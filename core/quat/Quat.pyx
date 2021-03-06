@@ -1,0 +1,86 @@
+from core.quat.quat_binding cimport *
+
+cdef class Quat:
+
+    def __init__(self, godot_quat _native = None):
+        if (_native != None):
+            self._native = _native
+        else:
+            api_core.godot_quat_new(&self._native)
+
+    def new_with_axis_angle(self, Vector3 axis, godot_real angle):
+        api_core.godot_quat_new_with_axis_angle(&self._native, &axis._native, angle)
+
+    def get_x(self):
+        return api_core.godot_quat_get_x(&self._native)
+
+    def set_x(self, godot_real val):
+        api_core.godot_quat_get_x(&self._native, val)
+
+    def get_y(self):
+        return api_core.godot_quat_get_y(&self._native)
+
+    def set_y(self, godot_real val):
+        api_core.godot_quat_set_y(&self._native, val)
+
+    def get_z(self):
+        return api_core.godot_quat_get_z(&self._native)
+
+    def set_z(self, godot_real val):
+        api_core.godot_quat_set_z(&self._native, val)
+
+    def get_w(self):
+        return api_core.godot_quat_get_w(&self._native)
+
+    def set_w(self, godot_real val):
+        api_core.godot_quat_set_w(&self._native, val)
+
+    def __str__(self):
+        return api_core.godot_quat_as_string(&self._native)
+
+    def length(self):
+        return api_core.godot_quat_length(&self._native)
+
+    def length_squared(self):
+        return api_core.godot_quat_length_squared(&self._native)
+
+    def normalized(self):
+        return Quat(api_core.godot_quat_normalized(&self._native))
+    de is_normalized(self):
+        return api_core.godot_quat_is_normalized(&self._native)
+
+    def inverse(self):
+        return Quat(api_core.godot_quat_inverse(&self._native))
+
+    def dot(self, Quat b):
+        return api_core.godot_quat_dot(&self._native, &b._native)
+
+    def xform(self, Vector3 v):
+        return Vector3(api_core.godot_quat_xform(&self._native, &v._native))
+
+    def slerp(self, Quat b, godot_real t):
+        return Quat(api_core.godot_quat_slepr(&self._native, &b._native, t))
+
+    def slerpni(self, Quat b, godot_real t):
+        return Quat(&self._native, &b._native, t)
+
+    def cubic_slerp(self, Quat b, Quat pre_a, Quat post_b, godot_real t):
+        return Quat(api_core.godot_quat_cubic_slerp(&self._native, &b._native, &pre_a._native, &post_b._native, t)
+
+    def __mult__(self, godot_real b):
+        return Quat(api_core.godot_quat_operator_multiply(&self._native, b))
+
+    def __add__(self, Quat b):
+        return Quat(api_core.godot_quat_operator_add(&self._native, &b._native))
+
+    def __sub__(self, Quat b):
+        return Quat(api_core.godot_quat_operator_subtract(&self._native, &b._native))
+
+    def __div__(self, godot_real b):
+        return Quat(api_core.godot_quat_operator_divide(&self._native, b))
+
+    def __eq__(self, Quat b):
+        return api_core.godot_quat_operator_equal(&self._native, &b._native)
+
+    def neg(self):
+        return Quat(api_core.godot_quat_operator_neq(&self._native))

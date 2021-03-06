@@ -1,0 +1,5 @@
+
+from godot_api.binding cimport *
+from classes.GeometryInstance cimport *
+cdef class Particles(GeometryInstance):
+    pass
