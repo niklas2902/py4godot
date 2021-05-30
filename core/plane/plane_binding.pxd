@@ -2,8 +2,7 @@ from godot_api.binding cimport *
 
 
 cdef extern from "binding.h":
-    ctypedef struct godot_plane:
-        pass
+    const godot_gdnative_core_api_struct *api_core
 
     struct godot_gdnative_core_api_struct:
         void (*godot_plane_new_with_reals)(godot_plane *r_dest, const godot_real p_a, const godot_real p_b, const godot_real p_c, const godot_real p_d);

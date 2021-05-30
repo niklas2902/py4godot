@@ -1,16 +1,109 @@
-cdef extern from "binding.h":
+from libcpp cimport bool
+from libc.stddef cimport wchar_t
 
+cdef extern from "binding.h":
+    DEF array_size = 1
+
+    ################################### types#######################################
+    ctypedef signed char        int8_t;
+    ctypedef short              int16_t;
+    ctypedef int                int32_t;
+    ctypedef long long          int64_t;
+    ctypedef unsigned char      uint8_t;
+    ctypedef unsigned short     uint16_t;
+    ctypedef unsigned int       uint32_t;
+    ctypedef unsigned long long uint64_t;
+
+    ctypedef signed char        int_least8_t;
+    ctypedef short              int_least16_t;
+    ctypedef int                int_least32_t;
+    ctypedef long long          int_least64_t;
+    ctypedef unsigned char      uint_least8_t;
+    ctypedef unsigned short     uint_least16_t;
+    ctypedef unsigned int       uint_least32_t;
+    ctypedef unsigned long long uint_least64_t;
+
+    ctypedef signed char        int_fast8_t;
+    ctypedef int                int_fast16_t;
+    ctypedef int                int_fast32_t;
+    ctypedef long long          int_fast64_t;
+    ctypedef unsigned char      uint_fast8_t;
+    ctypedef unsigned int       uint_fast16_t;
+    ctypedef unsigned int       uint_fast32_t;
+    ctypedef unsigned long long uint_fast64_t;
+
+    ctypedef long long          intmax_t;
+    ctypedef unsigned long long uintmax_t;
+
+
+    ctypedef float godot_real
+    ctypedef int godot_int
+    ctypedef bool godot_bool
+
+    ctypedef void godot_object;
+    ##################################c types########################################
+
+    #Todo:Remove [1] arrays
+
+    ctypedef struct godot_array:
+        uint8_t _dont_touch_that[array_size]
+    ctypedef struct godot_string:
+        uint8_t _dont_touch_that[array_size];
+    ctypedef struct godot_vector2:
+        uint8_t _dont_touch_that[8]
+    ctypedef struct godot_rect2:
+        uint8_t _dont_touch_that[16];
+    ctypedef struct godot_vector3:
+        pass
+    ctypedef struct godot_transform2d:
+        uint8_t _dont_touch_that[24];
+    ctypedef struct godot_plane:
+        uint8_t _dont_touch_that[16];
+    ctypedef struct godot_quat:
+        uint8_t _dont_touch_that[16]
+    ctypedef struct godot_aabb:
+        uint8_t _dont_touch_that[24];
+    ctypedef struct godot_basis:
+        uint8_t _dont_touch_that[36]
+    ctypedef struct godot_transform:
+        uint8_t _dont_touch_that[48];
+    ctypedef struct godot_color:
+        uint8_t _dont_touch_that[16];
+    ctypedef struct godot_node_path:
+        uint8_t _dont_touch_that[array_size];
+    ctypedef struct godot_rid:
+        uint8_t _dont_touch_that[array_size];
+    ctypedef struct godot_dictionary:
+        uint8_t _dont_touch_that[array_size];
+    ctypedef struct godot_pool_byte_array:
+        uint8_t _dont_touch_that[array_size];
+    ctypedef struct godot_pool_int_array:
+        uint8_t _dont_touch_that[array_size];
+    ctypedef struct godot_pool_real_array:
+        uint8_t _dont_touch_that[array_size];
+    ctypedef struct godot_pool_string_array:
+        uint8_t _dont_touch_that[array_size];
+    ctypedef struct godot_pool_color_array:
+        uint8_t _dont_touch_that[array_size];
+    ctypedef struct godot_pool_vector2_array:
+        uint8_t _dont_touch_that[array_size];
+    ctypedef struct godot_pool_vector3_array:
+        uint8_t _dont_touch_that[array_size];
+
+
+    #############################method binding##########################
     ctypedef struct godot_variant:
-        pass
-    ctypedef struct godot_object:
-        pass
+        uint8_t _dont_touch_that[array_size+16];
+
     ctypedef struct godot_method_bind:
-        pass
+        uint8_t _dont_touch_that[1];
     ctypedef godot_object *(*godot_class_constructor)()
 
     void hello(const char *name)
+    void new_variant(const char *test)
+    #void new_variant(double test)
+    void show_api()
     godot_variant simple_get_data(godot_object *p_instance, void *p_method_data, void *p_user_data, int p_num_args, godot_variant **p_args)
-
 
     struct godot_gdnative_ext_nativescript_api_struct:
         void *(*godot_nativescript_get_userdata)(godot_object *p_instance)
@@ -24,68 +117,3 @@ cdef extern from "binding.h":
 
     godot_object *_owner
 
-
-    ##################################c types########################################
-    ctypedef struct godot_array:
-        pass
-    ctypedef struct godot_bool:
-        pass
-    ctypedef struct godot_string:
-        pass
-    ctypedef struct godot_real:
-        pass
-    ctypedef struct wchar_t:
-        pass
-    ctypedef struct uint32_t:
-        pass
-    ctypedef struct uint64_t:
-        pass
-    ctypedef struct godot_pool_byte_array:
-        pass
-    ctypedef struct godot_vector2:
-        pass
-    ctypedef struct godot_rect2:
-        pass
-    ctypedef struct godot_vector3:
-        pass
-    ctypedef struct godot_transform2d:
-        pass
-    ctypedef struct godot_plane:
-        pass
-    ctypedef struct godot_quat:
-        pass
-    ctypedef struct godot_aabb:
-        pass
-    ctypedef struct godot_basis:
-        pass
-    ctypedef struct godot_transform:
-        pass
-    ctypedef struct godot_color:
-        pass
-    ctypedef struct godot_node_path:
-        pass
-    ctypedef struct godot_rid:
-        pass
-    ctypedef struct godot_object:
-        pass
-    ctypedef struct godot_dictionary:
-        pass
-    ctypedef struct godot_int:
-        pass
-
-
-    ##Rework
-    ctypedef struct String:
-        pass
-    ctypedef struct bool:
-        pass
-    ctypedef struct Array:
-        pass
-    ctypedef struct Reference:
-        pass
-    ctypedef struct PoolStringArray:
-        pass
-    ctypedef struct Variant:
-        pass
-    ctypedef struct Error:
-        pass

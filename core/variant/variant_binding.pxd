@@ -2,9 +2,14 @@ from godot_api.binding cimport *
 
 
 cdef extern from "binding.h":
-    ctypedef struct godot_rect2:
+
+    ctypedef struct godot_variant_type:
         pass
 
+    ctypedef struct godot_variant_call_error:
+        pass
+
+    const godot_gdnative_core_api_struct *api_core
     struct godot_gdnative_core_api_struct:
         godot_variant_type (*godot_variant_get_type)(const godot_variant *p_v);
         void (*godot_variant_new_copy)(godot_variant *r_dest, const godot_variant *p_src);

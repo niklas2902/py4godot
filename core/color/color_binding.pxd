@@ -2,8 +2,7 @@ from godot_api.binding cimport *
 
 
 cdef extern from "binding.h":
-    ctypedef struct godot_color:
-        pass
+    const godot_gdnative_core_api_struct *api_core
 
     struct godot_gdnative_core_api_struct:
         void (*godot_color_new_rgba)(godot_color *r_dest, const godot_real p_r, const godot_real p_g, const godot_real p_b, const godot_real p_a);

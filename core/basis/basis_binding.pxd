@@ -5,6 +5,8 @@ cdef extern from "binding.h":
     ctypedef struct godot_basis:
         pass
 
+    const godot_gdnative_core_api_struct *api_core
+
     struct godot_gdnative_core_api_struct:
         void (*godot_basis_new_with_rows)(godot_basis *r_dest, const godot_vector3 *p_x_axis, const godot_vector3 *p_y_axis, const godot_vector3 *p_z_axis);
         void (*godot_basis_new_with_axis_and_angle)(godot_basis *r_dest, const godot_vector3 *p_axis, const godot_real p_phi);

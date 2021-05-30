@@ -2,24 +2,47 @@ from godot_api.binding cimport *
 
 
 cdef extern from "binding.h":
-    ctypedef struct godot_pool_int_array:
+
+    ctypedef struct uint8_t:
         pass
 
-    ctypedef struct godot_pool_real_array:
+    ctypedef struct godot_error:
         pass
 
-    ctypedef struct godot_pool_string_array:
+    ctypedef struct godot_pool_byte_array_read_access:
+        pass
+    ctypedef struct godot_pool_byte_array_write_access:
         pass
 
-    ctypedef struct godot_pool_color_array:
+    ctypedef struct godot_pool_int_array_read_access:
+        pass
+    ctypedef struct godot_pool_int_array_write_access:
         pass
 
-    ctypedef struct godot_pool_vector2_array:
+    ctypedef struct godot_pool_real_array_read_access:
+        pass
+    ctypedef struct godot_pool_real_array_write_access:
         pass
 
-    ctypedef struct godot_pool_vector3_array:
+    ctypedef struct godot_pool_color_array_read_access:
+        pass
+    ctypedef struct godot_pool_color_array_write_access:
         pass
 
+    ctypedef struct godot_pool_string_array_read_access:
+        pass
+    ctypedef struct godot_pool_string_array_write_access:
+        pass
+
+    ctypedef struct godot_pool_vector2_array_read_access:
+        pass
+    ctypedef struct godot_pool_vector2_array_write_access:
+        pass
+
+    ctypedef struct godot_pool_vector3_array_read_access:
+        pass
+    ctypedef struct godot_pool_vector3_array_write_access:
+        pass
 
     struct godot_gdnative_core_api_struct:
         void (*godot_pool_byte_array_new)(godot_pool_byte_array *r_dest);

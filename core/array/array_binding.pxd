@@ -2,8 +2,7 @@ from godot_api.binding cimport *
 
 
 cdef extern from "binding.h":
-    ctypedef struct godot_array:
-        pass
+    const godot_gdnative_core_api_struct *api_core
 
     struct godot_gdnative_core_api_struct:
         void (*godot_array_new)(godot_array *r_dest);

@@ -2,8 +2,7 @@ from godot_api.binding cimport *
 
 
 cdef extern from "binding.h":
-    ctypedef struct godot_rect2:
-        pass
+    const godot_gdnative_core_api_struct *api_core
 
     struct godot_gdnative_core_api_struct:
         void (*godot_rect2_new_with_position_and_size)(godot_rect2 *r_dest, const godot_vector2 *p_pos, const godot_vector2 *p_size);

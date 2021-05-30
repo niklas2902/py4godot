@@ -2,8 +2,7 @@ from godot_api.binding cimport *
 
 
 cdef extern from "binding.h":
-    ctypedef struct godot_quat:
-        pass
+    const godot_gdnative_core_api_struct *api_core
 
     struct godot_gdnative_core_api_struct:
         void (*godot_quat_new)(godot_quat *r_dest, const godot_real p_x, const godot_real p_y, const godot_real p_z, const godot_real p_w);

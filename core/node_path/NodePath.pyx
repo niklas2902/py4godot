@@ -1,14 +1,16 @@
-from core.dictionary.dictionary_binding cimport *
+from core.node_path.node_path_binding cimport *
 
 cdef class NodePath:
 
-    def __init__(self, godot_dictionary _native = None):
+    def __init__(self, godot_node_path _native):
         if (_native != None):
             self._native = _native
         else:
-            api_core.godot_node_path_new(&self._native)
+            pass
+            #api_core.godot_node_path_new(&self._native)
 
     def new_copy(self, NodePath src):
+        pass
         api_core.godot_node_path_new_copy(&self._native, &src._native)
 
     def destroy(self):
@@ -21,13 +23,13 @@ cdef class NodePath:
         return api_core.godot_node_path_is_absolute(&self._native)
 
     def get_name_count(self):
-        return api_coreo.godot_node_path_get_name_count(&self._native)
+        return api_core.godot_node_path_get_name_count(&self._native)
 
     def get_name(self, godot_int idx):
         return api_core.godot_node_path_get_name(&self._native, idx)
 
     def get_subname_count(self):
-        return api_core.godot_node_path_get_subname_count(&self._name)
+        return api_core.godot_node_path_get_subname_count(&self._native)
 
     def get_subname(self, godot_int idx):
         return api_core.godot_node_path_get_subname(&self._native, idx)

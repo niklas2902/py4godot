@@ -2,13 +2,15 @@ from godot_api.binding cimport *
 
 
 cdef extern from "binding.h":
-    ctypedef struct godot_vector3:
-        pass
+
+    const godot_gdnative_core_api_struct *api_core
 
     ctypedef struct godot_vector3_axis:
         pass
 
+
     struct godot_gdnative_core_api_struct:
+        void (*godot_vector3_new)(godot_vector3 *r_dest, const godot_real p_x, const godot_real p_y, const godot_real p_z);
         godot_real (*godot_vector3_length)(const godot_vector3 *p_self);
         godot_real (*godot_vector3_length_squared)(const godot_vector3 *p_self);
         godot_bool (*godot_vector3_is_normalized)(const godot_vector3 *p_self);

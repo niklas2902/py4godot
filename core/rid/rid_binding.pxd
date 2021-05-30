@@ -2,11 +2,8 @@ from godot_api.binding cimport *
 
 
 cdef extern from "binding.h":
-    ctypedef struct godot_rid:
-        pass
 
     const godot_gdnative_core_api_struct *api_core
-
     struct godot_gdnative_core_api_struct:
         void (*godot_rid_new)(godot_rid *r_dest);
         godot_int (*godot_rid_get_id)(const godot_rid *p_self);

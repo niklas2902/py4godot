@@ -1,16 +1,19 @@
+from core.color.Color cimport *
+
 cdef class Color:
 
-    def __init__(self, godot_color _native = None):
+    def __init__(self, godot_color _native):
         if (_native != None):
             self._native = _native
         else:
-            api_core.godot_color_new(&self._native)
+            pass
+#            api_core.godot_color_new(&self._native)
 
-    def new_rgba(self, godot_real red, godot_real green, godot_real blue):
-        api_core.godot_color_new_rgba(&self._native, red, green, blue)
+    def new_rgba(self, godot_real red, godot_real green, godot_real blue, godot_real alpha):
+        api_core.godot_color_new_rgba(&self._native, red, green, blue, alpha)
 
     def new_rgb(self, godot_real red, godot_real green, godot_real blue):
-        api_core.godot_color_rgb(&self._native, red, green, blue)
+        api_core.godot_color_new_rgb(&self._native, red, green, blue)
 
     def get_red(self):
         return api_core.godot_color_get_r(&self._native)
@@ -49,10 +52,10 @@ cdef class Color:
         return api_core.godot_color_as_string(&self._native)
 
     def to_rgba32(self):
-        return api_core.godot_color_to_rgba(&self._native)
+        return api_core.godot_color_to_rgba32(&self._native)
 
     def to_argb32(self):
-        return api_core.godot_color_to_argb(&self._native)
+        return api_core.godot_color_to_argb32(&self._native)
 
     def gray(self):
         return api_core.godot_color_gray(&self._native)

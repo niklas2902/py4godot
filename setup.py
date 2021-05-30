@@ -1,12 +1,15 @@
 from setuptools import setup
 from Cython.Build import cythonize
-import main, os
+import main,os
+
+main.build()
 
 print(os.getcwd())
-#module = cythonize('classes/Object.pyx', language_level=3)
-module_rid = cythonize('core/rid/*.pyx', language_level=3)
+module = cythonize('core/*/*.pyx', language_level=3)
+module += cythonize("classes/*.pyx", language_level=3)
+module += cythonize("godot_api/*.pyx", language_level=3)
 setup(
-    ext_modules=module_rid
+    ext_modules=module
 )
 
 "build:python setup.py build_ext --compiler=msvc"

@@ -2,8 +2,8 @@ from godot_api.binding cimport *
 
 
 cdef extern from "binding.h":
-    ctypedef struct godot_aabb:
-        pass
+
+    const godot_gdnative_core_api_struct *api_core
 
     struct godot_gdnative_core_api_struct:
         void (*godot_aabb_new)(godot_aabb *r_dest, const godot_vector3 *p_pos, const godot_vector3 *p_size);
