@@ -1,0 +1,14 @@
+[general]
+
+singleton=false
+load_once=true
+symbol_prefix="godot_"
+reloadable=true
+
+[entry]
+
+Windows.64="res://.import/main.cp37-win_amd64.pyd"
+
+[dependencies]
+
+Windows.64=[ "res://.import/python37.dll" ]
