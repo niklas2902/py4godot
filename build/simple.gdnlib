@@ -7,8 +7,8 @@ reloadable=true
 
 [entry]
 
-Windows.64="res://.import/main.cp37-win_amd64.pyd"
+Windows.64="res://addons/godot_api/main.cp37-win_amd64.pyd"
 
 [dependencies]
 
-Windows.64=[ "res://.import/python37.dll" ]
+Windows.64=[ "res://addons/godot_api/python37.dll" ]

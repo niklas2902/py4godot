@@ -2,6 +2,7 @@
 #include "delorean_api.h"
 #include <string.h>
 
+
 typedef struct user_data_struct {
 	char data[256];
 } user_data_struct;
@@ -80,8 +81,15 @@ void GDN_EXPORT godot_nativescript_init(void *p_handle) {
 	//   `godot_headers/nativescript/godot_nativescript.h` for possible values).
 	// * The fifth and final parameter is a description of which function
 	//   to call when the method gets called.
+
 	Py_Initialize();
+	PyObject * pythonFile = PyImport_ImportModule("godot_api");
 	import_godot_api__delorean();
+    if (PyErr_Occurred())
+    {
+        PyErr_Print();
+        return -1;
+    }
 	Py_Finalize();
 	nativescript_api->godot_nativescript_register_method(p_handle, "SIMPLE", "get_data", attributes, get_data);
 }
