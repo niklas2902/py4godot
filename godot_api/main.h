@@ -83,13 +83,17 @@ void GDN_EXPORT godot_nativescript_init(void *p_handle) {
 	//   to call when the method gets called.
 
 	Py_Initialize();
-	PyObject * pythonFile = PyImport_ImportModule("godot_api");
+	PyRun_SimpleString("import sys,os\nprint(sys.path, os.getcwd())");
+	PyRun_SimpleString("import sys, os\nsys.path.insert(0,os.getcwd()+'/addons')");
+	PyRun_SimpleString("import sys,os\nprint(sys.path, os.getcwd())");
+	PyObject * pythonFile = PyImport_ImportModule("godot_api.delorean");
 	import_godot_api__delorean();
     if (PyErr_Occurred())
     {
         PyErr_Print();
         return -1;
     }
+    print_();
 	Py_Finalize();
 	nativescript_api->godot_nativescript_register_method(p_handle, "SIMPLE", "get_data", attributes, get_data);
 }
