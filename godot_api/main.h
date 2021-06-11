@@ -1,5 +1,6 @@
 #include "gdnative_api_struct.gen.h"
 #include "delorean_api.h"
+#include "../classes/classes_api.h"
 #include <string.h>
 
 
@@ -88,12 +89,14 @@ void GDN_EXPORT godot_nativescript_init(void *p_handle) {
 	PyRun_SimpleString("import sys,os\nprint(sys.path, os.getcwd())");
 	PyObject * pythonFile = PyImport_ImportModule("godot_api.delorean");
 	import_godot_api__delorean();
+	import_classes__classes();
     if (PyErr_Occurred())
     {
         PyErr_Print();
         return -1;
     }
     print_();
+    //init_method_bindings();
 	Py_Finalize();
 	nativescript_api->godot_nativescript_register_method(p_handle, "SIMPLE", "get_data", attributes, get_data);
 }

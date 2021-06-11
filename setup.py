@@ -1,14 +1,13 @@
 from setuptools import setup, Extension
 from Cython.Build import cythonize
-import glob
 import main,os
 
-main.build()
+#main.build()
 
-print(os.getcwd())
 module = cythonize('core/*/*.pyx', language_level=3)
 #module += cythonize("classes/*.pyx", language_level=3, nthreads=8)
 module += cythonize("classes/*.pyx", language_level=3, nthreads=8)
+module += cythonize("utils/*.pyx", language_level=3)
 module += cythonize("godot_api/*.pyx", language_level=3)
 setup(
     ext_modules=module
