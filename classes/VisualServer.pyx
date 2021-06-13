@@ -20,9 +20,9 @@ from core.transform.Transform cimport Transform
 from core.transform.Transform2D cimport Transform2D
 from core.vector2.Vector2 cimport Vector2
 from core.vector3.Vector3 cimport Vector3
-from core.variant.Variant cimport Type
-from core.variant.Variant cimport Operator
-from core.vector3.Vector3 cimport Axis
+from core.variant.Variant cimport Variant_Type
+from core.variant.Variant cimport Variant_Operator
+from core.vector3.Vector3 cimport Vector3_Axis
 from core.color.Color cimport Color
 from cython.operator cimport dereference
 from godot_api.binding_external cimport *
@@ -2897,7 +2897,7 @@ cdef class VisualServer(classes.Object.Object):
   def  mesh_get_blend_shape_mode(self,  RID mesh):
     cdef godot_object *_owner = self.godot_owner
 
-    cdef BlendShapeMode* ret = NULL;
+    cdef VisualServer_BlendShapeMode* ret = NULL;
 
     cdef void *args[1]
 
@@ -3111,7 +3111,7 @@ cdef class VisualServer(classes.Object.Object):
   def  mesh_surface_get_primitive_type(self,  RID mesh,  int surface):
     cdef godot_object *_owner = self.godot_owner
 
-    cdef PrimitiveType* ret = NULL;
+    cdef VisualServer_PrimitiveType* ret = NULL;
 
     cdef void *args[2]
 
@@ -4034,7 +4034,7 @@ cdef class VisualServer(classes.Object.Object):
   def  texture_get_format(self,  RID texture):
     cdef godot_object *_owner = self.godot_owner
 
-    cdef classes.Image.Format* ret = NULL;
+    cdef classes.Image.Image_Format* ret = NULL;
 
     cdef void *args[1]
 
@@ -4082,7 +4082,7 @@ cdef class VisualServer(classes.Object.Object):
   def  texture_get_type(self,  RID texture):
     cdef godot_object *_owner = self.godot_owner
 
-    cdef TextureType* ret = NULL;
+    cdef VisualServer_TextureType* ret = NULL;
 
     cdef void *args[1]
 

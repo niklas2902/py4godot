@@ -894,81 +894,81 @@ struct __pyx_obj_7classes_12VisualServer_VisualServer;
 /* "classes/Object.pxd":7
  * cdef class Object(Wrapper):
  *     pass
- * ctypedef enum ConnectFlags :CONNECT_DEFERRED, CONNECT_PERSIST, CONNECT_ONESHOT, CONNECT_REFERENCE_COUNTED,             # <<<<<<<<<<<<<<
+ * ctypedef enum Object_ConnectFlags :CONNECT_DEFERRED, CONNECT_PERSIST, CONNECT_ONESHOT, CONNECT_REFERENCE_COUNTED,             # <<<<<<<<<<<<<<
  */
-enum __pyx_t_7classes_6Object_ConnectFlags {
+enum __pyx_t_7classes_6Object_Object_ConnectFlags {
   __pyx_e_7classes_6Object_CONNECT_DEFERRED,
   __pyx_e_7classes_6Object_CONNECT_PERSIST,
   __pyx_e_7classes_6Object_CONNECT_ONESHOT,
   __pyx_e_7classes_6Object_CONNECT_REFERENCE_COUNTED
 };
-typedef enum __pyx_t_7classes_6Object_ConnectFlags __pyx_t_7classes_6Object_ConnectFlags;
+typedef enum __pyx_t_7classes_6Object_Object_ConnectFlags __pyx_t_7classes_6Object_Object_ConnectFlags;
 
 /* "classes/Image.pxd":7
  * cdef class Image(classes.Resource.Resource):
  *     pass
- * ctypedef enum AlphaMode :ALPHA_NONE, ALPHA_BIT, ALPHA_BLEND,             # <<<<<<<<<<<<<<
- * ctypedef enum CompressSource :COMPRESS_SOURCE_GENERIC, COMPRESS_SOURCE_SRGB, COMPRESS_SOURCE_NORMAL,
- * ctypedef enum Interpolation :INTERPOLATE_NEAREST, INTERPOLATE_BILINEAR, INTERPOLATE_CUBIC, INTERPOLATE_TRILINEAR, INTERPOLATE_LANCZOS,
+ * ctypedef enum Image_AlphaMode :ALPHA_NONE, ALPHA_BIT, ALPHA_BLEND,             # <<<<<<<<<<<<<<
+ * ctypedef enum Image_CompressSource :COMPRESS_SOURCE_GENERIC, COMPRESS_SOURCE_SRGB, COMPRESS_SOURCE_NORMAL,
+ * ctypedef enum Image_Interpolation :INTERPOLATE_NEAREST, INTERPOLATE_BILINEAR, INTERPOLATE_CUBIC, INTERPOLATE_TRILINEAR, INTERPOLATE_LANCZOS,
  */
-enum __pyx_t_7classes_5Image_AlphaMode {
+enum __pyx_t_7classes_5Image_Image_AlphaMode {
   __pyx_e_7classes_5Image_ALPHA_NONE,
   __pyx_e_7classes_5Image_ALPHA_BIT,
   __pyx_e_7classes_5Image_ALPHA_BLEND
 };
-typedef enum __pyx_t_7classes_5Image_AlphaMode __pyx_t_7classes_5Image_AlphaMode;
+typedef enum __pyx_t_7classes_5Image_Image_AlphaMode __pyx_t_7classes_5Image_Image_AlphaMode;
 
 /* "classes/Image.pxd":8
  *     pass
- * ctypedef enum AlphaMode :ALPHA_NONE, ALPHA_BIT, ALPHA_BLEND,
- * ctypedef enum CompressSource :COMPRESS_SOURCE_GENERIC, COMPRESS_SOURCE_SRGB, COMPRESS_SOURCE_NORMAL,             # <<<<<<<<<<<<<<
- * ctypedef enum Interpolation :INTERPOLATE_NEAREST, INTERPOLATE_BILINEAR, INTERPOLATE_CUBIC, INTERPOLATE_TRILINEAR, INTERPOLATE_LANCZOS,
- * ctypedef enum CompressMode :COMPRESS_S3TC, COMPRESS_PVRTC2, COMPRESS_PVRTC4, COMPRESS_ETC, COMPRESS_ETC2,
+ * ctypedef enum Image_AlphaMode :ALPHA_NONE, ALPHA_BIT, ALPHA_BLEND,
+ * ctypedef enum Image_CompressSource :COMPRESS_SOURCE_GENERIC, COMPRESS_SOURCE_SRGB, COMPRESS_SOURCE_NORMAL,             # <<<<<<<<<<<<<<
+ * ctypedef enum Image_Interpolation :INTERPOLATE_NEAREST, INTERPOLATE_BILINEAR, INTERPOLATE_CUBIC, INTERPOLATE_TRILINEAR, INTERPOLATE_LANCZOS,
+ * ctypedef enum Image_CompressMode :COMPRESS_S3TC, COMPRESS_PVRTC2, COMPRESS_PVRTC4, COMPRESS_ETC, COMPRESS_ETC2,
  */
-enum __pyx_t_7classes_5Image_CompressSource {
+enum __pyx_t_7classes_5Image_Image_CompressSource {
   __pyx_e_7classes_5Image_COMPRESS_SOURCE_GENERIC,
   __pyx_e_7classes_5Image_COMPRESS_SOURCE_SRGB,
   __pyx_e_7classes_5Image_COMPRESS_SOURCE_NORMAL
 };
-typedef enum __pyx_t_7classes_5Image_CompressSource __pyx_t_7classes_5Image_CompressSource;
+typedef enum __pyx_t_7classes_5Image_Image_CompressSource __pyx_t_7classes_5Image_Image_CompressSource;
 
 /* "classes/Image.pxd":9
- * ctypedef enum AlphaMode :ALPHA_NONE, ALPHA_BIT, ALPHA_BLEND,
- * ctypedef enum CompressSource :COMPRESS_SOURCE_GENERIC, COMPRESS_SOURCE_SRGB, COMPRESS_SOURCE_NORMAL,
- * ctypedef enum Interpolation :INTERPOLATE_NEAREST, INTERPOLATE_BILINEAR, INTERPOLATE_CUBIC, INTERPOLATE_TRILINEAR, INTERPOLATE_LANCZOS,             # <<<<<<<<<<<<<<
- * ctypedef enum CompressMode :COMPRESS_S3TC, COMPRESS_PVRTC2, COMPRESS_PVRTC4, COMPRESS_ETC, COMPRESS_ETC2,
- * ctypedef enum Format :FORMAT_L8, FORMAT_LA8, FORMAT_R8, FORMAT_RG8, FORMAT_RGB8, FORMAT_RGBA8, FORMAT_RGBA4444, FORMAT_RGBA5551, FORMAT_RF, FORMAT_RGF, FORMAT_RGBF, FORMAT_RGBAF, FORMAT_RH, FORMAT_RGH, FORMAT_RGBH, FORMAT_RGBAH, FORMAT_RGBE9995, FORMAT_DXT1, FORMAT_DXT3, FORMAT_DXT5, FORMAT_RGTC_R, FORMAT_RGTC_RG, FORMAT_BPTC_RGBA, FORMAT_BPTC_RGBF, FORMAT_BPTC_RGBFU, FORMAT_PVRTC2, FORMAT_PVRTC2A, FORMAT_PVRTC4, FORMAT_PVRTC4A, FORMAT_ETC, FORMAT_ETC2_R11, FORMAT_ETC2_R11S, FORMAT_ETC2_RG11, FORMAT_ETC2_RG11S, FORMAT_ETC2_RGB8, FORMAT_ETC2_RGBA8, FORMAT_ETC2_RGB8A1, FORMAT_MAX,
+ * ctypedef enum Image_AlphaMode :ALPHA_NONE, ALPHA_BIT, ALPHA_BLEND,
+ * ctypedef enum Image_CompressSource :COMPRESS_SOURCE_GENERIC, COMPRESS_SOURCE_SRGB, COMPRESS_SOURCE_NORMAL,
+ * ctypedef enum Image_Interpolation :INTERPOLATE_NEAREST, INTERPOLATE_BILINEAR, INTERPOLATE_CUBIC, INTERPOLATE_TRILINEAR, INTERPOLATE_LANCZOS,             # <<<<<<<<<<<<<<
+ * ctypedef enum Image_CompressMode :COMPRESS_S3TC, COMPRESS_PVRTC2, COMPRESS_PVRTC4, COMPRESS_ETC, COMPRESS_ETC2,
+ * ctypedef enum Image_Format :FORMAT_L8, FORMAT_LA8, FORMAT_R8, FORMAT_RG8, FORMAT_RGB8, FORMAT_RGBA8, FORMAT_RGBA4444, FORMAT_RGBA5551, FORMAT_RF, FORMAT_RGF, FORMAT_RGBF, FORMAT_RGBAF, FORMAT_RH, FORMAT_RGH, FORMAT_RGBH, FORMAT_RGBAH, FORMAT_RGBE9995, FORMAT_DXT1, FORMAT_DXT3, FORMAT_DXT5, FORMAT_RGTC_R, FORMAT_RGTC_RG, FORMAT_BPTC_RGBA, FORMAT_BPTC_RGBF, FORMAT_BPTC_RGBFU, FORMAT_PVRTC2, FORMAT_PVRTC2A, FORMAT_PVRTC4, FORMAT_PVRTC4A, FORMAT_ETC, FORMAT_ETC2_R11, FORMAT_ETC2_R11S, FORMAT_ETC2_RG11, FORMAT_ETC2_RG11S, FORMAT_ETC2_RGB8, FORMAT_ETC2_RGBA8, FORMAT_ETC2_RGB8A1, FORMAT_MAX,
  */
-enum __pyx_t_7classes_5Image_Interpolation {
+enum __pyx_t_7classes_5Image_Image_Interpolation {
   __pyx_e_7classes_5Image_INTERPOLATE_NEAREST,
   __pyx_e_7classes_5Image_INTERPOLATE_BILINEAR,
   __pyx_e_7classes_5Image_INTERPOLATE_CUBIC,
   __pyx_e_7classes_5Image_INTERPOLATE_TRILINEAR,
   __pyx_e_7classes_5Image_INTERPOLATE_LANCZOS
 };
-typedef enum __pyx_t_7classes_5Image_Interpolation __pyx_t_7classes_5Image_Interpolation;
+typedef enum __pyx_t_7classes_5Image_Image_Interpolation __pyx_t_7classes_5Image_Image_Interpolation;
 
 /* "classes/Image.pxd":10
- * ctypedef enum CompressSource :COMPRESS_SOURCE_GENERIC, COMPRESS_SOURCE_SRGB, COMPRESS_SOURCE_NORMAL,
- * ctypedef enum Interpolation :INTERPOLATE_NEAREST, INTERPOLATE_BILINEAR, INTERPOLATE_CUBIC, INTERPOLATE_TRILINEAR, INTERPOLATE_LANCZOS,
- * ctypedef enum CompressMode :COMPRESS_S3TC, COMPRESS_PVRTC2, COMPRESS_PVRTC4, COMPRESS_ETC, COMPRESS_ETC2,             # <<<<<<<<<<<<<<
- * ctypedef enum Format :FORMAT_L8, FORMAT_LA8, FORMAT_R8, FORMAT_RG8, FORMAT_RGB8, FORMAT_RGBA8, FORMAT_RGBA4444, FORMAT_RGBA5551, FORMAT_RF, FORMAT_RGF, FORMAT_RGBF, FORMAT_RGBAF, FORMAT_RH, FORMAT_RGH, FORMAT_RGBH, FORMAT_RGBAH, FORMAT_RGBE9995, FORMAT_DXT1, FORMAT_DXT3, FORMAT_DXT5, FORMAT_RGTC_R, FORMAT_RGTC_RG, FORMAT_BPTC_RGBA, FORMAT_BPTC_RGBF, FORMAT_BPTC_RGBFU, FORMAT_PVRTC2, FORMAT_PVRTC2A, FORMAT_PVRTC4, FORMAT_PVRTC4A, FORMAT_ETC, FORMAT_ETC2_R11, FORMAT_ETC2_R11S, FORMAT_ETC2_RG11, FORMAT_ETC2_RG11S, FORMAT_ETC2_RGB8, FORMAT_ETC2_RGBA8, FORMAT_ETC2_RGB8A1, FORMAT_MAX,
+ * ctypedef enum Image_CompressSource :COMPRESS_SOURCE_GENERIC, COMPRESS_SOURCE_SRGB, COMPRESS_SOURCE_NORMAL,
+ * ctypedef enum Image_Interpolation :INTERPOLATE_NEAREST, INTERPOLATE_BILINEAR, INTERPOLATE_CUBIC, INTERPOLATE_TRILINEAR, INTERPOLATE_LANCZOS,
+ * ctypedef enum Image_CompressMode :COMPRESS_S3TC, COMPRESS_PVRTC2, COMPRESS_PVRTC4, COMPRESS_ETC, COMPRESS_ETC2,             # <<<<<<<<<<<<<<
+ * ctypedef enum Image_Format :FORMAT_L8, FORMAT_LA8, FORMAT_R8, FORMAT_RG8, FORMAT_RGB8, FORMAT_RGBA8, FORMAT_RGBA4444, FORMAT_RGBA5551, FORMAT_RF, FORMAT_RGF, FORMAT_RGBF, FORMAT_RGBAF, FORMAT_RH, FORMAT_RGH, FORMAT_RGBH, FORMAT_RGBAH, FORMAT_RGBE9995, FORMAT_DXT1, FORMAT_DXT3, FORMAT_DXT5, FORMAT_RGTC_R, FORMAT_RGTC_RG, FORMAT_BPTC_RGBA, FORMAT_BPTC_RGBF, FORMAT_BPTC_RGBFU, FORMAT_PVRTC2, FORMAT_PVRTC2A, FORMAT_PVRTC4, FORMAT_PVRTC4A, FORMAT_ETC, FORMAT_ETC2_R11, FORMAT_ETC2_R11S, FORMAT_ETC2_RG11, FORMAT_ETC2_RG11S, FORMAT_ETC2_RGB8, FORMAT_ETC2_RGBA8, FORMAT_ETC2_RGB8A1, FORMAT_MAX,
  */
-enum __pyx_t_7classes_5Image_CompressMode {
+enum __pyx_t_7classes_5Image_Image_CompressMode {
   __pyx_e_7classes_5Image_COMPRESS_S3TC,
   __pyx_e_7classes_5Image_COMPRESS_PVRTC2,
   __pyx_e_7classes_5Image_COMPRESS_PVRTC4,
   __pyx_e_7classes_5Image_COMPRESS_ETC,
   __pyx_e_7classes_5Image_COMPRESS_ETC2
 };
-typedef enum __pyx_t_7classes_5Image_CompressMode __pyx_t_7classes_5Image_CompressMode;
+typedef enum __pyx_t_7classes_5Image_Image_CompressMode __pyx_t_7classes_5Image_Image_CompressMode;
 
 /* "classes/Image.pxd":11
- * ctypedef enum Interpolation :INTERPOLATE_NEAREST, INTERPOLATE_BILINEAR, INTERPOLATE_CUBIC, INTERPOLATE_TRILINEAR, INTERPOLATE_LANCZOS,
- * ctypedef enum CompressMode :COMPRESS_S3TC, COMPRESS_PVRTC2, COMPRESS_PVRTC4, COMPRESS_ETC, COMPRESS_ETC2,
- * ctypedef enum Format :FORMAT_L8, FORMAT_LA8, FORMAT_R8, FORMAT_RG8, FORMAT_RGB8, FORMAT_RGBA8, FORMAT_RGBA4444, FORMAT_RGBA5551, FORMAT_RF, FORMAT_RGF, FORMAT_RGBF, FORMAT_RGBAF, FORMAT_RH, FORMAT_RGH, FORMAT_RGBH, FORMAT_RGBAH, FORMAT_RGBE9995, FORMAT_DXT1, FORMAT_DXT3, FORMAT_DXT5, FORMAT_RGTC_R, FORMAT_RGTC_RG, FORMAT_BPTC_RGBA, FORMAT_BPTC_RGBF, FORMAT_BPTC_RGBFU, FORMAT_PVRTC2, FORMAT_PVRTC2A, FORMAT_PVRTC4, FORMAT_PVRTC4A, FORMAT_ETC, FORMAT_ETC2_R11, FORMAT_ETC2_R11S, FORMAT_ETC2_RG11, FORMAT_ETC2_RG11S, FORMAT_ETC2_RGB8, FORMAT_ETC2_RGBA8, FORMAT_ETC2_RGB8A1, FORMAT_MAX,             # <<<<<<<<<<<<<<
+ * ctypedef enum Image_Interpolation :INTERPOLATE_NEAREST, INTERPOLATE_BILINEAR, INTERPOLATE_CUBIC, INTERPOLATE_TRILINEAR, INTERPOLATE_LANCZOS,
+ * ctypedef enum Image_CompressMode :COMPRESS_S3TC, COMPRESS_PVRTC2, COMPRESS_PVRTC4, COMPRESS_ETC, COMPRESS_ETC2,
+ * ctypedef enum Image_Format :FORMAT_L8, FORMAT_LA8, FORMAT_R8, FORMAT_RG8, FORMAT_RGB8, FORMAT_RGBA8, FORMAT_RGBA4444, FORMAT_RGBA5551, FORMAT_RF, FORMAT_RGF, FORMAT_RGBF, FORMAT_RGBAF, FORMAT_RH, FORMAT_RGH, FORMAT_RGBH, FORMAT_RGBAH, FORMAT_RGBE9995, FORMAT_DXT1, FORMAT_DXT3, FORMAT_DXT5, FORMAT_RGTC_R, FORMAT_RGTC_RG, FORMAT_BPTC_RGBA, FORMAT_BPTC_RGBF, FORMAT_BPTC_RGBFU, FORMAT_PVRTC2, FORMAT_PVRTC2A, FORMAT_PVRTC4, FORMAT_PVRTC4A, FORMAT_ETC, FORMAT_ETC2_R11, FORMAT_ETC2_R11S, FORMAT_ETC2_RG11, FORMAT_ETC2_RG11S, FORMAT_ETC2_RGB8, FORMAT_ETC2_RGBA8, FORMAT_ETC2_RGB8A1, FORMAT_MAX,             # <<<<<<<<<<<<<<
  */
-enum __pyx_t_7classes_5Image_Format {
+enum __pyx_t_7classes_5Image_Image_Format {
   __pyx_e_7classes_5Image_FORMAT_L8,
   __pyx_e_7classes_5Image_FORMAT_LA8,
   __pyx_e_7classes_5Image_FORMAT_R8,
@@ -1008,16 +1008,16 @@ enum __pyx_t_7classes_5Image_Format {
   __pyx_e_7classes_5Image_FORMAT_ETC2_RGB8A1,
   __pyx_e_7classes_5Image_FORMAT_MAX
 };
-typedef enum __pyx_t_7classes_5Image_Format __pyx_t_7classes_5Image_Format;
+typedef enum __pyx_t_7classes_5Image_Image_Format __pyx_t_7classes_5Image_Image_Format;
 
 /* "core/variant/Variant.pxd":17
  *         print("new_variant", type(i))
  * 
- * ctypedef enum Type:             # <<<<<<<<<<<<<<
+ * ctypedef enum Variant_Type:             # <<<<<<<<<<<<<<
  *     NIL,
  *     # atomic types
  */
-enum __pyx_t_4core_7variant_7Variant_Type {
+enum __pyx_t_4core_7variant_7Variant_Variant_Type {
   __pyx_e_4core_7variant_7Variant_NIL,
   __pyx_e_4core_7variant_7Variant_BOOL,
   __pyx_e_4core_7variant_7Variant_INT,
@@ -1047,16 +1047,16 @@ enum __pyx_t_4core_7variant_7Variant_Type {
   __pyx_e_4core_7variant_7Variant_POOL_COLOR_ARRAY,
   __pyx_e_4core_7variant_7Variant_VARIANT_MAX
 };
-typedef enum __pyx_t_4core_7variant_7Variant_Type __pyx_t_4core_7variant_7Variant_Type;
+typedef enum __pyx_t_4core_7variant_7Variant_Variant_Type __pyx_t_4core_7variant_7Variant_Variant_Type;
 
 /* "core/variant/Variant.pxd":58
  * 
  * 
- * ctypedef enum Operator :             # <<<<<<<<<<<<<<
+ * ctypedef enum Variant_Operator :             # <<<<<<<<<<<<<<
  * 
  *     #comparation
  */
-enum __pyx_t_4core_7variant_7Variant_Operator {
+enum __pyx_t_4core_7variant_7Variant_Variant_Operator {
   __pyx_e_4core_7variant_7Variant_OP_EQUAL,
   __pyx_e_4core_7variant_7Variant_OP_NOT_EQUAL,
   __pyx_e_4core_7variant_7Variant_OP_LESS,
@@ -1084,69 +1084,69 @@ enum __pyx_t_4core_7variant_7Variant_Operator {
   __pyx_e_4core_7variant_7Variant_OP_IN,
   __pyx_e_4core_7variant_7Variant_OP_MAX
 };
-typedef enum __pyx_t_4core_7variant_7Variant_Operator __pyx_t_4core_7variant_7Variant_Operator;
+typedef enum __pyx_t_4core_7variant_7Variant_Variant_Operator __pyx_t_4core_7variant_7Variant_Variant_Operator;
 
 /* "core/vector3/Vector3.pxd":15
  * 
  * 
- * ctypedef enum Axis :             # <<<<<<<<<<<<<<
- *     AXIS_X,
- *     AXIS_Y,
+ * ctypedef enum Vector3_Axis :             # <<<<<<<<<<<<<<
+ *     Vector3_AXIS_X,
+ *     Vector3_AXIS_Y,
  */
-enum __pyx_t_4core_7vector3_7Vector3_Axis {
-  __pyx_e_4core_7vector3_7Vector3_AXIS_X,
-  __pyx_e_4core_7vector3_7Vector3_AXIS_Y,
-  __pyx_e_4core_7vector3_7Vector3_AXIS_Z
+enum __pyx_t_4core_7vector3_7Vector3_Vector3_Axis {
+  __pyx_e_4core_7vector3_7Vector3_Vector3_AXIS_X,
+  __pyx_e_4core_7vector3_7Vector3_Vector3_AXIS_Y,
+  __pyx_e_4core_7vector3_7Vector3_Vector3_AXIS_Z
 };
-typedef enum __pyx_t_4core_7vector3_7Vector3_Axis __pyx_t_4core_7vector3_7Vector3_Axis;
+typedef enum __pyx_t_4core_7vector3_7Vector3_Vector3_Axis __pyx_t_4core_7vector3_7Vector3_Vector3_Axis;
 
 /* "classes/VisualServer.pxd":7
  * cdef class VisualServer(classes.Object.Object):
  *     pass
- * ctypedef enum ReflectionProbeUpdateMode :REFLECTION_PROBE_UPDATE_ONCE, REFLECTION_PROBE_UPDATE_ALWAYS,             # <<<<<<<<<<<<<<
- * ctypedef enum LightDirectionalShadowDepthRangeMode :LIGHT_DIRECTIONAL_SHADOW_DEPTH_RANGE_STABLE, LIGHT_DIRECTIONAL_SHADOW_DEPTH_RANGE_OPTIMIZED,
- * ctypedef enum BlendShapeMode :BLEND_SHAPE_MODE_NORMALIZED, BLEND_SHAPE_MODE_RELATIVE,
+ * ctypedef enum VisualServer_ReflectionProbeUpdateMode :REFLECTION_PROBE_UPDATE_ONCE, REFLECTION_PROBE_UPDATE_ALWAYS,             # <<<<<<<<<<<<<<
+ * ctypedef enum VisualServer_LightDirectionalShadowDepthRangeMode :LIGHT_DIRECTIONAL_SHADOW_DEPTH_RANGE_STABLE, LIGHT_DIRECTIONAL_SHADOW_DEPTH_RANGE_OPTIMIZED,
+ * ctypedef enum VisualServer_BlendShapeMode :BLEND_SHAPE_MODE_NORMALIZED, BLEND_SHAPE_MODE_RELATIVE,
  */
-enum __pyx_t_7classes_12VisualServer_ReflectionProbeUpdateMode {
+enum __pyx_t_7classes_12VisualServer_VisualServer_ReflectionProbeUpdateMode {
   __pyx_e_7classes_12VisualServer_REFLECTION_PROBE_UPDATE_ONCE,
   __pyx_e_7classes_12VisualServer_REFLECTION_PROBE_UPDATE_ALWAYS
 };
-typedef enum __pyx_t_7classes_12VisualServer_ReflectionProbeUpdateMode __pyx_t_7classes_12VisualServer_ReflectionProbeUpdateMode;
+typedef enum __pyx_t_7classes_12VisualServer_VisualServer_ReflectionProbeUpdateMode __pyx_t_7classes_12VisualServer_VisualServer_ReflectionProbeUpdateMode;
 
 /* "classes/VisualServer.pxd":8
  *     pass
- * ctypedef enum ReflectionProbeUpdateMode :REFLECTION_PROBE_UPDATE_ONCE, REFLECTION_PROBE_UPDATE_ALWAYS,
- * ctypedef enum LightDirectionalShadowDepthRangeMode :LIGHT_DIRECTIONAL_SHADOW_DEPTH_RANGE_STABLE, LIGHT_DIRECTIONAL_SHADOW_DEPTH_RANGE_OPTIMIZED,             # <<<<<<<<<<<<<<
- * ctypedef enum BlendShapeMode :BLEND_SHAPE_MODE_NORMALIZED, BLEND_SHAPE_MODE_RELATIVE,
- * ctypedef enum PrimitiveType :PRIMITIVE_POINTS, PRIMITIVE_LINES, PRIMITIVE_LINE_STRIP, PRIMITIVE_LINE_LOOP, PRIMITIVE_TRIANGLES, PRIMITIVE_TRIANGLE_STRIP, PRIMITIVE_TRIANGLE_FAN, PRIMITIVE_MAX,
+ * ctypedef enum VisualServer_ReflectionProbeUpdateMode :REFLECTION_PROBE_UPDATE_ONCE, REFLECTION_PROBE_UPDATE_ALWAYS,
+ * ctypedef enum VisualServer_LightDirectionalShadowDepthRangeMode :LIGHT_DIRECTIONAL_SHADOW_DEPTH_RANGE_STABLE, LIGHT_DIRECTIONAL_SHADOW_DEPTH_RANGE_OPTIMIZED,             # <<<<<<<<<<<<<<
+ * ctypedef enum VisualServer_BlendShapeMode :BLEND_SHAPE_MODE_NORMALIZED, BLEND_SHAPE_MODE_RELATIVE,
+ * ctypedef enum VisualServer_PrimitiveType :PRIMITIVE_POINTS, PRIMITIVE_LINES, PRIMITIVE_LINE_STRIP, PRIMITIVE_LINE_LOOP, PRIMITIVE_TRIANGLES, PRIMITIVE_TRIANGLE_STRIP, PRIMITIVE_TRIANGLE_FAN, PRIMITIVE_MAX,
  */
-enum __pyx_t_7classes_12VisualServer_LightDirectionalShadowDepthRangeMode {
+enum __pyx_t_7classes_12VisualServer_VisualServer_LightDirectionalShadowDepthRangeMode {
   __pyx_e_7classes_12VisualServer_LIGHT_DIRECTIONAL_SHADOW_DEPTH_RANGE_STABLE,
   __pyx_e_7classes_12VisualServer_LIGHT_DIRECTIONAL_SHADOW_DEPTH_RANGE_OPTIMIZED
 };
-typedef enum __pyx_t_7classes_12VisualServer_LightDirectionalShadowDepthRangeMode __pyx_t_7classes_12VisualServer_LightDirectionalShadowDepthRangeMode;
+typedef enum __pyx_t_7classes_12VisualServer_VisualServer_LightDirectionalShadowDepthRangeMode __pyx_t_7classes_12VisualServer_VisualServer_LightDirectionalShadowDepthRangeMode;
 
 /* "classes/VisualServer.pxd":9
- * ctypedef enum ReflectionProbeUpdateMode :REFLECTION_PROBE_UPDATE_ONCE, REFLECTION_PROBE_UPDATE_ALWAYS,
- * ctypedef enum LightDirectionalShadowDepthRangeMode :LIGHT_DIRECTIONAL_SHADOW_DEPTH_RANGE_STABLE, LIGHT_DIRECTIONAL_SHADOW_DEPTH_RANGE_OPTIMIZED,
- * ctypedef enum BlendShapeMode :BLEND_SHAPE_MODE_NORMALIZED, BLEND_SHAPE_MODE_RELATIVE,             # <<<<<<<<<<<<<<
- * ctypedef enum PrimitiveType :PRIMITIVE_POINTS, PRIMITIVE_LINES, PRIMITIVE_LINE_STRIP, PRIMITIVE_LINE_LOOP, PRIMITIVE_TRIANGLES, PRIMITIVE_TRIANGLE_STRIP, PRIMITIVE_TRIANGLE_FAN, PRIMITIVE_MAX,
- * ctypedef enum TextureType :TEXTURE_TYPE_2D, TEXTURE_TYPE_CUBEMAP, TEXTURE_TYPE_2D_ARRAY, TEXTURE_TYPE_3D,
+ * ctypedef enum VisualServer_ReflectionProbeUpdateMode :REFLECTION_PROBE_UPDATE_ONCE, REFLECTION_PROBE_UPDATE_ALWAYS,
+ * ctypedef enum VisualServer_LightDirectionalShadowDepthRangeMode :LIGHT_DIRECTIONAL_SHADOW_DEPTH_RANGE_STABLE, LIGHT_DIRECTIONAL_SHADOW_DEPTH_RANGE_OPTIMIZED,
+ * ctypedef enum VisualServer_BlendShapeMode :BLEND_SHAPE_MODE_NORMALIZED, BLEND_SHAPE_MODE_RELATIVE,             # <<<<<<<<<<<<<<
+ * ctypedef enum VisualServer_PrimitiveType :PRIMITIVE_POINTS, PRIMITIVE_LINES, PRIMITIVE_LINE_STRIP, PRIMITIVE_LINE_LOOP, PRIMITIVE_TRIANGLES, PRIMITIVE_TRIANGLE_STRIP, PRIMITIVE_TRIANGLE_FAN, PRIMITIVE_MAX,
+ * ctypedef enum VisualServer_TextureType :TEXTURE_TYPE_2D, TEXTURE_TYPE_CUBEMAP, TEXTURE_TYPE_2D_ARRAY, TEXTURE_TYPE_3D,
  */
-enum __pyx_t_7classes_12VisualServer_BlendShapeMode {
+enum __pyx_t_7classes_12VisualServer_VisualServer_BlendShapeMode {
   __pyx_e_7classes_12VisualServer_BLEND_SHAPE_MODE_NORMALIZED,
   __pyx_e_7classes_12VisualServer_BLEND_SHAPE_MODE_RELATIVE
 };
-typedef enum __pyx_t_7classes_12VisualServer_BlendShapeMode __pyx_t_7classes_12VisualServer_BlendShapeMode;
+typedef enum __pyx_t_7classes_12VisualServer_VisualServer_BlendShapeMode __pyx_t_7classes_12VisualServer_VisualServer_BlendShapeMode;
 
 /* "classes/VisualServer.pxd":10
- * ctypedef enum LightDirectionalShadowDepthRangeMode :LIGHT_DIRECTIONAL_SHADOW_DEPTH_RANGE_STABLE, LIGHT_DIRECTIONAL_SHADOW_DEPTH_RANGE_OPTIMIZED,
- * ctypedef enum BlendShapeMode :BLEND_SHAPE_MODE_NORMALIZED, BLEND_SHAPE_MODE_RELATIVE,
- * ctypedef enum PrimitiveType :PRIMITIVE_POINTS, PRIMITIVE_LINES, PRIMITIVE_LINE_STRIP, PRIMITIVE_LINE_LOOP, PRIMITIVE_TRIANGLES, PRIMITIVE_TRIANGLE_STRIP, PRIMITIVE_TRIANGLE_FAN, PRIMITIVE_MAX,             # <<<<<<<<<<<<<<
- * ctypedef enum TextureType :TEXTURE_TYPE_2D, TEXTURE_TYPE_CUBEMAP, TEXTURE_TYPE_2D_ARRAY, TEXTURE_TYPE_3D,
- * ctypedef enum EnvironmentSSAOQuality :ENV_SSAO_QUALITY_LOW, ENV_SSAO_QUALITY_MEDIUM, ENV_SSAO_QUALITY_HIGH,
+ * ctypedef enum VisualServer_LightDirectionalShadowDepthRangeMode :LIGHT_DIRECTIONAL_SHADOW_DEPTH_RANGE_STABLE, LIGHT_DIRECTIONAL_SHADOW_DEPTH_RANGE_OPTIMIZED,
+ * ctypedef enum VisualServer_BlendShapeMode :BLEND_SHAPE_MODE_NORMALIZED, BLEND_SHAPE_MODE_RELATIVE,
+ * ctypedef enum VisualServer_PrimitiveType :PRIMITIVE_POINTS, PRIMITIVE_LINES, PRIMITIVE_LINE_STRIP, PRIMITIVE_LINE_LOOP, PRIMITIVE_TRIANGLES, PRIMITIVE_TRIANGLE_STRIP, PRIMITIVE_TRIANGLE_FAN, PRIMITIVE_MAX,             # <<<<<<<<<<<<<<
+ * ctypedef enum VisualServer_TextureType :TEXTURE_TYPE_2D, TEXTURE_TYPE_CUBEMAP, TEXTURE_TYPE_2D_ARRAY, TEXTURE_TYPE_3D,
+ * ctypedef enum VisualServer_EnvironmentSSAOQuality :ENV_SSAO_QUALITY_LOW, ENV_SSAO_QUALITY_MEDIUM, ENV_SSAO_QUALITY_HIGH,
  */
-enum __pyx_t_7classes_12VisualServer_PrimitiveType {
+enum __pyx_t_7classes_12VisualServer_VisualServer_PrimitiveType {
   __pyx_e_7classes_12VisualServer_PRIMITIVE_POINTS,
   __pyx_e_7classes_12VisualServer_PRIMITIVE_LINES,
   __pyx_e_7classes_12VisualServer_PRIMITIVE_LINE_STRIP,
@@ -1156,59 +1156,59 @@ enum __pyx_t_7classes_12VisualServer_PrimitiveType {
   __pyx_e_7classes_12VisualServer_PRIMITIVE_TRIANGLE_FAN,
   __pyx_e_7classes_12VisualServer_PRIMITIVE_MAX
 };
-typedef enum __pyx_t_7classes_12VisualServer_PrimitiveType __pyx_t_7classes_12VisualServer_PrimitiveType;
+typedef enum __pyx_t_7classes_12VisualServer_VisualServer_PrimitiveType __pyx_t_7classes_12VisualServer_VisualServer_PrimitiveType;
 
 /* "classes/VisualServer.pxd":11
- * ctypedef enum BlendShapeMode :BLEND_SHAPE_MODE_NORMALIZED, BLEND_SHAPE_MODE_RELATIVE,
- * ctypedef enum PrimitiveType :PRIMITIVE_POINTS, PRIMITIVE_LINES, PRIMITIVE_LINE_STRIP, PRIMITIVE_LINE_LOOP, PRIMITIVE_TRIANGLES, PRIMITIVE_TRIANGLE_STRIP, PRIMITIVE_TRIANGLE_FAN, PRIMITIVE_MAX,
- * ctypedef enum TextureType :TEXTURE_TYPE_2D, TEXTURE_TYPE_CUBEMAP, TEXTURE_TYPE_2D_ARRAY, TEXTURE_TYPE_3D,             # <<<<<<<<<<<<<<
- * ctypedef enum EnvironmentSSAOQuality :ENV_SSAO_QUALITY_LOW, ENV_SSAO_QUALITY_MEDIUM, ENV_SSAO_QUALITY_HIGH,
- * ctypedef enum EnvironmentDOFBlurQuality :ENV_DOF_BLUR_QUALITY_LOW, ENV_DOF_BLUR_QUALITY_MEDIUM, ENV_DOF_BLUR_QUALITY_HIGH,
+ * ctypedef enum VisualServer_BlendShapeMode :BLEND_SHAPE_MODE_NORMALIZED, BLEND_SHAPE_MODE_RELATIVE,
+ * ctypedef enum VisualServer_PrimitiveType :PRIMITIVE_POINTS, PRIMITIVE_LINES, PRIMITIVE_LINE_STRIP, PRIMITIVE_LINE_LOOP, PRIMITIVE_TRIANGLES, PRIMITIVE_TRIANGLE_STRIP, PRIMITIVE_TRIANGLE_FAN, PRIMITIVE_MAX,
+ * ctypedef enum VisualServer_TextureType :TEXTURE_TYPE_2D, TEXTURE_TYPE_CUBEMAP, TEXTURE_TYPE_2D_ARRAY, TEXTURE_TYPE_3D,             # <<<<<<<<<<<<<<
+ * ctypedef enum VisualServer_EnvironmentSSAOQuality :ENV_SSAO_QUALITY_LOW, ENV_SSAO_QUALITY_MEDIUM, ENV_SSAO_QUALITY_HIGH,
+ * ctypedef enum VisualServer_EnvironmentDOFBlurQuality :ENV_DOF_BLUR_QUALITY_LOW, ENV_DOF_BLUR_QUALITY_MEDIUM, ENV_DOF_BLUR_QUALITY_HIGH,
  */
-enum __pyx_t_7classes_12VisualServer_TextureType {
+enum __pyx_t_7classes_12VisualServer_VisualServer_TextureType {
   __pyx_e_7classes_12VisualServer_TEXTURE_TYPE_2D,
   __pyx_e_7classes_12VisualServer_TEXTURE_TYPE_CUBEMAP,
   __pyx_e_7classes_12VisualServer_TEXTURE_TYPE_2D_ARRAY,
   __pyx_e_7classes_12VisualServer_TEXTURE_TYPE_3D
 };
-typedef enum __pyx_t_7classes_12VisualServer_TextureType __pyx_t_7classes_12VisualServer_TextureType;
+typedef enum __pyx_t_7classes_12VisualServer_VisualServer_TextureType __pyx_t_7classes_12VisualServer_VisualServer_TextureType;
 
 /* "classes/VisualServer.pxd":12
- * ctypedef enum PrimitiveType :PRIMITIVE_POINTS, PRIMITIVE_LINES, PRIMITIVE_LINE_STRIP, PRIMITIVE_LINE_LOOP, PRIMITIVE_TRIANGLES, PRIMITIVE_TRIANGLE_STRIP, PRIMITIVE_TRIANGLE_FAN, PRIMITIVE_MAX,
- * ctypedef enum TextureType :TEXTURE_TYPE_2D, TEXTURE_TYPE_CUBEMAP, TEXTURE_TYPE_2D_ARRAY, TEXTURE_TYPE_3D,
- * ctypedef enum EnvironmentSSAOQuality :ENV_SSAO_QUALITY_LOW, ENV_SSAO_QUALITY_MEDIUM, ENV_SSAO_QUALITY_HIGH,             # <<<<<<<<<<<<<<
- * ctypedef enum EnvironmentDOFBlurQuality :ENV_DOF_BLUR_QUALITY_LOW, ENV_DOF_BLUR_QUALITY_MEDIUM, ENV_DOF_BLUR_QUALITY_HIGH,
- * ctypedef enum RenderInfo :INFO_OBJECTS_IN_FRAME, INFO_VERTICES_IN_FRAME, INFO_MATERIAL_CHANGES_IN_FRAME, INFO_SHADER_CHANGES_IN_FRAME, INFO_SURFACE_CHANGES_IN_FRAME, INFO_DRAW_CALLS_IN_FRAME, INFO_USAGE_VIDEO_MEM_TOTAL, INFO_VIDEO_MEM_USED, INFO_TEXTURE_MEM_USED, INFO_VERTEX_MEM_USED,
+ * ctypedef enum VisualServer_PrimitiveType :PRIMITIVE_POINTS, PRIMITIVE_LINES, PRIMITIVE_LINE_STRIP, PRIMITIVE_LINE_LOOP, PRIMITIVE_TRIANGLES, PRIMITIVE_TRIANGLE_STRIP, PRIMITIVE_TRIANGLE_FAN, PRIMITIVE_MAX,
+ * ctypedef enum VisualServer_TextureType :TEXTURE_TYPE_2D, TEXTURE_TYPE_CUBEMAP, TEXTURE_TYPE_2D_ARRAY, TEXTURE_TYPE_3D,
+ * ctypedef enum VisualServer_EnvironmentSSAOQuality :ENV_SSAO_QUALITY_LOW, ENV_SSAO_QUALITY_MEDIUM, ENV_SSAO_QUALITY_HIGH,             # <<<<<<<<<<<<<<
+ * ctypedef enum VisualServer_EnvironmentDOFBlurQuality :ENV_DOF_BLUR_QUALITY_LOW, ENV_DOF_BLUR_QUALITY_MEDIUM, ENV_DOF_BLUR_QUALITY_HIGH,
+ * ctypedef enum VisualServer_RenderInfo :INFO_OBJECTS_IN_FRAME, INFO_VERTICES_IN_FRAME, INFO_MATERIAL_CHANGES_IN_FRAME, INFO_SHADER_CHANGES_IN_FRAME, INFO_SURFACE_CHANGES_IN_FRAME, INFO_DRAW_CALLS_IN_FRAME, INFO_USAGE_VIDEO_MEM_TOTAL, INFO_VIDEO_MEM_USED, INFO_TEXTURE_MEM_USED, INFO_VERTEX_MEM_USED,
  */
-enum __pyx_t_7classes_12VisualServer_EnvironmentSSAOQuality {
+enum __pyx_t_7classes_12VisualServer_VisualServer_EnvironmentSSAOQuality {
   __pyx_e_7classes_12VisualServer_ENV_SSAO_QUALITY_LOW,
   __pyx_e_7classes_12VisualServer_ENV_SSAO_QUALITY_MEDIUM,
   __pyx_e_7classes_12VisualServer_ENV_SSAO_QUALITY_HIGH
 };
-typedef enum __pyx_t_7classes_12VisualServer_EnvironmentSSAOQuality __pyx_t_7classes_12VisualServer_EnvironmentSSAOQuality;
+typedef enum __pyx_t_7classes_12VisualServer_VisualServer_EnvironmentSSAOQuality __pyx_t_7classes_12VisualServer_VisualServer_EnvironmentSSAOQuality;
 
 /* "classes/VisualServer.pxd":13
- * ctypedef enum TextureType :TEXTURE_TYPE_2D, TEXTURE_TYPE_CUBEMAP, TEXTURE_TYPE_2D_ARRAY, TEXTURE_TYPE_3D,
- * ctypedef enum EnvironmentSSAOQuality :ENV_SSAO_QUALITY_LOW, ENV_SSAO_QUALITY_MEDIUM, ENV_SSAO_QUALITY_HIGH,
- * ctypedef enum EnvironmentDOFBlurQuality :ENV_DOF_BLUR_QUALITY_LOW, ENV_DOF_BLUR_QUALITY_MEDIUM, ENV_DOF_BLUR_QUALITY_HIGH,             # <<<<<<<<<<<<<<
- * ctypedef enum RenderInfo :INFO_OBJECTS_IN_FRAME, INFO_VERTICES_IN_FRAME, INFO_MATERIAL_CHANGES_IN_FRAME, INFO_SHADER_CHANGES_IN_FRAME, INFO_SURFACE_CHANGES_IN_FRAME, INFO_DRAW_CALLS_IN_FRAME, INFO_USAGE_VIDEO_MEM_TOTAL, INFO_VIDEO_MEM_USED, INFO_TEXTURE_MEM_USED, INFO_VERTEX_MEM_USED,
- * ctypedef enum NinePatchAxisMode :NINE_PATCH_STRETCH, NINE_PATCH_TILE, NINE_PATCH_TILE_FIT,
+ * ctypedef enum VisualServer_TextureType :TEXTURE_TYPE_2D, TEXTURE_TYPE_CUBEMAP, TEXTURE_TYPE_2D_ARRAY, TEXTURE_TYPE_3D,
+ * ctypedef enum VisualServer_EnvironmentSSAOQuality :ENV_SSAO_QUALITY_LOW, ENV_SSAO_QUALITY_MEDIUM, ENV_SSAO_QUALITY_HIGH,
+ * ctypedef enum VisualServer_EnvironmentDOFBlurQuality :ENV_DOF_BLUR_QUALITY_LOW, ENV_DOF_BLUR_QUALITY_MEDIUM, ENV_DOF_BLUR_QUALITY_HIGH,             # <<<<<<<<<<<<<<
+ * ctypedef enum VisualServer_RenderInfo :INFO_OBJECTS_IN_FRAME, INFO_VERTICES_IN_FRAME, INFO_MATERIAL_CHANGES_IN_FRAME, INFO_SHADER_CHANGES_IN_FRAME, INFO_SURFACE_CHANGES_IN_FRAME, INFO_DRAW_CALLS_IN_FRAME, INFO_USAGE_VIDEO_MEM_TOTAL, INFO_VIDEO_MEM_USED, INFO_TEXTURE_MEM_USED, INFO_VERTEX_MEM_USED,
+ * ctypedef enum VisualServer_NinePatchAxisMode :NINE_PATCH_STRETCH, NINE_PATCH_TILE, NINE_PATCH_TILE_FIT,
  */
-enum __pyx_t_7classes_12VisualServer_EnvironmentDOFBlurQuality {
+enum __pyx_t_7classes_12VisualServer_VisualServer_EnvironmentDOFBlurQuality {
   __pyx_e_7classes_12VisualServer_ENV_DOF_BLUR_QUALITY_LOW,
   __pyx_e_7classes_12VisualServer_ENV_DOF_BLUR_QUALITY_MEDIUM,
   __pyx_e_7classes_12VisualServer_ENV_DOF_BLUR_QUALITY_HIGH
 };
-typedef enum __pyx_t_7classes_12VisualServer_EnvironmentDOFBlurQuality __pyx_t_7classes_12VisualServer_EnvironmentDOFBlurQuality;
+typedef enum __pyx_t_7classes_12VisualServer_VisualServer_EnvironmentDOFBlurQuality __pyx_t_7classes_12VisualServer_VisualServer_EnvironmentDOFBlurQuality;
 
 /* "classes/VisualServer.pxd":14
- * ctypedef enum EnvironmentSSAOQuality :ENV_SSAO_QUALITY_LOW, ENV_SSAO_QUALITY_MEDIUM, ENV_SSAO_QUALITY_HIGH,
- * ctypedef enum EnvironmentDOFBlurQuality :ENV_DOF_BLUR_QUALITY_LOW, ENV_DOF_BLUR_QUALITY_MEDIUM, ENV_DOF_BLUR_QUALITY_HIGH,
- * ctypedef enum RenderInfo :INFO_OBJECTS_IN_FRAME, INFO_VERTICES_IN_FRAME, INFO_MATERIAL_CHANGES_IN_FRAME, INFO_SHADER_CHANGES_IN_FRAME, INFO_SURFACE_CHANGES_IN_FRAME, INFO_DRAW_CALLS_IN_FRAME, INFO_USAGE_VIDEO_MEM_TOTAL, INFO_VIDEO_MEM_USED, INFO_TEXTURE_MEM_USED, INFO_VERTEX_MEM_USED,             # <<<<<<<<<<<<<<
- * ctypedef enum NinePatchAxisMode :NINE_PATCH_STRETCH, NINE_PATCH_TILE, NINE_PATCH_TILE_FIT,
- * ctypedef enum ViewportRenderInfo :VIEWPORT_RENDER_INFO_OBJECTS_IN_FRAME, VIEWPORT_RENDER_INFO_VERTICES_IN_FRAME, VIEWPORT_RENDER_INFO_MATERIAL_CHANGES_IN_FRAME, VIEWPORT_RENDER_INFO_SHADER_CHANGES_IN_FRAME, VIEWPORT_RENDER_INFO_SURFACE_CHANGES_IN_FRAME, VIEWPORT_RENDER_INFO_DRAW_CALLS_IN_FRAME, VIEWPORT_RENDER_INFO_MAX,
+ * ctypedef enum VisualServer_EnvironmentSSAOQuality :ENV_SSAO_QUALITY_LOW, ENV_SSAO_QUALITY_MEDIUM, ENV_SSAO_QUALITY_HIGH,
+ * ctypedef enum VisualServer_EnvironmentDOFBlurQuality :ENV_DOF_BLUR_QUALITY_LOW, ENV_DOF_BLUR_QUALITY_MEDIUM, ENV_DOF_BLUR_QUALITY_HIGH,
+ * ctypedef enum VisualServer_RenderInfo :INFO_OBJECTS_IN_FRAME, INFO_VERTICES_IN_FRAME, INFO_MATERIAL_CHANGES_IN_FRAME, INFO_SHADER_CHANGES_IN_FRAME, INFO_SURFACE_CHANGES_IN_FRAME, INFO_DRAW_CALLS_IN_FRAME, INFO_USAGE_VIDEO_MEM_TOTAL, INFO_VIDEO_MEM_USED, INFO_TEXTURE_MEM_USED, INFO_VERTEX_MEM_USED,             # <<<<<<<<<<<<<<
+ * ctypedef enum VisualServer_NinePatchAxisMode :NINE_PATCH_STRETCH, NINE_PATCH_TILE, NINE_PATCH_TILE_FIT,
+ * ctypedef enum VisualServer_ViewportRenderInfo :VIEWPORT_RENDER_INFO_OBJECTS_IN_FRAME, VIEWPORT_RENDER_INFO_VERTICES_IN_FRAME, VIEWPORT_RENDER_INFO_MATERIAL_CHANGES_IN_FRAME, VIEWPORT_RENDER_INFO_SHADER_CHANGES_IN_FRAME, VIEWPORT_RENDER_INFO_SURFACE_CHANGES_IN_FRAME, VIEWPORT_RENDER_INFO_DRAW_CALLS_IN_FRAME, VIEWPORT_RENDER_INFO_MAX,
  */
-enum __pyx_t_7classes_12VisualServer_RenderInfo {
+enum __pyx_t_7classes_12VisualServer_VisualServer_RenderInfo {
   __pyx_e_7classes_12VisualServer_INFO_OBJECTS_IN_FRAME,
   __pyx_e_7classes_12VisualServer_INFO_VERTICES_IN_FRAME,
   __pyx_e_7classes_12VisualServer_INFO_MATERIAL_CHANGES_IN_FRAME,
@@ -1220,30 +1220,30 @@ enum __pyx_t_7classes_12VisualServer_RenderInfo {
   __pyx_e_7classes_12VisualServer_INFO_TEXTURE_MEM_USED,
   __pyx_e_7classes_12VisualServer_INFO_VERTEX_MEM_USED
 };
-typedef enum __pyx_t_7classes_12VisualServer_RenderInfo __pyx_t_7classes_12VisualServer_RenderInfo;
+typedef enum __pyx_t_7classes_12VisualServer_VisualServer_RenderInfo __pyx_t_7classes_12VisualServer_VisualServer_RenderInfo;
 
 /* "classes/VisualServer.pxd":15
- * ctypedef enum EnvironmentDOFBlurQuality :ENV_DOF_BLUR_QUALITY_LOW, ENV_DOF_BLUR_QUALITY_MEDIUM, ENV_DOF_BLUR_QUALITY_HIGH,
- * ctypedef enum RenderInfo :INFO_OBJECTS_IN_FRAME, INFO_VERTICES_IN_FRAME, INFO_MATERIAL_CHANGES_IN_FRAME, INFO_SHADER_CHANGES_IN_FRAME, INFO_SURFACE_CHANGES_IN_FRAME, INFO_DRAW_CALLS_IN_FRAME, INFO_USAGE_VIDEO_MEM_TOTAL, INFO_VIDEO_MEM_USED, INFO_TEXTURE_MEM_USED, INFO_VERTEX_MEM_USED,
- * ctypedef enum NinePatchAxisMode :NINE_PATCH_STRETCH, NINE_PATCH_TILE, NINE_PATCH_TILE_FIT,             # <<<<<<<<<<<<<<
- * ctypedef enum ViewportRenderInfo :VIEWPORT_RENDER_INFO_OBJECTS_IN_FRAME, VIEWPORT_RENDER_INFO_VERTICES_IN_FRAME, VIEWPORT_RENDER_INFO_MATERIAL_CHANGES_IN_FRAME, VIEWPORT_RENDER_INFO_SHADER_CHANGES_IN_FRAME, VIEWPORT_RENDER_INFO_SURFACE_CHANGES_IN_FRAME, VIEWPORT_RENDER_INFO_DRAW_CALLS_IN_FRAME, VIEWPORT_RENDER_INFO_MAX,
- * ctypedef enum ViewportClearMode :VIEWPORT_CLEAR_ALWAYS, VIEWPORT_CLEAR_NEVER, VIEWPORT_CLEAR_ONLY_NEXT_FRAME,
+ * ctypedef enum VisualServer_EnvironmentDOFBlurQuality :ENV_DOF_BLUR_QUALITY_LOW, ENV_DOF_BLUR_QUALITY_MEDIUM, ENV_DOF_BLUR_QUALITY_HIGH,
+ * ctypedef enum VisualServer_RenderInfo :INFO_OBJECTS_IN_FRAME, INFO_VERTICES_IN_FRAME, INFO_MATERIAL_CHANGES_IN_FRAME, INFO_SHADER_CHANGES_IN_FRAME, INFO_SURFACE_CHANGES_IN_FRAME, INFO_DRAW_CALLS_IN_FRAME, INFO_USAGE_VIDEO_MEM_TOTAL, INFO_VIDEO_MEM_USED, INFO_TEXTURE_MEM_USED, INFO_VERTEX_MEM_USED,
+ * ctypedef enum VisualServer_NinePatchAxisMode :NINE_PATCH_STRETCH, NINE_PATCH_TILE, NINE_PATCH_TILE_FIT,             # <<<<<<<<<<<<<<
+ * ctypedef enum VisualServer_ViewportRenderInfo :VIEWPORT_RENDER_INFO_OBJECTS_IN_FRAME, VIEWPORT_RENDER_INFO_VERTICES_IN_FRAME, VIEWPORT_RENDER_INFO_MATERIAL_CHANGES_IN_FRAME, VIEWPORT_RENDER_INFO_SHADER_CHANGES_IN_FRAME, VIEWPORT_RENDER_INFO_SURFACE_CHANGES_IN_FRAME, VIEWPORT_RENDER_INFO_DRAW_CALLS_IN_FRAME, VIEWPORT_RENDER_INFO_MAX,
+ * ctypedef enum VisualServer_ViewportClearMode :VIEWPORT_CLEAR_ALWAYS, VIEWPORT_CLEAR_NEVER, VIEWPORT_CLEAR_ONLY_NEXT_FRAME,
  */
-enum __pyx_t_7classes_12VisualServer_NinePatchAxisMode {
+enum __pyx_t_7classes_12VisualServer_VisualServer_NinePatchAxisMode {
   __pyx_e_7classes_12VisualServer_NINE_PATCH_STRETCH,
   __pyx_e_7classes_12VisualServer_NINE_PATCH_TILE,
   __pyx_e_7classes_12VisualServer_NINE_PATCH_TILE_FIT
 };
-typedef enum __pyx_t_7classes_12VisualServer_NinePatchAxisMode __pyx_t_7classes_12VisualServer_NinePatchAxisMode;
+typedef enum __pyx_t_7classes_12VisualServer_VisualServer_NinePatchAxisMode __pyx_t_7classes_12VisualServer_VisualServer_NinePatchAxisMode;
 
 /* "classes/VisualServer.pxd":16
- * ctypedef enum RenderInfo :INFO_OBJECTS_IN_FRAME, INFO_VERTICES_IN_FRAME, INFO_MATERIAL_CHANGES_IN_FRAME, INFO_SHADER_CHANGES_IN_FRAME, INFO_SURFACE_CHANGES_IN_FRAME, INFO_DRAW_CALLS_IN_FRAME, INFO_USAGE_VIDEO_MEM_TOTAL, INFO_VIDEO_MEM_USED, INFO_TEXTURE_MEM_USED, INFO_VERTEX_MEM_USED,
- * ctypedef enum NinePatchAxisMode :NINE_PATCH_STRETCH, NINE_PATCH_TILE, NINE_PATCH_TILE_FIT,
- * ctypedef enum ViewportRenderInfo :VIEWPORT_RENDER_INFO_OBJECTS_IN_FRAME, VIEWPORT_RENDER_INFO_VERTICES_IN_FRAME, VIEWPORT_RENDER_INFO_MATERIAL_CHANGES_IN_FRAME, VIEWPORT_RENDER_INFO_SHADER_CHANGES_IN_FRAME, VIEWPORT_RENDER_INFO_SURFACE_CHANGES_IN_FRAME, VIEWPORT_RENDER_INFO_DRAW_CALLS_IN_FRAME, VIEWPORT_RENDER_INFO_MAX,             # <<<<<<<<<<<<<<
- * ctypedef enum ViewportClearMode :VIEWPORT_CLEAR_ALWAYS, VIEWPORT_CLEAR_NEVER, VIEWPORT_CLEAR_ONLY_NEXT_FRAME,
- * ctypedef enum LightOmniShadowDetail :LIGHT_OMNI_SHADOW_DETAIL_VERTICAL, LIGHT_OMNI_SHADOW_DETAIL_HORIZONTAL,
+ * ctypedef enum VisualServer_RenderInfo :INFO_OBJECTS_IN_FRAME, INFO_VERTICES_IN_FRAME, INFO_MATERIAL_CHANGES_IN_FRAME, INFO_SHADER_CHANGES_IN_FRAME, INFO_SURFACE_CHANGES_IN_FRAME, INFO_DRAW_CALLS_IN_FRAME, INFO_USAGE_VIDEO_MEM_TOTAL, INFO_VIDEO_MEM_USED, INFO_TEXTURE_MEM_USED, INFO_VERTEX_MEM_USED,
+ * ctypedef enum VisualServer_NinePatchAxisMode :NINE_PATCH_STRETCH, NINE_PATCH_TILE, NINE_PATCH_TILE_FIT,
+ * ctypedef enum VisualServer_ViewportRenderInfo :VIEWPORT_RENDER_INFO_OBJECTS_IN_FRAME, VIEWPORT_RENDER_INFO_VERTICES_IN_FRAME, VIEWPORT_RENDER_INFO_MATERIAL_CHANGES_IN_FRAME, VIEWPORT_RENDER_INFO_SHADER_CHANGES_IN_FRAME, VIEWPORT_RENDER_INFO_SURFACE_CHANGES_IN_FRAME, VIEWPORT_RENDER_INFO_DRAW_CALLS_IN_FRAME, VIEWPORT_RENDER_INFO_MAX,             # <<<<<<<<<<<<<<
+ * ctypedef enum VisualServer_ViewportClearMode :VIEWPORT_CLEAR_ALWAYS, VIEWPORT_CLEAR_NEVER, VIEWPORT_CLEAR_ONLY_NEXT_FRAME,
+ * ctypedef enum VisualServer_LightOmniShadowDetail :LIGHT_OMNI_SHADOW_DETAIL_VERTICAL, LIGHT_OMNI_SHADOW_DETAIL_HORIZONTAL,
  */
-enum __pyx_t_7classes_12VisualServer_ViewportRenderInfo {
+enum __pyx_t_7classes_12VisualServer_VisualServer_ViewportRenderInfo {
   __pyx_e_7classes_12VisualServer_VIEWPORT_RENDER_INFO_OBJECTS_IN_FRAME,
   __pyx_e_7classes_12VisualServer_VIEWPORT_RENDER_INFO_VERTICES_IN_FRAME,
   __pyx_e_7classes_12VisualServer_VIEWPORT_RENDER_INFO_MATERIAL_CHANGES_IN_FRAME,
@@ -1252,116 +1252,116 @@ enum __pyx_t_7classes_12VisualServer_ViewportRenderInfo {
   __pyx_e_7classes_12VisualServer_VIEWPORT_RENDER_INFO_DRAW_CALLS_IN_FRAME,
   __pyx_e_7classes_12VisualServer_VIEWPORT_RENDER_INFO_MAX
 };
-typedef enum __pyx_t_7classes_12VisualServer_ViewportRenderInfo __pyx_t_7classes_12VisualServer_ViewportRenderInfo;
+typedef enum __pyx_t_7classes_12VisualServer_VisualServer_ViewportRenderInfo __pyx_t_7classes_12VisualServer_VisualServer_ViewportRenderInfo;
 
 /* "classes/VisualServer.pxd":17
- * ctypedef enum NinePatchAxisMode :NINE_PATCH_STRETCH, NINE_PATCH_TILE, NINE_PATCH_TILE_FIT,
- * ctypedef enum ViewportRenderInfo :VIEWPORT_RENDER_INFO_OBJECTS_IN_FRAME, VIEWPORT_RENDER_INFO_VERTICES_IN_FRAME, VIEWPORT_RENDER_INFO_MATERIAL_CHANGES_IN_FRAME, VIEWPORT_RENDER_INFO_SHADER_CHANGES_IN_FRAME, VIEWPORT_RENDER_INFO_SURFACE_CHANGES_IN_FRAME, VIEWPORT_RENDER_INFO_DRAW_CALLS_IN_FRAME, VIEWPORT_RENDER_INFO_MAX,
- * ctypedef enum ViewportClearMode :VIEWPORT_CLEAR_ALWAYS, VIEWPORT_CLEAR_NEVER, VIEWPORT_CLEAR_ONLY_NEXT_FRAME,             # <<<<<<<<<<<<<<
- * ctypedef enum LightOmniShadowDetail :LIGHT_OMNI_SHADOW_DETAIL_VERTICAL, LIGHT_OMNI_SHADOW_DETAIL_HORIZONTAL,
- * ctypedef enum ShaderMode :SHADER_SPATIAL, SHADER_CANVAS_ITEM, SHADER_PARTICLES, SHADER_MAX,
+ * ctypedef enum VisualServer_NinePatchAxisMode :NINE_PATCH_STRETCH, NINE_PATCH_TILE, NINE_PATCH_TILE_FIT,
+ * ctypedef enum VisualServer_ViewportRenderInfo :VIEWPORT_RENDER_INFO_OBJECTS_IN_FRAME, VIEWPORT_RENDER_INFO_VERTICES_IN_FRAME, VIEWPORT_RENDER_INFO_MATERIAL_CHANGES_IN_FRAME, VIEWPORT_RENDER_INFO_SHADER_CHANGES_IN_FRAME, VIEWPORT_RENDER_INFO_SURFACE_CHANGES_IN_FRAME, VIEWPORT_RENDER_INFO_DRAW_CALLS_IN_FRAME, VIEWPORT_RENDER_INFO_MAX,
+ * ctypedef enum VisualServer_ViewportClearMode :VIEWPORT_CLEAR_ALWAYS, VIEWPORT_CLEAR_NEVER, VIEWPORT_CLEAR_ONLY_NEXT_FRAME,             # <<<<<<<<<<<<<<
+ * ctypedef enum VisualServer_LightOmniShadowDetail :LIGHT_OMNI_SHADOW_DETAIL_VERTICAL, LIGHT_OMNI_SHADOW_DETAIL_HORIZONTAL,
+ * ctypedef enum VisualServer_ShaderMode :SHADER_SPATIAL, SHADER_CANVAS_ITEM, SHADER_PARTICLES, SHADER_MAX,
  */
-enum __pyx_t_7classes_12VisualServer_ViewportClearMode {
+enum __pyx_t_7classes_12VisualServer_VisualServer_ViewportClearMode {
   __pyx_e_7classes_12VisualServer_VIEWPORT_CLEAR_ALWAYS,
   __pyx_e_7classes_12VisualServer_VIEWPORT_CLEAR_NEVER,
   __pyx_e_7classes_12VisualServer_VIEWPORT_CLEAR_ONLY_NEXT_FRAME
 };
-typedef enum __pyx_t_7classes_12VisualServer_ViewportClearMode __pyx_t_7classes_12VisualServer_ViewportClearMode;
+typedef enum __pyx_t_7classes_12VisualServer_VisualServer_ViewportClearMode __pyx_t_7classes_12VisualServer_VisualServer_ViewportClearMode;
 
 /* "classes/VisualServer.pxd":18
- * ctypedef enum ViewportRenderInfo :VIEWPORT_RENDER_INFO_OBJECTS_IN_FRAME, VIEWPORT_RENDER_INFO_VERTICES_IN_FRAME, VIEWPORT_RENDER_INFO_MATERIAL_CHANGES_IN_FRAME, VIEWPORT_RENDER_INFO_SHADER_CHANGES_IN_FRAME, VIEWPORT_RENDER_INFO_SURFACE_CHANGES_IN_FRAME, VIEWPORT_RENDER_INFO_DRAW_CALLS_IN_FRAME, VIEWPORT_RENDER_INFO_MAX,
- * ctypedef enum ViewportClearMode :VIEWPORT_CLEAR_ALWAYS, VIEWPORT_CLEAR_NEVER, VIEWPORT_CLEAR_ONLY_NEXT_FRAME,
- * ctypedef enum LightOmniShadowDetail :LIGHT_OMNI_SHADOW_DETAIL_VERTICAL, LIGHT_OMNI_SHADOW_DETAIL_HORIZONTAL,             # <<<<<<<<<<<<<<
- * ctypedef enum ShaderMode :SHADER_SPATIAL, SHADER_CANVAS_ITEM, SHADER_PARTICLES, SHADER_MAX,
- * ctypedef enum MultimeshTransformFormat :MULTIMESH_TRANSFORM_2D, MULTIMESH_TRANSFORM_3D,
+ * ctypedef enum VisualServer_ViewportRenderInfo :VIEWPORT_RENDER_INFO_OBJECTS_IN_FRAME, VIEWPORT_RENDER_INFO_VERTICES_IN_FRAME, VIEWPORT_RENDER_INFO_MATERIAL_CHANGES_IN_FRAME, VIEWPORT_RENDER_INFO_SHADER_CHANGES_IN_FRAME, VIEWPORT_RENDER_INFO_SURFACE_CHANGES_IN_FRAME, VIEWPORT_RENDER_INFO_DRAW_CALLS_IN_FRAME, VIEWPORT_RENDER_INFO_MAX,
+ * ctypedef enum VisualServer_ViewportClearMode :VIEWPORT_CLEAR_ALWAYS, VIEWPORT_CLEAR_NEVER, VIEWPORT_CLEAR_ONLY_NEXT_FRAME,
+ * ctypedef enum VisualServer_LightOmniShadowDetail :LIGHT_OMNI_SHADOW_DETAIL_VERTICAL, LIGHT_OMNI_SHADOW_DETAIL_HORIZONTAL,             # <<<<<<<<<<<<<<
+ * ctypedef enum VisualServer_ShaderMode :SHADER_SPATIAL, SHADER_CANVAS_ITEM, SHADER_PARTICLES, SHADER_MAX,
+ * ctypedef enum VisualServer_MultimeshTransformFormat :MULTIMESH_TRANSFORM_2D, MULTIMESH_TRANSFORM_3D,
  */
-enum __pyx_t_7classes_12VisualServer_LightOmniShadowDetail {
+enum __pyx_t_7classes_12VisualServer_VisualServer_LightOmniShadowDetail {
   __pyx_e_7classes_12VisualServer_LIGHT_OMNI_SHADOW_DETAIL_VERTICAL,
   __pyx_e_7classes_12VisualServer_LIGHT_OMNI_SHADOW_DETAIL_HORIZONTAL
 };
-typedef enum __pyx_t_7classes_12VisualServer_LightOmniShadowDetail __pyx_t_7classes_12VisualServer_LightOmniShadowDetail;
+typedef enum __pyx_t_7classes_12VisualServer_VisualServer_LightOmniShadowDetail __pyx_t_7classes_12VisualServer_VisualServer_LightOmniShadowDetail;
 
 /* "classes/VisualServer.pxd":19
- * ctypedef enum ViewportClearMode :VIEWPORT_CLEAR_ALWAYS, VIEWPORT_CLEAR_NEVER, VIEWPORT_CLEAR_ONLY_NEXT_FRAME,
- * ctypedef enum LightOmniShadowDetail :LIGHT_OMNI_SHADOW_DETAIL_VERTICAL, LIGHT_OMNI_SHADOW_DETAIL_HORIZONTAL,
- * ctypedef enum ShaderMode :SHADER_SPATIAL, SHADER_CANVAS_ITEM, SHADER_PARTICLES, SHADER_MAX,             # <<<<<<<<<<<<<<
- * ctypedef enum MultimeshTransformFormat :MULTIMESH_TRANSFORM_2D, MULTIMESH_TRANSFORM_3D,
- * ctypedef enum ShadowCastingSetting :SHADOW_CASTING_SETTING_OFF, SHADOW_CASTING_SETTING_ON, SHADOW_CASTING_SETTING_DOUBLE_SIDED, SHADOW_CASTING_SETTING_SHADOWS_ONLY,
+ * ctypedef enum VisualServer_ViewportClearMode :VIEWPORT_CLEAR_ALWAYS, VIEWPORT_CLEAR_NEVER, VIEWPORT_CLEAR_ONLY_NEXT_FRAME,
+ * ctypedef enum VisualServer_LightOmniShadowDetail :LIGHT_OMNI_SHADOW_DETAIL_VERTICAL, LIGHT_OMNI_SHADOW_DETAIL_HORIZONTAL,
+ * ctypedef enum VisualServer_ShaderMode :SHADER_SPATIAL, SHADER_CANVAS_ITEM, SHADER_PARTICLES, SHADER_MAX,             # <<<<<<<<<<<<<<
+ * ctypedef enum VisualServer_MultimeshTransformFormat :MULTIMESH_TRANSFORM_2D, MULTIMESH_TRANSFORM_3D,
+ * ctypedef enum VisualServer_ShadowCastingSetting :SHADOW_CASTING_SETTING_OFF, SHADOW_CASTING_SETTING_ON, SHADOW_CASTING_SETTING_DOUBLE_SIDED, SHADOW_CASTING_SETTING_SHADOWS_ONLY,
  */
-enum __pyx_t_7classes_12VisualServer_ShaderMode {
+enum __pyx_t_7classes_12VisualServer_VisualServer_ShaderMode {
   __pyx_e_7classes_12VisualServer_SHADER_SPATIAL,
   __pyx_e_7classes_12VisualServer_SHADER_CANVAS_ITEM,
   __pyx_e_7classes_12VisualServer_SHADER_PARTICLES,
   __pyx_e_7classes_12VisualServer_SHADER_MAX
 };
-typedef enum __pyx_t_7classes_12VisualServer_ShaderMode __pyx_t_7classes_12VisualServer_ShaderMode;
+typedef enum __pyx_t_7classes_12VisualServer_VisualServer_ShaderMode __pyx_t_7classes_12VisualServer_VisualServer_ShaderMode;
 
 /* "classes/VisualServer.pxd":20
- * ctypedef enum LightOmniShadowDetail :LIGHT_OMNI_SHADOW_DETAIL_VERTICAL, LIGHT_OMNI_SHADOW_DETAIL_HORIZONTAL,
- * ctypedef enum ShaderMode :SHADER_SPATIAL, SHADER_CANVAS_ITEM, SHADER_PARTICLES, SHADER_MAX,
- * ctypedef enum MultimeshTransformFormat :MULTIMESH_TRANSFORM_2D, MULTIMESH_TRANSFORM_3D,             # <<<<<<<<<<<<<<
- * ctypedef enum ShadowCastingSetting :SHADOW_CASTING_SETTING_OFF, SHADOW_CASTING_SETTING_ON, SHADOW_CASTING_SETTING_DOUBLE_SIDED, SHADOW_CASTING_SETTING_SHADOWS_ONLY,
- * ctypedef enum ViewportDebugDraw :VIEWPORT_DEBUG_DRAW_DISABLED, VIEWPORT_DEBUG_DRAW_UNSHADED, VIEWPORT_DEBUG_DRAW_OVERDRAW, VIEWPORT_DEBUG_DRAW_WIREFRAME,
+ * ctypedef enum VisualServer_LightOmniShadowDetail :LIGHT_OMNI_SHADOW_DETAIL_VERTICAL, LIGHT_OMNI_SHADOW_DETAIL_HORIZONTAL,
+ * ctypedef enum VisualServer_ShaderMode :SHADER_SPATIAL, SHADER_CANVAS_ITEM, SHADER_PARTICLES, SHADER_MAX,
+ * ctypedef enum VisualServer_MultimeshTransformFormat :MULTIMESH_TRANSFORM_2D, MULTIMESH_TRANSFORM_3D,             # <<<<<<<<<<<<<<
+ * ctypedef enum VisualServer_ShadowCastingSetting :SHADOW_CASTING_SETTING_OFF, SHADOW_CASTING_SETTING_ON, SHADOW_CASTING_SETTING_DOUBLE_SIDED, SHADOW_CASTING_SETTING_SHADOWS_ONLY,
+ * ctypedef enum VisualServer_ViewportDebugDraw :VIEWPORT_DEBUG_DRAW_DISABLED, VIEWPORT_DEBUG_DRAW_UNSHADED, VIEWPORT_DEBUG_DRAW_OVERDRAW, VIEWPORT_DEBUG_DRAW_WIREFRAME,
  */
-enum __pyx_t_7classes_12VisualServer_MultimeshTransformFormat {
+enum __pyx_t_7classes_12VisualServer_VisualServer_MultimeshTransformFormat {
   __pyx_e_7classes_12VisualServer_MULTIMESH_TRANSFORM_2D,
   __pyx_e_7classes_12VisualServer_MULTIMESH_TRANSFORM_3D
 };
-typedef enum __pyx_t_7classes_12VisualServer_MultimeshTransformFormat __pyx_t_7classes_12VisualServer_MultimeshTransformFormat;
+typedef enum __pyx_t_7classes_12VisualServer_VisualServer_MultimeshTransformFormat __pyx_t_7classes_12VisualServer_VisualServer_MultimeshTransformFormat;
 
 /* "classes/VisualServer.pxd":21
- * ctypedef enum ShaderMode :SHADER_SPATIAL, SHADER_CANVAS_ITEM, SHADER_PARTICLES, SHADER_MAX,
- * ctypedef enum MultimeshTransformFormat :MULTIMESH_TRANSFORM_2D, MULTIMESH_TRANSFORM_3D,
- * ctypedef enum ShadowCastingSetting :SHADOW_CASTING_SETTING_OFF, SHADOW_CASTING_SETTING_ON, SHADOW_CASTING_SETTING_DOUBLE_SIDED, SHADOW_CASTING_SETTING_SHADOWS_ONLY,             # <<<<<<<<<<<<<<
- * ctypedef enum ViewportDebugDraw :VIEWPORT_DEBUG_DRAW_DISABLED, VIEWPORT_DEBUG_DRAW_UNSHADED, VIEWPORT_DEBUG_DRAW_OVERDRAW, VIEWPORT_DEBUG_DRAW_WIREFRAME,
- * ctypedef enum ViewportUsage :VIEWPORT_USAGE_2D, VIEWPORT_USAGE_2D_NO_SAMPLING, VIEWPORT_USAGE_3D, VIEWPORT_USAGE_3D_NO_EFFECTS,
+ * ctypedef enum VisualServer_ShaderMode :SHADER_SPATIAL, SHADER_CANVAS_ITEM, SHADER_PARTICLES, SHADER_MAX,
+ * ctypedef enum VisualServer_MultimeshTransformFormat :MULTIMESH_TRANSFORM_2D, MULTIMESH_TRANSFORM_3D,
+ * ctypedef enum VisualServer_ShadowCastingSetting :SHADOW_CASTING_SETTING_OFF, SHADOW_CASTING_SETTING_ON, SHADOW_CASTING_SETTING_DOUBLE_SIDED, SHADOW_CASTING_SETTING_SHADOWS_ONLY,             # <<<<<<<<<<<<<<
+ * ctypedef enum VisualServer_ViewportDebugDraw :VIEWPORT_DEBUG_DRAW_DISABLED, VIEWPORT_DEBUG_DRAW_UNSHADED, VIEWPORT_DEBUG_DRAW_OVERDRAW, VIEWPORT_DEBUG_DRAW_WIREFRAME,
+ * ctypedef enum VisualServer_ViewportUsage :VIEWPORT_USAGE_2D, VIEWPORT_USAGE_2D_NO_SAMPLING, VIEWPORT_USAGE_3D, VIEWPORT_USAGE_3D_NO_EFFECTS,
  */
-enum __pyx_t_7classes_12VisualServer_ShadowCastingSetting {
+enum __pyx_t_7classes_12VisualServer_VisualServer_ShadowCastingSetting {
   __pyx_e_7classes_12VisualServer_SHADOW_CASTING_SETTING_OFF,
   __pyx_e_7classes_12VisualServer_SHADOW_CASTING_SETTING_ON,
   __pyx_e_7classes_12VisualServer_SHADOW_CASTING_SETTING_DOUBLE_SIDED,
   __pyx_e_7classes_12VisualServer_SHADOW_CASTING_SETTING_SHADOWS_ONLY
 };
-typedef enum __pyx_t_7classes_12VisualServer_ShadowCastingSetting __pyx_t_7classes_12VisualServer_ShadowCastingSetting;
+typedef enum __pyx_t_7classes_12VisualServer_VisualServer_ShadowCastingSetting __pyx_t_7classes_12VisualServer_VisualServer_ShadowCastingSetting;
 
 /* "classes/VisualServer.pxd":22
- * ctypedef enum MultimeshTransformFormat :MULTIMESH_TRANSFORM_2D, MULTIMESH_TRANSFORM_3D,
- * ctypedef enum ShadowCastingSetting :SHADOW_CASTING_SETTING_OFF, SHADOW_CASTING_SETTING_ON, SHADOW_CASTING_SETTING_DOUBLE_SIDED, SHADOW_CASTING_SETTING_SHADOWS_ONLY,
- * ctypedef enum ViewportDebugDraw :VIEWPORT_DEBUG_DRAW_DISABLED, VIEWPORT_DEBUG_DRAW_UNSHADED, VIEWPORT_DEBUG_DRAW_OVERDRAW, VIEWPORT_DEBUG_DRAW_WIREFRAME,             # <<<<<<<<<<<<<<
- * ctypedef enum ViewportUsage :VIEWPORT_USAGE_2D, VIEWPORT_USAGE_2D_NO_SAMPLING, VIEWPORT_USAGE_3D, VIEWPORT_USAGE_3D_NO_EFFECTS,
- * ctypedef enum EnvironmentBG :ENV_BG_CLEAR_COLOR, ENV_BG_COLOR, ENV_BG_SKY, ENV_BG_COLOR_SKY, ENV_BG_CANVAS, ENV_BG_KEEP, ENV_BG_MAX,
+ * ctypedef enum VisualServer_MultimeshTransformFormat :MULTIMESH_TRANSFORM_2D, MULTIMESH_TRANSFORM_3D,
+ * ctypedef enum VisualServer_ShadowCastingSetting :SHADOW_CASTING_SETTING_OFF, SHADOW_CASTING_SETTING_ON, SHADOW_CASTING_SETTING_DOUBLE_SIDED, SHADOW_CASTING_SETTING_SHADOWS_ONLY,
+ * ctypedef enum VisualServer_ViewportDebugDraw :VIEWPORT_DEBUG_DRAW_DISABLED, VIEWPORT_DEBUG_DRAW_UNSHADED, VIEWPORT_DEBUG_DRAW_OVERDRAW, VIEWPORT_DEBUG_DRAW_WIREFRAME,             # <<<<<<<<<<<<<<
+ * ctypedef enum VisualServer_ViewportUsage :VIEWPORT_USAGE_2D, VIEWPORT_USAGE_2D_NO_SAMPLING, VIEWPORT_USAGE_3D, VIEWPORT_USAGE_3D_NO_EFFECTS,
+ * ctypedef enum VisualServer_EnvironmentBG :ENV_BG_CLEAR_COLOR, ENV_BG_COLOR, ENV_BG_SKY, ENV_BG_COLOR_SKY, ENV_BG_CANVAS, ENV_BG_KEEP, ENV_BG_MAX,
  */
-enum __pyx_t_7classes_12VisualServer_ViewportDebugDraw {
+enum __pyx_t_7classes_12VisualServer_VisualServer_ViewportDebugDraw {
   __pyx_e_7classes_12VisualServer_VIEWPORT_DEBUG_DRAW_DISABLED,
   __pyx_e_7classes_12VisualServer_VIEWPORT_DEBUG_DRAW_UNSHADED,
   __pyx_e_7classes_12VisualServer_VIEWPORT_DEBUG_DRAW_OVERDRAW,
   __pyx_e_7classes_12VisualServer_VIEWPORT_DEBUG_DRAW_WIREFRAME
 };
-typedef enum __pyx_t_7classes_12VisualServer_ViewportDebugDraw __pyx_t_7classes_12VisualServer_ViewportDebugDraw;
+typedef enum __pyx_t_7classes_12VisualServer_VisualServer_ViewportDebugDraw __pyx_t_7classes_12VisualServer_VisualServer_ViewportDebugDraw;
 
 /* "classes/VisualServer.pxd":23
- * ctypedef enum ShadowCastingSetting :SHADOW_CASTING_SETTING_OFF, SHADOW_CASTING_SETTING_ON, SHADOW_CASTING_SETTING_DOUBLE_SIDED, SHADOW_CASTING_SETTING_SHADOWS_ONLY,
- * ctypedef enum ViewportDebugDraw :VIEWPORT_DEBUG_DRAW_DISABLED, VIEWPORT_DEBUG_DRAW_UNSHADED, VIEWPORT_DEBUG_DRAW_OVERDRAW, VIEWPORT_DEBUG_DRAW_WIREFRAME,
- * ctypedef enum ViewportUsage :VIEWPORT_USAGE_2D, VIEWPORT_USAGE_2D_NO_SAMPLING, VIEWPORT_USAGE_3D, VIEWPORT_USAGE_3D_NO_EFFECTS,             # <<<<<<<<<<<<<<
- * ctypedef enum EnvironmentBG :ENV_BG_CLEAR_COLOR, ENV_BG_COLOR, ENV_BG_SKY, ENV_BG_COLOR_SKY, ENV_BG_CANVAS, ENV_BG_KEEP, ENV_BG_MAX,
- * ctypedef enum MultimeshCustomDataFormat :MULTIMESH_CUSTOM_DATA_NONE, MULTIMESH_CUSTOM_DATA_8BIT, MULTIMESH_CUSTOM_DATA_FLOAT,
+ * ctypedef enum VisualServer_ShadowCastingSetting :SHADOW_CASTING_SETTING_OFF, SHADOW_CASTING_SETTING_ON, SHADOW_CASTING_SETTING_DOUBLE_SIDED, SHADOW_CASTING_SETTING_SHADOWS_ONLY,
+ * ctypedef enum VisualServer_ViewportDebugDraw :VIEWPORT_DEBUG_DRAW_DISABLED, VIEWPORT_DEBUG_DRAW_UNSHADED, VIEWPORT_DEBUG_DRAW_OVERDRAW, VIEWPORT_DEBUG_DRAW_WIREFRAME,
+ * ctypedef enum VisualServer_ViewportUsage :VIEWPORT_USAGE_2D, VIEWPORT_USAGE_2D_NO_SAMPLING, VIEWPORT_USAGE_3D, VIEWPORT_USAGE_3D_NO_EFFECTS,             # <<<<<<<<<<<<<<
+ * ctypedef enum VisualServer_EnvironmentBG :ENV_BG_CLEAR_COLOR, ENV_BG_COLOR, ENV_BG_SKY, ENV_BG_COLOR_SKY, ENV_BG_CANVAS, ENV_BG_KEEP, ENV_BG_MAX,
+ * ctypedef enum VisualServer_MultimeshCustomDataFormat :MULTIMESH_CUSTOM_DATA_NONE, MULTIMESH_CUSTOM_DATA_8BIT, MULTIMESH_CUSTOM_DATA_FLOAT,
  */
-enum __pyx_t_7classes_12VisualServer_ViewportUsage {
+enum __pyx_t_7classes_12VisualServer_VisualServer_ViewportUsage {
   __pyx_e_7classes_12VisualServer_VIEWPORT_USAGE_2D,
   __pyx_e_7classes_12VisualServer_VIEWPORT_USAGE_2D_NO_SAMPLING,
   __pyx_e_7classes_12VisualServer_VIEWPORT_USAGE_3D,
   __pyx_e_7classes_12VisualServer_VIEWPORT_USAGE_3D_NO_EFFECTS
 };
-typedef enum __pyx_t_7classes_12VisualServer_ViewportUsage __pyx_t_7classes_12VisualServer_ViewportUsage;
+typedef enum __pyx_t_7classes_12VisualServer_VisualServer_ViewportUsage __pyx_t_7classes_12VisualServer_VisualServer_ViewportUsage;
 
 /* "classes/VisualServer.pxd":24
- * ctypedef enum ViewportDebugDraw :VIEWPORT_DEBUG_DRAW_DISABLED, VIEWPORT_DEBUG_DRAW_UNSHADED, VIEWPORT_DEBUG_DRAW_OVERDRAW, VIEWPORT_DEBUG_DRAW_WIREFRAME,
- * ctypedef enum ViewportUsage :VIEWPORT_USAGE_2D, VIEWPORT_USAGE_2D_NO_SAMPLING, VIEWPORT_USAGE_3D, VIEWPORT_USAGE_3D_NO_EFFECTS,
- * ctypedef enum EnvironmentBG :ENV_BG_CLEAR_COLOR, ENV_BG_COLOR, ENV_BG_SKY, ENV_BG_COLOR_SKY, ENV_BG_CANVAS, ENV_BG_KEEP, ENV_BG_MAX,             # <<<<<<<<<<<<<<
- * ctypedef enum MultimeshCustomDataFormat :MULTIMESH_CUSTOM_DATA_NONE, MULTIMESH_CUSTOM_DATA_8BIT, MULTIMESH_CUSTOM_DATA_FLOAT,
- * ctypedef enum LightOmniShadowMode :LIGHT_OMNI_SHADOW_DUAL_PARABOLOID, LIGHT_OMNI_SHADOW_CUBE,
+ * ctypedef enum VisualServer_ViewportDebugDraw :VIEWPORT_DEBUG_DRAW_DISABLED, VIEWPORT_DEBUG_DRAW_UNSHADED, VIEWPORT_DEBUG_DRAW_OVERDRAW, VIEWPORT_DEBUG_DRAW_WIREFRAME,
+ * ctypedef enum VisualServer_ViewportUsage :VIEWPORT_USAGE_2D, VIEWPORT_USAGE_2D_NO_SAMPLING, VIEWPORT_USAGE_3D, VIEWPORT_USAGE_3D_NO_EFFECTS,
+ * ctypedef enum VisualServer_EnvironmentBG :ENV_BG_CLEAR_COLOR, ENV_BG_COLOR, ENV_BG_SKY, ENV_BG_COLOR_SKY, ENV_BG_CANVAS, ENV_BG_KEEP, ENV_BG_MAX,             # <<<<<<<<<<<<<<
+ * ctypedef enum VisualServer_MultimeshCustomDataFormat :MULTIMESH_CUSTOM_DATA_NONE, MULTIMESH_CUSTOM_DATA_8BIT, MULTIMESH_CUSTOM_DATA_FLOAT,
+ * ctypedef enum VisualServer_LightOmniShadowMode :LIGHT_OMNI_SHADOW_DUAL_PARABOLOID, LIGHT_OMNI_SHADOW_CUBE,
  */
-enum __pyx_t_7classes_12VisualServer_EnvironmentBG {
+enum __pyx_t_7classes_12VisualServer_VisualServer_EnvironmentBG {
   __pyx_e_7classes_12VisualServer_ENV_BG_CLEAR_COLOR,
   __pyx_e_7classes_12VisualServer_ENV_BG_COLOR,
   __pyx_e_7classes_12VisualServer_ENV_BG_SKY,
@@ -1370,43 +1370,43 @@ enum __pyx_t_7classes_12VisualServer_EnvironmentBG {
   __pyx_e_7classes_12VisualServer_ENV_BG_KEEP,
   __pyx_e_7classes_12VisualServer_ENV_BG_MAX
 };
-typedef enum __pyx_t_7classes_12VisualServer_EnvironmentBG __pyx_t_7classes_12VisualServer_EnvironmentBG;
+typedef enum __pyx_t_7classes_12VisualServer_VisualServer_EnvironmentBG __pyx_t_7classes_12VisualServer_VisualServer_EnvironmentBG;
 
 /* "classes/VisualServer.pxd":25
- * ctypedef enum ViewportUsage :VIEWPORT_USAGE_2D, VIEWPORT_USAGE_2D_NO_SAMPLING, VIEWPORT_USAGE_3D, VIEWPORT_USAGE_3D_NO_EFFECTS,
- * ctypedef enum EnvironmentBG :ENV_BG_CLEAR_COLOR, ENV_BG_COLOR, ENV_BG_SKY, ENV_BG_COLOR_SKY, ENV_BG_CANVAS, ENV_BG_KEEP, ENV_BG_MAX,
- * ctypedef enum MultimeshCustomDataFormat :MULTIMESH_CUSTOM_DATA_NONE, MULTIMESH_CUSTOM_DATA_8BIT, MULTIMESH_CUSTOM_DATA_FLOAT,             # <<<<<<<<<<<<<<
- * ctypedef enum LightOmniShadowMode :LIGHT_OMNI_SHADOW_DUAL_PARABOLOID, LIGHT_OMNI_SHADOW_CUBE,
- * ctypedef enum TextureFlags :TEXTURE_FLAG_MIPMAPS, TEXTURE_FLAG_REPEAT, TEXTURE_FLAG_FILTER, TEXTURE_FLAGS_DEFAULT, TEXTURE_FLAG_ANISOTROPIC_FILTER, TEXTURE_FLAG_CONVERT_TO_LINEAR, TEXTURE_FLAG_MIRRORED_REPEAT, TEXTURE_FLAG_USED_FOR_STREAMING,
+ * ctypedef enum VisualServer_ViewportUsage :VIEWPORT_USAGE_2D, VIEWPORT_USAGE_2D_NO_SAMPLING, VIEWPORT_USAGE_3D, VIEWPORT_USAGE_3D_NO_EFFECTS,
+ * ctypedef enum VisualServer_EnvironmentBG :ENV_BG_CLEAR_COLOR, ENV_BG_COLOR, ENV_BG_SKY, ENV_BG_COLOR_SKY, ENV_BG_CANVAS, ENV_BG_KEEP, ENV_BG_MAX,
+ * ctypedef enum VisualServer_MultimeshCustomDataFormat :MULTIMESH_CUSTOM_DATA_NONE, MULTIMESH_CUSTOM_DATA_8BIT, MULTIMESH_CUSTOM_DATA_FLOAT,             # <<<<<<<<<<<<<<
+ * ctypedef enum VisualServer_LightOmniShadowMode :LIGHT_OMNI_SHADOW_DUAL_PARABOLOID, LIGHT_OMNI_SHADOW_CUBE,
+ * ctypedef enum VisualServer_TextureFlags :TEXTURE_FLAG_MIPMAPS, TEXTURE_FLAG_REPEAT, TEXTURE_FLAG_FILTER, TEXTURE_FLAGS_DEFAULT, TEXTURE_FLAG_ANISOTROPIC_FILTER, TEXTURE_FLAG_CONVERT_TO_LINEAR, TEXTURE_FLAG_MIRRORED_REPEAT, TEXTURE_FLAG_USED_FOR_STREAMING,
  */
-enum __pyx_t_7classes_12VisualServer_MultimeshCustomDataFormat {
+enum __pyx_t_7classes_12VisualServer_VisualServer_MultimeshCustomDataFormat {
   __pyx_e_7classes_12VisualServer_MULTIMESH_CUSTOM_DATA_NONE,
   __pyx_e_7classes_12VisualServer_MULTIMESH_CUSTOM_DATA_8BIT,
   __pyx_e_7classes_12VisualServer_MULTIMESH_CUSTOM_DATA_FLOAT
 };
-typedef enum __pyx_t_7classes_12VisualServer_MultimeshCustomDataFormat __pyx_t_7classes_12VisualServer_MultimeshCustomDataFormat;
+typedef enum __pyx_t_7classes_12VisualServer_VisualServer_MultimeshCustomDataFormat __pyx_t_7classes_12VisualServer_VisualServer_MultimeshCustomDataFormat;
 
 /* "classes/VisualServer.pxd":26
- * ctypedef enum EnvironmentBG :ENV_BG_CLEAR_COLOR, ENV_BG_COLOR, ENV_BG_SKY, ENV_BG_COLOR_SKY, ENV_BG_CANVAS, ENV_BG_KEEP, ENV_BG_MAX,
- * ctypedef enum MultimeshCustomDataFormat :MULTIMESH_CUSTOM_DATA_NONE, MULTIMESH_CUSTOM_DATA_8BIT, MULTIMESH_CUSTOM_DATA_FLOAT,
- * ctypedef enum LightOmniShadowMode :LIGHT_OMNI_SHADOW_DUAL_PARABOLOID, LIGHT_OMNI_SHADOW_CUBE,             # <<<<<<<<<<<<<<
- * ctypedef enum TextureFlags :TEXTURE_FLAG_MIPMAPS, TEXTURE_FLAG_REPEAT, TEXTURE_FLAG_FILTER, TEXTURE_FLAGS_DEFAULT, TEXTURE_FLAG_ANISOTROPIC_FILTER, TEXTURE_FLAG_CONVERT_TO_LINEAR, TEXTURE_FLAG_MIRRORED_REPEAT, TEXTURE_FLAG_USED_FOR_STREAMING,
- * ctypedef enum Features :FEATURE_SHADERS, FEATURE_MULTITHREADED,
+ * ctypedef enum VisualServer_EnvironmentBG :ENV_BG_CLEAR_COLOR, ENV_BG_COLOR, ENV_BG_SKY, ENV_BG_COLOR_SKY, ENV_BG_CANVAS, ENV_BG_KEEP, ENV_BG_MAX,
+ * ctypedef enum VisualServer_MultimeshCustomDataFormat :MULTIMESH_CUSTOM_DATA_NONE, MULTIMESH_CUSTOM_DATA_8BIT, MULTIMESH_CUSTOM_DATA_FLOAT,
+ * ctypedef enum VisualServer_LightOmniShadowMode :LIGHT_OMNI_SHADOW_DUAL_PARABOLOID, LIGHT_OMNI_SHADOW_CUBE,             # <<<<<<<<<<<<<<
+ * ctypedef enum VisualServer_TextureFlags :TEXTURE_FLAG_MIPMAPS, TEXTURE_FLAG_REPEAT, TEXTURE_FLAG_FILTER, TEXTURE_FLAGS_DEFAULT, TEXTURE_FLAG_ANISOTROPIC_FILTER, TEXTURE_FLAG_CONVERT_TO_LINEAR, TEXTURE_FLAG_MIRRORED_REPEAT, TEXTURE_FLAG_USED_FOR_STREAMING,
+ * ctypedef enum VisualServer_Features :FEATURE_SHADERS, FEATURE_MULTITHREADED,
  */
-enum __pyx_t_7classes_12VisualServer_LightOmniShadowMode {
+enum __pyx_t_7classes_12VisualServer_VisualServer_LightOmniShadowMode {
   __pyx_e_7classes_12VisualServer_LIGHT_OMNI_SHADOW_DUAL_PARABOLOID,
   __pyx_e_7classes_12VisualServer_LIGHT_OMNI_SHADOW_CUBE
 };
-typedef enum __pyx_t_7classes_12VisualServer_LightOmniShadowMode __pyx_t_7classes_12VisualServer_LightOmniShadowMode;
+typedef enum __pyx_t_7classes_12VisualServer_VisualServer_LightOmniShadowMode __pyx_t_7classes_12VisualServer_VisualServer_LightOmniShadowMode;
 
 /* "classes/VisualServer.pxd":27
- * ctypedef enum MultimeshCustomDataFormat :MULTIMESH_CUSTOM_DATA_NONE, MULTIMESH_CUSTOM_DATA_8BIT, MULTIMESH_CUSTOM_DATA_FLOAT,
- * ctypedef enum LightOmniShadowMode :LIGHT_OMNI_SHADOW_DUAL_PARABOLOID, LIGHT_OMNI_SHADOW_CUBE,
- * ctypedef enum TextureFlags :TEXTURE_FLAG_MIPMAPS, TEXTURE_FLAG_REPEAT, TEXTURE_FLAG_FILTER, TEXTURE_FLAGS_DEFAULT, TEXTURE_FLAG_ANISOTROPIC_FILTER, TEXTURE_FLAG_CONVERT_TO_LINEAR, TEXTURE_FLAG_MIRRORED_REPEAT, TEXTURE_FLAG_USED_FOR_STREAMING,             # <<<<<<<<<<<<<<
- * ctypedef enum Features :FEATURE_SHADERS, FEATURE_MULTITHREADED,
- * ctypedef enum InstanceType :INSTANCE_NONE, INSTANCE_MESH, INSTANCE_MULTIMESH, INSTANCE_IMMEDIATE, INSTANCE_PARTICLES, INSTANCE_LIGHT, INSTANCE_REFLECTION_PROBE, INSTANCE_GI_PROBE, INSTANCE_LIGHTMAP_CAPTURE, INSTANCE_MAX, INSTANCE_GEOMETRY_MASK,
+ * ctypedef enum VisualServer_MultimeshCustomDataFormat :MULTIMESH_CUSTOM_DATA_NONE, MULTIMESH_CUSTOM_DATA_8BIT, MULTIMESH_CUSTOM_DATA_FLOAT,
+ * ctypedef enum VisualServer_LightOmniShadowMode :LIGHT_OMNI_SHADOW_DUAL_PARABOLOID, LIGHT_OMNI_SHADOW_CUBE,
+ * ctypedef enum VisualServer_TextureFlags :TEXTURE_FLAG_MIPMAPS, TEXTURE_FLAG_REPEAT, TEXTURE_FLAG_FILTER, TEXTURE_FLAGS_DEFAULT, TEXTURE_FLAG_ANISOTROPIC_FILTER, TEXTURE_FLAG_CONVERT_TO_LINEAR, TEXTURE_FLAG_MIRRORED_REPEAT, TEXTURE_FLAG_USED_FOR_STREAMING,             # <<<<<<<<<<<<<<
+ * ctypedef enum VisualServer_Features :FEATURE_SHADERS, FEATURE_MULTITHREADED,
+ * ctypedef enum VisualServer_InstanceType :INSTANCE_NONE, INSTANCE_MESH, INSTANCE_MULTIMESH, INSTANCE_IMMEDIATE, INSTANCE_PARTICLES, INSTANCE_LIGHT, INSTANCE_REFLECTION_PROBE, INSTANCE_GI_PROBE, INSTANCE_LIGHTMAP_CAPTURE, INSTANCE_MAX, INSTANCE_GEOMETRY_MASK,
  */
-enum __pyx_t_7classes_12VisualServer_TextureFlags {
+enum __pyx_t_7classes_12VisualServer_VisualServer_TextureFlags {
   __pyx_e_7classes_12VisualServer_TEXTURE_FLAG_MIPMAPS,
   __pyx_e_7classes_12VisualServer_TEXTURE_FLAG_REPEAT,
   __pyx_e_7classes_12VisualServer_TEXTURE_FLAG_FILTER,
@@ -1416,29 +1416,29 @@ enum __pyx_t_7classes_12VisualServer_TextureFlags {
   __pyx_e_7classes_12VisualServer_TEXTURE_FLAG_MIRRORED_REPEAT,
   __pyx_e_7classes_12VisualServer_TEXTURE_FLAG_USED_FOR_STREAMING
 };
-typedef enum __pyx_t_7classes_12VisualServer_TextureFlags __pyx_t_7classes_12VisualServer_TextureFlags;
+typedef enum __pyx_t_7classes_12VisualServer_VisualServer_TextureFlags __pyx_t_7classes_12VisualServer_VisualServer_TextureFlags;
 
 /* "classes/VisualServer.pxd":28
- * ctypedef enum LightOmniShadowMode :LIGHT_OMNI_SHADOW_DUAL_PARABOLOID, LIGHT_OMNI_SHADOW_CUBE,
- * ctypedef enum TextureFlags :TEXTURE_FLAG_MIPMAPS, TEXTURE_FLAG_REPEAT, TEXTURE_FLAG_FILTER, TEXTURE_FLAGS_DEFAULT, TEXTURE_FLAG_ANISOTROPIC_FILTER, TEXTURE_FLAG_CONVERT_TO_LINEAR, TEXTURE_FLAG_MIRRORED_REPEAT, TEXTURE_FLAG_USED_FOR_STREAMING,
- * ctypedef enum Features :FEATURE_SHADERS, FEATURE_MULTITHREADED,             # <<<<<<<<<<<<<<
- * ctypedef enum InstanceType :INSTANCE_NONE, INSTANCE_MESH, INSTANCE_MULTIMESH, INSTANCE_IMMEDIATE, INSTANCE_PARTICLES, INSTANCE_LIGHT, INSTANCE_REFLECTION_PROBE, INSTANCE_GI_PROBE, INSTANCE_LIGHTMAP_CAPTURE, INSTANCE_MAX, INSTANCE_GEOMETRY_MASK,
- * ctypedef enum EnvironmentSSAOBlur :ENV_SSAO_BLUR_DISABLED, ENV_SSAO_BLUR_1x1, ENV_SSAO_BLUR_2x2, ENV_SSAO_BLUR_3x3,
+ * ctypedef enum VisualServer_LightOmniShadowMode :LIGHT_OMNI_SHADOW_DUAL_PARABOLOID, LIGHT_OMNI_SHADOW_CUBE,
+ * ctypedef enum VisualServer_TextureFlags :TEXTURE_FLAG_MIPMAPS, TEXTURE_FLAG_REPEAT, TEXTURE_FLAG_FILTER, TEXTURE_FLAGS_DEFAULT, TEXTURE_FLAG_ANISOTROPIC_FILTER, TEXTURE_FLAG_CONVERT_TO_LINEAR, TEXTURE_FLAG_MIRRORED_REPEAT, TEXTURE_FLAG_USED_FOR_STREAMING,
+ * ctypedef enum VisualServer_Features :FEATURE_SHADERS, FEATURE_MULTITHREADED,             # <<<<<<<<<<<<<<
+ * ctypedef enum VisualServer_InstanceType :INSTANCE_NONE, INSTANCE_MESH, INSTANCE_MULTIMESH, INSTANCE_IMMEDIATE, INSTANCE_PARTICLES, INSTANCE_LIGHT, INSTANCE_REFLECTION_PROBE, INSTANCE_GI_PROBE, INSTANCE_LIGHTMAP_CAPTURE, INSTANCE_MAX, INSTANCE_GEOMETRY_MASK,
+ * ctypedef enum VisualServer_EnvironmentSSAOBlur :ENV_SSAO_BLUR_DISABLED, ENV_SSAO_BLUR_1x1, ENV_SSAO_BLUR_2x2, ENV_SSAO_BLUR_3x3,
  */
-enum __pyx_t_7classes_12VisualServer_Features {
+enum __pyx_t_7classes_12VisualServer_VisualServer_Features {
   __pyx_e_7classes_12VisualServer_FEATURE_SHADERS,
   __pyx_e_7classes_12VisualServer_FEATURE_MULTITHREADED
 };
-typedef enum __pyx_t_7classes_12VisualServer_Features __pyx_t_7classes_12VisualServer_Features;
+typedef enum __pyx_t_7classes_12VisualServer_VisualServer_Features __pyx_t_7classes_12VisualServer_VisualServer_Features;
 
 /* "classes/VisualServer.pxd":29
- * ctypedef enum TextureFlags :TEXTURE_FLAG_MIPMAPS, TEXTURE_FLAG_REPEAT, TEXTURE_FLAG_FILTER, TEXTURE_FLAGS_DEFAULT, TEXTURE_FLAG_ANISOTROPIC_FILTER, TEXTURE_FLAG_CONVERT_TO_LINEAR, TEXTURE_FLAG_MIRRORED_REPEAT, TEXTURE_FLAG_USED_FOR_STREAMING,
- * ctypedef enum Features :FEATURE_SHADERS, FEATURE_MULTITHREADED,
- * ctypedef enum InstanceType :INSTANCE_NONE, INSTANCE_MESH, INSTANCE_MULTIMESH, INSTANCE_IMMEDIATE, INSTANCE_PARTICLES, INSTANCE_LIGHT, INSTANCE_REFLECTION_PROBE, INSTANCE_GI_PROBE, INSTANCE_LIGHTMAP_CAPTURE, INSTANCE_MAX, INSTANCE_GEOMETRY_MASK,             # <<<<<<<<<<<<<<
- * ctypedef enum EnvironmentSSAOBlur :ENV_SSAO_BLUR_DISABLED, ENV_SSAO_BLUR_1x1, ENV_SSAO_BLUR_2x2, ENV_SSAO_BLUR_3x3,
- * ctypedef enum EnvironmentToneMapper :ENV_TONE_MAPPER_LINEAR, ENV_TONE_MAPPER_REINHARD, ENV_TONE_MAPPER_FILMIC, ENV_TONE_MAPPER_ACES,
+ * ctypedef enum VisualServer_TextureFlags :TEXTURE_FLAG_MIPMAPS, TEXTURE_FLAG_REPEAT, TEXTURE_FLAG_FILTER, TEXTURE_FLAGS_DEFAULT, TEXTURE_FLAG_ANISOTROPIC_FILTER, TEXTURE_FLAG_CONVERT_TO_LINEAR, TEXTURE_FLAG_MIRRORED_REPEAT, TEXTURE_FLAG_USED_FOR_STREAMING,
+ * ctypedef enum VisualServer_Features :FEATURE_SHADERS, FEATURE_MULTITHREADED,
+ * ctypedef enum VisualServer_InstanceType :INSTANCE_NONE, INSTANCE_MESH, INSTANCE_MULTIMESH, INSTANCE_IMMEDIATE, INSTANCE_PARTICLES, INSTANCE_LIGHT, INSTANCE_REFLECTION_PROBE, INSTANCE_GI_PROBE, INSTANCE_LIGHTMAP_CAPTURE, INSTANCE_MAX, INSTANCE_GEOMETRY_MASK,             # <<<<<<<<<<<<<<
+ * ctypedef enum VisualServer_EnvironmentSSAOBlur :ENV_SSAO_BLUR_DISABLED, ENV_SSAO_BLUR_1x1, ENV_SSAO_BLUR_2x2, ENV_SSAO_BLUR_3x3,
+ * ctypedef enum VisualServer_EnvironmentToneMapper :ENV_TONE_MAPPER_LINEAR, ENV_TONE_MAPPER_REINHARD, ENV_TONE_MAPPER_FILMIC, ENV_TONE_MAPPER_ACES,
  */
-enum __pyx_t_7classes_12VisualServer_InstanceType {
+enum __pyx_t_7classes_12VisualServer_VisualServer_InstanceType {
   __pyx_e_7classes_12VisualServer_INSTANCE_NONE,
   __pyx_e_7classes_12VisualServer_INSTANCE_MESH,
   __pyx_e_7classes_12VisualServer_INSTANCE_MULTIMESH,
@@ -1451,75 +1451,75 @@ enum __pyx_t_7classes_12VisualServer_InstanceType {
   __pyx_e_7classes_12VisualServer_INSTANCE_MAX,
   __pyx_e_7classes_12VisualServer_INSTANCE_GEOMETRY_MASK
 };
-typedef enum __pyx_t_7classes_12VisualServer_InstanceType __pyx_t_7classes_12VisualServer_InstanceType;
+typedef enum __pyx_t_7classes_12VisualServer_VisualServer_InstanceType __pyx_t_7classes_12VisualServer_VisualServer_InstanceType;
 
 /* "classes/VisualServer.pxd":30
- * ctypedef enum Features :FEATURE_SHADERS, FEATURE_MULTITHREADED,
- * ctypedef enum InstanceType :INSTANCE_NONE, INSTANCE_MESH, INSTANCE_MULTIMESH, INSTANCE_IMMEDIATE, INSTANCE_PARTICLES, INSTANCE_LIGHT, INSTANCE_REFLECTION_PROBE, INSTANCE_GI_PROBE, INSTANCE_LIGHTMAP_CAPTURE, INSTANCE_MAX, INSTANCE_GEOMETRY_MASK,
- * ctypedef enum EnvironmentSSAOBlur :ENV_SSAO_BLUR_DISABLED, ENV_SSAO_BLUR_1x1, ENV_SSAO_BLUR_2x2, ENV_SSAO_BLUR_3x3,             # <<<<<<<<<<<<<<
- * ctypedef enum EnvironmentToneMapper :ENV_TONE_MAPPER_LINEAR, ENV_TONE_MAPPER_REINHARD, ENV_TONE_MAPPER_FILMIC, ENV_TONE_MAPPER_ACES,
- * ctypedef enum EnvironmentGlowBlendMode :GLOW_BLEND_MODE_ADDITIVE, GLOW_BLEND_MODE_SCREEN, GLOW_BLEND_MODE_SOFTLIGHT, GLOW_BLEND_MODE_REPLACE,
+ * ctypedef enum VisualServer_Features :FEATURE_SHADERS, FEATURE_MULTITHREADED,
+ * ctypedef enum VisualServer_InstanceType :INSTANCE_NONE, INSTANCE_MESH, INSTANCE_MULTIMESH, INSTANCE_IMMEDIATE, INSTANCE_PARTICLES, INSTANCE_LIGHT, INSTANCE_REFLECTION_PROBE, INSTANCE_GI_PROBE, INSTANCE_LIGHTMAP_CAPTURE, INSTANCE_MAX, INSTANCE_GEOMETRY_MASK,
+ * ctypedef enum VisualServer_EnvironmentSSAOBlur :ENV_SSAO_BLUR_DISABLED, ENV_SSAO_BLUR_1x1, ENV_SSAO_BLUR_2x2, ENV_SSAO_BLUR_3x3,             # <<<<<<<<<<<<<<
+ * ctypedef enum VisualServer_EnvironmentToneMapper :ENV_TONE_MAPPER_LINEAR, ENV_TONE_MAPPER_REINHARD, ENV_TONE_MAPPER_FILMIC, ENV_TONE_MAPPER_ACES,
+ * ctypedef enum VisualServer_EnvironmentGlowBlendMode :GLOW_BLEND_MODE_ADDITIVE, GLOW_BLEND_MODE_SCREEN, GLOW_BLEND_MODE_SOFTLIGHT, GLOW_BLEND_MODE_REPLACE,
  */
-enum __pyx_t_7classes_12VisualServer_EnvironmentSSAOBlur {
+enum __pyx_t_7classes_12VisualServer_VisualServer_EnvironmentSSAOBlur {
   __pyx_e_7classes_12VisualServer_ENV_SSAO_BLUR_DISABLED,
   __pyx_e_7classes_12VisualServer_ENV_SSAO_BLUR_1x1,
   __pyx_e_7classes_12VisualServer_ENV_SSAO_BLUR_2x2,
   __pyx_e_7classes_12VisualServer_ENV_SSAO_BLUR_3x3
 };
-typedef enum __pyx_t_7classes_12VisualServer_EnvironmentSSAOBlur __pyx_t_7classes_12VisualServer_EnvironmentSSAOBlur;
+typedef enum __pyx_t_7classes_12VisualServer_VisualServer_EnvironmentSSAOBlur __pyx_t_7classes_12VisualServer_VisualServer_EnvironmentSSAOBlur;
 
 /* "classes/VisualServer.pxd":31
- * ctypedef enum InstanceType :INSTANCE_NONE, INSTANCE_MESH, INSTANCE_MULTIMESH, INSTANCE_IMMEDIATE, INSTANCE_PARTICLES, INSTANCE_LIGHT, INSTANCE_REFLECTION_PROBE, INSTANCE_GI_PROBE, INSTANCE_LIGHTMAP_CAPTURE, INSTANCE_MAX, INSTANCE_GEOMETRY_MASK,
- * ctypedef enum EnvironmentSSAOBlur :ENV_SSAO_BLUR_DISABLED, ENV_SSAO_BLUR_1x1, ENV_SSAO_BLUR_2x2, ENV_SSAO_BLUR_3x3,
- * ctypedef enum EnvironmentToneMapper :ENV_TONE_MAPPER_LINEAR, ENV_TONE_MAPPER_REINHARD, ENV_TONE_MAPPER_FILMIC, ENV_TONE_MAPPER_ACES,             # <<<<<<<<<<<<<<
- * ctypedef enum EnvironmentGlowBlendMode :GLOW_BLEND_MODE_ADDITIVE, GLOW_BLEND_MODE_SCREEN, GLOW_BLEND_MODE_SOFTLIGHT, GLOW_BLEND_MODE_REPLACE,
- * ctypedef enum MultimeshColorFormat :MULTIMESH_COLOR_NONE, MULTIMESH_COLOR_8BIT, MULTIMESH_COLOR_FLOAT,
+ * ctypedef enum VisualServer_InstanceType :INSTANCE_NONE, INSTANCE_MESH, INSTANCE_MULTIMESH, INSTANCE_IMMEDIATE, INSTANCE_PARTICLES, INSTANCE_LIGHT, INSTANCE_REFLECTION_PROBE, INSTANCE_GI_PROBE, INSTANCE_LIGHTMAP_CAPTURE, INSTANCE_MAX, INSTANCE_GEOMETRY_MASK,
+ * ctypedef enum VisualServer_EnvironmentSSAOBlur :ENV_SSAO_BLUR_DISABLED, ENV_SSAO_BLUR_1x1, ENV_SSAO_BLUR_2x2, ENV_SSAO_BLUR_3x3,
+ * ctypedef enum VisualServer_EnvironmentToneMapper :ENV_TONE_MAPPER_LINEAR, ENV_TONE_MAPPER_REINHARD, ENV_TONE_MAPPER_FILMIC, ENV_TONE_MAPPER_ACES,             # <<<<<<<<<<<<<<
+ * ctypedef enum VisualServer_EnvironmentGlowBlendMode :GLOW_BLEND_MODE_ADDITIVE, GLOW_BLEND_MODE_SCREEN, GLOW_BLEND_MODE_SOFTLIGHT, GLOW_BLEND_MODE_REPLACE,
+ * ctypedef enum VisualServer_MultimeshColorFormat :MULTIMESH_COLOR_NONE, MULTIMESH_COLOR_8BIT, MULTIMESH_COLOR_FLOAT,
  */
-enum __pyx_t_7classes_12VisualServer_EnvironmentToneMapper {
+enum __pyx_t_7classes_12VisualServer_VisualServer_EnvironmentToneMapper {
   __pyx_e_7classes_12VisualServer_ENV_TONE_MAPPER_LINEAR,
   __pyx_e_7classes_12VisualServer_ENV_TONE_MAPPER_REINHARD,
   __pyx_e_7classes_12VisualServer_ENV_TONE_MAPPER_FILMIC,
   __pyx_e_7classes_12VisualServer_ENV_TONE_MAPPER_ACES
 };
-typedef enum __pyx_t_7classes_12VisualServer_EnvironmentToneMapper __pyx_t_7classes_12VisualServer_EnvironmentToneMapper;
+typedef enum __pyx_t_7classes_12VisualServer_VisualServer_EnvironmentToneMapper __pyx_t_7classes_12VisualServer_VisualServer_EnvironmentToneMapper;
 
 /* "classes/VisualServer.pxd":32
- * ctypedef enum EnvironmentSSAOBlur :ENV_SSAO_BLUR_DISABLED, ENV_SSAO_BLUR_1x1, ENV_SSAO_BLUR_2x2, ENV_SSAO_BLUR_3x3,
- * ctypedef enum EnvironmentToneMapper :ENV_TONE_MAPPER_LINEAR, ENV_TONE_MAPPER_REINHARD, ENV_TONE_MAPPER_FILMIC, ENV_TONE_MAPPER_ACES,
- * ctypedef enum EnvironmentGlowBlendMode :GLOW_BLEND_MODE_ADDITIVE, GLOW_BLEND_MODE_SCREEN, GLOW_BLEND_MODE_SOFTLIGHT, GLOW_BLEND_MODE_REPLACE,             # <<<<<<<<<<<<<<
- * ctypedef enum MultimeshColorFormat :MULTIMESH_COLOR_NONE, MULTIMESH_COLOR_8BIT, MULTIMESH_COLOR_FLOAT,
- * ctypedef enum CanvasLightShadowFilter :CANVAS_LIGHT_FILTER_NONE, CANVAS_LIGHT_FILTER_PCF3, CANVAS_LIGHT_FILTER_PCF5, CANVAS_LIGHT_FILTER_PCF7, CANVAS_LIGHT_FILTER_PCF9, CANVAS_LIGHT_FILTER_PCF13,
+ * ctypedef enum VisualServer_EnvironmentSSAOBlur :ENV_SSAO_BLUR_DISABLED, ENV_SSAO_BLUR_1x1, ENV_SSAO_BLUR_2x2, ENV_SSAO_BLUR_3x3,
+ * ctypedef enum VisualServer_EnvironmentToneMapper :ENV_TONE_MAPPER_LINEAR, ENV_TONE_MAPPER_REINHARD, ENV_TONE_MAPPER_FILMIC, ENV_TONE_MAPPER_ACES,
+ * ctypedef enum VisualServer_EnvironmentGlowBlendMode :GLOW_BLEND_MODE_ADDITIVE, GLOW_BLEND_MODE_SCREEN, GLOW_BLEND_MODE_SOFTLIGHT, GLOW_BLEND_MODE_REPLACE,             # <<<<<<<<<<<<<<
+ * ctypedef enum VisualServer_MultimeshColorFormat :MULTIMESH_COLOR_NONE, MULTIMESH_COLOR_8BIT, MULTIMESH_COLOR_FLOAT,
+ * ctypedef enum VisualServer_CanvasLightShadowFilter :CANVAS_LIGHT_FILTER_NONE, CANVAS_LIGHT_FILTER_PCF3, CANVAS_LIGHT_FILTER_PCF5, CANVAS_LIGHT_FILTER_PCF7, CANVAS_LIGHT_FILTER_PCF9, CANVAS_LIGHT_FILTER_PCF13,
  */
-enum __pyx_t_7classes_12VisualServer_EnvironmentGlowBlendMode {
+enum __pyx_t_7classes_12VisualServer_VisualServer_EnvironmentGlowBlendMode {
   __pyx_e_7classes_12VisualServer_GLOW_BLEND_MODE_ADDITIVE,
   __pyx_e_7classes_12VisualServer_GLOW_BLEND_MODE_SCREEN,
   __pyx_e_7classes_12VisualServer_GLOW_BLEND_MODE_SOFTLIGHT,
   __pyx_e_7classes_12VisualServer_GLOW_BLEND_MODE_REPLACE
 };
-typedef enum __pyx_t_7classes_12VisualServer_EnvironmentGlowBlendMode __pyx_t_7classes_12VisualServer_EnvironmentGlowBlendMode;
+typedef enum __pyx_t_7classes_12VisualServer_VisualServer_EnvironmentGlowBlendMode __pyx_t_7classes_12VisualServer_VisualServer_EnvironmentGlowBlendMode;
 
 /* "classes/VisualServer.pxd":33
- * ctypedef enum EnvironmentToneMapper :ENV_TONE_MAPPER_LINEAR, ENV_TONE_MAPPER_REINHARD, ENV_TONE_MAPPER_FILMIC, ENV_TONE_MAPPER_ACES,
- * ctypedef enum EnvironmentGlowBlendMode :GLOW_BLEND_MODE_ADDITIVE, GLOW_BLEND_MODE_SCREEN, GLOW_BLEND_MODE_SOFTLIGHT, GLOW_BLEND_MODE_REPLACE,
- * ctypedef enum MultimeshColorFormat :MULTIMESH_COLOR_NONE, MULTIMESH_COLOR_8BIT, MULTIMESH_COLOR_FLOAT,             # <<<<<<<<<<<<<<
- * ctypedef enum CanvasLightShadowFilter :CANVAS_LIGHT_FILTER_NONE, CANVAS_LIGHT_FILTER_PCF3, CANVAS_LIGHT_FILTER_PCF5, CANVAS_LIGHT_FILTER_PCF7, CANVAS_LIGHT_FILTER_PCF9, CANVAS_LIGHT_FILTER_PCF13,
- * ctypedef enum ScenarioDebugMode :SCENARIO_DEBUG_DISABLED, SCENARIO_DEBUG_WIREFRAME, SCENARIO_DEBUG_OVERDRAW, SCENARIO_DEBUG_SHADELESS,
+ * ctypedef enum VisualServer_EnvironmentToneMapper :ENV_TONE_MAPPER_LINEAR, ENV_TONE_MAPPER_REINHARD, ENV_TONE_MAPPER_FILMIC, ENV_TONE_MAPPER_ACES,
+ * ctypedef enum VisualServer_EnvironmentGlowBlendMode :GLOW_BLEND_MODE_ADDITIVE, GLOW_BLEND_MODE_SCREEN, GLOW_BLEND_MODE_SOFTLIGHT, GLOW_BLEND_MODE_REPLACE,
+ * ctypedef enum VisualServer_MultimeshColorFormat :MULTIMESH_COLOR_NONE, MULTIMESH_COLOR_8BIT, MULTIMESH_COLOR_FLOAT,             # <<<<<<<<<<<<<<
+ * ctypedef enum VisualServer_CanvasLightShadowFilter :CANVAS_LIGHT_FILTER_NONE, CANVAS_LIGHT_FILTER_PCF3, CANVAS_LIGHT_FILTER_PCF5, CANVAS_LIGHT_FILTER_PCF7, CANVAS_LIGHT_FILTER_PCF9, CANVAS_LIGHT_FILTER_PCF13,
+ * ctypedef enum VisualServer_ScenarioDebugMode :SCENARIO_DEBUG_DISABLED, SCENARIO_DEBUG_WIREFRAME, SCENARIO_DEBUG_OVERDRAW, SCENARIO_DEBUG_SHADELESS,
  */
-enum __pyx_t_7classes_12VisualServer_MultimeshColorFormat {
+enum __pyx_t_7classes_12VisualServer_VisualServer_MultimeshColorFormat {
   __pyx_e_7classes_12VisualServer_MULTIMESH_COLOR_NONE,
   __pyx_e_7classes_12VisualServer_MULTIMESH_COLOR_8BIT,
   __pyx_e_7classes_12VisualServer_MULTIMESH_COLOR_FLOAT
 };
-typedef enum __pyx_t_7classes_12VisualServer_MultimeshColorFormat __pyx_t_7classes_12VisualServer_MultimeshColorFormat;
+typedef enum __pyx_t_7classes_12VisualServer_VisualServer_MultimeshColorFormat __pyx_t_7classes_12VisualServer_VisualServer_MultimeshColorFormat;
 
 /* "classes/VisualServer.pxd":34
- * ctypedef enum EnvironmentGlowBlendMode :GLOW_BLEND_MODE_ADDITIVE, GLOW_BLEND_MODE_SCREEN, GLOW_BLEND_MODE_SOFTLIGHT, GLOW_BLEND_MODE_REPLACE,
- * ctypedef enum MultimeshColorFormat :MULTIMESH_COLOR_NONE, MULTIMESH_COLOR_8BIT, MULTIMESH_COLOR_FLOAT,
- * ctypedef enum CanvasLightShadowFilter :CANVAS_LIGHT_FILTER_NONE, CANVAS_LIGHT_FILTER_PCF3, CANVAS_LIGHT_FILTER_PCF5, CANVAS_LIGHT_FILTER_PCF7, CANVAS_LIGHT_FILTER_PCF9, CANVAS_LIGHT_FILTER_PCF13,             # <<<<<<<<<<<<<<
- * ctypedef enum ScenarioDebugMode :SCENARIO_DEBUG_DISABLED, SCENARIO_DEBUG_WIREFRAME, SCENARIO_DEBUG_OVERDRAW, SCENARIO_DEBUG_SHADELESS,
- * ctypedef enum ViewportUpdateMode :VIEWPORT_UPDATE_DISABLED, VIEWPORT_UPDATE_ONCE, VIEWPORT_UPDATE_WHEN_VISIBLE, VIEWPORT_UPDATE_ALWAYS,
+ * ctypedef enum VisualServer_EnvironmentGlowBlendMode :GLOW_BLEND_MODE_ADDITIVE, GLOW_BLEND_MODE_SCREEN, GLOW_BLEND_MODE_SOFTLIGHT, GLOW_BLEND_MODE_REPLACE,
+ * ctypedef enum VisualServer_MultimeshColorFormat :MULTIMESH_COLOR_NONE, MULTIMESH_COLOR_8BIT, MULTIMESH_COLOR_FLOAT,
+ * ctypedef enum VisualServer_CanvasLightShadowFilter :CANVAS_LIGHT_FILTER_NONE, CANVAS_LIGHT_FILTER_PCF3, CANVAS_LIGHT_FILTER_PCF5, CANVAS_LIGHT_FILTER_PCF7, CANVAS_LIGHT_FILTER_PCF9, CANVAS_LIGHT_FILTER_PCF13,             # <<<<<<<<<<<<<<
+ * ctypedef enum VisualServer_ScenarioDebugMode :SCENARIO_DEBUG_DISABLED, SCENARIO_DEBUG_WIREFRAME, SCENARIO_DEBUG_OVERDRAW, SCENARIO_DEBUG_SHADELESS,
+ * ctypedef enum VisualServer_ViewportUpdateMode :VIEWPORT_UPDATE_DISABLED, VIEWPORT_UPDATE_ONCE, VIEWPORT_UPDATE_WHEN_VISIBLE, VIEWPORT_UPDATE_ALWAYS,
  */
-enum __pyx_t_7classes_12VisualServer_CanvasLightShadowFilter {
+enum __pyx_t_7classes_12VisualServer_VisualServer_CanvasLightShadowFilter {
   __pyx_e_7classes_12VisualServer_CANVAS_LIGHT_FILTER_NONE,
   __pyx_e_7classes_12VisualServer_CANVAS_LIGHT_FILTER_PCF3,
   __pyx_e_7classes_12VisualServer_CANVAS_LIGHT_FILTER_PCF5,
@@ -1527,46 +1527,46 @@ enum __pyx_t_7classes_12VisualServer_CanvasLightShadowFilter {
   __pyx_e_7classes_12VisualServer_CANVAS_LIGHT_FILTER_PCF9,
   __pyx_e_7classes_12VisualServer_CANVAS_LIGHT_FILTER_PCF13
 };
-typedef enum __pyx_t_7classes_12VisualServer_CanvasLightShadowFilter __pyx_t_7classes_12VisualServer_CanvasLightShadowFilter;
+typedef enum __pyx_t_7classes_12VisualServer_VisualServer_CanvasLightShadowFilter __pyx_t_7classes_12VisualServer_VisualServer_CanvasLightShadowFilter;
 
 /* "classes/VisualServer.pxd":35
- * ctypedef enum MultimeshColorFormat :MULTIMESH_COLOR_NONE, MULTIMESH_COLOR_8BIT, MULTIMESH_COLOR_FLOAT,
- * ctypedef enum CanvasLightShadowFilter :CANVAS_LIGHT_FILTER_NONE, CANVAS_LIGHT_FILTER_PCF3, CANVAS_LIGHT_FILTER_PCF5, CANVAS_LIGHT_FILTER_PCF7, CANVAS_LIGHT_FILTER_PCF9, CANVAS_LIGHT_FILTER_PCF13,
- * ctypedef enum ScenarioDebugMode :SCENARIO_DEBUG_DISABLED, SCENARIO_DEBUG_WIREFRAME, SCENARIO_DEBUG_OVERDRAW, SCENARIO_DEBUG_SHADELESS,             # <<<<<<<<<<<<<<
- * ctypedef enum ViewportUpdateMode :VIEWPORT_UPDATE_DISABLED, VIEWPORT_UPDATE_ONCE, VIEWPORT_UPDATE_WHEN_VISIBLE, VIEWPORT_UPDATE_ALWAYS,
- * ctypedef enum ArrayFormat :ARRAY_FORMAT_VERTEX, ARRAY_FORMAT_NORMAL, ARRAY_FORMAT_TANGENT, ARRAY_FORMAT_COLOR, ARRAY_FORMAT_TEX_UV, ARRAY_FORMAT_TEX_UV2, ARRAY_FORMAT_BONES, ARRAY_FORMAT_WEIGHTS, ARRAY_FORMAT_INDEX, ARRAY_COMPRESS_VERTEX, ARRAY_COMPRESS_NORMAL, ARRAY_COMPRESS_TANGENT, ARRAY_COMPRESS_COLOR, ARRAY_COMPRESS_TEX_UV, ARRAY_COMPRESS_TEX_UV2, ARRAY_COMPRESS_BONES, ARRAY_COMPRESS_WEIGHTS, ARRAY_COMPRESS_DEFAULT, ARRAY_COMPRESS_INDEX, ARRAY_FLAG_USE_2D_VERTICES, ARRAY_FLAG_USE_16_BIT_BONES,
+ * ctypedef enum VisualServer_MultimeshColorFormat :MULTIMESH_COLOR_NONE, MULTIMESH_COLOR_8BIT, MULTIMESH_COLOR_FLOAT,
+ * ctypedef enum VisualServer_CanvasLightShadowFilter :CANVAS_LIGHT_FILTER_NONE, CANVAS_LIGHT_FILTER_PCF3, CANVAS_LIGHT_FILTER_PCF5, CANVAS_LIGHT_FILTER_PCF7, CANVAS_LIGHT_FILTER_PCF9, CANVAS_LIGHT_FILTER_PCF13,
+ * ctypedef enum VisualServer_ScenarioDebugMode :SCENARIO_DEBUG_DISABLED, SCENARIO_DEBUG_WIREFRAME, SCENARIO_DEBUG_OVERDRAW, SCENARIO_DEBUG_SHADELESS,             # <<<<<<<<<<<<<<
+ * ctypedef enum VisualServer_ViewportUpdateMode :VIEWPORT_UPDATE_DISABLED, VIEWPORT_UPDATE_ONCE, VIEWPORT_UPDATE_WHEN_VISIBLE, VIEWPORT_UPDATE_ALWAYS,
+ * ctypedef enum VisualServer_ArrayFormat :ARRAY_FORMAT_VERTEX, ARRAY_FORMAT_NORMAL, ARRAY_FORMAT_TANGENT, ARRAY_FORMAT_COLOR, ARRAY_FORMAT_TEX_UV, ARRAY_FORMAT_TEX_UV2, ARRAY_FORMAT_BONES, ARRAY_FORMAT_WEIGHTS, ARRAY_FORMAT_INDEX, ARRAY_COMPRESS_VERTEX, ARRAY_COMPRESS_NORMAL, ARRAY_COMPRESS_TANGENT, ARRAY_COMPRESS_COLOR, ARRAY_COMPRESS_TEX_UV, ARRAY_COMPRESS_TEX_UV2, ARRAY_COMPRESS_BONES, ARRAY_COMPRESS_WEIGHTS, ARRAY_COMPRESS_DEFAULT, ARRAY_COMPRESS_INDEX, ARRAY_FLAG_USE_2D_VERTICES, ARRAY_FLAG_USE_16_BIT_BONES,
  */
-enum __pyx_t_7classes_12VisualServer_ScenarioDebugMode {
+enum __pyx_t_7classes_12VisualServer_VisualServer_ScenarioDebugMode {
   __pyx_e_7classes_12VisualServer_SCENARIO_DEBUG_DISABLED,
   __pyx_e_7classes_12VisualServer_SCENARIO_DEBUG_WIREFRAME,
   __pyx_e_7classes_12VisualServer_SCENARIO_DEBUG_OVERDRAW,
   __pyx_e_7classes_12VisualServer_SCENARIO_DEBUG_SHADELESS
 };
-typedef enum __pyx_t_7classes_12VisualServer_ScenarioDebugMode __pyx_t_7classes_12VisualServer_ScenarioDebugMode;
+typedef enum __pyx_t_7classes_12VisualServer_VisualServer_ScenarioDebugMode __pyx_t_7classes_12VisualServer_VisualServer_ScenarioDebugMode;
 
 /* "classes/VisualServer.pxd":36
- * ctypedef enum CanvasLightShadowFilter :CANVAS_LIGHT_FILTER_NONE, CANVAS_LIGHT_FILTER_PCF3, CANVAS_LIGHT_FILTER_PCF5, CANVAS_LIGHT_FILTER_PCF7, CANVAS_LIGHT_FILTER_PCF9, CANVAS_LIGHT_FILTER_PCF13,
- * ctypedef enum ScenarioDebugMode :SCENARIO_DEBUG_DISABLED, SCENARIO_DEBUG_WIREFRAME, SCENARIO_DEBUG_OVERDRAW, SCENARIO_DEBUG_SHADELESS,
- * ctypedef enum ViewportUpdateMode :VIEWPORT_UPDATE_DISABLED, VIEWPORT_UPDATE_ONCE, VIEWPORT_UPDATE_WHEN_VISIBLE, VIEWPORT_UPDATE_ALWAYS,             # <<<<<<<<<<<<<<
- * ctypedef enum ArrayFormat :ARRAY_FORMAT_VERTEX, ARRAY_FORMAT_NORMAL, ARRAY_FORMAT_TANGENT, ARRAY_FORMAT_COLOR, ARRAY_FORMAT_TEX_UV, ARRAY_FORMAT_TEX_UV2, ARRAY_FORMAT_BONES, ARRAY_FORMAT_WEIGHTS, ARRAY_FORMAT_INDEX, ARRAY_COMPRESS_VERTEX, ARRAY_COMPRESS_NORMAL, ARRAY_COMPRESS_TANGENT, ARRAY_COMPRESS_COLOR, ARRAY_COMPRESS_TEX_UV, ARRAY_COMPRESS_TEX_UV2, ARRAY_COMPRESS_BONES, ARRAY_COMPRESS_WEIGHTS, ARRAY_COMPRESS_DEFAULT, ARRAY_COMPRESS_INDEX, ARRAY_FLAG_USE_2D_VERTICES, ARRAY_FLAG_USE_16_BIT_BONES,
- * ctypedef enum ParticlesDrawOrder :PARTICLES_DRAW_ORDER_INDEX, PARTICLES_DRAW_ORDER_LIFETIME, PARTICLES_DRAW_ORDER_VIEW_DEPTH,
+ * ctypedef enum VisualServer_CanvasLightShadowFilter :CANVAS_LIGHT_FILTER_NONE, CANVAS_LIGHT_FILTER_PCF3, CANVAS_LIGHT_FILTER_PCF5, CANVAS_LIGHT_FILTER_PCF7, CANVAS_LIGHT_FILTER_PCF9, CANVAS_LIGHT_FILTER_PCF13,
+ * ctypedef enum VisualServer_ScenarioDebugMode :SCENARIO_DEBUG_DISABLED, SCENARIO_DEBUG_WIREFRAME, SCENARIO_DEBUG_OVERDRAW, SCENARIO_DEBUG_SHADELESS,
+ * ctypedef enum VisualServer_ViewportUpdateMode :VIEWPORT_UPDATE_DISABLED, VIEWPORT_UPDATE_ONCE, VIEWPORT_UPDATE_WHEN_VISIBLE, VIEWPORT_UPDATE_ALWAYS,             # <<<<<<<<<<<<<<
+ * ctypedef enum VisualServer_ArrayFormat :ARRAY_FORMAT_VERTEX, ARRAY_FORMAT_NORMAL, ARRAY_FORMAT_TANGENT, ARRAY_FORMAT_COLOR, ARRAY_FORMAT_TEX_UV, ARRAY_FORMAT_TEX_UV2, ARRAY_FORMAT_BONES, ARRAY_FORMAT_WEIGHTS, ARRAY_FORMAT_INDEX, ARRAY_COMPRESS_VERTEX, ARRAY_COMPRESS_NORMAL, ARRAY_COMPRESS_TANGENT, ARRAY_COMPRESS_COLOR, ARRAY_COMPRESS_TEX_UV, ARRAY_COMPRESS_TEX_UV2, ARRAY_COMPRESS_BONES, ARRAY_COMPRESS_WEIGHTS, ARRAY_COMPRESS_DEFAULT, ARRAY_COMPRESS_INDEX, ARRAY_FLAG_USE_2D_VERTICES, ARRAY_FLAG_USE_16_BIT_BONES,
+ * ctypedef enum VisualServer_ParticlesDrawOrder :PARTICLES_DRAW_ORDER_INDEX, PARTICLES_DRAW_ORDER_LIFETIME, PARTICLES_DRAW_ORDER_VIEW_DEPTH,
  */
-enum __pyx_t_7classes_12VisualServer_ViewportUpdateMode {
+enum __pyx_t_7classes_12VisualServer_VisualServer_ViewportUpdateMode {
   __pyx_e_7classes_12VisualServer_VIEWPORT_UPDATE_DISABLED,
   __pyx_e_7classes_12VisualServer_VIEWPORT_UPDATE_ONCE,
   __pyx_e_7classes_12VisualServer_VIEWPORT_UPDATE_WHEN_VISIBLE,
   __pyx_e_7classes_12VisualServer_VIEWPORT_UPDATE_ALWAYS
 };
-typedef enum __pyx_t_7classes_12VisualServer_ViewportUpdateMode __pyx_t_7classes_12VisualServer_ViewportUpdateMode;
+typedef enum __pyx_t_7classes_12VisualServer_VisualServer_ViewportUpdateMode __pyx_t_7classes_12VisualServer_VisualServer_ViewportUpdateMode;
 
 /* "classes/VisualServer.pxd":37
- * ctypedef enum ScenarioDebugMode :SCENARIO_DEBUG_DISABLED, SCENARIO_DEBUG_WIREFRAME, SCENARIO_DEBUG_OVERDRAW, SCENARIO_DEBUG_SHADELESS,
- * ctypedef enum ViewportUpdateMode :VIEWPORT_UPDATE_DISABLED, VIEWPORT_UPDATE_ONCE, VIEWPORT_UPDATE_WHEN_VISIBLE, VIEWPORT_UPDATE_ALWAYS,
- * ctypedef enum ArrayFormat :ARRAY_FORMAT_VERTEX, ARRAY_FORMAT_NORMAL, ARRAY_FORMAT_TANGENT, ARRAY_FORMAT_COLOR, ARRAY_FORMAT_TEX_UV, ARRAY_FORMAT_TEX_UV2, ARRAY_FORMAT_BONES, ARRAY_FORMAT_WEIGHTS, ARRAY_FORMAT_INDEX, ARRAY_COMPRESS_VERTEX, ARRAY_COMPRESS_NORMAL, ARRAY_COMPRESS_TANGENT, ARRAY_COMPRESS_COLOR, ARRAY_COMPRESS_TEX_UV, ARRAY_COMPRESS_TEX_UV2, ARRAY_COMPRESS_BONES, ARRAY_COMPRESS_WEIGHTS, ARRAY_COMPRESS_DEFAULT, ARRAY_COMPRESS_INDEX, ARRAY_FLAG_USE_2D_VERTICES, ARRAY_FLAG_USE_16_BIT_BONES,             # <<<<<<<<<<<<<<
- * ctypedef enum ParticlesDrawOrder :PARTICLES_DRAW_ORDER_INDEX, PARTICLES_DRAW_ORDER_LIFETIME, PARTICLES_DRAW_ORDER_VIEW_DEPTH,
- * ctypedef enum CanvasLightMode :CANVAS_LIGHT_MODE_ADD, CANVAS_LIGHT_MODE_SUB, CANVAS_LIGHT_MODE_MIX, CANVAS_LIGHT_MODE_MASK,
+ * ctypedef enum VisualServer_ScenarioDebugMode :SCENARIO_DEBUG_DISABLED, SCENARIO_DEBUG_WIREFRAME, SCENARIO_DEBUG_OVERDRAW, SCENARIO_DEBUG_SHADELESS,
+ * ctypedef enum VisualServer_ViewportUpdateMode :VIEWPORT_UPDATE_DISABLED, VIEWPORT_UPDATE_ONCE, VIEWPORT_UPDATE_WHEN_VISIBLE, VIEWPORT_UPDATE_ALWAYS,
+ * ctypedef enum VisualServer_ArrayFormat :ARRAY_FORMAT_VERTEX, ARRAY_FORMAT_NORMAL, ARRAY_FORMAT_TANGENT, ARRAY_FORMAT_COLOR, ARRAY_FORMAT_TEX_UV, ARRAY_FORMAT_TEX_UV2, ARRAY_FORMAT_BONES, ARRAY_FORMAT_WEIGHTS, ARRAY_FORMAT_INDEX, ARRAY_COMPRESS_VERTEX, ARRAY_COMPRESS_NORMAL, ARRAY_COMPRESS_TANGENT, ARRAY_COMPRESS_COLOR, ARRAY_COMPRESS_TEX_UV, ARRAY_COMPRESS_TEX_UV2, ARRAY_COMPRESS_BONES, ARRAY_COMPRESS_WEIGHTS, ARRAY_COMPRESS_DEFAULT, ARRAY_COMPRESS_INDEX, ARRAY_FLAG_USE_2D_VERTICES, ARRAY_FLAG_USE_16_BIT_BONES,             # <<<<<<<<<<<<<<
+ * ctypedef enum VisualServer_ParticlesDrawOrder :PARTICLES_DRAW_ORDER_INDEX, PARTICLES_DRAW_ORDER_LIFETIME, PARTICLES_DRAW_ORDER_VIEW_DEPTH,
+ * ctypedef enum VisualServer_CanvasLightMode :CANVAS_LIGHT_MODE_ADD, CANVAS_LIGHT_MODE_SUB, CANVAS_LIGHT_MODE_MIX, CANVAS_LIGHT_MODE_MASK,
  */
-enum __pyx_t_7classes_12VisualServer_ArrayFormat {
+enum __pyx_t_7classes_12VisualServer_VisualServer_ArrayFormat {
   __pyx_e_7classes_12VisualServer_ARRAY_FORMAT_VERTEX,
   __pyx_e_7classes_12VisualServer_ARRAY_FORMAT_NORMAL,
   __pyx_e_7classes_12VisualServer_ARRAY_FORMAT_TANGENT,
@@ -1589,59 +1589,59 @@ enum __pyx_t_7classes_12VisualServer_ArrayFormat {
   __pyx_e_7classes_12VisualServer_ARRAY_FLAG_USE_2D_VERTICES,
   __pyx_e_7classes_12VisualServer_ARRAY_FLAG_USE_16_BIT_BONES
 };
-typedef enum __pyx_t_7classes_12VisualServer_ArrayFormat __pyx_t_7classes_12VisualServer_ArrayFormat;
+typedef enum __pyx_t_7classes_12VisualServer_VisualServer_ArrayFormat __pyx_t_7classes_12VisualServer_VisualServer_ArrayFormat;
 
 /* "classes/VisualServer.pxd":38
- * ctypedef enum ViewportUpdateMode :VIEWPORT_UPDATE_DISABLED, VIEWPORT_UPDATE_ONCE, VIEWPORT_UPDATE_WHEN_VISIBLE, VIEWPORT_UPDATE_ALWAYS,
- * ctypedef enum ArrayFormat :ARRAY_FORMAT_VERTEX, ARRAY_FORMAT_NORMAL, ARRAY_FORMAT_TANGENT, ARRAY_FORMAT_COLOR, ARRAY_FORMAT_TEX_UV, ARRAY_FORMAT_TEX_UV2, ARRAY_FORMAT_BONES, ARRAY_FORMAT_WEIGHTS, ARRAY_FORMAT_INDEX, ARRAY_COMPRESS_VERTEX, ARRAY_COMPRESS_NORMAL, ARRAY_COMPRESS_TANGENT, ARRAY_COMPRESS_COLOR, ARRAY_COMPRESS_TEX_UV, ARRAY_COMPRESS_TEX_UV2, ARRAY_COMPRESS_BONES, ARRAY_COMPRESS_WEIGHTS, ARRAY_COMPRESS_DEFAULT, ARRAY_COMPRESS_INDEX, ARRAY_FLAG_USE_2D_VERTICES, ARRAY_FLAG_USE_16_BIT_BONES,
- * ctypedef enum ParticlesDrawOrder :PARTICLES_DRAW_ORDER_INDEX, PARTICLES_DRAW_ORDER_LIFETIME, PARTICLES_DRAW_ORDER_VIEW_DEPTH,             # <<<<<<<<<<<<<<
- * ctypedef enum CanvasLightMode :CANVAS_LIGHT_MODE_ADD, CANVAS_LIGHT_MODE_SUB, CANVAS_LIGHT_MODE_MIX, CANVAS_LIGHT_MODE_MASK,
- * ctypedef enum LightDirectionalShadowMode :LIGHT_DIRECTIONAL_SHADOW_ORTHOGONAL, LIGHT_DIRECTIONAL_SHADOW_PARALLEL_2_SPLITS, LIGHT_DIRECTIONAL_SHADOW_PARALLEL_4_SPLITS,
+ * ctypedef enum VisualServer_ViewportUpdateMode :VIEWPORT_UPDATE_DISABLED, VIEWPORT_UPDATE_ONCE, VIEWPORT_UPDATE_WHEN_VISIBLE, VIEWPORT_UPDATE_ALWAYS,
+ * ctypedef enum VisualServer_ArrayFormat :ARRAY_FORMAT_VERTEX, ARRAY_FORMAT_NORMAL, ARRAY_FORMAT_TANGENT, ARRAY_FORMAT_COLOR, ARRAY_FORMAT_TEX_UV, ARRAY_FORMAT_TEX_UV2, ARRAY_FORMAT_BONES, ARRAY_FORMAT_WEIGHTS, ARRAY_FORMAT_INDEX, ARRAY_COMPRESS_VERTEX, ARRAY_COMPRESS_NORMAL, ARRAY_COMPRESS_TANGENT, ARRAY_COMPRESS_COLOR, ARRAY_COMPRESS_TEX_UV, ARRAY_COMPRESS_TEX_UV2, ARRAY_COMPRESS_BONES, ARRAY_COMPRESS_WEIGHTS, ARRAY_COMPRESS_DEFAULT, ARRAY_COMPRESS_INDEX, ARRAY_FLAG_USE_2D_VERTICES, ARRAY_FLAG_USE_16_BIT_BONES,
+ * ctypedef enum VisualServer_ParticlesDrawOrder :PARTICLES_DRAW_ORDER_INDEX, PARTICLES_DRAW_ORDER_LIFETIME, PARTICLES_DRAW_ORDER_VIEW_DEPTH,             # <<<<<<<<<<<<<<
+ * ctypedef enum VisualServer_CanvasLightMode :CANVAS_LIGHT_MODE_ADD, CANVAS_LIGHT_MODE_SUB, CANVAS_LIGHT_MODE_MIX, CANVAS_LIGHT_MODE_MASK,
+ * ctypedef enum VisualServer_LightDirectionalShadowMode :LIGHT_DIRECTIONAL_SHADOW_ORTHOGONAL, LIGHT_DIRECTIONAL_SHADOW_PARALLEL_2_SPLITS, LIGHT_DIRECTIONAL_SHADOW_PARALLEL_4_SPLITS,
  */
-enum __pyx_t_7classes_12VisualServer_ParticlesDrawOrder {
+enum __pyx_t_7classes_12VisualServer_VisualServer_ParticlesDrawOrder {
   __pyx_e_7classes_12VisualServer_PARTICLES_DRAW_ORDER_INDEX,
   __pyx_e_7classes_12VisualServer_PARTICLES_DRAW_ORDER_LIFETIME,
   __pyx_e_7classes_12VisualServer_PARTICLES_DRAW_ORDER_VIEW_DEPTH
 };
-typedef enum __pyx_t_7classes_12VisualServer_ParticlesDrawOrder __pyx_t_7classes_12VisualServer_ParticlesDrawOrder;
+typedef enum __pyx_t_7classes_12VisualServer_VisualServer_ParticlesDrawOrder __pyx_t_7classes_12VisualServer_VisualServer_ParticlesDrawOrder;
 
 /* "classes/VisualServer.pxd":39
- * ctypedef enum ArrayFormat :ARRAY_FORMAT_VERTEX, ARRAY_FORMAT_NORMAL, ARRAY_FORMAT_TANGENT, ARRAY_FORMAT_COLOR, ARRAY_FORMAT_TEX_UV, ARRAY_FORMAT_TEX_UV2, ARRAY_FORMAT_BONES, ARRAY_FORMAT_WEIGHTS, ARRAY_FORMAT_INDEX, ARRAY_COMPRESS_VERTEX, ARRAY_COMPRESS_NORMAL, ARRAY_COMPRESS_TANGENT, ARRAY_COMPRESS_COLOR, ARRAY_COMPRESS_TEX_UV, ARRAY_COMPRESS_TEX_UV2, ARRAY_COMPRESS_BONES, ARRAY_COMPRESS_WEIGHTS, ARRAY_COMPRESS_DEFAULT, ARRAY_COMPRESS_INDEX, ARRAY_FLAG_USE_2D_VERTICES, ARRAY_FLAG_USE_16_BIT_BONES,
- * ctypedef enum ParticlesDrawOrder :PARTICLES_DRAW_ORDER_INDEX, PARTICLES_DRAW_ORDER_LIFETIME, PARTICLES_DRAW_ORDER_VIEW_DEPTH,
- * ctypedef enum CanvasLightMode :CANVAS_LIGHT_MODE_ADD, CANVAS_LIGHT_MODE_SUB, CANVAS_LIGHT_MODE_MIX, CANVAS_LIGHT_MODE_MASK,             # <<<<<<<<<<<<<<
- * ctypedef enum LightDirectionalShadowMode :LIGHT_DIRECTIONAL_SHADOW_ORTHOGONAL, LIGHT_DIRECTIONAL_SHADOW_PARALLEL_2_SPLITS, LIGHT_DIRECTIONAL_SHADOW_PARALLEL_4_SPLITS,
- * ctypedef enum LightParam :LIGHT_PARAM_ENERGY, LIGHT_PARAM_SPECULAR, LIGHT_PARAM_RANGE, LIGHT_PARAM_ATTENUATION, LIGHT_PARAM_SPOT_ANGLE, LIGHT_PARAM_SPOT_ATTENUATION, LIGHT_PARAM_CONTACT_SHADOW_SIZE, LIGHT_PARAM_SHADOW_MAX_DISTANCE, LIGHT_PARAM_SHADOW_SPLIT_1_OFFSET, LIGHT_PARAM_SHADOW_SPLIT_2_OFFSET, LIGHT_PARAM_SHADOW_SPLIT_3_OFFSET, LIGHT_PARAM_SHADOW_NORMAL_BIAS, LIGHT_PARAM_SHADOW_BIAS, LIGHT_PARAM_SHADOW_BIAS_SPLIT_SCALE, LIGHT_PARAM_MAX,
+ * ctypedef enum VisualServer_ArrayFormat :ARRAY_FORMAT_VERTEX, ARRAY_FORMAT_NORMAL, ARRAY_FORMAT_TANGENT, ARRAY_FORMAT_COLOR, ARRAY_FORMAT_TEX_UV, ARRAY_FORMAT_TEX_UV2, ARRAY_FORMAT_BONES, ARRAY_FORMAT_WEIGHTS, ARRAY_FORMAT_INDEX, ARRAY_COMPRESS_VERTEX, ARRAY_COMPRESS_NORMAL, ARRAY_COMPRESS_TANGENT, ARRAY_COMPRESS_COLOR, ARRAY_COMPRESS_TEX_UV, ARRAY_COMPRESS_TEX_UV2, ARRAY_COMPRESS_BONES, ARRAY_COMPRESS_WEIGHTS, ARRAY_COMPRESS_DEFAULT, ARRAY_COMPRESS_INDEX, ARRAY_FLAG_USE_2D_VERTICES, ARRAY_FLAG_USE_16_BIT_BONES,
+ * ctypedef enum VisualServer_ParticlesDrawOrder :PARTICLES_DRAW_ORDER_INDEX, PARTICLES_DRAW_ORDER_LIFETIME, PARTICLES_DRAW_ORDER_VIEW_DEPTH,
+ * ctypedef enum VisualServer_CanvasLightMode :CANVAS_LIGHT_MODE_ADD, CANVAS_LIGHT_MODE_SUB, CANVAS_LIGHT_MODE_MIX, CANVAS_LIGHT_MODE_MASK,             # <<<<<<<<<<<<<<
+ * ctypedef enum VisualServer_LightDirectionalShadowMode :LIGHT_DIRECTIONAL_SHADOW_ORTHOGONAL, LIGHT_DIRECTIONAL_SHADOW_PARALLEL_2_SPLITS, LIGHT_DIRECTIONAL_SHADOW_PARALLEL_4_SPLITS,
+ * ctypedef enum VisualServer_LightParam :LIGHT_PARAM_ENERGY, LIGHT_PARAM_SPECULAR, LIGHT_PARAM_RANGE, LIGHT_PARAM_ATTENUATION, LIGHT_PARAM_SPOT_ANGLE, LIGHT_PARAM_SPOT_ATTENUATION, LIGHT_PARAM_CONTACT_SHADOW_SIZE, LIGHT_PARAM_SHADOW_MAX_DISTANCE, LIGHT_PARAM_SHADOW_SPLIT_1_OFFSET, LIGHT_PARAM_SHADOW_SPLIT_2_OFFSET, LIGHT_PARAM_SHADOW_SPLIT_3_OFFSET, LIGHT_PARAM_SHADOW_NORMAL_BIAS, LIGHT_PARAM_SHADOW_BIAS, LIGHT_PARAM_SHADOW_BIAS_SPLIT_SCALE, LIGHT_PARAM_MAX,
  */
-enum __pyx_t_7classes_12VisualServer_CanvasLightMode {
+enum __pyx_t_7classes_12VisualServer_VisualServer_CanvasLightMode {
   __pyx_e_7classes_12VisualServer_CANVAS_LIGHT_MODE_ADD,
   __pyx_e_7classes_12VisualServer_CANVAS_LIGHT_MODE_SUB,
   __pyx_e_7classes_12VisualServer_CANVAS_LIGHT_MODE_MIX,
   __pyx_e_7classes_12VisualServer_CANVAS_LIGHT_MODE_MASK
 };
-typedef enum __pyx_t_7classes_12VisualServer_CanvasLightMode __pyx_t_7classes_12VisualServer_CanvasLightMode;
+typedef enum __pyx_t_7classes_12VisualServer_VisualServer_CanvasLightMode __pyx_t_7classes_12VisualServer_VisualServer_CanvasLightMode;
 
 /* "classes/VisualServer.pxd":40
- * ctypedef enum ParticlesDrawOrder :PARTICLES_DRAW_ORDER_INDEX, PARTICLES_DRAW_ORDER_LIFETIME, PARTICLES_DRAW_ORDER_VIEW_DEPTH,
- * ctypedef enum CanvasLightMode :CANVAS_LIGHT_MODE_ADD, CANVAS_LIGHT_MODE_SUB, CANVAS_LIGHT_MODE_MIX, CANVAS_LIGHT_MODE_MASK,
- * ctypedef enum LightDirectionalShadowMode :LIGHT_DIRECTIONAL_SHADOW_ORTHOGONAL, LIGHT_DIRECTIONAL_SHADOW_PARALLEL_2_SPLITS, LIGHT_DIRECTIONAL_SHADOW_PARALLEL_4_SPLITS,             # <<<<<<<<<<<<<<
- * ctypedef enum LightParam :LIGHT_PARAM_ENERGY, LIGHT_PARAM_SPECULAR, LIGHT_PARAM_RANGE, LIGHT_PARAM_ATTENUATION, LIGHT_PARAM_SPOT_ANGLE, LIGHT_PARAM_SPOT_ATTENUATION, LIGHT_PARAM_CONTACT_SHADOW_SIZE, LIGHT_PARAM_SHADOW_MAX_DISTANCE, LIGHT_PARAM_SHADOW_SPLIT_1_OFFSET, LIGHT_PARAM_SHADOW_SPLIT_2_OFFSET, LIGHT_PARAM_SHADOW_SPLIT_3_OFFSET, LIGHT_PARAM_SHADOW_NORMAL_BIAS, LIGHT_PARAM_SHADOW_BIAS, LIGHT_PARAM_SHADOW_BIAS_SPLIT_SCALE, LIGHT_PARAM_MAX,
- * ctypedef enum ArrayType :ARRAY_VERTEX, ARRAY_NORMAL, ARRAY_TANGENT, ARRAY_COLOR, ARRAY_TEX_UV, ARRAY_TEX_UV2, ARRAY_BONES, ARRAY_WEIGHTS, ARRAY_INDEX, ARRAY_MAX,
+ * ctypedef enum VisualServer_ParticlesDrawOrder :PARTICLES_DRAW_ORDER_INDEX, PARTICLES_DRAW_ORDER_LIFETIME, PARTICLES_DRAW_ORDER_VIEW_DEPTH,
+ * ctypedef enum VisualServer_CanvasLightMode :CANVAS_LIGHT_MODE_ADD, CANVAS_LIGHT_MODE_SUB, CANVAS_LIGHT_MODE_MIX, CANVAS_LIGHT_MODE_MASK,
+ * ctypedef enum VisualServer_LightDirectionalShadowMode :LIGHT_DIRECTIONAL_SHADOW_ORTHOGONAL, LIGHT_DIRECTIONAL_SHADOW_PARALLEL_2_SPLITS, LIGHT_DIRECTIONAL_SHADOW_PARALLEL_4_SPLITS,             # <<<<<<<<<<<<<<
+ * ctypedef enum VisualServer_LightParam :LIGHT_PARAM_ENERGY, LIGHT_PARAM_SPECULAR, LIGHT_PARAM_RANGE, LIGHT_PARAM_ATTENUATION, LIGHT_PARAM_SPOT_ANGLE, LIGHT_PARAM_SPOT_ATTENUATION, LIGHT_PARAM_CONTACT_SHADOW_SIZE, LIGHT_PARAM_SHADOW_MAX_DISTANCE, LIGHT_PARAM_SHADOW_SPLIT_1_OFFSET, LIGHT_PARAM_SHADOW_SPLIT_2_OFFSET, LIGHT_PARAM_SHADOW_SPLIT_3_OFFSET, LIGHT_PARAM_SHADOW_NORMAL_BIAS, LIGHT_PARAM_SHADOW_BIAS, LIGHT_PARAM_SHADOW_BIAS_SPLIT_SCALE, LIGHT_PARAM_MAX,
+ * ctypedef enum VisualServer_ArrayType :ARRAY_VERTEX, ARRAY_NORMAL, ARRAY_TANGENT, ARRAY_COLOR, ARRAY_TEX_UV, ARRAY_TEX_UV2, ARRAY_BONES, ARRAY_WEIGHTS, ARRAY_INDEX, ARRAY_MAX,
  */
-enum __pyx_t_7classes_12VisualServer_LightDirectionalShadowMode {
+enum __pyx_t_7classes_12VisualServer_VisualServer_LightDirectionalShadowMode {
   __pyx_e_7classes_12VisualServer_LIGHT_DIRECTIONAL_SHADOW_ORTHOGONAL,
   __pyx_e_7classes_12VisualServer_LIGHT_DIRECTIONAL_SHADOW_PARALLEL_2_SPLITS,
   __pyx_e_7classes_12VisualServer_LIGHT_DIRECTIONAL_SHADOW_PARALLEL_4_SPLITS
 };
-typedef enum __pyx_t_7classes_12VisualServer_LightDirectionalShadowMode __pyx_t_7classes_12VisualServer_LightDirectionalShadowMode;
+typedef enum __pyx_t_7classes_12VisualServer_VisualServer_LightDirectionalShadowMode __pyx_t_7classes_12VisualServer_VisualServer_LightDirectionalShadowMode;
 
 /* "classes/VisualServer.pxd":41
- * ctypedef enum CanvasLightMode :CANVAS_LIGHT_MODE_ADD, CANVAS_LIGHT_MODE_SUB, CANVAS_LIGHT_MODE_MIX, CANVAS_LIGHT_MODE_MASK,
- * ctypedef enum LightDirectionalShadowMode :LIGHT_DIRECTIONAL_SHADOW_ORTHOGONAL, LIGHT_DIRECTIONAL_SHADOW_PARALLEL_2_SPLITS, LIGHT_DIRECTIONAL_SHADOW_PARALLEL_4_SPLITS,
- * ctypedef enum LightParam :LIGHT_PARAM_ENERGY, LIGHT_PARAM_SPECULAR, LIGHT_PARAM_RANGE, LIGHT_PARAM_ATTENUATION, LIGHT_PARAM_SPOT_ANGLE, LIGHT_PARAM_SPOT_ATTENUATION, LIGHT_PARAM_CONTACT_SHADOW_SIZE, LIGHT_PARAM_SHADOW_MAX_DISTANCE, LIGHT_PARAM_SHADOW_SPLIT_1_OFFSET, LIGHT_PARAM_SHADOW_SPLIT_2_OFFSET, LIGHT_PARAM_SHADOW_SPLIT_3_OFFSET, LIGHT_PARAM_SHADOW_NORMAL_BIAS, LIGHT_PARAM_SHADOW_BIAS, LIGHT_PARAM_SHADOW_BIAS_SPLIT_SCALE, LIGHT_PARAM_MAX,             # <<<<<<<<<<<<<<
- * ctypedef enum ArrayType :ARRAY_VERTEX, ARRAY_NORMAL, ARRAY_TANGENT, ARRAY_COLOR, ARRAY_TEX_UV, ARRAY_TEX_UV2, ARRAY_BONES, ARRAY_WEIGHTS, ARRAY_INDEX, ARRAY_MAX,
- * ctypedef enum CanvasOccluderPolygonCullMode :CANVAS_OCCLUDER_POLYGON_CULL_DISABLED, CANVAS_OCCLUDER_POLYGON_CULL_CLOCKWISE, CANVAS_OCCLUDER_POLYGON_CULL_COUNTER_CLOCKWISE,
+ * ctypedef enum VisualServer_CanvasLightMode :CANVAS_LIGHT_MODE_ADD, CANVAS_LIGHT_MODE_SUB, CANVAS_LIGHT_MODE_MIX, CANVAS_LIGHT_MODE_MASK,
+ * ctypedef enum VisualServer_LightDirectionalShadowMode :LIGHT_DIRECTIONAL_SHADOW_ORTHOGONAL, LIGHT_DIRECTIONAL_SHADOW_PARALLEL_2_SPLITS, LIGHT_DIRECTIONAL_SHADOW_PARALLEL_4_SPLITS,
+ * ctypedef enum VisualServer_LightParam :LIGHT_PARAM_ENERGY, LIGHT_PARAM_SPECULAR, LIGHT_PARAM_RANGE, LIGHT_PARAM_ATTENUATION, LIGHT_PARAM_SPOT_ANGLE, LIGHT_PARAM_SPOT_ATTENUATION, LIGHT_PARAM_CONTACT_SHADOW_SIZE, LIGHT_PARAM_SHADOW_MAX_DISTANCE, LIGHT_PARAM_SHADOW_SPLIT_1_OFFSET, LIGHT_PARAM_SHADOW_SPLIT_2_OFFSET, LIGHT_PARAM_SHADOW_SPLIT_3_OFFSET, LIGHT_PARAM_SHADOW_NORMAL_BIAS, LIGHT_PARAM_SHADOW_BIAS, LIGHT_PARAM_SHADOW_BIAS_SPLIT_SCALE, LIGHT_PARAM_MAX,             # <<<<<<<<<<<<<<
+ * ctypedef enum VisualServer_ArrayType :ARRAY_VERTEX, ARRAY_NORMAL, ARRAY_TANGENT, ARRAY_COLOR, ARRAY_TEX_UV, ARRAY_TEX_UV2, ARRAY_BONES, ARRAY_WEIGHTS, ARRAY_INDEX, ARRAY_MAX,
+ * ctypedef enum VisualServer_CanvasOccluderPolygonCullMode :CANVAS_OCCLUDER_POLYGON_CULL_DISABLED, CANVAS_OCCLUDER_POLYGON_CULL_CLOCKWISE, CANVAS_OCCLUDER_POLYGON_CULL_COUNTER_CLOCKWISE,
  */
-enum __pyx_t_7classes_12VisualServer_LightParam {
+enum __pyx_t_7classes_12VisualServer_VisualServer_LightParam {
   __pyx_e_7classes_12VisualServer_LIGHT_PARAM_ENERGY,
   __pyx_e_7classes_12VisualServer_LIGHT_PARAM_SPECULAR,
   __pyx_e_7classes_12VisualServer_LIGHT_PARAM_RANGE,
@@ -1658,16 +1658,16 @@ enum __pyx_t_7classes_12VisualServer_LightParam {
   __pyx_e_7classes_12VisualServer_LIGHT_PARAM_SHADOW_BIAS_SPLIT_SCALE,
   __pyx_e_7classes_12VisualServer_LIGHT_PARAM_MAX
 };
-typedef enum __pyx_t_7classes_12VisualServer_LightParam __pyx_t_7classes_12VisualServer_LightParam;
+typedef enum __pyx_t_7classes_12VisualServer_VisualServer_LightParam __pyx_t_7classes_12VisualServer_VisualServer_LightParam;
 
 /* "classes/VisualServer.pxd":42
- * ctypedef enum LightDirectionalShadowMode :LIGHT_DIRECTIONAL_SHADOW_ORTHOGONAL, LIGHT_DIRECTIONAL_SHADOW_PARALLEL_2_SPLITS, LIGHT_DIRECTIONAL_SHADOW_PARALLEL_4_SPLITS,
- * ctypedef enum LightParam :LIGHT_PARAM_ENERGY, LIGHT_PARAM_SPECULAR, LIGHT_PARAM_RANGE, LIGHT_PARAM_ATTENUATION, LIGHT_PARAM_SPOT_ANGLE, LIGHT_PARAM_SPOT_ATTENUATION, LIGHT_PARAM_CONTACT_SHADOW_SIZE, LIGHT_PARAM_SHADOW_MAX_DISTANCE, LIGHT_PARAM_SHADOW_SPLIT_1_OFFSET, LIGHT_PARAM_SHADOW_SPLIT_2_OFFSET, LIGHT_PARAM_SHADOW_SPLIT_3_OFFSET, LIGHT_PARAM_SHADOW_NORMAL_BIAS, LIGHT_PARAM_SHADOW_BIAS, LIGHT_PARAM_SHADOW_BIAS_SPLIT_SCALE, LIGHT_PARAM_MAX,
- * ctypedef enum ArrayType :ARRAY_VERTEX, ARRAY_NORMAL, ARRAY_TANGENT, ARRAY_COLOR, ARRAY_TEX_UV, ARRAY_TEX_UV2, ARRAY_BONES, ARRAY_WEIGHTS, ARRAY_INDEX, ARRAY_MAX,             # <<<<<<<<<<<<<<
- * ctypedef enum CanvasOccluderPolygonCullMode :CANVAS_OCCLUDER_POLYGON_CULL_DISABLED, CANVAS_OCCLUDER_POLYGON_CULL_CLOCKWISE, CANVAS_OCCLUDER_POLYGON_CULL_COUNTER_CLOCKWISE,
- * ctypedef enum InstanceFlags :INSTANCE_FLAG_USE_BAKED_LIGHT, INSTANCE_FLAG_DRAW_NEXT_FRAME_IF_VISIBLE, INSTANCE_FLAG_MAX,
+ * ctypedef enum VisualServer_LightDirectionalShadowMode :LIGHT_DIRECTIONAL_SHADOW_ORTHOGONAL, LIGHT_DIRECTIONAL_SHADOW_PARALLEL_2_SPLITS, LIGHT_DIRECTIONAL_SHADOW_PARALLEL_4_SPLITS,
+ * ctypedef enum VisualServer_LightParam :LIGHT_PARAM_ENERGY, LIGHT_PARAM_SPECULAR, LIGHT_PARAM_RANGE, LIGHT_PARAM_ATTENUATION, LIGHT_PARAM_SPOT_ANGLE, LIGHT_PARAM_SPOT_ATTENUATION, LIGHT_PARAM_CONTACT_SHADOW_SIZE, LIGHT_PARAM_SHADOW_MAX_DISTANCE, LIGHT_PARAM_SHADOW_SPLIT_1_OFFSET, LIGHT_PARAM_SHADOW_SPLIT_2_OFFSET, LIGHT_PARAM_SHADOW_SPLIT_3_OFFSET, LIGHT_PARAM_SHADOW_NORMAL_BIAS, LIGHT_PARAM_SHADOW_BIAS, LIGHT_PARAM_SHADOW_BIAS_SPLIT_SCALE, LIGHT_PARAM_MAX,
+ * ctypedef enum VisualServer_ArrayType :ARRAY_VERTEX, ARRAY_NORMAL, ARRAY_TANGENT, ARRAY_COLOR, ARRAY_TEX_UV, ARRAY_TEX_UV2, ARRAY_BONES, ARRAY_WEIGHTS, ARRAY_INDEX, ARRAY_MAX,             # <<<<<<<<<<<<<<
+ * ctypedef enum VisualServer_CanvasOccluderPolygonCullMode :CANVAS_OCCLUDER_POLYGON_CULL_DISABLED, CANVAS_OCCLUDER_POLYGON_CULL_CLOCKWISE, CANVAS_OCCLUDER_POLYGON_CULL_COUNTER_CLOCKWISE,
+ * ctypedef enum VisualServer_InstanceFlags :INSTANCE_FLAG_USE_BAKED_LIGHT, INSTANCE_FLAG_DRAW_NEXT_FRAME_IF_VISIBLE, INSTANCE_FLAG_MAX,
  */
-enum __pyx_t_7classes_12VisualServer_ArrayType {
+enum __pyx_t_7classes_12VisualServer_VisualServer_ArrayType {
   __pyx_e_7classes_12VisualServer_ARRAY_VERTEX,
   __pyx_e_7classes_12VisualServer_ARRAY_NORMAL,
   __pyx_e_7classes_12VisualServer_ARRAY_TANGENT,
@@ -1679,44 +1679,44 @@ enum __pyx_t_7classes_12VisualServer_ArrayType {
   __pyx_e_7classes_12VisualServer_ARRAY_INDEX,
   __pyx_e_7classes_12VisualServer_ARRAY_MAX
 };
-typedef enum __pyx_t_7classes_12VisualServer_ArrayType __pyx_t_7classes_12VisualServer_ArrayType;
+typedef enum __pyx_t_7classes_12VisualServer_VisualServer_ArrayType __pyx_t_7classes_12VisualServer_VisualServer_ArrayType;
 
 /* "classes/VisualServer.pxd":43
- * ctypedef enum LightParam :LIGHT_PARAM_ENERGY, LIGHT_PARAM_SPECULAR, LIGHT_PARAM_RANGE, LIGHT_PARAM_ATTENUATION, LIGHT_PARAM_SPOT_ANGLE, LIGHT_PARAM_SPOT_ATTENUATION, LIGHT_PARAM_CONTACT_SHADOW_SIZE, LIGHT_PARAM_SHADOW_MAX_DISTANCE, LIGHT_PARAM_SHADOW_SPLIT_1_OFFSET, LIGHT_PARAM_SHADOW_SPLIT_2_OFFSET, LIGHT_PARAM_SHADOW_SPLIT_3_OFFSET, LIGHT_PARAM_SHADOW_NORMAL_BIAS, LIGHT_PARAM_SHADOW_BIAS, LIGHT_PARAM_SHADOW_BIAS_SPLIT_SCALE, LIGHT_PARAM_MAX,
- * ctypedef enum ArrayType :ARRAY_VERTEX, ARRAY_NORMAL, ARRAY_TANGENT, ARRAY_COLOR, ARRAY_TEX_UV, ARRAY_TEX_UV2, ARRAY_BONES, ARRAY_WEIGHTS, ARRAY_INDEX, ARRAY_MAX,
- * ctypedef enum CanvasOccluderPolygonCullMode :CANVAS_OCCLUDER_POLYGON_CULL_DISABLED, CANVAS_OCCLUDER_POLYGON_CULL_CLOCKWISE, CANVAS_OCCLUDER_POLYGON_CULL_COUNTER_CLOCKWISE,             # <<<<<<<<<<<<<<
- * ctypedef enum InstanceFlags :INSTANCE_FLAG_USE_BAKED_LIGHT, INSTANCE_FLAG_DRAW_NEXT_FRAME_IF_VISIBLE, INSTANCE_FLAG_MAX,
- * ctypedef enum ViewportMSAA :VIEWPORT_MSAA_DISABLED, VIEWPORT_MSAA_2X, VIEWPORT_MSAA_4X, VIEWPORT_MSAA_8X, VIEWPORT_MSAA_16X, VIEWPORT_MSAA_EXT_2X, VIEWPORT_MSAA_EXT_4X,
+ * ctypedef enum VisualServer_LightParam :LIGHT_PARAM_ENERGY, LIGHT_PARAM_SPECULAR, LIGHT_PARAM_RANGE, LIGHT_PARAM_ATTENUATION, LIGHT_PARAM_SPOT_ANGLE, LIGHT_PARAM_SPOT_ATTENUATION, LIGHT_PARAM_CONTACT_SHADOW_SIZE, LIGHT_PARAM_SHADOW_MAX_DISTANCE, LIGHT_PARAM_SHADOW_SPLIT_1_OFFSET, LIGHT_PARAM_SHADOW_SPLIT_2_OFFSET, LIGHT_PARAM_SHADOW_SPLIT_3_OFFSET, LIGHT_PARAM_SHADOW_NORMAL_BIAS, LIGHT_PARAM_SHADOW_BIAS, LIGHT_PARAM_SHADOW_BIAS_SPLIT_SCALE, LIGHT_PARAM_MAX,
+ * ctypedef enum VisualServer_ArrayType :ARRAY_VERTEX, ARRAY_NORMAL, ARRAY_TANGENT, ARRAY_COLOR, ARRAY_TEX_UV, ARRAY_TEX_UV2, ARRAY_BONES, ARRAY_WEIGHTS, ARRAY_INDEX, ARRAY_MAX,
+ * ctypedef enum VisualServer_CanvasOccluderPolygonCullMode :CANVAS_OCCLUDER_POLYGON_CULL_DISABLED, CANVAS_OCCLUDER_POLYGON_CULL_CLOCKWISE, CANVAS_OCCLUDER_POLYGON_CULL_COUNTER_CLOCKWISE,             # <<<<<<<<<<<<<<
+ * ctypedef enum VisualServer_InstanceFlags :INSTANCE_FLAG_USE_BAKED_LIGHT, INSTANCE_FLAG_DRAW_NEXT_FRAME_IF_VISIBLE, INSTANCE_FLAG_MAX,
+ * ctypedef enum VisualServer_ViewportMSAA :VIEWPORT_MSAA_DISABLED, VIEWPORT_MSAA_2X, VIEWPORT_MSAA_4X, VIEWPORT_MSAA_8X, VIEWPORT_MSAA_16X, VIEWPORT_MSAA_EXT_2X, VIEWPORT_MSAA_EXT_4X,
  */
-enum __pyx_t_7classes_12VisualServer_CanvasOccluderPolygonCullMode {
+enum __pyx_t_7classes_12VisualServer_VisualServer_CanvasOccluderPolygonCullMode {
   __pyx_e_7classes_12VisualServer_CANVAS_OCCLUDER_POLYGON_CULL_DISABLED,
   __pyx_e_7classes_12VisualServer_CANVAS_OCCLUDER_POLYGON_CULL_CLOCKWISE,
   __pyx_e_7classes_12VisualServer_CANVAS_OCCLUDER_POLYGON_CULL_COUNTER_CLOCKWISE
 };
-typedef enum __pyx_t_7classes_12VisualServer_CanvasOccluderPolygonCullMode __pyx_t_7classes_12VisualServer_CanvasOccluderPolygonCullMode;
+typedef enum __pyx_t_7classes_12VisualServer_VisualServer_CanvasOccluderPolygonCullMode __pyx_t_7classes_12VisualServer_VisualServer_CanvasOccluderPolygonCullMode;
 
 /* "classes/VisualServer.pxd":44
- * ctypedef enum ArrayType :ARRAY_VERTEX, ARRAY_NORMAL, ARRAY_TANGENT, ARRAY_COLOR, ARRAY_TEX_UV, ARRAY_TEX_UV2, ARRAY_BONES, ARRAY_WEIGHTS, ARRAY_INDEX, ARRAY_MAX,
- * ctypedef enum CanvasOccluderPolygonCullMode :CANVAS_OCCLUDER_POLYGON_CULL_DISABLED, CANVAS_OCCLUDER_POLYGON_CULL_CLOCKWISE, CANVAS_OCCLUDER_POLYGON_CULL_COUNTER_CLOCKWISE,
- * ctypedef enum InstanceFlags :INSTANCE_FLAG_USE_BAKED_LIGHT, INSTANCE_FLAG_DRAW_NEXT_FRAME_IF_VISIBLE, INSTANCE_FLAG_MAX,             # <<<<<<<<<<<<<<
- * ctypedef enum ViewportMSAA :VIEWPORT_MSAA_DISABLED, VIEWPORT_MSAA_2X, VIEWPORT_MSAA_4X, VIEWPORT_MSAA_8X, VIEWPORT_MSAA_16X, VIEWPORT_MSAA_EXT_2X, VIEWPORT_MSAA_EXT_4X,
- * ctypedef enum LightType :LIGHT_DIRECTIONAL, LIGHT_OMNI, LIGHT_SPOT,
+ * ctypedef enum VisualServer_ArrayType :ARRAY_VERTEX, ARRAY_NORMAL, ARRAY_TANGENT, ARRAY_COLOR, ARRAY_TEX_UV, ARRAY_TEX_UV2, ARRAY_BONES, ARRAY_WEIGHTS, ARRAY_INDEX, ARRAY_MAX,
+ * ctypedef enum VisualServer_CanvasOccluderPolygonCullMode :CANVAS_OCCLUDER_POLYGON_CULL_DISABLED, CANVAS_OCCLUDER_POLYGON_CULL_CLOCKWISE, CANVAS_OCCLUDER_POLYGON_CULL_COUNTER_CLOCKWISE,
+ * ctypedef enum VisualServer_InstanceFlags :INSTANCE_FLAG_USE_BAKED_LIGHT, INSTANCE_FLAG_DRAW_NEXT_FRAME_IF_VISIBLE, INSTANCE_FLAG_MAX,             # <<<<<<<<<<<<<<
+ * ctypedef enum VisualServer_ViewportMSAA :VIEWPORT_MSAA_DISABLED, VIEWPORT_MSAA_2X, VIEWPORT_MSAA_4X, VIEWPORT_MSAA_8X, VIEWPORT_MSAA_16X, VIEWPORT_MSAA_EXT_2X, VIEWPORT_MSAA_EXT_4X,
+ * ctypedef enum VisualServer_LightType :LIGHT_DIRECTIONAL, LIGHT_OMNI, LIGHT_SPOT,
  */
-enum __pyx_t_7classes_12VisualServer_InstanceFlags {
+enum __pyx_t_7classes_12VisualServer_VisualServer_InstanceFlags {
   __pyx_e_7classes_12VisualServer_INSTANCE_FLAG_USE_BAKED_LIGHT,
   __pyx_e_7classes_12VisualServer_INSTANCE_FLAG_DRAW_NEXT_FRAME_IF_VISIBLE,
   __pyx_e_7classes_12VisualServer_INSTANCE_FLAG_MAX
 };
-typedef enum __pyx_t_7classes_12VisualServer_InstanceFlags __pyx_t_7classes_12VisualServer_InstanceFlags;
+typedef enum __pyx_t_7classes_12VisualServer_VisualServer_InstanceFlags __pyx_t_7classes_12VisualServer_VisualServer_InstanceFlags;
 
 /* "classes/VisualServer.pxd":45
- * ctypedef enum CanvasOccluderPolygonCullMode :CANVAS_OCCLUDER_POLYGON_CULL_DISABLED, CANVAS_OCCLUDER_POLYGON_CULL_CLOCKWISE, CANVAS_OCCLUDER_POLYGON_CULL_COUNTER_CLOCKWISE,
- * ctypedef enum InstanceFlags :INSTANCE_FLAG_USE_BAKED_LIGHT, INSTANCE_FLAG_DRAW_NEXT_FRAME_IF_VISIBLE, INSTANCE_FLAG_MAX,
- * ctypedef enum ViewportMSAA :VIEWPORT_MSAA_DISABLED, VIEWPORT_MSAA_2X, VIEWPORT_MSAA_4X, VIEWPORT_MSAA_8X, VIEWPORT_MSAA_16X, VIEWPORT_MSAA_EXT_2X, VIEWPORT_MSAA_EXT_4X,             # <<<<<<<<<<<<<<
- * ctypedef enum LightType :LIGHT_DIRECTIONAL, LIGHT_OMNI, LIGHT_SPOT,
- * ctypedef enum CubeMapSide :CUBEMAP_LEFT, CUBEMAP_RIGHT, CUBEMAP_BOTTOM, CUBEMAP_TOP, CUBEMAP_FRONT, CUBEMAP_BACK,
+ * ctypedef enum VisualServer_CanvasOccluderPolygonCullMode :CANVAS_OCCLUDER_POLYGON_CULL_DISABLED, CANVAS_OCCLUDER_POLYGON_CULL_CLOCKWISE, CANVAS_OCCLUDER_POLYGON_CULL_COUNTER_CLOCKWISE,
+ * ctypedef enum VisualServer_InstanceFlags :INSTANCE_FLAG_USE_BAKED_LIGHT, INSTANCE_FLAG_DRAW_NEXT_FRAME_IF_VISIBLE, INSTANCE_FLAG_MAX,
+ * ctypedef enum VisualServer_ViewportMSAA :VIEWPORT_MSAA_DISABLED, VIEWPORT_MSAA_2X, VIEWPORT_MSAA_4X, VIEWPORT_MSAA_8X, VIEWPORT_MSAA_16X, VIEWPORT_MSAA_EXT_2X, VIEWPORT_MSAA_EXT_4X,             # <<<<<<<<<<<<<<
+ * ctypedef enum VisualServer_LightType :LIGHT_DIRECTIONAL, LIGHT_OMNI, LIGHT_SPOT,
+ * ctypedef enum VisualServer_CubeMapSide :CUBEMAP_LEFT, CUBEMAP_RIGHT, CUBEMAP_BOTTOM, CUBEMAP_TOP, CUBEMAP_FRONT, CUBEMAP_BACK,
  */
-enum __pyx_t_7classes_12VisualServer_ViewportMSAA {
+enum __pyx_t_7classes_12VisualServer_VisualServer_ViewportMSAA {
   __pyx_e_7classes_12VisualServer_VIEWPORT_MSAA_DISABLED,
   __pyx_e_7classes_12VisualServer_VIEWPORT_MSAA_2X,
   __pyx_e_7classes_12VisualServer_VIEWPORT_MSAA_4X,
@@ -1725,27 +1725,27 @@ enum __pyx_t_7classes_12VisualServer_ViewportMSAA {
   __pyx_e_7classes_12VisualServer_VIEWPORT_MSAA_EXT_2X,
   __pyx_e_7classes_12VisualServer_VIEWPORT_MSAA_EXT_4X
 };
-typedef enum __pyx_t_7classes_12VisualServer_ViewportMSAA __pyx_t_7classes_12VisualServer_ViewportMSAA;
+typedef enum __pyx_t_7classes_12VisualServer_VisualServer_ViewportMSAA __pyx_t_7classes_12VisualServer_VisualServer_ViewportMSAA;
 
 /* "classes/VisualServer.pxd":46
- * ctypedef enum InstanceFlags :INSTANCE_FLAG_USE_BAKED_LIGHT, INSTANCE_FLAG_DRAW_NEXT_FRAME_IF_VISIBLE, INSTANCE_FLAG_MAX,
- * ctypedef enum ViewportMSAA :VIEWPORT_MSAA_DISABLED, VIEWPORT_MSAA_2X, VIEWPORT_MSAA_4X, VIEWPORT_MSAA_8X, VIEWPORT_MSAA_16X, VIEWPORT_MSAA_EXT_2X, VIEWPORT_MSAA_EXT_4X,
- * ctypedef enum LightType :LIGHT_DIRECTIONAL, LIGHT_OMNI, LIGHT_SPOT,             # <<<<<<<<<<<<<<
- * ctypedef enum CubeMapSide :CUBEMAP_LEFT, CUBEMAP_RIGHT, CUBEMAP_BOTTOM, CUBEMAP_TOP, CUBEMAP_FRONT, CUBEMAP_BACK,
+ * ctypedef enum VisualServer_InstanceFlags :INSTANCE_FLAG_USE_BAKED_LIGHT, INSTANCE_FLAG_DRAW_NEXT_FRAME_IF_VISIBLE, INSTANCE_FLAG_MAX,
+ * ctypedef enum VisualServer_ViewportMSAA :VIEWPORT_MSAA_DISABLED, VIEWPORT_MSAA_2X, VIEWPORT_MSAA_4X, VIEWPORT_MSAA_8X, VIEWPORT_MSAA_16X, VIEWPORT_MSAA_EXT_2X, VIEWPORT_MSAA_EXT_4X,
+ * ctypedef enum VisualServer_LightType :LIGHT_DIRECTIONAL, LIGHT_OMNI, LIGHT_SPOT,             # <<<<<<<<<<<<<<
+ * ctypedef enum VisualServer_CubeMapSide :CUBEMAP_LEFT, CUBEMAP_RIGHT, CUBEMAP_BOTTOM, CUBEMAP_TOP, CUBEMAP_FRONT, CUBEMAP_BACK,
  */
-enum __pyx_t_7classes_12VisualServer_LightType {
+enum __pyx_t_7classes_12VisualServer_VisualServer_LightType {
   __pyx_e_7classes_12VisualServer_LIGHT_DIRECTIONAL,
   __pyx_e_7classes_12VisualServer_LIGHT_OMNI,
   __pyx_e_7classes_12VisualServer_LIGHT_SPOT
 };
-typedef enum __pyx_t_7classes_12VisualServer_LightType __pyx_t_7classes_12VisualServer_LightType;
+typedef enum __pyx_t_7classes_12VisualServer_VisualServer_LightType __pyx_t_7classes_12VisualServer_VisualServer_LightType;
 
 /* "classes/VisualServer.pxd":47
- * ctypedef enum ViewportMSAA :VIEWPORT_MSAA_DISABLED, VIEWPORT_MSAA_2X, VIEWPORT_MSAA_4X, VIEWPORT_MSAA_8X, VIEWPORT_MSAA_16X, VIEWPORT_MSAA_EXT_2X, VIEWPORT_MSAA_EXT_4X,
- * ctypedef enum LightType :LIGHT_DIRECTIONAL, LIGHT_OMNI, LIGHT_SPOT,
- * ctypedef enum CubeMapSide :CUBEMAP_LEFT, CUBEMAP_RIGHT, CUBEMAP_BOTTOM, CUBEMAP_TOP, CUBEMAP_FRONT, CUBEMAP_BACK,             # <<<<<<<<<<<<<<
+ * ctypedef enum VisualServer_ViewportMSAA :VIEWPORT_MSAA_DISABLED, VIEWPORT_MSAA_2X, VIEWPORT_MSAA_4X, VIEWPORT_MSAA_8X, VIEWPORT_MSAA_16X, VIEWPORT_MSAA_EXT_2X, VIEWPORT_MSAA_EXT_4X,
+ * ctypedef enum VisualServer_LightType :LIGHT_DIRECTIONAL, LIGHT_OMNI, LIGHT_SPOT,
+ * ctypedef enum VisualServer_CubeMapSide :CUBEMAP_LEFT, CUBEMAP_RIGHT, CUBEMAP_BOTTOM, CUBEMAP_TOP, CUBEMAP_FRONT, CUBEMAP_BACK,             # <<<<<<<<<<<<<<
  */
-enum __pyx_t_7classes_12VisualServer_CubeMapSide {
+enum __pyx_t_7classes_12VisualServer_VisualServer_CubeMapSide {
   __pyx_e_7classes_12VisualServer_CUBEMAP_LEFT,
   __pyx_e_7classes_12VisualServer_CUBEMAP_RIGHT,
   __pyx_e_7classes_12VisualServer_CUBEMAP_BOTTOM,
@@ -1753,7 +1753,7 @@ enum __pyx_t_7classes_12VisualServer_CubeMapSide {
   __pyx_e_7classes_12VisualServer_CUBEMAP_FRONT,
   __pyx_e_7classes_12VisualServer_CUBEMAP_BACK
 };
-typedef enum __pyx_t_7classes_12VisualServer_CubeMapSide __pyx_t_7classes_12VisualServer_CubeMapSide;
+typedef enum __pyx_t_7classes_12VisualServer_VisualServer_CubeMapSide __pyx_t_7classes_12VisualServer_VisualServer_CubeMapSide;
 
 /* "utils/Wrapper.pxd":2
  * from godot_api.binding cimport *
@@ -1773,7 +1773,7 @@ struct __pyx_obj_5utils_7Wrapper_Wrapper {
  * from utils.Wrapper cimport *
  * cdef class Object(Wrapper):             # <<<<<<<<<<<<<<
  *     pass
- * ctypedef enum ConnectFlags :CONNECT_DEFERRED, CONNECT_PERSIST, CONNECT_ONESHOT, CONNECT_REFERENCE_COUNTED,
+ * ctypedef enum Object_ConnectFlags :CONNECT_DEFERRED, CONNECT_PERSIST, CONNECT_ONESHOT, CONNECT_REFERENCE_COUNTED,
  */
 struct __pyx_obj_7classes_6Object_Object {
   struct __pyx_obj_5utils_7Wrapper_Wrapper __pyx_base;
@@ -1807,7 +1807,7 @@ struct __pyx_obj_7classes_8Resource_Resource {
  * cimport classes.Resource
  * cdef class Image(classes.Resource.Resource):             # <<<<<<<<<<<<<<
  *     pass
- * ctypedef enum AlphaMode :ALPHA_NONE, ALPHA_BIT, ALPHA_BLEND,
+ * ctypedef enum Image_AlphaMode :ALPHA_NONE, ALPHA_BIT, ALPHA_BLEND,
  */
 struct __pyx_obj_7classes_5Image_Image {
   struct __pyx_obj_7classes_8Resource_Resource __pyx_base;
@@ -2141,7 +2141,7 @@ struct __pyx_obj_4core_7vector3_7Vector3_Vector3 {
  * cimport classes.Object
  * cdef class VisualServer(classes.Object.Object):             # <<<<<<<<<<<<<<
  *     pass
- * ctypedef enum ReflectionProbeUpdateMode :REFLECTION_PROBE_UPDATE_ONCE, REFLECTION_PROBE_UPDATE_ALWAYS,
+ * ctypedef enum VisualServer_ReflectionProbeUpdateMode :REFLECTION_PROBE_UPDATE_ONCE, REFLECTION_PROBE_UPDATE_ALWAYS,
  */
 struct __pyx_obj_7classes_12VisualServer_VisualServer {
   struct __pyx_obj_7classes_6Object_Object __pyx_base;
@@ -2170,7 +2170,7 @@ static CYTHON_INLINE godot_object *__pyx_f_5utils_7Wrapper_7Wrapper_get_godot_ow
  * from utils.Wrapper cimport *
  * cdef class Object(Wrapper):             # <<<<<<<<<<<<<<
  *     pass
- * ctypedef enum ConnectFlags :CONNECT_DEFERRED, CONNECT_PERSIST, CONNECT_ONESHOT, CONNECT_REFERENCE_COUNTED,
+ * ctypedef enum Object_ConnectFlags :CONNECT_DEFERRED, CONNECT_PERSIST, CONNECT_ONESHOT, CONNECT_REFERENCE_COUNTED,
  */
 
 struct __pyx_vtabstruct_7classes_6Object_Object {
@@ -2210,7 +2210,7 @@ static struct __pyx_vtabstruct_7classes_8Resource_Resource *__pyx_vtabptr_7class
  * cimport classes.Resource
  * cdef class Image(classes.Resource.Resource):             # <<<<<<<<<<<<<<
  *     pass
- * ctypedef enum AlphaMode :ALPHA_NONE, ALPHA_BIT, ALPHA_BLEND,
+ * ctypedef enum Image_AlphaMode :ALPHA_NONE, ALPHA_BIT, ALPHA_BLEND,
  */
 
 struct __pyx_vtabstruct_7classes_5Image_Image {
@@ -2918,16 +2918,16 @@ static void __Pyx_AddTraceback(const char *funcname, int c_line,
 static CYTHON_INLINE PyObject* __Pyx_PyInt_From_int(int value);
 
 /* CIntToPy.proto */
-static CYTHON_INLINE PyObject* __Pyx_PyInt_From___pyx_t_7classes_12VisualServer_BlendShapeMode(__pyx_t_7classes_12VisualServer_BlendShapeMode value);
+static CYTHON_INLINE PyObject* __Pyx_PyInt_From___pyx_t_7classes_12VisualServer_VisualServer_BlendShapeMode(__pyx_t_7classes_12VisualServer_VisualServer_BlendShapeMode value);
 
 /* CIntToPy.proto */
-static CYTHON_INLINE PyObject* __Pyx_PyInt_From___pyx_t_7classes_12VisualServer_PrimitiveType(__pyx_t_7classes_12VisualServer_PrimitiveType value);
+static CYTHON_INLINE PyObject* __Pyx_PyInt_From___pyx_t_7classes_12VisualServer_VisualServer_PrimitiveType(__pyx_t_7classes_12VisualServer_VisualServer_PrimitiveType value);
 
 /* CIntToPy.proto */
-static CYTHON_INLINE PyObject* __Pyx_PyInt_From___pyx_t_7classes_5Image_Format(__pyx_t_7classes_5Image_Format value);
+static CYTHON_INLINE PyObject* __Pyx_PyInt_From___pyx_t_7classes_5Image_Image_Format(__pyx_t_7classes_5Image_Image_Format value);
 
 /* CIntToPy.proto */
-static CYTHON_INLINE PyObject* __Pyx_PyInt_From___pyx_t_7classes_12VisualServer_TextureType(__pyx_t_7classes_12VisualServer_TextureType value);
+static CYTHON_INLINE PyObject* __Pyx_PyInt_From___pyx_t_7classes_12VisualServer_VisualServer_TextureType(__pyx_t_7classes_12VisualServer_VisualServer_TextureType value);
 
 /* CIntFromPy.proto */
 static CYTHON_INLINE int __Pyx_PyInt_As_int(PyObject *);
@@ -40390,7 +40390,7 @@ static PyObject *__pyx_pw_7classes_12VisualServer_12VisualServer_425mesh_get_ble
 
 static PyObject *__pyx_pf_7classes_12VisualServer_12VisualServer_424mesh_get_blend_shape_mode(struct __pyx_obj_7classes_12VisualServer_VisualServer *__pyx_v_self, struct __pyx_obj_4core_3rid_3RID_RID *__pyx_v_mesh) {
   CYTHON_UNUSED godot_object *__pyx_v__owner;
-  __pyx_t_7classes_12VisualServer_BlendShapeMode *__pyx_v_ret;
+  __pyx_t_7classes_12VisualServer_VisualServer_BlendShapeMode *__pyx_v_ret;
   void *__pyx_v_args[1];
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
@@ -40406,7 +40406,7 @@ static PyObject *__pyx_pf_7classes_12VisualServer_12VisualServer_424mesh_get_ble
  *   def  mesh_get_blend_shape_mode(self,  RID mesh):
  *     cdef godot_object *_owner = self.godot_owner             # <<<<<<<<<<<<<<
  * 
- *     cdef BlendShapeMode* ret = NULL;
+ *     cdef VisualServer_BlendShapeMode* ret = NULL;
  */
   __pyx_t_1 = __pyx_v_self->__pyx_base.__pyx_base.godot_owner;
   __pyx_v__owner = __pyx_t_1;
@@ -40414,7 +40414,7 @@ static PyObject *__pyx_pf_7classes_12VisualServer_12VisualServer_424mesh_get_ble
   /* "classes/VisualServer.pyx":2900
  *     cdef godot_object *_owner = self.godot_owner
  * 
- *     cdef BlendShapeMode* ret = NULL;             # <<<<<<<<<<<<<<
+ *     cdef VisualServer_BlendShapeMode* ret = NULL;             # <<<<<<<<<<<<<<
  * 
  *     cdef void *args[1]
  */
@@ -40455,7 +40455,7 @@ static PyObject *__pyx_pf_7classes_12VisualServer_12VisualServer_424mesh_get_ble
  *   def  mesh_get_custom_aabb(self,  RID mesh):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_2 = __Pyx_PyInt_From___pyx_t_7classes_12VisualServer_BlendShapeMode((*__pyx_v_ret)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 2907, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyInt_From___pyx_t_7classes_12VisualServer_VisualServer_BlendShapeMode((*__pyx_v_ret)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 2907, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_r = __pyx_t_2;
   __pyx_t_2 = 0;
@@ -43350,7 +43350,7 @@ static PyObject *__pyx_pw_7classes_12VisualServer_12VisualServer_461mesh_surface
 
 static PyObject *__pyx_pf_7classes_12VisualServer_12VisualServer_460mesh_surface_get_primitive_type(struct __pyx_obj_7classes_12VisualServer_VisualServer *__pyx_v_self, struct __pyx_obj_4core_3rid_3RID_RID *__pyx_v_mesh, int __pyx_v_surface) {
   CYTHON_UNUSED godot_object *__pyx_v__owner;
-  __pyx_t_7classes_12VisualServer_PrimitiveType *__pyx_v_ret;
+  __pyx_t_7classes_12VisualServer_VisualServer_PrimitiveType *__pyx_v_ret;
   void *__pyx_v_args[2];
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
@@ -43366,7 +43366,7 @@ static PyObject *__pyx_pf_7classes_12VisualServer_12VisualServer_460mesh_surface
  *   def  mesh_surface_get_primitive_type(self,  RID mesh,  int surface):
  *     cdef godot_object *_owner = self.godot_owner             # <<<<<<<<<<<<<<
  * 
- *     cdef PrimitiveType* ret = NULL;
+ *     cdef VisualServer_PrimitiveType* ret = NULL;
  */
   __pyx_t_1 = __pyx_v_self->__pyx_base.__pyx_base.godot_owner;
   __pyx_v__owner = __pyx_t_1;
@@ -43374,7 +43374,7 @@ static PyObject *__pyx_pf_7classes_12VisualServer_12VisualServer_460mesh_surface
   /* "classes/VisualServer.pyx":3114
  *     cdef godot_object *_owner = self.godot_owner
  * 
- *     cdef PrimitiveType* ret = NULL;             # <<<<<<<<<<<<<<
+ *     cdef VisualServer_PrimitiveType* ret = NULL;             # <<<<<<<<<<<<<<
  * 
  *     cdef void *args[2]
  */
@@ -43424,7 +43424,7 @@ static PyObject *__pyx_pf_7classes_12VisualServer_12VisualServer_460mesh_surface
  *   def  mesh_surface_get_skeleton_aabb(self,  RID mesh,  int surface):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_2 = __Pyx_PyInt_From___pyx_t_7classes_12VisualServer_PrimitiveType((*__pyx_v_ret)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 3122, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyInt_From___pyx_t_7classes_12VisualServer_VisualServer_PrimitiveType((*__pyx_v_ret)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 3122, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_r = __pyx_t_2;
   __pyx_t_2 = 0;
@@ -56523,7 +56523,7 @@ static PyObject *__pyx_pw_7classes_12VisualServer_12VisualServer_645texture_get_
 
 static PyObject *__pyx_pf_7classes_12VisualServer_12VisualServer_644texture_get_format(struct __pyx_obj_7classes_12VisualServer_VisualServer *__pyx_v_self, struct __pyx_obj_4core_3rid_3RID_RID *__pyx_v_texture) {
   CYTHON_UNUSED godot_object *__pyx_v__owner;
-  __pyx_t_7classes_5Image_Format *__pyx_v_ret;
+  __pyx_t_7classes_5Image_Image_Format *__pyx_v_ret;
   void *__pyx_v_args[1];
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
@@ -56539,7 +56539,7 @@ static PyObject *__pyx_pf_7classes_12VisualServer_12VisualServer_644texture_get_
  *   def  texture_get_format(self,  RID texture):
  *     cdef godot_object *_owner = self.godot_owner             # <<<<<<<<<<<<<<
  * 
- *     cdef classes.Image.Format* ret = NULL;
+ *     cdef classes.Image.Image_Format* ret = NULL;
  */
   __pyx_t_1 = __pyx_v_self->__pyx_base.__pyx_base.godot_owner;
   __pyx_v__owner = __pyx_t_1;
@@ -56547,7 +56547,7 @@ static PyObject *__pyx_pf_7classes_12VisualServer_12VisualServer_644texture_get_
   /* "classes/VisualServer.pyx":4037
  *     cdef godot_object *_owner = self.godot_owner
  * 
- *     cdef classes.Image.Format* ret = NULL;             # <<<<<<<<<<<<<<
+ *     cdef classes.Image.Image_Format* ret = NULL;             # <<<<<<<<<<<<<<
  * 
  *     cdef void *args[1]
  */
@@ -56588,7 +56588,7 @@ static PyObject *__pyx_pf_7classes_12VisualServer_12VisualServer_644texture_get_
  *   def  texture_get_height(self,  RID texture):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_2 = __Pyx_PyInt_From___pyx_t_7classes_5Image_Format((*__pyx_v_ret)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 4044, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyInt_From___pyx_t_7classes_5Image_Image_Format((*__pyx_v_ret)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 4044, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_r = __pyx_t_2;
   __pyx_t_2 = 0;
@@ -57007,7 +57007,7 @@ static PyObject *__pyx_pw_7classes_12VisualServer_12VisualServer_653texture_get_
 
 static PyObject *__pyx_pf_7classes_12VisualServer_12VisualServer_652texture_get_type(struct __pyx_obj_7classes_12VisualServer_VisualServer *__pyx_v_self, struct __pyx_obj_4core_3rid_3RID_RID *__pyx_v_texture) {
   CYTHON_UNUSED godot_object *__pyx_v__owner;
-  __pyx_t_7classes_12VisualServer_TextureType *__pyx_v_ret;
+  __pyx_t_7classes_12VisualServer_VisualServer_TextureType *__pyx_v_ret;
   void *__pyx_v_args[1];
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
@@ -57023,7 +57023,7 @@ static PyObject *__pyx_pf_7classes_12VisualServer_12VisualServer_652texture_get_
  *   def  texture_get_type(self,  RID texture):
  *     cdef godot_object *_owner = self.godot_owner             # <<<<<<<<<<<<<<
  * 
- *     cdef TextureType* ret = NULL;
+ *     cdef VisualServer_TextureType* ret = NULL;
  */
   __pyx_t_1 = __pyx_v_self->__pyx_base.__pyx_base.godot_owner;
   __pyx_v__owner = __pyx_t_1;
@@ -57031,7 +57031,7 @@ static PyObject *__pyx_pf_7classes_12VisualServer_12VisualServer_652texture_get_
   /* "classes/VisualServer.pyx":4085
  *     cdef godot_object *_owner = self.godot_owner
  * 
- *     cdef TextureType* ret = NULL;             # <<<<<<<<<<<<<<
+ *     cdef VisualServer_TextureType* ret = NULL;             # <<<<<<<<<<<<<<
  * 
  *     cdef void *args[1]
  */
@@ -57072,7 +57072,7 @@ static PyObject *__pyx_pf_7classes_12VisualServer_12VisualServer_652texture_get_
  *   def  texture_get_width(self,  RID texture):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_2 = __Pyx_PyInt_From___pyx_t_7classes_12VisualServer_TextureType((*__pyx_v_ret)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 4092, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyInt_From___pyx_t_7classes_12VisualServer_VisualServer_TextureType((*__pyx_v_ret)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 4092, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_r = __pyx_t_2;
   __pyx_t_2 = 0;
@@ -63390,7 +63390,7 @@ static CYTHON_INLINE void __pyx_f_4core_7variant_7Variant_7Variant_new_variant(C
  *     cdef inline void new_variant(self, i):
  *         print("new_variant", type(i))             # <<<<<<<<<<<<<<
  * 
- * ctypedef enum Type:
+ * ctypedef enum Variant_Type:
  */
   __pyx_t_1 = PyTuple_New(2); if (unlikely(!__pyx_t_1)) __PYX_ERR(4, 15, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
@@ -65285,39 +65285,10 @@ static int __pyx_import_star_set(PyObject *o, PyObject* py_name, char *name) {
   static const char* internal_type_names[] = {
     "AABB",
     "Array",
-    "ArrayFormat",
-    "ArrayType",
-    "Axis",
     "Basis",
-    "BlendShapeMode",
-    "CanvasLightMode",
-    "CanvasLightShadowFilter",
-    "CanvasOccluderPolygonCullMode",
     "Color",
-    "CubeMapSide",
     "Dictionary",
-    "EnvironmentBG",
-    "EnvironmentDOFBlurQuality",
-    "EnvironmentGlowBlendMode",
-    "EnvironmentSSAOBlur",
-    "EnvironmentSSAOQuality",
-    "EnvironmentToneMapper",
-    "Features",
-    "InstanceFlags",
-    "InstanceType",
-    "LightDirectionalShadowDepthRangeMode",
-    "LightDirectionalShadowMode",
-    "LightOmniShadowDetail",
-    "LightOmniShadowMode",
-    "LightParam",
-    "LightType",
-    "MultimeshColorFormat",
-    "MultimeshCustomDataFormat",
-    "MultimeshTransformFormat",
-    "NinePatchAxisMode",
     "NodePath",
-    "Operator",
-    "ParticlesDrawOrder",
     "Plane",
     "PoolByteArray",
     "PoolColorArray",
@@ -65326,32 +65297,61 @@ static int __pyx_import_star_set(PyObject *o, PyObject* py_name, char *name) {
     "PoolStringArray",
     "PoolVector2Array",
     "PoolVector3Array",
-    "PrimitiveType",
     "Quat",
     "RID",
     "Rect2",
     "Reference",
-    "ReflectionProbeUpdateMode",
-    "RenderInfo",
-    "ScenarioDebugMode",
-    "ShaderMode",
-    "ShadowCastingSetting",
     "String",
-    "TextureFlags",
-    "TextureType",
     "Transform",
     "Transform2D",
-    "Type",
     "Variant",
+    "Variant_Operator",
+    "Variant_Type",
     "Vector2",
     "Vector3",
-    "ViewportClearMode",
-    "ViewportDebugDraw",
-    "ViewportMSAA",
-    "ViewportRenderInfo",
-    "ViewportUpdateMode",
-    "ViewportUsage",
+    "Vector3_Axis",
     "VisualServer",
+    "VisualServer_ArrayFormat",
+    "VisualServer_ArrayType",
+    "VisualServer_BlendShapeMode",
+    "VisualServer_CanvasLightMode",
+    "VisualServer_CanvasLightShadowFilter",
+    "VisualServer_CanvasOccluderPolygonCullMode",
+    "VisualServer_CubeMapSide",
+    "VisualServer_EnvironmentBG",
+    "VisualServer_EnvironmentDOFBlurQuality",
+    "VisualServer_EnvironmentGlowBlendMode",
+    "VisualServer_EnvironmentSSAOBlur",
+    "VisualServer_EnvironmentSSAOQuality",
+    "VisualServer_EnvironmentToneMapper",
+    "VisualServer_Features",
+    "VisualServer_InstanceFlags",
+    "VisualServer_InstanceType",
+    "VisualServer_LightDirectionalShadowDepthRangeMode",
+    "VisualServer_LightDirectionalShadowMode",
+    "VisualServer_LightOmniShadowDetail",
+    "VisualServer_LightOmniShadowMode",
+    "VisualServer_LightParam",
+    "VisualServer_LightType",
+    "VisualServer_MultimeshColorFormat",
+    "VisualServer_MultimeshCustomDataFormat",
+    "VisualServer_MultimeshTransformFormat",
+    "VisualServer_NinePatchAxisMode",
+    "VisualServer_ParticlesDrawOrder",
+    "VisualServer_PrimitiveType",
+    "VisualServer_ReflectionProbeUpdateMode",
+    "VisualServer_RenderInfo",
+    "VisualServer_ScenarioDebugMode",
+    "VisualServer_ShaderMode",
+    "VisualServer_ShadowCastingSetting",
+    "VisualServer_TextureFlags",
+    "VisualServer_TextureType",
+    "VisualServer_ViewportClearMode",
+    "VisualServer_ViewportDebugDraw",
+    "VisualServer_ViewportMSAA",
+    "VisualServer_ViewportRenderInfo",
+    "VisualServer_ViewportUpdateMode",
+    "VisualServer_ViewportUsage",
     "Wrapper",
     "bool",
     "godot_aabb",
@@ -69302,24 +69302,24 @@ static CYTHON_INLINE PyObject* __Pyx_PyInt_From_int(int value) {
 }
 
 /* CIntToPy */
-static CYTHON_INLINE PyObject* __Pyx_PyInt_From___pyx_t_7classes_12VisualServer_BlendShapeMode(__pyx_t_7classes_12VisualServer_BlendShapeMode value) {
-    const __pyx_t_7classes_12VisualServer_BlendShapeMode neg_one = (__pyx_t_7classes_12VisualServer_BlendShapeMode) ((__pyx_t_7classes_12VisualServer_BlendShapeMode) 0 - (__pyx_t_7classes_12VisualServer_BlendShapeMode) 1), const_zero = (__pyx_t_7classes_12VisualServer_BlendShapeMode) 0;
+static CYTHON_INLINE PyObject* __Pyx_PyInt_From___pyx_t_7classes_12VisualServer_VisualServer_BlendShapeMode(__pyx_t_7classes_12VisualServer_VisualServer_BlendShapeMode value) {
+    const __pyx_t_7classes_12VisualServer_VisualServer_BlendShapeMode neg_one = (__pyx_t_7classes_12VisualServer_VisualServer_BlendShapeMode) ((__pyx_t_7classes_12VisualServer_VisualServer_BlendShapeMode) 0 - (__pyx_t_7classes_12VisualServer_VisualServer_BlendShapeMode) 1), const_zero = (__pyx_t_7classes_12VisualServer_VisualServer_BlendShapeMode) 0;
     const int is_unsigned = neg_one > const_zero;
     if (is_unsigned) {
-        if (sizeof(__pyx_t_7classes_12VisualServer_BlendShapeMode) < sizeof(long)) {
+        if (sizeof(__pyx_t_7classes_12VisualServer_VisualServer_BlendShapeMode) < sizeof(long)) {
             return PyInt_FromLong((long) value);
-        } else if (sizeof(__pyx_t_7classes_12VisualServer_BlendShapeMode) <= sizeof(unsigned long)) {
+        } else if (sizeof(__pyx_t_7classes_12VisualServer_VisualServer_BlendShapeMode) <= sizeof(unsigned long)) {
             return PyLong_FromUnsignedLong((unsigned long) value);
 #ifdef HAVE_LONG_LONG
-        } else if (sizeof(__pyx_t_7classes_12VisualServer_BlendShapeMode) <= sizeof(unsigned PY_LONG_LONG)) {
+        } else if (sizeof(__pyx_t_7classes_12VisualServer_VisualServer_BlendShapeMode) <= sizeof(unsigned PY_LONG_LONG)) {
             return PyLong_FromUnsignedLongLong((unsigned PY_LONG_LONG) value);
 #endif
         }
     } else {
-        if (sizeof(__pyx_t_7classes_12VisualServer_BlendShapeMode) <= sizeof(long)) {
+        if (sizeof(__pyx_t_7classes_12VisualServer_VisualServer_BlendShapeMode) <= sizeof(long)) {
             return PyInt_FromLong((long) value);
 #ifdef HAVE_LONG_LONG
-        } else if (sizeof(__pyx_t_7classes_12VisualServer_BlendShapeMode) <= sizeof(PY_LONG_LONG)) {
+        } else if (sizeof(__pyx_t_7classes_12VisualServer_VisualServer_BlendShapeMode) <= sizeof(PY_LONG_LONG)) {
             return PyLong_FromLongLong((PY_LONG_LONG) value);
 #endif
         }
@@ -69327,30 +69327,30 @@ static CYTHON_INLINE PyObject* __Pyx_PyInt_From___pyx_t_7classes_12VisualServer_
     {
         int one = 1; int little = (int)*(unsigned char *)&one;
         unsigned char *bytes = (unsigned char *)&value;
-        return _PyLong_FromByteArray(bytes, sizeof(__pyx_t_7classes_12VisualServer_BlendShapeMode),
+        return _PyLong_FromByteArray(bytes, sizeof(__pyx_t_7classes_12VisualServer_VisualServer_BlendShapeMode),
                                      little, !is_unsigned);
     }
 }
 
 /* CIntToPy */
-static CYTHON_INLINE PyObject* __Pyx_PyInt_From___pyx_t_7classes_12VisualServer_PrimitiveType(__pyx_t_7classes_12VisualServer_PrimitiveType value) {
-    const __pyx_t_7classes_12VisualServer_PrimitiveType neg_one = (__pyx_t_7classes_12VisualServer_PrimitiveType) ((__pyx_t_7classes_12VisualServer_PrimitiveType) 0 - (__pyx_t_7classes_12VisualServer_PrimitiveType) 1), const_zero = (__pyx_t_7classes_12VisualServer_PrimitiveType) 0;
+static CYTHON_INLINE PyObject* __Pyx_PyInt_From___pyx_t_7classes_12VisualServer_VisualServer_PrimitiveType(__pyx_t_7classes_12VisualServer_VisualServer_PrimitiveType value) {
+    const __pyx_t_7classes_12VisualServer_VisualServer_PrimitiveType neg_one = (__pyx_t_7classes_12VisualServer_VisualServer_PrimitiveType) ((__pyx_t_7classes_12VisualServer_VisualServer_PrimitiveType) 0 - (__pyx_t_7classes_12VisualServer_VisualServer_PrimitiveType) 1), const_zero = (__pyx_t_7classes_12VisualServer_VisualServer_PrimitiveType) 0;
     const int is_unsigned = neg_one > const_zero;
     if (is_unsigned) {
-        if (sizeof(__pyx_t_7classes_12VisualServer_PrimitiveType) < sizeof(long)) {
+        if (sizeof(__pyx_t_7classes_12VisualServer_VisualServer_PrimitiveType) < sizeof(long)) {
             return PyInt_FromLong((long) value);
-        } else if (sizeof(__pyx_t_7classes_12VisualServer_PrimitiveType) <= sizeof(unsigned long)) {
+        } else if (sizeof(__pyx_t_7classes_12VisualServer_VisualServer_PrimitiveType) <= sizeof(unsigned long)) {
             return PyLong_FromUnsignedLong((unsigned long) value);
 #ifdef HAVE_LONG_LONG
-        } else if (sizeof(__pyx_t_7classes_12VisualServer_PrimitiveType) <= sizeof(unsigned PY_LONG_LONG)) {
+        } else if (sizeof(__pyx_t_7classes_12VisualServer_VisualServer_PrimitiveType) <= sizeof(unsigned PY_LONG_LONG)) {
             return PyLong_FromUnsignedLongLong((unsigned PY_LONG_LONG) value);
 #endif
         }
     } else {
-        if (sizeof(__pyx_t_7classes_12VisualServer_PrimitiveType) <= sizeof(long)) {
+        if (sizeof(__pyx_t_7classes_12VisualServer_VisualServer_PrimitiveType) <= sizeof(long)) {
             return PyInt_FromLong((long) value);
 #ifdef HAVE_LONG_LONG
-        } else if (sizeof(__pyx_t_7classes_12VisualServer_PrimitiveType) <= sizeof(PY_LONG_LONG)) {
+        } else if (sizeof(__pyx_t_7classes_12VisualServer_VisualServer_PrimitiveType) <= sizeof(PY_LONG_LONG)) {
             return PyLong_FromLongLong((PY_LONG_LONG) value);
 #endif
         }
@@ -69358,30 +69358,30 @@ static CYTHON_INLINE PyObject* __Pyx_PyInt_From___pyx_t_7classes_12VisualServer_
     {
         int one = 1; int little = (int)*(unsigned char *)&one;
         unsigned char *bytes = (unsigned char *)&value;
-        return _PyLong_FromByteArray(bytes, sizeof(__pyx_t_7classes_12VisualServer_PrimitiveType),
+        return _PyLong_FromByteArray(bytes, sizeof(__pyx_t_7classes_12VisualServer_VisualServer_PrimitiveType),
                                      little, !is_unsigned);
     }
 }
 
 /* CIntToPy */
-static CYTHON_INLINE PyObject* __Pyx_PyInt_From___pyx_t_7classes_5Image_Format(__pyx_t_7classes_5Image_Format value) {
-    const __pyx_t_7classes_5Image_Format neg_one = (__pyx_t_7classes_5Image_Format) ((__pyx_t_7classes_5Image_Format) 0 - (__pyx_t_7classes_5Image_Format) 1), const_zero = (__pyx_t_7classes_5Image_Format) 0;
+static CYTHON_INLINE PyObject* __Pyx_PyInt_From___pyx_t_7classes_5Image_Image_Format(__pyx_t_7classes_5Image_Image_Format value) {
+    const __pyx_t_7classes_5Image_Image_Format neg_one = (__pyx_t_7classes_5Image_Image_Format) ((__pyx_t_7classes_5Image_Image_Format) 0 - (__pyx_t_7classes_5Image_Image_Format) 1), const_zero = (__pyx_t_7classes_5Image_Image_Format) 0;
     const int is_unsigned = neg_one > const_zero;
     if (is_unsigned) {
-        if (sizeof(__pyx_t_7classes_5Image_Format) < sizeof(long)) {
+        if (sizeof(__pyx_t_7classes_5Image_Image_Format) < sizeof(long)) {
             return PyInt_FromLong((long) value);
-        } else if (sizeof(__pyx_t_7classes_5Image_Format) <= sizeof(unsigned long)) {
+        } else if (sizeof(__pyx_t_7classes_5Image_Image_Format) <= sizeof(unsigned long)) {
             return PyLong_FromUnsignedLong((unsigned long) value);
 #ifdef HAVE_LONG_LONG
-        } else if (sizeof(__pyx_t_7classes_5Image_Format) <= sizeof(unsigned PY_LONG_LONG)) {
+        } else if (sizeof(__pyx_t_7classes_5Image_Image_Format) <= sizeof(unsigned PY_LONG_LONG)) {
             return PyLong_FromUnsignedLongLong((unsigned PY_LONG_LONG) value);
 #endif
         }
     } else {
-        if (sizeof(__pyx_t_7classes_5Image_Format) <= sizeof(long)) {
+        if (sizeof(__pyx_t_7classes_5Image_Image_Format) <= sizeof(long)) {
             return PyInt_FromLong((long) value);
 #ifdef HAVE_LONG_LONG
-        } else if (sizeof(__pyx_t_7classes_5Image_Format) <= sizeof(PY_LONG_LONG)) {
+        } else if (sizeof(__pyx_t_7classes_5Image_Image_Format) <= sizeof(PY_LONG_LONG)) {
             return PyLong_FromLongLong((PY_LONG_LONG) value);
 #endif
         }
@@ -69389,30 +69389,30 @@ static CYTHON_INLINE PyObject* __Pyx_PyInt_From___pyx_t_7classes_5Image_Format(_
     {
         int one = 1; int little = (int)*(unsigned char *)&one;
         unsigned char *bytes = (unsigned char *)&value;
-        return _PyLong_FromByteArray(bytes, sizeof(__pyx_t_7classes_5Image_Format),
+        return _PyLong_FromByteArray(bytes, sizeof(__pyx_t_7classes_5Image_Image_Format),
                                      little, !is_unsigned);
     }
 }
 
 /* CIntToPy */
-static CYTHON_INLINE PyObject* __Pyx_PyInt_From___pyx_t_7classes_12VisualServer_TextureType(__pyx_t_7classes_12VisualServer_TextureType value) {
-    const __pyx_t_7classes_12VisualServer_TextureType neg_one = (__pyx_t_7classes_12VisualServer_TextureType) ((__pyx_t_7classes_12VisualServer_TextureType) 0 - (__pyx_t_7classes_12VisualServer_TextureType) 1), const_zero = (__pyx_t_7classes_12VisualServer_TextureType) 0;
+static CYTHON_INLINE PyObject* __Pyx_PyInt_From___pyx_t_7classes_12VisualServer_VisualServer_TextureType(__pyx_t_7classes_12VisualServer_VisualServer_TextureType value) {
+    const __pyx_t_7classes_12VisualServer_VisualServer_TextureType neg_one = (__pyx_t_7classes_12VisualServer_VisualServer_TextureType) ((__pyx_t_7classes_12VisualServer_VisualServer_TextureType) 0 - (__pyx_t_7classes_12VisualServer_VisualServer_TextureType) 1), const_zero = (__pyx_t_7classes_12VisualServer_VisualServer_TextureType) 0;
     const int is_unsigned = neg_one > const_zero;
     if (is_unsigned) {
-        if (sizeof(__pyx_t_7classes_12VisualServer_TextureType) < sizeof(long)) {
+        if (sizeof(__pyx_t_7classes_12VisualServer_VisualServer_TextureType) < sizeof(long)) {
             return PyInt_FromLong((long) value);
-        } else if (sizeof(__pyx_t_7classes_12VisualServer_TextureType) <= sizeof(unsigned long)) {
+        } else if (sizeof(__pyx_t_7classes_12VisualServer_VisualServer_TextureType) <= sizeof(unsigned long)) {
             return PyLong_FromUnsignedLong((unsigned long) value);
 #ifdef HAVE_LONG_LONG
-        } else if (sizeof(__pyx_t_7classes_12VisualServer_TextureType) <= sizeof(unsigned PY_LONG_LONG)) {
+        } else if (sizeof(__pyx_t_7classes_12VisualServer_VisualServer_TextureType) <= sizeof(unsigned PY_LONG_LONG)) {
             return PyLong_FromUnsignedLongLong((unsigned PY_LONG_LONG) value);
 #endif
         }
     } else {
-        if (sizeof(__pyx_t_7classes_12VisualServer_TextureType) <= sizeof(long)) {
+        if (sizeof(__pyx_t_7classes_12VisualServer_VisualServer_TextureType) <= sizeof(long)) {
             return PyInt_FromLong((long) value);
 #ifdef HAVE_LONG_LONG
-        } else if (sizeof(__pyx_t_7classes_12VisualServer_TextureType) <= sizeof(PY_LONG_LONG)) {
+        } else if (sizeof(__pyx_t_7classes_12VisualServer_VisualServer_TextureType) <= sizeof(PY_LONG_LONG)) {
             return PyLong_FromLongLong((PY_LONG_LONG) value);
 #endif
         }
@@ -69420,7 +69420,7 @@ static CYTHON_INLINE PyObject* __Pyx_PyInt_From___pyx_t_7classes_12VisualServer_
     {
         int one = 1; int little = (int)*(unsigned char *)&one;
         unsigned char *bytes = (unsigned char *)&value;
-        return _PyLong_FromByteArray(bytes, sizeof(__pyx_t_7classes_12VisualServer_TextureType),
+        return _PyLong_FromByteArray(bytes, sizeof(__pyx_t_7classes_12VisualServer_VisualServer_TextureType),
                                      little, !is_unsigned);
     }
 }

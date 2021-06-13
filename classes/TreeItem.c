@@ -894,22 +894,22 @@ struct __pyx_obj_7classes_8TreeItem_TreeItem;
 /* "classes/Object.pxd":7
  * cdef class Object(Wrapper):
  *     pass
- * ctypedef enum ConnectFlags :CONNECT_DEFERRED, CONNECT_PERSIST, CONNECT_ONESHOT, CONNECT_REFERENCE_COUNTED,             # <<<<<<<<<<<<<<
+ * ctypedef enum Object_ConnectFlags :CONNECT_DEFERRED, CONNECT_PERSIST, CONNECT_ONESHOT, CONNECT_REFERENCE_COUNTED,             # <<<<<<<<<<<<<<
  */
-enum __pyx_t_7classes_6Object_ConnectFlags {
+enum __pyx_t_7classes_6Object_Object_ConnectFlags {
   __pyx_e_7classes_6Object_CONNECT_DEFERRED,
   __pyx_e_7classes_6Object_CONNECT_PERSIST,
   __pyx_e_7classes_6Object_CONNECT_ONESHOT,
   __pyx_e_7classes_6Object_CONNECT_REFERENCE_COUNTED
 };
-typedef enum __pyx_t_7classes_6Object_ConnectFlags __pyx_t_7classes_6Object_ConnectFlags;
+typedef enum __pyx_t_7classes_6Object_Object_ConnectFlags __pyx_t_7classes_6Object_Object_ConnectFlags;
 
 /* "classes/Texture.pxd":7
  * cdef class Texture(classes.Resource.Resource):
  *     pass
- * ctypedef enum Flags :FLAG_MIPMAPS, FLAG_REPEAT, FLAG_FILTER, FLAGS_DEFAULT, FLAG_ANISOTROPIC_FILTER, FLAG_CONVERT_TO_LINEAR, FLAG_MIRRORED_REPEAT, FLAG_VIDEO_SURFACE,             # <<<<<<<<<<<<<<
+ * ctypedef enum Texture_Flags :FLAG_MIPMAPS, FLAG_REPEAT, FLAG_FILTER, FLAGS_DEFAULT, FLAG_ANISOTROPIC_FILTER, FLAG_CONVERT_TO_LINEAR, FLAG_MIRRORED_REPEAT, FLAG_VIDEO_SURFACE,             # <<<<<<<<<<<<<<
  */
-enum __pyx_t_7classes_7Texture_Flags {
+enum __pyx_t_7classes_7Texture_Texture_Flags {
   __pyx_e_7classes_7Texture_FLAG_MIPMAPS,
   __pyx_e_7classes_7Texture_FLAG_REPEAT,
   __pyx_e_7classes_7Texture_FLAG_FILTER,
@@ -919,16 +919,16 @@ enum __pyx_t_7classes_7Texture_Flags {
   __pyx_e_7classes_7Texture_FLAG_MIRRORED_REPEAT,
   __pyx_e_7classes_7Texture_FLAG_VIDEO_SURFACE
 };
-typedef enum __pyx_t_7classes_7Texture_Flags __pyx_t_7classes_7Texture_Flags;
+typedef enum __pyx_t_7classes_7Texture_Texture_Flags __pyx_t_7classes_7Texture_Texture_Flags;
 
 /* "core/variant/Variant.pxd":17
  *         print("new_variant", type(i))
  * 
- * ctypedef enum Type:             # <<<<<<<<<<<<<<
+ * ctypedef enum Variant_Type:             # <<<<<<<<<<<<<<
  *     NIL,
  *     # atomic types
  */
-enum __pyx_t_4core_7variant_7Variant_Type {
+enum __pyx_t_4core_7variant_7Variant_Variant_Type {
   __pyx_e_4core_7variant_7Variant_NIL,
   __pyx_e_4core_7variant_7Variant_BOOL,
   __pyx_e_4core_7variant_7Variant_INT,
@@ -958,16 +958,16 @@ enum __pyx_t_4core_7variant_7Variant_Type {
   __pyx_e_4core_7variant_7Variant_POOL_COLOR_ARRAY,
   __pyx_e_4core_7variant_7Variant_VARIANT_MAX
 };
-typedef enum __pyx_t_4core_7variant_7Variant_Type __pyx_t_4core_7variant_7Variant_Type;
+typedef enum __pyx_t_4core_7variant_7Variant_Variant_Type __pyx_t_4core_7variant_7Variant_Variant_Type;
 
 /* "core/variant/Variant.pxd":58
  * 
  * 
- * ctypedef enum Operator :             # <<<<<<<<<<<<<<
+ * ctypedef enum Variant_Operator :             # <<<<<<<<<<<<<<
  * 
  *     #comparation
  */
-enum __pyx_t_4core_7variant_7Variant_Operator {
+enum __pyx_t_4core_7variant_7Variant_Variant_Operator {
   __pyx_e_4core_7variant_7Variant_OP_EQUAL,
   __pyx_e_4core_7variant_7Variant_OP_NOT_EQUAL,
   __pyx_e_4core_7variant_7Variant_OP_LESS,
@@ -995,48 +995,48 @@ enum __pyx_t_4core_7variant_7Variant_Operator {
   __pyx_e_4core_7variant_7Variant_OP_IN,
   __pyx_e_4core_7variant_7Variant_OP_MAX
 };
-typedef enum __pyx_t_4core_7variant_7Variant_Operator __pyx_t_4core_7variant_7Variant_Operator;
+typedef enum __pyx_t_4core_7variant_7Variant_Variant_Operator __pyx_t_4core_7variant_7Variant_Variant_Operator;
 
 /* "core/vector3/Vector3.pxd":15
  * 
  * 
- * ctypedef enum Axis :             # <<<<<<<<<<<<<<
- *     AXIS_X,
- *     AXIS_Y,
+ * ctypedef enum Vector3_Axis :             # <<<<<<<<<<<<<<
+ *     Vector3_AXIS_X,
+ *     Vector3_AXIS_Y,
  */
-enum __pyx_t_4core_7vector3_7Vector3_Axis {
-  __pyx_e_4core_7vector3_7Vector3_AXIS_X,
-  __pyx_e_4core_7vector3_7Vector3_AXIS_Y,
-  __pyx_e_4core_7vector3_7Vector3_AXIS_Z
+enum __pyx_t_4core_7vector3_7Vector3_Vector3_Axis {
+  __pyx_e_4core_7vector3_7Vector3_Vector3_AXIS_X,
+  __pyx_e_4core_7vector3_7Vector3_Vector3_AXIS_Y,
+  __pyx_e_4core_7vector3_7Vector3_Vector3_AXIS_Z
 };
-typedef enum __pyx_t_4core_7vector3_7Vector3_Axis __pyx_t_4core_7vector3_7Vector3_Axis;
+typedef enum __pyx_t_4core_7vector3_7Vector3_Vector3_Axis __pyx_t_4core_7vector3_7Vector3_Vector3_Axis;
 
 /* "classes/TreeItem.pxd":7
  * cdef class TreeItem(classes.Object.Object):
  *     pass
- * ctypedef enum TreeCellMode :CELL_MODE_STRING, CELL_MODE_CHECK, CELL_MODE_RANGE, CELL_MODE_ICON, CELL_MODE_CUSTOM,             # <<<<<<<<<<<<<<
- * ctypedef enum TextAlign :ALIGN_LEFT, ALIGN_CENTER, ALIGN_RIGHT,
+ * ctypedef enum TreeItem_TreeCellMode :CELL_MODE_STRING, CELL_MODE_CHECK, CELL_MODE_RANGE, CELL_MODE_ICON, CELL_MODE_CUSTOM,             # <<<<<<<<<<<<<<
+ * ctypedef enum TreeItem_TextAlign :ALIGN_LEFT, ALIGN_CENTER, ALIGN_RIGHT,
  */
-enum __pyx_t_7classes_8TreeItem_TreeCellMode {
+enum __pyx_t_7classes_8TreeItem_TreeItem_TreeCellMode {
   __pyx_e_7classes_8TreeItem_CELL_MODE_STRING,
   __pyx_e_7classes_8TreeItem_CELL_MODE_CHECK,
   __pyx_e_7classes_8TreeItem_CELL_MODE_RANGE,
   __pyx_e_7classes_8TreeItem_CELL_MODE_ICON,
   __pyx_e_7classes_8TreeItem_CELL_MODE_CUSTOM
 };
-typedef enum __pyx_t_7classes_8TreeItem_TreeCellMode __pyx_t_7classes_8TreeItem_TreeCellMode;
+typedef enum __pyx_t_7classes_8TreeItem_TreeItem_TreeCellMode __pyx_t_7classes_8TreeItem_TreeItem_TreeCellMode;
 
 /* "classes/TreeItem.pxd":8
  *     pass
- * ctypedef enum TreeCellMode :CELL_MODE_STRING, CELL_MODE_CHECK, CELL_MODE_RANGE, CELL_MODE_ICON, CELL_MODE_CUSTOM,
- * ctypedef enum TextAlign :ALIGN_LEFT, ALIGN_CENTER, ALIGN_RIGHT,             # <<<<<<<<<<<<<<
+ * ctypedef enum TreeItem_TreeCellMode :CELL_MODE_STRING, CELL_MODE_CHECK, CELL_MODE_RANGE, CELL_MODE_ICON, CELL_MODE_CUSTOM,
+ * ctypedef enum TreeItem_TextAlign :ALIGN_LEFT, ALIGN_CENTER, ALIGN_RIGHT,             # <<<<<<<<<<<<<<
  */
-enum __pyx_t_7classes_8TreeItem_TextAlign {
+enum __pyx_t_7classes_8TreeItem_TreeItem_TextAlign {
   __pyx_e_7classes_8TreeItem_ALIGN_LEFT,
   __pyx_e_7classes_8TreeItem_ALIGN_CENTER,
   __pyx_e_7classes_8TreeItem_ALIGN_RIGHT
 };
-typedef enum __pyx_t_7classes_8TreeItem_TextAlign __pyx_t_7classes_8TreeItem_TextAlign;
+typedef enum __pyx_t_7classes_8TreeItem_TreeItem_TextAlign __pyx_t_7classes_8TreeItem_TreeItem_TextAlign;
 
 /* "utils/Wrapper.pxd":2
  * from godot_api.binding cimport *
@@ -1056,7 +1056,7 @@ struct __pyx_obj_5utils_7Wrapper_Wrapper {
  * from utils.Wrapper cimport *
  * cdef class Object(Wrapper):             # <<<<<<<<<<<<<<
  *     pass
- * ctypedef enum ConnectFlags :CONNECT_DEFERRED, CONNECT_PERSIST, CONNECT_ONESHOT, CONNECT_REFERENCE_COUNTED,
+ * ctypedef enum Object_ConnectFlags :CONNECT_DEFERRED, CONNECT_PERSIST, CONNECT_ONESHOT, CONNECT_REFERENCE_COUNTED,
  */
 struct __pyx_obj_7classes_6Object_Object {
   struct __pyx_obj_5utils_7Wrapper_Wrapper __pyx_base;
@@ -1090,7 +1090,7 @@ struct __pyx_obj_7classes_8Resource_Resource {
  * cimport classes.Resource
  * cdef class Texture(classes.Resource.Resource):             # <<<<<<<<<<<<<<
  *     pass
- * ctypedef enum Flags :FLAG_MIPMAPS, FLAG_REPEAT, FLAG_FILTER, FLAGS_DEFAULT, FLAG_ANISOTROPIC_FILTER, FLAG_CONVERT_TO_LINEAR, FLAG_MIRRORED_REPEAT, FLAG_VIDEO_SURFACE,
+ * ctypedef enum Texture_Flags :FLAG_MIPMAPS, FLAG_REPEAT, FLAG_FILTER, FLAGS_DEFAULT, FLAG_ANISOTROPIC_FILTER, FLAG_CONVERT_TO_LINEAR, FLAG_MIRRORED_REPEAT, FLAG_VIDEO_SURFACE,
  */
 struct __pyx_obj_7classes_7Texture_Texture {
   struct __pyx_obj_7classes_8Resource_Resource __pyx_base;
@@ -1424,7 +1424,7 @@ struct __pyx_obj_4core_7vector3_7Vector3_Vector3 {
  * cimport classes.Object
  * cdef class TreeItem(classes.Object.Object):             # <<<<<<<<<<<<<<
  *     pass
- * ctypedef enum TreeCellMode :CELL_MODE_STRING, CELL_MODE_CHECK, CELL_MODE_RANGE, CELL_MODE_ICON, CELL_MODE_CUSTOM,
+ * ctypedef enum TreeItem_TreeCellMode :CELL_MODE_STRING, CELL_MODE_CHECK, CELL_MODE_RANGE, CELL_MODE_ICON, CELL_MODE_CUSTOM,
  */
 struct __pyx_obj_7classes_8TreeItem_TreeItem {
   struct __pyx_obj_7classes_6Object_Object __pyx_base;
@@ -1453,7 +1453,7 @@ static CYTHON_INLINE godot_object *__pyx_f_5utils_7Wrapper_7Wrapper_get_godot_ow
  * from utils.Wrapper cimport *
  * cdef class Object(Wrapper):             # <<<<<<<<<<<<<<
  *     pass
- * ctypedef enum ConnectFlags :CONNECT_DEFERRED, CONNECT_PERSIST, CONNECT_ONESHOT, CONNECT_REFERENCE_COUNTED,
+ * ctypedef enum Object_ConnectFlags :CONNECT_DEFERRED, CONNECT_PERSIST, CONNECT_ONESHOT, CONNECT_REFERENCE_COUNTED,
  */
 
 struct __pyx_vtabstruct_7classes_6Object_Object {
@@ -1493,7 +1493,7 @@ static struct __pyx_vtabstruct_7classes_8Resource_Resource *__pyx_vtabptr_7class
  * cimport classes.Resource
  * cdef class Texture(classes.Resource.Resource):             # <<<<<<<<<<<<<<
  *     pass
- * ctypedef enum Flags :FLAG_MIPMAPS, FLAG_REPEAT, FLAG_FILTER, FLAGS_DEFAULT, FLAG_ANISOTROPIC_FILTER, FLAG_CONVERT_TO_LINEAR, FLAG_MIRRORED_REPEAT, FLAG_VIDEO_SURFACE,
+ * ctypedef enum Texture_Flags :FLAG_MIPMAPS, FLAG_REPEAT, FLAG_FILTER, FLAGS_DEFAULT, FLAG_ANISOTROPIC_FILTER, FLAG_CONVERT_TO_LINEAR, FLAG_MIRRORED_REPEAT, FLAG_VIDEO_SURFACE,
  */
 
 struct __pyx_vtabstruct_7classes_7Texture_Texture {
@@ -2204,10 +2204,10 @@ static void __Pyx_AddTraceback(const char *funcname, int c_line,
 static CYTHON_INLINE PyObject* __Pyx_PyInt_From_int(int value);
 
 /* CIntToPy.proto */
-static CYTHON_INLINE PyObject* __Pyx_PyInt_From___pyx_t_7classes_8TreeItem_TreeCellMode(__pyx_t_7classes_8TreeItem_TreeCellMode value);
+static CYTHON_INLINE PyObject* __Pyx_PyInt_From___pyx_t_7classes_8TreeItem_TreeItem_TreeCellMode(__pyx_t_7classes_8TreeItem_TreeItem_TreeCellMode value);
 
 /* CIntToPy.proto */
-static CYTHON_INLINE PyObject* __Pyx_PyInt_From___pyx_t_7classes_8TreeItem_TextAlign(__pyx_t_7classes_8TreeItem_TextAlign value);
+static CYTHON_INLINE PyObject* __Pyx_PyInt_From___pyx_t_7classes_8TreeItem_TreeItem_TextAlign(__pyx_t_7classes_8TreeItem_TreeItem_TextAlign value);
 
 /* CIntFromPy.proto */
 static CYTHON_INLINE int __Pyx_PyInt_As_int(PyObject *);
@@ -5234,7 +5234,7 @@ static PyObject *__pyx_pw_7classes_8TreeItem_8TreeItem_21get_cell_mode(PyObject 
 
 static PyObject *__pyx_pf_7classes_8TreeItem_8TreeItem_20get_cell_mode(struct __pyx_obj_7classes_8TreeItem_TreeItem *__pyx_v_self, int __pyx_v_column) {
   CYTHON_UNUSED godot_object *__pyx_v__owner;
-  __pyx_t_7classes_8TreeItem_TreeCellMode *__pyx_v_ret;
+  __pyx_t_7classes_8TreeItem_TreeItem_TreeCellMode *__pyx_v_ret;
   void *__pyx_v_args[1];
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
@@ -5250,7 +5250,7 @@ static PyObject *__pyx_pf_7classes_8TreeItem_8TreeItem_20get_cell_mode(struct __
  *   def  get_cell_mode(self,  int column):
  *     cdef godot_object *_owner = self.godot_owner             # <<<<<<<<<<<<<<
  * 
- *     cdef TreeCellMode* ret = NULL;
+ *     cdef TreeItem_TreeCellMode* ret = NULL;
  */
   __pyx_t_1 = __pyx_v_self->__pyx_base.__pyx_base.godot_owner;
   __pyx_v__owner = __pyx_t_1;
@@ -5258,7 +5258,7 @@ static PyObject *__pyx_pf_7classes_8TreeItem_8TreeItem_20get_cell_mode(struct __
   /* "classes/TreeItem.pyx":295
  *     cdef godot_object *_owner = self.godot_owner
  * 
- *     cdef TreeCellMode* ret = NULL;             # <<<<<<<<<<<<<<
+ *     cdef TreeItem_TreeCellMode* ret = NULL;             # <<<<<<<<<<<<<<
  * 
  *     cdef void *args[1]
  */
@@ -5299,7 +5299,7 @@ static PyObject *__pyx_pf_7classes_8TreeItem_8TreeItem_20get_cell_mode(struct __
  *   def  get_children(self):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_2 = __Pyx_PyInt_From___pyx_t_7classes_8TreeItem_TreeCellMode((*__pyx_v_ret)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 302, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyInt_From___pyx_t_7classes_8TreeItem_TreeItem_TreeCellMode((*__pyx_v_ret)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 302, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_r = __pyx_t_2;
   __pyx_t_2 = 0;
@@ -7359,7 +7359,7 @@ static PyObject *__pyx_pw_7classes_8TreeItem_8TreeItem_59get_text_align(PyObject
 
 static PyObject *__pyx_pf_7classes_8TreeItem_8TreeItem_58get_text_align(struct __pyx_obj_7classes_8TreeItem_TreeItem *__pyx_v_self, int __pyx_v_column) {
   CYTHON_UNUSED godot_object *__pyx_v__owner;
-  __pyx_t_7classes_8TreeItem_TextAlign *__pyx_v_ret;
+  __pyx_t_7classes_8TreeItem_TreeItem_TextAlign *__pyx_v_ret;
   void *__pyx_v_args[1];
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
@@ -7375,7 +7375,7 @@ static PyObject *__pyx_pf_7classes_8TreeItem_8TreeItem_58get_text_align(struct _
  *   def  get_text_align(self,  int column):
  *     cdef godot_object *_owner = self.godot_owner             # <<<<<<<<<<<<<<
  * 
- *     cdef TextAlign* ret = NULL;
+ *     cdef TreeItem_TextAlign* ret = NULL;
  */
   __pyx_t_1 = __pyx_v_self->__pyx_base.__pyx_base.godot_owner;
   __pyx_v__owner = __pyx_t_1;
@@ -7383,7 +7383,7 @@ static PyObject *__pyx_pf_7classes_8TreeItem_8TreeItem_58get_text_align(struct _
   /* "classes/TreeItem.pyx":494
  *     cdef godot_object *_owner = self.godot_owner
  * 
- *     cdef TextAlign* ret = NULL;             # <<<<<<<<<<<<<<
+ *     cdef TreeItem_TextAlign* ret = NULL;             # <<<<<<<<<<<<<<
  * 
  *     cdef void *args[1]
  */
@@ -7424,7 +7424,7 @@ static PyObject *__pyx_pf_7classes_8TreeItem_8TreeItem_58get_text_align(struct _
  *   def  get_tooltip(self,  int column):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_2 = __Pyx_PyInt_From___pyx_t_7classes_8TreeItem_TextAlign((*__pyx_v_ret)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 501, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyInt_From___pyx_t_7classes_8TreeItem_TreeItem_TextAlign((*__pyx_v_ret)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 501, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_r = __pyx_t_2;
   __pyx_t_2 = 0;
@@ -12813,7 +12813,7 @@ static CYTHON_INLINE void __pyx_f_4core_7variant_7Variant_7Variant_new_variant(C
  *     cdef inline void new_variant(self, i):
  *         print("new_variant", type(i))             # <<<<<<<<<<<<<<
  * 
- * ctypedef enum Type:
+ * ctypedef enum Variant_Type:
  */
   __pyx_t_1 = PyTuple_New(2); if (unlikely(!__pyx_t_1)) __PYX_ERR(4, 15, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
@@ -14458,12 +14458,10 @@ static int __pyx_import_star_set(PyObject *o, PyObject* py_name, char *name) {
   static const char* internal_type_names[] = {
     "AABB",
     "Array",
-    "Axis",
     "Basis",
     "Color",
     "Dictionary",
     "NodePath",
-    "Operator",
     "Plane",
     "PoolByteArray",
     "PoolColorArray",
@@ -14477,15 +14475,17 @@ static int __pyx_import_star_set(PyObject *o, PyObject* py_name, char *name) {
     "Rect2",
     "Reference",
     "String",
-    "TextAlign",
     "Transform",
     "Transform2D",
-    "TreeCellMode",
     "TreeItem",
-    "Type",
+    "TreeItem_TextAlign",
+    "TreeItem_TreeCellMode",
     "Variant",
+    "Variant_Operator",
+    "Variant_Type",
     "Vector2",
     "Vector3",
+    "Vector3_Axis",
     "Wrapper",
     "bool",
     "godot_aabb",
@@ -17050,24 +17050,24 @@ static CYTHON_INLINE PyObject* __Pyx_PyInt_From_int(int value) {
 }
 
 /* CIntToPy */
-static CYTHON_INLINE PyObject* __Pyx_PyInt_From___pyx_t_7classes_8TreeItem_TreeCellMode(__pyx_t_7classes_8TreeItem_TreeCellMode value) {
-    const __pyx_t_7classes_8TreeItem_TreeCellMode neg_one = (__pyx_t_7classes_8TreeItem_TreeCellMode) ((__pyx_t_7classes_8TreeItem_TreeCellMode) 0 - (__pyx_t_7classes_8TreeItem_TreeCellMode) 1), const_zero = (__pyx_t_7classes_8TreeItem_TreeCellMode) 0;
+static CYTHON_INLINE PyObject* __Pyx_PyInt_From___pyx_t_7classes_8TreeItem_TreeItem_TreeCellMode(__pyx_t_7classes_8TreeItem_TreeItem_TreeCellMode value) {
+    const __pyx_t_7classes_8TreeItem_TreeItem_TreeCellMode neg_one = (__pyx_t_7classes_8TreeItem_TreeItem_TreeCellMode) ((__pyx_t_7classes_8TreeItem_TreeItem_TreeCellMode) 0 - (__pyx_t_7classes_8TreeItem_TreeItem_TreeCellMode) 1), const_zero = (__pyx_t_7classes_8TreeItem_TreeItem_TreeCellMode) 0;
     const int is_unsigned = neg_one > const_zero;
     if (is_unsigned) {
-        if (sizeof(__pyx_t_7classes_8TreeItem_TreeCellMode) < sizeof(long)) {
+        if (sizeof(__pyx_t_7classes_8TreeItem_TreeItem_TreeCellMode) < sizeof(long)) {
             return PyInt_FromLong((long) value);
-        } else if (sizeof(__pyx_t_7classes_8TreeItem_TreeCellMode) <= sizeof(unsigned long)) {
+        } else if (sizeof(__pyx_t_7classes_8TreeItem_TreeItem_TreeCellMode) <= sizeof(unsigned long)) {
             return PyLong_FromUnsignedLong((unsigned long) value);
 #ifdef HAVE_LONG_LONG
-        } else if (sizeof(__pyx_t_7classes_8TreeItem_TreeCellMode) <= sizeof(unsigned PY_LONG_LONG)) {
+        } else if (sizeof(__pyx_t_7classes_8TreeItem_TreeItem_TreeCellMode) <= sizeof(unsigned PY_LONG_LONG)) {
             return PyLong_FromUnsignedLongLong((unsigned PY_LONG_LONG) value);
 #endif
         }
     } else {
-        if (sizeof(__pyx_t_7classes_8TreeItem_TreeCellMode) <= sizeof(long)) {
+        if (sizeof(__pyx_t_7classes_8TreeItem_TreeItem_TreeCellMode) <= sizeof(long)) {
             return PyInt_FromLong((long) value);
 #ifdef HAVE_LONG_LONG
-        } else if (sizeof(__pyx_t_7classes_8TreeItem_TreeCellMode) <= sizeof(PY_LONG_LONG)) {
+        } else if (sizeof(__pyx_t_7classes_8TreeItem_TreeItem_TreeCellMode) <= sizeof(PY_LONG_LONG)) {
             return PyLong_FromLongLong((PY_LONG_LONG) value);
 #endif
         }
@@ -17075,30 +17075,30 @@ static CYTHON_INLINE PyObject* __Pyx_PyInt_From___pyx_t_7classes_8TreeItem_TreeC
     {
         int one = 1; int little = (int)*(unsigned char *)&one;
         unsigned char *bytes = (unsigned char *)&value;
-        return _PyLong_FromByteArray(bytes, sizeof(__pyx_t_7classes_8TreeItem_TreeCellMode),
+        return _PyLong_FromByteArray(bytes, sizeof(__pyx_t_7classes_8TreeItem_TreeItem_TreeCellMode),
                                      little, !is_unsigned);
     }
 }
 
 /* CIntToPy */
-static CYTHON_INLINE PyObject* __Pyx_PyInt_From___pyx_t_7classes_8TreeItem_TextAlign(__pyx_t_7classes_8TreeItem_TextAlign value) {
-    const __pyx_t_7classes_8TreeItem_TextAlign neg_one = (__pyx_t_7classes_8TreeItem_TextAlign) ((__pyx_t_7classes_8TreeItem_TextAlign) 0 - (__pyx_t_7classes_8TreeItem_TextAlign) 1), const_zero = (__pyx_t_7classes_8TreeItem_TextAlign) 0;
+static CYTHON_INLINE PyObject* __Pyx_PyInt_From___pyx_t_7classes_8TreeItem_TreeItem_TextAlign(__pyx_t_7classes_8TreeItem_TreeItem_TextAlign value) {
+    const __pyx_t_7classes_8TreeItem_TreeItem_TextAlign neg_one = (__pyx_t_7classes_8TreeItem_TreeItem_TextAlign) ((__pyx_t_7classes_8TreeItem_TreeItem_TextAlign) 0 - (__pyx_t_7classes_8TreeItem_TreeItem_TextAlign) 1), const_zero = (__pyx_t_7classes_8TreeItem_TreeItem_TextAlign) 0;
     const int is_unsigned = neg_one > const_zero;
     if (is_unsigned) {
-        if (sizeof(__pyx_t_7classes_8TreeItem_TextAlign) < sizeof(long)) {
+        if (sizeof(__pyx_t_7classes_8TreeItem_TreeItem_TextAlign) < sizeof(long)) {
             return PyInt_FromLong((long) value);
-        } else if (sizeof(__pyx_t_7classes_8TreeItem_TextAlign) <= sizeof(unsigned long)) {
+        } else if (sizeof(__pyx_t_7classes_8TreeItem_TreeItem_TextAlign) <= sizeof(unsigned long)) {
             return PyLong_FromUnsignedLong((unsigned long) value);
 #ifdef HAVE_LONG_LONG
-        } else if (sizeof(__pyx_t_7classes_8TreeItem_TextAlign) <= sizeof(unsigned PY_LONG_LONG)) {
+        } else if (sizeof(__pyx_t_7classes_8TreeItem_TreeItem_TextAlign) <= sizeof(unsigned PY_LONG_LONG)) {
             return PyLong_FromUnsignedLongLong((unsigned PY_LONG_LONG) value);
 #endif
         }
     } else {
-        if (sizeof(__pyx_t_7classes_8TreeItem_TextAlign) <= sizeof(long)) {
+        if (sizeof(__pyx_t_7classes_8TreeItem_TreeItem_TextAlign) <= sizeof(long)) {
             return PyInt_FromLong((long) value);
 #ifdef HAVE_LONG_LONG
-        } else if (sizeof(__pyx_t_7classes_8TreeItem_TextAlign) <= sizeof(PY_LONG_LONG)) {
+        } else if (sizeof(__pyx_t_7classes_8TreeItem_TreeItem_TextAlign) <= sizeof(PY_LONG_LONG)) {
             return PyLong_FromLongLong((PY_LONG_LONG) value);
 #endif
         }
@@ -17106,7 +17106,7 @@ static CYTHON_INLINE PyObject* __Pyx_PyInt_From___pyx_t_7classes_8TreeItem_TextA
     {
         int one = 1; int little = (int)*(unsigned char *)&one;
         unsigned char *bytes = (unsigned char *)&value;
-        return _PyLong_FromByteArray(bytes, sizeof(__pyx_t_7classes_8TreeItem_TextAlign),
+        return _PyLong_FromByteArray(bytes, sizeof(__pyx_t_7classes_8TreeItem_TreeItem_TextAlign),
                                      little, !is_unsigned);
     }
 }

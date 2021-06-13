@@ -58,7 +58,9 @@ def generate_methods(obj, import_string):
                     import_class,return_type = return_type.split("::")
                     if(import_class != obj["name"] and not import_class in core):
                         import_string += f"cimport classes.{import_class}\n"
-                        return_type = import_class+"."+return_type
+                        return_type = import_class+"."+import_class+"_"+return_type
+                    else:
+                        return_type = import_class+"_"+return_type
 
                 if(return_type in objects):
                     result += f"    cdef godot_object* ret = NULL;\n\n"
@@ -129,9 +131,9 @@ def generate_classes(obj):
     import_string += f"from core.transform.Transform2D cimport Transform2D\n"
     import_string += f"from core.vector2.Vector2 cimport Vector2\n"
     import_string += f"from core.vector3.Vector3 cimport Vector3\n"
-    import_string += f"from core.variant.Variant cimport Type\n"
-    import_string += f"from core.variant.Variant cimport Operator\n"
-    import_string += f"from core.vector3.Vector3 cimport Axis\n"
+    import_string += f"from core.variant.Variant cimport Variant_Type\n"
+    import_string += f"from core.variant.Variant cimport Variant_Operator\n"
+    import_string += f"from core.vector3.Vector3 cimport Vector3_Axis\n"
     import_string += f"from core.color.Color cimport Color\n"
     import_string += f"from cython.operator cimport dereference\n"
     import_string += f"from godot_api.binding_external cimport *\n"
@@ -158,7 +160,7 @@ def generate_classes(obj):
 def generate_enums(class_, obj):
     result = ""
     for enum in obj["enums"]:
-        result += f"""ctypedef enum {enum["name"]} :"""
+        result += f"""ctypedef enum {class_}_{enum["name"]} :"""
         for value in enum["values"]:
             result += value +", "
         result += "\n"

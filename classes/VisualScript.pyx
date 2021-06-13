@@ -20,9 +20,9 @@ from core.transform.Transform cimport Transform
 from core.transform.Transform2D cimport Transform2D
 from core.vector2.Vector2 cimport Vector2
 from core.vector3.Vector3 cimport Vector3
-from core.variant.Variant cimport Type
-from core.variant.Variant cimport Operator
-from core.vector3.Vector3 cimport Axis
+from core.variant.Variant cimport Variant_Type
+from core.variant.Variant cimport Variant_Operator
+from core.vector3.Vector3 cimport Vector3_Axis
 from core.color.Color cimport Color
 from cython.operator cimport dereference
 from godot_api.binding_external cimport *
@@ -239,7 +239,7 @@ cdef class VisualScript(classes.Script.Script):
   def  custom_signal_get_argument_type(self,  String name,  int argidx):
     cdef godot_object *_owner = self.godot_owner
 
-    cdef Type* ret = NULL;
+    cdef Variant_Type* ret = NULL;
 
     cdef void *args[2]
 

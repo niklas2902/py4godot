@@ -898,81 +898,81 @@ struct __pyx_obj_7classes_12NoiseTexture_NoiseTexture;
 /* "classes/Object.pxd":7
  * cdef class Object(Wrapper):
  *     pass
- * ctypedef enum ConnectFlags :CONNECT_DEFERRED, CONNECT_PERSIST, CONNECT_ONESHOT, CONNECT_REFERENCE_COUNTED,             # <<<<<<<<<<<<<<
+ * ctypedef enum Object_ConnectFlags :CONNECT_DEFERRED, CONNECT_PERSIST, CONNECT_ONESHOT, CONNECT_REFERENCE_COUNTED,             # <<<<<<<<<<<<<<
  */
-enum __pyx_t_7classes_6Object_ConnectFlags {
+enum __pyx_t_7classes_6Object_Object_ConnectFlags {
   __pyx_e_7classes_6Object_CONNECT_DEFERRED,
   __pyx_e_7classes_6Object_CONNECT_PERSIST,
   __pyx_e_7classes_6Object_CONNECT_ONESHOT,
   __pyx_e_7classes_6Object_CONNECT_REFERENCE_COUNTED
 };
-typedef enum __pyx_t_7classes_6Object_ConnectFlags __pyx_t_7classes_6Object_ConnectFlags;
+typedef enum __pyx_t_7classes_6Object_Object_ConnectFlags __pyx_t_7classes_6Object_Object_ConnectFlags;
 
 /* "classes/Image.pxd":7
  * cdef class Image(classes.Resource.Resource):
  *     pass
- * ctypedef enum AlphaMode :ALPHA_NONE, ALPHA_BIT, ALPHA_BLEND,             # <<<<<<<<<<<<<<
- * ctypedef enum CompressSource :COMPRESS_SOURCE_GENERIC, COMPRESS_SOURCE_SRGB, COMPRESS_SOURCE_NORMAL,
- * ctypedef enum Interpolation :INTERPOLATE_NEAREST, INTERPOLATE_BILINEAR, INTERPOLATE_CUBIC, INTERPOLATE_TRILINEAR, INTERPOLATE_LANCZOS,
+ * ctypedef enum Image_AlphaMode :ALPHA_NONE, ALPHA_BIT, ALPHA_BLEND,             # <<<<<<<<<<<<<<
+ * ctypedef enum Image_CompressSource :COMPRESS_SOURCE_GENERIC, COMPRESS_SOURCE_SRGB, COMPRESS_SOURCE_NORMAL,
+ * ctypedef enum Image_Interpolation :INTERPOLATE_NEAREST, INTERPOLATE_BILINEAR, INTERPOLATE_CUBIC, INTERPOLATE_TRILINEAR, INTERPOLATE_LANCZOS,
  */
-enum __pyx_t_7classes_5Image_AlphaMode {
+enum __pyx_t_7classes_5Image_Image_AlphaMode {
   __pyx_e_7classes_5Image_ALPHA_NONE,
   __pyx_e_7classes_5Image_ALPHA_BIT,
   __pyx_e_7classes_5Image_ALPHA_BLEND
 };
-typedef enum __pyx_t_7classes_5Image_AlphaMode __pyx_t_7classes_5Image_AlphaMode;
+typedef enum __pyx_t_7classes_5Image_Image_AlphaMode __pyx_t_7classes_5Image_Image_AlphaMode;
 
 /* "classes/Image.pxd":8
  *     pass
- * ctypedef enum AlphaMode :ALPHA_NONE, ALPHA_BIT, ALPHA_BLEND,
- * ctypedef enum CompressSource :COMPRESS_SOURCE_GENERIC, COMPRESS_SOURCE_SRGB, COMPRESS_SOURCE_NORMAL,             # <<<<<<<<<<<<<<
- * ctypedef enum Interpolation :INTERPOLATE_NEAREST, INTERPOLATE_BILINEAR, INTERPOLATE_CUBIC, INTERPOLATE_TRILINEAR, INTERPOLATE_LANCZOS,
- * ctypedef enum CompressMode :COMPRESS_S3TC, COMPRESS_PVRTC2, COMPRESS_PVRTC4, COMPRESS_ETC, COMPRESS_ETC2,
+ * ctypedef enum Image_AlphaMode :ALPHA_NONE, ALPHA_BIT, ALPHA_BLEND,
+ * ctypedef enum Image_CompressSource :COMPRESS_SOURCE_GENERIC, COMPRESS_SOURCE_SRGB, COMPRESS_SOURCE_NORMAL,             # <<<<<<<<<<<<<<
+ * ctypedef enum Image_Interpolation :INTERPOLATE_NEAREST, INTERPOLATE_BILINEAR, INTERPOLATE_CUBIC, INTERPOLATE_TRILINEAR, INTERPOLATE_LANCZOS,
+ * ctypedef enum Image_CompressMode :COMPRESS_S3TC, COMPRESS_PVRTC2, COMPRESS_PVRTC4, COMPRESS_ETC, COMPRESS_ETC2,
  */
-enum __pyx_t_7classes_5Image_CompressSource {
+enum __pyx_t_7classes_5Image_Image_CompressSource {
   __pyx_e_7classes_5Image_COMPRESS_SOURCE_GENERIC,
   __pyx_e_7classes_5Image_COMPRESS_SOURCE_SRGB,
   __pyx_e_7classes_5Image_COMPRESS_SOURCE_NORMAL
 };
-typedef enum __pyx_t_7classes_5Image_CompressSource __pyx_t_7classes_5Image_CompressSource;
+typedef enum __pyx_t_7classes_5Image_Image_CompressSource __pyx_t_7classes_5Image_Image_CompressSource;
 
 /* "classes/Image.pxd":9
- * ctypedef enum AlphaMode :ALPHA_NONE, ALPHA_BIT, ALPHA_BLEND,
- * ctypedef enum CompressSource :COMPRESS_SOURCE_GENERIC, COMPRESS_SOURCE_SRGB, COMPRESS_SOURCE_NORMAL,
- * ctypedef enum Interpolation :INTERPOLATE_NEAREST, INTERPOLATE_BILINEAR, INTERPOLATE_CUBIC, INTERPOLATE_TRILINEAR, INTERPOLATE_LANCZOS,             # <<<<<<<<<<<<<<
- * ctypedef enum CompressMode :COMPRESS_S3TC, COMPRESS_PVRTC2, COMPRESS_PVRTC4, COMPRESS_ETC, COMPRESS_ETC2,
- * ctypedef enum Format :FORMAT_L8, FORMAT_LA8, FORMAT_R8, FORMAT_RG8, FORMAT_RGB8, FORMAT_RGBA8, FORMAT_RGBA4444, FORMAT_RGBA5551, FORMAT_RF, FORMAT_RGF, FORMAT_RGBF, FORMAT_RGBAF, FORMAT_RH, FORMAT_RGH, FORMAT_RGBH, FORMAT_RGBAH, FORMAT_RGBE9995, FORMAT_DXT1, FORMAT_DXT3, FORMAT_DXT5, FORMAT_RGTC_R, FORMAT_RGTC_RG, FORMAT_BPTC_RGBA, FORMAT_BPTC_RGBF, FORMAT_BPTC_RGBFU, FORMAT_PVRTC2, FORMAT_PVRTC2A, FORMAT_PVRTC4, FORMAT_PVRTC4A, FORMAT_ETC, FORMAT_ETC2_R11, FORMAT_ETC2_R11S, FORMAT_ETC2_RG11, FORMAT_ETC2_RG11S, FORMAT_ETC2_RGB8, FORMAT_ETC2_RGBA8, FORMAT_ETC2_RGB8A1, FORMAT_MAX,
+ * ctypedef enum Image_AlphaMode :ALPHA_NONE, ALPHA_BIT, ALPHA_BLEND,
+ * ctypedef enum Image_CompressSource :COMPRESS_SOURCE_GENERIC, COMPRESS_SOURCE_SRGB, COMPRESS_SOURCE_NORMAL,
+ * ctypedef enum Image_Interpolation :INTERPOLATE_NEAREST, INTERPOLATE_BILINEAR, INTERPOLATE_CUBIC, INTERPOLATE_TRILINEAR, INTERPOLATE_LANCZOS,             # <<<<<<<<<<<<<<
+ * ctypedef enum Image_CompressMode :COMPRESS_S3TC, COMPRESS_PVRTC2, COMPRESS_PVRTC4, COMPRESS_ETC, COMPRESS_ETC2,
+ * ctypedef enum Image_Format :FORMAT_L8, FORMAT_LA8, FORMAT_R8, FORMAT_RG8, FORMAT_RGB8, FORMAT_RGBA8, FORMAT_RGBA4444, FORMAT_RGBA5551, FORMAT_RF, FORMAT_RGF, FORMAT_RGBF, FORMAT_RGBAF, FORMAT_RH, FORMAT_RGH, FORMAT_RGBH, FORMAT_RGBAH, FORMAT_RGBE9995, FORMAT_DXT1, FORMAT_DXT3, FORMAT_DXT5, FORMAT_RGTC_R, FORMAT_RGTC_RG, FORMAT_BPTC_RGBA, FORMAT_BPTC_RGBF, FORMAT_BPTC_RGBFU, FORMAT_PVRTC2, FORMAT_PVRTC2A, FORMAT_PVRTC4, FORMAT_PVRTC4A, FORMAT_ETC, FORMAT_ETC2_R11, FORMAT_ETC2_R11S, FORMAT_ETC2_RG11, FORMAT_ETC2_RG11S, FORMAT_ETC2_RGB8, FORMAT_ETC2_RGBA8, FORMAT_ETC2_RGB8A1, FORMAT_MAX,
  */
-enum __pyx_t_7classes_5Image_Interpolation {
+enum __pyx_t_7classes_5Image_Image_Interpolation {
   __pyx_e_7classes_5Image_INTERPOLATE_NEAREST,
   __pyx_e_7classes_5Image_INTERPOLATE_BILINEAR,
   __pyx_e_7classes_5Image_INTERPOLATE_CUBIC,
   __pyx_e_7classes_5Image_INTERPOLATE_TRILINEAR,
   __pyx_e_7classes_5Image_INTERPOLATE_LANCZOS
 };
-typedef enum __pyx_t_7classes_5Image_Interpolation __pyx_t_7classes_5Image_Interpolation;
+typedef enum __pyx_t_7classes_5Image_Image_Interpolation __pyx_t_7classes_5Image_Image_Interpolation;
 
 /* "classes/Image.pxd":10
- * ctypedef enum CompressSource :COMPRESS_SOURCE_GENERIC, COMPRESS_SOURCE_SRGB, COMPRESS_SOURCE_NORMAL,
- * ctypedef enum Interpolation :INTERPOLATE_NEAREST, INTERPOLATE_BILINEAR, INTERPOLATE_CUBIC, INTERPOLATE_TRILINEAR, INTERPOLATE_LANCZOS,
- * ctypedef enum CompressMode :COMPRESS_S3TC, COMPRESS_PVRTC2, COMPRESS_PVRTC4, COMPRESS_ETC, COMPRESS_ETC2,             # <<<<<<<<<<<<<<
- * ctypedef enum Format :FORMAT_L8, FORMAT_LA8, FORMAT_R8, FORMAT_RG8, FORMAT_RGB8, FORMAT_RGBA8, FORMAT_RGBA4444, FORMAT_RGBA5551, FORMAT_RF, FORMAT_RGF, FORMAT_RGBF, FORMAT_RGBAF, FORMAT_RH, FORMAT_RGH, FORMAT_RGBH, FORMAT_RGBAH, FORMAT_RGBE9995, FORMAT_DXT1, FORMAT_DXT3, FORMAT_DXT5, FORMAT_RGTC_R, FORMAT_RGTC_RG, FORMAT_BPTC_RGBA, FORMAT_BPTC_RGBF, FORMAT_BPTC_RGBFU, FORMAT_PVRTC2, FORMAT_PVRTC2A, FORMAT_PVRTC4, FORMAT_PVRTC4A, FORMAT_ETC, FORMAT_ETC2_R11, FORMAT_ETC2_R11S, FORMAT_ETC2_RG11, FORMAT_ETC2_RG11S, FORMAT_ETC2_RGB8, FORMAT_ETC2_RGBA8, FORMAT_ETC2_RGB8A1, FORMAT_MAX,
+ * ctypedef enum Image_CompressSource :COMPRESS_SOURCE_GENERIC, COMPRESS_SOURCE_SRGB, COMPRESS_SOURCE_NORMAL,
+ * ctypedef enum Image_Interpolation :INTERPOLATE_NEAREST, INTERPOLATE_BILINEAR, INTERPOLATE_CUBIC, INTERPOLATE_TRILINEAR, INTERPOLATE_LANCZOS,
+ * ctypedef enum Image_CompressMode :COMPRESS_S3TC, COMPRESS_PVRTC2, COMPRESS_PVRTC4, COMPRESS_ETC, COMPRESS_ETC2,             # <<<<<<<<<<<<<<
+ * ctypedef enum Image_Format :FORMAT_L8, FORMAT_LA8, FORMAT_R8, FORMAT_RG8, FORMAT_RGB8, FORMAT_RGBA8, FORMAT_RGBA4444, FORMAT_RGBA5551, FORMAT_RF, FORMAT_RGF, FORMAT_RGBF, FORMAT_RGBAF, FORMAT_RH, FORMAT_RGH, FORMAT_RGBH, FORMAT_RGBAH, FORMAT_RGBE9995, FORMAT_DXT1, FORMAT_DXT3, FORMAT_DXT5, FORMAT_RGTC_R, FORMAT_RGTC_RG, FORMAT_BPTC_RGBA, FORMAT_BPTC_RGBF, FORMAT_BPTC_RGBFU, FORMAT_PVRTC2, FORMAT_PVRTC2A, FORMAT_PVRTC4, FORMAT_PVRTC4A, FORMAT_ETC, FORMAT_ETC2_R11, FORMAT_ETC2_R11S, FORMAT_ETC2_RG11, FORMAT_ETC2_RG11S, FORMAT_ETC2_RGB8, FORMAT_ETC2_RGBA8, FORMAT_ETC2_RGB8A1, FORMAT_MAX,
  */
-enum __pyx_t_7classes_5Image_CompressMode {
+enum __pyx_t_7classes_5Image_Image_CompressMode {
   __pyx_e_7classes_5Image_COMPRESS_S3TC,
   __pyx_e_7classes_5Image_COMPRESS_PVRTC2,
   __pyx_e_7classes_5Image_COMPRESS_PVRTC4,
   __pyx_e_7classes_5Image_COMPRESS_ETC,
   __pyx_e_7classes_5Image_COMPRESS_ETC2
 };
-typedef enum __pyx_t_7classes_5Image_CompressMode __pyx_t_7classes_5Image_CompressMode;
+typedef enum __pyx_t_7classes_5Image_Image_CompressMode __pyx_t_7classes_5Image_Image_CompressMode;
 
 /* "classes/Image.pxd":11
- * ctypedef enum Interpolation :INTERPOLATE_NEAREST, INTERPOLATE_BILINEAR, INTERPOLATE_CUBIC, INTERPOLATE_TRILINEAR, INTERPOLATE_LANCZOS,
- * ctypedef enum CompressMode :COMPRESS_S3TC, COMPRESS_PVRTC2, COMPRESS_PVRTC4, COMPRESS_ETC, COMPRESS_ETC2,
- * ctypedef enum Format :FORMAT_L8, FORMAT_LA8, FORMAT_R8, FORMAT_RG8, FORMAT_RGB8, FORMAT_RGBA8, FORMAT_RGBA4444, FORMAT_RGBA5551, FORMAT_RF, FORMAT_RGF, FORMAT_RGBF, FORMAT_RGBAF, FORMAT_RH, FORMAT_RGH, FORMAT_RGBH, FORMAT_RGBAH, FORMAT_RGBE9995, FORMAT_DXT1, FORMAT_DXT3, FORMAT_DXT5, FORMAT_RGTC_R, FORMAT_RGTC_RG, FORMAT_BPTC_RGBA, FORMAT_BPTC_RGBF, FORMAT_BPTC_RGBFU, FORMAT_PVRTC2, FORMAT_PVRTC2A, FORMAT_PVRTC4, FORMAT_PVRTC4A, FORMAT_ETC, FORMAT_ETC2_R11, FORMAT_ETC2_R11S, FORMAT_ETC2_RG11, FORMAT_ETC2_RG11S, FORMAT_ETC2_RGB8, FORMAT_ETC2_RGBA8, FORMAT_ETC2_RGB8A1, FORMAT_MAX,             # <<<<<<<<<<<<<<
+ * ctypedef enum Image_Interpolation :INTERPOLATE_NEAREST, INTERPOLATE_BILINEAR, INTERPOLATE_CUBIC, INTERPOLATE_TRILINEAR, INTERPOLATE_LANCZOS,
+ * ctypedef enum Image_CompressMode :COMPRESS_S3TC, COMPRESS_PVRTC2, COMPRESS_PVRTC4, COMPRESS_ETC, COMPRESS_ETC2,
+ * ctypedef enum Image_Format :FORMAT_L8, FORMAT_LA8, FORMAT_R8, FORMAT_RG8, FORMAT_RGB8, FORMAT_RGBA8, FORMAT_RGBA4444, FORMAT_RGBA5551, FORMAT_RF, FORMAT_RGF, FORMAT_RGBF, FORMAT_RGBAF, FORMAT_RH, FORMAT_RGH, FORMAT_RGBH, FORMAT_RGBAH, FORMAT_RGBE9995, FORMAT_DXT1, FORMAT_DXT3, FORMAT_DXT5, FORMAT_RGTC_R, FORMAT_RGTC_RG, FORMAT_BPTC_RGBA, FORMAT_BPTC_RGBF, FORMAT_BPTC_RGBFU, FORMAT_PVRTC2, FORMAT_PVRTC2A, FORMAT_PVRTC4, FORMAT_PVRTC4A, FORMAT_ETC, FORMAT_ETC2_R11, FORMAT_ETC2_R11S, FORMAT_ETC2_RG11, FORMAT_ETC2_RG11S, FORMAT_ETC2_RGB8, FORMAT_ETC2_RGBA8, FORMAT_ETC2_RGB8A1, FORMAT_MAX,             # <<<<<<<<<<<<<<
  */
-enum __pyx_t_7classes_5Image_Format {
+enum __pyx_t_7classes_5Image_Image_Format {
   __pyx_e_7classes_5Image_FORMAT_L8,
   __pyx_e_7classes_5Image_FORMAT_LA8,
   __pyx_e_7classes_5Image_FORMAT_R8,
@@ -1012,14 +1012,14 @@ enum __pyx_t_7classes_5Image_Format {
   __pyx_e_7classes_5Image_FORMAT_ETC2_RGB8A1,
   __pyx_e_7classes_5Image_FORMAT_MAX
 };
-typedef enum __pyx_t_7classes_5Image_Format __pyx_t_7classes_5Image_Format;
+typedef enum __pyx_t_7classes_5Image_Image_Format __pyx_t_7classes_5Image_Image_Format;
 
 /* "classes/Texture.pxd":7
  * cdef class Texture(classes.Resource.Resource):
  *     pass
- * ctypedef enum Flags :FLAG_MIPMAPS, FLAG_REPEAT, FLAG_FILTER, FLAGS_DEFAULT, FLAG_ANISOTROPIC_FILTER, FLAG_CONVERT_TO_LINEAR, FLAG_MIRRORED_REPEAT, FLAG_VIDEO_SURFACE,             # <<<<<<<<<<<<<<
+ * ctypedef enum Texture_Flags :FLAG_MIPMAPS, FLAG_REPEAT, FLAG_FILTER, FLAGS_DEFAULT, FLAG_ANISOTROPIC_FILTER, FLAG_CONVERT_TO_LINEAR, FLAG_MIRRORED_REPEAT, FLAG_VIDEO_SURFACE,             # <<<<<<<<<<<<<<
  */
-enum __pyx_t_7classes_7Texture_Flags {
+enum __pyx_t_7classes_7Texture_Texture_Flags {
   __pyx_e_7classes_7Texture_FLAG_MIPMAPS,
   __pyx_e_7classes_7Texture_FLAG_REPEAT,
   __pyx_e_7classes_7Texture_FLAG_FILTER,
@@ -1029,16 +1029,16 @@ enum __pyx_t_7classes_7Texture_Flags {
   __pyx_e_7classes_7Texture_FLAG_MIRRORED_REPEAT,
   __pyx_e_7classes_7Texture_FLAG_VIDEO_SURFACE
 };
-typedef enum __pyx_t_7classes_7Texture_Flags __pyx_t_7classes_7Texture_Flags;
+typedef enum __pyx_t_7classes_7Texture_Texture_Flags __pyx_t_7classes_7Texture_Texture_Flags;
 
 /* "core/variant/Variant.pxd":17
  *         print("new_variant", type(i))
  * 
- * ctypedef enum Type:             # <<<<<<<<<<<<<<
+ * ctypedef enum Variant_Type:             # <<<<<<<<<<<<<<
  *     NIL,
  *     # atomic types
  */
-enum __pyx_t_4core_7variant_7Variant_Type {
+enum __pyx_t_4core_7variant_7Variant_Variant_Type {
   __pyx_e_4core_7variant_7Variant_NIL,
   __pyx_e_4core_7variant_7Variant_BOOL,
   __pyx_e_4core_7variant_7Variant_INT,
@@ -1068,16 +1068,16 @@ enum __pyx_t_4core_7variant_7Variant_Type {
   __pyx_e_4core_7variant_7Variant_POOL_COLOR_ARRAY,
   __pyx_e_4core_7variant_7Variant_VARIANT_MAX
 };
-typedef enum __pyx_t_4core_7variant_7Variant_Type __pyx_t_4core_7variant_7Variant_Type;
+typedef enum __pyx_t_4core_7variant_7Variant_Variant_Type __pyx_t_4core_7variant_7Variant_Variant_Type;
 
 /* "core/variant/Variant.pxd":58
  * 
  * 
- * ctypedef enum Operator :             # <<<<<<<<<<<<<<
+ * ctypedef enum Variant_Operator :             # <<<<<<<<<<<<<<
  * 
  *     #comparation
  */
-enum __pyx_t_4core_7variant_7Variant_Operator {
+enum __pyx_t_4core_7variant_7Variant_Variant_Operator {
   __pyx_e_4core_7variant_7Variant_OP_EQUAL,
   __pyx_e_4core_7variant_7Variant_OP_NOT_EQUAL,
   __pyx_e_4core_7variant_7Variant_OP_LESS,
@@ -1105,21 +1105,21 @@ enum __pyx_t_4core_7variant_7Variant_Operator {
   __pyx_e_4core_7variant_7Variant_OP_IN,
   __pyx_e_4core_7variant_7Variant_OP_MAX
 };
-typedef enum __pyx_t_4core_7variant_7Variant_Operator __pyx_t_4core_7variant_7Variant_Operator;
+typedef enum __pyx_t_4core_7variant_7Variant_Variant_Operator __pyx_t_4core_7variant_7Variant_Variant_Operator;
 
 /* "core/vector3/Vector3.pxd":15
  * 
  * 
- * ctypedef enum Axis :             # <<<<<<<<<<<<<<
- *     AXIS_X,
- *     AXIS_Y,
+ * ctypedef enum Vector3_Axis :             # <<<<<<<<<<<<<<
+ *     Vector3_AXIS_X,
+ *     Vector3_AXIS_Y,
  */
-enum __pyx_t_4core_7vector3_7Vector3_Axis {
-  __pyx_e_4core_7vector3_7Vector3_AXIS_X,
-  __pyx_e_4core_7vector3_7Vector3_AXIS_Y,
-  __pyx_e_4core_7vector3_7Vector3_AXIS_Z
+enum __pyx_t_4core_7vector3_7Vector3_Vector3_Axis {
+  __pyx_e_4core_7vector3_7Vector3_Vector3_AXIS_X,
+  __pyx_e_4core_7vector3_7Vector3_Vector3_AXIS_Y,
+  __pyx_e_4core_7vector3_7Vector3_Vector3_AXIS_Z
 };
-typedef enum __pyx_t_4core_7vector3_7Vector3_Axis __pyx_t_4core_7vector3_7Vector3_Axis;
+typedef enum __pyx_t_4core_7vector3_7Vector3_Vector3_Axis __pyx_t_4core_7vector3_7Vector3_Vector3_Axis;
 
 /* "utils/Wrapper.pxd":2
  * from godot_api.binding cimport *
@@ -1139,7 +1139,7 @@ struct __pyx_obj_5utils_7Wrapper_Wrapper {
  * from utils.Wrapper cimport *
  * cdef class Object(Wrapper):             # <<<<<<<<<<<<<<
  *     pass
- * ctypedef enum ConnectFlags :CONNECT_DEFERRED, CONNECT_PERSIST, CONNECT_ONESHOT, CONNECT_REFERENCE_COUNTED,
+ * ctypedef enum Object_ConnectFlags :CONNECT_DEFERRED, CONNECT_PERSIST, CONNECT_ONESHOT, CONNECT_REFERENCE_COUNTED,
  */
 struct __pyx_obj_7classes_6Object_Object {
   struct __pyx_obj_5utils_7Wrapper_Wrapper __pyx_base;
@@ -1173,7 +1173,7 @@ struct __pyx_obj_7classes_8Resource_Resource {
  * cimport classes.Resource
  * cdef class Image(classes.Resource.Resource):             # <<<<<<<<<<<<<<
  *     pass
- * ctypedef enum AlphaMode :ALPHA_NONE, ALPHA_BIT, ALPHA_BLEND,
+ * ctypedef enum Image_AlphaMode :ALPHA_NONE, ALPHA_BIT, ALPHA_BLEND,
  */
 struct __pyx_obj_7classes_5Image_Image {
   struct __pyx_obj_7classes_8Resource_Resource __pyx_base;
@@ -1196,7 +1196,7 @@ struct __pyx_obj_7classes_16OpenSimplexNoise_OpenSimplexNoise {
  * cimport classes.Resource
  * cdef class Texture(classes.Resource.Resource):             # <<<<<<<<<<<<<<
  *     pass
- * ctypedef enum Flags :FLAG_MIPMAPS, FLAG_REPEAT, FLAG_FILTER, FLAGS_DEFAULT, FLAG_ANISOTROPIC_FILTER, FLAG_CONVERT_TO_LINEAR, FLAG_MIRRORED_REPEAT, FLAG_VIDEO_SURFACE,
+ * ctypedef enum Texture_Flags :FLAG_MIPMAPS, FLAG_REPEAT, FLAG_FILTER, FLAGS_DEFAULT, FLAG_ANISOTROPIC_FILTER, FLAG_CONVERT_TO_LINEAR, FLAG_MIRRORED_REPEAT, FLAG_VIDEO_SURFACE,
  */
 struct __pyx_obj_7classes_7Texture_Texture {
   struct __pyx_obj_7classes_8Resource_Resource __pyx_base;
@@ -1558,7 +1558,7 @@ static CYTHON_INLINE godot_object *__pyx_f_5utils_7Wrapper_7Wrapper_get_godot_ow
  * from utils.Wrapper cimport *
  * cdef class Object(Wrapper):             # <<<<<<<<<<<<<<
  *     pass
- * ctypedef enum ConnectFlags :CONNECT_DEFERRED, CONNECT_PERSIST, CONNECT_ONESHOT, CONNECT_REFERENCE_COUNTED,
+ * ctypedef enum Object_ConnectFlags :CONNECT_DEFERRED, CONNECT_PERSIST, CONNECT_ONESHOT, CONNECT_REFERENCE_COUNTED,
  */
 
 struct __pyx_vtabstruct_7classes_6Object_Object {
@@ -1598,7 +1598,7 @@ static struct __pyx_vtabstruct_7classes_8Resource_Resource *__pyx_vtabptr_7class
  * cimport classes.Resource
  * cdef class Image(classes.Resource.Resource):             # <<<<<<<<<<<<<<
  *     pass
- * ctypedef enum AlphaMode :ALPHA_NONE, ALPHA_BIT, ALPHA_BLEND,
+ * ctypedef enum Image_AlphaMode :ALPHA_NONE, ALPHA_BIT, ALPHA_BLEND,
  */
 
 struct __pyx_vtabstruct_7classes_5Image_Image {
@@ -1625,7 +1625,7 @@ static struct __pyx_vtabstruct_7classes_16OpenSimplexNoise_OpenSimplexNoise *__p
  * cimport classes.Resource
  * cdef class Texture(classes.Resource.Resource):             # <<<<<<<<<<<<<<
  *     pass
- * ctypedef enum Flags :FLAG_MIPMAPS, FLAG_REPEAT, FLAG_FILTER, FLAGS_DEFAULT, FLAG_ANISOTROPIC_FILTER, FLAG_CONVERT_TO_LINEAR, FLAG_MIRRORED_REPEAT, FLAG_VIDEO_SURFACE,
+ * ctypedef enum Texture_Flags :FLAG_MIPMAPS, FLAG_REPEAT, FLAG_FILTER, FLAGS_DEFAULT, FLAG_ANISOTROPIC_FILTER, FLAG_CONVERT_TO_LINEAR, FLAG_MIRRORED_REPEAT, FLAG_VIDEO_SURFACE,
  */
 
 struct __pyx_vtabstruct_7classes_7Texture_Texture {
@@ -5674,7 +5674,7 @@ static CYTHON_INLINE void __pyx_f_4core_7variant_7Variant_7Variant_new_variant(C
  *     cdef inline void new_variant(self, i):
  *         print("new_variant", type(i))             # <<<<<<<<<<<<<<
  * 
- * ctypedef enum Type:
+ * ctypedef enum Variant_Type:
  */
   __pyx_t_1 = PyTuple_New(2); if (unlikely(!__pyx_t_1)) __PYX_ERR(4, 15, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
@@ -7312,13 +7312,11 @@ static int __pyx_import_star_set(PyObject *o, PyObject* py_name, char *name) {
   static const char* internal_type_names[] = {
     "AABB",
     "Array",
-    "Axis",
     "Basis",
     "Color",
     "Dictionary",
     "NodePath",
     "NoiseTexture",
-    "Operator",
     "Plane",
     "PoolByteArray",
     "PoolColorArray",
@@ -7334,10 +7332,12 @@ static int __pyx_import_star_set(PyObject *o, PyObject* py_name, char *name) {
     "String",
     "Transform",
     "Transform2D",
-    "Type",
     "Variant",
+    "Variant_Operator",
+    "Variant_Type",
     "Vector2",
     "Vector3",
+    "Vector3_Axis",
     "Wrapper",
     "bool",
     "godot_aabb",

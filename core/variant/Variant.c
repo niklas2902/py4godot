@@ -882,25 +882,25 @@ struct __pyx_obj_4core_7variant_7Variant_Variant;
 /* "core/vector3/Vector3.pxd":15
  * 
  * 
- * ctypedef enum Axis :             # <<<<<<<<<<<<<<
- *     AXIS_X,
- *     AXIS_Y,
+ * ctypedef enum Vector3_Axis :             # <<<<<<<<<<<<<<
+ *     Vector3_AXIS_X,
+ *     Vector3_AXIS_Y,
  */
-enum __pyx_t_4core_7vector3_7Vector3_Axis {
-  __pyx_e_4core_7vector3_7Vector3_AXIS_X,
-  __pyx_e_4core_7vector3_7Vector3_AXIS_Y,
-  __pyx_e_4core_7vector3_7Vector3_AXIS_Z
+enum __pyx_t_4core_7vector3_7Vector3_Vector3_Axis {
+  __pyx_e_4core_7vector3_7Vector3_Vector3_AXIS_X,
+  __pyx_e_4core_7vector3_7Vector3_Vector3_AXIS_Y,
+  __pyx_e_4core_7vector3_7Vector3_Vector3_AXIS_Z
 };
-typedef enum __pyx_t_4core_7vector3_7Vector3_Axis __pyx_t_4core_7vector3_7Vector3_Axis;
+typedef enum __pyx_t_4core_7vector3_7Vector3_Vector3_Axis __pyx_t_4core_7vector3_7Vector3_Vector3_Axis;
 
 /* "core/variant/Variant.pxd":17
  *         print("new_variant", type(i))
  * 
- * ctypedef enum Type:             # <<<<<<<<<<<<<<
+ * ctypedef enum Variant_Type:             # <<<<<<<<<<<<<<
  *     NIL,
  *     # atomic types
  */
-enum __pyx_t_4core_7variant_7Variant_Type {
+enum __pyx_t_4core_7variant_7Variant_Variant_Type {
   __pyx_e_4core_7variant_7Variant_NIL,
   __pyx_e_4core_7variant_7Variant_BOOL,
   __pyx_e_4core_7variant_7Variant_INT,
@@ -930,16 +930,16 @@ enum __pyx_t_4core_7variant_7Variant_Type {
   __pyx_e_4core_7variant_7Variant_POOL_COLOR_ARRAY,
   __pyx_e_4core_7variant_7Variant_VARIANT_MAX
 };
-typedef enum __pyx_t_4core_7variant_7Variant_Type __pyx_t_4core_7variant_7Variant_Type;
+typedef enum __pyx_t_4core_7variant_7Variant_Variant_Type __pyx_t_4core_7variant_7Variant_Variant_Type;
 
 /* "core/variant/Variant.pxd":58
  * 
  * 
- * ctypedef enum Operator :             # <<<<<<<<<<<<<<
+ * ctypedef enum Variant_Operator :             # <<<<<<<<<<<<<<
  * 
  *     #comparation
  */
-enum __pyx_t_4core_7variant_7Variant_Operator {
+enum __pyx_t_4core_7variant_7Variant_Variant_Operator {
   __pyx_e_4core_7variant_7Variant_OP_EQUAL,
   __pyx_e_4core_7variant_7Variant_OP_NOT_EQUAL,
   __pyx_e_4core_7variant_7Variant_OP_LESS,
@@ -967,7 +967,7 @@ enum __pyx_t_4core_7variant_7Variant_Operator {
   __pyx_e_4core_7variant_7Variant_OP_IN,
   __pyx_e_4core_7variant_7Variant_OP_MAX
 };
-typedef enum __pyx_t_4core_7variant_7Variant_Operator __pyx_t_4core_7variant_7Variant_Operator;
+typedef enum __pyx_t_4core_7variant_7Variant_Variant_Operator __pyx_t_4core_7variant_7Variant_Variant_Operator;
 
 /* "core/vector3/Vector3.pxd":3
  * from core.vector3.vector3_binding cimport *
@@ -5502,7 +5502,7 @@ static CYTHON_INLINE void __pyx_f_4core_7variant_7Variant_7Variant_new_variant(C
  *     cdef inline void new_variant(self, i):
  *         print("new_variant", type(i))             # <<<<<<<<<<<<<<
  * 
- * ctypedef enum Type:
+ * ctypedef enum Variant_Type:
  */
   __pyx_t_1 = PyTuple_New(2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 15, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);

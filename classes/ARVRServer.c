@@ -892,67 +892,67 @@ struct __pyx_obj_7classes_10ARVRServer_ARVRServer;
 /* "classes/Object.pxd":7
  * cdef class Object(Wrapper):
  *     pass
- * ctypedef enum ConnectFlags :CONNECT_DEFERRED, CONNECT_PERSIST, CONNECT_ONESHOT, CONNECT_REFERENCE_COUNTED,             # <<<<<<<<<<<<<<
+ * ctypedef enum Object_ConnectFlags :CONNECT_DEFERRED, CONNECT_PERSIST, CONNECT_ONESHOT, CONNECT_REFERENCE_COUNTED,             # <<<<<<<<<<<<<<
  */
-enum __pyx_t_7classes_6Object_ConnectFlags {
+enum __pyx_t_7classes_6Object_Object_ConnectFlags {
   __pyx_e_7classes_6Object_CONNECT_DEFERRED,
   __pyx_e_7classes_6Object_CONNECT_PERSIST,
   __pyx_e_7classes_6Object_CONNECT_ONESHOT,
   __pyx_e_7classes_6Object_CONNECT_REFERENCE_COUNTED
 };
-typedef enum __pyx_t_7classes_6Object_ConnectFlags __pyx_t_7classes_6Object_ConnectFlags;
+typedef enum __pyx_t_7classes_6Object_Object_ConnectFlags __pyx_t_7classes_6Object_Object_ConnectFlags;
 
 /* "classes/ARVRInterface.pxd":7
  * cdef class ARVRInterface(classes.Reference.Reference):
  *     pass
- * ctypedef enum Tracking_status :ARVR_NORMAL_TRACKING, ARVR_EXCESSIVE_MOTION, ARVR_INSUFFICIENT_FEATURES, ARVR_UNKNOWN_TRACKING, ARVR_NOT_TRACKING,             # <<<<<<<<<<<<<<
- * ctypedef enum Eyes :EYE_MONO, EYE_LEFT, EYE_RIGHT,
- * ctypedef enum Capabilities :ARVR_NONE, ARVR_MONO, ARVR_STEREO, ARVR_AR, ARVR_EXTERNAL,
+ * ctypedef enum ARVRInterface_Tracking_status :ARVR_NORMAL_TRACKING, ARVR_EXCESSIVE_MOTION, ARVR_INSUFFICIENT_FEATURES, ARVR_UNKNOWN_TRACKING, ARVR_NOT_TRACKING,             # <<<<<<<<<<<<<<
+ * ctypedef enum ARVRInterface_Eyes :EYE_MONO, EYE_LEFT, EYE_RIGHT,
+ * ctypedef enum ARVRInterface_Capabilities :ARVR_NONE, ARVR_MONO, ARVR_STEREO, ARVR_AR, ARVR_EXTERNAL,
  */
-enum __pyx_t_7classes_13ARVRInterface_Tracking_status {
+enum __pyx_t_7classes_13ARVRInterface_ARVRInterface_Tracking_status {
   __pyx_e_7classes_13ARVRInterface_ARVR_NORMAL_TRACKING,
   __pyx_e_7classes_13ARVRInterface_ARVR_EXCESSIVE_MOTION,
   __pyx_e_7classes_13ARVRInterface_ARVR_INSUFFICIENT_FEATURES,
   __pyx_e_7classes_13ARVRInterface_ARVR_UNKNOWN_TRACKING,
   __pyx_e_7classes_13ARVRInterface_ARVR_NOT_TRACKING
 };
-typedef enum __pyx_t_7classes_13ARVRInterface_Tracking_status __pyx_t_7classes_13ARVRInterface_Tracking_status;
+typedef enum __pyx_t_7classes_13ARVRInterface_ARVRInterface_Tracking_status __pyx_t_7classes_13ARVRInterface_ARVRInterface_Tracking_status;
 
 /* "classes/ARVRInterface.pxd":8
  *     pass
- * ctypedef enum Tracking_status :ARVR_NORMAL_TRACKING, ARVR_EXCESSIVE_MOTION, ARVR_INSUFFICIENT_FEATURES, ARVR_UNKNOWN_TRACKING, ARVR_NOT_TRACKING,
- * ctypedef enum Eyes :EYE_MONO, EYE_LEFT, EYE_RIGHT,             # <<<<<<<<<<<<<<
- * ctypedef enum Capabilities :ARVR_NONE, ARVR_MONO, ARVR_STEREO, ARVR_AR, ARVR_EXTERNAL,
+ * ctypedef enum ARVRInterface_Tracking_status :ARVR_NORMAL_TRACKING, ARVR_EXCESSIVE_MOTION, ARVR_INSUFFICIENT_FEATURES, ARVR_UNKNOWN_TRACKING, ARVR_NOT_TRACKING,
+ * ctypedef enum ARVRInterface_Eyes :EYE_MONO, EYE_LEFT, EYE_RIGHT,             # <<<<<<<<<<<<<<
+ * ctypedef enum ARVRInterface_Capabilities :ARVR_NONE, ARVR_MONO, ARVR_STEREO, ARVR_AR, ARVR_EXTERNAL,
  */
-enum __pyx_t_7classes_13ARVRInterface_Eyes {
+enum __pyx_t_7classes_13ARVRInterface_ARVRInterface_Eyes {
   __pyx_e_7classes_13ARVRInterface_EYE_MONO,
   __pyx_e_7classes_13ARVRInterface_EYE_LEFT,
   __pyx_e_7classes_13ARVRInterface_EYE_RIGHT
 };
-typedef enum __pyx_t_7classes_13ARVRInterface_Eyes __pyx_t_7classes_13ARVRInterface_Eyes;
+typedef enum __pyx_t_7classes_13ARVRInterface_ARVRInterface_Eyes __pyx_t_7classes_13ARVRInterface_ARVRInterface_Eyes;
 
 /* "classes/ARVRInterface.pxd":9
- * ctypedef enum Tracking_status :ARVR_NORMAL_TRACKING, ARVR_EXCESSIVE_MOTION, ARVR_INSUFFICIENT_FEATURES, ARVR_UNKNOWN_TRACKING, ARVR_NOT_TRACKING,
- * ctypedef enum Eyes :EYE_MONO, EYE_LEFT, EYE_RIGHT,
- * ctypedef enum Capabilities :ARVR_NONE, ARVR_MONO, ARVR_STEREO, ARVR_AR, ARVR_EXTERNAL,             # <<<<<<<<<<<<<<
+ * ctypedef enum ARVRInterface_Tracking_status :ARVR_NORMAL_TRACKING, ARVR_EXCESSIVE_MOTION, ARVR_INSUFFICIENT_FEATURES, ARVR_UNKNOWN_TRACKING, ARVR_NOT_TRACKING,
+ * ctypedef enum ARVRInterface_Eyes :EYE_MONO, EYE_LEFT, EYE_RIGHT,
+ * ctypedef enum ARVRInterface_Capabilities :ARVR_NONE, ARVR_MONO, ARVR_STEREO, ARVR_AR, ARVR_EXTERNAL,             # <<<<<<<<<<<<<<
  */
-enum __pyx_t_7classes_13ARVRInterface_Capabilities {
+enum __pyx_t_7classes_13ARVRInterface_ARVRInterface_Capabilities {
   __pyx_e_7classes_13ARVRInterface_ARVR_NONE,
   __pyx_e_7classes_13ARVRInterface_ARVR_MONO,
   __pyx_e_7classes_13ARVRInterface_ARVR_STEREO,
   __pyx_e_7classes_13ARVRInterface_ARVR_AR,
   __pyx_e_7classes_13ARVRInterface_ARVR_EXTERNAL
 };
-typedef enum __pyx_t_7classes_13ARVRInterface_Capabilities __pyx_t_7classes_13ARVRInterface_Capabilities;
+typedef enum __pyx_t_7classes_13ARVRInterface_ARVRInterface_Capabilities __pyx_t_7classes_13ARVRInterface_ARVRInterface_Capabilities;
 
 /* "core/variant/Variant.pxd":17
  *         print("new_variant", type(i))
  * 
- * ctypedef enum Type:             # <<<<<<<<<<<<<<
+ * ctypedef enum Variant_Type:             # <<<<<<<<<<<<<<
  *     NIL,
  *     # atomic types
  */
-enum __pyx_t_4core_7variant_7Variant_Type {
+enum __pyx_t_4core_7variant_7Variant_Variant_Type {
   __pyx_e_4core_7variant_7Variant_NIL,
   __pyx_e_4core_7variant_7Variant_BOOL,
   __pyx_e_4core_7variant_7Variant_INT,
@@ -982,16 +982,16 @@ enum __pyx_t_4core_7variant_7Variant_Type {
   __pyx_e_4core_7variant_7Variant_POOL_COLOR_ARRAY,
   __pyx_e_4core_7variant_7Variant_VARIANT_MAX
 };
-typedef enum __pyx_t_4core_7variant_7Variant_Type __pyx_t_4core_7variant_7Variant_Type;
+typedef enum __pyx_t_4core_7variant_7Variant_Variant_Type __pyx_t_4core_7variant_7Variant_Variant_Type;
 
 /* "core/variant/Variant.pxd":58
  * 
  * 
- * ctypedef enum Operator :             # <<<<<<<<<<<<<<
+ * ctypedef enum Variant_Operator :             # <<<<<<<<<<<<<<
  * 
  *     #comparation
  */
-enum __pyx_t_4core_7variant_7Variant_Operator {
+enum __pyx_t_4core_7variant_7Variant_Variant_Operator {
   __pyx_e_4core_7variant_7Variant_OP_EQUAL,
   __pyx_e_4core_7variant_7Variant_OP_NOT_EQUAL,
   __pyx_e_4core_7variant_7Variant_OP_LESS,
@@ -1019,41 +1019,41 @@ enum __pyx_t_4core_7variant_7Variant_Operator {
   __pyx_e_4core_7variant_7Variant_OP_IN,
   __pyx_e_4core_7variant_7Variant_OP_MAX
 };
-typedef enum __pyx_t_4core_7variant_7Variant_Operator __pyx_t_4core_7variant_7Variant_Operator;
+typedef enum __pyx_t_4core_7variant_7Variant_Variant_Operator __pyx_t_4core_7variant_7Variant_Variant_Operator;
 
 /* "core/vector3/Vector3.pxd":15
  * 
  * 
- * ctypedef enum Axis :             # <<<<<<<<<<<<<<
- *     AXIS_X,
- *     AXIS_Y,
+ * ctypedef enum Vector3_Axis :             # <<<<<<<<<<<<<<
+ *     Vector3_AXIS_X,
+ *     Vector3_AXIS_Y,
  */
-enum __pyx_t_4core_7vector3_7Vector3_Axis {
-  __pyx_e_4core_7vector3_7Vector3_AXIS_X,
-  __pyx_e_4core_7vector3_7Vector3_AXIS_Y,
-  __pyx_e_4core_7vector3_7Vector3_AXIS_Z
+enum __pyx_t_4core_7vector3_7Vector3_Vector3_Axis {
+  __pyx_e_4core_7vector3_7Vector3_Vector3_AXIS_X,
+  __pyx_e_4core_7vector3_7Vector3_Vector3_AXIS_Y,
+  __pyx_e_4core_7vector3_7Vector3_Vector3_AXIS_Z
 };
-typedef enum __pyx_t_4core_7vector3_7Vector3_Axis __pyx_t_4core_7vector3_7Vector3_Axis;
+typedef enum __pyx_t_4core_7vector3_7Vector3_Vector3_Axis __pyx_t_4core_7vector3_7Vector3_Vector3_Axis;
 
 /* "classes/ARVRServer.pxd":7
  * cdef class ARVRServer(classes.Object.Object):
  *     pass
- * ctypedef enum RotationMode :RESET_FULL_ROTATION, RESET_BUT_KEEP_TILT, DONT_RESET_ROTATION,             # <<<<<<<<<<<<<<
- * ctypedef enum TrackerType :TRACKER_CONTROLLER, TRACKER_BASESTATION, TRACKER_ANCHOR, TRACKER_ANY_KNOWN, TRACKER_UNKNOWN, TRACKER_ANY,
+ * ctypedef enum ARVRServer_RotationMode :RESET_FULL_ROTATION, RESET_BUT_KEEP_TILT, DONT_RESET_ROTATION,             # <<<<<<<<<<<<<<
+ * ctypedef enum ARVRServer_TrackerType :TRACKER_CONTROLLER, TRACKER_BASESTATION, TRACKER_ANCHOR, TRACKER_ANY_KNOWN, TRACKER_UNKNOWN, TRACKER_ANY,
  */
-enum __pyx_t_7classes_10ARVRServer_RotationMode {
+enum __pyx_t_7classes_10ARVRServer_ARVRServer_RotationMode {
   __pyx_e_7classes_10ARVRServer_RESET_FULL_ROTATION,
   __pyx_e_7classes_10ARVRServer_RESET_BUT_KEEP_TILT,
   __pyx_e_7classes_10ARVRServer_DONT_RESET_ROTATION
 };
-typedef enum __pyx_t_7classes_10ARVRServer_RotationMode __pyx_t_7classes_10ARVRServer_RotationMode;
+typedef enum __pyx_t_7classes_10ARVRServer_ARVRServer_RotationMode __pyx_t_7classes_10ARVRServer_ARVRServer_RotationMode;
 
 /* "classes/ARVRServer.pxd":8
  *     pass
- * ctypedef enum RotationMode :RESET_FULL_ROTATION, RESET_BUT_KEEP_TILT, DONT_RESET_ROTATION,
- * ctypedef enum TrackerType :TRACKER_CONTROLLER, TRACKER_BASESTATION, TRACKER_ANCHOR, TRACKER_ANY_KNOWN, TRACKER_UNKNOWN, TRACKER_ANY,             # <<<<<<<<<<<<<<
+ * ctypedef enum ARVRServer_RotationMode :RESET_FULL_ROTATION, RESET_BUT_KEEP_TILT, DONT_RESET_ROTATION,
+ * ctypedef enum ARVRServer_TrackerType :TRACKER_CONTROLLER, TRACKER_BASESTATION, TRACKER_ANCHOR, TRACKER_ANY_KNOWN, TRACKER_UNKNOWN, TRACKER_ANY,             # <<<<<<<<<<<<<<
  */
-enum __pyx_t_7classes_10ARVRServer_TrackerType {
+enum __pyx_t_7classes_10ARVRServer_ARVRServer_TrackerType {
   __pyx_e_7classes_10ARVRServer_TRACKER_CONTROLLER,
   __pyx_e_7classes_10ARVRServer_TRACKER_BASESTATION,
   __pyx_e_7classes_10ARVRServer_TRACKER_ANCHOR,
@@ -1061,7 +1061,7 @@ enum __pyx_t_7classes_10ARVRServer_TrackerType {
   __pyx_e_7classes_10ARVRServer_TRACKER_UNKNOWN,
   __pyx_e_7classes_10ARVRServer_TRACKER_ANY
 };
-typedef enum __pyx_t_7classes_10ARVRServer_TrackerType __pyx_t_7classes_10ARVRServer_TrackerType;
+typedef enum __pyx_t_7classes_10ARVRServer_ARVRServer_TrackerType __pyx_t_7classes_10ARVRServer_ARVRServer_TrackerType;
 
 /* "utils/Wrapper.pxd":2
  * from godot_api.binding cimport *
@@ -1081,7 +1081,7 @@ struct __pyx_obj_5utils_7Wrapper_Wrapper {
  * from utils.Wrapper cimport *
  * cdef class Object(Wrapper):             # <<<<<<<<<<<<<<
  *     pass
- * ctypedef enum ConnectFlags :CONNECT_DEFERRED, CONNECT_PERSIST, CONNECT_ONESHOT, CONNECT_REFERENCE_COUNTED,
+ * ctypedef enum Object_ConnectFlags :CONNECT_DEFERRED, CONNECT_PERSIST, CONNECT_ONESHOT, CONNECT_REFERENCE_COUNTED,
  */
 struct __pyx_obj_7classes_6Object_Object {
   struct __pyx_obj_5utils_7Wrapper_Wrapper __pyx_base;
@@ -1104,7 +1104,7 @@ struct __pyx_obj_7classes_9Reference_Reference {
  * cimport classes.Reference
  * cdef class ARVRInterface(classes.Reference.Reference):             # <<<<<<<<<<<<<<
  *     pass
- * ctypedef enum Tracking_status :ARVR_NORMAL_TRACKING, ARVR_EXCESSIVE_MOTION, ARVR_INSUFFICIENT_FEATURES, ARVR_UNKNOWN_TRACKING, ARVR_NOT_TRACKING,
+ * ctypedef enum ARVRInterface_Tracking_status :ARVR_NORMAL_TRACKING, ARVR_EXCESSIVE_MOTION, ARVR_INSUFFICIENT_FEATURES, ARVR_UNKNOWN_TRACKING, ARVR_NOT_TRACKING,
  */
 struct __pyx_obj_7classes_13ARVRInterface_ARVRInterface {
   struct __pyx_obj_7classes_9Reference_Reference __pyx_base;
@@ -1438,7 +1438,7 @@ struct __pyx_obj_4core_7vector3_7Vector3_Vector3 {
  * cimport classes.Object
  * cdef class ARVRServer(classes.Object.Object):             # <<<<<<<<<<<<<<
  *     pass
- * ctypedef enum RotationMode :RESET_FULL_ROTATION, RESET_BUT_KEEP_TILT, DONT_RESET_ROTATION,
+ * ctypedef enum ARVRServer_RotationMode :RESET_FULL_ROTATION, RESET_BUT_KEEP_TILT, DONT_RESET_ROTATION,
  */
 struct __pyx_obj_7classes_10ARVRServer_ARVRServer {
   struct __pyx_obj_7classes_6Object_Object __pyx_base;
@@ -1467,7 +1467,7 @@ static CYTHON_INLINE godot_object *__pyx_f_5utils_7Wrapper_7Wrapper_get_godot_ow
  * from utils.Wrapper cimport *
  * cdef class Object(Wrapper):             # <<<<<<<<<<<<<<
  *     pass
- * ctypedef enum ConnectFlags :CONNECT_DEFERRED, CONNECT_PERSIST, CONNECT_ONESHOT, CONNECT_REFERENCE_COUNTED,
+ * ctypedef enum Object_ConnectFlags :CONNECT_DEFERRED, CONNECT_PERSIST, CONNECT_ONESHOT, CONNECT_REFERENCE_COUNTED,
  */
 
 struct __pyx_vtabstruct_7classes_6Object_Object {
@@ -1494,7 +1494,7 @@ static struct __pyx_vtabstruct_7classes_9Reference_Reference *__pyx_vtabptr_7cla
  * cimport classes.Reference
  * cdef class ARVRInterface(classes.Reference.Reference):             # <<<<<<<<<<<<<<
  *     pass
- * ctypedef enum Tracking_status :ARVR_NORMAL_TRACKING, ARVR_EXCESSIVE_MOTION, ARVR_INSUFFICIENT_FEATURES, ARVR_UNKNOWN_TRACKING, ARVR_NOT_TRACKING,
+ * ctypedef enum ARVRInterface_Tracking_status :ARVR_NORMAL_TRACKING, ARVR_EXCESSIVE_MOTION, ARVR_INSUFFICIENT_FEATURES, ARVR_UNKNOWN_TRACKING, ARVR_NOT_TRACKING,
  */
 
 struct __pyx_vtabstruct_7classes_13ARVRInterface_ARVRInterface {
@@ -5278,7 +5278,7 @@ static CYTHON_INLINE void __pyx_f_4core_7variant_7Variant_7Variant_new_variant(C
  *     cdef inline void new_variant(self, i):
  *         print("new_variant", type(i))             # <<<<<<<<<<<<<<
  * 
- * ctypedef enum Type:
+ * ctypedef enum Variant_Type:
  */
   __pyx_t_1 = PyTuple_New(2); if (unlikely(!__pyx_t_1)) __PYX_ERR(4, 15, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
@@ -6858,13 +6858,13 @@ static int __pyx_import_star_set(PyObject *o, PyObject* py_name, char *name) {
   static const char* internal_type_names[] = {
     "AABB",
     "ARVRServer",
+    "ARVRServer_RotationMode",
+    "ARVRServer_TrackerType",
     "Array",
-    "Axis",
     "Basis",
     "Color",
     "Dictionary",
     "NodePath",
-    "Operator",
     "Plane",
     "PoolByteArray",
     "PoolColorArray",
@@ -6877,15 +6877,15 @@ static int __pyx_import_star_set(PyObject *o, PyObject* py_name, char *name) {
     "RID",
     "Rect2",
     "Reference",
-    "RotationMode",
     "String",
-    "TrackerType",
     "Transform",
     "Transform2D",
-    "Type",
     "Variant",
+    "Variant_Operator",
+    "Variant_Type",
     "Vector2",
     "Vector3",
+    "Vector3_Axis",
     "Wrapper",
     "bool",
     "godot_aabb",

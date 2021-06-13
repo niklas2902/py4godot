@@ -20,9 +20,9 @@ from core.transform.Transform cimport Transform
 from core.transform.Transform2D cimport Transform2D
 from core.vector2.Vector2 cimport Vector2
 from core.vector3.Vector3 cimport Vector3
-from core.variant.Variant cimport Type
-from core.variant.Variant cimport Operator
-from core.vector3.Vector3 cimport Axis
+from core.variant.Variant cimport Variant_Type
+from core.variant.Variant cimport Variant_Operator
+from core.vector3.Vector3 cimport Vector3_Axis
 from core.color.Color cimport Color
 from cython.operator cimport dereference
 from godot_api.binding_external cimport *
@@ -915,7 +915,7 @@ cdef class SpatialMaterial(classes.Material.Material):
   def  get_ao_texture_channel(self):
     cdef godot_object *_owner = self.godot_owner
 
-    cdef TextureChannel* ret = NULL;
+    cdef SpatialMaterial_TextureChannel* ret = NULL;
 
     api_core.godot_method_bind_ptrcall(bind_spatialmaterial_get_ao_texture_channel,self.godot_owner,NULL,&ret)
     hello('hallo2')
@@ -924,7 +924,7 @@ cdef class SpatialMaterial(classes.Material.Material):
   def  get_billboard_mode(self):
     cdef godot_object *_owner = self.godot_owner
 
-    cdef BillboardMode* ret = NULL;
+    cdef SpatialMaterial_BillboardMode* ret = NULL;
 
     api_core.godot_method_bind_ptrcall(bind_spatialmaterial_get_billboard_mode,self.godot_owner,NULL,&ret)
     hello('hallo2')
@@ -933,7 +933,7 @@ cdef class SpatialMaterial(classes.Material.Material):
   def  get_blend_mode(self):
     cdef godot_object *_owner = self.godot_owner
 
-    cdef BlendMode* ret = NULL;
+    cdef SpatialMaterial_BlendMode* ret = NULL;
 
     api_core.godot_method_bind_ptrcall(bind_spatialmaterial_get_blend_mode,self.godot_owner,NULL,&ret)
     hello('hallo2')
@@ -960,7 +960,7 @@ cdef class SpatialMaterial(classes.Material.Material):
   def  get_cull_mode(self):
     cdef godot_object *_owner = self.godot_owner
 
-    cdef CullMode* ret = NULL;
+    cdef SpatialMaterial_CullMode* ret = NULL;
 
     api_core.godot_method_bind_ptrcall(bind_spatialmaterial_get_cull_mode,self.godot_owner,NULL,&ret)
     hello('hallo2')
@@ -1005,7 +1005,7 @@ cdef class SpatialMaterial(classes.Material.Material):
   def  get_depth_draw_mode(self):
     cdef godot_object *_owner = self.godot_owner
 
-    cdef DepthDrawMode* ret = NULL;
+    cdef SpatialMaterial_DepthDrawMode* ret = NULL;
 
     api_core.godot_method_bind_ptrcall(bind_spatialmaterial_get_depth_draw_mode,self.godot_owner,NULL,&ret)
     hello('hallo2')
@@ -1023,7 +1023,7 @@ cdef class SpatialMaterial(classes.Material.Material):
   def  get_detail_blend_mode(self):
     cdef godot_object *_owner = self.godot_owner
 
-    cdef BlendMode* ret = NULL;
+    cdef SpatialMaterial_BlendMode* ret = NULL;
 
     api_core.godot_method_bind_ptrcall(bind_spatialmaterial_get_detail_blend_mode,self.godot_owner,NULL,&ret)
     hello('hallo2')
@@ -1032,7 +1032,7 @@ cdef class SpatialMaterial(classes.Material.Material):
   def  get_detail_uv(self):
     cdef godot_object *_owner = self.godot_owner
 
-    cdef DetailUV* ret = NULL;
+    cdef SpatialMaterial_DetailUV* ret = NULL;
 
     api_core.godot_method_bind_ptrcall(bind_spatialmaterial_get_detail_uv,self.godot_owner,NULL,&ret)
     hello('hallo2')
@@ -1041,7 +1041,7 @@ cdef class SpatialMaterial(classes.Material.Material):
   def  get_diffuse_mode(self):
     cdef godot_object *_owner = self.godot_owner
 
-    cdef DiffuseMode* ret = NULL;
+    cdef SpatialMaterial_DiffuseMode* ret = NULL;
 
     api_core.godot_method_bind_ptrcall(bind_spatialmaterial_get_diffuse_mode,self.godot_owner,NULL,&ret)
     hello('hallo2')
@@ -1050,7 +1050,7 @@ cdef class SpatialMaterial(classes.Material.Material):
   def  get_distance_fade(self):
     cdef godot_object *_owner = self.godot_owner
 
-    cdef DistanceFadeMode* ret = NULL;
+    cdef SpatialMaterial_DistanceFadeMode* ret = NULL;
 
     api_core.godot_method_bind_ptrcall(bind_spatialmaterial_get_distance_fade,self.godot_owner,NULL,&ret)
     hello('hallo2')
@@ -1095,7 +1095,7 @@ cdef class SpatialMaterial(classes.Material.Material):
   def  get_emission_operator(self):
     cdef godot_object *_owner = self.godot_owner
 
-    cdef EmissionOperator* ret = NULL;
+    cdef SpatialMaterial_EmissionOperator* ret = NULL;
 
     api_core.godot_method_bind_ptrcall(bind_spatialmaterial_get_emission_operator,self.godot_owner,NULL,&ret)
     hello('hallo2')
@@ -1155,7 +1155,7 @@ cdef class SpatialMaterial(classes.Material.Material):
   def  get_metallic_texture_channel(self):
     cdef godot_object *_owner = self.godot_owner
 
-    cdef TextureChannel* ret = NULL;
+    cdef SpatialMaterial_TextureChannel* ret = NULL;
 
     api_core.godot_method_bind_ptrcall(bind_spatialmaterial_get_metallic_texture_channel,self.godot_owner,NULL,&ret)
     hello('hallo2')
@@ -1227,7 +1227,7 @@ cdef class SpatialMaterial(classes.Material.Material):
   def  get_refraction_texture_channel(self):
     cdef godot_object *_owner = self.godot_owner
 
-    cdef TextureChannel* ret = NULL;
+    cdef SpatialMaterial_TextureChannel* ret = NULL;
 
     api_core.godot_method_bind_ptrcall(bind_spatialmaterial_get_refraction_texture_channel,self.godot_owner,NULL,&ret)
     hello('hallo2')
@@ -1263,7 +1263,7 @@ cdef class SpatialMaterial(classes.Material.Material):
   def  get_roughness_texture_channel(self):
     cdef godot_object *_owner = self.godot_owner
 
-    cdef TextureChannel* ret = NULL;
+    cdef SpatialMaterial_TextureChannel* ret = NULL;
 
     api_core.godot_method_bind_ptrcall(bind_spatialmaterial_get_roughness_texture_channel,self.godot_owner,NULL,&ret)
     hello('hallo2')
@@ -1281,7 +1281,7 @@ cdef class SpatialMaterial(classes.Material.Material):
   def  get_specular_mode(self):
     cdef godot_object *_owner = self.godot_owner
 
-    cdef SpecularMode* ret = NULL;
+    cdef SpatialMaterial_SpecularMode* ret = NULL;
 
     api_core.godot_method_bind_ptrcall(bind_spatialmaterial_get_specular_mode,self.godot_owner,NULL,&ret)
     hello('hallo2')

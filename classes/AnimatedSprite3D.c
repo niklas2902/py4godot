@@ -904,102 +904,102 @@ struct __pyx_obj_7classes_16AnimatedSprite3D_AnimatedSprite3D;
 /* "classes/Object.pxd":7
  * cdef class Object(Wrapper):
  *     pass
- * ctypedef enum ConnectFlags :CONNECT_DEFERRED, CONNECT_PERSIST, CONNECT_ONESHOT, CONNECT_REFERENCE_COUNTED,             # <<<<<<<<<<<<<<
+ * ctypedef enum Object_ConnectFlags :CONNECT_DEFERRED, CONNECT_PERSIST, CONNECT_ONESHOT, CONNECT_REFERENCE_COUNTED,             # <<<<<<<<<<<<<<
  */
-enum __pyx_t_7classes_6Object_ConnectFlags {
+enum __pyx_t_7classes_6Object_Object_ConnectFlags {
   __pyx_e_7classes_6Object_CONNECT_DEFERRED,
   __pyx_e_7classes_6Object_CONNECT_PERSIST,
   __pyx_e_7classes_6Object_CONNECT_ONESHOT,
   __pyx_e_7classes_6Object_CONNECT_REFERENCE_COUNTED
 };
-typedef enum __pyx_t_7classes_6Object_ConnectFlags __pyx_t_7classes_6Object_ConnectFlags;
+typedef enum __pyx_t_7classes_6Object_Object_ConnectFlags __pyx_t_7classes_6Object_Object_ConnectFlags;
 
 /* "classes/Node.pxd":7
  * cdef class Node(classes.Object.Object):
  *     pass
- * ctypedef enum PauseMode :PAUSE_MODE_INHERIT, PAUSE_MODE_STOP, PAUSE_MODE_PROCESS,             # <<<<<<<<<<<<<<
- * ctypedef enum DuplicateFlags :DUPLICATE_SIGNALS, DUPLICATE_GROUPS, DUPLICATE_SCRIPTS, DUPLICATE_USE_INSTANCING,
+ * ctypedef enum Node_PauseMode :PAUSE_MODE_INHERIT, PAUSE_MODE_STOP, PAUSE_MODE_PROCESS,             # <<<<<<<<<<<<<<
+ * ctypedef enum Node_DuplicateFlags :DUPLICATE_SIGNALS, DUPLICATE_GROUPS, DUPLICATE_SCRIPTS, DUPLICATE_USE_INSTANCING,
  */
-enum __pyx_t_7classes_4Node_PauseMode {
+enum __pyx_t_7classes_4Node_Node_PauseMode {
   __pyx_e_7classes_4Node_PAUSE_MODE_INHERIT,
   __pyx_e_7classes_4Node_PAUSE_MODE_STOP,
   __pyx_e_7classes_4Node_PAUSE_MODE_PROCESS
 };
-typedef enum __pyx_t_7classes_4Node_PauseMode __pyx_t_7classes_4Node_PauseMode;
+typedef enum __pyx_t_7classes_4Node_Node_PauseMode __pyx_t_7classes_4Node_Node_PauseMode;
 
 /* "classes/Node.pxd":8
  *     pass
- * ctypedef enum PauseMode :PAUSE_MODE_INHERIT, PAUSE_MODE_STOP, PAUSE_MODE_PROCESS,
- * ctypedef enum DuplicateFlags :DUPLICATE_SIGNALS, DUPLICATE_GROUPS, DUPLICATE_SCRIPTS, DUPLICATE_USE_INSTANCING,             # <<<<<<<<<<<<<<
+ * ctypedef enum Node_PauseMode :PAUSE_MODE_INHERIT, PAUSE_MODE_STOP, PAUSE_MODE_PROCESS,
+ * ctypedef enum Node_DuplicateFlags :DUPLICATE_SIGNALS, DUPLICATE_GROUPS, DUPLICATE_SCRIPTS, DUPLICATE_USE_INSTANCING,             # <<<<<<<<<<<<<<
  */
-enum __pyx_t_7classes_4Node_DuplicateFlags {
+enum __pyx_t_7classes_4Node_Node_DuplicateFlags {
   __pyx_e_7classes_4Node_DUPLICATE_SIGNALS,
   __pyx_e_7classes_4Node_DUPLICATE_GROUPS,
   __pyx_e_7classes_4Node_DUPLICATE_SCRIPTS,
   __pyx_e_7classes_4Node_DUPLICATE_USE_INSTANCING
 };
-typedef enum __pyx_t_7classes_4Node_DuplicateFlags __pyx_t_7classes_4Node_DuplicateFlags;
+typedef enum __pyx_t_7classes_4Node_Node_DuplicateFlags __pyx_t_7classes_4Node_Node_DuplicateFlags;
 
 /* "classes/GeometryInstance.pxd":7
  * cdef class GeometryInstance(classes.VisualInstance.VisualInstance):
  *     pass
- * ctypedef enum Flags :FLAG_USE_BAKED_LIGHT, FLAG_DRAW_NEXT_FRAME_IF_VISIBLE, FLAG_MAX,             # <<<<<<<<<<<<<<
- * ctypedef enum ShadowCastingSetting :SHADOW_CASTING_SETTING_OFF, SHADOW_CASTING_SETTING_ON, SHADOW_CASTING_SETTING_DOUBLE_SIDED, SHADOW_CASTING_SETTING_SHADOWS_ONLY,
+ * ctypedef enum GeometryInstance_Flags :FLAG_USE_BAKED_LIGHT, FLAG_DRAW_NEXT_FRAME_IF_VISIBLE, FLAG_MAX,             # <<<<<<<<<<<<<<
+ * ctypedef enum GeometryInstance_ShadowCastingSetting :SHADOW_CASTING_SETTING_OFF, SHADOW_CASTING_SETTING_ON, SHADOW_CASTING_SETTING_DOUBLE_SIDED, SHADOW_CASTING_SETTING_SHADOWS_ONLY,
  */
-enum __pyx_t_7classes_16GeometryInstance_Flags {
+enum __pyx_t_7classes_16GeometryInstance_GeometryInstance_Flags {
   __pyx_e_7classes_16GeometryInstance_FLAG_USE_BAKED_LIGHT,
   __pyx_e_7classes_16GeometryInstance_FLAG_DRAW_NEXT_FRAME_IF_VISIBLE,
   __pyx_e_7classes_16GeometryInstance_FLAG_MAX
 };
-typedef enum __pyx_t_7classes_16GeometryInstance_Flags __pyx_t_7classes_16GeometryInstance_Flags;
+typedef enum __pyx_t_7classes_16GeometryInstance_GeometryInstance_Flags __pyx_t_7classes_16GeometryInstance_GeometryInstance_Flags;
 
 /* "classes/GeometryInstance.pxd":8
  *     pass
- * ctypedef enum Flags :FLAG_USE_BAKED_LIGHT, FLAG_DRAW_NEXT_FRAME_IF_VISIBLE, FLAG_MAX,
- * ctypedef enum ShadowCastingSetting :SHADOW_CASTING_SETTING_OFF, SHADOW_CASTING_SETTING_ON, SHADOW_CASTING_SETTING_DOUBLE_SIDED, SHADOW_CASTING_SETTING_SHADOWS_ONLY,             # <<<<<<<<<<<<<<
+ * ctypedef enum GeometryInstance_Flags :FLAG_USE_BAKED_LIGHT, FLAG_DRAW_NEXT_FRAME_IF_VISIBLE, FLAG_MAX,
+ * ctypedef enum GeometryInstance_ShadowCastingSetting :SHADOW_CASTING_SETTING_OFF, SHADOW_CASTING_SETTING_ON, SHADOW_CASTING_SETTING_DOUBLE_SIDED, SHADOW_CASTING_SETTING_SHADOWS_ONLY,             # <<<<<<<<<<<<<<
  */
-enum __pyx_t_7classes_16GeometryInstance_ShadowCastingSetting {
+enum __pyx_t_7classes_16GeometryInstance_GeometryInstance_ShadowCastingSetting {
   __pyx_e_7classes_16GeometryInstance_SHADOW_CASTING_SETTING_OFF,
   __pyx_e_7classes_16GeometryInstance_SHADOW_CASTING_SETTING_ON,
   __pyx_e_7classes_16GeometryInstance_SHADOW_CASTING_SETTING_DOUBLE_SIDED,
   __pyx_e_7classes_16GeometryInstance_SHADOW_CASTING_SETTING_SHADOWS_ONLY
 };
-typedef enum __pyx_t_7classes_16GeometryInstance_ShadowCastingSetting __pyx_t_7classes_16GeometryInstance_ShadowCastingSetting;
+typedef enum __pyx_t_7classes_16GeometryInstance_GeometryInstance_ShadowCastingSetting __pyx_t_7classes_16GeometryInstance_GeometryInstance_ShadowCastingSetting;
 
 /* "classes/SpriteBase3D.pxd":7
  * cdef class SpriteBase3D(classes.GeometryInstance.GeometryInstance):
  *     pass
- * ctypedef enum DrawFlags :FLAG_TRANSPARENT, FLAG_SHADED, FLAG_DOUBLE_SIDED, FLAG_MAX,             # <<<<<<<<<<<<<<
- * ctypedef enum AlphaCutMode :ALPHA_CUT_DISABLED, ALPHA_CUT_DISCARD, ALPHA_CUT_OPAQUE_PREPASS,
+ * ctypedef enum SpriteBase3D_DrawFlags :FLAG_TRANSPARENT, FLAG_SHADED, FLAG_DOUBLE_SIDED, FLAG_MAX,             # <<<<<<<<<<<<<<
+ * ctypedef enum SpriteBase3D_AlphaCutMode :ALPHA_CUT_DISABLED, ALPHA_CUT_DISCARD, ALPHA_CUT_OPAQUE_PREPASS,
  */
-enum __pyx_t_7classes_12SpriteBase3D_DrawFlags {
+enum __pyx_t_7classes_12SpriteBase3D_SpriteBase3D_DrawFlags {
   __pyx_e_7classes_12SpriteBase3D_FLAG_TRANSPARENT,
   __pyx_e_7classes_12SpriteBase3D_FLAG_SHADED,
   __pyx_e_7classes_12SpriteBase3D_FLAG_DOUBLE_SIDED,
   __pyx_e_7classes_12SpriteBase3D_FLAG_MAX
 };
-typedef enum __pyx_t_7classes_12SpriteBase3D_DrawFlags __pyx_t_7classes_12SpriteBase3D_DrawFlags;
+typedef enum __pyx_t_7classes_12SpriteBase3D_SpriteBase3D_DrawFlags __pyx_t_7classes_12SpriteBase3D_SpriteBase3D_DrawFlags;
 
 /* "classes/SpriteBase3D.pxd":8
  *     pass
- * ctypedef enum DrawFlags :FLAG_TRANSPARENT, FLAG_SHADED, FLAG_DOUBLE_SIDED, FLAG_MAX,
- * ctypedef enum AlphaCutMode :ALPHA_CUT_DISABLED, ALPHA_CUT_DISCARD, ALPHA_CUT_OPAQUE_PREPASS,             # <<<<<<<<<<<<<<
+ * ctypedef enum SpriteBase3D_DrawFlags :FLAG_TRANSPARENT, FLAG_SHADED, FLAG_DOUBLE_SIDED, FLAG_MAX,
+ * ctypedef enum SpriteBase3D_AlphaCutMode :ALPHA_CUT_DISABLED, ALPHA_CUT_DISCARD, ALPHA_CUT_OPAQUE_PREPASS,             # <<<<<<<<<<<<<<
  */
-enum __pyx_t_7classes_12SpriteBase3D_AlphaCutMode {
+enum __pyx_t_7classes_12SpriteBase3D_SpriteBase3D_AlphaCutMode {
   __pyx_e_7classes_12SpriteBase3D_ALPHA_CUT_DISABLED,
   __pyx_e_7classes_12SpriteBase3D_ALPHA_CUT_DISCARD,
   __pyx_e_7classes_12SpriteBase3D_ALPHA_CUT_OPAQUE_PREPASS
 };
-typedef enum __pyx_t_7classes_12SpriteBase3D_AlphaCutMode __pyx_t_7classes_12SpriteBase3D_AlphaCutMode;
+typedef enum __pyx_t_7classes_12SpriteBase3D_SpriteBase3D_AlphaCutMode __pyx_t_7classes_12SpriteBase3D_SpriteBase3D_AlphaCutMode;
 
 /* "core/variant/Variant.pxd":17
  *         print("new_variant", type(i))
  * 
- * ctypedef enum Type:             # <<<<<<<<<<<<<<
+ * ctypedef enum Variant_Type:             # <<<<<<<<<<<<<<
  *     NIL,
  *     # atomic types
  */
-enum __pyx_t_4core_7variant_7Variant_Type {
+enum __pyx_t_4core_7variant_7Variant_Variant_Type {
   __pyx_e_4core_7variant_7Variant_NIL,
   __pyx_e_4core_7variant_7Variant_BOOL,
   __pyx_e_4core_7variant_7Variant_INT,
@@ -1029,16 +1029,16 @@ enum __pyx_t_4core_7variant_7Variant_Type {
   __pyx_e_4core_7variant_7Variant_POOL_COLOR_ARRAY,
   __pyx_e_4core_7variant_7Variant_VARIANT_MAX
 };
-typedef enum __pyx_t_4core_7variant_7Variant_Type __pyx_t_4core_7variant_7Variant_Type;
+typedef enum __pyx_t_4core_7variant_7Variant_Variant_Type __pyx_t_4core_7variant_7Variant_Variant_Type;
 
 /* "core/variant/Variant.pxd":58
  * 
  * 
- * ctypedef enum Operator :             # <<<<<<<<<<<<<<
+ * ctypedef enum Variant_Operator :             # <<<<<<<<<<<<<<
  * 
  *     #comparation
  */
-enum __pyx_t_4core_7variant_7Variant_Operator {
+enum __pyx_t_4core_7variant_7Variant_Variant_Operator {
   __pyx_e_4core_7variant_7Variant_OP_EQUAL,
   __pyx_e_4core_7variant_7Variant_OP_NOT_EQUAL,
   __pyx_e_4core_7variant_7Variant_OP_LESS,
@@ -1066,21 +1066,21 @@ enum __pyx_t_4core_7variant_7Variant_Operator {
   __pyx_e_4core_7variant_7Variant_OP_IN,
   __pyx_e_4core_7variant_7Variant_OP_MAX
 };
-typedef enum __pyx_t_4core_7variant_7Variant_Operator __pyx_t_4core_7variant_7Variant_Operator;
+typedef enum __pyx_t_4core_7variant_7Variant_Variant_Operator __pyx_t_4core_7variant_7Variant_Variant_Operator;
 
 /* "core/vector3/Vector3.pxd":15
  * 
  * 
- * ctypedef enum Axis :             # <<<<<<<<<<<<<<
- *     AXIS_X,
- *     AXIS_Y,
+ * ctypedef enum Vector3_Axis :             # <<<<<<<<<<<<<<
+ *     Vector3_AXIS_X,
+ *     Vector3_AXIS_Y,
  */
-enum __pyx_t_4core_7vector3_7Vector3_Axis {
-  __pyx_e_4core_7vector3_7Vector3_AXIS_X,
-  __pyx_e_4core_7vector3_7Vector3_AXIS_Y,
-  __pyx_e_4core_7vector3_7Vector3_AXIS_Z
+enum __pyx_t_4core_7vector3_7Vector3_Vector3_Axis {
+  __pyx_e_4core_7vector3_7Vector3_Vector3_AXIS_X,
+  __pyx_e_4core_7vector3_7Vector3_Vector3_AXIS_Y,
+  __pyx_e_4core_7vector3_7Vector3_Vector3_AXIS_Z
 };
-typedef enum __pyx_t_4core_7vector3_7Vector3_Axis __pyx_t_4core_7vector3_7Vector3_Axis;
+typedef enum __pyx_t_4core_7vector3_7Vector3_Vector3_Axis __pyx_t_4core_7vector3_7Vector3_Vector3_Axis;
 
 /* "utils/Wrapper.pxd":2
  * from godot_api.binding cimport *
@@ -1100,7 +1100,7 @@ struct __pyx_obj_5utils_7Wrapper_Wrapper {
  * from utils.Wrapper cimport *
  * cdef class Object(Wrapper):             # <<<<<<<<<<<<<<
  *     pass
- * ctypedef enum ConnectFlags :CONNECT_DEFERRED, CONNECT_PERSIST, CONNECT_ONESHOT, CONNECT_REFERENCE_COUNTED,
+ * ctypedef enum Object_ConnectFlags :CONNECT_DEFERRED, CONNECT_PERSIST, CONNECT_ONESHOT, CONNECT_REFERENCE_COUNTED,
  */
 struct __pyx_obj_7classes_6Object_Object {
   struct __pyx_obj_5utils_7Wrapper_Wrapper __pyx_base;
@@ -1145,7 +1145,7 @@ struct __pyx_obj_7classes_12SpriteFrames_SpriteFrames {
  * cimport classes.Object
  * cdef class Node(classes.Object.Object):             # <<<<<<<<<<<<<<
  *     pass
- * ctypedef enum PauseMode :PAUSE_MODE_INHERIT, PAUSE_MODE_STOP, PAUSE_MODE_PROCESS,
+ * ctypedef enum Node_PauseMode :PAUSE_MODE_INHERIT, PAUSE_MODE_STOP, PAUSE_MODE_PROCESS,
  */
 struct __pyx_obj_7classes_4Node_Node {
   struct __pyx_obj_7classes_6Object_Object __pyx_base;
@@ -1179,7 +1179,7 @@ struct __pyx_obj_7classes_14VisualInstance_VisualInstance {
  * cimport classes.VisualInstance
  * cdef class GeometryInstance(classes.VisualInstance.VisualInstance):             # <<<<<<<<<<<<<<
  *     pass
- * ctypedef enum Flags :FLAG_USE_BAKED_LIGHT, FLAG_DRAW_NEXT_FRAME_IF_VISIBLE, FLAG_MAX,
+ * ctypedef enum GeometryInstance_Flags :FLAG_USE_BAKED_LIGHT, FLAG_DRAW_NEXT_FRAME_IF_VISIBLE, FLAG_MAX,
  */
 struct __pyx_obj_7classes_16GeometryInstance_GeometryInstance {
   struct __pyx_obj_7classes_14VisualInstance_VisualInstance __pyx_base;
@@ -1191,7 +1191,7 @@ struct __pyx_obj_7classes_16GeometryInstance_GeometryInstance {
  * cimport classes.GeometryInstance
  * cdef class SpriteBase3D(classes.GeometryInstance.GeometryInstance):             # <<<<<<<<<<<<<<
  *     pass
- * ctypedef enum DrawFlags :FLAG_TRANSPARENT, FLAG_SHADED, FLAG_DOUBLE_SIDED, FLAG_MAX,
+ * ctypedef enum SpriteBase3D_DrawFlags :FLAG_TRANSPARENT, FLAG_SHADED, FLAG_DOUBLE_SIDED, FLAG_MAX,
  */
 struct __pyx_obj_7classes_12SpriteBase3D_SpriteBase3D {
   struct __pyx_obj_7classes_16GeometryInstance_GeometryInstance __pyx_base;
@@ -1553,7 +1553,7 @@ static CYTHON_INLINE godot_object *__pyx_f_5utils_7Wrapper_7Wrapper_get_godot_ow
  * from utils.Wrapper cimport *
  * cdef class Object(Wrapper):             # <<<<<<<<<<<<<<
  *     pass
- * ctypedef enum ConnectFlags :CONNECT_DEFERRED, CONNECT_PERSIST, CONNECT_ONESHOT, CONNECT_REFERENCE_COUNTED,
+ * ctypedef enum Object_ConnectFlags :CONNECT_DEFERRED, CONNECT_PERSIST, CONNECT_ONESHOT, CONNECT_REFERENCE_COUNTED,
  */
 
 struct __pyx_vtabstruct_7classes_6Object_Object {
@@ -1606,7 +1606,7 @@ static struct __pyx_vtabstruct_7classes_12SpriteFrames_SpriteFrames *__pyx_vtabp
  * cimport classes.Object
  * cdef class Node(classes.Object.Object):             # <<<<<<<<<<<<<<
  *     pass
- * ctypedef enum PauseMode :PAUSE_MODE_INHERIT, PAUSE_MODE_STOP, PAUSE_MODE_PROCESS,
+ * ctypedef enum Node_PauseMode :PAUSE_MODE_INHERIT, PAUSE_MODE_STOP, PAUSE_MODE_PROCESS,
  */
 
 struct __pyx_vtabstruct_7classes_4Node_Node {
@@ -1646,7 +1646,7 @@ static struct __pyx_vtabstruct_7classes_14VisualInstance_VisualInstance *__pyx_v
  * cimport classes.VisualInstance
  * cdef class GeometryInstance(classes.VisualInstance.VisualInstance):             # <<<<<<<<<<<<<<
  *     pass
- * ctypedef enum Flags :FLAG_USE_BAKED_LIGHT, FLAG_DRAW_NEXT_FRAME_IF_VISIBLE, FLAG_MAX,
+ * ctypedef enum GeometryInstance_Flags :FLAG_USE_BAKED_LIGHT, FLAG_DRAW_NEXT_FRAME_IF_VISIBLE, FLAG_MAX,
  */
 
 struct __pyx_vtabstruct_7classes_16GeometryInstance_GeometryInstance {
@@ -1660,7 +1660,7 @@ static struct __pyx_vtabstruct_7classes_16GeometryInstance_GeometryInstance *__p
  * cimport classes.GeometryInstance
  * cdef class SpriteBase3D(classes.GeometryInstance.GeometryInstance):             # <<<<<<<<<<<<<<
  *     pass
- * ctypedef enum DrawFlags :FLAG_TRANSPARENT, FLAG_SHADED, FLAG_DOUBLE_SIDED, FLAG_MAX,
+ * ctypedef enum SpriteBase3D_DrawFlags :FLAG_TRANSPARENT, FLAG_SHADED, FLAG_DOUBLE_SIDED, FLAG_MAX,
  */
 
 struct __pyx_vtabstruct_7classes_12SpriteBase3D_SpriteBase3D {
@@ -5189,7 +5189,7 @@ static CYTHON_INLINE void __pyx_f_4core_7variant_7Variant_7Variant_new_variant(C
  *     cdef inline void new_variant(self, i):
  *         print("new_variant", type(i))             # <<<<<<<<<<<<<<
  * 
- * ctypedef enum Type:
+ * ctypedef enum Variant_Type:
  */
   __pyx_t_1 = PyTuple_New(2); if (unlikely(!__pyx_t_1)) __PYX_ERR(4, 15, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
@@ -6796,12 +6796,10 @@ static int __pyx_import_star_set(PyObject *o, PyObject* py_name, char *name) {
     "AABB",
     "AnimatedSprite3D",
     "Array",
-    "Axis",
     "Basis",
     "Color",
     "Dictionary",
     "NodePath",
-    "Operator",
     "Plane",
     "PoolByteArray",
     "PoolColorArray",
@@ -6817,10 +6815,12 @@ static int __pyx_import_star_set(PyObject *o, PyObject* py_name, char *name) {
     "String",
     "Transform",
     "Transform2D",
-    "Type",
     "Variant",
+    "Variant_Operator",
+    "Variant_Type",
     "Vector2",
     "Vector3",
+    "Vector3_Axis",
     "Wrapper",
     "bool",
     "godot_aabb",

@@ -20,9 +20,9 @@ from core.transform.Transform cimport Transform
 from core.transform.Transform2D cimport Transform2D
 from core.vector2.Vector2 cimport Vector2
 from core.vector3.Vector3 cimport Vector3
-from core.variant.Variant cimport Type
-from core.variant.Variant cimport Operator
-from core.vector3.Vector3 cimport Axis
+from core.variant.Variant cimport Variant_Type
+from core.variant.Variant cimport Variant_Operator
+from core.vector3.Vector3 cimport Vector3_Axis
 from core.color.Color cimport Color
 from cython.operator cimport dereference
 from godot_api.binding_external cimport *
@@ -246,7 +246,7 @@ cdef class Particles(classes.GeometryInstance.GeometryInstance):
   def  get_draw_order(self):
     cdef godot_object *_owner = self.godot_owner
 
-    cdef DrawOrder* ret = NULL;
+    cdef Particles_DrawOrder* ret = NULL;
 
     api_core.godot_method_bind_ptrcall(bind_particles_get_draw_order,self.godot_owner,NULL,&ret)
     hello('hallo2')

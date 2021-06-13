@@ -20,9 +20,9 @@ from core.transform.Transform cimport Transform
 from core.transform.Transform2D cimport Transform2D
 from core.vector2.Vector2 cimport Vector2
 from core.vector3.Vector3 cimport Vector3
-from core.variant.Variant cimport Type
-from core.variant.Variant cimport Operator
-from core.vector3.Vector3 cimport Axis
+from core.variant.Variant cimport Variant_Type
+from core.variant.Variant cimport Variant_Operator
+from core.vector3.Vector3 cimport Vector3_Axis
 from core.color.Color cimport Color
 from cython.operator cimport dereference
 from godot_api.binding_external cimport *
@@ -192,7 +192,7 @@ cdef class SpriteBase3D(classes.GeometryInstance.GeometryInstance):
   def  get_alpha_cut_mode(self):
     cdef godot_object *_owner = self.godot_owner
 
-    cdef AlphaCutMode* ret = NULL;
+    cdef SpriteBase3D_AlphaCutMode* ret = NULL;
 
     api_core.godot_method_bind_ptrcall(bind_spritebase3d_get_alpha_cut_mode,self.godot_owner,NULL,&ret)
     hello('hallo2')
@@ -201,7 +201,7 @@ cdef class SpriteBase3D(classes.GeometryInstance.GeometryInstance):
   def  get_axis(self):
     cdef godot_object *_owner = self.godot_owner
 
-    cdef Axis* ret = NULL;
+    cdef Vector3_Axis* ret = NULL;
 
     api_core.godot_method_bind_ptrcall(bind_spritebase3d_get_axis,self.godot_owner,NULL,&ret)
     hello('hallo2')
@@ -210,7 +210,7 @@ cdef class SpriteBase3D(classes.GeometryInstance.GeometryInstance):
   def  get_billboard_mode(self):
     cdef godot_object *_owner = self.godot_owner
 
-    cdef classes.SpatialMaterial.BillboardMode* ret = NULL;
+    cdef classes.SpatialMaterial.SpatialMaterial_BillboardMode* ret = NULL;
 
     api_core.godot_method_bind_ptrcall(bind_spritebase3d_get_billboard_mode,self.godot_owner,NULL,&ret)
     hello('hallo2')

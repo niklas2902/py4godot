@@ -20,9 +20,9 @@ from core.transform.Transform cimport Transform
 from core.transform.Transform2D cimport Transform2D
 from core.vector2.Vector2 cimport Vector2
 from core.vector3.Vector3 cimport Vector3
-from core.variant.Variant cimport Type
-from core.variant.Variant cimport Operator
-from core.vector3.Vector3 cimport Axis
+from core.variant.Variant cimport Variant_Type
+from core.variant.Variant cimport Variant_Operator
+from core.vector3.Vector3 cimport Vector3_Axis
 from core.color.Color cimport Color
 from cython.operator cimport dereference
 from godot_api.binding_external cimport *
@@ -383,7 +383,7 @@ cdef class PhysicsServer(classes.Object.Object):
   def  area_get_space_override_mode(self,  RID area):
     cdef godot_object *_owner = self.godot_owner
 
-    cdef AreaSpaceOverrideMode* ret = NULL;
+    cdef PhysicsServer_AreaSpaceOverrideMode* ret = NULL;
 
     cdef void *args[1]
 
@@ -715,7 +715,7 @@ cdef class PhysicsServer(classes.Object.Object):
   def  body_get_mode(self,  RID body):
     cdef godot_object *_owner = self.godot_owner
 
-    cdef BodyMode* ret = NULL;
+    cdef PhysicsServer_BodyMode* ret = NULL;
 
     cdef void *args[1]
 
@@ -1269,7 +1269,7 @@ cdef class PhysicsServer(classes.Object.Object):
   def  joint_get_type(self,  RID joint):
     cdef godot_object *_owner = self.godot_owner
 
-    cdef JointType* ret = NULL;
+    cdef PhysicsServer_JointType* ret = NULL;
 
     cdef void *args[1]
 
@@ -1387,7 +1387,7 @@ cdef class PhysicsServer(classes.Object.Object):
   def  shape_get_type(self,  RID shape):
     cdef godot_object *_owner = self.godot_owner
 
-    cdef ShapeType* ret = NULL;
+    cdef PhysicsServer_ShapeType* ret = NULL;
 
     cdef void *args[1]
 

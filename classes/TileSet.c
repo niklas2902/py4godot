@@ -904,34 +904,34 @@ struct __pyx_obj_7classes_7TileSet_TileSet;
 /* "classes/Object.pxd":7
  * cdef class Object(Wrapper):
  *     pass
- * ctypedef enum ConnectFlags :CONNECT_DEFERRED, CONNECT_PERSIST, CONNECT_ONESHOT, CONNECT_REFERENCE_COUNTED,             # <<<<<<<<<<<<<<
+ * ctypedef enum Object_ConnectFlags :CONNECT_DEFERRED, CONNECT_PERSIST, CONNECT_ONESHOT, CONNECT_REFERENCE_COUNTED,             # <<<<<<<<<<<<<<
  */
-enum __pyx_t_7classes_6Object_ConnectFlags {
+enum __pyx_t_7classes_6Object_Object_ConnectFlags {
   __pyx_e_7classes_6Object_CONNECT_DEFERRED,
   __pyx_e_7classes_6Object_CONNECT_PERSIST,
   __pyx_e_7classes_6Object_CONNECT_ONESHOT,
   __pyx_e_7classes_6Object_CONNECT_REFERENCE_COUNTED
 };
-typedef enum __pyx_t_7classes_6Object_ConnectFlags __pyx_t_7classes_6Object_ConnectFlags;
+typedef enum __pyx_t_7classes_6Object_Object_ConnectFlags __pyx_t_7classes_6Object_Object_ConnectFlags;
 
 /* "classes/OccluderPolygon2D.pxd":7
  * cdef class OccluderPolygon2D(classes.Resource.Resource):
  *     pass
- * ctypedef enum CullMode :CULL_DISABLED, CULL_CLOCKWISE, CULL_COUNTER_CLOCKWISE,             # <<<<<<<<<<<<<<
+ * ctypedef enum OccluderPolygon2D_CullMode :CULL_DISABLED, CULL_CLOCKWISE, CULL_COUNTER_CLOCKWISE,             # <<<<<<<<<<<<<<
  */
-enum __pyx_t_7classes_17OccluderPolygon2D_CullMode {
+enum __pyx_t_7classes_17OccluderPolygon2D_OccluderPolygon2D_CullMode {
   __pyx_e_7classes_17OccluderPolygon2D_CULL_DISABLED,
   __pyx_e_7classes_17OccluderPolygon2D_CULL_CLOCKWISE,
   __pyx_e_7classes_17OccluderPolygon2D_CULL_COUNTER_CLOCKWISE
 };
-typedef enum __pyx_t_7classes_17OccluderPolygon2D_CullMode __pyx_t_7classes_17OccluderPolygon2D_CullMode;
+typedef enum __pyx_t_7classes_17OccluderPolygon2D_OccluderPolygon2D_CullMode __pyx_t_7classes_17OccluderPolygon2D_OccluderPolygon2D_CullMode;
 
 /* "classes/Texture.pxd":7
  * cdef class Texture(classes.Resource.Resource):
  *     pass
- * ctypedef enum Flags :FLAG_MIPMAPS, FLAG_REPEAT, FLAG_FILTER, FLAGS_DEFAULT, FLAG_ANISOTROPIC_FILTER, FLAG_CONVERT_TO_LINEAR, FLAG_MIRRORED_REPEAT, FLAG_VIDEO_SURFACE,             # <<<<<<<<<<<<<<
+ * ctypedef enum Texture_Flags :FLAG_MIPMAPS, FLAG_REPEAT, FLAG_FILTER, FLAGS_DEFAULT, FLAG_ANISOTROPIC_FILTER, FLAG_CONVERT_TO_LINEAR, FLAG_MIRRORED_REPEAT, FLAG_VIDEO_SURFACE,             # <<<<<<<<<<<<<<
  */
-enum __pyx_t_7classes_7Texture_Flags {
+enum __pyx_t_7classes_7Texture_Texture_Flags {
   __pyx_e_7classes_7Texture_FLAG_MIPMAPS,
   __pyx_e_7classes_7Texture_FLAG_REPEAT,
   __pyx_e_7classes_7Texture_FLAG_FILTER,
@@ -941,16 +941,16 @@ enum __pyx_t_7classes_7Texture_Flags {
   __pyx_e_7classes_7Texture_FLAG_MIRRORED_REPEAT,
   __pyx_e_7classes_7Texture_FLAG_VIDEO_SURFACE
 };
-typedef enum __pyx_t_7classes_7Texture_Flags __pyx_t_7classes_7Texture_Flags;
+typedef enum __pyx_t_7classes_7Texture_Texture_Flags __pyx_t_7classes_7Texture_Texture_Flags;
 
 /* "core/variant/Variant.pxd":17
  *         print("new_variant", type(i))
  * 
- * ctypedef enum Type:             # <<<<<<<<<<<<<<
+ * ctypedef enum Variant_Type:             # <<<<<<<<<<<<<<
  *     NIL,
  *     # atomic types
  */
-enum __pyx_t_4core_7variant_7Variant_Type {
+enum __pyx_t_4core_7variant_7Variant_Variant_Type {
   __pyx_e_4core_7variant_7Variant_NIL,
   __pyx_e_4core_7variant_7Variant_BOOL,
   __pyx_e_4core_7variant_7Variant_INT,
@@ -980,16 +980,16 @@ enum __pyx_t_4core_7variant_7Variant_Type {
   __pyx_e_4core_7variant_7Variant_POOL_COLOR_ARRAY,
   __pyx_e_4core_7variant_7Variant_VARIANT_MAX
 };
-typedef enum __pyx_t_4core_7variant_7Variant_Type __pyx_t_4core_7variant_7Variant_Type;
+typedef enum __pyx_t_4core_7variant_7Variant_Variant_Type __pyx_t_4core_7variant_7Variant_Variant_Type;
 
 /* "core/variant/Variant.pxd":58
  * 
  * 
- * ctypedef enum Operator :             # <<<<<<<<<<<<<<
+ * ctypedef enum Variant_Operator :             # <<<<<<<<<<<<<<
  * 
  *     #comparation
  */
-enum __pyx_t_4core_7variant_7Variant_Operator {
+enum __pyx_t_4core_7variant_7Variant_Variant_Operator {
   __pyx_e_4core_7variant_7Variant_OP_EQUAL,
   __pyx_e_4core_7variant_7Variant_OP_NOT_EQUAL,
   __pyx_e_4core_7variant_7Variant_OP_LESS,
@@ -1017,43 +1017,43 @@ enum __pyx_t_4core_7variant_7Variant_Operator {
   __pyx_e_4core_7variant_7Variant_OP_IN,
   __pyx_e_4core_7variant_7Variant_OP_MAX
 };
-typedef enum __pyx_t_4core_7variant_7Variant_Operator __pyx_t_4core_7variant_7Variant_Operator;
+typedef enum __pyx_t_4core_7variant_7Variant_Variant_Operator __pyx_t_4core_7variant_7Variant_Variant_Operator;
 
 /* "core/vector3/Vector3.pxd":15
  * 
  * 
- * ctypedef enum Axis :             # <<<<<<<<<<<<<<
- *     AXIS_X,
- *     AXIS_Y,
+ * ctypedef enum Vector3_Axis :             # <<<<<<<<<<<<<<
+ *     Vector3_AXIS_X,
+ *     Vector3_AXIS_Y,
  */
-enum __pyx_t_4core_7vector3_7Vector3_Axis {
-  __pyx_e_4core_7vector3_7Vector3_AXIS_X,
-  __pyx_e_4core_7vector3_7Vector3_AXIS_Y,
-  __pyx_e_4core_7vector3_7Vector3_AXIS_Z
+enum __pyx_t_4core_7vector3_7Vector3_Vector3_Axis {
+  __pyx_e_4core_7vector3_7Vector3_Vector3_AXIS_X,
+  __pyx_e_4core_7vector3_7Vector3_Vector3_AXIS_Y,
+  __pyx_e_4core_7vector3_7Vector3_Vector3_AXIS_Z
 };
-typedef enum __pyx_t_4core_7vector3_7Vector3_Axis __pyx_t_4core_7vector3_7Vector3_Axis;
+typedef enum __pyx_t_4core_7vector3_7Vector3_Vector3_Axis __pyx_t_4core_7vector3_7Vector3_Vector3_Axis;
 
 /* "classes/TileSet.pxd":7
  * cdef class TileSet(classes.Resource.Resource):
  *     pass
- * ctypedef enum TileMode :SINGLE_TILE, AUTO_TILE, ATLAS_TILE,             # <<<<<<<<<<<<<<
- * ctypedef enum AutotileBindings :BIND_TOPLEFT, BIND_TOP, BIND_TOPRIGHT, BIND_LEFT, BIND_CENTER, BIND_RIGHT, BIND_BOTTOMLEFT, BIND_BOTTOM, BIND_BOTTOMRIGHT,
- * ctypedef enum BitmaskMode :BITMASK_2X2, BITMASK_3X3_MINIMAL, BITMASK_3X3,
+ * ctypedef enum TileSet_TileMode :SINGLE_TILE, AUTO_TILE, ATLAS_TILE,             # <<<<<<<<<<<<<<
+ * ctypedef enum TileSet_AutotileBindings :BIND_TOPLEFT, BIND_TOP, BIND_TOPRIGHT, BIND_LEFT, BIND_CENTER, BIND_RIGHT, BIND_BOTTOMLEFT, BIND_BOTTOM, BIND_BOTTOMRIGHT,
+ * ctypedef enum TileSet_BitmaskMode :BITMASK_2X2, BITMASK_3X3_MINIMAL, BITMASK_3X3,
  */
-enum __pyx_t_7classes_7TileSet_TileMode {
+enum __pyx_t_7classes_7TileSet_TileSet_TileMode {
   __pyx_e_7classes_7TileSet_SINGLE_TILE,
   __pyx_e_7classes_7TileSet_AUTO_TILE,
   __pyx_e_7classes_7TileSet_ATLAS_TILE
 };
-typedef enum __pyx_t_7classes_7TileSet_TileMode __pyx_t_7classes_7TileSet_TileMode;
+typedef enum __pyx_t_7classes_7TileSet_TileSet_TileMode __pyx_t_7classes_7TileSet_TileSet_TileMode;
 
 /* "classes/TileSet.pxd":8
  *     pass
- * ctypedef enum TileMode :SINGLE_TILE, AUTO_TILE, ATLAS_TILE,
- * ctypedef enum AutotileBindings :BIND_TOPLEFT, BIND_TOP, BIND_TOPRIGHT, BIND_LEFT, BIND_CENTER, BIND_RIGHT, BIND_BOTTOMLEFT, BIND_BOTTOM, BIND_BOTTOMRIGHT,             # <<<<<<<<<<<<<<
- * ctypedef enum BitmaskMode :BITMASK_2X2, BITMASK_3X3_MINIMAL, BITMASK_3X3,
+ * ctypedef enum TileSet_TileMode :SINGLE_TILE, AUTO_TILE, ATLAS_TILE,
+ * ctypedef enum TileSet_AutotileBindings :BIND_TOPLEFT, BIND_TOP, BIND_TOPRIGHT, BIND_LEFT, BIND_CENTER, BIND_RIGHT, BIND_BOTTOMLEFT, BIND_BOTTOM, BIND_BOTTOMRIGHT,             # <<<<<<<<<<<<<<
+ * ctypedef enum TileSet_BitmaskMode :BITMASK_2X2, BITMASK_3X3_MINIMAL, BITMASK_3X3,
  */
-enum __pyx_t_7classes_7TileSet_AutotileBindings {
+enum __pyx_t_7classes_7TileSet_TileSet_AutotileBindings {
   __pyx_e_7classes_7TileSet_BIND_TOPLEFT,
   __pyx_e_7classes_7TileSet_BIND_TOP,
   __pyx_e_7classes_7TileSet_BIND_TOPRIGHT,
@@ -1064,19 +1064,19 @@ enum __pyx_t_7classes_7TileSet_AutotileBindings {
   __pyx_e_7classes_7TileSet_BIND_BOTTOM,
   __pyx_e_7classes_7TileSet_BIND_BOTTOMRIGHT
 };
-typedef enum __pyx_t_7classes_7TileSet_AutotileBindings __pyx_t_7classes_7TileSet_AutotileBindings;
+typedef enum __pyx_t_7classes_7TileSet_TileSet_AutotileBindings __pyx_t_7classes_7TileSet_TileSet_AutotileBindings;
 
 /* "classes/TileSet.pxd":9
- * ctypedef enum TileMode :SINGLE_TILE, AUTO_TILE, ATLAS_TILE,
- * ctypedef enum AutotileBindings :BIND_TOPLEFT, BIND_TOP, BIND_TOPRIGHT, BIND_LEFT, BIND_CENTER, BIND_RIGHT, BIND_BOTTOMLEFT, BIND_BOTTOM, BIND_BOTTOMRIGHT,
- * ctypedef enum BitmaskMode :BITMASK_2X2, BITMASK_3X3_MINIMAL, BITMASK_3X3,             # <<<<<<<<<<<<<<
+ * ctypedef enum TileSet_TileMode :SINGLE_TILE, AUTO_TILE, ATLAS_TILE,
+ * ctypedef enum TileSet_AutotileBindings :BIND_TOPLEFT, BIND_TOP, BIND_TOPRIGHT, BIND_LEFT, BIND_CENTER, BIND_RIGHT, BIND_BOTTOMLEFT, BIND_BOTTOM, BIND_BOTTOMRIGHT,
+ * ctypedef enum TileSet_BitmaskMode :BITMASK_2X2, BITMASK_3X3_MINIMAL, BITMASK_3X3,             # <<<<<<<<<<<<<<
  */
-enum __pyx_t_7classes_7TileSet_BitmaskMode {
+enum __pyx_t_7classes_7TileSet_TileSet_BitmaskMode {
   __pyx_e_7classes_7TileSet_BITMASK_2X2,
   __pyx_e_7classes_7TileSet_BITMASK_3X3_MINIMAL,
   __pyx_e_7classes_7TileSet_BITMASK_3X3
 };
-typedef enum __pyx_t_7classes_7TileSet_BitmaskMode __pyx_t_7classes_7TileSet_BitmaskMode;
+typedef enum __pyx_t_7classes_7TileSet_TileSet_BitmaskMode __pyx_t_7classes_7TileSet_TileSet_BitmaskMode;
 
 /* "utils/Wrapper.pxd":2
  * from godot_api.binding cimport *
@@ -1096,7 +1096,7 @@ struct __pyx_obj_5utils_7Wrapper_Wrapper {
  * from utils.Wrapper cimport *
  * cdef class Object(Wrapper):             # <<<<<<<<<<<<<<
  *     pass
- * ctypedef enum ConnectFlags :CONNECT_DEFERRED, CONNECT_PERSIST, CONNECT_ONESHOT, CONNECT_REFERENCE_COUNTED,
+ * ctypedef enum Object_ConnectFlags :CONNECT_DEFERRED, CONNECT_PERSIST, CONNECT_ONESHOT, CONNECT_REFERENCE_COUNTED,
  */
 struct __pyx_obj_7classes_6Object_Object {
   struct __pyx_obj_5utils_7Wrapper_Wrapper __pyx_base;
@@ -1130,7 +1130,7 @@ struct __pyx_obj_7classes_8Resource_Resource {
  * cimport classes.Resource
  * cdef class OccluderPolygon2D(classes.Resource.Resource):             # <<<<<<<<<<<<<<
  *     pass
- * ctypedef enum CullMode :CULL_DISABLED, CULL_CLOCKWISE, CULL_COUNTER_CLOCKWISE,
+ * ctypedef enum OccluderPolygon2D_CullMode :CULL_DISABLED, CULL_CLOCKWISE, CULL_COUNTER_CLOCKWISE,
  */
 struct __pyx_obj_7classes_17OccluderPolygon2D_OccluderPolygon2D {
   struct __pyx_obj_7classes_8Resource_Resource __pyx_base;
@@ -1186,7 +1186,7 @@ struct __pyx_obj_7classes_14ShaderMaterial_ShaderMaterial {
  * cimport classes.Resource
  * cdef class Texture(classes.Resource.Resource):             # <<<<<<<<<<<<<<
  *     pass
- * ctypedef enum Flags :FLAG_MIPMAPS, FLAG_REPEAT, FLAG_FILTER, FLAGS_DEFAULT, FLAG_ANISOTROPIC_FILTER, FLAG_CONVERT_TO_LINEAR, FLAG_MIRRORED_REPEAT, FLAG_VIDEO_SURFACE,
+ * ctypedef enum Texture_Flags :FLAG_MIPMAPS, FLAG_REPEAT, FLAG_FILTER, FLAGS_DEFAULT, FLAG_ANISOTROPIC_FILTER, FLAG_CONVERT_TO_LINEAR, FLAG_MIRRORED_REPEAT, FLAG_VIDEO_SURFACE,
  */
 struct __pyx_obj_7classes_7Texture_Texture {
   struct __pyx_obj_7classes_8Resource_Resource __pyx_base;
@@ -1520,7 +1520,7 @@ struct __pyx_obj_4core_7vector3_7Vector3_Vector3 {
  * cimport classes.Resource
  * cdef class TileSet(classes.Resource.Resource):             # <<<<<<<<<<<<<<
  *     pass
- * ctypedef enum TileMode :SINGLE_TILE, AUTO_TILE, ATLAS_TILE,
+ * ctypedef enum TileSet_TileMode :SINGLE_TILE, AUTO_TILE, ATLAS_TILE,
  */
 struct __pyx_obj_7classes_7TileSet_TileSet {
   struct __pyx_obj_7classes_8Resource_Resource __pyx_base;
@@ -1549,7 +1549,7 @@ static CYTHON_INLINE godot_object *__pyx_f_5utils_7Wrapper_7Wrapper_get_godot_ow
  * from utils.Wrapper cimport *
  * cdef class Object(Wrapper):             # <<<<<<<<<<<<<<
  *     pass
- * ctypedef enum ConnectFlags :CONNECT_DEFERRED, CONNECT_PERSIST, CONNECT_ONESHOT, CONNECT_REFERENCE_COUNTED,
+ * ctypedef enum Object_ConnectFlags :CONNECT_DEFERRED, CONNECT_PERSIST, CONNECT_ONESHOT, CONNECT_REFERENCE_COUNTED,
  */
 
 struct __pyx_vtabstruct_7classes_6Object_Object {
@@ -1589,7 +1589,7 @@ static struct __pyx_vtabstruct_7classes_8Resource_Resource *__pyx_vtabptr_7class
  * cimport classes.Resource
  * cdef class OccluderPolygon2D(classes.Resource.Resource):             # <<<<<<<<<<<<<<
  *     pass
- * ctypedef enum CullMode :CULL_DISABLED, CULL_CLOCKWISE, CULL_COUNTER_CLOCKWISE,
+ * ctypedef enum OccluderPolygon2D_CullMode :CULL_DISABLED, CULL_CLOCKWISE, CULL_COUNTER_CLOCKWISE,
  */
 
 struct __pyx_vtabstruct_7classes_17OccluderPolygon2D_OccluderPolygon2D {
@@ -1655,7 +1655,7 @@ static struct __pyx_vtabstruct_7classes_14ShaderMaterial_ShaderMaterial *__pyx_v
  * cimport classes.Resource
  * cdef class Texture(classes.Resource.Resource):             # <<<<<<<<<<<<<<
  *     pass
- * ctypedef enum Flags :FLAG_MIPMAPS, FLAG_REPEAT, FLAG_FILTER, FLAGS_DEFAULT, FLAG_ANISOTROPIC_FILTER, FLAG_CONVERT_TO_LINEAR, FLAG_MIRRORED_REPEAT, FLAG_VIDEO_SURFACE,
+ * ctypedef enum Texture_Flags :FLAG_MIPMAPS, FLAG_REPEAT, FLAG_FILTER, FLAGS_DEFAULT, FLAG_ANISOTROPIC_FILTER, FLAG_CONVERT_TO_LINEAR, FLAG_MIRRORED_REPEAT, FLAG_VIDEO_SURFACE,
  */
 
 struct __pyx_vtabstruct_7classes_7Texture_Texture {
@@ -2363,10 +2363,10 @@ static void __Pyx_AddTraceback(const char *funcname, int c_line,
 static CYTHON_INLINE PyObject* __Pyx_PyInt_From_int(int value);
 
 /* CIntToPy.proto */
-static CYTHON_INLINE PyObject* __Pyx_PyInt_From___pyx_t_7classes_7TileSet_BitmaskMode(__pyx_t_7classes_7TileSet_BitmaskMode value);
+static CYTHON_INLINE PyObject* __Pyx_PyInt_From___pyx_t_7classes_7TileSet_TileSet_BitmaskMode(__pyx_t_7classes_7TileSet_TileSet_BitmaskMode value);
 
 /* CIntToPy.proto */
-static CYTHON_INLINE PyObject* __Pyx_PyInt_From___pyx_t_7classes_7TileSet_TileMode(__pyx_t_7classes_7TileSet_TileMode value);
+static CYTHON_INLINE PyObject* __Pyx_PyInt_From___pyx_t_7classes_7TileSet_TileSet_TileMode(__pyx_t_7classes_7TileSet_TileSet_TileMode value);
 
 /* CIntFromPy.proto */
 static CYTHON_INLINE int __Pyx_PyInt_As_int(PyObject *);
@@ -4607,7 +4607,7 @@ static PyObject *__pyx_pw_7classes_7TileSet_7TileSet_13autotile_get_bitmask_mode
 
 static PyObject *__pyx_pf_7classes_7TileSet_7TileSet_12autotile_get_bitmask_mode(struct __pyx_obj_7classes_7TileSet_TileSet *__pyx_v_self, int __pyx_v_id) {
   CYTHON_UNUSED godot_object *__pyx_v__owner;
-  __pyx_t_7classes_7TileSet_BitmaskMode *__pyx_v_ret;
+  __pyx_t_7classes_7TileSet_TileSet_BitmaskMode *__pyx_v_ret;
   void *__pyx_v_args[1];
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
@@ -4623,7 +4623,7 @@ static PyObject *__pyx_pf_7classes_7TileSet_7TileSet_12autotile_get_bitmask_mode
  *   def  autotile_get_bitmask_mode(self,  int id):
  *     cdef godot_object *_owner = self.godot_owner             # <<<<<<<<<<<<<<
  * 
- *     cdef BitmaskMode* ret = NULL;
+ *     cdef TileSet_BitmaskMode* ret = NULL;
  */
   __pyx_t_1 = __pyx_v_self->__pyx_base.__pyx_base.__pyx_base.__pyx_base.godot_owner;
   __pyx_v__owner = __pyx_t_1;
@@ -4631,7 +4631,7 @@ static PyObject *__pyx_pf_7classes_7TileSet_7TileSet_12autotile_get_bitmask_mode
   /* "classes/TileSet.pyx":255
  *     cdef godot_object *_owner = self.godot_owner
  * 
- *     cdef BitmaskMode* ret = NULL;             # <<<<<<<<<<<<<<
+ *     cdef TileSet_BitmaskMode* ret = NULL;             # <<<<<<<<<<<<<<
  * 
  *     cdef void *args[1]
  */
@@ -4672,7 +4672,7 @@ static PyObject *__pyx_pf_7classes_7TileSet_7TileSet_12autotile_get_bitmask_mode
  *   def  autotile_get_icon_coordinate(self,  int id):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_2 = __Pyx_PyInt_From___pyx_t_7classes_7TileSet_BitmaskMode((*__pyx_v_ret)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 262, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyInt_From___pyx_t_7classes_7TileSet_TileSet_BitmaskMode((*__pyx_v_ret)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 262, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_r = __pyx_t_2;
   __pyx_t_2 = 0;
@@ -10353,7 +10353,7 @@ static PyObject *__pyx_pw_7classes_7TileSet_7TileSet_97tile_get_tile_mode(PyObje
 
 static PyObject *__pyx_pf_7classes_7TileSet_7TileSet_96tile_get_tile_mode(struct __pyx_obj_7classes_7TileSet_TileSet *__pyx_v_self, int __pyx_v_id) {
   CYTHON_UNUSED godot_object *__pyx_v__owner;
-  __pyx_t_7classes_7TileSet_TileMode *__pyx_v_ret;
+  __pyx_t_7classes_7TileSet_TileSet_TileMode *__pyx_v_ret;
   void *__pyx_v_args[1];
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
@@ -10369,7 +10369,7 @@ static PyObject *__pyx_pf_7classes_7TileSet_7TileSet_96tile_get_tile_mode(struct
  *   def  tile_get_tile_mode(self,  int id):
  *     cdef godot_object *_owner = self.godot_owner             # <<<<<<<<<<<<<<
  * 
- *     cdef TileMode* ret = NULL;
+ *     cdef TileSet_TileMode* ret = NULL;
  */
   __pyx_t_1 = __pyx_v_self->__pyx_base.__pyx_base.__pyx_base.__pyx_base.godot_owner;
   __pyx_v__owner = __pyx_t_1;
@@ -10377,7 +10377,7 @@ static PyObject *__pyx_pf_7classes_7TileSet_7TileSet_96tile_get_tile_mode(struct
   /* "classes/TileSet.pyx":709
  *     cdef godot_object *_owner = self.godot_owner
  * 
- *     cdef TileMode* ret = NULL;             # <<<<<<<<<<<<<<
+ *     cdef TileSet_TileMode* ret = NULL;             # <<<<<<<<<<<<<<
  * 
  *     cdef void *args[1]
  */
@@ -10418,7 +10418,7 @@ static PyObject *__pyx_pf_7classes_7TileSet_7TileSet_96tile_get_tile_mode(struct
  *   def  tile_get_z_index(self,  int id):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_2 = __Pyx_PyInt_From___pyx_t_7classes_7TileSet_TileMode((*__pyx_v_ret)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 716, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyInt_From___pyx_t_7classes_7TileSet_TileSet_TileMode((*__pyx_v_ret)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 716, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_r = __pyx_t_2;
   __pyx_t_2 = 0;
@@ -13895,7 +13895,7 @@ static CYTHON_INLINE void __pyx_f_4core_7variant_7Variant_7Variant_new_variant(C
  *     cdef inline void new_variant(self, i):
  *         print("new_variant", type(i))             # <<<<<<<<<<<<<<
  * 
- * ctypedef enum Type:
+ * ctypedef enum Variant_Type:
  */
   __pyx_t_1 = PyTuple_New(2); if (unlikely(!__pyx_t_1)) __PYX_ERR(4, 15, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
@@ -15493,14 +15493,10 @@ static int __pyx_import_star_set(PyObject *o, PyObject* py_name, char *name) {
   static const char* internal_type_names[] = {
     "AABB",
     "Array",
-    "AutotileBindings",
-    "Axis",
     "Basis",
-    "BitmaskMode",
     "Color",
     "Dictionary",
     "NodePath",
-    "Operator",
     "Plane",
     "PoolByteArray",
     "PoolColorArray",
@@ -15514,14 +15510,18 @@ static int __pyx_import_star_set(PyObject *o, PyObject* py_name, char *name) {
     "Rect2",
     "Reference",
     "String",
-    "TileMode",
     "TileSet",
+    "TileSet_AutotileBindings",
+    "TileSet_BitmaskMode",
+    "TileSet_TileMode",
     "Transform",
     "Transform2D",
-    "Type",
     "Variant",
+    "Variant_Operator",
+    "Variant_Type",
     "Vector2",
     "Vector3",
+    "Vector3_Axis",
     "Wrapper",
     "bool",
     "godot_aabb",
@@ -18097,24 +18097,24 @@ static CYTHON_INLINE PyObject* __Pyx_PyInt_From_int(int value) {
 }
 
 /* CIntToPy */
-static CYTHON_INLINE PyObject* __Pyx_PyInt_From___pyx_t_7classes_7TileSet_BitmaskMode(__pyx_t_7classes_7TileSet_BitmaskMode value) {
-    const __pyx_t_7classes_7TileSet_BitmaskMode neg_one = (__pyx_t_7classes_7TileSet_BitmaskMode) ((__pyx_t_7classes_7TileSet_BitmaskMode) 0 - (__pyx_t_7classes_7TileSet_BitmaskMode) 1), const_zero = (__pyx_t_7classes_7TileSet_BitmaskMode) 0;
+static CYTHON_INLINE PyObject* __Pyx_PyInt_From___pyx_t_7classes_7TileSet_TileSet_BitmaskMode(__pyx_t_7classes_7TileSet_TileSet_BitmaskMode value) {
+    const __pyx_t_7classes_7TileSet_TileSet_BitmaskMode neg_one = (__pyx_t_7classes_7TileSet_TileSet_BitmaskMode) ((__pyx_t_7classes_7TileSet_TileSet_BitmaskMode) 0 - (__pyx_t_7classes_7TileSet_TileSet_BitmaskMode) 1), const_zero = (__pyx_t_7classes_7TileSet_TileSet_BitmaskMode) 0;
     const int is_unsigned = neg_one > const_zero;
     if (is_unsigned) {
-        if (sizeof(__pyx_t_7classes_7TileSet_BitmaskMode) < sizeof(long)) {
+        if (sizeof(__pyx_t_7classes_7TileSet_TileSet_BitmaskMode) < sizeof(long)) {
             return PyInt_FromLong((long) value);
-        } else if (sizeof(__pyx_t_7classes_7TileSet_BitmaskMode) <= sizeof(unsigned long)) {
+        } else if (sizeof(__pyx_t_7classes_7TileSet_TileSet_BitmaskMode) <= sizeof(unsigned long)) {
             return PyLong_FromUnsignedLong((unsigned long) value);
 #ifdef HAVE_LONG_LONG
-        } else if (sizeof(__pyx_t_7classes_7TileSet_BitmaskMode) <= sizeof(unsigned PY_LONG_LONG)) {
+        } else if (sizeof(__pyx_t_7classes_7TileSet_TileSet_BitmaskMode) <= sizeof(unsigned PY_LONG_LONG)) {
             return PyLong_FromUnsignedLongLong((unsigned PY_LONG_LONG) value);
 #endif
         }
     } else {
-        if (sizeof(__pyx_t_7classes_7TileSet_BitmaskMode) <= sizeof(long)) {
+        if (sizeof(__pyx_t_7classes_7TileSet_TileSet_BitmaskMode) <= sizeof(long)) {
             return PyInt_FromLong((long) value);
 #ifdef HAVE_LONG_LONG
-        } else if (sizeof(__pyx_t_7classes_7TileSet_BitmaskMode) <= sizeof(PY_LONG_LONG)) {
+        } else if (sizeof(__pyx_t_7classes_7TileSet_TileSet_BitmaskMode) <= sizeof(PY_LONG_LONG)) {
             return PyLong_FromLongLong((PY_LONG_LONG) value);
 #endif
         }
@@ -18122,30 +18122,30 @@ static CYTHON_INLINE PyObject* __Pyx_PyInt_From___pyx_t_7classes_7TileSet_Bitmas
     {
         int one = 1; int little = (int)*(unsigned char *)&one;
         unsigned char *bytes = (unsigned char *)&value;
-        return _PyLong_FromByteArray(bytes, sizeof(__pyx_t_7classes_7TileSet_BitmaskMode),
+        return _PyLong_FromByteArray(bytes, sizeof(__pyx_t_7classes_7TileSet_TileSet_BitmaskMode),
                                      little, !is_unsigned);
     }
 }
 
 /* CIntToPy */
-static CYTHON_INLINE PyObject* __Pyx_PyInt_From___pyx_t_7classes_7TileSet_TileMode(__pyx_t_7classes_7TileSet_TileMode value) {
-    const __pyx_t_7classes_7TileSet_TileMode neg_one = (__pyx_t_7classes_7TileSet_TileMode) ((__pyx_t_7classes_7TileSet_TileMode) 0 - (__pyx_t_7classes_7TileSet_TileMode) 1), const_zero = (__pyx_t_7classes_7TileSet_TileMode) 0;
+static CYTHON_INLINE PyObject* __Pyx_PyInt_From___pyx_t_7classes_7TileSet_TileSet_TileMode(__pyx_t_7classes_7TileSet_TileSet_TileMode value) {
+    const __pyx_t_7classes_7TileSet_TileSet_TileMode neg_one = (__pyx_t_7classes_7TileSet_TileSet_TileMode) ((__pyx_t_7classes_7TileSet_TileSet_TileMode) 0 - (__pyx_t_7classes_7TileSet_TileSet_TileMode) 1), const_zero = (__pyx_t_7classes_7TileSet_TileSet_TileMode) 0;
     const int is_unsigned = neg_one > const_zero;
     if (is_unsigned) {
-        if (sizeof(__pyx_t_7classes_7TileSet_TileMode) < sizeof(long)) {
+        if (sizeof(__pyx_t_7classes_7TileSet_TileSet_TileMode) < sizeof(long)) {
             return PyInt_FromLong((long) value);
-        } else if (sizeof(__pyx_t_7classes_7TileSet_TileMode) <= sizeof(unsigned long)) {
+        } else if (sizeof(__pyx_t_7classes_7TileSet_TileSet_TileMode) <= sizeof(unsigned long)) {
             return PyLong_FromUnsignedLong((unsigned long) value);
 #ifdef HAVE_LONG_LONG
-        } else if (sizeof(__pyx_t_7classes_7TileSet_TileMode) <= sizeof(unsigned PY_LONG_LONG)) {
+        } else if (sizeof(__pyx_t_7classes_7TileSet_TileSet_TileMode) <= sizeof(unsigned PY_LONG_LONG)) {
             return PyLong_FromUnsignedLongLong((unsigned PY_LONG_LONG) value);
 #endif
         }
     } else {
-        if (sizeof(__pyx_t_7classes_7TileSet_TileMode) <= sizeof(long)) {
+        if (sizeof(__pyx_t_7classes_7TileSet_TileSet_TileMode) <= sizeof(long)) {
             return PyInt_FromLong((long) value);
 #ifdef HAVE_LONG_LONG
-        } else if (sizeof(__pyx_t_7classes_7TileSet_TileMode) <= sizeof(PY_LONG_LONG)) {
+        } else if (sizeof(__pyx_t_7classes_7TileSet_TileSet_TileMode) <= sizeof(PY_LONG_LONG)) {
             return PyLong_FromLongLong((PY_LONG_LONG) value);
 #endif
         }
@@ -18153,7 +18153,7 @@ static CYTHON_INLINE PyObject* __Pyx_PyInt_From___pyx_t_7classes_7TileSet_TileMo
     {
         int one = 1; int little = (int)*(unsigned char *)&one;
         unsigned char *bytes = (unsigned char *)&value;
-        return _PyLong_FromByteArray(bytes, sizeof(__pyx_t_7classes_7TileSet_TileMode),
+        return _PyLong_FromByteArray(bytes, sizeof(__pyx_t_7classes_7TileSet_TileSet_TileMode),
                                      little, !is_unsigned);
     }
 }

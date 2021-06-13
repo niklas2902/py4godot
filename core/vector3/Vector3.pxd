@@ -12,7 +12,7 @@ cdef class Vector3:
         v.set_native(_native)
 
 
-ctypedef enum Axis :
-    AXIS_X,
-    AXIS_Y,
-    AXIS_Z
+ctypedef enum Vector3_Axis :
+    Vector3_AXIS_X,
+    Vector3_AXIS_Y,
+    Vector3_AXIS_Z

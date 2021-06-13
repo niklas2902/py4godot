@@ -20,9 +20,9 @@ from core.transform.Transform cimport Transform
 from core.transform.Transform2D cimport Transform2D
 from core.vector2.Vector2 cimport Vector2
 from core.vector3.Vector3 cimport Vector3
-from core.variant.Variant cimport Type
-from core.variant.Variant cimport Operator
-from core.vector3.Vector3 cimport Axis
+from core.variant.Variant cimport Variant_Type
+from core.variant.Variant cimport Variant_Operator
+from core.vector3.Vector3 cimport Vector3_Axis
 from core.color.Color cimport Color
 from cython.operator cimport dereference
 from godot_api.binding_external cimport *
@@ -582,7 +582,7 @@ cdef class Animation(classes.Resource.Resource):
   def  track_get_interpolation_type(self,  int track_idx):
     cdef godot_object *_owner = self.godot_owner
 
-    cdef InterpolationType* ret = NULL;
+    cdef Animation_InterpolationType* ret = NULL;
 
     cdef void *args[1]
 
@@ -657,7 +657,7 @@ cdef class Animation(classes.Resource.Resource):
   def  track_get_type(self,  int track_idx):
     cdef godot_object *_owner = self.godot_owner
 
-    cdef TrackType* ret = NULL;
+    cdef Animation_TrackType* ret = NULL;
 
     cdef void *args[1]
 
@@ -872,7 +872,7 @@ cdef class Animation(classes.Resource.Resource):
   def  value_track_get_update_mode(self,  int track_idx):
     cdef godot_object *_owner = self.godot_owner
 
-    cdef UpdateMode* ret = NULL;
+    cdef Animation_UpdateMode* ret = NULL;
 
     cdef void *args[1]
 

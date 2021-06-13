@@ -896,38 +896,38 @@ struct __pyx_obj_7classes_23VisualShaderNodeCubeMap_VisualShaderNodeCubeMap;
 /* "classes/Object.pxd":7
  * cdef class Object(Wrapper):
  *     pass
- * ctypedef enum ConnectFlags :CONNECT_DEFERRED, CONNECT_PERSIST, CONNECT_ONESHOT, CONNECT_REFERENCE_COUNTED,             # <<<<<<<<<<<<<<
+ * ctypedef enum Object_ConnectFlags :CONNECT_DEFERRED, CONNECT_PERSIST, CONNECT_ONESHOT, CONNECT_REFERENCE_COUNTED,             # <<<<<<<<<<<<<<
  */
-enum __pyx_t_7classes_6Object_ConnectFlags {
+enum __pyx_t_7classes_6Object_Object_ConnectFlags {
   __pyx_e_7classes_6Object_CONNECT_DEFERRED,
   __pyx_e_7classes_6Object_CONNECT_PERSIST,
   __pyx_e_7classes_6Object_CONNECT_ONESHOT,
   __pyx_e_7classes_6Object_CONNECT_REFERENCE_COUNTED
 };
-typedef enum __pyx_t_7classes_6Object_ConnectFlags __pyx_t_7classes_6Object_ConnectFlags;
+typedef enum __pyx_t_7classes_6Object_Object_ConnectFlags __pyx_t_7classes_6Object_Object_ConnectFlags;
 
 /* "classes/CubeMap.pxd":7
  * cdef class CubeMap(classes.Resource.Resource):
  *     pass
- * ctypedef enum Flags :FLAG_MIPMAPS, FLAG_REPEAT, FLAG_FILTER, FLAGS_DEFAULT,             # <<<<<<<<<<<<<<
- * ctypedef enum Side :SIDE_LEFT, SIDE_RIGHT, SIDE_BOTTOM, SIDE_TOP, SIDE_FRONT, SIDE_BACK,
- * ctypedef enum Storage :STORAGE_RAW, STORAGE_COMPRESS_LOSSY, STORAGE_COMPRESS_LOSSLESS,
+ * ctypedef enum CubeMap_Flags :FLAG_MIPMAPS, FLAG_REPEAT, FLAG_FILTER, FLAGS_DEFAULT,             # <<<<<<<<<<<<<<
+ * ctypedef enum CubeMap_Side :SIDE_LEFT, SIDE_RIGHT, SIDE_BOTTOM, SIDE_TOP, SIDE_FRONT, SIDE_BACK,
+ * ctypedef enum CubeMap_Storage :STORAGE_RAW, STORAGE_COMPRESS_LOSSY, STORAGE_COMPRESS_LOSSLESS,
  */
-enum __pyx_t_7classes_7CubeMap_Flags {
+enum __pyx_t_7classes_7CubeMap_CubeMap_Flags {
   __pyx_e_7classes_7CubeMap_FLAG_MIPMAPS,
   __pyx_e_7classes_7CubeMap_FLAG_REPEAT,
   __pyx_e_7classes_7CubeMap_FLAG_FILTER,
   __pyx_e_7classes_7CubeMap_FLAGS_DEFAULT
 };
-typedef enum __pyx_t_7classes_7CubeMap_Flags __pyx_t_7classes_7CubeMap_Flags;
+typedef enum __pyx_t_7classes_7CubeMap_CubeMap_Flags __pyx_t_7classes_7CubeMap_CubeMap_Flags;
 
 /* "classes/CubeMap.pxd":8
  *     pass
- * ctypedef enum Flags :FLAG_MIPMAPS, FLAG_REPEAT, FLAG_FILTER, FLAGS_DEFAULT,
- * ctypedef enum Side :SIDE_LEFT, SIDE_RIGHT, SIDE_BOTTOM, SIDE_TOP, SIDE_FRONT, SIDE_BACK,             # <<<<<<<<<<<<<<
- * ctypedef enum Storage :STORAGE_RAW, STORAGE_COMPRESS_LOSSY, STORAGE_COMPRESS_LOSSLESS,
+ * ctypedef enum CubeMap_Flags :FLAG_MIPMAPS, FLAG_REPEAT, FLAG_FILTER, FLAGS_DEFAULT,
+ * ctypedef enum CubeMap_Side :SIDE_LEFT, SIDE_RIGHT, SIDE_BOTTOM, SIDE_TOP, SIDE_FRONT, SIDE_BACK,             # <<<<<<<<<<<<<<
+ * ctypedef enum CubeMap_Storage :STORAGE_RAW, STORAGE_COMPRESS_LOSSY, STORAGE_COMPRESS_LOSSLESS,
  */
-enum __pyx_t_7classes_7CubeMap_Side {
+enum __pyx_t_7classes_7CubeMap_CubeMap_Side {
   __pyx_e_7classes_7CubeMap_SIDE_LEFT,
   __pyx_e_7classes_7CubeMap_SIDE_RIGHT,
   __pyx_e_7classes_7CubeMap_SIDE_BOTTOM,
@@ -935,26 +935,26 @@ enum __pyx_t_7classes_7CubeMap_Side {
   __pyx_e_7classes_7CubeMap_SIDE_FRONT,
   __pyx_e_7classes_7CubeMap_SIDE_BACK
 };
-typedef enum __pyx_t_7classes_7CubeMap_Side __pyx_t_7classes_7CubeMap_Side;
+typedef enum __pyx_t_7classes_7CubeMap_CubeMap_Side __pyx_t_7classes_7CubeMap_CubeMap_Side;
 
 /* "classes/CubeMap.pxd":9
- * ctypedef enum Flags :FLAG_MIPMAPS, FLAG_REPEAT, FLAG_FILTER, FLAGS_DEFAULT,
- * ctypedef enum Side :SIDE_LEFT, SIDE_RIGHT, SIDE_BOTTOM, SIDE_TOP, SIDE_FRONT, SIDE_BACK,
- * ctypedef enum Storage :STORAGE_RAW, STORAGE_COMPRESS_LOSSY, STORAGE_COMPRESS_LOSSLESS,             # <<<<<<<<<<<<<<
+ * ctypedef enum CubeMap_Flags :FLAG_MIPMAPS, FLAG_REPEAT, FLAG_FILTER, FLAGS_DEFAULT,
+ * ctypedef enum CubeMap_Side :SIDE_LEFT, SIDE_RIGHT, SIDE_BOTTOM, SIDE_TOP, SIDE_FRONT, SIDE_BACK,
+ * ctypedef enum CubeMap_Storage :STORAGE_RAW, STORAGE_COMPRESS_LOSSY, STORAGE_COMPRESS_LOSSLESS,             # <<<<<<<<<<<<<<
  */
-enum __pyx_t_7classes_7CubeMap_Storage {
+enum __pyx_t_7classes_7CubeMap_CubeMap_Storage {
   __pyx_e_7classes_7CubeMap_STORAGE_RAW,
   __pyx_e_7classes_7CubeMap_STORAGE_COMPRESS_LOSSY,
   __pyx_e_7classes_7CubeMap_STORAGE_COMPRESS_LOSSLESS
 };
-typedef enum __pyx_t_7classes_7CubeMap_Storage __pyx_t_7classes_7CubeMap_Storage;
+typedef enum __pyx_t_7classes_7CubeMap_CubeMap_Storage __pyx_t_7classes_7CubeMap_CubeMap_Storage;
 
 /* "classes/VisualShaderNode.pxd":7
  * cdef class VisualShaderNode(classes.Resource.Resource):
  *     pass
- * ctypedef enum PortType :PORT_TYPE_SCALAR, PORT_TYPE_VECTOR, PORT_TYPE_BOOLEAN, PORT_TYPE_TRANSFORM, PORT_TYPE_SAMPLER, PORT_TYPE_MAX,             # <<<<<<<<<<<<<<
+ * ctypedef enum VisualShaderNode_PortType :PORT_TYPE_SCALAR, PORT_TYPE_VECTOR, PORT_TYPE_BOOLEAN, PORT_TYPE_TRANSFORM, PORT_TYPE_SAMPLER, PORT_TYPE_MAX,             # <<<<<<<<<<<<<<
  */
-enum __pyx_t_7classes_16VisualShaderNode_PortType {
+enum __pyx_t_7classes_16VisualShaderNode_VisualShaderNode_PortType {
   __pyx_e_7classes_16VisualShaderNode_PORT_TYPE_SCALAR,
   __pyx_e_7classes_16VisualShaderNode_PORT_TYPE_VECTOR,
   __pyx_e_7classes_16VisualShaderNode_PORT_TYPE_BOOLEAN,
@@ -962,16 +962,16 @@ enum __pyx_t_7classes_16VisualShaderNode_PortType {
   __pyx_e_7classes_16VisualShaderNode_PORT_TYPE_SAMPLER,
   __pyx_e_7classes_16VisualShaderNode_PORT_TYPE_MAX
 };
-typedef enum __pyx_t_7classes_16VisualShaderNode_PortType __pyx_t_7classes_16VisualShaderNode_PortType;
+typedef enum __pyx_t_7classes_16VisualShaderNode_VisualShaderNode_PortType __pyx_t_7classes_16VisualShaderNode_VisualShaderNode_PortType;
 
 /* "core/variant/Variant.pxd":17
  *         print("new_variant", type(i))
  * 
- * ctypedef enum Type:             # <<<<<<<<<<<<<<
+ * ctypedef enum Variant_Type:             # <<<<<<<<<<<<<<
  *     NIL,
  *     # atomic types
  */
-enum __pyx_t_4core_7variant_7Variant_Type {
+enum __pyx_t_4core_7variant_7Variant_Variant_Type {
   __pyx_e_4core_7variant_7Variant_NIL,
   __pyx_e_4core_7variant_7Variant_BOOL,
   __pyx_e_4core_7variant_7Variant_INT,
@@ -1001,16 +1001,16 @@ enum __pyx_t_4core_7variant_7Variant_Type {
   __pyx_e_4core_7variant_7Variant_POOL_COLOR_ARRAY,
   __pyx_e_4core_7variant_7Variant_VARIANT_MAX
 };
-typedef enum __pyx_t_4core_7variant_7Variant_Type __pyx_t_4core_7variant_7Variant_Type;
+typedef enum __pyx_t_4core_7variant_7Variant_Variant_Type __pyx_t_4core_7variant_7Variant_Variant_Type;
 
 /* "core/variant/Variant.pxd":58
  * 
  * 
- * ctypedef enum Operator :             # <<<<<<<<<<<<<<
+ * ctypedef enum Variant_Operator :             # <<<<<<<<<<<<<<
  * 
  *     #comparation
  */
-enum __pyx_t_4core_7variant_7Variant_Operator {
+enum __pyx_t_4core_7variant_7Variant_Variant_Operator {
   __pyx_e_4core_7variant_7Variant_OP_EQUAL,
   __pyx_e_4core_7variant_7Variant_OP_NOT_EQUAL,
   __pyx_e_4core_7variant_7Variant_OP_LESS,
@@ -1038,45 +1038,45 @@ enum __pyx_t_4core_7variant_7Variant_Operator {
   __pyx_e_4core_7variant_7Variant_OP_IN,
   __pyx_e_4core_7variant_7Variant_OP_MAX
 };
-typedef enum __pyx_t_4core_7variant_7Variant_Operator __pyx_t_4core_7variant_7Variant_Operator;
+typedef enum __pyx_t_4core_7variant_7Variant_Variant_Operator __pyx_t_4core_7variant_7Variant_Variant_Operator;
 
 /* "core/vector3/Vector3.pxd":15
  * 
  * 
- * ctypedef enum Axis :             # <<<<<<<<<<<<<<
- *     AXIS_X,
- *     AXIS_Y,
+ * ctypedef enum Vector3_Axis :             # <<<<<<<<<<<<<<
+ *     Vector3_AXIS_X,
+ *     Vector3_AXIS_Y,
  */
-enum __pyx_t_4core_7vector3_7Vector3_Axis {
-  __pyx_e_4core_7vector3_7Vector3_AXIS_X,
-  __pyx_e_4core_7vector3_7Vector3_AXIS_Y,
-  __pyx_e_4core_7vector3_7Vector3_AXIS_Z
+enum __pyx_t_4core_7vector3_7Vector3_Vector3_Axis {
+  __pyx_e_4core_7vector3_7Vector3_Vector3_AXIS_X,
+  __pyx_e_4core_7vector3_7Vector3_Vector3_AXIS_Y,
+  __pyx_e_4core_7vector3_7Vector3_Vector3_AXIS_Z
 };
-typedef enum __pyx_t_4core_7vector3_7Vector3_Axis __pyx_t_4core_7vector3_7Vector3_Axis;
+typedef enum __pyx_t_4core_7vector3_7Vector3_Vector3_Axis __pyx_t_4core_7vector3_7Vector3_Vector3_Axis;
 
 /* "classes/VisualShaderNodeCubeMap.pxd":7
  * cdef class VisualShaderNodeCubeMap(classes.VisualShaderNode.VisualShaderNode):
  *     pass
- * ctypedef enum TextureType :TYPE_DATA, TYPE_COLOR, TYPE_NORMALMAP,             # <<<<<<<<<<<<<<
- * ctypedef enum Source :SOURCE_TEXTURE, SOURCE_PORT,
+ * ctypedef enum VisualShaderNodeCubeMap_TextureType :TYPE_DATA, TYPE_COLOR, TYPE_NORMALMAP,             # <<<<<<<<<<<<<<
+ * ctypedef enum VisualShaderNodeCubeMap_Source :SOURCE_TEXTURE, SOURCE_PORT,
  */
-enum __pyx_t_7classes_23VisualShaderNodeCubeMap_TextureType {
+enum __pyx_t_7classes_23VisualShaderNodeCubeMap_VisualShaderNodeCubeMap_TextureType {
   __pyx_e_7classes_23VisualShaderNodeCubeMap_TYPE_DATA,
   __pyx_e_7classes_23VisualShaderNodeCubeMap_TYPE_COLOR,
   __pyx_e_7classes_23VisualShaderNodeCubeMap_TYPE_NORMALMAP
 };
-typedef enum __pyx_t_7classes_23VisualShaderNodeCubeMap_TextureType __pyx_t_7classes_23VisualShaderNodeCubeMap_TextureType;
+typedef enum __pyx_t_7classes_23VisualShaderNodeCubeMap_VisualShaderNodeCubeMap_TextureType __pyx_t_7classes_23VisualShaderNodeCubeMap_VisualShaderNodeCubeMap_TextureType;
 
 /* "classes/VisualShaderNodeCubeMap.pxd":8
  *     pass
- * ctypedef enum TextureType :TYPE_DATA, TYPE_COLOR, TYPE_NORMALMAP,
- * ctypedef enum Source :SOURCE_TEXTURE, SOURCE_PORT,             # <<<<<<<<<<<<<<
+ * ctypedef enum VisualShaderNodeCubeMap_TextureType :TYPE_DATA, TYPE_COLOR, TYPE_NORMALMAP,
+ * ctypedef enum VisualShaderNodeCubeMap_Source :SOURCE_TEXTURE, SOURCE_PORT,             # <<<<<<<<<<<<<<
  */
-enum __pyx_t_7classes_23VisualShaderNodeCubeMap_Source {
+enum __pyx_t_7classes_23VisualShaderNodeCubeMap_VisualShaderNodeCubeMap_Source {
   __pyx_e_7classes_23VisualShaderNodeCubeMap_SOURCE_TEXTURE,
   __pyx_e_7classes_23VisualShaderNodeCubeMap_SOURCE_PORT
 };
-typedef enum __pyx_t_7classes_23VisualShaderNodeCubeMap_Source __pyx_t_7classes_23VisualShaderNodeCubeMap_Source;
+typedef enum __pyx_t_7classes_23VisualShaderNodeCubeMap_VisualShaderNodeCubeMap_Source __pyx_t_7classes_23VisualShaderNodeCubeMap_VisualShaderNodeCubeMap_Source;
 
 /* "utils/Wrapper.pxd":2
  * from godot_api.binding cimport *
@@ -1096,7 +1096,7 @@ struct __pyx_obj_5utils_7Wrapper_Wrapper {
  * from utils.Wrapper cimport *
  * cdef class Object(Wrapper):             # <<<<<<<<<<<<<<
  *     pass
- * ctypedef enum ConnectFlags :CONNECT_DEFERRED, CONNECT_PERSIST, CONNECT_ONESHOT, CONNECT_REFERENCE_COUNTED,
+ * ctypedef enum Object_ConnectFlags :CONNECT_DEFERRED, CONNECT_PERSIST, CONNECT_ONESHOT, CONNECT_REFERENCE_COUNTED,
  */
 struct __pyx_obj_7classes_6Object_Object {
   struct __pyx_obj_5utils_7Wrapper_Wrapper __pyx_base;
@@ -1130,7 +1130,7 @@ struct __pyx_obj_7classes_8Resource_Resource {
  * cimport classes.Resource
  * cdef class CubeMap(classes.Resource.Resource):             # <<<<<<<<<<<<<<
  *     pass
- * ctypedef enum Flags :FLAG_MIPMAPS, FLAG_REPEAT, FLAG_FILTER, FLAGS_DEFAULT,
+ * ctypedef enum CubeMap_Flags :FLAG_MIPMAPS, FLAG_REPEAT, FLAG_FILTER, FLAGS_DEFAULT,
  */
 struct __pyx_obj_7classes_7CubeMap_CubeMap {
   struct __pyx_obj_7classes_8Resource_Resource __pyx_base;
@@ -1142,7 +1142,7 @@ struct __pyx_obj_7classes_7CubeMap_CubeMap {
  * cimport classes.Resource
  * cdef class VisualShaderNode(classes.Resource.Resource):             # <<<<<<<<<<<<<<
  *     pass
- * ctypedef enum PortType :PORT_TYPE_SCALAR, PORT_TYPE_VECTOR, PORT_TYPE_BOOLEAN, PORT_TYPE_TRANSFORM, PORT_TYPE_SAMPLER, PORT_TYPE_MAX,
+ * ctypedef enum VisualShaderNode_PortType :PORT_TYPE_SCALAR, PORT_TYPE_VECTOR, PORT_TYPE_BOOLEAN, PORT_TYPE_TRANSFORM, PORT_TYPE_SAMPLER, PORT_TYPE_MAX,
  */
 struct __pyx_obj_7classes_16VisualShaderNode_VisualShaderNode {
   struct __pyx_obj_7classes_8Resource_Resource __pyx_base;
@@ -1476,7 +1476,7 @@ struct __pyx_obj_4core_7vector3_7Vector3_Vector3 {
  * cimport classes.VisualShaderNode
  * cdef class VisualShaderNodeCubeMap(classes.VisualShaderNode.VisualShaderNode):             # <<<<<<<<<<<<<<
  *     pass
- * ctypedef enum TextureType :TYPE_DATA, TYPE_COLOR, TYPE_NORMALMAP,
+ * ctypedef enum VisualShaderNodeCubeMap_TextureType :TYPE_DATA, TYPE_COLOR, TYPE_NORMALMAP,
  */
 struct __pyx_obj_7classes_23VisualShaderNodeCubeMap_VisualShaderNodeCubeMap {
   struct __pyx_obj_7classes_16VisualShaderNode_VisualShaderNode __pyx_base;
@@ -1505,7 +1505,7 @@ static CYTHON_INLINE godot_object *__pyx_f_5utils_7Wrapper_7Wrapper_get_godot_ow
  * from utils.Wrapper cimport *
  * cdef class Object(Wrapper):             # <<<<<<<<<<<<<<
  *     pass
- * ctypedef enum ConnectFlags :CONNECT_DEFERRED, CONNECT_PERSIST, CONNECT_ONESHOT, CONNECT_REFERENCE_COUNTED,
+ * ctypedef enum Object_ConnectFlags :CONNECT_DEFERRED, CONNECT_PERSIST, CONNECT_ONESHOT, CONNECT_REFERENCE_COUNTED,
  */
 
 struct __pyx_vtabstruct_7classes_6Object_Object {
@@ -1545,7 +1545,7 @@ static struct __pyx_vtabstruct_7classes_8Resource_Resource *__pyx_vtabptr_7class
  * cimport classes.Resource
  * cdef class CubeMap(classes.Resource.Resource):             # <<<<<<<<<<<<<<
  *     pass
- * ctypedef enum Flags :FLAG_MIPMAPS, FLAG_REPEAT, FLAG_FILTER, FLAGS_DEFAULT,
+ * ctypedef enum CubeMap_Flags :FLAG_MIPMAPS, FLAG_REPEAT, FLAG_FILTER, FLAGS_DEFAULT,
  */
 
 struct __pyx_vtabstruct_7classes_7CubeMap_CubeMap {
@@ -1559,7 +1559,7 @@ static struct __pyx_vtabstruct_7classes_7CubeMap_CubeMap *__pyx_vtabptr_7classes
  * cimport classes.Resource
  * cdef class VisualShaderNode(classes.Resource.Resource):             # <<<<<<<<<<<<<<
  *     pass
- * ctypedef enum PortType :PORT_TYPE_SCALAR, PORT_TYPE_VECTOR, PORT_TYPE_BOOLEAN, PORT_TYPE_TRANSFORM, PORT_TYPE_SAMPLER, PORT_TYPE_MAX,
+ * ctypedef enum VisualShaderNode_PortType :PORT_TYPE_SCALAR, PORT_TYPE_VECTOR, PORT_TYPE_BOOLEAN, PORT_TYPE_TRANSFORM, PORT_TYPE_SAMPLER, PORT_TYPE_MAX,
  */
 
 struct __pyx_vtabstruct_7classes_16VisualShaderNode_VisualShaderNode {
@@ -2259,10 +2259,10 @@ static void __Pyx_AddTraceback(const char *funcname, int c_line,
                                int py_line, const char *filename);
 
 /* CIntToPy.proto */
-static CYTHON_INLINE PyObject* __Pyx_PyInt_From___pyx_t_7classes_23VisualShaderNodeCubeMap_Source(__pyx_t_7classes_23VisualShaderNodeCubeMap_Source value);
+static CYTHON_INLINE PyObject* __Pyx_PyInt_From___pyx_t_7classes_23VisualShaderNodeCubeMap_VisualShaderNodeCubeMap_Source(__pyx_t_7classes_23VisualShaderNodeCubeMap_VisualShaderNodeCubeMap_Source value);
 
 /* CIntToPy.proto */
-static CYTHON_INLINE PyObject* __Pyx_PyInt_From___pyx_t_7classes_23VisualShaderNodeCubeMap_TextureType(__pyx_t_7classes_23VisualShaderNodeCubeMap_TextureType value);
+static CYTHON_INLINE PyObject* __Pyx_PyInt_From___pyx_t_7classes_23VisualShaderNodeCubeMap_VisualShaderNodeCubeMap_TextureType(__pyx_t_7classes_23VisualShaderNodeCubeMap_VisualShaderNodeCubeMap_TextureType value);
 
 /* CIntFromPy.proto */
 static CYTHON_INLINE int __Pyx_PyInt_As_int(PyObject *);
@@ -3386,7 +3386,7 @@ static PyObject *__pyx_pw_7classes_23VisualShaderNodeCubeMap_23VisualShaderNodeC
 
 static PyObject *__pyx_pf_7classes_23VisualShaderNodeCubeMap_23VisualShaderNodeCubeMap_4get_source(struct __pyx_obj_7classes_23VisualShaderNodeCubeMap_VisualShaderNodeCubeMap *__pyx_v_self) {
   CYTHON_UNUSED godot_object *__pyx_v__owner;
-  __pyx_t_7classes_23VisualShaderNodeCubeMap_Source *__pyx_v_ret;
+  __pyx_t_7classes_23VisualShaderNodeCubeMap_VisualShaderNodeCubeMap_Source *__pyx_v_ret;
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   godot_object *__pyx_t_1;
@@ -3401,7 +3401,7 @@ static PyObject *__pyx_pf_7classes_23VisualShaderNodeCubeMap_23VisualShaderNodeC
  *   def  get_source(self):
  *     cdef godot_object *_owner = self.godot_owner             # <<<<<<<<<<<<<<
  * 
- *     cdef Source* ret = NULL;
+ *     cdef VisualShaderNodeCubeMap_Source* ret = NULL;
  */
   __pyx_t_1 = __pyx_v_self->__pyx_base.__pyx_base.__pyx_base.__pyx_base.__pyx_base.godot_owner;
   __pyx_v__owner = __pyx_t_1;
@@ -3409,14 +3409,14 @@ static PyObject *__pyx_pf_7classes_23VisualShaderNodeCubeMap_23VisualShaderNodeC
   /* "classes/VisualShaderNodeCubeMap.pyx":85
  *     cdef godot_object *_owner = self.godot_owner
  * 
- *     cdef Source* ret = NULL;             # <<<<<<<<<<<<<<
+ *     cdef VisualShaderNodeCubeMap_Source* ret = NULL;             # <<<<<<<<<<<<<<
  * 
  *     api_core.godot_method_bind_ptrcall(bind_visualshadernodecubemap_get_source,self.godot_owner,NULL,&ret)
  */
   __pyx_v_ret = NULL;
 
   /* "classes/VisualShaderNodeCubeMap.pyx":87
- *     cdef Source* ret = NULL;
+ *     cdef VisualShaderNodeCubeMap_Source* ret = NULL;
  * 
  *     api_core.godot_method_bind_ptrcall(bind_visualshadernodecubemap_get_source,self.godot_owner,NULL,&ret)             # <<<<<<<<<<<<<<
  *     hello('hallo2')
@@ -3441,7 +3441,7 @@ static PyObject *__pyx_pf_7classes_23VisualShaderNodeCubeMap_23VisualShaderNodeC
  *   def  get_texture_type(self):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_2 = __Pyx_PyInt_From___pyx_t_7classes_23VisualShaderNodeCubeMap_Source((*__pyx_v_ret)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 89, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyInt_From___pyx_t_7classes_23VisualShaderNodeCubeMap_VisualShaderNodeCubeMap_Source((*__pyx_v_ret)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 89, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_r = __pyx_t_2;
   __pyx_t_2 = 0;
@@ -3489,7 +3489,7 @@ static PyObject *__pyx_pw_7classes_23VisualShaderNodeCubeMap_23VisualShaderNodeC
 
 static PyObject *__pyx_pf_7classes_23VisualShaderNodeCubeMap_23VisualShaderNodeCubeMap_6get_texture_type(struct __pyx_obj_7classes_23VisualShaderNodeCubeMap_VisualShaderNodeCubeMap *__pyx_v_self) {
   CYTHON_UNUSED godot_object *__pyx_v__owner;
-  __pyx_t_7classes_23VisualShaderNodeCubeMap_TextureType *__pyx_v_ret;
+  __pyx_t_7classes_23VisualShaderNodeCubeMap_VisualShaderNodeCubeMap_TextureType *__pyx_v_ret;
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   godot_object *__pyx_t_1;
@@ -3504,7 +3504,7 @@ static PyObject *__pyx_pf_7classes_23VisualShaderNodeCubeMap_23VisualShaderNodeC
  *   def  get_texture_type(self):
  *     cdef godot_object *_owner = self.godot_owner             # <<<<<<<<<<<<<<
  * 
- *     cdef TextureType* ret = NULL;
+ *     cdef VisualShaderNodeCubeMap_TextureType* ret = NULL;
  */
   __pyx_t_1 = __pyx_v_self->__pyx_base.__pyx_base.__pyx_base.__pyx_base.__pyx_base.godot_owner;
   __pyx_v__owner = __pyx_t_1;
@@ -3512,14 +3512,14 @@ static PyObject *__pyx_pf_7classes_23VisualShaderNodeCubeMap_23VisualShaderNodeC
   /* "classes/VisualShaderNodeCubeMap.pyx":94
  *     cdef godot_object *_owner = self.godot_owner
  * 
- *     cdef TextureType* ret = NULL;             # <<<<<<<<<<<<<<
+ *     cdef VisualShaderNodeCubeMap_TextureType* ret = NULL;             # <<<<<<<<<<<<<<
  * 
  *     api_core.godot_method_bind_ptrcall(bind_visualshadernodecubemap_get_texture_type,self.godot_owner,NULL,&ret)
  */
   __pyx_v_ret = NULL;
 
   /* "classes/VisualShaderNodeCubeMap.pyx":96
- *     cdef TextureType* ret = NULL;
+ *     cdef VisualShaderNodeCubeMap_TextureType* ret = NULL;
  * 
  *     api_core.godot_method_bind_ptrcall(bind_visualshadernodecubemap_get_texture_type,self.godot_owner,NULL,&ret)             # <<<<<<<<<<<<<<
  *     hello('hallo2')
@@ -3544,7 +3544,7 @@ static PyObject *__pyx_pf_7classes_23VisualShaderNodeCubeMap_23VisualShaderNodeC
  *   def  set_cube_map(self,  classes.CubeMap.CubeMap value):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_2 = __Pyx_PyInt_From___pyx_t_7classes_23VisualShaderNodeCubeMap_TextureType((*__pyx_v_ret)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 98, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyInt_From___pyx_t_7classes_23VisualShaderNodeCubeMap_VisualShaderNodeCubeMap_TextureType((*__pyx_v_ret)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 98, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_r = __pyx_t_2;
   __pyx_t_2 = 0;
@@ -4313,7 +4313,7 @@ static CYTHON_INLINE void __pyx_f_4core_7variant_7Variant_7Variant_new_variant(C
  *     cdef inline void new_variant(self, i):
  *         print("new_variant", type(i))             # <<<<<<<<<<<<<<
  * 
- * ctypedef enum Type:
+ * ctypedef enum Variant_Type:
  */
   __pyx_t_1 = PyTuple_New(2); if (unlikely(!__pyx_t_1)) __PYX_ERR(4, 15, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
@@ -5898,12 +5898,10 @@ static int __pyx_import_star_set(PyObject *o, PyObject* py_name, char *name) {
   static const char* internal_type_names[] = {
     "AABB",
     "Array",
-    "Axis",
     "Basis",
     "Color",
     "Dictionary",
     "NodePath",
-    "Operator",
     "Plane",
     "PoolByteArray",
     "PoolColorArray",
@@ -5916,16 +5914,18 @@ static int __pyx_import_star_set(PyObject *o, PyObject* py_name, char *name) {
     "RID",
     "Rect2",
     "Reference",
-    "Source",
     "String",
-    "TextureType",
     "Transform",
     "Transform2D",
-    "Type",
     "Variant",
+    "Variant_Operator",
+    "Variant_Type",
     "Vector2",
     "Vector3",
+    "Vector3_Axis",
     "VisualShaderNodeCubeMap",
+    "VisualShaderNodeCubeMap_Source",
+    "VisualShaderNodeCubeMap_TextureType",
     "Wrapper",
     "bool",
     "godot_aabb",
@@ -8083,24 +8083,24 @@ bad:
     }
 
 /* CIntToPy */
-static CYTHON_INLINE PyObject* __Pyx_PyInt_From___pyx_t_7classes_23VisualShaderNodeCubeMap_Source(__pyx_t_7classes_23VisualShaderNodeCubeMap_Source value) {
-    const __pyx_t_7classes_23VisualShaderNodeCubeMap_Source neg_one = (__pyx_t_7classes_23VisualShaderNodeCubeMap_Source) ((__pyx_t_7classes_23VisualShaderNodeCubeMap_Source) 0 - (__pyx_t_7classes_23VisualShaderNodeCubeMap_Source) 1), const_zero = (__pyx_t_7classes_23VisualShaderNodeCubeMap_Source) 0;
+static CYTHON_INLINE PyObject* __Pyx_PyInt_From___pyx_t_7classes_23VisualShaderNodeCubeMap_VisualShaderNodeCubeMap_Source(__pyx_t_7classes_23VisualShaderNodeCubeMap_VisualShaderNodeCubeMap_Source value) {
+    const __pyx_t_7classes_23VisualShaderNodeCubeMap_VisualShaderNodeCubeMap_Source neg_one = (__pyx_t_7classes_23VisualShaderNodeCubeMap_VisualShaderNodeCubeMap_Source) ((__pyx_t_7classes_23VisualShaderNodeCubeMap_VisualShaderNodeCubeMap_Source) 0 - (__pyx_t_7classes_23VisualShaderNodeCubeMap_VisualShaderNodeCubeMap_Source) 1), const_zero = (__pyx_t_7classes_23VisualShaderNodeCubeMap_VisualShaderNodeCubeMap_Source) 0;
     const int is_unsigned = neg_one > const_zero;
     if (is_unsigned) {
-        if (sizeof(__pyx_t_7classes_23VisualShaderNodeCubeMap_Source) < sizeof(long)) {
+        if (sizeof(__pyx_t_7classes_23VisualShaderNodeCubeMap_VisualShaderNodeCubeMap_Source) < sizeof(long)) {
             return PyInt_FromLong((long) value);
-        } else if (sizeof(__pyx_t_7classes_23VisualShaderNodeCubeMap_Source) <= sizeof(unsigned long)) {
+        } else if (sizeof(__pyx_t_7classes_23VisualShaderNodeCubeMap_VisualShaderNodeCubeMap_Source) <= sizeof(unsigned long)) {
             return PyLong_FromUnsignedLong((unsigned long) value);
 #ifdef HAVE_LONG_LONG
-        } else if (sizeof(__pyx_t_7classes_23VisualShaderNodeCubeMap_Source) <= sizeof(unsigned PY_LONG_LONG)) {
+        } else if (sizeof(__pyx_t_7classes_23VisualShaderNodeCubeMap_VisualShaderNodeCubeMap_Source) <= sizeof(unsigned PY_LONG_LONG)) {
             return PyLong_FromUnsignedLongLong((unsigned PY_LONG_LONG) value);
 #endif
         }
     } else {
-        if (sizeof(__pyx_t_7classes_23VisualShaderNodeCubeMap_Source) <= sizeof(long)) {
+        if (sizeof(__pyx_t_7classes_23VisualShaderNodeCubeMap_VisualShaderNodeCubeMap_Source) <= sizeof(long)) {
             return PyInt_FromLong((long) value);
 #ifdef HAVE_LONG_LONG
-        } else if (sizeof(__pyx_t_7classes_23VisualShaderNodeCubeMap_Source) <= sizeof(PY_LONG_LONG)) {
+        } else if (sizeof(__pyx_t_7classes_23VisualShaderNodeCubeMap_VisualShaderNodeCubeMap_Source) <= sizeof(PY_LONG_LONG)) {
             return PyLong_FromLongLong((PY_LONG_LONG) value);
 #endif
         }
@@ -8108,30 +8108,30 @@ static CYTHON_INLINE PyObject* __Pyx_PyInt_From___pyx_t_7classes_23VisualShaderN
     {
         int one = 1; int little = (int)*(unsigned char *)&one;
         unsigned char *bytes = (unsigned char *)&value;
-        return _PyLong_FromByteArray(bytes, sizeof(__pyx_t_7classes_23VisualShaderNodeCubeMap_Source),
+        return _PyLong_FromByteArray(bytes, sizeof(__pyx_t_7classes_23VisualShaderNodeCubeMap_VisualShaderNodeCubeMap_Source),
                                      little, !is_unsigned);
     }
 }
 
 /* CIntToPy */
-static CYTHON_INLINE PyObject* __Pyx_PyInt_From___pyx_t_7classes_23VisualShaderNodeCubeMap_TextureType(__pyx_t_7classes_23VisualShaderNodeCubeMap_TextureType value) {
-    const __pyx_t_7classes_23VisualShaderNodeCubeMap_TextureType neg_one = (__pyx_t_7classes_23VisualShaderNodeCubeMap_TextureType) ((__pyx_t_7classes_23VisualShaderNodeCubeMap_TextureType) 0 - (__pyx_t_7classes_23VisualShaderNodeCubeMap_TextureType) 1), const_zero = (__pyx_t_7classes_23VisualShaderNodeCubeMap_TextureType) 0;
+static CYTHON_INLINE PyObject* __Pyx_PyInt_From___pyx_t_7classes_23VisualShaderNodeCubeMap_VisualShaderNodeCubeMap_TextureType(__pyx_t_7classes_23VisualShaderNodeCubeMap_VisualShaderNodeCubeMap_TextureType value) {
+    const __pyx_t_7classes_23VisualShaderNodeCubeMap_VisualShaderNodeCubeMap_TextureType neg_one = (__pyx_t_7classes_23VisualShaderNodeCubeMap_VisualShaderNodeCubeMap_TextureType) ((__pyx_t_7classes_23VisualShaderNodeCubeMap_VisualShaderNodeCubeMap_TextureType) 0 - (__pyx_t_7classes_23VisualShaderNodeCubeMap_VisualShaderNodeCubeMap_TextureType) 1), const_zero = (__pyx_t_7classes_23VisualShaderNodeCubeMap_VisualShaderNodeCubeMap_TextureType) 0;
     const int is_unsigned = neg_one > const_zero;
     if (is_unsigned) {
-        if (sizeof(__pyx_t_7classes_23VisualShaderNodeCubeMap_TextureType) < sizeof(long)) {
+        if (sizeof(__pyx_t_7classes_23VisualShaderNodeCubeMap_VisualShaderNodeCubeMap_TextureType) < sizeof(long)) {
             return PyInt_FromLong((long) value);
-        } else if (sizeof(__pyx_t_7classes_23VisualShaderNodeCubeMap_TextureType) <= sizeof(unsigned long)) {
+        } else if (sizeof(__pyx_t_7classes_23VisualShaderNodeCubeMap_VisualShaderNodeCubeMap_TextureType) <= sizeof(unsigned long)) {
             return PyLong_FromUnsignedLong((unsigned long) value);
 #ifdef HAVE_LONG_LONG
-        } else if (sizeof(__pyx_t_7classes_23VisualShaderNodeCubeMap_TextureType) <= sizeof(unsigned PY_LONG_LONG)) {
+        } else if (sizeof(__pyx_t_7classes_23VisualShaderNodeCubeMap_VisualShaderNodeCubeMap_TextureType) <= sizeof(unsigned PY_LONG_LONG)) {
             return PyLong_FromUnsignedLongLong((unsigned PY_LONG_LONG) value);
 #endif
         }
     } else {
-        if (sizeof(__pyx_t_7classes_23VisualShaderNodeCubeMap_TextureType) <= sizeof(long)) {
+        if (sizeof(__pyx_t_7classes_23VisualShaderNodeCubeMap_VisualShaderNodeCubeMap_TextureType) <= sizeof(long)) {
             return PyInt_FromLong((long) value);
 #ifdef HAVE_LONG_LONG
-        } else if (sizeof(__pyx_t_7classes_23VisualShaderNodeCubeMap_TextureType) <= sizeof(PY_LONG_LONG)) {
+        } else if (sizeof(__pyx_t_7classes_23VisualShaderNodeCubeMap_VisualShaderNodeCubeMap_TextureType) <= sizeof(PY_LONG_LONG)) {
             return PyLong_FromLongLong((PY_LONG_LONG) value);
 #endif
         }
@@ -8139,7 +8139,7 @@ static CYTHON_INLINE PyObject* __Pyx_PyInt_From___pyx_t_7classes_23VisualShaderN
     {
         int one = 1; int little = (int)*(unsigned char *)&one;
         unsigned char *bytes = (unsigned char *)&value;
-        return _PyLong_FromByteArray(bytes, sizeof(__pyx_t_7classes_23VisualShaderNodeCubeMap_TextureType),
+        return _PyLong_FromByteArray(bytes, sizeof(__pyx_t_7classes_23VisualShaderNodeCubeMap_VisualShaderNodeCubeMap_TextureType),
                                      little, !is_unsigned);
     }
 }

@@ -894,37 +894,37 @@ struct __pyx_obj_7classes_9MultiMesh_MultiMesh;
 /* "classes/Object.pxd":7
  * cdef class Object(Wrapper):
  *     pass
- * ctypedef enum ConnectFlags :CONNECT_DEFERRED, CONNECT_PERSIST, CONNECT_ONESHOT, CONNECT_REFERENCE_COUNTED,             # <<<<<<<<<<<<<<
+ * ctypedef enum Object_ConnectFlags :CONNECT_DEFERRED, CONNECT_PERSIST, CONNECT_ONESHOT, CONNECT_REFERENCE_COUNTED,             # <<<<<<<<<<<<<<
  */
-enum __pyx_t_7classes_6Object_ConnectFlags {
+enum __pyx_t_7classes_6Object_Object_ConnectFlags {
   __pyx_e_7classes_6Object_CONNECT_DEFERRED,
   __pyx_e_7classes_6Object_CONNECT_PERSIST,
   __pyx_e_7classes_6Object_CONNECT_ONESHOT,
   __pyx_e_7classes_6Object_CONNECT_REFERENCE_COUNTED
 };
-typedef enum __pyx_t_7classes_6Object_ConnectFlags __pyx_t_7classes_6Object_ConnectFlags;
+typedef enum __pyx_t_7classes_6Object_Object_ConnectFlags __pyx_t_7classes_6Object_Object_ConnectFlags;
 
 /* "classes/Mesh.pxd":7
  * cdef class Mesh(classes.Resource.Resource):
  *     pass
- * ctypedef enum BlendShapeMode :BLEND_SHAPE_MODE_NORMALIZED, BLEND_SHAPE_MODE_RELATIVE,             # <<<<<<<<<<<<<<
- * ctypedef enum PrimitiveType :PRIMITIVE_POINTS, PRIMITIVE_LINES, PRIMITIVE_LINE_STRIP, PRIMITIVE_LINE_LOOP, PRIMITIVE_TRIANGLES, PRIMITIVE_TRIANGLE_STRIP, PRIMITIVE_TRIANGLE_FAN,
- * ctypedef enum ArrayFormat :ARRAY_FORMAT_VERTEX, ARRAY_FORMAT_NORMAL, ARRAY_FORMAT_TANGENT, ARRAY_FORMAT_COLOR, ARRAY_COMPRESS_BASE, ARRAY_FORMAT_TEX_UV, ARRAY_FORMAT_TEX_UV2, ARRAY_FORMAT_BONES, ARRAY_FORMAT_WEIGHTS, ARRAY_FORMAT_INDEX, ARRAY_COMPRESS_VERTEX, ARRAY_COMPRESS_NORMAL, ARRAY_COMPRESS_TANGENT, ARRAY_COMPRESS_COLOR, ARRAY_COMPRESS_TEX_UV, ARRAY_COMPRESS_TEX_UV2, ARRAY_COMPRESS_BONES, ARRAY_COMPRESS_WEIGHTS, ARRAY_COMPRESS_DEFAULT, ARRAY_COMPRESS_INDEX, ARRAY_FLAG_USE_2D_VERTICES, ARRAY_FLAG_USE_16_BIT_BONES,
+ * ctypedef enum Mesh_BlendShapeMode :BLEND_SHAPE_MODE_NORMALIZED, BLEND_SHAPE_MODE_RELATIVE,             # <<<<<<<<<<<<<<
+ * ctypedef enum Mesh_PrimitiveType :PRIMITIVE_POINTS, PRIMITIVE_LINES, PRIMITIVE_LINE_STRIP, PRIMITIVE_LINE_LOOP, PRIMITIVE_TRIANGLES, PRIMITIVE_TRIANGLE_STRIP, PRIMITIVE_TRIANGLE_FAN,
+ * ctypedef enum Mesh_ArrayFormat :ARRAY_FORMAT_VERTEX, ARRAY_FORMAT_NORMAL, ARRAY_FORMAT_TANGENT, ARRAY_FORMAT_COLOR, ARRAY_COMPRESS_BASE, ARRAY_FORMAT_TEX_UV, ARRAY_FORMAT_TEX_UV2, ARRAY_FORMAT_BONES, ARRAY_FORMAT_WEIGHTS, ARRAY_FORMAT_INDEX, ARRAY_COMPRESS_VERTEX, ARRAY_COMPRESS_NORMAL, ARRAY_COMPRESS_TANGENT, ARRAY_COMPRESS_COLOR, ARRAY_COMPRESS_TEX_UV, ARRAY_COMPRESS_TEX_UV2, ARRAY_COMPRESS_BONES, ARRAY_COMPRESS_WEIGHTS, ARRAY_COMPRESS_DEFAULT, ARRAY_COMPRESS_INDEX, ARRAY_FLAG_USE_2D_VERTICES, ARRAY_FLAG_USE_16_BIT_BONES,
  */
-enum __pyx_t_7classes_4Mesh_BlendShapeMode {
+enum __pyx_t_7classes_4Mesh_Mesh_BlendShapeMode {
   __pyx_e_7classes_4Mesh_BLEND_SHAPE_MODE_NORMALIZED,
   __pyx_e_7classes_4Mesh_BLEND_SHAPE_MODE_RELATIVE
 };
-typedef enum __pyx_t_7classes_4Mesh_BlendShapeMode __pyx_t_7classes_4Mesh_BlendShapeMode;
+typedef enum __pyx_t_7classes_4Mesh_Mesh_BlendShapeMode __pyx_t_7classes_4Mesh_Mesh_BlendShapeMode;
 
 /* "classes/Mesh.pxd":8
  *     pass
- * ctypedef enum BlendShapeMode :BLEND_SHAPE_MODE_NORMALIZED, BLEND_SHAPE_MODE_RELATIVE,
- * ctypedef enum PrimitiveType :PRIMITIVE_POINTS, PRIMITIVE_LINES, PRIMITIVE_LINE_STRIP, PRIMITIVE_LINE_LOOP, PRIMITIVE_TRIANGLES, PRIMITIVE_TRIANGLE_STRIP, PRIMITIVE_TRIANGLE_FAN,             # <<<<<<<<<<<<<<
- * ctypedef enum ArrayFormat :ARRAY_FORMAT_VERTEX, ARRAY_FORMAT_NORMAL, ARRAY_FORMAT_TANGENT, ARRAY_FORMAT_COLOR, ARRAY_COMPRESS_BASE, ARRAY_FORMAT_TEX_UV, ARRAY_FORMAT_TEX_UV2, ARRAY_FORMAT_BONES, ARRAY_FORMAT_WEIGHTS, ARRAY_FORMAT_INDEX, ARRAY_COMPRESS_VERTEX, ARRAY_COMPRESS_NORMAL, ARRAY_COMPRESS_TANGENT, ARRAY_COMPRESS_COLOR, ARRAY_COMPRESS_TEX_UV, ARRAY_COMPRESS_TEX_UV2, ARRAY_COMPRESS_BONES, ARRAY_COMPRESS_WEIGHTS, ARRAY_COMPRESS_DEFAULT, ARRAY_COMPRESS_INDEX, ARRAY_FLAG_USE_2D_VERTICES, ARRAY_FLAG_USE_16_BIT_BONES,
- * ctypedef enum ArrayType :ARRAY_VERTEX, ARRAY_NORMAL, ARRAY_TANGENT, ARRAY_COLOR, ARRAY_TEX_UV, ARRAY_TEX_UV2, ARRAY_BONES, ARRAY_WEIGHTS, ARRAY_INDEX, ARRAY_MAX,
+ * ctypedef enum Mesh_BlendShapeMode :BLEND_SHAPE_MODE_NORMALIZED, BLEND_SHAPE_MODE_RELATIVE,
+ * ctypedef enum Mesh_PrimitiveType :PRIMITIVE_POINTS, PRIMITIVE_LINES, PRIMITIVE_LINE_STRIP, PRIMITIVE_LINE_LOOP, PRIMITIVE_TRIANGLES, PRIMITIVE_TRIANGLE_STRIP, PRIMITIVE_TRIANGLE_FAN,             # <<<<<<<<<<<<<<
+ * ctypedef enum Mesh_ArrayFormat :ARRAY_FORMAT_VERTEX, ARRAY_FORMAT_NORMAL, ARRAY_FORMAT_TANGENT, ARRAY_FORMAT_COLOR, ARRAY_COMPRESS_BASE, ARRAY_FORMAT_TEX_UV, ARRAY_FORMAT_TEX_UV2, ARRAY_FORMAT_BONES, ARRAY_FORMAT_WEIGHTS, ARRAY_FORMAT_INDEX, ARRAY_COMPRESS_VERTEX, ARRAY_COMPRESS_NORMAL, ARRAY_COMPRESS_TANGENT, ARRAY_COMPRESS_COLOR, ARRAY_COMPRESS_TEX_UV, ARRAY_COMPRESS_TEX_UV2, ARRAY_COMPRESS_BONES, ARRAY_COMPRESS_WEIGHTS, ARRAY_COMPRESS_DEFAULT, ARRAY_COMPRESS_INDEX, ARRAY_FLAG_USE_2D_VERTICES, ARRAY_FLAG_USE_16_BIT_BONES,
+ * ctypedef enum Mesh_ArrayType :ARRAY_VERTEX, ARRAY_NORMAL, ARRAY_TANGENT, ARRAY_COLOR, ARRAY_TEX_UV, ARRAY_TEX_UV2, ARRAY_BONES, ARRAY_WEIGHTS, ARRAY_INDEX, ARRAY_MAX,
  */
-enum __pyx_t_7classes_4Mesh_PrimitiveType {
+enum __pyx_t_7classes_4Mesh_Mesh_PrimitiveType {
   __pyx_e_7classes_4Mesh_PRIMITIVE_POINTS,
   __pyx_e_7classes_4Mesh_PRIMITIVE_LINES,
   __pyx_e_7classes_4Mesh_PRIMITIVE_LINE_STRIP,
@@ -933,15 +933,15 @@ enum __pyx_t_7classes_4Mesh_PrimitiveType {
   __pyx_e_7classes_4Mesh_PRIMITIVE_TRIANGLE_STRIP,
   __pyx_e_7classes_4Mesh_PRIMITIVE_TRIANGLE_FAN
 };
-typedef enum __pyx_t_7classes_4Mesh_PrimitiveType __pyx_t_7classes_4Mesh_PrimitiveType;
+typedef enum __pyx_t_7classes_4Mesh_Mesh_PrimitiveType __pyx_t_7classes_4Mesh_Mesh_PrimitiveType;
 
 /* "classes/Mesh.pxd":9
- * ctypedef enum BlendShapeMode :BLEND_SHAPE_MODE_NORMALIZED, BLEND_SHAPE_MODE_RELATIVE,
- * ctypedef enum PrimitiveType :PRIMITIVE_POINTS, PRIMITIVE_LINES, PRIMITIVE_LINE_STRIP, PRIMITIVE_LINE_LOOP, PRIMITIVE_TRIANGLES, PRIMITIVE_TRIANGLE_STRIP, PRIMITIVE_TRIANGLE_FAN,
- * ctypedef enum ArrayFormat :ARRAY_FORMAT_VERTEX, ARRAY_FORMAT_NORMAL, ARRAY_FORMAT_TANGENT, ARRAY_FORMAT_COLOR, ARRAY_COMPRESS_BASE, ARRAY_FORMAT_TEX_UV, ARRAY_FORMAT_TEX_UV2, ARRAY_FORMAT_BONES, ARRAY_FORMAT_WEIGHTS, ARRAY_FORMAT_INDEX, ARRAY_COMPRESS_VERTEX, ARRAY_COMPRESS_NORMAL, ARRAY_COMPRESS_TANGENT, ARRAY_COMPRESS_COLOR, ARRAY_COMPRESS_TEX_UV, ARRAY_COMPRESS_TEX_UV2, ARRAY_COMPRESS_BONES, ARRAY_COMPRESS_WEIGHTS, ARRAY_COMPRESS_DEFAULT, ARRAY_COMPRESS_INDEX, ARRAY_FLAG_USE_2D_VERTICES, ARRAY_FLAG_USE_16_BIT_BONES,             # <<<<<<<<<<<<<<
- * ctypedef enum ArrayType :ARRAY_VERTEX, ARRAY_NORMAL, ARRAY_TANGENT, ARRAY_COLOR, ARRAY_TEX_UV, ARRAY_TEX_UV2, ARRAY_BONES, ARRAY_WEIGHTS, ARRAY_INDEX, ARRAY_MAX,
+ * ctypedef enum Mesh_BlendShapeMode :BLEND_SHAPE_MODE_NORMALIZED, BLEND_SHAPE_MODE_RELATIVE,
+ * ctypedef enum Mesh_PrimitiveType :PRIMITIVE_POINTS, PRIMITIVE_LINES, PRIMITIVE_LINE_STRIP, PRIMITIVE_LINE_LOOP, PRIMITIVE_TRIANGLES, PRIMITIVE_TRIANGLE_STRIP, PRIMITIVE_TRIANGLE_FAN,
+ * ctypedef enum Mesh_ArrayFormat :ARRAY_FORMAT_VERTEX, ARRAY_FORMAT_NORMAL, ARRAY_FORMAT_TANGENT, ARRAY_FORMAT_COLOR, ARRAY_COMPRESS_BASE, ARRAY_FORMAT_TEX_UV, ARRAY_FORMAT_TEX_UV2, ARRAY_FORMAT_BONES, ARRAY_FORMAT_WEIGHTS, ARRAY_FORMAT_INDEX, ARRAY_COMPRESS_VERTEX, ARRAY_COMPRESS_NORMAL, ARRAY_COMPRESS_TANGENT, ARRAY_COMPRESS_COLOR, ARRAY_COMPRESS_TEX_UV, ARRAY_COMPRESS_TEX_UV2, ARRAY_COMPRESS_BONES, ARRAY_COMPRESS_WEIGHTS, ARRAY_COMPRESS_DEFAULT, ARRAY_COMPRESS_INDEX, ARRAY_FLAG_USE_2D_VERTICES, ARRAY_FLAG_USE_16_BIT_BONES,             # <<<<<<<<<<<<<<
+ * ctypedef enum Mesh_ArrayType :ARRAY_VERTEX, ARRAY_NORMAL, ARRAY_TANGENT, ARRAY_COLOR, ARRAY_TEX_UV, ARRAY_TEX_UV2, ARRAY_BONES, ARRAY_WEIGHTS, ARRAY_INDEX, ARRAY_MAX,
  */
-enum __pyx_t_7classes_4Mesh_ArrayFormat {
+enum __pyx_t_7classes_4Mesh_Mesh_ArrayFormat {
   __pyx_e_7classes_4Mesh_ARRAY_FORMAT_VERTEX,
   __pyx_e_7classes_4Mesh_ARRAY_FORMAT_NORMAL,
   __pyx_e_7classes_4Mesh_ARRAY_FORMAT_TANGENT,
@@ -965,14 +965,14 @@ enum __pyx_t_7classes_4Mesh_ArrayFormat {
   __pyx_e_7classes_4Mesh_ARRAY_FLAG_USE_2D_VERTICES,
   __pyx_e_7classes_4Mesh_ARRAY_FLAG_USE_16_BIT_BONES
 };
-typedef enum __pyx_t_7classes_4Mesh_ArrayFormat __pyx_t_7classes_4Mesh_ArrayFormat;
+typedef enum __pyx_t_7classes_4Mesh_Mesh_ArrayFormat __pyx_t_7classes_4Mesh_Mesh_ArrayFormat;
 
 /* "classes/Mesh.pxd":10
- * ctypedef enum PrimitiveType :PRIMITIVE_POINTS, PRIMITIVE_LINES, PRIMITIVE_LINE_STRIP, PRIMITIVE_LINE_LOOP, PRIMITIVE_TRIANGLES, PRIMITIVE_TRIANGLE_STRIP, PRIMITIVE_TRIANGLE_FAN,
- * ctypedef enum ArrayFormat :ARRAY_FORMAT_VERTEX, ARRAY_FORMAT_NORMAL, ARRAY_FORMAT_TANGENT, ARRAY_FORMAT_COLOR, ARRAY_COMPRESS_BASE, ARRAY_FORMAT_TEX_UV, ARRAY_FORMAT_TEX_UV2, ARRAY_FORMAT_BONES, ARRAY_FORMAT_WEIGHTS, ARRAY_FORMAT_INDEX, ARRAY_COMPRESS_VERTEX, ARRAY_COMPRESS_NORMAL, ARRAY_COMPRESS_TANGENT, ARRAY_COMPRESS_COLOR, ARRAY_COMPRESS_TEX_UV, ARRAY_COMPRESS_TEX_UV2, ARRAY_COMPRESS_BONES, ARRAY_COMPRESS_WEIGHTS, ARRAY_COMPRESS_DEFAULT, ARRAY_COMPRESS_INDEX, ARRAY_FLAG_USE_2D_VERTICES, ARRAY_FLAG_USE_16_BIT_BONES,
- * ctypedef enum ArrayType :ARRAY_VERTEX, ARRAY_NORMAL, ARRAY_TANGENT, ARRAY_COLOR, ARRAY_TEX_UV, ARRAY_TEX_UV2, ARRAY_BONES, ARRAY_WEIGHTS, ARRAY_INDEX, ARRAY_MAX,             # <<<<<<<<<<<<<<
+ * ctypedef enum Mesh_PrimitiveType :PRIMITIVE_POINTS, PRIMITIVE_LINES, PRIMITIVE_LINE_STRIP, PRIMITIVE_LINE_LOOP, PRIMITIVE_TRIANGLES, PRIMITIVE_TRIANGLE_STRIP, PRIMITIVE_TRIANGLE_FAN,
+ * ctypedef enum Mesh_ArrayFormat :ARRAY_FORMAT_VERTEX, ARRAY_FORMAT_NORMAL, ARRAY_FORMAT_TANGENT, ARRAY_FORMAT_COLOR, ARRAY_COMPRESS_BASE, ARRAY_FORMAT_TEX_UV, ARRAY_FORMAT_TEX_UV2, ARRAY_FORMAT_BONES, ARRAY_FORMAT_WEIGHTS, ARRAY_FORMAT_INDEX, ARRAY_COMPRESS_VERTEX, ARRAY_COMPRESS_NORMAL, ARRAY_COMPRESS_TANGENT, ARRAY_COMPRESS_COLOR, ARRAY_COMPRESS_TEX_UV, ARRAY_COMPRESS_TEX_UV2, ARRAY_COMPRESS_BONES, ARRAY_COMPRESS_WEIGHTS, ARRAY_COMPRESS_DEFAULT, ARRAY_COMPRESS_INDEX, ARRAY_FLAG_USE_2D_VERTICES, ARRAY_FLAG_USE_16_BIT_BONES,
+ * ctypedef enum Mesh_ArrayType :ARRAY_VERTEX, ARRAY_NORMAL, ARRAY_TANGENT, ARRAY_COLOR, ARRAY_TEX_UV, ARRAY_TEX_UV2, ARRAY_BONES, ARRAY_WEIGHTS, ARRAY_INDEX, ARRAY_MAX,             # <<<<<<<<<<<<<<
  */
-enum __pyx_t_7classes_4Mesh_ArrayType {
+enum __pyx_t_7classes_4Mesh_Mesh_ArrayType {
   __pyx_e_7classes_4Mesh_ARRAY_VERTEX,
   __pyx_e_7classes_4Mesh_ARRAY_NORMAL,
   __pyx_e_7classes_4Mesh_ARRAY_TANGENT,
@@ -984,16 +984,16 @@ enum __pyx_t_7classes_4Mesh_ArrayType {
   __pyx_e_7classes_4Mesh_ARRAY_INDEX,
   __pyx_e_7classes_4Mesh_ARRAY_MAX
 };
-typedef enum __pyx_t_7classes_4Mesh_ArrayType __pyx_t_7classes_4Mesh_ArrayType;
+typedef enum __pyx_t_7classes_4Mesh_Mesh_ArrayType __pyx_t_7classes_4Mesh_Mesh_ArrayType;
 
 /* "core/variant/Variant.pxd":17
  *         print("new_variant", type(i))
  * 
- * ctypedef enum Type:             # <<<<<<<<<<<<<<
+ * ctypedef enum Variant_Type:             # <<<<<<<<<<<<<<
  *     NIL,
  *     # atomic types
  */
-enum __pyx_t_4core_7variant_7Variant_Type {
+enum __pyx_t_4core_7variant_7Variant_Variant_Type {
   __pyx_e_4core_7variant_7Variant_NIL,
   __pyx_e_4core_7variant_7Variant_BOOL,
   __pyx_e_4core_7variant_7Variant_INT,
@@ -1023,16 +1023,16 @@ enum __pyx_t_4core_7variant_7Variant_Type {
   __pyx_e_4core_7variant_7Variant_POOL_COLOR_ARRAY,
   __pyx_e_4core_7variant_7Variant_VARIANT_MAX
 };
-typedef enum __pyx_t_4core_7variant_7Variant_Type __pyx_t_4core_7variant_7Variant_Type;
+typedef enum __pyx_t_4core_7variant_7Variant_Variant_Type __pyx_t_4core_7variant_7Variant_Variant_Type;
 
 /* "core/variant/Variant.pxd":58
  * 
  * 
- * ctypedef enum Operator :             # <<<<<<<<<<<<<<
+ * ctypedef enum Variant_Operator :             # <<<<<<<<<<<<<<
  * 
  *     #comparation
  */
-enum __pyx_t_4core_7variant_7Variant_Operator {
+enum __pyx_t_4core_7variant_7Variant_Variant_Operator {
   __pyx_e_4core_7variant_7Variant_OP_EQUAL,
   __pyx_e_4core_7variant_7Variant_OP_NOT_EQUAL,
   __pyx_e_4core_7variant_7Variant_OP_LESS,
@@ -1060,59 +1060,59 @@ enum __pyx_t_4core_7variant_7Variant_Operator {
   __pyx_e_4core_7variant_7Variant_OP_IN,
   __pyx_e_4core_7variant_7Variant_OP_MAX
 };
-typedef enum __pyx_t_4core_7variant_7Variant_Operator __pyx_t_4core_7variant_7Variant_Operator;
+typedef enum __pyx_t_4core_7variant_7Variant_Variant_Operator __pyx_t_4core_7variant_7Variant_Variant_Operator;
 
 /* "core/vector3/Vector3.pxd":15
  * 
  * 
- * ctypedef enum Axis :             # <<<<<<<<<<<<<<
- *     AXIS_X,
- *     AXIS_Y,
+ * ctypedef enum Vector3_Axis :             # <<<<<<<<<<<<<<
+ *     Vector3_AXIS_X,
+ *     Vector3_AXIS_Y,
  */
-enum __pyx_t_4core_7vector3_7Vector3_Axis {
-  __pyx_e_4core_7vector3_7Vector3_AXIS_X,
-  __pyx_e_4core_7vector3_7Vector3_AXIS_Y,
-  __pyx_e_4core_7vector3_7Vector3_AXIS_Z
+enum __pyx_t_4core_7vector3_7Vector3_Vector3_Axis {
+  __pyx_e_4core_7vector3_7Vector3_Vector3_AXIS_X,
+  __pyx_e_4core_7vector3_7Vector3_Vector3_AXIS_Y,
+  __pyx_e_4core_7vector3_7Vector3_Vector3_AXIS_Z
 };
-typedef enum __pyx_t_4core_7vector3_7Vector3_Axis __pyx_t_4core_7vector3_7Vector3_Axis;
+typedef enum __pyx_t_4core_7vector3_7Vector3_Vector3_Axis __pyx_t_4core_7vector3_7Vector3_Vector3_Axis;
 
 /* "classes/MultiMesh.pxd":7
  * cdef class MultiMesh(classes.Resource.Resource):
  *     pass
- * ctypedef enum TransformFormat :TRANSFORM_2D, TRANSFORM_3D,             # <<<<<<<<<<<<<<
- * ctypedef enum CustomDataFormat :CUSTOM_DATA_NONE, CUSTOM_DATA_8BIT, CUSTOM_DATA_FLOAT,
- * ctypedef enum ColorFormat :COLOR_NONE, COLOR_8BIT, COLOR_FLOAT,
+ * ctypedef enum MultiMesh_TransformFormat :TRANSFORM_2D, TRANSFORM_3D,             # <<<<<<<<<<<<<<
+ * ctypedef enum MultiMesh_CustomDataFormat :CUSTOM_DATA_NONE, CUSTOM_DATA_8BIT, CUSTOM_DATA_FLOAT,
+ * ctypedef enum MultiMesh_ColorFormat :COLOR_NONE, COLOR_8BIT, COLOR_FLOAT,
  */
-enum __pyx_t_7classes_9MultiMesh_TransformFormat {
+enum __pyx_t_7classes_9MultiMesh_MultiMesh_TransformFormat {
   __pyx_e_7classes_9MultiMesh_TRANSFORM_2D,
   __pyx_e_7classes_9MultiMesh_TRANSFORM_3D
 };
-typedef enum __pyx_t_7classes_9MultiMesh_TransformFormat __pyx_t_7classes_9MultiMesh_TransformFormat;
+typedef enum __pyx_t_7classes_9MultiMesh_MultiMesh_TransformFormat __pyx_t_7classes_9MultiMesh_MultiMesh_TransformFormat;
 
 /* "classes/MultiMesh.pxd":8
  *     pass
- * ctypedef enum TransformFormat :TRANSFORM_2D, TRANSFORM_3D,
- * ctypedef enum CustomDataFormat :CUSTOM_DATA_NONE, CUSTOM_DATA_8BIT, CUSTOM_DATA_FLOAT,             # <<<<<<<<<<<<<<
- * ctypedef enum ColorFormat :COLOR_NONE, COLOR_8BIT, COLOR_FLOAT,
+ * ctypedef enum MultiMesh_TransformFormat :TRANSFORM_2D, TRANSFORM_3D,
+ * ctypedef enum MultiMesh_CustomDataFormat :CUSTOM_DATA_NONE, CUSTOM_DATA_8BIT, CUSTOM_DATA_FLOAT,             # <<<<<<<<<<<<<<
+ * ctypedef enum MultiMesh_ColorFormat :COLOR_NONE, COLOR_8BIT, COLOR_FLOAT,
  */
-enum __pyx_t_7classes_9MultiMesh_CustomDataFormat {
+enum __pyx_t_7classes_9MultiMesh_MultiMesh_CustomDataFormat {
   __pyx_e_7classes_9MultiMesh_CUSTOM_DATA_NONE,
   __pyx_e_7classes_9MultiMesh_CUSTOM_DATA_8BIT,
   __pyx_e_7classes_9MultiMesh_CUSTOM_DATA_FLOAT
 };
-typedef enum __pyx_t_7classes_9MultiMesh_CustomDataFormat __pyx_t_7classes_9MultiMesh_CustomDataFormat;
+typedef enum __pyx_t_7classes_9MultiMesh_MultiMesh_CustomDataFormat __pyx_t_7classes_9MultiMesh_MultiMesh_CustomDataFormat;
 
 /* "classes/MultiMesh.pxd":9
- * ctypedef enum TransformFormat :TRANSFORM_2D, TRANSFORM_3D,
- * ctypedef enum CustomDataFormat :CUSTOM_DATA_NONE, CUSTOM_DATA_8BIT, CUSTOM_DATA_FLOAT,
- * ctypedef enum ColorFormat :COLOR_NONE, COLOR_8BIT, COLOR_FLOAT,             # <<<<<<<<<<<<<<
+ * ctypedef enum MultiMesh_TransformFormat :TRANSFORM_2D, TRANSFORM_3D,
+ * ctypedef enum MultiMesh_CustomDataFormat :CUSTOM_DATA_NONE, CUSTOM_DATA_8BIT, CUSTOM_DATA_FLOAT,
+ * ctypedef enum MultiMesh_ColorFormat :COLOR_NONE, COLOR_8BIT, COLOR_FLOAT,             # <<<<<<<<<<<<<<
  */
-enum __pyx_t_7classes_9MultiMesh_ColorFormat {
+enum __pyx_t_7classes_9MultiMesh_MultiMesh_ColorFormat {
   __pyx_e_7classes_9MultiMesh_COLOR_NONE,
   __pyx_e_7classes_9MultiMesh_COLOR_8BIT,
   __pyx_e_7classes_9MultiMesh_COLOR_FLOAT
 };
-typedef enum __pyx_t_7classes_9MultiMesh_ColorFormat __pyx_t_7classes_9MultiMesh_ColorFormat;
+typedef enum __pyx_t_7classes_9MultiMesh_MultiMesh_ColorFormat __pyx_t_7classes_9MultiMesh_MultiMesh_ColorFormat;
 
 /* "utils/Wrapper.pxd":2
  * from godot_api.binding cimport *
@@ -1132,7 +1132,7 @@ struct __pyx_obj_5utils_7Wrapper_Wrapper {
  * from utils.Wrapper cimport *
  * cdef class Object(Wrapper):             # <<<<<<<<<<<<<<
  *     pass
- * ctypedef enum ConnectFlags :CONNECT_DEFERRED, CONNECT_PERSIST, CONNECT_ONESHOT, CONNECT_REFERENCE_COUNTED,
+ * ctypedef enum Object_ConnectFlags :CONNECT_DEFERRED, CONNECT_PERSIST, CONNECT_ONESHOT, CONNECT_REFERENCE_COUNTED,
  */
 struct __pyx_obj_7classes_6Object_Object {
   struct __pyx_obj_5utils_7Wrapper_Wrapper __pyx_base;
@@ -1166,7 +1166,7 @@ struct __pyx_obj_7classes_8Resource_Resource {
  * cimport classes.Resource
  * cdef class Mesh(classes.Resource.Resource):             # <<<<<<<<<<<<<<
  *     pass
- * ctypedef enum BlendShapeMode :BLEND_SHAPE_MODE_NORMALIZED, BLEND_SHAPE_MODE_RELATIVE,
+ * ctypedef enum Mesh_BlendShapeMode :BLEND_SHAPE_MODE_NORMALIZED, BLEND_SHAPE_MODE_RELATIVE,
  */
 struct __pyx_obj_7classes_4Mesh_Mesh {
   struct __pyx_obj_7classes_8Resource_Resource __pyx_base;
@@ -1500,7 +1500,7 @@ struct __pyx_obj_4core_7vector3_7Vector3_Vector3 {
  * cimport classes.Resource
  * cdef class MultiMesh(classes.Resource.Resource):             # <<<<<<<<<<<<<<
  *     pass
- * ctypedef enum TransformFormat :TRANSFORM_2D, TRANSFORM_3D,
+ * ctypedef enum MultiMesh_TransformFormat :TRANSFORM_2D, TRANSFORM_3D,
  */
 struct __pyx_obj_7classes_9MultiMesh_MultiMesh {
   struct __pyx_obj_7classes_8Resource_Resource __pyx_base;
@@ -1529,7 +1529,7 @@ static CYTHON_INLINE godot_object *__pyx_f_5utils_7Wrapper_7Wrapper_get_godot_ow
  * from utils.Wrapper cimport *
  * cdef class Object(Wrapper):             # <<<<<<<<<<<<<<
  *     pass
- * ctypedef enum ConnectFlags :CONNECT_DEFERRED, CONNECT_PERSIST, CONNECT_ONESHOT, CONNECT_REFERENCE_COUNTED,
+ * ctypedef enum Object_ConnectFlags :CONNECT_DEFERRED, CONNECT_PERSIST, CONNECT_ONESHOT, CONNECT_REFERENCE_COUNTED,
  */
 
 struct __pyx_vtabstruct_7classes_6Object_Object {
@@ -1569,7 +1569,7 @@ static struct __pyx_vtabstruct_7classes_8Resource_Resource *__pyx_vtabptr_7class
  * cimport classes.Resource
  * cdef class Mesh(classes.Resource.Resource):             # <<<<<<<<<<<<<<
  *     pass
- * ctypedef enum BlendShapeMode :BLEND_SHAPE_MODE_NORMALIZED, BLEND_SHAPE_MODE_RELATIVE,
+ * ctypedef enum Mesh_BlendShapeMode :BLEND_SHAPE_MODE_NORMALIZED, BLEND_SHAPE_MODE_RELATIVE,
  */
 
 struct __pyx_vtabstruct_7classes_4Mesh_Mesh {
@@ -2277,16 +2277,16 @@ static void __Pyx_AddTraceback(const char *funcname, int c_line,
                                int py_line, const char *filename);
 
 /* CIntToPy.proto */
-static CYTHON_INLINE PyObject* __Pyx_PyInt_From___pyx_t_7classes_9MultiMesh_ColorFormat(__pyx_t_7classes_9MultiMesh_ColorFormat value);
+static CYTHON_INLINE PyObject* __Pyx_PyInt_From___pyx_t_7classes_9MultiMesh_MultiMesh_ColorFormat(__pyx_t_7classes_9MultiMesh_MultiMesh_ColorFormat value);
 
 /* CIntToPy.proto */
-static CYTHON_INLINE PyObject* __Pyx_PyInt_From___pyx_t_7classes_9MultiMesh_CustomDataFormat(__pyx_t_7classes_9MultiMesh_CustomDataFormat value);
+static CYTHON_INLINE PyObject* __Pyx_PyInt_From___pyx_t_7classes_9MultiMesh_MultiMesh_CustomDataFormat(__pyx_t_7classes_9MultiMesh_MultiMesh_CustomDataFormat value);
 
 /* CIntToPy.proto */
 static CYTHON_INLINE PyObject* __Pyx_PyInt_From_int(int value);
 
 /* CIntToPy.proto */
-static CYTHON_INLINE PyObject* __Pyx_PyInt_From___pyx_t_7classes_9MultiMesh_TransformFormat(__pyx_t_7classes_9MultiMesh_TransformFormat value);
+static CYTHON_INLINE PyObject* __Pyx_PyInt_From___pyx_t_7classes_9MultiMesh_MultiMesh_TransformFormat(__pyx_t_7classes_9MultiMesh_MultiMesh_TransformFormat value);
 
 /* CIntFromPy.proto */
 static CYTHON_INLINE int __Pyx_PyInt_As_int(PyObject *);
@@ -5581,7 +5581,7 @@ static PyObject *__pyx_pw_7classes_9MultiMesh_9MultiMesh_21get_color_format(PyOb
 
 static PyObject *__pyx_pf_7classes_9MultiMesh_9MultiMesh_20get_color_format(struct __pyx_obj_7classes_9MultiMesh_MultiMesh *__pyx_v_self) {
   CYTHON_UNUSED godot_object *__pyx_v__owner;
-  __pyx_t_7classes_9MultiMesh_ColorFormat *__pyx_v_ret;
+  __pyx_t_7classes_9MultiMesh_MultiMesh_ColorFormat *__pyx_v_ret;
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   godot_object *__pyx_t_1;
@@ -5596,7 +5596,7 @@ static PyObject *__pyx_pf_7classes_9MultiMesh_9MultiMesh_20get_color_format(stru
  *   def  get_color_format(self):
  *     cdef godot_object *_owner = self.godot_owner             # <<<<<<<<<<<<<<
  * 
- *     cdef ColorFormat* ret = NULL;
+ *     cdef MultiMesh_ColorFormat* ret = NULL;
  */
   __pyx_t_1 = __pyx_v_self->__pyx_base.__pyx_base.__pyx_base.__pyx_base.godot_owner;
   __pyx_v__owner = __pyx_t_1;
@@ -5604,14 +5604,14 @@ static PyObject *__pyx_pf_7classes_9MultiMesh_9MultiMesh_20get_color_format(stru
   /* "classes/MultiMesh.pyx":237
  *     cdef godot_object *_owner = self.godot_owner
  * 
- *     cdef ColorFormat* ret = NULL;             # <<<<<<<<<<<<<<
+ *     cdef MultiMesh_ColorFormat* ret = NULL;             # <<<<<<<<<<<<<<
  * 
  *     api_core.godot_method_bind_ptrcall(bind_multimesh_get_color_format,self.godot_owner,NULL,&ret)
  */
   __pyx_v_ret = NULL;
 
   /* "classes/MultiMesh.pyx":239
- *     cdef ColorFormat* ret = NULL;
+ *     cdef MultiMesh_ColorFormat* ret = NULL;
  * 
  *     api_core.godot_method_bind_ptrcall(bind_multimesh_get_color_format,self.godot_owner,NULL,&ret)             # <<<<<<<<<<<<<<
  *     hello('hallo2')
@@ -5636,7 +5636,7 @@ static PyObject *__pyx_pf_7classes_9MultiMesh_9MultiMesh_20get_color_format(stru
  *   def  get_custom_data_format(self):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_2 = __Pyx_PyInt_From___pyx_t_7classes_9MultiMesh_ColorFormat((*__pyx_v_ret)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 241, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyInt_From___pyx_t_7classes_9MultiMesh_MultiMesh_ColorFormat((*__pyx_v_ret)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 241, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_r = __pyx_t_2;
   __pyx_t_2 = 0;
@@ -5684,7 +5684,7 @@ static PyObject *__pyx_pw_7classes_9MultiMesh_9MultiMesh_23get_custom_data_forma
 
 static PyObject *__pyx_pf_7classes_9MultiMesh_9MultiMesh_22get_custom_data_format(struct __pyx_obj_7classes_9MultiMesh_MultiMesh *__pyx_v_self) {
   CYTHON_UNUSED godot_object *__pyx_v__owner;
-  __pyx_t_7classes_9MultiMesh_CustomDataFormat *__pyx_v_ret;
+  __pyx_t_7classes_9MultiMesh_MultiMesh_CustomDataFormat *__pyx_v_ret;
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   godot_object *__pyx_t_1;
@@ -5699,7 +5699,7 @@ static PyObject *__pyx_pf_7classes_9MultiMesh_9MultiMesh_22get_custom_data_forma
  *   def  get_custom_data_format(self):
  *     cdef godot_object *_owner = self.godot_owner             # <<<<<<<<<<<<<<
  * 
- *     cdef CustomDataFormat* ret = NULL;
+ *     cdef MultiMesh_CustomDataFormat* ret = NULL;
  */
   __pyx_t_1 = __pyx_v_self->__pyx_base.__pyx_base.__pyx_base.__pyx_base.godot_owner;
   __pyx_v__owner = __pyx_t_1;
@@ -5707,14 +5707,14 @@ static PyObject *__pyx_pf_7classes_9MultiMesh_9MultiMesh_22get_custom_data_forma
   /* "classes/MultiMesh.pyx":246
  *     cdef godot_object *_owner = self.godot_owner
  * 
- *     cdef CustomDataFormat* ret = NULL;             # <<<<<<<<<<<<<<
+ *     cdef MultiMesh_CustomDataFormat* ret = NULL;             # <<<<<<<<<<<<<<
  * 
  *     api_core.godot_method_bind_ptrcall(bind_multimesh_get_custom_data_format,self.godot_owner,NULL,&ret)
  */
   __pyx_v_ret = NULL;
 
   /* "classes/MultiMesh.pyx":248
- *     cdef CustomDataFormat* ret = NULL;
+ *     cdef MultiMesh_CustomDataFormat* ret = NULL;
  * 
  *     api_core.godot_method_bind_ptrcall(bind_multimesh_get_custom_data_format,self.godot_owner,NULL,&ret)             # <<<<<<<<<<<<<<
  *     hello('hallo2')
@@ -5739,7 +5739,7 @@ static PyObject *__pyx_pf_7classes_9MultiMesh_9MultiMesh_22get_custom_data_forma
  *   def  get_instance_color(self,  int instance):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_2 = __Pyx_PyInt_From___pyx_t_7classes_9MultiMesh_CustomDataFormat((*__pyx_v_ret)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 250, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyInt_From___pyx_t_7classes_9MultiMesh_MultiMesh_CustomDataFormat((*__pyx_v_ret)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 250, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_r = __pyx_t_2;
   __pyx_t_2 = 0;
@@ -6475,7 +6475,7 @@ static PyObject *__pyx_pw_7classes_9MultiMesh_9MultiMesh_37get_transform_format(
 
 static PyObject *__pyx_pf_7classes_9MultiMesh_9MultiMesh_36get_transform_format(struct __pyx_obj_7classes_9MultiMesh_MultiMesh *__pyx_v_self) {
   CYTHON_UNUSED godot_object *__pyx_v__owner;
-  __pyx_t_7classes_9MultiMesh_TransformFormat *__pyx_v_ret;
+  __pyx_t_7classes_9MultiMesh_MultiMesh_TransformFormat *__pyx_v_ret;
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   godot_object *__pyx_t_1;
@@ -6490,7 +6490,7 @@ static PyObject *__pyx_pf_7classes_9MultiMesh_9MultiMesh_36get_transform_format(
  *   def  get_transform_format(self):
  *     cdef godot_object *_owner = self.godot_owner             # <<<<<<<<<<<<<<
  * 
- *     cdef TransformFormat* ret = NULL;
+ *     cdef MultiMesh_TransformFormat* ret = NULL;
  */
   __pyx_t_1 = __pyx_v_self->__pyx_base.__pyx_base.__pyx_base.__pyx_base.godot_owner;
   __pyx_v__owner = __pyx_t_1;
@@ -6498,14 +6498,14 @@ static PyObject *__pyx_pf_7classes_9MultiMesh_9MultiMesh_36get_transform_format(
   /* "classes/MultiMesh.pyx":319
  *     cdef godot_object *_owner = self.godot_owner
  * 
- *     cdef TransformFormat* ret = NULL;             # <<<<<<<<<<<<<<
+ *     cdef MultiMesh_TransformFormat* ret = NULL;             # <<<<<<<<<<<<<<
  * 
  *     api_core.godot_method_bind_ptrcall(bind_multimesh_get_transform_format,self.godot_owner,NULL,&ret)
  */
   __pyx_v_ret = NULL;
 
   /* "classes/MultiMesh.pyx":321
- *     cdef TransformFormat* ret = NULL;
+ *     cdef MultiMesh_TransformFormat* ret = NULL;
  * 
  *     api_core.godot_method_bind_ptrcall(bind_multimesh_get_transform_format,self.godot_owner,NULL,&ret)             # <<<<<<<<<<<<<<
  *     hello('hallo2')
@@ -6530,7 +6530,7 @@ static PyObject *__pyx_pf_7classes_9MultiMesh_9MultiMesh_36get_transform_format(
  *   def  get_visible_instance_count(self):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_2 = __Pyx_PyInt_From___pyx_t_7classes_9MultiMesh_TransformFormat((*__pyx_v_ret)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 323, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyInt_From___pyx_t_7classes_9MultiMesh_MultiMesh_TransformFormat((*__pyx_v_ret)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 323, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_r = __pyx_t_2;
   __pyx_t_2 = 0;
@@ -8357,7 +8357,7 @@ static CYTHON_INLINE void __pyx_f_4core_7variant_7Variant_7Variant_new_variant(C
  *     cdef inline void new_variant(self, i):
  *         print("new_variant", type(i))             # <<<<<<<<<<<<<<
  * 
- * ctypedef enum Type:
+ * ctypedef enum Variant_Type:
  */
   __pyx_t_1 = PyTuple_New(2); if (unlikely(!__pyx_t_1)) __PYX_ERR(4, 15, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
@@ -10071,15 +10071,14 @@ static int __pyx_import_star_set(PyObject *o, PyObject* py_name, char *name) {
   static const char* internal_type_names[] = {
     "AABB",
     "Array",
-    "Axis",
     "Basis",
     "Color",
-    "ColorFormat",
-    "CustomDataFormat",
     "Dictionary",
     "MultiMesh",
+    "MultiMesh_ColorFormat",
+    "MultiMesh_CustomDataFormat",
+    "MultiMesh_TransformFormat",
     "NodePath",
-    "Operator",
     "Plane",
     "PoolByteArray",
     "PoolColorArray",
@@ -10095,11 +10094,12 @@ static int __pyx_import_star_set(PyObject *o, PyObject* py_name, char *name) {
     "String",
     "Transform",
     "Transform2D",
-    "TransformFormat",
-    "Type",
     "Variant",
+    "Variant_Operator",
+    "Variant_Type",
     "Vector2",
     "Vector3",
+    "Vector3_Axis",
     "Wrapper",
     "bool",
     "godot_aabb",
@@ -12481,24 +12481,24 @@ bad:
     }
 
 /* CIntToPy */
-static CYTHON_INLINE PyObject* __Pyx_PyInt_From___pyx_t_7classes_9MultiMesh_ColorFormat(__pyx_t_7classes_9MultiMesh_ColorFormat value) {
-    const __pyx_t_7classes_9MultiMesh_ColorFormat neg_one = (__pyx_t_7classes_9MultiMesh_ColorFormat) ((__pyx_t_7classes_9MultiMesh_ColorFormat) 0 - (__pyx_t_7classes_9MultiMesh_ColorFormat) 1), const_zero = (__pyx_t_7classes_9MultiMesh_ColorFormat) 0;
+static CYTHON_INLINE PyObject* __Pyx_PyInt_From___pyx_t_7classes_9MultiMesh_MultiMesh_ColorFormat(__pyx_t_7classes_9MultiMesh_MultiMesh_ColorFormat value) {
+    const __pyx_t_7classes_9MultiMesh_MultiMesh_ColorFormat neg_one = (__pyx_t_7classes_9MultiMesh_MultiMesh_ColorFormat) ((__pyx_t_7classes_9MultiMesh_MultiMesh_ColorFormat) 0 - (__pyx_t_7classes_9MultiMesh_MultiMesh_ColorFormat) 1), const_zero = (__pyx_t_7classes_9MultiMesh_MultiMesh_ColorFormat) 0;
     const int is_unsigned = neg_one > const_zero;
     if (is_unsigned) {
-        if (sizeof(__pyx_t_7classes_9MultiMesh_ColorFormat) < sizeof(long)) {
+        if (sizeof(__pyx_t_7classes_9MultiMesh_MultiMesh_ColorFormat) < sizeof(long)) {
             return PyInt_FromLong((long) value);
-        } else if (sizeof(__pyx_t_7classes_9MultiMesh_ColorFormat) <= sizeof(unsigned long)) {
+        } else if (sizeof(__pyx_t_7classes_9MultiMesh_MultiMesh_ColorFormat) <= sizeof(unsigned long)) {
             return PyLong_FromUnsignedLong((unsigned long) value);
 #ifdef HAVE_LONG_LONG
-        } else if (sizeof(__pyx_t_7classes_9MultiMesh_ColorFormat) <= sizeof(unsigned PY_LONG_LONG)) {
+        } else if (sizeof(__pyx_t_7classes_9MultiMesh_MultiMesh_ColorFormat) <= sizeof(unsigned PY_LONG_LONG)) {
             return PyLong_FromUnsignedLongLong((unsigned PY_LONG_LONG) value);
 #endif
         }
     } else {
-        if (sizeof(__pyx_t_7classes_9MultiMesh_ColorFormat) <= sizeof(long)) {
+        if (sizeof(__pyx_t_7classes_9MultiMesh_MultiMesh_ColorFormat) <= sizeof(long)) {
             return PyInt_FromLong((long) value);
 #ifdef HAVE_LONG_LONG
-        } else if (sizeof(__pyx_t_7classes_9MultiMesh_ColorFormat) <= sizeof(PY_LONG_LONG)) {
+        } else if (sizeof(__pyx_t_7classes_9MultiMesh_MultiMesh_ColorFormat) <= sizeof(PY_LONG_LONG)) {
             return PyLong_FromLongLong((PY_LONG_LONG) value);
 #endif
         }
@@ -12506,30 +12506,30 @@ static CYTHON_INLINE PyObject* __Pyx_PyInt_From___pyx_t_7classes_9MultiMesh_Colo
     {
         int one = 1; int little = (int)*(unsigned char *)&one;
         unsigned char *bytes = (unsigned char *)&value;
-        return _PyLong_FromByteArray(bytes, sizeof(__pyx_t_7classes_9MultiMesh_ColorFormat),
+        return _PyLong_FromByteArray(bytes, sizeof(__pyx_t_7classes_9MultiMesh_MultiMesh_ColorFormat),
                                      little, !is_unsigned);
     }
 }
 
 /* CIntToPy */
-static CYTHON_INLINE PyObject* __Pyx_PyInt_From___pyx_t_7classes_9MultiMesh_CustomDataFormat(__pyx_t_7classes_9MultiMesh_CustomDataFormat value) {
-    const __pyx_t_7classes_9MultiMesh_CustomDataFormat neg_one = (__pyx_t_7classes_9MultiMesh_CustomDataFormat) ((__pyx_t_7classes_9MultiMesh_CustomDataFormat) 0 - (__pyx_t_7classes_9MultiMesh_CustomDataFormat) 1), const_zero = (__pyx_t_7classes_9MultiMesh_CustomDataFormat) 0;
+static CYTHON_INLINE PyObject* __Pyx_PyInt_From___pyx_t_7classes_9MultiMesh_MultiMesh_CustomDataFormat(__pyx_t_7classes_9MultiMesh_MultiMesh_CustomDataFormat value) {
+    const __pyx_t_7classes_9MultiMesh_MultiMesh_CustomDataFormat neg_one = (__pyx_t_7classes_9MultiMesh_MultiMesh_CustomDataFormat) ((__pyx_t_7classes_9MultiMesh_MultiMesh_CustomDataFormat) 0 - (__pyx_t_7classes_9MultiMesh_MultiMesh_CustomDataFormat) 1), const_zero = (__pyx_t_7classes_9MultiMesh_MultiMesh_CustomDataFormat) 0;
     const int is_unsigned = neg_one > const_zero;
     if (is_unsigned) {
-        if (sizeof(__pyx_t_7classes_9MultiMesh_CustomDataFormat) < sizeof(long)) {
+        if (sizeof(__pyx_t_7classes_9MultiMesh_MultiMesh_CustomDataFormat) < sizeof(long)) {
             return PyInt_FromLong((long) value);
-        } else if (sizeof(__pyx_t_7classes_9MultiMesh_CustomDataFormat) <= sizeof(unsigned long)) {
+        } else if (sizeof(__pyx_t_7classes_9MultiMesh_MultiMesh_CustomDataFormat) <= sizeof(unsigned long)) {
             return PyLong_FromUnsignedLong((unsigned long) value);
 #ifdef HAVE_LONG_LONG
-        } else if (sizeof(__pyx_t_7classes_9MultiMesh_CustomDataFormat) <= sizeof(unsigned PY_LONG_LONG)) {
+        } else if (sizeof(__pyx_t_7classes_9MultiMesh_MultiMesh_CustomDataFormat) <= sizeof(unsigned PY_LONG_LONG)) {
             return PyLong_FromUnsignedLongLong((unsigned PY_LONG_LONG) value);
 #endif
         }
     } else {
-        if (sizeof(__pyx_t_7classes_9MultiMesh_CustomDataFormat) <= sizeof(long)) {
+        if (sizeof(__pyx_t_7classes_9MultiMesh_MultiMesh_CustomDataFormat) <= sizeof(long)) {
             return PyInt_FromLong((long) value);
 #ifdef HAVE_LONG_LONG
-        } else if (sizeof(__pyx_t_7classes_9MultiMesh_CustomDataFormat) <= sizeof(PY_LONG_LONG)) {
+        } else if (sizeof(__pyx_t_7classes_9MultiMesh_MultiMesh_CustomDataFormat) <= sizeof(PY_LONG_LONG)) {
             return PyLong_FromLongLong((PY_LONG_LONG) value);
 #endif
         }
@@ -12537,7 +12537,7 @@ static CYTHON_INLINE PyObject* __Pyx_PyInt_From___pyx_t_7classes_9MultiMesh_Cust
     {
         int one = 1; int little = (int)*(unsigned char *)&one;
         unsigned char *bytes = (unsigned char *)&value;
-        return _PyLong_FromByteArray(bytes, sizeof(__pyx_t_7classes_9MultiMesh_CustomDataFormat),
+        return _PyLong_FromByteArray(bytes, sizeof(__pyx_t_7classes_9MultiMesh_MultiMesh_CustomDataFormat),
                                      little, !is_unsigned);
     }
 }
@@ -12574,24 +12574,24 @@ static CYTHON_INLINE PyObject* __Pyx_PyInt_From_int(int value) {
 }
 
 /* CIntToPy */
-static CYTHON_INLINE PyObject* __Pyx_PyInt_From___pyx_t_7classes_9MultiMesh_TransformFormat(__pyx_t_7classes_9MultiMesh_TransformFormat value) {
-    const __pyx_t_7classes_9MultiMesh_TransformFormat neg_one = (__pyx_t_7classes_9MultiMesh_TransformFormat) ((__pyx_t_7classes_9MultiMesh_TransformFormat) 0 - (__pyx_t_7classes_9MultiMesh_TransformFormat) 1), const_zero = (__pyx_t_7classes_9MultiMesh_TransformFormat) 0;
+static CYTHON_INLINE PyObject* __Pyx_PyInt_From___pyx_t_7classes_9MultiMesh_MultiMesh_TransformFormat(__pyx_t_7classes_9MultiMesh_MultiMesh_TransformFormat value) {
+    const __pyx_t_7classes_9MultiMesh_MultiMesh_TransformFormat neg_one = (__pyx_t_7classes_9MultiMesh_MultiMesh_TransformFormat) ((__pyx_t_7classes_9MultiMesh_MultiMesh_TransformFormat) 0 - (__pyx_t_7classes_9MultiMesh_MultiMesh_TransformFormat) 1), const_zero = (__pyx_t_7classes_9MultiMesh_MultiMesh_TransformFormat) 0;
     const int is_unsigned = neg_one > const_zero;
     if (is_unsigned) {
-        if (sizeof(__pyx_t_7classes_9MultiMesh_TransformFormat) < sizeof(long)) {
+        if (sizeof(__pyx_t_7classes_9MultiMesh_MultiMesh_TransformFormat) < sizeof(long)) {
             return PyInt_FromLong((long) value);
-        } else if (sizeof(__pyx_t_7classes_9MultiMesh_TransformFormat) <= sizeof(unsigned long)) {
+        } else if (sizeof(__pyx_t_7classes_9MultiMesh_MultiMesh_TransformFormat) <= sizeof(unsigned long)) {
             return PyLong_FromUnsignedLong((unsigned long) value);
 #ifdef HAVE_LONG_LONG
-        } else if (sizeof(__pyx_t_7classes_9MultiMesh_TransformFormat) <= sizeof(unsigned PY_LONG_LONG)) {
+        } else if (sizeof(__pyx_t_7classes_9MultiMesh_MultiMesh_TransformFormat) <= sizeof(unsigned PY_LONG_LONG)) {
             return PyLong_FromUnsignedLongLong((unsigned PY_LONG_LONG) value);
 #endif
         }
     } else {
-        if (sizeof(__pyx_t_7classes_9MultiMesh_TransformFormat) <= sizeof(long)) {
+        if (sizeof(__pyx_t_7classes_9MultiMesh_MultiMesh_TransformFormat) <= sizeof(long)) {
             return PyInt_FromLong((long) value);
 #ifdef HAVE_LONG_LONG
-        } else if (sizeof(__pyx_t_7classes_9MultiMesh_TransformFormat) <= sizeof(PY_LONG_LONG)) {
+        } else if (sizeof(__pyx_t_7classes_9MultiMesh_MultiMesh_TransformFormat) <= sizeof(PY_LONG_LONG)) {
             return PyLong_FromLongLong((PY_LONG_LONG) value);
 #endif
         }
@@ -12599,7 +12599,7 @@ static CYTHON_INLINE PyObject* __Pyx_PyInt_From___pyx_t_7classes_9MultiMesh_Tran
     {
         int one = 1; int little = (int)*(unsigned char *)&one;
         unsigned char *bytes = (unsigned char *)&value;
-        return _PyLong_FromByteArray(bytes, sizeof(__pyx_t_7classes_9MultiMesh_TransformFormat),
+        return _PyLong_FromByteArray(bytes, sizeof(__pyx_t_7classes_9MultiMesh_MultiMesh_TransformFormat),
                                      little, !is_unsigned);
     }
 }

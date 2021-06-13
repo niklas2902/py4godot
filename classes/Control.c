@@ -908,22 +908,22 @@ struct __pyx_obj_7classes_7Control_Control;
 /* "classes/Object.pxd":7
  * cdef class Object(Wrapper):
  *     pass
- * ctypedef enum ConnectFlags :CONNECT_DEFERRED, CONNECT_PERSIST, CONNECT_ONESHOT, CONNECT_REFERENCE_COUNTED,             # <<<<<<<<<<<<<<
+ * ctypedef enum Object_ConnectFlags :CONNECT_DEFERRED, CONNECT_PERSIST, CONNECT_ONESHOT, CONNECT_REFERENCE_COUNTED,             # <<<<<<<<<<<<<<
  */
-enum __pyx_t_7classes_6Object_ConnectFlags {
+enum __pyx_t_7classes_6Object_Object_ConnectFlags {
   __pyx_e_7classes_6Object_CONNECT_DEFERRED,
   __pyx_e_7classes_6Object_CONNECT_PERSIST,
   __pyx_e_7classes_6Object_CONNECT_ONESHOT,
   __pyx_e_7classes_6Object_CONNECT_REFERENCE_COUNTED
 };
-typedef enum __pyx_t_7classes_6Object_ConnectFlags __pyx_t_7classes_6Object_ConnectFlags;
+typedef enum __pyx_t_7classes_6Object_Object_ConnectFlags __pyx_t_7classes_6Object_Object_ConnectFlags;
 
 /* "classes/Texture.pxd":7
  * cdef class Texture(classes.Resource.Resource):
  *     pass
- * ctypedef enum Flags :FLAG_MIPMAPS, FLAG_REPEAT, FLAG_FILTER, FLAGS_DEFAULT, FLAG_ANISOTROPIC_FILTER, FLAG_CONVERT_TO_LINEAR, FLAG_MIRRORED_REPEAT, FLAG_VIDEO_SURFACE,             # <<<<<<<<<<<<<<
+ * ctypedef enum Texture_Flags :FLAG_MIPMAPS, FLAG_REPEAT, FLAG_FILTER, FLAGS_DEFAULT, FLAG_ANISOTROPIC_FILTER, FLAG_CONVERT_TO_LINEAR, FLAG_MIRRORED_REPEAT, FLAG_VIDEO_SURFACE,             # <<<<<<<<<<<<<<
  */
-enum __pyx_t_7classes_7Texture_Flags {
+enum __pyx_t_7classes_7Texture_Texture_Flags {
   __pyx_e_7classes_7Texture_FLAG_MIPMAPS,
   __pyx_e_7classes_7Texture_FLAG_REPEAT,
   __pyx_e_7classes_7Texture_FLAG_FILTER,
@@ -933,28 +933,28 @@ enum __pyx_t_7classes_7Texture_Flags {
   __pyx_e_7classes_7Texture_FLAG_MIRRORED_REPEAT,
   __pyx_e_7classes_7Texture_FLAG_VIDEO_SURFACE
 };
-typedef enum __pyx_t_7classes_7Texture_Flags __pyx_t_7classes_7Texture_Flags;
+typedef enum __pyx_t_7classes_7Texture_Texture_Flags __pyx_t_7classes_7Texture_Texture_Flags;
 
 /* "classes/Shader.pxd":7
  * cdef class Shader(classes.Resource.Resource):
  *     pass
- * ctypedef enum Mode :MODE_SPATIAL, MODE_CANVAS_ITEM, MODE_PARTICLES,             # <<<<<<<<<<<<<<
+ * ctypedef enum Shader_Mode :MODE_SPATIAL, MODE_CANVAS_ITEM, MODE_PARTICLES,             # <<<<<<<<<<<<<<
  */
-enum __pyx_t_7classes_6Shader_Mode {
+enum __pyx_t_7classes_6Shader_Shader_Mode {
   __pyx_e_7classes_6Shader_MODE_SPATIAL,
   __pyx_e_7classes_6Shader_MODE_CANVAS_ITEM,
   __pyx_e_7classes_6Shader_MODE_PARTICLES
 };
-typedef enum __pyx_t_7classes_6Shader_Mode __pyx_t_7classes_6Shader_Mode;
+typedef enum __pyx_t_7classes_6Shader_Shader_Mode __pyx_t_7classes_6Shader_Shader_Mode;
 
 /* "core/variant/Variant.pxd":17
  *         print("new_variant", type(i))
  * 
- * ctypedef enum Type:             # <<<<<<<<<<<<<<
+ * ctypedef enum Variant_Type:             # <<<<<<<<<<<<<<
  *     NIL,
  *     # atomic types
  */
-enum __pyx_t_4core_7variant_7Variant_Type {
+enum __pyx_t_4core_7variant_7Variant_Variant_Type {
   __pyx_e_4core_7variant_7Variant_NIL,
   __pyx_e_4core_7variant_7Variant_BOOL,
   __pyx_e_4core_7variant_7Variant_INT,
@@ -984,16 +984,16 @@ enum __pyx_t_4core_7variant_7Variant_Type {
   __pyx_e_4core_7variant_7Variant_POOL_COLOR_ARRAY,
   __pyx_e_4core_7variant_7Variant_VARIANT_MAX
 };
-typedef enum __pyx_t_4core_7variant_7Variant_Type __pyx_t_4core_7variant_7Variant_Type;
+typedef enum __pyx_t_4core_7variant_7Variant_Variant_Type __pyx_t_4core_7variant_7Variant_Variant_Type;
 
 /* "core/variant/Variant.pxd":58
  * 
  * 
- * ctypedef enum Operator :             # <<<<<<<<<<<<<<
+ * ctypedef enum Variant_Operator :             # <<<<<<<<<<<<<<
  * 
  *     #comparation
  */
-enum __pyx_t_4core_7variant_7Variant_Operator {
+enum __pyx_t_4core_7variant_7Variant_Variant_Operator {
   __pyx_e_4core_7variant_7Variant_OP_EQUAL,
   __pyx_e_4core_7variant_7Variant_OP_NOT_EQUAL,
   __pyx_e_4core_7variant_7Variant_OP_LESS,
@@ -1021,54 +1021,54 @@ enum __pyx_t_4core_7variant_7Variant_Operator {
   __pyx_e_4core_7variant_7Variant_OP_IN,
   __pyx_e_4core_7variant_7Variant_OP_MAX
 };
-typedef enum __pyx_t_4core_7variant_7Variant_Operator __pyx_t_4core_7variant_7Variant_Operator;
+typedef enum __pyx_t_4core_7variant_7Variant_Variant_Operator __pyx_t_4core_7variant_7Variant_Variant_Operator;
 
 /* "core/vector3/Vector3.pxd":15
  * 
  * 
- * ctypedef enum Axis :             # <<<<<<<<<<<<<<
- *     AXIS_X,
- *     AXIS_Y,
+ * ctypedef enum Vector3_Axis :             # <<<<<<<<<<<<<<
+ *     Vector3_AXIS_X,
+ *     Vector3_AXIS_Y,
  */
-enum __pyx_t_4core_7vector3_7Vector3_Axis {
-  __pyx_e_4core_7vector3_7Vector3_AXIS_X,
-  __pyx_e_4core_7vector3_7Vector3_AXIS_Y,
-  __pyx_e_4core_7vector3_7Vector3_AXIS_Z
+enum __pyx_t_4core_7vector3_7Vector3_Vector3_Axis {
+  __pyx_e_4core_7vector3_7Vector3_Vector3_AXIS_X,
+  __pyx_e_4core_7vector3_7Vector3_Vector3_AXIS_Y,
+  __pyx_e_4core_7vector3_7Vector3_Vector3_AXIS_Z
 };
-typedef enum __pyx_t_4core_7vector3_7Vector3_Axis __pyx_t_4core_7vector3_7Vector3_Axis;
+typedef enum __pyx_t_4core_7vector3_7Vector3_Vector3_Axis __pyx_t_4core_7vector3_7Vector3_Vector3_Axis;
 
 /* "classes/Node.pxd":7
  * cdef class Node(classes.Object.Object):
  *     pass
- * ctypedef enum PauseMode :PAUSE_MODE_INHERIT, PAUSE_MODE_STOP, PAUSE_MODE_PROCESS,             # <<<<<<<<<<<<<<
- * ctypedef enum DuplicateFlags :DUPLICATE_SIGNALS, DUPLICATE_GROUPS, DUPLICATE_SCRIPTS, DUPLICATE_USE_INSTANCING,
+ * ctypedef enum Node_PauseMode :PAUSE_MODE_INHERIT, PAUSE_MODE_STOP, PAUSE_MODE_PROCESS,             # <<<<<<<<<<<<<<
+ * ctypedef enum Node_DuplicateFlags :DUPLICATE_SIGNALS, DUPLICATE_GROUPS, DUPLICATE_SCRIPTS, DUPLICATE_USE_INSTANCING,
  */
-enum __pyx_t_7classes_4Node_PauseMode {
+enum __pyx_t_7classes_4Node_Node_PauseMode {
   __pyx_e_7classes_4Node_PAUSE_MODE_INHERIT,
   __pyx_e_7classes_4Node_PAUSE_MODE_STOP,
   __pyx_e_7classes_4Node_PAUSE_MODE_PROCESS
 };
-typedef enum __pyx_t_7classes_4Node_PauseMode __pyx_t_7classes_4Node_PauseMode;
+typedef enum __pyx_t_7classes_4Node_Node_PauseMode __pyx_t_7classes_4Node_Node_PauseMode;
 
 /* "classes/Node.pxd":8
  *     pass
- * ctypedef enum PauseMode :PAUSE_MODE_INHERIT, PAUSE_MODE_STOP, PAUSE_MODE_PROCESS,
- * ctypedef enum DuplicateFlags :DUPLICATE_SIGNALS, DUPLICATE_GROUPS, DUPLICATE_SCRIPTS, DUPLICATE_USE_INSTANCING,             # <<<<<<<<<<<<<<
+ * ctypedef enum Node_PauseMode :PAUSE_MODE_INHERIT, PAUSE_MODE_STOP, PAUSE_MODE_PROCESS,
+ * ctypedef enum Node_DuplicateFlags :DUPLICATE_SIGNALS, DUPLICATE_GROUPS, DUPLICATE_SCRIPTS, DUPLICATE_USE_INSTANCING,             # <<<<<<<<<<<<<<
  */
-enum __pyx_t_7classes_4Node_DuplicateFlags {
+enum __pyx_t_7classes_4Node_Node_DuplicateFlags {
   __pyx_e_7classes_4Node_DUPLICATE_SIGNALS,
   __pyx_e_7classes_4Node_DUPLICATE_GROUPS,
   __pyx_e_7classes_4Node_DUPLICATE_SCRIPTS,
   __pyx_e_7classes_4Node_DUPLICATE_USE_INSTANCING
 };
-typedef enum __pyx_t_7classes_4Node_DuplicateFlags __pyx_t_7classes_4Node_DuplicateFlags;
+typedef enum __pyx_t_7classes_4Node_Node_DuplicateFlags __pyx_t_7classes_4Node_Node_DuplicateFlags;
 
 /* "classes/CanvasItem.pxd":7
  * cdef class CanvasItem(classes.Node.Node):
  *     pass
- * ctypedef enum BlendMode :BLEND_MODE_MIX, BLEND_MODE_ADD, BLEND_MODE_SUB, BLEND_MODE_MUL, BLEND_MODE_PREMULT_ALPHA, BLEND_MODE_DISABLED,             # <<<<<<<<<<<<<<
+ * ctypedef enum CanvasItem_BlendMode :BLEND_MODE_MIX, BLEND_MODE_ADD, BLEND_MODE_SUB, BLEND_MODE_MUL, BLEND_MODE_PREMULT_ALPHA, BLEND_MODE_DISABLED,             # <<<<<<<<<<<<<<
  */
-enum __pyx_t_7classes_10CanvasItem_BlendMode {
+enum __pyx_t_7classes_10CanvasItem_CanvasItem_BlendMode {
   __pyx_e_7classes_10CanvasItem_BLEND_MODE_MIX,
   __pyx_e_7classes_10CanvasItem_BLEND_MODE_ADD,
   __pyx_e_7classes_10CanvasItem_BLEND_MODE_SUB,
@@ -1076,72 +1076,72 @@ enum __pyx_t_7classes_10CanvasItem_BlendMode {
   __pyx_e_7classes_10CanvasItem_BLEND_MODE_PREMULT_ALPHA,
   __pyx_e_7classes_10CanvasItem_BLEND_MODE_DISABLED
 };
-typedef enum __pyx_t_7classes_10CanvasItem_BlendMode __pyx_t_7classes_10CanvasItem_BlendMode;
+typedef enum __pyx_t_7classes_10CanvasItem_CanvasItem_BlendMode __pyx_t_7classes_10CanvasItem_CanvasItem_BlendMode;
 
 /* "classes/Control.pxd":7
  * cdef class Control(classes.CanvasItem.CanvasItem):
  *     pass
- * ctypedef enum Anchor :ANCHOR_BEGIN, ANCHOR_END,             # <<<<<<<<<<<<<<
- * ctypedef enum FocusMode :FOCUS_NONE, FOCUS_CLICK, FOCUS_ALL,
- * ctypedef enum LayoutPresetMode :PRESET_MODE_MINSIZE, PRESET_MODE_KEEP_WIDTH, PRESET_MODE_KEEP_HEIGHT, PRESET_MODE_KEEP_SIZE,
+ * ctypedef enum Control_Anchor :ANCHOR_BEGIN, ANCHOR_END,             # <<<<<<<<<<<<<<
+ * ctypedef enum Control_FocusMode :FOCUS_NONE, FOCUS_CLICK, FOCUS_ALL,
+ * ctypedef enum Control_LayoutPresetMode :PRESET_MODE_MINSIZE, PRESET_MODE_KEEP_WIDTH, PRESET_MODE_KEEP_HEIGHT, PRESET_MODE_KEEP_SIZE,
  */
-enum __pyx_t_7classes_7Control_Anchor {
+enum __pyx_t_7classes_7Control_Control_Anchor {
   __pyx_e_7classes_7Control_ANCHOR_BEGIN,
   __pyx_e_7classes_7Control_ANCHOR_END
 };
-typedef enum __pyx_t_7classes_7Control_Anchor __pyx_t_7classes_7Control_Anchor;
+typedef enum __pyx_t_7classes_7Control_Control_Anchor __pyx_t_7classes_7Control_Control_Anchor;
 
 /* "classes/Control.pxd":8
  *     pass
- * ctypedef enum Anchor :ANCHOR_BEGIN, ANCHOR_END,
- * ctypedef enum FocusMode :FOCUS_NONE, FOCUS_CLICK, FOCUS_ALL,             # <<<<<<<<<<<<<<
- * ctypedef enum LayoutPresetMode :PRESET_MODE_MINSIZE, PRESET_MODE_KEEP_WIDTH, PRESET_MODE_KEEP_HEIGHT, PRESET_MODE_KEEP_SIZE,
- * ctypedef enum MouseFilter :MOUSE_FILTER_STOP, MOUSE_FILTER_PASS, MOUSE_FILTER_IGNORE,
+ * ctypedef enum Control_Anchor :ANCHOR_BEGIN, ANCHOR_END,
+ * ctypedef enum Control_FocusMode :FOCUS_NONE, FOCUS_CLICK, FOCUS_ALL,             # <<<<<<<<<<<<<<
+ * ctypedef enum Control_LayoutPresetMode :PRESET_MODE_MINSIZE, PRESET_MODE_KEEP_WIDTH, PRESET_MODE_KEEP_HEIGHT, PRESET_MODE_KEEP_SIZE,
+ * ctypedef enum Control_MouseFilter :MOUSE_FILTER_STOP, MOUSE_FILTER_PASS, MOUSE_FILTER_IGNORE,
  */
-enum __pyx_t_7classes_7Control_FocusMode {
+enum __pyx_t_7classes_7Control_Control_FocusMode {
   __pyx_e_7classes_7Control_FOCUS_NONE,
   __pyx_e_7classes_7Control_FOCUS_CLICK,
   __pyx_e_7classes_7Control_FOCUS_ALL
 };
-typedef enum __pyx_t_7classes_7Control_FocusMode __pyx_t_7classes_7Control_FocusMode;
+typedef enum __pyx_t_7classes_7Control_Control_FocusMode __pyx_t_7classes_7Control_Control_FocusMode;
 
 /* "classes/Control.pxd":9
- * ctypedef enum Anchor :ANCHOR_BEGIN, ANCHOR_END,
- * ctypedef enum FocusMode :FOCUS_NONE, FOCUS_CLICK, FOCUS_ALL,
- * ctypedef enum LayoutPresetMode :PRESET_MODE_MINSIZE, PRESET_MODE_KEEP_WIDTH, PRESET_MODE_KEEP_HEIGHT, PRESET_MODE_KEEP_SIZE,             # <<<<<<<<<<<<<<
- * ctypedef enum MouseFilter :MOUSE_FILTER_STOP, MOUSE_FILTER_PASS, MOUSE_FILTER_IGNORE,
- * ctypedef enum CursorShape :CURSOR_ARROW, CURSOR_IBEAM, CURSOR_POINTING_HAND, CURSOR_CROSS, CURSOR_WAIT, CURSOR_BUSY, CURSOR_DRAG, CURSOR_CAN_DROP, CURSOR_FORBIDDEN, CURSOR_VSIZE, CURSOR_HSIZE, CURSOR_BDIAGSIZE, CURSOR_FDIAGSIZE, CURSOR_MOVE, CURSOR_VSPLIT, CURSOR_HSPLIT, CURSOR_HELP,
+ * ctypedef enum Control_Anchor :ANCHOR_BEGIN, ANCHOR_END,
+ * ctypedef enum Control_FocusMode :FOCUS_NONE, FOCUS_CLICK, FOCUS_ALL,
+ * ctypedef enum Control_LayoutPresetMode :PRESET_MODE_MINSIZE, PRESET_MODE_KEEP_WIDTH, PRESET_MODE_KEEP_HEIGHT, PRESET_MODE_KEEP_SIZE,             # <<<<<<<<<<<<<<
+ * ctypedef enum Control_MouseFilter :MOUSE_FILTER_STOP, MOUSE_FILTER_PASS, MOUSE_FILTER_IGNORE,
+ * ctypedef enum Control_CursorShape :CURSOR_ARROW, CURSOR_IBEAM, CURSOR_POINTING_HAND, CURSOR_CROSS, CURSOR_WAIT, CURSOR_BUSY, CURSOR_DRAG, CURSOR_CAN_DROP, CURSOR_FORBIDDEN, CURSOR_VSIZE, CURSOR_HSIZE, CURSOR_BDIAGSIZE, CURSOR_FDIAGSIZE, CURSOR_MOVE, CURSOR_VSPLIT, CURSOR_HSPLIT, CURSOR_HELP,
  */
-enum __pyx_t_7classes_7Control_LayoutPresetMode {
+enum __pyx_t_7classes_7Control_Control_LayoutPresetMode {
   __pyx_e_7classes_7Control_PRESET_MODE_MINSIZE,
   __pyx_e_7classes_7Control_PRESET_MODE_KEEP_WIDTH,
   __pyx_e_7classes_7Control_PRESET_MODE_KEEP_HEIGHT,
   __pyx_e_7classes_7Control_PRESET_MODE_KEEP_SIZE
 };
-typedef enum __pyx_t_7classes_7Control_LayoutPresetMode __pyx_t_7classes_7Control_LayoutPresetMode;
+typedef enum __pyx_t_7classes_7Control_Control_LayoutPresetMode __pyx_t_7classes_7Control_Control_LayoutPresetMode;
 
 /* "classes/Control.pxd":10
- * ctypedef enum FocusMode :FOCUS_NONE, FOCUS_CLICK, FOCUS_ALL,
- * ctypedef enum LayoutPresetMode :PRESET_MODE_MINSIZE, PRESET_MODE_KEEP_WIDTH, PRESET_MODE_KEEP_HEIGHT, PRESET_MODE_KEEP_SIZE,
- * ctypedef enum MouseFilter :MOUSE_FILTER_STOP, MOUSE_FILTER_PASS, MOUSE_FILTER_IGNORE,             # <<<<<<<<<<<<<<
- * ctypedef enum CursorShape :CURSOR_ARROW, CURSOR_IBEAM, CURSOR_POINTING_HAND, CURSOR_CROSS, CURSOR_WAIT, CURSOR_BUSY, CURSOR_DRAG, CURSOR_CAN_DROP, CURSOR_FORBIDDEN, CURSOR_VSIZE, CURSOR_HSIZE, CURSOR_BDIAGSIZE, CURSOR_FDIAGSIZE, CURSOR_MOVE, CURSOR_VSPLIT, CURSOR_HSPLIT, CURSOR_HELP,
- * ctypedef enum GrowDirection :GROW_DIRECTION_BEGIN, GROW_DIRECTION_END, GROW_DIRECTION_BOTH,
+ * ctypedef enum Control_FocusMode :FOCUS_NONE, FOCUS_CLICK, FOCUS_ALL,
+ * ctypedef enum Control_LayoutPresetMode :PRESET_MODE_MINSIZE, PRESET_MODE_KEEP_WIDTH, PRESET_MODE_KEEP_HEIGHT, PRESET_MODE_KEEP_SIZE,
+ * ctypedef enum Control_MouseFilter :MOUSE_FILTER_STOP, MOUSE_FILTER_PASS, MOUSE_FILTER_IGNORE,             # <<<<<<<<<<<<<<
+ * ctypedef enum Control_CursorShape :CURSOR_ARROW, CURSOR_IBEAM, CURSOR_POINTING_HAND, CURSOR_CROSS, CURSOR_WAIT, CURSOR_BUSY, CURSOR_DRAG, CURSOR_CAN_DROP, CURSOR_FORBIDDEN, CURSOR_VSIZE, CURSOR_HSIZE, CURSOR_BDIAGSIZE, CURSOR_FDIAGSIZE, CURSOR_MOVE, CURSOR_VSPLIT, CURSOR_HSPLIT, CURSOR_HELP,
+ * ctypedef enum Control_GrowDirection :GROW_DIRECTION_BEGIN, GROW_DIRECTION_END, GROW_DIRECTION_BOTH,
  */
-enum __pyx_t_7classes_7Control_MouseFilter {
+enum __pyx_t_7classes_7Control_Control_MouseFilter {
   __pyx_e_7classes_7Control_MOUSE_FILTER_STOP,
   __pyx_e_7classes_7Control_MOUSE_FILTER_PASS,
   __pyx_e_7classes_7Control_MOUSE_FILTER_IGNORE
 };
-typedef enum __pyx_t_7classes_7Control_MouseFilter __pyx_t_7classes_7Control_MouseFilter;
+typedef enum __pyx_t_7classes_7Control_Control_MouseFilter __pyx_t_7classes_7Control_Control_MouseFilter;
 
 /* "classes/Control.pxd":11
- * ctypedef enum LayoutPresetMode :PRESET_MODE_MINSIZE, PRESET_MODE_KEEP_WIDTH, PRESET_MODE_KEEP_HEIGHT, PRESET_MODE_KEEP_SIZE,
- * ctypedef enum MouseFilter :MOUSE_FILTER_STOP, MOUSE_FILTER_PASS, MOUSE_FILTER_IGNORE,
- * ctypedef enum CursorShape :CURSOR_ARROW, CURSOR_IBEAM, CURSOR_POINTING_HAND, CURSOR_CROSS, CURSOR_WAIT, CURSOR_BUSY, CURSOR_DRAG, CURSOR_CAN_DROP, CURSOR_FORBIDDEN, CURSOR_VSIZE, CURSOR_HSIZE, CURSOR_BDIAGSIZE, CURSOR_FDIAGSIZE, CURSOR_MOVE, CURSOR_VSPLIT, CURSOR_HSPLIT, CURSOR_HELP,             # <<<<<<<<<<<<<<
- * ctypedef enum GrowDirection :GROW_DIRECTION_BEGIN, GROW_DIRECTION_END, GROW_DIRECTION_BOTH,
- * ctypedef enum SizeFlags :SIZE_FILL, SIZE_EXPAND, SIZE_EXPAND_FILL, SIZE_SHRINK_CENTER, SIZE_SHRINK_END,
+ * ctypedef enum Control_LayoutPresetMode :PRESET_MODE_MINSIZE, PRESET_MODE_KEEP_WIDTH, PRESET_MODE_KEEP_HEIGHT, PRESET_MODE_KEEP_SIZE,
+ * ctypedef enum Control_MouseFilter :MOUSE_FILTER_STOP, MOUSE_FILTER_PASS, MOUSE_FILTER_IGNORE,
+ * ctypedef enum Control_CursorShape :CURSOR_ARROW, CURSOR_IBEAM, CURSOR_POINTING_HAND, CURSOR_CROSS, CURSOR_WAIT, CURSOR_BUSY, CURSOR_DRAG, CURSOR_CAN_DROP, CURSOR_FORBIDDEN, CURSOR_VSIZE, CURSOR_HSIZE, CURSOR_BDIAGSIZE, CURSOR_FDIAGSIZE, CURSOR_MOVE, CURSOR_VSPLIT, CURSOR_HSPLIT, CURSOR_HELP,             # <<<<<<<<<<<<<<
+ * ctypedef enum Control_GrowDirection :GROW_DIRECTION_BEGIN, GROW_DIRECTION_END, GROW_DIRECTION_BOTH,
+ * ctypedef enum Control_SizeFlags :SIZE_FILL, SIZE_EXPAND, SIZE_EXPAND_FILL, SIZE_SHRINK_CENTER, SIZE_SHRINK_END,
  */
-enum __pyx_t_7classes_7Control_CursorShape {
+enum __pyx_t_7classes_7Control_Control_CursorShape {
   __pyx_e_7classes_7Control_CURSOR_ARROW,
   __pyx_e_7classes_7Control_CURSOR_IBEAM,
   __pyx_e_7classes_7Control_CURSOR_POINTING_HAND,
@@ -1160,43 +1160,43 @@ enum __pyx_t_7classes_7Control_CursorShape {
   __pyx_e_7classes_7Control_CURSOR_HSPLIT,
   __pyx_e_7classes_7Control_CURSOR_HELP
 };
-typedef enum __pyx_t_7classes_7Control_CursorShape __pyx_t_7classes_7Control_CursorShape;
+typedef enum __pyx_t_7classes_7Control_Control_CursorShape __pyx_t_7classes_7Control_Control_CursorShape;
 
 /* "classes/Control.pxd":12
- * ctypedef enum MouseFilter :MOUSE_FILTER_STOP, MOUSE_FILTER_PASS, MOUSE_FILTER_IGNORE,
- * ctypedef enum CursorShape :CURSOR_ARROW, CURSOR_IBEAM, CURSOR_POINTING_HAND, CURSOR_CROSS, CURSOR_WAIT, CURSOR_BUSY, CURSOR_DRAG, CURSOR_CAN_DROP, CURSOR_FORBIDDEN, CURSOR_VSIZE, CURSOR_HSIZE, CURSOR_BDIAGSIZE, CURSOR_FDIAGSIZE, CURSOR_MOVE, CURSOR_VSPLIT, CURSOR_HSPLIT, CURSOR_HELP,
- * ctypedef enum GrowDirection :GROW_DIRECTION_BEGIN, GROW_DIRECTION_END, GROW_DIRECTION_BOTH,             # <<<<<<<<<<<<<<
- * ctypedef enum SizeFlags :SIZE_FILL, SIZE_EXPAND, SIZE_EXPAND_FILL, SIZE_SHRINK_CENTER, SIZE_SHRINK_END,
- * ctypedef enum LayoutPreset :PRESET_TOP_LEFT, PRESET_TOP_RIGHT, PRESET_BOTTOM_LEFT, PRESET_BOTTOM_RIGHT, PRESET_CENTER_LEFT, PRESET_CENTER_TOP, PRESET_CENTER_RIGHT, PRESET_CENTER_BOTTOM, PRESET_CENTER, PRESET_LEFT_WIDE, PRESET_TOP_WIDE, PRESET_RIGHT_WIDE, PRESET_BOTTOM_WIDE, PRESET_VCENTER_WIDE, PRESET_HCENTER_WIDE, PRESET_WIDE,
+ * ctypedef enum Control_MouseFilter :MOUSE_FILTER_STOP, MOUSE_FILTER_PASS, MOUSE_FILTER_IGNORE,
+ * ctypedef enum Control_CursorShape :CURSOR_ARROW, CURSOR_IBEAM, CURSOR_POINTING_HAND, CURSOR_CROSS, CURSOR_WAIT, CURSOR_BUSY, CURSOR_DRAG, CURSOR_CAN_DROP, CURSOR_FORBIDDEN, CURSOR_VSIZE, CURSOR_HSIZE, CURSOR_BDIAGSIZE, CURSOR_FDIAGSIZE, CURSOR_MOVE, CURSOR_VSPLIT, CURSOR_HSPLIT, CURSOR_HELP,
+ * ctypedef enum Control_GrowDirection :GROW_DIRECTION_BEGIN, GROW_DIRECTION_END, GROW_DIRECTION_BOTH,             # <<<<<<<<<<<<<<
+ * ctypedef enum Control_SizeFlags :SIZE_FILL, SIZE_EXPAND, SIZE_EXPAND_FILL, SIZE_SHRINK_CENTER, SIZE_SHRINK_END,
+ * ctypedef enum Control_LayoutPreset :PRESET_TOP_LEFT, PRESET_TOP_RIGHT, PRESET_BOTTOM_LEFT, PRESET_BOTTOM_RIGHT, PRESET_CENTER_LEFT, PRESET_CENTER_TOP, PRESET_CENTER_RIGHT, PRESET_CENTER_BOTTOM, PRESET_CENTER, PRESET_LEFT_WIDE, PRESET_TOP_WIDE, PRESET_RIGHT_WIDE, PRESET_BOTTOM_WIDE, PRESET_VCENTER_WIDE, PRESET_HCENTER_WIDE, PRESET_WIDE,
  */
-enum __pyx_t_7classes_7Control_GrowDirection {
+enum __pyx_t_7classes_7Control_Control_GrowDirection {
   __pyx_e_7classes_7Control_GROW_DIRECTION_BEGIN,
   __pyx_e_7classes_7Control_GROW_DIRECTION_END,
   __pyx_e_7classes_7Control_GROW_DIRECTION_BOTH
 };
-typedef enum __pyx_t_7classes_7Control_GrowDirection __pyx_t_7classes_7Control_GrowDirection;
+typedef enum __pyx_t_7classes_7Control_Control_GrowDirection __pyx_t_7classes_7Control_Control_GrowDirection;
 
 /* "classes/Control.pxd":13
- * ctypedef enum CursorShape :CURSOR_ARROW, CURSOR_IBEAM, CURSOR_POINTING_HAND, CURSOR_CROSS, CURSOR_WAIT, CURSOR_BUSY, CURSOR_DRAG, CURSOR_CAN_DROP, CURSOR_FORBIDDEN, CURSOR_VSIZE, CURSOR_HSIZE, CURSOR_BDIAGSIZE, CURSOR_FDIAGSIZE, CURSOR_MOVE, CURSOR_VSPLIT, CURSOR_HSPLIT, CURSOR_HELP,
- * ctypedef enum GrowDirection :GROW_DIRECTION_BEGIN, GROW_DIRECTION_END, GROW_DIRECTION_BOTH,
- * ctypedef enum SizeFlags :SIZE_FILL, SIZE_EXPAND, SIZE_EXPAND_FILL, SIZE_SHRINK_CENTER, SIZE_SHRINK_END,             # <<<<<<<<<<<<<<
- * ctypedef enum LayoutPreset :PRESET_TOP_LEFT, PRESET_TOP_RIGHT, PRESET_BOTTOM_LEFT, PRESET_BOTTOM_RIGHT, PRESET_CENTER_LEFT, PRESET_CENTER_TOP, PRESET_CENTER_RIGHT, PRESET_CENTER_BOTTOM, PRESET_CENTER, PRESET_LEFT_WIDE, PRESET_TOP_WIDE, PRESET_RIGHT_WIDE, PRESET_BOTTOM_WIDE, PRESET_VCENTER_WIDE, PRESET_HCENTER_WIDE, PRESET_WIDE,
+ * ctypedef enum Control_CursorShape :CURSOR_ARROW, CURSOR_IBEAM, CURSOR_POINTING_HAND, CURSOR_CROSS, CURSOR_WAIT, CURSOR_BUSY, CURSOR_DRAG, CURSOR_CAN_DROP, CURSOR_FORBIDDEN, CURSOR_VSIZE, CURSOR_HSIZE, CURSOR_BDIAGSIZE, CURSOR_FDIAGSIZE, CURSOR_MOVE, CURSOR_VSPLIT, CURSOR_HSPLIT, CURSOR_HELP,
+ * ctypedef enum Control_GrowDirection :GROW_DIRECTION_BEGIN, GROW_DIRECTION_END, GROW_DIRECTION_BOTH,
+ * ctypedef enum Control_SizeFlags :SIZE_FILL, SIZE_EXPAND, SIZE_EXPAND_FILL, SIZE_SHRINK_CENTER, SIZE_SHRINK_END,             # <<<<<<<<<<<<<<
+ * ctypedef enum Control_LayoutPreset :PRESET_TOP_LEFT, PRESET_TOP_RIGHT, PRESET_BOTTOM_LEFT, PRESET_BOTTOM_RIGHT, PRESET_CENTER_LEFT, PRESET_CENTER_TOP, PRESET_CENTER_RIGHT, PRESET_CENTER_BOTTOM, PRESET_CENTER, PRESET_LEFT_WIDE, PRESET_TOP_WIDE, PRESET_RIGHT_WIDE, PRESET_BOTTOM_WIDE, PRESET_VCENTER_WIDE, PRESET_HCENTER_WIDE, PRESET_WIDE,
  */
-enum __pyx_t_7classes_7Control_SizeFlags {
+enum __pyx_t_7classes_7Control_Control_SizeFlags {
   __pyx_e_7classes_7Control_SIZE_FILL,
   __pyx_e_7classes_7Control_SIZE_EXPAND,
   __pyx_e_7classes_7Control_SIZE_EXPAND_FILL,
   __pyx_e_7classes_7Control_SIZE_SHRINK_CENTER,
   __pyx_e_7classes_7Control_SIZE_SHRINK_END
 };
-typedef enum __pyx_t_7classes_7Control_SizeFlags __pyx_t_7classes_7Control_SizeFlags;
+typedef enum __pyx_t_7classes_7Control_Control_SizeFlags __pyx_t_7classes_7Control_Control_SizeFlags;
 
 /* "classes/Control.pxd":14
- * ctypedef enum GrowDirection :GROW_DIRECTION_BEGIN, GROW_DIRECTION_END, GROW_DIRECTION_BOTH,
- * ctypedef enum SizeFlags :SIZE_FILL, SIZE_EXPAND, SIZE_EXPAND_FILL, SIZE_SHRINK_CENTER, SIZE_SHRINK_END,
- * ctypedef enum LayoutPreset :PRESET_TOP_LEFT, PRESET_TOP_RIGHT, PRESET_BOTTOM_LEFT, PRESET_BOTTOM_RIGHT, PRESET_CENTER_LEFT, PRESET_CENTER_TOP, PRESET_CENTER_RIGHT, PRESET_CENTER_BOTTOM, PRESET_CENTER, PRESET_LEFT_WIDE, PRESET_TOP_WIDE, PRESET_RIGHT_WIDE, PRESET_BOTTOM_WIDE, PRESET_VCENTER_WIDE, PRESET_HCENTER_WIDE, PRESET_WIDE,             # <<<<<<<<<<<<<<
+ * ctypedef enum Control_GrowDirection :GROW_DIRECTION_BEGIN, GROW_DIRECTION_END, GROW_DIRECTION_BOTH,
+ * ctypedef enum Control_SizeFlags :SIZE_FILL, SIZE_EXPAND, SIZE_EXPAND_FILL, SIZE_SHRINK_CENTER, SIZE_SHRINK_END,
+ * ctypedef enum Control_LayoutPreset :PRESET_TOP_LEFT, PRESET_TOP_RIGHT, PRESET_BOTTOM_LEFT, PRESET_BOTTOM_RIGHT, PRESET_CENTER_LEFT, PRESET_CENTER_TOP, PRESET_CENTER_RIGHT, PRESET_CENTER_BOTTOM, PRESET_CENTER, PRESET_LEFT_WIDE, PRESET_TOP_WIDE, PRESET_RIGHT_WIDE, PRESET_BOTTOM_WIDE, PRESET_VCENTER_WIDE, PRESET_HCENTER_WIDE, PRESET_WIDE,             # <<<<<<<<<<<<<<
  */
-enum __pyx_t_7classes_7Control_LayoutPreset {
+enum __pyx_t_7classes_7Control_Control_LayoutPreset {
   __pyx_e_7classes_7Control_PRESET_TOP_LEFT,
   __pyx_e_7classes_7Control_PRESET_TOP_RIGHT,
   __pyx_e_7classes_7Control_PRESET_BOTTOM_LEFT,
@@ -1214,7 +1214,7 @@ enum __pyx_t_7classes_7Control_LayoutPreset {
   __pyx_e_7classes_7Control_PRESET_HCENTER_WIDE,
   __pyx_e_7classes_7Control_PRESET_WIDE
 };
-typedef enum __pyx_t_7classes_7Control_LayoutPreset __pyx_t_7classes_7Control_LayoutPreset;
+typedef enum __pyx_t_7classes_7Control_Control_LayoutPreset __pyx_t_7classes_7Control_Control_LayoutPreset;
 
 /* "utils/Wrapper.pxd":2
  * from godot_api.binding cimport *
@@ -1234,7 +1234,7 @@ struct __pyx_obj_5utils_7Wrapper_Wrapper {
  * from utils.Wrapper cimport *
  * cdef class Object(Wrapper):             # <<<<<<<<<<<<<<
  *     pass
- * ctypedef enum ConnectFlags :CONNECT_DEFERRED, CONNECT_PERSIST, CONNECT_ONESHOT, CONNECT_REFERENCE_COUNTED,
+ * ctypedef enum Object_ConnectFlags :CONNECT_DEFERRED, CONNECT_PERSIST, CONNECT_ONESHOT, CONNECT_REFERENCE_COUNTED,
  */
 struct __pyx_obj_7classes_6Object_Object {
   struct __pyx_obj_5utils_7Wrapper_Wrapper __pyx_base;
@@ -1290,7 +1290,7 @@ struct __pyx_obj_7classes_4Font_Font {
  * cimport classes.Resource
  * cdef class Texture(classes.Resource.Resource):             # <<<<<<<<<<<<<<
  *     pass
- * ctypedef enum Flags :FLAG_MIPMAPS, FLAG_REPEAT, FLAG_FILTER, FLAGS_DEFAULT, FLAG_ANISOTROPIC_FILTER, FLAG_CONVERT_TO_LINEAR, FLAG_MIRRORED_REPEAT, FLAG_VIDEO_SURFACE,
+ * ctypedef enum Texture_Flags :FLAG_MIPMAPS, FLAG_REPEAT, FLAG_FILTER, FLAGS_DEFAULT, FLAG_ANISOTROPIC_FILTER, FLAG_CONVERT_TO_LINEAR, FLAG_MIRRORED_REPEAT, FLAG_VIDEO_SURFACE,
  */
 struct __pyx_obj_7classes_7Texture_Texture {
   struct __pyx_obj_7classes_8Resource_Resource __pyx_base;
@@ -1302,7 +1302,7 @@ struct __pyx_obj_7classes_7Texture_Texture {
  * cimport classes.Resource
  * cdef class Shader(classes.Resource.Resource):             # <<<<<<<<<<<<<<
  *     pass
- * ctypedef enum Mode :MODE_SPATIAL, MODE_CANVAS_ITEM, MODE_PARTICLES,
+ * ctypedef enum Shader_Mode :MODE_SPATIAL, MODE_CANVAS_ITEM, MODE_PARTICLES,
  */
 struct __pyx_obj_7classes_6Shader_Shader {
   struct __pyx_obj_7classes_8Resource_Resource __pyx_base;
@@ -1658,7 +1658,7 @@ struct __pyx_obj_7classes_5Theme_Theme {
  * cimport classes.Object
  * cdef class Node(classes.Object.Object):             # <<<<<<<<<<<<<<
  *     pass
- * ctypedef enum PauseMode :PAUSE_MODE_INHERIT, PAUSE_MODE_STOP, PAUSE_MODE_PROCESS,
+ * ctypedef enum Node_PauseMode :PAUSE_MODE_INHERIT, PAUSE_MODE_STOP, PAUSE_MODE_PROCESS,
  */
 struct __pyx_obj_7classes_4Node_Node {
   struct __pyx_obj_7classes_6Object_Object __pyx_base;
@@ -1670,7 +1670,7 @@ struct __pyx_obj_7classes_4Node_Node {
  * cimport classes.Node
  * cdef class CanvasItem(classes.Node.Node):             # <<<<<<<<<<<<<<
  *     pass
- * ctypedef enum BlendMode :BLEND_MODE_MIX, BLEND_MODE_ADD, BLEND_MODE_SUB, BLEND_MODE_MUL, BLEND_MODE_PREMULT_ALPHA, BLEND_MODE_DISABLED,
+ * ctypedef enum CanvasItem_BlendMode :BLEND_MODE_MIX, BLEND_MODE_ADD, BLEND_MODE_SUB, BLEND_MODE_MUL, BLEND_MODE_PREMULT_ALPHA, BLEND_MODE_DISABLED,
  */
 struct __pyx_obj_7classes_10CanvasItem_CanvasItem {
   struct __pyx_obj_7classes_4Node_Node __pyx_base;
@@ -1682,7 +1682,7 @@ struct __pyx_obj_7classes_10CanvasItem_CanvasItem {
  * cimport classes.CanvasItem
  * cdef class Control(classes.CanvasItem.CanvasItem):             # <<<<<<<<<<<<<<
  *     pass
- * ctypedef enum Anchor :ANCHOR_BEGIN, ANCHOR_END,
+ * ctypedef enum Control_Anchor :ANCHOR_BEGIN, ANCHOR_END,
  */
 struct __pyx_obj_7classes_7Control_Control {
   struct __pyx_obj_7classes_10CanvasItem_CanvasItem __pyx_base;
@@ -1711,7 +1711,7 @@ static CYTHON_INLINE godot_object *__pyx_f_5utils_7Wrapper_7Wrapper_get_godot_ow
  * from utils.Wrapper cimport *
  * cdef class Object(Wrapper):             # <<<<<<<<<<<<<<
  *     pass
- * ctypedef enum ConnectFlags :CONNECT_DEFERRED, CONNECT_PERSIST, CONNECT_ONESHOT, CONNECT_REFERENCE_COUNTED,
+ * ctypedef enum Object_ConnectFlags :CONNECT_DEFERRED, CONNECT_PERSIST, CONNECT_ONESHOT, CONNECT_REFERENCE_COUNTED,
  */
 
 struct __pyx_vtabstruct_7classes_6Object_Object {
@@ -1777,7 +1777,7 @@ static struct __pyx_vtabstruct_7classes_4Font_Font *__pyx_vtabptr_7classes_4Font
  * cimport classes.Resource
  * cdef class Texture(classes.Resource.Resource):             # <<<<<<<<<<<<<<
  *     pass
- * ctypedef enum Flags :FLAG_MIPMAPS, FLAG_REPEAT, FLAG_FILTER, FLAGS_DEFAULT, FLAG_ANISOTROPIC_FILTER, FLAG_CONVERT_TO_LINEAR, FLAG_MIRRORED_REPEAT, FLAG_VIDEO_SURFACE,
+ * ctypedef enum Texture_Flags :FLAG_MIPMAPS, FLAG_REPEAT, FLAG_FILTER, FLAGS_DEFAULT, FLAG_ANISOTROPIC_FILTER, FLAG_CONVERT_TO_LINEAR, FLAG_MIRRORED_REPEAT, FLAG_VIDEO_SURFACE,
  */
 
 struct __pyx_vtabstruct_7classes_7Texture_Texture {
@@ -1791,7 +1791,7 @@ static struct __pyx_vtabstruct_7classes_7Texture_Texture *__pyx_vtabptr_7classes
  * cimport classes.Resource
  * cdef class Shader(classes.Resource.Resource):             # <<<<<<<<<<<<<<
  *     pass
- * ctypedef enum Mode :MODE_SPATIAL, MODE_CANVAS_ITEM, MODE_PARTICLES,
+ * ctypedef enum Shader_Mode :MODE_SPATIAL, MODE_CANVAS_ITEM, MODE_PARTICLES,
  */
 
 struct __pyx_vtabstruct_7classes_6Shader_Shader {
@@ -2210,7 +2210,7 @@ static struct __pyx_vtabstruct_7classes_5Theme_Theme *__pyx_vtabptr_7classes_5Th
  * cimport classes.Object
  * cdef class Node(classes.Object.Object):             # <<<<<<<<<<<<<<
  *     pass
- * ctypedef enum PauseMode :PAUSE_MODE_INHERIT, PAUSE_MODE_STOP, PAUSE_MODE_PROCESS,
+ * ctypedef enum Node_PauseMode :PAUSE_MODE_INHERIT, PAUSE_MODE_STOP, PAUSE_MODE_PROCESS,
  */
 
 struct __pyx_vtabstruct_7classes_4Node_Node {
@@ -2224,7 +2224,7 @@ static struct __pyx_vtabstruct_7classes_4Node_Node *__pyx_vtabptr_7classes_4Node
  * cimport classes.Node
  * cdef class CanvasItem(classes.Node.Node):             # <<<<<<<<<<<<<<
  *     pass
- * ctypedef enum BlendMode :BLEND_MODE_MIX, BLEND_MODE_ADD, BLEND_MODE_SUB, BLEND_MODE_MUL, BLEND_MODE_PREMULT_ALPHA, BLEND_MODE_DISABLED,
+ * ctypedef enum CanvasItem_BlendMode :BLEND_MODE_MIX, BLEND_MODE_ADD, BLEND_MODE_SUB, BLEND_MODE_MUL, BLEND_MODE_PREMULT_ALPHA, BLEND_MODE_DISABLED,
  */
 
 struct __pyx_vtabstruct_7classes_10CanvasItem_CanvasItem {
@@ -2556,16 +2556,16 @@ static void __Pyx_AddTraceback(const char *funcname, int c_line,
 static CYTHON_INLINE PyObject* __Pyx_PyInt_From_int(int value);
 
 /* CIntToPy.proto */
-static CYTHON_INLINE PyObject* __Pyx_PyInt_From___pyx_t_7classes_7Control_CursorShape(__pyx_t_7classes_7Control_CursorShape value);
+static CYTHON_INLINE PyObject* __Pyx_PyInt_From___pyx_t_7classes_7Control_Control_CursorShape(__pyx_t_7classes_7Control_Control_CursorShape value);
 
 /* CIntToPy.proto */
-static CYTHON_INLINE PyObject* __Pyx_PyInt_From___pyx_t_7classes_7Control_FocusMode(__pyx_t_7classes_7Control_FocusMode value);
+static CYTHON_INLINE PyObject* __Pyx_PyInt_From___pyx_t_7classes_7Control_Control_FocusMode(__pyx_t_7classes_7Control_Control_FocusMode value);
 
 /* CIntToPy.proto */
-static CYTHON_INLINE PyObject* __Pyx_PyInt_From___pyx_t_7classes_7Control_GrowDirection(__pyx_t_7classes_7Control_GrowDirection value);
+static CYTHON_INLINE PyObject* __Pyx_PyInt_From___pyx_t_7classes_7Control_Control_GrowDirection(__pyx_t_7classes_7Control_Control_GrowDirection value);
 
 /* CIntToPy.proto */
-static CYTHON_INLINE PyObject* __Pyx_PyInt_From___pyx_t_7classes_7Control_MouseFilter(__pyx_t_7classes_7Control_MouseFilter value);
+static CYTHON_INLINE PyObject* __Pyx_PyInt_From___pyx_t_7classes_7Control_Control_MouseFilter(__pyx_t_7classes_7Control_Control_MouseFilter value);
 
 /* CIntFromPy.proto */
 static CYTHON_INLINE int __Pyx_PyInt_As_int(PyObject *);
@@ -13154,7 +13154,7 @@ static PyObject *__pyx_pw_7classes_7Control_7Control_59get_cursor_shape(PyObject
 
 static PyObject *__pyx_pf_7classes_7Control_7Control_58get_cursor_shape(struct __pyx_obj_7classes_7Control_Control *__pyx_v_self, struct __pyx_obj_4core_7vector2_7Vector2_Vector2 *__pyx_v_position) {
   CYTHON_UNUSED godot_object *__pyx_v__owner;
-  __pyx_t_7classes_7Control_CursorShape *__pyx_v_ret;
+  __pyx_t_7classes_7Control_Control_CursorShape *__pyx_v_ret;
   void *__pyx_v_args[1];
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
@@ -13170,7 +13170,7 @@ static PyObject *__pyx_pf_7classes_7Control_7Control_58get_cursor_shape(struct _
  *   def  get_cursor_shape(self,  Vector2 position):
  *     cdef godot_object *_owner = self.godot_owner             # <<<<<<<<<<<<<<
  * 
- *     cdef CursorShape* ret = NULL;
+ *     cdef Control_CursorShape* ret = NULL;
  */
   __pyx_t_1 = __pyx_v_self->__pyx_base.__pyx_base.__pyx_base.__pyx_base.godot_owner;
   __pyx_v__owner = __pyx_t_1;
@@ -13178,7 +13178,7 @@ static PyObject *__pyx_pf_7classes_7Control_7Control_58get_cursor_shape(struct _
   /* "classes/Control.pyx":720
  *     cdef godot_object *_owner = self.godot_owner
  * 
- *     cdef CursorShape* ret = NULL;             # <<<<<<<<<<<<<<
+ *     cdef Control_CursorShape* ret = NULL;             # <<<<<<<<<<<<<<
  * 
  *     cdef void *args[1]
  */
@@ -13219,7 +13219,7 @@ static PyObject *__pyx_pf_7classes_7Control_7Control_58get_cursor_shape(struct _
  *   def  get_custom_minimum_size(self):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_2 = __Pyx_PyInt_From___pyx_t_7classes_7Control_CursorShape((*__pyx_v_ret)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 727, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyInt_From___pyx_t_7classes_7Control_Control_CursorShape((*__pyx_v_ret)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 727, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_r = __pyx_t_2;
   __pyx_t_2 = 0;
@@ -13370,7 +13370,7 @@ static PyObject *__pyx_pw_7classes_7Control_7Control_63get_default_cursor_shape(
 
 static PyObject *__pyx_pf_7classes_7Control_7Control_62get_default_cursor_shape(struct __pyx_obj_7classes_7Control_Control *__pyx_v_self) {
   CYTHON_UNUSED godot_object *__pyx_v__owner;
-  __pyx_t_7classes_7Control_CursorShape *__pyx_v_ret;
+  __pyx_t_7classes_7Control_Control_CursorShape *__pyx_v_ret;
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   godot_object *__pyx_t_1;
@@ -13385,7 +13385,7 @@ static PyObject *__pyx_pf_7classes_7Control_7Control_62get_default_cursor_shape(
  *   def  get_default_cursor_shape(self):
  *     cdef godot_object *_owner = self.godot_owner             # <<<<<<<<<<<<<<
  * 
- *     cdef CursorShape* ret = NULL;
+ *     cdef Control_CursorShape* ret = NULL;
  */
   __pyx_t_1 = __pyx_v_self->__pyx_base.__pyx_base.__pyx_base.__pyx_base.godot_owner;
   __pyx_v__owner = __pyx_t_1;
@@ -13393,14 +13393,14 @@ static PyObject *__pyx_pf_7classes_7Control_7Control_62get_default_cursor_shape(
   /* "classes/Control.pyx":741
  *     cdef godot_object *_owner = self.godot_owner
  * 
- *     cdef CursorShape* ret = NULL;             # <<<<<<<<<<<<<<
+ *     cdef Control_CursorShape* ret = NULL;             # <<<<<<<<<<<<<<
  * 
  *     api_core.godot_method_bind_ptrcall(bind_control_get_default_cursor_shape,self.godot_owner,NULL,&ret)
  */
   __pyx_v_ret = NULL;
 
   /* "classes/Control.pyx":743
- *     cdef CursorShape* ret = NULL;
+ *     cdef Control_CursorShape* ret = NULL;
  * 
  *     api_core.godot_method_bind_ptrcall(bind_control_get_default_cursor_shape,self.godot_owner,NULL,&ret)             # <<<<<<<<<<<<<<
  *     hello('hallo2')
@@ -13425,7 +13425,7 @@ static PyObject *__pyx_pf_7classes_7Control_7Control_62get_default_cursor_shape(
  *   def  get_drag_data(self,  Vector2 position):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_2 = __Pyx_PyInt_From___pyx_t_7classes_7Control_CursorShape((*__pyx_v_ret)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 745, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyInt_From___pyx_t_7classes_7Control_Control_CursorShape((*__pyx_v_ret)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 745, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_r = __pyx_t_2;
   __pyx_t_2 = 0;
@@ -13697,7 +13697,7 @@ static PyObject *__pyx_pw_7classes_7Control_7Control_69get_focus_mode(PyObject *
 
 static PyObject *__pyx_pf_7classes_7Control_7Control_68get_focus_mode(struct __pyx_obj_7classes_7Control_Control *__pyx_v_self) {
   CYTHON_UNUSED godot_object *__pyx_v__owner;
-  __pyx_t_7classes_7Control_FocusMode *__pyx_v_ret;
+  __pyx_t_7classes_7Control_Control_FocusMode *__pyx_v_ret;
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   godot_object *__pyx_t_1;
@@ -13712,7 +13712,7 @@ static PyObject *__pyx_pf_7classes_7Control_7Control_68get_focus_mode(struct __p
  *   def  get_focus_mode(self):
  *     cdef godot_object *_owner = self.godot_owner             # <<<<<<<<<<<<<<
  * 
- *     cdef FocusMode* ret = NULL;
+ *     cdef Control_FocusMode* ret = NULL;
  */
   __pyx_t_1 = __pyx_v_self->__pyx_base.__pyx_base.__pyx_base.__pyx_base.godot_owner;
   __pyx_v__owner = __pyx_t_1;
@@ -13720,14 +13720,14 @@ static PyObject *__pyx_pf_7classes_7Control_7Control_68get_focus_mode(struct __p
   /* "classes/Control.pyx":771
  *     cdef godot_object *_owner = self.godot_owner
  * 
- *     cdef FocusMode* ret = NULL;             # <<<<<<<<<<<<<<
+ *     cdef Control_FocusMode* ret = NULL;             # <<<<<<<<<<<<<<
  * 
  *     api_core.godot_method_bind_ptrcall(bind_control_get_focus_mode,self.godot_owner,NULL,&ret)
  */
   __pyx_v_ret = NULL;
 
   /* "classes/Control.pyx":773
- *     cdef FocusMode* ret = NULL;
+ *     cdef Control_FocusMode* ret = NULL;
  * 
  *     api_core.godot_method_bind_ptrcall(bind_control_get_focus_mode,self.godot_owner,NULL,&ret)             # <<<<<<<<<<<<<<
  *     hello('hallo2')
@@ -13752,7 +13752,7 @@ static PyObject *__pyx_pf_7classes_7Control_7Control_68get_focus_mode(struct __p
  *   def  get_focus_neighbour(self,  int margin):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_2 = __Pyx_PyInt_From___pyx_t_7classes_7Control_FocusMode((*__pyx_v_ret)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 775, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyInt_From___pyx_t_7classes_7Control_Control_FocusMode((*__pyx_v_ret)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 775, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_r = __pyx_t_2;
   __pyx_t_2 = 0;
@@ -14576,7 +14576,7 @@ static PyObject *__pyx_pw_7classes_7Control_7Control_85get_h_grow_direction(PyOb
 
 static PyObject *__pyx_pf_7classes_7Control_7Control_84get_h_grow_direction(struct __pyx_obj_7classes_7Control_Control *__pyx_v_self) {
   CYTHON_UNUSED godot_object *__pyx_v__owner;
-  __pyx_t_7classes_7Control_GrowDirection *__pyx_v_ret;
+  __pyx_t_7classes_7Control_Control_GrowDirection *__pyx_v_ret;
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   godot_object *__pyx_t_1;
@@ -14591,7 +14591,7 @@ static PyObject *__pyx_pf_7classes_7Control_7Control_84get_h_grow_direction(stru
  *   def  get_h_grow_direction(self):
  *     cdef godot_object *_owner = self.godot_owner             # <<<<<<<<<<<<<<
  * 
- *     cdef GrowDirection* ret = NULL;
+ *     cdef Control_GrowDirection* ret = NULL;
  */
   __pyx_t_1 = __pyx_v_self->__pyx_base.__pyx_base.__pyx_base.__pyx_base.godot_owner;
   __pyx_v__owner = __pyx_t_1;
@@ -14599,14 +14599,14 @@ static PyObject *__pyx_pf_7classes_7Control_7Control_84get_h_grow_direction(stru
   /* "classes/Control.pyx":846
  *     cdef godot_object *_owner = self.godot_owner
  * 
- *     cdef GrowDirection* ret = NULL;             # <<<<<<<<<<<<<<
+ *     cdef Control_GrowDirection* ret = NULL;             # <<<<<<<<<<<<<<
  * 
  *     api_core.godot_method_bind_ptrcall(bind_control_get_h_grow_direction,self.godot_owner,NULL,&ret)
  */
   __pyx_v_ret = NULL;
 
   /* "classes/Control.pyx":848
- *     cdef GrowDirection* ret = NULL;
+ *     cdef Control_GrowDirection* ret = NULL;
  * 
  *     api_core.godot_method_bind_ptrcall(bind_control_get_h_grow_direction,self.godot_owner,NULL,&ret)             # <<<<<<<<<<<<<<
  *     hello('hallo2')
@@ -14631,7 +14631,7 @@ static PyObject *__pyx_pf_7classes_7Control_7Control_84get_h_grow_direction(stru
  *   def  get_h_size_flags(self):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_2 = __Pyx_PyInt_From___pyx_t_7classes_7Control_GrowDirection((*__pyx_v_ret)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 850, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyInt_From___pyx_t_7classes_7Control_Control_GrowDirection((*__pyx_v_ret)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 850, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_r = __pyx_t_2;
   __pyx_t_2 = 0;
@@ -15168,7 +15168,7 @@ static PyObject *__pyx_pw_7classes_7Control_7Control_95get_mouse_filter(PyObject
 
 static PyObject *__pyx_pf_7classes_7Control_7Control_94get_mouse_filter(struct __pyx_obj_7classes_7Control_Control *__pyx_v_self) {
   CYTHON_UNUSED godot_object *__pyx_v__owner;
-  __pyx_t_7classes_7Control_MouseFilter *__pyx_v_ret;
+  __pyx_t_7classes_7Control_Control_MouseFilter *__pyx_v_ret;
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   godot_object *__pyx_t_1;
@@ -15183,7 +15183,7 @@ static PyObject *__pyx_pf_7classes_7Control_7Control_94get_mouse_filter(struct _
  *   def  get_mouse_filter(self):
  *     cdef godot_object *_owner = self.godot_owner             # <<<<<<<<<<<<<<
  * 
- *     cdef MouseFilter* ret = NULL;
+ *     cdef Control_MouseFilter* ret = NULL;
  */
   __pyx_t_1 = __pyx_v_self->__pyx_base.__pyx_base.__pyx_base.__pyx_base.godot_owner;
   __pyx_v__owner = __pyx_t_1;
@@ -15191,14 +15191,14 @@ static PyObject *__pyx_pf_7classes_7Control_7Control_94get_mouse_filter(struct _
   /* "classes/Control.pyx":896
  *     cdef godot_object *_owner = self.godot_owner
  * 
- *     cdef MouseFilter* ret = NULL;             # <<<<<<<<<<<<<<
+ *     cdef Control_MouseFilter* ret = NULL;             # <<<<<<<<<<<<<<
  * 
  *     api_core.godot_method_bind_ptrcall(bind_control_get_mouse_filter,self.godot_owner,NULL,&ret)
  */
   __pyx_v_ret = NULL;
 
   /* "classes/Control.pyx":898
- *     cdef MouseFilter* ret = NULL;
+ *     cdef Control_MouseFilter* ret = NULL;
  * 
  *     api_core.godot_method_bind_ptrcall(bind_control_get_mouse_filter,self.godot_owner,NULL,&ret)             # <<<<<<<<<<<<<<
  *     hello('hallo2')
@@ -15223,7 +15223,7 @@ static PyObject *__pyx_pf_7classes_7Control_7Control_94get_mouse_filter(struct _
  *   def  get_parent_area_size(self):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_2 = __Pyx_PyInt_From___pyx_t_7classes_7Control_MouseFilter((*__pyx_v_ret)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 900, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyInt_From___pyx_t_7classes_7Control_Control_MouseFilter((*__pyx_v_ret)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 900, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_r = __pyx_t_2;
   __pyx_t_2 = 0;
@@ -16638,7 +16638,7 @@ static PyObject *__pyx_pw_7classes_7Control_7Control_123get_v_grow_direction(PyO
 
 static PyObject *__pyx_pf_7classes_7Control_7Control_122get_v_grow_direction(struct __pyx_obj_7classes_7Control_Control *__pyx_v_self) {
   CYTHON_UNUSED godot_object *__pyx_v__owner;
-  __pyx_t_7classes_7Control_GrowDirection *__pyx_v_ret;
+  __pyx_t_7classes_7Control_Control_GrowDirection *__pyx_v_ret;
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   godot_object *__pyx_t_1;
@@ -16653,7 +16653,7 @@ static PyObject *__pyx_pf_7classes_7Control_7Control_122get_v_grow_direction(str
  *   def  get_v_grow_direction(self):
  *     cdef godot_object *_owner = self.godot_owner             # <<<<<<<<<<<<<<
  * 
- *     cdef GrowDirection* ret = NULL;
+ *     cdef Control_GrowDirection* ret = NULL;
  */
   __pyx_t_1 = __pyx_v_self->__pyx_base.__pyx_base.__pyx_base.__pyx_base.godot_owner;
   __pyx_v__owner = __pyx_t_1;
@@ -16661,14 +16661,14 @@ static PyObject *__pyx_pf_7classes_7Control_7Control_122get_v_grow_direction(str
   /* "classes/Control.pyx":1023
  *     cdef godot_object *_owner = self.godot_owner
  * 
- *     cdef GrowDirection* ret = NULL;             # <<<<<<<<<<<<<<
+ *     cdef Control_GrowDirection* ret = NULL;             # <<<<<<<<<<<<<<
  * 
  *     api_core.godot_method_bind_ptrcall(bind_control_get_v_grow_direction,self.godot_owner,NULL,&ret)
  */
   __pyx_v_ret = NULL;
 
   /* "classes/Control.pyx":1025
- *     cdef GrowDirection* ret = NULL;
+ *     cdef Control_GrowDirection* ret = NULL;
  * 
  *     api_core.godot_method_bind_ptrcall(bind_control_get_v_grow_direction,self.godot_owner,NULL,&ret)             # <<<<<<<<<<<<<<
  *     hello('hallo2')
@@ -16693,7 +16693,7 @@ static PyObject *__pyx_pf_7classes_7Control_7Control_122get_v_grow_direction(str
  *   def  get_v_size_flags(self):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_2 = __Pyx_PyInt_From___pyx_t_7classes_7Control_GrowDirection((*__pyx_v_ret)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 1027, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyInt_From___pyx_t_7classes_7Control_Control_GrowDirection((*__pyx_v_ret)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 1027, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_r = __pyx_t_2;
   __pyx_t_2 = 0;
@@ -23268,7 +23268,7 @@ static CYTHON_INLINE void __pyx_f_4core_7variant_7Variant_7Variant_new_variant(C
  *     cdef inline void new_variant(self, i):
  *         print("new_variant", type(i))             # <<<<<<<<<<<<<<
  * 
- * ctypedef enum Type:
+ * ctypedef enum Variant_Type:
  */
   __pyx_t_1 = PyTuple_New(2); if (unlikely(!__pyx_t_1)) __PYX_ERR(4, 15, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
@@ -25395,21 +25395,20 @@ static PyMethodDef __pyx_methods[] = {
 static int __pyx_import_star_set(PyObject *o, PyObject* py_name, char *name) {
   static const char* internal_type_names[] = {
     "AABB",
-    "Anchor",
     "Array",
-    "Axis",
     "Basis",
     "Color",
     "Control",
-    "CursorShape",
+    "Control_Anchor",
+    "Control_CursorShape",
+    "Control_FocusMode",
+    "Control_GrowDirection",
+    "Control_LayoutPreset",
+    "Control_LayoutPresetMode",
+    "Control_MouseFilter",
+    "Control_SizeFlags",
     "Dictionary",
-    "FocusMode",
-    "GrowDirection",
-    "LayoutPreset",
-    "LayoutPresetMode",
-    "MouseFilter",
     "NodePath",
-    "Operator",
     "Plane",
     "PoolByteArray",
     "PoolColorArray",
@@ -25422,14 +25421,15 @@ static int __pyx_import_star_set(PyObject *o, PyObject* py_name, char *name) {
     "RID",
     "Rect2",
     "Reference",
-    "SizeFlags",
     "String",
     "Transform",
     "Transform2D",
-    "Type",
     "Variant",
+    "Variant_Operator",
+    "Variant_Type",
     "Vector2",
     "Vector3",
+    "Vector3_Axis",
     "Wrapper",
     "bool",
     "godot_aabb",
@@ -28284,24 +28284,24 @@ static CYTHON_INLINE PyObject* __Pyx_PyInt_From_int(int value) {
 }
 
 /* CIntToPy */
-static CYTHON_INLINE PyObject* __Pyx_PyInt_From___pyx_t_7classes_7Control_CursorShape(__pyx_t_7classes_7Control_CursorShape value) {
-    const __pyx_t_7classes_7Control_CursorShape neg_one = (__pyx_t_7classes_7Control_CursorShape) ((__pyx_t_7classes_7Control_CursorShape) 0 - (__pyx_t_7classes_7Control_CursorShape) 1), const_zero = (__pyx_t_7classes_7Control_CursorShape) 0;
+static CYTHON_INLINE PyObject* __Pyx_PyInt_From___pyx_t_7classes_7Control_Control_CursorShape(__pyx_t_7classes_7Control_Control_CursorShape value) {
+    const __pyx_t_7classes_7Control_Control_CursorShape neg_one = (__pyx_t_7classes_7Control_Control_CursorShape) ((__pyx_t_7classes_7Control_Control_CursorShape) 0 - (__pyx_t_7classes_7Control_Control_CursorShape) 1), const_zero = (__pyx_t_7classes_7Control_Control_CursorShape) 0;
     const int is_unsigned = neg_one > const_zero;
     if (is_unsigned) {
-        if (sizeof(__pyx_t_7classes_7Control_CursorShape) < sizeof(long)) {
+        if (sizeof(__pyx_t_7classes_7Control_Control_CursorShape) < sizeof(long)) {
             return PyInt_FromLong((long) value);
-        } else if (sizeof(__pyx_t_7classes_7Control_CursorShape) <= sizeof(unsigned long)) {
+        } else if (sizeof(__pyx_t_7classes_7Control_Control_CursorShape) <= sizeof(unsigned long)) {
             return PyLong_FromUnsignedLong((unsigned long) value);
 #ifdef HAVE_LONG_LONG
-        } else if (sizeof(__pyx_t_7classes_7Control_CursorShape) <= sizeof(unsigned PY_LONG_LONG)) {
+        } else if (sizeof(__pyx_t_7classes_7Control_Control_CursorShape) <= sizeof(unsigned PY_LONG_LONG)) {
             return PyLong_FromUnsignedLongLong((unsigned PY_LONG_LONG) value);
 #endif
         }
     } else {
-        if (sizeof(__pyx_t_7classes_7Control_CursorShape) <= sizeof(long)) {
+        if (sizeof(__pyx_t_7classes_7Control_Control_CursorShape) <= sizeof(long)) {
             return PyInt_FromLong((long) value);
 #ifdef HAVE_LONG_LONG
-        } else if (sizeof(__pyx_t_7classes_7Control_CursorShape) <= sizeof(PY_LONG_LONG)) {
+        } else if (sizeof(__pyx_t_7classes_7Control_Control_CursorShape) <= sizeof(PY_LONG_LONG)) {
             return PyLong_FromLongLong((PY_LONG_LONG) value);
 #endif
         }
@@ -28309,30 +28309,30 @@ static CYTHON_INLINE PyObject* __Pyx_PyInt_From___pyx_t_7classes_7Control_Cursor
     {
         int one = 1; int little = (int)*(unsigned char *)&one;
         unsigned char *bytes = (unsigned char *)&value;
-        return _PyLong_FromByteArray(bytes, sizeof(__pyx_t_7classes_7Control_CursorShape),
+        return _PyLong_FromByteArray(bytes, sizeof(__pyx_t_7classes_7Control_Control_CursorShape),
                                      little, !is_unsigned);
     }
 }
 
 /* CIntToPy */
-static CYTHON_INLINE PyObject* __Pyx_PyInt_From___pyx_t_7classes_7Control_FocusMode(__pyx_t_7classes_7Control_FocusMode value) {
-    const __pyx_t_7classes_7Control_FocusMode neg_one = (__pyx_t_7classes_7Control_FocusMode) ((__pyx_t_7classes_7Control_FocusMode) 0 - (__pyx_t_7classes_7Control_FocusMode) 1), const_zero = (__pyx_t_7classes_7Control_FocusMode) 0;
+static CYTHON_INLINE PyObject* __Pyx_PyInt_From___pyx_t_7classes_7Control_Control_FocusMode(__pyx_t_7classes_7Control_Control_FocusMode value) {
+    const __pyx_t_7classes_7Control_Control_FocusMode neg_one = (__pyx_t_7classes_7Control_Control_FocusMode) ((__pyx_t_7classes_7Control_Control_FocusMode) 0 - (__pyx_t_7classes_7Control_Control_FocusMode) 1), const_zero = (__pyx_t_7classes_7Control_Control_FocusMode) 0;
     const int is_unsigned = neg_one > const_zero;
     if (is_unsigned) {
-        if (sizeof(__pyx_t_7classes_7Control_FocusMode) < sizeof(long)) {
+        if (sizeof(__pyx_t_7classes_7Control_Control_FocusMode) < sizeof(long)) {
             return PyInt_FromLong((long) value);
-        } else if (sizeof(__pyx_t_7classes_7Control_FocusMode) <= sizeof(unsigned long)) {
+        } else if (sizeof(__pyx_t_7classes_7Control_Control_FocusMode) <= sizeof(unsigned long)) {
             return PyLong_FromUnsignedLong((unsigned long) value);
 #ifdef HAVE_LONG_LONG
-        } else if (sizeof(__pyx_t_7classes_7Control_FocusMode) <= sizeof(unsigned PY_LONG_LONG)) {
+        } else if (sizeof(__pyx_t_7classes_7Control_Control_FocusMode) <= sizeof(unsigned PY_LONG_LONG)) {
             return PyLong_FromUnsignedLongLong((unsigned PY_LONG_LONG) value);
 #endif
         }
     } else {
-        if (sizeof(__pyx_t_7classes_7Control_FocusMode) <= sizeof(long)) {
+        if (sizeof(__pyx_t_7classes_7Control_Control_FocusMode) <= sizeof(long)) {
             return PyInt_FromLong((long) value);
 #ifdef HAVE_LONG_LONG
-        } else if (sizeof(__pyx_t_7classes_7Control_FocusMode) <= sizeof(PY_LONG_LONG)) {
+        } else if (sizeof(__pyx_t_7classes_7Control_Control_FocusMode) <= sizeof(PY_LONG_LONG)) {
             return PyLong_FromLongLong((PY_LONG_LONG) value);
 #endif
         }
@@ -28340,30 +28340,30 @@ static CYTHON_INLINE PyObject* __Pyx_PyInt_From___pyx_t_7classes_7Control_FocusM
     {
         int one = 1; int little = (int)*(unsigned char *)&one;
         unsigned char *bytes = (unsigned char *)&value;
-        return _PyLong_FromByteArray(bytes, sizeof(__pyx_t_7classes_7Control_FocusMode),
+        return _PyLong_FromByteArray(bytes, sizeof(__pyx_t_7classes_7Control_Control_FocusMode),
                                      little, !is_unsigned);
     }
 }
 
 /* CIntToPy */
-static CYTHON_INLINE PyObject* __Pyx_PyInt_From___pyx_t_7classes_7Control_GrowDirection(__pyx_t_7classes_7Control_GrowDirection value) {
-    const __pyx_t_7classes_7Control_GrowDirection neg_one = (__pyx_t_7classes_7Control_GrowDirection) ((__pyx_t_7classes_7Control_GrowDirection) 0 - (__pyx_t_7classes_7Control_GrowDirection) 1), const_zero = (__pyx_t_7classes_7Control_GrowDirection) 0;
+static CYTHON_INLINE PyObject* __Pyx_PyInt_From___pyx_t_7classes_7Control_Control_GrowDirection(__pyx_t_7classes_7Control_Control_GrowDirection value) {
+    const __pyx_t_7classes_7Control_Control_GrowDirection neg_one = (__pyx_t_7classes_7Control_Control_GrowDirection) ((__pyx_t_7classes_7Control_Control_GrowDirection) 0 - (__pyx_t_7classes_7Control_Control_GrowDirection) 1), const_zero = (__pyx_t_7classes_7Control_Control_GrowDirection) 0;
     const int is_unsigned = neg_one > const_zero;
     if (is_unsigned) {
-        if (sizeof(__pyx_t_7classes_7Control_GrowDirection) < sizeof(long)) {
+        if (sizeof(__pyx_t_7classes_7Control_Control_GrowDirection) < sizeof(long)) {
             return PyInt_FromLong((long) value);
-        } else if (sizeof(__pyx_t_7classes_7Control_GrowDirection) <= sizeof(unsigned long)) {
+        } else if (sizeof(__pyx_t_7classes_7Control_Control_GrowDirection) <= sizeof(unsigned long)) {
             return PyLong_FromUnsignedLong((unsigned long) value);
 #ifdef HAVE_LONG_LONG
-        } else if (sizeof(__pyx_t_7classes_7Control_GrowDirection) <= sizeof(unsigned PY_LONG_LONG)) {
+        } else if (sizeof(__pyx_t_7classes_7Control_Control_GrowDirection) <= sizeof(unsigned PY_LONG_LONG)) {
             return PyLong_FromUnsignedLongLong((unsigned PY_LONG_LONG) value);
 #endif
         }
     } else {
-        if (sizeof(__pyx_t_7classes_7Control_GrowDirection) <= sizeof(long)) {
+        if (sizeof(__pyx_t_7classes_7Control_Control_GrowDirection) <= sizeof(long)) {
             return PyInt_FromLong((long) value);
 #ifdef HAVE_LONG_LONG
-        } else if (sizeof(__pyx_t_7classes_7Control_GrowDirection) <= sizeof(PY_LONG_LONG)) {
+        } else if (sizeof(__pyx_t_7classes_7Control_Control_GrowDirection) <= sizeof(PY_LONG_LONG)) {
             return PyLong_FromLongLong((PY_LONG_LONG) value);
 #endif
         }
@@ -28371,30 +28371,30 @@ static CYTHON_INLINE PyObject* __Pyx_PyInt_From___pyx_t_7classes_7Control_GrowDi
     {
         int one = 1; int little = (int)*(unsigned char *)&one;
         unsigned char *bytes = (unsigned char *)&value;
-        return _PyLong_FromByteArray(bytes, sizeof(__pyx_t_7classes_7Control_GrowDirection),
+        return _PyLong_FromByteArray(bytes, sizeof(__pyx_t_7classes_7Control_Control_GrowDirection),
                                      little, !is_unsigned);
     }
 }
 
 /* CIntToPy */
-static CYTHON_INLINE PyObject* __Pyx_PyInt_From___pyx_t_7classes_7Control_MouseFilter(__pyx_t_7classes_7Control_MouseFilter value) {
-    const __pyx_t_7classes_7Control_MouseFilter neg_one = (__pyx_t_7classes_7Control_MouseFilter) ((__pyx_t_7classes_7Control_MouseFilter) 0 - (__pyx_t_7classes_7Control_MouseFilter) 1), const_zero = (__pyx_t_7classes_7Control_MouseFilter) 0;
+static CYTHON_INLINE PyObject* __Pyx_PyInt_From___pyx_t_7classes_7Control_Control_MouseFilter(__pyx_t_7classes_7Control_Control_MouseFilter value) {
+    const __pyx_t_7classes_7Control_Control_MouseFilter neg_one = (__pyx_t_7classes_7Control_Control_MouseFilter) ((__pyx_t_7classes_7Control_Control_MouseFilter) 0 - (__pyx_t_7classes_7Control_Control_MouseFilter) 1), const_zero = (__pyx_t_7classes_7Control_Control_MouseFilter) 0;
     const int is_unsigned = neg_one > const_zero;
     if (is_unsigned) {
-        if (sizeof(__pyx_t_7classes_7Control_MouseFilter) < sizeof(long)) {
+        if (sizeof(__pyx_t_7classes_7Control_Control_MouseFilter) < sizeof(long)) {
             return PyInt_FromLong((long) value);
-        } else if (sizeof(__pyx_t_7classes_7Control_MouseFilter) <= sizeof(unsigned long)) {
+        } else if (sizeof(__pyx_t_7classes_7Control_Control_MouseFilter) <= sizeof(unsigned long)) {
             return PyLong_FromUnsignedLong((unsigned long) value);
 #ifdef HAVE_LONG_LONG
-        } else if (sizeof(__pyx_t_7classes_7Control_MouseFilter) <= sizeof(unsigned PY_LONG_LONG)) {
+        } else if (sizeof(__pyx_t_7classes_7Control_Control_MouseFilter) <= sizeof(unsigned PY_LONG_LONG)) {
             return PyLong_FromUnsignedLongLong((unsigned PY_LONG_LONG) value);
 #endif
         }
     } else {
-        if (sizeof(__pyx_t_7classes_7Control_MouseFilter) <= sizeof(long)) {
+        if (sizeof(__pyx_t_7classes_7Control_Control_MouseFilter) <= sizeof(long)) {
             return PyInt_FromLong((long) value);
 #ifdef HAVE_LONG_LONG
-        } else if (sizeof(__pyx_t_7classes_7Control_MouseFilter) <= sizeof(PY_LONG_LONG)) {
+        } else if (sizeof(__pyx_t_7classes_7Control_Control_MouseFilter) <= sizeof(PY_LONG_LONG)) {
             return PyLong_FromLongLong((PY_LONG_LONG) value);
 #endif
         }
@@ -28402,7 +28402,7 @@ static CYTHON_INLINE PyObject* __Pyx_PyInt_From___pyx_t_7classes_7Control_MouseF
     {
         int one = 1; int little = (int)*(unsigned char *)&one;
         unsigned char *bytes = (unsigned char *)&value;
-        return _PyLong_FromByteArray(bytes, sizeof(__pyx_t_7classes_7Control_MouseFilter),
+        return _PyLong_FromByteArray(bytes, sizeof(__pyx_t_7classes_7Control_Control_MouseFilter),
                                      little, !is_unsigned);
     }
 }

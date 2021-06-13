@@ -910,22 +910,22 @@ struct __pyx_obj_7classes_16EditorFileDialog_EditorFileDialog;
 /* "classes/Object.pxd":7
  * cdef class Object(Wrapper):
  *     pass
- * ctypedef enum ConnectFlags :CONNECT_DEFERRED, CONNECT_PERSIST, CONNECT_ONESHOT, CONNECT_REFERENCE_COUNTED,             # <<<<<<<<<<<<<<
+ * ctypedef enum Object_ConnectFlags :CONNECT_DEFERRED, CONNECT_PERSIST, CONNECT_ONESHOT, CONNECT_REFERENCE_COUNTED,             # <<<<<<<<<<<<<<
  */
-enum __pyx_t_7classes_6Object_ConnectFlags {
+enum __pyx_t_7classes_6Object_Object_ConnectFlags {
   __pyx_e_7classes_6Object_CONNECT_DEFERRED,
   __pyx_e_7classes_6Object_CONNECT_PERSIST,
   __pyx_e_7classes_6Object_CONNECT_ONESHOT,
   __pyx_e_7classes_6Object_CONNECT_REFERENCE_COUNTED
 };
-typedef enum __pyx_t_7classes_6Object_ConnectFlags __pyx_t_7classes_6Object_ConnectFlags;
+typedef enum __pyx_t_7classes_6Object_Object_ConnectFlags __pyx_t_7classes_6Object_Object_ConnectFlags;
 
 /* "classes/Texture.pxd":7
  * cdef class Texture(classes.Resource.Resource):
  *     pass
- * ctypedef enum Flags :FLAG_MIPMAPS, FLAG_REPEAT, FLAG_FILTER, FLAGS_DEFAULT, FLAG_ANISOTROPIC_FILTER, FLAG_CONVERT_TO_LINEAR, FLAG_MIRRORED_REPEAT, FLAG_VIDEO_SURFACE,             # <<<<<<<<<<<<<<
+ * ctypedef enum Texture_Flags :FLAG_MIPMAPS, FLAG_REPEAT, FLAG_FILTER, FLAGS_DEFAULT, FLAG_ANISOTROPIC_FILTER, FLAG_CONVERT_TO_LINEAR, FLAG_MIRRORED_REPEAT, FLAG_VIDEO_SURFACE,             # <<<<<<<<<<<<<<
  */
-enum __pyx_t_7classes_7Texture_Flags {
+enum __pyx_t_7classes_7Texture_Texture_Flags {
   __pyx_e_7classes_7Texture_FLAG_MIPMAPS,
   __pyx_e_7classes_7Texture_FLAG_REPEAT,
   __pyx_e_7classes_7Texture_FLAG_FILTER,
@@ -935,40 +935,40 @@ enum __pyx_t_7classes_7Texture_Flags {
   __pyx_e_7classes_7Texture_FLAG_MIRRORED_REPEAT,
   __pyx_e_7classes_7Texture_FLAG_VIDEO_SURFACE
 };
-typedef enum __pyx_t_7classes_7Texture_Flags __pyx_t_7classes_7Texture_Flags;
+typedef enum __pyx_t_7classes_7Texture_Texture_Flags __pyx_t_7classes_7Texture_Texture_Flags;
 
 /* "classes/Node.pxd":7
  * cdef class Node(classes.Object.Object):
  *     pass
- * ctypedef enum PauseMode :PAUSE_MODE_INHERIT, PAUSE_MODE_STOP, PAUSE_MODE_PROCESS,             # <<<<<<<<<<<<<<
- * ctypedef enum DuplicateFlags :DUPLICATE_SIGNALS, DUPLICATE_GROUPS, DUPLICATE_SCRIPTS, DUPLICATE_USE_INSTANCING,
+ * ctypedef enum Node_PauseMode :PAUSE_MODE_INHERIT, PAUSE_MODE_STOP, PAUSE_MODE_PROCESS,             # <<<<<<<<<<<<<<
+ * ctypedef enum Node_DuplicateFlags :DUPLICATE_SIGNALS, DUPLICATE_GROUPS, DUPLICATE_SCRIPTS, DUPLICATE_USE_INSTANCING,
  */
-enum __pyx_t_7classes_4Node_PauseMode {
+enum __pyx_t_7classes_4Node_Node_PauseMode {
   __pyx_e_7classes_4Node_PAUSE_MODE_INHERIT,
   __pyx_e_7classes_4Node_PAUSE_MODE_STOP,
   __pyx_e_7classes_4Node_PAUSE_MODE_PROCESS
 };
-typedef enum __pyx_t_7classes_4Node_PauseMode __pyx_t_7classes_4Node_PauseMode;
+typedef enum __pyx_t_7classes_4Node_Node_PauseMode __pyx_t_7classes_4Node_Node_PauseMode;
 
 /* "classes/Node.pxd":8
  *     pass
- * ctypedef enum PauseMode :PAUSE_MODE_INHERIT, PAUSE_MODE_STOP, PAUSE_MODE_PROCESS,
- * ctypedef enum DuplicateFlags :DUPLICATE_SIGNALS, DUPLICATE_GROUPS, DUPLICATE_SCRIPTS, DUPLICATE_USE_INSTANCING,             # <<<<<<<<<<<<<<
+ * ctypedef enum Node_PauseMode :PAUSE_MODE_INHERIT, PAUSE_MODE_STOP, PAUSE_MODE_PROCESS,
+ * ctypedef enum Node_DuplicateFlags :DUPLICATE_SIGNALS, DUPLICATE_GROUPS, DUPLICATE_SCRIPTS, DUPLICATE_USE_INSTANCING,             # <<<<<<<<<<<<<<
  */
-enum __pyx_t_7classes_4Node_DuplicateFlags {
+enum __pyx_t_7classes_4Node_Node_DuplicateFlags {
   __pyx_e_7classes_4Node_DUPLICATE_SIGNALS,
   __pyx_e_7classes_4Node_DUPLICATE_GROUPS,
   __pyx_e_7classes_4Node_DUPLICATE_SCRIPTS,
   __pyx_e_7classes_4Node_DUPLICATE_USE_INSTANCING
 };
-typedef enum __pyx_t_7classes_4Node_DuplicateFlags __pyx_t_7classes_4Node_DuplicateFlags;
+typedef enum __pyx_t_7classes_4Node_Node_DuplicateFlags __pyx_t_7classes_4Node_Node_DuplicateFlags;
 
 /* "classes/CanvasItem.pxd":7
  * cdef class CanvasItem(classes.Node.Node):
  *     pass
- * ctypedef enum BlendMode :BLEND_MODE_MIX, BLEND_MODE_ADD, BLEND_MODE_SUB, BLEND_MODE_MUL, BLEND_MODE_PREMULT_ALPHA, BLEND_MODE_DISABLED,             # <<<<<<<<<<<<<<
+ * ctypedef enum CanvasItem_BlendMode :BLEND_MODE_MIX, BLEND_MODE_ADD, BLEND_MODE_SUB, BLEND_MODE_MUL, BLEND_MODE_PREMULT_ALPHA, BLEND_MODE_DISABLED,             # <<<<<<<<<<<<<<
  */
-enum __pyx_t_7classes_10CanvasItem_BlendMode {
+enum __pyx_t_7classes_10CanvasItem_CanvasItem_BlendMode {
   __pyx_e_7classes_10CanvasItem_BLEND_MODE_MIX,
   __pyx_e_7classes_10CanvasItem_BLEND_MODE_ADD,
   __pyx_e_7classes_10CanvasItem_BLEND_MODE_SUB,
@@ -976,72 +976,72 @@ enum __pyx_t_7classes_10CanvasItem_BlendMode {
   __pyx_e_7classes_10CanvasItem_BLEND_MODE_PREMULT_ALPHA,
   __pyx_e_7classes_10CanvasItem_BLEND_MODE_DISABLED
 };
-typedef enum __pyx_t_7classes_10CanvasItem_BlendMode __pyx_t_7classes_10CanvasItem_BlendMode;
+typedef enum __pyx_t_7classes_10CanvasItem_CanvasItem_BlendMode __pyx_t_7classes_10CanvasItem_CanvasItem_BlendMode;
 
 /* "classes/Control.pxd":7
  * cdef class Control(classes.CanvasItem.CanvasItem):
  *     pass
- * ctypedef enum Anchor :ANCHOR_BEGIN, ANCHOR_END,             # <<<<<<<<<<<<<<
- * ctypedef enum FocusMode :FOCUS_NONE, FOCUS_CLICK, FOCUS_ALL,
- * ctypedef enum LayoutPresetMode :PRESET_MODE_MINSIZE, PRESET_MODE_KEEP_WIDTH, PRESET_MODE_KEEP_HEIGHT, PRESET_MODE_KEEP_SIZE,
+ * ctypedef enum Control_Anchor :ANCHOR_BEGIN, ANCHOR_END,             # <<<<<<<<<<<<<<
+ * ctypedef enum Control_FocusMode :FOCUS_NONE, FOCUS_CLICK, FOCUS_ALL,
+ * ctypedef enum Control_LayoutPresetMode :PRESET_MODE_MINSIZE, PRESET_MODE_KEEP_WIDTH, PRESET_MODE_KEEP_HEIGHT, PRESET_MODE_KEEP_SIZE,
  */
-enum __pyx_t_7classes_7Control_Anchor {
+enum __pyx_t_7classes_7Control_Control_Anchor {
   __pyx_e_7classes_7Control_ANCHOR_BEGIN,
   __pyx_e_7classes_7Control_ANCHOR_END
 };
-typedef enum __pyx_t_7classes_7Control_Anchor __pyx_t_7classes_7Control_Anchor;
+typedef enum __pyx_t_7classes_7Control_Control_Anchor __pyx_t_7classes_7Control_Control_Anchor;
 
 /* "classes/Control.pxd":8
  *     pass
- * ctypedef enum Anchor :ANCHOR_BEGIN, ANCHOR_END,
- * ctypedef enum FocusMode :FOCUS_NONE, FOCUS_CLICK, FOCUS_ALL,             # <<<<<<<<<<<<<<
- * ctypedef enum LayoutPresetMode :PRESET_MODE_MINSIZE, PRESET_MODE_KEEP_WIDTH, PRESET_MODE_KEEP_HEIGHT, PRESET_MODE_KEEP_SIZE,
- * ctypedef enum MouseFilter :MOUSE_FILTER_STOP, MOUSE_FILTER_PASS, MOUSE_FILTER_IGNORE,
+ * ctypedef enum Control_Anchor :ANCHOR_BEGIN, ANCHOR_END,
+ * ctypedef enum Control_FocusMode :FOCUS_NONE, FOCUS_CLICK, FOCUS_ALL,             # <<<<<<<<<<<<<<
+ * ctypedef enum Control_LayoutPresetMode :PRESET_MODE_MINSIZE, PRESET_MODE_KEEP_WIDTH, PRESET_MODE_KEEP_HEIGHT, PRESET_MODE_KEEP_SIZE,
+ * ctypedef enum Control_MouseFilter :MOUSE_FILTER_STOP, MOUSE_FILTER_PASS, MOUSE_FILTER_IGNORE,
  */
-enum __pyx_t_7classes_7Control_FocusMode {
+enum __pyx_t_7classes_7Control_Control_FocusMode {
   __pyx_e_7classes_7Control_FOCUS_NONE,
   __pyx_e_7classes_7Control_FOCUS_CLICK,
   __pyx_e_7classes_7Control_FOCUS_ALL
 };
-typedef enum __pyx_t_7classes_7Control_FocusMode __pyx_t_7classes_7Control_FocusMode;
+typedef enum __pyx_t_7classes_7Control_Control_FocusMode __pyx_t_7classes_7Control_Control_FocusMode;
 
 /* "classes/Control.pxd":9
- * ctypedef enum Anchor :ANCHOR_BEGIN, ANCHOR_END,
- * ctypedef enum FocusMode :FOCUS_NONE, FOCUS_CLICK, FOCUS_ALL,
- * ctypedef enum LayoutPresetMode :PRESET_MODE_MINSIZE, PRESET_MODE_KEEP_WIDTH, PRESET_MODE_KEEP_HEIGHT, PRESET_MODE_KEEP_SIZE,             # <<<<<<<<<<<<<<
- * ctypedef enum MouseFilter :MOUSE_FILTER_STOP, MOUSE_FILTER_PASS, MOUSE_FILTER_IGNORE,
- * ctypedef enum CursorShape :CURSOR_ARROW, CURSOR_IBEAM, CURSOR_POINTING_HAND, CURSOR_CROSS, CURSOR_WAIT, CURSOR_BUSY, CURSOR_DRAG, CURSOR_CAN_DROP, CURSOR_FORBIDDEN, CURSOR_VSIZE, CURSOR_HSIZE, CURSOR_BDIAGSIZE, CURSOR_FDIAGSIZE, CURSOR_MOVE, CURSOR_VSPLIT, CURSOR_HSPLIT, CURSOR_HELP,
+ * ctypedef enum Control_Anchor :ANCHOR_BEGIN, ANCHOR_END,
+ * ctypedef enum Control_FocusMode :FOCUS_NONE, FOCUS_CLICK, FOCUS_ALL,
+ * ctypedef enum Control_LayoutPresetMode :PRESET_MODE_MINSIZE, PRESET_MODE_KEEP_WIDTH, PRESET_MODE_KEEP_HEIGHT, PRESET_MODE_KEEP_SIZE,             # <<<<<<<<<<<<<<
+ * ctypedef enum Control_MouseFilter :MOUSE_FILTER_STOP, MOUSE_FILTER_PASS, MOUSE_FILTER_IGNORE,
+ * ctypedef enum Control_CursorShape :CURSOR_ARROW, CURSOR_IBEAM, CURSOR_POINTING_HAND, CURSOR_CROSS, CURSOR_WAIT, CURSOR_BUSY, CURSOR_DRAG, CURSOR_CAN_DROP, CURSOR_FORBIDDEN, CURSOR_VSIZE, CURSOR_HSIZE, CURSOR_BDIAGSIZE, CURSOR_FDIAGSIZE, CURSOR_MOVE, CURSOR_VSPLIT, CURSOR_HSPLIT, CURSOR_HELP,
  */
-enum __pyx_t_7classes_7Control_LayoutPresetMode {
+enum __pyx_t_7classes_7Control_Control_LayoutPresetMode {
   __pyx_e_7classes_7Control_PRESET_MODE_MINSIZE,
   __pyx_e_7classes_7Control_PRESET_MODE_KEEP_WIDTH,
   __pyx_e_7classes_7Control_PRESET_MODE_KEEP_HEIGHT,
   __pyx_e_7classes_7Control_PRESET_MODE_KEEP_SIZE
 };
-typedef enum __pyx_t_7classes_7Control_LayoutPresetMode __pyx_t_7classes_7Control_LayoutPresetMode;
+typedef enum __pyx_t_7classes_7Control_Control_LayoutPresetMode __pyx_t_7classes_7Control_Control_LayoutPresetMode;
 
 /* "classes/Control.pxd":10
- * ctypedef enum FocusMode :FOCUS_NONE, FOCUS_CLICK, FOCUS_ALL,
- * ctypedef enum LayoutPresetMode :PRESET_MODE_MINSIZE, PRESET_MODE_KEEP_WIDTH, PRESET_MODE_KEEP_HEIGHT, PRESET_MODE_KEEP_SIZE,
- * ctypedef enum MouseFilter :MOUSE_FILTER_STOP, MOUSE_FILTER_PASS, MOUSE_FILTER_IGNORE,             # <<<<<<<<<<<<<<
- * ctypedef enum CursorShape :CURSOR_ARROW, CURSOR_IBEAM, CURSOR_POINTING_HAND, CURSOR_CROSS, CURSOR_WAIT, CURSOR_BUSY, CURSOR_DRAG, CURSOR_CAN_DROP, CURSOR_FORBIDDEN, CURSOR_VSIZE, CURSOR_HSIZE, CURSOR_BDIAGSIZE, CURSOR_FDIAGSIZE, CURSOR_MOVE, CURSOR_VSPLIT, CURSOR_HSPLIT, CURSOR_HELP,
- * ctypedef enum GrowDirection :GROW_DIRECTION_BEGIN, GROW_DIRECTION_END, GROW_DIRECTION_BOTH,
+ * ctypedef enum Control_FocusMode :FOCUS_NONE, FOCUS_CLICK, FOCUS_ALL,
+ * ctypedef enum Control_LayoutPresetMode :PRESET_MODE_MINSIZE, PRESET_MODE_KEEP_WIDTH, PRESET_MODE_KEEP_HEIGHT, PRESET_MODE_KEEP_SIZE,
+ * ctypedef enum Control_MouseFilter :MOUSE_FILTER_STOP, MOUSE_FILTER_PASS, MOUSE_FILTER_IGNORE,             # <<<<<<<<<<<<<<
+ * ctypedef enum Control_CursorShape :CURSOR_ARROW, CURSOR_IBEAM, CURSOR_POINTING_HAND, CURSOR_CROSS, CURSOR_WAIT, CURSOR_BUSY, CURSOR_DRAG, CURSOR_CAN_DROP, CURSOR_FORBIDDEN, CURSOR_VSIZE, CURSOR_HSIZE, CURSOR_BDIAGSIZE, CURSOR_FDIAGSIZE, CURSOR_MOVE, CURSOR_VSPLIT, CURSOR_HSPLIT, CURSOR_HELP,
+ * ctypedef enum Control_GrowDirection :GROW_DIRECTION_BEGIN, GROW_DIRECTION_END, GROW_DIRECTION_BOTH,
  */
-enum __pyx_t_7classes_7Control_MouseFilter {
+enum __pyx_t_7classes_7Control_Control_MouseFilter {
   __pyx_e_7classes_7Control_MOUSE_FILTER_STOP,
   __pyx_e_7classes_7Control_MOUSE_FILTER_PASS,
   __pyx_e_7classes_7Control_MOUSE_FILTER_IGNORE
 };
-typedef enum __pyx_t_7classes_7Control_MouseFilter __pyx_t_7classes_7Control_MouseFilter;
+typedef enum __pyx_t_7classes_7Control_Control_MouseFilter __pyx_t_7classes_7Control_Control_MouseFilter;
 
 /* "classes/Control.pxd":11
- * ctypedef enum LayoutPresetMode :PRESET_MODE_MINSIZE, PRESET_MODE_KEEP_WIDTH, PRESET_MODE_KEEP_HEIGHT, PRESET_MODE_KEEP_SIZE,
- * ctypedef enum MouseFilter :MOUSE_FILTER_STOP, MOUSE_FILTER_PASS, MOUSE_FILTER_IGNORE,
- * ctypedef enum CursorShape :CURSOR_ARROW, CURSOR_IBEAM, CURSOR_POINTING_HAND, CURSOR_CROSS, CURSOR_WAIT, CURSOR_BUSY, CURSOR_DRAG, CURSOR_CAN_DROP, CURSOR_FORBIDDEN, CURSOR_VSIZE, CURSOR_HSIZE, CURSOR_BDIAGSIZE, CURSOR_FDIAGSIZE, CURSOR_MOVE, CURSOR_VSPLIT, CURSOR_HSPLIT, CURSOR_HELP,             # <<<<<<<<<<<<<<
- * ctypedef enum GrowDirection :GROW_DIRECTION_BEGIN, GROW_DIRECTION_END, GROW_DIRECTION_BOTH,
- * ctypedef enum SizeFlags :SIZE_FILL, SIZE_EXPAND, SIZE_EXPAND_FILL, SIZE_SHRINK_CENTER, SIZE_SHRINK_END,
+ * ctypedef enum Control_LayoutPresetMode :PRESET_MODE_MINSIZE, PRESET_MODE_KEEP_WIDTH, PRESET_MODE_KEEP_HEIGHT, PRESET_MODE_KEEP_SIZE,
+ * ctypedef enum Control_MouseFilter :MOUSE_FILTER_STOP, MOUSE_FILTER_PASS, MOUSE_FILTER_IGNORE,
+ * ctypedef enum Control_CursorShape :CURSOR_ARROW, CURSOR_IBEAM, CURSOR_POINTING_HAND, CURSOR_CROSS, CURSOR_WAIT, CURSOR_BUSY, CURSOR_DRAG, CURSOR_CAN_DROP, CURSOR_FORBIDDEN, CURSOR_VSIZE, CURSOR_HSIZE, CURSOR_BDIAGSIZE, CURSOR_FDIAGSIZE, CURSOR_MOVE, CURSOR_VSPLIT, CURSOR_HSPLIT, CURSOR_HELP,             # <<<<<<<<<<<<<<
+ * ctypedef enum Control_GrowDirection :GROW_DIRECTION_BEGIN, GROW_DIRECTION_END, GROW_DIRECTION_BOTH,
+ * ctypedef enum Control_SizeFlags :SIZE_FILL, SIZE_EXPAND, SIZE_EXPAND_FILL, SIZE_SHRINK_CENTER, SIZE_SHRINK_END,
  */
-enum __pyx_t_7classes_7Control_CursorShape {
+enum __pyx_t_7classes_7Control_Control_CursorShape {
   __pyx_e_7classes_7Control_CURSOR_ARROW,
   __pyx_e_7classes_7Control_CURSOR_IBEAM,
   __pyx_e_7classes_7Control_CURSOR_POINTING_HAND,
@@ -1060,43 +1060,43 @@ enum __pyx_t_7classes_7Control_CursorShape {
   __pyx_e_7classes_7Control_CURSOR_HSPLIT,
   __pyx_e_7classes_7Control_CURSOR_HELP
 };
-typedef enum __pyx_t_7classes_7Control_CursorShape __pyx_t_7classes_7Control_CursorShape;
+typedef enum __pyx_t_7classes_7Control_Control_CursorShape __pyx_t_7classes_7Control_Control_CursorShape;
 
 /* "classes/Control.pxd":12
- * ctypedef enum MouseFilter :MOUSE_FILTER_STOP, MOUSE_FILTER_PASS, MOUSE_FILTER_IGNORE,
- * ctypedef enum CursorShape :CURSOR_ARROW, CURSOR_IBEAM, CURSOR_POINTING_HAND, CURSOR_CROSS, CURSOR_WAIT, CURSOR_BUSY, CURSOR_DRAG, CURSOR_CAN_DROP, CURSOR_FORBIDDEN, CURSOR_VSIZE, CURSOR_HSIZE, CURSOR_BDIAGSIZE, CURSOR_FDIAGSIZE, CURSOR_MOVE, CURSOR_VSPLIT, CURSOR_HSPLIT, CURSOR_HELP,
- * ctypedef enum GrowDirection :GROW_DIRECTION_BEGIN, GROW_DIRECTION_END, GROW_DIRECTION_BOTH,             # <<<<<<<<<<<<<<
- * ctypedef enum SizeFlags :SIZE_FILL, SIZE_EXPAND, SIZE_EXPAND_FILL, SIZE_SHRINK_CENTER, SIZE_SHRINK_END,
- * ctypedef enum LayoutPreset :PRESET_TOP_LEFT, PRESET_TOP_RIGHT, PRESET_BOTTOM_LEFT, PRESET_BOTTOM_RIGHT, PRESET_CENTER_LEFT, PRESET_CENTER_TOP, PRESET_CENTER_RIGHT, PRESET_CENTER_BOTTOM, PRESET_CENTER, PRESET_LEFT_WIDE, PRESET_TOP_WIDE, PRESET_RIGHT_WIDE, PRESET_BOTTOM_WIDE, PRESET_VCENTER_WIDE, PRESET_HCENTER_WIDE, PRESET_WIDE,
+ * ctypedef enum Control_MouseFilter :MOUSE_FILTER_STOP, MOUSE_FILTER_PASS, MOUSE_FILTER_IGNORE,
+ * ctypedef enum Control_CursorShape :CURSOR_ARROW, CURSOR_IBEAM, CURSOR_POINTING_HAND, CURSOR_CROSS, CURSOR_WAIT, CURSOR_BUSY, CURSOR_DRAG, CURSOR_CAN_DROP, CURSOR_FORBIDDEN, CURSOR_VSIZE, CURSOR_HSIZE, CURSOR_BDIAGSIZE, CURSOR_FDIAGSIZE, CURSOR_MOVE, CURSOR_VSPLIT, CURSOR_HSPLIT, CURSOR_HELP,
+ * ctypedef enum Control_GrowDirection :GROW_DIRECTION_BEGIN, GROW_DIRECTION_END, GROW_DIRECTION_BOTH,             # <<<<<<<<<<<<<<
+ * ctypedef enum Control_SizeFlags :SIZE_FILL, SIZE_EXPAND, SIZE_EXPAND_FILL, SIZE_SHRINK_CENTER, SIZE_SHRINK_END,
+ * ctypedef enum Control_LayoutPreset :PRESET_TOP_LEFT, PRESET_TOP_RIGHT, PRESET_BOTTOM_LEFT, PRESET_BOTTOM_RIGHT, PRESET_CENTER_LEFT, PRESET_CENTER_TOP, PRESET_CENTER_RIGHT, PRESET_CENTER_BOTTOM, PRESET_CENTER, PRESET_LEFT_WIDE, PRESET_TOP_WIDE, PRESET_RIGHT_WIDE, PRESET_BOTTOM_WIDE, PRESET_VCENTER_WIDE, PRESET_HCENTER_WIDE, PRESET_WIDE,
  */
-enum __pyx_t_7classes_7Control_GrowDirection {
+enum __pyx_t_7classes_7Control_Control_GrowDirection {
   __pyx_e_7classes_7Control_GROW_DIRECTION_BEGIN,
   __pyx_e_7classes_7Control_GROW_DIRECTION_END,
   __pyx_e_7classes_7Control_GROW_DIRECTION_BOTH
 };
-typedef enum __pyx_t_7classes_7Control_GrowDirection __pyx_t_7classes_7Control_GrowDirection;
+typedef enum __pyx_t_7classes_7Control_Control_GrowDirection __pyx_t_7classes_7Control_Control_GrowDirection;
 
 /* "classes/Control.pxd":13
- * ctypedef enum CursorShape :CURSOR_ARROW, CURSOR_IBEAM, CURSOR_POINTING_HAND, CURSOR_CROSS, CURSOR_WAIT, CURSOR_BUSY, CURSOR_DRAG, CURSOR_CAN_DROP, CURSOR_FORBIDDEN, CURSOR_VSIZE, CURSOR_HSIZE, CURSOR_BDIAGSIZE, CURSOR_FDIAGSIZE, CURSOR_MOVE, CURSOR_VSPLIT, CURSOR_HSPLIT, CURSOR_HELP,
- * ctypedef enum GrowDirection :GROW_DIRECTION_BEGIN, GROW_DIRECTION_END, GROW_DIRECTION_BOTH,
- * ctypedef enum SizeFlags :SIZE_FILL, SIZE_EXPAND, SIZE_EXPAND_FILL, SIZE_SHRINK_CENTER, SIZE_SHRINK_END,             # <<<<<<<<<<<<<<
- * ctypedef enum LayoutPreset :PRESET_TOP_LEFT, PRESET_TOP_RIGHT, PRESET_BOTTOM_LEFT, PRESET_BOTTOM_RIGHT, PRESET_CENTER_LEFT, PRESET_CENTER_TOP, PRESET_CENTER_RIGHT, PRESET_CENTER_BOTTOM, PRESET_CENTER, PRESET_LEFT_WIDE, PRESET_TOP_WIDE, PRESET_RIGHT_WIDE, PRESET_BOTTOM_WIDE, PRESET_VCENTER_WIDE, PRESET_HCENTER_WIDE, PRESET_WIDE,
+ * ctypedef enum Control_CursorShape :CURSOR_ARROW, CURSOR_IBEAM, CURSOR_POINTING_HAND, CURSOR_CROSS, CURSOR_WAIT, CURSOR_BUSY, CURSOR_DRAG, CURSOR_CAN_DROP, CURSOR_FORBIDDEN, CURSOR_VSIZE, CURSOR_HSIZE, CURSOR_BDIAGSIZE, CURSOR_FDIAGSIZE, CURSOR_MOVE, CURSOR_VSPLIT, CURSOR_HSPLIT, CURSOR_HELP,
+ * ctypedef enum Control_GrowDirection :GROW_DIRECTION_BEGIN, GROW_DIRECTION_END, GROW_DIRECTION_BOTH,
+ * ctypedef enum Control_SizeFlags :SIZE_FILL, SIZE_EXPAND, SIZE_EXPAND_FILL, SIZE_SHRINK_CENTER, SIZE_SHRINK_END,             # <<<<<<<<<<<<<<
+ * ctypedef enum Control_LayoutPreset :PRESET_TOP_LEFT, PRESET_TOP_RIGHT, PRESET_BOTTOM_LEFT, PRESET_BOTTOM_RIGHT, PRESET_CENTER_LEFT, PRESET_CENTER_TOP, PRESET_CENTER_RIGHT, PRESET_CENTER_BOTTOM, PRESET_CENTER, PRESET_LEFT_WIDE, PRESET_TOP_WIDE, PRESET_RIGHT_WIDE, PRESET_BOTTOM_WIDE, PRESET_VCENTER_WIDE, PRESET_HCENTER_WIDE, PRESET_WIDE,
  */
-enum __pyx_t_7classes_7Control_SizeFlags {
+enum __pyx_t_7classes_7Control_Control_SizeFlags {
   __pyx_e_7classes_7Control_SIZE_FILL,
   __pyx_e_7classes_7Control_SIZE_EXPAND,
   __pyx_e_7classes_7Control_SIZE_EXPAND_FILL,
   __pyx_e_7classes_7Control_SIZE_SHRINK_CENTER,
   __pyx_e_7classes_7Control_SIZE_SHRINK_END
 };
-typedef enum __pyx_t_7classes_7Control_SizeFlags __pyx_t_7classes_7Control_SizeFlags;
+typedef enum __pyx_t_7classes_7Control_Control_SizeFlags __pyx_t_7classes_7Control_Control_SizeFlags;
 
 /* "classes/Control.pxd":14
- * ctypedef enum GrowDirection :GROW_DIRECTION_BEGIN, GROW_DIRECTION_END, GROW_DIRECTION_BOTH,
- * ctypedef enum SizeFlags :SIZE_FILL, SIZE_EXPAND, SIZE_EXPAND_FILL, SIZE_SHRINK_CENTER, SIZE_SHRINK_END,
- * ctypedef enum LayoutPreset :PRESET_TOP_LEFT, PRESET_TOP_RIGHT, PRESET_BOTTOM_LEFT, PRESET_BOTTOM_RIGHT, PRESET_CENTER_LEFT, PRESET_CENTER_TOP, PRESET_CENTER_RIGHT, PRESET_CENTER_BOTTOM, PRESET_CENTER, PRESET_LEFT_WIDE, PRESET_TOP_WIDE, PRESET_RIGHT_WIDE, PRESET_BOTTOM_WIDE, PRESET_VCENTER_WIDE, PRESET_HCENTER_WIDE, PRESET_WIDE,             # <<<<<<<<<<<<<<
+ * ctypedef enum Control_GrowDirection :GROW_DIRECTION_BEGIN, GROW_DIRECTION_END, GROW_DIRECTION_BOTH,
+ * ctypedef enum Control_SizeFlags :SIZE_FILL, SIZE_EXPAND, SIZE_EXPAND_FILL, SIZE_SHRINK_CENTER, SIZE_SHRINK_END,
+ * ctypedef enum Control_LayoutPreset :PRESET_TOP_LEFT, PRESET_TOP_RIGHT, PRESET_BOTTOM_LEFT, PRESET_BOTTOM_RIGHT, PRESET_CENTER_LEFT, PRESET_CENTER_TOP, PRESET_CENTER_RIGHT, PRESET_CENTER_BOTTOM, PRESET_CENTER, PRESET_LEFT_WIDE, PRESET_TOP_WIDE, PRESET_RIGHT_WIDE, PRESET_BOTTOM_WIDE, PRESET_VCENTER_WIDE, PRESET_HCENTER_WIDE, PRESET_WIDE,             # <<<<<<<<<<<<<<
  */
-enum __pyx_t_7classes_7Control_LayoutPreset {
+enum __pyx_t_7classes_7Control_Control_LayoutPreset {
   __pyx_e_7classes_7Control_PRESET_TOP_LEFT,
   __pyx_e_7classes_7Control_PRESET_TOP_RIGHT,
   __pyx_e_7classes_7Control_PRESET_BOTTOM_LEFT,
@@ -1114,16 +1114,16 @@ enum __pyx_t_7classes_7Control_LayoutPreset {
   __pyx_e_7classes_7Control_PRESET_HCENTER_WIDE,
   __pyx_e_7classes_7Control_PRESET_WIDE
 };
-typedef enum __pyx_t_7classes_7Control_LayoutPreset __pyx_t_7classes_7Control_LayoutPreset;
+typedef enum __pyx_t_7classes_7Control_Control_LayoutPreset __pyx_t_7classes_7Control_Control_LayoutPreset;
 
 /* "core/variant/Variant.pxd":17
  *         print("new_variant", type(i))
  * 
- * ctypedef enum Type:             # <<<<<<<<<<<<<<
+ * ctypedef enum Variant_Type:             # <<<<<<<<<<<<<<
  *     NIL,
  *     # atomic types
  */
-enum __pyx_t_4core_7variant_7Variant_Type {
+enum __pyx_t_4core_7variant_7Variant_Variant_Type {
   __pyx_e_4core_7variant_7Variant_NIL,
   __pyx_e_4core_7variant_7Variant_BOOL,
   __pyx_e_4core_7variant_7Variant_INT,
@@ -1153,16 +1153,16 @@ enum __pyx_t_4core_7variant_7Variant_Type {
   __pyx_e_4core_7variant_7Variant_POOL_COLOR_ARRAY,
   __pyx_e_4core_7variant_7Variant_VARIANT_MAX
 };
-typedef enum __pyx_t_4core_7variant_7Variant_Type __pyx_t_4core_7variant_7Variant_Type;
+typedef enum __pyx_t_4core_7variant_7Variant_Variant_Type __pyx_t_4core_7variant_7Variant_Variant_Type;
 
 /* "core/variant/Variant.pxd":58
  * 
  * 
- * ctypedef enum Operator :             # <<<<<<<<<<<<<<
+ * ctypedef enum Variant_Operator :             # <<<<<<<<<<<<<<
  * 
  *     #comparation
  */
-enum __pyx_t_4core_7variant_7Variant_Operator {
+enum __pyx_t_4core_7variant_7Variant_Variant_Operator {
   __pyx_e_4core_7variant_7Variant_OP_EQUAL,
   __pyx_e_4core_7variant_7Variant_OP_NOT_EQUAL,
   __pyx_e_4core_7variant_7Variant_OP_LESS,
@@ -1190,61 +1190,61 @@ enum __pyx_t_4core_7variant_7Variant_Operator {
   __pyx_e_4core_7variant_7Variant_OP_IN,
   __pyx_e_4core_7variant_7Variant_OP_MAX
 };
-typedef enum __pyx_t_4core_7variant_7Variant_Operator __pyx_t_4core_7variant_7Variant_Operator;
+typedef enum __pyx_t_4core_7variant_7Variant_Variant_Operator __pyx_t_4core_7variant_7Variant_Variant_Operator;
 
 /* "core/vector3/Vector3.pxd":15
  * 
  * 
- * ctypedef enum Axis :             # <<<<<<<<<<<<<<
- *     AXIS_X,
- *     AXIS_Y,
+ * ctypedef enum Vector3_Axis :             # <<<<<<<<<<<<<<
+ *     Vector3_AXIS_X,
+ *     Vector3_AXIS_Y,
  */
-enum __pyx_t_4core_7vector3_7Vector3_Axis {
-  __pyx_e_4core_7vector3_7Vector3_AXIS_X,
-  __pyx_e_4core_7vector3_7Vector3_AXIS_Y,
-  __pyx_e_4core_7vector3_7Vector3_AXIS_Z
+enum __pyx_t_4core_7vector3_7Vector3_Vector3_Axis {
+  __pyx_e_4core_7vector3_7Vector3_Vector3_AXIS_X,
+  __pyx_e_4core_7vector3_7Vector3_Vector3_AXIS_Y,
+  __pyx_e_4core_7vector3_7Vector3_Vector3_AXIS_Z
 };
-typedef enum __pyx_t_4core_7vector3_7Vector3_Axis __pyx_t_4core_7vector3_7Vector3_Axis;
+typedef enum __pyx_t_4core_7vector3_7Vector3_Vector3_Axis __pyx_t_4core_7vector3_7Vector3_Vector3_Axis;
 
 /* "classes/EditorFileDialog.pxd":7
  * cdef class EditorFileDialog(classes.ConfirmationDialog.ConfirmationDialog):
  *     pass
- * ctypedef enum DisplayMode :DISPLAY_THUMBNAILS, DISPLAY_LIST,             # <<<<<<<<<<<<<<
- * ctypedef enum Mode :MODE_OPEN_FILE, MODE_OPEN_FILES, MODE_OPEN_DIR, MODE_OPEN_ANY, MODE_SAVE_FILE,
- * ctypedef enum Access :ACCESS_RESOURCES, ACCESS_USERDATA, ACCESS_FILESYSTEM,
+ * ctypedef enum EditorFileDialog_DisplayMode :DISPLAY_THUMBNAILS, DISPLAY_LIST,             # <<<<<<<<<<<<<<
+ * ctypedef enum EditorFileDialog_Mode :MODE_OPEN_FILE, MODE_OPEN_FILES, MODE_OPEN_DIR, MODE_OPEN_ANY, MODE_SAVE_FILE,
+ * ctypedef enum EditorFileDialog_Access :ACCESS_RESOURCES, ACCESS_USERDATA, ACCESS_FILESYSTEM,
  */
-enum __pyx_t_7classes_16EditorFileDialog_DisplayMode {
+enum __pyx_t_7classes_16EditorFileDialog_EditorFileDialog_DisplayMode {
   __pyx_e_7classes_16EditorFileDialog_DISPLAY_THUMBNAILS,
   __pyx_e_7classes_16EditorFileDialog_DISPLAY_LIST
 };
-typedef enum __pyx_t_7classes_16EditorFileDialog_DisplayMode __pyx_t_7classes_16EditorFileDialog_DisplayMode;
+typedef enum __pyx_t_7classes_16EditorFileDialog_EditorFileDialog_DisplayMode __pyx_t_7classes_16EditorFileDialog_EditorFileDialog_DisplayMode;
 
 /* "classes/EditorFileDialog.pxd":8
  *     pass
- * ctypedef enum DisplayMode :DISPLAY_THUMBNAILS, DISPLAY_LIST,
- * ctypedef enum Mode :MODE_OPEN_FILE, MODE_OPEN_FILES, MODE_OPEN_DIR, MODE_OPEN_ANY, MODE_SAVE_FILE,             # <<<<<<<<<<<<<<
- * ctypedef enum Access :ACCESS_RESOURCES, ACCESS_USERDATA, ACCESS_FILESYSTEM,
+ * ctypedef enum EditorFileDialog_DisplayMode :DISPLAY_THUMBNAILS, DISPLAY_LIST,
+ * ctypedef enum EditorFileDialog_Mode :MODE_OPEN_FILE, MODE_OPEN_FILES, MODE_OPEN_DIR, MODE_OPEN_ANY, MODE_SAVE_FILE,             # <<<<<<<<<<<<<<
+ * ctypedef enum EditorFileDialog_Access :ACCESS_RESOURCES, ACCESS_USERDATA, ACCESS_FILESYSTEM,
  */
-enum __pyx_t_7classes_16EditorFileDialog_Mode {
+enum __pyx_t_7classes_16EditorFileDialog_EditorFileDialog_Mode {
   __pyx_e_7classes_16EditorFileDialog_MODE_OPEN_FILE,
   __pyx_e_7classes_16EditorFileDialog_MODE_OPEN_FILES,
   __pyx_e_7classes_16EditorFileDialog_MODE_OPEN_DIR,
   __pyx_e_7classes_16EditorFileDialog_MODE_OPEN_ANY,
   __pyx_e_7classes_16EditorFileDialog_MODE_SAVE_FILE
 };
-typedef enum __pyx_t_7classes_16EditorFileDialog_Mode __pyx_t_7classes_16EditorFileDialog_Mode;
+typedef enum __pyx_t_7classes_16EditorFileDialog_EditorFileDialog_Mode __pyx_t_7classes_16EditorFileDialog_EditorFileDialog_Mode;
 
 /* "classes/EditorFileDialog.pxd":9
- * ctypedef enum DisplayMode :DISPLAY_THUMBNAILS, DISPLAY_LIST,
- * ctypedef enum Mode :MODE_OPEN_FILE, MODE_OPEN_FILES, MODE_OPEN_DIR, MODE_OPEN_ANY, MODE_SAVE_FILE,
- * ctypedef enum Access :ACCESS_RESOURCES, ACCESS_USERDATA, ACCESS_FILESYSTEM,             # <<<<<<<<<<<<<<
+ * ctypedef enum EditorFileDialog_DisplayMode :DISPLAY_THUMBNAILS, DISPLAY_LIST,
+ * ctypedef enum EditorFileDialog_Mode :MODE_OPEN_FILE, MODE_OPEN_FILES, MODE_OPEN_DIR, MODE_OPEN_ANY, MODE_SAVE_FILE,
+ * ctypedef enum EditorFileDialog_Access :ACCESS_RESOURCES, ACCESS_USERDATA, ACCESS_FILESYSTEM,             # <<<<<<<<<<<<<<
  */
-enum __pyx_t_7classes_16EditorFileDialog_Access {
+enum __pyx_t_7classes_16EditorFileDialog_EditorFileDialog_Access {
   __pyx_e_7classes_16EditorFileDialog_ACCESS_RESOURCES,
   __pyx_e_7classes_16EditorFileDialog_ACCESS_USERDATA,
   __pyx_e_7classes_16EditorFileDialog_ACCESS_FILESYSTEM
 };
-typedef enum __pyx_t_7classes_16EditorFileDialog_Access __pyx_t_7classes_16EditorFileDialog_Access;
+typedef enum __pyx_t_7classes_16EditorFileDialog_EditorFileDialog_Access __pyx_t_7classes_16EditorFileDialog_EditorFileDialog_Access;
 
 /* "utils/Wrapper.pxd":2
  * from godot_api.binding cimport *
@@ -1264,7 +1264,7 @@ struct __pyx_obj_5utils_7Wrapper_Wrapper {
  * from utils.Wrapper cimport *
  * cdef class Object(Wrapper):             # <<<<<<<<<<<<<<
  *     pass
- * ctypedef enum ConnectFlags :CONNECT_DEFERRED, CONNECT_PERSIST, CONNECT_ONESHOT, CONNECT_REFERENCE_COUNTED,
+ * ctypedef enum Object_ConnectFlags :CONNECT_DEFERRED, CONNECT_PERSIST, CONNECT_ONESHOT, CONNECT_REFERENCE_COUNTED,
  */
 struct __pyx_obj_7classes_6Object_Object {
   struct __pyx_obj_5utils_7Wrapper_Wrapper __pyx_base;
@@ -1298,7 +1298,7 @@ struct __pyx_obj_7classes_8Resource_Resource {
  * cimport classes.Resource
  * cdef class Texture(classes.Resource.Resource):             # <<<<<<<<<<<<<<
  *     pass
- * ctypedef enum Flags :FLAG_MIPMAPS, FLAG_REPEAT, FLAG_FILTER, FLAGS_DEFAULT, FLAG_ANISOTROPIC_FILTER, FLAG_CONVERT_TO_LINEAR, FLAG_MIRRORED_REPEAT, FLAG_VIDEO_SURFACE,
+ * ctypedef enum Texture_Flags :FLAG_MIPMAPS, FLAG_REPEAT, FLAG_FILTER, FLAGS_DEFAULT, FLAG_ANISOTROPIC_FILTER, FLAG_CONVERT_TO_LINEAR, FLAG_MIRRORED_REPEAT, FLAG_VIDEO_SURFACE,
  */
 struct __pyx_obj_7classes_7Texture_Texture {
   struct __pyx_obj_7classes_8Resource_Resource __pyx_base;
@@ -1321,7 +1321,7 @@ struct __pyx_obj_7classes_10InputEvent_InputEvent {
  * cimport classes.Object
  * cdef class Node(classes.Object.Object):             # <<<<<<<<<<<<<<
  *     pass
- * ctypedef enum PauseMode :PAUSE_MODE_INHERIT, PAUSE_MODE_STOP, PAUSE_MODE_PROCESS,
+ * ctypedef enum Node_PauseMode :PAUSE_MODE_INHERIT, PAUSE_MODE_STOP, PAUSE_MODE_PROCESS,
  */
 struct __pyx_obj_7classes_4Node_Node {
   struct __pyx_obj_7classes_6Object_Object __pyx_base;
@@ -1333,7 +1333,7 @@ struct __pyx_obj_7classes_4Node_Node {
  * cimport classes.Node
  * cdef class CanvasItem(classes.Node.Node):             # <<<<<<<<<<<<<<
  *     pass
- * ctypedef enum BlendMode :BLEND_MODE_MIX, BLEND_MODE_ADD, BLEND_MODE_SUB, BLEND_MODE_MUL, BLEND_MODE_PREMULT_ALPHA, BLEND_MODE_DISABLED,
+ * ctypedef enum CanvasItem_BlendMode :BLEND_MODE_MIX, BLEND_MODE_ADD, BLEND_MODE_SUB, BLEND_MODE_MUL, BLEND_MODE_PREMULT_ALPHA, BLEND_MODE_DISABLED,
  */
 struct __pyx_obj_7classes_10CanvasItem_CanvasItem {
   struct __pyx_obj_7classes_4Node_Node __pyx_base;
@@ -1345,7 +1345,7 @@ struct __pyx_obj_7classes_10CanvasItem_CanvasItem {
  * cimport classes.CanvasItem
  * cdef class Control(classes.CanvasItem.CanvasItem):             # <<<<<<<<<<<<<<
  *     pass
- * ctypedef enum Anchor :ANCHOR_BEGIN, ANCHOR_END,
+ * ctypedef enum Control_Anchor :ANCHOR_BEGIN, ANCHOR_END,
  */
 struct __pyx_obj_7classes_7Control_Control {
   struct __pyx_obj_7classes_10CanvasItem_CanvasItem __pyx_base;
@@ -1723,7 +1723,7 @@ struct __pyx_obj_4core_7vector3_7Vector3_Vector3 {
  * cimport classes.ConfirmationDialog
  * cdef class EditorFileDialog(classes.ConfirmationDialog.ConfirmationDialog):             # <<<<<<<<<<<<<<
  *     pass
- * ctypedef enum DisplayMode :DISPLAY_THUMBNAILS, DISPLAY_LIST,
+ * ctypedef enum EditorFileDialog_DisplayMode :DISPLAY_THUMBNAILS, DISPLAY_LIST,
  */
 struct __pyx_obj_7classes_16EditorFileDialog_EditorFileDialog {
   struct __pyx_obj_7classes_18ConfirmationDialog_ConfirmationDialog __pyx_base;
@@ -1752,7 +1752,7 @@ static CYTHON_INLINE godot_object *__pyx_f_5utils_7Wrapper_7Wrapper_get_godot_ow
  * from utils.Wrapper cimport *
  * cdef class Object(Wrapper):             # <<<<<<<<<<<<<<
  *     pass
- * ctypedef enum ConnectFlags :CONNECT_DEFERRED, CONNECT_PERSIST, CONNECT_ONESHOT, CONNECT_REFERENCE_COUNTED,
+ * ctypedef enum Object_ConnectFlags :CONNECT_DEFERRED, CONNECT_PERSIST, CONNECT_ONESHOT, CONNECT_REFERENCE_COUNTED,
  */
 
 struct __pyx_vtabstruct_7classes_6Object_Object {
@@ -1792,7 +1792,7 @@ static struct __pyx_vtabstruct_7classes_8Resource_Resource *__pyx_vtabptr_7class
  * cimport classes.Resource
  * cdef class Texture(classes.Resource.Resource):             # <<<<<<<<<<<<<<
  *     pass
- * ctypedef enum Flags :FLAG_MIPMAPS, FLAG_REPEAT, FLAG_FILTER, FLAGS_DEFAULT, FLAG_ANISOTROPIC_FILTER, FLAG_CONVERT_TO_LINEAR, FLAG_MIRRORED_REPEAT, FLAG_VIDEO_SURFACE,
+ * ctypedef enum Texture_Flags :FLAG_MIPMAPS, FLAG_REPEAT, FLAG_FILTER, FLAGS_DEFAULT, FLAG_ANISOTROPIC_FILTER, FLAG_CONVERT_TO_LINEAR, FLAG_MIRRORED_REPEAT, FLAG_VIDEO_SURFACE,
  */
 
 struct __pyx_vtabstruct_7classes_7Texture_Texture {
@@ -1819,7 +1819,7 @@ static struct __pyx_vtabstruct_7classes_10InputEvent_InputEvent *__pyx_vtabptr_7
  * cimport classes.Object
  * cdef class Node(classes.Object.Object):             # <<<<<<<<<<<<<<
  *     pass
- * ctypedef enum PauseMode :PAUSE_MODE_INHERIT, PAUSE_MODE_STOP, PAUSE_MODE_PROCESS,
+ * ctypedef enum Node_PauseMode :PAUSE_MODE_INHERIT, PAUSE_MODE_STOP, PAUSE_MODE_PROCESS,
  */
 
 struct __pyx_vtabstruct_7classes_4Node_Node {
@@ -1833,7 +1833,7 @@ static struct __pyx_vtabstruct_7classes_4Node_Node *__pyx_vtabptr_7classes_4Node
  * cimport classes.Node
  * cdef class CanvasItem(classes.Node.Node):             # <<<<<<<<<<<<<<
  *     pass
- * ctypedef enum BlendMode :BLEND_MODE_MIX, BLEND_MODE_ADD, BLEND_MODE_SUB, BLEND_MODE_MUL, BLEND_MODE_PREMULT_ALPHA, BLEND_MODE_DISABLED,
+ * ctypedef enum CanvasItem_BlendMode :BLEND_MODE_MIX, BLEND_MODE_ADD, BLEND_MODE_SUB, BLEND_MODE_MUL, BLEND_MODE_PREMULT_ALPHA, BLEND_MODE_DISABLED,
  */
 
 struct __pyx_vtabstruct_7classes_10CanvasItem_CanvasItem {
@@ -1847,7 +1847,7 @@ static struct __pyx_vtabstruct_7classes_10CanvasItem_CanvasItem *__pyx_vtabptr_7
  * cimport classes.CanvasItem
  * cdef class Control(classes.CanvasItem.CanvasItem):             # <<<<<<<<<<<<<<
  *     pass
- * ctypedef enum Anchor :ANCHOR_BEGIN, ANCHOR_END,
+ * ctypedef enum Control_Anchor :ANCHOR_BEGIN, ANCHOR_END,
  */
 
 struct __pyx_vtabstruct_7classes_7Control_Control {
@@ -2607,13 +2607,13 @@ static void __Pyx_AddTraceback(const char *funcname, int c_line,
                                int py_line, const char *filename);
 
 /* CIntToPy.proto */
-static CYTHON_INLINE PyObject* __Pyx_PyInt_From___pyx_t_7classes_16EditorFileDialog_Access(__pyx_t_7classes_16EditorFileDialog_Access value);
+static CYTHON_INLINE PyObject* __Pyx_PyInt_From___pyx_t_7classes_16EditorFileDialog_EditorFileDialog_Access(__pyx_t_7classes_16EditorFileDialog_EditorFileDialog_Access value);
 
 /* CIntToPy.proto */
-static CYTHON_INLINE PyObject* __Pyx_PyInt_From___pyx_t_7classes_16EditorFileDialog_DisplayMode(__pyx_t_7classes_16EditorFileDialog_DisplayMode value);
+static CYTHON_INLINE PyObject* __Pyx_PyInt_From___pyx_t_7classes_16EditorFileDialog_EditorFileDialog_DisplayMode(__pyx_t_7classes_16EditorFileDialog_EditorFileDialog_DisplayMode value);
 
 /* CIntToPy.proto */
-static CYTHON_INLINE PyObject* __Pyx_PyInt_From___pyx_t_7classes_16EditorFileDialog_Mode(__pyx_t_7classes_16EditorFileDialog_Mode value);
+static CYTHON_INLINE PyObject* __Pyx_PyInt_From___pyx_t_7classes_16EditorFileDialog_EditorFileDialog_Mode(__pyx_t_7classes_16EditorFileDialog_EditorFileDialog_Mode value);
 
 /* CIntFromPy.proto */
 static CYTHON_INLINE int __Pyx_PyInt_As_int(PyObject *);
@@ -7962,7 +7962,7 @@ static PyObject *__pyx_pw_7classes_16EditorFileDialog_16EditorFileDialog_67get_a
 
 static PyObject *__pyx_pf_7classes_16EditorFileDialog_16EditorFileDialog_66get_access(struct __pyx_obj_7classes_16EditorFileDialog_EditorFileDialog *__pyx_v_self) {
   CYTHON_UNUSED godot_object *__pyx_v__owner;
-  __pyx_t_7classes_16EditorFileDialog_Access *__pyx_v_ret;
+  __pyx_t_7classes_16EditorFileDialog_EditorFileDialog_Access *__pyx_v_ret;
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   godot_object *__pyx_t_1;
@@ -7977,7 +7977,7 @@ static PyObject *__pyx_pf_7classes_16EditorFileDialog_16EditorFileDialog_66get_a
  *   def  get_access(self):
  *     cdef godot_object *_owner = self.godot_owner             # <<<<<<<<<<<<<<
  * 
- *     cdef Access* ret = NULL;
+ *     cdef EditorFileDialog_Access* ret = NULL;
  */
   __pyx_t_1 = __pyx_v_self->__pyx_base.__pyx_base.__pyx_base.__pyx_base.__pyx_base.__pyx_base.__pyx_base.__pyx_base.__pyx_base.godot_owner;
   __pyx_v__owner = __pyx_t_1;
@@ -7985,14 +7985,14 @@ static PyObject *__pyx_pf_7classes_16EditorFileDialog_16EditorFileDialog_66get_a
   /* "classes/EditorFileDialog.pyx":416
  *     cdef godot_object *_owner = self.godot_owner
  * 
- *     cdef Access* ret = NULL;             # <<<<<<<<<<<<<<
+ *     cdef EditorFileDialog_Access* ret = NULL;             # <<<<<<<<<<<<<<
  * 
  *     api_core.godot_method_bind_ptrcall(bind_editorfiledialog_get_access,self.godot_owner,NULL,&ret)
  */
   __pyx_v_ret = NULL;
 
   /* "classes/EditorFileDialog.pyx":418
- *     cdef Access* ret = NULL;
+ *     cdef EditorFileDialog_Access* ret = NULL;
  * 
  *     api_core.godot_method_bind_ptrcall(bind_editorfiledialog_get_access,self.godot_owner,NULL,&ret)             # <<<<<<<<<<<<<<
  *     hello('hallo2')
@@ -8017,7 +8017,7 @@ static PyObject *__pyx_pf_7classes_16EditorFileDialog_16EditorFileDialog_66get_a
  *   def  get_current_dir(self):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_2 = __Pyx_PyInt_From___pyx_t_7classes_16EditorFileDialog_Access((*__pyx_v_ret)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 420, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyInt_From___pyx_t_7classes_16EditorFileDialog_EditorFileDialog_Access((*__pyx_v_ret)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 420, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_r = __pyx_t_2;
   __pyx_t_2 = 0;
@@ -8374,7 +8374,7 @@ static PyObject *__pyx_pw_7classes_16EditorFileDialog_16EditorFileDialog_75get_d
 
 static PyObject *__pyx_pf_7classes_16EditorFileDialog_16EditorFileDialog_74get_display_mode(struct __pyx_obj_7classes_16EditorFileDialog_EditorFileDialog *__pyx_v_self) {
   CYTHON_UNUSED godot_object *__pyx_v__owner;
-  __pyx_t_7classes_16EditorFileDialog_DisplayMode *__pyx_v_ret;
+  __pyx_t_7classes_16EditorFileDialog_EditorFileDialog_DisplayMode *__pyx_v_ret;
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   godot_object *__pyx_t_1;
@@ -8389,7 +8389,7 @@ static PyObject *__pyx_pf_7classes_16EditorFileDialog_16EditorFileDialog_74get_d
  *   def  get_display_mode(self):
  *     cdef godot_object *_owner = self.godot_owner             # <<<<<<<<<<<<<<
  * 
- *     cdef DisplayMode* ret = NULL;
+ *     cdef EditorFileDialog_DisplayMode* ret = NULL;
  */
   __pyx_t_1 = __pyx_v_self->__pyx_base.__pyx_base.__pyx_base.__pyx_base.__pyx_base.__pyx_base.__pyx_base.__pyx_base.__pyx_base.godot_owner;
   __pyx_v__owner = __pyx_t_1;
@@ -8397,14 +8397,14 @@ static PyObject *__pyx_pf_7classes_16EditorFileDialog_16EditorFileDialog_74get_d
   /* "classes/EditorFileDialog.pyx":452
  *     cdef godot_object *_owner = self.godot_owner
  * 
- *     cdef DisplayMode* ret = NULL;             # <<<<<<<<<<<<<<
+ *     cdef EditorFileDialog_DisplayMode* ret = NULL;             # <<<<<<<<<<<<<<
  * 
  *     api_core.godot_method_bind_ptrcall(bind_editorfiledialog_get_display_mode,self.godot_owner,NULL,&ret)
  */
   __pyx_v_ret = NULL;
 
   /* "classes/EditorFileDialog.pyx":454
- *     cdef DisplayMode* ret = NULL;
+ *     cdef EditorFileDialog_DisplayMode* ret = NULL;
  * 
  *     api_core.godot_method_bind_ptrcall(bind_editorfiledialog_get_display_mode,self.godot_owner,NULL,&ret)             # <<<<<<<<<<<<<<
  *     hello('hallo2')
@@ -8429,7 +8429,7 @@ static PyObject *__pyx_pf_7classes_16EditorFileDialog_16EditorFileDialog_74get_d
  *   def  get_mode(self):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_2 = __Pyx_PyInt_From___pyx_t_7classes_16EditorFileDialog_DisplayMode((*__pyx_v_ret)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 456, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyInt_From___pyx_t_7classes_16EditorFileDialog_EditorFileDialog_DisplayMode((*__pyx_v_ret)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 456, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_r = __pyx_t_2;
   __pyx_t_2 = 0;
@@ -8477,7 +8477,7 @@ static PyObject *__pyx_pw_7classes_16EditorFileDialog_16EditorFileDialog_77get_m
 
 static PyObject *__pyx_pf_7classes_16EditorFileDialog_16EditorFileDialog_76get_mode(struct __pyx_obj_7classes_16EditorFileDialog_EditorFileDialog *__pyx_v_self) {
   CYTHON_UNUSED godot_object *__pyx_v__owner;
-  __pyx_t_7classes_16EditorFileDialog_Mode *__pyx_v_ret;
+  __pyx_t_7classes_16EditorFileDialog_EditorFileDialog_Mode *__pyx_v_ret;
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   godot_object *__pyx_t_1;
@@ -8492,7 +8492,7 @@ static PyObject *__pyx_pf_7classes_16EditorFileDialog_16EditorFileDialog_76get_m
  *   def  get_mode(self):
  *     cdef godot_object *_owner = self.godot_owner             # <<<<<<<<<<<<<<
  * 
- *     cdef Mode* ret = NULL;
+ *     cdef EditorFileDialog_Mode* ret = NULL;
  */
   __pyx_t_1 = __pyx_v_self->__pyx_base.__pyx_base.__pyx_base.__pyx_base.__pyx_base.__pyx_base.__pyx_base.__pyx_base.__pyx_base.godot_owner;
   __pyx_v__owner = __pyx_t_1;
@@ -8500,14 +8500,14 @@ static PyObject *__pyx_pf_7classes_16EditorFileDialog_16EditorFileDialog_76get_m
   /* "classes/EditorFileDialog.pyx":461
  *     cdef godot_object *_owner = self.godot_owner
  * 
- *     cdef Mode* ret = NULL;             # <<<<<<<<<<<<<<
+ *     cdef EditorFileDialog_Mode* ret = NULL;             # <<<<<<<<<<<<<<
  * 
  *     api_core.godot_method_bind_ptrcall(bind_editorfiledialog_get_mode,self.godot_owner,NULL,&ret)
  */
   __pyx_v_ret = NULL;
 
   /* "classes/EditorFileDialog.pyx":463
- *     cdef Mode* ret = NULL;
+ *     cdef EditorFileDialog_Mode* ret = NULL;
  * 
  *     api_core.godot_method_bind_ptrcall(bind_editorfiledialog_get_mode,self.godot_owner,NULL,&ret)             # <<<<<<<<<<<<<<
  *     hello('hallo2')
@@ -8532,7 +8532,7 @@ static PyObject *__pyx_pf_7classes_16EditorFileDialog_16EditorFileDialog_76get_m
  *   def  get_vbox(self):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_2 = __Pyx_PyInt_From___pyx_t_7classes_16EditorFileDialog_Mode((*__pyx_v_ret)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 465, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyInt_From___pyx_t_7classes_16EditorFileDialog_EditorFileDialog_Mode((*__pyx_v_ret)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 465, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_r = __pyx_t_2;
   __pyx_t_2 = 0;
@@ -10118,7 +10118,7 @@ static CYTHON_INLINE void __pyx_f_4core_7variant_7Variant_7Variant_new_variant(C
  *     cdef inline void new_variant(self, i):
  *         print("new_variant", type(i))             # <<<<<<<<<<<<<<
  * 
- * ctypedef enum Type:
+ * ctypedef enum Variant_Type:
  */
   __pyx_t_1 = PyTuple_New(2); if (unlikely(!__pyx_t_1)) __PYX_ERR(4, 15, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
@@ -11821,17 +11821,15 @@ static PyMethodDef __pyx_methods[] = {
 static int __pyx_import_star_set(PyObject *o, PyObject* py_name, char *name) {
   static const char* internal_type_names[] = {
     "AABB",
-    "Access",
     "Array",
-    "Axis",
     "Basis",
     "Color",
     "Dictionary",
-    "DisplayMode",
     "EditorFileDialog",
-    "Mode",
+    "EditorFileDialog_Access",
+    "EditorFileDialog_DisplayMode",
+    "EditorFileDialog_Mode",
     "NodePath",
-    "Operator",
     "Plane",
     "PoolByteArray",
     "PoolColorArray",
@@ -11847,10 +11845,12 @@ static int __pyx_import_star_set(PyObject *o, PyObject* py_name, char *name) {
     "String",
     "Transform",
     "Transform2D",
-    "Type",
     "Variant",
+    "Variant_Operator",
+    "Variant_Type",
     "Vector2",
     "Vector3",
+    "Vector3_Axis",
     "Wrapper",
     "bool",
     "godot_aabb",
@@ -14356,24 +14356,24 @@ bad:
     }
 
 /* CIntToPy */
-static CYTHON_INLINE PyObject* __Pyx_PyInt_From___pyx_t_7classes_16EditorFileDialog_Access(__pyx_t_7classes_16EditorFileDialog_Access value) {
-    const __pyx_t_7classes_16EditorFileDialog_Access neg_one = (__pyx_t_7classes_16EditorFileDialog_Access) ((__pyx_t_7classes_16EditorFileDialog_Access) 0 - (__pyx_t_7classes_16EditorFileDialog_Access) 1), const_zero = (__pyx_t_7classes_16EditorFileDialog_Access) 0;
+static CYTHON_INLINE PyObject* __Pyx_PyInt_From___pyx_t_7classes_16EditorFileDialog_EditorFileDialog_Access(__pyx_t_7classes_16EditorFileDialog_EditorFileDialog_Access value) {
+    const __pyx_t_7classes_16EditorFileDialog_EditorFileDialog_Access neg_one = (__pyx_t_7classes_16EditorFileDialog_EditorFileDialog_Access) ((__pyx_t_7classes_16EditorFileDialog_EditorFileDialog_Access) 0 - (__pyx_t_7classes_16EditorFileDialog_EditorFileDialog_Access) 1), const_zero = (__pyx_t_7classes_16EditorFileDialog_EditorFileDialog_Access) 0;
     const int is_unsigned = neg_one > const_zero;
     if (is_unsigned) {
-        if (sizeof(__pyx_t_7classes_16EditorFileDialog_Access) < sizeof(long)) {
+        if (sizeof(__pyx_t_7classes_16EditorFileDialog_EditorFileDialog_Access) < sizeof(long)) {
             return PyInt_FromLong((long) value);
-        } else if (sizeof(__pyx_t_7classes_16EditorFileDialog_Access) <= sizeof(unsigned long)) {
+        } else if (sizeof(__pyx_t_7classes_16EditorFileDialog_EditorFileDialog_Access) <= sizeof(unsigned long)) {
             return PyLong_FromUnsignedLong((unsigned long) value);
 #ifdef HAVE_LONG_LONG
-        } else if (sizeof(__pyx_t_7classes_16EditorFileDialog_Access) <= sizeof(unsigned PY_LONG_LONG)) {
+        } else if (sizeof(__pyx_t_7classes_16EditorFileDialog_EditorFileDialog_Access) <= sizeof(unsigned PY_LONG_LONG)) {
             return PyLong_FromUnsignedLongLong((unsigned PY_LONG_LONG) value);
 #endif
         }
     } else {
-        if (sizeof(__pyx_t_7classes_16EditorFileDialog_Access) <= sizeof(long)) {
+        if (sizeof(__pyx_t_7classes_16EditorFileDialog_EditorFileDialog_Access) <= sizeof(long)) {
             return PyInt_FromLong((long) value);
 #ifdef HAVE_LONG_LONG
-        } else if (sizeof(__pyx_t_7classes_16EditorFileDialog_Access) <= sizeof(PY_LONG_LONG)) {
+        } else if (sizeof(__pyx_t_7classes_16EditorFileDialog_EditorFileDialog_Access) <= sizeof(PY_LONG_LONG)) {
             return PyLong_FromLongLong((PY_LONG_LONG) value);
 #endif
         }
@@ -14381,30 +14381,30 @@ static CYTHON_INLINE PyObject* __Pyx_PyInt_From___pyx_t_7classes_16EditorFileDia
     {
         int one = 1; int little = (int)*(unsigned char *)&one;
         unsigned char *bytes = (unsigned char *)&value;
-        return _PyLong_FromByteArray(bytes, sizeof(__pyx_t_7classes_16EditorFileDialog_Access),
+        return _PyLong_FromByteArray(bytes, sizeof(__pyx_t_7classes_16EditorFileDialog_EditorFileDialog_Access),
                                      little, !is_unsigned);
     }
 }
 
 /* CIntToPy */
-static CYTHON_INLINE PyObject* __Pyx_PyInt_From___pyx_t_7classes_16EditorFileDialog_DisplayMode(__pyx_t_7classes_16EditorFileDialog_DisplayMode value) {
-    const __pyx_t_7classes_16EditorFileDialog_DisplayMode neg_one = (__pyx_t_7classes_16EditorFileDialog_DisplayMode) ((__pyx_t_7classes_16EditorFileDialog_DisplayMode) 0 - (__pyx_t_7classes_16EditorFileDialog_DisplayMode) 1), const_zero = (__pyx_t_7classes_16EditorFileDialog_DisplayMode) 0;
+static CYTHON_INLINE PyObject* __Pyx_PyInt_From___pyx_t_7classes_16EditorFileDialog_EditorFileDialog_DisplayMode(__pyx_t_7classes_16EditorFileDialog_EditorFileDialog_DisplayMode value) {
+    const __pyx_t_7classes_16EditorFileDialog_EditorFileDialog_DisplayMode neg_one = (__pyx_t_7classes_16EditorFileDialog_EditorFileDialog_DisplayMode) ((__pyx_t_7classes_16EditorFileDialog_EditorFileDialog_DisplayMode) 0 - (__pyx_t_7classes_16EditorFileDialog_EditorFileDialog_DisplayMode) 1), const_zero = (__pyx_t_7classes_16EditorFileDialog_EditorFileDialog_DisplayMode) 0;
     const int is_unsigned = neg_one > const_zero;
     if (is_unsigned) {
-        if (sizeof(__pyx_t_7classes_16EditorFileDialog_DisplayMode) < sizeof(long)) {
+        if (sizeof(__pyx_t_7classes_16EditorFileDialog_EditorFileDialog_DisplayMode) < sizeof(long)) {
             return PyInt_FromLong((long) value);
-        } else if (sizeof(__pyx_t_7classes_16EditorFileDialog_DisplayMode) <= sizeof(unsigned long)) {
+        } else if (sizeof(__pyx_t_7classes_16EditorFileDialog_EditorFileDialog_DisplayMode) <= sizeof(unsigned long)) {
             return PyLong_FromUnsignedLong((unsigned long) value);
 #ifdef HAVE_LONG_LONG
-        } else if (sizeof(__pyx_t_7classes_16EditorFileDialog_DisplayMode) <= sizeof(unsigned PY_LONG_LONG)) {
+        } else if (sizeof(__pyx_t_7classes_16EditorFileDialog_EditorFileDialog_DisplayMode) <= sizeof(unsigned PY_LONG_LONG)) {
             return PyLong_FromUnsignedLongLong((unsigned PY_LONG_LONG) value);
 #endif
         }
     } else {
-        if (sizeof(__pyx_t_7classes_16EditorFileDialog_DisplayMode) <= sizeof(long)) {
+        if (sizeof(__pyx_t_7classes_16EditorFileDialog_EditorFileDialog_DisplayMode) <= sizeof(long)) {
             return PyInt_FromLong((long) value);
 #ifdef HAVE_LONG_LONG
-        } else if (sizeof(__pyx_t_7classes_16EditorFileDialog_DisplayMode) <= sizeof(PY_LONG_LONG)) {
+        } else if (sizeof(__pyx_t_7classes_16EditorFileDialog_EditorFileDialog_DisplayMode) <= sizeof(PY_LONG_LONG)) {
             return PyLong_FromLongLong((PY_LONG_LONG) value);
 #endif
         }
@@ -14412,30 +14412,30 @@ static CYTHON_INLINE PyObject* __Pyx_PyInt_From___pyx_t_7classes_16EditorFileDia
     {
         int one = 1; int little = (int)*(unsigned char *)&one;
         unsigned char *bytes = (unsigned char *)&value;
-        return _PyLong_FromByteArray(bytes, sizeof(__pyx_t_7classes_16EditorFileDialog_DisplayMode),
+        return _PyLong_FromByteArray(bytes, sizeof(__pyx_t_7classes_16EditorFileDialog_EditorFileDialog_DisplayMode),
                                      little, !is_unsigned);
     }
 }
 
 /* CIntToPy */
-static CYTHON_INLINE PyObject* __Pyx_PyInt_From___pyx_t_7classes_16EditorFileDialog_Mode(__pyx_t_7classes_16EditorFileDialog_Mode value) {
-    const __pyx_t_7classes_16EditorFileDialog_Mode neg_one = (__pyx_t_7classes_16EditorFileDialog_Mode) ((__pyx_t_7classes_16EditorFileDialog_Mode) 0 - (__pyx_t_7classes_16EditorFileDialog_Mode) 1), const_zero = (__pyx_t_7classes_16EditorFileDialog_Mode) 0;
+static CYTHON_INLINE PyObject* __Pyx_PyInt_From___pyx_t_7classes_16EditorFileDialog_EditorFileDialog_Mode(__pyx_t_7classes_16EditorFileDialog_EditorFileDialog_Mode value) {
+    const __pyx_t_7classes_16EditorFileDialog_EditorFileDialog_Mode neg_one = (__pyx_t_7classes_16EditorFileDialog_EditorFileDialog_Mode) ((__pyx_t_7classes_16EditorFileDialog_EditorFileDialog_Mode) 0 - (__pyx_t_7classes_16EditorFileDialog_EditorFileDialog_Mode) 1), const_zero = (__pyx_t_7classes_16EditorFileDialog_EditorFileDialog_Mode) 0;
     const int is_unsigned = neg_one > const_zero;
     if (is_unsigned) {
-        if (sizeof(__pyx_t_7classes_16EditorFileDialog_Mode) < sizeof(long)) {
+        if (sizeof(__pyx_t_7classes_16EditorFileDialog_EditorFileDialog_Mode) < sizeof(long)) {
             return PyInt_FromLong((long) value);
-        } else if (sizeof(__pyx_t_7classes_16EditorFileDialog_Mode) <= sizeof(unsigned long)) {
+        } else if (sizeof(__pyx_t_7classes_16EditorFileDialog_EditorFileDialog_Mode) <= sizeof(unsigned long)) {
             return PyLong_FromUnsignedLong((unsigned long) value);
 #ifdef HAVE_LONG_LONG
-        } else if (sizeof(__pyx_t_7classes_16EditorFileDialog_Mode) <= sizeof(unsigned PY_LONG_LONG)) {
+        } else if (sizeof(__pyx_t_7classes_16EditorFileDialog_EditorFileDialog_Mode) <= sizeof(unsigned PY_LONG_LONG)) {
             return PyLong_FromUnsignedLongLong((unsigned PY_LONG_LONG) value);
 #endif
         }
     } else {
-        if (sizeof(__pyx_t_7classes_16EditorFileDialog_Mode) <= sizeof(long)) {
+        if (sizeof(__pyx_t_7classes_16EditorFileDialog_EditorFileDialog_Mode) <= sizeof(long)) {
             return PyInt_FromLong((long) value);
 #ifdef HAVE_LONG_LONG
-        } else if (sizeof(__pyx_t_7classes_16EditorFileDialog_Mode) <= sizeof(PY_LONG_LONG)) {
+        } else if (sizeof(__pyx_t_7classes_16EditorFileDialog_EditorFileDialog_Mode) <= sizeof(PY_LONG_LONG)) {
             return PyLong_FromLongLong((PY_LONG_LONG) value);
 #endif
         }
@@ -14443,7 +14443,7 @@ static CYTHON_INLINE PyObject* __Pyx_PyInt_From___pyx_t_7classes_16EditorFileDia
     {
         int one = 1; int little = (int)*(unsigned char *)&one;
         unsigned char *bytes = (unsigned char *)&value;
-        return _PyLong_FromByteArray(bytes, sizeof(__pyx_t_7classes_16EditorFileDialog_Mode),
+        return _PyLong_FromByteArray(bytes, sizeof(__pyx_t_7classes_16EditorFileDialog_EditorFileDialog_Mode),
                                      little, !is_unsigned);
     }
 }

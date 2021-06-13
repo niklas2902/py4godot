@@ -900,50 +900,50 @@ struct __pyx_obj_7classes_8Viewport_Viewport;
 /* "classes/Object.pxd":7
  * cdef class Object(Wrapper):
  *     pass
- * ctypedef enum ConnectFlags :CONNECT_DEFERRED, CONNECT_PERSIST, CONNECT_ONESHOT, CONNECT_REFERENCE_COUNTED,             # <<<<<<<<<<<<<<
+ * ctypedef enum Object_ConnectFlags :CONNECT_DEFERRED, CONNECT_PERSIST, CONNECT_ONESHOT, CONNECT_REFERENCE_COUNTED,             # <<<<<<<<<<<<<<
  */
-enum __pyx_t_7classes_6Object_ConnectFlags {
+enum __pyx_t_7classes_6Object_Object_ConnectFlags {
   __pyx_e_7classes_6Object_CONNECT_DEFERRED,
   __pyx_e_7classes_6Object_CONNECT_PERSIST,
   __pyx_e_7classes_6Object_CONNECT_ONESHOT,
   __pyx_e_7classes_6Object_CONNECT_REFERENCE_COUNTED
 };
-typedef enum __pyx_t_7classes_6Object_ConnectFlags __pyx_t_7classes_6Object_ConnectFlags;
+typedef enum __pyx_t_7classes_6Object_Object_ConnectFlags __pyx_t_7classes_6Object_Object_ConnectFlags;
 
 /* "classes/Node.pxd":7
  * cdef class Node(classes.Object.Object):
  *     pass
- * ctypedef enum PauseMode :PAUSE_MODE_INHERIT, PAUSE_MODE_STOP, PAUSE_MODE_PROCESS,             # <<<<<<<<<<<<<<
- * ctypedef enum DuplicateFlags :DUPLICATE_SIGNALS, DUPLICATE_GROUPS, DUPLICATE_SCRIPTS, DUPLICATE_USE_INSTANCING,
+ * ctypedef enum Node_PauseMode :PAUSE_MODE_INHERIT, PAUSE_MODE_STOP, PAUSE_MODE_PROCESS,             # <<<<<<<<<<<<<<
+ * ctypedef enum Node_DuplicateFlags :DUPLICATE_SIGNALS, DUPLICATE_GROUPS, DUPLICATE_SCRIPTS, DUPLICATE_USE_INSTANCING,
  */
-enum __pyx_t_7classes_4Node_PauseMode {
+enum __pyx_t_7classes_4Node_Node_PauseMode {
   __pyx_e_7classes_4Node_PAUSE_MODE_INHERIT,
   __pyx_e_7classes_4Node_PAUSE_MODE_STOP,
   __pyx_e_7classes_4Node_PAUSE_MODE_PROCESS
 };
-typedef enum __pyx_t_7classes_4Node_PauseMode __pyx_t_7classes_4Node_PauseMode;
+typedef enum __pyx_t_7classes_4Node_Node_PauseMode __pyx_t_7classes_4Node_Node_PauseMode;
 
 /* "classes/Node.pxd":8
  *     pass
- * ctypedef enum PauseMode :PAUSE_MODE_INHERIT, PAUSE_MODE_STOP, PAUSE_MODE_PROCESS,
- * ctypedef enum DuplicateFlags :DUPLICATE_SIGNALS, DUPLICATE_GROUPS, DUPLICATE_SCRIPTS, DUPLICATE_USE_INSTANCING,             # <<<<<<<<<<<<<<
+ * ctypedef enum Node_PauseMode :PAUSE_MODE_INHERIT, PAUSE_MODE_STOP, PAUSE_MODE_PROCESS,
+ * ctypedef enum Node_DuplicateFlags :DUPLICATE_SIGNALS, DUPLICATE_GROUPS, DUPLICATE_SCRIPTS, DUPLICATE_USE_INSTANCING,             # <<<<<<<<<<<<<<
  */
-enum __pyx_t_7classes_4Node_DuplicateFlags {
+enum __pyx_t_7classes_4Node_Node_DuplicateFlags {
   __pyx_e_7classes_4Node_DUPLICATE_SIGNALS,
   __pyx_e_7classes_4Node_DUPLICATE_GROUPS,
   __pyx_e_7classes_4Node_DUPLICATE_SCRIPTS,
   __pyx_e_7classes_4Node_DUPLICATE_USE_INSTANCING
 };
-typedef enum __pyx_t_7classes_4Node_DuplicateFlags __pyx_t_7classes_4Node_DuplicateFlags;
+typedef enum __pyx_t_7classes_4Node_Node_DuplicateFlags __pyx_t_7classes_4Node_Node_DuplicateFlags;
 
 /* "core/variant/Variant.pxd":17
  *         print("new_variant", type(i))
  * 
- * ctypedef enum Type:             # <<<<<<<<<<<<<<
+ * ctypedef enum Variant_Type:             # <<<<<<<<<<<<<<
  *     NIL,
  *     # atomic types
  */
-enum __pyx_t_4core_7variant_7Variant_Type {
+enum __pyx_t_4core_7variant_7Variant_Variant_Type {
   __pyx_e_4core_7variant_7Variant_NIL,
   __pyx_e_4core_7variant_7Variant_BOOL,
   __pyx_e_4core_7variant_7Variant_INT,
@@ -973,16 +973,16 @@ enum __pyx_t_4core_7variant_7Variant_Type {
   __pyx_e_4core_7variant_7Variant_POOL_COLOR_ARRAY,
   __pyx_e_4core_7variant_7Variant_VARIANT_MAX
 };
-typedef enum __pyx_t_4core_7variant_7Variant_Type __pyx_t_4core_7variant_7Variant_Type;
+typedef enum __pyx_t_4core_7variant_7Variant_Variant_Type __pyx_t_4core_7variant_7Variant_Variant_Type;
 
 /* "core/variant/Variant.pxd":58
  * 
  * 
- * ctypedef enum Operator :             # <<<<<<<<<<<<<<
+ * ctypedef enum Variant_Operator :             # <<<<<<<<<<<<<<
  * 
  *     #comparation
  */
-enum __pyx_t_4core_7variant_7Variant_Operator {
+enum __pyx_t_4core_7variant_7Variant_Variant_Operator {
   __pyx_e_4core_7variant_7Variant_OP_EQUAL,
   __pyx_e_4core_7variant_7Variant_OP_NOT_EQUAL,
   __pyx_e_4core_7variant_7Variant_OP_LESS,
@@ -1010,44 +1010,44 @@ enum __pyx_t_4core_7variant_7Variant_Operator {
   __pyx_e_4core_7variant_7Variant_OP_IN,
   __pyx_e_4core_7variant_7Variant_OP_MAX
 };
-typedef enum __pyx_t_4core_7variant_7Variant_Operator __pyx_t_4core_7variant_7Variant_Operator;
+typedef enum __pyx_t_4core_7variant_7Variant_Variant_Operator __pyx_t_4core_7variant_7Variant_Variant_Operator;
 
 /* "core/vector3/Vector3.pxd":15
  * 
  * 
- * ctypedef enum Axis :             # <<<<<<<<<<<<<<
- *     AXIS_X,
- *     AXIS_Y,
+ * ctypedef enum Vector3_Axis :             # <<<<<<<<<<<<<<
+ *     Vector3_AXIS_X,
+ *     Vector3_AXIS_Y,
  */
-enum __pyx_t_4core_7vector3_7Vector3_Axis {
-  __pyx_e_4core_7vector3_7Vector3_AXIS_X,
-  __pyx_e_4core_7vector3_7Vector3_AXIS_Y,
-  __pyx_e_4core_7vector3_7Vector3_AXIS_Z
+enum __pyx_t_4core_7vector3_7Vector3_Vector3_Axis {
+  __pyx_e_4core_7vector3_7Vector3_Vector3_AXIS_X,
+  __pyx_e_4core_7vector3_7Vector3_Vector3_AXIS_Y,
+  __pyx_e_4core_7vector3_7Vector3_Vector3_AXIS_Z
 };
-typedef enum __pyx_t_4core_7vector3_7Vector3_Axis __pyx_t_4core_7vector3_7Vector3_Axis;
+typedef enum __pyx_t_4core_7vector3_7Vector3_Vector3_Axis __pyx_t_4core_7vector3_7Vector3_Vector3_Axis;
 
 /* "classes/Viewport.pxd":7
  * cdef class Viewport(classes.Node.Node):
  *     pass
- * ctypedef enum ClearMode :CLEAR_MODE_ALWAYS, CLEAR_MODE_NEVER, CLEAR_MODE_ONLY_NEXT_FRAME,             # <<<<<<<<<<<<<<
- * ctypedef enum RenderInfo :RENDER_INFO_OBJECTS_IN_FRAME, RENDER_INFO_VERTICES_IN_FRAME, RENDER_INFO_MATERIAL_CHANGES_IN_FRAME, RENDER_INFO_SHADER_CHANGES_IN_FRAME, RENDER_INFO_SURFACE_CHANGES_IN_FRAME, RENDER_INFO_DRAW_CALLS_IN_FRAME, RENDER_INFO_MAX,
- * ctypedef enum Usage :USAGE_2D, USAGE_2D_NO_SAMPLING, USAGE_3D, USAGE_3D_NO_EFFECTS,
+ * ctypedef enum Viewport_ClearMode :CLEAR_MODE_ALWAYS, CLEAR_MODE_NEVER, CLEAR_MODE_ONLY_NEXT_FRAME,             # <<<<<<<<<<<<<<
+ * ctypedef enum Viewport_RenderInfo :RENDER_INFO_OBJECTS_IN_FRAME, RENDER_INFO_VERTICES_IN_FRAME, RENDER_INFO_MATERIAL_CHANGES_IN_FRAME, RENDER_INFO_SHADER_CHANGES_IN_FRAME, RENDER_INFO_SURFACE_CHANGES_IN_FRAME, RENDER_INFO_DRAW_CALLS_IN_FRAME, RENDER_INFO_MAX,
+ * ctypedef enum Viewport_Usage :USAGE_2D, USAGE_2D_NO_SAMPLING, USAGE_3D, USAGE_3D_NO_EFFECTS,
  */
-enum __pyx_t_7classes_8Viewport_ClearMode {
+enum __pyx_t_7classes_8Viewport_Viewport_ClearMode {
   __pyx_e_7classes_8Viewport_CLEAR_MODE_ALWAYS,
   __pyx_e_7classes_8Viewport_CLEAR_MODE_NEVER,
   __pyx_e_7classes_8Viewport_CLEAR_MODE_ONLY_NEXT_FRAME
 };
-typedef enum __pyx_t_7classes_8Viewport_ClearMode __pyx_t_7classes_8Viewport_ClearMode;
+typedef enum __pyx_t_7classes_8Viewport_Viewport_ClearMode __pyx_t_7classes_8Viewport_Viewport_ClearMode;
 
 /* "classes/Viewport.pxd":8
  *     pass
- * ctypedef enum ClearMode :CLEAR_MODE_ALWAYS, CLEAR_MODE_NEVER, CLEAR_MODE_ONLY_NEXT_FRAME,
- * ctypedef enum RenderInfo :RENDER_INFO_OBJECTS_IN_FRAME, RENDER_INFO_VERTICES_IN_FRAME, RENDER_INFO_MATERIAL_CHANGES_IN_FRAME, RENDER_INFO_SHADER_CHANGES_IN_FRAME, RENDER_INFO_SURFACE_CHANGES_IN_FRAME, RENDER_INFO_DRAW_CALLS_IN_FRAME, RENDER_INFO_MAX,             # <<<<<<<<<<<<<<
- * ctypedef enum Usage :USAGE_2D, USAGE_2D_NO_SAMPLING, USAGE_3D, USAGE_3D_NO_EFFECTS,
- * ctypedef enum DebugDraw :DEBUG_DRAW_DISABLED, DEBUG_DRAW_UNSHADED, DEBUG_DRAW_OVERDRAW, DEBUG_DRAW_WIREFRAME,
+ * ctypedef enum Viewport_ClearMode :CLEAR_MODE_ALWAYS, CLEAR_MODE_NEVER, CLEAR_MODE_ONLY_NEXT_FRAME,
+ * ctypedef enum Viewport_RenderInfo :RENDER_INFO_OBJECTS_IN_FRAME, RENDER_INFO_VERTICES_IN_FRAME, RENDER_INFO_MATERIAL_CHANGES_IN_FRAME, RENDER_INFO_SHADER_CHANGES_IN_FRAME, RENDER_INFO_SURFACE_CHANGES_IN_FRAME, RENDER_INFO_DRAW_CALLS_IN_FRAME, RENDER_INFO_MAX,             # <<<<<<<<<<<<<<
+ * ctypedef enum Viewport_Usage :USAGE_2D, USAGE_2D_NO_SAMPLING, USAGE_3D, USAGE_3D_NO_EFFECTS,
+ * ctypedef enum Viewport_DebugDraw :DEBUG_DRAW_DISABLED, DEBUG_DRAW_UNSHADED, DEBUG_DRAW_OVERDRAW, DEBUG_DRAW_WIREFRAME,
  */
-enum __pyx_t_7classes_8Viewport_RenderInfo {
+enum __pyx_t_7classes_8Viewport_Viewport_RenderInfo {
   __pyx_e_7classes_8Viewport_RENDER_INFO_OBJECTS_IN_FRAME,
   __pyx_e_7classes_8Viewport_RENDER_INFO_VERTICES_IN_FRAME,
   __pyx_e_7classes_8Viewport_RENDER_INFO_MATERIAL_CHANGES_IN_FRAME,
@@ -1056,46 +1056,46 @@ enum __pyx_t_7classes_8Viewport_RenderInfo {
   __pyx_e_7classes_8Viewport_RENDER_INFO_DRAW_CALLS_IN_FRAME,
   __pyx_e_7classes_8Viewport_RENDER_INFO_MAX
 };
-typedef enum __pyx_t_7classes_8Viewport_RenderInfo __pyx_t_7classes_8Viewport_RenderInfo;
+typedef enum __pyx_t_7classes_8Viewport_Viewport_RenderInfo __pyx_t_7classes_8Viewport_Viewport_RenderInfo;
 
 /* "classes/Viewport.pxd":9
- * ctypedef enum ClearMode :CLEAR_MODE_ALWAYS, CLEAR_MODE_NEVER, CLEAR_MODE_ONLY_NEXT_FRAME,
- * ctypedef enum RenderInfo :RENDER_INFO_OBJECTS_IN_FRAME, RENDER_INFO_VERTICES_IN_FRAME, RENDER_INFO_MATERIAL_CHANGES_IN_FRAME, RENDER_INFO_SHADER_CHANGES_IN_FRAME, RENDER_INFO_SURFACE_CHANGES_IN_FRAME, RENDER_INFO_DRAW_CALLS_IN_FRAME, RENDER_INFO_MAX,
- * ctypedef enum Usage :USAGE_2D, USAGE_2D_NO_SAMPLING, USAGE_3D, USAGE_3D_NO_EFFECTS,             # <<<<<<<<<<<<<<
- * ctypedef enum DebugDraw :DEBUG_DRAW_DISABLED, DEBUG_DRAW_UNSHADED, DEBUG_DRAW_OVERDRAW, DEBUG_DRAW_WIREFRAME,
- * ctypedef enum ShadowAtlasQuadrantSubdiv :SHADOW_ATLAS_QUADRANT_SUBDIV_DISABLED, SHADOW_ATLAS_QUADRANT_SUBDIV_1, SHADOW_ATLAS_QUADRANT_SUBDIV_4, SHADOW_ATLAS_QUADRANT_SUBDIV_16, SHADOW_ATLAS_QUADRANT_SUBDIV_64, SHADOW_ATLAS_QUADRANT_SUBDIV_256, SHADOW_ATLAS_QUADRANT_SUBDIV_1024, SHADOW_ATLAS_QUADRANT_SUBDIV_MAX,
+ * ctypedef enum Viewport_ClearMode :CLEAR_MODE_ALWAYS, CLEAR_MODE_NEVER, CLEAR_MODE_ONLY_NEXT_FRAME,
+ * ctypedef enum Viewport_RenderInfo :RENDER_INFO_OBJECTS_IN_FRAME, RENDER_INFO_VERTICES_IN_FRAME, RENDER_INFO_MATERIAL_CHANGES_IN_FRAME, RENDER_INFO_SHADER_CHANGES_IN_FRAME, RENDER_INFO_SURFACE_CHANGES_IN_FRAME, RENDER_INFO_DRAW_CALLS_IN_FRAME, RENDER_INFO_MAX,
+ * ctypedef enum Viewport_Usage :USAGE_2D, USAGE_2D_NO_SAMPLING, USAGE_3D, USAGE_3D_NO_EFFECTS,             # <<<<<<<<<<<<<<
+ * ctypedef enum Viewport_DebugDraw :DEBUG_DRAW_DISABLED, DEBUG_DRAW_UNSHADED, DEBUG_DRAW_OVERDRAW, DEBUG_DRAW_WIREFRAME,
+ * ctypedef enum Viewport_ShadowAtlasQuadrantSubdiv :SHADOW_ATLAS_QUADRANT_SUBDIV_DISABLED, SHADOW_ATLAS_QUADRANT_SUBDIV_1, SHADOW_ATLAS_QUADRANT_SUBDIV_4, SHADOW_ATLAS_QUADRANT_SUBDIV_16, SHADOW_ATLAS_QUADRANT_SUBDIV_64, SHADOW_ATLAS_QUADRANT_SUBDIV_256, SHADOW_ATLAS_QUADRANT_SUBDIV_1024, SHADOW_ATLAS_QUADRANT_SUBDIV_MAX,
  */
-enum __pyx_t_7classes_8Viewport_Usage {
+enum __pyx_t_7classes_8Viewport_Viewport_Usage {
   __pyx_e_7classes_8Viewport_USAGE_2D,
   __pyx_e_7classes_8Viewport_USAGE_2D_NO_SAMPLING,
   __pyx_e_7classes_8Viewport_USAGE_3D,
   __pyx_e_7classes_8Viewport_USAGE_3D_NO_EFFECTS
 };
-typedef enum __pyx_t_7classes_8Viewport_Usage __pyx_t_7classes_8Viewport_Usage;
+typedef enum __pyx_t_7classes_8Viewport_Viewport_Usage __pyx_t_7classes_8Viewport_Viewport_Usage;
 
 /* "classes/Viewport.pxd":10
- * ctypedef enum RenderInfo :RENDER_INFO_OBJECTS_IN_FRAME, RENDER_INFO_VERTICES_IN_FRAME, RENDER_INFO_MATERIAL_CHANGES_IN_FRAME, RENDER_INFO_SHADER_CHANGES_IN_FRAME, RENDER_INFO_SURFACE_CHANGES_IN_FRAME, RENDER_INFO_DRAW_CALLS_IN_FRAME, RENDER_INFO_MAX,
- * ctypedef enum Usage :USAGE_2D, USAGE_2D_NO_SAMPLING, USAGE_3D, USAGE_3D_NO_EFFECTS,
- * ctypedef enum DebugDraw :DEBUG_DRAW_DISABLED, DEBUG_DRAW_UNSHADED, DEBUG_DRAW_OVERDRAW, DEBUG_DRAW_WIREFRAME,             # <<<<<<<<<<<<<<
- * ctypedef enum ShadowAtlasQuadrantSubdiv :SHADOW_ATLAS_QUADRANT_SUBDIV_DISABLED, SHADOW_ATLAS_QUADRANT_SUBDIV_1, SHADOW_ATLAS_QUADRANT_SUBDIV_4, SHADOW_ATLAS_QUADRANT_SUBDIV_16, SHADOW_ATLAS_QUADRANT_SUBDIV_64, SHADOW_ATLAS_QUADRANT_SUBDIV_256, SHADOW_ATLAS_QUADRANT_SUBDIV_1024, SHADOW_ATLAS_QUADRANT_SUBDIV_MAX,
- * ctypedef enum UpdateMode :UPDATE_DISABLED, UPDATE_ONCE, UPDATE_WHEN_VISIBLE, UPDATE_ALWAYS,
+ * ctypedef enum Viewport_RenderInfo :RENDER_INFO_OBJECTS_IN_FRAME, RENDER_INFO_VERTICES_IN_FRAME, RENDER_INFO_MATERIAL_CHANGES_IN_FRAME, RENDER_INFO_SHADER_CHANGES_IN_FRAME, RENDER_INFO_SURFACE_CHANGES_IN_FRAME, RENDER_INFO_DRAW_CALLS_IN_FRAME, RENDER_INFO_MAX,
+ * ctypedef enum Viewport_Usage :USAGE_2D, USAGE_2D_NO_SAMPLING, USAGE_3D, USAGE_3D_NO_EFFECTS,
+ * ctypedef enum Viewport_DebugDraw :DEBUG_DRAW_DISABLED, DEBUG_DRAW_UNSHADED, DEBUG_DRAW_OVERDRAW, DEBUG_DRAW_WIREFRAME,             # <<<<<<<<<<<<<<
+ * ctypedef enum Viewport_ShadowAtlasQuadrantSubdiv :SHADOW_ATLAS_QUADRANT_SUBDIV_DISABLED, SHADOW_ATLAS_QUADRANT_SUBDIV_1, SHADOW_ATLAS_QUADRANT_SUBDIV_4, SHADOW_ATLAS_QUADRANT_SUBDIV_16, SHADOW_ATLAS_QUADRANT_SUBDIV_64, SHADOW_ATLAS_QUADRANT_SUBDIV_256, SHADOW_ATLAS_QUADRANT_SUBDIV_1024, SHADOW_ATLAS_QUADRANT_SUBDIV_MAX,
+ * ctypedef enum Viewport_UpdateMode :UPDATE_DISABLED, UPDATE_ONCE, UPDATE_WHEN_VISIBLE, UPDATE_ALWAYS,
  */
-enum __pyx_t_7classes_8Viewport_DebugDraw {
+enum __pyx_t_7classes_8Viewport_Viewport_DebugDraw {
   __pyx_e_7classes_8Viewport_DEBUG_DRAW_DISABLED,
   __pyx_e_7classes_8Viewport_DEBUG_DRAW_UNSHADED,
   __pyx_e_7classes_8Viewport_DEBUG_DRAW_OVERDRAW,
   __pyx_e_7classes_8Viewport_DEBUG_DRAW_WIREFRAME
 };
-typedef enum __pyx_t_7classes_8Viewport_DebugDraw __pyx_t_7classes_8Viewport_DebugDraw;
+typedef enum __pyx_t_7classes_8Viewport_Viewport_DebugDraw __pyx_t_7classes_8Viewport_Viewport_DebugDraw;
 
 /* "classes/Viewport.pxd":11
- * ctypedef enum Usage :USAGE_2D, USAGE_2D_NO_SAMPLING, USAGE_3D, USAGE_3D_NO_EFFECTS,
- * ctypedef enum DebugDraw :DEBUG_DRAW_DISABLED, DEBUG_DRAW_UNSHADED, DEBUG_DRAW_OVERDRAW, DEBUG_DRAW_WIREFRAME,
- * ctypedef enum ShadowAtlasQuadrantSubdiv :SHADOW_ATLAS_QUADRANT_SUBDIV_DISABLED, SHADOW_ATLAS_QUADRANT_SUBDIV_1, SHADOW_ATLAS_QUADRANT_SUBDIV_4, SHADOW_ATLAS_QUADRANT_SUBDIV_16, SHADOW_ATLAS_QUADRANT_SUBDIV_64, SHADOW_ATLAS_QUADRANT_SUBDIV_256, SHADOW_ATLAS_QUADRANT_SUBDIV_1024, SHADOW_ATLAS_QUADRANT_SUBDIV_MAX,             # <<<<<<<<<<<<<<
- * ctypedef enum UpdateMode :UPDATE_DISABLED, UPDATE_ONCE, UPDATE_WHEN_VISIBLE, UPDATE_ALWAYS,
- * ctypedef enum MSAA :MSAA_DISABLED, MSAA_2X, MSAA_4X, MSAA_8X, MSAA_16X,
+ * ctypedef enum Viewport_Usage :USAGE_2D, USAGE_2D_NO_SAMPLING, USAGE_3D, USAGE_3D_NO_EFFECTS,
+ * ctypedef enum Viewport_DebugDraw :DEBUG_DRAW_DISABLED, DEBUG_DRAW_UNSHADED, DEBUG_DRAW_OVERDRAW, DEBUG_DRAW_WIREFRAME,
+ * ctypedef enum Viewport_ShadowAtlasQuadrantSubdiv :SHADOW_ATLAS_QUADRANT_SUBDIV_DISABLED, SHADOW_ATLAS_QUADRANT_SUBDIV_1, SHADOW_ATLAS_QUADRANT_SUBDIV_4, SHADOW_ATLAS_QUADRANT_SUBDIV_16, SHADOW_ATLAS_QUADRANT_SUBDIV_64, SHADOW_ATLAS_QUADRANT_SUBDIV_256, SHADOW_ATLAS_QUADRANT_SUBDIV_1024, SHADOW_ATLAS_QUADRANT_SUBDIV_MAX,             # <<<<<<<<<<<<<<
+ * ctypedef enum Viewport_UpdateMode :UPDATE_DISABLED, UPDATE_ONCE, UPDATE_WHEN_VISIBLE, UPDATE_ALWAYS,
+ * ctypedef enum Viewport_MSAA :MSAA_DISABLED, MSAA_2X, MSAA_4X, MSAA_8X, MSAA_16X,
  */
-enum __pyx_t_7classes_8Viewport_ShadowAtlasQuadrantSubdiv {
+enum __pyx_t_7classes_8Viewport_Viewport_ShadowAtlasQuadrantSubdiv {
   __pyx_e_7classes_8Viewport_SHADOW_ATLAS_QUADRANT_SUBDIV_DISABLED,
   __pyx_e_7classes_8Viewport_SHADOW_ATLAS_QUADRANT_SUBDIV_1,
   __pyx_e_7classes_8Viewport_SHADOW_ATLAS_QUADRANT_SUBDIV_4,
@@ -1105,35 +1105,35 @@ enum __pyx_t_7classes_8Viewport_ShadowAtlasQuadrantSubdiv {
   __pyx_e_7classes_8Viewport_SHADOW_ATLAS_QUADRANT_SUBDIV_1024,
   __pyx_e_7classes_8Viewport_SHADOW_ATLAS_QUADRANT_SUBDIV_MAX
 };
-typedef enum __pyx_t_7classes_8Viewport_ShadowAtlasQuadrantSubdiv __pyx_t_7classes_8Viewport_ShadowAtlasQuadrantSubdiv;
+typedef enum __pyx_t_7classes_8Viewport_Viewport_ShadowAtlasQuadrantSubdiv __pyx_t_7classes_8Viewport_Viewport_ShadowAtlasQuadrantSubdiv;
 
 /* "classes/Viewport.pxd":12
- * ctypedef enum DebugDraw :DEBUG_DRAW_DISABLED, DEBUG_DRAW_UNSHADED, DEBUG_DRAW_OVERDRAW, DEBUG_DRAW_WIREFRAME,
- * ctypedef enum ShadowAtlasQuadrantSubdiv :SHADOW_ATLAS_QUADRANT_SUBDIV_DISABLED, SHADOW_ATLAS_QUADRANT_SUBDIV_1, SHADOW_ATLAS_QUADRANT_SUBDIV_4, SHADOW_ATLAS_QUADRANT_SUBDIV_16, SHADOW_ATLAS_QUADRANT_SUBDIV_64, SHADOW_ATLAS_QUADRANT_SUBDIV_256, SHADOW_ATLAS_QUADRANT_SUBDIV_1024, SHADOW_ATLAS_QUADRANT_SUBDIV_MAX,
- * ctypedef enum UpdateMode :UPDATE_DISABLED, UPDATE_ONCE, UPDATE_WHEN_VISIBLE, UPDATE_ALWAYS,             # <<<<<<<<<<<<<<
- * ctypedef enum MSAA :MSAA_DISABLED, MSAA_2X, MSAA_4X, MSAA_8X, MSAA_16X,
+ * ctypedef enum Viewport_DebugDraw :DEBUG_DRAW_DISABLED, DEBUG_DRAW_UNSHADED, DEBUG_DRAW_OVERDRAW, DEBUG_DRAW_WIREFRAME,
+ * ctypedef enum Viewport_ShadowAtlasQuadrantSubdiv :SHADOW_ATLAS_QUADRANT_SUBDIV_DISABLED, SHADOW_ATLAS_QUADRANT_SUBDIV_1, SHADOW_ATLAS_QUADRANT_SUBDIV_4, SHADOW_ATLAS_QUADRANT_SUBDIV_16, SHADOW_ATLAS_QUADRANT_SUBDIV_64, SHADOW_ATLAS_QUADRANT_SUBDIV_256, SHADOW_ATLAS_QUADRANT_SUBDIV_1024, SHADOW_ATLAS_QUADRANT_SUBDIV_MAX,
+ * ctypedef enum Viewport_UpdateMode :UPDATE_DISABLED, UPDATE_ONCE, UPDATE_WHEN_VISIBLE, UPDATE_ALWAYS,             # <<<<<<<<<<<<<<
+ * ctypedef enum Viewport_MSAA :MSAA_DISABLED, MSAA_2X, MSAA_4X, MSAA_8X, MSAA_16X,
  */
-enum __pyx_t_7classes_8Viewport_UpdateMode {
+enum __pyx_t_7classes_8Viewport_Viewport_UpdateMode {
   __pyx_e_7classes_8Viewport_UPDATE_DISABLED,
   __pyx_e_7classes_8Viewport_UPDATE_ONCE,
   __pyx_e_7classes_8Viewport_UPDATE_WHEN_VISIBLE,
   __pyx_e_7classes_8Viewport_UPDATE_ALWAYS
 };
-typedef enum __pyx_t_7classes_8Viewport_UpdateMode __pyx_t_7classes_8Viewport_UpdateMode;
+typedef enum __pyx_t_7classes_8Viewport_Viewport_UpdateMode __pyx_t_7classes_8Viewport_Viewport_UpdateMode;
 
 /* "classes/Viewport.pxd":13
- * ctypedef enum ShadowAtlasQuadrantSubdiv :SHADOW_ATLAS_QUADRANT_SUBDIV_DISABLED, SHADOW_ATLAS_QUADRANT_SUBDIV_1, SHADOW_ATLAS_QUADRANT_SUBDIV_4, SHADOW_ATLAS_QUADRANT_SUBDIV_16, SHADOW_ATLAS_QUADRANT_SUBDIV_64, SHADOW_ATLAS_QUADRANT_SUBDIV_256, SHADOW_ATLAS_QUADRANT_SUBDIV_1024, SHADOW_ATLAS_QUADRANT_SUBDIV_MAX,
- * ctypedef enum UpdateMode :UPDATE_DISABLED, UPDATE_ONCE, UPDATE_WHEN_VISIBLE, UPDATE_ALWAYS,
- * ctypedef enum MSAA :MSAA_DISABLED, MSAA_2X, MSAA_4X, MSAA_8X, MSAA_16X,             # <<<<<<<<<<<<<<
+ * ctypedef enum Viewport_ShadowAtlasQuadrantSubdiv :SHADOW_ATLAS_QUADRANT_SUBDIV_DISABLED, SHADOW_ATLAS_QUADRANT_SUBDIV_1, SHADOW_ATLAS_QUADRANT_SUBDIV_4, SHADOW_ATLAS_QUADRANT_SUBDIV_16, SHADOW_ATLAS_QUADRANT_SUBDIV_64, SHADOW_ATLAS_QUADRANT_SUBDIV_256, SHADOW_ATLAS_QUADRANT_SUBDIV_1024, SHADOW_ATLAS_QUADRANT_SUBDIV_MAX,
+ * ctypedef enum Viewport_UpdateMode :UPDATE_DISABLED, UPDATE_ONCE, UPDATE_WHEN_VISIBLE, UPDATE_ALWAYS,
+ * ctypedef enum Viewport_MSAA :MSAA_DISABLED, MSAA_2X, MSAA_4X, MSAA_8X, MSAA_16X,             # <<<<<<<<<<<<<<
  */
-enum __pyx_t_7classes_8Viewport_MSAA {
+enum __pyx_t_7classes_8Viewport_Viewport_MSAA {
   __pyx_e_7classes_8Viewport_MSAA_DISABLED,
   __pyx_e_7classes_8Viewport_MSAA_2X,
   __pyx_e_7classes_8Viewport_MSAA_4X,
   __pyx_e_7classes_8Viewport_MSAA_8X,
   __pyx_e_7classes_8Viewport_MSAA_16X
 };
-typedef enum __pyx_t_7classes_8Viewport_MSAA __pyx_t_7classes_8Viewport_MSAA;
+typedef enum __pyx_t_7classes_8Viewport_Viewport_MSAA __pyx_t_7classes_8Viewport_Viewport_MSAA;
 
 /* "utils/Wrapper.pxd":2
  * from godot_api.binding cimport *
@@ -1153,7 +1153,7 @@ struct __pyx_obj_5utils_7Wrapper_Wrapper {
  * from utils.Wrapper cimport *
  * cdef class Object(Wrapper):             # <<<<<<<<<<<<<<
  *     pass
- * ctypedef enum ConnectFlags :CONNECT_DEFERRED, CONNECT_PERSIST, CONNECT_ONESHOT, CONNECT_REFERENCE_COUNTED,
+ * ctypedef enum Object_ConnectFlags :CONNECT_DEFERRED, CONNECT_PERSIST, CONNECT_ONESHOT, CONNECT_REFERENCE_COUNTED,
  */
 struct __pyx_obj_7classes_6Object_Object {
   struct __pyx_obj_5utils_7Wrapper_Wrapper __pyx_base;
@@ -1220,7 +1220,7 @@ struct __pyx_obj_7classes_7World2D_World2D {
  * cimport classes.Object
  * cdef class Node(classes.Object.Object):             # <<<<<<<<<<<<<<
  *     pass
- * ctypedef enum PauseMode :PAUSE_MODE_INHERIT, PAUSE_MODE_STOP, PAUSE_MODE_PROCESS,
+ * ctypedef enum Node_PauseMode :PAUSE_MODE_INHERIT, PAUSE_MODE_STOP, PAUSE_MODE_PROCESS,
  */
 struct __pyx_obj_7classes_4Node_Node {
   struct __pyx_obj_7classes_6Object_Object __pyx_base;
@@ -1554,7 +1554,7 @@ struct __pyx_obj_4core_7vector3_7Vector3_Vector3 {
  * cimport classes.Node
  * cdef class Viewport(classes.Node.Node):             # <<<<<<<<<<<<<<
  *     pass
- * ctypedef enum ClearMode :CLEAR_MODE_ALWAYS, CLEAR_MODE_NEVER, CLEAR_MODE_ONLY_NEXT_FRAME,
+ * ctypedef enum Viewport_ClearMode :CLEAR_MODE_ALWAYS, CLEAR_MODE_NEVER, CLEAR_MODE_ONLY_NEXT_FRAME,
  */
 struct __pyx_obj_7classes_8Viewport_Viewport {
   struct __pyx_obj_7classes_4Node_Node __pyx_base;
@@ -1583,7 +1583,7 @@ static CYTHON_INLINE godot_object *__pyx_f_5utils_7Wrapper_7Wrapper_get_godot_ow
  * from utils.Wrapper cimport *
  * cdef class Object(Wrapper):             # <<<<<<<<<<<<<<
  *     pass
- * ctypedef enum ConnectFlags :CONNECT_DEFERRED, CONNECT_PERSIST, CONNECT_ONESHOT, CONNECT_REFERENCE_COUNTED,
+ * ctypedef enum Object_ConnectFlags :CONNECT_DEFERRED, CONNECT_PERSIST, CONNECT_ONESHOT, CONNECT_REFERENCE_COUNTED,
  */
 
 struct __pyx_vtabstruct_7classes_6Object_Object {
@@ -1662,7 +1662,7 @@ static struct __pyx_vtabstruct_7classes_7World2D_World2D *__pyx_vtabptr_7classes
  * cimport classes.Object
  * cdef class Node(classes.Object.Object):             # <<<<<<<<<<<<<<
  *     pass
- * ctypedef enum PauseMode :PAUSE_MODE_INHERIT, PAUSE_MODE_STOP, PAUSE_MODE_PROCESS,
+ * ctypedef enum Node_PauseMode :PAUSE_MODE_INHERIT, PAUSE_MODE_STOP, PAUSE_MODE_PROCESS,
  */
 
 struct __pyx_vtabstruct_7classes_4Node_Node {
@@ -2370,25 +2370,25 @@ static void __Pyx_AddTraceback(const char *funcname, int c_line,
                                int py_line, const char *filename);
 
 /* CIntToPy.proto */
-static CYTHON_INLINE PyObject* __Pyx_PyInt_From___pyx_t_7classes_8Viewport_ClearMode(__pyx_t_7classes_8Viewport_ClearMode value);
+static CYTHON_INLINE PyObject* __Pyx_PyInt_From___pyx_t_7classes_8Viewport_Viewport_ClearMode(__pyx_t_7classes_8Viewport_Viewport_ClearMode value);
 
 /* CIntToPy.proto */
-static CYTHON_INLINE PyObject* __Pyx_PyInt_From___pyx_t_7classes_8Viewport_DebugDraw(__pyx_t_7classes_8Viewport_DebugDraw value);
+static CYTHON_INLINE PyObject* __Pyx_PyInt_From___pyx_t_7classes_8Viewport_Viewport_DebugDraw(__pyx_t_7classes_8Viewport_Viewport_DebugDraw value);
 
 /* CIntToPy.proto */
-static CYTHON_INLINE PyObject* __Pyx_PyInt_From___pyx_t_7classes_8Viewport_MSAA(__pyx_t_7classes_8Viewport_MSAA value);
+static CYTHON_INLINE PyObject* __Pyx_PyInt_From___pyx_t_7classes_8Viewport_Viewport_MSAA(__pyx_t_7classes_8Viewport_Viewport_MSAA value);
 
 /* CIntToPy.proto */
 static CYTHON_INLINE PyObject* __Pyx_PyInt_From_int(int value);
 
 /* CIntToPy.proto */
-static CYTHON_INLINE PyObject* __Pyx_PyInt_From___pyx_t_7classes_8Viewport_ShadowAtlasQuadrantSubdiv(__pyx_t_7classes_8Viewport_ShadowAtlasQuadrantSubdiv value);
+static CYTHON_INLINE PyObject* __Pyx_PyInt_From___pyx_t_7classes_8Viewport_Viewport_ShadowAtlasQuadrantSubdiv(__pyx_t_7classes_8Viewport_Viewport_ShadowAtlasQuadrantSubdiv value);
 
 /* CIntToPy.proto */
-static CYTHON_INLINE PyObject* __Pyx_PyInt_From___pyx_t_7classes_8Viewport_UpdateMode(__pyx_t_7classes_8Viewport_UpdateMode value);
+static CYTHON_INLINE PyObject* __Pyx_PyInt_From___pyx_t_7classes_8Viewport_Viewport_UpdateMode(__pyx_t_7classes_8Viewport_Viewport_UpdateMode value);
 
 /* CIntToPy.proto */
-static CYTHON_INLINE PyObject* __Pyx_PyInt_From___pyx_t_7classes_8Viewport_Usage(__pyx_t_7classes_8Viewport_Usage value);
+static CYTHON_INLINE PyObject* __Pyx_PyInt_From___pyx_t_7classes_8Viewport_Viewport_Usage(__pyx_t_7classes_8Viewport_Viewport_Usage value);
 
 /* CIntFromPy.proto */
 static CYTHON_INLINE int __Pyx_PyInt_As_int(PyObject *);
@@ -9901,7 +9901,7 @@ static PyObject *__pyx_pw_7classes_8Viewport_8Viewport_27get_clear_mode(PyObject
 
 static PyObject *__pyx_pf_7classes_8Viewport_8Viewport_26get_clear_mode(struct __pyx_obj_7classes_8Viewport_Viewport *__pyx_v_self) {
   CYTHON_UNUSED godot_object *__pyx_v__owner;
-  __pyx_t_7classes_8Viewport_ClearMode *__pyx_v_ret;
+  __pyx_t_7classes_8Viewport_Viewport_ClearMode *__pyx_v_ret;
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   godot_object *__pyx_t_1;
@@ -9916,7 +9916,7 @@ static PyObject *__pyx_pf_7classes_8Viewport_8Viewport_26get_clear_mode(struct _
  *   def  get_clear_mode(self):
  *     cdef godot_object *_owner = self.godot_owner             # <<<<<<<<<<<<<<
  * 
- *     cdef ClearMode* ret = NULL;
+ *     cdef Viewport_ClearMode* ret = NULL;
  */
   __pyx_t_1 = __pyx_v_self->__pyx_base.__pyx_base.__pyx_base.godot_owner;
   __pyx_v__owner = __pyx_t_1;
@@ -9924,14 +9924,14 @@ static PyObject *__pyx_pf_7classes_8Viewport_8Viewport_26get_clear_mode(struct _
   /* "classes/Viewport.pyx":482
  *     cdef godot_object *_owner = self.godot_owner
  * 
- *     cdef ClearMode* ret = NULL;             # <<<<<<<<<<<<<<
+ *     cdef Viewport_ClearMode* ret = NULL;             # <<<<<<<<<<<<<<
  * 
  *     api_core.godot_method_bind_ptrcall(bind_viewport_get_clear_mode,self.godot_owner,NULL,&ret)
  */
   __pyx_v_ret = NULL;
 
   /* "classes/Viewport.pyx":484
- *     cdef ClearMode* ret = NULL;
+ *     cdef Viewport_ClearMode* ret = NULL;
  * 
  *     api_core.godot_method_bind_ptrcall(bind_viewport_get_clear_mode,self.godot_owner,NULL,&ret)             # <<<<<<<<<<<<<<
  *     hello('hallo2')
@@ -9956,7 +9956,7 @@ static PyObject *__pyx_pf_7classes_8Viewport_8Viewport_26get_clear_mode(struct _
  *   def  get_debug_draw(self):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_2 = __Pyx_PyInt_From___pyx_t_7classes_8Viewport_ClearMode((*__pyx_v_ret)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 486, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyInt_From___pyx_t_7classes_8Viewport_Viewport_ClearMode((*__pyx_v_ret)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 486, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_r = __pyx_t_2;
   __pyx_t_2 = 0;
@@ -10004,7 +10004,7 @@ static PyObject *__pyx_pw_7classes_8Viewport_8Viewport_29get_debug_draw(PyObject
 
 static PyObject *__pyx_pf_7classes_8Viewport_8Viewport_28get_debug_draw(struct __pyx_obj_7classes_8Viewport_Viewport *__pyx_v_self) {
   CYTHON_UNUSED godot_object *__pyx_v__owner;
-  __pyx_t_7classes_8Viewport_DebugDraw *__pyx_v_ret;
+  __pyx_t_7classes_8Viewport_Viewport_DebugDraw *__pyx_v_ret;
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   godot_object *__pyx_t_1;
@@ -10019,7 +10019,7 @@ static PyObject *__pyx_pf_7classes_8Viewport_8Viewport_28get_debug_draw(struct _
  *   def  get_debug_draw(self):
  *     cdef godot_object *_owner = self.godot_owner             # <<<<<<<<<<<<<<
  * 
- *     cdef DebugDraw* ret = NULL;
+ *     cdef Viewport_DebugDraw* ret = NULL;
  */
   __pyx_t_1 = __pyx_v_self->__pyx_base.__pyx_base.__pyx_base.godot_owner;
   __pyx_v__owner = __pyx_t_1;
@@ -10027,14 +10027,14 @@ static PyObject *__pyx_pf_7classes_8Viewport_8Viewport_28get_debug_draw(struct _
   /* "classes/Viewport.pyx":491
  *     cdef godot_object *_owner = self.godot_owner
  * 
- *     cdef DebugDraw* ret = NULL;             # <<<<<<<<<<<<<<
+ *     cdef Viewport_DebugDraw* ret = NULL;             # <<<<<<<<<<<<<<
  * 
  *     api_core.godot_method_bind_ptrcall(bind_viewport_get_debug_draw,self.godot_owner,NULL,&ret)
  */
   __pyx_v_ret = NULL;
 
   /* "classes/Viewport.pyx":493
- *     cdef DebugDraw* ret = NULL;
+ *     cdef Viewport_DebugDraw* ret = NULL;
  * 
  *     api_core.godot_method_bind_ptrcall(bind_viewport_get_debug_draw,self.godot_owner,NULL,&ret)             # <<<<<<<<<<<<<<
  *     hello('hallo2')
@@ -10059,7 +10059,7 @@ static PyObject *__pyx_pf_7classes_8Viewport_8Viewport_28get_debug_draw(struct _
  *   def  get_final_transform(self):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_2 = __Pyx_PyInt_From___pyx_t_7classes_8Viewport_DebugDraw((*__pyx_v_ret)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 495, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyInt_From___pyx_t_7classes_8Viewport_Viewport_DebugDraw((*__pyx_v_ret)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 495, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_r = __pyx_t_2;
   __pyx_t_2 = 0;
@@ -10703,7 +10703,7 @@ static PyObject *__pyx_pw_7classes_8Viewport_8Viewport_43get_msaa(PyObject *__py
 
 static PyObject *__pyx_pf_7classes_8Viewport_8Viewport_42get_msaa(struct __pyx_obj_7classes_8Viewport_Viewport *__pyx_v_self) {
   CYTHON_UNUSED godot_object *__pyx_v__owner;
-  __pyx_t_7classes_8Viewport_MSAA *__pyx_v_ret;
+  __pyx_t_7classes_8Viewport_Viewport_MSAA *__pyx_v_ret;
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   godot_object *__pyx_t_1;
@@ -10718,7 +10718,7 @@ static PyObject *__pyx_pf_7classes_8Viewport_8Viewport_42get_msaa(struct __pyx_o
  *   def  get_msaa(self):
  *     cdef godot_object *_owner = self.godot_owner             # <<<<<<<<<<<<<<
  * 
- *     cdef MSAA* ret = NULL;
+ *     cdef Viewport_MSAA* ret = NULL;
  */
   __pyx_t_1 = __pyx_v_self->__pyx_base.__pyx_base.__pyx_base.godot_owner;
   __pyx_v__owner = __pyx_t_1;
@@ -10726,14 +10726,14 @@ static PyObject *__pyx_pf_7classes_8Viewport_8Viewport_42get_msaa(struct __pyx_o
   /* "classes/Viewport.pyx":552
  *     cdef godot_object *_owner = self.godot_owner
  * 
- *     cdef MSAA* ret = NULL;             # <<<<<<<<<<<<<<
+ *     cdef Viewport_MSAA* ret = NULL;             # <<<<<<<<<<<<<<
  * 
  *     api_core.godot_method_bind_ptrcall(bind_viewport_get_msaa,self.godot_owner,NULL,&ret)
  */
   __pyx_v_ret = NULL;
 
   /* "classes/Viewport.pyx":554
- *     cdef MSAA* ret = NULL;
+ *     cdef Viewport_MSAA* ret = NULL;
  * 
  *     api_core.godot_method_bind_ptrcall(bind_viewport_get_msaa,self.godot_owner,NULL,&ret)             # <<<<<<<<<<<<<<
  *     hello('hallo2')
@@ -10758,7 +10758,7 @@ static PyObject *__pyx_pf_7classes_8Viewport_8Viewport_42get_msaa(struct __pyx_o
  *   def  get_physics_object_picking(self):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_2 = __Pyx_PyInt_From___pyx_t_7classes_8Viewport_MSAA((*__pyx_v_ret)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 556, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyInt_From___pyx_t_7classes_8Viewport_Viewport_MSAA((*__pyx_v_ret)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 556, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_r = __pyx_t_2;
   __pyx_t_2 = 0;
@@ -11048,7 +11048,7 @@ static PyObject *__pyx_pw_7classes_8Viewport_8Viewport_49get_shadow_atlas_quadra
 
 static PyObject *__pyx_pf_7classes_8Viewport_8Viewport_48get_shadow_atlas_quadrant_subdiv(struct __pyx_obj_7classes_8Viewport_Viewport *__pyx_v_self, int __pyx_v_quadrant) {
   CYTHON_UNUSED godot_object *__pyx_v__owner;
-  __pyx_t_7classes_8Viewport_ShadowAtlasQuadrantSubdiv *__pyx_v_ret;
+  __pyx_t_7classes_8Viewport_Viewport_ShadowAtlasQuadrantSubdiv *__pyx_v_ret;
   void *__pyx_v_args[1];
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
@@ -11064,7 +11064,7 @@ static PyObject *__pyx_pf_7classes_8Viewport_8Viewport_48get_shadow_atlas_quadra
  *   def  get_shadow_atlas_quadrant_subdiv(self,  int quadrant):
  *     cdef godot_object *_owner = self.godot_owner             # <<<<<<<<<<<<<<
  * 
- *     cdef ShadowAtlasQuadrantSubdiv* ret = NULL;
+ *     cdef Viewport_ShadowAtlasQuadrantSubdiv* ret = NULL;
  */
   __pyx_t_1 = __pyx_v_self->__pyx_base.__pyx_base.__pyx_base.godot_owner;
   __pyx_v__owner = __pyx_t_1;
@@ -11072,7 +11072,7 @@ static PyObject *__pyx_pf_7classes_8Viewport_8Viewport_48get_shadow_atlas_quadra
   /* "classes/Viewport.pyx":582
  *     cdef godot_object *_owner = self.godot_owner
  * 
- *     cdef ShadowAtlasQuadrantSubdiv* ret = NULL;             # <<<<<<<<<<<<<<
+ *     cdef Viewport_ShadowAtlasQuadrantSubdiv* ret = NULL;             # <<<<<<<<<<<<<<
  * 
  *     cdef void *args[1]
  */
@@ -11113,7 +11113,7 @@ static PyObject *__pyx_pf_7classes_8Viewport_8Viewport_48get_shadow_atlas_quadra
  *   def  get_shadow_atlas_size(self):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_2 = __Pyx_PyInt_From___pyx_t_7classes_8Viewport_ShadowAtlasQuadrantSubdiv((*__pyx_v_ret)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 589, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyInt_From___pyx_t_7classes_8Viewport_Viewport_ShadowAtlasQuadrantSubdiv((*__pyx_v_ret)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 589, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_r = __pyx_t_2;
   __pyx_t_2 = 0;
@@ -11551,7 +11551,7 @@ static PyObject *__pyx_pw_7classes_8Viewport_8Viewport_59get_update_mode(PyObjec
 
 static PyObject *__pyx_pf_7classes_8Viewport_8Viewport_58get_update_mode(struct __pyx_obj_7classes_8Viewport_Viewport *__pyx_v_self) {
   CYTHON_UNUSED godot_object *__pyx_v__owner;
-  __pyx_t_7classes_8Viewport_UpdateMode *__pyx_v_ret;
+  __pyx_t_7classes_8Viewport_Viewport_UpdateMode *__pyx_v_ret;
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   godot_object *__pyx_t_1;
@@ -11566,7 +11566,7 @@ static PyObject *__pyx_pf_7classes_8Viewport_8Viewport_58get_update_mode(struct 
  *   def  get_update_mode(self):
  *     cdef godot_object *_owner = self.godot_owner             # <<<<<<<<<<<<<<
  * 
- *     cdef UpdateMode* ret = NULL;
+ *     cdef Viewport_UpdateMode* ret = NULL;
  */
   __pyx_t_1 = __pyx_v_self->__pyx_base.__pyx_base.__pyx_base.godot_owner;
   __pyx_v__owner = __pyx_t_1;
@@ -11574,14 +11574,14 @@ static PyObject *__pyx_pf_7classes_8Viewport_8Viewport_58get_update_mode(struct 
   /* "classes/Viewport.pyx":628
  *     cdef godot_object *_owner = self.godot_owner
  * 
- *     cdef UpdateMode* ret = NULL;             # <<<<<<<<<<<<<<
+ *     cdef Viewport_UpdateMode* ret = NULL;             # <<<<<<<<<<<<<<
  * 
  *     api_core.godot_method_bind_ptrcall(bind_viewport_get_update_mode,self.godot_owner,NULL,&ret)
  */
   __pyx_v_ret = NULL;
 
   /* "classes/Viewport.pyx":630
- *     cdef UpdateMode* ret = NULL;
+ *     cdef Viewport_UpdateMode* ret = NULL;
  * 
  *     api_core.godot_method_bind_ptrcall(bind_viewport_get_update_mode,self.godot_owner,NULL,&ret)             # <<<<<<<<<<<<<<
  *     hello('hallo2')
@@ -11606,7 +11606,7 @@ static PyObject *__pyx_pf_7classes_8Viewport_8Viewport_58get_update_mode(struct 
  *   def  get_usage(self):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_2 = __Pyx_PyInt_From___pyx_t_7classes_8Viewport_UpdateMode((*__pyx_v_ret)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 632, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyInt_From___pyx_t_7classes_8Viewport_Viewport_UpdateMode((*__pyx_v_ret)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 632, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_r = __pyx_t_2;
   __pyx_t_2 = 0;
@@ -11654,7 +11654,7 @@ static PyObject *__pyx_pw_7classes_8Viewport_8Viewport_61get_usage(PyObject *__p
 
 static PyObject *__pyx_pf_7classes_8Viewport_8Viewport_60get_usage(struct __pyx_obj_7classes_8Viewport_Viewport *__pyx_v_self) {
   CYTHON_UNUSED godot_object *__pyx_v__owner;
-  __pyx_t_7classes_8Viewport_Usage *__pyx_v_ret;
+  __pyx_t_7classes_8Viewport_Viewport_Usage *__pyx_v_ret;
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   godot_object *__pyx_t_1;
@@ -11669,7 +11669,7 @@ static PyObject *__pyx_pf_7classes_8Viewport_8Viewport_60get_usage(struct __pyx_
  *   def  get_usage(self):
  *     cdef godot_object *_owner = self.godot_owner             # <<<<<<<<<<<<<<
  * 
- *     cdef Usage* ret = NULL;
+ *     cdef Viewport_Usage* ret = NULL;
  */
   __pyx_t_1 = __pyx_v_self->__pyx_base.__pyx_base.__pyx_base.godot_owner;
   __pyx_v__owner = __pyx_t_1;
@@ -11677,14 +11677,14 @@ static PyObject *__pyx_pf_7classes_8Viewport_8Viewport_60get_usage(struct __pyx_
   /* "classes/Viewport.pyx":637
  *     cdef godot_object *_owner = self.godot_owner
  * 
- *     cdef Usage* ret = NULL;             # <<<<<<<<<<<<<<
+ *     cdef Viewport_Usage* ret = NULL;             # <<<<<<<<<<<<<<
  * 
  *     api_core.godot_method_bind_ptrcall(bind_viewport_get_usage,self.godot_owner,NULL,&ret)
  */
   __pyx_v_ret = NULL;
 
   /* "classes/Viewport.pyx":639
- *     cdef Usage* ret = NULL;
+ *     cdef Viewport_Usage* ret = NULL;
  * 
  *     api_core.godot_method_bind_ptrcall(bind_viewport_get_usage,self.godot_owner,NULL,&ret)             # <<<<<<<<<<<<<<
  *     hello('hallo2')
@@ -11709,7 +11709,7 @@ static PyObject *__pyx_pf_7classes_8Viewport_8Viewport_60get_usage(struct __pyx_
  *   def  get_vflip(self):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_2 = __Pyx_PyInt_From___pyx_t_7classes_8Viewport_Usage((*__pyx_v_ret)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 641, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyInt_From___pyx_t_7classes_8Viewport_Viewport_Usage((*__pyx_v_ret)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 641, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_r = __pyx_t_2;
   __pyx_t_2 = 0;
@@ -17548,7 +17548,7 @@ static CYTHON_INLINE void __pyx_f_4core_7variant_7Variant_7Variant_new_variant(C
  *     cdef inline void new_variant(self, i):
  *         print("new_variant", type(i))             # <<<<<<<<<<<<<<
  * 
- * ctypedef enum Type:
+ * ctypedef enum Variant_Type:
  */
   __pyx_t_1 = PyTuple_New(2); if (unlikely(!__pyx_t_1)) __PYX_ERR(4, 15, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
@@ -19617,15 +19617,10 @@ static int __pyx_import_star_set(PyObject *o, PyObject* py_name, char *name) {
   static const char* internal_type_names[] = {
     "AABB",
     "Array",
-    "Axis",
     "Basis",
-    "ClearMode",
     "Color",
-    "DebugDraw",
     "Dictionary",
-    "MSAA",
     "NodePath",
-    "Operator",
     "Plane",
     "PoolByteArray",
     "PoolColorArray",
@@ -19638,18 +19633,23 @@ static int __pyx_import_star_set(PyObject *o, PyObject* py_name, char *name) {
     "RID",
     "Rect2",
     "Reference",
-    "RenderInfo",
-    "ShadowAtlasQuadrantSubdiv",
     "String",
     "Transform",
     "Transform2D",
-    "Type",
-    "UpdateMode",
-    "Usage",
     "Variant",
+    "Variant_Operator",
+    "Variant_Type",
     "Vector2",
     "Vector3",
+    "Vector3_Axis",
     "Viewport",
+    "Viewport_ClearMode",
+    "Viewport_DebugDraw",
+    "Viewport_MSAA",
+    "Viewport_RenderInfo",
+    "Viewport_ShadowAtlasQuadrantSubdiv",
+    "Viewport_UpdateMode",
+    "Viewport_Usage",
     "Wrapper",
     "bool",
     "godot_aabb",
@@ -22310,24 +22310,24 @@ bad:
     }
 
 /* CIntToPy */
-static CYTHON_INLINE PyObject* __Pyx_PyInt_From___pyx_t_7classes_8Viewport_ClearMode(__pyx_t_7classes_8Viewport_ClearMode value) {
-    const __pyx_t_7classes_8Viewport_ClearMode neg_one = (__pyx_t_7classes_8Viewport_ClearMode) ((__pyx_t_7classes_8Viewport_ClearMode) 0 - (__pyx_t_7classes_8Viewport_ClearMode) 1), const_zero = (__pyx_t_7classes_8Viewport_ClearMode) 0;
+static CYTHON_INLINE PyObject* __Pyx_PyInt_From___pyx_t_7classes_8Viewport_Viewport_ClearMode(__pyx_t_7classes_8Viewport_Viewport_ClearMode value) {
+    const __pyx_t_7classes_8Viewport_Viewport_ClearMode neg_one = (__pyx_t_7classes_8Viewport_Viewport_ClearMode) ((__pyx_t_7classes_8Viewport_Viewport_ClearMode) 0 - (__pyx_t_7classes_8Viewport_Viewport_ClearMode) 1), const_zero = (__pyx_t_7classes_8Viewport_Viewport_ClearMode) 0;
     const int is_unsigned = neg_one > const_zero;
     if (is_unsigned) {
-        if (sizeof(__pyx_t_7classes_8Viewport_ClearMode) < sizeof(long)) {
+        if (sizeof(__pyx_t_7classes_8Viewport_Viewport_ClearMode) < sizeof(long)) {
             return PyInt_FromLong((long) value);
-        } else if (sizeof(__pyx_t_7classes_8Viewport_ClearMode) <= sizeof(unsigned long)) {
+        } else if (sizeof(__pyx_t_7classes_8Viewport_Viewport_ClearMode) <= sizeof(unsigned long)) {
             return PyLong_FromUnsignedLong((unsigned long) value);
 #ifdef HAVE_LONG_LONG
-        } else if (sizeof(__pyx_t_7classes_8Viewport_ClearMode) <= sizeof(unsigned PY_LONG_LONG)) {
+        } else if (sizeof(__pyx_t_7classes_8Viewport_Viewport_ClearMode) <= sizeof(unsigned PY_LONG_LONG)) {
             return PyLong_FromUnsignedLongLong((unsigned PY_LONG_LONG) value);
 #endif
         }
     } else {
-        if (sizeof(__pyx_t_7classes_8Viewport_ClearMode) <= sizeof(long)) {
+        if (sizeof(__pyx_t_7classes_8Viewport_Viewport_ClearMode) <= sizeof(long)) {
             return PyInt_FromLong((long) value);
 #ifdef HAVE_LONG_LONG
-        } else if (sizeof(__pyx_t_7classes_8Viewport_ClearMode) <= sizeof(PY_LONG_LONG)) {
+        } else if (sizeof(__pyx_t_7classes_8Viewport_Viewport_ClearMode) <= sizeof(PY_LONG_LONG)) {
             return PyLong_FromLongLong((PY_LONG_LONG) value);
 #endif
         }
@@ -22335,30 +22335,30 @@ static CYTHON_INLINE PyObject* __Pyx_PyInt_From___pyx_t_7classes_8Viewport_Clear
     {
         int one = 1; int little = (int)*(unsigned char *)&one;
         unsigned char *bytes = (unsigned char *)&value;
-        return _PyLong_FromByteArray(bytes, sizeof(__pyx_t_7classes_8Viewport_ClearMode),
+        return _PyLong_FromByteArray(bytes, sizeof(__pyx_t_7classes_8Viewport_Viewport_ClearMode),
                                      little, !is_unsigned);
     }
 }
 
 /* CIntToPy */
-static CYTHON_INLINE PyObject* __Pyx_PyInt_From___pyx_t_7classes_8Viewport_DebugDraw(__pyx_t_7classes_8Viewport_DebugDraw value) {
-    const __pyx_t_7classes_8Viewport_DebugDraw neg_one = (__pyx_t_7classes_8Viewport_DebugDraw) ((__pyx_t_7classes_8Viewport_DebugDraw) 0 - (__pyx_t_7classes_8Viewport_DebugDraw) 1), const_zero = (__pyx_t_7classes_8Viewport_DebugDraw) 0;
+static CYTHON_INLINE PyObject* __Pyx_PyInt_From___pyx_t_7classes_8Viewport_Viewport_DebugDraw(__pyx_t_7classes_8Viewport_Viewport_DebugDraw value) {
+    const __pyx_t_7classes_8Viewport_Viewport_DebugDraw neg_one = (__pyx_t_7classes_8Viewport_Viewport_DebugDraw) ((__pyx_t_7classes_8Viewport_Viewport_DebugDraw) 0 - (__pyx_t_7classes_8Viewport_Viewport_DebugDraw) 1), const_zero = (__pyx_t_7classes_8Viewport_Viewport_DebugDraw) 0;
     const int is_unsigned = neg_one > const_zero;
     if (is_unsigned) {
-        if (sizeof(__pyx_t_7classes_8Viewport_DebugDraw) < sizeof(long)) {
+        if (sizeof(__pyx_t_7classes_8Viewport_Viewport_DebugDraw) < sizeof(long)) {
             return PyInt_FromLong((long) value);
-        } else if (sizeof(__pyx_t_7classes_8Viewport_DebugDraw) <= sizeof(unsigned long)) {
+        } else if (sizeof(__pyx_t_7classes_8Viewport_Viewport_DebugDraw) <= sizeof(unsigned long)) {
             return PyLong_FromUnsignedLong((unsigned long) value);
 #ifdef HAVE_LONG_LONG
-        } else if (sizeof(__pyx_t_7classes_8Viewport_DebugDraw) <= sizeof(unsigned PY_LONG_LONG)) {
+        } else if (sizeof(__pyx_t_7classes_8Viewport_Viewport_DebugDraw) <= sizeof(unsigned PY_LONG_LONG)) {
             return PyLong_FromUnsignedLongLong((unsigned PY_LONG_LONG) value);
 #endif
         }
     } else {
-        if (sizeof(__pyx_t_7classes_8Viewport_DebugDraw) <= sizeof(long)) {
+        if (sizeof(__pyx_t_7classes_8Viewport_Viewport_DebugDraw) <= sizeof(long)) {
             return PyInt_FromLong((long) value);
 #ifdef HAVE_LONG_LONG
-        } else if (sizeof(__pyx_t_7classes_8Viewport_DebugDraw) <= sizeof(PY_LONG_LONG)) {
+        } else if (sizeof(__pyx_t_7classes_8Viewport_Viewport_DebugDraw) <= sizeof(PY_LONG_LONG)) {
             return PyLong_FromLongLong((PY_LONG_LONG) value);
 #endif
         }
@@ -22366,30 +22366,30 @@ static CYTHON_INLINE PyObject* __Pyx_PyInt_From___pyx_t_7classes_8Viewport_Debug
     {
         int one = 1; int little = (int)*(unsigned char *)&one;
         unsigned char *bytes = (unsigned char *)&value;
-        return _PyLong_FromByteArray(bytes, sizeof(__pyx_t_7classes_8Viewport_DebugDraw),
+        return _PyLong_FromByteArray(bytes, sizeof(__pyx_t_7classes_8Viewport_Viewport_DebugDraw),
                                      little, !is_unsigned);
     }
 }
 
 /* CIntToPy */
-static CYTHON_INLINE PyObject* __Pyx_PyInt_From___pyx_t_7classes_8Viewport_MSAA(__pyx_t_7classes_8Viewport_MSAA value) {
-    const __pyx_t_7classes_8Viewport_MSAA neg_one = (__pyx_t_7classes_8Viewport_MSAA) ((__pyx_t_7classes_8Viewport_MSAA) 0 - (__pyx_t_7classes_8Viewport_MSAA) 1), const_zero = (__pyx_t_7classes_8Viewport_MSAA) 0;
+static CYTHON_INLINE PyObject* __Pyx_PyInt_From___pyx_t_7classes_8Viewport_Viewport_MSAA(__pyx_t_7classes_8Viewport_Viewport_MSAA value) {
+    const __pyx_t_7classes_8Viewport_Viewport_MSAA neg_one = (__pyx_t_7classes_8Viewport_Viewport_MSAA) ((__pyx_t_7classes_8Viewport_Viewport_MSAA) 0 - (__pyx_t_7classes_8Viewport_Viewport_MSAA) 1), const_zero = (__pyx_t_7classes_8Viewport_Viewport_MSAA) 0;
     const int is_unsigned = neg_one > const_zero;
     if (is_unsigned) {
-        if (sizeof(__pyx_t_7classes_8Viewport_MSAA) < sizeof(long)) {
+        if (sizeof(__pyx_t_7classes_8Viewport_Viewport_MSAA) < sizeof(long)) {
             return PyInt_FromLong((long) value);
-        } else if (sizeof(__pyx_t_7classes_8Viewport_MSAA) <= sizeof(unsigned long)) {
+        } else if (sizeof(__pyx_t_7classes_8Viewport_Viewport_MSAA) <= sizeof(unsigned long)) {
             return PyLong_FromUnsignedLong((unsigned long) value);
 #ifdef HAVE_LONG_LONG
-        } else if (sizeof(__pyx_t_7classes_8Viewport_MSAA) <= sizeof(unsigned PY_LONG_LONG)) {
+        } else if (sizeof(__pyx_t_7classes_8Viewport_Viewport_MSAA) <= sizeof(unsigned PY_LONG_LONG)) {
             return PyLong_FromUnsignedLongLong((unsigned PY_LONG_LONG) value);
 #endif
         }
     } else {
-        if (sizeof(__pyx_t_7classes_8Viewport_MSAA) <= sizeof(long)) {
+        if (sizeof(__pyx_t_7classes_8Viewport_Viewport_MSAA) <= sizeof(long)) {
             return PyInt_FromLong((long) value);
 #ifdef HAVE_LONG_LONG
-        } else if (sizeof(__pyx_t_7classes_8Viewport_MSAA) <= sizeof(PY_LONG_LONG)) {
+        } else if (sizeof(__pyx_t_7classes_8Viewport_Viewport_MSAA) <= sizeof(PY_LONG_LONG)) {
             return PyLong_FromLongLong((PY_LONG_LONG) value);
 #endif
         }
@@ -22397,7 +22397,7 @@ static CYTHON_INLINE PyObject* __Pyx_PyInt_From___pyx_t_7classes_8Viewport_MSAA(
     {
         int one = 1; int little = (int)*(unsigned char *)&one;
         unsigned char *bytes = (unsigned char *)&value;
-        return _PyLong_FromByteArray(bytes, sizeof(__pyx_t_7classes_8Viewport_MSAA),
+        return _PyLong_FromByteArray(bytes, sizeof(__pyx_t_7classes_8Viewport_Viewport_MSAA),
                                      little, !is_unsigned);
     }
 }
@@ -22434,24 +22434,24 @@ static CYTHON_INLINE PyObject* __Pyx_PyInt_From_int(int value) {
 }
 
 /* CIntToPy */
-static CYTHON_INLINE PyObject* __Pyx_PyInt_From___pyx_t_7classes_8Viewport_ShadowAtlasQuadrantSubdiv(__pyx_t_7classes_8Viewport_ShadowAtlasQuadrantSubdiv value) {
-    const __pyx_t_7classes_8Viewport_ShadowAtlasQuadrantSubdiv neg_one = (__pyx_t_7classes_8Viewport_ShadowAtlasQuadrantSubdiv) ((__pyx_t_7classes_8Viewport_ShadowAtlasQuadrantSubdiv) 0 - (__pyx_t_7classes_8Viewport_ShadowAtlasQuadrantSubdiv) 1), const_zero = (__pyx_t_7classes_8Viewport_ShadowAtlasQuadrantSubdiv) 0;
+static CYTHON_INLINE PyObject* __Pyx_PyInt_From___pyx_t_7classes_8Viewport_Viewport_ShadowAtlasQuadrantSubdiv(__pyx_t_7classes_8Viewport_Viewport_ShadowAtlasQuadrantSubdiv value) {
+    const __pyx_t_7classes_8Viewport_Viewport_ShadowAtlasQuadrantSubdiv neg_one = (__pyx_t_7classes_8Viewport_Viewport_ShadowAtlasQuadrantSubdiv) ((__pyx_t_7classes_8Viewport_Viewport_ShadowAtlasQuadrantSubdiv) 0 - (__pyx_t_7classes_8Viewport_Viewport_ShadowAtlasQuadrantSubdiv) 1), const_zero = (__pyx_t_7classes_8Viewport_Viewport_ShadowAtlasQuadrantSubdiv) 0;
     const int is_unsigned = neg_one > const_zero;
     if (is_unsigned) {
-        if (sizeof(__pyx_t_7classes_8Viewport_ShadowAtlasQuadrantSubdiv) < sizeof(long)) {
+        if (sizeof(__pyx_t_7classes_8Viewport_Viewport_ShadowAtlasQuadrantSubdiv) < sizeof(long)) {
             return PyInt_FromLong((long) value);
-        } else if (sizeof(__pyx_t_7classes_8Viewport_ShadowAtlasQuadrantSubdiv) <= sizeof(unsigned long)) {
+        } else if (sizeof(__pyx_t_7classes_8Viewport_Viewport_ShadowAtlasQuadrantSubdiv) <= sizeof(unsigned long)) {
             return PyLong_FromUnsignedLong((unsigned long) value);
 #ifdef HAVE_LONG_LONG
-        } else if (sizeof(__pyx_t_7classes_8Viewport_ShadowAtlasQuadrantSubdiv) <= sizeof(unsigned PY_LONG_LONG)) {
+        } else if (sizeof(__pyx_t_7classes_8Viewport_Viewport_ShadowAtlasQuadrantSubdiv) <= sizeof(unsigned PY_LONG_LONG)) {
             return PyLong_FromUnsignedLongLong((unsigned PY_LONG_LONG) value);
 #endif
         }
     } else {
-        if (sizeof(__pyx_t_7classes_8Viewport_ShadowAtlasQuadrantSubdiv) <= sizeof(long)) {
+        if (sizeof(__pyx_t_7classes_8Viewport_Viewport_ShadowAtlasQuadrantSubdiv) <= sizeof(long)) {
             return PyInt_FromLong((long) value);
 #ifdef HAVE_LONG_LONG
-        } else if (sizeof(__pyx_t_7classes_8Viewport_ShadowAtlasQuadrantSubdiv) <= sizeof(PY_LONG_LONG)) {
+        } else if (sizeof(__pyx_t_7classes_8Viewport_Viewport_ShadowAtlasQuadrantSubdiv) <= sizeof(PY_LONG_LONG)) {
             return PyLong_FromLongLong((PY_LONG_LONG) value);
 #endif
         }
@@ -22459,30 +22459,30 @@ static CYTHON_INLINE PyObject* __Pyx_PyInt_From___pyx_t_7classes_8Viewport_Shado
     {
         int one = 1; int little = (int)*(unsigned char *)&one;
         unsigned char *bytes = (unsigned char *)&value;
-        return _PyLong_FromByteArray(bytes, sizeof(__pyx_t_7classes_8Viewport_ShadowAtlasQuadrantSubdiv),
+        return _PyLong_FromByteArray(bytes, sizeof(__pyx_t_7classes_8Viewport_Viewport_ShadowAtlasQuadrantSubdiv),
                                      little, !is_unsigned);
     }
 }
 
 /* CIntToPy */
-static CYTHON_INLINE PyObject* __Pyx_PyInt_From___pyx_t_7classes_8Viewport_UpdateMode(__pyx_t_7classes_8Viewport_UpdateMode value) {
-    const __pyx_t_7classes_8Viewport_UpdateMode neg_one = (__pyx_t_7classes_8Viewport_UpdateMode) ((__pyx_t_7classes_8Viewport_UpdateMode) 0 - (__pyx_t_7classes_8Viewport_UpdateMode) 1), const_zero = (__pyx_t_7classes_8Viewport_UpdateMode) 0;
+static CYTHON_INLINE PyObject* __Pyx_PyInt_From___pyx_t_7classes_8Viewport_Viewport_UpdateMode(__pyx_t_7classes_8Viewport_Viewport_UpdateMode value) {
+    const __pyx_t_7classes_8Viewport_Viewport_UpdateMode neg_one = (__pyx_t_7classes_8Viewport_Viewport_UpdateMode) ((__pyx_t_7classes_8Viewport_Viewport_UpdateMode) 0 - (__pyx_t_7classes_8Viewport_Viewport_UpdateMode) 1), const_zero = (__pyx_t_7classes_8Viewport_Viewport_UpdateMode) 0;
     const int is_unsigned = neg_one > const_zero;
     if (is_unsigned) {
-        if (sizeof(__pyx_t_7classes_8Viewport_UpdateMode) < sizeof(long)) {
+        if (sizeof(__pyx_t_7classes_8Viewport_Viewport_UpdateMode) < sizeof(long)) {
             return PyInt_FromLong((long) value);
-        } else if (sizeof(__pyx_t_7classes_8Viewport_UpdateMode) <= sizeof(unsigned long)) {
+        } else if (sizeof(__pyx_t_7classes_8Viewport_Viewport_UpdateMode) <= sizeof(unsigned long)) {
             return PyLong_FromUnsignedLong((unsigned long) value);
 #ifdef HAVE_LONG_LONG
-        } else if (sizeof(__pyx_t_7classes_8Viewport_UpdateMode) <= sizeof(unsigned PY_LONG_LONG)) {
+        } else if (sizeof(__pyx_t_7classes_8Viewport_Viewport_UpdateMode) <= sizeof(unsigned PY_LONG_LONG)) {
             return PyLong_FromUnsignedLongLong((unsigned PY_LONG_LONG) value);
 #endif
         }
     } else {
-        if (sizeof(__pyx_t_7classes_8Viewport_UpdateMode) <= sizeof(long)) {
+        if (sizeof(__pyx_t_7classes_8Viewport_Viewport_UpdateMode) <= sizeof(long)) {
             return PyInt_FromLong((long) value);
 #ifdef HAVE_LONG_LONG
-        } else if (sizeof(__pyx_t_7classes_8Viewport_UpdateMode) <= sizeof(PY_LONG_LONG)) {
+        } else if (sizeof(__pyx_t_7classes_8Viewport_Viewport_UpdateMode) <= sizeof(PY_LONG_LONG)) {
             return PyLong_FromLongLong((PY_LONG_LONG) value);
 #endif
         }
@@ -22490,30 +22490,30 @@ static CYTHON_INLINE PyObject* __Pyx_PyInt_From___pyx_t_7classes_8Viewport_Updat
     {
         int one = 1; int little = (int)*(unsigned char *)&one;
         unsigned char *bytes = (unsigned char *)&value;
-        return _PyLong_FromByteArray(bytes, sizeof(__pyx_t_7classes_8Viewport_UpdateMode),
+        return _PyLong_FromByteArray(bytes, sizeof(__pyx_t_7classes_8Viewport_Viewport_UpdateMode),
                                      little, !is_unsigned);
     }
 }
 
 /* CIntToPy */
-static CYTHON_INLINE PyObject* __Pyx_PyInt_From___pyx_t_7classes_8Viewport_Usage(__pyx_t_7classes_8Viewport_Usage value) {
-    const __pyx_t_7classes_8Viewport_Usage neg_one = (__pyx_t_7classes_8Viewport_Usage) ((__pyx_t_7classes_8Viewport_Usage) 0 - (__pyx_t_7classes_8Viewport_Usage) 1), const_zero = (__pyx_t_7classes_8Viewport_Usage) 0;
+static CYTHON_INLINE PyObject* __Pyx_PyInt_From___pyx_t_7classes_8Viewport_Viewport_Usage(__pyx_t_7classes_8Viewport_Viewport_Usage value) {
+    const __pyx_t_7classes_8Viewport_Viewport_Usage neg_one = (__pyx_t_7classes_8Viewport_Viewport_Usage) ((__pyx_t_7classes_8Viewport_Viewport_Usage) 0 - (__pyx_t_7classes_8Viewport_Viewport_Usage) 1), const_zero = (__pyx_t_7classes_8Viewport_Viewport_Usage) 0;
     const int is_unsigned = neg_one > const_zero;
     if (is_unsigned) {
-        if (sizeof(__pyx_t_7classes_8Viewport_Usage) < sizeof(long)) {
+        if (sizeof(__pyx_t_7classes_8Viewport_Viewport_Usage) < sizeof(long)) {
             return PyInt_FromLong((long) value);
-        } else if (sizeof(__pyx_t_7classes_8Viewport_Usage) <= sizeof(unsigned long)) {
+        } else if (sizeof(__pyx_t_7classes_8Viewport_Viewport_Usage) <= sizeof(unsigned long)) {
             return PyLong_FromUnsignedLong((unsigned long) value);
 #ifdef HAVE_LONG_LONG
-        } else if (sizeof(__pyx_t_7classes_8Viewport_Usage) <= sizeof(unsigned PY_LONG_LONG)) {
+        } else if (sizeof(__pyx_t_7classes_8Viewport_Viewport_Usage) <= sizeof(unsigned PY_LONG_LONG)) {
             return PyLong_FromUnsignedLongLong((unsigned PY_LONG_LONG) value);
 #endif
         }
     } else {
-        if (sizeof(__pyx_t_7classes_8Viewport_Usage) <= sizeof(long)) {
+        if (sizeof(__pyx_t_7classes_8Viewport_Viewport_Usage) <= sizeof(long)) {
             return PyInt_FromLong((long) value);
 #ifdef HAVE_LONG_LONG
-        } else if (sizeof(__pyx_t_7classes_8Viewport_Usage) <= sizeof(PY_LONG_LONG)) {
+        } else if (sizeof(__pyx_t_7classes_8Viewport_Viewport_Usage) <= sizeof(PY_LONG_LONG)) {
             return PyLong_FromLongLong((PY_LONG_LONG) value);
 #endif
         }
@@ -22521,7 +22521,7 @@ static CYTHON_INLINE PyObject* __Pyx_PyInt_From___pyx_t_7classes_8Viewport_Usage
     {
         int one = 1; int little = (int)*(unsigned char *)&one;
         unsigned char *bytes = (unsigned char *)&value;
-        return _PyLong_FromByteArray(bytes, sizeof(__pyx_t_7classes_8Viewport_Usage),
+        return _PyLong_FromByteArray(bytes, sizeof(__pyx_t_7classes_8Viewport_Viewport_Usage),
                                      little, !is_unsigned);
     }
 }

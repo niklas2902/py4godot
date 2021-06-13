@@ -904,22 +904,22 @@ struct __pyx_obj_7classes_14CPUParticles2D_CPUParticles2D;
 /* "classes/Object.pxd":7
  * cdef class Object(Wrapper):
  *     pass
- * ctypedef enum ConnectFlags :CONNECT_DEFERRED, CONNECT_PERSIST, CONNECT_ONESHOT, CONNECT_REFERENCE_COUNTED,             # <<<<<<<<<<<<<<
+ * ctypedef enum Object_ConnectFlags :CONNECT_DEFERRED, CONNECT_PERSIST, CONNECT_ONESHOT, CONNECT_REFERENCE_COUNTED,             # <<<<<<<<<<<<<<
  */
-enum __pyx_t_7classes_6Object_ConnectFlags {
+enum __pyx_t_7classes_6Object_Object_ConnectFlags {
   __pyx_e_7classes_6Object_CONNECT_DEFERRED,
   __pyx_e_7classes_6Object_CONNECT_PERSIST,
   __pyx_e_7classes_6Object_CONNECT_ONESHOT,
   __pyx_e_7classes_6Object_CONNECT_REFERENCE_COUNTED
 };
-typedef enum __pyx_t_7classes_6Object_ConnectFlags __pyx_t_7classes_6Object_ConnectFlags;
+typedef enum __pyx_t_7classes_6Object_Object_ConnectFlags __pyx_t_7classes_6Object_Object_ConnectFlags;
 
 /* "classes/Texture.pxd":7
  * cdef class Texture(classes.Resource.Resource):
  *     pass
- * ctypedef enum Flags :FLAG_MIPMAPS, FLAG_REPEAT, FLAG_FILTER, FLAGS_DEFAULT, FLAG_ANISOTROPIC_FILTER, FLAG_CONVERT_TO_LINEAR, FLAG_MIRRORED_REPEAT, FLAG_VIDEO_SURFACE,             # <<<<<<<<<<<<<<
+ * ctypedef enum Texture_Flags :FLAG_MIPMAPS, FLAG_REPEAT, FLAG_FILTER, FLAGS_DEFAULT, FLAG_ANISOTROPIC_FILTER, FLAG_CONVERT_TO_LINEAR, FLAG_MIRRORED_REPEAT, FLAG_VIDEO_SURFACE,             # <<<<<<<<<<<<<<
  */
-enum __pyx_t_7classes_7Texture_Flags {
+enum __pyx_t_7classes_7Texture_Texture_Flags {
   __pyx_e_7classes_7Texture_FLAG_MIPMAPS,
   __pyx_e_7classes_7Texture_FLAG_REPEAT,
   __pyx_e_7classes_7Texture_FLAG_FILTER,
@@ -929,52 +929,52 @@ enum __pyx_t_7classes_7Texture_Flags {
   __pyx_e_7classes_7Texture_FLAG_MIRRORED_REPEAT,
   __pyx_e_7classes_7Texture_FLAG_VIDEO_SURFACE
 };
-typedef enum __pyx_t_7classes_7Texture_Flags __pyx_t_7classes_7Texture_Flags;
+typedef enum __pyx_t_7classes_7Texture_Texture_Flags __pyx_t_7classes_7Texture_Texture_Flags;
 
 /* "classes/Curve.pxd":7
  * cdef class Curve(classes.Resource.Resource):
  *     pass
- * ctypedef enum TangentMode :TANGENT_FREE, TANGENT_LINEAR, TANGENT_MODE_COUNT,             # <<<<<<<<<<<<<<
+ * ctypedef enum Curve_TangentMode :TANGENT_FREE, TANGENT_LINEAR, TANGENT_MODE_COUNT,             # <<<<<<<<<<<<<<
  */
-enum __pyx_t_7classes_5Curve_TangentMode {
+enum __pyx_t_7classes_5Curve_Curve_TangentMode {
   __pyx_e_7classes_5Curve_TANGENT_FREE,
   __pyx_e_7classes_5Curve_TANGENT_LINEAR,
   __pyx_e_7classes_5Curve_TANGENT_MODE_COUNT
 };
-typedef enum __pyx_t_7classes_5Curve_TangentMode __pyx_t_7classes_5Curve_TangentMode;
+typedef enum __pyx_t_7classes_5Curve_Curve_TangentMode __pyx_t_7classes_5Curve_Curve_TangentMode;
 
 /* "classes/Node.pxd":7
  * cdef class Node(classes.Object.Object):
  *     pass
- * ctypedef enum PauseMode :PAUSE_MODE_INHERIT, PAUSE_MODE_STOP, PAUSE_MODE_PROCESS,             # <<<<<<<<<<<<<<
- * ctypedef enum DuplicateFlags :DUPLICATE_SIGNALS, DUPLICATE_GROUPS, DUPLICATE_SCRIPTS, DUPLICATE_USE_INSTANCING,
+ * ctypedef enum Node_PauseMode :PAUSE_MODE_INHERIT, PAUSE_MODE_STOP, PAUSE_MODE_PROCESS,             # <<<<<<<<<<<<<<
+ * ctypedef enum Node_DuplicateFlags :DUPLICATE_SIGNALS, DUPLICATE_GROUPS, DUPLICATE_SCRIPTS, DUPLICATE_USE_INSTANCING,
  */
-enum __pyx_t_7classes_4Node_PauseMode {
+enum __pyx_t_7classes_4Node_Node_PauseMode {
   __pyx_e_7classes_4Node_PAUSE_MODE_INHERIT,
   __pyx_e_7classes_4Node_PAUSE_MODE_STOP,
   __pyx_e_7classes_4Node_PAUSE_MODE_PROCESS
 };
-typedef enum __pyx_t_7classes_4Node_PauseMode __pyx_t_7classes_4Node_PauseMode;
+typedef enum __pyx_t_7classes_4Node_Node_PauseMode __pyx_t_7classes_4Node_Node_PauseMode;
 
 /* "classes/Node.pxd":8
  *     pass
- * ctypedef enum PauseMode :PAUSE_MODE_INHERIT, PAUSE_MODE_STOP, PAUSE_MODE_PROCESS,
- * ctypedef enum DuplicateFlags :DUPLICATE_SIGNALS, DUPLICATE_GROUPS, DUPLICATE_SCRIPTS, DUPLICATE_USE_INSTANCING,             # <<<<<<<<<<<<<<
+ * ctypedef enum Node_PauseMode :PAUSE_MODE_INHERIT, PAUSE_MODE_STOP, PAUSE_MODE_PROCESS,
+ * ctypedef enum Node_DuplicateFlags :DUPLICATE_SIGNALS, DUPLICATE_GROUPS, DUPLICATE_SCRIPTS, DUPLICATE_USE_INSTANCING,             # <<<<<<<<<<<<<<
  */
-enum __pyx_t_7classes_4Node_DuplicateFlags {
+enum __pyx_t_7classes_4Node_Node_DuplicateFlags {
   __pyx_e_7classes_4Node_DUPLICATE_SIGNALS,
   __pyx_e_7classes_4Node_DUPLICATE_GROUPS,
   __pyx_e_7classes_4Node_DUPLICATE_SCRIPTS,
   __pyx_e_7classes_4Node_DUPLICATE_USE_INSTANCING
 };
-typedef enum __pyx_t_7classes_4Node_DuplicateFlags __pyx_t_7classes_4Node_DuplicateFlags;
+typedef enum __pyx_t_7classes_4Node_Node_DuplicateFlags __pyx_t_7classes_4Node_Node_DuplicateFlags;
 
 /* "classes/CanvasItem.pxd":7
  * cdef class CanvasItem(classes.Node.Node):
  *     pass
- * ctypedef enum BlendMode :BLEND_MODE_MIX, BLEND_MODE_ADD, BLEND_MODE_SUB, BLEND_MODE_MUL, BLEND_MODE_PREMULT_ALPHA, BLEND_MODE_DISABLED,             # <<<<<<<<<<<<<<
+ * ctypedef enum CanvasItem_BlendMode :BLEND_MODE_MIX, BLEND_MODE_ADD, BLEND_MODE_SUB, BLEND_MODE_MUL, BLEND_MODE_PREMULT_ALPHA, BLEND_MODE_DISABLED,             # <<<<<<<<<<<<<<
  */
-enum __pyx_t_7classes_10CanvasItem_BlendMode {
+enum __pyx_t_7classes_10CanvasItem_CanvasItem_BlendMode {
   __pyx_e_7classes_10CanvasItem_BLEND_MODE_MIX,
   __pyx_e_7classes_10CanvasItem_BLEND_MODE_ADD,
   __pyx_e_7classes_10CanvasItem_BLEND_MODE_SUB,
@@ -982,16 +982,16 @@ enum __pyx_t_7classes_10CanvasItem_BlendMode {
   __pyx_e_7classes_10CanvasItem_BLEND_MODE_PREMULT_ALPHA,
   __pyx_e_7classes_10CanvasItem_BLEND_MODE_DISABLED
 };
-typedef enum __pyx_t_7classes_10CanvasItem_BlendMode __pyx_t_7classes_10CanvasItem_BlendMode;
+typedef enum __pyx_t_7classes_10CanvasItem_CanvasItem_BlendMode __pyx_t_7classes_10CanvasItem_CanvasItem_BlendMode;
 
 /* "core/variant/Variant.pxd":17
  *         print("new_variant", type(i))
  * 
- * ctypedef enum Type:             # <<<<<<<<<<<<<<
+ * ctypedef enum Variant_Type:             # <<<<<<<<<<<<<<
  *     NIL,
  *     # atomic types
  */
-enum __pyx_t_4core_7variant_7Variant_Type {
+enum __pyx_t_4core_7variant_7Variant_Variant_Type {
   __pyx_e_4core_7variant_7Variant_NIL,
   __pyx_e_4core_7variant_7Variant_BOOL,
   __pyx_e_4core_7variant_7Variant_INT,
@@ -1021,16 +1021,16 @@ enum __pyx_t_4core_7variant_7Variant_Type {
   __pyx_e_4core_7variant_7Variant_POOL_COLOR_ARRAY,
   __pyx_e_4core_7variant_7Variant_VARIANT_MAX
 };
-typedef enum __pyx_t_4core_7variant_7Variant_Type __pyx_t_4core_7variant_7Variant_Type;
+typedef enum __pyx_t_4core_7variant_7Variant_Variant_Type __pyx_t_4core_7variant_7Variant_Variant_Type;
 
 /* "core/variant/Variant.pxd":58
  * 
  * 
- * ctypedef enum Operator :             # <<<<<<<<<<<<<<
+ * ctypedef enum Variant_Operator :             # <<<<<<<<<<<<<<
  * 
  *     #comparation
  */
-enum __pyx_t_4core_7variant_7Variant_Operator {
+enum __pyx_t_4core_7variant_7Variant_Variant_Operator {
   __pyx_e_4core_7variant_7Variant_OP_EQUAL,
   __pyx_e_4core_7variant_7Variant_OP_NOT_EQUAL,
   __pyx_e_4core_7variant_7Variant_OP_LESS,
@@ -1058,45 +1058,45 @@ enum __pyx_t_4core_7variant_7Variant_Operator {
   __pyx_e_4core_7variant_7Variant_OP_IN,
   __pyx_e_4core_7variant_7Variant_OP_MAX
 };
-typedef enum __pyx_t_4core_7variant_7Variant_Operator __pyx_t_4core_7variant_7Variant_Operator;
+typedef enum __pyx_t_4core_7variant_7Variant_Variant_Operator __pyx_t_4core_7variant_7Variant_Variant_Operator;
 
 /* "core/vector3/Vector3.pxd":15
  * 
  * 
- * ctypedef enum Axis :             # <<<<<<<<<<<<<<
- *     AXIS_X,
- *     AXIS_Y,
+ * ctypedef enum Vector3_Axis :             # <<<<<<<<<<<<<<
+ *     Vector3_AXIS_X,
+ *     Vector3_AXIS_Y,
  */
-enum __pyx_t_4core_7vector3_7Vector3_Axis {
-  __pyx_e_4core_7vector3_7Vector3_AXIS_X,
-  __pyx_e_4core_7vector3_7Vector3_AXIS_Y,
-  __pyx_e_4core_7vector3_7Vector3_AXIS_Z
+enum __pyx_t_4core_7vector3_7Vector3_Vector3_Axis {
+  __pyx_e_4core_7vector3_7Vector3_Vector3_AXIS_X,
+  __pyx_e_4core_7vector3_7Vector3_Vector3_AXIS_Y,
+  __pyx_e_4core_7vector3_7Vector3_Vector3_AXIS_Z
 };
-typedef enum __pyx_t_4core_7vector3_7Vector3_Axis __pyx_t_4core_7vector3_7Vector3_Axis;
+typedef enum __pyx_t_4core_7vector3_7Vector3_Vector3_Axis __pyx_t_4core_7vector3_7Vector3_Vector3_Axis;
 
 /* "classes/CPUParticles2D.pxd":7
  * cdef class CPUParticles2D(classes.Node2D.Node2D):
  *     pass
- * ctypedef enum Flags :FLAG_ALIGN_Y_TO_VELOCITY, FLAG_ROTATE_Y, FLAG_DISABLE_Z, FLAG_MAX,             # <<<<<<<<<<<<<<
- * ctypedef enum EmissionShape :EMISSION_SHAPE_POINT, EMISSION_SHAPE_SPHERE, EMISSION_SHAPE_RECTANGLE, EMISSION_SHAPE_POINTS, EMISSION_SHAPE_DIRECTED_POINTS, EMISSION_SHAPE_MAX,
- * ctypedef enum Parameter :PARAM_INITIAL_LINEAR_VELOCITY, PARAM_ANGULAR_VELOCITY, PARAM_ORBIT_VELOCITY, PARAM_LINEAR_ACCEL, PARAM_RADIAL_ACCEL, PARAM_TANGENTIAL_ACCEL, PARAM_DAMPING, PARAM_ANGLE, PARAM_SCALE, PARAM_HUE_VARIATION, PARAM_ANIM_SPEED, PARAM_ANIM_OFFSET, PARAM_MAX,
+ * ctypedef enum CPUParticles2D_Flags :FLAG_ALIGN_Y_TO_VELOCITY, FLAG_ROTATE_Y, FLAG_DISABLE_Z, FLAG_MAX,             # <<<<<<<<<<<<<<
+ * ctypedef enum CPUParticles2D_EmissionShape :EMISSION_SHAPE_POINT, EMISSION_SHAPE_SPHERE, EMISSION_SHAPE_RECTANGLE, EMISSION_SHAPE_POINTS, EMISSION_SHAPE_DIRECTED_POINTS, EMISSION_SHAPE_MAX,
+ * ctypedef enum CPUParticles2D_Parameter :PARAM_INITIAL_LINEAR_VELOCITY, PARAM_ANGULAR_VELOCITY, PARAM_ORBIT_VELOCITY, PARAM_LINEAR_ACCEL, PARAM_RADIAL_ACCEL, PARAM_TANGENTIAL_ACCEL, PARAM_DAMPING, PARAM_ANGLE, PARAM_SCALE, PARAM_HUE_VARIATION, PARAM_ANIM_SPEED, PARAM_ANIM_OFFSET, PARAM_MAX,
  */
-enum __pyx_t_7classes_14CPUParticles2D_Flags {
+enum __pyx_t_7classes_14CPUParticles2D_CPUParticles2D_Flags {
   __pyx_e_7classes_14CPUParticles2D_FLAG_ALIGN_Y_TO_VELOCITY,
   __pyx_e_7classes_14CPUParticles2D_FLAG_ROTATE_Y,
   __pyx_e_7classes_14CPUParticles2D_FLAG_DISABLE_Z,
   __pyx_e_7classes_14CPUParticles2D_FLAG_MAX
 };
-typedef enum __pyx_t_7classes_14CPUParticles2D_Flags __pyx_t_7classes_14CPUParticles2D_Flags;
+typedef enum __pyx_t_7classes_14CPUParticles2D_CPUParticles2D_Flags __pyx_t_7classes_14CPUParticles2D_CPUParticles2D_Flags;
 
 /* "classes/CPUParticles2D.pxd":8
  *     pass
- * ctypedef enum Flags :FLAG_ALIGN_Y_TO_VELOCITY, FLAG_ROTATE_Y, FLAG_DISABLE_Z, FLAG_MAX,
- * ctypedef enum EmissionShape :EMISSION_SHAPE_POINT, EMISSION_SHAPE_SPHERE, EMISSION_SHAPE_RECTANGLE, EMISSION_SHAPE_POINTS, EMISSION_SHAPE_DIRECTED_POINTS, EMISSION_SHAPE_MAX,             # <<<<<<<<<<<<<<
- * ctypedef enum Parameter :PARAM_INITIAL_LINEAR_VELOCITY, PARAM_ANGULAR_VELOCITY, PARAM_ORBIT_VELOCITY, PARAM_LINEAR_ACCEL, PARAM_RADIAL_ACCEL, PARAM_TANGENTIAL_ACCEL, PARAM_DAMPING, PARAM_ANGLE, PARAM_SCALE, PARAM_HUE_VARIATION, PARAM_ANIM_SPEED, PARAM_ANIM_OFFSET, PARAM_MAX,
- * ctypedef enum DrawOrder :DRAW_ORDER_INDEX, DRAW_ORDER_LIFETIME,
+ * ctypedef enum CPUParticles2D_Flags :FLAG_ALIGN_Y_TO_VELOCITY, FLAG_ROTATE_Y, FLAG_DISABLE_Z, FLAG_MAX,
+ * ctypedef enum CPUParticles2D_EmissionShape :EMISSION_SHAPE_POINT, EMISSION_SHAPE_SPHERE, EMISSION_SHAPE_RECTANGLE, EMISSION_SHAPE_POINTS, EMISSION_SHAPE_DIRECTED_POINTS, EMISSION_SHAPE_MAX,             # <<<<<<<<<<<<<<
+ * ctypedef enum CPUParticles2D_Parameter :PARAM_INITIAL_LINEAR_VELOCITY, PARAM_ANGULAR_VELOCITY, PARAM_ORBIT_VELOCITY, PARAM_LINEAR_ACCEL, PARAM_RADIAL_ACCEL, PARAM_TANGENTIAL_ACCEL, PARAM_DAMPING, PARAM_ANGLE, PARAM_SCALE, PARAM_HUE_VARIATION, PARAM_ANIM_SPEED, PARAM_ANIM_OFFSET, PARAM_MAX,
+ * ctypedef enum CPUParticles2D_DrawOrder :DRAW_ORDER_INDEX, DRAW_ORDER_LIFETIME,
  */
-enum __pyx_t_7classes_14CPUParticles2D_EmissionShape {
+enum __pyx_t_7classes_14CPUParticles2D_CPUParticles2D_EmissionShape {
   __pyx_e_7classes_14CPUParticles2D_EMISSION_SHAPE_POINT,
   __pyx_e_7classes_14CPUParticles2D_EMISSION_SHAPE_SPHERE,
   __pyx_e_7classes_14CPUParticles2D_EMISSION_SHAPE_RECTANGLE,
@@ -1104,15 +1104,15 @@ enum __pyx_t_7classes_14CPUParticles2D_EmissionShape {
   __pyx_e_7classes_14CPUParticles2D_EMISSION_SHAPE_DIRECTED_POINTS,
   __pyx_e_7classes_14CPUParticles2D_EMISSION_SHAPE_MAX
 };
-typedef enum __pyx_t_7classes_14CPUParticles2D_EmissionShape __pyx_t_7classes_14CPUParticles2D_EmissionShape;
+typedef enum __pyx_t_7classes_14CPUParticles2D_CPUParticles2D_EmissionShape __pyx_t_7classes_14CPUParticles2D_CPUParticles2D_EmissionShape;
 
 /* "classes/CPUParticles2D.pxd":9
- * ctypedef enum Flags :FLAG_ALIGN_Y_TO_VELOCITY, FLAG_ROTATE_Y, FLAG_DISABLE_Z, FLAG_MAX,
- * ctypedef enum EmissionShape :EMISSION_SHAPE_POINT, EMISSION_SHAPE_SPHERE, EMISSION_SHAPE_RECTANGLE, EMISSION_SHAPE_POINTS, EMISSION_SHAPE_DIRECTED_POINTS, EMISSION_SHAPE_MAX,
- * ctypedef enum Parameter :PARAM_INITIAL_LINEAR_VELOCITY, PARAM_ANGULAR_VELOCITY, PARAM_ORBIT_VELOCITY, PARAM_LINEAR_ACCEL, PARAM_RADIAL_ACCEL, PARAM_TANGENTIAL_ACCEL, PARAM_DAMPING, PARAM_ANGLE, PARAM_SCALE, PARAM_HUE_VARIATION, PARAM_ANIM_SPEED, PARAM_ANIM_OFFSET, PARAM_MAX,             # <<<<<<<<<<<<<<
- * ctypedef enum DrawOrder :DRAW_ORDER_INDEX, DRAW_ORDER_LIFETIME,
+ * ctypedef enum CPUParticles2D_Flags :FLAG_ALIGN_Y_TO_VELOCITY, FLAG_ROTATE_Y, FLAG_DISABLE_Z, FLAG_MAX,
+ * ctypedef enum CPUParticles2D_EmissionShape :EMISSION_SHAPE_POINT, EMISSION_SHAPE_SPHERE, EMISSION_SHAPE_RECTANGLE, EMISSION_SHAPE_POINTS, EMISSION_SHAPE_DIRECTED_POINTS, EMISSION_SHAPE_MAX,
+ * ctypedef enum CPUParticles2D_Parameter :PARAM_INITIAL_LINEAR_VELOCITY, PARAM_ANGULAR_VELOCITY, PARAM_ORBIT_VELOCITY, PARAM_LINEAR_ACCEL, PARAM_RADIAL_ACCEL, PARAM_TANGENTIAL_ACCEL, PARAM_DAMPING, PARAM_ANGLE, PARAM_SCALE, PARAM_HUE_VARIATION, PARAM_ANIM_SPEED, PARAM_ANIM_OFFSET, PARAM_MAX,             # <<<<<<<<<<<<<<
+ * ctypedef enum CPUParticles2D_DrawOrder :DRAW_ORDER_INDEX, DRAW_ORDER_LIFETIME,
  */
-enum __pyx_t_7classes_14CPUParticles2D_Parameter {
+enum __pyx_t_7classes_14CPUParticles2D_CPUParticles2D_Parameter {
   __pyx_e_7classes_14CPUParticles2D_PARAM_INITIAL_LINEAR_VELOCITY,
   __pyx_e_7classes_14CPUParticles2D_PARAM_ANGULAR_VELOCITY,
   __pyx_e_7classes_14CPUParticles2D_PARAM_ORBIT_VELOCITY,
@@ -1127,18 +1127,18 @@ enum __pyx_t_7classes_14CPUParticles2D_Parameter {
   __pyx_e_7classes_14CPUParticles2D_PARAM_ANIM_OFFSET,
   __pyx_e_7classes_14CPUParticles2D_PARAM_MAX
 };
-typedef enum __pyx_t_7classes_14CPUParticles2D_Parameter __pyx_t_7classes_14CPUParticles2D_Parameter;
+typedef enum __pyx_t_7classes_14CPUParticles2D_CPUParticles2D_Parameter __pyx_t_7classes_14CPUParticles2D_CPUParticles2D_Parameter;
 
 /* "classes/CPUParticles2D.pxd":10
- * ctypedef enum EmissionShape :EMISSION_SHAPE_POINT, EMISSION_SHAPE_SPHERE, EMISSION_SHAPE_RECTANGLE, EMISSION_SHAPE_POINTS, EMISSION_SHAPE_DIRECTED_POINTS, EMISSION_SHAPE_MAX,
- * ctypedef enum Parameter :PARAM_INITIAL_LINEAR_VELOCITY, PARAM_ANGULAR_VELOCITY, PARAM_ORBIT_VELOCITY, PARAM_LINEAR_ACCEL, PARAM_RADIAL_ACCEL, PARAM_TANGENTIAL_ACCEL, PARAM_DAMPING, PARAM_ANGLE, PARAM_SCALE, PARAM_HUE_VARIATION, PARAM_ANIM_SPEED, PARAM_ANIM_OFFSET, PARAM_MAX,
- * ctypedef enum DrawOrder :DRAW_ORDER_INDEX, DRAW_ORDER_LIFETIME,             # <<<<<<<<<<<<<<
+ * ctypedef enum CPUParticles2D_EmissionShape :EMISSION_SHAPE_POINT, EMISSION_SHAPE_SPHERE, EMISSION_SHAPE_RECTANGLE, EMISSION_SHAPE_POINTS, EMISSION_SHAPE_DIRECTED_POINTS, EMISSION_SHAPE_MAX,
+ * ctypedef enum CPUParticles2D_Parameter :PARAM_INITIAL_LINEAR_VELOCITY, PARAM_ANGULAR_VELOCITY, PARAM_ORBIT_VELOCITY, PARAM_LINEAR_ACCEL, PARAM_RADIAL_ACCEL, PARAM_TANGENTIAL_ACCEL, PARAM_DAMPING, PARAM_ANGLE, PARAM_SCALE, PARAM_HUE_VARIATION, PARAM_ANIM_SPEED, PARAM_ANIM_OFFSET, PARAM_MAX,
+ * ctypedef enum CPUParticles2D_DrawOrder :DRAW_ORDER_INDEX, DRAW_ORDER_LIFETIME,             # <<<<<<<<<<<<<<
  */
-enum __pyx_t_7classes_14CPUParticles2D_DrawOrder {
+enum __pyx_t_7classes_14CPUParticles2D_CPUParticles2D_DrawOrder {
   __pyx_e_7classes_14CPUParticles2D_DRAW_ORDER_INDEX,
   __pyx_e_7classes_14CPUParticles2D_DRAW_ORDER_LIFETIME
 };
-typedef enum __pyx_t_7classes_14CPUParticles2D_DrawOrder __pyx_t_7classes_14CPUParticles2D_DrawOrder;
+typedef enum __pyx_t_7classes_14CPUParticles2D_CPUParticles2D_DrawOrder __pyx_t_7classes_14CPUParticles2D_CPUParticles2D_DrawOrder;
 
 /* "utils/Wrapper.pxd":2
  * from godot_api.binding cimport *
@@ -1158,7 +1158,7 @@ struct __pyx_obj_5utils_7Wrapper_Wrapper {
  * from utils.Wrapper cimport *
  * cdef class Object(Wrapper):             # <<<<<<<<<<<<<<
  *     pass
- * ctypedef enum ConnectFlags :CONNECT_DEFERRED, CONNECT_PERSIST, CONNECT_ONESHOT, CONNECT_REFERENCE_COUNTED,
+ * ctypedef enum Object_ConnectFlags :CONNECT_DEFERRED, CONNECT_PERSIST, CONNECT_ONESHOT, CONNECT_REFERENCE_COUNTED,
  */
 struct __pyx_obj_7classes_6Object_Object {
   struct __pyx_obj_5utils_7Wrapper_Wrapper __pyx_base;
@@ -1203,7 +1203,7 @@ struct __pyx_obj_7classes_8Gradient_Gradient {
  * cimport classes.Resource
  * cdef class Texture(classes.Resource.Resource):             # <<<<<<<<<<<<<<
  *     pass
- * ctypedef enum Flags :FLAG_MIPMAPS, FLAG_REPEAT, FLAG_FILTER, FLAGS_DEFAULT, FLAG_ANISOTROPIC_FILTER, FLAG_CONVERT_TO_LINEAR, FLAG_MIRRORED_REPEAT, FLAG_VIDEO_SURFACE,
+ * ctypedef enum Texture_Flags :FLAG_MIPMAPS, FLAG_REPEAT, FLAG_FILTER, FLAGS_DEFAULT, FLAG_ANISOTROPIC_FILTER, FLAG_CONVERT_TO_LINEAR, FLAG_MIRRORED_REPEAT, FLAG_VIDEO_SURFACE,
  */
 struct __pyx_obj_7classes_7Texture_Texture {
   struct __pyx_obj_7classes_8Resource_Resource __pyx_base;
@@ -1215,7 +1215,7 @@ struct __pyx_obj_7classes_7Texture_Texture {
  * cimport classes.Resource
  * cdef class Curve(classes.Resource.Resource):             # <<<<<<<<<<<<<<
  *     pass
- * ctypedef enum TangentMode :TANGENT_FREE, TANGENT_LINEAR, TANGENT_MODE_COUNT,
+ * ctypedef enum Curve_TangentMode :TANGENT_FREE, TANGENT_LINEAR, TANGENT_MODE_COUNT,
  */
 struct __pyx_obj_7classes_5Curve_Curve {
   struct __pyx_obj_7classes_8Resource_Resource __pyx_base;
@@ -1227,7 +1227,7 @@ struct __pyx_obj_7classes_5Curve_Curve {
  * cimport classes.Object
  * cdef class Node(classes.Object.Object):             # <<<<<<<<<<<<<<
  *     pass
- * ctypedef enum PauseMode :PAUSE_MODE_INHERIT, PAUSE_MODE_STOP, PAUSE_MODE_PROCESS,
+ * ctypedef enum Node_PauseMode :PAUSE_MODE_INHERIT, PAUSE_MODE_STOP, PAUSE_MODE_PROCESS,
  */
 struct __pyx_obj_7classes_4Node_Node {
   struct __pyx_obj_7classes_6Object_Object __pyx_base;
@@ -1239,7 +1239,7 @@ struct __pyx_obj_7classes_4Node_Node {
  * cimport classes.Node
  * cdef class CanvasItem(classes.Node.Node):             # <<<<<<<<<<<<<<
  *     pass
- * ctypedef enum BlendMode :BLEND_MODE_MIX, BLEND_MODE_ADD, BLEND_MODE_SUB, BLEND_MODE_MUL, BLEND_MODE_PREMULT_ALPHA, BLEND_MODE_DISABLED,
+ * ctypedef enum CanvasItem_BlendMode :BLEND_MODE_MIX, BLEND_MODE_ADD, BLEND_MODE_SUB, BLEND_MODE_MUL, BLEND_MODE_PREMULT_ALPHA, BLEND_MODE_DISABLED,
  */
 struct __pyx_obj_7classes_10CanvasItem_CanvasItem {
   struct __pyx_obj_7classes_4Node_Node __pyx_base;
@@ -1584,7 +1584,7 @@ struct __pyx_obj_4core_7vector3_7Vector3_Vector3 {
  * cimport classes.Node2D
  * cdef class CPUParticles2D(classes.Node2D.Node2D):             # <<<<<<<<<<<<<<
  *     pass
- * ctypedef enum Flags :FLAG_ALIGN_Y_TO_VELOCITY, FLAG_ROTATE_Y, FLAG_DISABLE_Z, FLAG_MAX,
+ * ctypedef enum CPUParticles2D_Flags :FLAG_ALIGN_Y_TO_VELOCITY, FLAG_ROTATE_Y, FLAG_DISABLE_Z, FLAG_MAX,
  */
 struct __pyx_obj_7classes_14CPUParticles2D_CPUParticles2D {
   struct __pyx_obj_7classes_6Node2D_Node2D __pyx_base;
@@ -1613,7 +1613,7 @@ static CYTHON_INLINE godot_object *__pyx_f_5utils_7Wrapper_7Wrapper_get_godot_ow
  * from utils.Wrapper cimport *
  * cdef class Object(Wrapper):             # <<<<<<<<<<<<<<
  *     pass
- * ctypedef enum ConnectFlags :CONNECT_DEFERRED, CONNECT_PERSIST, CONNECT_ONESHOT, CONNECT_REFERENCE_COUNTED,
+ * ctypedef enum Object_ConnectFlags :CONNECT_DEFERRED, CONNECT_PERSIST, CONNECT_ONESHOT, CONNECT_REFERENCE_COUNTED,
  */
 
 struct __pyx_vtabstruct_7classes_6Object_Object {
@@ -1666,7 +1666,7 @@ static struct __pyx_vtabstruct_7classes_8Gradient_Gradient *__pyx_vtabptr_7class
  * cimport classes.Resource
  * cdef class Texture(classes.Resource.Resource):             # <<<<<<<<<<<<<<
  *     pass
- * ctypedef enum Flags :FLAG_MIPMAPS, FLAG_REPEAT, FLAG_FILTER, FLAGS_DEFAULT, FLAG_ANISOTROPIC_FILTER, FLAG_CONVERT_TO_LINEAR, FLAG_MIRRORED_REPEAT, FLAG_VIDEO_SURFACE,
+ * ctypedef enum Texture_Flags :FLAG_MIPMAPS, FLAG_REPEAT, FLAG_FILTER, FLAGS_DEFAULT, FLAG_ANISOTROPIC_FILTER, FLAG_CONVERT_TO_LINEAR, FLAG_MIRRORED_REPEAT, FLAG_VIDEO_SURFACE,
  */
 
 struct __pyx_vtabstruct_7classes_7Texture_Texture {
@@ -1680,7 +1680,7 @@ static struct __pyx_vtabstruct_7classes_7Texture_Texture *__pyx_vtabptr_7classes
  * cimport classes.Resource
  * cdef class Curve(classes.Resource.Resource):             # <<<<<<<<<<<<<<
  *     pass
- * ctypedef enum TangentMode :TANGENT_FREE, TANGENT_LINEAR, TANGENT_MODE_COUNT,
+ * ctypedef enum Curve_TangentMode :TANGENT_FREE, TANGENT_LINEAR, TANGENT_MODE_COUNT,
  */
 
 struct __pyx_vtabstruct_7classes_5Curve_Curve {
@@ -1694,7 +1694,7 @@ static struct __pyx_vtabstruct_7classes_5Curve_Curve *__pyx_vtabptr_7classes_5Cu
  * cimport classes.Object
  * cdef class Node(classes.Object.Object):             # <<<<<<<<<<<<<<
  *     pass
- * ctypedef enum PauseMode :PAUSE_MODE_INHERIT, PAUSE_MODE_STOP, PAUSE_MODE_PROCESS,
+ * ctypedef enum Node_PauseMode :PAUSE_MODE_INHERIT, PAUSE_MODE_STOP, PAUSE_MODE_PROCESS,
  */
 
 struct __pyx_vtabstruct_7classes_4Node_Node {
@@ -1708,7 +1708,7 @@ static struct __pyx_vtabstruct_7classes_4Node_Node *__pyx_vtabptr_7classes_4Node
  * cimport classes.Node
  * cdef class CanvasItem(classes.Node.Node):             # <<<<<<<<<<<<<<
  *     pass
- * ctypedef enum BlendMode :BLEND_MODE_MIX, BLEND_MODE_ADD, BLEND_MODE_SUB, BLEND_MODE_MUL, BLEND_MODE_PREMULT_ALPHA, BLEND_MODE_DISABLED,
+ * ctypedef enum CanvasItem_BlendMode :BLEND_MODE_MIX, BLEND_MODE_ADD, BLEND_MODE_SUB, BLEND_MODE_MUL, BLEND_MODE_PREMULT_ALPHA, BLEND_MODE_DISABLED,
  */
 
 struct __pyx_vtabstruct_7classes_10CanvasItem_CanvasItem {
@@ -2432,10 +2432,10 @@ static void __Pyx_AddTraceback(const char *funcname, int c_line,
 static CYTHON_INLINE PyObject* __Pyx_PyInt_From_int(int value);
 
 /* CIntToPy.proto */
-static CYTHON_INLINE PyObject* __Pyx_PyInt_From___pyx_t_7classes_14CPUParticles2D_DrawOrder(__pyx_t_7classes_14CPUParticles2D_DrawOrder value);
+static CYTHON_INLINE PyObject* __Pyx_PyInt_From___pyx_t_7classes_14CPUParticles2D_CPUParticles2D_DrawOrder(__pyx_t_7classes_14CPUParticles2D_CPUParticles2D_DrawOrder value);
 
 /* CIntToPy.proto */
-static CYTHON_INLINE PyObject* __Pyx_PyInt_From___pyx_t_7classes_14CPUParticles2D_EmissionShape(__pyx_t_7classes_14CPUParticles2D_EmissionShape value);
+static CYTHON_INLINE PyObject* __Pyx_PyInt_From___pyx_t_7classes_14CPUParticles2D_CPUParticles2D_EmissionShape(__pyx_t_7classes_14CPUParticles2D_CPUParticles2D_EmissionShape value);
 
 /* CIntFromPy.proto */
 static CYTHON_INLINE int __Pyx_PyInt_As_int(PyObject *);
@@ -14649,7 +14649,7 @@ static PyObject *__pyx_pw_7classes_14CPUParticles2D_14CPUParticles2D_15get_draw_
 
 static PyObject *__pyx_pf_7classes_14CPUParticles2D_14CPUParticles2D_14get_draw_order(struct __pyx_obj_7classes_14CPUParticles2D_CPUParticles2D *__pyx_v_self) {
   CYTHON_UNUSED godot_object *__pyx_v__owner;
-  __pyx_t_7classes_14CPUParticles2D_DrawOrder *__pyx_v_ret;
+  __pyx_t_7classes_14CPUParticles2D_CPUParticles2D_DrawOrder *__pyx_v_ret;
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   godot_object *__pyx_t_1;
@@ -14664,7 +14664,7 @@ static PyObject *__pyx_pf_7classes_14CPUParticles2D_14CPUParticles2D_14get_draw_
  *   def  get_draw_order(self):
  *     cdef godot_object *_owner = self.godot_owner             # <<<<<<<<<<<<<<
  * 
- *     cdef DrawOrder* ret = NULL;
+ *     cdef CPUParticles2D_DrawOrder* ret = NULL;
  */
   __pyx_t_1 = __pyx_v_self->__pyx_base.__pyx_base.__pyx_base.__pyx_base.__pyx_base.godot_owner;
   __pyx_v__owner = __pyx_t_1;
@@ -14672,14 +14672,14 @@ static PyObject *__pyx_pf_7classes_14CPUParticles2D_14CPUParticles2D_14get_draw_
   /* "classes/CPUParticles2D.pyx":597
  *     cdef godot_object *_owner = self.godot_owner
  * 
- *     cdef DrawOrder* ret = NULL;             # <<<<<<<<<<<<<<
+ *     cdef CPUParticles2D_DrawOrder* ret = NULL;             # <<<<<<<<<<<<<<
  * 
  *     api_core.godot_method_bind_ptrcall(bind_cpuparticles2d_get_draw_order,self.godot_owner,NULL,&ret)
  */
   __pyx_v_ret = NULL;
 
   /* "classes/CPUParticles2D.pyx":599
- *     cdef DrawOrder* ret = NULL;
+ *     cdef CPUParticles2D_DrawOrder* ret = NULL;
  * 
  *     api_core.godot_method_bind_ptrcall(bind_cpuparticles2d_get_draw_order,self.godot_owner,NULL,&ret)             # <<<<<<<<<<<<<<
  *     hello('hallo2')
@@ -14704,7 +14704,7 @@ static PyObject *__pyx_pf_7classes_14CPUParticles2D_14CPUParticles2D_14get_draw_
  *   def  get_emission_colors(self):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_2 = __Pyx_PyInt_From___pyx_t_7classes_14CPUParticles2D_DrawOrder((*__pyx_v_ret)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 601, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyInt_From___pyx_t_7classes_14CPUParticles2D_CPUParticles2D_DrawOrder((*__pyx_v_ret)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 601, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_r = __pyx_t_2;
   __pyx_t_2 = 0;
@@ -15098,7 +15098,7 @@ static PyObject *__pyx_pw_7classes_14CPUParticles2D_14CPUParticles2D_25get_emiss
 
 static PyObject *__pyx_pf_7classes_14CPUParticles2D_14CPUParticles2D_24get_emission_shape(struct __pyx_obj_7classes_14CPUParticles2D_CPUParticles2D *__pyx_v_self) {
   CYTHON_UNUSED godot_object *__pyx_v__owner;
-  __pyx_t_7classes_14CPUParticles2D_EmissionShape *__pyx_v_ret;
+  __pyx_t_7classes_14CPUParticles2D_CPUParticles2D_EmissionShape *__pyx_v_ret;
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   godot_object *__pyx_t_1;
@@ -15113,7 +15113,7 @@ static PyObject *__pyx_pf_7classes_14CPUParticles2D_14CPUParticles2D_24get_emiss
  *   def  get_emission_shape(self):
  *     cdef godot_object *_owner = self.godot_owner             # <<<<<<<<<<<<<<
  * 
- *     cdef EmissionShape* ret = NULL;
+ *     cdef CPUParticles2D_EmissionShape* ret = NULL;
  */
   __pyx_t_1 = __pyx_v_self->__pyx_base.__pyx_base.__pyx_base.__pyx_base.__pyx_base.godot_owner;
   __pyx_v__owner = __pyx_t_1;
@@ -15121,14 +15121,14 @@ static PyObject *__pyx_pf_7classes_14CPUParticles2D_14CPUParticles2D_24get_emiss
   /* "classes/CPUParticles2D.pyx":636
  *     cdef godot_object *_owner = self.godot_owner
  * 
- *     cdef EmissionShape* ret = NULL;             # <<<<<<<<<<<<<<
+ *     cdef CPUParticles2D_EmissionShape* ret = NULL;             # <<<<<<<<<<<<<<
  * 
  *     api_core.godot_method_bind_ptrcall(bind_cpuparticles2d_get_emission_shape,self.godot_owner,NULL,&ret)
  */
   __pyx_v_ret = NULL;
 
   /* "classes/CPUParticles2D.pyx":638
- *     cdef EmissionShape* ret = NULL;
+ *     cdef CPUParticles2D_EmissionShape* ret = NULL;
  * 
  *     api_core.godot_method_bind_ptrcall(bind_cpuparticles2d_get_emission_shape,self.godot_owner,NULL,&ret)             # <<<<<<<<<<<<<<
  *     hello('hallo2')
@@ -15153,7 +15153,7 @@ static PyObject *__pyx_pf_7classes_14CPUParticles2D_14CPUParticles2D_24get_emiss
  *   def  get_emission_sphere_radius(self):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_2 = __Pyx_PyInt_From___pyx_t_7classes_14CPUParticles2D_EmissionShape((*__pyx_v_ret)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 640, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyInt_From___pyx_t_7classes_14CPUParticles2D_CPUParticles2D_EmissionShape((*__pyx_v_ret)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 640, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_r = __pyx_t_2;
   __pyx_t_2 = 0;
@@ -20768,7 +20768,7 @@ static CYTHON_INLINE void __pyx_f_4core_7variant_7Variant_7Variant_new_variant(C
  *     cdef inline void new_variant(self, i):
  *         print("new_variant", type(i))             # <<<<<<<<<<<<<<
  * 
- * ctypedef enum Type:
+ * ctypedef enum Variant_Type:
  */
   __pyx_t_1 = PyTuple_New(2); if (unlikely(!__pyx_t_1)) __PYX_ERR(4, 15, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
@@ -23295,17 +23295,15 @@ static int __pyx_import_star_set(PyObject *o, PyObject* py_name, char *name) {
   static const char* internal_type_names[] = {
     "AABB",
     "Array",
-    "Axis",
     "Basis",
     "CPUParticles2D",
+    "CPUParticles2D_DrawOrder",
+    "CPUParticles2D_EmissionShape",
+    "CPUParticles2D_Flags",
+    "CPUParticles2D_Parameter",
     "Color",
     "Dictionary",
-    "DrawOrder",
-    "EmissionShape",
-    "Flags",
     "NodePath",
-    "Operator",
-    "Parameter",
     "Plane",
     "PoolByteArray",
     "PoolColorArray",
@@ -23321,10 +23319,12 @@ static int __pyx_import_star_set(PyObject *o, PyObject* py_name, char *name) {
     "String",
     "Transform",
     "Transform2D",
-    "Type",
     "Variant",
+    "Variant_Operator",
+    "Variant_Type",
     "Vector2",
     "Vector3",
+    "Vector3_Axis",
     "Wrapper",
     "bool",
     "godot_aabb",
@@ -26005,24 +26005,24 @@ static CYTHON_INLINE PyObject* __Pyx_PyInt_From_int(int value) {
 }
 
 /* CIntToPy */
-static CYTHON_INLINE PyObject* __Pyx_PyInt_From___pyx_t_7classes_14CPUParticles2D_DrawOrder(__pyx_t_7classes_14CPUParticles2D_DrawOrder value) {
-    const __pyx_t_7classes_14CPUParticles2D_DrawOrder neg_one = (__pyx_t_7classes_14CPUParticles2D_DrawOrder) ((__pyx_t_7classes_14CPUParticles2D_DrawOrder) 0 - (__pyx_t_7classes_14CPUParticles2D_DrawOrder) 1), const_zero = (__pyx_t_7classes_14CPUParticles2D_DrawOrder) 0;
+static CYTHON_INLINE PyObject* __Pyx_PyInt_From___pyx_t_7classes_14CPUParticles2D_CPUParticles2D_DrawOrder(__pyx_t_7classes_14CPUParticles2D_CPUParticles2D_DrawOrder value) {
+    const __pyx_t_7classes_14CPUParticles2D_CPUParticles2D_DrawOrder neg_one = (__pyx_t_7classes_14CPUParticles2D_CPUParticles2D_DrawOrder) ((__pyx_t_7classes_14CPUParticles2D_CPUParticles2D_DrawOrder) 0 - (__pyx_t_7classes_14CPUParticles2D_CPUParticles2D_DrawOrder) 1), const_zero = (__pyx_t_7classes_14CPUParticles2D_CPUParticles2D_DrawOrder) 0;
     const int is_unsigned = neg_one > const_zero;
     if (is_unsigned) {
-        if (sizeof(__pyx_t_7classes_14CPUParticles2D_DrawOrder) < sizeof(long)) {
+        if (sizeof(__pyx_t_7classes_14CPUParticles2D_CPUParticles2D_DrawOrder) < sizeof(long)) {
             return PyInt_FromLong((long) value);
-        } else if (sizeof(__pyx_t_7classes_14CPUParticles2D_DrawOrder) <= sizeof(unsigned long)) {
+        } else if (sizeof(__pyx_t_7classes_14CPUParticles2D_CPUParticles2D_DrawOrder) <= sizeof(unsigned long)) {
             return PyLong_FromUnsignedLong((unsigned long) value);
 #ifdef HAVE_LONG_LONG
-        } else if (sizeof(__pyx_t_7classes_14CPUParticles2D_DrawOrder) <= sizeof(unsigned PY_LONG_LONG)) {
+        } else if (sizeof(__pyx_t_7classes_14CPUParticles2D_CPUParticles2D_DrawOrder) <= sizeof(unsigned PY_LONG_LONG)) {
             return PyLong_FromUnsignedLongLong((unsigned PY_LONG_LONG) value);
 #endif
         }
     } else {
-        if (sizeof(__pyx_t_7classes_14CPUParticles2D_DrawOrder) <= sizeof(long)) {
+        if (sizeof(__pyx_t_7classes_14CPUParticles2D_CPUParticles2D_DrawOrder) <= sizeof(long)) {
             return PyInt_FromLong((long) value);
 #ifdef HAVE_LONG_LONG
-        } else if (sizeof(__pyx_t_7classes_14CPUParticles2D_DrawOrder) <= sizeof(PY_LONG_LONG)) {
+        } else if (sizeof(__pyx_t_7classes_14CPUParticles2D_CPUParticles2D_DrawOrder) <= sizeof(PY_LONG_LONG)) {
             return PyLong_FromLongLong((PY_LONG_LONG) value);
 #endif
         }
@@ -26030,30 +26030,30 @@ static CYTHON_INLINE PyObject* __Pyx_PyInt_From___pyx_t_7classes_14CPUParticles2
     {
         int one = 1; int little = (int)*(unsigned char *)&one;
         unsigned char *bytes = (unsigned char *)&value;
-        return _PyLong_FromByteArray(bytes, sizeof(__pyx_t_7classes_14CPUParticles2D_DrawOrder),
+        return _PyLong_FromByteArray(bytes, sizeof(__pyx_t_7classes_14CPUParticles2D_CPUParticles2D_DrawOrder),
                                      little, !is_unsigned);
     }
 }
 
 /* CIntToPy */
-static CYTHON_INLINE PyObject* __Pyx_PyInt_From___pyx_t_7classes_14CPUParticles2D_EmissionShape(__pyx_t_7classes_14CPUParticles2D_EmissionShape value) {
-    const __pyx_t_7classes_14CPUParticles2D_EmissionShape neg_one = (__pyx_t_7classes_14CPUParticles2D_EmissionShape) ((__pyx_t_7classes_14CPUParticles2D_EmissionShape) 0 - (__pyx_t_7classes_14CPUParticles2D_EmissionShape) 1), const_zero = (__pyx_t_7classes_14CPUParticles2D_EmissionShape) 0;
+static CYTHON_INLINE PyObject* __Pyx_PyInt_From___pyx_t_7classes_14CPUParticles2D_CPUParticles2D_EmissionShape(__pyx_t_7classes_14CPUParticles2D_CPUParticles2D_EmissionShape value) {
+    const __pyx_t_7classes_14CPUParticles2D_CPUParticles2D_EmissionShape neg_one = (__pyx_t_7classes_14CPUParticles2D_CPUParticles2D_EmissionShape) ((__pyx_t_7classes_14CPUParticles2D_CPUParticles2D_EmissionShape) 0 - (__pyx_t_7classes_14CPUParticles2D_CPUParticles2D_EmissionShape) 1), const_zero = (__pyx_t_7classes_14CPUParticles2D_CPUParticles2D_EmissionShape) 0;
     const int is_unsigned = neg_one > const_zero;
     if (is_unsigned) {
-        if (sizeof(__pyx_t_7classes_14CPUParticles2D_EmissionShape) < sizeof(long)) {
+        if (sizeof(__pyx_t_7classes_14CPUParticles2D_CPUParticles2D_EmissionShape) < sizeof(long)) {
             return PyInt_FromLong((long) value);
-        } else if (sizeof(__pyx_t_7classes_14CPUParticles2D_EmissionShape) <= sizeof(unsigned long)) {
+        } else if (sizeof(__pyx_t_7classes_14CPUParticles2D_CPUParticles2D_EmissionShape) <= sizeof(unsigned long)) {
             return PyLong_FromUnsignedLong((unsigned long) value);
 #ifdef HAVE_LONG_LONG
-        } else if (sizeof(__pyx_t_7classes_14CPUParticles2D_EmissionShape) <= sizeof(unsigned PY_LONG_LONG)) {
+        } else if (sizeof(__pyx_t_7classes_14CPUParticles2D_CPUParticles2D_EmissionShape) <= sizeof(unsigned PY_LONG_LONG)) {
             return PyLong_FromUnsignedLongLong((unsigned PY_LONG_LONG) value);
 #endif
         }
     } else {
-        if (sizeof(__pyx_t_7classes_14CPUParticles2D_EmissionShape) <= sizeof(long)) {
+        if (sizeof(__pyx_t_7classes_14CPUParticles2D_CPUParticles2D_EmissionShape) <= sizeof(long)) {
             return PyInt_FromLong((long) value);
 #ifdef HAVE_LONG_LONG
-        } else if (sizeof(__pyx_t_7classes_14CPUParticles2D_EmissionShape) <= sizeof(PY_LONG_LONG)) {
+        } else if (sizeof(__pyx_t_7classes_14CPUParticles2D_CPUParticles2D_EmissionShape) <= sizeof(PY_LONG_LONG)) {
             return PyLong_FromLongLong((PY_LONG_LONG) value);
 #endif
         }
@@ -26061,7 +26061,7 @@ static CYTHON_INLINE PyObject* __Pyx_PyInt_From___pyx_t_7classes_14CPUParticles2
     {
         int one = 1; int little = (int)*(unsigned char *)&one;
         unsigned char *bytes = (unsigned char *)&value;
-        return _PyLong_FromByteArray(bytes, sizeof(__pyx_t_7classes_14CPUParticles2D_EmissionShape),
+        return _PyLong_FromByteArray(bytes, sizeof(__pyx_t_7classes_14CPUParticles2D_CPUParticles2D_EmissionShape),
                                      little, !is_unsigned);
     }
 }

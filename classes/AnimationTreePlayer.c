@@ -896,24 +896,24 @@ struct __pyx_obj_7classes_19AnimationTreePlayer_AnimationTreePlayer;
 /* "classes/Object.pxd":7
  * cdef class Object(Wrapper):
  *     pass
- * ctypedef enum ConnectFlags :CONNECT_DEFERRED, CONNECT_PERSIST, CONNECT_ONESHOT, CONNECT_REFERENCE_COUNTED,             # <<<<<<<<<<<<<<
+ * ctypedef enum Object_ConnectFlags :CONNECT_DEFERRED, CONNECT_PERSIST, CONNECT_ONESHOT, CONNECT_REFERENCE_COUNTED,             # <<<<<<<<<<<<<<
  */
-enum __pyx_t_7classes_6Object_ConnectFlags {
+enum __pyx_t_7classes_6Object_Object_ConnectFlags {
   __pyx_e_7classes_6Object_CONNECT_DEFERRED,
   __pyx_e_7classes_6Object_CONNECT_PERSIST,
   __pyx_e_7classes_6Object_CONNECT_ONESHOT,
   __pyx_e_7classes_6Object_CONNECT_REFERENCE_COUNTED
 };
-typedef enum __pyx_t_7classes_6Object_ConnectFlags __pyx_t_7classes_6Object_ConnectFlags;
+typedef enum __pyx_t_7classes_6Object_Object_ConnectFlags __pyx_t_7classes_6Object_Object_ConnectFlags;
 
 /* "classes/Animation.pxd":7
  * cdef class Animation(classes.Resource.Resource):
  *     pass
- * ctypedef enum TrackType :TYPE_VALUE, TYPE_TRANSFORM, TYPE_METHOD, TYPE_BEZIER, TYPE_AUDIO, TYPE_ANIMATION,             # <<<<<<<<<<<<<<
- * ctypedef enum UpdateMode :UPDATE_CONTINUOUS, UPDATE_DISCRETE, UPDATE_TRIGGER, UPDATE_CAPTURE,
- * ctypedef enum InterpolationType :INTERPOLATION_NEAREST, INTERPOLATION_LINEAR, INTERPOLATION_CUBIC,
+ * ctypedef enum Animation_TrackType :TYPE_VALUE, TYPE_TRANSFORM, TYPE_METHOD, TYPE_BEZIER, TYPE_AUDIO, TYPE_ANIMATION,             # <<<<<<<<<<<<<<
+ * ctypedef enum Animation_UpdateMode :UPDATE_CONTINUOUS, UPDATE_DISCRETE, UPDATE_TRIGGER, UPDATE_CAPTURE,
+ * ctypedef enum Animation_InterpolationType :INTERPOLATION_NEAREST, INTERPOLATION_LINEAR, INTERPOLATION_CUBIC,
  */
-enum __pyx_t_7classes_9Animation_TrackType {
+enum __pyx_t_7classes_9Animation_Animation_TrackType {
   __pyx_e_7classes_9Animation_TYPE_VALUE,
   __pyx_e_7classes_9Animation_TYPE_TRANSFORM,
   __pyx_e_7classes_9Animation_TYPE_METHOD,
@@ -921,68 +921,68 @@ enum __pyx_t_7classes_9Animation_TrackType {
   __pyx_e_7classes_9Animation_TYPE_AUDIO,
   __pyx_e_7classes_9Animation_TYPE_ANIMATION
 };
-typedef enum __pyx_t_7classes_9Animation_TrackType __pyx_t_7classes_9Animation_TrackType;
+typedef enum __pyx_t_7classes_9Animation_Animation_TrackType __pyx_t_7classes_9Animation_Animation_TrackType;
 
 /* "classes/Animation.pxd":8
  *     pass
- * ctypedef enum TrackType :TYPE_VALUE, TYPE_TRANSFORM, TYPE_METHOD, TYPE_BEZIER, TYPE_AUDIO, TYPE_ANIMATION,
- * ctypedef enum UpdateMode :UPDATE_CONTINUOUS, UPDATE_DISCRETE, UPDATE_TRIGGER, UPDATE_CAPTURE,             # <<<<<<<<<<<<<<
- * ctypedef enum InterpolationType :INTERPOLATION_NEAREST, INTERPOLATION_LINEAR, INTERPOLATION_CUBIC,
+ * ctypedef enum Animation_TrackType :TYPE_VALUE, TYPE_TRANSFORM, TYPE_METHOD, TYPE_BEZIER, TYPE_AUDIO, TYPE_ANIMATION,
+ * ctypedef enum Animation_UpdateMode :UPDATE_CONTINUOUS, UPDATE_DISCRETE, UPDATE_TRIGGER, UPDATE_CAPTURE,             # <<<<<<<<<<<<<<
+ * ctypedef enum Animation_InterpolationType :INTERPOLATION_NEAREST, INTERPOLATION_LINEAR, INTERPOLATION_CUBIC,
  */
-enum __pyx_t_7classes_9Animation_UpdateMode {
+enum __pyx_t_7classes_9Animation_Animation_UpdateMode {
   __pyx_e_7classes_9Animation_UPDATE_CONTINUOUS,
   __pyx_e_7classes_9Animation_UPDATE_DISCRETE,
   __pyx_e_7classes_9Animation_UPDATE_TRIGGER,
   __pyx_e_7classes_9Animation_UPDATE_CAPTURE
 };
-typedef enum __pyx_t_7classes_9Animation_UpdateMode __pyx_t_7classes_9Animation_UpdateMode;
+typedef enum __pyx_t_7classes_9Animation_Animation_UpdateMode __pyx_t_7classes_9Animation_Animation_UpdateMode;
 
 /* "classes/Animation.pxd":9
- * ctypedef enum TrackType :TYPE_VALUE, TYPE_TRANSFORM, TYPE_METHOD, TYPE_BEZIER, TYPE_AUDIO, TYPE_ANIMATION,
- * ctypedef enum UpdateMode :UPDATE_CONTINUOUS, UPDATE_DISCRETE, UPDATE_TRIGGER, UPDATE_CAPTURE,
- * ctypedef enum InterpolationType :INTERPOLATION_NEAREST, INTERPOLATION_LINEAR, INTERPOLATION_CUBIC,             # <<<<<<<<<<<<<<
+ * ctypedef enum Animation_TrackType :TYPE_VALUE, TYPE_TRANSFORM, TYPE_METHOD, TYPE_BEZIER, TYPE_AUDIO, TYPE_ANIMATION,
+ * ctypedef enum Animation_UpdateMode :UPDATE_CONTINUOUS, UPDATE_DISCRETE, UPDATE_TRIGGER, UPDATE_CAPTURE,
+ * ctypedef enum Animation_InterpolationType :INTERPOLATION_NEAREST, INTERPOLATION_LINEAR, INTERPOLATION_CUBIC,             # <<<<<<<<<<<<<<
  */
-enum __pyx_t_7classes_9Animation_InterpolationType {
+enum __pyx_t_7classes_9Animation_Animation_InterpolationType {
   __pyx_e_7classes_9Animation_INTERPOLATION_NEAREST,
   __pyx_e_7classes_9Animation_INTERPOLATION_LINEAR,
   __pyx_e_7classes_9Animation_INTERPOLATION_CUBIC
 };
-typedef enum __pyx_t_7classes_9Animation_InterpolationType __pyx_t_7classes_9Animation_InterpolationType;
+typedef enum __pyx_t_7classes_9Animation_Animation_InterpolationType __pyx_t_7classes_9Animation_Animation_InterpolationType;
 
 /* "classes/Node.pxd":7
  * cdef class Node(classes.Object.Object):
  *     pass
- * ctypedef enum PauseMode :PAUSE_MODE_INHERIT, PAUSE_MODE_STOP, PAUSE_MODE_PROCESS,             # <<<<<<<<<<<<<<
- * ctypedef enum DuplicateFlags :DUPLICATE_SIGNALS, DUPLICATE_GROUPS, DUPLICATE_SCRIPTS, DUPLICATE_USE_INSTANCING,
+ * ctypedef enum Node_PauseMode :PAUSE_MODE_INHERIT, PAUSE_MODE_STOP, PAUSE_MODE_PROCESS,             # <<<<<<<<<<<<<<
+ * ctypedef enum Node_DuplicateFlags :DUPLICATE_SIGNALS, DUPLICATE_GROUPS, DUPLICATE_SCRIPTS, DUPLICATE_USE_INSTANCING,
  */
-enum __pyx_t_7classes_4Node_PauseMode {
+enum __pyx_t_7classes_4Node_Node_PauseMode {
   __pyx_e_7classes_4Node_PAUSE_MODE_INHERIT,
   __pyx_e_7classes_4Node_PAUSE_MODE_STOP,
   __pyx_e_7classes_4Node_PAUSE_MODE_PROCESS
 };
-typedef enum __pyx_t_7classes_4Node_PauseMode __pyx_t_7classes_4Node_PauseMode;
+typedef enum __pyx_t_7classes_4Node_Node_PauseMode __pyx_t_7classes_4Node_Node_PauseMode;
 
 /* "classes/Node.pxd":8
  *     pass
- * ctypedef enum PauseMode :PAUSE_MODE_INHERIT, PAUSE_MODE_STOP, PAUSE_MODE_PROCESS,
- * ctypedef enum DuplicateFlags :DUPLICATE_SIGNALS, DUPLICATE_GROUPS, DUPLICATE_SCRIPTS, DUPLICATE_USE_INSTANCING,             # <<<<<<<<<<<<<<
+ * ctypedef enum Node_PauseMode :PAUSE_MODE_INHERIT, PAUSE_MODE_STOP, PAUSE_MODE_PROCESS,
+ * ctypedef enum Node_DuplicateFlags :DUPLICATE_SIGNALS, DUPLICATE_GROUPS, DUPLICATE_SCRIPTS, DUPLICATE_USE_INSTANCING,             # <<<<<<<<<<<<<<
  */
-enum __pyx_t_7classes_4Node_DuplicateFlags {
+enum __pyx_t_7classes_4Node_Node_DuplicateFlags {
   __pyx_e_7classes_4Node_DUPLICATE_SIGNALS,
   __pyx_e_7classes_4Node_DUPLICATE_GROUPS,
   __pyx_e_7classes_4Node_DUPLICATE_SCRIPTS,
   __pyx_e_7classes_4Node_DUPLICATE_USE_INSTANCING
 };
-typedef enum __pyx_t_7classes_4Node_DuplicateFlags __pyx_t_7classes_4Node_DuplicateFlags;
+typedef enum __pyx_t_7classes_4Node_Node_DuplicateFlags __pyx_t_7classes_4Node_Node_DuplicateFlags;
 
 /* "core/variant/Variant.pxd":17
  *         print("new_variant", type(i))
  * 
- * ctypedef enum Type:             # <<<<<<<<<<<<<<
+ * ctypedef enum Variant_Type:             # <<<<<<<<<<<<<<
  *     NIL,
  *     # atomic types
  */
-enum __pyx_t_4core_7variant_7Variant_Type {
+enum __pyx_t_4core_7variant_7Variant_Variant_Type {
   __pyx_e_4core_7variant_7Variant_NIL,
   __pyx_e_4core_7variant_7Variant_BOOL,
   __pyx_e_4core_7variant_7Variant_INT,
@@ -1012,16 +1012,16 @@ enum __pyx_t_4core_7variant_7Variant_Type {
   __pyx_e_4core_7variant_7Variant_POOL_COLOR_ARRAY,
   __pyx_e_4core_7variant_7Variant_VARIANT_MAX
 };
-typedef enum __pyx_t_4core_7variant_7Variant_Type __pyx_t_4core_7variant_7Variant_Type;
+typedef enum __pyx_t_4core_7variant_7Variant_Variant_Type __pyx_t_4core_7variant_7Variant_Variant_Type;
 
 /* "core/variant/Variant.pxd":58
  * 
  * 
- * ctypedef enum Operator :             # <<<<<<<<<<<<<<
+ * ctypedef enum Variant_Operator :             # <<<<<<<<<<<<<<
  * 
  *     #comparation
  */
-enum __pyx_t_4core_7variant_7Variant_Operator {
+enum __pyx_t_4core_7variant_7Variant_Variant_Operator {
   __pyx_e_4core_7variant_7Variant_OP_EQUAL,
   __pyx_e_4core_7variant_7Variant_OP_NOT_EQUAL,
   __pyx_e_4core_7variant_7Variant_OP_LESS,
@@ -1049,40 +1049,40 @@ enum __pyx_t_4core_7variant_7Variant_Operator {
   __pyx_e_4core_7variant_7Variant_OP_IN,
   __pyx_e_4core_7variant_7Variant_OP_MAX
 };
-typedef enum __pyx_t_4core_7variant_7Variant_Operator __pyx_t_4core_7variant_7Variant_Operator;
+typedef enum __pyx_t_4core_7variant_7Variant_Variant_Operator __pyx_t_4core_7variant_7Variant_Variant_Operator;
 
 /* "core/vector3/Vector3.pxd":15
  * 
  * 
- * ctypedef enum Axis :             # <<<<<<<<<<<<<<
- *     AXIS_X,
- *     AXIS_Y,
+ * ctypedef enum Vector3_Axis :             # <<<<<<<<<<<<<<
+ *     Vector3_AXIS_X,
+ *     Vector3_AXIS_Y,
  */
-enum __pyx_t_4core_7vector3_7Vector3_Axis {
-  __pyx_e_4core_7vector3_7Vector3_AXIS_X,
-  __pyx_e_4core_7vector3_7Vector3_AXIS_Y,
-  __pyx_e_4core_7vector3_7Vector3_AXIS_Z
+enum __pyx_t_4core_7vector3_7Vector3_Vector3_Axis {
+  __pyx_e_4core_7vector3_7Vector3_Vector3_AXIS_X,
+  __pyx_e_4core_7vector3_7Vector3_Vector3_AXIS_Y,
+  __pyx_e_4core_7vector3_7Vector3_Vector3_AXIS_Z
 };
-typedef enum __pyx_t_4core_7vector3_7Vector3_Axis __pyx_t_4core_7vector3_7Vector3_Axis;
+typedef enum __pyx_t_4core_7vector3_7Vector3_Vector3_Axis __pyx_t_4core_7vector3_7Vector3_Vector3_Axis;
 
 /* "classes/AnimationTreePlayer.pxd":7
  * cdef class AnimationTreePlayer(classes.Node.Node):
  *     pass
- * ctypedef enum AnimationProcessMode :ANIMATION_PROCESS_PHYSICS, ANIMATION_PROCESS_IDLE,             # <<<<<<<<<<<<<<
- * ctypedef enum NodeType :NODE_OUTPUT, NODE_ANIMATION, NODE_ONESHOT, NODE_MIX, NODE_BLEND2, NODE_BLEND3, NODE_BLEND4, NODE_TIMESCALE, NODE_TIMESEEK, NODE_TRANSITION,
+ * ctypedef enum AnimationTreePlayer_AnimationProcessMode :ANIMATION_PROCESS_PHYSICS, ANIMATION_PROCESS_IDLE,             # <<<<<<<<<<<<<<
+ * ctypedef enum AnimationTreePlayer_NodeType :NODE_OUTPUT, NODE_ANIMATION, NODE_ONESHOT, NODE_MIX, NODE_BLEND2, NODE_BLEND3, NODE_BLEND4, NODE_TIMESCALE, NODE_TIMESEEK, NODE_TRANSITION,
  */
-enum __pyx_t_7classes_19AnimationTreePlayer_AnimationProcessMode {
+enum __pyx_t_7classes_19AnimationTreePlayer_AnimationTreePlayer_AnimationProcessMode {
   __pyx_e_7classes_19AnimationTreePlayer_ANIMATION_PROCESS_PHYSICS,
   __pyx_e_7classes_19AnimationTreePlayer_ANIMATION_PROCESS_IDLE
 };
-typedef enum __pyx_t_7classes_19AnimationTreePlayer_AnimationProcessMode __pyx_t_7classes_19AnimationTreePlayer_AnimationProcessMode;
+typedef enum __pyx_t_7classes_19AnimationTreePlayer_AnimationTreePlayer_AnimationProcessMode __pyx_t_7classes_19AnimationTreePlayer_AnimationTreePlayer_AnimationProcessMode;
 
 /* "classes/AnimationTreePlayer.pxd":8
  *     pass
- * ctypedef enum AnimationProcessMode :ANIMATION_PROCESS_PHYSICS, ANIMATION_PROCESS_IDLE,
- * ctypedef enum NodeType :NODE_OUTPUT, NODE_ANIMATION, NODE_ONESHOT, NODE_MIX, NODE_BLEND2, NODE_BLEND3, NODE_BLEND4, NODE_TIMESCALE, NODE_TIMESEEK, NODE_TRANSITION,             # <<<<<<<<<<<<<<
+ * ctypedef enum AnimationTreePlayer_AnimationProcessMode :ANIMATION_PROCESS_PHYSICS, ANIMATION_PROCESS_IDLE,
+ * ctypedef enum AnimationTreePlayer_NodeType :NODE_OUTPUT, NODE_ANIMATION, NODE_ONESHOT, NODE_MIX, NODE_BLEND2, NODE_BLEND3, NODE_BLEND4, NODE_TIMESCALE, NODE_TIMESEEK, NODE_TRANSITION,             # <<<<<<<<<<<<<<
  */
-enum __pyx_t_7classes_19AnimationTreePlayer_NodeType {
+enum __pyx_t_7classes_19AnimationTreePlayer_AnimationTreePlayer_NodeType {
   __pyx_e_7classes_19AnimationTreePlayer_NODE_OUTPUT,
   __pyx_e_7classes_19AnimationTreePlayer_NODE_ANIMATION,
   __pyx_e_7classes_19AnimationTreePlayer_NODE_ONESHOT,
@@ -1094,7 +1094,7 @@ enum __pyx_t_7classes_19AnimationTreePlayer_NodeType {
   __pyx_e_7classes_19AnimationTreePlayer_NODE_TIMESEEK,
   __pyx_e_7classes_19AnimationTreePlayer_NODE_TRANSITION
 };
-typedef enum __pyx_t_7classes_19AnimationTreePlayer_NodeType __pyx_t_7classes_19AnimationTreePlayer_NodeType;
+typedef enum __pyx_t_7classes_19AnimationTreePlayer_AnimationTreePlayer_NodeType __pyx_t_7classes_19AnimationTreePlayer_AnimationTreePlayer_NodeType;
 
 /* "utils/Wrapper.pxd":2
  * from godot_api.binding cimport *
@@ -1114,7 +1114,7 @@ struct __pyx_obj_5utils_7Wrapper_Wrapper {
  * from utils.Wrapper cimport *
  * cdef class Object(Wrapper):             # <<<<<<<<<<<<<<
  *     pass
- * ctypedef enum ConnectFlags :CONNECT_DEFERRED, CONNECT_PERSIST, CONNECT_ONESHOT, CONNECT_REFERENCE_COUNTED,
+ * ctypedef enum Object_ConnectFlags :CONNECT_DEFERRED, CONNECT_PERSIST, CONNECT_ONESHOT, CONNECT_REFERENCE_COUNTED,
  */
 struct __pyx_obj_7classes_6Object_Object {
   struct __pyx_obj_5utils_7Wrapper_Wrapper __pyx_base;
@@ -1148,7 +1148,7 @@ struct __pyx_obj_7classes_8Resource_Resource {
  * cimport classes.Resource
  * cdef class Animation(classes.Resource.Resource):             # <<<<<<<<<<<<<<
  *     pass
- * ctypedef enum TrackType :TYPE_VALUE, TYPE_TRANSFORM, TYPE_METHOD, TYPE_BEZIER, TYPE_AUDIO, TYPE_ANIMATION,
+ * ctypedef enum Animation_TrackType :TYPE_VALUE, TYPE_TRANSFORM, TYPE_METHOD, TYPE_BEZIER, TYPE_AUDIO, TYPE_ANIMATION,
  */
 struct __pyx_obj_7classes_9Animation_Animation {
   struct __pyx_obj_7classes_8Resource_Resource __pyx_base;
@@ -1160,7 +1160,7 @@ struct __pyx_obj_7classes_9Animation_Animation {
  * cimport classes.Object
  * cdef class Node(classes.Object.Object):             # <<<<<<<<<<<<<<
  *     pass
- * ctypedef enum PauseMode :PAUSE_MODE_INHERIT, PAUSE_MODE_STOP, PAUSE_MODE_PROCESS,
+ * ctypedef enum Node_PauseMode :PAUSE_MODE_INHERIT, PAUSE_MODE_STOP, PAUSE_MODE_PROCESS,
  */
 struct __pyx_obj_7classes_4Node_Node {
   struct __pyx_obj_7classes_6Object_Object __pyx_base;
@@ -1494,7 +1494,7 @@ struct __pyx_obj_4core_7vector3_7Vector3_Vector3 {
  * cimport classes.Node
  * cdef class AnimationTreePlayer(classes.Node.Node):             # <<<<<<<<<<<<<<
  *     pass
- * ctypedef enum AnimationProcessMode :ANIMATION_PROCESS_PHYSICS, ANIMATION_PROCESS_IDLE,
+ * ctypedef enum AnimationTreePlayer_AnimationProcessMode :ANIMATION_PROCESS_PHYSICS, ANIMATION_PROCESS_IDLE,
  */
 struct __pyx_obj_7classes_19AnimationTreePlayer_AnimationTreePlayer {
   struct __pyx_obj_7classes_4Node_Node __pyx_base;
@@ -1523,7 +1523,7 @@ static CYTHON_INLINE godot_object *__pyx_f_5utils_7Wrapper_7Wrapper_get_godot_ow
  * from utils.Wrapper cimport *
  * cdef class Object(Wrapper):             # <<<<<<<<<<<<<<
  *     pass
- * ctypedef enum ConnectFlags :CONNECT_DEFERRED, CONNECT_PERSIST, CONNECT_ONESHOT, CONNECT_REFERENCE_COUNTED,
+ * ctypedef enum Object_ConnectFlags :CONNECT_DEFERRED, CONNECT_PERSIST, CONNECT_ONESHOT, CONNECT_REFERENCE_COUNTED,
  */
 
 struct __pyx_vtabstruct_7classes_6Object_Object {
@@ -1563,7 +1563,7 @@ static struct __pyx_vtabstruct_7classes_8Resource_Resource *__pyx_vtabptr_7class
  * cimport classes.Resource
  * cdef class Animation(classes.Resource.Resource):             # <<<<<<<<<<<<<<
  *     pass
- * ctypedef enum TrackType :TYPE_VALUE, TYPE_TRANSFORM, TYPE_METHOD, TYPE_BEZIER, TYPE_AUDIO, TYPE_ANIMATION,
+ * ctypedef enum Animation_TrackType :TYPE_VALUE, TYPE_TRANSFORM, TYPE_METHOD, TYPE_BEZIER, TYPE_AUDIO, TYPE_ANIMATION,
  */
 
 struct __pyx_vtabstruct_7classes_9Animation_Animation {
@@ -1577,7 +1577,7 @@ static struct __pyx_vtabstruct_7classes_9Animation_Animation *__pyx_vtabptr_7cla
  * cimport classes.Object
  * cdef class Node(classes.Object.Object):             # <<<<<<<<<<<<<<
  *     pass
- * ctypedef enum PauseMode :PAUSE_MODE_INHERIT, PAUSE_MODE_STOP, PAUSE_MODE_PROCESS,
+ * ctypedef enum Node_PauseMode :PAUSE_MODE_INHERIT, PAUSE_MODE_STOP, PAUSE_MODE_PROCESS,
  */
 
 struct __pyx_vtabstruct_7classes_4Node_Node {
@@ -2288,13 +2288,13 @@ static void __Pyx_AddTraceback(const char *funcname, int c_line,
 static CYTHON_INLINE PyObject* __Pyx_PyInt_From_godot_error(godot_error value);
 
 /* CIntToPy.proto */
-static CYTHON_INLINE PyObject* __Pyx_PyInt_From___pyx_t_7classes_19AnimationTreePlayer_AnimationProcessMode(__pyx_t_7classes_19AnimationTreePlayer_AnimationProcessMode value);
+static CYTHON_INLINE PyObject* __Pyx_PyInt_From___pyx_t_7classes_19AnimationTreePlayer_AnimationTreePlayer_AnimationProcessMode(__pyx_t_7classes_19AnimationTreePlayer_AnimationTreePlayer_AnimationProcessMode value);
 
 /* CIntToPy.proto */
 static CYTHON_INLINE PyObject* __Pyx_PyInt_From_int(int value);
 
 /* CIntToPy.proto */
-static CYTHON_INLINE PyObject* __Pyx_PyInt_From___pyx_t_7classes_19AnimationTreePlayer_NodeType(__pyx_t_7classes_19AnimationTreePlayer_NodeType value);
+static CYTHON_INLINE PyObject* __Pyx_PyInt_From___pyx_t_7classes_19AnimationTreePlayer_AnimationTreePlayer_NodeType(__pyx_t_7classes_19AnimationTreePlayer_AnimationTreePlayer_NodeType value);
 
 /* CIntFromPy.proto */
 static CYTHON_INLINE int __Pyx_PyInt_As_int(PyObject *);
@@ -6811,7 +6811,7 @@ static PyObject *__pyx_pw_7classes_19AnimationTreePlayer_19AnimationTreePlayer_3
 
 static PyObject *__pyx_pf_7classes_19AnimationTreePlayer_19AnimationTreePlayer_38get_animation_process_mode(struct __pyx_obj_7classes_19AnimationTreePlayer_AnimationTreePlayer *__pyx_v_self) {
   CYTHON_UNUSED godot_object *__pyx_v__owner;
-  __pyx_t_7classes_19AnimationTreePlayer_AnimationProcessMode *__pyx_v_ret;
+  __pyx_t_7classes_19AnimationTreePlayer_AnimationTreePlayer_AnimationProcessMode *__pyx_v_ret;
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   godot_object *__pyx_t_1;
@@ -6826,7 +6826,7 @@ static PyObject *__pyx_pf_7classes_19AnimationTreePlayer_19AnimationTreePlayer_3
  *   def  get_animation_process_mode(self):
  *     cdef godot_object *_owner = self.godot_owner             # <<<<<<<<<<<<<<
  * 
- *     cdef AnimationProcessMode* ret = NULL;
+ *     cdef AnimationTreePlayer_AnimationProcessMode* ret = NULL;
  */
   __pyx_t_1 = __pyx_v_self->__pyx_base.__pyx_base.__pyx_base.godot_owner;
   __pyx_v__owner = __pyx_t_1;
@@ -6834,14 +6834,14 @@ static PyObject *__pyx_pf_7classes_19AnimationTreePlayer_19AnimationTreePlayer_3
   /* "classes/AnimationTreePlayer.pyx":391
  *     cdef godot_object *_owner = self.godot_owner
  * 
- *     cdef AnimationProcessMode* ret = NULL;             # <<<<<<<<<<<<<<
+ *     cdef AnimationTreePlayer_AnimationProcessMode* ret = NULL;             # <<<<<<<<<<<<<<
  * 
  *     api_core.godot_method_bind_ptrcall(bind_animationtreeplayer_get_animation_process_mode,self.godot_owner,NULL,&ret)
  */
   __pyx_v_ret = NULL;
 
   /* "classes/AnimationTreePlayer.pyx":393
- *     cdef AnimationProcessMode* ret = NULL;
+ *     cdef AnimationTreePlayer_AnimationProcessMode* ret = NULL;
  * 
  *     api_core.godot_method_bind_ptrcall(bind_animationtreeplayer_get_animation_process_mode,self.godot_owner,NULL,&ret)             # <<<<<<<<<<<<<<
  *     hello('hallo2')
@@ -6866,7 +6866,7 @@ static PyObject *__pyx_pf_7classes_19AnimationTreePlayer_19AnimationTreePlayer_3
  *   def  get_base_path(self):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_2 = __Pyx_PyInt_From___pyx_t_7classes_19AnimationTreePlayer_AnimationProcessMode((*__pyx_v_ret)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 395, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyInt_From___pyx_t_7classes_19AnimationTreePlayer_AnimationTreePlayer_AnimationProcessMode((*__pyx_v_ret)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 395, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_r = __pyx_t_2;
   __pyx_t_2 = 0;
@@ -8120,7 +8120,7 @@ static PyObject *__pyx_pw_7classes_19AnimationTreePlayer_19AnimationTreePlayer_6
 
 static PyObject *__pyx_pf_7classes_19AnimationTreePlayer_19AnimationTreePlayer_60node_get_type(struct __pyx_obj_7classes_19AnimationTreePlayer_AnimationTreePlayer *__pyx_v_self, struct __pyx_obj_4core_6string_6String_String *__pyx_v_id) {
   CYTHON_UNUSED godot_object *__pyx_v__owner;
-  __pyx_t_7classes_19AnimationTreePlayer_NodeType *__pyx_v_ret;
+  __pyx_t_7classes_19AnimationTreePlayer_AnimationTreePlayer_NodeType *__pyx_v_ret;
   void *__pyx_v_args[1];
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
@@ -8136,7 +8136,7 @@ static PyObject *__pyx_pf_7classes_19AnimationTreePlayer_19AnimationTreePlayer_6
  *   def  node_get_type(self,  String id):
  *     cdef godot_object *_owner = self.godot_owner             # <<<<<<<<<<<<<<
  * 
- *     cdef NodeType* ret = NULL;
+ *     cdef AnimationTreePlayer_NodeType* ret = NULL;
  */
   __pyx_t_1 = __pyx_v_self->__pyx_base.__pyx_base.__pyx_base.godot_owner;
   __pyx_v__owner = __pyx_t_1;
@@ -8144,7 +8144,7 @@ static PyObject *__pyx_pf_7classes_19AnimationTreePlayer_19AnimationTreePlayer_6
   /* "classes/AnimationTreePlayer.pyx":504
  *     cdef godot_object *_owner = self.godot_owner
  * 
- *     cdef NodeType* ret = NULL;             # <<<<<<<<<<<<<<
+ *     cdef AnimationTreePlayer_NodeType* ret = NULL;             # <<<<<<<<<<<<<<
  * 
  *     cdef void *args[1]
  */
@@ -8185,7 +8185,7 @@ static PyObject *__pyx_pf_7classes_19AnimationTreePlayer_19AnimationTreePlayer_6
  *   def  node_rename(self,  String node,  String new_name):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_2 = __Pyx_PyInt_From___pyx_t_7classes_19AnimationTreePlayer_NodeType((*__pyx_v_ret)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 511, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyInt_From___pyx_t_7classes_19AnimationTreePlayer_AnimationTreePlayer_NodeType((*__pyx_v_ret)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 511, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_r = __pyx_t_2;
   __pyx_t_2 = 0;
@@ -13104,7 +13104,7 @@ static CYTHON_INLINE void __pyx_f_4core_7variant_7Variant_7Variant_new_variant(C
  *     cdef inline void new_variant(self, i):
  *         print("new_variant", type(i))             # <<<<<<<<<<<<<<
  * 
- * ctypedef enum Type:
+ * ctypedef enum Variant_Type:
  */
   __pyx_t_1 = PyTuple_New(2); if (unlikely(!__pyx_t_1)) __PYX_ERR(4, 15, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
@@ -14762,16 +14762,14 @@ static PyMethodDef __pyx_methods[] = {
 static int __pyx_import_star_set(PyObject *o, PyObject* py_name, char *name) {
   static const char* internal_type_names[] = {
     "AABB",
-    "AnimationProcessMode",
     "AnimationTreePlayer",
+    "AnimationTreePlayer_AnimationProcessMode",
+    "AnimationTreePlayer_NodeType",
     "Array",
-    "Axis",
     "Basis",
     "Color",
     "Dictionary",
     "NodePath",
-    "NodeType",
-    "Operator",
     "Plane",
     "PoolByteArray",
     "PoolColorArray",
@@ -14787,10 +14785,12 @@ static int __pyx_import_star_set(PyObject *o, PyObject* py_name, char *name) {
     "String",
     "Transform",
     "Transform2D",
-    "Type",
     "Variant",
+    "Variant_Operator",
+    "Variant_Type",
     "Vector2",
     "Vector3",
+    "Vector3_Axis",
     "Wrapper",
     "bool",
     "godot_aabb",
@@ -17354,24 +17354,24 @@ static CYTHON_INLINE PyObject* __Pyx_PyInt_From_godot_error(godot_error value) {
 }
 
 /* CIntToPy */
-static CYTHON_INLINE PyObject* __Pyx_PyInt_From___pyx_t_7classes_19AnimationTreePlayer_AnimationProcessMode(__pyx_t_7classes_19AnimationTreePlayer_AnimationProcessMode value) {
-    const __pyx_t_7classes_19AnimationTreePlayer_AnimationProcessMode neg_one = (__pyx_t_7classes_19AnimationTreePlayer_AnimationProcessMode) ((__pyx_t_7classes_19AnimationTreePlayer_AnimationProcessMode) 0 - (__pyx_t_7classes_19AnimationTreePlayer_AnimationProcessMode) 1), const_zero = (__pyx_t_7classes_19AnimationTreePlayer_AnimationProcessMode) 0;
+static CYTHON_INLINE PyObject* __Pyx_PyInt_From___pyx_t_7classes_19AnimationTreePlayer_AnimationTreePlayer_AnimationProcessMode(__pyx_t_7classes_19AnimationTreePlayer_AnimationTreePlayer_AnimationProcessMode value) {
+    const __pyx_t_7classes_19AnimationTreePlayer_AnimationTreePlayer_AnimationProcessMode neg_one = (__pyx_t_7classes_19AnimationTreePlayer_AnimationTreePlayer_AnimationProcessMode) ((__pyx_t_7classes_19AnimationTreePlayer_AnimationTreePlayer_AnimationProcessMode) 0 - (__pyx_t_7classes_19AnimationTreePlayer_AnimationTreePlayer_AnimationProcessMode) 1), const_zero = (__pyx_t_7classes_19AnimationTreePlayer_AnimationTreePlayer_AnimationProcessMode) 0;
     const int is_unsigned = neg_one > const_zero;
     if (is_unsigned) {
-        if (sizeof(__pyx_t_7classes_19AnimationTreePlayer_AnimationProcessMode) < sizeof(long)) {
+        if (sizeof(__pyx_t_7classes_19AnimationTreePlayer_AnimationTreePlayer_AnimationProcessMode) < sizeof(long)) {
             return PyInt_FromLong((long) value);
-        } else if (sizeof(__pyx_t_7classes_19AnimationTreePlayer_AnimationProcessMode) <= sizeof(unsigned long)) {
+        } else if (sizeof(__pyx_t_7classes_19AnimationTreePlayer_AnimationTreePlayer_AnimationProcessMode) <= sizeof(unsigned long)) {
             return PyLong_FromUnsignedLong((unsigned long) value);
 #ifdef HAVE_LONG_LONG
-        } else if (sizeof(__pyx_t_7classes_19AnimationTreePlayer_AnimationProcessMode) <= sizeof(unsigned PY_LONG_LONG)) {
+        } else if (sizeof(__pyx_t_7classes_19AnimationTreePlayer_AnimationTreePlayer_AnimationProcessMode) <= sizeof(unsigned PY_LONG_LONG)) {
             return PyLong_FromUnsignedLongLong((unsigned PY_LONG_LONG) value);
 #endif
         }
     } else {
-        if (sizeof(__pyx_t_7classes_19AnimationTreePlayer_AnimationProcessMode) <= sizeof(long)) {
+        if (sizeof(__pyx_t_7classes_19AnimationTreePlayer_AnimationTreePlayer_AnimationProcessMode) <= sizeof(long)) {
             return PyInt_FromLong((long) value);
 #ifdef HAVE_LONG_LONG
-        } else if (sizeof(__pyx_t_7classes_19AnimationTreePlayer_AnimationProcessMode) <= sizeof(PY_LONG_LONG)) {
+        } else if (sizeof(__pyx_t_7classes_19AnimationTreePlayer_AnimationTreePlayer_AnimationProcessMode) <= sizeof(PY_LONG_LONG)) {
             return PyLong_FromLongLong((PY_LONG_LONG) value);
 #endif
         }
@@ -17379,7 +17379,7 @@ static CYTHON_INLINE PyObject* __Pyx_PyInt_From___pyx_t_7classes_19AnimationTree
     {
         int one = 1; int little = (int)*(unsigned char *)&one;
         unsigned char *bytes = (unsigned char *)&value;
-        return _PyLong_FromByteArray(bytes, sizeof(__pyx_t_7classes_19AnimationTreePlayer_AnimationProcessMode),
+        return _PyLong_FromByteArray(bytes, sizeof(__pyx_t_7classes_19AnimationTreePlayer_AnimationTreePlayer_AnimationProcessMode),
                                      little, !is_unsigned);
     }
 }
@@ -17416,24 +17416,24 @@ static CYTHON_INLINE PyObject* __Pyx_PyInt_From_int(int value) {
 }
 
 /* CIntToPy */
-static CYTHON_INLINE PyObject* __Pyx_PyInt_From___pyx_t_7classes_19AnimationTreePlayer_NodeType(__pyx_t_7classes_19AnimationTreePlayer_NodeType value) {
-    const __pyx_t_7classes_19AnimationTreePlayer_NodeType neg_one = (__pyx_t_7classes_19AnimationTreePlayer_NodeType) ((__pyx_t_7classes_19AnimationTreePlayer_NodeType) 0 - (__pyx_t_7classes_19AnimationTreePlayer_NodeType) 1), const_zero = (__pyx_t_7classes_19AnimationTreePlayer_NodeType) 0;
+static CYTHON_INLINE PyObject* __Pyx_PyInt_From___pyx_t_7classes_19AnimationTreePlayer_AnimationTreePlayer_NodeType(__pyx_t_7classes_19AnimationTreePlayer_AnimationTreePlayer_NodeType value) {
+    const __pyx_t_7classes_19AnimationTreePlayer_AnimationTreePlayer_NodeType neg_one = (__pyx_t_7classes_19AnimationTreePlayer_AnimationTreePlayer_NodeType) ((__pyx_t_7classes_19AnimationTreePlayer_AnimationTreePlayer_NodeType) 0 - (__pyx_t_7classes_19AnimationTreePlayer_AnimationTreePlayer_NodeType) 1), const_zero = (__pyx_t_7classes_19AnimationTreePlayer_AnimationTreePlayer_NodeType) 0;
     const int is_unsigned = neg_one > const_zero;
     if (is_unsigned) {
-        if (sizeof(__pyx_t_7classes_19AnimationTreePlayer_NodeType) < sizeof(long)) {
+        if (sizeof(__pyx_t_7classes_19AnimationTreePlayer_AnimationTreePlayer_NodeType) < sizeof(long)) {
             return PyInt_FromLong((long) value);
-        } else if (sizeof(__pyx_t_7classes_19AnimationTreePlayer_NodeType) <= sizeof(unsigned long)) {
+        } else if (sizeof(__pyx_t_7classes_19AnimationTreePlayer_AnimationTreePlayer_NodeType) <= sizeof(unsigned long)) {
             return PyLong_FromUnsignedLong((unsigned long) value);
 #ifdef HAVE_LONG_LONG
-        } else if (sizeof(__pyx_t_7classes_19AnimationTreePlayer_NodeType) <= sizeof(unsigned PY_LONG_LONG)) {
+        } else if (sizeof(__pyx_t_7classes_19AnimationTreePlayer_AnimationTreePlayer_NodeType) <= sizeof(unsigned PY_LONG_LONG)) {
             return PyLong_FromUnsignedLongLong((unsigned PY_LONG_LONG) value);
 #endif
         }
     } else {
-        if (sizeof(__pyx_t_7classes_19AnimationTreePlayer_NodeType) <= sizeof(long)) {
+        if (sizeof(__pyx_t_7classes_19AnimationTreePlayer_AnimationTreePlayer_NodeType) <= sizeof(long)) {
             return PyInt_FromLong((long) value);
 #ifdef HAVE_LONG_LONG
-        } else if (sizeof(__pyx_t_7classes_19AnimationTreePlayer_NodeType) <= sizeof(PY_LONG_LONG)) {
+        } else if (sizeof(__pyx_t_7classes_19AnimationTreePlayer_AnimationTreePlayer_NodeType) <= sizeof(PY_LONG_LONG)) {
             return PyLong_FromLongLong((PY_LONG_LONG) value);
 #endif
         }
@@ -17441,7 +17441,7 @@ static CYTHON_INLINE PyObject* __Pyx_PyInt_From___pyx_t_7classes_19AnimationTree
     {
         int one = 1; int little = (int)*(unsigned char *)&one;
         unsigned char *bytes = (unsigned char *)&value;
-        return _PyLong_FromByteArray(bytes, sizeof(__pyx_t_7classes_19AnimationTreePlayer_NodeType),
+        return _PyLong_FromByteArray(bytes, sizeof(__pyx_t_7classes_19AnimationTreePlayer_AnimationTreePlayer_NodeType),
                                      little, !is_unsigned);
     }
 }

@@ -892,80 +892,80 @@ struct __pyx_obj_7classes_17Physics2DServerSW_Physics2DServerSW;
 /* "classes/Object.pxd":7
  * cdef class Object(Wrapper):
  *     pass
- * ctypedef enum ConnectFlags :CONNECT_DEFERRED, CONNECT_PERSIST, CONNECT_ONESHOT, CONNECT_REFERENCE_COUNTED,             # <<<<<<<<<<<<<<
+ * ctypedef enum Object_ConnectFlags :CONNECT_DEFERRED, CONNECT_PERSIST, CONNECT_ONESHOT, CONNECT_REFERENCE_COUNTED,             # <<<<<<<<<<<<<<
  */
-enum __pyx_t_7classes_6Object_ConnectFlags {
+enum __pyx_t_7classes_6Object_Object_ConnectFlags {
   __pyx_e_7classes_6Object_CONNECT_DEFERRED,
   __pyx_e_7classes_6Object_CONNECT_PERSIST,
   __pyx_e_7classes_6Object_CONNECT_ONESHOT,
   __pyx_e_7classes_6Object_CONNECT_REFERENCE_COUNTED
 };
-typedef enum __pyx_t_7classes_6Object_ConnectFlags __pyx_t_7classes_6Object_ConnectFlags;
+typedef enum __pyx_t_7classes_6Object_Object_ConnectFlags __pyx_t_7classes_6Object_Object_ConnectFlags;
 
 /* "classes/Physics2DServer.pxd":7
  * cdef class Physics2DServer(classes.Object.Object):
  *     pass
- * ctypedef enum ProcessInfo :INFO_ACTIVE_OBJECTS, INFO_COLLISION_PAIRS, INFO_ISLAND_COUNT,             # <<<<<<<<<<<<<<
- * ctypedef enum AreaBodyStatus :AREA_BODY_ADDED, AREA_BODY_REMOVED,
- * ctypedef enum DampedStringParam :DAMPED_STRING_REST_LENGTH, DAMPED_STRING_STIFFNESS, DAMPED_STRING_DAMPING,
+ * ctypedef enum Physics2DServer_ProcessInfo :INFO_ACTIVE_OBJECTS, INFO_COLLISION_PAIRS, INFO_ISLAND_COUNT,             # <<<<<<<<<<<<<<
+ * ctypedef enum Physics2DServer_AreaBodyStatus :AREA_BODY_ADDED, AREA_BODY_REMOVED,
+ * ctypedef enum Physics2DServer_DampedStringParam :DAMPED_STRING_REST_LENGTH, DAMPED_STRING_STIFFNESS, DAMPED_STRING_DAMPING,
  */
-enum __pyx_t_7classes_15Physics2DServer_ProcessInfo {
+enum __pyx_t_7classes_15Physics2DServer_Physics2DServer_ProcessInfo {
   __pyx_e_7classes_15Physics2DServer_INFO_ACTIVE_OBJECTS,
   __pyx_e_7classes_15Physics2DServer_INFO_COLLISION_PAIRS,
   __pyx_e_7classes_15Physics2DServer_INFO_ISLAND_COUNT
 };
-typedef enum __pyx_t_7classes_15Physics2DServer_ProcessInfo __pyx_t_7classes_15Physics2DServer_ProcessInfo;
+typedef enum __pyx_t_7classes_15Physics2DServer_Physics2DServer_ProcessInfo __pyx_t_7classes_15Physics2DServer_Physics2DServer_ProcessInfo;
 
 /* "classes/Physics2DServer.pxd":8
  *     pass
- * ctypedef enum ProcessInfo :INFO_ACTIVE_OBJECTS, INFO_COLLISION_PAIRS, INFO_ISLAND_COUNT,
- * ctypedef enum AreaBodyStatus :AREA_BODY_ADDED, AREA_BODY_REMOVED,             # <<<<<<<<<<<<<<
- * ctypedef enum DampedStringParam :DAMPED_STRING_REST_LENGTH, DAMPED_STRING_STIFFNESS, DAMPED_STRING_DAMPING,
- * ctypedef enum BodyMode :BODY_MODE_STATIC, BODY_MODE_KINEMATIC, BODY_MODE_RIGID, BODY_MODE_CHARACTER,
+ * ctypedef enum Physics2DServer_ProcessInfo :INFO_ACTIVE_OBJECTS, INFO_COLLISION_PAIRS, INFO_ISLAND_COUNT,
+ * ctypedef enum Physics2DServer_AreaBodyStatus :AREA_BODY_ADDED, AREA_BODY_REMOVED,             # <<<<<<<<<<<<<<
+ * ctypedef enum Physics2DServer_DampedStringParam :DAMPED_STRING_REST_LENGTH, DAMPED_STRING_STIFFNESS, DAMPED_STRING_DAMPING,
+ * ctypedef enum Physics2DServer_BodyMode :BODY_MODE_STATIC, BODY_MODE_KINEMATIC, BODY_MODE_RIGID, BODY_MODE_CHARACTER,
  */
-enum __pyx_t_7classes_15Physics2DServer_AreaBodyStatus {
+enum __pyx_t_7classes_15Physics2DServer_Physics2DServer_AreaBodyStatus {
   __pyx_e_7classes_15Physics2DServer_AREA_BODY_ADDED,
   __pyx_e_7classes_15Physics2DServer_AREA_BODY_REMOVED
 };
-typedef enum __pyx_t_7classes_15Physics2DServer_AreaBodyStatus __pyx_t_7classes_15Physics2DServer_AreaBodyStatus;
+typedef enum __pyx_t_7classes_15Physics2DServer_Physics2DServer_AreaBodyStatus __pyx_t_7classes_15Physics2DServer_Physics2DServer_AreaBodyStatus;
 
 /* "classes/Physics2DServer.pxd":9
- * ctypedef enum ProcessInfo :INFO_ACTIVE_OBJECTS, INFO_COLLISION_PAIRS, INFO_ISLAND_COUNT,
- * ctypedef enum AreaBodyStatus :AREA_BODY_ADDED, AREA_BODY_REMOVED,
- * ctypedef enum DampedStringParam :DAMPED_STRING_REST_LENGTH, DAMPED_STRING_STIFFNESS, DAMPED_STRING_DAMPING,             # <<<<<<<<<<<<<<
- * ctypedef enum BodyMode :BODY_MODE_STATIC, BODY_MODE_KINEMATIC, BODY_MODE_RIGID, BODY_MODE_CHARACTER,
- * ctypedef enum ShapeType :SHAPE_LINE, SHAPE_RAY, SHAPE_SEGMENT, SHAPE_CIRCLE, SHAPE_RECTANGLE, SHAPE_CAPSULE, SHAPE_CONVEX_POLYGON, SHAPE_CONCAVE_POLYGON, SHAPE_CUSTOM,
+ * ctypedef enum Physics2DServer_ProcessInfo :INFO_ACTIVE_OBJECTS, INFO_COLLISION_PAIRS, INFO_ISLAND_COUNT,
+ * ctypedef enum Physics2DServer_AreaBodyStatus :AREA_BODY_ADDED, AREA_BODY_REMOVED,
+ * ctypedef enum Physics2DServer_DampedStringParam :DAMPED_STRING_REST_LENGTH, DAMPED_STRING_STIFFNESS, DAMPED_STRING_DAMPING,             # <<<<<<<<<<<<<<
+ * ctypedef enum Physics2DServer_BodyMode :BODY_MODE_STATIC, BODY_MODE_KINEMATIC, BODY_MODE_RIGID, BODY_MODE_CHARACTER,
+ * ctypedef enum Physics2DServer_ShapeType :SHAPE_LINE, SHAPE_RAY, SHAPE_SEGMENT, SHAPE_CIRCLE, SHAPE_RECTANGLE, SHAPE_CAPSULE, SHAPE_CONVEX_POLYGON, SHAPE_CONCAVE_POLYGON, SHAPE_CUSTOM,
  */
-enum __pyx_t_7classes_15Physics2DServer_DampedStringParam {
+enum __pyx_t_7classes_15Physics2DServer_Physics2DServer_DampedStringParam {
   __pyx_e_7classes_15Physics2DServer_DAMPED_STRING_REST_LENGTH,
   __pyx_e_7classes_15Physics2DServer_DAMPED_STRING_STIFFNESS,
   __pyx_e_7classes_15Physics2DServer_DAMPED_STRING_DAMPING
 };
-typedef enum __pyx_t_7classes_15Physics2DServer_DampedStringParam __pyx_t_7classes_15Physics2DServer_DampedStringParam;
+typedef enum __pyx_t_7classes_15Physics2DServer_Physics2DServer_DampedStringParam __pyx_t_7classes_15Physics2DServer_Physics2DServer_DampedStringParam;
 
 /* "classes/Physics2DServer.pxd":10
- * ctypedef enum AreaBodyStatus :AREA_BODY_ADDED, AREA_BODY_REMOVED,
- * ctypedef enum DampedStringParam :DAMPED_STRING_REST_LENGTH, DAMPED_STRING_STIFFNESS, DAMPED_STRING_DAMPING,
- * ctypedef enum BodyMode :BODY_MODE_STATIC, BODY_MODE_KINEMATIC, BODY_MODE_RIGID, BODY_MODE_CHARACTER,             # <<<<<<<<<<<<<<
- * ctypedef enum ShapeType :SHAPE_LINE, SHAPE_RAY, SHAPE_SEGMENT, SHAPE_CIRCLE, SHAPE_RECTANGLE, SHAPE_CAPSULE, SHAPE_CONVEX_POLYGON, SHAPE_CONCAVE_POLYGON, SHAPE_CUSTOM,
- * ctypedef enum JointParam :JOINT_PARAM_BIAS, JOINT_PARAM_MAX_BIAS, JOINT_PARAM_MAX_FORCE,
+ * ctypedef enum Physics2DServer_AreaBodyStatus :AREA_BODY_ADDED, AREA_BODY_REMOVED,
+ * ctypedef enum Physics2DServer_DampedStringParam :DAMPED_STRING_REST_LENGTH, DAMPED_STRING_STIFFNESS, DAMPED_STRING_DAMPING,
+ * ctypedef enum Physics2DServer_BodyMode :BODY_MODE_STATIC, BODY_MODE_KINEMATIC, BODY_MODE_RIGID, BODY_MODE_CHARACTER,             # <<<<<<<<<<<<<<
+ * ctypedef enum Physics2DServer_ShapeType :SHAPE_LINE, SHAPE_RAY, SHAPE_SEGMENT, SHAPE_CIRCLE, SHAPE_RECTANGLE, SHAPE_CAPSULE, SHAPE_CONVEX_POLYGON, SHAPE_CONCAVE_POLYGON, SHAPE_CUSTOM,
+ * ctypedef enum Physics2DServer_JointParam :JOINT_PARAM_BIAS, JOINT_PARAM_MAX_BIAS, JOINT_PARAM_MAX_FORCE,
  */
-enum __pyx_t_7classes_15Physics2DServer_BodyMode {
+enum __pyx_t_7classes_15Physics2DServer_Physics2DServer_BodyMode {
   __pyx_e_7classes_15Physics2DServer_BODY_MODE_STATIC,
   __pyx_e_7classes_15Physics2DServer_BODY_MODE_KINEMATIC,
   __pyx_e_7classes_15Physics2DServer_BODY_MODE_RIGID,
   __pyx_e_7classes_15Physics2DServer_BODY_MODE_CHARACTER
 };
-typedef enum __pyx_t_7classes_15Physics2DServer_BodyMode __pyx_t_7classes_15Physics2DServer_BodyMode;
+typedef enum __pyx_t_7classes_15Physics2DServer_Physics2DServer_BodyMode __pyx_t_7classes_15Physics2DServer_Physics2DServer_BodyMode;
 
 /* "classes/Physics2DServer.pxd":11
- * ctypedef enum DampedStringParam :DAMPED_STRING_REST_LENGTH, DAMPED_STRING_STIFFNESS, DAMPED_STRING_DAMPING,
- * ctypedef enum BodyMode :BODY_MODE_STATIC, BODY_MODE_KINEMATIC, BODY_MODE_RIGID, BODY_MODE_CHARACTER,
- * ctypedef enum ShapeType :SHAPE_LINE, SHAPE_RAY, SHAPE_SEGMENT, SHAPE_CIRCLE, SHAPE_RECTANGLE, SHAPE_CAPSULE, SHAPE_CONVEX_POLYGON, SHAPE_CONCAVE_POLYGON, SHAPE_CUSTOM,             # <<<<<<<<<<<<<<
- * ctypedef enum JointParam :JOINT_PARAM_BIAS, JOINT_PARAM_MAX_BIAS, JOINT_PARAM_MAX_FORCE,
- * ctypedef enum SpaceParameter :SPACE_PARAM_CONTACT_RECYCLE_RADIUS, SPACE_PARAM_CONTACT_MAX_SEPARATION, SPACE_PARAM_BODY_MAX_ALLOWED_PENETRATION, SPACE_PARAM_BODY_LINEAR_VELOCITY_SLEEP_THRESHOLD, SPACE_PARAM_BODY_ANGULAR_VELOCITY_SLEEP_THRESHOLD, SPACE_PARAM_BODY_TIME_TO_SLEEP, SPACE_PARAM_CONSTRAINT_DEFAULT_BIAS, SPACE_PARAM_TEST_MOTION_MIN_CONTACT_DEPTH,
+ * ctypedef enum Physics2DServer_DampedStringParam :DAMPED_STRING_REST_LENGTH, DAMPED_STRING_STIFFNESS, DAMPED_STRING_DAMPING,
+ * ctypedef enum Physics2DServer_BodyMode :BODY_MODE_STATIC, BODY_MODE_KINEMATIC, BODY_MODE_RIGID, BODY_MODE_CHARACTER,
+ * ctypedef enum Physics2DServer_ShapeType :SHAPE_LINE, SHAPE_RAY, SHAPE_SEGMENT, SHAPE_CIRCLE, SHAPE_RECTANGLE, SHAPE_CAPSULE, SHAPE_CONVEX_POLYGON, SHAPE_CONCAVE_POLYGON, SHAPE_CUSTOM,             # <<<<<<<<<<<<<<
+ * ctypedef enum Physics2DServer_JointParam :JOINT_PARAM_BIAS, JOINT_PARAM_MAX_BIAS, JOINT_PARAM_MAX_FORCE,
+ * ctypedef enum Physics2DServer_SpaceParameter :SPACE_PARAM_CONTACT_RECYCLE_RADIUS, SPACE_PARAM_CONTACT_MAX_SEPARATION, SPACE_PARAM_BODY_MAX_ALLOWED_PENETRATION, SPACE_PARAM_BODY_LINEAR_VELOCITY_SLEEP_THRESHOLD, SPACE_PARAM_BODY_ANGULAR_VELOCITY_SLEEP_THRESHOLD, SPACE_PARAM_BODY_TIME_TO_SLEEP, SPACE_PARAM_CONSTRAINT_DEFAULT_BIAS, SPACE_PARAM_TEST_MOTION_MIN_CONTACT_DEPTH,
  */
-enum __pyx_t_7classes_15Physics2DServer_ShapeType {
+enum __pyx_t_7classes_15Physics2DServer_Physics2DServer_ShapeType {
   __pyx_e_7classes_15Physics2DServer_SHAPE_LINE,
   __pyx_e_7classes_15Physics2DServer_SHAPE_RAY,
   __pyx_e_7classes_15Physics2DServer_SHAPE_SEGMENT,
@@ -976,30 +976,30 @@ enum __pyx_t_7classes_15Physics2DServer_ShapeType {
   __pyx_e_7classes_15Physics2DServer_SHAPE_CONCAVE_POLYGON,
   __pyx_e_7classes_15Physics2DServer_SHAPE_CUSTOM
 };
-typedef enum __pyx_t_7classes_15Physics2DServer_ShapeType __pyx_t_7classes_15Physics2DServer_ShapeType;
+typedef enum __pyx_t_7classes_15Physics2DServer_Physics2DServer_ShapeType __pyx_t_7classes_15Physics2DServer_Physics2DServer_ShapeType;
 
 /* "classes/Physics2DServer.pxd":12
- * ctypedef enum BodyMode :BODY_MODE_STATIC, BODY_MODE_KINEMATIC, BODY_MODE_RIGID, BODY_MODE_CHARACTER,
- * ctypedef enum ShapeType :SHAPE_LINE, SHAPE_RAY, SHAPE_SEGMENT, SHAPE_CIRCLE, SHAPE_RECTANGLE, SHAPE_CAPSULE, SHAPE_CONVEX_POLYGON, SHAPE_CONCAVE_POLYGON, SHAPE_CUSTOM,
- * ctypedef enum JointParam :JOINT_PARAM_BIAS, JOINT_PARAM_MAX_BIAS, JOINT_PARAM_MAX_FORCE,             # <<<<<<<<<<<<<<
- * ctypedef enum SpaceParameter :SPACE_PARAM_CONTACT_RECYCLE_RADIUS, SPACE_PARAM_CONTACT_MAX_SEPARATION, SPACE_PARAM_BODY_MAX_ALLOWED_PENETRATION, SPACE_PARAM_BODY_LINEAR_VELOCITY_SLEEP_THRESHOLD, SPACE_PARAM_BODY_ANGULAR_VELOCITY_SLEEP_THRESHOLD, SPACE_PARAM_BODY_TIME_TO_SLEEP, SPACE_PARAM_CONSTRAINT_DEFAULT_BIAS, SPACE_PARAM_TEST_MOTION_MIN_CONTACT_DEPTH,
- * ctypedef enum JointType :JOINT_PIN, JOINT_GROOVE, JOINT_DAMPED_SPRING,
+ * ctypedef enum Physics2DServer_BodyMode :BODY_MODE_STATIC, BODY_MODE_KINEMATIC, BODY_MODE_RIGID, BODY_MODE_CHARACTER,
+ * ctypedef enum Physics2DServer_ShapeType :SHAPE_LINE, SHAPE_RAY, SHAPE_SEGMENT, SHAPE_CIRCLE, SHAPE_RECTANGLE, SHAPE_CAPSULE, SHAPE_CONVEX_POLYGON, SHAPE_CONCAVE_POLYGON, SHAPE_CUSTOM,
+ * ctypedef enum Physics2DServer_JointParam :JOINT_PARAM_BIAS, JOINT_PARAM_MAX_BIAS, JOINT_PARAM_MAX_FORCE,             # <<<<<<<<<<<<<<
+ * ctypedef enum Physics2DServer_SpaceParameter :SPACE_PARAM_CONTACT_RECYCLE_RADIUS, SPACE_PARAM_CONTACT_MAX_SEPARATION, SPACE_PARAM_BODY_MAX_ALLOWED_PENETRATION, SPACE_PARAM_BODY_LINEAR_VELOCITY_SLEEP_THRESHOLD, SPACE_PARAM_BODY_ANGULAR_VELOCITY_SLEEP_THRESHOLD, SPACE_PARAM_BODY_TIME_TO_SLEEP, SPACE_PARAM_CONSTRAINT_DEFAULT_BIAS, SPACE_PARAM_TEST_MOTION_MIN_CONTACT_DEPTH,
+ * ctypedef enum Physics2DServer_JointType :JOINT_PIN, JOINT_GROOVE, JOINT_DAMPED_SPRING,
  */
-enum __pyx_t_7classes_15Physics2DServer_JointParam {
+enum __pyx_t_7classes_15Physics2DServer_Physics2DServer_JointParam {
   __pyx_e_7classes_15Physics2DServer_JOINT_PARAM_BIAS,
   __pyx_e_7classes_15Physics2DServer_JOINT_PARAM_MAX_BIAS,
   __pyx_e_7classes_15Physics2DServer_JOINT_PARAM_MAX_FORCE
 };
-typedef enum __pyx_t_7classes_15Physics2DServer_JointParam __pyx_t_7classes_15Physics2DServer_JointParam;
+typedef enum __pyx_t_7classes_15Physics2DServer_Physics2DServer_JointParam __pyx_t_7classes_15Physics2DServer_Physics2DServer_JointParam;
 
 /* "classes/Physics2DServer.pxd":13
- * ctypedef enum ShapeType :SHAPE_LINE, SHAPE_RAY, SHAPE_SEGMENT, SHAPE_CIRCLE, SHAPE_RECTANGLE, SHAPE_CAPSULE, SHAPE_CONVEX_POLYGON, SHAPE_CONCAVE_POLYGON, SHAPE_CUSTOM,
- * ctypedef enum JointParam :JOINT_PARAM_BIAS, JOINT_PARAM_MAX_BIAS, JOINT_PARAM_MAX_FORCE,
- * ctypedef enum SpaceParameter :SPACE_PARAM_CONTACT_RECYCLE_RADIUS, SPACE_PARAM_CONTACT_MAX_SEPARATION, SPACE_PARAM_BODY_MAX_ALLOWED_PENETRATION, SPACE_PARAM_BODY_LINEAR_VELOCITY_SLEEP_THRESHOLD, SPACE_PARAM_BODY_ANGULAR_VELOCITY_SLEEP_THRESHOLD, SPACE_PARAM_BODY_TIME_TO_SLEEP, SPACE_PARAM_CONSTRAINT_DEFAULT_BIAS, SPACE_PARAM_TEST_MOTION_MIN_CONTACT_DEPTH,             # <<<<<<<<<<<<<<
- * ctypedef enum JointType :JOINT_PIN, JOINT_GROOVE, JOINT_DAMPED_SPRING,
- * ctypedef enum CCDMode :CCD_MODE_DISABLED, CCD_MODE_CAST_RAY, CCD_MODE_CAST_SHAPE,
+ * ctypedef enum Physics2DServer_ShapeType :SHAPE_LINE, SHAPE_RAY, SHAPE_SEGMENT, SHAPE_CIRCLE, SHAPE_RECTANGLE, SHAPE_CAPSULE, SHAPE_CONVEX_POLYGON, SHAPE_CONCAVE_POLYGON, SHAPE_CUSTOM,
+ * ctypedef enum Physics2DServer_JointParam :JOINT_PARAM_BIAS, JOINT_PARAM_MAX_BIAS, JOINT_PARAM_MAX_FORCE,
+ * ctypedef enum Physics2DServer_SpaceParameter :SPACE_PARAM_CONTACT_RECYCLE_RADIUS, SPACE_PARAM_CONTACT_MAX_SEPARATION, SPACE_PARAM_BODY_MAX_ALLOWED_PENETRATION, SPACE_PARAM_BODY_LINEAR_VELOCITY_SLEEP_THRESHOLD, SPACE_PARAM_BODY_ANGULAR_VELOCITY_SLEEP_THRESHOLD, SPACE_PARAM_BODY_TIME_TO_SLEEP, SPACE_PARAM_CONSTRAINT_DEFAULT_BIAS, SPACE_PARAM_TEST_MOTION_MIN_CONTACT_DEPTH,             # <<<<<<<<<<<<<<
+ * ctypedef enum Physics2DServer_JointType :JOINT_PIN, JOINT_GROOVE, JOINT_DAMPED_SPRING,
+ * ctypedef enum Physics2DServer_CCDMode :CCD_MODE_DISABLED, CCD_MODE_CAST_RAY, CCD_MODE_CAST_SHAPE,
  */
-enum __pyx_t_7classes_15Physics2DServer_SpaceParameter {
+enum __pyx_t_7classes_15Physics2DServer_Physics2DServer_SpaceParameter {
   __pyx_e_7classes_15Physics2DServer_SPACE_PARAM_CONTACT_RECYCLE_RADIUS,
   __pyx_e_7classes_15Physics2DServer_SPACE_PARAM_CONTACT_MAX_SEPARATION,
   __pyx_e_7classes_15Physics2DServer_SPACE_PARAM_BODY_MAX_ALLOWED_PENETRATION,
@@ -1009,60 +1009,60 @@ enum __pyx_t_7classes_15Physics2DServer_SpaceParameter {
   __pyx_e_7classes_15Physics2DServer_SPACE_PARAM_CONSTRAINT_DEFAULT_BIAS,
   __pyx_e_7classes_15Physics2DServer_SPACE_PARAM_TEST_MOTION_MIN_CONTACT_DEPTH
 };
-typedef enum __pyx_t_7classes_15Physics2DServer_SpaceParameter __pyx_t_7classes_15Physics2DServer_SpaceParameter;
+typedef enum __pyx_t_7classes_15Physics2DServer_Physics2DServer_SpaceParameter __pyx_t_7classes_15Physics2DServer_Physics2DServer_SpaceParameter;
 
 /* "classes/Physics2DServer.pxd":14
- * ctypedef enum JointParam :JOINT_PARAM_BIAS, JOINT_PARAM_MAX_BIAS, JOINT_PARAM_MAX_FORCE,
- * ctypedef enum SpaceParameter :SPACE_PARAM_CONTACT_RECYCLE_RADIUS, SPACE_PARAM_CONTACT_MAX_SEPARATION, SPACE_PARAM_BODY_MAX_ALLOWED_PENETRATION, SPACE_PARAM_BODY_LINEAR_VELOCITY_SLEEP_THRESHOLD, SPACE_PARAM_BODY_ANGULAR_VELOCITY_SLEEP_THRESHOLD, SPACE_PARAM_BODY_TIME_TO_SLEEP, SPACE_PARAM_CONSTRAINT_DEFAULT_BIAS, SPACE_PARAM_TEST_MOTION_MIN_CONTACT_DEPTH,
- * ctypedef enum JointType :JOINT_PIN, JOINT_GROOVE, JOINT_DAMPED_SPRING,             # <<<<<<<<<<<<<<
- * ctypedef enum CCDMode :CCD_MODE_DISABLED, CCD_MODE_CAST_RAY, CCD_MODE_CAST_SHAPE,
- * ctypedef enum BodyState :BODY_STATE_TRANSFORM, BODY_STATE_LINEAR_VELOCITY, BODY_STATE_ANGULAR_VELOCITY, BODY_STATE_SLEEPING, BODY_STATE_CAN_SLEEP,
+ * ctypedef enum Physics2DServer_JointParam :JOINT_PARAM_BIAS, JOINT_PARAM_MAX_BIAS, JOINT_PARAM_MAX_FORCE,
+ * ctypedef enum Physics2DServer_SpaceParameter :SPACE_PARAM_CONTACT_RECYCLE_RADIUS, SPACE_PARAM_CONTACT_MAX_SEPARATION, SPACE_PARAM_BODY_MAX_ALLOWED_PENETRATION, SPACE_PARAM_BODY_LINEAR_VELOCITY_SLEEP_THRESHOLD, SPACE_PARAM_BODY_ANGULAR_VELOCITY_SLEEP_THRESHOLD, SPACE_PARAM_BODY_TIME_TO_SLEEP, SPACE_PARAM_CONSTRAINT_DEFAULT_BIAS, SPACE_PARAM_TEST_MOTION_MIN_CONTACT_DEPTH,
+ * ctypedef enum Physics2DServer_JointType :JOINT_PIN, JOINT_GROOVE, JOINT_DAMPED_SPRING,             # <<<<<<<<<<<<<<
+ * ctypedef enum Physics2DServer_CCDMode :CCD_MODE_DISABLED, CCD_MODE_CAST_RAY, CCD_MODE_CAST_SHAPE,
+ * ctypedef enum Physics2DServer_BodyState :BODY_STATE_TRANSFORM, BODY_STATE_LINEAR_VELOCITY, BODY_STATE_ANGULAR_VELOCITY, BODY_STATE_SLEEPING, BODY_STATE_CAN_SLEEP,
  */
-enum __pyx_t_7classes_15Physics2DServer_JointType {
+enum __pyx_t_7classes_15Physics2DServer_Physics2DServer_JointType {
   __pyx_e_7classes_15Physics2DServer_JOINT_PIN,
   __pyx_e_7classes_15Physics2DServer_JOINT_GROOVE,
   __pyx_e_7classes_15Physics2DServer_JOINT_DAMPED_SPRING
 };
-typedef enum __pyx_t_7classes_15Physics2DServer_JointType __pyx_t_7classes_15Physics2DServer_JointType;
+typedef enum __pyx_t_7classes_15Physics2DServer_Physics2DServer_JointType __pyx_t_7classes_15Physics2DServer_Physics2DServer_JointType;
 
 /* "classes/Physics2DServer.pxd":15
- * ctypedef enum SpaceParameter :SPACE_PARAM_CONTACT_RECYCLE_RADIUS, SPACE_PARAM_CONTACT_MAX_SEPARATION, SPACE_PARAM_BODY_MAX_ALLOWED_PENETRATION, SPACE_PARAM_BODY_LINEAR_VELOCITY_SLEEP_THRESHOLD, SPACE_PARAM_BODY_ANGULAR_VELOCITY_SLEEP_THRESHOLD, SPACE_PARAM_BODY_TIME_TO_SLEEP, SPACE_PARAM_CONSTRAINT_DEFAULT_BIAS, SPACE_PARAM_TEST_MOTION_MIN_CONTACT_DEPTH,
- * ctypedef enum JointType :JOINT_PIN, JOINT_GROOVE, JOINT_DAMPED_SPRING,
- * ctypedef enum CCDMode :CCD_MODE_DISABLED, CCD_MODE_CAST_RAY, CCD_MODE_CAST_SHAPE,             # <<<<<<<<<<<<<<
- * ctypedef enum BodyState :BODY_STATE_TRANSFORM, BODY_STATE_LINEAR_VELOCITY, BODY_STATE_ANGULAR_VELOCITY, BODY_STATE_SLEEPING, BODY_STATE_CAN_SLEEP,
- * ctypedef enum BodyParameter :BODY_PARAM_BOUNCE, BODY_PARAM_FRICTION, BODY_PARAM_MASS, BODY_PARAM_INERTIA, BODY_PARAM_GRAVITY_SCALE, BODY_PARAM_LINEAR_DAMP, BODY_PARAM_ANGULAR_DAMP, BODY_PARAM_MAX,
+ * ctypedef enum Physics2DServer_SpaceParameter :SPACE_PARAM_CONTACT_RECYCLE_RADIUS, SPACE_PARAM_CONTACT_MAX_SEPARATION, SPACE_PARAM_BODY_MAX_ALLOWED_PENETRATION, SPACE_PARAM_BODY_LINEAR_VELOCITY_SLEEP_THRESHOLD, SPACE_PARAM_BODY_ANGULAR_VELOCITY_SLEEP_THRESHOLD, SPACE_PARAM_BODY_TIME_TO_SLEEP, SPACE_PARAM_CONSTRAINT_DEFAULT_BIAS, SPACE_PARAM_TEST_MOTION_MIN_CONTACT_DEPTH,
+ * ctypedef enum Physics2DServer_JointType :JOINT_PIN, JOINT_GROOVE, JOINT_DAMPED_SPRING,
+ * ctypedef enum Physics2DServer_CCDMode :CCD_MODE_DISABLED, CCD_MODE_CAST_RAY, CCD_MODE_CAST_SHAPE,             # <<<<<<<<<<<<<<
+ * ctypedef enum Physics2DServer_BodyState :BODY_STATE_TRANSFORM, BODY_STATE_LINEAR_VELOCITY, BODY_STATE_ANGULAR_VELOCITY, BODY_STATE_SLEEPING, BODY_STATE_CAN_SLEEP,
+ * ctypedef enum Physics2DServer_BodyParameter :BODY_PARAM_BOUNCE, BODY_PARAM_FRICTION, BODY_PARAM_MASS, BODY_PARAM_INERTIA, BODY_PARAM_GRAVITY_SCALE, BODY_PARAM_LINEAR_DAMP, BODY_PARAM_ANGULAR_DAMP, BODY_PARAM_MAX,
  */
-enum __pyx_t_7classes_15Physics2DServer_CCDMode {
+enum __pyx_t_7classes_15Physics2DServer_Physics2DServer_CCDMode {
   __pyx_e_7classes_15Physics2DServer_CCD_MODE_DISABLED,
   __pyx_e_7classes_15Physics2DServer_CCD_MODE_CAST_RAY,
   __pyx_e_7classes_15Physics2DServer_CCD_MODE_CAST_SHAPE
 };
-typedef enum __pyx_t_7classes_15Physics2DServer_CCDMode __pyx_t_7classes_15Physics2DServer_CCDMode;
+typedef enum __pyx_t_7classes_15Physics2DServer_Physics2DServer_CCDMode __pyx_t_7classes_15Physics2DServer_Physics2DServer_CCDMode;
 
 /* "classes/Physics2DServer.pxd":16
- * ctypedef enum JointType :JOINT_PIN, JOINT_GROOVE, JOINT_DAMPED_SPRING,
- * ctypedef enum CCDMode :CCD_MODE_DISABLED, CCD_MODE_CAST_RAY, CCD_MODE_CAST_SHAPE,
- * ctypedef enum BodyState :BODY_STATE_TRANSFORM, BODY_STATE_LINEAR_VELOCITY, BODY_STATE_ANGULAR_VELOCITY, BODY_STATE_SLEEPING, BODY_STATE_CAN_SLEEP,             # <<<<<<<<<<<<<<
- * ctypedef enum BodyParameter :BODY_PARAM_BOUNCE, BODY_PARAM_FRICTION, BODY_PARAM_MASS, BODY_PARAM_INERTIA, BODY_PARAM_GRAVITY_SCALE, BODY_PARAM_LINEAR_DAMP, BODY_PARAM_ANGULAR_DAMP, BODY_PARAM_MAX,
- * ctypedef enum AreaSpaceOverrideMode :AREA_SPACE_OVERRIDE_DISABLED, AREA_SPACE_OVERRIDE_COMBINE, AREA_SPACE_OVERRIDE_COMBINE_REPLACE, AREA_SPACE_OVERRIDE_REPLACE, AREA_SPACE_OVERRIDE_REPLACE_COMBINE,
+ * ctypedef enum Physics2DServer_JointType :JOINT_PIN, JOINT_GROOVE, JOINT_DAMPED_SPRING,
+ * ctypedef enum Physics2DServer_CCDMode :CCD_MODE_DISABLED, CCD_MODE_CAST_RAY, CCD_MODE_CAST_SHAPE,
+ * ctypedef enum Physics2DServer_BodyState :BODY_STATE_TRANSFORM, BODY_STATE_LINEAR_VELOCITY, BODY_STATE_ANGULAR_VELOCITY, BODY_STATE_SLEEPING, BODY_STATE_CAN_SLEEP,             # <<<<<<<<<<<<<<
+ * ctypedef enum Physics2DServer_BodyParameter :BODY_PARAM_BOUNCE, BODY_PARAM_FRICTION, BODY_PARAM_MASS, BODY_PARAM_INERTIA, BODY_PARAM_GRAVITY_SCALE, BODY_PARAM_LINEAR_DAMP, BODY_PARAM_ANGULAR_DAMP, BODY_PARAM_MAX,
+ * ctypedef enum Physics2DServer_AreaSpaceOverrideMode :AREA_SPACE_OVERRIDE_DISABLED, AREA_SPACE_OVERRIDE_COMBINE, AREA_SPACE_OVERRIDE_COMBINE_REPLACE, AREA_SPACE_OVERRIDE_REPLACE, AREA_SPACE_OVERRIDE_REPLACE_COMBINE,
  */
-enum __pyx_t_7classes_15Physics2DServer_BodyState {
+enum __pyx_t_7classes_15Physics2DServer_Physics2DServer_BodyState {
   __pyx_e_7classes_15Physics2DServer_BODY_STATE_TRANSFORM,
   __pyx_e_7classes_15Physics2DServer_BODY_STATE_LINEAR_VELOCITY,
   __pyx_e_7classes_15Physics2DServer_BODY_STATE_ANGULAR_VELOCITY,
   __pyx_e_7classes_15Physics2DServer_BODY_STATE_SLEEPING,
   __pyx_e_7classes_15Physics2DServer_BODY_STATE_CAN_SLEEP
 };
-typedef enum __pyx_t_7classes_15Physics2DServer_BodyState __pyx_t_7classes_15Physics2DServer_BodyState;
+typedef enum __pyx_t_7classes_15Physics2DServer_Physics2DServer_BodyState __pyx_t_7classes_15Physics2DServer_Physics2DServer_BodyState;
 
 /* "classes/Physics2DServer.pxd":17
- * ctypedef enum CCDMode :CCD_MODE_DISABLED, CCD_MODE_CAST_RAY, CCD_MODE_CAST_SHAPE,
- * ctypedef enum BodyState :BODY_STATE_TRANSFORM, BODY_STATE_LINEAR_VELOCITY, BODY_STATE_ANGULAR_VELOCITY, BODY_STATE_SLEEPING, BODY_STATE_CAN_SLEEP,
- * ctypedef enum BodyParameter :BODY_PARAM_BOUNCE, BODY_PARAM_FRICTION, BODY_PARAM_MASS, BODY_PARAM_INERTIA, BODY_PARAM_GRAVITY_SCALE, BODY_PARAM_LINEAR_DAMP, BODY_PARAM_ANGULAR_DAMP, BODY_PARAM_MAX,             # <<<<<<<<<<<<<<
- * ctypedef enum AreaSpaceOverrideMode :AREA_SPACE_OVERRIDE_DISABLED, AREA_SPACE_OVERRIDE_COMBINE, AREA_SPACE_OVERRIDE_COMBINE_REPLACE, AREA_SPACE_OVERRIDE_REPLACE, AREA_SPACE_OVERRIDE_REPLACE_COMBINE,
- * ctypedef enum AreaParameter :AREA_PARAM_GRAVITY, AREA_PARAM_GRAVITY_VECTOR, AREA_PARAM_GRAVITY_IS_POINT, AREA_PARAM_GRAVITY_DISTANCE_SCALE, AREA_PARAM_GRAVITY_POINT_ATTENUATION, AREA_PARAM_LINEAR_DAMP, AREA_PARAM_ANGULAR_DAMP, AREA_PARAM_PRIORITY,
+ * ctypedef enum Physics2DServer_CCDMode :CCD_MODE_DISABLED, CCD_MODE_CAST_RAY, CCD_MODE_CAST_SHAPE,
+ * ctypedef enum Physics2DServer_BodyState :BODY_STATE_TRANSFORM, BODY_STATE_LINEAR_VELOCITY, BODY_STATE_ANGULAR_VELOCITY, BODY_STATE_SLEEPING, BODY_STATE_CAN_SLEEP,
+ * ctypedef enum Physics2DServer_BodyParameter :BODY_PARAM_BOUNCE, BODY_PARAM_FRICTION, BODY_PARAM_MASS, BODY_PARAM_INERTIA, BODY_PARAM_GRAVITY_SCALE, BODY_PARAM_LINEAR_DAMP, BODY_PARAM_ANGULAR_DAMP, BODY_PARAM_MAX,             # <<<<<<<<<<<<<<
+ * ctypedef enum Physics2DServer_AreaSpaceOverrideMode :AREA_SPACE_OVERRIDE_DISABLED, AREA_SPACE_OVERRIDE_COMBINE, AREA_SPACE_OVERRIDE_COMBINE_REPLACE, AREA_SPACE_OVERRIDE_REPLACE, AREA_SPACE_OVERRIDE_REPLACE_COMBINE,
+ * ctypedef enum Physics2DServer_AreaParameter :AREA_PARAM_GRAVITY, AREA_PARAM_GRAVITY_VECTOR, AREA_PARAM_GRAVITY_IS_POINT, AREA_PARAM_GRAVITY_DISTANCE_SCALE, AREA_PARAM_GRAVITY_POINT_ATTENUATION, AREA_PARAM_LINEAR_DAMP, AREA_PARAM_ANGULAR_DAMP, AREA_PARAM_PRIORITY,
  */
-enum __pyx_t_7classes_15Physics2DServer_BodyParameter {
+enum __pyx_t_7classes_15Physics2DServer_Physics2DServer_BodyParameter {
   __pyx_e_7classes_15Physics2DServer_BODY_PARAM_BOUNCE,
   __pyx_e_7classes_15Physics2DServer_BODY_PARAM_FRICTION,
   __pyx_e_7classes_15Physics2DServer_BODY_PARAM_MASS,
@@ -1072,29 +1072,29 @@ enum __pyx_t_7classes_15Physics2DServer_BodyParameter {
   __pyx_e_7classes_15Physics2DServer_BODY_PARAM_ANGULAR_DAMP,
   __pyx_e_7classes_15Physics2DServer_BODY_PARAM_MAX
 };
-typedef enum __pyx_t_7classes_15Physics2DServer_BodyParameter __pyx_t_7classes_15Physics2DServer_BodyParameter;
+typedef enum __pyx_t_7classes_15Physics2DServer_Physics2DServer_BodyParameter __pyx_t_7classes_15Physics2DServer_Physics2DServer_BodyParameter;
 
 /* "classes/Physics2DServer.pxd":18
- * ctypedef enum BodyState :BODY_STATE_TRANSFORM, BODY_STATE_LINEAR_VELOCITY, BODY_STATE_ANGULAR_VELOCITY, BODY_STATE_SLEEPING, BODY_STATE_CAN_SLEEP,
- * ctypedef enum BodyParameter :BODY_PARAM_BOUNCE, BODY_PARAM_FRICTION, BODY_PARAM_MASS, BODY_PARAM_INERTIA, BODY_PARAM_GRAVITY_SCALE, BODY_PARAM_LINEAR_DAMP, BODY_PARAM_ANGULAR_DAMP, BODY_PARAM_MAX,
- * ctypedef enum AreaSpaceOverrideMode :AREA_SPACE_OVERRIDE_DISABLED, AREA_SPACE_OVERRIDE_COMBINE, AREA_SPACE_OVERRIDE_COMBINE_REPLACE, AREA_SPACE_OVERRIDE_REPLACE, AREA_SPACE_OVERRIDE_REPLACE_COMBINE,             # <<<<<<<<<<<<<<
- * ctypedef enum AreaParameter :AREA_PARAM_GRAVITY, AREA_PARAM_GRAVITY_VECTOR, AREA_PARAM_GRAVITY_IS_POINT, AREA_PARAM_GRAVITY_DISTANCE_SCALE, AREA_PARAM_GRAVITY_POINT_ATTENUATION, AREA_PARAM_LINEAR_DAMP, AREA_PARAM_ANGULAR_DAMP, AREA_PARAM_PRIORITY,
+ * ctypedef enum Physics2DServer_BodyState :BODY_STATE_TRANSFORM, BODY_STATE_LINEAR_VELOCITY, BODY_STATE_ANGULAR_VELOCITY, BODY_STATE_SLEEPING, BODY_STATE_CAN_SLEEP,
+ * ctypedef enum Physics2DServer_BodyParameter :BODY_PARAM_BOUNCE, BODY_PARAM_FRICTION, BODY_PARAM_MASS, BODY_PARAM_INERTIA, BODY_PARAM_GRAVITY_SCALE, BODY_PARAM_LINEAR_DAMP, BODY_PARAM_ANGULAR_DAMP, BODY_PARAM_MAX,
+ * ctypedef enum Physics2DServer_AreaSpaceOverrideMode :AREA_SPACE_OVERRIDE_DISABLED, AREA_SPACE_OVERRIDE_COMBINE, AREA_SPACE_OVERRIDE_COMBINE_REPLACE, AREA_SPACE_OVERRIDE_REPLACE, AREA_SPACE_OVERRIDE_REPLACE_COMBINE,             # <<<<<<<<<<<<<<
+ * ctypedef enum Physics2DServer_AreaParameter :AREA_PARAM_GRAVITY, AREA_PARAM_GRAVITY_VECTOR, AREA_PARAM_GRAVITY_IS_POINT, AREA_PARAM_GRAVITY_DISTANCE_SCALE, AREA_PARAM_GRAVITY_POINT_ATTENUATION, AREA_PARAM_LINEAR_DAMP, AREA_PARAM_ANGULAR_DAMP, AREA_PARAM_PRIORITY,
  */
-enum __pyx_t_7classes_15Physics2DServer_AreaSpaceOverrideMode {
+enum __pyx_t_7classes_15Physics2DServer_Physics2DServer_AreaSpaceOverrideMode {
   __pyx_e_7classes_15Physics2DServer_AREA_SPACE_OVERRIDE_DISABLED,
   __pyx_e_7classes_15Physics2DServer_AREA_SPACE_OVERRIDE_COMBINE,
   __pyx_e_7classes_15Physics2DServer_AREA_SPACE_OVERRIDE_COMBINE_REPLACE,
   __pyx_e_7classes_15Physics2DServer_AREA_SPACE_OVERRIDE_REPLACE,
   __pyx_e_7classes_15Physics2DServer_AREA_SPACE_OVERRIDE_REPLACE_COMBINE
 };
-typedef enum __pyx_t_7classes_15Physics2DServer_AreaSpaceOverrideMode __pyx_t_7classes_15Physics2DServer_AreaSpaceOverrideMode;
+typedef enum __pyx_t_7classes_15Physics2DServer_Physics2DServer_AreaSpaceOverrideMode __pyx_t_7classes_15Physics2DServer_Physics2DServer_AreaSpaceOverrideMode;
 
 /* "classes/Physics2DServer.pxd":19
- * ctypedef enum BodyParameter :BODY_PARAM_BOUNCE, BODY_PARAM_FRICTION, BODY_PARAM_MASS, BODY_PARAM_INERTIA, BODY_PARAM_GRAVITY_SCALE, BODY_PARAM_LINEAR_DAMP, BODY_PARAM_ANGULAR_DAMP, BODY_PARAM_MAX,
- * ctypedef enum AreaSpaceOverrideMode :AREA_SPACE_OVERRIDE_DISABLED, AREA_SPACE_OVERRIDE_COMBINE, AREA_SPACE_OVERRIDE_COMBINE_REPLACE, AREA_SPACE_OVERRIDE_REPLACE, AREA_SPACE_OVERRIDE_REPLACE_COMBINE,
- * ctypedef enum AreaParameter :AREA_PARAM_GRAVITY, AREA_PARAM_GRAVITY_VECTOR, AREA_PARAM_GRAVITY_IS_POINT, AREA_PARAM_GRAVITY_DISTANCE_SCALE, AREA_PARAM_GRAVITY_POINT_ATTENUATION, AREA_PARAM_LINEAR_DAMP, AREA_PARAM_ANGULAR_DAMP, AREA_PARAM_PRIORITY,             # <<<<<<<<<<<<<<
+ * ctypedef enum Physics2DServer_BodyParameter :BODY_PARAM_BOUNCE, BODY_PARAM_FRICTION, BODY_PARAM_MASS, BODY_PARAM_INERTIA, BODY_PARAM_GRAVITY_SCALE, BODY_PARAM_LINEAR_DAMP, BODY_PARAM_ANGULAR_DAMP, BODY_PARAM_MAX,
+ * ctypedef enum Physics2DServer_AreaSpaceOverrideMode :AREA_SPACE_OVERRIDE_DISABLED, AREA_SPACE_OVERRIDE_COMBINE, AREA_SPACE_OVERRIDE_COMBINE_REPLACE, AREA_SPACE_OVERRIDE_REPLACE, AREA_SPACE_OVERRIDE_REPLACE_COMBINE,
+ * ctypedef enum Physics2DServer_AreaParameter :AREA_PARAM_GRAVITY, AREA_PARAM_GRAVITY_VECTOR, AREA_PARAM_GRAVITY_IS_POINT, AREA_PARAM_GRAVITY_DISTANCE_SCALE, AREA_PARAM_GRAVITY_POINT_ATTENUATION, AREA_PARAM_LINEAR_DAMP, AREA_PARAM_ANGULAR_DAMP, AREA_PARAM_PRIORITY,             # <<<<<<<<<<<<<<
  */
-enum __pyx_t_7classes_15Physics2DServer_AreaParameter {
+enum __pyx_t_7classes_15Physics2DServer_Physics2DServer_AreaParameter {
   __pyx_e_7classes_15Physics2DServer_AREA_PARAM_GRAVITY,
   __pyx_e_7classes_15Physics2DServer_AREA_PARAM_GRAVITY_VECTOR,
   __pyx_e_7classes_15Physics2DServer_AREA_PARAM_GRAVITY_IS_POINT,
@@ -1104,16 +1104,16 @@ enum __pyx_t_7classes_15Physics2DServer_AreaParameter {
   __pyx_e_7classes_15Physics2DServer_AREA_PARAM_ANGULAR_DAMP,
   __pyx_e_7classes_15Physics2DServer_AREA_PARAM_PRIORITY
 };
-typedef enum __pyx_t_7classes_15Physics2DServer_AreaParameter __pyx_t_7classes_15Physics2DServer_AreaParameter;
+typedef enum __pyx_t_7classes_15Physics2DServer_Physics2DServer_AreaParameter __pyx_t_7classes_15Physics2DServer_Physics2DServer_AreaParameter;
 
 /* "core/variant/Variant.pxd":17
  *         print("new_variant", type(i))
  * 
- * ctypedef enum Type:             # <<<<<<<<<<<<<<
+ * ctypedef enum Variant_Type:             # <<<<<<<<<<<<<<
  *     NIL,
  *     # atomic types
  */
-enum __pyx_t_4core_7variant_7Variant_Type {
+enum __pyx_t_4core_7variant_7Variant_Variant_Type {
   __pyx_e_4core_7variant_7Variant_NIL,
   __pyx_e_4core_7variant_7Variant_BOOL,
   __pyx_e_4core_7variant_7Variant_INT,
@@ -1143,16 +1143,16 @@ enum __pyx_t_4core_7variant_7Variant_Type {
   __pyx_e_4core_7variant_7Variant_POOL_COLOR_ARRAY,
   __pyx_e_4core_7variant_7Variant_VARIANT_MAX
 };
-typedef enum __pyx_t_4core_7variant_7Variant_Type __pyx_t_4core_7variant_7Variant_Type;
+typedef enum __pyx_t_4core_7variant_7Variant_Variant_Type __pyx_t_4core_7variant_7Variant_Variant_Type;
 
 /* "core/variant/Variant.pxd":58
  * 
  * 
- * ctypedef enum Operator :             # <<<<<<<<<<<<<<
+ * ctypedef enum Variant_Operator :             # <<<<<<<<<<<<<<
  * 
  *     #comparation
  */
-enum __pyx_t_4core_7variant_7Variant_Operator {
+enum __pyx_t_4core_7variant_7Variant_Variant_Operator {
   __pyx_e_4core_7variant_7Variant_OP_EQUAL,
   __pyx_e_4core_7variant_7Variant_OP_NOT_EQUAL,
   __pyx_e_4core_7variant_7Variant_OP_LESS,
@@ -1180,21 +1180,21 @@ enum __pyx_t_4core_7variant_7Variant_Operator {
   __pyx_e_4core_7variant_7Variant_OP_IN,
   __pyx_e_4core_7variant_7Variant_OP_MAX
 };
-typedef enum __pyx_t_4core_7variant_7Variant_Operator __pyx_t_4core_7variant_7Variant_Operator;
+typedef enum __pyx_t_4core_7variant_7Variant_Variant_Operator __pyx_t_4core_7variant_7Variant_Variant_Operator;
 
 /* "core/vector3/Vector3.pxd":15
  * 
  * 
- * ctypedef enum Axis :             # <<<<<<<<<<<<<<
- *     AXIS_X,
- *     AXIS_Y,
+ * ctypedef enum Vector3_Axis :             # <<<<<<<<<<<<<<
+ *     Vector3_AXIS_X,
+ *     Vector3_AXIS_Y,
  */
-enum __pyx_t_4core_7vector3_7Vector3_Axis {
-  __pyx_e_4core_7vector3_7Vector3_AXIS_X,
-  __pyx_e_4core_7vector3_7Vector3_AXIS_Y,
-  __pyx_e_4core_7vector3_7Vector3_AXIS_Z
+enum __pyx_t_4core_7vector3_7Vector3_Vector3_Axis {
+  __pyx_e_4core_7vector3_7Vector3_Vector3_AXIS_X,
+  __pyx_e_4core_7vector3_7Vector3_Vector3_AXIS_Y,
+  __pyx_e_4core_7vector3_7Vector3_Vector3_AXIS_Z
 };
-typedef enum __pyx_t_4core_7vector3_7Vector3_Axis __pyx_t_4core_7vector3_7Vector3_Axis;
+typedef enum __pyx_t_4core_7vector3_7Vector3_Vector3_Axis __pyx_t_4core_7vector3_7Vector3_Vector3_Axis;
 
 /* "utils/Wrapper.pxd":2
  * from godot_api.binding cimport *
@@ -1214,7 +1214,7 @@ struct __pyx_obj_5utils_7Wrapper_Wrapper {
  * from utils.Wrapper cimport *
  * cdef class Object(Wrapper):             # <<<<<<<<<<<<<<
  *     pass
- * ctypedef enum ConnectFlags :CONNECT_DEFERRED, CONNECT_PERSIST, CONNECT_ONESHOT, CONNECT_REFERENCE_COUNTED,
+ * ctypedef enum Object_ConnectFlags :CONNECT_DEFERRED, CONNECT_PERSIST, CONNECT_ONESHOT, CONNECT_REFERENCE_COUNTED,
  */
 struct __pyx_obj_7classes_6Object_Object {
   struct __pyx_obj_5utils_7Wrapper_Wrapper __pyx_base;
@@ -1226,7 +1226,7 @@ struct __pyx_obj_7classes_6Object_Object {
  * cimport classes.Object
  * cdef class Physics2DServer(classes.Object.Object):             # <<<<<<<<<<<<<<
  *     pass
- * ctypedef enum ProcessInfo :INFO_ACTIVE_OBJECTS, INFO_COLLISION_PAIRS, INFO_ISLAND_COUNT,
+ * ctypedef enum Physics2DServer_ProcessInfo :INFO_ACTIVE_OBJECTS, INFO_COLLISION_PAIRS, INFO_ISLAND_COUNT,
  */
 struct __pyx_obj_7classes_15Physics2DServer_Physics2DServer {
   struct __pyx_obj_7classes_6Object_Object __pyx_base;
@@ -1599,7 +1599,7 @@ static CYTHON_INLINE godot_object *__pyx_f_5utils_7Wrapper_7Wrapper_get_godot_ow
  * from utils.Wrapper cimport *
  * cdef class Object(Wrapper):             # <<<<<<<<<<<<<<
  *     pass
- * ctypedef enum ConnectFlags :CONNECT_DEFERRED, CONNECT_PERSIST, CONNECT_ONESHOT, CONNECT_REFERENCE_COUNTED,
+ * ctypedef enum Object_ConnectFlags :CONNECT_DEFERRED, CONNECT_PERSIST, CONNECT_ONESHOT, CONNECT_REFERENCE_COUNTED,
  */
 
 struct __pyx_vtabstruct_7classes_6Object_Object {
@@ -1613,7 +1613,7 @@ static struct __pyx_vtabstruct_7classes_6Object_Object *__pyx_vtabptr_7classes_6
  * cimport classes.Object
  * cdef class Physics2DServer(classes.Object.Object):             # <<<<<<<<<<<<<<
  *     pass
- * ctypedef enum ProcessInfo :INFO_ACTIVE_OBJECTS, INFO_COLLISION_PAIRS, INFO_ISLAND_COUNT,
+ * ctypedef enum Physics2DServer_ProcessInfo :INFO_ACTIVE_OBJECTS, INFO_COLLISION_PAIRS, INFO_ISLAND_COUNT,
  */
 
 struct __pyx_vtabstruct_7classes_15Physics2DServer_Physics2DServer {
@@ -3218,7 +3218,7 @@ static CYTHON_INLINE void __pyx_f_4core_7variant_7Variant_7Variant_new_variant(C
  *     cdef inline void new_variant(self, i):
  *         print("new_variant", type(i))             # <<<<<<<<<<<<<<
  * 
- * ctypedef enum Type:
+ * ctypedef enum Variant_Type:
  */
   __pyx_t_1 = PyTuple_New(2); if (unlikely(!__pyx_t_1)) __PYX_ERR(4, 15, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
@@ -4748,12 +4748,10 @@ static int __pyx_import_star_set(PyObject *o, PyObject* py_name, char *name) {
   static const char* internal_type_names[] = {
     "AABB",
     "Array",
-    "Axis",
     "Basis",
     "Color",
     "Dictionary",
     "NodePath",
-    "Operator",
     "Physics2DServerSW",
     "Plane",
     "PoolByteArray",
@@ -4770,10 +4768,12 @@ static int __pyx_import_star_set(PyObject *o, PyObject* py_name, char *name) {
     "String",
     "Transform",
     "Transform2D",
-    "Type",
     "Variant",
+    "Variant_Operator",
+    "Variant_Type",
     "Vector2",
     "Vector3",
+    "Vector3_Axis",
     "Wrapper",
     "bool",
     "godot_aabb",

@@ -892,22 +892,22 @@ struct __pyx_obj_7classes_4UPNP_UPNP;
 /* "classes/Object.pxd":7
  * cdef class Object(Wrapper):
  *     pass
- * ctypedef enum ConnectFlags :CONNECT_DEFERRED, CONNECT_PERSIST, CONNECT_ONESHOT, CONNECT_REFERENCE_COUNTED,             # <<<<<<<<<<<<<<
+ * ctypedef enum Object_ConnectFlags :CONNECT_DEFERRED, CONNECT_PERSIST, CONNECT_ONESHOT, CONNECT_REFERENCE_COUNTED,             # <<<<<<<<<<<<<<
  */
-enum __pyx_t_7classes_6Object_ConnectFlags {
+enum __pyx_t_7classes_6Object_Object_ConnectFlags {
   __pyx_e_7classes_6Object_CONNECT_DEFERRED,
   __pyx_e_7classes_6Object_CONNECT_PERSIST,
   __pyx_e_7classes_6Object_CONNECT_ONESHOT,
   __pyx_e_7classes_6Object_CONNECT_REFERENCE_COUNTED
 };
-typedef enum __pyx_t_7classes_6Object_ConnectFlags __pyx_t_7classes_6Object_ConnectFlags;
+typedef enum __pyx_t_7classes_6Object_Object_ConnectFlags __pyx_t_7classes_6Object_Object_ConnectFlags;
 
 /* "classes/UPNPDevice.pxd":7
  * cdef class UPNPDevice(classes.Reference.Reference):
  *     pass
- * ctypedef enum IGDStatus :IGD_STATUS_OK, IGD_STATUS_HTTP_ERROR, IGD_STATUS_HTTP_EMPTY, IGD_STATUS_NO_URLS, IGD_STATUS_NO_IGD, IGD_STATUS_DISCONNECTED, IGD_STATUS_UNKNOWN_DEVICE, IGD_STATUS_INVALID_CONTROL, IGD_STATUS_MALLOC_ERROR, IGD_STATUS_UNKNOWN_ERROR,             # <<<<<<<<<<<<<<
+ * ctypedef enum UPNPDevice_IGDStatus :IGD_STATUS_OK, IGD_STATUS_HTTP_ERROR, IGD_STATUS_HTTP_EMPTY, IGD_STATUS_NO_URLS, IGD_STATUS_NO_IGD, IGD_STATUS_DISCONNECTED, IGD_STATUS_UNKNOWN_DEVICE, IGD_STATUS_INVALID_CONTROL, IGD_STATUS_MALLOC_ERROR, IGD_STATUS_UNKNOWN_ERROR,             # <<<<<<<<<<<<<<
  */
-enum __pyx_t_7classes_10UPNPDevice_IGDStatus {
+enum __pyx_t_7classes_10UPNPDevice_UPNPDevice_IGDStatus {
   __pyx_e_7classes_10UPNPDevice_IGD_STATUS_OK,
   __pyx_e_7classes_10UPNPDevice_IGD_STATUS_HTTP_ERROR,
   __pyx_e_7classes_10UPNPDevice_IGD_STATUS_HTTP_EMPTY,
@@ -919,16 +919,16 @@ enum __pyx_t_7classes_10UPNPDevice_IGDStatus {
   __pyx_e_7classes_10UPNPDevice_IGD_STATUS_MALLOC_ERROR,
   __pyx_e_7classes_10UPNPDevice_IGD_STATUS_UNKNOWN_ERROR
 };
-typedef enum __pyx_t_7classes_10UPNPDevice_IGDStatus __pyx_t_7classes_10UPNPDevice_IGDStatus;
+typedef enum __pyx_t_7classes_10UPNPDevice_UPNPDevice_IGDStatus __pyx_t_7classes_10UPNPDevice_UPNPDevice_IGDStatus;
 
 /* "core/variant/Variant.pxd":17
  *         print("new_variant", type(i))
  * 
- * ctypedef enum Type:             # <<<<<<<<<<<<<<
+ * ctypedef enum Variant_Type:             # <<<<<<<<<<<<<<
  *     NIL,
  *     # atomic types
  */
-enum __pyx_t_4core_7variant_7Variant_Type {
+enum __pyx_t_4core_7variant_7Variant_Variant_Type {
   __pyx_e_4core_7variant_7Variant_NIL,
   __pyx_e_4core_7variant_7Variant_BOOL,
   __pyx_e_4core_7variant_7Variant_INT,
@@ -958,16 +958,16 @@ enum __pyx_t_4core_7variant_7Variant_Type {
   __pyx_e_4core_7variant_7Variant_POOL_COLOR_ARRAY,
   __pyx_e_4core_7variant_7Variant_VARIANT_MAX
 };
-typedef enum __pyx_t_4core_7variant_7Variant_Type __pyx_t_4core_7variant_7Variant_Type;
+typedef enum __pyx_t_4core_7variant_7Variant_Variant_Type __pyx_t_4core_7variant_7Variant_Variant_Type;
 
 /* "core/variant/Variant.pxd":58
  * 
  * 
- * ctypedef enum Operator :             # <<<<<<<<<<<<<<
+ * ctypedef enum Variant_Operator :             # <<<<<<<<<<<<<<
  * 
  *     #comparation
  */
-enum __pyx_t_4core_7variant_7Variant_Operator {
+enum __pyx_t_4core_7variant_7Variant_Variant_Operator {
   __pyx_e_4core_7variant_7Variant_OP_EQUAL,
   __pyx_e_4core_7variant_7Variant_OP_NOT_EQUAL,
   __pyx_e_4core_7variant_7Variant_OP_LESS,
@@ -995,28 +995,28 @@ enum __pyx_t_4core_7variant_7Variant_Operator {
   __pyx_e_4core_7variant_7Variant_OP_IN,
   __pyx_e_4core_7variant_7Variant_OP_MAX
 };
-typedef enum __pyx_t_4core_7variant_7Variant_Operator __pyx_t_4core_7variant_7Variant_Operator;
+typedef enum __pyx_t_4core_7variant_7Variant_Variant_Operator __pyx_t_4core_7variant_7Variant_Variant_Operator;
 
 /* "core/vector3/Vector3.pxd":15
  * 
  * 
- * ctypedef enum Axis :             # <<<<<<<<<<<<<<
- *     AXIS_X,
- *     AXIS_Y,
+ * ctypedef enum Vector3_Axis :             # <<<<<<<<<<<<<<
+ *     Vector3_AXIS_X,
+ *     Vector3_AXIS_Y,
  */
-enum __pyx_t_4core_7vector3_7Vector3_Axis {
-  __pyx_e_4core_7vector3_7Vector3_AXIS_X,
-  __pyx_e_4core_7vector3_7Vector3_AXIS_Y,
-  __pyx_e_4core_7vector3_7Vector3_AXIS_Z
+enum __pyx_t_4core_7vector3_7Vector3_Vector3_Axis {
+  __pyx_e_4core_7vector3_7Vector3_Vector3_AXIS_X,
+  __pyx_e_4core_7vector3_7Vector3_Vector3_AXIS_Y,
+  __pyx_e_4core_7vector3_7Vector3_Vector3_AXIS_Z
 };
-typedef enum __pyx_t_4core_7vector3_7Vector3_Axis __pyx_t_4core_7vector3_7Vector3_Axis;
+typedef enum __pyx_t_4core_7vector3_7Vector3_Vector3_Axis __pyx_t_4core_7vector3_7Vector3_Vector3_Axis;
 
 /* "classes/UPNP.pxd":7
  * cdef class UPNP(classes.Reference.Reference):
  *     pass
- * ctypedef enum UPNPResult :UPNP_RESULT_SUCCESS, UPNP_RESULT_NOT_AUTHORIZED, UPNP_RESULT_PORT_MAPPING_NOT_FOUND, UPNP_RESULT_INCONSISTENT_PARAMETERS, UPNP_RESULT_NO_SUCH_ENTRY_IN_ARRAY, UPNP_RESULT_ACTION_FAILED, UPNP_RESULT_SRC_IP_WILDCARD_NOT_PERMITTED, UPNP_RESULT_EXT_PORT_WILDCARD_NOT_PERMITTED, UPNP_RESULT_INT_PORT_WILDCARD_NOT_PERMITTED, UPNP_RESULT_REMOTE_HOST_MUST_BE_WILDCARD, UPNP_RESULT_EXT_PORT_MUST_BE_WILDCARD, UPNP_RESULT_NO_PORT_MAPS_AVAILABLE, UPNP_RESULT_CONFLICT_WITH_OTHER_MECHANISM, UPNP_RESULT_CONFLICT_WITH_OTHER_MAPPING, UPNP_RESULT_SAME_PORT_VALUES_REQUIRED, UPNP_RESULT_ONLY_PERMANENT_LEASE_SUPPORTED, UPNP_RESULT_INVALID_GATEWAY, UPNP_RESULT_INVALID_PORT, UPNP_RESULT_INVALID_PROTOCOL, UPNP_RESULT_INVALID_DURATION, UPNP_RESULT_INVALID_ARGS, UPNP_RESULT_INVALID_RESPONSE, UPNP_RESULT_INVALID_PARAM, UPNP_RESULT_HTTP_ERROR, UPNP_RESULT_SOCKET_ERROR, UPNP_RESULT_MEM_ALLOC_ERROR, UPNP_RESULT_NO_GATEWAY, UPNP_RESULT_NO_DEVICES, UPNP_RESULT_UNKNOWN_ERROR,             # <<<<<<<<<<<<<<
+ * ctypedef enum UPNP_UPNPResult :UPNP_RESULT_SUCCESS, UPNP_RESULT_NOT_AUTHORIZED, UPNP_RESULT_PORT_MAPPING_NOT_FOUND, UPNP_RESULT_INCONSISTENT_PARAMETERS, UPNP_RESULT_NO_SUCH_ENTRY_IN_ARRAY, UPNP_RESULT_ACTION_FAILED, UPNP_RESULT_SRC_IP_WILDCARD_NOT_PERMITTED, UPNP_RESULT_EXT_PORT_WILDCARD_NOT_PERMITTED, UPNP_RESULT_INT_PORT_WILDCARD_NOT_PERMITTED, UPNP_RESULT_REMOTE_HOST_MUST_BE_WILDCARD, UPNP_RESULT_EXT_PORT_MUST_BE_WILDCARD, UPNP_RESULT_NO_PORT_MAPS_AVAILABLE, UPNP_RESULT_CONFLICT_WITH_OTHER_MECHANISM, UPNP_RESULT_CONFLICT_WITH_OTHER_MAPPING, UPNP_RESULT_SAME_PORT_VALUES_REQUIRED, UPNP_RESULT_ONLY_PERMANENT_LEASE_SUPPORTED, UPNP_RESULT_INVALID_GATEWAY, UPNP_RESULT_INVALID_PORT, UPNP_RESULT_INVALID_PROTOCOL, UPNP_RESULT_INVALID_DURATION, UPNP_RESULT_INVALID_ARGS, UPNP_RESULT_INVALID_RESPONSE, UPNP_RESULT_INVALID_PARAM, UPNP_RESULT_HTTP_ERROR, UPNP_RESULT_SOCKET_ERROR, UPNP_RESULT_MEM_ALLOC_ERROR, UPNP_RESULT_NO_GATEWAY, UPNP_RESULT_NO_DEVICES, UPNP_RESULT_UNKNOWN_ERROR,             # <<<<<<<<<<<<<<
  */
-enum __pyx_t_7classes_4UPNP_UPNPResult {
+enum __pyx_t_7classes_4UPNP_UPNP_UPNPResult {
   __pyx_e_7classes_4UPNP_UPNP_RESULT_SUCCESS,
   __pyx_e_7classes_4UPNP_UPNP_RESULT_NOT_AUTHORIZED,
   __pyx_e_7classes_4UPNP_UPNP_RESULT_PORT_MAPPING_NOT_FOUND,
@@ -1047,7 +1047,7 @@ enum __pyx_t_7classes_4UPNP_UPNPResult {
   __pyx_e_7classes_4UPNP_UPNP_RESULT_NO_DEVICES,
   __pyx_e_7classes_4UPNP_UPNP_RESULT_UNKNOWN_ERROR
 };
-typedef enum __pyx_t_7classes_4UPNP_UPNPResult __pyx_t_7classes_4UPNP_UPNPResult;
+typedef enum __pyx_t_7classes_4UPNP_UPNP_UPNPResult __pyx_t_7classes_4UPNP_UPNP_UPNPResult;
 
 /* "utils/Wrapper.pxd":2
  * from godot_api.binding cimport *
@@ -1067,7 +1067,7 @@ struct __pyx_obj_5utils_7Wrapper_Wrapper {
  * from utils.Wrapper cimport *
  * cdef class Object(Wrapper):             # <<<<<<<<<<<<<<
  *     pass
- * ctypedef enum ConnectFlags :CONNECT_DEFERRED, CONNECT_PERSIST, CONNECT_ONESHOT, CONNECT_REFERENCE_COUNTED,
+ * ctypedef enum Object_ConnectFlags :CONNECT_DEFERRED, CONNECT_PERSIST, CONNECT_ONESHOT, CONNECT_REFERENCE_COUNTED,
  */
 struct __pyx_obj_7classes_6Object_Object {
   struct __pyx_obj_5utils_7Wrapper_Wrapper __pyx_base;
@@ -1090,7 +1090,7 @@ struct __pyx_obj_7classes_9Reference_Reference {
  * cimport classes.Reference
  * cdef class UPNPDevice(classes.Reference.Reference):             # <<<<<<<<<<<<<<
  *     pass
- * ctypedef enum IGDStatus :IGD_STATUS_OK, IGD_STATUS_HTTP_ERROR, IGD_STATUS_HTTP_EMPTY, IGD_STATUS_NO_URLS, IGD_STATUS_NO_IGD, IGD_STATUS_DISCONNECTED, IGD_STATUS_UNKNOWN_DEVICE, IGD_STATUS_INVALID_CONTROL, IGD_STATUS_MALLOC_ERROR, IGD_STATUS_UNKNOWN_ERROR,
+ * ctypedef enum UPNPDevice_IGDStatus :IGD_STATUS_OK, IGD_STATUS_HTTP_ERROR, IGD_STATUS_HTTP_EMPTY, IGD_STATUS_NO_URLS, IGD_STATUS_NO_IGD, IGD_STATUS_DISCONNECTED, IGD_STATUS_UNKNOWN_DEVICE, IGD_STATUS_INVALID_CONTROL, IGD_STATUS_MALLOC_ERROR, IGD_STATUS_UNKNOWN_ERROR,
  */
 struct __pyx_obj_7classes_10UPNPDevice_UPNPDevice {
   struct __pyx_obj_7classes_9Reference_Reference __pyx_base;
@@ -1424,7 +1424,7 @@ struct __pyx_obj_4core_7vector3_7Vector3_Vector3 {
  * cimport classes.Reference
  * cdef class UPNP(classes.Reference.Reference):             # <<<<<<<<<<<<<<
  *     pass
- * ctypedef enum UPNPResult :UPNP_RESULT_SUCCESS, UPNP_RESULT_NOT_AUTHORIZED, UPNP_RESULT_PORT_MAPPING_NOT_FOUND, UPNP_RESULT_INCONSISTENT_PARAMETERS, UPNP_RESULT_NO_SUCH_ENTRY_IN_ARRAY, UPNP_RESULT_ACTION_FAILED, UPNP_RESULT_SRC_IP_WILDCARD_NOT_PERMITTED, UPNP_RESULT_EXT_PORT_WILDCARD_NOT_PERMITTED, UPNP_RESULT_INT_PORT_WILDCARD_NOT_PERMITTED, UPNP_RESULT_REMOTE_HOST_MUST_BE_WILDCARD, UPNP_RESULT_EXT_PORT_MUST_BE_WILDCARD, UPNP_RESULT_NO_PORT_MAPS_AVAILABLE, UPNP_RESULT_CONFLICT_WITH_OTHER_MECHANISM, UPNP_RESULT_CONFLICT_WITH_OTHER_MAPPING, UPNP_RESULT_SAME_PORT_VALUES_REQUIRED, UPNP_RESULT_ONLY_PERMANENT_LEASE_SUPPORTED, UPNP_RESULT_INVALID_GATEWAY, UPNP_RESULT_INVALID_PORT, UPNP_RESULT_INVALID_PROTOCOL, UPNP_RESULT_INVALID_DURATION, UPNP_RESULT_INVALID_ARGS, UPNP_RESULT_INVALID_RESPONSE, UPNP_RESULT_INVALID_PARAM, UPNP_RESULT_HTTP_ERROR, UPNP_RESULT_SOCKET_ERROR, UPNP_RESULT_MEM_ALLOC_ERROR, UPNP_RESULT_NO_GATEWAY, UPNP_RESULT_NO_DEVICES, UPNP_RESULT_UNKNOWN_ERROR,
+ * ctypedef enum UPNP_UPNPResult :UPNP_RESULT_SUCCESS, UPNP_RESULT_NOT_AUTHORIZED, UPNP_RESULT_PORT_MAPPING_NOT_FOUND, UPNP_RESULT_INCONSISTENT_PARAMETERS, UPNP_RESULT_NO_SUCH_ENTRY_IN_ARRAY, UPNP_RESULT_ACTION_FAILED, UPNP_RESULT_SRC_IP_WILDCARD_NOT_PERMITTED, UPNP_RESULT_EXT_PORT_WILDCARD_NOT_PERMITTED, UPNP_RESULT_INT_PORT_WILDCARD_NOT_PERMITTED, UPNP_RESULT_REMOTE_HOST_MUST_BE_WILDCARD, UPNP_RESULT_EXT_PORT_MUST_BE_WILDCARD, UPNP_RESULT_NO_PORT_MAPS_AVAILABLE, UPNP_RESULT_CONFLICT_WITH_OTHER_MECHANISM, UPNP_RESULT_CONFLICT_WITH_OTHER_MAPPING, UPNP_RESULT_SAME_PORT_VALUES_REQUIRED, UPNP_RESULT_ONLY_PERMANENT_LEASE_SUPPORTED, UPNP_RESULT_INVALID_GATEWAY, UPNP_RESULT_INVALID_PORT, UPNP_RESULT_INVALID_PROTOCOL, UPNP_RESULT_INVALID_DURATION, UPNP_RESULT_INVALID_ARGS, UPNP_RESULT_INVALID_RESPONSE, UPNP_RESULT_INVALID_PARAM, UPNP_RESULT_HTTP_ERROR, UPNP_RESULT_SOCKET_ERROR, UPNP_RESULT_MEM_ALLOC_ERROR, UPNP_RESULT_NO_GATEWAY, UPNP_RESULT_NO_DEVICES, UPNP_RESULT_UNKNOWN_ERROR,
  */
 struct __pyx_obj_7classes_4UPNP_UPNP {
   struct __pyx_obj_7classes_9Reference_Reference __pyx_base;
@@ -1453,7 +1453,7 @@ static CYTHON_INLINE godot_object *__pyx_f_5utils_7Wrapper_7Wrapper_get_godot_ow
  * from utils.Wrapper cimport *
  * cdef class Object(Wrapper):             # <<<<<<<<<<<<<<
  *     pass
- * ctypedef enum ConnectFlags :CONNECT_DEFERRED, CONNECT_PERSIST, CONNECT_ONESHOT, CONNECT_REFERENCE_COUNTED,
+ * ctypedef enum Object_ConnectFlags :CONNECT_DEFERRED, CONNECT_PERSIST, CONNECT_ONESHOT, CONNECT_REFERENCE_COUNTED,
  */
 
 struct __pyx_vtabstruct_7classes_6Object_Object {
@@ -1480,7 +1480,7 @@ static struct __pyx_vtabstruct_7classes_9Reference_Reference *__pyx_vtabptr_7cla
  * cimport classes.Reference
  * cdef class UPNPDevice(classes.Reference.Reference):             # <<<<<<<<<<<<<<
  *     pass
- * ctypedef enum IGDStatus :IGD_STATUS_OK, IGD_STATUS_HTTP_ERROR, IGD_STATUS_HTTP_EMPTY, IGD_STATUS_NO_URLS, IGD_STATUS_NO_IGD, IGD_STATUS_DISCONNECTED, IGD_STATUS_UNKNOWN_DEVICE, IGD_STATUS_INVALID_CONTROL, IGD_STATUS_MALLOC_ERROR, IGD_STATUS_UNKNOWN_ERROR,
+ * ctypedef enum UPNPDevice_IGDStatus :IGD_STATUS_OK, IGD_STATUS_HTTP_ERROR, IGD_STATUS_HTTP_EMPTY, IGD_STATUS_NO_URLS, IGD_STATUS_NO_IGD, IGD_STATUS_DISCONNECTED, IGD_STATUS_UNKNOWN_DEVICE, IGD_STATUS_INVALID_CONTROL, IGD_STATUS_MALLOC_ERROR, IGD_STATUS_UNKNOWN_ERROR,
  */
 
 struct __pyx_vtabstruct_7classes_10UPNPDevice_UPNPDevice {
@@ -5814,7 +5814,7 @@ static CYTHON_INLINE void __pyx_f_4core_7variant_7Variant_7Variant_new_variant(C
  *     cdef inline void new_variant(self, i):
  *         print("new_variant", type(i))             # <<<<<<<<<<<<<<
  * 
- * ctypedef enum Type:
+ * ctypedef enum Variant_Type:
  */
   __pyx_t_1 = PyTuple_New(2); if (unlikely(!__pyx_t_1)) __PYX_ERR(4, 15, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
@@ -7410,12 +7410,10 @@ static int __pyx_import_star_set(PyObject *o, PyObject* py_name, char *name) {
   static const char* internal_type_names[] = {
     "AABB",
     "Array",
-    "Axis",
     "Basis",
     "Color",
     "Dictionary",
     "NodePath",
-    "Operator",
     "Plane",
     "PoolByteArray",
     "PoolColorArray",
@@ -7431,12 +7429,14 @@ static int __pyx_import_star_set(PyObject *o, PyObject* py_name, char *name) {
     "String",
     "Transform",
     "Transform2D",
-    "Type",
     "UPNP",
-    "UPNPResult",
+    "UPNP_UPNPResult",
     "Variant",
+    "Variant_Operator",
+    "Variant_Type",
     "Vector2",
     "Vector3",
+    "Vector3_Axis",
     "Wrapper",
     "bool",
     "godot_aabb",

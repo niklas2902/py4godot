@@ -896,22 +896,22 @@ struct __pyx_obj_7classes_15SpatialMaterial_SpatialMaterial;
 /* "classes/Object.pxd":7
  * cdef class Object(Wrapper):
  *     pass
- * ctypedef enum ConnectFlags :CONNECT_DEFERRED, CONNECT_PERSIST, CONNECT_ONESHOT, CONNECT_REFERENCE_COUNTED,             # <<<<<<<<<<<<<<
+ * ctypedef enum Object_ConnectFlags :CONNECT_DEFERRED, CONNECT_PERSIST, CONNECT_ONESHOT, CONNECT_REFERENCE_COUNTED,             # <<<<<<<<<<<<<<
  */
-enum __pyx_t_7classes_6Object_ConnectFlags {
+enum __pyx_t_7classes_6Object_Object_ConnectFlags {
   __pyx_e_7classes_6Object_CONNECT_DEFERRED,
   __pyx_e_7classes_6Object_CONNECT_PERSIST,
   __pyx_e_7classes_6Object_CONNECT_ONESHOT,
   __pyx_e_7classes_6Object_CONNECT_REFERENCE_COUNTED
 };
-typedef enum __pyx_t_7classes_6Object_ConnectFlags __pyx_t_7classes_6Object_ConnectFlags;
+typedef enum __pyx_t_7classes_6Object_Object_ConnectFlags __pyx_t_7classes_6Object_Object_ConnectFlags;
 
 /* "classes/Texture.pxd":7
  * cdef class Texture(classes.Resource.Resource):
  *     pass
- * ctypedef enum Flags :FLAG_MIPMAPS, FLAG_REPEAT, FLAG_FILTER, FLAGS_DEFAULT, FLAG_ANISOTROPIC_FILTER, FLAG_CONVERT_TO_LINEAR, FLAG_MIRRORED_REPEAT, FLAG_VIDEO_SURFACE,             # <<<<<<<<<<<<<<
+ * ctypedef enum Texture_Flags :FLAG_MIPMAPS, FLAG_REPEAT, FLAG_FILTER, FLAGS_DEFAULT, FLAG_ANISOTROPIC_FILTER, FLAG_CONVERT_TO_LINEAR, FLAG_MIRRORED_REPEAT, FLAG_VIDEO_SURFACE,             # <<<<<<<<<<<<<<
  */
-enum __pyx_t_7classes_7Texture_Flags {
+enum __pyx_t_7classes_7Texture_Texture_Flags {
   __pyx_e_7classes_7Texture_FLAG_MIPMAPS,
   __pyx_e_7classes_7Texture_FLAG_REPEAT,
   __pyx_e_7classes_7Texture_FLAG_FILTER,
@@ -921,16 +921,16 @@ enum __pyx_t_7classes_7Texture_Flags {
   __pyx_e_7classes_7Texture_FLAG_MIRRORED_REPEAT,
   __pyx_e_7classes_7Texture_FLAG_VIDEO_SURFACE
 };
-typedef enum __pyx_t_7classes_7Texture_Flags __pyx_t_7classes_7Texture_Flags;
+typedef enum __pyx_t_7classes_7Texture_Texture_Flags __pyx_t_7classes_7Texture_Texture_Flags;
 
 /* "core/variant/Variant.pxd":17
  *         print("new_variant", type(i))
  * 
- * ctypedef enum Type:             # <<<<<<<<<<<<<<
+ * ctypedef enum Variant_Type:             # <<<<<<<<<<<<<<
  *     NIL,
  *     # atomic types
  */
-enum __pyx_t_4core_7variant_7Variant_Type {
+enum __pyx_t_4core_7variant_7Variant_Variant_Type {
   __pyx_e_4core_7variant_7Variant_NIL,
   __pyx_e_4core_7variant_7Variant_BOOL,
   __pyx_e_4core_7variant_7Variant_INT,
@@ -960,16 +960,16 @@ enum __pyx_t_4core_7variant_7Variant_Type {
   __pyx_e_4core_7variant_7Variant_POOL_COLOR_ARRAY,
   __pyx_e_4core_7variant_7Variant_VARIANT_MAX
 };
-typedef enum __pyx_t_4core_7variant_7Variant_Type __pyx_t_4core_7variant_7Variant_Type;
+typedef enum __pyx_t_4core_7variant_7Variant_Variant_Type __pyx_t_4core_7variant_7Variant_Variant_Type;
 
 /* "core/variant/Variant.pxd":58
  * 
  * 
- * ctypedef enum Operator :             # <<<<<<<<<<<<<<
+ * ctypedef enum Variant_Operator :             # <<<<<<<<<<<<<<
  * 
  *     #comparation
  */
-enum __pyx_t_4core_7variant_7Variant_Operator {
+enum __pyx_t_4core_7variant_7Variant_Variant_Operator {
   __pyx_e_4core_7variant_7Variant_OP_EQUAL,
   __pyx_e_4core_7variant_7Variant_OP_NOT_EQUAL,
   __pyx_e_4core_7variant_7Variant_OP_LESS,
@@ -997,75 +997,75 @@ enum __pyx_t_4core_7variant_7Variant_Operator {
   __pyx_e_4core_7variant_7Variant_OP_IN,
   __pyx_e_4core_7variant_7Variant_OP_MAX
 };
-typedef enum __pyx_t_4core_7variant_7Variant_Operator __pyx_t_4core_7variant_7Variant_Operator;
+typedef enum __pyx_t_4core_7variant_7Variant_Variant_Operator __pyx_t_4core_7variant_7Variant_Variant_Operator;
 
 /* "core/vector3/Vector3.pxd":15
  * 
  * 
- * ctypedef enum Axis :             # <<<<<<<<<<<<<<
- *     AXIS_X,
- *     AXIS_Y,
+ * ctypedef enum Vector3_Axis :             # <<<<<<<<<<<<<<
+ *     Vector3_AXIS_X,
+ *     Vector3_AXIS_Y,
  */
-enum __pyx_t_4core_7vector3_7Vector3_Axis {
-  __pyx_e_4core_7vector3_7Vector3_AXIS_X,
-  __pyx_e_4core_7vector3_7Vector3_AXIS_Y,
-  __pyx_e_4core_7vector3_7Vector3_AXIS_Z
+enum __pyx_t_4core_7vector3_7Vector3_Vector3_Axis {
+  __pyx_e_4core_7vector3_7Vector3_Vector3_AXIS_X,
+  __pyx_e_4core_7vector3_7Vector3_Vector3_AXIS_Y,
+  __pyx_e_4core_7vector3_7Vector3_Vector3_AXIS_Z
 };
-typedef enum __pyx_t_4core_7vector3_7Vector3_Axis __pyx_t_4core_7vector3_7Vector3_Axis;
+typedef enum __pyx_t_4core_7vector3_7Vector3_Vector3_Axis __pyx_t_4core_7vector3_7Vector3_Vector3_Axis;
 
 /* "classes/SpatialMaterial.pxd":7
  * cdef class SpatialMaterial(classes.Material.Material):
  *     pass
- * ctypedef enum EmissionOperator :EMISSION_OP_ADD, EMISSION_OP_MULTIPLY,             # <<<<<<<<<<<<<<
- * ctypedef enum DiffuseMode :DIFFUSE_BURLEY, DIFFUSE_LAMBERT, DIFFUSE_LAMBERT_WRAP, DIFFUSE_OREN_NAYAR, DIFFUSE_TOON,
- * ctypedef enum SpecularMode :SPECULAR_SCHLICK_GGX, SPECULAR_BLINN, SPECULAR_PHONG, SPECULAR_TOON, SPECULAR_DISABLED,
+ * ctypedef enum SpatialMaterial_EmissionOperator :EMISSION_OP_ADD, EMISSION_OP_MULTIPLY,             # <<<<<<<<<<<<<<
+ * ctypedef enum SpatialMaterial_DiffuseMode :DIFFUSE_BURLEY, DIFFUSE_LAMBERT, DIFFUSE_LAMBERT_WRAP, DIFFUSE_OREN_NAYAR, DIFFUSE_TOON,
+ * ctypedef enum SpatialMaterial_SpecularMode :SPECULAR_SCHLICK_GGX, SPECULAR_BLINN, SPECULAR_PHONG, SPECULAR_TOON, SPECULAR_DISABLED,
  */
-enum __pyx_t_7classes_15SpatialMaterial_EmissionOperator {
+enum __pyx_t_7classes_15SpatialMaterial_SpatialMaterial_EmissionOperator {
   __pyx_e_7classes_15SpatialMaterial_EMISSION_OP_ADD,
   __pyx_e_7classes_15SpatialMaterial_EMISSION_OP_MULTIPLY
 };
-typedef enum __pyx_t_7classes_15SpatialMaterial_EmissionOperator __pyx_t_7classes_15SpatialMaterial_EmissionOperator;
+typedef enum __pyx_t_7classes_15SpatialMaterial_SpatialMaterial_EmissionOperator __pyx_t_7classes_15SpatialMaterial_SpatialMaterial_EmissionOperator;
 
 /* "classes/SpatialMaterial.pxd":8
  *     pass
- * ctypedef enum EmissionOperator :EMISSION_OP_ADD, EMISSION_OP_MULTIPLY,
- * ctypedef enum DiffuseMode :DIFFUSE_BURLEY, DIFFUSE_LAMBERT, DIFFUSE_LAMBERT_WRAP, DIFFUSE_OREN_NAYAR, DIFFUSE_TOON,             # <<<<<<<<<<<<<<
- * ctypedef enum SpecularMode :SPECULAR_SCHLICK_GGX, SPECULAR_BLINN, SPECULAR_PHONG, SPECULAR_TOON, SPECULAR_DISABLED,
- * ctypedef enum Feature :FEATURE_TRANSPARENT, FEATURE_EMISSION, FEATURE_NORMAL_MAPPING, FEATURE_RIM, FEATURE_CLEARCOAT, FEATURE_ANISOTROPY, FEATURE_AMBIENT_OCCLUSION, FEATURE_DEPTH_MAPPING, FEATURE_SUBSURACE_SCATTERING, FEATURE_TRANSMISSION, FEATURE_REFRACTION, FEATURE_DETAIL, FEATURE_MAX,
+ * ctypedef enum SpatialMaterial_EmissionOperator :EMISSION_OP_ADD, EMISSION_OP_MULTIPLY,
+ * ctypedef enum SpatialMaterial_DiffuseMode :DIFFUSE_BURLEY, DIFFUSE_LAMBERT, DIFFUSE_LAMBERT_WRAP, DIFFUSE_OREN_NAYAR, DIFFUSE_TOON,             # <<<<<<<<<<<<<<
+ * ctypedef enum SpatialMaterial_SpecularMode :SPECULAR_SCHLICK_GGX, SPECULAR_BLINN, SPECULAR_PHONG, SPECULAR_TOON, SPECULAR_DISABLED,
+ * ctypedef enum SpatialMaterial_Feature :FEATURE_TRANSPARENT, FEATURE_EMISSION, FEATURE_NORMAL_MAPPING, FEATURE_RIM, FEATURE_CLEARCOAT, FEATURE_ANISOTROPY, FEATURE_AMBIENT_OCCLUSION, FEATURE_DEPTH_MAPPING, FEATURE_SUBSURACE_SCATTERING, FEATURE_TRANSMISSION, FEATURE_REFRACTION, FEATURE_DETAIL, FEATURE_MAX,
  */
-enum __pyx_t_7classes_15SpatialMaterial_DiffuseMode {
+enum __pyx_t_7classes_15SpatialMaterial_SpatialMaterial_DiffuseMode {
   __pyx_e_7classes_15SpatialMaterial_DIFFUSE_BURLEY,
   __pyx_e_7classes_15SpatialMaterial_DIFFUSE_LAMBERT,
   __pyx_e_7classes_15SpatialMaterial_DIFFUSE_LAMBERT_WRAP,
   __pyx_e_7classes_15SpatialMaterial_DIFFUSE_OREN_NAYAR,
   __pyx_e_7classes_15SpatialMaterial_DIFFUSE_TOON
 };
-typedef enum __pyx_t_7classes_15SpatialMaterial_DiffuseMode __pyx_t_7classes_15SpatialMaterial_DiffuseMode;
+typedef enum __pyx_t_7classes_15SpatialMaterial_SpatialMaterial_DiffuseMode __pyx_t_7classes_15SpatialMaterial_SpatialMaterial_DiffuseMode;
 
 /* "classes/SpatialMaterial.pxd":9
- * ctypedef enum EmissionOperator :EMISSION_OP_ADD, EMISSION_OP_MULTIPLY,
- * ctypedef enum DiffuseMode :DIFFUSE_BURLEY, DIFFUSE_LAMBERT, DIFFUSE_LAMBERT_WRAP, DIFFUSE_OREN_NAYAR, DIFFUSE_TOON,
- * ctypedef enum SpecularMode :SPECULAR_SCHLICK_GGX, SPECULAR_BLINN, SPECULAR_PHONG, SPECULAR_TOON, SPECULAR_DISABLED,             # <<<<<<<<<<<<<<
- * ctypedef enum Feature :FEATURE_TRANSPARENT, FEATURE_EMISSION, FEATURE_NORMAL_MAPPING, FEATURE_RIM, FEATURE_CLEARCOAT, FEATURE_ANISOTROPY, FEATURE_AMBIENT_OCCLUSION, FEATURE_DEPTH_MAPPING, FEATURE_SUBSURACE_SCATTERING, FEATURE_TRANSMISSION, FEATURE_REFRACTION, FEATURE_DETAIL, FEATURE_MAX,
- * ctypedef enum Flags :FLAG_UNSHADED, FLAG_USE_VERTEX_LIGHTING, FLAG_DISABLE_DEPTH_TEST, FLAG_ALBEDO_FROM_VERTEX_COLOR, FLAG_SRGB_VERTEX_COLOR, FLAG_USE_POINT_SIZE, FLAG_FIXED_SIZE, FLAG_BILLBOARD_KEEP_SCALE, FLAG_UV1_USE_TRIPLANAR, FLAG_UV2_USE_TRIPLANAR, FLAG_TRIPLANAR_USE_WORLD, FLAG_AO_ON_UV2, FLAG_EMISSION_ON_UV2, FLAG_USE_ALPHA_SCISSOR, FLAG_ALBEDO_TEXTURE_FORCE_SRGB, FLAG_DONT_RECEIVE_SHADOWS, FLAG_ENSURE_CORRECT_NORMALS, FLAG_DISABLE_AMBIENT_LIGHT, FLAG_USE_SHADOW_TO_OPACITY, FLAG_MAX,
+ * ctypedef enum SpatialMaterial_EmissionOperator :EMISSION_OP_ADD, EMISSION_OP_MULTIPLY,
+ * ctypedef enum SpatialMaterial_DiffuseMode :DIFFUSE_BURLEY, DIFFUSE_LAMBERT, DIFFUSE_LAMBERT_WRAP, DIFFUSE_OREN_NAYAR, DIFFUSE_TOON,
+ * ctypedef enum SpatialMaterial_SpecularMode :SPECULAR_SCHLICK_GGX, SPECULAR_BLINN, SPECULAR_PHONG, SPECULAR_TOON, SPECULAR_DISABLED,             # <<<<<<<<<<<<<<
+ * ctypedef enum SpatialMaterial_Feature :FEATURE_TRANSPARENT, FEATURE_EMISSION, FEATURE_NORMAL_MAPPING, FEATURE_RIM, FEATURE_CLEARCOAT, FEATURE_ANISOTROPY, FEATURE_AMBIENT_OCCLUSION, FEATURE_DEPTH_MAPPING, FEATURE_SUBSURACE_SCATTERING, FEATURE_TRANSMISSION, FEATURE_REFRACTION, FEATURE_DETAIL, FEATURE_MAX,
+ * ctypedef enum SpatialMaterial_Flags :FLAG_UNSHADED, FLAG_USE_VERTEX_LIGHTING, FLAG_DISABLE_DEPTH_TEST, FLAG_ALBEDO_FROM_VERTEX_COLOR, FLAG_SRGB_VERTEX_COLOR, FLAG_USE_POINT_SIZE, FLAG_FIXED_SIZE, FLAG_BILLBOARD_KEEP_SCALE, FLAG_UV1_USE_TRIPLANAR, FLAG_UV2_USE_TRIPLANAR, FLAG_TRIPLANAR_USE_WORLD, FLAG_AO_ON_UV2, FLAG_EMISSION_ON_UV2, FLAG_USE_ALPHA_SCISSOR, FLAG_ALBEDO_TEXTURE_FORCE_SRGB, FLAG_DONT_RECEIVE_SHADOWS, FLAG_ENSURE_CORRECT_NORMALS, FLAG_DISABLE_AMBIENT_LIGHT, FLAG_USE_SHADOW_TO_OPACITY, FLAG_MAX,
  */
-enum __pyx_t_7classes_15SpatialMaterial_SpecularMode {
+enum __pyx_t_7classes_15SpatialMaterial_SpatialMaterial_SpecularMode {
   __pyx_e_7classes_15SpatialMaterial_SPECULAR_SCHLICK_GGX,
   __pyx_e_7classes_15SpatialMaterial_SPECULAR_BLINN,
   __pyx_e_7classes_15SpatialMaterial_SPECULAR_PHONG,
   __pyx_e_7classes_15SpatialMaterial_SPECULAR_TOON,
   __pyx_e_7classes_15SpatialMaterial_SPECULAR_DISABLED
 };
-typedef enum __pyx_t_7classes_15SpatialMaterial_SpecularMode __pyx_t_7classes_15SpatialMaterial_SpecularMode;
+typedef enum __pyx_t_7classes_15SpatialMaterial_SpatialMaterial_SpecularMode __pyx_t_7classes_15SpatialMaterial_SpatialMaterial_SpecularMode;
 
 /* "classes/SpatialMaterial.pxd":10
- * ctypedef enum DiffuseMode :DIFFUSE_BURLEY, DIFFUSE_LAMBERT, DIFFUSE_LAMBERT_WRAP, DIFFUSE_OREN_NAYAR, DIFFUSE_TOON,
- * ctypedef enum SpecularMode :SPECULAR_SCHLICK_GGX, SPECULAR_BLINN, SPECULAR_PHONG, SPECULAR_TOON, SPECULAR_DISABLED,
- * ctypedef enum Feature :FEATURE_TRANSPARENT, FEATURE_EMISSION, FEATURE_NORMAL_MAPPING, FEATURE_RIM, FEATURE_CLEARCOAT, FEATURE_ANISOTROPY, FEATURE_AMBIENT_OCCLUSION, FEATURE_DEPTH_MAPPING, FEATURE_SUBSURACE_SCATTERING, FEATURE_TRANSMISSION, FEATURE_REFRACTION, FEATURE_DETAIL, FEATURE_MAX,             # <<<<<<<<<<<<<<
- * ctypedef enum Flags :FLAG_UNSHADED, FLAG_USE_VERTEX_LIGHTING, FLAG_DISABLE_DEPTH_TEST, FLAG_ALBEDO_FROM_VERTEX_COLOR, FLAG_SRGB_VERTEX_COLOR, FLAG_USE_POINT_SIZE, FLAG_FIXED_SIZE, FLAG_BILLBOARD_KEEP_SCALE, FLAG_UV1_USE_TRIPLANAR, FLAG_UV2_USE_TRIPLANAR, FLAG_TRIPLANAR_USE_WORLD, FLAG_AO_ON_UV2, FLAG_EMISSION_ON_UV2, FLAG_USE_ALPHA_SCISSOR, FLAG_ALBEDO_TEXTURE_FORCE_SRGB, FLAG_DONT_RECEIVE_SHADOWS, FLAG_ENSURE_CORRECT_NORMALS, FLAG_DISABLE_AMBIENT_LIGHT, FLAG_USE_SHADOW_TO_OPACITY, FLAG_MAX,
- * ctypedef enum CullMode :CULL_BACK, CULL_FRONT, CULL_DISABLED,
+ * ctypedef enum SpatialMaterial_DiffuseMode :DIFFUSE_BURLEY, DIFFUSE_LAMBERT, DIFFUSE_LAMBERT_WRAP, DIFFUSE_OREN_NAYAR, DIFFUSE_TOON,
+ * ctypedef enum SpatialMaterial_SpecularMode :SPECULAR_SCHLICK_GGX, SPECULAR_BLINN, SPECULAR_PHONG, SPECULAR_TOON, SPECULAR_DISABLED,
+ * ctypedef enum SpatialMaterial_Feature :FEATURE_TRANSPARENT, FEATURE_EMISSION, FEATURE_NORMAL_MAPPING, FEATURE_RIM, FEATURE_CLEARCOAT, FEATURE_ANISOTROPY, FEATURE_AMBIENT_OCCLUSION, FEATURE_DEPTH_MAPPING, FEATURE_SUBSURACE_SCATTERING, FEATURE_TRANSMISSION, FEATURE_REFRACTION, FEATURE_DETAIL, FEATURE_MAX,             # <<<<<<<<<<<<<<
+ * ctypedef enum SpatialMaterial_Flags :FLAG_UNSHADED, FLAG_USE_VERTEX_LIGHTING, FLAG_DISABLE_DEPTH_TEST, FLAG_ALBEDO_FROM_VERTEX_COLOR, FLAG_SRGB_VERTEX_COLOR, FLAG_USE_POINT_SIZE, FLAG_FIXED_SIZE, FLAG_BILLBOARD_KEEP_SCALE, FLAG_UV1_USE_TRIPLANAR, FLAG_UV2_USE_TRIPLANAR, FLAG_TRIPLANAR_USE_WORLD, FLAG_AO_ON_UV2, FLAG_EMISSION_ON_UV2, FLAG_USE_ALPHA_SCISSOR, FLAG_ALBEDO_TEXTURE_FORCE_SRGB, FLAG_DONT_RECEIVE_SHADOWS, FLAG_ENSURE_CORRECT_NORMALS, FLAG_DISABLE_AMBIENT_LIGHT, FLAG_USE_SHADOW_TO_OPACITY, FLAG_MAX,
+ * ctypedef enum SpatialMaterial_CullMode :CULL_BACK, CULL_FRONT, CULL_DISABLED,
  */
-enum __pyx_t_7classes_15SpatialMaterial_Feature {
+enum __pyx_t_7classes_15SpatialMaterial_SpatialMaterial_Feature {
   __pyx_e_7classes_15SpatialMaterial_FEATURE_TRANSPARENT,
   __pyx_e_7classes_15SpatialMaterial_FEATURE_EMISSION,
   __pyx_e_7classes_15SpatialMaterial_FEATURE_NORMAL_MAPPING,
@@ -1080,16 +1080,16 @@ enum __pyx_t_7classes_15SpatialMaterial_Feature {
   __pyx_e_7classes_15SpatialMaterial_FEATURE_DETAIL,
   __pyx_e_7classes_15SpatialMaterial_FEATURE_MAX
 };
-typedef enum __pyx_t_7classes_15SpatialMaterial_Feature __pyx_t_7classes_15SpatialMaterial_Feature;
+typedef enum __pyx_t_7classes_15SpatialMaterial_SpatialMaterial_Feature __pyx_t_7classes_15SpatialMaterial_SpatialMaterial_Feature;
 
 /* "classes/SpatialMaterial.pxd":11
- * ctypedef enum SpecularMode :SPECULAR_SCHLICK_GGX, SPECULAR_BLINN, SPECULAR_PHONG, SPECULAR_TOON, SPECULAR_DISABLED,
- * ctypedef enum Feature :FEATURE_TRANSPARENT, FEATURE_EMISSION, FEATURE_NORMAL_MAPPING, FEATURE_RIM, FEATURE_CLEARCOAT, FEATURE_ANISOTROPY, FEATURE_AMBIENT_OCCLUSION, FEATURE_DEPTH_MAPPING, FEATURE_SUBSURACE_SCATTERING, FEATURE_TRANSMISSION, FEATURE_REFRACTION, FEATURE_DETAIL, FEATURE_MAX,
- * ctypedef enum Flags :FLAG_UNSHADED, FLAG_USE_VERTEX_LIGHTING, FLAG_DISABLE_DEPTH_TEST, FLAG_ALBEDO_FROM_VERTEX_COLOR, FLAG_SRGB_VERTEX_COLOR, FLAG_USE_POINT_SIZE, FLAG_FIXED_SIZE, FLAG_BILLBOARD_KEEP_SCALE, FLAG_UV1_USE_TRIPLANAR, FLAG_UV2_USE_TRIPLANAR, FLAG_TRIPLANAR_USE_WORLD, FLAG_AO_ON_UV2, FLAG_EMISSION_ON_UV2, FLAG_USE_ALPHA_SCISSOR, FLAG_ALBEDO_TEXTURE_FORCE_SRGB, FLAG_DONT_RECEIVE_SHADOWS, FLAG_ENSURE_CORRECT_NORMALS, FLAG_DISABLE_AMBIENT_LIGHT, FLAG_USE_SHADOW_TO_OPACITY, FLAG_MAX,             # <<<<<<<<<<<<<<
- * ctypedef enum CullMode :CULL_BACK, CULL_FRONT, CULL_DISABLED,
- * ctypedef enum DetailUV :DETAIL_UV_1, DETAIL_UV_2,
+ * ctypedef enum SpatialMaterial_SpecularMode :SPECULAR_SCHLICK_GGX, SPECULAR_BLINN, SPECULAR_PHONG, SPECULAR_TOON, SPECULAR_DISABLED,
+ * ctypedef enum SpatialMaterial_Feature :FEATURE_TRANSPARENT, FEATURE_EMISSION, FEATURE_NORMAL_MAPPING, FEATURE_RIM, FEATURE_CLEARCOAT, FEATURE_ANISOTROPY, FEATURE_AMBIENT_OCCLUSION, FEATURE_DEPTH_MAPPING, FEATURE_SUBSURACE_SCATTERING, FEATURE_TRANSMISSION, FEATURE_REFRACTION, FEATURE_DETAIL, FEATURE_MAX,
+ * ctypedef enum SpatialMaterial_Flags :FLAG_UNSHADED, FLAG_USE_VERTEX_LIGHTING, FLAG_DISABLE_DEPTH_TEST, FLAG_ALBEDO_FROM_VERTEX_COLOR, FLAG_SRGB_VERTEX_COLOR, FLAG_USE_POINT_SIZE, FLAG_FIXED_SIZE, FLAG_BILLBOARD_KEEP_SCALE, FLAG_UV1_USE_TRIPLANAR, FLAG_UV2_USE_TRIPLANAR, FLAG_TRIPLANAR_USE_WORLD, FLAG_AO_ON_UV2, FLAG_EMISSION_ON_UV2, FLAG_USE_ALPHA_SCISSOR, FLAG_ALBEDO_TEXTURE_FORCE_SRGB, FLAG_DONT_RECEIVE_SHADOWS, FLAG_ENSURE_CORRECT_NORMALS, FLAG_DISABLE_AMBIENT_LIGHT, FLAG_USE_SHADOW_TO_OPACITY, FLAG_MAX,             # <<<<<<<<<<<<<<
+ * ctypedef enum SpatialMaterial_CullMode :CULL_BACK, CULL_FRONT, CULL_DISABLED,
+ * ctypedef enum SpatialMaterial_DetailUV :DETAIL_UV_1, DETAIL_UV_2,
  */
-enum __pyx_t_7classes_15SpatialMaterial_Flags {
+enum __pyx_t_7classes_15SpatialMaterial_SpatialMaterial_Flags {
   __pyx_e_7classes_15SpatialMaterial_FLAG_UNSHADED,
   __pyx_e_7classes_15SpatialMaterial_FLAG_USE_VERTEX_LIGHTING,
   __pyx_e_7classes_15SpatialMaterial_FLAG_DISABLE_DEPTH_TEST,
@@ -1111,116 +1111,116 @@ enum __pyx_t_7classes_15SpatialMaterial_Flags {
   __pyx_e_7classes_15SpatialMaterial_FLAG_USE_SHADOW_TO_OPACITY,
   __pyx_e_7classes_15SpatialMaterial_FLAG_MAX
 };
-typedef enum __pyx_t_7classes_15SpatialMaterial_Flags __pyx_t_7classes_15SpatialMaterial_Flags;
+typedef enum __pyx_t_7classes_15SpatialMaterial_SpatialMaterial_Flags __pyx_t_7classes_15SpatialMaterial_SpatialMaterial_Flags;
 
 /* "classes/SpatialMaterial.pxd":12
- * ctypedef enum Feature :FEATURE_TRANSPARENT, FEATURE_EMISSION, FEATURE_NORMAL_MAPPING, FEATURE_RIM, FEATURE_CLEARCOAT, FEATURE_ANISOTROPY, FEATURE_AMBIENT_OCCLUSION, FEATURE_DEPTH_MAPPING, FEATURE_SUBSURACE_SCATTERING, FEATURE_TRANSMISSION, FEATURE_REFRACTION, FEATURE_DETAIL, FEATURE_MAX,
- * ctypedef enum Flags :FLAG_UNSHADED, FLAG_USE_VERTEX_LIGHTING, FLAG_DISABLE_DEPTH_TEST, FLAG_ALBEDO_FROM_VERTEX_COLOR, FLAG_SRGB_VERTEX_COLOR, FLAG_USE_POINT_SIZE, FLAG_FIXED_SIZE, FLAG_BILLBOARD_KEEP_SCALE, FLAG_UV1_USE_TRIPLANAR, FLAG_UV2_USE_TRIPLANAR, FLAG_TRIPLANAR_USE_WORLD, FLAG_AO_ON_UV2, FLAG_EMISSION_ON_UV2, FLAG_USE_ALPHA_SCISSOR, FLAG_ALBEDO_TEXTURE_FORCE_SRGB, FLAG_DONT_RECEIVE_SHADOWS, FLAG_ENSURE_CORRECT_NORMALS, FLAG_DISABLE_AMBIENT_LIGHT, FLAG_USE_SHADOW_TO_OPACITY, FLAG_MAX,
- * ctypedef enum CullMode :CULL_BACK, CULL_FRONT, CULL_DISABLED,             # <<<<<<<<<<<<<<
- * ctypedef enum DetailUV :DETAIL_UV_1, DETAIL_UV_2,
- * ctypedef enum DistanceFadeMode :DISTANCE_FADE_DISABLED, DISTANCE_FADE_PIXEL_ALPHA, DISTANCE_FADE_PIXEL_DITHER, DISTANCE_FADE_OBJECT_DITHER,
+ * ctypedef enum SpatialMaterial_Feature :FEATURE_TRANSPARENT, FEATURE_EMISSION, FEATURE_NORMAL_MAPPING, FEATURE_RIM, FEATURE_CLEARCOAT, FEATURE_ANISOTROPY, FEATURE_AMBIENT_OCCLUSION, FEATURE_DEPTH_MAPPING, FEATURE_SUBSURACE_SCATTERING, FEATURE_TRANSMISSION, FEATURE_REFRACTION, FEATURE_DETAIL, FEATURE_MAX,
+ * ctypedef enum SpatialMaterial_Flags :FLAG_UNSHADED, FLAG_USE_VERTEX_LIGHTING, FLAG_DISABLE_DEPTH_TEST, FLAG_ALBEDO_FROM_VERTEX_COLOR, FLAG_SRGB_VERTEX_COLOR, FLAG_USE_POINT_SIZE, FLAG_FIXED_SIZE, FLAG_BILLBOARD_KEEP_SCALE, FLAG_UV1_USE_TRIPLANAR, FLAG_UV2_USE_TRIPLANAR, FLAG_TRIPLANAR_USE_WORLD, FLAG_AO_ON_UV2, FLAG_EMISSION_ON_UV2, FLAG_USE_ALPHA_SCISSOR, FLAG_ALBEDO_TEXTURE_FORCE_SRGB, FLAG_DONT_RECEIVE_SHADOWS, FLAG_ENSURE_CORRECT_NORMALS, FLAG_DISABLE_AMBIENT_LIGHT, FLAG_USE_SHADOW_TO_OPACITY, FLAG_MAX,
+ * ctypedef enum SpatialMaterial_CullMode :CULL_BACK, CULL_FRONT, CULL_DISABLED,             # <<<<<<<<<<<<<<
+ * ctypedef enum SpatialMaterial_DetailUV :DETAIL_UV_1, DETAIL_UV_2,
+ * ctypedef enum SpatialMaterial_DistanceFadeMode :DISTANCE_FADE_DISABLED, DISTANCE_FADE_PIXEL_ALPHA, DISTANCE_FADE_PIXEL_DITHER, DISTANCE_FADE_OBJECT_DITHER,
  */
-enum __pyx_t_7classes_15SpatialMaterial_CullMode {
+enum __pyx_t_7classes_15SpatialMaterial_SpatialMaterial_CullMode {
   __pyx_e_7classes_15SpatialMaterial_CULL_BACK,
   __pyx_e_7classes_15SpatialMaterial_CULL_FRONT,
   __pyx_e_7classes_15SpatialMaterial_CULL_DISABLED
 };
-typedef enum __pyx_t_7classes_15SpatialMaterial_CullMode __pyx_t_7classes_15SpatialMaterial_CullMode;
+typedef enum __pyx_t_7classes_15SpatialMaterial_SpatialMaterial_CullMode __pyx_t_7classes_15SpatialMaterial_SpatialMaterial_CullMode;
 
 /* "classes/SpatialMaterial.pxd":13
- * ctypedef enum Flags :FLAG_UNSHADED, FLAG_USE_VERTEX_LIGHTING, FLAG_DISABLE_DEPTH_TEST, FLAG_ALBEDO_FROM_VERTEX_COLOR, FLAG_SRGB_VERTEX_COLOR, FLAG_USE_POINT_SIZE, FLAG_FIXED_SIZE, FLAG_BILLBOARD_KEEP_SCALE, FLAG_UV1_USE_TRIPLANAR, FLAG_UV2_USE_TRIPLANAR, FLAG_TRIPLANAR_USE_WORLD, FLAG_AO_ON_UV2, FLAG_EMISSION_ON_UV2, FLAG_USE_ALPHA_SCISSOR, FLAG_ALBEDO_TEXTURE_FORCE_SRGB, FLAG_DONT_RECEIVE_SHADOWS, FLAG_ENSURE_CORRECT_NORMALS, FLAG_DISABLE_AMBIENT_LIGHT, FLAG_USE_SHADOW_TO_OPACITY, FLAG_MAX,
- * ctypedef enum CullMode :CULL_BACK, CULL_FRONT, CULL_DISABLED,
- * ctypedef enum DetailUV :DETAIL_UV_1, DETAIL_UV_2,             # <<<<<<<<<<<<<<
- * ctypedef enum DistanceFadeMode :DISTANCE_FADE_DISABLED, DISTANCE_FADE_PIXEL_ALPHA, DISTANCE_FADE_PIXEL_DITHER, DISTANCE_FADE_OBJECT_DITHER,
- * ctypedef enum BillboardMode :BILLBOARD_DISABLED, BILLBOARD_ENABLED, BILLBOARD_FIXED_Y, BILLBOARD_PARTICLES,
+ * ctypedef enum SpatialMaterial_Flags :FLAG_UNSHADED, FLAG_USE_VERTEX_LIGHTING, FLAG_DISABLE_DEPTH_TEST, FLAG_ALBEDO_FROM_VERTEX_COLOR, FLAG_SRGB_VERTEX_COLOR, FLAG_USE_POINT_SIZE, FLAG_FIXED_SIZE, FLAG_BILLBOARD_KEEP_SCALE, FLAG_UV1_USE_TRIPLANAR, FLAG_UV2_USE_TRIPLANAR, FLAG_TRIPLANAR_USE_WORLD, FLAG_AO_ON_UV2, FLAG_EMISSION_ON_UV2, FLAG_USE_ALPHA_SCISSOR, FLAG_ALBEDO_TEXTURE_FORCE_SRGB, FLAG_DONT_RECEIVE_SHADOWS, FLAG_ENSURE_CORRECT_NORMALS, FLAG_DISABLE_AMBIENT_LIGHT, FLAG_USE_SHADOW_TO_OPACITY, FLAG_MAX,
+ * ctypedef enum SpatialMaterial_CullMode :CULL_BACK, CULL_FRONT, CULL_DISABLED,
+ * ctypedef enum SpatialMaterial_DetailUV :DETAIL_UV_1, DETAIL_UV_2,             # <<<<<<<<<<<<<<
+ * ctypedef enum SpatialMaterial_DistanceFadeMode :DISTANCE_FADE_DISABLED, DISTANCE_FADE_PIXEL_ALPHA, DISTANCE_FADE_PIXEL_DITHER, DISTANCE_FADE_OBJECT_DITHER,
+ * ctypedef enum SpatialMaterial_BillboardMode :BILLBOARD_DISABLED, BILLBOARD_ENABLED, BILLBOARD_FIXED_Y, BILLBOARD_PARTICLES,
  */
-enum __pyx_t_7classes_15SpatialMaterial_DetailUV {
+enum __pyx_t_7classes_15SpatialMaterial_SpatialMaterial_DetailUV {
   __pyx_e_7classes_15SpatialMaterial_DETAIL_UV_1,
   __pyx_e_7classes_15SpatialMaterial_DETAIL_UV_2
 };
-typedef enum __pyx_t_7classes_15SpatialMaterial_DetailUV __pyx_t_7classes_15SpatialMaterial_DetailUV;
+typedef enum __pyx_t_7classes_15SpatialMaterial_SpatialMaterial_DetailUV __pyx_t_7classes_15SpatialMaterial_SpatialMaterial_DetailUV;
 
 /* "classes/SpatialMaterial.pxd":14
- * ctypedef enum CullMode :CULL_BACK, CULL_FRONT, CULL_DISABLED,
- * ctypedef enum DetailUV :DETAIL_UV_1, DETAIL_UV_2,
- * ctypedef enum DistanceFadeMode :DISTANCE_FADE_DISABLED, DISTANCE_FADE_PIXEL_ALPHA, DISTANCE_FADE_PIXEL_DITHER, DISTANCE_FADE_OBJECT_DITHER,             # <<<<<<<<<<<<<<
- * ctypedef enum BillboardMode :BILLBOARD_DISABLED, BILLBOARD_ENABLED, BILLBOARD_FIXED_Y, BILLBOARD_PARTICLES,
- * ctypedef enum DepthDrawMode :DEPTH_DRAW_OPAQUE_ONLY, DEPTH_DRAW_ALWAYS, DEPTH_DRAW_DISABLED, DEPTH_DRAW_ALPHA_OPAQUE_PREPASS,
+ * ctypedef enum SpatialMaterial_CullMode :CULL_BACK, CULL_FRONT, CULL_DISABLED,
+ * ctypedef enum SpatialMaterial_DetailUV :DETAIL_UV_1, DETAIL_UV_2,
+ * ctypedef enum SpatialMaterial_DistanceFadeMode :DISTANCE_FADE_DISABLED, DISTANCE_FADE_PIXEL_ALPHA, DISTANCE_FADE_PIXEL_DITHER, DISTANCE_FADE_OBJECT_DITHER,             # <<<<<<<<<<<<<<
+ * ctypedef enum SpatialMaterial_BillboardMode :BILLBOARD_DISABLED, BILLBOARD_ENABLED, BILLBOARD_FIXED_Y, BILLBOARD_PARTICLES,
+ * ctypedef enum SpatialMaterial_DepthDrawMode :DEPTH_DRAW_OPAQUE_ONLY, DEPTH_DRAW_ALWAYS, DEPTH_DRAW_DISABLED, DEPTH_DRAW_ALPHA_OPAQUE_PREPASS,
  */
-enum __pyx_t_7classes_15SpatialMaterial_DistanceFadeMode {
+enum __pyx_t_7classes_15SpatialMaterial_SpatialMaterial_DistanceFadeMode {
   __pyx_e_7classes_15SpatialMaterial_DISTANCE_FADE_DISABLED,
   __pyx_e_7classes_15SpatialMaterial_DISTANCE_FADE_PIXEL_ALPHA,
   __pyx_e_7classes_15SpatialMaterial_DISTANCE_FADE_PIXEL_DITHER,
   __pyx_e_7classes_15SpatialMaterial_DISTANCE_FADE_OBJECT_DITHER
 };
-typedef enum __pyx_t_7classes_15SpatialMaterial_DistanceFadeMode __pyx_t_7classes_15SpatialMaterial_DistanceFadeMode;
+typedef enum __pyx_t_7classes_15SpatialMaterial_SpatialMaterial_DistanceFadeMode __pyx_t_7classes_15SpatialMaterial_SpatialMaterial_DistanceFadeMode;
 
 /* "classes/SpatialMaterial.pxd":15
- * ctypedef enum DetailUV :DETAIL_UV_1, DETAIL_UV_2,
- * ctypedef enum DistanceFadeMode :DISTANCE_FADE_DISABLED, DISTANCE_FADE_PIXEL_ALPHA, DISTANCE_FADE_PIXEL_DITHER, DISTANCE_FADE_OBJECT_DITHER,
- * ctypedef enum BillboardMode :BILLBOARD_DISABLED, BILLBOARD_ENABLED, BILLBOARD_FIXED_Y, BILLBOARD_PARTICLES,             # <<<<<<<<<<<<<<
- * ctypedef enum DepthDrawMode :DEPTH_DRAW_OPAQUE_ONLY, DEPTH_DRAW_ALWAYS, DEPTH_DRAW_DISABLED, DEPTH_DRAW_ALPHA_OPAQUE_PREPASS,
- * ctypedef enum TextureChannel :TEXTURE_CHANNEL_RED, TEXTURE_CHANNEL_GREEN, TEXTURE_CHANNEL_BLUE, TEXTURE_CHANNEL_ALPHA, TEXTURE_CHANNEL_GRAYSCALE,
+ * ctypedef enum SpatialMaterial_DetailUV :DETAIL_UV_1, DETAIL_UV_2,
+ * ctypedef enum SpatialMaterial_DistanceFadeMode :DISTANCE_FADE_DISABLED, DISTANCE_FADE_PIXEL_ALPHA, DISTANCE_FADE_PIXEL_DITHER, DISTANCE_FADE_OBJECT_DITHER,
+ * ctypedef enum SpatialMaterial_BillboardMode :BILLBOARD_DISABLED, BILLBOARD_ENABLED, BILLBOARD_FIXED_Y, BILLBOARD_PARTICLES,             # <<<<<<<<<<<<<<
+ * ctypedef enum SpatialMaterial_DepthDrawMode :DEPTH_DRAW_OPAQUE_ONLY, DEPTH_DRAW_ALWAYS, DEPTH_DRAW_DISABLED, DEPTH_DRAW_ALPHA_OPAQUE_PREPASS,
+ * ctypedef enum SpatialMaterial_TextureChannel :TEXTURE_CHANNEL_RED, TEXTURE_CHANNEL_GREEN, TEXTURE_CHANNEL_BLUE, TEXTURE_CHANNEL_ALPHA, TEXTURE_CHANNEL_GRAYSCALE,
  */
-enum __pyx_t_7classes_15SpatialMaterial_BillboardMode {
+enum __pyx_t_7classes_15SpatialMaterial_SpatialMaterial_BillboardMode {
   __pyx_e_7classes_15SpatialMaterial_BILLBOARD_DISABLED,
   __pyx_e_7classes_15SpatialMaterial_BILLBOARD_ENABLED,
   __pyx_e_7classes_15SpatialMaterial_BILLBOARD_FIXED_Y,
   __pyx_e_7classes_15SpatialMaterial_BILLBOARD_PARTICLES
 };
-typedef enum __pyx_t_7classes_15SpatialMaterial_BillboardMode __pyx_t_7classes_15SpatialMaterial_BillboardMode;
+typedef enum __pyx_t_7classes_15SpatialMaterial_SpatialMaterial_BillboardMode __pyx_t_7classes_15SpatialMaterial_SpatialMaterial_BillboardMode;
 
 /* "classes/SpatialMaterial.pxd":16
- * ctypedef enum DistanceFadeMode :DISTANCE_FADE_DISABLED, DISTANCE_FADE_PIXEL_ALPHA, DISTANCE_FADE_PIXEL_DITHER, DISTANCE_FADE_OBJECT_DITHER,
- * ctypedef enum BillboardMode :BILLBOARD_DISABLED, BILLBOARD_ENABLED, BILLBOARD_FIXED_Y, BILLBOARD_PARTICLES,
- * ctypedef enum DepthDrawMode :DEPTH_DRAW_OPAQUE_ONLY, DEPTH_DRAW_ALWAYS, DEPTH_DRAW_DISABLED, DEPTH_DRAW_ALPHA_OPAQUE_PREPASS,             # <<<<<<<<<<<<<<
- * ctypedef enum TextureChannel :TEXTURE_CHANNEL_RED, TEXTURE_CHANNEL_GREEN, TEXTURE_CHANNEL_BLUE, TEXTURE_CHANNEL_ALPHA, TEXTURE_CHANNEL_GRAYSCALE,
- * ctypedef enum BlendMode :BLEND_MODE_MIX, BLEND_MODE_ADD, BLEND_MODE_SUB, BLEND_MODE_MUL,
+ * ctypedef enum SpatialMaterial_DistanceFadeMode :DISTANCE_FADE_DISABLED, DISTANCE_FADE_PIXEL_ALPHA, DISTANCE_FADE_PIXEL_DITHER, DISTANCE_FADE_OBJECT_DITHER,
+ * ctypedef enum SpatialMaterial_BillboardMode :BILLBOARD_DISABLED, BILLBOARD_ENABLED, BILLBOARD_FIXED_Y, BILLBOARD_PARTICLES,
+ * ctypedef enum SpatialMaterial_DepthDrawMode :DEPTH_DRAW_OPAQUE_ONLY, DEPTH_DRAW_ALWAYS, DEPTH_DRAW_DISABLED, DEPTH_DRAW_ALPHA_OPAQUE_PREPASS,             # <<<<<<<<<<<<<<
+ * ctypedef enum SpatialMaterial_TextureChannel :TEXTURE_CHANNEL_RED, TEXTURE_CHANNEL_GREEN, TEXTURE_CHANNEL_BLUE, TEXTURE_CHANNEL_ALPHA, TEXTURE_CHANNEL_GRAYSCALE,
+ * ctypedef enum SpatialMaterial_BlendMode :BLEND_MODE_MIX, BLEND_MODE_ADD, BLEND_MODE_SUB, BLEND_MODE_MUL,
  */
-enum __pyx_t_7classes_15SpatialMaterial_DepthDrawMode {
+enum __pyx_t_7classes_15SpatialMaterial_SpatialMaterial_DepthDrawMode {
   __pyx_e_7classes_15SpatialMaterial_DEPTH_DRAW_OPAQUE_ONLY,
   __pyx_e_7classes_15SpatialMaterial_DEPTH_DRAW_ALWAYS,
   __pyx_e_7classes_15SpatialMaterial_DEPTH_DRAW_DISABLED,
   __pyx_e_7classes_15SpatialMaterial_DEPTH_DRAW_ALPHA_OPAQUE_PREPASS
 };
-typedef enum __pyx_t_7classes_15SpatialMaterial_DepthDrawMode __pyx_t_7classes_15SpatialMaterial_DepthDrawMode;
+typedef enum __pyx_t_7classes_15SpatialMaterial_SpatialMaterial_DepthDrawMode __pyx_t_7classes_15SpatialMaterial_SpatialMaterial_DepthDrawMode;
 
 /* "classes/SpatialMaterial.pxd":17
- * ctypedef enum BillboardMode :BILLBOARD_DISABLED, BILLBOARD_ENABLED, BILLBOARD_FIXED_Y, BILLBOARD_PARTICLES,
- * ctypedef enum DepthDrawMode :DEPTH_DRAW_OPAQUE_ONLY, DEPTH_DRAW_ALWAYS, DEPTH_DRAW_DISABLED, DEPTH_DRAW_ALPHA_OPAQUE_PREPASS,
- * ctypedef enum TextureChannel :TEXTURE_CHANNEL_RED, TEXTURE_CHANNEL_GREEN, TEXTURE_CHANNEL_BLUE, TEXTURE_CHANNEL_ALPHA, TEXTURE_CHANNEL_GRAYSCALE,             # <<<<<<<<<<<<<<
- * ctypedef enum BlendMode :BLEND_MODE_MIX, BLEND_MODE_ADD, BLEND_MODE_SUB, BLEND_MODE_MUL,
- * ctypedef enum TextureParam :TEXTURE_ALBEDO, TEXTURE_METALLIC, TEXTURE_ROUGHNESS, TEXTURE_EMISSION, TEXTURE_NORMAL, TEXTURE_RIM, TEXTURE_CLEARCOAT, TEXTURE_FLOWMAP, TEXTURE_AMBIENT_OCCLUSION, TEXTURE_DEPTH, TEXTURE_SUBSURFACE_SCATTERING, TEXTURE_TRANSMISSION, TEXTURE_REFRACTION, TEXTURE_DETAIL_MASK, TEXTURE_DETAIL_ALBEDO, TEXTURE_DETAIL_NORMAL, TEXTURE_MAX,
+ * ctypedef enum SpatialMaterial_BillboardMode :BILLBOARD_DISABLED, BILLBOARD_ENABLED, BILLBOARD_FIXED_Y, BILLBOARD_PARTICLES,
+ * ctypedef enum SpatialMaterial_DepthDrawMode :DEPTH_DRAW_OPAQUE_ONLY, DEPTH_DRAW_ALWAYS, DEPTH_DRAW_DISABLED, DEPTH_DRAW_ALPHA_OPAQUE_PREPASS,
+ * ctypedef enum SpatialMaterial_TextureChannel :TEXTURE_CHANNEL_RED, TEXTURE_CHANNEL_GREEN, TEXTURE_CHANNEL_BLUE, TEXTURE_CHANNEL_ALPHA, TEXTURE_CHANNEL_GRAYSCALE,             # <<<<<<<<<<<<<<
+ * ctypedef enum SpatialMaterial_BlendMode :BLEND_MODE_MIX, BLEND_MODE_ADD, BLEND_MODE_SUB, BLEND_MODE_MUL,
+ * ctypedef enum SpatialMaterial_TextureParam :TEXTURE_ALBEDO, TEXTURE_METALLIC, TEXTURE_ROUGHNESS, TEXTURE_EMISSION, TEXTURE_NORMAL, TEXTURE_RIM, TEXTURE_CLEARCOAT, TEXTURE_FLOWMAP, TEXTURE_AMBIENT_OCCLUSION, TEXTURE_DEPTH, TEXTURE_SUBSURFACE_SCATTERING, TEXTURE_TRANSMISSION, TEXTURE_REFRACTION, TEXTURE_DETAIL_MASK, TEXTURE_DETAIL_ALBEDO, TEXTURE_DETAIL_NORMAL, TEXTURE_MAX,
  */
-enum __pyx_t_7classes_15SpatialMaterial_TextureChannel {
+enum __pyx_t_7classes_15SpatialMaterial_SpatialMaterial_TextureChannel {
   __pyx_e_7classes_15SpatialMaterial_TEXTURE_CHANNEL_RED,
   __pyx_e_7classes_15SpatialMaterial_TEXTURE_CHANNEL_GREEN,
   __pyx_e_7classes_15SpatialMaterial_TEXTURE_CHANNEL_BLUE,
   __pyx_e_7classes_15SpatialMaterial_TEXTURE_CHANNEL_ALPHA,
   __pyx_e_7classes_15SpatialMaterial_TEXTURE_CHANNEL_GRAYSCALE
 };
-typedef enum __pyx_t_7classes_15SpatialMaterial_TextureChannel __pyx_t_7classes_15SpatialMaterial_TextureChannel;
+typedef enum __pyx_t_7classes_15SpatialMaterial_SpatialMaterial_TextureChannel __pyx_t_7classes_15SpatialMaterial_SpatialMaterial_TextureChannel;
 
 /* "classes/SpatialMaterial.pxd":18
- * ctypedef enum DepthDrawMode :DEPTH_DRAW_OPAQUE_ONLY, DEPTH_DRAW_ALWAYS, DEPTH_DRAW_DISABLED, DEPTH_DRAW_ALPHA_OPAQUE_PREPASS,
- * ctypedef enum TextureChannel :TEXTURE_CHANNEL_RED, TEXTURE_CHANNEL_GREEN, TEXTURE_CHANNEL_BLUE, TEXTURE_CHANNEL_ALPHA, TEXTURE_CHANNEL_GRAYSCALE,
- * ctypedef enum BlendMode :BLEND_MODE_MIX, BLEND_MODE_ADD, BLEND_MODE_SUB, BLEND_MODE_MUL,             # <<<<<<<<<<<<<<
- * ctypedef enum TextureParam :TEXTURE_ALBEDO, TEXTURE_METALLIC, TEXTURE_ROUGHNESS, TEXTURE_EMISSION, TEXTURE_NORMAL, TEXTURE_RIM, TEXTURE_CLEARCOAT, TEXTURE_FLOWMAP, TEXTURE_AMBIENT_OCCLUSION, TEXTURE_DEPTH, TEXTURE_SUBSURFACE_SCATTERING, TEXTURE_TRANSMISSION, TEXTURE_REFRACTION, TEXTURE_DETAIL_MASK, TEXTURE_DETAIL_ALBEDO, TEXTURE_DETAIL_NORMAL, TEXTURE_MAX,
+ * ctypedef enum SpatialMaterial_DepthDrawMode :DEPTH_DRAW_OPAQUE_ONLY, DEPTH_DRAW_ALWAYS, DEPTH_DRAW_DISABLED, DEPTH_DRAW_ALPHA_OPAQUE_PREPASS,
+ * ctypedef enum SpatialMaterial_TextureChannel :TEXTURE_CHANNEL_RED, TEXTURE_CHANNEL_GREEN, TEXTURE_CHANNEL_BLUE, TEXTURE_CHANNEL_ALPHA, TEXTURE_CHANNEL_GRAYSCALE,
+ * ctypedef enum SpatialMaterial_BlendMode :BLEND_MODE_MIX, BLEND_MODE_ADD, BLEND_MODE_SUB, BLEND_MODE_MUL,             # <<<<<<<<<<<<<<
+ * ctypedef enum SpatialMaterial_TextureParam :TEXTURE_ALBEDO, TEXTURE_METALLIC, TEXTURE_ROUGHNESS, TEXTURE_EMISSION, TEXTURE_NORMAL, TEXTURE_RIM, TEXTURE_CLEARCOAT, TEXTURE_FLOWMAP, TEXTURE_AMBIENT_OCCLUSION, TEXTURE_DEPTH, TEXTURE_SUBSURFACE_SCATTERING, TEXTURE_TRANSMISSION, TEXTURE_REFRACTION, TEXTURE_DETAIL_MASK, TEXTURE_DETAIL_ALBEDO, TEXTURE_DETAIL_NORMAL, TEXTURE_MAX,
  */
-enum __pyx_t_7classes_15SpatialMaterial_BlendMode {
+enum __pyx_t_7classes_15SpatialMaterial_SpatialMaterial_BlendMode {
   __pyx_e_7classes_15SpatialMaterial_BLEND_MODE_MIX,
   __pyx_e_7classes_15SpatialMaterial_BLEND_MODE_ADD,
   __pyx_e_7classes_15SpatialMaterial_BLEND_MODE_SUB,
   __pyx_e_7classes_15SpatialMaterial_BLEND_MODE_MUL
 };
-typedef enum __pyx_t_7classes_15SpatialMaterial_BlendMode __pyx_t_7classes_15SpatialMaterial_BlendMode;
+typedef enum __pyx_t_7classes_15SpatialMaterial_SpatialMaterial_BlendMode __pyx_t_7classes_15SpatialMaterial_SpatialMaterial_BlendMode;
 
 /* "classes/SpatialMaterial.pxd":19
- * ctypedef enum TextureChannel :TEXTURE_CHANNEL_RED, TEXTURE_CHANNEL_GREEN, TEXTURE_CHANNEL_BLUE, TEXTURE_CHANNEL_ALPHA, TEXTURE_CHANNEL_GRAYSCALE,
- * ctypedef enum BlendMode :BLEND_MODE_MIX, BLEND_MODE_ADD, BLEND_MODE_SUB, BLEND_MODE_MUL,
- * ctypedef enum TextureParam :TEXTURE_ALBEDO, TEXTURE_METALLIC, TEXTURE_ROUGHNESS, TEXTURE_EMISSION, TEXTURE_NORMAL, TEXTURE_RIM, TEXTURE_CLEARCOAT, TEXTURE_FLOWMAP, TEXTURE_AMBIENT_OCCLUSION, TEXTURE_DEPTH, TEXTURE_SUBSURFACE_SCATTERING, TEXTURE_TRANSMISSION, TEXTURE_REFRACTION, TEXTURE_DETAIL_MASK, TEXTURE_DETAIL_ALBEDO, TEXTURE_DETAIL_NORMAL, TEXTURE_MAX,             # <<<<<<<<<<<<<<
+ * ctypedef enum SpatialMaterial_TextureChannel :TEXTURE_CHANNEL_RED, TEXTURE_CHANNEL_GREEN, TEXTURE_CHANNEL_BLUE, TEXTURE_CHANNEL_ALPHA, TEXTURE_CHANNEL_GRAYSCALE,
+ * ctypedef enum SpatialMaterial_BlendMode :BLEND_MODE_MIX, BLEND_MODE_ADD, BLEND_MODE_SUB, BLEND_MODE_MUL,
+ * ctypedef enum SpatialMaterial_TextureParam :TEXTURE_ALBEDO, TEXTURE_METALLIC, TEXTURE_ROUGHNESS, TEXTURE_EMISSION, TEXTURE_NORMAL, TEXTURE_RIM, TEXTURE_CLEARCOAT, TEXTURE_FLOWMAP, TEXTURE_AMBIENT_OCCLUSION, TEXTURE_DEPTH, TEXTURE_SUBSURFACE_SCATTERING, TEXTURE_TRANSMISSION, TEXTURE_REFRACTION, TEXTURE_DETAIL_MASK, TEXTURE_DETAIL_ALBEDO, TEXTURE_DETAIL_NORMAL, TEXTURE_MAX,             # <<<<<<<<<<<<<<
  */
-enum __pyx_t_7classes_15SpatialMaterial_TextureParam {
+enum __pyx_t_7classes_15SpatialMaterial_SpatialMaterial_TextureParam {
   __pyx_e_7classes_15SpatialMaterial_TEXTURE_ALBEDO,
   __pyx_e_7classes_15SpatialMaterial_TEXTURE_METALLIC,
   __pyx_e_7classes_15SpatialMaterial_TEXTURE_ROUGHNESS,
@@ -1239,7 +1239,7 @@ enum __pyx_t_7classes_15SpatialMaterial_TextureParam {
   __pyx_e_7classes_15SpatialMaterial_TEXTURE_DETAIL_NORMAL,
   __pyx_e_7classes_15SpatialMaterial_TEXTURE_MAX
 };
-typedef enum __pyx_t_7classes_15SpatialMaterial_TextureParam __pyx_t_7classes_15SpatialMaterial_TextureParam;
+typedef enum __pyx_t_7classes_15SpatialMaterial_SpatialMaterial_TextureParam __pyx_t_7classes_15SpatialMaterial_SpatialMaterial_TextureParam;
 
 /* "utils/Wrapper.pxd":2
  * from godot_api.binding cimport *
@@ -1259,7 +1259,7 @@ struct __pyx_obj_5utils_7Wrapper_Wrapper {
  * from utils.Wrapper cimport *
  * cdef class Object(Wrapper):             # <<<<<<<<<<<<<<
  *     pass
- * ctypedef enum ConnectFlags :CONNECT_DEFERRED, CONNECT_PERSIST, CONNECT_ONESHOT, CONNECT_REFERENCE_COUNTED,
+ * ctypedef enum Object_ConnectFlags :CONNECT_DEFERRED, CONNECT_PERSIST, CONNECT_ONESHOT, CONNECT_REFERENCE_COUNTED,
  */
 struct __pyx_obj_7classes_6Object_Object {
   struct __pyx_obj_5utils_7Wrapper_Wrapper __pyx_base;
@@ -1293,7 +1293,7 @@ struct __pyx_obj_7classes_8Resource_Resource {
  * cimport classes.Resource
  * cdef class Texture(classes.Resource.Resource):             # <<<<<<<<<<<<<<
  *     pass
- * ctypedef enum Flags :FLAG_MIPMAPS, FLAG_REPEAT, FLAG_FILTER, FLAGS_DEFAULT, FLAG_ANISOTROPIC_FILTER, FLAG_CONVERT_TO_LINEAR, FLAG_MIRRORED_REPEAT, FLAG_VIDEO_SURFACE,
+ * ctypedef enum Texture_Flags :FLAG_MIPMAPS, FLAG_REPEAT, FLAG_FILTER, FLAGS_DEFAULT, FLAG_ANISOTROPIC_FILTER, FLAG_CONVERT_TO_LINEAR, FLAG_MIRRORED_REPEAT, FLAG_VIDEO_SURFACE,
  */
 struct __pyx_obj_7classes_7Texture_Texture {
   struct __pyx_obj_7classes_8Resource_Resource __pyx_base;
@@ -1638,7 +1638,7 @@ struct __pyx_obj_4core_7vector3_7Vector3_Vector3 {
  * cimport classes.Material
  * cdef class SpatialMaterial(classes.Material.Material):             # <<<<<<<<<<<<<<
  *     pass
- * ctypedef enum EmissionOperator :EMISSION_OP_ADD, EMISSION_OP_MULTIPLY,
+ * ctypedef enum SpatialMaterial_EmissionOperator :EMISSION_OP_ADD, EMISSION_OP_MULTIPLY,
  */
 struct __pyx_obj_7classes_15SpatialMaterial_SpatialMaterial {
   struct __pyx_obj_7classes_8Material_Material __pyx_base;
@@ -1667,7 +1667,7 @@ static CYTHON_INLINE godot_object *__pyx_f_5utils_7Wrapper_7Wrapper_get_godot_ow
  * from utils.Wrapper cimport *
  * cdef class Object(Wrapper):             # <<<<<<<<<<<<<<
  *     pass
- * ctypedef enum ConnectFlags :CONNECT_DEFERRED, CONNECT_PERSIST, CONNECT_ONESHOT, CONNECT_REFERENCE_COUNTED,
+ * ctypedef enum Object_ConnectFlags :CONNECT_DEFERRED, CONNECT_PERSIST, CONNECT_ONESHOT, CONNECT_REFERENCE_COUNTED,
  */
 
 struct __pyx_vtabstruct_7classes_6Object_Object {
@@ -1707,7 +1707,7 @@ static struct __pyx_vtabstruct_7classes_8Resource_Resource *__pyx_vtabptr_7class
  * cimport classes.Resource
  * cdef class Texture(classes.Resource.Resource):             # <<<<<<<<<<<<<<
  *     pass
- * ctypedef enum Flags :FLAG_MIPMAPS, FLAG_REPEAT, FLAG_FILTER, FLAGS_DEFAULT, FLAG_ANISOTROPIC_FILTER, FLAG_CONVERT_TO_LINEAR, FLAG_MIRRORED_REPEAT, FLAG_VIDEO_SURFACE,
+ * ctypedef enum Texture_Flags :FLAG_MIPMAPS, FLAG_REPEAT, FLAG_FILTER, FLAGS_DEFAULT, FLAG_ANISOTROPIC_FILTER, FLAG_CONVERT_TO_LINEAR, FLAG_MIRRORED_REPEAT, FLAG_VIDEO_SURFACE,
  */
 
 struct __pyx_vtabstruct_7classes_7Texture_Texture {
@@ -2428,37 +2428,37 @@ static void __Pyx_AddTraceback(const char *funcname, int c_line,
                                int py_line, const char *filename);
 
 /* CIntToPy.proto */
-static CYTHON_INLINE PyObject* __Pyx_PyInt_From___pyx_t_7classes_15SpatialMaterial_TextureChannel(__pyx_t_7classes_15SpatialMaterial_TextureChannel value);
+static CYTHON_INLINE PyObject* __Pyx_PyInt_From___pyx_t_7classes_15SpatialMaterial_SpatialMaterial_TextureChannel(__pyx_t_7classes_15SpatialMaterial_SpatialMaterial_TextureChannel value);
 
 /* CIntToPy.proto */
-static CYTHON_INLINE PyObject* __Pyx_PyInt_From___pyx_t_7classes_15SpatialMaterial_BillboardMode(__pyx_t_7classes_15SpatialMaterial_BillboardMode value);
+static CYTHON_INLINE PyObject* __Pyx_PyInt_From___pyx_t_7classes_15SpatialMaterial_SpatialMaterial_BillboardMode(__pyx_t_7classes_15SpatialMaterial_SpatialMaterial_BillboardMode value);
 
 /* CIntToPy.proto */
-static CYTHON_INLINE PyObject* __Pyx_PyInt_From___pyx_t_7classes_15SpatialMaterial_BlendMode(__pyx_t_7classes_15SpatialMaterial_BlendMode value);
+static CYTHON_INLINE PyObject* __Pyx_PyInt_From___pyx_t_7classes_15SpatialMaterial_SpatialMaterial_BlendMode(__pyx_t_7classes_15SpatialMaterial_SpatialMaterial_BlendMode value);
 
 /* CIntToPy.proto */
-static CYTHON_INLINE PyObject* __Pyx_PyInt_From___pyx_t_7classes_15SpatialMaterial_CullMode(__pyx_t_7classes_15SpatialMaterial_CullMode value);
+static CYTHON_INLINE PyObject* __Pyx_PyInt_From___pyx_t_7classes_15SpatialMaterial_SpatialMaterial_CullMode(__pyx_t_7classes_15SpatialMaterial_SpatialMaterial_CullMode value);
 
 /* CIntToPy.proto */
 static CYTHON_INLINE PyObject* __Pyx_PyInt_From_int(int value);
 
 /* CIntToPy.proto */
-static CYTHON_INLINE PyObject* __Pyx_PyInt_From___pyx_t_7classes_15SpatialMaterial_DepthDrawMode(__pyx_t_7classes_15SpatialMaterial_DepthDrawMode value);
+static CYTHON_INLINE PyObject* __Pyx_PyInt_From___pyx_t_7classes_15SpatialMaterial_SpatialMaterial_DepthDrawMode(__pyx_t_7classes_15SpatialMaterial_SpatialMaterial_DepthDrawMode value);
 
 /* CIntToPy.proto */
-static CYTHON_INLINE PyObject* __Pyx_PyInt_From___pyx_t_7classes_15SpatialMaterial_DetailUV(__pyx_t_7classes_15SpatialMaterial_DetailUV value);
+static CYTHON_INLINE PyObject* __Pyx_PyInt_From___pyx_t_7classes_15SpatialMaterial_SpatialMaterial_DetailUV(__pyx_t_7classes_15SpatialMaterial_SpatialMaterial_DetailUV value);
 
 /* CIntToPy.proto */
-static CYTHON_INLINE PyObject* __Pyx_PyInt_From___pyx_t_7classes_15SpatialMaterial_DiffuseMode(__pyx_t_7classes_15SpatialMaterial_DiffuseMode value);
+static CYTHON_INLINE PyObject* __Pyx_PyInt_From___pyx_t_7classes_15SpatialMaterial_SpatialMaterial_DiffuseMode(__pyx_t_7classes_15SpatialMaterial_SpatialMaterial_DiffuseMode value);
 
 /* CIntToPy.proto */
-static CYTHON_INLINE PyObject* __Pyx_PyInt_From___pyx_t_7classes_15SpatialMaterial_DistanceFadeMode(__pyx_t_7classes_15SpatialMaterial_DistanceFadeMode value);
+static CYTHON_INLINE PyObject* __Pyx_PyInt_From___pyx_t_7classes_15SpatialMaterial_SpatialMaterial_DistanceFadeMode(__pyx_t_7classes_15SpatialMaterial_SpatialMaterial_DistanceFadeMode value);
 
 /* CIntToPy.proto */
-static CYTHON_INLINE PyObject* __Pyx_PyInt_From___pyx_t_7classes_15SpatialMaterial_EmissionOperator(__pyx_t_7classes_15SpatialMaterial_EmissionOperator value);
+static CYTHON_INLINE PyObject* __Pyx_PyInt_From___pyx_t_7classes_15SpatialMaterial_SpatialMaterial_EmissionOperator(__pyx_t_7classes_15SpatialMaterial_SpatialMaterial_EmissionOperator value);
 
 /* CIntToPy.proto */
-static CYTHON_INLINE PyObject* __Pyx_PyInt_From___pyx_t_7classes_15SpatialMaterial_SpecularMode(__pyx_t_7classes_15SpatialMaterial_SpecularMode value);
+static CYTHON_INLINE PyObject* __Pyx_PyInt_From___pyx_t_7classes_15SpatialMaterial_SpatialMaterial_SpecularMode(__pyx_t_7classes_15SpatialMaterial_SpatialMaterial_SpecularMode value);
 
 /* CIntFromPy.proto */
 static CYTHON_INLINE int __Pyx_PyInt_As_int(PyObject *);
@@ -21683,7 +21683,7 @@ static PyObject *__pyx_pw_7classes_15SpatialMaterial_15SpatialMaterial_11get_ao_
 
 static PyObject *__pyx_pf_7classes_15SpatialMaterial_15SpatialMaterial_10get_ao_texture_channel(struct __pyx_obj_7classes_15SpatialMaterial_SpatialMaterial *__pyx_v_self) {
   CYTHON_UNUSED godot_object *__pyx_v__owner;
-  __pyx_t_7classes_15SpatialMaterial_TextureChannel *__pyx_v_ret;
+  __pyx_t_7classes_15SpatialMaterial_SpatialMaterial_TextureChannel *__pyx_v_ret;
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   godot_object *__pyx_t_1;
@@ -21698,7 +21698,7 @@ static PyObject *__pyx_pf_7classes_15SpatialMaterial_15SpatialMaterial_10get_ao_
  *   def  get_ao_texture_channel(self):
  *     cdef godot_object *_owner = self.godot_owner             # <<<<<<<<<<<<<<
  * 
- *     cdef TextureChannel* ret = NULL;
+ *     cdef SpatialMaterial_TextureChannel* ret = NULL;
  */
   __pyx_t_1 = __pyx_v_self->__pyx_base.__pyx_base.__pyx_base.__pyx_base.__pyx_base.godot_owner;
   __pyx_v__owner = __pyx_t_1;
@@ -21706,14 +21706,14 @@ static PyObject *__pyx_pf_7classes_15SpatialMaterial_15SpatialMaterial_10get_ao_
   /* "classes/SpatialMaterial.pyx":918
  *     cdef godot_object *_owner = self.godot_owner
  * 
- *     cdef TextureChannel* ret = NULL;             # <<<<<<<<<<<<<<
+ *     cdef SpatialMaterial_TextureChannel* ret = NULL;             # <<<<<<<<<<<<<<
  * 
  *     api_core.godot_method_bind_ptrcall(bind_spatialmaterial_get_ao_texture_channel,self.godot_owner,NULL,&ret)
  */
   __pyx_v_ret = NULL;
 
   /* "classes/SpatialMaterial.pyx":920
- *     cdef TextureChannel* ret = NULL;
+ *     cdef SpatialMaterial_TextureChannel* ret = NULL;
  * 
  *     api_core.godot_method_bind_ptrcall(bind_spatialmaterial_get_ao_texture_channel,self.godot_owner,NULL,&ret)             # <<<<<<<<<<<<<<
  *     hello('hallo2')
@@ -21738,7 +21738,7 @@ static PyObject *__pyx_pf_7classes_15SpatialMaterial_15SpatialMaterial_10get_ao_
  *   def  get_billboard_mode(self):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_2 = __Pyx_PyInt_From___pyx_t_7classes_15SpatialMaterial_TextureChannel((*__pyx_v_ret)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 922, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyInt_From___pyx_t_7classes_15SpatialMaterial_SpatialMaterial_TextureChannel((*__pyx_v_ret)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 922, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_r = __pyx_t_2;
   __pyx_t_2 = 0;
@@ -21786,7 +21786,7 @@ static PyObject *__pyx_pw_7classes_15SpatialMaterial_15SpatialMaterial_13get_bil
 
 static PyObject *__pyx_pf_7classes_15SpatialMaterial_15SpatialMaterial_12get_billboard_mode(struct __pyx_obj_7classes_15SpatialMaterial_SpatialMaterial *__pyx_v_self) {
   CYTHON_UNUSED godot_object *__pyx_v__owner;
-  __pyx_t_7classes_15SpatialMaterial_BillboardMode *__pyx_v_ret;
+  __pyx_t_7classes_15SpatialMaterial_SpatialMaterial_BillboardMode *__pyx_v_ret;
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   godot_object *__pyx_t_1;
@@ -21801,7 +21801,7 @@ static PyObject *__pyx_pf_7classes_15SpatialMaterial_15SpatialMaterial_12get_bil
  *   def  get_billboard_mode(self):
  *     cdef godot_object *_owner = self.godot_owner             # <<<<<<<<<<<<<<
  * 
- *     cdef BillboardMode* ret = NULL;
+ *     cdef SpatialMaterial_BillboardMode* ret = NULL;
  */
   __pyx_t_1 = __pyx_v_self->__pyx_base.__pyx_base.__pyx_base.__pyx_base.__pyx_base.godot_owner;
   __pyx_v__owner = __pyx_t_1;
@@ -21809,14 +21809,14 @@ static PyObject *__pyx_pf_7classes_15SpatialMaterial_15SpatialMaterial_12get_bil
   /* "classes/SpatialMaterial.pyx":927
  *     cdef godot_object *_owner = self.godot_owner
  * 
- *     cdef BillboardMode* ret = NULL;             # <<<<<<<<<<<<<<
+ *     cdef SpatialMaterial_BillboardMode* ret = NULL;             # <<<<<<<<<<<<<<
  * 
  *     api_core.godot_method_bind_ptrcall(bind_spatialmaterial_get_billboard_mode,self.godot_owner,NULL,&ret)
  */
   __pyx_v_ret = NULL;
 
   /* "classes/SpatialMaterial.pyx":929
- *     cdef BillboardMode* ret = NULL;
+ *     cdef SpatialMaterial_BillboardMode* ret = NULL;
  * 
  *     api_core.godot_method_bind_ptrcall(bind_spatialmaterial_get_billboard_mode,self.godot_owner,NULL,&ret)             # <<<<<<<<<<<<<<
  *     hello('hallo2')
@@ -21841,7 +21841,7 @@ static PyObject *__pyx_pf_7classes_15SpatialMaterial_15SpatialMaterial_12get_bil
  *   def  get_blend_mode(self):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_2 = __Pyx_PyInt_From___pyx_t_7classes_15SpatialMaterial_BillboardMode((*__pyx_v_ret)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 931, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyInt_From___pyx_t_7classes_15SpatialMaterial_SpatialMaterial_BillboardMode((*__pyx_v_ret)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 931, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_r = __pyx_t_2;
   __pyx_t_2 = 0;
@@ -21889,7 +21889,7 @@ static PyObject *__pyx_pw_7classes_15SpatialMaterial_15SpatialMaterial_15get_ble
 
 static PyObject *__pyx_pf_7classes_15SpatialMaterial_15SpatialMaterial_14get_blend_mode(struct __pyx_obj_7classes_15SpatialMaterial_SpatialMaterial *__pyx_v_self) {
   CYTHON_UNUSED godot_object *__pyx_v__owner;
-  __pyx_t_7classes_15SpatialMaterial_BlendMode *__pyx_v_ret;
+  __pyx_t_7classes_15SpatialMaterial_SpatialMaterial_BlendMode *__pyx_v_ret;
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   godot_object *__pyx_t_1;
@@ -21904,7 +21904,7 @@ static PyObject *__pyx_pf_7classes_15SpatialMaterial_15SpatialMaterial_14get_ble
  *   def  get_blend_mode(self):
  *     cdef godot_object *_owner = self.godot_owner             # <<<<<<<<<<<<<<
  * 
- *     cdef BlendMode* ret = NULL;
+ *     cdef SpatialMaterial_BlendMode* ret = NULL;
  */
   __pyx_t_1 = __pyx_v_self->__pyx_base.__pyx_base.__pyx_base.__pyx_base.__pyx_base.godot_owner;
   __pyx_v__owner = __pyx_t_1;
@@ -21912,14 +21912,14 @@ static PyObject *__pyx_pf_7classes_15SpatialMaterial_15SpatialMaterial_14get_ble
   /* "classes/SpatialMaterial.pyx":936
  *     cdef godot_object *_owner = self.godot_owner
  * 
- *     cdef BlendMode* ret = NULL;             # <<<<<<<<<<<<<<
+ *     cdef SpatialMaterial_BlendMode* ret = NULL;             # <<<<<<<<<<<<<<
  * 
  *     api_core.godot_method_bind_ptrcall(bind_spatialmaterial_get_blend_mode,self.godot_owner,NULL,&ret)
  */
   __pyx_v_ret = NULL;
 
   /* "classes/SpatialMaterial.pyx":938
- *     cdef BlendMode* ret = NULL;
+ *     cdef SpatialMaterial_BlendMode* ret = NULL;
  * 
  *     api_core.godot_method_bind_ptrcall(bind_spatialmaterial_get_blend_mode,self.godot_owner,NULL,&ret)             # <<<<<<<<<<<<<<
  *     hello('hallo2')
@@ -21944,7 +21944,7 @@ static PyObject *__pyx_pf_7classes_15SpatialMaterial_15SpatialMaterial_14get_ble
  *   def  get_clearcoat(self):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_2 = __Pyx_PyInt_From___pyx_t_7classes_15SpatialMaterial_BlendMode((*__pyx_v_ret)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 940, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyInt_From___pyx_t_7classes_15SpatialMaterial_SpatialMaterial_BlendMode((*__pyx_v_ret)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 940, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_r = __pyx_t_2;
   __pyx_t_2 = 0;
@@ -22198,7 +22198,7 @@ static PyObject *__pyx_pw_7classes_15SpatialMaterial_15SpatialMaterial_21get_cul
 
 static PyObject *__pyx_pf_7classes_15SpatialMaterial_15SpatialMaterial_20get_cull_mode(struct __pyx_obj_7classes_15SpatialMaterial_SpatialMaterial *__pyx_v_self) {
   CYTHON_UNUSED godot_object *__pyx_v__owner;
-  __pyx_t_7classes_15SpatialMaterial_CullMode *__pyx_v_ret;
+  __pyx_t_7classes_15SpatialMaterial_SpatialMaterial_CullMode *__pyx_v_ret;
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   godot_object *__pyx_t_1;
@@ -22213,7 +22213,7 @@ static PyObject *__pyx_pf_7classes_15SpatialMaterial_15SpatialMaterial_20get_cul
  *   def  get_cull_mode(self):
  *     cdef godot_object *_owner = self.godot_owner             # <<<<<<<<<<<<<<
  * 
- *     cdef CullMode* ret = NULL;
+ *     cdef SpatialMaterial_CullMode* ret = NULL;
  */
   __pyx_t_1 = __pyx_v_self->__pyx_base.__pyx_base.__pyx_base.__pyx_base.__pyx_base.godot_owner;
   __pyx_v__owner = __pyx_t_1;
@@ -22221,14 +22221,14 @@ static PyObject *__pyx_pf_7classes_15SpatialMaterial_15SpatialMaterial_20get_cul
   /* "classes/SpatialMaterial.pyx":963
  *     cdef godot_object *_owner = self.godot_owner
  * 
- *     cdef CullMode* ret = NULL;             # <<<<<<<<<<<<<<
+ *     cdef SpatialMaterial_CullMode* ret = NULL;             # <<<<<<<<<<<<<<
  * 
  *     api_core.godot_method_bind_ptrcall(bind_spatialmaterial_get_cull_mode,self.godot_owner,NULL,&ret)
  */
   __pyx_v_ret = NULL;
 
   /* "classes/SpatialMaterial.pyx":965
- *     cdef CullMode* ret = NULL;
+ *     cdef SpatialMaterial_CullMode* ret = NULL;
  * 
  *     api_core.godot_method_bind_ptrcall(bind_spatialmaterial_get_cull_mode,self.godot_owner,NULL,&ret)             # <<<<<<<<<<<<<<
  *     hello('hallo2')
@@ -22253,7 +22253,7 @@ static PyObject *__pyx_pf_7classes_15SpatialMaterial_15SpatialMaterial_20get_cul
  *   def  get_depth_deep_parallax_flip_binormal(self):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_2 = __Pyx_PyInt_From___pyx_t_7classes_15SpatialMaterial_CullMode((*__pyx_v_ret)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 967, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyInt_From___pyx_t_7classes_15SpatialMaterial_SpatialMaterial_CullMode((*__pyx_v_ret)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 967, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_r = __pyx_t_2;
   __pyx_t_2 = 0;
@@ -22713,7 +22713,7 @@ static PyObject *__pyx_pw_7classes_15SpatialMaterial_15SpatialMaterial_31get_dep
 
 static PyObject *__pyx_pf_7classes_15SpatialMaterial_15SpatialMaterial_30get_depth_draw_mode(struct __pyx_obj_7classes_15SpatialMaterial_SpatialMaterial *__pyx_v_self) {
   CYTHON_UNUSED godot_object *__pyx_v__owner;
-  __pyx_t_7classes_15SpatialMaterial_DepthDrawMode *__pyx_v_ret;
+  __pyx_t_7classes_15SpatialMaterial_SpatialMaterial_DepthDrawMode *__pyx_v_ret;
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   godot_object *__pyx_t_1;
@@ -22728,7 +22728,7 @@ static PyObject *__pyx_pf_7classes_15SpatialMaterial_15SpatialMaterial_30get_dep
  *   def  get_depth_draw_mode(self):
  *     cdef godot_object *_owner = self.godot_owner             # <<<<<<<<<<<<<<
  * 
- *     cdef DepthDrawMode* ret = NULL;
+ *     cdef SpatialMaterial_DepthDrawMode* ret = NULL;
  */
   __pyx_t_1 = __pyx_v_self->__pyx_base.__pyx_base.__pyx_base.__pyx_base.__pyx_base.godot_owner;
   __pyx_v__owner = __pyx_t_1;
@@ -22736,14 +22736,14 @@ static PyObject *__pyx_pf_7classes_15SpatialMaterial_15SpatialMaterial_30get_dep
   /* "classes/SpatialMaterial.pyx":1008
  *     cdef godot_object *_owner = self.godot_owner
  * 
- *     cdef DepthDrawMode* ret = NULL;             # <<<<<<<<<<<<<<
+ *     cdef SpatialMaterial_DepthDrawMode* ret = NULL;             # <<<<<<<<<<<<<<
  * 
  *     api_core.godot_method_bind_ptrcall(bind_spatialmaterial_get_depth_draw_mode,self.godot_owner,NULL,&ret)
  */
   __pyx_v_ret = NULL;
 
   /* "classes/SpatialMaterial.pyx":1010
- *     cdef DepthDrawMode* ret = NULL;
+ *     cdef SpatialMaterial_DepthDrawMode* ret = NULL;
  * 
  *     api_core.godot_method_bind_ptrcall(bind_spatialmaterial_get_depth_draw_mode,self.godot_owner,NULL,&ret)             # <<<<<<<<<<<<<<
  *     hello('hallo2')
@@ -22768,7 +22768,7 @@ static PyObject *__pyx_pf_7classes_15SpatialMaterial_15SpatialMaterial_30get_dep
  *   def  get_depth_scale(self):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_2 = __Pyx_PyInt_From___pyx_t_7classes_15SpatialMaterial_DepthDrawMode((*__pyx_v_ret)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 1012, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyInt_From___pyx_t_7classes_15SpatialMaterial_SpatialMaterial_DepthDrawMode((*__pyx_v_ret)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 1012, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_r = __pyx_t_2;
   __pyx_t_2 = 0;
@@ -22919,7 +22919,7 @@ static PyObject *__pyx_pw_7classes_15SpatialMaterial_15SpatialMaterial_35get_det
 
 static PyObject *__pyx_pf_7classes_15SpatialMaterial_15SpatialMaterial_34get_detail_blend_mode(struct __pyx_obj_7classes_15SpatialMaterial_SpatialMaterial *__pyx_v_self) {
   CYTHON_UNUSED godot_object *__pyx_v__owner;
-  __pyx_t_7classes_15SpatialMaterial_BlendMode *__pyx_v_ret;
+  __pyx_t_7classes_15SpatialMaterial_SpatialMaterial_BlendMode *__pyx_v_ret;
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   godot_object *__pyx_t_1;
@@ -22934,7 +22934,7 @@ static PyObject *__pyx_pf_7classes_15SpatialMaterial_15SpatialMaterial_34get_det
  *   def  get_detail_blend_mode(self):
  *     cdef godot_object *_owner = self.godot_owner             # <<<<<<<<<<<<<<
  * 
- *     cdef BlendMode* ret = NULL;
+ *     cdef SpatialMaterial_BlendMode* ret = NULL;
  */
   __pyx_t_1 = __pyx_v_self->__pyx_base.__pyx_base.__pyx_base.__pyx_base.__pyx_base.godot_owner;
   __pyx_v__owner = __pyx_t_1;
@@ -22942,14 +22942,14 @@ static PyObject *__pyx_pf_7classes_15SpatialMaterial_15SpatialMaterial_34get_det
   /* "classes/SpatialMaterial.pyx":1026
  *     cdef godot_object *_owner = self.godot_owner
  * 
- *     cdef BlendMode* ret = NULL;             # <<<<<<<<<<<<<<
+ *     cdef SpatialMaterial_BlendMode* ret = NULL;             # <<<<<<<<<<<<<<
  * 
  *     api_core.godot_method_bind_ptrcall(bind_spatialmaterial_get_detail_blend_mode,self.godot_owner,NULL,&ret)
  */
   __pyx_v_ret = NULL;
 
   /* "classes/SpatialMaterial.pyx":1028
- *     cdef BlendMode* ret = NULL;
+ *     cdef SpatialMaterial_BlendMode* ret = NULL;
  * 
  *     api_core.godot_method_bind_ptrcall(bind_spatialmaterial_get_detail_blend_mode,self.godot_owner,NULL,&ret)             # <<<<<<<<<<<<<<
  *     hello('hallo2')
@@ -22974,7 +22974,7 @@ static PyObject *__pyx_pf_7classes_15SpatialMaterial_15SpatialMaterial_34get_det
  *   def  get_detail_uv(self):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_2 = __Pyx_PyInt_From___pyx_t_7classes_15SpatialMaterial_BlendMode((*__pyx_v_ret)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 1030, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyInt_From___pyx_t_7classes_15SpatialMaterial_SpatialMaterial_BlendMode((*__pyx_v_ret)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 1030, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_r = __pyx_t_2;
   __pyx_t_2 = 0;
@@ -23022,7 +23022,7 @@ static PyObject *__pyx_pw_7classes_15SpatialMaterial_15SpatialMaterial_37get_det
 
 static PyObject *__pyx_pf_7classes_15SpatialMaterial_15SpatialMaterial_36get_detail_uv(struct __pyx_obj_7classes_15SpatialMaterial_SpatialMaterial *__pyx_v_self) {
   CYTHON_UNUSED godot_object *__pyx_v__owner;
-  __pyx_t_7classes_15SpatialMaterial_DetailUV *__pyx_v_ret;
+  __pyx_t_7classes_15SpatialMaterial_SpatialMaterial_DetailUV *__pyx_v_ret;
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   godot_object *__pyx_t_1;
@@ -23037,7 +23037,7 @@ static PyObject *__pyx_pf_7classes_15SpatialMaterial_15SpatialMaterial_36get_det
  *   def  get_detail_uv(self):
  *     cdef godot_object *_owner = self.godot_owner             # <<<<<<<<<<<<<<
  * 
- *     cdef DetailUV* ret = NULL;
+ *     cdef SpatialMaterial_DetailUV* ret = NULL;
  */
   __pyx_t_1 = __pyx_v_self->__pyx_base.__pyx_base.__pyx_base.__pyx_base.__pyx_base.godot_owner;
   __pyx_v__owner = __pyx_t_1;
@@ -23045,14 +23045,14 @@ static PyObject *__pyx_pf_7classes_15SpatialMaterial_15SpatialMaterial_36get_det
   /* "classes/SpatialMaterial.pyx":1035
  *     cdef godot_object *_owner = self.godot_owner
  * 
- *     cdef DetailUV* ret = NULL;             # <<<<<<<<<<<<<<
+ *     cdef SpatialMaterial_DetailUV* ret = NULL;             # <<<<<<<<<<<<<<
  * 
  *     api_core.godot_method_bind_ptrcall(bind_spatialmaterial_get_detail_uv,self.godot_owner,NULL,&ret)
  */
   __pyx_v_ret = NULL;
 
   /* "classes/SpatialMaterial.pyx":1037
- *     cdef DetailUV* ret = NULL;
+ *     cdef SpatialMaterial_DetailUV* ret = NULL;
  * 
  *     api_core.godot_method_bind_ptrcall(bind_spatialmaterial_get_detail_uv,self.godot_owner,NULL,&ret)             # <<<<<<<<<<<<<<
  *     hello('hallo2')
@@ -23077,7 +23077,7 @@ static PyObject *__pyx_pf_7classes_15SpatialMaterial_15SpatialMaterial_36get_det
  *   def  get_diffuse_mode(self):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_2 = __Pyx_PyInt_From___pyx_t_7classes_15SpatialMaterial_DetailUV((*__pyx_v_ret)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 1039, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyInt_From___pyx_t_7classes_15SpatialMaterial_SpatialMaterial_DetailUV((*__pyx_v_ret)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 1039, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_r = __pyx_t_2;
   __pyx_t_2 = 0;
@@ -23125,7 +23125,7 @@ static PyObject *__pyx_pw_7classes_15SpatialMaterial_15SpatialMaterial_39get_dif
 
 static PyObject *__pyx_pf_7classes_15SpatialMaterial_15SpatialMaterial_38get_diffuse_mode(struct __pyx_obj_7classes_15SpatialMaterial_SpatialMaterial *__pyx_v_self) {
   CYTHON_UNUSED godot_object *__pyx_v__owner;
-  __pyx_t_7classes_15SpatialMaterial_DiffuseMode *__pyx_v_ret;
+  __pyx_t_7classes_15SpatialMaterial_SpatialMaterial_DiffuseMode *__pyx_v_ret;
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   godot_object *__pyx_t_1;
@@ -23140,7 +23140,7 @@ static PyObject *__pyx_pf_7classes_15SpatialMaterial_15SpatialMaterial_38get_dif
  *   def  get_diffuse_mode(self):
  *     cdef godot_object *_owner = self.godot_owner             # <<<<<<<<<<<<<<
  * 
- *     cdef DiffuseMode* ret = NULL;
+ *     cdef SpatialMaterial_DiffuseMode* ret = NULL;
  */
   __pyx_t_1 = __pyx_v_self->__pyx_base.__pyx_base.__pyx_base.__pyx_base.__pyx_base.godot_owner;
   __pyx_v__owner = __pyx_t_1;
@@ -23148,14 +23148,14 @@ static PyObject *__pyx_pf_7classes_15SpatialMaterial_15SpatialMaterial_38get_dif
   /* "classes/SpatialMaterial.pyx":1044
  *     cdef godot_object *_owner = self.godot_owner
  * 
- *     cdef DiffuseMode* ret = NULL;             # <<<<<<<<<<<<<<
+ *     cdef SpatialMaterial_DiffuseMode* ret = NULL;             # <<<<<<<<<<<<<<
  * 
  *     api_core.godot_method_bind_ptrcall(bind_spatialmaterial_get_diffuse_mode,self.godot_owner,NULL,&ret)
  */
   __pyx_v_ret = NULL;
 
   /* "classes/SpatialMaterial.pyx":1046
- *     cdef DiffuseMode* ret = NULL;
+ *     cdef SpatialMaterial_DiffuseMode* ret = NULL;
  * 
  *     api_core.godot_method_bind_ptrcall(bind_spatialmaterial_get_diffuse_mode,self.godot_owner,NULL,&ret)             # <<<<<<<<<<<<<<
  *     hello('hallo2')
@@ -23180,7 +23180,7 @@ static PyObject *__pyx_pf_7classes_15SpatialMaterial_15SpatialMaterial_38get_dif
  *   def  get_distance_fade(self):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_2 = __Pyx_PyInt_From___pyx_t_7classes_15SpatialMaterial_DiffuseMode((*__pyx_v_ret)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 1048, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyInt_From___pyx_t_7classes_15SpatialMaterial_SpatialMaterial_DiffuseMode((*__pyx_v_ret)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 1048, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_r = __pyx_t_2;
   __pyx_t_2 = 0;
@@ -23228,7 +23228,7 @@ static PyObject *__pyx_pw_7classes_15SpatialMaterial_15SpatialMaterial_41get_dis
 
 static PyObject *__pyx_pf_7classes_15SpatialMaterial_15SpatialMaterial_40get_distance_fade(struct __pyx_obj_7classes_15SpatialMaterial_SpatialMaterial *__pyx_v_self) {
   CYTHON_UNUSED godot_object *__pyx_v__owner;
-  __pyx_t_7classes_15SpatialMaterial_DistanceFadeMode *__pyx_v_ret;
+  __pyx_t_7classes_15SpatialMaterial_SpatialMaterial_DistanceFadeMode *__pyx_v_ret;
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   godot_object *__pyx_t_1;
@@ -23243,7 +23243,7 @@ static PyObject *__pyx_pf_7classes_15SpatialMaterial_15SpatialMaterial_40get_dis
  *   def  get_distance_fade(self):
  *     cdef godot_object *_owner = self.godot_owner             # <<<<<<<<<<<<<<
  * 
- *     cdef DistanceFadeMode* ret = NULL;
+ *     cdef SpatialMaterial_DistanceFadeMode* ret = NULL;
  */
   __pyx_t_1 = __pyx_v_self->__pyx_base.__pyx_base.__pyx_base.__pyx_base.__pyx_base.godot_owner;
   __pyx_v__owner = __pyx_t_1;
@@ -23251,14 +23251,14 @@ static PyObject *__pyx_pf_7classes_15SpatialMaterial_15SpatialMaterial_40get_dis
   /* "classes/SpatialMaterial.pyx":1053
  *     cdef godot_object *_owner = self.godot_owner
  * 
- *     cdef DistanceFadeMode* ret = NULL;             # <<<<<<<<<<<<<<
+ *     cdef SpatialMaterial_DistanceFadeMode* ret = NULL;             # <<<<<<<<<<<<<<
  * 
  *     api_core.godot_method_bind_ptrcall(bind_spatialmaterial_get_distance_fade,self.godot_owner,NULL,&ret)
  */
   __pyx_v_ret = NULL;
 
   /* "classes/SpatialMaterial.pyx":1055
- *     cdef DistanceFadeMode* ret = NULL;
+ *     cdef SpatialMaterial_DistanceFadeMode* ret = NULL;
  * 
  *     api_core.godot_method_bind_ptrcall(bind_spatialmaterial_get_distance_fade,self.godot_owner,NULL,&ret)             # <<<<<<<<<<<<<<
  *     hello('hallo2')
@@ -23283,7 +23283,7 @@ static PyObject *__pyx_pf_7classes_15SpatialMaterial_15SpatialMaterial_40get_dis
  *   def  get_distance_fade_max_distance(self):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_2 = __Pyx_PyInt_From___pyx_t_7classes_15SpatialMaterial_DistanceFadeMode((*__pyx_v_ret)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 1057, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyInt_From___pyx_t_7classes_15SpatialMaterial_SpatialMaterial_DistanceFadeMode((*__pyx_v_ret)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 1057, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_r = __pyx_t_2;
   __pyx_t_2 = 0;
@@ -23743,7 +23743,7 @@ static PyObject *__pyx_pw_7classes_15SpatialMaterial_15SpatialMaterial_51get_emi
 
 static PyObject *__pyx_pf_7classes_15SpatialMaterial_15SpatialMaterial_50get_emission_operator(struct __pyx_obj_7classes_15SpatialMaterial_SpatialMaterial *__pyx_v_self) {
   CYTHON_UNUSED godot_object *__pyx_v__owner;
-  __pyx_t_7classes_15SpatialMaterial_EmissionOperator *__pyx_v_ret;
+  __pyx_t_7classes_15SpatialMaterial_SpatialMaterial_EmissionOperator *__pyx_v_ret;
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   godot_object *__pyx_t_1;
@@ -23758,7 +23758,7 @@ static PyObject *__pyx_pf_7classes_15SpatialMaterial_15SpatialMaterial_50get_emi
  *   def  get_emission_operator(self):
  *     cdef godot_object *_owner = self.godot_owner             # <<<<<<<<<<<<<<
  * 
- *     cdef EmissionOperator* ret = NULL;
+ *     cdef SpatialMaterial_EmissionOperator* ret = NULL;
  */
   __pyx_t_1 = __pyx_v_self->__pyx_base.__pyx_base.__pyx_base.__pyx_base.__pyx_base.godot_owner;
   __pyx_v__owner = __pyx_t_1;
@@ -23766,14 +23766,14 @@ static PyObject *__pyx_pf_7classes_15SpatialMaterial_15SpatialMaterial_50get_emi
   /* "classes/SpatialMaterial.pyx":1098
  *     cdef godot_object *_owner = self.godot_owner
  * 
- *     cdef EmissionOperator* ret = NULL;             # <<<<<<<<<<<<<<
+ *     cdef SpatialMaterial_EmissionOperator* ret = NULL;             # <<<<<<<<<<<<<<
  * 
  *     api_core.godot_method_bind_ptrcall(bind_spatialmaterial_get_emission_operator,self.godot_owner,NULL,&ret)
  */
   __pyx_v_ret = NULL;
 
   /* "classes/SpatialMaterial.pyx":1100
- *     cdef EmissionOperator* ret = NULL;
+ *     cdef SpatialMaterial_EmissionOperator* ret = NULL;
  * 
  *     api_core.godot_method_bind_ptrcall(bind_spatialmaterial_get_emission_operator,self.godot_owner,NULL,&ret)             # <<<<<<<<<<<<<<
  *     hello('hallo2')
@@ -23798,7 +23798,7 @@ static PyObject *__pyx_pf_7classes_15SpatialMaterial_15SpatialMaterial_50get_emi
  *   def  get_feature(self,  int feature):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_2 = __Pyx_PyInt_From___pyx_t_7classes_15SpatialMaterial_EmissionOperator((*__pyx_v_ret)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 1102, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyInt_From___pyx_t_7classes_15SpatialMaterial_SpatialMaterial_EmissionOperator((*__pyx_v_ret)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 1102, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_r = __pyx_t_2;
   __pyx_t_2 = 0;
@@ -24407,7 +24407,7 @@ static PyObject *__pyx_pw_7classes_15SpatialMaterial_15SpatialMaterial_63get_met
 
 static PyObject *__pyx_pf_7classes_15SpatialMaterial_15SpatialMaterial_62get_metallic_texture_channel(struct __pyx_obj_7classes_15SpatialMaterial_SpatialMaterial *__pyx_v_self) {
   CYTHON_UNUSED godot_object *__pyx_v__owner;
-  __pyx_t_7classes_15SpatialMaterial_TextureChannel *__pyx_v_ret;
+  __pyx_t_7classes_15SpatialMaterial_SpatialMaterial_TextureChannel *__pyx_v_ret;
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   godot_object *__pyx_t_1;
@@ -24422,7 +24422,7 @@ static PyObject *__pyx_pf_7classes_15SpatialMaterial_15SpatialMaterial_62get_met
  *   def  get_metallic_texture_channel(self):
  *     cdef godot_object *_owner = self.godot_owner             # <<<<<<<<<<<<<<
  * 
- *     cdef TextureChannel* ret = NULL;
+ *     cdef SpatialMaterial_TextureChannel* ret = NULL;
  */
   __pyx_t_1 = __pyx_v_self->__pyx_base.__pyx_base.__pyx_base.__pyx_base.__pyx_base.godot_owner;
   __pyx_v__owner = __pyx_t_1;
@@ -24430,14 +24430,14 @@ static PyObject *__pyx_pf_7classes_15SpatialMaterial_15SpatialMaterial_62get_met
   /* "classes/SpatialMaterial.pyx":1158
  *     cdef godot_object *_owner = self.godot_owner
  * 
- *     cdef TextureChannel* ret = NULL;             # <<<<<<<<<<<<<<
+ *     cdef SpatialMaterial_TextureChannel* ret = NULL;             # <<<<<<<<<<<<<<
  * 
  *     api_core.godot_method_bind_ptrcall(bind_spatialmaterial_get_metallic_texture_channel,self.godot_owner,NULL,&ret)
  */
   __pyx_v_ret = NULL;
 
   /* "classes/SpatialMaterial.pyx":1160
- *     cdef TextureChannel* ret = NULL;
+ *     cdef SpatialMaterial_TextureChannel* ret = NULL;
  * 
  *     api_core.godot_method_bind_ptrcall(bind_spatialmaterial_get_metallic_texture_channel,self.godot_owner,NULL,&ret)             # <<<<<<<<<<<<<<
  *     hello('hallo2')
@@ -24462,7 +24462,7 @@ static PyObject *__pyx_pf_7classes_15SpatialMaterial_15SpatialMaterial_62get_met
  *   def  get_normal_scale(self):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_2 = __Pyx_PyInt_From___pyx_t_7classes_15SpatialMaterial_TextureChannel((*__pyx_v_ret)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 1162, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyInt_From___pyx_t_7classes_15SpatialMaterial_SpatialMaterial_TextureChannel((*__pyx_v_ret)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 1162, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_r = __pyx_t_2;
   __pyx_t_2 = 0;
@@ -25231,7 +25231,7 @@ static PyObject *__pyx_pw_7classes_15SpatialMaterial_15SpatialMaterial_79get_ref
 
 static PyObject *__pyx_pf_7classes_15SpatialMaterial_15SpatialMaterial_78get_refraction_texture_channel(struct __pyx_obj_7classes_15SpatialMaterial_SpatialMaterial *__pyx_v_self) {
   CYTHON_UNUSED godot_object *__pyx_v__owner;
-  __pyx_t_7classes_15SpatialMaterial_TextureChannel *__pyx_v_ret;
+  __pyx_t_7classes_15SpatialMaterial_SpatialMaterial_TextureChannel *__pyx_v_ret;
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   godot_object *__pyx_t_1;
@@ -25246,7 +25246,7 @@ static PyObject *__pyx_pf_7classes_15SpatialMaterial_15SpatialMaterial_78get_ref
  *   def  get_refraction_texture_channel(self):
  *     cdef godot_object *_owner = self.godot_owner             # <<<<<<<<<<<<<<
  * 
- *     cdef TextureChannel* ret = NULL;
+ *     cdef SpatialMaterial_TextureChannel* ret = NULL;
  */
   __pyx_t_1 = __pyx_v_self->__pyx_base.__pyx_base.__pyx_base.__pyx_base.__pyx_base.godot_owner;
   __pyx_v__owner = __pyx_t_1;
@@ -25254,14 +25254,14 @@ static PyObject *__pyx_pf_7classes_15SpatialMaterial_15SpatialMaterial_78get_ref
   /* "classes/SpatialMaterial.pyx":1230
  *     cdef godot_object *_owner = self.godot_owner
  * 
- *     cdef TextureChannel* ret = NULL;             # <<<<<<<<<<<<<<
+ *     cdef SpatialMaterial_TextureChannel* ret = NULL;             # <<<<<<<<<<<<<<
  * 
  *     api_core.godot_method_bind_ptrcall(bind_spatialmaterial_get_refraction_texture_channel,self.godot_owner,NULL,&ret)
  */
   __pyx_v_ret = NULL;
 
   /* "classes/SpatialMaterial.pyx":1232
- *     cdef TextureChannel* ret = NULL;
+ *     cdef SpatialMaterial_TextureChannel* ret = NULL;
  * 
  *     api_core.godot_method_bind_ptrcall(bind_spatialmaterial_get_refraction_texture_channel,self.godot_owner,NULL,&ret)             # <<<<<<<<<<<<<<
  *     hello('hallo2')
@@ -25286,7 +25286,7 @@ static PyObject *__pyx_pf_7classes_15SpatialMaterial_15SpatialMaterial_78get_ref
  *   def  get_rim(self):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_2 = __Pyx_PyInt_From___pyx_t_7classes_15SpatialMaterial_TextureChannel((*__pyx_v_ret)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 1234, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyInt_From___pyx_t_7classes_15SpatialMaterial_SpatialMaterial_TextureChannel((*__pyx_v_ret)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 1234, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_r = __pyx_t_2;
   __pyx_t_2 = 0;
@@ -25643,7 +25643,7 @@ static PyObject *__pyx_pw_7classes_15SpatialMaterial_15SpatialMaterial_87get_rou
 
 static PyObject *__pyx_pf_7classes_15SpatialMaterial_15SpatialMaterial_86get_roughness_texture_channel(struct __pyx_obj_7classes_15SpatialMaterial_SpatialMaterial *__pyx_v_self) {
   CYTHON_UNUSED godot_object *__pyx_v__owner;
-  __pyx_t_7classes_15SpatialMaterial_TextureChannel *__pyx_v_ret;
+  __pyx_t_7classes_15SpatialMaterial_SpatialMaterial_TextureChannel *__pyx_v_ret;
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   godot_object *__pyx_t_1;
@@ -25658,7 +25658,7 @@ static PyObject *__pyx_pf_7classes_15SpatialMaterial_15SpatialMaterial_86get_rou
  *   def  get_roughness_texture_channel(self):
  *     cdef godot_object *_owner = self.godot_owner             # <<<<<<<<<<<<<<
  * 
- *     cdef TextureChannel* ret = NULL;
+ *     cdef SpatialMaterial_TextureChannel* ret = NULL;
  */
   __pyx_t_1 = __pyx_v_self->__pyx_base.__pyx_base.__pyx_base.__pyx_base.__pyx_base.godot_owner;
   __pyx_v__owner = __pyx_t_1;
@@ -25666,14 +25666,14 @@ static PyObject *__pyx_pf_7classes_15SpatialMaterial_15SpatialMaterial_86get_rou
   /* "classes/SpatialMaterial.pyx":1266
  *     cdef godot_object *_owner = self.godot_owner
  * 
- *     cdef TextureChannel* ret = NULL;             # <<<<<<<<<<<<<<
+ *     cdef SpatialMaterial_TextureChannel* ret = NULL;             # <<<<<<<<<<<<<<
  * 
  *     api_core.godot_method_bind_ptrcall(bind_spatialmaterial_get_roughness_texture_channel,self.godot_owner,NULL,&ret)
  */
   __pyx_v_ret = NULL;
 
   /* "classes/SpatialMaterial.pyx":1268
- *     cdef TextureChannel* ret = NULL;
+ *     cdef SpatialMaterial_TextureChannel* ret = NULL;
  * 
  *     api_core.godot_method_bind_ptrcall(bind_spatialmaterial_get_roughness_texture_channel,self.godot_owner,NULL,&ret)             # <<<<<<<<<<<<<<
  *     hello('hallo2')
@@ -25698,7 +25698,7 @@ static PyObject *__pyx_pf_7classes_15SpatialMaterial_15SpatialMaterial_86get_rou
  *   def  get_specular(self):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_2 = __Pyx_PyInt_From___pyx_t_7classes_15SpatialMaterial_TextureChannel((*__pyx_v_ret)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 1270, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyInt_From___pyx_t_7classes_15SpatialMaterial_SpatialMaterial_TextureChannel((*__pyx_v_ret)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 1270, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_r = __pyx_t_2;
   __pyx_t_2 = 0;
@@ -25849,7 +25849,7 @@ static PyObject *__pyx_pw_7classes_15SpatialMaterial_15SpatialMaterial_91get_spe
 
 static PyObject *__pyx_pf_7classes_15SpatialMaterial_15SpatialMaterial_90get_specular_mode(struct __pyx_obj_7classes_15SpatialMaterial_SpatialMaterial *__pyx_v_self) {
   CYTHON_UNUSED godot_object *__pyx_v__owner;
-  __pyx_t_7classes_15SpatialMaterial_SpecularMode *__pyx_v_ret;
+  __pyx_t_7classes_15SpatialMaterial_SpatialMaterial_SpecularMode *__pyx_v_ret;
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   godot_object *__pyx_t_1;
@@ -25864,7 +25864,7 @@ static PyObject *__pyx_pf_7classes_15SpatialMaterial_15SpatialMaterial_90get_spe
  *   def  get_specular_mode(self):
  *     cdef godot_object *_owner = self.godot_owner             # <<<<<<<<<<<<<<
  * 
- *     cdef SpecularMode* ret = NULL;
+ *     cdef SpatialMaterial_SpecularMode* ret = NULL;
  */
   __pyx_t_1 = __pyx_v_self->__pyx_base.__pyx_base.__pyx_base.__pyx_base.__pyx_base.godot_owner;
   __pyx_v__owner = __pyx_t_1;
@@ -25872,14 +25872,14 @@ static PyObject *__pyx_pf_7classes_15SpatialMaterial_15SpatialMaterial_90get_spe
   /* "classes/SpatialMaterial.pyx":1284
  *     cdef godot_object *_owner = self.godot_owner
  * 
- *     cdef SpecularMode* ret = NULL;             # <<<<<<<<<<<<<<
+ *     cdef SpatialMaterial_SpecularMode* ret = NULL;             # <<<<<<<<<<<<<<
  * 
  *     api_core.godot_method_bind_ptrcall(bind_spatialmaterial_get_specular_mode,self.godot_owner,NULL,&ret)
  */
   __pyx_v_ret = NULL;
 
   /* "classes/SpatialMaterial.pyx":1286
- *     cdef SpecularMode* ret = NULL;
+ *     cdef SpatialMaterial_SpecularMode* ret = NULL;
  * 
  *     api_core.godot_method_bind_ptrcall(bind_spatialmaterial_get_specular_mode,self.godot_owner,NULL,&ret)             # <<<<<<<<<<<<<<
  *     hello('hallo2')
@@ -25904,7 +25904,7 @@ static PyObject *__pyx_pf_7classes_15SpatialMaterial_15SpatialMaterial_90get_spe
  *   def  get_subsurface_scattering_strength(self):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_2 = __Pyx_PyInt_From___pyx_t_7classes_15SpatialMaterial_SpecularMode((*__pyx_v_ret)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 1288, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyInt_From___pyx_t_7classes_15SpatialMaterial_SpatialMaterial_SpecularMode((*__pyx_v_ret)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 1288, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_r = __pyx_t_2;
   __pyx_t_2 = 0;
@@ -33102,7 +33102,7 @@ static CYTHON_INLINE void __pyx_f_4core_7variant_7Variant_7Variant_new_variant(C
  *     cdef inline void new_variant(self, i):
  *         print("new_variant", type(i))             # <<<<<<<<<<<<<<
  * 
- * ctypedef enum Type:
+ * ctypedef enum Variant_Type:
  */
   __pyx_t_1 = PyTuple_New(2); if (unlikely(!__pyx_t_1)) __PYX_ERR(4, 15, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
@@ -36265,22 +36265,10 @@ static int __pyx_import_star_set(PyObject *o, PyObject* py_name, char *name) {
   static const char* internal_type_names[] = {
     "AABB",
     "Array",
-    "Axis",
     "Basis",
-    "BillboardMode",
-    "BlendMode",
     "Color",
-    "CullMode",
-    "DepthDrawMode",
-    "DetailUV",
     "Dictionary",
-    "DiffuseMode",
-    "DistanceFadeMode",
-    "EmissionOperator",
-    "Feature",
-    "Flags",
     "NodePath",
-    "Operator",
     "Plane",
     "PoolByteArray",
     "PoolColorArray",
@@ -36294,16 +36282,28 @@ static int __pyx_import_star_set(PyObject *o, PyObject* py_name, char *name) {
     "Rect2",
     "Reference",
     "SpatialMaterial",
-    "SpecularMode",
+    "SpatialMaterial_BillboardMode",
+    "SpatialMaterial_BlendMode",
+    "SpatialMaterial_CullMode",
+    "SpatialMaterial_DepthDrawMode",
+    "SpatialMaterial_DetailUV",
+    "SpatialMaterial_DiffuseMode",
+    "SpatialMaterial_DistanceFadeMode",
+    "SpatialMaterial_EmissionOperator",
+    "SpatialMaterial_Feature",
+    "SpatialMaterial_Flags",
+    "SpatialMaterial_SpecularMode",
+    "SpatialMaterial_TextureChannel",
+    "SpatialMaterial_TextureParam",
     "String",
-    "TextureChannel",
-    "TextureParam",
     "Transform",
     "Transform2D",
-    "Type",
     "Variant",
+    "Variant_Operator",
+    "Variant_Type",
     "Vector2",
     "Vector3",
+    "Vector3_Axis",
     "Wrapper",
     "bool",
     "godot_aabb",
@@ -39213,24 +39213,24 @@ bad:
     }
 
 /* CIntToPy */
-static CYTHON_INLINE PyObject* __Pyx_PyInt_From___pyx_t_7classes_15SpatialMaterial_TextureChannel(__pyx_t_7classes_15SpatialMaterial_TextureChannel value) {
-    const __pyx_t_7classes_15SpatialMaterial_TextureChannel neg_one = (__pyx_t_7classes_15SpatialMaterial_TextureChannel) ((__pyx_t_7classes_15SpatialMaterial_TextureChannel) 0 - (__pyx_t_7classes_15SpatialMaterial_TextureChannel) 1), const_zero = (__pyx_t_7classes_15SpatialMaterial_TextureChannel) 0;
+static CYTHON_INLINE PyObject* __Pyx_PyInt_From___pyx_t_7classes_15SpatialMaterial_SpatialMaterial_TextureChannel(__pyx_t_7classes_15SpatialMaterial_SpatialMaterial_TextureChannel value) {
+    const __pyx_t_7classes_15SpatialMaterial_SpatialMaterial_TextureChannel neg_one = (__pyx_t_7classes_15SpatialMaterial_SpatialMaterial_TextureChannel) ((__pyx_t_7classes_15SpatialMaterial_SpatialMaterial_TextureChannel) 0 - (__pyx_t_7classes_15SpatialMaterial_SpatialMaterial_TextureChannel) 1), const_zero = (__pyx_t_7classes_15SpatialMaterial_SpatialMaterial_TextureChannel) 0;
     const int is_unsigned = neg_one > const_zero;
     if (is_unsigned) {
-        if (sizeof(__pyx_t_7classes_15SpatialMaterial_TextureChannel) < sizeof(long)) {
+        if (sizeof(__pyx_t_7classes_15SpatialMaterial_SpatialMaterial_TextureChannel) < sizeof(long)) {
             return PyInt_FromLong((long) value);
-        } else if (sizeof(__pyx_t_7classes_15SpatialMaterial_TextureChannel) <= sizeof(unsigned long)) {
+        } else if (sizeof(__pyx_t_7classes_15SpatialMaterial_SpatialMaterial_TextureChannel) <= sizeof(unsigned long)) {
             return PyLong_FromUnsignedLong((unsigned long) value);
 #ifdef HAVE_LONG_LONG
-        } else if (sizeof(__pyx_t_7classes_15SpatialMaterial_TextureChannel) <= sizeof(unsigned PY_LONG_LONG)) {
+        } else if (sizeof(__pyx_t_7classes_15SpatialMaterial_SpatialMaterial_TextureChannel) <= sizeof(unsigned PY_LONG_LONG)) {
             return PyLong_FromUnsignedLongLong((unsigned PY_LONG_LONG) value);
 #endif
         }
     } else {
-        if (sizeof(__pyx_t_7classes_15SpatialMaterial_TextureChannel) <= sizeof(long)) {
+        if (sizeof(__pyx_t_7classes_15SpatialMaterial_SpatialMaterial_TextureChannel) <= sizeof(long)) {
             return PyInt_FromLong((long) value);
 #ifdef HAVE_LONG_LONG
-        } else if (sizeof(__pyx_t_7classes_15SpatialMaterial_TextureChannel) <= sizeof(PY_LONG_LONG)) {
+        } else if (sizeof(__pyx_t_7classes_15SpatialMaterial_SpatialMaterial_TextureChannel) <= sizeof(PY_LONG_LONG)) {
             return PyLong_FromLongLong((PY_LONG_LONG) value);
 #endif
         }
@@ -39238,30 +39238,30 @@ static CYTHON_INLINE PyObject* __Pyx_PyInt_From___pyx_t_7classes_15SpatialMateri
     {
         int one = 1; int little = (int)*(unsigned char *)&one;
         unsigned char *bytes = (unsigned char *)&value;
-        return _PyLong_FromByteArray(bytes, sizeof(__pyx_t_7classes_15SpatialMaterial_TextureChannel),
+        return _PyLong_FromByteArray(bytes, sizeof(__pyx_t_7classes_15SpatialMaterial_SpatialMaterial_TextureChannel),
                                      little, !is_unsigned);
     }
 }
 
 /* CIntToPy */
-static CYTHON_INLINE PyObject* __Pyx_PyInt_From___pyx_t_7classes_15SpatialMaterial_BillboardMode(__pyx_t_7classes_15SpatialMaterial_BillboardMode value) {
-    const __pyx_t_7classes_15SpatialMaterial_BillboardMode neg_one = (__pyx_t_7classes_15SpatialMaterial_BillboardMode) ((__pyx_t_7classes_15SpatialMaterial_BillboardMode) 0 - (__pyx_t_7classes_15SpatialMaterial_BillboardMode) 1), const_zero = (__pyx_t_7classes_15SpatialMaterial_BillboardMode) 0;
+static CYTHON_INLINE PyObject* __Pyx_PyInt_From___pyx_t_7classes_15SpatialMaterial_SpatialMaterial_BillboardMode(__pyx_t_7classes_15SpatialMaterial_SpatialMaterial_BillboardMode value) {
+    const __pyx_t_7classes_15SpatialMaterial_SpatialMaterial_BillboardMode neg_one = (__pyx_t_7classes_15SpatialMaterial_SpatialMaterial_BillboardMode) ((__pyx_t_7classes_15SpatialMaterial_SpatialMaterial_BillboardMode) 0 - (__pyx_t_7classes_15SpatialMaterial_SpatialMaterial_BillboardMode) 1), const_zero = (__pyx_t_7classes_15SpatialMaterial_SpatialMaterial_BillboardMode) 0;
     const int is_unsigned = neg_one > const_zero;
     if (is_unsigned) {
-        if (sizeof(__pyx_t_7classes_15SpatialMaterial_BillboardMode) < sizeof(long)) {
+        if (sizeof(__pyx_t_7classes_15SpatialMaterial_SpatialMaterial_BillboardMode) < sizeof(long)) {
             return PyInt_FromLong((long) value);
-        } else if (sizeof(__pyx_t_7classes_15SpatialMaterial_BillboardMode) <= sizeof(unsigned long)) {
+        } else if (sizeof(__pyx_t_7classes_15SpatialMaterial_SpatialMaterial_BillboardMode) <= sizeof(unsigned long)) {
             return PyLong_FromUnsignedLong((unsigned long) value);
 #ifdef HAVE_LONG_LONG
-        } else if (sizeof(__pyx_t_7classes_15SpatialMaterial_BillboardMode) <= sizeof(unsigned PY_LONG_LONG)) {
+        } else if (sizeof(__pyx_t_7classes_15SpatialMaterial_SpatialMaterial_BillboardMode) <= sizeof(unsigned PY_LONG_LONG)) {
             return PyLong_FromUnsignedLongLong((unsigned PY_LONG_LONG) value);
 #endif
         }
     } else {
-        if (sizeof(__pyx_t_7classes_15SpatialMaterial_BillboardMode) <= sizeof(long)) {
+        if (sizeof(__pyx_t_7classes_15SpatialMaterial_SpatialMaterial_BillboardMode) <= sizeof(long)) {
             return PyInt_FromLong((long) value);
 #ifdef HAVE_LONG_LONG
-        } else if (sizeof(__pyx_t_7classes_15SpatialMaterial_BillboardMode) <= sizeof(PY_LONG_LONG)) {
+        } else if (sizeof(__pyx_t_7classes_15SpatialMaterial_SpatialMaterial_BillboardMode) <= sizeof(PY_LONG_LONG)) {
             return PyLong_FromLongLong((PY_LONG_LONG) value);
 #endif
         }
@@ -39269,30 +39269,30 @@ static CYTHON_INLINE PyObject* __Pyx_PyInt_From___pyx_t_7classes_15SpatialMateri
     {
         int one = 1; int little = (int)*(unsigned char *)&one;
         unsigned char *bytes = (unsigned char *)&value;
-        return _PyLong_FromByteArray(bytes, sizeof(__pyx_t_7classes_15SpatialMaterial_BillboardMode),
+        return _PyLong_FromByteArray(bytes, sizeof(__pyx_t_7classes_15SpatialMaterial_SpatialMaterial_BillboardMode),
                                      little, !is_unsigned);
     }
 }
 
 /* CIntToPy */
-static CYTHON_INLINE PyObject* __Pyx_PyInt_From___pyx_t_7classes_15SpatialMaterial_BlendMode(__pyx_t_7classes_15SpatialMaterial_BlendMode value) {
-    const __pyx_t_7classes_15SpatialMaterial_BlendMode neg_one = (__pyx_t_7classes_15SpatialMaterial_BlendMode) ((__pyx_t_7classes_15SpatialMaterial_BlendMode) 0 - (__pyx_t_7classes_15SpatialMaterial_BlendMode) 1), const_zero = (__pyx_t_7classes_15SpatialMaterial_BlendMode) 0;
+static CYTHON_INLINE PyObject* __Pyx_PyInt_From___pyx_t_7classes_15SpatialMaterial_SpatialMaterial_BlendMode(__pyx_t_7classes_15SpatialMaterial_SpatialMaterial_BlendMode value) {
+    const __pyx_t_7classes_15SpatialMaterial_SpatialMaterial_BlendMode neg_one = (__pyx_t_7classes_15SpatialMaterial_SpatialMaterial_BlendMode) ((__pyx_t_7classes_15SpatialMaterial_SpatialMaterial_BlendMode) 0 - (__pyx_t_7classes_15SpatialMaterial_SpatialMaterial_BlendMode) 1), const_zero = (__pyx_t_7classes_15SpatialMaterial_SpatialMaterial_BlendMode) 0;
     const int is_unsigned = neg_one > const_zero;
     if (is_unsigned) {
-        if (sizeof(__pyx_t_7classes_15SpatialMaterial_BlendMode) < sizeof(long)) {
+        if (sizeof(__pyx_t_7classes_15SpatialMaterial_SpatialMaterial_BlendMode) < sizeof(long)) {
             return PyInt_FromLong((long) value);
-        } else if (sizeof(__pyx_t_7classes_15SpatialMaterial_BlendMode) <= sizeof(unsigned long)) {
+        } else if (sizeof(__pyx_t_7classes_15SpatialMaterial_SpatialMaterial_BlendMode) <= sizeof(unsigned long)) {
             return PyLong_FromUnsignedLong((unsigned long) value);
 #ifdef HAVE_LONG_LONG
-        } else if (sizeof(__pyx_t_7classes_15SpatialMaterial_BlendMode) <= sizeof(unsigned PY_LONG_LONG)) {
+        } else if (sizeof(__pyx_t_7classes_15SpatialMaterial_SpatialMaterial_BlendMode) <= sizeof(unsigned PY_LONG_LONG)) {
             return PyLong_FromUnsignedLongLong((unsigned PY_LONG_LONG) value);
 #endif
         }
     } else {
-        if (sizeof(__pyx_t_7classes_15SpatialMaterial_BlendMode) <= sizeof(long)) {
+        if (sizeof(__pyx_t_7classes_15SpatialMaterial_SpatialMaterial_BlendMode) <= sizeof(long)) {
             return PyInt_FromLong((long) value);
 #ifdef HAVE_LONG_LONG
-        } else if (sizeof(__pyx_t_7classes_15SpatialMaterial_BlendMode) <= sizeof(PY_LONG_LONG)) {
+        } else if (sizeof(__pyx_t_7classes_15SpatialMaterial_SpatialMaterial_BlendMode) <= sizeof(PY_LONG_LONG)) {
             return PyLong_FromLongLong((PY_LONG_LONG) value);
 #endif
         }
@@ -39300,30 +39300,30 @@ static CYTHON_INLINE PyObject* __Pyx_PyInt_From___pyx_t_7classes_15SpatialMateri
     {
         int one = 1; int little = (int)*(unsigned char *)&one;
         unsigned char *bytes = (unsigned char *)&value;
-        return _PyLong_FromByteArray(bytes, sizeof(__pyx_t_7classes_15SpatialMaterial_BlendMode),
+        return _PyLong_FromByteArray(bytes, sizeof(__pyx_t_7classes_15SpatialMaterial_SpatialMaterial_BlendMode),
                                      little, !is_unsigned);
     }
 }
 
 /* CIntToPy */
-static CYTHON_INLINE PyObject* __Pyx_PyInt_From___pyx_t_7classes_15SpatialMaterial_CullMode(__pyx_t_7classes_15SpatialMaterial_CullMode value) {
-    const __pyx_t_7classes_15SpatialMaterial_CullMode neg_one = (__pyx_t_7classes_15SpatialMaterial_CullMode) ((__pyx_t_7classes_15SpatialMaterial_CullMode) 0 - (__pyx_t_7classes_15SpatialMaterial_CullMode) 1), const_zero = (__pyx_t_7classes_15SpatialMaterial_CullMode) 0;
+static CYTHON_INLINE PyObject* __Pyx_PyInt_From___pyx_t_7classes_15SpatialMaterial_SpatialMaterial_CullMode(__pyx_t_7classes_15SpatialMaterial_SpatialMaterial_CullMode value) {
+    const __pyx_t_7classes_15SpatialMaterial_SpatialMaterial_CullMode neg_one = (__pyx_t_7classes_15SpatialMaterial_SpatialMaterial_CullMode) ((__pyx_t_7classes_15SpatialMaterial_SpatialMaterial_CullMode) 0 - (__pyx_t_7classes_15SpatialMaterial_SpatialMaterial_CullMode) 1), const_zero = (__pyx_t_7classes_15SpatialMaterial_SpatialMaterial_CullMode) 0;
     const int is_unsigned = neg_one > const_zero;
     if (is_unsigned) {
-        if (sizeof(__pyx_t_7classes_15SpatialMaterial_CullMode) < sizeof(long)) {
+        if (sizeof(__pyx_t_7classes_15SpatialMaterial_SpatialMaterial_CullMode) < sizeof(long)) {
             return PyInt_FromLong((long) value);
-        } else if (sizeof(__pyx_t_7classes_15SpatialMaterial_CullMode) <= sizeof(unsigned long)) {
+        } else if (sizeof(__pyx_t_7classes_15SpatialMaterial_SpatialMaterial_CullMode) <= sizeof(unsigned long)) {
             return PyLong_FromUnsignedLong((unsigned long) value);
 #ifdef HAVE_LONG_LONG
-        } else if (sizeof(__pyx_t_7classes_15SpatialMaterial_CullMode) <= sizeof(unsigned PY_LONG_LONG)) {
+        } else if (sizeof(__pyx_t_7classes_15SpatialMaterial_SpatialMaterial_CullMode) <= sizeof(unsigned PY_LONG_LONG)) {
             return PyLong_FromUnsignedLongLong((unsigned PY_LONG_LONG) value);
 #endif
         }
     } else {
-        if (sizeof(__pyx_t_7classes_15SpatialMaterial_CullMode) <= sizeof(long)) {
+        if (sizeof(__pyx_t_7classes_15SpatialMaterial_SpatialMaterial_CullMode) <= sizeof(long)) {
             return PyInt_FromLong((long) value);
 #ifdef HAVE_LONG_LONG
-        } else if (sizeof(__pyx_t_7classes_15SpatialMaterial_CullMode) <= sizeof(PY_LONG_LONG)) {
+        } else if (sizeof(__pyx_t_7classes_15SpatialMaterial_SpatialMaterial_CullMode) <= sizeof(PY_LONG_LONG)) {
             return PyLong_FromLongLong((PY_LONG_LONG) value);
 #endif
         }
@@ -39331,7 +39331,7 @@ static CYTHON_INLINE PyObject* __Pyx_PyInt_From___pyx_t_7classes_15SpatialMateri
     {
         int one = 1; int little = (int)*(unsigned char *)&one;
         unsigned char *bytes = (unsigned char *)&value;
-        return _PyLong_FromByteArray(bytes, sizeof(__pyx_t_7classes_15SpatialMaterial_CullMode),
+        return _PyLong_FromByteArray(bytes, sizeof(__pyx_t_7classes_15SpatialMaterial_SpatialMaterial_CullMode),
                                      little, !is_unsigned);
     }
 }
@@ -39368,24 +39368,24 @@ static CYTHON_INLINE PyObject* __Pyx_PyInt_From_int(int value) {
 }
 
 /* CIntToPy */
-static CYTHON_INLINE PyObject* __Pyx_PyInt_From___pyx_t_7classes_15SpatialMaterial_DepthDrawMode(__pyx_t_7classes_15SpatialMaterial_DepthDrawMode value) {
-    const __pyx_t_7classes_15SpatialMaterial_DepthDrawMode neg_one = (__pyx_t_7classes_15SpatialMaterial_DepthDrawMode) ((__pyx_t_7classes_15SpatialMaterial_DepthDrawMode) 0 - (__pyx_t_7classes_15SpatialMaterial_DepthDrawMode) 1), const_zero = (__pyx_t_7classes_15SpatialMaterial_DepthDrawMode) 0;
+static CYTHON_INLINE PyObject* __Pyx_PyInt_From___pyx_t_7classes_15SpatialMaterial_SpatialMaterial_DepthDrawMode(__pyx_t_7classes_15SpatialMaterial_SpatialMaterial_DepthDrawMode value) {
+    const __pyx_t_7classes_15SpatialMaterial_SpatialMaterial_DepthDrawMode neg_one = (__pyx_t_7classes_15SpatialMaterial_SpatialMaterial_DepthDrawMode) ((__pyx_t_7classes_15SpatialMaterial_SpatialMaterial_DepthDrawMode) 0 - (__pyx_t_7classes_15SpatialMaterial_SpatialMaterial_DepthDrawMode) 1), const_zero = (__pyx_t_7classes_15SpatialMaterial_SpatialMaterial_DepthDrawMode) 0;
     const int is_unsigned = neg_one > const_zero;
     if (is_unsigned) {
-        if (sizeof(__pyx_t_7classes_15SpatialMaterial_DepthDrawMode) < sizeof(long)) {
+        if (sizeof(__pyx_t_7classes_15SpatialMaterial_SpatialMaterial_DepthDrawMode) < sizeof(long)) {
             return PyInt_FromLong((long) value);
-        } else if (sizeof(__pyx_t_7classes_15SpatialMaterial_DepthDrawMode) <= sizeof(unsigned long)) {
+        } else if (sizeof(__pyx_t_7classes_15SpatialMaterial_SpatialMaterial_DepthDrawMode) <= sizeof(unsigned long)) {
             return PyLong_FromUnsignedLong((unsigned long) value);
 #ifdef HAVE_LONG_LONG
-        } else if (sizeof(__pyx_t_7classes_15SpatialMaterial_DepthDrawMode) <= sizeof(unsigned PY_LONG_LONG)) {
+        } else if (sizeof(__pyx_t_7classes_15SpatialMaterial_SpatialMaterial_DepthDrawMode) <= sizeof(unsigned PY_LONG_LONG)) {
             return PyLong_FromUnsignedLongLong((unsigned PY_LONG_LONG) value);
 #endif
         }
     } else {
-        if (sizeof(__pyx_t_7classes_15SpatialMaterial_DepthDrawMode) <= sizeof(long)) {
+        if (sizeof(__pyx_t_7classes_15SpatialMaterial_SpatialMaterial_DepthDrawMode) <= sizeof(long)) {
             return PyInt_FromLong((long) value);
 #ifdef HAVE_LONG_LONG
-        } else if (sizeof(__pyx_t_7classes_15SpatialMaterial_DepthDrawMode) <= sizeof(PY_LONG_LONG)) {
+        } else if (sizeof(__pyx_t_7classes_15SpatialMaterial_SpatialMaterial_DepthDrawMode) <= sizeof(PY_LONG_LONG)) {
             return PyLong_FromLongLong((PY_LONG_LONG) value);
 #endif
         }
@@ -39393,30 +39393,30 @@ static CYTHON_INLINE PyObject* __Pyx_PyInt_From___pyx_t_7classes_15SpatialMateri
     {
         int one = 1; int little = (int)*(unsigned char *)&one;
         unsigned char *bytes = (unsigned char *)&value;
-        return _PyLong_FromByteArray(bytes, sizeof(__pyx_t_7classes_15SpatialMaterial_DepthDrawMode),
+        return _PyLong_FromByteArray(bytes, sizeof(__pyx_t_7classes_15SpatialMaterial_SpatialMaterial_DepthDrawMode),
                                      little, !is_unsigned);
     }
 }
 
 /* CIntToPy */
-static CYTHON_INLINE PyObject* __Pyx_PyInt_From___pyx_t_7classes_15SpatialMaterial_DetailUV(__pyx_t_7classes_15SpatialMaterial_DetailUV value) {
-    const __pyx_t_7classes_15SpatialMaterial_DetailUV neg_one = (__pyx_t_7classes_15SpatialMaterial_DetailUV) ((__pyx_t_7classes_15SpatialMaterial_DetailUV) 0 - (__pyx_t_7classes_15SpatialMaterial_DetailUV) 1), const_zero = (__pyx_t_7classes_15SpatialMaterial_DetailUV) 0;
+static CYTHON_INLINE PyObject* __Pyx_PyInt_From___pyx_t_7classes_15SpatialMaterial_SpatialMaterial_DetailUV(__pyx_t_7classes_15SpatialMaterial_SpatialMaterial_DetailUV value) {
+    const __pyx_t_7classes_15SpatialMaterial_SpatialMaterial_DetailUV neg_one = (__pyx_t_7classes_15SpatialMaterial_SpatialMaterial_DetailUV) ((__pyx_t_7classes_15SpatialMaterial_SpatialMaterial_DetailUV) 0 - (__pyx_t_7classes_15SpatialMaterial_SpatialMaterial_DetailUV) 1), const_zero = (__pyx_t_7classes_15SpatialMaterial_SpatialMaterial_DetailUV) 0;
     const int is_unsigned = neg_one > const_zero;
     if (is_unsigned) {
-        if (sizeof(__pyx_t_7classes_15SpatialMaterial_DetailUV) < sizeof(long)) {
+        if (sizeof(__pyx_t_7classes_15SpatialMaterial_SpatialMaterial_DetailUV) < sizeof(long)) {
             return PyInt_FromLong((long) value);
-        } else if (sizeof(__pyx_t_7classes_15SpatialMaterial_DetailUV) <= sizeof(unsigned long)) {
+        } else if (sizeof(__pyx_t_7classes_15SpatialMaterial_SpatialMaterial_DetailUV) <= sizeof(unsigned long)) {
             return PyLong_FromUnsignedLong((unsigned long) value);
 #ifdef HAVE_LONG_LONG
-        } else if (sizeof(__pyx_t_7classes_15SpatialMaterial_DetailUV) <= sizeof(unsigned PY_LONG_LONG)) {
+        } else if (sizeof(__pyx_t_7classes_15SpatialMaterial_SpatialMaterial_DetailUV) <= sizeof(unsigned PY_LONG_LONG)) {
             return PyLong_FromUnsignedLongLong((unsigned PY_LONG_LONG) value);
 #endif
         }
     } else {
-        if (sizeof(__pyx_t_7classes_15SpatialMaterial_DetailUV) <= sizeof(long)) {
+        if (sizeof(__pyx_t_7classes_15SpatialMaterial_SpatialMaterial_DetailUV) <= sizeof(long)) {
             return PyInt_FromLong((long) value);
 #ifdef HAVE_LONG_LONG
-        } else if (sizeof(__pyx_t_7classes_15SpatialMaterial_DetailUV) <= sizeof(PY_LONG_LONG)) {
+        } else if (sizeof(__pyx_t_7classes_15SpatialMaterial_SpatialMaterial_DetailUV) <= sizeof(PY_LONG_LONG)) {
             return PyLong_FromLongLong((PY_LONG_LONG) value);
 #endif
         }
@@ -39424,30 +39424,30 @@ static CYTHON_INLINE PyObject* __Pyx_PyInt_From___pyx_t_7classes_15SpatialMateri
     {
         int one = 1; int little = (int)*(unsigned char *)&one;
         unsigned char *bytes = (unsigned char *)&value;
-        return _PyLong_FromByteArray(bytes, sizeof(__pyx_t_7classes_15SpatialMaterial_DetailUV),
+        return _PyLong_FromByteArray(bytes, sizeof(__pyx_t_7classes_15SpatialMaterial_SpatialMaterial_DetailUV),
                                      little, !is_unsigned);
     }
 }
 
 /* CIntToPy */
-static CYTHON_INLINE PyObject* __Pyx_PyInt_From___pyx_t_7classes_15SpatialMaterial_DiffuseMode(__pyx_t_7classes_15SpatialMaterial_DiffuseMode value) {
-    const __pyx_t_7classes_15SpatialMaterial_DiffuseMode neg_one = (__pyx_t_7classes_15SpatialMaterial_DiffuseMode) ((__pyx_t_7classes_15SpatialMaterial_DiffuseMode) 0 - (__pyx_t_7classes_15SpatialMaterial_DiffuseMode) 1), const_zero = (__pyx_t_7classes_15SpatialMaterial_DiffuseMode) 0;
+static CYTHON_INLINE PyObject* __Pyx_PyInt_From___pyx_t_7classes_15SpatialMaterial_SpatialMaterial_DiffuseMode(__pyx_t_7classes_15SpatialMaterial_SpatialMaterial_DiffuseMode value) {
+    const __pyx_t_7classes_15SpatialMaterial_SpatialMaterial_DiffuseMode neg_one = (__pyx_t_7classes_15SpatialMaterial_SpatialMaterial_DiffuseMode) ((__pyx_t_7classes_15SpatialMaterial_SpatialMaterial_DiffuseMode) 0 - (__pyx_t_7classes_15SpatialMaterial_SpatialMaterial_DiffuseMode) 1), const_zero = (__pyx_t_7classes_15SpatialMaterial_SpatialMaterial_DiffuseMode) 0;
     const int is_unsigned = neg_one > const_zero;
     if (is_unsigned) {
-        if (sizeof(__pyx_t_7classes_15SpatialMaterial_DiffuseMode) < sizeof(long)) {
+        if (sizeof(__pyx_t_7classes_15SpatialMaterial_SpatialMaterial_DiffuseMode) < sizeof(long)) {
             return PyInt_FromLong((long) value);
-        } else if (sizeof(__pyx_t_7classes_15SpatialMaterial_DiffuseMode) <= sizeof(unsigned long)) {
+        } else if (sizeof(__pyx_t_7classes_15SpatialMaterial_SpatialMaterial_DiffuseMode) <= sizeof(unsigned long)) {
             return PyLong_FromUnsignedLong((unsigned long) value);
 #ifdef HAVE_LONG_LONG
-        } else if (sizeof(__pyx_t_7classes_15SpatialMaterial_DiffuseMode) <= sizeof(unsigned PY_LONG_LONG)) {
+        } else if (sizeof(__pyx_t_7classes_15SpatialMaterial_SpatialMaterial_DiffuseMode) <= sizeof(unsigned PY_LONG_LONG)) {
             return PyLong_FromUnsignedLongLong((unsigned PY_LONG_LONG) value);
 #endif
         }
     } else {
-        if (sizeof(__pyx_t_7classes_15SpatialMaterial_DiffuseMode) <= sizeof(long)) {
+        if (sizeof(__pyx_t_7classes_15SpatialMaterial_SpatialMaterial_DiffuseMode) <= sizeof(long)) {
             return PyInt_FromLong((long) value);
 #ifdef HAVE_LONG_LONG
-        } else if (sizeof(__pyx_t_7classes_15SpatialMaterial_DiffuseMode) <= sizeof(PY_LONG_LONG)) {
+        } else if (sizeof(__pyx_t_7classes_15SpatialMaterial_SpatialMaterial_DiffuseMode) <= sizeof(PY_LONG_LONG)) {
             return PyLong_FromLongLong((PY_LONG_LONG) value);
 #endif
         }
@@ -39455,30 +39455,30 @@ static CYTHON_INLINE PyObject* __Pyx_PyInt_From___pyx_t_7classes_15SpatialMateri
     {
         int one = 1; int little = (int)*(unsigned char *)&one;
         unsigned char *bytes = (unsigned char *)&value;
-        return _PyLong_FromByteArray(bytes, sizeof(__pyx_t_7classes_15SpatialMaterial_DiffuseMode),
+        return _PyLong_FromByteArray(bytes, sizeof(__pyx_t_7classes_15SpatialMaterial_SpatialMaterial_DiffuseMode),
                                      little, !is_unsigned);
     }
 }
 
 /* CIntToPy */
-static CYTHON_INLINE PyObject* __Pyx_PyInt_From___pyx_t_7classes_15SpatialMaterial_DistanceFadeMode(__pyx_t_7classes_15SpatialMaterial_DistanceFadeMode value) {
-    const __pyx_t_7classes_15SpatialMaterial_DistanceFadeMode neg_one = (__pyx_t_7classes_15SpatialMaterial_DistanceFadeMode) ((__pyx_t_7classes_15SpatialMaterial_DistanceFadeMode) 0 - (__pyx_t_7classes_15SpatialMaterial_DistanceFadeMode) 1), const_zero = (__pyx_t_7classes_15SpatialMaterial_DistanceFadeMode) 0;
+static CYTHON_INLINE PyObject* __Pyx_PyInt_From___pyx_t_7classes_15SpatialMaterial_SpatialMaterial_DistanceFadeMode(__pyx_t_7classes_15SpatialMaterial_SpatialMaterial_DistanceFadeMode value) {
+    const __pyx_t_7classes_15SpatialMaterial_SpatialMaterial_DistanceFadeMode neg_one = (__pyx_t_7classes_15SpatialMaterial_SpatialMaterial_DistanceFadeMode) ((__pyx_t_7classes_15SpatialMaterial_SpatialMaterial_DistanceFadeMode) 0 - (__pyx_t_7classes_15SpatialMaterial_SpatialMaterial_DistanceFadeMode) 1), const_zero = (__pyx_t_7classes_15SpatialMaterial_SpatialMaterial_DistanceFadeMode) 0;
     const int is_unsigned = neg_one > const_zero;
     if (is_unsigned) {
-        if (sizeof(__pyx_t_7classes_15SpatialMaterial_DistanceFadeMode) < sizeof(long)) {
+        if (sizeof(__pyx_t_7classes_15SpatialMaterial_SpatialMaterial_DistanceFadeMode) < sizeof(long)) {
             return PyInt_FromLong((long) value);
-        } else if (sizeof(__pyx_t_7classes_15SpatialMaterial_DistanceFadeMode) <= sizeof(unsigned long)) {
+        } else if (sizeof(__pyx_t_7classes_15SpatialMaterial_SpatialMaterial_DistanceFadeMode) <= sizeof(unsigned long)) {
             return PyLong_FromUnsignedLong((unsigned long) value);
 #ifdef HAVE_LONG_LONG
-        } else if (sizeof(__pyx_t_7classes_15SpatialMaterial_DistanceFadeMode) <= sizeof(unsigned PY_LONG_LONG)) {
+        } else if (sizeof(__pyx_t_7classes_15SpatialMaterial_SpatialMaterial_DistanceFadeMode) <= sizeof(unsigned PY_LONG_LONG)) {
             return PyLong_FromUnsignedLongLong((unsigned PY_LONG_LONG) value);
 #endif
         }
     } else {
-        if (sizeof(__pyx_t_7classes_15SpatialMaterial_DistanceFadeMode) <= sizeof(long)) {
+        if (sizeof(__pyx_t_7classes_15SpatialMaterial_SpatialMaterial_DistanceFadeMode) <= sizeof(long)) {
             return PyInt_FromLong((long) value);
 #ifdef HAVE_LONG_LONG
-        } else if (sizeof(__pyx_t_7classes_15SpatialMaterial_DistanceFadeMode) <= sizeof(PY_LONG_LONG)) {
+        } else if (sizeof(__pyx_t_7classes_15SpatialMaterial_SpatialMaterial_DistanceFadeMode) <= sizeof(PY_LONG_LONG)) {
             return PyLong_FromLongLong((PY_LONG_LONG) value);
 #endif
         }
@@ -39486,30 +39486,30 @@ static CYTHON_INLINE PyObject* __Pyx_PyInt_From___pyx_t_7classes_15SpatialMateri
     {
         int one = 1; int little = (int)*(unsigned char *)&one;
         unsigned char *bytes = (unsigned char *)&value;
-        return _PyLong_FromByteArray(bytes, sizeof(__pyx_t_7classes_15SpatialMaterial_DistanceFadeMode),
+        return _PyLong_FromByteArray(bytes, sizeof(__pyx_t_7classes_15SpatialMaterial_SpatialMaterial_DistanceFadeMode),
                                      little, !is_unsigned);
     }
 }
 
 /* CIntToPy */
-static CYTHON_INLINE PyObject* __Pyx_PyInt_From___pyx_t_7classes_15SpatialMaterial_EmissionOperator(__pyx_t_7classes_15SpatialMaterial_EmissionOperator value) {
-    const __pyx_t_7classes_15SpatialMaterial_EmissionOperator neg_one = (__pyx_t_7classes_15SpatialMaterial_EmissionOperator) ((__pyx_t_7classes_15SpatialMaterial_EmissionOperator) 0 - (__pyx_t_7classes_15SpatialMaterial_EmissionOperator) 1), const_zero = (__pyx_t_7classes_15SpatialMaterial_EmissionOperator) 0;
+static CYTHON_INLINE PyObject* __Pyx_PyInt_From___pyx_t_7classes_15SpatialMaterial_SpatialMaterial_EmissionOperator(__pyx_t_7classes_15SpatialMaterial_SpatialMaterial_EmissionOperator value) {
+    const __pyx_t_7classes_15SpatialMaterial_SpatialMaterial_EmissionOperator neg_one = (__pyx_t_7classes_15SpatialMaterial_SpatialMaterial_EmissionOperator) ((__pyx_t_7classes_15SpatialMaterial_SpatialMaterial_EmissionOperator) 0 - (__pyx_t_7classes_15SpatialMaterial_SpatialMaterial_EmissionOperator) 1), const_zero = (__pyx_t_7classes_15SpatialMaterial_SpatialMaterial_EmissionOperator) 0;
     const int is_unsigned = neg_one > const_zero;
     if (is_unsigned) {
-        if (sizeof(__pyx_t_7classes_15SpatialMaterial_EmissionOperator) < sizeof(long)) {
+        if (sizeof(__pyx_t_7classes_15SpatialMaterial_SpatialMaterial_EmissionOperator) < sizeof(long)) {
             return PyInt_FromLong((long) value);
-        } else if (sizeof(__pyx_t_7classes_15SpatialMaterial_EmissionOperator) <= sizeof(unsigned long)) {
+        } else if (sizeof(__pyx_t_7classes_15SpatialMaterial_SpatialMaterial_EmissionOperator) <= sizeof(unsigned long)) {
             return PyLong_FromUnsignedLong((unsigned long) value);
 #ifdef HAVE_LONG_LONG
-        } else if (sizeof(__pyx_t_7classes_15SpatialMaterial_EmissionOperator) <= sizeof(unsigned PY_LONG_LONG)) {
+        } else if (sizeof(__pyx_t_7classes_15SpatialMaterial_SpatialMaterial_EmissionOperator) <= sizeof(unsigned PY_LONG_LONG)) {
             return PyLong_FromUnsignedLongLong((unsigned PY_LONG_LONG) value);
 #endif
         }
     } else {
-        if (sizeof(__pyx_t_7classes_15SpatialMaterial_EmissionOperator) <= sizeof(long)) {
+        if (sizeof(__pyx_t_7classes_15SpatialMaterial_SpatialMaterial_EmissionOperator) <= sizeof(long)) {
             return PyInt_FromLong((long) value);
 #ifdef HAVE_LONG_LONG
-        } else if (sizeof(__pyx_t_7classes_15SpatialMaterial_EmissionOperator) <= sizeof(PY_LONG_LONG)) {
+        } else if (sizeof(__pyx_t_7classes_15SpatialMaterial_SpatialMaterial_EmissionOperator) <= sizeof(PY_LONG_LONG)) {
             return PyLong_FromLongLong((PY_LONG_LONG) value);
 #endif
         }
@@ -39517,30 +39517,30 @@ static CYTHON_INLINE PyObject* __Pyx_PyInt_From___pyx_t_7classes_15SpatialMateri
     {
         int one = 1; int little = (int)*(unsigned char *)&one;
         unsigned char *bytes = (unsigned char *)&value;
-        return _PyLong_FromByteArray(bytes, sizeof(__pyx_t_7classes_15SpatialMaterial_EmissionOperator),
+        return _PyLong_FromByteArray(bytes, sizeof(__pyx_t_7classes_15SpatialMaterial_SpatialMaterial_EmissionOperator),
                                      little, !is_unsigned);
     }
 }
 
 /* CIntToPy */
-static CYTHON_INLINE PyObject* __Pyx_PyInt_From___pyx_t_7classes_15SpatialMaterial_SpecularMode(__pyx_t_7classes_15SpatialMaterial_SpecularMode value) {
-    const __pyx_t_7classes_15SpatialMaterial_SpecularMode neg_one = (__pyx_t_7classes_15SpatialMaterial_SpecularMode) ((__pyx_t_7classes_15SpatialMaterial_SpecularMode) 0 - (__pyx_t_7classes_15SpatialMaterial_SpecularMode) 1), const_zero = (__pyx_t_7classes_15SpatialMaterial_SpecularMode) 0;
+static CYTHON_INLINE PyObject* __Pyx_PyInt_From___pyx_t_7classes_15SpatialMaterial_SpatialMaterial_SpecularMode(__pyx_t_7classes_15SpatialMaterial_SpatialMaterial_SpecularMode value) {
+    const __pyx_t_7classes_15SpatialMaterial_SpatialMaterial_SpecularMode neg_one = (__pyx_t_7classes_15SpatialMaterial_SpatialMaterial_SpecularMode) ((__pyx_t_7classes_15SpatialMaterial_SpatialMaterial_SpecularMode) 0 - (__pyx_t_7classes_15SpatialMaterial_SpatialMaterial_SpecularMode) 1), const_zero = (__pyx_t_7classes_15SpatialMaterial_SpatialMaterial_SpecularMode) 0;
     const int is_unsigned = neg_one > const_zero;
     if (is_unsigned) {
-        if (sizeof(__pyx_t_7classes_15SpatialMaterial_SpecularMode) < sizeof(long)) {
+        if (sizeof(__pyx_t_7classes_15SpatialMaterial_SpatialMaterial_SpecularMode) < sizeof(long)) {
             return PyInt_FromLong((long) value);
-        } else if (sizeof(__pyx_t_7classes_15SpatialMaterial_SpecularMode) <= sizeof(unsigned long)) {
+        } else if (sizeof(__pyx_t_7classes_15SpatialMaterial_SpatialMaterial_SpecularMode) <= sizeof(unsigned long)) {
             return PyLong_FromUnsignedLong((unsigned long) value);
 #ifdef HAVE_LONG_LONG
-        } else if (sizeof(__pyx_t_7classes_15SpatialMaterial_SpecularMode) <= sizeof(unsigned PY_LONG_LONG)) {
+        } else if (sizeof(__pyx_t_7classes_15SpatialMaterial_SpatialMaterial_SpecularMode) <= sizeof(unsigned PY_LONG_LONG)) {
             return PyLong_FromUnsignedLongLong((unsigned PY_LONG_LONG) value);
 #endif
         }
     } else {
-        if (sizeof(__pyx_t_7classes_15SpatialMaterial_SpecularMode) <= sizeof(long)) {
+        if (sizeof(__pyx_t_7classes_15SpatialMaterial_SpatialMaterial_SpecularMode) <= sizeof(long)) {
             return PyInt_FromLong((long) value);
 #ifdef HAVE_LONG_LONG
-        } else if (sizeof(__pyx_t_7classes_15SpatialMaterial_SpecularMode) <= sizeof(PY_LONG_LONG)) {
+        } else if (sizeof(__pyx_t_7classes_15SpatialMaterial_SpatialMaterial_SpecularMode) <= sizeof(PY_LONG_LONG)) {
             return PyLong_FromLongLong((PY_LONG_LONG) value);
 #endif
         }
@@ -39548,7 +39548,7 @@ static CYTHON_INLINE PyObject* __Pyx_PyInt_From___pyx_t_7classes_15SpatialMateri
     {
         int one = 1; int little = (int)*(unsigned char *)&one;
         unsigned char *bytes = (unsigned char *)&value;
-        return _PyLong_FromByteArray(bytes, sizeof(__pyx_t_7classes_15SpatialMaterial_SpecularMode),
+        return _PyLong_FromByteArray(bytes, sizeof(__pyx_t_7classes_15SpatialMaterial_SpatialMaterial_SpecularMode),
                                      little, !is_unsigned);
     }
 }

@@ -894,24 +894,24 @@ struct __pyx_obj_7classes_5Input_Input;
 /* "classes/Object.pxd":7
  * cdef class Object(Wrapper):
  *     pass
- * ctypedef enum ConnectFlags :CONNECT_DEFERRED, CONNECT_PERSIST, CONNECT_ONESHOT, CONNECT_REFERENCE_COUNTED,             # <<<<<<<<<<<<<<
+ * ctypedef enum Object_ConnectFlags :CONNECT_DEFERRED, CONNECT_PERSIST, CONNECT_ONESHOT, CONNECT_REFERENCE_COUNTED,             # <<<<<<<<<<<<<<
  */
-enum __pyx_t_7classes_6Object_ConnectFlags {
+enum __pyx_t_7classes_6Object_Object_ConnectFlags {
   __pyx_e_7classes_6Object_CONNECT_DEFERRED,
   __pyx_e_7classes_6Object_CONNECT_PERSIST,
   __pyx_e_7classes_6Object_CONNECT_ONESHOT,
   __pyx_e_7classes_6Object_CONNECT_REFERENCE_COUNTED
 };
-typedef enum __pyx_t_7classes_6Object_ConnectFlags __pyx_t_7classes_6Object_ConnectFlags;
+typedef enum __pyx_t_7classes_6Object_Object_ConnectFlags __pyx_t_7classes_6Object_Object_ConnectFlags;
 
 /* "core/variant/Variant.pxd":17
  *         print("new_variant", type(i))
  * 
- * ctypedef enum Type:             # <<<<<<<<<<<<<<
+ * ctypedef enum Variant_Type:             # <<<<<<<<<<<<<<
  *     NIL,
  *     # atomic types
  */
-enum __pyx_t_4core_7variant_7Variant_Type {
+enum __pyx_t_4core_7variant_7Variant_Variant_Type {
   __pyx_e_4core_7variant_7Variant_NIL,
   __pyx_e_4core_7variant_7Variant_BOOL,
   __pyx_e_4core_7variant_7Variant_INT,
@@ -941,16 +941,16 @@ enum __pyx_t_4core_7variant_7Variant_Type {
   __pyx_e_4core_7variant_7Variant_POOL_COLOR_ARRAY,
   __pyx_e_4core_7variant_7Variant_VARIANT_MAX
 };
-typedef enum __pyx_t_4core_7variant_7Variant_Type __pyx_t_4core_7variant_7Variant_Type;
+typedef enum __pyx_t_4core_7variant_7Variant_Variant_Type __pyx_t_4core_7variant_7Variant_Variant_Type;
 
 /* "core/variant/Variant.pxd":58
  * 
  * 
- * ctypedef enum Operator :             # <<<<<<<<<<<<<<
+ * ctypedef enum Variant_Operator :             # <<<<<<<<<<<<<<
  * 
  *     #comparation
  */
-enum __pyx_t_4core_7variant_7Variant_Operator {
+enum __pyx_t_4core_7variant_7Variant_Variant_Operator {
   __pyx_e_4core_7variant_7Variant_OP_EQUAL,
   __pyx_e_4core_7variant_7Variant_OP_NOT_EQUAL,
   __pyx_e_4core_7variant_7Variant_OP_LESS,
@@ -978,42 +978,42 @@ enum __pyx_t_4core_7variant_7Variant_Operator {
   __pyx_e_4core_7variant_7Variant_OP_IN,
   __pyx_e_4core_7variant_7Variant_OP_MAX
 };
-typedef enum __pyx_t_4core_7variant_7Variant_Operator __pyx_t_4core_7variant_7Variant_Operator;
+typedef enum __pyx_t_4core_7variant_7Variant_Variant_Operator __pyx_t_4core_7variant_7Variant_Variant_Operator;
 
 /* "core/vector3/Vector3.pxd":15
  * 
  * 
- * ctypedef enum Axis :             # <<<<<<<<<<<<<<
- *     AXIS_X,
- *     AXIS_Y,
+ * ctypedef enum Vector3_Axis :             # <<<<<<<<<<<<<<
+ *     Vector3_AXIS_X,
+ *     Vector3_AXIS_Y,
  */
-enum __pyx_t_4core_7vector3_7Vector3_Axis {
-  __pyx_e_4core_7vector3_7Vector3_AXIS_X,
-  __pyx_e_4core_7vector3_7Vector3_AXIS_Y,
-  __pyx_e_4core_7vector3_7Vector3_AXIS_Z
+enum __pyx_t_4core_7vector3_7Vector3_Vector3_Axis {
+  __pyx_e_4core_7vector3_7Vector3_Vector3_AXIS_X,
+  __pyx_e_4core_7vector3_7Vector3_Vector3_AXIS_Y,
+  __pyx_e_4core_7vector3_7Vector3_Vector3_AXIS_Z
 };
-typedef enum __pyx_t_4core_7vector3_7Vector3_Axis __pyx_t_4core_7vector3_7Vector3_Axis;
+typedef enum __pyx_t_4core_7vector3_7Vector3_Vector3_Axis __pyx_t_4core_7vector3_7Vector3_Vector3_Axis;
 
 /* "classes/Input.pxd":7
  * cdef class Input(classes.Object.Object):
  *     pass
- * ctypedef enum MouseMode :MOUSE_MODE_VISIBLE, MOUSE_MODE_HIDDEN, MOUSE_MODE_CAPTURED, MOUSE_MODE_CONFINED,             # <<<<<<<<<<<<<<
- * ctypedef enum CursorShape :CURSOR_ARROW, CURSOR_IBEAM, CURSOR_POINTING_HAND, CURSOR_CROSS, CURSOR_WAIT, CURSOR_BUSY, CURSOR_DRAG, CURSOR_CAN_DROP, CURSOR_FORBIDDEN, CURSOR_VSIZE, CURSOR_HSIZE, CURSOR_BDIAGSIZE, CURSOR_FDIAGSIZE, CURSOR_MOVE, CURSOR_VSPLIT, CURSOR_HSPLIT, CURSOR_HELP,
+ * ctypedef enum Input_MouseMode :MOUSE_MODE_VISIBLE, MOUSE_MODE_HIDDEN, MOUSE_MODE_CAPTURED, MOUSE_MODE_CONFINED,             # <<<<<<<<<<<<<<
+ * ctypedef enum Input_CursorShape :CURSOR_ARROW, CURSOR_IBEAM, CURSOR_POINTING_HAND, CURSOR_CROSS, CURSOR_WAIT, CURSOR_BUSY, CURSOR_DRAG, CURSOR_CAN_DROP, CURSOR_FORBIDDEN, CURSOR_VSIZE, CURSOR_HSIZE, CURSOR_BDIAGSIZE, CURSOR_FDIAGSIZE, CURSOR_MOVE, CURSOR_VSPLIT, CURSOR_HSPLIT, CURSOR_HELP,
  */
-enum __pyx_t_7classes_5Input_MouseMode {
+enum __pyx_t_7classes_5Input_Input_MouseMode {
   __pyx_e_7classes_5Input_MOUSE_MODE_VISIBLE,
   __pyx_e_7classes_5Input_MOUSE_MODE_HIDDEN,
   __pyx_e_7classes_5Input_MOUSE_MODE_CAPTURED,
   __pyx_e_7classes_5Input_MOUSE_MODE_CONFINED
 };
-typedef enum __pyx_t_7classes_5Input_MouseMode __pyx_t_7classes_5Input_MouseMode;
+typedef enum __pyx_t_7classes_5Input_Input_MouseMode __pyx_t_7classes_5Input_Input_MouseMode;
 
 /* "classes/Input.pxd":8
  *     pass
- * ctypedef enum MouseMode :MOUSE_MODE_VISIBLE, MOUSE_MODE_HIDDEN, MOUSE_MODE_CAPTURED, MOUSE_MODE_CONFINED,
- * ctypedef enum CursorShape :CURSOR_ARROW, CURSOR_IBEAM, CURSOR_POINTING_HAND, CURSOR_CROSS, CURSOR_WAIT, CURSOR_BUSY, CURSOR_DRAG, CURSOR_CAN_DROP, CURSOR_FORBIDDEN, CURSOR_VSIZE, CURSOR_HSIZE, CURSOR_BDIAGSIZE, CURSOR_FDIAGSIZE, CURSOR_MOVE, CURSOR_VSPLIT, CURSOR_HSPLIT, CURSOR_HELP,             # <<<<<<<<<<<<<<
+ * ctypedef enum Input_MouseMode :MOUSE_MODE_VISIBLE, MOUSE_MODE_HIDDEN, MOUSE_MODE_CAPTURED, MOUSE_MODE_CONFINED,
+ * ctypedef enum Input_CursorShape :CURSOR_ARROW, CURSOR_IBEAM, CURSOR_POINTING_HAND, CURSOR_CROSS, CURSOR_WAIT, CURSOR_BUSY, CURSOR_DRAG, CURSOR_CAN_DROP, CURSOR_FORBIDDEN, CURSOR_VSIZE, CURSOR_HSIZE, CURSOR_BDIAGSIZE, CURSOR_FDIAGSIZE, CURSOR_MOVE, CURSOR_VSPLIT, CURSOR_HSPLIT, CURSOR_HELP,             # <<<<<<<<<<<<<<
  */
-enum __pyx_t_7classes_5Input_CursorShape {
+enum __pyx_t_7classes_5Input_Input_CursorShape {
   __pyx_e_7classes_5Input_CURSOR_ARROW,
   __pyx_e_7classes_5Input_CURSOR_IBEAM,
   __pyx_e_7classes_5Input_CURSOR_POINTING_HAND,
@@ -1032,7 +1032,7 @@ enum __pyx_t_7classes_5Input_CursorShape {
   __pyx_e_7classes_5Input_CURSOR_HSPLIT,
   __pyx_e_7classes_5Input_CURSOR_HELP
 };
-typedef enum __pyx_t_7classes_5Input_CursorShape __pyx_t_7classes_5Input_CursorShape;
+typedef enum __pyx_t_7classes_5Input_Input_CursorShape __pyx_t_7classes_5Input_Input_CursorShape;
 
 /* "utils/Wrapper.pxd":2
  * from godot_api.binding cimport *
@@ -1052,7 +1052,7 @@ struct __pyx_obj_5utils_7Wrapper_Wrapper {
  * from utils.Wrapper cimport *
  * cdef class Object(Wrapper):             # <<<<<<<<<<<<<<
  *     pass
- * ctypedef enum ConnectFlags :CONNECT_DEFERRED, CONNECT_PERSIST, CONNECT_ONESHOT, CONNECT_REFERENCE_COUNTED,
+ * ctypedef enum Object_ConnectFlags :CONNECT_DEFERRED, CONNECT_PERSIST, CONNECT_ONESHOT, CONNECT_REFERENCE_COUNTED,
  */
 struct __pyx_obj_7classes_6Object_Object {
   struct __pyx_obj_5utils_7Wrapper_Wrapper __pyx_base;
@@ -1419,7 +1419,7 @@ struct __pyx_obj_4core_7vector3_7Vector3_Vector3 {
  * cimport classes.Object
  * cdef class Input(classes.Object.Object):             # <<<<<<<<<<<<<<
  *     pass
- * ctypedef enum MouseMode :MOUSE_MODE_VISIBLE, MOUSE_MODE_HIDDEN, MOUSE_MODE_CAPTURED, MOUSE_MODE_CONFINED,
+ * ctypedef enum Input_MouseMode :MOUSE_MODE_VISIBLE, MOUSE_MODE_HIDDEN, MOUSE_MODE_CAPTURED, MOUSE_MODE_CONFINED,
  */
 struct __pyx_obj_7classes_5Input_Input {
   struct __pyx_obj_7classes_6Object_Object __pyx_base;
@@ -1448,7 +1448,7 @@ static CYTHON_INLINE godot_object *__pyx_f_5utils_7Wrapper_7Wrapper_get_godot_ow
  * from utils.Wrapper cimport *
  * cdef class Object(Wrapper):             # <<<<<<<<<<<<<<
  *     pass
- * ctypedef enum ConnectFlags :CONNECT_DEFERRED, CONNECT_PERSIST, CONNECT_ONESHOT, CONNECT_REFERENCE_COUNTED,
+ * ctypedef enum Object_ConnectFlags :CONNECT_DEFERRED, CONNECT_PERSIST, CONNECT_ONESHOT, CONNECT_REFERENCE_COUNTED,
  */
 
 struct __pyx_vtabstruct_7classes_6Object_Object {
@@ -2192,13 +2192,13 @@ static void __Pyx_AddTraceback(const char *funcname, int c_line,
                                int py_line, const char *filename);
 
 /* CIntToPy.proto */
-static CYTHON_INLINE PyObject* __Pyx_PyInt_From___pyx_t_7classes_5Input_CursorShape(__pyx_t_7classes_5Input_CursorShape value);
+static CYTHON_INLINE PyObject* __Pyx_PyInt_From___pyx_t_7classes_5Input_Input_CursorShape(__pyx_t_7classes_5Input_Input_CursorShape value);
 
 /* CIntToPy.proto */
 static CYTHON_INLINE PyObject* __Pyx_PyInt_From_int(int value);
 
 /* CIntToPy.proto */
-static CYTHON_INLINE PyObject* __Pyx_PyInt_From___pyx_t_7classes_5Input_MouseMode(__pyx_t_7classes_5Input_MouseMode value);
+static CYTHON_INLINE PyObject* __Pyx_PyInt_From___pyx_t_7classes_5Input_Input_MouseMode(__pyx_t_7classes_5Input_Input_MouseMode value);
 
 /* CIntFromPy.proto */
 static CYTHON_INLINE int __Pyx_PyInt_As_int(PyObject *);
@@ -3882,7 +3882,7 @@ static PyObject *__pyx_pw_7classes_5Input_5Input_15get_current_cursor_shape(PyOb
 
 static PyObject *__pyx_pf_7classes_5Input_5Input_14get_current_cursor_shape(struct __pyx_obj_7classes_5Input_Input *__pyx_v_self) {
   CYTHON_UNUSED godot_object *__pyx_v__owner;
-  __pyx_t_7classes_5Input_CursorShape *__pyx_v_ret;
+  __pyx_t_7classes_5Input_Input_CursorShape *__pyx_v_ret;
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   godot_object *__pyx_t_1;
@@ -3897,7 +3897,7 @@ static PyObject *__pyx_pf_7classes_5Input_5Input_14get_current_cursor_shape(stru
  *   def  get_current_cursor_shape(self):
  *     cdef godot_object *_owner = self.godot_owner             # <<<<<<<<<<<<<<
  * 
- *     cdef CursorShape* ret = NULL;
+ *     cdef Input_CursorShape* ret = NULL;
  */
   __pyx_t_1 = __pyx_v_self->__pyx_base.__pyx_base.godot_owner;
   __pyx_v__owner = __pyx_t_1;
@@ -3905,14 +3905,14 @@ static PyObject *__pyx_pf_7classes_5Input_5Input_14get_current_cursor_shape(stru
   /* "classes/Input.pyx":183
  *     cdef godot_object *_owner = self.godot_owner
  * 
- *     cdef CursorShape* ret = NULL;             # <<<<<<<<<<<<<<
+ *     cdef Input_CursorShape* ret = NULL;             # <<<<<<<<<<<<<<
  * 
  *     api_core.godot_method_bind_ptrcall(bind_input_get_current_cursor_shape,self.godot_owner,NULL,&ret)
  */
   __pyx_v_ret = NULL;
 
   /* "classes/Input.pyx":185
- *     cdef CursorShape* ret = NULL;
+ *     cdef Input_CursorShape* ret = NULL;
  * 
  *     api_core.godot_method_bind_ptrcall(bind_input_get_current_cursor_shape,self.godot_owner,NULL,&ret)             # <<<<<<<<<<<<<<
  *     hello('hallo2')
@@ -3937,7 +3937,7 @@ static PyObject *__pyx_pf_7classes_5Input_5Input_14get_current_cursor_shape(stru
  *   def  get_gravity(self):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_2 = __Pyx_PyInt_From___pyx_t_7classes_5Input_CursorShape((*__pyx_v_ret)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 187, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyInt_From___pyx_t_7classes_5Input_Input_CursorShape((*__pyx_v_ret)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 187, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_r = __pyx_t_2;
   __pyx_t_2 = 0;
@@ -5671,7 +5671,7 @@ static PyObject *__pyx_pw_7classes_5Input_5Input_45get_mouse_mode(PyObject *__py
 
 static PyObject *__pyx_pf_7classes_5Input_5Input_44get_mouse_mode(struct __pyx_obj_7classes_5Input_Input *__pyx_v_self) {
   CYTHON_UNUSED godot_object *__pyx_v__owner;
-  __pyx_t_7classes_5Input_MouseMode *__pyx_v_ret;
+  __pyx_t_7classes_5Input_Input_MouseMode *__pyx_v_ret;
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   godot_object *__pyx_t_1;
@@ -5686,7 +5686,7 @@ static PyObject *__pyx_pf_7classes_5Input_5Input_44get_mouse_mode(struct __pyx_o
  *   def  get_mouse_mode(self):
  *     cdef godot_object *_owner = self.godot_owner             # <<<<<<<<<<<<<<
  * 
- *     cdef MouseMode* ret = NULL;
+ *     cdef Input_MouseMode* ret = NULL;
  */
   __pyx_t_1 = __pyx_v_self->__pyx_base.__pyx_base.godot_owner;
   __pyx_v__owner = __pyx_t_1;
@@ -5694,14 +5694,14 @@ static PyObject *__pyx_pf_7classes_5Input_5Input_44get_mouse_mode(struct __pyx_o
   /* "classes/Input.pyx":346
  *     cdef godot_object *_owner = self.godot_owner
  * 
- *     cdef MouseMode* ret = NULL;             # <<<<<<<<<<<<<<
+ *     cdef Input_MouseMode* ret = NULL;             # <<<<<<<<<<<<<<
  * 
  *     api_core.godot_method_bind_ptrcall(bind_input_get_mouse_mode,self.godot_owner,NULL,&ret)
  */
   __pyx_v_ret = NULL;
 
   /* "classes/Input.pyx":348
- *     cdef MouseMode* ret = NULL;
+ *     cdef Input_MouseMode* ret = NULL;
  * 
  *     api_core.godot_method_bind_ptrcall(bind_input_get_mouse_mode,self.godot_owner,NULL,&ret)             # <<<<<<<<<<<<<<
  *     hello('hallo2')
@@ -5726,7 +5726,7 @@ static PyObject *__pyx_pf_7classes_5Input_5Input_44get_mouse_mode(struct __pyx_o
  *   def  is_action_just_pressed(self,  String action):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_2 = __Pyx_PyInt_From___pyx_t_7classes_5Input_MouseMode((*__pyx_v_ret)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 350, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyInt_From___pyx_t_7classes_5Input_Input_MouseMode((*__pyx_v_ret)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 350, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_r = __pyx_t_2;
   __pyx_t_2 = 0;
@@ -8405,7 +8405,7 @@ static CYTHON_INLINE void __pyx_f_4core_7variant_7Variant_7Variant_new_variant(C
  *     cdef inline void new_variant(self, i):
  *         print("new_variant", type(i))             # <<<<<<<<<<<<<<
  * 
- * ctypedef enum Type:
+ * ctypedef enum Variant_Type:
  */
   __pyx_t_1 = PyTuple_New(2); if (unlikely(!__pyx_t_1)) __PYX_ERR(4, 15, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
@@ -9975,15 +9975,13 @@ static int __pyx_import_star_set(PyObject *o, PyObject* py_name, char *name) {
   static const char* internal_type_names[] = {
     "AABB",
     "Array",
-    "Axis",
     "Basis",
     "Color",
-    "CursorShape",
     "Dictionary",
     "Input",
-    "MouseMode",
+    "Input_CursorShape",
+    "Input_MouseMode",
     "NodePath",
-    "Operator",
     "Plane",
     "PoolByteArray",
     "PoolColorArray",
@@ -9999,10 +9997,12 @@ static int __pyx_import_star_set(PyObject *o, PyObject* py_name, char *name) {
     "String",
     "Transform",
     "Transform2D",
-    "Type",
     "Variant",
+    "Variant_Operator",
+    "Variant_Type",
     "Vector2",
     "Vector3",
+    "Vector3_Axis",
     "Wrapper",
     "bool",
     "godot_aabb",
@@ -12387,24 +12387,24 @@ bad:
     }
 
 /* CIntToPy */
-static CYTHON_INLINE PyObject* __Pyx_PyInt_From___pyx_t_7classes_5Input_CursorShape(__pyx_t_7classes_5Input_CursorShape value) {
-    const __pyx_t_7classes_5Input_CursorShape neg_one = (__pyx_t_7classes_5Input_CursorShape) ((__pyx_t_7classes_5Input_CursorShape) 0 - (__pyx_t_7classes_5Input_CursorShape) 1), const_zero = (__pyx_t_7classes_5Input_CursorShape) 0;
+static CYTHON_INLINE PyObject* __Pyx_PyInt_From___pyx_t_7classes_5Input_Input_CursorShape(__pyx_t_7classes_5Input_Input_CursorShape value) {
+    const __pyx_t_7classes_5Input_Input_CursorShape neg_one = (__pyx_t_7classes_5Input_Input_CursorShape) ((__pyx_t_7classes_5Input_Input_CursorShape) 0 - (__pyx_t_7classes_5Input_Input_CursorShape) 1), const_zero = (__pyx_t_7classes_5Input_Input_CursorShape) 0;
     const int is_unsigned = neg_one > const_zero;
     if (is_unsigned) {
-        if (sizeof(__pyx_t_7classes_5Input_CursorShape) < sizeof(long)) {
+        if (sizeof(__pyx_t_7classes_5Input_Input_CursorShape) < sizeof(long)) {
             return PyInt_FromLong((long) value);
-        } else if (sizeof(__pyx_t_7classes_5Input_CursorShape) <= sizeof(unsigned long)) {
+        } else if (sizeof(__pyx_t_7classes_5Input_Input_CursorShape) <= sizeof(unsigned long)) {
             return PyLong_FromUnsignedLong((unsigned long) value);
 #ifdef HAVE_LONG_LONG
-        } else if (sizeof(__pyx_t_7classes_5Input_CursorShape) <= sizeof(unsigned PY_LONG_LONG)) {
+        } else if (sizeof(__pyx_t_7classes_5Input_Input_CursorShape) <= sizeof(unsigned PY_LONG_LONG)) {
             return PyLong_FromUnsignedLongLong((unsigned PY_LONG_LONG) value);
 #endif
         }
     } else {
-        if (sizeof(__pyx_t_7classes_5Input_CursorShape) <= sizeof(long)) {
+        if (sizeof(__pyx_t_7classes_5Input_Input_CursorShape) <= sizeof(long)) {
             return PyInt_FromLong((long) value);
 #ifdef HAVE_LONG_LONG
-        } else if (sizeof(__pyx_t_7classes_5Input_CursorShape) <= sizeof(PY_LONG_LONG)) {
+        } else if (sizeof(__pyx_t_7classes_5Input_Input_CursorShape) <= sizeof(PY_LONG_LONG)) {
             return PyLong_FromLongLong((PY_LONG_LONG) value);
 #endif
         }
@@ -12412,7 +12412,7 @@ static CYTHON_INLINE PyObject* __Pyx_PyInt_From___pyx_t_7classes_5Input_CursorSh
     {
         int one = 1; int little = (int)*(unsigned char *)&one;
         unsigned char *bytes = (unsigned char *)&value;
-        return _PyLong_FromByteArray(bytes, sizeof(__pyx_t_7classes_5Input_CursorShape),
+        return _PyLong_FromByteArray(bytes, sizeof(__pyx_t_7classes_5Input_Input_CursorShape),
                                      little, !is_unsigned);
     }
 }
@@ -12449,24 +12449,24 @@ static CYTHON_INLINE PyObject* __Pyx_PyInt_From_int(int value) {
 }
 
 /* CIntToPy */
-static CYTHON_INLINE PyObject* __Pyx_PyInt_From___pyx_t_7classes_5Input_MouseMode(__pyx_t_7classes_5Input_MouseMode value) {
-    const __pyx_t_7classes_5Input_MouseMode neg_one = (__pyx_t_7classes_5Input_MouseMode) ((__pyx_t_7classes_5Input_MouseMode) 0 - (__pyx_t_7classes_5Input_MouseMode) 1), const_zero = (__pyx_t_7classes_5Input_MouseMode) 0;
+static CYTHON_INLINE PyObject* __Pyx_PyInt_From___pyx_t_7classes_5Input_Input_MouseMode(__pyx_t_7classes_5Input_Input_MouseMode value) {
+    const __pyx_t_7classes_5Input_Input_MouseMode neg_one = (__pyx_t_7classes_5Input_Input_MouseMode) ((__pyx_t_7classes_5Input_Input_MouseMode) 0 - (__pyx_t_7classes_5Input_Input_MouseMode) 1), const_zero = (__pyx_t_7classes_5Input_Input_MouseMode) 0;
     const int is_unsigned = neg_one > const_zero;
     if (is_unsigned) {
-        if (sizeof(__pyx_t_7classes_5Input_MouseMode) < sizeof(long)) {
+        if (sizeof(__pyx_t_7classes_5Input_Input_MouseMode) < sizeof(long)) {
             return PyInt_FromLong((long) value);
-        } else if (sizeof(__pyx_t_7classes_5Input_MouseMode) <= sizeof(unsigned long)) {
+        } else if (sizeof(__pyx_t_7classes_5Input_Input_MouseMode) <= sizeof(unsigned long)) {
             return PyLong_FromUnsignedLong((unsigned long) value);
 #ifdef HAVE_LONG_LONG
-        } else if (sizeof(__pyx_t_7classes_5Input_MouseMode) <= sizeof(unsigned PY_LONG_LONG)) {
+        } else if (sizeof(__pyx_t_7classes_5Input_Input_MouseMode) <= sizeof(unsigned PY_LONG_LONG)) {
             return PyLong_FromUnsignedLongLong((unsigned PY_LONG_LONG) value);
 #endif
         }
     } else {
-        if (sizeof(__pyx_t_7classes_5Input_MouseMode) <= sizeof(long)) {
+        if (sizeof(__pyx_t_7classes_5Input_Input_MouseMode) <= sizeof(long)) {
             return PyInt_FromLong((long) value);
 #ifdef HAVE_LONG_LONG
-        } else if (sizeof(__pyx_t_7classes_5Input_MouseMode) <= sizeof(PY_LONG_LONG)) {
+        } else if (sizeof(__pyx_t_7classes_5Input_Input_MouseMode) <= sizeof(PY_LONG_LONG)) {
             return PyLong_FromLongLong((PY_LONG_LONG) value);
 #endif
         }
@@ -12474,7 +12474,7 @@ static CYTHON_INLINE PyObject* __Pyx_PyInt_From___pyx_t_7classes_5Input_MouseMod
     {
         int one = 1; int little = (int)*(unsigned char *)&one;
         unsigned char *bytes = (unsigned char *)&value;
-        return _PyLong_FromByteArray(bytes, sizeof(__pyx_t_7classes_5Input_MouseMode),
+        return _PyLong_FromByteArray(bytes, sizeof(__pyx_t_7classes_5Input_Input_MouseMode),
                                      little, !is_unsigned);
     }
 }

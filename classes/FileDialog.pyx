@@ -20,9 +20,9 @@ from core.transform.Transform cimport Transform
 from core.transform.Transform2D cimport Transform2D
 from core.vector2.Vector2 cimport Vector2
 from core.vector3.Vector3 cimport Vector3
-from core.variant.Variant cimport Type
-from core.variant.Variant cimport Operator
-from core.vector3.Vector3 cimport Axis
+from core.variant.Variant cimport Variant_Type
+from core.variant.Variant cimport Variant_Operator
+from core.vector3.Vector3 cimport Vector3_Axis
 from core.color.Color cimport Color
 from cython.operator cimport dereference
 from godot_api.binding_external cimport *
@@ -295,7 +295,7 @@ cdef class FileDialog(classes.ConfirmationDialog.ConfirmationDialog):
   def  get_access(self):
     cdef godot_object *_owner = self.godot_owner
 
-    cdef Access* ret = NULL;
+    cdef FileDialog_Access* ret = NULL;
 
     api_core.godot_method_bind_ptrcall(bind_filedialog_get_access,self.godot_owner,NULL,&ret)
     hello('hallo2')
@@ -345,7 +345,7 @@ cdef class FileDialog(classes.ConfirmationDialog.ConfirmationDialog):
   def  get_mode(self):
     cdef godot_object *_owner = self.godot_owner
 
-    cdef Mode* ret = NULL;
+    cdef FileDialog_Mode* ret = NULL;
 
     api_core.godot_method_bind_ptrcall(bind_filedialog_get_mode,self.godot_owner,NULL,&ret)
     hello('hallo2')

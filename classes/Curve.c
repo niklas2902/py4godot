@@ -892,24 +892,24 @@ struct __pyx_obj_7classes_5Curve_Curve;
 /* "classes/Object.pxd":7
  * cdef class Object(Wrapper):
  *     pass
- * ctypedef enum ConnectFlags :CONNECT_DEFERRED, CONNECT_PERSIST, CONNECT_ONESHOT, CONNECT_REFERENCE_COUNTED,             # <<<<<<<<<<<<<<
+ * ctypedef enum Object_ConnectFlags :CONNECT_DEFERRED, CONNECT_PERSIST, CONNECT_ONESHOT, CONNECT_REFERENCE_COUNTED,             # <<<<<<<<<<<<<<
  */
-enum __pyx_t_7classes_6Object_ConnectFlags {
+enum __pyx_t_7classes_6Object_Object_ConnectFlags {
   __pyx_e_7classes_6Object_CONNECT_DEFERRED,
   __pyx_e_7classes_6Object_CONNECT_PERSIST,
   __pyx_e_7classes_6Object_CONNECT_ONESHOT,
   __pyx_e_7classes_6Object_CONNECT_REFERENCE_COUNTED
 };
-typedef enum __pyx_t_7classes_6Object_ConnectFlags __pyx_t_7classes_6Object_ConnectFlags;
+typedef enum __pyx_t_7classes_6Object_Object_ConnectFlags __pyx_t_7classes_6Object_Object_ConnectFlags;
 
 /* "core/variant/Variant.pxd":17
  *         print("new_variant", type(i))
  * 
- * ctypedef enum Type:             # <<<<<<<<<<<<<<
+ * ctypedef enum Variant_Type:             # <<<<<<<<<<<<<<
  *     NIL,
  *     # atomic types
  */
-enum __pyx_t_4core_7variant_7Variant_Type {
+enum __pyx_t_4core_7variant_7Variant_Variant_Type {
   __pyx_e_4core_7variant_7Variant_NIL,
   __pyx_e_4core_7variant_7Variant_BOOL,
   __pyx_e_4core_7variant_7Variant_INT,
@@ -939,16 +939,16 @@ enum __pyx_t_4core_7variant_7Variant_Type {
   __pyx_e_4core_7variant_7Variant_POOL_COLOR_ARRAY,
   __pyx_e_4core_7variant_7Variant_VARIANT_MAX
 };
-typedef enum __pyx_t_4core_7variant_7Variant_Type __pyx_t_4core_7variant_7Variant_Type;
+typedef enum __pyx_t_4core_7variant_7Variant_Variant_Type __pyx_t_4core_7variant_7Variant_Variant_Type;
 
 /* "core/variant/Variant.pxd":58
  * 
  * 
- * ctypedef enum Operator :             # <<<<<<<<<<<<<<
+ * ctypedef enum Variant_Operator :             # <<<<<<<<<<<<<<
  * 
  *     #comparation
  */
-enum __pyx_t_4core_7variant_7Variant_Operator {
+enum __pyx_t_4core_7variant_7Variant_Variant_Operator {
   __pyx_e_4core_7variant_7Variant_OP_EQUAL,
   __pyx_e_4core_7variant_7Variant_OP_NOT_EQUAL,
   __pyx_e_4core_7variant_7Variant_OP_LESS,
@@ -976,33 +976,33 @@ enum __pyx_t_4core_7variant_7Variant_Operator {
   __pyx_e_4core_7variant_7Variant_OP_IN,
   __pyx_e_4core_7variant_7Variant_OP_MAX
 };
-typedef enum __pyx_t_4core_7variant_7Variant_Operator __pyx_t_4core_7variant_7Variant_Operator;
+typedef enum __pyx_t_4core_7variant_7Variant_Variant_Operator __pyx_t_4core_7variant_7Variant_Variant_Operator;
 
 /* "core/vector3/Vector3.pxd":15
  * 
  * 
- * ctypedef enum Axis :             # <<<<<<<<<<<<<<
- *     AXIS_X,
- *     AXIS_Y,
+ * ctypedef enum Vector3_Axis :             # <<<<<<<<<<<<<<
+ *     Vector3_AXIS_X,
+ *     Vector3_AXIS_Y,
  */
-enum __pyx_t_4core_7vector3_7Vector3_Axis {
-  __pyx_e_4core_7vector3_7Vector3_AXIS_X,
-  __pyx_e_4core_7vector3_7Vector3_AXIS_Y,
-  __pyx_e_4core_7vector3_7Vector3_AXIS_Z
+enum __pyx_t_4core_7vector3_7Vector3_Vector3_Axis {
+  __pyx_e_4core_7vector3_7Vector3_Vector3_AXIS_X,
+  __pyx_e_4core_7vector3_7Vector3_Vector3_AXIS_Y,
+  __pyx_e_4core_7vector3_7Vector3_Vector3_AXIS_Z
 };
-typedef enum __pyx_t_4core_7vector3_7Vector3_Axis __pyx_t_4core_7vector3_7Vector3_Axis;
+typedef enum __pyx_t_4core_7vector3_7Vector3_Vector3_Axis __pyx_t_4core_7vector3_7Vector3_Vector3_Axis;
 
 /* "classes/Curve.pxd":7
  * cdef class Curve(classes.Resource.Resource):
  *     pass
- * ctypedef enum TangentMode :TANGENT_FREE, TANGENT_LINEAR, TANGENT_MODE_COUNT,             # <<<<<<<<<<<<<<
+ * ctypedef enum Curve_TangentMode :TANGENT_FREE, TANGENT_LINEAR, TANGENT_MODE_COUNT,             # <<<<<<<<<<<<<<
  */
-enum __pyx_t_7classes_5Curve_TangentMode {
+enum __pyx_t_7classes_5Curve_Curve_TangentMode {
   __pyx_e_7classes_5Curve_TANGENT_FREE,
   __pyx_e_7classes_5Curve_TANGENT_LINEAR,
   __pyx_e_7classes_5Curve_TANGENT_MODE_COUNT
 };
-typedef enum __pyx_t_7classes_5Curve_TangentMode __pyx_t_7classes_5Curve_TangentMode;
+typedef enum __pyx_t_7classes_5Curve_Curve_TangentMode __pyx_t_7classes_5Curve_Curve_TangentMode;
 
 /* "utils/Wrapper.pxd":2
  * from godot_api.binding cimport *
@@ -1022,7 +1022,7 @@ struct __pyx_obj_5utils_7Wrapper_Wrapper {
  * from utils.Wrapper cimport *
  * cdef class Object(Wrapper):             # <<<<<<<<<<<<<<
  *     pass
- * ctypedef enum ConnectFlags :CONNECT_DEFERRED, CONNECT_PERSIST, CONNECT_ONESHOT, CONNECT_REFERENCE_COUNTED,
+ * ctypedef enum Object_ConnectFlags :CONNECT_DEFERRED, CONNECT_PERSIST, CONNECT_ONESHOT, CONNECT_REFERENCE_COUNTED,
  */
 struct __pyx_obj_7classes_6Object_Object {
   struct __pyx_obj_5utils_7Wrapper_Wrapper __pyx_base;
@@ -1378,7 +1378,7 @@ struct __pyx_obj_4core_7vector3_7Vector3_Vector3 {
  * cimport classes.Resource
  * cdef class Curve(classes.Resource.Resource):             # <<<<<<<<<<<<<<
  *     pass
- * ctypedef enum TangentMode :TANGENT_FREE, TANGENT_LINEAR, TANGENT_MODE_COUNT,
+ * ctypedef enum Curve_TangentMode :TANGENT_FREE, TANGENT_LINEAR, TANGENT_MODE_COUNT,
  */
 struct __pyx_obj_7classes_5Curve_Curve {
   struct __pyx_obj_7classes_8Resource_Resource __pyx_base;
@@ -1407,7 +1407,7 @@ static CYTHON_INLINE godot_object *__pyx_f_5utils_7Wrapper_7Wrapper_get_godot_ow
  * from utils.Wrapper cimport *
  * cdef class Object(Wrapper):             # <<<<<<<<<<<<<<
  *     pass
- * ctypedef enum ConnectFlags :CONNECT_DEFERRED, CONNECT_PERSIST, CONNECT_ONESHOT, CONNECT_REFERENCE_COUNTED,
+ * ctypedef enum Object_ConnectFlags :CONNECT_DEFERRED, CONNECT_PERSIST, CONNECT_ONESHOT, CONNECT_REFERENCE_COUNTED,
  */
 
 struct __pyx_vtabstruct_7classes_6Object_Object {
@@ -2144,7 +2144,7 @@ static void __Pyx_AddTraceback(const char *funcname, int c_line,
 static CYTHON_INLINE PyObject* __Pyx_PyInt_From_int(int value);
 
 /* CIntToPy.proto */
-static CYTHON_INLINE PyObject* __Pyx_PyInt_From___pyx_t_7classes_5Curve_TangentMode(__pyx_t_7classes_5Curve_TangentMode value);
+static CYTHON_INLINE PyObject* __Pyx_PyInt_From___pyx_t_7classes_5Curve_Curve_TangentMode(__pyx_t_7classes_5Curve_Curve_TangentMode value);
 
 /* CIntFromPy.proto */
 static CYTHON_INLINE int __Pyx_PyInt_As_int(PyObject *);
@@ -4689,7 +4689,7 @@ static PyObject *__pyx_pw_7classes_5Curve_5Curve_23get_point_left_mode(PyObject 
 
 static PyObject *__pyx_pf_7classes_5Curve_5Curve_22get_point_left_mode(struct __pyx_obj_7classes_5Curve_Curve *__pyx_v_self, int __pyx_v_index) {
   CYTHON_UNUSED godot_object *__pyx_v__owner;
-  __pyx_t_7classes_5Curve_TangentMode *__pyx_v_ret;
+  __pyx_t_7classes_5Curve_Curve_TangentMode *__pyx_v_ret;
   void *__pyx_v_args[1];
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
@@ -4705,7 +4705,7 @@ static PyObject *__pyx_pf_7classes_5Curve_5Curve_22get_point_left_mode(struct __
  *   def  get_point_left_mode(self,  int index):
  *     cdef godot_object *_owner = self.godot_owner             # <<<<<<<<<<<<<<
  * 
- *     cdef TangentMode* ret = NULL;
+ *     cdef Curve_TangentMode* ret = NULL;
  */
   __pyx_t_1 = __pyx_v_self->__pyx_base.__pyx_base.__pyx_base.__pyx_base.godot_owner;
   __pyx_v__owner = __pyx_t_1;
@@ -4713,7 +4713,7 @@ static PyObject *__pyx_pf_7classes_5Curve_5Curve_22get_point_left_mode(struct __
   /* "classes/Curve.pyx":209
  *     cdef godot_object *_owner = self.godot_owner
  * 
- *     cdef TangentMode* ret = NULL;             # <<<<<<<<<<<<<<
+ *     cdef Curve_TangentMode* ret = NULL;             # <<<<<<<<<<<<<<
  * 
  *     cdef void *args[1]
  */
@@ -4754,7 +4754,7 @@ static PyObject *__pyx_pf_7classes_5Curve_5Curve_22get_point_left_mode(struct __
  *   def  get_point_left_tangent(self,  int index):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_2 = __Pyx_PyInt_From___pyx_t_7classes_5Curve_TangentMode((*__pyx_v_ret)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 216, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyInt_From___pyx_t_7classes_5Curve_Curve_TangentMode((*__pyx_v_ret)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 216, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_r = __pyx_t_2;
   __pyx_t_2 = 0;
@@ -5067,7 +5067,7 @@ static PyObject *__pyx_pw_7classes_5Curve_5Curve_29get_point_right_mode(PyObject
 
 static PyObject *__pyx_pf_7classes_5Curve_5Curve_28get_point_right_mode(struct __pyx_obj_7classes_5Curve_Curve *__pyx_v_self, int __pyx_v_index) {
   CYTHON_UNUSED godot_object *__pyx_v__owner;
-  __pyx_t_7classes_5Curve_TangentMode *__pyx_v_ret;
+  __pyx_t_7classes_5Curve_Curve_TangentMode *__pyx_v_ret;
   void *__pyx_v_args[1];
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
@@ -5083,7 +5083,7 @@ static PyObject *__pyx_pf_7classes_5Curve_5Curve_28get_point_right_mode(struct _
  *   def  get_point_right_mode(self,  int index):
  *     cdef godot_object *_owner = self.godot_owner             # <<<<<<<<<<<<<<
  * 
- *     cdef TangentMode* ret = NULL;
+ *     cdef Curve_TangentMode* ret = NULL;
  */
   __pyx_t_1 = __pyx_v_self->__pyx_base.__pyx_base.__pyx_base.__pyx_base.godot_owner;
   __pyx_v__owner = __pyx_t_1;
@@ -5091,7 +5091,7 @@ static PyObject *__pyx_pf_7classes_5Curve_5Curve_28get_point_right_mode(struct _
   /* "classes/Curve.pyx":245
  *     cdef godot_object *_owner = self.godot_owner
  * 
- *     cdef TangentMode* ret = NULL;             # <<<<<<<<<<<<<<
+ *     cdef Curve_TangentMode* ret = NULL;             # <<<<<<<<<<<<<<
  * 
  *     cdef void *args[1]
  */
@@ -5132,7 +5132,7 @@ static PyObject *__pyx_pf_7classes_5Curve_5Curve_28get_point_right_mode(struct _
  *   def  get_point_right_tangent(self,  int index):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_2 = __Pyx_PyInt_From___pyx_t_7classes_5Curve_TangentMode((*__pyx_v_ret)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 252, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyInt_From___pyx_t_7classes_5Curve_Curve_TangentMode((*__pyx_v_ret)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 252, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_r = __pyx_t_2;
   __pyx_t_2 = 0;
@@ -7255,7 +7255,7 @@ static CYTHON_INLINE void __pyx_f_4core_7variant_7Variant_7Variant_new_variant(C
  *     cdef inline void new_variant(self, i):
  *         print("new_variant", type(i))             # <<<<<<<<<<<<<<
  * 
- * ctypedef enum Type:
+ * ctypedef enum Variant_Type:
  */
   __pyx_t_1 = PyTuple_New(2); if (unlikely(!__pyx_t_1)) __PYX_ERR(4, 15, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
@@ -8876,13 +8876,12 @@ static int __pyx_import_star_set(PyObject *o, PyObject* py_name, char *name) {
   static const char* internal_type_names[] = {
     "AABB",
     "Array",
-    "Axis",
     "Basis",
     "Color",
     "Curve",
+    "Curve_TangentMode",
     "Dictionary",
     "NodePath",
-    "Operator",
     "Plane",
     "PoolByteArray",
     "PoolColorArray",
@@ -8896,13 +8895,14 @@ static int __pyx_import_star_set(PyObject *o, PyObject* py_name, char *name) {
     "Rect2",
     "Reference",
     "String",
-    "TangentMode",
     "Transform",
     "Transform2D",
-    "Type",
     "Variant",
+    "Variant_Operator",
+    "Variant_Type",
     "Vector2",
     "Vector3",
+    "Vector3_Axis",
     "Wrapper",
     "bool",
     "godot_aabb",
@@ -11291,24 +11291,24 @@ static CYTHON_INLINE PyObject* __Pyx_PyInt_From_int(int value) {
 }
 
 /* CIntToPy */
-static CYTHON_INLINE PyObject* __Pyx_PyInt_From___pyx_t_7classes_5Curve_TangentMode(__pyx_t_7classes_5Curve_TangentMode value) {
-    const __pyx_t_7classes_5Curve_TangentMode neg_one = (__pyx_t_7classes_5Curve_TangentMode) ((__pyx_t_7classes_5Curve_TangentMode) 0 - (__pyx_t_7classes_5Curve_TangentMode) 1), const_zero = (__pyx_t_7classes_5Curve_TangentMode) 0;
+static CYTHON_INLINE PyObject* __Pyx_PyInt_From___pyx_t_7classes_5Curve_Curve_TangentMode(__pyx_t_7classes_5Curve_Curve_TangentMode value) {
+    const __pyx_t_7classes_5Curve_Curve_TangentMode neg_one = (__pyx_t_7classes_5Curve_Curve_TangentMode) ((__pyx_t_7classes_5Curve_Curve_TangentMode) 0 - (__pyx_t_7classes_5Curve_Curve_TangentMode) 1), const_zero = (__pyx_t_7classes_5Curve_Curve_TangentMode) 0;
     const int is_unsigned = neg_one > const_zero;
     if (is_unsigned) {
-        if (sizeof(__pyx_t_7classes_5Curve_TangentMode) < sizeof(long)) {
+        if (sizeof(__pyx_t_7classes_5Curve_Curve_TangentMode) < sizeof(long)) {
             return PyInt_FromLong((long) value);
-        } else if (sizeof(__pyx_t_7classes_5Curve_TangentMode) <= sizeof(unsigned long)) {
+        } else if (sizeof(__pyx_t_7classes_5Curve_Curve_TangentMode) <= sizeof(unsigned long)) {
             return PyLong_FromUnsignedLong((unsigned long) value);
 #ifdef HAVE_LONG_LONG
-        } else if (sizeof(__pyx_t_7classes_5Curve_TangentMode) <= sizeof(unsigned PY_LONG_LONG)) {
+        } else if (sizeof(__pyx_t_7classes_5Curve_Curve_TangentMode) <= sizeof(unsigned PY_LONG_LONG)) {
             return PyLong_FromUnsignedLongLong((unsigned PY_LONG_LONG) value);
 #endif
         }
     } else {
-        if (sizeof(__pyx_t_7classes_5Curve_TangentMode) <= sizeof(long)) {
+        if (sizeof(__pyx_t_7classes_5Curve_Curve_TangentMode) <= sizeof(long)) {
             return PyInt_FromLong((long) value);
 #ifdef HAVE_LONG_LONG
-        } else if (sizeof(__pyx_t_7classes_5Curve_TangentMode) <= sizeof(PY_LONG_LONG)) {
+        } else if (sizeof(__pyx_t_7classes_5Curve_Curve_TangentMode) <= sizeof(PY_LONG_LONG)) {
             return PyLong_FromLongLong((PY_LONG_LONG) value);
 #endif
         }
@@ -11316,7 +11316,7 @@ static CYTHON_INLINE PyObject* __Pyx_PyInt_From___pyx_t_7classes_5Curve_TangentM
     {
         int one = 1; int little = (int)*(unsigned char *)&one;
         unsigned char *bytes = (unsigned char *)&value;
-        return _PyLong_FromByteArray(bytes, sizeof(__pyx_t_7classes_5Curve_TangentMode),
+        return _PyLong_FromByteArray(bytes, sizeof(__pyx_t_7classes_5Curve_Curve_TangentMode),
                                      little, !is_unsigned);
     }
 }

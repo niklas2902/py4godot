@@ -896,22 +896,22 @@ struct __pyx_obj_7classes_11Environment_Environment;
 /* "classes/Object.pxd":7
  * cdef class Object(Wrapper):
  *     pass
- * ctypedef enum ConnectFlags :CONNECT_DEFERRED, CONNECT_PERSIST, CONNECT_ONESHOT, CONNECT_REFERENCE_COUNTED,             # <<<<<<<<<<<<<<
+ * ctypedef enum Object_ConnectFlags :CONNECT_DEFERRED, CONNECT_PERSIST, CONNECT_ONESHOT, CONNECT_REFERENCE_COUNTED,             # <<<<<<<<<<<<<<
  */
-enum __pyx_t_7classes_6Object_ConnectFlags {
+enum __pyx_t_7classes_6Object_Object_ConnectFlags {
   __pyx_e_7classes_6Object_CONNECT_DEFERRED,
   __pyx_e_7classes_6Object_CONNECT_PERSIST,
   __pyx_e_7classes_6Object_CONNECT_ONESHOT,
   __pyx_e_7classes_6Object_CONNECT_REFERENCE_COUNTED
 };
-typedef enum __pyx_t_7classes_6Object_ConnectFlags __pyx_t_7classes_6Object_ConnectFlags;
+typedef enum __pyx_t_7classes_6Object_Object_ConnectFlags __pyx_t_7classes_6Object_Object_ConnectFlags;
 
 /* "classes/Texture.pxd":7
  * cdef class Texture(classes.Resource.Resource):
  *     pass
- * ctypedef enum Flags :FLAG_MIPMAPS, FLAG_REPEAT, FLAG_FILTER, FLAGS_DEFAULT, FLAG_ANISOTROPIC_FILTER, FLAG_CONVERT_TO_LINEAR, FLAG_MIRRORED_REPEAT, FLAG_VIDEO_SURFACE,             # <<<<<<<<<<<<<<
+ * ctypedef enum Texture_Flags :FLAG_MIPMAPS, FLAG_REPEAT, FLAG_FILTER, FLAGS_DEFAULT, FLAG_ANISOTROPIC_FILTER, FLAG_CONVERT_TO_LINEAR, FLAG_MIRRORED_REPEAT, FLAG_VIDEO_SURFACE,             # <<<<<<<<<<<<<<
  */
-enum __pyx_t_7classes_7Texture_Flags {
+enum __pyx_t_7classes_7Texture_Texture_Flags {
   __pyx_e_7classes_7Texture_FLAG_MIPMAPS,
   __pyx_e_7classes_7Texture_FLAG_REPEAT,
   __pyx_e_7classes_7Texture_FLAG_FILTER,
@@ -921,14 +921,14 @@ enum __pyx_t_7classes_7Texture_Flags {
   __pyx_e_7classes_7Texture_FLAG_MIRRORED_REPEAT,
   __pyx_e_7classes_7Texture_FLAG_VIDEO_SURFACE
 };
-typedef enum __pyx_t_7classes_7Texture_Flags __pyx_t_7classes_7Texture_Flags;
+typedef enum __pyx_t_7classes_7Texture_Texture_Flags __pyx_t_7classes_7Texture_Texture_Flags;
 
 /* "classes/Sky.pxd":7
  * cdef class Sky(classes.Resource.Resource):
  *     pass
- * ctypedef enum RadianceSize :RADIANCE_SIZE_32, RADIANCE_SIZE_64, RADIANCE_SIZE_128, RADIANCE_SIZE_256, RADIANCE_SIZE_512, RADIANCE_SIZE_1024, RADIANCE_SIZE_2048, RADIANCE_SIZE_MAX,             # <<<<<<<<<<<<<<
+ * ctypedef enum Sky_RadianceSize :RADIANCE_SIZE_32, RADIANCE_SIZE_64, RADIANCE_SIZE_128, RADIANCE_SIZE_256, RADIANCE_SIZE_512, RADIANCE_SIZE_1024, RADIANCE_SIZE_2048, RADIANCE_SIZE_MAX,             # <<<<<<<<<<<<<<
  */
-enum __pyx_t_7classes_3Sky_RadianceSize {
+enum __pyx_t_7classes_3Sky_Sky_RadianceSize {
   __pyx_e_7classes_3Sky_RADIANCE_SIZE_32,
   __pyx_e_7classes_3Sky_RADIANCE_SIZE_64,
   __pyx_e_7classes_3Sky_RADIANCE_SIZE_128,
@@ -938,16 +938,16 @@ enum __pyx_t_7classes_3Sky_RadianceSize {
   __pyx_e_7classes_3Sky_RADIANCE_SIZE_2048,
   __pyx_e_7classes_3Sky_RADIANCE_SIZE_MAX
 };
-typedef enum __pyx_t_7classes_3Sky_RadianceSize __pyx_t_7classes_3Sky_RadianceSize;
+typedef enum __pyx_t_7classes_3Sky_Sky_RadianceSize __pyx_t_7classes_3Sky_Sky_RadianceSize;
 
 /* "core/variant/Variant.pxd":17
  *         print("new_variant", type(i))
  * 
- * ctypedef enum Type:             # <<<<<<<<<<<<<<
+ * ctypedef enum Variant_Type:             # <<<<<<<<<<<<<<
  *     NIL,
  *     # atomic types
  */
-enum __pyx_t_4core_7variant_7Variant_Type {
+enum __pyx_t_4core_7variant_7Variant_Variant_Type {
   __pyx_e_4core_7variant_7Variant_NIL,
   __pyx_e_4core_7variant_7Variant_BOOL,
   __pyx_e_4core_7variant_7Variant_INT,
@@ -977,16 +977,16 @@ enum __pyx_t_4core_7variant_7Variant_Type {
   __pyx_e_4core_7variant_7Variant_POOL_COLOR_ARRAY,
   __pyx_e_4core_7variant_7Variant_VARIANT_MAX
 };
-typedef enum __pyx_t_4core_7variant_7Variant_Type __pyx_t_4core_7variant_7Variant_Type;
+typedef enum __pyx_t_4core_7variant_7Variant_Variant_Type __pyx_t_4core_7variant_7Variant_Variant_Type;
 
 /* "core/variant/Variant.pxd":58
  * 
  * 
- * ctypedef enum Operator :             # <<<<<<<<<<<<<<
+ * ctypedef enum Variant_Operator :             # <<<<<<<<<<<<<<
  * 
  *     #comparation
  */
-enum __pyx_t_4core_7variant_7Variant_Operator {
+enum __pyx_t_4core_7variant_7Variant_Variant_Operator {
   __pyx_e_4core_7variant_7Variant_OP_EQUAL,
   __pyx_e_4core_7variant_7Variant_OP_NOT_EQUAL,
   __pyx_e_4core_7variant_7Variant_OP_LESS,
@@ -1014,75 +1014,75 @@ enum __pyx_t_4core_7variant_7Variant_Operator {
   __pyx_e_4core_7variant_7Variant_OP_IN,
   __pyx_e_4core_7variant_7Variant_OP_MAX
 };
-typedef enum __pyx_t_4core_7variant_7Variant_Operator __pyx_t_4core_7variant_7Variant_Operator;
+typedef enum __pyx_t_4core_7variant_7Variant_Variant_Operator __pyx_t_4core_7variant_7Variant_Variant_Operator;
 
 /* "core/vector3/Vector3.pxd":15
  * 
  * 
- * ctypedef enum Axis :             # <<<<<<<<<<<<<<
- *     AXIS_X,
- *     AXIS_Y,
+ * ctypedef enum Vector3_Axis :             # <<<<<<<<<<<<<<
+ *     Vector3_AXIS_X,
+ *     Vector3_AXIS_Y,
  */
-enum __pyx_t_4core_7vector3_7Vector3_Axis {
-  __pyx_e_4core_7vector3_7Vector3_AXIS_X,
-  __pyx_e_4core_7vector3_7Vector3_AXIS_Y,
-  __pyx_e_4core_7vector3_7Vector3_AXIS_Z
+enum __pyx_t_4core_7vector3_7Vector3_Vector3_Axis {
+  __pyx_e_4core_7vector3_7Vector3_Vector3_AXIS_X,
+  __pyx_e_4core_7vector3_7Vector3_Vector3_AXIS_Y,
+  __pyx_e_4core_7vector3_7Vector3_Vector3_AXIS_Z
 };
-typedef enum __pyx_t_4core_7vector3_7Vector3_Axis __pyx_t_4core_7vector3_7Vector3_Axis;
+typedef enum __pyx_t_4core_7vector3_7Vector3_Vector3_Axis __pyx_t_4core_7vector3_7Vector3_Vector3_Axis;
 
 /* "classes/Environment.pxd":7
  * cdef class Environment(classes.Resource.Resource):
  *     pass
- * ctypedef enum SSAOBlur :SSAO_BLUR_DISABLED, SSAO_BLUR_1x1, SSAO_BLUR_2x2, SSAO_BLUR_3x3,             # <<<<<<<<<<<<<<
- * ctypedef enum ToneMapper :TONE_MAPPER_LINEAR, TONE_MAPPER_REINHARDT, TONE_MAPPER_FILMIC, TONE_MAPPER_ACES,
- * ctypedef enum GlowBlendMode :GLOW_BLEND_MODE_ADDITIVE, GLOW_BLEND_MODE_SCREEN, GLOW_BLEND_MODE_SOFTLIGHT, GLOW_BLEND_MODE_REPLACE,
+ * ctypedef enum Environment_SSAOBlur :SSAO_BLUR_DISABLED, SSAO_BLUR_1x1, SSAO_BLUR_2x2, SSAO_BLUR_3x3,             # <<<<<<<<<<<<<<
+ * ctypedef enum Environment_ToneMapper :TONE_MAPPER_LINEAR, TONE_MAPPER_REINHARDT, TONE_MAPPER_FILMIC, TONE_MAPPER_ACES,
+ * ctypedef enum Environment_GlowBlendMode :GLOW_BLEND_MODE_ADDITIVE, GLOW_BLEND_MODE_SCREEN, GLOW_BLEND_MODE_SOFTLIGHT, GLOW_BLEND_MODE_REPLACE,
  */
-enum __pyx_t_7classes_11Environment_SSAOBlur {
+enum __pyx_t_7classes_11Environment_Environment_SSAOBlur {
   __pyx_e_7classes_11Environment_SSAO_BLUR_DISABLED,
   __pyx_e_7classes_11Environment_SSAO_BLUR_1x1,
   __pyx_e_7classes_11Environment_SSAO_BLUR_2x2,
   __pyx_e_7classes_11Environment_SSAO_BLUR_3x3
 };
-typedef enum __pyx_t_7classes_11Environment_SSAOBlur __pyx_t_7classes_11Environment_SSAOBlur;
+typedef enum __pyx_t_7classes_11Environment_Environment_SSAOBlur __pyx_t_7classes_11Environment_Environment_SSAOBlur;
 
 /* "classes/Environment.pxd":8
  *     pass
- * ctypedef enum SSAOBlur :SSAO_BLUR_DISABLED, SSAO_BLUR_1x1, SSAO_BLUR_2x2, SSAO_BLUR_3x3,
- * ctypedef enum ToneMapper :TONE_MAPPER_LINEAR, TONE_MAPPER_REINHARDT, TONE_MAPPER_FILMIC, TONE_MAPPER_ACES,             # <<<<<<<<<<<<<<
- * ctypedef enum GlowBlendMode :GLOW_BLEND_MODE_ADDITIVE, GLOW_BLEND_MODE_SCREEN, GLOW_BLEND_MODE_SOFTLIGHT, GLOW_BLEND_MODE_REPLACE,
- * ctypedef enum BGMode :BG_CLEAR_COLOR, BG_COLOR, BG_SKY, BG_COLOR_SKY, BG_CANVAS, BG_KEEP, BG_CAMERA_FEED, BG_MAX,
+ * ctypedef enum Environment_SSAOBlur :SSAO_BLUR_DISABLED, SSAO_BLUR_1x1, SSAO_BLUR_2x2, SSAO_BLUR_3x3,
+ * ctypedef enum Environment_ToneMapper :TONE_MAPPER_LINEAR, TONE_MAPPER_REINHARDT, TONE_MAPPER_FILMIC, TONE_MAPPER_ACES,             # <<<<<<<<<<<<<<
+ * ctypedef enum Environment_GlowBlendMode :GLOW_BLEND_MODE_ADDITIVE, GLOW_BLEND_MODE_SCREEN, GLOW_BLEND_MODE_SOFTLIGHT, GLOW_BLEND_MODE_REPLACE,
+ * ctypedef enum Environment_BGMode :BG_CLEAR_COLOR, BG_COLOR, BG_SKY, BG_COLOR_SKY, BG_CANVAS, BG_KEEP, BG_CAMERA_FEED, BG_MAX,
  */
-enum __pyx_t_7classes_11Environment_ToneMapper {
+enum __pyx_t_7classes_11Environment_Environment_ToneMapper {
   __pyx_e_7classes_11Environment_TONE_MAPPER_LINEAR,
   __pyx_e_7classes_11Environment_TONE_MAPPER_REINHARDT,
   __pyx_e_7classes_11Environment_TONE_MAPPER_FILMIC,
   __pyx_e_7classes_11Environment_TONE_MAPPER_ACES
 };
-typedef enum __pyx_t_7classes_11Environment_ToneMapper __pyx_t_7classes_11Environment_ToneMapper;
+typedef enum __pyx_t_7classes_11Environment_Environment_ToneMapper __pyx_t_7classes_11Environment_Environment_ToneMapper;
 
 /* "classes/Environment.pxd":9
- * ctypedef enum SSAOBlur :SSAO_BLUR_DISABLED, SSAO_BLUR_1x1, SSAO_BLUR_2x2, SSAO_BLUR_3x3,
- * ctypedef enum ToneMapper :TONE_MAPPER_LINEAR, TONE_MAPPER_REINHARDT, TONE_MAPPER_FILMIC, TONE_MAPPER_ACES,
- * ctypedef enum GlowBlendMode :GLOW_BLEND_MODE_ADDITIVE, GLOW_BLEND_MODE_SCREEN, GLOW_BLEND_MODE_SOFTLIGHT, GLOW_BLEND_MODE_REPLACE,             # <<<<<<<<<<<<<<
- * ctypedef enum BGMode :BG_CLEAR_COLOR, BG_COLOR, BG_SKY, BG_COLOR_SKY, BG_CANVAS, BG_KEEP, BG_CAMERA_FEED, BG_MAX,
- * ctypedef enum SSAOQuality :SSAO_QUALITY_LOW, SSAO_QUALITY_MEDIUM, SSAO_QUALITY_HIGH,
+ * ctypedef enum Environment_SSAOBlur :SSAO_BLUR_DISABLED, SSAO_BLUR_1x1, SSAO_BLUR_2x2, SSAO_BLUR_3x3,
+ * ctypedef enum Environment_ToneMapper :TONE_MAPPER_LINEAR, TONE_MAPPER_REINHARDT, TONE_MAPPER_FILMIC, TONE_MAPPER_ACES,
+ * ctypedef enum Environment_GlowBlendMode :GLOW_BLEND_MODE_ADDITIVE, GLOW_BLEND_MODE_SCREEN, GLOW_BLEND_MODE_SOFTLIGHT, GLOW_BLEND_MODE_REPLACE,             # <<<<<<<<<<<<<<
+ * ctypedef enum Environment_BGMode :BG_CLEAR_COLOR, BG_COLOR, BG_SKY, BG_COLOR_SKY, BG_CANVAS, BG_KEEP, BG_CAMERA_FEED, BG_MAX,
+ * ctypedef enum Environment_SSAOQuality :SSAO_QUALITY_LOW, SSAO_QUALITY_MEDIUM, SSAO_QUALITY_HIGH,
  */
-enum __pyx_t_7classes_11Environment_GlowBlendMode {
+enum __pyx_t_7classes_11Environment_Environment_GlowBlendMode {
   __pyx_e_7classes_11Environment_GLOW_BLEND_MODE_ADDITIVE,
   __pyx_e_7classes_11Environment_GLOW_BLEND_MODE_SCREEN,
   __pyx_e_7classes_11Environment_GLOW_BLEND_MODE_SOFTLIGHT,
   __pyx_e_7classes_11Environment_GLOW_BLEND_MODE_REPLACE
 };
-typedef enum __pyx_t_7classes_11Environment_GlowBlendMode __pyx_t_7classes_11Environment_GlowBlendMode;
+typedef enum __pyx_t_7classes_11Environment_Environment_GlowBlendMode __pyx_t_7classes_11Environment_Environment_GlowBlendMode;
 
 /* "classes/Environment.pxd":10
- * ctypedef enum ToneMapper :TONE_MAPPER_LINEAR, TONE_MAPPER_REINHARDT, TONE_MAPPER_FILMIC, TONE_MAPPER_ACES,
- * ctypedef enum GlowBlendMode :GLOW_BLEND_MODE_ADDITIVE, GLOW_BLEND_MODE_SCREEN, GLOW_BLEND_MODE_SOFTLIGHT, GLOW_BLEND_MODE_REPLACE,
- * ctypedef enum BGMode :BG_CLEAR_COLOR, BG_COLOR, BG_SKY, BG_COLOR_SKY, BG_CANVAS, BG_KEEP, BG_CAMERA_FEED, BG_MAX,             # <<<<<<<<<<<<<<
- * ctypedef enum SSAOQuality :SSAO_QUALITY_LOW, SSAO_QUALITY_MEDIUM, SSAO_QUALITY_HIGH,
- * ctypedef enum DOFBlurQuality :DOF_BLUR_QUALITY_LOW, DOF_BLUR_QUALITY_MEDIUM, DOF_BLUR_QUALITY_HIGH,
+ * ctypedef enum Environment_ToneMapper :TONE_MAPPER_LINEAR, TONE_MAPPER_REINHARDT, TONE_MAPPER_FILMIC, TONE_MAPPER_ACES,
+ * ctypedef enum Environment_GlowBlendMode :GLOW_BLEND_MODE_ADDITIVE, GLOW_BLEND_MODE_SCREEN, GLOW_BLEND_MODE_SOFTLIGHT, GLOW_BLEND_MODE_REPLACE,
+ * ctypedef enum Environment_BGMode :BG_CLEAR_COLOR, BG_COLOR, BG_SKY, BG_COLOR_SKY, BG_CANVAS, BG_KEEP, BG_CAMERA_FEED, BG_MAX,             # <<<<<<<<<<<<<<
+ * ctypedef enum Environment_SSAOQuality :SSAO_QUALITY_LOW, SSAO_QUALITY_MEDIUM, SSAO_QUALITY_HIGH,
+ * ctypedef enum Environment_DOFBlurQuality :DOF_BLUR_QUALITY_LOW, DOF_BLUR_QUALITY_MEDIUM, DOF_BLUR_QUALITY_HIGH,
  */
-enum __pyx_t_7classes_11Environment_BGMode {
+enum __pyx_t_7classes_11Environment_Environment_BGMode {
   __pyx_e_7classes_11Environment_BG_CLEAR_COLOR,
   __pyx_e_7classes_11Environment_BG_COLOR,
   __pyx_e_7classes_11Environment_BG_SKY,
@@ -1092,32 +1092,32 @@ enum __pyx_t_7classes_11Environment_BGMode {
   __pyx_e_7classes_11Environment_BG_CAMERA_FEED,
   __pyx_e_7classes_11Environment_BG_MAX
 };
-typedef enum __pyx_t_7classes_11Environment_BGMode __pyx_t_7classes_11Environment_BGMode;
+typedef enum __pyx_t_7classes_11Environment_Environment_BGMode __pyx_t_7classes_11Environment_Environment_BGMode;
 
 /* "classes/Environment.pxd":11
- * ctypedef enum GlowBlendMode :GLOW_BLEND_MODE_ADDITIVE, GLOW_BLEND_MODE_SCREEN, GLOW_BLEND_MODE_SOFTLIGHT, GLOW_BLEND_MODE_REPLACE,
- * ctypedef enum BGMode :BG_CLEAR_COLOR, BG_COLOR, BG_SKY, BG_COLOR_SKY, BG_CANVAS, BG_KEEP, BG_CAMERA_FEED, BG_MAX,
- * ctypedef enum SSAOQuality :SSAO_QUALITY_LOW, SSAO_QUALITY_MEDIUM, SSAO_QUALITY_HIGH,             # <<<<<<<<<<<<<<
- * ctypedef enum DOFBlurQuality :DOF_BLUR_QUALITY_LOW, DOF_BLUR_QUALITY_MEDIUM, DOF_BLUR_QUALITY_HIGH,
+ * ctypedef enum Environment_GlowBlendMode :GLOW_BLEND_MODE_ADDITIVE, GLOW_BLEND_MODE_SCREEN, GLOW_BLEND_MODE_SOFTLIGHT, GLOW_BLEND_MODE_REPLACE,
+ * ctypedef enum Environment_BGMode :BG_CLEAR_COLOR, BG_COLOR, BG_SKY, BG_COLOR_SKY, BG_CANVAS, BG_KEEP, BG_CAMERA_FEED, BG_MAX,
+ * ctypedef enum Environment_SSAOQuality :SSAO_QUALITY_LOW, SSAO_QUALITY_MEDIUM, SSAO_QUALITY_HIGH,             # <<<<<<<<<<<<<<
+ * ctypedef enum Environment_DOFBlurQuality :DOF_BLUR_QUALITY_LOW, DOF_BLUR_QUALITY_MEDIUM, DOF_BLUR_QUALITY_HIGH,
  */
-enum __pyx_t_7classes_11Environment_SSAOQuality {
+enum __pyx_t_7classes_11Environment_Environment_SSAOQuality {
   __pyx_e_7classes_11Environment_SSAO_QUALITY_LOW,
   __pyx_e_7classes_11Environment_SSAO_QUALITY_MEDIUM,
   __pyx_e_7classes_11Environment_SSAO_QUALITY_HIGH
 };
-typedef enum __pyx_t_7classes_11Environment_SSAOQuality __pyx_t_7classes_11Environment_SSAOQuality;
+typedef enum __pyx_t_7classes_11Environment_Environment_SSAOQuality __pyx_t_7classes_11Environment_Environment_SSAOQuality;
 
 /* "classes/Environment.pxd":12
- * ctypedef enum BGMode :BG_CLEAR_COLOR, BG_COLOR, BG_SKY, BG_COLOR_SKY, BG_CANVAS, BG_KEEP, BG_CAMERA_FEED, BG_MAX,
- * ctypedef enum SSAOQuality :SSAO_QUALITY_LOW, SSAO_QUALITY_MEDIUM, SSAO_QUALITY_HIGH,
- * ctypedef enum DOFBlurQuality :DOF_BLUR_QUALITY_LOW, DOF_BLUR_QUALITY_MEDIUM, DOF_BLUR_QUALITY_HIGH,             # <<<<<<<<<<<<<<
+ * ctypedef enum Environment_BGMode :BG_CLEAR_COLOR, BG_COLOR, BG_SKY, BG_COLOR_SKY, BG_CANVAS, BG_KEEP, BG_CAMERA_FEED, BG_MAX,
+ * ctypedef enum Environment_SSAOQuality :SSAO_QUALITY_LOW, SSAO_QUALITY_MEDIUM, SSAO_QUALITY_HIGH,
+ * ctypedef enum Environment_DOFBlurQuality :DOF_BLUR_QUALITY_LOW, DOF_BLUR_QUALITY_MEDIUM, DOF_BLUR_QUALITY_HIGH,             # <<<<<<<<<<<<<<
  */
-enum __pyx_t_7classes_11Environment_DOFBlurQuality {
+enum __pyx_t_7classes_11Environment_Environment_DOFBlurQuality {
   __pyx_e_7classes_11Environment_DOF_BLUR_QUALITY_LOW,
   __pyx_e_7classes_11Environment_DOF_BLUR_QUALITY_MEDIUM,
   __pyx_e_7classes_11Environment_DOF_BLUR_QUALITY_HIGH
 };
-typedef enum __pyx_t_7classes_11Environment_DOFBlurQuality __pyx_t_7classes_11Environment_DOFBlurQuality;
+typedef enum __pyx_t_7classes_11Environment_Environment_DOFBlurQuality __pyx_t_7classes_11Environment_Environment_DOFBlurQuality;
 
 /* "utils/Wrapper.pxd":2
  * from godot_api.binding cimport *
@@ -1137,7 +1137,7 @@ struct __pyx_obj_5utils_7Wrapper_Wrapper {
  * from utils.Wrapper cimport *
  * cdef class Object(Wrapper):             # <<<<<<<<<<<<<<
  *     pass
- * ctypedef enum ConnectFlags :CONNECT_DEFERRED, CONNECT_PERSIST, CONNECT_ONESHOT, CONNECT_REFERENCE_COUNTED,
+ * ctypedef enum Object_ConnectFlags :CONNECT_DEFERRED, CONNECT_PERSIST, CONNECT_ONESHOT, CONNECT_REFERENCE_COUNTED,
  */
 struct __pyx_obj_7classes_6Object_Object {
   struct __pyx_obj_5utils_7Wrapper_Wrapper __pyx_base;
@@ -1171,7 +1171,7 @@ struct __pyx_obj_7classes_8Resource_Resource {
  * cimport classes.Resource
  * cdef class Texture(classes.Resource.Resource):             # <<<<<<<<<<<<<<
  *     pass
- * ctypedef enum Flags :FLAG_MIPMAPS, FLAG_REPEAT, FLAG_FILTER, FLAGS_DEFAULT, FLAG_ANISOTROPIC_FILTER, FLAG_CONVERT_TO_LINEAR, FLAG_MIRRORED_REPEAT, FLAG_VIDEO_SURFACE,
+ * ctypedef enum Texture_Flags :FLAG_MIPMAPS, FLAG_REPEAT, FLAG_FILTER, FLAGS_DEFAULT, FLAG_ANISOTROPIC_FILTER, FLAG_CONVERT_TO_LINEAR, FLAG_MIRRORED_REPEAT, FLAG_VIDEO_SURFACE,
  */
 struct __pyx_obj_7classes_7Texture_Texture {
   struct __pyx_obj_7classes_8Resource_Resource __pyx_base;
@@ -1183,7 +1183,7 @@ struct __pyx_obj_7classes_7Texture_Texture {
  * cimport classes.Resource
  * cdef class Sky(classes.Resource.Resource):             # <<<<<<<<<<<<<<
  *     pass
- * ctypedef enum RadianceSize :RADIANCE_SIZE_32, RADIANCE_SIZE_64, RADIANCE_SIZE_128, RADIANCE_SIZE_256, RADIANCE_SIZE_512, RADIANCE_SIZE_1024, RADIANCE_SIZE_2048, RADIANCE_SIZE_MAX,
+ * ctypedef enum Sky_RadianceSize :RADIANCE_SIZE_32, RADIANCE_SIZE_64, RADIANCE_SIZE_128, RADIANCE_SIZE_256, RADIANCE_SIZE_512, RADIANCE_SIZE_1024, RADIANCE_SIZE_2048, RADIANCE_SIZE_MAX,
  */
 struct __pyx_obj_7classes_3Sky_Sky {
   struct __pyx_obj_7classes_8Resource_Resource __pyx_base;
@@ -1517,7 +1517,7 @@ struct __pyx_obj_4core_7vector3_7Vector3_Vector3 {
  * cimport classes.Resource
  * cdef class Environment(classes.Resource.Resource):             # <<<<<<<<<<<<<<
  *     pass
- * ctypedef enum SSAOBlur :SSAO_BLUR_DISABLED, SSAO_BLUR_1x1, SSAO_BLUR_2x2, SSAO_BLUR_3x3,
+ * ctypedef enum Environment_SSAOBlur :SSAO_BLUR_DISABLED, SSAO_BLUR_1x1, SSAO_BLUR_2x2, SSAO_BLUR_3x3,
  */
 struct __pyx_obj_7classes_11Environment_Environment {
   struct __pyx_obj_7classes_8Resource_Resource __pyx_base;
@@ -1546,7 +1546,7 @@ static CYTHON_INLINE godot_object *__pyx_f_5utils_7Wrapper_7Wrapper_get_godot_ow
  * from utils.Wrapper cimport *
  * cdef class Object(Wrapper):             # <<<<<<<<<<<<<<
  *     pass
- * ctypedef enum ConnectFlags :CONNECT_DEFERRED, CONNECT_PERSIST, CONNECT_ONESHOT, CONNECT_REFERENCE_COUNTED,
+ * ctypedef enum Object_ConnectFlags :CONNECT_DEFERRED, CONNECT_PERSIST, CONNECT_ONESHOT, CONNECT_REFERENCE_COUNTED,
  */
 
 struct __pyx_vtabstruct_7classes_6Object_Object {
@@ -1586,7 +1586,7 @@ static struct __pyx_vtabstruct_7classes_8Resource_Resource *__pyx_vtabptr_7class
  * cimport classes.Resource
  * cdef class Texture(classes.Resource.Resource):             # <<<<<<<<<<<<<<
  *     pass
- * ctypedef enum Flags :FLAG_MIPMAPS, FLAG_REPEAT, FLAG_FILTER, FLAGS_DEFAULT, FLAG_ANISOTROPIC_FILTER, FLAG_CONVERT_TO_LINEAR, FLAG_MIRRORED_REPEAT, FLAG_VIDEO_SURFACE,
+ * ctypedef enum Texture_Flags :FLAG_MIPMAPS, FLAG_REPEAT, FLAG_FILTER, FLAGS_DEFAULT, FLAG_ANISOTROPIC_FILTER, FLAG_CONVERT_TO_LINEAR, FLAG_MIRRORED_REPEAT, FLAG_VIDEO_SURFACE,
  */
 
 struct __pyx_vtabstruct_7classes_7Texture_Texture {
@@ -1600,7 +1600,7 @@ static struct __pyx_vtabstruct_7classes_7Texture_Texture *__pyx_vtabptr_7classes
  * cimport classes.Resource
  * cdef class Sky(classes.Resource.Resource):             # <<<<<<<<<<<<<<
  *     pass
- * ctypedef enum RadianceSize :RADIANCE_SIZE_32, RADIANCE_SIZE_64, RADIANCE_SIZE_128, RADIANCE_SIZE_256, RADIANCE_SIZE_512, RADIANCE_SIZE_1024, RADIANCE_SIZE_2048, RADIANCE_SIZE_MAX,
+ * ctypedef enum Sky_RadianceSize :RADIANCE_SIZE_32, RADIANCE_SIZE_64, RADIANCE_SIZE_128, RADIANCE_SIZE_256, RADIANCE_SIZE_512, RADIANCE_SIZE_1024, RADIANCE_SIZE_2048, RADIANCE_SIZE_MAX,
  */
 
 struct __pyx_vtabstruct_7classes_3Sky_Sky {
@@ -2308,25 +2308,25 @@ static void __Pyx_AddTraceback(const char *funcname, int c_line,
                                int py_line, const char *filename);
 
 /* CIntToPy.proto */
-static CYTHON_INLINE PyObject* __Pyx_PyInt_From___pyx_t_7classes_11Environment_BGMode(__pyx_t_7classes_11Environment_BGMode value);
+static CYTHON_INLINE PyObject* __Pyx_PyInt_From___pyx_t_7classes_11Environment_Environment_BGMode(__pyx_t_7classes_11Environment_Environment_BGMode value);
 
 /* CIntToPy.proto */
 static CYTHON_INLINE PyObject* __Pyx_PyInt_From_int(int value);
 
 /* CIntToPy.proto */
-static CYTHON_INLINE PyObject* __Pyx_PyInt_From___pyx_t_7classes_11Environment_DOFBlurQuality(__pyx_t_7classes_11Environment_DOFBlurQuality value);
+static CYTHON_INLINE PyObject* __Pyx_PyInt_From___pyx_t_7classes_11Environment_Environment_DOFBlurQuality(__pyx_t_7classes_11Environment_Environment_DOFBlurQuality value);
 
 /* CIntToPy.proto */
-static CYTHON_INLINE PyObject* __Pyx_PyInt_From___pyx_t_7classes_11Environment_GlowBlendMode(__pyx_t_7classes_11Environment_GlowBlendMode value);
+static CYTHON_INLINE PyObject* __Pyx_PyInt_From___pyx_t_7classes_11Environment_Environment_GlowBlendMode(__pyx_t_7classes_11Environment_Environment_GlowBlendMode value);
 
 /* CIntToPy.proto */
-static CYTHON_INLINE PyObject* __Pyx_PyInt_From___pyx_t_7classes_11Environment_SSAOBlur(__pyx_t_7classes_11Environment_SSAOBlur value);
+static CYTHON_INLINE PyObject* __Pyx_PyInt_From___pyx_t_7classes_11Environment_Environment_SSAOBlur(__pyx_t_7classes_11Environment_Environment_SSAOBlur value);
 
 /* CIntToPy.proto */
-static CYTHON_INLINE PyObject* __Pyx_PyInt_From___pyx_t_7classes_11Environment_SSAOQuality(__pyx_t_7classes_11Environment_SSAOQuality value);
+static CYTHON_INLINE PyObject* __Pyx_PyInt_From___pyx_t_7classes_11Environment_Environment_SSAOQuality(__pyx_t_7classes_11Environment_Environment_SSAOQuality value);
 
 /* CIntToPy.proto */
-static CYTHON_INLINE PyObject* __Pyx_PyInt_From___pyx_t_7classes_11Environment_ToneMapper(__pyx_t_7classes_11Environment_ToneMapper value);
+static CYTHON_INLINE PyObject* __Pyx_PyInt_From___pyx_t_7classes_11Environment_Environment_ToneMapper(__pyx_t_7classes_11Environment_Environment_ToneMapper value);
 
 /* CIntFromPy.proto */
 static CYTHON_INLINE int __Pyx_PyInt_As_int(PyObject *);
@@ -19480,7 +19480,7 @@ static PyObject *__pyx_pw_7classes_11Environment_11Environment_17get_background(
 
 static PyObject *__pyx_pf_7classes_11Environment_11Environment_16get_background(struct __pyx_obj_7classes_11Environment_Environment *__pyx_v_self) {
   CYTHON_UNUSED godot_object *__pyx_v__owner;
-  __pyx_t_7classes_11Environment_BGMode *__pyx_v_ret;
+  __pyx_t_7classes_11Environment_Environment_BGMode *__pyx_v_ret;
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   godot_object *__pyx_t_1;
@@ -19495,7 +19495,7 @@ static PyObject *__pyx_pf_7classes_11Environment_11Environment_16get_background(
  *   def  get_background(self):
  *     cdef godot_object *_owner = self.godot_owner             # <<<<<<<<<<<<<<
  * 
- *     cdef BGMode* ret = NULL;
+ *     cdef Environment_BGMode* ret = NULL;
  */
   __pyx_t_1 = __pyx_v_self->__pyx_base.__pyx_base.__pyx_base.__pyx_base.godot_owner;
   __pyx_v__owner = __pyx_t_1;
@@ -19503,14 +19503,14 @@ static PyObject *__pyx_pf_7classes_11Environment_11Environment_16get_background(
   /* "classes/Environment.pyx":926
  *     cdef godot_object *_owner = self.godot_owner
  * 
- *     cdef BGMode* ret = NULL;             # <<<<<<<<<<<<<<
+ *     cdef Environment_BGMode* ret = NULL;             # <<<<<<<<<<<<<<
  * 
  *     api_core.godot_method_bind_ptrcall(bind_environment_get_background,self.godot_owner,NULL,&ret)
  */
   __pyx_v_ret = NULL;
 
   /* "classes/Environment.pyx":928
- *     cdef BGMode* ret = NULL;
+ *     cdef Environment_BGMode* ret = NULL;
  * 
  *     api_core.godot_method_bind_ptrcall(bind_environment_get_background,self.godot_owner,NULL,&ret)             # <<<<<<<<<<<<<<
  *     hello('hallo2')
@@ -19535,7 +19535,7 @@ static PyObject *__pyx_pf_7classes_11Environment_11Environment_16get_background(
  *   def  get_bg_color(self):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_2 = __Pyx_PyInt_From___pyx_t_7classes_11Environment_BGMode((*__pyx_v_ret)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 930, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyInt_From___pyx_t_7classes_11Environment_Environment_BGMode((*__pyx_v_ret)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 930, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_r = __pyx_t_2;
   __pyx_t_2 = 0;
@@ -20201,7 +20201,7 @@ static PyObject *__pyx_pw_7classes_11Environment_11Environment_31get_dof_blur_fa
 
 static PyObject *__pyx_pf_7classes_11Environment_11Environment_30get_dof_blur_far_quality(struct __pyx_obj_7classes_11Environment_Environment *__pyx_v_self) {
   CYTHON_UNUSED godot_object *__pyx_v__owner;
-  __pyx_t_7classes_11Environment_DOFBlurQuality *__pyx_v_ret;
+  __pyx_t_7classes_11Environment_Environment_DOFBlurQuality *__pyx_v_ret;
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   godot_object *__pyx_t_1;
@@ -20216,7 +20216,7 @@ static PyObject *__pyx_pf_7classes_11Environment_11Environment_30get_dof_blur_fa
  *   def  get_dof_blur_far_quality(self):
  *     cdef godot_object *_owner = self.godot_owner             # <<<<<<<<<<<<<<
  * 
- *     cdef DOFBlurQuality* ret = NULL;
+ *     cdef Environment_DOFBlurQuality* ret = NULL;
  */
   __pyx_t_1 = __pyx_v_self->__pyx_base.__pyx_base.__pyx_base.__pyx_base.godot_owner;
   __pyx_v__owner = __pyx_t_1;
@@ -20224,14 +20224,14 @@ static PyObject *__pyx_pf_7classes_11Environment_11Environment_30get_dof_blur_fa
   /* "classes/Environment.pyx":989
  *     cdef godot_object *_owner = self.godot_owner
  * 
- *     cdef DOFBlurQuality* ret = NULL;             # <<<<<<<<<<<<<<
+ *     cdef Environment_DOFBlurQuality* ret = NULL;             # <<<<<<<<<<<<<<
  * 
  *     api_core.godot_method_bind_ptrcall(bind_environment_get_dof_blur_far_quality,self.godot_owner,NULL,&ret)
  */
   __pyx_v_ret = NULL;
 
   /* "classes/Environment.pyx":991
- *     cdef DOFBlurQuality* ret = NULL;
+ *     cdef Environment_DOFBlurQuality* ret = NULL;
  * 
  *     api_core.godot_method_bind_ptrcall(bind_environment_get_dof_blur_far_quality,self.godot_owner,NULL,&ret)             # <<<<<<<<<<<<<<
  *     hello('hallo2')
@@ -20256,7 +20256,7 @@ static PyObject *__pyx_pf_7classes_11Environment_11Environment_30get_dof_blur_fa
  *   def  get_dof_blur_far_transition(self):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_2 = __Pyx_PyInt_From___pyx_t_7classes_11Environment_DOFBlurQuality((*__pyx_v_ret)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 993, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyInt_From___pyx_t_7classes_11Environment_Environment_DOFBlurQuality((*__pyx_v_ret)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 993, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_r = __pyx_t_2;
   __pyx_t_2 = 0;
@@ -20613,7 +20613,7 @@ static PyObject *__pyx_pw_7classes_11Environment_11Environment_39get_dof_blur_ne
 
 static PyObject *__pyx_pf_7classes_11Environment_11Environment_38get_dof_blur_near_quality(struct __pyx_obj_7classes_11Environment_Environment *__pyx_v_self) {
   CYTHON_UNUSED godot_object *__pyx_v__owner;
-  __pyx_t_7classes_11Environment_DOFBlurQuality *__pyx_v_ret;
+  __pyx_t_7classes_11Environment_Environment_DOFBlurQuality *__pyx_v_ret;
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   godot_object *__pyx_t_1;
@@ -20628,7 +20628,7 @@ static PyObject *__pyx_pf_7classes_11Environment_11Environment_38get_dof_blur_ne
  *   def  get_dof_blur_near_quality(self):
  *     cdef godot_object *_owner = self.godot_owner             # <<<<<<<<<<<<<<
  * 
- *     cdef DOFBlurQuality* ret = NULL;
+ *     cdef Environment_DOFBlurQuality* ret = NULL;
  */
   __pyx_t_1 = __pyx_v_self->__pyx_base.__pyx_base.__pyx_base.__pyx_base.godot_owner;
   __pyx_v__owner = __pyx_t_1;
@@ -20636,14 +20636,14 @@ static PyObject *__pyx_pf_7classes_11Environment_11Environment_38get_dof_blur_ne
   /* "classes/Environment.pyx":1025
  *     cdef godot_object *_owner = self.godot_owner
  * 
- *     cdef DOFBlurQuality* ret = NULL;             # <<<<<<<<<<<<<<
+ *     cdef Environment_DOFBlurQuality* ret = NULL;             # <<<<<<<<<<<<<<
  * 
  *     api_core.godot_method_bind_ptrcall(bind_environment_get_dof_blur_near_quality,self.godot_owner,NULL,&ret)
  */
   __pyx_v_ret = NULL;
 
   /* "classes/Environment.pyx":1027
- *     cdef DOFBlurQuality* ret = NULL;
+ *     cdef Environment_DOFBlurQuality* ret = NULL;
  * 
  *     api_core.godot_method_bind_ptrcall(bind_environment_get_dof_blur_near_quality,self.godot_owner,NULL,&ret)             # <<<<<<<<<<<<<<
  *     hello('hallo2')
@@ -20668,7 +20668,7 @@ static PyObject *__pyx_pf_7classes_11Environment_11Environment_38get_dof_blur_ne
  *   def  get_dof_blur_near_transition(self):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_2 = __Pyx_PyInt_From___pyx_t_7classes_11Environment_DOFBlurQuality((*__pyx_v_ret)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 1029, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyInt_From___pyx_t_7classes_11Environment_Environment_DOFBlurQuality((*__pyx_v_ret)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 1029, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_r = __pyx_t_2;
   __pyx_t_2 = 0;
@@ -21849,7 +21849,7 @@ static PyObject *__pyx_pw_7classes_11Environment_11Environment_63get_glow_blend_
 
 static PyObject *__pyx_pf_7classes_11Environment_11Environment_62get_glow_blend_mode(struct __pyx_obj_7classes_11Environment_Environment *__pyx_v_self) {
   CYTHON_UNUSED godot_object *__pyx_v__owner;
-  __pyx_t_7classes_11Environment_GlowBlendMode *__pyx_v_ret;
+  __pyx_t_7classes_11Environment_Environment_GlowBlendMode *__pyx_v_ret;
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   godot_object *__pyx_t_1;
@@ -21864,7 +21864,7 @@ static PyObject *__pyx_pf_7classes_11Environment_11Environment_62get_glow_blend_
  *   def  get_glow_blend_mode(self):
  *     cdef godot_object *_owner = self.godot_owner             # <<<<<<<<<<<<<<
  * 
- *     cdef GlowBlendMode* ret = NULL;
+ *     cdef Environment_GlowBlendMode* ret = NULL;
  */
   __pyx_t_1 = __pyx_v_self->__pyx_base.__pyx_base.__pyx_base.__pyx_base.godot_owner;
   __pyx_v__owner = __pyx_t_1;
@@ -21872,14 +21872,14 @@ static PyObject *__pyx_pf_7classes_11Environment_11Environment_62get_glow_blend_
   /* "classes/Environment.pyx":1133
  *     cdef godot_object *_owner = self.godot_owner
  * 
- *     cdef GlowBlendMode* ret = NULL;             # <<<<<<<<<<<<<<
+ *     cdef Environment_GlowBlendMode* ret = NULL;             # <<<<<<<<<<<<<<
  * 
  *     api_core.godot_method_bind_ptrcall(bind_environment_get_glow_blend_mode,self.godot_owner,NULL,&ret)
  */
   __pyx_v_ret = NULL;
 
   /* "classes/Environment.pyx":1135
- *     cdef GlowBlendMode* ret = NULL;
+ *     cdef Environment_GlowBlendMode* ret = NULL;
  * 
  *     api_core.godot_method_bind_ptrcall(bind_environment_get_glow_blend_mode,self.godot_owner,NULL,&ret)             # <<<<<<<<<<<<<<
  *     hello('hallo2')
@@ -21904,7 +21904,7 @@ static PyObject *__pyx_pf_7classes_11Environment_11Environment_62get_glow_blend_
  *   def  get_glow_bloom(self):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_2 = __Pyx_PyInt_From___pyx_t_7classes_11Environment_GlowBlendMode((*__pyx_v_ret)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 1137, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyInt_From___pyx_t_7classes_11Environment_Environment_GlowBlendMode((*__pyx_v_ret)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 1137, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_r = __pyx_t_2;
   __pyx_t_2 = 0;
@@ -23269,7 +23269,7 @@ static PyObject *__pyx_pw_7classes_11Environment_11Environment_91get_ssao_blur(P
 
 static PyObject *__pyx_pf_7classes_11Environment_11Environment_90get_ssao_blur(struct __pyx_obj_7classes_11Environment_Environment *__pyx_v_self) {
   CYTHON_UNUSED godot_object *__pyx_v__owner;
-  __pyx_t_7classes_11Environment_SSAOBlur *__pyx_v_ret;
+  __pyx_t_7classes_11Environment_Environment_SSAOBlur *__pyx_v_ret;
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   godot_object *__pyx_t_1;
@@ -23284,7 +23284,7 @@ static PyObject *__pyx_pf_7classes_11Environment_11Environment_90get_ssao_blur(s
  *   def  get_ssao_blur(self):
  *     cdef godot_object *_owner = self.godot_owner             # <<<<<<<<<<<<<<
  * 
- *     cdef SSAOBlur* ret = NULL;
+ *     cdef Environment_SSAOBlur* ret = NULL;
  */
   __pyx_t_1 = __pyx_v_self->__pyx_base.__pyx_base.__pyx_base.__pyx_base.godot_owner;
   __pyx_v__owner = __pyx_t_1;
@@ -23292,14 +23292,14 @@ static PyObject *__pyx_pf_7classes_11Environment_11Environment_90get_ssao_blur(s
   /* "classes/Environment.pyx":1257
  *     cdef godot_object *_owner = self.godot_owner
  * 
- *     cdef SSAOBlur* ret = NULL;             # <<<<<<<<<<<<<<
+ *     cdef Environment_SSAOBlur* ret = NULL;             # <<<<<<<<<<<<<<
  * 
  *     api_core.godot_method_bind_ptrcall(bind_environment_get_ssao_blur,self.godot_owner,NULL,&ret)
  */
   __pyx_v_ret = NULL;
 
   /* "classes/Environment.pyx":1259
- *     cdef SSAOBlur* ret = NULL;
+ *     cdef Environment_SSAOBlur* ret = NULL;
  * 
  *     api_core.godot_method_bind_ptrcall(bind_environment_get_ssao_blur,self.godot_owner,NULL,&ret)             # <<<<<<<<<<<<<<
  *     hello('hallo2')
@@ -23324,7 +23324,7 @@ static PyObject *__pyx_pf_7classes_11Environment_11Environment_90get_ssao_blur(s
  *   def  get_ssao_color(self):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_2 = __Pyx_PyInt_From___pyx_t_7classes_11Environment_SSAOBlur((*__pyx_v_ret)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 1261, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyInt_From___pyx_t_7classes_11Environment_Environment_SSAOBlur((*__pyx_v_ret)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 1261, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_r = __pyx_t_2;
   __pyx_t_2 = 0;
@@ -23887,7 +23887,7 @@ static PyObject *__pyx_pw_7classes_11Environment_11Environment_103get_ssao_quali
 
 static PyObject *__pyx_pf_7classes_11Environment_11Environment_102get_ssao_quality(struct __pyx_obj_7classes_11Environment_Environment *__pyx_v_self) {
   CYTHON_UNUSED godot_object *__pyx_v__owner;
-  __pyx_t_7classes_11Environment_SSAOQuality *__pyx_v_ret;
+  __pyx_t_7classes_11Environment_Environment_SSAOQuality *__pyx_v_ret;
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   godot_object *__pyx_t_1;
@@ -23902,7 +23902,7 @@ static PyObject *__pyx_pf_7classes_11Environment_11Environment_102get_ssao_quali
  *   def  get_ssao_quality(self):
  *     cdef godot_object *_owner = self.godot_owner             # <<<<<<<<<<<<<<
  * 
- *     cdef SSAOQuality* ret = NULL;
+ *     cdef Environment_SSAOQuality* ret = NULL;
  */
   __pyx_t_1 = __pyx_v_self->__pyx_base.__pyx_base.__pyx_base.__pyx_base.godot_owner;
   __pyx_v__owner = __pyx_t_1;
@@ -23910,14 +23910,14 @@ static PyObject *__pyx_pf_7classes_11Environment_11Environment_102get_ssao_quali
   /* "classes/Environment.pyx":1311
  *     cdef godot_object *_owner = self.godot_owner
  * 
- *     cdef SSAOQuality* ret = NULL;             # <<<<<<<<<<<<<<
+ *     cdef Environment_SSAOQuality* ret = NULL;             # <<<<<<<<<<<<<<
  * 
  *     api_core.godot_method_bind_ptrcall(bind_environment_get_ssao_quality,self.godot_owner,NULL,&ret)
  */
   __pyx_v_ret = NULL;
 
   /* "classes/Environment.pyx":1313
- *     cdef SSAOQuality* ret = NULL;
+ *     cdef Environment_SSAOQuality* ret = NULL;
  * 
  *     api_core.godot_method_bind_ptrcall(bind_environment_get_ssao_quality,self.godot_owner,NULL,&ret)             # <<<<<<<<<<<<<<
  *     hello('hallo2')
@@ -23942,7 +23942,7 @@ static PyObject *__pyx_pf_7classes_11Environment_11Environment_102get_ssao_quali
  *   def  get_ssao_radius(self):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_2 = __Pyx_PyInt_From___pyx_t_7classes_11Environment_SSAOQuality((*__pyx_v_ret)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 1315, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyInt_From___pyx_t_7classes_11Environment_Environment_SSAOQuality((*__pyx_v_ret)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 1315, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_r = __pyx_t_2;
   __pyx_t_2 = 0;
@@ -25329,7 +25329,7 @@ static PyObject *__pyx_pw_7classes_11Environment_11Environment_131get_tonemapper
 
 static PyObject *__pyx_pf_7classes_11Environment_11Environment_130get_tonemapper(struct __pyx_obj_7classes_11Environment_Environment *__pyx_v_self) {
   CYTHON_UNUSED godot_object *__pyx_v__owner;
-  __pyx_t_7classes_11Environment_ToneMapper *__pyx_v_ret;
+  __pyx_t_7classes_11Environment_Environment_ToneMapper *__pyx_v_ret;
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   godot_object *__pyx_t_1;
@@ -25344,7 +25344,7 @@ static PyObject *__pyx_pf_7classes_11Environment_11Environment_130get_tonemapper
  *   def  get_tonemapper(self):
  *     cdef godot_object *_owner = self.godot_owner             # <<<<<<<<<<<<<<
  * 
- *     cdef ToneMapper* ret = NULL;
+ *     cdef Environment_ToneMapper* ret = NULL;
  */
   __pyx_t_1 = __pyx_v_self->__pyx_base.__pyx_base.__pyx_base.__pyx_base.godot_owner;
   __pyx_v__owner = __pyx_t_1;
@@ -25352,14 +25352,14 @@ static PyObject *__pyx_pf_7classes_11Environment_11Environment_130get_tonemapper
   /* "classes/Environment.pyx":1437
  *     cdef godot_object *_owner = self.godot_owner
  * 
- *     cdef ToneMapper* ret = NULL;             # <<<<<<<<<<<<<<
+ *     cdef Environment_ToneMapper* ret = NULL;             # <<<<<<<<<<<<<<
  * 
  *     api_core.godot_method_bind_ptrcall(bind_environment_get_tonemapper,self.godot_owner,NULL,&ret)
  */
   __pyx_v_ret = NULL;
 
   /* "classes/Environment.pyx":1439
- *     cdef ToneMapper* ret = NULL;
+ *     cdef Environment_ToneMapper* ret = NULL;
  * 
  *     api_core.godot_method_bind_ptrcall(bind_environment_get_tonemapper,self.godot_owner,NULL,&ret)             # <<<<<<<<<<<<<<
  *     hello('hallo2')
@@ -25384,7 +25384,7 @@ static PyObject *__pyx_pf_7classes_11Environment_11Environment_130get_tonemapper
  *   def  is_adjustment_enabled(self):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_2 = __Pyx_PyInt_From___pyx_t_7classes_11Environment_ToneMapper((*__pyx_v_ret)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 1441, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyInt_From___pyx_t_7classes_11Environment_Environment_ToneMapper((*__pyx_v_ret)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 1441, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_r = __pyx_t_2;
   __pyx_t_2 = 0;
@@ -34568,7 +34568,7 @@ static CYTHON_INLINE void __pyx_f_4core_7variant_7Variant_7Variant_new_variant(C
  *     cdef inline void new_variant(self, i):
  *         print("new_variant", type(i))             # <<<<<<<<<<<<<<
  * 
- * ctypedef enum Type:
+ * ctypedef enum Variant_Type:
  */
   __pyx_t_1 = PyTuple_New(2); if (unlikely(!__pyx_t_1)) __PYX_ERR(4, 15, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
@@ -37518,16 +37518,17 @@ static int __pyx_import_star_set(PyObject *o, PyObject* py_name, char *name) {
   static const char* internal_type_names[] = {
     "AABB",
     "Array",
-    "Axis",
-    "BGMode",
     "Basis",
     "Color",
-    "DOFBlurQuality",
     "Dictionary",
     "Environment",
-    "GlowBlendMode",
+    "Environment_BGMode",
+    "Environment_DOFBlurQuality",
+    "Environment_GlowBlendMode",
+    "Environment_SSAOBlur",
+    "Environment_SSAOQuality",
+    "Environment_ToneMapper",
     "NodePath",
-    "Operator",
     "Plane",
     "PoolByteArray",
     "PoolColorArray",
@@ -37540,16 +37541,15 @@ static int __pyx_import_star_set(PyObject *o, PyObject* py_name, char *name) {
     "RID",
     "Rect2",
     "Reference",
-    "SSAOBlur",
-    "SSAOQuality",
     "String",
-    "ToneMapper",
     "Transform",
     "Transform2D",
-    "Type",
     "Variant",
+    "Variant_Operator",
+    "Variant_Type",
     "Vector2",
     "Vector3",
+    "Vector3_Axis",
     "Wrapper",
     "bool",
     "godot_aabb",
@@ -40590,24 +40590,24 @@ bad:
     }
 
 /* CIntToPy */
-static CYTHON_INLINE PyObject* __Pyx_PyInt_From___pyx_t_7classes_11Environment_BGMode(__pyx_t_7classes_11Environment_BGMode value) {
-    const __pyx_t_7classes_11Environment_BGMode neg_one = (__pyx_t_7classes_11Environment_BGMode) ((__pyx_t_7classes_11Environment_BGMode) 0 - (__pyx_t_7classes_11Environment_BGMode) 1), const_zero = (__pyx_t_7classes_11Environment_BGMode) 0;
+static CYTHON_INLINE PyObject* __Pyx_PyInt_From___pyx_t_7classes_11Environment_Environment_BGMode(__pyx_t_7classes_11Environment_Environment_BGMode value) {
+    const __pyx_t_7classes_11Environment_Environment_BGMode neg_one = (__pyx_t_7classes_11Environment_Environment_BGMode) ((__pyx_t_7classes_11Environment_Environment_BGMode) 0 - (__pyx_t_7classes_11Environment_Environment_BGMode) 1), const_zero = (__pyx_t_7classes_11Environment_Environment_BGMode) 0;
     const int is_unsigned = neg_one > const_zero;
     if (is_unsigned) {
-        if (sizeof(__pyx_t_7classes_11Environment_BGMode) < sizeof(long)) {
+        if (sizeof(__pyx_t_7classes_11Environment_Environment_BGMode) < sizeof(long)) {
             return PyInt_FromLong((long) value);
-        } else if (sizeof(__pyx_t_7classes_11Environment_BGMode) <= sizeof(unsigned long)) {
+        } else if (sizeof(__pyx_t_7classes_11Environment_Environment_BGMode) <= sizeof(unsigned long)) {
             return PyLong_FromUnsignedLong((unsigned long) value);
 #ifdef HAVE_LONG_LONG
-        } else if (sizeof(__pyx_t_7classes_11Environment_BGMode) <= sizeof(unsigned PY_LONG_LONG)) {
+        } else if (sizeof(__pyx_t_7classes_11Environment_Environment_BGMode) <= sizeof(unsigned PY_LONG_LONG)) {
             return PyLong_FromUnsignedLongLong((unsigned PY_LONG_LONG) value);
 #endif
         }
     } else {
-        if (sizeof(__pyx_t_7classes_11Environment_BGMode) <= sizeof(long)) {
+        if (sizeof(__pyx_t_7classes_11Environment_Environment_BGMode) <= sizeof(long)) {
             return PyInt_FromLong((long) value);
 #ifdef HAVE_LONG_LONG
-        } else if (sizeof(__pyx_t_7classes_11Environment_BGMode) <= sizeof(PY_LONG_LONG)) {
+        } else if (sizeof(__pyx_t_7classes_11Environment_Environment_BGMode) <= sizeof(PY_LONG_LONG)) {
             return PyLong_FromLongLong((PY_LONG_LONG) value);
 #endif
         }
@@ -40615,7 +40615,7 @@ static CYTHON_INLINE PyObject* __Pyx_PyInt_From___pyx_t_7classes_11Environment_B
     {
         int one = 1; int little = (int)*(unsigned char *)&one;
         unsigned char *bytes = (unsigned char *)&value;
-        return _PyLong_FromByteArray(bytes, sizeof(__pyx_t_7classes_11Environment_BGMode),
+        return _PyLong_FromByteArray(bytes, sizeof(__pyx_t_7classes_11Environment_Environment_BGMode),
                                      little, !is_unsigned);
     }
 }
@@ -40652,24 +40652,24 @@ static CYTHON_INLINE PyObject* __Pyx_PyInt_From_int(int value) {
 }
 
 /* CIntToPy */
-static CYTHON_INLINE PyObject* __Pyx_PyInt_From___pyx_t_7classes_11Environment_DOFBlurQuality(__pyx_t_7classes_11Environment_DOFBlurQuality value) {
-    const __pyx_t_7classes_11Environment_DOFBlurQuality neg_one = (__pyx_t_7classes_11Environment_DOFBlurQuality) ((__pyx_t_7classes_11Environment_DOFBlurQuality) 0 - (__pyx_t_7classes_11Environment_DOFBlurQuality) 1), const_zero = (__pyx_t_7classes_11Environment_DOFBlurQuality) 0;
+static CYTHON_INLINE PyObject* __Pyx_PyInt_From___pyx_t_7classes_11Environment_Environment_DOFBlurQuality(__pyx_t_7classes_11Environment_Environment_DOFBlurQuality value) {
+    const __pyx_t_7classes_11Environment_Environment_DOFBlurQuality neg_one = (__pyx_t_7classes_11Environment_Environment_DOFBlurQuality) ((__pyx_t_7classes_11Environment_Environment_DOFBlurQuality) 0 - (__pyx_t_7classes_11Environment_Environment_DOFBlurQuality) 1), const_zero = (__pyx_t_7classes_11Environment_Environment_DOFBlurQuality) 0;
     const int is_unsigned = neg_one > const_zero;
     if (is_unsigned) {
-        if (sizeof(__pyx_t_7classes_11Environment_DOFBlurQuality) < sizeof(long)) {
+        if (sizeof(__pyx_t_7classes_11Environment_Environment_DOFBlurQuality) < sizeof(long)) {
             return PyInt_FromLong((long) value);
-        } else if (sizeof(__pyx_t_7classes_11Environment_DOFBlurQuality) <= sizeof(unsigned long)) {
+        } else if (sizeof(__pyx_t_7classes_11Environment_Environment_DOFBlurQuality) <= sizeof(unsigned long)) {
             return PyLong_FromUnsignedLong((unsigned long) value);
 #ifdef HAVE_LONG_LONG
-        } else if (sizeof(__pyx_t_7classes_11Environment_DOFBlurQuality) <= sizeof(unsigned PY_LONG_LONG)) {
+        } else if (sizeof(__pyx_t_7classes_11Environment_Environment_DOFBlurQuality) <= sizeof(unsigned PY_LONG_LONG)) {
             return PyLong_FromUnsignedLongLong((unsigned PY_LONG_LONG) value);
 #endif
         }
     } else {
-        if (sizeof(__pyx_t_7classes_11Environment_DOFBlurQuality) <= sizeof(long)) {
+        if (sizeof(__pyx_t_7classes_11Environment_Environment_DOFBlurQuality) <= sizeof(long)) {
             return PyInt_FromLong((long) value);
 #ifdef HAVE_LONG_LONG
-        } else if (sizeof(__pyx_t_7classes_11Environment_DOFBlurQuality) <= sizeof(PY_LONG_LONG)) {
+        } else if (sizeof(__pyx_t_7classes_11Environment_Environment_DOFBlurQuality) <= sizeof(PY_LONG_LONG)) {
             return PyLong_FromLongLong((PY_LONG_LONG) value);
 #endif
         }
@@ -40677,30 +40677,30 @@ static CYTHON_INLINE PyObject* __Pyx_PyInt_From___pyx_t_7classes_11Environment_D
     {
         int one = 1; int little = (int)*(unsigned char *)&one;
         unsigned char *bytes = (unsigned char *)&value;
-        return _PyLong_FromByteArray(bytes, sizeof(__pyx_t_7classes_11Environment_DOFBlurQuality),
+        return _PyLong_FromByteArray(bytes, sizeof(__pyx_t_7classes_11Environment_Environment_DOFBlurQuality),
                                      little, !is_unsigned);
     }
 }
 
 /* CIntToPy */
-static CYTHON_INLINE PyObject* __Pyx_PyInt_From___pyx_t_7classes_11Environment_GlowBlendMode(__pyx_t_7classes_11Environment_GlowBlendMode value) {
-    const __pyx_t_7classes_11Environment_GlowBlendMode neg_one = (__pyx_t_7classes_11Environment_GlowBlendMode) ((__pyx_t_7classes_11Environment_GlowBlendMode) 0 - (__pyx_t_7classes_11Environment_GlowBlendMode) 1), const_zero = (__pyx_t_7classes_11Environment_GlowBlendMode) 0;
+static CYTHON_INLINE PyObject* __Pyx_PyInt_From___pyx_t_7classes_11Environment_Environment_GlowBlendMode(__pyx_t_7classes_11Environment_Environment_GlowBlendMode value) {
+    const __pyx_t_7classes_11Environment_Environment_GlowBlendMode neg_one = (__pyx_t_7classes_11Environment_Environment_GlowBlendMode) ((__pyx_t_7classes_11Environment_Environment_GlowBlendMode) 0 - (__pyx_t_7classes_11Environment_Environment_GlowBlendMode) 1), const_zero = (__pyx_t_7classes_11Environment_Environment_GlowBlendMode) 0;
     const int is_unsigned = neg_one > const_zero;
     if (is_unsigned) {
-        if (sizeof(__pyx_t_7classes_11Environment_GlowBlendMode) < sizeof(long)) {
+        if (sizeof(__pyx_t_7classes_11Environment_Environment_GlowBlendMode) < sizeof(long)) {
             return PyInt_FromLong((long) value);
-        } else if (sizeof(__pyx_t_7classes_11Environment_GlowBlendMode) <= sizeof(unsigned long)) {
+        } else if (sizeof(__pyx_t_7classes_11Environment_Environment_GlowBlendMode) <= sizeof(unsigned long)) {
             return PyLong_FromUnsignedLong((unsigned long) value);
 #ifdef HAVE_LONG_LONG
-        } else if (sizeof(__pyx_t_7classes_11Environment_GlowBlendMode) <= sizeof(unsigned PY_LONG_LONG)) {
+        } else if (sizeof(__pyx_t_7classes_11Environment_Environment_GlowBlendMode) <= sizeof(unsigned PY_LONG_LONG)) {
             return PyLong_FromUnsignedLongLong((unsigned PY_LONG_LONG) value);
 #endif
         }
     } else {
-        if (sizeof(__pyx_t_7classes_11Environment_GlowBlendMode) <= sizeof(long)) {
+        if (sizeof(__pyx_t_7classes_11Environment_Environment_GlowBlendMode) <= sizeof(long)) {
             return PyInt_FromLong((long) value);
 #ifdef HAVE_LONG_LONG
-        } else if (sizeof(__pyx_t_7classes_11Environment_GlowBlendMode) <= sizeof(PY_LONG_LONG)) {
+        } else if (sizeof(__pyx_t_7classes_11Environment_Environment_GlowBlendMode) <= sizeof(PY_LONG_LONG)) {
             return PyLong_FromLongLong((PY_LONG_LONG) value);
 #endif
         }
@@ -40708,30 +40708,30 @@ static CYTHON_INLINE PyObject* __Pyx_PyInt_From___pyx_t_7classes_11Environment_G
     {
         int one = 1; int little = (int)*(unsigned char *)&one;
         unsigned char *bytes = (unsigned char *)&value;
-        return _PyLong_FromByteArray(bytes, sizeof(__pyx_t_7classes_11Environment_GlowBlendMode),
+        return _PyLong_FromByteArray(bytes, sizeof(__pyx_t_7classes_11Environment_Environment_GlowBlendMode),
                                      little, !is_unsigned);
     }
 }
 
 /* CIntToPy */
-static CYTHON_INLINE PyObject* __Pyx_PyInt_From___pyx_t_7classes_11Environment_SSAOBlur(__pyx_t_7classes_11Environment_SSAOBlur value) {
-    const __pyx_t_7classes_11Environment_SSAOBlur neg_one = (__pyx_t_7classes_11Environment_SSAOBlur) ((__pyx_t_7classes_11Environment_SSAOBlur) 0 - (__pyx_t_7classes_11Environment_SSAOBlur) 1), const_zero = (__pyx_t_7classes_11Environment_SSAOBlur) 0;
+static CYTHON_INLINE PyObject* __Pyx_PyInt_From___pyx_t_7classes_11Environment_Environment_SSAOBlur(__pyx_t_7classes_11Environment_Environment_SSAOBlur value) {
+    const __pyx_t_7classes_11Environment_Environment_SSAOBlur neg_one = (__pyx_t_7classes_11Environment_Environment_SSAOBlur) ((__pyx_t_7classes_11Environment_Environment_SSAOBlur) 0 - (__pyx_t_7classes_11Environment_Environment_SSAOBlur) 1), const_zero = (__pyx_t_7classes_11Environment_Environment_SSAOBlur) 0;
     const int is_unsigned = neg_one > const_zero;
     if (is_unsigned) {
-        if (sizeof(__pyx_t_7classes_11Environment_SSAOBlur) < sizeof(long)) {
+        if (sizeof(__pyx_t_7classes_11Environment_Environment_SSAOBlur) < sizeof(long)) {
             return PyInt_FromLong((long) value);
-        } else if (sizeof(__pyx_t_7classes_11Environment_SSAOBlur) <= sizeof(unsigned long)) {
+        } else if (sizeof(__pyx_t_7classes_11Environment_Environment_SSAOBlur) <= sizeof(unsigned long)) {
             return PyLong_FromUnsignedLong((unsigned long) value);
 #ifdef HAVE_LONG_LONG
-        } else if (sizeof(__pyx_t_7classes_11Environment_SSAOBlur) <= sizeof(unsigned PY_LONG_LONG)) {
+        } else if (sizeof(__pyx_t_7classes_11Environment_Environment_SSAOBlur) <= sizeof(unsigned PY_LONG_LONG)) {
             return PyLong_FromUnsignedLongLong((unsigned PY_LONG_LONG) value);
 #endif
         }
     } else {
-        if (sizeof(__pyx_t_7classes_11Environment_SSAOBlur) <= sizeof(long)) {
+        if (sizeof(__pyx_t_7classes_11Environment_Environment_SSAOBlur) <= sizeof(long)) {
             return PyInt_FromLong((long) value);
 #ifdef HAVE_LONG_LONG
-        } else if (sizeof(__pyx_t_7classes_11Environment_SSAOBlur) <= sizeof(PY_LONG_LONG)) {
+        } else if (sizeof(__pyx_t_7classes_11Environment_Environment_SSAOBlur) <= sizeof(PY_LONG_LONG)) {
             return PyLong_FromLongLong((PY_LONG_LONG) value);
 #endif
         }
@@ -40739,30 +40739,30 @@ static CYTHON_INLINE PyObject* __Pyx_PyInt_From___pyx_t_7classes_11Environment_S
     {
         int one = 1; int little = (int)*(unsigned char *)&one;
         unsigned char *bytes = (unsigned char *)&value;
-        return _PyLong_FromByteArray(bytes, sizeof(__pyx_t_7classes_11Environment_SSAOBlur),
+        return _PyLong_FromByteArray(bytes, sizeof(__pyx_t_7classes_11Environment_Environment_SSAOBlur),
                                      little, !is_unsigned);
     }
 }
 
 /* CIntToPy */
-static CYTHON_INLINE PyObject* __Pyx_PyInt_From___pyx_t_7classes_11Environment_SSAOQuality(__pyx_t_7classes_11Environment_SSAOQuality value) {
-    const __pyx_t_7classes_11Environment_SSAOQuality neg_one = (__pyx_t_7classes_11Environment_SSAOQuality) ((__pyx_t_7classes_11Environment_SSAOQuality) 0 - (__pyx_t_7classes_11Environment_SSAOQuality) 1), const_zero = (__pyx_t_7classes_11Environment_SSAOQuality) 0;
+static CYTHON_INLINE PyObject* __Pyx_PyInt_From___pyx_t_7classes_11Environment_Environment_SSAOQuality(__pyx_t_7classes_11Environment_Environment_SSAOQuality value) {
+    const __pyx_t_7classes_11Environment_Environment_SSAOQuality neg_one = (__pyx_t_7classes_11Environment_Environment_SSAOQuality) ((__pyx_t_7classes_11Environment_Environment_SSAOQuality) 0 - (__pyx_t_7classes_11Environment_Environment_SSAOQuality) 1), const_zero = (__pyx_t_7classes_11Environment_Environment_SSAOQuality) 0;
     const int is_unsigned = neg_one > const_zero;
     if (is_unsigned) {
-        if (sizeof(__pyx_t_7classes_11Environment_SSAOQuality) < sizeof(long)) {
+        if (sizeof(__pyx_t_7classes_11Environment_Environment_SSAOQuality) < sizeof(long)) {
             return PyInt_FromLong((long) value);
-        } else if (sizeof(__pyx_t_7classes_11Environment_SSAOQuality) <= sizeof(unsigned long)) {
+        } else if (sizeof(__pyx_t_7classes_11Environment_Environment_SSAOQuality) <= sizeof(unsigned long)) {
             return PyLong_FromUnsignedLong((unsigned long) value);
 #ifdef HAVE_LONG_LONG
-        } else if (sizeof(__pyx_t_7classes_11Environment_SSAOQuality) <= sizeof(unsigned PY_LONG_LONG)) {
+        } else if (sizeof(__pyx_t_7classes_11Environment_Environment_SSAOQuality) <= sizeof(unsigned PY_LONG_LONG)) {
             return PyLong_FromUnsignedLongLong((unsigned PY_LONG_LONG) value);
 #endif
         }
     } else {
-        if (sizeof(__pyx_t_7classes_11Environment_SSAOQuality) <= sizeof(long)) {
+        if (sizeof(__pyx_t_7classes_11Environment_Environment_SSAOQuality) <= sizeof(long)) {
             return PyInt_FromLong((long) value);
 #ifdef HAVE_LONG_LONG
-        } else if (sizeof(__pyx_t_7classes_11Environment_SSAOQuality) <= sizeof(PY_LONG_LONG)) {
+        } else if (sizeof(__pyx_t_7classes_11Environment_Environment_SSAOQuality) <= sizeof(PY_LONG_LONG)) {
             return PyLong_FromLongLong((PY_LONG_LONG) value);
 #endif
         }
@@ -40770,30 +40770,30 @@ static CYTHON_INLINE PyObject* __Pyx_PyInt_From___pyx_t_7classes_11Environment_S
     {
         int one = 1; int little = (int)*(unsigned char *)&one;
         unsigned char *bytes = (unsigned char *)&value;
-        return _PyLong_FromByteArray(bytes, sizeof(__pyx_t_7classes_11Environment_SSAOQuality),
+        return _PyLong_FromByteArray(bytes, sizeof(__pyx_t_7classes_11Environment_Environment_SSAOQuality),
                                      little, !is_unsigned);
     }
 }
 
 /* CIntToPy */
-static CYTHON_INLINE PyObject* __Pyx_PyInt_From___pyx_t_7classes_11Environment_ToneMapper(__pyx_t_7classes_11Environment_ToneMapper value) {
-    const __pyx_t_7classes_11Environment_ToneMapper neg_one = (__pyx_t_7classes_11Environment_ToneMapper) ((__pyx_t_7classes_11Environment_ToneMapper) 0 - (__pyx_t_7classes_11Environment_ToneMapper) 1), const_zero = (__pyx_t_7classes_11Environment_ToneMapper) 0;
+static CYTHON_INLINE PyObject* __Pyx_PyInt_From___pyx_t_7classes_11Environment_Environment_ToneMapper(__pyx_t_7classes_11Environment_Environment_ToneMapper value) {
+    const __pyx_t_7classes_11Environment_Environment_ToneMapper neg_one = (__pyx_t_7classes_11Environment_Environment_ToneMapper) ((__pyx_t_7classes_11Environment_Environment_ToneMapper) 0 - (__pyx_t_7classes_11Environment_Environment_ToneMapper) 1), const_zero = (__pyx_t_7classes_11Environment_Environment_ToneMapper) 0;
     const int is_unsigned = neg_one > const_zero;
     if (is_unsigned) {
-        if (sizeof(__pyx_t_7classes_11Environment_ToneMapper) < sizeof(long)) {
+        if (sizeof(__pyx_t_7classes_11Environment_Environment_ToneMapper) < sizeof(long)) {
             return PyInt_FromLong((long) value);
-        } else if (sizeof(__pyx_t_7classes_11Environment_ToneMapper) <= sizeof(unsigned long)) {
+        } else if (sizeof(__pyx_t_7classes_11Environment_Environment_ToneMapper) <= sizeof(unsigned long)) {
             return PyLong_FromUnsignedLong((unsigned long) value);
 #ifdef HAVE_LONG_LONG
-        } else if (sizeof(__pyx_t_7classes_11Environment_ToneMapper) <= sizeof(unsigned PY_LONG_LONG)) {
+        } else if (sizeof(__pyx_t_7classes_11Environment_Environment_ToneMapper) <= sizeof(unsigned PY_LONG_LONG)) {
             return PyLong_FromUnsignedLongLong((unsigned PY_LONG_LONG) value);
 #endif
         }
     } else {
-        if (sizeof(__pyx_t_7classes_11Environment_ToneMapper) <= sizeof(long)) {
+        if (sizeof(__pyx_t_7classes_11Environment_Environment_ToneMapper) <= sizeof(long)) {
             return PyInt_FromLong((long) value);
 #ifdef HAVE_LONG_LONG
-        } else if (sizeof(__pyx_t_7classes_11Environment_ToneMapper) <= sizeof(PY_LONG_LONG)) {
+        } else if (sizeof(__pyx_t_7classes_11Environment_Environment_ToneMapper) <= sizeof(PY_LONG_LONG)) {
             return PyLong_FromLongLong((PY_LONG_LONG) value);
 #endif
         }
@@ -40801,7 +40801,7 @@ static CYTHON_INLINE PyObject* __Pyx_PyInt_From___pyx_t_7classes_11Environment_T
     {
         int one = 1; int little = (int)*(unsigned char *)&one;
         unsigned char *bytes = (unsigned char *)&value;
-        return _PyLong_FromByteArray(bytes, sizeof(__pyx_t_7classes_11Environment_ToneMapper),
+        return _PyLong_FromByteArray(bytes, sizeof(__pyx_t_7classes_11Environment_Environment_ToneMapper),
                                      little, !is_unsigned);
     }
 }

@@ -20,9 +20,9 @@ from core.transform.Transform cimport Transform
 from core.transform.Transform2D cimport Transform2D
 from core.vector2.Vector2 cimport Vector2
 from core.vector3.Vector3 cimport Vector3
-from core.variant.Variant cimport Type
-from core.variant.Variant cimport Operator
-from core.vector3.Vector3 cimport Axis
+from core.variant.Variant cimport Variant_Type
+from core.variant.Variant cimport Variant_Operator
+from core.vector3.Vector3 cimport Vector3_Axis
 from core.color.Color cimport Color
 from cython.operator cimport dereference
 from godot_api.binding_external cimport *
@@ -717,7 +717,7 @@ cdef class Control(classes.CanvasItem.CanvasItem):
   def  get_cursor_shape(self,  Vector2 position):
     cdef godot_object *_owner = self.godot_owner
 
-    cdef CursorShape* ret = NULL;
+    cdef Control_CursorShape* ret = NULL;
 
     cdef void *args[1]
 
@@ -738,7 +738,7 @@ cdef class Control(classes.CanvasItem.CanvasItem):
   def  get_default_cursor_shape(self):
     cdef godot_object *_owner = self.godot_owner
 
-    cdef CursorShape* ret = NULL;
+    cdef Control_CursorShape* ret = NULL;
 
     api_core.godot_method_bind_ptrcall(bind_control_get_default_cursor_shape,self.godot_owner,NULL,&ret)
     hello('hallo2')
@@ -768,7 +768,7 @@ cdef class Control(classes.CanvasItem.CanvasItem):
   def  get_focus_mode(self):
     cdef godot_object *_owner = self.godot_owner
 
-    cdef FocusMode* ret = NULL;
+    cdef Control_FocusMode* ret = NULL;
 
     api_core.godot_method_bind_ptrcall(bind_control_get_focus_mode,self.godot_owner,NULL,&ret)
     hello('hallo2')
@@ -843,7 +843,7 @@ cdef class Control(classes.CanvasItem.CanvasItem):
   def  get_h_grow_direction(self):
     cdef godot_object *_owner = self.godot_owner
 
-    cdef GrowDirection* ret = NULL;
+    cdef Control_GrowDirection* ret = NULL;
 
     api_core.godot_method_bind_ptrcall(bind_control_get_h_grow_direction,self.godot_owner,NULL,&ret)
     hello('hallo2')
@@ -893,7 +893,7 @@ cdef class Control(classes.CanvasItem.CanvasItem):
   def  get_mouse_filter(self):
     cdef godot_object *_owner = self.godot_owner
 
-    cdef MouseFilter* ret = NULL;
+    cdef Control_MouseFilter* ret = NULL;
 
     api_core.godot_method_bind_ptrcall(bind_control_get_mouse_filter,self.godot_owner,NULL,&ret)
     hello('hallo2')
@@ -1020,7 +1020,7 @@ cdef class Control(classes.CanvasItem.CanvasItem):
   def  get_v_grow_direction(self):
     cdef godot_object *_owner = self.godot_owner
 
-    cdef GrowDirection* ret = NULL;
+    cdef Control_GrowDirection* ret = NULL;
 
     api_core.godot_method_bind_ptrcall(bind_control_get_v_grow_direction,self.godot_owner,NULL,&ret)
     hello('hallo2')

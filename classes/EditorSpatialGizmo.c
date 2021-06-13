@@ -910,37 +910,37 @@ struct __pyx_obj_7classes_18EditorSpatialGizmo_EditorSpatialGizmo;
 /* "classes/Object.pxd":7
  * cdef class Object(Wrapper):
  *     pass
- * ctypedef enum ConnectFlags :CONNECT_DEFERRED, CONNECT_PERSIST, CONNECT_ONESHOT, CONNECT_REFERENCE_COUNTED,             # <<<<<<<<<<<<<<
+ * ctypedef enum Object_ConnectFlags :CONNECT_DEFERRED, CONNECT_PERSIST, CONNECT_ONESHOT, CONNECT_REFERENCE_COUNTED,             # <<<<<<<<<<<<<<
  */
-enum __pyx_t_7classes_6Object_ConnectFlags {
+enum __pyx_t_7classes_6Object_Object_ConnectFlags {
   __pyx_e_7classes_6Object_CONNECT_DEFERRED,
   __pyx_e_7classes_6Object_CONNECT_PERSIST,
   __pyx_e_7classes_6Object_CONNECT_ONESHOT,
   __pyx_e_7classes_6Object_CONNECT_REFERENCE_COUNTED
 };
-typedef enum __pyx_t_7classes_6Object_ConnectFlags __pyx_t_7classes_6Object_ConnectFlags;
+typedef enum __pyx_t_7classes_6Object_Object_ConnectFlags __pyx_t_7classes_6Object_Object_ConnectFlags;
 
 /* "classes/Mesh.pxd":7
  * cdef class Mesh(classes.Resource.Resource):
  *     pass
- * ctypedef enum BlendShapeMode :BLEND_SHAPE_MODE_NORMALIZED, BLEND_SHAPE_MODE_RELATIVE,             # <<<<<<<<<<<<<<
- * ctypedef enum PrimitiveType :PRIMITIVE_POINTS, PRIMITIVE_LINES, PRIMITIVE_LINE_STRIP, PRIMITIVE_LINE_LOOP, PRIMITIVE_TRIANGLES, PRIMITIVE_TRIANGLE_STRIP, PRIMITIVE_TRIANGLE_FAN,
- * ctypedef enum ArrayFormat :ARRAY_FORMAT_VERTEX, ARRAY_FORMAT_NORMAL, ARRAY_FORMAT_TANGENT, ARRAY_FORMAT_COLOR, ARRAY_COMPRESS_BASE, ARRAY_FORMAT_TEX_UV, ARRAY_FORMAT_TEX_UV2, ARRAY_FORMAT_BONES, ARRAY_FORMAT_WEIGHTS, ARRAY_FORMAT_INDEX, ARRAY_COMPRESS_VERTEX, ARRAY_COMPRESS_NORMAL, ARRAY_COMPRESS_TANGENT, ARRAY_COMPRESS_COLOR, ARRAY_COMPRESS_TEX_UV, ARRAY_COMPRESS_TEX_UV2, ARRAY_COMPRESS_BONES, ARRAY_COMPRESS_WEIGHTS, ARRAY_COMPRESS_DEFAULT, ARRAY_COMPRESS_INDEX, ARRAY_FLAG_USE_2D_VERTICES, ARRAY_FLAG_USE_16_BIT_BONES,
+ * ctypedef enum Mesh_BlendShapeMode :BLEND_SHAPE_MODE_NORMALIZED, BLEND_SHAPE_MODE_RELATIVE,             # <<<<<<<<<<<<<<
+ * ctypedef enum Mesh_PrimitiveType :PRIMITIVE_POINTS, PRIMITIVE_LINES, PRIMITIVE_LINE_STRIP, PRIMITIVE_LINE_LOOP, PRIMITIVE_TRIANGLES, PRIMITIVE_TRIANGLE_STRIP, PRIMITIVE_TRIANGLE_FAN,
+ * ctypedef enum Mesh_ArrayFormat :ARRAY_FORMAT_VERTEX, ARRAY_FORMAT_NORMAL, ARRAY_FORMAT_TANGENT, ARRAY_FORMAT_COLOR, ARRAY_COMPRESS_BASE, ARRAY_FORMAT_TEX_UV, ARRAY_FORMAT_TEX_UV2, ARRAY_FORMAT_BONES, ARRAY_FORMAT_WEIGHTS, ARRAY_FORMAT_INDEX, ARRAY_COMPRESS_VERTEX, ARRAY_COMPRESS_NORMAL, ARRAY_COMPRESS_TANGENT, ARRAY_COMPRESS_COLOR, ARRAY_COMPRESS_TEX_UV, ARRAY_COMPRESS_TEX_UV2, ARRAY_COMPRESS_BONES, ARRAY_COMPRESS_WEIGHTS, ARRAY_COMPRESS_DEFAULT, ARRAY_COMPRESS_INDEX, ARRAY_FLAG_USE_2D_VERTICES, ARRAY_FLAG_USE_16_BIT_BONES,
  */
-enum __pyx_t_7classes_4Mesh_BlendShapeMode {
+enum __pyx_t_7classes_4Mesh_Mesh_BlendShapeMode {
   __pyx_e_7classes_4Mesh_BLEND_SHAPE_MODE_NORMALIZED,
   __pyx_e_7classes_4Mesh_BLEND_SHAPE_MODE_RELATIVE
 };
-typedef enum __pyx_t_7classes_4Mesh_BlendShapeMode __pyx_t_7classes_4Mesh_BlendShapeMode;
+typedef enum __pyx_t_7classes_4Mesh_Mesh_BlendShapeMode __pyx_t_7classes_4Mesh_Mesh_BlendShapeMode;
 
 /* "classes/Mesh.pxd":8
  *     pass
- * ctypedef enum BlendShapeMode :BLEND_SHAPE_MODE_NORMALIZED, BLEND_SHAPE_MODE_RELATIVE,
- * ctypedef enum PrimitiveType :PRIMITIVE_POINTS, PRIMITIVE_LINES, PRIMITIVE_LINE_STRIP, PRIMITIVE_LINE_LOOP, PRIMITIVE_TRIANGLES, PRIMITIVE_TRIANGLE_STRIP, PRIMITIVE_TRIANGLE_FAN,             # <<<<<<<<<<<<<<
- * ctypedef enum ArrayFormat :ARRAY_FORMAT_VERTEX, ARRAY_FORMAT_NORMAL, ARRAY_FORMAT_TANGENT, ARRAY_FORMAT_COLOR, ARRAY_COMPRESS_BASE, ARRAY_FORMAT_TEX_UV, ARRAY_FORMAT_TEX_UV2, ARRAY_FORMAT_BONES, ARRAY_FORMAT_WEIGHTS, ARRAY_FORMAT_INDEX, ARRAY_COMPRESS_VERTEX, ARRAY_COMPRESS_NORMAL, ARRAY_COMPRESS_TANGENT, ARRAY_COMPRESS_COLOR, ARRAY_COMPRESS_TEX_UV, ARRAY_COMPRESS_TEX_UV2, ARRAY_COMPRESS_BONES, ARRAY_COMPRESS_WEIGHTS, ARRAY_COMPRESS_DEFAULT, ARRAY_COMPRESS_INDEX, ARRAY_FLAG_USE_2D_VERTICES, ARRAY_FLAG_USE_16_BIT_BONES,
- * ctypedef enum ArrayType :ARRAY_VERTEX, ARRAY_NORMAL, ARRAY_TANGENT, ARRAY_COLOR, ARRAY_TEX_UV, ARRAY_TEX_UV2, ARRAY_BONES, ARRAY_WEIGHTS, ARRAY_INDEX, ARRAY_MAX,
+ * ctypedef enum Mesh_BlendShapeMode :BLEND_SHAPE_MODE_NORMALIZED, BLEND_SHAPE_MODE_RELATIVE,
+ * ctypedef enum Mesh_PrimitiveType :PRIMITIVE_POINTS, PRIMITIVE_LINES, PRIMITIVE_LINE_STRIP, PRIMITIVE_LINE_LOOP, PRIMITIVE_TRIANGLES, PRIMITIVE_TRIANGLE_STRIP, PRIMITIVE_TRIANGLE_FAN,             # <<<<<<<<<<<<<<
+ * ctypedef enum Mesh_ArrayFormat :ARRAY_FORMAT_VERTEX, ARRAY_FORMAT_NORMAL, ARRAY_FORMAT_TANGENT, ARRAY_FORMAT_COLOR, ARRAY_COMPRESS_BASE, ARRAY_FORMAT_TEX_UV, ARRAY_FORMAT_TEX_UV2, ARRAY_FORMAT_BONES, ARRAY_FORMAT_WEIGHTS, ARRAY_FORMAT_INDEX, ARRAY_COMPRESS_VERTEX, ARRAY_COMPRESS_NORMAL, ARRAY_COMPRESS_TANGENT, ARRAY_COMPRESS_COLOR, ARRAY_COMPRESS_TEX_UV, ARRAY_COMPRESS_TEX_UV2, ARRAY_COMPRESS_BONES, ARRAY_COMPRESS_WEIGHTS, ARRAY_COMPRESS_DEFAULT, ARRAY_COMPRESS_INDEX, ARRAY_FLAG_USE_2D_VERTICES, ARRAY_FLAG_USE_16_BIT_BONES,
+ * ctypedef enum Mesh_ArrayType :ARRAY_VERTEX, ARRAY_NORMAL, ARRAY_TANGENT, ARRAY_COLOR, ARRAY_TEX_UV, ARRAY_TEX_UV2, ARRAY_BONES, ARRAY_WEIGHTS, ARRAY_INDEX, ARRAY_MAX,
  */
-enum __pyx_t_7classes_4Mesh_PrimitiveType {
+enum __pyx_t_7classes_4Mesh_Mesh_PrimitiveType {
   __pyx_e_7classes_4Mesh_PRIMITIVE_POINTS,
   __pyx_e_7classes_4Mesh_PRIMITIVE_LINES,
   __pyx_e_7classes_4Mesh_PRIMITIVE_LINE_STRIP,
@@ -949,15 +949,15 @@ enum __pyx_t_7classes_4Mesh_PrimitiveType {
   __pyx_e_7classes_4Mesh_PRIMITIVE_TRIANGLE_STRIP,
   __pyx_e_7classes_4Mesh_PRIMITIVE_TRIANGLE_FAN
 };
-typedef enum __pyx_t_7classes_4Mesh_PrimitiveType __pyx_t_7classes_4Mesh_PrimitiveType;
+typedef enum __pyx_t_7classes_4Mesh_Mesh_PrimitiveType __pyx_t_7classes_4Mesh_Mesh_PrimitiveType;
 
 /* "classes/Mesh.pxd":9
- * ctypedef enum BlendShapeMode :BLEND_SHAPE_MODE_NORMALIZED, BLEND_SHAPE_MODE_RELATIVE,
- * ctypedef enum PrimitiveType :PRIMITIVE_POINTS, PRIMITIVE_LINES, PRIMITIVE_LINE_STRIP, PRIMITIVE_LINE_LOOP, PRIMITIVE_TRIANGLES, PRIMITIVE_TRIANGLE_STRIP, PRIMITIVE_TRIANGLE_FAN,
- * ctypedef enum ArrayFormat :ARRAY_FORMAT_VERTEX, ARRAY_FORMAT_NORMAL, ARRAY_FORMAT_TANGENT, ARRAY_FORMAT_COLOR, ARRAY_COMPRESS_BASE, ARRAY_FORMAT_TEX_UV, ARRAY_FORMAT_TEX_UV2, ARRAY_FORMAT_BONES, ARRAY_FORMAT_WEIGHTS, ARRAY_FORMAT_INDEX, ARRAY_COMPRESS_VERTEX, ARRAY_COMPRESS_NORMAL, ARRAY_COMPRESS_TANGENT, ARRAY_COMPRESS_COLOR, ARRAY_COMPRESS_TEX_UV, ARRAY_COMPRESS_TEX_UV2, ARRAY_COMPRESS_BONES, ARRAY_COMPRESS_WEIGHTS, ARRAY_COMPRESS_DEFAULT, ARRAY_COMPRESS_INDEX, ARRAY_FLAG_USE_2D_VERTICES, ARRAY_FLAG_USE_16_BIT_BONES,             # <<<<<<<<<<<<<<
- * ctypedef enum ArrayType :ARRAY_VERTEX, ARRAY_NORMAL, ARRAY_TANGENT, ARRAY_COLOR, ARRAY_TEX_UV, ARRAY_TEX_UV2, ARRAY_BONES, ARRAY_WEIGHTS, ARRAY_INDEX, ARRAY_MAX,
+ * ctypedef enum Mesh_BlendShapeMode :BLEND_SHAPE_MODE_NORMALIZED, BLEND_SHAPE_MODE_RELATIVE,
+ * ctypedef enum Mesh_PrimitiveType :PRIMITIVE_POINTS, PRIMITIVE_LINES, PRIMITIVE_LINE_STRIP, PRIMITIVE_LINE_LOOP, PRIMITIVE_TRIANGLES, PRIMITIVE_TRIANGLE_STRIP, PRIMITIVE_TRIANGLE_FAN,
+ * ctypedef enum Mesh_ArrayFormat :ARRAY_FORMAT_VERTEX, ARRAY_FORMAT_NORMAL, ARRAY_FORMAT_TANGENT, ARRAY_FORMAT_COLOR, ARRAY_COMPRESS_BASE, ARRAY_FORMAT_TEX_UV, ARRAY_FORMAT_TEX_UV2, ARRAY_FORMAT_BONES, ARRAY_FORMAT_WEIGHTS, ARRAY_FORMAT_INDEX, ARRAY_COMPRESS_VERTEX, ARRAY_COMPRESS_NORMAL, ARRAY_COMPRESS_TANGENT, ARRAY_COMPRESS_COLOR, ARRAY_COMPRESS_TEX_UV, ARRAY_COMPRESS_TEX_UV2, ARRAY_COMPRESS_BONES, ARRAY_COMPRESS_WEIGHTS, ARRAY_COMPRESS_DEFAULT, ARRAY_COMPRESS_INDEX, ARRAY_FLAG_USE_2D_VERTICES, ARRAY_FLAG_USE_16_BIT_BONES,             # <<<<<<<<<<<<<<
+ * ctypedef enum Mesh_ArrayType :ARRAY_VERTEX, ARRAY_NORMAL, ARRAY_TANGENT, ARRAY_COLOR, ARRAY_TEX_UV, ARRAY_TEX_UV2, ARRAY_BONES, ARRAY_WEIGHTS, ARRAY_INDEX, ARRAY_MAX,
  */
-enum __pyx_t_7classes_4Mesh_ArrayFormat {
+enum __pyx_t_7classes_4Mesh_Mesh_ArrayFormat {
   __pyx_e_7classes_4Mesh_ARRAY_FORMAT_VERTEX,
   __pyx_e_7classes_4Mesh_ARRAY_FORMAT_NORMAL,
   __pyx_e_7classes_4Mesh_ARRAY_FORMAT_TANGENT,
@@ -981,14 +981,14 @@ enum __pyx_t_7classes_4Mesh_ArrayFormat {
   __pyx_e_7classes_4Mesh_ARRAY_FLAG_USE_2D_VERTICES,
   __pyx_e_7classes_4Mesh_ARRAY_FLAG_USE_16_BIT_BONES
 };
-typedef enum __pyx_t_7classes_4Mesh_ArrayFormat __pyx_t_7classes_4Mesh_ArrayFormat;
+typedef enum __pyx_t_7classes_4Mesh_Mesh_ArrayFormat __pyx_t_7classes_4Mesh_Mesh_ArrayFormat;
 
 /* "classes/Mesh.pxd":10
- * ctypedef enum PrimitiveType :PRIMITIVE_POINTS, PRIMITIVE_LINES, PRIMITIVE_LINE_STRIP, PRIMITIVE_LINE_LOOP, PRIMITIVE_TRIANGLES, PRIMITIVE_TRIANGLE_STRIP, PRIMITIVE_TRIANGLE_FAN,
- * ctypedef enum ArrayFormat :ARRAY_FORMAT_VERTEX, ARRAY_FORMAT_NORMAL, ARRAY_FORMAT_TANGENT, ARRAY_FORMAT_COLOR, ARRAY_COMPRESS_BASE, ARRAY_FORMAT_TEX_UV, ARRAY_FORMAT_TEX_UV2, ARRAY_FORMAT_BONES, ARRAY_FORMAT_WEIGHTS, ARRAY_FORMAT_INDEX, ARRAY_COMPRESS_VERTEX, ARRAY_COMPRESS_NORMAL, ARRAY_COMPRESS_TANGENT, ARRAY_COMPRESS_COLOR, ARRAY_COMPRESS_TEX_UV, ARRAY_COMPRESS_TEX_UV2, ARRAY_COMPRESS_BONES, ARRAY_COMPRESS_WEIGHTS, ARRAY_COMPRESS_DEFAULT, ARRAY_COMPRESS_INDEX, ARRAY_FLAG_USE_2D_VERTICES, ARRAY_FLAG_USE_16_BIT_BONES,
- * ctypedef enum ArrayType :ARRAY_VERTEX, ARRAY_NORMAL, ARRAY_TANGENT, ARRAY_COLOR, ARRAY_TEX_UV, ARRAY_TEX_UV2, ARRAY_BONES, ARRAY_WEIGHTS, ARRAY_INDEX, ARRAY_MAX,             # <<<<<<<<<<<<<<
+ * ctypedef enum Mesh_PrimitiveType :PRIMITIVE_POINTS, PRIMITIVE_LINES, PRIMITIVE_LINE_STRIP, PRIMITIVE_LINE_LOOP, PRIMITIVE_TRIANGLES, PRIMITIVE_TRIANGLE_STRIP, PRIMITIVE_TRIANGLE_FAN,
+ * ctypedef enum Mesh_ArrayFormat :ARRAY_FORMAT_VERTEX, ARRAY_FORMAT_NORMAL, ARRAY_FORMAT_TANGENT, ARRAY_FORMAT_COLOR, ARRAY_COMPRESS_BASE, ARRAY_FORMAT_TEX_UV, ARRAY_FORMAT_TEX_UV2, ARRAY_FORMAT_BONES, ARRAY_FORMAT_WEIGHTS, ARRAY_FORMAT_INDEX, ARRAY_COMPRESS_VERTEX, ARRAY_COMPRESS_NORMAL, ARRAY_COMPRESS_TANGENT, ARRAY_COMPRESS_COLOR, ARRAY_COMPRESS_TEX_UV, ARRAY_COMPRESS_TEX_UV2, ARRAY_COMPRESS_BONES, ARRAY_COMPRESS_WEIGHTS, ARRAY_COMPRESS_DEFAULT, ARRAY_COMPRESS_INDEX, ARRAY_FLAG_USE_2D_VERTICES, ARRAY_FLAG_USE_16_BIT_BONES,
+ * ctypedef enum Mesh_ArrayType :ARRAY_VERTEX, ARRAY_NORMAL, ARRAY_TANGENT, ARRAY_COLOR, ARRAY_TEX_UV, ARRAY_TEX_UV2, ARRAY_BONES, ARRAY_WEIGHTS, ARRAY_INDEX, ARRAY_MAX,             # <<<<<<<<<<<<<<
  */
-enum __pyx_t_7classes_4Mesh_ArrayType {
+enum __pyx_t_7classes_4Mesh_Mesh_ArrayType {
   __pyx_e_7classes_4Mesh_ARRAY_VERTEX,
   __pyx_e_7classes_4Mesh_ARRAY_NORMAL,
   __pyx_e_7classes_4Mesh_ARRAY_TANGENT,
@@ -1000,15 +1000,15 @@ enum __pyx_t_7classes_4Mesh_ArrayType {
   __pyx_e_7classes_4Mesh_ARRAY_INDEX,
   __pyx_e_7classes_4Mesh_ARRAY_MAX
 };
-typedef enum __pyx_t_7classes_4Mesh_ArrayType __pyx_t_7classes_4Mesh_ArrayType;
+typedef enum __pyx_t_7classes_4Mesh_Mesh_ArrayType __pyx_t_7classes_4Mesh_Mesh_ArrayType;
 
 /* "classes/ArrayMesh.pxd":7
  * cdef class ArrayMesh(classes.Mesh.Mesh):
  *     pass
- * ctypedef enum ArrayFormat :ARRAY_FORMAT_VERTEX, ARRAY_FORMAT_NORMAL, ARRAY_FORMAT_TANGENT, ARRAY_FORMAT_COLOR, ARRAY_FORMAT_TEX_UV, ARRAY_FORMAT_TEX_UV2, ARRAY_FORMAT_BONES, ARRAY_FORMAT_WEIGHTS, ARRAY_FORMAT_INDEX,             # <<<<<<<<<<<<<<
- * ctypedef enum ArrayType :ARRAY_VERTEX, ARRAY_NORMAL, ARRAY_TANGENT, ARRAY_COLOR, ARRAY_TEX_UV, ARRAY_TEX_UV2, ARRAY_BONES, ARRAY_WEIGHTS, ARRAY_INDEX, ARRAY_MAX,
+ * ctypedef enum ArrayMesh_ArrayFormat :ARRAY_FORMAT_VERTEX, ARRAY_FORMAT_NORMAL, ARRAY_FORMAT_TANGENT, ARRAY_FORMAT_COLOR, ARRAY_FORMAT_TEX_UV, ARRAY_FORMAT_TEX_UV2, ARRAY_FORMAT_BONES, ARRAY_FORMAT_WEIGHTS, ARRAY_FORMAT_INDEX,             # <<<<<<<<<<<<<<
+ * ctypedef enum ArrayMesh_ArrayType :ARRAY_VERTEX, ARRAY_NORMAL, ARRAY_TANGENT, ARRAY_COLOR, ARRAY_TEX_UV, ARRAY_TEX_UV2, ARRAY_BONES, ARRAY_WEIGHTS, ARRAY_INDEX, ARRAY_MAX,
  */
-enum __pyx_t_7classes_9ArrayMesh_ArrayFormat {
+enum __pyx_t_7classes_9ArrayMesh_ArrayMesh_ArrayFormat {
   __pyx_e_7classes_9ArrayMesh_ARRAY_FORMAT_VERTEX,
   __pyx_e_7classes_9ArrayMesh_ARRAY_FORMAT_NORMAL,
   __pyx_e_7classes_9ArrayMesh_ARRAY_FORMAT_TANGENT,
@@ -1019,14 +1019,14 @@ enum __pyx_t_7classes_9ArrayMesh_ArrayFormat {
   __pyx_e_7classes_9ArrayMesh_ARRAY_FORMAT_WEIGHTS,
   __pyx_e_7classes_9ArrayMesh_ARRAY_FORMAT_INDEX
 };
-typedef enum __pyx_t_7classes_9ArrayMesh_ArrayFormat __pyx_t_7classes_9ArrayMesh_ArrayFormat;
+typedef enum __pyx_t_7classes_9ArrayMesh_ArrayMesh_ArrayFormat __pyx_t_7classes_9ArrayMesh_ArrayMesh_ArrayFormat;
 
 /* "classes/ArrayMesh.pxd":8
  *     pass
- * ctypedef enum ArrayFormat :ARRAY_FORMAT_VERTEX, ARRAY_FORMAT_NORMAL, ARRAY_FORMAT_TANGENT, ARRAY_FORMAT_COLOR, ARRAY_FORMAT_TEX_UV, ARRAY_FORMAT_TEX_UV2, ARRAY_FORMAT_BONES, ARRAY_FORMAT_WEIGHTS, ARRAY_FORMAT_INDEX,
- * ctypedef enum ArrayType :ARRAY_VERTEX, ARRAY_NORMAL, ARRAY_TANGENT, ARRAY_COLOR, ARRAY_TEX_UV, ARRAY_TEX_UV2, ARRAY_BONES, ARRAY_WEIGHTS, ARRAY_INDEX, ARRAY_MAX,             # <<<<<<<<<<<<<<
+ * ctypedef enum ArrayMesh_ArrayFormat :ARRAY_FORMAT_VERTEX, ARRAY_FORMAT_NORMAL, ARRAY_FORMAT_TANGENT, ARRAY_FORMAT_COLOR, ARRAY_FORMAT_TEX_UV, ARRAY_FORMAT_TEX_UV2, ARRAY_FORMAT_BONES, ARRAY_FORMAT_WEIGHTS, ARRAY_FORMAT_INDEX,
+ * ctypedef enum ArrayMesh_ArrayType :ARRAY_VERTEX, ARRAY_NORMAL, ARRAY_TANGENT, ARRAY_COLOR, ARRAY_TEX_UV, ARRAY_TEX_UV2, ARRAY_BONES, ARRAY_WEIGHTS, ARRAY_INDEX, ARRAY_MAX,             # <<<<<<<<<<<<<<
  */
-enum __pyx_t_7classes_9ArrayMesh_ArrayType {
+enum __pyx_t_7classes_9ArrayMesh_ArrayMesh_ArrayType {
   __pyx_e_7classes_9ArrayMesh_ARRAY_VERTEX,
   __pyx_e_7classes_9ArrayMesh_ARRAY_NORMAL,
   __pyx_e_7classes_9ArrayMesh_ARRAY_TANGENT,
@@ -1038,80 +1038,80 @@ enum __pyx_t_7classes_9ArrayMesh_ArrayType {
   __pyx_e_7classes_9ArrayMesh_ARRAY_INDEX,
   __pyx_e_7classes_9ArrayMesh_ARRAY_MAX
 };
-typedef enum __pyx_t_7classes_9ArrayMesh_ArrayType __pyx_t_7classes_9ArrayMesh_ArrayType;
+typedef enum __pyx_t_7classes_9ArrayMesh_ArrayMesh_ArrayType __pyx_t_7classes_9ArrayMesh_ArrayMesh_ArrayType;
 
 /* "classes/Node.pxd":7
  * cdef class Node(classes.Object.Object):
  *     pass
- * ctypedef enum PauseMode :PAUSE_MODE_INHERIT, PAUSE_MODE_STOP, PAUSE_MODE_PROCESS,             # <<<<<<<<<<<<<<
- * ctypedef enum DuplicateFlags :DUPLICATE_SIGNALS, DUPLICATE_GROUPS, DUPLICATE_SCRIPTS, DUPLICATE_USE_INSTANCING,
+ * ctypedef enum Node_PauseMode :PAUSE_MODE_INHERIT, PAUSE_MODE_STOP, PAUSE_MODE_PROCESS,             # <<<<<<<<<<<<<<
+ * ctypedef enum Node_DuplicateFlags :DUPLICATE_SIGNALS, DUPLICATE_GROUPS, DUPLICATE_SCRIPTS, DUPLICATE_USE_INSTANCING,
  */
-enum __pyx_t_7classes_4Node_PauseMode {
+enum __pyx_t_7classes_4Node_Node_PauseMode {
   __pyx_e_7classes_4Node_PAUSE_MODE_INHERIT,
   __pyx_e_7classes_4Node_PAUSE_MODE_STOP,
   __pyx_e_7classes_4Node_PAUSE_MODE_PROCESS
 };
-typedef enum __pyx_t_7classes_4Node_PauseMode __pyx_t_7classes_4Node_PauseMode;
+typedef enum __pyx_t_7classes_4Node_Node_PauseMode __pyx_t_7classes_4Node_Node_PauseMode;
 
 /* "classes/Node.pxd":8
  *     pass
- * ctypedef enum PauseMode :PAUSE_MODE_INHERIT, PAUSE_MODE_STOP, PAUSE_MODE_PROCESS,
- * ctypedef enum DuplicateFlags :DUPLICATE_SIGNALS, DUPLICATE_GROUPS, DUPLICATE_SCRIPTS, DUPLICATE_USE_INSTANCING,             # <<<<<<<<<<<<<<
+ * ctypedef enum Node_PauseMode :PAUSE_MODE_INHERIT, PAUSE_MODE_STOP, PAUSE_MODE_PROCESS,
+ * ctypedef enum Node_DuplicateFlags :DUPLICATE_SIGNALS, DUPLICATE_GROUPS, DUPLICATE_SCRIPTS, DUPLICATE_USE_INSTANCING,             # <<<<<<<<<<<<<<
  */
-enum __pyx_t_7classes_4Node_DuplicateFlags {
+enum __pyx_t_7classes_4Node_Node_DuplicateFlags {
   __pyx_e_7classes_4Node_DUPLICATE_SIGNALS,
   __pyx_e_7classes_4Node_DUPLICATE_GROUPS,
   __pyx_e_7classes_4Node_DUPLICATE_SCRIPTS,
   __pyx_e_7classes_4Node_DUPLICATE_USE_INSTANCING
 };
-typedef enum __pyx_t_7classes_4Node_DuplicateFlags __pyx_t_7classes_4Node_DuplicateFlags;
+typedef enum __pyx_t_7classes_4Node_Node_DuplicateFlags __pyx_t_7classes_4Node_Node_DuplicateFlags;
 
 /* "classes/Camera.pxd":7
  * cdef class Camera(classes.Spatial.Spatial):
  *     pass
- * ctypedef enum KeepAspect :KEEP_WIDTH, KEEP_HEIGHT,             # <<<<<<<<<<<<<<
- * ctypedef enum Projection :PROJECTION_PERSPECTIVE, PROJECTION_ORTHOGONAL, PROJECTION_FRUSTUM,
- * ctypedef enum DopplerTracking :DOPPLER_TRACKING_DISABLED, DOPPLER_TRACKING_IDLE_STEP, DOPPLER_TRACKING_PHYSICS_STEP,
+ * ctypedef enum Camera_KeepAspect :KEEP_WIDTH, KEEP_HEIGHT,             # <<<<<<<<<<<<<<
+ * ctypedef enum Camera_Projection :PROJECTION_PERSPECTIVE, PROJECTION_ORTHOGONAL, PROJECTION_FRUSTUM,
+ * ctypedef enum Camera_DopplerTracking :DOPPLER_TRACKING_DISABLED, DOPPLER_TRACKING_IDLE_STEP, DOPPLER_TRACKING_PHYSICS_STEP,
  */
-enum __pyx_t_7classes_6Camera_KeepAspect {
+enum __pyx_t_7classes_6Camera_Camera_KeepAspect {
   __pyx_e_7classes_6Camera_KEEP_WIDTH,
   __pyx_e_7classes_6Camera_KEEP_HEIGHT
 };
-typedef enum __pyx_t_7classes_6Camera_KeepAspect __pyx_t_7classes_6Camera_KeepAspect;
+typedef enum __pyx_t_7classes_6Camera_Camera_KeepAspect __pyx_t_7classes_6Camera_Camera_KeepAspect;
 
 /* "classes/Camera.pxd":8
  *     pass
- * ctypedef enum KeepAspect :KEEP_WIDTH, KEEP_HEIGHT,
- * ctypedef enum Projection :PROJECTION_PERSPECTIVE, PROJECTION_ORTHOGONAL, PROJECTION_FRUSTUM,             # <<<<<<<<<<<<<<
- * ctypedef enum DopplerTracking :DOPPLER_TRACKING_DISABLED, DOPPLER_TRACKING_IDLE_STEP, DOPPLER_TRACKING_PHYSICS_STEP,
+ * ctypedef enum Camera_KeepAspect :KEEP_WIDTH, KEEP_HEIGHT,
+ * ctypedef enum Camera_Projection :PROJECTION_PERSPECTIVE, PROJECTION_ORTHOGONAL, PROJECTION_FRUSTUM,             # <<<<<<<<<<<<<<
+ * ctypedef enum Camera_DopplerTracking :DOPPLER_TRACKING_DISABLED, DOPPLER_TRACKING_IDLE_STEP, DOPPLER_TRACKING_PHYSICS_STEP,
  */
-enum __pyx_t_7classes_6Camera_Projection {
+enum __pyx_t_7classes_6Camera_Camera_Projection {
   __pyx_e_7classes_6Camera_PROJECTION_PERSPECTIVE,
   __pyx_e_7classes_6Camera_PROJECTION_ORTHOGONAL,
   __pyx_e_7classes_6Camera_PROJECTION_FRUSTUM
 };
-typedef enum __pyx_t_7classes_6Camera_Projection __pyx_t_7classes_6Camera_Projection;
+typedef enum __pyx_t_7classes_6Camera_Camera_Projection __pyx_t_7classes_6Camera_Camera_Projection;
 
 /* "classes/Camera.pxd":9
- * ctypedef enum KeepAspect :KEEP_WIDTH, KEEP_HEIGHT,
- * ctypedef enum Projection :PROJECTION_PERSPECTIVE, PROJECTION_ORTHOGONAL, PROJECTION_FRUSTUM,
- * ctypedef enum DopplerTracking :DOPPLER_TRACKING_DISABLED, DOPPLER_TRACKING_IDLE_STEP, DOPPLER_TRACKING_PHYSICS_STEP,             # <<<<<<<<<<<<<<
+ * ctypedef enum Camera_KeepAspect :KEEP_WIDTH, KEEP_HEIGHT,
+ * ctypedef enum Camera_Projection :PROJECTION_PERSPECTIVE, PROJECTION_ORTHOGONAL, PROJECTION_FRUSTUM,
+ * ctypedef enum Camera_DopplerTracking :DOPPLER_TRACKING_DISABLED, DOPPLER_TRACKING_IDLE_STEP, DOPPLER_TRACKING_PHYSICS_STEP,             # <<<<<<<<<<<<<<
  */
-enum __pyx_t_7classes_6Camera_DopplerTracking {
+enum __pyx_t_7classes_6Camera_Camera_DopplerTracking {
   __pyx_e_7classes_6Camera_DOPPLER_TRACKING_DISABLED,
   __pyx_e_7classes_6Camera_DOPPLER_TRACKING_IDLE_STEP,
   __pyx_e_7classes_6Camera_DOPPLER_TRACKING_PHYSICS_STEP
 };
-typedef enum __pyx_t_7classes_6Camera_DopplerTracking __pyx_t_7classes_6Camera_DopplerTracking;
+typedef enum __pyx_t_7classes_6Camera_Camera_DopplerTracking __pyx_t_7classes_6Camera_Camera_DopplerTracking;
 
 /* "core/variant/Variant.pxd":17
  *         print("new_variant", type(i))
  * 
- * ctypedef enum Type:             # <<<<<<<<<<<<<<
+ * ctypedef enum Variant_Type:             # <<<<<<<<<<<<<<
  *     NIL,
  *     # atomic types
  */
-enum __pyx_t_4core_7variant_7Variant_Type {
+enum __pyx_t_4core_7variant_7Variant_Variant_Type {
   __pyx_e_4core_7variant_7Variant_NIL,
   __pyx_e_4core_7variant_7Variant_BOOL,
   __pyx_e_4core_7variant_7Variant_INT,
@@ -1141,16 +1141,16 @@ enum __pyx_t_4core_7variant_7Variant_Type {
   __pyx_e_4core_7variant_7Variant_POOL_COLOR_ARRAY,
   __pyx_e_4core_7variant_7Variant_VARIANT_MAX
 };
-typedef enum __pyx_t_4core_7variant_7Variant_Type __pyx_t_4core_7variant_7Variant_Type;
+typedef enum __pyx_t_4core_7variant_7Variant_Variant_Type __pyx_t_4core_7variant_7Variant_Variant_Type;
 
 /* "core/variant/Variant.pxd":58
  * 
  * 
- * ctypedef enum Operator :             # <<<<<<<<<<<<<<
+ * ctypedef enum Variant_Operator :             # <<<<<<<<<<<<<<
  * 
  *     #comparation
  */
-enum __pyx_t_4core_7variant_7Variant_Operator {
+enum __pyx_t_4core_7variant_7Variant_Variant_Operator {
   __pyx_e_4core_7variant_7Variant_OP_EQUAL,
   __pyx_e_4core_7variant_7Variant_OP_NOT_EQUAL,
   __pyx_e_4core_7variant_7Variant_OP_LESS,
@@ -1178,21 +1178,21 @@ enum __pyx_t_4core_7variant_7Variant_Operator {
   __pyx_e_4core_7variant_7Variant_OP_IN,
   __pyx_e_4core_7variant_7Variant_OP_MAX
 };
-typedef enum __pyx_t_4core_7variant_7Variant_Operator __pyx_t_4core_7variant_7Variant_Operator;
+typedef enum __pyx_t_4core_7variant_7Variant_Variant_Operator __pyx_t_4core_7variant_7Variant_Variant_Operator;
 
 /* "core/vector3/Vector3.pxd":15
  * 
  * 
- * ctypedef enum Axis :             # <<<<<<<<<<<<<<
- *     AXIS_X,
- *     AXIS_Y,
+ * ctypedef enum Vector3_Axis :             # <<<<<<<<<<<<<<
+ *     Vector3_AXIS_X,
+ *     Vector3_AXIS_Y,
  */
-enum __pyx_t_4core_7vector3_7Vector3_Axis {
-  __pyx_e_4core_7vector3_7Vector3_AXIS_X,
-  __pyx_e_4core_7vector3_7Vector3_AXIS_Y,
-  __pyx_e_4core_7vector3_7Vector3_AXIS_Z
+enum __pyx_t_4core_7vector3_7Vector3_Vector3_Axis {
+  __pyx_e_4core_7vector3_7Vector3_Vector3_AXIS_X,
+  __pyx_e_4core_7vector3_7Vector3_Vector3_AXIS_Y,
+  __pyx_e_4core_7vector3_7Vector3_Vector3_AXIS_Z
 };
-typedef enum __pyx_t_4core_7vector3_7Vector3_Axis __pyx_t_4core_7vector3_7Vector3_Axis;
+typedef enum __pyx_t_4core_7vector3_7Vector3_Vector3_Axis __pyx_t_4core_7vector3_7Vector3_Vector3_Axis;
 
 /* "utils/Wrapper.pxd":2
  * from godot_api.binding cimport *
@@ -1212,7 +1212,7 @@ struct __pyx_obj_5utils_7Wrapper_Wrapper {
  * from utils.Wrapper cimport *
  * cdef class Object(Wrapper):             # <<<<<<<<<<<<<<
  *     pass
- * ctypedef enum ConnectFlags :CONNECT_DEFERRED, CONNECT_PERSIST, CONNECT_ONESHOT, CONNECT_REFERENCE_COUNTED,
+ * ctypedef enum Object_ConnectFlags :CONNECT_DEFERRED, CONNECT_PERSIST, CONNECT_ONESHOT, CONNECT_REFERENCE_COUNTED,
  */
 struct __pyx_obj_7classes_6Object_Object {
   struct __pyx_obj_5utils_7Wrapper_Wrapper __pyx_base;
@@ -1268,7 +1268,7 @@ struct __pyx_obj_7classes_8Material_Material {
  * cimport classes.Resource
  * cdef class Mesh(classes.Resource.Resource):             # <<<<<<<<<<<<<<
  *     pass
- * ctypedef enum BlendShapeMode :BLEND_SHAPE_MODE_NORMALIZED, BLEND_SHAPE_MODE_RELATIVE,
+ * ctypedef enum Mesh_BlendShapeMode :BLEND_SHAPE_MODE_NORMALIZED, BLEND_SHAPE_MODE_RELATIVE,
  */
 struct __pyx_obj_7classes_4Mesh_Mesh {
   struct __pyx_obj_7classes_8Resource_Resource __pyx_base;
@@ -1280,7 +1280,7 @@ struct __pyx_obj_7classes_4Mesh_Mesh {
  * cimport classes.Mesh
  * cdef class ArrayMesh(classes.Mesh.Mesh):             # <<<<<<<<<<<<<<
  *     pass
- * ctypedef enum ArrayFormat :ARRAY_FORMAT_VERTEX, ARRAY_FORMAT_NORMAL, ARRAY_FORMAT_TANGENT, ARRAY_FORMAT_COLOR, ARRAY_FORMAT_TEX_UV, ARRAY_FORMAT_TEX_UV2, ARRAY_FORMAT_BONES, ARRAY_FORMAT_WEIGHTS, ARRAY_FORMAT_INDEX,
+ * ctypedef enum ArrayMesh_ArrayFormat :ARRAY_FORMAT_VERTEX, ARRAY_FORMAT_NORMAL, ARRAY_FORMAT_TANGENT, ARRAY_FORMAT_COLOR, ARRAY_FORMAT_TEX_UV, ARRAY_FORMAT_TEX_UV2, ARRAY_FORMAT_BONES, ARRAY_FORMAT_WEIGHTS, ARRAY_FORMAT_INDEX,
  */
 struct __pyx_obj_7classes_9ArrayMesh_ArrayMesh {
   struct __pyx_obj_7classes_4Mesh_Mesh __pyx_base;
@@ -1303,7 +1303,7 @@ struct __pyx_obj_7classes_13SkinReference_SkinReference {
  * cimport classes.Object
  * cdef class Node(classes.Object.Object):             # <<<<<<<<<<<<<<
  *     pass
- * ctypedef enum PauseMode :PAUSE_MODE_INHERIT, PAUSE_MODE_STOP, PAUSE_MODE_PROCESS,
+ * ctypedef enum Node_PauseMode :PAUSE_MODE_INHERIT, PAUSE_MODE_STOP, PAUSE_MODE_PROCESS,
  */
 struct __pyx_obj_7classes_4Node_Node {
   struct __pyx_obj_7classes_6Object_Object __pyx_base;
@@ -1326,7 +1326,7 @@ struct __pyx_obj_7classes_7Spatial_Spatial {
  * cimport classes.Spatial
  * cdef class Camera(classes.Spatial.Spatial):             # <<<<<<<<<<<<<<
  *     pass
- * ctypedef enum KeepAspect :KEEP_WIDTH, KEEP_HEIGHT,
+ * ctypedef enum Camera_KeepAspect :KEEP_WIDTH, KEEP_HEIGHT,
  */
 struct __pyx_obj_7classes_6Camera_Camera {
   struct __pyx_obj_7classes_7Spatial_Spatial __pyx_base;
@@ -1699,7 +1699,7 @@ static CYTHON_INLINE godot_object *__pyx_f_5utils_7Wrapper_7Wrapper_get_godot_ow
  * from utils.Wrapper cimport *
  * cdef class Object(Wrapper):             # <<<<<<<<<<<<<<
  *     pass
- * ctypedef enum ConnectFlags :CONNECT_DEFERRED, CONNECT_PERSIST, CONNECT_ONESHOT, CONNECT_REFERENCE_COUNTED,
+ * ctypedef enum Object_ConnectFlags :CONNECT_DEFERRED, CONNECT_PERSIST, CONNECT_ONESHOT, CONNECT_REFERENCE_COUNTED,
  */
 
 struct __pyx_vtabstruct_7classes_6Object_Object {
@@ -1765,7 +1765,7 @@ static struct __pyx_vtabstruct_7classes_8Material_Material *__pyx_vtabptr_7class
  * cimport classes.Resource
  * cdef class Mesh(classes.Resource.Resource):             # <<<<<<<<<<<<<<
  *     pass
- * ctypedef enum BlendShapeMode :BLEND_SHAPE_MODE_NORMALIZED, BLEND_SHAPE_MODE_RELATIVE,
+ * ctypedef enum Mesh_BlendShapeMode :BLEND_SHAPE_MODE_NORMALIZED, BLEND_SHAPE_MODE_RELATIVE,
  */
 
 struct __pyx_vtabstruct_7classes_4Mesh_Mesh {
@@ -1779,7 +1779,7 @@ static struct __pyx_vtabstruct_7classes_4Mesh_Mesh *__pyx_vtabptr_7classes_4Mesh
  * cimport classes.Mesh
  * cdef class ArrayMesh(classes.Mesh.Mesh):             # <<<<<<<<<<<<<<
  *     pass
- * ctypedef enum ArrayFormat :ARRAY_FORMAT_VERTEX, ARRAY_FORMAT_NORMAL, ARRAY_FORMAT_TANGENT, ARRAY_FORMAT_COLOR, ARRAY_FORMAT_TEX_UV, ARRAY_FORMAT_TEX_UV2, ARRAY_FORMAT_BONES, ARRAY_FORMAT_WEIGHTS, ARRAY_FORMAT_INDEX,
+ * ctypedef enum ArrayMesh_ArrayFormat :ARRAY_FORMAT_VERTEX, ARRAY_FORMAT_NORMAL, ARRAY_FORMAT_TANGENT, ARRAY_FORMAT_COLOR, ARRAY_FORMAT_TEX_UV, ARRAY_FORMAT_TEX_UV2, ARRAY_FORMAT_BONES, ARRAY_FORMAT_WEIGHTS, ARRAY_FORMAT_INDEX,
  */
 
 struct __pyx_vtabstruct_7classes_9ArrayMesh_ArrayMesh {
@@ -1806,7 +1806,7 @@ static struct __pyx_vtabstruct_7classes_13SkinReference_SkinReference *__pyx_vta
  * cimport classes.Object
  * cdef class Node(classes.Object.Object):             # <<<<<<<<<<<<<<
  *     pass
- * ctypedef enum PauseMode :PAUSE_MODE_INHERIT, PAUSE_MODE_STOP, PAUSE_MODE_PROCESS,
+ * ctypedef enum Node_PauseMode :PAUSE_MODE_INHERIT, PAUSE_MODE_STOP, PAUSE_MODE_PROCESS,
  */
 
 struct __pyx_vtabstruct_7classes_4Node_Node {
@@ -1833,7 +1833,7 @@ static struct __pyx_vtabstruct_7classes_7Spatial_Spatial *__pyx_vtabptr_7classes
  * cimport classes.Spatial
  * cdef class Camera(classes.Spatial.Spatial):             # <<<<<<<<<<<<<<
  *     pass
- * ctypedef enum KeepAspect :KEEP_WIDTH, KEEP_HEIGHT,
+ * ctypedef enum Camera_KeepAspect :KEEP_WIDTH, KEEP_HEIGHT,
  */
 
 struct __pyx_vtabstruct_7classes_6Camera_Camera {
@@ -5826,7 +5826,7 @@ static CYTHON_INLINE void __pyx_f_4core_7variant_7Variant_7Variant_new_variant(C
  *     cdef inline void new_variant(self, i):
  *         print("new_variant", type(i))             # <<<<<<<<<<<<<<
  * 
- * ctypedef enum Type:
+ * ctypedef enum Variant_Type:
  */
   __pyx_t_1 = PyTuple_New(2); if (unlikely(!__pyx_t_1)) __PYX_ERR(4, 15, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
@@ -7373,13 +7373,11 @@ static int __pyx_import_star_set(PyObject *o, PyObject* py_name, char *name) {
   static const char* internal_type_names[] = {
     "AABB",
     "Array",
-    "Axis",
     "Basis",
     "Color",
     "Dictionary",
     "EditorSpatialGizmo",
     "NodePath",
-    "Operator",
     "Plane",
     "PoolByteArray",
     "PoolColorArray",
@@ -7395,10 +7393,12 @@ static int __pyx_import_star_set(PyObject *o, PyObject* py_name, char *name) {
     "String",
     "Transform",
     "Transform2D",
-    "Type",
     "Variant",
+    "Variant_Operator",
+    "Variant_Type",
     "Vector2",
     "Vector3",
+    "Vector3_Axis",
     "Wrapper",
     "bool",
     "godot_aabb",

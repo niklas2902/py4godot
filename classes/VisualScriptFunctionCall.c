@@ -894,24 +894,24 @@ struct __pyx_obj_7classes_24VisualScriptFunctionCall_VisualScriptFunctionCall;
 /* "classes/Object.pxd":7
  * cdef class Object(Wrapper):
  *     pass
- * ctypedef enum ConnectFlags :CONNECT_DEFERRED, CONNECT_PERSIST, CONNECT_ONESHOT, CONNECT_REFERENCE_COUNTED,             # <<<<<<<<<<<<<<
+ * ctypedef enum Object_ConnectFlags :CONNECT_DEFERRED, CONNECT_PERSIST, CONNECT_ONESHOT, CONNECT_REFERENCE_COUNTED,             # <<<<<<<<<<<<<<
  */
-enum __pyx_t_7classes_6Object_ConnectFlags {
+enum __pyx_t_7classes_6Object_Object_ConnectFlags {
   __pyx_e_7classes_6Object_CONNECT_DEFERRED,
   __pyx_e_7classes_6Object_CONNECT_PERSIST,
   __pyx_e_7classes_6Object_CONNECT_ONESHOT,
   __pyx_e_7classes_6Object_CONNECT_REFERENCE_COUNTED
 };
-typedef enum __pyx_t_7classes_6Object_ConnectFlags __pyx_t_7classes_6Object_ConnectFlags;
+typedef enum __pyx_t_7classes_6Object_Object_ConnectFlags __pyx_t_7classes_6Object_Object_ConnectFlags;
 
 /* "core/variant/Variant.pxd":17
  *         print("new_variant", type(i))
  * 
- * ctypedef enum Type:             # <<<<<<<<<<<<<<
+ * ctypedef enum Variant_Type:             # <<<<<<<<<<<<<<
  *     NIL,
  *     # atomic types
  */
-enum __pyx_t_4core_7variant_7Variant_Type {
+enum __pyx_t_4core_7variant_7Variant_Variant_Type {
   __pyx_e_4core_7variant_7Variant_NIL,
   __pyx_e_4core_7variant_7Variant_BOOL,
   __pyx_e_4core_7variant_7Variant_INT,
@@ -941,16 +941,16 @@ enum __pyx_t_4core_7variant_7Variant_Type {
   __pyx_e_4core_7variant_7Variant_POOL_COLOR_ARRAY,
   __pyx_e_4core_7variant_7Variant_VARIANT_MAX
 };
-typedef enum __pyx_t_4core_7variant_7Variant_Type __pyx_t_4core_7variant_7Variant_Type;
+typedef enum __pyx_t_4core_7variant_7Variant_Variant_Type __pyx_t_4core_7variant_7Variant_Variant_Type;
 
 /* "core/variant/Variant.pxd":58
  * 
  * 
- * ctypedef enum Operator :             # <<<<<<<<<<<<<<
+ * ctypedef enum Variant_Operator :             # <<<<<<<<<<<<<<
  * 
  *     #comparation
  */
-enum __pyx_t_4core_7variant_7Variant_Operator {
+enum __pyx_t_4core_7variant_7Variant_Variant_Operator {
   __pyx_e_4core_7variant_7Variant_OP_EQUAL,
   __pyx_e_4core_7variant_7Variant_OP_NOT_EQUAL,
   __pyx_e_4core_7variant_7Variant_OP_LESS,
@@ -978,50 +978,50 @@ enum __pyx_t_4core_7variant_7Variant_Operator {
   __pyx_e_4core_7variant_7Variant_OP_IN,
   __pyx_e_4core_7variant_7Variant_OP_MAX
 };
-typedef enum __pyx_t_4core_7variant_7Variant_Operator __pyx_t_4core_7variant_7Variant_Operator;
+typedef enum __pyx_t_4core_7variant_7Variant_Variant_Operator __pyx_t_4core_7variant_7Variant_Variant_Operator;
 
 /* "core/vector3/Vector3.pxd":15
  * 
  * 
- * ctypedef enum Axis :             # <<<<<<<<<<<<<<
- *     AXIS_X,
- *     AXIS_Y,
+ * ctypedef enum Vector3_Axis :             # <<<<<<<<<<<<<<
+ *     Vector3_AXIS_X,
+ *     Vector3_AXIS_Y,
  */
-enum __pyx_t_4core_7vector3_7Vector3_Axis {
-  __pyx_e_4core_7vector3_7Vector3_AXIS_X,
-  __pyx_e_4core_7vector3_7Vector3_AXIS_Y,
-  __pyx_e_4core_7vector3_7Vector3_AXIS_Z
+enum __pyx_t_4core_7vector3_7Vector3_Vector3_Axis {
+  __pyx_e_4core_7vector3_7Vector3_Vector3_AXIS_X,
+  __pyx_e_4core_7vector3_7Vector3_Vector3_AXIS_Y,
+  __pyx_e_4core_7vector3_7Vector3_Vector3_AXIS_Z
 };
-typedef enum __pyx_t_4core_7vector3_7Vector3_Axis __pyx_t_4core_7vector3_7Vector3_Axis;
+typedef enum __pyx_t_4core_7vector3_7Vector3_Vector3_Axis __pyx_t_4core_7vector3_7Vector3_Vector3_Axis;
 
 /* "classes/VisualScriptFunctionCall.pxd":7
  * cdef class VisualScriptFunctionCall(classes.VisualScriptNode.VisualScriptNode):
  *     pass
- * ctypedef enum RPCCallMode :RPC_DISABLED, RPC_RELIABLE, RPC_UNRELIABLE, RPC_RELIABLE_TO_ID, RPC_UNRELIABLE_TO_ID,             # <<<<<<<<<<<<<<
- * ctypedef enum CallMode :CALL_MODE_SELF, CALL_MODE_NODE_PATH, CALL_MODE_INSTANCE, CALL_MODE_BASIC_TYPE, CALL_MODE_SINGLETON,
+ * ctypedef enum VisualScriptFunctionCall_RPCCallMode :RPC_DISABLED, RPC_RELIABLE, RPC_UNRELIABLE, RPC_RELIABLE_TO_ID, RPC_UNRELIABLE_TO_ID,             # <<<<<<<<<<<<<<
+ * ctypedef enum VisualScriptFunctionCall_CallMode :CALL_MODE_SELF, CALL_MODE_NODE_PATH, CALL_MODE_INSTANCE, CALL_MODE_BASIC_TYPE, CALL_MODE_SINGLETON,
  */
-enum __pyx_t_7classes_24VisualScriptFunctionCall_RPCCallMode {
+enum __pyx_t_7classes_24VisualScriptFunctionCall_VisualScriptFunctionCall_RPCCallMode {
   __pyx_e_7classes_24VisualScriptFunctionCall_RPC_DISABLED,
   __pyx_e_7classes_24VisualScriptFunctionCall_RPC_RELIABLE,
   __pyx_e_7classes_24VisualScriptFunctionCall_RPC_UNRELIABLE,
   __pyx_e_7classes_24VisualScriptFunctionCall_RPC_RELIABLE_TO_ID,
   __pyx_e_7classes_24VisualScriptFunctionCall_RPC_UNRELIABLE_TO_ID
 };
-typedef enum __pyx_t_7classes_24VisualScriptFunctionCall_RPCCallMode __pyx_t_7classes_24VisualScriptFunctionCall_RPCCallMode;
+typedef enum __pyx_t_7classes_24VisualScriptFunctionCall_VisualScriptFunctionCall_RPCCallMode __pyx_t_7classes_24VisualScriptFunctionCall_VisualScriptFunctionCall_RPCCallMode;
 
 /* "classes/VisualScriptFunctionCall.pxd":8
  *     pass
- * ctypedef enum RPCCallMode :RPC_DISABLED, RPC_RELIABLE, RPC_UNRELIABLE, RPC_RELIABLE_TO_ID, RPC_UNRELIABLE_TO_ID,
- * ctypedef enum CallMode :CALL_MODE_SELF, CALL_MODE_NODE_PATH, CALL_MODE_INSTANCE, CALL_MODE_BASIC_TYPE, CALL_MODE_SINGLETON,             # <<<<<<<<<<<<<<
+ * ctypedef enum VisualScriptFunctionCall_RPCCallMode :RPC_DISABLED, RPC_RELIABLE, RPC_UNRELIABLE, RPC_RELIABLE_TO_ID, RPC_UNRELIABLE_TO_ID,
+ * ctypedef enum VisualScriptFunctionCall_CallMode :CALL_MODE_SELF, CALL_MODE_NODE_PATH, CALL_MODE_INSTANCE, CALL_MODE_BASIC_TYPE, CALL_MODE_SINGLETON,             # <<<<<<<<<<<<<<
  */
-enum __pyx_t_7classes_24VisualScriptFunctionCall_CallMode {
+enum __pyx_t_7classes_24VisualScriptFunctionCall_VisualScriptFunctionCall_CallMode {
   __pyx_e_7classes_24VisualScriptFunctionCall_CALL_MODE_SELF,
   __pyx_e_7classes_24VisualScriptFunctionCall_CALL_MODE_NODE_PATH,
   __pyx_e_7classes_24VisualScriptFunctionCall_CALL_MODE_INSTANCE,
   __pyx_e_7classes_24VisualScriptFunctionCall_CALL_MODE_BASIC_TYPE,
   __pyx_e_7classes_24VisualScriptFunctionCall_CALL_MODE_SINGLETON
 };
-typedef enum __pyx_t_7classes_24VisualScriptFunctionCall_CallMode __pyx_t_7classes_24VisualScriptFunctionCall_CallMode;
+typedef enum __pyx_t_7classes_24VisualScriptFunctionCall_VisualScriptFunctionCall_CallMode __pyx_t_7classes_24VisualScriptFunctionCall_VisualScriptFunctionCall_CallMode;
 
 /* "utils/Wrapper.pxd":2
  * from godot_api.binding cimport *
@@ -1041,7 +1041,7 @@ struct __pyx_obj_5utils_7Wrapper_Wrapper {
  * from utils.Wrapper cimport *
  * cdef class Object(Wrapper):             # <<<<<<<<<<<<<<
  *     pass
- * ctypedef enum ConnectFlags :CONNECT_DEFERRED, CONNECT_PERSIST, CONNECT_ONESHOT, CONNECT_REFERENCE_COUNTED,
+ * ctypedef enum Object_ConnectFlags :CONNECT_DEFERRED, CONNECT_PERSIST, CONNECT_ONESHOT, CONNECT_REFERENCE_COUNTED,
  */
 struct __pyx_obj_7classes_6Object_Object {
   struct __pyx_obj_5utils_7Wrapper_Wrapper __pyx_base;
@@ -1408,7 +1408,7 @@ struct __pyx_obj_4core_7vector3_7Vector3_Vector3 {
  * cimport classes.VisualScriptNode
  * cdef class VisualScriptFunctionCall(classes.VisualScriptNode.VisualScriptNode):             # <<<<<<<<<<<<<<
  *     pass
- * ctypedef enum RPCCallMode :RPC_DISABLED, RPC_RELIABLE, RPC_UNRELIABLE, RPC_RELIABLE_TO_ID, RPC_UNRELIABLE_TO_ID,
+ * ctypedef enum VisualScriptFunctionCall_RPCCallMode :RPC_DISABLED, RPC_RELIABLE, RPC_UNRELIABLE, RPC_RELIABLE_TO_ID, RPC_UNRELIABLE_TO_ID,
  */
 struct __pyx_obj_7classes_24VisualScriptFunctionCall_VisualScriptFunctionCall {
   struct __pyx_obj_7classes_16VisualScriptNode_VisualScriptNode __pyx_base;
@@ -1437,7 +1437,7 @@ static CYTHON_INLINE godot_object *__pyx_f_5utils_7Wrapper_7Wrapper_get_godot_ow
  * from utils.Wrapper cimport *
  * cdef class Object(Wrapper):             # <<<<<<<<<<<<<<
  *     pass
- * ctypedef enum ConnectFlags :CONNECT_DEFERRED, CONNECT_PERSIST, CONNECT_ONESHOT, CONNECT_REFERENCE_COUNTED,
+ * ctypedef enum Object_ConnectFlags :CONNECT_DEFERRED, CONNECT_PERSIST, CONNECT_ONESHOT, CONNECT_REFERENCE_COUNTED,
  */
 
 struct __pyx_vtabstruct_7classes_6Object_Object {
@@ -2176,13 +2176,13 @@ static void __Pyx_AddTraceback(const char *funcname, int c_line,
                                int py_line, const char *filename);
 
 /* CIntToPy.proto */
-static CYTHON_INLINE PyObject* __Pyx_PyInt_From___pyx_t_4core_7variant_7Variant_Type(__pyx_t_4core_7variant_7Variant_Type value);
+static CYTHON_INLINE PyObject* __Pyx_PyInt_From___pyx_t_4core_7variant_7Variant_Variant_Type(__pyx_t_4core_7variant_7Variant_Variant_Type value);
 
 /* CIntToPy.proto */
-static CYTHON_INLINE PyObject* __Pyx_PyInt_From___pyx_t_7classes_24VisualScriptFunctionCall_CallMode(__pyx_t_7classes_24VisualScriptFunctionCall_CallMode value);
+static CYTHON_INLINE PyObject* __Pyx_PyInt_From___pyx_t_7classes_24VisualScriptFunctionCall_VisualScriptFunctionCall_CallMode(__pyx_t_7classes_24VisualScriptFunctionCall_VisualScriptFunctionCall_CallMode value);
 
 /* CIntToPy.proto */
-static CYTHON_INLINE PyObject* __Pyx_PyInt_From___pyx_t_7classes_24VisualScriptFunctionCall_RPCCallMode(__pyx_t_7classes_24VisualScriptFunctionCall_RPCCallMode value);
+static CYTHON_INLINE PyObject* __Pyx_PyInt_From___pyx_t_7classes_24VisualScriptFunctionCall_VisualScriptFunctionCall_RPCCallMode(__pyx_t_7classes_24VisualScriptFunctionCall_VisualScriptFunctionCall_RPCCallMode value);
 
 /* CIntToPy.proto */
 static CYTHON_INLINE PyObject* __Pyx_PyInt_From_int(int value);
@@ -5262,7 +5262,7 @@ static PyObject *__pyx_pw_7classes_24VisualScriptFunctionCall_24VisualScriptFunc
 
 static PyObject *__pyx_pf_7classes_24VisualScriptFunctionCall_24VisualScriptFunctionCall_12get_basic_type(struct __pyx_obj_7classes_24VisualScriptFunctionCall_VisualScriptFunctionCall *__pyx_v_self) {
   CYTHON_UNUSED godot_object *__pyx_v__owner;
-  __pyx_t_4core_7variant_7Variant_Type *__pyx_v_ret;
+  __pyx_t_4core_7variant_7Variant_Variant_Type *__pyx_v_ret;
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   godot_object *__pyx_t_1;
@@ -5277,7 +5277,7 @@ static PyObject *__pyx_pf_7classes_24VisualScriptFunctionCall_24VisualScriptFunc
  *   def  get_basic_type(self):
  *     cdef godot_object *_owner = self.godot_owner             # <<<<<<<<<<<<<<
  * 
- *     cdef Type* ret = NULL;
+ *     cdef Variant_Type* ret = NULL;
  */
   __pyx_t_1 = __pyx_v_self->__pyx_base.__pyx_base.__pyx_base.__pyx_base.__pyx_base.godot_owner;
   __pyx_v__owner = __pyx_t_1;
@@ -5285,14 +5285,14 @@ static PyObject *__pyx_pf_7classes_24VisualScriptFunctionCall_24VisualScriptFunc
   /* "classes/VisualScriptFunctionCall.pyx":201
  *     cdef godot_object *_owner = self.godot_owner
  * 
- *     cdef Type* ret = NULL;             # <<<<<<<<<<<<<<
+ *     cdef Variant_Type* ret = NULL;             # <<<<<<<<<<<<<<
  * 
  *     api_core.godot_method_bind_ptrcall(bind_visualscriptfunctioncall_get_basic_type,self.godot_owner,NULL,&ret)
  */
   __pyx_v_ret = NULL;
 
   /* "classes/VisualScriptFunctionCall.pyx":203
- *     cdef Type* ret = NULL;
+ *     cdef Variant_Type* ret = NULL;
  * 
  *     api_core.godot_method_bind_ptrcall(bind_visualscriptfunctioncall_get_basic_type,self.godot_owner,NULL,&ret)             # <<<<<<<<<<<<<<
  *     hello('hallo2')
@@ -5317,7 +5317,7 @@ static PyObject *__pyx_pf_7classes_24VisualScriptFunctionCall_24VisualScriptFunc
  *   def  get_call_mode(self):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_2 = __Pyx_PyInt_From___pyx_t_4core_7variant_7Variant_Type((*__pyx_v_ret)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 205, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyInt_From___pyx_t_4core_7variant_7Variant_Variant_Type((*__pyx_v_ret)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 205, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_r = __pyx_t_2;
   __pyx_t_2 = 0;
@@ -5365,7 +5365,7 @@ static PyObject *__pyx_pw_7classes_24VisualScriptFunctionCall_24VisualScriptFunc
 
 static PyObject *__pyx_pf_7classes_24VisualScriptFunctionCall_24VisualScriptFunctionCall_14get_call_mode(struct __pyx_obj_7classes_24VisualScriptFunctionCall_VisualScriptFunctionCall *__pyx_v_self) {
   CYTHON_UNUSED godot_object *__pyx_v__owner;
-  __pyx_t_7classes_24VisualScriptFunctionCall_CallMode *__pyx_v_ret;
+  __pyx_t_7classes_24VisualScriptFunctionCall_VisualScriptFunctionCall_CallMode *__pyx_v_ret;
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   godot_object *__pyx_t_1;
@@ -5380,7 +5380,7 @@ static PyObject *__pyx_pf_7classes_24VisualScriptFunctionCall_24VisualScriptFunc
  *   def  get_call_mode(self):
  *     cdef godot_object *_owner = self.godot_owner             # <<<<<<<<<<<<<<
  * 
- *     cdef CallMode* ret = NULL;
+ *     cdef VisualScriptFunctionCall_CallMode* ret = NULL;
  */
   __pyx_t_1 = __pyx_v_self->__pyx_base.__pyx_base.__pyx_base.__pyx_base.__pyx_base.godot_owner;
   __pyx_v__owner = __pyx_t_1;
@@ -5388,14 +5388,14 @@ static PyObject *__pyx_pf_7classes_24VisualScriptFunctionCall_24VisualScriptFunc
   /* "classes/VisualScriptFunctionCall.pyx":210
  *     cdef godot_object *_owner = self.godot_owner
  * 
- *     cdef CallMode* ret = NULL;             # <<<<<<<<<<<<<<
+ *     cdef VisualScriptFunctionCall_CallMode* ret = NULL;             # <<<<<<<<<<<<<<
  * 
  *     api_core.godot_method_bind_ptrcall(bind_visualscriptfunctioncall_get_call_mode,self.godot_owner,NULL,&ret)
  */
   __pyx_v_ret = NULL;
 
   /* "classes/VisualScriptFunctionCall.pyx":212
- *     cdef CallMode* ret = NULL;
+ *     cdef VisualScriptFunctionCall_CallMode* ret = NULL;
  * 
  *     api_core.godot_method_bind_ptrcall(bind_visualscriptfunctioncall_get_call_mode,self.godot_owner,NULL,&ret)             # <<<<<<<<<<<<<<
  *     hello('hallo2')
@@ -5420,7 +5420,7 @@ static PyObject *__pyx_pf_7classes_24VisualScriptFunctionCall_24VisualScriptFunc
  *   def  get_function(self):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_2 = __Pyx_PyInt_From___pyx_t_7classes_24VisualScriptFunctionCall_CallMode((*__pyx_v_ret)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 214, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyInt_From___pyx_t_7classes_24VisualScriptFunctionCall_VisualScriptFunctionCall_CallMode((*__pyx_v_ret)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 214, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_r = __pyx_t_2;
   __pyx_t_2 = 0;
@@ -5571,7 +5571,7 @@ static PyObject *__pyx_pw_7classes_24VisualScriptFunctionCall_24VisualScriptFunc
 
 static PyObject *__pyx_pf_7classes_24VisualScriptFunctionCall_24VisualScriptFunctionCall_18get_rpc_call_mode(struct __pyx_obj_7classes_24VisualScriptFunctionCall_VisualScriptFunctionCall *__pyx_v_self) {
   CYTHON_UNUSED godot_object *__pyx_v__owner;
-  __pyx_t_7classes_24VisualScriptFunctionCall_RPCCallMode *__pyx_v_ret;
+  __pyx_t_7classes_24VisualScriptFunctionCall_VisualScriptFunctionCall_RPCCallMode *__pyx_v_ret;
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   godot_object *__pyx_t_1;
@@ -5586,7 +5586,7 @@ static PyObject *__pyx_pf_7classes_24VisualScriptFunctionCall_24VisualScriptFunc
  *   def  get_rpc_call_mode(self):
  *     cdef godot_object *_owner = self.godot_owner             # <<<<<<<<<<<<<<
  * 
- *     cdef RPCCallMode* ret = NULL;
+ *     cdef VisualScriptFunctionCall_RPCCallMode* ret = NULL;
  */
   __pyx_t_1 = __pyx_v_self->__pyx_base.__pyx_base.__pyx_base.__pyx_base.__pyx_base.godot_owner;
   __pyx_v__owner = __pyx_t_1;
@@ -5594,14 +5594,14 @@ static PyObject *__pyx_pf_7classes_24VisualScriptFunctionCall_24VisualScriptFunc
   /* "classes/VisualScriptFunctionCall.pyx":228
  *     cdef godot_object *_owner = self.godot_owner
  * 
- *     cdef RPCCallMode* ret = NULL;             # <<<<<<<<<<<<<<
+ *     cdef VisualScriptFunctionCall_RPCCallMode* ret = NULL;             # <<<<<<<<<<<<<<
  * 
  *     api_core.godot_method_bind_ptrcall(bind_visualscriptfunctioncall_get_rpc_call_mode,self.godot_owner,NULL,&ret)
  */
   __pyx_v_ret = NULL;
 
   /* "classes/VisualScriptFunctionCall.pyx":230
- *     cdef RPCCallMode* ret = NULL;
+ *     cdef VisualScriptFunctionCall_RPCCallMode* ret = NULL;
  * 
  *     api_core.godot_method_bind_ptrcall(bind_visualscriptfunctioncall_get_rpc_call_mode,self.godot_owner,NULL,&ret)             # <<<<<<<<<<<<<<
  *     hello('hallo2')
@@ -5626,7 +5626,7 @@ static PyObject *__pyx_pf_7classes_24VisualScriptFunctionCall_24VisualScriptFunc
  *   def  get_singleton(self):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_2 = __Pyx_PyInt_From___pyx_t_7classes_24VisualScriptFunctionCall_RPCCallMode((*__pyx_v_ret)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 232, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyInt_From___pyx_t_7classes_24VisualScriptFunctionCall_VisualScriptFunctionCall_RPCCallMode((*__pyx_v_ret)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 232, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_r = __pyx_t_2;
   __pyx_t_2 = 0;
@@ -7341,7 +7341,7 @@ static CYTHON_INLINE void __pyx_f_4core_7variant_7Variant_7Variant_new_variant(C
  *     cdef inline void new_variant(self, i):
  *         print("new_variant", type(i))             # <<<<<<<<<<<<<<
  * 
- * ctypedef enum Type:
+ * ctypedef enum Variant_Type:
  */
   __pyx_t_1 = PyTuple_New(2); if (unlikely(!__pyx_t_1)) __PYX_ERR(4, 15, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
@@ -9062,13 +9062,10 @@ static int __pyx_import_star_set(PyObject *o, PyObject* py_name, char *name) {
   static const char* internal_type_names[] = {
     "AABB",
     "Array",
-    "Axis",
     "Basis",
-    "CallMode",
     "Color",
     "Dictionary",
     "NodePath",
-    "Operator",
     "Plane",
     "PoolByteArray",
     "PoolColorArray",
@@ -9079,17 +9076,20 @@ static int __pyx_import_star_set(PyObject *o, PyObject* py_name, char *name) {
     "PoolVector3Array",
     "Quat",
     "RID",
-    "RPCCallMode",
     "Rect2",
     "Reference",
     "String",
     "Transform",
     "Transform2D",
-    "Type",
     "Variant",
+    "Variant_Operator",
+    "Variant_Type",
     "Vector2",
     "Vector3",
+    "Vector3_Axis",
     "VisualScriptFunctionCall",
+    "VisualScriptFunctionCall_CallMode",
+    "VisualScriptFunctionCall_RPCCallMode",
     "Wrapper",
     "bool",
     "godot_aabb",
@@ -11321,24 +11321,24 @@ bad:
     }
 
 /* CIntToPy */
-static CYTHON_INLINE PyObject* __Pyx_PyInt_From___pyx_t_4core_7variant_7Variant_Type(__pyx_t_4core_7variant_7Variant_Type value) {
-    const __pyx_t_4core_7variant_7Variant_Type neg_one = (__pyx_t_4core_7variant_7Variant_Type) ((__pyx_t_4core_7variant_7Variant_Type) 0 - (__pyx_t_4core_7variant_7Variant_Type) 1), const_zero = (__pyx_t_4core_7variant_7Variant_Type) 0;
+static CYTHON_INLINE PyObject* __Pyx_PyInt_From___pyx_t_4core_7variant_7Variant_Variant_Type(__pyx_t_4core_7variant_7Variant_Variant_Type value) {
+    const __pyx_t_4core_7variant_7Variant_Variant_Type neg_one = (__pyx_t_4core_7variant_7Variant_Variant_Type) ((__pyx_t_4core_7variant_7Variant_Variant_Type) 0 - (__pyx_t_4core_7variant_7Variant_Variant_Type) 1), const_zero = (__pyx_t_4core_7variant_7Variant_Variant_Type) 0;
     const int is_unsigned = neg_one > const_zero;
     if (is_unsigned) {
-        if (sizeof(__pyx_t_4core_7variant_7Variant_Type) < sizeof(long)) {
+        if (sizeof(__pyx_t_4core_7variant_7Variant_Variant_Type) < sizeof(long)) {
             return PyInt_FromLong((long) value);
-        } else if (sizeof(__pyx_t_4core_7variant_7Variant_Type) <= sizeof(unsigned long)) {
+        } else if (sizeof(__pyx_t_4core_7variant_7Variant_Variant_Type) <= sizeof(unsigned long)) {
             return PyLong_FromUnsignedLong((unsigned long) value);
 #ifdef HAVE_LONG_LONG
-        } else if (sizeof(__pyx_t_4core_7variant_7Variant_Type) <= sizeof(unsigned PY_LONG_LONG)) {
+        } else if (sizeof(__pyx_t_4core_7variant_7Variant_Variant_Type) <= sizeof(unsigned PY_LONG_LONG)) {
             return PyLong_FromUnsignedLongLong((unsigned PY_LONG_LONG) value);
 #endif
         }
     } else {
-        if (sizeof(__pyx_t_4core_7variant_7Variant_Type) <= sizeof(long)) {
+        if (sizeof(__pyx_t_4core_7variant_7Variant_Variant_Type) <= sizeof(long)) {
             return PyInt_FromLong((long) value);
 #ifdef HAVE_LONG_LONG
-        } else if (sizeof(__pyx_t_4core_7variant_7Variant_Type) <= sizeof(PY_LONG_LONG)) {
+        } else if (sizeof(__pyx_t_4core_7variant_7Variant_Variant_Type) <= sizeof(PY_LONG_LONG)) {
             return PyLong_FromLongLong((PY_LONG_LONG) value);
 #endif
         }
@@ -11346,30 +11346,30 @@ static CYTHON_INLINE PyObject* __Pyx_PyInt_From___pyx_t_4core_7variant_7Variant_
     {
         int one = 1; int little = (int)*(unsigned char *)&one;
         unsigned char *bytes = (unsigned char *)&value;
-        return _PyLong_FromByteArray(bytes, sizeof(__pyx_t_4core_7variant_7Variant_Type),
+        return _PyLong_FromByteArray(bytes, sizeof(__pyx_t_4core_7variant_7Variant_Variant_Type),
                                      little, !is_unsigned);
     }
 }
 
 /* CIntToPy */
-static CYTHON_INLINE PyObject* __Pyx_PyInt_From___pyx_t_7classes_24VisualScriptFunctionCall_CallMode(__pyx_t_7classes_24VisualScriptFunctionCall_CallMode value) {
-    const __pyx_t_7classes_24VisualScriptFunctionCall_CallMode neg_one = (__pyx_t_7classes_24VisualScriptFunctionCall_CallMode) ((__pyx_t_7classes_24VisualScriptFunctionCall_CallMode) 0 - (__pyx_t_7classes_24VisualScriptFunctionCall_CallMode) 1), const_zero = (__pyx_t_7classes_24VisualScriptFunctionCall_CallMode) 0;
+static CYTHON_INLINE PyObject* __Pyx_PyInt_From___pyx_t_7classes_24VisualScriptFunctionCall_VisualScriptFunctionCall_CallMode(__pyx_t_7classes_24VisualScriptFunctionCall_VisualScriptFunctionCall_CallMode value) {
+    const __pyx_t_7classes_24VisualScriptFunctionCall_VisualScriptFunctionCall_CallMode neg_one = (__pyx_t_7classes_24VisualScriptFunctionCall_VisualScriptFunctionCall_CallMode) ((__pyx_t_7classes_24VisualScriptFunctionCall_VisualScriptFunctionCall_CallMode) 0 - (__pyx_t_7classes_24VisualScriptFunctionCall_VisualScriptFunctionCall_CallMode) 1), const_zero = (__pyx_t_7classes_24VisualScriptFunctionCall_VisualScriptFunctionCall_CallMode) 0;
     const int is_unsigned = neg_one > const_zero;
     if (is_unsigned) {
-        if (sizeof(__pyx_t_7classes_24VisualScriptFunctionCall_CallMode) < sizeof(long)) {
+        if (sizeof(__pyx_t_7classes_24VisualScriptFunctionCall_VisualScriptFunctionCall_CallMode) < sizeof(long)) {
             return PyInt_FromLong((long) value);
-        } else if (sizeof(__pyx_t_7classes_24VisualScriptFunctionCall_CallMode) <= sizeof(unsigned long)) {
+        } else if (sizeof(__pyx_t_7classes_24VisualScriptFunctionCall_VisualScriptFunctionCall_CallMode) <= sizeof(unsigned long)) {
             return PyLong_FromUnsignedLong((unsigned long) value);
 #ifdef HAVE_LONG_LONG
-        } else if (sizeof(__pyx_t_7classes_24VisualScriptFunctionCall_CallMode) <= sizeof(unsigned PY_LONG_LONG)) {
+        } else if (sizeof(__pyx_t_7classes_24VisualScriptFunctionCall_VisualScriptFunctionCall_CallMode) <= sizeof(unsigned PY_LONG_LONG)) {
             return PyLong_FromUnsignedLongLong((unsigned PY_LONG_LONG) value);
 #endif
         }
     } else {
-        if (sizeof(__pyx_t_7classes_24VisualScriptFunctionCall_CallMode) <= sizeof(long)) {
+        if (sizeof(__pyx_t_7classes_24VisualScriptFunctionCall_VisualScriptFunctionCall_CallMode) <= sizeof(long)) {
             return PyInt_FromLong((long) value);
 #ifdef HAVE_LONG_LONG
-        } else if (sizeof(__pyx_t_7classes_24VisualScriptFunctionCall_CallMode) <= sizeof(PY_LONG_LONG)) {
+        } else if (sizeof(__pyx_t_7classes_24VisualScriptFunctionCall_VisualScriptFunctionCall_CallMode) <= sizeof(PY_LONG_LONG)) {
             return PyLong_FromLongLong((PY_LONG_LONG) value);
 #endif
         }
@@ -11377,30 +11377,30 @@ static CYTHON_INLINE PyObject* __Pyx_PyInt_From___pyx_t_7classes_24VisualScriptF
     {
         int one = 1; int little = (int)*(unsigned char *)&one;
         unsigned char *bytes = (unsigned char *)&value;
-        return _PyLong_FromByteArray(bytes, sizeof(__pyx_t_7classes_24VisualScriptFunctionCall_CallMode),
+        return _PyLong_FromByteArray(bytes, sizeof(__pyx_t_7classes_24VisualScriptFunctionCall_VisualScriptFunctionCall_CallMode),
                                      little, !is_unsigned);
     }
 }
 
 /* CIntToPy */
-static CYTHON_INLINE PyObject* __Pyx_PyInt_From___pyx_t_7classes_24VisualScriptFunctionCall_RPCCallMode(__pyx_t_7classes_24VisualScriptFunctionCall_RPCCallMode value) {
-    const __pyx_t_7classes_24VisualScriptFunctionCall_RPCCallMode neg_one = (__pyx_t_7classes_24VisualScriptFunctionCall_RPCCallMode) ((__pyx_t_7classes_24VisualScriptFunctionCall_RPCCallMode) 0 - (__pyx_t_7classes_24VisualScriptFunctionCall_RPCCallMode) 1), const_zero = (__pyx_t_7classes_24VisualScriptFunctionCall_RPCCallMode) 0;
+static CYTHON_INLINE PyObject* __Pyx_PyInt_From___pyx_t_7classes_24VisualScriptFunctionCall_VisualScriptFunctionCall_RPCCallMode(__pyx_t_7classes_24VisualScriptFunctionCall_VisualScriptFunctionCall_RPCCallMode value) {
+    const __pyx_t_7classes_24VisualScriptFunctionCall_VisualScriptFunctionCall_RPCCallMode neg_one = (__pyx_t_7classes_24VisualScriptFunctionCall_VisualScriptFunctionCall_RPCCallMode) ((__pyx_t_7classes_24VisualScriptFunctionCall_VisualScriptFunctionCall_RPCCallMode) 0 - (__pyx_t_7classes_24VisualScriptFunctionCall_VisualScriptFunctionCall_RPCCallMode) 1), const_zero = (__pyx_t_7classes_24VisualScriptFunctionCall_VisualScriptFunctionCall_RPCCallMode) 0;
     const int is_unsigned = neg_one > const_zero;
     if (is_unsigned) {
-        if (sizeof(__pyx_t_7classes_24VisualScriptFunctionCall_RPCCallMode) < sizeof(long)) {
+        if (sizeof(__pyx_t_7classes_24VisualScriptFunctionCall_VisualScriptFunctionCall_RPCCallMode) < sizeof(long)) {
             return PyInt_FromLong((long) value);
-        } else if (sizeof(__pyx_t_7classes_24VisualScriptFunctionCall_RPCCallMode) <= sizeof(unsigned long)) {
+        } else if (sizeof(__pyx_t_7classes_24VisualScriptFunctionCall_VisualScriptFunctionCall_RPCCallMode) <= sizeof(unsigned long)) {
             return PyLong_FromUnsignedLong((unsigned long) value);
 #ifdef HAVE_LONG_LONG
-        } else if (sizeof(__pyx_t_7classes_24VisualScriptFunctionCall_RPCCallMode) <= sizeof(unsigned PY_LONG_LONG)) {
+        } else if (sizeof(__pyx_t_7classes_24VisualScriptFunctionCall_VisualScriptFunctionCall_RPCCallMode) <= sizeof(unsigned PY_LONG_LONG)) {
             return PyLong_FromUnsignedLongLong((unsigned PY_LONG_LONG) value);
 #endif
         }
     } else {
-        if (sizeof(__pyx_t_7classes_24VisualScriptFunctionCall_RPCCallMode) <= sizeof(long)) {
+        if (sizeof(__pyx_t_7classes_24VisualScriptFunctionCall_VisualScriptFunctionCall_RPCCallMode) <= sizeof(long)) {
             return PyInt_FromLong((long) value);
 #ifdef HAVE_LONG_LONG
-        } else if (sizeof(__pyx_t_7classes_24VisualScriptFunctionCall_RPCCallMode) <= sizeof(PY_LONG_LONG)) {
+        } else if (sizeof(__pyx_t_7classes_24VisualScriptFunctionCall_VisualScriptFunctionCall_RPCCallMode) <= sizeof(PY_LONG_LONG)) {
             return PyLong_FromLongLong((PY_LONG_LONG) value);
 #endif
         }
@@ -11408,7 +11408,7 @@ static CYTHON_INLINE PyObject* __Pyx_PyInt_From___pyx_t_7classes_24VisualScriptF
     {
         int one = 1; int little = (int)*(unsigned char *)&one;
         unsigned char *bytes = (unsigned char *)&value;
-        return _PyLong_FromByteArray(bytes, sizeof(__pyx_t_7classes_24VisualScriptFunctionCall_RPCCallMode),
+        return _PyLong_FromByteArray(bytes, sizeof(__pyx_t_7classes_24VisualScriptFunctionCall_VisualScriptFunctionCall_RPCCallMode),
                                      little, !is_unsigned);
     }
 }

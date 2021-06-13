@@ -20,9 +20,9 @@ from core.transform.Transform cimport Transform
 from core.transform.Transform2D cimport Transform2D
 from core.vector2.Vector2 cimport Vector2
 from core.vector3.Vector3 cimport Vector3
-from core.variant.Variant cimport Type
-from core.variant.Variant cimport Operator
-from core.vector3.Vector3 cimport Axis
+from core.variant.Variant cimport Variant_Type
+from core.variant.Variant cimport Variant_Operator
+from core.vector3.Vector3 cimport Vector3_Axis
 from core.color.Color cimport Color
 from cython.operator cimport dereference
 from godot_api.binding_external cimport *
@@ -479,7 +479,7 @@ cdef class Viewport(classes.Node.Node):
   def  get_clear_mode(self):
     cdef godot_object *_owner = self.godot_owner
 
-    cdef ClearMode* ret = NULL;
+    cdef Viewport_ClearMode* ret = NULL;
 
     api_core.godot_method_bind_ptrcall(bind_viewport_get_clear_mode,self.godot_owner,NULL,&ret)
     hello('hallo2')
@@ -488,7 +488,7 @@ cdef class Viewport(classes.Node.Node):
   def  get_debug_draw(self):
     cdef godot_object *_owner = self.godot_owner
 
-    cdef DebugDraw* ret = NULL;
+    cdef Viewport_DebugDraw* ret = NULL;
 
     api_core.godot_method_bind_ptrcall(bind_viewport_get_debug_draw,self.godot_owner,NULL,&ret)
     hello('hallo2')
@@ -549,7 +549,7 @@ cdef class Viewport(classes.Node.Node):
   def  get_msaa(self):
     cdef godot_object *_owner = self.godot_owner
 
-    cdef MSAA* ret = NULL;
+    cdef Viewport_MSAA* ret = NULL;
 
     api_core.godot_method_bind_ptrcall(bind_viewport_get_msaa,self.godot_owner,NULL,&ret)
     hello('hallo2')
@@ -579,7 +579,7 @@ cdef class Viewport(classes.Node.Node):
   def  get_shadow_atlas_quadrant_subdiv(self,  int quadrant):
     cdef godot_object *_owner = self.godot_owner
 
-    cdef ShadowAtlasQuadrantSubdiv* ret = NULL;
+    cdef Viewport_ShadowAtlasQuadrantSubdiv* ret = NULL;
 
     cdef void *args[1]
 
@@ -625,7 +625,7 @@ cdef class Viewport(classes.Node.Node):
   def  get_update_mode(self):
     cdef godot_object *_owner = self.godot_owner
 
-    cdef UpdateMode* ret = NULL;
+    cdef Viewport_UpdateMode* ret = NULL;
 
     api_core.godot_method_bind_ptrcall(bind_viewport_get_update_mode,self.godot_owner,NULL,&ret)
     hello('hallo2')
@@ -634,7 +634,7 @@ cdef class Viewport(classes.Node.Node):
   def  get_usage(self):
     cdef godot_object *_owner = self.godot_owner
 
-    cdef Usage* ret = NULL;
+    cdef Viewport_Usage* ret = NULL;
 
     api_core.godot_method_bind_ptrcall(bind_viewport_get_usage,self.godot_owner,NULL,&ret)
     hello('hallo2')

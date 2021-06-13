@@ -20,9 +20,9 @@ from core.transform.Transform cimport Transform
 from core.transform.Transform2D cimport Transform2D
 from core.vector2.Vector2 cimport Vector2
 from core.vector3.Vector3 cimport Vector3
-from core.variant.Variant cimport Type
-from core.variant.Variant cimport Operator
-from core.vector3.Vector3 cimport Axis
+from core.variant.Variant cimport Variant_Type
+from core.variant.Variant cimport Variant_Operator
+from core.vector3.Vector3 cimport Vector3_Axis
 from core.color.Color cimport Color
 from cython.operator cimport dereference
 from godot_api.binding_external cimport *
@@ -292,7 +292,7 @@ cdef class TreeItem(classes.Object.Object):
   def  get_cell_mode(self,  int column):
     cdef godot_object *_owner = self.godot_owner
 
-    cdef TreeCellMode* ret = NULL;
+    cdef TreeItem_TreeCellMode* ret = NULL;
 
     cdef void *args[1]
 
@@ -491,7 +491,7 @@ cdef class TreeItem(classes.Object.Object):
   def  get_text_align(self,  int column):
     cdef godot_object *_owner = self.godot_owner
 
-    cdef TextAlign* ret = NULL;
+    cdef TreeItem_TextAlign* ret = NULL;
 
     cdef void *args[1]
 

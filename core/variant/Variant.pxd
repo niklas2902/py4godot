@@ -14,7 +14,7 @@ cdef class Variant:
     cdef inline void new_variant(self, i):
         print("new_variant", type(i))
 
-ctypedef enum Type:
+ctypedef enum Variant_Type:
     NIL,
     # atomic types
     BOOL,
@@ -55,7 +55,7 @@ ctypedef enum Type:
 
 
 
-ctypedef enum Operator :
+ctypedef enum Variant_Operator :
 
     #comparation
     OP_EQUAL,
