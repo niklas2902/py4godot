@@ -1,6 +1,0 @@
-
-from enum import *
-from godot_api.binding_external cimport *
-cimport classes.Spatial
-cdef class NavigationMeshInstance(classes.Spatial.Spatial):
-    pass

@@ -36,7 +36,7 @@ def generate_methods(obj, import_string):
 
 
             for argument in method["arguments"]:
-                args += " "+(argument["type"] if not argument["type"] in objects else "classes."+argument["type"]+"."+argument["type"])+" "
+                args += " "+(argument["type"] if not argument["type"] in objects else argument["type"])+" "
                 args += (argument["name"] if argument["name"] not in exclude_words else argument["name"]+"_")+", "
 
                 if(argument["type"] in objects):
@@ -58,14 +58,14 @@ def generate_methods(obj, import_string):
                     import_class,return_type = return_type.split("::")
                     if(import_class != obj["name"] and not import_class in core):
                         import_string += f"cimport classes.{import_class}\n"
-                        return_type = import_class+"."+import_class+"_"+return_type
+                        return_type = import_class+"_"+return_type
                     else:
                         return_type = import_class+"_"+return_type
 
                 if(return_type in objects):
                     result += f"    cdef godot_object* ret = NULL;\n\n"
                 else:
-                    return_type_imported = 'classes.'+return_type if return_type.split(".")[0] in objects else return_type
+                    return_type_imported = return_type if return_type.split(".")[0] in objects else return_type
                     result += f"    cdef {return_type_imported if return_type_imported not in types else types[return_type_imported]}* ret = NULL;\n\n"
 
             if(len(method['arguments']) > 0):
@@ -83,7 +83,7 @@ def generate_methods(obj, import_string):
             result += f"    hello('hallo2')\n"
             if return_type != "void" and not return_type in objects and not return_type_save.startswith("Pool"):
                 if("." in return_type):
-                    return_type = "classes."+return_type
+                    return_type = return_type
                 if(return_type in objects and return_type_save not in types):
                     return_type = "godot_object"
                 if(return_type in types and not return_type_save in return_type):
@@ -94,11 +94,11 @@ def generate_methods(obj, import_string):
 
 def generate_method_bindings(obj):
     result = "\n##################################Generated method bindings#########################################\n"
-    result += "cdef godot_method_bind *bind\n"
+    result += f"cdef godot_method_bind *bind_{obj['name']}\n"
     for method in obj["methods"]:
         result += f"cdef godot_method_bind *bind_{obj['name'].lower()}_{method['name']}\n"
-    result += "cpdef init_method_bindings():\n"
-    result += '  bind = api_core.godot_method_bind_get_method("Object", "_get")\n'
+    result += f"cpdef init_method_bindings_{obj['name']}():\n"
+    result += f'  bind_{obj["name"]} = api_core.godot_method_bind_get_method("Object", "_get")\n'
     for method in obj["methods"]:
         result += f"  bind_{obj['name'].lower()}_{method['name']} = api_core.godot_method_bind_get_method('{obj['name']}', '{method['name']}')\n"
     return result
@@ -106,37 +106,10 @@ def generate_method_bindings(obj):
 
 def generate_classes(obj):
     result = ""
-    if(obj["base_class"] != ""):
-        result += f"cimport classes.{obj['base_class']} \n"
     import_string = ""
+    if(obj["base_class"] != ""):
+        import_string += f"cimport classes.{obj['base_class']} \n"
     import_string += ""
-    import_string += f"\n##################################Import gdnative api#########################################\n"
-    import_string += f"from enum import *\n"
-    import_string += f"from utils.Wrapper cimport *\n"
-    import_string += f"from classes.Reference cimport Reference\n"
-    import_string += f"from core.node_path.NodePath cimport NodePath\n"
-    import_string += f"from core.string.String cimport String\n"
-    import_string += f"from core.variant.Variant cimport Variant\n"
-    import_string += f"from core.array.Array cimport Array\n"
-    import_string += f"from core.color.Color cimport Color\n"
-    import_string += f"from core.plane.Plane cimport Plane\n"
-    import_string += f"from core.basis.Basis cimport Basis\n"
-    import_string += f"from core.aabb.AABB cimport AABB\n"
-    import_string += f"from core.dictionary.Dictionary cimport Dictionary\n"
-    import_string += f"from core.pool_array.PoolArrays cimport *\n"
-    import_string += f"from core.quat.Quat cimport Quat\n"
-    import_string += f"from core.rect2.Rect2 cimport Rect2\n"
-    import_string += f"from core.rid.RID cimport RID\n"
-    import_string += f"from core.transform.Transform cimport Transform\n"
-    import_string += f"from core.transform.Transform2D cimport Transform2D\n"
-    import_string += f"from core.vector2.Vector2 cimport Vector2\n"
-    import_string += f"from core.vector3.Vector3 cimport Vector3\n"
-    import_string += f"from core.variant.Variant cimport Variant_Type\n"
-    import_string += f"from core.variant.Variant cimport Variant_Operator\n"
-    import_string += f"from core.vector3.Vector3 cimport Vector3_Axis\n"
-    import_string += f"from core.color.Color cimport Color\n"
-    import_string += f"from cython.operator cimport dereference\n"
-    import_string += f"from godot_api.binding_external cimport *\n"
 
     result += generate_method_bindings(obj)
 
@@ -144,7 +117,7 @@ def generate_classes(obj):
 
     if(obj["name"] == "GlobalConstants"):
         print(obj["name"],"|",obj["base_class"], obj["base_class"] == "")
-    result += f"""cdef class {obj['name']}({'classes.'+obj['base_class']+'.'+obj['base_class'] if obj['base_class'] != "" else "Wrapper"}):\n"""
+    result += f"""cdef class {obj['name']}({obj['base_class'] if obj['base_class'] != "" else "Wrapper"}):\n"""
     result += f"""  def __init__(self):\n"""
     result += f"""    super().__init__()\n"""
     result += f"""    nativescript_api_11.godot_nativescript_get_instance_binding_data(0, api_core.godot_get_class_constructor("{obj["name"]}")())"""
@@ -154,15 +127,16 @@ def generate_classes(obj):
     result += results[0]
     import_string = results[1]
 
-    generate_pxd(obj["name"], obj["base_class"], obj)
-    return import_string + result
+    pxd_file = generate_pxd(obj["name"], obj["base_class"], obj)
+    return import_string, result,pxd_file
 
 def generate_enums(class_, obj):
     result = ""
     for enum in obj["enums"]:
         result += f"""ctypedef enum {class_}_{enum["name"]} :"""
         for value in enum["values"]:
-            result += value +", "
+            result += class_.upper()+"_"+value +", "
+        result = result.rstrip(", ")
         result += "\n"
 
     return result
@@ -172,43 +146,63 @@ def generate_pxd(class_, base_class, obj):
     if(class_ == "GlobalConstants"):
         print(class_,"|",base_class)
 
-    string_to_write = ""
-    if(class_ == "Object"):
-        string_to_write = (f"""
-from enum import *
-from godot_api.binding_external cimport *
-from utils.Wrapper cimport *
-cdef class Object(Wrapper):
-    pass\n""")
-    else:
-        if(base_class != ""):
-            string_to_write = (f"""
-from enum import *
-from godot_api.binding_external cimport *
-cimport classes.{base_class}
-cdef class {class_}(classes.{base_class}.{base_class}):
-    pass\n""")
-        else:
-            string_to_write = (f"""
-from enum import *
-from godot_api.binding_external cimport *
-from utils.Wrapper cimport *
-cdef class {class_}(Wrapper):
-    pass\n""")
-    file =""
-    try:
-        with open(f"classes/{class_}.pxd", "r") as headerFile:
-            file = headerFile.read()
-    except:
-        print(f"File classes/{class_}.pxd not found")
+    string_to_write = "\n"
+    #if(class_ == "Object"):
+    #    string_to_write = (f"""
+#cdef class Object(Wrapper):
+#    pass\n""")
+#    else:
+#        if(base_class != ""):
+#            string_to_write = (f"""
+            
+#cdef class {class_}({base_class}):
+#    pass\n""")
+#        else:
+#            string_to_write = (f"""
+            
+#cdef class {class_}(Wrapper):
+#    pass\n""")
+#    file =""
 
     string_to_write += (generate_enums(class_, obj))
-    if(file != string_to_write):
-        print("write_header")
-        with open(f"classes/{class_}.pxd", "w") as headerFile:
-            headerFile.write(string_to_write)
+    return string_to_write
 
 test_mode = False
+
+def create_set(string, set):
+    strings = string.split("\n")
+    for s in strings:
+        set.add(s)
+
+base_import_string=""
+base_import_string += f"\n##################################Import gdnative api#########################################\n"
+base_import_string += f"from enum import *\n"
+base_import_string += f"from utils.Wrapper cimport *\n"
+base_import_string += f"from core.node_path.NodePath cimport NodePath\n"
+base_import_string += f"from core.string.String cimport String\n"
+base_import_string += f"from core.variant.Variant cimport Variant\n"
+base_import_string += f"from core.array.Array cimport Array\n"
+base_import_string += f"from core.color.Color cimport Color\n"
+base_import_string += f"from core.plane.Plane cimport Plane\n"
+base_import_string += f"from core.basis.Basis cimport Basis\n"
+base_import_string += f"from core.aabb.AABB cimport AABB\n"
+base_import_string += f"from core.dictionary.Dictionary cimport Dictionary\n"
+base_import_string += f"from core.pool_array.PoolArrays cimport *\n"
+base_import_string += f"from core.quat.Quat cimport Quat\n"
+base_import_string += f"from core.rect2.Rect2 cimport Rect2\n"
+base_import_string += f"from core.rid.RID cimport RID\n"
+base_import_string += f"from core.transform.Transform cimport Transform\n"
+base_import_string += f"from core.transform.Transform2D cimport Transform2D\n"
+base_import_string += f"from core.vector2.Vector2 cimport Vector2\n"
+base_import_string += f"from core.vector3.Vector3 cimport Vector3\n"
+base_import_string += f"from core.variant.Variant cimport Variant_Type\n"
+base_import_string += f"from core.variant.Variant cimport Variant_Operator\n"
+base_import_string += f"from core.vector3.Vector3 cimport Vector3_Axis\n"
+base_import_string += f"from core.color.Color cimport Color\n"
+base_import_string += f"from cython.operator cimport dereference\n"
+base_import_string += f"from godot_api.binding_external cimport *\n"
+
+import_string = ""
 
 def build(test = False):
 
@@ -221,14 +215,22 @@ def build(test = False):
     objects = set([element["name"] for element in obj])
     print(objects)
 
+    bindings_file = ""
+    pxd_file = """from enum import *
+from godot_api.binding_external cimport *
+from utils.Wrapper cimport *"""
+    set_ = set()
     #generate all the class files
     for element in obj:
         if(element["name"].startswith("_")):
             continue
-        generated_file = ""
+
         file = ""
         generated_file = generate_classes(element)
-        try:
+        bindings_file += generated_file[1]+"\n"
+        pxd_file += generated_file[2]
+        create_set(generated_file[0],set_)
+        """try:
             with open(f"classes/{element['name']}.pyx", "r") as generateFile:
                 file = generateFile.read()
         except:
@@ -236,7 +238,7 @@ def build(test = False):
         if(generated_file != file):
             print("###########################################write into file#########################################")
             with open(f"classes/{element['name']}.pyx", "w") as generateFile:
-                generateFile.write(generate_classes(element))
+                generateFile.write(generated_file[0]+generated_file[1])
 
 
         #generate main file
@@ -260,3 +262,10 @@ def build(test = False):
                 print("write main")
                 mainFile.write(import_string+"\n\n")
                 mainFile.write(init_method_bindings_string)
+        """
+
+    print(set_)
+    with open("classes/generated.pyx", "w") as bindings:
+        bindings.write(base_import_string+bindings_file)
+    with open("classes/generated.pxd", "w") as bindings_pxd:
+        bindings_pxd.write(pxd_file)
