@@ -200,11 +200,18 @@ base_import_string += f"from core.variant.Variant cimport Variant_Operator\n"
 base_import_string += f"from core.vector3.Vector3 cimport Vector3_Axis\n"
 base_import_string += f"from core.color.Color cimport Color\n"
 base_import_string += f"from cython.operator cimport dereference\n"
-base_import_string += f"from godot_api.binding_external cimport *\n"
+base_import_string += f"from godot_api.binding_external cimport *\n\n\n" \
+                      f"cdef set_core(godot_gdnative_core_api_struct* core):\n" \
+                      f"    global api_core\n" \
+                      f"    api_core = core\n\n\n"
+
+
+main_string = ""
 
 import_string = ""
 
 def build(test = False):
+    init_methods_string = "def init_method_bindings():\n"
 
     global objects
     # read file
@@ -225,6 +232,7 @@ from utils.Wrapper cimport *"""
         if(element["name"].startswith("_")):
             continue
 
+        init_methods_string += f"  init_method_bindings_{element['name']}()\n"
         file = ""
         generated_file = generate_classes(element)
         bindings_file += generated_file[1]+"\n"
@@ -266,6 +274,6 @@ from utils.Wrapper cimport *"""
 
     print(set_)
     with open("classes/generated.pyx", "w") as bindings:
-        bindings.write(base_import_string+bindings_file)
+        bindings.write(base_import_string+main_string+bindings_file+ init_methods_string)
     with open("classes/generated.pxd", "w") as bindings_pxd:
-        bindings_pxd.write(pxd_file)
+        bindings_pxd.write(pxd_file+"\ncdef set_core(godot_gdnative_core_api_struct* core)")

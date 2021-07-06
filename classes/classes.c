@@ -3,6 +3,12 @@
 /* BEGIN: Cython Metadata
 {
     "distutils": {
+        "depends": [
+            "godot_api\\binding.h"
+        ],
+        "include_dirs": [
+            ".\\godot_api"
+        ],
         "name": "classes.classes",
         "sources": [
             "classes\\classes.pyx"
@@ -617,6 +623,8 @@ static CYTHON_INLINE float __PYX_NAN() {
 #define __PYX_HAVE__classes__classes
 #define __PYX_HAVE_API__classes__classes
 /* Early includes */
+#include <stddef.h>
+#include "binding.h"
 #ifdef _OPENMP
 #include <omp.h>
 #endif /* _OPENMP */
@@ -826,24 +834,5861 @@ static const char *__pyx_filename;
 
 static const char *__pyx_f[] = {
   "classes\\classes.pyx",
-  "stringsource",
+  "utils\\Wrapper.pxd",
 };
 
 /*--- Type declarations ---*/
-struct __pyx_obj___pyx_scope_struct____Pyx_CFunc_object_______to_py;
+struct __pyx_obj_5utils_7Wrapper_Wrapper;
 
-/* "cfunc.to_py":64
+/* "classes/generated.pxd":8
  * 
- * @cname("__Pyx_CFunc_object_______to_py")
- * cdef object __Pyx_CFunc_object_______to_py(object (*f)() ):             # <<<<<<<<<<<<<<
- *     def wrap():
- *         """wrap()"""
+ * 
+ * ctypedef enum ARVRInterface_Tracking_status :ARVRINTERFACE_ARVR_NORMAL_TRACKING, ARVRINTERFACE_ARVR_EXCESSIVE_MOTION, ARVRINTERFACE_ARVR_INSUFFICIENT_FEATURES, ARVRINTERFACE_ARVR_UNKNOWN_TRACKING, ARVRINTERFACE_ARVR_NOT_TRACKING             # <<<<<<<<<<<<<<
+ * ctypedef enum ARVRInterface_Eyes :ARVRINTERFACE_EYE_MONO, ARVRINTERFACE_EYE_LEFT, ARVRINTERFACE_EYE_RIGHT
+ * ctypedef enum ARVRInterface_Capabilities :ARVRINTERFACE_ARVR_NONE, ARVRINTERFACE_ARVR_MONO, ARVRINTERFACE_ARVR_STEREO, ARVRINTERFACE_ARVR_AR, ARVRINTERFACE_ARVR_EXTERNAL
  */
-struct __pyx_obj___pyx_scope_struct____Pyx_CFunc_object_______to_py {
+enum __pyx_t_7classes_9generated_ARVRInterface_Tracking_status {
+  __pyx_e_7classes_9generated_ARVRINTERFACE_ARVR_NORMAL_TRACKING,
+  __pyx_e_7classes_9generated_ARVRINTERFACE_ARVR_EXCESSIVE_MOTION,
+  __pyx_e_7classes_9generated_ARVRINTERFACE_ARVR_INSUFFICIENT_FEATURES,
+  __pyx_e_7classes_9generated_ARVRINTERFACE_ARVR_UNKNOWN_TRACKING,
+  __pyx_e_7classes_9generated_ARVRINTERFACE_ARVR_NOT_TRACKING
+};
+typedef enum __pyx_t_7classes_9generated_ARVRInterface_Tracking_status __pyx_t_7classes_9generated_ARVRInterface_Tracking_status;
+
+/* "classes/generated.pxd":9
+ * 
+ * ctypedef enum ARVRInterface_Tracking_status :ARVRINTERFACE_ARVR_NORMAL_TRACKING, ARVRINTERFACE_ARVR_EXCESSIVE_MOTION, ARVRINTERFACE_ARVR_INSUFFICIENT_FEATURES, ARVRINTERFACE_ARVR_UNKNOWN_TRACKING, ARVRINTERFACE_ARVR_NOT_TRACKING
+ * ctypedef enum ARVRInterface_Eyes :ARVRINTERFACE_EYE_MONO, ARVRINTERFACE_EYE_LEFT, ARVRINTERFACE_EYE_RIGHT             # <<<<<<<<<<<<<<
+ * ctypedef enum ARVRInterface_Capabilities :ARVRINTERFACE_ARVR_NONE, ARVRINTERFACE_ARVR_MONO, ARVRINTERFACE_ARVR_STEREO, ARVRINTERFACE_ARVR_AR, ARVRINTERFACE_ARVR_EXTERNAL
+ * 
+ */
+enum __pyx_t_7classes_9generated_ARVRInterface_Eyes {
+  __pyx_e_7classes_9generated_ARVRINTERFACE_EYE_MONO,
+  __pyx_e_7classes_9generated_ARVRINTERFACE_EYE_LEFT,
+  __pyx_e_7classes_9generated_ARVRINTERFACE_EYE_RIGHT
+};
+typedef enum __pyx_t_7classes_9generated_ARVRInterface_Eyes __pyx_t_7classes_9generated_ARVRInterface_Eyes;
+
+/* "classes/generated.pxd":10
+ * ctypedef enum ARVRInterface_Tracking_status :ARVRINTERFACE_ARVR_NORMAL_TRACKING, ARVRINTERFACE_ARVR_EXCESSIVE_MOTION, ARVRINTERFACE_ARVR_INSUFFICIENT_FEATURES, ARVRINTERFACE_ARVR_UNKNOWN_TRACKING, ARVRINTERFACE_ARVR_NOT_TRACKING
+ * ctypedef enum ARVRInterface_Eyes :ARVRINTERFACE_EYE_MONO, ARVRINTERFACE_EYE_LEFT, ARVRINTERFACE_EYE_RIGHT
+ * ctypedef enum ARVRInterface_Capabilities :ARVRINTERFACE_ARVR_NONE, ARVRINTERFACE_ARVR_MONO, ARVRINTERFACE_ARVR_STEREO, ARVRINTERFACE_ARVR_AR, ARVRINTERFACE_ARVR_EXTERNAL             # <<<<<<<<<<<<<<
+ * 
+ * 
+ */
+enum __pyx_t_7classes_9generated_ARVRInterface_Capabilities {
+  __pyx_e_7classes_9generated_ARVRINTERFACE_ARVR_NONE,
+  __pyx_e_7classes_9generated_ARVRINTERFACE_ARVR_MONO,
+  __pyx_e_7classes_9generated_ARVRINTERFACE_ARVR_STEREO,
+  __pyx_e_7classes_9generated_ARVRINTERFACE_ARVR_AR,
+  __pyx_e_7classes_9generated_ARVRINTERFACE_ARVR_EXTERNAL
+};
+typedef enum __pyx_t_7classes_9generated_ARVRInterface_Capabilities __pyx_t_7classes_9generated_ARVRInterface_Capabilities;
+
+/* "classes/generated.pxd":14
+ * 
+ * 
+ * ctypedef enum ARVRPositionalTracker_TrackerHand :ARVRPOSITIONALTRACKER_TRACKER_HAND_UNKNOWN, ARVRPOSITIONALTRACKER_TRACKER_LEFT_HAND, ARVRPOSITIONALTRACKER_TRACKER_RIGHT_HAND             # <<<<<<<<<<<<<<
+ * 
+ * ctypedef enum ARVRServer_RotationMode :ARVRSERVER_RESET_FULL_ROTATION, ARVRSERVER_RESET_BUT_KEEP_TILT, ARVRSERVER_DONT_RESET_ROTATION
+ */
+enum __pyx_t_7classes_9generated_ARVRPositionalTracker_TrackerHand {
+  __pyx_e_7classes_9generated_ARVRPOSITIONALTRACKER_TRACKER_HAND_UNKNOWN,
+  __pyx_e_7classes_9generated_ARVRPOSITIONALTRACKER_TRACKER_LEFT_HAND,
+  __pyx_e_7classes_9generated_ARVRPOSITIONALTRACKER_TRACKER_RIGHT_HAND
+};
+typedef enum __pyx_t_7classes_9generated_ARVRPositionalTracker_TrackerHand __pyx_t_7classes_9generated_ARVRPositionalTracker_TrackerHand;
+
+/* "classes/generated.pxd":16
+ * ctypedef enum ARVRPositionalTracker_TrackerHand :ARVRPOSITIONALTRACKER_TRACKER_HAND_UNKNOWN, ARVRPOSITIONALTRACKER_TRACKER_LEFT_HAND, ARVRPOSITIONALTRACKER_TRACKER_RIGHT_HAND
+ * 
+ * ctypedef enum ARVRServer_RotationMode :ARVRSERVER_RESET_FULL_ROTATION, ARVRSERVER_RESET_BUT_KEEP_TILT, ARVRSERVER_DONT_RESET_ROTATION             # <<<<<<<<<<<<<<
+ * ctypedef enum ARVRServer_TrackerType :ARVRSERVER_TRACKER_CONTROLLER, ARVRSERVER_TRACKER_BASESTATION, ARVRSERVER_TRACKER_ANCHOR, ARVRSERVER_TRACKER_ANY_KNOWN, ARVRSERVER_TRACKER_UNKNOWN, ARVRSERVER_TRACKER_ANY
+ * 
+ */
+enum __pyx_t_7classes_9generated_ARVRServer_RotationMode {
+  __pyx_e_7classes_9generated_ARVRSERVER_RESET_FULL_ROTATION,
+  __pyx_e_7classes_9generated_ARVRSERVER_RESET_BUT_KEEP_TILT,
+  __pyx_e_7classes_9generated_ARVRSERVER_DONT_RESET_ROTATION
+};
+typedef enum __pyx_t_7classes_9generated_ARVRServer_RotationMode __pyx_t_7classes_9generated_ARVRServer_RotationMode;
+
+/* "classes/generated.pxd":17
+ * 
+ * ctypedef enum ARVRServer_RotationMode :ARVRSERVER_RESET_FULL_ROTATION, ARVRSERVER_RESET_BUT_KEEP_TILT, ARVRSERVER_DONT_RESET_ROTATION
+ * ctypedef enum ARVRServer_TrackerType :ARVRSERVER_TRACKER_CONTROLLER, ARVRSERVER_TRACKER_BASESTATION, ARVRSERVER_TRACKER_ANCHOR, ARVRSERVER_TRACKER_ANY_KNOWN, ARVRSERVER_TRACKER_UNKNOWN, ARVRSERVER_TRACKER_ANY             # <<<<<<<<<<<<<<
+ * 
+ * 
+ */
+enum __pyx_t_7classes_9generated_ARVRServer_TrackerType {
+  __pyx_e_7classes_9generated_ARVRSERVER_TRACKER_CONTROLLER,
+  __pyx_e_7classes_9generated_ARVRSERVER_TRACKER_BASESTATION,
+  __pyx_e_7classes_9generated_ARVRSERVER_TRACKER_ANCHOR,
+  __pyx_e_7classes_9generated_ARVRSERVER_TRACKER_ANY_KNOWN,
+  __pyx_e_7classes_9generated_ARVRSERVER_TRACKER_UNKNOWN,
+  __pyx_e_7classes_9generated_ARVRSERVER_TRACKER_ANY
+};
+typedef enum __pyx_t_7classes_9generated_ARVRServer_TrackerType __pyx_t_7classes_9generated_ARVRServer_TrackerType;
+
+/* "classes/generated.pxd":25
+ * 
+ * 
+ * ctypedef enum Animation_TrackType :ANIMATION_TYPE_VALUE, ANIMATION_TYPE_TRANSFORM, ANIMATION_TYPE_METHOD, ANIMATION_TYPE_BEZIER, ANIMATION_TYPE_AUDIO, ANIMATION_TYPE_ANIMATION             # <<<<<<<<<<<<<<
+ * ctypedef enum Animation_UpdateMode :ANIMATION_UPDATE_CONTINUOUS, ANIMATION_UPDATE_DISCRETE, ANIMATION_UPDATE_TRIGGER, ANIMATION_UPDATE_CAPTURE
+ * ctypedef enum Animation_InterpolationType :ANIMATION_INTERPOLATION_NEAREST, ANIMATION_INTERPOLATION_LINEAR, ANIMATION_INTERPOLATION_CUBIC
+ */
+enum __pyx_t_7classes_9generated_Animation_TrackType {
+  __pyx_e_7classes_9generated_ANIMATION_TYPE_VALUE,
+  __pyx_e_7classes_9generated_ANIMATION_TYPE_TRANSFORM,
+  __pyx_e_7classes_9generated_ANIMATION_TYPE_METHOD,
+  __pyx_e_7classes_9generated_ANIMATION_TYPE_BEZIER,
+  __pyx_e_7classes_9generated_ANIMATION_TYPE_AUDIO,
+  __pyx_e_7classes_9generated_ANIMATION_TYPE_ANIMATION
+};
+typedef enum __pyx_t_7classes_9generated_Animation_TrackType __pyx_t_7classes_9generated_Animation_TrackType;
+
+/* "classes/generated.pxd":26
+ * 
+ * ctypedef enum Animation_TrackType :ANIMATION_TYPE_VALUE, ANIMATION_TYPE_TRANSFORM, ANIMATION_TYPE_METHOD, ANIMATION_TYPE_BEZIER, ANIMATION_TYPE_AUDIO, ANIMATION_TYPE_ANIMATION
+ * ctypedef enum Animation_UpdateMode :ANIMATION_UPDATE_CONTINUOUS, ANIMATION_UPDATE_DISCRETE, ANIMATION_UPDATE_TRIGGER, ANIMATION_UPDATE_CAPTURE             # <<<<<<<<<<<<<<
+ * ctypedef enum Animation_InterpolationType :ANIMATION_INTERPOLATION_NEAREST, ANIMATION_INTERPOLATION_LINEAR, ANIMATION_INTERPOLATION_CUBIC
+ * 
+ */
+enum __pyx_t_7classes_9generated_Animation_UpdateMode {
+  __pyx_e_7classes_9generated_ANIMATION_UPDATE_CONTINUOUS,
+  __pyx_e_7classes_9generated_ANIMATION_UPDATE_DISCRETE,
+  __pyx_e_7classes_9generated_ANIMATION_UPDATE_TRIGGER,
+  __pyx_e_7classes_9generated_ANIMATION_UPDATE_CAPTURE
+};
+typedef enum __pyx_t_7classes_9generated_Animation_UpdateMode __pyx_t_7classes_9generated_Animation_UpdateMode;
+
+/* "classes/generated.pxd":27
+ * ctypedef enum Animation_TrackType :ANIMATION_TYPE_VALUE, ANIMATION_TYPE_TRANSFORM, ANIMATION_TYPE_METHOD, ANIMATION_TYPE_BEZIER, ANIMATION_TYPE_AUDIO, ANIMATION_TYPE_ANIMATION
+ * ctypedef enum Animation_UpdateMode :ANIMATION_UPDATE_CONTINUOUS, ANIMATION_UPDATE_DISCRETE, ANIMATION_UPDATE_TRIGGER, ANIMATION_UPDATE_CAPTURE
+ * ctypedef enum Animation_InterpolationType :ANIMATION_INTERPOLATION_NEAREST, ANIMATION_INTERPOLATION_LINEAR, ANIMATION_INTERPOLATION_CUBIC             # <<<<<<<<<<<<<<
+ * 
+ * ctypedef enum AnimationNode_FilterAction :ANIMATIONNODE_FILTER_IGNORE, ANIMATIONNODE_FILTER_PASS, ANIMATIONNODE_FILTER_STOP, ANIMATIONNODE_FILTER_BLEND
+ */
+enum __pyx_t_7classes_9generated_Animation_InterpolationType {
+  __pyx_e_7classes_9generated_ANIMATION_INTERPOLATION_NEAREST,
+  __pyx_e_7classes_9generated_ANIMATION_INTERPOLATION_LINEAR,
+  __pyx_e_7classes_9generated_ANIMATION_INTERPOLATION_CUBIC
+};
+typedef enum __pyx_t_7classes_9generated_Animation_InterpolationType __pyx_t_7classes_9generated_Animation_InterpolationType;
+
+/* "classes/generated.pxd":29
+ * ctypedef enum Animation_InterpolationType :ANIMATION_INTERPOLATION_NEAREST, ANIMATION_INTERPOLATION_LINEAR, ANIMATION_INTERPOLATION_CUBIC
+ * 
+ * ctypedef enum AnimationNode_FilterAction :ANIMATIONNODE_FILTER_IGNORE, ANIMATIONNODE_FILTER_PASS, ANIMATIONNODE_FILTER_STOP, ANIMATIONNODE_FILTER_BLEND             # <<<<<<<<<<<<<<
+ * 
+ * 
+ */
+enum __pyx_t_7classes_9generated_AnimationNode_FilterAction {
+  __pyx_e_7classes_9generated_ANIMATIONNODE_FILTER_IGNORE,
+  __pyx_e_7classes_9generated_ANIMATIONNODE_FILTER_PASS,
+  __pyx_e_7classes_9generated_ANIMATIONNODE_FILTER_STOP,
+  __pyx_e_7classes_9generated_ANIMATIONNODE_FILTER_BLEND
+};
+typedef enum __pyx_t_7classes_9generated_AnimationNode_FilterAction __pyx_t_7classes_9generated_AnimationNode_FilterAction;
+
+/* "classes/generated.pxd":37
+ * 
+ * 
+ * ctypedef enum AnimationNodeBlendSpace2D_BlendMode :ANIMATIONNODEBLENDSPACE2D_BLEND_MODE_INTERPOLATED, ANIMATIONNODEBLENDSPACE2D_BLEND_MODE_DISCRETE, ANIMATIONNODEBLENDSPACE2D_BLEND_MODE_DISCRETE_CARRY             # <<<<<<<<<<<<<<
+ * 
+ * 
+ */
+enum __pyx_t_7classes_9generated_AnimationNodeBlendSpace2D_BlendMode {
+  __pyx_e_7classes_9generated_ANIMATIONNODEBLENDSPACE2D_BLEND_MODE_INTERPOLATED,
+  __pyx_e_7classes_9generated_ANIMATIONNODEBLENDSPACE2D_BLEND_MODE_DISCRETE,
+  __pyx_e_7classes_9generated_ANIMATIONNODEBLENDSPACE2D_BLEND_MODE_DISCRETE_CARRY
+};
+typedef enum __pyx_t_7classes_9generated_AnimationNodeBlendSpace2D_BlendMode __pyx_t_7classes_9generated_AnimationNodeBlendSpace2D_BlendMode;
+
+/* "classes/generated.pxd":40
+ * 
+ * 
+ * ctypedef enum AnimationNodeOneShot_MixMode :ANIMATIONNODEONESHOT_MIX_MODE_BLEND, ANIMATIONNODEONESHOT_MIX_MODE_ADD             # <<<<<<<<<<<<<<
+ * 
+ * 
+ */
+enum __pyx_t_7classes_9generated_AnimationNodeOneShot_MixMode {
+  __pyx_e_7classes_9generated_ANIMATIONNODEONESHOT_MIX_MODE_BLEND,
+  __pyx_e_7classes_9generated_ANIMATIONNODEONESHOT_MIX_MODE_ADD
+};
+typedef enum __pyx_t_7classes_9generated_AnimationNodeOneShot_MixMode __pyx_t_7classes_9generated_AnimationNodeOneShot_MixMode;
+
+/* "classes/generated.pxd":45
+ * 
+ * 
+ * ctypedef enum AnimationNodeStateMachineTransition_SwitchMode :ANIMATIONNODESTATEMACHINETRANSITION_SWITCH_MODE_IMMEDIATE, ANIMATIONNODESTATEMACHINETRANSITION_SWITCH_MODE_SYNC, ANIMATIONNODESTATEMACHINETRANSITION_SWITCH_MODE_AT_END             # <<<<<<<<<<<<<<
+ * 
+ * 
+ */
+enum __pyx_t_7classes_9generated_AnimationNodeStateMachineTransition_SwitchMode {
+  __pyx_e_7classes_9generated_ANIMATIONNODESTATEMACHINETRANSITION_SWITCH_MODE_IMMEDIATE,
+  __pyx_e_7classes_9generated_ANIMATIONNODESTATEMACHINETRANSITION_SWITCH_MODE_SYNC,
+  __pyx_e_7classes_9generated_ANIMATIONNODESTATEMACHINETRANSITION_SWITCH_MODE_AT_END
+};
+typedef enum __pyx_t_7classes_9generated_AnimationNodeStateMachineTransition_SwitchMode __pyx_t_7classes_9generated_AnimationNodeStateMachineTransition_SwitchMode;
+
+/* "classes/generated.pxd":50
+ * 
+ * 
+ * ctypedef enum AnimationPlayer_AnimationProcessMode :ANIMATIONPLAYER_ANIMATION_PROCESS_PHYSICS, ANIMATIONPLAYER_ANIMATION_PROCESS_IDLE, ANIMATIONPLAYER_ANIMATION_PROCESS_MANUAL             # <<<<<<<<<<<<<<
+ * ctypedef enum AnimationPlayer_AnimationMethodCallMode :ANIMATIONPLAYER_ANIMATION_METHOD_CALL_DEFERRED, ANIMATIONPLAYER_ANIMATION_METHOD_CALL_IMMEDIATE
+ * 
+ */
+enum __pyx_t_7classes_9generated_AnimationPlayer_AnimationProcessMode {
+  __pyx_e_7classes_9generated_ANIMATIONPLAYER_ANIMATION_PROCESS_PHYSICS,
+  __pyx_e_7classes_9generated_ANIMATIONPLAYER_ANIMATION_PROCESS_IDLE,
+  __pyx_e_7classes_9generated_ANIMATIONPLAYER_ANIMATION_PROCESS_MANUAL
+};
+typedef enum __pyx_t_7classes_9generated_AnimationPlayer_AnimationProcessMode __pyx_t_7classes_9generated_AnimationPlayer_AnimationProcessMode;
+
+/* "classes/generated.pxd":51
+ * 
+ * ctypedef enum AnimationPlayer_AnimationProcessMode :ANIMATIONPLAYER_ANIMATION_PROCESS_PHYSICS, ANIMATIONPLAYER_ANIMATION_PROCESS_IDLE, ANIMATIONPLAYER_ANIMATION_PROCESS_MANUAL
+ * ctypedef enum AnimationPlayer_AnimationMethodCallMode :ANIMATIONPLAYER_ANIMATION_METHOD_CALL_DEFERRED, ANIMATIONPLAYER_ANIMATION_METHOD_CALL_IMMEDIATE             # <<<<<<<<<<<<<<
+ * 
+ * 
+ */
+enum __pyx_t_7classes_9generated_AnimationPlayer_AnimationMethodCallMode {
+  __pyx_e_7classes_9generated_ANIMATIONPLAYER_ANIMATION_METHOD_CALL_DEFERRED,
+  __pyx_e_7classes_9generated_ANIMATIONPLAYER_ANIMATION_METHOD_CALL_IMMEDIATE
+};
+typedef enum __pyx_t_7classes_9generated_AnimationPlayer_AnimationMethodCallMode __pyx_t_7classes_9generated_AnimationPlayer_AnimationMethodCallMode;
+
+/* "classes/generated.pxd":55
+ * 
+ * 
+ * ctypedef enum AnimationTree_AnimationProcessMode :ANIMATIONTREE_ANIMATION_PROCESS_PHYSICS, ANIMATIONTREE_ANIMATION_PROCESS_IDLE, ANIMATIONTREE_ANIMATION_PROCESS_MANUAL             # <<<<<<<<<<<<<<
+ * 
+ * ctypedef enum AnimationTreePlayer_AnimationProcessMode :ANIMATIONTREEPLAYER_ANIMATION_PROCESS_PHYSICS, ANIMATIONTREEPLAYER_ANIMATION_PROCESS_IDLE
+ */
+enum __pyx_t_7classes_9generated_AnimationTree_AnimationProcessMode {
+  __pyx_e_7classes_9generated_ANIMATIONTREE_ANIMATION_PROCESS_PHYSICS,
+  __pyx_e_7classes_9generated_ANIMATIONTREE_ANIMATION_PROCESS_IDLE,
+  __pyx_e_7classes_9generated_ANIMATIONTREE_ANIMATION_PROCESS_MANUAL
+};
+typedef enum __pyx_t_7classes_9generated_AnimationTree_AnimationProcessMode __pyx_t_7classes_9generated_AnimationTree_AnimationProcessMode;
+
+/* "classes/generated.pxd":57
+ * ctypedef enum AnimationTree_AnimationProcessMode :ANIMATIONTREE_ANIMATION_PROCESS_PHYSICS, ANIMATIONTREE_ANIMATION_PROCESS_IDLE, ANIMATIONTREE_ANIMATION_PROCESS_MANUAL
+ * 
+ * ctypedef enum AnimationTreePlayer_AnimationProcessMode :ANIMATIONTREEPLAYER_ANIMATION_PROCESS_PHYSICS, ANIMATIONTREEPLAYER_ANIMATION_PROCESS_IDLE             # <<<<<<<<<<<<<<
+ * ctypedef enum AnimationTreePlayer_NodeType :ANIMATIONTREEPLAYER_NODE_OUTPUT, ANIMATIONTREEPLAYER_NODE_ANIMATION, ANIMATIONTREEPLAYER_NODE_ONESHOT, ANIMATIONTREEPLAYER_NODE_MIX, ANIMATIONTREEPLAYER_NODE_BLEND2, ANIMATIONTREEPLAYER_NODE_BLEND3, ANIMATIONTREEPLAYER_NODE_BLEND4, ANIMATIONTREEPLAYER_NODE_TIMESCALE, ANIMATIONTREEPLAYER_NODE_TIMESEEK, ANIMATIONTREEPLAYER_NODE_TRANSITION
+ * 
+ */
+enum __pyx_t_7classes_9generated_AnimationTreePlayer_AnimationProcessMode {
+  __pyx_e_7classes_9generated_ANIMATIONTREEPLAYER_ANIMATION_PROCESS_PHYSICS,
+  __pyx_e_7classes_9generated_ANIMATIONTREEPLAYER_ANIMATION_PROCESS_IDLE
+};
+typedef enum __pyx_t_7classes_9generated_AnimationTreePlayer_AnimationProcessMode __pyx_t_7classes_9generated_AnimationTreePlayer_AnimationProcessMode;
+
+/* "classes/generated.pxd":58
+ * 
+ * ctypedef enum AnimationTreePlayer_AnimationProcessMode :ANIMATIONTREEPLAYER_ANIMATION_PROCESS_PHYSICS, ANIMATIONTREEPLAYER_ANIMATION_PROCESS_IDLE
+ * ctypedef enum AnimationTreePlayer_NodeType :ANIMATIONTREEPLAYER_NODE_OUTPUT, ANIMATIONTREEPLAYER_NODE_ANIMATION, ANIMATIONTREEPLAYER_NODE_ONESHOT, ANIMATIONTREEPLAYER_NODE_MIX, ANIMATIONTREEPLAYER_NODE_BLEND2, ANIMATIONTREEPLAYER_NODE_BLEND3, ANIMATIONTREEPLAYER_NODE_BLEND4, ANIMATIONTREEPLAYER_NODE_TIMESCALE, ANIMATIONTREEPLAYER_NODE_TIMESEEK, ANIMATIONTREEPLAYER_NODE_TRANSITION             # <<<<<<<<<<<<<<
+ * 
+ * ctypedef enum Area_SpaceOverride :AREA_SPACE_OVERRIDE_DISABLED, AREA_SPACE_OVERRIDE_COMBINE, AREA_SPACE_OVERRIDE_COMBINE_REPLACE, AREA_SPACE_OVERRIDE_REPLACE, AREA_SPACE_OVERRIDE_REPLACE_COMBINE
+ */
+enum __pyx_t_7classes_9generated_AnimationTreePlayer_NodeType {
+  __pyx_e_7classes_9generated_ANIMATIONTREEPLAYER_NODE_OUTPUT,
+  __pyx_e_7classes_9generated_ANIMATIONTREEPLAYER_NODE_ANIMATION,
+  __pyx_e_7classes_9generated_ANIMATIONTREEPLAYER_NODE_ONESHOT,
+  __pyx_e_7classes_9generated_ANIMATIONTREEPLAYER_NODE_MIX,
+  __pyx_e_7classes_9generated_ANIMATIONTREEPLAYER_NODE_BLEND2,
+  __pyx_e_7classes_9generated_ANIMATIONTREEPLAYER_NODE_BLEND3,
+  __pyx_e_7classes_9generated_ANIMATIONTREEPLAYER_NODE_BLEND4,
+  __pyx_e_7classes_9generated_ANIMATIONTREEPLAYER_NODE_TIMESCALE,
+  __pyx_e_7classes_9generated_ANIMATIONTREEPLAYER_NODE_TIMESEEK,
+  __pyx_e_7classes_9generated_ANIMATIONTREEPLAYER_NODE_TRANSITION
+};
+typedef enum __pyx_t_7classes_9generated_AnimationTreePlayer_NodeType __pyx_t_7classes_9generated_AnimationTreePlayer_NodeType;
+
+/* "classes/generated.pxd":60
+ * ctypedef enum AnimationTreePlayer_NodeType :ANIMATIONTREEPLAYER_NODE_OUTPUT, ANIMATIONTREEPLAYER_NODE_ANIMATION, ANIMATIONTREEPLAYER_NODE_ONESHOT, ANIMATIONTREEPLAYER_NODE_MIX, ANIMATIONTREEPLAYER_NODE_BLEND2, ANIMATIONTREEPLAYER_NODE_BLEND3, ANIMATIONTREEPLAYER_NODE_BLEND4, ANIMATIONTREEPLAYER_NODE_TIMESCALE, ANIMATIONTREEPLAYER_NODE_TIMESEEK, ANIMATIONTREEPLAYER_NODE_TRANSITION
+ * 
+ * ctypedef enum Area_SpaceOverride :AREA_SPACE_OVERRIDE_DISABLED, AREA_SPACE_OVERRIDE_COMBINE, AREA_SPACE_OVERRIDE_COMBINE_REPLACE, AREA_SPACE_OVERRIDE_REPLACE, AREA_SPACE_OVERRIDE_REPLACE_COMBINE             # <<<<<<<<<<<<<<
+ * 
+ * ctypedef enum Area2D_SpaceOverride :AREA2D_SPACE_OVERRIDE_DISABLED, AREA2D_SPACE_OVERRIDE_COMBINE, AREA2D_SPACE_OVERRIDE_COMBINE_REPLACE, AREA2D_SPACE_OVERRIDE_REPLACE, AREA2D_SPACE_OVERRIDE_REPLACE_COMBINE
+ */
+enum __pyx_t_7classes_9generated_Area_SpaceOverride {
+  __pyx_e_7classes_9generated_AREA_SPACE_OVERRIDE_DISABLED,
+  __pyx_e_7classes_9generated_AREA_SPACE_OVERRIDE_COMBINE,
+  __pyx_e_7classes_9generated_AREA_SPACE_OVERRIDE_COMBINE_REPLACE,
+  __pyx_e_7classes_9generated_AREA_SPACE_OVERRIDE_REPLACE,
+  __pyx_e_7classes_9generated_AREA_SPACE_OVERRIDE_REPLACE_COMBINE
+};
+typedef enum __pyx_t_7classes_9generated_Area_SpaceOverride __pyx_t_7classes_9generated_Area_SpaceOverride;
+
+/* "classes/generated.pxd":62
+ * ctypedef enum Area_SpaceOverride :AREA_SPACE_OVERRIDE_DISABLED, AREA_SPACE_OVERRIDE_COMBINE, AREA_SPACE_OVERRIDE_COMBINE_REPLACE, AREA_SPACE_OVERRIDE_REPLACE, AREA_SPACE_OVERRIDE_REPLACE_COMBINE
+ * 
+ * ctypedef enum Area2D_SpaceOverride :AREA2D_SPACE_OVERRIDE_DISABLED, AREA2D_SPACE_OVERRIDE_COMBINE, AREA2D_SPACE_OVERRIDE_COMBINE_REPLACE, AREA2D_SPACE_OVERRIDE_REPLACE, AREA2D_SPACE_OVERRIDE_REPLACE_COMBINE             # <<<<<<<<<<<<<<
+ * 
+ * ctypedef enum ArrayMesh_ArrayFormat :ARRAYMESH_ARRAY_FORMAT_VERTEX, ARRAYMESH_ARRAY_FORMAT_NORMAL, ARRAYMESH_ARRAY_FORMAT_TANGENT, ARRAYMESH_ARRAY_FORMAT_COLOR, ARRAYMESH_ARRAY_FORMAT_TEX_UV, ARRAYMESH_ARRAY_FORMAT_TEX_UV2, ARRAYMESH_ARRAY_FORMAT_BONES, ARRAYMESH_ARRAY_FORMAT_WEIGHTS, ARRAYMESH_ARRAY_FORMAT_INDEX
+ */
+enum __pyx_t_7classes_9generated_Area2D_SpaceOverride {
+  __pyx_e_7classes_9generated_AREA2D_SPACE_OVERRIDE_DISABLED,
+  __pyx_e_7classes_9generated_AREA2D_SPACE_OVERRIDE_COMBINE,
+  __pyx_e_7classes_9generated_AREA2D_SPACE_OVERRIDE_COMBINE_REPLACE,
+  __pyx_e_7classes_9generated_AREA2D_SPACE_OVERRIDE_REPLACE,
+  __pyx_e_7classes_9generated_AREA2D_SPACE_OVERRIDE_REPLACE_COMBINE
+};
+typedef enum __pyx_t_7classes_9generated_Area2D_SpaceOverride __pyx_t_7classes_9generated_Area2D_SpaceOverride;
+
+/* "classes/generated.pxd":64
+ * ctypedef enum Area2D_SpaceOverride :AREA2D_SPACE_OVERRIDE_DISABLED, AREA2D_SPACE_OVERRIDE_COMBINE, AREA2D_SPACE_OVERRIDE_COMBINE_REPLACE, AREA2D_SPACE_OVERRIDE_REPLACE, AREA2D_SPACE_OVERRIDE_REPLACE_COMBINE
+ * 
+ * ctypedef enum ArrayMesh_ArrayFormat :ARRAYMESH_ARRAY_FORMAT_VERTEX, ARRAYMESH_ARRAY_FORMAT_NORMAL, ARRAYMESH_ARRAY_FORMAT_TANGENT, ARRAYMESH_ARRAY_FORMAT_COLOR, ARRAYMESH_ARRAY_FORMAT_TEX_UV, ARRAYMESH_ARRAY_FORMAT_TEX_UV2, ARRAYMESH_ARRAY_FORMAT_BONES, ARRAYMESH_ARRAY_FORMAT_WEIGHTS, ARRAYMESH_ARRAY_FORMAT_INDEX             # <<<<<<<<<<<<<<
+ * ctypedef enum ArrayMesh_ArrayType :ARRAYMESH_ARRAY_VERTEX, ARRAYMESH_ARRAY_NORMAL, ARRAYMESH_ARRAY_TANGENT, ARRAYMESH_ARRAY_COLOR, ARRAYMESH_ARRAY_TEX_UV, ARRAYMESH_ARRAY_TEX_UV2, ARRAYMESH_ARRAY_BONES, ARRAYMESH_ARRAY_WEIGHTS, ARRAYMESH_ARRAY_INDEX, ARRAYMESH_ARRAY_MAX
+ * 
+ */
+enum __pyx_t_7classes_9generated_ArrayMesh_ArrayFormat {
+  __pyx_e_7classes_9generated_ARRAYMESH_ARRAY_FORMAT_VERTEX,
+  __pyx_e_7classes_9generated_ARRAYMESH_ARRAY_FORMAT_NORMAL,
+  __pyx_e_7classes_9generated_ARRAYMESH_ARRAY_FORMAT_TANGENT,
+  __pyx_e_7classes_9generated_ARRAYMESH_ARRAY_FORMAT_COLOR,
+  __pyx_e_7classes_9generated_ARRAYMESH_ARRAY_FORMAT_TEX_UV,
+  __pyx_e_7classes_9generated_ARRAYMESH_ARRAY_FORMAT_TEX_UV2,
+  __pyx_e_7classes_9generated_ARRAYMESH_ARRAY_FORMAT_BONES,
+  __pyx_e_7classes_9generated_ARRAYMESH_ARRAY_FORMAT_WEIGHTS,
+  __pyx_e_7classes_9generated_ARRAYMESH_ARRAY_FORMAT_INDEX
+};
+typedef enum __pyx_t_7classes_9generated_ArrayMesh_ArrayFormat __pyx_t_7classes_9generated_ArrayMesh_ArrayFormat;
+
+/* "classes/generated.pxd":65
+ * 
+ * ctypedef enum ArrayMesh_ArrayFormat :ARRAYMESH_ARRAY_FORMAT_VERTEX, ARRAYMESH_ARRAY_FORMAT_NORMAL, ARRAYMESH_ARRAY_FORMAT_TANGENT, ARRAYMESH_ARRAY_FORMAT_COLOR, ARRAYMESH_ARRAY_FORMAT_TEX_UV, ARRAYMESH_ARRAY_FORMAT_TEX_UV2, ARRAYMESH_ARRAY_FORMAT_BONES, ARRAYMESH_ARRAY_FORMAT_WEIGHTS, ARRAYMESH_ARRAY_FORMAT_INDEX
+ * ctypedef enum ArrayMesh_ArrayType :ARRAYMESH_ARRAY_VERTEX, ARRAYMESH_ARRAY_NORMAL, ARRAYMESH_ARRAY_TANGENT, ARRAYMESH_ARRAY_COLOR, ARRAYMESH_ARRAY_TEX_UV, ARRAYMESH_ARRAY_TEX_UV2, ARRAYMESH_ARRAY_BONES, ARRAYMESH_ARRAY_WEIGHTS, ARRAYMESH_ARRAY_INDEX, ARRAYMESH_ARRAY_MAX             # <<<<<<<<<<<<<<
+ * 
+ * 
+ */
+enum __pyx_t_7classes_9generated_ArrayMesh_ArrayType {
+  __pyx_e_7classes_9generated_ARRAYMESH_ARRAY_VERTEX,
+  __pyx_e_7classes_9generated_ARRAYMESH_ARRAY_NORMAL,
+  __pyx_e_7classes_9generated_ARRAYMESH_ARRAY_TANGENT,
+  __pyx_e_7classes_9generated_ARRAYMESH_ARRAY_COLOR,
+  __pyx_e_7classes_9generated_ARRAYMESH_ARRAY_TEX_UV,
+  __pyx_e_7classes_9generated_ARRAYMESH_ARRAY_TEX_UV2,
+  __pyx_e_7classes_9generated_ARRAYMESH_ARRAY_BONES,
+  __pyx_e_7classes_9generated_ARRAYMESH_ARRAY_WEIGHTS,
+  __pyx_e_7classes_9generated_ARRAYMESH_ARRAY_INDEX,
+  __pyx_e_7classes_9generated_ARRAYMESH_ARRAY_MAX
+};
+typedef enum __pyx_t_7classes_9generated_ArrayMesh_ArrayType __pyx_t_7classes_9generated_ArrayMesh_ArrayType;
+
+/* "classes/generated.pxd":76
+ * 
+ * 
+ * ctypedef enum AudioEffectDistortion_Mode :AUDIOEFFECTDISTORTION_MODE_CLIP, AUDIOEFFECTDISTORTION_MODE_ATAN, AUDIOEFFECTDISTORTION_MODE_LOFI, AUDIOEFFECTDISTORTION_MODE_OVERDRIVE, AUDIOEFFECTDISTORTION_MODE_WAVESHAPE             # <<<<<<<<<<<<<<
+ * 
+ * 
+ */
+enum __pyx_t_7classes_9generated_AudioEffectDistortion_Mode {
+  __pyx_e_7classes_9generated_AUDIOEFFECTDISTORTION_MODE_CLIP,
+  __pyx_e_7classes_9generated_AUDIOEFFECTDISTORTION_MODE_ATAN,
+  __pyx_e_7classes_9generated_AUDIOEFFECTDISTORTION_MODE_LOFI,
+  __pyx_e_7classes_9generated_AUDIOEFFECTDISTORTION_MODE_OVERDRIVE,
+  __pyx_e_7classes_9generated_AUDIOEFFECTDISTORTION_MODE_WAVESHAPE
+};
+typedef enum __pyx_t_7classes_9generated_AudioEffectDistortion_Mode __pyx_t_7classes_9generated_AudioEffectDistortion_Mode;
+
+/* "classes/generated.pxd":82
+ * 
+ * 
+ * ctypedef enum AudioEffectFilter_FilterDB :AUDIOEFFECTFILTER_FILTER_6DB, AUDIOEFFECTFILTER_FILTER_12DB, AUDIOEFFECTFILTER_FILTER_18DB, AUDIOEFFECTFILTER_FILTER_24DB             # <<<<<<<<<<<<<<
+ * 
+ * 
+ */
+enum __pyx_t_7classes_9generated_AudioEffectFilter_FilterDB {
+  __pyx_e_7classes_9generated_AUDIOEFFECTFILTER_FILTER_6DB,
+  __pyx_e_7classes_9generated_AUDIOEFFECTFILTER_FILTER_12DB,
+  __pyx_e_7classes_9generated_AUDIOEFFECTFILTER_FILTER_18DB,
+  __pyx_e_7classes_9generated_AUDIOEFFECTFILTER_FILTER_24DB
+};
+typedef enum __pyx_t_7classes_9generated_AudioEffectFilter_FilterDB __pyx_t_7classes_9generated_AudioEffectFilter_FilterDB;
+
+/* "classes/generated.pxd":93
+ * 
+ * 
+ * ctypedef enum AudioEffectPitchShift_FFT_Size :AUDIOEFFECTPITCHSHIFT_FFT_SIZE_256, AUDIOEFFECTPITCHSHIFT_FFT_SIZE_512, AUDIOEFFECTPITCHSHIFT_FFT_SIZE_1024, AUDIOEFFECTPITCHSHIFT_FFT_SIZE_2048, AUDIOEFFECTPITCHSHIFT_FFT_SIZE_4096, AUDIOEFFECTPITCHSHIFT_FFT_SIZE_MAX             # <<<<<<<<<<<<<<
+ * 
+ * 
+ */
+enum __pyx_t_7classes_9generated_AudioEffectPitchShift_FFT_Size {
+  __pyx_e_7classes_9generated_AUDIOEFFECTPITCHSHIFT_FFT_SIZE_256,
+  __pyx_e_7classes_9generated_AUDIOEFFECTPITCHSHIFT_FFT_SIZE_512,
+  __pyx_e_7classes_9generated_AUDIOEFFECTPITCHSHIFT_FFT_SIZE_1024,
+  __pyx_e_7classes_9generated_AUDIOEFFECTPITCHSHIFT_FFT_SIZE_2048,
+  __pyx_e_7classes_9generated_AUDIOEFFECTPITCHSHIFT_FFT_SIZE_4096,
+  __pyx_e_7classes_9generated_AUDIOEFFECTPITCHSHIFT_FFT_SIZE_MAX
+};
+typedef enum __pyx_t_7classes_9generated_AudioEffectPitchShift_FFT_Size __pyx_t_7classes_9generated_AudioEffectPitchShift_FFT_Size;
+
+/* "classes/generated.pxd":97
+ * 
+ * 
+ * ctypedef enum AudioEffectSpectrumAnalyzer_FFT_Size :AUDIOEFFECTSPECTRUMANALYZER_FFT_SIZE_256, AUDIOEFFECTSPECTRUMANALYZER_FFT_SIZE_512, AUDIOEFFECTSPECTRUMANALYZER_FFT_SIZE_1024, AUDIOEFFECTSPECTRUMANALYZER_FFT_SIZE_2048, AUDIOEFFECTSPECTRUMANALYZER_FFT_SIZE_4096, AUDIOEFFECTSPECTRUMANALYZER_FFT_SIZE_MAX             # <<<<<<<<<<<<<<
+ * 
+ * ctypedef enum AudioEffectSpectrumAnalyzerInstance_MagnitudeMode :AUDIOEFFECTSPECTRUMANALYZERINSTANCE_MAGNITUDE_AVERAGE, AUDIOEFFECTSPECTRUMANALYZERINSTANCE_MAGNITUDE_MAX
+ */
+enum __pyx_t_7classes_9generated_AudioEffectSpectrumAnalyzer_FFT_Size {
+  __pyx_e_7classes_9generated_AUDIOEFFECTSPECTRUMANALYZER_FFT_SIZE_256,
+  __pyx_e_7classes_9generated_AUDIOEFFECTSPECTRUMANALYZER_FFT_SIZE_512,
+  __pyx_e_7classes_9generated_AUDIOEFFECTSPECTRUMANALYZER_FFT_SIZE_1024,
+  __pyx_e_7classes_9generated_AUDIOEFFECTSPECTRUMANALYZER_FFT_SIZE_2048,
+  __pyx_e_7classes_9generated_AUDIOEFFECTSPECTRUMANALYZER_FFT_SIZE_4096,
+  __pyx_e_7classes_9generated_AUDIOEFFECTSPECTRUMANALYZER_FFT_SIZE_MAX
+};
+typedef enum __pyx_t_7classes_9generated_AudioEffectSpectrumAnalyzer_FFT_Size __pyx_t_7classes_9generated_AudioEffectSpectrumAnalyzer_FFT_Size;
+
+/* "classes/generated.pxd":99
+ * ctypedef enum AudioEffectSpectrumAnalyzer_FFT_Size :AUDIOEFFECTSPECTRUMANALYZER_FFT_SIZE_256, AUDIOEFFECTSPECTRUMANALYZER_FFT_SIZE_512, AUDIOEFFECTSPECTRUMANALYZER_FFT_SIZE_1024, AUDIOEFFECTSPECTRUMANALYZER_FFT_SIZE_2048, AUDIOEFFECTSPECTRUMANALYZER_FFT_SIZE_4096, AUDIOEFFECTSPECTRUMANALYZER_FFT_SIZE_MAX
+ * 
+ * ctypedef enum AudioEffectSpectrumAnalyzerInstance_MagnitudeMode :AUDIOEFFECTSPECTRUMANALYZERINSTANCE_MAGNITUDE_AVERAGE, AUDIOEFFECTSPECTRUMANALYZERINSTANCE_MAGNITUDE_MAX             # <<<<<<<<<<<<<<
+ * 
+ * 
+ */
+enum __pyx_t_7classes_9generated_AudioEffectSpectrumAnalyzerInstance_MagnitudeMode {
+  __pyx_e_7classes_9generated_AUDIOEFFECTSPECTRUMANALYZERINSTANCE_MAGNITUDE_AVERAGE,
+  __pyx_e_7classes_9generated_AUDIOEFFECTSPECTRUMANALYZERINSTANCE_MAGNITUDE_MAX
+};
+typedef enum __pyx_t_7classes_9generated_AudioEffectSpectrumAnalyzerInstance_MagnitudeMode __pyx_t_7classes_9generated_AudioEffectSpectrumAnalyzerInstance_MagnitudeMode;
+
+/* "classes/generated.pxd":102
+ * 
+ * 
+ * ctypedef enum AudioServer_SpeakerMode :AUDIOSERVER_SPEAKER_MODE_STEREO, AUDIOSERVER_SPEAKER_SURROUND_31, AUDIOSERVER_SPEAKER_SURROUND_51, AUDIOSERVER_SPEAKER_SURROUND_71             # <<<<<<<<<<<<<<
+ * 
+ * 
+ */
+enum __pyx_t_7classes_9generated_AudioServer_SpeakerMode {
+  __pyx_e_7classes_9generated_AUDIOSERVER_SPEAKER_MODE_STEREO,
+  __pyx_e_7classes_9generated_AUDIOSERVER_SPEAKER_SURROUND_31,
+  __pyx_e_7classes_9generated_AUDIOSERVER_SPEAKER_SURROUND_51,
+  __pyx_e_7classes_9generated_AUDIOSERVER_SPEAKER_SURROUND_71
+};
+typedef enum __pyx_t_7classes_9generated_AudioServer_SpeakerMode __pyx_t_7classes_9generated_AudioServer_SpeakerMode;
+
+/* "classes/generated.pxd":111
+ * 
+ * 
+ * ctypedef enum AudioStreamPlayer_MixTarget :AUDIOSTREAMPLAYER_MIX_TARGET_STEREO, AUDIOSTREAMPLAYER_MIX_TARGET_SURROUND, AUDIOSTREAMPLAYER_MIX_TARGET_CENTER             # <<<<<<<<<<<<<<
+ * 
+ * 
+ */
+enum __pyx_t_7classes_9generated_AudioStreamPlayer_MixTarget {
+  __pyx_e_7classes_9generated_AUDIOSTREAMPLAYER_MIX_TARGET_STEREO,
+  __pyx_e_7classes_9generated_AUDIOSTREAMPLAYER_MIX_TARGET_SURROUND,
+  __pyx_e_7classes_9generated_AUDIOSTREAMPLAYER_MIX_TARGET_CENTER
+};
+typedef enum __pyx_t_7classes_9generated_AudioStreamPlayer_MixTarget __pyx_t_7classes_9generated_AudioStreamPlayer_MixTarget;
+
+/* "classes/generated.pxd":114
+ * 
+ * 
+ * ctypedef enum AudioStreamPlayer3D_AttenuationModel :AUDIOSTREAMPLAYER3D_ATTENUATION_INVERSE_DISTANCE, AUDIOSTREAMPLAYER3D_ATTENUATION_INVERSE_SQUARE_DISTANCE, AUDIOSTREAMPLAYER3D_ATTENUATION_LOGARITHMIC, AUDIOSTREAMPLAYER3D_ATTENUATION_DISABLED             # <<<<<<<<<<<<<<
+ * ctypedef enum AudioStreamPlayer3D_OutOfRangeMode :AUDIOSTREAMPLAYER3D_OUT_OF_RANGE_MIX, AUDIOSTREAMPLAYER3D_OUT_OF_RANGE_PAUSE
+ * ctypedef enum AudioStreamPlayer3D_DopplerTracking :AUDIOSTREAMPLAYER3D_DOPPLER_TRACKING_DISABLED, AUDIOSTREAMPLAYER3D_DOPPLER_TRACKING_IDLE_STEP, AUDIOSTREAMPLAYER3D_DOPPLER_TRACKING_PHYSICS_STEP
+ */
+enum __pyx_t_7classes_9generated_AudioStreamPlayer3D_AttenuationModel {
+  __pyx_e_7classes_9generated_AUDIOSTREAMPLAYER3D_ATTENUATION_INVERSE_DISTANCE,
+  __pyx_e_7classes_9generated_AUDIOSTREAMPLAYER3D_ATTENUATION_INVERSE_SQUARE_DISTANCE,
+  __pyx_e_7classes_9generated_AUDIOSTREAMPLAYER3D_ATTENUATION_LOGARITHMIC,
+  __pyx_e_7classes_9generated_AUDIOSTREAMPLAYER3D_ATTENUATION_DISABLED
+};
+typedef enum __pyx_t_7classes_9generated_AudioStreamPlayer3D_AttenuationModel __pyx_t_7classes_9generated_AudioStreamPlayer3D_AttenuationModel;
+
+/* "classes/generated.pxd":115
+ * 
+ * ctypedef enum AudioStreamPlayer3D_AttenuationModel :AUDIOSTREAMPLAYER3D_ATTENUATION_INVERSE_DISTANCE, AUDIOSTREAMPLAYER3D_ATTENUATION_INVERSE_SQUARE_DISTANCE, AUDIOSTREAMPLAYER3D_ATTENUATION_LOGARITHMIC, AUDIOSTREAMPLAYER3D_ATTENUATION_DISABLED
+ * ctypedef enum AudioStreamPlayer3D_OutOfRangeMode :AUDIOSTREAMPLAYER3D_OUT_OF_RANGE_MIX, AUDIOSTREAMPLAYER3D_OUT_OF_RANGE_PAUSE             # <<<<<<<<<<<<<<
+ * ctypedef enum AudioStreamPlayer3D_DopplerTracking :AUDIOSTREAMPLAYER3D_DOPPLER_TRACKING_DISABLED, AUDIOSTREAMPLAYER3D_DOPPLER_TRACKING_IDLE_STEP, AUDIOSTREAMPLAYER3D_DOPPLER_TRACKING_PHYSICS_STEP
+ * 
+ */
+enum __pyx_t_7classes_9generated_AudioStreamPlayer3D_OutOfRangeMode {
+  __pyx_e_7classes_9generated_AUDIOSTREAMPLAYER3D_OUT_OF_RANGE_MIX,
+  __pyx_e_7classes_9generated_AUDIOSTREAMPLAYER3D_OUT_OF_RANGE_PAUSE
+};
+typedef enum __pyx_t_7classes_9generated_AudioStreamPlayer3D_OutOfRangeMode __pyx_t_7classes_9generated_AudioStreamPlayer3D_OutOfRangeMode;
+
+/* "classes/generated.pxd":116
+ * ctypedef enum AudioStreamPlayer3D_AttenuationModel :AUDIOSTREAMPLAYER3D_ATTENUATION_INVERSE_DISTANCE, AUDIOSTREAMPLAYER3D_ATTENUATION_INVERSE_SQUARE_DISTANCE, AUDIOSTREAMPLAYER3D_ATTENUATION_LOGARITHMIC, AUDIOSTREAMPLAYER3D_ATTENUATION_DISABLED
+ * ctypedef enum AudioStreamPlayer3D_OutOfRangeMode :AUDIOSTREAMPLAYER3D_OUT_OF_RANGE_MIX, AUDIOSTREAMPLAYER3D_OUT_OF_RANGE_PAUSE
+ * ctypedef enum AudioStreamPlayer3D_DopplerTracking :AUDIOSTREAMPLAYER3D_DOPPLER_TRACKING_DISABLED, AUDIOSTREAMPLAYER3D_DOPPLER_TRACKING_IDLE_STEP, AUDIOSTREAMPLAYER3D_DOPPLER_TRACKING_PHYSICS_STEP             # <<<<<<<<<<<<<<
+ * 
+ * 
+ */
+enum __pyx_t_7classes_9generated_AudioStreamPlayer3D_DopplerTracking {
+  __pyx_e_7classes_9generated_AUDIOSTREAMPLAYER3D_DOPPLER_TRACKING_DISABLED,
+  __pyx_e_7classes_9generated_AUDIOSTREAMPLAYER3D_DOPPLER_TRACKING_IDLE_STEP,
+  __pyx_e_7classes_9generated_AUDIOSTREAMPLAYER3D_DOPPLER_TRACKING_PHYSICS_STEP
+};
+typedef enum __pyx_t_7classes_9generated_AudioStreamPlayer3D_DopplerTracking __pyx_t_7classes_9generated_AudioStreamPlayer3D_DopplerTracking;
+
+/* "classes/generated.pxd":119
+ * 
+ * 
+ * ctypedef enum AudioStreamSample_LoopMode :AUDIOSTREAMSAMPLE_LOOP_DISABLED, AUDIOSTREAMSAMPLE_LOOP_FORWARD, AUDIOSTREAMSAMPLE_LOOP_PING_PONG, AUDIOSTREAMSAMPLE_LOOP_BACKWARD             # <<<<<<<<<<<<<<
+ * ctypedef enum AudioStreamSample_Format :AUDIOSTREAMSAMPLE_FORMAT_8_BITS, AUDIOSTREAMSAMPLE_FORMAT_16_BITS, AUDIOSTREAMSAMPLE_FORMAT_IMA_ADPCM
+ * 
+ */
+enum __pyx_t_7classes_9generated_AudioStreamSample_LoopMode {
+  __pyx_e_7classes_9generated_AUDIOSTREAMSAMPLE_LOOP_DISABLED,
+  __pyx_e_7classes_9generated_AUDIOSTREAMSAMPLE_LOOP_FORWARD,
+  __pyx_e_7classes_9generated_AUDIOSTREAMSAMPLE_LOOP_PING_PONG,
+  __pyx_e_7classes_9generated_AUDIOSTREAMSAMPLE_LOOP_BACKWARD
+};
+typedef enum __pyx_t_7classes_9generated_AudioStreamSample_LoopMode __pyx_t_7classes_9generated_AudioStreamSample_LoopMode;
+
+/* "classes/generated.pxd":120
+ * 
+ * ctypedef enum AudioStreamSample_LoopMode :AUDIOSTREAMSAMPLE_LOOP_DISABLED, AUDIOSTREAMSAMPLE_LOOP_FORWARD, AUDIOSTREAMSAMPLE_LOOP_PING_PONG, AUDIOSTREAMSAMPLE_LOOP_BACKWARD
+ * ctypedef enum AudioStreamSample_Format :AUDIOSTREAMSAMPLE_FORMAT_8_BITS, AUDIOSTREAMSAMPLE_FORMAT_16_BITS, AUDIOSTREAMSAMPLE_FORMAT_IMA_ADPCM             # <<<<<<<<<<<<<<
+ * 
+ * ctypedef enum BackBufferCopy_CopyMode :BACKBUFFERCOPY_COPY_MODE_DISABLED, BACKBUFFERCOPY_COPY_MODE_RECT, BACKBUFFERCOPY_COPY_MODE_VIEWPORT
+ */
+enum __pyx_t_7classes_9generated_AudioStreamSample_Format {
+  __pyx_e_7classes_9generated_AUDIOSTREAMSAMPLE_FORMAT_8_BITS,
+  __pyx_e_7classes_9generated_AUDIOSTREAMSAMPLE_FORMAT_16_BITS,
+  __pyx_e_7classes_9generated_AUDIOSTREAMSAMPLE_FORMAT_IMA_ADPCM
+};
+typedef enum __pyx_t_7classes_9generated_AudioStreamSample_Format __pyx_t_7classes_9generated_AudioStreamSample_Format;
+
+/* "classes/generated.pxd":122
+ * ctypedef enum AudioStreamSample_Format :AUDIOSTREAMSAMPLE_FORMAT_8_BITS, AUDIOSTREAMSAMPLE_FORMAT_16_BITS, AUDIOSTREAMSAMPLE_FORMAT_IMA_ADPCM
+ * 
+ * ctypedef enum BackBufferCopy_CopyMode :BACKBUFFERCOPY_COPY_MODE_DISABLED, BACKBUFFERCOPY_COPY_MODE_RECT, BACKBUFFERCOPY_COPY_MODE_VIEWPORT             # <<<<<<<<<<<<<<
+ * 
+ * ctypedef enum BakedLightmap_BakeQuality :BAKEDLIGHTMAP_BAKE_QUALITY_LOW, BAKEDLIGHTMAP_BAKE_QUALITY_MEDIUM, BAKEDLIGHTMAP_BAKE_QUALITY_HIGH
+ */
+enum __pyx_t_7classes_9generated_BackBufferCopy_CopyMode {
+  __pyx_e_7classes_9generated_BACKBUFFERCOPY_COPY_MODE_DISABLED,
+  __pyx_e_7classes_9generated_BACKBUFFERCOPY_COPY_MODE_RECT,
+  __pyx_e_7classes_9generated_BACKBUFFERCOPY_COPY_MODE_VIEWPORT
+};
+typedef enum __pyx_t_7classes_9generated_BackBufferCopy_CopyMode __pyx_t_7classes_9generated_BackBufferCopy_CopyMode;
+
+/* "classes/generated.pxd":124
+ * ctypedef enum BackBufferCopy_CopyMode :BACKBUFFERCOPY_COPY_MODE_DISABLED, BACKBUFFERCOPY_COPY_MODE_RECT, BACKBUFFERCOPY_COPY_MODE_VIEWPORT
+ * 
+ * ctypedef enum BakedLightmap_BakeQuality :BAKEDLIGHTMAP_BAKE_QUALITY_LOW, BAKEDLIGHTMAP_BAKE_QUALITY_MEDIUM, BAKEDLIGHTMAP_BAKE_QUALITY_HIGH             # <<<<<<<<<<<<<<
+ * ctypedef enum BakedLightmap_BakeError :BAKEDLIGHTMAP_BAKE_ERROR_OK, BAKEDLIGHTMAP_BAKE_ERROR_NO_SAVE_PATH, BAKEDLIGHTMAP_BAKE_ERROR_NO_MESHES, BAKEDLIGHTMAP_BAKE_ERROR_CANT_CREATE_IMAGE, BAKEDLIGHTMAP_BAKE_ERROR_USER_ABORTED
+ * ctypedef enum BakedLightmap_BakeMode :BAKEDLIGHTMAP_BAKE_MODE_CONE_TRACE, BAKEDLIGHTMAP_BAKE_MODE_RAY_TRACE
+ */
+enum __pyx_t_7classes_9generated_BakedLightmap_BakeQuality {
+  __pyx_e_7classes_9generated_BAKEDLIGHTMAP_BAKE_QUALITY_LOW,
+  __pyx_e_7classes_9generated_BAKEDLIGHTMAP_BAKE_QUALITY_MEDIUM,
+  __pyx_e_7classes_9generated_BAKEDLIGHTMAP_BAKE_QUALITY_HIGH
+};
+typedef enum __pyx_t_7classes_9generated_BakedLightmap_BakeQuality __pyx_t_7classes_9generated_BakedLightmap_BakeQuality;
+
+/* "classes/generated.pxd":125
+ * 
+ * ctypedef enum BakedLightmap_BakeQuality :BAKEDLIGHTMAP_BAKE_QUALITY_LOW, BAKEDLIGHTMAP_BAKE_QUALITY_MEDIUM, BAKEDLIGHTMAP_BAKE_QUALITY_HIGH
+ * ctypedef enum BakedLightmap_BakeError :BAKEDLIGHTMAP_BAKE_ERROR_OK, BAKEDLIGHTMAP_BAKE_ERROR_NO_SAVE_PATH, BAKEDLIGHTMAP_BAKE_ERROR_NO_MESHES, BAKEDLIGHTMAP_BAKE_ERROR_CANT_CREATE_IMAGE, BAKEDLIGHTMAP_BAKE_ERROR_USER_ABORTED             # <<<<<<<<<<<<<<
+ * ctypedef enum BakedLightmap_BakeMode :BAKEDLIGHTMAP_BAKE_MODE_CONE_TRACE, BAKEDLIGHTMAP_BAKE_MODE_RAY_TRACE
+ * 
+ */
+enum __pyx_t_7classes_9generated_BakedLightmap_BakeError {
+  __pyx_e_7classes_9generated_BAKEDLIGHTMAP_BAKE_ERROR_OK,
+  __pyx_e_7classes_9generated_BAKEDLIGHTMAP_BAKE_ERROR_NO_SAVE_PATH,
+  __pyx_e_7classes_9generated_BAKEDLIGHTMAP_BAKE_ERROR_NO_MESHES,
+  __pyx_e_7classes_9generated_BAKEDLIGHTMAP_BAKE_ERROR_CANT_CREATE_IMAGE,
+  __pyx_e_7classes_9generated_BAKEDLIGHTMAP_BAKE_ERROR_USER_ABORTED
+};
+typedef enum __pyx_t_7classes_9generated_BakedLightmap_BakeError __pyx_t_7classes_9generated_BakedLightmap_BakeError;
+
+/* "classes/generated.pxd":126
+ * ctypedef enum BakedLightmap_BakeQuality :BAKEDLIGHTMAP_BAKE_QUALITY_LOW, BAKEDLIGHTMAP_BAKE_QUALITY_MEDIUM, BAKEDLIGHTMAP_BAKE_QUALITY_HIGH
+ * ctypedef enum BakedLightmap_BakeError :BAKEDLIGHTMAP_BAKE_ERROR_OK, BAKEDLIGHTMAP_BAKE_ERROR_NO_SAVE_PATH, BAKEDLIGHTMAP_BAKE_ERROR_NO_MESHES, BAKEDLIGHTMAP_BAKE_ERROR_CANT_CREATE_IMAGE, BAKEDLIGHTMAP_BAKE_ERROR_USER_ABORTED
+ * ctypedef enum BakedLightmap_BakeMode :BAKEDLIGHTMAP_BAKE_MODE_CONE_TRACE, BAKEDLIGHTMAP_BAKE_MODE_RAY_TRACE             # <<<<<<<<<<<<<<
+ * 
+ * 
+ */
+enum __pyx_t_7classes_9generated_BakedLightmap_BakeMode {
+  __pyx_e_7classes_9generated_BAKEDLIGHTMAP_BAKE_MODE_CONE_TRACE,
+  __pyx_e_7classes_9generated_BAKEDLIGHTMAP_BAKE_MODE_RAY_TRACE
+};
+typedef enum __pyx_t_7classes_9generated_BakedLightmap_BakeMode __pyx_t_7classes_9generated_BakedLightmap_BakeMode;
+
+/* "classes/generated.pxd":129
+ * 
+ * 
+ * ctypedef enum BaseButton_ActionMode :BASEBUTTON_ACTION_MODE_BUTTON_PRESS, BASEBUTTON_ACTION_MODE_BUTTON_RELEASE             # <<<<<<<<<<<<<<
+ * ctypedef enum BaseButton_DrawMode :BASEBUTTON_DRAW_NORMAL, BASEBUTTON_DRAW_PRESSED, BASEBUTTON_DRAW_HOVER, BASEBUTTON_DRAW_DISABLED, BASEBUTTON_DRAW_HOVER_PRESSED
+ * 
+ */
+enum __pyx_t_7classes_9generated_BaseButton_ActionMode {
+  __pyx_e_7classes_9generated_BASEBUTTON_ACTION_MODE_BUTTON_PRESS,
+  __pyx_e_7classes_9generated_BASEBUTTON_ACTION_MODE_BUTTON_RELEASE
+};
+typedef enum __pyx_t_7classes_9generated_BaseButton_ActionMode __pyx_t_7classes_9generated_BaseButton_ActionMode;
+
+/* "classes/generated.pxd":130
+ * 
+ * ctypedef enum BaseButton_ActionMode :BASEBUTTON_ACTION_MODE_BUTTON_PRESS, BASEBUTTON_ACTION_MODE_BUTTON_RELEASE
+ * ctypedef enum BaseButton_DrawMode :BASEBUTTON_DRAW_NORMAL, BASEBUTTON_DRAW_PRESSED, BASEBUTTON_DRAW_HOVER, BASEBUTTON_DRAW_DISABLED, BASEBUTTON_DRAW_HOVER_PRESSED             # <<<<<<<<<<<<<<
+ * 
+ * 
+ */
+enum __pyx_t_7classes_9generated_BaseButton_DrawMode {
+  __pyx_e_7classes_9generated_BASEBUTTON_DRAW_NORMAL,
+  __pyx_e_7classes_9generated_BASEBUTTON_DRAW_PRESSED,
+  __pyx_e_7classes_9generated_BASEBUTTON_DRAW_HOVER,
+  __pyx_e_7classes_9generated_BASEBUTTON_DRAW_DISABLED,
+  __pyx_e_7classes_9generated_BASEBUTTON_DRAW_HOVER_PRESSED
+};
+typedef enum __pyx_t_7classes_9generated_BaseButton_DrawMode __pyx_t_7classes_9generated_BaseButton_DrawMode;
+
+/* "classes/generated.pxd":136
+ * 
+ * 
+ * ctypedef enum BoxContainer_AlignMode :BOXCONTAINER_ALIGN_BEGIN, BOXCONTAINER_ALIGN_CENTER, BOXCONTAINER_ALIGN_END             # <<<<<<<<<<<<<<
+ * 
+ * 
+ */
+enum __pyx_t_7classes_9generated_BoxContainer_AlignMode {
+  __pyx_e_7classes_9generated_BOXCONTAINER_ALIGN_BEGIN,
+  __pyx_e_7classes_9generated_BOXCONTAINER_ALIGN_CENTER,
+  __pyx_e_7classes_9generated_BOXCONTAINER_ALIGN_END
+};
+typedef enum __pyx_t_7classes_9generated_BoxContainer_AlignMode __pyx_t_7classes_9generated_BoxContainer_AlignMode;
+
+/* "classes/generated.pxd":141
+ * 
+ * 
+ * ctypedef enum Button_TextAlign :BUTTON_ALIGN_LEFT, BUTTON_ALIGN_CENTER, BUTTON_ALIGN_RIGHT             # <<<<<<<<<<<<<<
+ * 
+ * 
+ */
+enum __pyx_t_7classes_9generated_Button_TextAlign {
+  __pyx_e_7classes_9generated_BUTTON_ALIGN_LEFT,
+  __pyx_e_7classes_9generated_BUTTON_ALIGN_CENTER,
+  __pyx_e_7classes_9generated_BUTTON_ALIGN_RIGHT
+};
+typedef enum __pyx_t_7classes_9generated_Button_TextAlign __pyx_t_7classes_9generated_Button_TextAlign;
+
+/* "classes/generated.pxd":144
+ * 
+ * 
+ * ctypedef enum CPUParticles_Flags :CPUPARTICLES_FLAG_ALIGN_Y_TO_VELOCITY, CPUPARTICLES_FLAG_ROTATE_Y, CPUPARTICLES_FLAG_DISABLE_Z, CPUPARTICLES_FLAG_MAX             # <<<<<<<<<<<<<<
+ * ctypedef enum CPUParticles_EmissionShape :CPUPARTICLES_EMISSION_SHAPE_POINT, CPUPARTICLES_EMISSION_SHAPE_SPHERE, CPUPARTICLES_EMISSION_SHAPE_BOX, CPUPARTICLES_EMISSION_SHAPE_POINTS, CPUPARTICLES_EMISSION_SHAPE_DIRECTED_POINTS, CPUPARTICLES_EMISSION_SHAPE_MAX
+ * ctypedef enum CPUParticles_Parameter :CPUPARTICLES_PARAM_INITIAL_LINEAR_VELOCITY, CPUPARTICLES_PARAM_ANGULAR_VELOCITY, CPUPARTICLES_PARAM_ORBIT_VELOCITY, CPUPARTICLES_PARAM_LINEAR_ACCEL, CPUPARTICLES_PARAM_RADIAL_ACCEL, CPUPARTICLES_PARAM_TANGENTIAL_ACCEL, CPUPARTICLES_PARAM_DAMPING, CPUPARTICLES_PARAM_ANGLE, CPUPARTICLES_PARAM_SCALE, CPUPARTICLES_PARAM_HUE_VARIATION, CPUPARTICLES_PARAM_ANIM_SPEED, CPUPARTICLES_PARAM_ANIM_OFFSET, CPUPARTICLES_PARAM_MAX
+ */
+enum __pyx_t_7classes_9generated_CPUParticles_Flags {
+  __pyx_e_7classes_9generated_CPUPARTICLES_FLAG_ALIGN_Y_TO_VELOCITY,
+  __pyx_e_7classes_9generated_CPUPARTICLES_FLAG_ROTATE_Y,
+  __pyx_e_7classes_9generated_CPUPARTICLES_FLAG_DISABLE_Z,
+  __pyx_e_7classes_9generated_CPUPARTICLES_FLAG_MAX
+};
+typedef enum __pyx_t_7classes_9generated_CPUParticles_Flags __pyx_t_7classes_9generated_CPUParticles_Flags;
+
+/* "classes/generated.pxd":145
+ * 
+ * ctypedef enum CPUParticles_Flags :CPUPARTICLES_FLAG_ALIGN_Y_TO_VELOCITY, CPUPARTICLES_FLAG_ROTATE_Y, CPUPARTICLES_FLAG_DISABLE_Z, CPUPARTICLES_FLAG_MAX
+ * ctypedef enum CPUParticles_EmissionShape :CPUPARTICLES_EMISSION_SHAPE_POINT, CPUPARTICLES_EMISSION_SHAPE_SPHERE, CPUPARTICLES_EMISSION_SHAPE_BOX, CPUPARTICLES_EMISSION_SHAPE_POINTS, CPUPARTICLES_EMISSION_SHAPE_DIRECTED_POINTS, CPUPARTICLES_EMISSION_SHAPE_MAX             # <<<<<<<<<<<<<<
+ * ctypedef enum CPUParticles_Parameter :CPUPARTICLES_PARAM_INITIAL_LINEAR_VELOCITY, CPUPARTICLES_PARAM_ANGULAR_VELOCITY, CPUPARTICLES_PARAM_ORBIT_VELOCITY, CPUPARTICLES_PARAM_LINEAR_ACCEL, CPUPARTICLES_PARAM_RADIAL_ACCEL, CPUPARTICLES_PARAM_TANGENTIAL_ACCEL, CPUPARTICLES_PARAM_DAMPING, CPUPARTICLES_PARAM_ANGLE, CPUPARTICLES_PARAM_SCALE, CPUPARTICLES_PARAM_HUE_VARIATION, CPUPARTICLES_PARAM_ANIM_SPEED, CPUPARTICLES_PARAM_ANIM_OFFSET, CPUPARTICLES_PARAM_MAX
+ * ctypedef enum CPUParticles_DrawOrder :CPUPARTICLES_DRAW_ORDER_INDEX, CPUPARTICLES_DRAW_ORDER_LIFETIME, CPUPARTICLES_DRAW_ORDER_VIEW_DEPTH
+ */
+enum __pyx_t_7classes_9generated_CPUParticles_EmissionShape {
+  __pyx_e_7classes_9generated_CPUPARTICLES_EMISSION_SHAPE_POINT,
+  __pyx_e_7classes_9generated_CPUPARTICLES_EMISSION_SHAPE_SPHERE,
+  __pyx_e_7classes_9generated_CPUPARTICLES_EMISSION_SHAPE_BOX,
+  __pyx_e_7classes_9generated_CPUPARTICLES_EMISSION_SHAPE_POINTS,
+  __pyx_e_7classes_9generated_CPUPARTICLES_EMISSION_SHAPE_DIRECTED_POINTS,
+  __pyx_e_7classes_9generated_CPUPARTICLES_EMISSION_SHAPE_MAX
+};
+typedef enum __pyx_t_7classes_9generated_CPUParticles_EmissionShape __pyx_t_7classes_9generated_CPUParticles_EmissionShape;
+
+/* "classes/generated.pxd":146
+ * ctypedef enum CPUParticles_Flags :CPUPARTICLES_FLAG_ALIGN_Y_TO_VELOCITY, CPUPARTICLES_FLAG_ROTATE_Y, CPUPARTICLES_FLAG_DISABLE_Z, CPUPARTICLES_FLAG_MAX
+ * ctypedef enum CPUParticles_EmissionShape :CPUPARTICLES_EMISSION_SHAPE_POINT, CPUPARTICLES_EMISSION_SHAPE_SPHERE, CPUPARTICLES_EMISSION_SHAPE_BOX, CPUPARTICLES_EMISSION_SHAPE_POINTS, CPUPARTICLES_EMISSION_SHAPE_DIRECTED_POINTS, CPUPARTICLES_EMISSION_SHAPE_MAX
+ * ctypedef enum CPUParticles_Parameter :CPUPARTICLES_PARAM_INITIAL_LINEAR_VELOCITY, CPUPARTICLES_PARAM_ANGULAR_VELOCITY, CPUPARTICLES_PARAM_ORBIT_VELOCITY, CPUPARTICLES_PARAM_LINEAR_ACCEL, CPUPARTICLES_PARAM_RADIAL_ACCEL, CPUPARTICLES_PARAM_TANGENTIAL_ACCEL, CPUPARTICLES_PARAM_DAMPING, CPUPARTICLES_PARAM_ANGLE, CPUPARTICLES_PARAM_SCALE, CPUPARTICLES_PARAM_HUE_VARIATION, CPUPARTICLES_PARAM_ANIM_SPEED, CPUPARTICLES_PARAM_ANIM_OFFSET, CPUPARTICLES_PARAM_MAX             # <<<<<<<<<<<<<<
+ * ctypedef enum CPUParticles_DrawOrder :CPUPARTICLES_DRAW_ORDER_INDEX, CPUPARTICLES_DRAW_ORDER_LIFETIME, CPUPARTICLES_DRAW_ORDER_VIEW_DEPTH
+ * 
+ */
+enum __pyx_t_7classes_9generated_CPUParticles_Parameter {
+  __pyx_e_7classes_9generated_CPUPARTICLES_PARAM_INITIAL_LINEAR_VELOCITY,
+  __pyx_e_7classes_9generated_CPUPARTICLES_PARAM_ANGULAR_VELOCITY,
+  __pyx_e_7classes_9generated_CPUPARTICLES_PARAM_ORBIT_VELOCITY,
+  __pyx_e_7classes_9generated_CPUPARTICLES_PARAM_LINEAR_ACCEL,
+  __pyx_e_7classes_9generated_CPUPARTICLES_PARAM_RADIAL_ACCEL,
+  __pyx_e_7classes_9generated_CPUPARTICLES_PARAM_TANGENTIAL_ACCEL,
+  __pyx_e_7classes_9generated_CPUPARTICLES_PARAM_DAMPING,
+  __pyx_e_7classes_9generated_CPUPARTICLES_PARAM_ANGLE,
+  __pyx_e_7classes_9generated_CPUPARTICLES_PARAM_SCALE,
+  __pyx_e_7classes_9generated_CPUPARTICLES_PARAM_HUE_VARIATION,
+  __pyx_e_7classes_9generated_CPUPARTICLES_PARAM_ANIM_SPEED,
+  __pyx_e_7classes_9generated_CPUPARTICLES_PARAM_ANIM_OFFSET,
+  __pyx_e_7classes_9generated_CPUPARTICLES_PARAM_MAX
+};
+typedef enum __pyx_t_7classes_9generated_CPUParticles_Parameter __pyx_t_7classes_9generated_CPUParticles_Parameter;
+
+/* "classes/generated.pxd":147
+ * ctypedef enum CPUParticles_EmissionShape :CPUPARTICLES_EMISSION_SHAPE_POINT, CPUPARTICLES_EMISSION_SHAPE_SPHERE, CPUPARTICLES_EMISSION_SHAPE_BOX, CPUPARTICLES_EMISSION_SHAPE_POINTS, CPUPARTICLES_EMISSION_SHAPE_DIRECTED_POINTS, CPUPARTICLES_EMISSION_SHAPE_MAX
+ * ctypedef enum CPUParticles_Parameter :CPUPARTICLES_PARAM_INITIAL_LINEAR_VELOCITY, CPUPARTICLES_PARAM_ANGULAR_VELOCITY, CPUPARTICLES_PARAM_ORBIT_VELOCITY, CPUPARTICLES_PARAM_LINEAR_ACCEL, CPUPARTICLES_PARAM_RADIAL_ACCEL, CPUPARTICLES_PARAM_TANGENTIAL_ACCEL, CPUPARTICLES_PARAM_DAMPING, CPUPARTICLES_PARAM_ANGLE, CPUPARTICLES_PARAM_SCALE, CPUPARTICLES_PARAM_HUE_VARIATION, CPUPARTICLES_PARAM_ANIM_SPEED, CPUPARTICLES_PARAM_ANIM_OFFSET, CPUPARTICLES_PARAM_MAX
+ * ctypedef enum CPUParticles_DrawOrder :CPUPARTICLES_DRAW_ORDER_INDEX, CPUPARTICLES_DRAW_ORDER_LIFETIME, CPUPARTICLES_DRAW_ORDER_VIEW_DEPTH             # <<<<<<<<<<<<<<
+ * 
+ * ctypedef enum CPUParticles2D_Flags :CPUPARTICLES2D_FLAG_ALIGN_Y_TO_VELOCITY, CPUPARTICLES2D_FLAG_ROTATE_Y, CPUPARTICLES2D_FLAG_DISABLE_Z, CPUPARTICLES2D_FLAG_MAX
+ */
+enum __pyx_t_7classes_9generated_CPUParticles_DrawOrder {
+  __pyx_e_7classes_9generated_CPUPARTICLES_DRAW_ORDER_INDEX,
+  __pyx_e_7classes_9generated_CPUPARTICLES_DRAW_ORDER_LIFETIME,
+  __pyx_e_7classes_9generated_CPUPARTICLES_DRAW_ORDER_VIEW_DEPTH
+};
+typedef enum __pyx_t_7classes_9generated_CPUParticles_DrawOrder __pyx_t_7classes_9generated_CPUParticles_DrawOrder;
+
+/* "classes/generated.pxd":149
+ * ctypedef enum CPUParticles_DrawOrder :CPUPARTICLES_DRAW_ORDER_INDEX, CPUPARTICLES_DRAW_ORDER_LIFETIME, CPUPARTICLES_DRAW_ORDER_VIEW_DEPTH
+ * 
+ * ctypedef enum CPUParticles2D_Flags :CPUPARTICLES2D_FLAG_ALIGN_Y_TO_VELOCITY, CPUPARTICLES2D_FLAG_ROTATE_Y, CPUPARTICLES2D_FLAG_DISABLE_Z, CPUPARTICLES2D_FLAG_MAX             # <<<<<<<<<<<<<<
+ * ctypedef enum CPUParticles2D_EmissionShape :CPUPARTICLES2D_EMISSION_SHAPE_POINT, CPUPARTICLES2D_EMISSION_SHAPE_SPHERE, CPUPARTICLES2D_EMISSION_SHAPE_RECTANGLE, CPUPARTICLES2D_EMISSION_SHAPE_POINTS, CPUPARTICLES2D_EMISSION_SHAPE_DIRECTED_POINTS, CPUPARTICLES2D_EMISSION_SHAPE_MAX
+ * ctypedef enum CPUParticles2D_Parameter :CPUPARTICLES2D_PARAM_INITIAL_LINEAR_VELOCITY, CPUPARTICLES2D_PARAM_ANGULAR_VELOCITY, CPUPARTICLES2D_PARAM_ORBIT_VELOCITY, CPUPARTICLES2D_PARAM_LINEAR_ACCEL, CPUPARTICLES2D_PARAM_RADIAL_ACCEL, CPUPARTICLES2D_PARAM_TANGENTIAL_ACCEL, CPUPARTICLES2D_PARAM_DAMPING, CPUPARTICLES2D_PARAM_ANGLE, CPUPARTICLES2D_PARAM_SCALE, CPUPARTICLES2D_PARAM_HUE_VARIATION, CPUPARTICLES2D_PARAM_ANIM_SPEED, CPUPARTICLES2D_PARAM_ANIM_OFFSET, CPUPARTICLES2D_PARAM_MAX
+ */
+enum __pyx_t_7classes_9generated_CPUParticles2D_Flags {
+  __pyx_e_7classes_9generated_CPUPARTICLES2D_FLAG_ALIGN_Y_TO_VELOCITY,
+  __pyx_e_7classes_9generated_CPUPARTICLES2D_FLAG_ROTATE_Y,
+  __pyx_e_7classes_9generated_CPUPARTICLES2D_FLAG_DISABLE_Z,
+  __pyx_e_7classes_9generated_CPUPARTICLES2D_FLAG_MAX
+};
+typedef enum __pyx_t_7classes_9generated_CPUParticles2D_Flags __pyx_t_7classes_9generated_CPUParticles2D_Flags;
+
+/* "classes/generated.pxd":150
+ * 
+ * ctypedef enum CPUParticles2D_Flags :CPUPARTICLES2D_FLAG_ALIGN_Y_TO_VELOCITY, CPUPARTICLES2D_FLAG_ROTATE_Y, CPUPARTICLES2D_FLAG_DISABLE_Z, CPUPARTICLES2D_FLAG_MAX
+ * ctypedef enum CPUParticles2D_EmissionShape :CPUPARTICLES2D_EMISSION_SHAPE_POINT, CPUPARTICLES2D_EMISSION_SHAPE_SPHERE, CPUPARTICLES2D_EMISSION_SHAPE_RECTANGLE, CPUPARTICLES2D_EMISSION_SHAPE_POINTS, CPUPARTICLES2D_EMISSION_SHAPE_DIRECTED_POINTS, CPUPARTICLES2D_EMISSION_SHAPE_MAX             # <<<<<<<<<<<<<<
+ * ctypedef enum CPUParticles2D_Parameter :CPUPARTICLES2D_PARAM_INITIAL_LINEAR_VELOCITY, CPUPARTICLES2D_PARAM_ANGULAR_VELOCITY, CPUPARTICLES2D_PARAM_ORBIT_VELOCITY, CPUPARTICLES2D_PARAM_LINEAR_ACCEL, CPUPARTICLES2D_PARAM_RADIAL_ACCEL, CPUPARTICLES2D_PARAM_TANGENTIAL_ACCEL, CPUPARTICLES2D_PARAM_DAMPING, CPUPARTICLES2D_PARAM_ANGLE, CPUPARTICLES2D_PARAM_SCALE, CPUPARTICLES2D_PARAM_HUE_VARIATION, CPUPARTICLES2D_PARAM_ANIM_SPEED, CPUPARTICLES2D_PARAM_ANIM_OFFSET, CPUPARTICLES2D_PARAM_MAX
+ * ctypedef enum CPUParticles2D_DrawOrder :CPUPARTICLES2D_DRAW_ORDER_INDEX, CPUPARTICLES2D_DRAW_ORDER_LIFETIME
+ */
+enum __pyx_t_7classes_9generated_CPUParticles2D_EmissionShape {
+  __pyx_e_7classes_9generated_CPUPARTICLES2D_EMISSION_SHAPE_POINT,
+  __pyx_e_7classes_9generated_CPUPARTICLES2D_EMISSION_SHAPE_SPHERE,
+  __pyx_e_7classes_9generated_CPUPARTICLES2D_EMISSION_SHAPE_RECTANGLE,
+  __pyx_e_7classes_9generated_CPUPARTICLES2D_EMISSION_SHAPE_POINTS,
+  __pyx_e_7classes_9generated_CPUPARTICLES2D_EMISSION_SHAPE_DIRECTED_POINTS,
+  __pyx_e_7classes_9generated_CPUPARTICLES2D_EMISSION_SHAPE_MAX
+};
+typedef enum __pyx_t_7classes_9generated_CPUParticles2D_EmissionShape __pyx_t_7classes_9generated_CPUParticles2D_EmissionShape;
+
+/* "classes/generated.pxd":151
+ * ctypedef enum CPUParticles2D_Flags :CPUPARTICLES2D_FLAG_ALIGN_Y_TO_VELOCITY, CPUPARTICLES2D_FLAG_ROTATE_Y, CPUPARTICLES2D_FLAG_DISABLE_Z, CPUPARTICLES2D_FLAG_MAX
+ * ctypedef enum CPUParticles2D_EmissionShape :CPUPARTICLES2D_EMISSION_SHAPE_POINT, CPUPARTICLES2D_EMISSION_SHAPE_SPHERE, CPUPARTICLES2D_EMISSION_SHAPE_RECTANGLE, CPUPARTICLES2D_EMISSION_SHAPE_POINTS, CPUPARTICLES2D_EMISSION_SHAPE_DIRECTED_POINTS, CPUPARTICLES2D_EMISSION_SHAPE_MAX
+ * ctypedef enum CPUParticles2D_Parameter :CPUPARTICLES2D_PARAM_INITIAL_LINEAR_VELOCITY, CPUPARTICLES2D_PARAM_ANGULAR_VELOCITY, CPUPARTICLES2D_PARAM_ORBIT_VELOCITY, CPUPARTICLES2D_PARAM_LINEAR_ACCEL, CPUPARTICLES2D_PARAM_RADIAL_ACCEL, CPUPARTICLES2D_PARAM_TANGENTIAL_ACCEL, CPUPARTICLES2D_PARAM_DAMPING, CPUPARTICLES2D_PARAM_ANGLE, CPUPARTICLES2D_PARAM_SCALE, CPUPARTICLES2D_PARAM_HUE_VARIATION, CPUPARTICLES2D_PARAM_ANIM_SPEED, CPUPARTICLES2D_PARAM_ANIM_OFFSET, CPUPARTICLES2D_PARAM_MAX             # <<<<<<<<<<<<<<
+ * ctypedef enum CPUParticles2D_DrawOrder :CPUPARTICLES2D_DRAW_ORDER_INDEX, CPUPARTICLES2D_DRAW_ORDER_LIFETIME
+ * 
+ */
+enum __pyx_t_7classes_9generated_CPUParticles2D_Parameter {
+  __pyx_e_7classes_9generated_CPUPARTICLES2D_PARAM_INITIAL_LINEAR_VELOCITY,
+  __pyx_e_7classes_9generated_CPUPARTICLES2D_PARAM_ANGULAR_VELOCITY,
+  __pyx_e_7classes_9generated_CPUPARTICLES2D_PARAM_ORBIT_VELOCITY,
+  __pyx_e_7classes_9generated_CPUPARTICLES2D_PARAM_LINEAR_ACCEL,
+  __pyx_e_7classes_9generated_CPUPARTICLES2D_PARAM_RADIAL_ACCEL,
+  __pyx_e_7classes_9generated_CPUPARTICLES2D_PARAM_TANGENTIAL_ACCEL,
+  __pyx_e_7classes_9generated_CPUPARTICLES2D_PARAM_DAMPING,
+  __pyx_e_7classes_9generated_CPUPARTICLES2D_PARAM_ANGLE,
+  __pyx_e_7classes_9generated_CPUPARTICLES2D_PARAM_SCALE,
+  __pyx_e_7classes_9generated_CPUPARTICLES2D_PARAM_HUE_VARIATION,
+  __pyx_e_7classes_9generated_CPUPARTICLES2D_PARAM_ANIM_SPEED,
+  __pyx_e_7classes_9generated_CPUPARTICLES2D_PARAM_ANIM_OFFSET,
+  __pyx_e_7classes_9generated_CPUPARTICLES2D_PARAM_MAX
+};
+typedef enum __pyx_t_7classes_9generated_CPUParticles2D_Parameter __pyx_t_7classes_9generated_CPUParticles2D_Parameter;
+
+/* "classes/generated.pxd":152
+ * ctypedef enum CPUParticles2D_EmissionShape :CPUPARTICLES2D_EMISSION_SHAPE_POINT, CPUPARTICLES2D_EMISSION_SHAPE_SPHERE, CPUPARTICLES2D_EMISSION_SHAPE_RECTANGLE, CPUPARTICLES2D_EMISSION_SHAPE_POINTS, CPUPARTICLES2D_EMISSION_SHAPE_DIRECTED_POINTS, CPUPARTICLES2D_EMISSION_SHAPE_MAX
+ * ctypedef enum CPUParticles2D_Parameter :CPUPARTICLES2D_PARAM_INITIAL_LINEAR_VELOCITY, CPUPARTICLES2D_PARAM_ANGULAR_VELOCITY, CPUPARTICLES2D_PARAM_ORBIT_VELOCITY, CPUPARTICLES2D_PARAM_LINEAR_ACCEL, CPUPARTICLES2D_PARAM_RADIAL_ACCEL, CPUPARTICLES2D_PARAM_TANGENTIAL_ACCEL, CPUPARTICLES2D_PARAM_DAMPING, CPUPARTICLES2D_PARAM_ANGLE, CPUPARTICLES2D_PARAM_SCALE, CPUPARTICLES2D_PARAM_HUE_VARIATION, CPUPARTICLES2D_PARAM_ANIM_SPEED, CPUPARTICLES2D_PARAM_ANIM_OFFSET, CPUPARTICLES2D_PARAM_MAX
+ * ctypedef enum CPUParticles2D_DrawOrder :CPUPARTICLES2D_DRAW_ORDER_INDEX, CPUPARTICLES2D_DRAW_ORDER_LIFETIME             # <<<<<<<<<<<<<<
+ * 
+ * 
+ */
+enum __pyx_t_7classes_9generated_CPUParticles2D_DrawOrder {
+  __pyx_e_7classes_9generated_CPUPARTICLES2D_DRAW_ORDER_INDEX,
+  __pyx_e_7classes_9generated_CPUPARTICLES2D_DRAW_ORDER_LIFETIME
+};
+typedef enum __pyx_t_7classes_9generated_CPUParticles2D_DrawOrder __pyx_t_7classes_9generated_CPUParticles2D_DrawOrder;
+
+/* "classes/generated.pxd":158
+ * 
+ * 
+ * ctypedef enum CSGPolygon_PathRotation :CSGPOLYGON_PATH_ROTATION_POLYGON, CSGPOLYGON_PATH_ROTATION_PATH, CSGPOLYGON_PATH_ROTATION_PATH_FOLLOW             # <<<<<<<<<<<<<<
+ * ctypedef enum CSGPolygon_Mode :CSGPOLYGON_MODE_DEPTH, CSGPOLYGON_MODE_SPIN, CSGPOLYGON_MODE_PATH
+ * 
+ */
+enum __pyx_t_7classes_9generated_CSGPolygon_PathRotation {
+  __pyx_e_7classes_9generated_CSGPOLYGON_PATH_ROTATION_POLYGON,
+  __pyx_e_7classes_9generated_CSGPOLYGON_PATH_ROTATION_PATH,
+  __pyx_e_7classes_9generated_CSGPOLYGON_PATH_ROTATION_PATH_FOLLOW
+};
+typedef enum __pyx_t_7classes_9generated_CSGPolygon_PathRotation __pyx_t_7classes_9generated_CSGPolygon_PathRotation;
+
+/* "classes/generated.pxd":159
+ * 
+ * ctypedef enum CSGPolygon_PathRotation :CSGPOLYGON_PATH_ROTATION_POLYGON, CSGPOLYGON_PATH_ROTATION_PATH, CSGPOLYGON_PATH_ROTATION_PATH_FOLLOW
+ * ctypedef enum CSGPolygon_Mode :CSGPOLYGON_MODE_DEPTH, CSGPOLYGON_MODE_SPIN, CSGPOLYGON_MODE_PATH             # <<<<<<<<<<<<<<
+ * 
+ * 
+ */
+enum __pyx_t_7classes_9generated_CSGPolygon_Mode {
+  __pyx_e_7classes_9generated_CSGPOLYGON_MODE_DEPTH,
+  __pyx_e_7classes_9generated_CSGPOLYGON_MODE_SPIN,
+  __pyx_e_7classes_9generated_CSGPOLYGON_MODE_PATH
+};
+typedef enum __pyx_t_7classes_9generated_CSGPolygon_Mode __pyx_t_7classes_9generated_CSGPolygon_Mode;
+
+/* "classes/generated.pxd":162
+ * 
+ * 
+ * ctypedef enum CSGShape_Operation :CSGSHAPE_OPERATION_UNION, CSGSHAPE_OPERATION_INTERSECTION, CSGSHAPE_OPERATION_SUBTRACTION             # <<<<<<<<<<<<<<
+ * 
+ * 
+ */
+enum __pyx_t_7classes_9generated_CSGShape_Operation {
+  __pyx_e_7classes_9generated_CSGSHAPE_OPERATION_UNION,
+  __pyx_e_7classes_9generated_CSGSHAPE_OPERATION_INTERSECTION,
+  __pyx_e_7classes_9generated_CSGSHAPE_OPERATION_SUBTRACTION
+};
+typedef enum __pyx_t_7classes_9generated_CSGShape_Operation __pyx_t_7classes_9generated_CSGShape_Operation;
+
+/* "classes/generated.pxd":166
+ * 
+ * 
+ * ctypedef enum Camera_KeepAspect :CAMERA_KEEP_WIDTH, CAMERA_KEEP_HEIGHT             # <<<<<<<<<<<<<<
+ * ctypedef enum Camera_Projection :CAMERA_PROJECTION_PERSPECTIVE, CAMERA_PROJECTION_ORTHOGONAL, CAMERA_PROJECTION_FRUSTUM
+ * ctypedef enum Camera_DopplerTracking :CAMERA_DOPPLER_TRACKING_DISABLED, CAMERA_DOPPLER_TRACKING_IDLE_STEP, CAMERA_DOPPLER_TRACKING_PHYSICS_STEP
+ */
+enum __pyx_t_7classes_9generated_Camera_KeepAspect {
+  __pyx_e_7classes_9generated_CAMERA_KEEP_WIDTH,
+  __pyx_e_7classes_9generated_CAMERA_KEEP_HEIGHT
+};
+typedef enum __pyx_t_7classes_9generated_Camera_KeepAspect __pyx_t_7classes_9generated_Camera_KeepAspect;
+
+/* "classes/generated.pxd":167
+ * 
+ * ctypedef enum Camera_KeepAspect :CAMERA_KEEP_WIDTH, CAMERA_KEEP_HEIGHT
+ * ctypedef enum Camera_Projection :CAMERA_PROJECTION_PERSPECTIVE, CAMERA_PROJECTION_ORTHOGONAL, CAMERA_PROJECTION_FRUSTUM             # <<<<<<<<<<<<<<
+ * ctypedef enum Camera_DopplerTracking :CAMERA_DOPPLER_TRACKING_DISABLED, CAMERA_DOPPLER_TRACKING_IDLE_STEP, CAMERA_DOPPLER_TRACKING_PHYSICS_STEP
+ * 
+ */
+enum __pyx_t_7classes_9generated_Camera_Projection {
+  __pyx_e_7classes_9generated_CAMERA_PROJECTION_PERSPECTIVE,
+  __pyx_e_7classes_9generated_CAMERA_PROJECTION_ORTHOGONAL,
+  __pyx_e_7classes_9generated_CAMERA_PROJECTION_FRUSTUM
+};
+typedef enum __pyx_t_7classes_9generated_Camera_Projection __pyx_t_7classes_9generated_Camera_Projection;
+
+/* "classes/generated.pxd":168
+ * ctypedef enum Camera_KeepAspect :CAMERA_KEEP_WIDTH, CAMERA_KEEP_HEIGHT
+ * ctypedef enum Camera_Projection :CAMERA_PROJECTION_PERSPECTIVE, CAMERA_PROJECTION_ORTHOGONAL, CAMERA_PROJECTION_FRUSTUM
+ * ctypedef enum Camera_DopplerTracking :CAMERA_DOPPLER_TRACKING_DISABLED, CAMERA_DOPPLER_TRACKING_IDLE_STEP, CAMERA_DOPPLER_TRACKING_PHYSICS_STEP             # <<<<<<<<<<<<<<
+ * 
+ * ctypedef enum Camera2D_Camera2DProcessMode :CAMERA2D_CAMERA2D_PROCESS_PHYSICS, CAMERA2D_CAMERA2D_PROCESS_IDLE
+ */
+enum __pyx_t_7classes_9generated_Camera_DopplerTracking {
+  __pyx_e_7classes_9generated_CAMERA_DOPPLER_TRACKING_DISABLED,
+  __pyx_e_7classes_9generated_CAMERA_DOPPLER_TRACKING_IDLE_STEP,
+  __pyx_e_7classes_9generated_CAMERA_DOPPLER_TRACKING_PHYSICS_STEP
+};
+typedef enum __pyx_t_7classes_9generated_Camera_DopplerTracking __pyx_t_7classes_9generated_Camera_DopplerTracking;
+
+/* "classes/generated.pxd":170
+ * ctypedef enum Camera_DopplerTracking :CAMERA_DOPPLER_TRACKING_DISABLED, CAMERA_DOPPLER_TRACKING_IDLE_STEP, CAMERA_DOPPLER_TRACKING_PHYSICS_STEP
+ * 
+ * ctypedef enum Camera2D_Camera2DProcessMode :CAMERA2D_CAMERA2D_PROCESS_PHYSICS, CAMERA2D_CAMERA2D_PROCESS_IDLE             # <<<<<<<<<<<<<<
+ * ctypedef enum Camera2D_AnchorMode :CAMERA2D_ANCHOR_MODE_FIXED_TOP_LEFT, CAMERA2D_ANCHOR_MODE_DRAG_CENTER
+ * 
+ */
+enum __pyx_t_7classes_9generated_Camera2D_Camera2DProcessMode {
+  __pyx_e_7classes_9generated_CAMERA2D_CAMERA2D_PROCESS_PHYSICS,
+  __pyx_e_7classes_9generated_CAMERA2D_CAMERA2D_PROCESS_IDLE
+};
+typedef enum __pyx_t_7classes_9generated_Camera2D_Camera2DProcessMode __pyx_t_7classes_9generated_Camera2D_Camera2DProcessMode;
+
+/* "classes/generated.pxd":171
+ * 
+ * ctypedef enum Camera2D_Camera2DProcessMode :CAMERA2D_CAMERA2D_PROCESS_PHYSICS, CAMERA2D_CAMERA2D_PROCESS_IDLE
+ * ctypedef enum Camera2D_AnchorMode :CAMERA2D_ANCHOR_MODE_FIXED_TOP_LEFT, CAMERA2D_ANCHOR_MODE_DRAG_CENTER             # <<<<<<<<<<<<<<
+ * 
+ * ctypedef enum CameraFeed_FeedDataType :CAMERAFEED_FEED_NOIMAGE, CAMERAFEED_FEED_RGB, CAMERAFEED_FEED_YCBCR, CAMERAFEED_FEED_YCBCR_SEP
+ */
+enum __pyx_t_7classes_9generated_Camera2D_AnchorMode {
+  __pyx_e_7classes_9generated_CAMERA2D_ANCHOR_MODE_FIXED_TOP_LEFT,
+  __pyx_e_7classes_9generated_CAMERA2D_ANCHOR_MODE_DRAG_CENTER
+};
+typedef enum __pyx_t_7classes_9generated_Camera2D_AnchorMode __pyx_t_7classes_9generated_Camera2D_AnchorMode;
+
+/* "classes/generated.pxd":173
+ * ctypedef enum Camera2D_AnchorMode :CAMERA2D_ANCHOR_MODE_FIXED_TOP_LEFT, CAMERA2D_ANCHOR_MODE_DRAG_CENTER
+ * 
+ * ctypedef enum CameraFeed_FeedDataType :CAMERAFEED_FEED_NOIMAGE, CAMERAFEED_FEED_RGB, CAMERAFEED_FEED_YCBCR, CAMERAFEED_FEED_YCBCR_SEP             # <<<<<<<<<<<<<<
+ * ctypedef enum CameraFeed_FeedPosition :CAMERAFEED_FEED_UNSPECIFIED, CAMERAFEED_FEED_FRONT, CAMERAFEED_FEED_BACK
+ * 
+ */
+enum __pyx_t_7classes_9generated_CameraFeed_FeedDataType {
+  __pyx_e_7classes_9generated_CAMERAFEED_FEED_NOIMAGE,
+  __pyx_e_7classes_9generated_CAMERAFEED_FEED_RGB,
+  __pyx_e_7classes_9generated_CAMERAFEED_FEED_YCBCR,
+  __pyx_e_7classes_9generated_CAMERAFEED_FEED_YCBCR_SEP
+};
+typedef enum __pyx_t_7classes_9generated_CameraFeed_FeedDataType __pyx_t_7classes_9generated_CameraFeed_FeedDataType;
+
+/* "classes/generated.pxd":174
+ * 
+ * ctypedef enum CameraFeed_FeedDataType :CAMERAFEED_FEED_NOIMAGE, CAMERAFEED_FEED_RGB, CAMERAFEED_FEED_YCBCR, CAMERAFEED_FEED_YCBCR_SEP
+ * ctypedef enum CameraFeed_FeedPosition :CAMERAFEED_FEED_UNSPECIFIED, CAMERAFEED_FEED_FRONT, CAMERAFEED_FEED_BACK             # <<<<<<<<<<<<<<
+ * 
+ * ctypedef enum CameraServer_FeedImage :CAMERASERVER_FEED_RGBA_IMAGE, CAMERASERVER_FEED_YCBCR_IMAGE, CAMERASERVER_FEED_Y_IMAGE, CAMERASERVER_FEED_CBCR_IMAGE
+ */
+enum __pyx_t_7classes_9generated_CameraFeed_FeedPosition {
+  __pyx_e_7classes_9generated_CAMERAFEED_FEED_UNSPECIFIED,
+  __pyx_e_7classes_9generated_CAMERAFEED_FEED_FRONT,
+  __pyx_e_7classes_9generated_CAMERAFEED_FEED_BACK
+};
+typedef enum __pyx_t_7classes_9generated_CameraFeed_FeedPosition __pyx_t_7classes_9generated_CameraFeed_FeedPosition;
+
+/* "classes/generated.pxd":176
+ * ctypedef enum CameraFeed_FeedPosition :CAMERAFEED_FEED_UNSPECIFIED, CAMERAFEED_FEED_FRONT, CAMERAFEED_FEED_BACK
+ * 
+ * ctypedef enum CameraServer_FeedImage :CAMERASERVER_FEED_RGBA_IMAGE, CAMERASERVER_FEED_YCBCR_IMAGE, CAMERASERVER_FEED_Y_IMAGE, CAMERASERVER_FEED_CBCR_IMAGE             # <<<<<<<<<<<<<<
+ * 
+ * 
+ */
+enum __pyx_t_7classes_9generated_CameraServer_FeedImage {
+  __pyx_e_7classes_9generated_CAMERASERVER_FEED_RGBA_IMAGE,
+  __pyx_e_7classes_9generated_CAMERASERVER_FEED_YCBCR_IMAGE,
+  __pyx_e_7classes_9generated_CAMERASERVER_FEED_Y_IMAGE,
+  __pyx_e_7classes_9generated_CAMERASERVER_FEED_CBCR_IMAGE
+};
+typedef enum __pyx_t_7classes_9generated_CameraServer_FeedImage __pyx_t_7classes_9generated_CameraServer_FeedImage;
+
+/* "classes/generated.pxd":179
+ * 
+ * 
+ * ctypedef enum CanvasItem_BlendMode :CANVASITEM_BLEND_MODE_MIX, CANVASITEM_BLEND_MODE_ADD, CANVASITEM_BLEND_MODE_SUB, CANVASITEM_BLEND_MODE_MUL, CANVASITEM_BLEND_MODE_PREMULT_ALPHA, CANVASITEM_BLEND_MODE_DISABLED             # <<<<<<<<<<<<<<
+ * 
+ * ctypedef enum CanvasItemMaterial_LightMode :CANVASITEMMATERIAL_LIGHT_MODE_NORMAL, CANVASITEMMATERIAL_LIGHT_MODE_UNSHADED, CANVASITEMMATERIAL_LIGHT_MODE_LIGHT_ONLY
+ */
+enum __pyx_t_7classes_9generated_CanvasItem_BlendMode {
+  __pyx_e_7classes_9generated_CANVASITEM_BLEND_MODE_MIX,
+  __pyx_e_7classes_9generated_CANVASITEM_BLEND_MODE_ADD,
+  __pyx_e_7classes_9generated_CANVASITEM_BLEND_MODE_SUB,
+  __pyx_e_7classes_9generated_CANVASITEM_BLEND_MODE_MUL,
+  __pyx_e_7classes_9generated_CANVASITEM_BLEND_MODE_PREMULT_ALPHA,
+  __pyx_e_7classes_9generated_CANVASITEM_BLEND_MODE_DISABLED
+};
+typedef enum __pyx_t_7classes_9generated_CanvasItem_BlendMode __pyx_t_7classes_9generated_CanvasItem_BlendMode;
+
+/* "classes/generated.pxd":181
+ * ctypedef enum CanvasItem_BlendMode :CANVASITEM_BLEND_MODE_MIX, CANVASITEM_BLEND_MODE_ADD, CANVASITEM_BLEND_MODE_SUB, CANVASITEM_BLEND_MODE_MUL, CANVASITEM_BLEND_MODE_PREMULT_ALPHA, CANVASITEM_BLEND_MODE_DISABLED
+ * 
+ * ctypedef enum CanvasItemMaterial_LightMode :CANVASITEMMATERIAL_LIGHT_MODE_NORMAL, CANVASITEMMATERIAL_LIGHT_MODE_UNSHADED, CANVASITEMMATERIAL_LIGHT_MODE_LIGHT_ONLY             # <<<<<<<<<<<<<<
+ * ctypedef enum CanvasItemMaterial_BlendMode :CANVASITEMMATERIAL_BLEND_MODE_MIX, CANVASITEMMATERIAL_BLEND_MODE_ADD, CANVASITEMMATERIAL_BLEND_MODE_SUB, CANVASITEMMATERIAL_BLEND_MODE_MUL, CANVASITEMMATERIAL_BLEND_MODE_PREMULT_ALPHA
+ * 
+ */
+enum __pyx_t_7classes_9generated_CanvasItemMaterial_LightMode {
+  __pyx_e_7classes_9generated_CANVASITEMMATERIAL_LIGHT_MODE_NORMAL,
+  __pyx_e_7classes_9generated_CANVASITEMMATERIAL_LIGHT_MODE_UNSHADED,
+  __pyx_e_7classes_9generated_CANVASITEMMATERIAL_LIGHT_MODE_LIGHT_ONLY
+};
+typedef enum __pyx_t_7classes_9generated_CanvasItemMaterial_LightMode __pyx_t_7classes_9generated_CanvasItemMaterial_LightMode;
+
+/* "classes/generated.pxd":182
+ * 
+ * ctypedef enum CanvasItemMaterial_LightMode :CANVASITEMMATERIAL_LIGHT_MODE_NORMAL, CANVASITEMMATERIAL_LIGHT_MODE_UNSHADED, CANVASITEMMATERIAL_LIGHT_MODE_LIGHT_ONLY
+ * ctypedef enum CanvasItemMaterial_BlendMode :CANVASITEMMATERIAL_BLEND_MODE_MIX, CANVASITEMMATERIAL_BLEND_MODE_ADD, CANVASITEMMATERIAL_BLEND_MODE_SUB, CANVASITEMMATERIAL_BLEND_MODE_MUL, CANVASITEMMATERIAL_BLEND_MODE_PREMULT_ALPHA             # <<<<<<<<<<<<<<
+ * 
+ * 
+ */
+enum __pyx_t_7classes_9generated_CanvasItemMaterial_BlendMode {
+  __pyx_e_7classes_9generated_CANVASITEMMATERIAL_BLEND_MODE_MIX,
+  __pyx_e_7classes_9generated_CANVASITEMMATERIAL_BLEND_MODE_ADD,
+  __pyx_e_7classes_9generated_CANVASITEMMATERIAL_BLEND_MODE_SUB,
+  __pyx_e_7classes_9generated_CANVASITEMMATERIAL_BLEND_MODE_MUL,
+  __pyx_e_7classes_9generated_CANVASITEMMATERIAL_BLEND_MODE_PREMULT_ALPHA
+};
+typedef enum __pyx_t_7classes_9generated_CanvasItemMaterial_BlendMode __pyx_t_7classes_9generated_CanvasItemMaterial_BlendMode;
+
+/* "classes/generated.pxd":194
+ * 
+ * 
+ * ctypedef enum ClippedCamera_ProcessMode :CLIPPEDCAMERA_CLIP_PROCESS_PHYSICS, CLIPPEDCAMERA_CLIP_PROCESS_IDLE             # <<<<<<<<<<<<<<
+ * 
+ * 
+ */
+enum __pyx_t_7classes_9generated_ClippedCamera_ProcessMode {
+  __pyx_e_7classes_9generated_CLIPPEDCAMERA_CLIP_PROCESS_PHYSICS,
+  __pyx_e_7classes_9generated_CLIPPEDCAMERA_CLIP_PROCESS_IDLE
+};
+typedef enum __pyx_t_7classes_9generated_ClippedCamera_ProcessMode __pyx_t_7classes_9generated_ClippedCamera_ProcessMode;
+
+/* "classes/generated.pxd":199
+ * 
+ * 
+ * ctypedef enum CollisionPolygon2D_BuildMode :COLLISIONPOLYGON2D_BUILD_SOLIDS, COLLISIONPOLYGON2D_BUILD_SEGMENTS             # <<<<<<<<<<<<<<
+ * 
+ * 
+ */
+enum __pyx_t_7classes_9generated_CollisionPolygon2D_BuildMode {
+  __pyx_e_7classes_9generated_COLLISIONPOLYGON2D_BUILD_SOLIDS,
+  __pyx_e_7classes_9generated_COLLISIONPOLYGON2D_BUILD_SEGMENTS
+};
+typedef enum __pyx_t_7classes_9generated_CollisionPolygon2D_BuildMode __pyx_t_7classes_9generated_CollisionPolygon2D_BuildMode;
+
+/* "classes/generated.pxd":208
+ * 
+ * 
+ * ctypedef enum ConeTwistJoint_Param :CONETWISTJOINT_PARAM_SWING_SPAN, CONETWISTJOINT_PARAM_TWIST_SPAN, CONETWISTJOINT_PARAM_BIAS, CONETWISTJOINT_PARAM_SOFTNESS, CONETWISTJOINT_PARAM_RELAXATION, CONETWISTJOINT_PARAM_MAX             # <<<<<<<<<<<<<<
+ * 
+ * 
+ */
+enum __pyx_t_7classes_9generated_ConeTwistJoint_Param {
+  __pyx_e_7classes_9generated_CONETWISTJOINT_PARAM_SWING_SPAN,
+  __pyx_e_7classes_9generated_CONETWISTJOINT_PARAM_TWIST_SPAN,
+  __pyx_e_7classes_9generated_CONETWISTJOINT_PARAM_BIAS,
+  __pyx_e_7classes_9generated_CONETWISTJOINT_PARAM_SOFTNESS,
+  __pyx_e_7classes_9generated_CONETWISTJOINT_PARAM_RELAXATION,
+  __pyx_e_7classes_9generated_CONETWISTJOINT_PARAM_MAX
+};
+typedef enum __pyx_t_7classes_9generated_ConeTwistJoint_Param __pyx_t_7classes_9generated_ConeTwistJoint_Param;
+
+/* "classes/generated.pxd":213
+ * 
+ * 
+ * ctypedef enum Control_Anchor :CONTROL_ANCHOR_BEGIN, CONTROL_ANCHOR_END             # <<<<<<<<<<<<<<
+ * ctypedef enum Control_FocusMode :CONTROL_FOCUS_NONE, CONTROL_FOCUS_CLICK, CONTROL_FOCUS_ALL
+ * ctypedef enum Control_LayoutPresetMode :CONTROL_PRESET_MODE_MINSIZE, CONTROL_PRESET_MODE_KEEP_WIDTH, CONTROL_PRESET_MODE_KEEP_HEIGHT, CONTROL_PRESET_MODE_KEEP_SIZE
+ */
+enum __pyx_t_7classes_9generated_Control_Anchor {
+  __pyx_e_7classes_9generated_CONTROL_ANCHOR_BEGIN,
+  __pyx_e_7classes_9generated_CONTROL_ANCHOR_END
+};
+typedef enum __pyx_t_7classes_9generated_Control_Anchor __pyx_t_7classes_9generated_Control_Anchor;
+
+/* "classes/generated.pxd":214
+ * 
+ * ctypedef enum Control_Anchor :CONTROL_ANCHOR_BEGIN, CONTROL_ANCHOR_END
+ * ctypedef enum Control_FocusMode :CONTROL_FOCUS_NONE, CONTROL_FOCUS_CLICK, CONTROL_FOCUS_ALL             # <<<<<<<<<<<<<<
+ * ctypedef enum Control_LayoutPresetMode :CONTROL_PRESET_MODE_MINSIZE, CONTROL_PRESET_MODE_KEEP_WIDTH, CONTROL_PRESET_MODE_KEEP_HEIGHT, CONTROL_PRESET_MODE_KEEP_SIZE
+ * ctypedef enum Control_MouseFilter :CONTROL_MOUSE_FILTER_STOP, CONTROL_MOUSE_FILTER_PASS, CONTROL_MOUSE_FILTER_IGNORE
+ */
+enum __pyx_t_7classes_9generated_Control_FocusMode {
+  __pyx_e_7classes_9generated_CONTROL_FOCUS_NONE,
+  __pyx_e_7classes_9generated_CONTROL_FOCUS_CLICK,
+  __pyx_e_7classes_9generated_CONTROL_FOCUS_ALL
+};
+typedef enum __pyx_t_7classes_9generated_Control_FocusMode __pyx_t_7classes_9generated_Control_FocusMode;
+
+/* "classes/generated.pxd":215
+ * ctypedef enum Control_Anchor :CONTROL_ANCHOR_BEGIN, CONTROL_ANCHOR_END
+ * ctypedef enum Control_FocusMode :CONTROL_FOCUS_NONE, CONTROL_FOCUS_CLICK, CONTROL_FOCUS_ALL
+ * ctypedef enum Control_LayoutPresetMode :CONTROL_PRESET_MODE_MINSIZE, CONTROL_PRESET_MODE_KEEP_WIDTH, CONTROL_PRESET_MODE_KEEP_HEIGHT, CONTROL_PRESET_MODE_KEEP_SIZE             # <<<<<<<<<<<<<<
+ * ctypedef enum Control_MouseFilter :CONTROL_MOUSE_FILTER_STOP, CONTROL_MOUSE_FILTER_PASS, CONTROL_MOUSE_FILTER_IGNORE
+ * ctypedef enum Control_CursorShape :CONTROL_CURSOR_ARROW, CONTROL_CURSOR_IBEAM, CONTROL_CURSOR_POINTING_HAND, CONTROL_CURSOR_CROSS, CONTROL_CURSOR_WAIT, CONTROL_CURSOR_BUSY, CONTROL_CURSOR_DRAG, CONTROL_CURSOR_CAN_DROP, CONTROL_CURSOR_FORBIDDEN, CONTROL_CURSOR_VSIZE, CONTROL_CURSOR_HSIZE, CONTROL_CURSOR_BDIAGSIZE, CONTROL_CURSOR_FDIAGSIZE, CONTROL_CURSOR_MOVE, CONTROL_CURSOR_VSPLIT, CONTROL_CURSOR_HSPLIT, CONTROL_CURSOR_HELP
+ */
+enum __pyx_t_7classes_9generated_Control_LayoutPresetMode {
+  __pyx_e_7classes_9generated_CONTROL_PRESET_MODE_MINSIZE,
+  __pyx_e_7classes_9generated_CONTROL_PRESET_MODE_KEEP_WIDTH,
+  __pyx_e_7classes_9generated_CONTROL_PRESET_MODE_KEEP_HEIGHT,
+  __pyx_e_7classes_9generated_CONTROL_PRESET_MODE_KEEP_SIZE
+};
+typedef enum __pyx_t_7classes_9generated_Control_LayoutPresetMode __pyx_t_7classes_9generated_Control_LayoutPresetMode;
+
+/* "classes/generated.pxd":216
+ * ctypedef enum Control_FocusMode :CONTROL_FOCUS_NONE, CONTROL_FOCUS_CLICK, CONTROL_FOCUS_ALL
+ * ctypedef enum Control_LayoutPresetMode :CONTROL_PRESET_MODE_MINSIZE, CONTROL_PRESET_MODE_KEEP_WIDTH, CONTROL_PRESET_MODE_KEEP_HEIGHT, CONTROL_PRESET_MODE_KEEP_SIZE
+ * ctypedef enum Control_MouseFilter :CONTROL_MOUSE_FILTER_STOP, CONTROL_MOUSE_FILTER_PASS, CONTROL_MOUSE_FILTER_IGNORE             # <<<<<<<<<<<<<<
+ * ctypedef enum Control_CursorShape :CONTROL_CURSOR_ARROW, CONTROL_CURSOR_IBEAM, CONTROL_CURSOR_POINTING_HAND, CONTROL_CURSOR_CROSS, CONTROL_CURSOR_WAIT, CONTROL_CURSOR_BUSY, CONTROL_CURSOR_DRAG, CONTROL_CURSOR_CAN_DROP, CONTROL_CURSOR_FORBIDDEN, CONTROL_CURSOR_VSIZE, CONTROL_CURSOR_HSIZE, CONTROL_CURSOR_BDIAGSIZE, CONTROL_CURSOR_FDIAGSIZE, CONTROL_CURSOR_MOVE, CONTROL_CURSOR_VSPLIT, CONTROL_CURSOR_HSPLIT, CONTROL_CURSOR_HELP
+ * ctypedef enum Control_GrowDirection :CONTROL_GROW_DIRECTION_BEGIN, CONTROL_GROW_DIRECTION_END, CONTROL_GROW_DIRECTION_BOTH
+ */
+enum __pyx_t_7classes_9generated_Control_MouseFilter {
+  __pyx_e_7classes_9generated_CONTROL_MOUSE_FILTER_STOP,
+  __pyx_e_7classes_9generated_CONTROL_MOUSE_FILTER_PASS,
+  __pyx_e_7classes_9generated_CONTROL_MOUSE_FILTER_IGNORE
+};
+typedef enum __pyx_t_7classes_9generated_Control_MouseFilter __pyx_t_7classes_9generated_Control_MouseFilter;
+
+/* "classes/generated.pxd":217
+ * ctypedef enum Control_LayoutPresetMode :CONTROL_PRESET_MODE_MINSIZE, CONTROL_PRESET_MODE_KEEP_WIDTH, CONTROL_PRESET_MODE_KEEP_HEIGHT, CONTROL_PRESET_MODE_KEEP_SIZE
+ * ctypedef enum Control_MouseFilter :CONTROL_MOUSE_FILTER_STOP, CONTROL_MOUSE_FILTER_PASS, CONTROL_MOUSE_FILTER_IGNORE
+ * ctypedef enum Control_CursorShape :CONTROL_CURSOR_ARROW, CONTROL_CURSOR_IBEAM, CONTROL_CURSOR_POINTING_HAND, CONTROL_CURSOR_CROSS, CONTROL_CURSOR_WAIT, CONTROL_CURSOR_BUSY, CONTROL_CURSOR_DRAG, CONTROL_CURSOR_CAN_DROP, CONTROL_CURSOR_FORBIDDEN, CONTROL_CURSOR_VSIZE, CONTROL_CURSOR_HSIZE, CONTROL_CURSOR_BDIAGSIZE, CONTROL_CURSOR_FDIAGSIZE, CONTROL_CURSOR_MOVE, CONTROL_CURSOR_VSPLIT, CONTROL_CURSOR_HSPLIT, CONTROL_CURSOR_HELP             # <<<<<<<<<<<<<<
+ * ctypedef enum Control_GrowDirection :CONTROL_GROW_DIRECTION_BEGIN, CONTROL_GROW_DIRECTION_END, CONTROL_GROW_DIRECTION_BOTH
+ * ctypedef enum Control_SizeFlags :CONTROL_SIZE_FILL, CONTROL_SIZE_EXPAND, CONTROL_SIZE_EXPAND_FILL, CONTROL_SIZE_SHRINK_CENTER, CONTROL_SIZE_SHRINK_END
+ */
+enum __pyx_t_7classes_9generated_Control_CursorShape {
+  __pyx_e_7classes_9generated_CONTROL_CURSOR_ARROW,
+  __pyx_e_7classes_9generated_CONTROL_CURSOR_IBEAM,
+  __pyx_e_7classes_9generated_CONTROL_CURSOR_POINTING_HAND,
+  __pyx_e_7classes_9generated_CONTROL_CURSOR_CROSS,
+  __pyx_e_7classes_9generated_CONTROL_CURSOR_WAIT,
+  __pyx_e_7classes_9generated_CONTROL_CURSOR_BUSY,
+  __pyx_e_7classes_9generated_CONTROL_CURSOR_DRAG,
+  __pyx_e_7classes_9generated_CONTROL_CURSOR_CAN_DROP,
+  __pyx_e_7classes_9generated_CONTROL_CURSOR_FORBIDDEN,
+  __pyx_e_7classes_9generated_CONTROL_CURSOR_VSIZE,
+  __pyx_e_7classes_9generated_CONTROL_CURSOR_HSIZE,
+  __pyx_e_7classes_9generated_CONTROL_CURSOR_BDIAGSIZE,
+  __pyx_e_7classes_9generated_CONTROL_CURSOR_FDIAGSIZE,
+  __pyx_e_7classes_9generated_CONTROL_CURSOR_MOVE,
+  __pyx_e_7classes_9generated_CONTROL_CURSOR_VSPLIT,
+  __pyx_e_7classes_9generated_CONTROL_CURSOR_HSPLIT,
+  __pyx_e_7classes_9generated_CONTROL_CURSOR_HELP
+};
+typedef enum __pyx_t_7classes_9generated_Control_CursorShape __pyx_t_7classes_9generated_Control_CursorShape;
+
+/* "classes/generated.pxd":218
+ * ctypedef enum Control_MouseFilter :CONTROL_MOUSE_FILTER_STOP, CONTROL_MOUSE_FILTER_PASS, CONTROL_MOUSE_FILTER_IGNORE
+ * ctypedef enum Control_CursorShape :CONTROL_CURSOR_ARROW, CONTROL_CURSOR_IBEAM, CONTROL_CURSOR_POINTING_HAND, CONTROL_CURSOR_CROSS, CONTROL_CURSOR_WAIT, CONTROL_CURSOR_BUSY, CONTROL_CURSOR_DRAG, CONTROL_CURSOR_CAN_DROP, CONTROL_CURSOR_FORBIDDEN, CONTROL_CURSOR_VSIZE, CONTROL_CURSOR_HSIZE, CONTROL_CURSOR_BDIAGSIZE, CONTROL_CURSOR_FDIAGSIZE, CONTROL_CURSOR_MOVE, CONTROL_CURSOR_VSPLIT, CONTROL_CURSOR_HSPLIT, CONTROL_CURSOR_HELP
+ * ctypedef enum Control_GrowDirection :CONTROL_GROW_DIRECTION_BEGIN, CONTROL_GROW_DIRECTION_END, CONTROL_GROW_DIRECTION_BOTH             # <<<<<<<<<<<<<<
+ * ctypedef enum Control_SizeFlags :CONTROL_SIZE_FILL, CONTROL_SIZE_EXPAND, CONTROL_SIZE_EXPAND_FILL, CONTROL_SIZE_SHRINK_CENTER, CONTROL_SIZE_SHRINK_END
+ * ctypedef enum Control_LayoutPreset :CONTROL_PRESET_TOP_LEFT, CONTROL_PRESET_TOP_RIGHT, CONTROL_PRESET_BOTTOM_LEFT, CONTROL_PRESET_BOTTOM_RIGHT, CONTROL_PRESET_CENTER_LEFT, CONTROL_PRESET_CENTER_TOP, CONTROL_PRESET_CENTER_RIGHT, CONTROL_PRESET_CENTER_BOTTOM, CONTROL_PRESET_CENTER, CONTROL_PRESET_LEFT_WIDE, CONTROL_PRESET_TOP_WIDE, CONTROL_PRESET_RIGHT_WIDE, CONTROL_PRESET_BOTTOM_WIDE, CONTROL_PRESET_VCENTER_WIDE, CONTROL_PRESET_HCENTER_WIDE, CONTROL_PRESET_WIDE
+ */
+enum __pyx_t_7classes_9generated_Control_GrowDirection {
+  __pyx_e_7classes_9generated_CONTROL_GROW_DIRECTION_BEGIN,
+  __pyx_e_7classes_9generated_CONTROL_GROW_DIRECTION_END,
+  __pyx_e_7classes_9generated_CONTROL_GROW_DIRECTION_BOTH
+};
+typedef enum __pyx_t_7classes_9generated_Control_GrowDirection __pyx_t_7classes_9generated_Control_GrowDirection;
+
+/* "classes/generated.pxd":219
+ * ctypedef enum Control_CursorShape :CONTROL_CURSOR_ARROW, CONTROL_CURSOR_IBEAM, CONTROL_CURSOR_POINTING_HAND, CONTROL_CURSOR_CROSS, CONTROL_CURSOR_WAIT, CONTROL_CURSOR_BUSY, CONTROL_CURSOR_DRAG, CONTROL_CURSOR_CAN_DROP, CONTROL_CURSOR_FORBIDDEN, CONTROL_CURSOR_VSIZE, CONTROL_CURSOR_HSIZE, CONTROL_CURSOR_BDIAGSIZE, CONTROL_CURSOR_FDIAGSIZE, CONTROL_CURSOR_MOVE, CONTROL_CURSOR_VSPLIT, CONTROL_CURSOR_HSPLIT, CONTROL_CURSOR_HELP
+ * ctypedef enum Control_GrowDirection :CONTROL_GROW_DIRECTION_BEGIN, CONTROL_GROW_DIRECTION_END, CONTROL_GROW_DIRECTION_BOTH
+ * ctypedef enum Control_SizeFlags :CONTROL_SIZE_FILL, CONTROL_SIZE_EXPAND, CONTROL_SIZE_EXPAND_FILL, CONTROL_SIZE_SHRINK_CENTER, CONTROL_SIZE_SHRINK_END             # <<<<<<<<<<<<<<
+ * ctypedef enum Control_LayoutPreset :CONTROL_PRESET_TOP_LEFT, CONTROL_PRESET_TOP_RIGHT, CONTROL_PRESET_BOTTOM_LEFT, CONTROL_PRESET_BOTTOM_RIGHT, CONTROL_PRESET_CENTER_LEFT, CONTROL_PRESET_CENTER_TOP, CONTROL_PRESET_CENTER_RIGHT, CONTROL_PRESET_CENTER_BOTTOM, CONTROL_PRESET_CENTER, CONTROL_PRESET_LEFT_WIDE, CONTROL_PRESET_TOP_WIDE, CONTROL_PRESET_RIGHT_WIDE, CONTROL_PRESET_BOTTOM_WIDE, CONTROL_PRESET_VCENTER_WIDE, CONTROL_PRESET_HCENTER_WIDE, CONTROL_PRESET_WIDE
+ * 
+ */
+enum __pyx_t_7classes_9generated_Control_SizeFlags {
+  __pyx_e_7classes_9generated_CONTROL_SIZE_FILL,
+  __pyx_e_7classes_9generated_CONTROL_SIZE_EXPAND,
+  __pyx_e_7classes_9generated_CONTROL_SIZE_EXPAND_FILL,
+  __pyx_e_7classes_9generated_CONTROL_SIZE_SHRINK_CENTER,
+  __pyx_e_7classes_9generated_CONTROL_SIZE_SHRINK_END
+};
+typedef enum __pyx_t_7classes_9generated_Control_SizeFlags __pyx_t_7classes_9generated_Control_SizeFlags;
+
+/* "classes/generated.pxd":220
+ * ctypedef enum Control_GrowDirection :CONTROL_GROW_DIRECTION_BEGIN, CONTROL_GROW_DIRECTION_END, CONTROL_GROW_DIRECTION_BOTH
+ * ctypedef enum Control_SizeFlags :CONTROL_SIZE_FILL, CONTROL_SIZE_EXPAND, CONTROL_SIZE_EXPAND_FILL, CONTROL_SIZE_SHRINK_CENTER, CONTROL_SIZE_SHRINK_END
+ * ctypedef enum Control_LayoutPreset :CONTROL_PRESET_TOP_LEFT, CONTROL_PRESET_TOP_RIGHT, CONTROL_PRESET_BOTTOM_LEFT, CONTROL_PRESET_BOTTOM_RIGHT, CONTROL_PRESET_CENTER_LEFT, CONTROL_PRESET_CENTER_TOP, CONTROL_PRESET_CENTER_RIGHT, CONTROL_PRESET_CENTER_BOTTOM, CONTROL_PRESET_CENTER, CONTROL_PRESET_LEFT_WIDE, CONTROL_PRESET_TOP_WIDE, CONTROL_PRESET_RIGHT_WIDE, CONTROL_PRESET_BOTTOM_WIDE, CONTROL_PRESET_VCENTER_WIDE, CONTROL_PRESET_HCENTER_WIDE, CONTROL_PRESET_WIDE             # <<<<<<<<<<<<<<
+ * 
+ * 
+ */
+enum __pyx_t_7classes_9generated_Control_LayoutPreset {
+  __pyx_e_7classes_9generated_CONTROL_PRESET_TOP_LEFT,
+  __pyx_e_7classes_9generated_CONTROL_PRESET_TOP_RIGHT,
+  __pyx_e_7classes_9generated_CONTROL_PRESET_BOTTOM_LEFT,
+  __pyx_e_7classes_9generated_CONTROL_PRESET_BOTTOM_RIGHT,
+  __pyx_e_7classes_9generated_CONTROL_PRESET_CENTER_LEFT,
+  __pyx_e_7classes_9generated_CONTROL_PRESET_CENTER_TOP,
+  __pyx_e_7classes_9generated_CONTROL_PRESET_CENTER_RIGHT,
+  __pyx_e_7classes_9generated_CONTROL_PRESET_CENTER_BOTTOM,
+  __pyx_e_7classes_9generated_CONTROL_PRESET_CENTER,
+  __pyx_e_7classes_9generated_CONTROL_PRESET_LEFT_WIDE,
+  __pyx_e_7classes_9generated_CONTROL_PRESET_TOP_WIDE,
+  __pyx_e_7classes_9generated_CONTROL_PRESET_RIGHT_WIDE,
+  __pyx_e_7classes_9generated_CONTROL_PRESET_BOTTOM_WIDE,
+  __pyx_e_7classes_9generated_CONTROL_PRESET_VCENTER_WIDE,
+  __pyx_e_7classes_9generated_CONTROL_PRESET_HCENTER_WIDE,
+  __pyx_e_7classes_9generated_CONTROL_PRESET_WIDE
+};
+typedef enum __pyx_t_7classes_9generated_Control_LayoutPreset __pyx_t_7classes_9generated_Control_LayoutPreset;
+
+/* "classes/generated.pxd":226
+ * 
+ * 
+ * ctypedef enum CubeMap_Flags :CUBEMAP_FLAG_MIPMAPS, CUBEMAP_FLAG_REPEAT, CUBEMAP_FLAG_FILTER, CUBEMAP_FLAGS_DEFAULT             # <<<<<<<<<<<<<<
+ * ctypedef enum CubeMap_Side :CUBEMAP_SIDE_LEFT, CUBEMAP_SIDE_RIGHT, CUBEMAP_SIDE_BOTTOM, CUBEMAP_SIDE_TOP, CUBEMAP_SIDE_FRONT, CUBEMAP_SIDE_BACK
+ * ctypedef enum CubeMap_Storage :CUBEMAP_STORAGE_RAW, CUBEMAP_STORAGE_COMPRESS_LOSSY, CUBEMAP_STORAGE_COMPRESS_LOSSLESS
+ */
+enum __pyx_t_7classes_9generated_CubeMap_Flags {
+  __pyx_e_7classes_9generated_CUBEMAP_FLAG_MIPMAPS,
+  __pyx_e_7classes_9generated_CUBEMAP_FLAG_REPEAT,
+  __pyx_e_7classes_9generated_CUBEMAP_FLAG_FILTER,
+  __pyx_e_7classes_9generated_CUBEMAP_FLAGS_DEFAULT
+};
+typedef enum __pyx_t_7classes_9generated_CubeMap_Flags __pyx_t_7classes_9generated_CubeMap_Flags;
+
+/* "classes/generated.pxd":227
+ * 
+ * ctypedef enum CubeMap_Flags :CUBEMAP_FLAG_MIPMAPS, CUBEMAP_FLAG_REPEAT, CUBEMAP_FLAG_FILTER, CUBEMAP_FLAGS_DEFAULT
+ * ctypedef enum CubeMap_Side :CUBEMAP_SIDE_LEFT, CUBEMAP_SIDE_RIGHT, CUBEMAP_SIDE_BOTTOM, CUBEMAP_SIDE_TOP, CUBEMAP_SIDE_FRONT, CUBEMAP_SIDE_BACK             # <<<<<<<<<<<<<<
+ * ctypedef enum CubeMap_Storage :CUBEMAP_STORAGE_RAW, CUBEMAP_STORAGE_COMPRESS_LOSSY, CUBEMAP_STORAGE_COMPRESS_LOSSLESS
+ * 
+ */
+enum __pyx_t_7classes_9generated_CubeMap_Side {
+  __pyx_e_7classes_9generated_CUBEMAP_SIDE_LEFT,
+  __pyx_e_7classes_9generated_CUBEMAP_SIDE_RIGHT,
+  __pyx_e_7classes_9generated_CUBEMAP_SIDE_BOTTOM,
+  __pyx_e_7classes_9generated_CUBEMAP_SIDE_TOP,
+  __pyx_e_7classes_9generated_CUBEMAP_SIDE_FRONT,
+  __pyx_e_7classes_9generated_CUBEMAP_SIDE_BACK
+};
+typedef enum __pyx_t_7classes_9generated_CubeMap_Side __pyx_t_7classes_9generated_CubeMap_Side;
+
+/* "classes/generated.pxd":228
+ * ctypedef enum CubeMap_Flags :CUBEMAP_FLAG_MIPMAPS, CUBEMAP_FLAG_REPEAT, CUBEMAP_FLAG_FILTER, CUBEMAP_FLAGS_DEFAULT
+ * ctypedef enum CubeMap_Side :CUBEMAP_SIDE_LEFT, CUBEMAP_SIDE_RIGHT, CUBEMAP_SIDE_BOTTOM, CUBEMAP_SIDE_TOP, CUBEMAP_SIDE_FRONT, CUBEMAP_SIDE_BACK
+ * ctypedef enum CubeMap_Storage :CUBEMAP_STORAGE_RAW, CUBEMAP_STORAGE_COMPRESS_LOSSY, CUBEMAP_STORAGE_COMPRESS_LOSSLESS             # <<<<<<<<<<<<<<
+ * 
+ * 
+ */
+enum __pyx_t_7classes_9generated_CubeMap_Storage {
+  __pyx_e_7classes_9generated_CUBEMAP_STORAGE_RAW,
+  __pyx_e_7classes_9generated_CUBEMAP_STORAGE_COMPRESS_LOSSY,
+  __pyx_e_7classes_9generated_CUBEMAP_STORAGE_COMPRESS_LOSSLESS
+};
+typedef enum __pyx_t_7classes_9generated_CubeMap_Storage __pyx_t_7classes_9generated_CubeMap_Storage;
+
+/* "classes/generated.pxd":231
+ * 
+ * 
+ * ctypedef enum Curve_TangentMode :CURVE_TANGENT_FREE, CURVE_TANGENT_LINEAR, CURVE_TANGENT_MODE_COUNT             # <<<<<<<<<<<<<<
+ * 
+ * 
+ */
+enum __pyx_t_7classes_9generated_Curve_TangentMode {
+  __pyx_e_7classes_9generated_CURVE_TANGENT_FREE,
+  __pyx_e_7classes_9generated_CURVE_TANGENT_LINEAR,
+  __pyx_e_7classes_9generated_CURVE_TANGENT_MODE_COUNT
+};
+typedef enum __pyx_t_7classes_9generated_Curve_TangentMode __pyx_t_7classes_9generated_Curve_TangentMode;
+
+/* "classes/generated.pxd":239
+ * 
+ * 
+ * ctypedef enum DirectionalLight_ShadowMode :DIRECTIONALLIGHT_SHADOW_ORTHOGONAL, DIRECTIONALLIGHT_SHADOW_PARALLEL_2_SPLITS, DIRECTIONALLIGHT_SHADOW_PARALLEL_4_SPLITS             # <<<<<<<<<<<<<<
+ * ctypedef enum DirectionalLight_ShadowDepthRange :DIRECTIONALLIGHT_SHADOW_DEPTH_RANGE_STABLE, DIRECTIONALLIGHT_SHADOW_DEPTH_RANGE_OPTIMIZED
+ * 
+ */
+enum __pyx_t_7classes_9generated_DirectionalLight_ShadowMode {
+  __pyx_e_7classes_9generated_DIRECTIONALLIGHT_SHADOW_ORTHOGONAL,
+  __pyx_e_7classes_9generated_DIRECTIONALLIGHT_SHADOW_PARALLEL_2_SPLITS,
+  __pyx_e_7classes_9generated_DIRECTIONALLIGHT_SHADOW_PARALLEL_4_SPLITS
+};
+typedef enum __pyx_t_7classes_9generated_DirectionalLight_ShadowMode __pyx_t_7classes_9generated_DirectionalLight_ShadowMode;
+
+/* "classes/generated.pxd":240
+ * 
+ * ctypedef enum DirectionalLight_ShadowMode :DIRECTIONALLIGHT_SHADOW_ORTHOGONAL, DIRECTIONALLIGHT_SHADOW_PARALLEL_2_SPLITS, DIRECTIONALLIGHT_SHADOW_PARALLEL_4_SPLITS
+ * ctypedef enum DirectionalLight_ShadowDepthRange :DIRECTIONALLIGHT_SHADOW_DEPTH_RANGE_STABLE, DIRECTIONALLIGHT_SHADOW_DEPTH_RANGE_OPTIMIZED             # <<<<<<<<<<<<<<
+ * 
+ * ctypedef enum DynamicFont_SpacingType :DYNAMICFONT_SPACING_TOP, DYNAMICFONT_SPACING_BOTTOM, DYNAMICFONT_SPACING_CHAR, DYNAMICFONT_SPACING_SPACE
+ */
+enum __pyx_t_7classes_9generated_DirectionalLight_ShadowDepthRange {
+  __pyx_e_7classes_9generated_DIRECTIONALLIGHT_SHADOW_DEPTH_RANGE_STABLE,
+  __pyx_e_7classes_9generated_DIRECTIONALLIGHT_SHADOW_DEPTH_RANGE_OPTIMIZED
+};
+typedef enum __pyx_t_7classes_9generated_DirectionalLight_ShadowDepthRange __pyx_t_7classes_9generated_DirectionalLight_ShadowDepthRange;
+
+/* "classes/generated.pxd":242
+ * ctypedef enum DirectionalLight_ShadowDepthRange :DIRECTIONALLIGHT_SHADOW_DEPTH_RANGE_STABLE, DIRECTIONALLIGHT_SHADOW_DEPTH_RANGE_OPTIMIZED
+ * 
+ * ctypedef enum DynamicFont_SpacingType :DYNAMICFONT_SPACING_TOP, DYNAMICFONT_SPACING_BOTTOM, DYNAMICFONT_SPACING_CHAR, DYNAMICFONT_SPACING_SPACE             # <<<<<<<<<<<<<<
+ * 
+ * ctypedef enum DynamicFontData_Hinting :DYNAMICFONTDATA_HINTING_NONE, DYNAMICFONTDATA_HINTING_LIGHT, DYNAMICFONTDATA_HINTING_NORMAL
+ */
+enum __pyx_t_7classes_9generated_DynamicFont_SpacingType {
+  __pyx_e_7classes_9generated_DYNAMICFONT_SPACING_TOP,
+  __pyx_e_7classes_9generated_DYNAMICFONT_SPACING_BOTTOM,
+  __pyx_e_7classes_9generated_DYNAMICFONT_SPACING_CHAR,
+  __pyx_e_7classes_9generated_DYNAMICFONT_SPACING_SPACE
+};
+typedef enum __pyx_t_7classes_9generated_DynamicFont_SpacingType __pyx_t_7classes_9generated_DynamicFont_SpacingType;
+
+/* "classes/generated.pxd":244
+ * ctypedef enum DynamicFont_SpacingType :DYNAMICFONT_SPACING_TOP, DYNAMICFONT_SPACING_BOTTOM, DYNAMICFONT_SPACING_CHAR, DYNAMICFONT_SPACING_SPACE
+ * 
+ * ctypedef enum DynamicFontData_Hinting :DYNAMICFONTDATA_HINTING_NONE, DYNAMICFONTDATA_HINTING_LIGHT, DYNAMICFONTDATA_HINTING_NORMAL             # <<<<<<<<<<<<<<
+ * 
+ * 
+ */
+enum __pyx_t_7classes_9generated_DynamicFontData_Hinting {
+  __pyx_e_7classes_9generated_DYNAMICFONTDATA_HINTING_NONE,
+  __pyx_e_7classes_9generated_DYNAMICFONTDATA_HINTING_LIGHT,
+  __pyx_e_7classes_9generated_DYNAMICFONTDATA_HINTING_NORMAL
+};
+typedef enum __pyx_t_7classes_9generated_DynamicFontData_Hinting __pyx_t_7classes_9generated_DynamicFontData_Hinting;
+
+/* "classes/generated.pxd":247
+ * 
+ * 
+ * ctypedef enum EditorFeatureProfile_Feature :EDITORFEATUREPROFILE_FEATURE_3D, EDITORFEATUREPROFILE_FEATURE_SCRIPT, EDITORFEATUREPROFILE_FEATURE_ASSET_LIB, EDITORFEATUREPROFILE_FEATURE_SCENE_TREE, EDITORFEATUREPROFILE_FEATURE_IMPORT_DOCK, EDITORFEATUREPROFILE_FEATURE_NODE_DOCK, EDITORFEATUREPROFILE_FEATURE_FILESYSTEM_DOCK, EDITORFEATUREPROFILE_FEATURE_MAX             # <<<<<<<<<<<<<<
+ * 
+ * ctypedef enum EditorFileDialog_DisplayMode :EDITORFILEDIALOG_DISPLAY_THUMBNAILS, EDITORFILEDIALOG_DISPLAY_LIST
+ */
+enum __pyx_t_7classes_9generated_EditorFeatureProfile_Feature {
+  __pyx_e_7classes_9generated_EDITORFEATUREPROFILE_FEATURE_3D,
+  __pyx_e_7classes_9generated_EDITORFEATUREPROFILE_FEATURE_SCRIPT,
+  __pyx_e_7classes_9generated_EDITORFEATUREPROFILE_FEATURE_ASSET_LIB,
+  __pyx_e_7classes_9generated_EDITORFEATUREPROFILE_FEATURE_SCENE_TREE,
+  __pyx_e_7classes_9generated_EDITORFEATUREPROFILE_FEATURE_IMPORT_DOCK,
+  __pyx_e_7classes_9generated_EDITORFEATUREPROFILE_FEATURE_NODE_DOCK,
+  __pyx_e_7classes_9generated_EDITORFEATUREPROFILE_FEATURE_FILESYSTEM_DOCK,
+  __pyx_e_7classes_9generated_EDITORFEATUREPROFILE_FEATURE_MAX
+};
+typedef enum __pyx_t_7classes_9generated_EditorFeatureProfile_Feature __pyx_t_7classes_9generated_EditorFeatureProfile_Feature;
+
+/* "classes/generated.pxd":249
+ * ctypedef enum EditorFeatureProfile_Feature :EDITORFEATUREPROFILE_FEATURE_3D, EDITORFEATUREPROFILE_FEATURE_SCRIPT, EDITORFEATUREPROFILE_FEATURE_ASSET_LIB, EDITORFEATUREPROFILE_FEATURE_SCENE_TREE, EDITORFEATUREPROFILE_FEATURE_IMPORT_DOCK, EDITORFEATUREPROFILE_FEATURE_NODE_DOCK, EDITORFEATUREPROFILE_FEATURE_FILESYSTEM_DOCK, EDITORFEATUREPROFILE_FEATURE_MAX
+ * 
+ * ctypedef enum EditorFileDialog_DisplayMode :EDITORFILEDIALOG_DISPLAY_THUMBNAILS, EDITORFILEDIALOG_DISPLAY_LIST             # <<<<<<<<<<<<<<
+ * ctypedef enum EditorFileDialog_Mode :EDITORFILEDIALOG_MODE_OPEN_FILE, EDITORFILEDIALOG_MODE_OPEN_FILES, EDITORFILEDIALOG_MODE_OPEN_DIR, EDITORFILEDIALOG_MODE_OPEN_ANY, EDITORFILEDIALOG_MODE_SAVE_FILE
+ * ctypedef enum EditorFileDialog_Access :EDITORFILEDIALOG_ACCESS_RESOURCES, EDITORFILEDIALOG_ACCESS_USERDATA, EDITORFILEDIALOG_ACCESS_FILESYSTEM
+ */
+enum __pyx_t_7classes_9generated_EditorFileDialog_DisplayMode {
+  __pyx_e_7classes_9generated_EDITORFILEDIALOG_DISPLAY_THUMBNAILS,
+  __pyx_e_7classes_9generated_EDITORFILEDIALOG_DISPLAY_LIST
+};
+typedef enum __pyx_t_7classes_9generated_EditorFileDialog_DisplayMode __pyx_t_7classes_9generated_EditorFileDialog_DisplayMode;
+
+/* "classes/generated.pxd":250
+ * 
+ * ctypedef enum EditorFileDialog_DisplayMode :EDITORFILEDIALOG_DISPLAY_THUMBNAILS, EDITORFILEDIALOG_DISPLAY_LIST
+ * ctypedef enum EditorFileDialog_Mode :EDITORFILEDIALOG_MODE_OPEN_FILE, EDITORFILEDIALOG_MODE_OPEN_FILES, EDITORFILEDIALOG_MODE_OPEN_DIR, EDITORFILEDIALOG_MODE_OPEN_ANY, EDITORFILEDIALOG_MODE_SAVE_FILE             # <<<<<<<<<<<<<<
+ * ctypedef enum EditorFileDialog_Access :EDITORFILEDIALOG_ACCESS_RESOURCES, EDITORFILEDIALOG_ACCESS_USERDATA, EDITORFILEDIALOG_ACCESS_FILESYSTEM
+ * 
+ */
+enum __pyx_t_7classes_9generated_EditorFileDialog_Mode {
+  __pyx_e_7classes_9generated_EDITORFILEDIALOG_MODE_OPEN_FILE,
+  __pyx_e_7classes_9generated_EDITORFILEDIALOG_MODE_OPEN_FILES,
+  __pyx_e_7classes_9generated_EDITORFILEDIALOG_MODE_OPEN_DIR,
+  __pyx_e_7classes_9generated_EDITORFILEDIALOG_MODE_OPEN_ANY,
+  __pyx_e_7classes_9generated_EDITORFILEDIALOG_MODE_SAVE_FILE
+};
+typedef enum __pyx_t_7classes_9generated_EditorFileDialog_Mode __pyx_t_7classes_9generated_EditorFileDialog_Mode;
+
+/* "classes/generated.pxd":251
+ * ctypedef enum EditorFileDialog_DisplayMode :EDITORFILEDIALOG_DISPLAY_THUMBNAILS, EDITORFILEDIALOG_DISPLAY_LIST
+ * ctypedef enum EditorFileDialog_Mode :EDITORFILEDIALOG_MODE_OPEN_FILE, EDITORFILEDIALOG_MODE_OPEN_FILES, EDITORFILEDIALOG_MODE_OPEN_DIR, EDITORFILEDIALOG_MODE_OPEN_ANY, EDITORFILEDIALOG_MODE_SAVE_FILE
+ * ctypedef enum EditorFileDialog_Access :EDITORFILEDIALOG_ACCESS_RESOURCES, EDITORFILEDIALOG_ACCESS_USERDATA, EDITORFILEDIALOG_ACCESS_FILESYSTEM             # <<<<<<<<<<<<<<
+ * 
+ * 
+ */
+enum __pyx_t_7classes_9generated_EditorFileDialog_Access {
+  __pyx_e_7classes_9generated_EDITORFILEDIALOG_ACCESS_RESOURCES,
+  __pyx_e_7classes_9generated_EDITORFILEDIALOG_ACCESS_USERDATA,
+  __pyx_e_7classes_9generated_EDITORFILEDIALOG_ACCESS_FILESYSTEM
+};
+typedef enum __pyx_t_7classes_9generated_EditorFileDialog_Access __pyx_t_7classes_9generated_EditorFileDialog_Access;
+
+/* "classes/generated.pxd":260
+ * 
+ * 
+ * ctypedef enum EditorPlugin_DockSlot :EDITORPLUGIN_DOCK_SLOT_LEFT_UL, EDITORPLUGIN_DOCK_SLOT_LEFT_BL, EDITORPLUGIN_DOCK_SLOT_LEFT_UR, EDITORPLUGIN_DOCK_SLOT_LEFT_BR, EDITORPLUGIN_DOCK_SLOT_RIGHT_UL, EDITORPLUGIN_DOCK_SLOT_RIGHT_BL, EDITORPLUGIN_DOCK_SLOT_RIGHT_UR, EDITORPLUGIN_DOCK_SLOT_RIGHT_BR, EDITORPLUGIN_DOCK_SLOT_MAX             # <<<<<<<<<<<<<<
+ * ctypedef enum EditorPlugin_CustomControlContainer :EDITORPLUGIN_CONTAINER_TOOLBAR, EDITORPLUGIN_CONTAINER_SPATIAL_EDITOR_MENU, EDITORPLUGIN_CONTAINER_SPATIAL_EDITOR_SIDE_LEFT, EDITORPLUGIN_CONTAINER_SPATIAL_EDITOR_SIDE_RIGHT, EDITORPLUGIN_CONTAINER_SPATIAL_EDITOR_BOTTOM, EDITORPLUGIN_CONTAINER_CANVAS_EDITOR_MENU, EDITORPLUGIN_CONTAINER_CANVAS_EDITOR_SIDE_LEFT, EDITORPLUGIN_CONTAINER_CANVAS_EDITOR_SIDE_RIGHT, EDITORPLUGIN_CONTAINER_CANVAS_EDITOR_BOTTOM, EDITORPLUGIN_CONTAINER_PROPERTY_EDITOR_BOTTOM, EDITORPLUGIN_CONTAINER_PROJECT_SETTING_TAB_LEFT, EDITORPLUGIN_CONTAINER_PROJECT_SETTING_TAB_RIGHT
+ * 
+ */
+enum __pyx_t_7classes_9generated_EditorPlugin_DockSlot {
+  __pyx_e_7classes_9generated_EDITORPLUGIN_DOCK_SLOT_LEFT_UL,
+  __pyx_e_7classes_9generated_EDITORPLUGIN_DOCK_SLOT_LEFT_BL,
+  __pyx_e_7classes_9generated_EDITORPLUGIN_DOCK_SLOT_LEFT_UR,
+  __pyx_e_7classes_9generated_EDITORPLUGIN_DOCK_SLOT_LEFT_BR,
+  __pyx_e_7classes_9generated_EDITORPLUGIN_DOCK_SLOT_RIGHT_UL,
+  __pyx_e_7classes_9generated_EDITORPLUGIN_DOCK_SLOT_RIGHT_BL,
+  __pyx_e_7classes_9generated_EDITORPLUGIN_DOCK_SLOT_RIGHT_UR,
+  __pyx_e_7classes_9generated_EDITORPLUGIN_DOCK_SLOT_RIGHT_BR,
+  __pyx_e_7classes_9generated_EDITORPLUGIN_DOCK_SLOT_MAX
+};
+typedef enum __pyx_t_7classes_9generated_EditorPlugin_DockSlot __pyx_t_7classes_9generated_EditorPlugin_DockSlot;
+
+/* "classes/generated.pxd":261
+ * 
+ * ctypedef enum EditorPlugin_DockSlot :EDITORPLUGIN_DOCK_SLOT_LEFT_UL, EDITORPLUGIN_DOCK_SLOT_LEFT_BL, EDITORPLUGIN_DOCK_SLOT_LEFT_UR, EDITORPLUGIN_DOCK_SLOT_LEFT_BR, EDITORPLUGIN_DOCK_SLOT_RIGHT_UL, EDITORPLUGIN_DOCK_SLOT_RIGHT_BL, EDITORPLUGIN_DOCK_SLOT_RIGHT_UR, EDITORPLUGIN_DOCK_SLOT_RIGHT_BR, EDITORPLUGIN_DOCK_SLOT_MAX
+ * ctypedef enum EditorPlugin_CustomControlContainer :EDITORPLUGIN_CONTAINER_TOOLBAR, EDITORPLUGIN_CONTAINER_SPATIAL_EDITOR_MENU, EDITORPLUGIN_CONTAINER_SPATIAL_EDITOR_SIDE_LEFT, EDITORPLUGIN_CONTAINER_SPATIAL_EDITOR_SIDE_RIGHT, EDITORPLUGIN_CONTAINER_SPATIAL_EDITOR_BOTTOM, EDITORPLUGIN_CONTAINER_CANVAS_EDITOR_MENU, EDITORPLUGIN_CONTAINER_CANVAS_EDITOR_SIDE_LEFT, EDITORPLUGIN_CONTAINER_CANVAS_EDITOR_SIDE_RIGHT, EDITORPLUGIN_CONTAINER_CANVAS_EDITOR_BOTTOM, EDITORPLUGIN_CONTAINER_PROPERTY_EDITOR_BOTTOM, EDITORPLUGIN_CONTAINER_PROJECT_SETTING_TAB_LEFT, EDITORPLUGIN_CONTAINER_PROJECT_SETTING_TAB_RIGHT             # <<<<<<<<<<<<<<
+ * 
+ * 
+ */
+enum __pyx_t_7classes_9generated_EditorPlugin_CustomControlContainer {
+  __pyx_e_7classes_9generated_EDITORPLUGIN_CONTAINER_TOOLBAR,
+  __pyx_e_7classes_9generated_EDITORPLUGIN_CONTAINER_SPATIAL_EDITOR_MENU,
+  __pyx_e_7classes_9generated_EDITORPLUGIN_CONTAINER_SPATIAL_EDITOR_SIDE_LEFT,
+  __pyx_e_7classes_9generated_EDITORPLUGIN_CONTAINER_SPATIAL_EDITOR_SIDE_RIGHT,
+  __pyx_e_7classes_9generated_EDITORPLUGIN_CONTAINER_SPATIAL_EDITOR_BOTTOM,
+  __pyx_e_7classes_9generated_EDITORPLUGIN_CONTAINER_CANVAS_EDITOR_MENU,
+  __pyx_e_7classes_9generated_EDITORPLUGIN_CONTAINER_CANVAS_EDITOR_SIDE_LEFT,
+  __pyx_e_7classes_9generated_EDITORPLUGIN_CONTAINER_CANVAS_EDITOR_SIDE_RIGHT,
+  __pyx_e_7classes_9generated_EDITORPLUGIN_CONTAINER_CANVAS_EDITOR_BOTTOM,
+  __pyx_e_7classes_9generated_EDITORPLUGIN_CONTAINER_PROPERTY_EDITOR_BOTTOM,
+  __pyx_e_7classes_9generated_EDITORPLUGIN_CONTAINER_PROJECT_SETTING_TAB_LEFT,
+  __pyx_e_7classes_9generated_EDITORPLUGIN_CONTAINER_PROJECT_SETTING_TAB_RIGHT
+};
+typedef enum __pyx_t_7classes_9generated_EditorPlugin_CustomControlContainer __pyx_t_7classes_9generated_EditorPlugin_CustomControlContainer;
+
+/* "classes/generated.pxd":278
+ * 
+ * 
+ * ctypedef enum Environment_SSAOBlur :ENVIRONMENT_SSAO_BLUR_DISABLED, ENVIRONMENT_SSAO_BLUR_1x1, ENVIRONMENT_SSAO_BLUR_2x2, ENVIRONMENT_SSAO_BLUR_3x3             # <<<<<<<<<<<<<<
+ * ctypedef enum Environment_ToneMapper :ENVIRONMENT_TONE_MAPPER_LINEAR, ENVIRONMENT_TONE_MAPPER_REINHARDT, ENVIRONMENT_TONE_MAPPER_FILMIC, ENVIRONMENT_TONE_MAPPER_ACES
+ * ctypedef enum Environment_GlowBlendMode :ENVIRONMENT_GLOW_BLEND_MODE_ADDITIVE, ENVIRONMENT_GLOW_BLEND_MODE_SCREEN, ENVIRONMENT_GLOW_BLEND_MODE_SOFTLIGHT, ENVIRONMENT_GLOW_BLEND_MODE_REPLACE
+ */
+enum __pyx_t_7classes_9generated_Environment_SSAOBlur {
+  __pyx_e_7classes_9generated_ENVIRONMENT_SSAO_BLUR_DISABLED,
+  __pyx_e_7classes_9generated_ENVIRONMENT_SSAO_BLUR_1x1,
+  __pyx_e_7classes_9generated_ENVIRONMENT_SSAO_BLUR_2x2,
+  __pyx_e_7classes_9generated_ENVIRONMENT_SSAO_BLUR_3x3
+};
+typedef enum __pyx_t_7classes_9generated_Environment_SSAOBlur __pyx_t_7classes_9generated_Environment_SSAOBlur;
+
+/* "classes/generated.pxd":279
+ * 
+ * ctypedef enum Environment_SSAOBlur :ENVIRONMENT_SSAO_BLUR_DISABLED, ENVIRONMENT_SSAO_BLUR_1x1, ENVIRONMENT_SSAO_BLUR_2x2, ENVIRONMENT_SSAO_BLUR_3x3
+ * ctypedef enum Environment_ToneMapper :ENVIRONMENT_TONE_MAPPER_LINEAR, ENVIRONMENT_TONE_MAPPER_REINHARDT, ENVIRONMENT_TONE_MAPPER_FILMIC, ENVIRONMENT_TONE_MAPPER_ACES             # <<<<<<<<<<<<<<
+ * ctypedef enum Environment_GlowBlendMode :ENVIRONMENT_GLOW_BLEND_MODE_ADDITIVE, ENVIRONMENT_GLOW_BLEND_MODE_SCREEN, ENVIRONMENT_GLOW_BLEND_MODE_SOFTLIGHT, ENVIRONMENT_GLOW_BLEND_MODE_REPLACE
+ * ctypedef enum Environment_BGMode :ENVIRONMENT_BG_CLEAR_COLOR, ENVIRONMENT_BG_COLOR, ENVIRONMENT_BG_SKY, ENVIRONMENT_BG_COLOR_SKY, ENVIRONMENT_BG_CANVAS, ENVIRONMENT_BG_KEEP, ENVIRONMENT_BG_CAMERA_FEED, ENVIRONMENT_BG_MAX
+ */
+enum __pyx_t_7classes_9generated_Environment_ToneMapper {
+  __pyx_e_7classes_9generated_ENVIRONMENT_TONE_MAPPER_LINEAR,
+  __pyx_e_7classes_9generated_ENVIRONMENT_TONE_MAPPER_REINHARDT,
+  __pyx_e_7classes_9generated_ENVIRONMENT_TONE_MAPPER_FILMIC,
+  __pyx_e_7classes_9generated_ENVIRONMENT_TONE_MAPPER_ACES
+};
+typedef enum __pyx_t_7classes_9generated_Environment_ToneMapper __pyx_t_7classes_9generated_Environment_ToneMapper;
+
+/* "classes/generated.pxd":280
+ * ctypedef enum Environment_SSAOBlur :ENVIRONMENT_SSAO_BLUR_DISABLED, ENVIRONMENT_SSAO_BLUR_1x1, ENVIRONMENT_SSAO_BLUR_2x2, ENVIRONMENT_SSAO_BLUR_3x3
+ * ctypedef enum Environment_ToneMapper :ENVIRONMENT_TONE_MAPPER_LINEAR, ENVIRONMENT_TONE_MAPPER_REINHARDT, ENVIRONMENT_TONE_MAPPER_FILMIC, ENVIRONMENT_TONE_MAPPER_ACES
+ * ctypedef enum Environment_GlowBlendMode :ENVIRONMENT_GLOW_BLEND_MODE_ADDITIVE, ENVIRONMENT_GLOW_BLEND_MODE_SCREEN, ENVIRONMENT_GLOW_BLEND_MODE_SOFTLIGHT, ENVIRONMENT_GLOW_BLEND_MODE_REPLACE             # <<<<<<<<<<<<<<
+ * ctypedef enum Environment_BGMode :ENVIRONMENT_BG_CLEAR_COLOR, ENVIRONMENT_BG_COLOR, ENVIRONMENT_BG_SKY, ENVIRONMENT_BG_COLOR_SKY, ENVIRONMENT_BG_CANVAS, ENVIRONMENT_BG_KEEP, ENVIRONMENT_BG_CAMERA_FEED, ENVIRONMENT_BG_MAX
+ * ctypedef enum Environment_SSAOQuality :ENVIRONMENT_SSAO_QUALITY_LOW, ENVIRONMENT_SSAO_QUALITY_MEDIUM, ENVIRONMENT_SSAO_QUALITY_HIGH
+ */
+enum __pyx_t_7classes_9generated_Environment_GlowBlendMode {
+  __pyx_e_7classes_9generated_ENVIRONMENT_GLOW_BLEND_MODE_ADDITIVE,
+  __pyx_e_7classes_9generated_ENVIRONMENT_GLOW_BLEND_MODE_SCREEN,
+  __pyx_e_7classes_9generated_ENVIRONMENT_GLOW_BLEND_MODE_SOFTLIGHT,
+  __pyx_e_7classes_9generated_ENVIRONMENT_GLOW_BLEND_MODE_REPLACE
+};
+typedef enum __pyx_t_7classes_9generated_Environment_GlowBlendMode __pyx_t_7classes_9generated_Environment_GlowBlendMode;
+
+/* "classes/generated.pxd":281
+ * ctypedef enum Environment_ToneMapper :ENVIRONMENT_TONE_MAPPER_LINEAR, ENVIRONMENT_TONE_MAPPER_REINHARDT, ENVIRONMENT_TONE_MAPPER_FILMIC, ENVIRONMENT_TONE_MAPPER_ACES
+ * ctypedef enum Environment_GlowBlendMode :ENVIRONMENT_GLOW_BLEND_MODE_ADDITIVE, ENVIRONMENT_GLOW_BLEND_MODE_SCREEN, ENVIRONMENT_GLOW_BLEND_MODE_SOFTLIGHT, ENVIRONMENT_GLOW_BLEND_MODE_REPLACE
+ * ctypedef enum Environment_BGMode :ENVIRONMENT_BG_CLEAR_COLOR, ENVIRONMENT_BG_COLOR, ENVIRONMENT_BG_SKY, ENVIRONMENT_BG_COLOR_SKY, ENVIRONMENT_BG_CANVAS, ENVIRONMENT_BG_KEEP, ENVIRONMENT_BG_CAMERA_FEED, ENVIRONMENT_BG_MAX             # <<<<<<<<<<<<<<
+ * ctypedef enum Environment_SSAOQuality :ENVIRONMENT_SSAO_QUALITY_LOW, ENVIRONMENT_SSAO_QUALITY_MEDIUM, ENVIRONMENT_SSAO_QUALITY_HIGH
+ * ctypedef enum Environment_DOFBlurQuality :ENVIRONMENT_DOF_BLUR_QUALITY_LOW, ENVIRONMENT_DOF_BLUR_QUALITY_MEDIUM, ENVIRONMENT_DOF_BLUR_QUALITY_HIGH
+ */
+enum __pyx_t_7classes_9generated_Environment_BGMode {
+  __pyx_e_7classes_9generated_ENVIRONMENT_BG_CLEAR_COLOR,
+  __pyx_e_7classes_9generated_ENVIRONMENT_BG_COLOR,
+  __pyx_e_7classes_9generated_ENVIRONMENT_BG_SKY,
+  __pyx_e_7classes_9generated_ENVIRONMENT_BG_COLOR_SKY,
+  __pyx_e_7classes_9generated_ENVIRONMENT_BG_CANVAS,
+  __pyx_e_7classes_9generated_ENVIRONMENT_BG_KEEP,
+  __pyx_e_7classes_9generated_ENVIRONMENT_BG_CAMERA_FEED,
+  __pyx_e_7classes_9generated_ENVIRONMENT_BG_MAX
+};
+typedef enum __pyx_t_7classes_9generated_Environment_BGMode __pyx_t_7classes_9generated_Environment_BGMode;
+
+/* "classes/generated.pxd":282
+ * ctypedef enum Environment_GlowBlendMode :ENVIRONMENT_GLOW_BLEND_MODE_ADDITIVE, ENVIRONMENT_GLOW_BLEND_MODE_SCREEN, ENVIRONMENT_GLOW_BLEND_MODE_SOFTLIGHT, ENVIRONMENT_GLOW_BLEND_MODE_REPLACE
+ * ctypedef enum Environment_BGMode :ENVIRONMENT_BG_CLEAR_COLOR, ENVIRONMENT_BG_COLOR, ENVIRONMENT_BG_SKY, ENVIRONMENT_BG_COLOR_SKY, ENVIRONMENT_BG_CANVAS, ENVIRONMENT_BG_KEEP, ENVIRONMENT_BG_CAMERA_FEED, ENVIRONMENT_BG_MAX
+ * ctypedef enum Environment_SSAOQuality :ENVIRONMENT_SSAO_QUALITY_LOW, ENVIRONMENT_SSAO_QUALITY_MEDIUM, ENVIRONMENT_SSAO_QUALITY_HIGH             # <<<<<<<<<<<<<<
+ * ctypedef enum Environment_DOFBlurQuality :ENVIRONMENT_DOF_BLUR_QUALITY_LOW, ENVIRONMENT_DOF_BLUR_QUALITY_MEDIUM, ENVIRONMENT_DOF_BLUR_QUALITY_HIGH
+ * 
+ */
+enum __pyx_t_7classes_9generated_Environment_SSAOQuality {
+  __pyx_e_7classes_9generated_ENVIRONMENT_SSAO_QUALITY_LOW,
+  __pyx_e_7classes_9generated_ENVIRONMENT_SSAO_QUALITY_MEDIUM,
+  __pyx_e_7classes_9generated_ENVIRONMENT_SSAO_QUALITY_HIGH
+};
+typedef enum __pyx_t_7classes_9generated_Environment_SSAOQuality __pyx_t_7classes_9generated_Environment_SSAOQuality;
+
+/* "classes/generated.pxd":283
+ * ctypedef enum Environment_BGMode :ENVIRONMENT_BG_CLEAR_COLOR, ENVIRONMENT_BG_COLOR, ENVIRONMENT_BG_SKY, ENVIRONMENT_BG_COLOR_SKY, ENVIRONMENT_BG_CANVAS, ENVIRONMENT_BG_KEEP, ENVIRONMENT_BG_CAMERA_FEED, ENVIRONMENT_BG_MAX
+ * ctypedef enum Environment_SSAOQuality :ENVIRONMENT_SSAO_QUALITY_LOW, ENVIRONMENT_SSAO_QUALITY_MEDIUM, ENVIRONMENT_SSAO_QUALITY_HIGH
+ * ctypedef enum Environment_DOFBlurQuality :ENVIRONMENT_DOF_BLUR_QUALITY_LOW, ENVIRONMENT_DOF_BLUR_QUALITY_MEDIUM, ENVIRONMENT_DOF_BLUR_QUALITY_HIGH             # <<<<<<<<<<<<<<
+ * 
+ * 
+ */
+enum __pyx_t_7classes_9generated_Environment_DOFBlurQuality {
+  __pyx_e_7classes_9generated_ENVIRONMENT_DOF_BLUR_QUALITY_LOW,
+  __pyx_e_7classes_9generated_ENVIRONMENT_DOF_BLUR_QUALITY_MEDIUM,
+  __pyx_e_7classes_9generated_ENVIRONMENT_DOF_BLUR_QUALITY_HIGH
+};
+typedef enum __pyx_t_7classes_9generated_Environment_DOFBlurQuality __pyx_t_7classes_9generated_Environment_DOFBlurQuality;
+
+/* "classes/generated.pxd":286
+ * 
+ * 
+ * ctypedef enum FileDialog_Mode :FILEDIALOG_MODE_OPEN_FILE, FILEDIALOG_MODE_OPEN_FILES, FILEDIALOG_MODE_OPEN_DIR, FILEDIALOG_MODE_OPEN_ANY, FILEDIALOG_MODE_SAVE_FILE             # <<<<<<<<<<<<<<
+ * ctypedef enum FileDialog_Access :FILEDIALOG_ACCESS_RESOURCES, FILEDIALOG_ACCESS_USERDATA, FILEDIALOG_ACCESS_FILESYSTEM
+ * 
+ */
+enum __pyx_t_7classes_9generated_FileDialog_Mode {
+  __pyx_e_7classes_9generated_FILEDIALOG_MODE_OPEN_FILE,
+  __pyx_e_7classes_9generated_FILEDIALOG_MODE_OPEN_FILES,
+  __pyx_e_7classes_9generated_FILEDIALOG_MODE_OPEN_DIR,
+  __pyx_e_7classes_9generated_FILEDIALOG_MODE_OPEN_ANY,
+  __pyx_e_7classes_9generated_FILEDIALOG_MODE_SAVE_FILE
+};
+typedef enum __pyx_t_7classes_9generated_FileDialog_Mode __pyx_t_7classes_9generated_FileDialog_Mode;
+
+/* "classes/generated.pxd":287
+ * 
+ * ctypedef enum FileDialog_Mode :FILEDIALOG_MODE_OPEN_FILE, FILEDIALOG_MODE_OPEN_FILES, FILEDIALOG_MODE_OPEN_DIR, FILEDIALOG_MODE_OPEN_ANY, FILEDIALOG_MODE_SAVE_FILE
+ * ctypedef enum FileDialog_Access :FILEDIALOG_ACCESS_RESOURCES, FILEDIALOG_ACCESS_USERDATA, FILEDIALOG_ACCESS_FILESYSTEM             # <<<<<<<<<<<<<<
+ * 
+ * 
+ */
+enum __pyx_t_7classes_9generated_FileDialog_Access {
+  __pyx_e_7classes_9generated_FILEDIALOG_ACCESS_RESOURCES,
+  __pyx_e_7classes_9generated_FILEDIALOG_ACCESS_USERDATA,
+  __pyx_e_7classes_9generated_FILEDIALOG_ACCESS_FILESYSTEM
+};
+typedef enum __pyx_t_7classes_9generated_FileDialog_Access __pyx_t_7classes_9generated_FileDialog_Access;
+
+/* "classes/generated.pxd":295
+ * 
+ * 
+ * ctypedef enum GIProbe_Subdiv :GIPROBE_SUBDIV_64, GIPROBE_SUBDIV_128, GIPROBE_SUBDIV_256, GIPROBE_SUBDIV_512, GIPROBE_SUBDIV_MAX             # <<<<<<<<<<<<<<
+ * 
+ * 
+ */
+enum __pyx_t_7classes_9generated_GIProbe_Subdiv {
+  __pyx_e_7classes_9generated_GIPROBE_SUBDIV_64,
+  __pyx_e_7classes_9generated_GIPROBE_SUBDIV_128,
+  __pyx_e_7classes_9generated_GIPROBE_SUBDIV_256,
+  __pyx_e_7classes_9generated_GIPROBE_SUBDIV_512,
+  __pyx_e_7classes_9generated_GIPROBE_SUBDIV_MAX
+};
+typedef enum __pyx_t_7classes_9generated_GIProbe_Subdiv __pyx_t_7classes_9generated_GIProbe_Subdiv;
+
+/* "classes/generated.pxd":298
+ * 
+ * 
+ * ctypedef enum Generic6DOFJoint_Param :GENERIC6DOFJOINT_PARAM_LINEAR_LOWER_LIMIT, GENERIC6DOFJOINT_PARAM_LINEAR_UPPER_LIMIT, GENERIC6DOFJOINT_PARAM_LINEAR_LIMIT_SOFTNESS, GENERIC6DOFJOINT_PARAM_LINEAR_RESTITUTION, GENERIC6DOFJOINT_PARAM_LINEAR_DAMPING, GENERIC6DOFJOINT_PARAM_LINEAR_MOTOR_TARGET_VELOCITY, GENERIC6DOFJOINT_PARAM_LINEAR_MOTOR_FORCE_LIMIT, GENERIC6DOFJOINT_PARAM_ANGULAR_LOWER_LIMIT, GENERIC6DOFJOINT_PARAM_ANGULAR_UPPER_LIMIT, GENERIC6DOFJOINT_PARAM_ANGULAR_LIMIT_SOFTNESS, GENERIC6DOFJOINT_PARAM_ANGULAR_DAMPING, GENERIC6DOFJOINT_PARAM_ANGULAR_RESTITUTION, GENERIC6DOFJOINT_PARAM_ANGULAR_FORCE_LIMIT, GENERIC6DOFJOINT_PARAM_ANGULAR_ERP, GENERIC6DOFJOINT_PARAM_ANGULAR_MOTOR_TARGET_VELOCITY, GENERIC6DOFJOINT_PARAM_ANGULAR_MOTOR_FORCE_LIMIT, GENERIC6DOFJOINT_PARAM_MAX             # <<<<<<<<<<<<<<
+ * ctypedef enum Generic6DOFJoint_Flag :GENERIC6DOFJOINT_FLAG_ENABLE_LINEAR_LIMIT, GENERIC6DOFJOINT_FLAG_ENABLE_ANGULAR_LIMIT, GENERIC6DOFJOINT_FLAG_ENABLE_ANGULAR_SPRING, GENERIC6DOFJOINT_FLAG_ENABLE_LINEAR_SPRING, GENERIC6DOFJOINT_FLAG_ENABLE_MOTOR, GENERIC6DOFJOINT_FLAG_ENABLE_LINEAR_MOTOR, GENERIC6DOFJOINT_FLAG_MAX
+ * 
+ */
+enum __pyx_t_7classes_9generated_Generic6DOFJoint_Param {
+  __pyx_e_7classes_9generated_GENERIC6DOFJOINT_PARAM_LINEAR_LOWER_LIMIT,
+  __pyx_e_7classes_9generated_GENERIC6DOFJOINT_PARAM_LINEAR_UPPER_LIMIT,
+  __pyx_e_7classes_9generated_GENERIC6DOFJOINT_PARAM_LINEAR_LIMIT_SOFTNESS,
+  __pyx_e_7classes_9generated_GENERIC6DOFJOINT_PARAM_LINEAR_RESTITUTION,
+  __pyx_e_7classes_9generated_GENERIC6DOFJOINT_PARAM_LINEAR_DAMPING,
+  __pyx_e_7classes_9generated_GENERIC6DOFJOINT_PARAM_LINEAR_MOTOR_TARGET_VELOCITY,
+  __pyx_e_7classes_9generated_GENERIC6DOFJOINT_PARAM_LINEAR_MOTOR_FORCE_LIMIT,
+  __pyx_e_7classes_9generated_GENERIC6DOFJOINT_PARAM_ANGULAR_LOWER_LIMIT,
+  __pyx_e_7classes_9generated_GENERIC6DOFJOINT_PARAM_ANGULAR_UPPER_LIMIT,
+  __pyx_e_7classes_9generated_GENERIC6DOFJOINT_PARAM_ANGULAR_LIMIT_SOFTNESS,
+  __pyx_e_7classes_9generated_GENERIC6DOFJOINT_PARAM_ANGULAR_DAMPING,
+  __pyx_e_7classes_9generated_GENERIC6DOFJOINT_PARAM_ANGULAR_RESTITUTION,
+  __pyx_e_7classes_9generated_GENERIC6DOFJOINT_PARAM_ANGULAR_FORCE_LIMIT,
+  __pyx_e_7classes_9generated_GENERIC6DOFJOINT_PARAM_ANGULAR_ERP,
+  __pyx_e_7classes_9generated_GENERIC6DOFJOINT_PARAM_ANGULAR_MOTOR_TARGET_VELOCITY,
+  __pyx_e_7classes_9generated_GENERIC6DOFJOINT_PARAM_ANGULAR_MOTOR_FORCE_LIMIT,
+  __pyx_e_7classes_9generated_GENERIC6DOFJOINT_PARAM_MAX
+};
+typedef enum __pyx_t_7classes_9generated_Generic6DOFJoint_Param __pyx_t_7classes_9generated_Generic6DOFJoint_Param;
+
+/* "classes/generated.pxd":299
+ * 
+ * ctypedef enum Generic6DOFJoint_Param :GENERIC6DOFJOINT_PARAM_LINEAR_LOWER_LIMIT, GENERIC6DOFJOINT_PARAM_LINEAR_UPPER_LIMIT, GENERIC6DOFJOINT_PARAM_LINEAR_LIMIT_SOFTNESS, GENERIC6DOFJOINT_PARAM_LINEAR_RESTITUTION, GENERIC6DOFJOINT_PARAM_LINEAR_DAMPING, GENERIC6DOFJOINT_PARAM_LINEAR_MOTOR_TARGET_VELOCITY, GENERIC6DOFJOINT_PARAM_LINEAR_MOTOR_FORCE_LIMIT, GENERIC6DOFJOINT_PARAM_ANGULAR_LOWER_LIMIT, GENERIC6DOFJOINT_PARAM_ANGULAR_UPPER_LIMIT, GENERIC6DOFJOINT_PARAM_ANGULAR_LIMIT_SOFTNESS, GENERIC6DOFJOINT_PARAM_ANGULAR_DAMPING, GENERIC6DOFJOINT_PARAM_ANGULAR_RESTITUTION, GENERIC6DOFJOINT_PARAM_ANGULAR_FORCE_LIMIT, GENERIC6DOFJOINT_PARAM_ANGULAR_ERP, GENERIC6DOFJOINT_PARAM_ANGULAR_MOTOR_TARGET_VELOCITY, GENERIC6DOFJOINT_PARAM_ANGULAR_MOTOR_FORCE_LIMIT, GENERIC6DOFJOINT_PARAM_MAX
+ * ctypedef enum Generic6DOFJoint_Flag :GENERIC6DOFJOINT_FLAG_ENABLE_LINEAR_LIMIT, GENERIC6DOFJOINT_FLAG_ENABLE_ANGULAR_LIMIT, GENERIC6DOFJOINT_FLAG_ENABLE_ANGULAR_SPRING, GENERIC6DOFJOINT_FLAG_ENABLE_LINEAR_SPRING, GENERIC6DOFJOINT_FLAG_ENABLE_MOTOR, GENERIC6DOFJOINT_FLAG_ENABLE_LINEAR_MOTOR, GENERIC6DOFJOINT_FLAG_MAX             # <<<<<<<<<<<<<<
+ * 
+ * ctypedef enum GeometryInstance_Flags :GEOMETRYINSTANCE_FLAG_USE_BAKED_LIGHT, GEOMETRYINSTANCE_FLAG_DRAW_NEXT_FRAME_IF_VISIBLE, GEOMETRYINSTANCE_FLAG_MAX
+ */
+enum __pyx_t_7classes_9generated_Generic6DOFJoint_Flag {
+  __pyx_e_7classes_9generated_GENERIC6DOFJOINT_FLAG_ENABLE_LINEAR_LIMIT,
+  __pyx_e_7classes_9generated_GENERIC6DOFJOINT_FLAG_ENABLE_ANGULAR_LIMIT,
+  __pyx_e_7classes_9generated_GENERIC6DOFJOINT_FLAG_ENABLE_ANGULAR_SPRING,
+  __pyx_e_7classes_9generated_GENERIC6DOFJOINT_FLAG_ENABLE_LINEAR_SPRING,
+  __pyx_e_7classes_9generated_GENERIC6DOFJOINT_FLAG_ENABLE_MOTOR,
+  __pyx_e_7classes_9generated_GENERIC6DOFJOINT_FLAG_ENABLE_LINEAR_MOTOR,
+  __pyx_e_7classes_9generated_GENERIC6DOFJOINT_FLAG_MAX
+};
+typedef enum __pyx_t_7classes_9generated_Generic6DOFJoint_Flag __pyx_t_7classes_9generated_Generic6DOFJoint_Flag;
+
+/* "classes/generated.pxd":301
+ * ctypedef enum Generic6DOFJoint_Flag :GENERIC6DOFJOINT_FLAG_ENABLE_LINEAR_LIMIT, GENERIC6DOFJOINT_FLAG_ENABLE_ANGULAR_LIMIT, GENERIC6DOFJOINT_FLAG_ENABLE_ANGULAR_SPRING, GENERIC6DOFJOINT_FLAG_ENABLE_LINEAR_SPRING, GENERIC6DOFJOINT_FLAG_ENABLE_MOTOR, GENERIC6DOFJOINT_FLAG_ENABLE_LINEAR_MOTOR, GENERIC6DOFJOINT_FLAG_MAX
+ * 
+ * ctypedef enum GeometryInstance_Flags :GEOMETRYINSTANCE_FLAG_USE_BAKED_LIGHT, GEOMETRYINSTANCE_FLAG_DRAW_NEXT_FRAME_IF_VISIBLE, GEOMETRYINSTANCE_FLAG_MAX             # <<<<<<<<<<<<<<
+ * ctypedef enum GeometryInstance_ShadowCastingSetting :GEOMETRYINSTANCE_SHADOW_CASTING_SETTING_OFF, GEOMETRYINSTANCE_SHADOW_CASTING_SETTING_ON, GEOMETRYINSTANCE_SHADOW_CASTING_SETTING_DOUBLE_SIDED, GEOMETRYINSTANCE_SHADOW_CASTING_SETTING_SHADOWS_ONLY
+ * 
+ */
+enum __pyx_t_7classes_9generated_GeometryInstance_Flags {
+  __pyx_e_7classes_9generated_GEOMETRYINSTANCE_FLAG_USE_BAKED_LIGHT,
+  __pyx_e_7classes_9generated_GEOMETRYINSTANCE_FLAG_DRAW_NEXT_FRAME_IF_VISIBLE,
+  __pyx_e_7classes_9generated_GEOMETRYINSTANCE_FLAG_MAX
+};
+typedef enum __pyx_t_7classes_9generated_GeometryInstance_Flags __pyx_t_7classes_9generated_GeometryInstance_Flags;
+
+/* "classes/generated.pxd":302
+ * 
+ * ctypedef enum GeometryInstance_Flags :GEOMETRYINSTANCE_FLAG_USE_BAKED_LIGHT, GEOMETRYINSTANCE_FLAG_DRAW_NEXT_FRAME_IF_VISIBLE, GEOMETRYINSTANCE_FLAG_MAX
+ * ctypedef enum GeometryInstance_ShadowCastingSetting :GEOMETRYINSTANCE_SHADOW_CASTING_SETTING_OFF, GEOMETRYINSTANCE_SHADOW_CASTING_SETTING_ON, GEOMETRYINSTANCE_SHADOW_CASTING_SETTING_DOUBLE_SIDED, GEOMETRYINSTANCE_SHADOW_CASTING_SETTING_SHADOWS_ONLY             # <<<<<<<<<<<<<<
+ * 
+ * 
+ */
+enum __pyx_t_7classes_9generated_GeometryInstance_ShadowCastingSetting {
+  __pyx_e_7classes_9generated_GEOMETRYINSTANCE_SHADOW_CASTING_SETTING_OFF,
+  __pyx_e_7classes_9generated_GEOMETRYINSTANCE_SHADOW_CASTING_SETTING_ON,
+  __pyx_e_7classes_9generated_GEOMETRYINSTANCE_SHADOW_CASTING_SETTING_DOUBLE_SIDED,
+  __pyx_e_7classes_9generated_GEOMETRYINSTANCE_SHADOW_CASTING_SETTING_SHADOWS_ONLY
+};
+typedef enum __pyx_t_7classes_9generated_GeometryInstance_ShadowCastingSetting __pyx_t_7classes_9generated_GeometryInstance_ShadowCastingSetting;
+
+/* "classes/generated.pxd":307
+ * 
+ * 
+ * ctypedef enum GraphNode_Overlay :GRAPHNODE_OVERLAY_DISABLED, GRAPHNODE_OVERLAY_BREAKPOINT, GRAPHNODE_OVERLAY_POSITION             # <<<<<<<<<<<<<<
+ * 
+ * 
+ */
+enum __pyx_t_7classes_9generated_GraphNode_Overlay {
+  __pyx_e_7classes_9generated_GRAPHNODE_OVERLAY_DISABLED,
+  __pyx_e_7classes_9generated_GRAPHNODE_OVERLAY_BREAKPOINT,
+  __pyx_e_7classes_9generated_GRAPHNODE_OVERLAY_POSITION
+};
+typedef enum __pyx_t_7classes_9generated_GraphNode_Overlay __pyx_t_7classes_9generated_GraphNode_Overlay;
+
+/* "classes/generated.pxd":317
+ * 
+ * 
+ * ctypedef enum HTTPClient_Status :HTTPCLIENT_STATUS_DISCONNECTED, HTTPCLIENT_STATUS_RESOLVING, HTTPCLIENT_STATUS_CANT_RESOLVE, HTTPCLIENT_STATUS_CONNECTING, HTTPCLIENT_STATUS_CANT_CONNECT, HTTPCLIENT_STATUS_CONNECTED, HTTPCLIENT_STATUS_REQUESTING, HTTPCLIENT_STATUS_BODY, HTTPCLIENT_STATUS_CONNECTION_ERROR, HTTPCLIENT_STATUS_SSL_HANDSHAKE_ERROR             # <<<<<<<<<<<<<<
+ * ctypedef enum HTTPClient_Method :HTTPCLIENT_METHOD_GET, HTTPCLIENT_METHOD_HEAD, HTTPCLIENT_METHOD_POST, HTTPCLIENT_METHOD_PUT, HTTPCLIENT_METHOD_DELETE, HTTPCLIENT_METHOD_OPTIONS, HTTPCLIENT_METHOD_TRACE, HTTPCLIENT_METHOD_CONNECT, HTTPCLIENT_METHOD_PATCH, HTTPCLIENT_METHOD_MAX
+ * ctypedef enum HTTPClient_ResponseCode :HTTPCLIENT_RESPONSE_CONTINUE, HTTPCLIENT_RESPONSE_SWITCHING_PROTOCOLS, HTTPCLIENT_RESPONSE_PROCESSING, HTTPCLIENT_RESPONSE_OK, HTTPCLIENT_RESPONSE_CREATED, HTTPCLIENT_RESPONSE_ACCEPTED, HTTPCLIENT_RESPONSE_NON_AUTHORITATIVE_INFORMATION, HTTPCLIENT_RESPONSE_NO_CONTENT, HTTPCLIENT_RESPONSE_RESET_CONTENT, HTTPCLIENT_RESPONSE_PARTIAL_CONTENT, HTTPCLIENT_RESPONSE_MULTI_STATUS, HTTPCLIENT_RESPONSE_ALREADY_REPORTED, HTTPCLIENT_RESPONSE_IM_USED, HTTPCLIENT_RESPONSE_MULTIPLE_CHOICES, HTTPCLIENT_RESPONSE_MOVED_PERMANENTLY, HTTPCLIENT_RESPONSE_FOUND, HTTPCLIENT_RESPONSE_SEE_OTHER, HTTPCLIENT_RESPONSE_NOT_MODIFIED, HTTPCLIENT_RESPONSE_USE_PROXY, HTTPCLIENT_RESPONSE_SWITCH_PROXY, HTTPCLIENT_RESPONSE_TEMPORARY_REDIRECT, HTTPCLIENT_RESPONSE_PERMANENT_REDIRECT, HTTPCLIENT_RESPONSE_BAD_REQUEST, HTTPCLIENT_RESPONSE_UNAUTHORIZED, HTTPCLIENT_RESPONSE_PAYMENT_REQUIRED, HTTPCLIENT_RESPONSE_FORBIDDEN, HTTPCLIENT_RESPONSE_NOT_FOUND, HTTPCLIENT_RESPONSE_METHOD_NOT_ALLOWED, HTTPCLIENT_RESPONSE_NOT_ACCEPTABLE, HTTPCLIENT_RESPONSE_PROXY_AUTHENTICATION_REQUIRED, HTTPCLIENT_RESPONSE_REQUEST_TIMEOUT, HTTPCLIENT_RESPONSE_CONFLICT, HTTPCLIENT_RESPONSE_GONE, HTTPCLIENT_RESPONSE_LENGTH_REQUIRED, HTTPCLIENT_RESPONSE_PRECONDITION_FAILED, HTTPCLIENT_RESPONSE_REQUEST_ENTITY_TOO_LARGE, HTTPCLIENT_RESPONSE_REQUEST_URI_TOO_LONG, HTTPCLIENT_RESPONSE_UNSUPPORTED_MEDIA_TYPE, HTTPCLIENT_RESPONSE_REQUESTED_RANGE_NOT_SATISFIABLE, HTTPCLIENT_RESPONSE_EXPECTATION_FAILED, HTTPCLIENT_RESPONSE_IM_A_TEAPOT, HTTPCLIENT_RESPONSE_MISDIRECTED_REQUEST, HTTPCLIENT_RESPONSE_UNPROCESSABLE_ENTITY, HTTPCLIENT_RESPONSE_LOCKED, HTTPCLIENT_RESPONSE_FAILED_DEPENDENCY, HTTPCLIENT_RESPONSE_UPGRADE_REQUIRED, HTTPCLIENT_RESPONSE_PRECONDITION_REQUIRED, HTTPCLIENT_RESPONSE_TOO_MANY_REQUESTS, HTTPCLIENT_RESPONSE_REQUEST_HEADER_FIELDS_TOO_LARGE, HTTPCLIENT_RESPONSE_UNAVAILABLE_FOR_LEGAL_REASONS, HTTPCLIENT_RESPONSE_INTERNAL_SERVER_ERROR, HTTPCLIENT_RESPONSE_NOT_IMPLEMENTED, HTTPCLIENT_RESPONSE_BAD_GATEWAY, HTTPCLIENT_RESPONSE_SERVICE_UNAVAILABLE, HTTPCLIENT_RESPONSE_GATEWAY_TIMEOUT, HTTPCLIENT_RESPONSE_HTTP_VERSION_NOT_SUPPORTED, HTTPCLIENT_RESPONSE_VARIANT_ALSO_NEGOTIATES, HTTPCLIENT_RESPONSE_INSUFFICIENT_STORAGE, HTTPCLIENT_RESPONSE_LOOP_DETECTED, HTTPCLIENT_RESPONSE_NOT_EXTENDED, HTTPCLIENT_RESPONSE_NETWORK_AUTH_REQUIRED
+ */
+enum __pyx_t_7classes_9generated_HTTPClient_Status {
+  __pyx_e_7classes_9generated_HTTPCLIENT_STATUS_DISCONNECTED,
+  __pyx_e_7classes_9generated_HTTPCLIENT_STATUS_RESOLVING,
+  __pyx_e_7classes_9generated_HTTPCLIENT_STATUS_CANT_RESOLVE,
+  __pyx_e_7classes_9generated_HTTPCLIENT_STATUS_CONNECTING,
+  __pyx_e_7classes_9generated_HTTPCLIENT_STATUS_CANT_CONNECT,
+  __pyx_e_7classes_9generated_HTTPCLIENT_STATUS_CONNECTED,
+  __pyx_e_7classes_9generated_HTTPCLIENT_STATUS_REQUESTING,
+  __pyx_e_7classes_9generated_HTTPCLIENT_STATUS_BODY,
+  __pyx_e_7classes_9generated_HTTPCLIENT_STATUS_CONNECTION_ERROR,
+  __pyx_e_7classes_9generated_HTTPCLIENT_STATUS_SSL_HANDSHAKE_ERROR
+};
+typedef enum __pyx_t_7classes_9generated_HTTPClient_Status __pyx_t_7classes_9generated_HTTPClient_Status;
+
+/* "classes/generated.pxd":318
+ * 
+ * ctypedef enum HTTPClient_Status :HTTPCLIENT_STATUS_DISCONNECTED, HTTPCLIENT_STATUS_RESOLVING, HTTPCLIENT_STATUS_CANT_RESOLVE, HTTPCLIENT_STATUS_CONNECTING, HTTPCLIENT_STATUS_CANT_CONNECT, HTTPCLIENT_STATUS_CONNECTED, HTTPCLIENT_STATUS_REQUESTING, HTTPCLIENT_STATUS_BODY, HTTPCLIENT_STATUS_CONNECTION_ERROR, HTTPCLIENT_STATUS_SSL_HANDSHAKE_ERROR
+ * ctypedef enum HTTPClient_Method :HTTPCLIENT_METHOD_GET, HTTPCLIENT_METHOD_HEAD, HTTPCLIENT_METHOD_POST, HTTPCLIENT_METHOD_PUT, HTTPCLIENT_METHOD_DELETE, HTTPCLIENT_METHOD_OPTIONS, HTTPCLIENT_METHOD_TRACE, HTTPCLIENT_METHOD_CONNECT, HTTPCLIENT_METHOD_PATCH, HTTPCLIENT_METHOD_MAX             # <<<<<<<<<<<<<<
+ * ctypedef enum HTTPClient_ResponseCode :HTTPCLIENT_RESPONSE_CONTINUE, HTTPCLIENT_RESPONSE_SWITCHING_PROTOCOLS, HTTPCLIENT_RESPONSE_PROCESSING, HTTPCLIENT_RESPONSE_OK, HTTPCLIENT_RESPONSE_CREATED, HTTPCLIENT_RESPONSE_ACCEPTED, HTTPCLIENT_RESPONSE_NON_AUTHORITATIVE_INFORMATION, HTTPCLIENT_RESPONSE_NO_CONTENT, HTTPCLIENT_RESPONSE_RESET_CONTENT, HTTPCLIENT_RESPONSE_PARTIAL_CONTENT, HTTPCLIENT_RESPONSE_MULTI_STATUS, HTTPCLIENT_RESPONSE_ALREADY_REPORTED, HTTPCLIENT_RESPONSE_IM_USED, HTTPCLIENT_RESPONSE_MULTIPLE_CHOICES, HTTPCLIENT_RESPONSE_MOVED_PERMANENTLY, HTTPCLIENT_RESPONSE_FOUND, HTTPCLIENT_RESPONSE_SEE_OTHER, HTTPCLIENT_RESPONSE_NOT_MODIFIED, HTTPCLIENT_RESPONSE_USE_PROXY, HTTPCLIENT_RESPONSE_SWITCH_PROXY, HTTPCLIENT_RESPONSE_TEMPORARY_REDIRECT, HTTPCLIENT_RESPONSE_PERMANENT_REDIRECT, HTTPCLIENT_RESPONSE_BAD_REQUEST, HTTPCLIENT_RESPONSE_UNAUTHORIZED, HTTPCLIENT_RESPONSE_PAYMENT_REQUIRED, HTTPCLIENT_RESPONSE_FORBIDDEN, HTTPCLIENT_RESPONSE_NOT_FOUND, HTTPCLIENT_RESPONSE_METHOD_NOT_ALLOWED, HTTPCLIENT_RESPONSE_NOT_ACCEPTABLE, HTTPCLIENT_RESPONSE_PROXY_AUTHENTICATION_REQUIRED, HTTPCLIENT_RESPONSE_REQUEST_TIMEOUT, HTTPCLIENT_RESPONSE_CONFLICT, HTTPCLIENT_RESPONSE_GONE, HTTPCLIENT_RESPONSE_LENGTH_REQUIRED, HTTPCLIENT_RESPONSE_PRECONDITION_FAILED, HTTPCLIENT_RESPONSE_REQUEST_ENTITY_TOO_LARGE, HTTPCLIENT_RESPONSE_REQUEST_URI_TOO_LONG, HTTPCLIENT_RESPONSE_UNSUPPORTED_MEDIA_TYPE, HTTPCLIENT_RESPONSE_REQUESTED_RANGE_NOT_SATISFIABLE, HTTPCLIENT_RESPONSE_EXPECTATION_FAILED, HTTPCLIENT_RESPONSE_IM_A_TEAPOT, HTTPCLIENT_RESPONSE_MISDIRECTED_REQUEST, HTTPCLIENT_RESPONSE_UNPROCESSABLE_ENTITY, HTTPCLIENT_RESPONSE_LOCKED, HTTPCLIENT_RESPONSE_FAILED_DEPENDENCY, HTTPCLIENT_RESPONSE_UPGRADE_REQUIRED, HTTPCLIENT_RESPONSE_PRECONDITION_REQUIRED, HTTPCLIENT_RESPONSE_TOO_MANY_REQUESTS, HTTPCLIENT_RESPONSE_REQUEST_HEADER_FIELDS_TOO_LARGE, HTTPCLIENT_RESPONSE_UNAVAILABLE_FOR_LEGAL_REASONS, HTTPCLIENT_RESPONSE_INTERNAL_SERVER_ERROR, HTTPCLIENT_RESPONSE_NOT_IMPLEMENTED, HTTPCLIENT_RESPONSE_BAD_GATEWAY, HTTPCLIENT_RESPONSE_SERVICE_UNAVAILABLE, HTTPCLIENT_RESPONSE_GATEWAY_TIMEOUT, HTTPCLIENT_RESPONSE_HTTP_VERSION_NOT_SUPPORTED, HTTPCLIENT_RESPONSE_VARIANT_ALSO_NEGOTIATES, HTTPCLIENT_RESPONSE_INSUFFICIENT_STORAGE, HTTPCLIENT_RESPONSE_LOOP_DETECTED, HTTPCLIENT_RESPONSE_NOT_EXTENDED, HTTPCLIENT_RESPONSE_NETWORK_AUTH_REQUIRED
+ * 
+ */
+enum __pyx_t_7classes_9generated_HTTPClient_Method {
+  __pyx_e_7classes_9generated_HTTPCLIENT_METHOD_GET,
+  __pyx_e_7classes_9generated_HTTPCLIENT_METHOD_HEAD,
+  __pyx_e_7classes_9generated_HTTPCLIENT_METHOD_POST,
+  __pyx_e_7classes_9generated_HTTPCLIENT_METHOD_PUT,
+  __pyx_e_7classes_9generated_HTTPCLIENT_METHOD_DELETE,
+  __pyx_e_7classes_9generated_HTTPCLIENT_METHOD_OPTIONS,
+  __pyx_e_7classes_9generated_HTTPCLIENT_METHOD_TRACE,
+  __pyx_e_7classes_9generated_HTTPCLIENT_METHOD_CONNECT,
+  __pyx_e_7classes_9generated_HTTPCLIENT_METHOD_PATCH,
+  __pyx_e_7classes_9generated_HTTPCLIENT_METHOD_MAX
+};
+typedef enum __pyx_t_7classes_9generated_HTTPClient_Method __pyx_t_7classes_9generated_HTTPClient_Method;
+
+/* "classes/generated.pxd":319
+ * ctypedef enum HTTPClient_Status :HTTPCLIENT_STATUS_DISCONNECTED, HTTPCLIENT_STATUS_RESOLVING, HTTPCLIENT_STATUS_CANT_RESOLVE, HTTPCLIENT_STATUS_CONNECTING, HTTPCLIENT_STATUS_CANT_CONNECT, HTTPCLIENT_STATUS_CONNECTED, HTTPCLIENT_STATUS_REQUESTING, HTTPCLIENT_STATUS_BODY, HTTPCLIENT_STATUS_CONNECTION_ERROR, HTTPCLIENT_STATUS_SSL_HANDSHAKE_ERROR
+ * ctypedef enum HTTPClient_Method :HTTPCLIENT_METHOD_GET, HTTPCLIENT_METHOD_HEAD, HTTPCLIENT_METHOD_POST, HTTPCLIENT_METHOD_PUT, HTTPCLIENT_METHOD_DELETE, HTTPCLIENT_METHOD_OPTIONS, HTTPCLIENT_METHOD_TRACE, HTTPCLIENT_METHOD_CONNECT, HTTPCLIENT_METHOD_PATCH, HTTPCLIENT_METHOD_MAX
+ * ctypedef enum HTTPClient_ResponseCode :HTTPCLIENT_RESPONSE_CONTINUE, HTTPCLIENT_RESPONSE_SWITCHING_PROTOCOLS, HTTPCLIENT_RESPONSE_PROCESSING, HTTPCLIENT_RESPONSE_OK, HTTPCLIENT_RESPONSE_CREATED, HTTPCLIENT_RESPONSE_ACCEPTED, HTTPCLIENT_RESPONSE_NON_AUTHORITATIVE_INFORMATION, HTTPCLIENT_RESPONSE_NO_CONTENT, HTTPCLIENT_RESPONSE_RESET_CONTENT, HTTPCLIENT_RESPONSE_PARTIAL_CONTENT, HTTPCLIENT_RESPONSE_MULTI_STATUS, HTTPCLIENT_RESPONSE_ALREADY_REPORTED, HTTPCLIENT_RESPONSE_IM_USED, HTTPCLIENT_RESPONSE_MULTIPLE_CHOICES, HTTPCLIENT_RESPONSE_MOVED_PERMANENTLY, HTTPCLIENT_RESPONSE_FOUND, HTTPCLIENT_RESPONSE_SEE_OTHER, HTTPCLIENT_RESPONSE_NOT_MODIFIED, HTTPCLIENT_RESPONSE_USE_PROXY, HTTPCLIENT_RESPONSE_SWITCH_PROXY, HTTPCLIENT_RESPONSE_TEMPORARY_REDIRECT, HTTPCLIENT_RESPONSE_PERMANENT_REDIRECT, HTTPCLIENT_RESPONSE_BAD_REQUEST, HTTPCLIENT_RESPONSE_UNAUTHORIZED, HTTPCLIENT_RESPONSE_PAYMENT_REQUIRED, HTTPCLIENT_RESPONSE_FORBIDDEN, HTTPCLIENT_RESPONSE_NOT_FOUND, HTTPCLIENT_RESPONSE_METHOD_NOT_ALLOWED, HTTPCLIENT_RESPONSE_NOT_ACCEPTABLE, HTTPCLIENT_RESPONSE_PROXY_AUTHENTICATION_REQUIRED, HTTPCLIENT_RESPONSE_REQUEST_TIMEOUT, HTTPCLIENT_RESPONSE_CONFLICT, HTTPCLIENT_RESPONSE_GONE, HTTPCLIENT_RESPONSE_LENGTH_REQUIRED, HTTPCLIENT_RESPONSE_PRECONDITION_FAILED, HTTPCLIENT_RESPONSE_REQUEST_ENTITY_TOO_LARGE, HTTPCLIENT_RESPONSE_REQUEST_URI_TOO_LONG, HTTPCLIENT_RESPONSE_UNSUPPORTED_MEDIA_TYPE, HTTPCLIENT_RESPONSE_REQUESTED_RANGE_NOT_SATISFIABLE, HTTPCLIENT_RESPONSE_EXPECTATION_FAILED, HTTPCLIENT_RESPONSE_IM_A_TEAPOT, HTTPCLIENT_RESPONSE_MISDIRECTED_REQUEST, HTTPCLIENT_RESPONSE_UNPROCESSABLE_ENTITY, HTTPCLIENT_RESPONSE_LOCKED, HTTPCLIENT_RESPONSE_FAILED_DEPENDENCY, HTTPCLIENT_RESPONSE_UPGRADE_REQUIRED, HTTPCLIENT_RESPONSE_PRECONDITION_REQUIRED, HTTPCLIENT_RESPONSE_TOO_MANY_REQUESTS, HTTPCLIENT_RESPONSE_REQUEST_HEADER_FIELDS_TOO_LARGE, HTTPCLIENT_RESPONSE_UNAVAILABLE_FOR_LEGAL_REASONS, HTTPCLIENT_RESPONSE_INTERNAL_SERVER_ERROR, HTTPCLIENT_RESPONSE_NOT_IMPLEMENTED, HTTPCLIENT_RESPONSE_BAD_GATEWAY, HTTPCLIENT_RESPONSE_SERVICE_UNAVAILABLE, HTTPCLIENT_RESPONSE_GATEWAY_TIMEOUT, HTTPCLIENT_RESPONSE_HTTP_VERSION_NOT_SUPPORTED, HTTPCLIENT_RESPONSE_VARIANT_ALSO_NEGOTIATES, HTTPCLIENT_RESPONSE_INSUFFICIENT_STORAGE, HTTPCLIENT_RESPONSE_LOOP_DETECTED, HTTPCLIENT_RESPONSE_NOT_EXTENDED, HTTPCLIENT_RESPONSE_NETWORK_AUTH_REQUIRED             # <<<<<<<<<<<<<<
+ * 
+ * ctypedef enum HTTPRequest_Result :HTTPREQUEST_RESULT_SUCCESS, HTTPREQUEST_RESULT_CHUNKED_BODY_SIZE_MISMATCH, HTTPREQUEST_RESULT_CANT_CONNECT, HTTPREQUEST_RESULT_CANT_RESOLVE, HTTPREQUEST_RESULT_CONNECTION_ERROR, HTTPREQUEST_RESULT_SSL_HANDSHAKE_ERROR, HTTPREQUEST_RESULT_NO_RESPONSE, HTTPREQUEST_RESULT_BODY_SIZE_LIMIT_EXCEEDED, HTTPREQUEST_RESULT_REQUEST_FAILED, HTTPREQUEST_RESULT_DOWNLOAD_FILE_CANT_OPEN, HTTPREQUEST_RESULT_DOWNLOAD_FILE_WRITE_ERROR, HTTPREQUEST_RESULT_REDIRECT_LIMIT_REACHED, HTTPREQUEST_RESULT_TIMEOUT
+ */
+enum __pyx_t_7classes_9generated_HTTPClient_ResponseCode {
+  __pyx_e_7classes_9generated_HTTPCLIENT_RESPONSE_CONTINUE,
+  __pyx_e_7classes_9generated_HTTPCLIENT_RESPONSE_SWITCHING_PROTOCOLS,
+  __pyx_e_7classes_9generated_HTTPCLIENT_RESPONSE_PROCESSING,
+  __pyx_e_7classes_9generated_HTTPCLIENT_RESPONSE_OK,
+  __pyx_e_7classes_9generated_HTTPCLIENT_RESPONSE_CREATED,
+  __pyx_e_7classes_9generated_HTTPCLIENT_RESPONSE_ACCEPTED,
+  __pyx_e_7classes_9generated_HTTPCLIENT_RESPONSE_NON_AUTHORITATIVE_INFORMATION,
+  __pyx_e_7classes_9generated_HTTPCLIENT_RESPONSE_NO_CONTENT,
+  __pyx_e_7classes_9generated_HTTPCLIENT_RESPONSE_RESET_CONTENT,
+  __pyx_e_7classes_9generated_HTTPCLIENT_RESPONSE_PARTIAL_CONTENT,
+  __pyx_e_7classes_9generated_HTTPCLIENT_RESPONSE_MULTI_STATUS,
+  __pyx_e_7classes_9generated_HTTPCLIENT_RESPONSE_ALREADY_REPORTED,
+  __pyx_e_7classes_9generated_HTTPCLIENT_RESPONSE_IM_USED,
+  __pyx_e_7classes_9generated_HTTPCLIENT_RESPONSE_MULTIPLE_CHOICES,
+  __pyx_e_7classes_9generated_HTTPCLIENT_RESPONSE_MOVED_PERMANENTLY,
+  __pyx_e_7classes_9generated_HTTPCLIENT_RESPONSE_FOUND,
+  __pyx_e_7classes_9generated_HTTPCLIENT_RESPONSE_SEE_OTHER,
+  __pyx_e_7classes_9generated_HTTPCLIENT_RESPONSE_NOT_MODIFIED,
+  __pyx_e_7classes_9generated_HTTPCLIENT_RESPONSE_USE_PROXY,
+  __pyx_e_7classes_9generated_HTTPCLIENT_RESPONSE_SWITCH_PROXY,
+  __pyx_e_7classes_9generated_HTTPCLIENT_RESPONSE_TEMPORARY_REDIRECT,
+  __pyx_e_7classes_9generated_HTTPCLIENT_RESPONSE_PERMANENT_REDIRECT,
+  __pyx_e_7classes_9generated_HTTPCLIENT_RESPONSE_BAD_REQUEST,
+  __pyx_e_7classes_9generated_HTTPCLIENT_RESPONSE_UNAUTHORIZED,
+  __pyx_e_7classes_9generated_HTTPCLIENT_RESPONSE_PAYMENT_REQUIRED,
+  __pyx_e_7classes_9generated_HTTPCLIENT_RESPONSE_FORBIDDEN,
+  __pyx_e_7classes_9generated_HTTPCLIENT_RESPONSE_NOT_FOUND,
+  __pyx_e_7classes_9generated_HTTPCLIENT_RESPONSE_METHOD_NOT_ALLOWED,
+  __pyx_e_7classes_9generated_HTTPCLIENT_RESPONSE_NOT_ACCEPTABLE,
+  __pyx_e_7classes_9generated_HTTPCLIENT_RESPONSE_PROXY_AUTHENTICATION_REQUIRED,
+  __pyx_e_7classes_9generated_HTTPCLIENT_RESPONSE_REQUEST_TIMEOUT,
+  __pyx_e_7classes_9generated_HTTPCLIENT_RESPONSE_CONFLICT,
+  __pyx_e_7classes_9generated_HTTPCLIENT_RESPONSE_GONE,
+  __pyx_e_7classes_9generated_HTTPCLIENT_RESPONSE_LENGTH_REQUIRED,
+  __pyx_e_7classes_9generated_HTTPCLIENT_RESPONSE_PRECONDITION_FAILED,
+  __pyx_e_7classes_9generated_HTTPCLIENT_RESPONSE_REQUEST_ENTITY_TOO_LARGE,
+  __pyx_e_7classes_9generated_HTTPCLIENT_RESPONSE_REQUEST_URI_TOO_LONG,
+  __pyx_e_7classes_9generated_HTTPCLIENT_RESPONSE_UNSUPPORTED_MEDIA_TYPE,
+  __pyx_e_7classes_9generated_HTTPCLIENT_RESPONSE_REQUESTED_RANGE_NOT_SATISFIABLE,
+  __pyx_e_7classes_9generated_HTTPCLIENT_RESPONSE_EXPECTATION_FAILED,
+  __pyx_e_7classes_9generated_HTTPCLIENT_RESPONSE_IM_A_TEAPOT,
+  __pyx_e_7classes_9generated_HTTPCLIENT_RESPONSE_MISDIRECTED_REQUEST,
+  __pyx_e_7classes_9generated_HTTPCLIENT_RESPONSE_UNPROCESSABLE_ENTITY,
+  __pyx_e_7classes_9generated_HTTPCLIENT_RESPONSE_LOCKED,
+  __pyx_e_7classes_9generated_HTTPCLIENT_RESPONSE_FAILED_DEPENDENCY,
+  __pyx_e_7classes_9generated_HTTPCLIENT_RESPONSE_UPGRADE_REQUIRED,
+  __pyx_e_7classes_9generated_HTTPCLIENT_RESPONSE_PRECONDITION_REQUIRED,
+  __pyx_e_7classes_9generated_HTTPCLIENT_RESPONSE_TOO_MANY_REQUESTS,
+  __pyx_e_7classes_9generated_HTTPCLIENT_RESPONSE_REQUEST_HEADER_FIELDS_TOO_LARGE,
+  __pyx_e_7classes_9generated_HTTPCLIENT_RESPONSE_UNAVAILABLE_FOR_LEGAL_REASONS,
+  __pyx_e_7classes_9generated_HTTPCLIENT_RESPONSE_INTERNAL_SERVER_ERROR,
+  __pyx_e_7classes_9generated_HTTPCLIENT_RESPONSE_NOT_IMPLEMENTED,
+  __pyx_e_7classes_9generated_HTTPCLIENT_RESPONSE_BAD_GATEWAY,
+  __pyx_e_7classes_9generated_HTTPCLIENT_RESPONSE_SERVICE_UNAVAILABLE,
+  __pyx_e_7classes_9generated_HTTPCLIENT_RESPONSE_GATEWAY_TIMEOUT,
+  __pyx_e_7classes_9generated_HTTPCLIENT_RESPONSE_HTTP_VERSION_NOT_SUPPORTED,
+  __pyx_e_7classes_9generated_HTTPCLIENT_RESPONSE_VARIANT_ALSO_NEGOTIATES,
+  __pyx_e_7classes_9generated_HTTPCLIENT_RESPONSE_INSUFFICIENT_STORAGE,
+  __pyx_e_7classes_9generated_HTTPCLIENT_RESPONSE_LOOP_DETECTED,
+  __pyx_e_7classes_9generated_HTTPCLIENT_RESPONSE_NOT_EXTENDED,
+  __pyx_e_7classes_9generated_HTTPCLIENT_RESPONSE_NETWORK_AUTH_REQUIRED
+};
+typedef enum __pyx_t_7classes_9generated_HTTPClient_ResponseCode __pyx_t_7classes_9generated_HTTPClient_ResponseCode;
+
+/* "classes/generated.pxd":321
+ * ctypedef enum HTTPClient_ResponseCode :HTTPCLIENT_RESPONSE_CONTINUE, HTTPCLIENT_RESPONSE_SWITCHING_PROTOCOLS, HTTPCLIENT_RESPONSE_PROCESSING, HTTPCLIENT_RESPONSE_OK, HTTPCLIENT_RESPONSE_CREATED, HTTPCLIENT_RESPONSE_ACCEPTED, HTTPCLIENT_RESPONSE_NON_AUTHORITATIVE_INFORMATION, HTTPCLIENT_RESPONSE_NO_CONTENT, HTTPCLIENT_RESPONSE_RESET_CONTENT, HTTPCLIENT_RESPONSE_PARTIAL_CONTENT, HTTPCLIENT_RESPONSE_MULTI_STATUS, HTTPCLIENT_RESPONSE_ALREADY_REPORTED, HTTPCLIENT_RESPONSE_IM_USED, HTTPCLIENT_RESPONSE_MULTIPLE_CHOICES, HTTPCLIENT_RESPONSE_MOVED_PERMANENTLY, HTTPCLIENT_RESPONSE_FOUND, HTTPCLIENT_RESPONSE_SEE_OTHER, HTTPCLIENT_RESPONSE_NOT_MODIFIED, HTTPCLIENT_RESPONSE_USE_PROXY, HTTPCLIENT_RESPONSE_SWITCH_PROXY, HTTPCLIENT_RESPONSE_TEMPORARY_REDIRECT, HTTPCLIENT_RESPONSE_PERMANENT_REDIRECT, HTTPCLIENT_RESPONSE_BAD_REQUEST, HTTPCLIENT_RESPONSE_UNAUTHORIZED, HTTPCLIENT_RESPONSE_PAYMENT_REQUIRED, HTTPCLIENT_RESPONSE_FORBIDDEN, HTTPCLIENT_RESPONSE_NOT_FOUND, HTTPCLIENT_RESPONSE_METHOD_NOT_ALLOWED, HTTPCLIENT_RESPONSE_NOT_ACCEPTABLE, HTTPCLIENT_RESPONSE_PROXY_AUTHENTICATION_REQUIRED, HTTPCLIENT_RESPONSE_REQUEST_TIMEOUT, HTTPCLIENT_RESPONSE_CONFLICT, HTTPCLIENT_RESPONSE_GONE, HTTPCLIENT_RESPONSE_LENGTH_REQUIRED, HTTPCLIENT_RESPONSE_PRECONDITION_FAILED, HTTPCLIENT_RESPONSE_REQUEST_ENTITY_TOO_LARGE, HTTPCLIENT_RESPONSE_REQUEST_URI_TOO_LONG, HTTPCLIENT_RESPONSE_UNSUPPORTED_MEDIA_TYPE, HTTPCLIENT_RESPONSE_REQUESTED_RANGE_NOT_SATISFIABLE, HTTPCLIENT_RESPONSE_EXPECTATION_FAILED, HTTPCLIENT_RESPONSE_IM_A_TEAPOT, HTTPCLIENT_RESPONSE_MISDIRECTED_REQUEST, HTTPCLIENT_RESPONSE_UNPROCESSABLE_ENTITY, HTTPCLIENT_RESPONSE_LOCKED, HTTPCLIENT_RESPONSE_FAILED_DEPENDENCY, HTTPCLIENT_RESPONSE_UPGRADE_REQUIRED, HTTPCLIENT_RESPONSE_PRECONDITION_REQUIRED, HTTPCLIENT_RESPONSE_TOO_MANY_REQUESTS, HTTPCLIENT_RESPONSE_REQUEST_HEADER_FIELDS_TOO_LARGE, HTTPCLIENT_RESPONSE_UNAVAILABLE_FOR_LEGAL_REASONS, HTTPCLIENT_RESPONSE_INTERNAL_SERVER_ERROR, HTTPCLIENT_RESPONSE_NOT_IMPLEMENTED, HTTPCLIENT_RESPONSE_BAD_GATEWAY, HTTPCLIENT_RESPONSE_SERVICE_UNAVAILABLE, HTTPCLIENT_RESPONSE_GATEWAY_TIMEOUT, HTTPCLIENT_RESPONSE_HTTP_VERSION_NOT_SUPPORTED, HTTPCLIENT_RESPONSE_VARIANT_ALSO_NEGOTIATES, HTTPCLIENT_RESPONSE_INSUFFICIENT_STORAGE, HTTPCLIENT_RESPONSE_LOOP_DETECTED, HTTPCLIENT_RESPONSE_NOT_EXTENDED, HTTPCLIENT_RESPONSE_NETWORK_AUTH_REQUIRED
+ * 
+ * ctypedef enum HTTPRequest_Result :HTTPREQUEST_RESULT_SUCCESS, HTTPREQUEST_RESULT_CHUNKED_BODY_SIZE_MISMATCH, HTTPREQUEST_RESULT_CANT_CONNECT, HTTPREQUEST_RESULT_CANT_RESOLVE, HTTPREQUEST_RESULT_CONNECTION_ERROR, HTTPREQUEST_RESULT_SSL_HANDSHAKE_ERROR, HTTPREQUEST_RESULT_NO_RESPONSE, HTTPREQUEST_RESULT_BODY_SIZE_LIMIT_EXCEEDED, HTTPREQUEST_RESULT_REQUEST_FAILED, HTTPREQUEST_RESULT_DOWNLOAD_FILE_CANT_OPEN, HTTPREQUEST_RESULT_DOWNLOAD_FILE_WRITE_ERROR, HTTPREQUEST_RESULT_REDIRECT_LIMIT_REACHED, HTTPREQUEST_RESULT_TIMEOUT             # <<<<<<<<<<<<<<
+ * 
+ * ctypedef enum HashingContext_HashType :HASHINGCONTEXT_HASH_MD5, HASHINGCONTEXT_HASH_SHA1, HASHINGCONTEXT_HASH_SHA256
+ */
+enum __pyx_t_7classes_9generated_HTTPRequest_Result {
+  __pyx_e_7classes_9generated_HTTPREQUEST_RESULT_SUCCESS,
+  __pyx_e_7classes_9generated_HTTPREQUEST_RESULT_CHUNKED_BODY_SIZE_MISMATCH,
+  __pyx_e_7classes_9generated_HTTPREQUEST_RESULT_CANT_CONNECT,
+  __pyx_e_7classes_9generated_HTTPREQUEST_RESULT_CANT_RESOLVE,
+  __pyx_e_7classes_9generated_HTTPREQUEST_RESULT_CONNECTION_ERROR,
+  __pyx_e_7classes_9generated_HTTPREQUEST_RESULT_SSL_HANDSHAKE_ERROR,
+  __pyx_e_7classes_9generated_HTTPREQUEST_RESULT_NO_RESPONSE,
+  __pyx_e_7classes_9generated_HTTPREQUEST_RESULT_BODY_SIZE_LIMIT_EXCEEDED,
+  __pyx_e_7classes_9generated_HTTPREQUEST_RESULT_REQUEST_FAILED,
+  __pyx_e_7classes_9generated_HTTPREQUEST_RESULT_DOWNLOAD_FILE_CANT_OPEN,
+  __pyx_e_7classes_9generated_HTTPREQUEST_RESULT_DOWNLOAD_FILE_WRITE_ERROR,
+  __pyx_e_7classes_9generated_HTTPREQUEST_RESULT_REDIRECT_LIMIT_REACHED,
+  __pyx_e_7classes_9generated_HTTPREQUEST_RESULT_TIMEOUT
+};
+typedef enum __pyx_t_7classes_9generated_HTTPRequest_Result __pyx_t_7classes_9generated_HTTPRequest_Result;
+
+/* "classes/generated.pxd":323
+ * ctypedef enum HTTPRequest_Result :HTTPREQUEST_RESULT_SUCCESS, HTTPREQUEST_RESULT_CHUNKED_BODY_SIZE_MISMATCH, HTTPREQUEST_RESULT_CANT_CONNECT, HTTPREQUEST_RESULT_CANT_RESOLVE, HTTPREQUEST_RESULT_CONNECTION_ERROR, HTTPREQUEST_RESULT_SSL_HANDSHAKE_ERROR, HTTPREQUEST_RESULT_NO_RESPONSE, HTTPREQUEST_RESULT_BODY_SIZE_LIMIT_EXCEEDED, HTTPREQUEST_RESULT_REQUEST_FAILED, HTTPREQUEST_RESULT_DOWNLOAD_FILE_CANT_OPEN, HTTPREQUEST_RESULT_DOWNLOAD_FILE_WRITE_ERROR, HTTPREQUEST_RESULT_REDIRECT_LIMIT_REACHED, HTTPREQUEST_RESULT_TIMEOUT
+ * 
+ * ctypedef enum HashingContext_HashType :HASHINGCONTEXT_HASH_MD5, HASHINGCONTEXT_HASH_SHA1, HASHINGCONTEXT_HASH_SHA256             # <<<<<<<<<<<<<<
+ * 
+ * 
+ */
+enum __pyx_t_7classes_9generated_HashingContext_HashType {
+  __pyx_e_7classes_9generated_HASHINGCONTEXT_HASH_MD5,
+  __pyx_e_7classes_9generated_HASHINGCONTEXT_HASH_SHA1,
+  __pyx_e_7classes_9generated_HASHINGCONTEXT_HASH_SHA256
+};
+typedef enum __pyx_t_7classes_9generated_HashingContext_HashType __pyx_t_7classes_9generated_HashingContext_HashType;
+
+/* "classes/generated.pxd":326
+ * 
+ * 
+ * ctypedef enum HingeJoint_Param :HINGEJOINT_PARAM_BIAS, HINGEJOINT_PARAM_LIMIT_UPPER, HINGEJOINT_PARAM_LIMIT_LOWER, HINGEJOINT_PARAM_LIMIT_BIAS, HINGEJOINT_PARAM_LIMIT_SOFTNESS, HINGEJOINT_PARAM_LIMIT_RELAXATION, HINGEJOINT_PARAM_MOTOR_TARGET_VELOCITY, HINGEJOINT_PARAM_MOTOR_MAX_IMPULSE, HINGEJOINT_PARAM_MAX             # <<<<<<<<<<<<<<
+ * ctypedef enum HingeJoint_Flag :HINGEJOINT_FLAG_USE_LIMIT, HINGEJOINT_FLAG_ENABLE_MOTOR, HINGEJOINT_FLAG_MAX
+ * 
+ */
+enum __pyx_t_7classes_9generated_HingeJoint_Param {
+  __pyx_e_7classes_9generated_HINGEJOINT_PARAM_BIAS,
+  __pyx_e_7classes_9generated_HINGEJOINT_PARAM_LIMIT_UPPER,
+  __pyx_e_7classes_9generated_HINGEJOINT_PARAM_LIMIT_LOWER,
+  __pyx_e_7classes_9generated_HINGEJOINT_PARAM_LIMIT_BIAS,
+  __pyx_e_7classes_9generated_HINGEJOINT_PARAM_LIMIT_SOFTNESS,
+  __pyx_e_7classes_9generated_HINGEJOINT_PARAM_LIMIT_RELAXATION,
+  __pyx_e_7classes_9generated_HINGEJOINT_PARAM_MOTOR_TARGET_VELOCITY,
+  __pyx_e_7classes_9generated_HINGEJOINT_PARAM_MOTOR_MAX_IMPULSE,
+  __pyx_e_7classes_9generated_HINGEJOINT_PARAM_MAX
+};
+typedef enum __pyx_t_7classes_9generated_HingeJoint_Param __pyx_t_7classes_9generated_HingeJoint_Param;
+
+/* "classes/generated.pxd":327
+ * 
+ * ctypedef enum HingeJoint_Param :HINGEJOINT_PARAM_BIAS, HINGEJOINT_PARAM_LIMIT_UPPER, HINGEJOINT_PARAM_LIMIT_LOWER, HINGEJOINT_PARAM_LIMIT_BIAS, HINGEJOINT_PARAM_LIMIT_SOFTNESS, HINGEJOINT_PARAM_LIMIT_RELAXATION, HINGEJOINT_PARAM_MOTOR_TARGET_VELOCITY, HINGEJOINT_PARAM_MOTOR_MAX_IMPULSE, HINGEJOINT_PARAM_MAX
+ * ctypedef enum HingeJoint_Flag :HINGEJOINT_FLAG_USE_LIMIT, HINGEJOINT_FLAG_ENABLE_MOTOR, HINGEJOINT_FLAG_MAX             # <<<<<<<<<<<<<<
+ * 
+ * ctypedef enum IP_ResolverStatus :IP_RESOLVER_STATUS_NONE, IP_RESOLVER_STATUS_WAITING, IP_RESOLVER_STATUS_DONE, IP_RESOLVER_STATUS_ERROR
+ */
+enum __pyx_t_7classes_9generated_HingeJoint_Flag {
+  __pyx_e_7classes_9generated_HINGEJOINT_FLAG_USE_LIMIT,
+  __pyx_e_7classes_9generated_HINGEJOINT_FLAG_ENABLE_MOTOR,
+  __pyx_e_7classes_9generated_HINGEJOINT_FLAG_MAX
+};
+typedef enum __pyx_t_7classes_9generated_HingeJoint_Flag __pyx_t_7classes_9generated_HingeJoint_Flag;
+
+/* "classes/generated.pxd":329
+ * ctypedef enum HingeJoint_Flag :HINGEJOINT_FLAG_USE_LIMIT, HINGEJOINT_FLAG_ENABLE_MOTOR, HINGEJOINT_FLAG_MAX
+ * 
+ * ctypedef enum IP_ResolverStatus :IP_RESOLVER_STATUS_NONE, IP_RESOLVER_STATUS_WAITING, IP_RESOLVER_STATUS_DONE, IP_RESOLVER_STATUS_ERROR             # <<<<<<<<<<<<<<
+ * ctypedef enum IP_Type :IP_TYPE_NONE, IP_TYPE_IPV4, IP_TYPE_IPV6, IP_TYPE_ANY
+ * 
+ */
+enum __pyx_t_7classes_9generated_IP_ResolverStatus {
+  __pyx_e_7classes_9generated_IP_RESOLVER_STATUS_NONE,
+  __pyx_e_7classes_9generated_IP_RESOLVER_STATUS_WAITING,
+  __pyx_e_7classes_9generated_IP_RESOLVER_STATUS_DONE,
+  __pyx_e_7classes_9generated_IP_RESOLVER_STATUS_ERROR
+};
+typedef enum __pyx_t_7classes_9generated_IP_ResolverStatus __pyx_t_7classes_9generated_IP_ResolverStatus;
+
+/* "classes/generated.pxd":330
+ * 
+ * ctypedef enum IP_ResolverStatus :IP_RESOLVER_STATUS_NONE, IP_RESOLVER_STATUS_WAITING, IP_RESOLVER_STATUS_DONE, IP_RESOLVER_STATUS_ERROR
+ * ctypedef enum IP_Type :IP_TYPE_NONE, IP_TYPE_IPV4, IP_TYPE_IPV6, IP_TYPE_ANY             # <<<<<<<<<<<<<<
+ * 
+ * 
+ */
+enum __pyx_t_7classes_9generated_IP_Type {
+  __pyx_e_7classes_9generated_IP_TYPE_NONE,
+  __pyx_e_7classes_9generated_IP_TYPE_IPV4,
+  __pyx_e_7classes_9generated_IP_TYPE_IPV6,
+  __pyx_e_7classes_9generated_IP_TYPE_ANY
+};
+typedef enum __pyx_t_7classes_9generated_IP_Type __pyx_t_7classes_9generated_IP_Type;
+
+/* "classes/generated.pxd":333
+ * 
+ * 
+ * ctypedef enum Image_AlphaMode :IMAGE_ALPHA_NONE, IMAGE_ALPHA_BIT, IMAGE_ALPHA_BLEND             # <<<<<<<<<<<<<<
+ * ctypedef enum Image_CompressSource :IMAGE_COMPRESS_SOURCE_GENERIC, IMAGE_COMPRESS_SOURCE_SRGB, IMAGE_COMPRESS_SOURCE_NORMAL
+ * ctypedef enum Image_Interpolation :IMAGE_INTERPOLATE_NEAREST, IMAGE_INTERPOLATE_BILINEAR, IMAGE_INTERPOLATE_CUBIC, IMAGE_INTERPOLATE_TRILINEAR, IMAGE_INTERPOLATE_LANCZOS
+ */
+enum __pyx_t_7classes_9generated_Image_AlphaMode {
+  __pyx_e_7classes_9generated_IMAGE_ALPHA_NONE,
+  __pyx_e_7classes_9generated_IMAGE_ALPHA_BIT,
+  __pyx_e_7classes_9generated_IMAGE_ALPHA_BLEND
+};
+typedef enum __pyx_t_7classes_9generated_Image_AlphaMode __pyx_t_7classes_9generated_Image_AlphaMode;
+
+/* "classes/generated.pxd":334
+ * 
+ * ctypedef enum Image_AlphaMode :IMAGE_ALPHA_NONE, IMAGE_ALPHA_BIT, IMAGE_ALPHA_BLEND
+ * ctypedef enum Image_CompressSource :IMAGE_COMPRESS_SOURCE_GENERIC, IMAGE_COMPRESS_SOURCE_SRGB, IMAGE_COMPRESS_SOURCE_NORMAL             # <<<<<<<<<<<<<<
+ * ctypedef enum Image_Interpolation :IMAGE_INTERPOLATE_NEAREST, IMAGE_INTERPOLATE_BILINEAR, IMAGE_INTERPOLATE_CUBIC, IMAGE_INTERPOLATE_TRILINEAR, IMAGE_INTERPOLATE_LANCZOS
+ * ctypedef enum Image_CompressMode :IMAGE_COMPRESS_S3TC, IMAGE_COMPRESS_PVRTC2, IMAGE_COMPRESS_PVRTC4, IMAGE_COMPRESS_ETC, IMAGE_COMPRESS_ETC2
+ */
+enum __pyx_t_7classes_9generated_Image_CompressSource {
+  __pyx_e_7classes_9generated_IMAGE_COMPRESS_SOURCE_GENERIC,
+  __pyx_e_7classes_9generated_IMAGE_COMPRESS_SOURCE_SRGB,
+  __pyx_e_7classes_9generated_IMAGE_COMPRESS_SOURCE_NORMAL
+};
+typedef enum __pyx_t_7classes_9generated_Image_CompressSource __pyx_t_7classes_9generated_Image_CompressSource;
+
+/* "classes/generated.pxd":335
+ * ctypedef enum Image_AlphaMode :IMAGE_ALPHA_NONE, IMAGE_ALPHA_BIT, IMAGE_ALPHA_BLEND
+ * ctypedef enum Image_CompressSource :IMAGE_COMPRESS_SOURCE_GENERIC, IMAGE_COMPRESS_SOURCE_SRGB, IMAGE_COMPRESS_SOURCE_NORMAL
+ * ctypedef enum Image_Interpolation :IMAGE_INTERPOLATE_NEAREST, IMAGE_INTERPOLATE_BILINEAR, IMAGE_INTERPOLATE_CUBIC, IMAGE_INTERPOLATE_TRILINEAR, IMAGE_INTERPOLATE_LANCZOS             # <<<<<<<<<<<<<<
+ * ctypedef enum Image_CompressMode :IMAGE_COMPRESS_S3TC, IMAGE_COMPRESS_PVRTC2, IMAGE_COMPRESS_PVRTC4, IMAGE_COMPRESS_ETC, IMAGE_COMPRESS_ETC2
+ * ctypedef enum Image_Format :IMAGE_FORMAT_L8, IMAGE_FORMAT_LA8, IMAGE_FORMAT_R8, IMAGE_FORMAT_RG8, IMAGE_FORMAT_RGB8, IMAGE_FORMAT_RGBA8, IMAGE_FORMAT_RGBA4444, IMAGE_FORMAT_RGBA5551, IMAGE_FORMAT_RF, IMAGE_FORMAT_RGF, IMAGE_FORMAT_RGBF, IMAGE_FORMAT_RGBAF, IMAGE_FORMAT_RH, IMAGE_FORMAT_RGH, IMAGE_FORMAT_RGBH, IMAGE_FORMAT_RGBAH, IMAGE_FORMAT_RGBE9995, IMAGE_FORMAT_DXT1, IMAGE_FORMAT_DXT3, IMAGE_FORMAT_DXT5, IMAGE_FORMAT_RGTC_R, IMAGE_FORMAT_RGTC_RG, IMAGE_FORMAT_BPTC_RGBA, IMAGE_FORMAT_BPTC_RGBF, IMAGE_FORMAT_BPTC_RGBFU, IMAGE_FORMAT_PVRTC2, IMAGE_FORMAT_PVRTC2A, IMAGE_FORMAT_PVRTC4, IMAGE_FORMAT_PVRTC4A, IMAGE_FORMAT_ETC, IMAGE_FORMAT_ETC2_R11, IMAGE_FORMAT_ETC2_R11S, IMAGE_FORMAT_ETC2_RG11, IMAGE_FORMAT_ETC2_RG11S, IMAGE_FORMAT_ETC2_RGB8, IMAGE_FORMAT_ETC2_RGBA8, IMAGE_FORMAT_ETC2_RGB8A1, IMAGE_FORMAT_MAX
+ */
+enum __pyx_t_7classes_9generated_Image_Interpolation {
+  __pyx_e_7classes_9generated_IMAGE_INTERPOLATE_NEAREST,
+  __pyx_e_7classes_9generated_IMAGE_INTERPOLATE_BILINEAR,
+  __pyx_e_7classes_9generated_IMAGE_INTERPOLATE_CUBIC,
+  __pyx_e_7classes_9generated_IMAGE_INTERPOLATE_TRILINEAR,
+  __pyx_e_7classes_9generated_IMAGE_INTERPOLATE_LANCZOS
+};
+typedef enum __pyx_t_7classes_9generated_Image_Interpolation __pyx_t_7classes_9generated_Image_Interpolation;
+
+/* "classes/generated.pxd":336
+ * ctypedef enum Image_CompressSource :IMAGE_COMPRESS_SOURCE_GENERIC, IMAGE_COMPRESS_SOURCE_SRGB, IMAGE_COMPRESS_SOURCE_NORMAL
+ * ctypedef enum Image_Interpolation :IMAGE_INTERPOLATE_NEAREST, IMAGE_INTERPOLATE_BILINEAR, IMAGE_INTERPOLATE_CUBIC, IMAGE_INTERPOLATE_TRILINEAR, IMAGE_INTERPOLATE_LANCZOS
+ * ctypedef enum Image_CompressMode :IMAGE_COMPRESS_S3TC, IMAGE_COMPRESS_PVRTC2, IMAGE_COMPRESS_PVRTC4, IMAGE_COMPRESS_ETC, IMAGE_COMPRESS_ETC2             # <<<<<<<<<<<<<<
+ * ctypedef enum Image_Format :IMAGE_FORMAT_L8, IMAGE_FORMAT_LA8, IMAGE_FORMAT_R8, IMAGE_FORMAT_RG8, IMAGE_FORMAT_RGB8, IMAGE_FORMAT_RGBA8, IMAGE_FORMAT_RGBA4444, IMAGE_FORMAT_RGBA5551, IMAGE_FORMAT_RF, IMAGE_FORMAT_RGF, IMAGE_FORMAT_RGBF, IMAGE_FORMAT_RGBAF, IMAGE_FORMAT_RH, IMAGE_FORMAT_RGH, IMAGE_FORMAT_RGBH, IMAGE_FORMAT_RGBAH, IMAGE_FORMAT_RGBE9995, IMAGE_FORMAT_DXT1, IMAGE_FORMAT_DXT3, IMAGE_FORMAT_DXT5, IMAGE_FORMAT_RGTC_R, IMAGE_FORMAT_RGTC_RG, IMAGE_FORMAT_BPTC_RGBA, IMAGE_FORMAT_BPTC_RGBF, IMAGE_FORMAT_BPTC_RGBFU, IMAGE_FORMAT_PVRTC2, IMAGE_FORMAT_PVRTC2A, IMAGE_FORMAT_PVRTC4, IMAGE_FORMAT_PVRTC4A, IMAGE_FORMAT_ETC, IMAGE_FORMAT_ETC2_R11, IMAGE_FORMAT_ETC2_R11S, IMAGE_FORMAT_ETC2_RG11, IMAGE_FORMAT_ETC2_RG11S, IMAGE_FORMAT_ETC2_RGB8, IMAGE_FORMAT_ETC2_RGBA8, IMAGE_FORMAT_ETC2_RGB8A1, IMAGE_FORMAT_MAX
+ * 
+ */
+enum __pyx_t_7classes_9generated_Image_CompressMode {
+  __pyx_e_7classes_9generated_IMAGE_COMPRESS_S3TC,
+  __pyx_e_7classes_9generated_IMAGE_COMPRESS_PVRTC2,
+  __pyx_e_7classes_9generated_IMAGE_COMPRESS_PVRTC4,
+  __pyx_e_7classes_9generated_IMAGE_COMPRESS_ETC,
+  __pyx_e_7classes_9generated_IMAGE_COMPRESS_ETC2
+};
+typedef enum __pyx_t_7classes_9generated_Image_CompressMode __pyx_t_7classes_9generated_Image_CompressMode;
+
+/* "classes/generated.pxd":337
+ * ctypedef enum Image_Interpolation :IMAGE_INTERPOLATE_NEAREST, IMAGE_INTERPOLATE_BILINEAR, IMAGE_INTERPOLATE_CUBIC, IMAGE_INTERPOLATE_TRILINEAR, IMAGE_INTERPOLATE_LANCZOS
+ * ctypedef enum Image_CompressMode :IMAGE_COMPRESS_S3TC, IMAGE_COMPRESS_PVRTC2, IMAGE_COMPRESS_PVRTC4, IMAGE_COMPRESS_ETC, IMAGE_COMPRESS_ETC2
+ * ctypedef enum Image_Format :IMAGE_FORMAT_L8, IMAGE_FORMAT_LA8, IMAGE_FORMAT_R8, IMAGE_FORMAT_RG8, IMAGE_FORMAT_RGB8, IMAGE_FORMAT_RGBA8, IMAGE_FORMAT_RGBA4444, IMAGE_FORMAT_RGBA5551, IMAGE_FORMAT_RF, IMAGE_FORMAT_RGF, IMAGE_FORMAT_RGBF, IMAGE_FORMAT_RGBAF, IMAGE_FORMAT_RH, IMAGE_FORMAT_RGH, IMAGE_FORMAT_RGBH, IMAGE_FORMAT_RGBAH, IMAGE_FORMAT_RGBE9995, IMAGE_FORMAT_DXT1, IMAGE_FORMAT_DXT3, IMAGE_FORMAT_DXT5, IMAGE_FORMAT_RGTC_R, IMAGE_FORMAT_RGTC_RG, IMAGE_FORMAT_BPTC_RGBA, IMAGE_FORMAT_BPTC_RGBF, IMAGE_FORMAT_BPTC_RGBFU, IMAGE_FORMAT_PVRTC2, IMAGE_FORMAT_PVRTC2A, IMAGE_FORMAT_PVRTC4, IMAGE_FORMAT_PVRTC4A, IMAGE_FORMAT_ETC, IMAGE_FORMAT_ETC2_R11, IMAGE_FORMAT_ETC2_R11S, IMAGE_FORMAT_ETC2_RG11, IMAGE_FORMAT_ETC2_RG11S, IMAGE_FORMAT_ETC2_RGB8, IMAGE_FORMAT_ETC2_RGBA8, IMAGE_FORMAT_ETC2_RGB8A1, IMAGE_FORMAT_MAX             # <<<<<<<<<<<<<<
+ * 
+ * ctypedef enum ImageTexture_Storage :IMAGETEXTURE_STORAGE_RAW, IMAGETEXTURE_STORAGE_COMPRESS_LOSSY, IMAGETEXTURE_STORAGE_COMPRESS_LOSSLESS
+ */
+enum __pyx_t_7classes_9generated_Image_Format {
+  __pyx_e_7classes_9generated_IMAGE_FORMAT_L8,
+  __pyx_e_7classes_9generated_IMAGE_FORMAT_LA8,
+  __pyx_e_7classes_9generated_IMAGE_FORMAT_R8,
+  __pyx_e_7classes_9generated_IMAGE_FORMAT_RG8,
+  __pyx_e_7classes_9generated_IMAGE_FORMAT_RGB8,
+  __pyx_e_7classes_9generated_IMAGE_FORMAT_RGBA8,
+  __pyx_e_7classes_9generated_IMAGE_FORMAT_RGBA4444,
+  __pyx_e_7classes_9generated_IMAGE_FORMAT_RGBA5551,
+  __pyx_e_7classes_9generated_IMAGE_FORMAT_RF,
+  __pyx_e_7classes_9generated_IMAGE_FORMAT_RGF,
+  __pyx_e_7classes_9generated_IMAGE_FORMAT_RGBF,
+  __pyx_e_7classes_9generated_IMAGE_FORMAT_RGBAF,
+  __pyx_e_7classes_9generated_IMAGE_FORMAT_RH,
+  __pyx_e_7classes_9generated_IMAGE_FORMAT_RGH,
+  __pyx_e_7classes_9generated_IMAGE_FORMAT_RGBH,
+  __pyx_e_7classes_9generated_IMAGE_FORMAT_RGBAH,
+  __pyx_e_7classes_9generated_IMAGE_FORMAT_RGBE9995,
+  __pyx_e_7classes_9generated_IMAGE_FORMAT_DXT1,
+  __pyx_e_7classes_9generated_IMAGE_FORMAT_DXT3,
+  __pyx_e_7classes_9generated_IMAGE_FORMAT_DXT5,
+  __pyx_e_7classes_9generated_IMAGE_FORMAT_RGTC_R,
+  __pyx_e_7classes_9generated_IMAGE_FORMAT_RGTC_RG,
+  __pyx_e_7classes_9generated_IMAGE_FORMAT_BPTC_RGBA,
+  __pyx_e_7classes_9generated_IMAGE_FORMAT_BPTC_RGBF,
+  __pyx_e_7classes_9generated_IMAGE_FORMAT_BPTC_RGBFU,
+  __pyx_e_7classes_9generated_IMAGE_FORMAT_PVRTC2,
+  __pyx_e_7classes_9generated_IMAGE_FORMAT_PVRTC2A,
+  __pyx_e_7classes_9generated_IMAGE_FORMAT_PVRTC4,
+  __pyx_e_7classes_9generated_IMAGE_FORMAT_PVRTC4A,
+  __pyx_e_7classes_9generated_IMAGE_FORMAT_ETC,
+  __pyx_e_7classes_9generated_IMAGE_FORMAT_ETC2_R11,
+  __pyx_e_7classes_9generated_IMAGE_FORMAT_ETC2_R11S,
+  __pyx_e_7classes_9generated_IMAGE_FORMAT_ETC2_RG11,
+  __pyx_e_7classes_9generated_IMAGE_FORMAT_ETC2_RG11S,
+  __pyx_e_7classes_9generated_IMAGE_FORMAT_ETC2_RGB8,
+  __pyx_e_7classes_9generated_IMAGE_FORMAT_ETC2_RGBA8,
+  __pyx_e_7classes_9generated_IMAGE_FORMAT_ETC2_RGB8A1,
+  __pyx_e_7classes_9generated_IMAGE_FORMAT_MAX
+};
+typedef enum __pyx_t_7classes_9generated_Image_Format __pyx_t_7classes_9generated_Image_Format;
+
+/* "classes/generated.pxd":339
+ * ctypedef enum Image_Format :IMAGE_FORMAT_L8, IMAGE_FORMAT_LA8, IMAGE_FORMAT_R8, IMAGE_FORMAT_RG8, IMAGE_FORMAT_RGB8, IMAGE_FORMAT_RGBA8, IMAGE_FORMAT_RGBA4444, IMAGE_FORMAT_RGBA5551, IMAGE_FORMAT_RF, IMAGE_FORMAT_RGF, IMAGE_FORMAT_RGBF, IMAGE_FORMAT_RGBAF, IMAGE_FORMAT_RH, IMAGE_FORMAT_RGH, IMAGE_FORMAT_RGBH, IMAGE_FORMAT_RGBAH, IMAGE_FORMAT_RGBE9995, IMAGE_FORMAT_DXT1, IMAGE_FORMAT_DXT3, IMAGE_FORMAT_DXT5, IMAGE_FORMAT_RGTC_R, IMAGE_FORMAT_RGTC_RG, IMAGE_FORMAT_BPTC_RGBA, IMAGE_FORMAT_BPTC_RGBF, IMAGE_FORMAT_BPTC_RGBFU, IMAGE_FORMAT_PVRTC2, IMAGE_FORMAT_PVRTC2A, IMAGE_FORMAT_PVRTC4, IMAGE_FORMAT_PVRTC4A, IMAGE_FORMAT_ETC, IMAGE_FORMAT_ETC2_R11, IMAGE_FORMAT_ETC2_R11S, IMAGE_FORMAT_ETC2_RG11, IMAGE_FORMAT_ETC2_RG11S, IMAGE_FORMAT_ETC2_RGB8, IMAGE_FORMAT_ETC2_RGBA8, IMAGE_FORMAT_ETC2_RGB8A1, IMAGE_FORMAT_MAX
+ * 
+ * ctypedef enum ImageTexture_Storage :IMAGETEXTURE_STORAGE_RAW, IMAGETEXTURE_STORAGE_COMPRESS_LOSSY, IMAGETEXTURE_STORAGE_COMPRESS_LOSSLESS             # <<<<<<<<<<<<<<
+ * 
+ * 
+ */
+enum __pyx_t_7classes_9generated_ImageTexture_Storage {
+  __pyx_e_7classes_9generated_IMAGETEXTURE_STORAGE_RAW,
+  __pyx_e_7classes_9generated_IMAGETEXTURE_STORAGE_COMPRESS_LOSSY,
+  __pyx_e_7classes_9generated_IMAGETEXTURE_STORAGE_COMPRESS_LOSSLESS
+};
+typedef enum __pyx_t_7classes_9generated_ImageTexture_Storage __pyx_t_7classes_9generated_ImageTexture_Storage;
+
+/* "classes/generated.pxd":342
+ * 
+ * 
+ * ctypedef enum Input_MouseMode :INPUT_MOUSE_MODE_VISIBLE, INPUT_MOUSE_MODE_HIDDEN, INPUT_MOUSE_MODE_CAPTURED, INPUT_MOUSE_MODE_CONFINED             # <<<<<<<<<<<<<<
+ * ctypedef enum Input_CursorShape :INPUT_CURSOR_ARROW, INPUT_CURSOR_IBEAM, INPUT_CURSOR_POINTING_HAND, INPUT_CURSOR_CROSS, INPUT_CURSOR_WAIT, INPUT_CURSOR_BUSY, INPUT_CURSOR_DRAG, INPUT_CURSOR_CAN_DROP, INPUT_CURSOR_FORBIDDEN, INPUT_CURSOR_VSIZE, INPUT_CURSOR_HSIZE, INPUT_CURSOR_BDIAGSIZE, INPUT_CURSOR_FDIAGSIZE, INPUT_CURSOR_MOVE, INPUT_CURSOR_VSPLIT, INPUT_CURSOR_HSPLIT, INPUT_CURSOR_HELP
+ * 
+ */
+enum __pyx_t_7classes_9generated_Input_MouseMode {
+  __pyx_e_7classes_9generated_INPUT_MOUSE_MODE_VISIBLE,
+  __pyx_e_7classes_9generated_INPUT_MOUSE_MODE_HIDDEN,
+  __pyx_e_7classes_9generated_INPUT_MOUSE_MODE_CAPTURED,
+  __pyx_e_7classes_9generated_INPUT_MOUSE_MODE_CONFINED
+};
+typedef enum __pyx_t_7classes_9generated_Input_MouseMode __pyx_t_7classes_9generated_Input_MouseMode;
+
+/* "classes/generated.pxd":343
+ * 
+ * ctypedef enum Input_MouseMode :INPUT_MOUSE_MODE_VISIBLE, INPUT_MOUSE_MODE_HIDDEN, INPUT_MOUSE_MODE_CAPTURED, INPUT_MOUSE_MODE_CONFINED
+ * ctypedef enum Input_CursorShape :INPUT_CURSOR_ARROW, INPUT_CURSOR_IBEAM, INPUT_CURSOR_POINTING_HAND, INPUT_CURSOR_CROSS, INPUT_CURSOR_WAIT, INPUT_CURSOR_BUSY, INPUT_CURSOR_DRAG, INPUT_CURSOR_CAN_DROP, INPUT_CURSOR_FORBIDDEN, INPUT_CURSOR_VSIZE, INPUT_CURSOR_HSIZE, INPUT_CURSOR_BDIAGSIZE, INPUT_CURSOR_FDIAGSIZE, INPUT_CURSOR_MOVE, INPUT_CURSOR_VSPLIT, INPUT_CURSOR_HSPLIT, INPUT_CURSOR_HELP             # <<<<<<<<<<<<<<
+ * 
+ * 
+ */
+enum __pyx_t_7classes_9generated_Input_CursorShape {
+  __pyx_e_7classes_9generated_INPUT_CURSOR_ARROW,
+  __pyx_e_7classes_9generated_INPUT_CURSOR_IBEAM,
+  __pyx_e_7classes_9generated_INPUT_CURSOR_POINTING_HAND,
+  __pyx_e_7classes_9generated_INPUT_CURSOR_CROSS,
+  __pyx_e_7classes_9generated_INPUT_CURSOR_WAIT,
+  __pyx_e_7classes_9generated_INPUT_CURSOR_BUSY,
+  __pyx_e_7classes_9generated_INPUT_CURSOR_DRAG,
+  __pyx_e_7classes_9generated_INPUT_CURSOR_CAN_DROP,
+  __pyx_e_7classes_9generated_INPUT_CURSOR_FORBIDDEN,
+  __pyx_e_7classes_9generated_INPUT_CURSOR_VSIZE,
+  __pyx_e_7classes_9generated_INPUT_CURSOR_HSIZE,
+  __pyx_e_7classes_9generated_INPUT_CURSOR_BDIAGSIZE,
+  __pyx_e_7classes_9generated_INPUT_CURSOR_FDIAGSIZE,
+  __pyx_e_7classes_9generated_INPUT_CURSOR_MOVE,
+  __pyx_e_7classes_9generated_INPUT_CURSOR_VSPLIT,
+  __pyx_e_7classes_9generated_INPUT_CURSOR_HSPLIT,
+  __pyx_e_7classes_9generated_INPUT_CURSOR_HELP
+};
+typedef enum __pyx_t_7classes_9generated_Input_CursorShape __pyx_t_7classes_9generated_Input_CursorShape;
+
+/* "classes/generated.pxd":364
+ * 
+ * 
+ * ctypedef enum ItemList_SelectMode :ITEMLIST_SELECT_SINGLE, ITEMLIST_SELECT_MULTI             # <<<<<<<<<<<<<<
+ * ctypedef enum ItemList_IconMode :ITEMLIST_ICON_MODE_TOP, ITEMLIST_ICON_MODE_LEFT
+ * 
+ */
+enum __pyx_t_7classes_9generated_ItemList_SelectMode {
+  __pyx_e_7classes_9generated_ITEMLIST_SELECT_SINGLE,
+  __pyx_e_7classes_9generated_ITEMLIST_SELECT_MULTI
+};
+typedef enum __pyx_t_7classes_9generated_ItemList_SelectMode __pyx_t_7classes_9generated_ItemList_SelectMode;
+
+/* "classes/generated.pxd":365
+ * 
+ * ctypedef enum ItemList_SelectMode :ITEMLIST_SELECT_SINGLE, ITEMLIST_SELECT_MULTI
+ * ctypedef enum ItemList_IconMode :ITEMLIST_ICON_MODE_TOP, ITEMLIST_ICON_MODE_LEFT             # <<<<<<<<<<<<<<
+ * 
+ * 
+ */
+enum __pyx_t_7classes_9generated_ItemList_IconMode {
+  __pyx_e_7classes_9generated_ITEMLIST_ICON_MODE_TOP,
+  __pyx_e_7classes_9generated_ITEMLIST_ICON_MODE_LEFT
+};
+typedef enum __pyx_t_7classes_9generated_ItemList_IconMode __pyx_t_7classes_9generated_ItemList_IconMode;
+
+/* "classes/generated.pxd":368
+ * 
+ * 
+ * ctypedef enum JSONRPC_ErrorCode :JSONRPC_PARSE_ERROR, JSONRPC_INTERNAL_ERROR, JSONRPC_INVALID_PARAMS, JSONRPC_METHOD_NOT_FOUND, JSONRPC_INVALID_REQUEST             # <<<<<<<<<<<<<<
+ * 
+ * 
+ */
+enum __pyx_t_7classes_9generated_JSONRPC_ErrorCode {
+  __pyx_e_7classes_9generated_JSONRPC_PARSE_ERROR,
+  __pyx_e_7classes_9generated_JSONRPC_INTERNAL_ERROR,
+  __pyx_e_7classes_9generated_JSONRPC_INVALID_PARAMS,
+  __pyx_e_7classes_9generated_JSONRPC_METHOD_NOT_FOUND,
+  __pyx_e_7classes_9generated_JSONRPC_INVALID_REQUEST
+};
+typedef enum __pyx_t_7classes_9generated_JSONRPC_ErrorCode __pyx_t_7classes_9generated_JSONRPC_ErrorCode;
+
+/* "classes/generated.pxd":379
+ * 
+ * 
+ * ctypedef enum Label_Align :LABEL_ALIGN_LEFT, LABEL_ALIGN_CENTER, LABEL_ALIGN_RIGHT, LABEL_ALIGN_FILL             # <<<<<<<<<<<<<<
+ * ctypedef enum Label_VAlign :LABEL_VALIGN_TOP, LABEL_VALIGN_CENTER, LABEL_VALIGN_BOTTOM, LABEL_VALIGN_FILL
+ * 
+ */
+enum __pyx_t_7classes_9generated_Label_Align {
+  __pyx_e_7classes_9generated_LABEL_ALIGN_LEFT,
+  __pyx_e_7classes_9generated_LABEL_ALIGN_CENTER,
+  __pyx_e_7classes_9generated_LABEL_ALIGN_RIGHT,
+  __pyx_e_7classes_9generated_LABEL_ALIGN_FILL
+};
+typedef enum __pyx_t_7classes_9generated_Label_Align __pyx_t_7classes_9generated_Label_Align;
+
+/* "classes/generated.pxd":380
+ * 
+ * ctypedef enum Label_Align :LABEL_ALIGN_LEFT, LABEL_ALIGN_CENTER, LABEL_ALIGN_RIGHT, LABEL_ALIGN_FILL
+ * ctypedef enum Label_VAlign :LABEL_VALIGN_TOP, LABEL_VALIGN_CENTER, LABEL_VALIGN_BOTTOM, LABEL_VALIGN_FILL             # <<<<<<<<<<<<<<
+ * 
+ * 
+ */
+enum __pyx_t_7classes_9generated_Label_VAlign {
+  __pyx_e_7classes_9generated_LABEL_VALIGN_TOP,
+  __pyx_e_7classes_9generated_LABEL_VALIGN_CENTER,
+  __pyx_e_7classes_9generated_LABEL_VALIGN_BOTTOM,
+  __pyx_e_7classes_9generated_LABEL_VALIGN_FILL
+};
+typedef enum __pyx_t_7classes_9generated_Label_VAlign __pyx_t_7classes_9generated_Label_VAlign;
+
+/* "classes/generated.pxd":383
+ * 
+ * 
+ * ctypedef enum Light_BakeMode :LIGHT_BAKE_DISABLED, LIGHT_BAKE_INDIRECT, LIGHT_BAKE_ALL             # <<<<<<<<<<<<<<
+ * ctypedef enum Light_Param :LIGHT_PARAM_ENERGY, LIGHT_PARAM_INDIRECT_ENERGY, LIGHT_PARAM_SPECULAR, LIGHT_PARAM_RANGE, LIGHT_PARAM_ATTENUATION, LIGHT_PARAM_SPOT_ANGLE, LIGHT_PARAM_SPOT_ATTENUATION, LIGHT_PARAM_CONTACT_SHADOW_SIZE, LIGHT_PARAM_SHADOW_MAX_DISTANCE, LIGHT_PARAM_SHADOW_SPLIT_1_OFFSET, LIGHT_PARAM_SHADOW_SPLIT_2_OFFSET, LIGHT_PARAM_SHADOW_SPLIT_3_OFFSET, LIGHT_PARAM_SHADOW_NORMAL_BIAS, LIGHT_PARAM_SHADOW_BIAS, LIGHT_PARAM_SHADOW_BIAS_SPLIT_SCALE, LIGHT_PARAM_MAX
+ * 
+ */
+enum __pyx_t_7classes_9generated_Light_BakeMode {
+  __pyx_e_7classes_9generated_LIGHT_BAKE_DISABLED,
+  __pyx_e_7classes_9generated_LIGHT_BAKE_INDIRECT,
+  __pyx_e_7classes_9generated_LIGHT_BAKE_ALL
+};
+typedef enum __pyx_t_7classes_9generated_Light_BakeMode __pyx_t_7classes_9generated_Light_BakeMode;
+
+/* "classes/generated.pxd":384
+ * 
+ * ctypedef enum Light_BakeMode :LIGHT_BAKE_DISABLED, LIGHT_BAKE_INDIRECT, LIGHT_BAKE_ALL
+ * ctypedef enum Light_Param :LIGHT_PARAM_ENERGY, LIGHT_PARAM_INDIRECT_ENERGY, LIGHT_PARAM_SPECULAR, LIGHT_PARAM_RANGE, LIGHT_PARAM_ATTENUATION, LIGHT_PARAM_SPOT_ANGLE, LIGHT_PARAM_SPOT_ATTENUATION, LIGHT_PARAM_CONTACT_SHADOW_SIZE, LIGHT_PARAM_SHADOW_MAX_DISTANCE, LIGHT_PARAM_SHADOW_SPLIT_1_OFFSET, LIGHT_PARAM_SHADOW_SPLIT_2_OFFSET, LIGHT_PARAM_SHADOW_SPLIT_3_OFFSET, LIGHT_PARAM_SHADOW_NORMAL_BIAS, LIGHT_PARAM_SHADOW_BIAS, LIGHT_PARAM_SHADOW_BIAS_SPLIT_SCALE, LIGHT_PARAM_MAX             # <<<<<<<<<<<<<<
+ * 
+ * ctypedef enum Light2D_ShadowFilter :LIGHT2D_SHADOW_FILTER_NONE, LIGHT2D_SHADOW_FILTER_PCF3, LIGHT2D_SHADOW_FILTER_PCF5, LIGHT2D_SHADOW_FILTER_PCF7, LIGHT2D_SHADOW_FILTER_PCF9, LIGHT2D_SHADOW_FILTER_PCF13
+ */
+enum __pyx_t_7classes_9generated_Light_Param {
+  __pyx_e_7classes_9generated_LIGHT_PARAM_ENERGY,
+  __pyx_e_7classes_9generated_LIGHT_PARAM_INDIRECT_ENERGY,
+  __pyx_e_7classes_9generated_LIGHT_PARAM_SPECULAR,
+  __pyx_e_7classes_9generated_LIGHT_PARAM_RANGE,
+  __pyx_e_7classes_9generated_LIGHT_PARAM_ATTENUATION,
+  __pyx_e_7classes_9generated_LIGHT_PARAM_SPOT_ANGLE,
+  __pyx_e_7classes_9generated_LIGHT_PARAM_SPOT_ATTENUATION,
+  __pyx_e_7classes_9generated_LIGHT_PARAM_CONTACT_SHADOW_SIZE,
+  __pyx_e_7classes_9generated_LIGHT_PARAM_SHADOW_MAX_DISTANCE,
+  __pyx_e_7classes_9generated_LIGHT_PARAM_SHADOW_SPLIT_1_OFFSET,
+  __pyx_e_7classes_9generated_LIGHT_PARAM_SHADOW_SPLIT_2_OFFSET,
+  __pyx_e_7classes_9generated_LIGHT_PARAM_SHADOW_SPLIT_3_OFFSET,
+  __pyx_e_7classes_9generated_LIGHT_PARAM_SHADOW_NORMAL_BIAS,
+  __pyx_e_7classes_9generated_LIGHT_PARAM_SHADOW_BIAS,
+  __pyx_e_7classes_9generated_LIGHT_PARAM_SHADOW_BIAS_SPLIT_SCALE,
+  __pyx_e_7classes_9generated_LIGHT_PARAM_MAX
+};
+typedef enum __pyx_t_7classes_9generated_Light_Param __pyx_t_7classes_9generated_Light_Param;
+
+/* "classes/generated.pxd":386
+ * ctypedef enum Light_Param :LIGHT_PARAM_ENERGY, LIGHT_PARAM_INDIRECT_ENERGY, LIGHT_PARAM_SPECULAR, LIGHT_PARAM_RANGE, LIGHT_PARAM_ATTENUATION, LIGHT_PARAM_SPOT_ANGLE, LIGHT_PARAM_SPOT_ATTENUATION, LIGHT_PARAM_CONTACT_SHADOW_SIZE, LIGHT_PARAM_SHADOW_MAX_DISTANCE, LIGHT_PARAM_SHADOW_SPLIT_1_OFFSET, LIGHT_PARAM_SHADOW_SPLIT_2_OFFSET, LIGHT_PARAM_SHADOW_SPLIT_3_OFFSET, LIGHT_PARAM_SHADOW_NORMAL_BIAS, LIGHT_PARAM_SHADOW_BIAS, LIGHT_PARAM_SHADOW_BIAS_SPLIT_SCALE, LIGHT_PARAM_MAX
+ * 
+ * ctypedef enum Light2D_ShadowFilter :LIGHT2D_SHADOW_FILTER_NONE, LIGHT2D_SHADOW_FILTER_PCF3, LIGHT2D_SHADOW_FILTER_PCF5, LIGHT2D_SHADOW_FILTER_PCF7, LIGHT2D_SHADOW_FILTER_PCF9, LIGHT2D_SHADOW_FILTER_PCF13             # <<<<<<<<<<<<<<
+ * ctypedef enum Light2D_Mode :LIGHT2D_MODE_ADD, LIGHT2D_MODE_SUB, LIGHT2D_MODE_MIX, LIGHT2D_MODE_MASK
+ * 
+ */
+enum __pyx_t_7classes_9generated_Light2D_ShadowFilter {
+  __pyx_e_7classes_9generated_LIGHT2D_SHADOW_FILTER_NONE,
+  __pyx_e_7classes_9generated_LIGHT2D_SHADOW_FILTER_PCF3,
+  __pyx_e_7classes_9generated_LIGHT2D_SHADOW_FILTER_PCF5,
+  __pyx_e_7classes_9generated_LIGHT2D_SHADOW_FILTER_PCF7,
+  __pyx_e_7classes_9generated_LIGHT2D_SHADOW_FILTER_PCF9,
+  __pyx_e_7classes_9generated_LIGHT2D_SHADOW_FILTER_PCF13
+};
+typedef enum __pyx_t_7classes_9generated_Light2D_ShadowFilter __pyx_t_7classes_9generated_Light2D_ShadowFilter;
+
+/* "classes/generated.pxd":387
+ * 
+ * ctypedef enum Light2D_ShadowFilter :LIGHT2D_SHADOW_FILTER_NONE, LIGHT2D_SHADOW_FILTER_PCF3, LIGHT2D_SHADOW_FILTER_PCF5, LIGHT2D_SHADOW_FILTER_PCF7, LIGHT2D_SHADOW_FILTER_PCF9, LIGHT2D_SHADOW_FILTER_PCF13
+ * ctypedef enum Light2D_Mode :LIGHT2D_MODE_ADD, LIGHT2D_MODE_SUB, LIGHT2D_MODE_MIX, LIGHT2D_MODE_MASK             # <<<<<<<<<<<<<<
+ * 
+ * 
+ */
+enum __pyx_t_7classes_9generated_Light2D_Mode {
+  __pyx_e_7classes_9generated_LIGHT2D_MODE_ADD,
+  __pyx_e_7classes_9generated_LIGHT2D_MODE_SUB,
+  __pyx_e_7classes_9generated_LIGHT2D_MODE_MIX,
+  __pyx_e_7classes_9generated_LIGHT2D_MODE_MASK
+};
+typedef enum __pyx_t_7classes_9generated_Light2D_Mode __pyx_t_7classes_9generated_Light2D_Mode;
+
+/* "classes/generated.pxd":390
+ * 
+ * 
+ * ctypedef enum Line2D_LineTextureMode :LINE2D_LINE_TEXTURE_NONE, LINE2D_LINE_TEXTURE_TILE, LINE2D_LINE_TEXTURE_STRETCH             # <<<<<<<<<<<<<<
+ * ctypedef enum Line2D_LineCapMode :LINE2D_LINE_CAP_NONE, LINE2D_LINE_CAP_BOX, LINE2D_LINE_CAP_ROUND
+ * ctypedef enum Line2D_LineJointMode :LINE2D_LINE_JOINT_SHARP, LINE2D_LINE_JOINT_BEVEL, LINE2D_LINE_JOINT_ROUND
+ */
+enum __pyx_t_7classes_9generated_Line2D_LineTextureMode {
+  __pyx_e_7classes_9generated_LINE2D_LINE_TEXTURE_NONE,
+  __pyx_e_7classes_9generated_LINE2D_LINE_TEXTURE_TILE,
+  __pyx_e_7classes_9generated_LINE2D_LINE_TEXTURE_STRETCH
+};
+typedef enum __pyx_t_7classes_9generated_Line2D_LineTextureMode __pyx_t_7classes_9generated_Line2D_LineTextureMode;
+
+/* "classes/generated.pxd":391
+ * 
+ * ctypedef enum Line2D_LineTextureMode :LINE2D_LINE_TEXTURE_NONE, LINE2D_LINE_TEXTURE_TILE, LINE2D_LINE_TEXTURE_STRETCH
+ * ctypedef enum Line2D_LineCapMode :LINE2D_LINE_CAP_NONE, LINE2D_LINE_CAP_BOX, LINE2D_LINE_CAP_ROUND             # <<<<<<<<<<<<<<
+ * ctypedef enum Line2D_LineJointMode :LINE2D_LINE_JOINT_SHARP, LINE2D_LINE_JOINT_BEVEL, LINE2D_LINE_JOINT_ROUND
+ * 
+ */
+enum __pyx_t_7classes_9generated_Line2D_LineCapMode {
+  __pyx_e_7classes_9generated_LINE2D_LINE_CAP_NONE,
+  __pyx_e_7classes_9generated_LINE2D_LINE_CAP_BOX,
+  __pyx_e_7classes_9generated_LINE2D_LINE_CAP_ROUND
+};
+typedef enum __pyx_t_7classes_9generated_Line2D_LineCapMode __pyx_t_7classes_9generated_Line2D_LineCapMode;
+
+/* "classes/generated.pxd":392
+ * ctypedef enum Line2D_LineTextureMode :LINE2D_LINE_TEXTURE_NONE, LINE2D_LINE_TEXTURE_TILE, LINE2D_LINE_TEXTURE_STRETCH
+ * ctypedef enum Line2D_LineCapMode :LINE2D_LINE_CAP_NONE, LINE2D_LINE_CAP_BOX, LINE2D_LINE_CAP_ROUND
+ * ctypedef enum Line2D_LineJointMode :LINE2D_LINE_JOINT_SHARP, LINE2D_LINE_JOINT_BEVEL, LINE2D_LINE_JOINT_ROUND             # <<<<<<<<<<<<<<
+ * 
+ * ctypedef enum LineEdit_Align :LINEEDIT_ALIGN_LEFT, LINEEDIT_ALIGN_CENTER, LINEEDIT_ALIGN_RIGHT, LINEEDIT_ALIGN_FILL
+ */
+enum __pyx_t_7classes_9generated_Line2D_LineJointMode {
+  __pyx_e_7classes_9generated_LINE2D_LINE_JOINT_SHARP,
+  __pyx_e_7classes_9generated_LINE2D_LINE_JOINT_BEVEL,
+  __pyx_e_7classes_9generated_LINE2D_LINE_JOINT_ROUND
+};
+typedef enum __pyx_t_7classes_9generated_Line2D_LineJointMode __pyx_t_7classes_9generated_Line2D_LineJointMode;
+
+/* "classes/generated.pxd":394
+ * ctypedef enum Line2D_LineJointMode :LINE2D_LINE_JOINT_SHARP, LINE2D_LINE_JOINT_BEVEL, LINE2D_LINE_JOINT_ROUND
+ * 
+ * ctypedef enum LineEdit_Align :LINEEDIT_ALIGN_LEFT, LINEEDIT_ALIGN_CENTER, LINEEDIT_ALIGN_RIGHT, LINEEDIT_ALIGN_FILL             # <<<<<<<<<<<<<<
+ * ctypedef enum LineEdit_MenuItems :LINEEDIT_MENU_CUT, LINEEDIT_MENU_COPY, LINEEDIT_MENU_PASTE, LINEEDIT_MENU_CLEAR, LINEEDIT_MENU_SELECT_ALL, LINEEDIT_MENU_UNDO, LINEEDIT_MENU_REDO, LINEEDIT_MENU_MAX
+ * 
+ */
+enum __pyx_t_7classes_9generated_LineEdit_Align {
+  __pyx_e_7classes_9generated_LINEEDIT_ALIGN_LEFT,
+  __pyx_e_7classes_9generated_LINEEDIT_ALIGN_CENTER,
+  __pyx_e_7classes_9generated_LINEEDIT_ALIGN_RIGHT,
+  __pyx_e_7classes_9generated_LINEEDIT_ALIGN_FILL
+};
+typedef enum __pyx_t_7classes_9generated_LineEdit_Align __pyx_t_7classes_9generated_LineEdit_Align;
+
+/* "classes/generated.pxd":395
+ * 
+ * ctypedef enum LineEdit_Align :LINEEDIT_ALIGN_LEFT, LINEEDIT_ALIGN_CENTER, LINEEDIT_ALIGN_RIGHT, LINEEDIT_ALIGN_FILL
+ * ctypedef enum LineEdit_MenuItems :LINEEDIT_MENU_CUT, LINEEDIT_MENU_COPY, LINEEDIT_MENU_PASTE, LINEEDIT_MENU_CLEAR, LINEEDIT_MENU_SELECT_ALL, LINEEDIT_MENU_UNDO, LINEEDIT_MENU_REDO, LINEEDIT_MENU_MAX             # <<<<<<<<<<<<<<
+ * 
+ * 
+ */
+enum __pyx_t_7classes_9generated_LineEdit_MenuItems {
+  __pyx_e_7classes_9generated_LINEEDIT_MENU_CUT,
+  __pyx_e_7classes_9generated_LINEEDIT_MENU_COPY,
+  __pyx_e_7classes_9generated_LINEEDIT_MENU_PASTE,
+  __pyx_e_7classes_9generated_LINEEDIT_MENU_CLEAR,
+  __pyx_e_7classes_9generated_LINEEDIT_MENU_SELECT_ALL,
+  __pyx_e_7classes_9generated_LINEEDIT_MENU_UNDO,
+  __pyx_e_7classes_9generated_LINEEDIT_MENU_REDO,
+  __pyx_e_7classes_9generated_LINEEDIT_MENU_MAX
+};
+typedef enum __pyx_t_7classes_9generated_LineEdit_MenuItems __pyx_t_7classes_9generated_LineEdit_MenuItems;
+
+/* "classes/generated.pxd":398
+ * 
+ * 
+ * ctypedef enum LinkButton_UnderlineMode :LINKBUTTON_UNDERLINE_MODE_ALWAYS, LINKBUTTON_UNDERLINE_MODE_ON_HOVER, LINKBUTTON_UNDERLINE_MODE_NEVER             # <<<<<<<<<<<<<<
+ * 
+ * 
+ */
+enum __pyx_t_7classes_9generated_LinkButton_UnderlineMode {
+  __pyx_e_7classes_9generated_LINKBUTTON_UNDERLINE_MODE_ALWAYS,
+  __pyx_e_7classes_9generated_LINKBUTTON_UNDERLINE_MODE_ON_HOVER,
+  __pyx_e_7classes_9generated_LINKBUTTON_UNDERLINE_MODE_NEVER
+};
+typedef enum __pyx_t_7classes_9generated_LinkButton_UnderlineMode __pyx_t_7classes_9generated_LinkButton_UnderlineMode;
+
+/* "classes/generated.pxd":405
+ * 
+ * 
+ * ctypedef enum Mesh_BlendShapeMode :MESH_BLEND_SHAPE_MODE_NORMALIZED, MESH_BLEND_SHAPE_MODE_RELATIVE             # <<<<<<<<<<<<<<
+ * ctypedef enum Mesh_PrimitiveType :MESH_PRIMITIVE_POINTS, MESH_PRIMITIVE_LINES, MESH_PRIMITIVE_LINE_STRIP, MESH_PRIMITIVE_LINE_LOOP, MESH_PRIMITIVE_TRIANGLES, MESH_PRIMITIVE_TRIANGLE_STRIP, MESH_PRIMITIVE_TRIANGLE_FAN
+ * ctypedef enum Mesh_ArrayFormat :MESH_ARRAY_FORMAT_VERTEX, MESH_ARRAY_FORMAT_NORMAL, MESH_ARRAY_FORMAT_TANGENT, MESH_ARRAY_FORMAT_COLOR, MESH_ARRAY_COMPRESS_BASE, MESH_ARRAY_FORMAT_TEX_UV, MESH_ARRAY_FORMAT_TEX_UV2, MESH_ARRAY_FORMAT_BONES, MESH_ARRAY_FORMAT_WEIGHTS, MESH_ARRAY_FORMAT_INDEX, MESH_ARRAY_COMPRESS_VERTEX, MESH_ARRAY_COMPRESS_NORMAL, MESH_ARRAY_COMPRESS_TANGENT, MESH_ARRAY_COMPRESS_COLOR, MESH_ARRAY_COMPRESS_TEX_UV, MESH_ARRAY_COMPRESS_TEX_UV2, MESH_ARRAY_COMPRESS_BONES, MESH_ARRAY_COMPRESS_WEIGHTS, MESH_ARRAY_COMPRESS_DEFAULT, MESH_ARRAY_COMPRESS_INDEX, MESH_ARRAY_FLAG_USE_2D_VERTICES, MESH_ARRAY_FLAG_USE_16_BIT_BONES
+ */
+enum __pyx_t_7classes_9generated_Mesh_BlendShapeMode {
+  __pyx_e_7classes_9generated_MESH_BLEND_SHAPE_MODE_NORMALIZED,
+  __pyx_e_7classes_9generated_MESH_BLEND_SHAPE_MODE_RELATIVE
+};
+typedef enum __pyx_t_7classes_9generated_Mesh_BlendShapeMode __pyx_t_7classes_9generated_Mesh_BlendShapeMode;
+
+/* "classes/generated.pxd":406
+ * 
+ * ctypedef enum Mesh_BlendShapeMode :MESH_BLEND_SHAPE_MODE_NORMALIZED, MESH_BLEND_SHAPE_MODE_RELATIVE
+ * ctypedef enum Mesh_PrimitiveType :MESH_PRIMITIVE_POINTS, MESH_PRIMITIVE_LINES, MESH_PRIMITIVE_LINE_STRIP, MESH_PRIMITIVE_LINE_LOOP, MESH_PRIMITIVE_TRIANGLES, MESH_PRIMITIVE_TRIANGLE_STRIP, MESH_PRIMITIVE_TRIANGLE_FAN             # <<<<<<<<<<<<<<
+ * ctypedef enum Mesh_ArrayFormat :MESH_ARRAY_FORMAT_VERTEX, MESH_ARRAY_FORMAT_NORMAL, MESH_ARRAY_FORMAT_TANGENT, MESH_ARRAY_FORMAT_COLOR, MESH_ARRAY_COMPRESS_BASE, MESH_ARRAY_FORMAT_TEX_UV, MESH_ARRAY_FORMAT_TEX_UV2, MESH_ARRAY_FORMAT_BONES, MESH_ARRAY_FORMAT_WEIGHTS, MESH_ARRAY_FORMAT_INDEX, MESH_ARRAY_COMPRESS_VERTEX, MESH_ARRAY_COMPRESS_NORMAL, MESH_ARRAY_COMPRESS_TANGENT, MESH_ARRAY_COMPRESS_COLOR, MESH_ARRAY_COMPRESS_TEX_UV, MESH_ARRAY_COMPRESS_TEX_UV2, MESH_ARRAY_COMPRESS_BONES, MESH_ARRAY_COMPRESS_WEIGHTS, MESH_ARRAY_COMPRESS_DEFAULT, MESH_ARRAY_COMPRESS_INDEX, MESH_ARRAY_FLAG_USE_2D_VERTICES, MESH_ARRAY_FLAG_USE_16_BIT_BONES
+ * ctypedef enum Mesh_ArrayType :MESH_ARRAY_VERTEX, MESH_ARRAY_NORMAL, MESH_ARRAY_TANGENT, MESH_ARRAY_COLOR, MESH_ARRAY_TEX_UV, MESH_ARRAY_TEX_UV2, MESH_ARRAY_BONES, MESH_ARRAY_WEIGHTS, MESH_ARRAY_INDEX, MESH_ARRAY_MAX
+ */
+enum __pyx_t_7classes_9generated_Mesh_PrimitiveType {
+  __pyx_e_7classes_9generated_MESH_PRIMITIVE_POINTS,
+  __pyx_e_7classes_9generated_MESH_PRIMITIVE_LINES,
+  __pyx_e_7classes_9generated_MESH_PRIMITIVE_LINE_STRIP,
+  __pyx_e_7classes_9generated_MESH_PRIMITIVE_LINE_LOOP,
+  __pyx_e_7classes_9generated_MESH_PRIMITIVE_TRIANGLES,
+  __pyx_e_7classes_9generated_MESH_PRIMITIVE_TRIANGLE_STRIP,
+  __pyx_e_7classes_9generated_MESH_PRIMITIVE_TRIANGLE_FAN
+};
+typedef enum __pyx_t_7classes_9generated_Mesh_PrimitiveType __pyx_t_7classes_9generated_Mesh_PrimitiveType;
+
+/* "classes/generated.pxd":407
+ * ctypedef enum Mesh_BlendShapeMode :MESH_BLEND_SHAPE_MODE_NORMALIZED, MESH_BLEND_SHAPE_MODE_RELATIVE
+ * ctypedef enum Mesh_PrimitiveType :MESH_PRIMITIVE_POINTS, MESH_PRIMITIVE_LINES, MESH_PRIMITIVE_LINE_STRIP, MESH_PRIMITIVE_LINE_LOOP, MESH_PRIMITIVE_TRIANGLES, MESH_PRIMITIVE_TRIANGLE_STRIP, MESH_PRIMITIVE_TRIANGLE_FAN
+ * ctypedef enum Mesh_ArrayFormat :MESH_ARRAY_FORMAT_VERTEX, MESH_ARRAY_FORMAT_NORMAL, MESH_ARRAY_FORMAT_TANGENT, MESH_ARRAY_FORMAT_COLOR, MESH_ARRAY_COMPRESS_BASE, MESH_ARRAY_FORMAT_TEX_UV, MESH_ARRAY_FORMAT_TEX_UV2, MESH_ARRAY_FORMAT_BONES, MESH_ARRAY_FORMAT_WEIGHTS, MESH_ARRAY_FORMAT_INDEX, MESH_ARRAY_COMPRESS_VERTEX, MESH_ARRAY_COMPRESS_NORMAL, MESH_ARRAY_COMPRESS_TANGENT, MESH_ARRAY_COMPRESS_COLOR, MESH_ARRAY_COMPRESS_TEX_UV, MESH_ARRAY_COMPRESS_TEX_UV2, MESH_ARRAY_COMPRESS_BONES, MESH_ARRAY_COMPRESS_WEIGHTS, MESH_ARRAY_COMPRESS_DEFAULT, MESH_ARRAY_COMPRESS_INDEX, MESH_ARRAY_FLAG_USE_2D_VERTICES, MESH_ARRAY_FLAG_USE_16_BIT_BONES             # <<<<<<<<<<<<<<
+ * ctypedef enum Mesh_ArrayType :MESH_ARRAY_VERTEX, MESH_ARRAY_NORMAL, MESH_ARRAY_TANGENT, MESH_ARRAY_COLOR, MESH_ARRAY_TEX_UV, MESH_ARRAY_TEX_UV2, MESH_ARRAY_BONES, MESH_ARRAY_WEIGHTS, MESH_ARRAY_INDEX, MESH_ARRAY_MAX
+ * 
+ */
+enum __pyx_t_7classes_9generated_Mesh_ArrayFormat {
+  __pyx_e_7classes_9generated_MESH_ARRAY_FORMAT_VERTEX,
+  __pyx_e_7classes_9generated_MESH_ARRAY_FORMAT_NORMAL,
+  __pyx_e_7classes_9generated_MESH_ARRAY_FORMAT_TANGENT,
+  __pyx_e_7classes_9generated_MESH_ARRAY_FORMAT_COLOR,
+  __pyx_e_7classes_9generated_MESH_ARRAY_COMPRESS_BASE,
+  __pyx_e_7classes_9generated_MESH_ARRAY_FORMAT_TEX_UV,
+  __pyx_e_7classes_9generated_MESH_ARRAY_FORMAT_TEX_UV2,
+  __pyx_e_7classes_9generated_MESH_ARRAY_FORMAT_BONES,
+  __pyx_e_7classes_9generated_MESH_ARRAY_FORMAT_WEIGHTS,
+  __pyx_e_7classes_9generated_MESH_ARRAY_FORMAT_INDEX,
+  __pyx_e_7classes_9generated_MESH_ARRAY_COMPRESS_VERTEX,
+  __pyx_e_7classes_9generated_MESH_ARRAY_COMPRESS_NORMAL,
+  __pyx_e_7classes_9generated_MESH_ARRAY_COMPRESS_TANGENT,
+  __pyx_e_7classes_9generated_MESH_ARRAY_COMPRESS_COLOR,
+  __pyx_e_7classes_9generated_MESH_ARRAY_COMPRESS_TEX_UV,
+  __pyx_e_7classes_9generated_MESH_ARRAY_COMPRESS_TEX_UV2,
+  __pyx_e_7classes_9generated_MESH_ARRAY_COMPRESS_BONES,
+  __pyx_e_7classes_9generated_MESH_ARRAY_COMPRESS_WEIGHTS,
+  __pyx_e_7classes_9generated_MESH_ARRAY_COMPRESS_DEFAULT,
+  __pyx_e_7classes_9generated_MESH_ARRAY_COMPRESS_INDEX,
+  __pyx_e_7classes_9generated_MESH_ARRAY_FLAG_USE_2D_VERTICES,
+  __pyx_e_7classes_9generated_MESH_ARRAY_FLAG_USE_16_BIT_BONES
+};
+typedef enum __pyx_t_7classes_9generated_Mesh_ArrayFormat __pyx_t_7classes_9generated_Mesh_ArrayFormat;
+
+/* "classes/generated.pxd":408
+ * ctypedef enum Mesh_PrimitiveType :MESH_PRIMITIVE_POINTS, MESH_PRIMITIVE_LINES, MESH_PRIMITIVE_LINE_STRIP, MESH_PRIMITIVE_LINE_LOOP, MESH_PRIMITIVE_TRIANGLES, MESH_PRIMITIVE_TRIANGLE_STRIP, MESH_PRIMITIVE_TRIANGLE_FAN
+ * ctypedef enum Mesh_ArrayFormat :MESH_ARRAY_FORMAT_VERTEX, MESH_ARRAY_FORMAT_NORMAL, MESH_ARRAY_FORMAT_TANGENT, MESH_ARRAY_FORMAT_COLOR, MESH_ARRAY_COMPRESS_BASE, MESH_ARRAY_FORMAT_TEX_UV, MESH_ARRAY_FORMAT_TEX_UV2, MESH_ARRAY_FORMAT_BONES, MESH_ARRAY_FORMAT_WEIGHTS, MESH_ARRAY_FORMAT_INDEX, MESH_ARRAY_COMPRESS_VERTEX, MESH_ARRAY_COMPRESS_NORMAL, MESH_ARRAY_COMPRESS_TANGENT, MESH_ARRAY_COMPRESS_COLOR, MESH_ARRAY_COMPRESS_TEX_UV, MESH_ARRAY_COMPRESS_TEX_UV2, MESH_ARRAY_COMPRESS_BONES, MESH_ARRAY_COMPRESS_WEIGHTS, MESH_ARRAY_COMPRESS_DEFAULT, MESH_ARRAY_COMPRESS_INDEX, MESH_ARRAY_FLAG_USE_2D_VERTICES, MESH_ARRAY_FLAG_USE_16_BIT_BONES
+ * ctypedef enum Mesh_ArrayType :MESH_ARRAY_VERTEX, MESH_ARRAY_NORMAL, MESH_ARRAY_TANGENT, MESH_ARRAY_COLOR, MESH_ARRAY_TEX_UV, MESH_ARRAY_TEX_UV2, MESH_ARRAY_BONES, MESH_ARRAY_WEIGHTS, MESH_ARRAY_INDEX, MESH_ARRAY_MAX             # <<<<<<<<<<<<<<
+ * 
+ * 
+ */
+enum __pyx_t_7classes_9generated_Mesh_ArrayType {
+  __pyx_e_7classes_9generated_MESH_ARRAY_VERTEX,
+  __pyx_e_7classes_9generated_MESH_ARRAY_NORMAL,
+  __pyx_e_7classes_9generated_MESH_ARRAY_TANGENT,
+  __pyx_e_7classes_9generated_MESH_ARRAY_COLOR,
+  __pyx_e_7classes_9generated_MESH_ARRAY_TEX_UV,
+  __pyx_e_7classes_9generated_MESH_ARRAY_TEX_UV2,
+  __pyx_e_7classes_9generated_MESH_ARRAY_BONES,
+  __pyx_e_7classes_9generated_MESH_ARRAY_WEIGHTS,
+  __pyx_e_7classes_9generated_MESH_ARRAY_INDEX,
+  __pyx_e_7classes_9generated_MESH_ARRAY_MAX
+};
+typedef enum __pyx_t_7classes_9generated_Mesh_ArrayType __pyx_t_7classes_9generated_Mesh_ArrayType;
+
+/* "classes/generated.pxd":416
+ * 
+ * 
+ * ctypedef enum MultiMesh_TransformFormat :MULTIMESH_TRANSFORM_2D, MULTIMESH_TRANSFORM_3D             # <<<<<<<<<<<<<<
+ * ctypedef enum MultiMesh_CustomDataFormat :MULTIMESH_CUSTOM_DATA_NONE, MULTIMESH_CUSTOM_DATA_8BIT, MULTIMESH_CUSTOM_DATA_FLOAT
+ * ctypedef enum MultiMesh_ColorFormat :MULTIMESH_COLOR_NONE, MULTIMESH_COLOR_8BIT, MULTIMESH_COLOR_FLOAT
+ */
+enum __pyx_t_7classes_9generated_MultiMesh_TransformFormat {
+  __pyx_e_7classes_9generated_MULTIMESH_TRANSFORM_2D,
+  __pyx_e_7classes_9generated_MULTIMESH_TRANSFORM_3D
+};
+typedef enum __pyx_t_7classes_9generated_MultiMesh_TransformFormat __pyx_t_7classes_9generated_MultiMesh_TransformFormat;
+
+/* "classes/generated.pxd":417
+ * 
+ * ctypedef enum MultiMesh_TransformFormat :MULTIMESH_TRANSFORM_2D, MULTIMESH_TRANSFORM_3D
+ * ctypedef enum MultiMesh_CustomDataFormat :MULTIMESH_CUSTOM_DATA_NONE, MULTIMESH_CUSTOM_DATA_8BIT, MULTIMESH_CUSTOM_DATA_FLOAT             # <<<<<<<<<<<<<<
+ * ctypedef enum MultiMesh_ColorFormat :MULTIMESH_COLOR_NONE, MULTIMESH_COLOR_8BIT, MULTIMESH_COLOR_FLOAT
+ * 
+ */
+enum __pyx_t_7classes_9generated_MultiMesh_CustomDataFormat {
+  __pyx_e_7classes_9generated_MULTIMESH_CUSTOM_DATA_NONE,
+  __pyx_e_7classes_9generated_MULTIMESH_CUSTOM_DATA_8BIT,
+  __pyx_e_7classes_9generated_MULTIMESH_CUSTOM_DATA_FLOAT
+};
+typedef enum __pyx_t_7classes_9generated_MultiMesh_CustomDataFormat __pyx_t_7classes_9generated_MultiMesh_CustomDataFormat;
+
+/* "classes/generated.pxd":418
+ * ctypedef enum MultiMesh_TransformFormat :MULTIMESH_TRANSFORM_2D, MULTIMESH_TRANSFORM_3D
+ * ctypedef enum MultiMesh_CustomDataFormat :MULTIMESH_CUSTOM_DATA_NONE, MULTIMESH_CUSTOM_DATA_8BIT, MULTIMESH_CUSTOM_DATA_FLOAT
+ * ctypedef enum MultiMesh_ColorFormat :MULTIMESH_COLOR_NONE, MULTIMESH_COLOR_8BIT, MULTIMESH_COLOR_FLOAT             # <<<<<<<<<<<<<<
+ * 
+ * 
+ */
+enum __pyx_t_7classes_9generated_MultiMesh_ColorFormat {
+  __pyx_e_7classes_9generated_MULTIMESH_COLOR_NONE,
+  __pyx_e_7classes_9generated_MULTIMESH_COLOR_8BIT,
+  __pyx_e_7classes_9generated_MULTIMESH_COLOR_FLOAT
+};
+typedef enum __pyx_t_7classes_9generated_MultiMesh_ColorFormat __pyx_t_7classes_9generated_MultiMesh_ColorFormat;
+
+/* "classes/generated.pxd":422
+ * 
+ * 
+ * ctypedef enum MultiplayerAPI_RPCMode :MULTIPLAYERAPI_RPC_MODE_DISABLED, MULTIPLAYERAPI_RPC_MODE_REMOTE, MULTIPLAYERAPI_RPC_MODE_MASTER, MULTIPLAYERAPI_RPC_MODE_PUPPET, MULTIPLAYERAPI_RPC_MODE_SLAVE, MULTIPLAYERAPI_RPC_MODE_REMOTESYNC, MULTIPLAYERAPI_RPC_MODE_SYNC, MULTIPLAYERAPI_RPC_MODE_MASTERSYNC, MULTIPLAYERAPI_RPC_MODE_PUPPETSYNC             # <<<<<<<<<<<<<<
+ * 
+ * 
+ */
+enum __pyx_t_7classes_9generated_MultiplayerAPI_RPCMode {
+  __pyx_e_7classes_9generated_MULTIPLAYERAPI_RPC_MODE_DISABLED,
+  __pyx_e_7classes_9generated_MULTIPLAYERAPI_RPC_MODE_REMOTE,
+  __pyx_e_7classes_9generated_MULTIPLAYERAPI_RPC_MODE_MASTER,
+  __pyx_e_7classes_9generated_MULTIPLAYERAPI_RPC_MODE_PUPPET,
+  __pyx_e_7classes_9generated_MULTIPLAYERAPI_RPC_MODE_SLAVE,
+  __pyx_e_7classes_9generated_MULTIPLAYERAPI_RPC_MODE_REMOTESYNC,
+  __pyx_e_7classes_9generated_MULTIPLAYERAPI_RPC_MODE_SYNC,
+  __pyx_e_7classes_9generated_MULTIPLAYERAPI_RPC_MODE_MASTERSYNC,
+  __pyx_e_7classes_9generated_MULTIPLAYERAPI_RPC_MODE_PUPPETSYNC
+};
+typedef enum __pyx_t_7classes_9generated_MultiplayerAPI_RPCMode __pyx_t_7classes_9generated_MultiplayerAPI_RPCMode;
+
+/* "classes/generated.pxd":432
+ * 
+ * 
+ * ctypedef enum NetworkedMultiplayerENet_CompressionMode :NETWORKEDMULTIPLAYERENET_COMPRESS_NONE, NETWORKEDMULTIPLAYERENET_COMPRESS_RANGE_CODER, NETWORKEDMULTIPLAYERENET_COMPRESS_FASTLZ, NETWORKEDMULTIPLAYERENET_COMPRESS_ZLIB, NETWORKEDMULTIPLAYERENET_COMPRESS_ZSTD             # <<<<<<<<<<<<<<
+ * 
+ * ctypedef enum NetworkedMultiplayerPeer_ConnectionStatus :NETWORKEDMULTIPLAYERPEER_CONNECTION_DISCONNECTED, NETWORKEDMULTIPLAYERPEER_CONNECTION_CONNECTING, NETWORKEDMULTIPLAYERPEER_CONNECTION_CONNECTED
+ */
+enum __pyx_t_7classes_9generated_NetworkedMultiplayerENet_CompressionMode {
+  __pyx_e_7classes_9generated_NETWORKEDMULTIPLAYERENET_COMPRESS_NONE,
+  __pyx_e_7classes_9generated_NETWORKEDMULTIPLAYERENET_COMPRESS_RANGE_CODER,
+  __pyx_e_7classes_9generated_NETWORKEDMULTIPLAYERENET_COMPRESS_FASTLZ,
+  __pyx_e_7classes_9generated_NETWORKEDMULTIPLAYERENET_COMPRESS_ZLIB,
+  __pyx_e_7classes_9generated_NETWORKEDMULTIPLAYERENET_COMPRESS_ZSTD
+};
+typedef enum __pyx_t_7classes_9generated_NetworkedMultiplayerENet_CompressionMode __pyx_t_7classes_9generated_NetworkedMultiplayerENet_CompressionMode;
+
+/* "classes/generated.pxd":434
+ * ctypedef enum NetworkedMultiplayerENet_CompressionMode :NETWORKEDMULTIPLAYERENET_COMPRESS_NONE, NETWORKEDMULTIPLAYERENET_COMPRESS_RANGE_CODER, NETWORKEDMULTIPLAYERENET_COMPRESS_FASTLZ, NETWORKEDMULTIPLAYERENET_COMPRESS_ZLIB, NETWORKEDMULTIPLAYERENET_COMPRESS_ZSTD
+ * 
+ * ctypedef enum NetworkedMultiplayerPeer_ConnectionStatus :NETWORKEDMULTIPLAYERPEER_CONNECTION_DISCONNECTED, NETWORKEDMULTIPLAYERPEER_CONNECTION_CONNECTING, NETWORKEDMULTIPLAYERPEER_CONNECTION_CONNECTED             # <<<<<<<<<<<<<<
+ * ctypedef enum NetworkedMultiplayerPeer_TransferMode :NETWORKEDMULTIPLAYERPEER_TRANSFER_MODE_UNRELIABLE, NETWORKEDMULTIPLAYERPEER_TRANSFER_MODE_UNRELIABLE_ORDERED, NETWORKEDMULTIPLAYERPEER_TRANSFER_MODE_RELIABLE
+ * 
+ */
+enum __pyx_t_7classes_9generated_NetworkedMultiplayerPeer_ConnectionStatus {
+  __pyx_e_7classes_9generated_NETWORKEDMULTIPLAYERPEER_CONNECTION_DISCONNECTED,
+  __pyx_e_7classes_9generated_NETWORKEDMULTIPLAYERPEER_CONNECTION_CONNECTING,
+  __pyx_e_7classes_9generated_NETWORKEDMULTIPLAYERPEER_CONNECTION_CONNECTED
+};
+typedef enum __pyx_t_7classes_9generated_NetworkedMultiplayerPeer_ConnectionStatus __pyx_t_7classes_9generated_NetworkedMultiplayerPeer_ConnectionStatus;
+
+/* "classes/generated.pxd":435
+ * 
+ * ctypedef enum NetworkedMultiplayerPeer_ConnectionStatus :NETWORKEDMULTIPLAYERPEER_CONNECTION_DISCONNECTED, NETWORKEDMULTIPLAYERPEER_CONNECTION_CONNECTING, NETWORKEDMULTIPLAYERPEER_CONNECTION_CONNECTED
+ * ctypedef enum NetworkedMultiplayerPeer_TransferMode :NETWORKEDMULTIPLAYERPEER_TRANSFER_MODE_UNRELIABLE, NETWORKEDMULTIPLAYERPEER_TRANSFER_MODE_UNRELIABLE_ORDERED, NETWORKEDMULTIPLAYERPEER_TRANSFER_MODE_RELIABLE             # <<<<<<<<<<<<<<
+ * 
+ * ctypedef enum NinePatchRect_AxisStretchMode :NINEPATCHRECT_AXIS_STRETCH_MODE_STRETCH, NINEPATCHRECT_AXIS_STRETCH_MODE_TILE, NINEPATCHRECT_AXIS_STRETCH_MODE_TILE_FIT
+ */
+enum __pyx_t_7classes_9generated_NetworkedMultiplayerPeer_TransferMode {
+  __pyx_e_7classes_9generated_NETWORKEDMULTIPLAYERPEER_TRANSFER_MODE_UNRELIABLE,
+  __pyx_e_7classes_9generated_NETWORKEDMULTIPLAYERPEER_TRANSFER_MODE_UNRELIABLE_ORDERED,
+  __pyx_e_7classes_9generated_NETWORKEDMULTIPLAYERPEER_TRANSFER_MODE_RELIABLE
+};
+typedef enum __pyx_t_7classes_9generated_NetworkedMultiplayerPeer_TransferMode __pyx_t_7classes_9generated_NetworkedMultiplayerPeer_TransferMode;
+
+/* "classes/generated.pxd":437
+ * ctypedef enum NetworkedMultiplayerPeer_TransferMode :NETWORKEDMULTIPLAYERPEER_TRANSFER_MODE_UNRELIABLE, NETWORKEDMULTIPLAYERPEER_TRANSFER_MODE_UNRELIABLE_ORDERED, NETWORKEDMULTIPLAYERPEER_TRANSFER_MODE_RELIABLE
+ * 
+ * ctypedef enum NinePatchRect_AxisStretchMode :NINEPATCHRECT_AXIS_STRETCH_MODE_STRETCH, NINEPATCHRECT_AXIS_STRETCH_MODE_TILE, NINEPATCHRECT_AXIS_STRETCH_MODE_TILE_FIT             # <<<<<<<<<<<<<<
+ * 
+ * ctypedef enum Node_PauseMode :NODE_PAUSE_MODE_INHERIT, NODE_PAUSE_MODE_STOP, NODE_PAUSE_MODE_PROCESS
+ */
+enum __pyx_t_7classes_9generated_NinePatchRect_AxisStretchMode {
+  __pyx_e_7classes_9generated_NINEPATCHRECT_AXIS_STRETCH_MODE_STRETCH,
+  __pyx_e_7classes_9generated_NINEPATCHRECT_AXIS_STRETCH_MODE_TILE,
+  __pyx_e_7classes_9generated_NINEPATCHRECT_AXIS_STRETCH_MODE_TILE_FIT
+};
+typedef enum __pyx_t_7classes_9generated_NinePatchRect_AxisStretchMode __pyx_t_7classes_9generated_NinePatchRect_AxisStretchMode;
+
+/* "classes/generated.pxd":439
+ * ctypedef enum NinePatchRect_AxisStretchMode :NINEPATCHRECT_AXIS_STRETCH_MODE_STRETCH, NINEPATCHRECT_AXIS_STRETCH_MODE_TILE, NINEPATCHRECT_AXIS_STRETCH_MODE_TILE_FIT
+ * 
+ * ctypedef enum Node_PauseMode :NODE_PAUSE_MODE_INHERIT, NODE_PAUSE_MODE_STOP, NODE_PAUSE_MODE_PROCESS             # <<<<<<<<<<<<<<
+ * ctypedef enum Node_DuplicateFlags :NODE_DUPLICATE_SIGNALS, NODE_DUPLICATE_GROUPS, NODE_DUPLICATE_SCRIPTS, NODE_DUPLICATE_USE_INSTANCING
+ * 
+ */
+enum __pyx_t_7classes_9generated_Node_PauseMode {
+  __pyx_e_7classes_9generated_NODE_PAUSE_MODE_INHERIT,
+  __pyx_e_7classes_9generated_NODE_PAUSE_MODE_STOP,
+  __pyx_e_7classes_9generated_NODE_PAUSE_MODE_PROCESS
+};
+typedef enum __pyx_t_7classes_9generated_Node_PauseMode __pyx_t_7classes_9generated_Node_PauseMode;
+
+/* "classes/generated.pxd":440
+ * 
+ * ctypedef enum Node_PauseMode :NODE_PAUSE_MODE_INHERIT, NODE_PAUSE_MODE_STOP, NODE_PAUSE_MODE_PROCESS
+ * ctypedef enum Node_DuplicateFlags :NODE_DUPLICATE_SIGNALS, NODE_DUPLICATE_GROUPS, NODE_DUPLICATE_SCRIPTS, NODE_DUPLICATE_USE_INSTANCING             # <<<<<<<<<<<<<<
+ * 
+ * 
+ */
+enum __pyx_t_7classes_9generated_Node_DuplicateFlags {
+  __pyx_e_7classes_9generated_NODE_DUPLICATE_SIGNALS,
+  __pyx_e_7classes_9generated_NODE_DUPLICATE_GROUPS,
+  __pyx_e_7classes_9generated_NODE_DUPLICATE_SCRIPTS,
+  __pyx_e_7classes_9generated_NODE_DUPLICATE_USE_INSTANCING
+};
+typedef enum __pyx_t_7classes_9generated_Node_DuplicateFlags __pyx_t_7classes_9generated_Node_DuplicateFlags;
+
+/* "classes/generated.pxd":444
+ * 
+ * 
+ * ctypedef enum Object_ConnectFlags :OBJECT_CONNECT_DEFERRED, OBJECT_CONNECT_PERSIST, OBJECT_CONNECT_ONESHOT, OBJECT_CONNECT_REFERENCE_COUNTED             # <<<<<<<<<<<<<<
+ * 
+ * ctypedef enum OccluderPolygon2D_CullMode :OCCLUDERPOLYGON2D_CULL_DISABLED, OCCLUDERPOLYGON2D_CULL_CLOCKWISE, OCCLUDERPOLYGON2D_CULL_COUNTER_CLOCKWISE
+ */
+enum __pyx_t_7classes_9generated_Object_ConnectFlags {
+  __pyx_e_7classes_9generated_OBJECT_CONNECT_DEFERRED,
+  __pyx_e_7classes_9generated_OBJECT_CONNECT_PERSIST,
+  __pyx_e_7classes_9generated_OBJECT_CONNECT_ONESHOT,
+  __pyx_e_7classes_9generated_OBJECT_CONNECT_REFERENCE_COUNTED
+};
+typedef enum __pyx_t_7classes_9generated_Object_ConnectFlags __pyx_t_7classes_9generated_Object_ConnectFlags;
+
+/* "classes/generated.pxd":446
+ * ctypedef enum Object_ConnectFlags :OBJECT_CONNECT_DEFERRED, OBJECT_CONNECT_PERSIST, OBJECT_CONNECT_ONESHOT, OBJECT_CONNECT_REFERENCE_COUNTED
+ * 
+ * ctypedef enum OccluderPolygon2D_CullMode :OCCLUDERPOLYGON2D_CULL_DISABLED, OCCLUDERPOLYGON2D_CULL_CLOCKWISE, OCCLUDERPOLYGON2D_CULL_COUNTER_CLOCKWISE             # <<<<<<<<<<<<<<
+ * 
+ * ctypedef enum OmniLight_ShadowMode :OMNILIGHT_SHADOW_DUAL_PARABOLOID, OMNILIGHT_SHADOW_CUBE
+ */
+enum __pyx_t_7classes_9generated_OccluderPolygon2D_CullMode {
+  __pyx_e_7classes_9generated_OCCLUDERPOLYGON2D_CULL_DISABLED,
+  __pyx_e_7classes_9generated_OCCLUDERPOLYGON2D_CULL_CLOCKWISE,
+  __pyx_e_7classes_9generated_OCCLUDERPOLYGON2D_CULL_COUNTER_CLOCKWISE
+};
+typedef enum __pyx_t_7classes_9generated_OccluderPolygon2D_CullMode __pyx_t_7classes_9generated_OccluderPolygon2D_CullMode;
+
+/* "classes/generated.pxd":448
+ * ctypedef enum OccluderPolygon2D_CullMode :OCCLUDERPOLYGON2D_CULL_DISABLED, OCCLUDERPOLYGON2D_CULL_CLOCKWISE, OCCLUDERPOLYGON2D_CULL_COUNTER_CLOCKWISE
+ * 
+ * ctypedef enum OmniLight_ShadowMode :OMNILIGHT_SHADOW_DUAL_PARABOLOID, OMNILIGHT_SHADOW_CUBE             # <<<<<<<<<<<<<<
+ * ctypedef enum OmniLight_ShadowDetail :OMNILIGHT_SHADOW_DETAIL_VERTICAL, OMNILIGHT_SHADOW_DETAIL_HORIZONTAL
+ * 
+ */
+enum __pyx_t_7classes_9generated_OmniLight_ShadowMode {
+  __pyx_e_7classes_9generated_OMNILIGHT_SHADOW_DUAL_PARABOLOID,
+  __pyx_e_7classes_9generated_OMNILIGHT_SHADOW_CUBE
+};
+typedef enum __pyx_t_7classes_9generated_OmniLight_ShadowMode __pyx_t_7classes_9generated_OmniLight_ShadowMode;
+
+/* "classes/generated.pxd":449
+ * 
+ * ctypedef enum OmniLight_ShadowMode :OMNILIGHT_SHADOW_DUAL_PARABOLOID, OMNILIGHT_SHADOW_CUBE
+ * ctypedef enum OmniLight_ShadowDetail :OMNILIGHT_SHADOW_DETAIL_VERTICAL, OMNILIGHT_SHADOW_DETAIL_HORIZONTAL             # <<<<<<<<<<<<<<
+ * 
+ * 
+ */
+enum __pyx_t_7classes_9generated_OmniLight_ShadowDetail {
+  __pyx_e_7classes_9generated_OMNILIGHT_SHADOW_DETAIL_VERTICAL,
+  __pyx_e_7classes_9generated_OMNILIGHT_SHADOW_DETAIL_HORIZONTAL
+};
+typedef enum __pyx_t_7classes_9generated_OmniLight_ShadowDetail __pyx_t_7classes_9generated_OmniLight_ShadowDetail;
+
+/* "classes/generated.pxd":457
+ * 
+ * 
+ * ctypedef enum PackedScene_GenEditState :PACKEDSCENE_GEN_EDIT_STATE_DISABLED, PACKEDSCENE_GEN_EDIT_STATE_INSTANCE, PACKEDSCENE_GEN_EDIT_STATE_MAIN             # <<<<<<<<<<<<<<
+ * 
+ * 
+ */
+enum __pyx_t_7classes_9generated_PackedScene_GenEditState {
+  __pyx_e_7classes_9generated_PACKEDSCENE_GEN_EDIT_STATE_DISABLED,
+  __pyx_e_7classes_9generated_PACKEDSCENE_GEN_EDIT_STATE_INSTANCE,
+  __pyx_e_7classes_9generated_PACKEDSCENE_GEN_EDIT_STATE_MAIN
+};
+typedef enum __pyx_t_7classes_9generated_PackedScene_GenEditState __pyx_t_7classes_9generated_PackedScene_GenEditState;
+
+/* "classes/generated.pxd":468
+ * 
+ * 
+ * ctypedef enum Particles_DrawOrder :PARTICLES_DRAW_ORDER_INDEX, PARTICLES_DRAW_ORDER_LIFETIME, PARTICLES_DRAW_ORDER_VIEW_DEPTH             # <<<<<<<<<<<<<<
+ * 
+ * ctypedef enum Particles2D_DrawOrder :PARTICLES2D_DRAW_ORDER_INDEX, PARTICLES2D_DRAW_ORDER_LIFETIME
+ */
+enum __pyx_t_7classes_9generated_Particles_DrawOrder {
+  __pyx_e_7classes_9generated_PARTICLES_DRAW_ORDER_INDEX,
+  __pyx_e_7classes_9generated_PARTICLES_DRAW_ORDER_LIFETIME,
+  __pyx_e_7classes_9generated_PARTICLES_DRAW_ORDER_VIEW_DEPTH
+};
+typedef enum __pyx_t_7classes_9generated_Particles_DrawOrder __pyx_t_7classes_9generated_Particles_DrawOrder;
+
+/* "classes/generated.pxd":470
+ * ctypedef enum Particles_DrawOrder :PARTICLES_DRAW_ORDER_INDEX, PARTICLES_DRAW_ORDER_LIFETIME, PARTICLES_DRAW_ORDER_VIEW_DEPTH
+ * 
+ * ctypedef enum Particles2D_DrawOrder :PARTICLES2D_DRAW_ORDER_INDEX, PARTICLES2D_DRAW_ORDER_LIFETIME             # <<<<<<<<<<<<<<
+ * 
+ * ctypedef enum ParticlesMaterial_Flags :PARTICLESMATERIAL_FLAG_ALIGN_Y_TO_VELOCITY, PARTICLESMATERIAL_FLAG_ROTATE_Y, PARTICLESMATERIAL_FLAG_DISABLE_Z, PARTICLESMATERIAL_FLAG_MAX
+ */
+enum __pyx_t_7classes_9generated_Particles2D_DrawOrder {
+  __pyx_e_7classes_9generated_PARTICLES2D_DRAW_ORDER_INDEX,
+  __pyx_e_7classes_9generated_PARTICLES2D_DRAW_ORDER_LIFETIME
+};
+typedef enum __pyx_t_7classes_9generated_Particles2D_DrawOrder __pyx_t_7classes_9generated_Particles2D_DrawOrder;
+
+/* "classes/generated.pxd":472
+ * ctypedef enum Particles2D_DrawOrder :PARTICLES2D_DRAW_ORDER_INDEX, PARTICLES2D_DRAW_ORDER_LIFETIME
+ * 
+ * ctypedef enum ParticlesMaterial_Flags :PARTICLESMATERIAL_FLAG_ALIGN_Y_TO_VELOCITY, PARTICLESMATERIAL_FLAG_ROTATE_Y, PARTICLESMATERIAL_FLAG_DISABLE_Z, PARTICLESMATERIAL_FLAG_MAX             # <<<<<<<<<<<<<<
+ * ctypedef enum ParticlesMaterial_EmissionShape :PARTICLESMATERIAL_EMISSION_SHAPE_POINT, PARTICLESMATERIAL_EMISSION_SHAPE_SPHERE, PARTICLESMATERIAL_EMISSION_SHAPE_BOX, PARTICLESMATERIAL_EMISSION_SHAPE_POINTS, PARTICLESMATERIAL_EMISSION_SHAPE_DIRECTED_POINTS, PARTICLESMATERIAL_EMISSION_SHAPE_MAX
+ * ctypedef enum ParticlesMaterial_Parameter :PARTICLESMATERIAL_PARAM_INITIAL_LINEAR_VELOCITY, PARTICLESMATERIAL_PARAM_ANGULAR_VELOCITY, PARTICLESMATERIAL_PARAM_ORBIT_VELOCITY, PARTICLESMATERIAL_PARAM_LINEAR_ACCEL, PARTICLESMATERIAL_PARAM_RADIAL_ACCEL, PARTICLESMATERIAL_PARAM_TANGENTIAL_ACCEL, PARTICLESMATERIAL_PARAM_DAMPING, PARTICLESMATERIAL_PARAM_ANGLE, PARTICLESMATERIAL_PARAM_SCALE, PARTICLESMATERIAL_PARAM_HUE_VARIATION, PARTICLESMATERIAL_PARAM_ANIM_SPEED, PARTICLESMATERIAL_PARAM_ANIM_OFFSET, PARTICLESMATERIAL_PARAM_MAX
+ */
+enum __pyx_t_7classes_9generated_ParticlesMaterial_Flags {
+  __pyx_e_7classes_9generated_PARTICLESMATERIAL_FLAG_ALIGN_Y_TO_VELOCITY,
+  __pyx_e_7classes_9generated_PARTICLESMATERIAL_FLAG_ROTATE_Y,
+  __pyx_e_7classes_9generated_PARTICLESMATERIAL_FLAG_DISABLE_Z,
+  __pyx_e_7classes_9generated_PARTICLESMATERIAL_FLAG_MAX
+};
+typedef enum __pyx_t_7classes_9generated_ParticlesMaterial_Flags __pyx_t_7classes_9generated_ParticlesMaterial_Flags;
+
+/* "classes/generated.pxd":473
+ * 
+ * ctypedef enum ParticlesMaterial_Flags :PARTICLESMATERIAL_FLAG_ALIGN_Y_TO_VELOCITY, PARTICLESMATERIAL_FLAG_ROTATE_Y, PARTICLESMATERIAL_FLAG_DISABLE_Z, PARTICLESMATERIAL_FLAG_MAX
+ * ctypedef enum ParticlesMaterial_EmissionShape :PARTICLESMATERIAL_EMISSION_SHAPE_POINT, PARTICLESMATERIAL_EMISSION_SHAPE_SPHERE, PARTICLESMATERIAL_EMISSION_SHAPE_BOX, PARTICLESMATERIAL_EMISSION_SHAPE_POINTS, PARTICLESMATERIAL_EMISSION_SHAPE_DIRECTED_POINTS, PARTICLESMATERIAL_EMISSION_SHAPE_MAX             # <<<<<<<<<<<<<<
+ * ctypedef enum ParticlesMaterial_Parameter :PARTICLESMATERIAL_PARAM_INITIAL_LINEAR_VELOCITY, PARTICLESMATERIAL_PARAM_ANGULAR_VELOCITY, PARTICLESMATERIAL_PARAM_ORBIT_VELOCITY, PARTICLESMATERIAL_PARAM_LINEAR_ACCEL, PARTICLESMATERIAL_PARAM_RADIAL_ACCEL, PARTICLESMATERIAL_PARAM_TANGENTIAL_ACCEL, PARTICLESMATERIAL_PARAM_DAMPING, PARTICLESMATERIAL_PARAM_ANGLE, PARTICLESMATERIAL_PARAM_SCALE, PARTICLESMATERIAL_PARAM_HUE_VARIATION, PARTICLESMATERIAL_PARAM_ANIM_SPEED, PARTICLESMATERIAL_PARAM_ANIM_OFFSET, PARTICLESMATERIAL_PARAM_MAX
+ * 
+ */
+enum __pyx_t_7classes_9generated_ParticlesMaterial_EmissionShape {
+  __pyx_e_7classes_9generated_PARTICLESMATERIAL_EMISSION_SHAPE_POINT,
+  __pyx_e_7classes_9generated_PARTICLESMATERIAL_EMISSION_SHAPE_SPHERE,
+  __pyx_e_7classes_9generated_PARTICLESMATERIAL_EMISSION_SHAPE_BOX,
+  __pyx_e_7classes_9generated_PARTICLESMATERIAL_EMISSION_SHAPE_POINTS,
+  __pyx_e_7classes_9generated_PARTICLESMATERIAL_EMISSION_SHAPE_DIRECTED_POINTS,
+  __pyx_e_7classes_9generated_PARTICLESMATERIAL_EMISSION_SHAPE_MAX
+};
+typedef enum __pyx_t_7classes_9generated_ParticlesMaterial_EmissionShape __pyx_t_7classes_9generated_ParticlesMaterial_EmissionShape;
+
+/* "classes/generated.pxd":474
+ * ctypedef enum ParticlesMaterial_Flags :PARTICLESMATERIAL_FLAG_ALIGN_Y_TO_VELOCITY, PARTICLESMATERIAL_FLAG_ROTATE_Y, PARTICLESMATERIAL_FLAG_DISABLE_Z, PARTICLESMATERIAL_FLAG_MAX
+ * ctypedef enum ParticlesMaterial_EmissionShape :PARTICLESMATERIAL_EMISSION_SHAPE_POINT, PARTICLESMATERIAL_EMISSION_SHAPE_SPHERE, PARTICLESMATERIAL_EMISSION_SHAPE_BOX, PARTICLESMATERIAL_EMISSION_SHAPE_POINTS, PARTICLESMATERIAL_EMISSION_SHAPE_DIRECTED_POINTS, PARTICLESMATERIAL_EMISSION_SHAPE_MAX
+ * ctypedef enum ParticlesMaterial_Parameter :PARTICLESMATERIAL_PARAM_INITIAL_LINEAR_VELOCITY, PARTICLESMATERIAL_PARAM_ANGULAR_VELOCITY, PARTICLESMATERIAL_PARAM_ORBIT_VELOCITY, PARTICLESMATERIAL_PARAM_LINEAR_ACCEL, PARTICLESMATERIAL_PARAM_RADIAL_ACCEL, PARTICLESMATERIAL_PARAM_TANGENTIAL_ACCEL, PARTICLESMATERIAL_PARAM_DAMPING, PARTICLESMATERIAL_PARAM_ANGLE, PARTICLESMATERIAL_PARAM_SCALE, PARTICLESMATERIAL_PARAM_HUE_VARIATION, PARTICLESMATERIAL_PARAM_ANIM_SPEED, PARTICLESMATERIAL_PARAM_ANIM_OFFSET, PARTICLESMATERIAL_PARAM_MAX             # <<<<<<<<<<<<<<
+ * 
+ * 
+ */
+enum __pyx_t_7classes_9generated_ParticlesMaterial_Parameter {
+  __pyx_e_7classes_9generated_PARTICLESMATERIAL_PARAM_INITIAL_LINEAR_VELOCITY,
+  __pyx_e_7classes_9generated_PARTICLESMATERIAL_PARAM_ANGULAR_VELOCITY,
+  __pyx_e_7classes_9generated_PARTICLESMATERIAL_PARAM_ORBIT_VELOCITY,
+  __pyx_e_7classes_9generated_PARTICLESMATERIAL_PARAM_LINEAR_ACCEL,
+  __pyx_e_7classes_9generated_PARTICLESMATERIAL_PARAM_RADIAL_ACCEL,
+  __pyx_e_7classes_9generated_PARTICLESMATERIAL_PARAM_TANGENTIAL_ACCEL,
+  __pyx_e_7classes_9generated_PARTICLESMATERIAL_PARAM_DAMPING,
+  __pyx_e_7classes_9generated_PARTICLESMATERIAL_PARAM_ANGLE,
+  __pyx_e_7classes_9generated_PARTICLESMATERIAL_PARAM_SCALE,
+  __pyx_e_7classes_9generated_PARTICLESMATERIAL_PARAM_HUE_VARIATION,
+  __pyx_e_7classes_9generated_PARTICLESMATERIAL_PARAM_ANIM_SPEED,
+  __pyx_e_7classes_9generated_PARTICLESMATERIAL_PARAM_ANIM_OFFSET,
+  __pyx_e_7classes_9generated_PARTICLESMATERIAL_PARAM_MAX
+};
+typedef enum __pyx_t_7classes_9generated_ParticlesMaterial_Parameter __pyx_t_7classes_9generated_ParticlesMaterial_Parameter;
+
+/* "classes/generated.pxd":478
+ * 
+ * 
+ * ctypedef enum PathFollow_RotationMode :PATHFOLLOW_ROTATION_NONE, PATHFOLLOW_ROTATION_Y, PATHFOLLOW_ROTATION_XY, PATHFOLLOW_ROTATION_XYZ, PATHFOLLOW_ROTATION_ORIENTED             # <<<<<<<<<<<<<<
+ * 
+ * 
+ */
+enum __pyx_t_7classes_9generated_PathFollow_RotationMode {
+  __pyx_e_7classes_9generated_PATHFOLLOW_ROTATION_NONE,
+  __pyx_e_7classes_9generated_PATHFOLLOW_ROTATION_Y,
+  __pyx_e_7classes_9generated_PATHFOLLOW_ROTATION_XY,
+  __pyx_e_7classes_9generated_PATHFOLLOW_ROTATION_XYZ,
+  __pyx_e_7classes_9generated_PATHFOLLOW_ROTATION_ORIENTED
+};
+typedef enum __pyx_t_7classes_9generated_PathFollow_RotationMode __pyx_t_7classes_9generated_PathFollow_RotationMode;
+
+/* "classes/generated.pxd":481
+ * 
+ * 
+ * ctypedef enum Performance_Monitor :PERFORMANCE_TIME_FPS, PERFORMANCE_TIME_PROCESS, PERFORMANCE_TIME_PHYSICS_PROCESS, PERFORMANCE_MEMORY_STATIC, PERFORMANCE_MEMORY_DYNAMIC, PERFORMANCE_MEMORY_STATIC_MAX, PERFORMANCE_MEMORY_DYNAMIC_MAX, PERFORMANCE_MEMORY_MESSAGE_BUFFER_MAX, PERFORMANCE_OBJECT_COUNT, PERFORMANCE_OBJECT_RESOURCE_COUNT, PERFORMANCE_OBJECT_NODE_COUNT, PERFORMANCE_OBJECT_ORPHAN_NODE_COUNT, PERFORMANCE_RENDER_OBJECTS_IN_FRAME, PERFORMANCE_RENDER_VERTICES_IN_FRAME, PERFORMANCE_RENDER_MATERIAL_CHANGES_IN_FRAME, PERFORMANCE_RENDER_SHADER_CHANGES_IN_FRAME, PERFORMANCE_RENDER_SURFACE_CHANGES_IN_FRAME, PERFORMANCE_RENDER_DRAW_CALLS_IN_FRAME, PERFORMANCE_RENDER_VIDEO_MEM_USED, PERFORMANCE_RENDER_TEXTURE_MEM_USED, PERFORMANCE_RENDER_VERTEX_MEM_USED, PERFORMANCE_RENDER_USAGE_VIDEO_MEM_TOTAL, PERFORMANCE_PHYSICS_2D_ACTIVE_OBJECTS, PERFORMANCE_PHYSICS_2D_COLLISION_PAIRS, PERFORMANCE_PHYSICS_2D_ISLAND_COUNT, PERFORMANCE_PHYSICS_3D_ACTIVE_OBJECTS, PERFORMANCE_PHYSICS_3D_COLLISION_PAIRS, PERFORMANCE_PHYSICS_3D_ISLAND_COUNT, PERFORMANCE_AUDIO_OUTPUT_LATENCY, PERFORMANCE_MONITOR_MAX             # <<<<<<<<<<<<<<
+ * 
+ * ctypedef enum PhysicalBone_JointType :PHYSICALBONE_JOINT_TYPE_NONE, PHYSICALBONE_JOINT_TYPE_PIN, PHYSICALBONE_JOINT_TYPE_CONE, PHYSICALBONE_JOINT_TYPE_HINGE, PHYSICALBONE_JOINT_TYPE_SLIDER, PHYSICALBONE_JOINT_TYPE_6DOF
+ */
+enum __pyx_t_7classes_9generated_Performance_Monitor {
+  __pyx_e_7classes_9generated_PERFORMANCE_TIME_FPS,
+  __pyx_e_7classes_9generated_PERFORMANCE_TIME_PROCESS,
+  __pyx_e_7classes_9generated_PERFORMANCE_TIME_PHYSICS_PROCESS,
+  __pyx_e_7classes_9generated_PERFORMANCE_MEMORY_STATIC,
+  __pyx_e_7classes_9generated_PERFORMANCE_MEMORY_DYNAMIC,
+  __pyx_e_7classes_9generated_PERFORMANCE_MEMORY_STATIC_MAX,
+  __pyx_e_7classes_9generated_PERFORMANCE_MEMORY_DYNAMIC_MAX,
+  __pyx_e_7classes_9generated_PERFORMANCE_MEMORY_MESSAGE_BUFFER_MAX,
+  __pyx_e_7classes_9generated_PERFORMANCE_OBJECT_COUNT,
+  __pyx_e_7classes_9generated_PERFORMANCE_OBJECT_RESOURCE_COUNT,
+  __pyx_e_7classes_9generated_PERFORMANCE_OBJECT_NODE_COUNT,
+  __pyx_e_7classes_9generated_PERFORMANCE_OBJECT_ORPHAN_NODE_COUNT,
+  __pyx_e_7classes_9generated_PERFORMANCE_RENDER_OBJECTS_IN_FRAME,
+  __pyx_e_7classes_9generated_PERFORMANCE_RENDER_VERTICES_IN_FRAME,
+  __pyx_e_7classes_9generated_PERFORMANCE_RENDER_MATERIAL_CHANGES_IN_FRAME,
+  __pyx_e_7classes_9generated_PERFORMANCE_RENDER_SHADER_CHANGES_IN_FRAME,
+  __pyx_e_7classes_9generated_PERFORMANCE_RENDER_SURFACE_CHANGES_IN_FRAME,
+  __pyx_e_7classes_9generated_PERFORMANCE_RENDER_DRAW_CALLS_IN_FRAME,
+  __pyx_e_7classes_9generated_PERFORMANCE_RENDER_VIDEO_MEM_USED,
+  __pyx_e_7classes_9generated_PERFORMANCE_RENDER_TEXTURE_MEM_USED,
+  __pyx_e_7classes_9generated_PERFORMANCE_RENDER_VERTEX_MEM_USED,
+  __pyx_e_7classes_9generated_PERFORMANCE_RENDER_USAGE_VIDEO_MEM_TOTAL,
+  __pyx_e_7classes_9generated_PERFORMANCE_PHYSICS_2D_ACTIVE_OBJECTS,
+  __pyx_e_7classes_9generated_PERFORMANCE_PHYSICS_2D_COLLISION_PAIRS,
+  __pyx_e_7classes_9generated_PERFORMANCE_PHYSICS_2D_ISLAND_COUNT,
+  __pyx_e_7classes_9generated_PERFORMANCE_PHYSICS_3D_ACTIVE_OBJECTS,
+  __pyx_e_7classes_9generated_PERFORMANCE_PHYSICS_3D_COLLISION_PAIRS,
+  __pyx_e_7classes_9generated_PERFORMANCE_PHYSICS_3D_ISLAND_COUNT,
+  __pyx_e_7classes_9generated_PERFORMANCE_AUDIO_OUTPUT_LATENCY,
+  __pyx_e_7classes_9generated_PERFORMANCE_MONITOR_MAX
+};
+typedef enum __pyx_t_7classes_9generated_Performance_Monitor __pyx_t_7classes_9generated_Performance_Monitor;
+
+/* "classes/generated.pxd":483
+ * ctypedef enum Performance_Monitor :PERFORMANCE_TIME_FPS, PERFORMANCE_TIME_PROCESS, PERFORMANCE_TIME_PHYSICS_PROCESS, PERFORMANCE_MEMORY_STATIC, PERFORMANCE_MEMORY_DYNAMIC, PERFORMANCE_MEMORY_STATIC_MAX, PERFORMANCE_MEMORY_DYNAMIC_MAX, PERFORMANCE_MEMORY_MESSAGE_BUFFER_MAX, PERFORMANCE_OBJECT_COUNT, PERFORMANCE_OBJECT_RESOURCE_COUNT, PERFORMANCE_OBJECT_NODE_COUNT, PERFORMANCE_OBJECT_ORPHAN_NODE_COUNT, PERFORMANCE_RENDER_OBJECTS_IN_FRAME, PERFORMANCE_RENDER_VERTICES_IN_FRAME, PERFORMANCE_RENDER_MATERIAL_CHANGES_IN_FRAME, PERFORMANCE_RENDER_SHADER_CHANGES_IN_FRAME, PERFORMANCE_RENDER_SURFACE_CHANGES_IN_FRAME, PERFORMANCE_RENDER_DRAW_CALLS_IN_FRAME, PERFORMANCE_RENDER_VIDEO_MEM_USED, PERFORMANCE_RENDER_TEXTURE_MEM_USED, PERFORMANCE_RENDER_VERTEX_MEM_USED, PERFORMANCE_RENDER_USAGE_VIDEO_MEM_TOTAL, PERFORMANCE_PHYSICS_2D_ACTIVE_OBJECTS, PERFORMANCE_PHYSICS_2D_COLLISION_PAIRS, PERFORMANCE_PHYSICS_2D_ISLAND_COUNT, PERFORMANCE_PHYSICS_3D_ACTIVE_OBJECTS, PERFORMANCE_PHYSICS_3D_COLLISION_PAIRS, PERFORMANCE_PHYSICS_3D_ISLAND_COUNT, PERFORMANCE_AUDIO_OUTPUT_LATENCY, PERFORMANCE_MONITOR_MAX
+ * 
+ * ctypedef enum PhysicalBone_JointType :PHYSICALBONE_JOINT_TYPE_NONE, PHYSICALBONE_JOINT_TYPE_PIN, PHYSICALBONE_JOINT_TYPE_CONE, PHYSICALBONE_JOINT_TYPE_HINGE, PHYSICALBONE_JOINT_TYPE_SLIDER, PHYSICALBONE_JOINT_TYPE_6DOF             # <<<<<<<<<<<<<<
+ * 
+ * 
+ */
+enum __pyx_t_7classes_9generated_PhysicalBone_JointType {
+  __pyx_e_7classes_9generated_PHYSICALBONE_JOINT_TYPE_NONE,
+  __pyx_e_7classes_9generated_PHYSICALBONE_JOINT_TYPE_PIN,
+  __pyx_e_7classes_9generated_PHYSICALBONE_JOINT_TYPE_CONE,
+  __pyx_e_7classes_9generated_PHYSICALBONE_JOINT_TYPE_HINGE,
+  __pyx_e_7classes_9generated_PHYSICALBONE_JOINT_TYPE_SLIDER,
+  __pyx_e_7classes_9generated_PHYSICALBONE_JOINT_TYPE_6DOF
+};
+typedef enum __pyx_t_7classes_9generated_PhysicalBone_JointType __pyx_t_7classes_9generated_PhysicalBone_JointType;
+
+/* "classes/generated.pxd":488
+ * 
+ * 
+ * ctypedef enum Physics2DServer_ProcessInfo :PHYSICS2DSERVER_INFO_ACTIVE_OBJECTS, PHYSICS2DSERVER_INFO_COLLISION_PAIRS, PHYSICS2DSERVER_INFO_ISLAND_COUNT             # <<<<<<<<<<<<<<
+ * ctypedef enum Physics2DServer_AreaBodyStatus :PHYSICS2DSERVER_AREA_BODY_ADDED, PHYSICS2DSERVER_AREA_BODY_REMOVED
+ * ctypedef enum Physics2DServer_DampedStringParam :PHYSICS2DSERVER_DAMPED_STRING_REST_LENGTH, PHYSICS2DSERVER_DAMPED_STRING_STIFFNESS, PHYSICS2DSERVER_DAMPED_STRING_DAMPING
+ */
+enum __pyx_t_7classes_9generated_Physics2DServer_ProcessInfo {
+  __pyx_e_7classes_9generated_PHYSICS2DSERVER_INFO_ACTIVE_OBJECTS,
+  __pyx_e_7classes_9generated_PHYSICS2DSERVER_INFO_COLLISION_PAIRS,
+  __pyx_e_7classes_9generated_PHYSICS2DSERVER_INFO_ISLAND_COUNT
+};
+typedef enum __pyx_t_7classes_9generated_Physics2DServer_ProcessInfo __pyx_t_7classes_9generated_Physics2DServer_ProcessInfo;
+
+/* "classes/generated.pxd":489
+ * 
+ * ctypedef enum Physics2DServer_ProcessInfo :PHYSICS2DSERVER_INFO_ACTIVE_OBJECTS, PHYSICS2DSERVER_INFO_COLLISION_PAIRS, PHYSICS2DSERVER_INFO_ISLAND_COUNT
+ * ctypedef enum Physics2DServer_AreaBodyStatus :PHYSICS2DSERVER_AREA_BODY_ADDED, PHYSICS2DSERVER_AREA_BODY_REMOVED             # <<<<<<<<<<<<<<
+ * ctypedef enum Physics2DServer_DampedStringParam :PHYSICS2DSERVER_DAMPED_STRING_REST_LENGTH, PHYSICS2DSERVER_DAMPED_STRING_STIFFNESS, PHYSICS2DSERVER_DAMPED_STRING_DAMPING
+ * ctypedef enum Physics2DServer_BodyMode :PHYSICS2DSERVER_BODY_MODE_STATIC, PHYSICS2DSERVER_BODY_MODE_KINEMATIC, PHYSICS2DSERVER_BODY_MODE_RIGID, PHYSICS2DSERVER_BODY_MODE_CHARACTER
+ */
+enum __pyx_t_7classes_9generated_Physics2DServer_AreaBodyStatus {
+  __pyx_e_7classes_9generated_PHYSICS2DSERVER_AREA_BODY_ADDED,
+  __pyx_e_7classes_9generated_PHYSICS2DSERVER_AREA_BODY_REMOVED
+};
+typedef enum __pyx_t_7classes_9generated_Physics2DServer_AreaBodyStatus __pyx_t_7classes_9generated_Physics2DServer_AreaBodyStatus;
+
+/* "classes/generated.pxd":490
+ * ctypedef enum Physics2DServer_ProcessInfo :PHYSICS2DSERVER_INFO_ACTIVE_OBJECTS, PHYSICS2DSERVER_INFO_COLLISION_PAIRS, PHYSICS2DSERVER_INFO_ISLAND_COUNT
+ * ctypedef enum Physics2DServer_AreaBodyStatus :PHYSICS2DSERVER_AREA_BODY_ADDED, PHYSICS2DSERVER_AREA_BODY_REMOVED
+ * ctypedef enum Physics2DServer_DampedStringParam :PHYSICS2DSERVER_DAMPED_STRING_REST_LENGTH, PHYSICS2DSERVER_DAMPED_STRING_STIFFNESS, PHYSICS2DSERVER_DAMPED_STRING_DAMPING             # <<<<<<<<<<<<<<
+ * ctypedef enum Physics2DServer_BodyMode :PHYSICS2DSERVER_BODY_MODE_STATIC, PHYSICS2DSERVER_BODY_MODE_KINEMATIC, PHYSICS2DSERVER_BODY_MODE_RIGID, PHYSICS2DSERVER_BODY_MODE_CHARACTER
+ * ctypedef enum Physics2DServer_ShapeType :PHYSICS2DSERVER_SHAPE_LINE, PHYSICS2DSERVER_SHAPE_RAY, PHYSICS2DSERVER_SHAPE_SEGMENT, PHYSICS2DSERVER_SHAPE_CIRCLE, PHYSICS2DSERVER_SHAPE_RECTANGLE, PHYSICS2DSERVER_SHAPE_CAPSULE, PHYSICS2DSERVER_SHAPE_CONVEX_POLYGON, PHYSICS2DSERVER_SHAPE_CONCAVE_POLYGON, PHYSICS2DSERVER_SHAPE_CUSTOM
+ */
+enum __pyx_t_7classes_9generated_Physics2DServer_DampedStringParam {
+  __pyx_e_7classes_9generated_PHYSICS2DSERVER_DAMPED_STRING_REST_LENGTH,
+  __pyx_e_7classes_9generated_PHYSICS2DSERVER_DAMPED_STRING_STIFFNESS,
+  __pyx_e_7classes_9generated_PHYSICS2DSERVER_DAMPED_STRING_DAMPING
+};
+typedef enum __pyx_t_7classes_9generated_Physics2DServer_DampedStringParam __pyx_t_7classes_9generated_Physics2DServer_DampedStringParam;
+
+/* "classes/generated.pxd":491
+ * ctypedef enum Physics2DServer_AreaBodyStatus :PHYSICS2DSERVER_AREA_BODY_ADDED, PHYSICS2DSERVER_AREA_BODY_REMOVED
+ * ctypedef enum Physics2DServer_DampedStringParam :PHYSICS2DSERVER_DAMPED_STRING_REST_LENGTH, PHYSICS2DSERVER_DAMPED_STRING_STIFFNESS, PHYSICS2DSERVER_DAMPED_STRING_DAMPING
+ * ctypedef enum Physics2DServer_BodyMode :PHYSICS2DSERVER_BODY_MODE_STATIC, PHYSICS2DSERVER_BODY_MODE_KINEMATIC, PHYSICS2DSERVER_BODY_MODE_RIGID, PHYSICS2DSERVER_BODY_MODE_CHARACTER             # <<<<<<<<<<<<<<
+ * ctypedef enum Physics2DServer_ShapeType :PHYSICS2DSERVER_SHAPE_LINE, PHYSICS2DSERVER_SHAPE_RAY, PHYSICS2DSERVER_SHAPE_SEGMENT, PHYSICS2DSERVER_SHAPE_CIRCLE, PHYSICS2DSERVER_SHAPE_RECTANGLE, PHYSICS2DSERVER_SHAPE_CAPSULE, PHYSICS2DSERVER_SHAPE_CONVEX_POLYGON, PHYSICS2DSERVER_SHAPE_CONCAVE_POLYGON, PHYSICS2DSERVER_SHAPE_CUSTOM
+ * ctypedef enum Physics2DServer_JointParam :PHYSICS2DSERVER_JOINT_PARAM_BIAS, PHYSICS2DSERVER_JOINT_PARAM_MAX_BIAS, PHYSICS2DSERVER_JOINT_PARAM_MAX_FORCE
+ */
+enum __pyx_t_7classes_9generated_Physics2DServer_BodyMode {
+  __pyx_e_7classes_9generated_PHYSICS2DSERVER_BODY_MODE_STATIC,
+  __pyx_e_7classes_9generated_PHYSICS2DSERVER_BODY_MODE_KINEMATIC,
+  __pyx_e_7classes_9generated_PHYSICS2DSERVER_BODY_MODE_RIGID,
+  __pyx_e_7classes_9generated_PHYSICS2DSERVER_BODY_MODE_CHARACTER
+};
+typedef enum __pyx_t_7classes_9generated_Physics2DServer_BodyMode __pyx_t_7classes_9generated_Physics2DServer_BodyMode;
+
+/* "classes/generated.pxd":492
+ * ctypedef enum Physics2DServer_DampedStringParam :PHYSICS2DSERVER_DAMPED_STRING_REST_LENGTH, PHYSICS2DSERVER_DAMPED_STRING_STIFFNESS, PHYSICS2DSERVER_DAMPED_STRING_DAMPING
+ * ctypedef enum Physics2DServer_BodyMode :PHYSICS2DSERVER_BODY_MODE_STATIC, PHYSICS2DSERVER_BODY_MODE_KINEMATIC, PHYSICS2DSERVER_BODY_MODE_RIGID, PHYSICS2DSERVER_BODY_MODE_CHARACTER
+ * ctypedef enum Physics2DServer_ShapeType :PHYSICS2DSERVER_SHAPE_LINE, PHYSICS2DSERVER_SHAPE_RAY, PHYSICS2DSERVER_SHAPE_SEGMENT, PHYSICS2DSERVER_SHAPE_CIRCLE, PHYSICS2DSERVER_SHAPE_RECTANGLE, PHYSICS2DSERVER_SHAPE_CAPSULE, PHYSICS2DSERVER_SHAPE_CONVEX_POLYGON, PHYSICS2DSERVER_SHAPE_CONCAVE_POLYGON, PHYSICS2DSERVER_SHAPE_CUSTOM             # <<<<<<<<<<<<<<
+ * ctypedef enum Physics2DServer_JointParam :PHYSICS2DSERVER_JOINT_PARAM_BIAS, PHYSICS2DSERVER_JOINT_PARAM_MAX_BIAS, PHYSICS2DSERVER_JOINT_PARAM_MAX_FORCE
+ * ctypedef enum Physics2DServer_SpaceParameter :PHYSICS2DSERVER_SPACE_PARAM_CONTACT_RECYCLE_RADIUS, PHYSICS2DSERVER_SPACE_PARAM_CONTACT_MAX_SEPARATION, PHYSICS2DSERVER_SPACE_PARAM_BODY_MAX_ALLOWED_PENETRATION, PHYSICS2DSERVER_SPACE_PARAM_BODY_LINEAR_VELOCITY_SLEEP_THRESHOLD, PHYSICS2DSERVER_SPACE_PARAM_BODY_ANGULAR_VELOCITY_SLEEP_THRESHOLD, PHYSICS2DSERVER_SPACE_PARAM_BODY_TIME_TO_SLEEP, PHYSICS2DSERVER_SPACE_PARAM_CONSTRAINT_DEFAULT_BIAS, PHYSICS2DSERVER_SPACE_PARAM_TEST_MOTION_MIN_CONTACT_DEPTH
+ */
+enum __pyx_t_7classes_9generated_Physics2DServer_ShapeType {
+  __pyx_e_7classes_9generated_PHYSICS2DSERVER_SHAPE_LINE,
+  __pyx_e_7classes_9generated_PHYSICS2DSERVER_SHAPE_RAY,
+  __pyx_e_7classes_9generated_PHYSICS2DSERVER_SHAPE_SEGMENT,
+  __pyx_e_7classes_9generated_PHYSICS2DSERVER_SHAPE_CIRCLE,
+  __pyx_e_7classes_9generated_PHYSICS2DSERVER_SHAPE_RECTANGLE,
+  __pyx_e_7classes_9generated_PHYSICS2DSERVER_SHAPE_CAPSULE,
+  __pyx_e_7classes_9generated_PHYSICS2DSERVER_SHAPE_CONVEX_POLYGON,
+  __pyx_e_7classes_9generated_PHYSICS2DSERVER_SHAPE_CONCAVE_POLYGON,
+  __pyx_e_7classes_9generated_PHYSICS2DSERVER_SHAPE_CUSTOM
+};
+typedef enum __pyx_t_7classes_9generated_Physics2DServer_ShapeType __pyx_t_7classes_9generated_Physics2DServer_ShapeType;
+
+/* "classes/generated.pxd":493
+ * ctypedef enum Physics2DServer_BodyMode :PHYSICS2DSERVER_BODY_MODE_STATIC, PHYSICS2DSERVER_BODY_MODE_KINEMATIC, PHYSICS2DSERVER_BODY_MODE_RIGID, PHYSICS2DSERVER_BODY_MODE_CHARACTER
+ * ctypedef enum Physics2DServer_ShapeType :PHYSICS2DSERVER_SHAPE_LINE, PHYSICS2DSERVER_SHAPE_RAY, PHYSICS2DSERVER_SHAPE_SEGMENT, PHYSICS2DSERVER_SHAPE_CIRCLE, PHYSICS2DSERVER_SHAPE_RECTANGLE, PHYSICS2DSERVER_SHAPE_CAPSULE, PHYSICS2DSERVER_SHAPE_CONVEX_POLYGON, PHYSICS2DSERVER_SHAPE_CONCAVE_POLYGON, PHYSICS2DSERVER_SHAPE_CUSTOM
+ * ctypedef enum Physics2DServer_JointParam :PHYSICS2DSERVER_JOINT_PARAM_BIAS, PHYSICS2DSERVER_JOINT_PARAM_MAX_BIAS, PHYSICS2DSERVER_JOINT_PARAM_MAX_FORCE             # <<<<<<<<<<<<<<
+ * ctypedef enum Physics2DServer_SpaceParameter :PHYSICS2DSERVER_SPACE_PARAM_CONTACT_RECYCLE_RADIUS, PHYSICS2DSERVER_SPACE_PARAM_CONTACT_MAX_SEPARATION, PHYSICS2DSERVER_SPACE_PARAM_BODY_MAX_ALLOWED_PENETRATION, PHYSICS2DSERVER_SPACE_PARAM_BODY_LINEAR_VELOCITY_SLEEP_THRESHOLD, PHYSICS2DSERVER_SPACE_PARAM_BODY_ANGULAR_VELOCITY_SLEEP_THRESHOLD, PHYSICS2DSERVER_SPACE_PARAM_BODY_TIME_TO_SLEEP, PHYSICS2DSERVER_SPACE_PARAM_CONSTRAINT_DEFAULT_BIAS, PHYSICS2DSERVER_SPACE_PARAM_TEST_MOTION_MIN_CONTACT_DEPTH
+ * ctypedef enum Physics2DServer_JointType :PHYSICS2DSERVER_JOINT_PIN, PHYSICS2DSERVER_JOINT_GROOVE, PHYSICS2DSERVER_JOINT_DAMPED_SPRING
+ */
+enum __pyx_t_7classes_9generated_Physics2DServer_JointParam {
+  __pyx_e_7classes_9generated_PHYSICS2DSERVER_JOINT_PARAM_BIAS,
+  __pyx_e_7classes_9generated_PHYSICS2DSERVER_JOINT_PARAM_MAX_BIAS,
+  __pyx_e_7classes_9generated_PHYSICS2DSERVER_JOINT_PARAM_MAX_FORCE
+};
+typedef enum __pyx_t_7classes_9generated_Physics2DServer_JointParam __pyx_t_7classes_9generated_Physics2DServer_JointParam;
+
+/* "classes/generated.pxd":494
+ * ctypedef enum Physics2DServer_ShapeType :PHYSICS2DSERVER_SHAPE_LINE, PHYSICS2DSERVER_SHAPE_RAY, PHYSICS2DSERVER_SHAPE_SEGMENT, PHYSICS2DSERVER_SHAPE_CIRCLE, PHYSICS2DSERVER_SHAPE_RECTANGLE, PHYSICS2DSERVER_SHAPE_CAPSULE, PHYSICS2DSERVER_SHAPE_CONVEX_POLYGON, PHYSICS2DSERVER_SHAPE_CONCAVE_POLYGON, PHYSICS2DSERVER_SHAPE_CUSTOM
+ * ctypedef enum Physics2DServer_JointParam :PHYSICS2DSERVER_JOINT_PARAM_BIAS, PHYSICS2DSERVER_JOINT_PARAM_MAX_BIAS, PHYSICS2DSERVER_JOINT_PARAM_MAX_FORCE
+ * ctypedef enum Physics2DServer_SpaceParameter :PHYSICS2DSERVER_SPACE_PARAM_CONTACT_RECYCLE_RADIUS, PHYSICS2DSERVER_SPACE_PARAM_CONTACT_MAX_SEPARATION, PHYSICS2DSERVER_SPACE_PARAM_BODY_MAX_ALLOWED_PENETRATION, PHYSICS2DSERVER_SPACE_PARAM_BODY_LINEAR_VELOCITY_SLEEP_THRESHOLD, PHYSICS2DSERVER_SPACE_PARAM_BODY_ANGULAR_VELOCITY_SLEEP_THRESHOLD, PHYSICS2DSERVER_SPACE_PARAM_BODY_TIME_TO_SLEEP, PHYSICS2DSERVER_SPACE_PARAM_CONSTRAINT_DEFAULT_BIAS, PHYSICS2DSERVER_SPACE_PARAM_TEST_MOTION_MIN_CONTACT_DEPTH             # <<<<<<<<<<<<<<
+ * ctypedef enum Physics2DServer_JointType :PHYSICS2DSERVER_JOINT_PIN, PHYSICS2DSERVER_JOINT_GROOVE, PHYSICS2DSERVER_JOINT_DAMPED_SPRING
+ * ctypedef enum Physics2DServer_CCDMode :PHYSICS2DSERVER_CCD_MODE_DISABLED, PHYSICS2DSERVER_CCD_MODE_CAST_RAY, PHYSICS2DSERVER_CCD_MODE_CAST_SHAPE
+ */
+enum __pyx_t_7classes_9generated_Physics2DServer_SpaceParameter {
+  __pyx_e_7classes_9generated_PHYSICS2DSERVER_SPACE_PARAM_CONTACT_RECYCLE_RADIUS,
+  __pyx_e_7classes_9generated_PHYSICS2DSERVER_SPACE_PARAM_CONTACT_MAX_SEPARATION,
+  __pyx_e_7classes_9generated_PHYSICS2DSERVER_SPACE_PARAM_BODY_MAX_ALLOWED_PENETRATION,
+  __pyx_e_7classes_9generated_PHYSICS2DSERVER_SPACE_PARAM_BODY_LINEAR_VELOCITY_SLEEP_THRESHOLD,
+  __pyx_e_7classes_9generated_PHYSICS2DSERVER_SPACE_PARAM_BODY_ANGULAR_VELOCITY_SLEEP_THRESHOLD,
+  __pyx_e_7classes_9generated_PHYSICS2DSERVER_SPACE_PARAM_BODY_TIME_TO_SLEEP,
+  __pyx_e_7classes_9generated_PHYSICS2DSERVER_SPACE_PARAM_CONSTRAINT_DEFAULT_BIAS,
+  __pyx_e_7classes_9generated_PHYSICS2DSERVER_SPACE_PARAM_TEST_MOTION_MIN_CONTACT_DEPTH
+};
+typedef enum __pyx_t_7classes_9generated_Physics2DServer_SpaceParameter __pyx_t_7classes_9generated_Physics2DServer_SpaceParameter;
+
+/* "classes/generated.pxd":495
+ * ctypedef enum Physics2DServer_JointParam :PHYSICS2DSERVER_JOINT_PARAM_BIAS, PHYSICS2DSERVER_JOINT_PARAM_MAX_BIAS, PHYSICS2DSERVER_JOINT_PARAM_MAX_FORCE
+ * ctypedef enum Physics2DServer_SpaceParameter :PHYSICS2DSERVER_SPACE_PARAM_CONTACT_RECYCLE_RADIUS, PHYSICS2DSERVER_SPACE_PARAM_CONTACT_MAX_SEPARATION, PHYSICS2DSERVER_SPACE_PARAM_BODY_MAX_ALLOWED_PENETRATION, PHYSICS2DSERVER_SPACE_PARAM_BODY_LINEAR_VELOCITY_SLEEP_THRESHOLD, PHYSICS2DSERVER_SPACE_PARAM_BODY_ANGULAR_VELOCITY_SLEEP_THRESHOLD, PHYSICS2DSERVER_SPACE_PARAM_BODY_TIME_TO_SLEEP, PHYSICS2DSERVER_SPACE_PARAM_CONSTRAINT_DEFAULT_BIAS, PHYSICS2DSERVER_SPACE_PARAM_TEST_MOTION_MIN_CONTACT_DEPTH
+ * ctypedef enum Physics2DServer_JointType :PHYSICS2DSERVER_JOINT_PIN, PHYSICS2DSERVER_JOINT_GROOVE, PHYSICS2DSERVER_JOINT_DAMPED_SPRING             # <<<<<<<<<<<<<<
+ * ctypedef enum Physics2DServer_CCDMode :PHYSICS2DSERVER_CCD_MODE_DISABLED, PHYSICS2DSERVER_CCD_MODE_CAST_RAY, PHYSICS2DSERVER_CCD_MODE_CAST_SHAPE
+ * ctypedef enum Physics2DServer_BodyState :PHYSICS2DSERVER_BODY_STATE_TRANSFORM, PHYSICS2DSERVER_BODY_STATE_LINEAR_VELOCITY, PHYSICS2DSERVER_BODY_STATE_ANGULAR_VELOCITY, PHYSICS2DSERVER_BODY_STATE_SLEEPING, PHYSICS2DSERVER_BODY_STATE_CAN_SLEEP
+ */
+enum __pyx_t_7classes_9generated_Physics2DServer_JointType {
+  __pyx_e_7classes_9generated_PHYSICS2DSERVER_JOINT_PIN,
+  __pyx_e_7classes_9generated_PHYSICS2DSERVER_JOINT_GROOVE,
+  __pyx_e_7classes_9generated_PHYSICS2DSERVER_JOINT_DAMPED_SPRING
+};
+typedef enum __pyx_t_7classes_9generated_Physics2DServer_JointType __pyx_t_7classes_9generated_Physics2DServer_JointType;
+
+/* "classes/generated.pxd":496
+ * ctypedef enum Physics2DServer_SpaceParameter :PHYSICS2DSERVER_SPACE_PARAM_CONTACT_RECYCLE_RADIUS, PHYSICS2DSERVER_SPACE_PARAM_CONTACT_MAX_SEPARATION, PHYSICS2DSERVER_SPACE_PARAM_BODY_MAX_ALLOWED_PENETRATION, PHYSICS2DSERVER_SPACE_PARAM_BODY_LINEAR_VELOCITY_SLEEP_THRESHOLD, PHYSICS2DSERVER_SPACE_PARAM_BODY_ANGULAR_VELOCITY_SLEEP_THRESHOLD, PHYSICS2DSERVER_SPACE_PARAM_BODY_TIME_TO_SLEEP, PHYSICS2DSERVER_SPACE_PARAM_CONSTRAINT_DEFAULT_BIAS, PHYSICS2DSERVER_SPACE_PARAM_TEST_MOTION_MIN_CONTACT_DEPTH
+ * ctypedef enum Physics2DServer_JointType :PHYSICS2DSERVER_JOINT_PIN, PHYSICS2DSERVER_JOINT_GROOVE, PHYSICS2DSERVER_JOINT_DAMPED_SPRING
+ * ctypedef enum Physics2DServer_CCDMode :PHYSICS2DSERVER_CCD_MODE_DISABLED, PHYSICS2DSERVER_CCD_MODE_CAST_RAY, PHYSICS2DSERVER_CCD_MODE_CAST_SHAPE             # <<<<<<<<<<<<<<
+ * ctypedef enum Physics2DServer_BodyState :PHYSICS2DSERVER_BODY_STATE_TRANSFORM, PHYSICS2DSERVER_BODY_STATE_LINEAR_VELOCITY, PHYSICS2DSERVER_BODY_STATE_ANGULAR_VELOCITY, PHYSICS2DSERVER_BODY_STATE_SLEEPING, PHYSICS2DSERVER_BODY_STATE_CAN_SLEEP
+ * ctypedef enum Physics2DServer_BodyParameter :PHYSICS2DSERVER_BODY_PARAM_BOUNCE, PHYSICS2DSERVER_BODY_PARAM_FRICTION, PHYSICS2DSERVER_BODY_PARAM_MASS, PHYSICS2DSERVER_BODY_PARAM_INERTIA, PHYSICS2DSERVER_BODY_PARAM_GRAVITY_SCALE, PHYSICS2DSERVER_BODY_PARAM_LINEAR_DAMP, PHYSICS2DSERVER_BODY_PARAM_ANGULAR_DAMP, PHYSICS2DSERVER_BODY_PARAM_MAX
+ */
+enum __pyx_t_7classes_9generated_Physics2DServer_CCDMode {
+  __pyx_e_7classes_9generated_PHYSICS2DSERVER_CCD_MODE_DISABLED,
+  __pyx_e_7classes_9generated_PHYSICS2DSERVER_CCD_MODE_CAST_RAY,
+  __pyx_e_7classes_9generated_PHYSICS2DSERVER_CCD_MODE_CAST_SHAPE
+};
+typedef enum __pyx_t_7classes_9generated_Physics2DServer_CCDMode __pyx_t_7classes_9generated_Physics2DServer_CCDMode;
+
+/* "classes/generated.pxd":497
+ * ctypedef enum Physics2DServer_JointType :PHYSICS2DSERVER_JOINT_PIN, PHYSICS2DSERVER_JOINT_GROOVE, PHYSICS2DSERVER_JOINT_DAMPED_SPRING
+ * ctypedef enum Physics2DServer_CCDMode :PHYSICS2DSERVER_CCD_MODE_DISABLED, PHYSICS2DSERVER_CCD_MODE_CAST_RAY, PHYSICS2DSERVER_CCD_MODE_CAST_SHAPE
+ * ctypedef enum Physics2DServer_BodyState :PHYSICS2DSERVER_BODY_STATE_TRANSFORM, PHYSICS2DSERVER_BODY_STATE_LINEAR_VELOCITY, PHYSICS2DSERVER_BODY_STATE_ANGULAR_VELOCITY, PHYSICS2DSERVER_BODY_STATE_SLEEPING, PHYSICS2DSERVER_BODY_STATE_CAN_SLEEP             # <<<<<<<<<<<<<<
+ * ctypedef enum Physics2DServer_BodyParameter :PHYSICS2DSERVER_BODY_PARAM_BOUNCE, PHYSICS2DSERVER_BODY_PARAM_FRICTION, PHYSICS2DSERVER_BODY_PARAM_MASS, PHYSICS2DSERVER_BODY_PARAM_INERTIA, PHYSICS2DSERVER_BODY_PARAM_GRAVITY_SCALE, PHYSICS2DSERVER_BODY_PARAM_LINEAR_DAMP, PHYSICS2DSERVER_BODY_PARAM_ANGULAR_DAMP, PHYSICS2DSERVER_BODY_PARAM_MAX
+ * ctypedef enum Physics2DServer_AreaSpaceOverrideMode :PHYSICS2DSERVER_AREA_SPACE_OVERRIDE_DISABLED, PHYSICS2DSERVER_AREA_SPACE_OVERRIDE_COMBINE, PHYSICS2DSERVER_AREA_SPACE_OVERRIDE_COMBINE_REPLACE, PHYSICS2DSERVER_AREA_SPACE_OVERRIDE_REPLACE, PHYSICS2DSERVER_AREA_SPACE_OVERRIDE_REPLACE_COMBINE
+ */
+enum __pyx_t_7classes_9generated_Physics2DServer_BodyState {
+  __pyx_e_7classes_9generated_PHYSICS2DSERVER_BODY_STATE_TRANSFORM,
+  __pyx_e_7classes_9generated_PHYSICS2DSERVER_BODY_STATE_LINEAR_VELOCITY,
+  __pyx_e_7classes_9generated_PHYSICS2DSERVER_BODY_STATE_ANGULAR_VELOCITY,
+  __pyx_e_7classes_9generated_PHYSICS2DSERVER_BODY_STATE_SLEEPING,
+  __pyx_e_7classes_9generated_PHYSICS2DSERVER_BODY_STATE_CAN_SLEEP
+};
+typedef enum __pyx_t_7classes_9generated_Physics2DServer_BodyState __pyx_t_7classes_9generated_Physics2DServer_BodyState;
+
+/* "classes/generated.pxd":498
+ * ctypedef enum Physics2DServer_CCDMode :PHYSICS2DSERVER_CCD_MODE_DISABLED, PHYSICS2DSERVER_CCD_MODE_CAST_RAY, PHYSICS2DSERVER_CCD_MODE_CAST_SHAPE
+ * ctypedef enum Physics2DServer_BodyState :PHYSICS2DSERVER_BODY_STATE_TRANSFORM, PHYSICS2DSERVER_BODY_STATE_LINEAR_VELOCITY, PHYSICS2DSERVER_BODY_STATE_ANGULAR_VELOCITY, PHYSICS2DSERVER_BODY_STATE_SLEEPING, PHYSICS2DSERVER_BODY_STATE_CAN_SLEEP
+ * ctypedef enum Physics2DServer_BodyParameter :PHYSICS2DSERVER_BODY_PARAM_BOUNCE, PHYSICS2DSERVER_BODY_PARAM_FRICTION, PHYSICS2DSERVER_BODY_PARAM_MASS, PHYSICS2DSERVER_BODY_PARAM_INERTIA, PHYSICS2DSERVER_BODY_PARAM_GRAVITY_SCALE, PHYSICS2DSERVER_BODY_PARAM_LINEAR_DAMP, PHYSICS2DSERVER_BODY_PARAM_ANGULAR_DAMP, PHYSICS2DSERVER_BODY_PARAM_MAX             # <<<<<<<<<<<<<<
+ * ctypedef enum Physics2DServer_AreaSpaceOverrideMode :PHYSICS2DSERVER_AREA_SPACE_OVERRIDE_DISABLED, PHYSICS2DSERVER_AREA_SPACE_OVERRIDE_COMBINE, PHYSICS2DSERVER_AREA_SPACE_OVERRIDE_COMBINE_REPLACE, PHYSICS2DSERVER_AREA_SPACE_OVERRIDE_REPLACE, PHYSICS2DSERVER_AREA_SPACE_OVERRIDE_REPLACE_COMBINE
+ * ctypedef enum Physics2DServer_AreaParameter :PHYSICS2DSERVER_AREA_PARAM_GRAVITY, PHYSICS2DSERVER_AREA_PARAM_GRAVITY_VECTOR, PHYSICS2DSERVER_AREA_PARAM_GRAVITY_IS_POINT, PHYSICS2DSERVER_AREA_PARAM_GRAVITY_DISTANCE_SCALE, PHYSICS2DSERVER_AREA_PARAM_GRAVITY_POINT_ATTENUATION, PHYSICS2DSERVER_AREA_PARAM_LINEAR_DAMP, PHYSICS2DSERVER_AREA_PARAM_ANGULAR_DAMP, PHYSICS2DSERVER_AREA_PARAM_PRIORITY
+ */
+enum __pyx_t_7classes_9generated_Physics2DServer_BodyParameter {
+  __pyx_e_7classes_9generated_PHYSICS2DSERVER_BODY_PARAM_BOUNCE,
+  __pyx_e_7classes_9generated_PHYSICS2DSERVER_BODY_PARAM_FRICTION,
+  __pyx_e_7classes_9generated_PHYSICS2DSERVER_BODY_PARAM_MASS,
+  __pyx_e_7classes_9generated_PHYSICS2DSERVER_BODY_PARAM_INERTIA,
+  __pyx_e_7classes_9generated_PHYSICS2DSERVER_BODY_PARAM_GRAVITY_SCALE,
+  __pyx_e_7classes_9generated_PHYSICS2DSERVER_BODY_PARAM_LINEAR_DAMP,
+  __pyx_e_7classes_9generated_PHYSICS2DSERVER_BODY_PARAM_ANGULAR_DAMP,
+  __pyx_e_7classes_9generated_PHYSICS2DSERVER_BODY_PARAM_MAX
+};
+typedef enum __pyx_t_7classes_9generated_Physics2DServer_BodyParameter __pyx_t_7classes_9generated_Physics2DServer_BodyParameter;
+
+/* "classes/generated.pxd":499
+ * ctypedef enum Physics2DServer_BodyState :PHYSICS2DSERVER_BODY_STATE_TRANSFORM, PHYSICS2DSERVER_BODY_STATE_LINEAR_VELOCITY, PHYSICS2DSERVER_BODY_STATE_ANGULAR_VELOCITY, PHYSICS2DSERVER_BODY_STATE_SLEEPING, PHYSICS2DSERVER_BODY_STATE_CAN_SLEEP
+ * ctypedef enum Physics2DServer_BodyParameter :PHYSICS2DSERVER_BODY_PARAM_BOUNCE, PHYSICS2DSERVER_BODY_PARAM_FRICTION, PHYSICS2DSERVER_BODY_PARAM_MASS, PHYSICS2DSERVER_BODY_PARAM_INERTIA, PHYSICS2DSERVER_BODY_PARAM_GRAVITY_SCALE, PHYSICS2DSERVER_BODY_PARAM_LINEAR_DAMP, PHYSICS2DSERVER_BODY_PARAM_ANGULAR_DAMP, PHYSICS2DSERVER_BODY_PARAM_MAX
+ * ctypedef enum Physics2DServer_AreaSpaceOverrideMode :PHYSICS2DSERVER_AREA_SPACE_OVERRIDE_DISABLED, PHYSICS2DSERVER_AREA_SPACE_OVERRIDE_COMBINE, PHYSICS2DSERVER_AREA_SPACE_OVERRIDE_COMBINE_REPLACE, PHYSICS2DSERVER_AREA_SPACE_OVERRIDE_REPLACE, PHYSICS2DSERVER_AREA_SPACE_OVERRIDE_REPLACE_COMBINE             # <<<<<<<<<<<<<<
+ * ctypedef enum Physics2DServer_AreaParameter :PHYSICS2DSERVER_AREA_PARAM_GRAVITY, PHYSICS2DSERVER_AREA_PARAM_GRAVITY_VECTOR, PHYSICS2DSERVER_AREA_PARAM_GRAVITY_IS_POINT, PHYSICS2DSERVER_AREA_PARAM_GRAVITY_DISTANCE_SCALE, PHYSICS2DSERVER_AREA_PARAM_GRAVITY_POINT_ATTENUATION, PHYSICS2DSERVER_AREA_PARAM_LINEAR_DAMP, PHYSICS2DSERVER_AREA_PARAM_ANGULAR_DAMP, PHYSICS2DSERVER_AREA_PARAM_PRIORITY
+ * 
+ */
+enum __pyx_t_7classes_9generated_Physics2DServer_AreaSpaceOverrideMode {
+  __pyx_e_7classes_9generated_PHYSICS2DSERVER_AREA_SPACE_OVERRIDE_DISABLED,
+  __pyx_e_7classes_9generated_PHYSICS2DSERVER_AREA_SPACE_OVERRIDE_COMBINE,
+  __pyx_e_7classes_9generated_PHYSICS2DSERVER_AREA_SPACE_OVERRIDE_COMBINE_REPLACE,
+  __pyx_e_7classes_9generated_PHYSICS2DSERVER_AREA_SPACE_OVERRIDE_REPLACE,
+  __pyx_e_7classes_9generated_PHYSICS2DSERVER_AREA_SPACE_OVERRIDE_REPLACE_COMBINE
+};
+typedef enum __pyx_t_7classes_9generated_Physics2DServer_AreaSpaceOverrideMode __pyx_t_7classes_9generated_Physics2DServer_AreaSpaceOverrideMode;
+
+/* "classes/generated.pxd":500
+ * ctypedef enum Physics2DServer_BodyParameter :PHYSICS2DSERVER_BODY_PARAM_BOUNCE, PHYSICS2DSERVER_BODY_PARAM_FRICTION, PHYSICS2DSERVER_BODY_PARAM_MASS, PHYSICS2DSERVER_BODY_PARAM_INERTIA, PHYSICS2DSERVER_BODY_PARAM_GRAVITY_SCALE, PHYSICS2DSERVER_BODY_PARAM_LINEAR_DAMP, PHYSICS2DSERVER_BODY_PARAM_ANGULAR_DAMP, PHYSICS2DSERVER_BODY_PARAM_MAX
+ * ctypedef enum Physics2DServer_AreaSpaceOverrideMode :PHYSICS2DSERVER_AREA_SPACE_OVERRIDE_DISABLED, PHYSICS2DSERVER_AREA_SPACE_OVERRIDE_COMBINE, PHYSICS2DSERVER_AREA_SPACE_OVERRIDE_COMBINE_REPLACE, PHYSICS2DSERVER_AREA_SPACE_OVERRIDE_REPLACE, PHYSICS2DSERVER_AREA_SPACE_OVERRIDE_REPLACE_COMBINE
+ * ctypedef enum Physics2DServer_AreaParameter :PHYSICS2DSERVER_AREA_PARAM_GRAVITY, PHYSICS2DSERVER_AREA_PARAM_GRAVITY_VECTOR, PHYSICS2DSERVER_AREA_PARAM_GRAVITY_IS_POINT, PHYSICS2DSERVER_AREA_PARAM_GRAVITY_DISTANCE_SCALE, PHYSICS2DSERVER_AREA_PARAM_GRAVITY_POINT_ATTENUATION, PHYSICS2DSERVER_AREA_PARAM_LINEAR_DAMP, PHYSICS2DSERVER_AREA_PARAM_ANGULAR_DAMP, PHYSICS2DSERVER_AREA_PARAM_PRIORITY             # <<<<<<<<<<<<<<
+ * 
+ * 
+ */
+enum __pyx_t_7classes_9generated_Physics2DServer_AreaParameter {
+  __pyx_e_7classes_9generated_PHYSICS2DSERVER_AREA_PARAM_GRAVITY,
+  __pyx_e_7classes_9generated_PHYSICS2DSERVER_AREA_PARAM_GRAVITY_VECTOR,
+  __pyx_e_7classes_9generated_PHYSICS2DSERVER_AREA_PARAM_GRAVITY_IS_POINT,
+  __pyx_e_7classes_9generated_PHYSICS2DSERVER_AREA_PARAM_GRAVITY_DISTANCE_SCALE,
+  __pyx_e_7classes_9generated_PHYSICS2DSERVER_AREA_PARAM_GRAVITY_POINT_ATTENUATION,
+  __pyx_e_7classes_9generated_PHYSICS2DSERVER_AREA_PARAM_LINEAR_DAMP,
+  __pyx_e_7classes_9generated_PHYSICS2DSERVER_AREA_PARAM_ANGULAR_DAMP,
+  __pyx_e_7classes_9generated_PHYSICS2DSERVER_AREA_PARAM_PRIORITY
+};
+typedef enum __pyx_t_7classes_9generated_Physics2DServer_AreaParameter __pyx_t_7classes_9generated_Physics2DServer_AreaParameter;
+
+/* "classes/generated.pxd":511
+ * 
+ * 
+ * ctypedef enum PhysicsServer_BodyAxis :PHYSICSSERVER_BODY_AXIS_LINEAR_X, PHYSICSSERVER_BODY_AXIS_LINEAR_Y, PHYSICSSERVER_BODY_AXIS_LINEAR_Z, PHYSICSSERVER_BODY_AXIS_ANGULAR_X, PHYSICSSERVER_BODY_AXIS_ANGULAR_Y, PHYSICSSERVER_BODY_AXIS_ANGULAR_Z             # <<<<<<<<<<<<<<
+ * ctypedef enum PhysicsServer_ProcessInfo :PHYSICSSERVER_INFO_ACTIVE_OBJECTS, PHYSICSSERVER_INFO_COLLISION_PAIRS, PHYSICSSERVER_INFO_ISLAND_COUNT
+ * ctypedef enum PhysicsServer_AreaBodyStatus :PHYSICSSERVER_AREA_BODY_ADDED, PHYSICSSERVER_AREA_BODY_REMOVED
+ */
+enum __pyx_t_7classes_9generated_PhysicsServer_BodyAxis {
+  __pyx_e_7classes_9generated_PHYSICSSERVER_BODY_AXIS_LINEAR_X,
+  __pyx_e_7classes_9generated_PHYSICSSERVER_BODY_AXIS_LINEAR_Y,
+  __pyx_e_7classes_9generated_PHYSICSSERVER_BODY_AXIS_LINEAR_Z,
+  __pyx_e_7classes_9generated_PHYSICSSERVER_BODY_AXIS_ANGULAR_X,
+  __pyx_e_7classes_9generated_PHYSICSSERVER_BODY_AXIS_ANGULAR_Y,
+  __pyx_e_7classes_9generated_PHYSICSSERVER_BODY_AXIS_ANGULAR_Z
+};
+typedef enum __pyx_t_7classes_9generated_PhysicsServer_BodyAxis __pyx_t_7classes_9generated_PhysicsServer_BodyAxis;
+
+/* "classes/generated.pxd":512
+ * 
+ * ctypedef enum PhysicsServer_BodyAxis :PHYSICSSERVER_BODY_AXIS_LINEAR_X, PHYSICSSERVER_BODY_AXIS_LINEAR_Y, PHYSICSSERVER_BODY_AXIS_LINEAR_Z, PHYSICSSERVER_BODY_AXIS_ANGULAR_X, PHYSICSSERVER_BODY_AXIS_ANGULAR_Y, PHYSICSSERVER_BODY_AXIS_ANGULAR_Z
+ * ctypedef enum PhysicsServer_ProcessInfo :PHYSICSSERVER_INFO_ACTIVE_OBJECTS, PHYSICSSERVER_INFO_COLLISION_PAIRS, PHYSICSSERVER_INFO_ISLAND_COUNT             # <<<<<<<<<<<<<<
+ * ctypedef enum PhysicsServer_AreaBodyStatus :PHYSICSSERVER_AREA_BODY_ADDED, PHYSICSSERVER_AREA_BODY_REMOVED
+ * ctypedef enum PhysicsServer_BodyMode :PHYSICSSERVER_BODY_MODE_STATIC, PHYSICSSERVER_BODY_MODE_KINEMATIC, PHYSICSSERVER_BODY_MODE_RIGID, PHYSICSSERVER_BODY_MODE_CHARACTER
+ */
+enum __pyx_t_7classes_9generated_PhysicsServer_ProcessInfo {
+  __pyx_e_7classes_9generated_PHYSICSSERVER_INFO_ACTIVE_OBJECTS,
+  __pyx_e_7classes_9generated_PHYSICSSERVER_INFO_COLLISION_PAIRS,
+  __pyx_e_7classes_9generated_PHYSICSSERVER_INFO_ISLAND_COUNT
+};
+typedef enum __pyx_t_7classes_9generated_PhysicsServer_ProcessInfo __pyx_t_7classes_9generated_PhysicsServer_ProcessInfo;
+
+/* "classes/generated.pxd":513
+ * ctypedef enum PhysicsServer_BodyAxis :PHYSICSSERVER_BODY_AXIS_LINEAR_X, PHYSICSSERVER_BODY_AXIS_LINEAR_Y, PHYSICSSERVER_BODY_AXIS_LINEAR_Z, PHYSICSSERVER_BODY_AXIS_ANGULAR_X, PHYSICSSERVER_BODY_AXIS_ANGULAR_Y, PHYSICSSERVER_BODY_AXIS_ANGULAR_Z
+ * ctypedef enum PhysicsServer_ProcessInfo :PHYSICSSERVER_INFO_ACTIVE_OBJECTS, PHYSICSSERVER_INFO_COLLISION_PAIRS, PHYSICSSERVER_INFO_ISLAND_COUNT
+ * ctypedef enum PhysicsServer_AreaBodyStatus :PHYSICSSERVER_AREA_BODY_ADDED, PHYSICSSERVER_AREA_BODY_REMOVED             # <<<<<<<<<<<<<<
+ * ctypedef enum PhysicsServer_BodyMode :PHYSICSSERVER_BODY_MODE_STATIC, PHYSICSSERVER_BODY_MODE_KINEMATIC, PHYSICSSERVER_BODY_MODE_RIGID, PHYSICSSERVER_BODY_MODE_CHARACTER
+ * ctypedef enum PhysicsServer_ShapeType :PHYSICSSERVER_SHAPE_PLANE, PHYSICSSERVER_SHAPE_RAY, PHYSICSSERVER_SHAPE_SPHERE, PHYSICSSERVER_SHAPE_BOX, PHYSICSSERVER_SHAPE_CAPSULE, PHYSICSSERVER_SHAPE_CYLINDER, PHYSICSSERVER_SHAPE_CONVEX_POLYGON, PHYSICSSERVER_SHAPE_CONCAVE_POLYGON, PHYSICSSERVER_SHAPE_HEIGHTMAP, PHYSICSSERVER_SHAPE_CUSTOM
+ */
+enum __pyx_t_7classes_9generated_PhysicsServer_AreaBodyStatus {
+  __pyx_e_7classes_9generated_PHYSICSSERVER_AREA_BODY_ADDED,
+  __pyx_e_7classes_9generated_PHYSICSSERVER_AREA_BODY_REMOVED
+};
+typedef enum __pyx_t_7classes_9generated_PhysicsServer_AreaBodyStatus __pyx_t_7classes_9generated_PhysicsServer_AreaBodyStatus;
+
+/* "classes/generated.pxd":514
+ * ctypedef enum PhysicsServer_ProcessInfo :PHYSICSSERVER_INFO_ACTIVE_OBJECTS, PHYSICSSERVER_INFO_COLLISION_PAIRS, PHYSICSSERVER_INFO_ISLAND_COUNT
+ * ctypedef enum PhysicsServer_AreaBodyStatus :PHYSICSSERVER_AREA_BODY_ADDED, PHYSICSSERVER_AREA_BODY_REMOVED
+ * ctypedef enum PhysicsServer_BodyMode :PHYSICSSERVER_BODY_MODE_STATIC, PHYSICSSERVER_BODY_MODE_KINEMATIC, PHYSICSSERVER_BODY_MODE_RIGID, PHYSICSSERVER_BODY_MODE_CHARACTER             # <<<<<<<<<<<<<<
+ * ctypedef enum PhysicsServer_ShapeType :PHYSICSSERVER_SHAPE_PLANE, PHYSICSSERVER_SHAPE_RAY, PHYSICSSERVER_SHAPE_SPHERE, PHYSICSSERVER_SHAPE_BOX, PHYSICSSERVER_SHAPE_CAPSULE, PHYSICSSERVER_SHAPE_CYLINDER, PHYSICSSERVER_SHAPE_CONVEX_POLYGON, PHYSICSSERVER_SHAPE_CONCAVE_POLYGON, PHYSICSSERVER_SHAPE_HEIGHTMAP, PHYSICSSERVER_SHAPE_CUSTOM
+ * ctypedef enum PhysicsServer_PinJointParam :PHYSICSSERVER_PIN_JOINT_BIAS, PHYSICSSERVER_PIN_JOINT_DAMPING, PHYSICSSERVER_PIN_JOINT_IMPULSE_CLAMP
+ */
+enum __pyx_t_7classes_9generated_PhysicsServer_BodyMode {
+  __pyx_e_7classes_9generated_PHYSICSSERVER_BODY_MODE_STATIC,
+  __pyx_e_7classes_9generated_PHYSICSSERVER_BODY_MODE_KINEMATIC,
+  __pyx_e_7classes_9generated_PHYSICSSERVER_BODY_MODE_RIGID,
+  __pyx_e_7classes_9generated_PHYSICSSERVER_BODY_MODE_CHARACTER
+};
+typedef enum __pyx_t_7classes_9generated_PhysicsServer_BodyMode __pyx_t_7classes_9generated_PhysicsServer_BodyMode;
+
+/* "classes/generated.pxd":515
+ * ctypedef enum PhysicsServer_AreaBodyStatus :PHYSICSSERVER_AREA_BODY_ADDED, PHYSICSSERVER_AREA_BODY_REMOVED
+ * ctypedef enum PhysicsServer_BodyMode :PHYSICSSERVER_BODY_MODE_STATIC, PHYSICSSERVER_BODY_MODE_KINEMATIC, PHYSICSSERVER_BODY_MODE_RIGID, PHYSICSSERVER_BODY_MODE_CHARACTER
+ * ctypedef enum PhysicsServer_ShapeType :PHYSICSSERVER_SHAPE_PLANE, PHYSICSSERVER_SHAPE_RAY, PHYSICSSERVER_SHAPE_SPHERE, PHYSICSSERVER_SHAPE_BOX, PHYSICSSERVER_SHAPE_CAPSULE, PHYSICSSERVER_SHAPE_CYLINDER, PHYSICSSERVER_SHAPE_CONVEX_POLYGON, PHYSICSSERVER_SHAPE_CONCAVE_POLYGON, PHYSICSSERVER_SHAPE_HEIGHTMAP, PHYSICSSERVER_SHAPE_CUSTOM             # <<<<<<<<<<<<<<
+ * ctypedef enum PhysicsServer_PinJointParam :PHYSICSSERVER_PIN_JOINT_BIAS, PHYSICSSERVER_PIN_JOINT_DAMPING, PHYSICSSERVER_PIN_JOINT_IMPULSE_CLAMP
+ * ctypedef enum PhysicsServer_SpaceParameter :PHYSICSSERVER_SPACE_PARAM_CONTACT_RECYCLE_RADIUS, PHYSICSSERVER_SPACE_PARAM_CONTACT_MAX_SEPARATION, PHYSICSSERVER_SPACE_PARAM_BODY_MAX_ALLOWED_PENETRATION, PHYSICSSERVER_SPACE_PARAM_BODY_LINEAR_VELOCITY_SLEEP_THRESHOLD, PHYSICSSERVER_SPACE_PARAM_BODY_ANGULAR_VELOCITY_SLEEP_THRESHOLD, PHYSICSSERVER_SPACE_PARAM_BODY_TIME_TO_SLEEP, PHYSICSSERVER_SPACE_PARAM_BODY_ANGULAR_VELOCITY_DAMP_RATIO, PHYSICSSERVER_SPACE_PARAM_CONSTRAINT_DEFAULT_BIAS, PHYSICSSERVER_SPACE_PARAM_TEST_MOTION_MIN_CONTACT_DEPTH
+ */
+enum __pyx_t_7classes_9generated_PhysicsServer_ShapeType {
+  __pyx_e_7classes_9generated_PHYSICSSERVER_SHAPE_PLANE,
+  __pyx_e_7classes_9generated_PHYSICSSERVER_SHAPE_RAY,
+  __pyx_e_7classes_9generated_PHYSICSSERVER_SHAPE_SPHERE,
+  __pyx_e_7classes_9generated_PHYSICSSERVER_SHAPE_BOX,
+  __pyx_e_7classes_9generated_PHYSICSSERVER_SHAPE_CAPSULE,
+  __pyx_e_7classes_9generated_PHYSICSSERVER_SHAPE_CYLINDER,
+  __pyx_e_7classes_9generated_PHYSICSSERVER_SHAPE_CONVEX_POLYGON,
+  __pyx_e_7classes_9generated_PHYSICSSERVER_SHAPE_CONCAVE_POLYGON,
+  __pyx_e_7classes_9generated_PHYSICSSERVER_SHAPE_HEIGHTMAP,
+  __pyx_e_7classes_9generated_PHYSICSSERVER_SHAPE_CUSTOM
+};
+typedef enum __pyx_t_7classes_9generated_PhysicsServer_ShapeType __pyx_t_7classes_9generated_PhysicsServer_ShapeType;
+
+/* "classes/generated.pxd":516
+ * ctypedef enum PhysicsServer_BodyMode :PHYSICSSERVER_BODY_MODE_STATIC, PHYSICSSERVER_BODY_MODE_KINEMATIC, PHYSICSSERVER_BODY_MODE_RIGID, PHYSICSSERVER_BODY_MODE_CHARACTER
+ * ctypedef enum PhysicsServer_ShapeType :PHYSICSSERVER_SHAPE_PLANE, PHYSICSSERVER_SHAPE_RAY, PHYSICSSERVER_SHAPE_SPHERE, PHYSICSSERVER_SHAPE_BOX, PHYSICSSERVER_SHAPE_CAPSULE, PHYSICSSERVER_SHAPE_CYLINDER, PHYSICSSERVER_SHAPE_CONVEX_POLYGON, PHYSICSSERVER_SHAPE_CONCAVE_POLYGON, PHYSICSSERVER_SHAPE_HEIGHTMAP, PHYSICSSERVER_SHAPE_CUSTOM
+ * ctypedef enum PhysicsServer_PinJointParam :PHYSICSSERVER_PIN_JOINT_BIAS, PHYSICSSERVER_PIN_JOINT_DAMPING, PHYSICSSERVER_PIN_JOINT_IMPULSE_CLAMP             # <<<<<<<<<<<<<<
+ * ctypedef enum PhysicsServer_SpaceParameter :PHYSICSSERVER_SPACE_PARAM_CONTACT_RECYCLE_RADIUS, PHYSICSSERVER_SPACE_PARAM_CONTACT_MAX_SEPARATION, PHYSICSSERVER_SPACE_PARAM_BODY_MAX_ALLOWED_PENETRATION, PHYSICSSERVER_SPACE_PARAM_BODY_LINEAR_VELOCITY_SLEEP_THRESHOLD, PHYSICSSERVER_SPACE_PARAM_BODY_ANGULAR_VELOCITY_SLEEP_THRESHOLD, PHYSICSSERVER_SPACE_PARAM_BODY_TIME_TO_SLEEP, PHYSICSSERVER_SPACE_PARAM_BODY_ANGULAR_VELOCITY_DAMP_RATIO, PHYSICSSERVER_SPACE_PARAM_CONSTRAINT_DEFAULT_BIAS, PHYSICSSERVER_SPACE_PARAM_TEST_MOTION_MIN_CONTACT_DEPTH
+ * ctypedef enum PhysicsServer_ConeTwistJointParam :PHYSICSSERVER_CONE_TWIST_JOINT_SWING_SPAN, PHYSICSSERVER_CONE_TWIST_JOINT_TWIST_SPAN, PHYSICSSERVER_CONE_TWIST_JOINT_BIAS, PHYSICSSERVER_CONE_TWIST_JOINT_SOFTNESS, PHYSICSSERVER_CONE_TWIST_JOINT_RELAXATION
+ */
+enum __pyx_t_7classes_9generated_PhysicsServer_PinJointParam {
+  __pyx_e_7classes_9generated_PHYSICSSERVER_PIN_JOINT_BIAS,
+  __pyx_e_7classes_9generated_PHYSICSSERVER_PIN_JOINT_DAMPING,
+  __pyx_e_7classes_9generated_PHYSICSSERVER_PIN_JOINT_IMPULSE_CLAMP
+};
+typedef enum __pyx_t_7classes_9generated_PhysicsServer_PinJointParam __pyx_t_7classes_9generated_PhysicsServer_PinJointParam;
+
+/* "classes/generated.pxd":517
+ * ctypedef enum PhysicsServer_ShapeType :PHYSICSSERVER_SHAPE_PLANE, PHYSICSSERVER_SHAPE_RAY, PHYSICSSERVER_SHAPE_SPHERE, PHYSICSSERVER_SHAPE_BOX, PHYSICSSERVER_SHAPE_CAPSULE, PHYSICSSERVER_SHAPE_CYLINDER, PHYSICSSERVER_SHAPE_CONVEX_POLYGON, PHYSICSSERVER_SHAPE_CONCAVE_POLYGON, PHYSICSSERVER_SHAPE_HEIGHTMAP, PHYSICSSERVER_SHAPE_CUSTOM
+ * ctypedef enum PhysicsServer_PinJointParam :PHYSICSSERVER_PIN_JOINT_BIAS, PHYSICSSERVER_PIN_JOINT_DAMPING, PHYSICSSERVER_PIN_JOINT_IMPULSE_CLAMP
+ * ctypedef enum PhysicsServer_SpaceParameter :PHYSICSSERVER_SPACE_PARAM_CONTACT_RECYCLE_RADIUS, PHYSICSSERVER_SPACE_PARAM_CONTACT_MAX_SEPARATION, PHYSICSSERVER_SPACE_PARAM_BODY_MAX_ALLOWED_PENETRATION, PHYSICSSERVER_SPACE_PARAM_BODY_LINEAR_VELOCITY_SLEEP_THRESHOLD, PHYSICSSERVER_SPACE_PARAM_BODY_ANGULAR_VELOCITY_SLEEP_THRESHOLD, PHYSICSSERVER_SPACE_PARAM_BODY_TIME_TO_SLEEP, PHYSICSSERVER_SPACE_PARAM_BODY_ANGULAR_VELOCITY_DAMP_RATIO, PHYSICSSERVER_SPACE_PARAM_CONSTRAINT_DEFAULT_BIAS, PHYSICSSERVER_SPACE_PARAM_TEST_MOTION_MIN_CONTACT_DEPTH             # <<<<<<<<<<<<<<
+ * ctypedef enum PhysicsServer_ConeTwistJointParam :PHYSICSSERVER_CONE_TWIST_JOINT_SWING_SPAN, PHYSICSSERVER_CONE_TWIST_JOINT_TWIST_SPAN, PHYSICSSERVER_CONE_TWIST_JOINT_BIAS, PHYSICSSERVER_CONE_TWIST_JOINT_SOFTNESS, PHYSICSSERVER_CONE_TWIST_JOINT_RELAXATION
+ * ctypedef enum PhysicsServer_JointType :PHYSICSSERVER_JOINT_PIN, PHYSICSSERVER_JOINT_HINGE, PHYSICSSERVER_JOINT_SLIDER, PHYSICSSERVER_JOINT_CONE_TWIST, PHYSICSSERVER_JOINT_6DOF
+ */
+enum __pyx_t_7classes_9generated_PhysicsServer_SpaceParameter {
+  __pyx_e_7classes_9generated_PHYSICSSERVER_SPACE_PARAM_CONTACT_RECYCLE_RADIUS,
+  __pyx_e_7classes_9generated_PHYSICSSERVER_SPACE_PARAM_CONTACT_MAX_SEPARATION,
+  __pyx_e_7classes_9generated_PHYSICSSERVER_SPACE_PARAM_BODY_MAX_ALLOWED_PENETRATION,
+  __pyx_e_7classes_9generated_PHYSICSSERVER_SPACE_PARAM_BODY_LINEAR_VELOCITY_SLEEP_THRESHOLD,
+  __pyx_e_7classes_9generated_PHYSICSSERVER_SPACE_PARAM_BODY_ANGULAR_VELOCITY_SLEEP_THRESHOLD,
+  __pyx_e_7classes_9generated_PHYSICSSERVER_SPACE_PARAM_BODY_TIME_TO_SLEEP,
+  __pyx_e_7classes_9generated_PHYSICSSERVER_SPACE_PARAM_BODY_ANGULAR_VELOCITY_DAMP_RATIO,
+  __pyx_e_7classes_9generated_PHYSICSSERVER_SPACE_PARAM_CONSTRAINT_DEFAULT_BIAS,
+  __pyx_e_7classes_9generated_PHYSICSSERVER_SPACE_PARAM_TEST_MOTION_MIN_CONTACT_DEPTH
+};
+typedef enum __pyx_t_7classes_9generated_PhysicsServer_SpaceParameter __pyx_t_7classes_9generated_PhysicsServer_SpaceParameter;
+
+/* "classes/generated.pxd":518
+ * ctypedef enum PhysicsServer_PinJointParam :PHYSICSSERVER_PIN_JOINT_BIAS, PHYSICSSERVER_PIN_JOINT_DAMPING, PHYSICSSERVER_PIN_JOINT_IMPULSE_CLAMP
+ * ctypedef enum PhysicsServer_SpaceParameter :PHYSICSSERVER_SPACE_PARAM_CONTACT_RECYCLE_RADIUS, PHYSICSSERVER_SPACE_PARAM_CONTACT_MAX_SEPARATION, PHYSICSSERVER_SPACE_PARAM_BODY_MAX_ALLOWED_PENETRATION, PHYSICSSERVER_SPACE_PARAM_BODY_LINEAR_VELOCITY_SLEEP_THRESHOLD, PHYSICSSERVER_SPACE_PARAM_BODY_ANGULAR_VELOCITY_SLEEP_THRESHOLD, PHYSICSSERVER_SPACE_PARAM_BODY_TIME_TO_SLEEP, PHYSICSSERVER_SPACE_PARAM_BODY_ANGULAR_VELOCITY_DAMP_RATIO, PHYSICSSERVER_SPACE_PARAM_CONSTRAINT_DEFAULT_BIAS, PHYSICSSERVER_SPACE_PARAM_TEST_MOTION_MIN_CONTACT_DEPTH
+ * ctypedef enum PhysicsServer_ConeTwistJointParam :PHYSICSSERVER_CONE_TWIST_JOINT_SWING_SPAN, PHYSICSSERVER_CONE_TWIST_JOINT_TWIST_SPAN, PHYSICSSERVER_CONE_TWIST_JOINT_BIAS, PHYSICSSERVER_CONE_TWIST_JOINT_SOFTNESS, PHYSICSSERVER_CONE_TWIST_JOINT_RELAXATION             # <<<<<<<<<<<<<<
+ * ctypedef enum PhysicsServer_JointType :PHYSICSSERVER_JOINT_PIN, PHYSICSSERVER_JOINT_HINGE, PHYSICSSERVER_JOINT_SLIDER, PHYSICSSERVER_JOINT_CONE_TWIST, PHYSICSSERVER_JOINT_6DOF
+ * ctypedef enum PhysicsServer_BodyState :PHYSICSSERVER_BODY_STATE_TRANSFORM, PHYSICSSERVER_BODY_STATE_LINEAR_VELOCITY, PHYSICSSERVER_BODY_STATE_ANGULAR_VELOCITY, PHYSICSSERVER_BODY_STATE_SLEEPING, PHYSICSSERVER_BODY_STATE_CAN_SLEEP
+ */
+enum __pyx_t_7classes_9generated_PhysicsServer_ConeTwistJointParam {
+  __pyx_e_7classes_9generated_PHYSICSSERVER_CONE_TWIST_JOINT_SWING_SPAN,
+  __pyx_e_7classes_9generated_PHYSICSSERVER_CONE_TWIST_JOINT_TWIST_SPAN,
+  __pyx_e_7classes_9generated_PHYSICSSERVER_CONE_TWIST_JOINT_BIAS,
+  __pyx_e_7classes_9generated_PHYSICSSERVER_CONE_TWIST_JOINT_SOFTNESS,
+  __pyx_e_7classes_9generated_PHYSICSSERVER_CONE_TWIST_JOINT_RELAXATION
+};
+typedef enum __pyx_t_7classes_9generated_PhysicsServer_ConeTwistJointParam __pyx_t_7classes_9generated_PhysicsServer_ConeTwistJointParam;
+
+/* "classes/generated.pxd":519
+ * ctypedef enum PhysicsServer_SpaceParameter :PHYSICSSERVER_SPACE_PARAM_CONTACT_RECYCLE_RADIUS, PHYSICSSERVER_SPACE_PARAM_CONTACT_MAX_SEPARATION, PHYSICSSERVER_SPACE_PARAM_BODY_MAX_ALLOWED_PENETRATION, PHYSICSSERVER_SPACE_PARAM_BODY_LINEAR_VELOCITY_SLEEP_THRESHOLD, PHYSICSSERVER_SPACE_PARAM_BODY_ANGULAR_VELOCITY_SLEEP_THRESHOLD, PHYSICSSERVER_SPACE_PARAM_BODY_TIME_TO_SLEEP, PHYSICSSERVER_SPACE_PARAM_BODY_ANGULAR_VELOCITY_DAMP_RATIO, PHYSICSSERVER_SPACE_PARAM_CONSTRAINT_DEFAULT_BIAS, PHYSICSSERVER_SPACE_PARAM_TEST_MOTION_MIN_CONTACT_DEPTH
+ * ctypedef enum PhysicsServer_ConeTwistJointParam :PHYSICSSERVER_CONE_TWIST_JOINT_SWING_SPAN, PHYSICSSERVER_CONE_TWIST_JOINT_TWIST_SPAN, PHYSICSSERVER_CONE_TWIST_JOINT_BIAS, PHYSICSSERVER_CONE_TWIST_JOINT_SOFTNESS, PHYSICSSERVER_CONE_TWIST_JOINT_RELAXATION
+ * ctypedef enum PhysicsServer_JointType :PHYSICSSERVER_JOINT_PIN, PHYSICSSERVER_JOINT_HINGE, PHYSICSSERVER_JOINT_SLIDER, PHYSICSSERVER_JOINT_CONE_TWIST, PHYSICSSERVER_JOINT_6DOF             # <<<<<<<<<<<<<<
+ * ctypedef enum PhysicsServer_BodyState :PHYSICSSERVER_BODY_STATE_TRANSFORM, PHYSICSSERVER_BODY_STATE_LINEAR_VELOCITY, PHYSICSSERVER_BODY_STATE_ANGULAR_VELOCITY, PHYSICSSERVER_BODY_STATE_SLEEPING, PHYSICSSERVER_BODY_STATE_CAN_SLEEP
+ * ctypedef enum PhysicsServer_BodyParameter :PHYSICSSERVER_BODY_PARAM_BOUNCE, PHYSICSSERVER_BODY_PARAM_FRICTION, PHYSICSSERVER_BODY_PARAM_MASS, PHYSICSSERVER_BODY_PARAM_GRAVITY_SCALE, PHYSICSSERVER_BODY_PARAM_LINEAR_DAMP, PHYSICSSERVER_BODY_PARAM_ANGULAR_DAMP, PHYSICSSERVER_BODY_PARAM_MAX
+ */
+enum __pyx_t_7classes_9generated_PhysicsServer_JointType {
+  __pyx_e_7classes_9generated_PHYSICSSERVER_JOINT_PIN,
+  __pyx_e_7classes_9generated_PHYSICSSERVER_JOINT_HINGE,
+  __pyx_e_7classes_9generated_PHYSICSSERVER_JOINT_SLIDER,
+  __pyx_e_7classes_9generated_PHYSICSSERVER_JOINT_CONE_TWIST,
+  __pyx_e_7classes_9generated_PHYSICSSERVER_JOINT_6DOF
+};
+typedef enum __pyx_t_7classes_9generated_PhysicsServer_JointType __pyx_t_7classes_9generated_PhysicsServer_JointType;
+
+/* "classes/generated.pxd":520
+ * ctypedef enum PhysicsServer_ConeTwistJointParam :PHYSICSSERVER_CONE_TWIST_JOINT_SWING_SPAN, PHYSICSSERVER_CONE_TWIST_JOINT_TWIST_SPAN, PHYSICSSERVER_CONE_TWIST_JOINT_BIAS, PHYSICSSERVER_CONE_TWIST_JOINT_SOFTNESS, PHYSICSSERVER_CONE_TWIST_JOINT_RELAXATION
+ * ctypedef enum PhysicsServer_JointType :PHYSICSSERVER_JOINT_PIN, PHYSICSSERVER_JOINT_HINGE, PHYSICSSERVER_JOINT_SLIDER, PHYSICSSERVER_JOINT_CONE_TWIST, PHYSICSSERVER_JOINT_6DOF
+ * ctypedef enum PhysicsServer_BodyState :PHYSICSSERVER_BODY_STATE_TRANSFORM, PHYSICSSERVER_BODY_STATE_LINEAR_VELOCITY, PHYSICSSERVER_BODY_STATE_ANGULAR_VELOCITY, PHYSICSSERVER_BODY_STATE_SLEEPING, PHYSICSSERVER_BODY_STATE_CAN_SLEEP             # <<<<<<<<<<<<<<
+ * ctypedef enum PhysicsServer_BodyParameter :PHYSICSSERVER_BODY_PARAM_BOUNCE, PHYSICSSERVER_BODY_PARAM_FRICTION, PHYSICSSERVER_BODY_PARAM_MASS, PHYSICSSERVER_BODY_PARAM_GRAVITY_SCALE, PHYSICSSERVER_BODY_PARAM_LINEAR_DAMP, PHYSICSSERVER_BODY_PARAM_ANGULAR_DAMP, PHYSICSSERVER_BODY_PARAM_MAX
+ * ctypedef enum PhysicsServer_G6DOFJointAxisParam :PHYSICSSERVER_G6DOF_JOINT_LINEAR_LOWER_LIMIT, PHYSICSSERVER_G6DOF_JOINT_LINEAR_UPPER_LIMIT, PHYSICSSERVER_G6DOF_JOINT_LINEAR_LIMIT_SOFTNESS, PHYSICSSERVER_G6DOF_JOINT_LINEAR_RESTITUTION, PHYSICSSERVER_G6DOF_JOINT_LINEAR_DAMPING, PHYSICSSERVER_G6DOF_JOINT_LINEAR_MOTOR_TARGET_VELOCITY, PHYSICSSERVER_G6DOF_JOINT_LINEAR_MOTOR_FORCE_LIMIT, PHYSICSSERVER_G6DOF_JOINT_ANGULAR_LOWER_LIMIT, PHYSICSSERVER_G6DOF_JOINT_ANGULAR_UPPER_LIMIT, PHYSICSSERVER_G6DOF_JOINT_ANGULAR_LIMIT_SOFTNESS, PHYSICSSERVER_G6DOF_JOINT_ANGULAR_DAMPING, PHYSICSSERVER_G6DOF_JOINT_ANGULAR_RESTITUTION, PHYSICSSERVER_G6DOF_JOINT_ANGULAR_FORCE_LIMIT, PHYSICSSERVER_G6DOF_JOINT_ANGULAR_ERP, PHYSICSSERVER_G6DOF_JOINT_ANGULAR_MOTOR_TARGET_VELOCITY, PHYSICSSERVER_G6DOF_JOINT_ANGULAR_MOTOR_FORCE_LIMIT
+ */
+enum __pyx_t_7classes_9generated_PhysicsServer_BodyState {
+  __pyx_e_7classes_9generated_PHYSICSSERVER_BODY_STATE_TRANSFORM,
+  __pyx_e_7classes_9generated_PHYSICSSERVER_BODY_STATE_LINEAR_VELOCITY,
+  __pyx_e_7classes_9generated_PHYSICSSERVER_BODY_STATE_ANGULAR_VELOCITY,
+  __pyx_e_7classes_9generated_PHYSICSSERVER_BODY_STATE_SLEEPING,
+  __pyx_e_7classes_9generated_PHYSICSSERVER_BODY_STATE_CAN_SLEEP
+};
+typedef enum __pyx_t_7classes_9generated_PhysicsServer_BodyState __pyx_t_7classes_9generated_PhysicsServer_BodyState;
+
+/* "classes/generated.pxd":521
+ * ctypedef enum PhysicsServer_JointType :PHYSICSSERVER_JOINT_PIN, PHYSICSSERVER_JOINT_HINGE, PHYSICSSERVER_JOINT_SLIDER, PHYSICSSERVER_JOINT_CONE_TWIST, PHYSICSSERVER_JOINT_6DOF
+ * ctypedef enum PhysicsServer_BodyState :PHYSICSSERVER_BODY_STATE_TRANSFORM, PHYSICSSERVER_BODY_STATE_LINEAR_VELOCITY, PHYSICSSERVER_BODY_STATE_ANGULAR_VELOCITY, PHYSICSSERVER_BODY_STATE_SLEEPING, PHYSICSSERVER_BODY_STATE_CAN_SLEEP
+ * ctypedef enum PhysicsServer_BodyParameter :PHYSICSSERVER_BODY_PARAM_BOUNCE, PHYSICSSERVER_BODY_PARAM_FRICTION, PHYSICSSERVER_BODY_PARAM_MASS, PHYSICSSERVER_BODY_PARAM_GRAVITY_SCALE, PHYSICSSERVER_BODY_PARAM_LINEAR_DAMP, PHYSICSSERVER_BODY_PARAM_ANGULAR_DAMP, PHYSICSSERVER_BODY_PARAM_MAX             # <<<<<<<<<<<<<<
+ * ctypedef enum PhysicsServer_G6DOFJointAxisParam :PHYSICSSERVER_G6DOF_JOINT_LINEAR_LOWER_LIMIT, PHYSICSSERVER_G6DOF_JOINT_LINEAR_UPPER_LIMIT, PHYSICSSERVER_G6DOF_JOINT_LINEAR_LIMIT_SOFTNESS, PHYSICSSERVER_G6DOF_JOINT_LINEAR_RESTITUTION, PHYSICSSERVER_G6DOF_JOINT_LINEAR_DAMPING, PHYSICSSERVER_G6DOF_JOINT_LINEAR_MOTOR_TARGET_VELOCITY, PHYSICSSERVER_G6DOF_JOINT_LINEAR_MOTOR_FORCE_LIMIT, PHYSICSSERVER_G6DOF_JOINT_ANGULAR_LOWER_LIMIT, PHYSICSSERVER_G6DOF_JOINT_ANGULAR_UPPER_LIMIT, PHYSICSSERVER_G6DOF_JOINT_ANGULAR_LIMIT_SOFTNESS, PHYSICSSERVER_G6DOF_JOINT_ANGULAR_DAMPING, PHYSICSSERVER_G6DOF_JOINT_ANGULAR_RESTITUTION, PHYSICSSERVER_G6DOF_JOINT_ANGULAR_FORCE_LIMIT, PHYSICSSERVER_G6DOF_JOINT_ANGULAR_ERP, PHYSICSSERVER_G6DOF_JOINT_ANGULAR_MOTOR_TARGET_VELOCITY, PHYSICSSERVER_G6DOF_JOINT_ANGULAR_MOTOR_FORCE_LIMIT
+ * ctypedef enum PhysicsServer_SliderJointParam :PHYSICSSERVER_SLIDER_JOINT_LINEAR_LIMIT_UPPER, PHYSICSSERVER_SLIDER_JOINT_LINEAR_LIMIT_LOWER, PHYSICSSERVER_SLIDER_JOINT_LINEAR_LIMIT_SOFTNESS, PHYSICSSERVER_SLIDER_JOINT_LINEAR_LIMIT_RESTITUTION, PHYSICSSERVER_SLIDER_JOINT_LINEAR_LIMIT_DAMPING, PHYSICSSERVER_SLIDER_JOINT_LINEAR_MOTION_SOFTNESS, PHYSICSSERVER_SLIDER_JOINT_LINEAR_MOTION_RESTITUTION, PHYSICSSERVER_SLIDER_JOINT_LINEAR_MOTION_DAMPING, PHYSICSSERVER_SLIDER_JOINT_LINEAR_ORTHOGONAL_SOFTNESS, PHYSICSSERVER_SLIDER_JOINT_LINEAR_ORTHOGONAL_RESTITUTION, PHYSICSSERVER_SLIDER_JOINT_LINEAR_ORTHOGONAL_DAMPING, PHYSICSSERVER_SLIDER_JOINT_ANGULAR_LIMIT_UPPER, PHYSICSSERVER_SLIDER_JOINT_ANGULAR_LIMIT_LOWER, PHYSICSSERVER_SLIDER_JOINT_ANGULAR_LIMIT_SOFTNESS, PHYSICSSERVER_SLIDER_JOINT_ANGULAR_LIMIT_RESTITUTION, PHYSICSSERVER_SLIDER_JOINT_ANGULAR_LIMIT_DAMPING, PHYSICSSERVER_SLIDER_JOINT_ANGULAR_MOTION_SOFTNESS, PHYSICSSERVER_SLIDER_JOINT_ANGULAR_MOTION_RESTITUTION, PHYSICSSERVER_SLIDER_JOINT_ANGULAR_MOTION_DAMPING, PHYSICSSERVER_SLIDER_JOINT_ANGULAR_ORTHOGONAL_SOFTNESS, PHYSICSSERVER_SLIDER_JOINT_ANGULAR_ORTHOGONAL_RESTITUTION, PHYSICSSERVER_SLIDER_JOINT_ANGULAR_ORTHOGONAL_DAMPING, PHYSICSSERVER_SLIDER_JOINT_MAX
+ */
+enum __pyx_t_7classes_9generated_PhysicsServer_BodyParameter {
+  __pyx_e_7classes_9generated_PHYSICSSERVER_BODY_PARAM_BOUNCE,
+  __pyx_e_7classes_9generated_PHYSICSSERVER_BODY_PARAM_FRICTION,
+  __pyx_e_7classes_9generated_PHYSICSSERVER_BODY_PARAM_MASS,
+  __pyx_e_7classes_9generated_PHYSICSSERVER_BODY_PARAM_GRAVITY_SCALE,
+  __pyx_e_7classes_9generated_PHYSICSSERVER_BODY_PARAM_LINEAR_DAMP,
+  __pyx_e_7classes_9generated_PHYSICSSERVER_BODY_PARAM_ANGULAR_DAMP,
+  __pyx_e_7classes_9generated_PHYSICSSERVER_BODY_PARAM_MAX
+};
+typedef enum __pyx_t_7classes_9generated_PhysicsServer_BodyParameter __pyx_t_7classes_9generated_PhysicsServer_BodyParameter;
+
+/* "classes/generated.pxd":522
+ * ctypedef enum PhysicsServer_BodyState :PHYSICSSERVER_BODY_STATE_TRANSFORM, PHYSICSSERVER_BODY_STATE_LINEAR_VELOCITY, PHYSICSSERVER_BODY_STATE_ANGULAR_VELOCITY, PHYSICSSERVER_BODY_STATE_SLEEPING, PHYSICSSERVER_BODY_STATE_CAN_SLEEP
+ * ctypedef enum PhysicsServer_BodyParameter :PHYSICSSERVER_BODY_PARAM_BOUNCE, PHYSICSSERVER_BODY_PARAM_FRICTION, PHYSICSSERVER_BODY_PARAM_MASS, PHYSICSSERVER_BODY_PARAM_GRAVITY_SCALE, PHYSICSSERVER_BODY_PARAM_LINEAR_DAMP, PHYSICSSERVER_BODY_PARAM_ANGULAR_DAMP, PHYSICSSERVER_BODY_PARAM_MAX
+ * ctypedef enum PhysicsServer_G6DOFJointAxisParam :PHYSICSSERVER_G6DOF_JOINT_LINEAR_LOWER_LIMIT, PHYSICSSERVER_G6DOF_JOINT_LINEAR_UPPER_LIMIT, PHYSICSSERVER_G6DOF_JOINT_LINEAR_LIMIT_SOFTNESS, PHYSICSSERVER_G6DOF_JOINT_LINEAR_RESTITUTION, PHYSICSSERVER_G6DOF_JOINT_LINEAR_DAMPING, PHYSICSSERVER_G6DOF_JOINT_LINEAR_MOTOR_TARGET_VELOCITY, PHYSICSSERVER_G6DOF_JOINT_LINEAR_MOTOR_FORCE_LIMIT, PHYSICSSERVER_G6DOF_JOINT_ANGULAR_LOWER_LIMIT, PHYSICSSERVER_G6DOF_JOINT_ANGULAR_UPPER_LIMIT, PHYSICSSERVER_G6DOF_JOINT_ANGULAR_LIMIT_SOFTNESS, PHYSICSSERVER_G6DOF_JOINT_ANGULAR_DAMPING, PHYSICSSERVER_G6DOF_JOINT_ANGULAR_RESTITUTION, PHYSICSSERVER_G6DOF_JOINT_ANGULAR_FORCE_LIMIT, PHYSICSSERVER_G6DOF_JOINT_ANGULAR_ERP, PHYSICSSERVER_G6DOF_JOINT_ANGULAR_MOTOR_TARGET_VELOCITY, PHYSICSSERVER_G6DOF_JOINT_ANGULAR_MOTOR_FORCE_LIMIT             # <<<<<<<<<<<<<<
+ * ctypedef enum PhysicsServer_SliderJointParam :PHYSICSSERVER_SLIDER_JOINT_LINEAR_LIMIT_UPPER, PHYSICSSERVER_SLIDER_JOINT_LINEAR_LIMIT_LOWER, PHYSICSSERVER_SLIDER_JOINT_LINEAR_LIMIT_SOFTNESS, PHYSICSSERVER_SLIDER_JOINT_LINEAR_LIMIT_RESTITUTION, PHYSICSSERVER_SLIDER_JOINT_LINEAR_LIMIT_DAMPING, PHYSICSSERVER_SLIDER_JOINT_LINEAR_MOTION_SOFTNESS, PHYSICSSERVER_SLIDER_JOINT_LINEAR_MOTION_RESTITUTION, PHYSICSSERVER_SLIDER_JOINT_LINEAR_MOTION_DAMPING, PHYSICSSERVER_SLIDER_JOINT_LINEAR_ORTHOGONAL_SOFTNESS, PHYSICSSERVER_SLIDER_JOINT_LINEAR_ORTHOGONAL_RESTITUTION, PHYSICSSERVER_SLIDER_JOINT_LINEAR_ORTHOGONAL_DAMPING, PHYSICSSERVER_SLIDER_JOINT_ANGULAR_LIMIT_UPPER, PHYSICSSERVER_SLIDER_JOINT_ANGULAR_LIMIT_LOWER, PHYSICSSERVER_SLIDER_JOINT_ANGULAR_LIMIT_SOFTNESS, PHYSICSSERVER_SLIDER_JOINT_ANGULAR_LIMIT_RESTITUTION, PHYSICSSERVER_SLIDER_JOINT_ANGULAR_LIMIT_DAMPING, PHYSICSSERVER_SLIDER_JOINT_ANGULAR_MOTION_SOFTNESS, PHYSICSSERVER_SLIDER_JOINT_ANGULAR_MOTION_RESTITUTION, PHYSICSSERVER_SLIDER_JOINT_ANGULAR_MOTION_DAMPING, PHYSICSSERVER_SLIDER_JOINT_ANGULAR_ORTHOGONAL_SOFTNESS, PHYSICSSERVER_SLIDER_JOINT_ANGULAR_ORTHOGONAL_RESTITUTION, PHYSICSSERVER_SLIDER_JOINT_ANGULAR_ORTHOGONAL_DAMPING, PHYSICSSERVER_SLIDER_JOINT_MAX
+ * ctypedef enum PhysicsServer_HingeJointParam :PHYSICSSERVER_HINGE_JOINT_BIAS, PHYSICSSERVER_HINGE_JOINT_LIMIT_UPPER, PHYSICSSERVER_HINGE_JOINT_LIMIT_LOWER, PHYSICSSERVER_HINGE_JOINT_LIMIT_BIAS, PHYSICSSERVER_HINGE_JOINT_LIMIT_SOFTNESS, PHYSICSSERVER_HINGE_JOINT_LIMIT_RELAXATION, PHYSICSSERVER_HINGE_JOINT_MOTOR_TARGET_VELOCITY, PHYSICSSERVER_HINGE_JOINT_MOTOR_MAX_IMPULSE
+ */
+enum __pyx_t_7classes_9generated_PhysicsServer_G6DOFJointAxisParam {
+  __pyx_e_7classes_9generated_PHYSICSSERVER_G6DOF_JOINT_LINEAR_LOWER_LIMIT,
+  __pyx_e_7classes_9generated_PHYSICSSERVER_G6DOF_JOINT_LINEAR_UPPER_LIMIT,
+  __pyx_e_7classes_9generated_PHYSICSSERVER_G6DOF_JOINT_LINEAR_LIMIT_SOFTNESS,
+  __pyx_e_7classes_9generated_PHYSICSSERVER_G6DOF_JOINT_LINEAR_RESTITUTION,
+  __pyx_e_7classes_9generated_PHYSICSSERVER_G6DOF_JOINT_LINEAR_DAMPING,
+  __pyx_e_7classes_9generated_PHYSICSSERVER_G6DOF_JOINT_LINEAR_MOTOR_TARGET_VELOCITY,
+  __pyx_e_7classes_9generated_PHYSICSSERVER_G6DOF_JOINT_LINEAR_MOTOR_FORCE_LIMIT,
+  __pyx_e_7classes_9generated_PHYSICSSERVER_G6DOF_JOINT_ANGULAR_LOWER_LIMIT,
+  __pyx_e_7classes_9generated_PHYSICSSERVER_G6DOF_JOINT_ANGULAR_UPPER_LIMIT,
+  __pyx_e_7classes_9generated_PHYSICSSERVER_G6DOF_JOINT_ANGULAR_LIMIT_SOFTNESS,
+  __pyx_e_7classes_9generated_PHYSICSSERVER_G6DOF_JOINT_ANGULAR_DAMPING,
+  __pyx_e_7classes_9generated_PHYSICSSERVER_G6DOF_JOINT_ANGULAR_RESTITUTION,
+  __pyx_e_7classes_9generated_PHYSICSSERVER_G6DOF_JOINT_ANGULAR_FORCE_LIMIT,
+  __pyx_e_7classes_9generated_PHYSICSSERVER_G6DOF_JOINT_ANGULAR_ERP,
+  __pyx_e_7classes_9generated_PHYSICSSERVER_G6DOF_JOINT_ANGULAR_MOTOR_TARGET_VELOCITY,
+  __pyx_e_7classes_9generated_PHYSICSSERVER_G6DOF_JOINT_ANGULAR_MOTOR_FORCE_LIMIT
+};
+typedef enum __pyx_t_7classes_9generated_PhysicsServer_G6DOFJointAxisParam __pyx_t_7classes_9generated_PhysicsServer_G6DOFJointAxisParam;
+
+/* "classes/generated.pxd":523
+ * ctypedef enum PhysicsServer_BodyParameter :PHYSICSSERVER_BODY_PARAM_BOUNCE, PHYSICSSERVER_BODY_PARAM_FRICTION, PHYSICSSERVER_BODY_PARAM_MASS, PHYSICSSERVER_BODY_PARAM_GRAVITY_SCALE, PHYSICSSERVER_BODY_PARAM_LINEAR_DAMP, PHYSICSSERVER_BODY_PARAM_ANGULAR_DAMP, PHYSICSSERVER_BODY_PARAM_MAX
+ * ctypedef enum PhysicsServer_G6DOFJointAxisParam :PHYSICSSERVER_G6DOF_JOINT_LINEAR_LOWER_LIMIT, PHYSICSSERVER_G6DOF_JOINT_LINEAR_UPPER_LIMIT, PHYSICSSERVER_G6DOF_JOINT_LINEAR_LIMIT_SOFTNESS, PHYSICSSERVER_G6DOF_JOINT_LINEAR_RESTITUTION, PHYSICSSERVER_G6DOF_JOINT_LINEAR_DAMPING, PHYSICSSERVER_G6DOF_JOINT_LINEAR_MOTOR_TARGET_VELOCITY, PHYSICSSERVER_G6DOF_JOINT_LINEAR_MOTOR_FORCE_LIMIT, PHYSICSSERVER_G6DOF_JOINT_ANGULAR_LOWER_LIMIT, PHYSICSSERVER_G6DOF_JOINT_ANGULAR_UPPER_LIMIT, PHYSICSSERVER_G6DOF_JOINT_ANGULAR_LIMIT_SOFTNESS, PHYSICSSERVER_G6DOF_JOINT_ANGULAR_DAMPING, PHYSICSSERVER_G6DOF_JOINT_ANGULAR_RESTITUTION, PHYSICSSERVER_G6DOF_JOINT_ANGULAR_FORCE_LIMIT, PHYSICSSERVER_G6DOF_JOINT_ANGULAR_ERP, PHYSICSSERVER_G6DOF_JOINT_ANGULAR_MOTOR_TARGET_VELOCITY, PHYSICSSERVER_G6DOF_JOINT_ANGULAR_MOTOR_FORCE_LIMIT
+ * ctypedef enum PhysicsServer_SliderJointParam :PHYSICSSERVER_SLIDER_JOINT_LINEAR_LIMIT_UPPER, PHYSICSSERVER_SLIDER_JOINT_LINEAR_LIMIT_LOWER, PHYSICSSERVER_SLIDER_JOINT_LINEAR_LIMIT_SOFTNESS, PHYSICSSERVER_SLIDER_JOINT_LINEAR_LIMIT_RESTITUTION, PHYSICSSERVER_SLIDER_JOINT_LINEAR_LIMIT_DAMPING, PHYSICSSERVER_SLIDER_JOINT_LINEAR_MOTION_SOFTNESS, PHYSICSSERVER_SLIDER_JOINT_LINEAR_MOTION_RESTITUTION, PHYSICSSERVER_SLIDER_JOINT_LINEAR_MOTION_DAMPING, PHYSICSSERVER_SLIDER_JOINT_LINEAR_ORTHOGONAL_SOFTNESS, PHYSICSSERVER_SLIDER_JOINT_LINEAR_ORTHOGONAL_RESTITUTION, PHYSICSSERVER_SLIDER_JOINT_LINEAR_ORTHOGONAL_DAMPING, PHYSICSSERVER_SLIDER_JOINT_ANGULAR_LIMIT_UPPER, PHYSICSSERVER_SLIDER_JOINT_ANGULAR_LIMIT_LOWER, PHYSICSSERVER_SLIDER_JOINT_ANGULAR_LIMIT_SOFTNESS, PHYSICSSERVER_SLIDER_JOINT_ANGULAR_LIMIT_RESTITUTION, PHYSICSSERVER_SLIDER_JOINT_ANGULAR_LIMIT_DAMPING, PHYSICSSERVER_SLIDER_JOINT_ANGULAR_MOTION_SOFTNESS, PHYSICSSERVER_SLIDER_JOINT_ANGULAR_MOTION_RESTITUTION, PHYSICSSERVER_SLIDER_JOINT_ANGULAR_MOTION_DAMPING, PHYSICSSERVER_SLIDER_JOINT_ANGULAR_ORTHOGONAL_SOFTNESS, PHYSICSSERVER_SLIDER_JOINT_ANGULAR_ORTHOGONAL_RESTITUTION, PHYSICSSERVER_SLIDER_JOINT_ANGULAR_ORTHOGONAL_DAMPING, PHYSICSSERVER_SLIDER_JOINT_MAX             # <<<<<<<<<<<<<<
+ * ctypedef enum PhysicsServer_HingeJointParam :PHYSICSSERVER_HINGE_JOINT_BIAS, PHYSICSSERVER_HINGE_JOINT_LIMIT_UPPER, PHYSICSSERVER_HINGE_JOINT_LIMIT_LOWER, PHYSICSSERVER_HINGE_JOINT_LIMIT_BIAS, PHYSICSSERVER_HINGE_JOINT_LIMIT_SOFTNESS, PHYSICSSERVER_HINGE_JOINT_LIMIT_RELAXATION, PHYSICSSERVER_HINGE_JOINT_MOTOR_TARGET_VELOCITY, PHYSICSSERVER_HINGE_JOINT_MOTOR_MAX_IMPULSE
+ * ctypedef enum PhysicsServer_G6DOFJointAxisFlag :PHYSICSSERVER_G6DOF_JOINT_FLAG_ENABLE_LINEAR_LIMIT, PHYSICSSERVER_G6DOF_JOINT_FLAG_ENABLE_ANGULAR_LIMIT, PHYSICSSERVER_G6DOF_JOINT_FLAG_ENABLE_MOTOR, PHYSICSSERVER_G6DOF_JOINT_FLAG_ENABLE_LINEAR_MOTOR
+ */
+enum __pyx_t_7classes_9generated_PhysicsServer_SliderJointParam {
+  __pyx_e_7classes_9generated_PHYSICSSERVER_SLIDER_JOINT_LINEAR_LIMIT_UPPER,
+  __pyx_e_7classes_9generated_PHYSICSSERVER_SLIDER_JOINT_LINEAR_LIMIT_LOWER,
+  __pyx_e_7classes_9generated_PHYSICSSERVER_SLIDER_JOINT_LINEAR_LIMIT_SOFTNESS,
+  __pyx_e_7classes_9generated_PHYSICSSERVER_SLIDER_JOINT_LINEAR_LIMIT_RESTITUTION,
+  __pyx_e_7classes_9generated_PHYSICSSERVER_SLIDER_JOINT_LINEAR_LIMIT_DAMPING,
+  __pyx_e_7classes_9generated_PHYSICSSERVER_SLIDER_JOINT_LINEAR_MOTION_SOFTNESS,
+  __pyx_e_7classes_9generated_PHYSICSSERVER_SLIDER_JOINT_LINEAR_MOTION_RESTITUTION,
+  __pyx_e_7classes_9generated_PHYSICSSERVER_SLIDER_JOINT_LINEAR_MOTION_DAMPING,
+  __pyx_e_7classes_9generated_PHYSICSSERVER_SLIDER_JOINT_LINEAR_ORTHOGONAL_SOFTNESS,
+  __pyx_e_7classes_9generated_PHYSICSSERVER_SLIDER_JOINT_LINEAR_ORTHOGONAL_RESTITUTION,
+  __pyx_e_7classes_9generated_PHYSICSSERVER_SLIDER_JOINT_LINEAR_ORTHOGONAL_DAMPING,
+  __pyx_e_7classes_9generated_PHYSICSSERVER_SLIDER_JOINT_ANGULAR_LIMIT_UPPER,
+  __pyx_e_7classes_9generated_PHYSICSSERVER_SLIDER_JOINT_ANGULAR_LIMIT_LOWER,
+  __pyx_e_7classes_9generated_PHYSICSSERVER_SLIDER_JOINT_ANGULAR_LIMIT_SOFTNESS,
+  __pyx_e_7classes_9generated_PHYSICSSERVER_SLIDER_JOINT_ANGULAR_LIMIT_RESTITUTION,
+  __pyx_e_7classes_9generated_PHYSICSSERVER_SLIDER_JOINT_ANGULAR_LIMIT_DAMPING,
+  __pyx_e_7classes_9generated_PHYSICSSERVER_SLIDER_JOINT_ANGULAR_MOTION_SOFTNESS,
+  __pyx_e_7classes_9generated_PHYSICSSERVER_SLIDER_JOINT_ANGULAR_MOTION_RESTITUTION,
+  __pyx_e_7classes_9generated_PHYSICSSERVER_SLIDER_JOINT_ANGULAR_MOTION_DAMPING,
+  __pyx_e_7classes_9generated_PHYSICSSERVER_SLIDER_JOINT_ANGULAR_ORTHOGONAL_SOFTNESS,
+  __pyx_e_7classes_9generated_PHYSICSSERVER_SLIDER_JOINT_ANGULAR_ORTHOGONAL_RESTITUTION,
+  __pyx_e_7classes_9generated_PHYSICSSERVER_SLIDER_JOINT_ANGULAR_ORTHOGONAL_DAMPING,
+  __pyx_e_7classes_9generated_PHYSICSSERVER_SLIDER_JOINT_MAX
+};
+typedef enum __pyx_t_7classes_9generated_PhysicsServer_SliderJointParam __pyx_t_7classes_9generated_PhysicsServer_SliderJointParam;
+
+/* "classes/generated.pxd":524
+ * ctypedef enum PhysicsServer_G6DOFJointAxisParam :PHYSICSSERVER_G6DOF_JOINT_LINEAR_LOWER_LIMIT, PHYSICSSERVER_G6DOF_JOINT_LINEAR_UPPER_LIMIT, PHYSICSSERVER_G6DOF_JOINT_LINEAR_LIMIT_SOFTNESS, PHYSICSSERVER_G6DOF_JOINT_LINEAR_RESTITUTION, PHYSICSSERVER_G6DOF_JOINT_LINEAR_DAMPING, PHYSICSSERVER_G6DOF_JOINT_LINEAR_MOTOR_TARGET_VELOCITY, PHYSICSSERVER_G6DOF_JOINT_LINEAR_MOTOR_FORCE_LIMIT, PHYSICSSERVER_G6DOF_JOINT_ANGULAR_LOWER_LIMIT, PHYSICSSERVER_G6DOF_JOINT_ANGULAR_UPPER_LIMIT, PHYSICSSERVER_G6DOF_JOINT_ANGULAR_LIMIT_SOFTNESS, PHYSICSSERVER_G6DOF_JOINT_ANGULAR_DAMPING, PHYSICSSERVER_G6DOF_JOINT_ANGULAR_RESTITUTION, PHYSICSSERVER_G6DOF_JOINT_ANGULAR_FORCE_LIMIT, PHYSICSSERVER_G6DOF_JOINT_ANGULAR_ERP, PHYSICSSERVER_G6DOF_JOINT_ANGULAR_MOTOR_TARGET_VELOCITY, PHYSICSSERVER_G6DOF_JOINT_ANGULAR_MOTOR_FORCE_LIMIT
+ * ctypedef enum PhysicsServer_SliderJointParam :PHYSICSSERVER_SLIDER_JOINT_LINEAR_LIMIT_UPPER, PHYSICSSERVER_SLIDER_JOINT_LINEAR_LIMIT_LOWER, PHYSICSSERVER_SLIDER_JOINT_LINEAR_LIMIT_SOFTNESS, PHYSICSSERVER_SLIDER_JOINT_LINEAR_LIMIT_RESTITUTION, PHYSICSSERVER_SLIDER_JOINT_LINEAR_LIMIT_DAMPING, PHYSICSSERVER_SLIDER_JOINT_LINEAR_MOTION_SOFTNESS, PHYSICSSERVER_SLIDER_JOINT_LINEAR_MOTION_RESTITUTION, PHYSICSSERVER_SLIDER_JOINT_LINEAR_MOTION_DAMPING, PHYSICSSERVER_SLIDER_JOINT_LINEAR_ORTHOGONAL_SOFTNESS, PHYSICSSERVER_SLIDER_JOINT_LINEAR_ORTHOGONAL_RESTITUTION, PHYSICSSERVER_SLIDER_JOINT_LINEAR_ORTHOGONAL_DAMPING, PHYSICSSERVER_SLIDER_JOINT_ANGULAR_LIMIT_UPPER, PHYSICSSERVER_SLIDER_JOINT_ANGULAR_LIMIT_LOWER, PHYSICSSERVER_SLIDER_JOINT_ANGULAR_LIMIT_SOFTNESS, PHYSICSSERVER_SLIDER_JOINT_ANGULAR_LIMIT_RESTITUTION, PHYSICSSERVER_SLIDER_JOINT_ANGULAR_LIMIT_DAMPING, PHYSICSSERVER_SLIDER_JOINT_ANGULAR_MOTION_SOFTNESS, PHYSICSSERVER_SLIDER_JOINT_ANGULAR_MOTION_RESTITUTION, PHYSICSSERVER_SLIDER_JOINT_ANGULAR_MOTION_DAMPING, PHYSICSSERVER_SLIDER_JOINT_ANGULAR_ORTHOGONAL_SOFTNESS, PHYSICSSERVER_SLIDER_JOINT_ANGULAR_ORTHOGONAL_RESTITUTION, PHYSICSSERVER_SLIDER_JOINT_ANGULAR_ORTHOGONAL_DAMPING, PHYSICSSERVER_SLIDER_JOINT_MAX
+ * ctypedef enum PhysicsServer_HingeJointParam :PHYSICSSERVER_HINGE_JOINT_BIAS, PHYSICSSERVER_HINGE_JOINT_LIMIT_UPPER, PHYSICSSERVER_HINGE_JOINT_LIMIT_LOWER, PHYSICSSERVER_HINGE_JOINT_LIMIT_BIAS, PHYSICSSERVER_HINGE_JOINT_LIMIT_SOFTNESS, PHYSICSSERVER_HINGE_JOINT_LIMIT_RELAXATION, PHYSICSSERVER_HINGE_JOINT_MOTOR_TARGET_VELOCITY, PHYSICSSERVER_HINGE_JOINT_MOTOR_MAX_IMPULSE             # <<<<<<<<<<<<<<
+ * ctypedef enum PhysicsServer_G6DOFJointAxisFlag :PHYSICSSERVER_G6DOF_JOINT_FLAG_ENABLE_LINEAR_LIMIT, PHYSICSSERVER_G6DOF_JOINT_FLAG_ENABLE_ANGULAR_LIMIT, PHYSICSSERVER_G6DOF_JOINT_FLAG_ENABLE_MOTOR, PHYSICSSERVER_G6DOF_JOINT_FLAG_ENABLE_LINEAR_MOTOR
+ * ctypedef enum PhysicsServer_HingeJointFlag :PHYSICSSERVER_HINGE_JOINT_FLAG_USE_LIMIT, PHYSICSSERVER_HINGE_JOINT_FLAG_ENABLE_MOTOR
+ */
+enum __pyx_t_7classes_9generated_PhysicsServer_HingeJointParam {
+  __pyx_e_7classes_9generated_PHYSICSSERVER_HINGE_JOINT_BIAS,
+  __pyx_e_7classes_9generated_PHYSICSSERVER_HINGE_JOINT_LIMIT_UPPER,
+  __pyx_e_7classes_9generated_PHYSICSSERVER_HINGE_JOINT_LIMIT_LOWER,
+  __pyx_e_7classes_9generated_PHYSICSSERVER_HINGE_JOINT_LIMIT_BIAS,
+  __pyx_e_7classes_9generated_PHYSICSSERVER_HINGE_JOINT_LIMIT_SOFTNESS,
+  __pyx_e_7classes_9generated_PHYSICSSERVER_HINGE_JOINT_LIMIT_RELAXATION,
+  __pyx_e_7classes_9generated_PHYSICSSERVER_HINGE_JOINT_MOTOR_TARGET_VELOCITY,
+  __pyx_e_7classes_9generated_PHYSICSSERVER_HINGE_JOINT_MOTOR_MAX_IMPULSE
+};
+typedef enum __pyx_t_7classes_9generated_PhysicsServer_HingeJointParam __pyx_t_7classes_9generated_PhysicsServer_HingeJointParam;
+
+/* "classes/generated.pxd":525
+ * ctypedef enum PhysicsServer_SliderJointParam :PHYSICSSERVER_SLIDER_JOINT_LINEAR_LIMIT_UPPER, PHYSICSSERVER_SLIDER_JOINT_LINEAR_LIMIT_LOWER, PHYSICSSERVER_SLIDER_JOINT_LINEAR_LIMIT_SOFTNESS, PHYSICSSERVER_SLIDER_JOINT_LINEAR_LIMIT_RESTITUTION, PHYSICSSERVER_SLIDER_JOINT_LINEAR_LIMIT_DAMPING, PHYSICSSERVER_SLIDER_JOINT_LINEAR_MOTION_SOFTNESS, PHYSICSSERVER_SLIDER_JOINT_LINEAR_MOTION_RESTITUTION, PHYSICSSERVER_SLIDER_JOINT_LINEAR_MOTION_DAMPING, PHYSICSSERVER_SLIDER_JOINT_LINEAR_ORTHOGONAL_SOFTNESS, PHYSICSSERVER_SLIDER_JOINT_LINEAR_ORTHOGONAL_RESTITUTION, PHYSICSSERVER_SLIDER_JOINT_LINEAR_ORTHOGONAL_DAMPING, PHYSICSSERVER_SLIDER_JOINT_ANGULAR_LIMIT_UPPER, PHYSICSSERVER_SLIDER_JOINT_ANGULAR_LIMIT_LOWER, PHYSICSSERVER_SLIDER_JOINT_ANGULAR_LIMIT_SOFTNESS, PHYSICSSERVER_SLIDER_JOINT_ANGULAR_LIMIT_RESTITUTION, PHYSICSSERVER_SLIDER_JOINT_ANGULAR_LIMIT_DAMPING, PHYSICSSERVER_SLIDER_JOINT_ANGULAR_MOTION_SOFTNESS, PHYSICSSERVER_SLIDER_JOINT_ANGULAR_MOTION_RESTITUTION, PHYSICSSERVER_SLIDER_JOINT_ANGULAR_MOTION_DAMPING, PHYSICSSERVER_SLIDER_JOINT_ANGULAR_ORTHOGONAL_SOFTNESS, PHYSICSSERVER_SLIDER_JOINT_ANGULAR_ORTHOGONAL_RESTITUTION, PHYSICSSERVER_SLIDER_JOINT_ANGULAR_ORTHOGONAL_DAMPING, PHYSICSSERVER_SLIDER_JOINT_MAX
+ * ctypedef enum PhysicsServer_HingeJointParam :PHYSICSSERVER_HINGE_JOINT_BIAS, PHYSICSSERVER_HINGE_JOINT_LIMIT_UPPER, PHYSICSSERVER_HINGE_JOINT_LIMIT_LOWER, PHYSICSSERVER_HINGE_JOINT_LIMIT_BIAS, PHYSICSSERVER_HINGE_JOINT_LIMIT_SOFTNESS, PHYSICSSERVER_HINGE_JOINT_LIMIT_RELAXATION, PHYSICSSERVER_HINGE_JOINT_MOTOR_TARGET_VELOCITY, PHYSICSSERVER_HINGE_JOINT_MOTOR_MAX_IMPULSE
+ * ctypedef enum PhysicsServer_G6DOFJointAxisFlag :PHYSICSSERVER_G6DOF_JOINT_FLAG_ENABLE_LINEAR_LIMIT, PHYSICSSERVER_G6DOF_JOINT_FLAG_ENABLE_ANGULAR_LIMIT, PHYSICSSERVER_G6DOF_JOINT_FLAG_ENABLE_MOTOR, PHYSICSSERVER_G6DOF_JOINT_FLAG_ENABLE_LINEAR_MOTOR             # <<<<<<<<<<<<<<
+ * ctypedef enum PhysicsServer_HingeJointFlag :PHYSICSSERVER_HINGE_JOINT_FLAG_USE_LIMIT, PHYSICSSERVER_HINGE_JOINT_FLAG_ENABLE_MOTOR
+ * ctypedef enum PhysicsServer_AreaSpaceOverrideMode :PHYSICSSERVER_AREA_SPACE_OVERRIDE_DISABLED, PHYSICSSERVER_AREA_SPACE_OVERRIDE_COMBINE, PHYSICSSERVER_AREA_SPACE_OVERRIDE_COMBINE_REPLACE, PHYSICSSERVER_AREA_SPACE_OVERRIDE_REPLACE, PHYSICSSERVER_AREA_SPACE_OVERRIDE_REPLACE_COMBINE
+ */
+enum __pyx_t_7classes_9generated_PhysicsServer_G6DOFJointAxisFlag {
+  __pyx_e_7classes_9generated_PHYSICSSERVER_G6DOF_JOINT_FLAG_ENABLE_LINEAR_LIMIT,
+  __pyx_e_7classes_9generated_PHYSICSSERVER_G6DOF_JOINT_FLAG_ENABLE_ANGULAR_LIMIT,
+  __pyx_e_7classes_9generated_PHYSICSSERVER_G6DOF_JOINT_FLAG_ENABLE_MOTOR,
+  __pyx_e_7classes_9generated_PHYSICSSERVER_G6DOF_JOINT_FLAG_ENABLE_LINEAR_MOTOR
+};
+typedef enum __pyx_t_7classes_9generated_PhysicsServer_G6DOFJointAxisFlag __pyx_t_7classes_9generated_PhysicsServer_G6DOFJointAxisFlag;
+
+/* "classes/generated.pxd":526
+ * ctypedef enum PhysicsServer_HingeJointParam :PHYSICSSERVER_HINGE_JOINT_BIAS, PHYSICSSERVER_HINGE_JOINT_LIMIT_UPPER, PHYSICSSERVER_HINGE_JOINT_LIMIT_LOWER, PHYSICSSERVER_HINGE_JOINT_LIMIT_BIAS, PHYSICSSERVER_HINGE_JOINT_LIMIT_SOFTNESS, PHYSICSSERVER_HINGE_JOINT_LIMIT_RELAXATION, PHYSICSSERVER_HINGE_JOINT_MOTOR_TARGET_VELOCITY, PHYSICSSERVER_HINGE_JOINT_MOTOR_MAX_IMPULSE
+ * ctypedef enum PhysicsServer_G6DOFJointAxisFlag :PHYSICSSERVER_G6DOF_JOINT_FLAG_ENABLE_LINEAR_LIMIT, PHYSICSSERVER_G6DOF_JOINT_FLAG_ENABLE_ANGULAR_LIMIT, PHYSICSSERVER_G6DOF_JOINT_FLAG_ENABLE_MOTOR, PHYSICSSERVER_G6DOF_JOINT_FLAG_ENABLE_LINEAR_MOTOR
+ * ctypedef enum PhysicsServer_HingeJointFlag :PHYSICSSERVER_HINGE_JOINT_FLAG_USE_LIMIT, PHYSICSSERVER_HINGE_JOINT_FLAG_ENABLE_MOTOR             # <<<<<<<<<<<<<<
+ * ctypedef enum PhysicsServer_AreaSpaceOverrideMode :PHYSICSSERVER_AREA_SPACE_OVERRIDE_DISABLED, PHYSICSSERVER_AREA_SPACE_OVERRIDE_COMBINE, PHYSICSSERVER_AREA_SPACE_OVERRIDE_COMBINE_REPLACE, PHYSICSSERVER_AREA_SPACE_OVERRIDE_REPLACE, PHYSICSSERVER_AREA_SPACE_OVERRIDE_REPLACE_COMBINE
+ * ctypedef enum PhysicsServer_AreaParameter :PHYSICSSERVER_AREA_PARAM_GRAVITY, PHYSICSSERVER_AREA_PARAM_GRAVITY_VECTOR, PHYSICSSERVER_AREA_PARAM_GRAVITY_IS_POINT, PHYSICSSERVER_AREA_PARAM_GRAVITY_DISTANCE_SCALE, PHYSICSSERVER_AREA_PARAM_GRAVITY_POINT_ATTENUATION, PHYSICSSERVER_AREA_PARAM_LINEAR_DAMP, PHYSICSSERVER_AREA_PARAM_ANGULAR_DAMP, PHYSICSSERVER_AREA_PARAM_PRIORITY
+ */
+enum __pyx_t_7classes_9generated_PhysicsServer_HingeJointFlag {
+  __pyx_e_7classes_9generated_PHYSICSSERVER_HINGE_JOINT_FLAG_USE_LIMIT,
+  __pyx_e_7classes_9generated_PHYSICSSERVER_HINGE_JOINT_FLAG_ENABLE_MOTOR
+};
+typedef enum __pyx_t_7classes_9generated_PhysicsServer_HingeJointFlag __pyx_t_7classes_9generated_PhysicsServer_HingeJointFlag;
+
+/* "classes/generated.pxd":527
+ * ctypedef enum PhysicsServer_G6DOFJointAxisFlag :PHYSICSSERVER_G6DOF_JOINT_FLAG_ENABLE_LINEAR_LIMIT, PHYSICSSERVER_G6DOF_JOINT_FLAG_ENABLE_ANGULAR_LIMIT, PHYSICSSERVER_G6DOF_JOINT_FLAG_ENABLE_MOTOR, PHYSICSSERVER_G6DOF_JOINT_FLAG_ENABLE_LINEAR_MOTOR
+ * ctypedef enum PhysicsServer_HingeJointFlag :PHYSICSSERVER_HINGE_JOINT_FLAG_USE_LIMIT, PHYSICSSERVER_HINGE_JOINT_FLAG_ENABLE_MOTOR
+ * ctypedef enum PhysicsServer_AreaSpaceOverrideMode :PHYSICSSERVER_AREA_SPACE_OVERRIDE_DISABLED, PHYSICSSERVER_AREA_SPACE_OVERRIDE_COMBINE, PHYSICSSERVER_AREA_SPACE_OVERRIDE_COMBINE_REPLACE, PHYSICSSERVER_AREA_SPACE_OVERRIDE_REPLACE, PHYSICSSERVER_AREA_SPACE_OVERRIDE_REPLACE_COMBINE             # <<<<<<<<<<<<<<
+ * ctypedef enum PhysicsServer_AreaParameter :PHYSICSSERVER_AREA_PARAM_GRAVITY, PHYSICSSERVER_AREA_PARAM_GRAVITY_VECTOR, PHYSICSSERVER_AREA_PARAM_GRAVITY_IS_POINT, PHYSICSSERVER_AREA_PARAM_GRAVITY_DISTANCE_SCALE, PHYSICSSERVER_AREA_PARAM_GRAVITY_POINT_ATTENUATION, PHYSICSSERVER_AREA_PARAM_LINEAR_DAMP, PHYSICSSERVER_AREA_PARAM_ANGULAR_DAMP, PHYSICSSERVER_AREA_PARAM_PRIORITY
+ * 
+ */
+enum __pyx_t_7classes_9generated_PhysicsServer_AreaSpaceOverrideMode {
+  __pyx_e_7classes_9generated_PHYSICSSERVER_AREA_SPACE_OVERRIDE_DISABLED,
+  __pyx_e_7classes_9generated_PHYSICSSERVER_AREA_SPACE_OVERRIDE_COMBINE,
+  __pyx_e_7classes_9generated_PHYSICSSERVER_AREA_SPACE_OVERRIDE_COMBINE_REPLACE,
+  __pyx_e_7classes_9generated_PHYSICSSERVER_AREA_SPACE_OVERRIDE_REPLACE,
+  __pyx_e_7classes_9generated_PHYSICSSERVER_AREA_SPACE_OVERRIDE_REPLACE_COMBINE
+};
+typedef enum __pyx_t_7classes_9generated_PhysicsServer_AreaSpaceOverrideMode __pyx_t_7classes_9generated_PhysicsServer_AreaSpaceOverrideMode;
+
+/* "classes/generated.pxd":528
+ * ctypedef enum PhysicsServer_HingeJointFlag :PHYSICSSERVER_HINGE_JOINT_FLAG_USE_LIMIT, PHYSICSSERVER_HINGE_JOINT_FLAG_ENABLE_MOTOR
+ * ctypedef enum PhysicsServer_AreaSpaceOverrideMode :PHYSICSSERVER_AREA_SPACE_OVERRIDE_DISABLED, PHYSICSSERVER_AREA_SPACE_OVERRIDE_COMBINE, PHYSICSSERVER_AREA_SPACE_OVERRIDE_COMBINE_REPLACE, PHYSICSSERVER_AREA_SPACE_OVERRIDE_REPLACE, PHYSICSSERVER_AREA_SPACE_OVERRIDE_REPLACE_COMBINE
+ * ctypedef enum PhysicsServer_AreaParameter :PHYSICSSERVER_AREA_PARAM_GRAVITY, PHYSICSSERVER_AREA_PARAM_GRAVITY_VECTOR, PHYSICSSERVER_AREA_PARAM_GRAVITY_IS_POINT, PHYSICSSERVER_AREA_PARAM_GRAVITY_DISTANCE_SCALE, PHYSICSSERVER_AREA_PARAM_GRAVITY_POINT_ATTENUATION, PHYSICSSERVER_AREA_PARAM_LINEAR_DAMP, PHYSICSSERVER_AREA_PARAM_ANGULAR_DAMP, PHYSICSSERVER_AREA_PARAM_PRIORITY             # <<<<<<<<<<<<<<
+ * 
+ * 
+ */
+enum __pyx_t_7classes_9generated_PhysicsServer_AreaParameter {
+  __pyx_e_7classes_9generated_PHYSICSSERVER_AREA_PARAM_GRAVITY,
+  __pyx_e_7classes_9generated_PHYSICSSERVER_AREA_PARAM_GRAVITY_VECTOR,
+  __pyx_e_7classes_9generated_PHYSICSSERVER_AREA_PARAM_GRAVITY_IS_POINT,
+  __pyx_e_7classes_9generated_PHYSICSSERVER_AREA_PARAM_GRAVITY_DISTANCE_SCALE,
+  __pyx_e_7classes_9generated_PHYSICSSERVER_AREA_PARAM_GRAVITY_POINT_ATTENUATION,
+  __pyx_e_7classes_9generated_PHYSICSSERVER_AREA_PARAM_LINEAR_DAMP,
+  __pyx_e_7classes_9generated_PHYSICSSERVER_AREA_PARAM_ANGULAR_DAMP,
+  __pyx_e_7classes_9generated_PHYSICSSERVER_AREA_PARAM_PRIORITY
+};
+typedef enum __pyx_t_7classes_9generated_PhysicsServer_AreaParameter __pyx_t_7classes_9generated_PhysicsServer_AreaParameter;
+
+/* "classes/generated.pxd":532
+ * 
+ * 
+ * ctypedef enum PinJoint_Param :PINJOINT_PARAM_BIAS, PINJOINT_PARAM_DAMPING, PINJOINT_PARAM_IMPULSE_CLAMP             # <<<<<<<<<<<<<<
+ * 
+ * 
+ */
+enum __pyx_t_7classes_9generated_PinJoint_Param {
+  __pyx_e_7classes_9generated_PINJOINT_PARAM_BIAS,
+  __pyx_e_7classes_9generated_PINJOINT_PARAM_DAMPING,
+  __pyx_e_7classes_9generated_PINJOINT_PARAM_IMPULSE_CLAMP
+};
+typedef enum __pyx_t_7classes_9generated_PinJoint_Param __pyx_t_7classes_9generated_PinJoint_Param;
+
+/* "classes/generated.pxd":549
+ * 
+ * 
+ * ctypedef enum ProceduralSky_TextureSize :PROCEDURALSKY_TEXTURE_SIZE_256, PROCEDURALSKY_TEXTURE_SIZE_512, PROCEDURALSKY_TEXTURE_SIZE_1024, PROCEDURALSKY_TEXTURE_SIZE_2048, PROCEDURALSKY_TEXTURE_SIZE_4096, PROCEDURALSKY_TEXTURE_SIZE_MAX             # <<<<<<<<<<<<<<
+ * 
+ * 
+ */
+enum __pyx_t_7classes_9generated_ProceduralSky_TextureSize {
+  __pyx_e_7classes_9generated_PROCEDURALSKY_TEXTURE_SIZE_256,
+  __pyx_e_7classes_9generated_PROCEDURALSKY_TEXTURE_SIZE_512,
+  __pyx_e_7classes_9generated_PROCEDURALSKY_TEXTURE_SIZE_1024,
+  __pyx_e_7classes_9generated_PROCEDURALSKY_TEXTURE_SIZE_2048,
+  __pyx_e_7classes_9generated_PROCEDURALSKY_TEXTURE_SIZE_4096,
+  __pyx_e_7classes_9generated_PROCEDURALSKY_TEXTURE_SIZE_MAX
+};
+typedef enum __pyx_t_7classes_9generated_ProceduralSky_TextureSize __pyx_t_7classes_9generated_ProceduralSky_TextureSize;
+
+/* "classes/generated.pxd":553
+ * 
+ * 
+ * ctypedef enum ProximityGroup_DispatchMode :PROXIMITYGROUP_MODE_PROXY, PROXIMITYGROUP_MODE_SIGNAL             # <<<<<<<<<<<<<<
+ * 
+ * 
+ */
+enum __pyx_t_7classes_9generated_ProximityGroup_DispatchMode {
+  __pyx_e_7classes_9generated_PROXIMITYGROUP_MODE_PROXY,
+  __pyx_e_7classes_9generated_PROXIMITYGROUP_MODE_SIGNAL
+};
+typedef enum __pyx_t_7classes_9generated_ProximityGroup_DispatchMode __pyx_t_7classes_9generated_ProximityGroup_DispatchMode;
+
+/* "classes/generated.pxd":566
+ * 
+ * 
+ * ctypedef enum ReflectionProbe_UpdateMode :REFLECTIONPROBE_UPDATE_ONCE, REFLECTIONPROBE_UPDATE_ALWAYS             # <<<<<<<<<<<<<<
+ * 
+ * 
+ */
+enum __pyx_t_7classes_9generated_ReflectionProbe_UpdateMode {
+  __pyx_e_7classes_9generated_REFLECTIONPROBE_UPDATE_ONCE,
+  __pyx_e_7classes_9generated_REFLECTIONPROBE_UPDATE_ALWAYS
+};
+typedef enum __pyx_t_7classes_9generated_ReflectionProbe_UpdateMode __pyx_t_7classes_9generated_ReflectionProbe_UpdateMode;
+
+/* "classes/generated.pxd":581
+ * 
+ * 
+ * ctypedef enum RichTextLabel_Align :RICHTEXTLABEL_ALIGN_LEFT, RICHTEXTLABEL_ALIGN_CENTER, RICHTEXTLABEL_ALIGN_RIGHT, RICHTEXTLABEL_ALIGN_FILL             # <<<<<<<<<<<<<<
+ * ctypedef enum RichTextLabel_ListType :RICHTEXTLABEL_LIST_NUMBERS, RICHTEXTLABEL_LIST_LETTERS, RICHTEXTLABEL_LIST_DOTS
+ * ctypedef enum RichTextLabel_ItemType :RICHTEXTLABEL_ITEM_FRAME, RICHTEXTLABEL_ITEM_TEXT, RICHTEXTLABEL_ITEM_IMAGE, RICHTEXTLABEL_ITEM_NEWLINE, RICHTEXTLABEL_ITEM_FONT, RICHTEXTLABEL_ITEM_COLOR, RICHTEXTLABEL_ITEM_UNDERLINE, RICHTEXTLABEL_ITEM_STRIKETHROUGH, RICHTEXTLABEL_ITEM_ALIGN, RICHTEXTLABEL_ITEM_INDENT, RICHTEXTLABEL_ITEM_LIST, RICHTEXTLABEL_ITEM_TABLE, RICHTEXTLABEL_ITEM_FADE, RICHTEXTLABEL_ITEM_SHAKE, RICHTEXTLABEL_ITEM_WAVE, RICHTEXTLABEL_ITEM_TORNADO, RICHTEXTLABEL_ITEM_RAINBOW, RICHTEXTLABEL_ITEM_META, RICHTEXTLABEL_ITEM_CUSTOMFX
+ */
+enum __pyx_t_7classes_9generated_RichTextLabel_Align {
+  __pyx_e_7classes_9generated_RICHTEXTLABEL_ALIGN_LEFT,
+  __pyx_e_7classes_9generated_RICHTEXTLABEL_ALIGN_CENTER,
+  __pyx_e_7classes_9generated_RICHTEXTLABEL_ALIGN_RIGHT,
+  __pyx_e_7classes_9generated_RICHTEXTLABEL_ALIGN_FILL
+};
+typedef enum __pyx_t_7classes_9generated_RichTextLabel_Align __pyx_t_7classes_9generated_RichTextLabel_Align;
+
+/* "classes/generated.pxd":582
+ * 
+ * ctypedef enum RichTextLabel_Align :RICHTEXTLABEL_ALIGN_LEFT, RICHTEXTLABEL_ALIGN_CENTER, RICHTEXTLABEL_ALIGN_RIGHT, RICHTEXTLABEL_ALIGN_FILL
+ * ctypedef enum RichTextLabel_ListType :RICHTEXTLABEL_LIST_NUMBERS, RICHTEXTLABEL_LIST_LETTERS, RICHTEXTLABEL_LIST_DOTS             # <<<<<<<<<<<<<<
+ * ctypedef enum RichTextLabel_ItemType :RICHTEXTLABEL_ITEM_FRAME, RICHTEXTLABEL_ITEM_TEXT, RICHTEXTLABEL_ITEM_IMAGE, RICHTEXTLABEL_ITEM_NEWLINE, RICHTEXTLABEL_ITEM_FONT, RICHTEXTLABEL_ITEM_COLOR, RICHTEXTLABEL_ITEM_UNDERLINE, RICHTEXTLABEL_ITEM_STRIKETHROUGH, RICHTEXTLABEL_ITEM_ALIGN, RICHTEXTLABEL_ITEM_INDENT, RICHTEXTLABEL_ITEM_LIST, RICHTEXTLABEL_ITEM_TABLE, RICHTEXTLABEL_ITEM_FADE, RICHTEXTLABEL_ITEM_SHAKE, RICHTEXTLABEL_ITEM_WAVE, RICHTEXTLABEL_ITEM_TORNADO, RICHTEXTLABEL_ITEM_RAINBOW, RICHTEXTLABEL_ITEM_META, RICHTEXTLABEL_ITEM_CUSTOMFX
+ * 
+ */
+enum __pyx_t_7classes_9generated_RichTextLabel_ListType {
+  __pyx_e_7classes_9generated_RICHTEXTLABEL_LIST_NUMBERS,
+  __pyx_e_7classes_9generated_RICHTEXTLABEL_LIST_LETTERS,
+  __pyx_e_7classes_9generated_RICHTEXTLABEL_LIST_DOTS
+};
+typedef enum __pyx_t_7classes_9generated_RichTextLabel_ListType __pyx_t_7classes_9generated_RichTextLabel_ListType;
+
+/* "classes/generated.pxd":583
+ * ctypedef enum RichTextLabel_Align :RICHTEXTLABEL_ALIGN_LEFT, RICHTEXTLABEL_ALIGN_CENTER, RICHTEXTLABEL_ALIGN_RIGHT, RICHTEXTLABEL_ALIGN_FILL
+ * ctypedef enum RichTextLabel_ListType :RICHTEXTLABEL_LIST_NUMBERS, RICHTEXTLABEL_LIST_LETTERS, RICHTEXTLABEL_LIST_DOTS
+ * ctypedef enum RichTextLabel_ItemType :RICHTEXTLABEL_ITEM_FRAME, RICHTEXTLABEL_ITEM_TEXT, RICHTEXTLABEL_ITEM_IMAGE, RICHTEXTLABEL_ITEM_NEWLINE, RICHTEXTLABEL_ITEM_FONT, RICHTEXTLABEL_ITEM_COLOR, RICHTEXTLABEL_ITEM_UNDERLINE, RICHTEXTLABEL_ITEM_STRIKETHROUGH, RICHTEXTLABEL_ITEM_ALIGN, RICHTEXTLABEL_ITEM_INDENT, RICHTEXTLABEL_ITEM_LIST, RICHTEXTLABEL_ITEM_TABLE, RICHTEXTLABEL_ITEM_FADE, RICHTEXTLABEL_ITEM_SHAKE, RICHTEXTLABEL_ITEM_WAVE, RICHTEXTLABEL_ITEM_TORNADO, RICHTEXTLABEL_ITEM_RAINBOW, RICHTEXTLABEL_ITEM_META, RICHTEXTLABEL_ITEM_CUSTOMFX             # <<<<<<<<<<<<<<
+ * 
+ * ctypedef enum RigidBody_Mode :RIGIDBODY_MODE_RIGID, RIGIDBODY_MODE_STATIC, RIGIDBODY_MODE_CHARACTER, RIGIDBODY_MODE_KINEMATIC
+ */
+enum __pyx_t_7classes_9generated_RichTextLabel_ItemType {
+  __pyx_e_7classes_9generated_RICHTEXTLABEL_ITEM_FRAME,
+  __pyx_e_7classes_9generated_RICHTEXTLABEL_ITEM_TEXT,
+  __pyx_e_7classes_9generated_RICHTEXTLABEL_ITEM_IMAGE,
+  __pyx_e_7classes_9generated_RICHTEXTLABEL_ITEM_NEWLINE,
+  __pyx_e_7classes_9generated_RICHTEXTLABEL_ITEM_FONT,
+  __pyx_e_7classes_9generated_RICHTEXTLABEL_ITEM_COLOR,
+  __pyx_e_7classes_9generated_RICHTEXTLABEL_ITEM_UNDERLINE,
+  __pyx_e_7classes_9generated_RICHTEXTLABEL_ITEM_STRIKETHROUGH,
+  __pyx_e_7classes_9generated_RICHTEXTLABEL_ITEM_ALIGN,
+  __pyx_e_7classes_9generated_RICHTEXTLABEL_ITEM_INDENT,
+  __pyx_e_7classes_9generated_RICHTEXTLABEL_ITEM_LIST,
+  __pyx_e_7classes_9generated_RICHTEXTLABEL_ITEM_TABLE,
+  __pyx_e_7classes_9generated_RICHTEXTLABEL_ITEM_FADE,
+  __pyx_e_7classes_9generated_RICHTEXTLABEL_ITEM_SHAKE,
+  __pyx_e_7classes_9generated_RICHTEXTLABEL_ITEM_WAVE,
+  __pyx_e_7classes_9generated_RICHTEXTLABEL_ITEM_TORNADO,
+  __pyx_e_7classes_9generated_RICHTEXTLABEL_ITEM_RAINBOW,
+  __pyx_e_7classes_9generated_RICHTEXTLABEL_ITEM_META,
+  __pyx_e_7classes_9generated_RICHTEXTLABEL_ITEM_CUSTOMFX
+};
+typedef enum __pyx_t_7classes_9generated_RichTextLabel_ItemType __pyx_t_7classes_9generated_RichTextLabel_ItemType;
+
+/* "classes/generated.pxd":585
+ * ctypedef enum RichTextLabel_ItemType :RICHTEXTLABEL_ITEM_FRAME, RICHTEXTLABEL_ITEM_TEXT, RICHTEXTLABEL_ITEM_IMAGE, RICHTEXTLABEL_ITEM_NEWLINE, RICHTEXTLABEL_ITEM_FONT, RICHTEXTLABEL_ITEM_COLOR, RICHTEXTLABEL_ITEM_UNDERLINE, RICHTEXTLABEL_ITEM_STRIKETHROUGH, RICHTEXTLABEL_ITEM_ALIGN, RICHTEXTLABEL_ITEM_INDENT, RICHTEXTLABEL_ITEM_LIST, RICHTEXTLABEL_ITEM_TABLE, RICHTEXTLABEL_ITEM_FADE, RICHTEXTLABEL_ITEM_SHAKE, RICHTEXTLABEL_ITEM_WAVE, RICHTEXTLABEL_ITEM_TORNADO, RICHTEXTLABEL_ITEM_RAINBOW, RICHTEXTLABEL_ITEM_META, RICHTEXTLABEL_ITEM_CUSTOMFX
+ * 
+ * ctypedef enum RigidBody_Mode :RIGIDBODY_MODE_RIGID, RIGIDBODY_MODE_STATIC, RIGIDBODY_MODE_CHARACTER, RIGIDBODY_MODE_KINEMATIC             # <<<<<<<<<<<<<<
+ * 
+ * ctypedef enum RigidBody2D_Mode :RIGIDBODY2D_MODE_RIGID, RIGIDBODY2D_MODE_STATIC, RIGIDBODY2D_MODE_CHARACTER, RIGIDBODY2D_MODE_KINEMATIC
+ */
+enum __pyx_t_7classes_9generated_RigidBody_Mode {
+  __pyx_e_7classes_9generated_RIGIDBODY_MODE_RIGID,
+  __pyx_e_7classes_9generated_RIGIDBODY_MODE_STATIC,
+  __pyx_e_7classes_9generated_RIGIDBODY_MODE_CHARACTER,
+  __pyx_e_7classes_9generated_RIGIDBODY_MODE_KINEMATIC
+};
+typedef enum __pyx_t_7classes_9generated_RigidBody_Mode __pyx_t_7classes_9generated_RigidBody_Mode;
+
+/* "classes/generated.pxd":587
+ * ctypedef enum RigidBody_Mode :RIGIDBODY_MODE_RIGID, RIGIDBODY_MODE_STATIC, RIGIDBODY_MODE_CHARACTER, RIGIDBODY_MODE_KINEMATIC
+ * 
+ * ctypedef enum RigidBody2D_Mode :RIGIDBODY2D_MODE_RIGID, RIGIDBODY2D_MODE_STATIC, RIGIDBODY2D_MODE_CHARACTER, RIGIDBODY2D_MODE_KINEMATIC             # <<<<<<<<<<<<<<
+ * ctypedef enum RigidBody2D_CCDMode :RIGIDBODY2D_CCD_MODE_DISABLED, RIGIDBODY2D_CCD_MODE_CAST_RAY, RIGIDBODY2D_CCD_MODE_CAST_SHAPE
+ * 
+ */
+enum __pyx_t_7classes_9generated_RigidBody2D_Mode {
+  __pyx_e_7classes_9generated_RIGIDBODY2D_MODE_RIGID,
+  __pyx_e_7classes_9generated_RIGIDBODY2D_MODE_STATIC,
+  __pyx_e_7classes_9generated_RIGIDBODY2D_MODE_CHARACTER,
+  __pyx_e_7classes_9generated_RIGIDBODY2D_MODE_KINEMATIC
+};
+typedef enum __pyx_t_7classes_9generated_RigidBody2D_Mode __pyx_t_7classes_9generated_RigidBody2D_Mode;
+
+/* "classes/generated.pxd":588
+ * 
+ * ctypedef enum RigidBody2D_Mode :RIGIDBODY2D_MODE_RIGID, RIGIDBODY2D_MODE_STATIC, RIGIDBODY2D_MODE_CHARACTER, RIGIDBODY2D_MODE_KINEMATIC
+ * ctypedef enum RigidBody2D_CCDMode :RIGIDBODY2D_CCD_MODE_DISABLED, RIGIDBODY2D_CCD_MODE_CAST_RAY, RIGIDBODY2D_CCD_MODE_CAST_SHAPE             # <<<<<<<<<<<<<<
+ * 
+ * 
+ */
+enum __pyx_t_7classes_9generated_RigidBody2D_CCDMode {
+  __pyx_e_7classes_9generated_RIGIDBODY2D_CCD_MODE_DISABLED,
+  __pyx_e_7classes_9generated_RIGIDBODY2D_CCD_MODE_CAST_RAY,
+  __pyx_e_7classes_9generated_RIGIDBODY2D_CCD_MODE_CAST_SHAPE
+};
+typedef enum __pyx_t_7classes_9generated_RigidBody2D_CCDMode __pyx_t_7classes_9generated_RigidBody2D_CCDMode;
+
+/* "classes/generated.pxd":591
+ * 
+ * 
+ * ctypedef enum SceneState_GenEditState :SCENESTATE_GEN_EDIT_STATE_DISABLED, SCENESTATE_GEN_EDIT_STATE_INSTANCE, SCENESTATE_GEN_EDIT_STATE_MAIN             # <<<<<<<<<<<<<<
+ * 
+ * ctypedef enum SceneTree_StretchAspect :SCENETREE_STRETCH_ASPECT_IGNORE, SCENETREE_STRETCH_ASPECT_KEEP, SCENETREE_STRETCH_ASPECT_KEEP_WIDTH, SCENETREE_STRETCH_ASPECT_KEEP_HEIGHT, SCENETREE_STRETCH_ASPECT_EXPAND
+ */
+enum __pyx_t_7classes_9generated_SceneState_GenEditState {
+  __pyx_e_7classes_9generated_SCENESTATE_GEN_EDIT_STATE_DISABLED,
+  __pyx_e_7classes_9generated_SCENESTATE_GEN_EDIT_STATE_INSTANCE,
+  __pyx_e_7classes_9generated_SCENESTATE_GEN_EDIT_STATE_MAIN
+};
+typedef enum __pyx_t_7classes_9generated_SceneState_GenEditState __pyx_t_7classes_9generated_SceneState_GenEditState;
+
+/* "classes/generated.pxd":593
+ * ctypedef enum SceneState_GenEditState :SCENESTATE_GEN_EDIT_STATE_DISABLED, SCENESTATE_GEN_EDIT_STATE_INSTANCE, SCENESTATE_GEN_EDIT_STATE_MAIN
+ * 
+ * ctypedef enum SceneTree_StretchAspect :SCENETREE_STRETCH_ASPECT_IGNORE, SCENETREE_STRETCH_ASPECT_KEEP, SCENETREE_STRETCH_ASPECT_KEEP_WIDTH, SCENETREE_STRETCH_ASPECT_KEEP_HEIGHT, SCENETREE_STRETCH_ASPECT_EXPAND             # <<<<<<<<<<<<<<
+ * ctypedef enum SceneTree_GroupCallFlags :SCENETREE_GROUP_CALL_DEFAULT, SCENETREE_GROUP_CALL_REVERSE, SCENETREE_GROUP_CALL_REALTIME, SCENETREE_GROUP_CALL_UNIQUE
+ * ctypedef enum SceneTree_StretchMode :SCENETREE_STRETCH_MODE_DISABLED, SCENETREE_STRETCH_MODE_2D, SCENETREE_STRETCH_MODE_VIEWPORT
+ */
+enum __pyx_t_7classes_9generated_SceneTree_StretchAspect {
+  __pyx_e_7classes_9generated_SCENETREE_STRETCH_ASPECT_IGNORE,
+  __pyx_e_7classes_9generated_SCENETREE_STRETCH_ASPECT_KEEP,
+  __pyx_e_7classes_9generated_SCENETREE_STRETCH_ASPECT_KEEP_WIDTH,
+  __pyx_e_7classes_9generated_SCENETREE_STRETCH_ASPECT_KEEP_HEIGHT,
+  __pyx_e_7classes_9generated_SCENETREE_STRETCH_ASPECT_EXPAND
+};
+typedef enum __pyx_t_7classes_9generated_SceneTree_StretchAspect __pyx_t_7classes_9generated_SceneTree_StretchAspect;
+
+/* "classes/generated.pxd":594
+ * 
+ * ctypedef enum SceneTree_StretchAspect :SCENETREE_STRETCH_ASPECT_IGNORE, SCENETREE_STRETCH_ASPECT_KEEP, SCENETREE_STRETCH_ASPECT_KEEP_WIDTH, SCENETREE_STRETCH_ASPECT_KEEP_HEIGHT, SCENETREE_STRETCH_ASPECT_EXPAND
+ * ctypedef enum SceneTree_GroupCallFlags :SCENETREE_GROUP_CALL_DEFAULT, SCENETREE_GROUP_CALL_REVERSE, SCENETREE_GROUP_CALL_REALTIME, SCENETREE_GROUP_CALL_UNIQUE             # <<<<<<<<<<<<<<
+ * ctypedef enum SceneTree_StretchMode :SCENETREE_STRETCH_MODE_DISABLED, SCENETREE_STRETCH_MODE_2D, SCENETREE_STRETCH_MODE_VIEWPORT
+ * 
+ */
+enum __pyx_t_7classes_9generated_SceneTree_GroupCallFlags {
+  __pyx_e_7classes_9generated_SCENETREE_GROUP_CALL_DEFAULT,
+  __pyx_e_7classes_9generated_SCENETREE_GROUP_CALL_REVERSE,
+  __pyx_e_7classes_9generated_SCENETREE_GROUP_CALL_REALTIME,
+  __pyx_e_7classes_9generated_SCENETREE_GROUP_CALL_UNIQUE
+};
+typedef enum __pyx_t_7classes_9generated_SceneTree_GroupCallFlags __pyx_t_7classes_9generated_SceneTree_GroupCallFlags;
+
+/* "classes/generated.pxd":595
+ * ctypedef enum SceneTree_StretchAspect :SCENETREE_STRETCH_ASPECT_IGNORE, SCENETREE_STRETCH_ASPECT_KEEP, SCENETREE_STRETCH_ASPECT_KEEP_WIDTH, SCENETREE_STRETCH_ASPECT_KEEP_HEIGHT, SCENETREE_STRETCH_ASPECT_EXPAND
+ * ctypedef enum SceneTree_GroupCallFlags :SCENETREE_GROUP_CALL_DEFAULT, SCENETREE_GROUP_CALL_REVERSE, SCENETREE_GROUP_CALL_REALTIME, SCENETREE_GROUP_CALL_UNIQUE
+ * ctypedef enum SceneTree_StretchMode :SCENETREE_STRETCH_MODE_DISABLED, SCENETREE_STRETCH_MODE_2D, SCENETREE_STRETCH_MODE_VIEWPORT             # <<<<<<<<<<<<<<
+ * 
+ * 
+ */
+enum __pyx_t_7classes_9generated_SceneTree_StretchMode {
+  __pyx_e_7classes_9generated_SCENETREE_STRETCH_MODE_DISABLED,
+  __pyx_e_7classes_9generated_SCENETREE_STRETCH_MODE_2D,
+  __pyx_e_7classes_9generated_SCENETREE_STRETCH_MODE_VIEWPORT
+};
+typedef enum __pyx_t_7classes_9generated_SceneTree_StretchMode __pyx_t_7classes_9generated_SceneTree_StretchMode;
+
+/* "classes/generated.pxd":605
+ * 
+ * 
+ * ctypedef enum Shader_Mode :SHADER_MODE_SPATIAL, SHADER_MODE_CANVAS_ITEM, SHADER_MODE_PARTICLES             # <<<<<<<<<<<<<<
+ * 
+ * 
+ */
+enum __pyx_t_7classes_9generated_Shader_Mode {
+  __pyx_e_7classes_9generated_SHADER_MODE_SPATIAL,
+  __pyx_e_7classes_9generated_SHADER_MODE_CANVAS_ITEM,
+  __pyx_e_7classes_9generated_SHADER_MODE_PARTICLES
+};
+typedef enum __pyx_t_7classes_9generated_Shader_Mode __pyx_t_7classes_9generated_Shader_Mode;
+
+/* "classes/generated.pxd":616
+ * 
+ * 
+ * ctypedef enum Sky_RadianceSize :SKY_RADIANCE_SIZE_32, SKY_RADIANCE_SIZE_64, SKY_RADIANCE_SIZE_128, SKY_RADIANCE_SIZE_256, SKY_RADIANCE_SIZE_512, SKY_RADIANCE_SIZE_1024, SKY_RADIANCE_SIZE_2048, SKY_RADIANCE_SIZE_MAX             # <<<<<<<<<<<<<<
+ * 
+ * 
+ */
+enum __pyx_t_7classes_9generated_Sky_RadianceSize {
+  __pyx_e_7classes_9generated_SKY_RADIANCE_SIZE_32,
+  __pyx_e_7classes_9generated_SKY_RADIANCE_SIZE_64,
+  __pyx_e_7classes_9generated_SKY_RADIANCE_SIZE_128,
+  __pyx_e_7classes_9generated_SKY_RADIANCE_SIZE_256,
+  __pyx_e_7classes_9generated_SKY_RADIANCE_SIZE_512,
+  __pyx_e_7classes_9generated_SKY_RADIANCE_SIZE_1024,
+  __pyx_e_7classes_9generated_SKY_RADIANCE_SIZE_2048,
+  __pyx_e_7classes_9generated_SKY_RADIANCE_SIZE_MAX
+};
+typedef enum __pyx_t_7classes_9generated_Sky_RadianceSize __pyx_t_7classes_9generated_Sky_RadianceSize;
+
+/* "classes/generated.pxd":619
+ * 
+ * 
+ * ctypedef enum SliderJoint_Param :SLIDERJOINT_PARAM_LINEAR_LIMIT_UPPER, SLIDERJOINT_PARAM_LINEAR_LIMIT_LOWER, SLIDERJOINT_PARAM_LINEAR_LIMIT_SOFTNESS, SLIDERJOINT_PARAM_LINEAR_LIMIT_RESTITUTION, SLIDERJOINT_PARAM_LINEAR_LIMIT_DAMPING, SLIDERJOINT_PARAM_LINEAR_MOTION_SOFTNESS, SLIDERJOINT_PARAM_LINEAR_MOTION_RESTITUTION, SLIDERJOINT_PARAM_LINEAR_MOTION_DAMPING, SLIDERJOINT_PARAM_LINEAR_ORTHOGONAL_SOFTNESS, SLIDERJOINT_PARAM_LINEAR_ORTHOGONAL_RESTITUTION, SLIDERJOINT_PARAM_LINEAR_ORTHOGONAL_DAMPING, SLIDERJOINT_PARAM_ANGULAR_LIMIT_UPPER, SLIDERJOINT_PARAM_ANGULAR_LIMIT_LOWER, SLIDERJOINT_PARAM_ANGULAR_LIMIT_SOFTNESS, SLIDERJOINT_PARAM_ANGULAR_LIMIT_RESTITUTION, SLIDERJOINT_PARAM_ANGULAR_LIMIT_DAMPING, SLIDERJOINT_PARAM_ANGULAR_MOTION_SOFTNESS, SLIDERJOINT_PARAM_ANGULAR_MOTION_RESTITUTION, SLIDERJOINT_PARAM_ANGULAR_MOTION_DAMPING, SLIDERJOINT_PARAM_ANGULAR_ORTHOGONAL_SOFTNESS, SLIDERJOINT_PARAM_ANGULAR_ORTHOGONAL_RESTITUTION, SLIDERJOINT_PARAM_ANGULAR_ORTHOGONAL_DAMPING, SLIDERJOINT_PARAM_MAX             # <<<<<<<<<<<<<<
+ * 
+ * 
+ */
+enum __pyx_t_7classes_9generated_SliderJoint_Param {
+  __pyx_e_7classes_9generated_SLIDERJOINT_PARAM_LINEAR_LIMIT_UPPER,
+  __pyx_e_7classes_9generated_SLIDERJOINT_PARAM_LINEAR_LIMIT_LOWER,
+  __pyx_e_7classes_9generated_SLIDERJOINT_PARAM_LINEAR_LIMIT_SOFTNESS,
+  __pyx_e_7classes_9generated_SLIDERJOINT_PARAM_LINEAR_LIMIT_RESTITUTION,
+  __pyx_e_7classes_9generated_SLIDERJOINT_PARAM_LINEAR_LIMIT_DAMPING,
+  __pyx_e_7classes_9generated_SLIDERJOINT_PARAM_LINEAR_MOTION_SOFTNESS,
+  __pyx_e_7classes_9generated_SLIDERJOINT_PARAM_LINEAR_MOTION_RESTITUTION,
+  __pyx_e_7classes_9generated_SLIDERJOINT_PARAM_LINEAR_MOTION_DAMPING,
+  __pyx_e_7classes_9generated_SLIDERJOINT_PARAM_LINEAR_ORTHOGONAL_SOFTNESS,
+  __pyx_e_7classes_9generated_SLIDERJOINT_PARAM_LINEAR_ORTHOGONAL_RESTITUTION,
+  __pyx_e_7classes_9generated_SLIDERJOINT_PARAM_LINEAR_ORTHOGONAL_DAMPING,
+  __pyx_e_7classes_9generated_SLIDERJOINT_PARAM_ANGULAR_LIMIT_UPPER,
+  __pyx_e_7classes_9generated_SLIDERJOINT_PARAM_ANGULAR_LIMIT_LOWER,
+  __pyx_e_7classes_9generated_SLIDERJOINT_PARAM_ANGULAR_LIMIT_SOFTNESS,
+  __pyx_e_7classes_9generated_SLIDERJOINT_PARAM_ANGULAR_LIMIT_RESTITUTION,
+  __pyx_e_7classes_9generated_SLIDERJOINT_PARAM_ANGULAR_LIMIT_DAMPING,
+  __pyx_e_7classes_9generated_SLIDERJOINT_PARAM_ANGULAR_MOTION_SOFTNESS,
+  __pyx_e_7classes_9generated_SLIDERJOINT_PARAM_ANGULAR_MOTION_RESTITUTION,
+  __pyx_e_7classes_9generated_SLIDERJOINT_PARAM_ANGULAR_MOTION_DAMPING,
+  __pyx_e_7classes_9generated_SLIDERJOINT_PARAM_ANGULAR_ORTHOGONAL_SOFTNESS,
+  __pyx_e_7classes_9generated_SLIDERJOINT_PARAM_ANGULAR_ORTHOGONAL_RESTITUTION,
+  __pyx_e_7classes_9generated_SLIDERJOINT_PARAM_ANGULAR_ORTHOGONAL_DAMPING,
+  __pyx_e_7classes_9generated_SLIDERJOINT_PARAM_MAX
+};
+typedef enum __pyx_t_7classes_9generated_SliderJoint_Param __pyx_t_7classes_9generated_SliderJoint_Param;
+
+/* "classes/generated.pxd":624
+ * 
+ * 
+ * ctypedef enum SpatialMaterial_EmissionOperator :SPATIALMATERIAL_EMISSION_OP_ADD, SPATIALMATERIAL_EMISSION_OP_MULTIPLY             # <<<<<<<<<<<<<<
+ * ctypedef enum SpatialMaterial_DiffuseMode :SPATIALMATERIAL_DIFFUSE_BURLEY, SPATIALMATERIAL_DIFFUSE_LAMBERT, SPATIALMATERIAL_DIFFUSE_LAMBERT_WRAP, SPATIALMATERIAL_DIFFUSE_OREN_NAYAR, SPATIALMATERIAL_DIFFUSE_TOON
+ * ctypedef enum SpatialMaterial_SpecularMode :SPATIALMATERIAL_SPECULAR_SCHLICK_GGX, SPATIALMATERIAL_SPECULAR_BLINN, SPATIALMATERIAL_SPECULAR_PHONG, SPATIALMATERIAL_SPECULAR_TOON, SPATIALMATERIAL_SPECULAR_DISABLED
+ */
+enum __pyx_t_7classes_9generated_SpatialMaterial_EmissionOperator {
+  __pyx_e_7classes_9generated_SPATIALMATERIAL_EMISSION_OP_ADD,
+  __pyx_e_7classes_9generated_SPATIALMATERIAL_EMISSION_OP_MULTIPLY
+};
+typedef enum __pyx_t_7classes_9generated_SpatialMaterial_EmissionOperator __pyx_t_7classes_9generated_SpatialMaterial_EmissionOperator;
+
+/* "classes/generated.pxd":625
+ * 
+ * ctypedef enum SpatialMaterial_EmissionOperator :SPATIALMATERIAL_EMISSION_OP_ADD, SPATIALMATERIAL_EMISSION_OP_MULTIPLY
+ * ctypedef enum SpatialMaterial_DiffuseMode :SPATIALMATERIAL_DIFFUSE_BURLEY, SPATIALMATERIAL_DIFFUSE_LAMBERT, SPATIALMATERIAL_DIFFUSE_LAMBERT_WRAP, SPATIALMATERIAL_DIFFUSE_OREN_NAYAR, SPATIALMATERIAL_DIFFUSE_TOON             # <<<<<<<<<<<<<<
+ * ctypedef enum SpatialMaterial_SpecularMode :SPATIALMATERIAL_SPECULAR_SCHLICK_GGX, SPATIALMATERIAL_SPECULAR_BLINN, SPATIALMATERIAL_SPECULAR_PHONG, SPATIALMATERIAL_SPECULAR_TOON, SPATIALMATERIAL_SPECULAR_DISABLED
+ * ctypedef enum SpatialMaterial_Feature :SPATIALMATERIAL_FEATURE_TRANSPARENT, SPATIALMATERIAL_FEATURE_EMISSION, SPATIALMATERIAL_FEATURE_NORMAL_MAPPING, SPATIALMATERIAL_FEATURE_RIM, SPATIALMATERIAL_FEATURE_CLEARCOAT, SPATIALMATERIAL_FEATURE_ANISOTROPY, SPATIALMATERIAL_FEATURE_AMBIENT_OCCLUSION, SPATIALMATERIAL_FEATURE_DEPTH_MAPPING, SPATIALMATERIAL_FEATURE_SUBSURACE_SCATTERING, SPATIALMATERIAL_FEATURE_TRANSMISSION, SPATIALMATERIAL_FEATURE_REFRACTION, SPATIALMATERIAL_FEATURE_DETAIL, SPATIALMATERIAL_FEATURE_MAX
+ */
+enum __pyx_t_7classes_9generated_SpatialMaterial_DiffuseMode {
+  __pyx_e_7classes_9generated_SPATIALMATERIAL_DIFFUSE_BURLEY,
+  __pyx_e_7classes_9generated_SPATIALMATERIAL_DIFFUSE_LAMBERT,
+  __pyx_e_7classes_9generated_SPATIALMATERIAL_DIFFUSE_LAMBERT_WRAP,
+  __pyx_e_7classes_9generated_SPATIALMATERIAL_DIFFUSE_OREN_NAYAR,
+  __pyx_e_7classes_9generated_SPATIALMATERIAL_DIFFUSE_TOON
+};
+typedef enum __pyx_t_7classes_9generated_SpatialMaterial_DiffuseMode __pyx_t_7classes_9generated_SpatialMaterial_DiffuseMode;
+
+/* "classes/generated.pxd":626
+ * ctypedef enum SpatialMaterial_EmissionOperator :SPATIALMATERIAL_EMISSION_OP_ADD, SPATIALMATERIAL_EMISSION_OP_MULTIPLY
+ * ctypedef enum SpatialMaterial_DiffuseMode :SPATIALMATERIAL_DIFFUSE_BURLEY, SPATIALMATERIAL_DIFFUSE_LAMBERT, SPATIALMATERIAL_DIFFUSE_LAMBERT_WRAP, SPATIALMATERIAL_DIFFUSE_OREN_NAYAR, SPATIALMATERIAL_DIFFUSE_TOON
+ * ctypedef enum SpatialMaterial_SpecularMode :SPATIALMATERIAL_SPECULAR_SCHLICK_GGX, SPATIALMATERIAL_SPECULAR_BLINN, SPATIALMATERIAL_SPECULAR_PHONG, SPATIALMATERIAL_SPECULAR_TOON, SPATIALMATERIAL_SPECULAR_DISABLED             # <<<<<<<<<<<<<<
+ * ctypedef enum SpatialMaterial_Feature :SPATIALMATERIAL_FEATURE_TRANSPARENT, SPATIALMATERIAL_FEATURE_EMISSION, SPATIALMATERIAL_FEATURE_NORMAL_MAPPING, SPATIALMATERIAL_FEATURE_RIM, SPATIALMATERIAL_FEATURE_CLEARCOAT, SPATIALMATERIAL_FEATURE_ANISOTROPY, SPATIALMATERIAL_FEATURE_AMBIENT_OCCLUSION, SPATIALMATERIAL_FEATURE_DEPTH_MAPPING, SPATIALMATERIAL_FEATURE_SUBSURACE_SCATTERING, SPATIALMATERIAL_FEATURE_TRANSMISSION, SPATIALMATERIAL_FEATURE_REFRACTION, SPATIALMATERIAL_FEATURE_DETAIL, SPATIALMATERIAL_FEATURE_MAX
+ * ctypedef enum SpatialMaterial_Flags :SPATIALMATERIAL_FLAG_UNSHADED, SPATIALMATERIAL_FLAG_USE_VERTEX_LIGHTING, SPATIALMATERIAL_FLAG_DISABLE_DEPTH_TEST, SPATIALMATERIAL_FLAG_ALBEDO_FROM_VERTEX_COLOR, SPATIALMATERIAL_FLAG_SRGB_VERTEX_COLOR, SPATIALMATERIAL_FLAG_USE_POINT_SIZE, SPATIALMATERIAL_FLAG_FIXED_SIZE, SPATIALMATERIAL_FLAG_BILLBOARD_KEEP_SCALE, SPATIALMATERIAL_FLAG_UV1_USE_TRIPLANAR, SPATIALMATERIAL_FLAG_UV2_USE_TRIPLANAR, SPATIALMATERIAL_FLAG_TRIPLANAR_USE_WORLD, SPATIALMATERIAL_FLAG_AO_ON_UV2, SPATIALMATERIAL_FLAG_EMISSION_ON_UV2, SPATIALMATERIAL_FLAG_USE_ALPHA_SCISSOR, SPATIALMATERIAL_FLAG_ALBEDO_TEXTURE_FORCE_SRGB, SPATIALMATERIAL_FLAG_DONT_RECEIVE_SHADOWS, SPATIALMATERIAL_FLAG_ENSURE_CORRECT_NORMALS, SPATIALMATERIAL_FLAG_DISABLE_AMBIENT_LIGHT, SPATIALMATERIAL_FLAG_USE_SHADOW_TO_OPACITY, SPATIALMATERIAL_FLAG_MAX
+ */
+enum __pyx_t_7classes_9generated_SpatialMaterial_SpecularMode {
+  __pyx_e_7classes_9generated_SPATIALMATERIAL_SPECULAR_SCHLICK_GGX,
+  __pyx_e_7classes_9generated_SPATIALMATERIAL_SPECULAR_BLINN,
+  __pyx_e_7classes_9generated_SPATIALMATERIAL_SPECULAR_PHONG,
+  __pyx_e_7classes_9generated_SPATIALMATERIAL_SPECULAR_TOON,
+  __pyx_e_7classes_9generated_SPATIALMATERIAL_SPECULAR_DISABLED
+};
+typedef enum __pyx_t_7classes_9generated_SpatialMaterial_SpecularMode __pyx_t_7classes_9generated_SpatialMaterial_SpecularMode;
+
+/* "classes/generated.pxd":627
+ * ctypedef enum SpatialMaterial_DiffuseMode :SPATIALMATERIAL_DIFFUSE_BURLEY, SPATIALMATERIAL_DIFFUSE_LAMBERT, SPATIALMATERIAL_DIFFUSE_LAMBERT_WRAP, SPATIALMATERIAL_DIFFUSE_OREN_NAYAR, SPATIALMATERIAL_DIFFUSE_TOON
+ * ctypedef enum SpatialMaterial_SpecularMode :SPATIALMATERIAL_SPECULAR_SCHLICK_GGX, SPATIALMATERIAL_SPECULAR_BLINN, SPATIALMATERIAL_SPECULAR_PHONG, SPATIALMATERIAL_SPECULAR_TOON, SPATIALMATERIAL_SPECULAR_DISABLED
+ * ctypedef enum SpatialMaterial_Feature :SPATIALMATERIAL_FEATURE_TRANSPARENT, SPATIALMATERIAL_FEATURE_EMISSION, SPATIALMATERIAL_FEATURE_NORMAL_MAPPING, SPATIALMATERIAL_FEATURE_RIM, SPATIALMATERIAL_FEATURE_CLEARCOAT, SPATIALMATERIAL_FEATURE_ANISOTROPY, SPATIALMATERIAL_FEATURE_AMBIENT_OCCLUSION, SPATIALMATERIAL_FEATURE_DEPTH_MAPPING, SPATIALMATERIAL_FEATURE_SUBSURACE_SCATTERING, SPATIALMATERIAL_FEATURE_TRANSMISSION, SPATIALMATERIAL_FEATURE_REFRACTION, SPATIALMATERIAL_FEATURE_DETAIL, SPATIALMATERIAL_FEATURE_MAX             # <<<<<<<<<<<<<<
+ * ctypedef enum SpatialMaterial_Flags :SPATIALMATERIAL_FLAG_UNSHADED, SPATIALMATERIAL_FLAG_USE_VERTEX_LIGHTING, SPATIALMATERIAL_FLAG_DISABLE_DEPTH_TEST, SPATIALMATERIAL_FLAG_ALBEDO_FROM_VERTEX_COLOR, SPATIALMATERIAL_FLAG_SRGB_VERTEX_COLOR, SPATIALMATERIAL_FLAG_USE_POINT_SIZE, SPATIALMATERIAL_FLAG_FIXED_SIZE, SPATIALMATERIAL_FLAG_BILLBOARD_KEEP_SCALE, SPATIALMATERIAL_FLAG_UV1_USE_TRIPLANAR, SPATIALMATERIAL_FLAG_UV2_USE_TRIPLANAR, SPATIALMATERIAL_FLAG_TRIPLANAR_USE_WORLD, SPATIALMATERIAL_FLAG_AO_ON_UV2, SPATIALMATERIAL_FLAG_EMISSION_ON_UV2, SPATIALMATERIAL_FLAG_USE_ALPHA_SCISSOR, SPATIALMATERIAL_FLAG_ALBEDO_TEXTURE_FORCE_SRGB, SPATIALMATERIAL_FLAG_DONT_RECEIVE_SHADOWS, SPATIALMATERIAL_FLAG_ENSURE_CORRECT_NORMALS, SPATIALMATERIAL_FLAG_DISABLE_AMBIENT_LIGHT, SPATIALMATERIAL_FLAG_USE_SHADOW_TO_OPACITY, SPATIALMATERIAL_FLAG_MAX
+ * ctypedef enum SpatialMaterial_CullMode :SPATIALMATERIAL_CULL_BACK, SPATIALMATERIAL_CULL_FRONT, SPATIALMATERIAL_CULL_DISABLED
+ */
+enum __pyx_t_7classes_9generated_SpatialMaterial_Feature {
+  __pyx_e_7classes_9generated_SPATIALMATERIAL_FEATURE_TRANSPARENT,
+  __pyx_e_7classes_9generated_SPATIALMATERIAL_FEATURE_EMISSION,
+  __pyx_e_7classes_9generated_SPATIALMATERIAL_FEATURE_NORMAL_MAPPING,
+  __pyx_e_7classes_9generated_SPATIALMATERIAL_FEATURE_RIM,
+  __pyx_e_7classes_9generated_SPATIALMATERIAL_FEATURE_CLEARCOAT,
+  __pyx_e_7classes_9generated_SPATIALMATERIAL_FEATURE_ANISOTROPY,
+  __pyx_e_7classes_9generated_SPATIALMATERIAL_FEATURE_AMBIENT_OCCLUSION,
+  __pyx_e_7classes_9generated_SPATIALMATERIAL_FEATURE_DEPTH_MAPPING,
+  __pyx_e_7classes_9generated_SPATIALMATERIAL_FEATURE_SUBSURACE_SCATTERING,
+  __pyx_e_7classes_9generated_SPATIALMATERIAL_FEATURE_TRANSMISSION,
+  __pyx_e_7classes_9generated_SPATIALMATERIAL_FEATURE_REFRACTION,
+  __pyx_e_7classes_9generated_SPATIALMATERIAL_FEATURE_DETAIL,
+  __pyx_e_7classes_9generated_SPATIALMATERIAL_FEATURE_MAX
+};
+typedef enum __pyx_t_7classes_9generated_SpatialMaterial_Feature __pyx_t_7classes_9generated_SpatialMaterial_Feature;
+
+/* "classes/generated.pxd":628
+ * ctypedef enum SpatialMaterial_SpecularMode :SPATIALMATERIAL_SPECULAR_SCHLICK_GGX, SPATIALMATERIAL_SPECULAR_BLINN, SPATIALMATERIAL_SPECULAR_PHONG, SPATIALMATERIAL_SPECULAR_TOON, SPATIALMATERIAL_SPECULAR_DISABLED
+ * ctypedef enum SpatialMaterial_Feature :SPATIALMATERIAL_FEATURE_TRANSPARENT, SPATIALMATERIAL_FEATURE_EMISSION, SPATIALMATERIAL_FEATURE_NORMAL_MAPPING, SPATIALMATERIAL_FEATURE_RIM, SPATIALMATERIAL_FEATURE_CLEARCOAT, SPATIALMATERIAL_FEATURE_ANISOTROPY, SPATIALMATERIAL_FEATURE_AMBIENT_OCCLUSION, SPATIALMATERIAL_FEATURE_DEPTH_MAPPING, SPATIALMATERIAL_FEATURE_SUBSURACE_SCATTERING, SPATIALMATERIAL_FEATURE_TRANSMISSION, SPATIALMATERIAL_FEATURE_REFRACTION, SPATIALMATERIAL_FEATURE_DETAIL, SPATIALMATERIAL_FEATURE_MAX
+ * ctypedef enum SpatialMaterial_Flags :SPATIALMATERIAL_FLAG_UNSHADED, SPATIALMATERIAL_FLAG_USE_VERTEX_LIGHTING, SPATIALMATERIAL_FLAG_DISABLE_DEPTH_TEST, SPATIALMATERIAL_FLAG_ALBEDO_FROM_VERTEX_COLOR, SPATIALMATERIAL_FLAG_SRGB_VERTEX_COLOR, SPATIALMATERIAL_FLAG_USE_POINT_SIZE, SPATIALMATERIAL_FLAG_FIXED_SIZE, SPATIALMATERIAL_FLAG_BILLBOARD_KEEP_SCALE, SPATIALMATERIAL_FLAG_UV1_USE_TRIPLANAR, SPATIALMATERIAL_FLAG_UV2_USE_TRIPLANAR, SPATIALMATERIAL_FLAG_TRIPLANAR_USE_WORLD, SPATIALMATERIAL_FLAG_AO_ON_UV2, SPATIALMATERIAL_FLAG_EMISSION_ON_UV2, SPATIALMATERIAL_FLAG_USE_ALPHA_SCISSOR, SPATIALMATERIAL_FLAG_ALBEDO_TEXTURE_FORCE_SRGB, SPATIALMATERIAL_FLAG_DONT_RECEIVE_SHADOWS, SPATIALMATERIAL_FLAG_ENSURE_CORRECT_NORMALS, SPATIALMATERIAL_FLAG_DISABLE_AMBIENT_LIGHT, SPATIALMATERIAL_FLAG_USE_SHADOW_TO_OPACITY, SPATIALMATERIAL_FLAG_MAX             # <<<<<<<<<<<<<<
+ * ctypedef enum SpatialMaterial_CullMode :SPATIALMATERIAL_CULL_BACK, SPATIALMATERIAL_CULL_FRONT, SPATIALMATERIAL_CULL_DISABLED
+ * ctypedef enum SpatialMaterial_DetailUV :SPATIALMATERIAL_DETAIL_UV_1, SPATIALMATERIAL_DETAIL_UV_2
+ */
+enum __pyx_t_7classes_9generated_SpatialMaterial_Flags {
+  __pyx_e_7classes_9generated_SPATIALMATERIAL_FLAG_UNSHADED,
+  __pyx_e_7classes_9generated_SPATIALMATERIAL_FLAG_USE_VERTEX_LIGHTING,
+  __pyx_e_7classes_9generated_SPATIALMATERIAL_FLAG_DISABLE_DEPTH_TEST,
+  __pyx_e_7classes_9generated_SPATIALMATERIAL_FLAG_ALBEDO_FROM_VERTEX_COLOR,
+  __pyx_e_7classes_9generated_SPATIALMATERIAL_FLAG_SRGB_VERTEX_COLOR,
+  __pyx_e_7classes_9generated_SPATIALMATERIAL_FLAG_USE_POINT_SIZE,
+  __pyx_e_7classes_9generated_SPATIALMATERIAL_FLAG_FIXED_SIZE,
+  __pyx_e_7classes_9generated_SPATIALMATERIAL_FLAG_BILLBOARD_KEEP_SCALE,
+  __pyx_e_7classes_9generated_SPATIALMATERIAL_FLAG_UV1_USE_TRIPLANAR,
+  __pyx_e_7classes_9generated_SPATIALMATERIAL_FLAG_UV2_USE_TRIPLANAR,
+  __pyx_e_7classes_9generated_SPATIALMATERIAL_FLAG_TRIPLANAR_USE_WORLD,
+  __pyx_e_7classes_9generated_SPATIALMATERIAL_FLAG_AO_ON_UV2,
+  __pyx_e_7classes_9generated_SPATIALMATERIAL_FLAG_EMISSION_ON_UV2,
+  __pyx_e_7classes_9generated_SPATIALMATERIAL_FLAG_USE_ALPHA_SCISSOR,
+  __pyx_e_7classes_9generated_SPATIALMATERIAL_FLAG_ALBEDO_TEXTURE_FORCE_SRGB,
+  __pyx_e_7classes_9generated_SPATIALMATERIAL_FLAG_DONT_RECEIVE_SHADOWS,
+  __pyx_e_7classes_9generated_SPATIALMATERIAL_FLAG_ENSURE_CORRECT_NORMALS,
+  __pyx_e_7classes_9generated_SPATIALMATERIAL_FLAG_DISABLE_AMBIENT_LIGHT,
+  __pyx_e_7classes_9generated_SPATIALMATERIAL_FLAG_USE_SHADOW_TO_OPACITY,
+  __pyx_e_7classes_9generated_SPATIALMATERIAL_FLAG_MAX
+};
+typedef enum __pyx_t_7classes_9generated_SpatialMaterial_Flags __pyx_t_7classes_9generated_SpatialMaterial_Flags;
+
+/* "classes/generated.pxd":629
+ * ctypedef enum SpatialMaterial_Feature :SPATIALMATERIAL_FEATURE_TRANSPARENT, SPATIALMATERIAL_FEATURE_EMISSION, SPATIALMATERIAL_FEATURE_NORMAL_MAPPING, SPATIALMATERIAL_FEATURE_RIM, SPATIALMATERIAL_FEATURE_CLEARCOAT, SPATIALMATERIAL_FEATURE_ANISOTROPY, SPATIALMATERIAL_FEATURE_AMBIENT_OCCLUSION, SPATIALMATERIAL_FEATURE_DEPTH_MAPPING, SPATIALMATERIAL_FEATURE_SUBSURACE_SCATTERING, SPATIALMATERIAL_FEATURE_TRANSMISSION, SPATIALMATERIAL_FEATURE_REFRACTION, SPATIALMATERIAL_FEATURE_DETAIL, SPATIALMATERIAL_FEATURE_MAX
+ * ctypedef enum SpatialMaterial_Flags :SPATIALMATERIAL_FLAG_UNSHADED, SPATIALMATERIAL_FLAG_USE_VERTEX_LIGHTING, SPATIALMATERIAL_FLAG_DISABLE_DEPTH_TEST, SPATIALMATERIAL_FLAG_ALBEDO_FROM_VERTEX_COLOR, SPATIALMATERIAL_FLAG_SRGB_VERTEX_COLOR, SPATIALMATERIAL_FLAG_USE_POINT_SIZE, SPATIALMATERIAL_FLAG_FIXED_SIZE, SPATIALMATERIAL_FLAG_BILLBOARD_KEEP_SCALE, SPATIALMATERIAL_FLAG_UV1_USE_TRIPLANAR, SPATIALMATERIAL_FLAG_UV2_USE_TRIPLANAR, SPATIALMATERIAL_FLAG_TRIPLANAR_USE_WORLD, SPATIALMATERIAL_FLAG_AO_ON_UV2, SPATIALMATERIAL_FLAG_EMISSION_ON_UV2, SPATIALMATERIAL_FLAG_USE_ALPHA_SCISSOR, SPATIALMATERIAL_FLAG_ALBEDO_TEXTURE_FORCE_SRGB, SPATIALMATERIAL_FLAG_DONT_RECEIVE_SHADOWS, SPATIALMATERIAL_FLAG_ENSURE_CORRECT_NORMALS, SPATIALMATERIAL_FLAG_DISABLE_AMBIENT_LIGHT, SPATIALMATERIAL_FLAG_USE_SHADOW_TO_OPACITY, SPATIALMATERIAL_FLAG_MAX
+ * ctypedef enum SpatialMaterial_CullMode :SPATIALMATERIAL_CULL_BACK, SPATIALMATERIAL_CULL_FRONT, SPATIALMATERIAL_CULL_DISABLED             # <<<<<<<<<<<<<<
+ * ctypedef enum SpatialMaterial_DetailUV :SPATIALMATERIAL_DETAIL_UV_1, SPATIALMATERIAL_DETAIL_UV_2
+ * ctypedef enum SpatialMaterial_DistanceFadeMode :SPATIALMATERIAL_DISTANCE_FADE_DISABLED, SPATIALMATERIAL_DISTANCE_FADE_PIXEL_ALPHA, SPATIALMATERIAL_DISTANCE_FADE_PIXEL_DITHER, SPATIALMATERIAL_DISTANCE_FADE_OBJECT_DITHER
+ */
+enum __pyx_t_7classes_9generated_SpatialMaterial_CullMode {
+  __pyx_e_7classes_9generated_SPATIALMATERIAL_CULL_BACK,
+  __pyx_e_7classes_9generated_SPATIALMATERIAL_CULL_FRONT,
+  __pyx_e_7classes_9generated_SPATIALMATERIAL_CULL_DISABLED
+};
+typedef enum __pyx_t_7classes_9generated_SpatialMaterial_CullMode __pyx_t_7classes_9generated_SpatialMaterial_CullMode;
+
+/* "classes/generated.pxd":630
+ * ctypedef enum SpatialMaterial_Flags :SPATIALMATERIAL_FLAG_UNSHADED, SPATIALMATERIAL_FLAG_USE_VERTEX_LIGHTING, SPATIALMATERIAL_FLAG_DISABLE_DEPTH_TEST, SPATIALMATERIAL_FLAG_ALBEDO_FROM_VERTEX_COLOR, SPATIALMATERIAL_FLAG_SRGB_VERTEX_COLOR, SPATIALMATERIAL_FLAG_USE_POINT_SIZE, SPATIALMATERIAL_FLAG_FIXED_SIZE, SPATIALMATERIAL_FLAG_BILLBOARD_KEEP_SCALE, SPATIALMATERIAL_FLAG_UV1_USE_TRIPLANAR, SPATIALMATERIAL_FLAG_UV2_USE_TRIPLANAR, SPATIALMATERIAL_FLAG_TRIPLANAR_USE_WORLD, SPATIALMATERIAL_FLAG_AO_ON_UV2, SPATIALMATERIAL_FLAG_EMISSION_ON_UV2, SPATIALMATERIAL_FLAG_USE_ALPHA_SCISSOR, SPATIALMATERIAL_FLAG_ALBEDO_TEXTURE_FORCE_SRGB, SPATIALMATERIAL_FLAG_DONT_RECEIVE_SHADOWS, SPATIALMATERIAL_FLAG_ENSURE_CORRECT_NORMALS, SPATIALMATERIAL_FLAG_DISABLE_AMBIENT_LIGHT, SPATIALMATERIAL_FLAG_USE_SHADOW_TO_OPACITY, SPATIALMATERIAL_FLAG_MAX
+ * ctypedef enum SpatialMaterial_CullMode :SPATIALMATERIAL_CULL_BACK, SPATIALMATERIAL_CULL_FRONT, SPATIALMATERIAL_CULL_DISABLED
+ * ctypedef enum SpatialMaterial_DetailUV :SPATIALMATERIAL_DETAIL_UV_1, SPATIALMATERIAL_DETAIL_UV_2             # <<<<<<<<<<<<<<
+ * ctypedef enum SpatialMaterial_DistanceFadeMode :SPATIALMATERIAL_DISTANCE_FADE_DISABLED, SPATIALMATERIAL_DISTANCE_FADE_PIXEL_ALPHA, SPATIALMATERIAL_DISTANCE_FADE_PIXEL_DITHER, SPATIALMATERIAL_DISTANCE_FADE_OBJECT_DITHER
+ * ctypedef enum SpatialMaterial_BillboardMode :SPATIALMATERIAL_BILLBOARD_DISABLED, SPATIALMATERIAL_BILLBOARD_ENABLED, SPATIALMATERIAL_BILLBOARD_FIXED_Y, SPATIALMATERIAL_BILLBOARD_PARTICLES
+ */
+enum __pyx_t_7classes_9generated_SpatialMaterial_DetailUV {
+  __pyx_e_7classes_9generated_SPATIALMATERIAL_DETAIL_UV_1,
+  __pyx_e_7classes_9generated_SPATIALMATERIAL_DETAIL_UV_2
+};
+typedef enum __pyx_t_7classes_9generated_SpatialMaterial_DetailUV __pyx_t_7classes_9generated_SpatialMaterial_DetailUV;
+
+/* "classes/generated.pxd":631
+ * ctypedef enum SpatialMaterial_CullMode :SPATIALMATERIAL_CULL_BACK, SPATIALMATERIAL_CULL_FRONT, SPATIALMATERIAL_CULL_DISABLED
+ * ctypedef enum SpatialMaterial_DetailUV :SPATIALMATERIAL_DETAIL_UV_1, SPATIALMATERIAL_DETAIL_UV_2
+ * ctypedef enum SpatialMaterial_DistanceFadeMode :SPATIALMATERIAL_DISTANCE_FADE_DISABLED, SPATIALMATERIAL_DISTANCE_FADE_PIXEL_ALPHA, SPATIALMATERIAL_DISTANCE_FADE_PIXEL_DITHER, SPATIALMATERIAL_DISTANCE_FADE_OBJECT_DITHER             # <<<<<<<<<<<<<<
+ * ctypedef enum SpatialMaterial_BillboardMode :SPATIALMATERIAL_BILLBOARD_DISABLED, SPATIALMATERIAL_BILLBOARD_ENABLED, SPATIALMATERIAL_BILLBOARD_FIXED_Y, SPATIALMATERIAL_BILLBOARD_PARTICLES
+ * ctypedef enum SpatialMaterial_DepthDrawMode :SPATIALMATERIAL_DEPTH_DRAW_OPAQUE_ONLY, SPATIALMATERIAL_DEPTH_DRAW_ALWAYS, SPATIALMATERIAL_DEPTH_DRAW_DISABLED, SPATIALMATERIAL_DEPTH_DRAW_ALPHA_OPAQUE_PREPASS
+ */
+enum __pyx_t_7classes_9generated_SpatialMaterial_DistanceFadeMode {
+  __pyx_e_7classes_9generated_SPATIALMATERIAL_DISTANCE_FADE_DISABLED,
+  __pyx_e_7classes_9generated_SPATIALMATERIAL_DISTANCE_FADE_PIXEL_ALPHA,
+  __pyx_e_7classes_9generated_SPATIALMATERIAL_DISTANCE_FADE_PIXEL_DITHER,
+  __pyx_e_7classes_9generated_SPATIALMATERIAL_DISTANCE_FADE_OBJECT_DITHER
+};
+typedef enum __pyx_t_7classes_9generated_SpatialMaterial_DistanceFadeMode __pyx_t_7classes_9generated_SpatialMaterial_DistanceFadeMode;
+
+/* "classes/generated.pxd":632
+ * ctypedef enum SpatialMaterial_DetailUV :SPATIALMATERIAL_DETAIL_UV_1, SPATIALMATERIAL_DETAIL_UV_2
+ * ctypedef enum SpatialMaterial_DistanceFadeMode :SPATIALMATERIAL_DISTANCE_FADE_DISABLED, SPATIALMATERIAL_DISTANCE_FADE_PIXEL_ALPHA, SPATIALMATERIAL_DISTANCE_FADE_PIXEL_DITHER, SPATIALMATERIAL_DISTANCE_FADE_OBJECT_DITHER
+ * ctypedef enum SpatialMaterial_BillboardMode :SPATIALMATERIAL_BILLBOARD_DISABLED, SPATIALMATERIAL_BILLBOARD_ENABLED, SPATIALMATERIAL_BILLBOARD_FIXED_Y, SPATIALMATERIAL_BILLBOARD_PARTICLES             # <<<<<<<<<<<<<<
+ * ctypedef enum SpatialMaterial_DepthDrawMode :SPATIALMATERIAL_DEPTH_DRAW_OPAQUE_ONLY, SPATIALMATERIAL_DEPTH_DRAW_ALWAYS, SPATIALMATERIAL_DEPTH_DRAW_DISABLED, SPATIALMATERIAL_DEPTH_DRAW_ALPHA_OPAQUE_PREPASS
+ * ctypedef enum SpatialMaterial_TextureChannel :SPATIALMATERIAL_TEXTURE_CHANNEL_RED, SPATIALMATERIAL_TEXTURE_CHANNEL_GREEN, SPATIALMATERIAL_TEXTURE_CHANNEL_BLUE, SPATIALMATERIAL_TEXTURE_CHANNEL_ALPHA, SPATIALMATERIAL_TEXTURE_CHANNEL_GRAYSCALE
+ */
+enum __pyx_t_7classes_9generated_SpatialMaterial_BillboardMode {
+  __pyx_e_7classes_9generated_SPATIALMATERIAL_BILLBOARD_DISABLED,
+  __pyx_e_7classes_9generated_SPATIALMATERIAL_BILLBOARD_ENABLED,
+  __pyx_e_7classes_9generated_SPATIALMATERIAL_BILLBOARD_FIXED_Y,
+  __pyx_e_7classes_9generated_SPATIALMATERIAL_BILLBOARD_PARTICLES
+};
+typedef enum __pyx_t_7classes_9generated_SpatialMaterial_BillboardMode __pyx_t_7classes_9generated_SpatialMaterial_BillboardMode;
+
+/* "classes/generated.pxd":633
+ * ctypedef enum SpatialMaterial_DistanceFadeMode :SPATIALMATERIAL_DISTANCE_FADE_DISABLED, SPATIALMATERIAL_DISTANCE_FADE_PIXEL_ALPHA, SPATIALMATERIAL_DISTANCE_FADE_PIXEL_DITHER, SPATIALMATERIAL_DISTANCE_FADE_OBJECT_DITHER
+ * ctypedef enum SpatialMaterial_BillboardMode :SPATIALMATERIAL_BILLBOARD_DISABLED, SPATIALMATERIAL_BILLBOARD_ENABLED, SPATIALMATERIAL_BILLBOARD_FIXED_Y, SPATIALMATERIAL_BILLBOARD_PARTICLES
+ * ctypedef enum SpatialMaterial_DepthDrawMode :SPATIALMATERIAL_DEPTH_DRAW_OPAQUE_ONLY, SPATIALMATERIAL_DEPTH_DRAW_ALWAYS, SPATIALMATERIAL_DEPTH_DRAW_DISABLED, SPATIALMATERIAL_DEPTH_DRAW_ALPHA_OPAQUE_PREPASS             # <<<<<<<<<<<<<<
+ * ctypedef enum SpatialMaterial_TextureChannel :SPATIALMATERIAL_TEXTURE_CHANNEL_RED, SPATIALMATERIAL_TEXTURE_CHANNEL_GREEN, SPATIALMATERIAL_TEXTURE_CHANNEL_BLUE, SPATIALMATERIAL_TEXTURE_CHANNEL_ALPHA, SPATIALMATERIAL_TEXTURE_CHANNEL_GRAYSCALE
+ * ctypedef enum SpatialMaterial_BlendMode :SPATIALMATERIAL_BLEND_MODE_MIX, SPATIALMATERIAL_BLEND_MODE_ADD, SPATIALMATERIAL_BLEND_MODE_SUB, SPATIALMATERIAL_BLEND_MODE_MUL
+ */
+enum __pyx_t_7classes_9generated_SpatialMaterial_DepthDrawMode {
+  __pyx_e_7classes_9generated_SPATIALMATERIAL_DEPTH_DRAW_OPAQUE_ONLY,
+  __pyx_e_7classes_9generated_SPATIALMATERIAL_DEPTH_DRAW_ALWAYS,
+  __pyx_e_7classes_9generated_SPATIALMATERIAL_DEPTH_DRAW_DISABLED,
+  __pyx_e_7classes_9generated_SPATIALMATERIAL_DEPTH_DRAW_ALPHA_OPAQUE_PREPASS
+};
+typedef enum __pyx_t_7classes_9generated_SpatialMaterial_DepthDrawMode __pyx_t_7classes_9generated_SpatialMaterial_DepthDrawMode;
+
+/* "classes/generated.pxd":634
+ * ctypedef enum SpatialMaterial_BillboardMode :SPATIALMATERIAL_BILLBOARD_DISABLED, SPATIALMATERIAL_BILLBOARD_ENABLED, SPATIALMATERIAL_BILLBOARD_FIXED_Y, SPATIALMATERIAL_BILLBOARD_PARTICLES
+ * ctypedef enum SpatialMaterial_DepthDrawMode :SPATIALMATERIAL_DEPTH_DRAW_OPAQUE_ONLY, SPATIALMATERIAL_DEPTH_DRAW_ALWAYS, SPATIALMATERIAL_DEPTH_DRAW_DISABLED, SPATIALMATERIAL_DEPTH_DRAW_ALPHA_OPAQUE_PREPASS
+ * ctypedef enum SpatialMaterial_TextureChannel :SPATIALMATERIAL_TEXTURE_CHANNEL_RED, SPATIALMATERIAL_TEXTURE_CHANNEL_GREEN, SPATIALMATERIAL_TEXTURE_CHANNEL_BLUE, SPATIALMATERIAL_TEXTURE_CHANNEL_ALPHA, SPATIALMATERIAL_TEXTURE_CHANNEL_GRAYSCALE             # <<<<<<<<<<<<<<
+ * ctypedef enum SpatialMaterial_BlendMode :SPATIALMATERIAL_BLEND_MODE_MIX, SPATIALMATERIAL_BLEND_MODE_ADD, SPATIALMATERIAL_BLEND_MODE_SUB, SPATIALMATERIAL_BLEND_MODE_MUL
+ * ctypedef enum SpatialMaterial_TextureParam :SPATIALMATERIAL_TEXTURE_ALBEDO, SPATIALMATERIAL_TEXTURE_METALLIC, SPATIALMATERIAL_TEXTURE_ROUGHNESS, SPATIALMATERIAL_TEXTURE_EMISSION, SPATIALMATERIAL_TEXTURE_NORMAL, SPATIALMATERIAL_TEXTURE_RIM, SPATIALMATERIAL_TEXTURE_CLEARCOAT, SPATIALMATERIAL_TEXTURE_FLOWMAP, SPATIALMATERIAL_TEXTURE_AMBIENT_OCCLUSION, SPATIALMATERIAL_TEXTURE_DEPTH, SPATIALMATERIAL_TEXTURE_SUBSURFACE_SCATTERING, SPATIALMATERIAL_TEXTURE_TRANSMISSION, SPATIALMATERIAL_TEXTURE_REFRACTION, SPATIALMATERIAL_TEXTURE_DETAIL_MASK, SPATIALMATERIAL_TEXTURE_DETAIL_ALBEDO, SPATIALMATERIAL_TEXTURE_DETAIL_NORMAL, SPATIALMATERIAL_TEXTURE_MAX
+ */
+enum __pyx_t_7classes_9generated_SpatialMaterial_TextureChannel {
+  __pyx_e_7classes_9generated_SPATIALMATERIAL_TEXTURE_CHANNEL_RED,
+  __pyx_e_7classes_9generated_SPATIALMATERIAL_TEXTURE_CHANNEL_GREEN,
+  __pyx_e_7classes_9generated_SPATIALMATERIAL_TEXTURE_CHANNEL_BLUE,
+  __pyx_e_7classes_9generated_SPATIALMATERIAL_TEXTURE_CHANNEL_ALPHA,
+  __pyx_e_7classes_9generated_SPATIALMATERIAL_TEXTURE_CHANNEL_GRAYSCALE
+};
+typedef enum __pyx_t_7classes_9generated_SpatialMaterial_TextureChannel __pyx_t_7classes_9generated_SpatialMaterial_TextureChannel;
+
+/* "classes/generated.pxd":635
+ * ctypedef enum SpatialMaterial_DepthDrawMode :SPATIALMATERIAL_DEPTH_DRAW_OPAQUE_ONLY, SPATIALMATERIAL_DEPTH_DRAW_ALWAYS, SPATIALMATERIAL_DEPTH_DRAW_DISABLED, SPATIALMATERIAL_DEPTH_DRAW_ALPHA_OPAQUE_PREPASS
+ * ctypedef enum SpatialMaterial_TextureChannel :SPATIALMATERIAL_TEXTURE_CHANNEL_RED, SPATIALMATERIAL_TEXTURE_CHANNEL_GREEN, SPATIALMATERIAL_TEXTURE_CHANNEL_BLUE, SPATIALMATERIAL_TEXTURE_CHANNEL_ALPHA, SPATIALMATERIAL_TEXTURE_CHANNEL_GRAYSCALE
+ * ctypedef enum SpatialMaterial_BlendMode :SPATIALMATERIAL_BLEND_MODE_MIX, SPATIALMATERIAL_BLEND_MODE_ADD, SPATIALMATERIAL_BLEND_MODE_SUB, SPATIALMATERIAL_BLEND_MODE_MUL             # <<<<<<<<<<<<<<
+ * ctypedef enum SpatialMaterial_TextureParam :SPATIALMATERIAL_TEXTURE_ALBEDO, SPATIALMATERIAL_TEXTURE_METALLIC, SPATIALMATERIAL_TEXTURE_ROUGHNESS, SPATIALMATERIAL_TEXTURE_EMISSION, SPATIALMATERIAL_TEXTURE_NORMAL, SPATIALMATERIAL_TEXTURE_RIM, SPATIALMATERIAL_TEXTURE_CLEARCOAT, SPATIALMATERIAL_TEXTURE_FLOWMAP, SPATIALMATERIAL_TEXTURE_AMBIENT_OCCLUSION, SPATIALMATERIAL_TEXTURE_DEPTH, SPATIALMATERIAL_TEXTURE_SUBSURFACE_SCATTERING, SPATIALMATERIAL_TEXTURE_TRANSMISSION, SPATIALMATERIAL_TEXTURE_REFRACTION, SPATIALMATERIAL_TEXTURE_DETAIL_MASK, SPATIALMATERIAL_TEXTURE_DETAIL_ALBEDO, SPATIALMATERIAL_TEXTURE_DETAIL_NORMAL, SPATIALMATERIAL_TEXTURE_MAX
+ * 
+ */
+enum __pyx_t_7classes_9generated_SpatialMaterial_BlendMode {
+  __pyx_e_7classes_9generated_SPATIALMATERIAL_BLEND_MODE_MIX,
+  __pyx_e_7classes_9generated_SPATIALMATERIAL_BLEND_MODE_ADD,
+  __pyx_e_7classes_9generated_SPATIALMATERIAL_BLEND_MODE_SUB,
+  __pyx_e_7classes_9generated_SPATIALMATERIAL_BLEND_MODE_MUL
+};
+typedef enum __pyx_t_7classes_9generated_SpatialMaterial_BlendMode __pyx_t_7classes_9generated_SpatialMaterial_BlendMode;
+
+/* "classes/generated.pxd":636
+ * ctypedef enum SpatialMaterial_TextureChannel :SPATIALMATERIAL_TEXTURE_CHANNEL_RED, SPATIALMATERIAL_TEXTURE_CHANNEL_GREEN, SPATIALMATERIAL_TEXTURE_CHANNEL_BLUE, SPATIALMATERIAL_TEXTURE_CHANNEL_ALPHA, SPATIALMATERIAL_TEXTURE_CHANNEL_GRAYSCALE
+ * ctypedef enum SpatialMaterial_BlendMode :SPATIALMATERIAL_BLEND_MODE_MIX, SPATIALMATERIAL_BLEND_MODE_ADD, SPATIALMATERIAL_BLEND_MODE_SUB, SPATIALMATERIAL_BLEND_MODE_MUL
+ * ctypedef enum SpatialMaterial_TextureParam :SPATIALMATERIAL_TEXTURE_ALBEDO, SPATIALMATERIAL_TEXTURE_METALLIC, SPATIALMATERIAL_TEXTURE_ROUGHNESS, SPATIALMATERIAL_TEXTURE_EMISSION, SPATIALMATERIAL_TEXTURE_NORMAL, SPATIALMATERIAL_TEXTURE_RIM, SPATIALMATERIAL_TEXTURE_CLEARCOAT, SPATIALMATERIAL_TEXTURE_FLOWMAP, SPATIALMATERIAL_TEXTURE_AMBIENT_OCCLUSION, SPATIALMATERIAL_TEXTURE_DEPTH, SPATIALMATERIAL_TEXTURE_SUBSURFACE_SCATTERING, SPATIALMATERIAL_TEXTURE_TRANSMISSION, SPATIALMATERIAL_TEXTURE_REFRACTION, SPATIALMATERIAL_TEXTURE_DETAIL_MASK, SPATIALMATERIAL_TEXTURE_DETAIL_ALBEDO, SPATIALMATERIAL_TEXTURE_DETAIL_NORMAL, SPATIALMATERIAL_TEXTURE_MAX             # <<<<<<<<<<<<<<
+ * 
+ * 
+ */
+enum __pyx_t_7classes_9generated_SpatialMaterial_TextureParam {
+  __pyx_e_7classes_9generated_SPATIALMATERIAL_TEXTURE_ALBEDO,
+  __pyx_e_7classes_9generated_SPATIALMATERIAL_TEXTURE_METALLIC,
+  __pyx_e_7classes_9generated_SPATIALMATERIAL_TEXTURE_ROUGHNESS,
+  __pyx_e_7classes_9generated_SPATIALMATERIAL_TEXTURE_EMISSION,
+  __pyx_e_7classes_9generated_SPATIALMATERIAL_TEXTURE_NORMAL,
+  __pyx_e_7classes_9generated_SPATIALMATERIAL_TEXTURE_RIM,
+  __pyx_e_7classes_9generated_SPATIALMATERIAL_TEXTURE_CLEARCOAT,
+  __pyx_e_7classes_9generated_SPATIALMATERIAL_TEXTURE_FLOWMAP,
+  __pyx_e_7classes_9generated_SPATIALMATERIAL_TEXTURE_AMBIENT_OCCLUSION,
+  __pyx_e_7classes_9generated_SPATIALMATERIAL_TEXTURE_DEPTH,
+  __pyx_e_7classes_9generated_SPATIALMATERIAL_TEXTURE_SUBSURFACE_SCATTERING,
+  __pyx_e_7classes_9generated_SPATIALMATERIAL_TEXTURE_TRANSMISSION,
+  __pyx_e_7classes_9generated_SPATIALMATERIAL_TEXTURE_REFRACTION,
+  __pyx_e_7classes_9generated_SPATIALMATERIAL_TEXTURE_DETAIL_MASK,
+  __pyx_e_7classes_9generated_SPATIALMATERIAL_TEXTURE_DETAIL_ALBEDO,
+  __pyx_e_7classes_9generated_SPATIALMATERIAL_TEXTURE_DETAIL_NORMAL,
+  __pyx_e_7classes_9generated_SPATIALMATERIAL_TEXTURE_MAX
+};
+typedef enum __pyx_t_7classes_9generated_SpatialMaterial_TextureParam __pyx_t_7classes_9generated_SpatialMaterial_TextureParam;
+
+/* "classes/generated.pxd":642
+ * 
+ * 
+ * ctypedef enum SplitContainer_DraggerVisibility :SPLITCONTAINER_DRAGGER_VISIBLE, SPLITCONTAINER_DRAGGER_HIDDEN, SPLITCONTAINER_DRAGGER_HIDDEN_COLLAPSED             # <<<<<<<<<<<<<<
+ * 
+ * 
+ */
+enum __pyx_t_7classes_9generated_SplitContainer_DraggerVisibility {
+  __pyx_e_7classes_9generated_SPLITCONTAINER_DRAGGER_VISIBLE,
+  __pyx_e_7classes_9generated_SPLITCONTAINER_DRAGGER_HIDDEN,
+  __pyx_e_7classes_9generated_SPLITCONTAINER_DRAGGER_HIDDEN_COLLAPSED
+};
+typedef enum __pyx_t_7classes_9generated_SplitContainer_DraggerVisibility __pyx_t_7classes_9generated_SplitContainer_DraggerVisibility;
+
+/* "classes/generated.pxd":648
+ * 
+ * 
+ * ctypedef enum SpriteBase3D_DrawFlags :SPRITEBASE3D_FLAG_TRANSPARENT, SPRITEBASE3D_FLAG_SHADED, SPRITEBASE3D_FLAG_DOUBLE_SIDED, SPRITEBASE3D_FLAG_MAX             # <<<<<<<<<<<<<<
+ * ctypedef enum SpriteBase3D_AlphaCutMode :SPRITEBASE3D_ALPHA_CUT_DISABLED, SPRITEBASE3D_ALPHA_CUT_DISCARD, SPRITEBASE3D_ALPHA_CUT_OPAQUE_PREPASS
+ * 
+ */
+enum __pyx_t_7classes_9generated_SpriteBase3D_DrawFlags {
+  __pyx_e_7classes_9generated_SPRITEBASE3D_FLAG_TRANSPARENT,
+  __pyx_e_7classes_9generated_SPRITEBASE3D_FLAG_SHADED,
+  __pyx_e_7classes_9generated_SPRITEBASE3D_FLAG_DOUBLE_SIDED,
+  __pyx_e_7classes_9generated_SPRITEBASE3D_FLAG_MAX
+};
+typedef enum __pyx_t_7classes_9generated_SpriteBase3D_DrawFlags __pyx_t_7classes_9generated_SpriteBase3D_DrawFlags;
+
+/* "classes/generated.pxd":649
+ * 
+ * ctypedef enum SpriteBase3D_DrawFlags :SPRITEBASE3D_FLAG_TRANSPARENT, SPRITEBASE3D_FLAG_SHADED, SPRITEBASE3D_FLAG_DOUBLE_SIDED, SPRITEBASE3D_FLAG_MAX
+ * ctypedef enum SpriteBase3D_AlphaCutMode :SPRITEBASE3D_ALPHA_CUT_DISABLED, SPRITEBASE3D_ALPHA_CUT_DISCARD, SPRITEBASE3D_ALPHA_CUT_OPAQUE_PREPASS             # <<<<<<<<<<<<<<
+ * 
+ * 
+ */
+enum __pyx_t_7classes_9generated_SpriteBase3D_AlphaCutMode {
+  __pyx_e_7classes_9generated_SPRITEBASE3D_ALPHA_CUT_DISABLED,
+  __pyx_e_7classes_9generated_SPRITEBASE3D_ALPHA_CUT_DISCARD,
+  __pyx_e_7classes_9generated_SPRITEBASE3D_ALPHA_CUT_OPAQUE_PREPASS
+};
+typedef enum __pyx_t_7classes_9generated_SpriteBase3D_AlphaCutMode __pyx_t_7classes_9generated_SpriteBase3D_AlphaCutMode;
+
+/* "classes/generated.pxd":657
+ * 
+ * 
+ * ctypedef enum StreamPeerSSL_Status :STREAMPEERSSL_STATUS_DISCONNECTED, STREAMPEERSSL_STATUS_HANDSHAKING, STREAMPEERSSL_STATUS_CONNECTED, STREAMPEERSSL_STATUS_ERROR, STREAMPEERSSL_STATUS_ERROR_HOSTNAME_MISMATCH             # <<<<<<<<<<<<<<
+ * 
+ * ctypedef enum StreamPeerTCP_Status :STREAMPEERTCP_STATUS_NONE, STREAMPEERTCP_STATUS_CONNECTING, STREAMPEERTCP_STATUS_CONNECTED, STREAMPEERTCP_STATUS_ERROR
+ */
+enum __pyx_t_7classes_9generated_StreamPeerSSL_Status {
+  __pyx_e_7classes_9generated_STREAMPEERSSL_STATUS_DISCONNECTED,
+  __pyx_e_7classes_9generated_STREAMPEERSSL_STATUS_HANDSHAKING,
+  __pyx_e_7classes_9generated_STREAMPEERSSL_STATUS_CONNECTED,
+  __pyx_e_7classes_9generated_STREAMPEERSSL_STATUS_ERROR,
+  __pyx_e_7classes_9generated_STREAMPEERSSL_STATUS_ERROR_HOSTNAME_MISMATCH
+};
+typedef enum __pyx_t_7classes_9generated_StreamPeerSSL_Status __pyx_t_7classes_9generated_StreamPeerSSL_Status;
+
+/* "classes/generated.pxd":659
+ * ctypedef enum StreamPeerSSL_Status :STREAMPEERSSL_STATUS_DISCONNECTED, STREAMPEERSSL_STATUS_HANDSHAKING, STREAMPEERSSL_STATUS_CONNECTED, STREAMPEERSSL_STATUS_ERROR, STREAMPEERSSL_STATUS_ERROR_HOSTNAME_MISMATCH
+ * 
+ * ctypedef enum StreamPeerTCP_Status :STREAMPEERTCP_STATUS_NONE, STREAMPEERTCP_STATUS_CONNECTING, STREAMPEERTCP_STATUS_CONNECTED, STREAMPEERTCP_STATUS_ERROR             # <<<<<<<<<<<<<<
+ * 
+ * 
+ */
+enum __pyx_t_7classes_9generated_StreamPeerTCP_Status {
+  __pyx_e_7classes_9generated_STREAMPEERTCP_STATUS_NONE,
+  __pyx_e_7classes_9generated_STREAMPEERTCP_STATUS_CONNECTING,
+  __pyx_e_7classes_9generated_STREAMPEERTCP_STATUS_CONNECTED,
+  __pyx_e_7classes_9generated_STREAMPEERTCP_STATUS_ERROR
+};
+typedef enum __pyx_t_7classes_9generated_StreamPeerTCP_Status __pyx_t_7classes_9generated_StreamPeerTCP_Status;
+
+/* "classes/generated.pxd":666
+ * 
+ * 
+ * ctypedef enum StyleBoxTexture_AxisStretchMode :STYLEBOXTEXTURE_AXIS_STRETCH_MODE_STRETCH, STYLEBOXTEXTURE_AXIS_STRETCH_MODE_TILE, STYLEBOXTEXTURE_AXIS_STRETCH_MODE_TILE_FIT             # <<<<<<<<<<<<<<
+ * 
+ * 
+ */
+enum __pyx_t_7classes_9generated_StyleBoxTexture_AxisStretchMode {
+  __pyx_e_7classes_9generated_STYLEBOXTEXTURE_AXIS_STRETCH_MODE_STRETCH,
+  __pyx_e_7classes_9generated_STYLEBOXTEXTURE_AXIS_STRETCH_MODE_TILE,
+  __pyx_e_7classes_9generated_STYLEBOXTEXTURE_AXIS_STRETCH_MODE_TILE_FIT
+};
+typedef enum __pyx_t_7classes_9generated_StyleBoxTexture_AxisStretchMode __pyx_t_7classes_9generated_StyleBoxTexture_AxisStretchMode;
+
+/* "classes/generated.pxd":670
+ * 
+ * 
+ * ctypedef enum TabContainer_TabAlign :TABCONTAINER_ALIGN_LEFT, TABCONTAINER_ALIGN_CENTER, TABCONTAINER_ALIGN_RIGHT             # <<<<<<<<<<<<<<
+ * 
+ * ctypedef enum Tabs_CloseButtonDisplayPolicy :TABS_CLOSE_BUTTON_SHOW_NEVER, TABS_CLOSE_BUTTON_SHOW_ACTIVE_ONLY, TABS_CLOSE_BUTTON_SHOW_ALWAYS, TABS_CLOSE_BUTTON_MAX
+ */
+enum __pyx_t_7classes_9generated_TabContainer_TabAlign {
+  __pyx_e_7classes_9generated_TABCONTAINER_ALIGN_LEFT,
+  __pyx_e_7classes_9generated_TABCONTAINER_ALIGN_CENTER,
+  __pyx_e_7classes_9generated_TABCONTAINER_ALIGN_RIGHT
+};
+typedef enum __pyx_t_7classes_9generated_TabContainer_TabAlign __pyx_t_7classes_9generated_TabContainer_TabAlign;
+
+/* "classes/generated.pxd":672
+ * ctypedef enum TabContainer_TabAlign :TABCONTAINER_ALIGN_LEFT, TABCONTAINER_ALIGN_CENTER, TABCONTAINER_ALIGN_RIGHT
+ * 
+ * ctypedef enum Tabs_CloseButtonDisplayPolicy :TABS_CLOSE_BUTTON_SHOW_NEVER, TABS_CLOSE_BUTTON_SHOW_ACTIVE_ONLY, TABS_CLOSE_BUTTON_SHOW_ALWAYS, TABS_CLOSE_BUTTON_MAX             # <<<<<<<<<<<<<<
+ * ctypedef enum Tabs_TabAlign :TABS_ALIGN_LEFT, TABS_ALIGN_CENTER, TABS_ALIGN_RIGHT, TABS_ALIGN_MAX
+ * 
+ */
+enum __pyx_t_7classes_9generated_Tabs_CloseButtonDisplayPolicy {
+  __pyx_e_7classes_9generated_TABS_CLOSE_BUTTON_SHOW_NEVER,
+  __pyx_e_7classes_9generated_TABS_CLOSE_BUTTON_SHOW_ACTIVE_ONLY,
+  __pyx_e_7classes_9generated_TABS_CLOSE_BUTTON_SHOW_ALWAYS,
+  __pyx_e_7classes_9generated_TABS_CLOSE_BUTTON_MAX
+};
+typedef enum __pyx_t_7classes_9generated_Tabs_CloseButtonDisplayPolicy __pyx_t_7classes_9generated_Tabs_CloseButtonDisplayPolicy;
+
+/* "classes/generated.pxd":673
+ * 
+ * ctypedef enum Tabs_CloseButtonDisplayPolicy :TABS_CLOSE_BUTTON_SHOW_NEVER, TABS_CLOSE_BUTTON_SHOW_ACTIVE_ONLY, TABS_CLOSE_BUTTON_SHOW_ALWAYS, TABS_CLOSE_BUTTON_MAX
+ * ctypedef enum Tabs_TabAlign :TABS_ALIGN_LEFT, TABS_ALIGN_CENTER, TABS_ALIGN_RIGHT, TABS_ALIGN_MAX             # <<<<<<<<<<<<<<
+ * 
+ * ctypedef enum TextEdit_SearchFlags :TEXTEDIT_SEARCH_MATCH_CASE, TEXTEDIT_SEARCH_WHOLE_WORDS, TEXTEDIT_SEARCH_BACKWARDS
+ */
+enum __pyx_t_7classes_9generated_Tabs_TabAlign {
+  __pyx_e_7classes_9generated_TABS_ALIGN_LEFT,
+  __pyx_e_7classes_9generated_TABS_ALIGN_CENTER,
+  __pyx_e_7classes_9generated_TABS_ALIGN_RIGHT,
+  __pyx_e_7classes_9generated_TABS_ALIGN_MAX
+};
+typedef enum __pyx_t_7classes_9generated_Tabs_TabAlign __pyx_t_7classes_9generated_Tabs_TabAlign;
+
+/* "classes/generated.pxd":675
+ * ctypedef enum Tabs_TabAlign :TABS_ALIGN_LEFT, TABS_ALIGN_CENTER, TABS_ALIGN_RIGHT, TABS_ALIGN_MAX
+ * 
+ * ctypedef enum TextEdit_SearchFlags :TEXTEDIT_SEARCH_MATCH_CASE, TEXTEDIT_SEARCH_WHOLE_WORDS, TEXTEDIT_SEARCH_BACKWARDS             # <<<<<<<<<<<<<<
+ * ctypedef enum TextEdit_SearchResult :TEXTEDIT_SEARCH_RESULT_COLUMN, TEXTEDIT_SEARCH_RESULT_LINE
+ * ctypedef enum TextEdit_MenuItems :TEXTEDIT_MENU_CUT, TEXTEDIT_MENU_COPY, TEXTEDIT_MENU_PASTE, TEXTEDIT_MENU_CLEAR, TEXTEDIT_MENU_SELECT_ALL, TEXTEDIT_MENU_UNDO, TEXTEDIT_MENU_REDO, TEXTEDIT_MENU_MAX
+ */
+enum __pyx_t_7classes_9generated_TextEdit_SearchFlags {
+  __pyx_e_7classes_9generated_TEXTEDIT_SEARCH_MATCH_CASE,
+  __pyx_e_7classes_9generated_TEXTEDIT_SEARCH_WHOLE_WORDS,
+  __pyx_e_7classes_9generated_TEXTEDIT_SEARCH_BACKWARDS
+};
+typedef enum __pyx_t_7classes_9generated_TextEdit_SearchFlags __pyx_t_7classes_9generated_TextEdit_SearchFlags;
+
+/* "classes/generated.pxd":676
+ * 
+ * ctypedef enum TextEdit_SearchFlags :TEXTEDIT_SEARCH_MATCH_CASE, TEXTEDIT_SEARCH_WHOLE_WORDS, TEXTEDIT_SEARCH_BACKWARDS
+ * ctypedef enum TextEdit_SearchResult :TEXTEDIT_SEARCH_RESULT_COLUMN, TEXTEDIT_SEARCH_RESULT_LINE             # <<<<<<<<<<<<<<
+ * ctypedef enum TextEdit_MenuItems :TEXTEDIT_MENU_CUT, TEXTEDIT_MENU_COPY, TEXTEDIT_MENU_PASTE, TEXTEDIT_MENU_CLEAR, TEXTEDIT_MENU_SELECT_ALL, TEXTEDIT_MENU_UNDO, TEXTEDIT_MENU_REDO, TEXTEDIT_MENU_MAX
+ * 
+ */
+enum __pyx_t_7classes_9generated_TextEdit_SearchResult {
+  __pyx_e_7classes_9generated_TEXTEDIT_SEARCH_RESULT_COLUMN,
+  __pyx_e_7classes_9generated_TEXTEDIT_SEARCH_RESULT_LINE
+};
+typedef enum __pyx_t_7classes_9generated_TextEdit_SearchResult __pyx_t_7classes_9generated_TextEdit_SearchResult;
+
+/* "classes/generated.pxd":677
+ * ctypedef enum TextEdit_SearchFlags :TEXTEDIT_SEARCH_MATCH_CASE, TEXTEDIT_SEARCH_WHOLE_WORDS, TEXTEDIT_SEARCH_BACKWARDS
+ * ctypedef enum TextEdit_SearchResult :TEXTEDIT_SEARCH_RESULT_COLUMN, TEXTEDIT_SEARCH_RESULT_LINE
+ * ctypedef enum TextEdit_MenuItems :TEXTEDIT_MENU_CUT, TEXTEDIT_MENU_COPY, TEXTEDIT_MENU_PASTE, TEXTEDIT_MENU_CLEAR, TEXTEDIT_MENU_SELECT_ALL, TEXTEDIT_MENU_UNDO, TEXTEDIT_MENU_REDO, TEXTEDIT_MENU_MAX             # <<<<<<<<<<<<<<
+ * 
+ * 
+ */
+enum __pyx_t_7classes_9generated_TextEdit_MenuItems {
+  __pyx_e_7classes_9generated_TEXTEDIT_MENU_CUT,
+  __pyx_e_7classes_9generated_TEXTEDIT_MENU_COPY,
+  __pyx_e_7classes_9generated_TEXTEDIT_MENU_PASTE,
+  __pyx_e_7classes_9generated_TEXTEDIT_MENU_CLEAR,
+  __pyx_e_7classes_9generated_TEXTEDIT_MENU_SELECT_ALL,
+  __pyx_e_7classes_9generated_TEXTEDIT_MENU_UNDO,
+  __pyx_e_7classes_9generated_TEXTEDIT_MENU_REDO,
+  __pyx_e_7classes_9generated_TEXTEDIT_MENU_MAX
+};
+typedef enum __pyx_t_7classes_9generated_TextEdit_MenuItems __pyx_t_7classes_9generated_TextEdit_MenuItems;
+
+/* "classes/generated.pxd":680
+ * 
+ * 
+ * ctypedef enum Texture_Flags :TEXTURE_FLAG_MIPMAPS, TEXTURE_FLAG_REPEAT, TEXTURE_FLAG_FILTER, TEXTURE_FLAGS_DEFAULT, TEXTURE_FLAG_ANISOTROPIC_FILTER, TEXTURE_FLAG_CONVERT_TO_LINEAR, TEXTURE_FLAG_MIRRORED_REPEAT, TEXTURE_FLAG_VIDEO_SURFACE             # <<<<<<<<<<<<<<
+ * 
+ * 
+ */
+enum __pyx_t_7classes_9generated_Texture_Flags {
+  __pyx_e_7classes_9generated_TEXTURE_FLAG_MIPMAPS,
+  __pyx_e_7classes_9generated_TEXTURE_FLAG_REPEAT,
+  __pyx_e_7classes_9generated_TEXTURE_FLAG_FILTER,
+  __pyx_e_7classes_9generated_TEXTURE_FLAGS_DEFAULT,
+  __pyx_e_7classes_9generated_TEXTURE_FLAG_ANISOTROPIC_FILTER,
+  __pyx_e_7classes_9generated_TEXTURE_FLAG_CONVERT_TO_LINEAR,
+  __pyx_e_7classes_9generated_TEXTURE_FLAG_MIRRORED_REPEAT,
+  __pyx_e_7classes_9generated_TEXTURE_FLAG_VIDEO_SURFACE
+};
+typedef enum __pyx_t_7classes_9generated_Texture_Flags __pyx_t_7classes_9generated_Texture_Flags;
+
+/* "classes/generated.pxd":684
+ * 
+ * 
+ * ctypedef enum TextureButton_StretchMode :TEXTUREBUTTON_STRETCH_SCALE, TEXTUREBUTTON_STRETCH_TILE, TEXTUREBUTTON_STRETCH_KEEP, TEXTUREBUTTON_STRETCH_KEEP_CENTERED, TEXTUREBUTTON_STRETCH_KEEP_ASPECT, TEXTUREBUTTON_STRETCH_KEEP_ASPECT_CENTERED, TEXTUREBUTTON_STRETCH_KEEP_ASPECT_COVERED             # <<<<<<<<<<<<<<
+ * 
+ * ctypedef enum TextureLayered_Flags :TEXTURELAYERED_FLAG_MIPMAPS, TEXTURELAYERED_FLAG_REPEAT, TEXTURELAYERED_FLAG_FILTER, TEXTURELAYERED_FLAGS_DEFAULT
+ */
+enum __pyx_t_7classes_9generated_TextureButton_StretchMode {
+  __pyx_e_7classes_9generated_TEXTUREBUTTON_STRETCH_SCALE,
+  __pyx_e_7classes_9generated_TEXTUREBUTTON_STRETCH_TILE,
+  __pyx_e_7classes_9generated_TEXTUREBUTTON_STRETCH_KEEP,
+  __pyx_e_7classes_9generated_TEXTUREBUTTON_STRETCH_KEEP_CENTERED,
+  __pyx_e_7classes_9generated_TEXTUREBUTTON_STRETCH_KEEP_ASPECT,
+  __pyx_e_7classes_9generated_TEXTUREBUTTON_STRETCH_KEEP_ASPECT_CENTERED,
+  __pyx_e_7classes_9generated_TEXTUREBUTTON_STRETCH_KEEP_ASPECT_COVERED
+};
+typedef enum __pyx_t_7classes_9generated_TextureButton_StretchMode __pyx_t_7classes_9generated_TextureButton_StretchMode;
+
+/* "classes/generated.pxd":686
+ * ctypedef enum TextureButton_StretchMode :TEXTUREBUTTON_STRETCH_SCALE, TEXTUREBUTTON_STRETCH_TILE, TEXTUREBUTTON_STRETCH_KEEP, TEXTUREBUTTON_STRETCH_KEEP_CENTERED, TEXTUREBUTTON_STRETCH_KEEP_ASPECT, TEXTUREBUTTON_STRETCH_KEEP_ASPECT_CENTERED, TEXTUREBUTTON_STRETCH_KEEP_ASPECT_COVERED
+ * 
+ * ctypedef enum TextureLayered_Flags :TEXTURELAYERED_FLAG_MIPMAPS, TEXTURELAYERED_FLAG_REPEAT, TEXTURELAYERED_FLAG_FILTER, TEXTURELAYERED_FLAGS_DEFAULT             # <<<<<<<<<<<<<<
+ * 
+ * ctypedef enum TextureProgress_FillMode :TEXTUREPROGRESS_FILL_LEFT_TO_RIGHT, TEXTUREPROGRESS_FILL_RIGHT_TO_LEFT, TEXTUREPROGRESS_FILL_TOP_TO_BOTTOM, TEXTUREPROGRESS_FILL_BOTTOM_TO_TOP, TEXTUREPROGRESS_FILL_CLOCKWISE, TEXTUREPROGRESS_FILL_COUNTER_CLOCKWISE, TEXTUREPROGRESS_FILL_BILINEAR_LEFT_AND_RIGHT, TEXTUREPROGRESS_FILL_BILINEAR_TOP_AND_BOTTOM, TEXTUREPROGRESS_FILL_CLOCKWISE_AND_COUNTER_CLOCKWISE
+ */
+enum __pyx_t_7classes_9generated_TextureLayered_Flags {
+  __pyx_e_7classes_9generated_TEXTURELAYERED_FLAG_MIPMAPS,
+  __pyx_e_7classes_9generated_TEXTURELAYERED_FLAG_REPEAT,
+  __pyx_e_7classes_9generated_TEXTURELAYERED_FLAG_FILTER,
+  __pyx_e_7classes_9generated_TEXTURELAYERED_FLAGS_DEFAULT
+};
+typedef enum __pyx_t_7classes_9generated_TextureLayered_Flags __pyx_t_7classes_9generated_TextureLayered_Flags;
+
+/* "classes/generated.pxd":688
+ * ctypedef enum TextureLayered_Flags :TEXTURELAYERED_FLAG_MIPMAPS, TEXTURELAYERED_FLAG_REPEAT, TEXTURELAYERED_FLAG_FILTER, TEXTURELAYERED_FLAGS_DEFAULT
+ * 
+ * ctypedef enum TextureProgress_FillMode :TEXTUREPROGRESS_FILL_LEFT_TO_RIGHT, TEXTUREPROGRESS_FILL_RIGHT_TO_LEFT, TEXTUREPROGRESS_FILL_TOP_TO_BOTTOM, TEXTUREPROGRESS_FILL_BOTTOM_TO_TOP, TEXTUREPROGRESS_FILL_CLOCKWISE, TEXTUREPROGRESS_FILL_COUNTER_CLOCKWISE, TEXTUREPROGRESS_FILL_BILINEAR_LEFT_AND_RIGHT, TEXTUREPROGRESS_FILL_BILINEAR_TOP_AND_BOTTOM, TEXTUREPROGRESS_FILL_CLOCKWISE_AND_COUNTER_CLOCKWISE             # <<<<<<<<<<<<<<
+ * 
+ * ctypedef enum TextureRect_StretchMode :TEXTURERECT_STRETCH_SCALE_ON_EXPAND, TEXTURERECT_STRETCH_SCALE, TEXTURERECT_STRETCH_TILE, TEXTURERECT_STRETCH_KEEP, TEXTURERECT_STRETCH_KEEP_CENTERED, TEXTURERECT_STRETCH_KEEP_ASPECT, TEXTURERECT_STRETCH_KEEP_ASPECT_CENTERED, TEXTURERECT_STRETCH_KEEP_ASPECT_COVERED
+ */
+enum __pyx_t_7classes_9generated_TextureProgress_FillMode {
+  __pyx_e_7classes_9generated_TEXTUREPROGRESS_FILL_LEFT_TO_RIGHT,
+  __pyx_e_7classes_9generated_TEXTUREPROGRESS_FILL_RIGHT_TO_LEFT,
+  __pyx_e_7classes_9generated_TEXTUREPROGRESS_FILL_TOP_TO_BOTTOM,
+  __pyx_e_7classes_9generated_TEXTUREPROGRESS_FILL_BOTTOM_TO_TOP,
+  __pyx_e_7classes_9generated_TEXTUREPROGRESS_FILL_CLOCKWISE,
+  __pyx_e_7classes_9generated_TEXTUREPROGRESS_FILL_COUNTER_CLOCKWISE,
+  __pyx_e_7classes_9generated_TEXTUREPROGRESS_FILL_BILINEAR_LEFT_AND_RIGHT,
+  __pyx_e_7classes_9generated_TEXTUREPROGRESS_FILL_BILINEAR_TOP_AND_BOTTOM,
+  __pyx_e_7classes_9generated_TEXTUREPROGRESS_FILL_CLOCKWISE_AND_COUNTER_CLOCKWISE
+};
+typedef enum __pyx_t_7classes_9generated_TextureProgress_FillMode __pyx_t_7classes_9generated_TextureProgress_FillMode;
+
+/* "classes/generated.pxd":690
+ * ctypedef enum TextureProgress_FillMode :TEXTUREPROGRESS_FILL_LEFT_TO_RIGHT, TEXTUREPROGRESS_FILL_RIGHT_TO_LEFT, TEXTUREPROGRESS_FILL_TOP_TO_BOTTOM, TEXTUREPROGRESS_FILL_BOTTOM_TO_TOP, TEXTUREPROGRESS_FILL_CLOCKWISE, TEXTUREPROGRESS_FILL_COUNTER_CLOCKWISE, TEXTUREPROGRESS_FILL_BILINEAR_LEFT_AND_RIGHT, TEXTUREPROGRESS_FILL_BILINEAR_TOP_AND_BOTTOM, TEXTUREPROGRESS_FILL_CLOCKWISE_AND_COUNTER_CLOCKWISE
+ * 
+ * ctypedef enum TextureRect_StretchMode :TEXTURERECT_STRETCH_SCALE_ON_EXPAND, TEXTURERECT_STRETCH_SCALE, TEXTURERECT_STRETCH_TILE, TEXTURERECT_STRETCH_KEEP, TEXTURERECT_STRETCH_KEEP_CENTERED, TEXTURERECT_STRETCH_KEEP_ASPECT, TEXTURERECT_STRETCH_KEEP_ASPECT_CENTERED, TEXTURERECT_STRETCH_KEEP_ASPECT_COVERED             # <<<<<<<<<<<<<<
+ * 
+ * 
+ */
+enum __pyx_t_7classes_9generated_TextureRect_StretchMode {
+  __pyx_e_7classes_9generated_TEXTURERECT_STRETCH_SCALE_ON_EXPAND,
+  __pyx_e_7classes_9generated_TEXTURERECT_STRETCH_SCALE,
+  __pyx_e_7classes_9generated_TEXTURERECT_STRETCH_TILE,
+  __pyx_e_7classes_9generated_TEXTURERECT_STRETCH_KEEP,
+  __pyx_e_7classes_9generated_TEXTURERECT_STRETCH_KEEP_CENTERED,
+  __pyx_e_7classes_9generated_TEXTURERECT_STRETCH_KEEP_ASPECT,
+  __pyx_e_7classes_9generated_TEXTURERECT_STRETCH_KEEP_ASPECT_CENTERED,
+  __pyx_e_7classes_9generated_TEXTURERECT_STRETCH_KEEP_ASPECT_COVERED
+};
+typedef enum __pyx_t_7classes_9generated_TextureRect_StretchMode __pyx_t_7classes_9generated_TextureRect_StretchMode;
+
+/* "classes/generated.pxd":693
+ * 
+ * 
+ * ctypedef enum TileMap_Mode :TILEMAP_MODE_SQUARE, TILEMAP_MODE_ISOMETRIC, TILEMAP_MODE_CUSTOM             # <<<<<<<<<<<<<<
+ * ctypedef enum TileMap_TileOrigin :TILEMAP_TILE_ORIGIN_TOP_LEFT, TILEMAP_TILE_ORIGIN_CENTER, TILEMAP_TILE_ORIGIN_BOTTOM_LEFT
+ * ctypedef enum TileMap_HalfOffset :TILEMAP_HALF_OFFSET_X, TILEMAP_HALF_OFFSET_Y, TILEMAP_HALF_OFFSET_DISABLED, TILEMAP_HALF_OFFSET_NEGATIVE_X, TILEMAP_HALF_OFFSET_NEGATIVE_Y
+ */
+enum __pyx_t_7classes_9generated_TileMap_Mode {
+  __pyx_e_7classes_9generated_TILEMAP_MODE_SQUARE,
+  __pyx_e_7classes_9generated_TILEMAP_MODE_ISOMETRIC,
+  __pyx_e_7classes_9generated_TILEMAP_MODE_CUSTOM
+};
+typedef enum __pyx_t_7classes_9generated_TileMap_Mode __pyx_t_7classes_9generated_TileMap_Mode;
+
+/* "classes/generated.pxd":694
+ * 
+ * ctypedef enum TileMap_Mode :TILEMAP_MODE_SQUARE, TILEMAP_MODE_ISOMETRIC, TILEMAP_MODE_CUSTOM
+ * ctypedef enum TileMap_TileOrigin :TILEMAP_TILE_ORIGIN_TOP_LEFT, TILEMAP_TILE_ORIGIN_CENTER, TILEMAP_TILE_ORIGIN_BOTTOM_LEFT             # <<<<<<<<<<<<<<
+ * ctypedef enum TileMap_HalfOffset :TILEMAP_HALF_OFFSET_X, TILEMAP_HALF_OFFSET_Y, TILEMAP_HALF_OFFSET_DISABLED, TILEMAP_HALF_OFFSET_NEGATIVE_X, TILEMAP_HALF_OFFSET_NEGATIVE_Y
+ * 
+ */
+enum __pyx_t_7classes_9generated_TileMap_TileOrigin {
+  __pyx_e_7classes_9generated_TILEMAP_TILE_ORIGIN_TOP_LEFT,
+  __pyx_e_7classes_9generated_TILEMAP_TILE_ORIGIN_CENTER,
+  __pyx_e_7classes_9generated_TILEMAP_TILE_ORIGIN_BOTTOM_LEFT
+};
+typedef enum __pyx_t_7classes_9generated_TileMap_TileOrigin __pyx_t_7classes_9generated_TileMap_TileOrigin;
+
+/* "classes/generated.pxd":695
+ * ctypedef enum TileMap_Mode :TILEMAP_MODE_SQUARE, TILEMAP_MODE_ISOMETRIC, TILEMAP_MODE_CUSTOM
+ * ctypedef enum TileMap_TileOrigin :TILEMAP_TILE_ORIGIN_TOP_LEFT, TILEMAP_TILE_ORIGIN_CENTER, TILEMAP_TILE_ORIGIN_BOTTOM_LEFT
+ * ctypedef enum TileMap_HalfOffset :TILEMAP_HALF_OFFSET_X, TILEMAP_HALF_OFFSET_Y, TILEMAP_HALF_OFFSET_DISABLED, TILEMAP_HALF_OFFSET_NEGATIVE_X, TILEMAP_HALF_OFFSET_NEGATIVE_Y             # <<<<<<<<<<<<<<
+ * 
+ * ctypedef enum TileSet_TileMode :TILESET_SINGLE_TILE, TILESET_AUTO_TILE, TILESET_ATLAS_TILE
+ */
+enum __pyx_t_7classes_9generated_TileMap_HalfOffset {
+  __pyx_e_7classes_9generated_TILEMAP_HALF_OFFSET_X,
+  __pyx_e_7classes_9generated_TILEMAP_HALF_OFFSET_Y,
+  __pyx_e_7classes_9generated_TILEMAP_HALF_OFFSET_DISABLED,
+  __pyx_e_7classes_9generated_TILEMAP_HALF_OFFSET_NEGATIVE_X,
+  __pyx_e_7classes_9generated_TILEMAP_HALF_OFFSET_NEGATIVE_Y
+};
+typedef enum __pyx_t_7classes_9generated_TileMap_HalfOffset __pyx_t_7classes_9generated_TileMap_HalfOffset;
+
+/* "classes/generated.pxd":697
+ * ctypedef enum TileMap_HalfOffset :TILEMAP_HALF_OFFSET_X, TILEMAP_HALF_OFFSET_Y, TILEMAP_HALF_OFFSET_DISABLED, TILEMAP_HALF_OFFSET_NEGATIVE_X, TILEMAP_HALF_OFFSET_NEGATIVE_Y
+ * 
+ * ctypedef enum TileSet_TileMode :TILESET_SINGLE_TILE, TILESET_AUTO_TILE, TILESET_ATLAS_TILE             # <<<<<<<<<<<<<<
+ * ctypedef enum TileSet_AutotileBindings :TILESET_BIND_TOPLEFT, TILESET_BIND_TOP, TILESET_BIND_TOPRIGHT, TILESET_BIND_LEFT, TILESET_BIND_CENTER, TILESET_BIND_RIGHT, TILESET_BIND_BOTTOMLEFT, TILESET_BIND_BOTTOM, TILESET_BIND_BOTTOMRIGHT
+ * ctypedef enum TileSet_BitmaskMode :TILESET_BITMASK_2X2, TILESET_BITMASK_3X3_MINIMAL, TILESET_BITMASK_3X3
+ */
+enum __pyx_t_7classes_9generated_TileSet_TileMode {
+  __pyx_e_7classes_9generated_TILESET_SINGLE_TILE,
+  __pyx_e_7classes_9generated_TILESET_AUTO_TILE,
+  __pyx_e_7classes_9generated_TILESET_ATLAS_TILE
+};
+typedef enum __pyx_t_7classes_9generated_TileSet_TileMode __pyx_t_7classes_9generated_TileSet_TileMode;
+
+/* "classes/generated.pxd":698
+ * 
+ * ctypedef enum TileSet_TileMode :TILESET_SINGLE_TILE, TILESET_AUTO_TILE, TILESET_ATLAS_TILE
+ * ctypedef enum TileSet_AutotileBindings :TILESET_BIND_TOPLEFT, TILESET_BIND_TOP, TILESET_BIND_TOPRIGHT, TILESET_BIND_LEFT, TILESET_BIND_CENTER, TILESET_BIND_RIGHT, TILESET_BIND_BOTTOMLEFT, TILESET_BIND_BOTTOM, TILESET_BIND_BOTTOMRIGHT             # <<<<<<<<<<<<<<
+ * ctypedef enum TileSet_BitmaskMode :TILESET_BITMASK_2X2, TILESET_BITMASK_3X3_MINIMAL, TILESET_BITMASK_3X3
+ * 
+ */
+enum __pyx_t_7classes_9generated_TileSet_AutotileBindings {
+  __pyx_e_7classes_9generated_TILESET_BIND_TOPLEFT,
+  __pyx_e_7classes_9generated_TILESET_BIND_TOP,
+  __pyx_e_7classes_9generated_TILESET_BIND_TOPRIGHT,
+  __pyx_e_7classes_9generated_TILESET_BIND_LEFT,
+  __pyx_e_7classes_9generated_TILESET_BIND_CENTER,
+  __pyx_e_7classes_9generated_TILESET_BIND_RIGHT,
+  __pyx_e_7classes_9generated_TILESET_BIND_BOTTOMLEFT,
+  __pyx_e_7classes_9generated_TILESET_BIND_BOTTOM,
+  __pyx_e_7classes_9generated_TILESET_BIND_BOTTOMRIGHT
+};
+typedef enum __pyx_t_7classes_9generated_TileSet_AutotileBindings __pyx_t_7classes_9generated_TileSet_AutotileBindings;
+
+/* "classes/generated.pxd":699
+ * ctypedef enum TileSet_TileMode :TILESET_SINGLE_TILE, TILESET_AUTO_TILE, TILESET_ATLAS_TILE
+ * ctypedef enum TileSet_AutotileBindings :TILESET_BIND_TOPLEFT, TILESET_BIND_TOP, TILESET_BIND_TOPRIGHT, TILESET_BIND_LEFT, TILESET_BIND_CENTER, TILESET_BIND_RIGHT, TILESET_BIND_BOTTOMLEFT, TILESET_BIND_BOTTOM, TILESET_BIND_BOTTOMRIGHT
+ * ctypedef enum TileSet_BitmaskMode :TILESET_BITMASK_2X2, TILESET_BITMASK_3X3_MINIMAL, TILESET_BITMASK_3X3             # <<<<<<<<<<<<<<
+ * 
+ * ctypedef enum Timer_TimerProcessMode :TIMER_TIMER_PROCESS_PHYSICS, TIMER_TIMER_PROCESS_IDLE
+ */
+enum __pyx_t_7classes_9generated_TileSet_BitmaskMode {
+  __pyx_e_7classes_9generated_TILESET_BITMASK_2X2,
+  __pyx_e_7classes_9generated_TILESET_BITMASK_3X3_MINIMAL,
+  __pyx_e_7classes_9generated_TILESET_BITMASK_3X3
+};
+typedef enum __pyx_t_7classes_9generated_TileSet_BitmaskMode __pyx_t_7classes_9generated_TileSet_BitmaskMode;
+
+/* "classes/generated.pxd":701
+ * ctypedef enum TileSet_BitmaskMode :TILESET_BITMASK_2X2, TILESET_BITMASK_3X3_MINIMAL, TILESET_BITMASK_3X3
+ * 
+ * ctypedef enum Timer_TimerProcessMode :TIMER_TIMER_PROCESS_PHYSICS, TIMER_TIMER_PROCESS_IDLE             # <<<<<<<<<<<<<<
+ * 
+ * 
+ */
+enum __pyx_t_7classes_9generated_Timer_TimerProcessMode {
+  __pyx_e_7classes_9generated_TIMER_TIMER_PROCESS_PHYSICS,
+  __pyx_e_7classes_9generated_TIMER_TIMER_PROCESS_IDLE
+};
+typedef enum __pyx_t_7classes_9generated_Timer_TimerProcessMode __pyx_t_7classes_9generated_Timer_TimerProcessMode;
+
+/* "classes/generated.pxd":704
+ * 
+ * 
+ * ctypedef enum TouchScreenButton_VisibilityMode :TOUCHSCREENBUTTON_VISIBILITY_ALWAYS, TOUCHSCREENBUTTON_VISIBILITY_TOUCHSCREEN_ONLY             # <<<<<<<<<<<<<<
+ * 
+ * 
+ */
+enum __pyx_t_7classes_9generated_TouchScreenButton_VisibilityMode {
+  __pyx_e_7classes_9generated_TOUCHSCREENBUTTON_VISIBILITY_ALWAYS,
+  __pyx_e_7classes_9generated_TOUCHSCREENBUTTON_VISIBILITY_TOUCHSCREEN_ONLY
+};
+typedef enum __pyx_t_7classes_9generated_TouchScreenButton_VisibilityMode __pyx_t_7classes_9generated_TouchScreenButton_VisibilityMode;
+
+/* "classes/generated.pxd":708
+ * 
+ * 
+ * ctypedef enum Tree_SelectMode :TREE_SELECT_SINGLE, TREE_SELECT_ROW, TREE_SELECT_MULTI             # <<<<<<<<<<<<<<
+ * ctypedef enum Tree_DropModeFlags :TREE_DROP_MODE_DISABLED, TREE_DROP_MODE_ON_ITEM, TREE_DROP_MODE_INBETWEEN
+ * 
+ */
+enum __pyx_t_7classes_9generated_Tree_SelectMode {
+  __pyx_e_7classes_9generated_TREE_SELECT_SINGLE,
+  __pyx_e_7classes_9generated_TREE_SELECT_ROW,
+  __pyx_e_7classes_9generated_TREE_SELECT_MULTI
+};
+typedef enum __pyx_t_7classes_9generated_Tree_SelectMode __pyx_t_7classes_9generated_Tree_SelectMode;
+
+/* "classes/generated.pxd":709
+ * 
+ * ctypedef enum Tree_SelectMode :TREE_SELECT_SINGLE, TREE_SELECT_ROW, TREE_SELECT_MULTI
+ * ctypedef enum Tree_DropModeFlags :TREE_DROP_MODE_DISABLED, TREE_DROP_MODE_ON_ITEM, TREE_DROP_MODE_INBETWEEN             # <<<<<<<<<<<<<<
+ * 
+ * ctypedef enum TreeItem_TreeCellMode :TREEITEM_CELL_MODE_STRING, TREEITEM_CELL_MODE_CHECK, TREEITEM_CELL_MODE_RANGE, TREEITEM_CELL_MODE_ICON, TREEITEM_CELL_MODE_CUSTOM
+ */
+enum __pyx_t_7classes_9generated_Tree_DropModeFlags {
+  __pyx_e_7classes_9generated_TREE_DROP_MODE_DISABLED,
+  __pyx_e_7classes_9generated_TREE_DROP_MODE_ON_ITEM,
+  __pyx_e_7classes_9generated_TREE_DROP_MODE_INBETWEEN
+};
+typedef enum __pyx_t_7classes_9generated_Tree_DropModeFlags __pyx_t_7classes_9generated_Tree_DropModeFlags;
+
+/* "classes/generated.pxd":711
+ * ctypedef enum Tree_DropModeFlags :TREE_DROP_MODE_DISABLED, TREE_DROP_MODE_ON_ITEM, TREE_DROP_MODE_INBETWEEN
+ * 
+ * ctypedef enum TreeItem_TreeCellMode :TREEITEM_CELL_MODE_STRING, TREEITEM_CELL_MODE_CHECK, TREEITEM_CELL_MODE_RANGE, TREEITEM_CELL_MODE_ICON, TREEITEM_CELL_MODE_CUSTOM             # <<<<<<<<<<<<<<
+ * ctypedef enum TreeItem_TextAlign :TREEITEM_ALIGN_LEFT, TREEITEM_ALIGN_CENTER, TREEITEM_ALIGN_RIGHT
+ * 
+ */
+enum __pyx_t_7classes_9generated_TreeItem_TreeCellMode {
+  __pyx_e_7classes_9generated_TREEITEM_CELL_MODE_STRING,
+  __pyx_e_7classes_9generated_TREEITEM_CELL_MODE_CHECK,
+  __pyx_e_7classes_9generated_TREEITEM_CELL_MODE_RANGE,
+  __pyx_e_7classes_9generated_TREEITEM_CELL_MODE_ICON,
+  __pyx_e_7classes_9generated_TREEITEM_CELL_MODE_CUSTOM
+};
+typedef enum __pyx_t_7classes_9generated_TreeItem_TreeCellMode __pyx_t_7classes_9generated_TreeItem_TreeCellMode;
+
+/* "classes/generated.pxd":712
+ * 
+ * ctypedef enum TreeItem_TreeCellMode :TREEITEM_CELL_MODE_STRING, TREEITEM_CELL_MODE_CHECK, TREEITEM_CELL_MODE_RANGE, TREEITEM_CELL_MODE_ICON, TREEITEM_CELL_MODE_CUSTOM
+ * ctypedef enum TreeItem_TextAlign :TREEITEM_ALIGN_LEFT, TREEITEM_ALIGN_CENTER, TREEITEM_ALIGN_RIGHT             # <<<<<<<<<<<<<<
+ * 
+ * 
+ */
+enum __pyx_t_7classes_9generated_TreeItem_TextAlign {
+  __pyx_e_7classes_9generated_TREEITEM_ALIGN_LEFT,
+  __pyx_e_7classes_9generated_TREEITEM_ALIGN_CENTER,
+  __pyx_e_7classes_9generated_TREEITEM_ALIGN_RIGHT
+};
+typedef enum __pyx_t_7classes_9generated_TreeItem_TextAlign __pyx_t_7classes_9generated_TreeItem_TextAlign;
+
+/* "classes/generated.pxd":715
+ * 
+ * 
+ * ctypedef enum Tween_TransitionType :TWEEN_TRANS_LINEAR, TWEEN_TRANS_SINE, TWEEN_TRANS_QUINT, TWEEN_TRANS_QUART, TWEEN_TRANS_QUAD, TWEEN_TRANS_EXPO, TWEEN_TRANS_ELASTIC, TWEEN_TRANS_CUBIC, TWEEN_TRANS_CIRC, TWEEN_TRANS_BOUNCE, TWEEN_TRANS_BACK             # <<<<<<<<<<<<<<
+ * ctypedef enum Tween_TweenProcessMode :TWEEN_TWEEN_PROCESS_PHYSICS, TWEEN_TWEEN_PROCESS_IDLE
+ * ctypedef enum Tween_EaseType :TWEEN_EASE_IN, TWEEN_EASE_OUT, TWEEN_EASE_IN_OUT, TWEEN_EASE_OUT_IN
+ */
+enum __pyx_t_7classes_9generated_Tween_TransitionType {
+  __pyx_e_7classes_9generated_TWEEN_TRANS_LINEAR,
+  __pyx_e_7classes_9generated_TWEEN_TRANS_SINE,
+  __pyx_e_7classes_9generated_TWEEN_TRANS_QUINT,
+  __pyx_e_7classes_9generated_TWEEN_TRANS_QUART,
+  __pyx_e_7classes_9generated_TWEEN_TRANS_QUAD,
+  __pyx_e_7classes_9generated_TWEEN_TRANS_EXPO,
+  __pyx_e_7classes_9generated_TWEEN_TRANS_ELASTIC,
+  __pyx_e_7classes_9generated_TWEEN_TRANS_CUBIC,
+  __pyx_e_7classes_9generated_TWEEN_TRANS_CIRC,
+  __pyx_e_7classes_9generated_TWEEN_TRANS_BOUNCE,
+  __pyx_e_7classes_9generated_TWEEN_TRANS_BACK
+};
+typedef enum __pyx_t_7classes_9generated_Tween_TransitionType __pyx_t_7classes_9generated_Tween_TransitionType;
+
+/* "classes/generated.pxd":716
+ * 
+ * ctypedef enum Tween_TransitionType :TWEEN_TRANS_LINEAR, TWEEN_TRANS_SINE, TWEEN_TRANS_QUINT, TWEEN_TRANS_QUART, TWEEN_TRANS_QUAD, TWEEN_TRANS_EXPO, TWEEN_TRANS_ELASTIC, TWEEN_TRANS_CUBIC, TWEEN_TRANS_CIRC, TWEEN_TRANS_BOUNCE, TWEEN_TRANS_BACK
+ * ctypedef enum Tween_TweenProcessMode :TWEEN_TWEEN_PROCESS_PHYSICS, TWEEN_TWEEN_PROCESS_IDLE             # <<<<<<<<<<<<<<
+ * ctypedef enum Tween_EaseType :TWEEN_EASE_IN, TWEEN_EASE_OUT, TWEEN_EASE_IN_OUT, TWEEN_EASE_OUT_IN
+ * 
+ */
+enum __pyx_t_7classes_9generated_Tween_TweenProcessMode {
+  __pyx_e_7classes_9generated_TWEEN_TWEEN_PROCESS_PHYSICS,
+  __pyx_e_7classes_9generated_TWEEN_TWEEN_PROCESS_IDLE
+};
+typedef enum __pyx_t_7classes_9generated_Tween_TweenProcessMode __pyx_t_7classes_9generated_Tween_TweenProcessMode;
+
+/* "classes/generated.pxd":717
+ * ctypedef enum Tween_TransitionType :TWEEN_TRANS_LINEAR, TWEEN_TRANS_SINE, TWEEN_TRANS_QUINT, TWEEN_TRANS_QUART, TWEEN_TRANS_QUAD, TWEEN_TRANS_EXPO, TWEEN_TRANS_ELASTIC, TWEEN_TRANS_CUBIC, TWEEN_TRANS_CIRC, TWEEN_TRANS_BOUNCE, TWEEN_TRANS_BACK
+ * ctypedef enum Tween_TweenProcessMode :TWEEN_TWEEN_PROCESS_PHYSICS, TWEEN_TWEEN_PROCESS_IDLE
+ * ctypedef enum Tween_EaseType :TWEEN_EASE_IN, TWEEN_EASE_OUT, TWEEN_EASE_IN_OUT, TWEEN_EASE_OUT_IN             # <<<<<<<<<<<<<<
+ * 
+ * ctypedef enum UPNP_UPNPResult :UPNP_UPNP_RESULT_SUCCESS, UPNP_UPNP_RESULT_NOT_AUTHORIZED, UPNP_UPNP_RESULT_PORT_MAPPING_NOT_FOUND, UPNP_UPNP_RESULT_INCONSISTENT_PARAMETERS, UPNP_UPNP_RESULT_NO_SUCH_ENTRY_IN_ARRAY, UPNP_UPNP_RESULT_ACTION_FAILED, UPNP_UPNP_RESULT_SRC_IP_WILDCARD_NOT_PERMITTED, UPNP_UPNP_RESULT_EXT_PORT_WILDCARD_NOT_PERMITTED, UPNP_UPNP_RESULT_INT_PORT_WILDCARD_NOT_PERMITTED, UPNP_UPNP_RESULT_REMOTE_HOST_MUST_BE_WILDCARD, UPNP_UPNP_RESULT_EXT_PORT_MUST_BE_WILDCARD, UPNP_UPNP_RESULT_NO_PORT_MAPS_AVAILABLE, UPNP_UPNP_RESULT_CONFLICT_WITH_OTHER_MECHANISM, UPNP_UPNP_RESULT_CONFLICT_WITH_OTHER_MAPPING, UPNP_UPNP_RESULT_SAME_PORT_VALUES_REQUIRED, UPNP_UPNP_RESULT_ONLY_PERMANENT_LEASE_SUPPORTED, UPNP_UPNP_RESULT_INVALID_GATEWAY, UPNP_UPNP_RESULT_INVALID_PORT, UPNP_UPNP_RESULT_INVALID_PROTOCOL, UPNP_UPNP_RESULT_INVALID_DURATION, UPNP_UPNP_RESULT_INVALID_ARGS, UPNP_UPNP_RESULT_INVALID_RESPONSE, UPNP_UPNP_RESULT_INVALID_PARAM, UPNP_UPNP_RESULT_HTTP_ERROR, UPNP_UPNP_RESULT_SOCKET_ERROR, UPNP_UPNP_RESULT_MEM_ALLOC_ERROR, UPNP_UPNP_RESULT_NO_GATEWAY, UPNP_UPNP_RESULT_NO_DEVICES, UPNP_UPNP_RESULT_UNKNOWN_ERROR
+ */
+enum __pyx_t_7classes_9generated_Tween_EaseType {
+  __pyx_e_7classes_9generated_TWEEN_EASE_IN,
+  __pyx_e_7classes_9generated_TWEEN_EASE_OUT,
+  __pyx_e_7classes_9generated_TWEEN_EASE_IN_OUT,
+  __pyx_e_7classes_9generated_TWEEN_EASE_OUT_IN
+};
+typedef enum __pyx_t_7classes_9generated_Tween_EaseType __pyx_t_7classes_9generated_Tween_EaseType;
+
+/* "classes/generated.pxd":719
+ * ctypedef enum Tween_EaseType :TWEEN_EASE_IN, TWEEN_EASE_OUT, TWEEN_EASE_IN_OUT, TWEEN_EASE_OUT_IN
+ * 
+ * ctypedef enum UPNP_UPNPResult :UPNP_UPNP_RESULT_SUCCESS, UPNP_UPNP_RESULT_NOT_AUTHORIZED, UPNP_UPNP_RESULT_PORT_MAPPING_NOT_FOUND, UPNP_UPNP_RESULT_INCONSISTENT_PARAMETERS, UPNP_UPNP_RESULT_NO_SUCH_ENTRY_IN_ARRAY, UPNP_UPNP_RESULT_ACTION_FAILED, UPNP_UPNP_RESULT_SRC_IP_WILDCARD_NOT_PERMITTED, UPNP_UPNP_RESULT_EXT_PORT_WILDCARD_NOT_PERMITTED, UPNP_UPNP_RESULT_INT_PORT_WILDCARD_NOT_PERMITTED, UPNP_UPNP_RESULT_REMOTE_HOST_MUST_BE_WILDCARD, UPNP_UPNP_RESULT_EXT_PORT_MUST_BE_WILDCARD, UPNP_UPNP_RESULT_NO_PORT_MAPS_AVAILABLE, UPNP_UPNP_RESULT_CONFLICT_WITH_OTHER_MECHANISM, UPNP_UPNP_RESULT_CONFLICT_WITH_OTHER_MAPPING, UPNP_UPNP_RESULT_SAME_PORT_VALUES_REQUIRED, UPNP_UPNP_RESULT_ONLY_PERMANENT_LEASE_SUPPORTED, UPNP_UPNP_RESULT_INVALID_GATEWAY, UPNP_UPNP_RESULT_INVALID_PORT, UPNP_UPNP_RESULT_INVALID_PROTOCOL, UPNP_UPNP_RESULT_INVALID_DURATION, UPNP_UPNP_RESULT_INVALID_ARGS, UPNP_UPNP_RESULT_INVALID_RESPONSE, UPNP_UPNP_RESULT_INVALID_PARAM, UPNP_UPNP_RESULT_HTTP_ERROR, UPNP_UPNP_RESULT_SOCKET_ERROR, UPNP_UPNP_RESULT_MEM_ALLOC_ERROR, UPNP_UPNP_RESULT_NO_GATEWAY, UPNP_UPNP_RESULT_NO_DEVICES, UPNP_UPNP_RESULT_UNKNOWN_ERROR             # <<<<<<<<<<<<<<
+ * 
+ * ctypedef enum UPNPDevice_IGDStatus :UPNPDEVICE_IGD_STATUS_OK, UPNPDEVICE_IGD_STATUS_HTTP_ERROR, UPNPDEVICE_IGD_STATUS_HTTP_EMPTY, UPNPDEVICE_IGD_STATUS_NO_URLS, UPNPDEVICE_IGD_STATUS_NO_IGD, UPNPDEVICE_IGD_STATUS_DISCONNECTED, UPNPDEVICE_IGD_STATUS_UNKNOWN_DEVICE, UPNPDEVICE_IGD_STATUS_INVALID_CONTROL, UPNPDEVICE_IGD_STATUS_MALLOC_ERROR, UPNPDEVICE_IGD_STATUS_UNKNOWN_ERROR
+ */
+enum __pyx_t_7classes_9generated_UPNP_UPNPResult {
+  __pyx_e_7classes_9generated_UPNP_UPNP_RESULT_SUCCESS,
+  __pyx_e_7classes_9generated_UPNP_UPNP_RESULT_NOT_AUTHORIZED,
+  __pyx_e_7classes_9generated_UPNP_UPNP_RESULT_PORT_MAPPING_NOT_FOUND,
+  __pyx_e_7classes_9generated_UPNP_UPNP_RESULT_INCONSISTENT_PARAMETERS,
+  __pyx_e_7classes_9generated_UPNP_UPNP_RESULT_NO_SUCH_ENTRY_IN_ARRAY,
+  __pyx_e_7classes_9generated_UPNP_UPNP_RESULT_ACTION_FAILED,
+  __pyx_e_7classes_9generated_UPNP_UPNP_RESULT_SRC_IP_WILDCARD_NOT_PERMITTED,
+  __pyx_e_7classes_9generated_UPNP_UPNP_RESULT_EXT_PORT_WILDCARD_NOT_PERMITTED,
+  __pyx_e_7classes_9generated_UPNP_UPNP_RESULT_INT_PORT_WILDCARD_NOT_PERMITTED,
+  __pyx_e_7classes_9generated_UPNP_UPNP_RESULT_REMOTE_HOST_MUST_BE_WILDCARD,
+  __pyx_e_7classes_9generated_UPNP_UPNP_RESULT_EXT_PORT_MUST_BE_WILDCARD,
+  __pyx_e_7classes_9generated_UPNP_UPNP_RESULT_NO_PORT_MAPS_AVAILABLE,
+  __pyx_e_7classes_9generated_UPNP_UPNP_RESULT_CONFLICT_WITH_OTHER_MECHANISM,
+  __pyx_e_7classes_9generated_UPNP_UPNP_RESULT_CONFLICT_WITH_OTHER_MAPPING,
+  __pyx_e_7classes_9generated_UPNP_UPNP_RESULT_SAME_PORT_VALUES_REQUIRED,
+  __pyx_e_7classes_9generated_UPNP_UPNP_RESULT_ONLY_PERMANENT_LEASE_SUPPORTED,
+  __pyx_e_7classes_9generated_UPNP_UPNP_RESULT_INVALID_GATEWAY,
+  __pyx_e_7classes_9generated_UPNP_UPNP_RESULT_INVALID_PORT,
+  __pyx_e_7classes_9generated_UPNP_UPNP_RESULT_INVALID_PROTOCOL,
+  __pyx_e_7classes_9generated_UPNP_UPNP_RESULT_INVALID_DURATION,
+  __pyx_e_7classes_9generated_UPNP_UPNP_RESULT_INVALID_ARGS,
+  __pyx_e_7classes_9generated_UPNP_UPNP_RESULT_INVALID_RESPONSE,
+  __pyx_e_7classes_9generated_UPNP_UPNP_RESULT_INVALID_PARAM,
+  __pyx_e_7classes_9generated_UPNP_UPNP_RESULT_HTTP_ERROR,
+  __pyx_e_7classes_9generated_UPNP_UPNP_RESULT_SOCKET_ERROR,
+  __pyx_e_7classes_9generated_UPNP_UPNP_RESULT_MEM_ALLOC_ERROR,
+  __pyx_e_7classes_9generated_UPNP_UPNP_RESULT_NO_GATEWAY,
+  __pyx_e_7classes_9generated_UPNP_UPNP_RESULT_NO_DEVICES,
+  __pyx_e_7classes_9generated_UPNP_UPNP_RESULT_UNKNOWN_ERROR
+};
+typedef enum __pyx_t_7classes_9generated_UPNP_UPNPResult __pyx_t_7classes_9generated_UPNP_UPNPResult;
+
+/* "classes/generated.pxd":721
+ * ctypedef enum UPNP_UPNPResult :UPNP_UPNP_RESULT_SUCCESS, UPNP_UPNP_RESULT_NOT_AUTHORIZED, UPNP_UPNP_RESULT_PORT_MAPPING_NOT_FOUND, UPNP_UPNP_RESULT_INCONSISTENT_PARAMETERS, UPNP_UPNP_RESULT_NO_SUCH_ENTRY_IN_ARRAY, UPNP_UPNP_RESULT_ACTION_FAILED, UPNP_UPNP_RESULT_SRC_IP_WILDCARD_NOT_PERMITTED, UPNP_UPNP_RESULT_EXT_PORT_WILDCARD_NOT_PERMITTED, UPNP_UPNP_RESULT_INT_PORT_WILDCARD_NOT_PERMITTED, UPNP_UPNP_RESULT_REMOTE_HOST_MUST_BE_WILDCARD, UPNP_UPNP_RESULT_EXT_PORT_MUST_BE_WILDCARD, UPNP_UPNP_RESULT_NO_PORT_MAPS_AVAILABLE, UPNP_UPNP_RESULT_CONFLICT_WITH_OTHER_MECHANISM, UPNP_UPNP_RESULT_CONFLICT_WITH_OTHER_MAPPING, UPNP_UPNP_RESULT_SAME_PORT_VALUES_REQUIRED, UPNP_UPNP_RESULT_ONLY_PERMANENT_LEASE_SUPPORTED, UPNP_UPNP_RESULT_INVALID_GATEWAY, UPNP_UPNP_RESULT_INVALID_PORT, UPNP_UPNP_RESULT_INVALID_PROTOCOL, UPNP_UPNP_RESULT_INVALID_DURATION, UPNP_UPNP_RESULT_INVALID_ARGS, UPNP_UPNP_RESULT_INVALID_RESPONSE, UPNP_UPNP_RESULT_INVALID_PARAM, UPNP_UPNP_RESULT_HTTP_ERROR, UPNP_UPNP_RESULT_SOCKET_ERROR, UPNP_UPNP_RESULT_MEM_ALLOC_ERROR, UPNP_UPNP_RESULT_NO_GATEWAY, UPNP_UPNP_RESULT_NO_DEVICES, UPNP_UPNP_RESULT_UNKNOWN_ERROR
+ * 
+ * ctypedef enum UPNPDevice_IGDStatus :UPNPDEVICE_IGD_STATUS_OK, UPNPDEVICE_IGD_STATUS_HTTP_ERROR, UPNPDEVICE_IGD_STATUS_HTTP_EMPTY, UPNPDEVICE_IGD_STATUS_NO_URLS, UPNPDEVICE_IGD_STATUS_NO_IGD, UPNPDEVICE_IGD_STATUS_DISCONNECTED, UPNPDEVICE_IGD_STATUS_UNKNOWN_DEVICE, UPNPDEVICE_IGD_STATUS_INVALID_CONTROL, UPNPDEVICE_IGD_STATUS_MALLOC_ERROR, UPNPDEVICE_IGD_STATUS_UNKNOWN_ERROR             # <<<<<<<<<<<<<<
+ * 
+ * ctypedef enum UndoRedo_MergeMode :UNDOREDO_MERGE_DISABLE, UNDOREDO_MERGE_ENDS, UNDOREDO_MERGE_ALL
+ */
+enum __pyx_t_7classes_9generated_UPNPDevice_IGDStatus {
+  __pyx_e_7classes_9generated_UPNPDEVICE_IGD_STATUS_OK,
+  __pyx_e_7classes_9generated_UPNPDEVICE_IGD_STATUS_HTTP_ERROR,
+  __pyx_e_7classes_9generated_UPNPDEVICE_IGD_STATUS_HTTP_EMPTY,
+  __pyx_e_7classes_9generated_UPNPDEVICE_IGD_STATUS_NO_URLS,
+  __pyx_e_7classes_9generated_UPNPDEVICE_IGD_STATUS_NO_IGD,
+  __pyx_e_7classes_9generated_UPNPDEVICE_IGD_STATUS_DISCONNECTED,
+  __pyx_e_7classes_9generated_UPNPDEVICE_IGD_STATUS_UNKNOWN_DEVICE,
+  __pyx_e_7classes_9generated_UPNPDEVICE_IGD_STATUS_INVALID_CONTROL,
+  __pyx_e_7classes_9generated_UPNPDEVICE_IGD_STATUS_MALLOC_ERROR,
+  __pyx_e_7classes_9generated_UPNPDEVICE_IGD_STATUS_UNKNOWN_ERROR
+};
+typedef enum __pyx_t_7classes_9generated_UPNPDevice_IGDStatus __pyx_t_7classes_9generated_UPNPDevice_IGDStatus;
+
+/* "classes/generated.pxd":723
+ * ctypedef enum UPNPDevice_IGDStatus :UPNPDEVICE_IGD_STATUS_OK, UPNPDEVICE_IGD_STATUS_HTTP_ERROR, UPNPDEVICE_IGD_STATUS_HTTP_EMPTY, UPNPDEVICE_IGD_STATUS_NO_URLS, UPNPDEVICE_IGD_STATUS_NO_IGD, UPNPDEVICE_IGD_STATUS_DISCONNECTED, UPNPDEVICE_IGD_STATUS_UNKNOWN_DEVICE, UPNPDEVICE_IGD_STATUS_INVALID_CONTROL, UPNPDEVICE_IGD_STATUS_MALLOC_ERROR, UPNPDEVICE_IGD_STATUS_UNKNOWN_ERROR
+ * 
+ * ctypedef enum UndoRedo_MergeMode :UNDOREDO_MERGE_DISABLE, UNDOREDO_MERGE_ENDS, UNDOREDO_MERGE_ALL             # <<<<<<<<<<<<<<
+ * 
+ * 
+ */
+enum __pyx_t_7classes_9generated_UndoRedo_MergeMode {
+  __pyx_e_7classes_9generated_UNDOREDO_MERGE_DISABLE,
+  __pyx_e_7classes_9generated_UNDOREDO_MERGE_ENDS,
+  __pyx_e_7classes_9generated_UNDOREDO_MERGE_ALL
+};
+typedef enum __pyx_t_7classes_9generated_UndoRedo_MergeMode __pyx_t_7classes_9generated_UndoRedo_MergeMode;
+
+/* "classes/generated.pxd":737
+ * 
+ * 
+ * ctypedef enum Viewport_ClearMode :VIEWPORT_CLEAR_MODE_ALWAYS, VIEWPORT_CLEAR_MODE_NEVER, VIEWPORT_CLEAR_MODE_ONLY_NEXT_FRAME             # <<<<<<<<<<<<<<
+ * ctypedef enum Viewport_RenderInfo :VIEWPORT_RENDER_INFO_OBJECTS_IN_FRAME, VIEWPORT_RENDER_INFO_VERTICES_IN_FRAME, VIEWPORT_RENDER_INFO_MATERIAL_CHANGES_IN_FRAME, VIEWPORT_RENDER_INFO_SHADER_CHANGES_IN_FRAME, VIEWPORT_RENDER_INFO_SURFACE_CHANGES_IN_FRAME, VIEWPORT_RENDER_INFO_DRAW_CALLS_IN_FRAME, VIEWPORT_RENDER_INFO_MAX
+ * ctypedef enum Viewport_Usage :VIEWPORT_USAGE_2D, VIEWPORT_USAGE_2D_NO_SAMPLING, VIEWPORT_USAGE_3D, VIEWPORT_USAGE_3D_NO_EFFECTS
+ */
+enum __pyx_t_7classes_9generated_Viewport_ClearMode {
+  __pyx_e_7classes_9generated_VIEWPORT_CLEAR_MODE_ALWAYS,
+  __pyx_e_7classes_9generated_VIEWPORT_CLEAR_MODE_NEVER,
+  __pyx_e_7classes_9generated_VIEWPORT_CLEAR_MODE_ONLY_NEXT_FRAME
+};
+typedef enum __pyx_t_7classes_9generated_Viewport_ClearMode __pyx_t_7classes_9generated_Viewport_ClearMode;
+
+/* "classes/generated.pxd":738
+ * 
+ * ctypedef enum Viewport_ClearMode :VIEWPORT_CLEAR_MODE_ALWAYS, VIEWPORT_CLEAR_MODE_NEVER, VIEWPORT_CLEAR_MODE_ONLY_NEXT_FRAME
+ * ctypedef enum Viewport_RenderInfo :VIEWPORT_RENDER_INFO_OBJECTS_IN_FRAME, VIEWPORT_RENDER_INFO_VERTICES_IN_FRAME, VIEWPORT_RENDER_INFO_MATERIAL_CHANGES_IN_FRAME, VIEWPORT_RENDER_INFO_SHADER_CHANGES_IN_FRAME, VIEWPORT_RENDER_INFO_SURFACE_CHANGES_IN_FRAME, VIEWPORT_RENDER_INFO_DRAW_CALLS_IN_FRAME, VIEWPORT_RENDER_INFO_MAX             # <<<<<<<<<<<<<<
+ * ctypedef enum Viewport_Usage :VIEWPORT_USAGE_2D, VIEWPORT_USAGE_2D_NO_SAMPLING, VIEWPORT_USAGE_3D, VIEWPORT_USAGE_3D_NO_EFFECTS
+ * ctypedef enum Viewport_DebugDraw :VIEWPORT_DEBUG_DRAW_DISABLED, VIEWPORT_DEBUG_DRAW_UNSHADED, VIEWPORT_DEBUG_DRAW_OVERDRAW, VIEWPORT_DEBUG_DRAW_WIREFRAME
+ */
+enum __pyx_t_7classes_9generated_Viewport_RenderInfo {
+  __pyx_e_7classes_9generated_VIEWPORT_RENDER_INFO_OBJECTS_IN_FRAME,
+  __pyx_e_7classes_9generated_VIEWPORT_RENDER_INFO_VERTICES_IN_FRAME,
+  __pyx_e_7classes_9generated_VIEWPORT_RENDER_INFO_MATERIAL_CHANGES_IN_FRAME,
+  __pyx_e_7classes_9generated_VIEWPORT_RENDER_INFO_SHADER_CHANGES_IN_FRAME,
+  __pyx_e_7classes_9generated_VIEWPORT_RENDER_INFO_SURFACE_CHANGES_IN_FRAME,
+  __pyx_e_7classes_9generated_VIEWPORT_RENDER_INFO_DRAW_CALLS_IN_FRAME,
+  __pyx_e_7classes_9generated_VIEWPORT_RENDER_INFO_MAX
+};
+typedef enum __pyx_t_7classes_9generated_Viewport_RenderInfo __pyx_t_7classes_9generated_Viewport_RenderInfo;
+
+/* "classes/generated.pxd":739
+ * ctypedef enum Viewport_ClearMode :VIEWPORT_CLEAR_MODE_ALWAYS, VIEWPORT_CLEAR_MODE_NEVER, VIEWPORT_CLEAR_MODE_ONLY_NEXT_FRAME
+ * ctypedef enum Viewport_RenderInfo :VIEWPORT_RENDER_INFO_OBJECTS_IN_FRAME, VIEWPORT_RENDER_INFO_VERTICES_IN_FRAME, VIEWPORT_RENDER_INFO_MATERIAL_CHANGES_IN_FRAME, VIEWPORT_RENDER_INFO_SHADER_CHANGES_IN_FRAME, VIEWPORT_RENDER_INFO_SURFACE_CHANGES_IN_FRAME, VIEWPORT_RENDER_INFO_DRAW_CALLS_IN_FRAME, VIEWPORT_RENDER_INFO_MAX
+ * ctypedef enum Viewport_Usage :VIEWPORT_USAGE_2D, VIEWPORT_USAGE_2D_NO_SAMPLING, VIEWPORT_USAGE_3D, VIEWPORT_USAGE_3D_NO_EFFECTS             # <<<<<<<<<<<<<<
+ * ctypedef enum Viewport_DebugDraw :VIEWPORT_DEBUG_DRAW_DISABLED, VIEWPORT_DEBUG_DRAW_UNSHADED, VIEWPORT_DEBUG_DRAW_OVERDRAW, VIEWPORT_DEBUG_DRAW_WIREFRAME
+ * ctypedef enum Viewport_ShadowAtlasQuadrantSubdiv :VIEWPORT_SHADOW_ATLAS_QUADRANT_SUBDIV_DISABLED, VIEWPORT_SHADOW_ATLAS_QUADRANT_SUBDIV_1, VIEWPORT_SHADOW_ATLAS_QUADRANT_SUBDIV_4, VIEWPORT_SHADOW_ATLAS_QUADRANT_SUBDIV_16, VIEWPORT_SHADOW_ATLAS_QUADRANT_SUBDIV_64, VIEWPORT_SHADOW_ATLAS_QUADRANT_SUBDIV_256, VIEWPORT_SHADOW_ATLAS_QUADRANT_SUBDIV_1024, VIEWPORT_SHADOW_ATLAS_QUADRANT_SUBDIV_MAX
+ */
+enum __pyx_t_7classes_9generated_Viewport_Usage {
+  __pyx_e_7classes_9generated_VIEWPORT_USAGE_2D,
+  __pyx_e_7classes_9generated_VIEWPORT_USAGE_2D_NO_SAMPLING,
+  __pyx_e_7classes_9generated_VIEWPORT_USAGE_3D,
+  __pyx_e_7classes_9generated_VIEWPORT_USAGE_3D_NO_EFFECTS
+};
+typedef enum __pyx_t_7classes_9generated_Viewport_Usage __pyx_t_7classes_9generated_Viewport_Usage;
+
+/* "classes/generated.pxd":740
+ * ctypedef enum Viewport_RenderInfo :VIEWPORT_RENDER_INFO_OBJECTS_IN_FRAME, VIEWPORT_RENDER_INFO_VERTICES_IN_FRAME, VIEWPORT_RENDER_INFO_MATERIAL_CHANGES_IN_FRAME, VIEWPORT_RENDER_INFO_SHADER_CHANGES_IN_FRAME, VIEWPORT_RENDER_INFO_SURFACE_CHANGES_IN_FRAME, VIEWPORT_RENDER_INFO_DRAW_CALLS_IN_FRAME, VIEWPORT_RENDER_INFO_MAX
+ * ctypedef enum Viewport_Usage :VIEWPORT_USAGE_2D, VIEWPORT_USAGE_2D_NO_SAMPLING, VIEWPORT_USAGE_3D, VIEWPORT_USAGE_3D_NO_EFFECTS
+ * ctypedef enum Viewport_DebugDraw :VIEWPORT_DEBUG_DRAW_DISABLED, VIEWPORT_DEBUG_DRAW_UNSHADED, VIEWPORT_DEBUG_DRAW_OVERDRAW, VIEWPORT_DEBUG_DRAW_WIREFRAME             # <<<<<<<<<<<<<<
+ * ctypedef enum Viewport_ShadowAtlasQuadrantSubdiv :VIEWPORT_SHADOW_ATLAS_QUADRANT_SUBDIV_DISABLED, VIEWPORT_SHADOW_ATLAS_QUADRANT_SUBDIV_1, VIEWPORT_SHADOW_ATLAS_QUADRANT_SUBDIV_4, VIEWPORT_SHADOW_ATLAS_QUADRANT_SUBDIV_16, VIEWPORT_SHADOW_ATLAS_QUADRANT_SUBDIV_64, VIEWPORT_SHADOW_ATLAS_QUADRANT_SUBDIV_256, VIEWPORT_SHADOW_ATLAS_QUADRANT_SUBDIV_1024, VIEWPORT_SHADOW_ATLAS_QUADRANT_SUBDIV_MAX
+ * ctypedef enum Viewport_UpdateMode :VIEWPORT_UPDATE_DISABLED, VIEWPORT_UPDATE_ONCE, VIEWPORT_UPDATE_WHEN_VISIBLE, VIEWPORT_UPDATE_ALWAYS
+ */
+enum __pyx_t_7classes_9generated_Viewport_DebugDraw {
+  __pyx_e_7classes_9generated_VIEWPORT_DEBUG_DRAW_DISABLED,
+  __pyx_e_7classes_9generated_VIEWPORT_DEBUG_DRAW_UNSHADED,
+  __pyx_e_7classes_9generated_VIEWPORT_DEBUG_DRAW_OVERDRAW,
+  __pyx_e_7classes_9generated_VIEWPORT_DEBUG_DRAW_WIREFRAME
+};
+typedef enum __pyx_t_7classes_9generated_Viewport_DebugDraw __pyx_t_7classes_9generated_Viewport_DebugDraw;
+
+/* "classes/generated.pxd":741
+ * ctypedef enum Viewport_Usage :VIEWPORT_USAGE_2D, VIEWPORT_USAGE_2D_NO_SAMPLING, VIEWPORT_USAGE_3D, VIEWPORT_USAGE_3D_NO_EFFECTS
+ * ctypedef enum Viewport_DebugDraw :VIEWPORT_DEBUG_DRAW_DISABLED, VIEWPORT_DEBUG_DRAW_UNSHADED, VIEWPORT_DEBUG_DRAW_OVERDRAW, VIEWPORT_DEBUG_DRAW_WIREFRAME
+ * ctypedef enum Viewport_ShadowAtlasQuadrantSubdiv :VIEWPORT_SHADOW_ATLAS_QUADRANT_SUBDIV_DISABLED, VIEWPORT_SHADOW_ATLAS_QUADRANT_SUBDIV_1, VIEWPORT_SHADOW_ATLAS_QUADRANT_SUBDIV_4, VIEWPORT_SHADOW_ATLAS_QUADRANT_SUBDIV_16, VIEWPORT_SHADOW_ATLAS_QUADRANT_SUBDIV_64, VIEWPORT_SHADOW_ATLAS_QUADRANT_SUBDIV_256, VIEWPORT_SHADOW_ATLAS_QUADRANT_SUBDIV_1024, VIEWPORT_SHADOW_ATLAS_QUADRANT_SUBDIV_MAX             # <<<<<<<<<<<<<<
+ * ctypedef enum Viewport_UpdateMode :VIEWPORT_UPDATE_DISABLED, VIEWPORT_UPDATE_ONCE, VIEWPORT_UPDATE_WHEN_VISIBLE, VIEWPORT_UPDATE_ALWAYS
+ * ctypedef enum Viewport_MSAA :VIEWPORT_MSAA_DISABLED, VIEWPORT_MSAA_2X, VIEWPORT_MSAA_4X, VIEWPORT_MSAA_8X, VIEWPORT_MSAA_16X
+ */
+enum __pyx_t_7classes_9generated_Viewport_ShadowAtlasQuadrantSubdiv {
+  __pyx_e_7classes_9generated_VIEWPORT_SHADOW_ATLAS_QUADRANT_SUBDIV_DISABLED,
+  __pyx_e_7classes_9generated_VIEWPORT_SHADOW_ATLAS_QUADRANT_SUBDIV_1,
+  __pyx_e_7classes_9generated_VIEWPORT_SHADOW_ATLAS_QUADRANT_SUBDIV_4,
+  __pyx_e_7classes_9generated_VIEWPORT_SHADOW_ATLAS_QUADRANT_SUBDIV_16,
+  __pyx_e_7classes_9generated_VIEWPORT_SHADOW_ATLAS_QUADRANT_SUBDIV_64,
+  __pyx_e_7classes_9generated_VIEWPORT_SHADOW_ATLAS_QUADRANT_SUBDIV_256,
+  __pyx_e_7classes_9generated_VIEWPORT_SHADOW_ATLAS_QUADRANT_SUBDIV_1024,
+  __pyx_e_7classes_9generated_VIEWPORT_SHADOW_ATLAS_QUADRANT_SUBDIV_MAX
+};
+typedef enum __pyx_t_7classes_9generated_Viewport_ShadowAtlasQuadrantSubdiv __pyx_t_7classes_9generated_Viewport_ShadowAtlasQuadrantSubdiv;
+
+/* "classes/generated.pxd":742
+ * ctypedef enum Viewport_DebugDraw :VIEWPORT_DEBUG_DRAW_DISABLED, VIEWPORT_DEBUG_DRAW_UNSHADED, VIEWPORT_DEBUG_DRAW_OVERDRAW, VIEWPORT_DEBUG_DRAW_WIREFRAME
+ * ctypedef enum Viewport_ShadowAtlasQuadrantSubdiv :VIEWPORT_SHADOW_ATLAS_QUADRANT_SUBDIV_DISABLED, VIEWPORT_SHADOW_ATLAS_QUADRANT_SUBDIV_1, VIEWPORT_SHADOW_ATLAS_QUADRANT_SUBDIV_4, VIEWPORT_SHADOW_ATLAS_QUADRANT_SUBDIV_16, VIEWPORT_SHADOW_ATLAS_QUADRANT_SUBDIV_64, VIEWPORT_SHADOW_ATLAS_QUADRANT_SUBDIV_256, VIEWPORT_SHADOW_ATLAS_QUADRANT_SUBDIV_1024, VIEWPORT_SHADOW_ATLAS_QUADRANT_SUBDIV_MAX
+ * ctypedef enum Viewport_UpdateMode :VIEWPORT_UPDATE_DISABLED, VIEWPORT_UPDATE_ONCE, VIEWPORT_UPDATE_WHEN_VISIBLE, VIEWPORT_UPDATE_ALWAYS             # <<<<<<<<<<<<<<
+ * ctypedef enum Viewport_MSAA :VIEWPORT_MSAA_DISABLED, VIEWPORT_MSAA_2X, VIEWPORT_MSAA_4X, VIEWPORT_MSAA_8X, VIEWPORT_MSAA_16X
+ * 
+ */
+enum __pyx_t_7classes_9generated_Viewport_UpdateMode {
+  __pyx_e_7classes_9generated_VIEWPORT_UPDATE_DISABLED,
+  __pyx_e_7classes_9generated_VIEWPORT_UPDATE_ONCE,
+  __pyx_e_7classes_9generated_VIEWPORT_UPDATE_WHEN_VISIBLE,
+  __pyx_e_7classes_9generated_VIEWPORT_UPDATE_ALWAYS
+};
+typedef enum __pyx_t_7classes_9generated_Viewport_UpdateMode __pyx_t_7classes_9generated_Viewport_UpdateMode;
+
+/* "classes/generated.pxd":743
+ * ctypedef enum Viewport_ShadowAtlasQuadrantSubdiv :VIEWPORT_SHADOW_ATLAS_QUADRANT_SUBDIV_DISABLED, VIEWPORT_SHADOW_ATLAS_QUADRANT_SUBDIV_1, VIEWPORT_SHADOW_ATLAS_QUADRANT_SUBDIV_4, VIEWPORT_SHADOW_ATLAS_QUADRANT_SUBDIV_16, VIEWPORT_SHADOW_ATLAS_QUADRANT_SUBDIV_64, VIEWPORT_SHADOW_ATLAS_QUADRANT_SUBDIV_256, VIEWPORT_SHADOW_ATLAS_QUADRANT_SUBDIV_1024, VIEWPORT_SHADOW_ATLAS_QUADRANT_SUBDIV_MAX
+ * ctypedef enum Viewport_UpdateMode :VIEWPORT_UPDATE_DISABLED, VIEWPORT_UPDATE_ONCE, VIEWPORT_UPDATE_WHEN_VISIBLE, VIEWPORT_UPDATE_ALWAYS
+ * ctypedef enum Viewport_MSAA :VIEWPORT_MSAA_DISABLED, VIEWPORT_MSAA_2X, VIEWPORT_MSAA_4X, VIEWPORT_MSAA_8X, VIEWPORT_MSAA_16X             # <<<<<<<<<<<<<<
+ * 
+ * 
+ */
+enum __pyx_t_7classes_9generated_Viewport_MSAA {
+  __pyx_e_7classes_9generated_VIEWPORT_MSAA_DISABLED,
+  __pyx_e_7classes_9generated_VIEWPORT_MSAA_2X,
+  __pyx_e_7classes_9generated_VIEWPORT_MSAA_4X,
+  __pyx_e_7classes_9generated_VIEWPORT_MSAA_8X,
+  __pyx_e_7classes_9generated_VIEWPORT_MSAA_16X
+};
+typedef enum __pyx_t_7classes_9generated_Viewport_MSAA __pyx_t_7classes_9generated_Viewport_MSAA;
+
+/* "classes/generated.pxd":747
+ * 
+ * 
+ * ctypedef enum VisibilityEnabler_Enabler :VISIBILITYENABLER_ENABLER_PAUSE_ANIMATIONS, VISIBILITYENABLER_ENABLER_FREEZE_BODIES, VISIBILITYENABLER_ENABLER_MAX             # <<<<<<<<<<<<<<
+ * 
+ * ctypedef enum VisibilityEnabler2D_Enabler :VISIBILITYENABLER2D_ENABLER_PAUSE_ANIMATIONS, VISIBILITYENABLER2D_ENABLER_FREEZE_BODIES, VISIBILITYENABLER2D_ENABLER_PAUSE_PARTICLES, VISIBILITYENABLER2D_ENABLER_PARENT_PROCESS, VISIBILITYENABLER2D_ENABLER_PARENT_PHYSICS_PROCESS, VISIBILITYENABLER2D_ENABLER_PAUSE_ANIMATED_SPRITES, VISIBILITYENABLER2D_ENABLER_MAX
+ */
+enum __pyx_t_7classes_9generated_VisibilityEnabler_Enabler {
+  __pyx_e_7classes_9generated_VISIBILITYENABLER_ENABLER_PAUSE_ANIMATIONS,
+  __pyx_e_7classes_9generated_VISIBILITYENABLER_ENABLER_FREEZE_BODIES,
+  __pyx_e_7classes_9generated_VISIBILITYENABLER_ENABLER_MAX
+};
+typedef enum __pyx_t_7classes_9generated_VisibilityEnabler_Enabler __pyx_t_7classes_9generated_VisibilityEnabler_Enabler;
+
+/* "classes/generated.pxd":749
+ * ctypedef enum VisibilityEnabler_Enabler :VISIBILITYENABLER_ENABLER_PAUSE_ANIMATIONS, VISIBILITYENABLER_ENABLER_FREEZE_BODIES, VISIBILITYENABLER_ENABLER_MAX
+ * 
+ * ctypedef enum VisibilityEnabler2D_Enabler :VISIBILITYENABLER2D_ENABLER_PAUSE_ANIMATIONS, VISIBILITYENABLER2D_ENABLER_FREEZE_BODIES, VISIBILITYENABLER2D_ENABLER_PAUSE_PARTICLES, VISIBILITYENABLER2D_ENABLER_PARENT_PROCESS, VISIBILITYENABLER2D_ENABLER_PARENT_PHYSICS_PROCESS, VISIBILITYENABLER2D_ENABLER_PAUSE_ANIMATED_SPRITES, VISIBILITYENABLER2D_ENABLER_MAX             # <<<<<<<<<<<<<<
+ * 
+ * 
+ */
+enum __pyx_t_7classes_9generated_VisibilityEnabler2D_Enabler {
+  __pyx_e_7classes_9generated_VISIBILITYENABLER2D_ENABLER_PAUSE_ANIMATIONS,
+  __pyx_e_7classes_9generated_VISIBILITYENABLER2D_ENABLER_FREEZE_BODIES,
+  __pyx_e_7classes_9generated_VISIBILITYENABLER2D_ENABLER_PAUSE_PARTICLES,
+  __pyx_e_7classes_9generated_VISIBILITYENABLER2D_ENABLER_PARENT_PROCESS,
+  __pyx_e_7classes_9generated_VISIBILITYENABLER2D_ENABLER_PARENT_PHYSICS_PROCESS,
+  __pyx_e_7classes_9generated_VISIBILITYENABLER2D_ENABLER_PAUSE_ANIMATED_SPRITES,
+  __pyx_e_7classes_9generated_VISIBILITYENABLER2D_ENABLER_MAX
+};
+typedef enum __pyx_t_7classes_9generated_VisibilityEnabler2D_Enabler __pyx_t_7classes_9generated_VisibilityEnabler2D_Enabler;
+
+/* "classes/generated.pxd":756
+ * 
+ * 
+ * ctypedef enum VisualScriptBuiltinFunc_BuiltinFunc :VISUALSCRIPTBUILTINFUNC_MATH_SIN, VISUALSCRIPTBUILTINFUNC_MATH_COS, VISUALSCRIPTBUILTINFUNC_MATH_TAN, VISUALSCRIPTBUILTINFUNC_MATH_SINH, VISUALSCRIPTBUILTINFUNC_MATH_COSH, VISUALSCRIPTBUILTINFUNC_MATH_TANH, VISUALSCRIPTBUILTINFUNC_MATH_ASIN, VISUALSCRIPTBUILTINFUNC_MATH_ACOS, VISUALSCRIPTBUILTINFUNC_MATH_ATAN, VISUALSCRIPTBUILTINFUNC_MATH_ATAN2, VISUALSCRIPTBUILTINFUNC_MATH_SQRT, VISUALSCRIPTBUILTINFUNC_MATH_FMOD, VISUALSCRIPTBUILTINFUNC_MATH_FPOSMOD, VISUALSCRIPTBUILTINFUNC_MATH_FLOOR, VISUALSCRIPTBUILTINFUNC_MATH_CEIL, VISUALSCRIPTBUILTINFUNC_MATH_ROUND, VISUALSCRIPTBUILTINFUNC_MATH_ABS, VISUALSCRIPTBUILTINFUNC_MATH_SIGN, VISUALSCRIPTBUILTINFUNC_MATH_POW, VISUALSCRIPTBUILTINFUNC_MATH_LOG, VISUALSCRIPTBUILTINFUNC_MATH_EXP, VISUALSCRIPTBUILTINFUNC_MATH_ISNAN, VISUALSCRIPTBUILTINFUNC_MATH_ISINF, VISUALSCRIPTBUILTINFUNC_MATH_EASE, VISUALSCRIPTBUILTINFUNC_MATH_DECIMALS, VISUALSCRIPTBUILTINFUNC_MATH_STEPIFY, VISUALSCRIPTBUILTINFUNC_MATH_LERP, VISUALSCRIPTBUILTINFUNC_MATH_INVERSE_LERP, VISUALSCRIPTBUILTINFUNC_MATH_RANGE_LERP, VISUALSCRIPTBUILTINFUNC_MATH_MOVE_TOWARD, VISUALSCRIPTBUILTINFUNC_MATH_DECTIME, VISUALSCRIPTBUILTINFUNC_MATH_RANDOMIZE, VISUALSCRIPTBUILTINFUNC_MATH_RAND, VISUALSCRIPTBUILTINFUNC_MATH_RANDF, VISUALSCRIPTBUILTINFUNC_MATH_RANDOM, VISUALSCRIPTBUILTINFUNC_MATH_SEED, VISUALSCRIPTBUILTINFUNC_MATH_RANDSEED, VISUALSCRIPTBUILTINFUNC_MATH_DEG2RAD, VISUALSCRIPTBUILTINFUNC_MATH_RAD2DEG, VISUALSCRIPTBUILTINFUNC_MATH_LINEAR2DB, VISUALSCRIPTBUILTINFUNC_MATH_DB2LINEAR, VISUALSCRIPTBUILTINFUNC_MATH_POLAR2CARTESIAN, VISUALSCRIPTBUILTINFUNC_MATH_CARTESIAN2POLAR, VISUALSCRIPTBUILTINFUNC_MATH_WRAP, VISUALSCRIPTBUILTINFUNC_MATH_WRAPF, VISUALSCRIPTBUILTINFUNC_LOGIC_MAX, VISUALSCRIPTBUILTINFUNC_LOGIC_MIN, VISUALSCRIPTBUILTINFUNC_LOGIC_CLAMP, VISUALSCRIPTBUILTINFUNC_LOGIC_NEAREST_PO2, VISUALSCRIPTBUILTINFUNC_OBJ_WEAKREF, VISUALSCRIPTBUILTINFUNC_FUNC_FUNCREF, VISUALSCRIPTBUILTINFUNC_TYPE_CONVERT, VISUALSCRIPTBUILTINFUNC_TYPE_OF, VISUALSCRIPTBUILTINFUNC_TYPE_EXISTS, VISUALSCRIPTBUILTINFUNC_TEXT_CHAR, VISUALSCRIPTBUILTINFUNC_TEXT_STR, VISUALSCRIPTBUILTINFUNC_TEXT_PRINT, VISUALSCRIPTBUILTINFUNC_TEXT_PRINTERR, VISUALSCRIPTBUILTINFUNC_TEXT_PRINTRAW, VISUALSCRIPTBUILTINFUNC_VAR_TO_STR, VISUALSCRIPTBUILTINFUNC_STR_TO_VAR, VISUALSCRIPTBUILTINFUNC_VAR_TO_BYTES, VISUALSCRIPTBUILTINFUNC_BYTES_TO_VAR, VISUALSCRIPTBUILTINFUNC_COLORN, VISUALSCRIPTBUILTINFUNC_MATH_SMOOTHSTEP, VISUALSCRIPTBUILTINFUNC_MATH_POSMOD, VISUALSCRIPTBUILTINFUNC_MATH_LERP_ANGLE, VISUALSCRIPTBUILTINFUNC_TEXT_ORD, VISUALSCRIPTBUILTINFUNC_FUNC_MAX             # <<<<<<<<<<<<<<
+ * 
+ * 
+ */
+enum __pyx_t_7classes_9generated_VisualScriptBuiltinFunc_BuiltinFunc {
+  __pyx_e_7classes_9generated_VISUALSCRIPTBUILTINFUNC_MATH_SIN,
+  __pyx_e_7classes_9generated_VISUALSCRIPTBUILTINFUNC_MATH_COS,
+  __pyx_e_7classes_9generated_VISUALSCRIPTBUILTINFUNC_MATH_TAN,
+  __pyx_e_7classes_9generated_VISUALSCRIPTBUILTINFUNC_MATH_SINH,
+  __pyx_e_7classes_9generated_VISUALSCRIPTBUILTINFUNC_MATH_COSH,
+  __pyx_e_7classes_9generated_VISUALSCRIPTBUILTINFUNC_MATH_TANH,
+  __pyx_e_7classes_9generated_VISUALSCRIPTBUILTINFUNC_MATH_ASIN,
+  __pyx_e_7classes_9generated_VISUALSCRIPTBUILTINFUNC_MATH_ACOS,
+  __pyx_e_7classes_9generated_VISUALSCRIPTBUILTINFUNC_MATH_ATAN,
+  __pyx_e_7classes_9generated_VISUALSCRIPTBUILTINFUNC_MATH_ATAN2,
+  __pyx_e_7classes_9generated_VISUALSCRIPTBUILTINFUNC_MATH_SQRT,
+  __pyx_e_7classes_9generated_VISUALSCRIPTBUILTINFUNC_MATH_FMOD,
+  __pyx_e_7classes_9generated_VISUALSCRIPTBUILTINFUNC_MATH_FPOSMOD,
+  __pyx_e_7classes_9generated_VISUALSCRIPTBUILTINFUNC_MATH_FLOOR,
+  __pyx_e_7classes_9generated_VISUALSCRIPTBUILTINFUNC_MATH_CEIL,
+  __pyx_e_7classes_9generated_VISUALSCRIPTBUILTINFUNC_MATH_ROUND,
+  __pyx_e_7classes_9generated_VISUALSCRIPTBUILTINFUNC_MATH_ABS,
+  __pyx_e_7classes_9generated_VISUALSCRIPTBUILTINFUNC_MATH_SIGN,
+  __pyx_e_7classes_9generated_VISUALSCRIPTBUILTINFUNC_MATH_POW,
+  __pyx_e_7classes_9generated_VISUALSCRIPTBUILTINFUNC_MATH_LOG,
+  __pyx_e_7classes_9generated_VISUALSCRIPTBUILTINFUNC_MATH_EXP,
+  __pyx_e_7classes_9generated_VISUALSCRIPTBUILTINFUNC_MATH_ISNAN,
+  __pyx_e_7classes_9generated_VISUALSCRIPTBUILTINFUNC_MATH_ISINF,
+  __pyx_e_7classes_9generated_VISUALSCRIPTBUILTINFUNC_MATH_EASE,
+  __pyx_e_7classes_9generated_VISUALSCRIPTBUILTINFUNC_MATH_DECIMALS,
+  __pyx_e_7classes_9generated_VISUALSCRIPTBUILTINFUNC_MATH_STEPIFY,
+  __pyx_e_7classes_9generated_VISUALSCRIPTBUILTINFUNC_MATH_LERP,
+  __pyx_e_7classes_9generated_VISUALSCRIPTBUILTINFUNC_MATH_INVERSE_LERP,
+  __pyx_e_7classes_9generated_VISUALSCRIPTBUILTINFUNC_MATH_RANGE_LERP,
+  __pyx_e_7classes_9generated_VISUALSCRIPTBUILTINFUNC_MATH_MOVE_TOWARD,
+  __pyx_e_7classes_9generated_VISUALSCRIPTBUILTINFUNC_MATH_DECTIME,
+  __pyx_e_7classes_9generated_VISUALSCRIPTBUILTINFUNC_MATH_RANDOMIZE,
+  __pyx_e_7classes_9generated_VISUALSCRIPTBUILTINFUNC_MATH_RAND,
+  __pyx_e_7classes_9generated_VISUALSCRIPTBUILTINFUNC_MATH_RANDF,
+  __pyx_e_7classes_9generated_VISUALSCRIPTBUILTINFUNC_MATH_RANDOM,
+  __pyx_e_7classes_9generated_VISUALSCRIPTBUILTINFUNC_MATH_SEED,
+  __pyx_e_7classes_9generated_VISUALSCRIPTBUILTINFUNC_MATH_RANDSEED,
+  __pyx_e_7classes_9generated_VISUALSCRIPTBUILTINFUNC_MATH_DEG2RAD,
+  __pyx_e_7classes_9generated_VISUALSCRIPTBUILTINFUNC_MATH_RAD2DEG,
+  __pyx_e_7classes_9generated_VISUALSCRIPTBUILTINFUNC_MATH_LINEAR2DB,
+  __pyx_e_7classes_9generated_VISUALSCRIPTBUILTINFUNC_MATH_DB2LINEAR,
+  __pyx_e_7classes_9generated_VISUALSCRIPTBUILTINFUNC_MATH_POLAR2CARTESIAN,
+  __pyx_e_7classes_9generated_VISUALSCRIPTBUILTINFUNC_MATH_CARTESIAN2POLAR,
+  __pyx_e_7classes_9generated_VISUALSCRIPTBUILTINFUNC_MATH_WRAP,
+  __pyx_e_7classes_9generated_VISUALSCRIPTBUILTINFUNC_MATH_WRAPF,
+  __pyx_e_7classes_9generated_VISUALSCRIPTBUILTINFUNC_LOGIC_MAX,
+  __pyx_e_7classes_9generated_VISUALSCRIPTBUILTINFUNC_LOGIC_MIN,
+  __pyx_e_7classes_9generated_VISUALSCRIPTBUILTINFUNC_LOGIC_CLAMP,
+  __pyx_e_7classes_9generated_VISUALSCRIPTBUILTINFUNC_LOGIC_NEAREST_PO2,
+  __pyx_e_7classes_9generated_VISUALSCRIPTBUILTINFUNC_OBJ_WEAKREF,
+  __pyx_e_7classes_9generated_VISUALSCRIPTBUILTINFUNC_FUNC_FUNCREF,
+  __pyx_e_7classes_9generated_VISUALSCRIPTBUILTINFUNC_TYPE_CONVERT,
+  __pyx_e_7classes_9generated_VISUALSCRIPTBUILTINFUNC_TYPE_OF,
+  __pyx_e_7classes_9generated_VISUALSCRIPTBUILTINFUNC_TYPE_EXISTS,
+  __pyx_e_7classes_9generated_VISUALSCRIPTBUILTINFUNC_TEXT_CHAR,
+  __pyx_e_7classes_9generated_VISUALSCRIPTBUILTINFUNC_TEXT_STR,
+  __pyx_e_7classes_9generated_VISUALSCRIPTBUILTINFUNC_TEXT_PRINT,
+  __pyx_e_7classes_9generated_VISUALSCRIPTBUILTINFUNC_TEXT_PRINTERR,
+  __pyx_e_7classes_9generated_VISUALSCRIPTBUILTINFUNC_TEXT_PRINTRAW,
+  __pyx_e_7classes_9generated_VISUALSCRIPTBUILTINFUNC_VAR_TO_STR,
+  __pyx_e_7classes_9generated_VISUALSCRIPTBUILTINFUNC_STR_TO_VAR,
+  __pyx_e_7classes_9generated_VISUALSCRIPTBUILTINFUNC_VAR_TO_BYTES,
+  __pyx_e_7classes_9generated_VISUALSCRIPTBUILTINFUNC_BYTES_TO_VAR,
+  __pyx_e_7classes_9generated_VISUALSCRIPTBUILTINFUNC_COLORN,
+  __pyx_e_7classes_9generated_VISUALSCRIPTBUILTINFUNC_MATH_SMOOTHSTEP,
+  __pyx_e_7classes_9generated_VISUALSCRIPTBUILTINFUNC_MATH_POSMOD,
+  __pyx_e_7classes_9generated_VISUALSCRIPTBUILTINFUNC_MATH_LERP_ANGLE,
+  __pyx_e_7classes_9generated_VISUALSCRIPTBUILTINFUNC_TEXT_ORD,
+  __pyx_e_7classes_9generated_VISUALSCRIPTBUILTINFUNC_FUNC_MAX
+};
+typedef enum __pyx_t_7classes_9generated_VisualScriptBuiltinFunc_BuiltinFunc __pyx_t_7classes_9generated_VisualScriptBuiltinFunc_BuiltinFunc;
+
+/* "classes/generated.pxd":764
+ * 
+ * 
+ * ctypedef enum VisualScriptCustomNode_StartMode :VISUALSCRIPTCUSTOMNODE_START_MODE_BEGIN_SEQUENCE, VISUALSCRIPTCUSTOMNODE_START_MODE_CONTINUE_SEQUENCE, VISUALSCRIPTCUSTOMNODE_START_MODE_RESUME_YIELD             # <<<<<<<<<<<<<<
+ * 
+ * 
+ */
+enum __pyx_t_7classes_9generated_VisualScriptCustomNode_StartMode {
+  __pyx_e_7classes_9generated_VISUALSCRIPTCUSTOMNODE_START_MODE_BEGIN_SEQUENCE,
+  __pyx_e_7classes_9generated_VISUALSCRIPTCUSTOMNODE_START_MODE_CONTINUE_SEQUENCE,
+  __pyx_e_7classes_9generated_VISUALSCRIPTCUSTOMNODE_START_MODE_RESUME_YIELD
+};
+typedef enum __pyx_t_7classes_9generated_VisualScriptCustomNode_StartMode __pyx_t_7classes_9generated_VisualScriptCustomNode_StartMode;
+
+/* "classes/generated.pxd":771
+ * 
+ * 
+ * ctypedef enum VisualScriptFunctionCall_RPCCallMode :VISUALSCRIPTFUNCTIONCALL_RPC_DISABLED, VISUALSCRIPTFUNCTIONCALL_RPC_RELIABLE, VISUALSCRIPTFUNCTIONCALL_RPC_UNRELIABLE, VISUALSCRIPTFUNCTIONCALL_RPC_RELIABLE_TO_ID, VISUALSCRIPTFUNCTIONCALL_RPC_UNRELIABLE_TO_ID             # <<<<<<<<<<<<<<
+ * ctypedef enum VisualScriptFunctionCall_CallMode :VISUALSCRIPTFUNCTIONCALL_CALL_MODE_SELF, VISUALSCRIPTFUNCTIONCALL_CALL_MODE_NODE_PATH, VISUALSCRIPTFUNCTIONCALL_CALL_MODE_INSTANCE, VISUALSCRIPTFUNCTIONCALL_CALL_MODE_BASIC_TYPE, VISUALSCRIPTFUNCTIONCALL_CALL_MODE_SINGLETON
+ * 
+ */
+enum __pyx_t_7classes_9generated_VisualScriptFunctionCall_RPCCallMode {
+  __pyx_e_7classes_9generated_VISUALSCRIPTFUNCTIONCALL_RPC_DISABLED,
+  __pyx_e_7classes_9generated_VISUALSCRIPTFUNCTIONCALL_RPC_RELIABLE,
+  __pyx_e_7classes_9generated_VISUALSCRIPTFUNCTIONCALL_RPC_UNRELIABLE,
+  __pyx_e_7classes_9generated_VISUALSCRIPTFUNCTIONCALL_RPC_RELIABLE_TO_ID,
+  __pyx_e_7classes_9generated_VISUALSCRIPTFUNCTIONCALL_RPC_UNRELIABLE_TO_ID
+};
+typedef enum __pyx_t_7classes_9generated_VisualScriptFunctionCall_RPCCallMode __pyx_t_7classes_9generated_VisualScriptFunctionCall_RPCCallMode;
+
+/* "classes/generated.pxd":772
+ * 
+ * ctypedef enum VisualScriptFunctionCall_RPCCallMode :VISUALSCRIPTFUNCTIONCALL_RPC_DISABLED, VISUALSCRIPTFUNCTIONCALL_RPC_RELIABLE, VISUALSCRIPTFUNCTIONCALL_RPC_UNRELIABLE, VISUALSCRIPTFUNCTIONCALL_RPC_RELIABLE_TO_ID, VISUALSCRIPTFUNCTIONCALL_RPC_UNRELIABLE_TO_ID
+ * ctypedef enum VisualScriptFunctionCall_CallMode :VISUALSCRIPTFUNCTIONCALL_CALL_MODE_SELF, VISUALSCRIPTFUNCTIONCALL_CALL_MODE_NODE_PATH, VISUALSCRIPTFUNCTIONCALL_CALL_MODE_INSTANCE, VISUALSCRIPTFUNCTIONCALL_CALL_MODE_BASIC_TYPE, VISUALSCRIPTFUNCTIONCALL_CALL_MODE_SINGLETON             # <<<<<<<<<<<<<<
+ * 
+ * 
+ */
+enum __pyx_t_7classes_9generated_VisualScriptFunctionCall_CallMode {
+  __pyx_e_7classes_9generated_VISUALSCRIPTFUNCTIONCALL_CALL_MODE_SELF,
+  __pyx_e_7classes_9generated_VISUALSCRIPTFUNCTIONCALL_CALL_MODE_NODE_PATH,
+  __pyx_e_7classes_9generated_VISUALSCRIPTFUNCTIONCALL_CALL_MODE_INSTANCE,
+  __pyx_e_7classes_9generated_VISUALSCRIPTFUNCTIONCALL_CALL_MODE_BASIC_TYPE,
+  __pyx_e_7classes_9generated_VISUALSCRIPTFUNCTIONCALL_CALL_MODE_SINGLETON
+};
+typedef enum __pyx_t_7classes_9generated_VisualScriptFunctionCall_CallMode __pyx_t_7classes_9generated_VisualScriptFunctionCall_CallMode;
+
+/* "classes/generated.pxd":778
+ * 
+ * 
+ * ctypedef enum VisualScriptInputAction_Mode :VISUALSCRIPTINPUTACTION_MODE_PRESSED, VISUALSCRIPTINPUTACTION_MODE_RELEASED, VISUALSCRIPTINPUTACTION_MODE_JUST_PRESSED, VISUALSCRIPTINPUTACTION_MODE_JUST_RELEASED             # <<<<<<<<<<<<<<
+ * 
+ * 
+ */
+enum __pyx_t_7classes_9generated_VisualScriptInputAction_Mode {
+  __pyx_e_7classes_9generated_VISUALSCRIPTINPUTACTION_MODE_PRESSED,
+  __pyx_e_7classes_9generated_VISUALSCRIPTINPUTACTION_MODE_RELEASED,
+  __pyx_e_7classes_9generated_VISUALSCRIPTINPUTACTION_MODE_JUST_PRESSED,
+  __pyx_e_7classes_9generated_VISUALSCRIPTINPUTACTION_MODE_JUST_RELEASED
+};
+typedef enum __pyx_t_7classes_9generated_VisualScriptInputAction_Mode __pyx_t_7classes_9generated_VisualScriptInputAction_Mode;
+
+/* "classes/generated.pxd":784
+ * 
+ * 
+ * ctypedef enum VisualScriptMathConstant_MathConstant :VISUALSCRIPTMATHCONSTANT_MATH_CONSTANT_ONE, VISUALSCRIPTMATHCONSTANT_MATH_CONSTANT_PI, VISUALSCRIPTMATHCONSTANT_MATH_CONSTANT_HALF_PI, VISUALSCRIPTMATHCONSTANT_MATH_CONSTANT_TAU, VISUALSCRIPTMATHCONSTANT_MATH_CONSTANT_E, VISUALSCRIPTMATHCONSTANT_MATH_CONSTANT_SQRT2, VISUALSCRIPTMATHCONSTANT_MATH_CONSTANT_INF, VISUALSCRIPTMATHCONSTANT_MATH_CONSTANT_NAN, VISUALSCRIPTMATHCONSTANT_MATH_CONSTANT_MAX             # <<<<<<<<<<<<<<
+ * 
+ * 
+ */
+enum __pyx_t_7classes_9generated_VisualScriptMathConstant_MathConstant {
+  __pyx_e_7classes_9generated_VISUALSCRIPTMATHCONSTANT_MATH_CONSTANT_ONE,
+  __pyx_e_7classes_9generated_VISUALSCRIPTMATHCONSTANT_MATH_CONSTANT_PI,
+  __pyx_e_7classes_9generated_VISUALSCRIPTMATHCONSTANT_MATH_CONSTANT_HALF_PI,
+  __pyx_e_7classes_9generated_VISUALSCRIPTMATHCONSTANT_MATH_CONSTANT_TAU,
+  __pyx_e_7classes_9generated_VISUALSCRIPTMATHCONSTANT_MATH_CONSTANT_E,
+  __pyx_e_7classes_9generated_VISUALSCRIPTMATHCONSTANT_MATH_CONSTANT_SQRT2,
+  __pyx_e_7classes_9generated_VISUALSCRIPTMATHCONSTANT_MATH_CONSTANT_INF,
+  __pyx_e_7classes_9generated_VISUALSCRIPTMATHCONSTANT_MATH_CONSTANT_NAN,
+  __pyx_e_7classes_9generated_VISUALSCRIPTMATHCONSTANT_MATH_CONSTANT_MAX
+};
+typedef enum __pyx_t_7classes_9generated_VisualScriptMathConstant_MathConstant __pyx_t_7classes_9generated_VisualScriptMathConstant_MathConstant;
+
+/* "classes/generated.pxd":789
+ * 
+ * 
+ * ctypedef enum VisualScriptPropertyGet_CallMode :VISUALSCRIPTPROPERTYGET_CALL_MODE_SELF, VISUALSCRIPTPROPERTYGET_CALL_MODE_NODE_PATH, VISUALSCRIPTPROPERTYGET_CALL_MODE_INSTANCE             # <<<<<<<<<<<<<<
+ * 
+ * ctypedef enum VisualScriptPropertySet_AssignOp :VISUALSCRIPTPROPERTYSET_ASSIGN_OP_NONE, VISUALSCRIPTPROPERTYSET_ASSIGN_OP_ADD, VISUALSCRIPTPROPERTYSET_ASSIGN_OP_SUB, VISUALSCRIPTPROPERTYSET_ASSIGN_OP_MUL, VISUALSCRIPTPROPERTYSET_ASSIGN_OP_DIV, VISUALSCRIPTPROPERTYSET_ASSIGN_OP_MOD, VISUALSCRIPTPROPERTYSET_ASSIGN_OP_SHIFT_LEFT, VISUALSCRIPTPROPERTYSET_ASSIGN_OP_SHIFT_RIGHT, VISUALSCRIPTPROPERTYSET_ASSIGN_OP_BIT_AND, VISUALSCRIPTPROPERTYSET_ASSIGN_OP_BIT_OR, VISUALSCRIPTPROPERTYSET_ASSIGN_OP_BIT_XOR
+ */
+enum __pyx_t_7classes_9generated_VisualScriptPropertyGet_CallMode {
+  __pyx_e_7classes_9generated_VISUALSCRIPTPROPERTYGET_CALL_MODE_SELF,
+  __pyx_e_7classes_9generated_VISUALSCRIPTPROPERTYGET_CALL_MODE_NODE_PATH,
+  __pyx_e_7classes_9generated_VISUALSCRIPTPROPERTYGET_CALL_MODE_INSTANCE
+};
+typedef enum __pyx_t_7classes_9generated_VisualScriptPropertyGet_CallMode __pyx_t_7classes_9generated_VisualScriptPropertyGet_CallMode;
+
+/* "classes/generated.pxd":791
+ * ctypedef enum VisualScriptPropertyGet_CallMode :VISUALSCRIPTPROPERTYGET_CALL_MODE_SELF, VISUALSCRIPTPROPERTYGET_CALL_MODE_NODE_PATH, VISUALSCRIPTPROPERTYGET_CALL_MODE_INSTANCE
+ * 
+ * ctypedef enum VisualScriptPropertySet_AssignOp :VISUALSCRIPTPROPERTYSET_ASSIGN_OP_NONE, VISUALSCRIPTPROPERTYSET_ASSIGN_OP_ADD, VISUALSCRIPTPROPERTYSET_ASSIGN_OP_SUB, VISUALSCRIPTPROPERTYSET_ASSIGN_OP_MUL, VISUALSCRIPTPROPERTYSET_ASSIGN_OP_DIV, VISUALSCRIPTPROPERTYSET_ASSIGN_OP_MOD, VISUALSCRIPTPROPERTYSET_ASSIGN_OP_SHIFT_LEFT, VISUALSCRIPTPROPERTYSET_ASSIGN_OP_SHIFT_RIGHT, VISUALSCRIPTPROPERTYSET_ASSIGN_OP_BIT_AND, VISUALSCRIPTPROPERTYSET_ASSIGN_OP_BIT_OR, VISUALSCRIPTPROPERTYSET_ASSIGN_OP_BIT_XOR             # <<<<<<<<<<<<<<
+ * ctypedef enum VisualScriptPropertySet_CallMode :VISUALSCRIPTPROPERTYSET_CALL_MODE_SELF, VISUALSCRIPTPROPERTYSET_CALL_MODE_NODE_PATH, VISUALSCRIPTPROPERTYSET_CALL_MODE_INSTANCE, VISUALSCRIPTPROPERTYSET_CALL_MODE_BASIC_TYPE
+ * 
+ */
+enum __pyx_t_7classes_9generated_VisualScriptPropertySet_AssignOp {
+  __pyx_e_7classes_9generated_VISUALSCRIPTPROPERTYSET_ASSIGN_OP_NONE,
+  __pyx_e_7classes_9generated_VISUALSCRIPTPROPERTYSET_ASSIGN_OP_ADD,
+  __pyx_e_7classes_9generated_VISUALSCRIPTPROPERTYSET_ASSIGN_OP_SUB,
+  __pyx_e_7classes_9generated_VISUALSCRIPTPROPERTYSET_ASSIGN_OP_MUL,
+  __pyx_e_7classes_9generated_VISUALSCRIPTPROPERTYSET_ASSIGN_OP_DIV,
+  __pyx_e_7classes_9generated_VISUALSCRIPTPROPERTYSET_ASSIGN_OP_MOD,
+  __pyx_e_7classes_9generated_VISUALSCRIPTPROPERTYSET_ASSIGN_OP_SHIFT_LEFT,
+  __pyx_e_7classes_9generated_VISUALSCRIPTPROPERTYSET_ASSIGN_OP_SHIFT_RIGHT,
+  __pyx_e_7classes_9generated_VISUALSCRIPTPROPERTYSET_ASSIGN_OP_BIT_AND,
+  __pyx_e_7classes_9generated_VISUALSCRIPTPROPERTYSET_ASSIGN_OP_BIT_OR,
+  __pyx_e_7classes_9generated_VISUALSCRIPTPROPERTYSET_ASSIGN_OP_BIT_XOR
+};
+typedef enum __pyx_t_7classes_9generated_VisualScriptPropertySet_AssignOp __pyx_t_7classes_9generated_VisualScriptPropertySet_AssignOp;
+
+/* "classes/generated.pxd":792
+ * 
+ * ctypedef enum VisualScriptPropertySet_AssignOp :VISUALSCRIPTPROPERTYSET_ASSIGN_OP_NONE, VISUALSCRIPTPROPERTYSET_ASSIGN_OP_ADD, VISUALSCRIPTPROPERTYSET_ASSIGN_OP_SUB, VISUALSCRIPTPROPERTYSET_ASSIGN_OP_MUL, VISUALSCRIPTPROPERTYSET_ASSIGN_OP_DIV, VISUALSCRIPTPROPERTYSET_ASSIGN_OP_MOD, VISUALSCRIPTPROPERTYSET_ASSIGN_OP_SHIFT_LEFT, VISUALSCRIPTPROPERTYSET_ASSIGN_OP_SHIFT_RIGHT, VISUALSCRIPTPROPERTYSET_ASSIGN_OP_BIT_AND, VISUALSCRIPTPROPERTYSET_ASSIGN_OP_BIT_OR, VISUALSCRIPTPROPERTYSET_ASSIGN_OP_BIT_XOR
+ * ctypedef enum VisualScriptPropertySet_CallMode :VISUALSCRIPTPROPERTYSET_CALL_MODE_SELF, VISUALSCRIPTPROPERTYSET_CALL_MODE_NODE_PATH, VISUALSCRIPTPROPERTYSET_CALL_MODE_INSTANCE, VISUALSCRIPTPROPERTYSET_CALL_MODE_BASIC_TYPE             # <<<<<<<<<<<<<<
+ * 
+ * 
+ */
+enum __pyx_t_7classes_9generated_VisualScriptPropertySet_CallMode {
+  __pyx_e_7classes_9generated_VISUALSCRIPTPROPERTYSET_CALL_MODE_SELF,
+  __pyx_e_7classes_9generated_VISUALSCRIPTPROPERTYSET_CALL_MODE_NODE_PATH,
+  __pyx_e_7classes_9generated_VISUALSCRIPTPROPERTYSET_CALL_MODE_INSTANCE,
+  __pyx_e_7classes_9generated_VISUALSCRIPTPROPERTYSET_CALL_MODE_BASIC_TYPE
+};
+typedef enum __pyx_t_7classes_9generated_VisualScriptPropertySet_CallMode __pyx_t_7classes_9generated_VisualScriptPropertySet_CallMode;
+
+/* "classes/generated.pxd":807
+ * 
+ * 
+ * ctypedef enum VisualScriptYield_YieldMode :VISUALSCRIPTYIELD_YIELD_FRAME, VISUALSCRIPTYIELD_YIELD_PHYSICS_FRAME, VISUALSCRIPTYIELD_YIELD_WAIT             # <<<<<<<<<<<<<<
+ * 
+ * ctypedef enum VisualScriptYieldSignal_CallMode :VISUALSCRIPTYIELDSIGNAL_CALL_MODE_SELF, VISUALSCRIPTYIELDSIGNAL_CALL_MODE_NODE_PATH, VISUALSCRIPTYIELDSIGNAL_CALL_MODE_INSTANCE
+ */
+enum __pyx_t_7classes_9generated_VisualScriptYield_YieldMode {
+  __pyx_e_7classes_9generated_VISUALSCRIPTYIELD_YIELD_FRAME,
+  __pyx_e_7classes_9generated_VISUALSCRIPTYIELD_YIELD_PHYSICS_FRAME,
+  __pyx_e_7classes_9generated_VISUALSCRIPTYIELD_YIELD_WAIT
+};
+typedef enum __pyx_t_7classes_9generated_VisualScriptYield_YieldMode __pyx_t_7classes_9generated_VisualScriptYield_YieldMode;
+
+/* "classes/generated.pxd":809
+ * ctypedef enum VisualScriptYield_YieldMode :VISUALSCRIPTYIELD_YIELD_FRAME, VISUALSCRIPTYIELD_YIELD_PHYSICS_FRAME, VISUALSCRIPTYIELD_YIELD_WAIT
+ * 
+ * ctypedef enum VisualScriptYieldSignal_CallMode :VISUALSCRIPTYIELDSIGNAL_CALL_MODE_SELF, VISUALSCRIPTYIELDSIGNAL_CALL_MODE_NODE_PATH, VISUALSCRIPTYIELDSIGNAL_CALL_MODE_INSTANCE             # <<<<<<<<<<<<<<
+ * 
+ * ctypedef enum VisualServer_ReflectionProbeUpdateMode :VISUALSERVER_REFLECTION_PROBE_UPDATE_ONCE, VISUALSERVER_REFLECTION_PROBE_UPDATE_ALWAYS
+ */
+enum __pyx_t_7classes_9generated_VisualScriptYieldSignal_CallMode {
+  __pyx_e_7classes_9generated_VISUALSCRIPTYIELDSIGNAL_CALL_MODE_SELF,
+  __pyx_e_7classes_9generated_VISUALSCRIPTYIELDSIGNAL_CALL_MODE_NODE_PATH,
+  __pyx_e_7classes_9generated_VISUALSCRIPTYIELDSIGNAL_CALL_MODE_INSTANCE
+};
+typedef enum __pyx_t_7classes_9generated_VisualScriptYieldSignal_CallMode __pyx_t_7classes_9generated_VisualScriptYieldSignal_CallMode;
+
+/* "classes/generated.pxd":811
+ * ctypedef enum VisualScriptYieldSignal_CallMode :VISUALSCRIPTYIELDSIGNAL_CALL_MODE_SELF, VISUALSCRIPTYIELDSIGNAL_CALL_MODE_NODE_PATH, VISUALSCRIPTYIELDSIGNAL_CALL_MODE_INSTANCE
+ * 
+ * ctypedef enum VisualServer_ReflectionProbeUpdateMode :VISUALSERVER_REFLECTION_PROBE_UPDATE_ONCE, VISUALSERVER_REFLECTION_PROBE_UPDATE_ALWAYS             # <<<<<<<<<<<<<<
+ * ctypedef enum VisualServer_LightDirectionalShadowDepthRangeMode :VISUALSERVER_LIGHT_DIRECTIONAL_SHADOW_DEPTH_RANGE_STABLE, VISUALSERVER_LIGHT_DIRECTIONAL_SHADOW_DEPTH_RANGE_OPTIMIZED
+ * ctypedef enum VisualServer_BlendShapeMode :VISUALSERVER_BLEND_SHAPE_MODE_NORMALIZED, VISUALSERVER_BLEND_SHAPE_MODE_RELATIVE
+ */
+enum __pyx_t_7classes_9generated_VisualServer_ReflectionProbeUpdateMode {
+  __pyx_e_7classes_9generated_VISUALSERVER_REFLECTION_PROBE_UPDATE_ONCE,
+  __pyx_e_7classes_9generated_VISUALSERVER_REFLECTION_PROBE_UPDATE_ALWAYS
+};
+typedef enum __pyx_t_7classes_9generated_VisualServer_ReflectionProbeUpdateMode __pyx_t_7classes_9generated_VisualServer_ReflectionProbeUpdateMode;
+
+/* "classes/generated.pxd":812
+ * 
+ * ctypedef enum VisualServer_ReflectionProbeUpdateMode :VISUALSERVER_REFLECTION_PROBE_UPDATE_ONCE, VISUALSERVER_REFLECTION_PROBE_UPDATE_ALWAYS
+ * ctypedef enum VisualServer_LightDirectionalShadowDepthRangeMode :VISUALSERVER_LIGHT_DIRECTIONAL_SHADOW_DEPTH_RANGE_STABLE, VISUALSERVER_LIGHT_DIRECTIONAL_SHADOW_DEPTH_RANGE_OPTIMIZED             # <<<<<<<<<<<<<<
+ * ctypedef enum VisualServer_BlendShapeMode :VISUALSERVER_BLEND_SHAPE_MODE_NORMALIZED, VISUALSERVER_BLEND_SHAPE_MODE_RELATIVE
+ * ctypedef enum VisualServer_PrimitiveType :VISUALSERVER_PRIMITIVE_POINTS, VISUALSERVER_PRIMITIVE_LINES, VISUALSERVER_PRIMITIVE_LINE_STRIP, VISUALSERVER_PRIMITIVE_LINE_LOOP, VISUALSERVER_PRIMITIVE_TRIANGLES, VISUALSERVER_PRIMITIVE_TRIANGLE_STRIP, VISUALSERVER_PRIMITIVE_TRIANGLE_FAN, VISUALSERVER_PRIMITIVE_MAX
+ */
+enum __pyx_t_7classes_9generated_VisualServer_LightDirectionalShadowDepthRangeMode {
+  __pyx_e_7classes_9generated_VISUALSERVER_LIGHT_DIRECTIONAL_SHADOW_DEPTH_RANGE_STABLE,
+  __pyx_e_7classes_9generated_VISUALSERVER_LIGHT_DIRECTIONAL_SHADOW_DEPTH_RANGE_OPTIMIZED
+};
+typedef enum __pyx_t_7classes_9generated_VisualServer_LightDirectionalShadowDepthRangeMode __pyx_t_7classes_9generated_VisualServer_LightDirectionalShadowDepthRangeMode;
+
+/* "classes/generated.pxd":813
+ * ctypedef enum VisualServer_ReflectionProbeUpdateMode :VISUALSERVER_REFLECTION_PROBE_UPDATE_ONCE, VISUALSERVER_REFLECTION_PROBE_UPDATE_ALWAYS
+ * ctypedef enum VisualServer_LightDirectionalShadowDepthRangeMode :VISUALSERVER_LIGHT_DIRECTIONAL_SHADOW_DEPTH_RANGE_STABLE, VISUALSERVER_LIGHT_DIRECTIONAL_SHADOW_DEPTH_RANGE_OPTIMIZED
+ * ctypedef enum VisualServer_BlendShapeMode :VISUALSERVER_BLEND_SHAPE_MODE_NORMALIZED, VISUALSERVER_BLEND_SHAPE_MODE_RELATIVE             # <<<<<<<<<<<<<<
+ * ctypedef enum VisualServer_PrimitiveType :VISUALSERVER_PRIMITIVE_POINTS, VISUALSERVER_PRIMITIVE_LINES, VISUALSERVER_PRIMITIVE_LINE_STRIP, VISUALSERVER_PRIMITIVE_LINE_LOOP, VISUALSERVER_PRIMITIVE_TRIANGLES, VISUALSERVER_PRIMITIVE_TRIANGLE_STRIP, VISUALSERVER_PRIMITIVE_TRIANGLE_FAN, VISUALSERVER_PRIMITIVE_MAX
+ * ctypedef enum VisualServer_TextureType :VISUALSERVER_TEXTURE_TYPE_2D, VISUALSERVER_TEXTURE_TYPE_CUBEMAP, VISUALSERVER_TEXTURE_TYPE_2D_ARRAY, VISUALSERVER_TEXTURE_TYPE_3D
+ */
+enum __pyx_t_7classes_9generated_VisualServer_BlendShapeMode {
+  __pyx_e_7classes_9generated_VISUALSERVER_BLEND_SHAPE_MODE_NORMALIZED,
+  __pyx_e_7classes_9generated_VISUALSERVER_BLEND_SHAPE_MODE_RELATIVE
+};
+typedef enum __pyx_t_7classes_9generated_VisualServer_BlendShapeMode __pyx_t_7classes_9generated_VisualServer_BlendShapeMode;
+
+/* "classes/generated.pxd":814
+ * ctypedef enum VisualServer_LightDirectionalShadowDepthRangeMode :VISUALSERVER_LIGHT_DIRECTIONAL_SHADOW_DEPTH_RANGE_STABLE, VISUALSERVER_LIGHT_DIRECTIONAL_SHADOW_DEPTH_RANGE_OPTIMIZED
+ * ctypedef enum VisualServer_BlendShapeMode :VISUALSERVER_BLEND_SHAPE_MODE_NORMALIZED, VISUALSERVER_BLEND_SHAPE_MODE_RELATIVE
+ * ctypedef enum VisualServer_PrimitiveType :VISUALSERVER_PRIMITIVE_POINTS, VISUALSERVER_PRIMITIVE_LINES, VISUALSERVER_PRIMITIVE_LINE_STRIP, VISUALSERVER_PRIMITIVE_LINE_LOOP, VISUALSERVER_PRIMITIVE_TRIANGLES, VISUALSERVER_PRIMITIVE_TRIANGLE_STRIP, VISUALSERVER_PRIMITIVE_TRIANGLE_FAN, VISUALSERVER_PRIMITIVE_MAX             # <<<<<<<<<<<<<<
+ * ctypedef enum VisualServer_TextureType :VISUALSERVER_TEXTURE_TYPE_2D, VISUALSERVER_TEXTURE_TYPE_CUBEMAP, VISUALSERVER_TEXTURE_TYPE_2D_ARRAY, VISUALSERVER_TEXTURE_TYPE_3D
+ * ctypedef enum VisualServer_EnvironmentSSAOQuality :VISUALSERVER_ENV_SSAO_QUALITY_LOW, VISUALSERVER_ENV_SSAO_QUALITY_MEDIUM, VISUALSERVER_ENV_SSAO_QUALITY_HIGH
+ */
+enum __pyx_t_7classes_9generated_VisualServer_PrimitiveType {
+  __pyx_e_7classes_9generated_VISUALSERVER_PRIMITIVE_POINTS,
+  __pyx_e_7classes_9generated_VISUALSERVER_PRIMITIVE_LINES,
+  __pyx_e_7classes_9generated_VISUALSERVER_PRIMITIVE_LINE_STRIP,
+  __pyx_e_7classes_9generated_VISUALSERVER_PRIMITIVE_LINE_LOOP,
+  __pyx_e_7classes_9generated_VISUALSERVER_PRIMITIVE_TRIANGLES,
+  __pyx_e_7classes_9generated_VISUALSERVER_PRIMITIVE_TRIANGLE_STRIP,
+  __pyx_e_7classes_9generated_VISUALSERVER_PRIMITIVE_TRIANGLE_FAN,
+  __pyx_e_7classes_9generated_VISUALSERVER_PRIMITIVE_MAX
+};
+typedef enum __pyx_t_7classes_9generated_VisualServer_PrimitiveType __pyx_t_7classes_9generated_VisualServer_PrimitiveType;
+
+/* "classes/generated.pxd":815
+ * ctypedef enum VisualServer_BlendShapeMode :VISUALSERVER_BLEND_SHAPE_MODE_NORMALIZED, VISUALSERVER_BLEND_SHAPE_MODE_RELATIVE
+ * ctypedef enum VisualServer_PrimitiveType :VISUALSERVER_PRIMITIVE_POINTS, VISUALSERVER_PRIMITIVE_LINES, VISUALSERVER_PRIMITIVE_LINE_STRIP, VISUALSERVER_PRIMITIVE_LINE_LOOP, VISUALSERVER_PRIMITIVE_TRIANGLES, VISUALSERVER_PRIMITIVE_TRIANGLE_STRIP, VISUALSERVER_PRIMITIVE_TRIANGLE_FAN, VISUALSERVER_PRIMITIVE_MAX
+ * ctypedef enum VisualServer_TextureType :VISUALSERVER_TEXTURE_TYPE_2D, VISUALSERVER_TEXTURE_TYPE_CUBEMAP, VISUALSERVER_TEXTURE_TYPE_2D_ARRAY, VISUALSERVER_TEXTURE_TYPE_3D             # <<<<<<<<<<<<<<
+ * ctypedef enum VisualServer_EnvironmentSSAOQuality :VISUALSERVER_ENV_SSAO_QUALITY_LOW, VISUALSERVER_ENV_SSAO_QUALITY_MEDIUM, VISUALSERVER_ENV_SSAO_QUALITY_HIGH
+ * ctypedef enum VisualServer_EnvironmentDOFBlurQuality :VISUALSERVER_ENV_DOF_BLUR_QUALITY_LOW, VISUALSERVER_ENV_DOF_BLUR_QUALITY_MEDIUM, VISUALSERVER_ENV_DOF_BLUR_QUALITY_HIGH
+ */
+enum __pyx_t_7classes_9generated_VisualServer_TextureType {
+  __pyx_e_7classes_9generated_VISUALSERVER_TEXTURE_TYPE_2D,
+  __pyx_e_7classes_9generated_VISUALSERVER_TEXTURE_TYPE_CUBEMAP,
+  __pyx_e_7classes_9generated_VISUALSERVER_TEXTURE_TYPE_2D_ARRAY,
+  __pyx_e_7classes_9generated_VISUALSERVER_TEXTURE_TYPE_3D
+};
+typedef enum __pyx_t_7classes_9generated_VisualServer_TextureType __pyx_t_7classes_9generated_VisualServer_TextureType;
+
+/* "classes/generated.pxd":816
+ * ctypedef enum VisualServer_PrimitiveType :VISUALSERVER_PRIMITIVE_POINTS, VISUALSERVER_PRIMITIVE_LINES, VISUALSERVER_PRIMITIVE_LINE_STRIP, VISUALSERVER_PRIMITIVE_LINE_LOOP, VISUALSERVER_PRIMITIVE_TRIANGLES, VISUALSERVER_PRIMITIVE_TRIANGLE_STRIP, VISUALSERVER_PRIMITIVE_TRIANGLE_FAN, VISUALSERVER_PRIMITIVE_MAX
+ * ctypedef enum VisualServer_TextureType :VISUALSERVER_TEXTURE_TYPE_2D, VISUALSERVER_TEXTURE_TYPE_CUBEMAP, VISUALSERVER_TEXTURE_TYPE_2D_ARRAY, VISUALSERVER_TEXTURE_TYPE_3D
+ * ctypedef enum VisualServer_EnvironmentSSAOQuality :VISUALSERVER_ENV_SSAO_QUALITY_LOW, VISUALSERVER_ENV_SSAO_QUALITY_MEDIUM, VISUALSERVER_ENV_SSAO_QUALITY_HIGH             # <<<<<<<<<<<<<<
+ * ctypedef enum VisualServer_EnvironmentDOFBlurQuality :VISUALSERVER_ENV_DOF_BLUR_QUALITY_LOW, VISUALSERVER_ENV_DOF_BLUR_QUALITY_MEDIUM, VISUALSERVER_ENV_DOF_BLUR_QUALITY_HIGH
+ * ctypedef enum VisualServer_RenderInfo :VISUALSERVER_INFO_OBJECTS_IN_FRAME, VISUALSERVER_INFO_VERTICES_IN_FRAME, VISUALSERVER_INFO_MATERIAL_CHANGES_IN_FRAME, VISUALSERVER_INFO_SHADER_CHANGES_IN_FRAME, VISUALSERVER_INFO_SURFACE_CHANGES_IN_FRAME, VISUALSERVER_INFO_DRAW_CALLS_IN_FRAME, VISUALSERVER_INFO_USAGE_VIDEO_MEM_TOTAL, VISUALSERVER_INFO_VIDEO_MEM_USED, VISUALSERVER_INFO_TEXTURE_MEM_USED, VISUALSERVER_INFO_VERTEX_MEM_USED
+ */
+enum __pyx_t_7classes_9generated_VisualServer_EnvironmentSSAOQuality {
+  __pyx_e_7classes_9generated_VISUALSERVER_ENV_SSAO_QUALITY_LOW,
+  __pyx_e_7classes_9generated_VISUALSERVER_ENV_SSAO_QUALITY_MEDIUM,
+  __pyx_e_7classes_9generated_VISUALSERVER_ENV_SSAO_QUALITY_HIGH
+};
+typedef enum __pyx_t_7classes_9generated_VisualServer_EnvironmentSSAOQuality __pyx_t_7classes_9generated_VisualServer_EnvironmentSSAOQuality;
+
+/* "classes/generated.pxd":817
+ * ctypedef enum VisualServer_TextureType :VISUALSERVER_TEXTURE_TYPE_2D, VISUALSERVER_TEXTURE_TYPE_CUBEMAP, VISUALSERVER_TEXTURE_TYPE_2D_ARRAY, VISUALSERVER_TEXTURE_TYPE_3D
+ * ctypedef enum VisualServer_EnvironmentSSAOQuality :VISUALSERVER_ENV_SSAO_QUALITY_LOW, VISUALSERVER_ENV_SSAO_QUALITY_MEDIUM, VISUALSERVER_ENV_SSAO_QUALITY_HIGH
+ * ctypedef enum VisualServer_EnvironmentDOFBlurQuality :VISUALSERVER_ENV_DOF_BLUR_QUALITY_LOW, VISUALSERVER_ENV_DOF_BLUR_QUALITY_MEDIUM, VISUALSERVER_ENV_DOF_BLUR_QUALITY_HIGH             # <<<<<<<<<<<<<<
+ * ctypedef enum VisualServer_RenderInfo :VISUALSERVER_INFO_OBJECTS_IN_FRAME, VISUALSERVER_INFO_VERTICES_IN_FRAME, VISUALSERVER_INFO_MATERIAL_CHANGES_IN_FRAME, VISUALSERVER_INFO_SHADER_CHANGES_IN_FRAME, VISUALSERVER_INFO_SURFACE_CHANGES_IN_FRAME, VISUALSERVER_INFO_DRAW_CALLS_IN_FRAME, VISUALSERVER_INFO_USAGE_VIDEO_MEM_TOTAL, VISUALSERVER_INFO_VIDEO_MEM_USED, VISUALSERVER_INFO_TEXTURE_MEM_USED, VISUALSERVER_INFO_VERTEX_MEM_USED
+ * ctypedef enum VisualServer_NinePatchAxisMode :VISUALSERVER_NINE_PATCH_STRETCH, VISUALSERVER_NINE_PATCH_TILE, VISUALSERVER_NINE_PATCH_TILE_FIT
+ */
+enum __pyx_t_7classes_9generated_VisualServer_EnvironmentDOFBlurQuality {
+  __pyx_e_7classes_9generated_VISUALSERVER_ENV_DOF_BLUR_QUALITY_LOW,
+  __pyx_e_7classes_9generated_VISUALSERVER_ENV_DOF_BLUR_QUALITY_MEDIUM,
+  __pyx_e_7classes_9generated_VISUALSERVER_ENV_DOF_BLUR_QUALITY_HIGH
+};
+typedef enum __pyx_t_7classes_9generated_VisualServer_EnvironmentDOFBlurQuality __pyx_t_7classes_9generated_VisualServer_EnvironmentDOFBlurQuality;
+
+/* "classes/generated.pxd":818
+ * ctypedef enum VisualServer_EnvironmentSSAOQuality :VISUALSERVER_ENV_SSAO_QUALITY_LOW, VISUALSERVER_ENV_SSAO_QUALITY_MEDIUM, VISUALSERVER_ENV_SSAO_QUALITY_HIGH
+ * ctypedef enum VisualServer_EnvironmentDOFBlurQuality :VISUALSERVER_ENV_DOF_BLUR_QUALITY_LOW, VISUALSERVER_ENV_DOF_BLUR_QUALITY_MEDIUM, VISUALSERVER_ENV_DOF_BLUR_QUALITY_HIGH
+ * ctypedef enum VisualServer_RenderInfo :VISUALSERVER_INFO_OBJECTS_IN_FRAME, VISUALSERVER_INFO_VERTICES_IN_FRAME, VISUALSERVER_INFO_MATERIAL_CHANGES_IN_FRAME, VISUALSERVER_INFO_SHADER_CHANGES_IN_FRAME, VISUALSERVER_INFO_SURFACE_CHANGES_IN_FRAME, VISUALSERVER_INFO_DRAW_CALLS_IN_FRAME, VISUALSERVER_INFO_USAGE_VIDEO_MEM_TOTAL, VISUALSERVER_INFO_VIDEO_MEM_USED, VISUALSERVER_INFO_TEXTURE_MEM_USED, VISUALSERVER_INFO_VERTEX_MEM_USED             # <<<<<<<<<<<<<<
+ * ctypedef enum VisualServer_NinePatchAxisMode :VISUALSERVER_NINE_PATCH_STRETCH, VISUALSERVER_NINE_PATCH_TILE, VISUALSERVER_NINE_PATCH_TILE_FIT
+ * ctypedef enum VisualServer_ViewportRenderInfo :VISUALSERVER_VIEWPORT_RENDER_INFO_OBJECTS_IN_FRAME, VISUALSERVER_VIEWPORT_RENDER_INFO_VERTICES_IN_FRAME, VISUALSERVER_VIEWPORT_RENDER_INFO_MATERIAL_CHANGES_IN_FRAME, VISUALSERVER_VIEWPORT_RENDER_INFO_SHADER_CHANGES_IN_FRAME, VISUALSERVER_VIEWPORT_RENDER_INFO_SURFACE_CHANGES_IN_FRAME, VISUALSERVER_VIEWPORT_RENDER_INFO_DRAW_CALLS_IN_FRAME, VISUALSERVER_VIEWPORT_RENDER_INFO_MAX
+ */
+enum __pyx_t_7classes_9generated_VisualServer_RenderInfo {
+  __pyx_e_7classes_9generated_VISUALSERVER_INFO_OBJECTS_IN_FRAME,
+  __pyx_e_7classes_9generated_VISUALSERVER_INFO_VERTICES_IN_FRAME,
+  __pyx_e_7classes_9generated_VISUALSERVER_INFO_MATERIAL_CHANGES_IN_FRAME,
+  __pyx_e_7classes_9generated_VISUALSERVER_INFO_SHADER_CHANGES_IN_FRAME,
+  __pyx_e_7classes_9generated_VISUALSERVER_INFO_SURFACE_CHANGES_IN_FRAME,
+  __pyx_e_7classes_9generated_VISUALSERVER_INFO_DRAW_CALLS_IN_FRAME,
+  __pyx_e_7classes_9generated_VISUALSERVER_INFO_USAGE_VIDEO_MEM_TOTAL,
+  __pyx_e_7classes_9generated_VISUALSERVER_INFO_VIDEO_MEM_USED,
+  __pyx_e_7classes_9generated_VISUALSERVER_INFO_TEXTURE_MEM_USED,
+  __pyx_e_7classes_9generated_VISUALSERVER_INFO_VERTEX_MEM_USED
+};
+typedef enum __pyx_t_7classes_9generated_VisualServer_RenderInfo __pyx_t_7classes_9generated_VisualServer_RenderInfo;
+
+/* "classes/generated.pxd":819
+ * ctypedef enum VisualServer_EnvironmentDOFBlurQuality :VISUALSERVER_ENV_DOF_BLUR_QUALITY_LOW, VISUALSERVER_ENV_DOF_BLUR_QUALITY_MEDIUM, VISUALSERVER_ENV_DOF_BLUR_QUALITY_HIGH
+ * ctypedef enum VisualServer_RenderInfo :VISUALSERVER_INFO_OBJECTS_IN_FRAME, VISUALSERVER_INFO_VERTICES_IN_FRAME, VISUALSERVER_INFO_MATERIAL_CHANGES_IN_FRAME, VISUALSERVER_INFO_SHADER_CHANGES_IN_FRAME, VISUALSERVER_INFO_SURFACE_CHANGES_IN_FRAME, VISUALSERVER_INFO_DRAW_CALLS_IN_FRAME, VISUALSERVER_INFO_USAGE_VIDEO_MEM_TOTAL, VISUALSERVER_INFO_VIDEO_MEM_USED, VISUALSERVER_INFO_TEXTURE_MEM_USED, VISUALSERVER_INFO_VERTEX_MEM_USED
+ * ctypedef enum VisualServer_NinePatchAxisMode :VISUALSERVER_NINE_PATCH_STRETCH, VISUALSERVER_NINE_PATCH_TILE, VISUALSERVER_NINE_PATCH_TILE_FIT             # <<<<<<<<<<<<<<
+ * ctypedef enum VisualServer_ViewportRenderInfo :VISUALSERVER_VIEWPORT_RENDER_INFO_OBJECTS_IN_FRAME, VISUALSERVER_VIEWPORT_RENDER_INFO_VERTICES_IN_FRAME, VISUALSERVER_VIEWPORT_RENDER_INFO_MATERIAL_CHANGES_IN_FRAME, VISUALSERVER_VIEWPORT_RENDER_INFO_SHADER_CHANGES_IN_FRAME, VISUALSERVER_VIEWPORT_RENDER_INFO_SURFACE_CHANGES_IN_FRAME, VISUALSERVER_VIEWPORT_RENDER_INFO_DRAW_CALLS_IN_FRAME, VISUALSERVER_VIEWPORT_RENDER_INFO_MAX
+ * ctypedef enum VisualServer_ViewportClearMode :VISUALSERVER_VIEWPORT_CLEAR_ALWAYS, VISUALSERVER_VIEWPORT_CLEAR_NEVER, VISUALSERVER_VIEWPORT_CLEAR_ONLY_NEXT_FRAME
+ */
+enum __pyx_t_7classes_9generated_VisualServer_NinePatchAxisMode {
+  __pyx_e_7classes_9generated_VISUALSERVER_NINE_PATCH_STRETCH,
+  __pyx_e_7classes_9generated_VISUALSERVER_NINE_PATCH_TILE,
+  __pyx_e_7classes_9generated_VISUALSERVER_NINE_PATCH_TILE_FIT
+};
+typedef enum __pyx_t_7classes_9generated_VisualServer_NinePatchAxisMode __pyx_t_7classes_9generated_VisualServer_NinePatchAxisMode;
+
+/* "classes/generated.pxd":820
+ * ctypedef enum VisualServer_RenderInfo :VISUALSERVER_INFO_OBJECTS_IN_FRAME, VISUALSERVER_INFO_VERTICES_IN_FRAME, VISUALSERVER_INFO_MATERIAL_CHANGES_IN_FRAME, VISUALSERVER_INFO_SHADER_CHANGES_IN_FRAME, VISUALSERVER_INFO_SURFACE_CHANGES_IN_FRAME, VISUALSERVER_INFO_DRAW_CALLS_IN_FRAME, VISUALSERVER_INFO_USAGE_VIDEO_MEM_TOTAL, VISUALSERVER_INFO_VIDEO_MEM_USED, VISUALSERVER_INFO_TEXTURE_MEM_USED, VISUALSERVER_INFO_VERTEX_MEM_USED
+ * ctypedef enum VisualServer_NinePatchAxisMode :VISUALSERVER_NINE_PATCH_STRETCH, VISUALSERVER_NINE_PATCH_TILE, VISUALSERVER_NINE_PATCH_TILE_FIT
+ * ctypedef enum VisualServer_ViewportRenderInfo :VISUALSERVER_VIEWPORT_RENDER_INFO_OBJECTS_IN_FRAME, VISUALSERVER_VIEWPORT_RENDER_INFO_VERTICES_IN_FRAME, VISUALSERVER_VIEWPORT_RENDER_INFO_MATERIAL_CHANGES_IN_FRAME, VISUALSERVER_VIEWPORT_RENDER_INFO_SHADER_CHANGES_IN_FRAME, VISUALSERVER_VIEWPORT_RENDER_INFO_SURFACE_CHANGES_IN_FRAME, VISUALSERVER_VIEWPORT_RENDER_INFO_DRAW_CALLS_IN_FRAME, VISUALSERVER_VIEWPORT_RENDER_INFO_MAX             # <<<<<<<<<<<<<<
+ * ctypedef enum VisualServer_ViewportClearMode :VISUALSERVER_VIEWPORT_CLEAR_ALWAYS, VISUALSERVER_VIEWPORT_CLEAR_NEVER, VISUALSERVER_VIEWPORT_CLEAR_ONLY_NEXT_FRAME
+ * ctypedef enum VisualServer_LightOmniShadowDetail :VISUALSERVER_LIGHT_OMNI_SHADOW_DETAIL_VERTICAL, VISUALSERVER_LIGHT_OMNI_SHADOW_DETAIL_HORIZONTAL
+ */
+enum __pyx_t_7classes_9generated_VisualServer_ViewportRenderInfo {
+  __pyx_e_7classes_9generated_VISUALSERVER_VIEWPORT_RENDER_INFO_OBJECTS_IN_FRAME,
+  __pyx_e_7classes_9generated_VISUALSERVER_VIEWPORT_RENDER_INFO_VERTICES_IN_FRAME,
+  __pyx_e_7classes_9generated_VISUALSERVER_VIEWPORT_RENDER_INFO_MATERIAL_CHANGES_IN_FRAME,
+  __pyx_e_7classes_9generated_VISUALSERVER_VIEWPORT_RENDER_INFO_SHADER_CHANGES_IN_FRAME,
+  __pyx_e_7classes_9generated_VISUALSERVER_VIEWPORT_RENDER_INFO_SURFACE_CHANGES_IN_FRAME,
+  __pyx_e_7classes_9generated_VISUALSERVER_VIEWPORT_RENDER_INFO_DRAW_CALLS_IN_FRAME,
+  __pyx_e_7classes_9generated_VISUALSERVER_VIEWPORT_RENDER_INFO_MAX
+};
+typedef enum __pyx_t_7classes_9generated_VisualServer_ViewportRenderInfo __pyx_t_7classes_9generated_VisualServer_ViewportRenderInfo;
+
+/* "classes/generated.pxd":821
+ * ctypedef enum VisualServer_NinePatchAxisMode :VISUALSERVER_NINE_PATCH_STRETCH, VISUALSERVER_NINE_PATCH_TILE, VISUALSERVER_NINE_PATCH_TILE_FIT
+ * ctypedef enum VisualServer_ViewportRenderInfo :VISUALSERVER_VIEWPORT_RENDER_INFO_OBJECTS_IN_FRAME, VISUALSERVER_VIEWPORT_RENDER_INFO_VERTICES_IN_FRAME, VISUALSERVER_VIEWPORT_RENDER_INFO_MATERIAL_CHANGES_IN_FRAME, VISUALSERVER_VIEWPORT_RENDER_INFO_SHADER_CHANGES_IN_FRAME, VISUALSERVER_VIEWPORT_RENDER_INFO_SURFACE_CHANGES_IN_FRAME, VISUALSERVER_VIEWPORT_RENDER_INFO_DRAW_CALLS_IN_FRAME, VISUALSERVER_VIEWPORT_RENDER_INFO_MAX
+ * ctypedef enum VisualServer_ViewportClearMode :VISUALSERVER_VIEWPORT_CLEAR_ALWAYS, VISUALSERVER_VIEWPORT_CLEAR_NEVER, VISUALSERVER_VIEWPORT_CLEAR_ONLY_NEXT_FRAME             # <<<<<<<<<<<<<<
+ * ctypedef enum VisualServer_LightOmniShadowDetail :VISUALSERVER_LIGHT_OMNI_SHADOW_DETAIL_VERTICAL, VISUALSERVER_LIGHT_OMNI_SHADOW_DETAIL_HORIZONTAL
+ * ctypedef enum VisualServer_ShaderMode :VISUALSERVER_SHADER_SPATIAL, VISUALSERVER_SHADER_CANVAS_ITEM, VISUALSERVER_SHADER_PARTICLES, VISUALSERVER_SHADER_MAX
+ */
+enum __pyx_t_7classes_9generated_VisualServer_ViewportClearMode {
+  __pyx_e_7classes_9generated_VISUALSERVER_VIEWPORT_CLEAR_ALWAYS,
+  __pyx_e_7classes_9generated_VISUALSERVER_VIEWPORT_CLEAR_NEVER,
+  __pyx_e_7classes_9generated_VISUALSERVER_VIEWPORT_CLEAR_ONLY_NEXT_FRAME
+};
+typedef enum __pyx_t_7classes_9generated_VisualServer_ViewportClearMode __pyx_t_7classes_9generated_VisualServer_ViewportClearMode;
+
+/* "classes/generated.pxd":822
+ * ctypedef enum VisualServer_ViewportRenderInfo :VISUALSERVER_VIEWPORT_RENDER_INFO_OBJECTS_IN_FRAME, VISUALSERVER_VIEWPORT_RENDER_INFO_VERTICES_IN_FRAME, VISUALSERVER_VIEWPORT_RENDER_INFO_MATERIAL_CHANGES_IN_FRAME, VISUALSERVER_VIEWPORT_RENDER_INFO_SHADER_CHANGES_IN_FRAME, VISUALSERVER_VIEWPORT_RENDER_INFO_SURFACE_CHANGES_IN_FRAME, VISUALSERVER_VIEWPORT_RENDER_INFO_DRAW_CALLS_IN_FRAME, VISUALSERVER_VIEWPORT_RENDER_INFO_MAX
+ * ctypedef enum VisualServer_ViewportClearMode :VISUALSERVER_VIEWPORT_CLEAR_ALWAYS, VISUALSERVER_VIEWPORT_CLEAR_NEVER, VISUALSERVER_VIEWPORT_CLEAR_ONLY_NEXT_FRAME
+ * ctypedef enum VisualServer_LightOmniShadowDetail :VISUALSERVER_LIGHT_OMNI_SHADOW_DETAIL_VERTICAL, VISUALSERVER_LIGHT_OMNI_SHADOW_DETAIL_HORIZONTAL             # <<<<<<<<<<<<<<
+ * ctypedef enum VisualServer_ShaderMode :VISUALSERVER_SHADER_SPATIAL, VISUALSERVER_SHADER_CANVAS_ITEM, VISUALSERVER_SHADER_PARTICLES, VISUALSERVER_SHADER_MAX
+ * ctypedef enum VisualServer_MultimeshTransformFormat :VISUALSERVER_MULTIMESH_TRANSFORM_2D, VISUALSERVER_MULTIMESH_TRANSFORM_3D
+ */
+enum __pyx_t_7classes_9generated_VisualServer_LightOmniShadowDetail {
+  __pyx_e_7classes_9generated_VISUALSERVER_LIGHT_OMNI_SHADOW_DETAIL_VERTICAL,
+  __pyx_e_7classes_9generated_VISUALSERVER_LIGHT_OMNI_SHADOW_DETAIL_HORIZONTAL
+};
+typedef enum __pyx_t_7classes_9generated_VisualServer_LightOmniShadowDetail __pyx_t_7classes_9generated_VisualServer_LightOmniShadowDetail;
+
+/* "classes/generated.pxd":823
+ * ctypedef enum VisualServer_ViewportClearMode :VISUALSERVER_VIEWPORT_CLEAR_ALWAYS, VISUALSERVER_VIEWPORT_CLEAR_NEVER, VISUALSERVER_VIEWPORT_CLEAR_ONLY_NEXT_FRAME
+ * ctypedef enum VisualServer_LightOmniShadowDetail :VISUALSERVER_LIGHT_OMNI_SHADOW_DETAIL_VERTICAL, VISUALSERVER_LIGHT_OMNI_SHADOW_DETAIL_HORIZONTAL
+ * ctypedef enum VisualServer_ShaderMode :VISUALSERVER_SHADER_SPATIAL, VISUALSERVER_SHADER_CANVAS_ITEM, VISUALSERVER_SHADER_PARTICLES, VISUALSERVER_SHADER_MAX             # <<<<<<<<<<<<<<
+ * ctypedef enum VisualServer_MultimeshTransformFormat :VISUALSERVER_MULTIMESH_TRANSFORM_2D, VISUALSERVER_MULTIMESH_TRANSFORM_3D
+ * ctypedef enum VisualServer_ShadowCastingSetting :VISUALSERVER_SHADOW_CASTING_SETTING_OFF, VISUALSERVER_SHADOW_CASTING_SETTING_ON, VISUALSERVER_SHADOW_CASTING_SETTING_DOUBLE_SIDED, VISUALSERVER_SHADOW_CASTING_SETTING_SHADOWS_ONLY
+ */
+enum __pyx_t_7classes_9generated_VisualServer_ShaderMode {
+  __pyx_e_7classes_9generated_VISUALSERVER_SHADER_SPATIAL,
+  __pyx_e_7classes_9generated_VISUALSERVER_SHADER_CANVAS_ITEM,
+  __pyx_e_7classes_9generated_VISUALSERVER_SHADER_PARTICLES,
+  __pyx_e_7classes_9generated_VISUALSERVER_SHADER_MAX
+};
+typedef enum __pyx_t_7classes_9generated_VisualServer_ShaderMode __pyx_t_7classes_9generated_VisualServer_ShaderMode;
+
+/* "classes/generated.pxd":824
+ * ctypedef enum VisualServer_LightOmniShadowDetail :VISUALSERVER_LIGHT_OMNI_SHADOW_DETAIL_VERTICAL, VISUALSERVER_LIGHT_OMNI_SHADOW_DETAIL_HORIZONTAL
+ * ctypedef enum VisualServer_ShaderMode :VISUALSERVER_SHADER_SPATIAL, VISUALSERVER_SHADER_CANVAS_ITEM, VISUALSERVER_SHADER_PARTICLES, VISUALSERVER_SHADER_MAX
+ * ctypedef enum VisualServer_MultimeshTransformFormat :VISUALSERVER_MULTIMESH_TRANSFORM_2D, VISUALSERVER_MULTIMESH_TRANSFORM_3D             # <<<<<<<<<<<<<<
+ * ctypedef enum VisualServer_ShadowCastingSetting :VISUALSERVER_SHADOW_CASTING_SETTING_OFF, VISUALSERVER_SHADOW_CASTING_SETTING_ON, VISUALSERVER_SHADOW_CASTING_SETTING_DOUBLE_SIDED, VISUALSERVER_SHADOW_CASTING_SETTING_SHADOWS_ONLY
+ * ctypedef enum VisualServer_ViewportDebugDraw :VISUALSERVER_VIEWPORT_DEBUG_DRAW_DISABLED, VISUALSERVER_VIEWPORT_DEBUG_DRAW_UNSHADED, VISUALSERVER_VIEWPORT_DEBUG_DRAW_OVERDRAW, VISUALSERVER_VIEWPORT_DEBUG_DRAW_WIREFRAME
+ */
+enum __pyx_t_7classes_9generated_VisualServer_MultimeshTransformFormat {
+  __pyx_e_7classes_9generated_VISUALSERVER_MULTIMESH_TRANSFORM_2D,
+  __pyx_e_7classes_9generated_VISUALSERVER_MULTIMESH_TRANSFORM_3D
+};
+typedef enum __pyx_t_7classes_9generated_VisualServer_MultimeshTransformFormat __pyx_t_7classes_9generated_VisualServer_MultimeshTransformFormat;
+
+/* "classes/generated.pxd":825
+ * ctypedef enum VisualServer_ShaderMode :VISUALSERVER_SHADER_SPATIAL, VISUALSERVER_SHADER_CANVAS_ITEM, VISUALSERVER_SHADER_PARTICLES, VISUALSERVER_SHADER_MAX
+ * ctypedef enum VisualServer_MultimeshTransformFormat :VISUALSERVER_MULTIMESH_TRANSFORM_2D, VISUALSERVER_MULTIMESH_TRANSFORM_3D
+ * ctypedef enum VisualServer_ShadowCastingSetting :VISUALSERVER_SHADOW_CASTING_SETTING_OFF, VISUALSERVER_SHADOW_CASTING_SETTING_ON, VISUALSERVER_SHADOW_CASTING_SETTING_DOUBLE_SIDED, VISUALSERVER_SHADOW_CASTING_SETTING_SHADOWS_ONLY             # <<<<<<<<<<<<<<
+ * ctypedef enum VisualServer_ViewportDebugDraw :VISUALSERVER_VIEWPORT_DEBUG_DRAW_DISABLED, VISUALSERVER_VIEWPORT_DEBUG_DRAW_UNSHADED, VISUALSERVER_VIEWPORT_DEBUG_DRAW_OVERDRAW, VISUALSERVER_VIEWPORT_DEBUG_DRAW_WIREFRAME
+ * ctypedef enum VisualServer_ViewportUsage :VISUALSERVER_VIEWPORT_USAGE_2D, VISUALSERVER_VIEWPORT_USAGE_2D_NO_SAMPLING, VISUALSERVER_VIEWPORT_USAGE_3D, VISUALSERVER_VIEWPORT_USAGE_3D_NO_EFFECTS
+ */
+enum __pyx_t_7classes_9generated_VisualServer_ShadowCastingSetting {
+  __pyx_e_7classes_9generated_VISUALSERVER_SHADOW_CASTING_SETTING_OFF,
+  __pyx_e_7classes_9generated_VISUALSERVER_SHADOW_CASTING_SETTING_ON,
+  __pyx_e_7classes_9generated_VISUALSERVER_SHADOW_CASTING_SETTING_DOUBLE_SIDED,
+  __pyx_e_7classes_9generated_VISUALSERVER_SHADOW_CASTING_SETTING_SHADOWS_ONLY
+};
+typedef enum __pyx_t_7classes_9generated_VisualServer_ShadowCastingSetting __pyx_t_7classes_9generated_VisualServer_ShadowCastingSetting;
+
+/* "classes/generated.pxd":826
+ * ctypedef enum VisualServer_MultimeshTransformFormat :VISUALSERVER_MULTIMESH_TRANSFORM_2D, VISUALSERVER_MULTIMESH_TRANSFORM_3D
+ * ctypedef enum VisualServer_ShadowCastingSetting :VISUALSERVER_SHADOW_CASTING_SETTING_OFF, VISUALSERVER_SHADOW_CASTING_SETTING_ON, VISUALSERVER_SHADOW_CASTING_SETTING_DOUBLE_SIDED, VISUALSERVER_SHADOW_CASTING_SETTING_SHADOWS_ONLY
+ * ctypedef enum VisualServer_ViewportDebugDraw :VISUALSERVER_VIEWPORT_DEBUG_DRAW_DISABLED, VISUALSERVER_VIEWPORT_DEBUG_DRAW_UNSHADED, VISUALSERVER_VIEWPORT_DEBUG_DRAW_OVERDRAW, VISUALSERVER_VIEWPORT_DEBUG_DRAW_WIREFRAME             # <<<<<<<<<<<<<<
+ * ctypedef enum VisualServer_ViewportUsage :VISUALSERVER_VIEWPORT_USAGE_2D, VISUALSERVER_VIEWPORT_USAGE_2D_NO_SAMPLING, VISUALSERVER_VIEWPORT_USAGE_3D, VISUALSERVER_VIEWPORT_USAGE_3D_NO_EFFECTS
+ * ctypedef enum VisualServer_EnvironmentBG :VISUALSERVER_ENV_BG_CLEAR_COLOR, VISUALSERVER_ENV_BG_COLOR, VISUALSERVER_ENV_BG_SKY, VISUALSERVER_ENV_BG_COLOR_SKY, VISUALSERVER_ENV_BG_CANVAS, VISUALSERVER_ENV_BG_KEEP, VISUALSERVER_ENV_BG_MAX
+ */
+enum __pyx_t_7classes_9generated_VisualServer_ViewportDebugDraw {
+  __pyx_e_7classes_9generated_VISUALSERVER_VIEWPORT_DEBUG_DRAW_DISABLED,
+  __pyx_e_7classes_9generated_VISUALSERVER_VIEWPORT_DEBUG_DRAW_UNSHADED,
+  __pyx_e_7classes_9generated_VISUALSERVER_VIEWPORT_DEBUG_DRAW_OVERDRAW,
+  __pyx_e_7classes_9generated_VISUALSERVER_VIEWPORT_DEBUG_DRAW_WIREFRAME
+};
+typedef enum __pyx_t_7classes_9generated_VisualServer_ViewportDebugDraw __pyx_t_7classes_9generated_VisualServer_ViewportDebugDraw;
+
+/* "classes/generated.pxd":827
+ * ctypedef enum VisualServer_ShadowCastingSetting :VISUALSERVER_SHADOW_CASTING_SETTING_OFF, VISUALSERVER_SHADOW_CASTING_SETTING_ON, VISUALSERVER_SHADOW_CASTING_SETTING_DOUBLE_SIDED, VISUALSERVER_SHADOW_CASTING_SETTING_SHADOWS_ONLY
+ * ctypedef enum VisualServer_ViewportDebugDraw :VISUALSERVER_VIEWPORT_DEBUG_DRAW_DISABLED, VISUALSERVER_VIEWPORT_DEBUG_DRAW_UNSHADED, VISUALSERVER_VIEWPORT_DEBUG_DRAW_OVERDRAW, VISUALSERVER_VIEWPORT_DEBUG_DRAW_WIREFRAME
+ * ctypedef enum VisualServer_ViewportUsage :VISUALSERVER_VIEWPORT_USAGE_2D, VISUALSERVER_VIEWPORT_USAGE_2D_NO_SAMPLING, VISUALSERVER_VIEWPORT_USAGE_3D, VISUALSERVER_VIEWPORT_USAGE_3D_NO_EFFECTS             # <<<<<<<<<<<<<<
+ * ctypedef enum VisualServer_EnvironmentBG :VISUALSERVER_ENV_BG_CLEAR_COLOR, VISUALSERVER_ENV_BG_COLOR, VISUALSERVER_ENV_BG_SKY, VISUALSERVER_ENV_BG_COLOR_SKY, VISUALSERVER_ENV_BG_CANVAS, VISUALSERVER_ENV_BG_KEEP, VISUALSERVER_ENV_BG_MAX
+ * ctypedef enum VisualServer_MultimeshCustomDataFormat :VISUALSERVER_MULTIMESH_CUSTOM_DATA_NONE, VISUALSERVER_MULTIMESH_CUSTOM_DATA_8BIT, VISUALSERVER_MULTIMESH_CUSTOM_DATA_FLOAT
+ */
+enum __pyx_t_7classes_9generated_VisualServer_ViewportUsage {
+  __pyx_e_7classes_9generated_VISUALSERVER_VIEWPORT_USAGE_2D,
+  __pyx_e_7classes_9generated_VISUALSERVER_VIEWPORT_USAGE_2D_NO_SAMPLING,
+  __pyx_e_7classes_9generated_VISUALSERVER_VIEWPORT_USAGE_3D,
+  __pyx_e_7classes_9generated_VISUALSERVER_VIEWPORT_USAGE_3D_NO_EFFECTS
+};
+typedef enum __pyx_t_7classes_9generated_VisualServer_ViewportUsage __pyx_t_7classes_9generated_VisualServer_ViewportUsage;
+
+/* "classes/generated.pxd":828
+ * ctypedef enum VisualServer_ViewportDebugDraw :VISUALSERVER_VIEWPORT_DEBUG_DRAW_DISABLED, VISUALSERVER_VIEWPORT_DEBUG_DRAW_UNSHADED, VISUALSERVER_VIEWPORT_DEBUG_DRAW_OVERDRAW, VISUALSERVER_VIEWPORT_DEBUG_DRAW_WIREFRAME
+ * ctypedef enum VisualServer_ViewportUsage :VISUALSERVER_VIEWPORT_USAGE_2D, VISUALSERVER_VIEWPORT_USAGE_2D_NO_SAMPLING, VISUALSERVER_VIEWPORT_USAGE_3D, VISUALSERVER_VIEWPORT_USAGE_3D_NO_EFFECTS
+ * ctypedef enum VisualServer_EnvironmentBG :VISUALSERVER_ENV_BG_CLEAR_COLOR, VISUALSERVER_ENV_BG_COLOR, VISUALSERVER_ENV_BG_SKY, VISUALSERVER_ENV_BG_COLOR_SKY, VISUALSERVER_ENV_BG_CANVAS, VISUALSERVER_ENV_BG_KEEP, VISUALSERVER_ENV_BG_MAX             # <<<<<<<<<<<<<<
+ * ctypedef enum VisualServer_MultimeshCustomDataFormat :VISUALSERVER_MULTIMESH_CUSTOM_DATA_NONE, VISUALSERVER_MULTIMESH_CUSTOM_DATA_8BIT, VISUALSERVER_MULTIMESH_CUSTOM_DATA_FLOAT
+ * ctypedef enum VisualServer_LightOmniShadowMode :VISUALSERVER_LIGHT_OMNI_SHADOW_DUAL_PARABOLOID, VISUALSERVER_LIGHT_OMNI_SHADOW_CUBE
+ */
+enum __pyx_t_7classes_9generated_VisualServer_EnvironmentBG {
+  __pyx_e_7classes_9generated_VISUALSERVER_ENV_BG_CLEAR_COLOR,
+  __pyx_e_7classes_9generated_VISUALSERVER_ENV_BG_COLOR,
+  __pyx_e_7classes_9generated_VISUALSERVER_ENV_BG_SKY,
+  __pyx_e_7classes_9generated_VISUALSERVER_ENV_BG_COLOR_SKY,
+  __pyx_e_7classes_9generated_VISUALSERVER_ENV_BG_CANVAS,
+  __pyx_e_7classes_9generated_VISUALSERVER_ENV_BG_KEEP,
+  __pyx_e_7classes_9generated_VISUALSERVER_ENV_BG_MAX
+};
+typedef enum __pyx_t_7classes_9generated_VisualServer_EnvironmentBG __pyx_t_7classes_9generated_VisualServer_EnvironmentBG;
+
+/* "classes/generated.pxd":829
+ * ctypedef enum VisualServer_ViewportUsage :VISUALSERVER_VIEWPORT_USAGE_2D, VISUALSERVER_VIEWPORT_USAGE_2D_NO_SAMPLING, VISUALSERVER_VIEWPORT_USAGE_3D, VISUALSERVER_VIEWPORT_USAGE_3D_NO_EFFECTS
+ * ctypedef enum VisualServer_EnvironmentBG :VISUALSERVER_ENV_BG_CLEAR_COLOR, VISUALSERVER_ENV_BG_COLOR, VISUALSERVER_ENV_BG_SKY, VISUALSERVER_ENV_BG_COLOR_SKY, VISUALSERVER_ENV_BG_CANVAS, VISUALSERVER_ENV_BG_KEEP, VISUALSERVER_ENV_BG_MAX
+ * ctypedef enum VisualServer_MultimeshCustomDataFormat :VISUALSERVER_MULTIMESH_CUSTOM_DATA_NONE, VISUALSERVER_MULTIMESH_CUSTOM_DATA_8BIT, VISUALSERVER_MULTIMESH_CUSTOM_DATA_FLOAT             # <<<<<<<<<<<<<<
+ * ctypedef enum VisualServer_LightOmniShadowMode :VISUALSERVER_LIGHT_OMNI_SHADOW_DUAL_PARABOLOID, VISUALSERVER_LIGHT_OMNI_SHADOW_CUBE
+ * ctypedef enum VisualServer_TextureFlags :VISUALSERVER_TEXTURE_FLAG_MIPMAPS, VISUALSERVER_TEXTURE_FLAG_REPEAT, VISUALSERVER_TEXTURE_FLAG_FILTER, VISUALSERVER_TEXTURE_FLAGS_DEFAULT, VISUALSERVER_TEXTURE_FLAG_ANISOTROPIC_FILTER, VISUALSERVER_TEXTURE_FLAG_CONVERT_TO_LINEAR, VISUALSERVER_TEXTURE_FLAG_MIRRORED_REPEAT, VISUALSERVER_TEXTURE_FLAG_USED_FOR_STREAMING
+ */
+enum __pyx_t_7classes_9generated_VisualServer_MultimeshCustomDataFormat {
+  __pyx_e_7classes_9generated_VISUALSERVER_MULTIMESH_CUSTOM_DATA_NONE,
+  __pyx_e_7classes_9generated_VISUALSERVER_MULTIMESH_CUSTOM_DATA_8BIT,
+  __pyx_e_7classes_9generated_VISUALSERVER_MULTIMESH_CUSTOM_DATA_FLOAT
+};
+typedef enum __pyx_t_7classes_9generated_VisualServer_MultimeshCustomDataFormat __pyx_t_7classes_9generated_VisualServer_MultimeshCustomDataFormat;
+
+/* "classes/generated.pxd":830
+ * ctypedef enum VisualServer_EnvironmentBG :VISUALSERVER_ENV_BG_CLEAR_COLOR, VISUALSERVER_ENV_BG_COLOR, VISUALSERVER_ENV_BG_SKY, VISUALSERVER_ENV_BG_COLOR_SKY, VISUALSERVER_ENV_BG_CANVAS, VISUALSERVER_ENV_BG_KEEP, VISUALSERVER_ENV_BG_MAX
+ * ctypedef enum VisualServer_MultimeshCustomDataFormat :VISUALSERVER_MULTIMESH_CUSTOM_DATA_NONE, VISUALSERVER_MULTIMESH_CUSTOM_DATA_8BIT, VISUALSERVER_MULTIMESH_CUSTOM_DATA_FLOAT
+ * ctypedef enum VisualServer_LightOmniShadowMode :VISUALSERVER_LIGHT_OMNI_SHADOW_DUAL_PARABOLOID, VISUALSERVER_LIGHT_OMNI_SHADOW_CUBE             # <<<<<<<<<<<<<<
+ * ctypedef enum VisualServer_TextureFlags :VISUALSERVER_TEXTURE_FLAG_MIPMAPS, VISUALSERVER_TEXTURE_FLAG_REPEAT, VISUALSERVER_TEXTURE_FLAG_FILTER, VISUALSERVER_TEXTURE_FLAGS_DEFAULT, VISUALSERVER_TEXTURE_FLAG_ANISOTROPIC_FILTER, VISUALSERVER_TEXTURE_FLAG_CONVERT_TO_LINEAR, VISUALSERVER_TEXTURE_FLAG_MIRRORED_REPEAT, VISUALSERVER_TEXTURE_FLAG_USED_FOR_STREAMING
+ * ctypedef enum VisualServer_Features :VISUALSERVER_FEATURE_SHADERS, VISUALSERVER_FEATURE_MULTITHREADED
+ */
+enum __pyx_t_7classes_9generated_VisualServer_LightOmniShadowMode {
+  __pyx_e_7classes_9generated_VISUALSERVER_LIGHT_OMNI_SHADOW_DUAL_PARABOLOID,
+  __pyx_e_7classes_9generated_VISUALSERVER_LIGHT_OMNI_SHADOW_CUBE
+};
+typedef enum __pyx_t_7classes_9generated_VisualServer_LightOmniShadowMode __pyx_t_7classes_9generated_VisualServer_LightOmniShadowMode;
+
+/* "classes/generated.pxd":831
+ * ctypedef enum VisualServer_MultimeshCustomDataFormat :VISUALSERVER_MULTIMESH_CUSTOM_DATA_NONE, VISUALSERVER_MULTIMESH_CUSTOM_DATA_8BIT, VISUALSERVER_MULTIMESH_CUSTOM_DATA_FLOAT
+ * ctypedef enum VisualServer_LightOmniShadowMode :VISUALSERVER_LIGHT_OMNI_SHADOW_DUAL_PARABOLOID, VISUALSERVER_LIGHT_OMNI_SHADOW_CUBE
+ * ctypedef enum VisualServer_TextureFlags :VISUALSERVER_TEXTURE_FLAG_MIPMAPS, VISUALSERVER_TEXTURE_FLAG_REPEAT, VISUALSERVER_TEXTURE_FLAG_FILTER, VISUALSERVER_TEXTURE_FLAGS_DEFAULT, VISUALSERVER_TEXTURE_FLAG_ANISOTROPIC_FILTER, VISUALSERVER_TEXTURE_FLAG_CONVERT_TO_LINEAR, VISUALSERVER_TEXTURE_FLAG_MIRRORED_REPEAT, VISUALSERVER_TEXTURE_FLAG_USED_FOR_STREAMING             # <<<<<<<<<<<<<<
+ * ctypedef enum VisualServer_Features :VISUALSERVER_FEATURE_SHADERS, VISUALSERVER_FEATURE_MULTITHREADED
+ * ctypedef enum VisualServer_InstanceType :VISUALSERVER_INSTANCE_NONE, VISUALSERVER_INSTANCE_MESH, VISUALSERVER_INSTANCE_MULTIMESH, VISUALSERVER_INSTANCE_IMMEDIATE, VISUALSERVER_INSTANCE_PARTICLES, VISUALSERVER_INSTANCE_LIGHT, VISUALSERVER_INSTANCE_REFLECTION_PROBE, VISUALSERVER_INSTANCE_GI_PROBE, VISUALSERVER_INSTANCE_LIGHTMAP_CAPTURE, VISUALSERVER_INSTANCE_MAX, VISUALSERVER_INSTANCE_GEOMETRY_MASK
+ */
+enum __pyx_t_7classes_9generated_VisualServer_TextureFlags {
+  __pyx_e_7classes_9generated_VISUALSERVER_TEXTURE_FLAG_MIPMAPS,
+  __pyx_e_7classes_9generated_VISUALSERVER_TEXTURE_FLAG_REPEAT,
+  __pyx_e_7classes_9generated_VISUALSERVER_TEXTURE_FLAG_FILTER,
+  __pyx_e_7classes_9generated_VISUALSERVER_TEXTURE_FLAGS_DEFAULT,
+  __pyx_e_7classes_9generated_VISUALSERVER_TEXTURE_FLAG_ANISOTROPIC_FILTER,
+  __pyx_e_7classes_9generated_VISUALSERVER_TEXTURE_FLAG_CONVERT_TO_LINEAR,
+  __pyx_e_7classes_9generated_VISUALSERVER_TEXTURE_FLAG_MIRRORED_REPEAT,
+  __pyx_e_7classes_9generated_VISUALSERVER_TEXTURE_FLAG_USED_FOR_STREAMING
+};
+typedef enum __pyx_t_7classes_9generated_VisualServer_TextureFlags __pyx_t_7classes_9generated_VisualServer_TextureFlags;
+
+/* "classes/generated.pxd":832
+ * ctypedef enum VisualServer_LightOmniShadowMode :VISUALSERVER_LIGHT_OMNI_SHADOW_DUAL_PARABOLOID, VISUALSERVER_LIGHT_OMNI_SHADOW_CUBE
+ * ctypedef enum VisualServer_TextureFlags :VISUALSERVER_TEXTURE_FLAG_MIPMAPS, VISUALSERVER_TEXTURE_FLAG_REPEAT, VISUALSERVER_TEXTURE_FLAG_FILTER, VISUALSERVER_TEXTURE_FLAGS_DEFAULT, VISUALSERVER_TEXTURE_FLAG_ANISOTROPIC_FILTER, VISUALSERVER_TEXTURE_FLAG_CONVERT_TO_LINEAR, VISUALSERVER_TEXTURE_FLAG_MIRRORED_REPEAT, VISUALSERVER_TEXTURE_FLAG_USED_FOR_STREAMING
+ * ctypedef enum VisualServer_Features :VISUALSERVER_FEATURE_SHADERS, VISUALSERVER_FEATURE_MULTITHREADED             # <<<<<<<<<<<<<<
+ * ctypedef enum VisualServer_InstanceType :VISUALSERVER_INSTANCE_NONE, VISUALSERVER_INSTANCE_MESH, VISUALSERVER_INSTANCE_MULTIMESH, VISUALSERVER_INSTANCE_IMMEDIATE, VISUALSERVER_INSTANCE_PARTICLES, VISUALSERVER_INSTANCE_LIGHT, VISUALSERVER_INSTANCE_REFLECTION_PROBE, VISUALSERVER_INSTANCE_GI_PROBE, VISUALSERVER_INSTANCE_LIGHTMAP_CAPTURE, VISUALSERVER_INSTANCE_MAX, VISUALSERVER_INSTANCE_GEOMETRY_MASK
+ * ctypedef enum VisualServer_EnvironmentSSAOBlur :VISUALSERVER_ENV_SSAO_BLUR_DISABLED, VISUALSERVER_ENV_SSAO_BLUR_1x1, VISUALSERVER_ENV_SSAO_BLUR_2x2, VISUALSERVER_ENV_SSAO_BLUR_3x3
+ */
+enum __pyx_t_7classes_9generated_VisualServer_Features {
+  __pyx_e_7classes_9generated_VISUALSERVER_FEATURE_SHADERS,
+  __pyx_e_7classes_9generated_VISUALSERVER_FEATURE_MULTITHREADED
+};
+typedef enum __pyx_t_7classes_9generated_VisualServer_Features __pyx_t_7classes_9generated_VisualServer_Features;
+
+/* "classes/generated.pxd":833
+ * ctypedef enum VisualServer_TextureFlags :VISUALSERVER_TEXTURE_FLAG_MIPMAPS, VISUALSERVER_TEXTURE_FLAG_REPEAT, VISUALSERVER_TEXTURE_FLAG_FILTER, VISUALSERVER_TEXTURE_FLAGS_DEFAULT, VISUALSERVER_TEXTURE_FLAG_ANISOTROPIC_FILTER, VISUALSERVER_TEXTURE_FLAG_CONVERT_TO_LINEAR, VISUALSERVER_TEXTURE_FLAG_MIRRORED_REPEAT, VISUALSERVER_TEXTURE_FLAG_USED_FOR_STREAMING
+ * ctypedef enum VisualServer_Features :VISUALSERVER_FEATURE_SHADERS, VISUALSERVER_FEATURE_MULTITHREADED
+ * ctypedef enum VisualServer_InstanceType :VISUALSERVER_INSTANCE_NONE, VISUALSERVER_INSTANCE_MESH, VISUALSERVER_INSTANCE_MULTIMESH, VISUALSERVER_INSTANCE_IMMEDIATE, VISUALSERVER_INSTANCE_PARTICLES, VISUALSERVER_INSTANCE_LIGHT, VISUALSERVER_INSTANCE_REFLECTION_PROBE, VISUALSERVER_INSTANCE_GI_PROBE, VISUALSERVER_INSTANCE_LIGHTMAP_CAPTURE, VISUALSERVER_INSTANCE_MAX, VISUALSERVER_INSTANCE_GEOMETRY_MASK             # <<<<<<<<<<<<<<
+ * ctypedef enum VisualServer_EnvironmentSSAOBlur :VISUALSERVER_ENV_SSAO_BLUR_DISABLED, VISUALSERVER_ENV_SSAO_BLUR_1x1, VISUALSERVER_ENV_SSAO_BLUR_2x2, VISUALSERVER_ENV_SSAO_BLUR_3x3
+ * ctypedef enum VisualServer_EnvironmentToneMapper :VISUALSERVER_ENV_TONE_MAPPER_LINEAR, VISUALSERVER_ENV_TONE_MAPPER_REINHARD, VISUALSERVER_ENV_TONE_MAPPER_FILMIC, VISUALSERVER_ENV_TONE_MAPPER_ACES
+ */
+enum __pyx_t_7classes_9generated_VisualServer_InstanceType {
+  __pyx_e_7classes_9generated_VISUALSERVER_INSTANCE_NONE,
+  __pyx_e_7classes_9generated_VISUALSERVER_INSTANCE_MESH,
+  __pyx_e_7classes_9generated_VISUALSERVER_INSTANCE_MULTIMESH,
+  __pyx_e_7classes_9generated_VISUALSERVER_INSTANCE_IMMEDIATE,
+  __pyx_e_7classes_9generated_VISUALSERVER_INSTANCE_PARTICLES,
+  __pyx_e_7classes_9generated_VISUALSERVER_INSTANCE_LIGHT,
+  __pyx_e_7classes_9generated_VISUALSERVER_INSTANCE_REFLECTION_PROBE,
+  __pyx_e_7classes_9generated_VISUALSERVER_INSTANCE_GI_PROBE,
+  __pyx_e_7classes_9generated_VISUALSERVER_INSTANCE_LIGHTMAP_CAPTURE,
+  __pyx_e_7classes_9generated_VISUALSERVER_INSTANCE_MAX,
+  __pyx_e_7classes_9generated_VISUALSERVER_INSTANCE_GEOMETRY_MASK
+};
+typedef enum __pyx_t_7classes_9generated_VisualServer_InstanceType __pyx_t_7classes_9generated_VisualServer_InstanceType;
+
+/* "classes/generated.pxd":834
+ * ctypedef enum VisualServer_Features :VISUALSERVER_FEATURE_SHADERS, VISUALSERVER_FEATURE_MULTITHREADED
+ * ctypedef enum VisualServer_InstanceType :VISUALSERVER_INSTANCE_NONE, VISUALSERVER_INSTANCE_MESH, VISUALSERVER_INSTANCE_MULTIMESH, VISUALSERVER_INSTANCE_IMMEDIATE, VISUALSERVER_INSTANCE_PARTICLES, VISUALSERVER_INSTANCE_LIGHT, VISUALSERVER_INSTANCE_REFLECTION_PROBE, VISUALSERVER_INSTANCE_GI_PROBE, VISUALSERVER_INSTANCE_LIGHTMAP_CAPTURE, VISUALSERVER_INSTANCE_MAX, VISUALSERVER_INSTANCE_GEOMETRY_MASK
+ * ctypedef enum VisualServer_EnvironmentSSAOBlur :VISUALSERVER_ENV_SSAO_BLUR_DISABLED, VISUALSERVER_ENV_SSAO_BLUR_1x1, VISUALSERVER_ENV_SSAO_BLUR_2x2, VISUALSERVER_ENV_SSAO_BLUR_3x3             # <<<<<<<<<<<<<<
+ * ctypedef enum VisualServer_EnvironmentToneMapper :VISUALSERVER_ENV_TONE_MAPPER_LINEAR, VISUALSERVER_ENV_TONE_MAPPER_REINHARD, VISUALSERVER_ENV_TONE_MAPPER_FILMIC, VISUALSERVER_ENV_TONE_MAPPER_ACES
+ * ctypedef enum VisualServer_EnvironmentGlowBlendMode :VISUALSERVER_GLOW_BLEND_MODE_ADDITIVE, VISUALSERVER_GLOW_BLEND_MODE_SCREEN, VISUALSERVER_GLOW_BLEND_MODE_SOFTLIGHT, VISUALSERVER_GLOW_BLEND_MODE_REPLACE
+ */
+enum __pyx_t_7classes_9generated_VisualServer_EnvironmentSSAOBlur {
+  __pyx_e_7classes_9generated_VISUALSERVER_ENV_SSAO_BLUR_DISABLED,
+  __pyx_e_7classes_9generated_VISUALSERVER_ENV_SSAO_BLUR_1x1,
+  __pyx_e_7classes_9generated_VISUALSERVER_ENV_SSAO_BLUR_2x2,
+  __pyx_e_7classes_9generated_VISUALSERVER_ENV_SSAO_BLUR_3x3
+};
+typedef enum __pyx_t_7classes_9generated_VisualServer_EnvironmentSSAOBlur __pyx_t_7classes_9generated_VisualServer_EnvironmentSSAOBlur;
+
+/* "classes/generated.pxd":835
+ * ctypedef enum VisualServer_InstanceType :VISUALSERVER_INSTANCE_NONE, VISUALSERVER_INSTANCE_MESH, VISUALSERVER_INSTANCE_MULTIMESH, VISUALSERVER_INSTANCE_IMMEDIATE, VISUALSERVER_INSTANCE_PARTICLES, VISUALSERVER_INSTANCE_LIGHT, VISUALSERVER_INSTANCE_REFLECTION_PROBE, VISUALSERVER_INSTANCE_GI_PROBE, VISUALSERVER_INSTANCE_LIGHTMAP_CAPTURE, VISUALSERVER_INSTANCE_MAX, VISUALSERVER_INSTANCE_GEOMETRY_MASK
+ * ctypedef enum VisualServer_EnvironmentSSAOBlur :VISUALSERVER_ENV_SSAO_BLUR_DISABLED, VISUALSERVER_ENV_SSAO_BLUR_1x1, VISUALSERVER_ENV_SSAO_BLUR_2x2, VISUALSERVER_ENV_SSAO_BLUR_3x3
+ * ctypedef enum VisualServer_EnvironmentToneMapper :VISUALSERVER_ENV_TONE_MAPPER_LINEAR, VISUALSERVER_ENV_TONE_MAPPER_REINHARD, VISUALSERVER_ENV_TONE_MAPPER_FILMIC, VISUALSERVER_ENV_TONE_MAPPER_ACES             # <<<<<<<<<<<<<<
+ * ctypedef enum VisualServer_EnvironmentGlowBlendMode :VISUALSERVER_GLOW_BLEND_MODE_ADDITIVE, VISUALSERVER_GLOW_BLEND_MODE_SCREEN, VISUALSERVER_GLOW_BLEND_MODE_SOFTLIGHT, VISUALSERVER_GLOW_BLEND_MODE_REPLACE
+ * ctypedef enum VisualServer_MultimeshColorFormat :VISUALSERVER_MULTIMESH_COLOR_NONE, VISUALSERVER_MULTIMESH_COLOR_8BIT, VISUALSERVER_MULTIMESH_COLOR_FLOAT
+ */
+enum __pyx_t_7classes_9generated_VisualServer_EnvironmentToneMapper {
+  __pyx_e_7classes_9generated_VISUALSERVER_ENV_TONE_MAPPER_LINEAR,
+  __pyx_e_7classes_9generated_VISUALSERVER_ENV_TONE_MAPPER_REINHARD,
+  __pyx_e_7classes_9generated_VISUALSERVER_ENV_TONE_MAPPER_FILMIC,
+  __pyx_e_7classes_9generated_VISUALSERVER_ENV_TONE_MAPPER_ACES
+};
+typedef enum __pyx_t_7classes_9generated_VisualServer_EnvironmentToneMapper __pyx_t_7classes_9generated_VisualServer_EnvironmentToneMapper;
+
+/* "classes/generated.pxd":836
+ * ctypedef enum VisualServer_EnvironmentSSAOBlur :VISUALSERVER_ENV_SSAO_BLUR_DISABLED, VISUALSERVER_ENV_SSAO_BLUR_1x1, VISUALSERVER_ENV_SSAO_BLUR_2x2, VISUALSERVER_ENV_SSAO_BLUR_3x3
+ * ctypedef enum VisualServer_EnvironmentToneMapper :VISUALSERVER_ENV_TONE_MAPPER_LINEAR, VISUALSERVER_ENV_TONE_MAPPER_REINHARD, VISUALSERVER_ENV_TONE_MAPPER_FILMIC, VISUALSERVER_ENV_TONE_MAPPER_ACES
+ * ctypedef enum VisualServer_EnvironmentGlowBlendMode :VISUALSERVER_GLOW_BLEND_MODE_ADDITIVE, VISUALSERVER_GLOW_BLEND_MODE_SCREEN, VISUALSERVER_GLOW_BLEND_MODE_SOFTLIGHT, VISUALSERVER_GLOW_BLEND_MODE_REPLACE             # <<<<<<<<<<<<<<
+ * ctypedef enum VisualServer_MultimeshColorFormat :VISUALSERVER_MULTIMESH_COLOR_NONE, VISUALSERVER_MULTIMESH_COLOR_8BIT, VISUALSERVER_MULTIMESH_COLOR_FLOAT
+ * ctypedef enum VisualServer_CanvasLightShadowFilter :VISUALSERVER_CANVAS_LIGHT_FILTER_NONE, VISUALSERVER_CANVAS_LIGHT_FILTER_PCF3, VISUALSERVER_CANVAS_LIGHT_FILTER_PCF5, VISUALSERVER_CANVAS_LIGHT_FILTER_PCF7, VISUALSERVER_CANVAS_LIGHT_FILTER_PCF9, VISUALSERVER_CANVAS_LIGHT_FILTER_PCF13
+ */
+enum __pyx_t_7classes_9generated_VisualServer_EnvironmentGlowBlendMode {
+  __pyx_e_7classes_9generated_VISUALSERVER_GLOW_BLEND_MODE_ADDITIVE,
+  __pyx_e_7classes_9generated_VISUALSERVER_GLOW_BLEND_MODE_SCREEN,
+  __pyx_e_7classes_9generated_VISUALSERVER_GLOW_BLEND_MODE_SOFTLIGHT,
+  __pyx_e_7classes_9generated_VISUALSERVER_GLOW_BLEND_MODE_REPLACE
+};
+typedef enum __pyx_t_7classes_9generated_VisualServer_EnvironmentGlowBlendMode __pyx_t_7classes_9generated_VisualServer_EnvironmentGlowBlendMode;
+
+/* "classes/generated.pxd":837
+ * ctypedef enum VisualServer_EnvironmentToneMapper :VISUALSERVER_ENV_TONE_MAPPER_LINEAR, VISUALSERVER_ENV_TONE_MAPPER_REINHARD, VISUALSERVER_ENV_TONE_MAPPER_FILMIC, VISUALSERVER_ENV_TONE_MAPPER_ACES
+ * ctypedef enum VisualServer_EnvironmentGlowBlendMode :VISUALSERVER_GLOW_BLEND_MODE_ADDITIVE, VISUALSERVER_GLOW_BLEND_MODE_SCREEN, VISUALSERVER_GLOW_BLEND_MODE_SOFTLIGHT, VISUALSERVER_GLOW_BLEND_MODE_REPLACE
+ * ctypedef enum VisualServer_MultimeshColorFormat :VISUALSERVER_MULTIMESH_COLOR_NONE, VISUALSERVER_MULTIMESH_COLOR_8BIT, VISUALSERVER_MULTIMESH_COLOR_FLOAT             # <<<<<<<<<<<<<<
+ * ctypedef enum VisualServer_CanvasLightShadowFilter :VISUALSERVER_CANVAS_LIGHT_FILTER_NONE, VISUALSERVER_CANVAS_LIGHT_FILTER_PCF3, VISUALSERVER_CANVAS_LIGHT_FILTER_PCF5, VISUALSERVER_CANVAS_LIGHT_FILTER_PCF7, VISUALSERVER_CANVAS_LIGHT_FILTER_PCF9, VISUALSERVER_CANVAS_LIGHT_FILTER_PCF13
+ * ctypedef enum VisualServer_ScenarioDebugMode :VISUALSERVER_SCENARIO_DEBUG_DISABLED, VISUALSERVER_SCENARIO_DEBUG_WIREFRAME, VISUALSERVER_SCENARIO_DEBUG_OVERDRAW, VISUALSERVER_SCENARIO_DEBUG_SHADELESS
+ */
+enum __pyx_t_7classes_9generated_VisualServer_MultimeshColorFormat {
+  __pyx_e_7classes_9generated_VISUALSERVER_MULTIMESH_COLOR_NONE,
+  __pyx_e_7classes_9generated_VISUALSERVER_MULTIMESH_COLOR_8BIT,
+  __pyx_e_7classes_9generated_VISUALSERVER_MULTIMESH_COLOR_FLOAT
+};
+typedef enum __pyx_t_7classes_9generated_VisualServer_MultimeshColorFormat __pyx_t_7classes_9generated_VisualServer_MultimeshColorFormat;
+
+/* "classes/generated.pxd":838
+ * ctypedef enum VisualServer_EnvironmentGlowBlendMode :VISUALSERVER_GLOW_BLEND_MODE_ADDITIVE, VISUALSERVER_GLOW_BLEND_MODE_SCREEN, VISUALSERVER_GLOW_BLEND_MODE_SOFTLIGHT, VISUALSERVER_GLOW_BLEND_MODE_REPLACE
+ * ctypedef enum VisualServer_MultimeshColorFormat :VISUALSERVER_MULTIMESH_COLOR_NONE, VISUALSERVER_MULTIMESH_COLOR_8BIT, VISUALSERVER_MULTIMESH_COLOR_FLOAT
+ * ctypedef enum VisualServer_CanvasLightShadowFilter :VISUALSERVER_CANVAS_LIGHT_FILTER_NONE, VISUALSERVER_CANVAS_LIGHT_FILTER_PCF3, VISUALSERVER_CANVAS_LIGHT_FILTER_PCF5, VISUALSERVER_CANVAS_LIGHT_FILTER_PCF7, VISUALSERVER_CANVAS_LIGHT_FILTER_PCF9, VISUALSERVER_CANVAS_LIGHT_FILTER_PCF13             # <<<<<<<<<<<<<<
+ * ctypedef enum VisualServer_ScenarioDebugMode :VISUALSERVER_SCENARIO_DEBUG_DISABLED, VISUALSERVER_SCENARIO_DEBUG_WIREFRAME, VISUALSERVER_SCENARIO_DEBUG_OVERDRAW, VISUALSERVER_SCENARIO_DEBUG_SHADELESS
+ * ctypedef enum VisualServer_ViewportUpdateMode :VISUALSERVER_VIEWPORT_UPDATE_DISABLED, VISUALSERVER_VIEWPORT_UPDATE_ONCE, VISUALSERVER_VIEWPORT_UPDATE_WHEN_VISIBLE, VISUALSERVER_VIEWPORT_UPDATE_ALWAYS
+ */
+enum __pyx_t_7classes_9generated_VisualServer_CanvasLightShadowFilter {
+  __pyx_e_7classes_9generated_VISUALSERVER_CANVAS_LIGHT_FILTER_NONE,
+  __pyx_e_7classes_9generated_VISUALSERVER_CANVAS_LIGHT_FILTER_PCF3,
+  __pyx_e_7classes_9generated_VISUALSERVER_CANVAS_LIGHT_FILTER_PCF5,
+  __pyx_e_7classes_9generated_VISUALSERVER_CANVAS_LIGHT_FILTER_PCF7,
+  __pyx_e_7classes_9generated_VISUALSERVER_CANVAS_LIGHT_FILTER_PCF9,
+  __pyx_e_7classes_9generated_VISUALSERVER_CANVAS_LIGHT_FILTER_PCF13
+};
+typedef enum __pyx_t_7classes_9generated_VisualServer_CanvasLightShadowFilter __pyx_t_7classes_9generated_VisualServer_CanvasLightShadowFilter;
+
+/* "classes/generated.pxd":839
+ * ctypedef enum VisualServer_MultimeshColorFormat :VISUALSERVER_MULTIMESH_COLOR_NONE, VISUALSERVER_MULTIMESH_COLOR_8BIT, VISUALSERVER_MULTIMESH_COLOR_FLOAT
+ * ctypedef enum VisualServer_CanvasLightShadowFilter :VISUALSERVER_CANVAS_LIGHT_FILTER_NONE, VISUALSERVER_CANVAS_LIGHT_FILTER_PCF3, VISUALSERVER_CANVAS_LIGHT_FILTER_PCF5, VISUALSERVER_CANVAS_LIGHT_FILTER_PCF7, VISUALSERVER_CANVAS_LIGHT_FILTER_PCF9, VISUALSERVER_CANVAS_LIGHT_FILTER_PCF13
+ * ctypedef enum VisualServer_ScenarioDebugMode :VISUALSERVER_SCENARIO_DEBUG_DISABLED, VISUALSERVER_SCENARIO_DEBUG_WIREFRAME, VISUALSERVER_SCENARIO_DEBUG_OVERDRAW, VISUALSERVER_SCENARIO_DEBUG_SHADELESS             # <<<<<<<<<<<<<<
+ * ctypedef enum VisualServer_ViewportUpdateMode :VISUALSERVER_VIEWPORT_UPDATE_DISABLED, VISUALSERVER_VIEWPORT_UPDATE_ONCE, VISUALSERVER_VIEWPORT_UPDATE_WHEN_VISIBLE, VISUALSERVER_VIEWPORT_UPDATE_ALWAYS
+ * ctypedef enum VisualServer_ArrayFormat :VISUALSERVER_ARRAY_FORMAT_VERTEX, VISUALSERVER_ARRAY_FORMAT_NORMAL, VISUALSERVER_ARRAY_FORMAT_TANGENT, VISUALSERVER_ARRAY_FORMAT_COLOR, VISUALSERVER_ARRAY_FORMAT_TEX_UV, VISUALSERVER_ARRAY_FORMAT_TEX_UV2, VISUALSERVER_ARRAY_FORMAT_BONES, VISUALSERVER_ARRAY_FORMAT_WEIGHTS, VISUALSERVER_ARRAY_FORMAT_INDEX, VISUALSERVER_ARRAY_COMPRESS_VERTEX, VISUALSERVER_ARRAY_COMPRESS_NORMAL, VISUALSERVER_ARRAY_COMPRESS_TANGENT, VISUALSERVER_ARRAY_COMPRESS_COLOR, VISUALSERVER_ARRAY_COMPRESS_TEX_UV, VISUALSERVER_ARRAY_COMPRESS_TEX_UV2, VISUALSERVER_ARRAY_COMPRESS_BONES, VISUALSERVER_ARRAY_COMPRESS_WEIGHTS, VISUALSERVER_ARRAY_COMPRESS_DEFAULT, VISUALSERVER_ARRAY_COMPRESS_INDEX, VISUALSERVER_ARRAY_FLAG_USE_2D_VERTICES, VISUALSERVER_ARRAY_FLAG_USE_16_BIT_BONES
+ */
+enum __pyx_t_7classes_9generated_VisualServer_ScenarioDebugMode {
+  __pyx_e_7classes_9generated_VISUALSERVER_SCENARIO_DEBUG_DISABLED,
+  __pyx_e_7classes_9generated_VISUALSERVER_SCENARIO_DEBUG_WIREFRAME,
+  __pyx_e_7classes_9generated_VISUALSERVER_SCENARIO_DEBUG_OVERDRAW,
+  __pyx_e_7classes_9generated_VISUALSERVER_SCENARIO_DEBUG_SHADELESS
+};
+typedef enum __pyx_t_7classes_9generated_VisualServer_ScenarioDebugMode __pyx_t_7classes_9generated_VisualServer_ScenarioDebugMode;
+
+/* "classes/generated.pxd":840
+ * ctypedef enum VisualServer_CanvasLightShadowFilter :VISUALSERVER_CANVAS_LIGHT_FILTER_NONE, VISUALSERVER_CANVAS_LIGHT_FILTER_PCF3, VISUALSERVER_CANVAS_LIGHT_FILTER_PCF5, VISUALSERVER_CANVAS_LIGHT_FILTER_PCF7, VISUALSERVER_CANVAS_LIGHT_FILTER_PCF9, VISUALSERVER_CANVAS_LIGHT_FILTER_PCF13
+ * ctypedef enum VisualServer_ScenarioDebugMode :VISUALSERVER_SCENARIO_DEBUG_DISABLED, VISUALSERVER_SCENARIO_DEBUG_WIREFRAME, VISUALSERVER_SCENARIO_DEBUG_OVERDRAW, VISUALSERVER_SCENARIO_DEBUG_SHADELESS
+ * ctypedef enum VisualServer_ViewportUpdateMode :VISUALSERVER_VIEWPORT_UPDATE_DISABLED, VISUALSERVER_VIEWPORT_UPDATE_ONCE, VISUALSERVER_VIEWPORT_UPDATE_WHEN_VISIBLE, VISUALSERVER_VIEWPORT_UPDATE_ALWAYS             # <<<<<<<<<<<<<<
+ * ctypedef enum VisualServer_ArrayFormat :VISUALSERVER_ARRAY_FORMAT_VERTEX, VISUALSERVER_ARRAY_FORMAT_NORMAL, VISUALSERVER_ARRAY_FORMAT_TANGENT, VISUALSERVER_ARRAY_FORMAT_COLOR, VISUALSERVER_ARRAY_FORMAT_TEX_UV, VISUALSERVER_ARRAY_FORMAT_TEX_UV2, VISUALSERVER_ARRAY_FORMAT_BONES, VISUALSERVER_ARRAY_FORMAT_WEIGHTS, VISUALSERVER_ARRAY_FORMAT_INDEX, VISUALSERVER_ARRAY_COMPRESS_VERTEX, VISUALSERVER_ARRAY_COMPRESS_NORMAL, VISUALSERVER_ARRAY_COMPRESS_TANGENT, VISUALSERVER_ARRAY_COMPRESS_COLOR, VISUALSERVER_ARRAY_COMPRESS_TEX_UV, VISUALSERVER_ARRAY_COMPRESS_TEX_UV2, VISUALSERVER_ARRAY_COMPRESS_BONES, VISUALSERVER_ARRAY_COMPRESS_WEIGHTS, VISUALSERVER_ARRAY_COMPRESS_DEFAULT, VISUALSERVER_ARRAY_COMPRESS_INDEX, VISUALSERVER_ARRAY_FLAG_USE_2D_VERTICES, VISUALSERVER_ARRAY_FLAG_USE_16_BIT_BONES
+ * ctypedef enum VisualServer_ParticlesDrawOrder :VISUALSERVER_PARTICLES_DRAW_ORDER_INDEX, VISUALSERVER_PARTICLES_DRAW_ORDER_LIFETIME, VISUALSERVER_PARTICLES_DRAW_ORDER_VIEW_DEPTH
+ */
+enum __pyx_t_7classes_9generated_VisualServer_ViewportUpdateMode {
+  __pyx_e_7classes_9generated_VISUALSERVER_VIEWPORT_UPDATE_DISABLED,
+  __pyx_e_7classes_9generated_VISUALSERVER_VIEWPORT_UPDATE_ONCE,
+  __pyx_e_7classes_9generated_VISUALSERVER_VIEWPORT_UPDATE_WHEN_VISIBLE,
+  __pyx_e_7classes_9generated_VISUALSERVER_VIEWPORT_UPDATE_ALWAYS
+};
+typedef enum __pyx_t_7classes_9generated_VisualServer_ViewportUpdateMode __pyx_t_7classes_9generated_VisualServer_ViewportUpdateMode;
+
+/* "classes/generated.pxd":841
+ * ctypedef enum VisualServer_ScenarioDebugMode :VISUALSERVER_SCENARIO_DEBUG_DISABLED, VISUALSERVER_SCENARIO_DEBUG_WIREFRAME, VISUALSERVER_SCENARIO_DEBUG_OVERDRAW, VISUALSERVER_SCENARIO_DEBUG_SHADELESS
+ * ctypedef enum VisualServer_ViewportUpdateMode :VISUALSERVER_VIEWPORT_UPDATE_DISABLED, VISUALSERVER_VIEWPORT_UPDATE_ONCE, VISUALSERVER_VIEWPORT_UPDATE_WHEN_VISIBLE, VISUALSERVER_VIEWPORT_UPDATE_ALWAYS
+ * ctypedef enum VisualServer_ArrayFormat :VISUALSERVER_ARRAY_FORMAT_VERTEX, VISUALSERVER_ARRAY_FORMAT_NORMAL, VISUALSERVER_ARRAY_FORMAT_TANGENT, VISUALSERVER_ARRAY_FORMAT_COLOR, VISUALSERVER_ARRAY_FORMAT_TEX_UV, VISUALSERVER_ARRAY_FORMAT_TEX_UV2, VISUALSERVER_ARRAY_FORMAT_BONES, VISUALSERVER_ARRAY_FORMAT_WEIGHTS, VISUALSERVER_ARRAY_FORMAT_INDEX, VISUALSERVER_ARRAY_COMPRESS_VERTEX, VISUALSERVER_ARRAY_COMPRESS_NORMAL, VISUALSERVER_ARRAY_COMPRESS_TANGENT, VISUALSERVER_ARRAY_COMPRESS_COLOR, VISUALSERVER_ARRAY_COMPRESS_TEX_UV, VISUALSERVER_ARRAY_COMPRESS_TEX_UV2, VISUALSERVER_ARRAY_COMPRESS_BONES, VISUALSERVER_ARRAY_COMPRESS_WEIGHTS, VISUALSERVER_ARRAY_COMPRESS_DEFAULT, VISUALSERVER_ARRAY_COMPRESS_INDEX, VISUALSERVER_ARRAY_FLAG_USE_2D_VERTICES, VISUALSERVER_ARRAY_FLAG_USE_16_BIT_BONES             # <<<<<<<<<<<<<<
+ * ctypedef enum VisualServer_ParticlesDrawOrder :VISUALSERVER_PARTICLES_DRAW_ORDER_INDEX, VISUALSERVER_PARTICLES_DRAW_ORDER_LIFETIME, VISUALSERVER_PARTICLES_DRAW_ORDER_VIEW_DEPTH
+ * ctypedef enum VisualServer_CanvasLightMode :VISUALSERVER_CANVAS_LIGHT_MODE_ADD, VISUALSERVER_CANVAS_LIGHT_MODE_SUB, VISUALSERVER_CANVAS_LIGHT_MODE_MIX, VISUALSERVER_CANVAS_LIGHT_MODE_MASK
+ */
+enum __pyx_t_7classes_9generated_VisualServer_ArrayFormat {
+  __pyx_e_7classes_9generated_VISUALSERVER_ARRAY_FORMAT_VERTEX,
+  __pyx_e_7classes_9generated_VISUALSERVER_ARRAY_FORMAT_NORMAL,
+  __pyx_e_7classes_9generated_VISUALSERVER_ARRAY_FORMAT_TANGENT,
+  __pyx_e_7classes_9generated_VISUALSERVER_ARRAY_FORMAT_COLOR,
+  __pyx_e_7classes_9generated_VISUALSERVER_ARRAY_FORMAT_TEX_UV,
+  __pyx_e_7classes_9generated_VISUALSERVER_ARRAY_FORMAT_TEX_UV2,
+  __pyx_e_7classes_9generated_VISUALSERVER_ARRAY_FORMAT_BONES,
+  __pyx_e_7classes_9generated_VISUALSERVER_ARRAY_FORMAT_WEIGHTS,
+  __pyx_e_7classes_9generated_VISUALSERVER_ARRAY_FORMAT_INDEX,
+  __pyx_e_7classes_9generated_VISUALSERVER_ARRAY_COMPRESS_VERTEX,
+  __pyx_e_7classes_9generated_VISUALSERVER_ARRAY_COMPRESS_NORMAL,
+  __pyx_e_7classes_9generated_VISUALSERVER_ARRAY_COMPRESS_TANGENT,
+  __pyx_e_7classes_9generated_VISUALSERVER_ARRAY_COMPRESS_COLOR,
+  __pyx_e_7classes_9generated_VISUALSERVER_ARRAY_COMPRESS_TEX_UV,
+  __pyx_e_7classes_9generated_VISUALSERVER_ARRAY_COMPRESS_TEX_UV2,
+  __pyx_e_7classes_9generated_VISUALSERVER_ARRAY_COMPRESS_BONES,
+  __pyx_e_7classes_9generated_VISUALSERVER_ARRAY_COMPRESS_WEIGHTS,
+  __pyx_e_7classes_9generated_VISUALSERVER_ARRAY_COMPRESS_DEFAULT,
+  __pyx_e_7classes_9generated_VISUALSERVER_ARRAY_COMPRESS_INDEX,
+  __pyx_e_7classes_9generated_VISUALSERVER_ARRAY_FLAG_USE_2D_VERTICES,
+  __pyx_e_7classes_9generated_VISUALSERVER_ARRAY_FLAG_USE_16_BIT_BONES
+};
+typedef enum __pyx_t_7classes_9generated_VisualServer_ArrayFormat __pyx_t_7classes_9generated_VisualServer_ArrayFormat;
+
+/* "classes/generated.pxd":842
+ * ctypedef enum VisualServer_ViewportUpdateMode :VISUALSERVER_VIEWPORT_UPDATE_DISABLED, VISUALSERVER_VIEWPORT_UPDATE_ONCE, VISUALSERVER_VIEWPORT_UPDATE_WHEN_VISIBLE, VISUALSERVER_VIEWPORT_UPDATE_ALWAYS
+ * ctypedef enum VisualServer_ArrayFormat :VISUALSERVER_ARRAY_FORMAT_VERTEX, VISUALSERVER_ARRAY_FORMAT_NORMAL, VISUALSERVER_ARRAY_FORMAT_TANGENT, VISUALSERVER_ARRAY_FORMAT_COLOR, VISUALSERVER_ARRAY_FORMAT_TEX_UV, VISUALSERVER_ARRAY_FORMAT_TEX_UV2, VISUALSERVER_ARRAY_FORMAT_BONES, VISUALSERVER_ARRAY_FORMAT_WEIGHTS, VISUALSERVER_ARRAY_FORMAT_INDEX, VISUALSERVER_ARRAY_COMPRESS_VERTEX, VISUALSERVER_ARRAY_COMPRESS_NORMAL, VISUALSERVER_ARRAY_COMPRESS_TANGENT, VISUALSERVER_ARRAY_COMPRESS_COLOR, VISUALSERVER_ARRAY_COMPRESS_TEX_UV, VISUALSERVER_ARRAY_COMPRESS_TEX_UV2, VISUALSERVER_ARRAY_COMPRESS_BONES, VISUALSERVER_ARRAY_COMPRESS_WEIGHTS, VISUALSERVER_ARRAY_COMPRESS_DEFAULT, VISUALSERVER_ARRAY_COMPRESS_INDEX, VISUALSERVER_ARRAY_FLAG_USE_2D_VERTICES, VISUALSERVER_ARRAY_FLAG_USE_16_BIT_BONES
+ * ctypedef enum VisualServer_ParticlesDrawOrder :VISUALSERVER_PARTICLES_DRAW_ORDER_INDEX, VISUALSERVER_PARTICLES_DRAW_ORDER_LIFETIME, VISUALSERVER_PARTICLES_DRAW_ORDER_VIEW_DEPTH             # <<<<<<<<<<<<<<
+ * ctypedef enum VisualServer_CanvasLightMode :VISUALSERVER_CANVAS_LIGHT_MODE_ADD, VISUALSERVER_CANVAS_LIGHT_MODE_SUB, VISUALSERVER_CANVAS_LIGHT_MODE_MIX, VISUALSERVER_CANVAS_LIGHT_MODE_MASK
+ * ctypedef enum VisualServer_LightDirectionalShadowMode :VISUALSERVER_LIGHT_DIRECTIONAL_SHADOW_ORTHOGONAL, VISUALSERVER_LIGHT_DIRECTIONAL_SHADOW_PARALLEL_2_SPLITS, VISUALSERVER_LIGHT_DIRECTIONAL_SHADOW_PARALLEL_4_SPLITS
+ */
+enum __pyx_t_7classes_9generated_VisualServer_ParticlesDrawOrder {
+  __pyx_e_7classes_9generated_VISUALSERVER_PARTICLES_DRAW_ORDER_INDEX,
+  __pyx_e_7classes_9generated_VISUALSERVER_PARTICLES_DRAW_ORDER_LIFETIME,
+  __pyx_e_7classes_9generated_VISUALSERVER_PARTICLES_DRAW_ORDER_VIEW_DEPTH
+};
+typedef enum __pyx_t_7classes_9generated_VisualServer_ParticlesDrawOrder __pyx_t_7classes_9generated_VisualServer_ParticlesDrawOrder;
+
+/* "classes/generated.pxd":843
+ * ctypedef enum VisualServer_ArrayFormat :VISUALSERVER_ARRAY_FORMAT_VERTEX, VISUALSERVER_ARRAY_FORMAT_NORMAL, VISUALSERVER_ARRAY_FORMAT_TANGENT, VISUALSERVER_ARRAY_FORMAT_COLOR, VISUALSERVER_ARRAY_FORMAT_TEX_UV, VISUALSERVER_ARRAY_FORMAT_TEX_UV2, VISUALSERVER_ARRAY_FORMAT_BONES, VISUALSERVER_ARRAY_FORMAT_WEIGHTS, VISUALSERVER_ARRAY_FORMAT_INDEX, VISUALSERVER_ARRAY_COMPRESS_VERTEX, VISUALSERVER_ARRAY_COMPRESS_NORMAL, VISUALSERVER_ARRAY_COMPRESS_TANGENT, VISUALSERVER_ARRAY_COMPRESS_COLOR, VISUALSERVER_ARRAY_COMPRESS_TEX_UV, VISUALSERVER_ARRAY_COMPRESS_TEX_UV2, VISUALSERVER_ARRAY_COMPRESS_BONES, VISUALSERVER_ARRAY_COMPRESS_WEIGHTS, VISUALSERVER_ARRAY_COMPRESS_DEFAULT, VISUALSERVER_ARRAY_COMPRESS_INDEX, VISUALSERVER_ARRAY_FLAG_USE_2D_VERTICES, VISUALSERVER_ARRAY_FLAG_USE_16_BIT_BONES
+ * ctypedef enum VisualServer_ParticlesDrawOrder :VISUALSERVER_PARTICLES_DRAW_ORDER_INDEX, VISUALSERVER_PARTICLES_DRAW_ORDER_LIFETIME, VISUALSERVER_PARTICLES_DRAW_ORDER_VIEW_DEPTH
+ * ctypedef enum VisualServer_CanvasLightMode :VISUALSERVER_CANVAS_LIGHT_MODE_ADD, VISUALSERVER_CANVAS_LIGHT_MODE_SUB, VISUALSERVER_CANVAS_LIGHT_MODE_MIX, VISUALSERVER_CANVAS_LIGHT_MODE_MASK             # <<<<<<<<<<<<<<
+ * ctypedef enum VisualServer_LightDirectionalShadowMode :VISUALSERVER_LIGHT_DIRECTIONAL_SHADOW_ORTHOGONAL, VISUALSERVER_LIGHT_DIRECTIONAL_SHADOW_PARALLEL_2_SPLITS, VISUALSERVER_LIGHT_DIRECTIONAL_SHADOW_PARALLEL_4_SPLITS
+ * ctypedef enum VisualServer_LightParam :VISUALSERVER_LIGHT_PARAM_ENERGY, VISUALSERVER_LIGHT_PARAM_SPECULAR, VISUALSERVER_LIGHT_PARAM_RANGE, VISUALSERVER_LIGHT_PARAM_ATTENUATION, VISUALSERVER_LIGHT_PARAM_SPOT_ANGLE, VISUALSERVER_LIGHT_PARAM_SPOT_ATTENUATION, VISUALSERVER_LIGHT_PARAM_CONTACT_SHADOW_SIZE, VISUALSERVER_LIGHT_PARAM_SHADOW_MAX_DISTANCE, VISUALSERVER_LIGHT_PARAM_SHADOW_SPLIT_1_OFFSET, VISUALSERVER_LIGHT_PARAM_SHADOW_SPLIT_2_OFFSET, VISUALSERVER_LIGHT_PARAM_SHADOW_SPLIT_3_OFFSET, VISUALSERVER_LIGHT_PARAM_SHADOW_NORMAL_BIAS, VISUALSERVER_LIGHT_PARAM_SHADOW_BIAS, VISUALSERVER_LIGHT_PARAM_SHADOW_BIAS_SPLIT_SCALE, VISUALSERVER_LIGHT_PARAM_MAX
+ */
+enum __pyx_t_7classes_9generated_VisualServer_CanvasLightMode {
+  __pyx_e_7classes_9generated_VISUALSERVER_CANVAS_LIGHT_MODE_ADD,
+  __pyx_e_7classes_9generated_VISUALSERVER_CANVAS_LIGHT_MODE_SUB,
+  __pyx_e_7classes_9generated_VISUALSERVER_CANVAS_LIGHT_MODE_MIX,
+  __pyx_e_7classes_9generated_VISUALSERVER_CANVAS_LIGHT_MODE_MASK
+};
+typedef enum __pyx_t_7classes_9generated_VisualServer_CanvasLightMode __pyx_t_7classes_9generated_VisualServer_CanvasLightMode;
+
+/* "classes/generated.pxd":844
+ * ctypedef enum VisualServer_ParticlesDrawOrder :VISUALSERVER_PARTICLES_DRAW_ORDER_INDEX, VISUALSERVER_PARTICLES_DRAW_ORDER_LIFETIME, VISUALSERVER_PARTICLES_DRAW_ORDER_VIEW_DEPTH
+ * ctypedef enum VisualServer_CanvasLightMode :VISUALSERVER_CANVAS_LIGHT_MODE_ADD, VISUALSERVER_CANVAS_LIGHT_MODE_SUB, VISUALSERVER_CANVAS_LIGHT_MODE_MIX, VISUALSERVER_CANVAS_LIGHT_MODE_MASK
+ * ctypedef enum VisualServer_LightDirectionalShadowMode :VISUALSERVER_LIGHT_DIRECTIONAL_SHADOW_ORTHOGONAL, VISUALSERVER_LIGHT_DIRECTIONAL_SHADOW_PARALLEL_2_SPLITS, VISUALSERVER_LIGHT_DIRECTIONAL_SHADOW_PARALLEL_4_SPLITS             # <<<<<<<<<<<<<<
+ * ctypedef enum VisualServer_LightParam :VISUALSERVER_LIGHT_PARAM_ENERGY, VISUALSERVER_LIGHT_PARAM_SPECULAR, VISUALSERVER_LIGHT_PARAM_RANGE, VISUALSERVER_LIGHT_PARAM_ATTENUATION, VISUALSERVER_LIGHT_PARAM_SPOT_ANGLE, VISUALSERVER_LIGHT_PARAM_SPOT_ATTENUATION, VISUALSERVER_LIGHT_PARAM_CONTACT_SHADOW_SIZE, VISUALSERVER_LIGHT_PARAM_SHADOW_MAX_DISTANCE, VISUALSERVER_LIGHT_PARAM_SHADOW_SPLIT_1_OFFSET, VISUALSERVER_LIGHT_PARAM_SHADOW_SPLIT_2_OFFSET, VISUALSERVER_LIGHT_PARAM_SHADOW_SPLIT_3_OFFSET, VISUALSERVER_LIGHT_PARAM_SHADOW_NORMAL_BIAS, VISUALSERVER_LIGHT_PARAM_SHADOW_BIAS, VISUALSERVER_LIGHT_PARAM_SHADOW_BIAS_SPLIT_SCALE, VISUALSERVER_LIGHT_PARAM_MAX
+ * ctypedef enum VisualServer_ArrayType :VISUALSERVER_ARRAY_VERTEX, VISUALSERVER_ARRAY_NORMAL, VISUALSERVER_ARRAY_TANGENT, VISUALSERVER_ARRAY_COLOR, VISUALSERVER_ARRAY_TEX_UV, VISUALSERVER_ARRAY_TEX_UV2, VISUALSERVER_ARRAY_BONES, VISUALSERVER_ARRAY_WEIGHTS, VISUALSERVER_ARRAY_INDEX, VISUALSERVER_ARRAY_MAX
+ */
+enum __pyx_t_7classes_9generated_VisualServer_LightDirectionalShadowMode {
+  __pyx_e_7classes_9generated_VISUALSERVER_LIGHT_DIRECTIONAL_SHADOW_ORTHOGONAL,
+  __pyx_e_7classes_9generated_VISUALSERVER_LIGHT_DIRECTIONAL_SHADOW_PARALLEL_2_SPLITS,
+  __pyx_e_7classes_9generated_VISUALSERVER_LIGHT_DIRECTIONAL_SHADOW_PARALLEL_4_SPLITS
+};
+typedef enum __pyx_t_7classes_9generated_VisualServer_LightDirectionalShadowMode __pyx_t_7classes_9generated_VisualServer_LightDirectionalShadowMode;
+
+/* "classes/generated.pxd":845
+ * ctypedef enum VisualServer_CanvasLightMode :VISUALSERVER_CANVAS_LIGHT_MODE_ADD, VISUALSERVER_CANVAS_LIGHT_MODE_SUB, VISUALSERVER_CANVAS_LIGHT_MODE_MIX, VISUALSERVER_CANVAS_LIGHT_MODE_MASK
+ * ctypedef enum VisualServer_LightDirectionalShadowMode :VISUALSERVER_LIGHT_DIRECTIONAL_SHADOW_ORTHOGONAL, VISUALSERVER_LIGHT_DIRECTIONAL_SHADOW_PARALLEL_2_SPLITS, VISUALSERVER_LIGHT_DIRECTIONAL_SHADOW_PARALLEL_4_SPLITS
+ * ctypedef enum VisualServer_LightParam :VISUALSERVER_LIGHT_PARAM_ENERGY, VISUALSERVER_LIGHT_PARAM_SPECULAR, VISUALSERVER_LIGHT_PARAM_RANGE, VISUALSERVER_LIGHT_PARAM_ATTENUATION, VISUALSERVER_LIGHT_PARAM_SPOT_ANGLE, VISUALSERVER_LIGHT_PARAM_SPOT_ATTENUATION, VISUALSERVER_LIGHT_PARAM_CONTACT_SHADOW_SIZE, VISUALSERVER_LIGHT_PARAM_SHADOW_MAX_DISTANCE, VISUALSERVER_LIGHT_PARAM_SHADOW_SPLIT_1_OFFSET, VISUALSERVER_LIGHT_PARAM_SHADOW_SPLIT_2_OFFSET, VISUALSERVER_LIGHT_PARAM_SHADOW_SPLIT_3_OFFSET, VISUALSERVER_LIGHT_PARAM_SHADOW_NORMAL_BIAS, VISUALSERVER_LIGHT_PARAM_SHADOW_BIAS, VISUALSERVER_LIGHT_PARAM_SHADOW_BIAS_SPLIT_SCALE, VISUALSERVER_LIGHT_PARAM_MAX             # <<<<<<<<<<<<<<
+ * ctypedef enum VisualServer_ArrayType :VISUALSERVER_ARRAY_VERTEX, VISUALSERVER_ARRAY_NORMAL, VISUALSERVER_ARRAY_TANGENT, VISUALSERVER_ARRAY_COLOR, VISUALSERVER_ARRAY_TEX_UV, VISUALSERVER_ARRAY_TEX_UV2, VISUALSERVER_ARRAY_BONES, VISUALSERVER_ARRAY_WEIGHTS, VISUALSERVER_ARRAY_INDEX, VISUALSERVER_ARRAY_MAX
+ * ctypedef enum VisualServer_CanvasOccluderPolygonCullMode :VISUALSERVER_CANVAS_OCCLUDER_POLYGON_CULL_DISABLED, VISUALSERVER_CANVAS_OCCLUDER_POLYGON_CULL_CLOCKWISE, VISUALSERVER_CANVAS_OCCLUDER_POLYGON_CULL_COUNTER_CLOCKWISE
+ */
+enum __pyx_t_7classes_9generated_VisualServer_LightParam {
+  __pyx_e_7classes_9generated_VISUALSERVER_LIGHT_PARAM_ENERGY,
+  __pyx_e_7classes_9generated_VISUALSERVER_LIGHT_PARAM_SPECULAR,
+  __pyx_e_7classes_9generated_VISUALSERVER_LIGHT_PARAM_RANGE,
+  __pyx_e_7classes_9generated_VISUALSERVER_LIGHT_PARAM_ATTENUATION,
+  __pyx_e_7classes_9generated_VISUALSERVER_LIGHT_PARAM_SPOT_ANGLE,
+  __pyx_e_7classes_9generated_VISUALSERVER_LIGHT_PARAM_SPOT_ATTENUATION,
+  __pyx_e_7classes_9generated_VISUALSERVER_LIGHT_PARAM_CONTACT_SHADOW_SIZE,
+  __pyx_e_7classes_9generated_VISUALSERVER_LIGHT_PARAM_SHADOW_MAX_DISTANCE,
+  __pyx_e_7classes_9generated_VISUALSERVER_LIGHT_PARAM_SHADOW_SPLIT_1_OFFSET,
+  __pyx_e_7classes_9generated_VISUALSERVER_LIGHT_PARAM_SHADOW_SPLIT_2_OFFSET,
+  __pyx_e_7classes_9generated_VISUALSERVER_LIGHT_PARAM_SHADOW_SPLIT_3_OFFSET,
+  __pyx_e_7classes_9generated_VISUALSERVER_LIGHT_PARAM_SHADOW_NORMAL_BIAS,
+  __pyx_e_7classes_9generated_VISUALSERVER_LIGHT_PARAM_SHADOW_BIAS,
+  __pyx_e_7classes_9generated_VISUALSERVER_LIGHT_PARAM_SHADOW_BIAS_SPLIT_SCALE,
+  __pyx_e_7classes_9generated_VISUALSERVER_LIGHT_PARAM_MAX
+};
+typedef enum __pyx_t_7classes_9generated_VisualServer_LightParam __pyx_t_7classes_9generated_VisualServer_LightParam;
+
+/* "classes/generated.pxd":846
+ * ctypedef enum VisualServer_LightDirectionalShadowMode :VISUALSERVER_LIGHT_DIRECTIONAL_SHADOW_ORTHOGONAL, VISUALSERVER_LIGHT_DIRECTIONAL_SHADOW_PARALLEL_2_SPLITS, VISUALSERVER_LIGHT_DIRECTIONAL_SHADOW_PARALLEL_4_SPLITS
+ * ctypedef enum VisualServer_LightParam :VISUALSERVER_LIGHT_PARAM_ENERGY, VISUALSERVER_LIGHT_PARAM_SPECULAR, VISUALSERVER_LIGHT_PARAM_RANGE, VISUALSERVER_LIGHT_PARAM_ATTENUATION, VISUALSERVER_LIGHT_PARAM_SPOT_ANGLE, VISUALSERVER_LIGHT_PARAM_SPOT_ATTENUATION, VISUALSERVER_LIGHT_PARAM_CONTACT_SHADOW_SIZE, VISUALSERVER_LIGHT_PARAM_SHADOW_MAX_DISTANCE, VISUALSERVER_LIGHT_PARAM_SHADOW_SPLIT_1_OFFSET, VISUALSERVER_LIGHT_PARAM_SHADOW_SPLIT_2_OFFSET, VISUALSERVER_LIGHT_PARAM_SHADOW_SPLIT_3_OFFSET, VISUALSERVER_LIGHT_PARAM_SHADOW_NORMAL_BIAS, VISUALSERVER_LIGHT_PARAM_SHADOW_BIAS, VISUALSERVER_LIGHT_PARAM_SHADOW_BIAS_SPLIT_SCALE, VISUALSERVER_LIGHT_PARAM_MAX
+ * ctypedef enum VisualServer_ArrayType :VISUALSERVER_ARRAY_VERTEX, VISUALSERVER_ARRAY_NORMAL, VISUALSERVER_ARRAY_TANGENT, VISUALSERVER_ARRAY_COLOR, VISUALSERVER_ARRAY_TEX_UV, VISUALSERVER_ARRAY_TEX_UV2, VISUALSERVER_ARRAY_BONES, VISUALSERVER_ARRAY_WEIGHTS, VISUALSERVER_ARRAY_INDEX, VISUALSERVER_ARRAY_MAX             # <<<<<<<<<<<<<<
+ * ctypedef enum VisualServer_CanvasOccluderPolygonCullMode :VISUALSERVER_CANVAS_OCCLUDER_POLYGON_CULL_DISABLED, VISUALSERVER_CANVAS_OCCLUDER_POLYGON_CULL_CLOCKWISE, VISUALSERVER_CANVAS_OCCLUDER_POLYGON_CULL_COUNTER_CLOCKWISE
+ * ctypedef enum VisualServer_InstanceFlags :VISUALSERVER_INSTANCE_FLAG_USE_BAKED_LIGHT, VISUALSERVER_INSTANCE_FLAG_DRAW_NEXT_FRAME_IF_VISIBLE, VISUALSERVER_INSTANCE_FLAG_MAX
+ */
+enum __pyx_t_7classes_9generated_VisualServer_ArrayType {
+  __pyx_e_7classes_9generated_VISUALSERVER_ARRAY_VERTEX,
+  __pyx_e_7classes_9generated_VISUALSERVER_ARRAY_NORMAL,
+  __pyx_e_7classes_9generated_VISUALSERVER_ARRAY_TANGENT,
+  __pyx_e_7classes_9generated_VISUALSERVER_ARRAY_COLOR,
+  __pyx_e_7classes_9generated_VISUALSERVER_ARRAY_TEX_UV,
+  __pyx_e_7classes_9generated_VISUALSERVER_ARRAY_TEX_UV2,
+  __pyx_e_7classes_9generated_VISUALSERVER_ARRAY_BONES,
+  __pyx_e_7classes_9generated_VISUALSERVER_ARRAY_WEIGHTS,
+  __pyx_e_7classes_9generated_VISUALSERVER_ARRAY_INDEX,
+  __pyx_e_7classes_9generated_VISUALSERVER_ARRAY_MAX
+};
+typedef enum __pyx_t_7classes_9generated_VisualServer_ArrayType __pyx_t_7classes_9generated_VisualServer_ArrayType;
+
+/* "classes/generated.pxd":847
+ * ctypedef enum VisualServer_LightParam :VISUALSERVER_LIGHT_PARAM_ENERGY, VISUALSERVER_LIGHT_PARAM_SPECULAR, VISUALSERVER_LIGHT_PARAM_RANGE, VISUALSERVER_LIGHT_PARAM_ATTENUATION, VISUALSERVER_LIGHT_PARAM_SPOT_ANGLE, VISUALSERVER_LIGHT_PARAM_SPOT_ATTENUATION, VISUALSERVER_LIGHT_PARAM_CONTACT_SHADOW_SIZE, VISUALSERVER_LIGHT_PARAM_SHADOW_MAX_DISTANCE, VISUALSERVER_LIGHT_PARAM_SHADOW_SPLIT_1_OFFSET, VISUALSERVER_LIGHT_PARAM_SHADOW_SPLIT_2_OFFSET, VISUALSERVER_LIGHT_PARAM_SHADOW_SPLIT_3_OFFSET, VISUALSERVER_LIGHT_PARAM_SHADOW_NORMAL_BIAS, VISUALSERVER_LIGHT_PARAM_SHADOW_BIAS, VISUALSERVER_LIGHT_PARAM_SHADOW_BIAS_SPLIT_SCALE, VISUALSERVER_LIGHT_PARAM_MAX
+ * ctypedef enum VisualServer_ArrayType :VISUALSERVER_ARRAY_VERTEX, VISUALSERVER_ARRAY_NORMAL, VISUALSERVER_ARRAY_TANGENT, VISUALSERVER_ARRAY_COLOR, VISUALSERVER_ARRAY_TEX_UV, VISUALSERVER_ARRAY_TEX_UV2, VISUALSERVER_ARRAY_BONES, VISUALSERVER_ARRAY_WEIGHTS, VISUALSERVER_ARRAY_INDEX, VISUALSERVER_ARRAY_MAX
+ * ctypedef enum VisualServer_CanvasOccluderPolygonCullMode :VISUALSERVER_CANVAS_OCCLUDER_POLYGON_CULL_DISABLED, VISUALSERVER_CANVAS_OCCLUDER_POLYGON_CULL_CLOCKWISE, VISUALSERVER_CANVAS_OCCLUDER_POLYGON_CULL_COUNTER_CLOCKWISE             # <<<<<<<<<<<<<<
+ * ctypedef enum VisualServer_InstanceFlags :VISUALSERVER_INSTANCE_FLAG_USE_BAKED_LIGHT, VISUALSERVER_INSTANCE_FLAG_DRAW_NEXT_FRAME_IF_VISIBLE, VISUALSERVER_INSTANCE_FLAG_MAX
+ * ctypedef enum VisualServer_ViewportMSAA :VISUALSERVER_VIEWPORT_MSAA_DISABLED, VISUALSERVER_VIEWPORT_MSAA_2X, VISUALSERVER_VIEWPORT_MSAA_4X, VISUALSERVER_VIEWPORT_MSAA_8X, VISUALSERVER_VIEWPORT_MSAA_16X, VISUALSERVER_VIEWPORT_MSAA_EXT_2X, VISUALSERVER_VIEWPORT_MSAA_EXT_4X
+ */
+enum __pyx_t_7classes_9generated_VisualServer_CanvasOccluderPolygonCullMode {
+  __pyx_e_7classes_9generated_VISUALSERVER_CANVAS_OCCLUDER_POLYGON_CULL_DISABLED,
+  __pyx_e_7classes_9generated_VISUALSERVER_CANVAS_OCCLUDER_POLYGON_CULL_CLOCKWISE,
+  __pyx_e_7classes_9generated_VISUALSERVER_CANVAS_OCCLUDER_POLYGON_CULL_COUNTER_CLOCKWISE
+};
+typedef enum __pyx_t_7classes_9generated_VisualServer_CanvasOccluderPolygonCullMode __pyx_t_7classes_9generated_VisualServer_CanvasOccluderPolygonCullMode;
+
+/* "classes/generated.pxd":848
+ * ctypedef enum VisualServer_ArrayType :VISUALSERVER_ARRAY_VERTEX, VISUALSERVER_ARRAY_NORMAL, VISUALSERVER_ARRAY_TANGENT, VISUALSERVER_ARRAY_COLOR, VISUALSERVER_ARRAY_TEX_UV, VISUALSERVER_ARRAY_TEX_UV2, VISUALSERVER_ARRAY_BONES, VISUALSERVER_ARRAY_WEIGHTS, VISUALSERVER_ARRAY_INDEX, VISUALSERVER_ARRAY_MAX
+ * ctypedef enum VisualServer_CanvasOccluderPolygonCullMode :VISUALSERVER_CANVAS_OCCLUDER_POLYGON_CULL_DISABLED, VISUALSERVER_CANVAS_OCCLUDER_POLYGON_CULL_CLOCKWISE, VISUALSERVER_CANVAS_OCCLUDER_POLYGON_CULL_COUNTER_CLOCKWISE
+ * ctypedef enum VisualServer_InstanceFlags :VISUALSERVER_INSTANCE_FLAG_USE_BAKED_LIGHT, VISUALSERVER_INSTANCE_FLAG_DRAW_NEXT_FRAME_IF_VISIBLE, VISUALSERVER_INSTANCE_FLAG_MAX             # <<<<<<<<<<<<<<
+ * ctypedef enum VisualServer_ViewportMSAA :VISUALSERVER_VIEWPORT_MSAA_DISABLED, VISUALSERVER_VIEWPORT_MSAA_2X, VISUALSERVER_VIEWPORT_MSAA_4X, VISUALSERVER_VIEWPORT_MSAA_8X, VISUALSERVER_VIEWPORT_MSAA_16X, VISUALSERVER_VIEWPORT_MSAA_EXT_2X, VISUALSERVER_VIEWPORT_MSAA_EXT_4X
+ * ctypedef enum VisualServer_LightType :VISUALSERVER_LIGHT_DIRECTIONAL, VISUALSERVER_LIGHT_OMNI, VISUALSERVER_LIGHT_SPOT
+ */
+enum __pyx_t_7classes_9generated_VisualServer_InstanceFlags {
+  __pyx_e_7classes_9generated_VISUALSERVER_INSTANCE_FLAG_USE_BAKED_LIGHT,
+  __pyx_e_7classes_9generated_VISUALSERVER_INSTANCE_FLAG_DRAW_NEXT_FRAME_IF_VISIBLE,
+  __pyx_e_7classes_9generated_VISUALSERVER_INSTANCE_FLAG_MAX
+};
+typedef enum __pyx_t_7classes_9generated_VisualServer_InstanceFlags __pyx_t_7classes_9generated_VisualServer_InstanceFlags;
+
+/* "classes/generated.pxd":849
+ * ctypedef enum VisualServer_CanvasOccluderPolygonCullMode :VISUALSERVER_CANVAS_OCCLUDER_POLYGON_CULL_DISABLED, VISUALSERVER_CANVAS_OCCLUDER_POLYGON_CULL_CLOCKWISE, VISUALSERVER_CANVAS_OCCLUDER_POLYGON_CULL_COUNTER_CLOCKWISE
+ * ctypedef enum VisualServer_InstanceFlags :VISUALSERVER_INSTANCE_FLAG_USE_BAKED_LIGHT, VISUALSERVER_INSTANCE_FLAG_DRAW_NEXT_FRAME_IF_VISIBLE, VISUALSERVER_INSTANCE_FLAG_MAX
+ * ctypedef enum VisualServer_ViewportMSAA :VISUALSERVER_VIEWPORT_MSAA_DISABLED, VISUALSERVER_VIEWPORT_MSAA_2X, VISUALSERVER_VIEWPORT_MSAA_4X, VISUALSERVER_VIEWPORT_MSAA_8X, VISUALSERVER_VIEWPORT_MSAA_16X, VISUALSERVER_VIEWPORT_MSAA_EXT_2X, VISUALSERVER_VIEWPORT_MSAA_EXT_4X             # <<<<<<<<<<<<<<
+ * ctypedef enum VisualServer_LightType :VISUALSERVER_LIGHT_DIRECTIONAL, VISUALSERVER_LIGHT_OMNI, VISUALSERVER_LIGHT_SPOT
+ * ctypedef enum VisualServer_CubeMapSide :VISUALSERVER_CUBEMAP_LEFT, VISUALSERVER_CUBEMAP_RIGHT, VISUALSERVER_CUBEMAP_BOTTOM, VISUALSERVER_CUBEMAP_TOP, VISUALSERVER_CUBEMAP_FRONT, VISUALSERVER_CUBEMAP_BACK
+ */
+enum __pyx_t_7classes_9generated_VisualServer_ViewportMSAA {
+  __pyx_e_7classes_9generated_VISUALSERVER_VIEWPORT_MSAA_DISABLED,
+  __pyx_e_7classes_9generated_VISUALSERVER_VIEWPORT_MSAA_2X,
+  __pyx_e_7classes_9generated_VISUALSERVER_VIEWPORT_MSAA_4X,
+  __pyx_e_7classes_9generated_VISUALSERVER_VIEWPORT_MSAA_8X,
+  __pyx_e_7classes_9generated_VISUALSERVER_VIEWPORT_MSAA_16X,
+  __pyx_e_7classes_9generated_VISUALSERVER_VIEWPORT_MSAA_EXT_2X,
+  __pyx_e_7classes_9generated_VISUALSERVER_VIEWPORT_MSAA_EXT_4X
+};
+typedef enum __pyx_t_7classes_9generated_VisualServer_ViewportMSAA __pyx_t_7classes_9generated_VisualServer_ViewportMSAA;
+
+/* "classes/generated.pxd":850
+ * ctypedef enum VisualServer_InstanceFlags :VISUALSERVER_INSTANCE_FLAG_USE_BAKED_LIGHT, VISUALSERVER_INSTANCE_FLAG_DRAW_NEXT_FRAME_IF_VISIBLE, VISUALSERVER_INSTANCE_FLAG_MAX
+ * ctypedef enum VisualServer_ViewportMSAA :VISUALSERVER_VIEWPORT_MSAA_DISABLED, VISUALSERVER_VIEWPORT_MSAA_2X, VISUALSERVER_VIEWPORT_MSAA_4X, VISUALSERVER_VIEWPORT_MSAA_8X, VISUALSERVER_VIEWPORT_MSAA_16X, VISUALSERVER_VIEWPORT_MSAA_EXT_2X, VISUALSERVER_VIEWPORT_MSAA_EXT_4X
+ * ctypedef enum VisualServer_LightType :VISUALSERVER_LIGHT_DIRECTIONAL, VISUALSERVER_LIGHT_OMNI, VISUALSERVER_LIGHT_SPOT             # <<<<<<<<<<<<<<
+ * ctypedef enum VisualServer_CubeMapSide :VISUALSERVER_CUBEMAP_LEFT, VISUALSERVER_CUBEMAP_RIGHT, VISUALSERVER_CUBEMAP_BOTTOM, VISUALSERVER_CUBEMAP_TOP, VISUALSERVER_CUBEMAP_FRONT, VISUALSERVER_CUBEMAP_BACK
+ * 
+ */
+enum __pyx_t_7classes_9generated_VisualServer_LightType {
+  __pyx_e_7classes_9generated_VISUALSERVER_LIGHT_DIRECTIONAL,
+  __pyx_e_7classes_9generated_VISUALSERVER_LIGHT_OMNI,
+  __pyx_e_7classes_9generated_VISUALSERVER_LIGHT_SPOT
+};
+typedef enum __pyx_t_7classes_9generated_VisualServer_LightType __pyx_t_7classes_9generated_VisualServer_LightType;
+
+/* "classes/generated.pxd":851
+ * ctypedef enum VisualServer_ViewportMSAA :VISUALSERVER_VIEWPORT_MSAA_DISABLED, VISUALSERVER_VIEWPORT_MSAA_2X, VISUALSERVER_VIEWPORT_MSAA_4X, VISUALSERVER_VIEWPORT_MSAA_8X, VISUALSERVER_VIEWPORT_MSAA_16X, VISUALSERVER_VIEWPORT_MSAA_EXT_2X, VISUALSERVER_VIEWPORT_MSAA_EXT_4X
+ * ctypedef enum VisualServer_LightType :VISUALSERVER_LIGHT_DIRECTIONAL, VISUALSERVER_LIGHT_OMNI, VISUALSERVER_LIGHT_SPOT
+ * ctypedef enum VisualServer_CubeMapSide :VISUALSERVER_CUBEMAP_LEFT, VISUALSERVER_CUBEMAP_RIGHT, VISUALSERVER_CUBEMAP_BOTTOM, VISUALSERVER_CUBEMAP_TOP, VISUALSERVER_CUBEMAP_FRONT, VISUALSERVER_CUBEMAP_BACK             # <<<<<<<<<<<<<<
+ * 
+ * ctypedef enum VisualShader_Type :VISUALSHADER_TYPE_VERTEX, VISUALSHADER_TYPE_FRAGMENT, VISUALSHADER_TYPE_LIGHT, VISUALSHADER_TYPE_MAX
+ */
+enum __pyx_t_7classes_9generated_VisualServer_CubeMapSide {
+  __pyx_e_7classes_9generated_VISUALSERVER_CUBEMAP_LEFT,
+  __pyx_e_7classes_9generated_VISUALSERVER_CUBEMAP_RIGHT,
+  __pyx_e_7classes_9generated_VISUALSERVER_CUBEMAP_BOTTOM,
+  __pyx_e_7classes_9generated_VISUALSERVER_CUBEMAP_TOP,
+  __pyx_e_7classes_9generated_VISUALSERVER_CUBEMAP_FRONT,
+  __pyx_e_7classes_9generated_VISUALSERVER_CUBEMAP_BACK
+};
+typedef enum __pyx_t_7classes_9generated_VisualServer_CubeMapSide __pyx_t_7classes_9generated_VisualServer_CubeMapSide;
+
+/* "classes/generated.pxd":853
+ * ctypedef enum VisualServer_CubeMapSide :VISUALSERVER_CUBEMAP_LEFT, VISUALSERVER_CUBEMAP_RIGHT, VISUALSERVER_CUBEMAP_BOTTOM, VISUALSERVER_CUBEMAP_TOP, VISUALSERVER_CUBEMAP_FRONT, VISUALSERVER_CUBEMAP_BACK
+ * 
+ * ctypedef enum VisualShader_Type :VISUALSHADER_TYPE_VERTEX, VISUALSHADER_TYPE_FRAGMENT, VISUALSHADER_TYPE_LIGHT, VISUALSHADER_TYPE_MAX             # <<<<<<<<<<<<<<
+ * 
+ * ctypedef enum VisualShaderNode_PortType :VISUALSHADERNODE_PORT_TYPE_SCALAR, VISUALSHADERNODE_PORT_TYPE_VECTOR, VISUALSHADERNODE_PORT_TYPE_BOOLEAN, VISUALSHADERNODE_PORT_TYPE_TRANSFORM, VISUALSHADERNODE_PORT_TYPE_SAMPLER, VISUALSHADERNODE_PORT_TYPE_MAX
+ */
+enum __pyx_t_7classes_9generated_VisualShader_Type {
+  __pyx_e_7classes_9generated_VISUALSHADER_TYPE_VERTEX,
+  __pyx_e_7classes_9generated_VISUALSHADER_TYPE_FRAGMENT,
+  __pyx_e_7classes_9generated_VISUALSHADER_TYPE_LIGHT,
+  __pyx_e_7classes_9generated_VISUALSHADER_TYPE_MAX
+};
+typedef enum __pyx_t_7classes_9generated_VisualShader_Type __pyx_t_7classes_9generated_VisualShader_Type;
+
+/* "classes/generated.pxd":855
+ * ctypedef enum VisualShader_Type :VISUALSHADER_TYPE_VERTEX, VISUALSHADER_TYPE_FRAGMENT, VISUALSHADER_TYPE_LIGHT, VISUALSHADER_TYPE_MAX
+ * 
+ * ctypedef enum VisualShaderNode_PortType :VISUALSHADERNODE_PORT_TYPE_SCALAR, VISUALSHADERNODE_PORT_TYPE_VECTOR, VISUALSHADERNODE_PORT_TYPE_BOOLEAN, VISUALSHADERNODE_PORT_TYPE_TRANSFORM, VISUALSHADERNODE_PORT_TYPE_SAMPLER, VISUALSHADERNODE_PORT_TYPE_MAX             # <<<<<<<<<<<<<<
+ * 
+ * 
+ */
+enum __pyx_t_7classes_9generated_VisualShaderNode_PortType {
+  __pyx_e_7classes_9generated_VISUALSHADERNODE_PORT_TYPE_SCALAR,
+  __pyx_e_7classes_9generated_VISUALSHADERNODE_PORT_TYPE_VECTOR,
+  __pyx_e_7classes_9generated_VISUALSHADERNODE_PORT_TYPE_BOOLEAN,
+  __pyx_e_7classes_9generated_VISUALSHADERNODE_PORT_TYPE_TRANSFORM,
+  __pyx_e_7classes_9generated_VISUALSHADERNODE_PORT_TYPE_SAMPLER,
+  __pyx_e_7classes_9generated_VISUALSHADERNODE_PORT_TYPE_MAX
+};
+typedef enum __pyx_t_7classes_9generated_VisualShaderNode_PortType __pyx_t_7classes_9generated_VisualShaderNode_PortType;
+
+/* "classes/generated.pxd":860
+ * 
+ * 
+ * ctypedef enum VisualShaderNodeColorFunc_Function :VISUALSHADERNODECOLORFUNC_FUNC_GRAYSCALE, VISUALSHADERNODECOLORFUNC_FUNC_SEPIA             # <<<<<<<<<<<<<<
+ * 
+ * ctypedef enum VisualShaderNodeColorOp_Operator :VISUALSHADERNODECOLOROP_OP_SCREEN, VISUALSHADERNODECOLOROP_OP_DIFFERENCE, VISUALSHADERNODECOLOROP_OP_DARKEN, VISUALSHADERNODECOLOROP_OP_LIGHTEN, VISUALSHADERNODECOLOROP_OP_OVERLAY, VISUALSHADERNODECOLOROP_OP_DODGE, VISUALSHADERNODECOLOROP_OP_BURN, VISUALSHADERNODECOLOROP_OP_SOFT_LIGHT, VISUALSHADERNODECOLOROP_OP_HARD_LIGHT
+ */
+enum __pyx_t_7classes_9generated_VisualShaderNodeColorFunc_Function {
+  __pyx_e_7classes_9generated_VISUALSHADERNODECOLORFUNC_FUNC_GRAYSCALE,
+  __pyx_e_7classes_9generated_VISUALSHADERNODECOLORFUNC_FUNC_SEPIA
+};
+typedef enum __pyx_t_7classes_9generated_VisualShaderNodeColorFunc_Function __pyx_t_7classes_9generated_VisualShaderNodeColorFunc_Function;
+
+/* "classes/generated.pxd":862
+ * ctypedef enum VisualShaderNodeColorFunc_Function :VISUALSHADERNODECOLORFUNC_FUNC_GRAYSCALE, VISUALSHADERNODECOLORFUNC_FUNC_SEPIA
+ * 
+ * ctypedef enum VisualShaderNodeColorOp_Operator :VISUALSHADERNODECOLOROP_OP_SCREEN, VISUALSHADERNODECOLOROP_OP_DIFFERENCE, VISUALSHADERNODECOLOROP_OP_DARKEN, VISUALSHADERNODECOLOROP_OP_LIGHTEN, VISUALSHADERNODECOLOROP_OP_OVERLAY, VISUALSHADERNODECOLOROP_OP_DODGE, VISUALSHADERNODECOLOROP_OP_BURN, VISUALSHADERNODECOLOROP_OP_SOFT_LIGHT, VISUALSHADERNODECOLOROP_OP_HARD_LIGHT             # <<<<<<<<<<<<<<
+ * 
+ * 
+ */
+enum __pyx_t_7classes_9generated_VisualShaderNodeColorOp_Operator {
+  __pyx_e_7classes_9generated_VISUALSHADERNODECOLOROP_OP_SCREEN,
+  __pyx_e_7classes_9generated_VISUALSHADERNODECOLOROP_OP_DIFFERENCE,
+  __pyx_e_7classes_9generated_VISUALSHADERNODECOLOROP_OP_DARKEN,
+  __pyx_e_7classes_9generated_VISUALSHADERNODECOLOROP_OP_LIGHTEN,
+  __pyx_e_7classes_9generated_VISUALSHADERNODECOLOROP_OP_OVERLAY,
+  __pyx_e_7classes_9generated_VISUALSHADERNODECOLOROP_OP_DODGE,
+  __pyx_e_7classes_9generated_VISUALSHADERNODECOLOROP_OP_BURN,
+  __pyx_e_7classes_9generated_VISUALSHADERNODECOLOROP_OP_SOFT_LIGHT,
+  __pyx_e_7classes_9generated_VISUALSHADERNODECOLOROP_OP_HARD_LIGHT
+};
+typedef enum __pyx_t_7classes_9generated_VisualShaderNodeColorOp_Operator __pyx_t_7classes_9generated_VisualShaderNodeColorOp_Operator;
+
+/* "classes/generated.pxd":865
+ * 
+ * 
+ * ctypedef enum VisualShaderNodeCompare_ComparisonType :VISUALSHADERNODECOMPARE_CTYPE_SCALAR, VISUALSHADERNODECOMPARE_CTYPE_VECTOR, VISUALSHADERNODECOMPARE_CTYPE_BOOLEAN, VISUALSHADERNODECOMPARE_CTYPE_TRANSFORM             # <<<<<<<<<<<<<<
+ * ctypedef enum VisualShaderNodeCompare_Function :VISUALSHADERNODECOMPARE_FUNC_EQUAL, VISUALSHADERNODECOMPARE_FUNC_NOT_EQUAL, VISUALSHADERNODECOMPARE_FUNC_GREATER_THAN, VISUALSHADERNODECOMPARE_FUNC_GREATER_THAN_EQUAL, VISUALSHADERNODECOMPARE_FUNC_LESS_THAN, VISUALSHADERNODECOMPARE_FUNC_LESS_THAN_EQUAL
+ * ctypedef enum VisualShaderNodeCompare_Condition :VISUALSHADERNODECOMPARE_COND_ALL, VISUALSHADERNODECOMPARE_COND_ANY
+ */
+enum __pyx_t_7classes_9generated_VisualShaderNodeCompare_ComparisonType {
+  __pyx_e_7classes_9generated_VISUALSHADERNODECOMPARE_CTYPE_SCALAR,
+  __pyx_e_7classes_9generated_VISUALSHADERNODECOMPARE_CTYPE_VECTOR,
+  __pyx_e_7classes_9generated_VISUALSHADERNODECOMPARE_CTYPE_BOOLEAN,
+  __pyx_e_7classes_9generated_VISUALSHADERNODECOMPARE_CTYPE_TRANSFORM
+};
+typedef enum __pyx_t_7classes_9generated_VisualShaderNodeCompare_ComparisonType __pyx_t_7classes_9generated_VisualShaderNodeCompare_ComparisonType;
+
+/* "classes/generated.pxd":866
+ * 
+ * ctypedef enum VisualShaderNodeCompare_ComparisonType :VISUALSHADERNODECOMPARE_CTYPE_SCALAR, VISUALSHADERNODECOMPARE_CTYPE_VECTOR, VISUALSHADERNODECOMPARE_CTYPE_BOOLEAN, VISUALSHADERNODECOMPARE_CTYPE_TRANSFORM
+ * ctypedef enum VisualShaderNodeCompare_Function :VISUALSHADERNODECOMPARE_FUNC_EQUAL, VISUALSHADERNODECOMPARE_FUNC_NOT_EQUAL, VISUALSHADERNODECOMPARE_FUNC_GREATER_THAN, VISUALSHADERNODECOMPARE_FUNC_GREATER_THAN_EQUAL, VISUALSHADERNODECOMPARE_FUNC_LESS_THAN, VISUALSHADERNODECOMPARE_FUNC_LESS_THAN_EQUAL             # <<<<<<<<<<<<<<
+ * ctypedef enum VisualShaderNodeCompare_Condition :VISUALSHADERNODECOMPARE_COND_ALL, VISUALSHADERNODECOMPARE_COND_ANY
+ * 
+ */
+enum __pyx_t_7classes_9generated_VisualShaderNodeCompare_Function {
+  __pyx_e_7classes_9generated_VISUALSHADERNODECOMPARE_FUNC_EQUAL,
+  __pyx_e_7classes_9generated_VISUALSHADERNODECOMPARE_FUNC_NOT_EQUAL,
+  __pyx_e_7classes_9generated_VISUALSHADERNODECOMPARE_FUNC_GREATER_THAN,
+  __pyx_e_7classes_9generated_VISUALSHADERNODECOMPARE_FUNC_GREATER_THAN_EQUAL,
+  __pyx_e_7classes_9generated_VISUALSHADERNODECOMPARE_FUNC_LESS_THAN,
+  __pyx_e_7classes_9generated_VISUALSHADERNODECOMPARE_FUNC_LESS_THAN_EQUAL
+};
+typedef enum __pyx_t_7classes_9generated_VisualShaderNodeCompare_Function __pyx_t_7classes_9generated_VisualShaderNodeCompare_Function;
+
+/* "classes/generated.pxd":867
+ * ctypedef enum VisualShaderNodeCompare_ComparisonType :VISUALSHADERNODECOMPARE_CTYPE_SCALAR, VISUALSHADERNODECOMPARE_CTYPE_VECTOR, VISUALSHADERNODECOMPARE_CTYPE_BOOLEAN, VISUALSHADERNODECOMPARE_CTYPE_TRANSFORM
+ * ctypedef enum VisualShaderNodeCompare_Function :VISUALSHADERNODECOMPARE_FUNC_EQUAL, VISUALSHADERNODECOMPARE_FUNC_NOT_EQUAL, VISUALSHADERNODECOMPARE_FUNC_GREATER_THAN, VISUALSHADERNODECOMPARE_FUNC_GREATER_THAN_EQUAL, VISUALSHADERNODECOMPARE_FUNC_LESS_THAN, VISUALSHADERNODECOMPARE_FUNC_LESS_THAN_EQUAL
+ * ctypedef enum VisualShaderNodeCompare_Condition :VISUALSHADERNODECOMPARE_COND_ALL, VISUALSHADERNODECOMPARE_COND_ANY             # <<<<<<<<<<<<<<
+ * 
+ * ctypedef enum VisualShaderNodeCubeMap_TextureType :VISUALSHADERNODECUBEMAP_TYPE_DATA, VISUALSHADERNODECUBEMAP_TYPE_COLOR, VISUALSHADERNODECUBEMAP_TYPE_NORMALMAP
+ */
+enum __pyx_t_7classes_9generated_VisualShaderNodeCompare_Condition {
+  __pyx_e_7classes_9generated_VISUALSHADERNODECOMPARE_COND_ALL,
+  __pyx_e_7classes_9generated_VISUALSHADERNODECOMPARE_COND_ANY
+};
+typedef enum __pyx_t_7classes_9generated_VisualShaderNodeCompare_Condition __pyx_t_7classes_9generated_VisualShaderNodeCompare_Condition;
+
+/* "classes/generated.pxd":869
+ * ctypedef enum VisualShaderNodeCompare_Condition :VISUALSHADERNODECOMPARE_COND_ALL, VISUALSHADERNODECOMPARE_COND_ANY
+ * 
+ * ctypedef enum VisualShaderNodeCubeMap_TextureType :VISUALSHADERNODECUBEMAP_TYPE_DATA, VISUALSHADERNODECUBEMAP_TYPE_COLOR, VISUALSHADERNODECUBEMAP_TYPE_NORMALMAP             # <<<<<<<<<<<<<<
+ * ctypedef enum VisualShaderNodeCubeMap_Source :VISUALSHADERNODECUBEMAP_SOURCE_TEXTURE, VISUALSHADERNODECUBEMAP_SOURCE_PORT
+ * 
+ */
+enum __pyx_t_7classes_9generated_VisualShaderNodeCubeMap_TextureType {
+  __pyx_e_7classes_9generated_VISUALSHADERNODECUBEMAP_TYPE_DATA,
+  __pyx_e_7classes_9generated_VISUALSHADERNODECUBEMAP_TYPE_COLOR,
+  __pyx_e_7classes_9generated_VISUALSHADERNODECUBEMAP_TYPE_NORMALMAP
+};
+typedef enum __pyx_t_7classes_9generated_VisualShaderNodeCubeMap_TextureType __pyx_t_7classes_9generated_VisualShaderNodeCubeMap_TextureType;
+
+/* "classes/generated.pxd":870
+ * 
+ * ctypedef enum VisualShaderNodeCubeMap_TextureType :VISUALSHADERNODECUBEMAP_TYPE_DATA, VISUALSHADERNODECUBEMAP_TYPE_COLOR, VISUALSHADERNODECUBEMAP_TYPE_NORMALMAP
+ * ctypedef enum VisualShaderNodeCubeMap_Source :VISUALSHADERNODECUBEMAP_SOURCE_TEXTURE, VISUALSHADERNODECUBEMAP_SOURCE_PORT             # <<<<<<<<<<<<<<
+ * 
+ * 
+ */
+enum __pyx_t_7classes_9generated_VisualShaderNodeCubeMap_Source {
+  __pyx_e_7classes_9generated_VISUALSHADERNODECUBEMAP_SOURCE_TEXTURE,
+  __pyx_e_7classes_9generated_VISUALSHADERNODECUBEMAP_SOURCE_PORT
+};
+typedef enum __pyx_t_7classes_9generated_VisualShaderNodeCubeMap_Source __pyx_t_7classes_9generated_VisualShaderNodeCubeMap_Source;
+
+/* "classes/generated.pxd":883
+ * 
+ * 
+ * ctypedef enum VisualShaderNodeIs_Function :VISUALSHADERNODEIS_FUNC_IS_INF, VISUALSHADERNODEIS_FUNC_IS_NAN             # <<<<<<<<<<<<<<
+ * 
+ * 
+ */
+enum __pyx_t_7classes_9generated_VisualShaderNodeIs_Function {
+  __pyx_e_7classes_9generated_VISUALSHADERNODEIS_FUNC_IS_INF,
+  __pyx_e_7classes_9generated_VISUALSHADERNODEIS_FUNC_IS_NAN
+};
+typedef enum __pyx_t_7classes_9generated_VisualShaderNodeIs_Function __pyx_t_7classes_9generated_VisualShaderNodeIs_Function;
+
+/* "classes/generated.pxd":889
+ * 
+ * 
+ * ctypedef enum VisualShaderNodeScalarDerivativeFunc_Function :VISUALSHADERNODESCALARDERIVATIVEFUNC_FUNC_SUM, VISUALSHADERNODESCALARDERIVATIVEFUNC_FUNC_X, VISUALSHADERNODESCALARDERIVATIVEFUNC_FUNC_Y             # <<<<<<<<<<<<<<
+ * 
+ * ctypedef enum VisualShaderNodeScalarFunc_Function :VISUALSHADERNODESCALARFUNC_FUNC_SIN, VISUALSHADERNODESCALARFUNC_FUNC_COS, VISUALSHADERNODESCALARFUNC_FUNC_TAN, VISUALSHADERNODESCALARFUNC_FUNC_ASIN, VISUALSHADERNODESCALARFUNC_FUNC_ACOS, VISUALSHADERNODESCALARFUNC_FUNC_ATAN, VISUALSHADERNODESCALARFUNC_FUNC_SINH, VISUALSHADERNODESCALARFUNC_FUNC_COSH, VISUALSHADERNODESCALARFUNC_FUNC_TANH, VISUALSHADERNODESCALARFUNC_FUNC_LOG, VISUALSHADERNODESCALARFUNC_FUNC_EXP, VISUALSHADERNODESCALARFUNC_FUNC_SQRT, VISUALSHADERNODESCALARFUNC_FUNC_ABS, VISUALSHADERNODESCALARFUNC_FUNC_SIGN, VISUALSHADERNODESCALARFUNC_FUNC_FLOOR, VISUALSHADERNODESCALARFUNC_FUNC_ROUND, VISUALSHADERNODESCALARFUNC_FUNC_CEIL, VISUALSHADERNODESCALARFUNC_FUNC_FRAC, VISUALSHADERNODESCALARFUNC_FUNC_SATURATE, VISUALSHADERNODESCALARFUNC_FUNC_NEGATE, VISUALSHADERNODESCALARFUNC_FUNC_ACOSH, VISUALSHADERNODESCALARFUNC_FUNC_ASINH, VISUALSHADERNODESCALARFUNC_FUNC_ATANH, VISUALSHADERNODESCALARFUNC_FUNC_DEGREES, VISUALSHADERNODESCALARFUNC_FUNC_EXP2, VISUALSHADERNODESCALARFUNC_FUNC_INVERSE_SQRT, VISUALSHADERNODESCALARFUNC_FUNC_LOG2, VISUALSHADERNODESCALARFUNC_FUNC_RADIANS, VISUALSHADERNODESCALARFUNC_FUNC_RECIPROCAL, VISUALSHADERNODESCALARFUNC_FUNC_ROUNDEVEN, VISUALSHADERNODESCALARFUNC_FUNC_TRUNC, VISUALSHADERNODESCALARFUNC_FUNC_ONEMINUS
+ */
+enum __pyx_t_7classes_9generated_VisualShaderNodeScalarDerivativeFunc_Function {
+  __pyx_e_7classes_9generated_VISUALSHADERNODESCALARDERIVATIVEFUNC_FUNC_SUM,
+  __pyx_e_7classes_9generated_VISUALSHADERNODESCALARDERIVATIVEFUNC_FUNC_X,
+  __pyx_e_7classes_9generated_VISUALSHADERNODESCALARDERIVATIVEFUNC_FUNC_Y
+};
+typedef enum __pyx_t_7classes_9generated_VisualShaderNodeScalarDerivativeFunc_Function __pyx_t_7classes_9generated_VisualShaderNodeScalarDerivativeFunc_Function;
+
+/* "classes/generated.pxd":891
+ * ctypedef enum VisualShaderNodeScalarDerivativeFunc_Function :VISUALSHADERNODESCALARDERIVATIVEFUNC_FUNC_SUM, VISUALSHADERNODESCALARDERIVATIVEFUNC_FUNC_X, VISUALSHADERNODESCALARDERIVATIVEFUNC_FUNC_Y
+ * 
+ * ctypedef enum VisualShaderNodeScalarFunc_Function :VISUALSHADERNODESCALARFUNC_FUNC_SIN, VISUALSHADERNODESCALARFUNC_FUNC_COS, VISUALSHADERNODESCALARFUNC_FUNC_TAN, VISUALSHADERNODESCALARFUNC_FUNC_ASIN, VISUALSHADERNODESCALARFUNC_FUNC_ACOS, VISUALSHADERNODESCALARFUNC_FUNC_ATAN, VISUALSHADERNODESCALARFUNC_FUNC_SINH, VISUALSHADERNODESCALARFUNC_FUNC_COSH, VISUALSHADERNODESCALARFUNC_FUNC_TANH, VISUALSHADERNODESCALARFUNC_FUNC_LOG, VISUALSHADERNODESCALARFUNC_FUNC_EXP, VISUALSHADERNODESCALARFUNC_FUNC_SQRT, VISUALSHADERNODESCALARFUNC_FUNC_ABS, VISUALSHADERNODESCALARFUNC_FUNC_SIGN, VISUALSHADERNODESCALARFUNC_FUNC_FLOOR, VISUALSHADERNODESCALARFUNC_FUNC_ROUND, VISUALSHADERNODESCALARFUNC_FUNC_CEIL, VISUALSHADERNODESCALARFUNC_FUNC_FRAC, VISUALSHADERNODESCALARFUNC_FUNC_SATURATE, VISUALSHADERNODESCALARFUNC_FUNC_NEGATE, VISUALSHADERNODESCALARFUNC_FUNC_ACOSH, VISUALSHADERNODESCALARFUNC_FUNC_ASINH, VISUALSHADERNODESCALARFUNC_FUNC_ATANH, VISUALSHADERNODESCALARFUNC_FUNC_DEGREES, VISUALSHADERNODESCALARFUNC_FUNC_EXP2, VISUALSHADERNODESCALARFUNC_FUNC_INVERSE_SQRT, VISUALSHADERNODESCALARFUNC_FUNC_LOG2, VISUALSHADERNODESCALARFUNC_FUNC_RADIANS, VISUALSHADERNODESCALARFUNC_FUNC_RECIPROCAL, VISUALSHADERNODESCALARFUNC_FUNC_ROUNDEVEN, VISUALSHADERNODESCALARFUNC_FUNC_TRUNC, VISUALSHADERNODESCALARFUNC_FUNC_ONEMINUS             # <<<<<<<<<<<<<<
+ * 
+ * 
+ */
+enum __pyx_t_7classes_9generated_VisualShaderNodeScalarFunc_Function {
+  __pyx_e_7classes_9generated_VISUALSHADERNODESCALARFUNC_FUNC_SIN,
+  __pyx_e_7classes_9generated_VISUALSHADERNODESCALARFUNC_FUNC_COS,
+  __pyx_e_7classes_9generated_VISUALSHADERNODESCALARFUNC_FUNC_TAN,
+  __pyx_e_7classes_9generated_VISUALSHADERNODESCALARFUNC_FUNC_ASIN,
+  __pyx_e_7classes_9generated_VISUALSHADERNODESCALARFUNC_FUNC_ACOS,
+  __pyx_e_7classes_9generated_VISUALSHADERNODESCALARFUNC_FUNC_ATAN,
+  __pyx_e_7classes_9generated_VISUALSHADERNODESCALARFUNC_FUNC_SINH,
+  __pyx_e_7classes_9generated_VISUALSHADERNODESCALARFUNC_FUNC_COSH,
+  __pyx_e_7classes_9generated_VISUALSHADERNODESCALARFUNC_FUNC_TANH,
+  __pyx_e_7classes_9generated_VISUALSHADERNODESCALARFUNC_FUNC_LOG,
+  __pyx_e_7classes_9generated_VISUALSHADERNODESCALARFUNC_FUNC_EXP,
+  __pyx_e_7classes_9generated_VISUALSHADERNODESCALARFUNC_FUNC_SQRT,
+  __pyx_e_7classes_9generated_VISUALSHADERNODESCALARFUNC_FUNC_ABS,
+  __pyx_e_7classes_9generated_VISUALSHADERNODESCALARFUNC_FUNC_SIGN,
+  __pyx_e_7classes_9generated_VISUALSHADERNODESCALARFUNC_FUNC_FLOOR,
+  __pyx_e_7classes_9generated_VISUALSHADERNODESCALARFUNC_FUNC_ROUND,
+  __pyx_e_7classes_9generated_VISUALSHADERNODESCALARFUNC_FUNC_CEIL,
+  __pyx_e_7classes_9generated_VISUALSHADERNODESCALARFUNC_FUNC_FRAC,
+  __pyx_e_7classes_9generated_VISUALSHADERNODESCALARFUNC_FUNC_SATURATE,
+  __pyx_e_7classes_9generated_VISUALSHADERNODESCALARFUNC_FUNC_NEGATE,
+  __pyx_e_7classes_9generated_VISUALSHADERNODESCALARFUNC_FUNC_ACOSH,
+  __pyx_e_7classes_9generated_VISUALSHADERNODESCALARFUNC_FUNC_ASINH,
+  __pyx_e_7classes_9generated_VISUALSHADERNODESCALARFUNC_FUNC_ATANH,
+  __pyx_e_7classes_9generated_VISUALSHADERNODESCALARFUNC_FUNC_DEGREES,
+  __pyx_e_7classes_9generated_VISUALSHADERNODESCALARFUNC_FUNC_EXP2,
+  __pyx_e_7classes_9generated_VISUALSHADERNODESCALARFUNC_FUNC_INVERSE_SQRT,
+  __pyx_e_7classes_9generated_VISUALSHADERNODESCALARFUNC_FUNC_LOG2,
+  __pyx_e_7classes_9generated_VISUALSHADERNODESCALARFUNC_FUNC_RADIANS,
+  __pyx_e_7classes_9generated_VISUALSHADERNODESCALARFUNC_FUNC_RECIPROCAL,
+  __pyx_e_7classes_9generated_VISUALSHADERNODESCALARFUNC_FUNC_ROUNDEVEN,
+  __pyx_e_7classes_9generated_VISUALSHADERNODESCALARFUNC_FUNC_TRUNC,
+  __pyx_e_7classes_9generated_VISUALSHADERNODESCALARFUNC_FUNC_ONEMINUS
+};
+typedef enum __pyx_t_7classes_9generated_VisualShaderNodeScalarFunc_Function __pyx_t_7classes_9generated_VisualShaderNodeScalarFunc_Function;
+
+/* "classes/generated.pxd":894
+ * 
+ * 
+ * ctypedef enum VisualShaderNodeScalarOp_Operator :VISUALSHADERNODESCALAROP_OP_ADD, VISUALSHADERNODESCALAROP_OP_SUB, VISUALSHADERNODESCALAROP_OP_MUL, VISUALSHADERNODESCALAROP_OP_DIV, VISUALSHADERNODESCALAROP_OP_MOD, VISUALSHADERNODESCALAROP_OP_POW, VISUALSHADERNODESCALAROP_OP_MAX, VISUALSHADERNODESCALAROP_OP_MIN, VISUALSHADERNODESCALAROP_OP_ATAN2, VISUALSHADERNODESCALAROP_OP_STEP             # <<<<<<<<<<<<<<
+ * 
+ * 
+ */
+enum __pyx_t_7classes_9generated_VisualShaderNodeScalarOp_Operator {
+  __pyx_e_7classes_9generated_VISUALSHADERNODESCALAROP_OP_ADD,
+  __pyx_e_7classes_9generated_VISUALSHADERNODESCALAROP_OP_SUB,
+  __pyx_e_7classes_9generated_VISUALSHADERNODESCALAROP_OP_MUL,
+  __pyx_e_7classes_9generated_VISUALSHADERNODESCALAROP_OP_DIV,
+  __pyx_e_7classes_9generated_VISUALSHADERNODESCALAROP_OP_MOD,
+  __pyx_e_7classes_9generated_VISUALSHADERNODESCALAROP_OP_POW,
+  __pyx_e_7classes_9generated_VISUALSHADERNODESCALAROP_OP_MAX,
+  __pyx_e_7classes_9generated_VISUALSHADERNODESCALAROP_OP_MIN,
+  __pyx_e_7classes_9generated_VISUALSHADERNODESCALAROP_OP_ATAN2,
+  __pyx_e_7classes_9generated_VISUALSHADERNODESCALAROP_OP_STEP
+};
+typedef enum __pyx_t_7classes_9generated_VisualShaderNodeScalarOp_Operator __pyx_t_7classes_9generated_VisualShaderNodeScalarOp_Operator;
+
+/* "classes/generated.pxd":900
+ * 
+ * 
+ * ctypedef enum VisualShaderNodeTexture_TextureType :VISUALSHADERNODETEXTURE_TYPE_DATA, VISUALSHADERNODETEXTURE_TYPE_COLOR, VISUALSHADERNODETEXTURE_TYPE_NORMALMAP             # <<<<<<<<<<<<<<
+ * ctypedef enum VisualShaderNodeTexture_Source :VISUALSHADERNODETEXTURE_SOURCE_TEXTURE, VISUALSHADERNODETEXTURE_SOURCE_SCREEN, VISUALSHADERNODETEXTURE_SOURCE_2D_TEXTURE, VISUALSHADERNODETEXTURE_SOURCE_2D_NORMAL, VISUALSHADERNODETEXTURE_SOURCE_DEPTH, VISUALSHADERNODETEXTURE_SOURCE_PORT
+ * 
+ */
+enum __pyx_t_7classes_9generated_VisualShaderNodeTexture_TextureType {
+  __pyx_e_7classes_9generated_VISUALSHADERNODETEXTURE_TYPE_DATA,
+  __pyx_e_7classes_9generated_VISUALSHADERNODETEXTURE_TYPE_COLOR,
+  __pyx_e_7classes_9generated_VISUALSHADERNODETEXTURE_TYPE_NORMALMAP
+};
+typedef enum __pyx_t_7classes_9generated_VisualShaderNodeTexture_TextureType __pyx_t_7classes_9generated_VisualShaderNodeTexture_TextureType;
+
+/* "classes/generated.pxd":901
+ * 
+ * ctypedef enum VisualShaderNodeTexture_TextureType :VISUALSHADERNODETEXTURE_TYPE_DATA, VISUALSHADERNODETEXTURE_TYPE_COLOR, VISUALSHADERNODETEXTURE_TYPE_NORMALMAP
+ * ctypedef enum VisualShaderNodeTexture_Source :VISUALSHADERNODETEXTURE_SOURCE_TEXTURE, VISUALSHADERNODETEXTURE_SOURCE_SCREEN, VISUALSHADERNODETEXTURE_SOURCE_2D_TEXTURE, VISUALSHADERNODETEXTURE_SOURCE_2D_NORMAL, VISUALSHADERNODETEXTURE_SOURCE_DEPTH, VISUALSHADERNODETEXTURE_SOURCE_PORT             # <<<<<<<<<<<<<<
+ * 
+ * ctypedef enum VisualShaderNodeTextureUniform_TextureType :VISUALSHADERNODETEXTUREUNIFORM_TYPE_DATA, VISUALSHADERNODETEXTUREUNIFORM_TYPE_COLOR, VISUALSHADERNODETEXTUREUNIFORM_TYPE_NORMALMAP, VISUALSHADERNODETEXTUREUNIFORM_TYPE_ANISO
+ */
+enum __pyx_t_7classes_9generated_VisualShaderNodeTexture_Source {
+  __pyx_e_7classes_9generated_VISUALSHADERNODETEXTURE_SOURCE_TEXTURE,
+  __pyx_e_7classes_9generated_VISUALSHADERNODETEXTURE_SOURCE_SCREEN,
+  __pyx_e_7classes_9generated_VISUALSHADERNODETEXTURE_SOURCE_2D_TEXTURE,
+  __pyx_e_7classes_9generated_VISUALSHADERNODETEXTURE_SOURCE_2D_NORMAL,
+  __pyx_e_7classes_9generated_VISUALSHADERNODETEXTURE_SOURCE_DEPTH,
+  __pyx_e_7classes_9generated_VISUALSHADERNODETEXTURE_SOURCE_PORT
+};
+typedef enum __pyx_t_7classes_9generated_VisualShaderNodeTexture_Source __pyx_t_7classes_9generated_VisualShaderNodeTexture_Source;
+
+/* "classes/generated.pxd":903
+ * ctypedef enum VisualShaderNodeTexture_Source :VISUALSHADERNODETEXTURE_SOURCE_TEXTURE, VISUALSHADERNODETEXTURE_SOURCE_SCREEN, VISUALSHADERNODETEXTURE_SOURCE_2D_TEXTURE, VISUALSHADERNODETEXTURE_SOURCE_2D_NORMAL, VISUALSHADERNODETEXTURE_SOURCE_DEPTH, VISUALSHADERNODETEXTURE_SOURCE_PORT
+ * 
+ * ctypedef enum VisualShaderNodeTextureUniform_TextureType :VISUALSHADERNODETEXTUREUNIFORM_TYPE_DATA, VISUALSHADERNODETEXTUREUNIFORM_TYPE_COLOR, VISUALSHADERNODETEXTUREUNIFORM_TYPE_NORMALMAP, VISUALSHADERNODETEXTUREUNIFORM_TYPE_ANISO             # <<<<<<<<<<<<<<
+ * ctypedef enum VisualShaderNodeTextureUniform_ColorDefault :VISUALSHADERNODETEXTUREUNIFORM_COLOR_DEFAULT_WHITE, VISUALSHADERNODETEXTUREUNIFORM_COLOR_DEFAULT_BLACK
+ * 
+ */
+enum __pyx_t_7classes_9generated_VisualShaderNodeTextureUniform_TextureType {
+  __pyx_e_7classes_9generated_VISUALSHADERNODETEXTUREUNIFORM_TYPE_DATA,
+  __pyx_e_7classes_9generated_VISUALSHADERNODETEXTUREUNIFORM_TYPE_COLOR,
+  __pyx_e_7classes_9generated_VISUALSHADERNODETEXTUREUNIFORM_TYPE_NORMALMAP,
+  __pyx_e_7classes_9generated_VISUALSHADERNODETEXTUREUNIFORM_TYPE_ANISO
+};
+typedef enum __pyx_t_7classes_9generated_VisualShaderNodeTextureUniform_TextureType __pyx_t_7classes_9generated_VisualShaderNodeTextureUniform_TextureType;
+
+/* "classes/generated.pxd":904
+ * 
+ * ctypedef enum VisualShaderNodeTextureUniform_TextureType :VISUALSHADERNODETEXTUREUNIFORM_TYPE_DATA, VISUALSHADERNODETEXTUREUNIFORM_TYPE_COLOR, VISUALSHADERNODETEXTUREUNIFORM_TYPE_NORMALMAP, VISUALSHADERNODETEXTUREUNIFORM_TYPE_ANISO
+ * ctypedef enum VisualShaderNodeTextureUniform_ColorDefault :VISUALSHADERNODETEXTUREUNIFORM_COLOR_DEFAULT_WHITE, VISUALSHADERNODETEXTUREUNIFORM_COLOR_DEFAULT_BLACK             # <<<<<<<<<<<<<<
+ * 
+ * 
+ */
+enum __pyx_t_7classes_9generated_VisualShaderNodeTextureUniform_ColorDefault {
+  __pyx_e_7classes_9generated_VISUALSHADERNODETEXTUREUNIFORM_COLOR_DEFAULT_WHITE,
+  __pyx_e_7classes_9generated_VISUALSHADERNODETEXTUREUNIFORM_COLOR_DEFAULT_BLACK
+};
+typedef enum __pyx_t_7classes_9generated_VisualShaderNodeTextureUniform_ColorDefault __pyx_t_7classes_9generated_VisualShaderNodeTextureUniform_ColorDefault;
+
+/* "classes/generated.pxd":910
+ * 
+ * 
+ * ctypedef enum VisualShaderNodeTransformFunc_Function :VISUALSHADERNODETRANSFORMFUNC_FUNC_INVERSE, VISUALSHADERNODETRANSFORMFUNC_FUNC_TRANSPOSE             # <<<<<<<<<<<<<<
+ * 
+ * ctypedef enum VisualShaderNodeTransformMult_Operator :VISUALSHADERNODETRANSFORMMULT_OP_AxB, VISUALSHADERNODETRANSFORMMULT_OP_BxA, VISUALSHADERNODETRANSFORMMULT_OP_AxB_COMP, VISUALSHADERNODETRANSFORMMULT_OP_BxA_COMP
+ */
+enum __pyx_t_7classes_9generated_VisualShaderNodeTransformFunc_Function {
+  __pyx_e_7classes_9generated_VISUALSHADERNODETRANSFORMFUNC_FUNC_INVERSE,
+  __pyx_e_7classes_9generated_VISUALSHADERNODETRANSFORMFUNC_FUNC_TRANSPOSE
+};
+typedef enum __pyx_t_7classes_9generated_VisualShaderNodeTransformFunc_Function __pyx_t_7classes_9generated_VisualShaderNodeTransformFunc_Function;
+
+/* "classes/generated.pxd":912
+ * ctypedef enum VisualShaderNodeTransformFunc_Function :VISUALSHADERNODETRANSFORMFUNC_FUNC_INVERSE, VISUALSHADERNODETRANSFORMFUNC_FUNC_TRANSPOSE
+ * 
+ * ctypedef enum VisualShaderNodeTransformMult_Operator :VISUALSHADERNODETRANSFORMMULT_OP_AxB, VISUALSHADERNODETRANSFORMMULT_OP_BxA, VISUALSHADERNODETRANSFORMMULT_OP_AxB_COMP, VISUALSHADERNODETRANSFORMMULT_OP_BxA_COMP             # <<<<<<<<<<<<<<
+ * 
+ * 
+ */
+enum __pyx_t_7classes_9generated_VisualShaderNodeTransformMult_Operator {
+  __pyx_e_7classes_9generated_VISUALSHADERNODETRANSFORMMULT_OP_AxB,
+  __pyx_e_7classes_9generated_VISUALSHADERNODETRANSFORMMULT_OP_BxA,
+  __pyx_e_7classes_9generated_VISUALSHADERNODETRANSFORMMULT_OP_AxB_COMP,
+  __pyx_e_7classes_9generated_VISUALSHADERNODETRANSFORMMULT_OP_BxA_COMP
+};
+typedef enum __pyx_t_7classes_9generated_VisualShaderNodeTransformMult_Operator __pyx_t_7classes_9generated_VisualShaderNodeTransformMult_Operator;
+
+/* "classes/generated.pxd":915
+ * 
+ * 
+ * ctypedef enum VisualShaderNodeTransformVecMult_Operator :VISUALSHADERNODETRANSFORMVECMULT_OP_AxB, VISUALSHADERNODETRANSFORMVECMULT_OP_BxA, VISUALSHADERNODETRANSFORMVECMULT_OP_3x3_AxB, VISUALSHADERNODETRANSFORMVECMULT_OP_3x3_BxA             # <<<<<<<<<<<<<<
+ * 
+ * 
+ */
+enum __pyx_t_7classes_9generated_VisualShaderNodeTransformVecMult_Operator {
+  __pyx_e_7classes_9generated_VISUALSHADERNODETRANSFORMVECMULT_OP_AxB,
+  __pyx_e_7classes_9generated_VISUALSHADERNODETRANSFORMVECMULT_OP_BxA,
+  __pyx_e_7classes_9generated_VISUALSHADERNODETRANSFORMVECMULT_OP_3x3_AxB,
+  __pyx_e_7classes_9generated_VISUALSHADERNODETRANSFORMVECMULT_OP_3x3_BxA
+};
+typedef enum __pyx_t_7classes_9generated_VisualShaderNodeTransformVecMult_Operator __pyx_t_7classes_9generated_VisualShaderNodeTransformVecMult_Operator;
+
+/* "classes/generated.pxd":923
+ * 
+ * 
+ * ctypedef enum VisualShaderNodeVectorDerivativeFunc_Function :VISUALSHADERNODEVECTORDERIVATIVEFUNC_FUNC_SUM, VISUALSHADERNODEVECTORDERIVATIVEFUNC_FUNC_X, VISUALSHADERNODEVECTORDERIVATIVEFUNC_FUNC_Y             # <<<<<<<<<<<<<<
+ * 
+ * 
+ */
+enum __pyx_t_7classes_9generated_VisualShaderNodeVectorDerivativeFunc_Function {
+  __pyx_e_7classes_9generated_VISUALSHADERNODEVECTORDERIVATIVEFUNC_FUNC_SUM,
+  __pyx_e_7classes_9generated_VISUALSHADERNODEVECTORDERIVATIVEFUNC_FUNC_X,
+  __pyx_e_7classes_9generated_VISUALSHADERNODEVECTORDERIVATIVEFUNC_FUNC_Y
+};
+typedef enum __pyx_t_7classes_9generated_VisualShaderNodeVectorDerivativeFunc_Function __pyx_t_7classes_9generated_VisualShaderNodeVectorDerivativeFunc_Function;
+
+/* "classes/generated.pxd":926
+ * 
+ * 
+ * ctypedef enum VisualShaderNodeVectorFunc_Function :VISUALSHADERNODEVECTORFUNC_FUNC_NORMALIZE, VISUALSHADERNODEVECTORFUNC_FUNC_SATURATE, VISUALSHADERNODEVECTORFUNC_FUNC_NEGATE, VISUALSHADERNODEVECTORFUNC_FUNC_RECIPROCAL, VISUALSHADERNODEVECTORFUNC_FUNC_RGB2HSV, VISUALSHADERNODEVECTORFUNC_FUNC_HSV2RGB, VISUALSHADERNODEVECTORFUNC_FUNC_ABS, VISUALSHADERNODEVECTORFUNC_FUNC_ACOS, VISUALSHADERNODEVECTORFUNC_FUNC_ACOSH, VISUALSHADERNODEVECTORFUNC_FUNC_ASIN, VISUALSHADERNODEVECTORFUNC_FUNC_ASINH, VISUALSHADERNODEVECTORFUNC_FUNC_ATAN, VISUALSHADERNODEVECTORFUNC_FUNC_ATANH, VISUALSHADERNODEVECTORFUNC_FUNC_CEIL, VISUALSHADERNODEVECTORFUNC_FUNC_COS, VISUALSHADERNODEVECTORFUNC_FUNC_COSH, VISUALSHADERNODEVECTORFUNC_FUNC_DEGREES, VISUALSHADERNODEVECTORFUNC_FUNC_EXP, VISUALSHADERNODEVECTORFUNC_FUNC_EXP2, VISUALSHADERNODEVECTORFUNC_FUNC_FLOOR, VISUALSHADERNODEVECTORFUNC_FUNC_FRAC, VISUALSHADERNODEVECTORFUNC_FUNC_INVERSE_SQRT, VISUALSHADERNODEVECTORFUNC_FUNC_LOG, VISUALSHADERNODEVECTORFUNC_FUNC_LOG2, VISUALSHADERNODEVECTORFUNC_FUNC_RADIANS, VISUALSHADERNODEVECTORFUNC_FUNC_ROUND, VISUALSHADERNODEVECTORFUNC_FUNC_ROUNDEVEN, VISUALSHADERNODEVECTORFUNC_FUNC_SIGN, VISUALSHADERNODEVECTORFUNC_FUNC_SIN, VISUALSHADERNODEVECTORFUNC_FUNC_SINH, VISUALSHADERNODEVECTORFUNC_FUNC_SQRT, VISUALSHADERNODEVECTORFUNC_FUNC_TAN, VISUALSHADERNODEVECTORFUNC_FUNC_TANH, VISUALSHADERNODEVECTORFUNC_FUNC_TRUNC, VISUALSHADERNODEVECTORFUNC_FUNC_ONEMINUS             # <<<<<<<<<<<<<<
+ * 
+ * 
+ */
+enum __pyx_t_7classes_9generated_VisualShaderNodeVectorFunc_Function {
+  __pyx_e_7classes_9generated_VISUALSHADERNODEVECTORFUNC_FUNC_NORMALIZE,
+  __pyx_e_7classes_9generated_VISUALSHADERNODEVECTORFUNC_FUNC_SATURATE,
+  __pyx_e_7classes_9generated_VISUALSHADERNODEVECTORFUNC_FUNC_NEGATE,
+  __pyx_e_7classes_9generated_VISUALSHADERNODEVECTORFUNC_FUNC_RECIPROCAL,
+  __pyx_e_7classes_9generated_VISUALSHADERNODEVECTORFUNC_FUNC_RGB2HSV,
+  __pyx_e_7classes_9generated_VISUALSHADERNODEVECTORFUNC_FUNC_HSV2RGB,
+  __pyx_e_7classes_9generated_VISUALSHADERNODEVECTORFUNC_FUNC_ABS,
+  __pyx_e_7classes_9generated_VISUALSHADERNODEVECTORFUNC_FUNC_ACOS,
+  __pyx_e_7classes_9generated_VISUALSHADERNODEVECTORFUNC_FUNC_ACOSH,
+  __pyx_e_7classes_9generated_VISUALSHADERNODEVECTORFUNC_FUNC_ASIN,
+  __pyx_e_7classes_9generated_VISUALSHADERNODEVECTORFUNC_FUNC_ASINH,
+  __pyx_e_7classes_9generated_VISUALSHADERNODEVECTORFUNC_FUNC_ATAN,
+  __pyx_e_7classes_9generated_VISUALSHADERNODEVECTORFUNC_FUNC_ATANH,
+  __pyx_e_7classes_9generated_VISUALSHADERNODEVECTORFUNC_FUNC_CEIL,
+  __pyx_e_7classes_9generated_VISUALSHADERNODEVECTORFUNC_FUNC_COS,
+  __pyx_e_7classes_9generated_VISUALSHADERNODEVECTORFUNC_FUNC_COSH,
+  __pyx_e_7classes_9generated_VISUALSHADERNODEVECTORFUNC_FUNC_DEGREES,
+  __pyx_e_7classes_9generated_VISUALSHADERNODEVECTORFUNC_FUNC_EXP,
+  __pyx_e_7classes_9generated_VISUALSHADERNODEVECTORFUNC_FUNC_EXP2,
+  __pyx_e_7classes_9generated_VISUALSHADERNODEVECTORFUNC_FUNC_FLOOR,
+  __pyx_e_7classes_9generated_VISUALSHADERNODEVECTORFUNC_FUNC_FRAC,
+  __pyx_e_7classes_9generated_VISUALSHADERNODEVECTORFUNC_FUNC_INVERSE_SQRT,
+  __pyx_e_7classes_9generated_VISUALSHADERNODEVECTORFUNC_FUNC_LOG,
+  __pyx_e_7classes_9generated_VISUALSHADERNODEVECTORFUNC_FUNC_LOG2,
+  __pyx_e_7classes_9generated_VISUALSHADERNODEVECTORFUNC_FUNC_RADIANS,
+  __pyx_e_7classes_9generated_VISUALSHADERNODEVECTORFUNC_FUNC_ROUND,
+  __pyx_e_7classes_9generated_VISUALSHADERNODEVECTORFUNC_FUNC_ROUNDEVEN,
+  __pyx_e_7classes_9generated_VISUALSHADERNODEVECTORFUNC_FUNC_SIGN,
+  __pyx_e_7classes_9generated_VISUALSHADERNODEVECTORFUNC_FUNC_SIN,
+  __pyx_e_7classes_9generated_VISUALSHADERNODEVECTORFUNC_FUNC_SINH,
+  __pyx_e_7classes_9generated_VISUALSHADERNODEVECTORFUNC_FUNC_SQRT,
+  __pyx_e_7classes_9generated_VISUALSHADERNODEVECTORFUNC_FUNC_TAN,
+  __pyx_e_7classes_9generated_VISUALSHADERNODEVECTORFUNC_FUNC_TANH,
+  __pyx_e_7classes_9generated_VISUALSHADERNODEVECTORFUNC_FUNC_TRUNC,
+  __pyx_e_7classes_9generated_VISUALSHADERNODEVECTORFUNC_FUNC_ONEMINUS
+};
+typedef enum __pyx_t_7classes_9generated_VisualShaderNodeVectorFunc_Function __pyx_t_7classes_9generated_VisualShaderNodeVectorFunc_Function;
+
+/* "classes/generated.pxd":930
+ * 
+ * 
+ * ctypedef enum VisualShaderNodeVectorOp_Operator :VISUALSHADERNODEVECTOROP_OP_ADD, VISUALSHADERNODEVECTOROP_OP_SUB, VISUALSHADERNODEVECTOROP_OP_MUL, VISUALSHADERNODEVECTOROP_OP_DIV, VISUALSHADERNODEVECTOROP_OP_MOD, VISUALSHADERNODEVECTOROP_OP_POW, VISUALSHADERNODEVECTOROP_OP_MAX, VISUALSHADERNODEVECTOROP_OP_MIN, VISUALSHADERNODEVECTOROP_OP_CROSS, VISUALSHADERNODEVECTOROP_OP_ATAN2, VISUALSHADERNODEVECTOROP_OP_REFLECT, VISUALSHADERNODEVECTOROP_OP_STEP             # <<<<<<<<<<<<<<
+ * 
+ * 
+ */
+enum __pyx_t_7classes_9generated_VisualShaderNodeVectorOp_Operator {
+  __pyx_e_7classes_9generated_VISUALSHADERNODEVECTOROP_OP_ADD,
+  __pyx_e_7classes_9generated_VISUALSHADERNODEVECTOROP_OP_SUB,
+  __pyx_e_7classes_9generated_VISUALSHADERNODEVECTOROP_OP_MUL,
+  __pyx_e_7classes_9generated_VISUALSHADERNODEVECTOROP_OP_DIV,
+  __pyx_e_7classes_9generated_VISUALSHADERNODEVECTOROP_OP_MOD,
+  __pyx_e_7classes_9generated_VISUALSHADERNODEVECTOROP_OP_POW,
+  __pyx_e_7classes_9generated_VISUALSHADERNODEVECTOROP_OP_MAX,
+  __pyx_e_7classes_9generated_VISUALSHADERNODEVECTOROP_OP_MIN,
+  __pyx_e_7classes_9generated_VISUALSHADERNODEVECTOROP_OP_CROSS,
+  __pyx_e_7classes_9generated_VISUALSHADERNODEVECTOROP_OP_ATAN2,
+  __pyx_e_7classes_9generated_VISUALSHADERNODEVECTOROP_OP_REFLECT,
+  __pyx_e_7classes_9generated_VISUALSHADERNODEVECTOROP_OP_STEP
+};
+typedef enum __pyx_t_7classes_9generated_VisualShaderNodeVectorOp_Operator __pyx_t_7classes_9generated_VisualShaderNodeVectorOp_Operator;
+
+/* "classes/generated.pxd":938
+ * 
+ * 
+ * ctypedef enum WebRTCDataChannel_WriteMode :WEBRTCDATACHANNEL_WRITE_MODE_TEXT, WEBRTCDATACHANNEL_WRITE_MODE_BINARY             # <<<<<<<<<<<<<<
+ * ctypedef enum WebRTCDataChannel_ChannelState :WEBRTCDATACHANNEL_STATE_CONNECTING, WEBRTCDATACHANNEL_STATE_OPEN, WEBRTCDATACHANNEL_STATE_CLOSING, WEBRTCDATACHANNEL_STATE_CLOSED
+ * 
+ */
+enum __pyx_t_7classes_9generated_WebRTCDataChannel_WriteMode {
+  __pyx_e_7classes_9generated_WEBRTCDATACHANNEL_WRITE_MODE_TEXT,
+  __pyx_e_7classes_9generated_WEBRTCDATACHANNEL_WRITE_MODE_BINARY
+};
+typedef enum __pyx_t_7classes_9generated_WebRTCDataChannel_WriteMode __pyx_t_7classes_9generated_WebRTCDataChannel_WriteMode;
+
+/* "classes/generated.pxd":939
+ * 
+ * ctypedef enum WebRTCDataChannel_WriteMode :WEBRTCDATACHANNEL_WRITE_MODE_TEXT, WEBRTCDATACHANNEL_WRITE_MODE_BINARY
+ * ctypedef enum WebRTCDataChannel_ChannelState :WEBRTCDATACHANNEL_STATE_CONNECTING, WEBRTCDATACHANNEL_STATE_OPEN, WEBRTCDATACHANNEL_STATE_CLOSING, WEBRTCDATACHANNEL_STATE_CLOSED             # <<<<<<<<<<<<<<
+ * 
+ * 
+ */
+enum __pyx_t_7classes_9generated_WebRTCDataChannel_ChannelState {
+  __pyx_e_7classes_9generated_WEBRTCDATACHANNEL_STATE_CONNECTING,
+  __pyx_e_7classes_9generated_WEBRTCDATACHANNEL_STATE_OPEN,
+  __pyx_e_7classes_9generated_WEBRTCDATACHANNEL_STATE_CLOSING,
+  __pyx_e_7classes_9generated_WEBRTCDATACHANNEL_STATE_CLOSED
+};
+typedef enum __pyx_t_7classes_9generated_WebRTCDataChannel_ChannelState __pyx_t_7classes_9generated_WebRTCDataChannel_ChannelState;
+
+/* "classes/generated.pxd":943
+ * 
+ * 
+ * ctypedef enum WebRTCPeerConnection_ConnectionState :WEBRTCPEERCONNECTION_STATE_NEW, WEBRTCPEERCONNECTION_STATE_CONNECTING, WEBRTCPEERCONNECTION_STATE_CONNECTED, WEBRTCPEERCONNECTION_STATE_DISCONNECTED, WEBRTCPEERCONNECTION_STATE_FAILED, WEBRTCPEERCONNECTION_STATE_CLOSED             # <<<<<<<<<<<<<<
+ * 
+ * 
+ */
+enum __pyx_t_7classes_9generated_WebRTCPeerConnection_ConnectionState {
+  __pyx_e_7classes_9generated_WEBRTCPEERCONNECTION_STATE_NEW,
+  __pyx_e_7classes_9generated_WEBRTCPEERCONNECTION_STATE_CONNECTING,
+  __pyx_e_7classes_9generated_WEBRTCPEERCONNECTION_STATE_CONNECTED,
+  __pyx_e_7classes_9generated_WEBRTCPEERCONNECTION_STATE_DISCONNECTED,
+  __pyx_e_7classes_9generated_WEBRTCPEERCONNECTION_STATE_FAILED,
+  __pyx_e_7classes_9generated_WEBRTCPEERCONNECTION_STATE_CLOSED
+};
+typedef enum __pyx_t_7classes_9generated_WebRTCPeerConnection_ConnectionState __pyx_t_7classes_9generated_WebRTCPeerConnection_ConnectionState;
+
+/* "classes/generated.pxd":948
+ * 
+ * 
+ * ctypedef enum WebSocketPeer_WriteMode :WEBSOCKETPEER_WRITE_MODE_TEXT, WEBSOCKETPEER_WRITE_MODE_BINARY             # <<<<<<<<<<<<<<
+ * 
+ * 
+ */
+enum __pyx_t_7classes_9generated_WebSocketPeer_WriteMode {
+  __pyx_e_7classes_9generated_WEBSOCKETPEER_WRITE_MODE_TEXT,
+  __pyx_e_7classes_9generated_WEBSOCKETPEER_WRITE_MODE_BINARY
+};
+typedef enum __pyx_t_7classes_9generated_WebSocketPeer_WriteMode __pyx_t_7classes_9generated_WebSocketPeer_WriteMode;
+
+/* "classes/generated.pxd":956
+ * 
+ * 
+ * ctypedef enum XMLParser_NodeType :XMLPARSER_NODE_NONE, XMLPARSER_NODE_ELEMENT, XMLPARSER_NODE_ELEMENT_END, XMLPARSER_NODE_TEXT, XMLPARSER_NODE_COMMENT, XMLPARSER_NODE_CDATA, XMLPARSER_NODE_UNKNOWN             # <<<<<<<<<<<<<<
+ * 
+ * 
+ */
+enum __pyx_t_7classes_9generated_XMLParser_NodeType {
+  __pyx_e_7classes_9generated_XMLPARSER_NODE_NONE,
+  __pyx_e_7classes_9generated_XMLPARSER_NODE_ELEMENT,
+  __pyx_e_7classes_9generated_XMLPARSER_NODE_ELEMENT_END,
+  __pyx_e_7classes_9generated_XMLPARSER_NODE_TEXT,
+  __pyx_e_7classes_9generated_XMLPARSER_NODE_COMMENT,
+  __pyx_e_7classes_9generated_XMLPARSER_NODE_CDATA,
+  __pyx_e_7classes_9generated_XMLPARSER_NODE_UNKNOWN
+};
+typedef enum __pyx_t_7classes_9generated_XMLParser_NodeType __pyx_t_7classes_9generated_XMLParser_NodeType;
+
+/* "utils/Wrapper.pxd":2
+ * from godot_api.binding cimport *
+ * cdef class Wrapper:             # <<<<<<<<<<<<<<
+ *     cdef godot_object *godot_owner
+ * 
+ */
+struct __pyx_obj_5utils_7Wrapper_Wrapper {
   PyObject_HEAD
-  PyObject *(*__pyx_v_f)(void);
+  struct __pyx_vtabstruct_5utils_7Wrapper_Wrapper *__pyx_vtab;
+  godot_object *godot_owner;
 };
 
+
+
+struct __pyx_vtabstruct_5utils_7Wrapper_Wrapper {
+  void (*set_godot_owner)(struct __pyx_obj_5utils_7Wrapper_Wrapper *, godot_object *);
+  godot_object *(*get_godot_owner)(struct __pyx_obj_5utils_7Wrapper_Wrapper *);
+};
+static struct __pyx_vtabstruct_5utils_7Wrapper_Wrapper *__pyx_vtabptr_5utils_7Wrapper_Wrapper;
+static CYTHON_INLINE void __pyx_f_5utils_7Wrapper_7Wrapper_set_godot_owner(struct __pyx_obj_5utils_7Wrapper_Wrapper *, godot_object *);
+static CYTHON_INLINE godot_object *__pyx_f_5utils_7Wrapper_7Wrapper_get_godot_owner(struct __pyx_obj_5utils_7Wrapper_Wrapper *);
 
 /* --- Runtime support code (head) --- */
 /* Refnanny.proto */
@@ -919,122 +6764,11 @@ static CYTHON_INLINE PyObject* __Pyx_PyObject_GetAttrStr(PyObject* obj, PyObject
 /* GetBuiltinName.proto */
 static PyObject *__Pyx_GetBuiltinName(PyObject *name);
 
-/* PyCFunctionFastCall.proto */
-#if CYTHON_FAST_PYCCALL
-static CYTHON_INLINE PyObject *__Pyx_PyCFunction_FastCall(PyObject *func, PyObject **args, Py_ssize_t nargs);
-#else
-#define __Pyx_PyCFunction_FastCall(func, args, nargs)  (assert(0), NULL)
-#endif
-
-/* PyFunctionFastCall.proto */
-#if CYTHON_FAST_PYCALL
-#define __Pyx_PyFunction_FastCall(func, args, nargs)\
-    __Pyx_PyFunction_FastCallDict((func), (args), (nargs), NULL)
-#if 1 || PY_VERSION_HEX < 0x030600B1
-static PyObject *__Pyx_PyFunction_FastCallDict(PyObject *func, PyObject **args, Py_ssize_t nargs, PyObject *kwargs);
-#else
-#define __Pyx_PyFunction_FastCallDict(func, args, nargs, kwargs) _PyFunction_FastCallDict(func, args, nargs, kwargs)
-#endif
-#define __Pyx_BUILD_ASSERT_EXPR(cond)\
-    (sizeof(char [1 - 2*!(cond)]) - 1)
-#ifndef Py_MEMBER_SIZE
-#define Py_MEMBER_SIZE(type, member) sizeof(((type *)0)->member)
-#endif
-  static size_t __pyx_pyframe_localsplus_offset = 0;
-  #include "frameobject.h"
-  #define __Pxy_PyFrame_Initialize_Offsets()\
-    ((void)__Pyx_BUILD_ASSERT_EXPR(sizeof(PyFrameObject) == offsetof(PyFrameObject, f_localsplus) + Py_MEMBER_SIZE(PyFrameObject, f_localsplus)),\
-     (void)(__pyx_pyframe_localsplus_offset = ((size_t)PyFrame_Type.tp_basicsize) - Py_MEMBER_SIZE(PyFrameObject, f_localsplus)))
-  #define __Pyx_PyFrame_GetLocalsplus(frame)\
-    (assert(__pyx_pyframe_localsplus_offset), (PyObject **)(((char *)(frame)) + __pyx_pyframe_localsplus_offset))
-#endif
-
 /* PyObjectCall.proto */
 #if CYTHON_COMPILING_IN_CPYTHON
 static CYTHON_INLINE PyObject* __Pyx_PyObject_Call(PyObject *func, PyObject *arg, PyObject *kw);
 #else
 #define __Pyx_PyObject_Call(func, arg, kw) PyObject_Call(func, arg, kw)
-#endif
-
-/* PyObjectCallMethO.proto */
-#if CYTHON_COMPILING_IN_CPYTHON
-static CYTHON_INLINE PyObject* __Pyx_PyObject_CallMethO(PyObject *func, PyObject *arg);
-#endif
-
-/* PyObjectCallOneArg.proto */
-static CYTHON_INLINE PyObject* __Pyx_PyObject_CallOneArg(PyObject *func, PyObject *arg);
-
-/* FetchCommonType.proto */
-static PyTypeObject* __Pyx_FetchCommonType(PyTypeObject* type);
-
-/* CythonFunctionShared.proto */
-#define __Pyx_CyFunction_USED 1
-#define __Pyx_CYFUNCTION_STATICMETHOD  0x01
-#define __Pyx_CYFUNCTION_CLASSMETHOD   0x02
-#define __Pyx_CYFUNCTION_CCLASS        0x04
-#define __Pyx_CyFunction_GetClosure(f)\
-    (((__pyx_CyFunctionObject *) (f))->func_closure)
-#define __Pyx_CyFunction_GetClassObj(f)\
-    (((__pyx_CyFunctionObject *) (f))->func_classobj)
-#define __Pyx_CyFunction_Defaults(type, f)\
-    ((type *)(((__pyx_CyFunctionObject *) (f))->defaults))
-#define __Pyx_CyFunction_SetDefaultsGetter(f, g)\
-    ((__pyx_CyFunctionObject *) (f))->defaults_getter = (g)
-typedef struct {
-    PyCFunctionObject func;
-#if PY_VERSION_HEX < 0x030500A0
-    PyObject *func_weakreflist;
-#endif
-    PyObject *func_dict;
-    PyObject *func_name;
-    PyObject *func_qualname;
-    PyObject *func_doc;
-    PyObject *func_globals;
-    PyObject *func_code;
-    PyObject *func_closure;
-    PyObject *func_classobj;
-    void *defaults;
-    int defaults_pyobjects;
-    size_t defaults_size;  // used by FusedFunction for copying defaults
-    int flags;
-    PyObject *defaults_tuple;
-    PyObject *defaults_kwdict;
-    PyObject *(*defaults_getter)(PyObject *);
-    PyObject *func_annotations;
-} __pyx_CyFunctionObject;
-static PyTypeObject *__pyx_CyFunctionType = 0;
-#define __Pyx_CyFunction_Check(obj)  (__Pyx_TypeCheck(obj, __pyx_CyFunctionType))
-static PyObject *__Pyx_CyFunction_Init(__pyx_CyFunctionObject* op, PyMethodDef *ml,
-                                      int flags, PyObject* qualname,
-                                      PyObject *self,
-                                      PyObject *module, PyObject *globals,
-                                      PyObject* code);
-static CYTHON_INLINE void *__Pyx_CyFunction_InitDefaults(PyObject *m,
-                                                         size_t size,
-                                                         int pyobjects);
-static CYTHON_INLINE void __Pyx_CyFunction_SetDefaultsTuple(PyObject *m,
-                                                            PyObject *tuple);
-static CYTHON_INLINE void __Pyx_CyFunction_SetDefaultsKwDict(PyObject *m,
-                                                             PyObject *dict);
-static CYTHON_INLINE void __Pyx_CyFunction_SetAnnotationsDict(PyObject *m,
-                                                              PyObject *dict);
-static int __pyx_CyFunction_init(void);
-
-/* CythonFunction.proto */
-static PyObject *__Pyx_CyFunction_New(PyMethodDef *ml,
-                                      int flags, PyObject* qualname,
-                                      PyObject *closure,
-                                      PyObject *module, PyObject *globals,
-                                      PyObject* code);
-
-/* IncludeStringH.proto */
-#include <string.h>
-
-/* PyObject_GenericGetAttrNoDict.proto */
-#if CYTHON_USE_TYPE_SLOTS && CYTHON_USE_PYTYPE_LOOKUP && PY_VERSION_HEX < 0x03070000
-static CYTHON_INLINE PyObject* __Pyx_PyObject_GenericGetAttrNoDict(PyObject* obj, PyObject* attr_name);
-#else
-#define __Pyx_PyObject_GenericGetAttrNoDict PyObject_GenericGetAttr
 #endif
 
 /* PyDictVersioning.proto */
@@ -1062,6 +6796,89 @@ static CYTHON_INLINE int __Pyx_object_dict_version_matches(PyObject* obj, PY_UIN
 #define __PYX_UPDATE_DICT_CACHE(dict, value, cache_var, version_var)
 #define __PYX_PY_DICT_LOOKUP_IF_MODIFIED(VAR, DICT, LOOKUP)  (VAR) = (LOOKUP);
 #endif
+
+/* GetModuleGlobalName.proto */
+#if CYTHON_USE_DICT_VERSIONS
+#define __Pyx_GetModuleGlobalName(var, name)  {\
+    static PY_UINT64_T __pyx_dict_version = 0;\
+    static PyObject *__pyx_dict_cached_value = NULL;\
+    (var) = (likely(__pyx_dict_version == __PYX_GET_DICT_VERSION(__pyx_d))) ?\
+        (likely(__pyx_dict_cached_value) ? __Pyx_NewRef(__pyx_dict_cached_value) : __Pyx_GetBuiltinName(name)) :\
+        __Pyx__GetModuleGlobalName(name, &__pyx_dict_version, &__pyx_dict_cached_value);\
+}
+#define __Pyx_GetModuleGlobalNameUncached(var, name)  {\
+    PY_UINT64_T __pyx_dict_version;\
+    PyObject *__pyx_dict_cached_value;\
+    (var) = __Pyx__GetModuleGlobalName(name, &__pyx_dict_version, &__pyx_dict_cached_value);\
+}
+static PyObject *__Pyx__GetModuleGlobalName(PyObject *name, PY_UINT64_T *dict_version, PyObject **dict_cached_value);
+#else
+#define __Pyx_GetModuleGlobalName(var, name)  (var) = __Pyx__GetModuleGlobalName(name)
+#define __Pyx_GetModuleGlobalNameUncached(var, name)  (var) = __Pyx__GetModuleGlobalName(name)
+static CYTHON_INLINE PyObject *__Pyx__GetModuleGlobalName(PyObject *name);
+#endif
+
+/* PyFunctionFastCall.proto */
+#if CYTHON_FAST_PYCALL
+#define __Pyx_PyFunction_FastCall(func, args, nargs)\
+    __Pyx_PyFunction_FastCallDict((func), (args), (nargs), NULL)
+#if 1 || PY_VERSION_HEX < 0x030600B1
+static PyObject *__Pyx_PyFunction_FastCallDict(PyObject *func, PyObject **args, Py_ssize_t nargs, PyObject *kwargs);
+#else
+#define __Pyx_PyFunction_FastCallDict(func, args, nargs, kwargs) _PyFunction_FastCallDict(func, args, nargs, kwargs)
+#endif
+#define __Pyx_BUILD_ASSERT_EXPR(cond)\
+    (sizeof(char [1 - 2*!(cond)]) - 1)
+#ifndef Py_MEMBER_SIZE
+#define Py_MEMBER_SIZE(type, member) sizeof(((type *)0)->member)
+#endif
+  static size_t __pyx_pyframe_localsplus_offset = 0;
+  #include "frameobject.h"
+  #define __Pxy_PyFrame_Initialize_Offsets()\
+    ((void)__Pyx_BUILD_ASSERT_EXPR(sizeof(PyFrameObject) == offsetof(PyFrameObject, f_localsplus) + Py_MEMBER_SIZE(PyFrameObject, f_localsplus)),\
+     (void)(__pyx_pyframe_localsplus_offset = ((size_t)PyFrame_Type.tp_basicsize) - Py_MEMBER_SIZE(PyFrameObject, f_localsplus)))
+  #define __Pyx_PyFrame_GetLocalsplus(frame)\
+    (assert(__pyx_pyframe_localsplus_offset), (PyObject **)(((char *)(frame)) + __pyx_pyframe_localsplus_offset))
+#endif
+
+/* PyObjectCallMethO.proto */
+#if CYTHON_COMPILING_IN_CPYTHON
+static CYTHON_INLINE PyObject* __Pyx_PyObject_CallMethO(PyObject *func, PyObject *arg);
+#endif
+
+/* PyObjectCallNoArg.proto */
+#if CYTHON_COMPILING_IN_CPYTHON
+static CYTHON_INLINE PyObject* __Pyx_PyObject_CallNoArg(PyObject *func);
+#else
+#define __Pyx_PyObject_CallNoArg(func) __Pyx_PyObject_Call(func, __pyx_empty_tuple, NULL)
+#endif
+
+/* PyCFunctionFastCall.proto */
+#if CYTHON_FAST_PYCCALL
+static CYTHON_INLINE PyObject *__Pyx_PyCFunction_FastCall(PyObject *func, PyObject **args, Py_ssize_t nargs);
+#else
+#define __Pyx_PyCFunction_FastCall(func, args, nargs)  (assert(0), NULL)
+#endif
+
+/* PyObjectCallOneArg.proto */
+static CYTHON_INLINE PyObject* __Pyx_PyObject_CallOneArg(PyObject *func, PyObject *arg);
+
+/* TypeImport.proto */
+#ifndef __PYX_HAVE_RT_ImportType_proto
+#define __PYX_HAVE_RT_ImportType_proto
+enum __Pyx_ImportType_CheckSize {
+   __Pyx_ImportType_CheckSize_Error = 0,
+   __Pyx_ImportType_CheckSize_Warn = 1,
+   __Pyx_ImportType_CheckSize_Ignore = 2
+};
+static PyTypeObject *__Pyx_ImportType(PyObject* module, const char *module_name, const char *class_name, size_t size, enum __Pyx_ImportType_CheckSize check_size);
+#endif
+
+/* GetVTable.proto */
+static void* __Pyx_GetVtable(PyObject *dict);
+
+/* Import.proto */
+static PyObject *__Pyx_Import(PyObject *name, PyObject *from_list, int level);
 
 /* PyThreadStateGet.proto */
 #if CYTHON_FAST_THREAD_STATE
@@ -1153,14 +6970,31 @@ static int __Pyx_check_binary_version(void);
 /* FunctionExport.proto */
 static int __Pyx_ExportFunction(const char *name, void (*f)(void), const char *sig);
 
+/* FunctionImport.proto */
+static int __Pyx_ImportFunction(PyObject *module, const char *funcname, void (**f)(void), const char *sig);
+
 /* InitStrings.proto */
 static int __Pyx_InitStrings(__Pyx_StringTabEntry *t);
 
+static CYTHON_INLINE void __pyx_f_5utils_7Wrapper_7Wrapper_set_godot_owner(struct __pyx_obj_5utils_7Wrapper_Wrapper *__pyx_v_self, godot_object *__pyx_v_owner); /* proto*/
+static CYTHON_INLINE godot_object *__pyx_f_5utils_7Wrapper_7Wrapper_get_godot_owner(struct __pyx_obj_5utils_7Wrapper_Wrapper *__pyx_v_self); /* proto*/
+
+/* Module declarations from 'libcpp' */
+
+/* Module declarations from 'libc.stddef' */
+
+/* Module declarations from 'godot_api.binding' */
+
+/* Module declarations from 'godot_api.binding_external' */
+
+/* Module declarations from 'utils.Wrapper' */
+static PyTypeObject *__pyx_ptype_5utils_7Wrapper_Wrapper = 0;
+
+/* Module declarations from 'classes.generated' */
+static PyObject *(*__pyx_f_7classes_9generated_set_core)(struct godot_gdnative_core_api_struct *); /*proto*/
 
 /* Module declarations from 'classes.classes' */
-static PyTypeObject *__pyx_ptype___pyx_scope_struct____Pyx_CFunc_object_______to_py = 0;
-static PyObject *__pyx_f_7classes_7classes_register_bindings(void); /*proto*/
-static PyObject *__Pyx_CFunc_object_______to_py(PyObject *(*)(void)); /*proto*/
+static PyObject *__pyx_f_7classes_7classes_init_method_bindings(struct godot_gdnative_core_api_struct *); /*proto*/
 #define __Pyx_MODULE_NAME "classes.classes"
 extern int __pyx_module_is_main_classes__classes;
 int __pyx_module_is_main_classes__classes = 0;
@@ -1170,55 +7004,106 @@ static PyObject *__pyx_builtin_print;
 static const char __pyx_k_main[] = "__main__";
 static const char __pyx_k_name[] = "__name__";
 static const char __pyx_k_test[] = "__test__";
-static const char __pyx_k_wrap[] = "wrap";
 static const char __pyx_k_print[] = "print";
-static const char __pyx_k_cfunc_to_py[] = "cfunc.to_py";
-static const char __pyx_k_stringsource[] = "stringsource";
+static const char __pyx_k_import[] = "__import__";
+static const char __pyx_k_classes[] = "classes";
+static const char __pyx_k_generated[] = "generated";
+static const char __pyx_k_pyx_vtable[] = "__pyx_vtable__";
+static const char __pyx_k_classes_generated[] = "classes.generated";
 static const char __pyx_k_cline_in_traceback[] = "cline_in_traceback";
-static const char __pyx_k_Pyx_CFunc_object_______to_py_l[] = "__Pyx_CFunc_object_______to_py.<locals>.wrap";
-static PyObject *__pyx_n_s_Pyx_CFunc_object_______to_py_l;
-static PyObject *__pyx_n_s_cfunc_to_py;
+static const char __pyx_k_init_method_bindings[] = "init_method_bindings";
+static const char __pyx_k_init_method_bindiings[] = "init_method_bindiings";
+static PyObject *__pyx_n_s_classes;
+static PyObject *__pyx_n_s_classes_generated;
 static PyObject *__pyx_n_s_cline_in_traceback;
+static PyObject *__pyx_n_s_generated;
+static PyObject *__pyx_n_s_import;
+static PyObject *__pyx_n_u_init_method_bindiings;
+static PyObject *__pyx_n_s_init_method_bindings;
 static PyObject *__pyx_n_s_main;
 static PyObject *__pyx_n_s_name;
 static PyObject *__pyx_n_s_print;
-static PyObject *__pyx_kp_s_stringsource;
+static PyObject *__pyx_n_s_pyx_vtable;
 static PyObject *__pyx_n_s_test;
-static PyObject *__pyx_n_s_wrap;
-static PyObject *__pyx_pf_11cfunc_dot_to_py_30__Pyx_CFunc_object_______to_py_wrap(PyObject *__pyx_self); /* proto */
-static PyObject *__pyx_tp_new___pyx_scope_struct____Pyx_CFunc_object_______to_py(PyTypeObject *t, PyObject *a, PyObject *k); /*proto*/
-static PyObject *__pyx_codeobj_;
+static PyObject *__pyx_tuple_;
 /* Late includes */
 
-/* "classes/classes.pyx":1
- * cdef api register_bindings():             # <<<<<<<<<<<<<<
- *     print(register_bindings)
+/* "classes/classes.pyx":5
+ * from godot_api.binding_external cimport *
+ * 
+ * cdef api init_method_bindings(godot_gdnative_core_api_struct* core):             # <<<<<<<<<<<<<<
+ *     print("init_method_bindiings")
+ *     c_generated.set_core(core)
  */
 
-static PyObject *__pyx_f_7classes_7classes_register_bindings(void) {
+static PyObject *__pyx_f_7classes_7classes_init_method_bindings(struct godot_gdnative_core_api_struct *__pyx_v_core) {
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   PyObject *__pyx_t_1 = NULL;
   PyObject *__pyx_t_2 = NULL;
+  PyObject *__pyx_t_3 = NULL;
   int __pyx_lineno = 0;
   const char *__pyx_filename = NULL;
   int __pyx_clineno = 0;
-  __Pyx_RefNannySetupContext("register_bindings", 0);
+  __Pyx_RefNannySetupContext("init_method_bindings", 0);
 
-  /* "classes/classes.pyx":2
- * cdef api register_bindings():
- *     print(register_bindings)             # <<<<<<<<<<<<<<
+  /* "classes/classes.pyx":6
+ * 
+ * cdef api init_method_bindings(godot_gdnative_core_api_struct* core):
+ *     print("init_method_bindiings")             # <<<<<<<<<<<<<<
+ *     c_generated.set_core(core)
+ *     classes.generated.init_method_bindings()
  */
-  __pyx_t_1 = __Pyx_CFunc_object_______to_py(__pyx_f_7classes_7classes_register_bindings); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_print, __pyx_tuple_, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 6, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = __Pyx_PyObject_CallOneArg(__pyx_builtin_print, __pyx_t_1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 2, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "classes/classes.pyx":1
- * cdef api register_bindings():             # <<<<<<<<<<<<<<
- *     print(register_bindings)
+  /* "classes/classes.pyx":7
+ * cdef api init_method_bindings(godot_gdnative_core_api_struct* core):
+ *     print("init_method_bindiings")
+ *     c_generated.set_core(core)             # <<<<<<<<<<<<<<
+ *     classes.generated.init_method_bindings()
+ */
+  __pyx_t_1 = __pyx_f_7classes_9generated_set_core(__pyx_v_core); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 7, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+
+  /* "classes/classes.pyx":8
+ *     print("init_method_bindiings")
+ *     c_generated.set_core(core)
+ *     classes.generated.init_method_bindings()             # <<<<<<<<<<<<<<
+ */
+  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_classes); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 8, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
+  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_generated); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 8, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_3);
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_init_method_bindings); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 8, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
+  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+  __pyx_t_3 = NULL;
+  if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_2))) {
+    __pyx_t_3 = PyMethod_GET_SELF(__pyx_t_2);
+    if (likely(__pyx_t_3)) {
+      PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_2);
+      __Pyx_INCREF(__pyx_t_3);
+      __Pyx_INCREF(function);
+      __Pyx_DECREF_SET(__pyx_t_2, function);
+    }
+  }
+  __pyx_t_1 = (__pyx_t_3) ? __Pyx_PyObject_CallOneArg(__pyx_t_2, __pyx_t_3) : __Pyx_PyObject_CallNoArg(__pyx_t_2);
+  __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
+  if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 8, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+
+  /* "classes/classes.pyx":5
+ * from godot_api.binding_external cimport *
+ * 
+ * cdef api init_method_bindings(godot_gdnative_core_api_struct* core):             # <<<<<<<<<<<<<<
+ *     print("init_method_bindiings")
+ *     c_generated.set_core(core)
  */
 
   /* function exit code */
@@ -1227,7 +7112,8 @@ static PyObject *__pyx_f_7classes_7classes_register_bindings(void) {
   __pyx_L1_error:;
   __Pyx_XDECREF(__pyx_t_1);
   __Pyx_XDECREF(__pyx_t_2);
-  __Pyx_AddTraceback("classes.classes.register_bindings", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_XDECREF(__pyx_t_3);
+  __Pyx_AddTraceback("classes.classes.init_method_bindings", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = 0;
   __pyx_L0:;
   __Pyx_XGIVEREF(__pyx_r);
@@ -1235,240 +7121,75 @@ static PyObject *__pyx_f_7classes_7classes_register_bindings(void) {
   return __pyx_r;
 }
 
-/* "cfunc.to_py":65
- * @cname("__Pyx_CFunc_object_______to_py")
- * cdef object __Pyx_CFunc_object_______to_py(object (*f)() ):
- *     def wrap():             # <<<<<<<<<<<<<<
- *         """wrap()"""
- *         return f()
+/* "utils/Wrapper.pxd":5
+ *     cdef godot_object *godot_owner
+ * 
+ *     cdef inline void set_godot_owner(self,godot_object* owner):             # <<<<<<<<<<<<<<
+ *         self.godot_owner = owner
+ * 
  */
 
-/* Python wrapper */
-static PyObject *__pyx_pw_11cfunc_dot_to_py_30__Pyx_CFunc_object_______to_py_1wrap(PyObject *__pyx_self, CYTHON_UNUSED PyObject *unused); /*proto*/
-static char __pyx_doc_11cfunc_dot_to_py_30__Pyx_CFunc_object_______to_py_wrap[] = "wrap()";
-static PyMethodDef __pyx_mdef_11cfunc_dot_to_py_30__Pyx_CFunc_object_______to_py_1wrap = {"wrap", (PyCFunction)__pyx_pw_11cfunc_dot_to_py_30__Pyx_CFunc_object_______to_py_1wrap, METH_NOARGS, __pyx_doc_11cfunc_dot_to_py_30__Pyx_CFunc_object_______to_py_wrap};
-static PyObject *__pyx_pw_11cfunc_dot_to_py_30__Pyx_CFunc_object_______to_py_1wrap(PyObject *__pyx_self, CYTHON_UNUSED PyObject *unused) {
-  PyObject *__pyx_r = 0;
+static CYTHON_INLINE void __pyx_f_5utils_7Wrapper_7Wrapper_set_godot_owner(struct __pyx_obj_5utils_7Wrapper_Wrapper *__pyx_v_self, godot_object *__pyx_v_owner) {
   __Pyx_RefNannyDeclarations
-  __Pyx_RefNannySetupContext("wrap (wrapper)", 0);
-  __pyx_r = __pyx_pf_11cfunc_dot_to_py_30__Pyx_CFunc_object_______to_py_wrap(__pyx_self);
+  __Pyx_RefNannySetupContext("set_godot_owner", 0);
+
+  /* "utils/Wrapper.pxd":6
+ * 
+ *     cdef inline void set_godot_owner(self,godot_object* owner):
+ *         self.godot_owner = owner             # <<<<<<<<<<<<<<
+ * 
+ *     cdef inline godot_object* get_godot_owner(self):
+ */
+  __pyx_v_self->godot_owner = __pyx_v_owner;
+
+  /* "utils/Wrapper.pxd":5
+ *     cdef godot_object *godot_owner
+ * 
+ *     cdef inline void set_godot_owner(self,godot_object* owner):             # <<<<<<<<<<<<<<
+ *         self.godot_owner = owner
+ * 
+ */
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
-  return __pyx_r;
 }
 
-static PyObject *__pyx_pf_11cfunc_dot_to_py_30__Pyx_CFunc_object_______to_py_wrap(PyObject *__pyx_self) {
-  struct __pyx_obj___pyx_scope_struct____Pyx_CFunc_object_______to_py *__pyx_cur_scope;
-  struct __pyx_obj___pyx_scope_struct____Pyx_CFunc_object_______to_py *__pyx_outer_scope;
-  PyObject *__pyx_r = NULL;
-  __Pyx_RefNannyDeclarations
-  PyObject *__pyx_t_1 = NULL;
-  int __pyx_lineno = 0;
-  const char *__pyx_filename = NULL;
-  int __pyx_clineno = 0;
-  __Pyx_RefNannySetupContext("wrap", 0);
-  __pyx_outer_scope = (struct __pyx_obj___pyx_scope_struct____Pyx_CFunc_object_______to_py *) __Pyx_CyFunction_GetClosure(__pyx_self);
-  __pyx_cur_scope = __pyx_outer_scope;
-
-  /* "cfunc.to_py":67
- *     def wrap():
- *         """wrap()"""
- *         return f()             # <<<<<<<<<<<<<<
- *     return wrap
+/* "utils/Wrapper.pxd":8
+ *         self.godot_owner = owner
+ * 
+ *     cdef inline godot_object* get_godot_owner(self):             # <<<<<<<<<<<<<<
+ *         return self.godot_owner
  * 
  */
-  __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __pyx_cur_scope->__pyx_v_f(); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 67, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_1);
-  __pyx_r = __pyx_t_1;
-  __pyx_t_1 = 0;
+
+static CYTHON_INLINE godot_object *__pyx_f_5utils_7Wrapper_7Wrapper_get_godot_owner(struct __pyx_obj_5utils_7Wrapper_Wrapper *__pyx_v_self) {
+  godot_object *__pyx_r;
+  __Pyx_RefNannyDeclarations
+  __Pyx_RefNannySetupContext("get_godot_owner", 0);
+
+  /* "utils/Wrapper.pxd":9
+ * 
+ *     cdef inline godot_object* get_godot_owner(self):
+ *         return self.godot_owner             # <<<<<<<<<<<<<<
+ * 
+ * 
+ */
+  __pyx_r = __pyx_v_self->godot_owner;
   goto __pyx_L0;
 
-  /* "cfunc.to_py":65
- * @cname("__Pyx_CFunc_object_______to_py")
- * cdef object __Pyx_CFunc_object_______to_py(object (*f)() ):
- *     def wrap():             # <<<<<<<<<<<<<<
- *         """wrap()"""
- *         return f()
+  /* "utils/Wrapper.pxd":8
+ *         self.godot_owner = owner
+ * 
+ *     cdef inline godot_object* get_godot_owner(self):             # <<<<<<<<<<<<<<
+ *         return self.godot_owner
+ * 
  */
 
   /* function exit code */
-  __pyx_L1_error:;
-  __Pyx_XDECREF(__pyx_t_1);
-  __Pyx_AddTraceback("cfunc.to_py.__Pyx_CFunc_object_______to_py.wrap", __pyx_clineno, __pyx_lineno, __pyx_filename);
-  __pyx_r = NULL;
   __pyx_L0:;
-  __Pyx_XGIVEREF(__pyx_r);
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
-
-/* "cfunc.to_py":64
- * 
- * @cname("__Pyx_CFunc_object_______to_py")
- * cdef object __Pyx_CFunc_object_______to_py(object (*f)() ):             # <<<<<<<<<<<<<<
- *     def wrap():
- *         """wrap()"""
- */
-
-static PyObject *__Pyx_CFunc_object_______to_py(PyObject *(*__pyx_v_f)(void)) {
-  struct __pyx_obj___pyx_scope_struct____Pyx_CFunc_object_______to_py *__pyx_cur_scope;
-  PyObject *__pyx_v_wrap = 0;
-  PyObject *__pyx_r = NULL;
-  __Pyx_RefNannyDeclarations
-  PyObject *__pyx_t_1 = NULL;
-  int __pyx_lineno = 0;
-  const char *__pyx_filename = NULL;
-  int __pyx_clineno = 0;
-  __Pyx_RefNannySetupContext("__Pyx_CFunc_object_______to_py", 0);
-  __pyx_cur_scope = (struct __pyx_obj___pyx_scope_struct____Pyx_CFunc_object_______to_py *)__pyx_tp_new___pyx_scope_struct____Pyx_CFunc_object_______to_py(__pyx_ptype___pyx_scope_struct____Pyx_CFunc_object_______to_py, __pyx_empty_tuple, NULL);
-  if (unlikely(!__pyx_cur_scope)) {
-    __pyx_cur_scope = ((struct __pyx_obj___pyx_scope_struct____Pyx_CFunc_object_______to_py *)Py_None);
-    __Pyx_INCREF(Py_None);
-    __PYX_ERR(1, 64, __pyx_L1_error)
-  } else {
-    __Pyx_GOTREF(__pyx_cur_scope);
-  }
-  __pyx_cur_scope->__pyx_v_f = __pyx_v_f;
-
-  /* "cfunc.to_py":65
- * @cname("__Pyx_CFunc_object_______to_py")
- * cdef object __Pyx_CFunc_object_______to_py(object (*f)() ):
- *     def wrap():             # <<<<<<<<<<<<<<
- *         """wrap()"""
- *         return f()
- */
-  __pyx_t_1 = __Pyx_CyFunction_New(&__pyx_mdef_11cfunc_dot_to_py_30__Pyx_CFunc_object_______to_py_1wrap, 0, __pyx_n_s_Pyx_CFunc_object_______to_py_l, ((PyObject*)__pyx_cur_scope), __pyx_n_s_cfunc_to_py, __pyx_d, ((PyObject *)__pyx_codeobj_)); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 65, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_1);
-  __pyx_v_wrap = __pyx_t_1;
-  __pyx_t_1 = 0;
-
-  /* "cfunc.to_py":68
- *         """wrap()"""
- *         return f()
- *     return wrap             # <<<<<<<<<<<<<<
- * 
- * 
- */
-  __Pyx_XDECREF(__pyx_r);
-  __Pyx_INCREF(__pyx_v_wrap);
-  __pyx_r = __pyx_v_wrap;
-  goto __pyx_L0;
-
-  /* "cfunc.to_py":64
- * 
- * @cname("__Pyx_CFunc_object_______to_py")
- * cdef object __Pyx_CFunc_object_______to_py(object (*f)() ):             # <<<<<<<<<<<<<<
- *     def wrap():
- *         """wrap()"""
- */
-
-  /* function exit code */
-  __pyx_L1_error:;
-  __Pyx_XDECREF(__pyx_t_1);
-  __Pyx_AddTraceback("cfunc.to_py.__Pyx_CFunc_object_______to_py", __pyx_clineno, __pyx_lineno, __pyx_filename);
-  __pyx_r = 0;
-  __pyx_L0:;
-  __Pyx_XDECREF(__pyx_v_wrap);
-  __Pyx_DECREF(((PyObject *)__pyx_cur_scope));
-  __Pyx_XGIVEREF(__pyx_r);
-  __Pyx_RefNannyFinishContext();
-  return __pyx_r;
-}
-
-static struct __pyx_obj___pyx_scope_struct____Pyx_CFunc_object_______to_py *__pyx_freelist___pyx_scope_struct____Pyx_CFunc_object_______to_py[8];
-static int __pyx_freecount___pyx_scope_struct____Pyx_CFunc_object_______to_py = 0;
-
-static PyObject *__pyx_tp_new___pyx_scope_struct____Pyx_CFunc_object_______to_py(PyTypeObject *t, CYTHON_UNUSED PyObject *a, CYTHON_UNUSED PyObject *k) {
-  PyObject *o;
-  if (CYTHON_COMPILING_IN_CPYTHON && likely((__pyx_freecount___pyx_scope_struct____Pyx_CFunc_object_______to_py > 0) & (t->tp_basicsize == sizeof(struct __pyx_obj___pyx_scope_struct____Pyx_CFunc_object_______to_py)))) {
-    o = (PyObject*)__pyx_freelist___pyx_scope_struct____Pyx_CFunc_object_______to_py[--__pyx_freecount___pyx_scope_struct____Pyx_CFunc_object_______to_py];
-    memset(o, 0, sizeof(struct __pyx_obj___pyx_scope_struct____Pyx_CFunc_object_______to_py));
-    (void) PyObject_INIT(o, t);
-  } else {
-    o = (*t->tp_alloc)(t, 0);
-    if (unlikely(!o)) return 0;
-  }
-  return o;
-}
-
-static void __pyx_tp_dealloc___pyx_scope_struct____Pyx_CFunc_object_______to_py(PyObject *o) {
-  if (CYTHON_COMPILING_IN_CPYTHON && ((__pyx_freecount___pyx_scope_struct____Pyx_CFunc_object_______to_py < 8) & (Py_TYPE(o)->tp_basicsize == sizeof(struct __pyx_obj___pyx_scope_struct____Pyx_CFunc_object_______to_py)))) {
-    __pyx_freelist___pyx_scope_struct____Pyx_CFunc_object_______to_py[__pyx_freecount___pyx_scope_struct____Pyx_CFunc_object_______to_py++] = ((struct __pyx_obj___pyx_scope_struct____Pyx_CFunc_object_______to_py *)o);
-  } else {
-    (*Py_TYPE(o)->tp_free)(o);
-  }
-}
-
-static PyTypeObject __pyx_scope_struct____Pyx_CFunc_object_______to_py = {
-  PyVarObject_HEAD_INIT(0, 0)
-  "classes.classes.__pyx_scope_struct____Pyx_CFunc_object_______to_py", /*tp_name*/
-  sizeof(struct __pyx_obj___pyx_scope_struct____Pyx_CFunc_object_______to_py), /*tp_basicsize*/
-  0, /*tp_itemsize*/
-  __pyx_tp_dealloc___pyx_scope_struct____Pyx_CFunc_object_______to_py, /*tp_dealloc*/
-  #if PY_VERSION_HEX < 0x030800b4
-  0, /*tp_print*/
-  #endif
-  #if PY_VERSION_HEX >= 0x030800b4
-  0, /*tp_vectorcall_offset*/
-  #endif
-  0, /*tp_getattr*/
-  0, /*tp_setattr*/
-  #if PY_MAJOR_VERSION < 3
-  0, /*tp_compare*/
-  #endif
-  #if PY_MAJOR_VERSION >= 3
-  0, /*tp_as_async*/
-  #endif
-  0, /*tp_repr*/
-  0, /*tp_as_number*/
-  0, /*tp_as_sequence*/
-  0, /*tp_as_mapping*/
-  0, /*tp_hash*/
-  0, /*tp_call*/
-  0, /*tp_str*/
-  0, /*tp_getattro*/
-  0, /*tp_setattro*/
-  0, /*tp_as_buffer*/
-  Py_TPFLAGS_DEFAULT|Py_TPFLAGS_HAVE_VERSION_TAG|Py_TPFLAGS_CHECKTYPES|Py_TPFLAGS_HAVE_NEWBUFFER, /*tp_flags*/
-  0, /*tp_doc*/
-  0, /*tp_traverse*/
-  0, /*tp_clear*/
-  0, /*tp_richcompare*/
-  0, /*tp_weaklistoffset*/
-  0, /*tp_iter*/
-  0, /*tp_iternext*/
-  0, /*tp_methods*/
-  0, /*tp_members*/
-  0, /*tp_getset*/
-  0, /*tp_base*/
-  0, /*tp_dict*/
-  0, /*tp_descr_get*/
-  0, /*tp_descr_set*/
-  0, /*tp_dictoffset*/
-  0, /*tp_init*/
-  0, /*tp_alloc*/
-  __pyx_tp_new___pyx_scope_struct____Pyx_CFunc_object_______to_py, /*tp_new*/
-  0, /*tp_free*/
-  0, /*tp_is_gc*/
-  0, /*tp_bases*/
-  0, /*tp_mro*/
-  0, /*tp_cache*/
-  0, /*tp_subclasses*/
-  0, /*tp_weaklist*/
-  0, /*tp_del*/
-  0, /*tp_version_tag*/
-  #if PY_VERSION_HEX >= 0x030400a1
-  0, /*tp_finalize*/
-  #endif
-  #if PY_VERSION_HEX >= 0x030800b1
-  0, /*tp_vectorcall*/
-  #endif
-  #if PY_VERSION_HEX >= 0x030800b4 && PY_VERSION_HEX < 0x03090000
-  0, /*tp_print*/
-  #endif
-};
 
 static PyMethodDef __pyx_methods[] = {
   {0, 0, 0, 0}
@@ -1516,19 +7237,22 @@ static struct PyModuleDef __pyx_moduledef = {
 #endif
 
 static __Pyx_StringTabEntry __pyx_string_tab[] = {
-  {&__pyx_n_s_Pyx_CFunc_object_______to_py_l, __pyx_k_Pyx_CFunc_object_______to_py_l, sizeof(__pyx_k_Pyx_CFunc_object_______to_py_l), 0, 0, 1, 1},
-  {&__pyx_n_s_cfunc_to_py, __pyx_k_cfunc_to_py, sizeof(__pyx_k_cfunc_to_py), 0, 0, 1, 1},
+  {&__pyx_n_s_classes, __pyx_k_classes, sizeof(__pyx_k_classes), 0, 0, 1, 1},
+  {&__pyx_n_s_classes_generated, __pyx_k_classes_generated, sizeof(__pyx_k_classes_generated), 0, 0, 1, 1},
   {&__pyx_n_s_cline_in_traceback, __pyx_k_cline_in_traceback, sizeof(__pyx_k_cline_in_traceback), 0, 0, 1, 1},
+  {&__pyx_n_s_generated, __pyx_k_generated, sizeof(__pyx_k_generated), 0, 0, 1, 1},
+  {&__pyx_n_s_import, __pyx_k_import, sizeof(__pyx_k_import), 0, 0, 1, 1},
+  {&__pyx_n_u_init_method_bindiings, __pyx_k_init_method_bindiings, sizeof(__pyx_k_init_method_bindiings), 0, 1, 0, 1},
+  {&__pyx_n_s_init_method_bindings, __pyx_k_init_method_bindings, sizeof(__pyx_k_init_method_bindings), 0, 0, 1, 1},
   {&__pyx_n_s_main, __pyx_k_main, sizeof(__pyx_k_main), 0, 0, 1, 1},
   {&__pyx_n_s_name, __pyx_k_name, sizeof(__pyx_k_name), 0, 0, 1, 1},
   {&__pyx_n_s_print, __pyx_k_print, sizeof(__pyx_k_print), 0, 0, 1, 1},
-  {&__pyx_kp_s_stringsource, __pyx_k_stringsource, sizeof(__pyx_k_stringsource), 0, 0, 1, 0},
+  {&__pyx_n_s_pyx_vtable, __pyx_k_pyx_vtable, sizeof(__pyx_k_pyx_vtable), 0, 0, 1, 1},
   {&__pyx_n_s_test, __pyx_k_test, sizeof(__pyx_k_test), 0, 0, 1, 1},
-  {&__pyx_n_s_wrap, __pyx_k_wrap, sizeof(__pyx_k_wrap), 0, 0, 1, 1},
   {0, 0, 0, 0, 0, 0, 0}
 };
 static CYTHON_SMALL_CODE int __Pyx_InitCachedBuiltins(void) {
-  __pyx_builtin_print = __Pyx_GetBuiltinName(__pyx_n_s_print); if (!__pyx_builtin_print) __PYX_ERR(0, 2, __pyx_L1_error)
+  __pyx_builtin_print = __Pyx_GetBuiltinName(__pyx_n_s_print); if (!__pyx_builtin_print) __PYX_ERR(0, 6, __pyx_L1_error)
   return 0;
   __pyx_L1_error:;
   return -1;
@@ -1538,14 +7262,16 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__Pyx_InitCachedConstants", 0);
 
-  /* "cfunc.to_py":65
- * @cname("__Pyx_CFunc_object_______to_py")
- * cdef object __Pyx_CFunc_object_______to_py(object (*f)() ):
- *     def wrap():             # <<<<<<<<<<<<<<
- *         """wrap()"""
- *         return f()
+  /* "classes/classes.pyx":6
+ * 
+ * cdef api init_method_bindings(godot_gdnative_core_api_struct* core):
+ *     print("init_method_bindiings")             # <<<<<<<<<<<<<<
+ *     c_generated.set_core(core)
+ *     classes.generated.init_method_bindings()
  */
-  __pyx_codeobj_ = (PyObject*)__Pyx_PyCode_New(0, 0, 0, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_stringsource, __pyx_n_s_wrap, 65, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj_)) __PYX_ERR(1, 65, __pyx_L1_error)
+  __pyx_tuple_ = PyTuple_Pack(1, __pyx_n_u_init_method_bindiings); if (unlikely(!__pyx_tuple_)) __PYX_ERR(0, 6, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple_);
+  __Pyx_GIVEREF(__pyx_tuple_);
   __Pyx_RefNannyFinishContext();
   return 0;
   __pyx_L1_error:;
@@ -1591,7 +7317,7 @@ static int __Pyx_modinit_function_export_code(void) {
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__Pyx_modinit_function_export_code", 0);
   /*--- Function export code ---*/
-  if (__Pyx_ExportFunction("register_bindings", (void (*)(void))__pyx_f_7classes_7classes_register_bindings, "PyObject *(void)") < 0) __PYX_ERR(0, 1, __pyx_L1_error)
+  if (__Pyx_ExportFunction("init_method_bindings", (void (*)(void))__pyx_f_7classes_7classes_init_method_bindings, "PyObject *(struct godot_gdnative_core_api_struct *)") < 0) __PYX_ERR(0, 1, __pyx_L1_error)
   __Pyx_RefNannyFinishContext();
   return 0;
   __pyx_L1_error:;
@@ -1601,32 +7327,32 @@ static int __Pyx_modinit_function_export_code(void) {
 
 static int __Pyx_modinit_type_init_code(void) {
   __Pyx_RefNannyDeclarations
-  int __pyx_lineno = 0;
-  const char *__pyx_filename = NULL;
-  int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__Pyx_modinit_type_init_code", 0);
   /*--- Type init code ---*/
-  if (PyType_Ready(&__pyx_scope_struct____Pyx_CFunc_object_______to_py) < 0) __PYX_ERR(1, 64, __pyx_L1_error)
-  #if PY_VERSION_HEX < 0x030800B1
-  __pyx_scope_struct____Pyx_CFunc_object_______to_py.tp_print = 0;
-  #endif
-  if ((CYTHON_USE_TYPE_SLOTS && CYTHON_USE_PYTYPE_LOOKUP) && likely(!__pyx_scope_struct____Pyx_CFunc_object_______to_py.tp_dictoffset && __pyx_scope_struct____Pyx_CFunc_object_______to_py.tp_getattro == PyObject_GenericGetAttr)) {
-    __pyx_scope_struct____Pyx_CFunc_object_______to_py.tp_getattro = __Pyx_PyObject_GenericGetAttrNoDict;
-  }
-  __pyx_ptype___pyx_scope_struct____Pyx_CFunc_object_______to_py = &__pyx_scope_struct____Pyx_CFunc_object_______to_py;
   __Pyx_RefNannyFinishContext();
   return 0;
-  __pyx_L1_error:;
-  __Pyx_RefNannyFinishContext();
-  return -1;
 }
 
 static int __Pyx_modinit_type_import_code(void) {
   __Pyx_RefNannyDeclarations
+  PyObject *__pyx_t_1 = NULL;
+  int __pyx_lineno = 0;
+  const char *__pyx_filename = NULL;
+  int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__Pyx_modinit_type_import_code", 0);
   /*--- Type import code ---*/
+  __pyx_t_1 = PyImport_ImportModule("utils.Wrapper"); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 2, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __pyx_ptype_5utils_7Wrapper_Wrapper = __Pyx_ImportType(__pyx_t_1, "utils.Wrapper", "Wrapper", sizeof(struct __pyx_obj_5utils_7Wrapper_Wrapper), __Pyx_ImportType_CheckSize_Warn);
+   if (!__pyx_ptype_5utils_7Wrapper_Wrapper) __PYX_ERR(1, 2, __pyx_L1_error)
+  __pyx_vtabptr_5utils_7Wrapper_Wrapper = (struct __pyx_vtabstruct_5utils_7Wrapper_Wrapper*)__Pyx_GetVtable(__pyx_ptype_5utils_7Wrapper_Wrapper->tp_dict); if (unlikely(!__pyx_vtabptr_5utils_7Wrapper_Wrapper)) __PYX_ERR(1, 2, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __Pyx_RefNannyFinishContext();
   return 0;
+  __pyx_L1_error:;
+  __Pyx_XDECREF(__pyx_t_1);
+  __Pyx_RefNannyFinishContext();
+  return -1;
 }
 
 static int __Pyx_modinit_variable_import_code(void) {
@@ -1639,10 +7365,22 @@ static int __Pyx_modinit_variable_import_code(void) {
 
 static int __Pyx_modinit_function_import_code(void) {
   __Pyx_RefNannyDeclarations
+  PyObject *__pyx_t_1 = NULL;
+  int __pyx_lineno = 0;
+  const char *__pyx_filename = NULL;
+  int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__Pyx_modinit_function_import_code", 0);
   /*--- Function import code ---*/
+  __pyx_t_1 = PyImport_ImportModule("classes.generated"); if (!__pyx_t_1) __PYX_ERR(0, 1, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  if (__Pyx_ImportFunction(__pyx_t_1, "set_core", (void (**)(void))&__pyx_f_7classes_9generated_set_core, "PyObject *(struct godot_gdnative_core_api_struct *)") < 0) __PYX_ERR(0, 1, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __Pyx_RefNannyFinishContext();
   return 0;
+  __pyx_L1_error:;
+  __Pyx_XDECREF(__pyx_t_1);
+  __Pyx_RefNannyFinishContext();
+  return -1;
 }
 
 
@@ -1838,30 +7576,42 @@ if (!__Pyx_RefNanny) {
   (void)__Pyx_modinit_global_init_code();
   (void)__Pyx_modinit_variable_export_code();
   if (unlikely(__Pyx_modinit_function_export_code() < 0)) __PYX_ERR(0, 1, __pyx_L1_error)
-  if (unlikely(__Pyx_modinit_type_init_code() < 0)) __PYX_ERR(0, 1, __pyx_L1_error)
-  (void)__Pyx_modinit_type_import_code();
+  (void)__Pyx_modinit_type_init_code();
+  if (unlikely(__Pyx_modinit_type_import_code() < 0)) __PYX_ERR(0, 1, __pyx_L1_error)
   (void)__Pyx_modinit_variable_import_code();
-  (void)__Pyx_modinit_function_import_code();
+  if (unlikely(__Pyx_modinit_function_import_code() < 0)) __PYX_ERR(0, 1, __pyx_L1_error)
   /*--- Execution code ---*/
   #if defined(__Pyx_Generator_USED) || defined(__Pyx_Coroutine_USED)
   if (__Pyx_patch_abc() < 0) __PYX_ERR(0, 1, __pyx_L1_error)
   #endif
 
+  /* "classes/classes.pyx":2
+ * cimport classes.generated as c_generated
+ * import classes.generated             # <<<<<<<<<<<<<<
+ * from godot_api.binding_external cimport *
+ * 
+ */
+  __pyx_t_1 = __Pyx_Import(__pyx_n_s_classes_generated, 0, 0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_classes, __pyx_t_1) < 0) __PYX_ERR(0, 2, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+
   /* "classes/classes.pyx":1
- * cdef api register_bindings():             # <<<<<<<<<<<<<<
- *     print(register_bindings)
+ * cimport classes.generated as c_generated             # <<<<<<<<<<<<<<
+ * import classes.generated
+ * from godot_api.binding_external cimport *
  */
   __pyx_t_1 = __Pyx_PyDict_NewPresized(0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 1, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   if (PyDict_SetItem(__pyx_d, __pyx_n_s_test, __pyx_t_1) < 0) __PYX_ERR(0, 1, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "cfunc.to_py":64
+  /* "utils/Wrapper.pxd":8
+ *         self.godot_owner = owner
  * 
- * @cname("__Pyx_CFunc_object_______to_py")
- * cdef object __Pyx_CFunc_object_______to_py(object (*f)() ):             # <<<<<<<<<<<<<<
- *     def wrap():
- *         """wrap()"""
+ *     cdef inline godot_object* get_godot_owner(self):             # <<<<<<<<<<<<<<
+ *         return self.godot_owner
+ * 
  */
 
   /*--- Wrapped vars code ---*/
@@ -1934,28 +7684,86 @@ static PyObject *__Pyx_GetBuiltinName(PyObject *name) {
     return result;
 }
 
-/* PyCFunctionFastCall */
-#if CYTHON_FAST_PYCCALL
-static CYTHON_INLINE PyObject * __Pyx_PyCFunction_FastCall(PyObject *func_obj, PyObject **args, Py_ssize_t nargs) {
-    PyCFunctionObject *func = (PyCFunctionObject*)func_obj;
-    PyCFunction meth = PyCFunction_GET_FUNCTION(func);
-    PyObject *self = PyCFunction_GET_SELF(func);
-    int flags = PyCFunction_GET_FLAGS(func);
-    assert(PyCFunction_Check(func));
-    assert(METH_FASTCALL == (flags & ~(METH_CLASS | METH_STATIC | METH_COEXIST | METH_KEYWORDS | METH_STACKLESS)));
-    assert(nargs >= 0);
-    assert(nargs == 0 || args != NULL);
-    /* _PyCFunction_FastCallDict() must not be called with an exception set,
-       because it may clear it (directly or indirectly) and so the
-       caller loses its exception */
-    assert(!PyErr_Occurred());
-    if ((PY_VERSION_HEX < 0x030700A0) || unlikely(flags & METH_KEYWORDS)) {
-        return (*((__Pyx_PyCFunctionFastWithKeywords)(void*)meth)) (self, args, nargs, NULL);
-    } else {
-        return (*((__Pyx_PyCFunctionFast)(void*)meth)) (self, args, nargs);
+/* PyObjectCall */
+#if CYTHON_COMPILING_IN_CPYTHON
+static CYTHON_INLINE PyObject* __Pyx_PyObject_Call(PyObject *func, PyObject *arg, PyObject *kw) {
+    PyObject *result;
+    ternaryfunc call = func->ob_type->tp_call;
+    if (unlikely(!call))
+        return PyObject_Call(func, arg, kw);
+    if (unlikely(Py_EnterRecursiveCall((char*)" while calling a Python object")))
+        return NULL;
+    result = (*call)(func, arg, kw);
+    Py_LeaveRecursiveCall();
+    if (unlikely(!result) && unlikely(!PyErr_Occurred())) {
+        PyErr_SetString(
+            PyExc_SystemError,
+            "NULL result without error in PyObject_Call");
     }
+    return result;
 }
 #endif
+
+/* PyDictVersioning */
+#if CYTHON_USE_DICT_VERSIONS && CYTHON_USE_TYPE_SLOTS
+static CYTHON_INLINE PY_UINT64_T __Pyx_get_tp_dict_version(PyObject *obj) {
+    PyObject *dict = Py_TYPE(obj)->tp_dict;
+    return likely(dict) ? __PYX_GET_DICT_VERSION(dict) : 0;
+}
+static CYTHON_INLINE PY_UINT64_T __Pyx_get_object_dict_version(PyObject *obj) {
+    PyObject **dictptr = NULL;
+    Py_ssize_t offset = Py_TYPE(obj)->tp_dictoffset;
+    if (offset) {
+#if CYTHON_COMPILING_IN_CPYTHON
+        dictptr = (likely(offset > 0)) ? (PyObject **) ((char *)obj + offset) : _PyObject_GetDictPtr(obj);
+#else
+        dictptr = _PyObject_GetDictPtr(obj);
+#endif
+    }
+    return (dictptr && *dictptr) ? __PYX_GET_DICT_VERSION(*dictptr) : 0;
+}
+static CYTHON_INLINE int __Pyx_object_dict_version_matches(PyObject* obj, PY_UINT64_T tp_dict_version, PY_UINT64_T obj_dict_version) {
+    PyObject *dict = Py_TYPE(obj)->tp_dict;
+    if (unlikely(!dict) || unlikely(tp_dict_version != __PYX_GET_DICT_VERSION(dict)))
+        return 0;
+    return obj_dict_version == __Pyx_get_object_dict_version(obj);
+}
+#endif
+
+/* GetModuleGlobalName */
+#if CYTHON_USE_DICT_VERSIONS
+static PyObject *__Pyx__GetModuleGlobalName(PyObject *name, PY_UINT64_T *dict_version, PyObject **dict_cached_value)
+#else
+static CYTHON_INLINE PyObject *__Pyx__GetModuleGlobalName(PyObject *name)
+#endif
+{
+    PyObject *result;
+#if !CYTHON_AVOID_BORROWED_REFS
+#if CYTHON_COMPILING_IN_CPYTHON && PY_VERSION_HEX >= 0x030500A1
+    result = _PyDict_GetItem_KnownHash(__pyx_d, name, ((PyASCIIObject *) name)->hash);
+    __PYX_UPDATE_DICT_CACHE(__pyx_d, result, *dict_cached_value, *dict_version)
+    if (likely(result)) {
+        return __Pyx_NewRef(result);
+    } else if (unlikely(PyErr_Occurred())) {
+        return NULL;
+    }
+#else
+    result = PyDict_GetItem(__pyx_d, name);
+    __PYX_UPDATE_DICT_CACHE(__pyx_d, result, *dict_cached_value, *dict_version)
+    if (likely(result)) {
+        return __Pyx_NewRef(result);
+    }
+#endif
+#else
+    result = PyObject_GetItem(__pyx_d, name);
+    __PYX_UPDATE_DICT_CACHE(__pyx_d, result, *dict_cached_value, *dict_version)
+    if (likely(result)) {
+        return __Pyx_NewRef(result);
+    }
+    PyErr_Clear();
+#endif
+    return __Pyx_GetBuiltinName(name);
+}
 
 /* PyFunctionFastCall */
 #if CYTHON_FAST_PYCALL
@@ -2076,26 +7884,6 @@ done:
 #endif
 #endif
 
-/* PyObjectCall */
-#if CYTHON_COMPILING_IN_CPYTHON
-static CYTHON_INLINE PyObject* __Pyx_PyObject_Call(PyObject *func, PyObject *arg, PyObject *kw) {
-    PyObject *result;
-    ternaryfunc call = func->ob_type->tp_call;
-    if (unlikely(!call))
-        return PyObject_Call(func, arg, kw);
-    if (unlikely(Py_EnterRecursiveCall((char*)" while calling a Python object")))
-        return NULL;
-    result = (*call)(func, arg, kw);
-    Py_LeaveRecursiveCall();
-    if (unlikely(!result) && unlikely(!PyErr_Occurred())) {
-        PyErr_SetString(
-            PyExc_SystemError,
-            "NULL result without error in PyObject_Call");
-    }
-    return result;
-}
-#endif
-
 /* PyObjectCallMethO */
 #if CYTHON_COMPILING_IN_CPYTHON
 static CYTHON_INLINE PyObject* __Pyx_PyObject_CallMethO(PyObject *func, PyObject *arg) {
@@ -2113,6 +7901,51 @@ static CYTHON_INLINE PyObject* __Pyx_PyObject_CallMethO(PyObject *func, PyObject
             "NULL result without error in PyObject_Call");
     }
     return result;
+}
+#endif
+
+/* PyObjectCallNoArg */
+#if CYTHON_COMPILING_IN_CPYTHON
+static CYTHON_INLINE PyObject* __Pyx_PyObject_CallNoArg(PyObject *func) {
+#if CYTHON_FAST_PYCALL
+    if (PyFunction_Check(func)) {
+        return __Pyx_PyFunction_FastCall(func, NULL, 0);
+    }
+#endif
+#ifdef __Pyx_CyFunction_USED
+    if (likely(PyCFunction_Check(func) || __Pyx_CyFunction_Check(func)))
+#else
+    if (likely(PyCFunction_Check(func)))
+#endif
+    {
+        if (likely(PyCFunction_GET_FLAGS(func) & METH_NOARGS)) {
+            return __Pyx_PyObject_CallMethO(func, NULL);
+        }
+    }
+    return __Pyx_PyObject_Call(func, __pyx_empty_tuple, NULL);
+}
+#endif
+
+/* PyCFunctionFastCall */
+#if CYTHON_FAST_PYCCALL
+static CYTHON_INLINE PyObject * __Pyx_PyCFunction_FastCall(PyObject *func_obj, PyObject **args, Py_ssize_t nargs) {
+    PyCFunctionObject *func = (PyCFunctionObject*)func_obj;
+    PyCFunction meth = PyCFunction_GET_FUNCTION(func);
+    PyObject *self = PyCFunction_GET_SELF(func);
+    int flags = PyCFunction_GET_FLAGS(func);
+    assert(PyCFunction_Check(func));
+    assert(METH_FASTCALL == (flags & ~(METH_CLASS | METH_STATIC | METH_COEXIST | METH_KEYWORDS | METH_STACKLESS)));
+    assert(nargs >= 0);
+    assert(nargs == 0 || args != NULL);
+    /* _PyCFunction_FastCallDict() must not be called with an exception set,
+       because it may clear it (directly or indirectly) and so the
+       caller loses its exception */
+    assert(!PyErr_Occurred());
+    if ((PY_VERSION_HEX < 0x030700A0) || unlikely(flags & METH_KEYWORDS)) {
+        return (*((__Pyx_PyCFunctionFastWithKeywords)(void*)meth)) (self, args, nargs, NULL);
+    } else {
+        return (*((__Pyx_PyCFunctionFast)(void*)meth)) (self, args, nargs);
+    }
 }
 #endif
 
@@ -2156,727 +7989,151 @@ static CYTHON_INLINE PyObject* __Pyx_PyObject_CallOneArg(PyObject *func, PyObjec
 }
 #endif
 
-/* FetchCommonType */
-static PyTypeObject* __Pyx_FetchCommonType(PyTypeObject* type) {
-    PyObject* fake_module;
-    PyTypeObject* cached_type = NULL;
-    fake_module = PyImport_AddModule((char*) "_cython_" CYTHON_ABI);
-    if (!fake_module) return NULL;
-    Py_INCREF(fake_module);
-    cached_type = (PyTypeObject*) PyObject_GetAttrString(fake_module, type->tp_name);
-    if (cached_type) {
-        if (!PyType_Check((PyObject*)cached_type)) {
-            PyErr_Format(PyExc_TypeError,
-                "Shared Cython type %.200s is not a type object",
-                type->tp_name);
-            goto bad;
-        }
-        if (cached_type->tp_basicsize != type->tp_basicsize) {
-            PyErr_Format(PyExc_TypeError,
-                "Shared Cython type %.200s has the wrong size, try recompiling",
-                type->tp_name);
-            goto bad;
-        }
-    } else {
-        if (!PyErr_ExceptionMatches(PyExc_AttributeError)) goto bad;
-        PyErr_Clear();
-        if (PyType_Ready(type) < 0) goto bad;
-        if (PyObject_SetAttrString(fake_module, type->tp_name, (PyObject*) type) < 0)
-            goto bad;
-        Py_INCREF(type);
-        cached_type = type;
+/* TypeImport */
+#ifndef __PYX_HAVE_RT_ImportType
+#define __PYX_HAVE_RT_ImportType
+static PyTypeObject *__Pyx_ImportType(PyObject *module, const char *module_name, const char *class_name,
+    size_t size, enum __Pyx_ImportType_CheckSize check_size)
+{
+    PyObject *result = 0;
+    char warning[200];
+    Py_ssize_t basicsize;
+#ifdef Py_LIMITED_API
+    PyObject *py_basicsize;
+#endif
+    result = PyObject_GetAttrString(module, class_name);
+    if (!result)
+        goto bad;
+    if (!PyType_Check(result)) {
+        PyErr_Format(PyExc_TypeError,
+            "%.200s.%.200s is not a type object",
+            module_name, class_name);
+        goto bad;
     }
-done:
-    Py_DECREF(fake_module);
-    return cached_type;
+#ifndef Py_LIMITED_API
+    basicsize = ((PyTypeObject *)result)->tp_basicsize;
+#else
+    py_basicsize = PyObject_GetAttrString(result, "__basicsize__");
+    if (!py_basicsize)
+        goto bad;
+    basicsize = PyLong_AsSsize_t(py_basicsize);
+    Py_DECREF(py_basicsize);
+    py_basicsize = 0;
+    if (basicsize == (Py_ssize_t)-1 && PyErr_Occurred())
+        goto bad;
+#endif
+    if ((size_t)basicsize < size) {
+        PyErr_Format(PyExc_ValueError,
+            "%.200s.%.200s size changed, may indicate binary incompatibility. "
+            "Expected %zd from C header, got %zd from PyObject",
+            module_name, class_name, size, basicsize);
+        goto bad;
+    }
+    if (check_size == __Pyx_ImportType_CheckSize_Error && (size_t)basicsize != size) {
+        PyErr_Format(PyExc_ValueError,
+            "%.200s.%.200s size changed, may indicate binary incompatibility. "
+            "Expected %zd from C header, got %zd from PyObject",
+            module_name, class_name, size, basicsize);
+        goto bad;
+    }
+    else if (check_size == __Pyx_ImportType_CheckSize_Warn && (size_t)basicsize > size) {
+        PyOS_snprintf(warning, sizeof(warning),
+            "%s.%s size changed, may indicate binary incompatibility. "
+            "Expected %zd from C header, got %zd from PyObject",
+            module_name, class_name, size, basicsize);
+        if (PyErr_WarnEx(NULL, warning, 0) < 0) goto bad;
+    }
+    return (PyTypeObject *)result;
 bad:
-    Py_XDECREF(cached_type);
-    cached_type = NULL;
-    goto done;
-}
-
-/* CythonFunctionShared */
-#include <structmember.h>
-static PyObject *
-__Pyx_CyFunction_get_doc(__pyx_CyFunctionObject *op, CYTHON_UNUSED void *closure)
-{
-    if (unlikely(op->func_doc == NULL)) {
-        if (op->func.m_ml->ml_doc) {
-#if PY_MAJOR_VERSION >= 3
-            op->func_doc = PyUnicode_FromString(op->func.m_ml->ml_doc);
-#else
-            op->func_doc = PyString_FromString(op->func.m_ml->ml_doc);
-#endif
-            if (unlikely(op->func_doc == NULL))
-                return NULL;
-        } else {
-            Py_INCREF(Py_None);
-            return Py_None;
-        }
-    }
-    Py_INCREF(op->func_doc);
-    return op->func_doc;
-}
-static int
-__Pyx_CyFunction_set_doc(__pyx_CyFunctionObject *op, PyObject *value, CYTHON_UNUSED void *context)
-{
-    PyObject *tmp = op->func_doc;
-    if (value == NULL) {
-        value = Py_None;
-    }
-    Py_INCREF(value);
-    op->func_doc = value;
-    Py_XDECREF(tmp);
-    return 0;
-}
-static PyObject *
-__Pyx_CyFunction_get_name(__pyx_CyFunctionObject *op, CYTHON_UNUSED void *context)
-{
-    if (unlikely(op->func_name == NULL)) {
-#if PY_MAJOR_VERSION >= 3
-        op->func_name = PyUnicode_InternFromString(op->func.m_ml->ml_name);
-#else
-        op->func_name = PyString_InternFromString(op->func.m_ml->ml_name);
-#endif
-        if (unlikely(op->func_name == NULL))
-            return NULL;
-    }
-    Py_INCREF(op->func_name);
-    return op->func_name;
-}
-static int
-__Pyx_CyFunction_set_name(__pyx_CyFunctionObject *op, PyObject *value, CYTHON_UNUSED void *context)
-{
-    PyObject *tmp;
-#if PY_MAJOR_VERSION >= 3
-    if (unlikely(value == NULL || !PyUnicode_Check(value)))
-#else
-    if (unlikely(value == NULL || !PyString_Check(value)))
-#endif
-    {
-        PyErr_SetString(PyExc_TypeError,
-                        "__name__ must be set to a string object");
-        return -1;
-    }
-    tmp = op->func_name;
-    Py_INCREF(value);
-    op->func_name = value;
-    Py_XDECREF(tmp);
-    return 0;
-}
-static PyObject *
-__Pyx_CyFunction_get_qualname(__pyx_CyFunctionObject *op, CYTHON_UNUSED void *context)
-{
-    Py_INCREF(op->func_qualname);
-    return op->func_qualname;
-}
-static int
-__Pyx_CyFunction_set_qualname(__pyx_CyFunctionObject *op, PyObject *value, CYTHON_UNUSED void *context)
-{
-    PyObject *tmp;
-#if PY_MAJOR_VERSION >= 3
-    if (unlikely(value == NULL || !PyUnicode_Check(value)))
-#else
-    if (unlikely(value == NULL || !PyString_Check(value)))
-#endif
-    {
-        PyErr_SetString(PyExc_TypeError,
-                        "__qualname__ must be set to a string object");
-        return -1;
-    }
-    tmp = op->func_qualname;
-    Py_INCREF(value);
-    op->func_qualname = value;
-    Py_XDECREF(tmp);
-    return 0;
-}
-static PyObject *
-__Pyx_CyFunction_get_self(__pyx_CyFunctionObject *m, CYTHON_UNUSED void *closure)
-{
-    PyObject *self;
-    self = m->func_closure;
-    if (self == NULL)
-        self = Py_None;
-    Py_INCREF(self);
-    return self;
-}
-static PyObject *
-__Pyx_CyFunction_get_dict(__pyx_CyFunctionObject *op, CYTHON_UNUSED void *context)
-{
-    if (unlikely(op->func_dict == NULL)) {
-        op->func_dict = PyDict_New();
-        if (unlikely(op->func_dict == NULL))
-            return NULL;
-    }
-    Py_INCREF(op->func_dict);
-    return op->func_dict;
-}
-static int
-__Pyx_CyFunction_set_dict(__pyx_CyFunctionObject *op, PyObject *value, CYTHON_UNUSED void *context)
-{
-    PyObject *tmp;
-    if (unlikely(value == NULL)) {
-        PyErr_SetString(PyExc_TypeError,
-               "function's dictionary may not be deleted");
-        return -1;
-    }
-    if (unlikely(!PyDict_Check(value))) {
-        PyErr_SetString(PyExc_TypeError,
-               "setting function's dictionary to a non-dict");
-        return -1;
-    }
-    tmp = op->func_dict;
-    Py_INCREF(value);
-    op->func_dict = value;
-    Py_XDECREF(tmp);
-    return 0;
-}
-static PyObject *
-__Pyx_CyFunction_get_globals(__pyx_CyFunctionObject *op, CYTHON_UNUSED void *context)
-{
-    Py_INCREF(op->func_globals);
-    return op->func_globals;
-}
-static PyObject *
-__Pyx_CyFunction_get_closure(CYTHON_UNUSED __pyx_CyFunctionObject *op, CYTHON_UNUSED void *context)
-{
-    Py_INCREF(Py_None);
-    return Py_None;
-}
-static PyObject *
-__Pyx_CyFunction_get_code(__pyx_CyFunctionObject *op, CYTHON_UNUSED void *context)
-{
-    PyObject* result = (op->func_code) ? op->func_code : Py_None;
-    Py_INCREF(result);
-    return result;
-}
-static int
-__Pyx_CyFunction_init_defaults(__pyx_CyFunctionObject *op) {
-    int result = 0;
-    PyObject *res = op->defaults_getter((PyObject *) op);
-    if (unlikely(!res))
-        return -1;
-    #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
-    op->defaults_tuple = PyTuple_GET_ITEM(res, 0);
-    Py_INCREF(op->defaults_tuple);
-    op->defaults_kwdict = PyTuple_GET_ITEM(res, 1);
-    Py_INCREF(op->defaults_kwdict);
-    #else
-    op->defaults_tuple = PySequence_ITEM(res, 0);
-    if (unlikely(!op->defaults_tuple)) result = -1;
-    else {
-        op->defaults_kwdict = PySequence_ITEM(res, 1);
-        if (unlikely(!op->defaults_kwdict)) result = -1;
-    }
-    #endif
-    Py_DECREF(res);
-    return result;
-}
-static int
-__Pyx_CyFunction_set_defaults(__pyx_CyFunctionObject *op, PyObject* value, CYTHON_UNUSED void *context) {
-    PyObject* tmp;
-    if (!value) {
-        value = Py_None;
-    } else if (value != Py_None && !PyTuple_Check(value)) {
-        PyErr_SetString(PyExc_TypeError,
-                        "__defaults__ must be set to a tuple object");
-        return -1;
-    }
-    Py_INCREF(value);
-    tmp = op->defaults_tuple;
-    op->defaults_tuple = value;
-    Py_XDECREF(tmp);
-    return 0;
-}
-static PyObject *
-__Pyx_CyFunction_get_defaults(__pyx_CyFunctionObject *op, CYTHON_UNUSED void *context) {
-    PyObject* result = op->defaults_tuple;
-    if (unlikely(!result)) {
-        if (op->defaults_getter) {
-            if (__Pyx_CyFunction_init_defaults(op) < 0) return NULL;
-            result = op->defaults_tuple;
-        } else {
-            result = Py_None;
-        }
-    }
-    Py_INCREF(result);
-    return result;
-}
-static int
-__Pyx_CyFunction_set_kwdefaults(__pyx_CyFunctionObject *op, PyObject* value, CYTHON_UNUSED void *context) {
-    PyObject* tmp;
-    if (!value) {
-        value = Py_None;
-    } else if (value != Py_None && !PyDict_Check(value)) {
-        PyErr_SetString(PyExc_TypeError,
-                        "__kwdefaults__ must be set to a dict object");
-        return -1;
-    }
-    Py_INCREF(value);
-    tmp = op->defaults_kwdict;
-    op->defaults_kwdict = value;
-    Py_XDECREF(tmp);
-    return 0;
-}
-static PyObject *
-__Pyx_CyFunction_get_kwdefaults(__pyx_CyFunctionObject *op, CYTHON_UNUSED void *context) {
-    PyObject* result = op->defaults_kwdict;
-    if (unlikely(!result)) {
-        if (op->defaults_getter) {
-            if (__Pyx_CyFunction_init_defaults(op) < 0) return NULL;
-            result = op->defaults_kwdict;
-        } else {
-            result = Py_None;
-        }
-    }
-    Py_INCREF(result);
-    return result;
-}
-static int
-__Pyx_CyFunction_set_annotations(__pyx_CyFunctionObject *op, PyObject* value, CYTHON_UNUSED void *context) {
-    PyObject* tmp;
-    if (!value || value == Py_None) {
-        value = NULL;
-    } else if (!PyDict_Check(value)) {
-        PyErr_SetString(PyExc_TypeError,
-                        "__annotations__ must be set to a dict object");
-        return -1;
-    }
-    Py_XINCREF(value);
-    tmp = op->func_annotations;
-    op->func_annotations = value;
-    Py_XDECREF(tmp);
-    return 0;
-}
-static PyObject *
-__Pyx_CyFunction_get_annotations(__pyx_CyFunctionObject *op, CYTHON_UNUSED void *context) {
-    PyObject* result = op->func_annotations;
-    if (unlikely(!result)) {
-        result = PyDict_New();
-        if (unlikely(!result)) return NULL;
-        op->func_annotations = result;
-    }
-    Py_INCREF(result);
-    return result;
-}
-static PyGetSetDef __pyx_CyFunction_getsets[] = {
-    {(char *) "func_doc", (getter)__Pyx_CyFunction_get_doc, (setter)__Pyx_CyFunction_set_doc, 0, 0},
-    {(char *) "__doc__",  (getter)__Pyx_CyFunction_get_doc, (setter)__Pyx_CyFunction_set_doc, 0, 0},
-    {(char *) "func_name", (getter)__Pyx_CyFunction_get_name, (setter)__Pyx_CyFunction_set_name, 0, 0},
-    {(char *) "__name__", (getter)__Pyx_CyFunction_get_name, (setter)__Pyx_CyFunction_set_name, 0, 0},
-    {(char *) "__qualname__", (getter)__Pyx_CyFunction_get_qualname, (setter)__Pyx_CyFunction_set_qualname, 0, 0},
-    {(char *) "__self__", (getter)__Pyx_CyFunction_get_self, 0, 0, 0},
-    {(char *) "func_dict", (getter)__Pyx_CyFunction_get_dict, (setter)__Pyx_CyFunction_set_dict, 0, 0},
-    {(char *) "__dict__", (getter)__Pyx_CyFunction_get_dict, (setter)__Pyx_CyFunction_set_dict, 0, 0},
-    {(char *) "func_globals", (getter)__Pyx_CyFunction_get_globals, 0, 0, 0},
-    {(char *) "__globals__", (getter)__Pyx_CyFunction_get_globals, 0, 0, 0},
-    {(char *) "func_closure", (getter)__Pyx_CyFunction_get_closure, 0, 0, 0},
-    {(char *) "__closure__", (getter)__Pyx_CyFunction_get_closure, 0, 0, 0},
-    {(char *) "func_code", (getter)__Pyx_CyFunction_get_code, 0, 0, 0},
-    {(char *) "__code__", (getter)__Pyx_CyFunction_get_code, 0, 0, 0},
-    {(char *) "func_defaults", (getter)__Pyx_CyFunction_get_defaults, (setter)__Pyx_CyFunction_set_defaults, 0, 0},
-    {(char *) "__defaults__", (getter)__Pyx_CyFunction_get_defaults, (setter)__Pyx_CyFunction_set_defaults, 0, 0},
-    {(char *) "__kwdefaults__", (getter)__Pyx_CyFunction_get_kwdefaults, (setter)__Pyx_CyFunction_set_kwdefaults, 0, 0},
-    {(char *) "__annotations__", (getter)__Pyx_CyFunction_get_annotations, (setter)__Pyx_CyFunction_set_annotations, 0, 0},
-    {0, 0, 0, 0, 0}
-};
-static PyMemberDef __pyx_CyFunction_members[] = {
-    {(char *) "__module__", T_OBJECT, offsetof(PyCFunctionObject, m_module), PY_WRITE_RESTRICTED, 0},
-    {0, 0, 0,  0, 0}
-};
-static PyObject *
-__Pyx_CyFunction_reduce(__pyx_CyFunctionObject *m, CYTHON_UNUSED PyObject *args)
-{
-#if PY_MAJOR_VERSION >= 3
-    return PyUnicode_FromString(m->func.m_ml->ml_name);
-#else
-    return PyString_FromString(m->func.m_ml->ml_name);
-#endif
-}
-static PyMethodDef __pyx_CyFunction_methods[] = {
-    {"__reduce__", (PyCFunction)__Pyx_CyFunction_reduce, METH_VARARGS, 0},
-    {0, 0, 0, 0}
-};
-#if PY_VERSION_HEX < 0x030500A0
-#define __Pyx_CyFunction_weakreflist(cyfunc) ((cyfunc)->func_weakreflist)
-#else
-#define __Pyx_CyFunction_weakreflist(cyfunc) ((cyfunc)->func.m_weakreflist)
-#endif
-static PyObject *__Pyx_CyFunction_Init(__pyx_CyFunctionObject *op, PyMethodDef *ml, int flags, PyObject* qualname,
-                                       PyObject *closure, PyObject *module, PyObject* globals, PyObject* code) {
-    if (unlikely(op == NULL))
-        return NULL;
-    op->flags = flags;
-    __Pyx_CyFunction_weakreflist(op) = NULL;
-    op->func.m_ml = ml;
-    op->func.m_self = (PyObject *) op;
-    Py_XINCREF(closure);
-    op->func_closure = closure;
-    Py_XINCREF(module);
-    op->func.m_module = module;
-    op->func_dict = NULL;
-    op->func_name = NULL;
-    Py_INCREF(qualname);
-    op->func_qualname = qualname;
-    op->func_doc = NULL;
-    op->func_classobj = NULL;
-    op->func_globals = globals;
-    Py_INCREF(op->func_globals);
-    Py_XINCREF(code);
-    op->func_code = code;
-    op->defaults_pyobjects = 0;
-    op->defaults_size = 0;
-    op->defaults = NULL;
-    op->defaults_tuple = NULL;
-    op->defaults_kwdict = NULL;
-    op->defaults_getter = NULL;
-    op->func_annotations = NULL;
-    return (PyObject *) op;
-}
-static int
-__Pyx_CyFunction_clear(__pyx_CyFunctionObject *m)
-{
-    Py_CLEAR(m->func_closure);
-    Py_CLEAR(m->func.m_module);
-    Py_CLEAR(m->func_dict);
-    Py_CLEAR(m->func_name);
-    Py_CLEAR(m->func_qualname);
-    Py_CLEAR(m->func_doc);
-    Py_CLEAR(m->func_globals);
-    Py_CLEAR(m->func_code);
-    Py_CLEAR(m->func_classobj);
-    Py_CLEAR(m->defaults_tuple);
-    Py_CLEAR(m->defaults_kwdict);
-    Py_CLEAR(m->func_annotations);
-    if (m->defaults) {
-        PyObject **pydefaults = __Pyx_CyFunction_Defaults(PyObject *, m);
-        int i;
-        for (i = 0; i < m->defaults_pyobjects; i++)
-            Py_XDECREF(pydefaults[i]);
-        PyObject_Free(m->defaults);
-        m->defaults = NULL;
-    }
-    return 0;
-}
-static void __Pyx__CyFunction_dealloc(__pyx_CyFunctionObject *m)
-{
-    if (__Pyx_CyFunction_weakreflist(m) != NULL)
-        PyObject_ClearWeakRefs((PyObject *) m);
-    __Pyx_CyFunction_clear(m);
-    PyObject_GC_Del(m);
-}
-static void __Pyx_CyFunction_dealloc(__pyx_CyFunctionObject *m)
-{
-    PyObject_GC_UnTrack(m);
-    __Pyx__CyFunction_dealloc(m);
-}
-static int __Pyx_CyFunction_traverse(__pyx_CyFunctionObject *m, visitproc visit, void *arg)
-{
-    Py_VISIT(m->func_closure);
-    Py_VISIT(m->func.m_module);
-    Py_VISIT(m->func_dict);
-    Py_VISIT(m->func_name);
-    Py_VISIT(m->func_qualname);
-    Py_VISIT(m->func_doc);
-    Py_VISIT(m->func_globals);
-    Py_VISIT(m->func_code);
-    Py_VISIT(m->func_classobj);
-    Py_VISIT(m->defaults_tuple);
-    Py_VISIT(m->defaults_kwdict);
-    if (m->defaults) {
-        PyObject **pydefaults = __Pyx_CyFunction_Defaults(PyObject *, m);
-        int i;
-        for (i = 0; i < m->defaults_pyobjects; i++)
-            Py_VISIT(pydefaults[i]);
-    }
-    return 0;
-}
-static PyObject *__Pyx_CyFunction_descr_get(PyObject *func, PyObject *obj, PyObject *type)
-{
-#if PY_MAJOR_VERSION < 3
-    __pyx_CyFunctionObject *m = (__pyx_CyFunctionObject *) func;
-    if (m->flags & __Pyx_CYFUNCTION_STATICMETHOD) {
-        Py_INCREF(func);
-        return func;
-    }
-    if (m->flags & __Pyx_CYFUNCTION_CLASSMETHOD) {
-        if (type == NULL)
-            type = (PyObject *)(Py_TYPE(obj));
-        return __Pyx_PyMethod_New(func, type, (PyObject *)(Py_TYPE(type)));
-    }
-    if (obj == Py_None)
-        obj = NULL;
-#endif
-    return __Pyx_PyMethod_New(func, obj, type);
-}
-static PyObject*
-__Pyx_CyFunction_repr(__pyx_CyFunctionObject *op)
-{
-#if PY_MAJOR_VERSION >= 3
-    return PyUnicode_FromFormat("<cyfunction %U at %p>",
-                                op->func_qualname, (void *)op);
-#else
-    return PyString_FromFormat("<cyfunction %s at %p>",
-                               PyString_AsString(op->func_qualname), (void *)op);
-#endif
-}
-static PyObject * __Pyx_CyFunction_CallMethod(PyObject *func, PyObject *self, PyObject *arg, PyObject *kw) {
-    PyCFunctionObject* f = (PyCFunctionObject*)func;
-    PyCFunction meth = f->m_ml->ml_meth;
-    Py_ssize_t size;
-    switch (f->m_ml->ml_flags & (METH_VARARGS | METH_KEYWORDS | METH_NOARGS | METH_O)) {
-    case METH_VARARGS:
-        if (likely(kw == NULL || PyDict_Size(kw) == 0))
-            return (*meth)(self, arg);
-        break;
-    case METH_VARARGS | METH_KEYWORDS:
-        return (*(PyCFunctionWithKeywords)(void*)meth)(self, arg, kw);
-    case METH_NOARGS:
-        if (likely(kw == NULL || PyDict_Size(kw) == 0)) {
-            size = PyTuple_GET_SIZE(arg);
-            if (likely(size == 0))
-                return (*meth)(self, NULL);
-            PyErr_Format(PyExc_TypeError,
-                "%.200s() takes no arguments (%" CYTHON_FORMAT_SSIZE_T "d given)",
-                f->m_ml->ml_name, size);
-            return NULL;
-        }
-        break;
-    case METH_O:
-        if (likely(kw == NULL || PyDict_Size(kw) == 0)) {
-            size = PyTuple_GET_SIZE(arg);
-            if (likely(size == 1)) {
-                PyObject *result, *arg0;
-                #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
-                arg0 = PyTuple_GET_ITEM(arg, 0);
-                #else
-                arg0 = PySequence_ITEM(arg, 0); if (unlikely(!arg0)) return NULL;
-                #endif
-                result = (*meth)(self, arg0);
-                #if !(CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS)
-                Py_DECREF(arg0);
-                #endif
-                return result;
-            }
-            PyErr_Format(PyExc_TypeError,
-                "%.200s() takes exactly one argument (%" CYTHON_FORMAT_SSIZE_T "d given)",
-                f->m_ml->ml_name, size);
-            return NULL;
-        }
-        break;
-    default:
-        PyErr_SetString(PyExc_SystemError, "Bad call flags in "
-                        "__Pyx_CyFunction_Call. METH_OLDARGS is no "
-                        "longer supported!");
-        return NULL;
-    }
-    PyErr_Format(PyExc_TypeError, "%.200s() takes no keyword arguments",
-                 f->m_ml->ml_name);
+    Py_XDECREF(result);
     return NULL;
 }
-static CYTHON_INLINE PyObject *__Pyx_CyFunction_Call(PyObject *func, PyObject *arg, PyObject *kw) {
-    return __Pyx_CyFunction_CallMethod(func, ((PyCFunctionObject*)func)->m_self, arg, kw);
-}
-static PyObject *__Pyx_CyFunction_CallAsMethod(PyObject *func, PyObject *args, PyObject *kw) {
-    PyObject *result;
-    __pyx_CyFunctionObject *cyfunc = (__pyx_CyFunctionObject *) func;
-    if ((cyfunc->flags & __Pyx_CYFUNCTION_CCLASS) && !(cyfunc->flags & __Pyx_CYFUNCTION_STATICMETHOD)) {
-        Py_ssize_t argc;
-        PyObject *new_args;
-        PyObject *self;
-        argc = PyTuple_GET_SIZE(args);
-        new_args = PyTuple_GetSlice(args, 1, argc);
-        if (unlikely(!new_args))
-            return NULL;
-        self = PyTuple_GetItem(args, 0);
-        if (unlikely(!self)) {
-            Py_DECREF(new_args);
-            return NULL;
-        }
-        result = __Pyx_CyFunction_CallMethod(func, self, new_args, kw);
-        Py_DECREF(new_args);
-    } else {
-        result = __Pyx_CyFunction_Call(func, args, kw);
-    }
-    return result;
-}
-static PyTypeObject __pyx_CyFunctionType_type = {
-    PyVarObject_HEAD_INIT(0, 0)
-    "cython_function_or_method",
-    sizeof(__pyx_CyFunctionObject),
-    0,
-    (destructor) __Pyx_CyFunction_dealloc,
-    0,
-    0,
-    0,
-#if PY_MAJOR_VERSION < 3
-    0,
-#else
-    0,
 #endif
-    (reprfunc) __Pyx_CyFunction_repr,
-    0,
-    0,
-    0,
-    0,
-    __Pyx_CyFunction_CallAsMethod,
-    0,
-    0,
-    0,
-    0,
-    Py_TPFLAGS_DEFAULT | Py_TPFLAGS_HAVE_GC,
-    0,
-    (traverseproc) __Pyx_CyFunction_traverse,
-    (inquiry) __Pyx_CyFunction_clear,
-    0,
-#if PY_VERSION_HEX < 0x030500A0
-    offsetof(__pyx_CyFunctionObject, func_weakreflist),
-#else
-    offsetof(PyCFunctionObject, m_weakreflist),
-#endif
-    0,
-    0,
-    __pyx_CyFunction_methods,
-    __pyx_CyFunction_members,
-    __pyx_CyFunction_getsets,
-    0,
-    0,
-    __Pyx_CyFunction_descr_get,
-    0,
-    offsetof(__pyx_CyFunctionObject, func_dict),
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-#if PY_VERSION_HEX >= 0x030400a1
-    0,
-#endif
-#if PY_VERSION_HEX >= 0x030800b1
-    0,
-#endif
-#if PY_VERSION_HEX >= 0x030800b4 && PY_VERSION_HEX < 0x03090000
-    0,
-#endif
-};
-static int __pyx_CyFunction_init(void) {
-    __pyx_CyFunctionType = __Pyx_FetchCommonType(&__pyx_CyFunctionType_type);
-    if (unlikely(__pyx_CyFunctionType == NULL)) {
-        return -1;
-    }
-    return 0;
-}
-static CYTHON_INLINE void *__Pyx_CyFunction_InitDefaults(PyObject *func, size_t size, int pyobjects) {
-    __pyx_CyFunctionObject *m = (__pyx_CyFunctionObject *) func;
-    m->defaults = PyObject_Malloc(size);
-    if (unlikely(!m->defaults))
-        return PyErr_NoMemory();
-    memset(m->defaults, 0, size);
-    m->defaults_pyobjects = pyobjects;
-    m->defaults_size = size;
-    return m->defaults;
-}
-static CYTHON_INLINE void __Pyx_CyFunction_SetDefaultsTuple(PyObject *func, PyObject *tuple) {
-    __pyx_CyFunctionObject *m = (__pyx_CyFunctionObject *) func;
-    m->defaults_tuple = tuple;
-    Py_INCREF(tuple);
-}
-static CYTHON_INLINE void __Pyx_CyFunction_SetDefaultsKwDict(PyObject *func, PyObject *dict) {
-    __pyx_CyFunctionObject *m = (__pyx_CyFunctionObject *) func;
-    m->defaults_kwdict = dict;
-    Py_INCREF(dict);
-}
-static CYTHON_INLINE void __Pyx_CyFunction_SetAnnotationsDict(PyObject *func, PyObject *dict) {
-    __pyx_CyFunctionObject *m = (__pyx_CyFunctionObject *) func;
-    m->func_annotations = dict;
-    Py_INCREF(dict);
-}
 
-/* CythonFunction */
-static PyObject *__Pyx_CyFunction_New(PyMethodDef *ml, int flags, PyObject* qualname,
-                                      PyObject *closure, PyObject *module, PyObject* globals, PyObject* code) {
-    PyObject *op = __Pyx_CyFunction_Init(
-        PyObject_GC_New(__pyx_CyFunctionObject, __pyx_CyFunctionType),
-        ml, flags, qualname, closure, module, globals, code
-    );
-    if (likely(op)) {
-        PyObject_GC_Track(op);
-    }
-    return op;
-}
-
-/* PyObject_GenericGetAttrNoDict */
-#if CYTHON_USE_TYPE_SLOTS && CYTHON_USE_PYTYPE_LOOKUP && PY_VERSION_HEX < 0x03070000
-static PyObject *__Pyx_RaiseGenericGetAttributeError(PyTypeObject *tp, PyObject *attr_name) {
-    PyErr_Format(PyExc_AttributeError,
-#if PY_MAJOR_VERSION >= 3
-                 "'%.50s' object has no attribute '%U'",
-                 tp->tp_name, attr_name);
+/* GetVTable */
+static void* __Pyx_GetVtable(PyObject *dict) {
+    void* ptr;
+    PyObject *ob = PyObject_GetItem(dict, __pyx_n_s_pyx_vtable);
+    if (!ob)
+        goto bad;
+#if PY_VERSION_HEX >= 0x02070000
+    ptr = PyCapsule_GetPointer(ob, 0);
 #else
-                 "'%.50s' object has no attribute '%.400s'",
-                 tp->tp_name, PyString_AS_STRING(attr_name));
+    ptr = PyCObject_AsVoidPtr(ob);
 #endif
+    if (!ptr && !PyErr_Occurred())
+        PyErr_SetString(PyExc_RuntimeError, "invalid vtable found for imported type");
+    Py_DECREF(ob);
+    return ptr;
+bad:
+    Py_XDECREF(ob);
     return NULL;
 }
-static CYTHON_INLINE PyObject* __Pyx_PyObject_GenericGetAttrNoDict(PyObject* obj, PyObject* attr_name) {
-    PyObject *descr;
-    PyTypeObject *tp = Py_TYPE(obj);
-    if (unlikely(!PyString_Check(attr_name))) {
-        return PyObject_GenericGetAttr(obj, attr_name);
-    }
-    assert(!tp->tp_dictoffset);
-    descr = _PyType_Lookup(tp, attr_name);
-    if (unlikely(!descr)) {
-        return __Pyx_RaiseGenericGetAttributeError(tp, attr_name);
-    }
-    Py_INCREF(descr);
+
+/* Import */
+static PyObject *__Pyx_Import(PyObject *name, PyObject *from_list, int level) {
+    PyObject *empty_list = 0;
+    PyObject *module = 0;
+    PyObject *global_dict = 0;
+    PyObject *empty_dict = 0;
+    PyObject *list;
     #if PY_MAJOR_VERSION < 3
-    if (likely(PyType_HasFeature(Py_TYPE(descr), Py_TPFLAGS_HAVE_CLASS)))
+    PyObject *py_import;
+    py_import = __Pyx_PyObject_GetAttrStr(__pyx_b, __pyx_n_s_import);
+    if (!py_import)
+        goto bad;
     #endif
+    if (from_list)
+        list = from_list;
+    else {
+        empty_list = PyList_New(0);
+        if (!empty_list)
+            goto bad;
+        list = empty_list;
+    }
+    global_dict = PyModule_GetDict(__pyx_m);
+    if (!global_dict)
+        goto bad;
+    empty_dict = PyDict_New();
+    if (!empty_dict)
+        goto bad;
     {
-        descrgetfunc f = Py_TYPE(descr)->tp_descr_get;
-        if (unlikely(f)) {
-            PyObject *res = f(descr, obj, (PyObject *)tp);
-            Py_DECREF(descr);
-            return res;
+        #if PY_MAJOR_VERSION >= 3
+        if (level == -1) {
+            if ((1) && (strchr(__Pyx_MODULE_NAME, '.'))) {
+                module = PyImport_ImportModuleLevelObject(
+                    name, global_dict, empty_dict, list, 1);
+                if (!module) {
+                    if (!PyErr_ExceptionMatches(PyExc_ImportError))
+                        goto bad;
+                    PyErr_Clear();
+                }
+            }
+            level = 0;
+        }
+        #endif
+        if (!module) {
+            #if PY_MAJOR_VERSION < 3
+            PyObject *py_level = PyInt_FromLong(level);
+            if (!py_level)
+                goto bad;
+            module = PyObject_CallFunctionObjArgs(py_import,
+                name, global_dict, empty_dict, list, py_level, (PyObject *)NULL);
+            Py_DECREF(py_level);
+            #else
+            module = PyImport_ImportModuleLevelObject(
+                name, global_dict, empty_dict, list, level);
+            #endif
         }
     }
-    return descr;
+bad:
+    #if PY_MAJOR_VERSION < 3
+    Py_XDECREF(py_import);
+    #endif
+    Py_XDECREF(empty_list);
+    Py_XDECREF(empty_dict);
+    return module;
 }
-#endif
-
-/* PyDictVersioning */
-#if CYTHON_USE_DICT_VERSIONS && CYTHON_USE_TYPE_SLOTS
-static CYTHON_INLINE PY_UINT64_T __Pyx_get_tp_dict_version(PyObject *obj) {
-    PyObject *dict = Py_TYPE(obj)->tp_dict;
-    return likely(dict) ? __PYX_GET_DICT_VERSION(dict) : 0;
-}
-static CYTHON_INLINE PY_UINT64_T __Pyx_get_object_dict_version(PyObject *obj) {
-    PyObject **dictptr = NULL;
-    Py_ssize_t offset = Py_TYPE(obj)->tp_dictoffset;
-    if (offset) {
-#if CYTHON_COMPILING_IN_CPYTHON
-        dictptr = (likely(offset > 0)) ? (PyObject **) ((char *)obj + offset) : _PyObject_GetDictPtr(obj);
-#else
-        dictptr = _PyObject_GetDictPtr(obj);
-#endif
-    }
-    return (dictptr && *dictptr) ? __PYX_GET_DICT_VERSION(*dictptr) : 0;
-}
-static CYTHON_INLINE int __Pyx_object_dict_version_matches(PyObject* obj, PY_UINT64_T tp_dict_version, PY_UINT64_T obj_dict_version) {
-    PyObject *dict = Py_TYPE(obj)->tp_dict;
-    if (unlikely(!dict) || unlikely(tp_dict_version != __PYX_GET_DICT_VERSION(dict)))
-        return 0;
-    return obj_dict_version == __Pyx_get_object_dict_version(obj);
-}
-#endif
 
 /* PyErrFetchRestore */
 #if CYTHON_FAST_THREAD_STATE
@@ -3692,6 +8949,60 @@ bad:
     Py_XDECREF(d);
     return -1;
 }
+
+/* FunctionImport */
+#ifndef __PYX_HAVE_RT_ImportFunction
+#define __PYX_HAVE_RT_ImportFunction
+static int __Pyx_ImportFunction(PyObject *module, const char *funcname, void (**f)(void), const char *sig) {
+    PyObject *d = 0;
+    PyObject *cobj = 0;
+    union {
+        void (*fp)(void);
+        void *p;
+    } tmp;
+    d = PyObject_GetAttrString(module, (char *)"__pyx_capi__");
+    if (!d)
+        goto bad;
+    cobj = PyDict_GetItemString(d, funcname);
+    if (!cobj) {
+        PyErr_Format(PyExc_ImportError,
+            "%.200s does not export expected C function %.200s",
+                PyModule_GetName(module), funcname);
+        goto bad;
+    }
+#if PY_VERSION_HEX >= 0x02070000
+    if (!PyCapsule_IsValid(cobj, sig)) {
+        PyErr_Format(PyExc_TypeError,
+            "C function %.200s.%.200s has wrong signature (expected %.500s, got %.500s)",
+             PyModule_GetName(module), funcname, sig, PyCapsule_GetName(cobj));
+        goto bad;
+    }
+    tmp.p = PyCapsule_GetPointer(cobj, sig);
+#else
+    {const char *desc, *s1, *s2;
+    desc = (const char *)PyCObject_GetDesc(cobj);
+    if (!desc)
+        goto bad;
+    s1 = desc; s2 = sig;
+    while (*s1 != '\0' && *s1 == *s2) { s1++; s2++; }
+    if (*s1 != *s2) {
+        PyErr_Format(PyExc_TypeError,
+            "C function %.200s.%.200s has wrong signature (expected %.500s, got %.500s)",
+             PyModule_GetName(module), funcname, sig, desc);
+        goto bad;
+    }
+    tmp.p = PyCObject_AsVoidPtr(cobj);}
+#endif
+    *f = tmp.fp;
+    if (!(*f))
+        goto bad;
+    Py_DECREF(d);
+    return 0;
+bad:
+    Py_XDECREF(d);
+    return -1;
+}
+#endif
 
 /* InitStrings */
 static int __Pyx_InitStrings(__Pyx_StringTabEntry *t) {

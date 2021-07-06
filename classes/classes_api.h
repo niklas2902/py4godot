@@ -7,8 +7,8 @@
 #endif
 #include "Python.h"
 
-static PyObject *(*__pyx_api_f_7classes_7classes_register_bindings)(void) = 0;
-#define register_bindings __pyx_api_f_7classes_7classes_register_bindings
+static PyObject *(*__pyx_api_f_7classes_7classes_init_method_bindings)(struct godot_gdnative_core_api_struct *) = 0;
+#define init_method_bindings __pyx_api_f_7classes_7classes_init_method_bindings
 #if !defined(__Pyx_PyIdentifier_FromString)
 #if PY_MAJOR_VERSION < 3
   #define __Pyx_PyIdentifier_FromString(s) PyString_FromString(s)
@@ -75,7 +75,7 @@ static int import_classes__classes(void) {
   PyObject *module = 0;
   module = PyImport_ImportModule("classes.classes");
   if (!module) goto bad;
-  if (__Pyx_ImportFunction(module, "register_bindings", (void (**)(void))&__pyx_api_f_7classes_7classes_register_bindings, "PyObject *(void)") < 0) goto bad;
+  if (__Pyx_ImportFunction(module, "init_method_bindings", (void (**)(void))&__pyx_api_f_7classes_7classes_init_method_bindings, "PyObject *(struct godot_gdnative_core_api_struct *)") < 0) goto bad;
   Py_DECREF(module); module = 0;
   return 0;
   bad:

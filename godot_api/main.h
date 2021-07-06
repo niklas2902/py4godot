@@ -29,6 +29,9 @@ godot_variant simple_get_data(godot_object *p_instance, void *p_method_data, voi
 // information we may find useful among which the pointers to our API structures.
 void GDN_EXPORT godot_gdnative_init(godot_gdnative_init_options *p_options) {
 	api_core = p_options->api_struct;
+	printf("set_api_core:\n");
+	printf("%p",api_core);
+	printf("\n");
 
 	// Find NativeScript extensions.
 	for (unsigned int i = 0; i < api_core->num_extensions; i++) {
@@ -45,6 +48,7 @@ void GDN_EXPORT godot_gdnative_init(godot_gdnative_init_options *p_options) {
 // `gdnative_terminate` which is called before the library is unloaded.
 // Godot will unload the library when no object uses it anymore.
 void GDN_EXPORT godot_gdnative_terminate(godot_gdnative_terminate_options *p_options) {
+    printf("terminate\n");
 	api_core = NULL;
 	nativescript_api = NULL;
 }
@@ -83,20 +87,23 @@ void GDN_EXPORT godot_nativescript_init(void *p_handle) {
 	// * The fifth and final parameter is a description of which function
 	//   to call when the method gets called.
 
+    printf("api_core:\n");
+    printf("%p",api_core);
+    printf("\n");
 	Py_Initialize();
 	PyRun_SimpleString("import sys,os\nprint(sys.path, os.getcwd())");
 	PyRun_SimpleString("import sys, os\nsys.path.insert(0,os.getcwd()+'/addons')");
 	PyRun_SimpleString("import sys,os\nprint(sys.path, os.getcwd())");
-	PyObject * pythonFile = PyImport_ImportModule("godot_api.delorean");
-	import_godot_api__delorean();
+	//PyObject * pythonFile = PyImport_ImportModule("godot_api.delorean");
+	//import_godot_api__delorean();
 	import_classes__classes();
     if (PyErr_Occurred())
     {
         PyErr_Print();
         return -1;
     }
-    print_();
-    //init_method_bindings();
+    //print_();
+    init_method_bindings(api_core);
 	Py_Finalize();
 	nativescript_api->godot_nativescript_register_method(p_handle, "SIMPLE", "get_data", attributes, get_data);
 }

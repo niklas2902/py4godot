@@ -1,2 +1,8 @@
-cdef api register_bindings():
-    print(register_bindings)
+cimport classes.generated as c_generated
+import classes.generated
+from godot_api.binding_external cimport *
+
+cdef api init_method_bindings(godot_gdnative_core_api_struct* core):
+    print("init_method_bindiings")
+    c_generated.set_core(core)
+    classes.generated.init_method_bindings()
