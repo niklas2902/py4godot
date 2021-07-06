@@ -7011,28 +7011,31 @@ static const char __pyx_k_generated[] = "generated";
 static const char __pyx_k_pyx_vtable[] = "__pyx_vtable__";
 static const char __pyx_k_classes_generated[] = "classes.generated";
 static const char __pyx_k_cline_in_traceback[] = "cline_in_traceback";
-static const char __pyx_k_init_method_bindings[] = "init_method_bindings";
-static const char __pyx_k_init_method_bindiings[] = "init_method_bindiings";
+static const char __pyx_k_init_method_bindings[] = "\n\n#####################init_method_bindings###############################\n\n";
+static const char __pyx_k_init_method_bindings_2[] = "init_method_bindings";
+static const char __pyx_k_end_init_method_bindings[] = "\n\n#####################end init_method_bindings###############################\n\n";
 static PyObject *__pyx_n_s_classes;
 static PyObject *__pyx_n_s_classes_generated;
 static PyObject *__pyx_n_s_cline_in_traceback;
+static PyObject *__pyx_kp_u_end_init_method_bindings;
 static PyObject *__pyx_n_s_generated;
 static PyObject *__pyx_n_s_import;
-static PyObject *__pyx_n_u_init_method_bindiings;
-static PyObject *__pyx_n_s_init_method_bindings;
+static PyObject *__pyx_kp_u_init_method_bindings;
+static PyObject *__pyx_n_s_init_method_bindings_2;
 static PyObject *__pyx_n_s_main;
 static PyObject *__pyx_n_s_name;
 static PyObject *__pyx_n_s_print;
 static PyObject *__pyx_n_s_pyx_vtable;
 static PyObject *__pyx_n_s_test;
 static PyObject *__pyx_tuple_;
+static PyObject *__pyx_tuple__2;
 /* Late includes */
 
 /* "classes/classes.pyx":5
  * from godot_api.binding_external cimport *
  * 
  * cdef api init_method_bindings(godot_gdnative_core_api_struct* core):             # <<<<<<<<<<<<<<
- *     print("init_method_bindiings")
+ *     print("\n\n#####################init_method_bindings###############################\n\n")
  *     c_generated.set_core(core)
  */
 
@@ -7050,7 +7053,7 @@ static PyObject *__pyx_f_7classes_7classes_init_method_bindings(struct godot_gdn
   /* "classes/classes.pyx":6
  * 
  * cdef api init_method_bindings(godot_gdnative_core_api_struct* core):
- *     print("init_method_bindiings")             # <<<<<<<<<<<<<<
+ *     print("\n\n#####################init_method_bindings###############################\n\n")             # <<<<<<<<<<<<<<
  *     c_generated.set_core(core)
  *     classes.generated.init_method_bindings()
  */
@@ -7060,25 +7063,27 @@ static PyObject *__pyx_f_7classes_7classes_init_method_bindings(struct godot_gdn
 
   /* "classes/classes.pyx":7
  * cdef api init_method_bindings(godot_gdnative_core_api_struct* core):
- *     print("init_method_bindiings")
+ *     print("\n\n#####################init_method_bindings###############################\n\n")
  *     c_generated.set_core(core)             # <<<<<<<<<<<<<<
  *     classes.generated.init_method_bindings()
+ *     print("\n\n#####################end init_method_bindings###############################\n\n")
  */
   __pyx_t_1 = __pyx_f_7classes_9generated_set_core(__pyx_v_core); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 7, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
   /* "classes/classes.pyx":8
- *     print("init_method_bindiings")
+ *     print("\n\n#####################init_method_bindings###############################\n\n")
  *     c_generated.set_core(core)
  *     classes.generated.init_method_bindings()             # <<<<<<<<<<<<<<
+ *     print("\n\n#####################end init_method_bindings###############################\n\n")
  */
   __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_classes); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 8, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_generated); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 8, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_init_method_bindings); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 8, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_init_method_bindings_2); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 8, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __pyx_t_3 = NULL;
@@ -7098,11 +7103,20 @@ static PyObject *__pyx_f_7classes_7classes_init_method_bindings(struct godot_gdn
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
+  /* "classes/classes.pyx":9
+ *     c_generated.set_core(core)
+ *     classes.generated.init_method_bindings()
+ *     print("\n\n#####################end init_method_bindings###############################\n\n")             # <<<<<<<<<<<<<<
+ */
+  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_print, __pyx_tuple__2, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 9, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+
   /* "classes/classes.pyx":5
  * from godot_api.binding_external cimport *
  * 
  * cdef api init_method_bindings(godot_gdnative_core_api_struct* core):             # <<<<<<<<<<<<<<
- *     print("init_method_bindiings")
+ *     print("\n\n#####################init_method_bindings###############################\n\n")
  *     c_generated.set_core(core)
  */
 
@@ -7240,10 +7254,11 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_n_s_classes, __pyx_k_classes, sizeof(__pyx_k_classes), 0, 0, 1, 1},
   {&__pyx_n_s_classes_generated, __pyx_k_classes_generated, sizeof(__pyx_k_classes_generated), 0, 0, 1, 1},
   {&__pyx_n_s_cline_in_traceback, __pyx_k_cline_in_traceback, sizeof(__pyx_k_cline_in_traceback), 0, 0, 1, 1},
+  {&__pyx_kp_u_end_init_method_bindings, __pyx_k_end_init_method_bindings, sizeof(__pyx_k_end_init_method_bindings), 0, 1, 0, 0},
   {&__pyx_n_s_generated, __pyx_k_generated, sizeof(__pyx_k_generated), 0, 0, 1, 1},
   {&__pyx_n_s_import, __pyx_k_import, sizeof(__pyx_k_import), 0, 0, 1, 1},
-  {&__pyx_n_u_init_method_bindiings, __pyx_k_init_method_bindiings, sizeof(__pyx_k_init_method_bindiings), 0, 1, 0, 1},
-  {&__pyx_n_s_init_method_bindings, __pyx_k_init_method_bindings, sizeof(__pyx_k_init_method_bindings), 0, 0, 1, 1},
+  {&__pyx_kp_u_init_method_bindings, __pyx_k_init_method_bindings, sizeof(__pyx_k_init_method_bindings), 0, 1, 0, 0},
+  {&__pyx_n_s_init_method_bindings_2, __pyx_k_init_method_bindings_2, sizeof(__pyx_k_init_method_bindings_2), 0, 0, 1, 1},
   {&__pyx_n_s_main, __pyx_k_main, sizeof(__pyx_k_main), 0, 0, 1, 1},
   {&__pyx_n_s_name, __pyx_k_name, sizeof(__pyx_k_name), 0, 0, 1, 1},
   {&__pyx_n_s_print, __pyx_k_print, sizeof(__pyx_k_print), 0, 0, 1, 1},
@@ -7265,13 +7280,22 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
   /* "classes/classes.pyx":6
  * 
  * cdef api init_method_bindings(godot_gdnative_core_api_struct* core):
- *     print("init_method_bindiings")             # <<<<<<<<<<<<<<
+ *     print("\n\n#####################init_method_bindings###############################\n\n")             # <<<<<<<<<<<<<<
  *     c_generated.set_core(core)
  *     classes.generated.init_method_bindings()
  */
-  __pyx_tuple_ = PyTuple_Pack(1, __pyx_n_u_init_method_bindiings); if (unlikely(!__pyx_tuple_)) __PYX_ERR(0, 6, __pyx_L1_error)
+  __pyx_tuple_ = PyTuple_Pack(1, __pyx_kp_u_init_method_bindings); if (unlikely(!__pyx_tuple_)) __PYX_ERR(0, 6, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple_);
   __Pyx_GIVEREF(__pyx_tuple_);
+
+  /* "classes/classes.pyx":9
+ *     c_generated.set_core(core)
+ *     classes.generated.init_method_bindings()
+ *     print("\n\n#####################end init_method_bindings###############################\n\n")             # <<<<<<<<<<<<<<
+ */
+  __pyx_tuple__2 = PyTuple_Pack(1, __pyx_kp_u_end_init_method_bindings); if (unlikely(!__pyx_tuple__2)) __PYX_ERR(0, 9, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__2);
+  __Pyx_GIVEREF(__pyx_tuple__2);
   __Pyx_RefNannyFinishContext();
   return 0;
   __pyx_L1_error:;

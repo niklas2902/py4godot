@@ -24,6 +24,8 @@ GDCALLINGCONV void *simple_constructor(godot_object *p_instance, void *p_method_
 GDCALLINGCONV void simple_destructor(godot_object *p_instance, void *p_method_data, void *p_user_data);
 godot_variant simple_get_data(godot_object *p_instance, void *p_method_data, void *p_user_data, int p_num_args, godot_variant **p_args);
 
+void set_up_bindings();
+
 // `gdnative_init` is a function that initializes our dynamic library.
 // Godot will give it a pointer to a structure that contains various bits of
 // information we may find useful among which the pointers to our API structures.
@@ -32,6 +34,7 @@ void GDN_EXPORT godot_gdnative_init(godot_gdnative_init_options *p_options) {
 	printf("set_api_core:\n");
 	printf("%p",api_core);
 	printf("\n");
+
 
 	// Find NativeScript extensions.
 	for (unsigned int i = 0; i < api_core->num_extensions; i++) {
@@ -90,21 +93,7 @@ void GDN_EXPORT godot_nativescript_init(void *p_handle) {
     printf("api_core:\n");
     printf("%p",api_core);
     printf("\n");
-	Py_Initialize();
-	PyRun_SimpleString("import sys,os\nprint(sys.path, os.getcwd())");
-	PyRun_SimpleString("import sys, os\nsys.path.insert(0,os.getcwd()+'/addons')");
-	PyRun_SimpleString("import sys,os\nprint(sys.path, os.getcwd())");
-	//PyObject * pythonFile = PyImport_ImportModule("godot_api.delorean");
-	//import_godot_api__delorean();
-	import_classes__classes();
-    if (PyErr_Occurred())
-    {
-        PyErr_Print();
-        return -1;
-    }
-    //print_();
-    init_method_bindings(api_core);
-	Py_Finalize();
+    set_up_bindings();
 	nativescript_api->godot_nativescript_register_method(p_handle, "SIMPLE", "get_data", attributes, get_data);
 }
 
@@ -144,6 +133,23 @@ godot_variant simple_get_data(godot_object *p_instance, void *p_method_data, voi
 	return ret;
 }
 
+void set_up_bindings(){
+    Py_Initialize();
+	PyRun_SimpleString("import sys,os\nprint(sys.path, os.getcwd())");
+	PyRun_SimpleString("import sys, os\nsys.path.insert(0,os.getcwd()+'/addons')");
+	PyRun_SimpleString("import sys,os\nprint(sys.path, os.getcwd())");
+	//PyObject * pythonFile = PyImport_ImportModule("godot_api.delorean");
+	//import_godot_api__delorean();
+	import_classes__classes();
+    if (PyErr_Occurred())
+    {
+        PyErr_Print();
+        return -1;
+    }
+    //print_();
+    init_method_bindings(api_core);
+	Py_Finalize();
+}
 
 void hello(const char *name) {
     printf("hello %s\n", name);
