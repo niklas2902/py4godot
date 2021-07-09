@@ -10,6 +10,50 @@ typedef struct user_data_struct {
 
 godot_object* _owner;
 
+
+static const char *RECOGNIZED_EXTENSIONS[] = { "py", "pyc", "pyo", "pyd", 0 };
+static const char *RESERVED_WORDS[] = {
+    "False",
+    "None",
+    "True",
+    "and",
+    "as",
+    "assert",
+    "break",
+    "class",
+    "continue",
+    "def",
+    "del",
+    "elif",
+    "else",
+    "except",
+    "finally",
+    "for",
+    "from",
+    "global",
+    "if",
+    "import",
+    "in",
+    "is",
+    "lambda",
+    "nonlocal",
+    "not",
+    "or",
+    "pass",
+    "raise",
+    "return",
+    "try",
+    "while",
+    "with",
+    "yield",
+    0
+};
+static const char *COMMENT_DELIMITERS[] = { "#", "\"\"\"\"\"\"", 0 };
+static const char *STRING_DELIMITERS[] = { "\" \"", "' '", 0 };
+static godot_pluginscript_language_desc desc;
+
+
+
 // GDNative supports a large collection of functions for calling back
 // into the main Godot executable. In order for your module to have
 // access to these functions, GDNative provides your application with
@@ -17,6 +61,7 @@ godot_object* _owner;
 const godot_gdnative_core_api_struct *api_core = NULL;
 const godot_gdnative_ext_nativescript_api_struct *nativescript_api = NULL;
 const godot_gdnative_ext_nativescript_1_1_api_struct *nativescript_api_11 = NULL;
+const godot_gdnative_ext_pluginscript_api_struct *gdapi_ext_pluginscript = NULL;
 
 // These are forward declarations for the functions we'll be implementing
 // for our object. A constructor and destructor are both necessary.
@@ -25,6 +70,7 @@ GDCALLINGCONV void simple_destructor(godot_object *p_instance, void *p_method_da
 godot_variant simple_get_data(godot_object *p_instance, void *p_method_data, void *p_user_data, int p_num_args, godot_variant **p_args);
 
 void set_up_bindings();
+void set_up_pluginscript();
 
 // `gdnative_init` is a function that initializes our dynamic library.
 // Godot will give it a pointer to a structure that contains various bits of
@@ -33,6 +79,7 @@ void GDN_EXPORT godot_gdnative_init(godot_gdnative_init_options *p_options) {
 	api_core = p_options->api_struct;
 	printf("set_api_core:\n");
 	printf("%p",api_core);
+	printf("godot_gdnative_init\n");
 	printf("\n");
 
 
@@ -42,6 +89,10 @@ void GDN_EXPORT godot_gdnative_init(godot_gdnative_init_options *p_options) {
 			case GDNATIVE_EXT_NATIVESCRIPT: {
 				nativescript_api = (godot_gdnative_ext_nativescript_api_struct *)api_core->extensions[i];
 			}; break;
+            case GDNATIVE_EXT_PLUGINSCRIPT:
+                gdapi_ext_pluginscript = (const godot_gdnative_ext_pluginscript_api_struct *)api_core->extensions[i];
+                break;
+
 			default:
 				break;
 		};
@@ -54,6 +105,7 @@ void GDN_EXPORT godot_gdnative_terminate(godot_gdnative_terminate_options *p_opt
     printf("terminate\n");
 	api_core = NULL;
 	nativescript_api = NULL;
+	//Py_Finalize();
 }
 
 // `nativescript_init` is the most important function. Godot calls
@@ -94,6 +146,7 @@ void GDN_EXPORT godot_nativescript_init(void *p_handle) {
     printf("%p",api_core);
     printf("\n");
     set_up_bindings();
+    set_up_pluginscript();
 	nativescript_api->godot_nativescript_register_method(p_handle, "SIMPLE", "get_data", attributes, get_data);
 }
 
@@ -139,16 +192,37 @@ void set_up_bindings(){
 	PyRun_SimpleString("import sys, os\nsys.path.insert(0,os.getcwd()+'/addons')");
 	PyRun_SimpleString("import sys,os\nprint(sys.path, os.getcwd())");
 	//PyObject * pythonFile = PyImport_ImportModule("godot_api.delorean");
-	//import_godot_api__delorean();
+	import_godot_api__delorean();
+    if (PyErr_Occurred())
+    {
+        PyErr_Print();
+        return ;
+    }
 	import_classes__classes();
     if (PyErr_Occurred())
     {
         PyErr_Print();
-        return -1;
+        return ;
     }
     //print_();
     init_method_bindings(api_core);
-	Py_Finalize();
+	//Py_Finalize();
+}
+
+
+void set_up_pluginscript(){
+    desc.name = "Python";
+    desc.type = "Python";
+    desc.extension = "py";
+    desc.recognized_extensions = RECOGNIZED_EXTENSIONS;
+    //desc.init = pythonscript_init;
+    //desc.finish = pythonscript_finish;
+    desc.reserved_words = RESERVED_WORDS;
+    desc.comment_delimiters = COMMENT_DELIMITERS;
+    desc.string_delimiters = STRING_DELIMITERS;
+    desc.has_named_classes = false;
+    //desc.add_global_constant = pythonscript_add_global_constant;
+    gdapi_ext_pluginscript->godot_pluginscript_register_language(&desc);
 }
 
 void hello(const char *name) {
