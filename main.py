@@ -252,10 +252,10 @@ from utils.Wrapper cimport *"""
         #generate main file
         string_file = ""
         try:
-            with open("classes/classes.pyx", "r") as mainFile:
+            with open("classes/api.pyx", "r") as mainFile:
                 string_file = mainFile.read()
         except:
-            print("File classes/classes.pyx not found")
+            print("File classes/api.pyx not found")
         import_string = ""
         init_method_bindings_string= "cdef api init_method_bindings():\n"
         for element in obj:
@@ -266,7 +266,7 @@ from utils.Wrapper cimport *"""
             init_method_bindings_string += f"  {element['name']}.init_method_bindings()\n"
 
         if(import_string + "\n\n" + init_method_bindings_string != string_file):
-            with open("classes/classes.pyx", "w") as mainFile:
+            with open("classes/api.pyx", "w") as mainFile:
                 print("write main")
                 mainFile.write(import_string+"\n\n")
                 mainFile.write(init_method_bindings_string)

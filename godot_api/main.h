@@ -1,6 +1,7 @@
 #include "gdnative_api_struct.gen.h"
 #include "delorean_api.h"
 #include "../classes/classes_api.h"
+#include "../pluginscript_api/api_api.h"
 #include <string.h>
 
 
@@ -192,18 +193,13 @@ void set_up_bindings(){
 	PyRun_SimpleString("import sys, os\nsys.path.insert(0,os.getcwd()+'/addons')");
 	PyRun_SimpleString("import sys,os\nprint(sys.path, os.getcwd())");
 	//PyObject * pythonFile = PyImport_ImportModule("godot_api.delorean");
-	import_godot_api__delorean();
-    if (PyErr_Occurred())
-    {
-        PyErr_Print();
-        return ;
-    }
 	import_classes__classes();
     if (PyErr_Occurred())
     {
         PyErr_Print();
         return ;
     }
+
     //print_();
     init_method_bindings(api_core);
 	//Py_Finalize();
@@ -211,17 +207,25 @@ void set_up_bindings(){
 
 
 void set_up_pluginscript(){
+
+    import_pluginscript_api__api();
+    if (PyErr_Occurred())
+    {
+        PyErr_Print();
+        return ;
+    }
+
     desc.name = "Python";
     desc.type = "Python";
     desc.extension = "py";
     desc.recognized_extensions = RECOGNIZED_EXTENSIONS;
-    //desc.init = pythonscript_init;
-    //desc.finish = pythonscript_finish;
+    desc.init = init_pluginscript;
+    desc.finish = finish_pluginscript;
     desc.reserved_words = RESERVED_WORDS;
     desc.comment_delimiters = COMMENT_DELIMITERS;
     desc.string_delimiters = STRING_DELIMITERS;
     desc.has_named_classes = false;
-    //desc.add_global_constant = pythonscript_add_global_constant;
+    desc.add_global_constant = add_global_constant_pluginscript;
     gdapi_ext_pluginscript->godot_pluginscript_register_language(&desc);
 }
 

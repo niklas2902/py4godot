@@ -90,6 +90,11 @@ cdef extern from "binding.h":
     ctypedef struct godot_pool_vector3_array:
         uint8_t _dont_touch_that[array_size];
 
+    ##############################pluginscript types#####################
+    ctypedef void godot_pluginscript_script_data;
+    ctypedef void godot_pluginscript_instance_data;
+    ctypedef void godot_pluginscript_language_data;
+
 
     #############################method binding##########################
     ctypedef struct godot_variant:
