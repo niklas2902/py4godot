@@ -4,8 +4,17 @@ cdef extern from "binding.h":
 
     cdef const godot_gdnative_core_api_struct *api_core;
 
+    ctypedef struct godot_string:
+        uint8_t _dont_touch_that[1];
+
     void hello(const char *name)
     godot_variant simple_get_data(godot_object *p_instance, void *p_method_data, void *p_user_data, int p_num_args, godot_variant **p_args)
+
+    ctypedef unsigned char      uint8_t
+
+    ctypedef struct godot_string_name:
+        uint8_t _dont_touch_that[1]
+
 
     ctypedef enum godot_error :
         GODOT_OK = 0
@@ -57,6 +66,58 @@ cdef extern from "binding.h":
         GODOT_ERR_HELP = 46
         GODOT_ERR_BUG = 46
         GODOT_ERR_PRINTER_ON_FIRE = 47
+
+    ###########################enums#######################################
+    ctypedef enum godot_variant_call_error_error:
+        GODOT_CALL_ERROR_CALL_OK,
+        GODOT_CALL_ERROR_CALL_ERROR_INVALID_METHOD,
+        GODOT_CALL_ERROR_CALL_ERROR_INVALID_ARGUMENT,
+        GODOT_CALL_ERROR_CALL_ERROR_TOO_MANY_ARGUMENTS,
+        GODOT_CALL_ERROR_CALL_ERROR_TOO_FEW_ARGUMENTS,
+        GODOT_CALL_ERROR_CALL_ERROR_INSTANCE_IS_NULL
+
+    ctypedef enum godot_variant_type:
+        GODOT_VARIANT_TYPE_NIL,
+
+        # atomic types
+        GODOT_VARIANT_TYPE_BOOL,
+        GODOT_VARIANT_TYPE_INT,
+        GODOT_VARIANT_TYPE_REAL,
+        GODOT_VARIANT_TYPE_STRING,
+
+        # math types
+
+        GODOT_VARIANT_TYPE_VECTOR2, # 5
+        GODOT_VARIANT_TYPE_RECT2,
+        GODOT_VARIANT_TYPE_VECTOR3,
+        GODOT_VARIANT_TYPE_TRANSFORM2D,
+        GODOT_VARIANT_TYPE_PLANE,
+        GODOT_VARIANT_TYPE_QUAT, # 10
+        GODOT_VARIANT_TYPE_AABB,
+        GODOT_VARIANT_TYPE_BASIS,
+        GODOT_VARIANT_TYPE_TRANSFORM,
+
+        # misc types
+        GODOT_VARIANT_TYPE_COLOR,
+        GODOT_VARIANT_TYPE_NODE_PATH, # 15
+        GODOT_VARIANT_TYPE_RID,
+        GODOT_VARIANT_TYPE_OBJECT,
+        GODOT_VARIANT_TYPE_DICTIONARY,
+        GODOT_VARIANT_TYPE_ARRAY, # 20
+
+        # arrays
+        GODOT_VARIANT_TYPE_POOL_BYTE_ARRAY,
+        GODOT_VARIANT_TYPE_POOL_INT_ARRAY,
+        GODOT_VARIANT_TYPE_POOL_REAL_ARRAY,
+        GODOT_VARIANT_TYPE_POOL_STRING_ARRAY,
+        GODOT_VARIANT_TYPE_POOL_VECTOR2_ARRAY, # 25
+        GODOT_VARIANT_TYPE_POOL_VECTOR3_ARRAY,
+        GODOT_VARIANT_TYPE_POOL_COLOR_ARRAY
+
+    ctypedef struct godot_variant_call_error:
+        godot_variant_call_error_error error
+        int argument
+        godot_variant_type expected
 
     struct godot_gdnative_core_api_struct:
         godot_method_bind *(*godot_method_bind_get_method)(const char *p_classname, const char *p_methodname)

@@ -226,6 +226,17 @@ void set_up_pluginscript(){
     desc.string_delimiters = STRING_DELIMITERS;
     desc.has_named_classes = false;
     desc.add_global_constant = add_global_constant_pluginscript;
+
+    desc.script_desc.init=init_pluginscript_desc;
+    desc.script_desc.finish=finish_pluginscript_desc;
+
+    desc.script_desc.instance_desc.init=init_pluginscript_instance;
+    desc.script_desc.instance_desc.finish=finish_pluginscript_instance;
+    desc.script_desc.instance_desc.set_prop=set_prop_pluginscript_instance;
+    desc.script_desc.instance_desc.get_prop=get_prop_pluginscript_instance;
+    desc.script_desc.instance_desc.call_method=call_method_pluginscript_instance;
+    desc.script_desc.instance_desc.notification=notification_pluginscript_instance;
+
     gdapi_ext_pluginscript->godot_pluginscript_register_language(&desc);
 }
 

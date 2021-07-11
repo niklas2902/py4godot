@@ -104,6 +104,7 @@ cdef extern from "binding.h":
         uint8_t _dont_touch_that[1];
     ctypedef godot_object *(*godot_class_constructor)()
 
+
     void hello(const char *name)
     void new_variant(const char *test)
     #void new_variant(double test)
