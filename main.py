@@ -230,6 +230,7 @@ from utils.Wrapper cimport *"""
     #generate all the class files
     for element in obj:
         if(element["name"].startswith("_")):
+            print(element["name"])
             continue
 
         init_methods_string += f"  init_method_bindings_{element['name']}()\n"

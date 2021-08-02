@@ -74,3 +74,7 @@ show_api(){
 void hello(const char *name) {
     printf("hello %s\n", name);
 }
+
+PyObject* from_godot_string(const wchar_t* string){
+    return PyUnicode_FromWideChar(string,-1);
+}

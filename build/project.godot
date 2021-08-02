@@ -8,11 +8,19 @@
 
 config_version=4
 
+_global_script_classes=[  ]
+_global_script_class_icons={
+}
+
 [application]
 
 config/name="Build"
 run/main_scene="res://Node.tscn"
 config/icon="res://icon.png"
+
+[gdnative]
+
+singletons=[ "res://simple.gdnlib" ]
 
 [rendering]
 

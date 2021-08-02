@@ -89,11 +89,22 @@ cdef extern from "binding.h":
         uint8_t _dont_touch_that[array_size];
     ctypedef struct godot_pool_vector3_array:
         uint8_t _dont_touch_that[array_size];
+    ctypedef struct godot_string_name:
+        uint8_t _dont_touch_that[1]
 
     ##############################pluginscript types#####################
     ctypedef void godot_pluginscript_script_data;
     ctypedef void godot_pluginscript_instance_data;
     ctypedef void godot_pluginscript_language_data;
+    ctypedef struct godot_pluginscript_script_manifest:
+        godot_pluginscript_script_data *data;
+        godot_string_name name;
+        godot_bool is_tool;
+        godot_string_name base;
+        godot_dictionary member_lines;
+        godot_array methods;
+        godot_array signals;
+        godot_array properties;
 
 
     #############################method binding##########################
@@ -110,6 +121,7 @@ cdef extern from "binding.h":
     #void new_variant(double test)
     void show_api()
     godot_variant simple_get_data(godot_object *p_instance, void *p_method_data, void *p_user_data, int p_num_args, godot_variant **p_args)
+
 
     struct godot_gdnative_ext_nativescript_api_struct:
         void *(*godot_nativescript_get_userdata)(godot_object *p_instance)

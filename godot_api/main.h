@@ -53,16 +53,14 @@ static const char *COMMENT_DELIMITERS[] = { "#", "\"\"\"\"\"\"", 0 };
 static const char *STRING_DELIMITERS[] = { "\" \"", "' '", 0 };
 static godot_pluginscript_language_desc desc;
 
-
-
 // GDNative supports a large collection of functions for calling back
 // into the main Godot executable. In order for your module to have
 // access to these functions, GDNative provides your application with
 // a struct containing pointers to all these functions.
-const godot_gdnative_core_api_struct *api_core = NULL;
-const godot_gdnative_ext_nativescript_api_struct *nativescript_api = NULL;
-const godot_gdnative_ext_nativescript_1_1_api_struct *nativescript_api_11 = NULL;
-const godot_gdnative_ext_pluginscript_api_struct *gdapi_ext_pluginscript = NULL;
+static const godot_gdnative_core_api_struct *api_core = NULL;
+static const godot_gdnative_ext_nativescript_api_struct *nativescript_api = NULL;
+static const godot_gdnative_ext_nativescript_1_1_api_struct *nativescript_api_11 = NULL;
+static const godot_gdnative_ext_pluginscript_api_struct *gdapi_ext_pluginscript = NULL;
 
 // These are forward declarations for the functions we'll be implementing
 // for our object. A constructor and destructor are both necessary.
@@ -98,15 +96,19 @@ void GDN_EXPORT godot_gdnative_init(godot_gdnative_init_options *p_options) {
 				break;
 		};
 	};
+
+    printf("api_core:\n");
+    printf("%p",api_core);
+    printf("\n");
+    set_up_bindings();
+    set_up_pluginscript();
 }
 
 // `gdnative_terminate` which is called before the library is unloaded.
 // Godot will unload the library when no object uses it anymore.
 void GDN_EXPORT godot_gdnative_terminate(godot_gdnative_terminate_options *p_options) {
     printf("terminate\n");
-	api_core = NULL;
-	nativescript_api = NULL;
-	//Py_Finalize();
+	Py_Finalize();
 }
 
 // `nativescript_init` is the most important function. Godot calls
@@ -142,12 +144,6 @@ void GDN_EXPORT godot_nativescript_init(void *p_handle) {
 	//   `godot_headers/nativescript/godot_nativescript.h` for possible values).
 	// * The fifth and final parameter is a description of which function
 	//   to call when the method gets called.
-
-    printf("api_core:\n");
-    printf("%p",api_core);
-    printf("\n");
-    set_up_bindings();
-    set_up_pluginscript();
 	nativescript_api->godot_nativescript_register_method(p_handle, "SIMPLE", "get_data", attributes, get_data);
 }
 
@@ -205,8 +201,13 @@ void set_up_bindings(){
 	//Py_Finalize();
 }
 
+void GDN_EXPORT godot_singleton_init() {
+    printf("init_singleton\n");
+}
+
 
 void set_up_pluginscript(){
+    printf("###################################set_up_pluginscript#################################################\n");
 
     import_pluginscript_api__api();
     if (PyErr_Occurred())
@@ -214,6 +215,8 @@ void set_up_pluginscript(){
         PyErr_Print();
         return ;
     }
+
+    set_api_core_pluginscript(api_core);
 
     desc.name = "Python";
     desc.type = "Python";
@@ -237,6 +240,10 @@ void set_up_pluginscript(){
     desc.script_desc.instance_desc.call_method=call_method_pluginscript_instance;
     desc.script_desc.instance_desc.notification=notification_pluginscript_instance;
 
+    printf("###################################finish_pluginscript###################################################\n");
+
+    // TODO: make python api to c
+    //Todo: look at terminate
     gdapi_ext_pluginscript->godot_pluginscript_register_language(&desc);
 }
 
