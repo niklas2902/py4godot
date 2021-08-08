@@ -2,12 +2,8 @@ from core.variant.Variant cimport *
 from core.array.array_binding cimport *
 cdef class Array:
 
-    def __init__(self, godot_array _native):
-        if (_native != None):
-            self._native = _native
-        else:
-            pass
-            #api_core.godot_array_new(&self._native)
+    def __init__(self):
+        api_core.godot_array_new(&self._native)
 
     def set(self, godot_int index, Variant value):
         api_core.godot_array_set(&self._native, index, &value._native)

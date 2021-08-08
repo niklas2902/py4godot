@@ -836,6 +836,8 @@ static const char *__pyx_filename;
 
 static const char *__pyx_f[] = {
   "pluginscript_api\\api.pyx",
+  "stringsource",
+  "godot_api\\binding_external.pxd",
   "type.pxd",
 };
 
@@ -1001,17 +1003,6 @@ static CYTHON_INLINE PyObject* __Pyx_PyObject_CallMethO(PyObject *func, PyObject
 /* PyObjectCallOneArg.proto */
 static CYTHON_INLINE PyObject* __Pyx_PyObject_CallOneArg(PyObject *func, PyObject *arg);
 
-/* TypeImport.proto */
-#ifndef __PYX_HAVE_RT_ImportType_proto
-#define __PYX_HAVE_RT_ImportType_proto
-enum __Pyx_ImportType_CheckSize {
-   __Pyx_ImportType_CheckSize_Error = 0,
-   __Pyx_ImportType_CheckSize_Warn = 1,
-   __Pyx_ImportType_CheckSize_Ignore = 2
-};
-static PyTypeObject *__Pyx_ImportType(PyObject* module, const char *module_name, const char *class_name, size_t size, enum __Pyx_ImportType_CheckSize check_size);
-#endif
-
 /* PyDictVersioning.proto */
 #if CYTHON_USE_DICT_VERSIONS && CYTHON_USE_TYPE_SLOTS
 #define __PYX_DICT_VERSION_INIT  ((PY_UINT64_T) -1)
@@ -1037,6 +1028,113 @@ static CYTHON_INLINE int __Pyx_object_dict_version_matches(PyObject* obj, PY_UIN
 #define __PYX_UPDATE_DICT_CACHE(dict, value, cache_var, version_var)
 #define __PYX_PY_DICT_LOOKUP_IF_MODIFIED(VAR, DICT, LOOKUP)  (VAR) = (LOOKUP);
 #endif
+
+/* GetModuleGlobalName.proto */
+#if CYTHON_USE_DICT_VERSIONS
+#define __Pyx_GetModuleGlobalName(var, name)  {\
+    static PY_UINT64_T __pyx_dict_version = 0;\
+    static PyObject *__pyx_dict_cached_value = NULL;\
+    (var) = (likely(__pyx_dict_version == __PYX_GET_DICT_VERSION(__pyx_d))) ?\
+        (likely(__pyx_dict_cached_value) ? __Pyx_NewRef(__pyx_dict_cached_value) : __Pyx_GetBuiltinName(name)) :\
+        __Pyx__GetModuleGlobalName(name, &__pyx_dict_version, &__pyx_dict_cached_value);\
+}
+#define __Pyx_GetModuleGlobalNameUncached(var, name)  {\
+    PY_UINT64_T __pyx_dict_version;\
+    PyObject *__pyx_dict_cached_value;\
+    (var) = __Pyx__GetModuleGlobalName(name, &__pyx_dict_version, &__pyx_dict_cached_value);\
+}
+static PyObject *__Pyx__GetModuleGlobalName(PyObject *name, PY_UINT64_T *dict_version, PyObject **dict_cached_value);
+#else
+#define __Pyx_GetModuleGlobalName(var, name)  (var) = __Pyx__GetModuleGlobalName(name)
+#define __Pyx_GetModuleGlobalNameUncached(var, name)  (var) = __Pyx__GetModuleGlobalName(name)
+static CYTHON_INLINE PyObject *__Pyx__GetModuleGlobalName(PyObject *name);
+#endif
+
+/* PyObjectCallNoArg.proto */
+#if CYTHON_COMPILING_IN_CPYTHON
+static CYTHON_INLINE PyObject* __Pyx_PyObject_CallNoArg(PyObject *func);
+#else
+#define __Pyx_PyObject_CallNoArg(func) __Pyx_PyObject_Call(func, __pyx_empty_tuple, NULL)
+#endif
+
+/* GetAttr.proto */
+static CYTHON_INLINE PyObject *__Pyx_GetAttr(PyObject *, PyObject *);
+
+/* Globals.proto */
+static PyObject* __Pyx_Globals(void);
+
+/* PyExec.proto */
+static PyObject* __Pyx_PyExec3(PyObject*, PyObject*, PyObject*);
+static CYTHON_INLINE PyObject* __Pyx_PyExec2(PyObject*, PyObject*);
+
+/* PyExecGlobals.proto */
+static PyObject* __Pyx_PyExecGlobals(PyObject*);
+
+/* GetTopmostException.proto */
+#if CYTHON_USE_EXC_INFO_STACK
+static _PyErr_StackItem * __Pyx_PyErr_GetTopmostException(PyThreadState *tstate);
+#endif
+
+/* SaveResetException.proto */
+#if CYTHON_FAST_THREAD_STATE
+#define __Pyx_ExceptionSave(type, value, tb)  __Pyx__ExceptionSave(__pyx_tstate, type, value, tb)
+static CYTHON_INLINE void __Pyx__ExceptionSave(PyThreadState *tstate, PyObject **type, PyObject **value, PyObject **tb);
+#define __Pyx_ExceptionReset(type, value, tb)  __Pyx__ExceptionReset(__pyx_tstate, type, value, tb)
+static CYTHON_INLINE void __Pyx__ExceptionReset(PyThreadState *tstate, PyObject *type, PyObject *value, PyObject *tb);
+#else
+#define __Pyx_ExceptionSave(type, value, tb)   PyErr_GetExcInfo(type, value, tb)
+#define __Pyx_ExceptionReset(type, value, tb)  PyErr_SetExcInfo(type, value, tb)
+#endif
+
+/* PyErrExceptionMatches.proto */
+#if CYTHON_FAST_THREAD_STATE
+#define __Pyx_PyErr_ExceptionMatches(err) __Pyx_PyErr_ExceptionMatchesInState(__pyx_tstate, err)
+static CYTHON_INLINE int __Pyx_PyErr_ExceptionMatchesInState(PyThreadState* tstate, PyObject* err);
+#else
+#define __Pyx_PyErr_ExceptionMatches(err)  PyErr_ExceptionMatches(err)
+#endif
+
+/* DictGetItem.proto */
+#if PY_MAJOR_VERSION >= 3 && !CYTHON_COMPILING_IN_PYPY
+static PyObject *__Pyx_PyDict_GetItem(PyObject *d, PyObject* key);
+#define __Pyx_PyObject_Dict_GetItem(obj, name)\
+    (likely(PyDict_CheckExact(obj)) ?\
+     __Pyx_PyDict_GetItem(obj, name) : PyObject_GetItem(obj, name))
+#else
+#define __Pyx_PyDict_GetItem(d, key) PyObject_GetItem(d, key)
+#define __Pyx_PyObject_Dict_GetItem(obj, name)  PyObject_GetItem(obj, name)
+#endif
+
+/* GetException.proto */
+#if CYTHON_FAST_THREAD_STATE
+#define __Pyx_GetException(type, value, tb)  __Pyx__GetException(__pyx_tstate, type, value, tb)
+static int __Pyx__GetException(PyThreadState *tstate, PyObject **type, PyObject **value, PyObject **tb);
+#else
+static int __Pyx_GetException(PyObject **type, PyObject **value, PyObject **tb);
+#endif
+
+/* RaiseException.proto */
+static void __Pyx_Raise(PyObject *type, PyObject *value, PyObject *tb, PyObject *cause);
+
+/* IncludeStringH.proto */
+#include <string.h>
+
+/* TypeImport.proto */
+#ifndef __PYX_HAVE_RT_ImportType_proto
+#define __PYX_HAVE_RT_ImportType_proto
+enum __Pyx_ImportType_CheckSize {
+   __Pyx_ImportType_CheckSize_Error = 0,
+   __Pyx_ImportType_CheckSize_Warn = 1,
+   __Pyx_ImportType_CheckSize_Ignore = 2
+};
+static PyTypeObject *__Pyx_ImportType(PyObject* module, const char *module_name, const char *class_name, size_t size, enum __Pyx_ImportType_CheckSize check_size);
+#endif
+
+/* Import.proto */
+static PyObject *__Pyx_Import(PyObject *name, PyObject *from_list, int level);
+
+/* ImportFrom.proto */
+static PyObject* __Pyx_ImportFrom(PyObject* module, PyObject* name);
 
 /* CLineInTraceback.proto */
 #ifdef CYTHON_CLINE_IN_TRACEBACK
@@ -1064,6 +1162,9 @@ static void __pyx_insert_code_object(int code_line, PyCodeObject* code_object);
 static void __Pyx_AddTraceback(const char *funcname, int c_line,
                                int py_line, const char *filename);
 
+/* CIntFromPy.proto */
+static CYTHON_INLINE uint8_t __Pyx_PyInt_As_uint8_t(PyObject *);
+
 /* CIntToPy.proto */
 static CYTHON_INLINE PyObject* __Pyx_PyInt_From_long(long value);
 
@@ -1085,6 +1186,9 @@ static CYTHON_INLINE int __Pyx_PyErr_GivenExceptionMatches2(PyObject *err, PyObj
 #define __Pyx_PyErr_GivenExceptionMatches2(err, type1, type2) (PyErr_GivenExceptionMatches(err, type1) || PyErr_GivenExceptionMatches(err, type2))
 #endif
 #define __Pyx_PyException_Check(obj) __Pyx_TypeCheck(obj, PyExc_Exception)
+
+/* CStringEquals.proto */
+static CYTHON_INLINE int __Pyx_StrEq(const char *, const char *);
 
 /* CheckBinaryVersion.proto */
 static int __Pyx_check_binary_version(void);
@@ -1120,6 +1224,7 @@ static PyTypeObject *__pyx_ptype_7cpython_4type_type = 0;
 /* Module declarations from 'godot_api.binding_external' */
 
 /* Module declarations from 'pluginscript_api.api' */
+static godot_dictionary __pyx_v_16pluginscript_api_3api_dictionary;
 static PyObject *__pyx_f_16pluginscript_api_3api_set_api_core_pluginscript(struct godot_gdnative_core_api_struct const *); /*proto*/
 static godot_pluginscript_language_data *__pyx_f_16pluginscript_api_3api_init_pluginscript(void); /*proto*/
 static void __pyx_f_16pluginscript_api_3api_finish_pluginscript(godot_pluginscript_instance_data *); /*proto*/
@@ -1132,51 +1237,104 @@ static bool __pyx_f_16pluginscript_api_3api_set_prop_pluginscript_instance(godot
 static bool __pyx_f_16pluginscript_api_3api_get_prop_pluginscript_instance(godot_pluginscript_instance_data *, godot_string const *, godot_variant *); /*proto*/
 static void __pyx_f_16pluginscript_api_3api_call_method_pluginscript_instance(godot_pluginscript_instance_data *, godot_string_name const *, godot_variant const **, int, godot_variant_call_error *); /*proto*/
 static void __pyx_f_16pluginscript_api_3api_notification_pluginscript_instance(godot_pluginscript_instance_data *, int); /*proto*/
-static PyObject *__pyx_f_16pluginscript_api_3api_get_from_w_string(godot_string const *); /*proto*/
+static PyObject *__pyx_f_16pluginscript_api_3api_get_python_string_from_w_string(godot_string const *); /*proto*/
+static int __Pyx_carray_from_py_uint8_t(PyObject *, uint8_t *, Py_ssize_t); /*proto*/
+static godot_dictionary __pyx_convert__from_py_godot_dictionary(PyObject *); /*proto*/
 #define __Pyx_MODULE_NAME "pluginscript_api.api"
 extern int __pyx_module_is_main_pluginscript_api__api;
 int __pyx_module_is_main_pluginscript_api__api = 0;
 
 /* Implementation of 'pluginscript_api.api' */
 static PyObject *__pyx_builtin_print;
+static PyObject *__pyx_builtin_TypeError;
+static PyObject *__pyx_builtin_OverflowError;
+static PyObject *__pyx_builtin_enumerate;
+static PyObject *__pyx_builtin_IndexError;
+static PyObject *__pyx_builtin_KeyError;
+static PyObject *__pyx_builtin_ValueError;
+static const char __pyx_k__16[] = "*";
 static const char __pyx_k_main[] = "__main__";
 static const char __pyx_k_name[] = "__name__";
 static const char __pyx_k_test[] = "__test__";
 static const char __pyx_k_path2[] = "path2:";
 static const char __pyx_k_print[] = "print";
+static const char __pyx_k_reset[] = "reset";
+static const char __pyx_k_import[] = "__import__";
+static const char __pyx_k_classes[] = "classes";
+static const char __pyx_k_methods[] = "methods";
+static const char __pyx_k_to_dict[] = "to_dict";
+static const char __pyx_k_KeyError[] = "KeyError";
+static const char __pyx_k_builtins[] = "__builtins__";
 static const char __pyx_k_get_prop[] = "\n###################################################get_prop########################################\n";
 static const char __pyx_k_set_prop[] = "\n#########################################################set_prop#######################################\n";
+static const char __pyx_k_TypeError[] = "TypeError";
+static const char __pyx_k_enumerate[] = "enumerate";
+static const char __pyx_k_IndexError[] = "IndexError";
+static const char __pyx_k_ValueError[] = "ValueError";
+static const char __pyx_k_properties[] = "properties";
 static const char __pyx_k_call_method[] = "\n#################################################call_method#############################################";
 static const char __pyx_k_finish_desc[] = "finish_desc\n";
 static const char __pyx_k_set_api_core[] = "\n#############################set_api_core############################################################";
+static const char __pyx_k_OverflowError[] = "OverflowError";
+static const char __pyx_k_classes_found[] = "classes_found:";
 static const char __pyx_k_instance_init[] = "\n####################################################################instance_init########################\n";
 static const char __pyx_k_create_manifest[] = "\n############################################create_manifest##############################################\n";
+static const char __pyx_k_dont_touch_that[] = "_dont_touch_that";
 static const char __pyx_k_instance_finish[] = "instance_finish\n";
 static const char __pyx_k_return_manifest[] = "\n################################return_manifest########################################################\n";
+static const char __pyx_k_MethodDescription[] = "MethodDescription";
+static const char __pyx_k_methods_generated[] = "methods generated:";
 static const char __pyx_k_cline_in_traceback[] = "cline_in_traceback";
 static const char __pyx_k_finish_python_test[] = "finish_python_test\n";
 static const char __pyx_k_add_global_constant[] = "\n######################################################add_global_constant#############################\n";
+static const char __pyx_k_properties_generated[] = "properties generated:";
 static const char __pyx_k_notification_instance[] = "\n#####################################################notification_instance###############################";
 static const char __pyx_k_init_python_pluginscript[] = "\n######################################################init_python_pluginscript####################################\n";
+static const char __pyx_k_No_value_specified_for_struct_at[] = "No value specified for struct attribute '_dont_touch_that'";
+static const char __pyx_k_pluginscript_api_description_cla[] = "pluginscript_api.description_classes.MethodDescription";
+static const char __pyx_k_pluginscript_api_utils_annotatio[] = "pluginscript_api.utils.annotations";
+static PyObject *__pyx_n_s_IndexError;
+static PyObject *__pyx_n_s_KeyError;
+static PyObject *__pyx_n_s_MethodDescription;
+static PyObject *__pyx_kp_s_No_value_specified_for_struct_at;
+static PyObject *__pyx_n_s_OverflowError;
+static PyObject *__pyx_n_s_TypeError;
+static PyObject *__pyx_n_s_ValueError;
+static PyObject *__pyx_n_s__16;
 static PyObject *__pyx_kp_u_add_global_constant;
+static PyObject *__pyx_n_s_builtins;
 static PyObject *__pyx_kp_u_call_method;
+static PyObject *__pyx_n_s_classes;
+static PyObject *__pyx_kp_u_classes_found;
 static PyObject *__pyx_n_s_cline_in_traceback;
 static PyObject *__pyx_kp_u_create_manifest;
+static PyObject *__pyx_n_s_dont_touch_that;
+static PyObject *__pyx_n_s_enumerate;
 static PyObject *__pyx_n_u_finish_desc;
 static PyObject *__pyx_n_u_finish_python_test;
 static PyObject *__pyx_kp_u_get_prop;
+static PyObject *__pyx_n_s_import;
 static PyObject *__pyx_kp_u_init_python_pluginscript;
 static PyObject *__pyx_n_u_instance_finish;
 static PyObject *__pyx_kp_u_instance_init;
 static PyObject *__pyx_n_s_main;
+static PyObject *__pyx_n_s_methods;
+static PyObject *__pyx_kp_u_methods_generated;
 static PyObject *__pyx_n_s_name;
 static PyObject *__pyx_kp_u_notification_instance;
 static PyObject *__pyx_kp_u_path2;
+static PyObject *__pyx_n_s_pluginscript_api_description_cla;
+static PyObject *__pyx_n_s_pluginscript_api_utils_annotatio;
 static PyObject *__pyx_n_s_print;
+static PyObject *__pyx_n_s_properties;
+static PyObject *__pyx_kp_u_properties_generated;
+static PyObject *__pyx_n_s_reset;
 static PyObject *__pyx_kp_u_return_manifest;
 static PyObject *__pyx_kp_u_set_api_core;
 static PyObject *__pyx_kp_u_set_prop;
 static PyObject *__pyx_n_s_test;
+static PyObject *__pyx_n_s_to_dict;
+static PyObject *__pyx_int_0;
 static PyObject *__pyx_tuple_;
 static PyObject *__pyx_tuple__2;
 static PyObject *__pyx_tuple__3;
@@ -1191,11 +1349,12 @@ static PyObject *__pyx_tuple__11;
 static PyObject *__pyx_tuple__12;
 static PyObject *__pyx_tuple__13;
 static PyObject *__pyx_tuple__14;
+static PyObject *__pyx_tuple__15;
 /* Late includes */
 
-/* "pluginscript_api/api.pyx":5
- * from libc.stddef cimport wchar_t
- * 
+/* "pluginscript_api/api.pyx":8
+ * from pluginscript_api.utils.annotations import methods, classes, properties, reset
+ * cdef godot_dictionary dictionary
  * cdef api set_api_core_pluginscript(const godot_gdnative_core_api_struct* core):             # <<<<<<<<<<<<<<
  *     global api_core
  *     api_core = core
@@ -1210,29 +1369,38 @@ static PyObject *__pyx_f_16pluginscript_api_3api_set_api_core_pluginscript(struc
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("set_api_core_pluginscript", 0);
 
-  /* "pluginscript_api/api.pyx":7
+  /* "pluginscript_api/api.pyx":10
  * cdef api set_api_core_pluginscript(const godot_gdnative_core_api_struct* core):
  *     global api_core
  *     api_core = core             # <<<<<<<<<<<<<<
- *     print("\n#############################set_api_core############################################################")
- * cdef api godot_pluginscript_language_data * init_pluginscript():
+ *     #set_api_core_dict(core)
+ *     api_core.godot_dictionary_new(&dictionary)
  */
   api_core = __pyx_v_core;
 
-  /* "pluginscript_api/api.pyx":8
- *     global api_core
+  /* "pluginscript_api/api.pyx":12
  *     api_core = core
+ *     #set_api_core_dict(core)
+ *     api_core.godot_dictionary_new(&dictionary)             # <<<<<<<<<<<<<<
+ *     print("\n#############################set_api_core############################################################")
+ * cdef api godot_pluginscript_language_data * init_pluginscript():
+ */
+  api_core->godot_dictionary_new((&__pyx_v_16pluginscript_api_3api_dictionary));
+
+  /* "pluginscript_api/api.pyx":13
+ *     #set_api_core_dict(core)
+ *     api_core.godot_dictionary_new(&dictionary)
  *     print("\n#############################set_api_core############################################################")             # <<<<<<<<<<<<<<
  * cdef api godot_pluginscript_language_data * init_pluginscript():
  *     print("\n######################################################init_python_pluginscript####################################\n");
  */
-  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_print, __pyx_tuple_, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 8, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_print, __pyx_tuple_, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 13, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "pluginscript_api/api.pyx":5
- * from libc.stddef cimport wchar_t
- * 
+  /* "pluginscript_api/api.pyx":8
+ * from pluginscript_api.utils.annotations import methods, classes, properties, reset
+ * cdef godot_dictionary dictionary
  * cdef api set_api_core_pluginscript(const godot_gdnative_core_api_struct* core):             # <<<<<<<<<<<<<<
  *     global api_core
  *     api_core = core
@@ -1251,8 +1419,8 @@ static PyObject *__pyx_f_16pluginscript_api_3api_set_api_core_pluginscript(struc
   return __pyx_r;
 }
 
-/* "pluginscript_api/api.pyx":9
- *     api_core = core
+/* "pluginscript_api/api.pyx":14
+ *     api_core.godot_dictionary_new(&dictionary)
  *     print("\n#############################set_api_core############################################################")
  * cdef api godot_pluginscript_language_data * init_pluginscript():             # <<<<<<<<<<<<<<
  *     print("\n######################################################init_python_pluginscript####################################\n");
@@ -1268,18 +1436,18 @@ static godot_pluginscript_language_data *__pyx_f_16pluginscript_api_3api_init_pl
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("init_pluginscript", 0);
 
-  /* "pluginscript_api/api.pyx":10
+  /* "pluginscript_api/api.pyx":15
  *     print("\n#############################set_api_core############################################################")
  * cdef api godot_pluginscript_language_data * init_pluginscript():
  *     print("\n######################################################init_python_pluginscript####################################\n");             # <<<<<<<<<<<<<<
  *     return NULL;
  * 
  */
-  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_print, __pyx_tuple__2, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 10, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_print, __pyx_tuple__2, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 15, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "pluginscript_api/api.pyx":11
+  /* "pluginscript_api/api.pyx":16
  * cdef api godot_pluginscript_language_data * init_pluginscript():
  *     print("\n######################################################init_python_pluginscript####################################\n");
  *     return NULL;             # <<<<<<<<<<<<<<
@@ -1289,8 +1457,8 @@ static godot_pluginscript_language_data *__pyx_f_16pluginscript_api_3api_init_pl
   __pyx_r = NULL;
   goto __pyx_L0;
 
-  /* "pluginscript_api/api.pyx":9
- *     api_core = core
+  /* "pluginscript_api/api.pyx":14
+ *     api_core.godot_dictionary_new(&dictionary)
  *     print("\n#############################set_api_core############################################################")
  * cdef api godot_pluginscript_language_data * init_pluginscript():             # <<<<<<<<<<<<<<
  *     print("\n######################################################init_python_pluginscript####################################\n");
@@ -1307,7 +1475,7 @@ static godot_pluginscript_language_data *__pyx_f_16pluginscript_api_3api_init_pl
   return __pyx_r;
 }
 
-/* "pluginscript_api/api.pyx":13
+/* "pluginscript_api/api.pyx":18
  *     return NULL;
  * 
  * cdef api void finish_pluginscript(godot_pluginscript_instance_data *p_data):             # <<<<<<<<<<<<<<
@@ -1323,18 +1491,18 @@ static void __pyx_f_16pluginscript_api_3api_finish_pluginscript(CYTHON_UNUSED go
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("finish_pluginscript", 0);
 
-  /* "pluginscript_api/api.pyx":14
+  /* "pluginscript_api/api.pyx":19
  * 
  * cdef api void finish_pluginscript(godot_pluginscript_instance_data *p_data):
  *     print("finish_python_test\n");             # <<<<<<<<<<<<<<
  * 
  * cdef api  void add_global_constant_pluginscript(godot_pluginscript_language_data *p_data, const godot_string *p_variable, const godot_variant *p_value):
  */
-  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_print, __pyx_tuple__3, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 14, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_print, __pyx_tuple__3, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 19, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "pluginscript_api/api.pyx":13
+  /* "pluginscript_api/api.pyx":18
  *     return NULL;
  * 
  * cdef api void finish_pluginscript(godot_pluginscript_instance_data *p_data):             # <<<<<<<<<<<<<<
@@ -1351,7 +1519,7 @@ static void __pyx_f_16pluginscript_api_3api_finish_pluginscript(CYTHON_UNUSED go
   __Pyx_RefNannyFinishContext();
 }
 
-/* "pluginscript_api/api.pyx":16
+/* "pluginscript_api/api.pyx":21
  *     print("finish_python_test\n");
  * 
  * cdef api  void add_global_constant_pluginscript(godot_pluginscript_language_data *p_data, const godot_string *p_variable, const godot_variant *p_value):             # <<<<<<<<<<<<<<
@@ -1367,18 +1535,18 @@ static void __pyx_f_16pluginscript_api_3api_add_global_constant_pluginscript(CYT
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("add_global_constant_pluginscript", 0);
 
-  /* "pluginscript_api/api.pyx":17
+  /* "pluginscript_api/api.pyx":22
  * 
  * cdef api  void add_global_constant_pluginscript(godot_pluginscript_language_data *p_data, const godot_string *p_variable, const godot_variant *p_value):
  *     print("\n######################################################add_global_constant#############################\n");             # <<<<<<<<<<<<<<
  * 
  * ###############################################pluginscript_desc#######################################################
  */
-  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_print, __pyx_tuple__4, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 17, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_print, __pyx_tuple__4, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 22, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "pluginscript_api/api.pyx":16
+  /* "pluginscript_api/api.pyx":21
  *     print("finish_python_test\n");
  * 
  * cdef api  void add_global_constant_pluginscript(godot_pluginscript_language_data *p_data, const godot_string *p_variable, const godot_variant *p_value):             # <<<<<<<<<<<<<<
@@ -1395,7 +1563,7 @@ static void __pyx_f_16pluginscript_api_3api_add_global_constant_pluginscript(CYT
   __Pyx_RefNannyFinishContext();
 }
 
-/* "pluginscript_api/api.pyx":20
+/* "pluginscript_api/api.pyx":25
  * 
  * ###############################################pluginscript_desc#######################################################
  * cdef api  godot_pluginscript_script_manifest init_pluginscript_desc (godot_pluginscript_language_data *p_data, const godot_string *p_path, const godot_string *p_source, godot_error *r_error):             # <<<<<<<<<<<<<<
@@ -1405,27 +1573,35 @@ static void __pyx_f_16pluginscript_api_3api_add_global_constant_pluginscript(CYT
 
 static godot_pluginscript_script_manifest __pyx_f_16pluginscript_api_3api_init_pluginscript_desc(CYTHON_UNUSED godot_pluginscript_language_data *__pyx_v_p_data, godot_string const *__pyx_v_p_path, godot_string const *__pyx_v_p_source, CYTHON_UNUSED godot_error *__pyx_v_r_error) {
   godot_pluginscript_script_manifest __pyx_v_manifest;
+  PyObject *__pyx_v_m = NULL;
   godot_pluginscript_script_manifest __pyx_r;
   __Pyx_RefNannyDeclarations
   PyObject *__pyx_t_1 = NULL;
   PyObject *__pyx_t_2 = NULL;
+  PyObject *__pyx_t_3 = NULL;
+  Py_ssize_t __pyx_t_4;
+  PyObject *(*__pyx_t_5)(PyObject *);
+  PyObject *__pyx_t_6 = NULL;
+  PyObject *__pyx_t_7 = NULL;
+  int __pyx_t_8;
+  PyObject *__pyx_t_9 = NULL;
   int __pyx_lineno = 0;
   const char *__pyx_filename = NULL;
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("init_pluginscript_desc", 0);
 
-  /* "pluginscript_api/api.pyx":21
+  /* "pluginscript_api/api.pyx":26
  * ###############################################pluginscript_desc#######################################################
  * cdef api  godot_pluginscript_script_manifest init_pluginscript_desc (godot_pluginscript_language_data *p_data, const godot_string *p_path, const godot_string *p_source, godot_error *r_error):
  *     print("\n############################################create_manifest##############################################\n");             # <<<<<<<<<<<<<<
  *     cdef godot_pluginscript_script_manifest manifest;
  *     manifest.data = NULL;
  */
-  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_print, __pyx_tuple__5, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 21, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_print, __pyx_tuple__5, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 26, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "pluginscript_api/api.pyx":23
+  /* "pluginscript_api/api.pyx":28
  *     print("\n############################################create_manifest##############################################\n");
  *     cdef godot_pluginscript_script_manifest manifest;
  *     manifest.data = NULL;             # <<<<<<<<<<<<<<
@@ -1434,7 +1610,7 @@ static godot_pluginscript_script_manifest __pyx_f_16pluginscript_api_3api_init_p
  */
   __pyx_v_manifest.data = NULL;
 
-  /* "pluginscript_api/api.pyx":24
+  /* "pluginscript_api/api.pyx":29
  *     cdef godot_pluginscript_script_manifest manifest;
  *     manifest.data = NULL;
  *     api_core.godot_string_name_new_data(&manifest.name, "python_manifest");             # <<<<<<<<<<<<<<
@@ -1443,7 +1619,7 @@ static godot_pluginscript_script_manifest __pyx_f_16pluginscript_api_3api_init_p
  */
   api_core->godot_string_name_new_data((&__pyx_v_manifest.name), ((char const *)"python_manifest"));
 
-  /* "pluginscript_api/api.pyx":25
+  /* "pluginscript_api/api.pyx":30
  *     manifest.data = NULL;
  *     api_core.godot_string_name_new_data(&manifest.name, "python_manifest");
  *     manifest.is_tool = False;             # <<<<<<<<<<<<<<
@@ -1452,7 +1628,7 @@ static godot_pluginscript_script_manifest __pyx_f_16pluginscript_api_3api_init_p
  */
   __pyx_v_manifest.is_tool = 0;
 
-  /* "pluginscript_api/api.pyx":26
+  /* "pluginscript_api/api.pyx":31
  *     api_core.godot_string_name_new_data(&manifest.name, "python_manifest");
  *     manifest.is_tool = False;
  *     api_core.godot_string_name_new_data(&manifest.base, "");             # <<<<<<<<<<<<<<
@@ -1461,7 +1637,7 @@ static godot_pluginscript_script_manifest __pyx_f_16pluginscript_api_3api_init_p
  */
   api_core->godot_string_name_new_data((&__pyx_v_manifest.base), ((char const *)""));
 
-  /* "pluginscript_api/api.pyx":27
+  /* "pluginscript_api/api.pyx":32
  *     manifest.is_tool = False;
  *     api_core.godot_string_name_new_data(&manifest.base, "");
  *     api_core.godot_dictionary_new(&manifest.member_lines);             # <<<<<<<<<<<<<<
@@ -1470,7 +1646,7 @@ static godot_pluginscript_script_manifest __pyx_f_16pluginscript_api_3api_init_p
  */
   api_core->godot_dictionary_new((&__pyx_v_manifest.member_lines));
 
-  /* "pluginscript_api/api.pyx":28
+  /* "pluginscript_api/api.pyx":33
  *     api_core.godot_string_name_new_data(&manifest.base, "");
  *     api_core.godot_dictionary_new(&manifest.member_lines);
  *     api_core.godot_array_new(&manifest.methods);             # <<<<<<<<<<<<<<
@@ -1479,7 +1655,7 @@ static godot_pluginscript_script_manifest __pyx_f_16pluginscript_api_3api_init_p
  */
   api_core->godot_array_new((&__pyx_v_manifest.methods));
 
-  /* "pluginscript_api/api.pyx":29
+  /* "pluginscript_api/api.pyx":34
  *     api_core.godot_dictionary_new(&manifest.member_lines);
  *     api_core.godot_array_new(&manifest.methods);
  *     api_core.godot_array_new(&manifest.signals);             # <<<<<<<<<<<<<<
@@ -1488,7 +1664,7 @@ static godot_pluginscript_script_manifest __pyx_f_16pluginscript_api_3api_init_p
  */
   api_core->godot_array_new((&__pyx_v_manifest.signals));
 
-  /* "pluginscript_api/api.pyx":30
+  /* "pluginscript_api/api.pyx":35
  *     api_core.godot_array_new(&manifest.methods);
  *     api_core.godot_array_new(&manifest.signals);
  *     api_core.godot_array_new(&manifest.properties);             # <<<<<<<<<<<<<<
@@ -1497,7 +1673,7 @@ static godot_pluginscript_script_manifest __pyx_f_16pluginscript_api_3api_init_p
  */
   api_core->godot_array_new((&__pyx_v_manifest.properties));
 
-  /* "pluginscript_api/api.pyx":32
+  /* "pluginscript_api/api.pyx":37
  *     api_core.godot_array_new(&manifest.properties);
  * 
  *     api_core.godot_print(p_source)             # <<<<<<<<<<<<<<
@@ -1506,53 +1682,304 @@ static godot_pluginscript_script_manifest __pyx_f_16pluginscript_api_3api_init_p
  */
   api_core->godot_print(__pyx_v_p_source);
 
-  /* "pluginscript_api/api.pyx":33
+  /* "pluginscript_api/api.pyx":38
  * 
  *     api_core.godot_print(p_source)
  *     api_core.godot_print(p_path)             # <<<<<<<<<<<<<<
  *     print("path2:")
- *     print(get_from_w_string(p_path))
+ *     print(get_python_string_from_w_string(p_path))
  */
   api_core->godot_print(__pyx_v_p_path);
 
-  /* "pluginscript_api/api.pyx":34
+  /* "pluginscript_api/api.pyx":39
  *     api_core.godot_print(p_source)
  *     api_core.godot_print(p_path)
  *     print("path2:")             # <<<<<<<<<<<<<<
- *     print(get_from_w_string(p_path))
- * #    PyUnicode_FromWideChar(c_string,-1)
+ *     print(get_python_string_from_w_string(p_path))
+ * 
  */
-  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_print, __pyx_tuple__6, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 34, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_print, __pyx_tuple__6, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 39, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "pluginscript_api/api.pyx":35
+  /* "pluginscript_api/api.pyx":40
  *     api_core.godot_print(p_path)
  *     print("path2:")
- *     print(get_from_w_string(p_path))             # <<<<<<<<<<<<<<
- * #    PyUnicode_FromWideChar(c_string,-1)
- *     #py_string = <bytes> c_string
+ *     print(get_python_string_from_w_string(p_path))             # <<<<<<<<<<<<<<
+ * 
+ *     reset()
  */
-  __pyx_t_1 = __pyx_f_16pluginscript_api_3api_get_from_w_string(__pyx_v_p_path); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 35, __pyx_L1_error)
+  __pyx_t_1 = __pyx_f_16pluginscript_api_3api_get_python_string_from_w_string(__pyx_v_p_path); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 40, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = __Pyx_PyObject_CallOneArg(__pyx_builtin_print, __pyx_t_1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 35, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_CallOneArg(__pyx_builtin_print, __pyx_t_1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 40, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
   /* "pluginscript_api/api.pyx":42
- *     #print(string)
- *     #print(PyUnicode_FromWideChar(api_core.godot_string_wide_str(p_path),-1))
+ *     print(get_python_string_from_w_string(p_path))
+ * 
+ *     reset()             # <<<<<<<<<<<<<<
+ *     exec(get_python_string_from_w_string(p_source))
+ *     print("methods generated:", methods)
+ */
+  __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_n_s_reset); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 42, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __pyx_t_3 = NULL;
+  if (CYTHON_UNPACK_METHODS && unlikely(PyMethod_Check(__pyx_t_1))) {
+    __pyx_t_3 = PyMethod_GET_SELF(__pyx_t_1);
+    if (likely(__pyx_t_3)) {
+      PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_1);
+      __Pyx_INCREF(__pyx_t_3);
+      __Pyx_INCREF(function);
+      __Pyx_DECREF_SET(__pyx_t_1, function);
+    }
+  }
+  __pyx_t_2 = (__pyx_t_3) ? __Pyx_PyObject_CallOneArg(__pyx_t_1, __pyx_t_3) : __Pyx_PyObject_CallNoArg(__pyx_t_1);
+  __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
+  if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 42, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+
+  /* "pluginscript_api/api.pyx":43
+ * 
+ *     reset()
+ *     exec(get_python_string_from_w_string(p_source))             # <<<<<<<<<<<<<<
+ *     print("methods generated:", methods)
+ *     print("properties generated:", properties)
+ */
+  __pyx_t_2 = __pyx_f_16pluginscript_api_3api_get_python_string_from_w_string(__pyx_v_p_source); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 43, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
+  __pyx_t_1 = __Pyx_PyExecGlobals(__pyx_t_2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 43, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+
+  /* "pluginscript_api/api.pyx":44
+ *     reset()
+ *     exec(get_python_string_from_w_string(p_source))
+ *     print("methods generated:", methods)             # <<<<<<<<<<<<<<
+ *     print("properties generated:", properties)
+ *     print("classes_found:", classes)
+ */
+  __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_n_s_methods); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 44, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __pyx_t_2 = PyTuple_New(2); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 44, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
+  __Pyx_INCREF(__pyx_kp_u_methods_generated);
+  __Pyx_GIVEREF(__pyx_kp_u_methods_generated);
+  PyTuple_SET_ITEM(__pyx_t_2, 0, __pyx_kp_u_methods_generated);
+  __Pyx_GIVEREF(__pyx_t_1);
+  PyTuple_SET_ITEM(__pyx_t_2, 1, __pyx_t_1);
+  __pyx_t_1 = 0;
+  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_print, __pyx_t_2, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 44, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+
+  /* "pluginscript_api/api.pyx":45
+ *     exec(get_python_string_from_w_string(p_source))
+ *     print("methods generated:", methods)
+ *     print("properties generated:", properties)             # <<<<<<<<<<<<<<
+ *     print("classes_found:", classes)
+ * #    PyUnicode_FromWideChar(c_string,-1)
+ */
+  __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_n_s_properties); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 45, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __pyx_t_2 = PyTuple_New(2); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 45, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
+  __Pyx_INCREF(__pyx_kp_u_properties_generated);
+  __Pyx_GIVEREF(__pyx_kp_u_properties_generated);
+  PyTuple_SET_ITEM(__pyx_t_2, 0, __pyx_kp_u_properties_generated);
+  __Pyx_GIVEREF(__pyx_t_1);
+  PyTuple_SET_ITEM(__pyx_t_2, 1, __pyx_t_1);
+  __pyx_t_1 = 0;
+  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_print, __pyx_t_2, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 45, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+
+  /* "pluginscript_api/api.pyx":46
+ *     print("methods generated:", methods)
+ *     print("properties generated:", properties)
+ *     print("classes_found:", classes)             # <<<<<<<<<<<<<<
+ * #    PyUnicode_FromWideChar(c_string,-1)
+ *     for m in methods:
+ */
+  __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_n_s_classes); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 46, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __pyx_t_2 = PyTuple_New(2); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 46, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
+  __Pyx_INCREF(__pyx_kp_u_classes_found);
+  __Pyx_GIVEREF(__pyx_kp_u_classes_found);
+  PyTuple_SET_ITEM(__pyx_t_2, 0, __pyx_kp_u_classes_found);
+  __Pyx_GIVEREF(__pyx_t_1);
+  PyTuple_SET_ITEM(__pyx_t_2, 1, __pyx_t_1);
+  __pyx_t_1 = 0;
+  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_print, __pyx_t_2, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 46, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+
+  /* "pluginscript_api/api.pyx":48
+ *     print("classes_found:", classes)
+ * #    PyUnicode_FromWideChar(c_string,-1)
+ *     for m in methods:             # <<<<<<<<<<<<<<
+ *         MethodDescription(m, None,None, 0, 0).to_dict()
+ *     #Dictionary()
+ */
+  __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_n_s_methods); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 48, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  if (likely(PyList_CheckExact(__pyx_t_1)) || PyTuple_CheckExact(__pyx_t_1)) {
+    __pyx_t_2 = __pyx_t_1; __Pyx_INCREF(__pyx_t_2); __pyx_t_4 = 0;
+    __pyx_t_5 = NULL;
+  } else {
+    __pyx_t_4 = -1; __pyx_t_2 = PyObject_GetIter(__pyx_t_1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 48, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_2);
+    __pyx_t_5 = Py_TYPE(__pyx_t_2)->tp_iternext; if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 48, __pyx_L1_error)
+  }
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+  for (;;) {
+    if (likely(!__pyx_t_5)) {
+      if (likely(PyList_CheckExact(__pyx_t_2))) {
+        if (__pyx_t_4 >= PyList_GET_SIZE(__pyx_t_2)) break;
+        #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
+        __pyx_t_1 = PyList_GET_ITEM(__pyx_t_2, __pyx_t_4); __Pyx_INCREF(__pyx_t_1); __pyx_t_4++; if (unlikely(0 < 0)) __PYX_ERR(0, 48, __pyx_L1_error)
+        #else
+        __pyx_t_1 = PySequence_ITEM(__pyx_t_2, __pyx_t_4); __pyx_t_4++; if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 48, __pyx_L1_error)
+        __Pyx_GOTREF(__pyx_t_1);
+        #endif
+      } else {
+        if (__pyx_t_4 >= PyTuple_GET_SIZE(__pyx_t_2)) break;
+        #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
+        __pyx_t_1 = PyTuple_GET_ITEM(__pyx_t_2, __pyx_t_4); __Pyx_INCREF(__pyx_t_1); __pyx_t_4++; if (unlikely(0 < 0)) __PYX_ERR(0, 48, __pyx_L1_error)
+        #else
+        __pyx_t_1 = PySequence_ITEM(__pyx_t_2, __pyx_t_4); __pyx_t_4++; if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 48, __pyx_L1_error)
+        __Pyx_GOTREF(__pyx_t_1);
+        #endif
+      }
+    } else {
+      __pyx_t_1 = __pyx_t_5(__pyx_t_2);
+      if (unlikely(!__pyx_t_1)) {
+        PyObject* exc_type = PyErr_Occurred();
+        if (exc_type) {
+          if (likely(__Pyx_PyErr_GivenExceptionMatches(exc_type, PyExc_StopIteration))) PyErr_Clear();
+          else __PYX_ERR(0, 48, __pyx_L1_error)
+        }
+        break;
+      }
+      __Pyx_GOTREF(__pyx_t_1);
+    }
+    __Pyx_XDECREF_SET(__pyx_v_m, __pyx_t_1);
+    __pyx_t_1 = 0;
+
+    /* "pluginscript_api/api.pyx":49
+ * #    PyUnicode_FromWideChar(c_string,-1)
+ *     for m in methods:
+ *         MethodDescription(m, None,None, 0, 0).to_dict()             # <<<<<<<<<<<<<<
+ *     #Dictionary()
+ * 
+ */
+    __Pyx_GetModuleGlobalName(__pyx_t_6, __pyx_n_s_MethodDescription); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 49, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_6);
+    __pyx_t_7 = NULL;
+    __pyx_t_8 = 0;
+    if (CYTHON_UNPACK_METHODS && unlikely(PyMethod_Check(__pyx_t_6))) {
+      __pyx_t_7 = PyMethod_GET_SELF(__pyx_t_6);
+      if (likely(__pyx_t_7)) {
+        PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_6);
+        __Pyx_INCREF(__pyx_t_7);
+        __Pyx_INCREF(function);
+        __Pyx_DECREF_SET(__pyx_t_6, function);
+        __pyx_t_8 = 1;
+      }
+    }
+    #if CYTHON_FAST_PYCALL
+    if (PyFunction_Check(__pyx_t_6)) {
+      PyObject *__pyx_temp[6] = {__pyx_t_7, __pyx_v_m, Py_None, Py_None, __pyx_int_0, __pyx_int_0};
+      __pyx_t_3 = __Pyx_PyFunction_FastCall(__pyx_t_6, __pyx_temp+1-__pyx_t_8, 5+__pyx_t_8); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 49, __pyx_L1_error)
+      __Pyx_XDECREF(__pyx_t_7); __pyx_t_7 = 0;
+      __Pyx_GOTREF(__pyx_t_3);
+    } else
+    #endif
+    #if CYTHON_FAST_PYCCALL
+    if (__Pyx_PyFastCFunction_Check(__pyx_t_6)) {
+      PyObject *__pyx_temp[6] = {__pyx_t_7, __pyx_v_m, Py_None, Py_None, __pyx_int_0, __pyx_int_0};
+      __pyx_t_3 = __Pyx_PyCFunction_FastCall(__pyx_t_6, __pyx_temp+1-__pyx_t_8, 5+__pyx_t_8); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 49, __pyx_L1_error)
+      __Pyx_XDECREF(__pyx_t_7); __pyx_t_7 = 0;
+      __Pyx_GOTREF(__pyx_t_3);
+    } else
+    #endif
+    {
+      __pyx_t_9 = PyTuple_New(5+__pyx_t_8); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 49, __pyx_L1_error)
+      __Pyx_GOTREF(__pyx_t_9);
+      if (__pyx_t_7) {
+        __Pyx_GIVEREF(__pyx_t_7); PyTuple_SET_ITEM(__pyx_t_9, 0, __pyx_t_7); __pyx_t_7 = NULL;
+      }
+      __Pyx_INCREF(__pyx_v_m);
+      __Pyx_GIVEREF(__pyx_v_m);
+      PyTuple_SET_ITEM(__pyx_t_9, 0+__pyx_t_8, __pyx_v_m);
+      __Pyx_INCREF(Py_None);
+      __Pyx_GIVEREF(Py_None);
+      PyTuple_SET_ITEM(__pyx_t_9, 1+__pyx_t_8, Py_None);
+      __Pyx_INCREF(Py_None);
+      __Pyx_GIVEREF(Py_None);
+      PyTuple_SET_ITEM(__pyx_t_9, 2+__pyx_t_8, Py_None);
+      __Pyx_INCREF(__pyx_int_0);
+      __Pyx_GIVEREF(__pyx_int_0);
+      PyTuple_SET_ITEM(__pyx_t_9, 3+__pyx_t_8, __pyx_int_0);
+      __Pyx_INCREF(__pyx_int_0);
+      __Pyx_GIVEREF(__pyx_int_0);
+      PyTuple_SET_ITEM(__pyx_t_9, 4+__pyx_t_8, __pyx_int_0);
+      __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_6, __pyx_t_9, NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 49, __pyx_L1_error)
+      __Pyx_GOTREF(__pyx_t_3);
+      __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
+    }
+    __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
+    __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_to_dict); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 49, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_6);
+    __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+    __pyx_t_3 = NULL;
+    if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_6))) {
+      __pyx_t_3 = PyMethod_GET_SELF(__pyx_t_6);
+      if (likely(__pyx_t_3)) {
+        PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_6);
+        __Pyx_INCREF(__pyx_t_3);
+        __Pyx_INCREF(function);
+        __Pyx_DECREF_SET(__pyx_t_6, function);
+      }
+    }
+    __pyx_t_1 = (__pyx_t_3) ? __Pyx_PyObject_CallOneArg(__pyx_t_6, __pyx_t_3) : __Pyx_PyObject_CallNoArg(__pyx_t_6);
+    __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
+    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 49, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_1);
+    __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
+    __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+
+    /* "pluginscript_api/api.pyx":48
+ *     print("classes_found:", classes)
+ * #    PyUnicode_FromWideChar(c_string,-1)
+ *     for m in methods:             # <<<<<<<<<<<<<<
+ *         MethodDescription(m, None,None, 0, 0).to_dict()
+ *     #Dictionary()
+ */
+  }
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+
+  /* "pluginscript_api/api.pyx":52
+ *     #Dictionary()
+ * 
  *     print("\n################################return_manifest########################################################\n");             # <<<<<<<<<<<<<<
  *     return manifest;
  * 
  */
-  __pyx_t_2 = __Pyx_PyObject_Call(__pyx_builtin_print, __pyx_tuple__7, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 42, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_Call(__pyx_builtin_print, __pyx_tuple__7, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 52, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "pluginscript_api/api.pyx":43
- *     #print(PyUnicode_FromWideChar(api_core.godot_string_wide_str(p_path),-1))
+  /* "pluginscript_api/api.pyx":53
+ * 
  *     print("\n################################return_manifest########################################################\n");
  *     return manifest;             # <<<<<<<<<<<<<<
  * 
@@ -1561,7 +1988,7 @@ static godot_pluginscript_script_manifest __pyx_f_16pluginscript_api_3api_init_p
   __pyx_r = __pyx_v_manifest;
   goto __pyx_L0;
 
-  /* "pluginscript_api/api.pyx":20
+  /* "pluginscript_api/api.pyx":25
  * 
  * ###############################################pluginscript_desc#######################################################
  * cdef api  godot_pluginscript_script_manifest init_pluginscript_desc (godot_pluginscript_language_data *p_data, const godot_string *p_path, const godot_string *p_source, godot_error *r_error):             # <<<<<<<<<<<<<<
@@ -1573,14 +2000,19 @@ static godot_pluginscript_script_manifest __pyx_f_16pluginscript_api_3api_init_p
   __pyx_L1_error:;
   __Pyx_XDECREF(__pyx_t_1);
   __Pyx_XDECREF(__pyx_t_2);
+  __Pyx_XDECREF(__pyx_t_3);
+  __Pyx_XDECREF(__pyx_t_6);
+  __Pyx_XDECREF(__pyx_t_7);
+  __Pyx_XDECREF(__pyx_t_9);
   __Pyx_WriteUnraisable("pluginscript_api.api.init_pluginscript_desc", __pyx_clineno, __pyx_lineno, __pyx_filename, 1, 0);
   __Pyx_pretend_to_initialize(&__pyx_r);
   __pyx_L0:;
+  __Pyx_XDECREF(__pyx_v_m);
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-/* "pluginscript_api/api.pyx":45
+/* "pluginscript_api/api.pyx":55
  *     return manifest;
  * 
  * cdef api  void finish_pluginscript_desc (godot_pluginscript_script_data *p_data):             # <<<<<<<<<<<<<<
@@ -1596,18 +2028,18 @@ static void __pyx_f_16pluginscript_api_3api_finish_pluginscript_desc(CYTHON_UNUS
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("finish_pluginscript_desc", 0);
 
-  /* "pluginscript_api/api.pyx":46
+  /* "pluginscript_api/api.pyx":56
  * 
  * cdef api  void finish_pluginscript_desc (godot_pluginscript_script_data *p_data):
  *     print("finish_desc\n");             # <<<<<<<<<<<<<<
  * 
  * 
  */
-  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_print, __pyx_tuple__8, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 46, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_print, __pyx_tuple__8, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 56, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "pluginscript_api/api.pyx":45
+  /* "pluginscript_api/api.pyx":55
  *     return manifest;
  * 
  * cdef api  void finish_pluginscript_desc (godot_pluginscript_script_data *p_data):             # <<<<<<<<<<<<<<
@@ -1624,7 +2056,7 @@ static void __pyx_f_16pluginscript_api_3api_finish_pluginscript_desc(CYTHON_UNUS
   __Pyx_RefNannyFinishContext();
 }
 
-/* "pluginscript_api/api.pyx":51
+/* "pluginscript_api/api.pyx":61
  * 
  * ###############################################pluginscript_instance#######################################################
  * cdef api void init_pluginscript_instance(godot_pluginscript_script_data *p_data, godot_object *p_owner):             # <<<<<<<<<<<<<<
@@ -1640,18 +2072,18 @@ static void __pyx_f_16pluginscript_api_3api_init_pluginscript_instance(CYTHON_UN
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("init_pluginscript_instance", 0);
 
-  /* "pluginscript_api/api.pyx":52
+  /* "pluginscript_api/api.pyx":62
  * ###############################################pluginscript_instance#######################################################
  * cdef api void init_pluginscript_instance(godot_pluginscript_script_data *p_data, godot_object *p_owner):
  *     print("\n####################################################################instance_init########################\n");             # <<<<<<<<<<<<<<
  * 
  * cdef api void finish_pluginscript_instance(godot_pluginscript_instance_data *p_data):
  */
-  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_print, __pyx_tuple__9, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 52, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_print, __pyx_tuple__9, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 62, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "pluginscript_api/api.pyx":51
+  /* "pluginscript_api/api.pyx":61
  * 
  * ###############################################pluginscript_instance#######################################################
  * cdef api void init_pluginscript_instance(godot_pluginscript_script_data *p_data, godot_object *p_owner):             # <<<<<<<<<<<<<<
@@ -1668,7 +2100,7 @@ static void __pyx_f_16pluginscript_api_3api_init_pluginscript_instance(CYTHON_UN
   __Pyx_RefNannyFinishContext();
 }
 
-/* "pluginscript_api/api.pyx":54
+/* "pluginscript_api/api.pyx":64
  *     print("\n####################################################################instance_init########################\n");
  * 
  * cdef api void finish_pluginscript_instance(godot_pluginscript_instance_data *p_data):             # <<<<<<<<<<<<<<
@@ -1684,18 +2116,18 @@ static void __pyx_f_16pluginscript_api_3api_finish_pluginscript_instance(CYTHON_
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("finish_pluginscript_instance", 0);
 
-  /* "pluginscript_api/api.pyx":55
+  /* "pluginscript_api/api.pyx":65
  * 
  * cdef api void finish_pluginscript_instance(godot_pluginscript_instance_data *p_data):
  *     print("instance_finish\n");             # <<<<<<<<<<<<<<
  * 
  * cdef api bool set_prop_pluginscript_instance(godot_pluginscript_instance_data *p_data, const godot_string *p_name, const godot_variant *p_value):
  */
-  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_print, __pyx_tuple__10, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 55, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_print, __pyx_tuple__10, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 65, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "pluginscript_api/api.pyx":54
+  /* "pluginscript_api/api.pyx":64
  *     print("\n####################################################################instance_init########################\n");
  * 
  * cdef api void finish_pluginscript_instance(godot_pluginscript_instance_data *p_data):             # <<<<<<<<<<<<<<
@@ -1712,7 +2144,7 @@ static void __pyx_f_16pluginscript_api_3api_finish_pluginscript_instance(CYTHON_
   __Pyx_RefNannyFinishContext();
 }
 
-/* "pluginscript_api/api.pyx":57
+/* "pluginscript_api/api.pyx":67
  *     print("instance_finish\n");
  * 
  * cdef api bool set_prop_pluginscript_instance(godot_pluginscript_instance_data *p_data, const godot_string *p_name, const godot_variant *p_value):             # <<<<<<<<<<<<<<
@@ -1729,18 +2161,18 @@ static bool __pyx_f_16pluginscript_api_3api_set_prop_pluginscript_instance(CYTHO
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("set_prop_pluginscript_instance", 0);
 
-  /* "pluginscript_api/api.pyx":58
+  /* "pluginscript_api/api.pyx":68
  * 
  * cdef api bool set_prop_pluginscript_instance(godot_pluginscript_instance_data *p_data, const godot_string *p_name, const godot_variant *p_value):
  *     print("\n#########################################################set_prop#######################################\n");             # <<<<<<<<<<<<<<
  *     return False;
  * 
  */
-  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_print, __pyx_tuple__11, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 58, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_print, __pyx_tuple__11, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 68, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "pluginscript_api/api.pyx":59
+  /* "pluginscript_api/api.pyx":69
  * cdef api bool set_prop_pluginscript_instance(godot_pluginscript_instance_data *p_data, const godot_string *p_name, const godot_variant *p_value):
  *     print("\n#########################################################set_prop#######################################\n");
  *     return False;             # <<<<<<<<<<<<<<
@@ -1750,7 +2182,7 @@ static bool __pyx_f_16pluginscript_api_3api_set_prop_pluginscript_instance(CYTHO
   __pyx_r = 0;
   goto __pyx_L0;
 
-  /* "pluginscript_api/api.pyx":57
+  /* "pluginscript_api/api.pyx":67
  *     print("instance_finish\n");
  * 
  * cdef api bool set_prop_pluginscript_instance(godot_pluginscript_instance_data *p_data, const godot_string *p_name, const godot_variant *p_value):             # <<<<<<<<<<<<<<
@@ -1768,7 +2200,7 @@ static bool __pyx_f_16pluginscript_api_3api_set_prop_pluginscript_instance(CYTHO
   return __pyx_r;
 }
 
-/* "pluginscript_api/api.pyx":61
+/* "pluginscript_api/api.pyx":71
  *     return False;
  * 
  * cdef api bool get_prop_pluginscript_instance(godot_pluginscript_instance_data *p_data, const godot_string *p_name, godot_variant *r_ret):             # <<<<<<<<<<<<<<
@@ -1785,18 +2217,18 @@ static bool __pyx_f_16pluginscript_api_3api_get_prop_pluginscript_instance(CYTHO
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("get_prop_pluginscript_instance", 0);
 
-  /* "pluginscript_api/api.pyx":62
+  /* "pluginscript_api/api.pyx":72
  * 
  * cdef api bool get_prop_pluginscript_instance(godot_pluginscript_instance_data *p_data, const godot_string *p_name, godot_variant *r_ret):
  *     print("\n###################################################get_prop########################################\n");             # <<<<<<<<<<<<<<
  *     return False;
  * 
  */
-  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_print, __pyx_tuple__12, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 62, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_print, __pyx_tuple__12, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 72, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "pluginscript_api/api.pyx":63
+  /* "pluginscript_api/api.pyx":73
  * cdef api bool get_prop_pluginscript_instance(godot_pluginscript_instance_data *p_data, const godot_string *p_name, godot_variant *r_ret):
  *     print("\n###################################################get_prop########################################\n");
  *     return False;             # <<<<<<<<<<<<<<
@@ -1806,7 +2238,7 @@ static bool __pyx_f_16pluginscript_api_3api_get_prop_pluginscript_instance(CYTHO
   __pyx_r = 0;
   goto __pyx_L0;
 
-  /* "pluginscript_api/api.pyx":61
+  /* "pluginscript_api/api.pyx":71
  *     return False;
  * 
  * cdef api bool get_prop_pluginscript_instance(godot_pluginscript_instance_data *p_data, const godot_string *p_name, godot_variant *r_ret):             # <<<<<<<<<<<<<<
@@ -1824,7 +2256,7 @@ static bool __pyx_f_16pluginscript_api_3api_get_prop_pluginscript_instance(CYTHO
   return __pyx_r;
 }
 
-/* "pluginscript_api/api.pyx":65
+/* "pluginscript_api/api.pyx":75
  *     return False;
  * 
  * cdef api void call_method_pluginscript_instance(godot_pluginscript_instance_data *p_data,const godot_string_name *p_method, const godot_variant **p_args,int p_argcount, godot_variant_call_error *r_error):             # <<<<<<<<<<<<<<
@@ -1840,18 +2272,18 @@ static void __pyx_f_16pluginscript_api_3api_call_method_pluginscript_instance(CY
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("call_method_pluginscript_instance", 0);
 
-  /* "pluginscript_api/api.pyx":66
+  /* "pluginscript_api/api.pyx":76
  * 
  * cdef api void call_method_pluginscript_instance(godot_pluginscript_instance_data *p_data,const godot_string_name *p_method, const godot_variant **p_args,int p_argcount, godot_variant_call_error *r_error):
  *     print("\n#################################################call_method#############################################");             # <<<<<<<<<<<<<<
  * 
  * cdef api void notification_pluginscript_instance(godot_pluginscript_instance_data *p_data, int p_notification):
  */
-  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_print, __pyx_tuple__13, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 66, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_print, __pyx_tuple__13, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 76, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "pluginscript_api/api.pyx":65
+  /* "pluginscript_api/api.pyx":75
  *     return False;
  * 
  * cdef api void call_method_pluginscript_instance(godot_pluginscript_instance_data *p_data,const godot_string_name *p_method, const godot_variant **p_args,int p_argcount, godot_variant_call_error *r_error):             # <<<<<<<<<<<<<<
@@ -1868,7 +2300,7 @@ static void __pyx_f_16pluginscript_api_3api_call_method_pluginscript_instance(CY
   __Pyx_RefNannyFinishContext();
 }
 
-/* "pluginscript_api/api.pyx":68
+/* "pluginscript_api/api.pyx":78
  *     print("\n#################################################call_method#############################################");
  * 
  * cdef api void notification_pluginscript_instance(godot_pluginscript_instance_data *p_data, int p_notification):             # <<<<<<<<<<<<<<
@@ -1884,18 +2316,18 @@ static void __pyx_f_16pluginscript_api_3api_notification_pluginscript_instance(C
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("notification_pluginscript_instance", 0);
 
-  /* "pluginscript_api/api.pyx":69
+  /* "pluginscript_api/api.pyx":79
  * 
  * cdef api void notification_pluginscript_instance(godot_pluginscript_instance_data *p_data, int p_notification):
  *     print("\n#####################################################notification_instance###############################");             # <<<<<<<<<<<<<<
  * 
  * 
  */
-  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_print, __pyx_tuple__14, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 69, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_print, __pyx_tuple__14, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 79, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "pluginscript_api/api.pyx":68
+  /* "pluginscript_api/api.pyx":78
  *     print("\n#################################################call_method#############################################");
  * 
  * cdef api void notification_pluginscript_instance(godot_pluginscript_instance_data *p_data, int p_notification):             # <<<<<<<<<<<<<<
@@ -1912,32 +2344,32 @@ static void __pyx_f_16pluginscript_api_3api_notification_pluginscript_instance(C
   __Pyx_RefNannyFinishContext();
 }
 
-/* "pluginscript_api/api.pyx":73
+/* "pluginscript_api/api.pyx":83
  * 
  * 
- * cdef unicode get_from_w_string(const godot_string* string):             # <<<<<<<<<<<<<<
+ * cdef unicode get_python_string_from_w_string(const godot_string* string):             # <<<<<<<<<<<<<<
  *     cdef const wchar_t* c_string = api_core.godot_string_wide_str(string)
  *     return <unicode>PyUnicode_FromWideChar(c_string,-1)
  */
 
-static PyObject *__pyx_f_16pluginscript_api_3api_get_from_w_string(godot_string const *__pyx_v_string) {
+static PyObject *__pyx_f_16pluginscript_api_3api_get_python_string_from_w_string(godot_string const *__pyx_v_string) {
   wchar_t const *__pyx_v_c_string;
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   PyObject *__pyx_t_1;
-  __Pyx_RefNannySetupContext("get_from_w_string", 0);
+  __Pyx_RefNannySetupContext("get_python_string_from_w_string", 0);
 
-  /* "pluginscript_api/api.pyx":74
+  /* "pluginscript_api/api.pyx":84
  * 
- * cdef unicode get_from_w_string(const godot_string* string):
+ * cdef unicode get_python_string_from_w_string(const godot_string* string):
  *     cdef const wchar_t* c_string = api_core.godot_string_wide_str(string)             # <<<<<<<<<<<<<<
  *     return <unicode>PyUnicode_FromWideChar(c_string,-1)
  * 
  */
   __pyx_v_c_string = api_core->godot_string_wide_str(__pyx_v_string);
 
-  /* "pluginscript_api/api.pyx":75
- * cdef unicode get_from_w_string(const godot_string* string):
+  /* "pluginscript_api/api.pyx":85
+ * cdef unicode get_python_string_from_w_string(const godot_string* string):
  *     cdef const wchar_t* c_string = api_core.godot_string_wide_str(string)
  *     return <unicode>PyUnicode_FromWideChar(c_string,-1)             # <<<<<<<<<<<<<<
  * 
@@ -1949,10 +2381,10 @@ static PyObject *__pyx_f_16pluginscript_api_3api_get_from_w_string(godot_string 
   __pyx_r = ((PyObject*)__pyx_t_1);
   goto __pyx_L0;
 
-  /* "pluginscript_api/api.pyx":73
+  /* "pluginscript_api/api.pyx":83
  * 
  * 
- * cdef unicode get_from_w_string(const godot_string* string):             # <<<<<<<<<<<<<<
+ * cdef unicode get_python_string_from_w_string(const godot_string* string):             # <<<<<<<<<<<<<<
  *     cdef const wchar_t* c_string = api_core.godot_string_wide_str(string)
  *     return <unicode>PyUnicode_FromWideChar(c_string,-1)
  */
@@ -1964,9 +2396,737 @@ static PyObject *__pyx_f_16pluginscript_api_3api_get_from_w_string(godot_string 
   return __pyx_r;
 }
 
+/* "carray.from_py":77
+ * 
+ * @cname("__Pyx_carray_from_py_uint8_t")
+ * cdef int __Pyx_carray_from_py_uint8_t(object o, base_type *v, Py_ssize_t length) except -1:             # <<<<<<<<<<<<<<
+ *     cdef Py_ssize_t i = length
+ *     try:
+ */
+
+static int __Pyx_carray_from_py_uint8_t(PyObject *__pyx_v_o, uint8_t *__pyx_v_v, Py_ssize_t __pyx_v_length) {
+  Py_ssize_t __pyx_v_i;
+  PyObject *__pyx_v_item = NULL;
+  int __pyx_r;
+  __Pyx_RefNannyDeclarations
+  PyObject *__pyx_t_1 = NULL;
+  PyObject *__pyx_t_2 = NULL;
+  PyObject *__pyx_t_3 = NULL;
+  Py_ssize_t __pyx_t_4;
+  int __pyx_t_5;
+  int __pyx_t_6;
+  PyObject *__pyx_t_7 = NULL;
+  Py_ssize_t __pyx_t_8;
+  PyObject *(*__pyx_t_9)(PyObject *);
+  PyObject *__pyx_t_10 = NULL;
+  uint8_t __pyx_t_11;
+  char const *__pyx_t_12;
+  int __pyx_lineno = 0;
+  const char *__pyx_filename = NULL;
+  int __pyx_clineno = 0;
+  __Pyx_RefNannySetupContext("__Pyx_carray_from_py_uint8_t", 0);
+
+  /* "carray.from_py":78
+ * @cname("__Pyx_carray_from_py_uint8_t")
+ * cdef int __Pyx_carray_from_py_uint8_t(object o, base_type *v, Py_ssize_t length) except -1:
+ *     cdef Py_ssize_t i = length             # <<<<<<<<<<<<<<
+ *     try:
+ *         i = len(o)
+ */
+  __pyx_v_i = __pyx_v_length;
+
+  /* "carray.from_py":79
+ * cdef int __Pyx_carray_from_py_uint8_t(object o, base_type *v, Py_ssize_t length) except -1:
+ *     cdef Py_ssize_t i = length
+ *     try:             # <<<<<<<<<<<<<<
+ *         i = len(o)
+ *     except (TypeError, OverflowError):
+ */
+  {
+    __Pyx_PyThreadState_declare
+    __Pyx_PyThreadState_assign
+    __Pyx_ExceptionSave(&__pyx_t_1, &__pyx_t_2, &__pyx_t_3);
+    __Pyx_XGOTREF(__pyx_t_1);
+    __Pyx_XGOTREF(__pyx_t_2);
+    __Pyx_XGOTREF(__pyx_t_3);
+    /*try:*/ {
+
+      /* "carray.from_py":80
+ *     cdef Py_ssize_t i = length
+ *     try:
+ *         i = len(o)             # <<<<<<<<<<<<<<
+ *     except (TypeError, OverflowError):
+ *         pass
+ */
+      __pyx_t_4 = PyObject_Length(__pyx_v_o); if (unlikely(__pyx_t_4 == ((Py_ssize_t)-1))) __PYX_ERR(1, 80, __pyx_L3_error)
+      __pyx_v_i = __pyx_t_4;
+
+      /* "carray.from_py":79
+ * cdef int __Pyx_carray_from_py_uint8_t(object o, base_type *v, Py_ssize_t length) except -1:
+ *     cdef Py_ssize_t i = length
+ *     try:             # <<<<<<<<<<<<<<
+ *         i = len(o)
+ *     except (TypeError, OverflowError):
+ */
+    }
+    __Pyx_XDECREF(__pyx_t_1); __pyx_t_1 = 0;
+    __Pyx_XDECREF(__pyx_t_2); __pyx_t_2 = 0;
+    __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
+    goto __pyx_L8_try_end;
+    __pyx_L3_error:;
+
+    /* "carray.from_py":81
+ *     try:
+ *         i = len(o)
+ *     except (TypeError, OverflowError):             # <<<<<<<<<<<<<<
+ *         pass
+ *     if i == length:
+ */
+    __pyx_t_5 = __Pyx_PyErr_ExceptionMatches(__pyx_builtin_TypeError) || __Pyx_PyErr_ExceptionMatches(__pyx_builtin_OverflowError);
+    if (__pyx_t_5) {
+      __Pyx_ErrRestore(0,0,0);
+      goto __pyx_L4_exception_handled;
+    }
+    goto __pyx_L5_except_error;
+    __pyx_L5_except_error:;
+
+    /* "carray.from_py":79
+ * cdef int __Pyx_carray_from_py_uint8_t(object o, base_type *v, Py_ssize_t length) except -1:
+ *     cdef Py_ssize_t i = length
+ *     try:             # <<<<<<<<<<<<<<
+ *         i = len(o)
+ *     except (TypeError, OverflowError):
+ */
+    __Pyx_XGIVEREF(__pyx_t_1);
+    __Pyx_XGIVEREF(__pyx_t_2);
+    __Pyx_XGIVEREF(__pyx_t_3);
+    __Pyx_ExceptionReset(__pyx_t_1, __pyx_t_2, __pyx_t_3);
+    goto __pyx_L1_error;
+    __pyx_L4_exception_handled:;
+    __Pyx_XGIVEREF(__pyx_t_1);
+    __Pyx_XGIVEREF(__pyx_t_2);
+    __Pyx_XGIVEREF(__pyx_t_3);
+    __Pyx_ExceptionReset(__pyx_t_1, __pyx_t_2, __pyx_t_3);
+    __pyx_L8_try_end:;
+  }
+
+  /* "carray.from_py":83
+ *     except (TypeError, OverflowError):
+ *         pass
+ *     if i == length:             # <<<<<<<<<<<<<<
+ *         for i, item in enumerate(o):
+ *             if i >= length:
+ */
+  __pyx_t_6 = ((__pyx_v_i == __pyx_v_length) != 0);
+  if (__pyx_t_6) {
+
+    /* "carray.from_py":84
+ *         pass
+ *     if i == length:
+ *         for i, item in enumerate(o):             # <<<<<<<<<<<<<<
+ *             if i >= length:
+ *                 break
+ */
+    __pyx_t_4 = 0;
+    if (likely(PyList_CheckExact(__pyx_v_o)) || PyTuple_CheckExact(__pyx_v_o)) {
+      __pyx_t_7 = __pyx_v_o; __Pyx_INCREF(__pyx_t_7); __pyx_t_8 = 0;
+      __pyx_t_9 = NULL;
+    } else {
+      __pyx_t_8 = -1; __pyx_t_7 = PyObject_GetIter(__pyx_v_o); if (unlikely(!__pyx_t_7)) __PYX_ERR(1, 84, __pyx_L1_error)
+      __Pyx_GOTREF(__pyx_t_7);
+      __pyx_t_9 = Py_TYPE(__pyx_t_7)->tp_iternext; if (unlikely(!__pyx_t_9)) __PYX_ERR(1, 84, __pyx_L1_error)
+    }
+    for (;;) {
+      if (likely(!__pyx_t_9)) {
+        if (likely(PyList_CheckExact(__pyx_t_7))) {
+          if (__pyx_t_8 >= PyList_GET_SIZE(__pyx_t_7)) break;
+          #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
+          __pyx_t_10 = PyList_GET_ITEM(__pyx_t_7, __pyx_t_8); __Pyx_INCREF(__pyx_t_10); __pyx_t_8++; if (unlikely(0 < 0)) __PYX_ERR(1, 84, __pyx_L1_error)
+          #else
+          __pyx_t_10 = PySequence_ITEM(__pyx_t_7, __pyx_t_8); __pyx_t_8++; if (unlikely(!__pyx_t_10)) __PYX_ERR(1, 84, __pyx_L1_error)
+          __Pyx_GOTREF(__pyx_t_10);
+          #endif
+        } else {
+          if (__pyx_t_8 >= PyTuple_GET_SIZE(__pyx_t_7)) break;
+          #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
+          __pyx_t_10 = PyTuple_GET_ITEM(__pyx_t_7, __pyx_t_8); __Pyx_INCREF(__pyx_t_10); __pyx_t_8++; if (unlikely(0 < 0)) __PYX_ERR(1, 84, __pyx_L1_error)
+          #else
+          __pyx_t_10 = PySequence_ITEM(__pyx_t_7, __pyx_t_8); __pyx_t_8++; if (unlikely(!__pyx_t_10)) __PYX_ERR(1, 84, __pyx_L1_error)
+          __Pyx_GOTREF(__pyx_t_10);
+          #endif
+        }
+      } else {
+        __pyx_t_10 = __pyx_t_9(__pyx_t_7);
+        if (unlikely(!__pyx_t_10)) {
+          PyObject* exc_type = PyErr_Occurred();
+          if (exc_type) {
+            if (likely(__Pyx_PyErr_GivenExceptionMatches(exc_type, PyExc_StopIteration))) PyErr_Clear();
+            else __PYX_ERR(1, 84, __pyx_L1_error)
+          }
+          break;
+        }
+        __Pyx_GOTREF(__pyx_t_10);
+      }
+      __Pyx_XDECREF_SET(__pyx_v_item, __pyx_t_10);
+      __pyx_t_10 = 0;
+      __pyx_v_i = __pyx_t_4;
+      __pyx_t_4 = (__pyx_t_4 + 1);
+
+      /* "carray.from_py":85
+ *     if i == length:
+ *         for i, item in enumerate(o):
+ *             if i >= length:             # <<<<<<<<<<<<<<
+ *                 break
+ *             v[i] = item
+ */
+      __pyx_t_6 = ((__pyx_v_i >= __pyx_v_length) != 0);
+      if (__pyx_t_6) {
+
+        /* "carray.from_py":86
+ *         for i, item in enumerate(o):
+ *             if i >= length:
+ *                 break             # <<<<<<<<<<<<<<
+ *             v[i] = item
+ *         else:
+ */
+        goto __pyx_L11_break;
+
+        /* "carray.from_py":85
+ *     if i == length:
+ *         for i, item in enumerate(o):
+ *             if i >= length:             # <<<<<<<<<<<<<<
+ *                 break
+ *             v[i] = item
+ */
+      }
+
+      /* "carray.from_py":87
+ *             if i >= length:
+ *                 break
+ *             v[i] = item             # <<<<<<<<<<<<<<
+ *         else:
+ *             i += 1  # convert index to length
+ */
+      __pyx_t_11 = __Pyx_PyInt_As_uint8_t(__pyx_v_item); if (unlikely((__pyx_t_11 == ((uint8_t)-1)) && PyErr_Occurred())) __PYX_ERR(1, 87, __pyx_L1_error)
+      (__pyx_v_v[__pyx_v_i]) = __pyx_t_11;
+
+      /* "carray.from_py":84
+ *         pass
+ *     if i == length:
+ *         for i, item in enumerate(o):             # <<<<<<<<<<<<<<
+ *             if i >= length:
+ *                 break
+ */
+    }
+    /*else*/ {
+
+      /* "carray.from_py":89
+ *             v[i] = item
+ *         else:
+ *             i += 1  # convert index to length             # <<<<<<<<<<<<<<
+ *             if i == length:
+ *                 return 0
+ */
+      __pyx_v_i = (__pyx_v_i + 1);
+
+      /* "carray.from_py":90
+ *         else:
+ *             i += 1  # convert index to length
+ *             if i == length:             # <<<<<<<<<<<<<<
+ *                 return 0
+ * 
+ */
+      __pyx_t_6 = ((__pyx_v_i == __pyx_v_length) != 0);
+      if (__pyx_t_6) {
+
+        /* "carray.from_py":91
+ *             i += 1  # convert index to length
+ *             if i == length:
+ *                 return 0             # <<<<<<<<<<<<<<
+ * 
+ *     PyErr_Format(
+ */
+        __pyx_r = 0;
+        __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
+        goto __pyx_L0;
+
+        /* "carray.from_py":90
+ *         else:
+ *             i += 1  # convert index to length
+ *             if i == length:             # <<<<<<<<<<<<<<
+ *                 return 0
+ * 
+ */
+      }
+    }
+
+    /* "carray.from_py":84
+ *         pass
+ *     if i == length:
+ *         for i, item in enumerate(o):             # <<<<<<<<<<<<<<
+ *             if i >= length:
+ *                 break
+ */
+    __pyx_L11_break:;
+    __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
+
+    /* "carray.from_py":83
+ *     except (TypeError, OverflowError):
+ *         pass
+ *     if i == length:             # <<<<<<<<<<<<<<
+ *         for i, item in enumerate(o):
+ *             if i >= length:
+ */
+  }
+
+  /* "carray.from_py":96
+ *         IndexError,
+ *         ("too many values found during array assignment, expected %zd"
+ *          if i >= length else             # <<<<<<<<<<<<<<
+ *          "not enough values found during array assignment, expected %zd, got %zd"),
+ *         length, i)
+ */
+  if (((__pyx_v_i >= __pyx_v_length) != 0)) {
+    __pyx_t_12 = ((char const *)"too many values found during array assignment, expected %zd");
+  } else {
+    __pyx_t_12 = ((char const *)"not enough values found during array assignment, expected %zd, got %zd");
+  }
+
+  /* "carray.from_py":93
+ *                 return 0
+ * 
+ *     PyErr_Format(             # <<<<<<<<<<<<<<
+ *         IndexError,
+ *         ("too many values found during array assignment, expected %zd"
+ */
+  __pyx_t_7 = PyErr_Format(__pyx_builtin_IndexError, __pyx_t_12, __pyx_v_length, __pyx_v_i); if (unlikely(!__pyx_t_7)) __PYX_ERR(1, 93, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_7);
+  __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
+
+  /* "carray.from_py":77
+ * 
+ * @cname("__Pyx_carray_from_py_uint8_t")
+ * cdef int __Pyx_carray_from_py_uint8_t(object o, base_type *v, Py_ssize_t length) except -1:             # <<<<<<<<<<<<<<
+ *     cdef Py_ssize_t i = length
+ *     try:
+ */
+
+  /* function exit code */
+  __pyx_r = 0;
+  goto __pyx_L0;
+  __pyx_L1_error:;
+  __Pyx_XDECREF(__pyx_t_7);
+  __Pyx_XDECREF(__pyx_t_10);
+  __Pyx_AddTraceback("carray.from_py.__Pyx_carray_from_py_uint8_t", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __pyx_r = -1;
+  __pyx_L0:;
+  __Pyx_XDECREF(__pyx_v_item);
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+/* "FromPyStructUtility":11
+ * 
+ * @cname("__pyx_convert__from_py_godot_dictionary")
+ * cdef struct_type __pyx_convert__from_py_godot_dictionary(obj) except *:             # <<<<<<<<<<<<<<
+ *     cdef struct_type result
+ *     if not PyMapping_Check(obj):
+ */
+
+static godot_dictionary __pyx_convert__from_py_godot_dictionary(PyObject *__pyx_v_obj) {
+  godot_dictionary __pyx_v_result;
+  PyObject *__pyx_v_value = NULL;
+  godot_dictionary __pyx_r;
+  __Pyx_RefNannyDeclarations
+  int __pyx_t_1;
+  PyObject *__pyx_t_2 = NULL;
+  PyObject *__pyx_t_3 = NULL;
+  PyObject *__pyx_t_4 = NULL;
+  PyObject *__pyx_t_5 = NULL;
+  int __pyx_t_6;
+  PyObject *__pyx_t_7 = NULL;
+  PyObject *__pyx_t_8 = NULL;
+  PyObject *__pyx_t_9 = NULL;
+  uint8_t __pyx_t_10[1];
+  int __pyx_lineno = 0;
+  const char *__pyx_filename = NULL;
+  int __pyx_clineno = 0;
+  __Pyx_RefNannySetupContext("__pyx_convert__from_py_godot_dictionary", 0);
+
+  /* "FromPyStructUtility":13
+ * cdef struct_type __pyx_convert__from_py_godot_dictionary(obj) except *:
+ *     cdef struct_type result
+ *     if not PyMapping_Check(obj):             # <<<<<<<<<<<<<<
+ *         PyErr_Format(TypeError, b"Expected %.16s, got %.200s", b"a mapping", Py_TYPE(obj).tp_name)
+ * 
+ */
+  __pyx_t_1 = ((!(PyMapping_Check(__pyx_v_obj) != 0)) != 0);
+  if (__pyx_t_1) {
+
+    /* "FromPyStructUtility":14
+ *     cdef struct_type result
+ *     if not PyMapping_Check(obj):
+ *         PyErr_Format(TypeError, b"Expected %.16s, got %.200s", b"a mapping", Py_TYPE(obj).tp_name)             # <<<<<<<<<<<<<<
+ * 
+ *     try:
+ */
+    __pyx_t_2 = PyErr_Format(__pyx_builtin_TypeError, ((char const *)"Expected %.16s, got %.200s"), ((char *)"a mapping"), Py_TYPE(__pyx_v_obj)->tp_name); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 14, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_2);
+    __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+
+    /* "FromPyStructUtility":13
+ * cdef struct_type __pyx_convert__from_py_godot_dictionary(obj) except *:
+ *     cdef struct_type result
+ *     if not PyMapping_Check(obj):             # <<<<<<<<<<<<<<
+ *         PyErr_Format(TypeError, b"Expected %.16s, got %.200s", b"a mapping", Py_TYPE(obj).tp_name)
+ * 
+ */
+  }
+
+  /* "FromPyStructUtility":16
+ *         PyErr_Format(TypeError, b"Expected %.16s, got %.200s", b"a mapping", Py_TYPE(obj).tp_name)
+ * 
+ *     try:             # <<<<<<<<<<<<<<
+ *         value = obj['_dont_touch_that']
+ *     except KeyError:
+ */
+  {
+    __Pyx_PyThreadState_declare
+    __Pyx_PyThreadState_assign
+    __Pyx_ExceptionSave(&__pyx_t_3, &__pyx_t_4, &__pyx_t_5);
+    __Pyx_XGOTREF(__pyx_t_3);
+    __Pyx_XGOTREF(__pyx_t_4);
+    __Pyx_XGOTREF(__pyx_t_5);
+    /*try:*/ {
+
+      /* "FromPyStructUtility":17
+ * 
+ *     try:
+ *         value = obj['_dont_touch_that']             # <<<<<<<<<<<<<<
+ *     except KeyError:
+ *         raise ValueError("No value specified for struct attribute '_dont_touch_that'")
+ */
+      __pyx_t_2 = __Pyx_PyObject_Dict_GetItem(__pyx_v_obj, __pyx_n_s_dont_touch_that); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 17, __pyx_L4_error)
+      __Pyx_GOTREF(__pyx_t_2);
+      __pyx_v_value = __pyx_t_2;
+      __pyx_t_2 = 0;
+
+      /* "FromPyStructUtility":16
+ *         PyErr_Format(TypeError, b"Expected %.16s, got %.200s", b"a mapping", Py_TYPE(obj).tp_name)
+ * 
+ *     try:             # <<<<<<<<<<<<<<
+ *         value = obj['_dont_touch_that']
+ *     except KeyError:
+ */
+    }
+    __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
+    __Pyx_XDECREF(__pyx_t_4); __pyx_t_4 = 0;
+    __Pyx_XDECREF(__pyx_t_5); __pyx_t_5 = 0;
+    goto __pyx_L9_try_end;
+    __pyx_L4_error:;
+    __Pyx_XDECREF(__pyx_t_2); __pyx_t_2 = 0;
+
+    /* "FromPyStructUtility":18
+ *     try:
+ *         value = obj['_dont_touch_that']
+ *     except KeyError:             # <<<<<<<<<<<<<<
+ *         raise ValueError("No value specified for struct attribute '_dont_touch_that'")
+ *     result._dont_touch_that = value
+ */
+    __pyx_t_6 = __Pyx_PyErr_ExceptionMatches(__pyx_builtin_KeyError);
+    if (__pyx_t_6) {
+      __Pyx_AddTraceback("FromPyStructUtility.__pyx_convert__from_py_godot_dictionary", __pyx_clineno, __pyx_lineno, __pyx_filename);
+      if (__Pyx_GetException(&__pyx_t_2, &__pyx_t_7, &__pyx_t_8) < 0) __PYX_ERR(1, 18, __pyx_L6_except_error)
+      __Pyx_GOTREF(__pyx_t_2);
+      __Pyx_GOTREF(__pyx_t_7);
+      __Pyx_GOTREF(__pyx_t_8);
+
+      /* "FromPyStructUtility":19
+ *         value = obj['_dont_touch_that']
+ *     except KeyError:
+ *         raise ValueError("No value specified for struct attribute '_dont_touch_that'")             # <<<<<<<<<<<<<<
+ *     result._dont_touch_that = value
+ *     return result
+ */
+      __pyx_t_9 = __Pyx_PyObject_Call(__pyx_builtin_ValueError, __pyx_tuple__15, NULL); if (unlikely(!__pyx_t_9)) __PYX_ERR(1, 19, __pyx_L6_except_error)
+      __Pyx_GOTREF(__pyx_t_9);
+      __Pyx_Raise(__pyx_t_9, 0, 0, 0);
+      __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
+      __PYX_ERR(1, 19, __pyx_L6_except_error)
+    }
+    goto __pyx_L6_except_error;
+    __pyx_L6_except_error:;
+
+    /* "FromPyStructUtility":16
+ *         PyErr_Format(TypeError, b"Expected %.16s, got %.200s", b"a mapping", Py_TYPE(obj).tp_name)
+ * 
+ *     try:             # <<<<<<<<<<<<<<
+ *         value = obj['_dont_touch_that']
+ *     except KeyError:
+ */
+    __Pyx_XGIVEREF(__pyx_t_3);
+    __Pyx_XGIVEREF(__pyx_t_4);
+    __Pyx_XGIVEREF(__pyx_t_5);
+    __Pyx_ExceptionReset(__pyx_t_3, __pyx_t_4, __pyx_t_5);
+    goto __pyx_L1_error;
+    __pyx_L9_try_end:;
+  }
+
+  /* "FromPyStructUtility":20
+ *     except KeyError:
+ *         raise ValueError("No value specified for struct attribute '_dont_touch_that'")
+ *     result._dont_touch_that = value             # <<<<<<<<<<<<<<
+ *     return result
+ * 
+ */
+  if (unlikely(__Pyx_carray_from_py_uint8_t(__pyx_v_value, __pyx_t_10, 1) < 0)) __PYX_ERR(1, 20, __pyx_L1_error)
+  memcpy(&(__pyx_v_result._dont_touch_that[0]), __pyx_t_10, sizeof(__pyx_v_result._dont_touch_that[0]) * (1));
+
+  /* "FromPyStructUtility":21
+ *         raise ValueError("No value specified for struct attribute '_dont_touch_that'")
+ *     result._dont_touch_that = value
+ *     return result             # <<<<<<<<<<<<<<
+ * 
+ * 
+ */
+  __pyx_r = __pyx_v_result;
+  goto __pyx_L0;
+
+  /* "FromPyStructUtility":11
+ * 
+ * @cname("__pyx_convert__from_py_godot_dictionary")
+ * cdef struct_type __pyx_convert__from_py_godot_dictionary(obj) except *:             # <<<<<<<<<<<<<<
+ *     cdef struct_type result
+ *     if not PyMapping_Check(obj):
+ */
+
+  /* function exit code */
+  __pyx_L1_error:;
+  __Pyx_XDECREF(__pyx_t_2);
+  __Pyx_XDECREF(__pyx_t_7);
+  __Pyx_XDECREF(__pyx_t_8);
+  __Pyx_XDECREF(__pyx_t_9);
+  __Pyx_AddTraceback("FromPyStructUtility.__pyx_convert__from_py_godot_dictionary", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_pretend_to_initialize(&__pyx_r);
+  __pyx_L0:;
+  __Pyx_XDECREF(__pyx_v_value);
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
 static PyMethodDef __pyx_methods[] = {
   {0, 0, 0, 0}
 };
+
+static int __pyx_import_star_set(PyObject *o, PyObject* py_name, char *name) {
+  static const char* internal_type_names[] = {
+    "PyObject",
+    "PyTypeObject",
+    "base_type",
+    "bool",
+    "godot_aabb",
+    "godot_array",
+    "godot_basis",
+    "godot_bool",
+    "godot_class_constructor",
+    "godot_color",
+    "godot_dictionary",
+    "godot_error",
+    "godot_gdnative_core_api_struct",
+    "godot_gdnative_ext_nativescript_1_1_api_struct",
+    "godot_gdnative_ext_nativescript_api_struct",
+    "godot_int",
+    "godot_method_bind",
+    "godot_node_path",
+    "godot_object",
+    "godot_plane",
+    "godot_pluginscript_instance_data",
+    "godot_pluginscript_language_data",
+    "godot_pluginscript_script_data",
+    "godot_pluginscript_script_manifest",
+    "godot_pool_byte_array",
+    "godot_pool_color_array",
+    "godot_pool_int_array",
+    "godot_pool_real_array",
+    "godot_pool_string_array",
+    "godot_pool_vector2_array",
+    "godot_pool_vector3_array",
+    "godot_quat",
+    "godot_real",
+    "godot_rect2",
+    "godot_rid",
+    "godot_string",
+    "godot_string_name",
+    "godot_transform",
+    "godot_transform2d",
+    "godot_variant",
+    "godot_variant_call_error",
+    "godot_variant_call_error_error",
+    "godot_variant_type",
+    "godot_vector2",
+    "godot_vector3",
+    "int16_t",
+    "int32_t",
+    "int64_t",
+    "int8_t",
+    "int_fast16_t",
+    "int_fast32_t",
+    "int_fast64_t",
+    "int_fast8_t",
+    "int_least16_t",
+    "int_least32_t",
+    "int_least64_t",
+    "int_least8_t",
+    "intmax_t",
+    "struct_type",
+    "uint16_t",
+    "uint32_t",
+    "uint64_t",
+    "uint8_t",
+    "uint_fast16_t",
+    "uint_fast32_t",
+    "uint_fast64_t",
+    "uint_fast8_t",
+    "uint_least16_t",
+    "uint_least32_t",
+    "uint_least64_t",
+    "uint_least8_t",
+    "uintmax_t",
+    "wchar_t",
+    0
+  };
+  const char** type_name = internal_type_names;
+  while (*type_name) {
+    if (__Pyx_StrEq(name, *type_name)) {
+      PyErr_Format(PyExc_TypeError, "Cannot overwrite C type %s", name);
+      goto bad;
+    }
+    type_name++;
+  }
+  if (0);
+  else if (__Pyx_StrEq(name, "api_core")) {
+    PyErr_Format(PyExc_TypeError, "Cannot convert Python object api_core to const godot_gdnative_core_api_struct *");
+    __PYX_ERR(2, 11, __pyx_L2_error)
+  }
+  else if (__Pyx_StrEq(name, "dictionary")) {
+    __pyx_v_16pluginscript_api_3api_dictionary = __pyx_convert__from_py_godot_dictionary(o); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 7, __pyx_L2_error)
+  }
+  else {
+    if (PyObject_SetAttr(__pyx_m, py_name, o) < 0) goto bad;
+  }
+  return 0;
+  __pyx_L2_error:;
+  __Pyx_AddTraceback("pluginscript_api.api", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  bad:
+  return -1;
+}
+
+static int
+__Pyx_import_all_from(PyObject *locals, PyObject *v)
+{
+    PyObject *all = PyObject_GetAttrString(v, "__all__");
+    PyObject *dict, *name, *value;
+    int skip_leading_underscores = 0;
+    int pos, err;
+    if (all == NULL) {
+        if (!PyErr_ExceptionMatches(PyExc_AttributeError))
+            return -1;
+        PyErr_Clear();
+        dict = PyObject_GetAttrString(v, "__dict__");
+        if (dict == NULL) {
+            if (!PyErr_ExceptionMatches(PyExc_AttributeError))
+                return -1;
+            PyErr_SetString(PyExc_ImportError,
+            "from-import-* object has no __dict__ and no __all__");
+            return -1;
+        }
+#if PY_MAJOR_VERSION < 3
+        all = PyObject_CallMethod(dict, (char *)"keys", NULL);
+#else
+        all = PyMapping_Keys(dict);
+#endif
+        Py_DECREF(dict);
+        if (all == NULL)
+            return -1;
+        skip_leading_underscores = 1;
+    }
+    for (pos = 0, err = 0; ; pos++) {
+        name = PySequence_GetItem(all, pos);
+        if (name == NULL) {
+            if (!PyErr_ExceptionMatches(PyExc_IndexError))
+                err = -1;
+            else
+                PyErr_Clear();
+            break;
+        }
+        if (skip_leading_underscores &&
+#if PY_MAJOR_VERSION < 3
+            likely(PyString_Check(name)) &&
+            PyString_AS_STRING(name)[0] == '_')
+#else
+            likely(PyUnicode_Check(name)) &&
+            likely(__Pyx_PyUnicode_GET_LENGTH(name)) &&
+            __Pyx_PyUnicode_READ_CHAR(name, 0) == '_')
+#endif
+        {
+            Py_DECREF(name);
+            continue;
+        }
+        value = PyObject_GetAttr(v, name);
+        if (value == NULL)
+            err = -1;
+        else if (PyDict_CheckExact(locals))
+            err = PyDict_SetItem(locals, name, value);
+        else
+            err = PyObject_SetItem(locals, name, value);
+        Py_DECREF(name);
+        Py_XDECREF(value);
+        if (err != 0)
+            break;
+    }
+    Py_DECREF(all);
+    return err;
+}
+static int __pyx_import_star(PyObject* m) {
+    int i;
+    int ret = -1;
+    char* s;
+    PyObject *locals = 0;
+    PyObject *list = 0;
+#if PY_MAJOR_VERSION >= 3
+    PyObject *utf8_name = 0;
+#endif
+    PyObject *name;
+    PyObject *item;
+    locals = PyDict_New();              if (!locals) goto bad;
+    if (__Pyx_import_all_from(locals, m) < 0) goto bad;
+    list = PyDict_Items(locals);        if (!list) goto bad;
+    for(i=0; i<PyList_GET_SIZE(list); i++) {
+        name = PyTuple_GET_ITEM(PyList_GET_ITEM(list, i), 0);
+        item = PyTuple_GET_ITEM(PyList_GET_ITEM(list, i), 1);
+#if PY_MAJOR_VERSION >= 3
+        utf8_name = PyUnicode_AsUTF8String(name);
+        if (!utf8_name) goto bad;
+        s = PyBytes_AS_STRING(utf8_name);
+        if (__pyx_import_star_set(item, name, s) < 0) goto bad;
+        Py_DECREF(utf8_name); utf8_name = 0;
+#else
+        s = PyString_AsString(name);
+        if (!s) goto bad;
+        if (__pyx_import_star_set(item, name, s) < 0) goto bad;
+#endif
+    }
+    ret = 0;
+bad:
+    Py_XDECREF(locals);
+    Py_XDECREF(list);
+#if PY_MAJOR_VERSION >= 3
+    Py_XDECREF(utf8_name);
+#endif
+    return ret;
+}
+
+
 
 #if PY_MAJOR_VERSION >= 3
 #if CYTHON_PEP489_MULTI_PHASE_INIT
@@ -2010,29 +3170,57 @@ static struct PyModuleDef __pyx_moduledef = {
 #endif
 
 static __Pyx_StringTabEntry __pyx_string_tab[] = {
+  {&__pyx_n_s_IndexError, __pyx_k_IndexError, sizeof(__pyx_k_IndexError), 0, 0, 1, 1},
+  {&__pyx_n_s_KeyError, __pyx_k_KeyError, sizeof(__pyx_k_KeyError), 0, 0, 1, 1},
+  {&__pyx_n_s_MethodDescription, __pyx_k_MethodDescription, sizeof(__pyx_k_MethodDescription), 0, 0, 1, 1},
+  {&__pyx_kp_s_No_value_specified_for_struct_at, __pyx_k_No_value_specified_for_struct_at, sizeof(__pyx_k_No_value_specified_for_struct_at), 0, 0, 1, 0},
+  {&__pyx_n_s_OverflowError, __pyx_k_OverflowError, sizeof(__pyx_k_OverflowError), 0, 0, 1, 1},
+  {&__pyx_n_s_TypeError, __pyx_k_TypeError, sizeof(__pyx_k_TypeError), 0, 0, 1, 1},
+  {&__pyx_n_s_ValueError, __pyx_k_ValueError, sizeof(__pyx_k_ValueError), 0, 0, 1, 1},
+  {&__pyx_n_s__16, __pyx_k__16, sizeof(__pyx_k__16), 0, 0, 1, 1},
   {&__pyx_kp_u_add_global_constant, __pyx_k_add_global_constant, sizeof(__pyx_k_add_global_constant), 0, 1, 0, 0},
+  {&__pyx_n_s_builtins, __pyx_k_builtins, sizeof(__pyx_k_builtins), 0, 0, 1, 1},
   {&__pyx_kp_u_call_method, __pyx_k_call_method, sizeof(__pyx_k_call_method), 0, 1, 0, 0},
+  {&__pyx_n_s_classes, __pyx_k_classes, sizeof(__pyx_k_classes), 0, 0, 1, 1},
+  {&__pyx_kp_u_classes_found, __pyx_k_classes_found, sizeof(__pyx_k_classes_found), 0, 1, 0, 0},
   {&__pyx_n_s_cline_in_traceback, __pyx_k_cline_in_traceback, sizeof(__pyx_k_cline_in_traceback), 0, 0, 1, 1},
   {&__pyx_kp_u_create_manifest, __pyx_k_create_manifest, sizeof(__pyx_k_create_manifest), 0, 1, 0, 0},
+  {&__pyx_n_s_dont_touch_that, __pyx_k_dont_touch_that, sizeof(__pyx_k_dont_touch_that), 0, 0, 1, 1},
+  {&__pyx_n_s_enumerate, __pyx_k_enumerate, sizeof(__pyx_k_enumerate), 0, 0, 1, 1},
   {&__pyx_n_u_finish_desc, __pyx_k_finish_desc, sizeof(__pyx_k_finish_desc), 0, 1, 0, 1},
   {&__pyx_n_u_finish_python_test, __pyx_k_finish_python_test, sizeof(__pyx_k_finish_python_test), 0, 1, 0, 1},
   {&__pyx_kp_u_get_prop, __pyx_k_get_prop, sizeof(__pyx_k_get_prop), 0, 1, 0, 0},
+  {&__pyx_n_s_import, __pyx_k_import, sizeof(__pyx_k_import), 0, 0, 1, 1},
   {&__pyx_kp_u_init_python_pluginscript, __pyx_k_init_python_pluginscript, sizeof(__pyx_k_init_python_pluginscript), 0, 1, 0, 0},
   {&__pyx_n_u_instance_finish, __pyx_k_instance_finish, sizeof(__pyx_k_instance_finish), 0, 1, 0, 1},
   {&__pyx_kp_u_instance_init, __pyx_k_instance_init, sizeof(__pyx_k_instance_init), 0, 1, 0, 0},
   {&__pyx_n_s_main, __pyx_k_main, sizeof(__pyx_k_main), 0, 0, 1, 1},
+  {&__pyx_n_s_methods, __pyx_k_methods, sizeof(__pyx_k_methods), 0, 0, 1, 1},
+  {&__pyx_kp_u_methods_generated, __pyx_k_methods_generated, sizeof(__pyx_k_methods_generated), 0, 1, 0, 0},
   {&__pyx_n_s_name, __pyx_k_name, sizeof(__pyx_k_name), 0, 0, 1, 1},
   {&__pyx_kp_u_notification_instance, __pyx_k_notification_instance, sizeof(__pyx_k_notification_instance), 0, 1, 0, 0},
   {&__pyx_kp_u_path2, __pyx_k_path2, sizeof(__pyx_k_path2), 0, 1, 0, 0},
+  {&__pyx_n_s_pluginscript_api_description_cla, __pyx_k_pluginscript_api_description_cla, sizeof(__pyx_k_pluginscript_api_description_cla), 0, 0, 1, 1},
+  {&__pyx_n_s_pluginscript_api_utils_annotatio, __pyx_k_pluginscript_api_utils_annotatio, sizeof(__pyx_k_pluginscript_api_utils_annotatio), 0, 0, 1, 1},
   {&__pyx_n_s_print, __pyx_k_print, sizeof(__pyx_k_print), 0, 0, 1, 1},
+  {&__pyx_n_s_properties, __pyx_k_properties, sizeof(__pyx_k_properties), 0, 0, 1, 1},
+  {&__pyx_kp_u_properties_generated, __pyx_k_properties_generated, sizeof(__pyx_k_properties_generated), 0, 1, 0, 0},
+  {&__pyx_n_s_reset, __pyx_k_reset, sizeof(__pyx_k_reset), 0, 0, 1, 1},
   {&__pyx_kp_u_return_manifest, __pyx_k_return_manifest, sizeof(__pyx_k_return_manifest), 0, 1, 0, 0},
   {&__pyx_kp_u_set_api_core, __pyx_k_set_api_core, sizeof(__pyx_k_set_api_core), 0, 1, 0, 0},
   {&__pyx_kp_u_set_prop, __pyx_k_set_prop, sizeof(__pyx_k_set_prop), 0, 1, 0, 0},
   {&__pyx_n_s_test, __pyx_k_test, sizeof(__pyx_k_test), 0, 0, 1, 1},
+  {&__pyx_n_s_to_dict, __pyx_k_to_dict, sizeof(__pyx_k_to_dict), 0, 0, 1, 1},
   {0, 0, 0, 0, 0, 0, 0}
 };
 static CYTHON_SMALL_CODE int __Pyx_InitCachedBuiltins(void) {
-  __pyx_builtin_print = __Pyx_GetBuiltinName(__pyx_n_s_print); if (!__pyx_builtin_print) __PYX_ERR(0, 8, __pyx_L1_error)
+  __pyx_builtin_print = __Pyx_GetBuiltinName(__pyx_n_s_print); if (!__pyx_builtin_print) __PYX_ERR(0, 13, __pyx_L1_error)
+  __pyx_builtin_TypeError = __Pyx_GetBuiltinName(__pyx_n_s_TypeError); if (!__pyx_builtin_TypeError) __PYX_ERR(1, 81, __pyx_L1_error)
+  __pyx_builtin_OverflowError = __Pyx_GetBuiltinName(__pyx_n_s_OverflowError); if (!__pyx_builtin_OverflowError) __PYX_ERR(1, 81, __pyx_L1_error)
+  __pyx_builtin_enumerate = __Pyx_GetBuiltinName(__pyx_n_s_enumerate); if (!__pyx_builtin_enumerate) __PYX_ERR(1, 84, __pyx_L1_error)
+  __pyx_builtin_IndexError = __Pyx_GetBuiltinName(__pyx_n_s_IndexError); if (!__pyx_builtin_IndexError) __PYX_ERR(1, 94, __pyx_L1_error)
+  __pyx_builtin_KeyError = __Pyx_GetBuiltinName(__pyx_n_s_KeyError); if (!__pyx_builtin_KeyError) __PYX_ERR(1, 18, __pyx_L1_error)
+  __pyx_builtin_ValueError = __Pyx_GetBuiltinName(__pyx_n_s_ValueError); if (!__pyx_builtin_ValueError) __PYX_ERR(1, 19, __pyx_L1_error)
   return 0;
   __pyx_L1_error:;
   return -1;
@@ -2042,159 +3230,170 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__Pyx_InitCachedConstants", 0);
 
-  /* "pluginscript_api/api.pyx":8
- *     global api_core
- *     api_core = core
+  /* "pluginscript_api/api.pyx":13
+ *     #set_api_core_dict(core)
+ *     api_core.godot_dictionary_new(&dictionary)
  *     print("\n#############################set_api_core############################################################")             # <<<<<<<<<<<<<<
  * cdef api godot_pluginscript_language_data * init_pluginscript():
  *     print("\n######################################################init_python_pluginscript####################################\n");
  */
-  __pyx_tuple_ = PyTuple_Pack(1, __pyx_kp_u_set_api_core); if (unlikely(!__pyx_tuple_)) __PYX_ERR(0, 8, __pyx_L1_error)
+  __pyx_tuple_ = PyTuple_Pack(1, __pyx_kp_u_set_api_core); if (unlikely(!__pyx_tuple_)) __PYX_ERR(0, 13, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple_);
   __Pyx_GIVEREF(__pyx_tuple_);
 
-  /* "pluginscript_api/api.pyx":10
+  /* "pluginscript_api/api.pyx":15
  *     print("\n#############################set_api_core############################################################")
  * cdef api godot_pluginscript_language_data * init_pluginscript():
  *     print("\n######################################################init_python_pluginscript####################################\n");             # <<<<<<<<<<<<<<
  *     return NULL;
  * 
  */
-  __pyx_tuple__2 = PyTuple_Pack(1, __pyx_kp_u_init_python_pluginscript); if (unlikely(!__pyx_tuple__2)) __PYX_ERR(0, 10, __pyx_L1_error)
+  __pyx_tuple__2 = PyTuple_Pack(1, __pyx_kp_u_init_python_pluginscript); if (unlikely(!__pyx_tuple__2)) __PYX_ERR(0, 15, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__2);
   __Pyx_GIVEREF(__pyx_tuple__2);
 
-  /* "pluginscript_api/api.pyx":14
+  /* "pluginscript_api/api.pyx":19
  * 
  * cdef api void finish_pluginscript(godot_pluginscript_instance_data *p_data):
  *     print("finish_python_test\n");             # <<<<<<<<<<<<<<
  * 
  * cdef api  void add_global_constant_pluginscript(godot_pluginscript_language_data *p_data, const godot_string *p_variable, const godot_variant *p_value):
  */
-  __pyx_tuple__3 = PyTuple_Pack(1, __pyx_n_u_finish_python_test); if (unlikely(!__pyx_tuple__3)) __PYX_ERR(0, 14, __pyx_L1_error)
+  __pyx_tuple__3 = PyTuple_Pack(1, __pyx_n_u_finish_python_test); if (unlikely(!__pyx_tuple__3)) __PYX_ERR(0, 19, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__3);
   __Pyx_GIVEREF(__pyx_tuple__3);
 
-  /* "pluginscript_api/api.pyx":17
+  /* "pluginscript_api/api.pyx":22
  * 
  * cdef api  void add_global_constant_pluginscript(godot_pluginscript_language_data *p_data, const godot_string *p_variable, const godot_variant *p_value):
  *     print("\n######################################################add_global_constant#############################\n");             # <<<<<<<<<<<<<<
  * 
  * ###############################################pluginscript_desc#######################################################
  */
-  __pyx_tuple__4 = PyTuple_Pack(1, __pyx_kp_u_add_global_constant); if (unlikely(!__pyx_tuple__4)) __PYX_ERR(0, 17, __pyx_L1_error)
+  __pyx_tuple__4 = PyTuple_Pack(1, __pyx_kp_u_add_global_constant); if (unlikely(!__pyx_tuple__4)) __PYX_ERR(0, 22, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__4);
   __Pyx_GIVEREF(__pyx_tuple__4);
 
-  /* "pluginscript_api/api.pyx":21
+  /* "pluginscript_api/api.pyx":26
  * ###############################################pluginscript_desc#######################################################
  * cdef api  godot_pluginscript_script_manifest init_pluginscript_desc (godot_pluginscript_language_data *p_data, const godot_string *p_path, const godot_string *p_source, godot_error *r_error):
  *     print("\n############################################create_manifest##############################################\n");             # <<<<<<<<<<<<<<
  *     cdef godot_pluginscript_script_manifest manifest;
  *     manifest.data = NULL;
  */
-  __pyx_tuple__5 = PyTuple_Pack(1, __pyx_kp_u_create_manifest); if (unlikely(!__pyx_tuple__5)) __PYX_ERR(0, 21, __pyx_L1_error)
+  __pyx_tuple__5 = PyTuple_Pack(1, __pyx_kp_u_create_manifest); if (unlikely(!__pyx_tuple__5)) __PYX_ERR(0, 26, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__5);
   __Pyx_GIVEREF(__pyx_tuple__5);
 
-  /* "pluginscript_api/api.pyx":34
+  /* "pluginscript_api/api.pyx":39
  *     api_core.godot_print(p_source)
  *     api_core.godot_print(p_path)
  *     print("path2:")             # <<<<<<<<<<<<<<
- *     print(get_from_w_string(p_path))
- * #    PyUnicode_FromWideChar(c_string,-1)
+ *     print(get_python_string_from_w_string(p_path))
+ * 
  */
-  __pyx_tuple__6 = PyTuple_Pack(1, __pyx_kp_u_path2); if (unlikely(!__pyx_tuple__6)) __PYX_ERR(0, 34, __pyx_L1_error)
+  __pyx_tuple__6 = PyTuple_Pack(1, __pyx_kp_u_path2); if (unlikely(!__pyx_tuple__6)) __PYX_ERR(0, 39, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__6);
   __Pyx_GIVEREF(__pyx_tuple__6);
 
-  /* "pluginscript_api/api.pyx":42
- *     #print(string)
- *     #print(PyUnicode_FromWideChar(api_core.godot_string_wide_str(p_path),-1))
+  /* "pluginscript_api/api.pyx":52
+ *     #Dictionary()
+ * 
  *     print("\n################################return_manifest########################################################\n");             # <<<<<<<<<<<<<<
  *     return manifest;
  * 
  */
-  __pyx_tuple__7 = PyTuple_Pack(1, __pyx_kp_u_return_manifest); if (unlikely(!__pyx_tuple__7)) __PYX_ERR(0, 42, __pyx_L1_error)
+  __pyx_tuple__7 = PyTuple_Pack(1, __pyx_kp_u_return_manifest); if (unlikely(!__pyx_tuple__7)) __PYX_ERR(0, 52, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__7);
   __Pyx_GIVEREF(__pyx_tuple__7);
 
-  /* "pluginscript_api/api.pyx":46
+  /* "pluginscript_api/api.pyx":56
  * 
  * cdef api  void finish_pluginscript_desc (godot_pluginscript_script_data *p_data):
  *     print("finish_desc\n");             # <<<<<<<<<<<<<<
  * 
  * 
  */
-  __pyx_tuple__8 = PyTuple_Pack(1, __pyx_n_u_finish_desc); if (unlikely(!__pyx_tuple__8)) __PYX_ERR(0, 46, __pyx_L1_error)
+  __pyx_tuple__8 = PyTuple_Pack(1, __pyx_n_u_finish_desc); if (unlikely(!__pyx_tuple__8)) __PYX_ERR(0, 56, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__8);
   __Pyx_GIVEREF(__pyx_tuple__8);
 
-  /* "pluginscript_api/api.pyx":52
+  /* "pluginscript_api/api.pyx":62
  * ###############################################pluginscript_instance#######################################################
  * cdef api void init_pluginscript_instance(godot_pluginscript_script_data *p_data, godot_object *p_owner):
  *     print("\n####################################################################instance_init########################\n");             # <<<<<<<<<<<<<<
  * 
  * cdef api void finish_pluginscript_instance(godot_pluginscript_instance_data *p_data):
  */
-  __pyx_tuple__9 = PyTuple_Pack(1, __pyx_kp_u_instance_init); if (unlikely(!__pyx_tuple__9)) __PYX_ERR(0, 52, __pyx_L1_error)
+  __pyx_tuple__9 = PyTuple_Pack(1, __pyx_kp_u_instance_init); if (unlikely(!__pyx_tuple__9)) __PYX_ERR(0, 62, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__9);
   __Pyx_GIVEREF(__pyx_tuple__9);
 
-  /* "pluginscript_api/api.pyx":55
+  /* "pluginscript_api/api.pyx":65
  * 
  * cdef api void finish_pluginscript_instance(godot_pluginscript_instance_data *p_data):
  *     print("instance_finish\n");             # <<<<<<<<<<<<<<
  * 
  * cdef api bool set_prop_pluginscript_instance(godot_pluginscript_instance_data *p_data, const godot_string *p_name, const godot_variant *p_value):
  */
-  __pyx_tuple__10 = PyTuple_Pack(1, __pyx_n_u_instance_finish); if (unlikely(!__pyx_tuple__10)) __PYX_ERR(0, 55, __pyx_L1_error)
+  __pyx_tuple__10 = PyTuple_Pack(1, __pyx_n_u_instance_finish); if (unlikely(!__pyx_tuple__10)) __PYX_ERR(0, 65, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__10);
   __Pyx_GIVEREF(__pyx_tuple__10);
 
-  /* "pluginscript_api/api.pyx":58
+  /* "pluginscript_api/api.pyx":68
  * 
  * cdef api bool set_prop_pluginscript_instance(godot_pluginscript_instance_data *p_data, const godot_string *p_name, const godot_variant *p_value):
  *     print("\n#########################################################set_prop#######################################\n");             # <<<<<<<<<<<<<<
  *     return False;
  * 
  */
-  __pyx_tuple__11 = PyTuple_Pack(1, __pyx_kp_u_set_prop); if (unlikely(!__pyx_tuple__11)) __PYX_ERR(0, 58, __pyx_L1_error)
+  __pyx_tuple__11 = PyTuple_Pack(1, __pyx_kp_u_set_prop); if (unlikely(!__pyx_tuple__11)) __PYX_ERR(0, 68, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__11);
   __Pyx_GIVEREF(__pyx_tuple__11);
 
-  /* "pluginscript_api/api.pyx":62
+  /* "pluginscript_api/api.pyx":72
  * 
  * cdef api bool get_prop_pluginscript_instance(godot_pluginscript_instance_data *p_data, const godot_string *p_name, godot_variant *r_ret):
  *     print("\n###################################################get_prop########################################\n");             # <<<<<<<<<<<<<<
  *     return False;
  * 
  */
-  __pyx_tuple__12 = PyTuple_Pack(1, __pyx_kp_u_get_prop); if (unlikely(!__pyx_tuple__12)) __PYX_ERR(0, 62, __pyx_L1_error)
+  __pyx_tuple__12 = PyTuple_Pack(1, __pyx_kp_u_get_prop); if (unlikely(!__pyx_tuple__12)) __PYX_ERR(0, 72, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__12);
   __Pyx_GIVEREF(__pyx_tuple__12);
 
-  /* "pluginscript_api/api.pyx":66
+  /* "pluginscript_api/api.pyx":76
  * 
  * cdef api void call_method_pluginscript_instance(godot_pluginscript_instance_data *p_data,const godot_string_name *p_method, const godot_variant **p_args,int p_argcount, godot_variant_call_error *r_error):
  *     print("\n#################################################call_method#############################################");             # <<<<<<<<<<<<<<
  * 
  * cdef api void notification_pluginscript_instance(godot_pluginscript_instance_data *p_data, int p_notification):
  */
-  __pyx_tuple__13 = PyTuple_Pack(1, __pyx_kp_u_call_method); if (unlikely(!__pyx_tuple__13)) __PYX_ERR(0, 66, __pyx_L1_error)
+  __pyx_tuple__13 = PyTuple_Pack(1, __pyx_kp_u_call_method); if (unlikely(!__pyx_tuple__13)) __PYX_ERR(0, 76, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__13);
   __Pyx_GIVEREF(__pyx_tuple__13);
 
-  /* "pluginscript_api/api.pyx":69
+  /* "pluginscript_api/api.pyx":79
  * 
  * cdef api void notification_pluginscript_instance(godot_pluginscript_instance_data *p_data, int p_notification):
  *     print("\n#####################################################notification_instance###############################");             # <<<<<<<<<<<<<<
  * 
  * 
  */
-  __pyx_tuple__14 = PyTuple_Pack(1, __pyx_kp_u_notification_instance); if (unlikely(!__pyx_tuple__14)) __PYX_ERR(0, 69, __pyx_L1_error)
+  __pyx_tuple__14 = PyTuple_Pack(1, __pyx_kp_u_notification_instance); if (unlikely(!__pyx_tuple__14)) __PYX_ERR(0, 79, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__14);
   __Pyx_GIVEREF(__pyx_tuple__14);
+
+  /* "FromPyStructUtility":19
+ *         value = obj['_dont_touch_that']
+ *     except KeyError:
+ *         raise ValueError("No value specified for struct attribute '_dont_touch_that'")             # <<<<<<<<<<<<<<
+ *     result._dont_touch_that = value
+ *     return result
+ */
+  __pyx_tuple__15 = PyTuple_Pack(1, __pyx_kp_s_No_value_specified_for_struct_at); if (unlikely(!__pyx_tuple__15)) __PYX_ERR(1, 19, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__15);
+  __Pyx_GIVEREF(__pyx_tuple__15);
   __Pyx_RefNannyFinishContext();
   return 0;
   __pyx_L1_error:;
@@ -2204,6 +3403,7 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
 
 static CYTHON_SMALL_CODE int __Pyx_InitGlobals(void) {
   if (__Pyx_InitStrings(__pyx_string_tab) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
+  __pyx_int_0 = PyInt_FromLong(0); if (unlikely(!__pyx_int_0)) __PYX_ERR(0, 1, __pyx_L1_error)
   return 0;
   __pyx_L1_error:;
   return -1;
@@ -2275,7 +3475,7 @@ static int __Pyx_modinit_type_import_code(void) {
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__Pyx_modinit_type_import_code", 0);
   /*--- Type import code ---*/
-  __pyx_t_1 = PyImport_ImportModule(__Pyx_BUILTIN_MODULE_NAME); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 9, __pyx_L1_error)
+  __pyx_t_1 = PyImport_ImportModule(__Pyx_BUILTIN_MODULE_NAME); if (unlikely(!__pyx_t_1)) __PYX_ERR(3, 9, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_ptype_7cpython_4type_type = __Pyx_ImportType(__pyx_t_1, __Pyx_BUILTIN_MODULE_NAME, "type", 
   #if defined(PYPY_VERSION_NUM) && PYPY_VERSION_NUM < 0x050B0000
@@ -2284,7 +3484,7 @@ static int __Pyx_modinit_type_import_code(void) {
   sizeof(PyHeapTypeObject),
   #endif
   __Pyx_ImportType_CheckSize_Warn);
-   if (!__pyx_ptype_7cpython_4type_type) __PYX_ERR(1, 9, __pyx_L1_error)
+   if (!__pyx_ptype_7cpython_4type_type) __PYX_ERR(3, 9, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __Pyx_RefNannyFinishContext();
   return 0;
@@ -2405,6 +3605,7 @@ static CYTHON_SMALL_CODE int __pyx_pymod_exec_api(PyObject *__pyx_pyinit_module)
 #endif
 {
   PyObject *__pyx_t_1 = NULL;
+  PyObject *__pyx_t_2 = NULL;
   int __pyx_lineno = 0;
   const char *__pyx_filename = NULL;
   int __pyx_clineno = 0;
@@ -2512,6 +3713,66 @@ if (!__Pyx_RefNanny) {
   if (__Pyx_patch_abc() < 0) __PYX_ERR(0, 1, __pyx_L1_error)
   #endif
 
+  /* "pluginscript_api/api.pyx":4
+ * from cython.operator cimport dereference
+ * from libc.stddef cimport wchar_t
+ * from pluginscript_api.description_classes.MethodDescription import *             # <<<<<<<<<<<<<<
+ * #from core.dictionary.Dictionary cimport set_api_core_dict
+ * from pluginscript_api.utils.annotations import methods, classes, properties, reset
+ */
+  __pyx_t_1 = PyList_New(1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 4, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __Pyx_INCREF(__pyx_n_s__16);
+  __Pyx_GIVEREF(__pyx_n_s__16);
+  PyList_SET_ITEM(__pyx_t_1, 0, __pyx_n_s__16);
+  __pyx_t_2 = __Pyx_Import(__pyx_n_s_pluginscript_api_description_cla, __pyx_t_1, 0); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 4, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+  if (__pyx_import_star(__pyx_t_2) < 0) __PYX_ERR(0, 4, __pyx_L1_error);
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+
+  /* "pluginscript_api/api.pyx":6
+ * from pluginscript_api.description_classes.MethodDescription import *
+ * #from core.dictionary.Dictionary cimport set_api_core_dict
+ * from pluginscript_api.utils.annotations import methods, classes, properties, reset             # <<<<<<<<<<<<<<
+ * cdef godot_dictionary dictionary
+ * cdef api set_api_core_pluginscript(const godot_gdnative_core_api_struct* core):
+ */
+  __pyx_t_2 = PyList_New(4); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 6, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
+  __Pyx_INCREF(__pyx_n_s_methods);
+  __Pyx_GIVEREF(__pyx_n_s_methods);
+  PyList_SET_ITEM(__pyx_t_2, 0, __pyx_n_s_methods);
+  __Pyx_INCREF(__pyx_n_s_classes);
+  __Pyx_GIVEREF(__pyx_n_s_classes);
+  PyList_SET_ITEM(__pyx_t_2, 1, __pyx_n_s_classes);
+  __Pyx_INCREF(__pyx_n_s_properties);
+  __Pyx_GIVEREF(__pyx_n_s_properties);
+  PyList_SET_ITEM(__pyx_t_2, 2, __pyx_n_s_properties);
+  __Pyx_INCREF(__pyx_n_s_reset);
+  __Pyx_GIVEREF(__pyx_n_s_reset);
+  PyList_SET_ITEM(__pyx_t_2, 3, __pyx_n_s_reset);
+  __pyx_t_1 = __Pyx_Import(__pyx_n_s_pluginscript_api_utils_annotatio, __pyx_t_2, 0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 6, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+  __pyx_t_2 = __Pyx_ImportFrom(__pyx_t_1, __pyx_n_s_methods); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 6, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_methods, __pyx_t_2) < 0) __PYX_ERR(0, 6, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+  __pyx_t_2 = __Pyx_ImportFrom(__pyx_t_1, __pyx_n_s_classes); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 6, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_classes, __pyx_t_2) < 0) __PYX_ERR(0, 6, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+  __pyx_t_2 = __Pyx_ImportFrom(__pyx_t_1, __pyx_n_s_properties); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 6, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_properties, __pyx_t_2) < 0) __PYX_ERR(0, 6, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+  __pyx_t_2 = __Pyx_ImportFrom(__pyx_t_1, __pyx_n_s_reset); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 6, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_reset, __pyx_t_2) < 0) __PYX_ERR(0, 6, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+
   /* "pluginscript_api/api.pyx":1
  * from godot_api.binding_external cimport *             # <<<<<<<<<<<<<<
  * from cython.operator cimport dereference
@@ -2522,11 +3783,20 @@ if (!__Pyx_RefNanny) {
   if (PyDict_SetItem(__pyx_d, __pyx_n_s_test, __pyx_t_1) < 0) __PYX_ERR(0, 1, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
+  /* "FromPyStructUtility":11
+ * 
+ * @cname("__pyx_convert__from_py_godot_dictionary")
+ * cdef struct_type __pyx_convert__from_py_godot_dictionary(obj) except *:             # <<<<<<<<<<<<<<
+ *     cdef struct_type result
+ *     if not PyMapping_Check(obj):
+ */
+
   /*--- Wrapped vars code ---*/
 
   goto __pyx_L0;
   __pyx_L1_error:;
   __Pyx_XDECREF(__pyx_t_1);
+  __Pyx_XDECREF(__pyx_t_2);
   if (__pyx_m) {
     if (__pyx_d) {
       __Pyx_AddTraceback("init pluginscript_api.api", __pyx_clineno, __pyx_lineno, __pyx_filename);
@@ -2880,6 +4150,568 @@ static CYTHON_INLINE PyObject* __Pyx_PyObject_CallOneArg(PyObject *func, PyObjec
 }
 #endif
 
+/* PyDictVersioning */
+#if CYTHON_USE_DICT_VERSIONS && CYTHON_USE_TYPE_SLOTS
+static CYTHON_INLINE PY_UINT64_T __Pyx_get_tp_dict_version(PyObject *obj) {
+    PyObject *dict = Py_TYPE(obj)->tp_dict;
+    return likely(dict) ? __PYX_GET_DICT_VERSION(dict) : 0;
+}
+static CYTHON_INLINE PY_UINT64_T __Pyx_get_object_dict_version(PyObject *obj) {
+    PyObject **dictptr = NULL;
+    Py_ssize_t offset = Py_TYPE(obj)->tp_dictoffset;
+    if (offset) {
+#if CYTHON_COMPILING_IN_CPYTHON
+        dictptr = (likely(offset > 0)) ? (PyObject **) ((char *)obj + offset) : _PyObject_GetDictPtr(obj);
+#else
+        dictptr = _PyObject_GetDictPtr(obj);
+#endif
+    }
+    return (dictptr && *dictptr) ? __PYX_GET_DICT_VERSION(*dictptr) : 0;
+}
+static CYTHON_INLINE int __Pyx_object_dict_version_matches(PyObject* obj, PY_UINT64_T tp_dict_version, PY_UINT64_T obj_dict_version) {
+    PyObject *dict = Py_TYPE(obj)->tp_dict;
+    if (unlikely(!dict) || unlikely(tp_dict_version != __PYX_GET_DICT_VERSION(dict)))
+        return 0;
+    return obj_dict_version == __Pyx_get_object_dict_version(obj);
+}
+#endif
+
+/* GetModuleGlobalName */
+#if CYTHON_USE_DICT_VERSIONS
+static PyObject *__Pyx__GetModuleGlobalName(PyObject *name, PY_UINT64_T *dict_version, PyObject **dict_cached_value)
+#else
+static CYTHON_INLINE PyObject *__Pyx__GetModuleGlobalName(PyObject *name)
+#endif
+{
+    PyObject *result;
+#if !CYTHON_AVOID_BORROWED_REFS
+#if CYTHON_COMPILING_IN_CPYTHON && PY_VERSION_HEX >= 0x030500A1
+    result = _PyDict_GetItem_KnownHash(__pyx_d, name, ((PyASCIIObject *) name)->hash);
+    __PYX_UPDATE_DICT_CACHE(__pyx_d, result, *dict_cached_value, *dict_version)
+    if (likely(result)) {
+        return __Pyx_NewRef(result);
+    } else if (unlikely(PyErr_Occurred())) {
+        return NULL;
+    }
+#else
+    result = PyDict_GetItem(__pyx_d, name);
+    __PYX_UPDATE_DICT_CACHE(__pyx_d, result, *dict_cached_value, *dict_version)
+    if (likely(result)) {
+        return __Pyx_NewRef(result);
+    }
+#endif
+#else
+    result = PyObject_GetItem(__pyx_d, name);
+    __PYX_UPDATE_DICT_CACHE(__pyx_d, result, *dict_cached_value, *dict_version)
+    if (likely(result)) {
+        return __Pyx_NewRef(result);
+    }
+    PyErr_Clear();
+#endif
+    return __Pyx_GetBuiltinName(name);
+}
+
+/* PyObjectCallNoArg */
+#if CYTHON_COMPILING_IN_CPYTHON
+static CYTHON_INLINE PyObject* __Pyx_PyObject_CallNoArg(PyObject *func) {
+#if CYTHON_FAST_PYCALL
+    if (PyFunction_Check(func)) {
+        return __Pyx_PyFunction_FastCall(func, NULL, 0);
+    }
+#endif
+#ifdef __Pyx_CyFunction_USED
+    if (likely(PyCFunction_Check(func) || __Pyx_CyFunction_Check(func)))
+#else
+    if (likely(PyCFunction_Check(func)))
+#endif
+    {
+        if (likely(PyCFunction_GET_FLAGS(func) & METH_NOARGS)) {
+            return __Pyx_PyObject_CallMethO(func, NULL);
+        }
+    }
+    return __Pyx_PyObject_Call(func, __pyx_empty_tuple, NULL);
+}
+#endif
+
+/* GetAttr */
+static CYTHON_INLINE PyObject *__Pyx_GetAttr(PyObject *o, PyObject *n) {
+#if CYTHON_USE_TYPE_SLOTS
+#if PY_MAJOR_VERSION >= 3
+    if (likely(PyUnicode_Check(n)))
+#else
+    if (likely(PyString_Check(n)))
+#endif
+        return __Pyx_PyObject_GetAttrStr(o, n);
+#endif
+    return PyObject_GetAttr(o, n);
+}
+
+/* Globals */
+static PyObject* __Pyx_Globals(void) {
+    Py_ssize_t i;
+    PyObject *names;
+    PyObject *globals = __pyx_d;
+    Py_INCREF(globals);
+    names = PyObject_Dir(__pyx_m);
+    if (!names)
+        goto bad;
+    for (i = PyList_GET_SIZE(names)-1; i >= 0; i--) {
+#if CYTHON_COMPILING_IN_PYPY
+        PyObject* name = PySequence_ITEM(names, i);
+        if (!name)
+            goto bad;
+#else
+        PyObject* name = PyList_GET_ITEM(names, i);
+#endif
+        if (!PyDict_Contains(globals, name)) {
+            PyObject* value = __Pyx_GetAttr(__pyx_m, name);
+            if (!value) {
+#if CYTHON_COMPILING_IN_PYPY
+                Py_DECREF(name);
+#endif
+                goto bad;
+            }
+            if (PyDict_SetItem(globals, name, value) < 0) {
+#if CYTHON_COMPILING_IN_PYPY
+                Py_DECREF(name);
+#endif
+                Py_DECREF(value);
+                goto bad;
+            }
+        }
+#if CYTHON_COMPILING_IN_PYPY
+        Py_DECREF(name);
+#endif
+    }
+    Py_DECREF(names);
+    return globals;
+bad:
+    Py_XDECREF(names);
+    Py_XDECREF(globals);
+    return NULL;
+}
+
+/* PyExec */
+static CYTHON_INLINE PyObject* __Pyx_PyExec2(PyObject* o, PyObject* globals) {
+    return __Pyx_PyExec3(o, globals, NULL);
+}
+static PyObject* __Pyx_PyExec3(PyObject* o, PyObject* globals, PyObject* locals) {
+    PyObject* result;
+    PyObject* s = 0;
+    char *code = 0;
+    if (!globals || globals == Py_None) {
+        globals = __pyx_d;
+    } else if (!PyDict_Check(globals)) {
+        PyErr_Format(PyExc_TypeError, "exec() arg 2 must be a dict, not %.200s",
+                     Py_TYPE(globals)->tp_name);
+        goto bad;
+    }
+    if (!locals || locals == Py_None) {
+        locals = globals;
+    }
+    if (__Pyx_PyDict_GetItemStr(globals, __pyx_n_s_builtins) == NULL) {
+        if (PyDict_SetItem(globals, __pyx_n_s_builtins, PyEval_GetBuiltins()) < 0)
+            goto bad;
+    }
+    if (PyCode_Check(o)) {
+        if (__Pyx_PyCode_HasFreeVars((PyCodeObject *)o)) {
+            PyErr_SetString(PyExc_TypeError,
+                "code object passed to exec() may not contain free variables");
+            goto bad;
+        }
+        #if CYTHON_COMPILING_IN_PYPY || PY_VERSION_HEX < 0x030200B1
+        result = PyEval_EvalCode((PyCodeObject *)o, globals, locals);
+        #else
+        result = PyEval_EvalCode(o, globals, locals);
+        #endif
+    } else {
+        PyCompilerFlags cf;
+        cf.cf_flags = 0;
+#if PY_VERSION_HEX >= 0x030800A3
+        cf.cf_feature_version = PY_MINOR_VERSION;
+#endif
+        if (PyUnicode_Check(o)) {
+            cf.cf_flags = PyCF_SOURCE_IS_UTF8;
+            s = PyUnicode_AsUTF8String(o);
+            if (!s) goto bad;
+            o = s;
+        #if PY_MAJOR_VERSION >= 3
+        } else if (!PyBytes_Check(o)) {
+        #else
+        } else if (!PyString_Check(o)) {
+        #endif
+            PyErr_Format(PyExc_TypeError,
+                "exec: arg 1 must be string, bytes or code object, got %.200s",
+                Py_TYPE(o)->tp_name);
+            goto bad;
+        }
+        #if PY_MAJOR_VERSION >= 3
+        code = PyBytes_AS_STRING(o);
+        #else
+        code = PyString_AS_STRING(o);
+        #endif
+        if (PyEval_MergeCompilerFlags(&cf)) {
+            result = PyRun_StringFlags(code, Py_file_input, globals, locals, &cf);
+        } else {
+            result = PyRun_String(code, Py_file_input, globals, locals);
+        }
+        Py_XDECREF(s);
+    }
+    return result;
+bad:
+    Py_XDECREF(s);
+    return 0;
+}
+
+/* PyExecGlobals */
+static PyObject* __Pyx_PyExecGlobals(PyObject* code) {
+    PyObject* result;
+    PyObject* globals = __Pyx_Globals();
+    if (unlikely(!globals))
+        return NULL;
+    result = __Pyx_PyExec2(code, globals);
+    Py_DECREF(globals);
+    return result;
+}
+
+/* GetTopmostException */
+#if CYTHON_USE_EXC_INFO_STACK
+static _PyErr_StackItem *
+__Pyx_PyErr_GetTopmostException(PyThreadState *tstate)
+{
+    _PyErr_StackItem *exc_info = tstate->exc_info;
+    while ((exc_info->exc_type == NULL || exc_info->exc_type == Py_None) &&
+           exc_info->previous_item != NULL)
+    {
+        exc_info = exc_info->previous_item;
+    }
+    return exc_info;
+}
+#endif
+
+/* SaveResetException */
+#if CYTHON_FAST_THREAD_STATE
+static CYTHON_INLINE void __Pyx__ExceptionSave(PyThreadState *tstate, PyObject **type, PyObject **value, PyObject **tb) {
+    #if CYTHON_USE_EXC_INFO_STACK
+    _PyErr_StackItem *exc_info = __Pyx_PyErr_GetTopmostException(tstate);
+    *type = exc_info->exc_type;
+    *value = exc_info->exc_value;
+    *tb = exc_info->exc_traceback;
+    #else
+    *type = tstate->exc_type;
+    *value = tstate->exc_value;
+    *tb = tstate->exc_traceback;
+    #endif
+    Py_XINCREF(*type);
+    Py_XINCREF(*value);
+    Py_XINCREF(*tb);
+}
+static CYTHON_INLINE void __Pyx__ExceptionReset(PyThreadState *tstate, PyObject *type, PyObject *value, PyObject *tb) {
+    PyObject *tmp_type, *tmp_value, *tmp_tb;
+    #if CYTHON_USE_EXC_INFO_STACK
+    _PyErr_StackItem *exc_info = tstate->exc_info;
+    tmp_type = exc_info->exc_type;
+    tmp_value = exc_info->exc_value;
+    tmp_tb = exc_info->exc_traceback;
+    exc_info->exc_type = type;
+    exc_info->exc_value = value;
+    exc_info->exc_traceback = tb;
+    #else
+    tmp_type = tstate->exc_type;
+    tmp_value = tstate->exc_value;
+    tmp_tb = tstate->exc_traceback;
+    tstate->exc_type = type;
+    tstate->exc_value = value;
+    tstate->exc_traceback = tb;
+    #endif
+    Py_XDECREF(tmp_type);
+    Py_XDECREF(tmp_value);
+    Py_XDECREF(tmp_tb);
+}
+#endif
+
+/* PyErrExceptionMatches */
+#if CYTHON_FAST_THREAD_STATE
+static int __Pyx_PyErr_ExceptionMatchesTuple(PyObject *exc_type, PyObject *tuple) {
+    Py_ssize_t i, n;
+    n = PyTuple_GET_SIZE(tuple);
+#if PY_MAJOR_VERSION >= 3
+    for (i=0; i<n; i++) {
+        if (exc_type == PyTuple_GET_ITEM(tuple, i)) return 1;
+    }
+#endif
+    for (i=0; i<n; i++) {
+        if (__Pyx_PyErr_GivenExceptionMatches(exc_type, PyTuple_GET_ITEM(tuple, i))) return 1;
+    }
+    return 0;
+}
+static CYTHON_INLINE int __Pyx_PyErr_ExceptionMatchesInState(PyThreadState* tstate, PyObject* err) {
+    PyObject *exc_type = tstate->curexc_type;
+    if (exc_type == err) return 1;
+    if (unlikely(!exc_type)) return 0;
+    if (unlikely(PyTuple_Check(err)))
+        return __Pyx_PyErr_ExceptionMatchesTuple(exc_type, err);
+    return __Pyx_PyErr_GivenExceptionMatches(exc_type, err);
+}
+#endif
+
+/* DictGetItem */
+#if PY_MAJOR_VERSION >= 3 && !CYTHON_COMPILING_IN_PYPY
+static PyObject *__Pyx_PyDict_GetItem(PyObject *d, PyObject* key) {
+    PyObject *value;
+    value = PyDict_GetItemWithError(d, key);
+    if (unlikely(!value)) {
+        if (!PyErr_Occurred()) {
+            if (unlikely(PyTuple_Check(key))) {
+                PyObject* args = PyTuple_Pack(1, key);
+                if (likely(args)) {
+                    PyErr_SetObject(PyExc_KeyError, args);
+                    Py_DECREF(args);
+                }
+            } else {
+                PyErr_SetObject(PyExc_KeyError, key);
+            }
+        }
+        return NULL;
+    }
+    Py_INCREF(value);
+    return value;
+}
+#endif
+
+/* GetException */
+#if CYTHON_FAST_THREAD_STATE
+static int __Pyx__GetException(PyThreadState *tstate, PyObject **type, PyObject **value, PyObject **tb)
+#else
+static int __Pyx_GetException(PyObject **type, PyObject **value, PyObject **tb)
+#endif
+{
+    PyObject *local_type, *local_value, *local_tb;
+#if CYTHON_FAST_THREAD_STATE
+    PyObject *tmp_type, *tmp_value, *tmp_tb;
+    local_type = tstate->curexc_type;
+    local_value = tstate->curexc_value;
+    local_tb = tstate->curexc_traceback;
+    tstate->curexc_type = 0;
+    tstate->curexc_value = 0;
+    tstate->curexc_traceback = 0;
+#else
+    PyErr_Fetch(&local_type, &local_value, &local_tb);
+#endif
+    PyErr_NormalizeException(&local_type, &local_value, &local_tb);
+#if CYTHON_FAST_THREAD_STATE
+    if (unlikely(tstate->curexc_type))
+#else
+    if (unlikely(PyErr_Occurred()))
+#endif
+        goto bad;
+    #if PY_MAJOR_VERSION >= 3
+    if (local_tb) {
+        if (unlikely(PyException_SetTraceback(local_value, local_tb) < 0))
+            goto bad;
+    }
+    #endif
+    Py_XINCREF(local_tb);
+    Py_XINCREF(local_type);
+    Py_XINCREF(local_value);
+    *type = local_type;
+    *value = local_value;
+    *tb = local_tb;
+#if CYTHON_FAST_THREAD_STATE
+    #if CYTHON_USE_EXC_INFO_STACK
+    {
+        _PyErr_StackItem *exc_info = tstate->exc_info;
+        tmp_type = exc_info->exc_type;
+        tmp_value = exc_info->exc_value;
+        tmp_tb = exc_info->exc_traceback;
+        exc_info->exc_type = local_type;
+        exc_info->exc_value = local_value;
+        exc_info->exc_traceback = local_tb;
+    }
+    #else
+    tmp_type = tstate->exc_type;
+    tmp_value = tstate->exc_value;
+    tmp_tb = tstate->exc_traceback;
+    tstate->exc_type = local_type;
+    tstate->exc_value = local_value;
+    tstate->exc_traceback = local_tb;
+    #endif
+    Py_XDECREF(tmp_type);
+    Py_XDECREF(tmp_value);
+    Py_XDECREF(tmp_tb);
+#else
+    PyErr_SetExcInfo(local_type, local_value, local_tb);
+#endif
+    return 0;
+bad:
+    *type = 0;
+    *value = 0;
+    *tb = 0;
+    Py_XDECREF(local_type);
+    Py_XDECREF(local_value);
+    Py_XDECREF(local_tb);
+    return -1;
+}
+
+/* RaiseException */
+#if PY_MAJOR_VERSION < 3
+static void __Pyx_Raise(PyObject *type, PyObject *value, PyObject *tb,
+                        CYTHON_UNUSED PyObject *cause) {
+    __Pyx_PyThreadState_declare
+    Py_XINCREF(type);
+    if (!value || value == Py_None)
+        value = NULL;
+    else
+        Py_INCREF(value);
+    if (!tb || tb == Py_None)
+        tb = NULL;
+    else {
+        Py_INCREF(tb);
+        if (!PyTraceBack_Check(tb)) {
+            PyErr_SetString(PyExc_TypeError,
+                "raise: arg 3 must be a traceback or None");
+            goto raise_error;
+        }
+    }
+    if (PyType_Check(type)) {
+#if CYTHON_COMPILING_IN_PYPY
+        if (!value) {
+            Py_INCREF(Py_None);
+            value = Py_None;
+        }
+#endif
+        PyErr_NormalizeException(&type, &value, &tb);
+    } else {
+        if (value) {
+            PyErr_SetString(PyExc_TypeError,
+                "instance exception may not have a separate value");
+            goto raise_error;
+        }
+        value = type;
+        type = (PyObject*) Py_TYPE(type);
+        Py_INCREF(type);
+        if (!PyType_IsSubtype((PyTypeObject *)type, (PyTypeObject *)PyExc_BaseException)) {
+            PyErr_SetString(PyExc_TypeError,
+                "raise: exception class must be a subclass of BaseException");
+            goto raise_error;
+        }
+    }
+    __Pyx_PyThreadState_assign
+    __Pyx_ErrRestore(type, value, tb);
+    return;
+raise_error:
+    Py_XDECREF(value);
+    Py_XDECREF(type);
+    Py_XDECREF(tb);
+    return;
+}
+#else
+static void __Pyx_Raise(PyObject *type, PyObject *value, PyObject *tb, PyObject *cause) {
+    PyObject* owned_instance = NULL;
+    if (tb == Py_None) {
+        tb = 0;
+    } else if (tb && !PyTraceBack_Check(tb)) {
+        PyErr_SetString(PyExc_TypeError,
+            "raise: arg 3 must be a traceback or None");
+        goto bad;
+    }
+    if (value == Py_None)
+        value = 0;
+    if (PyExceptionInstance_Check(type)) {
+        if (value) {
+            PyErr_SetString(PyExc_TypeError,
+                "instance exception may not have a separate value");
+            goto bad;
+        }
+        value = type;
+        type = (PyObject*) Py_TYPE(value);
+    } else if (PyExceptionClass_Check(type)) {
+        PyObject *instance_class = NULL;
+        if (value && PyExceptionInstance_Check(value)) {
+            instance_class = (PyObject*) Py_TYPE(value);
+            if (instance_class != type) {
+                int is_subclass = PyObject_IsSubclass(instance_class, type);
+                if (!is_subclass) {
+                    instance_class = NULL;
+                } else if (unlikely(is_subclass == -1)) {
+                    goto bad;
+                } else {
+                    type = instance_class;
+                }
+            }
+        }
+        if (!instance_class) {
+            PyObject *args;
+            if (!value)
+                args = PyTuple_New(0);
+            else if (PyTuple_Check(value)) {
+                Py_INCREF(value);
+                args = value;
+            } else
+                args = PyTuple_Pack(1, value);
+            if (!args)
+                goto bad;
+            owned_instance = PyObject_Call(type, args, NULL);
+            Py_DECREF(args);
+            if (!owned_instance)
+                goto bad;
+            value = owned_instance;
+            if (!PyExceptionInstance_Check(value)) {
+                PyErr_Format(PyExc_TypeError,
+                             "calling %R should have returned an instance of "
+                             "BaseException, not %R",
+                             type, Py_TYPE(value));
+                goto bad;
+            }
+        }
+    } else {
+        PyErr_SetString(PyExc_TypeError,
+            "raise: exception class must be a subclass of BaseException");
+        goto bad;
+    }
+    if (cause) {
+        PyObject *fixed_cause;
+        if (cause == Py_None) {
+            fixed_cause = NULL;
+        } else if (PyExceptionClass_Check(cause)) {
+            fixed_cause = PyObject_CallObject(cause, NULL);
+            if (fixed_cause == NULL)
+                goto bad;
+        } else if (PyExceptionInstance_Check(cause)) {
+            fixed_cause = cause;
+            Py_INCREF(fixed_cause);
+        } else {
+            PyErr_SetString(PyExc_TypeError,
+                            "exception causes must derive from "
+                            "BaseException");
+            goto bad;
+        }
+        PyException_SetCause(value, fixed_cause);
+    }
+    PyErr_SetObject(type, value);
+    if (tb) {
+#if CYTHON_COMPILING_IN_PYPY
+        PyObject *tmp_type, *tmp_value, *tmp_tb;
+        PyErr_Fetch(&tmp_type, &tmp_value, &tmp_tb);
+        Py_INCREF(tb);
+        PyErr_Restore(tmp_type, tmp_value, tb);
+        Py_XDECREF(tmp_tb);
+#else
+        PyThreadState *tstate = __Pyx_PyThreadState_Current;
+        PyObject* tmp_tb = tstate->curexc_traceback;
+        if (tb != tmp_tb) {
+            Py_INCREF(tb);
+            tstate->curexc_traceback = tb;
+            Py_XDECREF(tmp_tb);
+        }
+#endif
+    }
+bad:
+    Py_XDECREF(owned_instance);
+    return;
+}
+#endif
+
 /* TypeImport */
 #ifndef __PYX_HAVE_RT_ImportType
 #define __PYX_HAVE_RT_ImportType
@@ -2941,31 +4773,84 @@ bad:
 }
 #endif
 
-/* PyDictVersioning */
-#if CYTHON_USE_DICT_VERSIONS && CYTHON_USE_TYPE_SLOTS
-static CYTHON_INLINE PY_UINT64_T __Pyx_get_tp_dict_version(PyObject *obj) {
-    PyObject *dict = Py_TYPE(obj)->tp_dict;
-    return likely(dict) ? __PYX_GET_DICT_VERSION(dict) : 0;
-}
-static CYTHON_INLINE PY_UINT64_T __Pyx_get_object_dict_version(PyObject *obj) {
-    PyObject **dictptr = NULL;
-    Py_ssize_t offset = Py_TYPE(obj)->tp_dictoffset;
-    if (offset) {
-#if CYTHON_COMPILING_IN_CPYTHON
-        dictptr = (likely(offset > 0)) ? (PyObject **) ((char *)obj + offset) : _PyObject_GetDictPtr(obj);
-#else
-        dictptr = _PyObject_GetDictPtr(obj);
-#endif
+/* Import */
+static PyObject *__Pyx_Import(PyObject *name, PyObject *from_list, int level) {
+    PyObject *empty_list = 0;
+    PyObject *module = 0;
+    PyObject *global_dict = 0;
+    PyObject *empty_dict = 0;
+    PyObject *list;
+    #if PY_MAJOR_VERSION < 3
+    PyObject *py_import;
+    py_import = __Pyx_PyObject_GetAttrStr(__pyx_b, __pyx_n_s_import);
+    if (!py_import)
+        goto bad;
+    #endif
+    if (from_list)
+        list = from_list;
+    else {
+        empty_list = PyList_New(0);
+        if (!empty_list)
+            goto bad;
+        list = empty_list;
     }
-    return (dictptr && *dictptr) ? __PYX_GET_DICT_VERSION(*dictptr) : 0;
+    global_dict = PyModule_GetDict(__pyx_m);
+    if (!global_dict)
+        goto bad;
+    empty_dict = PyDict_New();
+    if (!empty_dict)
+        goto bad;
+    {
+        #if PY_MAJOR_VERSION >= 3
+        if (level == -1) {
+            if ((1) && (strchr(__Pyx_MODULE_NAME, '.'))) {
+                module = PyImport_ImportModuleLevelObject(
+                    name, global_dict, empty_dict, list, 1);
+                if (!module) {
+                    if (!PyErr_ExceptionMatches(PyExc_ImportError))
+                        goto bad;
+                    PyErr_Clear();
+                }
+            }
+            level = 0;
+        }
+        #endif
+        if (!module) {
+            #if PY_MAJOR_VERSION < 3
+            PyObject *py_level = PyInt_FromLong(level);
+            if (!py_level)
+                goto bad;
+            module = PyObject_CallFunctionObjArgs(py_import,
+                name, global_dict, empty_dict, list, py_level, (PyObject *)NULL);
+            Py_DECREF(py_level);
+            #else
+            module = PyImport_ImportModuleLevelObject(
+                name, global_dict, empty_dict, list, level);
+            #endif
+        }
+    }
+bad:
+    #if PY_MAJOR_VERSION < 3
+    Py_XDECREF(py_import);
+    #endif
+    Py_XDECREF(empty_list);
+    Py_XDECREF(empty_dict);
+    return module;
 }
-static CYTHON_INLINE int __Pyx_object_dict_version_matches(PyObject* obj, PY_UINT64_T tp_dict_version, PY_UINT64_T obj_dict_version) {
-    PyObject *dict = Py_TYPE(obj)->tp_dict;
-    if (unlikely(!dict) || unlikely(tp_dict_version != __PYX_GET_DICT_VERSION(dict)))
-        return 0;
-    return obj_dict_version == __Pyx_get_object_dict_version(obj);
+
+/* ImportFrom */
+static PyObject* __Pyx_ImportFrom(PyObject* module, PyObject* name) {
+    PyObject* value = __Pyx_PyObject_GetAttrStr(module, name);
+    if (unlikely(!value) && PyErr_ExceptionMatches(PyExc_AttributeError)) {
+        PyErr_Format(PyExc_ImportError,
+        #if PY_MAJOR_VERSION < 3
+            "cannot import name %.230s", PyString_AS_STRING(name));
+        #else
+            "cannot import name %S", name);
+        #endif
+    }
+    return value;
 }
-#endif
 
 /* CLineInTraceback */
 #ifndef CYTHON_CLINE_IN_TRACEBACK
@@ -3174,6 +5059,217 @@ bad:
     Py_XDECREF(py_frame);
 }
 
+/* CIntFromPyVerify */
+#define __PYX_VERIFY_RETURN_INT(target_type, func_type, func_value)\
+    __PYX__VERIFY_RETURN_INT(target_type, func_type, func_value, 0)
+#define __PYX_VERIFY_RETURN_INT_EXC(target_type, func_type, func_value)\
+    __PYX__VERIFY_RETURN_INT(target_type, func_type, func_value, 1)
+#define __PYX__VERIFY_RETURN_INT(target_type, func_type, func_value, exc)\
+    {\
+        func_type value = func_value;\
+        if (sizeof(target_type) < sizeof(func_type)) {\
+            if (unlikely(value != (func_type) (target_type) value)) {\
+                func_type zero = 0;\
+                if (exc && unlikely(value == (func_type)-1 && PyErr_Occurred()))\
+                    return (target_type) -1;\
+                if (is_unsigned && unlikely(value < zero))\
+                    goto raise_neg_overflow;\
+                else\
+                    goto raise_overflow;\
+            }\
+        }\
+        return (target_type) value;\
+    }
+
+/* CIntFromPy */
+static CYTHON_INLINE uint8_t __Pyx_PyInt_As_uint8_t(PyObject *x) {
+    const uint8_t neg_one = (uint8_t) ((uint8_t) 0 - (uint8_t) 1), const_zero = (uint8_t) 0;
+    const int is_unsigned = neg_one > const_zero;
+#if PY_MAJOR_VERSION < 3
+    if (likely(PyInt_Check(x))) {
+        if (sizeof(uint8_t) < sizeof(long)) {
+            __PYX_VERIFY_RETURN_INT(uint8_t, long, PyInt_AS_LONG(x))
+        } else {
+            long val = PyInt_AS_LONG(x);
+            if (is_unsigned && unlikely(val < 0)) {
+                goto raise_neg_overflow;
+            }
+            return (uint8_t) val;
+        }
+    } else
+#endif
+    if (likely(PyLong_Check(x))) {
+        if (is_unsigned) {
+#if CYTHON_USE_PYLONG_INTERNALS
+            const digit* digits = ((PyLongObject*)x)->ob_digit;
+            switch (Py_SIZE(x)) {
+                case  0: return (uint8_t) 0;
+                case  1: __PYX_VERIFY_RETURN_INT(uint8_t, digit, digits[0])
+                case 2:
+                    if (8 * sizeof(uint8_t) > 1 * PyLong_SHIFT) {
+                        if (8 * sizeof(unsigned long) > 2 * PyLong_SHIFT) {
+                            __PYX_VERIFY_RETURN_INT(uint8_t, unsigned long, (((((unsigned long)digits[1]) << PyLong_SHIFT) | (unsigned long)digits[0])))
+                        } else if (8 * sizeof(uint8_t) >= 2 * PyLong_SHIFT) {
+                            return (uint8_t) (((((uint8_t)digits[1]) << PyLong_SHIFT) | (uint8_t)digits[0]));
+                        }
+                    }
+                    break;
+                case 3:
+                    if (8 * sizeof(uint8_t) > 2 * PyLong_SHIFT) {
+                        if (8 * sizeof(unsigned long) > 3 * PyLong_SHIFT) {
+                            __PYX_VERIFY_RETURN_INT(uint8_t, unsigned long, (((((((unsigned long)digits[2]) << PyLong_SHIFT) | (unsigned long)digits[1]) << PyLong_SHIFT) | (unsigned long)digits[0])))
+                        } else if (8 * sizeof(uint8_t) >= 3 * PyLong_SHIFT) {
+                            return (uint8_t) (((((((uint8_t)digits[2]) << PyLong_SHIFT) | (uint8_t)digits[1]) << PyLong_SHIFT) | (uint8_t)digits[0]));
+                        }
+                    }
+                    break;
+                case 4:
+                    if (8 * sizeof(uint8_t) > 3 * PyLong_SHIFT) {
+                        if (8 * sizeof(unsigned long) > 4 * PyLong_SHIFT) {
+                            __PYX_VERIFY_RETURN_INT(uint8_t, unsigned long, (((((((((unsigned long)digits[3]) << PyLong_SHIFT) | (unsigned long)digits[2]) << PyLong_SHIFT) | (unsigned long)digits[1]) << PyLong_SHIFT) | (unsigned long)digits[0])))
+                        } else if (8 * sizeof(uint8_t) >= 4 * PyLong_SHIFT) {
+                            return (uint8_t) (((((((((uint8_t)digits[3]) << PyLong_SHIFT) | (uint8_t)digits[2]) << PyLong_SHIFT) | (uint8_t)digits[1]) << PyLong_SHIFT) | (uint8_t)digits[0]));
+                        }
+                    }
+                    break;
+            }
+#endif
+#if CYTHON_COMPILING_IN_CPYTHON
+            if (unlikely(Py_SIZE(x) < 0)) {
+                goto raise_neg_overflow;
+            }
+#else
+            {
+                int result = PyObject_RichCompareBool(x, Py_False, Py_LT);
+                if (unlikely(result < 0))
+                    return (uint8_t) -1;
+                if (unlikely(result == 1))
+                    goto raise_neg_overflow;
+            }
+#endif
+            if (sizeof(uint8_t) <= sizeof(unsigned long)) {
+                __PYX_VERIFY_RETURN_INT_EXC(uint8_t, unsigned long, PyLong_AsUnsignedLong(x))
+#ifdef HAVE_LONG_LONG
+            } else if (sizeof(uint8_t) <= sizeof(unsigned PY_LONG_LONG)) {
+                __PYX_VERIFY_RETURN_INT_EXC(uint8_t, unsigned PY_LONG_LONG, PyLong_AsUnsignedLongLong(x))
+#endif
+            }
+        } else {
+#if CYTHON_USE_PYLONG_INTERNALS
+            const digit* digits = ((PyLongObject*)x)->ob_digit;
+            switch (Py_SIZE(x)) {
+                case  0: return (uint8_t) 0;
+                case -1: __PYX_VERIFY_RETURN_INT(uint8_t, sdigit, (sdigit) (-(sdigit)digits[0]))
+                case  1: __PYX_VERIFY_RETURN_INT(uint8_t,  digit, +digits[0])
+                case -2:
+                    if (8 * sizeof(uint8_t) - 1 > 1 * PyLong_SHIFT) {
+                        if (8 * sizeof(unsigned long) > 2 * PyLong_SHIFT) {
+                            __PYX_VERIFY_RETURN_INT(uint8_t, long, -(long) (((((unsigned long)digits[1]) << PyLong_SHIFT) | (unsigned long)digits[0])))
+                        } else if (8 * sizeof(uint8_t) - 1 > 2 * PyLong_SHIFT) {
+                            return (uint8_t) (((uint8_t)-1)*(((((uint8_t)digits[1]) << PyLong_SHIFT) | (uint8_t)digits[0])));
+                        }
+                    }
+                    break;
+                case 2:
+                    if (8 * sizeof(uint8_t) > 1 * PyLong_SHIFT) {
+                        if (8 * sizeof(unsigned long) > 2 * PyLong_SHIFT) {
+                            __PYX_VERIFY_RETURN_INT(uint8_t, unsigned long, (((((unsigned long)digits[1]) << PyLong_SHIFT) | (unsigned long)digits[0])))
+                        } else if (8 * sizeof(uint8_t) - 1 > 2 * PyLong_SHIFT) {
+                            return (uint8_t) ((((((uint8_t)digits[1]) << PyLong_SHIFT) | (uint8_t)digits[0])));
+                        }
+                    }
+                    break;
+                case -3:
+                    if (8 * sizeof(uint8_t) - 1 > 2 * PyLong_SHIFT) {
+                        if (8 * sizeof(unsigned long) > 3 * PyLong_SHIFT) {
+                            __PYX_VERIFY_RETURN_INT(uint8_t, long, -(long) (((((((unsigned long)digits[2]) << PyLong_SHIFT) | (unsigned long)digits[1]) << PyLong_SHIFT) | (unsigned long)digits[0])))
+                        } else if (8 * sizeof(uint8_t) - 1 > 3 * PyLong_SHIFT) {
+                            return (uint8_t) (((uint8_t)-1)*(((((((uint8_t)digits[2]) << PyLong_SHIFT) | (uint8_t)digits[1]) << PyLong_SHIFT) | (uint8_t)digits[0])));
+                        }
+                    }
+                    break;
+                case 3:
+                    if (8 * sizeof(uint8_t) > 2 * PyLong_SHIFT) {
+                        if (8 * sizeof(unsigned long) > 3 * PyLong_SHIFT) {
+                            __PYX_VERIFY_RETURN_INT(uint8_t, unsigned long, (((((((unsigned long)digits[2]) << PyLong_SHIFT) | (unsigned long)digits[1]) << PyLong_SHIFT) | (unsigned long)digits[0])))
+                        } else if (8 * sizeof(uint8_t) - 1 > 3 * PyLong_SHIFT) {
+                            return (uint8_t) ((((((((uint8_t)digits[2]) << PyLong_SHIFT) | (uint8_t)digits[1]) << PyLong_SHIFT) | (uint8_t)digits[0])));
+                        }
+                    }
+                    break;
+                case -4:
+                    if (8 * sizeof(uint8_t) - 1 > 3 * PyLong_SHIFT) {
+                        if (8 * sizeof(unsigned long) > 4 * PyLong_SHIFT) {
+                            __PYX_VERIFY_RETURN_INT(uint8_t, long, -(long) (((((((((unsigned long)digits[3]) << PyLong_SHIFT) | (unsigned long)digits[2]) << PyLong_SHIFT) | (unsigned long)digits[1]) << PyLong_SHIFT) | (unsigned long)digits[0])))
+                        } else if (8 * sizeof(uint8_t) - 1 > 4 * PyLong_SHIFT) {
+                            return (uint8_t) (((uint8_t)-1)*(((((((((uint8_t)digits[3]) << PyLong_SHIFT) | (uint8_t)digits[2]) << PyLong_SHIFT) | (uint8_t)digits[1]) << PyLong_SHIFT) | (uint8_t)digits[0])));
+                        }
+                    }
+                    break;
+                case 4:
+                    if (8 * sizeof(uint8_t) > 3 * PyLong_SHIFT) {
+                        if (8 * sizeof(unsigned long) > 4 * PyLong_SHIFT) {
+                            __PYX_VERIFY_RETURN_INT(uint8_t, unsigned long, (((((((((unsigned long)digits[3]) << PyLong_SHIFT) | (unsigned long)digits[2]) << PyLong_SHIFT) | (unsigned long)digits[1]) << PyLong_SHIFT) | (unsigned long)digits[0])))
+                        } else if (8 * sizeof(uint8_t) - 1 > 4 * PyLong_SHIFT) {
+                            return (uint8_t) ((((((((((uint8_t)digits[3]) << PyLong_SHIFT) | (uint8_t)digits[2]) << PyLong_SHIFT) | (uint8_t)digits[1]) << PyLong_SHIFT) | (uint8_t)digits[0])));
+                        }
+                    }
+                    break;
+            }
+#endif
+            if (sizeof(uint8_t) <= sizeof(long)) {
+                __PYX_VERIFY_RETURN_INT_EXC(uint8_t, long, PyLong_AsLong(x))
+#ifdef HAVE_LONG_LONG
+            } else if (sizeof(uint8_t) <= sizeof(PY_LONG_LONG)) {
+                __PYX_VERIFY_RETURN_INT_EXC(uint8_t, PY_LONG_LONG, PyLong_AsLongLong(x))
+#endif
+            }
+        }
+        {
+#if CYTHON_COMPILING_IN_PYPY && !defined(_PyLong_AsByteArray)
+            PyErr_SetString(PyExc_RuntimeError,
+                            "_PyLong_AsByteArray() not available in PyPy, cannot convert large numbers");
+#else
+            uint8_t val;
+            PyObject *v = __Pyx_PyNumber_IntOrLong(x);
+ #if PY_MAJOR_VERSION < 3
+            if (likely(v) && !PyLong_Check(v)) {
+                PyObject *tmp = v;
+                v = PyNumber_Long(tmp);
+                Py_DECREF(tmp);
+            }
+ #endif
+            if (likely(v)) {
+                int one = 1; int is_little = (int)*(unsigned char *)&one;
+                unsigned char *bytes = (unsigned char *)&val;
+                int ret = _PyLong_AsByteArray((PyLongObject *)v,
+                                              bytes, sizeof(val),
+                                              is_little, !is_unsigned);
+                Py_DECREF(v);
+                if (likely(!ret))
+                    return val;
+            }
+#endif
+            return (uint8_t) -1;
+        }
+    } else {
+        uint8_t val;
+        PyObject *tmp = __Pyx_PyNumber_IntOrLong(x);
+        if (!tmp) return (uint8_t) -1;
+        val = __Pyx_PyInt_As_uint8_t(tmp);
+        Py_DECREF(tmp);
+        return val;
+    }
+raise_overflow:
+    PyErr_SetString(PyExc_OverflowError,
+        "value too large to convert to uint8_t");
+    return (uint8_t) -1;
+raise_neg_overflow:
+    PyErr_SetString(PyExc_OverflowError,
+        "can't convert negative value to uint8_t");
+    return (uint8_t) -1;
+}
+
 /* CIntToPy */
 static CYTHON_INLINE PyObject* __Pyx_PyInt_From_long(long value) {
     const long neg_one = (long) ((long) 0 - (long) 1), const_zero = (long) 0;
@@ -3204,28 +5300,6 @@ static CYTHON_INLINE PyObject* __Pyx_PyInt_From_long(long value) {
                                      little, !is_unsigned);
     }
 }
-
-/* CIntFromPyVerify */
-#define __PYX_VERIFY_RETURN_INT(target_type, func_type, func_value)\
-    __PYX__VERIFY_RETURN_INT(target_type, func_type, func_value, 0)
-#define __PYX_VERIFY_RETURN_INT_EXC(target_type, func_type, func_value)\
-    __PYX__VERIFY_RETURN_INT(target_type, func_type, func_value, 1)
-#define __PYX__VERIFY_RETURN_INT(target_type, func_type, func_value, exc)\
-    {\
-        func_type value = func_value;\
-        if (sizeof(target_type) < sizeof(func_type)) {\
-            if (unlikely(value != (func_type) (target_type) value)) {\
-                func_type zero = 0;\
-                if (exc && unlikely(value == (func_type)-1 && PyErr_Occurred()))\
-                    return (target_type) -1;\
-                if (is_unsigned && unlikely(value < zero))\
-                    goto raise_neg_overflow;\
-                else\
-                    goto raise_overflow;\
-            }\
-        }\
-        return (target_type) value;\
-    }
 
 /* CIntFromPy */
 static CYTHON_INLINE long __Pyx_PyInt_As_long(PyObject *x) {
@@ -3704,6 +5778,12 @@ static CYTHON_INLINE int __Pyx_PyErr_GivenExceptionMatches2(PyObject *err, PyObj
     return (PyErr_GivenExceptionMatches(err, exc_type1) || PyErr_GivenExceptionMatches(err, exc_type2));
 }
 #endif
+
+/* CStringEquals */
+static CYTHON_INLINE int __Pyx_StrEq(const char *s1, const char *s2) {
+    while (*s1 != '\0' && *s1 == *s2) { s1++; s2++; }
+    return *s1 == *s2;
+}
 
 /* CheckBinaryVersion */
 static int __Pyx_check_binary_version(void) {

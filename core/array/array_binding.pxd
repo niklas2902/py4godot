@@ -1,6 +1,5 @@
 from godot_api.binding cimport *
 
-
 cdef extern from "binding.h":
     const godot_gdnative_core_api_struct *api_core
 

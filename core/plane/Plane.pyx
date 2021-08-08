@@ -3,12 +3,8 @@ from core.plane.plane_binding cimport *
 
 cdef class Plane:
 
-    def __init__(self, godot_plane _native):
-        if (_native != None):
-            self._native = _native
-        else:
-            pass
-            #api_core.godot_plane_new(&self._native)
+    def __init__(self, godot_real a, godot_real b, godot_real c, godot_real d):
+        api_core.godot_plane_new_with_reals(&self._native, a,b,c,d)
 
     def new_with_reals(self, godot_real a, godot_real b, godot_real c, godot_real d):
         api_core.godot_plane_new_with_reals(&self._native, a,b,c,d)

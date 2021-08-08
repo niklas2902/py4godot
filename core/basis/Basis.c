@@ -974,7 +974,7 @@ static CYTHON_INLINE void __pyx_f_4core_6string_6String_6String_new_static(godot
  * 
  * cdef class Basis:             # <<<<<<<<<<<<<<
  * 
- *     def __init__(self, godot_basis _native):
+ *     def __init__(self):
  */
 
 struct __pyx_vtabstruct_4core_5basis_5Basis_Basis {
@@ -1059,6 +1059,13 @@ static CYTHON_INLINE PyObject* __Pyx_PyObject_GetAttrStr(PyObject* obj, PyObject
 /* GetBuiltinName.proto */
 static PyObject *__Pyx_GetBuiltinName(PyObject *name);
 
+/* RaiseArgTupleInvalid.proto */
+static void __Pyx_RaiseArgtupleInvalid(const char* func_name, int exact,
+    Py_ssize_t num_min, Py_ssize_t num_max, Py_ssize_t num_found);
+
+/* KeywordStringCheck.proto */
+static int __Pyx_CheckKeywordStrings(PyObject *kwdict, const char* function_name, int kw_allowed);
+
 /* RaiseDoubleKeywords.proto */
 static void __Pyx_RaiseDoubleKeywordsError(const char* func_name, PyObject* kw_name);
 
@@ -1066,10 +1073,6 @@ static void __Pyx_RaiseDoubleKeywordsError(const char* func_name, PyObject* kw_n
 static int __Pyx_ParseOptionalKeywords(PyObject *kwds, PyObject **argnames[],\
     PyObject *kwds2, PyObject *values[], Py_ssize_t num_pos_args,\
     const char* function_name);
-
-/* RaiseArgTupleInvalid.proto */
-static void __Pyx_RaiseArgtupleInvalid(const char* func_name, int exact,
-    Py_ssize_t num_min, Py_ssize_t num_max, Py_ssize_t num_found);
 
 /* ArgTypeTest.proto */
 #define __Pyx_ArgTypeTest(obj, type, none_allowed, name, exact)\
@@ -1175,52 +1178,6 @@ static void __Pyx_WriteUnraisable(const char *name, int clineno,
                                   int lineno, const char *filename,
                                   int full_traceback, int nogil);
 
-/* GetTopmostException.proto */
-#if CYTHON_USE_EXC_INFO_STACK
-static _PyErr_StackItem * __Pyx_PyErr_GetTopmostException(PyThreadState *tstate);
-#endif
-
-/* SaveResetException.proto */
-#if CYTHON_FAST_THREAD_STATE
-#define __Pyx_ExceptionSave(type, value, tb)  __Pyx__ExceptionSave(__pyx_tstate, type, value, tb)
-static CYTHON_INLINE void __Pyx__ExceptionSave(PyThreadState *tstate, PyObject **type, PyObject **value, PyObject **tb);
-#define __Pyx_ExceptionReset(type, value, tb)  __Pyx__ExceptionReset(__pyx_tstate, type, value, tb)
-static CYTHON_INLINE void __Pyx__ExceptionReset(PyThreadState *tstate, PyObject *type, PyObject *value, PyObject *tb);
-#else
-#define __Pyx_ExceptionSave(type, value, tb)   PyErr_GetExcInfo(type, value, tb)
-#define __Pyx_ExceptionReset(type, value, tb)  PyErr_SetExcInfo(type, value, tb)
-#endif
-
-/* PyErrExceptionMatches.proto */
-#if CYTHON_FAST_THREAD_STATE
-#define __Pyx_PyErr_ExceptionMatches(err) __Pyx_PyErr_ExceptionMatchesInState(__pyx_tstate, err)
-static CYTHON_INLINE int __Pyx_PyErr_ExceptionMatchesInState(PyThreadState* tstate, PyObject* err);
-#else
-#define __Pyx_PyErr_ExceptionMatches(err)  PyErr_ExceptionMatches(err)
-#endif
-
-/* DictGetItem.proto */
-#if PY_MAJOR_VERSION >= 3 && !CYTHON_COMPILING_IN_PYPY
-static PyObject *__Pyx_PyDict_GetItem(PyObject *d, PyObject* key);
-#define __Pyx_PyObject_Dict_GetItem(obj, name)\
-    (likely(PyDict_CheckExact(obj)) ?\
-     __Pyx_PyDict_GetItem(obj, name) : PyObject_GetItem(obj, name))
-#else
-#define __Pyx_PyDict_GetItem(d, key) PyObject_GetItem(d, key)
-#define __Pyx_PyObject_Dict_GetItem(obj, name)  PyObject_GetItem(obj, name)
-#endif
-
-/* GetException.proto */
-#if CYTHON_FAST_THREAD_STATE
-#define __Pyx_GetException(type, value, tb)  __Pyx__GetException(__pyx_tstate, type, value, tb)
-static int __Pyx__GetException(PyThreadState *tstate, PyObject **type, PyObject **value, PyObject **tb);
-#else
-static int __Pyx_GetException(PyObject **type, PyObject **value, PyObject **tb);
-#endif
-
-/* IncludeStringH.proto */
-#include <string.h>
-
 /* PyObject_GenericGetAttrNoDict.proto */
 #if CYTHON_USE_TYPE_SLOTS && CYTHON_USE_PYTYPE_LOOKUP && PY_VERSION_HEX < 0x03070000
 static CYTHON_INLINE PyObject* __Pyx_PyObject_GenericGetAttrNoDict(PyObject* obj, PyObject* attr_name);
@@ -1237,6 +1194,14 @@ static PyObject* __Pyx_PyObject_GenericGetAttr(PyObject* obj, PyObject* attr_nam
 
 /* SetVTable.proto */
 static int __Pyx_SetVtable(PyObject *dict, void *vtable);
+
+/* PyErrExceptionMatches.proto */
+#if CYTHON_FAST_THREAD_STATE
+#define __Pyx_PyErr_ExceptionMatches(err) __Pyx_PyErr_ExceptionMatchesInState(__pyx_tstate, err)
+static CYTHON_INLINE int __Pyx_PyErr_ExceptionMatchesInState(PyThreadState* tstate, PyObject* err);
+#else
+#define __Pyx_PyErr_ExceptionMatches(err)  PyErr_ExceptionMatches(err)
+#endif
 
 /* PyObjectGetAttrStrNoError.proto */
 static CYTHON_INLINE PyObject* __Pyx_PyObject_GetAttrStrNoError(PyObject* obj, PyObject* attr_name);
@@ -1310,13 +1275,10 @@ static void __pyx_insert_code_object(int code_line, PyCodeObject* code_object);
 static void __Pyx_AddTraceback(const char *funcname, int c_line,
                                int py_line, const char *filename);
 
-static PyObject* __pyx_convert__to_py_godot_basis(godot_basis s);
 static PyObject* __pyx_convert__to_py_godot_string(godot_string s);
+static PyObject* __pyx_convert__to_py_godot_basis(godot_basis s);
 /* CIntToPy.proto */
 static CYTHON_INLINE PyObject* __Pyx_PyInt_From_godot_int(godot_int value);
-
-/* CIntFromPy.proto */
-static CYTHON_INLINE uint8_t __Pyx_PyInt_As_uint8_t(PyObject *);
 
 /* CIntFromPy.proto */
 static CYTHON_INLINE godot_int __Pyx_PyInt_As_godot_int(PyObject *);
@@ -1385,19 +1347,12 @@ static PyTypeObject *__pyx_ptype_4core_6string_6String_String = 0;
 
 /* Module declarations from 'core.basis.Basis' */
 static PyTypeObject *__pyx_ptype_4core_5basis_5Basis_Basis = 0;
-static int __Pyx_carray_from_py_uint8_t(PyObject *, uint8_t *, Py_ssize_t); /*proto*/
-static godot_basis __pyx_convert__from_py_godot_basis(PyObject *); /*proto*/
 #define __Pyx_MODULE_NAME "core.basis.Basis"
 extern int __pyx_module_is_main_core__basis__Basis;
 int __pyx_module_is_main_core__basis__Basis = 0;
 
 /* Implementation of 'core.basis.Basis' */
 static PyObject *__pyx_builtin_TypeError;
-static PyObject *__pyx_builtin_OverflowError;
-static PyObject *__pyx_builtin_enumerate;
-static PyObject *__pyx_builtin_IndexError;
-static PyObject *__pyx_builtin_KeyError;
-static PyObject *__pyx_builtin_ValueError;
 static const char __pyx_k_phi[] = "phi";
 static const char __pyx_k_row[] = "row";
 static const char __pyx_k_axis[] = "axis";
@@ -1408,45 +1363,31 @@ static const char __pyx_k_Basis[] = "Basis";
 static const char __pyx_k_euler[] = "euler";
 static const char __pyx_k_p_phi[] = "p_phi";
 static const char __pyx_k_value[] = "value";
-static const char __pyx_k_native[] = "_native";
 static const char __pyx_k_r_dest[] = "r_dest";
 static const char __pyx_k_reduce[] = "__reduce__";
 static const char __pyx_k_x_axis[] = "x_axis";
 static const char __pyx_k_y_axis[] = "y_axis";
 static const char __pyx_k_z_axis[] = "z_axis";
-static const char __pyx_k_KeyError[] = "KeyError";
 static const char __pyx_k_getstate[] = "__getstate__";
 static const char __pyx_k_setstate[] = "__setstate__";
 static const char __pyx_k_TypeError[] = "TypeError";
-static const char __pyx_k_enumerate[] = "enumerate";
 static const char __pyx_k_reduce_ex[] = "__reduce_ex__";
-static const char __pyx_k_IndexError[] = "IndexError";
-static const char __pyx_k_ValueError[] = "ValueError";
 static const char __pyx_k_pyx_vtable[] = "__pyx_vtable__";
-static const char __pyx_k_OverflowError[] = "OverflowError";
 static const char __pyx_k_reduce_cython[] = "__reduce_cython__";
 static const char __pyx_k_dont_touch_that[] = "_dont_touch_that";
 static const char __pyx_k_setstate_cython[] = "__setstate_cython__";
 static const char __pyx_k_cline_in_traceback[] = "cline_in_traceback";
 static const char __pyx_k_Pickling_of_struct_members_such[] = "Pickling of struct members such as self._native must be explicitly requested with @auto_pickle(True)";
-static const char __pyx_k_No_value_specified_for_struct_at[] = "No value specified for struct attribute '_dont_touch_that'";
 static PyObject *__pyx_n_s_Basis;
-static PyObject *__pyx_n_s_IndexError;
-static PyObject *__pyx_n_s_KeyError;
-static PyObject *__pyx_kp_s_No_value_specified_for_struct_at;
-static PyObject *__pyx_n_s_OverflowError;
 static PyObject *__pyx_kp_s_Pickling_of_struct_members_such;
 static PyObject *__pyx_n_s_TypeError;
-static PyObject *__pyx_n_s_ValueError;
 static PyObject *__pyx_n_s_axis;
 static PyObject *__pyx_n_s_cline_in_traceback;
 static PyObject *__pyx_n_s_dont_touch_that;
-static PyObject *__pyx_n_s_enumerate;
 static PyObject *__pyx_n_s_euler;
 static PyObject *__pyx_n_s_getstate;
 static PyObject *__pyx_n_s_main;
 static PyObject *__pyx_n_s_name;
-static PyObject *__pyx_n_s_native;
 static PyObject *__pyx_n_s_p_phi;
 static PyObject *__pyx_n_s_phi;
 static PyObject *__pyx_n_s_pyx_vtable;
@@ -1462,7 +1403,7 @@ static PyObject *__pyx_n_s_value;
 static PyObject *__pyx_n_s_x_axis;
 static PyObject *__pyx_n_s_y_axis;
 static PyObject *__pyx_n_s_z_axis;
-static int __pyx_pf_4core_5basis_5Basis_5Basis___init__(struct __pyx_obj_4core_5basis_5Basis_Basis *__pyx_v_self, godot_basis __pyx_v__native); /* proto */
+static int __pyx_pf_4core_5basis_5Basis_5Basis___init__(struct __pyx_obj_4core_5basis_5Basis_Basis *__pyx_v_self); /* proto */
 static PyObject *__pyx_pf_4core_5basis_5Basis_5Basis_2new_with_rows(struct __pyx_obj_4core_5basis_5Basis_Basis *__pyx_v_self, struct __pyx_obj_4core_7vector3_7Vector3_Vector3 *__pyx_v_x_axis, struct __pyx_obj_4core_7vector3_7Vector3_Vector3 *__pyx_v_y_axis, struct __pyx_obj_4core_7vector3_7Vector3_Vector3 *__pyx_v_z_axis); /* proto */
 static PyObject *__pyx_pf_4core_5basis_5Basis_5Basis_4new_with_axis_and_angle(struct __pyx_obj_4core_5basis_5Basis_Basis *__pyx_v_dest, struct __pyx_obj_4core_7vector3_7Vector3_Vector3 *__pyx_v_axis, godot_real __pyx_v_p_phi); /* proto */
 static PyObject *__pyx_pf_4core_5basis_5Basis_5Basis_6new_with_euler(struct __pyx_obj_4core_5basis_5Basis_Basis *__pyx_v_dest, struct __pyx_obj_4core_7vector3_7Vector3_Vector3 *__pyx_v_euler); /* proto */
@@ -1497,149 +1438,62 @@ static PyObject *__pyx_pf_4core_5basis_5Basis_5Basis_62__setstate_cython__(CYTHO
 static PyObject *__pyx_tp_new_4core_5basis_5Basis_Basis(PyTypeObject *t, PyObject *a, PyObject *k); /*proto*/
 static PyObject *__pyx_tuple_;
 static PyObject *__pyx_tuple__2;
-static PyObject *__pyx_tuple__3;
 /* Late includes */
 
 /* "core/basis/Basis.pyx":9
  * cdef class Basis:
  * 
- *     def __init__(self, godot_basis _native):             # <<<<<<<<<<<<<<
- *         if (_native != None):
- *             self._native = _native
+ *     def __init__(self):             # <<<<<<<<<<<<<<
+ *         api_core.godot_basis_new(&self._native)
+ * 
  */
 
 /* Python wrapper */
 static int __pyx_pw_4core_5basis_5Basis_5Basis_1__init__(PyObject *__pyx_v_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
 static int __pyx_pw_4core_5basis_5Basis_5Basis_1__init__(PyObject *__pyx_v_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
-  godot_basis __pyx_v__native;
-  int __pyx_lineno = 0;
-  const char *__pyx_filename = NULL;
-  int __pyx_clineno = 0;
   int __pyx_r;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__init__ (wrapper)", 0);
-  {
-    static PyObject **__pyx_pyargnames[] = {&__pyx_n_s_native,0};
-    PyObject* values[1] = {0};
-    if (unlikely(__pyx_kwds)) {
-      Py_ssize_t kw_args;
-      const Py_ssize_t pos_args = PyTuple_GET_SIZE(__pyx_args);
-      switch (pos_args) {
-        case  1: values[0] = PyTuple_GET_ITEM(__pyx_args, 0);
-        CYTHON_FALLTHROUGH;
-        case  0: break;
-        default: goto __pyx_L5_argtuple_error;
-      }
-      kw_args = PyDict_Size(__pyx_kwds);
-      switch (pos_args) {
-        case  0:
-        if (likely((values[0] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_native)) != 0)) kw_args--;
-        else goto __pyx_L5_argtuple_error;
-      }
-      if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "__init__") < 0)) __PYX_ERR(1, 9, __pyx_L3_error)
-      }
-    } else if (PyTuple_GET_SIZE(__pyx_args) != 1) {
-      goto __pyx_L5_argtuple_error;
-    } else {
-      values[0] = PyTuple_GET_ITEM(__pyx_args, 0);
-    }
-    __pyx_v__native = __pyx_convert__from_py_godot_basis(values[0]); if (unlikely(PyErr_Occurred())) __PYX_ERR(1, 9, __pyx_L3_error)
-  }
-  goto __pyx_L4_argument_unpacking_done;
-  __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("__init__", 1, 1, 1, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(1, 9, __pyx_L3_error)
-  __pyx_L3_error:;
-  __Pyx_AddTraceback("core.basis.Basis.Basis.__init__", __pyx_clineno, __pyx_lineno, __pyx_filename);
-  __Pyx_RefNannyFinishContext();
-  return -1;
-  __pyx_L4_argument_unpacking_done:;
-  __pyx_r = __pyx_pf_4core_5basis_5Basis_5Basis___init__(((struct __pyx_obj_4core_5basis_5Basis_Basis *)__pyx_v_self), __pyx_v__native);
+  if (unlikely(PyTuple_GET_SIZE(__pyx_args) > 0)) {
+    __Pyx_RaiseArgtupleInvalid("__init__", 1, 0, 0, PyTuple_GET_SIZE(__pyx_args)); return -1;}
+  if (unlikely(__pyx_kwds) && unlikely(PyDict_Size(__pyx_kwds) > 0) && unlikely(!__Pyx_CheckKeywordStrings(__pyx_kwds, "__init__", 0))) return -1;
+  __pyx_r = __pyx_pf_4core_5basis_5Basis_5Basis___init__(((struct __pyx_obj_4core_5basis_5Basis_Basis *)__pyx_v_self));
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static int __pyx_pf_4core_5basis_5Basis_5Basis___init__(struct __pyx_obj_4core_5basis_5Basis_Basis *__pyx_v_self, godot_basis __pyx_v__native) {
+static int __pyx_pf_4core_5basis_5Basis_5Basis___init__(struct __pyx_obj_4core_5basis_5Basis_Basis *__pyx_v_self) {
   int __pyx_r;
   __Pyx_RefNannyDeclarations
-  PyObject *__pyx_t_1 = NULL;
-  PyObject *__pyx_t_2 = NULL;
-  int __pyx_t_3;
-  int __pyx_lineno = 0;
-  const char *__pyx_filename = NULL;
-  int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__init__", 0);
 
   /* "core/basis/Basis.pyx":10
  * 
- *     def __init__(self, godot_basis _native):
- *         if (_native != None):             # <<<<<<<<<<<<<<
- *             self._native = _native
- *         else:
- */
-  __pyx_t_1 = __pyx_convert__to_py_godot_basis(__pyx_v__native); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 10, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = PyObject_RichCompare(__pyx_t_1, Py_None, Py_NE); __Pyx_XGOTREF(__pyx_t_2); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 10, __pyx_L1_error)
-  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_3 = __Pyx_PyObject_IsTrue(__pyx_t_2); if (unlikely(__pyx_t_3 < 0)) __PYX_ERR(1, 10, __pyx_L1_error)
-  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  if (__pyx_t_3) {
-
-    /* "core/basis/Basis.pyx":11
- *     def __init__(self, godot_basis _native):
- *         if (_native != None):
- *             self._native = _native             # <<<<<<<<<<<<<<
- *         else:
- *             pass
- */
-    __pyx_v_self->_native = __pyx_v__native;
-
-    /* "core/basis/Basis.pyx":10
+ *     def __init__(self):
+ *         api_core.godot_basis_new(&self._native)             # <<<<<<<<<<<<<<
  * 
- *     def __init__(self, godot_basis _native):
- *         if (_native != None):             # <<<<<<<<<<<<<<
- *             self._native = _native
- *         else:
+ *     def new_with_rows(self, Vector3 x_axis, Vector3 y_axis, Vector3 z_axis):
  */
-    goto __pyx_L3;
-  }
-
-  /* "core/basis/Basis.pyx":13
- *             self._native = _native
- *         else:
- *             pass             # <<<<<<<<<<<<<<
- *             #api_core.godot_basis_new(&self._native)
- * 
- */
-  /*else*/ {
-  }
-  __pyx_L3:;
+  api_core->godot_basis_new((&__pyx_v_self->_native));
 
   /* "core/basis/Basis.pyx":9
  * cdef class Basis:
  * 
- *     def __init__(self, godot_basis _native):             # <<<<<<<<<<<<<<
- *         if (_native != None):
- *             self._native = _native
+ *     def __init__(self):             # <<<<<<<<<<<<<<
+ *         api_core.godot_basis_new(&self._native)
+ * 
  */
 
   /* function exit code */
   __pyx_r = 0;
-  goto __pyx_L0;
-  __pyx_L1_error:;
-  __Pyx_XDECREF(__pyx_t_1);
-  __Pyx_XDECREF(__pyx_t_2);
-  __Pyx_AddTraceback("core.basis.Basis.Basis.__init__", __pyx_clineno, __pyx_lineno, __pyx_filename);
-  __pyx_r = -1;
-  __pyx_L0:;
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-/* "core/basis/Basis.pyx":16
- *             #api_core.godot_basis_new(&self._native)
+/* "core/basis/Basis.pyx":12
+ *         api_core.godot_basis_new(&self._native)
  * 
  *     def new_with_rows(self, Vector3 x_axis, Vector3 y_axis, Vector3 z_axis):             # <<<<<<<<<<<<<<
  *         api_core.godot_basis_new_with_rows(&self._native, &x_axis._native, &y_axis._native, &z_axis._native)
@@ -1683,17 +1537,17 @@ static PyObject *__pyx_pw_4core_5basis_5Basis_5Basis_3new_with_rows(PyObject *__
         case  1:
         if (likely((values[1] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_y_axis)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("new_with_rows", 1, 3, 3, 1); __PYX_ERR(1, 16, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("new_with_rows", 1, 3, 3, 1); __PYX_ERR(1, 12, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  2:
         if (likely((values[2] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_z_axis)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("new_with_rows", 1, 3, 3, 2); __PYX_ERR(1, 16, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("new_with_rows", 1, 3, 3, 2); __PYX_ERR(1, 12, __pyx_L3_error)
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "new_with_rows") < 0)) __PYX_ERR(1, 16, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "new_with_rows") < 0)) __PYX_ERR(1, 12, __pyx_L3_error)
       }
     } else if (PyTuple_GET_SIZE(__pyx_args) != 3) {
       goto __pyx_L5_argtuple_error;
@@ -1708,15 +1562,15 @@ static PyObject *__pyx_pw_4core_5basis_5Basis_5Basis_3new_with_rows(PyObject *__
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("new_with_rows", 1, 3, 3, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(1, 16, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("new_with_rows", 1, 3, 3, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(1, 12, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("core.basis.Basis.Basis.new_with_rows", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_x_axis), __pyx_ptype_4core_7vector3_7Vector3_Vector3, 1, "x_axis", 0))) __PYX_ERR(1, 16, __pyx_L1_error)
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_y_axis), __pyx_ptype_4core_7vector3_7Vector3_Vector3, 1, "y_axis", 0))) __PYX_ERR(1, 16, __pyx_L1_error)
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_z_axis), __pyx_ptype_4core_7vector3_7Vector3_Vector3, 1, "z_axis", 0))) __PYX_ERR(1, 16, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_x_axis), __pyx_ptype_4core_7vector3_7Vector3_Vector3, 1, "x_axis", 0))) __PYX_ERR(1, 12, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_y_axis), __pyx_ptype_4core_7vector3_7Vector3_Vector3, 1, "y_axis", 0))) __PYX_ERR(1, 12, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_z_axis), __pyx_ptype_4core_7vector3_7Vector3_Vector3, 1, "z_axis", 0))) __PYX_ERR(1, 12, __pyx_L1_error)
   __pyx_r = __pyx_pf_4core_5basis_5Basis_5Basis_2new_with_rows(((struct __pyx_obj_4core_5basis_5Basis_Basis *)__pyx_v_self), __pyx_v_x_axis, __pyx_v_y_axis, __pyx_v_z_axis);
 
   /* function exit code */
@@ -1733,7 +1587,7 @@ static PyObject *__pyx_pf_4core_5basis_5Basis_5Basis_2new_with_rows(struct __pyx
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("new_with_rows", 0);
 
-  /* "core/basis/Basis.pyx":17
+  /* "core/basis/Basis.pyx":13
  * 
  *     def new_with_rows(self, Vector3 x_axis, Vector3 y_axis, Vector3 z_axis):
  *         api_core.godot_basis_new_with_rows(&self._native, &x_axis._native, &y_axis._native, &z_axis._native)             # <<<<<<<<<<<<<<
@@ -1742,8 +1596,8 @@ static PyObject *__pyx_pf_4core_5basis_5Basis_5Basis_2new_with_rows(struct __pyx
  */
   api_core->godot_basis_new_with_rows((&__pyx_v_self->_native), (&__pyx_v_x_axis->_native), (&__pyx_v_y_axis->_native), (&__pyx_v_z_axis->_native));
 
-  /* "core/basis/Basis.pyx":16
- *             #api_core.godot_basis_new(&self._native)
+  /* "core/basis/Basis.pyx":12
+ *         api_core.godot_basis_new(&self._native)
  * 
  *     def new_with_rows(self, Vector3 x_axis, Vector3 y_axis, Vector3 z_axis):             # <<<<<<<<<<<<<<
  *         api_core.godot_basis_new_with_rows(&self._native, &x_axis._native, &y_axis._native, &z_axis._native)
@@ -1757,7 +1611,7 @@ static PyObject *__pyx_pf_4core_5basis_5Basis_5Basis_2new_with_rows(struct __pyx
   return __pyx_r;
 }
 
-/* "core/basis/Basis.pyx":19
+/* "core/basis/Basis.pyx":15
  *         api_core.godot_basis_new_with_rows(&self._native, &x_axis._native, &y_axis._native, &z_axis._native)
  * 
  *     def new_with_axis_and_angle(Basis dest, Vector3 axis, godot_real p_phi):             # <<<<<<<<<<<<<<
@@ -1799,11 +1653,11 @@ static PyObject *__pyx_pw_4core_5basis_5Basis_5Basis_5new_with_axis_and_angle(Py
         case  1:
         if (likely((values[1] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_p_phi)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("new_with_axis_and_angle", 1, 2, 2, 1); __PYX_ERR(1, 19, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("new_with_axis_and_angle", 1, 2, 2, 1); __PYX_ERR(1, 15, __pyx_L3_error)
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "new_with_axis_and_angle") < 0)) __PYX_ERR(1, 19, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "new_with_axis_and_angle") < 0)) __PYX_ERR(1, 15, __pyx_L3_error)
       }
     } else if (PyTuple_GET_SIZE(__pyx_args) != 2) {
       goto __pyx_L5_argtuple_error;
@@ -1812,17 +1666,17 @@ static PyObject *__pyx_pw_4core_5basis_5Basis_5Basis_5new_with_axis_and_angle(Py
       values[1] = PyTuple_GET_ITEM(__pyx_args, 1);
     }
     __pyx_v_axis = ((struct __pyx_obj_4core_7vector3_7Vector3_Vector3 *)values[0]);
-    __pyx_v_p_phi = __pyx_PyFloat_AsFloat(values[1]); if (unlikely((__pyx_v_p_phi == ((godot_real)-1)) && PyErr_Occurred())) __PYX_ERR(1, 19, __pyx_L3_error)
+    __pyx_v_p_phi = __pyx_PyFloat_AsFloat(values[1]); if (unlikely((__pyx_v_p_phi == ((godot_real)-1)) && PyErr_Occurred())) __PYX_ERR(1, 15, __pyx_L3_error)
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("new_with_axis_and_angle", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(1, 19, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("new_with_axis_and_angle", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(1, 15, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("core.basis.Basis.Basis.new_with_axis_and_angle", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_axis), __pyx_ptype_4core_7vector3_7Vector3_Vector3, 1, "axis", 0))) __PYX_ERR(1, 19, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_axis), __pyx_ptype_4core_7vector3_7Vector3_Vector3, 1, "axis", 0))) __PYX_ERR(1, 15, __pyx_L1_error)
   __pyx_r = __pyx_pf_4core_5basis_5Basis_5Basis_4new_with_axis_and_angle(((struct __pyx_obj_4core_5basis_5Basis_Basis *)__pyx_v_dest), __pyx_v_axis, __pyx_v_p_phi);
 
   /* function exit code */
@@ -1839,7 +1693,7 @@ static PyObject *__pyx_pf_4core_5basis_5Basis_5Basis_4new_with_axis_and_angle(st
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("new_with_axis_and_angle", 0);
 
-  /* "core/basis/Basis.pyx":20
+  /* "core/basis/Basis.pyx":16
  * 
  *     def new_with_axis_and_angle(Basis dest, Vector3 axis, godot_real p_phi):
  *         api_core.godot_basis_new_with_axis_and_angle(&dest._native, &axis._native, p_phi)             # <<<<<<<<<<<<<<
@@ -1848,7 +1702,7 @@ static PyObject *__pyx_pf_4core_5basis_5Basis_5Basis_4new_with_axis_and_angle(st
  */
   api_core->godot_basis_new_with_axis_and_angle((&__pyx_v_dest->_native), (&__pyx_v_axis->_native), __pyx_v_p_phi);
 
-  /* "core/basis/Basis.pyx":19
+  /* "core/basis/Basis.pyx":15
  *         api_core.godot_basis_new_with_rows(&self._native, &x_axis._native, &y_axis._native, &z_axis._native)
  * 
  *     def new_with_axis_and_angle(Basis dest, Vector3 axis, godot_real p_phi):             # <<<<<<<<<<<<<<
@@ -1863,7 +1717,7 @@ static PyObject *__pyx_pf_4core_5basis_5Basis_5Basis_4new_with_axis_and_angle(st
   return __pyx_r;
 }
 
-/* "core/basis/Basis.pyx":22
+/* "core/basis/Basis.pyx":18
  *         api_core.godot_basis_new_with_axis_and_angle(&dest._native, &axis._native, p_phi)
  * 
  *     def new_with_euler(Basis dest, Vector3 euler):             # <<<<<<<<<<<<<<
@@ -1880,7 +1734,7 @@ static PyObject *__pyx_pw_4core_5basis_5Basis_5Basis_7new_with_euler(PyObject *_
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("new_with_euler (wrapper)", 0);
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_euler), __pyx_ptype_4core_7vector3_7Vector3_Vector3, 1, "euler", 0))) __PYX_ERR(1, 22, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_euler), __pyx_ptype_4core_7vector3_7Vector3_Vector3, 1, "euler", 0))) __PYX_ERR(1, 18, __pyx_L1_error)
   __pyx_r = __pyx_pf_4core_5basis_5Basis_5Basis_6new_with_euler(((struct __pyx_obj_4core_5basis_5Basis_Basis *)__pyx_v_dest), ((struct __pyx_obj_4core_7vector3_7Vector3_Vector3 *)__pyx_v_euler));
 
   /* function exit code */
@@ -1897,7 +1751,7 @@ static PyObject *__pyx_pf_4core_5basis_5Basis_5Basis_6new_with_euler(struct __py
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("new_with_euler", 0);
 
-  /* "core/basis/Basis.pyx":23
+  /* "core/basis/Basis.pyx":19
  * 
  *     def new_with_euler(Basis dest, Vector3 euler):
  *         api_core.godot_basis_new_with_euler(&dest._native, &euler._native)             # <<<<<<<<<<<<<<
@@ -1906,7 +1760,7 @@ static PyObject *__pyx_pf_4core_5basis_5Basis_5Basis_6new_with_euler(struct __py
  */
   api_core->godot_basis_new_with_euler((&__pyx_v_dest->_native), (&__pyx_v_euler->_native));
 
-  /* "core/basis/Basis.pyx":22
+  /* "core/basis/Basis.pyx":18
  *         api_core.godot_basis_new_with_axis_and_angle(&dest._native, &axis._native, p_phi)
  * 
  *     def new_with_euler(Basis dest, Vector3 euler):             # <<<<<<<<<<<<<<
@@ -1921,7 +1775,7 @@ static PyObject *__pyx_pf_4core_5basis_5Basis_5Basis_6new_with_euler(struct __py
   return __pyx_r;
 }
 
-/* "core/basis/Basis.pyx":25
+/* "core/basis/Basis.pyx":21
  *         api_core.godot_basis_new_with_euler(&dest._native, &euler._native)
  * 
  *     def as_string(self):             # <<<<<<<<<<<<<<
@@ -1951,7 +1805,7 @@ static PyObject *__pyx_pf_4core_5basis_5Basis_5Basis_8as_string(struct __pyx_obj
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("as_string", 0);
 
-  /* "core/basis/Basis.pyx":26
+  /* "core/basis/Basis.pyx":22
  * 
  *     def as_string(self):
  *         return api_core.godot_basis_as_string(&self._native)             # <<<<<<<<<<<<<<
@@ -1959,13 +1813,13 @@ static PyObject *__pyx_pf_4core_5basis_5Basis_5Basis_8as_string(struct __pyx_obj
  *     def inverse(self):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __pyx_convert__to_py_godot_string(api_core->godot_basis_as_string((&__pyx_v_self->_native))); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 26, __pyx_L1_error)
+  __pyx_t_1 = __pyx_convert__to_py_godot_string(api_core->godot_basis_as_string((&__pyx_v_self->_native))); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 22, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "core/basis/Basis.pyx":25
+  /* "core/basis/Basis.pyx":21
  *         api_core.godot_basis_new_with_euler(&dest._native, &euler._native)
  * 
  *     def as_string(self):             # <<<<<<<<<<<<<<
@@ -1984,7 +1838,7 @@ static PyObject *__pyx_pf_4core_5basis_5Basis_5Basis_8as_string(struct __pyx_obj
   return __pyx_r;
 }
 
-/* "core/basis/Basis.pyx":28
+/* "core/basis/Basis.pyx":24
  *         return api_core.godot_basis_as_string(&self._native)
  * 
  *     def inverse(self):             # <<<<<<<<<<<<<<
@@ -2014,7 +1868,7 @@ static PyObject *__pyx_pf_4core_5basis_5Basis_5Basis_10inverse(struct __pyx_obj_
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("inverse", 0);
 
-  /* "core/basis/Basis.pyx":29
+  /* "core/basis/Basis.pyx":25
  * 
  *     def inverse(self):
  *         return String. new_static(api_core.godot_basis_as_string(&self._native))             # <<<<<<<<<<<<<<
@@ -2022,13 +1876,13 @@ static PyObject *__pyx_pf_4core_5basis_5Basis_5Basis_10inverse(struct __pyx_obj_
  *     def transposed(self):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_void_to_None(__pyx_f_4core_6string_6String_6String_new_static(api_core->godot_basis_as_string((&__pyx_v_self->_native)))); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 29, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_void_to_None(__pyx_f_4core_6string_6String_6String_new_static(api_core->godot_basis_as_string((&__pyx_v_self->_native)))); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 25, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "core/basis/Basis.pyx":28
+  /* "core/basis/Basis.pyx":24
  *         return api_core.godot_basis_as_string(&self._native)
  * 
  *     def inverse(self):             # <<<<<<<<<<<<<<
@@ -2047,7 +1901,7 @@ static PyObject *__pyx_pf_4core_5basis_5Basis_5Basis_10inverse(struct __pyx_obj_
   return __pyx_r;
 }
 
-/* "core/basis/Basis.pyx":31
+/* "core/basis/Basis.pyx":27
  *         return String. new_static(api_core.godot_basis_as_string(&self._native))
  * 
  *     def transposed(self):             # <<<<<<<<<<<<<<
@@ -2077,7 +1931,7 @@ static PyObject *__pyx_pf_4core_5basis_5Basis_5Basis_12transposed(struct __pyx_o
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("transposed", 0);
 
-  /* "core/basis/Basis.pyx":32
+  /* "core/basis/Basis.pyx":28
  * 
  *     def transposed(self):
  *         return Basis. new_static(api_core.godot_basis_transposed(&self._native))             # <<<<<<<<<<<<<<
@@ -2085,13 +1939,13 @@ static PyObject *__pyx_pf_4core_5basis_5Basis_5Basis_12transposed(struct __pyx_o
  *     def orthonormalized(self):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_void_to_None(__pyx_f_4core_5basis_5Basis_5Basis_new_static(api_core->godot_basis_transposed((&__pyx_v_self->_native)))); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 32, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_void_to_None(__pyx_f_4core_5basis_5Basis_5Basis_new_static(api_core->godot_basis_transposed((&__pyx_v_self->_native)))); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 28, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "core/basis/Basis.pyx":31
+  /* "core/basis/Basis.pyx":27
  *         return String. new_static(api_core.godot_basis_as_string(&self._native))
  * 
  *     def transposed(self):             # <<<<<<<<<<<<<<
@@ -2110,7 +1964,7 @@ static PyObject *__pyx_pf_4core_5basis_5Basis_5Basis_12transposed(struct __pyx_o
   return __pyx_r;
 }
 
-/* "core/basis/Basis.pyx":34
+/* "core/basis/Basis.pyx":30
  *         return Basis. new_static(api_core.godot_basis_transposed(&self._native))
  * 
  *     def orthonormalized(self):             # <<<<<<<<<<<<<<
@@ -2140,7 +1994,7 @@ static PyObject *__pyx_pf_4core_5basis_5Basis_5Basis_14orthonormalized(struct __
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("orthonormalized", 0);
 
-  /* "core/basis/Basis.pyx":35
+  /* "core/basis/Basis.pyx":31
  * 
  *     def orthonormalized(self):
  *         return Basis. new_static(api_core.godot_basis_transposed(&self._native))             # <<<<<<<<<<<<<<
@@ -2148,13 +2002,13 @@ static PyObject *__pyx_pf_4core_5basis_5Basis_5Basis_14orthonormalized(struct __
  *     def determinant(self):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_void_to_None(__pyx_f_4core_5basis_5Basis_5Basis_new_static(api_core->godot_basis_transposed((&__pyx_v_self->_native)))); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 35, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_void_to_None(__pyx_f_4core_5basis_5Basis_5Basis_new_static(api_core->godot_basis_transposed((&__pyx_v_self->_native)))); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 31, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "core/basis/Basis.pyx":34
+  /* "core/basis/Basis.pyx":30
  *         return Basis. new_static(api_core.godot_basis_transposed(&self._native))
  * 
  *     def orthonormalized(self):             # <<<<<<<<<<<<<<
@@ -2173,7 +2027,7 @@ static PyObject *__pyx_pf_4core_5basis_5Basis_5Basis_14orthonormalized(struct __
   return __pyx_r;
 }
 
-/* "core/basis/Basis.pyx":37
+/* "core/basis/Basis.pyx":33
  *         return Basis. new_static(api_core.godot_basis_transposed(&self._native))
  * 
  *     def determinant(self):             # <<<<<<<<<<<<<<
@@ -2203,7 +2057,7 @@ static PyObject *__pyx_pf_4core_5basis_5Basis_5Basis_16determinant(struct __pyx_
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("determinant", 0);
 
-  /* "core/basis/Basis.pyx":38
+  /* "core/basis/Basis.pyx":34
  * 
  *     def determinant(self):
  *         return api_core.godot_basis_determinant(&self._native)             # <<<<<<<<<<<<<<
@@ -2211,13 +2065,13 @@ static PyObject *__pyx_pf_4core_5basis_5Basis_5Basis_16determinant(struct __pyx_
  *     def rotated(self, Vector3 axis, godot_real phi):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = PyFloat_FromDouble(api_core->godot_basis_determinant((&__pyx_v_self->_native))); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 38, __pyx_L1_error)
+  __pyx_t_1 = PyFloat_FromDouble(api_core->godot_basis_determinant((&__pyx_v_self->_native))); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 34, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "core/basis/Basis.pyx":37
+  /* "core/basis/Basis.pyx":33
  *         return Basis. new_static(api_core.godot_basis_transposed(&self._native))
  * 
  *     def determinant(self):             # <<<<<<<<<<<<<<
@@ -2236,7 +2090,7 @@ static PyObject *__pyx_pf_4core_5basis_5Basis_5Basis_16determinant(struct __pyx_
   return __pyx_r;
 }
 
-/* "core/basis/Basis.pyx":40
+/* "core/basis/Basis.pyx":36
  *         return api_core.godot_basis_determinant(&self._native)
  * 
  *     def rotated(self, Vector3 axis, godot_real phi):             # <<<<<<<<<<<<<<
@@ -2278,11 +2132,11 @@ static PyObject *__pyx_pw_4core_5basis_5Basis_5Basis_19rotated(PyObject *__pyx_v
         case  1:
         if (likely((values[1] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_phi)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("rotated", 1, 2, 2, 1); __PYX_ERR(1, 40, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("rotated", 1, 2, 2, 1); __PYX_ERR(1, 36, __pyx_L3_error)
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "rotated") < 0)) __PYX_ERR(1, 40, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "rotated") < 0)) __PYX_ERR(1, 36, __pyx_L3_error)
       }
     } else if (PyTuple_GET_SIZE(__pyx_args) != 2) {
       goto __pyx_L5_argtuple_error;
@@ -2291,17 +2145,17 @@ static PyObject *__pyx_pw_4core_5basis_5Basis_5Basis_19rotated(PyObject *__pyx_v
       values[1] = PyTuple_GET_ITEM(__pyx_args, 1);
     }
     __pyx_v_axis = ((struct __pyx_obj_4core_7vector3_7Vector3_Vector3 *)values[0]);
-    __pyx_v_phi = __pyx_PyFloat_AsFloat(values[1]); if (unlikely((__pyx_v_phi == ((godot_real)-1)) && PyErr_Occurred())) __PYX_ERR(1, 40, __pyx_L3_error)
+    __pyx_v_phi = __pyx_PyFloat_AsFloat(values[1]); if (unlikely((__pyx_v_phi == ((godot_real)-1)) && PyErr_Occurred())) __PYX_ERR(1, 36, __pyx_L3_error)
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("rotated", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(1, 40, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("rotated", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(1, 36, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("core.basis.Basis.Basis.rotated", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_axis), __pyx_ptype_4core_7vector3_7Vector3_Vector3, 1, "axis", 0))) __PYX_ERR(1, 40, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_axis), __pyx_ptype_4core_7vector3_7Vector3_Vector3, 1, "axis", 0))) __PYX_ERR(1, 36, __pyx_L1_error)
   __pyx_r = __pyx_pf_4core_5basis_5Basis_5Basis_18rotated(((struct __pyx_obj_4core_5basis_5Basis_Basis *)__pyx_v_self), __pyx_v_axis, __pyx_v_phi);
 
   /* function exit code */
@@ -2322,7 +2176,7 @@ static PyObject *__pyx_pf_4core_5basis_5Basis_5Basis_18rotated(struct __pyx_obj_
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("rotated", 0);
 
-  /* "core/basis/Basis.pyx":41
+  /* "core/basis/Basis.pyx":37
  * 
  *     def rotated(self, Vector3 axis, godot_real phi):
  *         return Basis. new_static(api_core.godot_basis_rotated(&self._native, &axis._native, phi))             # <<<<<<<<<<<<<<
@@ -2330,13 +2184,13 @@ static PyObject *__pyx_pf_4core_5basis_5Basis_5Basis_18rotated(struct __pyx_obj_
  *     def scaled(self, Vector3 scale):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_void_to_None(__pyx_f_4core_5basis_5Basis_5Basis_new_static(api_core->godot_basis_rotated((&__pyx_v_self->_native), (&__pyx_v_axis->_native), __pyx_v_phi))); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 41, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_void_to_None(__pyx_f_4core_5basis_5Basis_5Basis_new_static(api_core->godot_basis_rotated((&__pyx_v_self->_native), (&__pyx_v_axis->_native), __pyx_v_phi))); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 37, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "core/basis/Basis.pyx":40
+  /* "core/basis/Basis.pyx":36
  *         return api_core.godot_basis_determinant(&self._native)
  * 
  *     def rotated(self, Vector3 axis, godot_real phi):             # <<<<<<<<<<<<<<
@@ -2355,7 +2209,7 @@ static PyObject *__pyx_pf_4core_5basis_5Basis_5Basis_18rotated(struct __pyx_obj_
   return __pyx_r;
 }
 
-/* "core/basis/Basis.pyx":43
+/* "core/basis/Basis.pyx":39
  *         return Basis. new_static(api_core.godot_basis_rotated(&self._native, &axis._native, phi))
  * 
  *     def scaled(self, Vector3 scale):             # <<<<<<<<<<<<<<
@@ -2372,7 +2226,7 @@ static PyObject *__pyx_pw_4core_5basis_5Basis_5Basis_21scaled(PyObject *__pyx_v_
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("scaled (wrapper)", 0);
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_scale), __pyx_ptype_4core_7vector3_7Vector3_Vector3, 1, "scale", 0))) __PYX_ERR(1, 43, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_scale), __pyx_ptype_4core_7vector3_7Vector3_Vector3, 1, "scale", 0))) __PYX_ERR(1, 39, __pyx_L1_error)
   __pyx_r = __pyx_pf_4core_5basis_5Basis_5Basis_20scaled(((struct __pyx_obj_4core_5basis_5Basis_Basis *)__pyx_v_self), ((struct __pyx_obj_4core_7vector3_7Vector3_Vector3 *)__pyx_v_scale));
 
   /* function exit code */
@@ -2394,7 +2248,7 @@ static PyObject *__pyx_pf_4core_5basis_5Basis_5Basis_20scaled(struct __pyx_obj_4
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("scaled", 0);
 
-  /* "core/basis/Basis.pyx":44
+  /* "core/basis/Basis.pyx":40
  * 
  *     def scaled(self, Vector3 scale):
  *         return Basis(api_core.godot_basis_scaled(&self._native, &scale._native))             # <<<<<<<<<<<<<<
@@ -2402,16 +2256,16 @@ static PyObject *__pyx_pf_4core_5basis_5Basis_5Basis_20scaled(struct __pyx_obj_4
  *     def get_scale(self):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __pyx_convert__to_py_godot_basis(api_core->godot_basis_scaled((&__pyx_v_self->_native), (&__pyx_v_scale->_native))); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 44, __pyx_L1_error)
+  __pyx_t_1 = __pyx_convert__to_py_godot_basis(api_core->godot_basis_scaled((&__pyx_v_self->_native), (&__pyx_v_scale->_native))); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 40, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = __Pyx_PyObject_CallOneArg(((PyObject *)__pyx_ptype_4core_5basis_5Basis_Basis), __pyx_t_1); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 44, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_CallOneArg(((PyObject *)__pyx_ptype_4core_5basis_5Basis_Basis), __pyx_t_1); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 40, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_r = __pyx_t_2;
   __pyx_t_2 = 0;
   goto __pyx_L0;
 
-  /* "core/basis/Basis.pyx":43
+  /* "core/basis/Basis.pyx":39
  *         return Basis. new_static(api_core.godot_basis_rotated(&self._native, &axis._native, phi))
  * 
  *     def scaled(self, Vector3 scale):             # <<<<<<<<<<<<<<
@@ -2431,7 +2285,7 @@ static PyObject *__pyx_pf_4core_5basis_5Basis_5Basis_20scaled(struct __pyx_obj_4
   return __pyx_r;
 }
 
-/* "core/basis/Basis.pyx":46
+/* "core/basis/Basis.pyx":42
  *         return Basis(api_core.godot_basis_scaled(&self._native, &scale._native))
  * 
  *     def get_scale(self):             # <<<<<<<<<<<<<<
@@ -2461,7 +2315,7 @@ static PyObject *__pyx_pf_4core_5basis_5Basis_5Basis_22get_scale(struct __pyx_ob
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("get_scale", 0);
 
-  /* "core/basis/Basis.pyx":47
+  /* "core/basis/Basis.pyx":43
  * 
  *     def get_scale(self):
  *         return Vector3. new_static(api_core.godot_basis_get_scale(&self._native))             # <<<<<<<<<<<<<<
@@ -2469,13 +2323,13 @@ static PyObject *__pyx_pf_4core_5basis_5Basis_5Basis_22get_scale(struct __pyx_ob
  *     def get_euler(self):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_void_to_None(__pyx_f_4core_7vector3_7Vector3_7Vector3_new_static(api_core->godot_basis_get_scale((&__pyx_v_self->_native)))); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 47, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_void_to_None(__pyx_f_4core_7vector3_7Vector3_7Vector3_new_static(api_core->godot_basis_get_scale((&__pyx_v_self->_native)))); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 43, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "core/basis/Basis.pyx":46
+  /* "core/basis/Basis.pyx":42
  *         return Basis(api_core.godot_basis_scaled(&self._native, &scale._native))
  * 
  *     def get_scale(self):             # <<<<<<<<<<<<<<
@@ -2494,7 +2348,7 @@ static PyObject *__pyx_pf_4core_5basis_5Basis_5Basis_22get_scale(struct __pyx_ob
   return __pyx_r;
 }
 
-/* "core/basis/Basis.pyx":49
+/* "core/basis/Basis.pyx":45
  *         return Vector3. new_static(api_core.godot_basis_get_scale(&self._native))
  * 
  *     def get_euler(self):             # <<<<<<<<<<<<<<
@@ -2524,7 +2378,7 @@ static PyObject *__pyx_pf_4core_5basis_5Basis_5Basis_24get_euler(struct __pyx_ob
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("get_euler", 0);
 
-  /* "core/basis/Basis.pyx":50
+  /* "core/basis/Basis.pyx":46
  * 
  *     def get_euler(self):
  *         return Vector3. new_static(api_core.godot_basis_get_euler(&self._native))             # <<<<<<<<<<<<<<
@@ -2532,13 +2386,13 @@ static PyObject *__pyx_pf_4core_5basis_5Basis_5Basis_24get_euler(struct __pyx_ob
  *     def tdotx(self, Vector3 with_):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_void_to_None(__pyx_f_4core_7vector3_7Vector3_7Vector3_new_static(api_core->godot_basis_get_euler((&__pyx_v_self->_native)))); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 50, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_void_to_None(__pyx_f_4core_7vector3_7Vector3_7Vector3_new_static(api_core->godot_basis_get_euler((&__pyx_v_self->_native)))); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 46, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "core/basis/Basis.pyx":49
+  /* "core/basis/Basis.pyx":45
  *         return Vector3. new_static(api_core.godot_basis_get_scale(&self._native))
  * 
  *     def get_euler(self):             # <<<<<<<<<<<<<<
@@ -2557,7 +2411,7 @@ static PyObject *__pyx_pf_4core_5basis_5Basis_5Basis_24get_euler(struct __pyx_ob
   return __pyx_r;
 }
 
-/* "core/basis/Basis.pyx":52
+/* "core/basis/Basis.pyx":48
  *         return Vector3. new_static(api_core.godot_basis_get_euler(&self._native))
  * 
  *     def tdotx(self, Vector3 with_):             # <<<<<<<<<<<<<<
@@ -2574,7 +2428,7 @@ static PyObject *__pyx_pw_4core_5basis_5Basis_5Basis_27tdotx(PyObject *__pyx_v_s
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("tdotx (wrapper)", 0);
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_with_), __pyx_ptype_4core_7vector3_7Vector3_Vector3, 1, "with_", 0))) __PYX_ERR(1, 52, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_with_), __pyx_ptype_4core_7vector3_7Vector3_Vector3, 1, "with_", 0))) __PYX_ERR(1, 48, __pyx_L1_error)
   __pyx_r = __pyx_pf_4core_5basis_5Basis_5Basis_26tdotx(((struct __pyx_obj_4core_5basis_5Basis_Basis *)__pyx_v_self), ((struct __pyx_obj_4core_7vector3_7Vector3_Vector3 *)__pyx_v_with_));
 
   /* function exit code */
@@ -2595,7 +2449,7 @@ static PyObject *__pyx_pf_4core_5basis_5Basis_5Basis_26tdotx(struct __pyx_obj_4c
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("tdotx", 0);
 
-  /* "core/basis/Basis.pyx":53
+  /* "core/basis/Basis.pyx":49
  * 
  *     def tdotx(self, Vector3 with_):
  *         return api_core.godot_basis_tdotx(&self._native, &with_._native)             # <<<<<<<<<<<<<<
@@ -2603,13 +2457,13 @@ static PyObject *__pyx_pf_4core_5basis_5Basis_5Basis_26tdotx(struct __pyx_obj_4c
  *     def tdoty(self, Vector3 with_):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = PyFloat_FromDouble(api_core->godot_basis_tdotx((&__pyx_v_self->_native), (&__pyx_v_with_->_native))); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 53, __pyx_L1_error)
+  __pyx_t_1 = PyFloat_FromDouble(api_core->godot_basis_tdotx((&__pyx_v_self->_native), (&__pyx_v_with_->_native))); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 49, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "core/basis/Basis.pyx":52
+  /* "core/basis/Basis.pyx":48
  *         return Vector3. new_static(api_core.godot_basis_get_euler(&self._native))
  * 
  *     def tdotx(self, Vector3 with_):             # <<<<<<<<<<<<<<
@@ -2628,7 +2482,7 @@ static PyObject *__pyx_pf_4core_5basis_5Basis_5Basis_26tdotx(struct __pyx_obj_4c
   return __pyx_r;
 }
 
-/* "core/basis/Basis.pyx":55
+/* "core/basis/Basis.pyx":51
  *         return api_core.godot_basis_tdotx(&self._native, &with_._native)
  * 
  *     def tdoty(self, Vector3 with_):             # <<<<<<<<<<<<<<
@@ -2645,7 +2499,7 @@ static PyObject *__pyx_pw_4core_5basis_5Basis_5Basis_29tdoty(PyObject *__pyx_v_s
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("tdoty (wrapper)", 0);
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_with_), __pyx_ptype_4core_7vector3_7Vector3_Vector3, 1, "with_", 0))) __PYX_ERR(1, 55, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_with_), __pyx_ptype_4core_7vector3_7Vector3_Vector3, 1, "with_", 0))) __PYX_ERR(1, 51, __pyx_L1_error)
   __pyx_r = __pyx_pf_4core_5basis_5Basis_5Basis_28tdoty(((struct __pyx_obj_4core_5basis_5Basis_Basis *)__pyx_v_self), ((struct __pyx_obj_4core_7vector3_7Vector3_Vector3 *)__pyx_v_with_));
 
   /* function exit code */
@@ -2666,7 +2520,7 @@ static PyObject *__pyx_pf_4core_5basis_5Basis_5Basis_28tdoty(struct __pyx_obj_4c
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("tdoty", 0);
 
-  /* "core/basis/Basis.pyx":56
+  /* "core/basis/Basis.pyx":52
  * 
  *     def tdoty(self, Vector3 with_):
  *         return api_core.godot_basis_tdoty(&self._native, &with_._native)             # <<<<<<<<<<<<<<
@@ -2674,13 +2528,13 @@ static PyObject *__pyx_pf_4core_5basis_5Basis_5Basis_28tdoty(struct __pyx_obj_4c
  *     def tdotz(self, Vector3 with_):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = PyFloat_FromDouble(api_core->godot_basis_tdoty((&__pyx_v_self->_native), (&__pyx_v_with_->_native))); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 56, __pyx_L1_error)
+  __pyx_t_1 = PyFloat_FromDouble(api_core->godot_basis_tdoty((&__pyx_v_self->_native), (&__pyx_v_with_->_native))); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 52, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "core/basis/Basis.pyx":55
+  /* "core/basis/Basis.pyx":51
  *         return api_core.godot_basis_tdotx(&self._native, &with_._native)
  * 
  *     def tdoty(self, Vector3 with_):             # <<<<<<<<<<<<<<
@@ -2699,7 +2553,7 @@ static PyObject *__pyx_pf_4core_5basis_5Basis_5Basis_28tdoty(struct __pyx_obj_4c
   return __pyx_r;
 }
 
-/* "core/basis/Basis.pyx":58
+/* "core/basis/Basis.pyx":54
  *         return api_core.godot_basis_tdoty(&self._native, &with_._native)
  * 
  *     def tdotz(self, Vector3 with_):             # <<<<<<<<<<<<<<
@@ -2716,7 +2570,7 @@ static PyObject *__pyx_pw_4core_5basis_5Basis_5Basis_31tdotz(PyObject *__pyx_v_s
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("tdotz (wrapper)", 0);
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_with_), __pyx_ptype_4core_7vector3_7Vector3_Vector3, 1, "with_", 0))) __PYX_ERR(1, 58, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_with_), __pyx_ptype_4core_7vector3_7Vector3_Vector3, 1, "with_", 0))) __PYX_ERR(1, 54, __pyx_L1_error)
   __pyx_r = __pyx_pf_4core_5basis_5Basis_5Basis_30tdotz(((struct __pyx_obj_4core_5basis_5Basis_Basis *)__pyx_v_self), ((struct __pyx_obj_4core_7vector3_7Vector3_Vector3 *)__pyx_v_with_));
 
   /* function exit code */
@@ -2737,7 +2591,7 @@ static PyObject *__pyx_pf_4core_5basis_5Basis_5Basis_30tdotz(struct __pyx_obj_4c
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("tdotz", 0);
 
-  /* "core/basis/Basis.pyx":59
+  /* "core/basis/Basis.pyx":55
  * 
  *     def tdotz(self, Vector3 with_):
  *         return api_core.godot_basis_tdotz(&self._native, &with_._native)             # <<<<<<<<<<<<<<
@@ -2745,13 +2599,13 @@ static PyObject *__pyx_pf_4core_5basis_5Basis_5Basis_30tdotz(struct __pyx_obj_4c
  *     def xform(self, Vector3 v):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = PyFloat_FromDouble(api_core->godot_basis_tdotz((&__pyx_v_self->_native), (&__pyx_v_with_->_native))); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 59, __pyx_L1_error)
+  __pyx_t_1 = PyFloat_FromDouble(api_core->godot_basis_tdotz((&__pyx_v_self->_native), (&__pyx_v_with_->_native))); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 55, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "core/basis/Basis.pyx":58
+  /* "core/basis/Basis.pyx":54
  *         return api_core.godot_basis_tdoty(&self._native, &with_._native)
  * 
  *     def tdotz(self, Vector3 with_):             # <<<<<<<<<<<<<<
@@ -2770,7 +2624,7 @@ static PyObject *__pyx_pf_4core_5basis_5Basis_5Basis_30tdotz(struct __pyx_obj_4c
   return __pyx_r;
 }
 
-/* "core/basis/Basis.pyx":61
+/* "core/basis/Basis.pyx":57
  *         return api_core.godot_basis_tdotz(&self._native, &with_._native)
  * 
  *     def xform(self, Vector3 v):             # <<<<<<<<<<<<<<
@@ -2787,7 +2641,7 @@ static PyObject *__pyx_pw_4core_5basis_5Basis_5Basis_33xform(PyObject *__pyx_v_s
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("xform (wrapper)", 0);
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_v), __pyx_ptype_4core_7vector3_7Vector3_Vector3, 1, "v", 0))) __PYX_ERR(1, 61, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_v), __pyx_ptype_4core_7vector3_7Vector3_Vector3, 1, "v", 0))) __PYX_ERR(1, 57, __pyx_L1_error)
   __pyx_r = __pyx_pf_4core_5basis_5Basis_5Basis_32xform(((struct __pyx_obj_4core_5basis_5Basis_Basis *)__pyx_v_self), ((struct __pyx_obj_4core_7vector3_7Vector3_Vector3 *)__pyx_v_v));
 
   /* function exit code */
@@ -2808,7 +2662,7 @@ static PyObject *__pyx_pf_4core_5basis_5Basis_5Basis_32xform(struct __pyx_obj_4c
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("xform", 0);
 
-  /* "core/basis/Basis.pyx":62
+  /* "core/basis/Basis.pyx":58
  * 
  *     def xform(self, Vector3 v):
  *         return Vector3. new_static(api_core.godot_basis_xform(&self._native, &v._native))             # <<<<<<<<<<<<<<
@@ -2816,13 +2670,13 @@ static PyObject *__pyx_pf_4core_5basis_5Basis_5Basis_32xform(struct __pyx_obj_4c
  *     def xform_inv(self, Vector3 v):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_void_to_None(__pyx_f_4core_7vector3_7Vector3_7Vector3_new_static(api_core->godot_basis_xform((&__pyx_v_self->_native), (&__pyx_v_v->_native)))); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 62, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_void_to_None(__pyx_f_4core_7vector3_7Vector3_7Vector3_new_static(api_core->godot_basis_xform((&__pyx_v_self->_native), (&__pyx_v_v->_native)))); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 58, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "core/basis/Basis.pyx":61
+  /* "core/basis/Basis.pyx":57
  *         return api_core.godot_basis_tdotz(&self._native, &with_._native)
  * 
  *     def xform(self, Vector3 v):             # <<<<<<<<<<<<<<
@@ -2841,7 +2695,7 @@ static PyObject *__pyx_pf_4core_5basis_5Basis_5Basis_32xform(struct __pyx_obj_4c
   return __pyx_r;
 }
 
-/* "core/basis/Basis.pyx":64
+/* "core/basis/Basis.pyx":60
  *         return Vector3. new_static(api_core.godot_basis_xform(&self._native, &v._native))
  * 
  *     def xform_inv(self, Vector3 v):             # <<<<<<<<<<<<<<
@@ -2858,7 +2712,7 @@ static PyObject *__pyx_pw_4core_5basis_5Basis_5Basis_35xform_inv(PyObject *__pyx
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("xform_inv (wrapper)", 0);
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_v), __pyx_ptype_4core_7vector3_7Vector3_Vector3, 1, "v", 0))) __PYX_ERR(1, 64, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_v), __pyx_ptype_4core_7vector3_7Vector3_Vector3, 1, "v", 0))) __PYX_ERR(1, 60, __pyx_L1_error)
   __pyx_r = __pyx_pf_4core_5basis_5Basis_5Basis_34xform_inv(((struct __pyx_obj_4core_5basis_5Basis_Basis *)__pyx_v_self), ((struct __pyx_obj_4core_7vector3_7Vector3_Vector3 *)__pyx_v_v));
 
   /* function exit code */
@@ -2879,7 +2733,7 @@ static PyObject *__pyx_pf_4core_5basis_5Basis_5Basis_34xform_inv(struct __pyx_ob
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("xform_inv", 0);
 
-  /* "core/basis/Basis.pyx":65
+  /* "core/basis/Basis.pyx":61
  * 
  *     def xform_inv(self, Vector3 v):
  *         return Vector3. new_static(api_core.godot_basis_xform_inv(&self._native, &v._native))             # <<<<<<<<<<<<<<
@@ -2887,13 +2741,13 @@ static PyObject *__pyx_pf_4core_5basis_5Basis_5Basis_34xform_inv(struct __pyx_ob
  *     def get_orthogonal_index(self):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_void_to_None(__pyx_f_4core_7vector3_7Vector3_7Vector3_new_static(api_core->godot_basis_xform_inv((&__pyx_v_self->_native), (&__pyx_v_v->_native)))); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 65, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_void_to_None(__pyx_f_4core_7vector3_7Vector3_7Vector3_new_static(api_core->godot_basis_xform_inv((&__pyx_v_self->_native), (&__pyx_v_v->_native)))); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 61, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "core/basis/Basis.pyx":64
+  /* "core/basis/Basis.pyx":60
  *         return Vector3. new_static(api_core.godot_basis_xform(&self._native, &v._native))
  * 
  *     def xform_inv(self, Vector3 v):             # <<<<<<<<<<<<<<
@@ -2912,7 +2766,7 @@ static PyObject *__pyx_pf_4core_5basis_5Basis_5Basis_34xform_inv(struct __pyx_ob
   return __pyx_r;
 }
 
-/* "core/basis/Basis.pyx":67
+/* "core/basis/Basis.pyx":63
  *         return Vector3. new_static(api_core.godot_basis_xform_inv(&self._native, &v._native))
  * 
  *     def get_orthogonal_index(self):             # <<<<<<<<<<<<<<
@@ -2942,7 +2796,7 @@ static PyObject *__pyx_pf_4core_5basis_5Basis_5Basis_36get_orthogonal_index(stru
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("get_orthogonal_index", 0);
 
-  /* "core/basis/Basis.pyx":68
+  /* "core/basis/Basis.pyx":64
  * 
  *     def get_orthogonal_index(self):
  *         return api_core.godot_basis_get_orthogonal_index(&self._native)             # <<<<<<<<<<<<<<
@@ -2950,13 +2804,13 @@ static PyObject *__pyx_pf_4core_5basis_5Basis_5Basis_36get_orthogonal_index(stru
  *     def new_with_euler_quat(self, Basis r_dest, Quat euler):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_PyInt_From_godot_int(api_core->godot_basis_get_orthogonal_index((&__pyx_v_self->_native))); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 68, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyInt_From_godot_int(api_core->godot_basis_get_orthogonal_index((&__pyx_v_self->_native))); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 64, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "core/basis/Basis.pyx":67
+  /* "core/basis/Basis.pyx":63
  *         return Vector3. new_static(api_core.godot_basis_xform_inv(&self._native, &v._native))
  * 
  *     def get_orthogonal_index(self):             # <<<<<<<<<<<<<<
@@ -2975,7 +2829,7 @@ static PyObject *__pyx_pf_4core_5basis_5Basis_5Basis_36get_orthogonal_index(stru
   return __pyx_r;
 }
 
-/* "core/basis/Basis.pyx":70
+/* "core/basis/Basis.pyx":66
  *         return api_core.godot_basis_get_orthogonal_index(&self._native)
  * 
  *     def new_with_euler_quat(self, Basis r_dest, Quat euler):             # <<<<<<<<<<<<<<
@@ -3017,11 +2871,11 @@ static PyObject *__pyx_pw_4core_5basis_5Basis_5Basis_39new_with_euler_quat(PyObj
         case  1:
         if (likely((values[1] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_euler)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("new_with_euler_quat", 1, 2, 2, 1); __PYX_ERR(1, 70, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("new_with_euler_quat", 1, 2, 2, 1); __PYX_ERR(1, 66, __pyx_L3_error)
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "new_with_euler_quat") < 0)) __PYX_ERR(1, 70, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "new_with_euler_quat") < 0)) __PYX_ERR(1, 66, __pyx_L3_error)
       }
     } else if (PyTuple_GET_SIZE(__pyx_args) != 2) {
       goto __pyx_L5_argtuple_error;
@@ -3034,14 +2888,14 @@ static PyObject *__pyx_pw_4core_5basis_5Basis_5Basis_39new_with_euler_quat(PyObj
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("new_with_euler_quat", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(1, 70, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("new_with_euler_quat", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(1, 66, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("core.basis.Basis.Basis.new_with_euler_quat", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_r_dest), __pyx_ptype_4core_5basis_5Basis_Basis, 1, "r_dest", 0))) __PYX_ERR(1, 70, __pyx_L1_error)
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_euler), __pyx_ptype_4core_4quat_4Quat_Quat, 1, "euler", 0))) __PYX_ERR(1, 70, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_r_dest), __pyx_ptype_4core_5basis_5Basis_Basis, 1, "r_dest", 0))) __PYX_ERR(1, 66, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_euler), __pyx_ptype_4core_4quat_4Quat_Quat, 1, "euler", 0))) __PYX_ERR(1, 66, __pyx_L1_error)
   __pyx_r = __pyx_pf_4core_5basis_5Basis_5Basis_38new_with_euler_quat(((struct __pyx_obj_4core_5basis_5Basis_Basis *)__pyx_v_self), __pyx_v_r_dest, __pyx_v_euler);
 
   /* function exit code */
@@ -3058,7 +2912,7 @@ static PyObject *__pyx_pf_4core_5basis_5Basis_5Basis_38new_with_euler_quat(CYTHO
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("new_with_euler_quat", 0);
 
-  /* "core/basis/Basis.pyx":71
+  /* "core/basis/Basis.pyx":67
  * 
  *     def new_with_euler_quat(self, Basis r_dest, Quat euler):
  *         api_core.godot_basis_new_with_euler_quat(&r_dest._native, &euler._native)             # <<<<<<<<<<<<<<
@@ -3067,7 +2921,7 @@ static PyObject *__pyx_pf_4core_5basis_5Basis_5Basis_38new_with_euler_quat(CYTHO
  */
   api_core->godot_basis_new_with_euler_quat((&__pyx_v_r_dest->_native), (&__pyx_v_euler->_native));
 
-  /* "core/basis/Basis.pyx":70
+  /* "core/basis/Basis.pyx":66
  *         return api_core.godot_basis_get_orthogonal_index(&self._native)
  * 
  *     def new_with_euler_quat(self, Basis r_dest, Quat euler):             # <<<<<<<<<<<<<<
@@ -3082,7 +2936,7 @@ static PyObject *__pyx_pf_4core_5basis_5Basis_5Basis_38new_with_euler_quat(CYTHO
   return __pyx_r;
 }
 
-/* "core/basis/Basis.pyx":73
+/* "core/basis/Basis.pyx":69
  *         api_core.godot_basis_new_with_euler_quat(&r_dest._native, &euler._native)
  * 
  *     def get_elements(self, Vector3 elements):             # <<<<<<<<<<<<<<
@@ -3099,7 +2953,7 @@ static PyObject *__pyx_pw_4core_5basis_5Basis_5Basis_41get_elements(PyObject *__
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("get_elements (wrapper)", 0);
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_elements), __pyx_ptype_4core_7vector3_7Vector3_Vector3, 1, "elements", 0))) __PYX_ERR(1, 73, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_elements), __pyx_ptype_4core_7vector3_7Vector3_Vector3, 1, "elements", 0))) __PYX_ERR(1, 69, __pyx_L1_error)
   __pyx_r = __pyx_pf_4core_5basis_5Basis_5Basis_40get_elements(((struct __pyx_obj_4core_5basis_5Basis_Basis *)__pyx_v_self), ((struct __pyx_obj_4core_7vector3_7Vector3_Vector3 *)__pyx_v_elements));
 
   /* function exit code */
@@ -3116,7 +2970,7 @@ static PyObject *__pyx_pf_4core_5basis_5Basis_5Basis_40get_elements(struct __pyx
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("get_elements", 0);
 
-  /* "core/basis/Basis.pyx":74
+  /* "core/basis/Basis.pyx":70
  * 
  *     def get_elements(self, Vector3 elements):
  *         api_core.godot_basis_get_elements(&self._native, &elements._native)             # <<<<<<<<<<<<<<
@@ -3125,7 +2979,7 @@ static PyObject *__pyx_pf_4core_5basis_5Basis_5Basis_40get_elements(struct __pyx
  */
   api_core->godot_basis_get_elements((&__pyx_v_self->_native), (&__pyx_v_elements->_native));
 
-  /* "core/basis/Basis.pyx":73
+  /* "core/basis/Basis.pyx":69
  *         api_core.godot_basis_new_with_euler_quat(&r_dest._native, &euler._native)
  * 
  *     def get_elements(self, Vector3 elements):             # <<<<<<<<<<<<<<
@@ -3140,7 +2994,7 @@ static PyObject *__pyx_pf_4core_5basis_5Basis_5Basis_40get_elements(struct __pyx
   return __pyx_r;
 }
 
-/* "core/basis/Basis.pyx":76
+/* "core/basis/Basis.pyx":72
  *         api_core.godot_basis_get_elements(&self._native, &elements._native)
  * 
  *     def get_axis(self, godot_int axis):             # <<<<<<<<<<<<<<
@@ -3159,7 +3013,7 @@ static PyObject *__pyx_pw_4core_5basis_5Basis_5Basis_43get_axis(PyObject *__pyx_
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("get_axis (wrapper)", 0);
   assert(__pyx_arg_axis); {
-    __pyx_v_axis = __Pyx_PyInt_As_godot_int(__pyx_arg_axis); if (unlikely((__pyx_v_axis == ((godot_int)-1)) && PyErr_Occurred())) __PYX_ERR(1, 76, __pyx_L3_error)
+    __pyx_v_axis = __Pyx_PyInt_As_godot_int(__pyx_arg_axis); if (unlikely((__pyx_v_axis == ((godot_int)-1)) && PyErr_Occurred())) __PYX_ERR(1, 72, __pyx_L3_error)
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -3183,7 +3037,7 @@ static PyObject *__pyx_pf_4core_5basis_5Basis_5Basis_42get_axis(struct __pyx_obj
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("get_axis", 0);
 
-  /* "core/basis/Basis.pyx":77
+  /* "core/basis/Basis.pyx":73
  * 
  *     def get_axis(self, godot_int axis):
  *         return Vector3. new_static(api_core.godot_basis_get_axis(&self._native, axis))             # <<<<<<<<<<<<<<
@@ -3191,13 +3045,13 @@ static PyObject *__pyx_pf_4core_5basis_5Basis_5Basis_42get_axis(struct __pyx_obj
  *     def set_axis(self, godot_int axis, Vector3 value):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_void_to_None(__pyx_f_4core_7vector3_7Vector3_7Vector3_new_static(api_core->godot_basis_get_axis((&__pyx_v_self->_native), __pyx_v_axis))); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 77, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_void_to_None(__pyx_f_4core_7vector3_7Vector3_7Vector3_new_static(api_core->godot_basis_get_axis((&__pyx_v_self->_native), __pyx_v_axis))); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 73, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "core/basis/Basis.pyx":76
+  /* "core/basis/Basis.pyx":72
  *         api_core.godot_basis_get_elements(&self._native, &elements._native)
  * 
  *     def get_axis(self, godot_int axis):             # <<<<<<<<<<<<<<
@@ -3216,7 +3070,7 @@ static PyObject *__pyx_pf_4core_5basis_5Basis_5Basis_42get_axis(struct __pyx_obj
   return __pyx_r;
 }
 
-/* "core/basis/Basis.pyx":79
+/* "core/basis/Basis.pyx":75
  *         return Vector3. new_static(api_core.godot_basis_get_axis(&self._native, axis))
  * 
  *     def set_axis(self, godot_int axis, Vector3 value):             # <<<<<<<<<<<<<<
@@ -3258,11 +3112,11 @@ static PyObject *__pyx_pw_4core_5basis_5Basis_5Basis_45set_axis(PyObject *__pyx_
         case  1:
         if (likely((values[1] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_value)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("set_axis", 1, 2, 2, 1); __PYX_ERR(1, 79, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("set_axis", 1, 2, 2, 1); __PYX_ERR(1, 75, __pyx_L3_error)
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "set_axis") < 0)) __PYX_ERR(1, 79, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "set_axis") < 0)) __PYX_ERR(1, 75, __pyx_L3_error)
       }
     } else if (PyTuple_GET_SIZE(__pyx_args) != 2) {
       goto __pyx_L5_argtuple_error;
@@ -3270,18 +3124,18 @@ static PyObject *__pyx_pw_4core_5basis_5Basis_5Basis_45set_axis(PyObject *__pyx_
       values[0] = PyTuple_GET_ITEM(__pyx_args, 0);
       values[1] = PyTuple_GET_ITEM(__pyx_args, 1);
     }
-    __pyx_v_axis = __Pyx_PyInt_As_godot_int(values[0]); if (unlikely((__pyx_v_axis == ((godot_int)-1)) && PyErr_Occurred())) __PYX_ERR(1, 79, __pyx_L3_error)
+    __pyx_v_axis = __Pyx_PyInt_As_godot_int(values[0]); if (unlikely((__pyx_v_axis == ((godot_int)-1)) && PyErr_Occurred())) __PYX_ERR(1, 75, __pyx_L3_error)
     __pyx_v_value = ((struct __pyx_obj_4core_7vector3_7Vector3_Vector3 *)values[1]);
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("set_axis", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(1, 79, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("set_axis", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(1, 75, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("core.basis.Basis.Basis.set_axis", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_value), __pyx_ptype_4core_7vector3_7Vector3_Vector3, 1, "value", 0))) __PYX_ERR(1, 79, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_value), __pyx_ptype_4core_7vector3_7Vector3_Vector3, 1, "value", 0))) __PYX_ERR(1, 75, __pyx_L1_error)
   __pyx_r = __pyx_pf_4core_5basis_5Basis_5Basis_44set_axis(((struct __pyx_obj_4core_5basis_5Basis_Basis *)__pyx_v_self), __pyx_v_axis, __pyx_v_value);
 
   /* function exit code */
@@ -3298,7 +3152,7 @@ static PyObject *__pyx_pf_4core_5basis_5Basis_5Basis_44set_axis(struct __pyx_obj
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("set_axis", 0);
 
-  /* "core/basis/Basis.pyx":80
+  /* "core/basis/Basis.pyx":76
  * 
  *     def set_axis(self, godot_int axis, Vector3 value):
  *         api_core.godot_basis_set_axis(&self._native, axis, &value._native)             # <<<<<<<<<<<<<<
@@ -3307,7 +3161,7 @@ static PyObject *__pyx_pf_4core_5basis_5Basis_5Basis_44set_axis(struct __pyx_obj
  */
   api_core->godot_basis_set_axis((&__pyx_v_self->_native), __pyx_v_axis, (&__pyx_v_value->_native));
 
-  /* "core/basis/Basis.pyx":79
+  /* "core/basis/Basis.pyx":75
  *         return Vector3. new_static(api_core.godot_basis_get_axis(&self._native, axis))
  * 
  *     def set_axis(self, godot_int axis, Vector3 value):             # <<<<<<<<<<<<<<
@@ -3322,7 +3176,7 @@ static PyObject *__pyx_pf_4core_5basis_5Basis_5Basis_44set_axis(struct __pyx_obj
   return __pyx_r;
 }
 
-/* "core/basis/Basis.pyx":82
+/* "core/basis/Basis.pyx":78
  *         api_core.godot_basis_set_axis(&self._native, axis, &value._native)
  * 
  *     def get_row(self, godot_int row):             # <<<<<<<<<<<<<<
@@ -3341,7 +3195,7 @@ static PyObject *__pyx_pw_4core_5basis_5Basis_5Basis_47get_row(PyObject *__pyx_v
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("get_row (wrapper)", 0);
   assert(__pyx_arg_row); {
-    __pyx_v_row = __Pyx_PyInt_As_godot_int(__pyx_arg_row); if (unlikely((__pyx_v_row == ((godot_int)-1)) && PyErr_Occurred())) __PYX_ERR(1, 82, __pyx_L3_error)
+    __pyx_v_row = __Pyx_PyInt_As_godot_int(__pyx_arg_row); if (unlikely((__pyx_v_row == ((godot_int)-1)) && PyErr_Occurred())) __PYX_ERR(1, 78, __pyx_L3_error)
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -3365,7 +3219,7 @@ static PyObject *__pyx_pf_4core_5basis_5Basis_5Basis_46get_row(struct __pyx_obj_
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("get_row", 0);
 
-  /* "core/basis/Basis.pyx":83
+  /* "core/basis/Basis.pyx":79
  * 
  *     def get_row(self, godot_int row):
  *         return Vector3. new_static(api_core.godot_basis_get_row(&self._native, row))             # <<<<<<<<<<<<<<
@@ -3373,13 +3227,13 @@ static PyObject *__pyx_pf_4core_5basis_5Basis_5Basis_46get_row(struct __pyx_obj_
  *     def set_row(self, godot_int row, Vector3 value):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_void_to_None(__pyx_f_4core_7vector3_7Vector3_7Vector3_new_static(api_core->godot_basis_get_row((&__pyx_v_self->_native), __pyx_v_row))); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 83, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_void_to_None(__pyx_f_4core_7vector3_7Vector3_7Vector3_new_static(api_core->godot_basis_get_row((&__pyx_v_self->_native), __pyx_v_row))); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 79, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "core/basis/Basis.pyx":82
+  /* "core/basis/Basis.pyx":78
  *         api_core.godot_basis_set_axis(&self._native, axis, &value._native)
  * 
  *     def get_row(self, godot_int row):             # <<<<<<<<<<<<<<
@@ -3398,7 +3252,7 @@ static PyObject *__pyx_pf_4core_5basis_5Basis_5Basis_46get_row(struct __pyx_obj_
   return __pyx_r;
 }
 
-/* "core/basis/Basis.pyx":85
+/* "core/basis/Basis.pyx":81
  *         return Vector3. new_static(api_core.godot_basis_get_row(&self._native, row))
  * 
  *     def set_row(self, godot_int row, Vector3 value):             # <<<<<<<<<<<<<<
@@ -3440,11 +3294,11 @@ static PyObject *__pyx_pw_4core_5basis_5Basis_5Basis_49set_row(PyObject *__pyx_v
         case  1:
         if (likely((values[1] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_value)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("set_row", 1, 2, 2, 1); __PYX_ERR(1, 85, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("set_row", 1, 2, 2, 1); __PYX_ERR(1, 81, __pyx_L3_error)
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "set_row") < 0)) __PYX_ERR(1, 85, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "set_row") < 0)) __PYX_ERR(1, 81, __pyx_L3_error)
       }
     } else if (PyTuple_GET_SIZE(__pyx_args) != 2) {
       goto __pyx_L5_argtuple_error;
@@ -3452,18 +3306,18 @@ static PyObject *__pyx_pw_4core_5basis_5Basis_5Basis_49set_row(PyObject *__pyx_v
       values[0] = PyTuple_GET_ITEM(__pyx_args, 0);
       values[1] = PyTuple_GET_ITEM(__pyx_args, 1);
     }
-    __pyx_v_row = __Pyx_PyInt_As_godot_int(values[0]); if (unlikely((__pyx_v_row == ((godot_int)-1)) && PyErr_Occurred())) __PYX_ERR(1, 85, __pyx_L3_error)
+    __pyx_v_row = __Pyx_PyInt_As_godot_int(values[0]); if (unlikely((__pyx_v_row == ((godot_int)-1)) && PyErr_Occurred())) __PYX_ERR(1, 81, __pyx_L3_error)
     __pyx_v_value = ((struct __pyx_obj_4core_7vector3_7Vector3_Vector3 *)values[1]);
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("set_row", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(1, 85, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("set_row", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(1, 81, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("core.basis.Basis.Basis.set_row", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_value), __pyx_ptype_4core_7vector3_7Vector3_Vector3, 1, "value", 0))) __PYX_ERR(1, 85, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_value), __pyx_ptype_4core_7vector3_7Vector3_Vector3, 1, "value", 0))) __PYX_ERR(1, 81, __pyx_L1_error)
   __pyx_r = __pyx_pf_4core_5basis_5Basis_5Basis_48set_row(((struct __pyx_obj_4core_5basis_5Basis_Basis *)__pyx_v_self), __pyx_v_row, __pyx_v_value);
 
   /* function exit code */
@@ -3480,7 +3334,7 @@ static PyObject *__pyx_pf_4core_5basis_5Basis_5Basis_48set_row(struct __pyx_obj_
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("set_row", 0);
 
-  /* "core/basis/Basis.pyx":86
+  /* "core/basis/Basis.pyx":82
  * 
  *     def set_row(self, godot_int row, Vector3 value):
  *         api_core.godot_basis_set_row(&self._native, row, &value._native)             # <<<<<<<<<<<<<<
@@ -3489,7 +3343,7 @@ static PyObject *__pyx_pf_4core_5basis_5Basis_5Basis_48set_row(struct __pyx_obj_
  */
   api_core->godot_basis_set_row((&__pyx_v_self->_native), __pyx_v_row, (&__pyx_v_value->_native));
 
-  /* "core/basis/Basis.pyx":85
+  /* "core/basis/Basis.pyx":81
  *         return Vector3. new_static(api_core.godot_basis_get_row(&self._native, row))
  * 
  *     def set_row(self, godot_int row, Vector3 value):             # <<<<<<<<<<<<<<
@@ -3504,7 +3358,7 @@ static PyObject *__pyx_pf_4core_5basis_5Basis_5Basis_48set_row(struct __pyx_obj_
   return __pyx_r;
 }
 
-/* "core/basis/Basis.pyx":88
+/* "core/basis/Basis.pyx":84
  *         api_core.godot_basis_set_row(&self._native, row, &value._native)
  * 
  *     def __eq__(self, Basis other):             # <<<<<<<<<<<<<<
@@ -3521,7 +3375,7 @@ static PyObject *__pyx_pw_4core_5basis_5Basis_5Basis_51__eq__(PyObject *__pyx_v_
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__eq__ (wrapper)", 0);
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_other), __pyx_ptype_4core_5basis_5Basis_Basis, 1, "other", 0))) __PYX_ERR(1, 88, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_other), __pyx_ptype_4core_5basis_5Basis_Basis, 1, "other", 0))) __PYX_ERR(1, 84, __pyx_L1_error)
   __pyx_r = __pyx_pf_4core_5basis_5Basis_5Basis_50__eq__(((struct __pyx_obj_4core_5basis_5Basis_Basis *)__pyx_v_self), ((struct __pyx_obj_4core_5basis_5Basis_Basis *)__pyx_v_other));
 
   /* function exit code */
@@ -3542,7 +3396,7 @@ static PyObject *__pyx_pf_4core_5basis_5Basis_5Basis_50__eq__(struct __pyx_obj_4
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__eq__", 0);
 
-  /* "core/basis/Basis.pyx":89
+  /* "core/basis/Basis.pyx":85
  * 
  *     def __eq__(self, Basis other):
  *         return api_core.godot_basis_operator_equal(&self._native, &other._native)             # <<<<<<<<<<<<<<
@@ -3550,13 +3404,13 @@ static PyObject *__pyx_pf_4core_5basis_5Basis_5Basis_50__eq__(struct __pyx_obj_4
  *     def add(self, Basis other):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_PyBool_FromLong(api_core->godot_basis_operator_equal((&__pyx_v_self->_native), (&__pyx_v_other->_native))); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 89, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyBool_FromLong(api_core->godot_basis_operator_equal((&__pyx_v_self->_native), (&__pyx_v_other->_native))); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 85, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "core/basis/Basis.pyx":88
+  /* "core/basis/Basis.pyx":84
  *         api_core.godot_basis_set_row(&self._native, row, &value._native)
  * 
  *     def __eq__(self, Basis other):             # <<<<<<<<<<<<<<
@@ -3575,7 +3429,7 @@ static PyObject *__pyx_pf_4core_5basis_5Basis_5Basis_50__eq__(struct __pyx_obj_4
   return __pyx_r;
 }
 
-/* "core/basis/Basis.pyx":91
+/* "core/basis/Basis.pyx":87
  *         return api_core.godot_basis_operator_equal(&self._native, &other._native)
  * 
  *     def add(self, Basis other):             # <<<<<<<<<<<<<<
@@ -3592,7 +3446,7 @@ static PyObject *__pyx_pw_4core_5basis_5Basis_5Basis_53add(PyObject *__pyx_v_sel
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("add (wrapper)", 0);
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_other), __pyx_ptype_4core_5basis_5Basis_Basis, 1, "other", 0))) __PYX_ERR(1, 91, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_other), __pyx_ptype_4core_5basis_5Basis_Basis, 1, "other", 0))) __PYX_ERR(1, 87, __pyx_L1_error)
   __pyx_r = __pyx_pf_4core_5basis_5Basis_5Basis_52add(((struct __pyx_obj_4core_5basis_5Basis_Basis *)__pyx_v_self), ((struct __pyx_obj_4core_5basis_5Basis_Basis *)__pyx_v_other));
 
   /* function exit code */
@@ -3613,7 +3467,7 @@ static PyObject *__pyx_pf_4core_5basis_5Basis_5Basis_52add(struct __pyx_obj_4cor
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("add", 0);
 
-  /* "core/basis/Basis.pyx":92
+  /* "core/basis/Basis.pyx":88
  * 
  *     def add(self, Basis other):
  *         return Basis. new_static(api_core.godot_basis_operator_add(&self._native, &other._native))             # <<<<<<<<<<<<<<
@@ -3621,13 +3475,13 @@ static PyObject *__pyx_pf_4core_5basis_5Basis_5Basis_52add(struct __pyx_obj_4cor
  *     def sub(self, Basis other):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_void_to_None(__pyx_f_4core_5basis_5Basis_5Basis_new_static(api_core->godot_basis_operator_add((&__pyx_v_self->_native), (&__pyx_v_other->_native)))); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 92, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_void_to_None(__pyx_f_4core_5basis_5Basis_5Basis_new_static(api_core->godot_basis_operator_add((&__pyx_v_self->_native), (&__pyx_v_other->_native)))); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 88, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "core/basis/Basis.pyx":91
+  /* "core/basis/Basis.pyx":87
  *         return api_core.godot_basis_operator_equal(&self._native, &other._native)
  * 
  *     def add(self, Basis other):             # <<<<<<<<<<<<<<
@@ -3646,7 +3500,7 @@ static PyObject *__pyx_pf_4core_5basis_5Basis_5Basis_52add(struct __pyx_obj_4cor
   return __pyx_r;
 }
 
-/* "core/basis/Basis.pyx":94
+/* "core/basis/Basis.pyx":90
  *         return Basis. new_static(api_core.godot_basis_operator_add(&self._native, &other._native))
  * 
  *     def sub(self, Basis other):             # <<<<<<<<<<<<<<
@@ -3663,7 +3517,7 @@ static PyObject *__pyx_pw_4core_5basis_5Basis_5Basis_55sub(PyObject *__pyx_v_sel
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("sub (wrapper)", 0);
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_other), __pyx_ptype_4core_5basis_5Basis_Basis, 1, "other", 0))) __PYX_ERR(1, 94, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_other), __pyx_ptype_4core_5basis_5Basis_Basis, 1, "other", 0))) __PYX_ERR(1, 90, __pyx_L1_error)
   __pyx_r = __pyx_pf_4core_5basis_5Basis_5Basis_54sub(((struct __pyx_obj_4core_5basis_5Basis_Basis *)__pyx_v_self), ((struct __pyx_obj_4core_5basis_5Basis_Basis *)__pyx_v_other));
 
   /* function exit code */
@@ -3684,7 +3538,7 @@ static PyObject *__pyx_pf_4core_5basis_5Basis_5Basis_54sub(struct __pyx_obj_4cor
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("sub", 0);
 
-  /* "core/basis/Basis.pyx":95
+  /* "core/basis/Basis.pyx":91
  * 
  *     def sub(self, Basis other):
  *         return Basis. new_static(api_core.godot_basis_operator_subtract(&self._native, &other._native))             # <<<<<<<<<<<<<<
@@ -3692,13 +3546,13 @@ static PyObject *__pyx_pf_4core_5basis_5Basis_5Basis_54sub(struct __pyx_obj_4cor
  *     def multiply_vector(self, Basis other):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_void_to_None(__pyx_f_4core_5basis_5Basis_5Basis_new_static(api_core->godot_basis_operator_subtract((&__pyx_v_self->_native), (&__pyx_v_other->_native)))); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 95, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_void_to_None(__pyx_f_4core_5basis_5Basis_5Basis_new_static(api_core->godot_basis_operator_subtract((&__pyx_v_self->_native), (&__pyx_v_other->_native)))); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 91, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "core/basis/Basis.pyx":94
+  /* "core/basis/Basis.pyx":90
  *         return Basis. new_static(api_core.godot_basis_operator_add(&self._native, &other._native))
  * 
  *     def sub(self, Basis other):             # <<<<<<<<<<<<<<
@@ -3717,7 +3571,7 @@ static PyObject *__pyx_pf_4core_5basis_5Basis_5Basis_54sub(struct __pyx_obj_4cor
   return __pyx_r;
 }
 
-/* "core/basis/Basis.pyx":97
+/* "core/basis/Basis.pyx":93
  *         return Basis. new_static(api_core.godot_basis_operator_subtract(&self._native, &other._native))
  * 
  *     def multiply_vector(self, Basis other):             # <<<<<<<<<<<<<<
@@ -3734,7 +3588,7 @@ static PyObject *__pyx_pw_4core_5basis_5Basis_5Basis_57multiply_vector(PyObject 
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("multiply_vector (wrapper)", 0);
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_other), __pyx_ptype_4core_5basis_5Basis_Basis, 1, "other", 0))) __PYX_ERR(1, 97, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_other), __pyx_ptype_4core_5basis_5Basis_Basis, 1, "other", 0))) __PYX_ERR(1, 93, __pyx_L1_error)
   __pyx_r = __pyx_pf_4core_5basis_5Basis_5Basis_56multiply_vector(((struct __pyx_obj_4core_5basis_5Basis_Basis *)__pyx_v_self), ((struct __pyx_obj_4core_5basis_5Basis_Basis *)__pyx_v_other));
 
   /* function exit code */
@@ -3755,7 +3609,7 @@ static PyObject *__pyx_pf_4core_5basis_5Basis_5Basis_56multiply_vector(struct __
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("multiply_vector", 0);
 
-  /* "core/basis/Basis.pyx":98
+  /* "core/basis/Basis.pyx":94
  * 
  *     def multiply_vector(self, Basis other):
  *         return Basis. new_static(api_core.godot_basis_operator_multiply_vector(&self._native, &other._native))             # <<<<<<<<<<<<<<
@@ -3763,13 +3617,13 @@ static PyObject *__pyx_pf_4core_5basis_5Basis_5Basis_56multiply_vector(struct __
  *     def multiply_scalar(self, godot_real value):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_void_to_None(__pyx_f_4core_5basis_5Basis_5Basis_new_static(api_core->godot_basis_operator_multiply_vector((&__pyx_v_self->_native), (&__pyx_v_other->_native)))); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 98, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_void_to_None(__pyx_f_4core_5basis_5Basis_5Basis_new_static(api_core->godot_basis_operator_multiply_vector((&__pyx_v_self->_native), (&__pyx_v_other->_native)))); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 94, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "core/basis/Basis.pyx":97
+  /* "core/basis/Basis.pyx":93
  *         return Basis. new_static(api_core.godot_basis_operator_subtract(&self._native, &other._native))
  * 
  *     def multiply_vector(self, Basis other):             # <<<<<<<<<<<<<<
@@ -3788,7 +3642,7 @@ static PyObject *__pyx_pf_4core_5basis_5Basis_5Basis_56multiply_vector(struct __
   return __pyx_r;
 }
 
-/* "core/basis/Basis.pyx":100
+/* "core/basis/Basis.pyx":96
  *         return Basis. new_static(api_core.godot_basis_operator_multiply_vector(&self._native, &other._native))
  * 
  *     def multiply_scalar(self, godot_real value):             # <<<<<<<<<<<<<<
@@ -3806,7 +3660,7 @@ static PyObject *__pyx_pw_4core_5basis_5Basis_5Basis_59multiply_scalar(PyObject 
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("multiply_scalar (wrapper)", 0);
   assert(__pyx_arg_value); {
-    __pyx_v_value = __pyx_PyFloat_AsFloat(__pyx_arg_value); if (unlikely((__pyx_v_value == ((godot_real)-1)) && PyErr_Occurred())) __PYX_ERR(1, 100, __pyx_L3_error)
+    __pyx_v_value = __pyx_PyFloat_AsFloat(__pyx_arg_value); if (unlikely((__pyx_v_value == ((godot_real)-1)) && PyErr_Occurred())) __PYX_ERR(1, 96, __pyx_L3_error)
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -3830,19 +3684,19 @@ static PyObject *__pyx_pf_4core_5basis_5Basis_5Basis_58multiply_scalar(struct __
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("multiply_scalar", 0);
 
-  /* "core/basis/Basis.pyx":101
+  /* "core/basis/Basis.pyx":97
  * 
  *     def multiply_scalar(self, godot_real value):
  *         return Basis. new_static(api_core.godot_basis_operator_multiply_scalar(&self._native, value))             # <<<<<<<<<<<<<<
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_void_to_None(__pyx_f_4core_5basis_5Basis_5Basis_new_static(api_core->godot_basis_operator_multiply_scalar((&__pyx_v_self->_native), __pyx_v_value))); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 101, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_void_to_None(__pyx_f_4core_5basis_5Basis_5Basis_new_static(api_core->godot_basis_operator_multiply_scalar((&__pyx_v_self->_native), __pyx_v_value))); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 97, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "core/basis/Basis.pyx":100
+  /* "core/basis/Basis.pyx":96
  *         return Basis. new_static(api_core.godot_basis_operator_multiply_vector(&self._native, &other._native))
  * 
  *     def multiply_scalar(self, godot_real value):             # <<<<<<<<<<<<<<
@@ -4323,524 +4177,6 @@ static CYTHON_INLINE void __pyx_f_4core_6string_6String_6String_new_static(godot
   __Pyx_XDECREF((PyObject *)__pyx_v_v);
   __Pyx_RefNannyFinishContext();
 }
-
-/* "carray.from_py":77
- * 
- * @cname("__Pyx_carray_from_py_uint8_t")
- * cdef int __Pyx_carray_from_py_uint8_t(object o, base_type *v, Py_ssize_t length) except -1:             # <<<<<<<<<<<<<<
- *     cdef Py_ssize_t i = length
- *     try:
- */
-
-static int __Pyx_carray_from_py_uint8_t(PyObject *__pyx_v_o, uint8_t *__pyx_v_v, Py_ssize_t __pyx_v_length) {
-  Py_ssize_t __pyx_v_i;
-  PyObject *__pyx_v_item = NULL;
-  int __pyx_r;
-  __Pyx_RefNannyDeclarations
-  PyObject *__pyx_t_1 = NULL;
-  PyObject *__pyx_t_2 = NULL;
-  PyObject *__pyx_t_3 = NULL;
-  Py_ssize_t __pyx_t_4;
-  int __pyx_t_5;
-  int __pyx_t_6;
-  PyObject *__pyx_t_7 = NULL;
-  Py_ssize_t __pyx_t_8;
-  PyObject *(*__pyx_t_9)(PyObject *);
-  PyObject *__pyx_t_10 = NULL;
-  uint8_t __pyx_t_11;
-  char const *__pyx_t_12;
-  int __pyx_lineno = 0;
-  const char *__pyx_filename = NULL;
-  int __pyx_clineno = 0;
-  __Pyx_RefNannySetupContext("__Pyx_carray_from_py_uint8_t", 0);
-
-  /* "carray.from_py":78
- * @cname("__Pyx_carray_from_py_uint8_t")
- * cdef int __Pyx_carray_from_py_uint8_t(object o, base_type *v, Py_ssize_t length) except -1:
- *     cdef Py_ssize_t i = length             # <<<<<<<<<<<<<<
- *     try:
- *         i = len(o)
- */
-  __pyx_v_i = __pyx_v_length;
-
-  /* "carray.from_py":79
- * cdef int __Pyx_carray_from_py_uint8_t(object o, base_type *v, Py_ssize_t length) except -1:
- *     cdef Py_ssize_t i = length
- *     try:             # <<<<<<<<<<<<<<
- *         i = len(o)
- *     except (TypeError, OverflowError):
- */
-  {
-    __Pyx_PyThreadState_declare
-    __Pyx_PyThreadState_assign
-    __Pyx_ExceptionSave(&__pyx_t_1, &__pyx_t_2, &__pyx_t_3);
-    __Pyx_XGOTREF(__pyx_t_1);
-    __Pyx_XGOTREF(__pyx_t_2);
-    __Pyx_XGOTREF(__pyx_t_3);
-    /*try:*/ {
-
-      /* "carray.from_py":80
- *     cdef Py_ssize_t i = length
- *     try:
- *         i = len(o)             # <<<<<<<<<<<<<<
- *     except (TypeError, OverflowError):
- *         pass
- */
-      __pyx_t_4 = PyObject_Length(__pyx_v_o); if (unlikely(__pyx_t_4 == ((Py_ssize_t)-1))) __PYX_ERR(0, 80, __pyx_L3_error)
-      __pyx_v_i = __pyx_t_4;
-
-      /* "carray.from_py":79
- * cdef int __Pyx_carray_from_py_uint8_t(object o, base_type *v, Py_ssize_t length) except -1:
- *     cdef Py_ssize_t i = length
- *     try:             # <<<<<<<<<<<<<<
- *         i = len(o)
- *     except (TypeError, OverflowError):
- */
-    }
-    __Pyx_XDECREF(__pyx_t_1); __pyx_t_1 = 0;
-    __Pyx_XDECREF(__pyx_t_2); __pyx_t_2 = 0;
-    __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
-    goto __pyx_L8_try_end;
-    __pyx_L3_error:;
-
-    /* "carray.from_py":81
- *     try:
- *         i = len(o)
- *     except (TypeError, OverflowError):             # <<<<<<<<<<<<<<
- *         pass
- *     if i == length:
- */
-    __pyx_t_5 = __Pyx_PyErr_ExceptionMatches(__pyx_builtin_TypeError) || __Pyx_PyErr_ExceptionMatches(__pyx_builtin_OverflowError);
-    if (__pyx_t_5) {
-      __Pyx_ErrRestore(0,0,0);
-      goto __pyx_L4_exception_handled;
-    }
-    goto __pyx_L5_except_error;
-    __pyx_L5_except_error:;
-
-    /* "carray.from_py":79
- * cdef int __Pyx_carray_from_py_uint8_t(object o, base_type *v, Py_ssize_t length) except -1:
- *     cdef Py_ssize_t i = length
- *     try:             # <<<<<<<<<<<<<<
- *         i = len(o)
- *     except (TypeError, OverflowError):
- */
-    __Pyx_XGIVEREF(__pyx_t_1);
-    __Pyx_XGIVEREF(__pyx_t_2);
-    __Pyx_XGIVEREF(__pyx_t_3);
-    __Pyx_ExceptionReset(__pyx_t_1, __pyx_t_2, __pyx_t_3);
-    goto __pyx_L1_error;
-    __pyx_L4_exception_handled:;
-    __Pyx_XGIVEREF(__pyx_t_1);
-    __Pyx_XGIVEREF(__pyx_t_2);
-    __Pyx_XGIVEREF(__pyx_t_3);
-    __Pyx_ExceptionReset(__pyx_t_1, __pyx_t_2, __pyx_t_3);
-    __pyx_L8_try_end:;
-  }
-
-  /* "carray.from_py":83
- *     except (TypeError, OverflowError):
- *         pass
- *     if i == length:             # <<<<<<<<<<<<<<
- *         for i, item in enumerate(o):
- *             if i >= length:
- */
-  __pyx_t_6 = ((__pyx_v_i == __pyx_v_length) != 0);
-  if (__pyx_t_6) {
-
-    /* "carray.from_py":84
- *         pass
- *     if i == length:
- *         for i, item in enumerate(o):             # <<<<<<<<<<<<<<
- *             if i >= length:
- *                 break
- */
-    __pyx_t_4 = 0;
-    if (likely(PyList_CheckExact(__pyx_v_o)) || PyTuple_CheckExact(__pyx_v_o)) {
-      __pyx_t_7 = __pyx_v_o; __Pyx_INCREF(__pyx_t_7); __pyx_t_8 = 0;
-      __pyx_t_9 = NULL;
-    } else {
-      __pyx_t_8 = -1; __pyx_t_7 = PyObject_GetIter(__pyx_v_o); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 84, __pyx_L1_error)
-      __Pyx_GOTREF(__pyx_t_7);
-      __pyx_t_9 = Py_TYPE(__pyx_t_7)->tp_iternext; if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 84, __pyx_L1_error)
-    }
-    for (;;) {
-      if (likely(!__pyx_t_9)) {
-        if (likely(PyList_CheckExact(__pyx_t_7))) {
-          if (__pyx_t_8 >= PyList_GET_SIZE(__pyx_t_7)) break;
-          #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
-          __pyx_t_10 = PyList_GET_ITEM(__pyx_t_7, __pyx_t_8); __Pyx_INCREF(__pyx_t_10); __pyx_t_8++; if (unlikely(0 < 0)) __PYX_ERR(0, 84, __pyx_L1_error)
-          #else
-          __pyx_t_10 = PySequence_ITEM(__pyx_t_7, __pyx_t_8); __pyx_t_8++; if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 84, __pyx_L1_error)
-          __Pyx_GOTREF(__pyx_t_10);
-          #endif
-        } else {
-          if (__pyx_t_8 >= PyTuple_GET_SIZE(__pyx_t_7)) break;
-          #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
-          __pyx_t_10 = PyTuple_GET_ITEM(__pyx_t_7, __pyx_t_8); __Pyx_INCREF(__pyx_t_10); __pyx_t_8++; if (unlikely(0 < 0)) __PYX_ERR(0, 84, __pyx_L1_error)
-          #else
-          __pyx_t_10 = PySequence_ITEM(__pyx_t_7, __pyx_t_8); __pyx_t_8++; if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 84, __pyx_L1_error)
-          __Pyx_GOTREF(__pyx_t_10);
-          #endif
-        }
-      } else {
-        __pyx_t_10 = __pyx_t_9(__pyx_t_7);
-        if (unlikely(!__pyx_t_10)) {
-          PyObject* exc_type = PyErr_Occurred();
-          if (exc_type) {
-            if (likely(__Pyx_PyErr_GivenExceptionMatches(exc_type, PyExc_StopIteration))) PyErr_Clear();
-            else __PYX_ERR(0, 84, __pyx_L1_error)
-          }
-          break;
-        }
-        __Pyx_GOTREF(__pyx_t_10);
-      }
-      __Pyx_XDECREF_SET(__pyx_v_item, __pyx_t_10);
-      __pyx_t_10 = 0;
-      __pyx_v_i = __pyx_t_4;
-      __pyx_t_4 = (__pyx_t_4 + 1);
-
-      /* "carray.from_py":85
- *     if i == length:
- *         for i, item in enumerate(o):
- *             if i >= length:             # <<<<<<<<<<<<<<
- *                 break
- *             v[i] = item
- */
-      __pyx_t_6 = ((__pyx_v_i >= __pyx_v_length) != 0);
-      if (__pyx_t_6) {
-
-        /* "carray.from_py":86
- *         for i, item in enumerate(o):
- *             if i >= length:
- *                 break             # <<<<<<<<<<<<<<
- *             v[i] = item
- *         else:
- */
-        goto __pyx_L11_break;
-
-        /* "carray.from_py":85
- *     if i == length:
- *         for i, item in enumerate(o):
- *             if i >= length:             # <<<<<<<<<<<<<<
- *                 break
- *             v[i] = item
- */
-      }
-
-      /* "carray.from_py":87
- *             if i >= length:
- *                 break
- *             v[i] = item             # <<<<<<<<<<<<<<
- *         else:
- *             i += 1  # convert index to length
- */
-      __pyx_t_11 = __Pyx_PyInt_As_uint8_t(__pyx_v_item); if (unlikely((__pyx_t_11 == ((uint8_t)-1)) && PyErr_Occurred())) __PYX_ERR(0, 87, __pyx_L1_error)
-      (__pyx_v_v[__pyx_v_i]) = __pyx_t_11;
-
-      /* "carray.from_py":84
- *         pass
- *     if i == length:
- *         for i, item in enumerate(o):             # <<<<<<<<<<<<<<
- *             if i >= length:
- *                 break
- */
-    }
-    /*else*/ {
-
-      /* "carray.from_py":89
- *             v[i] = item
- *         else:
- *             i += 1  # convert index to length             # <<<<<<<<<<<<<<
- *             if i == length:
- *                 return 0
- */
-      __pyx_v_i = (__pyx_v_i + 1);
-
-      /* "carray.from_py":90
- *         else:
- *             i += 1  # convert index to length
- *             if i == length:             # <<<<<<<<<<<<<<
- *                 return 0
- * 
- */
-      __pyx_t_6 = ((__pyx_v_i == __pyx_v_length) != 0);
-      if (__pyx_t_6) {
-
-        /* "carray.from_py":91
- *             i += 1  # convert index to length
- *             if i == length:
- *                 return 0             # <<<<<<<<<<<<<<
- * 
- *     PyErr_Format(
- */
-        __pyx_r = 0;
-        __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
-        goto __pyx_L0;
-
-        /* "carray.from_py":90
- *         else:
- *             i += 1  # convert index to length
- *             if i == length:             # <<<<<<<<<<<<<<
- *                 return 0
- * 
- */
-      }
-    }
-
-    /* "carray.from_py":84
- *         pass
- *     if i == length:
- *         for i, item in enumerate(o):             # <<<<<<<<<<<<<<
- *             if i >= length:
- *                 break
- */
-    __pyx_L11_break:;
-    __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
-
-    /* "carray.from_py":83
- *     except (TypeError, OverflowError):
- *         pass
- *     if i == length:             # <<<<<<<<<<<<<<
- *         for i, item in enumerate(o):
- *             if i >= length:
- */
-  }
-
-  /* "carray.from_py":96
- *         IndexError,
- *         ("too many values found during array assignment, expected %zd"
- *          if i >= length else             # <<<<<<<<<<<<<<
- *          "not enough values found during array assignment, expected %zd, got %zd"),
- *         length, i)
- */
-  if (((__pyx_v_i >= __pyx_v_length) != 0)) {
-    __pyx_t_12 = ((char const *)"too many values found during array assignment, expected %zd");
-  } else {
-    __pyx_t_12 = ((char const *)"not enough values found during array assignment, expected %zd, got %zd");
-  }
-
-  /* "carray.from_py":93
- *                 return 0
- * 
- *     PyErr_Format(             # <<<<<<<<<<<<<<
- *         IndexError,
- *         ("too many values found during array assignment, expected %zd"
- */
-  __pyx_t_7 = PyErr_Format(__pyx_builtin_IndexError, __pyx_t_12, __pyx_v_length, __pyx_v_i); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 93, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_7);
-  __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
-
-  /* "carray.from_py":77
- * 
- * @cname("__Pyx_carray_from_py_uint8_t")
- * cdef int __Pyx_carray_from_py_uint8_t(object o, base_type *v, Py_ssize_t length) except -1:             # <<<<<<<<<<<<<<
- *     cdef Py_ssize_t i = length
- *     try:
- */
-
-  /* function exit code */
-  __pyx_r = 0;
-  goto __pyx_L0;
-  __pyx_L1_error:;
-  __Pyx_XDECREF(__pyx_t_7);
-  __Pyx_XDECREF(__pyx_t_10);
-  __Pyx_AddTraceback("carray.from_py.__Pyx_carray_from_py_uint8_t", __pyx_clineno, __pyx_lineno, __pyx_filename);
-  __pyx_r = -1;
-  __pyx_L0:;
-  __Pyx_XDECREF(__pyx_v_item);
-  __Pyx_RefNannyFinishContext();
-  return __pyx_r;
-}
-
-/* "FromPyStructUtility":11
- * 
- * @cname("__pyx_convert__from_py_godot_basis")
- * cdef struct_type __pyx_convert__from_py_godot_basis(obj) except *:             # <<<<<<<<<<<<<<
- *     cdef struct_type result
- *     if not PyMapping_Check(obj):
- */
-
-static godot_basis __pyx_convert__from_py_godot_basis(PyObject *__pyx_v_obj) {
-  godot_basis __pyx_v_result;
-  PyObject *__pyx_v_value = NULL;
-  godot_basis __pyx_r;
-  __Pyx_RefNannyDeclarations
-  int __pyx_t_1;
-  PyObject *__pyx_t_2 = NULL;
-  PyObject *__pyx_t_3 = NULL;
-  PyObject *__pyx_t_4 = NULL;
-  PyObject *__pyx_t_5 = NULL;
-  int __pyx_t_6;
-  PyObject *__pyx_t_7 = NULL;
-  PyObject *__pyx_t_8 = NULL;
-  PyObject *__pyx_t_9 = NULL;
-  uint8_t __pyx_t_10[36];
-  int __pyx_lineno = 0;
-  const char *__pyx_filename = NULL;
-  int __pyx_clineno = 0;
-  __Pyx_RefNannySetupContext("__pyx_convert__from_py_godot_basis", 0);
-
-  /* "FromPyStructUtility":13
- * cdef struct_type __pyx_convert__from_py_godot_basis(obj) except *:
- *     cdef struct_type result
- *     if not PyMapping_Check(obj):             # <<<<<<<<<<<<<<
- *         PyErr_Format(TypeError, b"Expected %.16s, got %.200s", b"a mapping", Py_TYPE(obj).tp_name)
- * 
- */
-  __pyx_t_1 = ((!(PyMapping_Check(__pyx_v_obj) != 0)) != 0);
-  if (__pyx_t_1) {
-
-    /* "FromPyStructUtility":14
- *     cdef struct_type result
- *     if not PyMapping_Check(obj):
- *         PyErr_Format(TypeError, b"Expected %.16s, got %.200s", b"a mapping", Py_TYPE(obj).tp_name)             # <<<<<<<<<<<<<<
- * 
- *     try:
- */
-    __pyx_t_2 = PyErr_Format(__pyx_builtin_TypeError, ((char const *)"Expected %.16s, got %.200s"), ((char *)"a mapping"), Py_TYPE(__pyx_v_obj)->tp_name); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 14, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_2);
-    __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-
-    /* "FromPyStructUtility":13
- * cdef struct_type __pyx_convert__from_py_godot_basis(obj) except *:
- *     cdef struct_type result
- *     if not PyMapping_Check(obj):             # <<<<<<<<<<<<<<
- *         PyErr_Format(TypeError, b"Expected %.16s, got %.200s", b"a mapping", Py_TYPE(obj).tp_name)
- * 
- */
-  }
-
-  /* "FromPyStructUtility":16
- *         PyErr_Format(TypeError, b"Expected %.16s, got %.200s", b"a mapping", Py_TYPE(obj).tp_name)
- * 
- *     try:             # <<<<<<<<<<<<<<
- *         value = obj['_dont_touch_that']
- *     except KeyError:
- */
-  {
-    __Pyx_PyThreadState_declare
-    __Pyx_PyThreadState_assign
-    __Pyx_ExceptionSave(&__pyx_t_3, &__pyx_t_4, &__pyx_t_5);
-    __Pyx_XGOTREF(__pyx_t_3);
-    __Pyx_XGOTREF(__pyx_t_4);
-    __Pyx_XGOTREF(__pyx_t_5);
-    /*try:*/ {
-
-      /* "FromPyStructUtility":17
- * 
- *     try:
- *         value = obj['_dont_touch_that']             # <<<<<<<<<<<<<<
- *     except KeyError:
- *         raise ValueError("No value specified for struct attribute '_dont_touch_that'")
- */
-      __pyx_t_2 = __Pyx_PyObject_Dict_GetItem(__pyx_v_obj, __pyx_n_s_dont_touch_that); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 17, __pyx_L4_error)
-      __Pyx_GOTREF(__pyx_t_2);
-      __pyx_v_value = __pyx_t_2;
-      __pyx_t_2 = 0;
-
-      /* "FromPyStructUtility":16
- *         PyErr_Format(TypeError, b"Expected %.16s, got %.200s", b"a mapping", Py_TYPE(obj).tp_name)
- * 
- *     try:             # <<<<<<<<<<<<<<
- *         value = obj['_dont_touch_that']
- *     except KeyError:
- */
-    }
-    __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
-    __Pyx_XDECREF(__pyx_t_4); __pyx_t_4 = 0;
-    __Pyx_XDECREF(__pyx_t_5); __pyx_t_5 = 0;
-    goto __pyx_L9_try_end;
-    __pyx_L4_error:;
-    __Pyx_XDECREF(__pyx_t_2); __pyx_t_2 = 0;
-
-    /* "FromPyStructUtility":18
- *     try:
- *         value = obj['_dont_touch_that']
- *     except KeyError:             # <<<<<<<<<<<<<<
- *         raise ValueError("No value specified for struct attribute '_dont_touch_that'")
- *     result._dont_touch_that = value
- */
-    __pyx_t_6 = __Pyx_PyErr_ExceptionMatches(__pyx_builtin_KeyError);
-    if (__pyx_t_6) {
-      __Pyx_AddTraceback("FromPyStructUtility.__pyx_convert__from_py_godot_basis", __pyx_clineno, __pyx_lineno, __pyx_filename);
-      if (__Pyx_GetException(&__pyx_t_2, &__pyx_t_7, &__pyx_t_8) < 0) __PYX_ERR(0, 18, __pyx_L6_except_error)
-      __Pyx_GOTREF(__pyx_t_2);
-      __Pyx_GOTREF(__pyx_t_7);
-      __Pyx_GOTREF(__pyx_t_8);
-
-      /* "FromPyStructUtility":19
- *         value = obj['_dont_touch_that']
- *     except KeyError:
- *         raise ValueError("No value specified for struct attribute '_dont_touch_that'")             # <<<<<<<<<<<<<<
- *     result._dont_touch_that = value
- *     return result
- */
-      __pyx_t_9 = __Pyx_PyObject_Call(__pyx_builtin_ValueError, __pyx_tuple__3, NULL); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 19, __pyx_L6_except_error)
-      __Pyx_GOTREF(__pyx_t_9);
-      __Pyx_Raise(__pyx_t_9, 0, 0, 0);
-      __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
-      __PYX_ERR(0, 19, __pyx_L6_except_error)
-    }
-    goto __pyx_L6_except_error;
-    __pyx_L6_except_error:;
-
-    /* "FromPyStructUtility":16
- *         PyErr_Format(TypeError, b"Expected %.16s, got %.200s", b"a mapping", Py_TYPE(obj).tp_name)
- * 
- *     try:             # <<<<<<<<<<<<<<
- *         value = obj['_dont_touch_that']
- *     except KeyError:
- */
-    __Pyx_XGIVEREF(__pyx_t_3);
-    __Pyx_XGIVEREF(__pyx_t_4);
-    __Pyx_XGIVEREF(__pyx_t_5);
-    __Pyx_ExceptionReset(__pyx_t_3, __pyx_t_4, __pyx_t_5);
-    goto __pyx_L1_error;
-    __pyx_L9_try_end:;
-  }
-
-  /* "FromPyStructUtility":20
- *     except KeyError:
- *         raise ValueError("No value specified for struct attribute '_dont_touch_that'")
- *     result._dont_touch_that = value             # <<<<<<<<<<<<<<
- *     return result
- * 
- */
-  if (unlikely(__Pyx_carray_from_py_uint8_t(__pyx_v_value, __pyx_t_10, 36) < 0)) __PYX_ERR(0, 20, __pyx_L1_error)
-  memcpy(&(__pyx_v_result._dont_touch_that[0]), __pyx_t_10, sizeof(__pyx_v_result._dont_touch_that[0]) * (36));
-
-  /* "FromPyStructUtility":21
- *         raise ValueError("No value specified for struct attribute '_dont_touch_that'")
- *     result._dont_touch_that = value
- *     return result             # <<<<<<<<<<<<<<
- * 
- * 
- */
-  __pyx_r = __pyx_v_result;
-  goto __pyx_L0;
-
-  /* "FromPyStructUtility":11
- * 
- * @cname("__pyx_convert__from_py_godot_basis")
- * cdef struct_type __pyx_convert__from_py_godot_basis(obj) except *:             # <<<<<<<<<<<<<<
- *     cdef struct_type result
- *     if not PyMapping_Check(obj):
- */
-
-  /* function exit code */
-  __pyx_L1_error:;
-  __Pyx_XDECREF(__pyx_t_2);
-  __Pyx_XDECREF(__pyx_t_7);
-  __Pyx_XDECREF(__pyx_t_8);
-  __Pyx_XDECREF(__pyx_t_9);
-  __Pyx_AddTraceback("FromPyStructUtility.__pyx_convert__from_py_godot_basis", __pyx_clineno, __pyx_lineno, __pyx_filename);
-  __Pyx_pretend_to_initialize(&__pyx_r);
-  __pyx_L0:;
-  __Pyx_XDECREF(__pyx_v_value);
-  __Pyx_RefNannyFinishContext();
-  return __pyx_r;
-}
 static struct __pyx_vtabstruct_4core_5basis_5Basis_Basis __pyx_vtable_4core_5basis_5Basis_Basis;
 
 static PyObject *__pyx_tp_new_4core_5basis_5Basis_Basis(PyTypeObject *t, CYTHON_UNUSED PyObject *a, CYTHON_UNUSED PyObject *k) {
@@ -5038,22 +4374,15 @@ static struct PyModuleDef __pyx_moduledef = {
 
 static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_n_s_Basis, __pyx_k_Basis, sizeof(__pyx_k_Basis), 0, 0, 1, 1},
-  {&__pyx_n_s_IndexError, __pyx_k_IndexError, sizeof(__pyx_k_IndexError), 0, 0, 1, 1},
-  {&__pyx_n_s_KeyError, __pyx_k_KeyError, sizeof(__pyx_k_KeyError), 0, 0, 1, 1},
-  {&__pyx_kp_s_No_value_specified_for_struct_at, __pyx_k_No_value_specified_for_struct_at, sizeof(__pyx_k_No_value_specified_for_struct_at), 0, 0, 1, 0},
-  {&__pyx_n_s_OverflowError, __pyx_k_OverflowError, sizeof(__pyx_k_OverflowError), 0, 0, 1, 1},
   {&__pyx_kp_s_Pickling_of_struct_members_such, __pyx_k_Pickling_of_struct_members_such, sizeof(__pyx_k_Pickling_of_struct_members_such), 0, 0, 1, 0},
   {&__pyx_n_s_TypeError, __pyx_k_TypeError, sizeof(__pyx_k_TypeError), 0, 0, 1, 1},
-  {&__pyx_n_s_ValueError, __pyx_k_ValueError, sizeof(__pyx_k_ValueError), 0, 0, 1, 1},
   {&__pyx_n_s_axis, __pyx_k_axis, sizeof(__pyx_k_axis), 0, 0, 1, 1},
   {&__pyx_n_s_cline_in_traceback, __pyx_k_cline_in_traceback, sizeof(__pyx_k_cline_in_traceback), 0, 0, 1, 1},
   {&__pyx_n_s_dont_touch_that, __pyx_k_dont_touch_that, sizeof(__pyx_k_dont_touch_that), 0, 0, 1, 1},
-  {&__pyx_n_s_enumerate, __pyx_k_enumerate, sizeof(__pyx_k_enumerate), 0, 0, 1, 1},
   {&__pyx_n_s_euler, __pyx_k_euler, sizeof(__pyx_k_euler), 0, 0, 1, 1},
   {&__pyx_n_s_getstate, __pyx_k_getstate, sizeof(__pyx_k_getstate), 0, 0, 1, 1},
   {&__pyx_n_s_main, __pyx_k_main, sizeof(__pyx_k_main), 0, 0, 1, 1},
   {&__pyx_n_s_name, __pyx_k_name, sizeof(__pyx_k_name), 0, 0, 1, 1},
-  {&__pyx_n_s_native, __pyx_k_native, sizeof(__pyx_k_native), 0, 0, 1, 1},
   {&__pyx_n_s_p_phi, __pyx_k_p_phi, sizeof(__pyx_k_p_phi), 0, 0, 1, 1},
   {&__pyx_n_s_phi, __pyx_k_phi, sizeof(__pyx_k_phi), 0, 0, 1, 1},
   {&__pyx_n_s_pyx_vtable, __pyx_k_pyx_vtable, sizeof(__pyx_k_pyx_vtable), 0, 0, 1, 1},
@@ -5073,11 +4402,6 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
 };
 static CYTHON_SMALL_CODE int __Pyx_InitCachedBuiltins(void) {
   __pyx_builtin_TypeError = __Pyx_GetBuiltinName(__pyx_n_s_TypeError); if (!__pyx_builtin_TypeError) __PYX_ERR(0, 2, __pyx_L1_error)
-  __pyx_builtin_OverflowError = __Pyx_GetBuiltinName(__pyx_n_s_OverflowError); if (!__pyx_builtin_OverflowError) __PYX_ERR(0, 81, __pyx_L1_error)
-  __pyx_builtin_enumerate = __Pyx_GetBuiltinName(__pyx_n_s_enumerate); if (!__pyx_builtin_enumerate) __PYX_ERR(0, 84, __pyx_L1_error)
-  __pyx_builtin_IndexError = __Pyx_GetBuiltinName(__pyx_n_s_IndexError); if (!__pyx_builtin_IndexError) __PYX_ERR(0, 94, __pyx_L1_error)
-  __pyx_builtin_KeyError = __Pyx_GetBuiltinName(__pyx_n_s_KeyError); if (!__pyx_builtin_KeyError) __PYX_ERR(0, 18, __pyx_L1_error)
-  __pyx_builtin_ValueError = __Pyx_GetBuiltinName(__pyx_n_s_ValueError); if (!__pyx_builtin_ValueError) __PYX_ERR(0, 19, __pyx_L1_error)
   return 0;
   __pyx_L1_error:;
   return -1;
@@ -5105,17 +4429,6 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
   __pyx_tuple__2 = PyTuple_Pack(1, __pyx_kp_s_Pickling_of_struct_members_such); if (unlikely(!__pyx_tuple__2)) __PYX_ERR(0, 4, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__2);
   __Pyx_GIVEREF(__pyx_tuple__2);
-
-  /* "FromPyStructUtility":19
- *         value = obj['_dont_touch_that']
- *     except KeyError:
- *         raise ValueError("No value specified for struct attribute '_dont_touch_that'")             # <<<<<<<<<<<<<<
- *     result._dont_touch_that = value
- *     return result
- */
-  __pyx_tuple__3 = PyTuple_Pack(1, __pyx_kp_s_No_value_specified_for_struct_at); if (unlikely(!__pyx_tuple__3)) __PYX_ERR(0, 19, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple__3);
-  __Pyx_GIVEREF(__pyx_tuple__3);
   __Pyx_RefNannyFinishContext();
   return 0;
   __pyx_L1_error:;
@@ -5452,12 +4765,12 @@ if (!__Pyx_RefNanny) {
   if (PyDict_SetItem(__pyx_d, __pyx_n_s_test, __pyx_t_1) < 0) __PYX_ERR(1, 1, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "FromPyStructUtility":11
+  /* "core/string/String.pxd":10
  * 
- * @cname("__pyx_convert__from_py_godot_basis")
- * cdef struct_type __pyx_convert__from_py_godot_basis(obj) except *:             # <<<<<<<<<<<<<<
- *     cdef struct_type result
- *     if not PyMapping_Check(obj):
+ *     @staticmethod
+ *     cdef inline void new_static(godot_string _native):             # <<<<<<<<<<<<<<
+ *         cdef String v = String.__new__(String)
+ *         v.set_native(_native)
  */
 
   /*--- Wrapped vars code ---*/
@@ -5528,6 +4841,72 @@ static PyObject *__Pyx_GetBuiltinName(PyObject *name) {
 #endif
     }
     return result;
+}
+
+/* RaiseArgTupleInvalid */
+static void __Pyx_RaiseArgtupleInvalid(
+    const char* func_name,
+    int exact,
+    Py_ssize_t num_min,
+    Py_ssize_t num_max,
+    Py_ssize_t num_found)
+{
+    Py_ssize_t num_expected;
+    const char *more_or_less;
+    if (num_found < num_min) {
+        num_expected = num_min;
+        more_or_less = "at least";
+    } else {
+        num_expected = num_max;
+        more_or_less = "at most";
+    }
+    if (exact) {
+        more_or_less = "exactly";
+    }
+    PyErr_Format(PyExc_TypeError,
+                 "%.200s() takes %.8s %" CYTHON_FORMAT_SSIZE_T "d positional argument%.1s (%" CYTHON_FORMAT_SSIZE_T "d given)",
+                 func_name, more_or_less, num_expected,
+                 (num_expected == 1) ? "" : "s", num_found);
+}
+
+/* KeywordStringCheck */
+static int __Pyx_CheckKeywordStrings(
+    PyObject *kwdict,
+    const char* function_name,
+    int kw_allowed)
+{
+    PyObject* key = 0;
+    Py_ssize_t pos = 0;
+#if CYTHON_COMPILING_IN_PYPY
+    if (!kw_allowed && PyDict_Next(kwdict, &pos, &key, 0))
+        goto invalid_keyword;
+    return 1;
+#else
+    while (PyDict_Next(kwdict, &pos, &key, 0)) {
+        #if PY_MAJOR_VERSION < 3
+        if (unlikely(!PyString_Check(key)))
+        #endif
+            if (unlikely(!PyUnicode_Check(key)))
+                goto invalid_keyword_type;
+    }
+    if ((!kw_allowed) && unlikely(key))
+        goto invalid_keyword;
+    return 1;
+invalid_keyword_type:
+    PyErr_Format(PyExc_TypeError,
+        "%.200s() keywords must be strings", function_name);
+    return 0;
+#endif
+invalid_keyword:
+    PyErr_Format(PyExc_TypeError,
+    #if PY_MAJOR_VERSION < 3
+        "%.200s() got an unexpected keyword argument '%.200s'",
+        function_name, PyString_AsString(key));
+    #else
+        "%s() got an unexpected keyword argument '%U'",
+        function_name, key);
+    #endif
+    return 0;
 }
 
 /* RaiseDoubleKeywords */
@@ -5644,32 +5023,6 @@ invalid_keyword:
     #endif
 bad:
     return -1;
-}
-
-/* RaiseArgTupleInvalid */
-static void __Pyx_RaiseArgtupleInvalid(
-    const char* func_name,
-    int exact,
-    Py_ssize_t num_min,
-    Py_ssize_t num_max,
-    Py_ssize_t num_found)
-{
-    Py_ssize_t num_expected;
-    const char *more_or_less;
-    if (num_found < num_min) {
-        num_expected = num_min;
-        more_or_less = "at least";
-    } else {
-        num_expected = num_max;
-        more_or_less = "at most";
-    }
-    if (exact) {
-        more_or_less = "exactly";
-    }
-    PyErr_Format(PyExc_TypeError,
-                 "%.200s() takes %.8s %" CYTHON_FORMAT_SSIZE_T "d positional argument%.1s (%" CYTHON_FORMAT_SSIZE_T "d given)",
-                 func_name, more_or_less, num_expected,
-                 (num_expected == 1) ? "" : "s", num_found);
 }
 
 /* ArgTypeTest */
@@ -6153,185 +5506,6 @@ static void __Pyx_WriteUnraisable(const char *name, CYTHON_UNUSED int clineno,
 #endif
 }
 
-/* GetTopmostException */
-#if CYTHON_USE_EXC_INFO_STACK
-static _PyErr_StackItem *
-__Pyx_PyErr_GetTopmostException(PyThreadState *tstate)
-{
-    _PyErr_StackItem *exc_info = tstate->exc_info;
-    while ((exc_info->exc_type == NULL || exc_info->exc_type == Py_None) &&
-           exc_info->previous_item != NULL)
-    {
-        exc_info = exc_info->previous_item;
-    }
-    return exc_info;
-}
-#endif
-
-/* SaveResetException */
-#if CYTHON_FAST_THREAD_STATE
-static CYTHON_INLINE void __Pyx__ExceptionSave(PyThreadState *tstate, PyObject **type, PyObject **value, PyObject **tb) {
-    #if CYTHON_USE_EXC_INFO_STACK
-    _PyErr_StackItem *exc_info = __Pyx_PyErr_GetTopmostException(tstate);
-    *type = exc_info->exc_type;
-    *value = exc_info->exc_value;
-    *tb = exc_info->exc_traceback;
-    #else
-    *type = tstate->exc_type;
-    *value = tstate->exc_value;
-    *tb = tstate->exc_traceback;
-    #endif
-    Py_XINCREF(*type);
-    Py_XINCREF(*value);
-    Py_XINCREF(*tb);
-}
-static CYTHON_INLINE void __Pyx__ExceptionReset(PyThreadState *tstate, PyObject *type, PyObject *value, PyObject *tb) {
-    PyObject *tmp_type, *tmp_value, *tmp_tb;
-    #if CYTHON_USE_EXC_INFO_STACK
-    _PyErr_StackItem *exc_info = tstate->exc_info;
-    tmp_type = exc_info->exc_type;
-    tmp_value = exc_info->exc_value;
-    tmp_tb = exc_info->exc_traceback;
-    exc_info->exc_type = type;
-    exc_info->exc_value = value;
-    exc_info->exc_traceback = tb;
-    #else
-    tmp_type = tstate->exc_type;
-    tmp_value = tstate->exc_value;
-    tmp_tb = tstate->exc_traceback;
-    tstate->exc_type = type;
-    tstate->exc_value = value;
-    tstate->exc_traceback = tb;
-    #endif
-    Py_XDECREF(tmp_type);
-    Py_XDECREF(tmp_value);
-    Py_XDECREF(tmp_tb);
-}
-#endif
-
-/* PyErrExceptionMatches */
-#if CYTHON_FAST_THREAD_STATE
-static int __Pyx_PyErr_ExceptionMatchesTuple(PyObject *exc_type, PyObject *tuple) {
-    Py_ssize_t i, n;
-    n = PyTuple_GET_SIZE(tuple);
-#if PY_MAJOR_VERSION >= 3
-    for (i=0; i<n; i++) {
-        if (exc_type == PyTuple_GET_ITEM(tuple, i)) return 1;
-    }
-#endif
-    for (i=0; i<n; i++) {
-        if (__Pyx_PyErr_GivenExceptionMatches(exc_type, PyTuple_GET_ITEM(tuple, i))) return 1;
-    }
-    return 0;
-}
-static CYTHON_INLINE int __Pyx_PyErr_ExceptionMatchesInState(PyThreadState* tstate, PyObject* err) {
-    PyObject *exc_type = tstate->curexc_type;
-    if (exc_type == err) return 1;
-    if (unlikely(!exc_type)) return 0;
-    if (unlikely(PyTuple_Check(err)))
-        return __Pyx_PyErr_ExceptionMatchesTuple(exc_type, err);
-    return __Pyx_PyErr_GivenExceptionMatches(exc_type, err);
-}
-#endif
-
-/* DictGetItem */
-#if PY_MAJOR_VERSION >= 3 && !CYTHON_COMPILING_IN_PYPY
-static PyObject *__Pyx_PyDict_GetItem(PyObject *d, PyObject* key) {
-    PyObject *value;
-    value = PyDict_GetItemWithError(d, key);
-    if (unlikely(!value)) {
-        if (!PyErr_Occurred()) {
-            if (unlikely(PyTuple_Check(key))) {
-                PyObject* args = PyTuple_Pack(1, key);
-                if (likely(args)) {
-                    PyErr_SetObject(PyExc_KeyError, args);
-                    Py_DECREF(args);
-                }
-            } else {
-                PyErr_SetObject(PyExc_KeyError, key);
-            }
-        }
-        return NULL;
-    }
-    Py_INCREF(value);
-    return value;
-}
-#endif
-
-/* GetException */
-#if CYTHON_FAST_THREAD_STATE
-static int __Pyx__GetException(PyThreadState *tstate, PyObject **type, PyObject **value, PyObject **tb)
-#else
-static int __Pyx_GetException(PyObject **type, PyObject **value, PyObject **tb)
-#endif
-{
-    PyObject *local_type, *local_value, *local_tb;
-#if CYTHON_FAST_THREAD_STATE
-    PyObject *tmp_type, *tmp_value, *tmp_tb;
-    local_type = tstate->curexc_type;
-    local_value = tstate->curexc_value;
-    local_tb = tstate->curexc_traceback;
-    tstate->curexc_type = 0;
-    tstate->curexc_value = 0;
-    tstate->curexc_traceback = 0;
-#else
-    PyErr_Fetch(&local_type, &local_value, &local_tb);
-#endif
-    PyErr_NormalizeException(&local_type, &local_value, &local_tb);
-#if CYTHON_FAST_THREAD_STATE
-    if (unlikely(tstate->curexc_type))
-#else
-    if (unlikely(PyErr_Occurred()))
-#endif
-        goto bad;
-    #if PY_MAJOR_VERSION >= 3
-    if (local_tb) {
-        if (unlikely(PyException_SetTraceback(local_value, local_tb) < 0))
-            goto bad;
-    }
-    #endif
-    Py_XINCREF(local_tb);
-    Py_XINCREF(local_type);
-    Py_XINCREF(local_value);
-    *type = local_type;
-    *value = local_value;
-    *tb = local_tb;
-#if CYTHON_FAST_THREAD_STATE
-    #if CYTHON_USE_EXC_INFO_STACK
-    {
-        _PyErr_StackItem *exc_info = tstate->exc_info;
-        tmp_type = exc_info->exc_type;
-        tmp_value = exc_info->exc_value;
-        tmp_tb = exc_info->exc_traceback;
-        exc_info->exc_type = local_type;
-        exc_info->exc_value = local_value;
-        exc_info->exc_traceback = local_tb;
-    }
-    #else
-    tmp_type = tstate->exc_type;
-    tmp_value = tstate->exc_value;
-    tmp_tb = tstate->exc_traceback;
-    tstate->exc_type = local_type;
-    tstate->exc_value = local_value;
-    tstate->exc_traceback = local_tb;
-    #endif
-    Py_XDECREF(tmp_type);
-    Py_XDECREF(tmp_value);
-    Py_XDECREF(tmp_tb);
-#else
-    PyErr_SetExcInfo(local_type, local_value, local_tb);
-#endif
-    return 0;
-bad:
-    *type = 0;
-    *value = 0;
-    *tb = 0;
-    Py_XDECREF(local_type);
-    Py_XDECREF(local_value);
-    Py_XDECREF(local_tb);
-    return -1;
-}
-
 /* PyObject_GenericGetAttrNoDict */
 #if CYTHON_USE_TYPE_SLOTS && CYTHON_USE_PYTYPE_LOOKUP && PY_VERSION_HEX < 0x03070000
 static PyObject *__Pyx_RaiseGenericGetAttributeError(PyTypeObject *tp, PyObject *attr_name) {
@@ -6399,6 +5573,31 @@ bad:
     Py_XDECREF(ob);
     return -1;
 }
+
+/* PyErrExceptionMatches */
+#if CYTHON_FAST_THREAD_STATE
+static int __Pyx_PyErr_ExceptionMatchesTuple(PyObject *exc_type, PyObject *tuple) {
+    Py_ssize_t i, n;
+    n = PyTuple_GET_SIZE(tuple);
+#if PY_MAJOR_VERSION >= 3
+    for (i=0; i<n; i++) {
+        if (exc_type == PyTuple_GET_ITEM(tuple, i)) return 1;
+    }
+#endif
+    for (i=0; i<n; i++) {
+        if (__Pyx_PyErr_GivenExceptionMatches(exc_type, PyTuple_GET_ITEM(tuple, i))) return 1;
+    }
+    return 0;
+}
+static CYTHON_INLINE int __Pyx_PyErr_ExceptionMatchesInState(PyThreadState* tstate, PyObject* err) {
+    PyObject *exc_type = tstate->curexc_type;
+    if (exc_type == err) return 1;
+    if (unlikely(!exc_type)) return 0;
+    if (unlikely(PyTuple_Check(err)))
+        return __Pyx_PyErr_ExceptionMatchesTuple(exc_type, err);
+    return __Pyx_PyErr_GivenExceptionMatches(exc_type, err);
+}
+#endif
 
 /* PyObjectGetAttrStrNoError */
 static void __Pyx_PyObject_GetAttrStr_ClearAttributeError(void) {
@@ -6842,7 +6041,7 @@ bad:
         return (target_type) value;\
     }
 
-static PyObject* __pyx_convert__to_py_godot_basis(godot_basis s) {
+static PyObject* __pyx_convert__to_py_godot_string(godot_string s) {
   PyObject* res;
   PyObject* member;
   res = __Pyx_PyDict_NewPresized(1); if (unlikely(!res)) return NULL;
@@ -6855,7 +6054,7 @@ static PyObject* __pyx_convert__to_py_godot_basis(godot_basis s) {
   Py_DECREF(res);
   return NULL;
 }
-static PyObject* __pyx_convert__to_py_godot_string(godot_string s) {
+static PyObject* __pyx_convert__to_py_godot_basis(godot_basis s) {
   PyObject* res;
   PyObject* member;
   res = __Pyx_PyDict_NewPresized(1); if (unlikely(!res)) return NULL;
@@ -6897,195 +6096,6 @@ static CYTHON_INLINE PyObject* __Pyx_PyInt_From_godot_int(godot_int value) {
         return _PyLong_FromByteArray(bytes, sizeof(godot_int),
                                      little, !is_unsigned);
     }
-}
-
-/* CIntFromPy */
-static CYTHON_INLINE uint8_t __Pyx_PyInt_As_uint8_t(PyObject *x) {
-    const uint8_t neg_one = (uint8_t) ((uint8_t) 0 - (uint8_t) 1), const_zero = (uint8_t) 0;
-    const int is_unsigned = neg_one > const_zero;
-#if PY_MAJOR_VERSION < 3
-    if (likely(PyInt_Check(x))) {
-        if (sizeof(uint8_t) < sizeof(long)) {
-            __PYX_VERIFY_RETURN_INT(uint8_t, long, PyInt_AS_LONG(x))
-        } else {
-            long val = PyInt_AS_LONG(x);
-            if (is_unsigned && unlikely(val < 0)) {
-                goto raise_neg_overflow;
-            }
-            return (uint8_t) val;
-        }
-    } else
-#endif
-    if (likely(PyLong_Check(x))) {
-        if (is_unsigned) {
-#if CYTHON_USE_PYLONG_INTERNALS
-            const digit* digits = ((PyLongObject*)x)->ob_digit;
-            switch (Py_SIZE(x)) {
-                case  0: return (uint8_t) 0;
-                case  1: __PYX_VERIFY_RETURN_INT(uint8_t, digit, digits[0])
-                case 2:
-                    if (8 * sizeof(uint8_t) > 1 * PyLong_SHIFT) {
-                        if (8 * sizeof(unsigned long) > 2 * PyLong_SHIFT) {
-                            __PYX_VERIFY_RETURN_INT(uint8_t, unsigned long, (((((unsigned long)digits[1]) << PyLong_SHIFT) | (unsigned long)digits[0])))
-                        } else if (8 * sizeof(uint8_t) >= 2 * PyLong_SHIFT) {
-                            return (uint8_t) (((((uint8_t)digits[1]) << PyLong_SHIFT) | (uint8_t)digits[0]));
-                        }
-                    }
-                    break;
-                case 3:
-                    if (8 * sizeof(uint8_t) > 2 * PyLong_SHIFT) {
-                        if (8 * sizeof(unsigned long) > 3 * PyLong_SHIFT) {
-                            __PYX_VERIFY_RETURN_INT(uint8_t, unsigned long, (((((((unsigned long)digits[2]) << PyLong_SHIFT) | (unsigned long)digits[1]) << PyLong_SHIFT) | (unsigned long)digits[0])))
-                        } else if (8 * sizeof(uint8_t) >= 3 * PyLong_SHIFT) {
-                            return (uint8_t) (((((((uint8_t)digits[2]) << PyLong_SHIFT) | (uint8_t)digits[1]) << PyLong_SHIFT) | (uint8_t)digits[0]));
-                        }
-                    }
-                    break;
-                case 4:
-                    if (8 * sizeof(uint8_t) > 3 * PyLong_SHIFT) {
-                        if (8 * sizeof(unsigned long) > 4 * PyLong_SHIFT) {
-                            __PYX_VERIFY_RETURN_INT(uint8_t, unsigned long, (((((((((unsigned long)digits[3]) << PyLong_SHIFT) | (unsigned long)digits[2]) << PyLong_SHIFT) | (unsigned long)digits[1]) << PyLong_SHIFT) | (unsigned long)digits[0])))
-                        } else if (8 * sizeof(uint8_t) >= 4 * PyLong_SHIFT) {
-                            return (uint8_t) (((((((((uint8_t)digits[3]) << PyLong_SHIFT) | (uint8_t)digits[2]) << PyLong_SHIFT) | (uint8_t)digits[1]) << PyLong_SHIFT) | (uint8_t)digits[0]));
-                        }
-                    }
-                    break;
-            }
-#endif
-#if CYTHON_COMPILING_IN_CPYTHON
-            if (unlikely(Py_SIZE(x) < 0)) {
-                goto raise_neg_overflow;
-            }
-#else
-            {
-                int result = PyObject_RichCompareBool(x, Py_False, Py_LT);
-                if (unlikely(result < 0))
-                    return (uint8_t) -1;
-                if (unlikely(result == 1))
-                    goto raise_neg_overflow;
-            }
-#endif
-            if (sizeof(uint8_t) <= sizeof(unsigned long)) {
-                __PYX_VERIFY_RETURN_INT_EXC(uint8_t, unsigned long, PyLong_AsUnsignedLong(x))
-#ifdef HAVE_LONG_LONG
-            } else if (sizeof(uint8_t) <= sizeof(unsigned PY_LONG_LONG)) {
-                __PYX_VERIFY_RETURN_INT_EXC(uint8_t, unsigned PY_LONG_LONG, PyLong_AsUnsignedLongLong(x))
-#endif
-            }
-        } else {
-#if CYTHON_USE_PYLONG_INTERNALS
-            const digit* digits = ((PyLongObject*)x)->ob_digit;
-            switch (Py_SIZE(x)) {
-                case  0: return (uint8_t) 0;
-                case -1: __PYX_VERIFY_RETURN_INT(uint8_t, sdigit, (sdigit) (-(sdigit)digits[0]))
-                case  1: __PYX_VERIFY_RETURN_INT(uint8_t,  digit, +digits[0])
-                case -2:
-                    if (8 * sizeof(uint8_t) - 1 > 1 * PyLong_SHIFT) {
-                        if (8 * sizeof(unsigned long) > 2 * PyLong_SHIFT) {
-                            __PYX_VERIFY_RETURN_INT(uint8_t, long, -(long) (((((unsigned long)digits[1]) << PyLong_SHIFT) | (unsigned long)digits[0])))
-                        } else if (8 * sizeof(uint8_t) - 1 > 2 * PyLong_SHIFT) {
-                            return (uint8_t) (((uint8_t)-1)*(((((uint8_t)digits[1]) << PyLong_SHIFT) | (uint8_t)digits[0])));
-                        }
-                    }
-                    break;
-                case 2:
-                    if (8 * sizeof(uint8_t) > 1 * PyLong_SHIFT) {
-                        if (8 * sizeof(unsigned long) > 2 * PyLong_SHIFT) {
-                            __PYX_VERIFY_RETURN_INT(uint8_t, unsigned long, (((((unsigned long)digits[1]) << PyLong_SHIFT) | (unsigned long)digits[0])))
-                        } else if (8 * sizeof(uint8_t) - 1 > 2 * PyLong_SHIFT) {
-                            return (uint8_t) ((((((uint8_t)digits[1]) << PyLong_SHIFT) | (uint8_t)digits[0])));
-                        }
-                    }
-                    break;
-                case -3:
-                    if (8 * sizeof(uint8_t) - 1 > 2 * PyLong_SHIFT) {
-                        if (8 * sizeof(unsigned long) > 3 * PyLong_SHIFT) {
-                            __PYX_VERIFY_RETURN_INT(uint8_t, long, -(long) (((((((unsigned long)digits[2]) << PyLong_SHIFT) | (unsigned long)digits[1]) << PyLong_SHIFT) | (unsigned long)digits[0])))
-                        } else if (8 * sizeof(uint8_t) - 1 > 3 * PyLong_SHIFT) {
-                            return (uint8_t) (((uint8_t)-1)*(((((((uint8_t)digits[2]) << PyLong_SHIFT) | (uint8_t)digits[1]) << PyLong_SHIFT) | (uint8_t)digits[0])));
-                        }
-                    }
-                    break;
-                case 3:
-                    if (8 * sizeof(uint8_t) > 2 * PyLong_SHIFT) {
-                        if (8 * sizeof(unsigned long) > 3 * PyLong_SHIFT) {
-                            __PYX_VERIFY_RETURN_INT(uint8_t, unsigned long, (((((((unsigned long)digits[2]) << PyLong_SHIFT) | (unsigned long)digits[1]) << PyLong_SHIFT) | (unsigned long)digits[0])))
-                        } else if (8 * sizeof(uint8_t) - 1 > 3 * PyLong_SHIFT) {
-                            return (uint8_t) ((((((((uint8_t)digits[2]) << PyLong_SHIFT) | (uint8_t)digits[1]) << PyLong_SHIFT) | (uint8_t)digits[0])));
-                        }
-                    }
-                    break;
-                case -4:
-                    if (8 * sizeof(uint8_t) - 1 > 3 * PyLong_SHIFT) {
-                        if (8 * sizeof(unsigned long) > 4 * PyLong_SHIFT) {
-                            __PYX_VERIFY_RETURN_INT(uint8_t, long, -(long) (((((((((unsigned long)digits[3]) << PyLong_SHIFT) | (unsigned long)digits[2]) << PyLong_SHIFT) | (unsigned long)digits[1]) << PyLong_SHIFT) | (unsigned long)digits[0])))
-                        } else if (8 * sizeof(uint8_t) - 1 > 4 * PyLong_SHIFT) {
-                            return (uint8_t) (((uint8_t)-1)*(((((((((uint8_t)digits[3]) << PyLong_SHIFT) | (uint8_t)digits[2]) << PyLong_SHIFT) | (uint8_t)digits[1]) << PyLong_SHIFT) | (uint8_t)digits[0])));
-                        }
-                    }
-                    break;
-                case 4:
-                    if (8 * sizeof(uint8_t) > 3 * PyLong_SHIFT) {
-                        if (8 * sizeof(unsigned long) > 4 * PyLong_SHIFT) {
-                            __PYX_VERIFY_RETURN_INT(uint8_t, unsigned long, (((((((((unsigned long)digits[3]) << PyLong_SHIFT) | (unsigned long)digits[2]) << PyLong_SHIFT) | (unsigned long)digits[1]) << PyLong_SHIFT) | (unsigned long)digits[0])))
-                        } else if (8 * sizeof(uint8_t) - 1 > 4 * PyLong_SHIFT) {
-                            return (uint8_t) ((((((((((uint8_t)digits[3]) << PyLong_SHIFT) | (uint8_t)digits[2]) << PyLong_SHIFT) | (uint8_t)digits[1]) << PyLong_SHIFT) | (uint8_t)digits[0])));
-                        }
-                    }
-                    break;
-            }
-#endif
-            if (sizeof(uint8_t) <= sizeof(long)) {
-                __PYX_VERIFY_RETURN_INT_EXC(uint8_t, long, PyLong_AsLong(x))
-#ifdef HAVE_LONG_LONG
-            } else if (sizeof(uint8_t) <= sizeof(PY_LONG_LONG)) {
-                __PYX_VERIFY_RETURN_INT_EXC(uint8_t, PY_LONG_LONG, PyLong_AsLongLong(x))
-#endif
-            }
-        }
-        {
-#if CYTHON_COMPILING_IN_PYPY && !defined(_PyLong_AsByteArray)
-            PyErr_SetString(PyExc_RuntimeError,
-                            "_PyLong_AsByteArray() not available in PyPy, cannot convert large numbers");
-#else
-            uint8_t val;
-            PyObject *v = __Pyx_PyNumber_IntOrLong(x);
- #if PY_MAJOR_VERSION < 3
-            if (likely(v) && !PyLong_Check(v)) {
-                PyObject *tmp = v;
-                v = PyNumber_Long(tmp);
-                Py_DECREF(tmp);
-            }
- #endif
-            if (likely(v)) {
-                int one = 1; int is_little = (int)*(unsigned char *)&one;
-                unsigned char *bytes = (unsigned char *)&val;
-                int ret = _PyLong_AsByteArray((PyLongObject *)v,
-                                              bytes, sizeof(val),
-                                              is_little, !is_unsigned);
-                Py_DECREF(v);
-                if (likely(!ret))
-                    return val;
-            }
-#endif
-            return (uint8_t) -1;
-        }
-    } else {
-        uint8_t val;
-        PyObject *tmp = __Pyx_PyNumber_IntOrLong(x);
-        if (!tmp) return (uint8_t) -1;
-        val = __Pyx_PyInt_As_uint8_t(tmp);
-        Py_DECREF(tmp);
-        return val;
-    }
-raise_overflow:
-    PyErr_SetString(PyExc_OverflowError,
-        "value too large to convert to uint8_t");
-    return (uint8_t) -1;
-raise_neg_overflow:
-    PyErr_SetString(PyExc_OverflowError,
-        "can't convert negative value to uint8_t");
-    return (uint8_t) -1;
 }
 
 /* CIntFromPy */

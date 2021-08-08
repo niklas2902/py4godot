@@ -2,6 +2,7 @@
 #include "delorean_api.h"
 #include "../classes/classes_api.h"
 #include "../pluginscript_api/api_api.h"
+#include "../core/dictionary/Dictionary_api.h"
 #include <string.h>
 
 
@@ -215,7 +216,13 @@ void set_up_pluginscript(){
         PyErr_Print();
         return ;
     }
-
+    import_core__dictionary__Dictionary();
+    if (PyErr_Occurred())
+    {
+        PyErr_Print();
+        return ;
+    }
+    set_api_core_dict(api_core);
     set_api_core_pluginscript(api_core);
 
     desc.name = "Python";

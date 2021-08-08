@@ -4,10 +4,7 @@ from core.vector3.vector3_binding cimport *
 cdef class Vector3:
 
     def __init__(self, godot_real x, godot_real y, godot_real z):
-        hello("Hallo")
-        hello("start")
         api_core.godot_vector3_new(&self._native,x,y,z)
-        hello("end")
 
     def normalized(self):
         return Vector3. new_static(api_core.godot_vector3_normalized(&self._native))

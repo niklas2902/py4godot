@@ -6,12 +6,8 @@ from core.string.String cimport *
 
 cdef class Basis:
 
-    def __init__(self, godot_basis _native):
-        if (_native != None):
-            self._native = _native
-        else:
-            pass
-            #api_core.godot_basis_new(&self._native)
+    def __init__(self):
+        api_core.godot_basis_new(&self._native)
 
     def new_with_rows(self, Vector3 x_axis, Vector3 y_axis, Vector3 z_axis):
         api_core.godot_basis_new_with_rows(&self._native, &x_axis._native, &y_axis._native, &z_axis._native)

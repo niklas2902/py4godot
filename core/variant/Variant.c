@@ -625,6 +625,8 @@ static CYTHON_INLINE float __PYX_NAN() {
 /* Early includes */
 #include <stddef.h>
 #include "binding.h"
+#include <string.h>
+#include <stdio.h>
 #ifdef _OPENMP
 #include <omp.h>
 #endif /* _OPENMP */
@@ -1249,8 +1251,8 @@ struct __pyx_obj_4core_5array_5Array_Array {
 };
 
 
-/* "core/dictionary/Dictionary.pxd":3
- * from core.dictionary.dictionary_binding cimport *
+/* "core/dictionary/Dictionary.pxd":4
+ * from libc.stdio cimport printf
  * 
  * cdef class Dictionary:             # <<<<<<<<<<<<<<
  *     cdef godot_dictionary _native
@@ -1618,8 +1620,8 @@ static CYTHON_INLINE void __pyx_f_4core_5array_5Array_5Array_set_native(struct _
 static CYTHON_INLINE void __pyx_f_4core_5array_5Array_5Array_new_static(godot_array);
 
 
-/* "core/dictionary/Dictionary.pxd":3
- * from core.dictionary.dictionary_binding cimport *
+/* "core/dictionary/Dictionary.pxd":4
+ * from libc.stdio cimport printf
  * 
  * cdef class Dictionary:             # <<<<<<<<<<<<<<
  *     cdef godot_dictionary _native
@@ -2195,6 +2197,10 @@ static PyTypeObject *__pyx_ptype_4core_10pool_array_10PoolArrays_PoolColorArray 
 
 /* Module declarations from 'core.array.Array' */
 static PyTypeObject *__pyx_ptype_4core_5array_5Array_Array = 0;
+
+/* Module declarations from 'libc.string' */
+
+/* Module declarations from 'libc.stdio' */
 
 /* Module declarations from 'core.dictionary.Dictionary' */
 static PyTypeObject *__pyx_ptype_4core_10dictionary_10Dictionary_Dictionary = 0;
@@ -6929,7 +6935,7 @@ static CYTHON_INLINE void __pyx_f_4core_5array_5Array_5Array_new_static(godot_ar
   __Pyx_RefNannyFinishContext();
 }
 
-/* "core/dictionary/Dictionary.pxd":6
+/* "core/dictionary/Dictionary.pxd":7
  *     cdef godot_dictionary _native
  * 
  *     cdef inline void set_native(self, godot_dictionary _native):             # <<<<<<<<<<<<<<
@@ -6941,7 +6947,7 @@ static CYTHON_INLINE void __pyx_f_4core_10dictionary_10Dictionary_10Dictionary_s
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("set_native", 0);
 
-  /* "core/dictionary/Dictionary.pxd":7
+  /* "core/dictionary/Dictionary.pxd":8
  * 
  *     cdef inline void set_native(self, godot_dictionary _native):
  *         self._native = _native             # <<<<<<<<<<<<<<
@@ -6950,7 +6956,7 @@ static CYTHON_INLINE void __pyx_f_4core_10dictionary_10Dictionary_10Dictionary_s
  */
   __pyx_v_self->_native = __pyx_v__native;
 
-  /* "core/dictionary/Dictionary.pxd":6
+  /* "core/dictionary/Dictionary.pxd":7
  *     cdef godot_dictionary _native
  * 
  *     cdef inline void set_native(self, godot_dictionary _native):             # <<<<<<<<<<<<<<
@@ -6962,7 +6968,7 @@ static CYTHON_INLINE void __pyx_f_4core_10dictionary_10Dictionary_10Dictionary_s
   __Pyx_RefNannyFinishContext();
 }
 
-/* "core/dictionary/Dictionary.pxd":10
+/* "core/dictionary/Dictionary.pxd":11
  * 
  *     @staticmethod
  *     cdef inline void new_static(godot_dictionary _native):             # <<<<<<<<<<<<<<
@@ -6979,26 +6985,26 @@ static CYTHON_INLINE void __pyx_f_4core_10dictionary_10Dictionary_10Dictionary_n
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("new_static", 0);
 
-  /* "core/dictionary/Dictionary.pxd":11
+  /* "core/dictionary/Dictionary.pxd":12
  *     @staticmethod
  *     cdef inline void new_static(godot_dictionary _native):
  *         cdef Dictionary o = Dictionary.__new__(Dictionary)             # <<<<<<<<<<<<<<
  *         o.set_native(_native)
  */
-  __pyx_t_1 = __Pyx_tp_new(((PyObject *)__pyx_ptype_4core_10dictionary_10Dictionary_Dictionary), __pyx_empty_tuple); if (unlikely(!__pyx_t_1)) __PYX_ERR(16, 11, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_tp_new(((PyObject *)__pyx_ptype_4core_10dictionary_10Dictionary_Dictionary), __pyx_empty_tuple); if (unlikely(!__pyx_t_1)) __PYX_ERR(16, 12, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  if (!(likely(__Pyx_TypeTest(__pyx_t_1, __pyx_ptype_4core_10dictionary_10Dictionary_Dictionary)))) __PYX_ERR(16, 11, __pyx_L1_error)
+  if (!(likely(__Pyx_TypeTest(__pyx_t_1, __pyx_ptype_4core_10dictionary_10Dictionary_Dictionary)))) __PYX_ERR(16, 12, __pyx_L1_error)
   __pyx_v_o = ((struct __pyx_obj_4core_10dictionary_10Dictionary_Dictionary *)__pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "core/dictionary/Dictionary.pxd":12
+  /* "core/dictionary/Dictionary.pxd":13
  *     cdef inline void new_static(godot_dictionary _native):
  *         cdef Dictionary o = Dictionary.__new__(Dictionary)
  *         o.set_native(_native)             # <<<<<<<<<<<<<<
  */
   __pyx_f_4core_10dictionary_10Dictionary_10Dictionary_set_native(__pyx_v_o, __pyx_v__native);
 
-  /* "core/dictionary/Dictionary.pxd":10
+  /* "core/dictionary/Dictionary.pxd":11
  * 
  *     @staticmethod
  *     cdef inline void new_static(godot_dictionary _native):             # <<<<<<<<<<<<<<
@@ -7596,11 +7602,11 @@ static int __Pyx_modinit_type_import_code(void) {
    if (!__pyx_ptype_4core_5array_5Array_Array) __PYX_ERR(15, 3, __pyx_L1_error)
   __pyx_vtabptr_4core_5array_5Array_Array = (struct __pyx_vtabstruct_4core_5array_5Array_Array*)__Pyx_GetVtable(__pyx_ptype_4core_5array_5Array_Array->tp_dict); if (unlikely(!__pyx_vtabptr_4core_5array_5Array_Array)) __PYX_ERR(15, 3, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_1 = PyImport_ImportModule("core.dictionary.Dictionary"); if (unlikely(!__pyx_t_1)) __PYX_ERR(16, 3, __pyx_L1_error)
+  __pyx_t_1 = PyImport_ImportModule("core.dictionary.Dictionary"); if (unlikely(!__pyx_t_1)) __PYX_ERR(16, 4, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_ptype_4core_10dictionary_10Dictionary_Dictionary = __Pyx_ImportType(__pyx_t_1, "core.dictionary.Dictionary", "Dictionary", sizeof(struct __pyx_obj_4core_10dictionary_10Dictionary_Dictionary), __Pyx_ImportType_CheckSize_Warn);
-   if (!__pyx_ptype_4core_10dictionary_10Dictionary_Dictionary) __PYX_ERR(16, 3, __pyx_L1_error)
-  __pyx_vtabptr_4core_10dictionary_10Dictionary_Dictionary = (struct __pyx_vtabstruct_4core_10dictionary_10Dictionary_Dictionary*)__Pyx_GetVtable(__pyx_ptype_4core_10dictionary_10Dictionary_Dictionary->tp_dict); if (unlikely(!__pyx_vtabptr_4core_10dictionary_10Dictionary_Dictionary)) __PYX_ERR(16, 3, __pyx_L1_error)
+   if (!__pyx_ptype_4core_10dictionary_10Dictionary_Dictionary) __PYX_ERR(16, 4, __pyx_L1_error)
+  __pyx_vtabptr_4core_10dictionary_10Dictionary_Dictionary = (struct __pyx_vtabstruct_4core_10dictionary_10Dictionary_Dictionary*)__Pyx_GetVtable(__pyx_ptype_4core_10dictionary_10Dictionary_Dictionary->tp_dict); if (unlikely(!__pyx_vtabptr_4core_10dictionary_10Dictionary_Dictionary)) __PYX_ERR(16, 4, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_t_1 = PyImport_ImportModule("core.rid.RID"); if (unlikely(!__pyx_t_1)) __PYX_ERR(17, 3, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);

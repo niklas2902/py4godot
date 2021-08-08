@@ -2,12 +2,8 @@ from core.rid.rid_binding cimport *
 
 cdef class RID:
 
-    def __init__(self, godot_rid _native):
-        if (_native != None):
-            self._native = _native
-        else:
-            pass
-            #api_core.godot_rid_new(&self._native)
+    def __init__(self):
+        api_core.godot_rid_new(&self._native)
 
     def get_rid(self):
         return api_core.godot_rid_get_id(&self._native)

@@ -1,10 +1,15 @@
 from godot_api.binding_external cimport *
 from cython.operator cimport dereference
 from libc.stddef cimport wchar_t
-
+from pluginscript_api.description_classes.MethodDescription import *
+#from core.dictionary.Dictionary cimport set_api_core_dict
+from pluginscript_api.utils.annotations import methods, classes, properties, reset
+cdef godot_dictionary dictionary
 cdef api set_api_core_pluginscript(const godot_gdnative_core_api_struct* core):
     global api_core
     api_core = core
+    #set_api_core_dict(core)
+    api_core.godot_dictionary_new(&dictionary)
     print("\n#############################set_api_core############################################################")
 cdef api godot_pluginscript_language_data * init_pluginscript():
     print("\n######################################################init_python_pluginscript####################################\n");
@@ -32,13 +37,18 @@ cdef api  godot_pluginscript_script_manifest init_pluginscript_desc (godot_plugi
     api_core.godot_print(p_source)
     api_core.godot_print(p_path)
     print("path2:")
-    print(get_from_w_string(p_path))
-#    PyUnicode_FromWideChar(c_string,-1)
-    #py_string = <bytes> c_string
+    print(get_python_string_from_w_string(p_path))
 
-    #PyUnicode_FromWideChar(string,-1)
-    #print(string)
-    #print(PyUnicode_FromWideChar(api_core.godot_string_wide_str(p_path),-1))
+    reset()
+    exec(get_python_string_from_w_string(p_source))
+    print("methods generated:", methods)
+    print("properties generated:", properties)
+    print("classes_found:", classes)
+#    PyUnicode_FromWideChar(c_string,-1)
+    for m in methods:
+        MethodDescription(m, None,None, 0, 0).to_dict()
+    #Dictionary()
+
     print("\n################################return_manifest########################################################\n");
     return manifest;
 
@@ -70,7 +80,7 @@ cdef api void notification_pluginscript_instance(godot_pluginscript_instance_dat
 
 
 
-cdef unicode get_from_w_string(const godot_string* string):
+cdef unicode get_python_string_from_w_string(const godot_string* string):
     cdef const wchar_t* c_string = api_core.godot_string_wide_str(string)
     return <unicode>PyUnicode_FromWideChar(c_string,-1)
 

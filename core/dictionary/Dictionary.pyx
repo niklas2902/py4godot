@@ -1,15 +1,26 @@
 from core.variant.Variant cimport *
 from core.array.Array cimport *
 from core.dictionary.dictionary_binding cimport *
+from cython.operator cimport dereference
+from libc.stdio cimport printf
+
+cdef api set_api_core_dict(godot_gdnative_core_api_struct * core):
+    global api_core
+    print("set_api_core")
+    printf("%p\n", &api_core)
+    api_core = core
+    print("end_api_core")
+
 
 cdef class Dictionary:
 
-    def __init__(self, godot_dictionary _native):
-        if (_native != None):
-            self._native = _native
-        else:
-            pass
-            #api_core.godot_dictionary_new(&self._native)
+    def __init__(self):
+        print("start_api_core_dictionary")
+        printf("%p\n", &api_core)
+        #api_core.godot_string_num(1)
+        cdef godot_dictionary dictionary
+        api_core.godot_dictionary_new(&dictionary)
+        print("end_api_core")
 
     def new_copy(self, Dictionary src):
         api_core.godot_dictionary_new_copy(&self._native, &src._native)
@@ -49,12 +60,11 @@ cdef class Dictionary:
 
     def set(self, Variant key, Variant value):
         api_core.godot_dictionary_set(&self._native, &key._native, &value._native)
-    """
+
     def next_(self, Variant key):
         cdef godot_variant * variant
         variant = (api_core.godot_dictionary_next(&self._native, &key._native))
-        cdef godot_variant v = *(variant)
-    """
+        return Variant.new_static(dereference(variant))
 
     def __eq__(self, Dictionary other):
         return api_core.godot_dictionary_operator_equal(&self._native, &other._native)

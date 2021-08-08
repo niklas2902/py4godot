@@ -1,4 +1,5 @@
 from core.dictionary.dictionary_binding cimport *
+from libc.stdio cimport printf
 
 cdef class Dictionary:
     cdef godot_dictionary _native

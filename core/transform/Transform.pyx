@@ -6,12 +6,8 @@ from core.transform.transform_binding cimport *
 
 cdef class Transform:
 
-    def __init__(self, godot_transform _native):
-        if (_native != None):
-            self._native = _native
-        else:
-            pass
-            #api_core.godot_transform_new(&self._native)
+    def __init__(self,Basis basis, Vector3 origin):
+        api_core.godot_transform_new(&self._native, &basis._native, &origin._native)
 
     def new_with_axis_origin(self, Vector3 x_axis, Vector3 y_axis, Vector3 z_axis, Vector3 origin):
         api_core.godot_transform_new_with_axis_origin(&self._native, &x_axis._native, &y_axis._native, &z_axis._native, &origin._native)

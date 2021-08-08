@@ -949,8 +949,8 @@ struct __pyx_obj_4core_10pool_array_10PoolArrays_PoolColorArray {
  * from core.pool_array.pool_array_binding cimport *
  * 
  * cdef class PoolByteArray:             # <<<<<<<<<<<<<<
- *     def __init__(self, godot_pool_byte_array _native):
- *         if (_native != None):
+ *     def __init__(self):
+ *         pass
  */
 
 struct __pyx_vtabstruct_4core_10pool_array_10PoolArrays_PoolByteArray {
@@ -960,8 +960,8 @@ static struct __pyx_vtabstruct_4core_10pool_array_10PoolArrays_PoolByteArray *__
 static CYTHON_INLINE void __pyx_f_4core_10pool_array_10PoolArrays_13PoolByteArray___new__(struct __pyx_obj_4core_10pool_array_10PoolArrays_PoolByteArray *, godot_pool_byte_array);
 
 
-/* "core/pool_array/PoolArrays.pyx":12
- *             #api_core.godot_pool_byte_array_new(&self._native)
+/* "core/pool_array/PoolArrays.pyx":9
+ *         #api_core.godot_pool_byte_array_new(&self._native)
  * 
  * cdef class PoolRealArray:             # <<<<<<<<<<<<<<
  *     def __init__(self, godot_pool_real_array _native):
@@ -975,7 +975,7 @@ static struct __pyx_vtabstruct_4core_10pool_array_10PoolArrays_PoolRealArray *__
 static CYTHON_INLINE void __pyx_f_4core_10pool_array_10PoolArrays_13PoolRealArray___new__(struct __pyx_obj_4core_10pool_array_10PoolArrays_PoolRealArray *, godot_pool_real_array);
 
 
-/* "core/pool_array/PoolArrays.pyx":20
+/* "core/pool_array/PoolArrays.pyx":17
  *             #api_core.godot_pool_real_array_new(&self._native)
  * 
  * cdef class PoolIntArray:             # <<<<<<<<<<<<<<
@@ -990,7 +990,7 @@ static struct __pyx_vtabstruct_4core_10pool_array_10PoolArrays_PoolIntArray *__p
 static CYTHON_INLINE void __pyx_f_4core_10pool_array_10PoolArrays_12PoolIntArray___new__(struct __pyx_obj_4core_10pool_array_10PoolArrays_PoolIntArray *, godot_pool_int_array);
 
 
-/* "core/pool_array/PoolArrays.pyx":28
+/* "core/pool_array/PoolArrays.pyx":25
  *             #api_core.godot_pool_int_array_new(&self._native)
  * 
  * cdef class PoolStringArray:             # <<<<<<<<<<<<<<
@@ -1005,7 +1005,7 @@ static struct __pyx_vtabstruct_4core_10pool_array_10PoolArrays_PoolStringArray *
 static CYTHON_INLINE void __pyx_f_4core_10pool_array_10PoolArrays_15PoolStringArray___new__(struct __pyx_obj_4core_10pool_array_10PoolArrays_PoolStringArray *, godot_pool_string_array);
 
 
-/* "core/pool_array/PoolArrays.pyx":36
+/* "core/pool_array/PoolArrays.pyx":33
  *             #api_core.godot_pool_string_array_new(&self._native)
  * 
  * cdef class PoolVector2Array:             # <<<<<<<<<<<<<<
@@ -1020,7 +1020,7 @@ static struct __pyx_vtabstruct_4core_10pool_array_10PoolArrays_PoolVector2Array 
 static CYTHON_INLINE void __pyx_f_4core_10pool_array_10PoolArrays_16PoolVector2Array___new__(struct __pyx_obj_4core_10pool_array_10PoolArrays_PoolVector2Array *, godot_pool_vector2_array);
 
 
-/* "core/pool_array/PoolArrays.pyx":44
+/* "core/pool_array/PoolArrays.pyx":41
  *             #api_core.godot_pool_vector2_array_new(&self._native)
  * 
  * cdef class PoolVector3Array:             # <<<<<<<<<<<<<<
@@ -1035,7 +1035,7 @@ static struct __pyx_vtabstruct_4core_10pool_array_10PoolArrays_PoolVector3Array 
 static CYTHON_INLINE void __pyx_f_4core_10pool_array_10PoolArrays_16PoolVector3Array___new__(struct __pyx_obj_4core_10pool_array_10PoolArrays_PoolVector3Array *, godot_pool_vector3_array);
 
 
-/* "core/pool_array/PoolArrays.pyx":52
+/* "core/pool_array/PoolArrays.pyx":49
  *             #api_core.godot_pool_vector3_array_new(&self._native)
  * 
  * cdef class PoolColorArray:             # <<<<<<<<<<<<<<
@@ -1123,17 +1123,12 @@ static CYTHON_INLINE PyObject* __Pyx_PyObject_GetAttrStr(PyObject* obj, PyObject
 /* GetBuiltinName.proto */
 static PyObject *__Pyx_GetBuiltinName(PyObject *name);
 
-/* RaiseDoubleKeywords.proto */
-static void __Pyx_RaiseDoubleKeywordsError(const char* func_name, PyObject* kw_name);
-
-/* ParseKeywords.proto */
-static int __Pyx_ParseOptionalKeywords(PyObject *kwds, PyObject **argnames[],\
-    PyObject *kwds2, PyObject *values[], Py_ssize_t num_pos_args,\
-    const char* function_name);
-
 /* RaiseArgTupleInvalid.proto */
 static void __Pyx_RaiseArgtupleInvalid(const char* func_name, int exact,
     Py_ssize_t num_min, Py_ssize_t num_max, Py_ssize_t num_found);
+
+/* KeywordStringCheck.proto */
+static int __Pyx_CheckKeywordStrings(PyObject *kwdict, const char* function_name, int kw_allowed);
 
 /* PyObjectCall.proto */
 #if CYTHON_COMPILING_IN_CPYTHON
@@ -1180,6 +1175,14 @@ static CYTHON_INLINE void __Pyx_ErrFetchInState(PyThreadState *tstate, PyObject 
 
 /* RaiseException.proto */
 static void __Pyx_Raise(PyObject *type, PyObject *value, PyObject *tb, PyObject *cause);
+
+/* RaiseDoubleKeywords.proto */
+static void __Pyx_RaiseDoubleKeywordsError(const char* func_name, PyObject* kw_name);
+
+/* ParseKeywords.proto */
+static int __Pyx_ParseOptionalKeywords(PyObject *kwds, PyObject **argnames[],\
+    PyObject *kwds2, PyObject *values[], Py_ssize_t num_pos_args,\
+    const char* function_name);
 
 /* GetTopmostException.proto */
 #if CYTHON_USE_EXC_INFO_STACK
@@ -1302,7 +1305,6 @@ static void __pyx_insert_code_object(int code_line, PyCodeObject* code_object);
 static void __Pyx_AddTraceback(const char *funcname, int c_line,
                                int py_line, const char *filename);
 
-static PyObject* __pyx_convert__to_py_godot_pool_byte_array(godot_pool_byte_array s);
 static PyObject* __pyx_convert__to_py_godot_pool_real_array(godot_pool_real_array s);
 static PyObject* __pyx_convert__to_py_godot_pool_int_array(godot_pool_int_array s);
 static PyObject* __pyx_convert__to_py_godot_pool_string_array(godot_pool_string_array s);
@@ -1365,7 +1367,6 @@ static PyTypeObject *__pyx_ptype_4core_10pool_array_10PoolArrays_PoolVector2Arra
 static PyTypeObject *__pyx_ptype_4core_10pool_array_10PoolArrays_PoolVector3Array = 0;
 static PyTypeObject *__pyx_ptype_4core_10pool_array_10PoolArrays_PoolColorArray = 0;
 static int __Pyx_carray_from_py_uint8_t(PyObject *, uint8_t *, Py_ssize_t); /*proto*/
-static godot_pool_byte_array __pyx_convert__from_py_godot_pool_byte_array(PyObject *); /*proto*/
 static godot_pool_real_array __pyx_convert__from_py_godot_pool_real_array(PyObject *); /*proto*/
 static godot_pool_int_array __pyx_convert__from_py_godot_pool_int_array(PyObject *); /*proto*/
 static godot_pool_string_array __pyx_convert__from_py_godot_pool_string_array(PyObject *); /*proto*/
@@ -1439,7 +1440,7 @@ static PyObject *__pyx_n_s_reduce_ex;
 static PyObject *__pyx_n_s_setstate;
 static PyObject *__pyx_n_s_setstate_cython;
 static PyObject *__pyx_n_s_test;
-static int __pyx_pf_4core_10pool_array_10PoolArrays_13PoolByteArray___init__(struct __pyx_obj_4core_10pool_array_10PoolArrays_PoolByteArray *__pyx_v_self, godot_pool_byte_array __pyx_v__native); /* proto */
+static int __pyx_pf_4core_10pool_array_10PoolArrays_13PoolByteArray___init__(CYTHON_UNUSED struct __pyx_obj_4core_10pool_array_10PoolArrays_PoolByteArray *__pyx_v_self); /* proto */
 static PyObject *__pyx_pf_4core_10pool_array_10PoolArrays_13PoolByteArray_2__reduce_cython__(CYTHON_UNUSED struct __pyx_obj_4core_10pool_array_10PoolArrays_PoolByteArray *__pyx_v_self); /* proto */
 static PyObject *__pyx_pf_4core_10pool_array_10PoolArrays_13PoolByteArray_4__setstate_cython__(CYTHON_UNUSED struct __pyx_obj_4core_10pool_array_10PoolArrays_PoolByteArray *__pyx_v_self, CYTHON_UNUSED PyObject *__pyx_v___pyx_state); /* proto */
 static int __pyx_pf_4core_10pool_array_10PoolArrays_13PoolRealArray___init__(struct __pyx_obj_4core_10pool_array_10PoolArrays_PoolRealArray *__pyx_v_self, godot_pool_real_array __pyx_v__native); /* proto */
@@ -1487,137 +1488,34 @@ static PyObject *__pyx_tuple__15;
 /* "core/pool_array/PoolArrays.pyx":5
  * 
  * cdef class PoolByteArray:
- *     def __init__(self, godot_pool_byte_array _native):             # <<<<<<<<<<<<<<
- *         if (_native != None):
- *             self._native = _native
+ *     def __init__(self):             # <<<<<<<<<<<<<<
+ *         pass
+ *         #api_core.godot_pool_byte_array_new(&self._native)
  */
 
 /* Python wrapper */
 static int __pyx_pw_4core_10pool_array_10PoolArrays_13PoolByteArray_1__init__(PyObject *__pyx_v_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
 static int __pyx_pw_4core_10pool_array_10PoolArrays_13PoolByteArray_1__init__(PyObject *__pyx_v_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
-  godot_pool_byte_array __pyx_v__native;
-  int __pyx_lineno = 0;
-  const char *__pyx_filename = NULL;
-  int __pyx_clineno = 0;
   int __pyx_r;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__init__ (wrapper)", 0);
-  {
-    static PyObject **__pyx_pyargnames[] = {&__pyx_n_s_native,0};
-    PyObject* values[1] = {0};
-    if (unlikely(__pyx_kwds)) {
-      Py_ssize_t kw_args;
-      const Py_ssize_t pos_args = PyTuple_GET_SIZE(__pyx_args);
-      switch (pos_args) {
-        case  1: values[0] = PyTuple_GET_ITEM(__pyx_args, 0);
-        CYTHON_FALLTHROUGH;
-        case  0: break;
-        default: goto __pyx_L5_argtuple_error;
-      }
-      kw_args = PyDict_Size(__pyx_kwds);
-      switch (pos_args) {
-        case  0:
-        if (likely((values[0] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_native)) != 0)) kw_args--;
-        else goto __pyx_L5_argtuple_error;
-      }
-      if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "__init__") < 0)) __PYX_ERR(1, 5, __pyx_L3_error)
-      }
-    } else if (PyTuple_GET_SIZE(__pyx_args) != 1) {
-      goto __pyx_L5_argtuple_error;
-    } else {
-      values[0] = PyTuple_GET_ITEM(__pyx_args, 0);
-    }
-    __pyx_v__native = __pyx_convert__from_py_godot_pool_byte_array(values[0]); if (unlikely(PyErr_Occurred())) __PYX_ERR(1, 5, __pyx_L3_error)
-  }
-  goto __pyx_L4_argument_unpacking_done;
-  __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("__init__", 1, 1, 1, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(1, 5, __pyx_L3_error)
-  __pyx_L3_error:;
-  __Pyx_AddTraceback("core.pool_array.PoolArrays.PoolByteArray.__init__", __pyx_clineno, __pyx_lineno, __pyx_filename);
-  __Pyx_RefNannyFinishContext();
-  return -1;
-  __pyx_L4_argument_unpacking_done:;
-  __pyx_r = __pyx_pf_4core_10pool_array_10PoolArrays_13PoolByteArray___init__(((struct __pyx_obj_4core_10pool_array_10PoolArrays_PoolByteArray *)__pyx_v_self), __pyx_v__native);
+  if (unlikely(PyTuple_GET_SIZE(__pyx_args) > 0)) {
+    __Pyx_RaiseArgtupleInvalid("__init__", 1, 0, 0, PyTuple_GET_SIZE(__pyx_args)); return -1;}
+  if (unlikely(__pyx_kwds) && unlikely(PyDict_Size(__pyx_kwds) > 0) && unlikely(!__Pyx_CheckKeywordStrings(__pyx_kwds, "__init__", 0))) return -1;
+  __pyx_r = __pyx_pf_4core_10pool_array_10PoolArrays_13PoolByteArray___init__(((struct __pyx_obj_4core_10pool_array_10PoolArrays_PoolByteArray *)__pyx_v_self));
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static int __pyx_pf_4core_10pool_array_10PoolArrays_13PoolByteArray___init__(struct __pyx_obj_4core_10pool_array_10PoolArrays_PoolByteArray *__pyx_v_self, godot_pool_byte_array __pyx_v__native) {
+static int __pyx_pf_4core_10pool_array_10PoolArrays_13PoolByteArray___init__(CYTHON_UNUSED struct __pyx_obj_4core_10pool_array_10PoolArrays_PoolByteArray *__pyx_v_self) {
   int __pyx_r;
   __Pyx_RefNannyDeclarations
-  PyObject *__pyx_t_1 = NULL;
-  PyObject *__pyx_t_2 = NULL;
-  int __pyx_t_3;
-  int __pyx_lineno = 0;
-  const char *__pyx_filename = NULL;
-  int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__init__", 0);
-
-  /* "core/pool_array/PoolArrays.pyx":6
- * cdef class PoolByteArray:
- *     def __init__(self, godot_pool_byte_array _native):
- *         if (_native != None):             # <<<<<<<<<<<<<<
- *             self._native = _native
- *         else:
- */
-  __pyx_t_1 = __pyx_convert__to_py_godot_pool_byte_array(__pyx_v__native); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 6, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = PyObject_RichCompare(__pyx_t_1, Py_None, Py_NE); __Pyx_XGOTREF(__pyx_t_2); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 6, __pyx_L1_error)
-  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_3 = __Pyx_PyObject_IsTrue(__pyx_t_2); if (unlikely(__pyx_t_3 < 0)) __PYX_ERR(1, 6, __pyx_L1_error)
-  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  if (__pyx_t_3) {
-
-    /* "core/pool_array/PoolArrays.pyx":7
- *     def __init__(self, godot_pool_byte_array _native):
- *         if (_native != None):
- *             self._native = _native             # <<<<<<<<<<<<<<
- *         else:
- *             pass
- */
-    __pyx_v_self->_native = __pyx_v__native;
-
-    /* "core/pool_array/PoolArrays.pyx":6
- * cdef class PoolByteArray:
- *     def __init__(self, godot_pool_byte_array _native):
- *         if (_native != None):             # <<<<<<<<<<<<<<
- *             self._native = _native
- *         else:
- */
-    goto __pyx_L3;
-  }
-
-  /* "core/pool_array/PoolArrays.pyx":9
- *             self._native = _native
- *         else:
- *             pass             # <<<<<<<<<<<<<<
- *             #api_core.godot_pool_byte_array_new(&self._native)
- * 
- */
-  /*else*/ {
-  }
-  __pyx_L3:;
-
-  /* "core/pool_array/PoolArrays.pyx":5
- * 
- * cdef class PoolByteArray:
- *     def __init__(self, godot_pool_byte_array _native):             # <<<<<<<<<<<<<<
- *         if (_native != None):
- *             self._native = _native
- */
 
   /* function exit code */
   __pyx_r = 0;
-  goto __pyx_L0;
-  __pyx_L1_error:;
-  __Pyx_XDECREF(__pyx_t_1);
-  __Pyx_XDECREF(__pyx_t_2);
-  __Pyx_AddTraceback("core.pool_array.PoolArrays.PoolByteArray.__init__", __pyx_clineno, __pyx_lineno, __pyx_filename);
-  __pyx_r = -1;
-  __pyx_L0:;
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
@@ -1735,7 +1633,7 @@ static PyObject *__pyx_pf_4core_10pool_array_10PoolArrays_13PoolByteArray_4__set
   return __pyx_r;
 }
 
-/* "core/pool_array/PoolArrays.pyx":13
+/* "core/pool_array/PoolArrays.pyx":10
  * 
  * cdef class PoolRealArray:
  *     def __init__(self, godot_pool_real_array _native):             # <<<<<<<<<<<<<<
@@ -1772,18 +1670,18 @@ static int __pyx_pw_4core_10pool_array_10PoolArrays_13PoolRealArray_1__init__(Py
         else goto __pyx_L5_argtuple_error;
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "__init__") < 0)) __PYX_ERR(1, 13, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "__init__") < 0)) __PYX_ERR(1, 10, __pyx_L3_error)
       }
     } else if (PyTuple_GET_SIZE(__pyx_args) != 1) {
       goto __pyx_L5_argtuple_error;
     } else {
       values[0] = PyTuple_GET_ITEM(__pyx_args, 0);
     }
-    __pyx_v__native = __pyx_convert__from_py_godot_pool_real_array(values[0]); if (unlikely(PyErr_Occurred())) __PYX_ERR(1, 13, __pyx_L3_error)
+    __pyx_v__native = __pyx_convert__from_py_godot_pool_real_array(values[0]); if (unlikely(PyErr_Occurred())) __PYX_ERR(1, 10, __pyx_L3_error)
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("__init__", 1, 1, 1, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(1, 13, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("__init__", 1, 1, 1, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(1, 10, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("core.pool_array.PoolArrays.PoolRealArray.__init__", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
@@ -1807,22 +1705,22 @@ static int __pyx_pf_4core_10pool_array_10PoolArrays_13PoolRealArray___init__(str
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__init__", 0);
 
-  /* "core/pool_array/PoolArrays.pyx":14
+  /* "core/pool_array/PoolArrays.pyx":11
  * cdef class PoolRealArray:
  *     def __init__(self, godot_pool_real_array _native):
  *         if (_native != None):             # <<<<<<<<<<<<<<
  *             self._native = _native
  *         else:
  */
-  __pyx_t_1 = __pyx_convert__to_py_godot_pool_real_array(__pyx_v__native); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 14, __pyx_L1_error)
+  __pyx_t_1 = __pyx_convert__to_py_godot_pool_real_array(__pyx_v__native); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 11, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = PyObject_RichCompare(__pyx_t_1, Py_None, Py_NE); __Pyx_XGOTREF(__pyx_t_2); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 14, __pyx_L1_error)
+  __pyx_t_2 = PyObject_RichCompare(__pyx_t_1, Py_None, Py_NE); __Pyx_XGOTREF(__pyx_t_2); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 11, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_3 = __Pyx_PyObject_IsTrue(__pyx_t_2); if (unlikely(__pyx_t_3 < 0)) __PYX_ERR(1, 14, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_IsTrue(__pyx_t_2); if (unlikely(__pyx_t_3 < 0)) __PYX_ERR(1, 11, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   if (__pyx_t_3) {
 
-    /* "core/pool_array/PoolArrays.pyx":15
+    /* "core/pool_array/PoolArrays.pyx":12
  *     def __init__(self, godot_pool_real_array _native):
  *         if (_native != None):
  *             self._native = _native             # <<<<<<<<<<<<<<
@@ -1831,7 +1729,7 @@ static int __pyx_pf_4core_10pool_array_10PoolArrays_13PoolRealArray___init__(str
  */
     __pyx_v_self->_native = __pyx_v__native;
 
-    /* "core/pool_array/PoolArrays.pyx":14
+    /* "core/pool_array/PoolArrays.pyx":11
  * cdef class PoolRealArray:
  *     def __init__(self, godot_pool_real_array _native):
  *         if (_native != None):             # <<<<<<<<<<<<<<
@@ -1841,7 +1739,7 @@ static int __pyx_pf_4core_10pool_array_10PoolArrays_13PoolRealArray___init__(str
     goto __pyx_L3;
   }
 
-  /* "core/pool_array/PoolArrays.pyx":17
+  /* "core/pool_array/PoolArrays.pyx":14
  *             self._native = _native
  *         else:
  *             pass             # <<<<<<<<<<<<<<
@@ -1852,7 +1750,7 @@ static int __pyx_pf_4core_10pool_array_10PoolArrays_13PoolRealArray___init__(str
   }
   __pyx_L3:;
 
-  /* "core/pool_array/PoolArrays.pyx":13
+  /* "core/pool_array/PoolArrays.pyx":10
  * 
  * cdef class PoolRealArray:
  *     def __init__(self, godot_pool_real_array _native):             # <<<<<<<<<<<<<<
@@ -1986,7 +1884,7 @@ static PyObject *__pyx_pf_4core_10pool_array_10PoolArrays_13PoolRealArray_4__set
   return __pyx_r;
 }
 
-/* "core/pool_array/PoolArrays.pyx":21
+/* "core/pool_array/PoolArrays.pyx":18
  * 
  * cdef class PoolIntArray:
  *     def __init__(self, godot_pool_int_array _native):             # <<<<<<<<<<<<<<
@@ -2023,18 +1921,18 @@ static int __pyx_pw_4core_10pool_array_10PoolArrays_12PoolIntArray_1__init__(PyO
         else goto __pyx_L5_argtuple_error;
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "__init__") < 0)) __PYX_ERR(1, 21, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "__init__") < 0)) __PYX_ERR(1, 18, __pyx_L3_error)
       }
     } else if (PyTuple_GET_SIZE(__pyx_args) != 1) {
       goto __pyx_L5_argtuple_error;
     } else {
       values[0] = PyTuple_GET_ITEM(__pyx_args, 0);
     }
-    __pyx_v__native = __pyx_convert__from_py_godot_pool_int_array(values[0]); if (unlikely(PyErr_Occurred())) __PYX_ERR(1, 21, __pyx_L3_error)
+    __pyx_v__native = __pyx_convert__from_py_godot_pool_int_array(values[0]); if (unlikely(PyErr_Occurred())) __PYX_ERR(1, 18, __pyx_L3_error)
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("__init__", 1, 1, 1, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(1, 21, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("__init__", 1, 1, 1, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(1, 18, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("core.pool_array.PoolArrays.PoolIntArray.__init__", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
@@ -2058,22 +1956,22 @@ static int __pyx_pf_4core_10pool_array_10PoolArrays_12PoolIntArray___init__(stru
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__init__", 0);
 
-  /* "core/pool_array/PoolArrays.pyx":22
+  /* "core/pool_array/PoolArrays.pyx":19
  * cdef class PoolIntArray:
  *     def __init__(self, godot_pool_int_array _native):
  *         if (_native != None):             # <<<<<<<<<<<<<<
  *             self._native = _native
  *         else:
  */
-  __pyx_t_1 = __pyx_convert__to_py_godot_pool_int_array(__pyx_v__native); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 22, __pyx_L1_error)
+  __pyx_t_1 = __pyx_convert__to_py_godot_pool_int_array(__pyx_v__native); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 19, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = PyObject_RichCompare(__pyx_t_1, Py_None, Py_NE); __Pyx_XGOTREF(__pyx_t_2); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 22, __pyx_L1_error)
+  __pyx_t_2 = PyObject_RichCompare(__pyx_t_1, Py_None, Py_NE); __Pyx_XGOTREF(__pyx_t_2); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 19, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_3 = __Pyx_PyObject_IsTrue(__pyx_t_2); if (unlikely(__pyx_t_3 < 0)) __PYX_ERR(1, 22, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_IsTrue(__pyx_t_2); if (unlikely(__pyx_t_3 < 0)) __PYX_ERR(1, 19, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   if (__pyx_t_3) {
 
-    /* "core/pool_array/PoolArrays.pyx":23
+    /* "core/pool_array/PoolArrays.pyx":20
  *     def __init__(self, godot_pool_int_array _native):
  *         if (_native != None):
  *             self._native = _native             # <<<<<<<<<<<<<<
@@ -2082,7 +1980,7 @@ static int __pyx_pf_4core_10pool_array_10PoolArrays_12PoolIntArray___init__(stru
  */
     __pyx_v_self->_native = __pyx_v__native;
 
-    /* "core/pool_array/PoolArrays.pyx":22
+    /* "core/pool_array/PoolArrays.pyx":19
  * cdef class PoolIntArray:
  *     def __init__(self, godot_pool_int_array _native):
  *         if (_native != None):             # <<<<<<<<<<<<<<
@@ -2092,7 +1990,7 @@ static int __pyx_pf_4core_10pool_array_10PoolArrays_12PoolIntArray___init__(stru
     goto __pyx_L3;
   }
 
-  /* "core/pool_array/PoolArrays.pyx":25
+  /* "core/pool_array/PoolArrays.pyx":22
  *             self._native = _native
  *         else:
  *             pass             # <<<<<<<<<<<<<<
@@ -2103,7 +2001,7 @@ static int __pyx_pf_4core_10pool_array_10PoolArrays_12PoolIntArray___init__(stru
   }
   __pyx_L3:;
 
-  /* "core/pool_array/PoolArrays.pyx":21
+  /* "core/pool_array/PoolArrays.pyx":18
  * 
  * cdef class PoolIntArray:
  *     def __init__(self, godot_pool_int_array _native):             # <<<<<<<<<<<<<<
@@ -2237,7 +2135,7 @@ static PyObject *__pyx_pf_4core_10pool_array_10PoolArrays_12PoolIntArray_4__sets
   return __pyx_r;
 }
 
-/* "core/pool_array/PoolArrays.pyx":29
+/* "core/pool_array/PoolArrays.pyx":26
  * 
  * cdef class PoolStringArray:
  *     def __init__(self, godot_pool_string_array _native):             # <<<<<<<<<<<<<<
@@ -2274,18 +2172,18 @@ static int __pyx_pw_4core_10pool_array_10PoolArrays_15PoolStringArray_1__init__(
         else goto __pyx_L5_argtuple_error;
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "__init__") < 0)) __PYX_ERR(1, 29, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "__init__") < 0)) __PYX_ERR(1, 26, __pyx_L3_error)
       }
     } else if (PyTuple_GET_SIZE(__pyx_args) != 1) {
       goto __pyx_L5_argtuple_error;
     } else {
       values[0] = PyTuple_GET_ITEM(__pyx_args, 0);
     }
-    __pyx_v__native = __pyx_convert__from_py_godot_pool_string_array(values[0]); if (unlikely(PyErr_Occurred())) __PYX_ERR(1, 29, __pyx_L3_error)
+    __pyx_v__native = __pyx_convert__from_py_godot_pool_string_array(values[0]); if (unlikely(PyErr_Occurred())) __PYX_ERR(1, 26, __pyx_L3_error)
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("__init__", 1, 1, 1, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(1, 29, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("__init__", 1, 1, 1, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(1, 26, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("core.pool_array.PoolArrays.PoolStringArray.__init__", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
@@ -2309,22 +2207,22 @@ static int __pyx_pf_4core_10pool_array_10PoolArrays_15PoolStringArray___init__(s
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__init__", 0);
 
-  /* "core/pool_array/PoolArrays.pyx":30
+  /* "core/pool_array/PoolArrays.pyx":27
  * cdef class PoolStringArray:
  *     def __init__(self, godot_pool_string_array _native):
  *         if (_native != None):             # <<<<<<<<<<<<<<
  *             self._native = _native
  *         else:
  */
-  __pyx_t_1 = __pyx_convert__to_py_godot_pool_string_array(__pyx_v__native); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 30, __pyx_L1_error)
+  __pyx_t_1 = __pyx_convert__to_py_godot_pool_string_array(__pyx_v__native); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 27, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = PyObject_RichCompare(__pyx_t_1, Py_None, Py_NE); __Pyx_XGOTREF(__pyx_t_2); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 30, __pyx_L1_error)
+  __pyx_t_2 = PyObject_RichCompare(__pyx_t_1, Py_None, Py_NE); __Pyx_XGOTREF(__pyx_t_2); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 27, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_3 = __Pyx_PyObject_IsTrue(__pyx_t_2); if (unlikely(__pyx_t_3 < 0)) __PYX_ERR(1, 30, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_IsTrue(__pyx_t_2); if (unlikely(__pyx_t_3 < 0)) __PYX_ERR(1, 27, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   if (__pyx_t_3) {
 
-    /* "core/pool_array/PoolArrays.pyx":31
+    /* "core/pool_array/PoolArrays.pyx":28
  *     def __init__(self, godot_pool_string_array _native):
  *         if (_native != None):
  *             self._native = _native             # <<<<<<<<<<<<<<
@@ -2333,7 +2231,7 @@ static int __pyx_pf_4core_10pool_array_10PoolArrays_15PoolStringArray___init__(s
  */
     __pyx_v_self->_native = __pyx_v__native;
 
-    /* "core/pool_array/PoolArrays.pyx":30
+    /* "core/pool_array/PoolArrays.pyx":27
  * cdef class PoolStringArray:
  *     def __init__(self, godot_pool_string_array _native):
  *         if (_native != None):             # <<<<<<<<<<<<<<
@@ -2343,7 +2241,7 @@ static int __pyx_pf_4core_10pool_array_10PoolArrays_15PoolStringArray___init__(s
     goto __pyx_L3;
   }
 
-  /* "core/pool_array/PoolArrays.pyx":33
+  /* "core/pool_array/PoolArrays.pyx":30
  *             self._native = _native
  *         else:
  *             pass             # <<<<<<<<<<<<<<
@@ -2354,7 +2252,7 @@ static int __pyx_pf_4core_10pool_array_10PoolArrays_15PoolStringArray___init__(s
   }
   __pyx_L3:;
 
-  /* "core/pool_array/PoolArrays.pyx":29
+  /* "core/pool_array/PoolArrays.pyx":26
  * 
  * cdef class PoolStringArray:
  *     def __init__(self, godot_pool_string_array _native):             # <<<<<<<<<<<<<<
@@ -2488,7 +2386,7 @@ static PyObject *__pyx_pf_4core_10pool_array_10PoolArrays_15PoolStringArray_4__s
   return __pyx_r;
 }
 
-/* "core/pool_array/PoolArrays.pyx":37
+/* "core/pool_array/PoolArrays.pyx":34
  * 
  * cdef class PoolVector2Array:
  *     def __init__(self, godot_pool_vector2_array _native):             # <<<<<<<<<<<<<<
@@ -2525,18 +2423,18 @@ static int __pyx_pw_4core_10pool_array_10PoolArrays_16PoolVector2Array_1__init__
         else goto __pyx_L5_argtuple_error;
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "__init__") < 0)) __PYX_ERR(1, 37, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "__init__") < 0)) __PYX_ERR(1, 34, __pyx_L3_error)
       }
     } else if (PyTuple_GET_SIZE(__pyx_args) != 1) {
       goto __pyx_L5_argtuple_error;
     } else {
       values[0] = PyTuple_GET_ITEM(__pyx_args, 0);
     }
-    __pyx_v__native = __pyx_convert__from_py_godot_pool_vector2_array(values[0]); if (unlikely(PyErr_Occurred())) __PYX_ERR(1, 37, __pyx_L3_error)
+    __pyx_v__native = __pyx_convert__from_py_godot_pool_vector2_array(values[0]); if (unlikely(PyErr_Occurred())) __PYX_ERR(1, 34, __pyx_L3_error)
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("__init__", 1, 1, 1, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(1, 37, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("__init__", 1, 1, 1, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(1, 34, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("core.pool_array.PoolArrays.PoolVector2Array.__init__", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
@@ -2560,22 +2458,22 @@ static int __pyx_pf_4core_10pool_array_10PoolArrays_16PoolVector2Array___init__(
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__init__", 0);
 
-  /* "core/pool_array/PoolArrays.pyx":38
+  /* "core/pool_array/PoolArrays.pyx":35
  * cdef class PoolVector2Array:
  *     def __init__(self, godot_pool_vector2_array _native):
  *         if (_native != None):             # <<<<<<<<<<<<<<
  *             self._native = _native
  *         else:
  */
-  __pyx_t_1 = __pyx_convert__to_py_godot_pool_vector2_array(__pyx_v__native); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 38, __pyx_L1_error)
+  __pyx_t_1 = __pyx_convert__to_py_godot_pool_vector2_array(__pyx_v__native); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 35, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = PyObject_RichCompare(__pyx_t_1, Py_None, Py_NE); __Pyx_XGOTREF(__pyx_t_2); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 38, __pyx_L1_error)
+  __pyx_t_2 = PyObject_RichCompare(__pyx_t_1, Py_None, Py_NE); __Pyx_XGOTREF(__pyx_t_2); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 35, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_3 = __Pyx_PyObject_IsTrue(__pyx_t_2); if (unlikely(__pyx_t_3 < 0)) __PYX_ERR(1, 38, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_IsTrue(__pyx_t_2); if (unlikely(__pyx_t_3 < 0)) __PYX_ERR(1, 35, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   if (__pyx_t_3) {
 
-    /* "core/pool_array/PoolArrays.pyx":39
+    /* "core/pool_array/PoolArrays.pyx":36
  *     def __init__(self, godot_pool_vector2_array _native):
  *         if (_native != None):
  *             self._native = _native             # <<<<<<<<<<<<<<
@@ -2584,7 +2482,7 @@ static int __pyx_pf_4core_10pool_array_10PoolArrays_16PoolVector2Array___init__(
  */
     __pyx_v_self->_native = __pyx_v__native;
 
-    /* "core/pool_array/PoolArrays.pyx":38
+    /* "core/pool_array/PoolArrays.pyx":35
  * cdef class PoolVector2Array:
  *     def __init__(self, godot_pool_vector2_array _native):
  *         if (_native != None):             # <<<<<<<<<<<<<<
@@ -2594,7 +2492,7 @@ static int __pyx_pf_4core_10pool_array_10PoolArrays_16PoolVector2Array___init__(
     goto __pyx_L3;
   }
 
-  /* "core/pool_array/PoolArrays.pyx":41
+  /* "core/pool_array/PoolArrays.pyx":38
  *             self._native = _native
  *         else:
  *             pass             # <<<<<<<<<<<<<<
@@ -2605,7 +2503,7 @@ static int __pyx_pf_4core_10pool_array_10PoolArrays_16PoolVector2Array___init__(
   }
   __pyx_L3:;
 
-  /* "core/pool_array/PoolArrays.pyx":37
+  /* "core/pool_array/PoolArrays.pyx":34
  * 
  * cdef class PoolVector2Array:
  *     def __init__(self, godot_pool_vector2_array _native):             # <<<<<<<<<<<<<<
@@ -2739,7 +2637,7 @@ static PyObject *__pyx_pf_4core_10pool_array_10PoolArrays_16PoolVector2Array_4__
   return __pyx_r;
 }
 
-/* "core/pool_array/PoolArrays.pyx":45
+/* "core/pool_array/PoolArrays.pyx":42
  * 
  * cdef class PoolVector3Array:
  *     def __init__(self, godot_pool_vector3_array _native):             # <<<<<<<<<<<<<<
@@ -2776,18 +2674,18 @@ static int __pyx_pw_4core_10pool_array_10PoolArrays_16PoolVector3Array_1__init__
         else goto __pyx_L5_argtuple_error;
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "__init__") < 0)) __PYX_ERR(1, 45, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "__init__") < 0)) __PYX_ERR(1, 42, __pyx_L3_error)
       }
     } else if (PyTuple_GET_SIZE(__pyx_args) != 1) {
       goto __pyx_L5_argtuple_error;
     } else {
       values[0] = PyTuple_GET_ITEM(__pyx_args, 0);
     }
-    __pyx_v__native = __pyx_convert__from_py_godot_pool_vector3_array(values[0]); if (unlikely(PyErr_Occurred())) __PYX_ERR(1, 45, __pyx_L3_error)
+    __pyx_v__native = __pyx_convert__from_py_godot_pool_vector3_array(values[0]); if (unlikely(PyErr_Occurred())) __PYX_ERR(1, 42, __pyx_L3_error)
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("__init__", 1, 1, 1, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(1, 45, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("__init__", 1, 1, 1, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(1, 42, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("core.pool_array.PoolArrays.PoolVector3Array.__init__", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
@@ -2811,22 +2709,22 @@ static int __pyx_pf_4core_10pool_array_10PoolArrays_16PoolVector3Array___init__(
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__init__", 0);
 
-  /* "core/pool_array/PoolArrays.pyx":46
+  /* "core/pool_array/PoolArrays.pyx":43
  * cdef class PoolVector3Array:
  *     def __init__(self, godot_pool_vector3_array _native):
  *         if (_native != None):             # <<<<<<<<<<<<<<
  *             self._native = _native
  *         else:
  */
-  __pyx_t_1 = __pyx_convert__to_py_godot_pool_vector3_array(__pyx_v__native); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 46, __pyx_L1_error)
+  __pyx_t_1 = __pyx_convert__to_py_godot_pool_vector3_array(__pyx_v__native); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 43, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = PyObject_RichCompare(__pyx_t_1, Py_None, Py_NE); __Pyx_XGOTREF(__pyx_t_2); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 46, __pyx_L1_error)
+  __pyx_t_2 = PyObject_RichCompare(__pyx_t_1, Py_None, Py_NE); __Pyx_XGOTREF(__pyx_t_2); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 43, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_3 = __Pyx_PyObject_IsTrue(__pyx_t_2); if (unlikely(__pyx_t_3 < 0)) __PYX_ERR(1, 46, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_IsTrue(__pyx_t_2); if (unlikely(__pyx_t_3 < 0)) __PYX_ERR(1, 43, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   if (__pyx_t_3) {
 
-    /* "core/pool_array/PoolArrays.pyx":47
+    /* "core/pool_array/PoolArrays.pyx":44
  *     def __init__(self, godot_pool_vector3_array _native):
  *         if (_native != None):
  *             self._native = _native             # <<<<<<<<<<<<<<
@@ -2835,7 +2733,7 @@ static int __pyx_pf_4core_10pool_array_10PoolArrays_16PoolVector3Array___init__(
  */
     __pyx_v_self->_native = __pyx_v__native;
 
-    /* "core/pool_array/PoolArrays.pyx":46
+    /* "core/pool_array/PoolArrays.pyx":43
  * cdef class PoolVector3Array:
  *     def __init__(self, godot_pool_vector3_array _native):
  *         if (_native != None):             # <<<<<<<<<<<<<<
@@ -2845,7 +2743,7 @@ static int __pyx_pf_4core_10pool_array_10PoolArrays_16PoolVector3Array___init__(
     goto __pyx_L3;
   }
 
-  /* "core/pool_array/PoolArrays.pyx":49
+  /* "core/pool_array/PoolArrays.pyx":46
  *             self._native = _native
  *         else:
  *             pass             # <<<<<<<<<<<<<<
@@ -2856,7 +2754,7 @@ static int __pyx_pf_4core_10pool_array_10PoolArrays_16PoolVector3Array___init__(
   }
   __pyx_L3:;
 
-  /* "core/pool_array/PoolArrays.pyx":45
+  /* "core/pool_array/PoolArrays.pyx":42
  * 
  * cdef class PoolVector3Array:
  *     def __init__(self, godot_pool_vector3_array _native):             # <<<<<<<<<<<<<<
@@ -2990,7 +2888,7 @@ static PyObject *__pyx_pf_4core_10pool_array_10PoolArrays_16PoolVector3Array_4__
   return __pyx_r;
 }
 
-/* "core/pool_array/PoolArrays.pyx":53
+/* "core/pool_array/PoolArrays.pyx":50
  * 
  * cdef class PoolColorArray:
  *     def __init__(self, godot_pool_color_array _native):             # <<<<<<<<<<<<<<
@@ -3027,18 +2925,18 @@ static int __pyx_pw_4core_10pool_array_10PoolArrays_14PoolColorArray_1__init__(P
         else goto __pyx_L5_argtuple_error;
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "__init__") < 0)) __PYX_ERR(1, 53, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "__init__") < 0)) __PYX_ERR(1, 50, __pyx_L3_error)
       }
     } else if (PyTuple_GET_SIZE(__pyx_args) != 1) {
       goto __pyx_L5_argtuple_error;
     } else {
       values[0] = PyTuple_GET_ITEM(__pyx_args, 0);
     }
-    __pyx_v__native = __pyx_convert__from_py_godot_pool_color_array(values[0]); if (unlikely(PyErr_Occurred())) __PYX_ERR(1, 53, __pyx_L3_error)
+    __pyx_v__native = __pyx_convert__from_py_godot_pool_color_array(values[0]); if (unlikely(PyErr_Occurred())) __PYX_ERR(1, 50, __pyx_L3_error)
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("__init__", 1, 1, 1, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(1, 53, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("__init__", 1, 1, 1, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(1, 50, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("core.pool_array.PoolArrays.PoolColorArray.__init__", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
@@ -3062,22 +2960,22 @@ static int __pyx_pf_4core_10pool_array_10PoolArrays_14PoolColorArray___init__(st
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__init__", 0);
 
-  /* "core/pool_array/PoolArrays.pyx":54
+  /* "core/pool_array/PoolArrays.pyx":51
  * cdef class PoolColorArray:
  *     def __init__(self, godot_pool_color_array _native):
  *         if (_native != None):             # <<<<<<<<<<<<<<
  *             self._native = _native
  *         else:
  */
-  __pyx_t_1 = __pyx_convert__to_py_godot_pool_color_array(__pyx_v__native); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 54, __pyx_L1_error)
+  __pyx_t_1 = __pyx_convert__to_py_godot_pool_color_array(__pyx_v__native); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 51, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = PyObject_RichCompare(__pyx_t_1, Py_None, Py_NE); __Pyx_XGOTREF(__pyx_t_2); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 54, __pyx_L1_error)
+  __pyx_t_2 = PyObject_RichCompare(__pyx_t_1, Py_None, Py_NE); __Pyx_XGOTREF(__pyx_t_2); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 51, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_3 = __Pyx_PyObject_IsTrue(__pyx_t_2); if (unlikely(__pyx_t_3 < 0)) __PYX_ERR(1, 54, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_IsTrue(__pyx_t_2); if (unlikely(__pyx_t_3 < 0)) __PYX_ERR(1, 51, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   if (__pyx_t_3) {
 
-    /* "core/pool_array/PoolArrays.pyx":55
+    /* "core/pool_array/PoolArrays.pyx":52
  *     def __init__(self, godot_pool_color_array _native):
  *         if (_native != None):
  *             self._native = _native             # <<<<<<<<<<<<<<
@@ -3086,7 +2984,7 @@ static int __pyx_pf_4core_10pool_array_10PoolArrays_14PoolColorArray___init__(st
  */
     __pyx_v_self->_native = __pyx_v__native;
 
-    /* "core/pool_array/PoolArrays.pyx":54
+    /* "core/pool_array/PoolArrays.pyx":51
  * cdef class PoolColorArray:
  *     def __init__(self, godot_pool_color_array _native):
  *         if (_native != None):             # <<<<<<<<<<<<<<
@@ -3096,7 +2994,7 @@ static int __pyx_pf_4core_10pool_array_10PoolArrays_14PoolColorArray___init__(st
     goto __pyx_L3;
   }
 
-  /* "core/pool_array/PoolArrays.pyx":57
+  /* "core/pool_array/PoolArrays.pyx":54
  *             self._native = _native
  *         else:
  *             pass             # <<<<<<<<<<<<<<
@@ -3106,7 +3004,7 @@ static int __pyx_pf_4core_10pool_array_10PoolArrays_14PoolColorArray___init__(st
   }
   __pyx_L3:;
 
-  /* "core/pool_array/PoolArrays.pyx":53
+  /* "core/pool_array/PoolArrays.pyx":50
  * 
  * cdef class PoolColorArray:
  *     def __init__(self, godot_pool_color_array _native):             # <<<<<<<<<<<<<<
@@ -3798,192 +3696,11 @@ static int __Pyx_carray_from_py_uint8_t(PyObject *__pyx_v_o, uint8_t *__pyx_v_v,
 
 /* "FromPyStructUtility":11
  * 
- * @cname("__pyx_convert__from_py_godot_pool_byte_array")
- * cdef struct_type __pyx_convert__from_py_godot_pool_byte_array(obj) except *:             # <<<<<<<<<<<<<<
+ * @cname("__pyx_convert__from_py_godot_pool_real_array")
+ * cdef struct_type __pyx_convert__from_py_godot_pool_real_array(obj) except *:             # <<<<<<<<<<<<<<
  *     cdef struct_type result
  *     if not PyMapping_Check(obj):
  */
-
-static godot_pool_byte_array __pyx_convert__from_py_godot_pool_byte_array(PyObject *__pyx_v_obj) {
-  godot_pool_byte_array __pyx_v_result;
-  PyObject *__pyx_v_value = NULL;
-  godot_pool_byte_array __pyx_r;
-  __Pyx_RefNannyDeclarations
-  int __pyx_t_1;
-  PyObject *__pyx_t_2 = NULL;
-  PyObject *__pyx_t_3 = NULL;
-  PyObject *__pyx_t_4 = NULL;
-  PyObject *__pyx_t_5 = NULL;
-  int __pyx_t_6;
-  PyObject *__pyx_t_7 = NULL;
-  PyObject *__pyx_t_8 = NULL;
-  PyObject *__pyx_t_9 = NULL;
-  uint8_t __pyx_t_10[1];
-  int __pyx_lineno = 0;
-  const char *__pyx_filename = NULL;
-  int __pyx_clineno = 0;
-  __Pyx_RefNannySetupContext("__pyx_convert__from_py_godot_pool_byte_array", 0);
-
-  /* "FromPyStructUtility":13
- * cdef struct_type __pyx_convert__from_py_godot_pool_byte_array(obj) except *:
- *     cdef struct_type result
- *     if not PyMapping_Check(obj):             # <<<<<<<<<<<<<<
- *         PyErr_Format(TypeError, b"Expected %.16s, got %.200s", b"a mapping", Py_TYPE(obj).tp_name)
- * 
- */
-  __pyx_t_1 = ((!(PyMapping_Check(__pyx_v_obj) != 0)) != 0);
-  if (__pyx_t_1) {
-
-    /* "FromPyStructUtility":14
- *     cdef struct_type result
- *     if not PyMapping_Check(obj):
- *         PyErr_Format(TypeError, b"Expected %.16s, got %.200s", b"a mapping", Py_TYPE(obj).tp_name)             # <<<<<<<<<<<<<<
- * 
- *     try:
- */
-    __pyx_t_2 = PyErr_Format(__pyx_builtin_TypeError, ((char const *)"Expected %.16s, got %.200s"), ((char *)"a mapping"), Py_TYPE(__pyx_v_obj)->tp_name); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 14, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_2);
-    __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-
-    /* "FromPyStructUtility":13
- * cdef struct_type __pyx_convert__from_py_godot_pool_byte_array(obj) except *:
- *     cdef struct_type result
- *     if not PyMapping_Check(obj):             # <<<<<<<<<<<<<<
- *         PyErr_Format(TypeError, b"Expected %.16s, got %.200s", b"a mapping", Py_TYPE(obj).tp_name)
- * 
- */
-  }
-
-  /* "FromPyStructUtility":16
- *         PyErr_Format(TypeError, b"Expected %.16s, got %.200s", b"a mapping", Py_TYPE(obj).tp_name)
- * 
- *     try:             # <<<<<<<<<<<<<<
- *         value = obj['_dont_touch_that']
- *     except KeyError:
- */
-  {
-    __Pyx_PyThreadState_declare
-    __Pyx_PyThreadState_assign
-    __Pyx_ExceptionSave(&__pyx_t_3, &__pyx_t_4, &__pyx_t_5);
-    __Pyx_XGOTREF(__pyx_t_3);
-    __Pyx_XGOTREF(__pyx_t_4);
-    __Pyx_XGOTREF(__pyx_t_5);
-    /*try:*/ {
-
-      /* "FromPyStructUtility":17
- * 
- *     try:
- *         value = obj['_dont_touch_that']             # <<<<<<<<<<<<<<
- *     except KeyError:
- *         raise ValueError("No value specified for struct attribute '_dont_touch_that'")
- */
-      __pyx_t_2 = __Pyx_PyObject_Dict_GetItem(__pyx_v_obj, __pyx_n_s_dont_touch_that); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 17, __pyx_L4_error)
-      __Pyx_GOTREF(__pyx_t_2);
-      __pyx_v_value = __pyx_t_2;
-      __pyx_t_2 = 0;
-
-      /* "FromPyStructUtility":16
- *         PyErr_Format(TypeError, b"Expected %.16s, got %.200s", b"a mapping", Py_TYPE(obj).tp_name)
- * 
- *     try:             # <<<<<<<<<<<<<<
- *         value = obj['_dont_touch_that']
- *     except KeyError:
- */
-    }
-    __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
-    __Pyx_XDECREF(__pyx_t_4); __pyx_t_4 = 0;
-    __Pyx_XDECREF(__pyx_t_5); __pyx_t_5 = 0;
-    goto __pyx_L9_try_end;
-    __pyx_L4_error:;
-    __Pyx_XDECREF(__pyx_t_2); __pyx_t_2 = 0;
-
-    /* "FromPyStructUtility":18
- *     try:
- *         value = obj['_dont_touch_that']
- *     except KeyError:             # <<<<<<<<<<<<<<
- *         raise ValueError("No value specified for struct attribute '_dont_touch_that'")
- *     result._dont_touch_that = value
- */
-    __pyx_t_6 = __Pyx_PyErr_ExceptionMatches(__pyx_builtin_KeyError);
-    if (__pyx_t_6) {
-      __Pyx_AddTraceback("FromPyStructUtility.__pyx_convert__from_py_godot_pool_byte_array", __pyx_clineno, __pyx_lineno, __pyx_filename);
-      if (__Pyx_GetException(&__pyx_t_2, &__pyx_t_7, &__pyx_t_8) < 0) __PYX_ERR(0, 18, __pyx_L6_except_error)
-      __Pyx_GOTREF(__pyx_t_2);
-      __Pyx_GOTREF(__pyx_t_7);
-      __Pyx_GOTREF(__pyx_t_8);
-
-      /* "FromPyStructUtility":19
- *         value = obj['_dont_touch_that']
- *     except KeyError:
- *         raise ValueError("No value specified for struct attribute '_dont_touch_that'")             # <<<<<<<<<<<<<<
- *     result._dont_touch_that = value
- *     return result
- */
-      __pyx_t_9 = __Pyx_PyObject_Call(__pyx_builtin_ValueError, __pyx_tuple__15, NULL); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 19, __pyx_L6_except_error)
-      __Pyx_GOTREF(__pyx_t_9);
-      __Pyx_Raise(__pyx_t_9, 0, 0, 0);
-      __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
-      __PYX_ERR(0, 19, __pyx_L6_except_error)
-    }
-    goto __pyx_L6_except_error;
-    __pyx_L6_except_error:;
-
-    /* "FromPyStructUtility":16
- *         PyErr_Format(TypeError, b"Expected %.16s, got %.200s", b"a mapping", Py_TYPE(obj).tp_name)
- * 
- *     try:             # <<<<<<<<<<<<<<
- *         value = obj['_dont_touch_that']
- *     except KeyError:
- */
-    __Pyx_XGIVEREF(__pyx_t_3);
-    __Pyx_XGIVEREF(__pyx_t_4);
-    __Pyx_XGIVEREF(__pyx_t_5);
-    __Pyx_ExceptionReset(__pyx_t_3, __pyx_t_4, __pyx_t_5);
-    goto __pyx_L1_error;
-    __pyx_L9_try_end:;
-  }
-
-  /* "FromPyStructUtility":20
- *     except KeyError:
- *         raise ValueError("No value specified for struct attribute '_dont_touch_that'")
- *     result._dont_touch_that = value             # <<<<<<<<<<<<<<
- *     return result
- * 
- */
-  if (unlikely(__Pyx_carray_from_py_uint8_t(__pyx_v_value, __pyx_t_10, 1) < 0)) __PYX_ERR(0, 20, __pyx_L1_error)
-  memcpy(&(__pyx_v_result._dont_touch_that[0]), __pyx_t_10, sizeof(__pyx_v_result._dont_touch_that[0]) * (1));
-
-  /* "FromPyStructUtility":21
- *         raise ValueError("No value specified for struct attribute '_dont_touch_that'")
- *     result._dont_touch_that = value
- *     return result             # <<<<<<<<<<<<<<
- * 
- * 
- */
-  __pyx_r = __pyx_v_result;
-  goto __pyx_L0;
-
-  /* "FromPyStructUtility":11
- * 
- * @cname("__pyx_convert__from_py_godot_pool_byte_array")
- * cdef struct_type __pyx_convert__from_py_godot_pool_byte_array(obj) except *:             # <<<<<<<<<<<<<<
- *     cdef struct_type result
- *     if not PyMapping_Check(obj):
- */
-
-  /* function exit code */
-  __pyx_L1_error:;
-  __Pyx_XDECREF(__pyx_t_2);
-  __Pyx_XDECREF(__pyx_t_7);
-  __Pyx_XDECREF(__pyx_t_8);
-  __Pyx_XDECREF(__pyx_t_9);
-  __Pyx_AddTraceback("FromPyStructUtility.__pyx_convert__from_py_godot_pool_byte_array", __pyx_clineno, __pyx_lineno, __pyx_filename);
-  __Pyx_pretend_to_initialize(&__pyx_r);
-  __pyx_L0:;
-  __Pyx_XDECREF(__pyx_v_value);
-  __Pyx_RefNannyFinishContext();
-  return __pyx_r;
-}
 
 static godot_pool_real_array __pyx_convert__from_py_godot_pool_real_array(PyObject *__pyx_v_obj) {
   godot_pool_real_array __pyx_v_result;
@@ -6067,81 +5784,81 @@ static int __Pyx_modinit_type_init_code(void) {
   __pyx_ptype_4core_10pool_array_10PoolArrays_PoolByteArray = &__pyx_type_4core_10pool_array_10PoolArrays_PoolByteArray;
   __pyx_vtabptr_4core_10pool_array_10PoolArrays_PoolRealArray = &__pyx_vtable_4core_10pool_array_10PoolArrays_PoolRealArray;
   __pyx_vtable_4core_10pool_array_10PoolArrays_PoolRealArray.__pyx___new__ = (void (*)(struct __pyx_obj_4core_10pool_array_10PoolArrays_PoolRealArray *, godot_pool_real_array))__pyx_f_4core_10pool_array_10PoolArrays_13PoolRealArray___new__;
-  if (PyType_Ready(&__pyx_type_4core_10pool_array_10PoolArrays_PoolRealArray) < 0) __PYX_ERR(1, 12, __pyx_L1_error)
+  if (PyType_Ready(&__pyx_type_4core_10pool_array_10PoolArrays_PoolRealArray) < 0) __PYX_ERR(1, 9, __pyx_L1_error)
   #if PY_VERSION_HEX < 0x030800B1
   __pyx_type_4core_10pool_array_10PoolArrays_PoolRealArray.tp_print = 0;
   #endif
   if ((CYTHON_USE_TYPE_SLOTS && CYTHON_USE_PYTYPE_LOOKUP) && likely(!__pyx_type_4core_10pool_array_10PoolArrays_PoolRealArray.tp_dictoffset && __pyx_type_4core_10pool_array_10PoolArrays_PoolRealArray.tp_getattro == PyObject_GenericGetAttr)) {
     __pyx_type_4core_10pool_array_10PoolArrays_PoolRealArray.tp_getattro = __Pyx_PyObject_GenericGetAttr;
   }
-  if (__Pyx_SetVtable(__pyx_type_4core_10pool_array_10PoolArrays_PoolRealArray.tp_dict, __pyx_vtabptr_4core_10pool_array_10PoolArrays_PoolRealArray) < 0) __PYX_ERR(1, 12, __pyx_L1_error)
-  if (PyObject_SetAttr(__pyx_m, __pyx_n_s_PoolRealArray, (PyObject *)&__pyx_type_4core_10pool_array_10PoolArrays_PoolRealArray) < 0) __PYX_ERR(1, 12, __pyx_L1_error)
-  if (__Pyx_setup_reduce((PyObject*)&__pyx_type_4core_10pool_array_10PoolArrays_PoolRealArray) < 0) __PYX_ERR(1, 12, __pyx_L1_error)
+  if (__Pyx_SetVtable(__pyx_type_4core_10pool_array_10PoolArrays_PoolRealArray.tp_dict, __pyx_vtabptr_4core_10pool_array_10PoolArrays_PoolRealArray) < 0) __PYX_ERR(1, 9, __pyx_L1_error)
+  if (PyObject_SetAttr(__pyx_m, __pyx_n_s_PoolRealArray, (PyObject *)&__pyx_type_4core_10pool_array_10PoolArrays_PoolRealArray) < 0) __PYX_ERR(1, 9, __pyx_L1_error)
+  if (__Pyx_setup_reduce((PyObject*)&__pyx_type_4core_10pool_array_10PoolArrays_PoolRealArray) < 0) __PYX_ERR(1, 9, __pyx_L1_error)
   __pyx_ptype_4core_10pool_array_10PoolArrays_PoolRealArray = &__pyx_type_4core_10pool_array_10PoolArrays_PoolRealArray;
   __pyx_vtabptr_4core_10pool_array_10PoolArrays_PoolIntArray = &__pyx_vtable_4core_10pool_array_10PoolArrays_PoolIntArray;
   __pyx_vtable_4core_10pool_array_10PoolArrays_PoolIntArray.__pyx___new__ = (void (*)(struct __pyx_obj_4core_10pool_array_10PoolArrays_PoolIntArray *, godot_pool_int_array))__pyx_f_4core_10pool_array_10PoolArrays_12PoolIntArray___new__;
-  if (PyType_Ready(&__pyx_type_4core_10pool_array_10PoolArrays_PoolIntArray) < 0) __PYX_ERR(1, 20, __pyx_L1_error)
+  if (PyType_Ready(&__pyx_type_4core_10pool_array_10PoolArrays_PoolIntArray) < 0) __PYX_ERR(1, 17, __pyx_L1_error)
   #if PY_VERSION_HEX < 0x030800B1
   __pyx_type_4core_10pool_array_10PoolArrays_PoolIntArray.tp_print = 0;
   #endif
   if ((CYTHON_USE_TYPE_SLOTS && CYTHON_USE_PYTYPE_LOOKUP) && likely(!__pyx_type_4core_10pool_array_10PoolArrays_PoolIntArray.tp_dictoffset && __pyx_type_4core_10pool_array_10PoolArrays_PoolIntArray.tp_getattro == PyObject_GenericGetAttr)) {
     __pyx_type_4core_10pool_array_10PoolArrays_PoolIntArray.tp_getattro = __Pyx_PyObject_GenericGetAttr;
   }
-  if (__Pyx_SetVtable(__pyx_type_4core_10pool_array_10PoolArrays_PoolIntArray.tp_dict, __pyx_vtabptr_4core_10pool_array_10PoolArrays_PoolIntArray) < 0) __PYX_ERR(1, 20, __pyx_L1_error)
-  if (PyObject_SetAttr(__pyx_m, __pyx_n_s_PoolIntArray, (PyObject *)&__pyx_type_4core_10pool_array_10PoolArrays_PoolIntArray) < 0) __PYX_ERR(1, 20, __pyx_L1_error)
-  if (__Pyx_setup_reduce((PyObject*)&__pyx_type_4core_10pool_array_10PoolArrays_PoolIntArray) < 0) __PYX_ERR(1, 20, __pyx_L1_error)
+  if (__Pyx_SetVtable(__pyx_type_4core_10pool_array_10PoolArrays_PoolIntArray.tp_dict, __pyx_vtabptr_4core_10pool_array_10PoolArrays_PoolIntArray) < 0) __PYX_ERR(1, 17, __pyx_L1_error)
+  if (PyObject_SetAttr(__pyx_m, __pyx_n_s_PoolIntArray, (PyObject *)&__pyx_type_4core_10pool_array_10PoolArrays_PoolIntArray) < 0) __PYX_ERR(1, 17, __pyx_L1_error)
+  if (__Pyx_setup_reduce((PyObject*)&__pyx_type_4core_10pool_array_10PoolArrays_PoolIntArray) < 0) __PYX_ERR(1, 17, __pyx_L1_error)
   __pyx_ptype_4core_10pool_array_10PoolArrays_PoolIntArray = &__pyx_type_4core_10pool_array_10PoolArrays_PoolIntArray;
   __pyx_vtabptr_4core_10pool_array_10PoolArrays_PoolStringArray = &__pyx_vtable_4core_10pool_array_10PoolArrays_PoolStringArray;
   __pyx_vtable_4core_10pool_array_10PoolArrays_PoolStringArray.__pyx___new__ = (void (*)(struct __pyx_obj_4core_10pool_array_10PoolArrays_PoolStringArray *, godot_pool_string_array))__pyx_f_4core_10pool_array_10PoolArrays_15PoolStringArray___new__;
-  if (PyType_Ready(&__pyx_type_4core_10pool_array_10PoolArrays_PoolStringArray) < 0) __PYX_ERR(1, 28, __pyx_L1_error)
+  if (PyType_Ready(&__pyx_type_4core_10pool_array_10PoolArrays_PoolStringArray) < 0) __PYX_ERR(1, 25, __pyx_L1_error)
   #if PY_VERSION_HEX < 0x030800B1
   __pyx_type_4core_10pool_array_10PoolArrays_PoolStringArray.tp_print = 0;
   #endif
   if ((CYTHON_USE_TYPE_SLOTS && CYTHON_USE_PYTYPE_LOOKUP) && likely(!__pyx_type_4core_10pool_array_10PoolArrays_PoolStringArray.tp_dictoffset && __pyx_type_4core_10pool_array_10PoolArrays_PoolStringArray.tp_getattro == PyObject_GenericGetAttr)) {
     __pyx_type_4core_10pool_array_10PoolArrays_PoolStringArray.tp_getattro = __Pyx_PyObject_GenericGetAttr;
   }
-  if (__Pyx_SetVtable(__pyx_type_4core_10pool_array_10PoolArrays_PoolStringArray.tp_dict, __pyx_vtabptr_4core_10pool_array_10PoolArrays_PoolStringArray) < 0) __PYX_ERR(1, 28, __pyx_L1_error)
-  if (PyObject_SetAttr(__pyx_m, __pyx_n_s_PoolStringArray, (PyObject *)&__pyx_type_4core_10pool_array_10PoolArrays_PoolStringArray) < 0) __PYX_ERR(1, 28, __pyx_L1_error)
-  if (__Pyx_setup_reduce((PyObject*)&__pyx_type_4core_10pool_array_10PoolArrays_PoolStringArray) < 0) __PYX_ERR(1, 28, __pyx_L1_error)
+  if (__Pyx_SetVtable(__pyx_type_4core_10pool_array_10PoolArrays_PoolStringArray.tp_dict, __pyx_vtabptr_4core_10pool_array_10PoolArrays_PoolStringArray) < 0) __PYX_ERR(1, 25, __pyx_L1_error)
+  if (PyObject_SetAttr(__pyx_m, __pyx_n_s_PoolStringArray, (PyObject *)&__pyx_type_4core_10pool_array_10PoolArrays_PoolStringArray) < 0) __PYX_ERR(1, 25, __pyx_L1_error)
+  if (__Pyx_setup_reduce((PyObject*)&__pyx_type_4core_10pool_array_10PoolArrays_PoolStringArray) < 0) __PYX_ERR(1, 25, __pyx_L1_error)
   __pyx_ptype_4core_10pool_array_10PoolArrays_PoolStringArray = &__pyx_type_4core_10pool_array_10PoolArrays_PoolStringArray;
   __pyx_vtabptr_4core_10pool_array_10PoolArrays_PoolVector2Array = &__pyx_vtable_4core_10pool_array_10PoolArrays_PoolVector2Array;
   __pyx_vtable_4core_10pool_array_10PoolArrays_PoolVector2Array.__pyx___new__ = (void (*)(struct __pyx_obj_4core_10pool_array_10PoolArrays_PoolVector2Array *, godot_pool_vector2_array))__pyx_f_4core_10pool_array_10PoolArrays_16PoolVector2Array___new__;
-  if (PyType_Ready(&__pyx_type_4core_10pool_array_10PoolArrays_PoolVector2Array) < 0) __PYX_ERR(1, 36, __pyx_L1_error)
+  if (PyType_Ready(&__pyx_type_4core_10pool_array_10PoolArrays_PoolVector2Array) < 0) __PYX_ERR(1, 33, __pyx_L1_error)
   #if PY_VERSION_HEX < 0x030800B1
   __pyx_type_4core_10pool_array_10PoolArrays_PoolVector2Array.tp_print = 0;
   #endif
   if ((CYTHON_USE_TYPE_SLOTS && CYTHON_USE_PYTYPE_LOOKUP) && likely(!__pyx_type_4core_10pool_array_10PoolArrays_PoolVector2Array.tp_dictoffset && __pyx_type_4core_10pool_array_10PoolArrays_PoolVector2Array.tp_getattro == PyObject_GenericGetAttr)) {
     __pyx_type_4core_10pool_array_10PoolArrays_PoolVector2Array.tp_getattro = __Pyx_PyObject_GenericGetAttr;
   }
-  if (__Pyx_SetVtable(__pyx_type_4core_10pool_array_10PoolArrays_PoolVector2Array.tp_dict, __pyx_vtabptr_4core_10pool_array_10PoolArrays_PoolVector2Array) < 0) __PYX_ERR(1, 36, __pyx_L1_error)
-  if (PyObject_SetAttr(__pyx_m, __pyx_n_s_PoolVector2Array, (PyObject *)&__pyx_type_4core_10pool_array_10PoolArrays_PoolVector2Array) < 0) __PYX_ERR(1, 36, __pyx_L1_error)
-  if (__Pyx_setup_reduce((PyObject*)&__pyx_type_4core_10pool_array_10PoolArrays_PoolVector2Array) < 0) __PYX_ERR(1, 36, __pyx_L1_error)
+  if (__Pyx_SetVtable(__pyx_type_4core_10pool_array_10PoolArrays_PoolVector2Array.tp_dict, __pyx_vtabptr_4core_10pool_array_10PoolArrays_PoolVector2Array) < 0) __PYX_ERR(1, 33, __pyx_L1_error)
+  if (PyObject_SetAttr(__pyx_m, __pyx_n_s_PoolVector2Array, (PyObject *)&__pyx_type_4core_10pool_array_10PoolArrays_PoolVector2Array) < 0) __PYX_ERR(1, 33, __pyx_L1_error)
+  if (__Pyx_setup_reduce((PyObject*)&__pyx_type_4core_10pool_array_10PoolArrays_PoolVector2Array) < 0) __PYX_ERR(1, 33, __pyx_L1_error)
   __pyx_ptype_4core_10pool_array_10PoolArrays_PoolVector2Array = &__pyx_type_4core_10pool_array_10PoolArrays_PoolVector2Array;
   __pyx_vtabptr_4core_10pool_array_10PoolArrays_PoolVector3Array = &__pyx_vtable_4core_10pool_array_10PoolArrays_PoolVector3Array;
   __pyx_vtable_4core_10pool_array_10PoolArrays_PoolVector3Array.__pyx___new__ = (void (*)(struct __pyx_obj_4core_10pool_array_10PoolArrays_PoolVector3Array *, godot_pool_vector3_array))__pyx_f_4core_10pool_array_10PoolArrays_16PoolVector3Array___new__;
-  if (PyType_Ready(&__pyx_type_4core_10pool_array_10PoolArrays_PoolVector3Array) < 0) __PYX_ERR(1, 44, __pyx_L1_error)
+  if (PyType_Ready(&__pyx_type_4core_10pool_array_10PoolArrays_PoolVector3Array) < 0) __PYX_ERR(1, 41, __pyx_L1_error)
   #if PY_VERSION_HEX < 0x030800B1
   __pyx_type_4core_10pool_array_10PoolArrays_PoolVector3Array.tp_print = 0;
   #endif
   if ((CYTHON_USE_TYPE_SLOTS && CYTHON_USE_PYTYPE_LOOKUP) && likely(!__pyx_type_4core_10pool_array_10PoolArrays_PoolVector3Array.tp_dictoffset && __pyx_type_4core_10pool_array_10PoolArrays_PoolVector3Array.tp_getattro == PyObject_GenericGetAttr)) {
     __pyx_type_4core_10pool_array_10PoolArrays_PoolVector3Array.tp_getattro = __Pyx_PyObject_GenericGetAttr;
   }
-  if (__Pyx_SetVtable(__pyx_type_4core_10pool_array_10PoolArrays_PoolVector3Array.tp_dict, __pyx_vtabptr_4core_10pool_array_10PoolArrays_PoolVector3Array) < 0) __PYX_ERR(1, 44, __pyx_L1_error)
-  if (PyObject_SetAttr(__pyx_m, __pyx_n_s_PoolVector3Array, (PyObject *)&__pyx_type_4core_10pool_array_10PoolArrays_PoolVector3Array) < 0) __PYX_ERR(1, 44, __pyx_L1_error)
-  if (__Pyx_setup_reduce((PyObject*)&__pyx_type_4core_10pool_array_10PoolArrays_PoolVector3Array) < 0) __PYX_ERR(1, 44, __pyx_L1_error)
+  if (__Pyx_SetVtable(__pyx_type_4core_10pool_array_10PoolArrays_PoolVector3Array.tp_dict, __pyx_vtabptr_4core_10pool_array_10PoolArrays_PoolVector3Array) < 0) __PYX_ERR(1, 41, __pyx_L1_error)
+  if (PyObject_SetAttr(__pyx_m, __pyx_n_s_PoolVector3Array, (PyObject *)&__pyx_type_4core_10pool_array_10PoolArrays_PoolVector3Array) < 0) __PYX_ERR(1, 41, __pyx_L1_error)
+  if (__Pyx_setup_reduce((PyObject*)&__pyx_type_4core_10pool_array_10PoolArrays_PoolVector3Array) < 0) __PYX_ERR(1, 41, __pyx_L1_error)
   __pyx_ptype_4core_10pool_array_10PoolArrays_PoolVector3Array = &__pyx_type_4core_10pool_array_10PoolArrays_PoolVector3Array;
   __pyx_vtabptr_4core_10pool_array_10PoolArrays_PoolColorArray = &__pyx_vtable_4core_10pool_array_10PoolArrays_PoolColorArray;
   __pyx_vtable_4core_10pool_array_10PoolArrays_PoolColorArray.__pyx___new__ = (void (*)(struct __pyx_obj_4core_10pool_array_10PoolArrays_PoolColorArray *, godot_pool_color_array))__pyx_f_4core_10pool_array_10PoolArrays_14PoolColorArray___new__;
-  if (PyType_Ready(&__pyx_type_4core_10pool_array_10PoolArrays_PoolColorArray) < 0) __PYX_ERR(1, 52, __pyx_L1_error)
+  if (PyType_Ready(&__pyx_type_4core_10pool_array_10PoolArrays_PoolColorArray) < 0) __PYX_ERR(1, 49, __pyx_L1_error)
   #if PY_VERSION_HEX < 0x030800B1
   __pyx_type_4core_10pool_array_10PoolArrays_PoolColorArray.tp_print = 0;
   #endif
   if ((CYTHON_USE_TYPE_SLOTS && CYTHON_USE_PYTYPE_LOOKUP) && likely(!__pyx_type_4core_10pool_array_10PoolArrays_PoolColorArray.tp_dictoffset && __pyx_type_4core_10pool_array_10PoolArrays_PoolColorArray.tp_getattro == PyObject_GenericGetAttr)) {
     __pyx_type_4core_10pool_array_10PoolArrays_PoolColorArray.tp_getattro = __Pyx_PyObject_GenericGetAttr;
   }
-  if (__Pyx_SetVtable(__pyx_type_4core_10pool_array_10PoolArrays_PoolColorArray.tp_dict, __pyx_vtabptr_4core_10pool_array_10PoolArrays_PoolColorArray) < 0) __PYX_ERR(1, 52, __pyx_L1_error)
-  if (PyObject_SetAttr(__pyx_m, __pyx_n_s_PoolColorArray, (PyObject *)&__pyx_type_4core_10pool_array_10PoolArrays_PoolColorArray) < 0) __PYX_ERR(1, 52, __pyx_L1_error)
-  if (__Pyx_setup_reduce((PyObject*)&__pyx_type_4core_10pool_array_10PoolArrays_PoolColorArray) < 0) __PYX_ERR(1, 52, __pyx_L1_error)
+  if (__Pyx_SetVtable(__pyx_type_4core_10pool_array_10PoolArrays_PoolColorArray.tp_dict, __pyx_vtabptr_4core_10pool_array_10PoolArrays_PoolColorArray) < 0) __PYX_ERR(1, 49, __pyx_L1_error)
+  if (PyObject_SetAttr(__pyx_m, __pyx_n_s_PoolColorArray, (PyObject *)&__pyx_type_4core_10pool_array_10PoolArrays_PoolColorArray) < 0) __PYX_ERR(1, 49, __pyx_L1_error)
+  if (__Pyx_setup_reduce((PyObject*)&__pyx_type_4core_10pool_array_10PoolArrays_PoolColorArray) < 0) __PYX_ERR(1, 49, __pyx_L1_error)
   __pyx_ptype_4core_10pool_array_10PoolArrays_PoolColorArray = &__pyx_type_4core_10pool_array_10PoolArrays_PoolColorArray;
   __Pyx_RefNannyFinishContext();
   return 0;
@@ -6465,122 +6182,6 @@ static PyObject *__Pyx_GetBuiltinName(PyObject *name) {
     return result;
 }
 
-/* RaiseDoubleKeywords */
-static void __Pyx_RaiseDoubleKeywordsError(
-    const char* func_name,
-    PyObject* kw_name)
-{
-    PyErr_Format(PyExc_TypeError,
-        #if PY_MAJOR_VERSION >= 3
-        "%s() got multiple values for keyword argument '%U'", func_name, kw_name);
-        #else
-        "%s() got multiple values for keyword argument '%s'", func_name,
-        PyString_AsString(kw_name));
-        #endif
-}
-
-/* ParseKeywords */
-static int __Pyx_ParseOptionalKeywords(
-    PyObject *kwds,
-    PyObject **argnames[],
-    PyObject *kwds2,
-    PyObject *values[],
-    Py_ssize_t num_pos_args,
-    const char* function_name)
-{
-    PyObject *key = 0, *value = 0;
-    Py_ssize_t pos = 0;
-    PyObject*** name;
-    PyObject*** first_kw_arg = argnames + num_pos_args;
-    while (PyDict_Next(kwds, &pos, &key, &value)) {
-        name = first_kw_arg;
-        while (*name && (**name != key)) name++;
-        if (*name) {
-            values[name-argnames] = value;
-            continue;
-        }
-        name = first_kw_arg;
-        #if PY_MAJOR_VERSION < 3
-        if (likely(PyString_Check(key))) {
-            while (*name) {
-                if ((CYTHON_COMPILING_IN_PYPY || PyString_GET_SIZE(**name) == PyString_GET_SIZE(key))
-                        && _PyString_Eq(**name, key)) {
-                    values[name-argnames] = value;
-                    break;
-                }
-                name++;
-            }
-            if (*name) continue;
-            else {
-                PyObject*** argname = argnames;
-                while (argname != first_kw_arg) {
-                    if ((**argname == key) || (
-                            (CYTHON_COMPILING_IN_PYPY || PyString_GET_SIZE(**argname) == PyString_GET_SIZE(key))
-                             && _PyString_Eq(**argname, key))) {
-                        goto arg_passed_twice;
-                    }
-                    argname++;
-                }
-            }
-        } else
-        #endif
-        if (likely(PyUnicode_Check(key))) {
-            while (*name) {
-                int cmp = (**name == key) ? 0 :
-                #if !CYTHON_COMPILING_IN_PYPY && PY_MAJOR_VERSION >= 3
-                    (__Pyx_PyUnicode_GET_LENGTH(**name) != __Pyx_PyUnicode_GET_LENGTH(key)) ? 1 :
-                #endif
-                    PyUnicode_Compare(**name, key);
-                if (cmp < 0 && unlikely(PyErr_Occurred())) goto bad;
-                if (cmp == 0) {
-                    values[name-argnames] = value;
-                    break;
-                }
-                name++;
-            }
-            if (*name) continue;
-            else {
-                PyObject*** argname = argnames;
-                while (argname != first_kw_arg) {
-                    int cmp = (**argname == key) ? 0 :
-                    #if !CYTHON_COMPILING_IN_PYPY && PY_MAJOR_VERSION >= 3
-                        (__Pyx_PyUnicode_GET_LENGTH(**argname) != __Pyx_PyUnicode_GET_LENGTH(key)) ? 1 :
-                    #endif
-                        PyUnicode_Compare(**argname, key);
-                    if (cmp < 0 && unlikely(PyErr_Occurred())) goto bad;
-                    if (cmp == 0) goto arg_passed_twice;
-                    argname++;
-                }
-            }
-        } else
-            goto invalid_keyword_type;
-        if (kwds2) {
-            if (unlikely(PyDict_SetItem(kwds2, key, value))) goto bad;
-        } else {
-            goto invalid_keyword;
-        }
-    }
-    return 0;
-arg_passed_twice:
-    __Pyx_RaiseDoubleKeywordsError(function_name, key);
-    goto bad;
-invalid_keyword_type:
-    PyErr_Format(PyExc_TypeError,
-        "%.200s() keywords must be strings", function_name);
-    goto bad;
-invalid_keyword:
-    PyErr_Format(PyExc_TypeError,
-    #if PY_MAJOR_VERSION < 3
-        "%.200s() got an unexpected keyword argument '%.200s'",
-        function_name, PyString_AsString(key));
-    #else
-        "%s() got an unexpected keyword argument '%U'",
-        function_name, key);
-    #endif
-bad:
-    return -1;
-}
-
 /* RaiseArgTupleInvalid */
 static void __Pyx_RaiseArgtupleInvalid(
     const char* func_name,
@@ -6605,6 +6206,46 @@ static void __Pyx_RaiseArgtupleInvalid(
                  "%.200s() takes %.8s %" CYTHON_FORMAT_SSIZE_T "d positional argument%.1s (%" CYTHON_FORMAT_SSIZE_T "d given)",
                  func_name, more_or_less, num_expected,
                  (num_expected == 1) ? "" : "s", num_found);
+}
+
+/* KeywordStringCheck */
+static int __Pyx_CheckKeywordStrings(
+    PyObject *kwdict,
+    const char* function_name,
+    int kw_allowed)
+{
+    PyObject* key = 0;
+    Py_ssize_t pos = 0;
+#if CYTHON_COMPILING_IN_PYPY
+    if (!kw_allowed && PyDict_Next(kwdict, &pos, &key, 0))
+        goto invalid_keyword;
+    return 1;
+#else
+    while (PyDict_Next(kwdict, &pos, &key, 0)) {
+        #if PY_MAJOR_VERSION < 3
+        if (unlikely(!PyString_Check(key)))
+        #endif
+            if (unlikely(!PyUnicode_Check(key)))
+                goto invalid_keyword_type;
+    }
+    if ((!kw_allowed) && unlikely(key))
+        goto invalid_keyword;
+    return 1;
+invalid_keyword_type:
+    PyErr_Format(PyExc_TypeError,
+        "%.200s() keywords must be strings", function_name);
+    return 0;
+#endif
+invalid_keyword:
+    PyErr_Format(PyExc_TypeError,
+    #if PY_MAJOR_VERSION < 3
+        "%.200s() got an unexpected keyword argument '%.200s'",
+        function_name, PyString_AsString(key));
+    #else
+        "%s() got an unexpected keyword argument '%U'",
+        function_name, key);
+    #endif
+    return 0;
 }
 
 /* PyObjectCall */
@@ -6809,6 +6450,122 @@ bad:
     return;
 }
 #endif
+
+/* RaiseDoubleKeywords */
+static void __Pyx_RaiseDoubleKeywordsError(
+    const char* func_name,
+    PyObject* kw_name)
+{
+    PyErr_Format(PyExc_TypeError,
+        #if PY_MAJOR_VERSION >= 3
+        "%s() got multiple values for keyword argument '%U'", func_name, kw_name);
+        #else
+        "%s() got multiple values for keyword argument '%s'", func_name,
+        PyString_AsString(kw_name));
+        #endif
+}
+
+/* ParseKeywords */
+static int __Pyx_ParseOptionalKeywords(
+    PyObject *kwds,
+    PyObject **argnames[],
+    PyObject *kwds2,
+    PyObject *values[],
+    Py_ssize_t num_pos_args,
+    const char* function_name)
+{
+    PyObject *key = 0, *value = 0;
+    Py_ssize_t pos = 0;
+    PyObject*** name;
+    PyObject*** first_kw_arg = argnames + num_pos_args;
+    while (PyDict_Next(kwds, &pos, &key, &value)) {
+        name = first_kw_arg;
+        while (*name && (**name != key)) name++;
+        if (*name) {
+            values[name-argnames] = value;
+            continue;
+        }
+        name = first_kw_arg;
+        #if PY_MAJOR_VERSION < 3
+        if (likely(PyString_Check(key))) {
+            while (*name) {
+                if ((CYTHON_COMPILING_IN_PYPY || PyString_GET_SIZE(**name) == PyString_GET_SIZE(key))
+                        && _PyString_Eq(**name, key)) {
+                    values[name-argnames] = value;
+                    break;
+                }
+                name++;
+            }
+            if (*name) continue;
+            else {
+                PyObject*** argname = argnames;
+                while (argname != first_kw_arg) {
+                    if ((**argname == key) || (
+                            (CYTHON_COMPILING_IN_PYPY || PyString_GET_SIZE(**argname) == PyString_GET_SIZE(key))
+                             && _PyString_Eq(**argname, key))) {
+                        goto arg_passed_twice;
+                    }
+                    argname++;
+                }
+            }
+        } else
+        #endif
+        if (likely(PyUnicode_Check(key))) {
+            while (*name) {
+                int cmp = (**name == key) ? 0 :
+                #if !CYTHON_COMPILING_IN_PYPY && PY_MAJOR_VERSION >= 3
+                    (__Pyx_PyUnicode_GET_LENGTH(**name) != __Pyx_PyUnicode_GET_LENGTH(key)) ? 1 :
+                #endif
+                    PyUnicode_Compare(**name, key);
+                if (cmp < 0 && unlikely(PyErr_Occurred())) goto bad;
+                if (cmp == 0) {
+                    values[name-argnames] = value;
+                    break;
+                }
+                name++;
+            }
+            if (*name) continue;
+            else {
+                PyObject*** argname = argnames;
+                while (argname != first_kw_arg) {
+                    int cmp = (**argname == key) ? 0 :
+                    #if !CYTHON_COMPILING_IN_PYPY && PY_MAJOR_VERSION >= 3
+                        (__Pyx_PyUnicode_GET_LENGTH(**argname) != __Pyx_PyUnicode_GET_LENGTH(key)) ? 1 :
+                    #endif
+                        PyUnicode_Compare(**argname, key);
+                    if (cmp < 0 && unlikely(PyErr_Occurred())) goto bad;
+                    if (cmp == 0) goto arg_passed_twice;
+                    argname++;
+                }
+            }
+        } else
+            goto invalid_keyword_type;
+        if (kwds2) {
+            if (unlikely(PyDict_SetItem(kwds2, key, value))) goto bad;
+        } else {
+            goto invalid_keyword;
+        }
+    }
+    return 0;
+arg_passed_twice:
+    __Pyx_RaiseDoubleKeywordsError(function_name, key);
+    goto bad;
+invalid_keyword_type:
+    PyErr_Format(PyExc_TypeError,
+        "%.200s() keywords must be strings", function_name);
+    goto bad;
+invalid_keyword:
+    PyErr_Format(PyExc_TypeError,
+    #if PY_MAJOR_VERSION < 3
+        "%.200s() got an unexpected keyword argument '%.200s'",
+        function_name, PyString_AsString(key));
+    #else
+        "%s() got an unexpected keyword argument '%U'",
+        function_name, key);
+    #endif
+bad:
+    return -1;
+}
 
 /* GetTopmostException */
 #if CYTHON_USE_EXC_INFO_STACK
@@ -7418,19 +7175,6 @@ bad:
         return (target_type) value;\
     }
 
-static PyObject* __pyx_convert__to_py_godot_pool_byte_array(godot_pool_byte_array s) {
-  PyObject* res;
-  PyObject* member;
-  res = __Pyx_PyDict_NewPresized(1); if (unlikely(!res)) return NULL;
-  member = __Pyx_PyObject_FromCString(s._dont_touch_that); if (unlikely(!member)) goto bad;
-  if (unlikely(PyDict_SetItem(res, __pyx_n_s_dont_touch_that, member) < 0)) goto bad;
-  Py_DECREF(member);
-  return res;
-  bad:
-  Py_XDECREF(member);
-  Py_DECREF(res);
-  return NULL;
-}
 static PyObject* __pyx_convert__to_py_godot_pool_real_array(godot_pool_real_array s) {
   PyObject* res;
   PyObject* member;

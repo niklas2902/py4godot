@@ -1,13 +1,10 @@
+from core.string.String cimport *
 from core.node_path.node_path_binding cimport *
 
 cdef class NodePath:
 
-    def __init__(self, godot_node_path _native):
-        if (_native != None):
-            self._native = _native
-        else:
-            pass
-            #api_core.godot_node_path_new(&self._native)
+    def __init__(self, String path):
+        api_core.godot_node_path_new(&self._native, &path._native)
 
     def new_copy(self, NodePath src):
         pass

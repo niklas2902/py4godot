@@ -3,11 +3,7 @@ from core.vector2.vector2_binding cimport *
 cdef class Vector2:
 
     def __init__(self, godot_real x = 0, godot_real y = 0):
-        print("start")
-        show_api()
-        #api_core.godot_vector2_new(&self._native, x, y)
-        Vector2.new_static(self._native)
-        print("end")
+        api_core.godot_vector2_new(&self._native, x, y)
 
     def __str__(self):
         return api_core.godot_vector2_as_string(&self._native)

@@ -2,12 +2,8 @@ from core.color.Color cimport *
 
 cdef class Color:
 
-    def __init__(self, godot_color _native):
-        if (_native != None):
-            self._native = _native
-        else:
-            pass
-#            api_core.godot_color_new(&self._native)
+    def __init__(self, godot_real red, godot_real green, godot_real blue, godot_real alpha = 255):
+        api_core.godot_color_new_rgba(&self._native, red, green,blue, alpha)
 
     def new_rgba(self, godot_real red, godot_real green, godot_real blue, godot_real alpha):
         api_core.godot_color_new_rgba(&self._native, red, green, blue, alpha)

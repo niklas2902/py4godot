@@ -24,3 +24,6 @@ cdef extern from "binding.h":
         godot_variant *(*godot_dictionary_next)(const godot_dictionary *p_self, const godot_variant *p_key);
         godot_bool (*godot_dictionary_operator_equal)(const godot_dictionary *p_self, const godot_dictionary *p_b);
         godot_string (*godot_dictionary_to_json)(const godot_dictionary *p_self);
+
+        void (*godot_print)(const godot_string *p_message);
+        godot_string (*godot_string_num)(double p_num);
