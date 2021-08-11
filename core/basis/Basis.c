@@ -624,6 +624,8 @@ static CYTHON_INLINE float __PYX_NAN() {
 #define __PYX_HAVE_API__core__basis__Basis
 /* Early includes */
 #include <stddef.h>
+#include <string.h>
+#include <stdio.h>
 #include "binding.h"
 #ifdef _OPENMP
 #include <omp.h>
@@ -837,14 +839,15 @@ static const char *__pyx_f[] = {
   "core\\basis\\Basis.pyx",
   "core\\basis\\Basis.pxd",
   "core\\vector3\\Vector3.pxd",
-  "core\\quat\\Quat.pxd",
   "core\\string\\String.pxd",
+  "core\\quat\\Quat.pxd",
+  "type.pxd",
 };
 
 /*--- Type declarations ---*/
 struct __pyx_obj_4core_7vector3_7Vector3_Vector3;
-struct __pyx_obj_4core_4quat_4Quat_Quat;
 struct __pyx_obj_4core_6string_6String_String;
+struct __pyx_obj_4core_4quat_4Quat_Quat;
 struct __pyx_obj_4core_5basis_5Basis_Basis;
 
 /* "core/vector3/Vector3.pxd":15
@@ -875,20 +878,6 @@ struct __pyx_obj_4core_7vector3_7Vector3_Vector3 {
 };
 
 
-/* "core/quat/Quat.pxd":3
- * from core.quat.quat_binding cimport *
- * 
- * cdef class Quat:             # <<<<<<<<<<<<<<
- *     cdef godot_quat _native
- * 
- */
-struct __pyx_obj_4core_4quat_4Quat_Quat {
-  PyObject_HEAD
-  struct __pyx_vtabstruct_4core_4quat_4Quat_Quat *__pyx_vtab;
-  godot_quat _native;
-};
-
-
 /* "core/string/String.pxd":3
  * from core.string.string_binding cimport *
  * 
@@ -900,6 +889,20 @@ struct __pyx_obj_4core_6string_6String_String {
   PyObject_HEAD
   struct __pyx_vtabstruct_4core_6string_6String_String *__pyx_vtab;
   godot_string _native;
+};
+
+
+/* "core/quat/Quat.pxd":3
+ * from core.quat.quat_binding cimport *
+ * 
+ * cdef class Quat:             # <<<<<<<<<<<<<<
+ *     cdef godot_quat _native
+ * 
+ */
+struct __pyx_obj_4core_4quat_4Quat_Quat {
+  PyObject_HEAD
+  struct __pyx_vtabstruct_4core_4quat_4Quat_Quat *__pyx_vtab;
+  godot_quat _native;
 };
 
 
@@ -935,23 +938,6 @@ static CYTHON_INLINE void __pyx_f_4core_7vector3_7Vector3_7Vector3_set_native(st
 static CYTHON_INLINE void __pyx_f_4core_7vector3_7Vector3_7Vector3_new_static(godot_vector3);
 
 
-/* "core/quat/Quat.pxd":3
- * from core.quat.quat_binding cimport *
- * 
- * cdef class Quat:             # <<<<<<<<<<<<<<
- *     cdef godot_quat _native
- * 
- */
-
-struct __pyx_vtabstruct_4core_4quat_4Quat_Quat {
-  void (*set_native)(struct __pyx_obj_4core_4quat_4Quat_Quat *, godot_quat);
-  void (*new_static)(godot_quat);
-};
-static struct __pyx_vtabstruct_4core_4quat_4Quat_Quat *__pyx_vtabptr_4core_4quat_4Quat_Quat;
-static CYTHON_INLINE void __pyx_f_4core_4quat_4Quat_4Quat_set_native(struct __pyx_obj_4core_4quat_4Quat_Quat *, godot_quat);
-static CYTHON_INLINE void __pyx_f_4core_4quat_4Quat_4Quat_new_static(godot_quat);
-
-
 /* "core/string/String.pxd":3
  * from core.string.string_binding cimport *
  * 
@@ -967,6 +953,23 @@ struct __pyx_vtabstruct_4core_6string_6String_String {
 static struct __pyx_vtabstruct_4core_6string_6String_String *__pyx_vtabptr_4core_6string_6String_String;
 static CYTHON_INLINE void __pyx_f_4core_6string_6String_6String_set_native(struct __pyx_obj_4core_6string_6String_String *, godot_string);
 static CYTHON_INLINE void __pyx_f_4core_6string_6String_6String_new_static(godot_string);
+
+
+/* "core/quat/Quat.pxd":3
+ * from core.quat.quat_binding cimport *
+ * 
+ * cdef class Quat:             # <<<<<<<<<<<<<<
+ *     cdef godot_quat _native
+ * 
+ */
+
+struct __pyx_vtabstruct_4core_4quat_4Quat_Quat {
+  void (*set_native)(struct __pyx_obj_4core_4quat_4Quat_Quat *, godot_quat);
+  void (*new_static)(godot_quat);
+};
+static struct __pyx_vtabstruct_4core_4quat_4Quat_Quat *__pyx_vtabptr_4core_4quat_4Quat_Quat;
+static CYTHON_INLINE void __pyx_f_4core_4quat_4Quat_4Quat_set_native(struct __pyx_obj_4core_4quat_4Quat_Quat *, godot_quat);
+static CYTHON_INLINE void __pyx_f_4core_4quat_4Quat_4Quat_new_static(godot_quat);
 
 
 /* "core/basis/Basis.pyx":7
@@ -1315,14 +1318,29 @@ static CYTHON_INLINE void __pyx_f_4core_5basis_5Basis_5Basis_set_native(struct _
 static CYTHON_INLINE void __pyx_f_4core_5basis_5Basis_5Basis_new_static(godot_basis __pyx_v__native); /* proto*/
 static CYTHON_INLINE void __pyx_f_4core_7vector3_7Vector3_7Vector3_set_native(struct __pyx_obj_4core_7vector3_7Vector3_Vector3 *__pyx_v_self, godot_vector3 __pyx_v__native); /* proto*/
 static CYTHON_INLINE void __pyx_f_4core_7vector3_7Vector3_7Vector3_new_static(godot_vector3 __pyx_v__native); /* proto*/
-static CYTHON_INLINE void __pyx_f_4core_4quat_4Quat_4Quat_set_native(struct __pyx_obj_4core_4quat_4Quat_Quat *__pyx_v_self, godot_quat __pyx_v__native); /* proto*/
-static CYTHON_INLINE void __pyx_f_4core_4quat_4Quat_4Quat_new_static(godot_quat __pyx_v__native); /* proto*/
 static CYTHON_INLINE void __pyx_f_4core_6string_6String_6String_set_native(struct __pyx_obj_4core_6string_6String_String *__pyx_v_self, godot_string __pyx_v__native); /* proto*/
 static CYTHON_INLINE void __pyx_f_4core_6string_6String_6String_new_static(godot_string __pyx_v__native); /* proto*/
+static CYTHON_INLINE void __pyx_f_4core_4quat_4Quat_4Quat_set_native(struct __pyx_obj_4core_4quat_4Quat_Quat *__pyx_v_self, godot_quat __pyx_v__native); /* proto*/
+static CYTHON_INLINE void __pyx_f_4core_4quat_4Quat_4Quat_new_static(godot_quat __pyx_v__native); /* proto*/
 
 /* Module declarations from 'libcpp' */
 
 /* Module declarations from 'libc.stddef' */
+
+/* Module declarations from 'libc.string' */
+
+/* Module declarations from 'libc.stdio' */
+
+/* Module declarations from '__builtin__' */
+
+/* Module declarations from 'cpython.type' */
+static PyTypeObject *__pyx_ptype_7cpython_4type_type = 0;
+
+/* Module declarations from 'cpython' */
+
+/* Module declarations from 'cpython.object' */
+
+/* Module declarations from 'cpython.ref' */
 
 /* Module declarations from 'godot_api.binding' */
 
@@ -1335,15 +1353,15 @@ static CYTHON_INLINE void __pyx_f_4core_6string_6String_6String_new_static(godot
 /* Module declarations from 'core.vector3.Vector3' */
 static PyTypeObject *__pyx_ptype_4core_7vector3_7Vector3_Vector3 = 0;
 
-/* Module declarations from 'core.quat.quat_binding' */
-
-/* Module declarations from 'core.quat.Quat' */
-static PyTypeObject *__pyx_ptype_4core_4quat_4Quat_Quat = 0;
-
 /* Module declarations from 'core.string.string_binding' */
 
 /* Module declarations from 'core.string.String' */
 static PyTypeObject *__pyx_ptype_4core_6string_6String_String = 0;
+
+/* Module declarations from 'core.quat.quat_binding' */
+
+/* Module declarations from 'core.quat.Quat' */
+static PyTypeObject *__pyx_ptype_4core_4quat_4Quat_Quat = 0;
 
 /* Module declarations from 'core.basis.Basis' */
 static PyTypeObject *__pyx_ptype_4core_5basis_5Basis_Basis = 0;
@@ -4004,93 +4022,6 @@ static CYTHON_INLINE void __pyx_f_4core_7vector3_7Vector3_7Vector3_new_static(go
   __Pyx_RefNannyFinishContext();
 }
 
-/* "core/quat/Quat.pxd":6
- *     cdef godot_quat _native
- * 
- *     cdef inline void set_native(self, godot_quat _native):             # <<<<<<<<<<<<<<
- *         self._native = _native
- * 
- */
-
-static CYTHON_INLINE void __pyx_f_4core_4quat_4Quat_4Quat_set_native(struct __pyx_obj_4core_4quat_4Quat_Quat *__pyx_v_self, godot_quat __pyx_v__native) {
-  __Pyx_RefNannyDeclarations
-  __Pyx_RefNannySetupContext("set_native", 0);
-
-  /* "core/quat/Quat.pxd":7
- * 
- *     cdef inline void set_native(self, godot_quat _native):
- *         self._native = _native             # <<<<<<<<<<<<<<
- * 
- *     @staticmethod
- */
-  __pyx_v_self->_native = __pyx_v__native;
-
-  /* "core/quat/Quat.pxd":6
- *     cdef godot_quat _native
- * 
- *     cdef inline void set_native(self, godot_quat _native):             # <<<<<<<<<<<<<<
- *         self._native = _native
- * 
- */
-
-  /* function exit code */
-  __Pyx_RefNannyFinishContext();
-}
-
-/* "core/quat/Quat.pxd":10
- * 
- *     @staticmethod
- *     cdef inline void new_static(godot_quat _native):             # <<<<<<<<<<<<<<
- *         cdef Quat o = Quat.__new__(Quat)
- *         o.set_native(_native)
- */
-
-static CYTHON_INLINE void __pyx_f_4core_4quat_4Quat_4Quat_new_static(godot_quat __pyx_v__native) {
-  struct __pyx_obj_4core_4quat_4Quat_Quat *__pyx_v_o = 0;
-  __Pyx_RefNannyDeclarations
-  PyObject *__pyx_t_1 = NULL;
-  int __pyx_lineno = 0;
-  const char *__pyx_filename = NULL;
-  int __pyx_clineno = 0;
-  __Pyx_RefNannySetupContext("new_static", 0);
-
-  /* "core/quat/Quat.pxd":11
- *     @staticmethod
- *     cdef inline void new_static(godot_quat _native):
- *         cdef Quat o = Quat.__new__(Quat)             # <<<<<<<<<<<<<<
- *         o.set_native(_native)
- */
-  __pyx_t_1 = __Pyx_tp_new(((PyObject *)__pyx_ptype_4core_4quat_4Quat_Quat), __pyx_empty_tuple); if (unlikely(!__pyx_t_1)) __PYX_ERR(4, 11, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_1);
-  if (!(likely(__Pyx_TypeTest(__pyx_t_1, __pyx_ptype_4core_4quat_4Quat_Quat)))) __PYX_ERR(4, 11, __pyx_L1_error)
-  __pyx_v_o = ((struct __pyx_obj_4core_4quat_4Quat_Quat *)__pyx_t_1);
-  __pyx_t_1 = 0;
-
-  /* "core/quat/Quat.pxd":12
- *     cdef inline void new_static(godot_quat _native):
- *         cdef Quat o = Quat.__new__(Quat)
- *         o.set_native(_native)             # <<<<<<<<<<<<<<
- */
-  __pyx_f_4core_4quat_4Quat_4Quat_set_native(__pyx_v_o, __pyx_v__native);
-
-  /* "core/quat/Quat.pxd":10
- * 
- *     @staticmethod
- *     cdef inline void new_static(godot_quat _native):             # <<<<<<<<<<<<<<
- *         cdef Quat o = Quat.__new__(Quat)
- *         o.set_native(_native)
- */
-
-  /* function exit code */
-  goto __pyx_L0;
-  __pyx_L1_error:;
-  __Pyx_XDECREF(__pyx_t_1);
-  __Pyx_WriteUnraisable("core.quat.Quat.Quat.new_static", __pyx_clineno, __pyx_lineno, __pyx_filename, 1, 0);
-  __pyx_L0:;
-  __Pyx_XDECREF((PyObject *)__pyx_v_o);
-  __Pyx_RefNannyFinishContext();
-}
-
 /* "core/string/String.pxd":6
  *     cdef godot_string _native
  * 
@@ -4147,9 +4078,9 @@ static CYTHON_INLINE void __pyx_f_4core_6string_6String_6String_new_static(godot
  *         cdef String v = String.__new__(String)             # <<<<<<<<<<<<<<
  *         v.set_native(_native)
  */
-  __pyx_t_1 = __Pyx_tp_new(((PyObject *)__pyx_ptype_4core_6string_6String_String), __pyx_empty_tuple); if (unlikely(!__pyx_t_1)) __PYX_ERR(5, 11, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_tp_new(((PyObject *)__pyx_ptype_4core_6string_6String_String), __pyx_empty_tuple); if (unlikely(!__pyx_t_1)) __PYX_ERR(4, 11, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  if (!(likely(__Pyx_TypeTest(__pyx_t_1, __pyx_ptype_4core_6string_6String_String)))) __PYX_ERR(5, 11, __pyx_L1_error)
+  if (!(likely(__Pyx_TypeTest(__pyx_t_1, __pyx_ptype_4core_6string_6String_String)))) __PYX_ERR(4, 11, __pyx_L1_error)
   __pyx_v_v = ((struct __pyx_obj_4core_6string_6String_String *)__pyx_t_1);
   __pyx_t_1 = 0;
 
@@ -4175,6 +4106,93 @@ static CYTHON_INLINE void __pyx_f_4core_6string_6String_6String_new_static(godot
   __Pyx_WriteUnraisable("core.string.String.String.new_static", __pyx_clineno, __pyx_lineno, __pyx_filename, 1, 0);
   __pyx_L0:;
   __Pyx_XDECREF((PyObject *)__pyx_v_v);
+  __Pyx_RefNannyFinishContext();
+}
+
+/* "core/quat/Quat.pxd":6
+ *     cdef godot_quat _native
+ * 
+ *     cdef inline void set_native(self, godot_quat _native):             # <<<<<<<<<<<<<<
+ *         self._native = _native
+ * 
+ */
+
+static CYTHON_INLINE void __pyx_f_4core_4quat_4Quat_4Quat_set_native(struct __pyx_obj_4core_4quat_4Quat_Quat *__pyx_v_self, godot_quat __pyx_v__native) {
+  __Pyx_RefNannyDeclarations
+  __Pyx_RefNannySetupContext("set_native", 0);
+
+  /* "core/quat/Quat.pxd":7
+ * 
+ *     cdef inline void set_native(self, godot_quat _native):
+ *         self._native = _native             # <<<<<<<<<<<<<<
+ * 
+ *     @staticmethod
+ */
+  __pyx_v_self->_native = __pyx_v__native;
+
+  /* "core/quat/Quat.pxd":6
+ *     cdef godot_quat _native
+ * 
+ *     cdef inline void set_native(self, godot_quat _native):             # <<<<<<<<<<<<<<
+ *         self._native = _native
+ * 
+ */
+
+  /* function exit code */
+  __Pyx_RefNannyFinishContext();
+}
+
+/* "core/quat/Quat.pxd":10
+ * 
+ *     @staticmethod
+ *     cdef inline void new_static(godot_quat _native):             # <<<<<<<<<<<<<<
+ *         cdef Quat o = Quat.__new__(Quat)
+ *         o.set_native(_native)
+ */
+
+static CYTHON_INLINE void __pyx_f_4core_4quat_4Quat_4Quat_new_static(godot_quat __pyx_v__native) {
+  struct __pyx_obj_4core_4quat_4Quat_Quat *__pyx_v_o = 0;
+  __Pyx_RefNannyDeclarations
+  PyObject *__pyx_t_1 = NULL;
+  int __pyx_lineno = 0;
+  const char *__pyx_filename = NULL;
+  int __pyx_clineno = 0;
+  __Pyx_RefNannySetupContext("new_static", 0);
+
+  /* "core/quat/Quat.pxd":11
+ *     @staticmethod
+ *     cdef inline void new_static(godot_quat _native):
+ *         cdef Quat o = Quat.__new__(Quat)             # <<<<<<<<<<<<<<
+ *         o.set_native(_native)
+ */
+  __pyx_t_1 = __Pyx_tp_new(((PyObject *)__pyx_ptype_4core_4quat_4Quat_Quat), __pyx_empty_tuple); if (unlikely(!__pyx_t_1)) __PYX_ERR(5, 11, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  if (!(likely(__Pyx_TypeTest(__pyx_t_1, __pyx_ptype_4core_4quat_4Quat_Quat)))) __PYX_ERR(5, 11, __pyx_L1_error)
+  __pyx_v_o = ((struct __pyx_obj_4core_4quat_4Quat_Quat *)__pyx_t_1);
+  __pyx_t_1 = 0;
+
+  /* "core/quat/Quat.pxd":12
+ *     cdef inline void new_static(godot_quat _native):
+ *         cdef Quat o = Quat.__new__(Quat)
+ *         o.set_native(_native)             # <<<<<<<<<<<<<<
+ */
+  __pyx_f_4core_4quat_4Quat_4Quat_set_native(__pyx_v_o, __pyx_v__native);
+
+  /* "core/quat/Quat.pxd":10
+ * 
+ *     @staticmethod
+ *     cdef inline void new_static(godot_quat _native):             # <<<<<<<<<<<<<<
+ *         cdef Quat o = Quat.__new__(Quat)
+ *         o.set_native(_native)
+ */
+
+  /* function exit code */
+  goto __pyx_L0;
+  __pyx_L1_error:;
+  __Pyx_XDECREF(__pyx_t_1);
+  __Pyx_WriteUnraisable("core.quat.Quat.Quat.new_static", __pyx_clineno, __pyx_lineno, __pyx_filename, 1, 0);
+  __pyx_L0:;
+  __Pyx_XDECREF((PyObject *)__pyx_v_o);
   __Pyx_RefNannyFinishContext();
 }
 static struct __pyx_vtabstruct_4core_5basis_5Basis_Basis __pyx_vtable_4core_5basis_5Basis_Basis;
@@ -4511,23 +4529,34 @@ static int __Pyx_modinit_type_import_code(void) {
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__Pyx_modinit_type_import_code", 0);
   /*--- Type import code ---*/
+  __pyx_t_1 = PyImport_ImportModule(__Pyx_BUILTIN_MODULE_NAME); if (unlikely(!__pyx_t_1)) __PYX_ERR(6, 9, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __pyx_ptype_7cpython_4type_type = __Pyx_ImportType(__pyx_t_1, __Pyx_BUILTIN_MODULE_NAME, "type", 
+  #if defined(PYPY_VERSION_NUM) && PYPY_VERSION_NUM < 0x050B0000
+  sizeof(PyTypeObject),
+  #else
+  sizeof(PyHeapTypeObject),
+  #endif
+  __Pyx_ImportType_CheckSize_Warn);
+   if (!__pyx_ptype_7cpython_4type_type) __PYX_ERR(6, 9, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_t_1 = PyImport_ImportModule("core.vector3.Vector3"); if (unlikely(!__pyx_t_1)) __PYX_ERR(3, 3, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_ptype_4core_7vector3_7Vector3_Vector3 = __Pyx_ImportType(__pyx_t_1, "core.vector3.Vector3", "Vector3", sizeof(struct __pyx_obj_4core_7vector3_7Vector3_Vector3), __Pyx_ImportType_CheckSize_Warn);
    if (!__pyx_ptype_4core_7vector3_7Vector3_Vector3) __PYX_ERR(3, 3, __pyx_L1_error)
   __pyx_vtabptr_4core_7vector3_7Vector3_Vector3 = (struct __pyx_vtabstruct_4core_7vector3_7Vector3_Vector3*)__Pyx_GetVtable(__pyx_ptype_4core_7vector3_7Vector3_Vector3->tp_dict); if (unlikely(!__pyx_vtabptr_4core_7vector3_7Vector3_Vector3)) __PYX_ERR(3, 3, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_1 = PyImport_ImportModule("core.quat.Quat"); if (unlikely(!__pyx_t_1)) __PYX_ERR(4, 3, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_1);
-  __pyx_ptype_4core_4quat_4Quat_Quat = __Pyx_ImportType(__pyx_t_1, "core.quat.Quat", "Quat", sizeof(struct __pyx_obj_4core_4quat_4Quat_Quat), __Pyx_ImportType_CheckSize_Warn);
-   if (!__pyx_ptype_4core_4quat_4Quat_Quat) __PYX_ERR(4, 3, __pyx_L1_error)
-  __pyx_vtabptr_4core_4quat_4Quat_Quat = (struct __pyx_vtabstruct_4core_4quat_4Quat_Quat*)__Pyx_GetVtable(__pyx_ptype_4core_4quat_4Quat_Quat->tp_dict); if (unlikely(!__pyx_vtabptr_4core_4quat_4Quat_Quat)) __PYX_ERR(4, 3, __pyx_L1_error)
-  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_1 = PyImport_ImportModule("core.string.String"); if (unlikely(!__pyx_t_1)) __PYX_ERR(5, 3, __pyx_L1_error)
+  __pyx_t_1 = PyImport_ImportModule("core.string.String"); if (unlikely(!__pyx_t_1)) __PYX_ERR(4, 3, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_ptype_4core_6string_6String_String = __Pyx_ImportType(__pyx_t_1, "core.string.String", "String", sizeof(struct __pyx_obj_4core_6string_6String_String), __Pyx_ImportType_CheckSize_Warn);
-   if (!__pyx_ptype_4core_6string_6String_String) __PYX_ERR(5, 3, __pyx_L1_error)
-  __pyx_vtabptr_4core_6string_6String_String = (struct __pyx_vtabstruct_4core_6string_6String_String*)__Pyx_GetVtable(__pyx_ptype_4core_6string_6String_String->tp_dict); if (unlikely(!__pyx_vtabptr_4core_6string_6String_String)) __PYX_ERR(5, 3, __pyx_L1_error)
+   if (!__pyx_ptype_4core_6string_6String_String) __PYX_ERR(4, 3, __pyx_L1_error)
+  __pyx_vtabptr_4core_6string_6String_String = (struct __pyx_vtabstruct_4core_6string_6String_String*)__Pyx_GetVtable(__pyx_ptype_4core_6string_6String_String->tp_dict); if (unlikely(!__pyx_vtabptr_4core_6string_6String_String)) __PYX_ERR(4, 3, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+  __pyx_t_1 = PyImport_ImportModule("core.quat.Quat"); if (unlikely(!__pyx_t_1)) __PYX_ERR(5, 3, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __pyx_ptype_4core_4quat_4Quat_Quat = __Pyx_ImportType(__pyx_t_1, "core.quat.Quat", "Quat", sizeof(struct __pyx_obj_4core_4quat_4Quat_Quat), __Pyx_ImportType_CheckSize_Warn);
+   if (!__pyx_ptype_4core_4quat_4Quat_Quat) __PYX_ERR(5, 3, __pyx_L1_error)
+  __pyx_vtabptr_4core_4quat_4Quat_Quat = (struct __pyx_vtabstruct_4core_4quat_4Quat_Quat*)__Pyx_GetVtable(__pyx_ptype_4core_4quat_4Quat_Quat->tp_dict); if (unlikely(!__pyx_vtabptr_4core_4quat_4Quat_Quat)) __PYX_ERR(5, 3, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __Pyx_RefNannyFinishContext();
   return 0;
@@ -4757,20 +4786,20 @@ if (!__Pyx_RefNanny) {
 
   /* "core/basis/Basis.pyx":1
  * from core.vector3.Vector3 cimport *             # <<<<<<<<<<<<<<
+ * from core.string.String cimport *
  * from core.quat.Quat cimport *
- * from core.basis.basis_binding cimport *
  */
   __pyx_t_1 = __Pyx_PyDict_NewPresized(0); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 1, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   if (PyDict_SetItem(__pyx_d, __pyx_n_s_test, __pyx_t_1) < 0) __PYX_ERR(1, 1, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "core/string/String.pxd":10
+  /* "core/quat/Quat.pxd":10
  * 
  *     @staticmethod
- *     cdef inline void new_static(godot_string _native):             # <<<<<<<<<<<<<<
- *         cdef String v = String.__new__(String)
- *         v.set_native(_native)
+ *     cdef inline void new_static(godot_quat _native):             # <<<<<<<<<<<<<<
+ *         cdef Quat o = Quat.__new__(Quat)
+ *         o.set_native(_native)
  */
 
   /*--- Wrapped vars code ---*/

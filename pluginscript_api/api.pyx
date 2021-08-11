@@ -2,7 +2,10 @@ from godot_api.binding_external cimport *
 from cython.operator cimport dereference
 from libc.stddef cimport wchar_t
 from pluginscript_api.description_classes.MethodDescription import *
+from pluginscript_api.description_classes.PropertyDescription import *
 #from core.dictionary.Dictionary cimport set_api_core_dict
+from core.array.Array import *
+
 from pluginscript_api.utils.annotations import methods, classes, properties, reset
 cdef godot_dictionary dictionary
 cdef api set_api_core_pluginscript(const godot_gdnative_core_api_struct* core):
@@ -44,10 +47,16 @@ cdef api  godot_pluginscript_script_manifest init_pluginscript_desc (godot_plugi
     print("methods generated:", methods)
     print("properties generated:", properties)
     print("classes_found:", classes)
+
+    properties_array = Array()
+    for p in properties:
+        properties_array.append(Variant(p.to_dict()))
+        print("dict:",p.to_dict())
 #    PyUnicode_FromWideChar(c_string,-1)
-    for m in methods:
-        MethodDescription(m, None,None, 0, 0).to_dict()
+    #for m in methods:
+        #MethodDescription(m, None,None, 0, 0).to_dict()
     #Dictionary()
+    manifest.properties = properties_array.get_native()
 
     print("\n################################return_manifest########################################################\n");
     return manifest;

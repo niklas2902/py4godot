@@ -6,21 +6,13 @@ from libc.stdio cimport printf
 
 cdef api set_api_core_dict(godot_gdnative_core_api_struct * core):
     global api_core
-    print("set_api_core")
-    printf("%p\n", &api_core)
     api_core = core
-    print("end_api_core")
 
 
 cdef class Dictionary:
 
     def __init__(self):
-        print("start_api_core_dictionary")
-        printf("%p\n", &api_core)
-        #api_core.godot_string_num(1)
-        cdef godot_dictionary dictionary
-        api_core.godot_dictionary_new(&dictionary)
-        print("end_api_core")
+        api_core.godot_dictionary_new(&self._native)
 
     def new_copy(self, Dictionary src):
         api_core.godot_dictionary_new_copy(&self._native, &src._native)

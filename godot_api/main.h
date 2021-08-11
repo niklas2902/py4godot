@@ -3,6 +3,9 @@
 #include "../classes/classes_api.h"
 #include "../pluginscript_api/api_api.h"
 #include "../core/dictionary/Dictionary_api.h"
+#include "../core/variant/Variant_api.h"
+#include "../core/array/Array_api.h"
+#include "../core/string/String_api.h"
 #include <string.h>
 
 
@@ -222,8 +225,33 @@ void set_up_pluginscript(){
         PyErr_Print();
         return ;
     }
+    import_core__array__Array();
+    if (PyErr_Occurred())
+    {
+        PyErr_Print();
+        return ;
+    }
+
+    import_core__variant__Variant();
+    if (PyErr_Occurred())
+    {
+        PyErr_Print();
+        return ;
+    }
+
+    import_core__string__String();
+    if (PyErr_Occurred())
+    {
+        PyErr_Print();
+        return ;
+    }
+
     set_api_core_dict(api_core);
+    set_api_core_variant(api_core);
+    set_api_core_array(api_core);
+    set_api_core_string(api_core);
     set_api_core_pluginscript(api_core);
+
 
     desc.name = "Python";
     desc.type = "Python";

@@ -624,9 +624,9 @@ static CYTHON_INLINE float __PYX_NAN() {
 #define __PYX_HAVE_API__core__dictionary__Dictionary
 /* Early includes */
 #include <stddef.h>
-#include "binding.h"
 #include <string.h>
 #include <stdio.h>
+#include "binding.h"
 #ifdef _OPENMP
 #include <omp.h>
 #endif /* _OPENMP */
@@ -835,11 +835,12 @@ static const char *__pyx_filename;
 
 
 static const char *__pyx_f[] = {
-  "core\\dictionary\\Dictionary.pyx",
   "stringsource",
+  "core\\dictionary\\Dictionary.pyx",
   "core\\dictionary\\Dictionary.pxd",
   "core\\variant\\Variant.pxd",
   "core\\array\\Array.pxd",
+  "type.pxd",
 };
 
 /*--- Type declarations ---*/
@@ -1002,7 +1003,7 @@ static CYTHON_INLINE void __pyx_f_4core_5array_5Array_5Array_set_native(struct _
 static CYTHON_INLINE void __pyx_f_4core_5array_5Array_5Array_new_static(godot_array);
 
 
-/* "core/dictionary/Dictionary.pyx":15
+/* "core/dictionary/Dictionary.pyx":12
  * 
  * 
  * cdef class Dictionary:             # <<<<<<<<<<<<<<
@@ -1092,13 +1093,6 @@ static CYTHON_INLINE PyObject* __Pyx_PyObject_GetAttrStr(PyObject* obj, PyObject
 /* GetBuiltinName.proto */
 static PyObject *__Pyx_GetBuiltinName(PyObject *name);
 
-/* PyObjectCall.proto */
-#if CYTHON_COMPILING_IN_CPYTHON
-static CYTHON_INLINE PyObject* __Pyx_PyObject_Call(PyObject *func, PyObject *arg, PyObject *kw);
-#else
-#define __Pyx_PyObject_Call(func, arg, kw) PyObject_Call(func, arg, kw)
-#endif
-
 /* RaiseArgTupleInvalid.proto */
 static void __Pyx_RaiseArgtupleInvalid(const char* func_name, int exact,
     Py_ssize_t num_min, Py_ssize_t num_max, Py_ssize_t num_found);
@@ -1119,6 +1113,13 @@ static void __Pyx_RaiseDoubleKeywordsError(const char* func_name, PyObject* kw_n
 static int __Pyx_ParseOptionalKeywords(PyObject *kwds, PyObject **argnames[],\
     PyObject *kwds2, PyObject *values[], Py_ssize_t num_pos_args,\
     const char* function_name);
+
+/* PyObjectCall.proto */
+#if CYTHON_COMPILING_IN_CPYTHON
+static CYTHON_INLINE PyObject* __Pyx_PyObject_Call(PyObject *func, PyObject *arg, PyObject *kw);
+#else
+#define __Pyx_PyObject_Call(func, arg, kw) PyObject_Call(func, arg, kw)
+#endif
 
 /* PyThreadStateGet.proto */
 #if CYTHON_FAST_THREAD_STATE
@@ -1317,13 +1318,24 @@ static CYTHON_INLINE void __pyx_f_4core_5array_5Array_5Array_new_static(godot_ar
 
 /* Module declarations from 'libc.stddef' */
 
-/* Module declarations from 'godot_api.binding' */
-
-/* Module declarations from 'core.dictionary.dictionary_binding' */
-
 /* Module declarations from 'libc.string' */
 
 /* Module declarations from 'libc.stdio' */
+
+/* Module declarations from '__builtin__' */
+
+/* Module declarations from 'cpython.type' */
+static PyTypeObject *__pyx_ptype_7cpython_4type_type = 0;
+
+/* Module declarations from 'cpython' */
+
+/* Module declarations from 'cpython.object' */
+
+/* Module declarations from 'cpython.ref' */
+
+/* Module declarations from 'godot_api.binding' */
+
+/* Module declarations from 'core.dictionary.dictionary_binding' */
 
 /* Module declarations from 'core.variant.variant_binding' */
 
@@ -1343,8 +1355,8 @@ extern int __pyx_module_is_main_core__dictionary__Dictionary;
 int __pyx_module_is_main_core__dictionary__Dictionary = 0;
 
 /* Implementation of 'core.dictionary.Dictionary' */
-static PyObject *__pyx_builtin_print;
 static PyObject *__pyx_builtin_TypeError;
+static PyObject *__pyx_builtin_print;
 static const char __pyx_k_key[] = "key";
 static const char __pyx_k_main[] = "__main__";
 static const char __pyx_k_name[] = "__name__";
@@ -1359,20 +1371,16 @@ static const char __pyx_k_reduce_ex[] = "__reduce_ex__";
 static const char __pyx_k_Dictionary[] = "Dictionary";
 static const char __pyx_k_pyx_vtable[] = "__pyx_vtable__";
 static const char __pyx_k_new_variant[] = "new_variant";
-static const char __pyx_k_end_api_core[] = "end_api_core";
-static const char __pyx_k_set_api_core[] = "set_api_core";
 static const char __pyx_k_reduce_cython[] = "__reduce_cython__";
 static const char __pyx_k_dont_touch_that[] = "_dont_touch_that";
 static const char __pyx_k_setstate_cython[] = "__setstate_cython__";
 static const char __pyx_k_cline_in_traceback[] = "cline_in_traceback";
-static const char __pyx_k_start_api_core_dictionary[] = "start_api_core_dictionary";
 static const char __pyx_k_Pickling_of_struct_members_such[] = "Pickling of struct members such as self._native must be explicitly requested with @auto_pickle(True)";
 static PyObject *__pyx_n_s_Dictionary;
 static PyObject *__pyx_kp_s_Pickling_of_struct_members_such;
 static PyObject *__pyx_n_s_TypeError;
 static PyObject *__pyx_n_s_cline_in_traceback;
 static PyObject *__pyx_n_s_dont_touch_that;
-static PyObject *__pyx_n_u_end_api_core;
 static PyObject *__pyx_n_s_getstate;
 static PyObject *__pyx_n_s_key;
 static PyObject *__pyx_n_s_main;
@@ -1383,13 +1391,11 @@ static PyObject *__pyx_n_s_pyx_vtable;
 static PyObject *__pyx_n_s_reduce;
 static PyObject *__pyx_n_s_reduce_cython;
 static PyObject *__pyx_n_s_reduce_ex;
-static PyObject *__pyx_n_u_set_api_core;
 static PyObject *__pyx_n_s_setstate;
 static PyObject *__pyx_n_s_setstate_cython;
-static PyObject *__pyx_n_u_start_api_core_dictionary;
 static PyObject *__pyx_n_s_test;
 static PyObject *__pyx_n_s_value;
-static int __pyx_pf_4core_10dictionary_10Dictionary_10Dictionary___init__(CYTHON_UNUSED struct __pyx_obj_4core_10dictionary_10Dictionary_Dictionary *__pyx_v_self); /* proto */
+static int __pyx_pf_4core_10dictionary_10Dictionary_10Dictionary___init__(struct __pyx_obj_4core_10dictionary_10Dictionary_Dictionary *__pyx_v_self); /* proto */
 static PyObject *__pyx_pf_4core_10dictionary_10Dictionary_10Dictionary_2new_copy(struct __pyx_obj_4core_10dictionary_10Dictionary_Dictionary *__pyx_v_self, struct __pyx_obj_4core_10dictionary_10Dictionary_Dictionary *__pyx_v_src); /* proto */
 static PyObject *__pyx_pf_4core_10dictionary_10Dictionary_10Dictionary_4destroy(struct __pyx_obj_4core_10dictionary_10Dictionary_Dictionary *__pyx_v_self); /* proto */
 static PyObject *__pyx_pf_4core_10dictionary_10Dictionary_10Dictionary_6size(struct __pyx_obj_4core_10dictionary_10Dictionary_Dictionary *__pyx_v_self); /* proto */
@@ -1411,9 +1417,6 @@ static PyObject *__pyx_pf_4core_10dictionary_10Dictionary_10Dictionary_36__setst
 static PyObject *__pyx_tp_new_4core_10dictionary_10Dictionary_Dictionary(PyTypeObject *t, PyObject *a, PyObject *k); /*proto*/
 static PyObject *__pyx_tuple_;
 static PyObject *__pyx_tuple__2;
-static PyObject *__pyx_tuple__3;
-static PyObject *__pyx_tuple__4;
-static PyObject *__pyx_tuple__5;
 /* Late includes */
 
 /* "core/dictionary/Dictionary.pyx":7
@@ -1421,85 +1424,44 @@ static PyObject *__pyx_tuple__5;
  * 
  * cdef api set_api_core_dict(godot_gdnative_core_api_struct * core):             # <<<<<<<<<<<<<<
  *     global api_core
- *     print("set_api_core")
+ *     api_core = core
  */
 
 static PyObject *__pyx_f_4core_10dictionary_10Dictionary_set_api_core_dict(struct godot_gdnative_core_api_struct *__pyx_v_core) {
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
-  PyObject *__pyx_t_1 = NULL;
-  int __pyx_lineno = 0;
-  const char *__pyx_filename = NULL;
-  int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("set_api_core_dict", 0);
 
   /* "core/dictionary/Dictionary.pyx":9
  * cdef api set_api_core_dict(godot_gdnative_core_api_struct * core):
  *     global api_core
- *     print("set_api_core")             # <<<<<<<<<<<<<<
- *     printf("%p\n", &api_core)
- *     api_core = core
- */
-  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_print, __pyx_tuple_, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 9, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_1);
-  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-
-  /* "core/dictionary/Dictionary.pyx":10
- *     global api_core
- *     print("set_api_core")
- *     printf("%p\n", &api_core)             # <<<<<<<<<<<<<<
- *     api_core = core
- *     print("end_api_core")
- */
-  (void)(printf(((char const *)"%p\n"), (&api_core)));
-
-  /* "core/dictionary/Dictionary.pyx":11
- *     print("set_api_core")
- *     printf("%p\n", &api_core)
  *     api_core = core             # <<<<<<<<<<<<<<
- *     print("end_api_core")
+ * 
  * 
  */
   api_core = __pyx_v_core;
-
-  /* "core/dictionary/Dictionary.pyx":12
- *     printf("%p\n", &api_core)
- *     api_core = core
- *     print("end_api_core")             # <<<<<<<<<<<<<<
- * 
- * 
- */
-  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_print, __pyx_tuple__2, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 12, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_1);
-  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
   /* "core/dictionary/Dictionary.pyx":7
  * from libc.stdio cimport printf
  * 
  * cdef api set_api_core_dict(godot_gdnative_core_api_struct * core):             # <<<<<<<<<<<<<<
  *     global api_core
- *     print("set_api_core")
+ *     api_core = core
  */
 
   /* function exit code */
   __pyx_r = Py_None; __Pyx_INCREF(Py_None);
-  goto __pyx_L0;
-  __pyx_L1_error:;
-  __Pyx_XDECREF(__pyx_t_1);
-  __Pyx_AddTraceback("core.dictionary.Dictionary.set_api_core_dict", __pyx_clineno, __pyx_lineno, __pyx_filename);
-  __pyx_r = 0;
-  __pyx_L0:;
   __Pyx_XGIVEREF(__pyx_r);
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-/* "core/dictionary/Dictionary.pyx":17
+/* "core/dictionary/Dictionary.pyx":14
  * cdef class Dictionary:
  * 
  *     def __init__(self):             # <<<<<<<<<<<<<<
- *         print("start_api_core_dictionary")
- *         printf("%p\n", &api_core)
+ *         api_core.godot_dictionary_new(&self._native)
+ * 
  */
 
 /* Python wrapper */
@@ -1518,78 +1480,36 @@ static int __pyx_pw_4core_10dictionary_10Dictionary_10Dictionary_1__init__(PyObj
   return __pyx_r;
 }
 
-static int __pyx_pf_4core_10dictionary_10Dictionary_10Dictionary___init__(CYTHON_UNUSED struct __pyx_obj_4core_10dictionary_10Dictionary_Dictionary *__pyx_v_self) {
-  godot_dictionary __pyx_v_dictionary;
+static int __pyx_pf_4core_10dictionary_10Dictionary_10Dictionary___init__(struct __pyx_obj_4core_10dictionary_10Dictionary_Dictionary *__pyx_v_self) {
   int __pyx_r;
   __Pyx_RefNannyDeclarations
-  PyObject *__pyx_t_1 = NULL;
-  int __pyx_lineno = 0;
-  const char *__pyx_filename = NULL;
-  int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__init__", 0);
 
-  /* "core/dictionary/Dictionary.pyx":18
+  /* "core/dictionary/Dictionary.pyx":15
  * 
  *     def __init__(self):
- *         print("start_api_core_dictionary")             # <<<<<<<<<<<<<<
- *         printf("%p\n", &api_core)
- *         #api_core.godot_string_num(1)
- */
-  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_print, __pyx_tuple__3, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 18, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_1);
-  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-
-  /* "core/dictionary/Dictionary.pyx":19
- *     def __init__(self):
- *         print("start_api_core_dictionary")
- *         printf("%p\n", &api_core)             # <<<<<<<<<<<<<<
- *         #api_core.godot_string_num(1)
- *         cdef godot_dictionary dictionary
- */
-  (void)(printf(((char const *)"%p\n"), (&api_core)));
-
-  /* "core/dictionary/Dictionary.pyx":22
- *         #api_core.godot_string_num(1)
- *         cdef godot_dictionary dictionary
- *         api_core.godot_dictionary_new(&dictionary)             # <<<<<<<<<<<<<<
- *         print("end_api_core")
- * 
- */
-  api_core->godot_dictionary_new((&__pyx_v_dictionary));
-
-  /* "core/dictionary/Dictionary.pyx":23
- *         cdef godot_dictionary dictionary
- *         api_core.godot_dictionary_new(&dictionary)
- *         print("end_api_core")             # <<<<<<<<<<<<<<
+ *         api_core.godot_dictionary_new(&self._native)             # <<<<<<<<<<<<<<
  * 
  *     def new_copy(self, Dictionary src):
  */
-  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_print, __pyx_tuple__2, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 23, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_1);
-  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+  api_core->godot_dictionary_new((&__pyx_v_self->_native));
 
-  /* "core/dictionary/Dictionary.pyx":17
+  /* "core/dictionary/Dictionary.pyx":14
  * cdef class Dictionary:
  * 
  *     def __init__(self):             # <<<<<<<<<<<<<<
- *         print("start_api_core_dictionary")
- *         printf("%p\n", &api_core)
+ *         api_core.godot_dictionary_new(&self._native)
+ * 
  */
 
   /* function exit code */
   __pyx_r = 0;
-  goto __pyx_L0;
-  __pyx_L1_error:;
-  __Pyx_XDECREF(__pyx_t_1);
-  __Pyx_AddTraceback("core.dictionary.Dictionary.Dictionary.__init__", __pyx_clineno, __pyx_lineno, __pyx_filename);
-  __pyx_r = -1;
-  __pyx_L0:;
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-/* "core/dictionary/Dictionary.pyx":25
- *         print("end_api_core")
+/* "core/dictionary/Dictionary.pyx":17
+ *         api_core.godot_dictionary_new(&self._native)
  * 
  *     def new_copy(self, Dictionary src):             # <<<<<<<<<<<<<<
  *         api_core.godot_dictionary_new_copy(&self._native, &src._native)
@@ -1605,7 +1525,7 @@ static PyObject *__pyx_pw_4core_10dictionary_10Dictionary_10Dictionary_3new_copy
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("new_copy (wrapper)", 0);
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_src), __pyx_ptype_4core_10dictionary_10Dictionary_Dictionary, 1, "src", 0))) __PYX_ERR(0, 25, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_src), __pyx_ptype_4core_10dictionary_10Dictionary_Dictionary, 1, "src", 0))) __PYX_ERR(1, 17, __pyx_L1_error)
   __pyx_r = __pyx_pf_4core_10dictionary_10Dictionary_10Dictionary_2new_copy(((struct __pyx_obj_4core_10dictionary_10Dictionary_Dictionary *)__pyx_v_self), ((struct __pyx_obj_4core_10dictionary_10Dictionary_Dictionary *)__pyx_v_src));
 
   /* function exit code */
@@ -1622,7 +1542,7 @@ static PyObject *__pyx_pf_4core_10dictionary_10Dictionary_10Dictionary_2new_copy
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("new_copy", 0);
 
-  /* "core/dictionary/Dictionary.pyx":26
+  /* "core/dictionary/Dictionary.pyx":18
  * 
  *     def new_copy(self, Dictionary src):
  *         api_core.godot_dictionary_new_copy(&self._native, &src._native)             # <<<<<<<<<<<<<<
@@ -1631,8 +1551,8 @@ static PyObject *__pyx_pf_4core_10dictionary_10Dictionary_10Dictionary_2new_copy
  */
   api_core->godot_dictionary_new_copy((&__pyx_v_self->_native), (&__pyx_v_src->_native));
 
-  /* "core/dictionary/Dictionary.pyx":25
- *         print("end_api_core")
+  /* "core/dictionary/Dictionary.pyx":17
+ *         api_core.godot_dictionary_new(&self._native)
  * 
  *     def new_copy(self, Dictionary src):             # <<<<<<<<<<<<<<
  *         api_core.godot_dictionary_new_copy(&self._native, &src._native)
@@ -1646,7 +1566,7 @@ static PyObject *__pyx_pf_4core_10dictionary_10Dictionary_10Dictionary_2new_copy
   return __pyx_r;
 }
 
-/* "core/dictionary/Dictionary.pyx":28
+/* "core/dictionary/Dictionary.pyx":20
  *         api_core.godot_dictionary_new_copy(&self._native, &src._native)
  * 
  *     def destroy(self):             # <<<<<<<<<<<<<<
@@ -1672,7 +1592,7 @@ static PyObject *__pyx_pf_4core_10dictionary_10Dictionary_10Dictionary_4destroy(
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("destroy", 0);
 
-  /* "core/dictionary/Dictionary.pyx":29
+  /* "core/dictionary/Dictionary.pyx":21
  * 
  *     def destroy(self):
  *         api_core.godot_dictionary_destroy(&self._native)             # <<<<<<<<<<<<<<
@@ -1681,7 +1601,7 @@ static PyObject *__pyx_pf_4core_10dictionary_10Dictionary_10Dictionary_4destroy(
  */
   api_core->godot_dictionary_destroy((&__pyx_v_self->_native));
 
-  /* "core/dictionary/Dictionary.pyx":28
+  /* "core/dictionary/Dictionary.pyx":20
  *         api_core.godot_dictionary_new_copy(&self._native, &src._native)
  * 
  *     def destroy(self):             # <<<<<<<<<<<<<<
@@ -1696,7 +1616,7 @@ static PyObject *__pyx_pf_4core_10dictionary_10Dictionary_10Dictionary_4destroy(
   return __pyx_r;
 }
 
-/* "core/dictionary/Dictionary.pyx":31
+/* "core/dictionary/Dictionary.pyx":23
  *         api_core.godot_dictionary_destroy(&self._native)
  * 
  *     def size(self):             # <<<<<<<<<<<<<<
@@ -1726,7 +1646,7 @@ static PyObject *__pyx_pf_4core_10dictionary_10Dictionary_10Dictionary_6size(str
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("size", 0);
 
-  /* "core/dictionary/Dictionary.pyx":32
+  /* "core/dictionary/Dictionary.pyx":24
  * 
  *     def size(self):
  *         return api_core.godot_dictionary_size(&self._native)             # <<<<<<<<<<<<<<
@@ -1734,13 +1654,13 @@ static PyObject *__pyx_pf_4core_10dictionary_10Dictionary_10Dictionary_6size(str
  *     def empty(self):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_PyInt_From_godot_int(api_core->godot_dictionary_size((&__pyx_v_self->_native))); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 32, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyInt_From_godot_int(api_core->godot_dictionary_size((&__pyx_v_self->_native))); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 24, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "core/dictionary/Dictionary.pyx":31
+  /* "core/dictionary/Dictionary.pyx":23
  *         api_core.godot_dictionary_destroy(&self._native)
  * 
  *     def size(self):             # <<<<<<<<<<<<<<
@@ -1759,7 +1679,7 @@ static PyObject *__pyx_pf_4core_10dictionary_10Dictionary_10Dictionary_6size(str
   return __pyx_r;
 }
 
-/* "core/dictionary/Dictionary.pyx":34
+/* "core/dictionary/Dictionary.pyx":26
  *         return api_core.godot_dictionary_size(&self._native)
  * 
  *     def empty(self):             # <<<<<<<<<<<<<<
@@ -1789,7 +1709,7 @@ static PyObject *__pyx_pf_4core_10dictionary_10Dictionary_10Dictionary_8empty(st
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("empty", 0);
 
-  /* "core/dictionary/Dictionary.pyx":35
+  /* "core/dictionary/Dictionary.pyx":27
  * 
  *     def empty(self):
  *         return api_core.godot_dictionary_empty(&self._native)             # <<<<<<<<<<<<<<
@@ -1797,13 +1717,13 @@ static PyObject *__pyx_pf_4core_10dictionary_10Dictionary_10Dictionary_8empty(st
  *     def clear(self):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_PyBool_FromLong(api_core->godot_dictionary_empty((&__pyx_v_self->_native))); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 35, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyBool_FromLong(api_core->godot_dictionary_empty((&__pyx_v_self->_native))); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 27, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "core/dictionary/Dictionary.pyx":34
+  /* "core/dictionary/Dictionary.pyx":26
  *         return api_core.godot_dictionary_size(&self._native)
  * 
  *     def empty(self):             # <<<<<<<<<<<<<<
@@ -1822,7 +1742,7 @@ static PyObject *__pyx_pf_4core_10dictionary_10Dictionary_10Dictionary_8empty(st
   return __pyx_r;
 }
 
-/* "core/dictionary/Dictionary.pyx":37
+/* "core/dictionary/Dictionary.pyx":29
  *         return api_core.godot_dictionary_empty(&self._native)
  * 
  *     def clear(self):             # <<<<<<<<<<<<<<
@@ -1848,7 +1768,7 @@ static PyObject *__pyx_pf_4core_10dictionary_10Dictionary_10Dictionary_10clear(s
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("clear", 0);
 
-  /* "core/dictionary/Dictionary.pyx":38
+  /* "core/dictionary/Dictionary.pyx":30
  * 
  *     def clear(self):
  *         api_core.godot_dictionary_clear(&self._native)             # <<<<<<<<<<<<<<
@@ -1857,7 +1777,7 @@ static PyObject *__pyx_pf_4core_10dictionary_10Dictionary_10Dictionary_10clear(s
  */
   api_core->godot_dictionary_clear((&__pyx_v_self->_native));
 
-  /* "core/dictionary/Dictionary.pyx":37
+  /* "core/dictionary/Dictionary.pyx":29
  *         return api_core.godot_dictionary_empty(&self._native)
  * 
  *     def clear(self):             # <<<<<<<<<<<<<<
@@ -1872,7 +1792,7 @@ static PyObject *__pyx_pf_4core_10dictionary_10Dictionary_10Dictionary_10clear(s
   return __pyx_r;
 }
 
-/* "core/dictionary/Dictionary.pyx":40
+/* "core/dictionary/Dictionary.pyx":32
  *         api_core.godot_dictionary_clear(&self._native)
  * 
  *     def has(self, Variant key):             # <<<<<<<<<<<<<<
@@ -1889,7 +1809,7 @@ static PyObject *__pyx_pw_4core_10dictionary_10Dictionary_10Dictionary_13has(PyO
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("has (wrapper)", 0);
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_key), __pyx_ptype_4core_7variant_7Variant_Variant, 1, "key", 0))) __PYX_ERR(0, 40, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_key), __pyx_ptype_4core_7variant_7Variant_Variant, 1, "key", 0))) __PYX_ERR(1, 32, __pyx_L1_error)
   __pyx_r = __pyx_pf_4core_10dictionary_10Dictionary_10Dictionary_12has(((struct __pyx_obj_4core_10dictionary_10Dictionary_Dictionary *)__pyx_v_self), ((struct __pyx_obj_4core_7variant_7Variant_Variant *)__pyx_v_key));
 
   /* function exit code */
@@ -1910,7 +1830,7 @@ static PyObject *__pyx_pf_4core_10dictionary_10Dictionary_10Dictionary_12has(str
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("has", 0);
 
-  /* "core/dictionary/Dictionary.pyx":41
+  /* "core/dictionary/Dictionary.pyx":33
  * 
  *     def has(self, Variant key):
  *         return api_core.godot_dictionary_has(&self._native, &key._native)             # <<<<<<<<<<<<<<
@@ -1918,13 +1838,13 @@ static PyObject *__pyx_pf_4core_10dictionary_10Dictionary_10Dictionary_12has(str
  *     def has_all(self, Array keys):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_PyBool_FromLong(api_core->godot_dictionary_has((&__pyx_v_self->_native), (&__pyx_v_key->_native))); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 41, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyBool_FromLong(api_core->godot_dictionary_has((&__pyx_v_self->_native), (&__pyx_v_key->_native))); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 33, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "core/dictionary/Dictionary.pyx":40
+  /* "core/dictionary/Dictionary.pyx":32
  *         api_core.godot_dictionary_clear(&self._native)
  * 
  *     def has(self, Variant key):             # <<<<<<<<<<<<<<
@@ -1943,7 +1863,7 @@ static PyObject *__pyx_pf_4core_10dictionary_10Dictionary_10Dictionary_12has(str
   return __pyx_r;
 }
 
-/* "core/dictionary/Dictionary.pyx":43
+/* "core/dictionary/Dictionary.pyx":35
  *         return api_core.godot_dictionary_has(&self._native, &key._native)
  * 
  *     def has_all(self, Array keys):             # <<<<<<<<<<<<<<
@@ -1960,7 +1880,7 @@ static PyObject *__pyx_pw_4core_10dictionary_10Dictionary_10Dictionary_15has_all
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("has_all (wrapper)", 0);
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_keys), __pyx_ptype_4core_5array_5Array_Array, 1, "keys", 0))) __PYX_ERR(0, 43, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_keys), __pyx_ptype_4core_5array_5Array_Array, 1, "keys", 0))) __PYX_ERR(1, 35, __pyx_L1_error)
   __pyx_r = __pyx_pf_4core_10dictionary_10Dictionary_10Dictionary_14has_all(((struct __pyx_obj_4core_10dictionary_10Dictionary_Dictionary *)__pyx_v_self), ((struct __pyx_obj_4core_5array_5Array_Array *)__pyx_v_keys));
 
   /* function exit code */
@@ -1981,7 +1901,7 @@ static PyObject *__pyx_pf_4core_10dictionary_10Dictionary_10Dictionary_14has_all
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("has_all", 0);
 
-  /* "core/dictionary/Dictionary.pyx":44
+  /* "core/dictionary/Dictionary.pyx":36
  * 
  *     def has_all(self, Array keys):
  *         return api_core.godot_dictionary_has_all(&self._native, &keys._native)             # <<<<<<<<<<<<<<
@@ -1989,13 +1909,13 @@ static PyObject *__pyx_pf_4core_10dictionary_10Dictionary_10Dictionary_14has_all
  *     def erase(self, Variant key):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_PyBool_FromLong(api_core->godot_dictionary_has_all((&__pyx_v_self->_native), (&__pyx_v_keys->_native))); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 44, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyBool_FromLong(api_core->godot_dictionary_has_all((&__pyx_v_self->_native), (&__pyx_v_keys->_native))); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 36, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "core/dictionary/Dictionary.pyx":43
+  /* "core/dictionary/Dictionary.pyx":35
  *         return api_core.godot_dictionary_has(&self._native, &key._native)
  * 
  *     def has_all(self, Array keys):             # <<<<<<<<<<<<<<
@@ -2014,7 +1934,7 @@ static PyObject *__pyx_pf_4core_10dictionary_10Dictionary_10Dictionary_14has_all
   return __pyx_r;
 }
 
-/* "core/dictionary/Dictionary.pyx":46
+/* "core/dictionary/Dictionary.pyx":38
  *         return api_core.godot_dictionary_has_all(&self._native, &keys._native)
  * 
  *     def erase(self, Variant key):             # <<<<<<<<<<<<<<
@@ -2031,7 +1951,7 @@ static PyObject *__pyx_pw_4core_10dictionary_10Dictionary_10Dictionary_17erase(P
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("erase (wrapper)", 0);
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_key), __pyx_ptype_4core_7variant_7Variant_Variant, 1, "key", 0))) __PYX_ERR(0, 46, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_key), __pyx_ptype_4core_7variant_7Variant_Variant, 1, "key", 0))) __PYX_ERR(1, 38, __pyx_L1_error)
   __pyx_r = __pyx_pf_4core_10dictionary_10Dictionary_10Dictionary_16erase(((struct __pyx_obj_4core_10dictionary_10Dictionary_Dictionary *)__pyx_v_self), ((struct __pyx_obj_4core_7variant_7Variant_Variant *)__pyx_v_key));
 
   /* function exit code */
@@ -2052,7 +1972,7 @@ static PyObject *__pyx_pf_4core_10dictionary_10Dictionary_10Dictionary_16erase(s
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("erase", 0);
 
-  /* "core/dictionary/Dictionary.pyx":47
+  /* "core/dictionary/Dictionary.pyx":39
  * 
  *     def erase(self, Variant key):
  *         return api_core.godot_dictionary_erase(&self._native, &key._native)             # <<<<<<<<<<<<<<
@@ -2060,13 +1980,13 @@ static PyObject *__pyx_pf_4core_10dictionary_10Dictionary_10Dictionary_16erase(s
  *     def hash(self):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_void_to_None(api_core->godot_dictionary_erase((&__pyx_v_self->_native), (&__pyx_v_key->_native))); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 47, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_void_to_None(api_core->godot_dictionary_erase((&__pyx_v_self->_native), (&__pyx_v_key->_native))); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 39, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "core/dictionary/Dictionary.pyx":46
+  /* "core/dictionary/Dictionary.pyx":38
  *         return api_core.godot_dictionary_has_all(&self._native, &keys._native)
  * 
  *     def erase(self, Variant key):             # <<<<<<<<<<<<<<
@@ -2085,7 +2005,7 @@ static PyObject *__pyx_pf_4core_10dictionary_10Dictionary_10Dictionary_16erase(s
   return __pyx_r;
 }
 
-/* "core/dictionary/Dictionary.pyx":49
+/* "core/dictionary/Dictionary.pyx":41
  *         return api_core.godot_dictionary_erase(&self._native, &key._native)
  * 
  *     def hash(self):             # <<<<<<<<<<<<<<
@@ -2115,7 +2035,7 @@ static PyObject *__pyx_pf_4core_10dictionary_10Dictionary_10Dictionary_18hash(st
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("hash", 0);
 
-  /* "core/dictionary/Dictionary.pyx":50
+  /* "core/dictionary/Dictionary.pyx":42
  * 
  *     def hash(self):
  *         return api_core.godot_dictionary_hash(&self._native)             # <<<<<<<<<<<<<<
@@ -2123,13 +2043,13 @@ static PyObject *__pyx_pf_4core_10dictionary_10Dictionary_10Dictionary_18hash(st
  *     def keys(self):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_PyInt_From_godot_int(api_core->godot_dictionary_hash((&__pyx_v_self->_native))); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 50, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyInt_From_godot_int(api_core->godot_dictionary_hash((&__pyx_v_self->_native))); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 42, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "core/dictionary/Dictionary.pyx":49
+  /* "core/dictionary/Dictionary.pyx":41
  *         return api_core.godot_dictionary_erase(&self._native, &key._native)
  * 
  *     def hash(self):             # <<<<<<<<<<<<<<
@@ -2148,7 +2068,7 @@ static PyObject *__pyx_pf_4core_10dictionary_10Dictionary_10Dictionary_18hash(st
   return __pyx_r;
 }
 
-/* "core/dictionary/Dictionary.pyx":52
+/* "core/dictionary/Dictionary.pyx":44
  *         return api_core.godot_dictionary_hash(&self._native)
  * 
  *     def keys(self):             # <<<<<<<<<<<<<<
@@ -2178,7 +2098,7 @@ static PyObject *__pyx_pf_4core_10dictionary_10Dictionary_10Dictionary_20keys(st
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("keys", 0);
 
-  /* "core/dictionary/Dictionary.pyx":53
+  /* "core/dictionary/Dictionary.pyx":45
  * 
  *     def keys(self):
  *         return Array. new_static(api_core.godot_dictionary_keys(&self._native))             # <<<<<<<<<<<<<<
@@ -2186,13 +2106,13 @@ static PyObject *__pyx_pf_4core_10dictionary_10Dictionary_10Dictionary_20keys(st
  *     def values(self):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_void_to_None(__pyx_f_4core_5array_5Array_5Array_new_static(api_core->godot_dictionary_keys((&__pyx_v_self->_native)))); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 53, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_void_to_None(__pyx_f_4core_5array_5Array_5Array_new_static(api_core->godot_dictionary_keys((&__pyx_v_self->_native)))); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 45, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "core/dictionary/Dictionary.pyx":52
+  /* "core/dictionary/Dictionary.pyx":44
  *         return api_core.godot_dictionary_hash(&self._native)
  * 
  *     def keys(self):             # <<<<<<<<<<<<<<
@@ -2211,7 +2131,7 @@ static PyObject *__pyx_pf_4core_10dictionary_10Dictionary_10Dictionary_20keys(st
   return __pyx_r;
 }
 
-/* "core/dictionary/Dictionary.pyx":55
+/* "core/dictionary/Dictionary.pyx":47
  *         return Array. new_static(api_core.godot_dictionary_keys(&self._native))
  * 
  *     def values(self):             # <<<<<<<<<<<<<<
@@ -2241,7 +2161,7 @@ static PyObject *__pyx_pf_4core_10dictionary_10Dictionary_10Dictionary_22values(
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("values", 0);
 
-  /* "core/dictionary/Dictionary.pyx":56
+  /* "core/dictionary/Dictionary.pyx":48
  * 
  *     def values(self):
  *         return Array. new_static(api_core.godot_dictionary_values(&self._native))             # <<<<<<<<<<<<<<
@@ -2249,13 +2169,13 @@ static PyObject *__pyx_pf_4core_10dictionary_10Dictionary_10Dictionary_22values(
  *     def get(self, Variant key):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_void_to_None(__pyx_f_4core_5array_5Array_5Array_new_static(api_core->godot_dictionary_values((&__pyx_v_self->_native)))); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 56, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_void_to_None(__pyx_f_4core_5array_5Array_5Array_new_static(api_core->godot_dictionary_values((&__pyx_v_self->_native)))); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 48, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "core/dictionary/Dictionary.pyx":55
+  /* "core/dictionary/Dictionary.pyx":47
  *         return Array. new_static(api_core.godot_dictionary_keys(&self._native))
  * 
  *     def values(self):             # <<<<<<<<<<<<<<
@@ -2274,7 +2194,7 @@ static PyObject *__pyx_pf_4core_10dictionary_10Dictionary_10Dictionary_22values(
   return __pyx_r;
 }
 
-/* "core/dictionary/Dictionary.pyx":58
+/* "core/dictionary/Dictionary.pyx":50
  *         return Array. new_static(api_core.godot_dictionary_values(&self._native))
  * 
  *     def get(self, Variant key):             # <<<<<<<<<<<<<<
@@ -2291,7 +2211,7 @@ static PyObject *__pyx_pw_4core_10dictionary_10Dictionary_10Dictionary_25get(PyO
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("get (wrapper)", 0);
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_key), __pyx_ptype_4core_7variant_7Variant_Variant, 1, "key", 0))) __PYX_ERR(0, 58, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_key), __pyx_ptype_4core_7variant_7Variant_Variant, 1, "key", 0))) __PYX_ERR(1, 50, __pyx_L1_error)
   __pyx_r = __pyx_pf_4core_10dictionary_10Dictionary_10Dictionary_24get(((struct __pyx_obj_4core_10dictionary_10Dictionary_Dictionary *)__pyx_v_self), ((struct __pyx_obj_4core_7variant_7Variant_Variant *)__pyx_v_key));
 
   /* function exit code */
@@ -2312,7 +2232,7 @@ static PyObject *__pyx_pf_4core_10dictionary_10Dictionary_10Dictionary_24get(str
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("get", 0);
 
-  /* "core/dictionary/Dictionary.pyx":59
+  /* "core/dictionary/Dictionary.pyx":51
  * 
  *     def get(self, Variant key):
  *         return Variant. new_static(api_core.godot_dictionary_get(&self._native, &key._native))             # <<<<<<<<<<<<<<
@@ -2320,13 +2240,13 @@ static PyObject *__pyx_pf_4core_10dictionary_10Dictionary_10Dictionary_24get(str
  *     def set(self, Variant key, Variant value):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_void_to_None(__pyx_f_4core_7variant_7Variant_7Variant_new_static(api_core->godot_dictionary_get((&__pyx_v_self->_native), (&__pyx_v_key->_native)))); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 59, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_void_to_None(__pyx_f_4core_7variant_7Variant_7Variant_new_static(api_core->godot_dictionary_get((&__pyx_v_self->_native), (&__pyx_v_key->_native)))); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 51, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "core/dictionary/Dictionary.pyx":58
+  /* "core/dictionary/Dictionary.pyx":50
  *         return Array. new_static(api_core.godot_dictionary_values(&self._native))
  * 
  *     def get(self, Variant key):             # <<<<<<<<<<<<<<
@@ -2345,7 +2265,7 @@ static PyObject *__pyx_pf_4core_10dictionary_10Dictionary_10Dictionary_24get(str
   return __pyx_r;
 }
 
-/* "core/dictionary/Dictionary.pyx":61
+/* "core/dictionary/Dictionary.pyx":53
  *         return Variant. new_static(api_core.godot_dictionary_get(&self._native, &key._native))
  * 
  *     def set(self, Variant key, Variant value):             # <<<<<<<<<<<<<<
@@ -2387,11 +2307,11 @@ static PyObject *__pyx_pw_4core_10dictionary_10Dictionary_10Dictionary_27set(PyO
         case  1:
         if (likely((values[1] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_value)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("set", 1, 2, 2, 1); __PYX_ERR(0, 61, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("set", 1, 2, 2, 1); __PYX_ERR(1, 53, __pyx_L3_error)
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "set") < 0)) __PYX_ERR(0, 61, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "set") < 0)) __PYX_ERR(1, 53, __pyx_L3_error)
       }
     } else if (PyTuple_GET_SIZE(__pyx_args) != 2) {
       goto __pyx_L5_argtuple_error;
@@ -2404,14 +2324,14 @@ static PyObject *__pyx_pw_4core_10dictionary_10Dictionary_10Dictionary_27set(PyO
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("set", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 61, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("set", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(1, 53, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("core.dictionary.Dictionary.Dictionary.set", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_key), __pyx_ptype_4core_7variant_7Variant_Variant, 1, "key", 0))) __PYX_ERR(0, 61, __pyx_L1_error)
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_value), __pyx_ptype_4core_7variant_7Variant_Variant, 1, "value", 0))) __PYX_ERR(0, 61, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_key), __pyx_ptype_4core_7variant_7Variant_Variant, 1, "key", 0))) __PYX_ERR(1, 53, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_value), __pyx_ptype_4core_7variant_7Variant_Variant, 1, "value", 0))) __PYX_ERR(1, 53, __pyx_L1_error)
   __pyx_r = __pyx_pf_4core_10dictionary_10Dictionary_10Dictionary_26set(((struct __pyx_obj_4core_10dictionary_10Dictionary_Dictionary *)__pyx_v_self), __pyx_v_key, __pyx_v_value);
 
   /* function exit code */
@@ -2428,7 +2348,7 @@ static PyObject *__pyx_pf_4core_10dictionary_10Dictionary_10Dictionary_26set(str
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("set", 0);
 
-  /* "core/dictionary/Dictionary.pyx":62
+  /* "core/dictionary/Dictionary.pyx":54
  * 
  *     def set(self, Variant key, Variant value):
  *         api_core.godot_dictionary_set(&self._native, &key._native, &value._native)             # <<<<<<<<<<<<<<
@@ -2437,7 +2357,7 @@ static PyObject *__pyx_pf_4core_10dictionary_10Dictionary_10Dictionary_26set(str
  */
   api_core->godot_dictionary_set((&__pyx_v_self->_native), (&__pyx_v_key->_native), (&__pyx_v_value->_native));
 
-  /* "core/dictionary/Dictionary.pyx":61
+  /* "core/dictionary/Dictionary.pyx":53
  *         return Variant. new_static(api_core.godot_dictionary_get(&self._native, &key._native))
  * 
  *     def set(self, Variant key, Variant value):             # <<<<<<<<<<<<<<
@@ -2452,7 +2372,7 @@ static PyObject *__pyx_pf_4core_10dictionary_10Dictionary_10Dictionary_26set(str
   return __pyx_r;
 }
 
-/* "core/dictionary/Dictionary.pyx":64
+/* "core/dictionary/Dictionary.pyx":56
  *         api_core.godot_dictionary_set(&self._native, &key._native, &value._native)
  * 
  *     def next_(self, Variant key):             # <<<<<<<<<<<<<<
@@ -2469,7 +2389,7 @@ static PyObject *__pyx_pw_4core_10dictionary_10Dictionary_10Dictionary_29next_(P
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("next_ (wrapper)", 0);
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_key), __pyx_ptype_4core_7variant_7Variant_Variant, 1, "key", 0))) __PYX_ERR(0, 64, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_key), __pyx_ptype_4core_7variant_7Variant_Variant, 1, "key", 0))) __PYX_ERR(1, 56, __pyx_L1_error)
   __pyx_r = __pyx_pf_4core_10dictionary_10Dictionary_10Dictionary_28next_(((struct __pyx_obj_4core_10dictionary_10Dictionary_Dictionary *)__pyx_v_self), ((struct __pyx_obj_4core_7variant_7Variant_Variant *)__pyx_v_key));
 
   /* function exit code */
@@ -2491,7 +2411,7 @@ static PyObject *__pyx_pf_4core_10dictionary_10Dictionary_10Dictionary_28next_(s
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("next_", 0);
 
-  /* "core/dictionary/Dictionary.pyx":66
+  /* "core/dictionary/Dictionary.pyx":58
  *     def next_(self, Variant key):
  *         cdef godot_variant * variant
  *         variant = (api_core.godot_dictionary_next(&self._native, &key._native))             # <<<<<<<<<<<<<<
@@ -2500,7 +2420,7 @@ static PyObject *__pyx_pf_4core_10dictionary_10Dictionary_10Dictionary_28next_(s
  */
   __pyx_v_variant = api_core->godot_dictionary_next((&__pyx_v_self->_native), (&__pyx_v_key->_native));
 
-  /* "core/dictionary/Dictionary.pyx":67
+  /* "core/dictionary/Dictionary.pyx":59
  *         cdef godot_variant * variant
  *         variant = (api_core.godot_dictionary_next(&self._native, &key._native))
  *         return Variant.new_static(dereference(variant))             # <<<<<<<<<<<<<<
@@ -2508,13 +2428,13 @@ static PyObject *__pyx_pf_4core_10dictionary_10Dictionary_10Dictionary_28next_(s
  *     def __eq__(self, Dictionary other):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_void_to_None(__pyx_f_4core_7variant_7Variant_7Variant_new_static((*__pyx_v_variant))); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 67, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_void_to_None(__pyx_f_4core_7variant_7Variant_7Variant_new_static((*__pyx_v_variant))); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 59, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "core/dictionary/Dictionary.pyx":64
+  /* "core/dictionary/Dictionary.pyx":56
  *         api_core.godot_dictionary_set(&self._native, &key._native, &value._native)
  * 
  *     def next_(self, Variant key):             # <<<<<<<<<<<<<<
@@ -2533,7 +2453,7 @@ static PyObject *__pyx_pf_4core_10dictionary_10Dictionary_10Dictionary_28next_(s
   return __pyx_r;
 }
 
-/* "core/dictionary/Dictionary.pyx":69
+/* "core/dictionary/Dictionary.pyx":61
  *         return Variant.new_static(dereference(variant))
  * 
  *     def __eq__(self, Dictionary other):             # <<<<<<<<<<<<<<
@@ -2550,7 +2470,7 @@ static PyObject *__pyx_pw_4core_10dictionary_10Dictionary_10Dictionary_31__eq__(
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__eq__ (wrapper)", 0);
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_other), __pyx_ptype_4core_10dictionary_10Dictionary_Dictionary, 1, "other", 0))) __PYX_ERR(0, 69, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_other), __pyx_ptype_4core_10dictionary_10Dictionary_Dictionary, 1, "other", 0))) __PYX_ERR(1, 61, __pyx_L1_error)
   __pyx_r = __pyx_pf_4core_10dictionary_10Dictionary_10Dictionary_30__eq__(((struct __pyx_obj_4core_10dictionary_10Dictionary_Dictionary *)__pyx_v_self), ((struct __pyx_obj_4core_10dictionary_10Dictionary_Dictionary *)__pyx_v_other));
 
   /* function exit code */
@@ -2571,7 +2491,7 @@ static PyObject *__pyx_pf_4core_10dictionary_10Dictionary_10Dictionary_30__eq__(
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__eq__", 0);
 
-  /* "core/dictionary/Dictionary.pyx":70
+  /* "core/dictionary/Dictionary.pyx":62
  * 
  *     def __eq__(self, Dictionary other):
  *         return api_core.godot_dictionary_operator_equal(&self._native, &other._native)             # <<<<<<<<<<<<<<
@@ -2579,13 +2499,13 @@ static PyObject *__pyx_pf_4core_10dictionary_10Dictionary_10Dictionary_30__eq__(
  *     def json(self):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_PyBool_FromLong(api_core->godot_dictionary_operator_equal((&__pyx_v_self->_native), (&__pyx_v_other->_native))); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 70, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyBool_FromLong(api_core->godot_dictionary_operator_equal((&__pyx_v_self->_native), (&__pyx_v_other->_native))); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 62, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "core/dictionary/Dictionary.pyx":69
+  /* "core/dictionary/Dictionary.pyx":61
  *         return Variant.new_static(dereference(variant))
  * 
  *     def __eq__(self, Dictionary other):             # <<<<<<<<<<<<<<
@@ -2604,7 +2524,7 @@ static PyObject *__pyx_pf_4core_10dictionary_10Dictionary_10Dictionary_30__eq__(
   return __pyx_r;
 }
 
-/* "core/dictionary/Dictionary.pyx":72
+/* "core/dictionary/Dictionary.pyx":64
  *         return api_core.godot_dictionary_operator_equal(&self._native, &other._native)
  * 
  *     def json(self):             # <<<<<<<<<<<<<<
@@ -2634,20 +2554,20 @@ static PyObject *__pyx_pf_4core_10dictionary_10Dictionary_10Dictionary_32json(st
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("json", 0);
 
-  /* "core/dictionary/Dictionary.pyx":73
+  /* "core/dictionary/Dictionary.pyx":65
  * 
  *     def json(self):
  *         return api_core.godot_dictionary_to_json(&self._native)             # <<<<<<<<<<<<<<
  * 
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __pyx_convert__to_py_godot_string(api_core->godot_dictionary_to_json((&__pyx_v_self->_native))); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 73, __pyx_L1_error)
+  __pyx_t_1 = __pyx_convert__to_py_godot_string(api_core->godot_dictionary_to_json((&__pyx_v_self->_native))); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 65, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "core/dictionary/Dictionary.pyx":72
+  /* "core/dictionary/Dictionary.pyx":64
  *         return api_core.godot_dictionary_operator_equal(&self._native, &other._native)
  * 
  *     def json(self):             # <<<<<<<<<<<<<<
@@ -2700,11 +2620,11 @@ static PyObject *__pyx_pf_4core_10dictionary_10Dictionary_10Dictionary_34__reduc
  * def __setstate_cython__(self, __pyx_state):
  *     raise TypeError("Pickling of struct members such as self._native must be explicitly requested with @auto_pickle(True)")
  */
-  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_TypeError, __pyx_tuple__4, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 2, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_TypeError, __pyx_tuple_, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_Raise(__pyx_t_1, 0, 0, 0);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __PYX_ERR(1, 2, __pyx_L1_error)
+  __PYX_ERR(0, 2, __pyx_L1_error)
 
   /* "(tree fragment)":1
  * def __reduce_cython__(self):             # <<<<<<<<<<<<<<
@@ -2756,11 +2676,11 @@ static PyObject *__pyx_pf_4core_10dictionary_10Dictionary_10Dictionary_36__setst
  * def __setstate_cython__(self, __pyx_state):
  *     raise TypeError("Pickling of struct members such as self._native must be explicitly requested with @auto_pickle(True)")             # <<<<<<<<<<<<<<
  */
-  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_TypeError, __pyx_tuple__5, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 4, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_TypeError, __pyx_tuple__2, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 4, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_Raise(__pyx_t_1, 0, 0, 0);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __PYX_ERR(1, 4, __pyx_L1_error)
+  __PYX_ERR(0, 4, __pyx_L1_error)
 
   /* "(tree fragment)":3
  * def __reduce_cython__(self):
@@ -3285,7 +3205,6 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_n_s_TypeError, __pyx_k_TypeError, sizeof(__pyx_k_TypeError), 0, 0, 1, 1},
   {&__pyx_n_s_cline_in_traceback, __pyx_k_cline_in_traceback, sizeof(__pyx_k_cline_in_traceback), 0, 0, 1, 1},
   {&__pyx_n_s_dont_touch_that, __pyx_k_dont_touch_that, sizeof(__pyx_k_dont_touch_that), 0, 0, 1, 1},
-  {&__pyx_n_u_end_api_core, __pyx_k_end_api_core, sizeof(__pyx_k_end_api_core), 0, 1, 0, 1},
   {&__pyx_n_s_getstate, __pyx_k_getstate, sizeof(__pyx_k_getstate), 0, 0, 1, 1},
   {&__pyx_n_s_key, __pyx_k_key, sizeof(__pyx_k_key), 0, 0, 1, 1},
   {&__pyx_n_s_main, __pyx_k_main, sizeof(__pyx_k_main), 0, 0, 1, 1},
@@ -3296,17 +3215,15 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_n_s_reduce, __pyx_k_reduce, sizeof(__pyx_k_reduce), 0, 0, 1, 1},
   {&__pyx_n_s_reduce_cython, __pyx_k_reduce_cython, sizeof(__pyx_k_reduce_cython), 0, 0, 1, 1},
   {&__pyx_n_s_reduce_ex, __pyx_k_reduce_ex, sizeof(__pyx_k_reduce_ex), 0, 0, 1, 1},
-  {&__pyx_n_u_set_api_core, __pyx_k_set_api_core, sizeof(__pyx_k_set_api_core), 0, 1, 0, 1},
   {&__pyx_n_s_setstate, __pyx_k_setstate, sizeof(__pyx_k_setstate), 0, 0, 1, 1},
   {&__pyx_n_s_setstate_cython, __pyx_k_setstate_cython, sizeof(__pyx_k_setstate_cython), 0, 0, 1, 1},
-  {&__pyx_n_u_start_api_core_dictionary, __pyx_k_start_api_core_dictionary, sizeof(__pyx_k_start_api_core_dictionary), 0, 1, 0, 1},
   {&__pyx_n_s_test, __pyx_k_test, sizeof(__pyx_k_test), 0, 0, 1, 1},
   {&__pyx_n_s_value, __pyx_k_value, sizeof(__pyx_k_value), 0, 0, 1, 1},
   {0, 0, 0, 0, 0, 0, 0}
 };
 static CYTHON_SMALL_CODE int __Pyx_InitCachedBuiltins(void) {
-  __pyx_builtin_print = __Pyx_GetBuiltinName(__pyx_n_s_print); if (!__pyx_builtin_print) __PYX_ERR(0, 9, __pyx_L1_error)
-  __pyx_builtin_TypeError = __Pyx_GetBuiltinName(__pyx_n_s_TypeError); if (!__pyx_builtin_TypeError) __PYX_ERR(1, 2, __pyx_L1_error)
+  __pyx_builtin_TypeError = __Pyx_GetBuiltinName(__pyx_n_s_TypeError); if (!__pyx_builtin_TypeError) __PYX_ERR(0, 2, __pyx_L1_error)
+  __pyx_builtin_print = __Pyx_GetBuiltinName(__pyx_n_s_print); if (!__pyx_builtin_print) __PYX_ERR(3, 15, __pyx_L1_error)
   return 0;
   __pyx_L1_error:;
   return -1;
@@ -3316,57 +3233,24 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__Pyx_InitCachedConstants", 0);
 
-  /* "core/dictionary/Dictionary.pyx":9
- * cdef api set_api_core_dict(godot_gdnative_core_api_struct * core):
- *     global api_core
- *     print("set_api_core")             # <<<<<<<<<<<<<<
- *     printf("%p\n", &api_core)
- *     api_core = core
- */
-  __pyx_tuple_ = PyTuple_Pack(1, __pyx_n_u_set_api_core); if (unlikely(!__pyx_tuple_)) __PYX_ERR(0, 9, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple_);
-  __Pyx_GIVEREF(__pyx_tuple_);
-
-  /* "core/dictionary/Dictionary.pyx":12
- *     printf("%p\n", &api_core)
- *     api_core = core
- *     print("end_api_core")             # <<<<<<<<<<<<<<
- * 
- * 
- */
-  __pyx_tuple__2 = PyTuple_Pack(1, __pyx_n_u_end_api_core); if (unlikely(!__pyx_tuple__2)) __PYX_ERR(0, 12, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple__2);
-  __Pyx_GIVEREF(__pyx_tuple__2);
-
-  /* "core/dictionary/Dictionary.pyx":18
- * 
- *     def __init__(self):
- *         print("start_api_core_dictionary")             # <<<<<<<<<<<<<<
- *         printf("%p\n", &api_core)
- *         #api_core.godot_string_num(1)
- */
-  __pyx_tuple__3 = PyTuple_Pack(1, __pyx_n_u_start_api_core_dictionary); if (unlikely(!__pyx_tuple__3)) __PYX_ERR(0, 18, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple__3);
-  __Pyx_GIVEREF(__pyx_tuple__3);
-
   /* "(tree fragment)":2
  * def __reduce_cython__(self):
  *     raise TypeError("Pickling of struct members such as self._native must be explicitly requested with @auto_pickle(True)")             # <<<<<<<<<<<<<<
  * def __setstate_cython__(self, __pyx_state):
  *     raise TypeError("Pickling of struct members such as self._native must be explicitly requested with @auto_pickle(True)")
  */
-  __pyx_tuple__4 = PyTuple_Pack(1, __pyx_kp_s_Pickling_of_struct_members_such); if (unlikely(!__pyx_tuple__4)) __PYX_ERR(1, 2, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple__4);
-  __Pyx_GIVEREF(__pyx_tuple__4);
+  __pyx_tuple_ = PyTuple_Pack(1, __pyx_kp_s_Pickling_of_struct_members_such); if (unlikely(!__pyx_tuple_)) __PYX_ERR(0, 2, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple_);
+  __Pyx_GIVEREF(__pyx_tuple_);
 
   /* "(tree fragment)":4
  *     raise TypeError("Pickling of struct members such as self._native must be explicitly requested with @auto_pickle(True)")
  * def __setstate_cython__(self, __pyx_state):
  *     raise TypeError("Pickling of struct members such as self._native must be explicitly requested with @auto_pickle(True)")             # <<<<<<<<<<<<<<
  */
-  __pyx_tuple__5 = PyTuple_Pack(1, __pyx_kp_s_Pickling_of_struct_members_such); if (unlikely(!__pyx_tuple__5)) __PYX_ERR(1, 4, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple__5);
-  __Pyx_GIVEREF(__pyx_tuple__5);
+  __pyx_tuple__2 = PyTuple_Pack(1, __pyx_kp_s_Pickling_of_struct_members_such); if (unlikely(!__pyx_tuple__2)) __PYX_ERR(0, 4, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__2);
+  __Pyx_GIVEREF(__pyx_tuple__2);
   __Pyx_RefNannyFinishContext();
   return 0;
   __pyx_L1_error:;
@@ -3375,7 +3259,7 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
 }
 
 static CYTHON_SMALL_CODE int __Pyx_InitGlobals(void) {
-  if (__Pyx_InitStrings(__pyx_string_tab) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
+  if (__Pyx_InitStrings(__pyx_string_tab) < 0) __PYX_ERR(1, 1, __pyx_L1_error);
   return 0;
   __pyx_L1_error:;
   return -1;
@@ -3412,7 +3296,7 @@ static int __Pyx_modinit_function_export_code(void) {
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__Pyx_modinit_function_export_code", 0);
   /*--- Function export code ---*/
-  if (__Pyx_ExportFunction("set_api_core_dict", (void (*)(void))__pyx_f_4core_10dictionary_10Dictionary_set_api_core_dict, "PyObject *(struct godot_gdnative_core_api_struct *)") < 0) __PYX_ERR(0, 1, __pyx_L1_error)
+  if (__Pyx_ExportFunction("set_api_core_dict", (void (*)(void))__pyx_f_4core_10dictionary_10Dictionary_set_api_core_dict, "PyObject *(struct godot_gdnative_core_api_struct *)") < 0) __PYX_ERR(1, 1, __pyx_L1_error)
   __Pyx_RefNannyFinishContext();
   return 0;
   __pyx_L1_error:;
@@ -3430,16 +3314,16 @@ static int __Pyx_modinit_type_init_code(void) {
   __pyx_vtabptr_4core_10dictionary_10Dictionary_Dictionary = &__pyx_vtable_4core_10dictionary_10Dictionary_Dictionary;
   __pyx_vtable_4core_10dictionary_10Dictionary_Dictionary.set_native = (void (*)(struct __pyx_obj_4core_10dictionary_10Dictionary_Dictionary *, godot_dictionary))__pyx_f_4core_10dictionary_10Dictionary_10Dictionary_set_native;
   __pyx_vtable_4core_10dictionary_10Dictionary_Dictionary.new_static = (void (*)(godot_dictionary))__pyx_f_4core_10dictionary_10Dictionary_10Dictionary_new_static;
-  if (PyType_Ready(&__pyx_type_4core_10dictionary_10Dictionary_Dictionary) < 0) __PYX_ERR(0, 15, __pyx_L1_error)
+  if (PyType_Ready(&__pyx_type_4core_10dictionary_10Dictionary_Dictionary) < 0) __PYX_ERR(1, 12, __pyx_L1_error)
   #if PY_VERSION_HEX < 0x030800B1
   __pyx_type_4core_10dictionary_10Dictionary_Dictionary.tp_print = 0;
   #endif
   if ((CYTHON_USE_TYPE_SLOTS && CYTHON_USE_PYTYPE_LOOKUP) && likely(!__pyx_type_4core_10dictionary_10Dictionary_Dictionary.tp_dictoffset && __pyx_type_4core_10dictionary_10Dictionary_Dictionary.tp_getattro == PyObject_GenericGetAttr)) {
     __pyx_type_4core_10dictionary_10Dictionary_Dictionary.tp_getattro = __Pyx_PyObject_GenericGetAttr;
   }
-  if (__Pyx_SetVtable(__pyx_type_4core_10dictionary_10Dictionary_Dictionary.tp_dict, __pyx_vtabptr_4core_10dictionary_10Dictionary_Dictionary) < 0) __PYX_ERR(0, 15, __pyx_L1_error)
-  if (PyObject_SetAttr(__pyx_m, __pyx_n_s_Dictionary, (PyObject *)&__pyx_type_4core_10dictionary_10Dictionary_Dictionary) < 0) __PYX_ERR(0, 15, __pyx_L1_error)
-  if (__Pyx_setup_reduce((PyObject*)&__pyx_type_4core_10dictionary_10Dictionary_Dictionary) < 0) __PYX_ERR(0, 15, __pyx_L1_error)
+  if (__Pyx_SetVtable(__pyx_type_4core_10dictionary_10Dictionary_Dictionary.tp_dict, __pyx_vtabptr_4core_10dictionary_10Dictionary_Dictionary) < 0) __PYX_ERR(1, 12, __pyx_L1_error)
+  if (PyObject_SetAttr(__pyx_m, __pyx_n_s_Dictionary, (PyObject *)&__pyx_type_4core_10dictionary_10Dictionary_Dictionary) < 0) __PYX_ERR(1, 12, __pyx_L1_error)
+  if (__Pyx_setup_reduce((PyObject*)&__pyx_type_4core_10dictionary_10Dictionary_Dictionary) < 0) __PYX_ERR(1, 12, __pyx_L1_error)
   __pyx_ptype_4core_10dictionary_10Dictionary_Dictionary = &__pyx_type_4core_10dictionary_10Dictionary_Dictionary;
   __Pyx_RefNannyFinishContext();
   return 0;
@@ -3456,6 +3340,17 @@ static int __Pyx_modinit_type_import_code(void) {
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__Pyx_modinit_type_import_code", 0);
   /*--- Type import code ---*/
+  __pyx_t_1 = PyImport_ImportModule(__Pyx_BUILTIN_MODULE_NAME); if (unlikely(!__pyx_t_1)) __PYX_ERR(5, 9, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __pyx_ptype_7cpython_4type_type = __Pyx_ImportType(__pyx_t_1, __Pyx_BUILTIN_MODULE_NAME, "type", 
+  #if defined(PYPY_VERSION_NUM) && PYPY_VERSION_NUM < 0x050B0000
+  sizeof(PyTypeObject),
+  #else
+  sizeof(PyHeapTypeObject),
+  #endif
+  __Pyx_ImportType_CheckSize_Warn);
+   if (!__pyx_ptype_7cpython_4type_type) __PYX_ERR(5, 9, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_t_1 = PyImport_ImportModule("core.variant.Variant"); if (unlikely(!__pyx_t_1)) __PYX_ERR(3, 3, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_ptype_4core_7variant_7Variant_Variant = __Pyx_ImportType(__pyx_t_1, "core.variant.Variant", "Variant", sizeof(struct __pyx_obj_4core_7variant_7Variant_Variant), __Pyx_ImportType_CheckSize_Warn);
@@ -3610,30 +3505,30 @@ if (!__Pyx_RefNanny) {
 }
 #endif
   __Pyx_RefNannySetupContext("__Pyx_PyMODINIT_FUNC PyInit_Dictionary(void)", 0);
-  if (__Pyx_check_binary_version() < 0) __PYX_ERR(0, 1, __pyx_L1_error)
+  if (__Pyx_check_binary_version() < 0) __PYX_ERR(1, 1, __pyx_L1_error)
   #ifdef __Pxy_PyFrame_Initialize_Offsets
   __Pxy_PyFrame_Initialize_Offsets();
   #endif
-  __pyx_empty_tuple = PyTuple_New(0); if (unlikely(!__pyx_empty_tuple)) __PYX_ERR(0, 1, __pyx_L1_error)
-  __pyx_empty_bytes = PyBytes_FromStringAndSize("", 0); if (unlikely(!__pyx_empty_bytes)) __PYX_ERR(0, 1, __pyx_L1_error)
-  __pyx_empty_unicode = PyUnicode_FromStringAndSize("", 0); if (unlikely(!__pyx_empty_unicode)) __PYX_ERR(0, 1, __pyx_L1_error)
+  __pyx_empty_tuple = PyTuple_New(0); if (unlikely(!__pyx_empty_tuple)) __PYX_ERR(1, 1, __pyx_L1_error)
+  __pyx_empty_bytes = PyBytes_FromStringAndSize("", 0); if (unlikely(!__pyx_empty_bytes)) __PYX_ERR(1, 1, __pyx_L1_error)
+  __pyx_empty_unicode = PyUnicode_FromStringAndSize("", 0); if (unlikely(!__pyx_empty_unicode)) __PYX_ERR(1, 1, __pyx_L1_error)
   #ifdef __Pyx_CyFunction_USED
-  if (__pyx_CyFunction_init() < 0) __PYX_ERR(0, 1, __pyx_L1_error)
+  if (__pyx_CyFunction_init() < 0) __PYX_ERR(1, 1, __pyx_L1_error)
   #endif
   #ifdef __Pyx_FusedFunction_USED
-  if (__pyx_FusedFunction_init() < 0) __PYX_ERR(0, 1, __pyx_L1_error)
+  if (__pyx_FusedFunction_init() < 0) __PYX_ERR(1, 1, __pyx_L1_error)
   #endif
   #ifdef __Pyx_Coroutine_USED
-  if (__pyx_Coroutine_init() < 0) __PYX_ERR(0, 1, __pyx_L1_error)
+  if (__pyx_Coroutine_init() < 0) __PYX_ERR(1, 1, __pyx_L1_error)
   #endif
   #ifdef __Pyx_Generator_USED
-  if (__pyx_Generator_init() < 0) __PYX_ERR(0, 1, __pyx_L1_error)
+  if (__pyx_Generator_init() < 0) __PYX_ERR(1, 1, __pyx_L1_error)
   #endif
   #ifdef __Pyx_AsyncGen_USED
-  if (__pyx_AsyncGen_init() < 0) __PYX_ERR(0, 1, __pyx_L1_error)
+  if (__pyx_AsyncGen_init() < 0) __PYX_ERR(1, 1, __pyx_L1_error)
   #endif
   #ifdef __Pyx_StopAsyncIteration_USED
-  if (__pyx_StopAsyncIteration_init() < 0) __PYX_ERR(0, 1, __pyx_L1_error)
+  if (__pyx_StopAsyncIteration_init() < 0) __PYX_ERR(1, 1, __pyx_L1_error)
   #endif
   /*--- Library function declarations ---*/
   /*--- Threads initialization code ---*/
@@ -3652,46 +3547,46 @@ if (!__Pyx_RefNanny) {
   #else
   __pyx_m = PyModule_Create(&__pyx_moduledef);
   #endif
-  if (unlikely(!__pyx_m)) __PYX_ERR(0, 1, __pyx_L1_error)
+  if (unlikely(!__pyx_m)) __PYX_ERR(1, 1, __pyx_L1_error)
   #endif
-  __pyx_d = PyModule_GetDict(__pyx_m); if (unlikely(!__pyx_d)) __PYX_ERR(0, 1, __pyx_L1_error)
+  __pyx_d = PyModule_GetDict(__pyx_m); if (unlikely(!__pyx_d)) __PYX_ERR(1, 1, __pyx_L1_error)
   Py_INCREF(__pyx_d);
-  __pyx_b = PyImport_AddModule(__Pyx_BUILTIN_MODULE_NAME); if (unlikely(!__pyx_b)) __PYX_ERR(0, 1, __pyx_L1_error)
+  __pyx_b = PyImport_AddModule(__Pyx_BUILTIN_MODULE_NAME); if (unlikely(!__pyx_b)) __PYX_ERR(1, 1, __pyx_L1_error)
   Py_INCREF(__pyx_b);
-  __pyx_cython_runtime = PyImport_AddModule((char *) "cython_runtime"); if (unlikely(!__pyx_cython_runtime)) __PYX_ERR(0, 1, __pyx_L1_error)
+  __pyx_cython_runtime = PyImport_AddModule((char *) "cython_runtime"); if (unlikely(!__pyx_cython_runtime)) __PYX_ERR(1, 1, __pyx_L1_error)
   Py_INCREF(__pyx_cython_runtime);
-  if (PyObject_SetAttrString(__pyx_m, "__builtins__", __pyx_b) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
+  if (PyObject_SetAttrString(__pyx_m, "__builtins__", __pyx_b) < 0) __PYX_ERR(1, 1, __pyx_L1_error);
   /*--- Initialize various global constants etc. ---*/
-  if (__Pyx_InitGlobals() < 0) __PYX_ERR(0, 1, __pyx_L1_error)
+  if (__Pyx_InitGlobals() < 0) __PYX_ERR(1, 1, __pyx_L1_error)
   #if PY_MAJOR_VERSION < 3 && (__PYX_DEFAULT_STRING_ENCODING_IS_ASCII || __PYX_DEFAULT_STRING_ENCODING_IS_DEFAULT)
-  if (__Pyx_init_sys_getdefaultencoding_params() < 0) __PYX_ERR(0, 1, __pyx_L1_error)
+  if (__Pyx_init_sys_getdefaultencoding_params() < 0) __PYX_ERR(1, 1, __pyx_L1_error)
   #endif
   if (__pyx_module_is_main_core__dictionary__Dictionary) {
-    if (PyObject_SetAttr(__pyx_m, __pyx_n_s_name, __pyx_n_s_main) < 0) __PYX_ERR(0, 1, __pyx_L1_error)
+    if (PyObject_SetAttr(__pyx_m, __pyx_n_s_name, __pyx_n_s_main) < 0) __PYX_ERR(1, 1, __pyx_L1_error)
   }
   #if PY_MAJOR_VERSION >= 3
   {
-    PyObject *modules = PyImport_GetModuleDict(); if (unlikely(!modules)) __PYX_ERR(0, 1, __pyx_L1_error)
+    PyObject *modules = PyImport_GetModuleDict(); if (unlikely(!modules)) __PYX_ERR(1, 1, __pyx_L1_error)
     if (!PyDict_GetItemString(modules, "core.dictionary.Dictionary")) {
-      if (unlikely(PyDict_SetItemString(modules, "core.dictionary.Dictionary", __pyx_m) < 0)) __PYX_ERR(0, 1, __pyx_L1_error)
+      if (unlikely(PyDict_SetItemString(modules, "core.dictionary.Dictionary", __pyx_m) < 0)) __PYX_ERR(1, 1, __pyx_L1_error)
     }
   }
   #endif
   /*--- Builtin init code ---*/
-  if (__Pyx_InitCachedBuiltins() < 0) __PYX_ERR(0, 1, __pyx_L1_error)
+  if (__Pyx_InitCachedBuiltins() < 0) __PYX_ERR(1, 1, __pyx_L1_error)
   /*--- Constants init code ---*/
-  if (__Pyx_InitCachedConstants() < 0) __PYX_ERR(0, 1, __pyx_L1_error)
+  if (__Pyx_InitCachedConstants() < 0) __PYX_ERR(1, 1, __pyx_L1_error)
   /*--- Global type/function init code ---*/
   (void)__Pyx_modinit_global_init_code();
   (void)__Pyx_modinit_variable_export_code();
-  if (unlikely(__Pyx_modinit_function_export_code() < 0)) __PYX_ERR(0, 1, __pyx_L1_error)
-  if (unlikely(__Pyx_modinit_type_init_code() < 0)) __PYX_ERR(0, 1, __pyx_L1_error)
-  if (unlikely(__Pyx_modinit_type_import_code() < 0)) __PYX_ERR(0, 1, __pyx_L1_error)
+  if (unlikely(__Pyx_modinit_function_export_code() < 0)) __PYX_ERR(1, 1, __pyx_L1_error)
+  if (unlikely(__Pyx_modinit_type_init_code() < 0)) __PYX_ERR(1, 1, __pyx_L1_error)
+  if (unlikely(__Pyx_modinit_type_import_code() < 0)) __PYX_ERR(1, 1, __pyx_L1_error)
   (void)__Pyx_modinit_variable_import_code();
   (void)__Pyx_modinit_function_import_code();
   /*--- Execution code ---*/
   #if defined(__Pyx_Generator_USED) || defined(__Pyx_Coroutine_USED)
-  if (__Pyx_patch_abc() < 0) __PYX_ERR(0, 1, __pyx_L1_error)
+  if (__Pyx_patch_abc() < 0) __PYX_ERR(1, 1, __pyx_L1_error)
   #endif
 
   /* "core/dictionary/Dictionary.pyx":1
@@ -3699,9 +3594,9 @@ if (!__Pyx_RefNanny) {
  * from core.array.Array cimport *
  * from core.dictionary.dictionary_binding cimport *
  */
-  __pyx_t_1 = __Pyx_PyDict_NewPresized(0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 1, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyDict_NewPresized(0); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 1, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_test, __pyx_t_1) < 0) __PYX_ERR(0, 1, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_test, __pyx_t_1) < 0) __PYX_ERR(1, 1, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
   /* "core/array/Array.pxd":10
@@ -3781,26 +3676,6 @@ static PyObject *__Pyx_GetBuiltinName(PyObject *name) {
     }
     return result;
 }
-
-/* PyObjectCall */
-#if CYTHON_COMPILING_IN_CPYTHON
-static CYTHON_INLINE PyObject* __Pyx_PyObject_Call(PyObject *func, PyObject *arg, PyObject *kw) {
-    PyObject *result;
-    ternaryfunc call = func->ob_type->tp_call;
-    if (unlikely(!call))
-        return PyObject_Call(func, arg, kw);
-    if (unlikely(Py_EnterRecursiveCall((char*)" while calling a Python object")))
-        return NULL;
-    result = (*call)(func, arg, kw);
-    Py_LeaveRecursiveCall();
-    if (unlikely(!result) && unlikely(!PyErr_Occurred())) {
-        PyErr_SetString(
-            PyExc_SystemError,
-            "NULL result without error in PyObject_Call");
-    }
-    return result;
-}
-#endif
 
 /* RaiseArgTupleInvalid */
 static void __Pyx_RaiseArgtupleInvalid(
@@ -4004,6 +3879,26 @@ invalid_keyword:
 bad:
     return -1;
 }
+
+/* PyObjectCall */
+#if CYTHON_COMPILING_IN_CPYTHON
+static CYTHON_INLINE PyObject* __Pyx_PyObject_Call(PyObject *func, PyObject *arg, PyObject *kw) {
+    PyObject *result;
+    ternaryfunc call = func->ob_type->tp_call;
+    if (unlikely(!call))
+        return PyObject_Call(func, arg, kw);
+    if (unlikely(Py_EnterRecursiveCall((char*)" while calling a Python object")))
+        return NULL;
+    result = (*call)(func, arg, kw);
+    Py_LeaveRecursiveCall();
+    if (unlikely(!result) && unlikely(!PyErr_Occurred())) {
+        PyErr_SetString(
+            PyExc_SystemError,
+            "NULL result without error in PyObject_Call");
+    }
+    return result;
+}
+#endif
 
 /* PyErrFetchRestore */
 #if CYTHON_FAST_THREAD_STATE

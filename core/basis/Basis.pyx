@@ -1,7 +1,7 @@
 from core.vector3.Vector3 cimport *
+from core.string.String cimport *
 from core.quat.Quat cimport *
 from core.basis.basis_binding cimport *
-from core.string.String cimport *
 
 
 cdef class Basis:

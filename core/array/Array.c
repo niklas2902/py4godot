@@ -624,6 +624,8 @@ static CYTHON_INLINE float __PYX_NAN() {
 #define __PYX_HAVE_API__core__array__Array
 /* Early includes */
 #include <stddef.h>
+#include <string.h>
+#include <stdio.h>
 #include "binding.h"
 #ifdef _OPENMP
 #include <omp.h>
@@ -837,6 +839,7 @@ static const char *__pyx_f[] = {
   "core\\array\\Array.pyx",
   "core\\array\\Array.pxd",
   "core\\variant\\Variant.pxd",
+  "type.pxd",
 };
 
 /*--- Type declarations ---*/
@@ -967,9 +970,9 @@ static CYTHON_INLINE void __pyx_f_4core_7variant_7Variant_7Variant_new_static(go
 static CYTHON_INLINE void __pyx_f_4core_7variant_7Variant_7Variant_new_variant(struct __pyx_obj_4core_7variant_7Variant_Variant *, PyObject *);
 
 
-/* "core/array/Array.pyx":3
- * from core.variant.Variant cimport *
- * from core.array.array_binding cimport *
+/* "core/array/Array.pyx":9
+ * 
+ * 
  * cdef class Array:             # <<<<<<<<<<<<<<
  * 
  *     def __init__(self):
@@ -1238,6 +1241,7 @@ static void __Pyx_AddTraceback(const char *funcname, int c_line,
 /* CIntToPy.proto */
 static CYTHON_INLINE PyObject* __Pyx_PyInt_From_godot_int(godot_int value);
 
+static PyObject* __pyx_convert__to_py_godot_array(godot_array s);
 /* CIntFromPy.proto */
 static CYTHON_INLINE godot_int __Pyx_PyInt_As_godot_int(PyObject *);
 
@@ -1266,6 +1270,9 @@ static CYTHON_INLINE int __Pyx_PyErr_GivenExceptionMatches2(PyObject *err, PyObj
 /* CheckBinaryVersion.proto */
 static int __Pyx_check_binary_version(void);
 
+/* FunctionExport.proto */
+static int __Pyx_ExportFunction(const char *name, void (*f)(void), const char *sig);
+
 /* InitStrings.proto */
 static int __Pyx_InitStrings(__Pyx_StringTabEntry *t);
 
@@ -1279,6 +1286,21 @@ static CYTHON_INLINE void __pyx_f_4core_7variant_7Variant_7Variant_new_variant(C
 
 /* Module declarations from 'libc.stddef' */
 
+/* Module declarations from 'libc.string' */
+
+/* Module declarations from 'libc.stdio' */
+
+/* Module declarations from '__builtin__' */
+
+/* Module declarations from 'cpython.type' */
+static PyTypeObject *__pyx_ptype_7cpython_4type_type = 0;
+
+/* Module declarations from 'cpython' */
+
+/* Module declarations from 'cpython.object' */
+
+/* Module declarations from 'cpython.ref' */
+
 /* Module declarations from 'godot_api.binding' */
 
 /* Module declarations from 'core.array.array_binding' */
@@ -1290,6 +1312,7 @@ static PyTypeObject *__pyx_ptype_4core_7variant_7Variant_Variant = 0;
 
 /* Module declarations from 'core.array.Array' */
 static PyTypeObject *__pyx_ptype_4core_5array_5Array_Array = 0;
+static PyObject *__pyx_f_4core_5array_5Array_set_api_core_array(struct godot_gdnative_core_api_struct *); /*proto*/
 #define __Pyx_MODULE_NAME "core.array.Array"
 extern int __pyx_module_is_main_core__array__Array;
 int __pyx_module_is_main_core__array__Array = 0;
@@ -1316,6 +1339,7 @@ static const char __pyx_k_reduce_ex[] = "__reduce_ex__";
 static const char __pyx_k_pyx_vtable[] = "__pyx_vtable__";
 static const char __pyx_k_new_variant[] = "new_variant";
 static const char __pyx_k_reduce_cython[] = "__reduce_cython__";
+static const char __pyx_k_dont_touch_that[] = "_dont_touch_that";
 static const char __pyx_k_setstate_cython[] = "__setstate_cython__";
 static const char __pyx_k_cline_in_traceback[] = "cline_in_traceback";
 static const char __pyx_k_Pickling_of_struct_members_such[] = "Pickling of struct members such as self._native must be explicitly requested with @auto_pickle(True)";
@@ -1324,6 +1348,7 @@ static PyObject *__pyx_kp_s_Pickling_of_struct_members_such;
 static PyObject *__pyx_n_s_TypeError;
 static PyObject *__pyx_n_s_before;
 static PyObject *__pyx_n_s_cline_in_traceback;
+static PyObject *__pyx_n_s_dont_touch_that;
 static PyObject *__pyx_n_s_from;
 static PyObject *__pyx_n_s_getstate;
 static PyObject *__pyx_n_s_index;
@@ -1369,14 +1394,52 @@ static PyObject *__pyx_pf_4core_5array_5Array_5Array_48size(struct __pyx_obj_4co
 static PyObject *__pyx_pf_4core_5array_5Array_5Array_50sort(struct __pyx_obj_4core_5array_5Array_Array *__pyx_v_self); /* proto */
 static PyObject *__pyx_pf_4core_5array_5Array_5Array_52bsearch(struct __pyx_obj_4core_5array_5Array_Array *__pyx_v_self, struct __pyx_obj_4core_7variant_7Variant_Variant *__pyx_v_value, godot_bool __pyx_v_before); /* proto */
 static PyObject *__pyx_pf_4core_5array_5Array_5Array_54destory(struct __pyx_obj_4core_5array_5Array_Array *__pyx_v_self); /* proto */
-static PyObject *__pyx_pf_4core_5array_5Array_5Array_56__reduce_cython__(CYTHON_UNUSED struct __pyx_obj_4core_5array_5Array_Array *__pyx_v_self); /* proto */
-static PyObject *__pyx_pf_4core_5array_5Array_5Array_58__setstate_cython__(CYTHON_UNUSED struct __pyx_obj_4core_5array_5Array_Array *__pyx_v_self, CYTHON_UNUSED PyObject *__pyx_v___pyx_state); /* proto */
+static PyObject *__pyx_pf_4core_5array_5Array_5Array_56get_native(struct __pyx_obj_4core_5array_5Array_Array *__pyx_v_self); /* proto */
+static PyObject *__pyx_pf_4core_5array_5Array_5Array_58__reduce_cython__(CYTHON_UNUSED struct __pyx_obj_4core_5array_5Array_Array *__pyx_v_self); /* proto */
+static PyObject *__pyx_pf_4core_5array_5Array_5Array_60__setstate_cython__(CYTHON_UNUSED struct __pyx_obj_4core_5array_5Array_Array *__pyx_v_self, CYTHON_UNUSED PyObject *__pyx_v___pyx_state); /* proto */
 static PyObject *__pyx_tp_new_4core_5array_5Array_Array(PyTypeObject *t, PyObject *a, PyObject *k); /*proto*/
 static PyObject *__pyx_tuple_;
 static PyObject *__pyx_tuple__2;
 /* Late includes */
 
-/* "core/array/Array.pyx":5
+/* "core/array/Array.pyx":4
+ * from core.array.array_binding cimport *
+ * 
+ * cdef api set_api_core_array(godot_gdnative_core_api_struct * core):             # <<<<<<<<<<<<<<
+ *     global api_core
+ *     api_core = core
+ */
+
+static PyObject *__pyx_f_4core_5array_5Array_set_api_core_array(struct godot_gdnative_core_api_struct *__pyx_v_core) {
+  PyObject *__pyx_r = NULL;
+  __Pyx_RefNannyDeclarations
+  __Pyx_RefNannySetupContext("set_api_core_array", 0);
+
+  /* "core/array/Array.pyx":6
+ * cdef api set_api_core_array(godot_gdnative_core_api_struct * core):
+ *     global api_core
+ *     api_core = core             # <<<<<<<<<<<<<<
+ * 
+ * 
+ */
+  api_core = __pyx_v_core;
+
+  /* "core/array/Array.pyx":4
+ * from core.array.array_binding cimport *
+ * 
+ * cdef api set_api_core_array(godot_gdnative_core_api_struct * core):             # <<<<<<<<<<<<<<
+ *     global api_core
+ *     api_core = core
+ */
+
+  /* function exit code */
+  __pyx_r = Py_None; __Pyx_INCREF(Py_None);
+  __Pyx_XGIVEREF(__pyx_r);
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+/* "core/array/Array.pyx":11
  * cdef class Array:
  * 
  *     def __init__(self):             # <<<<<<<<<<<<<<
@@ -1405,7 +1468,7 @@ static int __pyx_pf_4core_5array_5Array_5Array___init__(struct __pyx_obj_4core_5
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__init__", 0);
 
-  /* "core/array/Array.pyx":6
+  /* "core/array/Array.pyx":12
  * 
  *     def __init__(self):
  *         api_core.godot_array_new(&self._native)             # <<<<<<<<<<<<<<
@@ -1414,7 +1477,7 @@ static int __pyx_pf_4core_5array_5Array_5Array___init__(struct __pyx_obj_4core_5
  */
   api_core->godot_array_new((&__pyx_v_self->_native));
 
-  /* "core/array/Array.pyx":5
+  /* "core/array/Array.pyx":11
  * cdef class Array:
  * 
  *     def __init__(self):             # <<<<<<<<<<<<<<
@@ -1428,7 +1491,7 @@ static int __pyx_pf_4core_5array_5Array_5Array___init__(struct __pyx_obj_4core_5
   return __pyx_r;
 }
 
-/* "core/array/Array.pyx":8
+/* "core/array/Array.pyx":14
  *         api_core.godot_array_new(&self._native)
  * 
  *     def set(self, godot_int index, Variant value):             # <<<<<<<<<<<<<<
@@ -1470,11 +1533,11 @@ static PyObject *__pyx_pw_4core_5array_5Array_5Array_3set(PyObject *__pyx_v_self
         case  1:
         if (likely((values[1] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_value)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("set", 1, 2, 2, 1); __PYX_ERR(1, 8, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("set", 1, 2, 2, 1); __PYX_ERR(1, 14, __pyx_L3_error)
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "set") < 0)) __PYX_ERR(1, 8, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "set") < 0)) __PYX_ERR(1, 14, __pyx_L3_error)
       }
     } else if (PyTuple_GET_SIZE(__pyx_args) != 2) {
       goto __pyx_L5_argtuple_error;
@@ -1482,18 +1545,18 @@ static PyObject *__pyx_pw_4core_5array_5Array_5Array_3set(PyObject *__pyx_v_self
       values[0] = PyTuple_GET_ITEM(__pyx_args, 0);
       values[1] = PyTuple_GET_ITEM(__pyx_args, 1);
     }
-    __pyx_v_index = __Pyx_PyInt_As_godot_int(values[0]); if (unlikely((__pyx_v_index == ((godot_int)-1)) && PyErr_Occurred())) __PYX_ERR(1, 8, __pyx_L3_error)
+    __pyx_v_index = __Pyx_PyInt_As_godot_int(values[0]); if (unlikely((__pyx_v_index == ((godot_int)-1)) && PyErr_Occurred())) __PYX_ERR(1, 14, __pyx_L3_error)
     __pyx_v_value = ((struct __pyx_obj_4core_7variant_7Variant_Variant *)values[1]);
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("set", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(1, 8, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("set", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(1, 14, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("core.array.Array.Array.set", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_value), __pyx_ptype_4core_7variant_7Variant_Variant, 1, "value", 0))) __PYX_ERR(1, 8, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_value), __pyx_ptype_4core_7variant_7Variant_Variant, 1, "value", 0))) __PYX_ERR(1, 14, __pyx_L1_error)
   __pyx_r = __pyx_pf_4core_5array_5Array_5Array_2set(((struct __pyx_obj_4core_5array_5Array_Array *)__pyx_v_self), __pyx_v_index, __pyx_v_value);
 
   /* function exit code */
@@ -1510,7 +1573,7 @@ static PyObject *__pyx_pf_4core_5array_5Array_5Array_2set(struct __pyx_obj_4core
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("set", 0);
 
-  /* "core/array/Array.pyx":9
+  /* "core/array/Array.pyx":15
  * 
  *     def set(self, godot_int index, Variant value):
  *         api_core.godot_array_set(&self._native, index, &value._native)             # <<<<<<<<<<<<<<
@@ -1519,7 +1582,7 @@ static PyObject *__pyx_pf_4core_5array_5Array_5Array_2set(struct __pyx_obj_4core
  */
   api_core->godot_array_set((&__pyx_v_self->_native), __pyx_v_index, (&__pyx_v_value->_native));
 
-  /* "core/array/Array.pyx":8
+  /* "core/array/Array.pyx":14
  *         api_core.godot_array_new(&self._native)
  * 
  *     def set(self, godot_int index, Variant value):             # <<<<<<<<<<<<<<
@@ -1534,7 +1597,7 @@ static PyObject *__pyx_pf_4core_5array_5Array_5Array_2set(struct __pyx_obj_4core
   return __pyx_r;
 }
 
-/* "core/array/Array.pyx":11
+/* "core/array/Array.pyx":17
  *         api_core.godot_array_set(&self._native, index, &value._native)
  * 
  *     def get(self, godot_int index):             # <<<<<<<<<<<<<<
@@ -1553,7 +1616,7 @@ static PyObject *__pyx_pw_4core_5array_5Array_5Array_5get(PyObject *__pyx_v_self
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("get (wrapper)", 0);
   assert(__pyx_arg_index); {
-    __pyx_v_index = __Pyx_PyInt_As_godot_int(__pyx_arg_index); if (unlikely((__pyx_v_index == ((godot_int)-1)) && PyErr_Occurred())) __PYX_ERR(1, 11, __pyx_L3_error)
+    __pyx_v_index = __Pyx_PyInt_As_godot_int(__pyx_arg_index); if (unlikely((__pyx_v_index == ((godot_int)-1)) && PyErr_Occurred())) __PYX_ERR(1, 17, __pyx_L3_error)
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -1577,7 +1640,7 @@ static PyObject *__pyx_pf_4core_5array_5Array_5Array_4get(struct __pyx_obj_4core
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("get", 0);
 
-  /* "core/array/Array.pyx":12
+  /* "core/array/Array.pyx":18
  * 
  *     def get(self, godot_int index):
  *         return Variant. new_static(api_core.godot_array_get(&self._native, index))             # <<<<<<<<<<<<<<
@@ -1585,13 +1648,13 @@ static PyObject *__pyx_pf_4core_5array_5Array_5Array_4get(struct __pyx_obj_4core
  *     def __getitem__(self, godot_int index):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_void_to_None(__pyx_f_4core_7variant_7Variant_7Variant_new_static(api_core->godot_array_get((&__pyx_v_self->_native), __pyx_v_index))); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 12, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_void_to_None(__pyx_f_4core_7variant_7Variant_7Variant_new_static(api_core->godot_array_get((&__pyx_v_self->_native), __pyx_v_index))); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 18, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "core/array/Array.pyx":11
+  /* "core/array/Array.pyx":17
  *         api_core.godot_array_set(&self._native, index, &value._native)
  * 
  *     def get(self, godot_int index):             # <<<<<<<<<<<<<<
@@ -1610,7 +1673,7 @@ static PyObject *__pyx_pf_4core_5array_5Array_5Array_4get(struct __pyx_obj_4core
   return __pyx_r;
 }
 
-/* "core/array/Array.pyx":14
+/* "core/array/Array.pyx":20
  *         return Variant. new_static(api_core.godot_array_get(&self._native, index))
  * 
  *     def __getitem__(self, godot_int index):             # <<<<<<<<<<<<<<
@@ -1629,7 +1692,7 @@ static PyObject *__pyx_pw_4core_5array_5Array_5Array_7__getitem__(PyObject *__py
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__getitem__ (wrapper)", 0);
   assert(__pyx_arg_index); {
-    __pyx_v_index = __Pyx_PyInt_As_godot_int(__pyx_arg_index); if (unlikely((__pyx_v_index == ((godot_int)-1)) && PyErr_Occurred())) __PYX_ERR(1, 14, __pyx_L3_error)
+    __pyx_v_index = __Pyx_PyInt_As_godot_int(__pyx_arg_index); if (unlikely((__pyx_v_index == ((godot_int)-1)) && PyErr_Occurred())) __PYX_ERR(1, 20, __pyx_L3_error)
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -1653,7 +1716,7 @@ static PyObject *__pyx_pf_4core_5array_5Array_5Array_6__getitem__(struct __pyx_o
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__getitem__", 0);
 
-  /* "core/array/Array.pyx":15
+  /* "core/array/Array.pyx":21
  * 
  *     def __getitem__(self, godot_int index):
  *         return Variant. new_static(api_core.godot_array_get(&self._native, index))             # <<<<<<<<<<<<<<
@@ -1661,13 +1724,13 @@ static PyObject *__pyx_pf_4core_5array_5Array_5Array_6__getitem__(struct __pyx_o
  *     def append(self, Variant value):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_void_to_None(__pyx_f_4core_7variant_7Variant_7Variant_new_static(api_core->godot_array_get((&__pyx_v_self->_native), __pyx_v_index))); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 15, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_void_to_None(__pyx_f_4core_7variant_7Variant_7Variant_new_static(api_core->godot_array_get((&__pyx_v_self->_native), __pyx_v_index))); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 21, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "core/array/Array.pyx":14
+  /* "core/array/Array.pyx":20
  *         return Variant. new_static(api_core.godot_array_get(&self._native, index))
  * 
  *     def __getitem__(self, godot_int index):             # <<<<<<<<<<<<<<
@@ -1686,7 +1749,7 @@ static PyObject *__pyx_pf_4core_5array_5Array_5Array_6__getitem__(struct __pyx_o
   return __pyx_r;
 }
 
-/* "core/array/Array.pyx":17
+/* "core/array/Array.pyx":23
  *         return Variant. new_static(api_core.godot_array_get(&self._native, index))
  * 
  *     def append(self, Variant value):             # <<<<<<<<<<<<<<
@@ -1703,7 +1766,7 @@ static PyObject *__pyx_pw_4core_5array_5Array_5Array_9append(PyObject *__pyx_v_s
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("append (wrapper)", 0);
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_value), __pyx_ptype_4core_7variant_7Variant_Variant, 1, "value", 0))) __PYX_ERR(1, 17, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_value), __pyx_ptype_4core_7variant_7Variant_Variant, 1, "value", 0))) __PYX_ERR(1, 23, __pyx_L1_error)
   __pyx_r = __pyx_pf_4core_5array_5Array_5Array_8append(((struct __pyx_obj_4core_5array_5Array_Array *)__pyx_v_self), ((struct __pyx_obj_4core_7variant_7Variant_Variant *)__pyx_v_value));
 
   /* function exit code */
@@ -1720,7 +1783,7 @@ static PyObject *__pyx_pf_4core_5array_5Array_5Array_8append(struct __pyx_obj_4c
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("append", 0);
 
-  /* "core/array/Array.pyx":18
+  /* "core/array/Array.pyx":24
  * 
  *     def append(self, Variant value):
  *         api_core.godot_array_append(&self._native, &value._native)             # <<<<<<<<<<<<<<
@@ -1729,7 +1792,7 @@ static PyObject *__pyx_pf_4core_5array_5Array_5Array_8append(struct __pyx_obj_4c
  */
   api_core->godot_array_append((&__pyx_v_self->_native), (&__pyx_v_value->_native));
 
-  /* "core/array/Array.pyx":17
+  /* "core/array/Array.pyx":23
  *         return Variant. new_static(api_core.godot_array_get(&self._native, index))
  * 
  *     def append(self, Variant value):             # <<<<<<<<<<<<<<
@@ -1744,7 +1807,7 @@ static PyObject *__pyx_pf_4core_5array_5Array_5Array_8append(struct __pyx_obj_4c
   return __pyx_r;
 }
 
-/* "core/array/Array.pyx":20
+/* "core/array/Array.pyx":26
  *         api_core.godot_array_append(&self._native, &value._native)
  * 
  *     def clear(self):             # <<<<<<<<<<<<<<
@@ -1770,7 +1833,7 @@ static PyObject *__pyx_pf_4core_5array_5Array_5Array_10clear(struct __pyx_obj_4c
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("clear", 0);
 
-  /* "core/array/Array.pyx":21
+  /* "core/array/Array.pyx":27
  * 
  *     def clear(self):
  *         api_core.godot_array_clear(&self._native)             # <<<<<<<<<<<<<<
@@ -1779,7 +1842,7 @@ static PyObject *__pyx_pf_4core_5array_5Array_5Array_10clear(struct __pyx_obj_4c
  */
   api_core->godot_array_clear((&__pyx_v_self->_native));
 
-  /* "core/array/Array.pyx":20
+  /* "core/array/Array.pyx":26
  *         api_core.godot_array_append(&self._native, &value._native)
  * 
  *     def clear(self):             # <<<<<<<<<<<<<<
@@ -1794,7 +1857,7 @@ static PyObject *__pyx_pf_4core_5array_5Array_5Array_10clear(struct __pyx_obj_4c
   return __pyx_r;
 }
 
-/* "core/array/Array.pyx":23
+/* "core/array/Array.pyx":29
  *         api_core.godot_array_clear(&self._native)
  * 
  *     def count(self, Variant value):             # <<<<<<<<<<<<<<
@@ -1811,7 +1874,7 @@ static PyObject *__pyx_pw_4core_5array_5Array_5Array_13count(PyObject *__pyx_v_s
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("count (wrapper)", 0);
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_value), __pyx_ptype_4core_7variant_7Variant_Variant, 1, "value", 0))) __PYX_ERR(1, 23, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_value), __pyx_ptype_4core_7variant_7Variant_Variant, 1, "value", 0))) __PYX_ERR(1, 29, __pyx_L1_error)
   __pyx_r = __pyx_pf_4core_5array_5Array_5Array_12count(((struct __pyx_obj_4core_5array_5Array_Array *)__pyx_v_self), ((struct __pyx_obj_4core_7variant_7Variant_Variant *)__pyx_v_value));
 
   /* function exit code */
@@ -1832,7 +1895,7 @@ static PyObject *__pyx_pf_4core_5array_5Array_5Array_12count(struct __pyx_obj_4c
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("count", 0);
 
-  /* "core/array/Array.pyx":24
+  /* "core/array/Array.pyx":30
  * 
  *     def count(self, Variant value):
  *         return api_core.godot_array_count(&self._native, &value._native)             # <<<<<<<<<<<<<<
@@ -1840,13 +1903,13 @@ static PyObject *__pyx_pf_4core_5array_5Array_5Array_12count(struct __pyx_obj_4c
  *     def empty(self):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_PyInt_From_godot_int(api_core->godot_array_count((&__pyx_v_self->_native), (&__pyx_v_value->_native))); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 24, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyInt_From_godot_int(api_core->godot_array_count((&__pyx_v_self->_native), (&__pyx_v_value->_native))); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 30, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "core/array/Array.pyx":23
+  /* "core/array/Array.pyx":29
  *         api_core.godot_array_clear(&self._native)
  * 
  *     def count(self, Variant value):             # <<<<<<<<<<<<<<
@@ -1865,7 +1928,7 @@ static PyObject *__pyx_pf_4core_5array_5Array_5Array_12count(struct __pyx_obj_4c
   return __pyx_r;
 }
 
-/* "core/array/Array.pyx":26
+/* "core/array/Array.pyx":32
  *         return api_core.godot_array_count(&self._native, &value._native)
  * 
  *     def empty(self):             # <<<<<<<<<<<<<<
@@ -1895,7 +1958,7 @@ static PyObject *__pyx_pf_4core_5array_5Array_5Array_14empty(struct __pyx_obj_4c
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("empty", 0);
 
-  /* "core/array/Array.pyx":27
+  /* "core/array/Array.pyx":33
  * 
  *     def empty(self):
  *         return api_core.godot_array_empty(&self._native)             # <<<<<<<<<<<<<<
@@ -1903,13 +1966,13 @@ static PyObject *__pyx_pf_4core_5array_5Array_5Array_14empty(struct __pyx_obj_4c
  *     def erase(self, Variant value):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_PyBool_FromLong(api_core->godot_array_empty((&__pyx_v_self->_native))); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 27, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyBool_FromLong(api_core->godot_array_empty((&__pyx_v_self->_native))); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 33, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "core/array/Array.pyx":26
+  /* "core/array/Array.pyx":32
  *         return api_core.godot_array_count(&self._native, &value._native)
  * 
  *     def empty(self):             # <<<<<<<<<<<<<<
@@ -1928,7 +1991,7 @@ static PyObject *__pyx_pf_4core_5array_5Array_5Array_14empty(struct __pyx_obj_4c
   return __pyx_r;
 }
 
-/* "core/array/Array.pyx":29
+/* "core/array/Array.pyx":35
  *         return api_core.godot_array_empty(&self._native)
  * 
  *     def erase(self, Variant value):             # <<<<<<<<<<<<<<
@@ -1945,7 +2008,7 @@ static PyObject *__pyx_pw_4core_5array_5Array_5Array_17erase(PyObject *__pyx_v_s
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("erase (wrapper)", 0);
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_value), __pyx_ptype_4core_7variant_7Variant_Variant, 1, "value", 0))) __PYX_ERR(1, 29, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_value), __pyx_ptype_4core_7variant_7Variant_Variant, 1, "value", 0))) __PYX_ERR(1, 35, __pyx_L1_error)
   __pyx_r = __pyx_pf_4core_5array_5Array_5Array_16erase(((struct __pyx_obj_4core_5array_5Array_Array *)__pyx_v_self), ((struct __pyx_obj_4core_7variant_7Variant_Variant *)__pyx_v_value));
 
   /* function exit code */
@@ -1962,7 +2025,7 @@ static PyObject *__pyx_pf_4core_5array_5Array_5Array_16erase(struct __pyx_obj_4c
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("erase", 0);
 
-  /* "core/array/Array.pyx":30
+  /* "core/array/Array.pyx":36
  * 
  *     def erase(self, Variant value):
  *         api_core.godot_array_erase(&self._native, &value._native)             # <<<<<<<<<<<<<<
@@ -1971,7 +2034,7 @@ static PyObject *__pyx_pf_4core_5array_5Array_5Array_16erase(struct __pyx_obj_4c
  */
   api_core->godot_array_erase((&__pyx_v_self->_native), (&__pyx_v_value->_native));
 
-  /* "core/array/Array.pyx":29
+  /* "core/array/Array.pyx":35
  *         return api_core.godot_array_empty(&self._native)
  * 
  *     def erase(self, Variant value):             # <<<<<<<<<<<<<<
@@ -1986,7 +2049,7 @@ static PyObject *__pyx_pf_4core_5array_5Array_5Array_16erase(struct __pyx_obj_4c
   return __pyx_r;
 }
 
-/* "core/array/Array.pyx":32
+/* "core/array/Array.pyx":38
  *         api_core.godot_array_erase(&self._native, &value._native)
  * 
  *     def front(self):             # <<<<<<<<<<<<<<
@@ -2016,7 +2079,7 @@ static PyObject *__pyx_pf_4core_5array_5Array_5Array_18front(struct __pyx_obj_4c
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("front", 0);
 
-  /* "core/array/Array.pyx":33
+  /* "core/array/Array.pyx":39
  * 
  *     def front(self):
  *         return Variant. new_static(api_core.godot_array_front(&self._native))             # <<<<<<<<<<<<<<
@@ -2024,13 +2087,13 @@ static PyObject *__pyx_pf_4core_5array_5Array_5Array_18front(struct __pyx_obj_4c
  *     def back(self):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_void_to_None(__pyx_f_4core_7variant_7Variant_7Variant_new_static(api_core->godot_array_front((&__pyx_v_self->_native)))); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 33, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_void_to_None(__pyx_f_4core_7variant_7Variant_7Variant_new_static(api_core->godot_array_front((&__pyx_v_self->_native)))); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 39, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "core/array/Array.pyx":32
+  /* "core/array/Array.pyx":38
  *         api_core.godot_array_erase(&self._native, &value._native)
  * 
  *     def front(self):             # <<<<<<<<<<<<<<
@@ -2049,7 +2112,7 @@ static PyObject *__pyx_pf_4core_5array_5Array_5Array_18front(struct __pyx_obj_4c
   return __pyx_r;
 }
 
-/* "core/array/Array.pyx":35
+/* "core/array/Array.pyx":41
  *         return Variant. new_static(api_core.godot_array_front(&self._native))
  * 
  *     def back(self):             # <<<<<<<<<<<<<<
@@ -2079,7 +2142,7 @@ static PyObject *__pyx_pf_4core_5array_5Array_5Array_20back(struct __pyx_obj_4co
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("back", 0);
 
-  /* "core/array/Array.pyx":36
+  /* "core/array/Array.pyx":42
  * 
  *     def back(self):
  *         return Variant. new_static(api_core.godot_array_back(&self._native))             # <<<<<<<<<<<<<<
@@ -2087,13 +2150,13 @@ static PyObject *__pyx_pf_4core_5array_5Array_5Array_20back(struct __pyx_obj_4co
  *     def find(self, Variant what, godot_int from_):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_void_to_None(__pyx_f_4core_7variant_7Variant_7Variant_new_static(api_core->godot_array_back((&__pyx_v_self->_native)))); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 36, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_void_to_None(__pyx_f_4core_7variant_7Variant_7Variant_new_static(api_core->godot_array_back((&__pyx_v_self->_native)))); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 42, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "core/array/Array.pyx":35
+  /* "core/array/Array.pyx":41
  *         return Variant. new_static(api_core.godot_array_front(&self._native))
  * 
  *     def back(self):             # <<<<<<<<<<<<<<
@@ -2112,7 +2175,7 @@ static PyObject *__pyx_pf_4core_5array_5Array_5Array_20back(struct __pyx_obj_4co
   return __pyx_r;
 }
 
-/* "core/array/Array.pyx":38
+/* "core/array/Array.pyx":44
  *         return Variant. new_static(api_core.godot_array_back(&self._native))
  * 
  *     def find(self, Variant what, godot_int from_):             # <<<<<<<<<<<<<<
@@ -2154,11 +2217,11 @@ static PyObject *__pyx_pw_4core_5array_5Array_5Array_23find(PyObject *__pyx_v_se
         case  1:
         if (likely((values[1] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_from)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("find", 1, 2, 2, 1); __PYX_ERR(1, 38, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("find", 1, 2, 2, 1); __PYX_ERR(1, 44, __pyx_L3_error)
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "find") < 0)) __PYX_ERR(1, 38, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "find") < 0)) __PYX_ERR(1, 44, __pyx_L3_error)
       }
     } else if (PyTuple_GET_SIZE(__pyx_args) != 2) {
       goto __pyx_L5_argtuple_error;
@@ -2167,17 +2230,17 @@ static PyObject *__pyx_pw_4core_5array_5Array_5Array_23find(PyObject *__pyx_v_se
       values[1] = PyTuple_GET_ITEM(__pyx_args, 1);
     }
     __pyx_v_what = ((struct __pyx_obj_4core_7variant_7Variant_Variant *)values[0]);
-    __pyx_v_from_ = __Pyx_PyInt_As_godot_int(values[1]); if (unlikely((__pyx_v_from_ == ((godot_int)-1)) && PyErr_Occurred())) __PYX_ERR(1, 38, __pyx_L3_error)
+    __pyx_v_from_ = __Pyx_PyInt_As_godot_int(values[1]); if (unlikely((__pyx_v_from_ == ((godot_int)-1)) && PyErr_Occurred())) __PYX_ERR(1, 44, __pyx_L3_error)
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("find", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(1, 38, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("find", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(1, 44, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("core.array.Array.Array.find", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_what), __pyx_ptype_4core_7variant_7Variant_Variant, 1, "what", 0))) __PYX_ERR(1, 38, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_what), __pyx_ptype_4core_7variant_7Variant_Variant, 1, "what", 0))) __PYX_ERR(1, 44, __pyx_L1_error)
   __pyx_r = __pyx_pf_4core_5array_5Array_5Array_22find(((struct __pyx_obj_4core_5array_5Array_Array *)__pyx_v_self), __pyx_v_what, __pyx_v_from_);
 
   /* function exit code */
@@ -2198,7 +2261,7 @@ static PyObject *__pyx_pf_4core_5array_5Array_5Array_22find(struct __pyx_obj_4co
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("find", 0);
 
-  /* "core/array/Array.pyx":39
+  /* "core/array/Array.pyx":45
  * 
  *     def find(self, Variant what, godot_int from_):
  *         return api_core.godot_array_find(&self._native, &what._native, from_)             # <<<<<<<<<<<<<<
@@ -2206,13 +2269,13 @@ static PyObject *__pyx_pf_4core_5array_5Array_5Array_22find(struct __pyx_obj_4co
  *     def find_last(self, Variant what):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_PyInt_From_godot_int(api_core->godot_array_find((&__pyx_v_self->_native), (&__pyx_v_what->_native), __pyx_v_from_)); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 39, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyInt_From_godot_int(api_core->godot_array_find((&__pyx_v_self->_native), (&__pyx_v_what->_native), __pyx_v_from_)); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 45, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "core/array/Array.pyx":38
+  /* "core/array/Array.pyx":44
  *         return Variant. new_static(api_core.godot_array_back(&self._native))
  * 
  *     def find(self, Variant what, godot_int from_):             # <<<<<<<<<<<<<<
@@ -2231,7 +2294,7 @@ static PyObject *__pyx_pf_4core_5array_5Array_5Array_22find(struct __pyx_obj_4co
   return __pyx_r;
 }
 
-/* "core/array/Array.pyx":41
+/* "core/array/Array.pyx":47
  *         return api_core.godot_array_find(&self._native, &what._native, from_)
  * 
  *     def find_last(self, Variant what):             # <<<<<<<<<<<<<<
@@ -2248,7 +2311,7 @@ static PyObject *__pyx_pw_4core_5array_5Array_5Array_25find_last(PyObject *__pyx
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("find_last (wrapper)", 0);
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_what), __pyx_ptype_4core_7variant_7Variant_Variant, 1, "what", 0))) __PYX_ERR(1, 41, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_what), __pyx_ptype_4core_7variant_7Variant_Variant, 1, "what", 0))) __PYX_ERR(1, 47, __pyx_L1_error)
   __pyx_r = __pyx_pf_4core_5array_5Array_5Array_24find_last(((struct __pyx_obj_4core_5array_5Array_Array *)__pyx_v_self), ((struct __pyx_obj_4core_7variant_7Variant_Variant *)__pyx_v_what));
 
   /* function exit code */
@@ -2269,7 +2332,7 @@ static PyObject *__pyx_pf_4core_5array_5Array_5Array_24find_last(struct __pyx_ob
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("find_last", 0);
 
-  /* "core/array/Array.pyx":42
+  /* "core/array/Array.pyx":48
  * 
  *     def find_last(self, Variant what):
  *         return api_core.godot_array_find_last(&self._native, &what._native)             # <<<<<<<<<<<<<<
@@ -2277,13 +2340,13 @@ static PyObject *__pyx_pf_4core_5array_5Array_5Array_24find_last(struct __pyx_ob
  *     def has(self, Variant value):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_PyInt_From_godot_int(api_core->godot_array_find_last((&__pyx_v_self->_native), (&__pyx_v_what->_native))); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 42, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyInt_From_godot_int(api_core->godot_array_find_last((&__pyx_v_self->_native), (&__pyx_v_what->_native))); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 48, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "core/array/Array.pyx":41
+  /* "core/array/Array.pyx":47
  *         return api_core.godot_array_find(&self._native, &what._native, from_)
  * 
  *     def find_last(self, Variant what):             # <<<<<<<<<<<<<<
@@ -2302,7 +2365,7 @@ static PyObject *__pyx_pf_4core_5array_5Array_5Array_24find_last(struct __pyx_ob
   return __pyx_r;
 }
 
-/* "core/array/Array.pyx":44
+/* "core/array/Array.pyx":50
  *         return api_core.godot_array_find_last(&self._native, &what._native)
  * 
  *     def has(self, Variant value):             # <<<<<<<<<<<<<<
@@ -2319,7 +2382,7 @@ static PyObject *__pyx_pw_4core_5array_5Array_5Array_27has(PyObject *__pyx_v_sel
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("has (wrapper)", 0);
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_value), __pyx_ptype_4core_7variant_7Variant_Variant, 1, "value", 0))) __PYX_ERR(1, 44, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_value), __pyx_ptype_4core_7variant_7Variant_Variant, 1, "value", 0))) __PYX_ERR(1, 50, __pyx_L1_error)
   __pyx_r = __pyx_pf_4core_5array_5Array_5Array_26has(((struct __pyx_obj_4core_5array_5Array_Array *)__pyx_v_self), ((struct __pyx_obj_4core_7variant_7Variant_Variant *)__pyx_v_value));
 
   /* function exit code */
@@ -2340,7 +2403,7 @@ static PyObject *__pyx_pf_4core_5array_5Array_5Array_26has(struct __pyx_obj_4cor
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("has", 0);
 
-  /* "core/array/Array.pyx":45
+  /* "core/array/Array.pyx":51
  * 
  *     def has(self, Variant value):
  *         return api_core.godot_array_has(&self._native, &value._native)             # <<<<<<<<<<<<<<
@@ -2348,13 +2411,13 @@ static PyObject *__pyx_pf_4core_5array_5Array_5Array_26has(struct __pyx_obj_4cor
  *     def hash(self):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_PyBool_FromLong(api_core->godot_array_has((&__pyx_v_self->_native), (&__pyx_v_value->_native))); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 45, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyBool_FromLong(api_core->godot_array_has((&__pyx_v_self->_native), (&__pyx_v_value->_native))); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 51, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "core/array/Array.pyx":44
+  /* "core/array/Array.pyx":50
  *         return api_core.godot_array_find_last(&self._native, &what._native)
  * 
  *     def has(self, Variant value):             # <<<<<<<<<<<<<<
@@ -2373,7 +2436,7 @@ static PyObject *__pyx_pf_4core_5array_5Array_5Array_26has(struct __pyx_obj_4cor
   return __pyx_r;
 }
 
-/* "core/array/Array.pyx":47
+/* "core/array/Array.pyx":53
  *         return api_core.godot_array_has(&self._native, &value._native)
  * 
  *     def hash(self):             # <<<<<<<<<<<<<<
@@ -2403,7 +2466,7 @@ static PyObject *__pyx_pf_4core_5array_5Array_5Array_28hash(struct __pyx_obj_4co
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("hash", 0);
 
-  /* "core/array/Array.pyx":48
+  /* "core/array/Array.pyx":54
  * 
  *     def hash(self):
  *         return api_core.godot_array_hash(&self._native)             # <<<<<<<<<<<<<<
@@ -2411,13 +2474,13 @@ static PyObject *__pyx_pf_4core_5array_5Array_5Array_28hash(struct __pyx_obj_4co
  *     def insert(self, godot_int pos, Variant value):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_PyInt_From_godot_int(api_core->godot_array_hash((&__pyx_v_self->_native))); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 48, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyInt_From_godot_int(api_core->godot_array_hash((&__pyx_v_self->_native))); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 54, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "core/array/Array.pyx":47
+  /* "core/array/Array.pyx":53
  *         return api_core.godot_array_has(&self._native, &value._native)
  * 
  *     def hash(self):             # <<<<<<<<<<<<<<
@@ -2436,7 +2499,7 @@ static PyObject *__pyx_pf_4core_5array_5Array_5Array_28hash(struct __pyx_obj_4co
   return __pyx_r;
 }
 
-/* "core/array/Array.pyx":50
+/* "core/array/Array.pyx":56
  *         return api_core.godot_array_hash(&self._native)
  * 
  *     def insert(self, godot_int pos, Variant value):             # <<<<<<<<<<<<<<
@@ -2478,11 +2541,11 @@ static PyObject *__pyx_pw_4core_5array_5Array_5Array_31insert(PyObject *__pyx_v_
         case  1:
         if (likely((values[1] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_value)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("insert", 1, 2, 2, 1); __PYX_ERR(1, 50, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("insert", 1, 2, 2, 1); __PYX_ERR(1, 56, __pyx_L3_error)
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "insert") < 0)) __PYX_ERR(1, 50, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "insert") < 0)) __PYX_ERR(1, 56, __pyx_L3_error)
       }
     } else if (PyTuple_GET_SIZE(__pyx_args) != 2) {
       goto __pyx_L5_argtuple_error;
@@ -2490,18 +2553,18 @@ static PyObject *__pyx_pw_4core_5array_5Array_5Array_31insert(PyObject *__pyx_v_
       values[0] = PyTuple_GET_ITEM(__pyx_args, 0);
       values[1] = PyTuple_GET_ITEM(__pyx_args, 1);
     }
-    __pyx_v_pos = __Pyx_PyInt_As_godot_int(values[0]); if (unlikely((__pyx_v_pos == ((godot_int)-1)) && PyErr_Occurred())) __PYX_ERR(1, 50, __pyx_L3_error)
+    __pyx_v_pos = __Pyx_PyInt_As_godot_int(values[0]); if (unlikely((__pyx_v_pos == ((godot_int)-1)) && PyErr_Occurred())) __PYX_ERR(1, 56, __pyx_L3_error)
     __pyx_v_value = ((struct __pyx_obj_4core_7variant_7Variant_Variant *)values[1]);
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("insert", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(1, 50, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("insert", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(1, 56, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("core.array.Array.Array.insert", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_value), __pyx_ptype_4core_7variant_7Variant_Variant, 1, "value", 0))) __PYX_ERR(1, 50, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_value), __pyx_ptype_4core_7variant_7Variant_Variant, 1, "value", 0))) __PYX_ERR(1, 56, __pyx_L1_error)
   __pyx_r = __pyx_pf_4core_5array_5Array_5Array_30insert(((struct __pyx_obj_4core_5array_5Array_Array *)__pyx_v_self), __pyx_v_pos, __pyx_v_value);
 
   /* function exit code */
@@ -2522,7 +2585,7 @@ static PyObject *__pyx_pf_4core_5array_5Array_5Array_30insert(struct __pyx_obj_4
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("insert", 0);
 
-  /* "core/array/Array.pyx":51
+  /* "core/array/Array.pyx":57
  * 
  *     def insert(self, godot_int pos, Variant value):
  *         return api_core.godot_array_insert(&self._native, pos, &value._native)             # <<<<<<<<<<<<<<
@@ -2530,13 +2593,13 @@ static PyObject *__pyx_pf_4core_5array_5Array_5Array_30insert(struct __pyx_obj_4
  *     def invert(self):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_void_to_None(api_core->godot_array_insert((&__pyx_v_self->_native), __pyx_v_pos, (&__pyx_v_value->_native))); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 51, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_void_to_None(api_core->godot_array_insert((&__pyx_v_self->_native), __pyx_v_pos, (&__pyx_v_value->_native))); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 57, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "core/array/Array.pyx":50
+  /* "core/array/Array.pyx":56
  *         return api_core.godot_array_hash(&self._native)
  * 
  *     def insert(self, godot_int pos, Variant value):             # <<<<<<<<<<<<<<
@@ -2555,7 +2618,7 @@ static PyObject *__pyx_pf_4core_5array_5Array_5Array_30insert(struct __pyx_obj_4
   return __pyx_r;
 }
 
-/* "core/array/Array.pyx":53
+/* "core/array/Array.pyx":59
  *         return api_core.godot_array_insert(&self._native, pos, &value._native)
  * 
  *     def invert(self):             # <<<<<<<<<<<<<<
@@ -2585,7 +2648,7 @@ static PyObject *__pyx_pf_4core_5array_5Array_5Array_32invert(struct __pyx_obj_4
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("invert", 0);
 
-  /* "core/array/Array.pyx":54
+  /* "core/array/Array.pyx":60
  * 
  *     def invert(self):
  *         return api_core.godot_array_invert(&self._native)             # <<<<<<<<<<<<<<
@@ -2593,13 +2656,13 @@ static PyObject *__pyx_pf_4core_5array_5Array_5Array_32invert(struct __pyx_obj_4
  *     def pop_back(self):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_void_to_None(api_core->godot_array_invert((&__pyx_v_self->_native))); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 54, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_void_to_None(api_core->godot_array_invert((&__pyx_v_self->_native))); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 60, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "core/array/Array.pyx":53
+  /* "core/array/Array.pyx":59
  *         return api_core.godot_array_insert(&self._native, pos, &value._native)
  * 
  *     def invert(self):             # <<<<<<<<<<<<<<
@@ -2618,7 +2681,7 @@ static PyObject *__pyx_pf_4core_5array_5Array_5Array_32invert(struct __pyx_obj_4
   return __pyx_r;
 }
 
-/* "core/array/Array.pyx":56
+/* "core/array/Array.pyx":62
  *         return api_core.godot_array_invert(&self._native)
  * 
  *     def pop_back(self):             # <<<<<<<<<<<<<<
@@ -2648,7 +2711,7 @@ static PyObject *__pyx_pf_4core_5array_5Array_5Array_34pop_back(struct __pyx_obj
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("pop_back", 0);
 
-  /* "core/array/Array.pyx":57
+  /* "core/array/Array.pyx":63
  * 
  *     def pop_back(self):
  *         return Variant. new_static(api_core.godot_array_pop_back(&self._native))             # <<<<<<<<<<<<<<
@@ -2656,13 +2719,13 @@ static PyObject *__pyx_pf_4core_5array_5Array_5Array_34pop_back(struct __pyx_obj
  *     def pop_front(self):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_void_to_None(__pyx_f_4core_7variant_7Variant_7Variant_new_static(api_core->godot_array_pop_back((&__pyx_v_self->_native)))); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 57, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_void_to_None(__pyx_f_4core_7variant_7Variant_7Variant_new_static(api_core->godot_array_pop_back((&__pyx_v_self->_native)))); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 63, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "core/array/Array.pyx":56
+  /* "core/array/Array.pyx":62
  *         return api_core.godot_array_invert(&self._native)
  * 
  *     def pop_back(self):             # <<<<<<<<<<<<<<
@@ -2681,7 +2744,7 @@ static PyObject *__pyx_pf_4core_5array_5Array_5Array_34pop_back(struct __pyx_obj
   return __pyx_r;
 }
 
-/* "core/array/Array.pyx":59
+/* "core/array/Array.pyx":65
  *         return Variant. new_static(api_core.godot_array_pop_back(&self._native))
  * 
  *     def pop_front(self):             # <<<<<<<<<<<<<<
@@ -2711,7 +2774,7 @@ static PyObject *__pyx_pf_4core_5array_5Array_5Array_36pop_front(struct __pyx_ob
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("pop_front", 0);
 
-  /* "core/array/Array.pyx":60
+  /* "core/array/Array.pyx":66
  * 
  *     def pop_front(self):
  *         return Variant. new_static(api_core.godot_array_pop_front(&self._native))             # <<<<<<<<<<<<<<
@@ -2719,13 +2782,13 @@ static PyObject *__pyx_pf_4core_5array_5Array_5Array_36pop_front(struct __pyx_ob
  *     def push_back(self, Variant value):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_void_to_None(__pyx_f_4core_7variant_7Variant_7Variant_new_static(api_core->godot_array_pop_front((&__pyx_v_self->_native)))); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 60, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_void_to_None(__pyx_f_4core_7variant_7Variant_7Variant_new_static(api_core->godot_array_pop_front((&__pyx_v_self->_native)))); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 66, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "core/array/Array.pyx":59
+  /* "core/array/Array.pyx":65
  *         return Variant. new_static(api_core.godot_array_pop_back(&self._native))
  * 
  *     def pop_front(self):             # <<<<<<<<<<<<<<
@@ -2744,7 +2807,7 @@ static PyObject *__pyx_pf_4core_5array_5Array_5Array_36pop_front(struct __pyx_ob
   return __pyx_r;
 }
 
-/* "core/array/Array.pyx":62
+/* "core/array/Array.pyx":68
  *         return Variant. new_static(api_core.godot_array_pop_front(&self._native))
  * 
  *     def push_back(self, Variant value):             # <<<<<<<<<<<<<<
@@ -2761,7 +2824,7 @@ static PyObject *__pyx_pw_4core_5array_5Array_5Array_39push_back(PyObject *__pyx
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("push_back (wrapper)", 0);
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_value), __pyx_ptype_4core_7variant_7Variant_Variant, 1, "value", 0))) __PYX_ERR(1, 62, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_value), __pyx_ptype_4core_7variant_7Variant_Variant, 1, "value", 0))) __PYX_ERR(1, 68, __pyx_L1_error)
   __pyx_r = __pyx_pf_4core_5array_5Array_5Array_38push_back(((struct __pyx_obj_4core_5array_5Array_Array *)__pyx_v_self), ((struct __pyx_obj_4core_7variant_7Variant_Variant *)__pyx_v_value));
 
   /* function exit code */
@@ -2778,7 +2841,7 @@ static PyObject *__pyx_pf_4core_5array_5Array_5Array_38push_back(struct __pyx_ob
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("push_back", 0);
 
-  /* "core/array/Array.pyx":63
+  /* "core/array/Array.pyx":69
  * 
  *     def push_back(self, Variant value):
  *         api_core.godot_array_push_back(&self._native, &value._native)             # <<<<<<<<<<<<<<
@@ -2787,7 +2850,7 @@ static PyObject *__pyx_pf_4core_5array_5Array_5Array_38push_back(struct __pyx_ob
  */
   api_core->godot_array_push_back((&__pyx_v_self->_native), (&__pyx_v_value->_native));
 
-  /* "core/array/Array.pyx":62
+  /* "core/array/Array.pyx":68
  *         return Variant. new_static(api_core.godot_array_pop_front(&self._native))
  * 
  *     def push_back(self, Variant value):             # <<<<<<<<<<<<<<
@@ -2802,7 +2865,7 @@ static PyObject *__pyx_pf_4core_5array_5Array_5Array_38push_back(struct __pyx_ob
   return __pyx_r;
 }
 
-/* "core/array/Array.pyx":65
+/* "core/array/Array.pyx":71
  *         api_core.godot_array_push_back(&self._native, &value._native)
  * 
  *     def push_front(self, Variant value):             # <<<<<<<<<<<<<<
@@ -2819,7 +2882,7 @@ static PyObject *__pyx_pw_4core_5array_5Array_5Array_41push_front(PyObject *__py
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("push_front (wrapper)", 0);
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_value), __pyx_ptype_4core_7variant_7Variant_Variant, 1, "value", 0))) __PYX_ERR(1, 65, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_value), __pyx_ptype_4core_7variant_7Variant_Variant, 1, "value", 0))) __PYX_ERR(1, 71, __pyx_L1_error)
   __pyx_r = __pyx_pf_4core_5array_5Array_5Array_40push_front(((struct __pyx_obj_4core_5array_5Array_Array *)__pyx_v_self), ((struct __pyx_obj_4core_7variant_7Variant_Variant *)__pyx_v_value));
 
   /* function exit code */
@@ -2836,7 +2899,7 @@ static PyObject *__pyx_pf_4core_5array_5Array_5Array_40push_front(struct __pyx_o
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("push_front", 0);
 
-  /* "core/array/Array.pyx":66
+  /* "core/array/Array.pyx":72
  * 
  *     def push_front(self, Variant value):
  *         api_core.godot_array_push_front(&self._native, &value._native)             # <<<<<<<<<<<<<<
@@ -2845,7 +2908,7 @@ static PyObject *__pyx_pf_4core_5array_5Array_5Array_40push_front(struct __pyx_o
  */
   api_core->godot_array_push_front((&__pyx_v_self->_native), (&__pyx_v_value->_native));
 
-  /* "core/array/Array.pyx":65
+  /* "core/array/Array.pyx":71
  *         api_core.godot_array_push_back(&self._native, &value._native)
  * 
  *     def push_front(self, Variant value):             # <<<<<<<<<<<<<<
@@ -2860,7 +2923,7 @@ static PyObject *__pyx_pf_4core_5array_5Array_5Array_40push_front(struct __pyx_o
   return __pyx_r;
 }
 
-/* "core/array/Array.pyx":68
+/* "core/array/Array.pyx":74
  *         api_core.godot_array_push_front(&self._native, &value._native)
  * 
  *     def remove(self, godot_int index):             # <<<<<<<<<<<<<<
@@ -2879,7 +2942,7 @@ static PyObject *__pyx_pw_4core_5array_5Array_5Array_43remove(PyObject *__pyx_v_
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("remove (wrapper)", 0);
   assert(__pyx_arg_index); {
-    __pyx_v_index = __Pyx_PyInt_As_godot_int(__pyx_arg_index); if (unlikely((__pyx_v_index == ((godot_int)-1)) && PyErr_Occurred())) __PYX_ERR(1, 68, __pyx_L3_error)
+    __pyx_v_index = __Pyx_PyInt_As_godot_int(__pyx_arg_index); if (unlikely((__pyx_v_index == ((godot_int)-1)) && PyErr_Occurred())) __PYX_ERR(1, 74, __pyx_L3_error)
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -2899,7 +2962,7 @@ static PyObject *__pyx_pf_4core_5array_5Array_5Array_42remove(struct __pyx_obj_4
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("remove", 0);
 
-  /* "core/array/Array.pyx":69
+  /* "core/array/Array.pyx":75
  * 
  *     def remove(self, godot_int index):
  *         api_core.godot_array_remove(&self._native, index)             # <<<<<<<<<<<<<<
@@ -2908,7 +2971,7 @@ static PyObject *__pyx_pf_4core_5array_5Array_5Array_42remove(struct __pyx_obj_4
  */
   api_core->godot_array_remove((&__pyx_v_self->_native), __pyx_v_index);
 
-  /* "core/array/Array.pyx":68
+  /* "core/array/Array.pyx":74
  *         api_core.godot_array_push_front(&self._native, &value._native)
  * 
  *     def remove(self, godot_int index):             # <<<<<<<<<<<<<<
@@ -2923,7 +2986,7 @@ static PyObject *__pyx_pf_4core_5array_5Array_5Array_42remove(struct __pyx_obj_4
   return __pyx_r;
 }
 
-/* "core/array/Array.pyx":71
+/* "core/array/Array.pyx":77
  *         api_core.godot_array_remove(&self._native, index)
  * 
  *     def resize(self, godot_int size):             # <<<<<<<<<<<<<<
@@ -2942,7 +3005,7 @@ static PyObject *__pyx_pw_4core_5array_5Array_5Array_45resize(PyObject *__pyx_v_
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("resize (wrapper)", 0);
   assert(__pyx_arg_size); {
-    __pyx_v_size = __Pyx_PyInt_As_godot_int(__pyx_arg_size); if (unlikely((__pyx_v_size == ((godot_int)-1)) && PyErr_Occurred())) __PYX_ERR(1, 71, __pyx_L3_error)
+    __pyx_v_size = __Pyx_PyInt_As_godot_int(__pyx_arg_size); if (unlikely((__pyx_v_size == ((godot_int)-1)) && PyErr_Occurred())) __PYX_ERR(1, 77, __pyx_L3_error)
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -2962,7 +3025,7 @@ static PyObject *__pyx_pf_4core_5array_5Array_5Array_44resize(struct __pyx_obj_4
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("resize", 0);
 
-  /* "core/array/Array.pyx":72
+  /* "core/array/Array.pyx":78
  * 
  *     def resize(self, godot_int size):
  *         api_core.godot_array_resize(&self._native, size)             # <<<<<<<<<<<<<<
@@ -2971,7 +3034,7 @@ static PyObject *__pyx_pf_4core_5array_5Array_5Array_44resize(struct __pyx_obj_4
  */
   api_core->godot_array_resize((&__pyx_v_self->_native), __pyx_v_size);
 
-  /* "core/array/Array.pyx":71
+  /* "core/array/Array.pyx":77
  *         api_core.godot_array_remove(&self._native, index)
  * 
  *     def resize(self, godot_int size):             # <<<<<<<<<<<<<<
@@ -2986,7 +3049,7 @@ static PyObject *__pyx_pf_4core_5array_5Array_5Array_44resize(struct __pyx_obj_4
   return __pyx_r;
 }
 
-/* "core/array/Array.pyx":74
+/* "core/array/Array.pyx":80
  *         api_core.godot_array_resize(&self._native, size)
  * 
  *     def rfind(self, Variant what, godot_int from_):             # <<<<<<<<<<<<<<
@@ -3028,11 +3091,11 @@ static PyObject *__pyx_pw_4core_5array_5Array_5Array_47rfind(PyObject *__pyx_v_s
         case  1:
         if (likely((values[1] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_from)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("rfind", 1, 2, 2, 1); __PYX_ERR(1, 74, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("rfind", 1, 2, 2, 1); __PYX_ERR(1, 80, __pyx_L3_error)
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "rfind") < 0)) __PYX_ERR(1, 74, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "rfind") < 0)) __PYX_ERR(1, 80, __pyx_L3_error)
       }
     } else if (PyTuple_GET_SIZE(__pyx_args) != 2) {
       goto __pyx_L5_argtuple_error;
@@ -3041,17 +3104,17 @@ static PyObject *__pyx_pw_4core_5array_5Array_5Array_47rfind(PyObject *__pyx_v_s
       values[1] = PyTuple_GET_ITEM(__pyx_args, 1);
     }
     __pyx_v_what = ((struct __pyx_obj_4core_7variant_7Variant_Variant *)values[0]);
-    __pyx_v_from_ = __Pyx_PyInt_As_godot_int(values[1]); if (unlikely((__pyx_v_from_ == ((godot_int)-1)) && PyErr_Occurred())) __PYX_ERR(1, 74, __pyx_L3_error)
+    __pyx_v_from_ = __Pyx_PyInt_As_godot_int(values[1]); if (unlikely((__pyx_v_from_ == ((godot_int)-1)) && PyErr_Occurred())) __PYX_ERR(1, 80, __pyx_L3_error)
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("rfind", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(1, 74, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("rfind", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(1, 80, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("core.array.Array.Array.rfind", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_what), __pyx_ptype_4core_7variant_7Variant_Variant, 1, "what", 0))) __PYX_ERR(1, 74, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_what), __pyx_ptype_4core_7variant_7Variant_Variant, 1, "what", 0))) __PYX_ERR(1, 80, __pyx_L1_error)
   __pyx_r = __pyx_pf_4core_5array_5Array_5Array_46rfind(((struct __pyx_obj_4core_5array_5Array_Array *)__pyx_v_self), __pyx_v_what, __pyx_v_from_);
 
   /* function exit code */
@@ -3072,7 +3135,7 @@ static PyObject *__pyx_pf_4core_5array_5Array_5Array_46rfind(struct __pyx_obj_4c
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("rfind", 0);
 
-  /* "core/array/Array.pyx":75
+  /* "core/array/Array.pyx":81
  * 
  *     def rfind(self, Variant what, godot_int from_):
  *         return api_core.godot_array_rfind(&self._native, &what._native, from_)             # <<<<<<<<<<<<<<
@@ -3080,13 +3143,13 @@ static PyObject *__pyx_pf_4core_5array_5Array_5Array_46rfind(struct __pyx_obj_4c
  *     def size(self):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_PyInt_From_godot_int(api_core->godot_array_rfind((&__pyx_v_self->_native), (&__pyx_v_what->_native), __pyx_v_from_)); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 75, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyInt_From_godot_int(api_core->godot_array_rfind((&__pyx_v_self->_native), (&__pyx_v_what->_native), __pyx_v_from_)); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 81, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "core/array/Array.pyx":74
+  /* "core/array/Array.pyx":80
  *         api_core.godot_array_resize(&self._native, size)
  * 
  *     def rfind(self, Variant what, godot_int from_):             # <<<<<<<<<<<<<<
@@ -3105,7 +3168,7 @@ static PyObject *__pyx_pf_4core_5array_5Array_5Array_46rfind(struct __pyx_obj_4c
   return __pyx_r;
 }
 
-/* "core/array/Array.pyx":77
+/* "core/array/Array.pyx":83
  *         return api_core.godot_array_rfind(&self._native, &what._native, from_)
  * 
  *     def size(self):             # <<<<<<<<<<<<<<
@@ -3135,7 +3198,7 @@ static PyObject *__pyx_pf_4core_5array_5Array_5Array_48size(struct __pyx_obj_4co
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("size", 0);
 
-  /* "core/array/Array.pyx":78
+  /* "core/array/Array.pyx":84
  * 
  *     def size(self):
  *         return api_core.godot_array_size(&self._native)             # <<<<<<<<<<<<<<
@@ -3143,13 +3206,13 @@ static PyObject *__pyx_pf_4core_5array_5Array_5Array_48size(struct __pyx_obj_4co
  *     def sort(self):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_PyInt_From_godot_int(api_core->godot_array_size((&__pyx_v_self->_native))); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 78, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyInt_From_godot_int(api_core->godot_array_size((&__pyx_v_self->_native))); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 84, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "core/array/Array.pyx":77
+  /* "core/array/Array.pyx":83
  *         return api_core.godot_array_rfind(&self._native, &what._native, from_)
  * 
  *     def size(self):             # <<<<<<<<<<<<<<
@@ -3168,7 +3231,7 @@ static PyObject *__pyx_pf_4core_5array_5Array_5Array_48size(struct __pyx_obj_4co
   return __pyx_r;
 }
 
-/* "core/array/Array.pyx":80
+/* "core/array/Array.pyx":86
  *         return api_core.godot_array_size(&self._native)
  * 
  *     def sort(self):             # <<<<<<<<<<<<<<
@@ -3194,7 +3257,7 @@ static PyObject *__pyx_pf_4core_5array_5Array_5Array_50sort(struct __pyx_obj_4co
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("sort", 0);
 
-  /* "core/array/Array.pyx":81
+  /* "core/array/Array.pyx":87
  * 
  *     def sort(self):
  *         api_core.godot_array_sort(&self._native)             # <<<<<<<<<<<<<<
@@ -3203,7 +3266,7 @@ static PyObject *__pyx_pf_4core_5array_5Array_5Array_50sort(struct __pyx_obj_4co
  */
   api_core->godot_array_sort((&__pyx_v_self->_native));
 
-  /* "core/array/Array.pyx":80
+  /* "core/array/Array.pyx":86
  *         return api_core.godot_array_size(&self._native)
  * 
  *     def sort(self):             # <<<<<<<<<<<<<<
@@ -3218,7 +3281,7 @@ static PyObject *__pyx_pf_4core_5array_5Array_5Array_50sort(struct __pyx_obj_4co
   return __pyx_r;
 }
 
-/* "core/array/Array.pyx":86
+/* "core/array/Array.pyx":92
  *         api_core.godot_array_sort_custom(&self._native, p_obj, func)
  *     """
  *     def bsearch(self, Variant value, godot_bool before):             # <<<<<<<<<<<<<<
@@ -3260,11 +3323,11 @@ static PyObject *__pyx_pw_4core_5array_5Array_5Array_53bsearch(PyObject *__pyx_v
         case  1:
         if (likely((values[1] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_before)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("bsearch", 1, 2, 2, 1); __PYX_ERR(1, 86, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("bsearch", 1, 2, 2, 1); __PYX_ERR(1, 92, __pyx_L3_error)
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "bsearch") < 0)) __PYX_ERR(1, 86, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "bsearch") < 0)) __PYX_ERR(1, 92, __pyx_L3_error)
       }
     } else if (PyTuple_GET_SIZE(__pyx_args) != 2) {
       goto __pyx_L5_argtuple_error;
@@ -3273,17 +3336,17 @@ static PyObject *__pyx_pw_4core_5array_5Array_5Array_53bsearch(PyObject *__pyx_v
       values[1] = PyTuple_GET_ITEM(__pyx_args, 1);
     }
     __pyx_v_value = ((struct __pyx_obj_4core_7variant_7Variant_Variant *)values[0]);
-    __pyx_v_before = __Pyx_PyObject_IsTrue(values[1]); if (unlikely((__pyx_v_before == ((godot_bool)-1)) && PyErr_Occurred())) __PYX_ERR(1, 86, __pyx_L3_error)
+    __pyx_v_before = __Pyx_PyObject_IsTrue(values[1]); if (unlikely((__pyx_v_before == ((godot_bool)-1)) && PyErr_Occurred())) __PYX_ERR(1, 92, __pyx_L3_error)
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("bsearch", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(1, 86, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("bsearch", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(1, 92, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("core.array.Array.Array.bsearch", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_value), __pyx_ptype_4core_7variant_7Variant_Variant, 1, "value", 0))) __PYX_ERR(1, 86, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_value), __pyx_ptype_4core_7variant_7Variant_Variant, 1, "value", 0))) __PYX_ERR(1, 92, __pyx_L1_error)
   __pyx_r = __pyx_pf_4core_5array_5Array_5Array_52bsearch(((struct __pyx_obj_4core_5array_5Array_Array *)__pyx_v_self), __pyx_v_value, __pyx_v_before);
 
   /* function exit code */
@@ -3304,7 +3367,7 @@ static PyObject *__pyx_pf_4core_5array_5Array_5Array_52bsearch(struct __pyx_obj_
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("bsearch", 0);
 
-  /* "core/array/Array.pyx":87
+  /* "core/array/Array.pyx":93
  *     """
  *     def bsearch(self, Variant value, godot_bool before):
  *         return api_core.godot_array_bsearch(&self._native, &value._native, before)             # <<<<<<<<<<<<<<
@@ -3312,13 +3375,13 @@ static PyObject *__pyx_pf_4core_5array_5Array_5Array_52bsearch(struct __pyx_obj_
  *     def  bsearch_custom(self, Variant value, godot_object* p_obj, godot_string * p_func, godot_bool p_before):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_PyInt_From_godot_int(api_core->godot_array_bsearch((&__pyx_v_self->_native), (&__pyx_v_value->_native), __pyx_v_before)); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 87, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyInt_From_godot_int(api_core->godot_array_bsearch((&__pyx_v_self->_native), (&__pyx_v_value->_native), __pyx_v_before)); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 93, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "core/array/Array.pyx":86
+  /* "core/array/Array.pyx":92
  *         api_core.godot_array_sort_custom(&self._native, p_obj, func)
  *     """
  *     def bsearch(self, Variant value, godot_bool before):             # <<<<<<<<<<<<<<
@@ -3337,11 +3400,12 @@ static PyObject *__pyx_pf_4core_5array_5Array_5Array_52bsearch(struct __pyx_obj_
   return __pyx_r;
 }
 
-/* "core/array/Array.pyx":92
+/* "core/array/Array.pyx":98
  *         return api_core.godot_array_bsearch_custom(&self._native, &value._native, p_obj, p_func, p_before);
  *     """
  *     def destory(self):             # <<<<<<<<<<<<<<
  *         return api_core.godot_array_destroy(&self._native)
+ * 
  */
 
 /* Python wrapper */
@@ -3366,29 +3430,91 @@ static PyObject *__pyx_pf_4core_5array_5Array_5Array_54destory(struct __pyx_obj_
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("destory", 0);
 
-  /* "core/array/Array.pyx":93
+  /* "core/array/Array.pyx":99
  *     """
  *     def destory(self):
  *         return api_core.godot_array_destroy(&self._native)             # <<<<<<<<<<<<<<
+ * 
+ *     def get_native(self):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_void_to_None(api_core->godot_array_destroy((&__pyx_v_self->_native))); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 93, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_void_to_None(api_core->godot_array_destroy((&__pyx_v_self->_native))); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 99, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "core/array/Array.pyx":92
+  /* "core/array/Array.pyx":98
  *         return api_core.godot_array_bsearch_custom(&self._native, &value._native, p_obj, p_func, p_before);
  *     """
  *     def destory(self):             # <<<<<<<<<<<<<<
  *         return api_core.godot_array_destroy(&self._native)
+ * 
  */
 
   /* function exit code */
   __pyx_L1_error:;
   __Pyx_XDECREF(__pyx_t_1);
   __Pyx_AddTraceback("core.array.Array.Array.destory", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __pyx_r = NULL;
+  __pyx_L0:;
+  __Pyx_XGIVEREF(__pyx_r);
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+/* "core/array/Array.pyx":101
+ *         return api_core.godot_array_destroy(&self._native)
+ * 
+ *     def get_native(self):             # <<<<<<<<<<<<<<
+ *         return self._native
+ */
+
+/* Python wrapper */
+static PyObject *__pyx_pw_4core_5array_5Array_5Array_57get_native(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused); /*proto*/
+static PyObject *__pyx_pw_4core_5array_5Array_5Array_57get_native(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused) {
+  PyObject *__pyx_r = 0;
+  __Pyx_RefNannyDeclarations
+  __Pyx_RefNannySetupContext("get_native (wrapper)", 0);
+  __pyx_r = __pyx_pf_4core_5array_5Array_5Array_56get_native(((struct __pyx_obj_4core_5array_5Array_Array *)__pyx_v_self));
+
+  /* function exit code */
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+static PyObject *__pyx_pf_4core_5array_5Array_5Array_56get_native(struct __pyx_obj_4core_5array_5Array_Array *__pyx_v_self) {
+  PyObject *__pyx_r = NULL;
+  __Pyx_RefNannyDeclarations
+  PyObject *__pyx_t_1 = NULL;
+  int __pyx_lineno = 0;
+  const char *__pyx_filename = NULL;
+  int __pyx_clineno = 0;
+  __Pyx_RefNannySetupContext("get_native", 0);
+
+  /* "core/array/Array.pyx":102
+ * 
+ *     def get_native(self):
+ *         return self._native             # <<<<<<<<<<<<<<
+ */
+  __Pyx_XDECREF(__pyx_r);
+  __pyx_t_1 = __pyx_convert__to_py_godot_array(__pyx_v_self->_native); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 102, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __pyx_r = __pyx_t_1;
+  __pyx_t_1 = 0;
+  goto __pyx_L0;
+
+  /* "core/array/Array.pyx":101
+ *         return api_core.godot_array_destroy(&self._native)
+ * 
+ *     def get_native(self):             # <<<<<<<<<<<<<<
+ *         return self._native
+ */
+
+  /* function exit code */
+  __pyx_L1_error:;
+  __Pyx_XDECREF(__pyx_t_1);
+  __Pyx_AddTraceback("core.array.Array.Array.get_native", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   __pyx_L0:;
   __Pyx_XGIVEREF(__pyx_r);
@@ -3403,19 +3529,19 @@ static PyObject *__pyx_pf_4core_5array_5Array_5Array_54destory(struct __pyx_obj_
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_4core_5array_5Array_5Array_57__reduce_cython__(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused); /*proto*/
-static PyObject *__pyx_pw_4core_5array_5Array_5Array_57__reduce_cython__(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused) {
+static PyObject *__pyx_pw_4core_5array_5Array_5Array_59__reduce_cython__(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused); /*proto*/
+static PyObject *__pyx_pw_4core_5array_5Array_5Array_59__reduce_cython__(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused) {
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__reduce_cython__ (wrapper)", 0);
-  __pyx_r = __pyx_pf_4core_5array_5Array_5Array_56__reduce_cython__(((struct __pyx_obj_4core_5array_5Array_Array *)__pyx_v_self));
+  __pyx_r = __pyx_pf_4core_5array_5Array_5Array_58__reduce_cython__(((struct __pyx_obj_4core_5array_5Array_Array *)__pyx_v_self));
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_4core_5array_5Array_5Array_56__reduce_cython__(CYTHON_UNUSED struct __pyx_obj_4core_5array_5Array_Array *__pyx_v_self) {
+static PyObject *__pyx_pf_4core_5array_5Array_5Array_58__reduce_cython__(CYTHON_UNUSED struct __pyx_obj_4core_5array_5Array_Array *__pyx_v_self) {
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   PyObject *__pyx_t_1 = NULL;
@@ -3460,19 +3586,19 @@ static PyObject *__pyx_pf_4core_5array_5Array_5Array_56__reduce_cython__(CYTHON_
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_4core_5array_5Array_5Array_59__setstate_cython__(PyObject *__pyx_v_self, PyObject *__pyx_v___pyx_state); /*proto*/
-static PyObject *__pyx_pw_4core_5array_5Array_5Array_59__setstate_cython__(PyObject *__pyx_v_self, PyObject *__pyx_v___pyx_state) {
+static PyObject *__pyx_pw_4core_5array_5Array_5Array_61__setstate_cython__(PyObject *__pyx_v_self, PyObject *__pyx_v___pyx_state); /*proto*/
+static PyObject *__pyx_pw_4core_5array_5Array_5Array_61__setstate_cython__(PyObject *__pyx_v_self, PyObject *__pyx_v___pyx_state) {
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__setstate_cython__ (wrapper)", 0);
-  __pyx_r = __pyx_pf_4core_5array_5Array_5Array_58__setstate_cython__(((struct __pyx_obj_4core_5array_5Array_Array *)__pyx_v_self), ((PyObject *)__pyx_v___pyx_state));
+  __pyx_r = __pyx_pf_4core_5array_5Array_5Array_60__setstate_cython__(((struct __pyx_obj_4core_5array_5Array_Array *)__pyx_v_self), ((PyObject *)__pyx_v___pyx_state));
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_4core_5array_5Array_5Array_58__setstate_cython__(CYTHON_UNUSED struct __pyx_obj_4core_5array_5Array_Array *__pyx_v_self, CYTHON_UNUSED PyObject *__pyx_v___pyx_state) {
+static PyObject *__pyx_pf_4core_5array_5Array_5Array_60__setstate_cython__(CYTHON_UNUSED struct __pyx_obj_4core_5array_5Array_Array *__pyx_v_self, CYTHON_UNUSED PyObject *__pyx_v___pyx_state) {
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   PyObject *__pyx_t_1 = NULL;
@@ -3799,8 +3925,9 @@ static PyMethodDef __pyx_methods_4core_5array_5Array_Array[] = {
   {"sort", (PyCFunction)__pyx_pw_4core_5array_5Array_5Array_51sort, METH_NOARGS, 0},
   {"bsearch", (PyCFunction)(void*)(PyCFunctionWithKeywords)__pyx_pw_4core_5array_5Array_5Array_53bsearch, METH_VARARGS|METH_KEYWORDS, 0},
   {"destory", (PyCFunction)__pyx_pw_4core_5array_5Array_5Array_55destory, METH_NOARGS, 0},
-  {"__reduce_cython__", (PyCFunction)__pyx_pw_4core_5array_5Array_5Array_57__reduce_cython__, METH_NOARGS, 0},
-  {"__setstate_cython__", (PyCFunction)__pyx_pw_4core_5array_5Array_5Array_59__setstate_cython__, METH_O, 0},
+  {"get_native", (PyCFunction)__pyx_pw_4core_5array_5Array_5Array_57get_native, METH_NOARGS, 0},
+  {"__reduce_cython__", (PyCFunction)__pyx_pw_4core_5array_5Array_5Array_59__reduce_cython__, METH_NOARGS, 0},
+  {"__setstate_cython__", (PyCFunction)__pyx_pw_4core_5array_5Array_5Array_61__setstate_cython__, METH_O, 0},
   {0, 0, 0, 0}
 };
 
@@ -3943,6 +4070,7 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_n_s_TypeError, __pyx_k_TypeError, sizeof(__pyx_k_TypeError), 0, 0, 1, 1},
   {&__pyx_n_s_before, __pyx_k_before, sizeof(__pyx_k_before), 0, 0, 1, 1},
   {&__pyx_n_s_cline_in_traceback, __pyx_k_cline_in_traceback, sizeof(__pyx_k_cline_in_traceback), 0, 0, 1, 1},
+  {&__pyx_n_s_dont_touch_that, __pyx_k_dont_touch_that, sizeof(__pyx_k_dont_touch_that), 0, 0, 1, 1},
   {&__pyx_n_s_from, __pyx_k_from, sizeof(__pyx_k_from), 0, 0, 1, 1},
   {&__pyx_n_s_getstate, __pyx_k_getstate, sizeof(__pyx_k_getstate), 0, 0, 1, 1},
   {&__pyx_n_s_index, __pyx_k_index, sizeof(__pyx_k_index), 0, 0, 1, 1},
@@ -4032,10 +4160,17 @@ static int __Pyx_modinit_variable_export_code(void) {
 
 static int __Pyx_modinit_function_export_code(void) {
   __Pyx_RefNannyDeclarations
+  int __pyx_lineno = 0;
+  const char *__pyx_filename = NULL;
+  int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__Pyx_modinit_function_export_code", 0);
   /*--- Function export code ---*/
+  if (__Pyx_ExportFunction("set_api_core_array", (void (*)(void))__pyx_f_4core_5array_5Array_set_api_core_array, "PyObject *(struct godot_gdnative_core_api_struct *)") < 0) __PYX_ERR(1, 1, __pyx_L1_error)
   __Pyx_RefNannyFinishContext();
   return 0;
+  __pyx_L1_error:;
+  __Pyx_RefNannyFinishContext();
+  return -1;
 }
 
 static int __Pyx_modinit_type_init_code(void) {
@@ -4048,16 +4183,16 @@ static int __Pyx_modinit_type_init_code(void) {
   __pyx_vtabptr_4core_5array_5Array_Array = &__pyx_vtable_4core_5array_5Array_Array;
   __pyx_vtable_4core_5array_5Array_Array.set_native = (void (*)(struct __pyx_obj_4core_5array_5Array_Array *, godot_array))__pyx_f_4core_5array_5Array_5Array_set_native;
   __pyx_vtable_4core_5array_5Array_Array.new_static = (void (*)(godot_array))__pyx_f_4core_5array_5Array_5Array_new_static;
-  if (PyType_Ready(&__pyx_type_4core_5array_5Array_Array) < 0) __PYX_ERR(1, 3, __pyx_L1_error)
+  if (PyType_Ready(&__pyx_type_4core_5array_5Array_Array) < 0) __PYX_ERR(1, 9, __pyx_L1_error)
   #if PY_VERSION_HEX < 0x030800B1
   __pyx_type_4core_5array_5Array_Array.tp_print = 0;
   #endif
   if ((CYTHON_USE_TYPE_SLOTS && CYTHON_USE_PYTYPE_LOOKUP) && likely(!__pyx_type_4core_5array_5Array_Array.tp_dictoffset && __pyx_type_4core_5array_5Array_Array.tp_getattro == PyObject_GenericGetAttr)) {
     __pyx_type_4core_5array_5Array_Array.tp_getattro = __Pyx_PyObject_GenericGetAttr;
   }
-  if (__Pyx_SetVtable(__pyx_type_4core_5array_5Array_Array.tp_dict, __pyx_vtabptr_4core_5array_5Array_Array) < 0) __PYX_ERR(1, 3, __pyx_L1_error)
-  if (PyObject_SetAttr(__pyx_m, __pyx_n_s_Array, (PyObject *)&__pyx_type_4core_5array_5Array_Array) < 0) __PYX_ERR(1, 3, __pyx_L1_error)
-  if (__Pyx_setup_reduce((PyObject*)&__pyx_type_4core_5array_5Array_Array) < 0) __PYX_ERR(1, 3, __pyx_L1_error)
+  if (__Pyx_SetVtable(__pyx_type_4core_5array_5Array_Array.tp_dict, __pyx_vtabptr_4core_5array_5Array_Array) < 0) __PYX_ERR(1, 9, __pyx_L1_error)
+  if (PyObject_SetAttr(__pyx_m, __pyx_n_s_Array, (PyObject *)&__pyx_type_4core_5array_5Array_Array) < 0) __PYX_ERR(1, 9, __pyx_L1_error)
+  if (__Pyx_setup_reduce((PyObject*)&__pyx_type_4core_5array_5Array_Array) < 0) __PYX_ERR(1, 9, __pyx_L1_error)
   __pyx_ptype_4core_5array_5Array_Array = &__pyx_type_4core_5array_5Array_Array;
   __Pyx_RefNannyFinishContext();
   return 0;
@@ -4074,6 +4209,17 @@ static int __Pyx_modinit_type_import_code(void) {
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__Pyx_modinit_type_import_code", 0);
   /*--- Type import code ---*/
+  __pyx_t_1 = PyImport_ImportModule(__Pyx_BUILTIN_MODULE_NAME); if (unlikely(!__pyx_t_1)) __PYX_ERR(4, 9, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __pyx_ptype_7cpython_4type_type = __Pyx_ImportType(__pyx_t_1, __Pyx_BUILTIN_MODULE_NAME, "type", 
+  #if defined(PYPY_VERSION_NUM) && PYPY_VERSION_NUM < 0x050B0000
+  sizeof(PyTypeObject),
+  #else
+  sizeof(PyHeapTypeObject),
+  #endif
+  __Pyx_ImportType_CheckSize_Warn);
+   if (!__pyx_ptype_7cpython_4type_type) __PYX_ERR(4, 9, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_t_1 = PyImport_ImportModule("core.variant.Variant"); if (unlikely(!__pyx_t_1)) __PYX_ERR(3, 3, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_ptype_4core_7variant_7Variant_Variant = __Pyx_ImportType(__pyx_t_1, "core.variant.Variant", "Variant", sizeof(struct __pyx_obj_4core_7variant_7Variant_Variant), __Pyx_ImportType_CheckSize_Warn);
@@ -4296,7 +4442,7 @@ if (!__Pyx_RefNanny) {
   /*--- Global type/function init code ---*/
   (void)__Pyx_modinit_global_init_code();
   (void)__Pyx_modinit_variable_export_code();
-  (void)__Pyx_modinit_function_export_code();
+  if (unlikely(__Pyx_modinit_function_export_code() < 0)) __PYX_ERR(1, 1, __pyx_L1_error)
   if (unlikely(__Pyx_modinit_type_init_code() < 0)) __PYX_ERR(1, 1, __pyx_L1_error)
   if (unlikely(__Pyx_modinit_type_import_code() < 0)) __PYX_ERR(1, 1, __pyx_L1_error)
   (void)__Pyx_modinit_variable_import_code();
@@ -4309,7 +4455,7 @@ if (!__Pyx_RefNanny) {
   /* "core/array/Array.pyx":1
  * from core.variant.Variant cimport *             # <<<<<<<<<<<<<<
  * from core.array.array_binding cimport *
- * cdef class Array:
+ * 
  */
   __pyx_t_1 = __Pyx_PyDict_NewPresized(0); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 1, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
@@ -5421,6 +5567,19 @@ static CYTHON_INLINE PyObject* __Pyx_PyInt_From_godot_int(godot_int value) {
     }
 }
 
+static PyObject* __pyx_convert__to_py_godot_array(godot_array s) {
+  PyObject* res;
+  PyObject* member;
+  res = __Pyx_PyDict_NewPresized(1); if (unlikely(!res)) return NULL;
+  member = __Pyx_PyObject_FromCString(s._dont_touch_that); if (unlikely(!member)) goto bad;
+  if (unlikely(PyDict_SetItem(res, __pyx_n_s_dont_touch_that, member) < 0)) goto bad;
+  Py_DECREF(member);
+  return res;
+  bad:
+  Py_XDECREF(member);
+  Py_DECREF(res);
+  return NULL;
+}
 /* CIntFromPy */
 static CYTHON_INLINE godot_int __Pyx_PyInt_As_godot_int(PyObject *x) {
     const godot_int neg_one = (godot_int) ((godot_int) 0 - (godot_int) 1), const_zero = (godot_int) 0;
@@ -6133,6 +6292,43 @@ static int __Pyx_check_binary_version(void) {
         return PyErr_WarnEx(NULL, message, 1);
     }
     return 0;
+}
+
+/* FunctionExport */
+static int __Pyx_ExportFunction(const char *name, void (*f)(void), const char *sig) {
+    PyObject *d = 0;
+    PyObject *cobj = 0;
+    union {
+        void (*fp)(void);
+        void *p;
+    } tmp;
+    d = PyObject_GetAttrString(__pyx_m, (char *)"__pyx_capi__");
+    if (!d) {
+        PyErr_Clear();
+        d = PyDict_New();
+        if (!d)
+            goto bad;
+        Py_INCREF(d);
+        if (PyModule_AddObject(__pyx_m, (char *)"__pyx_capi__", d) < 0)
+            goto bad;
+    }
+    tmp.fp = f;
+#if PY_VERSION_HEX >= 0x02070000
+    cobj = PyCapsule_New(tmp.p, sig, 0);
+#else
+    cobj = PyCObject_FromVoidPtrAndDesc(tmp.p, (void *)sig, 0);
+#endif
+    if (!cobj)
+        goto bad;
+    if (PyDict_SetItemString(d, name, cobj) < 0)
+        goto bad;
+    Py_DECREF(cobj);
+    Py_DECREF(d);
+    return 0;
+bad:
+    Py_XDECREF(cobj);
+    Py_XDECREF(d);
+    return -1;
 }
 
 /* InitStrings */

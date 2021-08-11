@@ -23,8 +23,9 @@ class MethodDescription:
     def to_dict(self):
         d = Dictionary()
         d.set(Variant("name"), Variant(self.name))
-        d.set(Variant("args"), [])
+        d.set(Variant("args"), Variant(1))
         d.set(Variant("default_args"), Variant([Dictionary()]))
-        d.set(Variant("return", Variant()))
-        d.set(Variant("flags", 0))
-        d.set(Variant("rpc_mode", 0))
+        d.set(Variant("return"),Variant(1))
+        d.set(Variant("flags"), Variant(1))
+        d.set(Variant("rpc_mode"), Variant(1))
+        return d

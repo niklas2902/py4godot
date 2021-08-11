@@ -1,8 +1,14 @@
 from libcpp cimport bool
 from libc.stddef cimport wchar_t
+from cpython.ref cimport PyObject
+
+
+cdef extern from "Python.h":
+    cdef PyObject* PyUnicode_FromWideChar(const wchar_t *w, Py_ssize_t size);
+    cdef wchar_t* PyUnicode_AsWideCharString(object, Py_ssize_t *)
 
 cdef extern from "binding.h":
-    DEF array_size = 1
+    DEF array_size = 4 # Edit
 
     ################################### types#######################################
     ctypedef signed char        int8_t;

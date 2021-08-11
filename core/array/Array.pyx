@@ -1,5 +1,11 @@
 from core.variant.Variant cimport *
 from core.array.array_binding cimport *
+
+cdef api set_api_core_array(godot_gdnative_core_api_struct * core):
+    global api_core
+    api_core = core
+
+
 cdef class Array:
 
     def __init__(self):
@@ -91,3 +97,6 @@ cdef class Array:
     """
     def destory(self):
         return api_core.godot_array_destroy(&self._native)
+
+    def get_native(self):
+        return self._native

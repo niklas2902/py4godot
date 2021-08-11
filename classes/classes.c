@@ -624,9 +624,9 @@ static CYTHON_INLINE float __PYX_NAN() {
 #define __PYX_HAVE_API__classes__classes
 /* Early includes */
 #include <stddef.h>
-#include "binding.h"
 #include <string.h>
 #include <stdio.h>
+#include "binding.h"
 #ifdef _OPENMP
 #include <omp.h>
 #endif /* _OPENMP */
@@ -6986,8 +6986,6 @@ static CYTHON_INLINE godot_object *__pyx_f_5utils_7Wrapper_7Wrapper_get_godot_ow
 
 /* Module declarations from 'libc.stddef' */
 
-/* Module declarations from 'godot_api.binding' */
-
 /* Module declarations from 'libc.string' */
 
 /* Module declarations from 'libc.stdio' */
@@ -7002,6 +7000,8 @@ static PyTypeObject *__pyx_ptype_7cpython_4type_type = 0;
 /* Module declarations from 'cpython.object' */
 
 /* Module declarations from 'cpython.ref' */
+
+/* Module declarations from 'godot_api.binding' */
 
 /* Module declarations from 'godot_api.binding_external' */
 

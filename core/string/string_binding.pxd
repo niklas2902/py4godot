@@ -2,6 +2,7 @@ from godot_api.binding cimport *
 
 
 cdef extern from "binding.h":
+    const godot_gdnative_core_api_struct *api_core
     ctypedef struct godot_string:
         pass
     ctypedef struct uint8_t:
@@ -170,3 +171,5 @@ cdef extern from "binding.h":
         godot_bool (*godot_string_name_operator_equal)(const godot_string_name *p_self, const godot_string_name *p_other);
         godot_bool (*godot_string_name_operator_less)(const godot_string_name *p_self, const godot_string_name *p_other);
         void (*godot_string_name_destroy)(godot_string_name *p_self);
+
+        void (*godot_print)(const godot_string *p_message);

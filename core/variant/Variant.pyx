@@ -17,18 +17,65 @@ from core.rid.RID cimport *
 from core.variant.variant_binding cimport *
 
 
+cdef api set_api_core_variant(godot_gdnative_core_api_struct * core):
+    global api_core
+    api_core = core
+    print("finish setting core for variant")
+
+
 cdef class Variant:
 
-    function_dict = {float:new_float,int:new_int, Vector3:new_vector3,Vector2:new_vector2, AABB:new_aabb, String:new_string, Rect2:new_rect2, Quat:new_quat, Color:new_color, NodePath:new_node_path, type(True):new_bool }
-
     def __init__(self, variant = None):
+        """self.function_dict = {float:self.new_float,int:self.new_int, Vector3:self.new_vector3,Vector2:self.new_vector2,
+                AABB:self.new_aabb, String:self.new_string, Rect2:self.new_rect2, Quat:self.new_quat,
+                Color:self.new_color, NodePath:self.new_node_path, type(True):self.new_bool }"""
+
+
+        if(type(variant) == type("")):
+            variant = String(variant)
+
         if(variant != None):
-            self.function_dict[type(variant)](variant)
+            if(type(variant) == int):
+                self.new_int(variant)
+            elif(type(variant)==float):
+                self.new_float(variant)
+            elif(type(variant)==Vector3):
+                self.new_vector3(variant)
+            elif(type(variant)==Vector2):
+                self.new_vector2(variant)
+            elif(type(variant)==AABB):
+                self.new_aabb(variant)
+            elif(type(variant)==String):
+                self.new_string(variant)
+            elif(type(variant)==Rect2):
+                self.new_rect2(variant)
+            elif(type(variant)==Quat):
+                self.new_quat(variant)
+            elif(type(variant)==Color):
+                self.new_color(variant)
+            elif(type(variant)==NodePath):
+                self.new_node_path(variant)
+            elif(type(variant)==type(True)):
+                self.new_bool(variant)
+            elif type(variant) == Dictionary:
+                print("new_dict")
+                self.new_dict(variant)
+                print("new_dict_finished")
+            else:
+                print("no Variant created:",variant,"|", type(variant))
+        else:
+            self.new_nil()
+            print("empty_Variant_created", variant)
+
     def get_type(self):
         return api_core.godot_variant_get_type(&self._native)
 
+    def new_nil(self):
+        api_core.godot_variant_new_nil(&self._native);
+
     def new_int(self, variant):
-        api_core.godot_variant_new_uint(&self._native, variant)
+        print("new_int:", variant)
+        api_core.godot_variant_new_int(&self._native, variant)
 
     def new_bool(self, variant):
          api_core.godot_variant_new_bool(&self._native, variant)
@@ -59,6 +106,8 @@ cdef class Variant:
 
     def new_string(self, String variant):
         api_core.godot_variant_new_string(&self._native, &variant._native)
+    def new_dict(self, Dictionary variant):
+        api_core.godot_variant_new_dictionary(&self._native, &variant._native);
 
 
     def new(self, variant):

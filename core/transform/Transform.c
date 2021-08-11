@@ -624,6 +624,8 @@ static CYTHON_INLINE float __PYX_NAN() {
 #define __PYX_HAVE_API__core__transform__Transform
 /* Early includes */
 #include <stddef.h>
+#include <string.h>
+#include <stdio.h>
 #include "binding.h"
 #ifdef _OPENMP
 #include <omp.h>
@@ -840,6 +842,7 @@ static const char *__pyx_f[] = {
   "core\\vector3\\Vector3.pxd",
   "core\\plane\\Plane.pxd",
   "core\\aabb\\AABB.pxd",
+  "type.pxd",
 };
 
 /*--- Type declarations ---*/
@@ -1310,6 +1313,21 @@ static CYTHON_INLINE void __pyx_f_4core_4aabb_4AABB_4AABB_new_static(godot_aabb 
 /* Module declarations from 'libcpp' */
 
 /* Module declarations from 'libc.stddef' */
+
+/* Module declarations from 'libc.string' */
+
+/* Module declarations from 'libc.stdio' */
+
+/* Module declarations from '__builtin__' */
+
+/* Module declarations from 'cpython.type' */
+static PyTypeObject *__pyx_ptype_7cpython_4type_type = 0;
+
+/* Module declarations from 'cpython' */
+
+/* Module declarations from 'cpython.object' */
+
+/* Module declarations from 'cpython.ref' */
 
 /* Module declarations from 'godot_api.binding' */
 
@@ -3951,6 +3969,17 @@ static int __Pyx_modinit_type_import_code(void) {
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__Pyx_modinit_type_import_code", 0);
   /*--- Type import code ---*/
+  __pyx_t_1 = PyImport_ImportModule(__Pyx_BUILTIN_MODULE_NAME); if (unlikely(!__pyx_t_1)) __PYX_ERR(7, 9, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __pyx_ptype_7cpython_4type_type = __Pyx_ImportType(__pyx_t_1, __Pyx_BUILTIN_MODULE_NAME, "type", 
+  #if defined(PYPY_VERSION_NUM) && PYPY_VERSION_NUM < 0x050B0000
+  sizeof(PyTypeObject),
+  #else
+  sizeof(PyHeapTypeObject),
+  #endif
+  __Pyx_ImportType_CheckSize_Warn);
+   if (!__pyx_ptype_7cpython_4type_type) __PYX_ERR(7, 9, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_t_1 = PyImport_ImportModule("core.basis.Basis"); if (unlikely(!__pyx_t_1)) __PYX_ERR(3, 4, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_ptype_4core_5basis_5Basis_Basis = __Pyx_ImportType(__pyx_t_1, "core.basis.Basis", "Basis", sizeof(struct __pyx_obj_4core_5basis_5Basis_Basis), __Pyx_ImportType_CheckSize_Warn);
