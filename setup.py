@@ -11,6 +11,7 @@ module += cythonize("utils/*.pyx", language_level=3)
 module += cythonize("godot_api/*.pyx", language_level=3)
 module += cythonize("pluginscript_api/*.pyx", language_level=3)
 module += cythonize("pluginscript_api/*/*.pyx", language_level=3)
+module += cythonize("enums/*.pyx", language_level=3)
 setup(
     ext_modules=module
 )

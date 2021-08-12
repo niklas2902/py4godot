@@ -1,5 +1,4 @@
 #include "gdnative_api_struct.gen.h"
-#include "delorean_api.h"
 #include "../classes/classes_api.h"
 #include "../pluginscript_api/api_api.h"
 #include "../core/dictionary/Dictionary_api.h"
@@ -192,7 +191,6 @@ void set_up_bindings(){
 	PyRun_SimpleString("import sys,os\nprint(sys.path, os.getcwd())");
 	PyRun_SimpleString("import sys, os\nsys.path.insert(0,os.getcwd()+'/addons')");
 	PyRun_SimpleString("import sys,os\nprint(sys.path, os.getcwd())");
-	//PyObject * pythonFile = PyImport_ImportModule("godot_api.delorean");
 	import_classes__classes();
     if (PyErr_Occurred())
     {
