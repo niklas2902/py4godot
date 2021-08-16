@@ -1,17 +1,15 @@
-task build (type:Exec) {
+task build_python (type:Exec) {
     commandLine "cmd","/c","python setup.py build_ext --compiler=msvc"
 }
 
 task createAddons(type: Copy) {
     from('build/lib.win-amd64-3.9')
     into('build/addons')
-    include('*')
 }
 
 task copyBuild(type:Copy){
     from('build/lib.win-amd64-3.9')
     into('buildTemp/lib')
-    include('*')
 }
 
 task deleteBuild(type:Delete){
@@ -21,15 +19,24 @@ task deleteBuild(type:Delete){
 task copyTemp(type:Copy){
     from('build/temp.win-amd64-3.9')
     into('buildTemp/temp')
-    include('*')
 }
 
 task deleteTemp(type:Delete){
     delete "build/temp.win-amd64-3.9"
 }
 
-build.configure { finalizedBy createAddons }
-createAddons.configure{finalizedBy copyBuild}
-copyBuild.configure{finalizedBy copyTemp}
+task copyBeforeBuild_Build(type:Copy){
+    from('buildTemp/lib')
+    into('build/lib.win-amd64-3.9')
+}
+
+task copyBeforeBuild_Temp(type:Copy){
+    from('buildTemp/temp')
+    into('build/temp.win-amd64-3.9')
+}
+
+build_python.configure{dependsOn copyBeforeBuild_Build, copyBeforeBuild_Temp}
+build_python.configure { finalizedBy createAddons }
+createAddons.configure{finalizedBy copyBuild, copyTemp}
 copyTemp.configure{finalizedBy deleteTemp}
 copyBuild.configure{finalizedBy deleteBuild}
