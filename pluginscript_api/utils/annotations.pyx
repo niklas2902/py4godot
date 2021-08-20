@@ -16,17 +16,12 @@ def reset():
     properties = []
 
 def gdclass(func):
-    print("gdclass:", func)
-    print(dir(func))
-    print(func.__name__)
     classes.append(func.__name__)
 
 def gdproperty(type, defaultval, hint= None, hint_string = ""):
     class gdprop(property):
         def __init__(self,fget=None, fset=None, fdel=None, doc=None):
             if(not fget == None and fset == None and fdel == None and doc == None):
-                print("Hint_Range:",godot_property_hint.GODOT_PROPERTY_HINT_RANGE)
-                print("gdproperty: __init__", fget, "|type:",type,"|defaultval:",defaultval)
                 properties.append(PropertyDescription(name = fget.__name__,
                 type_=godot_variant_type.GODOT_VARIANT_TYPE_INT,
                 hint=godot_property_hint.GODOT_PROPERTY_HINT_RANGE if hint == None else hint,

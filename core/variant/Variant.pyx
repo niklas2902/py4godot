@@ -20,7 +20,6 @@ from core.variant.variant_binding cimport *
 cdef api set_api_core_variant(godot_gdnative_core_api_struct * core):
     global api_core
     api_core = core
-    print("finish setting core for variant")
 
 
 cdef class Variant:
@@ -58,14 +57,11 @@ cdef class Variant:
             elif(type(variant)==type(True)):
                 self.new_bool(variant)
             elif type(variant) == Dictionary:
-                print("new_dict")
                 self.new_dict(variant)
-                print("new_dict_finished")
             else:
                 print("no Variant created:",variant,"|", type(variant))
         else:
             self.new_nil()
-            print("empty_Variant_created", variant)
 
     def get_type(self):
         return api_core.godot_variant_get_type(&self._native)
@@ -74,7 +70,6 @@ cdef class Variant:
         api_core.godot_variant_new_nil(&self._native);
 
     def new_int(self, variant):
-        print("new_int:", variant)
         api_core.godot_variant_new_int(&self._native, variant)
 
     def new_bool(self, variant):

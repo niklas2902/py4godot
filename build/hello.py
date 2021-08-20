@@ -1,15 +1,13 @@
 from pluginscript_api.utils.annotations import  *
+from utils.Wrapper import *
 from enums.enums import *
 print(PropertyHint)
 print(PropertyHint.GODOT_PROPERTY_HINT_RANGE.value)
 
-class prop(property):
-	pass
-
 @gdclass
-class Ball:
+class Ball(Wrapper):
 	def __init__(self):
-		pass
+		super.__init__()
 	@gdmethod
 	def move(self):
 		print("method")

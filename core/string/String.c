@@ -1199,12 +1199,10 @@ static const char __pyx_k_reduce_cython[] = "__reduce_cython__";
 static const char __pyx_k_setstate_cython[] = "__setstate_cython__";
 static const char __pyx_k_cline_in_traceback[] = "cline_in_traceback";
 static const char __pyx_k_Pickling_of_struct_members_such[] = "Pickling of struct members such as self._native must be explicitly requested with @auto_pickle(True)";
-static const char __pyx_k_create_String_with_python_string[] = "create_String_with python_string";
 static PyObject *__pyx_kp_s_Pickling_of_struct_members_such;
 static PyObject *__pyx_n_s_String;
 static PyObject *__pyx_n_s_TypeError;
 static PyObject *__pyx_n_s_cline_in_traceback;
-static PyObject *__pyx_kp_u_create_String_with_python_string;
 static PyObject *__pyx_n_s_getstate;
 static PyObject *__pyx_n_s_main;
 static PyObject *__pyx_n_s_name;
@@ -1379,7 +1377,7 @@ static int __pyx_pf_4core_6string_6String_6String___init__(struct __pyx_obj_4cor
  *         if(string == None):
  *             api_core.godot_string_new(&self._native)             # <<<<<<<<<<<<<<
  *         else:
- *             print("create_String_with python_string", string)
+ *             api_core.godot_string_new_with_wide_string(&self._native,  PyUnicode_AsWideCharString(string, NULL), len(string))
  */
     api_core->godot_string_new((&__pyx_v_self->_native));
 
@@ -1396,35 +1394,15 @@ static int __pyx_pf_4core_6string_6String_6String___init__(struct __pyx_obj_4cor
   /* "core/string/String.pyx":14
  *             api_core.godot_string_new(&self._native)
  *         else:
- *             print("create_String_with python_string", string)             # <<<<<<<<<<<<<<
- *             api_core.godot_string_new_with_wide_string(&self._native,  PyUnicode_AsWideCharString(string, NULL), len(string))
- *             api_core.godot_print(&self._native)
- */
-  /*else*/ {
-    __pyx_t_2 = PyTuple_New(2); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 14, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_2);
-    __Pyx_INCREF(__pyx_kp_u_create_String_with_python_string);
-    __Pyx_GIVEREF(__pyx_kp_u_create_String_with_python_string);
-    PyTuple_SET_ITEM(__pyx_t_2, 0, __pyx_kp_u_create_String_with_python_string);
-    __Pyx_INCREF(__pyx_v_string);
-    __Pyx_GIVEREF(__pyx_v_string);
-    PyTuple_SET_ITEM(__pyx_t_2, 1, __pyx_v_string);
-    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_print, __pyx_t_2, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 14, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_1);
-    __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-
-    /* "core/string/String.pyx":15
- *         else:
- *             print("create_String_with python_string", string)
  *             api_core.godot_string_new_with_wide_string(&self._native,  PyUnicode_AsWideCharString(string, NULL), len(string))             # <<<<<<<<<<<<<<
  *             api_core.godot_print(&self._native)
  */
-    __pyx_t_4 = PyObject_Length(__pyx_v_string); if (unlikely(__pyx_t_4 == ((Py_ssize_t)-1))) __PYX_ERR(0, 15, __pyx_L1_error)
+  /*else*/ {
+    __pyx_t_4 = PyObject_Length(__pyx_v_string); if (unlikely(__pyx_t_4 == ((Py_ssize_t)-1))) __PYX_ERR(0, 14, __pyx_L1_error)
     api_core->godot_string_new_with_wide_string((&__pyx_v_self->_native), PyUnicode_AsWideCharString(__pyx_v_string, NULL), __pyx_t_4);
 
-    /* "core/string/String.pyx":16
- *             print("create_String_with python_string", string)
+    /* "core/string/String.pyx":15
+ *         else:
  *             api_core.godot_string_new_with_wide_string(&self._native,  PyUnicode_AsWideCharString(string, NULL), len(string))
  *             api_core.godot_print(&self._native)             # <<<<<<<<<<<<<<
  */
@@ -1802,7 +1780,6 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_n_s_String, __pyx_k_String, sizeof(__pyx_k_String), 0, 0, 1, 1},
   {&__pyx_n_s_TypeError, __pyx_k_TypeError, sizeof(__pyx_k_TypeError), 0, 0, 1, 1},
   {&__pyx_n_s_cline_in_traceback, __pyx_k_cline_in_traceback, sizeof(__pyx_k_cline_in_traceback), 0, 0, 1, 1},
-  {&__pyx_kp_u_create_String_with_python_string, __pyx_k_create_String_with_python_string, sizeof(__pyx_k_create_String_with_python_string), 0, 1, 0, 0},
   {&__pyx_n_s_getstate, __pyx_k_getstate, sizeof(__pyx_k_getstate), 0, 0, 1, 1},
   {&__pyx_n_s_main, __pyx_k_main, sizeof(__pyx_k_main), 0, 0, 1, 1},
   {&__pyx_n_s_name, __pyx_k_name, sizeof(__pyx_k_name), 0, 0, 1, 1},

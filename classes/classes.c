@@ -6673,7 +6673,7 @@ typedef enum __pyx_t_7classes_9generated_XMLParser_NodeType __pyx_t_7classes_9ge
 
 /* "utils/Wrapper.pxd":2
  * from godot_api.binding cimport *
- * cdef class Wrapper:             # <<<<<<<<<<<<<<
+ * cdef class Wrapper(object):             # <<<<<<<<<<<<<<
  *     cdef godot_object *godot_owner
  * 
  */

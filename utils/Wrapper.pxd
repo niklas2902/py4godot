@@ -1,5 +1,5 @@
 from godot_api.binding cimport *
-cdef class Wrapper:
+cdef class Wrapper(object):
     cdef godot_object *godot_owner
 
     cdef inline void set_godot_owner(self,godot_object* owner):

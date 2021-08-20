@@ -25,17 +25,10 @@ task deleteTemp(type:Delete){
     delete "build/temp.win-amd64-3.9"
 }
 
-task copyBeforeBuild_Build(type:Copy){
-    from('buildTemp/lib')
-    into('build/lib.win-amd64-3.9')
+task generate(type:Exec){
+    commandLine "cmd","/c","python main.py"
 }
 
-task copyBeforeBuild_Temp(type:Copy){
-    from('buildTemp/temp')
-    into('build/temp.win-amd64-3.9')
-}
-
-build_python.configure{dependsOn copyBeforeBuild_Build, copyBeforeBuild_Temp}
 build_python.configure { finalizedBy createAddons }
 createAddons.configure{finalizedBy copyBuild, copyTemp}
 copyTemp.configure{finalizedBy deleteTemp}

@@ -1,8 +1,5 @@
 from setuptools import setup, Extension
 from Cython.Build import cythonize
-import main,os
-
-#main.build()
 
 module = cythonize('core/*/*.pyx', language_level=3)
 #module += cythonize("classes/*.pyx", language_level=3, nthreads=8)
@@ -13,7 +10,8 @@ module += cythonize("pluginscript_api/*.pyx", language_level=3)
 module += cythonize("pluginscript_api/*/*.pyx", language_level=3)
 module += cythonize("enums/*.pyx", language_level=3)
 setup(
-    ext_modules=module
+    ext_modules=module,
+    version="0.0.1"
 )
 
 "build:python setup.py build_ext --compiler=msvc"

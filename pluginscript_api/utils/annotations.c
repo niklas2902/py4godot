@@ -934,7 +934,7 @@ struct __pyx_obj_4core_7variant_7Variant_Variant {
 };
 
 
-/* "pluginscript_api/utils/annotations.pyx":24
+/* "pluginscript_api/utils/annotations.pyx":21
  *     classes.append(func.__name__)
  * 
  * def gdproperty(type, defaultval, hint= None, hint_string = ""):             # <<<<<<<<<<<<<<
@@ -946,7 +946,6 @@ struct __pyx_obj_16pluginscript_api_5utils_11annotations___pyx_scope_struct__gdp
   PyObject *__pyx_v_defaultval;
   PyObject *__pyx_v_hint;
   PyObject *__pyx_v_hint_string;
-  PyObject *__pyx_v_type;
 };
 
 
@@ -1043,11 +1042,21 @@ static CYTHON_INLINE PyObject* __Pyx_PyObject_GetAttrStr(PyObject* obj, PyObject
 /* GetBuiltinName.proto */
 static PyObject *__Pyx_GetBuiltinName(PyObject *name);
 
-/* PyObjectCall.proto */
-#if CYTHON_COMPILING_IN_CPYTHON
-static CYTHON_INLINE PyObject* __Pyx_PyObject_Call(PyObject *func, PyObject *arg, PyObject *kw);
+/* ListAppend.proto */
+#if CYTHON_USE_PYLIST_INTERNALS && CYTHON_ASSUME_SAFE_MACROS
+static CYTHON_INLINE int __Pyx_PyList_Append(PyObject* list, PyObject* x) {
+    PyListObject* L = (PyListObject*) list;
+    Py_ssize_t len = Py_SIZE(list);
+    if (likely(L->allocated > len) & likely(len > (L->allocated >> 1))) {
+        Py_INCREF(x);
+        PyList_SET_ITEM(list, len, x);
+        __Pyx_SET_SIZE(list, len + 1);
+        return 0;
+    }
+    return PyList_Append(list, x);
+}
 #else
-#define __Pyx_PyObject_Call(func, arg, kw) PyObject_Call(func, arg, kw)
+#define __Pyx_PyList_Append(L,x) PyList_Append(L,x)
 #endif
 
 /* PyCFunctionFastCall.proto */
@@ -1080,6 +1089,16 @@ static PyObject *__Pyx_PyFunction_FastCallDict(PyObject *func, PyObject **args, 
     (assert(__pyx_pyframe_localsplus_offset), (PyObject **)(((char *)(frame)) + __pyx_pyframe_localsplus_offset))
 #endif
 
+/* PyObjectCall.proto */
+#if CYTHON_COMPILING_IN_CPYTHON
+static CYTHON_INLINE PyObject* __Pyx_PyObject_Call(PyObject *func, PyObject *arg, PyObject *kw);
+#else
+#define __Pyx_PyObject_Call(func, arg, kw) PyObject_Call(func, arg, kw)
+#endif
+
+/* PyObjectCall2Args.proto */
+static CYTHON_UNUSED PyObject* __Pyx_PyObject_Call2Args(PyObject* function, PyObject* arg1, PyObject* arg2);
+
 /* PyObjectCallMethO.proto */
 #if CYTHON_COMPILING_IN_CPYTHON
 static CYTHON_INLINE PyObject* __Pyx_PyObject_CallMethO(PyObject *func, PyObject *arg);
@@ -1087,26 +1106,6 @@ static CYTHON_INLINE PyObject* __Pyx_PyObject_CallMethO(PyObject *func, PyObject
 
 /* PyObjectCallOneArg.proto */
 static CYTHON_INLINE PyObject* __Pyx_PyObject_CallOneArg(PyObject *func, PyObject *arg);
-
-/* ListAppend.proto */
-#if CYTHON_USE_PYLIST_INTERNALS && CYTHON_ASSUME_SAFE_MACROS
-static CYTHON_INLINE int __Pyx_PyList_Append(PyObject* list, PyObject* x) {
-    PyListObject* L = (PyListObject*) list;
-    Py_ssize_t len = Py_SIZE(list);
-    if (likely(L->allocated > len) & likely(len > (L->allocated >> 1))) {
-        Py_INCREF(x);
-        PyList_SET_ITEM(list, len, x);
-        __Pyx_SET_SIZE(list, len + 1);
-        return 0;
-    }
-    return PyList_Append(list, x);
-}
-#else
-#define __Pyx_PyList_Append(L,x) PyList_Append(L,x)
-#endif
-
-/* PyObjectCall2Args.proto */
-static CYTHON_UNUSED PyObject* __Pyx_PyObject_Call2Args(PyObject* function, PyObject* arg1, PyObject* arg2);
 
 /* PyObjectGetMethod.proto */
 static int __Pyx_PyObject_GetMethod(PyObject *obj, PyObject *name, PyObject **method);
@@ -1372,10 +1371,10 @@ static void __Pyx_AddTraceback(const char *funcname, int c_line,
                                int py_line, const char *filename);
 
 /* CIntToPy.proto */
-static CYTHON_INLINE PyObject* __Pyx_PyInt_From_godot_property_hint(godot_property_hint value);
+static CYTHON_INLINE PyObject* __Pyx_PyInt_From_godot_variant_type(godot_variant_type value);
 
 /* CIntToPy.proto */
-static CYTHON_INLINE PyObject* __Pyx_PyInt_From_godot_variant_type(godot_variant_type value);
+static CYTHON_INLINE PyObject* __Pyx_PyInt_From_godot_property_hint(godot_property_hint value);
 
 /* CIntToPy.proto */
 static CYTHON_INLINE PyObject* __Pyx_PyInt_From_godot_property_usage_flags(godot_property_usage_flags value);
@@ -1450,9 +1449,9 @@ extern int __pyx_module_is_main_pluginscript_api__utils__annotations;
 int __pyx_module_is_main_pluginscript_api__utils__annotations = 0;
 
 /* Implementation of 'pluginscript_api.utils.annotations' */
-static PyObject *__pyx_builtin_print;
 static PyObject *__pyx_builtin_property;
 static PyObject *__pyx_builtin_super;
+static PyObject *__pyx_builtin_print;
 static const char __pyx_k_[] = "";
 static const char __pyx_k_doc[] = "doc";
 static const char __pyx_k_fdel[] = "fdel";
@@ -1477,30 +1476,25 @@ static const char __pyx_k_gdprop[] = "gdprop";
 static const char __pyx_k_import[] = "__import__";
 static const char __pyx_k_module[] = "__module__";
 static const char __pyx_k_name_2[] = "name";
-static const char __pyx_k_type_2[] = "|type:";
-static const char __pyx_k_type_3[] = "type_";
+static const char __pyx_k_type_2[] = "type_";
 static const char __pyx_k_classes[] = "classes";
-static const char __pyx_k_gdclass[] = "gdclass:";
+static const char __pyx_k_gdclass[] = "gdclass";
 static const char __pyx_k_methods[] = "methods";
 static const char __pyx_k_prepare[] = "__prepare__";
 static const char __pyx_k_gdmethod[] = "gdmethod";
 static const char __pyx_k_property[] = "property";
 static const char __pyx_k_qualname[] = "__qualname__";
 static const char __pyx_k_functools[] = "functools";
-static const char __pyx_k_gdclass_2[] = "gdclass";
 static const char __pyx_k_metaclass[] = "__metaclass__";
 static const char __pyx_k_rset_mode[] = "rset_mode";
-static const char __pyx_k_Hint_Range[] = "Hint_Range:";
 static const char __pyx_k_defaultval[] = "defaultval";
 static const char __pyx_k_gdproperty[] = "gdproperty";
 static const char __pyx_k_properties[] = "properties";
 static const char __pyx_k_pyx_vtable[] = "__pyx_vtable__";
 static const char __pyx_k_hint_string[] = "hint_string";
 static const char __pyx_k_new_variant[] = "new_variant";
-static const char __pyx_k_defaultval_2[] = "|defaultval:";
 static const char __pyx_k_default_value[] = "default_value";
 static const char __pyx_k_MethodDescription[] = "MethodDescription";
-static const char __pyx_k_gdproperty___init[] = "gdproperty: __init__";
 static const char __pyx_k_cline_in_traceback[] = "cline_in_traceback";
 static const char __pyx_k_PropertyDescription[] = "PropertyDescription";
 static const char __pyx_k_gdproperty_locals_gdprop[] = "gdproperty.<locals>.gdprop";
@@ -1510,7 +1504,6 @@ static const char __pyx_k_pluginscript_api_utils_annotatio[] = "pluginscript_api
 static const char __pyx_k_pluginscript_api_description_cla_2[] = "pluginscript_api.description_classes.PropertyDescription";
 static const char __pyx_k_pluginscript_api_utils_annotatio_2[] = "pluginscript_api\\utils\\annotations.pyx";
 static PyObject *__pyx_kp_u_;
-static PyObject *__pyx_kp_u_Hint_Range;
 static PyObject *__pyx_n_s_MethodDescription;
 static PyObject *__pyx_n_s_PropertyDescription;
 static PyObject *__pyx_n_s_append;
@@ -1518,7 +1511,6 @@ static PyObject *__pyx_n_s_classes;
 static PyObject *__pyx_n_s_cline_in_traceback;
 static PyObject *__pyx_n_s_default_value;
 static PyObject *__pyx_n_s_defaultval;
-static PyObject *__pyx_kp_u_defaultval_2;
 static PyObject *__pyx_n_s_doc;
 static PyObject *__pyx_n_s_doc_2;
 static PyObject *__pyx_n_s_fdel;
@@ -1526,12 +1518,10 @@ static PyObject *__pyx_n_s_fget;
 static PyObject *__pyx_n_s_fset;
 static PyObject *__pyx_n_s_func;
 static PyObject *__pyx_n_s_functools;
-static PyObject *__pyx_kp_u_gdclass;
-static PyObject *__pyx_n_s_gdclass_2;
+static PyObject *__pyx_n_s_gdclass;
 static PyObject *__pyx_n_s_gdmethod;
 static PyObject *__pyx_n_s_gdprop;
 static PyObject *__pyx_n_s_gdproperty;
-static PyObject *__pyx_kp_u_gdproperty___init;
 static PyObject *__pyx_n_s_gdproperty_locals_gdprop;
 static PyObject *__pyx_n_s_gdproperty_locals_gdprop___init;
 static PyObject *__pyx_n_s_hint;
@@ -1561,14 +1551,13 @@ static PyObject *__pyx_n_s_self;
 static PyObject *__pyx_n_s_super;
 static PyObject *__pyx_n_s_test;
 static PyObject *__pyx_n_s_type;
-static PyObject *__pyx_kp_u_type_2;
-static PyObject *__pyx_n_s_type_3;
+static PyObject *__pyx_n_s_type_2;
 static PyObject *__pyx_n_s_usage;
 static PyObject *__pyx_n_s_wraps;
 static PyObject *__pyx_pf_16pluginscript_api_5utils_11annotations_reset(CYTHON_UNUSED PyObject *__pyx_self); /* proto */
 static PyObject *__pyx_pf_16pluginscript_api_5utils_11annotations_2gdclass(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_func); /* proto */
 static PyObject *__pyx_pf_16pluginscript_api_5utils_11annotations_10gdproperty_6gdprop___init__(PyObject *__pyx_self, PyObject *__pyx_v_self, PyObject *__pyx_v_fget, PyObject *__pyx_v_fset, PyObject *__pyx_v_fdel, PyObject *__pyx_v_doc); /* proto */
-static PyObject *__pyx_pf_16pluginscript_api_5utils_11annotations_4gdproperty(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_type, PyObject *__pyx_v_defaultval, PyObject *__pyx_v_hint, PyObject *__pyx_v_hint_string); /* proto */
+static PyObject *__pyx_pf_16pluginscript_api_5utils_11annotations_4gdproperty(CYTHON_UNUSED PyObject *__pyx_self, CYTHON_UNUSED PyObject *__pyx_v_type, PyObject *__pyx_v_defaultval, PyObject *__pyx_v_hint, PyObject *__pyx_v_hint_string); /* proto */
 static PyObject *__pyx_pf_16pluginscript_api_5utils_11annotations_6gdmethod(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_func); /* proto */
 static PyObject *__pyx_tp_new_16pluginscript_api_5utils_11annotations___pyx_scope_struct__gdproperty(PyTypeObject *t, PyObject *a, PyObject *k); /*proto*/
 static PyObject *__pyx_tuple__2;
@@ -1676,8 +1665,8 @@ static PyObject *__pyx_pf_16pluginscript_api_5utils_11annotations_reset(CYTHON_U
  *     properties = []
  * 
  * def gdclass(func):             # <<<<<<<<<<<<<<
- *     print("gdclass:", func)
- *     print(dir(func))
+ *     classes.append(func.__name__)
+ * 
  */
 
 /* Python wrapper */
@@ -1708,72 +1697,24 @@ static PyObject *__pyx_pf_16pluginscript_api_5utils_11annotations_2gdclass(CYTHO
   /* "pluginscript_api/utils/annotations.pyx":19
  * 
  * def gdclass(func):
- *     print("gdclass:", func)             # <<<<<<<<<<<<<<
- *     print(dir(func))
- *     print(func.__name__)
- */
-  __pyx_t_1 = PyTuple_New(2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 19, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_1);
-  __Pyx_INCREF(__pyx_kp_u_gdclass);
-  __Pyx_GIVEREF(__pyx_kp_u_gdclass);
-  PyTuple_SET_ITEM(__pyx_t_1, 0, __pyx_kp_u_gdclass);
-  __Pyx_INCREF(__pyx_v_func);
-  __Pyx_GIVEREF(__pyx_v_func);
-  PyTuple_SET_ITEM(__pyx_t_1, 1, __pyx_v_func);
-  __pyx_t_2 = __Pyx_PyObject_Call(__pyx_builtin_print, __pyx_t_1, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 19, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_2);
-  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-
-  /* "pluginscript_api/utils/annotations.pyx":20
- * def gdclass(func):
- *     print("gdclass:", func)
- *     print(dir(func))             # <<<<<<<<<<<<<<
- *     print(func.__name__)
- *     classes.append(func.__name__)
- */
-  __pyx_t_2 = PyObject_Dir(__pyx_v_func); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 20, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_builtin_print, __pyx_t_2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 20, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_1);
-  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-
-  /* "pluginscript_api/utils/annotations.pyx":21
- *     print("gdclass:", func)
- *     print(dir(func))
- *     print(func.__name__)             # <<<<<<<<<<<<<<
- *     classes.append(func.__name__)
- * 
- */
-  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_func, __pyx_n_s_name); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 21, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = __Pyx_PyObject_CallOneArg(__pyx_builtin_print, __pyx_t_1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 21, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_2);
-  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-
-  /* "pluginscript_api/utils/annotations.pyx":22
- *     print(dir(func))
- *     print(func.__name__)
  *     classes.append(func.__name__)             # <<<<<<<<<<<<<<
  * 
  * def gdproperty(type, defaultval, hint= None, hint_string = ""):
  */
-  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_classes); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 22, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_func, __pyx_n_s_name); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 22, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_n_s_classes); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 19, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_3 = __Pyx_PyObject_Append(__pyx_t_2, __pyx_t_1); if (unlikely(__pyx_t_3 == ((int)-1))) __PYX_ERR(0, 22, __pyx_L1_error)
-  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_func, __pyx_n_s_name); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 19, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
+  __pyx_t_3 = __Pyx_PyObject_Append(__pyx_t_1, __pyx_t_2); if (unlikely(__pyx_t_3 == ((int)-1))) __PYX_ERR(0, 19, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
   /* "pluginscript_api/utils/annotations.pyx":18
  *     properties = []
  * 
  * def gdclass(func):             # <<<<<<<<<<<<<<
- *     print("gdclass:", func)
- *     print(dir(func))
+ *     classes.append(func.__name__)
+ * 
  */
 
   /* function exit code */
@@ -1790,7 +1731,7 @@ static PyObject *__pyx_pf_16pluginscript_api_5utils_11annotations_2gdclass(CYTHO
   return __pyx_r;
 }
 
-/* "pluginscript_api/utils/annotations.pyx":24
+/* "pluginscript_api/utils/annotations.pyx":21
  *     classes.append(func.__name__)
  * 
  * def gdproperty(type, defaultval, hint= None, hint_string = ""):             # <<<<<<<<<<<<<<
@@ -1802,7 +1743,7 @@ static PyObject *__pyx_pf_16pluginscript_api_5utils_11annotations_2gdclass(CYTHO
 static PyObject *__pyx_pw_16pluginscript_api_5utils_11annotations_5gdproperty(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
 static PyMethodDef __pyx_mdef_16pluginscript_api_5utils_11annotations_5gdproperty = {"gdproperty", (PyCFunction)(void*)(PyCFunctionWithKeywords)__pyx_pw_16pluginscript_api_5utils_11annotations_5gdproperty, METH_VARARGS|METH_KEYWORDS, 0};
 static PyObject *__pyx_pw_16pluginscript_api_5utils_11annotations_5gdproperty(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
-  PyObject *__pyx_v_type = 0;
+  CYTHON_UNUSED PyObject *__pyx_v_type = 0;
   PyObject *__pyx_v_defaultval = 0;
   PyObject *__pyx_v_hint = 0;
   PyObject *__pyx_v_hint_string = 0;
@@ -1841,7 +1782,7 @@ static PyObject *__pyx_pw_16pluginscript_api_5utils_11annotations_5gdproperty(Py
         case  1:
         if (likely((values[1] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_defaultval)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("gdproperty", 0, 2, 4, 1); __PYX_ERR(0, 24, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("gdproperty", 0, 2, 4, 1); __PYX_ERR(0, 21, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  2:
@@ -1857,7 +1798,7 @@ static PyObject *__pyx_pw_16pluginscript_api_5utils_11annotations_5gdproperty(Py
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "gdproperty") < 0)) __PYX_ERR(0, 24, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "gdproperty") < 0)) __PYX_ERR(0, 21, __pyx_L3_error)
       }
     } else {
       switch (PyTuple_GET_SIZE(__pyx_args)) {
@@ -1878,7 +1819,7 @@ static PyObject *__pyx_pw_16pluginscript_api_5utils_11annotations_5gdproperty(Py
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("gdproperty", 0, 2, 4, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 24, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("gdproperty", 0, 2, 4, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 21, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("pluginscript_api.utils.annotations.gdproperty", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
@@ -1891,12 +1832,12 @@ static PyObject *__pyx_pw_16pluginscript_api_5utils_11annotations_5gdproperty(Py
   return __pyx_r;
 }
 
-/* "pluginscript_api/utils/annotations.pyx":26
+/* "pluginscript_api/utils/annotations.pyx":23
  * def gdproperty(type, defaultval, hint= None, hint_string = ""):
  *     class gdprop(property):
  *         def __init__(self,fget=None, fset=None, fdel=None, doc=None):             # <<<<<<<<<<<<<<
  *             if(not fget == None and fset == None and fdel == None and doc == None):
- *                 print("Hint_Range:",godot_property_hint.GODOT_PROPERTY_HINT_RANGE)
+ *                 properties.append(PropertyDescription(name = fget.__name__,
  */
 
 /* Python wrapper */
@@ -1969,7 +1910,7 @@ static PyObject *__pyx_pw_16pluginscript_api_5utils_11annotations_10gdproperty_6
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "__init__") < 0)) __PYX_ERR(0, 26, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "__init__") < 0)) __PYX_ERR(0, 23, __pyx_L3_error)
       }
     } else {
       switch (PyTuple_GET_SIZE(__pyx_args)) {
@@ -1994,7 +1935,7 @@ static PyObject *__pyx_pw_16pluginscript_api_5utils_11annotations_10gdproperty_6
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("__init__", 0, 1, 5, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 26, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("__init__", 0, 1, 5, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 23, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("pluginscript_api.utils.annotations.gdproperty.gdprop.__init__", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
@@ -2029,15 +1970,15 @@ static PyObject *__pyx_pf_16pluginscript_api_5utils_11annotations_10gdproperty_6
   __pyx_outer_scope = (struct __pyx_obj_16pluginscript_api_5utils_11annotations___pyx_scope_struct__gdproperty *) __Pyx_CyFunction_GetClosure(__pyx_self);
   __pyx_cur_scope = __pyx_outer_scope;
 
-  /* "pluginscript_api/utils/annotations.pyx":27
+  /* "pluginscript_api/utils/annotations.pyx":24
  *     class gdprop(property):
  *         def __init__(self,fget=None, fset=None, fdel=None, doc=None):
  *             if(not fget == None and fset == None and fdel == None and doc == None):             # <<<<<<<<<<<<<<
- *                 print("Hint_Range:",godot_property_hint.GODOT_PROPERTY_HINT_RANGE)
- *                 print("gdproperty: __init__", fget, "|type:",type,"|defaultval:",defaultval)
+ *                 properties.append(PropertyDescription(name = fget.__name__,
+ *                 type_=godot_variant_type.GODOT_VARIANT_TYPE_INT,
  */
-  __pyx_t_2 = PyObject_RichCompare(__pyx_v_fget, Py_None, Py_EQ); __Pyx_XGOTREF(__pyx_t_2); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 27, __pyx_L1_error)
-  __pyx_t_3 = __Pyx_PyObject_IsTrue(__pyx_t_2); if (unlikely(__pyx_t_3 < 0)) __PYX_ERR(0, 27, __pyx_L1_error)
+  __pyx_t_2 = PyObject_RichCompare(__pyx_v_fget, Py_None, Py_EQ); __Pyx_XGOTREF(__pyx_t_2); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 24, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_IsTrue(__pyx_t_2); if (unlikely(__pyx_t_3 < 0)) __PYX_ERR(0, 24, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __pyx_t_4 = ((!__pyx_t_3) != 0);
   if (__pyx_t_4) {
@@ -2045,222 +1986,166 @@ static PyObject *__pyx_pf_16pluginscript_api_5utils_11annotations_10gdproperty_6
     __pyx_t_1 = __pyx_t_4;
     goto __pyx_L4_bool_binop_done;
   }
-  __pyx_t_2 = PyObject_RichCompare(__pyx_v_fset, Py_None, Py_EQ); __Pyx_XGOTREF(__pyx_t_2); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 27, __pyx_L1_error)
-  __pyx_t_4 = __Pyx_PyObject_IsTrue(__pyx_t_2); if (unlikely(__pyx_t_4 < 0)) __PYX_ERR(0, 27, __pyx_L1_error)
+  __pyx_t_2 = PyObject_RichCompare(__pyx_v_fset, Py_None, Py_EQ); __Pyx_XGOTREF(__pyx_t_2); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 24, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyObject_IsTrue(__pyx_t_2); if (unlikely(__pyx_t_4 < 0)) __PYX_ERR(0, 24, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   if (__pyx_t_4) {
   } else {
     __pyx_t_1 = __pyx_t_4;
     goto __pyx_L4_bool_binop_done;
   }
-  __pyx_t_2 = PyObject_RichCompare(__pyx_v_fdel, Py_None, Py_EQ); __Pyx_XGOTREF(__pyx_t_2); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 27, __pyx_L1_error)
-  __pyx_t_4 = __Pyx_PyObject_IsTrue(__pyx_t_2); if (unlikely(__pyx_t_4 < 0)) __PYX_ERR(0, 27, __pyx_L1_error)
+  __pyx_t_2 = PyObject_RichCompare(__pyx_v_fdel, Py_None, Py_EQ); __Pyx_XGOTREF(__pyx_t_2); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 24, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyObject_IsTrue(__pyx_t_2); if (unlikely(__pyx_t_4 < 0)) __PYX_ERR(0, 24, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   if (__pyx_t_4) {
   } else {
     __pyx_t_1 = __pyx_t_4;
     goto __pyx_L4_bool_binop_done;
   }
-  __pyx_t_2 = PyObject_RichCompare(__pyx_v_doc, Py_None, Py_EQ); __Pyx_XGOTREF(__pyx_t_2); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 27, __pyx_L1_error)
-  __pyx_t_4 = __Pyx_PyObject_IsTrue(__pyx_t_2); if (unlikely(__pyx_t_4 < 0)) __PYX_ERR(0, 27, __pyx_L1_error)
+  __pyx_t_2 = PyObject_RichCompare(__pyx_v_doc, Py_None, Py_EQ); __Pyx_XGOTREF(__pyx_t_2); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 24, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyObject_IsTrue(__pyx_t_2); if (unlikely(__pyx_t_4 < 0)) __PYX_ERR(0, 24, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __pyx_t_1 = __pyx_t_4;
   __pyx_L4_bool_binop_done:;
   if (__pyx_t_1) {
 
-    /* "pluginscript_api/utils/annotations.pyx":28
+    /* "pluginscript_api/utils/annotations.pyx":25
  *         def __init__(self,fget=None, fset=None, fdel=None, doc=None):
  *             if(not fget == None and fset == None and fdel == None and doc == None):
- *                 print("Hint_Range:",godot_property_hint.GODOT_PROPERTY_HINT_RANGE)             # <<<<<<<<<<<<<<
- *                 print("gdproperty: __init__", fget, "|type:",type,"|defaultval:",defaultval)
- *                 properties.append(PropertyDescription(name = fget.__name__,
- */
-    __pyx_t_2 = __Pyx_PyInt_From_godot_property_hint(GODOT_PROPERTY_HINT_RANGE); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 28, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_2);
-    __pyx_t_5 = PyTuple_New(2); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 28, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_5);
-    __Pyx_INCREF(__pyx_kp_u_Hint_Range);
-    __Pyx_GIVEREF(__pyx_kp_u_Hint_Range);
-    PyTuple_SET_ITEM(__pyx_t_5, 0, __pyx_kp_u_Hint_Range);
-    __Pyx_GIVEREF(__pyx_t_2);
-    PyTuple_SET_ITEM(__pyx_t_5, 1, __pyx_t_2);
-    __pyx_t_2 = 0;
-    __pyx_t_2 = __Pyx_PyObject_Call(__pyx_builtin_print, __pyx_t_5, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 28, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_2);
-    __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-    __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-
-    /* "pluginscript_api/utils/annotations.pyx":29
- *             if(not fget == None and fset == None and fdel == None and doc == None):
- *                 print("Hint_Range:",godot_property_hint.GODOT_PROPERTY_HINT_RANGE)
- *                 print("gdproperty: __init__", fget, "|type:",type,"|defaultval:",defaultval)             # <<<<<<<<<<<<<<
- *                 properties.append(PropertyDescription(name = fget.__name__,
- *                 type_=godot_variant_type.GODOT_VARIANT_TYPE_INT,
- */
-    if (unlikely(!__pyx_cur_scope->__pyx_v_type)) { __Pyx_RaiseClosureNameError("type"); __PYX_ERR(0, 29, __pyx_L1_error) }
-    if (unlikely(!__pyx_cur_scope->__pyx_v_defaultval)) { __Pyx_RaiseClosureNameError("defaultval"); __PYX_ERR(0, 29, __pyx_L1_error) }
-    __pyx_t_2 = PyTuple_New(6); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 29, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_2);
-    __Pyx_INCREF(__pyx_kp_u_gdproperty___init);
-    __Pyx_GIVEREF(__pyx_kp_u_gdproperty___init);
-    PyTuple_SET_ITEM(__pyx_t_2, 0, __pyx_kp_u_gdproperty___init);
-    __Pyx_INCREF(__pyx_v_fget);
-    __Pyx_GIVEREF(__pyx_v_fget);
-    PyTuple_SET_ITEM(__pyx_t_2, 1, __pyx_v_fget);
-    __Pyx_INCREF(__pyx_kp_u_type_2);
-    __Pyx_GIVEREF(__pyx_kp_u_type_2);
-    PyTuple_SET_ITEM(__pyx_t_2, 2, __pyx_kp_u_type_2);
-    __Pyx_INCREF(__pyx_cur_scope->__pyx_v_type);
-    __Pyx_GIVEREF(__pyx_cur_scope->__pyx_v_type);
-    PyTuple_SET_ITEM(__pyx_t_2, 3, __pyx_cur_scope->__pyx_v_type);
-    __Pyx_INCREF(__pyx_kp_u_defaultval_2);
-    __Pyx_GIVEREF(__pyx_kp_u_defaultval_2);
-    PyTuple_SET_ITEM(__pyx_t_2, 4, __pyx_kp_u_defaultval_2);
-    __Pyx_INCREF(__pyx_cur_scope->__pyx_v_defaultval);
-    __Pyx_GIVEREF(__pyx_cur_scope->__pyx_v_defaultval);
-    PyTuple_SET_ITEM(__pyx_t_2, 5, __pyx_cur_scope->__pyx_v_defaultval);
-    __pyx_t_5 = __Pyx_PyObject_Call(__pyx_builtin_print, __pyx_t_2, NULL); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 29, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_5);
-    __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-
-    /* "pluginscript_api/utils/annotations.pyx":30
- *                 print("Hint_Range:",godot_property_hint.GODOT_PROPERTY_HINT_RANGE)
- *                 print("gdproperty: __init__", fget, "|type:",type,"|defaultval:",defaultval)
  *                 properties.append(PropertyDescription(name = fget.__name__,             # <<<<<<<<<<<<<<
  *                 type_=godot_variant_type.GODOT_VARIANT_TYPE_INT,
  *                 hint=godot_property_hint.GODOT_PROPERTY_HINT_RANGE if hint == None else hint,
  */
-    __Pyx_GetModuleGlobalName(__pyx_t_5, __pyx_n_s_properties); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 30, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_5);
-    __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_PropertyDescription); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 30, __pyx_L1_error)
+    __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_properties); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 25, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
-    __pyx_t_6 = __Pyx_PyDict_NewPresized(7); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 30, __pyx_L1_error)
+    __Pyx_GetModuleGlobalName(__pyx_t_5, __pyx_n_s_PropertyDescription); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 25, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_5);
+    __pyx_t_6 = __Pyx_PyDict_NewPresized(7); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 25, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_6);
-    __pyx_t_7 = __Pyx_PyObject_GetAttrStr(__pyx_v_fget, __pyx_n_s_name); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 30, __pyx_L1_error)
+    __pyx_t_7 = __Pyx_PyObject_GetAttrStr(__pyx_v_fget, __pyx_n_s_name); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 25, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_7);
-    if (PyDict_SetItem(__pyx_t_6, __pyx_n_s_name_2, __pyx_t_7) < 0) __PYX_ERR(0, 30, __pyx_L1_error)
+    if (PyDict_SetItem(__pyx_t_6, __pyx_n_s_name_2, __pyx_t_7) < 0) __PYX_ERR(0, 25, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
 
-    /* "pluginscript_api/utils/annotations.pyx":31
- *                 print("gdproperty: __init__", fget, "|type:",type,"|defaultval:",defaultval)
+    /* "pluginscript_api/utils/annotations.pyx":26
+ *             if(not fget == None and fset == None and fdel == None and doc == None):
  *                 properties.append(PropertyDescription(name = fget.__name__,
  *                 type_=godot_variant_type.GODOT_VARIANT_TYPE_INT,             # <<<<<<<<<<<<<<
  *                 hint=godot_property_hint.GODOT_PROPERTY_HINT_RANGE if hint == None else hint,
  *                 hint_string=hint_string,usage=godot_property_usage_flags. GODOT_PROPERTY_USAGE_DEFAULT,
  */
-    __pyx_t_7 = __Pyx_PyInt_From_godot_variant_type(GODOT_VARIANT_TYPE_INT); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 31, __pyx_L1_error)
+    __pyx_t_7 = __Pyx_PyInt_From_godot_variant_type(GODOT_VARIANT_TYPE_INT); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 26, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_7);
-    if (PyDict_SetItem(__pyx_t_6, __pyx_n_s_type_3, __pyx_t_7) < 0) __PYX_ERR(0, 30, __pyx_L1_error)
+    if (PyDict_SetItem(__pyx_t_6, __pyx_n_s_type_2, __pyx_t_7) < 0) __PYX_ERR(0, 25, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
 
-    /* "pluginscript_api/utils/annotations.pyx":32
+    /* "pluginscript_api/utils/annotations.pyx":27
  *                 properties.append(PropertyDescription(name = fget.__name__,
  *                 type_=godot_variant_type.GODOT_VARIANT_TYPE_INT,
  *                 hint=godot_property_hint.GODOT_PROPERTY_HINT_RANGE if hint == None else hint,             # <<<<<<<<<<<<<<
  *                 hint_string=hint_string,usage=godot_property_usage_flags. GODOT_PROPERTY_USAGE_DEFAULT,
  *                 default_value=defaultval, rset_mode=godot_method_rpc_mode.GODOT_METHOD_RPC_MODE_REMOTESYNC))
  */
-    if (unlikely(!__pyx_cur_scope->__pyx_v_hint)) { __Pyx_RaiseClosureNameError("hint"); __PYX_ERR(0, 32, __pyx_L1_error) }
-    __pyx_t_8 = PyObject_RichCompare(__pyx_cur_scope->__pyx_v_hint, Py_None, Py_EQ); __Pyx_XGOTREF(__pyx_t_8); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 32, __pyx_L1_error)
-    __pyx_t_1 = __Pyx_PyObject_IsTrue(__pyx_t_8); if (unlikely(__pyx_t_1 < 0)) __PYX_ERR(0, 32, __pyx_L1_error)
+    if (unlikely(!__pyx_cur_scope->__pyx_v_hint)) { __Pyx_RaiseClosureNameError("hint"); __PYX_ERR(0, 27, __pyx_L1_error) }
+    __pyx_t_8 = PyObject_RichCompare(__pyx_cur_scope->__pyx_v_hint, Py_None, Py_EQ); __Pyx_XGOTREF(__pyx_t_8); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 27, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_IsTrue(__pyx_t_8); if (unlikely(__pyx_t_1 < 0)) __PYX_ERR(0, 27, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
     if (__pyx_t_1) {
-      __pyx_t_8 = __Pyx_PyInt_From_godot_property_hint(GODOT_PROPERTY_HINT_RANGE); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 32, __pyx_L1_error)
+      __pyx_t_8 = __Pyx_PyInt_From_godot_property_hint(GODOT_PROPERTY_HINT_RANGE); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 27, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_8);
       __pyx_t_7 = __pyx_t_8;
       __pyx_t_8 = 0;
     } else {
-      if (unlikely(!__pyx_cur_scope->__pyx_v_hint)) { __Pyx_RaiseClosureNameError("hint"); __PYX_ERR(0, 32, __pyx_L1_error) }
+      if (unlikely(!__pyx_cur_scope->__pyx_v_hint)) { __Pyx_RaiseClosureNameError("hint"); __PYX_ERR(0, 27, __pyx_L1_error) }
       __Pyx_INCREF(__pyx_cur_scope->__pyx_v_hint);
       __pyx_t_7 = __pyx_cur_scope->__pyx_v_hint;
     }
-    if (PyDict_SetItem(__pyx_t_6, __pyx_n_s_hint, __pyx_t_7) < 0) __PYX_ERR(0, 30, __pyx_L1_error)
+    if (PyDict_SetItem(__pyx_t_6, __pyx_n_s_hint, __pyx_t_7) < 0) __PYX_ERR(0, 25, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
 
-    /* "pluginscript_api/utils/annotations.pyx":33
+    /* "pluginscript_api/utils/annotations.pyx":28
  *                 type_=godot_variant_type.GODOT_VARIANT_TYPE_INT,
  *                 hint=godot_property_hint.GODOT_PROPERTY_HINT_RANGE if hint == None else hint,
  *                 hint_string=hint_string,usage=godot_property_usage_flags. GODOT_PROPERTY_USAGE_DEFAULT,             # <<<<<<<<<<<<<<
  *                 default_value=defaultval, rset_mode=godot_method_rpc_mode.GODOT_METHOD_RPC_MODE_REMOTESYNC))
  *             super().__init__(fget, set, fdel,doc)
  */
-    if (unlikely(!__pyx_cur_scope->__pyx_v_hint_string)) { __Pyx_RaiseClosureNameError("hint_string"); __PYX_ERR(0, 33, __pyx_L1_error) }
-    if (PyDict_SetItem(__pyx_t_6, __pyx_n_s_hint_string, __pyx_cur_scope->__pyx_v_hint_string) < 0) __PYX_ERR(0, 30, __pyx_L1_error)
-    __pyx_t_7 = __Pyx_PyInt_From_godot_property_usage_flags(GODOT_PROPERTY_USAGE_DEFAULT); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 33, __pyx_L1_error)
+    if (unlikely(!__pyx_cur_scope->__pyx_v_hint_string)) { __Pyx_RaiseClosureNameError("hint_string"); __PYX_ERR(0, 28, __pyx_L1_error) }
+    if (PyDict_SetItem(__pyx_t_6, __pyx_n_s_hint_string, __pyx_cur_scope->__pyx_v_hint_string) < 0) __PYX_ERR(0, 25, __pyx_L1_error)
+    __pyx_t_7 = __Pyx_PyInt_From_godot_property_usage_flags(GODOT_PROPERTY_USAGE_DEFAULT); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 28, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_7);
-    if (PyDict_SetItem(__pyx_t_6, __pyx_n_s_usage, __pyx_t_7) < 0) __PYX_ERR(0, 30, __pyx_L1_error)
+    if (PyDict_SetItem(__pyx_t_6, __pyx_n_s_usage, __pyx_t_7) < 0) __PYX_ERR(0, 25, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
 
-    /* "pluginscript_api/utils/annotations.pyx":34
+    /* "pluginscript_api/utils/annotations.pyx":29
  *                 hint=godot_property_hint.GODOT_PROPERTY_HINT_RANGE if hint == None else hint,
  *                 hint_string=hint_string,usage=godot_property_usage_flags. GODOT_PROPERTY_USAGE_DEFAULT,
  *                 default_value=defaultval, rset_mode=godot_method_rpc_mode.GODOT_METHOD_RPC_MODE_REMOTESYNC))             # <<<<<<<<<<<<<<
  *             super().__init__(fget, set, fdel,doc)
  *     return gdprop
  */
-    if (unlikely(!__pyx_cur_scope->__pyx_v_defaultval)) { __Pyx_RaiseClosureNameError("defaultval"); __PYX_ERR(0, 34, __pyx_L1_error) }
-    if (PyDict_SetItem(__pyx_t_6, __pyx_n_s_default_value, __pyx_cur_scope->__pyx_v_defaultval) < 0) __PYX_ERR(0, 30, __pyx_L1_error)
-    __pyx_t_7 = __Pyx_PyInt_From_godot_method_rpc_mode(GODOT_METHOD_RPC_MODE_REMOTESYNC); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 34, __pyx_L1_error)
+    if (unlikely(!__pyx_cur_scope->__pyx_v_defaultval)) { __Pyx_RaiseClosureNameError("defaultval"); __PYX_ERR(0, 29, __pyx_L1_error) }
+    if (PyDict_SetItem(__pyx_t_6, __pyx_n_s_default_value, __pyx_cur_scope->__pyx_v_defaultval) < 0) __PYX_ERR(0, 25, __pyx_L1_error)
+    __pyx_t_7 = __Pyx_PyInt_From_godot_method_rpc_mode(GODOT_METHOD_RPC_MODE_REMOTESYNC); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 29, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_7);
-    if (PyDict_SetItem(__pyx_t_6, __pyx_n_s_rset_mode, __pyx_t_7) < 0) __PYX_ERR(0, 30, __pyx_L1_error)
+    if (PyDict_SetItem(__pyx_t_6, __pyx_n_s_rset_mode, __pyx_t_7) < 0) __PYX_ERR(0, 25, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
 
-    /* "pluginscript_api/utils/annotations.pyx":30
- *                 print("Hint_Range:",godot_property_hint.GODOT_PROPERTY_HINT_RANGE)
- *                 print("gdproperty: __init__", fget, "|type:",type,"|defaultval:",defaultval)
+    /* "pluginscript_api/utils/annotations.pyx":25
+ *         def __init__(self,fget=None, fset=None, fdel=None, doc=None):
+ *             if(not fget == None and fset == None and fdel == None and doc == None):
  *                 properties.append(PropertyDescription(name = fget.__name__,             # <<<<<<<<<<<<<<
  *                 type_=godot_variant_type.GODOT_VARIANT_TYPE_INT,
  *                 hint=godot_property_hint.GODOT_PROPERTY_HINT_RANGE if hint == None else hint,
  */
-    __pyx_t_7 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_empty_tuple, __pyx_t_6); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 30, __pyx_L1_error)
+    __pyx_t_7 = __Pyx_PyObject_Call(__pyx_t_5, __pyx_empty_tuple, __pyx_t_6); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 25, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_7);
-    __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-    __pyx_t_9 = __Pyx_PyObject_Append(__pyx_t_5, __pyx_t_7); if (unlikely(__pyx_t_9 == ((int)-1))) __PYX_ERR(0, 30, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
+    __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
+    __pyx_t_9 = __Pyx_PyObject_Append(__pyx_t_2, __pyx_t_7); if (unlikely(__pyx_t_9 == ((int)-1))) __PYX_ERR(0, 25, __pyx_L1_error)
+    __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
     __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
 
-    /* "pluginscript_api/utils/annotations.pyx":27
+    /* "pluginscript_api/utils/annotations.pyx":24
  *     class gdprop(property):
  *         def __init__(self,fget=None, fset=None, fdel=None, doc=None):
  *             if(not fget == None and fset == None and fdel == None and doc == None):             # <<<<<<<<<<<<<<
- *                 print("Hint_Range:",godot_property_hint.GODOT_PROPERTY_HINT_RANGE)
- *                 print("gdproperty: __init__", fget, "|type:",type,"|defaultval:",defaultval)
+ *                 properties.append(PropertyDescription(name = fget.__name__,
+ *                 type_=godot_variant_type.GODOT_VARIANT_TYPE_INT,
  */
   }
 
-  /* "pluginscript_api/utils/annotations.pyx":35
+  /* "pluginscript_api/utils/annotations.pyx":30
  *                 hint_string=hint_string,usage=godot_property_usage_flags. GODOT_PROPERTY_USAGE_DEFAULT,
  *                 default_value=defaultval, rset_mode=godot_method_rpc_mode.GODOT_METHOD_RPC_MODE_REMOTESYNC))
  *             super().__init__(fget, set, fdel,doc)             # <<<<<<<<<<<<<<
  *     return gdprop
  * 
  */
-  __pyx_t_5 = __Pyx_CyFunction_GetClassObj(__pyx_self);
-  if (!__pyx_t_5) { PyErr_SetString(PyExc_SystemError, "super(): empty __class__ cell"); __PYX_ERR(0, 35, __pyx_L1_error) }
-  __Pyx_INCREF(__pyx_t_5);
-  __pyx_t_6 = PyTuple_New(2); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 35, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_CyFunction_GetClassObj(__pyx_self);
+  if (!__pyx_t_2) { PyErr_SetString(PyExc_SystemError, "super(): empty __class__ cell"); __PYX_ERR(0, 30, __pyx_L1_error) }
+  __Pyx_INCREF(__pyx_t_2);
+  __pyx_t_6 = PyTuple_New(2); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 30, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
-  __Pyx_GIVEREF(__pyx_t_5);
-  PyTuple_SET_ITEM(__pyx_t_6, 0, __pyx_t_5);
+  __Pyx_GIVEREF(__pyx_t_2);
+  PyTuple_SET_ITEM(__pyx_t_6, 0, __pyx_t_2);
   __Pyx_INCREF(__pyx_v_self);
   __Pyx_GIVEREF(__pyx_v_self);
   PyTuple_SET_ITEM(__pyx_t_6, 1, __pyx_v_self);
-  __pyx_t_5 = 0;
-  __pyx_t_5 = __Pyx_PyObject_Call(__pyx_builtin_super, __pyx_t_6, NULL); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 35, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_5);
+  __pyx_t_2 = 0;
+  __pyx_t_2 = __Pyx_PyObject_Call(__pyx_builtin_super, __pyx_t_6, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 30, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-  __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_t_5, __pyx_n_s_init); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 35, __pyx_L1_error)
+  __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_init); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 30, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
-  __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-  __pyx_t_5 = NULL;
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+  __pyx_t_2 = NULL;
   __pyx_t_10 = 0;
   if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_6))) {
-    __pyx_t_5 = PyMethod_GET_SELF(__pyx_t_6);
-    if (likely(__pyx_t_5)) {
+    __pyx_t_2 = PyMethod_GET_SELF(__pyx_t_6);
+    if (likely(__pyx_t_2)) {
       PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_6);
-      __Pyx_INCREF(__pyx_t_5);
+      __Pyx_INCREF(__pyx_t_2);
       __Pyx_INCREF(function);
       __Pyx_DECREF_SET(__pyx_t_6, function);
       __pyx_t_10 = 1;
@@ -2268,51 +2153,51 @@ static PyObject *__pyx_pf_16pluginscript_api_5utils_11annotations_10gdproperty_6
   }
   #if CYTHON_FAST_PYCALL
   if (PyFunction_Check(__pyx_t_6)) {
-    PyObject *__pyx_temp[5] = {__pyx_t_5, __pyx_v_fget, ((PyObject *)(&PySet_Type)), __pyx_v_fdel, __pyx_v_doc};
-    __pyx_t_7 = __Pyx_PyFunction_FastCall(__pyx_t_6, __pyx_temp+1-__pyx_t_10, 4+__pyx_t_10); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 35, __pyx_L1_error)
-    __Pyx_XDECREF(__pyx_t_5); __pyx_t_5 = 0;
+    PyObject *__pyx_temp[5] = {__pyx_t_2, __pyx_v_fget, ((PyObject *)(&PySet_Type)), __pyx_v_fdel, __pyx_v_doc};
+    __pyx_t_7 = __Pyx_PyFunction_FastCall(__pyx_t_6, __pyx_temp+1-__pyx_t_10, 4+__pyx_t_10); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 30, __pyx_L1_error)
+    __Pyx_XDECREF(__pyx_t_2); __pyx_t_2 = 0;
     __Pyx_GOTREF(__pyx_t_7);
   } else
   #endif
   #if CYTHON_FAST_PYCCALL
   if (__Pyx_PyFastCFunction_Check(__pyx_t_6)) {
-    PyObject *__pyx_temp[5] = {__pyx_t_5, __pyx_v_fget, ((PyObject *)(&PySet_Type)), __pyx_v_fdel, __pyx_v_doc};
-    __pyx_t_7 = __Pyx_PyCFunction_FastCall(__pyx_t_6, __pyx_temp+1-__pyx_t_10, 4+__pyx_t_10); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 35, __pyx_L1_error)
-    __Pyx_XDECREF(__pyx_t_5); __pyx_t_5 = 0;
+    PyObject *__pyx_temp[5] = {__pyx_t_2, __pyx_v_fget, ((PyObject *)(&PySet_Type)), __pyx_v_fdel, __pyx_v_doc};
+    __pyx_t_7 = __Pyx_PyCFunction_FastCall(__pyx_t_6, __pyx_temp+1-__pyx_t_10, 4+__pyx_t_10); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 30, __pyx_L1_error)
+    __Pyx_XDECREF(__pyx_t_2); __pyx_t_2 = 0;
     __Pyx_GOTREF(__pyx_t_7);
   } else
   #endif
   {
-    __pyx_t_2 = PyTuple_New(4+__pyx_t_10); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 35, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_2);
-    if (__pyx_t_5) {
-      __Pyx_GIVEREF(__pyx_t_5); PyTuple_SET_ITEM(__pyx_t_2, 0, __pyx_t_5); __pyx_t_5 = NULL;
+    __pyx_t_5 = PyTuple_New(4+__pyx_t_10); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 30, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_5);
+    if (__pyx_t_2) {
+      __Pyx_GIVEREF(__pyx_t_2); PyTuple_SET_ITEM(__pyx_t_5, 0, __pyx_t_2); __pyx_t_2 = NULL;
     }
     __Pyx_INCREF(__pyx_v_fget);
     __Pyx_GIVEREF(__pyx_v_fget);
-    PyTuple_SET_ITEM(__pyx_t_2, 0+__pyx_t_10, __pyx_v_fget);
+    PyTuple_SET_ITEM(__pyx_t_5, 0+__pyx_t_10, __pyx_v_fget);
     __Pyx_INCREF(((PyObject *)(&PySet_Type)));
     __Pyx_GIVEREF(((PyObject *)(&PySet_Type)));
-    PyTuple_SET_ITEM(__pyx_t_2, 1+__pyx_t_10, ((PyObject *)(&PySet_Type)));
+    PyTuple_SET_ITEM(__pyx_t_5, 1+__pyx_t_10, ((PyObject *)(&PySet_Type)));
     __Pyx_INCREF(__pyx_v_fdel);
     __Pyx_GIVEREF(__pyx_v_fdel);
-    PyTuple_SET_ITEM(__pyx_t_2, 2+__pyx_t_10, __pyx_v_fdel);
+    PyTuple_SET_ITEM(__pyx_t_5, 2+__pyx_t_10, __pyx_v_fdel);
     __Pyx_INCREF(__pyx_v_doc);
     __Pyx_GIVEREF(__pyx_v_doc);
-    PyTuple_SET_ITEM(__pyx_t_2, 3+__pyx_t_10, __pyx_v_doc);
-    __pyx_t_7 = __Pyx_PyObject_Call(__pyx_t_6, __pyx_t_2, NULL); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 35, __pyx_L1_error)
+    PyTuple_SET_ITEM(__pyx_t_5, 3+__pyx_t_10, __pyx_v_doc);
+    __pyx_t_7 = __Pyx_PyObject_Call(__pyx_t_6, __pyx_t_5, NULL); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 30, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_7);
-    __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+    __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
   }
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
 
-  /* "pluginscript_api/utils/annotations.pyx":26
+  /* "pluginscript_api/utils/annotations.pyx":23
  * def gdproperty(type, defaultval, hint= None, hint_string = ""):
  *     class gdprop(property):
  *         def __init__(self,fget=None, fset=None, fdel=None, doc=None):             # <<<<<<<<<<<<<<
  *             if(not fget == None and fset == None and fdel == None and doc == None):
- *                 print("Hint_Range:",godot_property_hint.GODOT_PROPERTY_HINT_RANGE)
+ *                 properties.append(PropertyDescription(name = fget.__name__,
  */
 
   /* function exit code */
@@ -2332,7 +2217,7 @@ static PyObject *__pyx_pf_16pluginscript_api_5utils_11annotations_10gdproperty_6
   return __pyx_r;
 }
 
-/* "pluginscript_api/utils/annotations.pyx":24
+/* "pluginscript_api/utils/annotations.pyx":21
  *     classes.append(func.__name__)
  * 
  * def gdproperty(type, defaultval, hint= None, hint_string = ""):             # <<<<<<<<<<<<<<
@@ -2340,7 +2225,7 @@ static PyObject *__pyx_pf_16pluginscript_api_5utils_11annotations_10gdproperty_6
  *         def __init__(self,fget=None, fset=None, fdel=None, doc=None):
  */
 
-static PyObject *__pyx_pf_16pluginscript_api_5utils_11annotations_4gdproperty(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_type, PyObject *__pyx_v_defaultval, PyObject *__pyx_v_hint, PyObject *__pyx_v_hint_string) {
+static PyObject *__pyx_pf_16pluginscript_api_5utils_11annotations_4gdproperty(CYTHON_UNUSED PyObject *__pyx_self, CYTHON_UNUSED PyObject *__pyx_v_type, PyObject *__pyx_v_defaultval, PyObject *__pyx_v_hint, PyObject *__pyx_v_hint_string) {
   struct __pyx_obj_16pluginscript_api_5utils_11annotations___pyx_scope_struct__gdproperty *__pyx_cur_scope;
   PyObject *__pyx_v_gdprop = NULL;
   PyObject *__pyx_r = NULL;
@@ -2357,13 +2242,10 @@ static PyObject *__pyx_pf_16pluginscript_api_5utils_11annotations_4gdproperty(CY
   if (unlikely(!__pyx_cur_scope)) {
     __pyx_cur_scope = ((struct __pyx_obj_16pluginscript_api_5utils_11annotations___pyx_scope_struct__gdproperty *)Py_None);
     __Pyx_INCREF(Py_None);
-    __PYX_ERR(0, 24, __pyx_L1_error)
+    __PYX_ERR(0, 21, __pyx_L1_error)
   } else {
     __Pyx_GOTREF(__pyx_cur_scope);
   }
-  __pyx_cur_scope->__pyx_v_type = __pyx_v_type;
-  __Pyx_INCREF(__pyx_cur_scope->__pyx_v_type);
-  __Pyx_GIVEREF(__pyx_cur_scope->__pyx_v_type);
   __pyx_cur_scope->__pyx_v_defaultval = __pyx_v_defaultval;
   __Pyx_INCREF(__pyx_cur_scope->__pyx_v_defaultval);
   __Pyx_GIVEREF(__pyx_cur_scope->__pyx_v_defaultval);
@@ -2374,53 +2256,53 @@ static PyObject *__pyx_pf_16pluginscript_api_5utils_11annotations_4gdproperty(CY
   __Pyx_INCREF(__pyx_cur_scope->__pyx_v_hint_string);
   __Pyx_GIVEREF(__pyx_cur_scope->__pyx_v_hint_string);
 
-  /* "pluginscript_api/utils/annotations.pyx":25
+  /* "pluginscript_api/utils/annotations.pyx":22
  * 
  * def gdproperty(type, defaultval, hint= None, hint_string = ""):
  *     class gdprop(property):             # <<<<<<<<<<<<<<
  *         def __init__(self,fget=None, fset=None, fdel=None, doc=None):
  *             if(not fget == None and fset == None and fdel == None and doc == None):
  */
-  __pyx_t_1 = __Pyx_CalculateMetaclass(NULL, __pyx_tuple__2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 25, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_CalculateMetaclass(NULL, __pyx_tuple__2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 22, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = __Pyx_Py3MetaclassPrepare(__pyx_t_1, __pyx_tuple__2, __pyx_n_s_gdprop, __pyx_n_s_gdproperty_locals_gdprop, (PyObject *) NULL, __pyx_n_s_pluginscript_api_utils_annotatio, (PyObject *) NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 25, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_Py3MetaclassPrepare(__pyx_t_1, __pyx_tuple__2, __pyx_n_s_gdprop, __pyx_n_s_gdproperty_locals_gdprop, (PyObject *) NULL, __pyx_n_s_pluginscript_api_utils_annotatio, (PyObject *) NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 22, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_3 = PyList_New(0); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 25, __pyx_L1_error)
+  __pyx_t_3 = PyList_New(0); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 22, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
 
-  /* "pluginscript_api/utils/annotations.pyx":26
+  /* "pluginscript_api/utils/annotations.pyx":23
  * def gdproperty(type, defaultval, hint= None, hint_string = ""):
  *     class gdprop(property):
  *         def __init__(self,fget=None, fset=None, fdel=None, doc=None):             # <<<<<<<<<<<<<<
  *             if(not fget == None and fset == None and fdel == None and doc == None):
- *                 print("Hint_Range:",godot_property_hint.GODOT_PROPERTY_HINT_RANGE)
+ *                 properties.append(PropertyDescription(name = fget.__name__,
  */
-  __pyx_t_4 = __Pyx_CyFunction_New(&__pyx_mdef_16pluginscript_api_5utils_11annotations_10gdproperty_6gdprop_1__init__, 0, __pyx_n_s_gdproperty_locals_gdprop___init, ((PyObject*)__pyx_cur_scope), __pyx_n_s_pluginscript_api_utils_annotatio, __pyx_d, ((PyObject *)__pyx_codeobj__4)); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 26, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_CyFunction_New(&__pyx_mdef_16pluginscript_api_5utils_11annotations_10gdproperty_6gdprop_1__init__, 0, __pyx_n_s_gdproperty_locals_gdprop___init, ((PyObject*)__pyx_cur_scope), __pyx_n_s_pluginscript_api_utils_annotatio, __pyx_d, ((PyObject *)__pyx_codeobj__4)); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 23, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   __Pyx_INCREF(__pyx_t_4);
   PyList_Append(__pyx_t_3, __pyx_t_4);
   __Pyx_GIVEREF(__pyx_t_4);
   __Pyx_CyFunction_SetDefaultsTuple(__pyx_t_4, __pyx_tuple__5);
-  if (__Pyx_SetNameInClass(__pyx_t_2, __pyx_n_s_init, __pyx_t_4) < 0) __PYX_ERR(0, 26, __pyx_L1_error)
+  if (__Pyx_SetNameInClass(__pyx_t_2, __pyx_n_s_init, __pyx_t_4) < 0) __PYX_ERR(0, 23, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
 
-  /* "pluginscript_api/utils/annotations.pyx":25
+  /* "pluginscript_api/utils/annotations.pyx":22
  * 
  * def gdproperty(type, defaultval, hint= None, hint_string = ""):
  *     class gdprop(property):             # <<<<<<<<<<<<<<
  *         def __init__(self,fget=None, fset=None, fdel=None, doc=None):
  *             if(not fget == None and fset == None and fdel == None and doc == None):
  */
-  __pyx_t_4 = __Pyx_Py3ClassCreate(__pyx_t_1, __pyx_n_s_gdprop, __pyx_tuple__2, __pyx_t_2, NULL, 0, 0); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 25, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_Py3ClassCreate(__pyx_t_1, __pyx_n_s_gdprop, __pyx_tuple__2, __pyx_t_2, NULL, 0, 0); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 22, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
-  if (__Pyx_CyFunction_InitClassCell(__pyx_t_3, __pyx_t_4) < 0) __PYX_ERR(0, 25, __pyx_L1_error)
+  if (__Pyx_CyFunction_InitClassCell(__pyx_t_3, __pyx_t_4) < 0) __PYX_ERR(0, 22, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __pyx_v_gdprop = __pyx_t_4;
   __pyx_t_4 = 0;
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "pluginscript_api/utils/annotations.pyx":36
+  /* "pluginscript_api/utils/annotations.pyx":31
  *                 default_value=defaultval, rset_mode=godot_method_rpc_mode.GODOT_METHOD_RPC_MODE_REMOTESYNC))
  *             super().__init__(fget, set, fdel,doc)
  *     return gdprop             # <<<<<<<<<<<<<<
@@ -2432,7 +2314,7 @@ static PyObject *__pyx_pf_16pluginscript_api_5utils_11annotations_4gdproperty(CY
   __pyx_r = __pyx_v_gdprop;
   goto __pyx_L0;
 
-  /* "pluginscript_api/utils/annotations.pyx":24
+  /* "pluginscript_api/utils/annotations.pyx":21
  *     classes.append(func.__name__)
  * 
  * def gdproperty(type, defaultval, hint= None, hint_string = ""):             # <<<<<<<<<<<<<<
@@ -2456,7 +2338,7 @@ static PyObject *__pyx_pf_16pluginscript_api_5utils_11annotations_4gdproperty(CY
   return __pyx_r;
 }
 
-/* "pluginscript_api/utils/annotations.pyx":39
+/* "pluginscript_api/utils/annotations.pyx":34
  * 
  * 
  * def gdmethod(func):             # <<<<<<<<<<<<<<
@@ -2488,20 +2370,20 @@ static PyObject *__pyx_pf_16pluginscript_api_5utils_11annotations_6gdmethod(CYTH
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("gdmethod", 0);
 
-  /* "pluginscript_api/utils/annotations.pyx":40
+  /* "pluginscript_api/utils/annotations.pyx":35
  * 
  * def gdmethod(func):
  *     methods.append(func.__name__)             # <<<<<<<<<<<<<<
  */
-  __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_n_s_methods); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 40, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_n_s_methods); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 35, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_func, __pyx_n_s_name); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 40, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_func, __pyx_n_s_name); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 35, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_3 = __Pyx_PyObject_Append(__pyx_t_1, __pyx_t_2); if (unlikely(__pyx_t_3 == ((int)-1))) __PYX_ERR(0, 40, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_Append(__pyx_t_1, __pyx_t_2); if (unlikely(__pyx_t_3 == ((int)-1))) __PYX_ERR(0, 35, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "pluginscript_api/utils/annotations.pyx":39
+  /* "pluginscript_api/utils/annotations.pyx":34
  * 
  * 
  * def gdmethod(func):             # <<<<<<<<<<<<<<
@@ -2690,7 +2572,6 @@ static void __pyx_tp_dealloc_16pluginscript_api_5utils_11annotations___pyx_scope
   Py_CLEAR(p->__pyx_v_defaultval);
   Py_CLEAR(p->__pyx_v_hint);
   Py_CLEAR(p->__pyx_v_hint_string);
-  Py_CLEAR(p->__pyx_v_type);
   if (CYTHON_COMPILING_IN_CPYTHON && ((__pyx_freecount_16pluginscript_api_5utils_11annotations___pyx_scope_struct__gdproperty < 8) & (Py_TYPE(o)->tp_basicsize == sizeof(struct __pyx_obj_16pluginscript_api_5utils_11annotations___pyx_scope_struct__gdproperty)))) {
     __pyx_freelist_16pluginscript_api_5utils_11annotations___pyx_scope_struct__gdproperty[__pyx_freecount_16pluginscript_api_5utils_11annotations___pyx_scope_struct__gdproperty++] = ((struct __pyx_obj_16pluginscript_api_5utils_11annotations___pyx_scope_struct__gdproperty *)o);
   } else {
@@ -2710,9 +2591,6 @@ static int __pyx_tp_traverse_16pluginscript_api_5utils_11annotations___pyx_scope
   if (p->__pyx_v_hint_string) {
     e = (*v)(p->__pyx_v_hint_string, a); if (e) return e;
   }
-  if (p->__pyx_v_type) {
-    e = (*v)(p->__pyx_v_type, a); if (e) return e;
-  }
   return 0;
 }
 
@@ -2727,9 +2605,6 @@ static int __pyx_tp_clear_16pluginscript_api_5utils_11annotations___pyx_scope_st
   Py_XDECREF(tmp);
   tmp = ((PyObject*)p->__pyx_v_hint_string);
   p->__pyx_v_hint_string = Py_None; Py_INCREF(Py_None);
-  Py_XDECREF(tmp);
-  tmp = ((PyObject*)p->__pyx_v_type);
-  p->__pyx_v_type = Py_None; Py_INCREF(Py_None);
   Py_XDECREF(tmp);
   return 0;
 }
@@ -2850,7 +2725,6 @@ static struct PyModuleDef __pyx_moduledef = {
 
 static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_kp_u_, __pyx_k_, sizeof(__pyx_k_), 0, 1, 0, 0},
-  {&__pyx_kp_u_Hint_Range, __pyx_k_Hint_Range, sizeof(__pyx_k_Hint_Range), 0, 1, 0, 0},
   {&__pyx_n_s_MethodDescription, __pyx_k_MethodDescription, sizeof(__pyx_k_MethodDescription), 0, 0, 1, 1},
   {&__pyx_n_s_PropertyDescription, __pyx_k_PropertyDescription, sizeof(__pyx_k_PropertyDescription), 0, 0, 1, 1},
   {&__pyx_n_s_append, __pyx_k_append, sizeof(__pyx_k_append), 0, 0, 1, 1},
@@ -2858,7 +2732,6 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_n_s_cline_in_traceback, __pyx_k_cline_in_traceback, sizeof(__pyx_k_cline_in_traceback), 0, 0, 1, 1},
   {&__pyx_n_s_default_value, __pyx_k_default_value, sizeof(__pyx_k_default_value), 0, 0, 1, 1},
   {&__pyx_n_s_defaultval, __pyx_k_defaultval, sizeof(__pyx_k_defaultval), 0, 0, 1, 1},
-  {&__pyx_kp_u_defaultval_2, __pyx_k_defaultval_2, sizeof(__pyx_k_defaultval_2), 0, 1, 0, 0},
   {&__pyx_n_s_doc, __pyx_k_doc, sizeof(__pyx_k_doc), 0, 0, 1, 1},
   {&__pyx_n_s_doc_2, __pyx_k_doc_2, sizeof(__pyx_k_doc_2), 0, 0, 1, 1},
   {&__pyx_n_s_fdel, __pyx_k_fdel, sizeof(__pyx_k_fdel), 0, 0, 1, 1},
@@ -2866,12 +2739,10 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_n_s_fset, __pyx_k_fset, sizeof(__pyx_k_fset), 0, 0, 1, 1},
   {&__pyx_n_s_func, __pyx_k_func, sizeof(__pyx_k_func), 0, 0, 1, 1},
   {&__pyx_n_s_functools, __pyx_k_functools, sizeof(__pyx_k_functools), 0, 0, 1, 1},
-  {&__pyx_kp_u_gdclass, __pyx_k_gdclass, sizeof(__pyx_k_gdclass), 0, 1, 0, 0},
-  {&__pyx_n_s_gdclass_2, __pyx_k_gdclass_2, sizeof(__pyx_k_gdclass_2), 0, 0, 1, 1},
+  {&__pyx_n_s_gdclass, __pyx_k_gdclass, sizeof(__pyx_k_gdclass), 0, 0, 1, 1},
   {&__pyx_n_s_gdmethod, __pyx_k_gdmethod, sizeof(__pyx_k_gdmethod), 0, 0, 1, 1},
   {&__pyx_n_s_gdprop, __pyx_k_gdprop, sizeof(__pyx_k_gdprop), 0, 0, 1, 1},
   {&__pyx_n_s_gdproperty, __pyx_k_gdproperty, sizeof(__pyx_k_gdproperty), 0, 0, 1, 1},
-  {&__pyx_kp_u_gdproperty___init, __pyx_k_gdproperty___init, sizeof(__pyx_k_gdproperty___init), 0, 1, 0, 0},
   {&__pyx_n_s_gdproperty_locals_gdprop, __pyx_k_gdproperty_locals_gdprop, sizeof(__pyx_k_gdproperty_locals_gdprop), 0, 0, 1, 1},
   {&__pyx_n_s_gdproperty_locals_gdprop___init, __pyx_k_gdproperty_locals_gdprop___init, sizeof(__pyx_k_gdproperty_locals_gdprop___init), 0, 0, 1, 1},
   {&__pyx_n_s_hint, __pyx_k_hint, sizeof(__pyx_k_hint), 0, 0, 1, 1},
@@ -2901,16 +2772,15 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_n_s_super, __pyx_k_super, sizeof(__pyx_k_super), 0, 0, 1, 1},
   {&__pyx_n_s_test, __pyx_k_test, sizeof(__pyx_k_test), 0, 0, 1, 1},
   {&__pyx_n_s_type, __pyx_k_type, sizeof(__pyx_k_type), 0, 0, 1, 1},
-  {&__pyx_kp_u_type_2, __pyx_k_type_2, sizeof(__pyx_k_type_2), 0, 1, 0, 0},
-  {&__pyx_n_s_type_3, __pyx_k_type_3, sizeof(__pyx_k_type_3), 0, 0, 1, 1},
+  {&__pyx_n_s_type_2, __pyx_k_type_2, sizeof(__pyx_k_type_2), 0, 0, 1, 1},
   {&__pyx_n_s_usage, __pyx_k_usage, sizeof(__pyx_k_usage), 0, 0, 1, 1},
   {&__pyx_n_s_wraps, __pyx_k_wraps, sizeof(__pyx_k_wraps), 0, 0, 1, 1},
   {0, 0, 0, 0, 0, 0, 0}
 };
 static CYTHON_SMALL_CODE int __Pyx_InitCachedBuiltins(void) {
-  __pyx_builtin_print = __Pyx_GetBuiltinName(__pyx_n_s_print); if (!__pyx_builtin_print) __PYX_ERR(0, 19, __pyx_L1_error)
-  __pyx_builtin_property = __Pyx_GetBuiltinName(__pyx_n_s_property); if (!__pyx_builtin_property) __PYX_ERR(0, 25, __pyx_L1_error)
-  __pyx_builtin_super = __Pyx_GetBuiltinName(__pyx_n_s_super); if (!__pyx_builtin_super) __PYX_ERR(0, 35, __pyx_L1_error)
+  __pyx_builtin_property = __Pyx_GetBuiltinName(__pyx_n_s_property); if (!__pyx_builtin_property) __PYX_ERR(0, 22, __pyx_L1_error)
+  __pyx_builtin_super = __Pyx_GetBuiltinName(__pyx_n_s_super); if (!__pyx_builtin_super) __PYX_ERR(0, 30, __pyx_L1_error)
+  __pyx_builtin_print = __Pyx_GetBuiltinName(__pyx_n_s_print); if (!__pyx_builtin_print) __PYX_ERR(1, 15, __pyx_L1_error)
   return 0;
   __pyx_L1_error:;
   return -1;
@@ -2920,29 +2790,29 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__Pyx_InitCachedConstants", 0);
 
-  /* "pluginscript_api/utils/annotations.pyx":25
+  /* "pluginscript_api/utils/annotations.pyx":22
  * 
  * def gdproperty(type, defaultval, hint= None, hint_string = ""):
  *     class gdprop(property):             # <<<<<<<<<<<<<<
  *         def __init__(self,fget=None, fset=None, fdel=None, doc=None):
  *             if(not fget == None and fset == None and fdel == None and doc == None):
  */
-  __pyx_tuple__2 = PyTuple_Pack(1, __pyx_builtin_property); if (unlikely(!__pyx_tuple__2)) __PYX_ERR(0, 25, __pyx_L1_error)
+  __pyx_tuple__2 = PyTuple_Pack(1, __pyx_builtin_property); if (unlikely(!__pyx_tuple__2)) __PYX_ERR(0, 22, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__2);
   __Pyx_GIVEREF(__pyx_tuple__2);
 
-  /* "pluginscript_api/utils/annotations.pyx":26
+  /* "pluginscript_api/utils/annotations.pyx":23
  * def gdproperty(type, defaultval, hint= None, hint_string = ""):
  *     class gdprop(property):
  *         def __init__(self,fget=None, fset=None, fdel=None, doc=None):             # <<<<<<<<<<<<<<
  *             if(not fget == None and fset == None and fdel == None and doc == None):
- *                 print("Hint_Range:",godot_property_hint.GODOT_PROPERTY_HINT_RANGE)
+ *                 properties.append(PropertyDescription(name = fget.__name__,
  */
-  __pyx_tuple__3 = PyTuple_Pack(5, __pyx_n_s_self, __pyx_n_s_fget, __pyx_n_s_fset, __pyx_n_s_fdel, __pyx_n_s_doc); if (unlikely(!__pyx_tuple__3)) __PYX_ERR(0, 26, __pyx_L1_error)
+  __pyx_tuple__3 = PyTuple_Pack(5, __pyx_n_s_self, __pyx_n_s_fget, __pyx_n_s_fset, __pyx_n_s_fdel, __pyx_n_s_doc); if (unlikely(!__pyx_tuple__3)) __PYX_ERR(0, 23, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__3);
   __Pyx_GIVEREF(__pyx_tuple__3);
-  __pyx_codeobj__4 = (PyObject*)__Pyx_PyCode_New(5, 0, 5, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__3, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_pluginscript_api_utils_annotatio_2, __pyx_n_s_init, 26, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__4)) __PYX_ERR(0, 26, __pyx_L1_error)
-  __pyx_tuple__5 = PyTuple_Pack(4, ((PyObject *)Py_None), ((PyObject *)Py_None), ((PyObject *)Py_None), ((PyObject *)Py_None)); if (unlikely(!__pyx_tuple__5)) __PYX_ERR(0, 26, __pyx_L1_error)
+  __pyx_codeobj__4 = (PyObject*)__Pyx_PyCode_New(5, 0, 5, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__3, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_pluginscript_api_utils_annotatio_2, __pyx_n_s_init, 23, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__4)) __PYX_ERR(0, 23, __pyx_L1_error)
+  __pyx_tuple__5 = PyTuple_Pack(4, ((PyObject *)Py_None), ((PyObject *)Py_None), ((PyObject *)Py_None), ((PyObject *)Py_None)); if (unlikely(!__pyx_tuple__5)) __PYX_ERR(0, 23, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__5);
   __Pyx_GIVEREF(__pyx_tuple__5);
 
@@ -2959,36 +2829,36 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
  *     properties = []
  * 
  * def gdclass(func):             # <<<<<<<<<<<<<<
- *     print("gdclass:", func)
- *     print(dir(func))
+ *     classes.append(func.__name__)
+ * 
  */
   __pyx_tuple__7 = PyTuple_Pack(1, __pyx_n_s_func); if (unlikely(!__pyx_tuple__7)) __PYX_ERR(0, 18, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__7);
   __Pyx_GIVEREF(__pyx_tuple__7);
-  __pyx_codeobj__8 = (PyObject*)__Pyx_PyCode_New(1, 0, 1, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__7, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_pluginscript_api_utils_annotatio_2, __pyx_n_s_gdclass_2, 18, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__8)) __PYX_ERR(0, 18, __pyx_L1_error)
+  __pyx_codeobj__8 = (PyObject*)__Pyx_PyCode_New(1, 0, 1, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__7, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_pluginscript_api_utils_annotatio_2, __pyx_n_s_gdclass, 18, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__8)) __PYX_ERR(0, 18, __pyx_L1_error)
 
-  /* "pluginscript_api/utils/annotations.pyx":24
+  /* "pluginscript_api/utils/annotations.pyx":21
  *     classes.append(func.__name__)
  * 
  * def gdproperty(type, defaultval, hint= None, hint_string = ""):             # <<<<<<<<<<<<<<
  *     class gdprop(property):
  *         def __init__(self,fget=None, fset=None, fdel=None, doc=None):
  */
-  __pyx_tuple__9 = PyTuple_Pack(5, __pyx_n_s_type, __pyx_n_s_defaultval, __pyx_n_s_hint, __pyx_n_s_hint_string, __pyx_n_s_gdprop); if (unlikely(!__pyx_tuple__9)) __PYX_ERR(0, 24, __pyx_L1_error)
+  __pyx_tuple__9 = PyTuple_Pack(5, __pyx_n_s_type, __pyx_n_s_defaultval, __pyx_n_s_hint, __pyx_n_s_hint_string, __pyx_n_s_gdprop); if (unlikely(!__pyx_tuple__9)) __PYX_ERR(0, 21, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__9);
   __Pyx_GIVEREF(__pyx_tuple__9);
-  __pyx_codeobj__10 = (PyObject*)__Pyx_PyCode_New(4, 0, 5, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__9, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_pluginscript_api_utils_annotatio_2, __pyx_n_s_gdproperty, 24, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__10)) __PYX_ERR(0, 24, __pyx_L1_error)
+  __pyx_codeobj__10 = (PyObject*)__Pyx_PyCode_New(4, 0, 5, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__9, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_pluginscript_api_utils_annotatio_2, __pyx_n_s_gdproperty, 21, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__10)) __PYX_ERR(0, 21, __pyx_L1_error)
 
-  /* "pluginscript_api/utils/annotations.pyx":39
+  /* "pluginscript_api/utils/annotations.pyx":34
  * 
  * 
  * def gdmethod(func):             # <<<<<<<<<<<<<<
  *     methods.append(func.__name__)
  */
-  __pyx_tuple__11 = PyTuple_Pack(1, __pyx_n_s_func); if (unlikely(!__pyx_tuple__11)) __PYX_ERR(0, 39, __pyx_L1_error)
+  __pyx_tuple__11 = PyTuple_Pack(1, __pyx_n_s_func); if (unlikely(!__pyx_tuple__11)) __PYX_ERR(0, 34, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__11);
   __Pyx_GIVEREF(__pyx_tuple__11);
-  __pyx_codeobj__12 = (PyObject*)__Pyx_PyCode_New(1, 0, 1, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__11, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_pluginscript_api_utils_annotatio_2, __pyx_n_s_gdmethod, 39, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__12)) __PYX_ERR(0, 39, __pyx_L1_error)
+  __pyx_codeobj__12 = (PyObject*)__Pyx_PyCode_New(1, 0, 1, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__11, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_pluginscript_api_utils_annotatio_2, __pyx_n_s_gdmethod, 34, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__12)) __PYX_ERR(0, 34, __pyx_L1_error)
   __Pyx_RefNannyFinishContext();
   return 0;
   __pyx_L1_error:;
@@ -3042,7 +2912,7 @@ static int __Pyx_modinit_type_init_code(void) {
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__Pyx_modinit_type_init_code", 0);
   /*--- Type init code ---*/
-  if (PyType_Ready(&__pyx_type_16pluginscript_api_5utils_11annotations___pyx_scope_struct__gdproperty) < 0) __PYX_ERR(0, 24, __pyx_L1_error)
+  if (PyType_Ready(&__pyx_type_16pluginscript_api_5utils_11annotations___pyx_scope_struct__gdproperty) < 0) __PYX_ERR(0, 21, __pyx_L1_error)
   #if PY_VERSION_HEX < 0x030800B1
   __pyx_type_16pluginscript_api_5utils_11annotations___pyx_scope_struct__gdproperty.tp_print = 0;
   #endif
@@ -3422,35 +3292,35 @@ if (!__Pyx_RefNanny) {
  *     properties = []
  * 
  * def gdclass(func):             # <<<<<<<<<<<<<<
- *     print("gdclass:", func)
- *     print(dir(func))
+ *     classes.append(func.__name__)
+ * 
  */
   __pyx_t_2 = PyCFunction_NewEx(&__pyx_mdef_16pluginscript_api_5utils_11annotations_3gdclass, NULL, __pyx_n_s_pluginscript_api_utils_annotatio); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 18, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_gdclass_2, __pyx_t_2) < 0) __PYX_ERR(0, 18, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_gdclass, __pyx_t_2) < 0) __PYX_ERR(0, 18, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "pluginscript_api/utils/annotations.pyx":24
+  /* "pluginscript_api/utils/annotations.pyx":21
  *     classes.append(func.__name__)
  * 
  * def gdproperty(type, defaultval, hint= None, hint_string = ""):             # <<<<<<<<<<<<<<
  *     class gdprop(property):
  *         def __init__(self,fget=None, fset=None, fdel=None, doc=None):
  */
-  __pyx_t_2 = PyCFunction_NewEx(&__pyx_mdef_16pluginscript_api_5utils_11annotations_5gdproperty, NULL, __pyx_n_s_pluginscript_api_utils_annotatio); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 24, __pyx_L1_error)
+  __pyx_t_2 = PyCFunction_NewEx(&__pyx_mdef_16pluginscript_api_5utils_11annotations_5gdproperty, NULL, __pyx_n_s_pluginscript_api_utils_annotatio); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 21, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_gdproperty, __pyx_t_2) < 0) __PYX_ERR(0, 24, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_gdproperty, __pyx_t_2) < 0) __PYX_ERR(0, 21, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "pluginscript_api/utils/annotations.pyx":39
+  /* "pluginscript_api/utils/annotations.pyx":34
  * 
  * 
  * def gdmethod(func):             # <<<<<<<<<<<<<<
  *     methods.append(func.__name__)
  */
-  __pyx_t_2 = PyCFunction_NewEx(&__pyx_mdef_16pluginscript_api_5utils_11annotations_7gdmethod, NULL, __pyx_n_s_pluginscript_api_utils_annotatio); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 39, __pyx_L1_error)
+  __pyx_t_2 = PyCFunction_NewEx(&__pyx_mdef_16pluginscript_api_5utils_11annotations_7gdmethod, NULL, __pyx_n_s_pluginscript_api_utils_annotatio); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 34, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_gdmethod, __pyx_t_2) < 0) __PYX_ERR(0, 39, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_gdmethod, __pyx_t_2) < 0) __PYX_ERR(0, 34, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
   /* "pluginscript_api/utils/annotations.pyx":1
@@ -3541,26 +3411,6 @@ static PyObject *__Pyx_GetBuiltinName(PyObject *name) {
     }
     return result;
 }
-
-/* PyObjectCall */
-#if CYTHON_COMPILING_IN_CPYTHON
-static CYTHON_INLINE PyObject* __Pyx_PyObject_Call(PyObject *func, PyObject *arg, PyObject *kw) {
-    PyObject *result;
-    ternaryfunc call = func->ob_type->tp_call;
-    if (unlikely(!call))
-        return PyObject_Call(func, arg, kw);
-    if (unlikely(Py_EnterRecursiveCall((char*)" while calling a Python object")))
-        return NULL;
-    result = (*call)(func, arg, kw);
-    Py_LeaveRecursiveCall();
-    if (unlikely(!result) && unlikely(!PyErr_Occurred())) {
-        PyErr_SetString(
-            PyExc_SystemError,
-            "NULL result without error in PyObject_Call");
-    }
-    return result;
-}
-#endif
 
 /* PyCFunctionFastCall */
 #if CYTHON_FAST_PYCCALL
@@ -3704,6 +3554,55 @@ done:
 #endif
 #endif
 
+/* PyObjectCall */
+#if CYTHON_COMPILING_IN_CPYTHON
+static CYTHON_INLINE PyObject* __Pyx_PyObject_Call(PyObject *func, PyObject *arg, PyObject *kw) {
+    PyObject *result;
+    ternaryfunc call = func->ob_type->tp_call;
+    if (unlikely(!call))
+        return PyObject_Call(func, arg, kw);
+    if (unlikely(Py_EnterRecursiveCall((char*)" while calling a Python object")))
+        return NULL;
+    result = (*call)(func, arg, kw);
+    Py_LeaveRecursiveCall();
+    if (unlikely(!result) && unlikely(!PyErr_Occurred())) {
+        PyErr_SetString(
+            PyExc_SystemError,
+            "NULL result without error in PyObject_Call");
+    }
+    return result;
+}
+#endif
+
+/* PyObjectCall2Args */
+static CYTHON_UNUSED PyObject* __Pyx_PyObject_Call2Args(PyObject* function, PyObject* arg1, PyObject* arg2) {
+    PyObject *args, *result = NULL;
+    #if CYTHON_FAST_PYCALL
+    if (PyFunction_Check(function)) {
+        PyObject *args[2] = {arg1, arg2};
+        return __Pyx_PyFunction_FastCall(function, args, 2);
+    }
+    #endif
+    #if CYTHON_FAST_PYCCALL
+    if (__Pyx_PyFastCFunction_Check(function)) {
+        PyObject *args[2] = {arg1, arg2};
+        return __Pyx_PyCFunction_FastCall(function, args, 2);
+    }
+    #endif
+    args = PyTuple_New(2);
+    if (unlikely(!args)) goto done;
+    Py_INCREF(arg1);
+    PyTuple_SET_ITEM(args, 0, arg1);
+    Py_INCREF(arg2);
+    PyTuple_SET_ITEM(args, 1, arg2);
+    Py_INCREF(function);
+    result = __Pyx_PyObject_Call(function, args, NULL);
+    Py_DECREF(args);
+    Py_DECREF(function);
+done:
+    return result;
+}
+
 /* PyObjectCallMethO */
 #if CYTHON_COMPILING_IN_CPYTHON
 static CYTHON_INLINE PyObject* __Pyx_PyObject_CallMethO(PyObject *func, PyObject *arg) {
@@ -3763,35 +3662,6 @@ static CYTHON_INLINE PyObject* __Pyx_PyObject_CallOneArg(PyObject *func, PyObjec
     return result;
 }
 #endif
-
-/* PyObjectCall2Args */
-static CYTHON_UNUSED PyObject* __Pyx_PyObject_Call2Args(PyObject* function, PyObject* arg1, PyObject* arg2) {
-    PyObject *args, *result = NULL;
-    #if CYTHON_FAST_PYCALL
-    if (PyFunction_Check(function)) {
-        PyObject *args[2] = {arg1, arg2};
-        return __Pyx_PyFunction_FastCall(function, args, 2);
-    }
-    #endif
-    #if CYTHON_FAST_PYCCALL
-    if (__Pyx_PyFastCFunction_Check(function)) {
-        PyObject *args[2] = {arg1, arg2};
-        return __Pyx_PyCFunction_FastCall(function, args, 2);
-    }
-    #endif
-    args = PyTuple_New(2);
-    if (unlikely(!args)) goto done;
-    Py_INCREF(arg1);
-    PyTuple_SET_ITEM(args, 0, arg1);
-    Py_INCREF(arg2);
-    PyTuple_SET_ITEM(args, 1, arg2);
-    Py_INCREF(function);
-    result = __Pyx_PyObject_Call(function, args, NULL);
-    Py_DECREF(args);
-    Py_DECREF(function);
-done:
-    return result;
-}
 
 /* PyObjectGetMethod */
 static int __Pyx_PyObject_GetMethod(PyObject *obj, PyObject *name, PyObject **method) {
@@ -5398,37 +5268,6 @@ bad:
 }
 
 /* CIntToPy */
-static CYTHON_INLINE PyObject* __Pyx_PyInt_From_godot_property_hint(godot_property_hint value) {
-    const godot_property_hint neg_one = (godot_property_hint) ((godot_property_hint) 0 - (godot_property_hint) 1), const_zero = (godot_property_hint) 0;
-    const int is_unsigned = neg_one > const_zero;
-    if (is_unsigned) {
-        if (sizeof(godot_property_hint) < sizeof(long)) {
-            return PyInt_FromLong((long) value);
-        } else if (sizeof(godot_property_hint) <= sizeof(unsigned long)) {
-            return PyLong_FromUnsignedLong((unsigned long) value);
-#ifdef HAVE_LONG_LONG
-        } else if (sizeof(godot_property_hint) <= sizeof(unsigned PY_LONG_LONG)) {
-            return PyLong_FromUnsignedLongLong((unsigned PY_LONG_LONG) value);
-#endif
-        }
-    } else {
-        if (sizeof(godot_property_hint) <= sizeof(long)) {
-            return PyInt_FromLong((long) value);
-#ifdef HAVE_LONG_LONG
-        } else if (sizeof(godot_property_hint) <= sizeof(PY_LONG_LONG)) {
-            return PyLong_FromLongLong((PY_LONG_LONG) value);
-#endif
-        }
-    }
-    {
-        int one = 1; int little = (int)*(unsigned char *)&one;
-        unsigned char *bytes = (unsigned char *)&value;
-        return _PyLong_FromByteArray(bytes, sizeof(godot_property_hint),
-                                     little, !is_unsigned);
-    }
-}
-
-/* CIntToPy */
 static CYTHON_INLINE PyObject* __Pyx_PyInt_From_godot_variant_type(godot_variant_type value) {
     const godot_variant_type neg_one = (godot_variant_type) ((godot_variant_type) 0 - (godot_variant_type) 1), const_zero = (godot_variant_type) 0;
     const int is_unsigned = neg_one > const_zero;
@@ -5455,6 +5294,37 @@ static CYTHON_INLINE PyObject* __Pyx_PyInt_From_godot_variant_type(godot_variant
         int one = 1; int little = (int)*(unsigned char *)&one;
         unsigned char *bytes = (unsigned char *)&value;
         return _PyLong_FromByteArray(bytes, sizeof(godot_variant_type),
+                                     little, !is_unsigned);
+    }
+}
+
+/* CIntToPy */
+static CYTHON_INLINE PyObject* __Pyx_PyInt_From_godot_property_hint(godot_property_hint value) {
+    const godot_property_hint neg_one = (godot_property_hint) ((godot_property_hint) 0 - (godot_property_hint) 1), const_zero = (godot_property_hint) 0;
+    const int is_unsigned = neg_one > const_zero;
+    if (is_unsigned) {
+        if (sizeof(godot_property_hint) < sizeof(long)) {
+            return PyInt_FromLong((long) value);
+        } else if (sizeof(godot_property_hint) <= sizeof(unsigned long)) {
+            return PyLong_FromUnsignedLong((unsigned long) value);
+#ifdef HAVE_LONG_LONG
+        } else if (sizeof(godot_property_hint) <= sizeof(unsigned PY_LONG_LONG)) {
+            return PyLong_FromUnsignedLongLong((unsigned PY_LONG_LONG) value);
+#endif
+        }
+    } else {
+        if (sizeof(godot_property_hint) <= sizeof(long)) {
+            return PyInt_FromLong((long) value);
+#ifdef HAVE_LONG_LONG
+        } else if (sizeof(godot_property_hint) <= sizeof(PY_LONG_LONG)) {
+            return PyLong_FromLongLong((PY_LONG_LONG) value);
+#endif
+        }
+    }
+    {
+        int one = 1; int little = (int)*(unsigned char *)&one;
+        unsigned char *bytes = (unsigned char *)&value;
+        return _PyLong_FromByteArray(bytes, sizeof(godot_property_hint),
                                      little, !is_unsigned);
     }
 }

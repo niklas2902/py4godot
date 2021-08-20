@@ -1384,8 +1384,8 @@ static int __pyx_pf_4core_9node_path_8NodePath_8NodePath___init__(struct __pyx_o
  *         api_core.godot_node_path_new(&self._native, &path._native)
  * 
  *     def new_copy(self, NodePath src):             # <<<<<<<<<<<<<<
- *         pass
  *         api_core.godot_node_path_new_copy(&self._native, &src._native)
+ * 
  */
 
 /* Python wrapper */
@@ -1414,9 +1414,9 @@ static PyObject *__pyx_pf_4core_9node_path_8NodePath_8NodePath_2new_copy(struct 
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("new_copy", 0);
 
-  /* "core/node_path/NodePath.pyx":11
+  /* "core/node_path/NodePath.pyx":10
+ * 
  *     def new_copy(self, NodePath src):
- *         pass
  *         api_core.godot_node_path_new_copy(&self._native, &src._native)             # <<<<<<<<<<<<<<
  * 
  *     def destroy(self):
@@ -1427,8 +1427,8 @@ static PyObject *__pyx_pf_4core_9node_path_8NodePath_8NodePath_2new_copy(struct 
  *         api_core.godot_node_path_new(&self._native, &path._native)
  * 
  *     def new_copy(self, NodePath src):             # <<<<<<<<<<<<<<
- *         pass
  *         api_core.godot_node_path_new_copy(&self._native, &src._native)
+ * 
  */
 
   /* function exit code */
@@ -1438,7 +1438,7 @@ static PyObject *__pyx_pf_4core_9node_path_8NodePath_8NodePath_2new_copy(struct 
   return __pyx_r;
 }
 
-/* "core/node_path/NodePath.pyx":13
+/* "core/node_path/NodePath.pyx":12
  *         api_core.godot_node_path_new_copy(&self._native, &src._native)
  * 
  *     def destroy(self):             # <<<<<<<<<<<<<<
@@ -1464,7 +1464,7 @@ static PyObject *__pyx_pf_4core_9node_path_8NodePath_8NodePath_4destroy(struct _
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("destroy", 0);
 
-  /* "core/node_path/NodePath.pyx":14
+  /* "core/node_path/NodePath.pyx":13
  * 
  *     def destroy(self):
  *         api_core.godot_node_path_destroy(&self._native)             # <<<<<<<<<<<<<<
@@ -1473,7 +1473,7 @@ static PyObject *__pyx_pf_4core_9node_path_8NodePath_8NodePath_4destroy(struct _
  */
   api_core->godot_node_path_destroy((&__pyx_v_self->_native));
 
-  /* "core/node_path/NodePath.pyx":13
+  /* "core/node_path/NodePath.pyx":12
  *         api_core.godot_node_path_new_copy(&self._native, &src._native)
  * 
  *     def destroy(self):             # <<<<<<<<<<<<<<
@@ -1488,7 +1488,7 @@ static PyObject *__pyx_pf_4core_9node_path_8NodePath_8NodePath_4destroy(struct _
   return __pyx_r;
 }
 
-/* "core/node_path/NodePath.pyx":16
+/* "core/node_path/NodePath.pyx":15
  *         api_core.godot_node_path_destroy(&self._native)
  * 
  *     def __str__(self):             # <<<<<<<<<<<<<<
@@ -1518,7 +1518,7 @@ static PyObject *__pyx_pf_4core_9node_path_8NodePath_8NodePath_6__str__(struct _
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__str__", 0);
 
-  /* "core/node_path/NodePath.pyx":17
+  /* "core/node_path/NodePath.pyx":16
  * 
  *     def __str__(self):
  *         return api_core.godot_node_path_as_string(&self._native)             # <<<<<<<<<<<<<<
@@ -1526,13 +1526,13 @@ static PyObject *__pyx_pf_4core_9node_path_8NodePath_8NodePath_6__str__(struct _
  *     def is_absolute(self):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __pyx_convert__to_py_godot_string(api_core->godot_node_path_as_string((&__pyx_v_self->_native))); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 17, __pyx_L1_error)
+  __pyx_t_1 = __pyx_convert__to_py_godot_string(api_core->godot_node_path_as_string((&__pyx_v_self->_native))); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 16, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "core/node_path/NodePath.pyx":16
+  /* "core/node_path/NodePath.pyx":15
  *         api_core.godot_node_path_destroy(&self._native)
  * 
  *     def __str__(self):             # <<<<<<<<<<<<<<
@@ -1551,7 +1551,7 @@ static PyObject *__pyx_pf_4core_9node_path_8NodePath_8NodePath_6__str__(struct _
   return __pyx_r;
 }
 
-/* "core/node_path/NodePath.pyx":19
+/* "core/node_path/NodePath.pyx":18
  *         return api_core.godot_node_path_as_string(&self._native)
  * 
  *     def is_absolute(self):             # <<<<<<<<<<<<<<
@@ -1581,7 +1581,7 @@ static PyObject *__pyx_pf_4core_9node_path_8NodePath_8NodePath_8is_absolute(stru
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("is_absolute", 0);
 
-  /* "core/node_path/NodePath.pyx":20
+  /* "core/node_path/NodePath.pyx":19
  * 
  *     def is_absolute(self):
  *         return api_core.godot_node_path_is_absolute(&self._native)             # <<<<<<<<<<<<<<
@@ -1589,13 +1589,13 @@ static PyObject *__pyx_pf_4core_9node_path_8NodePath_8NodePath_8is_absolute(stru
  *     def get_name_count(self):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_PyBool_FromLong(api_core->godot_node_path_is_absolute((&__pyx_v_self->_native))); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 20, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyBool_FromLong(api_core->godot_node_path_is_absolute((&__pyx_v_self->_native))); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 19, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "core/node_path/NodePath.pyx":19
+  /* "core/node_path/NodePath.pyx":18
  *         return api_core.godot_node_path_as_string(&self._native)
  * 
  *     def is_absolute(self):             # <<<<<<<<<<<<<<
@@ -1614,7 +1614,7 @@ static PyObject *__pyx_pf_4core_9node_path_8NodePath_8NodePath_8is_absolute(stru
   return __pyx_r;
 }
 
-/* "core/node_path/NodePath.pyx":22
+/* "core/node_path/NodePath.pyx":21
  *         return api_core.godot_node_path_is_absolute(&self._native)
  * 
  *     def get_name_count(self):             # <<<<<<<<<<<<<<
@@ -1644,7 +1644,7 @@ static PyObject *__pyx_pf_4core_9node_path_8NodePath_8NodePath_10get_name_count(
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("get_name_count", 0);
 
-  /* "core/node_path/NodePath.pyx":23
+  /* "core/node_path/NodePath.pyx":22
  * 
  *     def get_name_count(self):
  *         return api_core.godot_node_path_get_name_count(&self._native)             # <<<<<<<<<<<<<<
@@ -1652,13 +1652,13 @@ static PyObject *__pyx_pf_4core_9node_path_8NodePath_8NodePath_10get_name_count(
  *     def get_name(self, godot_int idx):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_PyInt_From_godot_int(api_core->godot_node_path_get_name_count((&__pyx_v_self->_native))); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 23, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyInt_From_godot_int(api_core->godot_node_path_get_name_count((&__pyx_v_self->_native))); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 22, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "core/node_path/NodePath.pyx":22
+  /* "core/node_path/NodePath.pyx":21
  *         return api_core.godot_node_path_is_absolute(&self._native)
  * 
  *     def get_name_count(self):             # <<<<<<<<<<<<<<
@@ -1677,7 +1677,7 @@ static PyObject *__pyx_pf_4core_9node_path_8NodePath_8NodePath_10get_name_count(
   return __pyx_r;
 }
 
-/* "core/node_path/NodePath.pyx":25
+/* "core/node_path/NodePath.pyx":24
  *         return api_core.godot_node_path_get_name_count(&self._native)
  * 
  *     def get_name(self, godot_int idx):             # <<<<<<<<<<<<<<
@@ -1696,7 +1696,7 @@ static PyObject *__pyx_pw_4core_9node_path_8NodePath_8NodePath_13get_name(PyObje
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("get_name (wrapper)", 0);
   assert(__pyx_arg_idx); {
-    __pyx_v_idx = __Pyx_PyInt_As_godot_int(__pyx_arg_idx); if (unlikely((__pyx_v_idx == ((godot_int)-1)) && PyErr_Occurred())) __PYX_ERR(1, 25, __pyx_L3_error)
+    __pyx_v_idx = __Pyx_PyInt_As_godot_int(__pyx_arg_idx); if (unlikely((__pyx_v_idx == ((godot_int)-1)) && PyErr_Occurred())) __PYX_ERR(1, 24, __pyx_L3_error)
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -1720,7 +1720,7 @@ static PyObject *__pyx_pf_4core_9node_path_8NodePath_8NodePath_12get_name(struct
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("get_name", 0);
 
-  /* "core/node_path/NodePath.pyx":26
+  /* "core/node_path/NodePath.pyx":25
  * 
  *     def get_name(self, godot_int idx):
  *         return api_core.godot_node_path_get_name(&self._native, idx)             # <<<<<<<<<<<<<<
@@ -1728,13 +1728,13 @@ static PyObject *__pyx_pf_4core_9node_path_8NodePath_8NodePath_12get_name(struct
  *     def get_subname_count(self):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __pyx_convert__to_py_godot_string(api_core->godot_node_path_get_name((&__pyx_v_self->_native), __pyx_v_idx)); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 26, __pyx_L1_error)
+  __pyx_t_1 = __pyx_convert__to_py_godot_string(api_core->godot_node_path_get_name((&__pyx_v_self->_native), __pyx_v_idx)); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 25, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "core/node_path/NodePath.pyx":25
+  /* "core/node_path/NodePath.pyx":24
  *         return api_core.godot_node_path_get_name_count(&self._native)
  * 
  *     def get_name(self, godot_int idx):             # <<<<<<<<<<<<<<
@@ -1753,7 +1753,7 @@ static PyObject *__pyx_pf_4core_9node_path_8NodePath_8NodePath_12get_name(struct
   return __pyx_r;
 }
 
-/* "core/node_path/NodePath.pyx":28
+/* "core/node_path/NodePath.pyx":27
  *         return api_core.godot_node_path_get_name(&self._native, idx)
  * 
  *     def get_subname_count(self):             # <<<<<<<<<<<<<<
@@ -1783,7 +1783,7 @@ static PyObject *__pyx_pf_4core_9node_path_8NodePath_8NodePath_14get_subname_cou
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("get_subname_count", 0);
 
-  /* "core/node_path/NodePath.pyx":29
+  /* "core/node_path/NodePath.pyx":28
  * 
  *     def get_subname_count(self):
  *         return api_core.godot_node_path_get_subname_count(&self._native)             # <<<<<<<<<<<<<<
@@ -1791,13 +1791,13 @@ static PyObject *__pyx_pf_4core_9node_path_8NodePath_8NodePath_14get_subname_cou
  *     def get_subname(self, godot_int idx):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_PyInt_From_godot_int(api_core->godot_node_path_get_subname_count((&__pyx_v_self->_native))); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 29, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyInt_From_godot_int(api_core->godot_node_path_get_subname_count((&__pyx_v_self->_native))); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 28, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "core/node_path/NodePath.pyx":28
+  /* "core/node_path/NodePath.pyx":27
  *         return api_core.godot_node_path_get_name(&self._native, idx)
  * 
  *     def get_subname_count(self):             # <<<<<<<<<<<<<<
@@ -1816,7 +1816,7 @@ static PyObject *__pyx_pf_4core_9node_path_8NodePath_8NodePath_14get_subname_cou
   return __pyx_r;
 }
 
-/* "core/node_path/NodePath.pyx":31
+/* "core/node_path/NodePath.pyx":30
  *         return api_core.godot_node_path_get_subname_count(&self._native)
  * 
  *     def get_subname(self, godot_int idx):             # <<<<<<<<<<<<<<
@@ -1835,7 +1835,7 @@ static PyObject *__pyx_pw_4core_9node_path_8NodePath_8NodePath_17get_subname(PyO
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("get_subname (wrapper)", 0);
   assert(__pyx_arg_idx); {
-    __pyx_v_idx = __Pyx_PyInt_As_godot_int(__pyx_arg_idx); if (unlikely((__pyx_v_idx == ((godot_int)-1)) && PyErr_Occurred())) __PYX_ERR(1, 31, __pyx_L3_error)
+    __pyx_v_idx = __Pyx_PyInt_As_godot_int(__pyx_arg_idx); if (unlikely((__pyx_v_idx == ((godot_int)-1)) && PyErr_Occurred())) __PYX_ERR(1, 30, __pyx_L3_error)
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -1859,7 +1859,7 @@ static PyObject *__pyx_pf_4core_9node_path_8NodePath_8NodePath_16get_subname(str
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("get_subname", 0);
 
-  /* "core/node_path/NodePath.pyx":32
+  /* "core/node_path/NodePath.pyx":31
  * 
  *     def get_subname(self, godot_int idx):
  *         return api_core.godot_node_path_get_subname(&self._native, idx)             # <<<<<<<<<<<<<<
@@ -1867,13 +1867,13 @@ static PyObject *__pyx_pf_4core_9node_path_8NodePath_8NodePath_16get_subname(str
  *     def get_concatenated_subnames(self):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __pyx_convert__to_py_godot_string(api_core->godot_node_path_get_subname((&__pyx_v_self->_native), __pyx_v_idx)); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 32, __pyx_L1_error)
+  __pyx_t_1 = __pyx_convert__to_py_godot_string(api_core->godot_node_path_get_subname((&__pyx_v_self->_native), __pyx_v_idx)); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 31, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "core/node_path/NodePath.pyx":31
+  /* "core/node_path/NodePath.pyx":30
  *         return api_core.godot_node_path_get_subname_count(&self._native)
  * 
  *     def get_subname(self, godot_int idx):             # <<<<<<<<<<<<<<
@@ -1892,7 +1892,7 @@ static PyObject *__pyx_pf_4core_9node_path_8NodePath_8NodePath_16get_subname(str
   return __pyx_r;
 }
 
-/* "core/node_path/NodePath.pyx":34
+/* "core/node_path/NodePath.pyx":33
  *         return api_core.godot_node_path_get_subname(&self._native, idx)
  * 
  *     def get_concatenated_subnames(self):             # <<<<<<<<<<<<<<
@@ -1922,7 +1922,7 @@ static PyObject *__pyx_pf_4core_9node_path_8NodePath_8NodePath_18get_concatenate
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("get_concatenated_subnames", 0);
 
-  /* "core/node_path/NodePath.pyx":35
+  /* "core/node_path/NodePath.pyx":34
  * 
  *     def get_concatenated_subnames(self):
  *         return api_core.godot_node_path_get_concatenated_subnames(&self._native)             # <<<<<<<<<<<<<<
@@ -1930,13 +1930,13 @@ static PyObject *__pyx_pf_4core_9node_path_8NodePath_8NodePath_18get_concatenate
  *     def is_empty(self):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __pyx_convert__to_py_godot_string(api_core->godot_node_path_get_concatenated_subnames((&__pyx_v_self->_native))); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 35, __pyx_L1_error)
+  __pyx_t_1 = __pyx_convert__to_py_godot_string(api_core->godot_node_path_get_concatenated_subnames((&__pyx_v_self->_native))); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 34, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "core/node_path/NodePath.pyx":34
+  /* "core/node_path/NodePath.pyx":33
  *         return api_core.godot_node_path_get_subname(&self._native, idx)
  * 
  *     def get_concatenated_subnames(self):             # <<<<<<<<<<<<<<
@@ -1955,7 +1955,7 @@ static PyObject *__pyx_pf_4core_9node_path_8NodePath_8NodePath_18get_concatenate
   return __pyx_r;
 }
 
-/* "core/node_path/NodePath.pyx":37
+/* "core/node_path/NodePath.pyx":36
  *         return api_core.godot_node_path_get_concatenated_subnames(&self._native)
  * 
  *     def is_empty(self):             # <<<<<<<<<<<<<<
@@ -1985,7 +1985,7 @@ static PyObject *__pyx_pf_4core_9node_path_8NodePath_8NodePath_20is_empty(struct
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("is_empty", 0);
 
-  /* "core/node_path/NodePath.pyx":38
+  /* "core/node_path/NodePath.pyx":37
  * 
  *     def is_empty(self):
  *         return api_core.godot_node_path_is_empty(&self._native)             # <<<<<<<<<<<<<<
@@ -1993,13 +1993,13 @@ static PyObject *__pyx_pf_4core_9node_path_8NodePath_8NodePath_20is_empty(struct
  *     def __eq__(self, NodePath b):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_PyBool_FromLong(api_core->godot_node_path_is_empty((&__pyx_v_self->_native))); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 38, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyBool_FromLong(api_core->godot_node_path_is_empty((&__pyx_v_self->_native))); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 37, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "core/node_path/NodePath.pyx":37
+  /* "core/node_path/NodePath.pyx":36
  *         return api_core.godot_node_path_get_concatenated_subnames(&self._native)
  * 
  *     def is_empty(self):             # <<<<<<<<<<<<<<
@@ -2018,7 +2018,7 @@ static PyObject *__pyx_pf_4core_9node_path_8NodePath_8NodePath_20is_empty(struct
   return __pyx_r;
 }
 
-/* "core/node_path/NodePath.pyx":40
+/* "core/node_path/NodePath.pyx":39
  *         return api_core.godot_node_path_is_empty(&self._native)
  * 
  *     def __eq__(self, NodePath b):             # <<<<<<<<<<<<<<
@@ -2035,7 +2035,7 @@ static PyObject *__pyx_pw_4core_9node_path_8NodePath_8NodePath_23__eq__(PyObject
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__eq__ (wrapper)", 0);
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_b), __pyx_ptype_4core_9node_path_8NodePath_NodePath, 1, "b", 0))) __PYX_ERR(1, 40, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_b), __pyx_ptype_4core_9node_path_8NodePath_NodePath, 1, "b", 0))) __PYX_ERR(1, 39, __pyx_L1_error)
   __pyx_r = __pyx_pf_4core_9node_path_8NodePath_8NodePath_22__eq__(((struct __pyx_obj_4core_9node_path_8NodePath_NodePath *)__pyx_v_self), ((struct __pyx_obj_4core_9node_path_8NodePath_NodePath *)__pyx_v_b));
 
   /* function exit code */
@@ -2056,20 +2056,20 @@ static PyObject *__pyx_pf_4core_9node_path_8NodePath_8NodePath_22__eq__(struct _
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__eq__", 0);
 
-  /* "core/node_path/NodePath.pyx":41
+  /* "core/node_path/NodePath.pyx":40
  * 
  *     def __eq__(self, NodePath b):
  *         return api_core.godot_node_path_operator_equal(&self._native, &b._native)             # <<<<<<<<<<<<<<
  * 
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_PyBool_FromLong(api_core->godot_node_path_operator_equal((&__pyx_v_self->_native), (&__pyx_v_b->_native))); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 41, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyBool_FromLong(api_core->godot_node_path_operator_equal((&__pyx_v_self->_native), (&__pyx_v_b->_native))); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 40, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "core/node_path/NodePath.pyx":40
+  /* "core/node_path/NodePath.pyx":39
  *         return api_core.godot_node_path_is_empty(&self._native)
  * 
  *     def __eq__(self, NodePath b):             # <<<<<<<<<<<<<<

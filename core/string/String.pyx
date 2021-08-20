@@ -11,6 +11,5 @@ cdef class String:
         if(string == None):
             api_core.godot_string_new(&self._native)
         else:
-            print("create_String_with python_string", string)
             api_core.godot_string_new_with_wide_string(&self._native,  PyUnicode_AsWideCharString(string, NULL), len(string))
             api_core.godot_print(&self._native)

@@ -79,6 +79,7 @@ void set_up_pluginscript();
 // information we may find useful among which the pointers to our API structures.
 void GDN_EXPORT godot_gdnative_init(godot_gdnative_init_options *p_options) {
 	api_core = p_options->api_struct;
+	printf("godot_python version 0.1\n");
 	printf("set_api_core:\n");
 	printf("%p",api_core);
 	printf("godot_gdnative_init\n");

@@ -845,7 +845,7 @@ struct __pyx_obj_5utils_7Wrapper_Wrapper;
 
 /* "utils/Wrapper.pxd":2
  * from godot_api.binding cimport *
- * cdef class Wrapper:             # <<<<<<<<<<<<<<
+ * cdef class Wrapper(object):             # <<<<<<<<<<<<<<
  *     cdef godot_object *godot_owner
  * 
  */
@@ -859,7 +859,7 @@ struct __pyx_obj_5utils_7Wrapper_Wrapper {
 
 /* "utils/Wrapper.pyx":2
  * from godot_api.binding cimport *
- * cdef class Wrapper:             # <<<<<<<<<<<<<<
+ * cdef class Wrapper(object):             # <<<<<<<<<<<<<<
  *     def __init__(self):
  *         pass
  */
@@ -1191,7 +1191,7 @@ static PyObject *__pyx_tuple__2;
 
 /* "utils/Wrapper.pyx":3
  * from godot_api.binding cimport *
- * cdef class Wrapper:
+ * cdef class Wrapper(object):
  *     def __init__(self):             # <<<<<<<<<<<<<<
  *         pass
  */
@@ -1917,7 +1917,7 @@ if (!__Pyx_RefNanny) {
 
   /* "utils/Wrapper.pyx":1
  * from godot_api.binding cimport *             # <<<<<<<<<<<<<<
- * cdef class Wrapper:
+ * cdef class Wrapper(object):
  *     def __init__(self):
  */
   __pyx_t_1 = __Pyx_PyDict_NewPresized(0); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 1, __pyx_L1_error)

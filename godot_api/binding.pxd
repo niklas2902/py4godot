@@ -6,6 +6,7 @@ from cpython.ref cimport PyObject
 cdef extern from "Python.h":
     cdef PyObject* PyUnicode_FromWideChar(const wchar_t *w, Py_ssize_t size);
     cdef wchar_t* PyUnicode_AsWideCharString(object, Py_ssize_t *)
+    cdef  PyObject* PyObject_Str(PyObject *o);
 
 cdef extern from "binding.h":
     DEF array_size = 4 # Edit

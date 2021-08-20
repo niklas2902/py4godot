@@ -7,7 +7,6 @@ cdef class NodePath:
         api_core.godot_node_path_new(&self._native, &path._native)
 
     def new_copy(self, NodePath src):
-        pass
         api_core.godot_node_path_new_copy(&self._native, &src._native)
 
     def destroy(self):

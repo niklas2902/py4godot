@@ -5,8 +5,14 @@ from pluginscript_api.description_classes.MethodDescription import *
 from pluginscript_api.description_classes.PropertyDescription import *
 #from core.dictionary.Dictionary cimport set_api_core_dict
 from core.array.Array import *
+from libc.stdio cimport printf
+from utils.Wrapper cimport Wrapper
+from cpython cimport Py_INCREF, Py_DECREF, PyObject
+from cpython.mem cimport PyMem_Malloc, PyMem_Realloc, PyMem_Free
 
 from pluginscript_api.utils.annotations import methods, classes, properties, reset
+
+
 cdef godot_dictionary dictionary
 cdef api set_api_core_pluginscript(const godot_gdnative_core_api_struct* core):
     global api_core
@@ -16,7 +22,6 @@ cdef api set_api_core_pluginscript(const godot_gdnative_core_api_struct* core):
     print("\n#############################set_api_core############################################################")
 cdef api godot_pluginscript_language_data * init_pluginscript():
     print("\n######################################################init_python_pluginscript####################################\n");
-    return NULL;
 
 cdef api void finish_pluginscript(godot_pluginscript_instance_data *p_data):
     print("finish_python_test\n");
@@ -28,7 +33,13 @@ cdef api  void add_global_constant_pluginscript(godot_pluginscript_language_data
 cdef api  godot_pluginscript_script_manifest init_pluginscript_desc (godot_pluginscript_language_data *p_data, const godot_string *p_path, const godot_string *p_source, godot_error *r_error):
     print("\n############################################create_manifest##############################################\n");
     cdef godot_pluginscript_script_manifest manifest;
-    manifest.data = NULL;
+
+    cdef Wrapper wrapper_obj = Wrapper()
+
+    cdef PyObject* obj = <PyObject *>wrapper_obj
+
+    manifest.data = obj;
+
     api_core.godot_string_name_new_data(&manifest.name, "python_manifest");
     manifest.is_tool = False;
     api_core.godot_string_name_new_data(&manifest.base, "");
@@ -39,23 +50,16 @@ cdef api  godot_pluginscript_script_manifest init_pluginscript_desc (godot_plugi
 
     api_core.godot_print(p_source)
     api_core.godot_print(p_path)
-    print("path2:")
-    print(get_python_string_from_w_string(p_path))
 
     reset()
     exec(get_python_string_from_w_string(p_source))
-    print("methods generated:", methods)
-    print("properties generated:", properties)
-    print("classes_found:", classes)
 
     properties_array = Array()
     for p in properties:
         properties_array.append(Variant(p.to_dict()))
         print("dict:",p.to_dict())
-#    PyUnicode_FromWideChar(c_string,-1)
     #for m in methods:
         #MethodDescription(m, None,None, 0, 0).to_dict()
-    #Dictionary()
     manifest.properties = properties_array.get_native()
 
     print("\n################################return_manifest########################################################\n");
@@ -69,6 +73,22 @@ cdef api  void finish_pluginscript_desc (godot_pluginscript_script_data *p_data)
 ###############################################pluginscript_instance#######################################################
 cdef api void init_pluginscript_instance(godot_pluginscript_script_data *p_data, godot_object *p_owner):
     print("\n####################################################################instance_init########################\n");
+    #(<Wrapper>p_data).godot_owner = p_owner
+ #   cdef int instance = (<object>p_data)
+#    cdef Wrapper * wrapper = instance
+    cdef PyObject * instance = (<PyObject * ?>p_data)
+    cdef str py_object_str = <str>PyObject_Str(instance)
+    print(py_object_str)
+    #TODO:Fill in
+    #cdef object instance = (<object>p_data)()
+    #cdef PyObject python_object = dereference(instance)
+  #  (<Object>instance)._gd_ptr = p_owner
+    #cdef Wrapper wrapper = (<Wrapper?> instance)
+    print("Incref")
+    #Py_INCREF(python_object)
+    #printf(instance)
+    print("return")
+
 
 cdef api void finish_pluginscript_instance(godot_pluginscript_instance_data *p_data):
     print("instance_finish\n");
