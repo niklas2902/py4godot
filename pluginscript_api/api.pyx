@@ -49,8 +49,9 @@ cdef api  godot_pluginscript_script_manifest init_pluginscript_desc (godot_plugi
     reset()
     exec(get_python_string_from_w_string(p_source))
 
+    gd_obj = classes[0]
     cdef PyObject* class_obj
-    class_obj = <PyObject*> classes[0]
+    class_obj = <PyObject*> gd_obj
     print("classes:", classes)
     cdef GDClassWrapper gd_class_wrapper = GDClassWrapper()
     gd_class_wrapper.py_obj = <PyObject*>class_obj
@@ -65,7 +66,7 @@ cdef api  godot_pluginscript_script_manifest init_pluginscript_desc (godot_plugi
     manifest.properties = properties_array.get_native()
 
 
-    cdef PyObject* obj = <PyObject *> gd_class_wrapper
+    cdef PyObject* obj = class_obj
 
     manifest.data = obj;
 
@@ -80,13 +81,11 @@ cdef api  void finish_pluginscript_desc (godot_pluginscript_script_data *p_data)
 ###############################################pluginscript_instance#######################################################
 cdef api void init_pluginscript_instance(godot_pluginscript_script_data *p_data, godot_object *p_owner):
     print("\n####################################################################instance_init########################\n");
-    cdef GDClassWrapper instance = (<GDClassWrapper ?>p_data)
+    cdef Wrapper instance = (<Wrapper ?>p_data)()
     print("instance_created")
-    cdef str py_object_str = <str>PyObject_Str(instance.py_obj)
-    print(py_object_str)
     print(instance)
-    cdef Wrapper wrapper_obj = <Wrapper?>instance.py_obj
-    wrapper_obj.godot_owner = p_owner
+    cdef Wrapper wrapper_obj = instance
+    wrapper_obj.set_godot_owner(p_owner)
     print("Incref")
     Py_INCREF(instance)
     print("return")
