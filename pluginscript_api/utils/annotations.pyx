@@ -16,7 +16,7 @@ def reset():
     properties = []
 
 def gdclass(func):
-    classes.append(func.__name__)
+    classes.append(func)
 
 def gdproperty(type, defaultval, hint= None, hint_string = ""):
     class gdprop(property):

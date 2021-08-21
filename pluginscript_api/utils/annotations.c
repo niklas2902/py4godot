@@ -935,7 +935,7 @@ struct __pyx_obj_4core_7variant_7Variant_Variant {
 
 
 /* "pluginscript_api/utils/annotations.pyx":21
- *     classes.append(func.__name__)
+ *     classes.append(func)
  * 
  * def gdproperty(type, defaultval, hint= None, hint_string = ""):             # <<<<<<<<<<<<<<
  *     class gdprop(property):
@@ -1461,7 +1461,7 @@ static const char __pyx_k_func[] = "func";
 static const char __pyx_k_hint[] = "hint";
 static const char __pyx_k_init[] = "__init__";
 static const char __pyx_k_main[] = "__main__";
-static const char __pyx_k_name[] = "__name__";
+static const char __pyx_k_name[] = "name";
 static const char __pyx_k_self[] = "self";
 static const char __pyx_k_test[] = "__test__";
 static const char __pyx_k_type[] = "type";
@@ -1475,7 +1475,7 @@ static const char __pyx_k_append[] = "append";
 static const char __pyx_k_gdprop[] = "gdprop";
 static const char __pyx_k_import[] = "__import__";
 static const char __pyx_k_module[] = "__module__";
-static const char __pyx_k_name_2[] = "name";
+static const char __pyx_k_name_2[] = "__name__";
 static const char __pyx_k_type_2[] = "type_";
 static const char __pyx_k_classes[] = "classes";
 static const char __pyx_k_gdclass[] = "gdclass";
@@ -1665,7 +1665,7 @@ static PyObject *__pyx_pf_16pluginscript_api_5utils_11annotations_reset(CYTHON_U
  *     properties = []
  * 
  * def gdclass(func):             # <<<<<<<<<<<<<<
- *     classes.append(func.__name__)
+ *     classes.append(func)
  * 
  */
 
@@ -1687,8 +1687,7 @@ static PyObject *__pyx_pf_16pluginscript_api_5utils_11annotations_2gdclass(CYTHO
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   PyObject *__pyx_t_1 = NULL;
-  PyObject *__pyx_t_2 = NULL;
-  int __pyx_t_3;
+  int __pyx_t_2;
   int __pyx_lineno = 0;
   const char *__pyx_filename = NULL;
   int __pyx_clineno = 0;
@@ -1697,23 +1696,20 @@ static PyObject *__pyx_pf_16pluginscript_api_5utils_11annotations_2gdclass(CYTHO
   /* "pluginscript_api/utils/annotations.pyx":19
  * 
  * def gdclass(func):
- *     classes.append(func.__name__)             # <<<<<<<<<<<<<<
+ *     classes.append(func)             # <<<<<<<<<<<<<<
  * 
  * def gdproperty(type, defaultval, hint= None, hint_string = ""):
  */
   __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_n_s_classes); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 19, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_func, __pyx_n_s_name); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 19, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_3 = __Pyx_PyObject_Append(__pyx_t_1, __pyx_t_2); if (unlikely(__pyx_t_3 == ((int)-1))) __PYX_ERR(0, 19, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_Append(__pyx_t_1, __pyx_v_func); if (unlikely(__pyx_t_2 == ((int)-1))) __PYX_ERR(0, 19, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
   /* "pluginscript_api/utils/annotations.pyx":18
  *     properties = []
  * 
  * def gdclass(func):             # <<<<<<<<<<<<<<
- *     classes.append(func.__name__)
+ *     classes.append(func)
  * 
  */
 
@@ -1722,7 +1718,6 @@ static PyObject *__pyx_pf_16pluginscript_api_5utils_11annotations_2gdclass(CYTHO
   goto __pyx_L0;
   __pyx_L1_error:;
   __Pyx_XDECREF(__pyx_t_1);
-  __Pyx_XDECREF(__pyx_t_2);
   __Pyx_AddTraceback("pluginscript_api.utils.annotations.gdclass", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   __pyx_L0:;
@@ -1732,7 +1727,7 @@ static PyObject *__pyx_pf_16pluginscript_api_5utils_11annotations_2gdclass(CYTHO
 }
 
 /* "pluginscript_api/utils/annotations.pyx":21
- *     classes.append(func.__name__)
+ *     classes.append(func)
  * 
  * def gdproperty(type, defaultval, hint= None, hint_string = ""):             # <<<<<<<<<<<<<<
  *     class gdprop(property):
@@ -2022,9 +2017,9 @@ static PyObject *__pyx_pf_16pluginscript_api_5utils_11annotations_10gdproperty_6
     __Pyx_GOTREF(__pyx_t_5);
     __pyx_t_6 = __Pyx_PyDict_NewPresized(7); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 25, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_6);
-    __pyx_t_7 = __Pyx_PyObject_GetAttrStr(__pyx_v_fget, __pyx_n_s_name); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 25, __pyx_L1_error)
+    __pyx_t_7 = __Pyx_PyObject_GetAttrStr(__pyx_v_fget, __pyx_n_s_name_2); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 25, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_7);
-    if (PyDict_SetItem(__pyx_t_6, __pyx_n_s_name_2, __pyx_t_7) < 0) __PYX_ERR(0, 25, __pyx_L1_error)
+    if (PyDict_SetItem(__pyx_t_6, __pyx_n_s_name, __pyx_t_7) < 0) __PYX_ERR(0, 25, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
 
     /* "pluginscript_api/utils/annotations.pyx":26
@@ -2218,7 +2213,7 @@ static PyObject *__pyx_pf_16pluginscript_api_5utils_11annotations_10gdproperty_6
 }
 
 /* "pluginscript_api/utils/annotations.pyx":21
- *     classes.append(func.__name__)
+ *     classes.append(func)
  * 
  * def gdproperty(type, defaultval, hint= None, hint_string = ""):             # <<<<<<<<<<<<<<
  *     class gdprop(property):
@@ -2315,7 +2310,7 @@ static PyObject *__pyx_pf_16pluginscript_api_5utils_11annotations_4gdproperty(CY
   goto __pyx_L0;
 
   /* "pluginscript_api/utils/annotations.pyx":21
- *     classes.append(func.__name__)
+ *     classes.append(func)
  * 
  * def gdproperty(type, defaultval, hint= None, hint_string = ""):             # <<<<<<<<<<<<<<
  *     class gdprop(property):
@@ -2377,7 +2372,7 @@ static PyObject *__pyx_pf_16pluginscript_api_5utils_11annotations_6gdmethod(CYTH
  */
   __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_n_s_methods); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 35, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_func, __pyx_n_s_name); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 35, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_func, __pyx_n_s_name_2); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 35, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_t_3 = __Pyx_PyObject_Append(__pyx_t_1, __pyx_t_2); if (unlikely(__pyx_t_3 == ((int)-1))) __PYX_ERR(0, 35, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
@@ -2829,7 +2824,7 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
  *     properties = []
  * 
  * def gdclass(func):             # <<<<<<<<<<<<<<
- *     classes.append(func.__name__)
+ *     classes.append(func)
  * 
  */
   __pyx_tuple__7 = PyTuple_Pack(1, __pyx_n_s_func); if (unlikely(!__pyx_tuple__7)) __PYX_ERR(0, 18, __pyx_L1_error)
@@ -2838,7 +2833,7 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
   __pyx_codeobj__8 = (PyObject*)__Pyx_PyCode_New(1, 0, 1, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__7, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_pluginscript_api_utils_annotatio_2, __pyx_n_s_gdclass, 18, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__8)) __PYX_ERR(0, 18, __pyx_L1_error)
 
   /* "pluginscript_api/utils/annotations.pyx":21
- *     classes.append(func.__name__)
+ *     classes.append(func)
  * 
  * def gdproperty(type, defaultval, hint= None, hint_string = ""):             # <<<<<<<<<<<<<<
  *     class gdprop(property):
@@ -3152,7 +3147,7 @@ if (!__Pyx_RefNanny) {
   if (__Pyx_init_sys_getdefaultencoding_params() < 0) __PYX_ERR(0, 1, __pyx_L1_error)
   #endif
   if (__pyx_module_is_main_pluginscript_api__utils__annotations) {
-    if (PyObject_SetAttr(__pyx_m, __pyx_n_s_name, __pyx_n_s_main) < 0) __PYX_ERR(0, 1, __pyx_L1_error)
+    if (PyObject_SetAttr(__pyx_m, __pyx_n_s_name_2, __pyx_n_s_main) < 0) __PYX_ERR(0, 1, __pyx_L1_error)
   }
   #if PY_MAJOR_VERSION >= 3
   {
@@ -3292,7 +3287,7 @@ if (!__Pyx_RefNanny) {
  *     properties = []
  * 
  * def gdclass(func):             # <<<<<<<<<<<<<<
- *     classes.append(func.__name__)
+ *     classes.append(func)
  * 
  */
   __pyx_t_2 = PyCFunction_NewEx(&__pyx_mdef_16pluginscript_api_5utils_11annotations_3gdclass, NULL, __pyx_n_s_pluginscript_api_utils_annotatio); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 18, __pyx_L1_error)
@@ -3301,7 +3296,7 @@ if (!__Pyx_RefNanny) {
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
   /* "pluginscript_api/utils/annotations.pyx":21
- *     classes.append(func.__name__)
+ *     classes.append(func)
  * 
  * def gdproperty(type, defaultval, hint= None, hint_string = ""):             # <<<<<<<<<<<<<<
  *     class gdprop(property):

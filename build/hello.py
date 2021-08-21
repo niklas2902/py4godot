@@ -7,7 +7,7 @@ print(PropertyHint.GODOT_PROPERTY_HINT_RANGE.value)
 @gdclass
 class Ball(Wrapper):
 	def __init__(self):
-		super.__init__()
+		super().__init__()
 	@gdmethod
 	def move(self):
 		print("method")
