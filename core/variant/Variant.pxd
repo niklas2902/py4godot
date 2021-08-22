@@ -1,3 +1,4 @@
+from core.dictionary.Dictionary cimport *
 from core.variant.variant_binding cimport *
 
 cdef class Variant:
@@ -7,12 +8,65 @@ cdef class Variant:
         self._native = _native
 
     @staticmethod
-    cdef inline void new_static(godot_variant _native):
+    cdef inline Variant new_static(godot_variant _native):
         cdef Variant v = Variant.__new__(Variant)
         v.set_native(_native)
+        return v
 
-    cdef inline void new_variant(self, i):
-        print("new_variant", type(i))
+    @staticmethod
+    cdef inline as_nil(self)
+    @staticmethod
+    cdef inline  as_bool(self)
+    @staticmethod
+    cdef inline  as_uint(self)
+    @staticmethod
+    cdef inline int as_int(self)
+    @staticmethod
+    cdef inline  as_real(self)
+    @staticmethod
+    cdef inline  as_string(self)
+    @staticmethod
+    cdef inline  as_vector2(self)
+    @staticmethod
+    cdef inline  as_rect2(self)
+    @staticmethod
+    cdef inline  as_vector3(self)
+    @staticmethod
+    cdef inline  as_transform2d(self)
+    @staticmethod
+    cdef inline  as_plane(self)
+    @staticmethod
+    cdef inline  as_quat(self)
+    @staticmethod
+    cdef inline  as_aabb(self)
+    @staticmethod
+    cdef inline  as_basis(self)
+    @staticmethod
+    cdef inline  as_transform(self)
+    @staticmethod
+    cdef inline  as_color(self)
+    @staticmethod
+    cdef inline  as_node_path(self)
+    @staticmethod
+    cdef inline  as_rid(self)
+    @staticmethod
+    cdef inline  as_object(self)
+    @staticmethod
+    cdef inline Dictionary as_dictionary(self)
+    @staticmethod
+    cdef inline  as_array(self)
+    @staticmethod
+    cdef inline  as_pool_byte_array(self)
+    @staticmethod
+    cdef inline  as_pool_int_array(self)
+    @staticmethod
+    cdef inline  as_pool_real_array(self)
+    @staticmethod
+    cdef inline  as_pool_string_array(self)
+    @staticmethod
+    cdef inline  as_pool_vector2_array(self)
+    @staticmethod
+    cdef inline  as_pool_vector3_array(self)
 
 ctypedef enum Variant_Type:
     NIL,

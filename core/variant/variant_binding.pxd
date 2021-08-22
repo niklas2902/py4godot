@@ -3,8 +3,42 @@ from godot_api.binding cimport *
 
 cdef extern from "binding.h":
 
-    ctypedef struct godot_variant_type:
-        pass
+    ctypedef enum godot_variant_type:
+        GODOT_VARIANT_TYPE_NIL
+
+        # atomic types
+        GODOT_VARIANT_TYPE_BOOL
+        GODOT_VARIANT_TYPE_INT
+        GODOT_VARIANT_TYPE_REAL
+        GODOT_VARIANT_TYPE_STRING
+
+        # math types
+
+        GODOT_VARIANT_TYPE_VECTOR2 # 5
+        GODOT_VARIANT_TYPE_RECT2
+        GODOT_VARIANT_TYPE_VECTOR3
+        GODOT_VARIANT_TYPE_TRANSFORM2D
+        GODOT_VARIANT_TYPE_PLANE
+        GODOT_VARIANT_TYPE_QUAT # 10
+        GODOT_VARIANT_TYPE_AABB
+        GODOT_VARIANT_TYPE_BASIS
+        GODOT_VARIANT_TYPE_TRANSFORM
+
+        # misc types
+        GODOT_VARIANT_TYPE_COLOR
+        GODOT_VARIANT_TYPE_NODE_PATH # 15
+        GODOT_VARIANT_TYPE_RID
+        GODOT_VARIANT_TYPE_OBJECT
+        GODOT_VARIANT_TYPE_DICTIONARY
+        GODOT_VARIANT_TYPE_ARRAY # 20
+
+        GODOT_VARIANT_TYPE_POOL_BYTE_ARRAY
+        GODOT_VARIANT_TYPE_POOL_INT_ARRAY
+        GODOT_VARIANT_TYPE_POOL_REAL_ARRAY
+        GODOT_VARIANT_TYPE_POOL_STRING_ARRAY
+        GODOT_VARIANT_TYPE_POOL_VECTOR2_ARRAY # 25
+        GODOT_VARIANT_TYPE_POOL_VECTOR3_ARRAY
+        GODOT_VARIANT_TYPE_POOL_COLOR_ARRAY
 
     ctypedef struct godot_variant_call_error:
         pass
@@ -75,3 +109,5 @@ cdef extern from "binding.h":
         godot_bool (*godot_variant_hash_compare)(const godot_variant *p_self, const godot_variant *p_other);
         godot_bool (*godot_variant_booleanize)(const godot_variant *p_self);
         void (*godot_variant_destroy)(godot_variant *p_self);
+
+

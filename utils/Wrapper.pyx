@@ -1,4 +1,6 @@
 from godot_api.binding cimport *
 cdef class Wrapper(object):
-    def __init__(self):
-        pass
+
+    def set_property(self, name, value):
+        print("set_property:", name,"|",value)
+        exec(f"self.{name} = value", globals(), locals())

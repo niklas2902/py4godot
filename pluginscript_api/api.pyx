@@ -9,6 +9,7 @@ from libc.stdio cimport printf
 from utils.GDClassWrapper cimport GDClassWrapper
 from utils.Wrapper cimport Wrapper
 from cpython cimport Py_INCREF, Py_DECREF, PyObject
+cimport core.variant.Variant as CVariant
 from cpython.mem cimport PyMem_Malloc, PyMem_Realloc, PyMem_Free
 
 from pluginscript_api.utils.annotations import methods, classes, properties, reset
@@ -52,10 +53,6 @@ cdef api  godot_pluginscript_script_manifest init_pluginscript_desc (godot_plugi
     gd_obj = classes[0]
     cdef PyObject* class_obj
     class_obj = <PyObject*> gd_obj
-    print("classes:", classes)
-    cdef GDClassWrapper gd_class_wrapper = GDClassWrapper()
-    gd_class_wrapper.py_obj = <PyObject*>class_obj
-    #print("OBJ:",class_obj)
 
     properties_array = Array()
     for p in properties:
@@ -82,22 +79,28 @@ cdef api  void finish_pluginscript_desc (godot_pluginscript_script_data *p_data)
 cdef api godot_pluginscript_instance_data * init_pluginscript_instance(godot_pluginscript_script_data *p_data, godot_object *p_owner):
     print("\n####################################################################instance_init########################\n");
     cdef Wrapper instance = (<Wrapper ?>p_data)()
-    cdef Wrapper wrapper_obj = instance
-    wrapper_obj.set_godot_owner(p_owner)
+    instance.set_godot_owner(p_owner)
     Py_INCREF(instance)
     return <PyObject*>instance
 
 
 cdef api void finish_pluginscript_instance(godot_pluginscript_instance_data *p_data):
-    cdef Wrapper instance = (<Wrapper ?>p_data)()
-    cdef Wrapper wrapper_obj = instance
-    wrapper_obj.set_godot_owner(p_owner)
+    print("instance_finish\n");
+    cdef Wrapper instance = (<Wrapper ?>p_data)
     Py_DECREF(instance)
-    return <PyObject*>instance
 
 cdef api bool set_prop_pluginscript_instance(godot_pluginscript_instance_data *p_data, const godot_string *p_name, const godot_variant *p_value):
     print("\n#########################################################set_prop#######################################\n");
-    return False;
+    api_core.godot_print(p_name)
+    cdef Wrapper instance = (<Wrapper ?>p_data)
+    print(CVariant.Variant.new_static(dereference(p_value)).get_type())
+    print(CVariant.Variant.new_static(dereference(p_value)).get_converted_value())
+
+    #Todo:is there a speedier way?
+    value = CVariant.Variant.new_static(dereference(p_value)).get_converted_value()
+    #exec(f"instance.{get_python_string_from_w_string(p_name)} = None")
+    instance.set_property(get_python_string_from_w_string(p_name), value)
+    return True;
 
 cdef api bool get_prop_pluginscript_instance(godot_pluginscript_instance_data *p_data, const godot_string *p_name, godot_variant *r_ret):
     print("\n###################################################get_prop########################################\n");

@@ -12,4 +12,9 @@ cdef class String:
             api_core.godot_string_new(&self._native)
         else:
             api_core.godot_string_new_with_wide_string(&self._native,  PyUnicode_AsWideCharString(string, NULL), len(string))
-            api_core.godot_print(&self._native)
+    def as_python_string(self):
+        cdef const wchar_t* c_string = api_core.godot_string_wide_str(&self._native)
+        return <unicode>PyUnicode_FromWideChar(c_string,-1)
+
+    def __str__(self):
+        return self.as_python_string(self)

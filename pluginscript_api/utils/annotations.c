@@ -836,16 +836,18 @@ static const char *__pyx_filename;
 
 static const char *__pyx_f[] = {
   "pluginscript_api\\utils\\annotations.pyx",
+  "core\\dictionary\\Dictionary.pxd",
   "core\\variant\\Variant.pxd",
   "type.pxd",
 };
 
 /*--- Type declarations ---*/
+struct __pyx_obj_4core_10dictionary_10Dictionary_Dictionary;
 struct __pyx_obj_4core_7variant_7Variant_Variant;
 struct __pyx_obj_16pluginscript_api_5utils_11annotations___pyx_scope_struct__gdproperty;
 
-/* "core/variant/Variant.pxd":17
- *         print("new_variant", type(i))
+/* "core/variant/Variant.pxd":71
+ *     cdef inline  as_pool_vector3_array(self)
  * 
  * ctypedef enum Variant_Type:             # <<<<<<<<<<<<<<
  *     NIL,
@@ -883,7 +885,7 @@ enum __pyx_t_4core_7variant_7Variant_Variant_Type {
 };
 typedef enum __pyx_t_4core_7variant_7Variant_Variant_Type __pyx_t_4core_7variant_7Variant_Variant_Type;
 
-/* "core/variant/Variant.pxd":58
+/* "core/variant/Variant.pxd":112
  * 
  * 
  * ctypedef enum Variant_Operator :             # <<<<<<<<<<<<<<
@@ -920,7 +922,21 @@ enum __pyx_t_4core_7variant_7Variant_Variant_Operator {
 };
 typedef enum __pyx_t_4core_7variant_7Variant_Variant_Operator __pyx_t_4core_7variant_7Variant_Variant_Operator;
 
-/* "core/variant/Variant.pxd":3
+/* "core/dictionary/Dictionary.pxd":4
+ * from libc.stdio cimport printf
+ * #Todo: refactor new_static in every other class
+ * cdef class Dictionary:             # <<<<<<<<<<<<<<
+ *     cdef godot_dictionary _native
+ * 
+ */
+struct __pyx_obj_4core_10dictionary_10Dictionary_Dictionary {
+  PyObject_HEAD
+  struct __pyx_vtabstruct_4core_10dictionary_10Dictionary_Dictionary *__pyx_vtab;
+  godot_dictionary _native;
+};
+
+
+/* "core/variant/Variant.pxd":4
  * from core.variant.variant_binding cimport *
  * 
  * cdef class Variant:             # <<<<<<<<<<<<<<
@@ -950,7 +966,24 @@ struct __pyx_obj_16pluginscript_api_5utils_11annotations___pyx_scope_struct__gdp
 
 
 
-/* "core/variant/Variant.pxd":3
+/* "core/dictionary/Dictionary.pxd":4
+ * from libc.stdio cimport printf
+ * #Todo: refactor new_static in every other class
+ * cdef class Dictionary:             # <<<<<<<<<<<<<<
+ *     cdef godot_dictionary _native
+ * 
+ */
+
+struct __pyx_vtabstruct_4core_10dictionary_10Dictionary_Dictionary {
+  void (*set_native)(struct __pyx_obj_4core_10dictionary_10Dictionary_Dictionary *, godot_dictionary);
+  struct __pyx_obj_4core_10dictionary_10Dictionary_Dictionary *(*new_static)(godot_dictionary);
+};
+static struct __pyx_vtabstruct_4core_10dictionary_10Dictionary_Dictionary *__pyx_vtabptr_4core_10dictionary_10Dictionary_Dictionary;
+static CYTHON_INLINE void __pyx_f_4core_10dictionary_10Dictionary_10Dictionary_set_native(struct __pyx_obj_4core_10dictionary_10Dictionary_Dictionary *, godot_dictionary);
+static CYTHON_INLINE struct __pyx_obj_4core_10dictionary_10Dictionary_Dictionary *__pyx_f_4core_10dictionary_10Dictionary_10Dictionary_new_static(godot_dictionary);
+
+
+/* "core/variant/Variant.pxd":4
  * from core.variant.variant_binding cimport *
  * 
  * cdef class Variant:             # <<<<<<<<<<<<<<
@@ -960,13 +993,38 @@ struct __pyx_obj_16pluginscript_api_5utils_11annotations___pyx_scope_struct__gdp
 
 struct __pyx_vtabstruct_4core_7variant_7Variant_Variant {
   void (*set_native)(struct __pyx_obj_4core_7variant_7Variant_Variant *, godot_variant);
-  void (*new_static)(godot_variant);
-  void (*new_variant)(struct __pyx_obj_4core_7variant_7Variant_Variant *, PyObject *);
+  struct __pyx_obj_4core_7variant_7Variant_Variant *(*new_static)(godot_variant);
+  PyObject *(*as_nil)(struct __pyx_obj_4core_7variant_7Variant_Variant *);
+  PyObject *(*as_bool)(struct __pyx_obj_4core_7variant_7Variant_Variant *);
+  PyObject *(*as_uint)(struct __pyx_obj_4core_7variant_7Variant_Variant *);
+  int (*as_int)(struct __pyx_obj_4core_7variant_7Variant_Variant *);
+  PyObject *(*as_real)(struct __pyx_obj_4core_7variant_7Variant_Variant *);
+  PyObject *(*as_string)(struct __pyx_obj_4core_7variant_7Variant_Variant *);
+  PyObject *(*as_vector2)(struct __pyx_obj_4core_7variant_7Variant_Variant *);
+  PyObject *(*as_rect2)(struct __pyx_obj_4core_7variant_7Variant_Variant *);
+  PyObject *(*as_vector3)(struct __pyx_obj_4core_7variant_7Variant_Variant *);
+  PyObject *(*as_transform2d)(struct __pyx_obj_4core_7variant_7Variant_Variant *);
+  PyObject *(*as_plane)(struct __pyx_obj_4core_7variant_7Variant_Variant *);
+  PyObject *(*as_quat)(struct __pyx_obj_4core_7variant_7Variant_Variant *);
+  PyObject *(*as_aabb)(struct __pyx_obj_4core_7variant_7Variant_Variant *);
+  PyObject *(*as_basis)(struct __pyx_obj_4core_7variant_7Variant_Variant *);
+  PyObject *(*as_transform)(struct __pyx_obj_4core_7variant_7Variant_Variant *);
+  PyObject *(*as_color)(struct __pyx_obj_4core_7variant_7Variant_Variant *);
+  PyObject *(*as_node_path)(struct __pyx_obj_4core_7variant_7Variant_Variant *);
+  PyObject *(*as_rid)(struct __pyx_obj_4core_7variant_7Variant_Variant *);
+  PyObject *(*as_object)(struct __pyx_obj_4core_7variant_7Variant_Variant *);
+  struct __pyx_obj_4core_10dictionary_10Dictionary_Dictionary *(*as_dictionary)(struct __pyx_obj_4core_7variant_7Variant_Variant *);
+  PyObject *(*as_array)(struct __pyx_obj_4core_7variant_7Variant_Variant *);
+  PyObject *(*as_pool_byte_array)(struct __pyx_obj_4core_7variant_7Variant_Variant *);
+  PyObject *(*as_pool_int_array)(struct __pyx_obj_4core_7variant_7Variant_Variant *);
+  PyObject *(*as_pool_real_array)(struct __pyx_obj_4core_7variant_7Variant_Variant *);
+  PyObject *(*as_pool_string_array)(struct __pyx_obj_4core_7variant_7Variant_Variant *);
+  PyObject *(*as_pool_vector2_array)(struct __pyx_obj_4core_7variant_7Variant_Variant *);
+  PyObject *(*as_pool_vector3_array)(struct __pyx_obj_4core_7variant_7Variant_Variant *);
 };
 static struct __pyx_vtabstruct_4core_7variant_7Variant_Variant *__pyx_vtabptr_4core_7variant_7Variant_Variant;
 static CYTHON_INLINE void __pyx_f_4core_7variant_7Variant_7Variant_set_native(struct __pyx_obj_4core_7variant_7Variant_Variant *, godot_variant);
-static CYTHON_INLINE void __pyx_f_4core_7variant_7Variant_7Variant_new_static(godot_variant);
-static CYTHON_INLINE void __pyx_f_4core_7variant_7Variant_7Variant_new_variant(struct __pyx_obj_4core_7variant_7Variant_Variant *, PyObject *);
+static CYTHON_INLINE struct __pyx_obj_4core_7variant_7Variant_Variant *__pyx_f_4core_7variant_7Variant_7Variant_new_static(godot_variant);
 
 /* --- Runtime support code (head) --- */
 /* Refnanny.proto */
@@ -1273,6 +1331,36 @@ static CYTHON_INLINE PyObject* __Pyx_tp_new_kwargs(PyObject* type_obj, PyObject*
 /* ExtTypeTest.proto */
 static CYTHON_INLINE int __Pyx_TypeTest(PyObject *obj, PyTypeObject *type);
 
+/* IncludeStringH.proto */
+#include <string.h>
+
+/* PyObject_GenericGetAttrNoDict.proto */
+#if CYTHON_USE_TYPE_SLOTS && CYTHON_USE_PYTYPE_LOOKUP && PY_VERSION_HEX < 0x03070000
+static CYTHON_INLINE PyObject* __Pyx_PyObject_GenericGetAttrNoDict(PyObject* obj, PyObject* attr_name);
+#else
+#define __Pyx_PyObject_GenericGetAttrNoDict PyObject_GenericGetAttr
+#endif
+
+/* TypeImport.proto */
+#ifndef __PYX_HAVE_RT_ImportType_proto
+#define __PYX_HAVE_RT_ImportType_proto
+enum __Pyx_ImportType_CheckSize {
+   __Pyx_ImportType_CheckSize_Error = 0,
+   __Pyx_ImportType_CheckSize_Warn = 1,
+   __Pyx_ImportType_CheckSize_Ignore = 2
+};
+static PyTypeObject *__Pyx_ImportType(PyObject* module, const char *module_name, const char *class_name, size_t size, enum __Pyx_ImportType_CheckSize check_size);
+#endif
+
+/* GetVTable.proto */
+static void* __Pyx_GetVtable(PyObject *dict);
+
+/* Import.proto */
+static PyObject *__Pyx_Import(PyObject *name, PyObject *from_list, int level);
+
+/* ImportFrom.proto */
+static PyObject* __Pyx_ImportFrom(PyObject* module, PyObject* name);
+
 /* PyThreadStateGet.proto */
 #if CYTHON_FAST_THREAD_STATE
 #define __Pyx_PyThreadState_declare  PyThreadState *__pyx_tstate;
@@ -1308,41 +1396,6 @@ static CYTHON_INLINE void __Pyx_ErrFetchInState(PyThreadState *tstate, PyObject 
 #define __Pyx_ErrRestore(type, value, tb)  PyErr_Restore(type, value, tb)
 #define __Pyx_ErrFetch(type, value, tb)  PyErr_Fetch(type, value, tb)
 #endif
-
-/* WriteUnraisableException.proto */
-static void __Pyx_WriteUnraisable(const char *name, int clineno,
-                                  int lineno, const char *filename,
-                                  int full_traceback, int nogil);
-
-/* IncludeStringH.proto */
-#include <string.h>
-
-/* PyObject_GenericGetAttrNoDict.proto */
-#if CYTHON_USE_TYPE_SLOTS && CYTHON_USE_PYTYPE_LOOKUP && PY_VERSION_HEX < 0x03070000
-static CYTHON_INLINE PyObject* __Pyx_PyObject_GenericGetAttrNoDict(PyObject* obj, PyObject* attr_name);
-#else
-#define __Pyx_PyObject_GenericGetAttrNoDict PyObject_GenericGetAttr
-#endif
-
-/* TypeImport.proto */
-#ifndef __PYX_HAVE_RT_ImportType_proto
-#define __PYX_HAVE_RT_ImportType_proto
-enum __Pyx_ImportType_CheckSize {
-   __Pyx_ImportType_CheckSize_Error = 0,
-   __Pyx_ImportType_CheckSize_Warn = 1,
-   __Pyx_ImportType_CheckSize_Ignore = 2
-};
-static PyTypeObject *__Pyx_ImportType(PyObject* module, const char *module_name, const char *class_name, size_t size, enum __Pyx_ImportType_CheckSize check_size);
-#endif
-
-/* GetVTable.proto */
-static void* __Pyx_GetVtable(PyObject *dict);
-
-/* Import.proto */
-static PyObject *__Pyx_Import(PyObject *name, PyObject *from_list, int level);
-
-/* ImportFrom.proto */
-static PyObject* __Pyx_ImportFrom(PyObject* module, PyObject* name);
 
 /* CLineInTraceback.proto */
 #ifdef CYTHON_CLINE_IN_TRACEBACK
@@ -1410,9 +1463,10 @@ static int __Pyx_check_binary_version(void);
 /* InitStrings.proto */
 static int __Pyx_InitStrings(__Pyx_StringTabEntry *t);
 
+static CYTHON_INLINE void __pyx_f_4core_10dictionary_10Dictionary_10Dictionary_set_native(struct __pyx_obj_4core_10dictionary_10Dictionary_Dictionary *__pyx_v_self, godot_dictionary __pyx_v__native); /* proto*/
+static CYTHON_INLINE struct __pyx_obj_4core_10dictionary_10Dictionary_Dictionary *__pyx_f_4core_10dictionary_10Dictionary_10Dictionary_new_static(godot_dictionary __pyx_v__native); /* proto*/
 static CYTHON_INLINE void __pyx_f_4core_7variant_7Variant_7Variant_set_native(struct __pyx_obj_4core_7variant_7Variant_Variant *__pyx_v_self, godot_variant __pyx_v__native); /* proto*/
-static CYTHON_INLINE void __pyx_f_4core_7variant_7Variant_7Variant_new_static(godot_variant __pyx_v__native); /* proto*/
-static CYTHON_INLINE void __pyx_f_4core_7variant_7Variant_7Variant_new_variant(CYTHON_UNUSED struct __pyx_obj_4core_7variant_7Variant_Variant *__pyx_v_self, PyObject *__pyx_v_i); /* proto*/
+static CYTHON_INLINE struct __pyx_obj_4core_7variant_7Variant_Variant *__pyx_f_4core_7variant_7Variant_7Variant_new_static(godot_variant __pyx_v__native); /* proto*/
 
 /* Module declarations from 'libcpp' */
 
@@ -1435,6 +1489,11 @@ static PyTypeObject *__pyx_ptype_7cpython_4type_type = 0;
 
 /* Module declarations from 'godot_api.binding' */
 
+/* Module declarations from 'core.dictionary.dictionary_binding' */
+
+/* Module declarations from 'core.dictionary.Dictionary' */
+static PyTypeObject *__pyx_ptype_4core_10dictionary_10Dictionary_Dictionary = 0;
+
 /* Module declarations from 'core.variant.variant_binding' */
 
 /* Module declarations from 'core.variant.Variant' */
@@ -1451,7 +1510,6 @@ int __pyx_module_is_main_pluginscript_api__utils__annotations = 0;
 /* Implementation of 'pluginscript_api.utils.annotations' */
 static PyObject *__pyx_builtin_property;
 static PyObject *__pyx_builtin_super;
-static PyObject *__pyx_builtin_print;
 static const char __pyx_k_[] = "";
 static const char __pyx_k_doc[] = "doc";
 static const char __pyx_k_fdel[] = "fdel";
@@ -1466,7 +1524,6 @@ static const char __pyx_k_self[] = "self";
 static const char __pyx_k_test[] = "__test__";
 static const char __pyx_k_type[] = "type";
 static const char __pyx_k_doc_2[] = "__doc__";
-static const char __pyx_k_print[] = "print";
 static const char __pyx_k_reset[] = "reset";
 static const char __pyx_k_super[] = "super";
 static const char __pyx_k_usage[] = "usage";
@@ -1492,7 +1549,6 @@ static const char __pyx_k_gdproperty[] = "gdproperty";
 static const char __pyx_k_properties[] = "properties";
 static const char __pyx_k_pyx_vtable[] = "__pyx_vtable__";
 static const char __pyx_k_hint_string[] = "hint_string";
-static const char __pyx_k_new_variant[] = "new_variant";
 static const char __pyx_k_default_value[] = "default_value";
 static const char __pyx_k_MethodDescription[] = "MethodDescription";
 static const char __pyx_k_cline_in_traceback[] = "cline_in_traceback";
@@ -1534,13 +1590,11 @@ static PyObject *__pyx_n_s_methods;
 static PyObject *__pyx_n_s_module;
 static PyObject *__pyx_n_s_name;
 static PyObject *__pyx_n_s_name_2;
-static PyObject *__pyx_n_u_new_variant;
 static PyObject *__pyx_n_s_pluginscript_api_description_cla;
 static PyObject *__pyx_n_s_pluginscript_api_description_cla_2;
 static PyObject *__pyx_n_s_pluginscript_api_utils_annotatio;
 static PyObject *__pyx_kp_s_pluginscript_api_utils_annotatio_2;
 static PyObject *__pyx_n_s_prepare;
-static PyObject *__pyx_n_s_print;
 static PyObject *__pyx_n_s_properties;
 static PyObject *__pyx_n_s_property;
 static PyObject *__pyx_n_s_pyx_vtable;
@@ -2063,7 +2117,7 @@ static PyObject *__pyx_pf_16pluginscript_api_5utils_11annotations_10gdproperty_6
  *                 hint=godot_property_hint.GODOT_PROPERTY_HINT_RANGE if hint == None else hint,
  *                 hint_string=hint_string,usage=godot_property_usage_flags. GODOT_PROPERTY_USAGE_DEFAULT,             # <<<<<<<<<<<<<<
  *                 default_value=defaultval, rset_mode=godot_method_rpc_mode.GODOT_METHOD_RPC_MODE_REMOTESYNC))
- *             super().__init__(fget, set, fdel,doc)
+ *             super().__init__(fget, fset, fdel,doc)
  */
     if (unlikely(!__pyx_cur_scope->__pyx_v_hint_string)) { __Pyx_RaiseClosureNameError("hint_string"); __PYX_ERR(0, 28, __pyx_L1_error) }
     if (PyDict_SetItem(__pyx_t_6, __pyx_n_s_hint_string, __pyx_cur_scope->__pyx_v_hint_string) < 0) __PYX_ERR(0, 25, __pyx_L1_error)
@@ -2076,7 +2130,7 @@ static PyObject *__pyx_pf_16pluginscript_api_5utils_11annotations_10gdproperty_6
  *                 hint=godot_property_hint.GODOT_PROPERTY_HINT_RANGE if hint == None else hint,
  *                 hint_string=hint_string,usage=godot_property_usage_flags. GODOT_PROPERTY_USAGE_DEFAULT,
  *                 default_value=defaultval, rset_mode=godot_method_rpc_mode.GODOT_METHOD_RPC_MODE_REMOTESYNC))             # <<<<<<<<<<<<<<
- *             super().__init__(fget, set, fdel,doc)
+ *             super().__init__(fget, fset, fdel,doc)
  *     return gdprop
  */
     if (unlikely(!__pyx_cur_scope->__pyx_v_defaultval)) { __Pyx_RaiseClosureNameError("defaultval"); __PYX_ERR(0, 29, __pyx_L1_error) }
@@ -2113,7 +2167,7 @@ static PyObject *__pyx_pf_16pluginscript_api_5utils_11annotations_10gdproperty_6
   /* "pluginscript_api/utils/annotations.pyx":30
  *                 hint_string=hint_string,usage=godot_property_usage_flags. GODOT_PROPERTY_USAGE_DEFAULT,
  *                 default_value=defaultval, rset_mode=godot_method_rpc_mode.GODOT_METHOD_RPC_MODE_REMOTESYNC))
- *             super().__init__(fget, set, fdel,doc)             # <<<<<<<<<<<<<<
+ *             super().__init__(fget, fset, fdel,doc)             # <<<<<<<<<<<<<<
  *     return gdprop
  * 
  */
@@ -2148,7 +2202,7 @@ static PyObject *__pyx_pf_16pluginscript_api_5utils_11annotations_10gdproperty_6
   }
   #if CYTHON_FAST_PYCALL
   if (PyFunction_Check(__pyx_t_6)) {
-    PyObject *__pyx_temp[5] = {__pyx_t_2, __pyx_v_fget, ((PyObject *)(&PySet_Type)), __pyx_v_fdel, __pyx_v_doc};
+    PyObject *__pyx_temp[5] = {__pyx_t_2, __pyx_v_fget, __pyx_v_fset, __pyx_v_fdel, __pyx_v_doc};
     __pyx_t_7 = __Pyx_PyFunction_FastCall(__pyx_t_6, __pyx_temp+1-__pyx_t_10, 4+__pyx_t_10); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 30, __pyx_L1_error)
     __Pyx_XDECREF(__pyx_t_2); __pyx_t_2 = 0;
     __Pyx_GOTREF(__pyx_t_7);
@@ -2156,7 +2210,7 @@ static PyObject *__pyx_pf_16pluginscript_api_5utils_11annotations_10gdproperty_6
   #endif
   #if CYTHON_FAST_PYCCALL
   if (__Pyx_PyFastCFunction_Check(__pyx_t_6)) {
-    PyObject *__pyx_temp[5] = {__pyx_t_2, __pyx_v_fget, ((PyObject *)(&PySet_Type)), __pyx_v_fdel, __pyx_v_doc};
+    PyObject *__pyx_temp[5] = {__pyx_t_2, __pyx_v_fget, __pyx_v_fset, __pyx_v_fdel, __pyx_v_doc};
     __pyx_t_7 = __Pyx_PyCFunction_FastCall(__pyx_t_6, __pyx_temp+1-__pyx_t_10, 4+__pyx_t_10); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 30, __pyx_L1_error)
     __Pyx_XDECREF(__pyx_t_2); __pyx_t_2 = 0;
     __Pyx_GOTREF(__pyx_t_7);
@@ -2171,9 +2225,9 @@ static PyObject *__pyx_pf_16pluginscript_api_5utils_11annotations_10gdproperty_6
     __Pyx_INCREF(__pyx_v_fget);
     __Pyx_GIVEREF(__pyx_v_fget);
     PyTuple_SET_ITEM(__pyx_t_5, 0+__pyx_t_10, __pyx_v_fget);
-    __Pyx_INCREF(((PyObject *)(&PySet_Type)));
-    __Pyx_GIVEREF(((PyObject *)(&PySet_Type)));
-    PyTuple_SET_ITEM(__pyx_t_5, 1+__pyx_t_10, ((PyObject *)(&PySet_Type)));
+    __Pyx_INCREF(__pyx_v_fset);
+    __Pyx_GIVEREF(__pyx_v_fset);
+    PyTuple_SET_ITEM(__pyx_t_5, 1+__pyx_t_10, __pyx_v_fset);
     __Pyx_INCREF(__pyx_v_fdel);
     __Pyx_GIVEREF(__pyx_v_fdel);
     PyTuple_SET_ITEM(__pyx_t_5, 2+__pyx_t_10, __pyx_v_fdel);
@@ -2299,7 +2353,7 @@ static PyObject *__pyx_pf_16pluginscript_api_5utils_11annotations_4gdproperty(CY
 
   /* "pluginscript_api/utils/annotations.pyx":31
  *                 default_value=defaultval, rset_mode=godot_method_rpc_mode.GODOT_METHOD_RPC_MODE_REMOTESYNC))
- *             super().__init__(fget, set, fdel,doc)
+ *             super().__init__(fget, fset, fdel,doc)
  *     return gdprop             # <<<<<<<<<<<<<<
  * 
  * 
@@ -2399,7 +2453,109 @@ static PyObject *__pyx_pf_16pluginscript_api_5utils_11annotations_6gdmethod(CYTH
   return __pyx_r;
 }
 
-/* "core/variant/Variant.pxd":6
+/* "core/dictionary/Dictionary.pxd":7
+ *     cdef godot_dictionary _native
+ * 
+ *     cdef inline void set_native(self, godot_dictionary _native):             # <<<<<<<<<<<<<<
+ *         self._native = _native
+ * 
+ */
+
+static CYTHON_INLINE void __pyx_f_4core_10dictionary_10Dictionary_10Dictionary_set_native(struct __pyx_obj_4core_10dictionary_10Dictionary_Dictionary *__pyx_v_self, godot_dictionary __pyx_v__native) {
+  __Pyx_RefNannyDeclarations
+  __Pyx_RefNannySetupContext("set_native", 0);
+
+  /* "core/dictionary/Dictionary.pxd":8
+ * 
+ *     cdef inline void set_native(self, godot_dictionary _native):
+ *         self._native = _native             # <<<<<<<<<<<<<<
+ * 
+ *     @staticmethod
+ */
+  __pyx_v_self->_native = __pyx_v__native;
+
+  /* "core/dictionary/Dictionary.pxd":7
+ *     cdef godot_dictionary _native
+ * 
+ *     cdef inline void set_native(self, godot_dictionary _native):             # <<<<<<<<<<<<<<
+ *         self._native = _native
+ * 
+ */
+
+  /* function exit code */
+  __Pyx_RefNannyFinishContext();
+}
+
+/* "core/dictionary/Dictionary.pxd":11
+ * 
+ *     @staticmethod
+ *     cdef inline Dictionary new_static(godot_dictionary _native):             # <<<<<<<<<<<<<<
+ *         cdef Dictionary o = Dictionary.__new__(Dictionary)
+ *         o.set_native(_native)
+ */
+
+static CYTHON_INLINE struct __pyx_obj_4core_10dictionary_10Dictionary_Dictionary *__pyx_f_4core_10dictionary_10Dictionary_10Dictionary_new_static(godot_dictionary __pyx_v__native) {
+  struct __pyx_obj_4core_10dictionary_10Dictionary_Dictionary *__pyx_v_o = 0;
+  struct __pyx_obj_4core_10dictionary_10Dictionary_Dictionary *__pyx_r = NULL;
+  __Pyx_RefNannyDeclarations
+  PyObject *__pyx_t_1 = NULL;
+  int __pyx_lineno = 0;
+  const char *__pyx_filename = NULL;
+  int __pyx_clineno = 0;
+  __Pyx_RefNannySetupContext("new_static", 0);
+
+  /* "core/dictionary/Dictionary.pxd":12
+ *     @staticmethod
+ *     cdef inline Dictionary new_static(godot_dictionary _native):
+ *         cdef Dictionary o = Dictionary.__new__(Dictionary)             # <<<<<<<<<<<<<<
+ *         o.set_native(_native)
+ *         return o
+ */
+  __pyx_t_1 = __Pyx_tp_new(((PyObject *)__pyx_ptype_4core_10dictionary_10Dictionary_Dictionary), __pyx_empty_tuple); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 12, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  if (!(likely(__Pyx_TypeTest(__pyx_t_1, __pyx_ptype_4core_10dictionary_10Dictionary_Dictionary)))) __PYX_ERR(1, 12, __pyx_L1_error)
+  __pyx_v_o = ((struct __pyx_obj_4core_10dictionary_10Dictionary_Dictionary *)__pyx_t_1);
+  __pyx_t_1 = 0;
+
+  /* "core/dictionary/Dictionary.pxd":13
+ *     cdef inline Dictionary new_static(godot_dictionary _native):
+ *         cdef Dictionary o = Dictionary.__new__(Dictionary)
+ *         o.set_native(_native)             # <<<<<<<<<<<<<<
+ *         return o
+ */
+  __pyx_f_4core_10dictionary_10Dictionary_10Dictionary_set_native(__pyx_v_o, __pyx_v__native);
+
+  /* "core/dictionary/Dictionary.pxd":14
+ *         cdef Dictionary o = Dictionary.__new__(Dictionary)
+ *         o.set_native(_native)
+ *         return o             # <<<<<<<<<<<<<<
+ */
+  __Pyx_XDECREF(((PyObject *)__pyx_r));
+  __Pyx_INCREF(((PyObject *)__pyx_v_o));
+  __pyx_r = __pyx_v_o;
+  goto __pyx_L0;
+
+  /* "core/dictionary/Dictionary.pxd":11
+ * 
+ *     @staticmethod
+ *     cdef inline Dictionary new_static(godot_dictionary _native):             # <<<<<<<<<<<<<<
+ *         cdef Dictionary o = Dictionary.__new__(Dictionary)
+ *         o.set_native(_native)
+ */
+
+  /* function exit code */
+  __pyx_L1_error:;
+  __Pyx_XDECREF(__pyx_t_1);
+  __Pyx_AddTraceback("core.dictionary.Dictionary.Dictionary.new_static", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __pyx_r = 0;
+  __pyx_L0:;
+  __Pyx_XDECREF((PyObject *)__pyx_v_o);
+  __Pyx_XGIVEREF((PyObject *)__pyx_r);
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+/* "core/variant/Variant.pxd":7
  *     cdef godot_variant _native
  * 
  *     cdef inline void set_native(self, godot_variant _native):             # <<<<<<<<<<<<<<
@@ -2411,7 +2567,7 @@ static CYTHON_INLINE void __pyx_f_4core_7variant_7Variant_7Variant_set_native(st
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("set_native", 0);
 
-  /* "core/variant/Variant.pxd":7
+  /* "core/variant/Variant.pxd":8
  * 
  *     cdef inline void set_native(self, godot_variant _native):
  *         self._native = _native             # <<<<<<<<<<<<<<
@@ -2420,7 +2576,7 @@ static CYTHON_INLINE void __pyx_f_4core_7variant_7Variant_7Variant_set_native(st
  */
   __pyx_v_self->_native = __pyx_v__native;
 
-  /* "core/variant/Variant.pxd":6
+  /* "core/variant/Variant.pxd":7
  *     cdef godot_variant _native
  * 
  *     cdef inline void set_native(self, godot_variant _native):             # <<<<<<<<<<<<<<
@@ -2432,16 +2588,17 @@ static CYTHON_INLINE void __pyx_f_4core_7variant_7Variant_7Variant_set_native(st
   __Pyx_RefNannyFinishContext();
 }
 
-/* "core/variant/Variant.pxd":10
+/* "core/variant/Variant.pxd":11
  * 
  *     @staticmethod
- *     cdef inline void new_static(godot_variant _native):             # <<<<<<<<<<<<<<
+ *     cdef inline Variant new_static(godot_variant _native):             # <<<<<<<<<<<<<<
  *         cdef Variant v = Variant.__new__(Variant)
  *         v.set_native(_native)
  */
 
-static CYTHON_INLINE void __pyx_f_4core_7variant_7Variant_7Variant_new_static(godot_variant __pyx_v__native) {
+static CYTHON_INLINE struct __pyx_obj_4core_7variant_7Variant_Variant *__pyx_f_4core_7variant_7Variant_7Variant_new_static(godot_variant __pyx_v__native) {
   struct __pyx_obj_4core_7variant_7Variant_Variant *__pyx_v_v = 0;
+  struct __pyx_obj_4core_7variant_7Variant_Variant *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   PyObject *__pyx_t_1 = NULL;
   int __pyx_lineno = 0;
@@ -2449,99 +2606,58 @@ static CYTHON_INLINE void __pyx_f_4core_7variant_7Variant_7Variant_new_static(go
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("new_static", 0);
 
-  /* "core/variant/Variant.pxd":11
+  /* "core/variant/Variant.pxd":12
  *     @staticmethod
- *     cdef inline void new_static(godot_variant _native):
+ *     cdef inline Variant new_static(godot_variant _native):
  *         cdef Variant v = Variant.__new__(Variant)             # <<<<<<<<<<<<<<
  *         v.set_native(_native)
- * 
+ *         return v
  */
-  __pyx_t_1 = __Pyx_tp_new(((PyObject *)__pyx_ptype_4core_7variant_7Variant_Variant), __pyx_empty_tuple); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 11, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_tp_new(((PyObject *)__pyx_ptype_4core_7variant_7Variant_Variant), __pyx_empty_tuple); if (unlikely(!__pyx_t_1)) __PYX_ERR(2, 12, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  if (!(likely(__Pyx_TypeTest(__pyx_t_1, __pyx_ptype_4core_7variant_7Variant_Variant)))) __PYX_ERR(1, 11, __pyx_L1_error)
+  if (!(likely(__Pyx_TypeTest(__pyx_t_1, __pyx_ptype_4core_7variant_7Variant_Variant)))) __PYX_ERR(2, 12, __pyx_L1_error)
   __pyx_v_v = ((struct __pyx_obj_4core_7variant_7Variant_Variant *)__pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "core/variant/Variant.pxd":12
- *     cdef inline void new_static(godot_variant _native):
+  /* "core/variant/Variant.pxd":13
+ *     cdef inline Variant new_static(godot_variant _native):
  *         cdef Variant v = Variant.__new__(Variant)
  *         v.set_native(_native)             # <<<<<<<<<<<<<<
+ *         return v
  * 
- *     cdef inline void new_variant(self, i):
  */
   __pyx_f_4core_7variant_7Variant_7Variant_set_native(__pyx_v_v, __pyx_v__native);
 
-  /* "core/variant/Variant.pxd":10
+  /* "core/variant/Variant.pxd":14
+ *         cdef Variant v = Variant.__new__(Variant)
+ *         v.set_native(_native)
+ *         return v             # <<<<<<<<<<<<<<
  * 
  *     @staticmethod
- *     cdef inline void new_static(godot_variant _native):             # <<<<<<<<<<<<<<
+ */
+  __Pyx_XDECREF(((PyObject *)__pyx_r));
+  __Pyx_INCREF(((PyObject *)__pyx_v_v));
+  __pyx_r = __pyx_v_v;
+  goto __pyx_L0;
+
+  /* "core/variant/Variant.pxd":11
+ * 
+ *     @staticmethod
+ *     cdef inline Variant new_static(godot_variant _native):             # <<<<<<<<<<<<<<
  *         cdef Variant v = Variant.__new__(Variant)
  *         v.set_native(_native)
  */
 
   /* function exit code */
-  goto __pyx_L0;
   __pyx_L1_error:;
   __Pyx_XDECREF(__pyx_t_1);
-  __Pyx_WriteUnraisable("core.variant.Variant.Variant.new_static", __pyx_clineno, __pyx_lineno, __pyx_filename, 1, 0);
+  __Pyx_AddTraceback("core.variant.Variant.Variant.new_static", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __pyx_r = 0;
   __pyx_L0:;
   __Pyx_XDECREF((PyObject *)__pyx_v_v);
+  __Pyx_XGIVEREF((PyObject *)__pyx_r);
   __Pyx_RefNannyFinishContext();
-}
-
-/* "core/variant/Variant.pxd":14
- *         v.set_native(_native)
- * 
- *     cdef inline void new_variant(self, i):             # <<<<<<<<<<<<<<
- *         print("new_variant", type(i))
- * 
- */
-
-static CYTHON_INLINE void __pyx_f_4core_7variant_7Variant_7Variant_new_variant(CYTHON_UNUSED struct __pyx_obj_4core_7variant_7Variant_Variant *__pyx_v_self, PyObject *__pyx_v_i) {
-  __Pyx_RefNannyDeclarations
-  PyObject *__pyx_t_1 = NULL;
-  PyObject *__pyx_t_2 = NULL;
-  int __pyx_lineno = 0;
-  const char *__pyx_filename = NULL;
-  int __pyx_clineno = 0;
-  __Pyx_RefNannySetupContext("new_variant", 0);
-
-  /* "core/variant/Variant.pxd":15
- * 
- *     cdef inline void new_variant(self, i):
- *         print("new_variant", type(i))             # <<<<<<<<<<<<<<
- * 
- * ctypedef enum Variant_Type:
- */
-  __pyx_t_1 = PyTuple_New(2); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 15, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_1);
-  __Pyx_INCREF(__pyx_n_u_new_variant);
-  __Pyx_GIVEREF(__pyx_n_u_new_variant);
-  PyTuple_SET_ITEM(__pyx_t_1, 0, __pyx_n_u_new_variant);
-  __Pyx_INCREF(((PyObject *)Py_TYPE(__pyx_v_i)));
-  __Pyx_GIVEREF(((PyObject *)Py_TYPE(__pyx_v_i)));
-  PyTuple_SET_ITEM(__pyx_t_1, 1, ((PyObject *)Py_TYPE(__pyx_v_i)));
-  __pyx_t_2 = __Pyx_PyObject_Call(__pyx_builtin_print, __pyx_t_1, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 15, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_2);
-  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-
-  /* "core/variant/Variant.pxd":14
- *         v.set_native(_native)
- * 
- *     cdef inline void new_variant(self, i):             # <<<<<<<<<<<<<<
- *         print("new_variant", type(i))
- * 
- */
-
-  /* function exit code */
-  goto __pyx_L0;
-  __pyx_L1_error:;
-  __Pyx_XDECREF(__pyx_t_1);
-  __Pyx_XDECREF(__pyx_t_2);
-  __Pyx_WriteUnraisable("core.variant.Variant.Variant.new_variant", __pyx_clineno, __pyx_lineno, __pyx_filename, 1, 0);
-  __pyx_L0:;
-  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
 }
 
 static struct __pyx_obj_16pluginscript_api_5utils_11annotations___pyx_scope_struct__gdproperty *__pyx_freelist_16pluginscript_api_5utils_11annotations___pyx_scope_struct__gdproperty[8];
@@ -2750,13 +2866,11 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_n_s_module, __pyx_k_module, sizeof(__pyx_k_module), 0, 0, 1, 1},
   {&__pyx_n_s_name, __pyx_k_name, sizeof(__pyx_k_name), 0, 0, 1, 1},
   {&__pyx_n_s_name_2, __pyx_k_name_2, sizeof(__pyx_k_name_2), 0, 0, 1, 1},
-  {&__pyx_n_u_new_variant, __pyx_k_new_variant, sizeof(__pyx_k_new_variant), 0, 1, 0, 1},
   {&__pyx_n_s_pluginscript_api_description_cla, __pyx_k_pluginscript_api_description_cla, sizeof(__pyx_k_pluginscript_api_description_cla), 0, 0, 1, 1},
   {&__pyx_n_s_pluginscript_api_description_cla_2, __pyx_k_pluginscript_api_description_cla_2, sizeof(__pyx_k_pluginscript_api_description_cla_2), 0, 0, 1, 1},
   {&__pyx_n_s_pluginscript_api_utils_annotatio, __pyx_k_pluginscript_api_utils_annotatio, sizeof(__pyx_k_pluginscript_api_utils_annotatio), 0, 0, 1, 1},
   {&__pyx_kp_s_pluginscript_api_utils_annotatio_2, __pyx_k_pluginscript_api_utils_annotatio_2, sizeof(__pyx_k_pluginscript_api_utils_annotatio_2), 0, 0, 1, 0},
   {&__pyx_n_s_prepare, __pyx_k_prepare, sizeof(__pyx_k_prepare), 0, 0, 1, 1},
-  {&__pyx_n_s_print, __pyx_k_print, sizeof(__pyx_k_print), 0, 0, 1, 1},
   {&__pyx_n_s_properties, __pyx_k_properties, sizeof(__pyx_k_properties), 0, 0, 1, 1},
   {&__pyx_n_s_property, __pyx_k_property, sizeof(__pyx_k_property), 0, 0, 1, 1},
   {&__pyx_n_s_pyx_vtable, __pyx_k_pyx_vtable, sizeof(__pyx_k_pyx_vtable), 0, 0, 1, 1},
@@ -2775,7 +2889,6 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
 static CYTHON_SMALL_CODE int __Pyx_InitCachedBuiltins(void) {
   __pyx_builtin_property = __Pyx_GetBuiltinName(__pyx_n_s_property); if (!__pyx_builtin_property) __PYX_ERR(0, 22, __pyx_L1_error)
   __pyx_builtin_super = __Pyx_GetBuiltinName(__pyx_n_s_super); if (!__pyx_builtin_super) __PYX_ERR(0, 30, __pyx_L1_error)
-  __pyx_builtin_print = __Pyx_GetBuiltinName(__pyx_n_s_print); if (!__pyx_builtin_print) __PYX_ERR(1, 15, __pyx_L1_error)
   return 0;
   __pyx_L1_error:;
   return -1;
@@ -2930,7 +3043,7 @@ static int __Pyx_modinit_type_import_code(void) {
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__Pyx_modinit_type_import_code", 0);
   /*--- Type import code ---*/
-  __pyx_t_1 = PyImport_ImportModule(__Pyx_BUILTIN_MODULE_NAME); if (unlikely(!__pyx_t_1)) __PYX_ERR(2, 9, __pyx_L1_error)
+  __pyx_t_1 = PyImport_ImportModule(__Pyx_BUILTIN_MODULE_NAME); if (unlikely(!__pyx_t_1)) __PYX_ERR(3, 9, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_ptype_7cpython_4type_type = __Pyx_ImportType(__pyx_t_1, __Pyx_BUILTIN_MODULE_NAME, "type", 
   #if defined(PYPY_VERSION_NUM) && PYPY_VERSION_NUM < 0x050B0000
@@ -2939,13 +3052,19 @@ static int __Pyx_modinit_type_import_code(void) {
   sizeof(PyHeapTypeObject),
   #endif
   __Pyx_ImportType_CheckSize_Warn);
-   if (!__pyx_ptype_7cpython_4type_type) __PYX_ERR(2, 9, __pyx_L1_error)
+   if (!__pyx_ptype_7cpython_4type_type) __PYX_ERR(3, 9, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_1 = PyImport_ImportModule("core.variant.Variant"); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 3, __pyx_L1_error)
+  __pyx_t_1 = PyImport_ImportModule("core.dictionary.Dictionary"); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 4, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __pyx_ptype_4core_10dictionary_10Dictionary_Dictionary = __Pyx_ImportType(__pyx_t_1, "core.dictionary.Dictionary", "Dictionary", sizeof(struct __pyx_obj_4core_10dictionary_10Dictionary_Dictionary), __Pyx_ImportType_CheckSize_Warn);
+   if (!__pyx_ptype_4core_10dictionary_10Dictionary_Dictionary) __PYX_ERR(1, 4, __pyx_L1_error)
+  __pyx_vtabptr_4core_10dictionary_10Dictionary_Dictionary = (struct __pyx_vtabstruct_4core_10dictionary_10Dictionary_Dictionary*)__Pyx_GetVtable(__pyx_ptype_4core_10dictionary_10Dictionary_Dictionary->tp_dict); if (unlikely(!__pyx_vtabptr_4core_10dictionary_10Dictionary_Dictionary)) __PYX_ERR(1, 4, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+  __pyx_t_1 = PyImport_ImportModule("core.variant.Variant"); if (unlikely(!__pyx_t_1)) __PYX_ERR(2, 4, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_ptype_4core_7variant_7Variant_Variant = __Pyx_ImportType(__pyx_t_1, "core.variant.Variant", "Variant", sizeof(struct __pyx_obj_4core_7variant_7Variant_Variant), __Pyx_ImportType_CheckSize_Warn);
-   if (!__pyx_ptype_4core_7variant_7Variant_Variant) __PYX_ERR(1, 3, __pyx_L1_error)
-  __pyx_vtabptr_4core_7variant_7Variant_Variant = (struct __pyx_vtabstruct_4core_7variant_7Variant_Variant*)__Pyx_GetVtable(__pyx_ptype_4core_7variant_7Variant_Variant->tp_dict); if (unlikely(!__pyx_vtabptr_4core_7variant_7Variant_Variant)) __PYX_ERR(1, 3, __pyx_L1_error)
+   if (!__pyx_ptype_4core_7variant_7Variant_Variant) __PYX_ERR(2, 4, __pyx_L1_error)
+  __pyx_vtabptr_4core_7variant_7Variant_Variant = (struct __pyx_vtabstruct_4core_7variant_7Variant_Variant*)__Pyx_GetVtable(__pyx_ptype_4core_7variant_7Variant_Variant->tp_dict); if (unlikely(!__pyx_vtabptr_4core_7variant_7Variant_Variant)) __PYX_ERR(2, 4, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __Pyx_RefNannyFinishContext();
   return 0;
@@ -3328,12 +3447,12 @@ if (!__Pyx_RefNanny) {
   if (PyDict_SetItem(__pyx_d, __pyx_n_s_test, __pyx_t_2) < 0) __PYX_ERR(0, 1, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "core/variant/Variant.pxd":14
+  /* "core/variant/Variant.pxd":11
+ * 
+ *     @staticmethod
+ *     cdef inline Variant new_static(godot_variant _native):             # <<<<<<<<<<<<<<
+ *         cdef Variant v = Variant.__new__(Variant)
  *         v.set_native(_native)
- * 
- *     cdef inline void new_variant(self, i):             # <<<<<<<<<<<<<<
- *         print("new_variant", type(i))
- * 
  */
 
   /*--- Wrapped vars code ---*/
@@ -4789,72 +4908,6 @@ static CYTHON_INLINE int __Pyx_TypeTest(PyObject *obj, PyTypeObject *type) {
     return 0;
 }
 
-/* PyErrFetchRestore */
-#if CYTHON_FAST_THREAD_STATE
-static CYTHON_INLINE void __Pyx_ErrRestoreInState(PyThreadState *tstate, PyObject *type, PyObject *value, PyObject *tb) {
-    PyObject *tmp_type, *tmp_value, *tmp_tb;
-    tmp_type = tstate->curexc_type;
-    tmp_value = tstate->curexc_value;
-    tmp_tb = tstate->curexc_traceback;
-    tstate->curexc_type = type;
-    tstate->curexc_value = value;
-    tstate->curexc_traceback = tb;
-    Py_XDECREF(tmp_type);
-    Py_XDECREF(tmp_value);
-    Py_XDECREF(tmp_tb);
-}
-static CYTHON_INLINE void __Pyx_ErrFetchInState(PyThreadState *tstate, PyObject **type, PyObject **value, PyObject **tb) {
-    *type = tstate->curexc_type;
-    *value = tstate->curexc_value;
-    *tb = tstate->curexc_traceback;
-    tstate->curexc_type = 0;
-    tstate->curexc_value = 0;
-    tstate->curexc_traceback = 0;
-}
-#endif
-
-/* WriteUnraisableException */
-static void __Pyx_WriteUnraisable(const char *name, CYTHON_UNUSED int clineno,
-                                  CYTHON_UNUSED int lineno, CYTHON_UNUSED const char *filename,
-                                  int full_traceback, CYTHON_UNUSED int nogil) {
-    PyObject *old_exc, *old_val, *old_tb;
-    PyObject *ctx;
-    __Pyx_PyThreadState_declare
-#ifdef WITH_THREAD
-    PyGILState_STATE state;
-    if (nogil)
-        state = PyGILState_Ensure();
-#ifdef _MSC_VER
-    else state = (PyGILState_STATE)-1;
-#endif
-#endif
-    __Pyx_PyThreadState_assign
-    __Pyx_ErrFetch(&old_exc, &old_val, &old_tb);
-    if (full_traceback) {
-        Py_XINCREF(old_exc);
-        Py_XINCREF(old_val);
-        Py_XINCREF(old_tb);
-        __Pyx_ErrRestore(old_exc, old_val, old_tb);
-        PyErr_PrintEx(1);
-    }
-    #if PY_MAJOR_VERSION < 3
-    ctx = PyString_FromString(name);
-    #else
-    ctx = PyUnicode_FromString(name);
-    #endif
-    __Pyx_ErrRestore(old_exc, old_val, old_tb);
-    if (!ctx) {
-        PyErr_WriteUnraisable(Py_None);
-    } else {
-        PyErr_WriteUnraisable(ctx);
-        Py_DECREF(ctx);
-    }
-#ifdef WITH_THREAD
-    if (nogil)
-        PyGILState_Release(state);
-#endif
-}
-
 /* PyObject_GenericGetAttrNoDict */
 #if CYTHON_USE_TYPE_SLOTS && CYTHON_USE_PYTYPE_LOOKUP && PY_VERSION_HEX < 0x03070000
 static PyObject *__Pyx_RaiseGenericGetAttributeError(PyTypeObject *tp, PyObject *attr_name) {
@@ -5054,6 +5107,30 @@ static PyObject* __Pyx_ImportFrom(PyObject* module, PyObject* name) {
     }
     return value;
 }
+
+/* PyErrFetchRestore */
+#if CYTHON_FAST_THREAD_STATE
+static CYTHON_INLINE void __Pyx_ErrRestoreInState(PyThreadState *tstate, PyObject *type, PyObject *value, PyObject *tb) {
+    PyObject *tmp_type, *tmp_value, *tmp_tb;
+    tmp_type = tstate->curexc_type;
+    tmp_value = tstate->curexc_value;
+    tmp_tb = tstate->curexc_traceback;
+    tstate->curexc_type = type;
+    tstate->curexc_value = value;
+    tstate->curexc_traceback = tb;
+    Py_XDECREF(tmp_type);
+    Py_XDECREF(tmp_value);
+    Py_XDECREF(tmp_tb);
+}
+static CYTHON_INLINE void __Pyx_ErrFetchInState(PyThreadState *tstate, PyObject **type, PyObject **value, PyObject **tb) {
+    *type = tstate->curexc_type;
+    *value = tstate->curexc_value;
+    *tb = tstate->curexc_traceback;
+    tstate->curexc_type = 0;
+    tstate->curexc_value = 0;
+    tstate->curexc_traceback = 0;
+}
+#endif
 
 /* CLineInTraceback */
 #ifndef CYTHON_CLINE_IN_TRACEBACK

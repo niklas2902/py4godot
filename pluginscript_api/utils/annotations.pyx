@@ -27,7 +27,7 @@ def gdproperty(type, defaultval, hint= None, hint_string = ""):
                 hint=godot_property_hint.GODOT_PROPERTY_HINT_RANGE if hint == None else hint,
                 hint_string=hint_string,usage=godot_property_usage_flags. GODOT_PROPERTY_USAGE_DEFAULT,
                 default_value=defaultval, rset_mode=godot_method_rpc_mode.GODOT_METHOD_RPC_MODE_REMOTESYNC))
-            super().__init__(fget, set, fdel,doc)
+            super().__init__(fget, fset, fdel,doc)
     return gdprop
 
 

@@ -21,6 +21,10 @@ cdef api set_api_core_variant(godot_gdnative_core_api_struct * core):
     global api_core
     api_core = core
 
+cdef dict_get_methods = {0:Variant.as_nil, 1:Variant.as_bool,2:Variant.as_int, 3:Variant.as_real,4:Variant.as_string, 5:Variant.as_vector2,
+ 6:Variant.as_rect2, 7:Variant.as_vector2,8:Variant.as_transform2d, 9:Variant.as_plane, 10:Variant.as_quat,11:Variant.as_aabb, 12:Variant.as_basis,
+  13:Variant.as_transform, 14:Variant.as_color, 15:Variant.as_node_path, 16:Variant.as_rid, 17:Variant.as_object, 18:Variant.as_dictionary}
+
 
 cdef class Variant:
 
@@ -33,6 +37,7 @@ cdef class Variant:
         if(type(variant) == type("")):
             variant = String(variant)
 
+        print("create new variant", type(variant))
         if(variant != None):
             if(type(variant) == int):
                 self.new_int(variant)
@@ -63,8 +68,6 @@ cdef class Variant:
         else:
             self.new_nil()
 
-    def get_type(self):
-        return api_core.godot_variant_get_type(&self._native)
 
     def new_nil(self):
         api_core.godot_variant_new_nil(&self._native);
@@ -158,58 +161,88 @@ cdef class Variant:
         elif (variant is godot_pool_color_array):
             api_core.godot_variant_new_pool_color_array(&self._native, variant)
         """
+    @staticmethod
+    cdef as_nil(self):
+        return None
 
-    def as_bool(self):
+    @staticmethod
+    cdef as_bool(self):
         return api_core.godot_variant_as_bool(&self._native)
-    def as_uint(self):
+    @staticmethod
+    cdef as_uint(self):
         return api_core.godot_variant_as_uint(&self._native)
-    def as_int(self):
+    @staticmethod
+    cdef int as_int(self):
+        print("as_int")
         return api_core.godot_variant_as_int(&self._native)
-    def as_real(self):
+    @staticmethod
+    cdef as_real(self):
         return api_core.godot_variant_as_real(&self._native)
-    def as_string(self):
+    @staticmethod
+    cdef as_string(self):
         return api_core.godot_variant_as_string(&self._native)
-    def as_vector2(self):
-        return Vector2(api_core.godot_variant_as_vector2(&self._native))
-    def as_rect2(self):
-        return Rect2(api_core.godot_variant_as_rect2(&self._native))
-    def as_vector3(self):
-        return Vector3(api_core.godot_variant_as_vector3(&self._native))
-    def as_transform2d(self):
-        return Transform2D(api_core.godot_variant_as_transform2d(&self._native))
-    def as_plane(self):
-        return Plane(api_core.godot_variant_as_plane(&self._native))
-    def as_quat(self):
-        return Quat(api_core.godot_variant_as_quat(&self._native))
-    def as_aabb(self):
-        return AABB(api_core.godot_variant_as_aabb(&self._native))
-    def as_basis(self):
-        return Basis(api_core.godot_variant_as_basis(&self._native))
-    def as_transform(self):
-        return Transform(api_core.godot_variant_as_transform(&self._native))
-    def as_color(self):
-        return Color(api_core.godot_variant_as_color(&self._native))
-    def as_node_path(self):
-        return NodePath(api_core.godot_variant_as_node_path(&self._native))
-    def as_rid(self):
+    @staticmethod
+    cdef as_vector2(self):
+        return Vector2.new_static(api_core.godot_variant_as_vector2(&self._native))
+    @staticmethod
+    cdef as_rect2(self):
+        return Rect2.new_static(api_core.godot_variant_as_rect2(&self._native))
+    @staticmethod
+    cdef as_vector3(self):
+        return Vector3.new_static(api_core.godot_variant_as_vector3(&self._native))
+    @staticmethod
+    cdef as_transform2d(self):
+        return Transform2D.new_static(api_core.godot_variant_as_transform2d(&self._native))
+    @staticmethod
+    cdef as_plane(self):
+        return Plane.new_static(api_core.godot_variant_as_plane(&self._native))
+    @staticmethod
+    cdef as_quat(self):
+        return Quat.new_static(api_core.godot_variant_as_quat(&self._native))
+    @staticmethod
+    cdef as_aabb(self):
+        return AABB.new_static(api_core.godot_variant_as_aabb(&self._native))
+    @staticmethod
+    cdef as_basis(self):
+        return Basis.new_static(api_core.godot_variant_as_basis(&self._native))
+    @staticmethod
+    cdef as_transform(self):
+        return Transform.new_static(api_core.godot_variant_as_transform(&self._native))
+    @staticmethod
+    cdef as_color(self):
+        return Color.new_static(api_core.godot_variant_as_color(&self._native))
+    @staticmethod
+    cdef as_node_path(self):
+        return NodePath.new_static(api_core.godot_variant_as_node_path(&self._native))
+    @staticmethod
+    cdef as_rid(self):
         return RID(api_core.godot_variant_as_rid(&self._native))
-    def as_object(self):
+    @staticmethod
+    cdef as_object(self):
         api_core.godot_variant_as_object(&self._native)
-    def as_dictionary(self):
-        return Dictionary(api_core.godot_variant_as_dictionary(&self._native))
-    def as_array(self):
-        return Array(api_core.godot_variant_as_array(&self._native))
-    def as_pool_byte_array(self):
+    @staticmethod
+    cdef Dictionary as_dictionary(self):
+        return Dictionary.new_static(api_core.godot_variant_as_dictionary(&self._native))
+    @staticmethod
+    cdef as_array(self):
+        return Array.new_static(api_core.godot_variant_as_array(&self._native))
+    @staticmethod
+    cdef as_pool_byte_array(self):
         return PoolByteArray(api_core.godot_variant_as_pool_byte_array(&self._native))
-    def as_pool_int_array(self):
+    @staticmethod
+    cdef as_pool_int_array(self):
         return PoolIntArray(api_core.godot_variant_as_pool_int_array(&self._native))
-    def as_pool_real_array(self):
+    @staticmethod
+    cdef as_pool_real_array(self):
         return PoolRealArray(api_core.godot_variant_as_pool_real_array(&self._native))
-    def as_pool_string_array(self):
+    @staticmethod
+    cdef as_pool_string_array(self):
         return PoolStringArray(api_core.godot_variant_as_pool_string_array(&self._native))
-    def as_pool_vector2_array(self):
+    @staticmethod
+    cdef as_pool_vector2_array(self):
         return PoolVector2Array(api_core.godot_variant_as_pool_vector2_array(&self._native))
-    def as_pool_vector3_array(self):
+    @staticmethod
+    cdef as_pool_vector3_array(self):
         return PoolVector3Array(api_core.godot_variant_as_pool_vector3_array(&self._native))
     def __eq__(self, Variant other):
         return api_core.godot_variant_operator_equal(&self._native, &other._native)
@@ -221,5 +254,12 @@ cdef class Variant:
         return api_core.godot_variant_booleanize(&self._native)
     def destroy(self):
         api_core.godot_variant_destroy(&self._native)
+
+    def get_converted_value(self):
+        print(self.get_type())
+        return dict_get_methods[self.get_type()](self)
+
+    def get_type(self):
+        return api_core.godot_variant_get_type(&self._native);
 
 
