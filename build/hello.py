@@ -8,6 +8,8 @@ print(PropertyHint.GODOT_PROPERTY_HINT_RANGE.value)
 class Ball(Wrapper):
 	def __init__(self):
 		super().__init__()
+		self.vel = 0
+		self.grounded = False
 	@gdmethod
 	def move(self):
 		print("method")
@@ -19,10 +21,21 @@ class Ball(Wrapper):
 	@gdproperty(int,5,hint = PropertyHint.GODOT_PROPERTY_HINT_RANGE.value, hint_string="1,100,5,slider")
 	def vel(self):
 		return 1
+		
 
 	@vel.setter
 	def vel(self, value):
 		print("set_value")
+		
+	
+	@gdproperty(bool,False)
+	def grounded(self):
+		return self.grounded
+		
+
+	@grounded.setter
+	def vel(self, value):
+		return self.grounded
 
 
 	

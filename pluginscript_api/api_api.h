@@ -19,7 +19,7 @@ static godot_pluginscript_script_manifest (*__pyx_api_f_16pluginscript_api_3api_
 #define init_pluginscript_desc __pyx_api_f_16pluginscript_api_3api_init_pluginscript_desc
 static void (*__pyx_api_f_16pluginscript_api_3api_finish_pluginscript_desc)(godot_pluginscript_script_data *) = 0;
 #define finish_pluginscript_desc __pyx_api_f_16pluginscript_api_3api_finish_pluginscript_desc
-static void (*__pyx_api_f_16pluginscript_api_3api_init_pluginscript_instance)(godot_pluginscript_script_data *, godot_object *) = 0;
+static godot_pluginscript_instance_data *(*__pyx_api_f_16pluginscript_api_3api_init_pluginscript_instance)(godot_pluginscript_script_data *, godot_object *) = 0;
 #define init_pluginscript_instance __pyx_api_f_16pluginscript_api_3api_init_pluginscript_instance
 static void (*__pyx_api_f_16pluginscript_api_3api_finish_pluginscript_instance)(godot_pluginscript_instance_data *) = 0;
 #define finish_pluginscript_instance __pyx_api_f_16pluginscript_api_3api_finish_pluginscript_instance
@@ -103,7 +103,7 @@ static int import_pluginscript_api__api(void) {
   if (__Pyx_ImportFunction(module, "add_global_constant_pluginscript", (void (**)(void))&__pyx_api_f_16pluginscript_api_3api_add_global_constant_pluginscript, "void (godot_pluginscript_language_data *, godot_string const *, godot_variant const *)") < 0) goto bad;
   if (__Pyx_ImportFunction(module, "init_pluginscript_desc", (void (**)(void))&__pyx_api_f_16pluginscript_api_3api_init_pluginscript_desc, "godot_pluginscript_script_manifest (godot_pluginscript_language_data *, godot_string const *, godot_string const *, godot_error *)") < 0) goto bad;
   if (__Pyx_ImportFunction(module, "finish_pluginscript_desc", (void (**)(void))&__pyx_api_f_16pluginscript_api_3api_finish_pluginscript_desc, "void (godot_pluginscript_script_data *)") < 0) goto bad;
-  if (__Pyx_ImportFunction(module, "init_pluginscript_instance", (void (**)(void))&__pyx_api_f_16pluginscript_api_3api_init_pluginscript_instance, "void (godot_pluginscript_script_data *, godot_object *)") < 0) goto bad;
+  if (__Pyx_ImportFunction(module, "init_pluginscript_instance", (void (**)(void))&__pyx_api_f_16pluginscript_api_3api_init_pluginscript_instance, "godot_pluginscript_instance_data *(godot_pluginscript_script_data *, godot_object *)") < 0) goto bad;
   if (__Pyx_ImportFunction(module, "finish_pluginscript_instance", (void (**)(void))&__pyx_api_f_16pluginscript_api_3api_finish_pluginscript_instance, "void (godot_pluginscript_instance_data *)") < 0) goto bad;
   if (__Pyx_ImportFunction(module, "set_prop_pluginscript_instance", (void (**)(void))&__pyx_api_f_16pluginscript_api_3api_set_prop_pluginscript_instance, "bool (godot_pluginscript_instance_data *, godot_string const *, godot_variant const *)") < 0) goto bad;
   if (__Pyx_ImportFunction(module, "get_prop_pluginscript_instance", (void (**)(void))&__pyx_api_f_16pluginscript_api_3api_get_prop_pluginscript_instance, "bool (godot_pluginscript_instance_data *, godot_string const *, godot_variant *)") < 0) goto bad;

@@ -79,20 +79,21 @@ cdef api  void finish_pluginscript_desc (godot_pluginscript_script_data *p_data)
 
 
 ###############################################pluginscript_instance#######################################################
-cdef api void init_pluginscript_instance(godot_pluginscript_script_data *p_data, godot_object *p_owner):
+cdef api godot_pluginscript_instance_data * init_pluginscript_instance(godot_pluginscript_script_data *p_data, godot_object *p_owner):
     print("\n####################################################################instance_init########################\n");
     cdef Wrapper instance = (<Wrapper ?>p_data)()
-    print("instance_created")
-    print(instance)
     cdef Wrapper wrapper_obj = instance
     wrapper_obj.set_godot_owner(p_owner)
-    print("Incref")
     Py_INCREF(instance)
-    print("return")
+    return <PyObject*>instance
 
 
 cdef api void finish_pluginscript_instance(godot_pluginscript_instance_data *p_data):
-    print("instance_finish\n");
+    cdef Wrapper instance = (<Wrapper ?>p_data)()
+    cdef Wrapper wrapper_obj = instance
+    wrapper_obj.set_godot_owner(p_owner)
+    Py_DECREF(instance)
+    return <PyObject*>instance
 
 cdef api bool set_prop_pluginscript_instance(godot_pluginscript_instance_data *p_data, const godot_string *p_name, const godot_variant *p_value):
     print("\n#########################################################set_prop#######################################\n");
