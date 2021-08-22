@@ -5,6 +5,7 @@
 #include "../core/variant/Variant_api.h"
 #include "../core/array/Array_api.h"
 #include "../core/string/String_api.h"
+#include "../core/string_name/StringName_api.h"
 #include <string.h>
 
 
@@ -245,10 +246,18 @@ void set_up_pluginscript(){
         return ;
     }
 
+    import_core__string_name__StringName();
+    if (PyErr_Occurred())
+    {
+        PyErr_Print();
+        return ;
+    }
+
     set_api_core_dict(api_core);
     set_api_core_variant(api_core);
     set_api_core_array(api_core);
     set_api_core_string(api_core);
+    set_api_core_string_name(api_core);
     set_api_core_pluginscript(api_core);
 
 

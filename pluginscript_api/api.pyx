@@ -1,16 +1,16 @@
-from godot_api.binding_external cimport *
 from cython.operator cimport dereference
 from libc.stddef cimport wchar_t
 from pluginscript_api.description_classes.MethodDescription import *
 from pluginscript_api.description_classes.PropertyDescription import *
 #from core.dictionary.Dictionary cimport set_api_core_dict
-from core.array.Array import *
+from core.array.Array import Array
+from core.string_name.StringName cimport StringName
 from libc.stdio cimport printf
-from utils.GDClassWrapper cimport GDClassWrapper
 from utils.Wrapper cimport Wrapper
 from cpython cimport Py_INCREF, Py_DECREF, PyObject
 cimport core.variant.Variant as CVariant
 from cpython.mem cimport PyMem_Malloc, PyMem_Realloc, PyMem_Free
+from godot_api.binding_external cimport *
 
 from pluginscript_api.utils.annotations import methods, classes, properties, reset
 
@@ -108,9 +108,12 @@ cdef api bool get_prop_pluginscript_instance(godot_pluginscript_instance_data *p
 
 cdef api void call_method_pluginscript_instance(godot_pluginscript_instance_data *p_data,const godot_string_name *p_method, const godot_variant **p_args,int p_argcount, godot_variant_call_error *r_error):
     print("\n#################################################call_method#############################################");
+    printf("%p", p_method)
+    #str(StringName.new_static(dereference(p_method)))
 
 cdef api void notification_pluginscript_instance(godot_pluginscript_instance_data *p_data, int p_notification):
     print("\n#####################################################notification_instance###############################");
+    print(p_notification)
 
 
 
@@ -118,4 +121,11 @@ cdef unicode get_python_string_from_w_string(const godot_string* string):
     cdef const wchar_t* c_string = api_core.godot_string_wide_str(string)
     return <unicode>PyUnicode_FromWideChar(c_string,-1)
 
-
+cdef unicode get_python_string_from_w_string_name(const godot_string_name* string_name):
+    print("string_name")
+    print("get string from w_string")
+    print(dereference(string_name))
+    cdef godot_string string = api_core.godot_string_name_get_name(string_name)
+    print("name created")
+    cdef const wchar_t* c_string = api_core.godot_string_wide_str(&string)
+    return ""

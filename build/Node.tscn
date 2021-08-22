@@ -9,5 +9,3 @@ script = ExtResource( 1 )
 __meta__ = {
 "_editor_description_": "test"
 }
-vel = 50
-grounded = 6

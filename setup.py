@@ -11,7 +11,8 @@ module += cythonize("pluginscript_api/*/*.pyx", language_level=3)
 module += cythonize("enums/*.pyx", language_level=3)
 setup(
     ext_modules=module,
-    version="0.0.1"
+    version="0.0.1",
+    platforms = ["linux"]
 )
 
 "build:python setup.py build_ext --compiler=msvc"

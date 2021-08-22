@@ -14,13 +14,13 @@ cdef extern from "binding.h":
     ctypedef struct godot_string:
         uint8_t _dont_touch_that[1];
 
+    ctypedef struct godot_string_name:
+        uint8_t _dont_touch_that[1]
+
     void hello(const char *name)
     godot_variant simple_get_data(godot_object *p_instance, void *p_method_data, void *p_user_data, int p_num_args, godot_variant **p_args)
 
     ctypedef unsigned char      uint8_t
-
-    ctypedef struct godot_string_name:
-        uint8_t _dont_touch_that[1]
 
 
     ctypedef enum godot_error :
@@ -137,6 +137,8 @@ cdef extern from "binding.h":
         void (*godot_string_name_new_data)(godot_string_name *r_dest, const char *p_name);
         void (*godot_print)(const godot_string *p_message);
         const wchar_t *(*godot_string_wide_str)(const godot_string *p_self);
+        godot_string (*godot_string_name_get_name)(const godot_string_name *p_self);
+        uint32_t godot_string_name_get_hash(const godot_string_name *p_self);
 
 
     ctypedef enum godot_method_rpc_mode:
