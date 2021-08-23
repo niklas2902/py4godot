@@ -252,7 +252,7 @@ cdef class Variant:
         return api_core.godot_variant_hash_compare(&self._native, &other._native)
     def booleanize(self):
         return api_core.godot_variant_booleanize(&self._native)
-    def destroy(self):
+    def __del__(self):
         api_core.godot_variant_destroy(&self._native)
 
     def get_converted_value(self):

@@ -24,7 +24,7 @@ def gdproperty(type, defaultval, hint= None, hint_string = ""):
             if(not fget == None and fset == None and fdel == None and doc == None):
                 properties.append(PropertyDescription(name = fget.__name__,
                 type_=godot_variant_type.GODOT_VARIANT_TYPE_INT,
-                hint=godot_property_hint.GODOT_PROPERTY_HINT_RANGE if hint == None else hint,
+                hint= hint,
                 hint_string=hint_string,usage=godot_property_usage_flags. GODOT_PROPERTY_USAGE_DEFAULT,
                 default_value=defaultval, rset_mode=godot_method_rpc_mode.GODOT_METHOD_RPC_MODE_REMOTESYNC))
             super().__init__(fget, fset, fdel,doc)

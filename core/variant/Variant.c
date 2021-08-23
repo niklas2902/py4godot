@@ -2494,7 +2494,7 @@ static PyObject *__pyx_pf_4core_7variant_7Variant_7Variant_30__eq__(struct __pyx
 static PyObject *__pyx_pf_4core_7variant_7Variant_7Variant_32__lt__(struct __pyx_obj_4core_7variant_7Variant_Variant *__pyx_v_self, struct __pyx_obj_4core_7variant_7Variant_Variant *__pyx_v_other); /* proto */
 static PyObject *__pyx_pf_4core_7variant_7Variant_7Variant_34hash_compare(struct __pyx_obj_4core_7variant_7Variant_Variant *__pyx_v_self, struct __pyx_obj_4core_7variant_7Variant_Variant *__pyx_v_other); /* proto */
 static PyObject *__pyx_pf_4core_7variant_7Variant_7Variant_36booleanize(struct __pyx_obj_4core_7variant_7Variant_Variant *__pyx_v_self); /* proto */
-static PyObject *__pyx_pf_4core_7variant_7Variant_7Variant_38destroy(struct __pyx_obj_4core_7variant_7Variant_Variant *__pyx_v_self); /* proto */
+static PyObject *__pyx_pf_4core_7variant_7Variant_7Variant_38__del__(struct __pyx_obj_4core_7variant_7Variant_Variant *__pyx_v_self); /* proto */
 static PyObject *__pyx_pf_4core_7variant_7Variant_7Variant_40get_converted_value(struct __pyx_obj_4core_7variant_7Variant_Variant *__pyx_v_self); /* proto */
 static PyObject *__pyx_pf_4core_7variant_7Variant_7Variant_42get_type(struct __pyx_obj_4core_7variant_7Variant_Variant *__pyx_v_self); /* proto */
 static PyObject *__pyx_pf_4core_7variant_7Variant_7Variant_44__reduce_cython__(CYTHON_UNUSED struct __pyx_obj_4core_7variant_7Variant_Variant *__pyx_v_self); /* proto */
@@ -5763,7 +5763,7 @@ static PyObject *__pyx_pf_4core_7variant_7Variant_7Variant_34hash_compare(struct
  *         return api_core.godot_variant_hash_compare(&self._native, &other._native)
  *     def booleanize(self):             # <<<<<<<<<<<<<<
  *         return api_core.godot_variant_booleanize(&self._native)
- *     def destroy(self):
+ *     def __del__(self):
  */
 
 /* Python wrapper */
@@ -5792,7 +5792,7 @@ static PyObject *__pyx_pf_4core_7variant_7Variant_7Variant_36booleanize(struct _
  *         return api_core.godot_variant_hash_compare(&self._native, &other._native)
  *     def booleanize(self):
  *         return api_core.godot_variant_booleanize(&self._native)             # <<<<<<<<<<<<<<
- *     def destroy(self):
+ *     def __del__(self):
  *         api_core.godot_variant_destroy(&self._native)
  */
   __Pyx_XDECREF(__pyx_r);
@@ -5807,7 +5807,7 @@ static PyObject *__pyx_pf_4core_7variant_7Variant_7Variant_36booleanize(struct _
  *         return api_core.godot_variant_hash_compare(&self._native, &other._native)
  *     def booleanize(self):             # <<<<<<<<<<<<<<
  *         return api_core.godot_variant_booleanize(&self._native)
- *     def destroy(self):
+ *     def __del__(self):
  */
 
   /* function exit code */
@@ -5824,32 +5824,32 @@ static PyObject *__pyx_pf_4core_7variant_7Variant_7Variant_36booleanize(struct _
 /* "core/variant/Variant.pyx":255
  *     def booleanize(self):
  *         return api_core.godot_variant_booleanize(&self._native)
- *     def destroy(self):             # <<<<<<<<<<<<<<
+ *     def __del__(self):             # <<<<<<<<<<<<<<
  *         api_core.godot_variant_destroy(&self._native)
  * 
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_4core_7variant_7Variant_7Variant_39destroy(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused); /*proto*/
-static PyObject *__pyx_pw_4core_7variant_7Variant_7Variant_39destroy(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused) {
+static PyObject *__pyx_pw_4core_7variant_7Variant_7Variant_39__del__(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused); /*proto*/
+static PyObject *__pyx_pw_4core_7variant_7Variant_7Variant_39__del__(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused) {
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
-  __Pyx_RefNannySetupContext("destroy (wrapper)", 0);
-  __pyx_r = __pyx_pf_4core_7variant_7Variant_7Variant_38destroy(((struct __pyx_obj_4core_7variant_7Variant_Variant *)__pyx_v_self));
+  __Pyx_RefNannySetupContext("__del__ (wrapper)", 0);
+  __pyx_r = __pyx_pf_4core_7variant_7Variant_7Variant_38__del__(((struct __pyx_obj_4core_7variant_7Variant_Variant *)__pyx_v_self));
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_4core_7variant_7Variant_7Variant_38destroy(struct __pyx_obj_4core_7variant_7Variant_Variant *__pyx_v_self) {
+static PyObject *__pyx_pf_4core_7variant_7Variant_7Variant_38__del__(struct __pyx_obj_4core_7variant_7Variant_Variant *__pyx_v_self) {
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
-  __Pyx_RefNannySetupContext("destroy", 0);
+  __Pyx_RefNannySetupContext("__del__", 0);
 
   /* "core/variant/Variant.pyx":256
  *         return api_core.godot_variant_booleanize(&self._native)
- *     def destroy(self):
+ *     def __del__(self):
  *         api_core.godot_variant_destroy(&self._native)             # <<<<<<<<<<<<<<
  * 
  *     def get_converted_value(self):
@@ -5859,7 +5859,7 @@ static PyObject *__pyx_pf_4core_7variant_7Variant_7Variant_38destroy(struct __py
   /* "core/variant/Variant.pyx":255
  *     def booleanize(self):
  *         return api_core.godot_variant_booleanize(&self._native)
- *     def destroy(self):             # <<<<<<<<<<<<<<
+ *     def __del__(self):             # <<<<<<<<<<<<<<
  *         api_core.godot_variant_destroy(&self._native)
  * 
  */
@@ -8384,7 +8384,7 @@ static PyMethodDef __pyx_methods_4core_7variant_7Variant_Variant[] = {
   {"new", (PyCFunction)__pyx_pw_4core_7variant_7Variant_7Variant_29new, METH_O, __pyx_doc_4core_7variant_7Variant_7Variant_28new},
   {"hash_compare", (PyCFunction)__pyx_pw_4core_7variant_7Variant_7Variant_35hash_compare, METH_O, 0},
   {"booleanize", (PyCFunction)__pyx_pw_4core_7variant_7Variant_7Variant_37booleanize, METH_NOARGS, 0},
-  {"destroy", (PyCFunction)__pyx_pw_4core_7variant_7Variant_7Variant_39destroy, METH_NOARGS, 0},
+  {"__del__", (PyCFunction)__pyx_pw_4core_7variant_7Variant_7Variant_39__del__, METH_NOARGS, 0},
   {"get_converted_value", (PyCFunction)__pyx_pw_4core_7variant_7Variant_7Variant_41get_converted_value, METH_NOARGS, 0},
   {"get_type", (PyCFunction)__pyx_pw_4core_7variant_7Variant_7Variant_43get_type, METH_NOARGS, 0},
   {"__reduce_cython__", (PyCFunction)__pyx_pw_4core_7variant_7Variant_7Variant_45__reduce_cython__, METH_NOARGS, 0},

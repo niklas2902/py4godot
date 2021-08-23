@@ -10,6 +10,7 @@ from utils.Wrapper cimport Wrapper
 from cpython cimport Py_INCREF, Py_DECREF, PyObject
 cimport core.variant.Variant as CVariant
 from cpython.mem cimport PyMem_Malloc, PyMem_Realloc, PyMem_Free
+from godot_api.binding cimport *
 from godot_api.binding_external cimport *
 
 from pluginscript_api.utils.annotations import methods, classes, properties, reset
@@ -19,7 +20,6 @@ cdef godot_dictionary dictionary
 cdef api set_api_core_pluginscript(const godot_gdnative_core_api_struct* core):
     global api_core
     api_core = core
-    #set_api_core_dict(core)
     api_core.godot_dictionary_new(&dictionary)
     print("\n#############################set_api_core############################################################")
 cdef api godot_pluginscript_language_data * init_pluginscript():
@@ -40,10 +40,9 @@ cdef api  godot_pluginscript_script_manifest init_pluginscript_desc (godot_plugi
     manifest.is_tool = False;
     api_core.godot_string_name_new_data(&manifest.base, "");
     api_core.godot_dictionary_new(&manifest.member_lines);
-    api_core.godot_array_new(&manifest.methods);
     api_core.godot_array_new(&manifest.signals);
-    api_core.godot_array_new(&manifest.properties);
-
+    methods_array = Array()
+    manifest.methods = methods_array.get_native()
     api_core.godot_print(p_source)
     api_core.godot_print(p_path)
 
@@ -98,7 +97,6 @@ cdef api bool set_prop_pluginscript_instance(godot_pluginscript_instance_data *p
 
     #Todo:is there a speedier way?
     value = CVariant.Variant.new_static(dereference(p_value)).get_converted_value()
-    #exec(f"instance.{get_python_string_from_w_string(p_name)} = None")
     instance.set_property(get_python_string_from_w_string(p_name), value)
     return True;
 
@@ -108,24 +106,16 @@ cdef api bool get_prop_pluginscript_instance(godot_pluginscript_instance_data *p
 
 cdef api void call_method_pluginscript_instance(godot_pluginscript_instance_data *p_data,const godot_string_name *p_method, const godot_variant **p_args,int p_argcount, godot_variant_call_error *r_error):
     print("\n#################################################call_method#############################################");
-    printf("%p", p_method)
-    #str(StringName.new_static(dereference(p_method)))
+    printf("%p\n", p_method)
+    print("argcount:",p_argcount)
+    cdef char * name = "hallo"
+    string_name = StringName(name)
+    print(string_name)
 
 cdef api void notification_pluginscript_instance(godot_pluginscript_instance_data *p_data, int p_notification):
     print("\n#####################################################notification_instance###############################");
     print(p_notification)
 
-
-
 cdef unicode get_python_string_from_w_string(const godot_string* string):
     cdef const wchar_t* c_string = api_core.godot_string_wide_str(string)
     return <unicode>PyUnicode_FromWideChar(c_string,-1)
-
-cdef unicode get_python_string_from_w_string_name(const godot_string_name* string_name):
-    print("string_name")
-    print("get string from w_string")
-    print(dereference(string_name))
-    cdef godot_string string = api_core.godot_string_name_get_name(string_name)
-    print("name created")
-    cdef const wchar_t* c_string = api_core.godot_string_wide_str(&string)
-    return ""

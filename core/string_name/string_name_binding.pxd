@@ -4,17 +4,6 @@ from godot_api.binding cimport *
 cdef extern from "binding.h":
     const godot_gdnative_core_api_struct *api_core
 
-    ctypedef struct godot_string:
-        pass
-    ctypedef struct uint8_t:
-        pass
-    ctypedef struct int64_t:
-        pass
-    ctypedef struct godot_char_string:
-        pass
-    ctypedef struct godot_string_name:
-        pass
-
     struct godot_gdnative_core_api_struct:
         void (*godot_string_name_new)(godot_string_name *r_dest, const godot_string *p_name);
         void (*godot_string_name_new_data)(godot_string_name *r_dest, const char *p_name);

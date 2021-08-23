@@ -54,8 +54,6 @@ cdef extern from "binding.h":
 
     ctypedef struct godot_array:
         uint8_t _dont_touch_that[array_size]
-    ctypedef struct godot_string:
-        uint8_t _dont_touch_that[array_size];
     ctypedef struct godot_vector2:
         uint8_t _dont_touch_that[8]
     ctypedef struct godot_rect2:
@@ -97,7 +95,11 @@ cdef extern from "binding.h":
     ctypedef struct godot_pool_vector3_array:
         uint8_t _dont_touch_that[array_size];
     ctypedef struct godot_string_name:
-        uint8_t _dont_touch_that[1]
+        uint8_t _dont_touch_that[array_size]
+    ctypedef struct godot_string:
+        uint8_t _dont_touch_that[array_size];
+    ctypedef struct godot_char_string:
+        pass
 
     ##############################pluginscript types#####################
     ctypedef void godot_pluginscript_script_data;

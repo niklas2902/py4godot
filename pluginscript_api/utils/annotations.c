@@ -1427,9 +1427,6 @@ static void __Pyx_AddTraceback(const char *funcname, int c_line,
 static CYTHON_INLINE PyObject* __Pyx_PyInt_From_godot_variant_type(godot_variant_type value);
 
 /* CIntToPy.proto */
-static CYTHON_INLINE PyObject* __Pyx_PyInt_From_godot_property_hint(godot_property_hint value);
-
-/* CIntToPy.proto */
 static CYTHON_INLINE PyObject* __Pyx_PyInt_From_godot_property_usage_flags(godot_property_usage_flags value);
 
 /* CIntToPy.proto */
@@ -2009,9 +2006,8 @@ static PyObject *__pyx_pf_16pluginscript_api_5utils_11annotations_10gdproperty_6
   PyObject *__pyx_t_5 = NULL;
   PyObject *__pyx_t_6 = NULL;
   PyObject *__pyx_t_7 = NULL;
-  PyObject *__pyx_t_8 = NULL;
+  int __pyx_t_8;
   int __pyx_t_9;
-  int __pyx_t_10;
   int __pyx_lineno = 0;
   const char *__pyx_filename = NULL;
   int __pyx_clineno = 0;
@@ -2063,7 +2059,7 @@ static PyObject *__pyx_pf_16pluginscript_api_5utils_11annotations_10gdproperty_6
  *             if(not fget == None and fset == None and fdel == None and doc == None):
  *                 properties.append(PropertyDescription(name = fget.__name__,             # <<<<<<<<<<<<<<
  *                 type_=godot_variant_type.GODOT_VARIANT_TYPE_INT,
- *                 hint=godot_property_hint.GODOT_PROPERTY_HINT_RANGE if hint == None else hint,
+ *                 hint= hint,
  */
     __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_properties); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 25, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
@@ -2080,7 +2076,7 @@ static PyObject *__pyx_pf_16pluginscript_api_5utils_11annotations_10gdproperty_6
  *             if(not fget == None and fset == None and fdel == None and doc == None):
  *                 properties.append(PropertyDescription(name = fget.__name__,
  *                 type_=godot_variant_type.GODOT_VARIANT_TYPE_INT,             # <<<<<<<<<<<<<<
- *                 hint=godot_property_hint.GODOT_PROPERTY_HINT_RANGE if hint == None else hint,
+ *                 hint= hint,
  *                 hint_string=hint_string,usage=godot_property_usage_flags. GODOT_PROPERTY_USAGE_DEFAULT,
  */
     __pyx_t_7 = __Pyx_PyInt_From_godot_variant_type(GODOT_VARIANT_TYPE_INT); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 26, __pyx_L1_error)
@@ -2091,30 +2087,16 @@ static PyObject *__pyx_pf_16pluginscript_api_5utils_11annotations_10gdproperty_6
     /* "pluginscript_api/utils/annotations.pyx":27
  *                 properties.append(PropertyDescription(name = fget.__name__,
  *                 type_=godot_variant_type.GODOT_VARIANT_TYPE_INT,
- *                 hint=godot_property_hint.GODOT_PROPERTY_HINT_RANGE if hint == None else hint,             # <<<<<<<<<<<<<<
+ *                 hint= hint,             # <<<<<<<<<<<<<<
  *                 hint_string=hint_string,usage=godot_property_usage_flags. GODOT_PROPERTY_USAGE_DEFAULT,
  *                 default_value=defaultval, rset_mode=godot_method_rpc_mode.GODOT_METHOD_RPC_MODE_REMOTESYNC))
  */
     if (unlikely(!__pyx_cur_scope->__pyx_v_hint)) { __Pyx_RaiseClosureNameError("hint"); __PYX_ERR(0, 27, __pyx_L1_error) }
-    __pyx_t_8 = PyObject_RichCompare(__pyx_cur_scope->__pyx_v_hint, Py_None, Py_EQ); __Pyx_XGOTREF(__pyx_t_8); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 27, __pyx_L1_error)
-    __pyx_t_1 = __Pyx_PyObject_IsTrue(__pyx_t_8); if (unlikely(__pyx_t_1 < 0)) __PYX_ERR(0, 27, __pyx_L1_error)
-    __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
-    if (__pyx_t_1) {
-      __pyx_t_8 = __Pyx_PyInt_From_godot_property_hint(GODOT_PROPERTY_HINT_RANGE); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 27, __pyx_L1_error)
-      __Pyx_GOTREF(__pyx_t_8);
-      __pyx_t_7 = __pyx_t_8;
-      __pyx_t_8 = 0;
-    } else {
-      if (unlikely(!__pyx_cur_scope->__pyx_v_hint)) { __Pyx_RaiseClosureNameError("hint"); __PYX_ERR(0, 27, __pyx_L1_error) }
-      __Pyx_INCREF(__pyx_cur_scope->__pyx_v_hint);
-      __pyx_t_7 = __pyx_cur_scope->__pyx_v_hint;
-    }
-    if (PyDict_SetItem(__pyx_t_6, __pyx_n_s_hint, __pyx_t_7) < 0) __PYX_ERR(0, 25, __pyx_L1_error)
-    __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
+    if (PyDict_SetItem(__pyx_t_6, __pyx_n_s_hint, __pyx_cur_scope->__pyx_v_hint) < 0) __PYX_ERR(0, 25, __pyx_L1_error)
 
     /* "pluginscript_api/utils/annotations.pyx":28
  *                 type_=godot_variant_type.GODOT_VARIANT_TYPE_INT,
- *                 hint=godot_property_hint.GODOT_PROPERTY_HINT_RANGE if hint == None else hint,
+ *                 hint= hint,
  *                 hint_string=hint_string,usage=godot_property_usage_flags. GODOT_PROPERTY_USAGE_DEFAULT,             # <<<<<<<<<<<<<<
  *                 default_value=defaultval, rset_mode=godot_method_rpc_mode.GODOT_METHOD_RPC_MODE_REMOTESYNC))
  *             super().__init__(fget, fset, fdel,doc)
@@ -2127,7 +2109,7 @@ static PyObject *__pyx_pf_16pluginscript_api_5utils_11annotations_10gdproperty_6
     __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
 
     /* "pluginscript_api/utils/annotations.pyx":29
- *                 hint=godot_property_hint.GODOT_PROPERTY_HINT_RANGE if hint == None else hint,
+ *                 hint= hint,
  *                 hint_string=hint_string,usage=godot_property_usage_flags. GODOT_PROPERTY_USAGE_DEFAULT,
  *                 default_value=defaultval, rset_mode=godot_method_rpc_mode.GODOT_METHOD_RPC_MODE_REMOTESYNC))             # <<<<<<<<<<<<<<
  *             super().__init__(fget, fset, fdel,doc)
@@ -2145,13 +2127,13 @@ static PyObject *__pyx_pf_16pluginscript_api_5utils_11annotations_10gdproperty_6
  *             if(not fget == None and fset == None and fdel == None and doc == None):
  *                 properties.append(PropertyDescription(name = fget.__name__,             # <<<<<<<<<<<<<<
  *                 type_=godot_variant_type.GODOT_VARIANT_TYPE_INT,
- *                 hint=godot_property_hint.GODOT_PROPERTY_HINT_RANGE if hint == None else hint,
+ *                 hint= hint,
  */
     __pyx_t_7 = __Pyx_PyObject_Call(__pyx_t_5, __pyx_empty_tuple, __pyx_t_6); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 25, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_7);
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
     __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-    __pyx_t_9 = __Pyx_PyObject_Append(__pyx_t_2, __pyx_t_7); if (unlikely(__pyx_t_9 == ((int)-1))) __PYX_ERR(0, 25, __pyx_L1_error)
+    __pyx_t_8 = __Pyx_PyObject_Append(__pyx_t_2, __pyx_t_7); if (unlikely(__pyx_t_8 == ((int)-1))) __PYX_ERR(0, 25, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
     __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
 
@@ -2189,7 +2171,7 @@ static PyObject *__pyx_pf_16pluginscript_api_5utils_11annotations_10gdproperty_6
   __Pyx_GOTREF(__pyx_t_6);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __pyx_t_2 = NULL;
-  __pyx_t_10 = 0;
+  __pyx_t_9 = 0;
   if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_6))) {
     __pyx_t_2 = PyMethod_GET_SELF(__pyx_t_6);
     if (likely(__pyx_t_2)) {
@@ -2197,13 +2179,13 @@ static PyObject *__pyx_pf_16pluginscript_api_5utils_11annotations_10gdproperty_6
       __Pyx_INCREF(__pyx_t_2);
       __Pyx_INCREF(function);
       __Pyx_DECREF_SET(__pyx_t_6, function);
-      __pyx_t_10 = 1;
+      __pyx_t_9 = 1;
     }
   }
   #if CYTHON_FAST_PYCALL
   if (PyFunction_Check(__pyx_t_6)) {
     PyObject *__pyx_temp[5] = {__pyx_t_2, __pyx_v_fget, __pyx_v_fset, __pyx_v_fdel, __pyx_v_doc};
-    __pyx_t_7 = __Pyx_PyFunction_FastCall(__pyx_t_6, __pyx_temp+1-__pyx_t_10, 4+__pyx_t_10); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 30, __pyx_L1_error)
+    __pyx_t_7 = __Pyx_PyFunction_FastCall(__pyx_t_6, __pyx_temp+1-__pyx_t_9, 4+__pyx_t_9); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 30, __pyx_L1_error)
     __Pyx_XDECREF(__pyx_t_2); __pyx_t_2 = 0;
     __Pyx_GOTREF(__pyx_t_7);
   } else
@@ -2211,29 +2193,29 @@ static PyObject *__pyx_pf_16pluginscript_api_5utils_11annotations_10gdproperty_6
   #if CYTHON_FAST_PYCCALL
   if (__Pyx_PyFastCFunction_Check(__pyx_t_6)) {
     PyObject *__pyx_temp[5] = {__pyx_t_2, __pyx_v_fget, __pyx_v_fset, __pyx_v_fdel, __pyx_v_doc};
-    __pyx_t_7 = __Pyx_PyCFunction_FastCall(__pyx_t_6, __pyx_temp+1-__pyx_t_10, 4+__pyx_t_10); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 30, __pyx_L1_error)
+    __pyx_t_7 = __Pyx_PyCFunction_FastCall(__pyx_t_6, __pyx_temp+1-__pyx_t_9, 4+__pyx_t_9); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 30, __pyx_L1_error)
     __Pyx_XDECREF(__pyx_t_2); __pyx_t_2 = 0;
     __Pyx_GOTREF(__pyx_t_7);
   } else
   #endif
   {
-    __pyx_t_5 = PyTuple_New(4+__pyx_t_10); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 30, __pyx_L1_error)
+    __pyx_t_5 = PyTuple_New(4+__pyx_t_9); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 30, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_5);
     if (__pyx_t_2) {
       __Pyx_GIVEREF(__pyx_t_2); PyTuple_SET_ITEM(__pyx_t_5, 0, __pyx_t_2); __pyx_t_2 = NULL;
     }
     __Pyx_INCREF(__pyx_v_fget);
     __Pyx_GIVEREF(__pyx_v_fget);
-    PyTuple_SET_ITEM(__pyx_t_5, 0+__pyx_t_10, __pyx_v_fget);
+    PyTuple_SET_ITEM(__pyx_t_5, 0+__pyx_t_9, __pyx_v_fget);
     __Pyx_INCREF(__pyx_v_fset);
     __Pyx_GIVEREF(__pyx_v_fset);
-    PyTuple_SET_ITEM(__pyx_t_5, 1+__pyx_t_10, __pyx_v_fset);
+    PyTuple_SET_ITEM(__pyx_t_5, 1+__pyx_t_9, __pyx_v_fset);
     __Pyx_INCREF(__pyx_v_fdel);
     __Pyx_GIVEREF(__pyx_v_fdel);
-    PyTuple_SET_ITEM(__pyx_t_5, 2+__pyx_t_10, __pyx_v_fdel);
+    PyTuple_SET_ITEM(__pyx_t_5, 2+__pyx_t_9, __pyx_v_fdel);
     __Pyx_INCREF(__pyx_v_doc);
     __Pyx_GIVEREF(__pyx_v_doc);
-    PyTuple_SET_ITEM(__pyx_t_5, 3+__pyx_t_10, __pyx_v_doc);
+    PyTuple_SET_ITEM(__pyx_t_5, 3+__pyx_t_9, __pyx_v_doc);
     __pyx_t_7 = __Pyx_PyObject_Call(__pyx_t_6, __pyx_t_5, NULL); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 30, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_7);
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
@@ -2257,7 +2239,6 @@ static PyObject *__pyx_pf_16pluginscript_api_5utils_11annotations_10gdproperty_6
   __Pyx_XDECREF(__pyx_t_5);
   __Pyx_XDECREF(__pyx_t_6);
   __Pyx_XDECREF(__pyx_t_7);
-  __Pyx_XDECREF(__pyx_t_8);
   __Pyx_AddTraceback("pluginscript_api.utils.annotations.gdproperty.gdprop.__init__", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   __pyx_L0:;
@@ -5366,37 +5347,6 @@ static CYTHON_INLINE PyObject* __Pyx_PyInt_From_godot_variant_type(godot_variant
         int one = 1; int little = (int)*(unsigned char *)&one;
         unsigned char *bytes = (unsigned char *)&value;
         return _PyLong_FromByteArray(bytes, sizeof(godot_variant_type),
-                                     little, !is_unsigned);
-    }
-}
-
-/* CIntToPy */
-static CYTHON_INLINE PyObject* __Pyx_PyInt_From_godot_property_hint(godot_property_hint value) {
-    const godot_property_hint neg_one = (godot_property_hint) ((godot_property_hint) 0 - (godot_property_hint) 1), const_zero = (godot_property_hint) 0;
-    const int is_unsigned = neg_one > const_zero;
-    if (is_unsigned) {
-        if (sizeof(godot_property_hint) < sizeof(long)) {
-            return PyInt_FromLong((long) value);
-        } else if (sizeof(godot_property_hint) <= sizeof(unsigned long)) {
-            return PyLong_FromUnsignedLong((unsigned long) value);
-#ifdef HAVE_LONG_LONG
-        } else if (sizeof(godot_property_hint) <= sizeof(unsigned PY_LONG_LONG)) {
-            return PyLong_FromUnsignedLongLong((unsigned PY_LONG_LONG) value);
-#endif
-        }
-    } else {
-        if (sizeof(godot_property_hint) <= sizeof(long)) {
-            return PyInt_FromLong((long) value);
-#ifdef HAVE_LONG_LONG
-        } else if (sizeof(godot_property_hint) <= sizeof(PY_LONG_LONG)) {
-            return PyLong_FromLongLong((PY_LONG_LONG) value);
-#endif
-        }
-    }
-    {
-        int one = 1; int little = (int)*(unsigned char *)&one;
-        unsigned char *bytes = (unsigned char *)&value;
-        return _PyLong_FromByteArray(bytes, sizeof(godot_property_hint),
                                      little, !is_unsigned);
     }
 }

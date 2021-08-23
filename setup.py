@@ -15,5 +15,5 @@ setup(
     platforms = ["linux"]
 )
 
-"build:python setup.py build_ext --compiler=msvc"
+"build:python setup.py build_ext --compiler=C:/Windows/System32/gcc.exe"
 "generate_api:generate_gdnative_api_struct.py -i godot_headers -o godot_api/generated.pxd"
