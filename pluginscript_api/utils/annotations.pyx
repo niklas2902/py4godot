@@ -32,4 +32,4 @@ def gdproperty(type, defaultval, hint= None, hint_string = ""):
 
 
 def gdmethod(func):
-    methods.append(func.__name__)
+    methods.append(MethodDescription(func.__name__, None, None, None, 1,1))

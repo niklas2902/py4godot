@@ -27,6 +27,9 @@ class Ball(Wrapper):
 		super().__init__()
 		self.velocity = 0
 
+	@gdmethod
+	def _init(self):
+		print("method")
 
 	@gdmethod
 	def move(self):

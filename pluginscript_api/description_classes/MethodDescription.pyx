@@ -1,5 +1,7 @@
 from core.dictionary.Dictionary import *
 from core.variant.Variant import *
+from core.array.Array cimport Array
+from core.string.String cimport String
 
 #Method info dictionary format
 #{
@@ -22,10 +24,12 @@ class MethodDescription:
 
     def to_dict(self):
         d = Dictionary()
-        d.set(Variant("name"), Variant(self.name))
-        d.set(Variant("args"), Variant(1))
-        d.set(Variant("default_args"), Variant([Dictionary()]))
-        d.set(Variant("return"),Variant(1))
-        d.set(Variant("flags"), Variant(1))
-        d.set(Variant("rpc_mode"), Variant(1))
+        a = Array()
+        a.append(Variant(Dictionary()))
+        d.set(Variant("name"), Variant(String(self.name)))
+        d.set(Variant("args"), Variant(a))
+        d.set(Variant("default_args"), Variant(Array()))
+        d.set(Variant("return"),Variant(Dictionary()))
+        d.set(Variant("flags"), Variant(0))
+        d.set(Variant("rpc_mode"),Variant(0))
         return d

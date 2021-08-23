@@ -42,7 +42,6 @@ cdef api  godot_pluginscript_script_manifest init_pluginscript_desc (godot_plugi
     api_core.godot_dictionary_new(&manifest.member_lines);
     api_core.godot_array_new(&manifest.signals);
     methods_array = Array()
-    manifest.methods = methods_array.get_native()
     api_core.godot_print(p_source)
     api_core.godot_print(p_path)
 
@@ -57,9 +56,10 @@ cdef api  godot_pluginscript_script_manifest init_pluginscript_desc (godot_plugi
     for p in properties:
         properties_array.append(Variant(p.to_dict()))
         print("dict:",p.to_dict())
-    #for m in methods:
-        #MethodDescription(m, None,None, 0, 0).to_dict()
+    for m in methods:
+        methods_array.append(Variant(m.to_dict()))
     manifest.properties = properties_array.get_native()
+    manifest.methods = methods_array.get_native()
 
 
     cdef PyObject* obj = class_obj
@@ -109,8 +109,7 @@ cdef api void call_method_pluginscript_instance(godot_pluginscript_instance_data
     printf("%p\n", p_method)
     print("argcount:",p_argcount)
     cdef char * name = "hallo"
-    string_name = StringName(name)
-    print(string_name)
+    print(StringName.new_static(dereference(p_method)))
 
 cdef api void notification_pluginscript_instance(godot_pluginscript_instance_data *p_data, int p_notification):
     print("\n#####################################################notification_instance###############################");
