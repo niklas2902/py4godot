@@ -33,8 +33,10 @@ cdef api  void add_global_constant_pluginscript(godot_pluginscript_language_data
 
 ###############################################pluginscript_desc#######################################################
 cdef api  godot_pluginscript_script_manifest init_pluginscript_desc (godot_pluginscript_language_data *p_data, const godot_string *p_path, const godot_string *p_source, godot_error *r_error):
-    print("\n############################################create_manifest##############################################\n");
+    cdef PyObject* class_obj
     cdef godot_pluginscript_script_manifest manifest;
+    cdef PyObject* obj
+    print("\n############################################create_manifest##############################################\n");
 
     api_core.godot_string_name_new_data(&manifest.name, "python_manifest");
     manifest.is_tool = False;
@@ -49,7 +51,6 @@ cdef api  godot_pluginscript_script_manifest init_pluginscript_desc (godot_plugi
     exec(get_python_string_from_w_string(p_source))
 
     gd_obj = classes[0]
-    cdef PyObject* class_obj
     class_obj = <PyObject*> gd_obj
 
     properties_array = Array()
@@ -62,7 +63,7 @@ cdef api  godot_pluginscript_script_manifest init_pluginscript_desc (godot_plugi
     manifest.methods = methods_array.get_native()
 
 
-    cdef PyObject* obj = class_obj
+    obj = class_obj
 
     manifest.data = obj;
 
@@ -76,22 +77,24 @@ cdef api  void finish_pluginscript_desc (godot_pluginscript_script_data *p_data)
 
 ###############################################pluginscript_instance#######################################################
 cdef api godot_pluginscript_instance_data * init_pluginscript_instance(godot_pluginscript_script_data *p_data, godot_object *p_owner):
+    cdef Wrapper instance
     print("\n####################################################################instance_init########################\n");
-    cdef Wrapper instance = (<Wrapper ?>p_data)()
+    instance = (<Wrapper ?>p_data)()
     instance.set_godot_owner(p_owner)
     Py_INCREF(instance)
     return <PyObject*>instance
 
 
 cdef api void finish_pluginscript_instance(godot_pluginscript_instance_data *p_data):
+    cdef Wrapper instance
     print("instance_finish\n");
-    cdef Wrapper instance = (<Wrapper ?>p_data)
+    instance = (<Wrapper ?>p_data)
     Py_DECREF(instance)
 
 cdef api bool set_prop_pluginscript_instance(godot_pluginscript_instance_data *p_data, const godot_string *p_name, const godot_variant *p_value):
+    cdef Wrapper instance = (<Wrapper ?>p_data)
     print("\n#########################################################set_prop#######################################\n");
     api_core.godot_print(p_name)
-    cdef Wrapper instance = (<Wrapper ?>p_data)
     print(CVariant.Variant.new_static(dereference(p_value)).get_type())
     print(CVariant.Variant.new_static(dereference(p_value)).get_converted_value())
 
@@ -101,15 +104,14 @@ cdef api bool set_prop_pluginscript_instance(godot_pluginscript_instance_data *p
     return True;
 
 cdef api bool get_prop_pluginscript_instance(godot_pluginscript_instance_data *p_data, const godot_string *p_name, godot_variant *r_ret):
-    print("\n###################################################get_prop########################################\n");
-    return False;
+        print("\n###################################################get_prop########################################\n");
+        return False;
 
 cdef api void call_method_pluginscript_instance(godot_pluginscript_instance_data *p_data,const godot_string_name *p_method, const godot_variant **p_args,int p_argcount, godot_variant_call_error *r_error):
-    print("\n#################################################call_method#############################################");
-    printf("%p\n", p_method)
-    print("argcount:",p_argcount)
-    cdef char * name = "hallo"
-    print(StringName.new_static(dereference(p_method)))
+        print("\n#################################################call_method#############################################");
+        printf("%p\n", p_method)
+        print("argcount:",p_argcount)
+        print(StringName.new_static(dereference(p_method)))
 
 cdef api void notification_pluginscript_instance(godot_pluginscript_instance_data *p_data, int p_notification):
     print("\n#####################################################notification_instance###############################");

@@ -14,6 +14,7 @@ typedef struct user_data_struct {
 } user_data_struct;
 
 godot_object* _owner;
+static PyThreadState *gilstate = NULL;
 
 
 static const char *RECOGNIZED_EXTENSIONS[] = { "py", "pyc", "pyo", "pyd", 0 };
@@ -105,15 +106,21 @@ void GDN_EXPORT godot_gdnative_init(godot_gdnative_init_options *p_options) {
     printf("api_core:\n");
     printf("%p",api_core);
     printf("\n");
+    Py_SetProgramName(L"godot");
+    // Initialize interpreter but skip initialization registration of signal handlers
+    Py_InitializeEx(0);
+
     set_up_bindings();
     set_up_pluginscript();
+
 }
 
 // `gdnative_terminate` which is called before the library is unloaded.
 // Godot will unload the library when no object uses it anymore.
 void GDN_EXPORT godot_gdnative_terminate(godot_gdnative_terminate_options *p_options) {
     printf("terminate\n");
-	Py_Finalize();
+
+    Py_FinalizeEx();
 }
 
 // `nativescript_init` is the most important function. Godot calls
@@ -189,7 +196,6 @@ godot_variant simple_get_data(godot_object *p_instance, void *p_method_data, voi
 }
 
 void set_up_bindings(){
-    Py_Initialize();
 	PyRun_SimpleString("import sys,os\nprint(sys.path, os.getcwd())");
 	PyRun_SimpleString("import sys, os\nsys.path.insert(0,os.getcwd()+'/addons')");
 	PyRun_SimpleString("import sys,os\nprint(sys.path, os.getcwd())");
