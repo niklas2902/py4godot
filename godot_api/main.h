@@ -108,10 +108,19 @@ void GDN_EXPORT godot_gdnative_init(godot_gdnative_init_options *p_options) {
     printf("\n");
     Py_SetProgramName(L"godot");
     // Initialize interpreter but skip initialization registration of signal handlers
+    Py_SetProgramName(L"godot");
+    // Initialize interpreter but skip initialization registration of signal handlers
     Py_InitializeEx(0);
+    // PyEval_InitThreads acquires the GIL, so we must release it later.
+    // Since python3.7 PyEval_InitThreads is automatically called by Py_InitializeEx, but it's better to leave it here
+    // to be explicit. Calling it again does nothing.
+    PyEval_InitThreads();
 
     set_up_bindings();
     set_up_pluginscript();
+
+    // Release the Kraken... er I mean the GIL !
+    gilstate = PyEval_SaveThread();
 
 }
 
@@ -120,7 +129,10 @@ void GDN_EXPORT godot_gdnative_init(godot_gdnative_init_options *p_options) {
 void GDN_EXPORT godot_gdnative_terminate(godot_gdnative_terminate_options *p_options) {
     printf("terminate\n");
 
-    Py_FinalizeEx();
+    // Re-acquire the gil in order to finalize properly
+    PyEval_RestoreThread(gilstate);
+
+    int ret = Py_FinalizeEx();
 }
 
 // `nativescript_init` is the most important function. Godot calls

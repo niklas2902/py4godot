@@ -22,17 +22,19 @@ cdef api set_api_core_pluginscript(const godot_gdnative_core_api_struct* core):
     api_core = core
     api_core.godot_dictionary_new(&dictionary)
     print("\n#############################set_api_core############################################################")
-cdef api godot_pluginscript_language_data * init_pluginscript():
+cdef api godot_pluginscript_language_data * init_pluginscript() with gil:
     print("\n######################################################init_python_pluginscript####################################\n");
 
-cdef api void finish_pluginscript(godot_pluginscript_instance_data *p_data):
+cdef api void finish_pluginscript(godot_pluginscript_instance_data *p_data) with gil:
     print("finish_python_test\n");
 
-cdef api  void add_global_constant_pluginscript(godot_pluginscript_language_data *p_data, const godot_string *p_variable, const godot_variant *p_value):
+cdef api  void add_global_constant_pluginscript(godot_pluginscript_language_data *p_data,
+const godot_string *p_variable, const godot_variant *p_value) with gil:
     print("\n######################################################add_global_constant#############################\n");
 
 ###############################################pluginscript_desc#######################################################
-cdef api  godot_pluginscript_script_manifest init_pluginscript_desc (godot_pluginscript_language_data *p_data, const godot_string *p_path, const godot_string *p_source, godot_error *r_error):
+cdef api  godot_pluginscript_script_manifest init_pluginscript_desc (godot_pluginscript_language_data *p_data,
+ const godot_string *p_path, const godot_string *p_source, godot_error *r_error) with gil:
     cdef PyObject* class_obj
     cdef godot_pluginscript_script_manifest manifest;
     cdef PyObject* obj
@@ -70,13 +72,14 @@ cdef api  godot_pluginscript_script_manifest init_pluginscript_desc (godot_plugi
     print("\n################################return_manifest########################################################\n");
     return manifest;
 
-cdef api  void finish_pluginscript_desc (godot_pluginscript_script_data *p_data):
+cdef api  void finish_pluginscript_desc (godot_pluginscript_script_data *p_data) with gil:
     print("finish_desc\n");
 
 
 
 ###############################################pluginscript_instance#######################################################
-cdef api godot_pluginscript_instance_data * init_pluginscript_instance(godot_pluginscript_script_data *p_data, godot_object *p_owner):
+cdef api godot_pluginscript_instance_data * init_pluginscript_instance(godot_pluginscript_script_data *p_data,
+ godot_object *p_owner) with gil:
     cdef Wrapper instance
     print("\n####################################################################instance_init########################\n");
     instance = (<Wrapper ?>p_data)()
@@ -85,13 +88,14 @@ cdef api godot_pluginscript_instance_data * init_pluginscript_instance(godot_plu
     return <PyObject*>instance
 
 
-cdef api void finish_pluginscript_instance(godot_pluginscript_instance_data *p_data):
+cdef api void finish_pluginscript_instance(godot_pluginscript_instance_data *p_data) with gil:
     cdef Wrapper instance
     print("instance_finish\n");
     instance = (<Wrapper ?>p_data)
     Py_DECREF(instance)
 
-cdef api bool set_prop_pluginscript_instance(godot_pluginscript_instance_data *p_data, const godot_string *p_name, const godot_variant *p_value):
+cdef api bool set_prop_pluginscript_instance(godot_pluginscript_instance_data *p_data,
+ const godot_string *p_name, const godot_variant *p_value) with gil:
     cdef Wrapper instance = (<Wrapper ?>p_data)
     print("\n#########################################################set_prop#######################################\n");
     api_core.godot_print(p_name)
@@ -103,17 +107,20 @@ cdef api bool set_prop_pluginscript_instance(godot_pluginscript_instance_data *p
     instance.set_property(get_python_string_from_w_string(p_name), value)
     return True;
 
-cdef api bool get_prop_pluginscript_instance(godot_pluginscript_instance_data *p_data, const godot_string *p_name, godot_variant *r_ret):
+cdef api bool get_prop_pluginscript_instance(godot_pluginscript_instance_data *p_data,
+const godot_string *p_name, godot_variant *r_ret) with gil:
         print("\n###################################################get_prop########################################\n");
         return False;
 
-cdef api void call_method_pluginscript_instance(godot_pluginscript_instance_data *p_data,const godot_string_name *p_method, const godot_variant **p_args,int p_argcount, godot_variant_call_error *r_error):
+cdef api void call_method_pluginscript_instance(godot_pluginscript_instance_data *p_data,const godot_string_name *p_method,
+const godot_variant **p_args,int p_argcount, godot_variant_call_error *r_error) with gil:
         print("\n#################################################call_method#############################################");
         printf("%p\n", p_method)
         print("argcount:",p_argcount)
         print(StringName.new_static(dereference(p_method)))
 
-cdef api void notification_pluginscript_instance(godot_pluginscript_instance_data *p_data, int p_notification):
+cdef api void notification_pluginscript_instance(godot_pluginscript_instance_data *p_data,
+int p_notification) with gil:
     print("\n#####################################################notification_instance###############################");
     print(p_notification)
 
