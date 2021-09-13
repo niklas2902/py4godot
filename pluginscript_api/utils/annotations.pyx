@@ -26,10 +26,10 @@ def gdproperty(type, defaultval, hint= None, hint_string = ""):
                 type_=godot_variant_type.GODOT_VARIANT_TYPE_INT,
                 hint= hint,
                 hint_string=hint_string,usage=godot_property_usage_flags. GODOT_PROPERTY_USAGE_DEFAULT,
-                default_value=defaultval, rset_mode=godot_method_rpc_mode.GODOT_METHOD_RPC_MODE_REMOTESYNC))
+                default_value=defaultval, rset_mode=godot_method_rpc_mode.GODOT_METHOD_RPC_MODE_DISABLED))
             super().__init__(fget, fset, fdel,doc)
     return gdprop
 
 
 def gdmethod(func):
-    methods.append(MethodDescription(func.__name__, None, None, None, 1,1))
+    methods.append(MethodDescription(func.__name__, None, None, None, 0,GODOT_METHOD_RPC_MODE_DISABLED))

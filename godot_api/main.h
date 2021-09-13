@@ -16,6 +16,10 @@ typedef struct user_data_struct {
 godot_object* _owner;
 static PyThreadState *gilstate = NULL;
 
+godot_variant call_method (godot_pluginscript_instance_data *p_data,
+			const godot_string_name *p_method, const godot_variant **p_args,
+			int p_argcount, godot_variant_call_error *r_error);
+
 
 static const char *RECOGNIZED_EXTENSIONS[] = { "py", "pyc", "pyo", "pyd", 0 };
 static const char *RESERVED_WORDS[] = {
@@ -310,4 +314,13 @@ void set_up_pluginscript(){
 
 void hello(const char *name) {
     printf("hello %s\n", name);
+}
+
+godot_variant call_method (godot_pluginscript_instance_data *p_data,
+			const godot_string_name *p_method, const godot_variant **p_args,
+			int p_argcount, godot_variant_call_error *r_error){
+    api_core->godot_string_name_get_name(p_method);
+    godot_variant* var;
+    api_core->godot_variant_new_nil(var);
+    return *(var);
 }

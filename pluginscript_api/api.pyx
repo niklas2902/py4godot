@@ -112,12 +112,14 @@ const godot_string *p_name, godot_variant *r_ret) with gil:
         print("\n###################################################get_prop########################################\n");
         return False;
 
-cdef api void call_method_pluginscript_instance(godot_pluginscript_instance_data *p_data,const godot_string_name *p_method,
+cdef api godot_variant call_method_pluginscript_instance(godot_pluginscript_instance_data *p_data,const godot_string_name *p_method,
 const godot_variant **p_args,int p_argcount, godot_variant_call_error *r_error) with gil:
         print("\n#################################################call_method#############################################");
         printf("%p\n", p_method)
         print("argcount:",p_argcount)
-        print(StringName.new_static(dereference(p_method)))
+        print(dereference(p_method))
+        print(StringName.new_static(p_method))
+        return CVariant.Variant()._native
 
 cdef api void notification_pluginscript_instance(godot_pluginscript_instance_data *p_data,
 int p_notification) with gil:

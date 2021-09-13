@@ -9,7 +9,7 @@ cdef extern from "Python.h":
     cdef  PyObject* PyObject_Str(PyObject *o);
 
 cdef extern from "binding.h":
-    DEF array_size = 4 # Edit
+    DEF array_size = 6 # Edit
 
     ################################### types#######################################
     ctypedef signed char        int8_t;
@@ -95,11 +95,11 @@ cdef extern from "binding.h":
     ctypedef struct godot_pool_vector3_array:
         uint8_t _dont_touch_that[array_size];
     ctypedef struct godot_string_name:
-        uint8_t _dont_touch_that[array_size]
+        uint8_t _dont_touch_that[array_size];
     ctypedef struct godot_string:
         uint8_t _dont_touch_that[array_size];
     ctypedef struct godot_char_string:
-        pass
+        uint8_t _dont_touch_that[array_size];
 
     ##############################pluginscript types#####################
     ctypedef void godot_pluginscript_script_data;

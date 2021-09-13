@@ -957,3 +957,4 @@ ctypedef enum XMLParser_NodeType :XMLPARSER_NODE_NONE, XMLPARSER_NODE_ELEMENT, X
 
 
 cdef set_core(godot_gdnative_core_api_struct* core)
+cdef set_native_script(godot_gdnative_ext_nativescript_1_1_api_struct* api)

@@ -1,5 +1,8 @@
 from setuptools import setup, Extension
 from Cython.Build import cythonize
+from main import *
+
+build()
 
 module = cythonize('core/*/*.pyx', language_level=3)
 #module += cythonize("classes/*.pyx", language_level=3, nthreads=8)

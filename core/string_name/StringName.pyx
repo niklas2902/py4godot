@@ -11,29 +11,28 @@ cdef class StringName:
 
     def __init__(self,string):
         if(type(string) == String):
-            api_core.godot_string_name_new(&self._native, &(<String>string)._native)
+            api_core.godot_string_name_new(self._native, &(<String>string)._native)
         else:
-            api_core.godot_string_name_new_data(&self._native, <char*>string)
+            api_core.godot_string_name_new_data(self._native, <char*>string)
 
 
     def get_name(self):
-        return String.new_static(api_core.godot_string_name_get_name(&self._native))
+        return String.new_static(api_core.godot_string_name_get_name(self._native))
 
     def __del__(self):
-        api_core.godot_string_name_destroy(&self._native)
+        api_core.godot_string_name_destroy(self._native)
 
     def __str__(self):
-        cdef unicode python_string = get_python_string_from_w_string_name(&self._native)
+        cdef unicode python_string = get_python_string_from_w_string_name(self._native)
         print(python_string)
         return python_string
 
 cdef unicode get_python_string_from_w_string_name(const godot_string_name* string_name):
     print("get string from w_string")
     print(dereference(string_name))
-    cdef godot_string_name name2
     print(dereference(string_name))
-    cdef godot_string string = api_core.godot_string_name_get_name(&name2)
-    print("name created")
+    cdef godot_string string = api_core.godot_string_name_get_name(string_name)
+    #print("name created")
     cdef const wchar_t* c_string = api_core.godot_string_wide_str(&string)
-    print("get_python_string")
-    return "<unicode>PyUnicode_FromWideChar(c_string,-1)"
+    #print("get_python_string")
+    return <unicode>PyUnicode_FromWideChar(c_string,-1)
