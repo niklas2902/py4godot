@@ -29,6 +29,8 @@ static bool (*__pyx_api_f_16pluginscript_api_3api_get_prop_pluginscript_instance
 #define get_prop_pluginscript_instance __pyx_api_f_16pluginscript_api_3api_get_prop_pluginscript_instance
 static godot_variant (*__pyx_api_f_16pluginscript_api_3api_call_method_pluginscript_instance)(godot_pluginscript_instance_data *, godot_string_name const *, godot_variant const **, int, godot_variant_call_error *) = 0;
 #define call_method_pluginscript_instance __pyx_api_f_16pluginscript_api_3api_call_method_pluginscript_instance
+static PyObject *(*__pyx_api_f_16pluginscript_api_3api_pluginscript_get_template_source_code)(godot_pluginscript_language_data *, godot_string const *, godot_string const *) = 0;
+#define pluginscript_get_template_source_code __pyx_api_f_16pluginscript_api_3api_pluginscript_get_template_source_code
 static void (*__pyx_api_f_16pluginscript_api_3api_notification_pluginscript_instance)(godot_pluginscript_instance_data *, int) = 0;
 #define notification_pluginscript_instance __pyx_api_f_16pluginscript_api_3api_notification_pluginscript_instance
 #if !defined(__Pyx_PyIdentifier_FromString)
@@ -108,6 +110,7 @@ static int import_pluginscript_api__api(void) {
   if (__Pyx_ImportFunction(module, "set_prop_pluginscript_instance", (void (**)(void))&__pyx_api_f_16pluginscript_api_3api_set_prop_pluginscript_instance, "bool (godot_pluginscript_instance_data *, godot_string const *, godot_variant const *)") < 0) goto bad;
   if (__Pyx_ImportFunction(module, "get_prop_pluginscript_instance", (void (**)(void))&__pyx_api_f_16pluginscript_api_3api_get_prop_pluginscript_instance, "bool (godot_pluginscript_instance_data *, godot_string const *, godot_variant *)") < 0) goto bad;
   if (__Pyx_ImportFunction(module, "call_method_pluginscript_instance", (void (**)(void))&__pyx_api_f_16pluginscript_api_3api_call_method_pluginscript_instance, "godot_variant (godot_pluginscript_instance_data *, godot_string_name const *, godot_variant const **, int, godot_variant_call_error *)") < 0) goto bad;
+  if (__Pyx_ImportFunction(module, "pluginscript_get_template_source_code", (void (**)(void))&__pyx_api_f_16pluginscript_api_3api_pluginscript_get_template_source_code, "PyObject *(godot_pluginscript_language_data *, godot_string const *, godot_string const *)") < 0) goto bad;
   if (__Pyx_ImportFunction(module, "notification_pluginscript_instance", (void (**)(void))&__pyx_api_f_16pluginscript_api_3api_notification_pluginscript_instance, "void (godot_pluginscript_instance_data *, int)") < 0) goto bad;
   Py_DECREF(module); module = 0;
   return 0;

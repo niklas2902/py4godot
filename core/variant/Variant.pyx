@@ -37,7 +37,6 @@ cdef class Variant:
         if(type(variant) == type("")):
             variant = String(variant)
 
-        print("create new variant", type(variant))
         if(variant != None):
             if(type(variant) == int):
                 self.new_int(variant)
@@ -63,6 +62,8 @@ cdef class Variant:
                 self.new_bool(variant)
             elif type(variant) == Dictionary:
                 self.new_dict(variant)
+            elif type(variant) == Array:
+                self.new_array(variant)
             else:
                 print("no Variant created:",variant,"|", type(variant))
         else:
@@ -104,8 +105,12 @@ cdef class Variant:
 
     def new_string(self, String variant):
         api_core.godot_variant_new_string(&self._native, &variant._native)
+
     def new_dict(self, Dictionary variant):
         api_core.godot_variant_new_dictionary(&self._native, &variant._native);
+
+    def new_array(self, Array variant):
+        api_core.godot_variant_new_array(&self._native, &variant._native)
 
 
     def new(self, variant):

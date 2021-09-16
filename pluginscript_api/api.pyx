@@ -5,6 +5,7 @@ from pluginscript_api.description_classes.PropertyDescription import *
 #from core.dictionary.Dictionary cimport set_api_core_dict
 from core.array.Array import Array
 from core.string_name.StringName cimport StringName
+from core.string.String cimport String
 from libc.stdio cimport printf
 from utils.Wrapper cimport Wrapper
 from cpython cimport Py_INCREF, Py_DECREF, PyObject
@@ -59,8 +60,11 @@ cdef api  godot_pluginscript_script_manifest init_pluginscript_desc (godot_plugi
     for p in properties:
         properties_array.append(Variant(p.to_dict()))
         print("dict:",p.to_dict())
-    for m in methods:
-        methods_array.append(Variant(m.to_dict()))
+    #for m in methods:
+    #    methods_array.append(Variant(m.to_dict()))
+    methods_array.append(Variant(MethodDescription("_process",["delta"], None, 0,0 ).to_dict()))
+
+
     manifest.properties = properties_array.get_native()
     manifest.methods = methods_array.get_native()
 
@@ -115,11 +119,15 @@ const godot_string *p_name, godot_variant *r_ret) with gil:
 cdef api godot_variant call_method_pluginscript_instance(godot_pluginscript_instance_data *p_data,const godot_string_name *p_method,
 const godot_variant **p_args,int p_argcount, godot_variant_call_error *r_error) with gil:
         print("\n#################################################call_method#############################################");
-        printf("%p\n", p_method)
-        print("argcount:",p_argcount)
-        print(dereference(p_method))
         print(StringName.new_static(p_method))
         return CVariant.Variant()._native
+
+
+cdef api pluginscript_get_template_source_code(godot_pluginscript_language_data *p_data, const godot_string *p_class_name, const godot_string *p_base_class_name):
+    return String(f"""
+    class {String.new_static(dereference(p_class_name))}({String.new_static(dereference(p_base_class_name))}):\n
+        pass
+    """)
 
 cdef api void notification_pluginscript_instance(godot_pluginscript_instance_data *p_data,
 int p_notification) with gil:

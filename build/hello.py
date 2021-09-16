@@ -29,7 +29,7 @@ class Ball(Wrapper):
 
 	@gdmethod
 	def _init(self):
-		print("method")
+		print("_init")
 
 	@gdmethod
 	def move(self):

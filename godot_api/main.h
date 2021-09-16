@@ -143,6 +143,10 @@ void GDN_EXPORT godot_gdnative_terminate(godot_gdnative_terminate_options *p_opt
 // this function as part of loading a GDNative library and communicates
 // back to the engine what objects we make available.
 void GDN_EXPORT godot_nativescript_init(void *p_handle) {
+    //Todo: register method process
+    printf("..................................native_script_init.................................................\n");
+
+
 	godot_instance_create_func create = { NULL, NULL, NULL };
 	create.create_func = &simple_constructor;
 
@@ -304,6 +308,8 @@ void set_up_pluginscript(){
     desc.script_desc.instance_desc.get_prop=get_prop_pluginscript_instance;
     desc.script_desc.instance_desc.call_method=call_method_pluginscript_instance;
     desc.script_desc.instance_desc.notification=notification_pluginscript_instance;
+
+    desc.get_template_source_code = pluginscript_get_template_source_code;
 
     printf("###################################finish_pluginscript###################################################\n");
 
