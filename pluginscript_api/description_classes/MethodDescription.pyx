@@ -29,7 +29,9 @@ class MethodDescription:
         d = Dictionary()
         a = Array()
         for i in self.args:
-            prop_desc = PropertyDescription("delta", 1.1, 0, "",0, 0,0)
+            print(i)
+            #Todo: improve this
+            prop_desc = PropertyDescription(i, None, 0, "",0, 0,0)
             a.append(Variant(prop_desc.to_dict()))
         #a.append(Variant(Dictionary()))
         d.set(Variant(String("name")), Variant(String(self.name)))

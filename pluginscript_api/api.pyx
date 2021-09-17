@@ -60,9 +60,9 @@ cdef api  godot_pluginscript_script_manifest init_pluginscript_desc (godot_plugi
     for p in properties:
         properties_array.append(Variant(p.to_dict()))
         print("dict:",p.to_dict())
-    #for m in methods:
-    #    methods_array.append(Variant(m.to_dict()))
-    methods_array.append(Variant(MethodDescription("_process",["delta"], None, 0,0 ).to_dict()))
+    for m in methods:
+        methods_array.append(Variant(m.to_dict()))
+    #methods_array.append(Variant(MethodDescription("_process",["delta"], None, 0,0 ).to_dict()))
 
 
     manifest.properties = properties_array.get_native()

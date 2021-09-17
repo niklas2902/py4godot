@@ -1,8 +1,9 @@
-from functools import wraps
 from core.variant.Variant cimport *
 from godot_api.binding_external cimport *
 from pluginscript_api.description_classes.MethodDescription import MethodDescription
 from pluginscript_api.description_classes.PropertyDescription import PropertyDescription
+import inspect
+
 
 methods = []
 classes = []
@@ -32,4 +33,5 @@ def gdproperty(type, defaultval, hint= None, hint_string = ""):
 
 
 def gdmethod(func):
-    methods.append(MethodDescription(func.__name__, None, None, None, 0,GODOT_METHOD_RPC_MODE_DISABLED))
+    print(dir(func))
+    methods.append(MethodDescription(func.__name__, inspect.getfullargspec(func).args, None, None, 0,GODOT_METHOD_RPC_MODE_DISABLED))

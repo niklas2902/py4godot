@@ -32,6 +32,10 @@ class Ball(Wrapper):
 		print("_init")
 
 	@gdmethod
+	def _process(self, delta):
+		print(delta)
+
+	@gdmethod
 	def move(self):
 		print("method")
 		
