@@ -35,3 +35,4 @@ def gdproperty(type, defaultval, hint= None, hint_string = ""):
 def gdmethod(func):
     print(dir(func))
     methods.append(MethodDescription(func.__name__, inspect.getfullargspec(func).args, None, None, 0,GODOT_METHOD_RPC_MODE_DISABLED))
+    return func

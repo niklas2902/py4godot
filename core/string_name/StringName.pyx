@@ -24,15 +24,9 @@ cdef class StringName:
 
     def __str__(self):
         cdef unicode python_string = get_python_string_from_w_string_name(self._native)
-        print(python_string)
         return python_string
 
 cdef unicode get_python_string_from_w_string_name(const godot_string_name* string_name):
-    print("get string from w_string")
-    print(dereference(string_name))
-    print(dereference(string_name))
     cdef godot_string string = api_core.godot_string_name_get_name(string_name)
-    #print("name created")
     cdef const wchar_t* c_string = api_core.godot_string_wide_str(&string)
-    #print("get_python_string")
     return <unicode>PyUnicode_FromWideChar(c_string,-1)

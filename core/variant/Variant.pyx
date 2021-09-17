@@ -261,7 +261,6 @@ cdef class Variant:
         api_core.godot_variant_destroy(&self._native)
 
     def get_converted_value(self):
-        print(self.get_type())
         return dict_get_methods[self.get_type()](self)
 
     def get_type(self):

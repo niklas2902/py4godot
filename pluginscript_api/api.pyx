@@ -119,7 +119,16 @@ const godot_string *p_name, godot_variant *r_ret) with gil:
 cdef api godot_variant call_method_pluginscript_instance(godot_pluginscript_instance_data *p_data,const godot_string_name *p_method,
 const godot_variant **p_args,int p_argcount, godot_variant_call_error *r_error) with gil:
         print("\n#################################################call_method#############################################");
-        print(StringName.new_static(p_method))
+        method_name = str(StringName.new_static(p_method))
+
+        cdef Wrapper instance = (<Wrapper>p_data)
+        if(hasattr(instance,method_name)):
+            args = []
+            for i in range(0, p_argcount):
+                variant=CVariant.Variant.new_static(dereference(p_args[i]))
+                args.append(variant.get_converted_value())
+            ret = getattr(instance,method_name)(*args)
+            return CVariant.Variant(ret)._native
         return CVariant.Variant()._native
 
 
@@ -137,3 +146,4 @@ int p_notification) with gil:
 cdef unicode get_python_string_from_w_string(const godot_string* string):
     cdef const wchar_t* c_string = api_core.godot_string_wide_str(string)
     return <unicode>PyUnicode_FromWideChar(c_string,-1)
+

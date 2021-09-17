@@ -2440,6 +2440,7 @@ static PyObject *__pyx_pf_16pluginscript_api_5utils_11annotations_6gdmethod(CYTH
  * def gdmethod(func):
  *     print(dir(func))             # <<<<<<<<<<<<<<
  *     methods.append(MethodDescription(func.__name__, inspect.getfullargspec(func).args, None, None, 0,GODOT_METHOD_RPC_MODE_DISABLED))
+ *     return func
  */
   __pyx_t_1 = PyObject_Dir(__pyx_v_func); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 36, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
@@ -2452,6 +2453,7 @@ static PyObject *__pyx_pf_16pluginscript_api_5utils_11annotations_6gdmethod(CYTH
  * def gdmethod(func):
  *     print(dir(func))
  *     methods.append(MethodDescription(func.__name__, inspect.getfullargspec(func).args, None, None, 0,GODOT_METHOD_RPC_MODE_DISABLED))             # <<<<<<<<<<<<<<
+ *     return func
  */
   __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_methods); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 37, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
@@ -2551,6 +2553,16 @@ static PyObject *__pyx_pf_16pluginscript_api_5utils_11annotations_6gdmethod(CYTH
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
+  /* "pluginscript_api/utils/annotations.pyx":38
+ *     print(dir(func))
+ *     methods.append(MethodDescription(func.__name__, inspect.getfullargspec(func).args, None, None, 0,GODOT_METHOD_RPC_MODE_DISABLED))
+ *     return func             # <<<<<<<<<<<<<<
+ */
+  __Pyx_XDECREF(__pyx_r);
+  __Pyx_INCREF(__pyx_v_func);
+  __pyx_r = __pyx_v_func;
+  goto __pyx_L0;
+
   /* "pluginscript_api/utils/annotations.pyx":35
  * 
  * 
@@ -2560,8 +2572,6 @@ static PyObject *__pyx_pf_16pluginscript_api_5utils_11annotations_6gdmethod(CYTH
  */
 
   /* function exit code */
-  __pyx_r = Py_None; __Pyx_INCREF(Py_None);
-  goto __pyx_L0;
   __pyx_L1_error:;
   __Pyx_XDECREF(__pyx_t_1);
   __Pyx_XDECREF(__pyx_t_2);
