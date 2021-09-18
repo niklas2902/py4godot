@@ -127,7 +127,7 @@ const godot_variant **p_args,int p_argcount, godot_variant_call_error *r_error) 
                 variant=CVariant.Variant.new_static(dereference(p_args[i]))
                 args.append(variant.get_converted_value())
             ret = getattr(instance,method_name)(*args)
-            return CVariant.Variant(ret)._native
+            return CVariant.Variant()._native
         return CVariant.Variant()._native
 
 

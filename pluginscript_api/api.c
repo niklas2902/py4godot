@@ -3249,7 +3249,7 @@ static godot_variant __pyx_f_16pluginscript_api_3api_call_method_pluginscript_in
   PyObject *__pyx_v_args = NULL;
   long __pyx_v_i;
   struct __pyx_obj_4core_7variant_7Variant_Variant *__pyx_v_variant = NULL;
-  PyObject *__pyx_v_ret = NULL;
+  CYTHON_UNUSED PyObject *__pyx_v_ret = NULL;
   godot_variant __pyx_r;
   __Pyx_RefNannyDeclarations
   PyObject *__pyx_t_1 = NULL;
@@ -3370,7 +3370,7 @@ static godot_variant __pyx_f_16pluginscript_api_3api_call_method_pluginscript_in
  *                 variant=CVariant.Variant.new_static(dereference(p_args[i]))
  *                 args.append(variant.get_converted_value())             # <<<<<<<<<<<<<<
  *             ret = getattr(instance,method_name)(*args)
- *             return CVariant.Variant(ret)._native
+ *             return CVariant.Variant()._native
  */
       __pyx_t_1 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_variant), __pyx_n_s_get_converted_value); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 128, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_1);
@@ -3397,7 +3397,7 @@ static godot_variant __pyx_f_16pluginscript_api_3api_call_method_pluginscript_in
  *                 variant=CVariant.Variant.new_static(dereference(p_args[i]))
  *                 args.append(variant.get_converted_value())
  *             ret = getattr(instance,method_name)(*args)             # <<<<<<<<<<<<<<
- *             return CVariant.Variant(ret)._native
+ *             return CVariant.Variant()._native
  *         return CVariant.Variant()._native
  */
     __pyx_t_2 = __Pyx_GetAttr(((PyObject *)__pyx_v_instance), __pyx_v_method_name); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 129, __pyx_L1_error)
@@ -3414,11 +3414,11 @@ static godot_variant __pyx_f_16pluginscript_api_3api_call_method_pluginscript_in
     /* "pluginscript_api/api.pyx":130
  *                 args.append(variant.get_converted_value())
  *             ret = getattr(instance,method_name)(*args)
- *             return CVariant.Variant(ret)._native             # <<<<<<<<<<<<<<
+ *             return CVariant.Variant()._native             # <<<<<<<<<<<<<<
  *         return CVariant.Variant()._native
  * 
  */
-    __pyx_t_8 = __Pyx_PyObject_CallOneArg(((PyObject *)__pyx_ptype_4core_7variant_7Variant_Variant), __pyx_v_ret); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 130, __pyx_L1_error)
+    __pyx_t_8 = __Pyx_PyObject_CallNoArg(((PyObject *)__pyx_ptype_4core_7variant_7Variant_Variant)); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 130, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_8);
     __pyx_r = ((struct __pyx_obj_4core_7variant_7Variant_Variant *)__pyx_t_8)->_native;
     __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
@@ -3435,7 +3435,7 @@ static godot_variant __pyx_f_16pluginscript_api_3api_call_method_pluginscript_in
 
   /* "pluginscript_api/api.pyx":131
  *             ret = getattr(instance,method_name)(*args)
- *             return CVariant.Variant(ret)._native
+ *             return CVariant.Variant()._native
  *         return CVariant.Variant()._native             # <<<<<<<<<<<<<<
  * 
  * 

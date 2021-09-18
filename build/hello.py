@@ -35,8 +35,7 @@ class Ball(Spatial):
 	@gdmethod
 	def _process(self, delta):
 		print(delta)
-		#print(self.get_transform())
-		#print(self.transform)
+		print(self.get_transform())
 
 	@gdmethod
 	def move(self):

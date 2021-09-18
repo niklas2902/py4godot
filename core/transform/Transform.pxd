@@ -7,6 +7,9 @@ cdef class Transform:
         self._native = _native
 
     @staticmethod
-    cdef inline void new_static(godot_transform _native):
+    cdef inline Transform new_static(godot_transform _native):
         cdef Transform v = Transform.__new__(Transform)
         v.set_native(_native)
+        print("created transform")
+        print("Transform:",v)
+        return v

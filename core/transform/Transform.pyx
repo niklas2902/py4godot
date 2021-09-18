@@ -2,7 +2,12 @@ from core.basis.Basis cimport *
 from core.vector3.Vector3 cimport *
 from core.plane.Plane cimport *
 from core.aabb.AABB cimport *
+from core.string.String cimport *
 from core.transform.transform_binding cimport *
+
+cdef api set_api_core_transform(godot_gdnative_core_api_struct * core):
+    global api_core
+    api_core = core
 
 cdef class Transform:
 
@@ -25,7 +30,7 @@ cdef class Transform:
         api_core.godot_transform_set_origin(&self._native, &v._native)
 
     def __str__(self):
-        return api_core.godot_transform_as_string(&self._native)
+        return str(String.new_static(api_core.godot_transform_as_string(&self._native)))
 
     def inverse(self):
         return Transform. new_static(api_core.godot_transform_inverse(&self._native))

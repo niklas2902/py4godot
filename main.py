@@ -83,7 +83,7 @@ def generate_methods(obj, import_string):
                         result += f"    args[{i}] = {arg_name}.godot_owner\n"
                     else:
                         result += f"    args[{i}] = {'&' + arg_name + '._native' if method['arguments'][i]['type'] in core else ('&' + arg_name)}\n"
-            result += f"    print('call_method_native')\n"
+            result += f"    print('call_method_native:{method['name']}')\n"
             if(not method["is_virtual"]):
                 result += f"    api_core.godot_method_bind_ptrcall(bind_{obj['name'].lower()}_{method['name']}," \
                           f"self.godot_owner,{'args' if len(method['arguments']) > 0 else 'NULL'},{'&ret' if return_type != 'void' else 'NULL'})\n"
