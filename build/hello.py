@@ -1,11 +1,12 @@
 from pluginscript_api.utils.annotations import  *
 from utils.Wrapper import *
 from enums.enums import *
+from classes.generated import *
 print(PropertyHint)
 print(PropertyHint.GODOT_PROPERTY_HINT_RANGE.value)
 
 @gdclass
-class Ball(Wrapper):
+class Ball(Spatial):
 
 	@gdproperty(int, 5, hint=PropertyHint.GODOT_PROPERTY_HINT_RANGE.value, hint_string="1,100,5,slider")
 	def vel(self):
@@ -34,6 +35,8 @@ class Ball(Wrapper):
 	@gdmethod
 	def _process(self, delta):
 		print(delta)
+		#print(self.get_transform())
+		#print(self.transform)
 
 	@gdmethod
 	def move(self):

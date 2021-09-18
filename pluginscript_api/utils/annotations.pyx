@@ -12,9 +12,9 @@ properties = []
 #TODO: look for methods to improve behavior (cdef reset?)
 def reset():
     global methods, classes, properties
-    methods = []
-    classes = []
-    properties = []
+    methods.clear()
+    classes.clear()
+    properties.clear()
 
 def gdclass(func):
     classes.append(func)

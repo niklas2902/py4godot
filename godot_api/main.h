@@ -110,8 +110,7 @@ void GDN_EXPORT godot_gdnative_init(godot_gdnative_init_options *p_options) {
     printf("api_core:\n");
     printf("%p",api_core);
     printf("\n");
-    Py_SetProgramName(L"godot");
-    // Initialize interpreter but skip initialization registration of signal handlers
+
     Py_SetProgramName(L"godot");
     // Initialize interpreter but skip initialization registration of signal handlers
     Py_InitializeEx(0);
@@ -296,7 +295,7 @@ void set_up_pluginscript(){
     desc.reserved_words = RESERVED_WORDS;
     desc.comment_delimiters = COMMENT_DELIMITERS;
     desc.string_delimiters = STRING_DELIMITERS;
-    desc.has_named_classes = false;
+    desc.has_named_classes = true;
     desc.add_global_constant = add_global_constant_pluginscript;
 
     desc.script_desc.init=init_pluginscript_desc;
@@ -321,6 +320,7 @@ void set_up_pluginscript(){
 void hello(const char *name) {
     printf("hello %s\n", name);
 }
+
 
 godot_variant call_method (godot_pluginscript_instance_data *p_data,
 			const godot_string_name *p_method, const godot_variant **p_args,

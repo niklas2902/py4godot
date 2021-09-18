@@ -62,8 +62,6 @@ cdef api  godot_pluginscript_script_manifest init_pluginscript_desc (godot_plugi
         print("dict:",p.to_dict())
     for m in methods:
         methods_array.append(Variant(m.to_dict()))
-    #methods_array.append(Variant(MethodDescription("_process",["delta"], None, 0,0 ).to_dict()))
-
 
     manifest.properties = properties_array.get_native()
     manifest.methods = methods_array.get_native()
@@ -72,7 +70,7 @@ cdef api  godot_pluginscript_script_manifest init_pluginscript_desc (godot_plugi
     obj = class_obj
 
     manifest.data = obj;
-
+    reset()
     print("\n################################return_manifest########################################################\n");
     return manifest;
 
@@ -120,6 +118,7 @@ cdef api godot_variant call_method_pluginscript_instance(godot_pluginscript_inst
 const godot_variant **p_args,int p_argcount, godot_variant_call_error *r_error) with gil:
         print("\n#################################################call_method#############################################");
         method_name = str(StringName.new_static(p_method))
+        print(method_name)
 
         cdef Wrapper instance = (<Wrapper>p_data)
         if(hasattr(instance,method_name)):
@@ -132,11 +131,37 @@ const godot_variant **p_args,int p_argcount, godot_variant_call_error *r_error) 
         return CVariant.Variant()._native
 
 
-cdef api pluginscript_get_template_source_code(godot_pluginscript_language_data *p_data, const godot_string *p_class_name, const godot_string *p_base_class_name):
+cdef api godot_string pluginscript_get_template_source_code(godot_pluginscript_language_data *p_data,
+ const godot_string *p_class_name, const godot_string *p_base_class_name) with gil:
+    print("get_template_source_code")
     return String(f"""
-    class {String.new_static(dereference(p_class_name))}({String.new_static(dereference(p_base_class_name))}):\n
-        pass
-    """)
+from pluginscript_api.utils.annotations import  *
+from utils.Wrapper import *
+from enums.enums import *
+
+@gdclass
+class {str(String.new_static(dereference(p_class_name)))}({str(String.new_static(dereference(p_base_class_name)))}):
+
+    @gdproperty(int, 5, hint=PropertyHint.GODOT_PROPERTY_HINT_RANGE.value, hint_string="1,100,5,slider")
+    def vel(self):
+        return 1
+    @vel.setter
+    def vel(self, value):
+        print("set_value", value)
+
+    def __init__(self):
+        super().__init__()
+        self.velocity = 0
+
+    @gdmethod
+    def _init(self):
+        print("_init")
+
+    @gdmethod
+    def _process(self, delta):
+        print(delta)
+
+""")._native
 
 cdef api void notification_pluginscript_instance(godot_pluginscript_instance_data *p_data,
 int p_notification) with gil:

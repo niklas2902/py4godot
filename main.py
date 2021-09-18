@@ -83,8 +83,10 @@ def generate_methods(obj, import_string):
                         result += f"    args[{i}] = {arg_name}.godot_owner\n"
                     else:
                         result += f"    args[{i}] = {'&' + arg_name + '._native' if method['arguments'][i]['type'] in core else ('&' + arg_name)}\n"
-            result += f"    api_core.godot_method_bind_ptrcall(bind_{obj['name'].lower()}_{method['name']}," \
-                      f"self.godot_owner,{'args' if len(method['arguments']) > 0 else 'NULL'},{'&ret' if return_type != 'void' else 'NULL'})\n"
+            result += f"    print('call_method_native')\n"
+            if(not method["is_virtual"]):
+                result += f"    api_core.godot_method_bind_ptrcall(bind_{obj['name'].lower()}_{method['name']}," \
+                          f"self.godot_owner,{'args' if len(method['arguments']) > 0 else 'NULL'},{'&ret' if return_type != 'void' else 'NULL'})\n"
             result += f"    hello('hallo2')\n"
             if return_type != "void" and not return_type in objects and not return_type_save.startswith("Pool"):
                 if ("." in return_type):
@@ -103,8 +105,12 @@ def generate_method_bindings(obj):
     result += f"cdef godot_method_bind *bind_{obj['name']}\n"
     for method in obj["methods"]:
         result += f"cdef godot_method_bind *bind_{obj['name'].lower()}_{method['name']}\n"
-    result += f"cpdef init_method_bindings_{obj['name']}():\n"
+    result += f"cdef init_method_bindings_{obj['name']}():\n"
     result += f'  bind_{obj["name"]} = api_core.godot_method_bind_get_method("Object", "_get")\n'
+
+    for method in obj["methods"]:
+        result += f"  global bind_{obj['name'].lower()}_{method['name']}\n"
+
     for method in obj["methods"]:
         result += f"  bind_{obj['name'].lower()}_{method['name']} = api_core.godot_method_bind_get_method('{obj['name']}', '{method['name']}')\n"
     return result
@@ -227,6 +233,7 @@ import_string = ""
 
 def build(test=False):
     init_methods_string = "def init_method_bindings():\n"
+    register_types_string = "cdef register_types():\n"
 
     global objects
     # read file
@@ -249,6 +256,7 @@ from utils.Wrapper cimport *"""
             continue
 
         init_methods_string += f"  init_method_bindings_{element['name']}()\n"
+        register_types_string += f"  api_core\n"
         file = ""
         generated_file = generate_classes(element)
         bindings_file += generated_file[1] + "\n"
@@ -290,7 +298,7 @@ from utils.Wrapper cimport *"""
 
     print(set_)
     with open("classes/generated.pyx", "w") as bindings:
-        bindings.write(base_import_string + main_string + bindings_file + init_methods_string)
+        bindings.write(base_import_string + main_string + bindings_file + init_methods_string + register_types_string)
     with open("classes/generated.pxd", "w") as bindings_pxd:
         bindings_pxd.write(pxd_file + "\ncdef set_core(godot_gdnative_core_api_struct* core)" +
                            "\ncdef set_native_script(godot_gdnative_ext_nativescript_1_1_api_struct* api)")

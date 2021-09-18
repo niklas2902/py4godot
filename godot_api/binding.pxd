@@ -126,6 +126,7 @@ cdef extern from "binding.h":
 
 
     void hello(const char *name)
+    void print_pointer(void* pointer)
     void new_variant(const char *test)
     #void new_variant(double test)
     void show_api()

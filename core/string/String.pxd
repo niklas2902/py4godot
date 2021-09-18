@@ -7,6 +7,7 @@ cdef class String:
         self._native = _native
 
     @staticmethod
-    cdef inline void new_static(godot_string _native):
+    cdef inline String new_static(godot_string _native):
         cdef String v = String.__new__(String)
         v.set_native(_native)
+        return v
