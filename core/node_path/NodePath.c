@@ -902,11 +902,11 @@ static CYTHON_INLINE struct __pyx_obj_4core_6string_6String_String *__pyx_f_4cor
 
 struct __pyx_vtabstruct_4core_9node_path_8NodePath_NodePath {
   void (*set_native)(struct __pyx_obj_4core_9node_path_8NodePath_NodePath *, godot_node_path);
-  void (*new_static)(godot_node_path);
+  struct __pyx_obj_4core_9node_path_8NodePath_NodePath *(*new_static)(godot_node_path);
 };
 static struct __pyx_vtabstruct_4core_9node_path_8NodePath_NodePath *__pyx_vtabptr_4core_9node_path_8NodePath_NodePath;
 static CYTHON_INLINE void __pyx_f_4core_9node_path_8NodePath_8NodePath_set_native(struct __pyx_obj_4core_9node_path_8NodePath_NodePath *, godot_node_path);
-static CYTHON_INLINE void __pyx_f_4core_9node_path_8NodePath_8NodePath_new_static(godot_node_path);
+static CYTHON_INLINE struct __pyx_obj_4core_9node_path_8NodePath_NodePath *__pyx_f_4core_9node_path_8NodePath_8NodePath_new_static(godot_node_path);
 
 /* --- Runtime support code (head) --- */
 /* Refnanny.proto */
@@ -1055,11 +1055,6 @@ static CYTHON_INLINE PyObject* __Pyx_tp_new_kwargs(PyObject* type_obj, PyObject*
 /* ExtTypeTest.proto */
 static CYTHON_INLINE int __Pyx_TypeTest(PyObject *obj, PyTypeObject *type);
 
-/* WriteUnraisableException.proto */
-static void __Pyx_WriteUnraisable(const char *name, int clineno,
-                                  int lineno, const char *filename,
-                                  int full_traceback, int nogil);
-
 /* PyObject_GenericGetAttrNoDict.proto */
 #if CYTHON_USE_TYPE_SLOTS && CYTHON_USE_PYTYPE_LOOKUP && PY_VERSION_HEX < 0x03070000
 static CYTHON_INLINE PyObject* __Pyx_PyObject_GenericGetAttrNoDict(PyObject* obj, PyObject* attr_name);
@@ -1193,7 +1188,7 @@ static int __Pyx_check_binary_version(void);
 static int __Pyx_InitStrings(__Pyx_StringTabEntry *t);
 
 static CYTHON_INLINE void __pyx_f_4core_9node_path_8NodePath_8NodePath_set_native(struct __pyx_obj_4core_9node_path_8NodePath_NodePath *__pyx_v_self, godot_node_path __pyx_v__native); /* proto*/
-static CYTHON_INLINE void __pyx_f_4core_9node_path_8NodePath_8NodePath_new_static(godot_node_path __pyx_v__native); /* proto*/
+static CYTHON_INLINE struct __pyx_obj_4core_9node_path_8NodePath_NodePath *__pyx_f_4core_9node_path_8NodePath_8NodePath_new_static(godot_node_path __pyx_v__native); /* proto*/
 static CYTHON_INLINE void __pyx_f_4core_6string_6String_6String_set_native(struct __pyx_obj_4core_6string_6String_String *__pyx_v_self, godot_string __pyx_v__native); /* proto*/
 static CYTHON_INLINE struct __pyx_obj_4core_6string_6String_String *__pyx_f_4core_6string_6String_6String_new_static(godot_string __pyx_v__native); /* proto*/
 
@@ -2237,13 +2232,14 @@ static CYTHON_INLINE void __pyx_f_4core_9node_path_8NodePath_8NodePath_set_nativ
 /* "core/node_path/NodePath.pxd":10
  * 
  *     @staticmethod
- *     cdef inline void new_static(godot_node_path _native):             # <<<<<<<<<<<<<<
+ *     cdef inline NodePath new_static(godot_node_path _native):             # <<<<<<<<<<<<<<
  *         cdef NodePath o = NodePath.__new__(NodePath)
  *         o.set_native(_native)
  */
 
-static CYTHON_INLINE void __pyx_f_4core_9node_path_8NodePath_8NodePath_new_static(godot_node_path __pyx_v__native) {
+static CYTHON_INLINE struct __pyx_obj_4core_9node_path_8NodePath_NodePath *__pyx_f_4core_9node_path_8NodePath_8NodePath_new_static(godot_node_path __pyx_v__native) {
   struct __pyx_obj_4core_9node_path_8NodePath_NodePath *__pyx_v_o = 0;
+  struct __pyx_obj_4core_9node_path_8NodePath_NodePath *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   PyObject *__pyx_t_1 = NULL;
   int __pyx_lineno = 0;
@@ -2253,9 +2249,10 @@ static CYTHON_INLINE void __pyx_f_4core_9node_path_8NodePath_8NodePath_new_stati
 
   /* "core/node_path/NodePath.pxd":11
  *     @staticmethod
- *     cdef inline void new_static(godot_node_path _native):
+ *     cdef inline NodePath new_static(godot_node_path _native):
  *         cdef NodePath o = NodePath.__new__(NodePath)             # <<<<<<<<<<<<<<
  *         o.set_native(_native)
+ *         return o
  */
   __pyx_t_1 = __Pyx_tp_new(((PyObject *)__pyx_ptype_4core_9node_path_8NodePath_NodePath), __pyx_empty_tuple); if (unlikely(!__pyx_t_1)) __PYX_ERR(2, 11, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
@@ -2264,28 +2261,41 @@ static CYTHON_INLINE void __pyx_f_4core_9node_path_8NodePath_8NodePath_new_stati
   __pyx_t_1 = 0;
 
   /* "core/node_path/NodePath.pxd":12
- *     cdef inline void new_static(godot_node_path _native):
+ *     cdef inline NodePath new_static(godot_node_path _native):
  *         cdef NodePath o = NodePath.__new__(NodePath)
  *         o.set_native(_native)             # <<<<<<<<<<<<<<
+ *         return o
  */
   __pyx_f_4core_9node_path_8NodePath_8NodePath_set_native(__pyx_v_o, __pyx_v__native);
+
+  /* "core/node_path/NodePath.pxd":13
+ *         cdef NodePath o = NodePath.__new__(NodePath)
+ *         o.set_native(_native)
+ *         return o             # <<<<<<<<<<<<<<
+ */
+  __Pyx_XDECREF(((PyObject *)__pyx_r));
+  __Pyx_INCREF(((PyObject *)__pyx_v_o));
+  __pyx_r = __pyx_v_o;
+  goto __pyx_L0;
 
   /* "core/node_path/NodePath.pxd":10
  * 
  *     @staticmethod
- *     cdef inline void new_static(godot_node_path _native):             # <<<<<<<<<<<<<<
+ *     cdef inline NodePath new_static(godot_node_path _native):             # <<<<<<<<<<<<<<
  *         cdef NodePath o = NodePath.__new__(NodePath)
  *         o.set_native(_native)
  */
 
   /* function exit code */
-  goto __pyx_L0;
   __pyx_L1_error:;
   __Pyx_XDECREF(__pyx_t_1);
-  __Pyx_WriteUnraisable("core.node_path.NodePath.NodePath.new_static", __pyx_clineno, __pyx_lineno, __pyx_filename, 1, 0);
+  __Pyx_AddTraceback("core.node_path.NodePath.NodePath.new_static", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __pyx_r = 0;
   __pyx_L0:;
   __Pyx_XDECREF((PyObject *)__pyx_v_o);
+  __Pyx_XGIVEREF((PyObject *)__pyx_r);
   __Pyx_RefNannyFinishContext();
+  return __pyx_r;
 }
 
 /* "core/string/String.pxd":6
@@ -2668,7 +2678,7 @@ static int __Pyx_modinit_type_init_code(void) {
   /*--- Type init code ---*/
   __pyx_vtabptr_4core_9node_path_8NodePath_NodePath = &__pyx_vtable_4core_9node_path_8NodePath_NodePath;
   __pyx_vtable_4core_9node_path_8NodePath_NodePath.set_native = (void (*)(struct __pyx_obj_4core_9node_path_8NodePath_NodePath *, godot_node_path))__pyx_f_4core_9node_path_8NodePath_8NodePath_set_native;
-  __pyx_vtable_4core_9node_path_8NodePath_NodePath.new_static = (void (*)(godot_node_path))__pyx_f_4core_9node_path_8NodePath_8NodePath_new_static;
+  __pyx_vtable_4core_9node_path_8NodePath_NodePath.new_static = (struct __pyx_obj_4core_9node_path_8NodePath_NodePath *(*)(godot_node_path))__pyx_f_4core_9node_path_8NodePath_8NodePath_new_static;
   if (PyType_Ready(&__pyx_type_4core_9node_path_8NodePath_NodePath) < 0) __PYX_ERR(1, 4, __pyx_L1_error)
   #if PY_VERSION_HEX < 0x030800B1
   __pyx_type_4core_9node_path_8NodePath_NodePath.tp_print = 0;
@@ -3403,48 +3413,6 @@ static CYTHON_INLINE int __Pyx_TypeTest(PyObject *obj, PyTypeObject *type) {
     PyErr_Format(PyExc_TypeError, "Cannot convert %.200s to %.200s",
                  Py_TYPE(obj)->tp_name, type->tp_name);
     return 0;
-}
-
-/* WriteUnraisableException */
-static void __Pyx_WriteUnraisable(const char *name, CYTHON_UNUSED int clineno,
-                                  CYTHON_UNUSED int lineno, CYTHON_UNUSED const char *filename,
-                                  int full_traceback, CYTHON_UNUSED int nogil) {
-    PyObject *old_exc, *old_val, *old_tb;
-    PyObject *ctx;
-    __Pyx_PyThreadState_declare
-#ifdef WITH_THREAD
-    PyGILState_STATE state;
-    if (nogil)
-        state = PyGILState_Ensure();
-#ifdef _MSC_VER
-    else state = (PyGILState_STATE)-1;
-#endif
-#endif
-    __Pyx_PyThreadState_assign
-    __Pyx_ErrFetch(&old_exc, &old_val, &old_tb);
-    if (full_traceback) {
-        Py_XINCREF(old_exc);
-        Py_XINCREF(old_val);
-        Py_XINCREF(old_tb);
-        __Pyx_ErrRestore(old_exc, old_val, old_tb);
-        PyErr_PrintEx(1);
-    }
-    #if PY_MAJOR_VERSION < 3
-    ctx = PyString_FromString(name);
-    #else
-    ctx = PyUnicode_FromString(name);
-    #endif
-    __Pyx_ErrRestore(old_exc, old_val, old_tb);
-    if (!ctx) {
-        PyErr_WriteUnraisable(Py_None);
-    } else {
-        PyErr_WriteUnraisable(ctx);
-        Py_DECREF(ctx);
-    }
-#ifdef WITH_THREAD
-    if (nogil)
-        PyGILState_Release(state);
-#endif
 }
 
 /* PyObject_GenericGetAttrNoDict */

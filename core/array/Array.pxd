@@ -7,6 +7,7 @@ cdef class Array:
         self._native = _native
 
     @staticmethod
-    cdef inline void new_static(godot_array _native):
+    cdef inline Array new_static(godot_array _native):
         cdef Array o = Array.__new__(Array)
         o.set_native(_native)
+        return o

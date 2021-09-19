@@ -1070,11 +1070,11 @@ static CYTHON_INLINE struct __pyx_obj_4core_7variant_7Variant_Variant *__pyx_f_4
 
 struct __pyx_vtabstruct_4core_5color_5Color_Color {
   void (*set_native)(struct __pyx_obj_4core_5color_5Color_Color *, godot_color);
-  void (*new_static)(godot_color);
+  struct __pyx_obj_4core_5color_5Color_Color *(*new_static)(godot_color);
 };
 static struct __pyx_vtabstruct_4core_5color_5Color_Color *__pyx_vtabptr_4core_5color_5Color_Color;
 static CYTHON_INLINE void __pyx_f_4core_5color_5Color_5Color_set_native(struct __pyx_obj_4core_5color_5Color_Color *, godot_color);
-static CYTHON_INLINE void __pyx_f_4core_5color_5Color_5Color_new_static(godot_color);
+static CYTHON_INLINE struct __pyx_obj_4core_5color_5Color_Color *__pyx_f_4core_5color_5Color_5Color_new_static(godot_color);
 
 /* --- Runtime support code (head) --- */
 /* Refnanny.proto */
@@ -1314,47 +1314,6 @@ static CYTHON_INLINE PyObject* __Pyx_tp_new_kwargs(PyObject* type_obj, PyObject*
 /* ExtTypeTest.proto */
 static CYTHON_INLINE int __Pyx_TypeTest(PyObject *obj, PyTypeObject *type);
 
-/* PyThreadStateGet.proto */
-#if CYTHON_FAST_THREAD_STATE
-#define __Pyx_PyThreadState_declare  PyThreadState *__pyx_tstate;
-#define __Pyx_PyThreadState_assign  __pyx_tstate = __Pyx_PyThreadState_Current;
-#define __Pyx_PyErr_Occurred()  __pyx_tstate->curexc_type
-#else
-#define __Pyx_PyThreadState_declare
-#define __Pyx_PyThreadState_assign
-#define __Pyx_PyErr_Occurred()  PyErr_Occurred()
-#endif
-
-/* PyErrFetchRestore.proto */
-#if CYTHON_FAST_THREAD_STATE
-#define __Pyx_PyErr_Clear() __Pyx_ErrRestore(NULL, NULL, NULL)
-#define __Pyx_ErrRestoreWithState(type, value, tb)  __Pyx_ErrRestoreInState(PyThreadState_GET(), type, value, tb)
-#define __Pyx_ErrFetchWithState(type, value, tb)    __Pyx_ErrFetchInState(PyThreadState_GET(), type, value, tb)
-#define __Pyx_ErrRestore(type, value, tb)  __Pyx_ErrRestoreInState(__pyx_tstate, type, value, tb)
-#define __Pyx_ErrFetch(type, value, tb)    __Pyx_ErrFetchInState(__pyx_tstate, type, value, tb)
-static CYTHON_INLINE void __Pyx_ErrRestoreInState(PyThreadState *tstate, PyObject *type, PyObject *value, PyObject *tb);
-static CYTHON_INLINE void __Pyx_ErrFetchInState(PyThreadState *tstate, PyObject **type, PyObject **value, PyObject **tb);
-#if CYTHON_COMPILING_IN_CPYTHON
-#define __Pyx_PyErr_SetNone(exc) (Py_INCREF(exc), __Pyx_ErrRestore((exc), NULL, NULL))
-#else
-#define __Pyx_PyErr_SetNone(exc) PyErr_SetNone(exc)
-#endif
-#else
-#define __Pyx_PyErr_Clear() PyErr_Clear()
-#define __Pyx_PyErr_SetNone(exc) PyErr_SetNone(exc)
-#define __Pyx_ErrRestoreWithState(type, value, tb)  PyErr_Restore(type, value, tb)
-#define __Pyx_ErrFetchWithState(type, value, tb)  PyErr_Fetch(type, value, tb)
-#define __Pyx_ErrRestoreInState(tstate, type, value, tb)  PyErr_Restore(type, value, tb)
-#define __Pyx_ErrFetchInState(tstate, type, value, tb)  PyErr_Fetch(type, value, tb)
-#define __Pyx_ErrRestore(type, value, tb)  PyErr_Restore(type, value, tb)
-#define __Pyx_ErrFetch(type, value, tb)  PyErr_Fetch(type, value, tb)
-#endif
-
-/* WriteUnraisableException.proto */
-static void __Pyx_WriteUnraisable(const char *name, int clineno,
-                                  int lineno, const char *filename,
-                                  int full_traceback, int nogil);
-
 /* TypeImport.proto */
 #ifndef __PYX_HAVE_RT_ImportType_proto
 #define __PYX_HAVE_RT_ImportType_proto
@@ -1455,6 +1414,42 @@ static PyObject *__Pyx_Py3MetaclassPrepare(PyObject *metaclass, PyObject *bases,
 static PyObject *__Pyx_Py3ClassCreate(PyObject *metaclass, PyObject *name, PyObject *bases, PyObject *dict,
                                       PyObject *mkw, int calculate_metaclass, int allow_py2_metaclass);
 
+/* PyThreadStateGet.proto */
+#if CYTHON_FAST_THREAD_STATE
+#define __Pyx_PyThreadState_declare  PyThreadState *__pyx_tstate;
+#define __Pyx_PyThreadState_assign  __pyx_tstate = __Pyx_PyThreadState_Current;
+#define __Pyx_PyErr_Occurred()  __pyx_tstate->curexc_type
+#else
+#define __Pyx_PyThreadState_declare
+#define __Pyx_PyThreadState_assign
+#define __Pyx_PyErr_Occurred()  PyErr_Occurred()
+#endif
+
+/* PyErrFetchRestore.proto */
+#if CYTHON_FAST_THREAD_STATE
+#define __Pyx_PyErr_Clear() __Pyx_ErrRestore(NULL, NULL, NULL)
+#define __Pyx_ErrRestoreWithState(type, value, tb)  __Pyx_ErrRestoreInState(PyThreadState_GET(), type, value, tb)
+#define __Pyx_ErrFetchWithState(type, value, tb)    __Pyx_ErrFetchInState(PyThreadState_GET(), type, value, tb)
+#define __Pyx_ErrRestore(type, value, tb)  __Pyx_ErrRestoreInState(__pyx_tstate, type, value, tb)
+#define __Pyx_ErrFetch(type, value, tb)    __Pyx_ErrFetchInState(__pyx_tstate, type, value, tb)
+static CYTHON_INLINE void __Pyx_ErrRestoreInState(PyThreadState *tstate, PyObject *type, PyObject *value, PyObject *tb);
+static CYTHON_INLINE void __Pyx_ErrFetchInState(PyThreadState *tstate, PyObject **type, PyObject **value, PyObject **tb);
+#if CYTHON_COMPILING_IN_CPYTHON
+#define __Pyx_PyErr_SetNone(exc) (Py_INCREF(exc), __Pyx_ErrRestore((exc), NULL, NULL))
+#else
+#define __Pyx_PyErr_SetNone(exc) PyErr_SetNone(exc)
+#endif
+#else
+#define __Pyx_PyErr_Clear() PyErr_Clear()
+#define __Pyx_PyErr_SetNone(exc) PyErr_SetNone(exc)
+#define __Pyx_ErrRestoreWithState(type, value, tb)  PyErr_Restore(type, value, tb)
+#define __Pyx_ErrFetchWithState(type, value, tb)  PyErr_Fetch(type, value, tb)
+#define __Pyx_ErrRestoreInState(tstate, type, value, tb)  PyErr_Restore(type, value, tb)
+#define __Pyx_ErrFetchInState(tstate, type, value, tb)  PyErr_Fetch(type, value, tb)
+#define __Pyx_ErrRestore(type, value, tb)  PyErr_Restore(type, value, tb)
+#define __Pyx_ErrFetch(type, value, tb)  PyErr_Fetch(type, value, tb)
+#endif
+
 /* CLineInTraceback.proto */
 #ifdef CYTHON_CLINE_IN_TRACEBACK
 #define __Pyx_CLineForTraceback(tstate, c_line)  (((CYTHON_CLINE_IN_TRACEBACK)) ? c_line : 0)
@@ -1522,7 +1517,7 @@ static CYTHON_INLINE struct __pyx_obj_4core_6string_6String_String *__pyx_f_4cor
 static CYTHON_INLINE void __pyx_f_4core_7variant_7Variant_7Variant_set_native(struct __pyx_obj_4core_7variant_7Variant_Variant *__pyx_v_self, godot_variant __pyx_v__native); /* proto*/
 static CYTHON_INLINE struct __pyx_obj_4core_7variant_7Variant_Variant *__pyx_f_4core_7variant_7Variant_7Variant_new_static(godot_variant __pyx_v__native); /* proto*/
 static CYTHON_INLINE void __pyx_f_4core_5color_5Color_5Color_set_native(struct __pyx_obj_4core_5color_5Color_Color *__pyx_v_self, godot_color __pyx_v__native); /* proto*/
-static CYTHON_INLINE void __pyx_f_4core_5color_5Color_5Color_new_static(godot_color __pyx_v__native); /* proto*/
+static CYTHON_INLINE struct __pyx_obj_4core_5color_5Color_Color *__pyx_f_4core_5color_5Color_5Color_new_static(godot_color __pyx_v__native); /* proto*/
 
 /* Module declarations from 'libcpp' */
 
@@ -2897,13 +2892,14 @@ static CYTHON_INLINE void __pyx_f_4core_5color_5Color_5Color_set_native(struct _
 /* "core/color/Color.pxd":10
  * 
  *     @staticmethod
- *     cdef inline void new_static(godot_color _native):             # <<<<<<<<<<<<<<
+ *     cdef inline Color new_static(godot_color _native):             # <<<<<<<<<<<<<<
  *         cdef Color o = Color.__new__(Color)
  *         o.set_native(_native)
  */
 
-static CYTHON_INLINE void __pyx_f_4core_5color_5Color_5Color_new_static(godot_color __pyx_v__native) {
+static CYTHON_INLINE struct __pyx_obj_4core_5color_5Color_Color *__pyx_f_4core_5color_5Color_5Color_new_static(godot_color __pyx_v__native) {
   struct __pyx_obj_4core_5color_5Color_Color *__pyx_v_o = 0;
+  struct __pyx_obj_4core_5color_5Color_Color *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   PyObject *__pyx_t_1 = NULL;
   int __pyx_lineno = 0;
@@ -2913,9 +2909,10 @@ static CYTHON_INLINE void __pyx_f_4core_5color_5Color_5Color_new_static(godot_co
 
   /* "core/color/Color.pxd":11
  *     @staticmethod
- *     cdef inline void new_static(godot_color _native):
+ *     cdef inline Color new_static(godot_color _native):
  *         cdef Color o = Color.__new__(Color)             # <<<<<<<<<<<<<<
  *         o.set_native(_native)
+ *         return o
  */
   __pyx_t_1 = __Pyx_tp_new(((PyObject *)__pyx_ptype_4core_5color_5Color_Color), __pyx_empty_tuple); if (unlikely(!__pyx_t_1)) __PYX_ERR(4, 11, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
@@ -2924,28 +2921,41 @@ static CYTHON_INLINE void __pyx_f_4core_5color_5Color_5Color_new_static(godot_co
   __pyx_t_1 = 0;
 
   /* "core/color/Color.pxd":12
- *     cdef inline void new_static(godot_color _native):
+ *     cdef inline Color new_static(godot_color _native):
  *         cdef Color o = Color.__new__(Color)
  *         o.set_native(_native)             # <<<<<<<<<<<<<<
+ *         return o
  */
   __pyx_f_4core_5color_5Color_5Color_set_native(__pyx_v_o, __pyx_v__native);
+
+  /* "core/color/Color.pxd":13
+ *         cdef Color o = Color.__new__(Color)
+ *         o.set_native(_native)
+ *         return o             # <<<<<<<<<<<<<<
+ */
+  __Pyx_XDECREF(((PyObject *)__pyx_r));
+  __Pyx_INCREF(((PyObject *)__pyx_v_o));
+  __pyx_r = __pyx_v_o;
+  goto __pyx_L0;
 
   /* "core/color/Color.pxd":10
  * 
  *     @staticmethod
- *     cdef inline void new_static(godot_color _native):             # <<<<<<<<<<<<<<
+ *     cdef inline Color new_static(godot_color _native):             # <<<<<<<<<<<<<<
  *         cdef Color o = Color.__new__(Color)
  *         o.set_native(_native)
  */
 
   /* function exit code */
-  goto __pyx_L0;
   __pyx_L1_error:;
   __Pyx_XDECREF(__pyx_t_1);
-  __Pyx_WriteUnraisable("core.color.Color.Color.new_static", __pyx_clineno, __pyx_lineno, __pyx_filename, 1, 0);
+  __Pyx_AddTraceback("core.color.Color.Color.new_static", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __pyx_r = 0;
   __pyx_L0:;
   __Pyx_XDECREF((PyObject *)__pyx_v_o);
+  __Pyx_XGIVEREF((PyObject *)__pyx_r);
   __Pyx_RefNannyFinishContext();
+  return __pyx_r;
 }
 
 static PyMethodDef __pyx_methods[] = {
@@ -3812,7 +3822,7 @@ if (!__Pyx_RefNanny) {
   /* "core/color/Color.pxd":10
  * 
  *     @staticmethod
- *     cdef inline void new_static(godot_color _native):             # <<<<<<<<<<<<<<
+ *     cdef inline Color new_static(godot_color _native):             # <<<<<<<<<<<<<<
  *         cdef Color o = Color.__new__(Color)
  *         o.set_native(_native)
  */
@@ -4477,72 +4487,6 @@ static CYTHON_INLINE int __Pyx_TypeTest(PyObject *obj, PyTypeObject *type) {
     PyErr_Format(PyExc_TypeError, "Cannot convert %.200s to %.200s",
                  Py_TYPE(obj)->tp_name, type->tp_name);
     return 0;
-}
-
-/* PyErrFetchRestore */
-#if CYTHON_FAST_THREAD_STATE
-static CYTHON_INLINE void __Pyx_ErrRestoreInState(PyThreadState *tstate, PyObject *type, PyObject *value, PyObject *tb) {
-    PyObject *tmp_type, *tmp_value, *tmp_tb;
-    tmp_type = tstate->curexc_type;
-    tmp_value = tstate->curexc_value;
-    tmp_tb = tstate->curexc_traceback;
-    tstate->curexc_type = type;
-    tstate->curexc_value = value;
-    tstate->curexc_traceback = tb;
-    Py_XDECREF(tmp_type);
-    Py_XDECREF(tmp_value);
-    Py_XDECREF(tmp_tb);
-}
-static CYTHON_INLINE void __Pyx_ErrFetchInState(PyThreadState *tstate, PyObject **type, PyObject **value, PyObject **tb) {
-    *type = tstate->curexc_type;
-    *value = tstate->curexc_value;
-    *tb = tstate->curexc_traceback;
-    tstate->curexc_type = 0;
-    tstate->curexc_value = 0;
-    tstate->curexc_traceback = 0;
-}
-#endif
-
-/* WriteUnraisableException */
-static void __Pyx_WriteUnraisable(const char *name, CYTHON_UNUSED int clineno,
-                                  CYTHON_UNUSED int lineno, CYTHON_UNUSED const char *filename,
-                                  int full_traceback, CYTHON_UNUSED int nogil) {
-    PyObject *old_exc, *old_val, *old_tb;
-    PyObject *ctx;
-    __Pyx_PyThreadState_declare
-#ifdef WITH_THREAD
-    PyGILState_STATE state;
-    if (nogil)
-        state = PyGILState_Ensure();
-#ifdef _MSC_VER
-    else state = (PyGILState_STATE)-1;
-#endif
-#endif
-    __Pyx_PyThreadState_assign
-    __Pyx_ErrFetch(&old_exc, &old_val, &old_tb);
-    if (full_traceback) {
-        Py_XINCREF(old_exc);
-        Py_XINCREF(old_val);
-        Py_XINCREF(old_tb);
-        __Pyx_ErrRestore(old_exc, old_val, old_tb);
-        PyErr_PrintEx(1);
-    }
-    #if PY_MAJOR_VERSION < 3
-    ctx = PyString_FromString(name);
-    #else
-    ctx = PyUnicode_FromString(name);
-    #endif
-    __Pyx_ErrRestore(old_exc, old_val, old_tb);
-    if (!ctx) {
-        PyErr_WriteUnraisable(Py_None);
-    } else {
-        PyErr_WriteUnraisable(ctx);
-        Py_DECREF(ctx);
-    }
-#ifdef WITH_THREAD
-    if (nogil)
-        PyGILState_Release(state);
-#endif
 }
 
 /* TypeImport */
@@ -5452,6 +5396,30 @@ static PyObject *__Pyx_Py3ClassCreate(PyObject *metaclass, PyObject *name, PyObj
     Py_XDECREF(owned_metaclass);
     return result;
 }
+
+/* PyErrFetchRestore */
+#if CYTHON_FAST_THREAD_STATE
+static CYTHON_INLINE void __Pyx_ErrRestoreInState(PyThreadState *tstate, PyObject *type, PyObject *value, PyObject *tb) {
+    PyObject *tmp_type, *tmp_value, *tmp_tb;
+    tmp_type = tstate->curexc_type;
+    tmp_value = tstate->curexc_value;
+    tmp_tb = tstate->curexc_traceback;
+    tstate->curexc_type = type;
+    tstate->curexc_value = value;
+    tstate->curexc_traceback = tb;
+    Py_XDECREF(tmp_type);
+    Py_XDECREF(tmp_value);
+    Py_XDECREF(tmp_tb);
+}
+static CYTHON_INLINE void __Pyx_ErrFetchInState(PyThreadState *tstate, PyObject **type, PyObject **value, PyObject **tb) {
+    *type = tstate->curexc_type;
+    *value = tstate->curexc_value;
+    *tb = tstate->curexc_traceback;
+    tstate->curexc_type = 0;
+    tstate->curexc_value = 0;
+    tstate->curexc_traceback = 0;
+}
+#endif
 
 /* CLineInTraceback */
 #ifndef CYTHON_CLINE_IN_TRACEBACK

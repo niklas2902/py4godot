@@ -7,6 +7,7 @@ cdef class Rect2:
         self._native = _native
 
     @staticmethod
-    cdef inline void new_static(godot_rect2 _native):
+    cdef inline Rect2 new_static(godot_rect2 _native):
         cdef Rect2 o = Rect2.__new__(Rect2)
         o.set_native(_native)
+        return o

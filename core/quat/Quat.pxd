@@ -7,6 +7,7 @@ cdef class Quat:
         self._native = _native
 
     @staticmethod
-    cdef inline void new_static(godot_quat _native):
+    cdef inline Quat new_static(godot_quat _native):
         cdef Quat o = Quat.__new__(Quat)
         o.set_native(_native)
+        return o

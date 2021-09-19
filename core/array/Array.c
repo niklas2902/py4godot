@@ -1038,11 +1038,11 @@ static CYTHON_INLINE struct __pyx_obj_4core_7variant_7Variant_Variant *__pyx_f_4
 
 struct __pyx_vtabstruct_4core_5array_5Array_Array {
   void (*set_native)(struct __pyx_obj_4core_5array_5Array_Array *, godot_array);
-  void (*new_static)(godot_array);
+  struct __pyx_obj_4core_5array_5Array_Array *(*new_static)(godot_array);
 };
 static struct __pyx_vtabstruct_4core_5array_5Array_Array *__pyx_vtabptr_4core_5array_5Array_Array;
 static CYTHON_INLINE void __pyx_f_4core_5array_5Array_5Array_set_native(struct __pyx_obj_4core_5array_5Array_Array *, godot_array);
-static CYTHON_INLINE void __pyx_f_4core_5array_5Array_5Array_new_static(godot_array);
+static CYTHON_INLINE struct __pyx_obj_4core_5array_5Array_Array *__pyx_f_4core_5array_5Array_5Array_new_static(godot_array);
 
 /* --- Runtime support code (head) --- */
 /* Refnanny.proto */
@@ -1194,11 +1194,6 @@ static CYTHON_INLINE PyObject* __Pyx_tp_new_kwargs(PyObject* type_obj, PyObject*
 /* ExtTypeTest.proto */
 static CYTHON_INLINE int __Pyx_TypeTest(PyObject *obj, PyTypeObject *type);
 
-/* WriteUnraisableException.proto */
-static void __Pyx_WriteUnraisable(const char *name, int clineno,
-                                  int lineno, const char *filename,
-                                  int full_traceback, int nogil);
-
 /* PyObject_GenericGetAttrNoDict.proto */
 #if CYTHON_USE_TYPE_SLOTS && CYTHON_USE_PYTYPE_LOOKUP && PY_VERSION_HEX < 0x03070000
 static CYTHON_INLINE PyObject* __Pyx_PyObject_GenericGetAttrNoDict(PyObject* obj, PyObject* attr_name);
@@ -1335,7 +1330,7 @@ static int __Pyx_ExportFunction(const char *name, void (*f)(void), const char *s
 static int __Pyx_InitStrings(__Pyx_StringTabEntry *t);
 
 static CYTHON_INLINE void __pyx_f_4core_5array_5Array_5Array_set_native(struct __pyx_obj_4core_5array_5Array_Array *__pyx_v_self, godot_array __pyx_v__native); /* proto*/
-static CYTHON_INLINE void __pyx_f_4core_5array_5Array_5Array_new_static(godot_array __pyx_v__native); /* proto*/
+static CYTHON_INLINE struct __pyx_obj_4core_5array_5Array_Array *__pyx_f_4core_5array_5Array_5Array_new_static(godot_array __pyx_v__native); /* proto*/
 static CYTHON_INLINE void __pyx_f_4core_10dictionary_10Dictionary_10Dictionary_set_native(struct __pyx_obj_4core_10dictionary_10Dictionary_Dictionary *__pyx_v_self, godot_dictionary __pyx_v__native); /* proto*/
 static CYTHON_INLINE struct __pyx_obj_4core_10dictionary_10Dictionary_Dictionary *__pyx_f_4core_10dictionary_10Dictionary_10Dictionary_new_static(godot_dictionary __pyx_v__native); /* proto*/
 static CYTHON_INLINE void __pyx_f_4core_7variant_7Variant_7Variant_set_native(struct __pyx_obj_4core_7variant_7Variant_Variant *__pyx_v_self, godot_variant __pyx_v__native); /* proto*/
@@ -3730,13 +3725,14 @@ static CYTHON_INLINE void __pyx_f_4core_5array_5Array_5Array_set_native(struct _
 /* "core/array/Array.pxd":10
  * 
  *     @staticmethod
- *     cdef inline void new_static(godot_array _native):             # <<<<<<<<<<<<<<
+ *     cdef inline Array new_static(godot_array _native):             # <<<<<<<<<<<<<<
  *         cdef Array o = Array.__new__(Array)
  *         o.set_native(_native)
  */
 
-static CYTHON_INLINE void __pyx_f_4core_5array_5Array_5Array_new_static(godot_array __pyx_v__native) {
+static CYTHON_INLINE struct __pyx_obj_4core_5array_5Array_Array *__pyx_f_4core_5array_5Array_5Array_new_static(godot_array __pyx_v__native) {
   struct __pyx_obj_4core_5array_5Array_Array *__pyx_v_o = 0;
+  struct __pyx_obj_4core_5array_5Array_Array *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   PyObject *__pyx_t_1 = NULL;
   int __pyx_lineno = 0;
@@ -3746,9 +3742,10 @@ static CYTHON_INLINE void __pyx_f_4core_5array_5Array_5Array_new_static(godot_ar
 
   /* "core/array/Array.pxd":11
  *     @staticmethod
- *     cdef inline void new_static(godot_array _native):
+ *     cdef inline Array new_static(godot_array _native):
  *         cdef Array o = Array.__new__(Array)             # <<<<<<<<<<<<<<
  *         o.set_native(_native)
+ *         return o
  */
   __pyx_t_1 = __Pyx_tp_new(((PyObject *)__pyx_ptype_4core_5array_5Array_Array), __pyx_empty_tuple); if (unlikely(!__pyx_t_1)) __PYX_ERR(2, 11, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
@@ -3757,28 +3754,41 @@ static CYTHON_INLINE void __pyx_f_4core_5array_5Array_5Array_new_static(godot_ar
   __pyx_t_1 = 0;
 
   /* "core/array/Array.pxd":12
- *     cdef inline void new_static(godot_array _native):
+ *     cdef inline Array new_static(godot_array _native):
  *         cdef Array o = Array.__new__(Array)
  *         o.set_native(_native)             # <<<<<<<<<<<<<<
+ *         return o
  */
   __pyx_f_4core_5array_5Array_5Array_set_native(__pyx_v_o, __pyx_v__native);
+
+  /* "core/array/Array.pxd":13
+ *         cdef Array o = Array.__new__(Array)
+ *         o.set_native(_native)
+ *         return o             # <<<<<<<<<<<<<<
+ */
+  __Pyx_XDECREF(((PyObject *)__pyx_r));
+  __Pyx_INCREF(((PyObject *)__pyx_v_o));
+  __pyx_r = __pyx_v_o;
+  goto __pyx_L0;
 
   /* "core/array/Array.pxd":10
  * 
  *     @staticmethod
- *     cdef inline void new_static(godot_array _native):             # <<<<<<<<<<<<<<
+ *     cdef inline Array new_static(godot_array _native):             # <<<<<<<<<<<<<<
  *         cdef Array o = Array.__new__(Array)
  *         o.set_native(_native)
  */
 
   /* function exit code */
-  goto __pyx_L0;
   __pyx_L1_error:;
   __Pyx_XDECREF(__pyx_t_1);
-  __Pyx_WriteUnraisable("core.array.Array.Array.new_static", __pyx_clineno, __pyx_lineno, __pyx_filename, 1, 0);
+  __Pyx_AddTraceback("core.array.Array.Array.new_static", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __pyx_r = 0;
   __pyx_L0:;
   __Pyx_XDECREF((PyObject *)__pyx_v_o);
+  __Pyx_XGIVEREF((PyObject *)__pyx_r);
   __Pyx_RefNannyFinishContext();
+  return __pyx_r;
 }
 
 /* "core/dictionary/Dictionary.pxd":7
@@ -4300,7 +4310,7 @@ static int __Pyx_modinit_type_init_code(void) {
   /*--- Type init code ---*/
   __pyx_vtabptr_4core_5array_5Array_Array = &__pyx_vtable_4core_5array_5Array_Array;
   __pyx_vtable_4core_5array_5Array_Array.set_native = (void (*)(struct __pyx_obj_4core_5array_5Array_Array *, godot_array))__pyx_f_4core_5array_5Array_5Array_set_native;
-  __pyx_vtable_4core_5array_5Array_Array.new_static = (void (*)(godot_array))__pyx_f_4core_5array_5Array_5Array_new_static;
+  __pyx_vtable_4core_5array_5Array_Array.new_static = (struct __pyx_obj_4core_5array_5Array_Array *(*)(godot_array))__pyx_f_4core_5array_5Array_5Array_new_static;
   if (PyType_Ready(&__pyx_type_4core_5array_5Array_Array) < 0) __PYX_ERR(1, 9, __pyx_L1_error)
   #if PY_VERSION_HEX < 0x030800B1
   __pyx_type_4core_5array_5Array_Array.tp_print = 0;
@@ -5081,48 +5091,6 @@ static CYTHON_INLINE int __Pyx_TypeTest(PyObject *obj, PyTypeObject *type) {
     PyErr_Format(PyExc_TypeError, "Cannot convert %.200s to %.200s",
                  Py_TYPE(obj)->tp_name, type->tp_name);
     return 0;
-}
-
-/* WriteUnraisableException */
-static void __Pyx_WriteUnraisable(const char *name, CYTHON_UNUSED int clineno,
-                                  CYTHON_UNUSED int lineno, CYTHON_UNUSED const char *filename,
-                                  int full_traceback, CYTHON_UNUSED int nogil) {
-    PyObject *old_exc, *old_val, *old_tb;
-    PyObject *ctx;
-    __Pyx_PyThreadState_declare
-#ifdef WITH_THREAD
-    PyGILState_STATE state;
-    if (nogil)
-        state = PyGILState_Ensure();
-#ifdef _MSC_VER
-    else state = (PyGILState_STATE)-1;
-#endif
-#endif
-    __Pyx_PyThreadState_assign
-    __Pyx_ErrFetch(&old_exc, &old_val, &old_tb);
-    if (full_traceback) {
-        Py_XINCREF(old_exc);
-        Py_XINCREF(old_val);
-        Py_XINCREF(old_tb);
-        __Pyx_ErrRestore(old_exc, old_val, old_tb);
-        PyErr_PrintEx(1);
-    }
-    #if PY_MAJOR_VERSION < 3
-    ctx = PyString_FromString(name);
-    #else
-    ctx = PyUnicode_FromString(name);
-    #endif
-    __Pyx_ErrRestore(old_exc, old_val, old_tb);
-    if (!ctx) {
-        PyErr_WriteUnraisable(Py_None);
-    } else {
-        PyErr_WriteUnraisable(ctx);
-        Py_DECREF(ctx);
-    }
-#ifdef WITH_THREAD
-    if (nogil)
-        PyGILState_Release(state);
-#endif
 }
 
 /* PyObject_GenericGetAttrNoDict */

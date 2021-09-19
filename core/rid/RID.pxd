@@ -7,6 +7,7 @@ cdef class RID:
         self._native = _native
 
     @staticmethod
-    cdef inline void new_static(godot_rid _native):
+    cdef inline RID new_static(godot_rid _native):
         cdef RID o = RID.__new__(RID)
         o.set_native(_native)
+        return o

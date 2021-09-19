@@ -1382,11 +1382,11 @@ static CYTHON_INLINE void __pyx_f_4core_7vector2_7Vector2_7Vector2_new_static(go
 
 struct __pyx_vtabstruct_4core_5basis_5Basis_Basis {
   void (*set_native)(struct __pyx_obj_4core_5basis_5Basis_Basis *, godot_basis);
-  void (*new_static)(godot_basis);
+  struct __pyx_obj_4core_5basis_5Basis_Basis *(*new_static)(godot_basis);
 };
 static struct __pyx_vtabstruct_4core_5basis_5Basis_Basis *__pyx_vtabptr_4core_5basis_5Basis_Basis;
 static CYTHON_INLINE void __pyx_f_4core_5basis_5Basis_5Basis_set_native(struct __pyx_obj_4core_5basis_5Basis_Basis *, godot_basis);
-static CYTHON_INLINE void __pyx_f_4core_5basis_5Basis_5Basis_new_static(godot_basis);
+static CYTHON_INLINE struct __pyx_obj_4core_5basis_5Basis_Basis *__pyx_f_4core_5basis_5Basis_5Basis_new_static(godot_basis);
 
 
 /* "core/aabb/AABB.pxd":3
@@ -1433,11 +1433,11 @@ static CYTHON_INLINE struct __pyx_obj_4core_6string_6String_String *__pyx_f_4cor
 
 struct __pyx_vtabstruct_4core_5rect2_5Rect2_Rect2 {
   void (*set_native)(struct __pyx_obj_4core_5rect2_5Rect2_Rect2 *, godot_rect2);
-  void (*new_static)(godot_rect2);
+  struct __pyx_obj_4core_5rect2_5Rect2_Rect2 *(*new_static)(godot_rect2);
 };
 static struct __pyx_vtabstruct_4core_5rect2_5Rect2_Rect2 *__pyx_vtabptr_4core_5rect2_5Rect2_Rect2;
 static CYTHON_INLINE void __pyx_f_4core_5rect2_5Rect2_5Rect2_set_native(struct __pyx_obj_4core_5rect2_5Rect2_Rect2 *, godot_rect2);
-static CYTHON_INLINE void __pyx_f_4core_5rect2_5Rect2_5Rect2_new_static(godot_rect2);
+static CYTHON_INLINE struct __pyx_obj_4core_5rect2_5Rect2_Rect2 *__pyx_f_4core_5rect2_5Rect2_5Rect2_new_static(godot_rect2);
 
 
 /* "core/quat/Quat.pxd":3
@@ -1450,11 +1450,11 @@ static CYTHON_INLINE void __pyx_f_4core_5rect2_5Rect2_5Rect2_new_static(godot_re
 
 struct __pyx_vtabstruct_4core_4quat_4Quat_Quat {
   void (*set_native)(struct __pyx_obj_4core_4quat_4Quat_Quat *, godot_quat);
-  void (*new_static)(godot_quat);
+  struct __pyx_obj_4core_4quat_4Quat_Quat *(*new_static)(godot_quat);
 };
 static struct __pyx_vtabstruct_4core_4quat_4Quat_Quat *__pyx_vtabptr_4core_4quat_4Quat_Quat;
 static CYTHON_INLINE void __pyx_f_4core_4quat_4Quat_4Quat_set_native(struct __pyx_obj_4core_4quat_4Quat_Quat *, godot_quat);
-static CYTHON_INLINE void __pyx_f_4core_4quat_4Quat_4Quat_new_static(godot_quat);
+static CYTHON_INLINE struct __pyx_obj_4core_4quat_4Quat_Quat *__pyx_f_4core_4quat_4Quat_4Quat_new_static(godot_quat);
 
 
 /* "core/color/Color.pxd":3
@@ -1467,11 +1467,11 @@ static CYTHON_INLINE void __pyx_f_4core_4quat_4Quat_4Quat_new_static(godot_quat)
 
 struct __pyx_vtabstruct_4core_5color_5Color_Color {
   void (*set_native)(struct __pyx_obj_4core_5color_5Color_Color *, godot_color);
-  void (*new_static)(godot_color);
+  struct __pyx_obj_4core_5color_5Color_Color *(*new_static)(godot_color);
 };
 static struct __pyx_vtabstruct_4core_5color_5Color_Color *__pyx_vtabptr_4core_5color_5Color_Color;
 static CYTHON_INLINE void __pyx_f_4core_5color_5Color_5Color_set_native(struct __pyx_obj_4core_5color_5Color_Color *, godot_color);
-static CYTHON_INLINE void __pyx_f_4core_5color_5Color_5Color_new_static(godot_color);
+static CYTHON_INLINE struct __pyx_obj_4core_5color_5Color_Color *__pyx_f_4core_5color_5Color_5Color_new_static(godot_color);
 
 
 /* "core/node_path/NodePath.pxd":3
@@ -1484,11 +1484,11 @@ static CYTHON_INLINE void __pyx_f_4core_5color_5Color_5Color_new_static(godot_co
 
 struct __pyx_vtabstruct_4core_9node_path_8NodePath_NodePath {
   void (*set_native)(struct __pyx_obj_4core_9node_path_8NodePath_NodePath *, godot_node_path);
-  void (*new_static)(godot_node_path);
+  struct __pyx_obj_4core_9node_path_8NodePath_NodePath *(*new_static)(godot_node_path);
 };
 static struct __pyx_vtabstruct_4core_9node_path_8NodePath_NodePath *__pyx_vtabptr_4core_9node_path_8NodePath_NodePath;
 static CYTHON_INLINE void __pyx_f_4core_9node_path_8NodePath_8NodePath_set_native(struct __pyx_obj_4core_9node_path_8NodePath_NodePath *, godot_node_path);
-static CYTHON_INLINE void __pyx_f_4core_9node_path_8NodePath_8NodePath_new_static(godot_node_path);
+static CYTHON_INLINE struct __pyx_obj_4core_9node_path_8NodePath_NodePath *__pyx_f_4core_9node_path_8NodePath_8NodePath_new_static(godot_node_path);
 
 
 /* "core/transform/Transform.pxd":3
@@ -1535,11 +1535,11 @@ static CYTHON_INLINE void __pyx_f_4core_9transform_11Transform2D_11Transform2D_n
 
 struct __pyx_vtabstruct_4core_5plane_5Plane_Plane {
   void (*set_native)(struct __pyx_obj_4core_5plane_5Plane_Plane *, godot_plane);
-  void (*new_static)(godot_plane);
+  struct __pyx_obj_4core_5plane_5Plane_Plane *(*new_static)(godot_plane);
 };
 static struct __pyx_vtabstruct_4core_5plane_5Plane_Plane *__pyx_vtabptr_4core_5plane_5Plane_Plane;
 static CYTHON_INLINE void __pyx_f_4core_5plane_5Plane_5Plane_set_native(struct __pyx_obj_4core_5plane_5Plane_Plane *, godot_plane);
-static CYTHON_INLINE void __pyx_f_4core_5plane_5Plane_5Plane_new_static(godot_plane);
+static CYTHON_INLINE struct __pyx_obj_4core_5plane_5Plane_Plane *__pyx_f_4core_5plane_5Plane_5Plane_new_static(godot_plane);
 
 
 /* "core/pool_array/PoolArrays.pxd":3
@@ -1657,11 +1657,11 @@ static CYTHON_INLINE void __pyx_f_4core_10pool_array_10PoolArrays_14PoolColorArr
 
 struct __pyx_vtabstruct_4core_5array_5Array_Array {
   void (*set_native)(struct __pyx_obj_4core_5array_5Array_Array *, godot_array);
-  void (*new_static)(godot_array);
+  struct __pyx_obj_4core_5array_5Array_Array *(*new_static)(godot_array);
 };
 static struct __pyx_vtabstruct_4core_5array_5Array_Array *__pyx_vtabptr_4core_5array_5Array_Array;
 static CYTHON_INLINE void __pyx_f_4core_5array_5Array_5Array_set_native(struct __pyx_obj_4core_5array_5Array_Array *, godot_array);
-static CYTHON_INLINE void __pyx_f_4core_5array_5Array_5Array_new_static(godot_array);
+static CYTHON_INLINE struct __pyx_obj_4core_5array_5Array_Array *__pyx_f_4core_5array_5Array_5Array_new_static(godot_array);
 
 
 /* "core/rid/RID.pxd":3
@@ -1674,11 +1674,11 @@ static CYTHON_INLINE void __pyx_f_4core_5array_5Array_5Array_new_static(godot_ar
 
 struct __pyx_vtabstruct_4core_3rid_3RID_RID {
   void (*set_native)(struct __pyx_obj_4core_3rid_3RID_RID *, godot_rid);
-  void (*new_static)(godot_rid);
+  struct __pyx_obj_4core_3rid_3RID_RID *(*new_static)(godot_rid);
 };
 static struct __pyx_vtabstruct_4core_3rid_3RID_RID *__pyx_vtabptr_4core_3rid_3RID_RID;
 static CYTHON_INLINE void __pyx_f_4core_3rid_3RID_3RID_set_native(struct __pyx_obj_4core_3rid_3RID_RID *, godot_rid);
-static CYTHON_INLINE void __pyx_f_4core_3rid_3RID_3RID_new_static(godot_rid);
+static CYTHON_INLINE struct __pyx_obj_4core_3rid_3RID_RID *__pyx_f_4core_3rid_3RID_3RID_new_static(godot_rid);
 
 
 /* "core/variant/Variant.pyx":29
@@ -2230,25 +2230,25 @@ static CYTHON_INLINE void __pyx_f_4core_7vector3_7Vector3_7Vector3_new_static(go
 static CYTHON_INLINE void __pyx_f_4core_7vector2_7Vector2_7Vector2_set_native(struct __pyx_obj_4core_7vector2_7Vector2_Vector2 *__pyx_v_self, godot_vector2 __pyx_v__native); /* proto*/
 static CYTHON_INLINE void __pyx_f_4core_7vector2_7Vector2_7Vector2_new_static(godot_vector2 __pyx_v__native); /* proto*/
 static CYTHON_INLINE void __pyx_f_4core_5basis_5Basis_5Basis_set_native(struct __pyx_obj_4core_5basis_5Basis_Basis *__pyx_v_self, godot_basis __pyx_v__native); /* proto*/
-static CYTHON_INLINE void __pyx_f_4core_5basis_5Basis_5Basis_new_static(godot_basis __pyx_v__native); /* proto*/
+static CYTHON_INLINE struct __pyx_obj_4core_5basis_5Basis_Basis *__pyx_f_4core_5basis_5Basis_5Basis_new_static(godot_basis __pyx_v__native); /* proto*/
 static CYTHON_INLINE void __pyx_f_4core_4aabb_4AABB_4AABB_set_native(struct __pyx_obj_4core_4aabb_4AABB_AABB *__pyx_v_self, godot_aabb __pyx_v__native); /* proto*/
 static CYTHON_INLINE void __pyx_f_4core_4aabb_4AABB_4AABB_new_static(godot_aabb __pyx_v__native); /* proto*/
 static CYTHON_INLINE void __pyx_f_4core_6string_6String_6String_set_native(struct __pyx_obj_4core_6string_6String_String *__pyx_v_self, godot_string __pyx_v__native); /* proto*/
 static CYTHON_INLINE struct __pyx_obj_4core_6string_6String_String *__pyx_f_4core_6string_6String_6String_new_static(godot_string __pyx_v__native); /* proto*/
 static CYTHON_INLINE void __pyx_f_4core_5rect2_5Rect2_5Rect2_set_native(struct __pyx_obj_4core_5rect2_5Rect2_Rect2 *__pyx_v_self, godot_rect2 __pyx_v__native); /* proto*/
-static CYTHON_INLINE void __pyx_f_4core_5rect2_5Rect2_5Rect2_new_static(godot_rect2 __pyx_v__native); /* proto*/
+static CYTHON_INLINE struct __pyx_obj_4core_5rect2_5Rect2_Rect2 *__pyx_f_4core_5rect2_5Rect2_5Rect2_new_static(godot_rect2 __pyx_v__native); /* proto*/
 static CYTHON_INLINE void __pyx_f_4core_4quat_4Quat_4Quat_set_native(struct __pyx_obj_4core_4quat_4Quat_Quat *__pyx_v_self, godot_quat __pyx_v__native); /* proto*/
-static CYTHON_INLINE void __pyx_f_4core_4quat_4Quat_4Quat_new_static(godot_quat __pyx_v__native); /* proto*/
+static CYTHON_INLINE struct __pyx_obj_4core_4quat_4Quat_Quat *__pyx_f_4core_4quat_4Quat_4Quat_new_static(godot_quat __pyx_v__native); /* proto*/
 static CYTHON_INLINE void __pyx_f_4core_5color_5Color_5Color_set_native(struct __pyx_obj_4core_5color_5Color_Color *__pyx_v_self, godot_color __pyx_v__native); /* proto*/
-static CYTHON_INLINE void __pyx_f_4core_5color_5Color_5Color_new_static(godot_color __pyx_v__native); /* proto*/
+static CYTHON_INLINE struct __pyx_obj_4core_5color_5Color_Color *__pyx_f_4core_5color_5Color_5Color_new_static(godot_color __pyx_v__native); /* proto*/
 static CYTHON_INLINE void __pyx_f_4core_9node_path_8NodePath_8NodePath_set_native(struct __pyx_obj_4core_9node_path_8NodePath_NodePath *__pyx_v_self, godot_node_path __pyx_v__native); /* proto*/
-static CYTHON_INLINE void __pyx_f_4core_9node_path_8NodePath_8NodePath_new_static(godot_node_path __pyx_v__native); /* proto*/
+static CYTHON_INLINE struct __pyx_obj_4core_9node_path_8NodePath_NodePath *__pyx_f_4core_9node_path_8NodePath_8NodePath_new_static(godot_node_path __pyx_v__native); /* proto*/
 static CYTHON_INLINE void __pyx_f_4core_9transform_9Transform_9Transform_set_native(struct __pyx_obj_4core_9transform_9Transform_Transform *__pyx_v_self, godot_transform __pyx_v__native); /* proto*/
 static CYTHON_INLINE struct __pyx_obj_4core_9transform_9Transform_Transform *__pyx_f_4core_9transform_9Transform_9Transform_new_static(godot_transform __pyx_v__native); /* proto*/
 static CYTHON_INLINE void __pyx_f_4core_9transform_11Transform2D_11Transform2D_set_native(struct __pyx_obj_4core_9transform_11Transform2D_Transform2D *__pyx_v_self, godot_transform2d __pyx_v__native); /* proto*/
 static CYTHON_INLINE void __pyx_f_4core_9transform_11Transform2D_11Transform2D_new_static(godot_transform2d __pyx_v__native); /* proto*/
 static CYTHON_INLINE void __pyx_f_4core_5plane_5Plane_5Plane_set_native(struct __pyx_obj_4core_5plane_5Plane_Plane *__pyx_v_self, godot_plane __pyx_v__native); /* proto*/
-static CYTHON_INLINE void __pyx_f_4core_5plane_5Plane_5Plane_new_static(godot_plane __pyx_v__native); /* proto*/
+static CYTHON_INLINE struct __pyx_obj_4core_5plane_5Plane_Plane *__pyx_f_4core_5plane_5Plane_5Plane_new_static(godot_plane __pyx_v__native); /* proto*/
 static CYTHON_INLINE void __pyx_f_4core_10pool_array_10PoolArrays_13PoolByteArray___new__(struct __pyx_obj_4core_10pool_array_10PoolArrays_PoolByteArray *__pyx_v_self, godot_pool_byte_array __pyx_v__native); /* proto*/
 static CYTHON_INLINE void __pyx_f_4core_10pool_array_10PoolArrays_13PoolRealArray___new__(struct __pyx_obj_4core_10pool_array_10PoolArrays_PoolRealArray *__pyx_v_self, godot_pool_real_array __pyx_v__native); /* proto*/
 static CYTHON_INLINE void __pyx_f_4core_10pool_array_10PoolArrays_12PoolIntArray___new__(struct __pyx_obj_4core_10pool_array_10PoolArrays_PoolIntArray *__pyx_v_self, godot_pool_int_array __pyx_v__native); /* proto*/
@@ -2257,9 +2257,9 @@ static CYTHON_INLINE void __pyx_f_4core_10pool_array_10PoolArrays_16PoolVector2A
 static CYTHON_INLINE void __pyx_f_4core_10pool_array_10PoolArrays_16PoolVector3Array___new__(struct __pyx_obj_4core_10pool_array_10PoolArrays_PoolVector3Array *__pyx_v_self, godot_pool_vector3_array __pyx_v__native); /* proto*/
 static CYTHON_INLINE void __pyx_f_4core_10pool_array_10PoolArrays_14PoolColorArray___new__(struct __pyx_obj_4core_10pool_array_10PoolArrays_PoolColorArray *__pyx_v_self, godot_pool_color_array __pyx_v__native); /* proto*/
 static CYTHON_INLINE void __pyx_f_4core_5array_5Array_5Array_set_native(struct __pyx_obj_4core_5array_5Array_Array *__pyx_v_self, godot_array __pyx_v__native); /* proto*/
-static CYTHON_INLINE void __pyx_f_4core_5array_5Array_5Array_new_static(godot_array __pyx_v__native); /* proto*/
+static CYTHON_INLINE struct __pyx_obj_4core_5array_5Array_Array *__pyx_f_4core_5array_5Array_5Array_new_static(godot_array __pyx_v__native); /* proto*/
 static CYTHON_INLINE void __pyx_f_4core_3rid_3RID_3RID_set_native(struct __pyx_obj_4core_3rid_3RID_RID *__pyx_v_self, godot_rid __pyx_v__native); /* proto*/
-static CYTHON_INLINE void __pyx_f_4core_3rid_3RID_3RID_new_static(godot_rid __pyx_v__native); /* proto*/
+static CYTHON_INLINE struct __pyx_obj_4core_3rid_3RID_RID *__pyx_f_4core_3rid_3RID_3RID_new_static(godot_rid __pyx_v__native); /* proto*/
 
 /* Module declarations from 'libcpp' */
 
@@ -4640,7 +4640,7 @@ static CYTHON_INLINE PyObject *__pyx_f_4core_7variant_7Variant_7Variant_as_rect2
  *     cdef as_vector3(self):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_void_to_None(__pyx_f_4core_5rect2_5Rect2_5Rect2_new_static(api_core->godot_variant_as_rect2((&__pyx_v_self->_native)))); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 194, __pyx_L1_error)
+  __pyx_t_1 = ((PyObject *)__pyx_f_4core_5rect2_5Rect2_5Rect2_new_static(api_core->godot_variant_as_rect2((&__pyx_v_self->_native)))); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 194, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
@@ -4790,7 +4790,7 @@ static CYTHON_INLINE PyObject *__pyx_f_4core_7variant_7Variant_7Variant_as_plane
  *     cdef as_quat(self):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_void_to_None(__pyx_f_4core_5plane_5Plane_5Plane_new_static(api_core->godot_variant_as_plane((&__pyx_v_self->_native)))); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 203, __pyx_L1_error)
+  __pyx_t_1 = ((PyObject *)__pyx_f_4core_5plane_5Plane_5Plane_new_static(api_core->godot_variant_as_plane((&__pyx_v_self->_native)))); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 203, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
@@ -4840,7 +4840,7 @@ static CYTHON_INLINE PyObject *__pyx_f_4core_7variant_7Variant_7Variant_as_quat(
  *     cdef as_aabb(self):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_void_to_None(__pyx_f_4core_4quat_4Quat_4Quat_new_static(api_core->godot_variant_as_quat((&__pyx_v_self->_native)))); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 206, __pyx_L1_error)
+  __pyx_t_1 = ((PyObject *)__pyx_f_4core_4quat_4Quat_4Quat_new_static(api_core->godot_variant_as_quat((&__pyx_v_self->_native)))); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 206, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
@@ -4940,7 +4940,7 @@ static CYTHON_INLINE PyObject *__pyx_f_4core_7variant_7Variant_7Variant_as_basis
  *     cdef as_transform(self):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_void_to_None(__pyx_f_4core_5basis_5Basis_5Basis_new_static(api_core->godot_variant_as_basis((&__pyx_v_self->_native)))); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 212, __pyx_L1_error)
+  __pyx_t_1 = ((PyObject *)__pyx_f_4core_5basis_5Basis_5Basis_new_static(api_core->godot_variant_as_basis((&__pyx_v_self->_native)))); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 212, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
@@ -5040,7 +5040,7 @@ static CYTHON_INLINE PyObject *__pyx_f_4core_7variant_7Variant_7Variant_as_color
  *     cdef as_node_path(self):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_void_to_None(__pyx_f_4core_5color_5Color_5Color_new_static(api_core->godot_variant_as_color((&__pyx_v_self->_native)))); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 218, __pyx_L1_error)
+  __pyx_t_1 = ((PyObject *)__pyx_f_4core_5color_5Color_5Color_new_static(api_core->godot_variant_as_color((&__pyx_v_self->_native)))); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 218, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
@@ -5090,7 +5090,7 @@ static CYTHON_INLINE PyObject *__pyx_f_4core_7variant_7Variant_7Variant_as_node_
  *     cdef as_rid(self):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_void_to_None(__pyx_f_4core_9node_path_8NodePath_8NodePath_new_static(api_core->godot_variant_as_node_path((&__pyx_v_self->_native)))); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 221, __pyx_L1_error)
+  __pyx_t_1 = ((PyObject *)__pyx_f_4core_9node_path_8NodePath_8NodePath_new_static(api_core->godot_variant_as_node_path((&__pyx_v_self->_native)))); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 221, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
@@ -5282,7 +5282,7 @@ static CYTHON_INLINE PyObject *__pyx_f_4core_7variant_7Variant_7Variant_as_array
  *     cdef as_pool_byte_array(self):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_void_to_None(__pyx_f_4core_5array_5Array_5Array_new_static(api_core->godot_variant_as_array((&__pyx_v_self->_native)))); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 233, __pyx_L1_error)
+  __pyx_t_1 = ((PyObject *)__pyx_f_4core_5array_5Array_5Array_new_static(api_core->godot_variant_as_array((&__pyx_v_self->_native)))); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 233, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
@@ -6694,13 +6694,14 @@ static CYTHON_INLINE void __pyx_f_4core_5basis_5Basis_5Basis_set_native(struct _
 /* "core/basis/Basis.pxd":11
  * 
  *     @staticmethod
- *     cdef inline void new_static(godot_basis _native):             # <<<<<<<<<<<<<<
+ *     cdef inline Basis new_static(godot_basis _native):             # <<<<<<<<<<<<<<
  *         cdef Basis o = Basis.__new__(Basis)
  *         o.set_native(_native)
  */
 
-static CYTHON_INLINE void __pyx_f_4core_5basis_5Basis_5Basis_new_static(godot_basis __pyx_v__native) {
+static CYTHON_INLINE struct __pyx_obj_4core_5basis_5Basis_Basis *__pyx_f_4core_5basis_5Basis_5Basis_new_static(godot_basis __pyx_v__native) {
   struct __pyx_obj_4core_5basis_5Basis_Basis *__pyx_v_o = 0;
+  struct __pyx_obj_4core_5basis_5Basis_Basis *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   PyObject *__pyx_t_1 = NULL;
   int __pyx_lineno = 0;
@@ -6710,9 +6711,10 @@ static CYTHON_INLINE void __pyx_f_4core_5basis_5Basis_5Basis_new_static(godot_ba
 
   /* "core/basis/Basis.pxd":12
  *     @staticmethod
- *     cdef inline void new_static(godot_basis _native):
+ *     cdef inline Basis new_static(godot_basis _native):
  *         cdef Basis o = Basis.__new__(Basis)             # <<<<<<<<<<<<<<
  *         o.set_native(_native)
+ *         return o
  */
   __pyx_t_1 = __Pyx_tp_new(((PyObject *)__pyx_ptype_4core_5basis_5Basis_Basis), __pyx_empty_tuple); if (unlikely(!__pyx_t_1)) __PYX_ERR(6, 12, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
@@ -6721,28 +6723,41 @@ static CYTHON_INLINE void __pyx_f_4core_5basis_5Basis_5Basis_new_static(godot_ba
   __pyx_t_1 = 0;
 
   /* "core/basis/Basis.pxd":13
- *     cdef inline void new_static(godot_basis _native):
+ *     cdef inline Basis new_static(godot_basis _native):
  *         cdef Basis o = Basis.__new__(Basis)
  *         o.set_native(_native)             # <<<<<<<<<<<<<<
+ *         return o
  */
   __pyx_f_4core_5basis_5Basis_5Basis_set_native(__pyx_v_o, __pyx_v__native);
+
+  /* "core/basis/Basis.pxd":14
+ *         cdef Basis o = Basis.__new__(Basis)
+ *         o.set_native(_native)
+ *         return o             # <<<<<<<<<<<<<<
+ */
+  __Pyx_XDECREF(((PyObject *)__pyx_r));
+  __Pyx_INCREF(((PyObject *)__pyx_v_o));
+  __pyx_r = __pyx_v_o;
+  goto __pyx_L0;
 
   /* "core/basis/Basis.pxd":11
  * 
  *     @staticmethod
- *     cdef inline void new_static(godot_basis _native):             # <<<<<<<<<<<<<<
+ *     cdef inline Basis new_static(godot_basis _native):             # <<<<<<<<<<<<<<
  *         cdef Basis o = Basis.__new__(Basis)
  *         o.set_native(_native)
  */
 
   /* function exit code */
-  goto __pyx_L0;
   __pyx_L1_error:;
   __Pyx_XDECREF(__pyx_t_1);
-  __Pyx_WriteUnraisable("core.basis.Basis.Basis.new_static", __pyx_clineno, __pyx_lineno, __pyx_filename, 1, 0);
+  __Pyx_AddTraceback("core.basis.Basis.Basis.new_static", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __pyx_r = 0;
   __pyx_L0:;
   __Pyx_XDECREF((PyObject *)__pyx_v_o);
+  __Pyx_XGIVEREF((PyObject *)__pyx_r);
   __Pyx_RefNannyFinishContext();
+  return __pyx_r;
 }
 
 /* "core/aabb/AABB.pxd":6
@@ -6970,13 +6985,14 @@ static CYTHON_INLINE void __pyx_f_4core_5rect2_5Rect2_5Rect2_set_native(struct _
 /* "core/rect2/Rect2.pxd":10
  * 
  *     @staticmethod
- *     cdef inline void new_static(godot_rect2 _native):             # <<<<<<<<<<<<<<
+ *     cdef inline Rect2 new_static(godot_rect2 _native):             # <<<<<<<<<<<<<<
  *         cdef Rect2 o = Rect2.__new__(Rect2)
  *         o.set_native(_native)
  */
 
-static CYTHON_INLINE void __pyx_f_4core_5rect2_5Rect2_5Rect2_new_static(godot_rect2 __pyx_v__native) {
+static CYTHON_INLINE struct __pyx_obj_4core_5rect2_5Rect2_Rect2 *__pyx_f_4core_5rect2_5Rect2_5Rect2_new_static(godot_rect2 __pyx_v__native) {
   struct __pyx_obj_4core_5rect2_5Rect2_Rect2 *__pyx_v_o = 0;
+  struct __pyx_obj_4core_5rect2_5Rect2_Rect2 *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   PyObject *__pyx_t_1 = NULL;
   int __pyx_lineno = 0;
@@ -6986,9 +7002,10 @@ static CYTHON_INLINE void __pyx_f_4core_5rect2_5Rect2_5Rect2_new_static(godot_re
 
   /* "core/rect2/Rect2.pxd":11
  *     @staticmethod
- *     cdef inline void new_static(godot_rect2 _native):
+ *     cdef inline Rect2 new_static(godot_rect2 _native):
  *         cdef Rect2 o = Rect2.__new__(Rect2)             # <<<<<<<<<<<<<<
  *         o.set_native(_native)
+ *         return o
  */
   __pyx_t_1 = __Pyx_tp_new(((PyObject *)__pyx_ptype_4core_5rect2_5Rect2_Rect2), __pyx_empty_tuple); if (unlikely(!__pyx_t_1)) __PYX_ERR(9, 11, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
@@ -6997,28 +7014,41 @@ static CYTHON_INLINE void __pyx_f_4core_5rect2_5Rect2_5Rect2_new_static(godot_re
   __pyx_t_1 = 0;
 
   /* "core/rect2/Rect2.pxd":12
- *     cdef inline void new_static(godot_rect2 _native):
+ *     cdef inline Rect2 new_static(godot_rect2 _native):
  *         cdef Rect2 o = Rect2.__new__(Rect2)
  *         o.set_native(_native)             # <<<<<<<<<<<<<<
+ *         return o
  */
   __pyx_f_4core_5rect2_5Rect2_5Rect2_set_native(__pyx_v_o, __pyx_v__native);
+
+  /* "core/rect2/Rect2.pxd":13
+ *         cdef Rect2 o = Rect2.__new__(Rect2)
+ *         o.set_native(_native)
+ *         return o             # <<<<<<<<<<<<<<
+ */
+  __Pyx_XDECREF(((PyObject *)__pyx_r));
+  __Pyx_INCREF(((PyObject *)__pyx_v_o));
+  __pyx_r = __pyx_v_o;
+  goto __pyx_L0;
 
   /* "core/rect2/Rect2.pxd":10
  * 
  *     @staticmethod
- *     cdef inline void new_static(godot_rect2 _native):             # <<<<<<<<<<<<<<
+ *     cdef inline Rect2 new_static(godot_rect2 _native):             # <<<<<<<<<<<<<<
  *         cdef Rect2 o = Rect2.__new__(Rect2)
  *         o.set_native(_native)
  */
 
   /* function exit code */
-  goto __pyx_L0;
   __pyx_L1_error:;
   __Pyx_XDECREF(__pyx_t_1);
-  __Pyx_WriteUnraisable("core.rect2.Rect2.Rect2.new_static", __pyx_clineno, __pyx_lineno, __pyx_filename, 1, 0);
+  __Pyx_AddTraceback("core.rect2.Rect2.Rect2.new_static", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __pyx_r = 0;
   __pyx_L0:;
   __Pyx_XDECREF((PyObject *)__pyx_v_o);
+  __Pyx_XGIVEREF((PyObject *)__pyx_r);
   __Pyx_RefNannyFinishContext();
+  return __pyx_r;
 }
 
 /* "core/quat/Quat.pxd":6
@@ -7057,13 +7087,14 @@ static CYTHON_INLINE void __pyx_f_4core_4quat_4Quat_4Quat_set_native(struct __py
 /* "core/quat/Quat.pxd":10
  * 
  *     @staticmethod
- *     cdef inline void new_static(godot_quat _native):             # <<<<<<<<<<<<<<
+ *     cdef inline Quat new_static(godot_quat _native):             # <<<<<<<<<<<<<<
  *         cdef Quat o = Quat.__new__(Quat)
  *         o.set_native(_native)
  */
 
-static CYTHON_INLINE void __pyx_f_4core_4quat_4Quat_4Quat_new_static(godot_quat __pyx_v__native) {
+static CYTHON_INLINE struct __pyx_obj_4core_4quat_4Quat_Quat *__pyx_f_4core_4quat_4Quat_4Quat_new_static(godot_quat __pyx_v__native) {
   struct __pyx_obj_4core_4quat_4Quat_Quat *__pyx_v_o = 0;
+  struct __pyx_obj_4core_4quat_4Quat_Quat *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   PyObject *__pyx_t_1 = NULL;
   int __pyx_lineno = 0;
@@ -7073,9 +7104,10 @@ static CYTHON_INLINE void __pyx_f_4core_4quat_4Quat_4Quat_new_static(godot_quat 
 
   /* "core/quat/Quat.pxd":11
  *     @staticmethod
- *     cdef inline void new_static(godot_quat _native):
+ *     cdef inline Quat new_static(godot_quat _native):
  *         cdef Quat o = Quat.__new__(Quat)             # <<<<<<<<<<<<<<
  *         o.set_native(_native)
+ *         return o
  */
   __pyx_t_1 = __Pyx_tp_new(((PyObject *)__pyx_ptype_4core_4quat_4Quat_Quat), __pyx_empty_tuple); if (unlikely(!__pyx_t_1)) __PYX_ERR(10, 11, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
@@ -7084,28 +7116,41 @@ static CYTHON_INLINE void __pyx_f_4core_4quat_4Quat_4Quat_new_static(godot_quat 
   __pyx_t_1 = 0;
 
   /* "core/quat/Quat.pxd":12
- *     cdef inline void new_static(godot_quat _native):
+ *     cdef inline Quat new_static(godot_quat _native):
  *         cdef Quat o = Quat.__new__(Quat)
  *         o.set_native(_native)             # <<<<<<<<<<<<<<
+ *         return o
  */
   __pyx_f_4core_4quat_4Quat_4Quat_set_native(__pyx_v_o, __pyx_v__native);
+
+  /* "core/quat/Quat.pxd":13
+ *         cdef Quat o = Quat.__new__(Quat)
+ *         o.set_native(_native)
+ *         return o             # <<<<<<<<<<<<<<
+ */
+  __Pyx_XDECREF(((PyObject *)__pyx_r));
+  __Pyx_INCREF(((PyObject *)__pyx_v_o));
+  __pyx_r = __pyx_v_o;
+  goto __pyx_L0;
 
   /* "core/quat/Quat.pxd":10
  * 
  *     @staticmethod
- *     cdef inline void new_static(godot_quat _native):             # <<<<<<<<<<<<<<
+ *     cdef inline Quat new_static(godot_quat _native):             # <<<<<<<<<<<<<<
  *         cdef Quat o = Quat.__new__(Quat)
  *         o.set_native(_native)
  */
 
   /* function exit code */
-  goto __pyx_L0;
   __pyx_L1_error:;
   __Pyx_XDECREF(__pyx_t_1);
-  __Pyx_WriteUnraisable("core.quat.Quat.Quat.new_static", __pyx_clineno, __pyx_lineno, __pyx_filename, 1, 0);
+  __Pyx_AddTraceback("core.quat.Quat.Quat.new_static", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __pyx_r = 0;
   __pyx_L0:;
   __Pyx_XDECREF((PyObject *)__pyx_v_o);
+  __Pyx_XGIVEREF((PyObject *)__pyx_r);
   __Pyx_RefNannyFinishContext();
+  return __pyx_r;
 }
 
 /* "core/color/Color.pxd":6
@@ -7144,13 +7189,14 @@ static CYTHON_INLINE void __pyx_f_4core_5color_5Color_5Color_set_native(struct _
 /* "core/color/Color.pxd":10
  * 
  *     @staticmethod
- *     cdef inline void new_static(godot_color _native):             # <<<<<<<<<<<<<<
+ *     cdef inline Color new_static(godot_color _native):             # <<<<<<<<<<<<<<
  *         cdef Color o = Color.__new__(Color)
  *         o.set_native(_native)
  */
 
-static CYTHON_INLINE void __pyx_f_4core_5color_5Color_5Color_new_static(godot_color __pyx_v__native) {
+static CYTHON_INLINE struct __pyx_obj_4core_5color_5Color_Color *__pyx_f_4core_5color_5Color_5Color_new_static(godot_color __pyx_v__native) {
   struct __pyx_obj_4core_5color_5Color_Color *__pyx_v_o = 0;
+  struct __pyx_obj_4core_5color_5Color_Color *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   PyObject *__pyx_t_1 = NULL;
   int __pyx_lineno = 0;
@@ -7160,9 +7206,10 @@ static CYTHON_INLINE void __pyx_f_4core_5color_5Color_5Color_new_static(godot_co
 
   /* "core/color/Color.pxd":11
  *     @staticmethod
- *     cdef inline void new_static(godot_color _native):
+ *     cdef inline Color new_static(godot_color _native):
  *         cdef Color o = Color.__new__(Color)             # <<<<<<<<<<<<<<
  *         o.set_native(_native)
+ *         return o
  */
   __pyx_t_1 = __Pyx_tp_new(((PyObject *)__pyx_ptype_4core_5color_5Color_Color), __pyx_empty_tuple); if (unlikely(!__pyx_t_1)) __PYX_ERR(11, 11, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
@@ -7171,28 +7218,41 @@ static CYTHON_INLINE void __pyx_f_4core_5color_5Color_5Color_new_static(godot_co
   __pyx_t_1 = 0;
 
   /* "core/color/Color.pxd":12
- *     cdef inline void new_static(godot_color _native):
+ *     cdef inline Color new_static(godot_color _native):
  *         cdef Color o = Color.__new__(Color)
  *         o.set_native(_native)             # <<<<<<<<<<<<<<
+ *         return o
  */
   __pyx_f_4core_5color_5Color_5Color_set_native(__pyx_v_o, __pyx_v__native);
+
+  /* "core/color/Color.pxd":13
+ *         cdef Color o = Color.__new__(Color)
+ *         o.set_native(_native)
+ *         return o             # <<<<<<<<<<<<<<
+ */
+  __Pyx_XDECREF(((PyObject *)__pyx_r));
+  __Pyx_INCREF(((PyObject *)__pyx_v_o));
+  __pyx_r = __pyx_v_o;
+  goto __pyx_L0;
 
   /* "core/color/Color.pxd":10
  * 
  *     @staticmethod
- *     cdef inline void new_static(godot_color _native):             # <<<<<<<<<<<<<<
+ *     cdef inline Color new_static(godot_color _native):             # <<<<<<<<<<<<<<
  *         cdef Color o = Color.__new__(Color)
  *         o.set_native(_native)
  */
 
   /* function exit code */
-  goto __pyx_L0;
   __pyx_L1_error:;
   __Pyx_XDECREF(__pyx_t_1);
-  __Pyx_WriteUnraisable("core.color.Color.Color.new_static", __pyx_clineno, __pyx_lineno, __pyx_filename, 1, 0);
+  __Pyx_AddTraceback("core.color.Color.Color.new_static", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __pyx_r = 0;
   __pyx_L0:;
   __Pyx_XDECREF((PyObject *)__pyx_v_o);
+  __Pyx_XGIVEREF((PyObject *)__pyx_r);
   __Pyx_RefNannyFinishContext();
+  return __pyx_r;
 }
 
 /* "core/node_path/NodePath.pxd":6
@@ -7231,13 +7291,14 @@ static CYTHON_INLINE void __pyx_f_4core_9node_path_8NodePath_8NodePath_set_nativ
 /* "core/node_path/NodePath.pxd":10
  * 
  *     @staticmethod
- *     cdef inline void new_static(godot_node_path _native):             # <<<<<<<<<<<<<<
+ *     cdef inline NodePath new_static(godot_node_path _native):             # <<<<<<<<<<<<<<
  *         cdef NodePath o = NodePath.__new__(NodePath)
  *         o.set_native(_native)
  */
 
-static CYTHON_INLINE void __pyx_f_4core_9node_path_8NodePath_8NodePath_new_static(godot_node_path __pyx_v__native) {
+static CYTHON_INLINE struct __pyx_obj_4core_9node_path_8NodePath_NodePath *__pyx_f_4core_9node_path_8NodePath_8NodePath_new_static(godot_node_path __pyx_v__native) {
   struct __pyx_obj_4core_9node_path_8NodePath_NodePath *__pyx_v_o = 0;
+  struct __pyx_obj_4core_9node_path_8NodePath_NodePath *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   PyObject *__pyx_t_1 = NULL;
   int __pyx_lineno = 0;
@@ -7247,9 +7308,10 @@ static CYTHON_INLINE void __pyx_f_4core_9node_path_8NodePath_8NodePath_new_stati
 
   /* "core/node_path/NodePath.pxd":11
  *     @staticmethod
- *     cdef inline void new_static(godot_node_path _native):
+ *     cdef inline NodePath new_static(godot_node_path _native):
  *         cdef NodePath o = NodePath.__new__(NodePath)             # <<<<<<<<<<<<<<
  *         o.set_native(_native)
+ *         return o
  */
   __pyx_t_1 = __Pyx_tp_new(((PyObject *)__pyx_ptype_4core_9node_path_8NodePath_NodePath), __pyx_empty_tuple); if (unlikely(!__pyx_t_1)) __PYX_ERR(12, 11, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
@@ -7258,28 +7320,41 @@ static CYTHON_INLINE void __pyx_f_4core_9node_path_8NodePath_8NodePath_new_stati
   __pyx_t_1 = 0;
 
   /* "core/node_path/NodePath.pxd":12
- *     cdef inline void new_static(godot_node_path _native):
+ *     cdef inline NodePath new_static(godot_node_path _native):
  *         cdef NodePath o = NodePath.__new__(NodePath)
  *         o.set_native(_native)             # <<<<<<<<<<<<<<
+ *         return o
  */
   __pyx_f_4core_9node_path_8NodePath_8NodePath_set_native(__pyx_v_o, __pyx_v__native);
+
+  /* "core/node_path/NodePath.pxd":13
+ *         cdef NodePath o = NodePath.__new__(NodePath)
+ *         o.set_native(_native)
+ *         return o             # <<<<<<<<<<<<<<
+ */
+  __Pyx_XDECREF(((PyObject *)__pyx_r));
+  __Pyx_INCREF(((PyObject *)__pyx_v_o));
+  __pyx_r = __pyx_v_o;
+  goto __pyx_L0;
 
   /* "core/node_path/NodePath.pxd":10
  * 
  *     @staticmethod
- *     cdef inline void new_static(godot_node_path _native):             # <<<<<<<<<<<<<<
+ *     cdef inline NodePath new_static(godot_node_path _native):             # <<<<<<<<<<<<<<
  *         cdef NodePath o = NodePath.__new__(NodePath)
  *         o.set_native(_native)
  */
 
   /* function exit code */
-  goto __pyx_L0;
   __pyx_L1_error:;
   __Pyx_XDECREF(__pyx_t_1);
-  __Pyx_WriteUnraisable("core.node_path.NodePath.NodePath.new_static", __pyx_clineno, __pyx_lineno, __pyx_filename, 1, 0);
+  __Pyx_AddTraceback("core.node_path.NodePath.NodePath.new_static", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __pyx_r = 0;
   __pyx_L0:;
   __Pyx_XDECREF((PyObject *)__pyx_v_o);
+  __Pyx_XGIVEREF((PyObject *)__pyx_r);
   __Pyx_RefNannyFinishContext();
+  return __pyx_r;
 }
 
 /* "core/transform/Transform.pxd":6
@@ -7540,13 +7615,14 @@ static CYTHON_INLINE void __pyx_f_4core_5plane_5Plane_5Plane_set_native(struct _
 /* "core/plane/Plane.pxd":10
  * 
  *     @staticmethod
- *     cdef inline void new_static(godot_plane _native):             # <<<<<<<<<<<<<<
+ *     cdef inline Plane new_static(godot_plane _native):             # <<<<<<<<<<<<<<
  *         cdef Plane o = Plane.__new__(Plane)
  *         o.set_native(_native)
  */
 
-static CYTHON_INLINE void __pyx_f_4core_5plane_5Plane_5Plane_new_static(godot_plane __pyx_v__native) {
+static CYTHON_INLINE struct __pyx_obj_4core_5plane_5Plane_Plane *__pyx_f_4core_5plane_5Plane_5Plane_new_static(godot_plane __pyx_v__native) {
   struct __pyx_obj_4core_5plane_5Plane_Plane *__pyx_v_o = 0;
+  struct __pyx_obj_4core_5plane_5Plane_Plane *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   PyObject *__pyx_t_1 = NULL;
   int __pyx_lineno = 0;
@@ -7556,9 +7632,10 @@ static CYTHON_INLINE void __pyx_f_4core_5plane_5Plane_5Plane_new_static(godot_pl
 
   /* "core/plane/Plane.pxd":11
  *     @staticmethod
- *     cdef inline void new_static(godot_plane _native):
+ *     cdef inline Plane new_static(godot_plane _native):
  *         cdef Plane o = Plane.__new__(Plane)             # <<<<<<<<<<<<<<
  *         o.set_native(_native)
+ *         return o
  */
   __pyx_t_1 = __Pyx_tp_new(((PyObject *)__pyx_ptype_4core_5plane_5Plane_Plane), __pyx_empty_tuple); if (unlikely(!__pyx_t_1)) __PYX_ERR(15, 11, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
@@ -7567,28 +7644,41 @@ static CYTHON_INLINE void __pyx_f_4core_5plane_5Plane_5Plane_new_static(godot_pl
   __pyx_t_1 = 0;
 
   /* "core/plane/Plane.pxd":12
- *     cdef inline void new_static(godot_plane _native):
+ *     cdef inline Plane new_static(godot_plane _native):
  *         cdef Plane o = Plane.__new__(Plane)
  *         o.set_native(_native)             # <<<<<<<<<<<<<<
+ *         return o
  */
   __pyx_f_4core_5plane_5Plane_5Plane_set_native(__pyx_v_o, __pyx_v__native);
+
+  /* "core/plane/Plane.pxd":13
+ *         cdef Plane o = Plane.__new__(Plane)
+ *         o.set_native(_native)
+ *         return o             # <<<<<<<<<<<<<<
+ */
+  __Pyx_XDECREF(((PyObject *)__pyx_r));
+  __Pyx_INCREF(((PyObject *)__pyx_v_o));
+  __pyx_r = __pyx_v_o;
+  goto __pyx_L0;
 
   /* "core/plane/Plane.pxd":10
  * 
  *     @staticmethod
- *     cdef inline void new_static(godot_plane _native):             # <<<<<<<<<<<<<<
+ *     cdef inline Plane new_static(godot_plane _native):             # <<<<<<<<<<<<<<
  *         cdef Plane o = Plane.__new__(Plane)
  *         o.set_native(_native)
  */
 
   /* function exit code */
-  goto __pyx_L0;
   __pyx_L1_error:;
   __Pyx_XDECREF(__pyx_t_1);
-  __Pyx_WriteUnraisable("core.plane.Plane.Plane.new_static", __pyx_clineno, __pyx_lineno, __pyx_filename, 1, 0);
+  __Pyx_AddTraceback("core.plane.Plane.Plane.new_static", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __pyx_r = 0;
   __pyx_L0:;
   __Pyx_XDECREF((PyObject *)__pyx_v_o);
+  __Pyx_XGIVEREF((PyObject *)__pyx_r);
   __Pyx_RefNannyFinishContext();
+  return __pyx_r;
 }
 
 /* "core/pool_array/PoolArrays.pxd":7
@@ -7854,13 +7944,14 @@ static CYTHON_INLINE void __pyx_f_4core_5array_5Array_5Array_set_native(struct _
 /* "core/array/Array.pxd":10
  * 
  *     @staticmethod
- *     cdef inline void new_static(godot_array _native):             # <<<<<<<<<<<<<<
+ *     cdef inline Array new_static(godot_array _native):             # <<<<<<<<<<<<<<
  *         cdef Array o = Array.__new__(Array)
  *         o.set_native(_native)
  */
 
-static CYTHON_INLINE void __pyx_f_4core_5array_5Array_5Array_new_static(godot_array __pyx_v__native) {
+static CYTHON_INLINE struct __pyx_obj_4core_5array_5Array_Array *__pyx_f_4core_5array_5Array_5Array_new_static(godot_array __pyx_v__native) {
   struct __pyx_obj_4core_5array_5Array_Array *__pyx_v_o = 0;
+  struct __pyx_obj_4core_5array_5Array_Array *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   PyObject *__pyx_t_1 = NULL;
   int __pyx_lineno = 0;
@@ -7870,9 +7961,10 @@ static CYTHON_INLINE void __pyx_f_4core_5array_5Array_5Array_new_static(godot_ar
 
   /* "core/array/Array.pxd":11
  *     @staticmethod
- *     cdef inline void new_static(godot_array _native):
+ *     cdef inline Array new_static(godot_array _native):
  *         cdef Array o = Array.__new__(Array)             # <<<<<<<<<<<<<<
  *         o.set_native(_native)
+ *         return o
  */
   __pyx_t_1 = __Pyx_tp_new(((PyObject *)__pyx_ptype_4core_5array_5Array_Array), __pyx_empty_tuple); if (unlikely(!__pyx_t_1)) __PYX_ERR(16, 11, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
@@ -7881,28 +7973,41 @@ static CYTHON_INLINE void __pyx_f_4core_5array_5Array_5Array_new_static(godot_ar
   __pyx_t_1 = 0;
 
   /* "core/array/Array.pxd":12
- *     cdef inline void new_static(godot_array _native):
+ *     cdef inline Array new_static(godot_array _native):
  *         cdef Array o = Array.__new__(Array)
  *         o.set_native(_native)             # <<<<<<<<<<<<<<
+ *         return o
  */
   __pyx_f_4core_5array_5Array_5Array_set_native(__pyx_v_o, __pyx_v__native);
+
+  /* "core/array/Array.pxd":13
+ *         cdef Array o = Array.__new__(Array)
+ *         o.set_native(_native)
+ *         return o             # <<<<<<<<<<<<<<
+ */
+  __Pyx_XDECREF(((PyObject *)__pyx_r));
+  __Pyx_INCREF(((PyObject *)__pyx_v_o));
+  __pyx_r = __pyx_v_o;
+  goto __pyx_L0;
 
   /* "core/array/Array.pxd":10
  * 
  *     @staticmethod
- *     cdef inline void new_static(godot_array _native):             # <<<<<<<<<<<<<<
+ *     cdef inline Array new_static(godot_array _native):             # <<<<<<<<<<<<<<
  *         cdef Array o = Array.__new__(Array)
  *         o.set_native(_native)
  */
 
   /* function exit code */
-  goto __pyx_L0;
   __pyx_L1_error:;
   __Pyx_XDECREF(__pyx_t_1);
-  __Pyx_WriteUnraisable("core.array.Array.Array.new_static", __pyx_clineno, __pyx_lineno, __pyx_filename, 1, 0);
+  __Pyx_AddTraceback("core.array.Array.Array.new_static", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __pyx_r = 0;
   __pyx_L0:;
   __Pyx_XDECREF((PyObject *)__pyx_v_o);
+  __Pyx_XGIVEREF((PyObject *)__pyx_r);
   __Pyx_RefNannyFinishContext();
+  return __pyx_r;
 }
 
 /* "core/rid/RID.pxd":6
@@ -7941,13 +8046,14 @@ static CYTHON_INLINE void __pyx_f_4core_3rid_3RID_3RID_set_native(struct __pyx_o
 /* "core/rid/RID.pxd":10
  * 
  *     @staticmethod
- *     cdef inline void new_static(godot_rid _native):             # <<<<<<<<<<<<<<
+ *     cdef inline RID new_static(godot_rid _native):             # <<<<<<<<<<<<<<
  *         cdef RID o = RID.__new__(RID)
  *         o.set_native(_native)
  */
 
-static CYTHON_INLINE void __pyx_f_4core_3rid_3RID_3RID_new_static(godot_rid __pyx_v__native) {
+static CYTHON_INLINE struct __pyx_obj_4core_3rid_3RID_RID *__pyx_f_4core_3rid_3RID_3RID_new_static(godot_rid __pyx_v__native) {
   struct __pyx_obj_4core_3rid_3RID_RID *__pyx_v_o = 0;
+  struct __pyx_obj_4core_3rid_3RID_RID *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   PyObject *__pyx_t_1 = NULL;
   int __pyx_lineno = 0;
@@ -7957,9 +8063,10 @@ static CYTHON_INLINE void __pyx_f_4core_3rid_3RID_3RID_new_static(godot_rid __py
 
   /* "core/rid/RID.pxd":11
  *     @staticmethod
- *     cdef inline void new_static(godot_rid _native):
+ *     cdef inline RID new_static(godot_rid _native):
  *         cdef RID o = RID.__new__(RID)             # <<<<<<<<<<<<<<
  *         o.set_native(_native)
+ *         return o
  */
   __pyx_t_1 = __Pyx_tp_new(((PyObject *)__pyx_ptype_4core_3rid_3RID_RID), __pyx_empty_tuple); if (unlikely(!__pyx_t_1)) __PYX_ERR(17, 11, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
@@ -7968,28 +8075,41 @@ static CYTHON_INLINE void __pyx_f_4core_3rid_3RID_3RID_new_static(godot_rid __py
   __pyx_t_1 = 0;
 
   /* "core/rid/RID.pxd":12
- *     cdef inline void new_static(godot_rid _native):
+ *     cdef inline RID new_static(godot_rid _native):
  *         cdef RID o = RID.__new__(RID)
  *         o.set_native(_native)             # <<<<<<<<<<<<<<
+ *         return o
  */
   __pyx_f_4core_3rid_3RID_3RID_set_native(__pyx_v_o, __pyx_v__native);
+
+  /* "core/rid/RID.pxd":13
+ *         cdef RID o = RID.__new__(RID)
+ *         o.set_native(_native)
+ *         return o             # <<<<<<<<<<<<<<
+ */
+  __Pyx_XDECREF(((PyObject *)__pyx_r));
+  __Pyx_INCREF(((PyObject *)__pyx_v_o));
+  __pyx_r = __pyx_v_o;
+  goto __pyx_L0;
 
   /* "core/rid/RID.pxd":10
  * 
  *     @staticmethod
- *     cdef inline void new_static(godot_rid _native):             # <<<<<<<<<<<<<<
+ *     cdef inline RID new_static(godot_rid _native):             # <<<<<<<<<<<<<<
  *         cdef RID o = RID.__new__(RID)
  *         o.set_native(_native)
  */
 
   /* function exit code */
-  goto __pyx_L0;
   __pyx_L1_error:;
   __Pyx_XDECREF(__pyx_t_1);
-  __Pyx_WriteUnraisable("core.rid.RID.RID.new_static", __pyx_clineno, __pyx_lineno, __pyx_filename, 1, 0);
+  __Pyx_AddTraceback("core.rid.RID.RID.new_static", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __pyx_r = 0;
   __pyx_L0:;
   __Pyx_XDECREF((PyObject *)__pyx_v_o);
+  __Pyx_XGIVEREF((PyObject *)__pyx_r);
   __Pyx_RefNannyFinishContext();
+  return __pyx_r;
 }
 
 /* "cfunc.to_py":65

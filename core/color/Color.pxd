@@ -7,6 +7,7 @@ cdef class Color:
         self._native = _native
 
     @staticmethod
-    cdef inline void new_static(godot_color _native):
+    cdef inline Color new_static(godot_color _native):
         cdef Color o = Color.__new__(Color)
         o.set_native(_native)
+        return o

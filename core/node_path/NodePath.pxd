@@ -7,6 +7,7 @@ cdef class NodePath:
         self._native = _native
 
     @staticmethod
-    cdef inline void new_static(godot_node_path _native):
+    cdef inline NodePath new_static(godot_node_path _native):
         cdef NodePath o = NodePath.__new__(NodePath)
         o.set_native(_native)
+        return o

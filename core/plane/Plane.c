@@ -916,11 +916,11 @@ static CYTHON_INLINE void __pyx_f_4core_7vector3_7Vector3_7Vector3_new_static(go
 
 struct __pyx_vtabstruct_4core_5plane_5Plane_Plane {
   void (*set_native)(struct __pyx_obj_4core_5plane_5Plane_Plane *, godot_plane);
-  void (*new_static)(godot_plane);
+  struct __pyx_obj_4core_5plane_5Plane_Plane *(*new_static)(godot_plane);
 };
 static struct __pyx_vtabstruct_4core_5plane_5Plane_Plane *__pyx_vtabptr_4core_5plane_5Plane_Plane;
 static CYTHON_INLINE void __pyx_f_4core_5plane_5Plane_5Plane_set_native(struct __pyx_obj_4core_5plane_5Plane_Plane *, godot_plane);
-static CYTHON_INLINE void __pyx_f_4core_5plane_5Plane_5Plane_new_static(godot_plane);
+static CYTHON_INLINE struct __pyx_obj_4core_5plane_5Plane_Plane *__pyx_f_4core_5plane_5Plane_5Plane_new_static(godot_plane);
 
 /* --- Runtime support code (head) --- */
 /* Refnanny.proto */
@@ -1201,7 +1201,7 @@ static int __Pyx_check_binary_version(void);
 static int __Pyx_InitStrings(__Pyx_StringTabEntry *t);
 
 static CYTHON_INLINE void __pyx_f_4core_5plane_5Plane_5Plane_set_native(struct __pyx_obj_4core_5plane_5Plane_Plane *__pyx_v_self, godot_plane __pyx_v__native); /* proto*/
-static CYTHON_INLINE void __pyx_f_4core_5plane_5Plane_5Plane_new_static(godot_plane __pyx_v__native); /* proto*/
+static CYTHON_INLINE struct __pyx_obj_4core_5plane_5Plane_Plane *__pyx_f_4core_5plane_5Plane_5Plane_new_static(godot_plane __pyx_v__native); /* proto*/
 static CYTHON_INLINE void __pyx_f_4core_7vector3_7Vector3_7Vector3_set_native(struct __pyx_obj_4core_7vector3_7Vector3_Vector3 *__pyx_v_self, godot_vector3 __pyx_v__native); /* proto*/
 static CYTHON_INLINE void __pyx_f_4core_7vector3_7Vector3_7Vector3_new_static(godot_vector3 __pyx_v__native); /* proto*/
 
@@ -1886,6 +1886,10 @@ static PyObject *__pyx_pw_4core_5plane_5Plane_5Plane_11normalized(PyObject *__py
 static PyObject *__pyx_pf_4core_5plane_5Plane_5Plane_10normalized(struct __pyx_obj_4core_5plane_5Plane_Plane *__pyx_v_self) {
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
+  PyObject *__pyx_t_1 = NULL;
+  int __pyx_lineno = 0;
+  const char *__pyx_filename = NULL;
+  int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("normalized", 0);
 
   /* "core/plane/Plane.pyx":22
@@ -1895,7 +1899,9 @@ static PyObject *__pyx_pf_4core_5plane_5Plane_5Plane_10normalized(struct __pyx_o
  * 
  *     def center(self):
  */
-  __pyx_f_4core_5plane_5Plane_5Plane_new_static(api_core->godot_plane_normalized((&__pyx_v_self->_native)));
+  __pyx_t_1 = ((PyObject *)__pyx_f_4core_5plane_5Plane_5Plane_new_static(api_core->godot_plane_normalized((&__pyx_v_self->_native)))); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 22, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
   /* "core/plane/Plane.pyx":21
  *         return api_core.godot_plane_as_string(&self._native)
@@ -1907,6 +1913,12 @@ static PyObject *__pyx_pf_4core_5plane_5Plane_5Plane_10normalized(struct __pyx_o
 
   /* function exit code */
   __pyx_r = Py_None; __Pyx_INCREF(Py_None);
+  goto __pyx_L0;
+  __pyx_L1_error:;
+  __Pyx_XDECREF(__pyx_t_1);
+  __Pyx_AddTraceback("core.plane.Plane.Plane.normalized", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __pyx_r = NULL;
+  __pyx_L0:;
   __Pyx_XGIVEREF(__pyx_r);
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
@@ -2804,7 +2816,7 @@ static PyObject *__pyx_pf_4core_5plane_5Plane_5Plane_30neg(struct __pyx_obj_4cor
  *     def __eq__(self, Plane other):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_void_to_None(__pyx_f_4core_5plane_5Plane_5Plane_new_static(api_core->godot_plane_operator_neg((&__pyx_v_self->_native)))); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 52, __pyx_L1_error)
+  __pyx_t_1 = ((PyObject *)__pyx_f_4core_5plane_5Plane_5Plane_new_static(api_core->godot_plane_operator_neg((&__pyx_v_self->_native)))); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 52, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
@@ -3292,13 +3304,14 @@ static CYTHON_INLINE void __pyx_f_4core_5plane_5Plane_5Plane_set_native(struct _
 /* "core/plane/Plane.pxd":10
  * 
  *     @staticmethod
- *     cdef inline void new_static(godot_plane _native):             # <<<<<<<<<<<<<<
+ *     cdef inline Plane new_static(godot_plane _native):             # <<<<<<<<<<<<<<
  *         cdef Plane o = Plane.__new__(Plane)
  *         o.set_native(_native)
  */
 
-static CYTHON_INLINE void __pyx_f_4core_5plane_5Plane_5Plane_new_static(godot_plane __pyx_v__native) {
+static CYTHON_INLINE struct __pyx_obj_4core_5plane_5Plane_Plane *__pyx_f_4core_5plane_5Plane_5Plane_new_static(godot_plane __pyx_v__native) {
   struct __pyx_obj_4core_5plane_5Plane_Plane *__pyx_v_o = 0;
+  struct __pyx_obj_4core_5plane_5Plane_Plane *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   PyObject *__pyx_t_1 = NULL;
   int __pyx_lineno = 0;
@@ -3308,9 +3321,10 @@ static CYTHON_INLINE void __pyx_f_4core_5plane_5Plane_5Plane_new_static(godot_pl
 
   /* "core/plane/Plane.pxd":11
  *     @staticmethod
- *     cdef inline void new_static(godot_plane _native):
+ *     cdef inline Plane new_static(godot_plane _native):
  *         cdef Plane o = Plane.__new__(Plane)             # <<<<<<<<<<<<<<
  *         o.set_native(_native)
+ *         return o
  */
   __pyx_t_1 = __Pyx_tp_new(((PyObject *)__pyx_ptype_4core_5plane_5Plane_Plane), __pyx_empty_tuple); if (unlikely(!__pyx_t_1)) __PYX_ERR(2, 11, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
@@ -3319,28 +3333,41 @@ static CYTHON_INLINE void __pyx_f_4core_5plane_5Plane_5Plane_new_static(godot_pl
   __pyx_t_1 = 0;
 
   /* "core/plane/Plane.pxd":12
- *     cdef inline void new_static(godot_plane _native):
+ *     cdef inline Plane new_static(godot_plane _native):
  *         cdef Plane o = Plane.__new__(Plane)
  *         o.set_native(_native)             # <<<<<<<<<<<<<<
+ *         return o
  */
   __pyx_f_4core_5plane_5Plane_5Plane_set_native(__pyx_v_o, __pyx_v__native);
+
+  /* "core/plane/Plane.pxd":13
+ *         cdef Plane o = Plane.__new__(Plane)
+ *         o.set_native(_native)
+ *         return o             # <<<<<<<<<<<<<<
+ */
+  __Pyx_XDECREF(((PyObject *)__pyx_r));
+  __Pyx_INCREF(((PyObject *)__pyx_v_o));
+  __pyx_r = __pyx_v_o;
+  goto __pyx_L0;
 
   /* "core/plane/Plane.pxd":10
  * 
  *     @staticmethod
- *     cdef inline void new_static(godot_plane _native):             # <<<<<<<<<<<<<<
+ *     cdef inline Plane new_static(godot_plane _native):             # <<<<<<<<<<<<<<
  *         cdef Plane o = Plane.__new__(Plane)
  *         o.set_native(_native)
  */
 
   /* function exit code */
-  goto __pyx_L0;
   __pyx_L1_error:;
   __Pyx_XDECREF(__pyx_t_1);
-  __Pyx_WriteUnraisable("core.plane.Plane.Plane.new_static", __pyx_clineno, __pyx_lineno, __pyx_filename, 1, 0);
+  __Pyx_AddTraceback("core.plane.Plane.Plane.new_static", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __pyx_r = 0;
   __pyx_L0:;
   __Pyx_XDECREF((PyObject *)__pyx_v_o);
+  __Pyx_XGIVEREF((PyObject *)__pyx_r);
   __Pyx_RefNannyFinishContext();
+  return __pyx_r;
 }
 
 /* "core/vector3/Vector3.pxd":6
@@ -3734,7 +3761,7 @@ static int __Pyx_modinit_type_init_code(void) {
   /*--- Type init code ---*/
   __pyx_vtabptr_4core_5plane_5Plane_Plane = &__pyx_vtable_4core_5plane_5Plane_Plane;
   __pyx_vtable_4core_5plane_5Plane_Plane.set_native = (void (*)(struct __pyx_obj_4core_5plane_5Plane_Plane *, godot_plane))__pyx_f_4core_5plane_5Plane_5Plane_set_native;
-  __pyx_vtable_4core_5plane_5Plane_Plane.new_static = (void (*)(godot_plane))__pyx_f_4core_5plane_5Plane_5Plane_new_static;
+  __pyx_vtable_4core_5plane_5Plane_Plane.new_static = (struct __pyx_obj_4core_5plane_5Plane_Plane *(*)(godot_plane))__pyx_f_4core_5plane_5Plane_5Plane_new_static;
   if (PyType_Ready(&__pyx_type_4core_5plane_5Plane_Plane) < 0) __PYX_ERR(1, 4, __pyx_L1_error)
   #if PY_VERSION_HEX < 0x030800B1
   __pyx_type_4core_5plane_5Plane_Plane.tp_print = 0;

@@ -7,6 +7,7 @@ cdef class Plane:
         self._native = _native
 
     @staticmethod
-    cdef inline void new_static(godot_plane _native):
+    cdef inline Plane new_static(godot_plane _native):
         cdef Plane o = Plane.__new__(Plane)
         o.set_native(_native)
+        return o

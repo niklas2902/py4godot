@@ -902,11 +902,11 @@ static CYTHON_INLINE void __pyx_f_4core_7vector2_7Vector2_7Vector2_new_static(go
 
 struct __pyx_vtabstruct_4core_5rect2_5Rect2_Rect2 {
   void (*set_native)(struct __pyx_obj_4core_5rect2_5Rect2_Rect2 *, godot_rect2);
-  void (*new_static)(godot_rect2);
+  struct __pyx_obj_4core_5rect2_5Rect2_Rect2 *(*new_static)(godot_rect2);
 };
 static struct __pyx_vtabstruct_4core_5rect2_5Rect2_Rect2 *__pyx_vtabptr_4core_5rect2_5Rect2_Rect2;
 static CYTHON_INLINE void __pyx_f_4core_5rect2_5Rect2_5Rect2_set_native(struct __pyx_obj_4core_5rect2_5Rect2_Rect2 *, godot_rect2);
-static CYTHON_INLINE void __pyx_f_4core_5rect2_5Rect2_5Rect2_new_static(godot_rect2);
+static CYTHON_INLINE struct __pyx_obj_4core_5rect2_5Rect2_Rect2 *__pyx_f_4core_5rect2_5Rect2_5Rect2_new_static(godot_rect2);
 
 /* --- Runtime support code (head) --- */
 /* Refnanny.proto */
@@ -1187,7 +1187,7 @@ static int __Pyx_check_binary_version(void);
 static int __Pyx_InitStrings(__Pyx_StringTabEntry *t);
 
 static CYTHON_INLINE void __pyx_f_4core_5rect2_5Rect2_5Rect2_set_native(struct __pyx_obj_4core_5rect2_5Rect2_Rect2 *__pyx_v_self, godot_rect2 __pyx_v__native); /* proto*/
-static CYTHON_INLINE void __pyx_f_4core_5rect2_5Rect2_5Rect2_new_static(godot_rect2 __pyx_v__native); /* proto*/
+static CYTHON_INLINE struct __pyx_obj_4core_5rect2_5Rect2_Rect2 *__pyx_f_4core_5rect2_5Rect2_5Rect2_new_static(godot_rect2 __pyx_v__native); /* proto*/
 static CYTHON_INLINE void __pyx_f_4core_7vector2_7Vector2_7Vector2_set_native(struct __pyx_obj_4core_7vector2_7Vector2_Vector2 *__pyx_v_self, godot_vector2 __pyx_v__native); /* proto*/
 static CYTHON_INLINE void __pyx_f_4core_7vector2_7Vector2_7Vector2_new_static(godot_vector2 __pyx_v__native); /* proto*/
 
@@ -1913,7 +1913,7 @@ static PyObject *__pyx_pf_4core_5rect2_5Rect2_5Rect2_14clip(struct __pyx_obj_4co
  *     def merge(self, Rect2 b):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_void_to_None(__pyx_f_4core_5rect2_5Rect2_5Rect2_new_static(api_core->godot_rect2_clip((&__pyx_v_self->_native), (&__pyx_v_b->_native)))); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 28, __pyx_L1_error)
+  __pyx_t_1 = ((PyObject *)__pyx_f_4core_5rect2_5Rect2_5Rect2_new_static(api_core->godot_rect2_clip((&__pyx_v_self->_native), (&__pyx_v_b->_native)))); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 28, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
@@ -1984,7 +1984,7 @@ static PyObject *__pyx_pf_4core_5rect2_5Rect2_5Rect2_16merge(struct __pyx_obj_4c
  *     def has_point(self, Vector2 point):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_void_to_None(__pyx_f_4core_5rect2_5Rect2_5Rect2_new_static(api_core->godot_rect2_merge((&__pyx_v_self->_native), (&__pyx_v_b->_native)))); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 31, __pyx_L1_error)
+  __pyx_t_1 = ((PyObject *)__pyx_f_4core_5rect2_5Rect2_5Rect2_new_static(api_core->godot_rect2_merge((&__pyx_v_self->_native), (&__pyx_v_b->_native)))); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 31, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
@@ -2131,7 +2131,7 @@ static PyObject *__pyx_pf_4core_5rect2_5Rect2_5Rect2_20grow(struct __pyx_obj_4co
  *     def expand(self, Vector2 to):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_void_to_None(__pyx_f_4core_5rect2_5Rect2_5Rect2_new_static(api_core->godot_rect2_grow((&__pyx_v_self->_native), __pyx_v_by))); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 37, __pyx_L1_error)
+  __pyx_t_1 = ((PyObject *)__pyx_f_4core_5rect2_5Rect2_5Rect2_new_static(api_core->godot_rect2_grow((&__pyx_v_self->_native), __pyx_v_by))); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 37, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
@@ -2202,7 +2202,7 @@ static PyObject *__pyx_pf_4core_5rect2_5Rect2_5Rect2_22expand(struct __pyx_obj_4
  *     def __eq__(self, Rect2 b):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_void_to_None(__pyx_f_4core_5rect2_5Rect2_5Rect2_new_static(api_core->godot_rect2_expand((&__pyx_v_self->_native), (&__pyx_v_to->_native)))); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 40, __pyx_L1_error)
+  __pyx_t_1 = ((PyObject *)__pyx_f_4core_5rect2_5Rect2_5Rect2_new_static(api_core->godot_rect2_expand((&__pyx_v_self->_native), (&__pyx_v_to->_native)))); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 40, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
@@ -2685,13 +2685,14 @@ static CYTHON_INLINE void __pyx_f_4core_5rect2_5Rect2_5Rect2_set_native(struct _
 /* "core/rect2/Rect2.pxd":10
  * 
  *     @staticmethod
- *     cdef inline void new_static(godot_rect2 _native):             # <<<<<<<<<<<<<<
+ *     cdef inline Rect2 new_static(godot_rect2 _native):             # <<<<<<<<<<<<<<
  *         cdef Rect2 o = Rect2.__new__(Rect2)
  *         o.set_native(_native)
  */
 
-static CYTHON_INLINE void __pyx_f_4core_5rect2_5Rect2_5Rect2_new_static(godot_rect2 __pyx_v__native) {
+static CYTHON_INLINE struct __pyx_obj_4core_5rect2_5Rect2_Rect2 *__pyx_f_4core_5rect2_5Rect2_5Rect2_new_static(godot_rect2 __pyx_v__native) {
   struct __pyx_obj_4core_5rect2_5Rect2_Rect2 *__pyx_v_o = 0;
+  struct __pyx_obj_4core_5rect2_5Rect2_Rect2 *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   PyObject *__pyx_t_1 = NULL;
   int __pyx_lineno = 0;
@@ -2701,9 +2702,10 @@ static CYTHON_INLINE void __pyx_f_4core_5rect2_5Rect2_5Rect2_new_static(godot_re
 
   /* "core/rect2/Rect2.pxd":11
  *     @staticmethod
- *     cdef inline void new_static(godot_rect2 _native):
+ *     cdef inline Rect2 new_static(godot_rect2 _native):
  *         cdef Rect2 o = Rect2.__new__(Rect2)             # <<<<<<<<<<<<<<
  *         o.set_native(_native)
+ *         return o
  */
   __pyx_t_1 = __Pyx_tp_new(((PyObject *)__pyx_ptype_4core_5rect2_5Rect2_Rect2), __pyx_empty_tuple); if (unlikely(!__pyx_t_1)) __PYX_ERR(2, 11, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
@@ -2712,28 +2714,41 @@ static CYTHON_INLINE void __pyx_f_4core_5rect2_5Rect2_5Rect2_new_static(godot_re
   __pyx_t_1 = 0;
 
   /* "core/rect2/Rect2.pxd":12
- *     cdef inline void new_static(godot_rect2 _native):
+ *     cdef inline Rect2 new_static(godot_rect2 _native):
  *         cdef Rect2 o = Rect2.__new__(Rect2)
  *         o.set_native(_native)             # <<<<<<<<<<<<<<
+ *         return o
  */
   __pyx_f_4core_5rect2_5Rect2_5Rect2_set_native(__pyx_v_o, __pyx_v__native);
+
+  /* "core/rect2/Rect2.pxd":13
+ *         cdef Rect2 o = Rect2.__new__(Rect2)
+ *         o.set_native(_native)
+ *         return o             # <<<<<<<<<<<<<<
+ */
+  __Pyx_XDECREF(((PyObject *)__pyx_r));
+  __Pyx_INCREF(((PyObject *)__pyx_v_o));
+  __pyx_r = __pyx_v_o;
+  goto __pyx_L0;
 
   /* "core/rect2/Rect2.pxd":10
  * 
  *     @staticmethod
- *     cdef inline void new_static(godot_rect2 _native):             # <<<<<<<<<<<<<<
+ *     cdef inline Rect2 new_static(godot_rect2 _native):             # <<<<<<<<<<<<<<
  *         cdef Rect2 o = Rect2.__new__(Rect2)
  *         o.set_native(_native)
  */
 
   /* function exit code */
-  goto __pyx_L0;
   __pyx_L1_error:;
   __Pyx_XDECREF(__pyx_t_1);
-  __Pyx_WriteUnraisable("core.rect2.Rect2.Rect2.new_static", __pyx_clineno, __pyx_lineno, __pyx_filename, 1, 0);
+  __Pyx_AddTraceback("core.rect2.Rect2.Rect2.new_static", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __pyx_r = 0;
   __pyx_L0:;
   __Pyx_XDECREF((PyObject *)__pyx_v_o);
+  __Pyx_XGIVEREF((PyObject *)__pyx_r);
   __Pyx_RefNannyFinishContext();
+  return __pyx_r;
 }
 
 /* "core/vector2/Vector2.pxd":6
@@ -3180,7 +3195,7 @@ static int __Pyx_modinit_type_init_code(void) {
   /*--- Type init code ---*/
   __pyx_vtabptr_4core_5rect2_5Rect2_Rect2 = &__pyx_vtable_4core_5rect2_5Rect2_Rect2;
   __pyx_vtable_4core_5rect2_5Rect2_Rect2.set_native = (void (*)(struct __pyx_obj_4core_5rect2_5Rect2_Rect2 *, godot_rect2))__pyx_f_4core_5rect2_5Rect2_5Rect2_set_native;
-  __pyx_vtable_4core_5rect2_5Rect2_Rect2.new_static = (void (*)(godot_rect2))__pyx_f_4core_5rect2_5Rect2_5Rect2_new_static;
+  __pyx_vtable_4core_5rect2_5Rect2_Rect2.new_static = (struct __pyx_obj_4core_5rect2_5Rect2_Rect2 *(*)(godot_rect2))__pyx_f_4core_5rect2_5Rect2_5Rect2_new_static;
   if (PyType_Ready(&__pyx_type_4core_5rect2_5Rect2_Rect2) < 0) __PYX_ERR(1, 4, __pyx_L1_error)
   #if PY_VERSION_HEX < 0x030800B1
   __pyx_type_4core_5rect2_5Rect2_Rect2.tp_print = 0;

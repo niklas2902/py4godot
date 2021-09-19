@@ -869,11 +869,11 @@ struct __pyx_obj_4core_3rid_3RID_RID {
 
 struct __pyx_vtabstruct_4core_3rid_3RID_RID {
   void (*set_native)(struct __pyx_obj_4core_3rid_3RID_RID *, godot_rid);
-  void (*new_static)(godot_rid);
+  struct __pyx_obj_4core_3rid_3RID_RID *(*new_static)(godot_rid);
 };
 static struct __pyx_vtabstruct_4core_3rid_3RID_RID *__pyx_vtabptr_4core_3rid_3RID_RID;
 static CYTHON_INLINE void __pyx_f_4core_3rid_3RID_3RID_set_native(struct __pyx_obj_4core_3rid_3RID_RID *, godot_rid);
-static CYTHON_INLINE void __pyx_f_4core_3rid_3RID_3RID_new_static(godot_rid);
+static CYTHON_INLINE struct __pyx_obj_4core_3rid_3RID_RID *__pyx_f_4core_3rid_3RID_3RID_new_static(godot_rid);
 
 /* --- Runtime support code (head) --- */
 /* Refnanny.proto */
@@ -1017,11 +1017,6 @@ static CYTHON_INLINE PyObject* __Pyx_tp_new_kwargs(PyObject* type_obj, PyObject*
 /* ExtTypeTest.proto */
 static CYTHON_INLINE int __Pyx_TypeTest(PyObject *obj, PyTypeObject *type);
 
-/* WriteUnraisableException.proto */
-static void __Pyx_WriteUnraisable(const char *name, int clineno,
-                                  int lineno, const char *filename,
-                                  int full_traceback, int nogil);
-
 /* PyObject_GenericGetAttrNoDict.proto */
 #if CYTHON_USE_TYPE_SLOTS && CYTHON_USE_PYTYPE_LOOKUP && PY_VERSION_HEX < 0x03070000
 static CYTHON_INLINE PyObject* __Pyx_PyObject_GenericGetAttrNoDict(PyObject* obj, PyObject* attr_name);
@@ -1148,7 +1143,7 @@ static int __Pyx_check_binary_version(void);
 static int __Pyx_InitStrings(__Pyx_StringTabEntry *t);
 
 static CYTHON_INLINE void __pyx_f_4core_3rid_3RID_3RID_set_native(struct __pyx_obj_4core_3rid_3RID_RID *__pyx_v_self, godot_rid __pyx_v__native); /* proto*/
-static CYTHON_INLINE void __pyx_f_4core_3rid_3RID_3RID_new_static(godot_rid __pyx_v__native); /* proto*/
+static CYTHON_INLINE struct __pyx_obj_4core_3rid_3RID_RID *__pyx_f_4core_3rid_3RID_3RID_new_static(godot_rid __pyx_v__native); /* proto*/
 
 /* Module declarations from 'libcpp' */
 
@@ -1625,13 +1620,14 @@ static CYTHON_INLINE void __pyx_f_4core_3rid_3RID_3RID_set_native(struct __pyx_o
 /* "core/rid/RID.pxd":10
  * 
  *     @staticmethod
- *     cdef inline void new_static(godot_rid _native):             # <<<<<<<<<<<<<<
+ *     cdef inline RID new_static(godot_rid _native):             # <<<<<<<<<<<<<<
  *         cdef RID o = RID.__new__(RID)
  *         o.set_native(_native)
  */
 
-static CYTHON_INLINE void __pyx_f_4core_3rid_3RID_3RID_new_static(godot_rid __pyx_v__native) {
+static CYTHON_INLINE struct __pyx_obj_4core_3rid_3RID_RID *__pyx_f_4core_3rid_3RID_3RID_new_static(godot_rid __pyx_v__native) {
   struct __pyx_obj_4core_3rid_3RID_RID *__pyx_v_o = 0;
+  struct __pyx_obj_4core_3rid_3RID_RID *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   PyObject *__pyx_t_1 = NULL;
   int __pyx_lineno = 0;
@@ -1641,9 +1637,10 @@ static CYTHON_INLINE void __pyx_f_4core_3rid_3RID_3RID_new_static(godot_rid __py
 
   /* "core/rid/RID.pxd":11
  *     @staticmethod
- *     cdef inline void new_static(godot_rid _native):
+ *     cdef inline RID new_static(godot_rid _native):
  *         cdef RID o = RID.__new__(RID)             # <<<<<<<<<<<<<<
  *         o.set_native(_native)
+ *         return o
  */
   __pyx_t_1 = __Pyx_tp_new(((PyObject *)__pyx_ptype_4core_3rid_3RID_RID), __pyx_empty_tuple); if (unlikely(!__pyx_t_1)) __PYX_ERR(2, 11, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
@@ -1652,28 +1649,41 @@ static CYTHON_INLINE void __pyx_f_4core_3rid_3RID_3RID_new_static(godot_rid __py
   __pyx_t_1 = 0;
 
   /* "core/rid/RID.pxd":12
- *     cdef inline void new_static(godot_rid _native):
+ *     cdef inline RID new_static(godot_rid _native):
  *         cdef RID o = RID.__new__(RID)
  *         o.set_native(_native)             # <<<<<<<<<<<<<<
+ *         return o
  */
   __pyx_f_4core_3rid_3RID_3RID_set_native(__pyx_v_o, __pyx_v__native);
+
+  /* "core/rid/RID.pxd":13
+ *         cdef RID o = RID.__new__(RID)
+ *         o.set_native(_native)
+ *         return o             # <<<<<<<<<<<<<<
+ */
+  __Pyx_XDECREF(((PyObject *)__pyx_r));
+  __Pyx_INCREF(((PyObject *)__pyx_v_o));
+  __pyx_r = __pyx_v_o;
+  goto __pyx_L0;
 
   /* "core/rid/RID.pxd":10
  * 
  *     @staticmethod
- *     cdef inline void new_static(godot_rid _native):             # <<<<<<<<<<<<<<
+ *     cdef inline RID new_static(godot_rid _native):             # <<<<<<<<<<<<<<
  *         cdef RID o = RID.__new__(RID)
  *         o.set_native(_native)
  */
 
   /* function exit code */
-  goto __pyx_L0;
   __pyx_L1_error:;
   __Pyx_XDECREF(__pyx_t_1);
-  __Pyx_WriteUnraisable("core.rid.RID.RID.new_static", __pyx_clineno, __pyx_lineno, __pyx_filename, 1, 0);
+  __Pyx_AddTraceback("core.rid.RID.RID.new_static", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __pyx_r = 0;
   __pyx_L0:;
   __Pyx_XDECREF((PyObject *)__pyx_v_o);
+  __Pyx_XGIVEREF((PyObject *)__pyx_r);
   __Pyx_RefNannyFinishContext();
+  return __pyx_r;
 }
 static struct __pyx_vtabstruct_4core_3rid_3RID_RID __pyx_vtable_4core_3rid_3RID_RID;
 
@@ -1947,7 +1957,7 @@ static int __Pyx_modinit_type_init_code(void) {
   /*--- Type init code ---*/
   __pyx_vtabptr_4core_3rid_3RID_RID = &__pyx_vtable_4core_3rid_3RID_RID;
   __pyx_vtable_4core_3rid_3RID_RID.set_native = (void (*)(struct __pyx_obj_4core_3rid_3RID_RID *, godot_rid))__pyx_f_4core_3rid_3RID_3RID_set_native;
-  __pyx_vtable_4core_3rid_3RID_RID.new_static = (void (*)(godot_rid))__pyx_f_4core_3rid_3RID_3RID_new_static;
+  __pyx_vtable_4core_3rid_3RID_RID.new_static = (struct __pyx_obj_4core_3rid_3RID_RID *(*)(godot_rid))__pyx_f_4core_3rid_3RID_3RID_new_static;
   if (PyType_Ready(&__pyx_type_4core_3rid_3RID_RID) < 0) __PYX_ERR(1, 3, __pyx_L1_error)
   #if PY_VERSION_HEX < 0x030800B1
   __pyx_type_4core_3rid_3RID_RID.tp_print = 0;
@@ -2224,7 +2234,7 @@ if (!__Pyx_RefNanny) {
   /* "core/rid/RID.pxd":10
  * 
  *     @staticmethod
- *     cdef inline void new_static(godot_rid _native):             # <<<<<<<<<<<<<<
+ *     cdef inline RID new_static(godot_rid _native):             # <<<<<<<<<<<<<<
  *         cdef RID o = RID.__new__(RID)
  *         o.set_native(_native)
  */
@@ -2600,48 +2610,6 @@ static CYTHON_INLINE int __Pyx_TypeTest(PyObject *obj, PyTypeObject *type) {
     PyErr_Format(PyExc_TypeError, "Cannot convert %.200s to %.200s",
                  Py_TYPE(obj)->tp_name, type->tp_name);
     return 0;
-}
-
-/* WriteUnraisableException */
-static void __Pyx_WriteUnraisable(const char *name, CYTHON_UNUSED int clineno,
-                                  CYTHON_UNUSED int lineno, CYTHON_UNUSED const char *filename,
-                                  int full_traceback, CYTHON_UNUSED int nogil) {
-    PyObject *old_exc, *old_val, *old_tb;
-    PyObject *ctx;
-    __Pyx_PyThreadState_declare
-#ifdef WITH_THREAD
-    PyGILState_STATE state;
-    if (nogil)
-        state = PyGILState_Ensure();
-#ifdef _MSC_VER
-    else state = (PyGILState_STATE)-1;
-#endif
-#endif
-    __Pyx_PyThreadState_assign
-    __Pyx_ErrFetch(&old_exc, &old_val, &old_tb);
-    if (full_traceback) {
-        Py_XINCREF(old_exc);
-        Py_XINCREF(old_val);
-        Py_XINCREF(old_tb);
-        __Pyx_ErrRestore(old_exc, old_val, old_tb);
-        PyErr_PrintEx(1);
-    }
-    #if PY_MAJOR_VERSION < 3
-    ctx = PyString_FromString(name);
-    #else
-    ctx = PyUnicode_FromString(name);
-    #endif
-    __Pyx_ErrRestore(old_exc, old_val, old_tb);
-    if (!ctx) {
-        PyErr_WriteUnraisable(Py_None);
-    } else {
-        PyErr_WriteUnraisable(ctx);
-        Py_DECREF(ctx);
-    }
-#ifdef WITH_THREAD
-    if (nogil)
-        PyGILState_Release(state);
-#endif
 }
 
 /* PyObject_GenericGetAttrNoDict */

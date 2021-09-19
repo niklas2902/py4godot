@@ -8,6 +8,7 @@ cdef class Basis:
         self._native = _native
 
     @staticmethod
-    cdef inline void new_static(godot_basis _native):
+    cdef inline Basis new_static(godot_basis _native):
         cdef Basis o = Basis.__new__(Basis)
         o.set_native(_native)
+        return o
