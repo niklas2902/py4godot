@@ -3,15 +3,15 @@ import json
 exclude_words = ["import", "raise", "class", "from", "pass", "with", "global", "print", "short", "in", "args"]
 
 types = {"Dictionary": "godot_dictionary", "Variant": "godot_variant", "Array": "godot_array", "String": "godot_string",
-         "PoolStringArray": "godot_pool_string_array", "Error": "godot_error", "Reference": "godot_object",
+         "PoolStringArray": "godot_pool_string_array", "Error": "godot_error",
          "NodePath": "godot_node_path",
-         "Vector3": "godot_vector3", "Vector2": "godot_vector2", "Plane": "godot_plane", "Mesh": "godot_object",
+         "Vector3": "godot_vector3", "Vector2": "godot_vector2", "Plane": "godot_plane",
          "Basis": "godot_basis", "Transform": "godot_transform",
-         "PoolIntArray": "godot_object", "PoolVector3Array": "godot_object", "PoolVector2Array": "godot_object",
+         "PoolIntArray": "godot_object *", "PoolVector3Array": "godot_object*", "PoolVector2Array": "godot_object*",
          "Quat": "godot_quat", "AABB": "godot_aabb"
-    , "Rect2": "godot_rect2", "PoolByteArray": "godot_object", "Transform2D": "godot_transform2d",
-         "PoolColorArray": "godot_object",
-         "Color": "godot_color", "RID": "godot_rid", "PoolRealArray": "godot_object", }
+    , "Rect2": "godot_rect2", "PoolByteArray": "godot_object *", "Transform2D": "godot_transform2d",
+         "PoolColorArray": "godot_object * ",
+         "Color": "godot_color", "RID": "godot_rid", "PoolRealArray": "godot_object *", }
 core = ["Dictionary", "Array", "Variant", "NodePath", "String", "Vector3", "Vector2", "Plane", "Basis", "Quat",
         "PoolIntArray", "RID", "AABB", "Transform", "PoolByteArray", "Rect2", "PoolVector2Array", "Transform2D",
         "PoolVector3Array",
@@ -68,11 +68,12 @@ def generate_methods(obj, import_string):
                         return_type = import_class + "_" + return_type
 
                 if (return_type in objects):
-                    result += f"    cdef godot_object* ret = NULL;\n\n"
+                    result += f"    cdef godot_object* ret\n\n"
                 else:
                     return_type_imported = return_type if return_type.split(".")[0] in objects else return_type
-                    result += f"    cdef {return_type_imported if return_type_imported not in types else types[return_type_imported]}* ret = NULL;\n\n"
-
+                    result += f"    cdef {return_type_imported if return_type_imported not in types else types[return_type_imported]} ret\n\n"
+            if(return_type == "godot_object"):
+                print("##############return_type:"+ return_type)
             if (len(method['arguments']) > 0):
                 result += f"    cdef void *args[{len(method['arguments'])}]\n\n"
 
@@ -83,6 +84,8 @@ def generate_methods(obj, import_string):
                         result += f"    args[{i}] = {arg_name}.godot_owner\n"
                     else:
                         result += f"    args[{i}] = {'&' + arg_name + '._native' if method['arguments'][i]['type'] in core else ('&' + arg_name)}\n"
+            else:
+                result += f"""    cdef void * args[1]\n    args[0] = NULL\n"""
             result += f"    print('call_method_native:{method['name']}')\n"
             if(not method["is_virtual"]):
                 result += f"    api_core.godot_method_bind_ptrcall(bind_{obj['name'].lower()}_{method['name']}," \
@@ -96,7 +99,7 @@ def generate_methods(obj, import_string):
                 if (return_type in types and not return_type_save in return_type):
                     return_type = types[return_type]
                     # print(return_type+"|"+return_type_save)
-                result += f"    return {return_type_save + '.new_static(dereference(ret))' if return_type_save in types else 'dereference(ret)'}\n\n"
+                result += f"    return {return_type_save + '.new_static(ret)' if return_type_save in types else 'ret'}\n\n"
     return result, import_string
 
 
