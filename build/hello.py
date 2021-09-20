@@ -2,6 +2,7 @@ from pluginscript_api.utils.annotations import  *
 from utils.Wrapper import *
 from enums.enums import *
 from classes.generated import *
+from core.vector3.Vector3 import Vector3
 print(PropertyHint)
 print(PropertyHint.GODOT_PROPERTY_HINT_RANGE.value)
 
@@ -16,33 +17,12 @@ class Ball(Spatial):
 	def vel(self, value):
 		print("set_value", value)
 
-	@gdproperty(bool, False)
-	def grounded(self):
-		return False
-
-	@grounded.setter
-	def grounded(self, value):
-		print("set_grounded")
-
-	def __init__(self):
-		super().__init__()
-		self.velocity = 0
-
-	@gdmethod
-	def _init(self):
-		print("_init")
 
 	@gdmethod
 	def _process(self, delta):
 		print(delta)
 		print(self.get_transform())
-
-	@gdmethod
-	def move(self):
-		print("method")
-		
-	@gdmethod
-	def jump(self):
-		print("jump")
-
+		transform = self.get_transform()
+		transform.set_origin(Vector3(4,0,0))
+		self.set_transform(transform)
 		

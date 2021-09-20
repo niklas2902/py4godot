@@ -1,8 +1,12 @@
 #from core.basis.Basis cimport *
 from core.vector3.vector3_binding cimport *
 
-cdef class Vector3:
 
+cdef api set_api_core_vector3(godot_gdnative_core_api_struct * core):
+    global api_core
+    api_core = core
+
+cdef class Vector3:
     def __init__(self, godot_real x, godot_real y, godot_real z):
         api_core.godot_vector3_new(&self._native,x,y,z)
 
