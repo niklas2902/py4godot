@@ -73,16 +73,7 @@ cdef api  godot_pluginscript_script_manifest init_pluginscript_desc (godot_plugi
 
         manifest.data = obj;
     else:
-        api_core.godot_string_name_new_data(&manifest.name, "python_manifest");
-        manifest.is_tool = False;
-        api_core.godot_string_name_new_data(&manifest.base, "");
-        api_core.godot_dictionary_new(&manifest.member_lines);
-        api_core.godot_array_new(&manifest.signals);
-        methods_array = Array()
-        properties_array = Array()
-
-        manifest.properties = properties_array.get_native()
-        manifest.methods = methods_array.get_native()
+        create_empty_manifest(&manifest)
     reset()
     print("\n################################return_manifest########################################################\n");
     return manifest;
@@ -176,9 +167,17 @@ class {str(String.new_static(dereference(p_class_name)))}({str(String.new_static
 
 """)._native
 
-cdef godot_pluginscript_script_manifest get_empty_manifest(godot_pluginscript_script_manifest manifest):
+cdef void create_empty_manifest(godot_pluginscript_script_manifest* manifest):
+    api_core.godot_string_name_new_data(&manifest.name, "python_manifest");
+    manifest.is_tool = False;
+    api_core.godot_string_name_new_data(&manifest.base, "");
+    api_core.godot_dictionary_new(&manifest.member_lines);
+    api_core.godot_array_new(&manifest.signals);
+    methods_array = Array()
+    properties_array = Array()
 
-    return manifest
+    manifest.properties = properties_array.get_native()
+    manifest.methods = methods_array.get_native()
 
 
 
