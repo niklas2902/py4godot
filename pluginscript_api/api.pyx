@@ -41,35 +41,48 @@ cdef api  godot_pluginscript_script_manifest init_pluginscript_desc (godot_plugi
     cdef PyObject* obj
     print("\n############################################create_manifest##############################################\n");
 
-    api_core.godot_string_name_new_data(&manifest.name, "python_manifest");
-    manifest.is_tool = False;
-    api_core.godot_string_name_new_data(&manifest.base, "");
-    api_core.godot_dictionary_new(&manifest.member_lines);
-    api_core.godot_array_new(&manifest.signals);
-    methods_array = Array()
-    api_core.godot_print(p_source)
-    api_core.godot_print(p_path)
 
     reset()
     exec(get_python_string_from_w_string(p_source))
 
-    gd_obj = classes[0]
-    class_obj = <PyObject*> gd_obj
+    if(len(classes) > 0):
+        gd_obj = classes[0]
+        api_core.godot_string_name_new_data(&manifest.name, "python_manifest");
+        manifest.is_tool = False;
+        api_core.godot_string_name_new_data(&manifest.base, "");
+        api_core.godot_dictionary_new(&manifest.member_lines);
+        api_core.godot_array_new(&manifest.signals);
+        methods_array = Array()
+        api_core.godot_print(p_source)
+        api_core.godot_print(p_path)
 
-    properties_array = Array()
-    for p in properties:
-        properties_array.append(Variant(p.to_dict()))
-        print("dict:",p.to_dict())
-    for m in methods:
-        methods_array.append(Variant(m.to_dict()))
+        class_obj = <PyObject*> gd_obj
 
-    manifest.properties = properties_array.get_native()
-    manifest.methods = methods_array.get_native()
+        properties_array = Array()
+        for p in properties:
+            properties_array.append(Variant(p.to_dict()))
+            print("dict:",p.to_dict())
+        for m in methods:
+            methods_array.append(Variant(m.to_dict()))
+
+        manifest.properties = properties_array.get_native()
+        manifest.methods = methods_array.get_native()
 
 
-    obj = class_obj
+        obj = class_obj
 
-    manifest.data = obj;
+        manifest.data = obj;
+    else:
+        api_core.godot_string_name_new_data(&manifest.name, "python_manifest");
+        manifest.is_tool = False;
+        api_core.godot_string_name_new_data(&manifest.base, "");
+        api_core.godot_dictionary_new(&manifest.member_lines);
+        api_core.godot_array_new(&manifest.signals);
+        methods_array = Array()
+        properties_array = Array()
+
+        manifest.properties = properties_array.get_native()
+        manifest.methods = methods_array.get_native()
     reset()
     print("\n################################return_manifest########################################################\n");
     return manifest;
@@ -162,6 +175,12 @@ class {str(String.new_static(dereference(p_class_name)))}({str(String.new_static
         print(delta)
 
 """)._native
+
+cdef godot_pluginscript_script_manifest get_empty_manifest(godot_pluginscript_script_manifest manifest):
+
+    return manifest
+
+
 
 cdef api void notification_pluginscript_instance(godot_pluginscript_instance_data *p_data,
 int p_notification) with gil:
