@@ -5112,10 +5112,7 @@ bad:
 static PyObject* __pyx_convert__to_py_godot_string(godot_string s) {
   PyObject* res;
   PyObject* member;
-  res = __Pyx_PyDict_NewPresized(1); if (unlikely(!res)) return NULL;
-  member = __Pyx_PyObject_FromCString(s._dont_touch_that); if (unlikely(!member)) goto bad;
-  if (unlikely(PyDict_SetItem(res, __pyx_n_s_dont_touch_that, member) < 0)) goto bad;
-  Py_DECREF(member);
+  res = __Pyx_PyDict_NewPresized(0); if (unlikely(!res)) return NULL;
   return res;
   bad:
   Py_XDECREF(member);

@@ -7,7 +7,6 @@ cdef api set_api_core_string(godot_gdnative_core_api_struct * core):
 cdef class String:
 
     def __init__(self, string = None):
-        print("string:", string)
         if(string == None):
             api_core.godot_string_new(&self._native)
         else:

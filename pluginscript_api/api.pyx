@@ -3,7 +3,7 @@ from libc.stddef cimport wchar_t
 from pluginscript_api.description_classes.MethodDescription import *
 from pluginscript_api.description_classes.PropertyDescription import *
 #from core.dictionary.Dictionary cimport set_api_core_dict
-from core.array.Array import Array
+from core.array.Array cimport Array
 from core.string_name.StringName cimport StringName
 from core.string.String cimport String
 from libc.stdio cimport printf
@@ -65,8 +65,8 @@ cdef api  godot_pluginscript_script_manifest init_pluginscript_desc (godot_plugi
         for m in methods:
             methods_array.append(Variant(m.to_dict()))
 
-        manifest.properties = properties_array.get_native()
-        manifest.methods = methods_array.get_native()
+        manifest.properties = properties_array._native
+        manifest.methods = methods_array._native
 
 
         obj = class_obj
@@ -176,8 +176,8 @@ cdef void create_empty_manifest(godot_pluginscript_script_manifest* manifest):
     methods_array = Array()
     properties_array = Array()
 
-    manifest.properties = properties_array.get_native()
-    manifest.methods = methods_array.get_native()
+    manifest.properties = properties_array._native
+    manifest.methods = methods_array._native
 
 
 

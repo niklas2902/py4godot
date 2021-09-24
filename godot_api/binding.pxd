@@ -53,7 +53,7 @@ cdef extern from "binding.h":
     #Todo:Remove [1] arrays
 
     ctypedef struct godot_array:
-        uint8_t _dont_touch_that[array_size]
+        pass
     ctypedef struct godot_vector2:
         uint8_t _dont_touch_that[8]
     ctypedef struct godot_rect2:
@@ -79,7 +79,7 @@ cdef extern from "binding.h":
     ctypedef struct godot_rid:
         uint8_t _dont_touch_that[array_size];
     ctypedef struct godot_dictionary:
-        uint8_t _dont_touch_that[array_size];
+        pass
     ctypedef struct godot_pool_byte_array:
         uint8_t _dont_touch_that[array_size];
     ctypedef struct godot_pool_int_array:
@@ -97,7 +97,7 @@ cdef extern from "binding.h":
     ctypedef struct godot_string_name:
         uint8_t _dont_touch_that[array_size];
     ctypedef struct godot_string:
-        uint8_t _dont_touch_that[array_size];
+        pass
     ctypedef struct godot_char_string:
         uint8_t _dont_touch_that[array_size];
 
