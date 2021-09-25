@@ -68,10 +68,7 @@ cdef api  godot_pluginscript_script_manifest init_pluginscript_desc (godot_plugi
         manifest.properties = properties_array._native
         manifest.methods = methods_array._native
 
-
-        obj = class_obj
-
-        manifest.data = obj;
+        manifest.data = class_obj
     else:
         create_empty_manifest(&manifest)
     reset()
@@ -88,8 +85,9 @@ cdef api godot_pluginscript_instance_data * init_pluginscript_instance(godot_plu
  godot_object *p_owner) with gil:
     print("\n####################################################################instance_init########################\n");
     cdef Wrapper instance
-    instance = (<Wrapper ?>p_data)()
+    (<Wrapper>p_data)()
     print("instance created")
+    instance = (<Wrapper>p_data)()
     print(instance)
     instance.set_godot_owner(p_owner)
     Py_INCREF(instance)

@@ -137,9 +137,7 @@ def generate_classes(obj):
         print(obj["name"], "|", obj["base_class"], obj["base_class"] == "")
     result += f"""cdef class {obj['name']}({obj['base_class'] if obj['base_class'] != "" else "Wrapper"}):\n"""
     result += f"""  def __init__(self):\n"""
-    result += f"""    print("__init__{obj['name']}")\n"""
     result += f"""    super().__init__()\n"""
-    result += f"""    #nativescript_api_11.godot_nativescript_get_instance_binding_data({len(obj["methods"])}, api_core.godot_get_class_constructor("{obj["name"]}")())"""
 
     result += generate_properties(obj)
     results = generate_methods(obj, import_string)
