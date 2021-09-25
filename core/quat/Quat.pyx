@@ -1,6 +1,9 @@
 from core.vector3.Vector3 cimport *
 from core.quat.quat_binding cimport *
 
+cdef api set_api_core_quat(godot_gdnative_core_api_struct * core):
+    global api_core
+    api_core = core
 
 cdef class Quat:
 

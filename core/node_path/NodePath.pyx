@@ -1,6 +1,10 @@
 from core.string.String cimport *
 from core.node_path.node_path_binding cimport *
 
+cdef api set_api_core_node_path(godot_gdnative_core_api_struct * core):
+    global api_core
+    api_core = core
+
 cdef class NodePath:
 
     def __init__(self, String path):

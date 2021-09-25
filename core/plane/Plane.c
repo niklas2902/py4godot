@@ -916,8 +916,8 @@ static CYTHON_INLINE void __pyx_f_4core_7vector3_7Vector3_7Vector3_set_native(st
 static CYTHON_INLINE struct __pyx_obj_4core_7vector3_7Vector3_Vector3 *__pyx_f_4core_7vector3_7Vector3_7Vector3_new_static(godot_vector3);
 
 
-/* "core/plane/Plane.pyx":4
- * from core.plane.plane_binding cimport *
+/* "core/plane/Plane.pyx":8
+ *     api_core = core
  * 
  * cdef class Plane:             # <<<<<<<<<<<<<<
  * 
@@ -1207,6 +1207,9 @@ static CYTHON_INLINE int __Pyx_PyErr_GivenExceptionMatches2(PyObject *err, PyObj
 /* CheckBinaryVersion.proto */
 static int __Pyx_check_binary_version(void);
 
+/* FunctionExport.proto */
+static int __Pyx_ExportFunction(const char *name, void (*f)(void), const char *sig);
+
 /* InitStrings.proto */
 static int __Pyx_InitStrings(__Pyx_StringTabEntry *t);
 
@@ -1245,6 +1248,7 @@ static PyTypeObject *__pyx_ptype_4core_7vector3_7Vector3_Vector3 = 0;
 
 /* Module declarations from 'core.plane.Plane' */
 static PyTypeObject *__pyx_ptype_4core_5plane_5Plane_Plane = 0;
+static PyObject *__pyx_f_4core_5plane_5Plane_set_api_core_plane(struct godot_gdnative_core_api_struct *); /*proto*/
 #define __Pyx_MODULE_NAME "core.plane.Plane"
 extern int __pyx_module_is_main_core__plane__Plane;
 int __pyx_module_is_main_core__plane__Plane = 0;
@@ -1337,7 +1341,44 @@ static PyObject *__pyx_tuple_;
 static PyObject *__pyx_tuple__2;
 /* Late includes */
 
-/* "core/plane/Plane.pyx":6
+/* "core/plane/Plane.pyx":4
+ * from core.plane.plane_binding cimport *
+ * 
+ * cdef api set_api_core_plane(godot_gdnative_core_api_struct * core):             # <<<<<<<<<<<<<<
+ *     global api_core
+ *     api_core = core
+ */
+
+static PyObject *__pyx_f_4core_5plane_5Plane_set_api_core_plane(struct godot_gdnative_core_api_struct *__pyx_v_core) {
+  PyObject *__pyx_r = NULL;
+  __Pyx_RefNannyDeclarations
+  __Pyx_RefNannySetupContext("set_api_core_plane", 0);
+
+  /* "core/plane/Plane.pyx":6
+ * cdef api set_api_core_plane(godot_gdnative_core_api_struct * core):
+ *     global api_core
+ *     api_core = core             # <<<<<<<<<<<<<<
+ * 
+ * cdef class Plane:
+ */
+  api_core = __pyx_v_core;
+
+  /* "core/plane/Plane.pyx":4
+ * from core.plane.plane_binding cimport *
+ * 
+ * cdef api set_api_core_plane(godot_gdnative_core_api_struct * core):             # <<<<<<<<<<<<<<
+ *     global api_core
+ *     api_core = core
+ */
+
+  /* function exit code */
+  __pyx_r = Py_None; __Pyx_INCREF(Py_None);
+  __Pyx_XGIVEREF(__pyx_r);
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+/* "core/plane/Plane.pyx":10
  * cdef class Plane:
  * 
  *     def __init__(self, godot_real a, godot_real b, godot_real c, godot_real d):             # <<<<<<<<<<<<<<
@@ -1385,23 +1426,23 @@ static int __pyx_pw_4core_5plane_5Plane_5Plane_1__init__(PyObject *__pyx_v_self,
         case  1:
         if (likely((values[1] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_b)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("__init__", 1, 4, 4, 1); __PYX_ERR(1, 6, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("__init__", 1, 4, 4, 1); __PYX_ERR(1, 10, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  2:
         if (likely((values[2] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_c)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("__init__", 1, 4, 4, 2); __PYX_ERR(1, 6, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("__init__", 1, 4, 4, 2); __PYX_ERR(1, 10, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  3:
         if (likely((values[3] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_d)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("__init__", 1, 4, 4, 3); __PYX_ERR(1, 6, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("__init__", 1, 4, 4, 3); __PYX_ERR(1, 10, __pyx_L3_error)
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "__init__") < 0)) __PYX_ERR(1, 6, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "__init__") < 0)) __PYX_ERR(1, 10, __pyx_L3_error)
       }
     } else if (PyTuple_GET_SIZE(__pyx_args) != 4) {
       goto __pyx_L5_argtuple_error;
@@ -1411,14 +1452,14 @@ static int __pyx_pw_4core_5plane_5Plane_5Plane_1__init__(PyObject *__pyx_v_self,
       values[2] = PyTuple_GET_ITEM(__pyx_args, 2);
       values[3] = PyTuple_GET_ITEM(__pyx_args, 3);
     }
-    __pyx_v_a = __pyx_PyFloat_AsFloat(values[0]); if (unlikely((__pyx_v_a == ((godot_real)-1)) && PyErr_Occurred())) __PYX_ERR(1, 6, __pyx_L3_error)
-    __pyx_v_b = __pyx_PyFloat_AsFloat(values[1]); if (unlikely((__pyx_v_b == ((godot_real)-1)) && PyErr_Occurred())) __PYX_ERR(1, 6, __pyx_L3_error)
-    __pyx_v_c = __pyx_PyFloat_AsFloat(values[2]); if (unlikely((__pyx_v_c == ((godot_real)-1)) && PyErr_Occurred())) __PYX_ERR(1, 6, __pyx_L3_error)
-    __pyx_v_d = __pyx_PyFloat_AsFloat(values[3]); if (unlikely((__pyx_v_d == ((godot_real)-1)) && PyErr_Occurred())) __PYX_ERR(1, 6, __pyx_L3_error)
+    __pyx_v_a = __pyx_PyFloat_AsFloat(values[0]); if (unlikely((__pyx_v_a == ((godot_real)-1)) && PyErr_Occurred())) __PYX_ERR(1, 10, __pyx_L3_error)
+    __pyx_v_b = __pyx_PyFloat_AsFloat(values[1]); if (unlikely((__pyx_v_b == ((godot_real)-1)) && PyErr_Occurred())) __PYX_ERR(1, 10, __pyx_L3_error)
+    __pyx_v_c = __pyx_PyFloat_AsFloat(values[2]); if (unlikely((__pyx_v_c == ((godot_real)-1)) && PyErr_Occurred())) __PYX_ERR(1, 10, __pyx_L3_error)
+    __pyx_v_d = __pyx_PyFloat_AsFloat(values[3]); if (unlikely((__pyx_v_d == ((godot_real)-1)) && PyErr_Occurred())) __PYX_ERR(1, 10, __pyx_L3_error)
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("__init__", 1, 4, 4, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(1, 6, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("__init__", 1, 4, 4, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(1, 10, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("core.plane.Plane.Plane.__init__", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
@@ -1436,7 +1477,7 @@ static int __pyx_pf_4core_5plane_5Plane_5Plane___init__(struct __pyx_obj_4core_5
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__init__", 0);
 
-  /* "core/plane/Plane.pyx":7
+  /* "core/plane/Plane.pyx":11
  * 
  *     def __init__(self, godot_real a, godot_real b, godot_real c, godot_real d):
  *         api_core.godot_plane_new_with_reals(&self._native, a,b,c,d)             # <<<<<<<<<<<<<<
@@ -1445,7 +1486,7 @@ static int __pyx_pf_4core_5plane_5Plane_5Plane___init__(struct __pyx_obj_4core_5
  */
   api_core->godot_plane_new_with_reals((&__pyx_v_self->_native), __pyx_v_a, __pyx_v_b, __pyx_v_c, __pyx_v_d);
 
-  /* "core/plane/Plane.pyx":6
+  /* "core/plane/Plane.pyx":10
  * cdef class Plane:
  * 
  *     def __init__(self, godot_real a, godot_real b, godot_real c, godot_real d):             # <<<<<<<<<<<<<<
@@ -1459,7 +1500,7 @@ static int __pyx_pf_4core_5plane_5Plane_5Plane___init__(struct __pyx_obj_4core_5
   return __pyx_r;
 }
 
-/* "core/plane/Plane.pyx":9
+/* "core/plane/Plane.pyx":13
  *         api_core.godot_plane_new_with_reals(&self._native, a,b,c,d)
  * 
  *     def new_with_reals(self, godot_real a, godot_real b, godot_real c, godot_real d):             # <<<<<<<<<<<<<<
@@ -1507,23 +1548,23 @@ static PyObject *__pyx_pw_4core_5plane_5Plane_5Plane_3new_with_reals(PyObject *_
         case  1:
         if (likely((values[1] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_b)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("new_with_reals", 1, 4, 4, 1); __PYX_ERR(1, 9, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("new_with_reals", 1, 4, 4, 1); __PYX_ERR(1, 13, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  2:
         if (likely((values[2] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_c)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("new_with_reals", 1, 4, 4, 2); __PYX_ERR(1, 9, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("new_with_reals", 1, 4, 4, 2); __PYX_ERR(1, 13, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  3:
         if (likely((values[3] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_d)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("new_with_reals", 1, 4, 4, 3); __PYX_ERR(1, 9, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("new_with_reals", 1, 4, 4, 3); __PYX_ERR(1, 13, __pyx_L3_error)
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "new_with_reals") < 0)) __PYX_ERR(1, 9, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "new_with_reals") < 0)) __PYX_ERR(1, 13, __pyx_L3_error)
       }
     } else if (PyTuple_GET_SIZE(__pyx_args) != 4) {
       goto __pyx_L5_argtuple_error;
@@ -1533,14 +1574,14 @@ static PyObject *__pyx_pw_4core_5plane_5Plane_5Plane_3new_with_reals(PyObject *_
       values[2] = PyTuple_GET_ITEM(__pyx_args, 2);
       values[3] = PyTuple_GET_ITEM(__pyx_args, 3);
     }
-    __pyx_v_a = __pyx_PyFloat_AsFloat(values[0]); if (unlikely((__pyx_v_a == ((godot_real)-1)) && PyErr_Occurred())) __PYX_ERR(1, 9, __pyx_L3_error)
-    __pyx_v_b = __pyx_PyFloat_AsFloat(values[1]); if (unlikely((__pyx_v_b == ((godot_real)-1)) && PyErr_Occurred())) __PYX_ERR(1, 9, __pyx_L3_error)
-    __pyx_v_c = __pyx_PyFloat_AsFloat(values[2]); if (unlikely((__pyx_v_c == ((godot_real)-1)) && PyErr_Occurred())) __PYX_ERR(1, 9, __pyx_L3_error)
-    __pyx_v_d = __pyx_PyFloat_AsFloat(values[3]); if (unlikely((__pyx_v_d == ((godot_real)-1)) && PyErr_Occurred())) __PYX_ERR(1, 9, __pyx_L3_error)
+    __pyx_v_a = __pyx_PyFloat_AsFloat(values[0]); if (unlikely((__pyx_v_a == ((godot_real)-1)) && PyErr_Occurred())) __PYX_ERR(1, 13, __pyx_L3_error)
+    __pyx_v_b = __pyx_PyFloat_AsFloat(values[1]); if (unlikely((__pyx_v_b == ((godot_real)-1)) && PyErr_Occurred())) __PYX_ERR(1, 13, __pyx_L3_error)
+    __pyx_v_c = __pyx_PyFloat_AsFloat(values[2]); if (unlikely((__pyx_v_c == ((godot_real)-1)) && PyErr_Occurred())) __PYX_ERR(1, 13, __pyx_L3_error)
+    __pyx_v_d = __pyx_PyFloat_AsFloat(values[3]); if (unlikely((__pyx_v_d == ((godot_real)-1)) && PyErr_Occurred())) __PYX_ERR(1, 13, __pyx_L3_error)
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("new_with_reals", 1, 4, 4, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(1, 9, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("new_with_reals", 1, 4, 4, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(1, 13, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("core.plane.Plane.Plane.new_with_reals", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
@@ -1558,7 +1599,7 @@ static PyObject *__pyx_pf_4core_5plane_5Plane_5Plane_2new_with_reals(struct __py
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("new_with_reals", 0);
 
-  /* "core/plane/Plane.pyx":10
+  /* "core/plane/Plane.pyx":14
  * 
  *     def new_with_reals(self, godot_real a, godot_real b, godot_real c, godot_real d):
  *         api_core.godot_plane_new_with_reals(&self._native, a,b,c,d)             # <<<<<<<<<<<<<<
@@ -1567,7 +1608,7 @@ static PyObject *__pyx_pf_4core_5plane_5Plane_5Plane_2new_with_reals(struct __py
  */
   api_core->godot_plane_new_with_reals((&__pyx_v_self->_native), __pyx_v_a, __pyx_v_b, __pyx_v_c, __pyx_v_d);
 
-  /* "core/plane/Plane.pyx":9
+  /* "core/plane/Plane.pyx":13
  *         api_core.godot_plane_new_with_reals(&self._native, a,b,c,d)
  * 
  *     def new_with_reals(self, godot_real a, godot_real b, godot_real c, godot_real d):             # <<<<<<<<<<<<<<
@@ -1582,7 +1623,7 @@ static PyObject *__pyx_pf_4core_5plane_5Plane_5Plane_2new_with_reals(struct __py
   return __pyx_r;
 }
 
-/* "core/plane/Plane.pyx":12
+/* "core/plane/Plane.pyx":16
  *         api_core.godot_plane_new_with_reals(&self._native, a,b,c,d)
  * 
  *     def new_with_vectors(self, Vector3 v1, Vector3 v2, Vector3 v3):             # <<<<<<<<<<<<<<
@@ -1627,17 +1668,17 @@ static PyObject *__pyx_pw_4core_5plane_5Plane_5Plane_5new_with_vectors(PyObject 
         case  1:
         if (likely((values[1] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_v2)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("new_with_vectors", 1, 3, 3, 1); __PYX_ERR(1, 12, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("new_with_vectors", 1, 3, 3, 1); __PYX_ERR(1, 16, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  2:
         if (likely((values[2] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_v3)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("new_with_vectors", 1, 3, 3, 2); __PYX_ERR(1, 12, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("new_with_vectors", 1, 3, 3, 2); __PYX_ERR(1, 16, __pyx_L3_error)
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "new_with_vectors") < 0)) __PYX_ERR(1, 12, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "new_with_vectors") < 0)) __PYX_ERR(1, 16, __pyx_L3_error)
       }
     } else if (PyTuple_GET_SIZE(__pyx_args) != 3) {
       goto __pyx_L5_argtuple_error;
@@ -1652,15 +1693,15 @@ static PyObject *__pyx_pw_4core_5plane_5Plane_5Plane_5new_with_vectors(PyObject 
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("new_with_vectors", 1, 3, 3, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(1, 12, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("new_with_vectors", 1, 3, 3, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(1, 16, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("core.plane.Plane.Plane.new_with_vectors", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_v1), __pyx_ptype_4core_7vector3_7Vector3_Vector3, 1, "v1", 0))) __PYX_ERR(1, 12, __pyx_L1_error)
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_v2), __pyx_ptype_4core_7vector3_7Vector3_Vector3, 1, "v2", 0))) __PYX_ERR(1, 12, __pyx_L1_error)
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_v3), __pyx_ptype_4core_7vector3_7Vector3_Vector3, 1, "v3", 0))) __PYX_ERR(1, 12, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_v1), __pyx_ptype_4core_7vector3_7Vector3_Vector3, 1, "v1", 0))) __PYX_ERR(1, 16, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_v2), __pyx_ptype_4core_7vector3_7Vector3_Vector3, 1, "v2", 0))) __PYX_ERR(1, 16, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_v3), __pyx_ptype_4core_7vector3_7Vector3_Vector3, 1, "v3", 0))) __PYX_ERR(1, 16, __pyx_L1_error)
   __pyx_r = __pyx_pf_4core_5plane_5Plane_5Plane_4new_with_vectors(((struct __pyx_obj_4core_5plane_5Plane_Plane *)__pyx_v_self), __pyx_v_v1, __pyx_v_v2, __pyx_v_v3);
 
   /* function exit code */
@@ -1677,7 +1718,7 @@ static PyObject *__pyx_pf_4core_5plane_5Plane_5Plane_4new_with_vectors(struct __
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("new_with_vectors", 0);
 
-  /* "core/plane/Plane.pyx":13
+  /* "core/plane/Plane.pyx":17
  * 
  *     def new_with_vectors(self, Vector3 v1, Vector3 v2, Vector3 v3):
  *         api_core.godot_plane_new_with_vectors(&self._native, &v2._native, &v2._native, &v3._native)             # <<<<<<<<<<<<<<
@@ -1686,7 +1727,7 @@ static PyObject *__pyx_pf_4core_5plane_5Plane_5Plane_4new_with_vectors(struct __
  */
   api_core->godot_plane_new_with_vectors((&__pyx_v_self->_native), (&__pyx_v_v2->_native), (&__pyx_v_v2->_native), (&__pyx_v_v3->_native));
 
-  /* "core/plane/Plane.pyx":12
+  /* "core/plane/Plane.pyx":16
  *         api_core.godot_plane_new_with_reals(&self._native, a,b,c,d)
  * 
  *     def new_with_vectors(self, Vector3 v1, Vector3 v2, Vector3 v3):             # <<<<<<<<<<<<<<
@@ -1701,7 +1742,7 @@ static PyObject *__pyx_pf_4core_5plane_5Plane_5Plane_4new_with_vectors(struct __
   return __pyx_r;
 }
 
-/* "core/plane/Plane.pyx":15
+/* "core/plane/Plane.pyx":19
  *         api_core.godot_plane_new_with_vectors(&self._native, &v2._native, &v2._native, &v3._native)
  * 
  *     def new_with_normal(self, Vector3 normal, godot_real d):             # <<<<<<<<<<<<<<
@@ -1743,11 +1784,11 @@ static PyObject *__pyx_pw_4core_5plane_5Plane_5Plane_7new_with_normal(PyObject *
         case  1:
         if (likely((values[1] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_d)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("new_with_normal", 1, 2, 2, 1); __PYX_ERR(1, 15, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("new_with_normal", 1, 2, 2, 1); __PYX_ERR(1, 19, __pyx_L3_error)
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "new_with_normal") < 0)) __PYX_ERR(1, 15, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "new_with_normal") < 0)) __PYX_ERR(1, 19, __pyx_L3_error)
       }
     } else if (PyTuple_GET_SIZE(__pyx_args) != 2) {
       goto __pyx_L5_argtuple_error;
@@ -1756,17 +1797,17 @@ static PyObject *__pyx_pw_4core_5plane_5Plane_5Plane_7new_with_normal(PyObject *
       values[1] = PyTuple_GET_ITEM(__pyx_args, 1);
     }
     __pyx_v_normal = ((struct __pyx_obj_4core_7vector3_7Vector3_Vector3 *)values[0]);
-    __pyx_v_d = __pyx_PyFloat_AsFloat(values[1]); if (unlikely((__pyx_v_d == ((godot_real)-1)) && PyErr_Occurred())) __PYX_ERR(1, 15, __pyx_L3_error)
+    __pyx_v_d = __pyx_PyFloat_AsFloat(values[1]); if (unlikely((__pyx_v_d == ((godot_real)-1)) && PyErr_Occurred())) __PYX_ERR(1, 19, __pyx_L3_error)
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("new_with_normal", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(1, 15, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("new_with_normal", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(1, 19, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("core.plane.Plane.Plane.new_with_normal", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_normal), __pyx_ptype_4core_7vector3_7Vector3_Vector3, 1, "normal", 0))) __PYX_ERR(1, 15, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_normal), __pyx_ptype_4core_7vector3_7Vector3_Vector3, 1, "normal", 0))) __PYX_ERR(1, 19, __pyx_L1_error)
   __pyx_r = __pyx_pf_4core_5plane_5Plane_5Plane_6new_with_normal(((struct __pyx_obj_4core_5plane_5Plane_Plane *)__pyx_v_self), __pyx_v_normal, __pyx_v_d);
 
   /* function exit code */
@@ -1783,7 +1824,7 @@ static PyObject *__pyx_pf_4core_5plane_5Plane_5Plane_6new_with_normal(struct __p
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("new_with_normal", 0);
 
-  /* "core/plane/Plane.pyx":16
+  /* "core/plane/Plane.pyx":20
  * 
  *     def new_with_normal(self, Vector3 normal, godot_real d):
  *         api_core.godot_plane_new_with_normal(&self._native, &normal._native, d)             # <<<<<<<<<<<<<<
@@ -1792,7 +1833,7 @@ static PyObject *__pyx_pf_4core_5plane_5Plane_5Plane_6new_with_normal(struct __p
  */
   api_core->godot_plane_new_with_normal((&__pyx_v_self->_native), (&__pyx_v_normal->_native), __pyx_v_d);
 
-  /* "core/plane/Plane.pyx":15
+  /* "core/plane/Plane.pyx":19
  *         api_core.godot_plane_new_with_vectors(&self._native, &v2._native, &v2._native, &v3._native)
  * 
  *     def new_with_normal(self, Vector3 normal, godot_real d):             # <<<<<<<<<<<<<<
@@ -1807,7 +1848,7 @@ static PyObject *__pyx_pf_4core_5plane_5Plane_5Plane_6new_with_normal(struct __p
   return __pyx_r;
 }
 
-/* "core/plane/Plane.pyx":18
+/* "core/plane/Plane.pyx":22
  *         api_core.godot_plane_new_with_normal(&self._native, &normal._native, d)
  * 
  *     def __str__(self):             # <<<<<<<<<<<<<<
@@ -1837,7 +1878,7 @@ static PyObject *__pyx_pf_4core_5plane_5Plane_5Plane_8__str__(struct __pyx_obj_4
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__str__", 0);
 
-  /* "core/plane/Plane.pyx":19
+  /* "core/plane/Plane.pyx":23
  * 
  *     def __str__(self):
  *         return api_core.godot_plane_as_string(&self._native)             # <<<<<<<<<<<<<<
@@ -1845,13 +1886,13 @@ static PyObject *__pyx_pf_4core_5plane_5Plane_5Plane_8__str__(struct __pyx_obj_4
  *     def normalized(self):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __pyx_convert__to_py_godot_string(api_core->godot_plane_as_string((&__pyx_v_self->_native))); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 19, __pyx_L1_error)
+  __pyx_t_1 = __pyx_convert__to_py_godot_string(api_core->godot_plane_as_string((&__pyx_v_self->_native))); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 23, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "core/plane/Plane.pyx":18
+  /* "core/plane/Plane.pyx":22
  *         api_core.godot_plane_new_with_normal(&self._native, &normal._native, d)
  * 
  *     def __str__(self):             # <<<<<<<<<<<<<<
@@ -1870,7 +1911,7 @@ static PyObject *__pyx_pf_4core_5plane_5Plane_5Plane_8__str__(struct __pyx_obj_4
   return __pyx_r;
 }
 
-/* "core/plane/Plane.pyx":21
+/* "core/plane/Plane.pyx":25
  *         return api_core.godot_plane_as_string(&self._native)
  * 
  *     def normalized(self):             # <<<<<<<<<<<<<<
@@ -1900,18 +1941,18 @@ static PyObject *__pyx_pf_4core_5plane_5Plane_5Plane_10normalized(struct __pyx_o
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("normalized", 0);
 
-  /* "core/plane/Plane.pyx":22
+  /* "core/plane/Plane.pyx":26
  * 
  *     def normalized(self):
  *         Plane. new_static(api_core.godot_plane_normalized(&self._native))             # <<<<<<<<<<<<<<
  * 
  *     def center(self):
  */
-  __pyx_t_1 = ((PyObject *)__pyx_f_4core_5plane_5Plane_5Plane_new_static(api_core->godot_plane_normalized((&__pyx_v_self->_native)))); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 22, __pyx_L1_error)
+  __pyx_t_1 = ((PyObject *)__pyx_f_4core_5plane_5Plane_5Plane_new_static(api_core->godot_plane_normalized((&__pyx_v_self->_native)))); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 26, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "core/plane/Plane.pyx":21
+  /* "core/plane/Plane.pyx":25
  *         return api_core.godot_plane_as_string(&self._native)
  * 
  *     def normalized(self):             # <<<<<<<<<<<<<<
@@ -1932,7 +1973,7 @@ static PyObject *__pyx_pf_4core_5plane_5Plane_5Plane_10normalized(struct __pyx_o
   return __pyx_r;
 }
 
-/* "core/plane/Plane.pyx":24
+/* "core/plane/Plane.pyx":28
  *         Plane. new_static(api_core.godot_plane_normalized(&self._native))
  * 
  *     def center(self):             # <<<<<<<<<<<<<<
@@ -1962,7 +2003,7 @@ static PyObject *__pyx_pf_4core_5plane_5Plane_5Plane_12center(struct __pyx_obj_4
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("center", 0);
 
-  /* "core/plane/Plane.pyx":25
+  /* "core/plane/Plane.pyx":29
  * 
  *     def center(self):
  *         return Vector3. new_static(api_core.godot_plane_center(&self._native))             # <<<<<<<<<<<<<<
@@ -1970,13 +2011,13 @@ static PyObject *__pyx_pf_4core_5plane_5Plane_5Plane_12center(struct __pyx_obj_4
  *     def get_any_point(self):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = ((PyObject *)__pyx_f_4core_7vector3_7Vector3_7Vector3_new_static(api_core->godot_plane_center((&__pyx_v_self->_native)))); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 25, __pyx_L1_error)
+  __pyx_t_1 = ((PyObject *)__pyx_f_4core_7vector3_7Vector3_7Vector3_new_static(api_core->godot_plane_center((&__pyx_v_self->_native)))); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 29, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "core/plane/Plane.pyx":24
+  /* "core/plane/Plane.pyx":28
  *         Plane. new_static(api_core.godot_plane_normalized(&self._native))
  * 
  *     def center(self):             # <<<<<<<<<<<<<<
@@ -1995,7 +2036,7 @@ static PyObject *__pyx_pf_4core_5plane_5Plane_5Plane_12center(struct __pyx_obj_4
   return __pyx_r;
 }
 
-/* "core/plane/Plane.pyx":27
+/* "core/plane/Plane.pyx":31
  *         return Vector3. new_static(api_core.godot_plane_center(&self._native))
  * 
  *     def get_any_point(self):             # <<<<<<<<<<<<<<
@@ -2025,7 +2066,7 @@ static PyObject *__pyx_pf_4core_5plane_5Plane_5Plane_14get_any_point(struct __py
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("get_any_point", 0);
 
-  /* "core/plane/Plane.pyx":28
+  /* "core/plane/Plane.pyx":32
  * 
  *     def get_any_point(self):
  *         return Vector3. new_static(api_core.godot_plane_get_any_point(&self._native))             # <<<<<<<<<<<<<<
@@ -2033,13 +2074,13 @@ static PyObject *__pyx_pf_4core_5plane_5Plane_5Plane_14get_any_point(struct __py
  *     def is_point_over(self, Vector3 point):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = ((PyObject *)__pyx_f_4core_7vector3_7Vector3_7Vector3_new_static(api_core->godot_plane_get_any_point((&__pyx_v_self->_native)))); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 28, __pyx_L1_error)
+  __pyx_t_1 = ((PyObject *)__pyx_f_4core_7vector3_7Vector3_7Vector3_new_static(api_core->godot_plane_get_any_point((&__pyx_v_self->_native)))); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 32, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "core/plane/Plane.pyx":27
+  /* "core/plane/Plane.pyx":31
  *         return Vector3. new_static(api_core.godot_plane_center(&self._native))
  * 
  *     def get_any_point(self):             # <<<<<<<<<<<<<<
@@ -2058,7 +2099,7 @@ static PyObject *__pyx_pf_4core_5plane_5Plane_5Plane_14get_any_point(struct __py
   return __pyx_r;
 }
 
-/* "core/plane/Plane.pyx":30
+/* "core/plane/Plane.pyx":34
  *         return Vector3. new_static(api_core.godot_plane_get_any_point(&self._native))
  * 
  *     def is_point_over(self, Vector3 point):             # <<<<<<<<<<<<<<
@@ -2075,7 +2116,7 @@ static PyObject *__pyx_pw_4core_5plane_5Plane_5Plane_17is_point_over(PyObject *_
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("is_point_over (wrapper)", 0);
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_point), __pyx_ptype_4core_7vector3_7Vector3_Vector3, 1, "point", 0))) __PYX_ERR(1, 30, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_point), __pyx_ptype_4core_7vector3_7Vector3_Vector3, 1, "point", 0))) __PYX_ERR(1, 34, __pyx_L1_error)
   __pyx_r = __pyx_pf_4core_5plane_5Plane_5Plane_16is_point_over(((struct __pyx_obj_4core_5plane_5Plane_Plane *)__pyx_v_self), ((struct __pyx_obj_4core_7vector3_7Vector3_Vector3 *)__pyx_v_point));
 
   /* function exit code */
@@ -2096,7 +2137,7 @@ static PyObject *__pyx_pf_4core_5plane_5Plane_5Plane_16is_point_over(struct __py
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("is_point_over", 0);
 
-  /* "core/plane/Plane.pyx":31
+  /* "core/plane/Plane.pyx":35
  * 
  *     def is_point_over(self, Vector3 point):
  *         return api_core.godot_plane_is_point_over(&self._native, &point._native)             # <<<<<<<<<<<<<<
@@ -2104,13 +2145,13 @@ static PyObject *__pyx_pf_4core_5plane_5Plane_5Plane_16is_point_over(struct __py
  *     def distance_to(self, Vector3 point):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_PyBool_FromLong(api_core->godot_plane_is_point_over((&__pyx_v_self->_native), (&__pyx_v_point->_native))); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 31, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyBool_FromLong(api_core->godot_plane_is_point_over((&__pyx_v_self->_native), (&__pyx_v_point->_native))); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 35, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "core/plane/Plane.pyx":30
+  /* "core/plane/Plane.pyx":34
  *         return Vector3. new_static(api_core.godot_plane_get_any_point(&self._native))
  * 
  *     def is_point_over(self, Vector3 point):             # <<<<<<<<<<<<<<
@@ -2129,7 +2170,7 @@ static PyObject *__pyx_pf_4core_5plane_5Plane_5Plane_16is_point_over(struct __py
   return __pyx_r;
 }
 
-/* "core/plane/Plane.pyx":33
+/* "core/plane/Plane.pyx":37
  *         return api_core.godot_plane_is_point_over(&self._native, &point._native)
  * 
  *     def distance_to(self, Vector3 point):             # <<<<<<<<<<<<<<
@@ -2146,7 +2187,7 @@ static PyObject *__pyx_pw_4core_5plane_5Plane_5Plane_19distance_to(PyObject *__p
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("distance_to (wrapper)", 0);
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_point), __pyx_ptype_4core_7vector3_7Vector3_Vector3, 1, "point", 0))) __PYX_ERR(1, 33, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_point), __pyx_ptype_4core_7vector3_7Vector3_Vector3, 1, "point", 0))) __PYX_ERR(1, 37, __pyx_L1_error)
   __pyx_r = __pyx_pf_4core_5plane_5Plane_5Plane_18distance_to(((struct __pyx_obj_4core_5plane_5Plane_Plane *)__pyx_v_self), ((struct __pyx_obj_4core_7vector3_7Vector3_Vector3 *)__pyx_v_point));
 
   /* function exit code */
@@ -2167,7 +2208,7 @@ static PyObject *__pyx_pf_4core_5plane_5Plane_5Plane_18distance_to(struct __pyx_
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("distance_to", 0);
 
-  /* "core/plane/Plane.pyx":34
+  /* "core/plane/Plane.pyx":38
  * 
  *     def distance_to(self, Vector3 point):
  *         return api_core.godot_plane_distance_to(&self._native, &point._native)             # <<<<<<<<<<<<<<
@@ -2175,13 +2216,13 @@ static PyObject *__pyx_pf_4core_5plane_5Plane_5Plane_18distance_to(struct __pyx_
  *     def has_point(self, Vector3 point, godot_real epsilon):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = PyFloat_FromDouble(api_core->godot_plane_distance_to((&__pyx_v_self->_native), (&__pyx_v_point->_native))); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 34, __pyx_L1_error)
+  __pyx_t_1 = PyFloat_FromDouble(api_core->godot_plane_distance_to((&__pyx_v_self->_native), (&__pyx_v_point->_native))); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 38, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "core/plane/Plane.pyx":33
+  /* "core/plane/Plane.pyx":37
  *         return api_core.godot_plane_is_point_over(&self._native, &point._native)
  * 
  *     def distance_to(self, Vector3 point):             # <<<<<<<<<<<<<<
@@ -2200,7 +2241,7 @@ static PyObject *__pyx_pf_4core_5plane_5Plane_5Plane_18distance_to(struct __pyx_
   return __pyx_r;
 }
 
-/* "core/plane/Plane.pyx":36
+/* "core/plane/Plane.pyx":40
  *         return api_core.godot_plane_distance_to(&self._native, &point._native)
  * 
  *     def has_point(self, Vector3 point, godot_real epsilon):             # <<<<<<<<<<<<<<
@@ -2242,11 +2283,11 @@ static PyObject *__pyx_pw_4core_5plane_5Plane_5Plane_21has_point(PyObject *__pyx
         case  1:
         if (likely((values[1] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_epsilon)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("has_point", 1, 2, 2, 1); __PYX_ERR(1, 36, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("has_point", 1, 2, 2, 1); __PYX_ERR(1, 40, __pyx_L3_error)
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "has_point") < 0)) __PYX_ERR(1, 36, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "has_point") < 0)) __PYX_ERR(1, 40, __pyx_L3_error)
       }
     } else if (PyTuple_GET_SIZE(__pyx_args) != 2) {
       goto __pyx_L5_argtuple_error;
@@ -2255,17 +2296,17 @@ static PyObject *__pyx_pw_4core_5plane_5Plane_5Plane_21has_point(PyObject *__pyx
       values[1] = PyTuple_GET_ITEM(__pyx_args, 1);
     }
     __pyx_v_point = ((struct __pyx_obj_4core_7vector3_7Vector3_Vector3 *)values[0]);
-    __pyx_v_epsilon = __pyx_PyFloat_AsFloat(values[1]); if (unlikely((__pyx_v_epsilon == ((godot_real)-1)) && PyErr_Occurred())) __PYX_ERR(1, 36, __pyx_L3_error)
+    __pyx_v_epsilon = __pyx_PyFloat_AsFloat(values[1]); if (unlikely((__pyx_v_epsilon == ((godot_real)-1)) && PyErr_Occurred())) __PYX_ERR(1, 40, __pyx_L3_error)
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("has_point", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(1, 36, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("has_point", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(1, 40, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("core.plane.Plane.Plane.has_point", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_point), __pyx_ptype_4core_7vector3_7Vector3_Vector3, 1, "point", 0))) __PYX_ERR(1, 36, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_point), __pyx_ptype_4core_7vector3_7Vector3_Vector3, 1, "point", 0))) __PYX_ERR(1, 40, __pyx_L1_error)
   __pyx_r = __pyx_pf_4core_5plane_5Plane_5Plane_20has_point(((struct __pyx_obj_4core_5plane_5Plane_Plane *)__pyx_v_self), __pyx_v_point, __pyx_v_epsilon);
 
   /* function exit code */
@@ -2286,7 +2327,7 @@ static PyObject *__pyx_pf_4core_5plane_5Plane_5Plane_20has_point(struct __pyx_ob
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("has_point", 0);
 
-  /* "core/plane/Plane.pyx":37
+  /* "core/plane/Plane.pyx":41
  * 
  *     def has_point(self, Vector3 point, godot_real epsilon):
  *         return api_core.godot_plane_has_point(&self._native, &point._native, epsilon)             # <<<<<<<<<<<<<<
@@ -2294,13 +2335,13 @@ static PyObject *__pyx_pf_4core_5plane_5Plane_5Plane_20has_point(struct __pyx_ob
  *     def project(self, Vector3 point):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_PyBool_FromLong(api_core->godot_plane_has_point((&__pyx_v_self->_native), (&__pyx_v_point->_native), __pyx_v_epsilon)); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 37, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyBool_FromLong(api_core->godot_plane_has_point((&__pyx_v_self->_native), (&__pyx_v_point->_native), __pyx_v_epsilon)); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 41, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "core/plane/Plane.pyx":36
+  /* "core/plane/Plane.pyx":40
  *         return api_core.godot_plane_distance_to(&self._native, &point._native)
  * 
  *     def has_point(self, Vector3 point, godot_real epsilon):             # <<<<<<<<<<<<<<
@@ -2319,7 +2360,7 @@ static PyObject *__pyx_pf_4core_5plane_5Plane_5Plane_20has_point(struct __pyx_ob
   return __pyx_r;
 }
 
-/* "core/plane/Plane.pyx":39
+/* "core/plane/Plane.pyx":43
  *         return api_core.godot_plane_has_point(&self._native, &point._native, epsilon)
  * 
  *     def project(self, Vector3 point):             # <<<<<<<<<<<<<<
@@ -2336,7 +2377,7 @@ static PyObject *__pyx_pw_4core_5plane_5Plane_5Plane_23project(PyObject *__pyx_v
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("project (wrapper)", 0);
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_point), __pyx_ptype_4core_7vector3_7Vector3_Vector3, 1, "point", 0))) __PYX_ERR(1, 39, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_point), __pyx_ptype_4core_7vector3_7Vector3_Vector3, 1, "point", 0))) __PYX_ERR(1, 43, __pyx_L1_error)
   __pyx_r = __pyx_pf_4core_5plane_5Plane_5Plane_22project(((struct __pyx_obj_4core_5plane_5Plane_Plane *)__pyx_v_self), ((struct __pyx_obj_4core_7vector3_7Vector3_Vector3 *)__pyx_v_point));
 
   /* function exit code */
@@ -2357,7 +2398,7 @@ static PyObject *__pyx_pf_4core_5plane_5Plane_5Plane_22project(struct __pyx_obj_
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("project", 0);
 
-  /* "core/plane/Plane.pyx":40
+  /* "core/plane/Plane.pyx":44
  * 
  *     def project(self, Vector3 point):
  *         return Vector3. new_static(api_core.godot_plane_project(&self._native, &point._native))             # <<<<<<<<<<<<<<
@@ -2365,13 +2406,13 @@ static PyObject *__pyx_pf_4core_5plane_5Plane_5Plane_22project(struct __pyx_obj_
  *     def intersect3(self, Vector3 dest, Plane b, Plane c):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = ((PyObject *)__pyx_f_4core_7vector3_7Vector3_7Vector3_new_static(api_core->godot_plane_project((&__pyx_v_self->_native), (&__pyx_v_point->_native)))); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 40, __pyx_L1_error)
+  __pyx_t_1 = ((PyObject *)__pyx_f_4core_7vector3_7Vector3_7Vector3_new_static(api_core->godot_plane_project((&__pyx_v_self->_native), (&__pyx_v_point->_native)))); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 44, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "core/plane/Plane.pyx":39
+  /* "core/plane/Plane.pyx":43
  *         return api_core.godot_plane_has_point(&self._native, &point._native, epsilon)
  * 
  *     def project(self, Vector3 point):             # <<<<<<<<<<<<<<
@@ -2390,7 +2431,7 @@ static PyObject *__pyx_pf_4core_5plane_5Plane_5Plane_22project(struct __pyx_obj_
   return __pyx_r;
 }
 
-/* "core/plane/Plane.pyx":42
+/* "core/plane/Plane.pyx":46
  *         return Vector3. new_static(api_core.godot_plane_project(&self._native, &point._native))
  * 
  *     def intersect3(self, Vector3 dest, Plane b, Plane c):             # <<<<<<<<<<<<<<
@@ -2435,17 +2476,17 @@ static PyObject *__pyx_pw_4core_5plane_5Plane_5Plane_25intersect3(PyObject *__py
         case  1:
         if (likely((values[1] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_b)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("intersect3", 1, 3, 3, 1); __PYX_ERR(1, 42, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("intersect3", 1, 3, 3, 1); __PYX_ERR(1, 46, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  2:
         if (likely((values[2] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_c)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("intersect3", 1, 3, 3, 2); __PYX_ERR(1, 42, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("intersect3", 1, 3, 3, 2); __PYX_ERR(1, 46, __pyx_L3_error)
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "intersect3") < 0)) __PYX_ERR(1, 42, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "intersect3") < 0)) __PYX_ERR(1, 46, __pyx_L3_error)
       }
     } else if (PyTuple_GET_SIZE(__pyx_args) != 3) {
       goto __pyx_L5_argtuple_error;
@@ -2460,15 +2501,15 @@ static PyObject *__pyx_pw_4core_5plane_5Plane_5Plane_25intersect3(PyObject *__py
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("intersect3", 1, 3, 3, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(1, 42, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("intersect3", 1, 3, 3, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(1, 46, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("core.plane.Plane.Plane.intersect3", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_dest), __pyx_ptype_4core_7vector3_7Vector3_Vector3, 1, "dest", 0))) __PYX_ERR(1, 42, __pyx_L1_error)
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_b), __pyx_ptype_4core_5plane_5Plane_Plane, 1, "b", 0))) __PYX_ERR(1, 42, __pyx_L1_error)
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_c), __pyx_ptype_4core_5plane_5Plane_Plane, 1, "c", 0))) __PYX_ERR(1, 42, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_dest), __pyx_ptype_4core_7vector3_7Vector3_Vector3, 1, "dest", 0))) __PYX_ERR(1, 46, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_b), __pyx_ptype_4core_5plane_5Plane_Plane, 1, "b", 0))) __PYX_ERR(1, 46, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_c), __pyx_ptype_4core_5plane_5Plane_Plane, 1, "c", 0))) __PYX_ERR(1, 46, __pyx_L1_error)
   __pyx_r = __pyx_pf_4core_5plane_5Plane_5Plane_24intersect3(((struct __pyx_obj_4core_5plane_5Plane_Plane *)__pyx_v_self), __pyx_v_dest, __pyx_v_b, __pyx_v_c);
 
   /* function exit code */
@@ -2489,7 +2530,7 @@ static PyObject *__pyx_pf_4core_5plane_5Plane_5Plane_24intersect3(struct __pyx_o
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("intersect3", 0);
 
-  /* "core/plane/Plane.pyx":43
+  /* "core/plane/Plane.pyx":47
  * 
  *     def intersect3(self, Vector3 dest, Plane b, Plane c):
  *         return api_core.godot_plane_intersect_3(&self._native, &dest._native, &b._native, &c._native)             # <<<<<<<<<<<<<<
@@ -2497,13 +2538,13 @@ static PyObject *__pyx_pf_4core_5plane_5Plane_5Plane_24intersect3(struct __pyx_o
  *     def intersects_ray(self, Vector3 dest, Vector3 from_, Vector3 dir):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_PyBool_FromLong(api_core->godot_plane_intersect_3((&__pyx_v_self->_native), (&__pyx_v_dest->_native), (&__pyx_v_b->_native), (&__pyx_v_c->_native))); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 43, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyBool_FromLong(api_core->godot_plane_intersect_3((&__pyx_v_self->_native), (&__pyx_v_dest->_native), (&__pyx_v_b->_native), (&__pyx_v_c->_native))); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 47, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "core/plane/Plane.pyx":42
+  /* "core/plane/Plane.pyx":46
  *         return Vector3. new_static(api_core.godot_plane_project(&self._native, &point._native))
  * 
  *     def intersect3(self, Vector3 dest, Plane b, Plane c):             # <<<<<<<<<<<<<<
@@ -2522,7 +2563,7 @@ static PyObject *__pyx_pf_4core_5plane_5Plane_5Plane_24intersect3(struct __pyx_o
   return __pyx_r;
 }
 
-/* "core/plane/Plane.pyx":45
+/* "core/plane/Plane.pyx":49
  *         return api_core.godot_plane_intersect_3(&self._native, &dest._native, &b._native, &c._native)
  * 
  *     def intersects_ray(self, Vector3 dest, Vector3 from_, Vector3 dir):             # <<<<<<<<<<<<<<
@@ -2567,17 +2608,17 @@ static PyObject *__pyx_pw_4core_5plane_5Plane_5Plane_27intersects_ray(PyObject *
         case  1:
         if (likely((values[1] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_from)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("intersects_ray", 1, 3, 3, 1); __PYX_ERR(1, 45, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("intersects_ray", 1, 3, 3, 1); __PYX_ERR(1, 49, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  2:
         if (likely((values[2] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_dir)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("intersects_ray", 1, 3, 3, 2); __PYX_ERR(1, 45, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("intersects_ray", 1, 3, 3, 2); __PYX_ERR(1, 49, __pyx_L3_error)
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "intersects_ray") < 0)) __PYX_ERR(1, 45, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "intersects_ray") < 0)) __PYX_ERR(1, 49, __pyx_L3_error)
       }
     } else if (PyTuple_GET_SIZE(__pyx_args) != 3) {
       goto __pyx_L5_argtuple_error;
@@ -2592,15 +2633,15 @@ static PyObject *__pyx_pw_4core_5plane_5Plane_5Plane_27intersects_ray(PyObject *
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("intersects_ray", 1, 3, 3, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(1, 45, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("intersects_ray", 1, 3, 3, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(1, 49, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("core.plane.Plane.Plane.intersects_ray", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_dest), __pyx_ptype_4core_7vector3_7Vector3_Vector3, 1, "dest", 0))) __PYX_ERR(1, 45, __pyx_L1_error)
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_from_), __pyx_ptype_4core_7vector3_7Vector3_Vector3, 1, "from_", 0))) __PYX_ERR(1, 45, __pyx_L1_error)
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_dir), __pyx_ptype_4core_7vector3_7Vector3_Vector3, 1, "dir", 0))) __PYX_ERR(1, 45, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_dest), __pyx_ptype_4core_7vector3_7Vector3_Vector3, 1, "dest", 0))) __PYX_ERR(1, 49, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_from_), __pyx_ptype_4core_7vector3_7Vector3_Vector3, 1, "from_", 0))) __PYX_ERR(1, 49, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_dir), __pyx_ptype_4core_7vector3_7Vector3_Vector3, 1, "dir", 0))) __PYX_ERR(1, 49, __pyx_L1_error)
   __pyx_r = __pyx_pf_4core_5plane_5Plane_5Plane_26intersects_ray(((struct __pyx_obj_4core_5plane_5Plane_Plane *)__pyx_v_self), __pyx_v_dest, __pyx_v_from_, __pyx_v_dir);
 
   /* function exit code */
@@ -2621,7 +2662,7 @@ static PyObject *__pyx_pf_4core_5plane_5Plane_5Plane_26intersects_ray(struct __p
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("intersects_ray", 0);
 
-  /* "core/plane/Plane.pyx":46
+  /* "core/plane/Plane.pyx":50
  * 
  *     def intersects_ray(self, Vector3 dest, Vector3 from_, Vector3 dir):
  *         return api_core.godot_plane_intersects_ray(&self._native, &dest._native, &from_._native, &dir._native)             # <<<<<<<<<<<<<<
@@ -2629,13 +2670,13 @@ static PyObject *__pyx_pf_4core_5plane_5Plane_5Plane_26intersects_ray(struct __p
  *     def intersects_segment(self, Vector3 dest, Vector3 begin, Vector3 end):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_PyBool_FromLong(api_core->godot_plane_intersects_ray((&__pyx_v_self->_native), (&__pyx_v_dest->_native), (&__pyx_v_from_->_native), (&__pyx_v_dir->_native))); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 46, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyBool_FromLong(api_core->godot_plane_intersects_ray((&__pyx_v_self->_native), (&__pyx_v_dest->_native), (&__pyx_v_from_->_native), (&__pyx_v_dir->_native))); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 50, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "core/plane/Plane.pyx":45
+  /* "core/plane/Plane.pyx":49
  *         return api_core.godot_plane_intersect_3(&self._native, &dest._native, &b._native, &c._native)
  * 
  *     def intersects_ray(self, Vector3 dest, Vector3 from_, Vector3 dir):             # <<<<<<<<<<<<<<
@@ -2654,7 +2695,7 @@ static PyObject *__pyx_pf_4core_5plane_5Plane_5Plane_26intersects_ray(struct __p
   return __pyx_r;
 }
 
-/* "core/plane/Plane.pyx":48
+/* "core/plane/Plane.pyx":52
  *         return api_core.godot_plane_intersects_ray(&self._native, &dest._native, &from_._native, &dir._native)
  * 
  *     def intersects_segment(self, Vector3 dest, Vector3 begin, Vector3 end):             # <<<<<<<<<<<<<<
@@ -2699,17 +2740,17 @@ static PyObject *__pyx_pw_4core_5plane_5Plane_5Plane_29intersects_segment(PyObje
         case  1:
         if (likely((values[1] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_begin)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("intersects_segment", 1, 3, 3, 1); __PYX_ERR(1, 48, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("intersects_segment", 1, 3, 3, 1); __PYX_ERR(1, 52, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  2:
         if (likely((values[2] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_end)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("intersects_segment", 1, 3, 3, 2); __PYX_ERR(1, 48, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("intersects_segment", 1, 3, 3, 2); __PYX_ERR(1, 52, __pyx_L3_error)
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "intersects_segment") < 0)) __PYX_ERR(1, 48, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "intersects_segment") < 0)) __PYX_ERR(1, 52, __pyx_L3_error)
       }
     } else if (PyTuple_GET_SIZE(__pyx_args) != 3) {
       goto __pyx_L5_argtuple_error;
@@ -2724,15 +2765,15 @@ static PyObject *__pyx_pw_4core_5plane_5Plane_5Plane_29intersects_segment(PyObje
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("intersects_segment", 1, 3, 3, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(1, 48, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("intersects_segment", 1, 3, 3, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(1, 52, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("core.plane.Plane.Plane.intersects_segment", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_dest), __pyx_ptype_4core_7vector3_7Vector3_Vector3, 1, "dest", 0))) __PYX_ERR(1, 48, __pyx_L1_error)
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_begin), __pyx_ptype_4core_7vector3_7Vector3_Vector3, 1, "begin", 0))) __PYX_ERR(1, 48, __pyx_L1_error)
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_end), __pyx_ptype_4core_7vector3_7Vector3_Vector3, 1, "end", 0))) __PYX_ERR(1, 48, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_dest), __pyx_ptype_4core_7vector3_7Vector3_Vector3, 1, "dest", 0))) __PYX_ERR(1, 52, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_begin), __pyx_ptype_4core_7vector3_7Vector3_Vector3, 1, "begin", 0))) __PYX_ERR(1, 52, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_end), __pyx_ptype_4core_7vector3_7Vector3_Vector3, 1, "end", 0))) __PYX_ERR(1, 52, __pyx_L1_error)
   __pyx_r = __pyx_pf_4core_5plane_5Plane_5Plane_28intersects_segment(((struct __pyx_obj_4core_5plane_5Plane_Plane *)__pyx_v_self), __pyx_v_dest, __pyx_v_begin, __pyx_v_end);
 
   /* function exit code */
@@ -2753,7 +2794,7 @@ static PyObject *__pyx_pf_4core_5plane_5Plane_5Plane_28intersects_segment(struct
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("intersects_segment", 0);
 
-  /* "core/plane/Plane.pyx":49
+  /* "core/plane/Plane.pyx":53
  * 
  *     def intersects_segment(self, Vector3 dest, Vector3 begin, Vector3 end):
  *         return api_core.godot_plane_intersects_segment(&self._native, &dest._native, &begin._native, &end._native)             # <<<<<<<<<<<<<<
@@ -2761,13 +2802,13 @@ static PyObject *__pyx_pf_4core_5plane_5Plane_5Plane_28intersects_segment(struct
  *     def neg(self):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_PyBool_FromLong(api_core->godot_plane_intersects_segment((&__pyx_v_self->_native), (&__pyx_v_dest->_native), (&__pyx_v_begin->_native), (&__pyx_v_end->_native))); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 49, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyBool_FromLong(api_core->godot_plane_intersects_segment((&__pyx_v_self->_native), (&__pyx_v_dest->_native), (&__pyx_v_begin->_native), (&__pyx_v_end->_native))); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 53, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "core/plane/Plane.pyx":48
+  /* "core/plane/Plane.pyx":52
  *         return api_core.godot_plane_intersects_ray(&self._native, &dest._native, &from_._native, &dir._native)
  * 
  *     def intersects_segment(self, Vector3 dest, Vector3 begin, Vector3 end):             # <<<<<<<<<<<<<<
@@ -2786,7 +2827,7 @@ static PyObject *__pyx_pf_4core_5plane_5Plane_5Plane_28intersects_segment(struct
   return __pyx_r;
 }
 
-/* "core/plane/Plane.pyx":51
+/* "core/plane/Plane.pyx":55
  *         return api_core.godot_plane_intersects_segment(&self._native, &dest._native, &begin._native, &end._native)
  * 
  *     def neg(self):             # <<<<<<<<<<<<<<
@@ -2816,7 +2857,7 @@ static PyObject *__pyx_pf_4core_5plane_5Plane_5Plane_30neg(struct __pyx_obj_4cor
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("neg", 0);
 
-  /* "core/plane/Plane.pyx":52
+  /* "core/plane/Plane.pyx":56
  * 
  *     def neg(self):
  *         return Plane. new_static(api_core.godot_plane_operator_neg(&self._native))             # <<<<<<<<<<<<<<
@@ -2824,13 +2865,13 @@ static PyObject *__pyx_pf_4core_5plane_5Plane_5Plane_30neg(struct __pyx_obj_4cor
  *     def __eq__(self, Plane other):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = ((PyObject *)__pyx_f_4core_5plane_5Plane_5Plane_new_static(api_core->godot_plane_operator_neg((&__pyx_v_self->_native)))); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 52, __pyx_L1_error)
+  __pyx_t_1 = ((PyObject *)__pyx_f_4core_5plane_5Plane_5Plane_new_static(api_core->godot_plane_operator_neg((&__pyx_v_self->_native)))); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 56, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "core/plane/Plane.pyx":51
+  /* "core/plane/Plane.pyx":55
  *         return api_core.godot_plane_intersects_segment(&self._native, &dest._native, &begin._native, &end._native)
  * 
  *     def neg(self):             # <<<<<<<<<<<<<<
@@ -2849,7 +2890,7 @@ static PyObject *__pyx_pf_4core_5plane_5Plane_5Plane_30neg(struct __pyx_obj_4cor
   return __pyx_r;
 }
 
-/* "core/plane/Plane.pyx":54
+/* "core/plane/Plane.pyx":58
  *         return Plane. new_static(api_core.godot_plane_operator_neg(&self._native))
  * 
  *     def __eq__(self, Plane other):             # <<<<<<<<<<<<<<
@@ -2866,7 +2907,7 @@ static PyObject *__pyx_pw_4core_5plane_5Plane_5Plane_33__eq__(PyObject *__pyx_v_
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__eq__ (wrapper)", 0);
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_other), __pyx_ptype_4core_5plane_5Plane_Plane, 1, "other", 0))) __PYX_ERR(1, 54, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_other), __pyx_ptype_4core_5plane_5Plane_Plane, 1, "other", 0))) __PYX_ERR(1, 58, __pyx_L1_error)
   __pyx_r = __pyx_pf_4core_5plane_5Plane_5Plane_32__eq__(((struct __pyx_obj_4core_5plane_5Plane_Plane *)__pyx_v_self), ((struct __pyx_obj_4core_5plane_5Plane_Plane *)__pyx_v_other));
 
   /* function exit code */
@@ -2887,7 +2928,7 @@ static PyObject *__pyx_pf_4core_5plane_5Plane_5Plane_32__eq__(struct __pyx_obj_4
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__eq__", 0);
 
-  /* "core/plane/Plane.pyx":55
+  /* "core/plane/Plane.pyx":59
  * 
  *     def __eq__(self, Plane other):
  *         return api_core.godot_plane_operator_equal(&self._native, &other._native)             # <<<<<<<<<<<<<<
@@ -2895,13 +2936,13 @@ static PyObject *__pyx_pf_4core_5plane_5Plane_5Plane_32__eq__(struct __pyx_obj_4
  *     def set_normal(self, Vector3 normal):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_PyBool_FromLong(api_core->godot_plane_operator_equal((&__pyx_v_self->_native), (&__pyx_v_other->_native))); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 55, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyBool_FromLong(api_core->godot_plane_operator_equal((&__pyx_v_self->_native), (&__pyx_v_other->_native))); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 59, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "core/plane/Plane.pyx":54
+  /* "core/plane/Plane.pyx":58
  *         return Plane. new_static(api_core.godot_plane_operator_neg(&self._native))
  * 
  *     def __eq__(self, Plane other):             # <<<<<<<<<<<<<<
@@ -2920,7 +2961,7 @@ static PyObject *__pyx_pf_4core_5plane_5Plane_5Plane_32__eq__(struct __pyx_obj_4
   return __pyx_r;
 }
 
-/* "core/plane/Plane.pyx":57
+/* "core/plane/Plane.pyx":61
  *         return api_core.godot_plane_operator_equal(&self._native, &other._native)
  * 
  *     def set_normal(self, Vector3 normal):             # <<<<<<<<<<<<<<
@@ -2937,7 +2978,7 @@ static PyObject *__pyx_pw_4core_5plane_5Plane_5Plane_35set_normal(PyObject *__py
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("set_normal (wrapper)", 0);
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_normal), __pyx_ptype_4core_7vector3_7Vector3_Vector3, 1, "normal", 0))) __PYX_ERR(1, 57, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_normal), __pyx_ptype_4core_7vector3_7Vector3_Vector3, 1, "normal", 0))) __PYX_ERR(1, 61, __pyx_L1_error)
   __pyx_r = __pyx_pf_4core_5plane_5Plane_5Plane_34set_normal(((struct __pyx_obj_4core_5plane_5Plane_Plane *)__pyx_v_self), ((struct __pyx_obj_4core_7vector3_7Vector3_Vector3 *)__pyx_v_normal));
 
   /* function exit code */
@@ -2954,7 +2995,7 @@ static PyObject *__pyx_pf_4core_5plane_5Plane_5Plane_34set_normal(struct __pyx_o
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("set_normal", 0);
 
-  /* "core/plane/Plane.pyx":58
+  /* "core/plane/Plane.pyx":62
  * 
  *     def set_normal(self, Vector3 normal):
  *         api_core.godot_plane_set_normal(&self._native, &normal._native)             # <<<<<<<<<<<<<<
@@ -2963,7 +3004,7 @@ static PyObject *__pyx_pf_4core_5plane_5Plane_5Plane_34set_normal(struct __pyx_o
  */
   api_core->godot_plane_set_normal((&__pyx_v_self->_native), (&__pyx_v_normal->_native));
 
-  /* "core/plane/Plane.pyx":57
+  /* "core/plane/Plane.pyx":61
  *         return api_core.godot_plane_operator_equal(&self._native, &other._native)
  * 
  *     def set_normal(self, Vector3 normal):             # <<<<<<<<<<<<<<
@@ -2978,7 +3019,7 @@ static PyObject *__pyx_pf_4core_5plane_5Plane_5Plane_34set_normal(struct __pyx_o
   return __pyx_r;
 }
 
-/* "core/plane/Plane.pyx":60
+/* "core/plane/Plane.pyx":64
  *         api_core.godot_plane_set_normal(&self._native, &normal._native)
  * 
  *     def get_normal(self):             # <<<<<<<<<<<<<<
@@ -3008,7 +3049,7 @@ static PyObject *__pyx_pf_4core_5plane_5Plane_5Plane_36get_normal(struct __pyx_o
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("get_normal", 0);
 
-  /* "core/plane/Plane.pyx":61
+  /* "core/plane/Plane.pyx":65
  * 
  *     def get_normal(self):
  *         return Vector3. new_static(api_core.godot_plane_get_normal(&self._native))             # <<<<<<<<<<<<<<
@@ -3016,13 +3057,13 @@ static PyObject *__pyx_pf_4core_5plane_5Plane_5Plane_36get_normal(struct __pyx_o
  *     def get_d(self):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = ((PyObject *)__pyx_f_4core_7vector3_7Vector3_7Vector3_new_static(api_core->godot_plane_get_normal((&__pyx_v_self->_native)))); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 61, __pyx_L1_error)
+  __pyx_t_1 = ((PyObject *)__pyx_f_4core_7vector3_7Vector3_7Vector3_new_static(api_core->godot_plane_get_normal((&__pyx_v_self->_native)))); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 65, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "core/plane/Plane.pyx":60
+  /* "core/plane/Plane.pyx":64
  *         api_core.godot_plane_set_normal(&self._native, &normal._native)
  * 
  *     def get_normal(self):             # <<<<<<<<<<<<<<
@@ -3041,7 +3082,7 @@ static PyObject *__pyx_pf_4core_5plane_5Plane_5Plane_36get_normal(struct __pyx_o
   return __pyx_r;
 }
 
-/* "core/plane/Plane.pyx":63
+/* "core/plane/Plane.pyx":67
  *         return Vector3. new_static(api_core.godot_plane_get_normal(&self._native))
  * 
  *     def get_d(self):             # <<<<<<<<<<<<<<
@@ -3071,7 +3112,7 @@ static PyObject *__pyx_pf_4core_5plane_5Plane_5Plane_38get_d(struct __pyx_obj_4c
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("get_d", 0);
 
-  /* "core/plane/Plane.pyx":64
+  /* "core/plane/Plane.pyx":68
  * 
  *     def get_d(self):
  *         return api_core.godot_plane_get_d(&self._native)             # <<<<<<<<<<<<<<
@@ -3079,13 +3120,13 @@ static PyObject *__pyx_pf_4core_5plane_5Plane_5Plane_38get_d(struct __pyx_obj_4c
  *     def set_d(self, godot_real d):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = PyFloat_FromDouble(api_core->godot_plane_get_d((&__pyx_v_self->_native))); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 64, __pyx_L1_error)
+  __pyx_t_1 = PyFloat_FromDouble(api_core->godot_plane_get_d((&__pyx_v_self->_native))); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 68, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "core/plane/Plane.pyx":63
+  /* "core/plane/Plane.pyx":67
  *         return Vector3. new_static(api_core.godot_plane_get_normal(&self._native))
  * 
  *     def get_d(self):             # <<<<<<<<<<<<<<
@@ -3104,7 +3145,7 @@ static PyObject *__pyx_pf_4core_5plane_5Plane_5Plane_38get_d(struct __pyx_obj_4c
   return __pyx_r;
 }
 
-/* "core/plane/Plane.pyx":66
+/* "core/plane/Plane.pyx":70
  *         return api_core.godot_plane_get_d(&self._native)
  * 
  *     def set_d(self, godot_real d):             # <<<<<<<<<<<<<<
@@ -3122,7 +3163,7 @@ static PyObject *__pyx_pw_4core_5plane_5Plane_5Plane_41set_d(PyObject *__pyx_v_s
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("set_d (wrapper)", 0);
   assert(__pyx_arg_d); {
-    __pyx_v_d = __pyx_PyFloat_AsFloat(__pyx_arg_d); if (unlikely((__pyx_v_d == ((godot_real)-1)) && PyErr_Occurred())) __PYX_ERR(1, 66, __pyx_L3_error)
+    __pyx_v_d = __pyx_PyFloat_AsFloat(__pyx_arg_d); if (unlikely((__pyx_v_d == ((godot_real)-1)) && PyErr_Occurred())) __PYX_ERR(1, 70, __pyx_L3_error)
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -3142,14 +3183,14 @@ static PyObject *__pyx_pf_4core_5plane_5Plane_5Plane_40set_d(struct __pyx_obj_4c
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("set_d", 0);
 
-  /* "core/plane/Plane.pyx":67
+  /* "core/plane/Plane.pyx":71
  * 
  *     def set_d(self, godot_real d):
  *         api_core.godot_plane_set_d(&self._native, d)             # <<<<<<<<<<<<<<
  */
   api_core->godot_plane_set_d((&__pyx_v_self->_native), __pyx_v_d);
 
-  /* "core/plane/Plane.pyx":66
+  /* "core/plane/Plane.pyx":70
  *         return api_core.godot_plane_get_d(&self._native)
  * 
  *     def set_d(self, godot_real d):             # <<<<<<<<<<<<<<
@@ -3768,10 +3809,17 @@ static int __Pyx_modinit_variable_export_code(void) {
 
 static int __Pyx_modinit_function_export_code(void) {
   __Pyx_RefNannyDeclarations
+  int __pyx_lineno = 0;
+  const char *__pyx_filename = NULL;
+  int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__Pyx_modinit_function_export_code", 0);
   /*--- Function export code ---*/
+  if (__Pyx_ExportFunction("set_api_core_plane", (void (*)(void))__pyx_f_4core_5plane_5Plane_set_api_core_plane, "PyObject *(struct godot_gdnative_core_api_struct *)") < 0) __PYX_ERR(1, 1, __pyx_L1_error)
   __Pyx_RefNannyFinishContext();
   return 0;
+  __pyx_L1_error:;
+  __Pyx_RefNannyFinishContext();
+  return -1;
 }
 
 static int __Pyx_modinit_type_init_code(void) {
@@ -3784,16 +3832,16 @@ static int __Pyx_modinit_type_init_code(void) {
   __pyx_vtabptr_4core_5plane_5Plane_Plane = &__pyx_vtable_4core_5plane_5Plane_Plane;
   __pyx_vtable_4core_5plane_5Plane_Plane.set_native = (void (*)(struct __pyx_obj_4core_5plane_5Plane_Plane *, godot_plane))__pyx_f_4core_5plane_5Plane_5Plane_set_native;
   __pyx_vtable_4core_5plane_5Plane_Plane.new_static = (struct __pyx_obj_4core_5plane_5Plane_Plane *(*)(godot_plane))__pyx_f_4core_5plane_5Plane_5Plane_new_static;
-  if (PyType_Ready(&__pyx_type_4core_5plane_5Plane_Plane) < 0) __PYX_ERR(1, 4, __pyx_L1_error)
+  if (PyType_Ready(&__pyx_type_4core_5plane_5Plane_Plane) < 0) __PYX_ERR(1, 8, __pyx_L1_error)
   #if PY_VERSION_HEX < 0x030800B1
   __pyx_type_4core_5plane_5Plane_Plane.tp_print = 0;
   #endif
   if ((CYTHON_USE_TYPE_SLOTS && CYTHON_USE_PYTYPE_LOOKUP) && likely(!__pyx_type_4core_5plane_5Plane_Plane.tp_dictoffset && __pyx_type_4core_5plane_5Plane_Plane.tp_getattro == PyObject_GenericGetAttr)) {
     __pyx_type_4core_5plane_5Plane_Plane.tp_getattro = __Pyx_PyObject_GenericGetAttr;
   }
-  if (__Pyx_SetVtable(__pyx_type_4core_5plane_5Plane_Plane.tp_dict, __pyx_vtabptr_4core_5plane_5Plane_Plane) < 0) __PYX_ERR(1, 4, __pyx_L1_error)
-  if (PyObject_SetAttr(__pyx_m, __pyx_n_s_Plane, (PyObject *)&__pyx_type_4core_5plane_5Plane_Plane) < 0) __PYX_ERR(1, 4, __pyx_L1_error)
-  if (__Pyx_setup_reduce((PyObject*)&__pyx_type_4core_5plane_5Plane_Plane) < 0) __PYX_ERR(1, 4, __pyx_L1_error)
+  if (__Pyx_SetVtable(__pyx_type_4core_5plane_5Plane_Plane.tp_dict, __pyx_vtabptr_4core_5plane_5Plane_Plane) < 0) __PYX_ERR(1, 8, __pyx_L1_error)
+  if (PyObject_SetAttr(__pyx_m, __pyx_n_s_Plane, (PyObject *)&__pyx_type_4core_5plane_5Plane_Plane) < 0) __PYX_ERR(1, 8, __pyx_L1_error)
+  if (__Pyx_setup_reduce((PyObject*)&__pyx_type_4core_5plane_5Plane_Plane) < 0) __PYX_ERR(1, 8, __pyx_L1_error)
   __pyx_ptype_4core_5plane_5Plane_Plane = &__pyx_type_4core_5plane_5Plane_Plane;
   __Pyx_RefNannyFinishContext();
   return 0;
@@ -4041,7 +4089,7 @@ if (!__Pyx_RefNanny) {
   /*--- Global type/function init code ---*/
   (void)__Pyx_modinit_global_init_code();
   (void)__Pyx_modinit_variable_export_code();
-  (void)__Pyx_modinit_function_export_code();
+  if (unlikely(__Pyx_modinit_function_export_code() < 0)) __PYX_ERR(1, 1, __pyx_L1_error)
   if (unlikely(__Pyx_modinit_type_init_code() < 0)) __PYX_ERR(1, 1, __pyx_L1_error)
   if (unlikely(__Pyx_modinit_type_import_code() < 0)) __PYX_ERR(1, 1, __pyx_L1_error)
   (void)__Pyx_modinit_variable_import_code();
@@ -5607,6 +5655,43 @@ static int __Pyx_check_binary_version(void) {
         return PyErr_WarnEx(NULL, message, 1);
     }
     return 0;
+}
+
+/* FunctionExport */
+static int __Pyx_ExportFunction(const char *name, void (*f)(void), const char *sig) {
+    PyObject *d = 0;
+    PyObject *cobj = 0;
+    union {
+        void (*fp)(void);
+        void *p;
+    } tmp;
+    d = PyObject_GetAttrString(__pyx_m, (char *)"__pyx_capi__");
+    if (!d) {
+        PyErr_Clear();
+        d = PyDict_New();
+        if (!d)
+            goto bad;
+        Py_INCREF(d);
+        if (PyModule_AddObject(__pyx_m, (char *)"__pyx_capi__", d) < 0)
+            goto bad;
+    }
+    tmp.fp = f;
+#if PY_VERSION_HEX >= 0x02070000
+    cobj = PyCapsule_New(tmp.p, sig, 0);
+#else
+    cobj = PyCObject_FromVoidPtrAndDesc(tmp.p, (void *)sig, 0);
+#endif
+    if (!cobj)
+        goto bad;
+    if (PyDict_SetItemString(d, name, cobj) < 0)
+        goto bad;
+    Py_DECREF(cobj);
+    Py_DECREF(d);
+    return 0;
+bad:
+    Py_XDECREF(cobj);
+    Py_XDECREF(d);
+    return -1;
 }
 
 /* InitStrings */

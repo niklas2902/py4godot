@@ -869,8 +869,8 @@ struct __pyx_obj_4core_5color_5Color_Color {
 
 
 
-/* "core/color/Color.pyx":3
- * from core.color.Color cimport *
+/* "core/color/Color.pyx":7
+ *     api_core = core
  * 
  * cdef class Color:             # <<<<<<<<<<<<<<
  * 
@@ -1199,6 +1199,9 @@ static CYTHON_INLINE int __Pyx_PyErr_GivenExceptionMatches2(PyObject *err, PyObj
 /* CheckBinaryVersion.proto */
 static int __Pyx_check_binary_version(void);
 
+/* FunctionExport.proto */
+static int __Pyx_ExportFunction(const char *name, void (*f)(void), const char *sig);
+
 /* InitStrings.proto */
 static int __Pyx_InitStrings(__Pyx_StringTabEntry *t);
 
@@ -1230,6 +1233,7 @@ static PyTypeObject *__pyx_ptype_7cpython_4type_type = 0;
 
 /* Module declarations from 'core.color.Color' */
 static PyTypeObject *__pyx_ptype_4core_5color_5Color_Color = 0;
+static PyObject *__pyx_f_4core_5color_5Color_set_api_core_color(struct godot_gdnative_core_api_struct *); /*proto*/
 #define __Pyx_MODULE_NAME "core.color.Color"
 extern int __pyx_module_is_main_core__color__Color;
 int __pyx_module_is_main_core__color__Color = 0;
@@ -1310,7 +1314,44 @@ static PyObject *__pyx_tuple_;
 static PyObject *__pyx_tuple__2;
 /* Late includes */
 
-/* "core/color/Color.pyx":5
+/* "core/color/Color.pyx":3
+ * from core.color.Color cimport *
+ * 
+ * cdef api set_api_core_color(godot_gdnative_core_api_struct * core):             # <<<<<<<<<<<<<<
+ *     global api_core
+ *     api_core = core
+ */
+
+static PyObject *__pyx_f_4core_5color_5Color_set_api_core_color(struct godot_gdnative_core_api_struct *__pyx_v_core) {
+  PyObject *__pyx_r = NULL;
+  __Pyx_RefNannyDeclarations
+  __Pyx_RefNannySetupContext("set_api_core_color", 0);
+
+  /* "core/color/Color.pyx":5
+ * cdef api set_api_core_color(godot_gdnative_core_api_struct * core):
+ *     global api_core
+ *     api_core = core             # <<<<<<<<<<<<<<
+ * 
+ * cdef class Color:
+ */
+  api_core = __pyx_v_core;
+
+  /* "core/color/Color.pyx":3
+ * from core.color.Color cimport *
+ * 
+ * cdef api set_api_core_color(godot_gdnative_core_api_struct * core):             # <<<<<<<<<<<<<<
+ *     global api_core
+ *     api_core = core
+ */
+
+  /* function exit code */
+  __pyx_r = Py_None; __Pyx_INCREF(Py_None);
+  __Pyx_XGIVEREF(__pyx_r);
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+/* "core/color/Color.pyx":9
  * cdef class Color:
  * 
  *     def __init__(self, godot_real red, godot_real green, godot_real blue, godot_real alpha = 255):             # <<<<<<<<<<<<<<
@@ -1358,13 +1399,13 @@ static int __pyx_pw_4core_5color_5Color_5Color_1__init__(PyObject *__pyx_v_self,
         case  1:
         if (likely((values[1] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_green)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("__init__", 0, 3, 4, 1); __PYX_ERR(1, 5, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("__init__", 0, 3, 4, 1); __PYX_ERR(1, 9, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  2:
         if (likely((values[2] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_blue)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("__init__", 0, 3, 4, 2); __PYX_ERR(1, 5, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("__init__", 0, 3, 4, 2); __PYX_ERR(1, 9, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  3:
@@ -1374,7 +1415,7 @@ static int __pyx_pw_4core_5color_5Color_5Color_1__init__(PyObject *__pyx_v_self,
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "__init__") < 0)) __PYX_ERR(1, 5, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "__init__") < 0)) __PYX_ERR(1, 9, __pyx_L3_error)
       }
     } else {
       switch (PyTuple_GET_SIZE(__pyx_args)) {
@@ -1387,18 +1428,18 @@ static int __pyx_pw_4core_5color_5Color_5Color_1__init__(PyObject *__pyx_v_self,
         default: goto __pyx_L5_argtuple_error;
       }
     }
-    __pyx_v_red = __pyx_PyFloat_AsFloat(values[0]); if (unlikely((__pyx_v_red == ((godot_real)-1)) && PyErr_Occurred())) __PYX_ERR(1, 5, __pyx_L3_error)
-    __pyx_v_green = __pyx_PyFloat_AsFloat(values[1]); if (unlikely((__pyx_v_green == ((godot_real)-1)) && PyErr_Occurred())) __PYX_ERR(1, 5, __pyx_L3_error)
-    __pyx_v_blue = __pyx_PyFloat_AsFloat(values[2]); if (unlikely((__pyx_v_blue == ((godot_real)-1)) && PyErr_Occurred())) __PYX_ERR(1, 5, __pyx_L3_error)
+    __pyx_v_red = __pyx_PyFloat_AsFloat(values[0]); if (unlikely((__pyx_v_red == ((godot_real)-1)) && PyErr_Occurred())) __PYX_ERR(1, 9, __pyx_L3_error)
+    __pyx_v_green = __pyx_PyFloat_AsFloat(values[1]); if (unlikely((__pyx_v_green == ((godot_real)-1)) && PyErr_Occurred())) __PYX_ERR(1, 9, __pyx_L3_error)
+    __pyx_v_blue = __pyx_PyFloat_AsFloat(values[2]); if (unlikely((__pyx_v_blue == ((godot_real)-1)) && PyErr_Occurred())) __PYX_ERR(1, 9, __pyx_L3_error)
     if (values[3]) {
-      __pyx_v_alpha = __pyx_PyFloat_AsFloat(values[3]); if (unlikely((__pyx_v_alpha == ((godot_real)-1)) && PyErr_Occurred())) __PYX_ERR(1, 5, __pyx_L3_error)
+      __pyx_v_alpha = __pyx_PyFloat_AsFloat(values[3]); if (unlikely((__pyx_v_alpha == ((godot_real)-1)) && PyErr_Occurred())) __PYX_ERR(1, 9, __pyx_L3_error)
     } else {
       __pyx_v_alpha = ((godot_real)255.0);
     }
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("__init__", 0, 3, 4, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(1, 5, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("__init__", 0, 3, 4, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(1, 9, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("core.color.Color.Color.__init__", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
@@ -1416,7 +1457,7 @@ static int __pyx_pf_4core_5color_5Color_5Color___init__(struct __pyx_obj_4core_5
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__init__", 0);
 
-  /* "core/color/Color.pyx":6
+  /* "core/color/Color.pyx":10
  * 
  *     def __init__(self, godot_real red, godot_real green, godot_real blue, godot_real alpha = 255):
  *         api_core.godot_color_new_rgba(&self._native, red, green,blue, alpha)             # <<<<<<<<<<<<<<
@@ -1425,7 +1466,7 @@ static int __pyx_pf_4core_5color_5Color_5Color___init__(struct __pyx_obj_4core_5
  */
   api_core->godot_color_new_rgba((&__pyx_v_self->_native), __pyx_v_red, __pyx_v_green, __pyx_v_blue, __pyx_v_alpha);
 
-  /* "core/color/Color.pyx":5
+  /* "core/color/Color.pyx":9
  * cdef class Color:
  * 
  *     def __init__(self, godot_real red, godot_real green, godot_real blue, godot_real alpha = 255):             # <<<<<<<<<<<<<<
@@ -1439,7 +1480,7 @@ static int __pyx_pf_4core_5color_5Color_5Color___init__(struct __pyx_obj_4core_5
   return __pyx_r;
 }
 
-/* "core/color/Color.pyx":8
+/* "core/color/Color.pyx":12
  *         api_core.godot_color_new_rgba(&self._native, red, green,blue, alpha)
  * 
  *     def new_rgba(self, godot_real red, godot_real green, godot_real blue, godot_real alpha):             # <<<<<<<<<<<<<<
@@ -1487,23 +1528,23 @@ static PyObject *__pyx_pw_4core_5color_5Color_5Color_3new_rgba(PyObject *__pyx_v
         case  1:
         if (likely((values[1] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_green)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("new_rgba", 1, 4, 4, 1); __PYX_ERR(1, 8, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("new_rgba", 1, 4, 4, 1); __PYX_ERR(1, 12, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  2:
         if (likely((values[2] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_blue)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("new_rgba", 1, 4, 4, 2); __PYX_ERR(1, 8, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("new_rgba", 1, 4, 4, 2); __PYX_ERR(1, 12, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  3:
         if (likely((values[3] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_alpha)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("new_rgba", 1, 4, 4, 3); __PYX_ERR(1, 8, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("new_rgba", 1, 4, 4, 3); __PYX_ERR(1, 12, __pyx_L3_error)
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "new_rgba") < 0)) __PYX_ERR(1, 8, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "new_rgba") < 0)) __PYX_ERR(1, 12, __pyx_L3_error)
       }
     } else if (PyTuple_GET_SIZE(__pyx_args) != 4) {
       goto __pyx_L5_argtuple_error;
@@ -1513,14 +1554,14 @@ static PyObject *__pyx_pw_4core_5color_5Color_5Color_3new_rgba(PyObject *__pyx_v
       values[2] = PyTuple_GET_ITEM(__pyx_args, 2);
       values[3] = PyTuple_GET_ITEM(__pyx_args, 3);
     }
-    __pyx_v_red = __pyx_PyFloat_AsFloat(values[0]); if (unlikely((__pyx_v_red == ((godot_real)-1)) && PyErr_Occurred())) __PYX_ERR(1, 8, __pyx_L3_error)
-    __pyx_v_green = __pyx_PyFloat_AsFloat(values[1]); if (unlikely((__pyx_v_green == ((godot_real)-1)) && PyErr_Occurred())) __PYX_ERR(1, 8, __pyx_L3_error)
-    __pyx_v_blue = __pyx_PyFloat_AsFloat(values[2]); if (unlikely((__pyx_v_blue == ((godot_real)-1)) && PyErr_Occurred())) __PYX_ERR(1, 8, __pyx_L3_error)
-    __pyx_v_alpha = __pyx_PyFloat_AsFloat(values[3]); if (unlikely((__pyx_v_alpha == ((godot_real)-1)) && PyErr_Occurred())) __PYX_ERR(1, 8, __pyx_L3_error)
+    __pyx_v_red = __pyx_PyFloat_AsFloat(values[0]); if (unlikely((__pyx_v_red == ((godot_real)-1)) && PyErr_Occurred())) __PYX_ERR(1, 12, __pyx_L3_error)
+    __pyx_v_green = __pyx_PyFloat_AsFloat(values[1]); if (unlikely((__pyx_v_green == ((godot_real)-1)) && PyErr_Occurred())) __PYX_ERR(1, 12, __pyx_L3_error)
+    __pyx_v_blue = __pyx_PyFloat_AsFloat(values[2]); if (unlikely((__pyx_v_blue == ((godot_real)-1)) && PyErr_Occurred())) __PYX_ERR(1, 12, __pyx_L3_error)
+    __pyx_v_alpha = __pyx_PyFloat_AsFloat(values[3]); if (unlikely((__pyx_v_alpha == ((godot_real)-1)) && PyErr_Occurred())) __PYX_ERR(1, 12, __pyx_L3_error)
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("new_rgba", 1, 4, 4, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(1, 8, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("new_rgba", 1, 4, 4, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(1, 12, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("core.color.Color.Color.new_rgba", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
@@ -1538,7 +1579,7 @@ static PyObject *__pyx_pf_4core_5color_5Color_5Color_2new_rgba(struct __pyx_obj_
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("new_rgba", 0);
 
-  /* "core/color/Color.pyx":9
+  /* "core/color/Color.pyx":13
  * 
  *     def new_rgba(self, godot_real red, godot_real green, godot_real blue, godot_real alpha):
  *         api_core.godot_color_new_rgba(&self._native, red, green, blue, alpha)             # <<<<<<<<<<<<<<
@@ -1547,7 +1588,7 @@ static PyObject *__pyx_pf_4core_5color_5Color_5Color_2new_rgba(struct __pyx_obj_
  */
   api_core->godot_color_new_rgba((&__pyx_v_self->_native), __pyx_v_red, __pyx_v_green, __pyx_v_blue, __pyx_v_alpha);
 
-  /* "core/color/Color.pyx":8
+  /* "core/color/Color.pyx":12
  *         api_core.godot_color_new_rgba(&self._native, red, green,blue, alpha)
  * 
  *     def new_rgba(self, godot_real red, godot_real green, godot_real blue, godot_real alpha):             # <<<<<<<<<<<<<<
@@ -1562,7 +1603,7 @@ static PyObject *__pyx_pf_4core_5color_5Color_5Color_2new_rgba(struct __pyx_obj_
   return __pyx_r;
 }
 
-/* "core/color/Color.pyx":11
+/* "core/color/Color.pyx":15
  *         api_core.godot_color_new_rgba(&self._native, red, green, blue, alpha)
  * 
  *     def new_rgb(self, godot_real red, godot_real green, godot_real blue):             # <<<<<<<<<<<<<<
@@ -1607,17 +1648,17 @@ static PyObject *__pyx_pw_4core_5color_5Color_5Color_5new_rgb(PyObject *__pyx_v_
         case  1:
         if (likely((values[1] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_green)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("new_rgb", 1, 3, 3, 1); __PYX_ERR(1, 11, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("new_rgb", 1, 3, 3, 1); __PYX_ERR(1, 15, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  2:
         if (likely((values[2] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_blue)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("new_rgb", 1, 3, 3, 2); __PYX_ERR(1, 11, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("new_rgb", 1, 3, 3, 2); __PYX_ERR(1, 15, __pyx_L3_error)
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "new_rgb") < 0)) __PYX_ERR(1, 11, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "new_rgb") < 0)) __PYX_ERR(1, 15, __pyx_L3_error)
       }
     } else if (PyTuple_GET_SIZE(__pyx_args) != 3) {
       goto __pyx_L5_argtuple_error;
@@ -1626,13 +1667,13 @@ static PyObject *__pyx_pw_4core_5color_5Color_5Color_5new_rgb(PyObject *__pyx_v_
       values[1] = PyTuple_GET_ITEM(__pyx_args, 1);
       values[2] = PyTuple_GET_ITEM(__pyx_args, 2);
     }
-    __pyx_v_red = __pyx_PyFloat_AsFloat(values[0]); if (unlikely((__pyx_v_red == ((godot_real)-1)) && PyErr_Occurred())) __PYX_ERR(1, 11, __pyx_L3_error)
-    __pyx_v_green = __pyx_PyFloat_AsFloat(values[1]); if (unlikely((__pyx_v_green == ((godot_real)-1)) && PyErr_Occurred())) __PYX_ERR(1, 11, __pyx_L3_error)
-    __pyx_v_blue = __pyx_PyFloat_AsFloat(values[2]); if (unlikely((__pyx_v_blue == ((godot_real)-1)) && PyErr_Occurred())) __PYX_ERR(1, 11, __pyx_L3_error)
+    __pyx_v_red = __pyx_PyFloat_AsFloat(values[0]); if (unlikely((__pyx_v_red == ((godot_real)-1)) && PyErr_Occurred())) __PYX_ERR(1, 15, __pyx_L3_error)
+    __pyx_v_green = __pyx_PyFloat_AsFloat(values[1]); if (unlikely((__pyx_v_green == ((godot_real)-1)) && PyErr_Occurred())) __PYX_ERR(1, 15, __pyx_L3_error)
+    __pyx_v_blue = __pyx_PyFloat_AsFloat(values[2]); if (unlikely((__pyx_v_blue == ((godot_real)-1)) && PyErr_Occurred())) __PYX_ERR(1, 15, __pyx_L3_error)
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("new_rgb", 1, 3, 3, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(1, 11, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("new_rgb", 1, 3, 3, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(1, 15, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("core.color.Color.Color.new_rgb", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
@@ -1650,7 +1691,7 @@ static PyObject *__pyx_pf_4core_5color_5Color_5Color_4new_rgb(struct __pyx_obj_4
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("new_rgb", 0);
 
-  /* "core/color/Color.pyx":12
+  /* "core/color/Color.pyx":16
  * 
  *     def new_rgb(self, godot_real red, godot_real green, godot_real blue):
  *         api_core.godot_color_new_rgb(&self._native, red, green, blue)             # <<<<<<<<<<<<<<
@@ -1659,7 +1700,7 @@ static PyObject *__pyx_pf_4core_5color_5Color_5Color_4new_rgb(struct __pyx_obj_4
  */
   api_core->godot_color_new_rgb((&__pyx_v_self->_native), __pyx_v_red, __pyx_v_green, __pyx_v_blue);
 
-  /* "core/color/Color.pyx":11
+  /* "core/color/Color.pyx":15
  *         api_core.godot_color_new_rgba(&self._native, red, green, blue, alpha)
  * 
  *     def new_rgb(self, godot_real red, godot_real green, godot_real blue):             # <<<<<<<<<<<<<<
@@ -1674,7 +1715,7 @@ static PyObject *__pyx_pf_4core_5color_5Color_5Color_4new_rgb(struct __pyx_obj_4
   return __pyx_r;
 }
 
-/* "core/color/Color.pyx":14
+/* "core/color/Color.pyx":18
  *         api_core.godot_color_new_rgb(&self._native, red, green, blue)
  * 
  *     def get_red(self):             # <<<<<<<<<<<<<<
@@ -1704,7 +1745,7 @@ static PyObject *__pyx_pf_4core_5color_5Color_5Color_6get_red(struct __pyx_obj_4
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("get_red", 0);
 
-  /* "core/color/Color.pyx":15
+  /* "core/color/Color.pyx":19
  * 
  *     def get_red(self):
  *         return api_core.godot_color_get_r(&self._native)             # <<<<<<<<<<<<<<
@@ -1712,13 +1753,13 @@ static PyObject *__pyx_pf_4core_5color_5Color_5Color_6get_red(struct __pyx_obj_4
  *     def set_red(self, godot_real red):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = PyFloat_FromDouble(api_core->godot_color_get_r((&__pyx_v_self->_native))); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 15, __pyx_L1_error)
+  __pyx_t_1 = PyFloat_FromDouble(api_core->godot_color_get_r((&__pyx_v_self->_native))); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 19, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "core/color/Color.pyx":14
+  /* "core/color/Color.pyx":18
  *         api_core.godot_color_new_rgb(&self._native, red, green, blue)
  * 
  *     def get_red(self):             # <<<<<<<<<<<<<<
@@ -1737,7 +1778,7 @@ static PyObject *__pyx_pf_4core_5color_5Color_5Color_6get_red(struct __pyx_obj_4
   return __pyx_r;
 }
 
-/* "core/color/Color.pyx":17
+/* "core/color/Color.pyx":21
  *         return api_core.godot_color_get_r(&self._native)
  * 
  *     def set_red(self, godot_real red):             # <<<<<<<<<<<<<<
@@ -1756,7 +1797,7 @@ static PyObject *__pyx_pw_4core_5color_5Color_5Color_9set_red(PyObject *__pyx_v_
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("set_red (wrapper)", 0);
   assert(__pyx_arg_red); {
-    __pyx_v_red = __pyx_PyFloat_AsFloat(__pyx_arg_red); if (unlikely((__pyx_v_red == ((godot_real)-1)) && PyErr_Occurred())) __PYX_ERR(1, 17, __pyx_L3_error)
+    __pyx_v_red = __pyx_PyFloat_AsFloat(__pyx_arg_red); if (unlikely((__pyx_v_red == ((godot_real)-1)) && PyErr_Occurred())) __PYX_ERR(1, 21, __pyx_L3_error)
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -1776,7 +1817,7 @@ static PyObject *__pyx_pf_4core_5color_5Color_5Color_8set_red(struct __pyx_obj_4
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("set_red", 0);
 
-  /* "core/color/Color.pyx":18
+  /* "core/color/Color.pyx":22
  * 
  *     def set_red(self, godot_real red):
  *         api_core.godot_color_set_r(&self._native, red)             # <<<<<<<<<<<<<<
@@ -1785,7 +1826,7 @@ static PyObject *__pyx_pf_4core_5color_5Color_5Color_8set_red(struct __pyx_obj_4
  */
   api_core->godot_color_set_r((&__pyx_v_self->_native), __pyx_v_red);
 
-  /* "core/color/Color.pyx":17
+  /* "core/color/Color.pyx":21
  *         return api_core.godot_color_get_r(&self._native)
  * 
  *     def set_red(self, godot_real red):             # <<<<<<<<<<<<<<
@@ -1800,7 +1841,7 @@ static PyObject *__pyx_pf_4core_5color_5Color_5Color_8set_red(struct __pyx_obj_4
   return __pyx_r;
 }
 
-/* "core/color/Color.pyx":20
+/* "core/color/Color.pyx":24
  *         api_core.godot_color_set_r(&self._native, red)
  * 
  *     def get_blue(self):             # <<<<<<<<<<<<<<
@@ -1830,7 +1871,7 @@ static PyObject *__pyx_pf_4core_5color_5Color_5Color_10get_blue(struct __pyx_obj
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("get_blue", 0);
 
-  /* "core/color/Color.pyx":21
+  /* "core/color/Color.pyx":25
  * 
  *     def get_blue(self):
  *         return api_core.godot_color_get_b(&self._native)             # <<<<<<<<<<<<<<
@@ -1838,13 +1879,13 @@ static PyObject *__pyx_pf_4core_5color_5Color_5Color_10get_blue(struct __pyx_obj
  *     def set_blue(self, godot_real blue):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = PyFloat_FromDouble(api_core->godot_color_get_b((&__pyx_v_self->_native))); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 21, __pyx_L1_error)
+  __pyx_t_1 = PyFloat_FromDouble(api_core->godot_color_get_b((&__pyx_v_self->_native))); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 25, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "core/color/Color.pyx":20
+  /* "core/color/Color.pyx":24
  *         api_core.godot_color_set_r(&self._native, red)
  * 
  *     def get_blue(self):             # <<<<<<<<<<<<<<
@@ -1863,7 +1904,7 @@ static PyObject *__pyx_pf_4core_5color_5Color_5Color_10get_blue(struct __pyx_obj
   return __pyx_r;
 }
 
-/* "core/color/Color.pyx":23
+/* "core/color/Color.pyx":27
  *         return api_core.godot_color_get_b(&self._native)
  * 
  *     def set_blue(self, godot_real blue):             # <<<<<<<<<<<<<<
@@ -1882,7 +1923,7 @@ static PyObject *__pyx_pw_4core_5color_5Color_5Color_13set_blue(PyObject *__pyx_
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("set_blue (wrapper)", 0);
   assert(__pyx_arg_blue); {
-    __pyx_v_blue = __pyx_PyFloat_AsFloat(__pyx_arg_blue); if (unlikely((__pyx_v_blue == ((godot_real)-1)) && PyErr_Occurred())) __PYX_ERR(1, 23, __pyx_L3_error)
+    __pyx_v_blue = __pyx_PyFloat_AsFloat(__pyx_arg_blue); if (unlikely((__pyx_v_blue == ((godot_real)-1)) && PyErr_Occurred())) __PYX_ERR(1, 27, __pyx_L3_error)
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -1902,7 +1943,7 @@ static PyObject *__pyx_pf_4core_5color_5Color_5Color_12set_blue(struct __pyx_obj
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("set_blue", 0);
 
-  /* "core/color/Color.pyx":24
+  /* "core/color/Color.pyx":28
  * 
  *     def set_blue(self, godot_real blue):
  *         api_core.godot_color_set_b(&self._native, blue)             # <<<<<<<<<<<<<<
@@ -1911,7 +1952,7 @@ static PyObject *__pyx_pf_4core_5color_5Color_5Color_12set_blue(struct __pyx_obj
  */
   api_core->godot_color_set_b((&__pyx_v_self->_native), __pyx_v_blue);
 
-  /* "core/color/Color.pyx":23
+  /* "core/color/Color.pyx":27
  *         return api_core.godot_color_get_b(&self._native)
  * 
  *     def set_blue(self, godot_real blue):             # <<<<<<<<<<<<<<
@@ -1926,7 +1967,7 @@ static PyObject *__pyx_pf_4core_5color_5Color_5Color_12set_blue(struct __pyx_obj
   return __pyx_r;
 }
 
-/* "core/color/Color.pyx":26
+/* "core/color/Color.pyx":30
  *         api_core.godot_color_set_b(&self._native, blue)
  * 
  *     def get_green(self):             # <<<<<<<<<<<<<<
@@ -1956,7 +1997,7 @@ static PyObject *__pyx_pf_4core_5color_5Color_5Color_14get_green(struct __pyx_ob
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("get_green", 0);
 
-  /* "core/color/Color.pyx":27
+  /* "core/color/Color.pyx":31
  * 
  *     def get_green(self):
  *         return api_core.godot_color_get_g(&self._native)             # <<<<<<<<<<<<<<
@@ -1964,13 +2005,13 @@ static PyObject *__pyx_pf_4core_5color_5Color_5Color_14get_green(struct __pyx_ob
  *     def set_green(self, godot_real green):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = PyFloat_FromDouble(api_core->godot_color_get_g((&__pyx_v_self->_native))); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 27, __pyx_L1_error)
+  __pyx_t_1 = PyFloat_FromDouble(api_core->godot_color_get_g((&__pyx_v_self->_native))); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 31, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "core/color/Color.pyx":26
+  /* "core/color/Color.pyx":30
  *         api_core.godot_color_set_b(&self._native, blue)
  * 
  *     def get_green(self):             # <<<<<<<<<<<<<<
@@ -1989,7 +2030,7 @@ static PyObject *__pyx_pf_4core_5color_5Color_5Color_14get_green(struct __pyx_ob
   return __pyx_r;
 }
 
-/* "core/color/Color.pyx":29
+/* "core/color/Color.pyx":33
  *         return api_core.godot_color_get_g(&self._native)
  * 
  *     def set_green(self, godot_real green):             # <<<<<<<<<<<<<<
@@ -2008,7 +2049,7 @@ static PyObject *__pyx_pw_4core_5color_5Color_5Color_17set_green(PyObject *__pyx
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("set_green (wrapper)", 0);
   assert(__pyx_arg_green); {
-    __pyx_v_green = __pyx_PyFloat_AsFloat(__pyx_arg_green); if (unlikely((__pyx_v_green == ((godot_real)-1)) && PyErr_Occurred())) __PYX_ERR(1, 29, __pyx_L3_error)
+    __pyx_v_green = __pyx_PyFloat_AsFloat(__pyx_arg_green); if (unlikely((__pyx_v_green == ((godot_real)-1)) && PyErr_Occurred())) __PYX_ERR(1, 33, __pyx_L3_error)
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -2028,7 +2069,7 @@ static PyObject *__pyx_pf_4core_5color_5Color_5Color_16set_green(struct __pyx_ob
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("set_green", 0);
 
-  /* "core/color/Color.pyx":30
+  /* "core/color/Color.pyx":34
  * 
  *     def set_green(self, godot_real green):
  *         api_core.godot_color_set_g(&self._native, green)             # <<<<<<<<<<<<<<
@@ -2037,7 +2078,7 @@ static PyObject *__pyx_pf_4core_5color_5Color_5Color_16set_green(struct __pyx_ob
  */
   api_core->godot_color_set_g((&__pyx_v_self->_native), __pyx_v_green);
 
-  /* "core/color/Color.pyx":29
+  /* "core/color/Color.pyx":33
  *         return api_core.godot_color_get_g(&self._native)
  * 
  *     def set_green(self, godot_real green):             # <<<<<<<<<<<<<<
@@ -2052,7 +2093,7 @@ static PyObject *__pyx_pf_4core_5color_5Color_5Color_16set_green(struct __pyx_ob
   return __pyx_r;
 }
 
-/* "core/color/Color.pyx":32
+/* "core/color/Color.pyx":36
  *         api_core.godot_color_set_g(&self._native, green)
  * 
  *     def set_alpha(self, godot_real alpha):             # <<<<<<<<<<<<<<
@@ -2071,7 +2112,7 @@ static PyObject *__pyx_pw_4core_5color_5Color_5Color_19set_alpha(PyObject *__pyx
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("set_alpha (wrapper)", 0);
   assert(__pyx_arg_alpha); {
-    __pyx_v_alpha = __pyx_PyFloat_AsFloat(__pyx_arg_alpha); if (unlikely((__pyx_v_alpha == ((godot_real)-1)) && PyErr_Occurred())) __PYX_ERR(1, 32, __pyx_L3_error)
+    __pyx_v_alpha = __pyx_PyFloat_AsFloat(__pyx_arg_alpha); if (unlikely((__pyx_v_alpha == ((godot_real)-1)) && PyErr_Occurred())) __PYX_ERR(1, 36, __pyx_L3_error)
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -2091,7 +2132,7 @@ static PyObject *__pyx_pf_4core_5color_5Color_5Color_18set_alpha(struct __pyx_ob
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("set_alpha", 0);
 
-  /* "core/color/Color.pyx":33
+  /* "core/color/Color.pyx":37
  * 
  *     def set_alpha(self, godot_real alpha):
  *         api_core.godot_color_set_a(&self._native, alpha)             # <<<<<<<<<<<<<<
@@ -2100,7 +2141,7 @@ static PyObject *__pyx_pf_4core_5color_5Color_5Color_18set_alpha(struct __pyx_ob
  */
   api_core->godot_color_set_a((&__pyx_v_self->_native), __pyx_v_alpha);
 
-  /* "core/color/Color.pyx":32
+  /* "core/color/Color.pyx":36
  *         api_core.godot_color_set_g(&self._native, green)
  * 
  *     def set_alpha(self, godot_real alpha):             # <<<<<<<<<<<<<<
@@ -2115,7 +2156,7 @@ static PyObject *__pyx_pf_4core_5color_5Color_5Color_18set_alpha(struct __pyx_ob
   return __pyx_r;
 }
 
-/* "core/color/Color.pyx":35
+/* "core/color/Color.pyx":39
  *         api_core.godot_color_set_a(&self._native, alpha)
  * 
  *     def get_alpha(self):             # <<<<<<<<<<<<<<
@@ -2145,7 +2186,7 @@ static PyObject *__pyx_pf_4core_5color_5Color_5Color_20get_alpha(struct __pyx_ob
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("get_alpha", 0);
 
-  /* "core/color/Color.pyx":36
+  /* "core/color/Color.pyx":40
  * 
  *     def get_alpha(self):
  *         return api_core.godot_color_get_a(&self._native)             # <<<<<<<<<<<<<<
@@ -2153,13 +2194,13 @@ static PyObject *__pyx_pf_4core_5color_5Color_5Color_20get_alpha(struct __pyx_ob
  *     def get_h(self):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = PyFloat_FromDouble(api_core->godot_color_get_a((&__pyx_v_self->_native))); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 36, __pyx_L1_error)
+  __pyx_t_1 = PyFloat_FromDouble(api_core->godot_color_get_a((&__pyx_v_self->_native))); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 40, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "core/color/Color.pyx":35
+  /* "core/color/Color.pyx":39
  *         api_core.godot_color_set_a(&self._native, alpha)
  * 
  *     def get_alpha(self):             # <<<<<<<<<<<<<<
@@ -2178,7 +2219,7 @@ static PyObject *__pyx_pf_4core_5color_5Color_5Color_20get_alpha(struct __pyx_ob
   return __pyx_r;
 }
 
-/* "core/color/Color.pyx":38
+/* "core/color/Color.pyx":42
  *         return api_core.godot_color_get_a(&self._native)
  * 
  *     def get_h(self):             # <<<<<<<<<<<<<<
@@ -2208,7 +2249,7 @@ static PyObject *__pyx_pf_4core_5color_5Color_5Color_22get_h(struct __pyx_obj_4c
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("get_h", 0);
 
-  /* "core/color/Color.pyx":39
+  /* "core/color/Color.pyx":43
  * 
  *     def get_h(self):
  *         return api_core.godot_color_get_h(&self._native)             # <<<<<<<<<<<<<<
@@ -2216,13 +2257,13 @@ static PyObject *__pyx_pf_4core_5color_5Color_5Color_22get_h(struct __pyx_obj_4c
  *     def get_s(self):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = PyFloat_FromDouble(api_core->godot_color_get_h((&__pyx_v_self->_native))); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 39, __pyx_L1_error)
+  __pyx_t_1 = PyFloat_FromDouble(api_core->godot_color_get_h((&__pyx_v_self->_native))); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 43, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "core/color/Color.pyx":38
+  /* "core/color/Color.pyx":42
  *         return api_core.godot_color_get_a(&self._native)
  * 
  *     def get_h(self):             # <<<<<<<<<<<<<<
@@ -2241,7 +2282,7 @@ static PyObject *__pyx_pf_4core_5color_5Color_5Color_22get_h(struct __pyx_obj_4c
   return __pyx_r;
 }
 
-/* "core/color/Color.pyx":41
+/* "core/color/Color.pyx":45
  *         return api_core.godot_color_get_h(&self._native)
  * 
  *     def get_s(self):             # <<<<<<<<<<<<<<
@@ -2271,7 +2312,7 @@ static PyObject *__pyx_pf_4core_5color_5Color_5Color_24get_s(struct __pyx_obj_4c
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("get_s", 0);
 
-  /* "core/color/Color.pyx":42
+  /* "core/color/Color.pyx":46
  * 
  *     def get_s(self):
  *         return api_core.godot_color_get_s(&self._native)             # <<<<<<<<<<<<<<
@@ -2279,13 +2320,13 @@ static PyObject *__pyx_pf_4core_5color_5Color_5Color_24get_s(struct __pyx_obj_4c
  *     def get_v(self):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = PyFloat_FromDouble(api_core->godot_color_get_s((&__pyx_v_self->_native))); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 42, __pyx_L1_error)
+  __pyx_t_1 = PyFloat_FromDouble(api_core->godot_color_get_s((&__pyx_v_self->_native))); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 46, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "core/color/Color.pyx":41
+  /* "core/color/Color.pyx":45
  *         return api_core.godot_color_get_h(&self._native)
  * 
  *     def get_s(self):             # <<<<<<<<<<<<<<
@@ -2304,7 +2345,7 @@ static PyObject *__pyx_pf_4core_5color_5Color_5Color_24get_s(struct __pyx_obj_4c
   return __pyx_r;
 }
 
-/* "core/color/Color.pyx":44
+/* "core/color/Color.pyx":48
  *         return api_core.godot_color_get_s(&self._native)
  * 
  *     def get_v(self):             # <<<<<<<<<<<<<<
@@ -2334,7 +2375,7 @@ static PyObject *__pyx_pf_4core_5color_5Color_5Color_26get_v(struct __pyx_obj_4c
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("get_v", 0);
 
-  /* "core/color/Color.pyx":45
+  /* "core/color/Color.pyx":49
  * 
  *     def get_v(self):
  *         return api_core.godot_color_get_v(&self._native)             # <<<<<<<<<<<<<<
@@ -2342,13 +2383,13 @@ static PyObject *__pyx_pf_4core_5color_5Color_5Color_26get_v(struct __pyx_obj_4c
  *     def __str__(self):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = PyFloat_FromDouble(api_core->godot_color_get_v((&__pyx_v_self->_native))); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 45, __pyx_L1_error)
+  __pyx_t_1 = PyFloat_FromDouble(api_core->godot_color_get_v((&__pyx_v_self->_native))); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 49, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "core/color/Color.pyx":44
+  /* "core/color/Color.pyx":48
  *         return api_core.godot_color_get_s(&self._native)
  * 
  *     def get_v(self):             # <<<<<<<<<<<<<<
@@ -2367,7 +2408,7 @@ static PyObject *__pyx_pf_4core_5color_5Color_5Color_26get_v(struct __pyx_obj_4c
   return __pyx_r;
 }
 
-/* "core/color/Color.pyx":47
+/* "core/color/Color.pyx":51
  *         return api_core.godot_color_get_v(&self._native)
  * 
  *     def __str__(self):             # <<<<<<<<<<<<<<
@@ -2397,7 +2438,7 @@ static PyObject *__pyx_pf_4core_5color_5Color_5Color_28__str__(struct __pyx_obj_
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__str__", 0);
 
-  /* "core/color/Color.pyx":48
+  /* "core/color/Color.pyx":52
  * 
  *     def __str__(self):
  *         return api_core.godot_color_as_string(&self._native)             # <<<<<<<<<<<<<<
@@ -2405,13 +2446,13 @@ static PyObject *__pyx_pf_4core_5color_5Color_5Color_28__str__(struct __pyx_obj_
  *     def to_rgba32(self):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __pyx_convert__to_py_godot_string(api_core->godot_color_as_string((&__pyx_v_self->_native))); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 48, __pyx_L1_error)
+  __pyx_t_1 = __pyx_convert__to_py_godot_string(api_core->godot_color_as_string((&__pyx_v_self->_native))); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 52, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "core/color/Color.pyx":47
+  /* "core/color/Color.pyx":51
  *         return api_core.godot_color_get_v(&self._native)
  * 
  *     def __str__(self):             # <<<<<<<<<<<<<<
@@ -2430,7 +2471,7 @@ static PyObject *__pyx_pf_4core_5color_5Color_5Color_28__str__(struct __pyx_obj_
   return __pyx_r;
 }
 
-/* "core/color/Color.pyx":50
+/* "core/color/Color.pyx":54
  *         return api_core.godot_color_as_string(&self._native)
  * 
  *     def to_rgba32(self):             # <<<<<<<<<<<<<<
@@ -2460,7 +2501,7 @@ static PyObject *__pyx_pf_4core_5color_5Color_5Color_30to_rgba32(struct __pyx_ob
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("to_rgba32", 0);
 
-  /* "core/color/Color.pyx":51
+  /* "core/color/Color.pyx":55
  * 
  *     def to_rgba32(self):
  *         return api_core.godot_color_to_rgba32(&self._native)             # <<<<<<<<<<<<<<
@@ -2468,13 +2509,13 @@ static PyObject *__pyx_pf_4core_5color_5Color_5Color_30to_rgba32(struct __pyx_ob
  *     def to_argb32(self):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_PyInt_From_godot_int(api_core->godot_color_to_rgba32((&__pyx_v_self->_native))); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 51, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyInt_From_godot_int(api_core->godot_color_to_rgba32((&__pyx_v_self->_native))); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 55, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "core/color/Color.pyx":50
+  /* "core/color/Color.pyx":54
  *         return api_core.godot_color_as_string(&self._native)
  * 
  *     def to_rgba32(self):             # <<<<<<<<<<<<<<
@@ -2493,7 +2534,7 @@ static PyObject *__pyx_pf_4core_5color_5Color_5Color_30to_rgba32(struct __pyx_ob
   return __pyx_r;
 }
 
-/* "core/color/Color.pyx":53
+/* "core/color/Color.pyx":57
  *         return api_core.godot_color_to_rgba32(&self._native)
  * 
  *     def to_argb32(self):             # <<<<<<<<<<<<<<
@@ -2523,7 +2564,7 @@ static PyObject *__pyx_pf_4core_5color_5Color_5Color_32to_argb32(struct __pyx_ob
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("to_argb32", 0);
 
-  /* "core/color/Color.pyx":54
+  /* "core/color/Color.pyx":58
  * 
  *     def to_argb32(self):
  *         return api_core.godot_color_to_argb32(&self._native)             # <<<<<<<<<<<<<<
@@ -2531,13 +2572,13 @@ static PyObject *__pyx_pf_4core_5color_5Color_5Color_32to_argb32(struct __pyx_ob
  *     def gray(self):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_PyInt_From_godot_int(api_core->godot_color_to_argb32((&__pyx_v_self->_native))); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 54, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyInt_From_godot_int(api_core->godot_color_to_argb32((&__pyx_v_self->_native))); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 58, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "core/color/Color.pyx":53
+  /* "core/color/Color.pyx":57
  *         return api_core.godot_color_to_rgba32(&self._native)
  * 
  *     def to_argb32(self):             # <<<<<<<<<<<<<<
@@ -2556,7 +2597,7 @@ static PyObject *__pyx_pf_4core_5color_5Color_5Color_32to_argb32(struct __pyx_ob
   return __pyx_r;
 }
 
-/* "core/color/Color.pyx":56
+/* "core/color/Color.pyx":60
  *         return api_core.godot_color_to_argb32(&self._native)
  * 
  *     def gray(self):             # <<<<<<<<<<<<<<
@@ -2586,7 +2627,7 @@ static PyObject *__pyx_pf_4core_5color_5Color_5Color_34gray(struct __pyx_obj_4co
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("gray", 0);
 
-  /* "core/color/Color.pyx":57
+  /* "core/color/Color.pyx":61
  * 
  *     def gray(self):
  *         return api_core.godot_color_gray(&self._native)             # <<<<<<<<<<<<<<
@@ -2594,13 +2635,13 @@ static PyObject *__pyx_pf_4core_5color_5Color_5Color_34gray(struct __pyx_obj_4co
  *     def inverted(self):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = PyFloat_FromDouble(api_core->godot_color_gray((&__pyx_v_self->_native))); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 57, __pyx_L1_error)
+  __pyx_t_1 = PyFloat_FromDouble(api_core->godot_color_gray((&__pyx_v_self->_native))); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 61, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "core/color/Color.pyx":56
+  /* "core/color/Color.pyx":60
  *         return api_core.godot_color_to_argb32(&self._native)
  * 
  *     def gray(self):             # <<<<<<<<<<<<<<
@@ -2619,7 +2660,7 @@ static PyObject *__pyx_pf_4core_5color_5Color_5Color_34gray(struct __pyx_obj_4co
   return __pyx_r;
 }
 
-/* "core/color/Color.pyx":59
+/* "core/color/Color.pyx":63
  *         return api_core.godot_color_gray(&self._native)
  * 
  *     def inverted(self):             # <<<<<<<<<<<<<<
@@ -2650,7 +2691,7 @@ static PyObject *__pyx_pf_4core_5color_5Color_5Color_36inverted(struct __pyx_obj
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("inverted", 0);
 
-  /* "core/color/Color.pyx":60
+  /* "core/color/Color.pyx":64
  * 
  *     def inverted(self):
  *         return Color(api_core.godot_color_inverted(&self._native))             # <<<<<<<<<<<<<<
@@ -2658,16 +2699,16 @@ static PyObject *__pyx_pf_4core_5color_5Color_5Color_36inverted(struct __pyx_obj
  *     def contrasted(self):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __pyx_convert__to_py_godot_color(api_core->godot_color_inverted((&__pyx_v_self->_native))); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 60, __pyx_L1_error)
+  __pyx_t_1 = __pyx_convert__to_py_godot_color(api_core->godot_color_inverted((&__pyx_v_self->_native))); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 64, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = __Pyx_PyObject_CallOneArg(((PyObject *)__pyx_ptype_4core_5color_5Color_Color), __pyx_t_1); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 60, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_CallOneArg(((PyObject *)__pyx_ptype_4core_5color_5Color_Color), __pyx_t_1); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 64, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_r = __pyx_t_2;
   __pyx_t_2 = 0;
   goto __pyx_L0;
 
-  /* "core/color/Color.pyx":59
+  /* "core/color/Color.pyx":63
  *         return api_core.godot_color_gray(&self._native)
  * 
  *     def inverted(self):             # <<<<<<<<<<<<<<
@@ -2687,7 +2728,7 @@ static PyObject *__pyx_pf_4core_5color_5Color_5Color_36inverted(struct __pyx_obj
   return __pyx_r;
 }
 
-/* "core/color/Color.pyx":62
+/* "core/color/Color.pyx":66
  *         return Color(api_core.godot_color_inverted(&self._native))
  * 
  *     def contrasted(self):             # <<<<<<<<<<<<<<
@@ -2718,7 +2759,7 @@ static PyObject *__pyx_pf_4core_5color_5Color_5Color_38contrasted(struct __pyx_o
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("contrasted", 0);
 
-  /* "core/color/Color.pyx":63
+  /* "core/color/Color.pyx":67
  * 
  *     def contrasted(self):
  *         return Color(api_core.godot_color_contrasted(&self._native))             # <<<<<<<<<<<<<<
@@ -2726,16 +2767,16 @@ static PyObject *__pyx_pf_4core_5color_5Color_5Color_38contrasted(struct __pyx_o
  *     def linear_interpolate(self, Color b, godot_real t):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __pyx_convert__to_py_godot_color(api_core->godot_color_contrasted((&__pyx_v_self->_native))); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 63, __pyx_L1_error)
+  __pyx_t_1 = __pyx_convert__to_py_godot_color(api_core->godot_color_contrasted((&__pyx_v_self->_native))); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 67, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = __Pyx_PyObject_CallOneArg(((PyObject *)__pyx_ptype_4core_5color_5Color_Color), __pyx_t_1); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 63, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_CallOneArg(((PyObject *)__pyx_ptype_4core_5color_5Color_Color), __pyx_t_1); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 67, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_r = __pyx_t_2;
   __pyx_t_2 = 0;
   goto __pyx_L0;
 
-  /* "core/color/Color.pyx":62
+  /* "core/color/Color.pyx":66
  *         return Color(api_core.godot_color_inverted(&self._native))
  * 
  *     def contrasted(self):             # <<<<<<<<<<<<<<
@@ -2755,7 +2796,7 @@ static PyObject *__pyx_pf_4core_5color_5Color_5Color_38contrasted(struct __pyx_o
   return __pyx_r;
 }
 
-/* "core/color/Color.pyx":65
+/* "core/color/Color.pyx":69
  *         return Color(api_core.godot_color_contrasted(&self._native))
  * 
  *     def linear_interpolate(self, Color b, godot_real t):             # <<<<<<<<<<<<<<
@@ -2797,11 +2838,11 @@ static PyObject *__pyx_pw_4core_5color_5Color_5Color_41linear_interpolate(PyObje
         case  1:
         if (likely((values[1] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_t)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("linear_interpolate", 1, 2, 2, 1); __PYX_ERR(1, 65, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("linear_interpolate", 1, 2, 2, 1); __PYX_ERR(1, 69, __pyx_L3_error)
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "linear_interpolate") < 0)) __PYX_ERR(1, 65, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "linear_interpolate") < 0)) __PYX_ERR(1, 69, __pyx_L3_error)
       }
     } else if (PyTuple_GET_SIZE(__pyx_args) != 2) {
       goto __pyx_L5_argtuple_error;
@@ -2810,17 +2851,17 @@ static PyObject *__pyx_pw_4core_5color_5Color_5Color_41linear_interpolate(PyObje
       values[1] = PyTuple_GET_ITEM(__pyx_args, 1);
     }
     __pyx_v_b = ((struct __pyx_obj_4core_5color_5Color_Color *)values[0]);
-    __pyx_v_t = __pyx_PyFloat_AsFloat(values[1]); if (unlikely((__pyx_v_t == ((godot_real)-1)) && PyErr_Occurred())) __PYX_ERR(1, 65, __pyx_L3_error)
+    __pyx_v_t = __pyx_PyFloat_AsFloat(values[1]); if (unlikely((__pyx_v_t == ((godot_real)-1)) && PyErr_Occurred())) __PYX_ERR(1, 69, __pyx_L3_error)
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("linear_interpolate", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(1, 65, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("linear_interpolate", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(1, 69, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("core.color.Color.Color.linear_interpolate", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_b), __pyx_ptype_4core_5color_5Color_Color, 1, "b", 0))) __PYX_ERR(1, 65, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_b), __pyx_ptype_4core_5color_5Color_Color, 1, "b", 0))) __PYX_ERR(1, 69, __pyx_L1_error)
   __pyx_r = __pyx_pf_4core_5color_5Color_5Color_40linear_interpolate(((struct __pyx_obj_4core_5color_5Color_Color *)__pyx_v_self), __pyx_v_b, __pyx_v_t);
 
   /* function exit code */
@@ -2842,7 +2883,7 @@ static PyObject *__pyx_pf_4core_5color_5Color_5Color_40linear_interpolate(struct
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("linear_interpolate", 0);
 
-  /* "core/color/Color.pyx":66
+  /* "core/color/Color.pyx":70
  * 
  *     def linear_interpolate(self, Color b, godot_real t):
  *         return Color(api_core.godot_color_linear_interpolate(&self._native, &b._native, t))             # <<<<<<<<<<<<<<
@@ -2850,16 +2891,16 @@ static PyObject *__pyx_pf_4core_5color_5Color_5Color_40linear_interpolate(struct
  *     def blend(self, Color over):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __pyx_convert__to_py_godot_color(api_core->godot_color_linear_interpolate((&__pyx_v_self->_native), (&__pyx_v_b->_native), __pyx_v_t)); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 66, __pyx_L1_error)
+  __pyx_t_1 = __pyx_convert__to_py_godot_color(api_core->godot_color_linear_interpolate((&__pyx_v_self->_native), (&__pyx_v_b->_native), __pyx_v_t)); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 70, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = __Pyx_PyObject_CallOneArg(((PyObject *)__pyx_ptype_4core_5color_5Color_Color), __pyx_t_1); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 66, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_CallOneArg(((PyObject *)__pyx_ptype_4core_5color_5Color_Color), __pyx_t_1); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 70, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_r = __pyx_t_2;
   __pyx_t_2 = 0;
   goto __pyx_L0;
 
-  /* "core/color/Color.pyx":65
+  /* "core/color/Color.pyx":69
  *         return Color(api_core.godot_color_contrasted(&self._native))
  * 
  *     def linear_interpolate(self, Color b, godot_real t):             # <<<<<<<<<<<<<<
@@ -2879,7 +2920,7 @@ static PyObject *__pyx_pf_4core_5color_5Color_5Color_40linear_interpolate(struct
   return __pyx_r;
 }
 
-/* "core/color/Color.pyx":68
+/* "core/color/Color.pyx":72
  *         return Color(api_core.godot_color_linear_interpolate(&self._native, &b._native, t))
  * 
  *     def blend(self, Color over):             # <<<<<<<<<<<<<<
@@ -2896,7 +2937,7 @@ static PyObject *__pyx_pw_4core_5color_5Color_5Color_43blend(PyObject *__pyx_v_s
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("blend (wrapper)", 0);
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_over), __pyx_ptype_4core_5color_5Color_Color, 1, "over", 0))) __PYX_ERR(1, 68, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_over), __pyx_ptype_4core_5color_5Color_Color, 1, "over", 0))) __PYX_ERR(1, 72, __pyx_L1_error)
   __pyx_r = __pyx_pf_4core_5color_5Color_5Color_42blend(((struct __pyx_obj_4core_5color_5Color_Color *)__pyx_v_self), ((struct __pyx_obj_4core_5color_5Color_Color *)__pyx_v_over));
 
   /* function exit code */
@@ -2918,7 +2959,7 @@ static PyObject *__pyx_pf_4core_5color_5Color_5Color_42blend(struct __pyx_obj_4c
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("blend", 0);
 
-  /* "core/color/Color.pyx":69
+  /* "core/color/Color.pyx":73
  * 
  *     def blend(self, Color over):
  *         return Color(api_core.godot_color_blend(&self._native, &over._native))             # <<<<<<<<<<<<<<
@@ -2926,16 +2967,16 @@ static PyObject *__pyx_pf_4core_5color_5Color_5Color_42blend(struct __pyx_obj_4c
  *     def to_html(self, godot_bool with_alpha):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __pyx_convert__to_py_godot_color(api_core->godot_color_blend((&__pyx_v_self->_native), (&__pyx_v_over->_native))); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 69, __pyx_L1_error)
+  __pyx_t_1 = __pyx_convert__to_py_godot_color(api_core->godot_color_blend((&__pyx_v_self->_native), (&__pyx_v_over->_native))); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 73, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = __Pyx_PyObject_CallOneArg(((PyObject *)__pyx_ptype_4core_5color_5Color_Color), __pyx_t_1); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 69, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_CallOneArg(((PyObject *)__pyx_ptype_4core_5color_5Color_Color), __pyx_t_1); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 73, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_r = __pyx_t_2;
   __pyx_t_2 = 0;
   goto __pyx_L0;
 
-  /* "core/color/Color.pyx":68
+  /* "core/color/Color.pyx":72
  *         return Color(api_core.godot_color_linear_interpolate(&self._native, &b._native, t))
  * 
  *     def blend(self, Color over):             # <<<<<<<<<<<<<<
@@ -2955,7 +2996,7 @@ static PyObject *__pyx_pf_4core_5color_5Color_5Color_42blend(struct __pyx_obj_4c
   return __pyx_r;
 }
 
-/* "core/color/Color.pyx":71
+/* "core/color/Color.pyx":75
  *         return Color(api_core.godot_color_blend(&self._native, &over._native))
  * 
  *     def to_html(self, godot_bool with_alpha):             # <<<<<<<<<<<<<<
@@ -2974,7 +3015,7 @@ static PyObject *__pyx_pw_4core_5color_5Color_5Color_45to_html(PyObject *__pyx_v
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("to_html (wrapper)", 0);
   assert(__pyx_arg_with_alpha); {
-    __pyx_v_with_alpha = __Pyx_PyObject_IsTrue(__pyx_arg_with_alpha); if (unlikely((__pyx_v_with_alpha == ((godot_bool)-1)) && PyErr_Occurred())) __PYX_ERR(1, 71, __pyx_L3_error)
+    __pyx_v_with_alpha = __Pyx_PyObject_IsTrue(__pyx_arg_with_alpha); if (unlikely((__pyx_v_with_alpha == ((godot_bool)-1)) && PyErr_Occurred())) __PYX_ERR(1, 75, __pyx_L3_error)
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -2998,7 +3039,7 @@ static PyObject *__pyx_pf_4core_5color_5Color_5Color_44to_html(struct __pyx_obj_
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("to_html", 0);
 
-  /* "core/color/Color.pyx":72
+  /* "core/color/Color.pyx":76
  * 
  *     def to_html(self, godot_bool with_alpha):
  *         return api_core.godot_color_to_html(&self._native, with_alpha)             # <<<<<<<<<<<<<<
@@ -3006,13 +3047,13 @@ static PyObject *__pyx_pf_4core_5color_5Color_5Color_44to_html(struct __pyx_obj_
  *     def __eq__(self, Color other):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __pyx_convert__to_py_godot_string(api_core->godot_color_to_html((&__pyx_v_self->_native), __pyx_v_with_alpha)); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 72, __pyx_L1_error)
+  __pyx_t_1 = __pyx_convert__to_py_godot_string(api_core->godot_color_to_html((&__pyx_v_self->_native), __pyx_v_with_alpha)); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 76, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "core/color/Color.pyx":71
+  /* "core/color/Color.pyx":75
  *         return Color(api_core.godot_color_blend(&self._native, &over._native))
  * 
  *     def to_html(self, godot_bool with_alpha):             # <<<<<<<<<<<<<<
@@ -3031,7 +3072,7 @@ static PyObject *__pyx_pf_4core_5color_5Color_5Color_44to_html(struct __pyx_obj_
   return __pyx_r;
 }
 
-/* "core/color/Color.pyx":74
+/* "core/color/Color.pyx":78
  *         return api_core.godot_color_to_html(&self._native, with_alpha)
  * 
  *     def __eq__(self, Color other):             # <<<<<<<<<<<<<<
@@ -3048,7 +3089,7 @@ static PyObject *__pyx_pw_4core_5color_5Color_5Color_47__eq__(PyObject *__pyx_v_
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__eq__ (wrapper)", 0);
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_other), __pyx_ptype_4core_5color_5Color_Color, 1, "other", 0))) __PYX_ERR(1, 74, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_other), __pyx_ptype_4core_5color_5Color_Color, 1, "other", 0))) __PYX_ERR(1, 78, __pyx_L1_error)
   __pyx_r = __pyx_pf_4core_5color_5Color_5Color_46__eq__(((struct __pyx_obj_4core_5color_5Color_Color *)__pyx_v_self), ((struct __pyx_obj_4core_5color_5Color_Color *)__pyx_v_other));
 
   /* function exit code */
@@ -3069,7 +3110,7 @@ static PyObject *__pyx_pf_4core_5color_5Color_5Color_46__eq__(struct __pyx_obj_4
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__eq__", 0);
 
-  /* "core/color/Color.pyx":75
+  /* "core/color/Color.pyx":79
  * 
  *     def __eq__(self, Color other):
  *         return api_core.godot_color_operator_equal(&self._native, &other._native)             # <<<<<<<<<<<<<<
@@ -3077,13 +3118,13 @@ static PyObject *__pyx_pf_4core_5color_5Color_5Color_46__eq__(struct __pyx_obj_4
  *     def __lt__(self, Color other):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_PyBool_FromLong(api_core->godot_color_operator_equal((&__pyx_v_self->_native), (&__pyx_v_other->_native))); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 75, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyBool_FromLong(api_core->godot_color_operator_equal((&__pyx_v_self->_native), (&__pyx_v_other->_native))); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 79, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "core/color/Color.pyx":74
+  /* "core/color/Color.pyx":78
  *         return api_core.godot_color_to_html(&self._native, with_alpha)
  * 
  *     def __eq__(self, Color other):             # <<<<<<<<<<<<<<
@@ -3102,7 +3143,7 @@ static PyObject *__pyx_pf_4core_5color_5Color_5Color_46__eq__(struct __pyx_obj_4
   return __pyx_r;
 }
 
-/* "core/color/Color.pyx":77
+/* "core/color/Color.pyx":81
  *         return api_core.godot_color_operator_equal(&self._native, &other._native)
  * 
  *     def __lt__(self, Color other):             # <<<<<<<<<<<<<<
@@ -3119,7 +3160,7 @@ static PyObject *__pyx_pw_4core_5color_5Color_5Color_49__lt__(PyObject *__pyx_v_
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__lt__ (wrapper)", 0);
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_other), __pyx_ptype_4core_5color_5Color_Color, 1, "other", 0))) __PYX_ERR(1, 77, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_other), __pyx_ptype_4core_5color_5Color_Color, 1, "other", 0))) __PYX_ERR(1, 81, __pyx_L1_error)
   __pyx_r = __pyx_pf_4core_5color_5Color_5Color_48__lt__(((struct __pyx_obj_4core_5color_5Color_Color *)__pyx_v_self), ((struct __pyx_obj_4core_5color_5Color_Color *)__pyx_v_other));
 
   /* function exit code */
@@ -3140,20 +3181,20 @@ static PyObject *__pyx_pf_4core_5color_5Color_5Color_48__lt__(struct __pyx_obj_4
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__lt__", 0);
 
-  /* "core/color/Color.pyx":78
+  /* "core/color/Color.pyx":82
  * 
  *     def __lt__(self, Color other):
  *         return api_core.godot_color_operator_less(&self._native, &other._native)             # <<<<<<<<<<<<<<
  * 
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_PyBool_FromLong(api_core->godot_color_operator_less((&__pyx_v_self->_native), (&__pyx_v_other->_native))); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 78, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyBool_FromLong(api_core->godot_color_operator_less((&__pyx_v_self->_native), (&__pyx_v_other->_native))); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 82, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "core/color/Color.pyx":77
+  /* "core/color/Color.pyx":81
  *         return api_core.godot_color_operator_equal(&self._native, &other._native)
  * 
  *     def __lt__(self, Color other):             # <<<<<<<<<<<<<<
@@ -3670,10 +3711,17 @@ static int __Pyx_modinit_variable_export_code(void) {
 
 static int __Pyx_modinit_function_export_code(void) {
   __Pyx_RefNannyDeclarations
+  int __pyx_lineno = 0;
+  const char *__pyx_filename = NULL;
+  int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__Pyx_modinit_function_export_code", 0);
   /*--- Function export code ---*/
+  if (__Pyx_ExportFunction("set_api_core_color", (void (*)(void))__pyx_f_4core_5color_5Color_set_api_core_color, "PyObject *(struct godot_gdnative_core_api_struct *)") < 0) __PYX_ERR(1, 1, __pyx_L1_error)
   __Pyx_RefNannyFinishContext();
   return 0;
+  __pyx_L1_error:;
+  __Pyx_RefNannyFinishContext();
+  return -1;
 }
 
 static int __Pyx_modinit_type_init_code(void) {
@@ -3686,16 +3734,16 @@ static int __Pyx_modinit_type_init_code(void) {
   __pyx_vtabptr_4core_5color_5Color_Color = &__pyx_vtable_4core_5color_5Color_Color;
   __pyx_vtable_4core_5color_5Color_Color.set_native = (void (*)(struct __pyx_obj_4core_5color_5Color_Color *, godot_color))__pyx_f_4core_5color_5Color_5Color_set_native;
   __pyx_vtable_4core_5color_5Color_Color.new_static = (struct __pyx_obj_4core_5color_5Color_Color *(*)(godot_color))__pyx_f_4core_5color_5Color_5Color_new_static;
-  if (PyType_Ready(&__pyx_type_4core_5color_5Color_Color) < 0) __PYX_ERR(1, 3, __pyx_L1_error)
+  if (PyType_Ready(&__pyx_type_4core_5color_5Color_Color) < 0) __PYX_ERR(1, 7, __pyx_L1_error)
   #if PY_VERSION_HEX < 0x030800B1
   __pyx_type_4core_5color_5Color_Color.tp_print = 0;
   #endif
   if ((CYTHON_USE_TYPE_SLOTS && CYTHON_USE_PYTYPE_LOOKUP) && likely(!__pyx_type_4core_5color_5Color_Color.tp_dictoffset && __pyx_type_4core_5color_5Color_Color.tp_getattro == PyObject_GenericGetAttr)) {
     __pyx_type_4core_5color_5Color_Color.tp_getattro = __Pyx_PyObject_GenericGetAttr;
   }
-  if (__Pyx_SetVtable(__pyx_type_4core_5color_5Color_Color.tp_dict, __pyx_vtabptr_4core_5color_5Color_Color) < 0) __PYX_ERR(1, 3, __pyx_L1_error)
-  if (PyObject_SetAttr(__pyx_m, __pyx_n_s_Color, (PyObject *)&__pyx_type_4core_5color_5Color_Color) < 0) __PYX_ERR(1, 3, __pyx_L1_error)
-  if (__Pyx_setup_reduce((PyObject*)&__pyx_type_4core_5color_5Color_Color) < 0) __PYX_ERR(1, 3, __pyx_L1_error)
+  if (__Pyx_SetVtable(__pyx_type_4core_5color_5Color_Color.tp_dict, __pyx_vtabptr_4core_5color_5Color_Color) < 0) __PYX_ERR(1, 7, __pyx_L1_error)
+  if (PyObject_SetAttr(__pyx_m, __pyx_n_s_Color, (PyObject *)&__pyx_type_4core_5color_5Color_Color) < 0) __PYX_ERR(1, 7, __pyx_L1_error)
+  if (__Pyx_setup_reduce((PyObject*)&__pyx_type_4core_5color_5Color_Color) < 0) __PYX_ERR(1, 7, __pyx_L1_error)
   __pyx_ptype_4core_5color_5Color_Color = &__pyx_type_4core_5color_5Color_Color;
   __Pyx_RefNannyFinishContext();
   return 0;
@@ -3937,7 +3985,7 @@ if (!__Pyx_RefNanny) {
   /*--- Global type/function init code ---*/
   (void)__Pyx_modinit_global_init_code();
   (void)__Pyx_modinit_variable_export_code();
-  (void)__Pyx_modinit_function_export_code();
+  if (unlikely(__Pyx_modinit_function_export_code() < 0)) __PYX_ERR(1, 1, __pyx_L1_error)
   if (unlikely(__Pyx_modinit_type_init_code() < 0)) __PYX_ERR(1, 1, __pyx_L1_error)
   if (unlikely(__Pyx_modinit_type_import_code() < 0)) __PYX_ERR(1, 1, __pyx_L1_error)
   (void)__Pyx_modinit_variable_import_code();
@@ -3950,7 +3998,7 @@ if (!__Pyx_RefNanny) {
   /* "core/color/Color.pyx":1
  * from core.color.Color cimport *             # <<<<<<<<<<<<<<
  * 
- * cdef class Color:
+ * cdef api set_api_core_color(godot_gdnative_core_api_struct * core):
  */
   __pyx_t_1 = __Pyx_PyDict_NewPresized(0); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 1, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
@@ -5736,6 +5784,43 @@ static int __Pyx_check_binary_version(void) {
         return PyErr_WarnEx(NULL, message, 1);
     }
     return 0;
+}
+
+/* FunctionExport */
+static int __Pyx_ExportFunction(const char *name, void (*f)(void), const char *sig) {
+    PyObject *d = 0;
+    PyObject *cobj = 0;
+    union {
+        void (*fp)(void);
+        void *p;
+    } tmp;
+    d = PyObject_GetAttrString(__pyx_m, (char *)"__pyx_capi__");
+    if (!d) {
+        PyErr_Clear();
+        d = PyDict_New();
+        if (!d)
+            goto bad;
+        Py_INCREF(d);
+        if (PyModule_AddObject(__pyx_m, (char *)"__pyx_capi__", d) < 0)
+            goto bad;
+    }
+    tmp.fp = f;
+#if PY_VERSION_HEX >= 0x02070000
+    cobj = PyCapsule_New(tmp.p, sig, 0);
+#else
+    cobj = PyCObject_FromVoidPtrAndDesc(tmp.p, (void *)sig, 0);
+#endif
+    if (!cobj)
+        goto bad;
+    if (PyDict_SetItemString(d, name, cobj) < 0)
+        goto bad;
+    Py_DECREF(cobj);
+    Py_DECREF(d);
+    return 0;
+bad:
+    Py_XDECREF(cobj);
+    Py_XDECREF(d);
+    return -1;
 }
 
 /* InitStrings */

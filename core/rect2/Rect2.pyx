@@ -1,6 +1,10 @@
 from core.vector2.Vector2 cimport *
 from core.rect2.rect2_binding cimport *
 
+cdef api set_api_core_rect2(godot_gdnative_core_api_struct * core):
+    global api_core
+    api_core = core
+
 cdef class Rect2:
 
     def __init__(self,godot_real x, godot_real y, godot_real width, godot_real height):

@@ -1,5 +1,9 @@
 from core.rid.rid_binding cimport *
 
+cdef api set_api_core_rid(godot_gdnative_core_api_struct * core):
+    global api_core
+    api_core = core
+
 cdef class RID:
 
     def __init__(self):

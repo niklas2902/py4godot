@@ -1,5 +1,9 @@
 from core.color.Color cimport *
 
+cdef api set_api_core_color(godot_gdnative_core_api_struct * core):
+    global api_core
+    api_core = core
+
 cdef class Color:
 
     def __init__(self, godot_real red, godot_real green, godot_real blue, godot_real alpha = 255):

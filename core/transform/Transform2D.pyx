@@ -4,6 +4,10 @@ from core.rect2.Rect2 cimport *
 from core.transform.Transform2D cimport *
 from core.transform.transform_binding cimport *
 
+cdef api set_api_core_transform2d(godot_gdnative_core_api_struct * core):
+    global api_core
+    api_core = core
+
 cdef class Transform2D:
 
     def __init__(self,godot_real rotation, Vector2 pos):

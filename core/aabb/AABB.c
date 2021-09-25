@@ -949,8 +949,8 @@ static CYTHON_INLINE void __pyx_f_4core_7vector3_7Vector3_7Vector3_set_native(st
 static CYTHON_INLINE struct __pyx_obj_4core_7vector3_7Vector3_Vector3 *__pyx_f_4core_7vector3_7Vector3_7Vector3_new_static(godot_vector3);
 
 
-/* "core/aabb/AABB.pyx":6
- * 
+/* "core/aabb/AABB.pyx":9
+ *     api_core = core
  * 
  * cdef class AABB:             # <<<<<<<<<<<<<<
  * 
@@ -1293,6 +1293,9 @@ static CYTHON_INLINE int __Pyx_PyErr_GivenExceptionMatches2(PyObject *err, PyObj
 /* CheckBinaryVersion.proto */
 static int __Pyx_check_binary_version(void);
 
+/* FunctionExport.proto */
+static int __Pyx_ExportFunction(const char *name, void (*f)(void), const char *sig);
+
 /* InitStrings.proto */
 static int __Pyx_InitStrings(__Pyx_StringTabEntry *t);
 
@@ -1338,6 +1341,7 @@ static PyTypeObject *__pyx_ptype_4core_7vector3_7Vector3_Vector3 = 0;
 
 /* Module declarations from 'core.aabb.AABB' */
 static PyTypeObject *__pyx_ptype_4core_4aabb_4AABB_AABB = 0;
+static PyObject *__pyx_f_4core_4aabb_4AABB_set_api_core_aabb(struct godot_gdnative_core_api_struct *); /*proto*/
 static int __Pyx_carray_from_py_uint8_t(PyObject *, uint8_t *, Py_ssize_t); /*proto*/
 static godot_aabb __pyx_convert__from_py_godot_aabb(PyObject *); /*proto*/
 #define __Pyx_MODULE_NAME "core.aabb.AABB"
@@ -1439,7 +1443,44 @@ static PyObject *__pyx_tuple__2;
 static PyObject *__pyx_tuple__3;
 /* Late includes */
 
-/* "core/aabb/AABB.pyx":8
+/* "core/aabb/AABB.pyx":5
+ * from core.aabb.aabb_binding cimport *
+ * 
+ * cdef api set_api_core_aabb(godot_gdnative_core_api_struct * core):             # <<<<<<<<<<<<<<
+ *     global api_core
+ *     api_core = core
+ */
+
+static PyObject *__pyx_f_4core_4aabb_4AABB_set_api_core_aabb(struct godot_gdnative_core_api_struct *__pyx_v_core) {
+  PyObject *__pyx_r = NULL;
+  __Pyx_RefNannyDeclarations
+  __Pyx_RefNannySetupContext("set_api_core_aabb", 0);
+
+  /* "core/aabb/AABB.pyx":7
+ * cdef api set_api_core_aabb(godot_gdnative_core_api_struct * core):
+ *     global api_core
+ *     api_core = core             # <<<<<<<<<<<<<<
+ * 
+ * cdef class AABB:
+ */
+  api_core = __pyx_v_core;
+
+  /* "core/aabb/AABB.pyx":5
+ * from core.aabb.aabb_binding cimport *
+ * 
+ * cdef api set_api_core_aabb(godot_gdnative_core_api_struct * core):             # <<<<<<<<<<<<<<
+ *     global api_core
+ *     api_core = core
+ */
+
+  /* function exit code */
+  __pyx_r = Py_None; __Pyx_INCREF(Py_None);
+  __Pyx_XGIVEREF(__pyx_r);
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+/* "core/aabb/AABB.pyx":11
  * cdef class AABB:
  * 
  *     def __init__(self, godot_aabb _native, Vector3 v, Vector3 v2):             # <<<<<<<<<<<<<<
@@ -1484,17 +1525,17 @@ static int __pyx_pw_4core_4aabb_4AABB_4AABB_1__init__(PyObject *__pyx_v_self, Py
         case  1:
         if (likely((values[1] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_v)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("__init__", 1, 3, 3, 1); __PYX_ERR(1, 8, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("__init__", 1, 3, 3, 1); __PYX_ERR(1, 11, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  2:
         if (likely((values[2] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_v2)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("__init__", 1, 3, 3, 2); __PYX_ERR(1, 8, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("__init__", 1, 3, 3, 2); __PYX_ERR(1, 11, __pyx_L3_error)
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "__init__") < 0)) __PYX_ERR(1, 8, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "__init__") < 0)) __PYX_ERR(1, 11, __pyx_L3_error)
       }
     } else if (PyTuple_GET_SIZE(__pyx_args) != 3) {
       goto __pyx_L5_argtuple_error;
@@ -1503,20 +1544,20 @@ static int __pyx_pw_4core_4aabb_4AABB_4AABB_1__init__(PyObject *__pyx_v_self, Py
       values[1] = PyTuple_GET_ITEM(__pyx_args, 1);
       values[2] = PyTuple_GET_ITEM(__pyx_args, 2);
     }
-    __pyx_v__native = __pyx_convert__from_py_godot_aabb(values[0]); if (unlikely(PyErr_Occurred())) __PYX_ERR(1, 8, __pyx_L3_error)
+    __pyx_v__native = __pyx_convert__from_py_godot_aabb(values[0]); if (unlikely(PyErr_Occurred())) __PYX_ERR(1, 11, __pyx_L3_error)
     __pyx_v_v = ((struct __pyx_obj_4core_7vector3_7Vector3_Vector3 *)values[1]);
     __pyx_v_v2 = ((struct __pyx_obj_4core_7vector3_7Vector3_Vector3 *)values[2]);
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("__init__", 1, 3, 3, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(1, 8, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("__init__", 1, 3, 3, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(1, 11, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("core.aabb.AABB.AABB.__init__", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return -1;
   __pyx_L4_argument_unpacking_done:;
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_v), __pyx_ptype_4core_7vector3_7Vector3_Vector3, 1, "v", 0))) __PYX_ERR(1, 8, __pyx_L1_error)
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_v2), __pyx_ptype_4core_7vector3_7Vector3_Vector3, 1, "v2", 0))) __PYX_ERR(1, 8, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_v), __pyx_ptype_4core_7vector3_7Vector3_Vector3, 1, "v", 0))) __PYX_ERR(1, 11, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_v2), __pyx_ptype_4core_7vector3_7Vector3_Vector3, 1, "v2", 0))) __PYX_ERR(1, 11, __pyx_L1_error)
   __pyx_r = __pyx_pf_4core_4aabb_4AABB_4AABB___init__(((struct __pyx_obj_4core_4aabb_4AABB_AABB *)__pyx_v_self), __pyx_v__native, __pyx_v_v, __pyx_v_v2);
 
   /* function exit code */
@@ -1539,22 +1580,22 @@ static int __pyx_pf_4core_4aabb_4AABB_4AABB___init__(struct __pyx_obj_4core_4aab
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__init__", 0);
 
-  /* "core/aabb/AABB.pyx":9
+  /* "core/aabb/AABB.pyx":12
  * 
  *     def __init__(self, godot_aabb _native, Vector3 v, Vector3 v2):
  *         if (_native != None):             # <<<<<<<<<<<<<<
  *             self._native = _native
  *         else:
  */
-  __pyx_t_1 = __pyx_convert__to_py_godot_aabb(__pyx_v__native); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 9, __pyx_L1_error)
+  __pyx_t_1 = __pyx_convert__to_py_godot_aabb(__pyx_v__native); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 12, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = PyObject_RichCompare(__pyx_t_1, Py_None, Py_NE); __Pyx_XGOTREF(__pyx_t_2); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 9, __pyx_L1_error)
+  __pyx_t_2 = PyObject_RichCompare(__pyx_t_1, Py_None, Py_NE); __Pyx_XGOTREF(__pyx_t_2); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 12, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_3 = __Pyx_PyObject_IsTrue(__pyx_t_2); if (unlikely(__pyx_t_3 < 0)) __PYX_ERR(1, 9, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_IsTrue(__pyx_t_2); if (unlikely(__pyx_t_3 < 0)) __PYX_ERR(1, 12, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   if (__pyx_t_3) {
 
-    /* "core/aabb/AABB.pyx":10
+    /* "core/aabb/AABB.pyx":13
  *     def __init__(self, godot_aabb _native, Vector3 v, Vector3 v2):
  *         if (_native != None):
  *             self._native = _native             # <<<<<<<<<<<<<<
@@ -1563,7 +1604,7 @@ static int __pyx_pf_4core_4aabb_4AABB_4AABB___init__(struct __pyx_obj_4core_4aab
  */
     __pyx_v_self->_native = __pyx_v__native;
 
-    /* "core/aabb/AABB.pyx":9
+    /* "core/aabb/AABB.pyx":12
  * 
  *     def __init__(self, godot_aabb _native, Vector3 v, Vector3 v2):
  *         if (_native != None):             # <<<<<<<<<<<<<<
@@ -1573,7 +1614,7 @@ static int __pyx_pf_4core_4aabb_4AABB_4AABB___init__(struct __pyx_obj_4core_4aab
     goto __pyx_L3;
   }
 
-  /* "core/aabb/AABB.pyx":12
+  /* "core/aabb/AABB.pyx":15
  *             self._native = _native
  *         else:
  *             pass             # <<<<<<<<<<<<<<
@@ -1584,7 +1625,7 @@ static int __pyx_pf_4core_4aabb_4AABB_4AABB___init__(struct __pyx_obj_4core_4aab
   }
   __pyx_L3:;
 
-  /* "core/aabb/AABB.pyx":8
+  /* "core/aabb/AABB.pyx":11
  * cdef class AABB:
  * 
  *     def __init__(self, godot_aabb _native, Vector3 v, Vector3 v2):             # <<<<<<<<<<<<<<
@@ -1605,7 +1646,7 @@ static int __pyx_pf_4core_4aabb_4AABB_4AABB___init__(struct __pyx_obj_4core_4aab
   return __pyx_r;
 }
 
-/* "core/aabb/AABB.pyx":15
+/* "core/aabb/AABB.pyx":18
  *             #api_core.godot_aabb_new(&self._native, &v._native, &v2._native)
  * 
  *     def intersects(self, AABB other):             # <<<<<<<<<<<<<<
@@ -1622,7 +1663,7 @@ static PyObject *__pyx_pw_4core_4aabb_4AABB_4AABB_3intersects(PyObject *__pyx_v_
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("intersects (wrapper)", 0);
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_other), __pyx_ptype_4core_4aabb_4AABB_AABB, 1, "other", 0))) __PYX_ERR(1, 15, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_other), __pyx_ptype_4core_4aabb_4AABB_AABB, 1, "other", 0))) __PYX_ERR(1, 18, __pyx_L1_error)
   __pyx_r = __pyx_pf_4core_4aabb_4AABB_4AABB_2intersects(((struct __pyx_obj_4core_4aabb_4AABB_AABB *)__pyx_v_self), ((struct __pyx_obj_4core_4aabb_4AABB_AABB *)__pyx_v_other));
 
   /* function exit code */
@@ -1643,7 +1684,7 @@ static PyObject *__pyx_pf_4core_4aabb_4AABB_4AABB_2intersects(struct __pyx_obj_4
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("intersects", 0);
 
-  /* "core/aabb/AABB.pyx":16
+  /* "core/aabb/AABB.pyx":19
  * 
  *     def intersects(self, AABB other):
  *         return api_core.godot_aabb_intersects(&self._native, &other._native)             # <<<<<<<<<<<<<<
@@ -1651,13 +1692,13 @@ static PyObject *__pyx_pf_4core_4aabb_4AABB_4AABB_2intersects(struct __pyx_obj_4
  *     def get_position(self):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_PyBool_FromLong(api_core->godot_aabb_intersects((&__pyx_v_self->_native), (&__pyx_v_other->_native))); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 16, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyBool_FromLong(api_core->godot_aabb_intersects((&__pyx_v_self->_native), (&__pyx_v_other->_native))); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 19, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "core/aabb/AABB.pyx":15
+  /* "core/aabb/AABB.pyx":18
  *             #api_core.godot_aabb_new(&self._native, &v._native, &v2._native)
  * 
  *     def intersects(self, AABB other):             # <<<<<<<<<<<<<<
@@ -1676,7 +1717,7 @@ static PyObject *__pyx_pf_4core_4aabb_4AABB_4AABB_2intersects(struct __pyx_obj_4
   return __pyx_r;
 }
 
-/* "core/aabb/AABB.pyx":18
+/* "core/aabb/AABB.pyx":21
  *         return api_core.godot_aabb_intersects(&self._native, &other._native)
  * 
  *     def get_position(self):             # <<<<<<<<<<<<<<
@@ -1706,7 +1747,7 @@ static PyObject *__pyx_pf_4core_4aabb_4AABB_4AABB_4get_position(struct __pyx_obj
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("get_position", 0);
 
-  /* "core/aabb/AABB.pyx":19
+  /* "core/aabb/AABB.pyx":22
  * 
  *     def get_position(self):
  *         return Vector3. new_static(api_core.godot_aabb_get_position(&self._native))             # <<<<<<<<<<<<<<
@@ -1714,13 +1755,13 @@ static PyObject *__pyx_pf_4core_4aabb_4AABB_4AABB_4get_position(struct __pyx_obj
  *     def set_position(self, Vector3 v):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = ((PyObject *)__pyx_f_4core_7vector3_7Vector3_7Vector3_new_static(api_core->godot_aabb_get_position((&__pyx_v_self->_native)))); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 19, __pyx_L1_error)
+  __pyx_t_1 = ((PyObject *)__pyx_f_4core_7vector3_7Vector3_7Vector3_new_static(api_core->godot_aabb_get_position((&__pyx_v_self->_native)))); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 22, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "core/aabb/AABB.pyx":18
+  /* "core/aabb/AABB.pyx":21
  *         return api_core.godot_aabb_intersects(&self._native, &other._native)
  * 
  *     def get_position(self):             # <<<<<<<<<<<<<<
@@ -1739,7 +1780,7 @@ static PyObject *__pyx_pf_4core_4aabb_4AABB_4AABB_4get_position(struct __pyx_obj
   return __pyx_r;
 }
 
-/* "core/aabb/AABB.pyx":21
+/* "core/aabb/AABB.pyx":24
  *         return Vector3. new_static(api_core.godot_aabb_get_position(&self._native))
  * 
  *     def set_position(self, Vector3 v):             # <<<<<<<<<<<<<<
@@ -1756,7 +1797,7 @@ static PyObject *__pyx_pw_4core_4aabb_4AABB_4AABB_7set_position(PyObject *__pyx_
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("set_position (wrapper)", 0);
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_v), __pyx_ptype_4core_7vector3_7Vector3_Vector3, 1, "v", 0))) __PYX_ERR(1, 21, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_v), __pyx_ptype_4core_7vector3_7Vector3_Vector3, 1, "v", 0))) __PYX_ERR(1, 24, __pyx_L1_error)
   __pyx_r = __pyx_pf_4core_4aabb_4AABB_4AABB_6set_position(((struct __pyx_obj_4core_4aabb_4AABB_AABB *)__pyx_v_self), ((struct __pyx_obj_4core_7vector3_7Vector3_Vector3 *)__pyx_v_v));
 
   /* function exit code */
@@ -1773,7 +1814,7 @@ static PyObject *__pyx_pf_4core_4aabb_4AABB_4AABB_6set_position(struct __pyx_obj
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("set_position", 0);
 
-  /* "core/aabb/AABB.pyx":22
+  /* "core/aabb/AABB.pyx":25
  * 
  *     def set_position(self, Vector3 v):
  *         api_core.godot_aabb_set_position(&self._native, &v._native)             # <<<<<<<<<<<<<<
@@ -1782,7 +1823,7 @@ static PyObject *__pyx_pf_4core_4aabb_4AABB_4AABB_6set_position(struct __pyx_obj
  */
   api_core->godot_aabb_set_position((&__pyx_v_self->_native), (&__pyx_v_v->_native));
 
-  /* "core/aabb/AABB.pyx":21
+  /* "core/aabb/AABB.pyx":24
  *         return Vector3. new_static(api_core.godot_aabb_get_position(&self._native))
  * 
  *     def set_position(self, Vector3 v):             # <<<<<<<<<<<<<<
@@ -1797,7 +1838,7 @@ static PyObject *__pyx_pf_4core_4aabb_4AABB_4AABB_6set_position(struct __pyx_obj
   return __pyx_r;
 }
 
-/* "core/aabb/AABB.pyx":24
+/* "core/aabb/AABB.pyx":27
  *         api_core.godot_aabb_set_position(&self._native, &v._native)
  * 
  *     def get_size(self):             # <<<<<<<<<<<<<<
@@ -1827,7 +1868,7 @@ static PyObject *__pyx_pf_4core_4aabb_4AABB_4AABB_8get_size(struct __pyx_obj_4co
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("get_size", 0);
 
-  /* "core/aabb/AABB.pyx":25
+  /* "core/aabb/AABB.pyx":28
  * 
  *     def get_size(self):
  *         return Vector3. new_static(api_core.godot_aabb_get_size(&self._native))             # <<<<<<<<<<<<<<
@@ -1835,13 +1876,13 @@ static PyObject *__pyx_pf_4core_4aabb_4AABB_4AABB_8get_size(struct __pyx_obj_4co
  *         api_core.godot_aabb_set_size(&self._native,&v._native)
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = ((PyObject *)__pyx_f_4core_7vector3_7Vector3_7Vector3_new_static(api_core->godot_aabb_get_size((&__pyx_v_self->_native)))); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 25, __pyx_L1_error)
+  __pyx_t_1 = ((PyObject *)__pyx_f_4core_7vector3_7Vector3_7Vector3_new_static(api_core->godot_aabb_get_size((&__pyx_v_self->_native)))); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 28, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "core/aabb/AABB.pyx":24
+  /* "core/aabb/AABB.pyx":27
  *         api_core.godot_aabb_set_position(&self._native, &v._native)
  * 
  *     def get_size(self):             # <<<<<<<<<<<<<<
@@ -1860,7 +1901,7 @@ static PyObject *__pyx_pf_4core_4aabb_4AABB_4AABB_8get_size(struct __pyx_obj_4co
   return __pyx_r;
 }
 
-/* "core/aabb/AABB.pyx":26
+/* "core/aabb/AABB.pyx":29
  *     def get_size(self):
  *         return Vector3. new_static(api_core.godot_aabb_get_size(&self._native))
  *     def set_size(self, Vector3 v):             # <<<<<<<<<<<<<<
@@ -1877,7 +1918,7 @@ static PyObject *__pyx_pw_4core_4aabb_4AABB_4AABB_11set_size(PyObject *__pyx_v_s
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("set_size (wrapper)", 0);
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_v), __pyx_ptype_4core_7vector3_7Vector3_Vector3, 1, "v", 0))) __PYX_ERR(1, 26, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_v), __pyx_ptype_4core_7vector3_7Vector3_Vector3, 1, "v", 0))) __PYX_ERR(1, 29, __pyx_L1_error)
   __pyx_r = __pyx_pf_4core_4aabb_4AABB_4AABB_10set_size(((struct __pyx_obj_4core_4aabb_4AABB_AABB *)__pyx_v_self), ((struct __pyx_obj_4core_7vector3_7Vector3_Vector3 *)__pyx_v_v));
 
   /* function exit code */
@@ -1894,7 +1935,7 @@ static PyObject *__pyx_pf_4core_4aabb_4AABB_4AABB_10set_size(struct __pyx_obj_4c
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("set_size", 0);
 
-  /* "core/aabb/AABB.pyx":27
+  /* "core/aabb/AABB.pyx":30
  *         return Vector3. new_static(api_core.godot_aabb_get_size(&self._native))
  *     def set_size(self, Vector3 v):
  *         api_core.godot_aabb_set_size(&self._native,&v._native)             # <<<<<<<<<<<<<<
@@ -1903,7 +1944,7 @@ static PyObject *__pyx_pf_4core_4aabb_4AABB_4AABB_10set_size(struct __pyx_obj_4c
  */
   api_core->godot_aabb_set_size((&__pyx_v_self->_native), (&__pyx_v_v->_native));
 
-  /* "core/aabb/AABB.pyx":26
+  /* "core/aabb/AABB.pyx":29
  *     def get_size(self):
  *         return Vector3. new_static(api_core.godot_aabb_get_size(&self._native))
  *     def set_size(self, Vector3 v):             # <<<<<<<<<<<<<<
@@ -1918,7 +1959,7 @@ static PyObject *__pyx_pf_4core_4aabb_4AABB_4AABB_10set_size(struct __pyx_obj_4c
   return __pyx_r;
 }
 
-/* "core/aabb/AABB.pyx":29
+/* "core/aabb/AABB.pyx":32
  *         api_core.godot_aabb_set_size(&self._native,&v._native)
  * 
  *     def as_string(self):             # <<<<<<<<<<<<<<
@@ -1948,7 +1989,7 @@ static PyObject *__pyx_pf_4core_4aabb_4AABB_4AABB_12as_string(struct __pyx_obj_4
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("as_string", 0);
 
-  /* "core/aabb/AABB.pyx":30
+  /* "core/aabb/AABB.pyx":33
  * 
  *     def as_string(self):
  *         return api_core.godot_aabb_as_string(&self._native)             # <<<<<<<<<<<<<<
@@ -1956,13 +1997,13 @@ static PyObject *__pyx_pf_4core_4aabb_4AABB_4AABB_12as_string(struct __pyx_obj_4
  *     def get_area(self):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __pyx_convert__to_py_godot_string(api_core->godot_aabb_as_string((&__pyx_v_self->_native))); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 30, __pyx_L1_error)
+  __pyx_t_1 = __pyx_convert__to_py_godot_string(api_core->godot_aabb_as_string((&__pyx_v_self->_native))); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 33, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "core/aabb/AABB.pyx":29
+  /* "core/aabb/AABB.pyx":32
  *         api_core.godot_aabb_set_size(&self._native,&v._native)
  * 
  *     def as_string(self):             # <<<<<<<<<<<<<<
@@ -1981,7 +2022,7 @@ static PyObject *__pyx_pf_4core_4aabb_4AABB_4AABB_12as_string(struct __pyx_obj_4
   return __pyx_r;
 }
 
-/* "core/aabb/AABB.pyx":32
+/* "core/aabb/AABB.pyx":35
  *         return api_core.godot_aabb_as_string(&self._native)
  * 
  *     def get_area(self):             # <<<<<<<<<<<<<<
@@ -2011,7 +2052,7 @@ static PyObject *__pyx_pf_4core_4aabb_4AABB_4AABB_14get_area(struct __pyx_obj_4c
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("get_area", 0);
 
-  /* "core/aabb/AABB.pyx":33
+  /* "core/aabb/AABB.pyx":36
  * 
  *     def get_area(self):
  *         return api_core.godot_aabb_get_area(&self._native)             # <<<<<<<<<<<<<<
@@ -2019,13 +2060,13 @@ static PyObject *__pyx_pf_4core_4aabb_4AABB_4AABB_14get_area(struct __pyx_obj_4c
  *         return api_core.godot_aabb_has_no_area(&self._native)
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = PyFloat_FromDouble(api_core->godot_aabb_get_area((&__pyx_v_self->_native))); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 33, __pyx_L1_error)
+  __pyx_t_1 = PyFloat_FromDouble(api_core->godot_aabb_get_area((&__pyx_v_self->_native))); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 36, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "core/aabb/AABB.pyx":32
+  /* "core/aabb/AABB.pyx":35
  *         return api_core.godot_aabb_as_string(&self._native)
  * 
  *     def get_area(self):             # <<<<<<<<<<<<<<
@@ -2044,7 +2085,7 @@ static PyObject *__pyx_pf_4core_4aabb_4AABB_4AABB_14get_area(struct __pyx_obj_4c
   return __pyx_r;
 }
 
-/* "core/aabb/AABB.pyx":34
+/* "core/aabb/AABB.pyx":37
  *     def get_area(self):
  *         return api_core.godot_aabb_get_area(&self._native)
  *     def has_no_area(self):             # <<<<<<<<<<<<<<
@@ -2074,7 +2115,7 @@ static PyObject *__pyx_pf_4core_4aabb_4AABB_4AABB_16has_no_area(struct __pyx_obj
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("has_no_area", 0);
 
-  /* "core/aabb/AABB.pyx":35
+  /* "core/aabb/AABB.pyx":38
  *         return api_core.godot_aabb_get_area(&self._native)
  *     def has_no_area(self):
  *         return api_core.godot_aabb_has_no_area(&self._native)             # <<<<<<<<<<<<<<
@@ -2082,13 +2123,13 @@ static PyObject *__pyx_pf_4core_4aabb_4AABB_4AABB_16has_no_area(struct __pyx_obj
  *     def has_no_surface(self):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_PyBool_FromLong(api_core->godot_aabb_has_no_area((&__pyx_v_self->_native))); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 35, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyBool_FromLong(api_core->godot_aabb_has_no_area((&__pyx_v_self->_native))); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 38, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "core/aabb/AABB.pyx":34
+  /* "core/aabb/AABB.pyx":37
  *     def get_area(self):
  *         return api_core.godot_aabb_get_area(&self._native)
  *     def has_no_area(self):             # <<<<<<<<<<<<<<
@@ -2107,7 +2148,7 @@ static PyObject *__pyx_pf_4core_4aabb_4AABB_4AABB_16has_no_area(struct __pyx_obj
   return __pyx_r;
 }
 
-/* "core/aabb/AABB.pyx":37
+/* "core/aabb/AABB.pyx":40
  *         return api_core.godot_aabb_has_no_area(&self._native)
  * 
  *     def has_no_surface(self):             # <<<<<<<<<<<<<<
@@ -2137,7 +2178,7 @@ static PyObject *__pyx_pf_4core_4aabb_4AABB_4AABB_18has_no_surface(struct __pyx_
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("has_no_surface", 0);
 
-  /* "core/aabb/AABB.pyx":38
+  /* "core/aabb/AABB.pyx":41
  * 
  *     def has_no_surface(self):
  *         return api_core.godot_aabb_has_no_surface(&self._native)             # <<<<<<<<<<<<<<
@@ -2145,13 +2186,13 @@ static PyObject *__pyx_pf_4core_4aabb_4AABB_4AABB_18has_no_surface(struct __pyx_
  *     def intersects(self, AABB other):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_PyBool_FromLong(api_core->godot_aabb_has_no_surface((&__pyx_v_self->_native))); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 38, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyBool_FromLong(api_core->godot_aabb_has_no_surface((&__pyx_v_self->_native))); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 41, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "core/aabb/AABB.pyx":37
+  /* "core/aabb/AABB.pyx":40
  *         return api_core.godot_aabb_has_no_area(&self._native)
  * 
  *     def has_no_surface(self):             # <<<<<<<<<<<<<<
@@ -2170,7 +2211,7 @@ static PyObject *__pyx_pf_4core_4aabb_4AABB_4AABB_18has_no_surface(struct __pyx_
   return __pyx_r;
 }
 
-/* "core/aabb/AABB.pyx":40
+/* "core/aabb/AABB.pyx":43
  *         return api_core.godot_aabb_has_no_surface(&self._native)
  * 
  *     def intersects(self, AABB other):             # <<<<<<<<<<<<<<
@@ -2187,7 +2228,7 @@ static PyObject *__pyx_pw_4core_4aabb_4AABB_4AABB_21intersects(PyObject *__pyx_v
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("intersects (wrapper)", 0);
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_other), __pyx_ptype_4core_4aabb_4AABB_AABB, 1, "other", 0))) __PYX_ERR(1, 40, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_other), __pyx_ptype_4core_4aabb_4AABB_AABB, 1, "other", 0))) __PYX_ERR(1, 43, __pyx_L1_error)
   __pyx_r = __pyx_pf_4core_4aabb_4AABB_4AABB_20intersects(((struct __pyx_obj_4core_4aabb_4AABB_AABB *)__pyx_v_self), ((struct __pyx_obj_4core_4aabb_4AABB_AABB *)__pyx_v_other));
 
   /* function exit code */
@@ -2208,7 +2249,7 @@ static PyObject *__pyx_pf_4core_4aabb_4AABB_4AABB_20intersects(struct __pyx_obj_
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("intersects", 0);
 
-  /* "core/aabb/AABB.pyx":41
+  /* "core/aabb/AABB.pyx":44
  * 
  *     def intersects(self, AABB other):
  *         return api_core.godot_aabb_intersects(&self._native, &other._native)             # <<<<<<<<<<<<<<
@@ -2216,13 +2257,13 @@ static PyObject *__pyx_pf_4core_4aabb_4AABB_4AABB_20intersects(struct __pyx_obj_
  *     def encloses(self,  AABB with_):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_PyBool_FromLong(api_core->godot_aabb_intersects((&__pyx_v_self->_native), (&__pyx_v_other->_native))); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 41, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyBool_FromLong(api_core->godot_aabb_intersects((&__pyx_v_self->_native), (&__pyx_v_other->_native))); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 44, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "core/aabb/AABB.pyx":40
+  /* "core/aabb/AABB.pyx":43
  *         return api_core.godot_aabb_has_no_surface(&self._native)
  * 
  *     def intersects(self, AABB other):             # <<<<<<<<<<<<<<
@@ -2241,7 +2282,7 @@ static PyObject *__pyx_pf_4core_4aabb_4AABB_4AABB_20intersects(struct __pyx_obj_
   return __pyx_r;
 }
 
-/* "core/aabb/AABB.pyx":43
+/* "core/aabb/AABB.pyx":46
  *         return api_core.godot_aabb_intersects(&self._native, &other._native)
  * 
  *     def encloses(self,  AABB with_):             # <<<<<<<<<<<<<<
@@ -2258,7 +2299,7 @@ static PyObject *__pyx_pw_4core_4aabb_4AABB_4AABB_23encloses(PyObject *__pyx_v_s
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("encloses (wrapper)", 0);
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_with_), __pyx_ptype_4core_4aabb_4AABB_AABB, 1, "with_", 0))) __PYX_ERR(1, 43, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_with_), __pyx_ptype_4core_4aabb_4AABB_AABB, 1, "with_", 0))) __PYX_ERR(1, 46, __pyx_L1_error)
   __pyx_r = __pyx_pf_4core_4aabb_4AABB_4AABB_22encloses(((struct __pyx_obj_4core_4aabb_4AABB_AABB *)__pyx_v_self), ((struct __pyx_obj_4core_4aabb_4AABB_AABB *)__pyx_v_with_));
 
   /* function exit code */
@@ -2279,7 +2320,7 @@ static PyObject *__pyx_pf_4core_4aabb_4AABB_4AABB_22encloses(struct __pyx_obj_4c
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("encloses", 0);
 
-  /* "core/aabb/AABB.pyx":44
+  /* "core/aabb/AABB.pyx":47
  * 
  *     def encloses(self,  AABB with_):
  *         return api_core.godot_aabb_encloses(&self._native, &with_._native)             # <<<<<<<<<<<<<<
@@ -2287,13 +2328,13 @@ static PyObject *__pyx_pf_4core_4aabb_4AABB_4AABB_22encloses(struct __pyx_obj_4c
  *     def merge(self, AABB with_):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_PyBool_FromLong(api_core->godot_aabb_encloses((&__pyx_v_self->_native), (&__pyx_v_with_->_native))); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 44, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyBool_FromLong(api_core->godot_aabb_encloses((&__pyx_v_self->_native), (&__pyx_v_with_->_native))); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 47, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "core/aabb/AABB.pyx":43
+  /* "core/aabb/AABB.pyx":46
  *         return api_core.godot_aabb_intersects(&self._native, &other._native)
  * 
  *     def encloses(self,  AABB with_):             # <<<<<<<<<<<<<<
@@ -2312,7 +2353,7 @@ static PyObject *__pyx_pf_4core_4aabb_4AABB_4AABB_22encloses(struct __pyx_obj_4c
   return __pyx_r;
 }
 
-/* "core/aabb/AABB.pyx":46
+/* "core/aabb/AABB.pyx":49
  *         return api_core.godot_aabb_encloses(&self._native, &with_._native)
  * 
  *     def merge(self, AABB with_):             # <<<<<<<<<<<<<<
@@ -2329,7 +2370,7 @@ static PyObject *__pyx_pw_4core_4aabb_4AABB_4AABB_25merge(PyObject *__pyx_v_self
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("merge (wrapper)", 0);
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_with_), __pyx_ptype_4core_4aabb_4AABB_AABB, 1, "with_", 0))) __PYX_ERR(1, 46, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_with_), __pyx_ptype_4core_4aabb_4AABB_AABB, 1, "with_", 0))) __PYX_ERR(1, 49, __pyx_L1_error)
   __pyx_r = __pyx_pf_4core_4aabb_4AABB_4AABB_24merge(((struct __pyx_obj_4core_4aabb_4AABB_AABB *)__pyx_v_self), ((struct __pyx_obj_4core_4aabb_4AABB_AABB *)__pyx_v_with_));
 
   /* function exit code */
@@ -2350,7 +2391,7 @@ static PyObject *__pyx_pf_4core_4aabb_4AABB_4AABB_24merge(struct __pyx_obj_4core
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("merge", 0);
 
-  /* "core/aabb/AABB.pyx":47
+  /* "core/aabb/AABB.pyx":50
  * 
  *     def merge(self, AABB with_):
  *         return AABB. new_static(api_core.godot_aabb_merge(&self._native, &with_._native))             # <<<<<<<<<<<<<<
@@ -2358,13 +2399,13 @@ static PyObject *__pyx_pf_4core_4aabb_4AABB_4AABB_24merge(struct __pyx_obj_4core
  *     def intersection(self, AABB with_):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_void_to_None(__pyx_f_4core_4aabb_4AABB_4AABB_new_static(api_core->godot_aabb_merge((&__pyx_v_self->_native), (&__pyx_v_with_->_native)))); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 47, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_void_to_None(__pyx_f_4core_4aabb_4AABB_4AABB_new_static(api_core->godot_aabb_merge((&__pyx_v_self->_native), (&__pyx_v_with_->_native)))); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 50, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "core/aabb/AABB.pyx":46
+  /* "core/aabb/AABB.pyx":49
  *         return api_core.godot_aabb_encloses(&self._native, &with_._native)
  * 
  *     def merge(self, AABB with_):             # <<<<<<<<<<<<<<
@@ -2383,7 +2424,7 @@ static PyObject *__pyx_pf_4core_4aabb_4AABB_4AABB_24merge(struct __pyx_obj_4core
   return __pyx_r;
 }
 
-/* "core/aabb/AABB.pyx":49
+/* "core/aabb/AABB.pyx":52
  *         return AABB. new_static(api_core.godot_aabb_merge(&self._native, &with_._native))
  * 
  *     def intersection(self, AABB with_):             # <<<<<<<<<<<<<<
@@ -2400,7 +2441,7 @@ static PyObject *__pyx_pw_4core_4aabb_4AABB_4AABB_27intersection(PyObject *__pyx
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("intersection (wrapper)", 0);
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_with_), __pyx_ptype_4core_4aabb_4AABB_AABB, 1, "with_", 0))) __PYX_ERR(1, 49, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_with_), __pyx_ptype_4core_4aabb_4AABB_AABB, 1, "with_", 0))) __PYX_ERR(1, 52, __pyx_L1_error)
   __pyx_r = __pyx_pf_4core_4aabb_4AABB_4AABB_26intersection(((struct __pyx_obj_4core_4aabb_4AABB_AABB *)__pyx_v_self), ((struct __pyx_obj_4core_4aabb_4AABB_AABB *)__pyx_v_with_));
 
   /* function exit code */
@@ -2421,7 +2462,7 @@ static PyObject *__pyx_pf_4core_4aabb_4AABB_4AABB_26intersection(struct __pyx_ob
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("intersection", 0);
 
-  /* "core/aabb/AABB.pyx":50
+  /* "core/aabb/AABB.pyx":53
  * 
  *     def intersection(self, AABB with_):
  *         return AABB. new_static(api_core.godot_aabb_intersection(&self._native, &with_._native))             # <<<<<<<<<<<<<<
@@ -2429,13 +2470,13 @@ static PyObject *__pyx_pf_4core_4aabb_4AABB_4AABB_26intersection(struct __pyx_ob
  *     def intersects_plane(self, Plane plane):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_void_to_None(__pyx_f_4core_4aabb_4AABB_4AABB_new_static(api_core->godot_aabb_intersection((&__pyx_v_self->_native), (&__pyx_v_with_->_native)))); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 50, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_void_to_None(__pyx_f_4core_4aabb_4AABB_4AABB_new_static(api_core->godot_aabb_intersection((&__pyx_v_self->_native), (&__pyx_v_with_->_native)))); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 53, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "core/aabb/AABB.pyx":49
+  /* "core/aabb/AABB.pyx":52
  *         return AABB. new_static(api_core.godot_aabb_merge(&self._native, &with_._native))
  * 
  *     def intersection(self, AABB with_):             # <<<<<<<<<<<<<<
@@ -2454,7 +2495,7 @@ static PyObject *__pyx_pf_4core_4aabb_4AABB_4AABB_26intersection(struct __pyx_ob
   return __pyx_r;
 }
 
-/* "core/aabb/AABB.pyx":52
+/* "core/aabb/AABB.pyx":55
  *         return AABB. new_static(api_core.godot_aabb_intersection(&self._native, &with_._native))
  * 
  *     def intersects_plane(self, Plane plane):             # <<<<<<<<<<<<<<
@@ -2471,7 +2512,7 @@ static PyObject *__pyx_pw_4core_4aabb_4AABB_4AABB_29intersects_plane(PyObject *_
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("intersects_plane (wrapper)", 0);
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_plane), __pyx_ptype_4core_5plane_5Plane_Plane, 1, "plane", 0))) __PYX_ERR(1, 52, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_plane), __pyx_ptype_4core_5plane_5Plane_Plane, 1, "plane", 0))) __PYX_ERR(1, 55, __pyx_L1_error)
   __pyx_r = __pyx_pf_4core_4aabb_4AABB_4AABB_28intersects_plane(((struct __pyx_obj_4core_4aabb_4AABB_AABB *)__pyx_v_self), ((struct __pyx_obj_4core_5plane_5Plane_Plane *)__pyx_v_plane));
 
   /* function exit code */
@@ -2492,7 +2533,7 @@ static PyObject *__pyx_pf_4core_4aabb_4AABB_4AABB_28intersects_plane(struct __py
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("intersects_plane", 0);
 
-  /* "core/aabb/AABB.pyx":53
+  /* "core/aabb/AABB.pyx":56
  * 
  *     def intersects_plane(self, Plane plane):
  *         return api_core.godot_aabb_intersects_plane(&self._native, &plane._native)             # <<<<<<<<<<<<<<
@@ -2500,13 +2541,13 @@ static PyObject *__pyx_pf_4core_4aabb_4AABB_4AABB_28intersects_plane(struct __py
  *     def intersects_segment(self, Vector3 from_, Vector3 to):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_PyBool_FromLong(api_core->godot_aabb_intersects_plane((&__pyx_v_self->_native), (&__pyx_v_plane->_native))); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 53, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyBool_FromLong(api_core->godot_aabb_intersects_plane((&__pyx_v_self->_native), (&__pyx_v_plane->_native))); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 56, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "core/aabb/AABB.pyx":52
+  /* "core/aabb/AABB.pyx":55
  *         return AABB. new_static(api_core.godot_aabb_intersection(&self._native, &with_._native))
  * 
  *     def intersects_plane(self, Plane plane):             # <<<<<<<<<<<<<<
@@ -2525,7 +2566,7 @@ static PyObject *__pyx_pf_4core_4aabb_4AABB_4AABB_28intersects_plane(struct __py
   return __pyx_r;
 }
 
-/* "core/aabb/AABB.pyx":55
+/* "core/aabb/AABB.pyx":58
  *         return api_core.godot_aabb_intersects_plane(&self._native, &plane._native)
  * 
  *     def intersects_segment(self, Vector3 from_, Vector3 to):             # <<<<<<<<<<<<<<
@@ -2567,11 +2608,11 @@ static PyObject *__pyx_pw_4core_4aabb_4AABB_4AABB_31intersects_segment(PyObject 
         case  1:
         if (likely((values[1] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_to)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("intersects_segment", 1, 2, 2, 1); __PYX_ERR(1, 55, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("intersects_segment", 1, 2, 2, 1); __PYX_ERR(1, 58, __pyx_L3_error)
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "intersects_segment") < 0)) __PYX_ERR(1, 55, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "intersects_segment") < 0)) __PYX_ERR(1, 58, __pyx_L3_error)
       }
     } else if (PyTuple_GET_SIZE(__pyx_args) != 2) {
       goto __pyx_L5_argtuple_error;
@@ -2584,14 +2625,14 @@ static PyObject *__pyx_pw_4core_4aabb_4AABB_4AABB_31intersects_segment(PyObject 
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("intersects_segment", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(1, 55, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("intersects_segment", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(1, 58, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("core.aabb.AABB.AABB.intersects_segment", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_from_), __pyx_ptype_4core_7vector3_7Vector3_Vector3, 1, "from_", 0))) __PYX_ERR(1, 55, __pyx_L1_error)
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_to), __pyx_ptype_4core_7vector3_7Vector3_Vector3, 1, "to", 0))) __PYX_ERR(1, 55, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_from_), __pyx_ptype_4core_7vector3_7Vector3_Vector3, 1, "from_", 0))) __PYX_ERR(1, 58, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_to), __pyx_ptype_4core_7vector3_7Vector3_Vector3, 1, "to", 0))) __PYX_ERR(1, 58, __pyx_L1_error)
   __pyx_r = __pyx_pf_4core_4aabb_4AABB_4AABB_30intersects_segment(((struct __pyx_obj_4core_4aabb_4AABB_AABB *)__pyx_v_self), __pyx_v_from_, __pyx_v_to);
 
   /* function exit code */
@@ -2612,7 +2653,7 @@ static PyObject *__pyx_pf_4core_4aabb_4AABB_4AABB_30intersects_segment(struct __
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("intersects_segment", 0);
 
-  /* "core/aabb/AABB.pyx":56
+  /* "core/aabb/AABB.pyx":59
  * 
  *     def intersects_segment(self, Vector3 from_, Vector3 to):
  *         return api_core.godot_aabb_intersects_segment(&self._native, &from_._native, &to._native)             # <<<<<<<<<<<<<<
@@ -2620,13 +2661,13 @@ static PyObject *__pyx_pf_4core_4aabb_4AABB_4AABB_30intersects_segment(struct __
  *     def has_point(self, Vector3 point):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_PyBool_FromLong(api_core->godot_aabb_intersects_segment((&__pyx_v_self->_native), (&__pyx_v_from_->_native), (&__pyx_v_to->_native))); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 56, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyBool_FromLong(api_core->godot_aabb_intersects_segment((&__pyx_v_self->_native), (&__pyx_v_from_->_native), (&__pyx_v_to->_native))); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 59, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "core/aabb/AABB.pyx":55
+  /* "core/aabb/AABB.pyx":58
  *         return api_core.godot_aabb_intersects_plane(&self._native, &plane._native)
  * 
  *     def intersects_segment(self, Vector3 from_, Vector3 to):             # <<<<<<<<<<<<<<
@@ -2645,7 +2686,7 @@ static PyObject *__pyx_pf_4core_4aabb_4AABB_4AABB_30intersects_segment(struct __
   return __pyx_r;
 }
 
-/* "core/aabb/AABB.pyx":58
+/* "core/aabb/AABB.pyx":61
  *         return api_core.godot_aabb_intersects_segment(&self._native, &from_._native, &to._native)
  * 
  *     def has_point(self, Vector3 point):             # <<<<<<<<<<<<<<
@@ -2662,7 +2703,7 @@ static PyObject *__pyx_pw_4core_4aabb_4AABB_4AABB_33has_point(PyObject *__pyx_v_
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("has_point (wrapper)", 0);
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_point), __pyx_ptype_4core_7vector3_7Vector3_Vector3, 1, "point", 0))) __PYX_ERR(1, 58, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_point), __pyx_ptype_4core_7vector3_7Vector3_Vector3, 1, "point", 0))) __PYX_ERR(1, 61, __pyx_L1_error)
   __pyx_r = __pyx_pf_4core_4aabb_4AABB_4AABB_32has_point(((struct __pyx_obj_4core_4aabb_4AABB_AABB *)__pyx_v_self), ((struct __pyx_obj_4core_7vector3_7Vector3_Vector3 *)__pyx_v_point));
 
   /* function exit code */
@@ -2683,7 +2724,7 @@ static PyObject *__pyx_pf_4core_4aabb_4AABB_4AABB_32has_point(struct __pyx_obj_4
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("has_point", 0);
 
-  /* "core/aabb/AABB.pyx":59
+  /* "core/aabb/AABB.pyx":62
  * 
  *     def has_point(self, Vector3 point):
  *         return api_core.godot_aabb_has_point(&self._native, &point._native)             # <<<<<<<<<<<<<<
@@ -2691,13 +2732,13 @@ static PyObject *__pyx_pf_4core_4aabb_4AABB_4AABB_32has_point(struct __pyx_obj_4
  *     def get_support(self, Vector3 dir):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_PyBool_FromLong(api_core->godot_aabb_has_point((&__pyx_v_self->_native), (&__pyx_v_point->_native))); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 59, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyBool_FromLong(api_core->godot_aabb_has_point((&__pyx_v_self->_native), (&__pyx_v_point->_native))); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 62, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "core/aabb/AABB.pyx":58
+  /* "core/aabb/AABB.pyx":61
  *         return api_core.godot_aabb_intersects_segment(&self._native, &from_._native, &to._native)
  * 
  *     def has_point(self, Vector3 point):             # <<<<<<<<<<<<<<
@@ -2716,7 +2757,7 @@ static PyObject *__pyx_pf_4core_4aabb_4AABB_4AABB_32has_point(struct __pyx_obj_4
   return __pyx_r;
 }
 
-/* "core/aabb/AABB.pyx":61
+/* "core/aabb/AABB.pyx":64
  *         return api_core.godot_aabb_has_point(&self._native, &point._native)
  * 
  *     def get_support(self, Vector3 dir):             # <<<<<<<<<<<<<<
@@ -2733,7 +2774,7 @@ static PyObject *__pyx_pw_4core_4aabb_4AABB_4AABB_35get_support(PyObject *__pyx_
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("get_support (wrapper)", 0);
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_dir), __pyx_ptype_4core_7vector3_7Vector3_Vector3, 1, "dir", 0))) __PYX_ERR(1, 61, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_dir), __pyx_ptype_4core_7vector3_7Vector3_Vector3, 1, "dir", 0))) __PYX_ERR(1, 64, __pyx_L1_error)
   __pyx_r = __pyx_pf_4core_4aabb_4AABB_4AABB_34get_support(((struct __pyx_obj_4core_4aabb_4AABB_AABB *)__pyx_v_self), ((struct __pyx_obj_4core_7vector3_7Vector3_Vector3 *)__pyx_v_dir));
 
   /* function exit code */
@@ -2754,7 +2795,7 @@ static PyObject *__pyx_pf_4core_4aabb_4AABB_4AABB_34get_support(struct __pyx_obj
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("get_support", 0);
 
-  /* "core/aabb/AABB.pyx":62
+  /* "core/aabb/AABB.pyx":65
  * 
  *     def get_support(self, Vector3 dir):
  *         return Vector3. new_static(api_core.godot_aabb_get_support(&self._native, &dir._native))             # <<<<<<<<<<<<<<
@@ -2762,13 +2803,13 @@ static PyObject *__pyx_pf_4core_4aabb_4AABB_4AABB_34get_support(struct __pyx_obj
  *     def get_longest_axis(self):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = ((PyObject *)__pyx_f_4core_7vector3_7Vector3_7Vector3_new_static(api_core->godot_aabb_get_support((&__pyx_v_self->_native), (&__pyx_v_dir->_native)))); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 62, __pyx_L1_error)
+  __pyx_t_1 = ((PyObject *)__pyx_f_4core_7vector3_7Vector3_7Vector3_new_static(api_core->godot_aabb_get_support((&__pyx_v_self->_native), (&__pyx_v_dir->_native)))); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 65, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "core/aabb/AABB.pyx":61
+  /* "core/aabb/AABB.pyx":64
  *         return api_core.godot_aabb_has_point(&self._native, &point._native)
  * 
  *     def get_support(self, Vector3 dir):             # <<<<<<<<<<<<<<
@@ -2787,7 +2828,7 @@ static PyObject *__pyx_pf_4core_4aabb_4AABB_4AABB_34get_support(struct __pyx_obj
   return __pyx_r;
 }
 
-/* "core/aabb/AABB.pyx":64
+/* "core/aabb/AABB.pyx":67
  *         return Vector3. new_static(api_core.godot_aabb_get_support(&self._native, &dir._native))
  * 
  *     def get_longest_axis(self):             # <<<<<<<<<<<<<<
@@ -2817,7 +2858,7 @@ static PyObject *__pyx_pf_4core_4aabb_4AABB_4AABB_36get_longest_axis(struct __py
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("get_longest_axis", 0);
 
-  /* "core/aabb/AABB.pyx":65
+  /* "core/aabb/AABB.pyx":68
  * 
  *     def get_longest_axis(self):
  *         return Vector3. new_static(api_core.godot_aabb_get_longest_axis(&self._native))             # <<<<<<<<<<<<<<
@@ -2825,13 +2866,13 @@ static PyObject *__pyx_pf_4core_4aabb_4AABB_4AABB_36get_longest_axis(struct __py
  *     def get_longest_axis_index(self):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = ((PyObject *)__pyx_f_4core_7vector3_7Vector3_7Vector3_new_static(api_core->godot_aabb_get_longest_axis((&__pyx_v_self->_native)))); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 65, __pyx_L1_error)
+  __pyx_t_1 = ((PyObject *)__pyx_f_4core_7vector3_7Vector3_7Vector3_new_static(api_core->godot_aabb_get_longest_axis((&__pyx_v_self->_native)))); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 68, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "core/aabb/AABB.pyx":64
+  /* "core/aabb/AABB.pyx":67
  *         return Vector3. new_static(api_core.godot_aabb_get_support(&self._native, &dir._native))
  * 
  *     def get_longest_axis(self):             # <<<<<<<<<<<<<<
@@ -2850,7 +2891,7 @@ static PyObject *__pyx_pf_4core_4aabb_4AABB_4AABB_36get_longest_axis(struct __py
   return __pyx_r;
 }
 
-/* "core/aabb/AABB.pyx":67
+/* "core/aabb/AABB.pyx":70
  *         return Vector3. new_static(api_core.godot_aabb_get_longest_axis(&self._native))
  * 
  *     def get_longest_axis_index(self):             # <<<<<<<<<<<<<<
@@ -2880,7 +2921,7 @@ static PyObject *__pyx_pf_4core_4aabb_4AABB_4AABB_38get_longest_axis_index(struc
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("get_longest_axis_index", 0);
 
-  /* "core/aabb/AABB.pyx":68
+  /* "core/aabb/AABB.pyx":71
  * 
  *     def get_longest_axis_index(self):
  *         return api_core.godot_aabb_get_longest_axis_index(&self._native)             # <<<<<<<<<<<<<<
@@ -2888,13 +2929,13 @@ static PyObject *__pyx_pf_4core_4aabb_4AABB_4AABB_38get_longest_axis_index(struc
  *     def get_longest_axis_size(self):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_PyInt_From_godot_int(api_core->godot_aabb_get_longest_axis_index((&__pyx_v_self->_native))); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 68, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyInt_From_godot_int(api_core->godot_aabb_get_longest_axis_index((&__pyx_v_self->_native))); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 71, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "core/aabb/AABB.pyx":67
+  /* "core/aabb/AABB.pyx":70
  *         return Vector3. new_static(api_core.godot_aabb_get_longest_axis(&self._native))
  * 
  *     def get_longest_axis_index(self):             # <<<<<<<<<<<<<<
@@ -2913,7 +2954,7 @@ static PyObject *__pyx_pf_4core_4aabb_4AABB_4AABB_38get_longest_axis_index(struc
   return __pyx_r;
 }
 
-/* "core/aabb/AABB.pyx":70
+/* "core/aabb/AABB.pyx":73
  *         return api_core.godot_aabb_get_longest_axis_index(&self._native)
  * 
  *     def get_longest_axis_size(self):             # <<<<<<<<<<<<<<
@@ -2943,7 +2984,7 @@ static PyObject *__pyx_pf_4core_4aabb_4AABB_4AABB_40get_longest_axis_size(struct
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("get_longest_axis_size", 0);
 
-  /* "core/aabb/AABB.pyx":71
+  /* "core/aabb/AABB.pyx":74
  * 
  *     def get_longest_axis_size(self):
  *         return api_core.godot_aabb_get_longest_axis_size(&self._native)             # <<<<<<<<<<<<<<
@@ -2951,13 +2992,13 @@ static PyObject *__pyx_pf_4core_4aabb_4AABB_4AABB_40get_longest_axis_size(struct
  *     def get_shortest_axis(self):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = PyFloat_FromDouble(api_core->godot_aabb_get_longest_axis_size((&__pyx_v_self->_native))); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 71, __pyx_L1_error)
+  __pyx_t_1 = PyFloat_FromDouble(api_core->godot_aabb_get_longest_axis_size((&__pyx_v_self->_native))); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 74, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "core/aabb/AABB.pyx":70
+  /* "core/aabb/AABB.pyx":73
  *         return api_core.godot_aabb_get_longest_axis_index(&self._native)
  * 
  *     def get_longest_axis_size(self):             # <<<<<<<<<<<<<<
@@ -2976,7 +3017,7 @@ static PyObject *__pyx_pf_4core_4aabb_4AABB_4AABB_40get_longest_axis_size(struct
   return __pyx_r;
 }
 
-/* "core/aabb/AABB.pyx":73
+/* "core/aabb/AABB.pyx":76
  *         return api_core.godot_aabb_get_longest_axis_size(&self._native)
  * 
  *     def get_shortest_axis(self):             # <<<<<<<<<<<<<<
@@ -3006,7 +3047,7 @@ static PyObject *__pyx_pf_4core_4aabb_4AABB_4AABB_42get_shortest_axis(struct __p
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("get_shortest_axis", 0);
 
-  /* "core/aabb/AABB.pyx":74
+  /* "core/aabb/AABB.pyx":77
  * 
  *     def get_shortest_axis(self):
  *         return Vector3. new_static(api_core.godot_aabb_get_shortest_axis(&self._native))             # <<<<<<<<<<<<<<
@@ -3014,13 +3055,13 @@ static PyObject *__pyx_pf_4core_4aabb_4AABB_4AABB_42get_shortest_axis(struct __p
  *     def get_shortest_axis_index(self):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = ((PyObject *)__pyx_f_4core_7vector3_7Vector3_7Vector3_new_static(api_core->godot_aabb_get_shortest_axis((&__pyx_v_self->_native)))); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 74, __pyx_L1_error)
+  __pyx_t_1 = ((PyObject *)__pyx_f_4core_7vector3_7Vector3_7Vector3_new_static(api_core->godot_aabb_get_shortest_axis((&__pyx_v_self->_native)))); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 77, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "core/aabb/AABB.pyx":73
+  /* "core/aabb/AABB.pyx":76
  *         return api_core.godot_aabb_get_longest_axis_size(&self._native)
  * 
  *     def get_shortest_axis(self):             # <<<<<<<<<<<<<<
@@ -3039,7 +3080,7 @@ static PyObject *__pyx_pf_4core_4aabb_4AABB_4AABB_42get_shortest_axis(struct __p
   return __pyx_r;
 }
 
-/* "core/aabb/AABB.pyx":76
+/* "core/aabb/AABB.pyx":79
  *         return Vector3. new_static(api_core.godot_aabb_get_shortest_axis(&self._native))
  * 
  *     def get_shortest_axis_index(self):             # <<<<<<<<<<<<<<
@@ -3069,7 +3110,7 @@ static PyObject *__pyx_pf_4core_4aabb_4AABB_4AABB_44get_shortest_axis_index(stru
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("get_shortest_axis_index", 0);
 
-  /* "core/aabb/AABB.pyx":77
+  /* "core/aabb/AABB.pyx":80
  * 
  *     def get_shortest_axis_index(self):
  *         return api_core.godot_aabb_get_shortest_axis_index(&self._native)             # <<<<<<<<<<<<<<
@@ -3077,13 +3118,13 @@ static PyObject *__pyx_pf_4core_4aabb_4AABB_4AABB_44get_shortest_axis_index(stru
  *     def get_shortest_axis_size(self):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_PyInt_From_godot_int(api_core->godot_aabb_get_shortest_axis_index((&__pyx_v_self->_native))); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 77, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyInt_From_godot_int(api_core->godot_aabb_get_shortest_axis_index((&__pyx_v_self->_native))); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 80, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "core/aabb/AABB.pyx":76
+  /* "core/aabb/AABB.pyx":79
  *         return Vector3. new_static(api_core.godot_aabb_get_shortest_axis(&self._native))
  * 
  *     def get_shortest_axis_index(self):             # <<<<<<<<<<<<<<
@@ -3102,7 +3143,7 @@ static PyObject *__pyx_pf_4core_4aabb_4AABB_4AABB_44get_shortest_axis_index(stru
   return __pyx_r;
 }
 
-/* "core/aabb/AABB.pyx":79
+/* "core/aabb/AABB.pyx":82
  *         return api_core.godot_aabb_get_shortest_axis_index(&self._native)
  * 
  *     def get_shortest_axis_size(self):             # <<<<<<<<<<<<<<
@@ -3132,7 +3173,7 @@ static PyObject *__pyx_pf_4core_4aabb_4AABB_4AABB_46get_shortest_axis_size(struc
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("get_shortest_axis_size", 0);
 
-  /* "core/aabb/AABB.pyx":80
+  /* "core/aabb/AABB.pyx":83
  * 
  *     def get_shortest_axis_size(self):
  *         return api_core.godot_aabb_get_shortest_axis_size(&self._native)             # <<<<<<<<<<<<<<
@@ -3140,13 +3181,13 @@ static PyObject *__pyx_pf_4core_4aabb_4AABB_4AABB_46get_shortest_axis_size(struc
  *     def expand(self, Vector3 to_point):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = PyFloat_FromDouble(api_core->godot_aabb_get_shortest_axis_size((&__pyx_v_self->_native))); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 80, __pyx_L1_error)
+  __pyx_t_1 = PyFloat_FromDouble(api_core->godot_aabb_get_shortest_axis_size((&__pyx_v_self->_native))); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 83, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "core/aabb/AABB.pyx":79
+  /* "core/aabb/AABB.pyx":82
  *         return api_core.godot_aabb_get_shortest_axis_index(&self._native)
  * 
  *     def get_shortest_axis_size(self):             # <<<<<<<<<<<<<<
@@ -3165,7 +3206,7 @@ static PyObject *__pyx_pf_4core_4aabb_4AABB_4AABB_46get_shortest_axis_size(struc
   return __pyx_r;
 }
 
-/* "core/aabb/AABB.pyx":82
+/* "core/aabb/AABB.pyx":85
  *         return api_core.godot_aabb_get_shortest_axis_size(&self._native)
  * 
  *     def expand(self, Vector3 to_point):             # <<<<<<<<<<<<<<
@@ -3182,7 +3223,7 @@ static PyObject *__pyx_pw_4core_4aabb_4AABB_4AABB_49expand(PyObject *__pyx_v_sel
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("expand (wrapper)", 0);
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_to_point), __pyx_ptype_4core_7vector3_7Vector3_Vector3, 1, "to_point", 0))) __PYX_ERR(1, 82, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_to_point), __pyx_ptype_4core_7vector3_7Vector3_Vector3, 1, "to_point", 0))) __PYX_ERR(1, 85, __pyx_L1_error)
   __pyx_r = __pyx_pf_4core_4aabb_4AABB_4AABB_48expand(((struct __pyx_obj_4core_4aabb_4AABB_AABB *)__pyx_v_self), ((struct __pyx_obj_4core_7vector3_7Vector3_Vector3 *)__pyx_v_to_point));
 
   /* function exit code */
@@ -3203,7 +3244,7 @@ static PyObject *__pyx_pf_4core_4aabb_4AABB_4AABB_48expand(struct __pyx_obj_4cor
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("expand", 0);
 
-  /* "core/aabb/AABB.pyx":83
+  /* "core/aabb/AABB.pyx":86
  * 
  *     def expand(self, Vector3 to_point):
  *         return api_core.godot_aabb_expand(&self._native, &to_point._native)             # <<<<<<<<<<<<<<
@@ -3211,13 +3252,13 @@ static PyObject *__pyx_pf_4core_4aabb_4AABB_4AABB_48expand(struct __pyx_obj_4cor
  *     def grow(self, godot_real by):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __pyx_convert__to_py_godot_aabb(api_core->godot_aabb_expand((&__pyx_v_self->_native), (&__pyx_v_to_point->_native))); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 83, __pyx_L1_error)
+  __pyx_t_1 = __pyx_convert__to_py_godot_aabb(api_core->godot_aabb_expand((&__pyx_v_self->_native), (&__pyx_v_to_point->_native))); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 86, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "core/aabb/AABB.pyx":82
+  /* "core/aabb/AABB.pyx":85
  *         return api_core.godot_aabb_get_shortest_axis_size(&self._native)
  * 
  *     def expand(self, Vector3 to_point):             # <<<<<<<<<<<<<<
@@ -3236,7 +3277,7 @@ static PyObject *__pyx_pf_4core_4aabb_4AABB_4AABB_48expand(struct __pyx_obj_4cor
   return __pyx_r;
 }
 
-/* "core/aabb/AABB.pyx":85
+/* "core/aabb/AABB.pyx":88
  *         return api_core.godot_aabb_expand(&self._native, &to_point._native)
  * 
  *     def grow(self, godot_real by):             # <<<<<<<<<<<<<<
@@ -3255,7 +3296,7 @@ static PyObject *__pyx_pw_4core_4aabb_4AABB_4AABB_51grow(PyObject *__pyx_v_self,
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("grow (wrapper)", 0);
   assert(__pyx_arg_by); {
-    __pyx_v_by = __pyx_PyFloat_AsFloat(__pyx_arg_by); if (unlikely((__pyx_v_by == ((godot_real)-1)) && PyErr_Occurred())) __PYX_ERR(1, 85, __pyx_L3_error)
+    __pyx_v_by = __pyx_PyFloat_AsFloat(__pyx_arg_by); if (unlikely((__pyx_v_by == ((godot_real)-1)) && PyErr_Occurred())) __PYX_ERR(1, 88, __pyx_L3_error)
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -3279,7 +3320,7 @@ static PyObject *__pyx_pf_4core_4aabb_4AABB_4AABB_50grow(struct __pyx_obj_4core_
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("grow", 0);
 
-  /* "core/aabb/AABB.pyx":86
+  /* "core/aabb/AABB.pyx":89
  * 
  *     def grow(self, godot_real by):
  *         return AABB. new_static(api_core.godot_aabb_grow(&self._native, by))             # <<<<<<<<<<<<<<
@@ -3287,13 +3328,13 @@ static PyObject *__pyx_pf_4core_4aabb_4AABB_4AABB_50grow(struct __pyx_obj_4core_
  *     def get_endpoint(self,  godot_int index):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_void_to_None(__pyx_f_4core_4aabb_4AABB_4AABB_new_static(api_core->godot_aabb_grow((&__pyx_v_self->_native), __pyx_v_by))); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 86, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_void_to_None(__pyx_f_4core_4aabb_4AABB_4AABB_new_static(api_core->godot_aabb_grow((&__pyx_v_self->_native), __pyx_v_by))); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 89, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "core/aabb/AABB.pyx":85
+  /* "core/aabb/AABB.pyx":88
  *         return api_core.godot_aabb_expand(&self._native, &to_point._native)
  * 
  *     def grow(self, godot_real by):             # <<<<<<<<<<<<<<
@@ -3312,7 +3353,7 @@ static PyObject *__pyx_pf_4core_4aabb_4AABB_4AABB_50grow(struct __pyx_obj_4core_
   return __pyx_r;
 }
 
-/* "core/aabb/AABB.pyx":88
+/* "core/aabb/AABB.pyx":91
  *         return AABB. new_static(api_core.godot_aabb_grow(&self._native, by))
  * 
  *     def get_endpoint(self,  godot_int index):             # <<<<<<<<<<<<<<
@@ -3331,7 +3372,7 @@ static PyObject *__pyx_pw_4core_4aabb_4AABB_4AABB_53get_endpoint(PyObject *__pyx
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("get_endpoint (wrapper)", 0);
   assert(__pyx_arg_index); {
-    __pyx_v_index = __Pyx_PyInt_As_godot_int(__pyx_arg_index); if (unlikely((__pyx_v_index == ((godot_int)-1)) && PyErr_Occurred())) __PYX_ERR(1, 88, __pyx_L3_error)
+    __pyx_v_index = __Pyx_PyInt_As_godot_int(__pyx_arg_index); if (unlikely((__pyx_v_index == ((godot_int)-1)) && PyErr_Occurred())) __PYX_ERR(1, 91, __pyx_L3_error)
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -3355,7 +3396,7 @@ static PyObject *__pyx_pf_4core_4aabb_4AABB_4AABB_52get_endpoint(struct __pyx_ob
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("get_endpoint", 0);
 
-  /* "core/aabb/AABB.pyx":89
+  /* "core/aabb/AABB.pyx":92
  * 
  *     def get_endpoint(self,  godot_int index):
  *         return Vector3. new_static(api_core.godot_aabb_get_endpoint(&self._native, index))             # <<<<<<<<<<<<<<
@@ -3363,13 +3404,13 @@ static PyObject *__pyx_pf_4core_4aabb_4AABB_4AABB_52get_endpoint(struct __pyx_ob
  *     def __eq__(self, AABB other):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = ((PyObject *)__pyx_f_4core_7vector3_7Vector3_7Vector3_new_static(api_core->godot_aabb_get_endpoint((&__pyx_v_self->_native), __pyx_v_index))); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 89, __pyx_L1_error)
+  __pyx_t_1 = ((PyObject *)__pyx_f_4core_7vector3_7Vector3_7Vector3_new_static(api_core->godot_aabb_get_endpoint((&__pyx_v_self->_native), __pyx_v_index))); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 92, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "core/aabb/AABB.pyx":88
+  /* "core/aabb/AABB.pyx":91
  *         return AABB. new_static(api_core.godot_aabb_grow(&self._native, by))
  * 
  *     def get_endpoint(self,  godot_int index):             # <<<<<<<<<<<<<<
@@ -3388,7 +3429,7 @@ static PyObject *__pyx_pf_4core_4aabb_4AABB_4AABB_52get_endpoint(struct __pyx_ob
   return __pyx_r;
 }
 
-/* "core/aabb/AABB.pyx":91
+/* "core/aabb/AABB.pyx":94
  *         return Vector3. new_static(api_core.godot_aabb_get_endpoint(&self._native, index))
  * 
  *     def __eq__(self, AABB other):             # <<<<<<<<<<<<<<
@@ -3405,7 +3446,7 @@ static PyObject *__pyx_pw_4core_4aabb_4AABB_4AABB_55__eq__(PyObject *__pyx_v_sel
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__eq__ (wrapper)", 0);
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_other), __pyx_ptype_4core_4aabb_4AABB_AABB, 1, "other", 0))) __PYX_ERR(1, 91, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_other), __pyx_ptype_4core_4aabb_4AABB_AABB, 1, "other", 0))) __PYX_ERR(1, 94, __pyx_L1_error)
   __pyx_r = __pyx_pf_4core_4aabb_4AABB_4AABB_54__eq__(((struct __pyx_obj_4core_4aabb_4AABB_AABB *)__pyx_v_self), ((struct __pyx_obj_4core_4aabb_4AABB_AABB *)__pyx_v_other));
 
   /* function exit code */
@@ -3426,7 +3467,7 @@ static PyObject *__pyx_pf_4core_4aabb_4AABB_4AABB_54__eq__(struct __pyx_obj_4cor
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__eq__", 0);
 
-  /* "core/aabb/AABB.pyx":92
+  /* "core/aabb/AABB.pyx":95
  * 
  *     def __eq__(self, AABB other):
  *         return api_core.godot_aabb_operator_equal(&self._native, &other._native)             # <<<<<<<<<<<<<<
@@ -3434,13 +3475,13 @@ static PyObject *__pyx_pf_4core_4aabb_4AABB_4AABB_54__eq__(struct __pyx_obj_4cor
  * 
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_PyBool_FromLong(api_core->godot_aabb_operator_equal((&__pyx_v_self->_native), (&__pyx_v_other->_native))); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 92, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyBool_FromLong(api_core->godot_aabb_operator_equal((&__pyx_v_self->_native), (&__pyx_v_other->_native))); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 95, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "core/aabb/AABB.pyx":91
+  /* "core/aabb/AABB.pyx":94
  *         return Vector3. new_static(api_core.godot_aabb_get_endpoint(&self._native, index))
  * 
  *     def __eq__(self, AABB other):             # <<<<<<<<<<<<<<
@@ -4690,10 +4731,17 @@ static int __Pyx_modinit_variable_export_code(void) {
 
 static int __Pyx_modinit_function_export_code(void) {
   __Pyx_RefNannyDeclarations
+  int __pyx_lineno = 0;
+  const char *__pyx_filename = NULL;
+  int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__Pyx_modinit_function_export_code", 0);
   /*--- Function export code ---*/
+  if (__Pyx_ExportFunction("set_api_core_aabb", (void (*)(void))__pyx_f_4core_4aabb_4AABB_set_api_core_aabb, "PyObject *(struct godot_gdnative_core_api_struct *)") < 0) __PYX_ERR(1, 1, __pyx_L1_error)
   __Pyx_RefNannyFinishContext();
   return 0;
+  __pyx_L1_error:;
+  __Pyx_RefNannyFinishContext();
+  return -1;
 }
 
 static int __Pyx_modinit_type_init_code(void) {
@@ -4706,16 +4754,16 @@ static int __Pyx_modinit_type_init_code(void) {
   __pyx_vtabptr_4core_4aabb_4AABB_AABB = &__pyx_vtable_4core_4aabb_4AABB_AABB;
   __pyx_vtable_4core_4aabb_4AABB_AABB.set_native = (void (*)(struct __pyx_obj_4core_4aabb_4AABB_AABB *, godot_aabb))__pyx_f_4core_4aabb_4AABB_4AABB_set_native;
   __pyx_vtable_4core_4aabb_4AABB_AABB.new_static = (void (*)(godot_aabb))__pyx_f_4core_4aabb_4AABB_4AABB_new_static;
-  if (PyType_Ready(&__pyx_type_4core_4aabb_4AABB_AABB) < 0) __PYX_ERR(1, 6, __pyx_L1_error)
+  if (PyType_Ready(&__pyx_type_4core_4aabb_4AABB_AABB) < 0) __PYX_ERR(1, 9, __pyx_L1_error)
   #if PY_VERSION_HEX < 0x030800B1
   __pyx_type_4core_4aabb_4AABB_AABB.tp_print = 0;
   #endif
   if ((CYTHON_USE_TYPE_SLOTS && CYTHON_USE_PYTYPE_LOOKUP) && likely(!__pyx_type_4core_4aabb_4AABB_AABB.tp_dictoffset && __pyx_type_4core_4aabb_4AABB_AABB.tp_getattro == PyObject_GenericGetAttr)) {
     __pyx_type_4core_4aabb_4AABB_AABB.tp_getattro = __Pyx_PyObject_GenericGetAttr;
   }
-  if (__Pyx_SetVtable(__pyx_type_4core_4aabb_4AABB_AABB.tp_dict, __pyx_vtabptr_4core_4aabb_4AABB_AABB) < 0) __PYX_ERR(1, 6, __pyx_L1_error)
-  if (PyObject_SetAttr(__pyx_m, __pyx_n_s_AABB, (PyObject *)&__pyx_type_4core_4aabb_4AABB_AABB) < 0) __PYX_ERR(1, 6, __pyx_L1_error)
-  if (__Pyx_setup_reduce((PyObject*)&__pyx_type_4core_4aabb_4AABB_AABB) < 0) __PYX_ERR(1, 6, __pyx_L1_error)
+  if (__Pyx_SetVtable(__pyx_type_4core_4aabb_4AABB_AABB.tp_dict, __pyx_vtabptr_4core_4aabb_4AABB_AABB) < 0) __PYX_ERR(1, 9, __pyx_L1_error)
+  if (PyObject_SetAttr(__pyx_m, __pyx_n_s_AABB, (PyObject *)&__pyx_type_4core_4aabb_4AABB_AABB) < 0) __PYX_ERR(1, 9, __pyx_L1_error)
+  if (__Pyx_setup_reduce((PyObject*)&__pyx_type_4core_4aabb_4AABB_AABB) < 0) __PYX_ERR(1, 9, __pyx_L1_error)
   __pyx_ptype_4core_4aabb_4AABB_AABB = &__pyx_type_4core_4aabb_4AABB_AABB;
   __Pyx_RefNannyFinishContext();
   return 0;
@@ -4969,7 +5017,7 @@ if (!__Pyx_RefNanny) {
   /*--- Global type/function init code ---*/
   (void)__Pyx_modinit_global_init_code();
   (void)__Pyx_modinit_variable_export_code();
-  (void)__Pyx_modinit_function_export_code();
+  if (unlikely(__Pyx_modinit_function_export_code() < 0)) __PYX_ERR(1, 1, __pyx_L1_error)
   if (unlikely(__Pyx_modinit_type_init_code() < 0)) __PYX_ERR(1, 1, __pyx_L1_error)
   if (unlikely(__Pyx_modinit_type_import_code() < 0)) __PYX_ERR(1, 1, __pyx_L1_error)
   (void)__Pyx_modinit_variable_import_code();
@@ -7174,6 +7222,43 @@ static int __Pyx_check_binary_version(void) {
         return PyErr_WarnEx(NULL, message, 1);
     }
     return 0;
+}
+
+/* FunctionExport */
+static int __Pyx_ExportFunction(const char *name, void (*f)(void), const char *sig) {
+    PyObject *d = 0;
+    PyObject *cobj = 0;
+    union {
+        void (*fp)(void);
+        void *p;
+    } tmp;
+    d = PyObject_GetAttrString(__pyx_m, (char *)"__pyx_capi__");
+    if (!d) {
+        PyErr_Clear();
+        d = PyDict_New();
+        if (!d)
+            goto bad;
+        Py_INCREF(d);
+        if (PyModule_AddObject(__pyx_m, (char *)"__pyx_capi__", d) < 0)
+            goto bad;
+    }
+    tmp.fp = f;
+#if PY_VERSION_HEX >= 0x02070000
+    cobj = PyCapsule_New(tmp.p, sig, 0);
+#else
+    cobj = PyCObject_FromVoidPtrAndDesc(tmp.p, (void *)sig, 0);
+#endif
+    if (!cobj)
+        goto bad;
+    if (PyDict_SetItemString(d, name, cobj) < 0)
+        goto bad;
+    Py_DECREF(cobj);
+    Py_DECREF(d);
+    return 0;
+bad:
+    Py_XDECREF(cobj);
+    Py_XDECREF(d);
+    return -1;
 }
 
 /* InitStrings */

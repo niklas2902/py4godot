@@ -869,8 +869,8 @@ struct __pyx_obj_4core_3rid_3RID_RID {
 
 
 
-/* "core/rid/RID.pyx":3
- * from core.rid.rid_binding cimport *
+/* "core/rid/RID.pyx":7
+ *     api_core = core
  * 
  * cdef class RID:             # <<<<<<<<<<<<<<
  * 
@@ -1154,6 +1154,9 @@ static CYTHON_INLINE int __Pyx_PyErr_GivenExceptionMatches2(PyObject *err, PyObj
 /* CheckBinaryVersion.proto */
 static int __Pyx_check_binary_version(void);
 
+/* FunctionExport.proto */
+static int __Pyx_ExportFunction(const char *name, void (*f)(void), const char *sig);
+
 /* InitStrings.proto */
 static int __Pyx_InitStrings(__Pyx_StringTabEntry *t);
 
@@ -1185,6 +1188,7 @@ static PyTypeObject *__pyx_ptype_7cpython_4type_type = 0;
 
 /* Module declarations from 'core.rid.RID' */
 static PyTypeObject *__pyx_ptype_4core_3rid_3RID_RID = 0;
+static PyObject *__pyx_f_4core_3rid_3RID_set_api_core_rid(struct godot_gdnative_core_api_struct *); /*proto*/
 #define __Pyx_MODULE_NAME "core.rid.RID"
 extern int __pyx_module_is_main_core__rid__RID;
 int __pyx_module_is_main_core__rid__RID = 0;
@@ -1230,7 +1234,44 @@ static PyObject *__pyx_tuple_;
 static PyObject *__pyx_tuple__2;
 /* Late includes */
 
-/* "core/rid/RID.pyx":5
+/* "core/rid/RID.pyx":3
+ * from core.rid.rid_binding cimport *
+ * 
+ * cdef api set_api_core_rid(godot_gdnative_core_api_struct * core):             # <<<<<<<<<<<<<<
+ *     global api_core
+ *     api_core = core
+ */
+
+static PyObject *__pyx_f_4core_3rid_3RID_set_api_core_rid(struct godot_gdnative_core_api_struct *__pyx_v_core) {
+  PyObject *__pyx_r = NULL;
+  __Pyx_RefNannyDeclarations
+  __Pyx_RefNannySetupContext("set_api_core_rid", 0);
+
+  /* "core/rid/RID.pyx":5
+ * cdef api set_api_core_rid(godot_gdnative_core_api_struct * core):
+ *     global api_core
+ *     api_core = core             # <<<<<<<<<<<<<<
+ * 
+ * cdef class RID:
+ */
+  api_core = __pyx_v_core;
+
+  /* "core/rid/RID.pyx":3
+ * from core.rid.rid_binding cimport *
+ * 
+ * cdef api set_api_core_rid(godot_gdnative_core_api_struct * core):             # <<<<<<<<<<<<<<
+ *     global api_core
+ *     api_core = core
+ */
+
+  /* function exit code */
+  __pyx_r = Py_None; __Pyx_INCREF(Py_None);
+  __Pyx_XGIVEREF(__pyx_r);
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+/* "core/rid/RID.pyx":9
  * cdef class RID:
  * 
  *     def __init__(self):             # <<<<<<<<<<<<<<
@@ -1259,7 +1300,7 @@ static int __pyx_pf_4core_3rid_3RID_3RID___init__(struct __pyx_obj_4core_3rid_3R
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__init__", 0);
 
-  /* "core/rid/RID.pyx":6
+  /* "core/rid/RID.pyx":10
  * 
  *     def __init__(self):
  *         api_core.godot_rid_new(&self._native)             # <<<<<<<<<<<<<<
@@ -1268,7 +1309,7 @@ static int __pyx_pf_4core_3rid_3RID_3RID___init__(struct __pyx_obj_4core_3rid_3R
  */
   api_core->godot_rid_new((&__pyx_v_self->_native));
 
-  /* "core/rid/RID.pyx":5
+  /* "core/rid/RID.pyx":9
  * cdef class RID:
  * 
  *     def __init__(self):             # <<<<<<<<<<<<<<
@@ -1282,7 +1323,7 @@ static int __pyx_pf_4core_3rid_3RID_3RID___init__(struct __pyx_obj_4core_3rid_3R
   return __pyx_r;
 }
 
-/* "core/rid/RID.pyx":8
+/* "core/rid/RID.pyx":12
  *         api_core.godot_rid_new(&self._native)
  * 
  *     def get_rid(self):             # <<<<<<<<<<<<<<
@@ -1312,7 +1353,7 @@ static PyObject *__pyx_pf_4core_3rid_3RID_3RID_2get_rid(struct __pyx_obj_4core_3
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("get_rid", 0);
 
-  /* "core/rid/RID.pyx":9
+  /* "core/rid/RID.pyx":13
  * 
  *     def get_rid(self):
  *         return api_core.godot_rid_get_id(&self._native)             # <<<<<<<<<<<<<<
@@ -1320,13 +1361,13 @@ static PyObject *__pyx_pf_4core_3rid_3RID_3RID_2get_rid(struct __pyx_obj_4core_3
  *     def  __eq__(self, RID other):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_PyInt_From_godot_int(api_core->godot_rid_get_id((&__pyx_v_self->_native))); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 9, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyInt_From_godot_int(api_core->godot_rid_get_id((&__pyx_v_self->_native))); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 13, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "core/rid/RID.pyx":8
+  /* "core/rid/RID.pyx":12
  *         api_core.godot_rid_new(&self._native)
  * 
  *     def get_rid(self):             # <<<<<<<<<<<<<<
@@ -1345,7 +1386,7 @@ static PyObject *__pyx_pf_4core_3rid_3RID_3RID_2get_rid(struct __pyx_obj_4core_3
   return __pyx_r;
 }
 
-/* "core/rid/RID.pyx":11
+/* "core/rid/RID.pyx":15
  *         return api_core.godot_rid_get_id(&self._native)
  * 
  *     def  __eq__(self, RID other):             # <<<<<<<<<<<<<<
@@ -1362,7 +1403,7 @@ static PyObject *__pyx_pw_4core_3rid_3RID_3RID_5__eq__(PyObject *__pyx_v_self, P
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__eq__ (wrapper)", 0);
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_other), __pyx_ptype_4core_3rid_3RID_RID, 1, "other", 0))) __PYX_ERR(1, 11, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_other), __pyx_ptype_4core_3rid_3RID_RID, 1, "other", 0))) __PYX_ERR(1, 15, __pyx_L1_error)
   __pyx_r = __pyx_pf_4core_3rid_3RID_3RID_4__eq__(((struct __pyx_obj_4core_3rid_3RID_RID *)__pyx_v_self), ((struct __pyx_obj_4core_3rid_3RID_RID *)__pyx_v_other));
 
   /* function exit code */
@@ -1383,7 +1424,7 @@ static PyObject *__pyx_pf_4core_3rid_3RID_3RID_4__eq__(struct __pyx_obj_4core_3r
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__eq__", 0);
 
-  /* "core/rid/RID.pyx":12
+  /* "core/rid/RID.pyx":16
  * 
  *     def  __eq__(self, RID other):
  *         return api_core.godot_rid_operator_equal(&self._native, &other._native)             # <<<<<<<<<<<<<<
@@ -1391,13 +1432,13 @@ static PyObject *__pyx_pf_4core_3rid_3RID_3RID_4__eq__(struct __pyx_obj_4core_3r
  *     def __lt__(self, RID other):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_PyBool_FromLong(api_core->godot_rid_operator_equal((&__pyx_v_self->_native), (&__pyx_v_other->_native))); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 12, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyBool_FromLong(api_core->godot_rid_operator_equal((&__pyx_v_self->_native), (&__pyx_v_other->_native))); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 16, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "core/rid/RID.pyx":11
+  /* "core/rid/RID.pyx":15
  *         return api_core.godot_rid_get_id(&self._native)
  * 
  *     def  __eq__(self, RID other):             # <<<<<<<<<<<<<<
@@ -1416,7 +1457,7 @@ static PyObject *__pyx_pf_4core_3rid_3RID_3RID_4__eq__(struct __pyx_obj_4core_3r
   return __pyx_r;
 }
 
-/* "core/rid/RID.pyx":14
+/* "core/rid/RID.pyx":18
  *         return api_core.godot_rid_operator_equal(&self._native, &other._native)
  * 
  *     def __lt__(self, RID other):             # <<<<<<<<<<<<<<
@@ -1433,7 +1474,7 @@ static PyObject *__pyx_pw_4core_3rid_3RID_3RID_7__lt__(PyObject *__pyx_v_self, P
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__lt__ (wrapper)", 0);
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_other), __pyx_ptype_4core_3rid_3RID_RID, 1, "other", 0))) __PYX_ERR(1, 14, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_other), __pyx_ptype_4core_3rid_3RID_RID, 1, "other", 0))) __PYX_ERR(1, 18, __pyx_L1_error)
   __pyx_r = __pyx_pf_4core_3rid_3RID_3RID_6__lt__(((struct __pyx_obj_4core_3rid_3RID_RID *)__pyx_v_self), ((struct __pyx_obj_4core_3rid_3RID_RID *)__pyx_v_other));
 
   /* function exit code */
@@ -1454,20 +1495,20 @@ static PyObject *__pyx_pf_4core_3rid_3RID_3RID_6__lt__(struct __pyx_obj_4core_3r
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__lt__", 0);
 
-  /* "core/rid/RID.pyx":15
+  /* "core/rid/RID.pyx":19
  * 
  *     def __lt__(self, RID other):
  *         return api_core.godot_rid_operator_less(&self._native, &other._native)             # <<<<<<<<<<<<<<
  * 
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_PyBool_FromLong(api_core->godot_rid_operator_less((&__pyx_v_self->_native), (&__pyx_v_other->_native))); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 15, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyBool_FromLong(api_core->godot_rid_operator_less((&__pyx_v_self->_native), (&__pyx_v_other->_native))); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 19, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "core/rid/RID.pyx":14
+  /* "core/rid/RID.pyx":18
  *         return api_core.godot_rid_operator_equal(&self._native, &other._native)
  * 
  *     def __lt__(self, RID other):             # <<<<<<<<<<<<<<
@@ -1957,10 +1998,17 @@ static int __Pyx_modinit_variable_export_code(void) {
 
 static int __Pyx_modinit_function_export_code(void) {
   __Pyx_RefNannyDeclarations
+  int __pyx_lineno = 0;
+  const char *__pyx_filename = NULL;
+  int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__Pyx_modinit_function_export_code", 0);
   /*--- Function export code ---*/
+  if (__Pyx_ExportFunction("set_api_core_rid", (void (*)(void))__pyx_f_4core_3rid_3RID_set_api_core_rid, "PyObject *(struct godot_gdnative_core_api_struct *)") < 0) __PYX_ERR(1, 1, __pyx_L1_error)
   __Pyx_RefNannyFinishContext();
   return 0;
+  __pyx_L1_error:;
+  __Pyx_RefNannyFinishContext();
+  return -1;
 }
 
 static int __Pyx_modinit_type_init_code(void) {
@@ -1973,16 +2021,16 @@ static int __Pyx_modinit_type_init_code(void) {
   __pyx_vtabptr_4core_3rid_3RID_RID = &__pyx_vtable_4core_3rid_3RID_RID;
   __pyx_vtable_4core_3rid_3RID_RID.set_native = (void (*)(struct __pyx_obj_4core_3rid_3RID_RID *, godot_rid))__pyx_f_4core_3rid_3RID_3RID_set_native;
   __pyx_vtable_4core_3rid_3RID_RID.new_static = (struct __pyx_obj_4core_3rid_3RID_RID *(*)(godot_rid))__pyx_f_4core_3rid_3RID_3RID_new_static;
-  if (PyType_Ready(&__pyx_type_4core_3rid_3RID_RID) < 0) __PYX_ERR(1, 3, __pyx_L1_error)
+  if (PyType_Ready(&__pyx_type_4core_3rid_3RID_RID) < 0) __PYX_ERR(1, 7, __pyx_L1_error)
   #if PY_VERSION_HEX < 0x030800B1
   __pyx_type_4core_3rid_3RID_RID.tp_print = 0;
   #endif
   if ((CYTHON_USE_TYPE_SLOTS && CYTHON_USE_PYTYPE_LOOKUP) && likely(!__pyx_type_4core_3rid_3RID_RID.tp_dictoffset && __pyx_type_4core_3rid_3RID_RID.tp_getattro == PyObject_GenericGetAttr)) {
     __pyx_type_4core_3rid_3RID_RID.tp_getattro = __Pyx_PyObject_GenericGetAttr;
   }
-  if (__Pyx_SetVtable(__pyx_type_4core_3rid_3RID_RID.tp_dict, __pyx_vtabptr_4core_3rid_3RID_RID) < 0) __PYX_ERR(1, 3, __pyx_L1_error)
-  if (PyObject_SetAttr(__pyx_m, __pyx_n_s_RID, (PyObject *)&__pyx_type_4core_3rid_3RID_RID) < 0) __PYX_ERR(1, 3, __pyx_L1_error)
-  if (__Pyx_setup_reduce((PyObject*)&__pyx_type_4core_3rid_3RID_RID) < 0) __PYX_ERR(1, 3, __pyx_L1_error)
+  if (__Pyx_SetVtable(__pyx_type_4core_3rid_3RID_RID.tp_dict, __pyx_vtabptr_4core_3rid_3RID_RID) < 0) __PYX_ERR(1, 7, __pyx_L1_error)
+  if (PyObject_SetAttr(__pyx_m, __pyx_n_s_RID, (PyObject *)&__pyx_type_4core_3rid_3RID_RID) < 0) __PYX_ERR(1, 7, __pyx_L1_error)
+  if (__Pyx_setup_reduce((PyObject*)&__pyx_type_4core_3rid_3RID_RID) < 0) __PYX_ERR(1, 7, __pyx_L1_error)
   __pyx_ptype_4core_3rid_3RID_RID = &__pyx_type_4core_3rid_3RID_RID;
   __Pyx_RefNannyFinishContext();
   return 0;
@@ -2224,7 +2272,7 @@ if (!__Pyx_RefNanny) {
   /*--- Global type/function init code ---*/
   (void)__Pyx_modinit_global_init_code();
   (void)__Pyx_modinit_variable_export_code();
-  (void)__Pyx_modinit_function_export_code();
+  if (unlikely(__Pyx_modinit_function_export_code() < 0)) __PYX_ERR(1, 1, __pyx_L1_error)
   if (unlikely(__Pyx_modinit_type_init_code() < 0)) __PYX_ERR(1, 1, __pyx_L1_error)
   if (unlikely(__Pyx_modinit_type_import_code() < 0)) __PYX_ERR(1, 1, __pyx_L1_error)
   (void)__Pyx_modinit_variable_import_code();
@@ -2237,7 +2285,7 @@ if (!__Pyx_RefNanny) {
   /* "core/rid/RID.pyx":1
  * from core.rid.rid_binding cimport *             # <<<<<<<<<<<<<<
  * 
- * cdef class RID:
+ * cdef api set_api_core_rid(godot_gdnative_core_api_struct * core):
  */
   __pyx_t_1 = __Pyx_PyDict_NewPresized(0); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 1, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
@@ -3722,6 +3770,43 @@ static int __Pyx_check_binary_version(void) {
         return PyErr_WarnEx(NULL, message, 1);
     }
     return 0;
+}
+
+/* FunctionExport */
+static int __Pyx_ExportFunction(const char *name, void (*f)(void), const char *sig) {
+    PyObject *d = 0;
+    PyObject *cobj = 0;
+    union {
+        void (*fp)(void);
+        void *p;
+    } tmp;
+    d = PyObject_GetAttrString(__pyx_m, (char *)"__pyx_capi__");
+    if (!d) {
+        PyErr_Clear();
+        d = PyDict_New();
+        if (!d)
+            goto bad;
+        Py_INCREF(d);
+        if (PyModule_AddObject(__pyx_m, (char *)"__pyx_capi__", d) < 0)
+            goto bad;
+    }
+    tmp.fp = f;
+#if PY_VERSION_HEX >= 0x02070000
+    cobj = PyCapsule_New(tmp.p, sig, 0);
+#else
+    cobj = PyCObject_FromVoidPtrAndDesc(tmp.p, (void *)sig, 0);
+#endif
+    if (!cobj)
+        goto bad;
+    if (PyDict_SetItemString(d, name, cobj) < 0)
+        goto bad;
+    Py_DECREF(cobj);
+    Py_DECREF(d);
+    return 0;
+bad:
+    Py_XDECREF(cobj);
+    Py_XDECREF(d);
+    return -1;
 }
 
 /* InitStrings */

@@ -1,5 +1,9 @@
 from core.vector2.vector2_binding cimport *
 
+cdef api set_api_core_vector2(godot_gdnative_core_api_struct * core):
+    global api_core
+    api_core = core
+
 cdef class Vector2:
 
     def __init__(self, godot_real x = 0, godot_real y = 0):

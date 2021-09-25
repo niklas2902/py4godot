@@ -1,6 +1,10 @@
 from core.vector3.Vector3 cimport *
 from core.plane.plane_binding cimport *
 
+cdef api set_api_core_plane(godot_gdnative_core_api_struct * core):
+    global api_core
+    api_core = core
+
 cdef class Plane:
 
     def __init__(self, godot_real a, godot_real b, godot_real c, godot_real d):

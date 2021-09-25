@@ -3,6 +3,9 @@ from core.string.String cimport *
 from core.quat.Quat cimport *
 from core.basis.basis_binding cimport *
 
+cdef api set_api_core_basis(godot_gdnative_core_api_struct * core):
+    global api_core
+    api_core = core
 
 cdef class Basis:
 

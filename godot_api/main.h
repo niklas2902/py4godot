@@ -5,9 +5,19 @@
 #include "../core/variant/Variant_api.h"
 #include "../core/array/Array_api.h"
 #include "../core/transform/Transform_api.h"
+#include "../core/transform/Transform2D_api.h"
 #include "../core/string/String_api.h"
 #include "../core/string_name/StringName_api.h"
 #include "../core/vector3/Vector3_api.h"
+#include "../core/vector2/Vector2_api.h"
+#include "../core/aabb/AABB_api.h"
+#include "../core/basis/Basis_api.h"
+#include "../core/color/Color_api.h"
+#include "../core/node_path/NodePath_api.h"
+#include "../core/plane/Plane_api.h"
+#include "../core/quat/Quat_api.h"
+#include "../core/rect2/Rect2_api.h"
+#include "../core/rid/RID_api.h"
 #include <string.h>
 
 
@@ -286,8 +296,77 @@ void set_up_pluginscript(){
         PyErr_Print();
         return ;
     }
+    import_core__transform__Transform2D();
+    if (PyErr_Occurred())
+    {
+        PyErr_Print();
+        return ;
+    }
 
     import_core__vector3__Vector3();
+    if (PyErr_Occurred())
+    {
+        PyErr_Print();
+        return ;
+    }
+
+    import_core__vector2__Vector2();
+    if (PyErr_Occurred())
+    {
+        PyErr_Print();
+        return ;
+    }
+
+    import_core__rid__RID();
+    if (PyErr_Occurred())
+    {
+        PyErr_Print();
+        return ;
+    }
+
+    import_core__rect2__Rect2();
+    if (PyErr_Occurred())
+    {
+        PyErr_Print();
+        return ;
+    }
+
+    import_core__quat__Quat();
+    if (PyErr_Occurred())
+    {
+        PyErr_Print();
+        return ;
+    }
+
+    import_core__plane__Plane();
+    if (PyErr_Occurred())
+    {
+        PyErr_Print();
+        return ;
+    }
+
+    import_core__node_path__NodePath();
+    if (PyErr_Occurred())
+    {
+        PyErr_Print();
+        return ;
+    }
+
+    import_core__color__Color();
+    if (PyErr_Occurred())
+    {
+        PyErr_Print();
+        return ;
+    }
+
+    import_core__basis__Basis();
+    if (PyErr_Occurred())
+    {
+        PyErr_Print();
+        return ;
+    }
+
+    import_core__aabb__AABB();
     if (PyErr_Occurred())
     {
         PyErr_Print();
@@ -301,6 +380,15 @@ void set_up_pluginscript(){
     set_api_core_string_name(api_core);
     set_api_core_transform(api_core);
     set_api_core_vector3(api_core);
+    set_api_core_aabb(api_core);
+    set_api_core_basis(api_core);
+    set_api_core_color(api_core);
+    set_api_core_node_path(api_core);
+    set_api_core_plane(api_core);
+    set_api_core_quat(api_core);
+    set_api_core_rect2(api_core);
+    set_api_core_rid(api_core);
+    set_api_core_vector2(api_core);
     set_api_core_pluginscript(api_core);
 
 

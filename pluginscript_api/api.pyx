@@ -86,9 +86,11 @@ cdef api  void finish_pluginscript_desc (godot_pluginscript_script_data *p_data)
 ###############################################pluginscript_instance#######################################################
 cdef api godot_pluginscript_instance_data * init_pluginscript_instance(godot_pluginscript_script_data *p_data,
  godot_object *p_owner) with gil:
-    cdef Wrapper instance
     print("\n####################################################################instance_init########################\n");
+    cdef Wrapper instance
     instance = (<Wrapper ?>p_data)()
+    print("instance created")
+    print(instance)
     instance.set_godot_owner(p_owner)
     Py_INCREF(instance)
     return <PyObject*>instance
@@ -139,9 +141,9 @@ cdef api godot_string pluginscript_get_template_source_code(godot_pluginscript_l
  const godot_string *p_class_name, const godot_string *p_base_class_name) with gil:
     print("get_template_source_code")
     return String(f"""
-from pluginscript_api.utils.annotations import  *
-from utils.Wrapper import *
 from enums.enums import *
+from core import *
+from classes.generated import *
 
 @gdclass
 class {str(String.new_static(dereference(p_class_name)))}({str(String.new_static(dereference(p_base_class_name)))}):

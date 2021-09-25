@@ -916,8 +916,8 @@ static CYTHON_INLINE void __pyx_f_4core_7vector3_7Vector3_7Vector3_set_native(st
 static CYTHON_INLINE struct __pyx_obj_4core_7vector3_7Vector3_Vector3 *__pyx_f_4core_7vector3_7Vector3_7Vector3_new_static(godot_vector3);
 
 
-/* "core/quat/Quat.pyx":5
- * 
+/* "core/quat/Quat.pyx":8
+ *     api_core = core
  * 
  * cdef class Quat:             # <<<<<<<<<<<<<<
  * 
@@ -1246,6 +1246,9 @@ static CYTHON_INLINE int __Pyx_PyErr_GivenExceptionMatches2(PyObject *err, PyObj
 /* CheckBinaryVersion.proto */
 static int __Pyx_check_binary_version(void);
 
+/* FunctionExport.proto */
+static int __Pyx_ExportFunction(const char *name, void (*f)(void), const char *sig);
+
 /* InitStrings.proto */
 static int __Pyx_InitStrings(__Pyx_StringTabEntry *t);
 
@@ -1284,6 +1287,7 @@ static PyTypeObject *__pyx_ptype_4core_7vector3_7Vector3_Vector3 = 0;
 
 /* Module declarations from 'core.quat.Quat' */
 static PyTypeObject *__pyx_ptype_4core_4quat_4Quat_Quat = 0;
+static PyObject *__pyx_f_4core_4quat_4Quat_set_api_core_quat(struct godot_gdnative_core_api_struct *); /*proto*/
 #define __Pyx_MODULE_NAME "core.quat.Quat"
 extern int __pyx_module_is_main_core__quat__Quat;
 int __pyx_module_is_main_core__quat__Quat = 0;
@@ -1374,7 +1378,44 @@ static PyObject *__pyx_tuple_;
 static PyObject *__pyx_tuple__2;
 /* Late includes */
 
-/* "core/quat/Quat.pyx":7
+/* "core/quat/Quat.pyx":4
+ * from core.quat.quat_binding cimport *
+ * 
+ * cdef api set_api_core_quat(godot_gdnative_core_api_struct * core):             # <<<<<<<<<<<<<<
+ *     global api_core
+ *     api_core = core
+ */
+
+static PyObject *__pyx_f_4core_4quat_4Quat_set_api_core_quat(struct godot_gdnative_core_api_struct *__pyx_v_core) {
+  PyObject *__pyx_r = NULL;
+  __Pyx_RefNannyDeclarations
+  __Pyx_RefNannySetupContext("set_api_core_quat", 0);
+
+  /* "core/quat/Quat.pyx":6
+ * cdef api set_api_core_quat(godot_gdnative_core_api_struct * core):
+ *     global api_core
+ *     api_core = core             # <<<<<<<<<<<<<<
+ * 
+ * cdef class Quat:
+ */
+  api_core = __pyx_v_core;
+
+  /* "core/quat/Quat.pyx":4
+ * from core.quat.quat_binding cimport *
+ * 
+ * cdef api set_api_core_quat(godot_gdnative_core_api_struct * core):             # <<<<<<<<<<<<<<
+ *     global api_core
+ *     api_core = core
+ */
+
+  /* function exit code */
+  __pyx_r = Py_None; __Pyx_INCREF(Py_None);
+  __Pyx_XGIVEREF(__pyx_r);
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+/* "core/quat/Quat.pyx":10
  * cdef class Quat:
  * 
  *     def __init__(self,godot_real x, godot_real y, godot_real z, godot_real w):             # <<<<<<<<<<<<<<
@@ -1422,23 +1463,23 @@ static int __pyx_pw_4core_4quat_4Quat_4Quat_1__init__(PyObject *__pyx_v_self, Py
         case  1:
         if (likely((values[1] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_y)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("__init__", 1, 4, 4, 1); __PYX_ERR(1, 7, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("__init__", 1, 4, 4, 1); __PYX_ERR(1, 10, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  2:
         if (likely((values[2] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_z)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("__init__", 1, 4, 4, 2); __PYX_ERR(1, 7, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("__init__", 1, 4, 4, 2); __PYX_ERR(1, 10, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  3:
         if (likely((values[3] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_w)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("__init__", 1, 4, 4, 3); __PYX_ERR(1, 7, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("__init__", 1, 4, 4, 3); __PYX_ERR(1, 10, __pyx_L3_error)
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "__init__") < 0)) __PYX_ERR(1, 7, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "__init__") < 0)) __PYX_ERR(1, 10, __pyx_L3_error)
       }
     } else if (PyTuple_GET_SIZE(__pyx_args) != 4) {
       goto __pyx_L5_argtuple_error;
@@ -1448,14 +1489,14 @@ static int __pyx_pw_4core_4quat_4Quat_4Quat_1__init__(PyObject *__pyx_v_self, Py
       values[2] = PyTuple_GET_ITEM(__pyx_args, 2);
       values[3] = PyTuple_GET_ITEM(__pyx_args, 3);
     }
-    __pyx_v_x = __pyx_PyFloat_AsFloat(values[0]); if (unlikely((__pyx_v_x == ((godot_real)-1)) && PyErr_Occurred())) __PYX_ERR(1, 7, __pyx_L3_error)
-    __pyx_v_y = __pyx_PyFloat_AsFloat(values[1]); if (unlikely((__pyx_v_y == ((godot_real)-1)) && PyErr_Occurred())) __PYX_ERR(1, 7, __pyx_L3_error)
-    __pyx_v_z = __pyx_PyFloat_AsFloat(values[2]); if (unlikely((__pyx_v_z == ((godot_real)-1)) && PyErr_Occurred())) __PYX_ERR(1, 7, __pyx_L3_error)
-    __pyx_v_w = __pyx_PyFloat_AsFloat(values[3]); if (unlikely((__pyx_v_w == ((godot_real)-1)) && PyErr_Occurred())) __PYX_ERR(1, 7, __pyx_L3_error)
+    __pyx_v_x = __pyx_PyFloat_AsFloat(values[0]); if (unlikely((__pyx_v_x == ((godot_real)-1)) && PyErr_Occurred())) __PYX_ERR(1, 10, __pyx_L3_error)
+    __pyx_v_y = __pyx_PyFloat_AsFloat(values[1]); if (unlikely((__pyx_v_y == ((godot_real)-1)) && PyErr_Occurred())) __PYX_ERR(1, 10, __pyx_L3_error)
+    __pyx_v_z = __pyx_PyFloat_AsFloat(values[2]); if (unlikely((__pyx_v_z == ((godot_real)-1)) && PyErr_Occurred())) __PYX_ERR(1, 10, __pyx_L3_error)
+    __pyx_v_w = __pyx_PyFloat_AsFloat(values[3]); if (unlikely((__pyx_v_w == ((godot_real)-1)) && PyErr_Occurred())) __PYX_ERR(1, 10, __pyx_L3_error)
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("__init__", 1, 4, 4, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(1, 7, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("__init__", 1, 4, 4, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(1, 10, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("core.quat.Quat.Quat.__init__", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
@@ -1473,7 +1514,7 @@ static int __pyx_pf_4core_4quat_4Quat_4Quat___init__(struct __pyx_obj_4core_4qua
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__init__", 0);
 
-  /* "core/quat/Quat.pyx":8
+  /* "core/quat/Quat.pyx":11
  * 
  *     def __init__(self,godot_real x, godot_real y, godot_real z, godot_real w):
  *             api_core.godot_quat_new(&self._native,x,y,z,w)             # <<<<<<<<<<<<<<
@@ -1482,7 +1523,7 @@ static int __pyx_pf_4core_4quat_4Quat_4Quat___init__(struct __pyx_obj_4core_4qua
  */
   api_core->godot_quat_new((&__pyx_v_self->_native), __pyx_v_x, __pyx_v_y, __pyx_v_z, __pyx_v_w);
 
-  /* "core/quat/Quat.pyx":7
+  /* "core/quat/Quat.pyx":10
  * cdef class Quat:
  * 
  *     def __init__(self,godot_real x, godot_real y, godot_real z, godot_real w):             # <<<<<<<<<<<<<<
@@ -1496,7 +1537,7 @@ static int __pyx_pf_4core_4quat_4Quat_4Quat___init__(struct __pyx_obj_4core_4qua
   return __pyx_r;
 }
 
-/* "core/quat/Quat.pyx":10
+/* "core/quat/Quat.pyx":13
  *             api_core.godot_quat_new(&self._native,x,y,z,w)
  * 
  *     def new_with_axis_angle(self, Vector3 axis, godot_real angle):             # <<<<<<<<<<<<<<
@@ -1538,11 +1579,11 @@ static PyObject *__pyx_pw_4core_4quat_4Quat_4Quat_3new_with_axis_angle(PyObject 
         case  1:
         if (likely((values[1] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_angle)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("new_with_axis_angle", 1, 2, 2, 1); __PYX_ERR(1, 10, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("new_with_axis_angle", 1, 2, 2, 1); __PYX_ERR(1, 13, __pyx_L3_error)
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "new_with_axis_angle") < 0)) __PYX_ERR(1, 10, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "new_with_axis_angle") < 0)) __PYX_ERR(1, 13, __pyx_L3_error)
       }
     } else if (PyTuple_GET_SIZE(__pyx_args) != 2) {
       goto __pyx_L5_argtuple_error;
@@ -1551,17 +1592,17 @@ static PyObject *__pyx_pw_4core_4quat_4Quat_4Quat_3new_with_axis_angle(PyObject 
       values[1] = PyTuple_GET_ITEM(__pyx_args, 1);
     }
     __pyx_v_axis = ((struct __pyx_obj_4core_7vector3_7Vector3_Vector3 *)values[0]);
-    __pyx_v_angle = __pyx_PyFloat_AsFloat(values[1]); if (unlikely((__pyx_v_angle == ((godot_real)-1)) && PyErr_Occurred())) __PYX_ERR(1, 10, __pyx_L3_error)
+    __pyx_v_angle = __pyx_PyFloat_AsFloat(values[1]); if (unlikely((__pyx_v_angle == ((godot_real)-1)) && PyErr_Occurred())) __PYX_ERR(1, 13, __pyx_L3_error)
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("new_with_axis_angle", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(1, 10, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("new_with_axis_angle", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(1, 13, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("core.quat.Quat.Quat.new_with_axis_angle", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_axis), __pyx_ptype_4core_7vector3_7Vector3_Vector3, 1, "axis", 0))) __PYX_ERR(1, 10, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_axis), __pyx_ptype_4core_7vector3_7Vector3_Vector3, 1, "axis", 0))) __PYX_ERR(1, 13, __pyx_L1_error)
   __pyx_r = __pyx_pf_4core_4quat_4Quat_4Quat_2new_with_axis_angle(((struct __pyx_obj_4core_4quat_4Quat_Quat *)__pyx_v_self), __pyx_v_axis, __pyx_v_angle);
 
   /* function exit code */
@@ -1578,7 +1619,7 @@ static PyObject *__pyx_pf_4core_4quat_4Quat_4Quat_2new_with_axis_angle(struct __
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("new_with_axis_angle", 0);
 
-  /* "core/quat/Quat.pyx":11
+  /* "core/quat/Quat.pyx":14
  * 
  *     def new_with_axis_angle(self, Vector3 axis, godot_real angle):
  *         api_core.godot_quat_new_with_axis_angle(&self._native, &axis._native, angle)             # <<<<<<<<<<<<<<
@@ -1587,7 +1628,7 @@ static PyObject *__pyx_pf_4core_4quat_4Quat_4Quat_2new_with_axis_angle(struct __
  */
   api_core->godot_quat_new_with_axis_angle((&__pyx_v_self->_native), (&__pyx_v_axis->_native), __pyx_v_angle);
 
-  /* "core/quat/Quat.pyx":10
+  /* "core/quat/Quat.pyx":13
  *             api_core.godot_quat_new(&self._native,x,y,z,w)
  * 
  *     def new_with_axis_angle(self, Vector3 axis, godot_real angle):             # <<<<<<<<<<<<<<
@@ -1602,7 +1643,7 @@ static PyObject *__pyx_pf_4core_4quat_4Quat_4Quat_2new_with_axis_angle(struct __
   return __pyx_r;
 }
 
-/* "core/quat/Quat.pyx":13
+/* "core/quat/Quat.pyx":16
  *         api_core.godot_quat_new_with_axis_angle(&self._native, &axis._native, angle)
  * 
  *     def get_x(self):             # <<<<<<<<<<<<<<
@@ -1632,7 +1673,7 @@ static PyObject *__pyx_pf_4core_4quat_4Quat_4Quat_4get_x(struct __pyx_obj_4core_
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("get_x", 0);
 
-  /* "core/quat/Quat.pyx":14
+  /* "core/quat/Quat.pyx":17
  * 
  *     def get_x(self):
  *         return api_core.godot_quat_get_x(&self._native)             # <<<<<<<<<<<<<<
@@ -1640,13 +1681,13 @@ static PyObject *__pyx_pf_4core_4quat_4Quat_4Quat_4get_x(struct __pyx_obj_4core_
  *     def set_x(self, godot_real val):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = PyFloat_FromDouble(api_core->godot_quat_get_x((&__pyx_v_self->_native))); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 14, __pyx_L1_error)
+  __pyx_t_1 = PyFloat_FromDouble(api_core->godot_quat_get_x((&__pyx_v_self->_native))); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 17, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "core/quat/Quat.pyx":13
+  /* "core/quat/Quat.pyx":16
  *         api_core.godot_quat_new_with_axis_angle(&self._native, &axis._native, angle)
  * 
  *     def get_x(self):             # <<<<<<<<<<<<<<
@@ -1665,7 +1706,7 @@ static PyObject *__pyx_pf_4core_4quat_4Quat_4Quat_4get_x(struct __pyx_obj_4core_
   return __pyx_r;
 }
 
-/* "core/quat/Quat.pyx":16
+/* "core/quat/Quat.pyx":19
  *         return api_core.godot_quat_get_x(&self._native)
  * 
  *     def set_x(self, godot_real val):             # <<<<<<<<<<<<<<
@@ -1684,7 +1725,7 @@ static PyObject *__pyx_pw_4core_4quat_4Quat_4Quat_7set_x(PyObject *__pyx_v_self,
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("set_x (wrapper)", 0);
   assert(__pyx_arg_val); {
-    __pyx_v_val = __pyx_PyFloat_AsFloat(__pyx_arg_val); if (unlikely((__pyx_v_val == ((godot_real)-1)) && PyErr_Occurred())) __PYX_ERR(1, 16, __pyx_L3_error)
+    __pyx_v_val = __pyx_PyFloat_AsFloat(__pyx_arg_val); if (unlikely((__pyx_v_val == ((godot_real)-1)) && PyErr_Occurred())) __PYX_ERR(1, 19, __pyx_L3_error)
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -1704,7 +1745,7 @@ static PyObject *__pyx_pf_4core_4quat_4Quat_4Quat_6set_x(struct __pyx_obj_4core_
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("set_x", 0);
 
-  /* "core/quat/Quat.pyx":17
+  /* "core/quat/Quat.pyx":20
  * 
  *     def set_x(self, godot_real val):
  *         api_core.godot_quat_set_x(&self._native, val)             # <<<<<<<<<<<<<<
@@ -1713,7 +1754,7 @@ static PyObject *__pyx_pf_4core_4quat_4Quat_4Quat_6set_x(struct __pyx_obj_4core_
  */
   api_core->godot_quat_set_x((&__pyx_v_self->_native), __pyx_v_val);
 
-  /* "core/quat/Quat.pyx":16
+  /* "core/quat/Quat.pyx":19
  *         return api_core.godot_quat_get_x(&self._native)
  * 
  *     def set_x(self, godot_real val):             # <<<<<<<<<<<<<<
@@ -1728,7 +1769,7 @@ static PyObject *__pyx_pf_4core_4quat_4Quat_4Quat_6set_x(struct __pyx_obj_4core_
   return __pyx_r;
 }
 
-/* "core/quat/Quat.pyx":19
+/* "core/quat/Quat.pyx":22
  *         api_core.godot_quat_set_x(&self._native, val)
  * 
  *     def get_y(self):             # <<<<<<<<<<<<<<
@@ -1758,7 +1799,7 @@ static PyObject *__pyx_pf_4core_4quat_4Quat_4Quat_8get_y(struct __pyx_obj_4core_
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("get_y", 0);
 
-  /* "core/quat/Quat.pyx":20
+  /* "core/quat/Quat.pyx":23
  * 
  *     def get_y(self):
  *         return api_core.godot_quat_get_y(&self._native)             # <<<<<<<<<<<<<<
@@ -1766,13 +1807,13 @@ static PyObject *__pyx_pf_4core_4quat_4Quat_4Quat_8get_y(struct __pyx_obj_4core_
  *     def set_y(self, godot_real val):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = PyFloat_FromDouble(api_core->godot_quat_get_y((&__pyx_v_self->_native))); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 20, __pyx_L1_error)
+  __pyx_t_1 = PyFloat_FromDouble(api_core->godot_quat_get_y((&__pyx_v_self->_native))); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 23, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "core/quat/Quat.pyx":19
+  /* "core/quat/Quat.pyx":22
  *         api_core.godot_quat_set_x(&self._native, val)
  * 
  *     def get_y(self):             # <<<<<<<<<<<<<<
@@ -1791,7 +1832,7 @@ static PyObject *__pyx_pf_4core_4quat_4Quat_4Quat_8get_y(struct __pyx_obj_4core_
   return __pyx_r;
 }
 
-/* "core/quat/Quat.pyx":22
+/* "core/quat/Quat.pyx":25
  *         return api_core.godot_quat_get_y(&self._native)
  * 
  *     def set_y(self, godot_real val):             # <<<<<<<<<<<<<<
@@ -1810,7 +1851,7 @@ static PyObject *__pyx_pw_4core_4quat_4Quat_4Quat_11set_y(PyObject *__pyx_v_self
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("set_y (wrapper)", 0);
   assert(__pyx_arg_val); {
-    __pyx_v_val = __pyx_PyFloat_AsFloat(__pyx_arg_val); if (unlikely((__pyx_v_val == ((godot_real)-1)) && PyErr_Occurred())) __PYX_ERR(1, 22, __pyx_L3_error)
+    __pyx_v_val = __pyx_PyFloat_AsFloat(__pyx_arg_val); if (unlikely((__pyx_v_val == ((godot_real)-1)) && PyErr_Occurred())) __PYX_ERR(1, 25, __pyx_L3_error)
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -1830,7 +1871,7 @@ static PyObject *__pyx_pf_4core_4quat_4Quat_4Quat_10set_y(struct __pyx_obj_4core
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("set_y", 0);
 
-  /* "core/quat/Quat.pyx":23
+  /* "core/quat/Quat.pyx":26
  * 
  *     def set_y(self, godot_real val):
  *         api_core.godot_quat_set_y(&self._native, val)             # <<<<<<<<<<<<<<
@@ -1839,7 +1880,7 @@ static PyObject *__pyx_pf_4core_4quat_4Quat_4Quat_10set_y(struct __pyx_obj_4core
  */
   api_core->godot_quat_set_y((&__pyx_v_self->_native), __pyx_v_val);
 
-  /* "core/quat/Quat.pyx":22
+  /* "core/quat/Quat.pyx":25
  *         return api_core.godot_quat_get_y(&self._native)
  * 
  *     def set_y(self, godot_real val):             # <<<<<<<<<<<<<<
@@ -1854,7 +1895,7 @@ static PyObject *__pyx_pf_4core_4quat_4Quat_4Quat_10set_y(struct __pyx_obj_4core
   return __pyx_r;
 }
 
-/* "core/quat/Quat.pyx":25
+/* "core/quat/Quat.pyx":28
  *         api_core.godot_quat_set_y(&self._native, val)
  * 
  *     def get_z(self):             # <<<<<<<<<<<<<<
@@ -1884,7 +1925,7 @@ static PyObject *__pyx_pf_4core_4quat_4Quat_4Quat_12get_z(struct __pyx_obj_4core
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("get_z", 0);
 
-  /* "core/quat/Quat.pyx":26
+  /* "core/quat/Quat.pyx":29
  * 
  *     def get_z(self):
  *         return api_core.godot_quat_get_z(&self._native)             # <<<<<<<<<<<<<<
@@ -1892,13 +1933,13 @@ static PyObject *__pyx_pf_4core_4quat_4Quat_4Quat_12get_z(struct __pyx_obj_4core
  *     def set_z(self, godot_real val):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = PyFloat_FromDouble(api_core->godot_quat_get_z((&__pyx_v_self->_native))); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 26, __pyx_L1_error)
+  __pyx_t_1 = PyFloat_FromDouble(api_core->godot_quat_get_z((&__pyx_v_self->_native))); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 29, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "core/quat/Quat.pyx":25
+  /* "core/quat/Quat.pyx":28
  *         api_core.godot_quat_set_y(&self._native, val)
  * 
  *     def get_z(self):             # <<<<<<<<<<<<<<
@@ -1917,7 +1958,7 @@ static PyObject *__pyx_pf_4core_4quat_4Quat_4Quat_12get_z(struct __pyx_obj_4core
   return __pyx_r;
 }
 
-/* "core/quat/Quat.pyx":28
+/* "core/quat/Quat.pyx":31
  *         return api_core.godot_quat_get_z(&self._native)
  * 
  *     def set_z(self, godot_real val):             # <<<<<<<<<<<<<<
@@ -1936,7 +1977,7 @@ static PyObject *__pyx_pw_4core_4quat_4Quat_4Quat_15set_z(PyObject *__pyx_v_self
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("set_z (wrapper)", 0);
   assert(__pyx_arg_val); {
-    __pyx_v_val = __pyx_PyFloat_AsFloat(__pyx_arg_val); if (unlikely((__pyx_v_val == ((godot_real)-1)) && PyErr_Occurred())) __PYX_ERR(1, 28, __pyx_L3_error)
+    __pyx_v_val = __pyx_PyFloat_AsFloat(__pyx_arg_val); if (unlikely((__pyx_v_val == ((godot_real)-1)) && PyErr_Occurred())) __PYX_ERR(1, 31, __pyx_L3_error)
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -1956,7 +1997,7 @@ static PyObject *__pyx_pf_4core_4quat_4Quat_4Quat_14set_z(struct __pyx_obj_4core
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("set_z", 0);
 
-  /* "core/quat/Quat.pyx":29
+  /* "core/quat/Quat.pyx":32
  * 
  *     def set_z(self, godot_real val):
  *         api_core.godot_quat_set_z(&self._native, val)             # <<<<<<<<<<<<<<
@@ -1965,7 +2006,7 @@ static PyObject *__pyx_pf_4core_4quat_4Quat_4Quat_14set_z(struct __pyx_obj_4core
  */
   api_core->godot_quat_set_z((&__pyx_v_self->_native), __pyx_v_val);
 
-  /* "core/quat/Quat.pyx":28
+  /* "core/quat/Quat.pyx":31
  *         return api_core.godot_quat_get_z(&self._native)
  * 
  *     def set_z(self, godot_real val):             # <<<<<<<<<<<<<<
@@ -1980,7 +2021,7 @@ static PyObject *__pyx_pf_4core_4quat_4Quat_4Quat_14set_z(struct __pyx_obj_4core
   return __pyx_r;
 }
 
-/* "core/quat/Quat.pyx":31
+/* "core/quat/Quat.pyx":34
  *         api_core.godot_quat_set_z(&self._native, val)
  * 
  *     def get_w(self):             # <<<<<<<<<<<<<<
@@ -2010,7 +2051,7 @@ static PyObject *__pyx_pf_4core_4quat_4Quat_4Quat_16get_w(struct __pyx_obj_4core
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("get_w", 0);
 
-  /* "core/quat/Quat.pyx":32
+  /* "core/quat/Quat.pyx":35
  * 
  *     def get_w(self):
  *         return api_core.godot_quat_get_w(&self._native)             # <<<<<<<<<<<<<<
@@ -2018,13 +2059,13 @@ static PyObject *__pyx_pf_4core_4quat_4Quat_4Quat_16get_w(struct __pyx_obj_4core
  *     def set_w(self, godot_real val):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = PyFloat_FromDouble(api_core->godot_quat_get_w((&__pyx_v_self->_native))); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 32, __pyx_L1_error)
+  __pyx_t_1 = PyFloat_FromDouble(api_core->godot_quat_get_w((&__pyx_v_self->_native))); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 35, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "core/quat/Quat.pyx":31
+  /* "core/quat/Quat.pyx":34
  *         api_core.godot_quat_set_z(&self._native, val)
  * 
  *     def get_w(self):             # <<<<<<<<<<<<<<
@@ -2043,7 +2084,7 @@ static PyObject *__pyx_pf_4core_4quat_4Quat_4Quat_16get_w(struct __pyx_obj_4core
   return __pyx_r;
 }
 
-/* "core/quat/Quat.pyx":34
+/* "core/quat/Quat.pyx":37
  *         return api_core.godot_quat_get_w(&self._native)
  * 
  *     def set_w(self, godot_real val):             # <<<<<<<<<<<<<<
@@ -2062,7 +2103,7 @@ static PyObject *__pyx_pw_4core_4quat_4Quat_4Quat_19set_w(PyObject *__pyx_v_self
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("set_w (wrapper)", 0);
   assert(__pyx_arg_val); {
-    __pyx_v_val = __pyx_PyFloat_AsFloat(__pyx_arg_val); if (unlikely((__pyx_v_val == ((godot_real)-1)) && PyErr_Occurred())) __PYX_ERR(1, 34, __pyx_L3_error)
+    __pyx_v_val = __pyx_PyFloat_AsFloat(__pyx_arg_val); if (unlikely((__pyx_v_val == ((godot_real)-1)) && PyErr_Occurred())) __PYX_ERR(1, 37, __pyx_L3_error)
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -2082,7 +2123,7 @@ static PyObject *__pyx_pf_4core_4quat_4Quat_4Quat_18set_w(struct __pyx_obj_4core
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("set_w", 0);
 
-  /* "core/quat/Quat.pyx":35
+  /* "core/quat/Quat.pyx":38
  * 
  *     def set_w(self, godot_real val):
  *         api_core.godot_quat_set_w(&self._native, val)             # <<<<<<<<<<<<<<
@@ -2091,7 +2132,7 @@ static PyObject *__pyx_pf_4core_4quat_4Quat_4Quat_18set_w(struct __pyx_obj_4core
  */
   api_core->godot_quat_set_w((&__pyx_v_self->_native), __pyx_v_val);
 
-  /* "core/quat/Quat.pyx":34
+  /* "core/quat/Quat.pyx":37
  *         return api_core.godot_quat_get_w(&self._native)
  * 
  *     def set_w(self, godot_real val):             # <<<<<<<<<<<<<<
@@ -2106,7 +2147,7 @@ static PyObject *__pyx_pf_4core_4quat_4Quat_4Quat_18set_w(struct __pyx_obj_4core
   return __pyx_r;
 }
 
-/* "core/quat/Quat.pyx":37
+/* "core/quat/Quat.pyx":40
  *         api_core.godot_quat_set_w(&self._native, val)
  * 
  *     def __str__(self):             # <<<<<<<<<<<<<<
@@ -2136,7 +2177,7 @@ static PyObject *__pyx_pf_4core_4quat_4Quat_4Quat_20__str__(struct __pyx_obj_4co
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__str__", 0);
 
-  /* "core/quat/Quat.pyx":38
+  /* "core/quat/Quat.pyx":41
  * 
  *     def __str__(self):
  *         return api_core.godot_quat_as_string(&self._native)             # <<<<<<<<<<<<<<
@@ -2144,13 +2185,13 @@ static PyObject *__pyx_pf_4core_4quat_4Quat_4Quat_20__str__(struct __pyx_obj_4co
  *     def length(self):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __pyx_convert__to_py_godot_string(api_core->godot_quat_as_string((&__pyx_v_self->_native))); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 38, __pyx_L1_error)
+  __pyx_t_1 = __pyx_convert__to_py_godot_string(api_core->godot_quat_as_string((&__pyx_v_self->_native))); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 41, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "core/quat/Quat.pyx":37
+  /* "core/quat/Quat.pyx":40
  *         api_core.godot_quat_set_w(&self._native, val)
  * 
  *     def __str__(self):             # <<<<<<<<<<<<<<
@@ -2169,7 +2210,7 @@ static PyObject *__pyx_pf_4core_4quat_4Quat_4Quat_20__str__(struct __pyx_obj_4co
   return __pyx_r;
 }
 
-/* "core/quat/Quat.pyx":40
+/* "core/quat/Quat.pyx":43
  *         return api_core.godot_quat_as_string(&self._native)
  * 
  *     def length(self):             # <<<<<<<<<<<<<<
@@ -2199,7 +2240,7 @@ static PyObject *__pyx_pf_4core_4quat_4Quat_4Quat_22length(struct __pyx_obj_4cor
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("length", 0);
 
-  /* "core/quat/Quat.pyx":41
+  /* "core/quat/Quat.pyx":44
  * 
  *     def length(self):
  *         return api_core.godot_quat_length(&self._native)             # <<<<<<<<<<<<<<
@@ -2207,13 +2248,13 @@ static PyObject *__pyx_pf_4core_4quat_4Quat_4Quat_22length(struct __pyx_obj_4cor
  *     def length_squared(self):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = PyFloat_FromDouble(api_core->godot_quat_length((&__pyx_v_self->_native))); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 41, __pyx_L1_error)
+  __pyx_t_1 = PyFloat_FromDouble(api_core->godot_quat_length((&__pyx_v_self->_native))); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 44, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "core/quat/Quat.pyx":40
+  /* "core/quat/Quat.pyx":43
  *         return api_core.godot_quat_as_string(&self._native)
  * 
  *     def length(self):             # <<<<<<<<<<<<<<
@@ -2232,7 +2273,7 @@ static PyObject *__pyx_pf_4core_4quat_4Quat_4Quat_22length(struct __pyx_obj_4cor
   return __pyx_r;
 }
 
-/* "core/quat/Quat.pyx":43
+/* "core/quat/Quat.pyx":46
  *         return api_core.godot_quat_length(&self._native)
  * 
  *     def length_squared(self):             # <<<<<<<<<<<<<<
@@ -2262,7 +2303,7 @@ static PyObject *__pyx_pf_4core_4quat_4Quat_4Quat_24length_squared(struct __pyx_
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("length_squared", 0);
 
-  /* "core/quat/Quat.pyx":44
+  /* "core/quat/Quat.pyx":47
  * 
  *     def length_squared(self):
  *         return api_core.godot_quat_length_squared(&self._native)             # <<<<<<<<<<<<<<
@@ -2270,13 +2311,13 @@ static PyObject *__pyx_pf_4core_4quat_4Quat_4Quat_24length_squared(struct __pyx_
  *     def normalized(self):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = PyFloat_FromDouble(api_core->godot_quat_length_squared((&__pyx_v_self->_native))); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 44, __pyx_L1_error)
+  __pyx_t_1 = PyFloat_FromDouble(api_core->godot_quat_length_squared((&__pyx_v_self->_native))); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 47, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "core/quat/Quat.pyx":43
+  /* "core/quat/Quat.pyx":46
  *         return api_core.godot_quat_length(&self._native)
  * 
  *     def length_squared(self):             # <<<<<<<<<<<<<<
@@ -2295,7 +2336,7 @@ static PyObject *__pyx_pf_4core_4quat_4Quat_4Quat_24length_squared(struct __pyx_
   return __pyx_r;
 }
 
-/* "core/quat/Quat.pyx":46
+/* "core/quat/Quat.pyx":49
  *         return api_core.godot_quat_length_squared(&self._native)
  * 
  *     def normalized(self):             # <<<<<<<<<<<<<<
@@ -2325,7 +2366,7 @@ static PyObject *__pyx_pf_4core_4quat_4Quat_4Quat_26normalized(struct __pyx_obj_
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("normalized", 0);
 
-  /* "core/quat/Quat.pyx":47
+  /* "core/quat/Quat.pyx":50
  * 
  *     def normalized(self):
  *         return Quat. new_static(api_core.godot_quat_normalized(&self._native))             # <<<<<<<<<<<<<<
@@ -2333,13 +2374,13 @@ static PyObject *__pyx_pf_4core_4quat_4Quat_4Quat_26normalized(struct __pyx_obj_
  *     def is_normalized(self):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = ((PyObject *)__pyx_f_4core_4quat_4Quat_4Quat_new_static(api_core->godot_quat_normalized((&__pyx_v_self->_native)))); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 47, __pyx_L1_error)
+  __pyx_t_1 = ((PyObject *)__pyx_f_4core_4quat_4Quat_4Quat_new_static(api_core->godot_quat_normalized((&__pyx_v_self->_native)))); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 50, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "core/quat/Quat.pyx":46
+  /* "core/quat/Quat.pyx":49
  *         return api_core.godot_quat_length_squared(&self._native)
  * 
  *     def normalized(self):             # <<<<<<<<<<<<<<
@@ -2358,7 +2399,7 @@ static PyObject *__pyx_pf_4core_4quat_4Quat_4Quat_26normalized(struct __pyx_obj_
   return __pyx_r;
 }
 
-/* "core/quat/Quat.pyx":49
+/* "core/quat/Quat.pyx":52
  *         return Quat. new_static(api_core.godot_quat_normalized(&self._native))
  * 
  *     def is_normalized(self):             # <<<<<<<<<<<<<<
@@ -2388,7 +2429,7 @@ static PyObject *__pyx_pf_4core_4quat_4Quat_4Quat_28is_normalized(struct __pyx_o
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("is_normalized", 0);
 
-  /* "core/quat/Quat.pyx":50
+  /* "core/quat/Quat.pyx":53
  * 
  *     def is_normalized(self):
  *         return api_core.godot_quat_is_normalized(&self._native)             # <<<<<<<<<<<<<<
@@ -2396,13 +2437,13 @@ static PyObject *__pyx_pf_4core_4quat_4Quat_4Quat_28is_normalized(struct __pyx_o
  *     def inverse(self):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_PyBool_FromLong(api_core->godot_quat_is_normalized((&__pyx_v_self->_native))); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 50, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyBool_FromLong(api_core->godot_quat_is_normalized((&__pyx_v_self->_native))); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 53, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "core/quat/Quat.pyx":49
+  /* "core/quat/Quat.pyx":52
  *         return Quat. new_static(api_core.godot_quat_normalized(&self._native))
  * 
  *     def is_normalized(self):             # <<<<<<<<<<<<<<
@@ -2421,7 +2462,7 @@ static PyObject *__pyx_pf_4core_4quat_4Quat_4Quat_28is_normalized(struct __pyx_o
   return __pyx_r;
 }
 
-/* "core/quat/Quat.pyx":52
+/* "core/quat/Quat.pyx":55
  *         return api_core.godot_quat_is_normalized(&self._native)
  * 
  *     def inverse(self):             # <<<<<<<<<<<<<<
@@ -2451,7 +2492,7 @@ static PyObject *__pyx_pf_4core_4quat_4Quat_4Quat_30inverse(struct __pyx_obj_4co
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("inverse", 0);
 
-  /* "core/quat/Quat.pyx":53
+  /* "core/quat/Quat.pyx":56
  * 
  *     def inverse(self):
  *         return Quat. new_static(api_core.godot_quat_inverse(&self._native))             # <<<<<<<<<<<<<<
@@ -2459,13 +2500,13 @@ static PyObject *__pyx_pf_4core_4quat_4Quat_4Quat_30inverse(struct __pyx_obj_4co
  *     def dot(self, Quat b):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = ((PyObject *)__pyx_f_4core_4quat_4Quat_4Quat_new_static(api_core->godot_quat_inverse((&__pyx_v_self->_native)))); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 53, __pyx_L1_error)
+  __pyx_t_1 = ((PyObject *)__pyx_f_4core_4quat_4Quat_4Quat_new_static(api_core->godot_quat_inverse((&__pyx_v_self->_native)))); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 56, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "core/quat/Quat.pyx":52
+  /* "core/quat/Quat.pyx":55
  *         return api_core.godot_quat_is_normalized(&self._native)
  * 
  *     def inverse(self):             # <<<<<<<<<<<<<<
@@ -2484,7 +2525,7 @@ static PyObject *__pyx_pf_4core_4quat_4Quat_4Quat_30inverse(struct __pyx_obj_4co
   return __pyx_r;
 }
 
-/* "core/quat/Quat.pyx":55
+/* "core/quat/Quat.pyx":58
  *         return Quat. new_static(api_core.godot_quat_inverse(&self._native))
  * 
  *     def dot(self, Quat b):             # <<<<<<<<<<<<<<
@@ -2501,7 +2542,7 @@ static PyObject *__pyx_pw_4core_4quat_4Quat_4Quat_33dot(PyObject *__pyx_v_self, 
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("dot (wrapper)", 0);
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_b), __pyx_ptype_4core_4quat_4Quat_Quat, 1, "b", 0))) __PYX_ERR(1, 55, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_b), __pyx_ptype_4core_4quat_4Quat_Quat, 1, "b", 0))) __PYX_ERR(1, 58, __pyx_L1_error)
   __pyx_r = __pyx_pf_4core_4quat_4Quat_4Quat_32dot(((struct __pyx_obj_4core_4quat_4Quat_Quat *)__pyx_v_self), ((struct __pyx_obj_4core_4quat_4Quat_Quat *)__pyx_v_b));
 
   /* function exit code */
@@ -2522,7 +2563,7 @@ static PyObject *__pyx_pf_4core_4quat_4Quat_4Quat_32dot(struct __pyx_obj_4core_4
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("dot", 0);
 
-  /* "core/quat/Quat.pyx":56
+  /* "core/quat/Quat.pyx":59
  * 
  *     def dot(self, Quat b):
  *         return api_core.godot_quat_dot(&self._native, &b._native)             # <<<<<<<<<<<<<<
@@ -2530,13 +2571,13 @@ static PyObject *__pyx_pf_4core_4quat_4Quat_4Quat_32dot(struct __pyx_obj_4core_4
  *     def xform(self, Vector3 v):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = PyFloat_FromDouble(api_core->godot_quat_dot((&__pyx_v_self->_native), (&__pyx_v_b->_native))); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 56, __pyx_L1_error)
+  __pyx_t_1 = PyFloat_FromDouble(api_core->godot_quat_dot((&__pyx_v_self->_native), (&__pyx_v_b->_native))); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 59, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "core/quat/Quat.pyx":55
+  /* "core/quat/Quat.pyx":58
  *         return Quat. new_static(api_core.godot_quat_inverse(&self._native))
  * 
  *     def dot(self, Quat b):             # <<<<<<<<<<<<<<
@@ -2555,7 +2596,7 @@ static PyObject *__pyx_pf_4core_4quat_4Quat_4Quat_32dot(struct __pyx_obj_4core_4
   return __pyx_r;
 }
 
-/* "core/quat/Quat.pyx":58
+/* "core/quat/Quat.pyx":61
  *         return api_core.godot_quat_dot(&self._native, &b._native)
  * 
  *     def xform(self, Vector3 v):             # <<<<<<<<<<<<<<
@@ -2572,7 +2613,7 @@ static PyObject *__pyx_pw_4core_4quat_4Quat_4Quat_35xform(PyObject *__pyx_v_self
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("xform (wrapper)", 0);
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_v), __pyx_ptype_4core_7vector3_7Vector3_Vector3, 1, "v", 0))) __PYX_ERR(1, 58, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_v), __pyx_ptype_4core_7vector3_7Vector3_Vector3, 1, "v", 0))) __PYX_ERR(1, 61, __pyx_L1_error)
   __pyx_r = __pyx_pf_4core_4quat_4Quat_4Quat_34xform(((struct __pyx_obj_4core_4quat_4Quat_Quat *)__pyx_v_self), ((struct __pyx_obj_4core_7vector3_7Vector3_Vector3 *)__pyx_v_v));
 
   /* function exit code */
@@ -2593,7 +2634,7 @@ static PyObject *__pyx_pf_4core_4quat_4Quat_4Quat_34xform(struct __pyx_obj_4core
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("xform", 0);
 
-  /* "core/quat/Quat.pyx":59
+  /* "core/quat/Quat.pyx":62
  * 
  *     def xform(self, Vector3 v):
  *         return Vector3. new_static(api_core.godot_quat_xform(&self._native, &v._native))             # <<<<<<<<<<<<<<
@@ -2601,13 +2642,13 @@ static PyObject *__pyx_pf_4core_4quat_4Quat_4Quat_34xform(struct __pyx_obj_4core
  *     def slerp(self, Quat b, godot_real t):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = ((PyObject *)__pyx_f_4core_7vector3_7Vector3_7Vector3_new_static(api_core->godot_quat_xform((&__pyx_v_self->_native), (&__pyx_v_v->_native)))); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 59, __pyx_L1_error)
+  __pyx_t_1 = ((PyObject *)__pyx_f_4core_7vector3_7Vector3_7Vector3_new_static(api_core->godot_quat_xform((&__pyx_v_self->_native), (&__pyx_v_v->_native)))); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 62, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "core/quat/Quat.pyx":58
+  /* "core/quat/Quat.pyx":61
  *         return api_core.godot_quat_dot(&self._native, &b._native)
  * 
  *     def xform(self, Vector3 v):             # <<<<<<<<<<<<<<
@@ -2626,7 +2667,7 @@ static PyObject *__pyx_pf_4core_4quat_4Quat_4Quat_34xform(struct __pyx_obj_4core
   return __pyx_r;
 }
 
-/* "core/quat/Quat.pyx":61
+/* "core/quat/Quat.pyx":64
  *         return Vector3. new_static(api_core.godot_quat_xform(&self._native, &v._native))
  * 
  *     def slerp(self, Quat b, godot_real t):             # <<<<<<<<<<<<<<
@@ -2668,11 +2709,11 @@ static PyObject *__pyx_pw_4core_4quat_4Quat_4Quat_37slerp(PyObject *__pyx_v_self
         case  1:
         if (likely((values[1] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_t)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("slerp", 1, 2, 2, 1); __PYX_ERR(1, 61, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("slerp", 1, 2, 2, 1); __PYX_ERR(1, 64, __pyx_L3_error)
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "slerp") < 0)) __PYX_ERR(1, 61, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "slerp") < 0)) __PYX_ERR(1, 64, __pyx_L3_error)
       }
     } else if (PyTuple_GET_SIZE(__pyx_args) != 2) {
       goto __pyx_L5_argtuple_error;
@@ -2681,17 +2722,17 @@ static PyObject *__pyx_pw_4core_4quat_4Quat_4Quat_37slerp(PyObject *__pyx_v_self
       values[1] = PyTuple_GET_ITEM(__pyx_args, 1);
     }
     __pyx_v_b = ((struct __pyx_obj_4core_4quat_4Quat_Quat *)values[0]);
-    __pyx_v_t = __pyx_PyFloat_AsFloat(values[1]); if (unlikely((__pyx_v_t == ((godot_real)-1)) && PyErr_Occurred())) __PYX_ERR(1, 61, __pyx_L3_error)
+    __pyx_v_t = __pyx_PyFloat_AsFloat(values[1]); if (unlikely((__pyx_v_t == ((godot_real)-1)) && PyErr_Occurred())) __PYX_ERR(1, 64, __pyx_L3_error)
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("slerp", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(1, 61, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("slerp", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(1, 64, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("core.quat.Quat.Quat.slerp", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_b), __pyx_ptype_4core_4quat_4Quat_Quat, 1, "b", 0))) __PYX_ERR(1, 61, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_b), __pyx_ptype_4core_4quat_4Quat_Quat, 1, "b", 0))) __PYX_ERR(1, 64, __pyx_L1_error)
   __pyx_r = __pyx_pf_4core_4quat_4Quat_4Quat_36slerp(((struct __pyx_obj_4core_4quat_4Quat_Quat *)__pyx_v_self), __pyx_v_b, __pyx_v_t);
 
   /* function exit code */
@@ -2712,7 +2753,7 @@ static PyObject *__pyx_pf_4core_4quat_4Quat_4Quat_36slerp(struct __pyx_obj_4core
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("slerp", 0);
 
-  /* "core/quat/Quat.pyx":62
+  /* "core/quat/Quat.pyx":65
  * 
  *     def slerp(self, Quat b, godot_real t):
  *         return Quat. new_static(api_core.godot_quat_slerp(&self._native, &b._native, t))             # <<<<<<<<<<<<<<
@@ -2720,13 +2761,13 @@ static PyObject *__pyx_pf_4core_4quat_4Quat_4Quat_36slerp(struct __pyx_obj_4core
  *     def slerpni(self, Quat b, godot_real t):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = ((PyObject *)__pyx_f_4core_4quat_4Quat_4Quat_new_static(api_core->godot_quat_slerp((&__pyx_v_self->_native), (&__pyx_v_b->_native), __pyx_v_t))); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 62, __pyx_L1_error)
+  __pyx_t_1 = ((PyObject *)__pyx_f_4core_4quat_4Quat_4Quat_new_static(api_core->godot_quat_slerp((&__pyx_v_self->_native), (&__pyx_v_b->_native), __pyx_v_t))); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 65, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "core/quat/Quat.pyx":61
+  /* "core/quat/Quat.pyx":64
  *         return Vector3. new_static(api_core.godot_quat_xform(&self._native, &v._native))
  * 
  *     def slerp(self, Quat b, godot_real t):             # <<<<<<<<<<<<<<
@@ -2745,7 +2786,7 @@ static PyObject *__pyx_pf_4core_4quat_4Quat_4Quat_36slerp(struct __pyx_obj_4core
   return __pyx_r;
 }
 
-/* "core/quat/Quat.pyx":64
+/* "core/quat/Quat.pyx":67
  *         return Quat. new_static(api_core.godot_quat_slerp(&self._native, &b._native, t))
  * 
  *     def slerpni(self, Quat b, godot_real t):             # <<<<<<<<<<<<<<
@@ -2787,11 +2828,11 @@ static PyObject *__pyx_pw_4core_4quat_4Quat_4Quat_39slerpni(PyObject *__pyx_v_se
         case  1:
         if (likely((values[1] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_t)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("slerpni", 1, 2, 2, 1); __PYX_ERR(1, 64, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("slerpni", 1, 2, 2, 1); __PYX_ERR(1, 67, __pyx_L3_error)
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "slerpni") < 0)) __PYX_ERR(1, 64, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "slerpni") < 0)) __PYX_ERR(1, 67, __pyx_L3_error)
       }
     } else if (PyTuple_GET_SIZE(__pyx_args) != 2) {
       goto __pyx_L5_argtuple_error;
@@ -2800,17 +2841,17 @@ static PyObject *__pyx_pw_4core_4quat_4Quat_4Quat_39slerpni(PyObject *__pyx_v_se
       values[1] = PyTuple_GET_ITEM(__pyx_args, 1);
     }
     __pyx_v_b = ((struct __pyx_obj_4core_4quat_4Quat_Quat *)values[0]);
-    __pyx_v_t = __pyx_PyFloat_AsFloat(values[1]); if (unlikely((__pyx_v_t == ((godot_real)-1)) && PyErr_Occurred())) __PYX_ERR(1, 64, __pyx_L3_error)
+    __pyx_v_t = __pyx_PyFloat_AsFloat(values[1]); if (unlikely((__pyx_v_t == ((godot_real)-1)) && PyErr_Occurred())) __PYX_ERR(1, 67, __pyx_L3_error)
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("slerpni", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(1, 64, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("slerpni", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(1, 67, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("core.quat.Quat.Quat.slerpni", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_b), __pyx_ptype_4core_4quat_4Quat_Quat, 1, "b", 0))) __PYX_ERR(1, 64, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_b), __pyx_ptype_4core_4quat_4Quat_Quat, 1, "b", 0))) __PYX_ERR(1, 67, __pyx_L1_error)
   __pyx_r = __pyx_pf_4core_4quat_4Quat_4Quat_38slerpni(((struct __pyx_obj_4core_4quat_4Quat_Quat *)__pyx_v_self), __pyx_v_b, __pyx_v_t);
 
   /* function exit code */
@@ -2831,7 +2872,7 @@ static PyObject *__pyx_pf_4core_4quat_4Quat_4Quat_38slerpni(struct __pyx_obj_4co
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("slerpni", 0);
 
-  /* "core/quat/Quat.pyx":65
+  /* "core/quat/Quat.pyx":68
  * 
  *     def slerpni(self, Quat b, godot_real t):
  *         return Quat. new_static(api_core.godot_quat_slerpni(&self._native, &b._native, t))             # <<<<<<<<<<<<<<
@@ -2839,13 +2880,13 @@ static PyObject *__pyx_pf_4core_4quat_4Quat_4Quat_38slerpni(struct __pyx_obj_4co
  *     def cubic_slerp(self, Quat b, Quat pre_a, Quat post_b, godot_real t):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = ((PyObject *)__pyx_f_4core_4quat_4Quat_4Quat_new_static(api_core->godot_quat_slerpni((&__pyx_v_self->_native), (&__pyx_v_b->_native), __pyx_v_t))); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 65, __pyx_L1_error)
+  __pyx_t_1 = ((PyObject *)__pyx_f_4core_4quat_4Quat_4Quat_new_static(api_core->godot_quat_slerpni((&__pyx_v_self->_native), (&__pyx_v_b->_native), __pyx_v_t))); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 68, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "core/quat/Quat.pyx":64
+  /* "core/quat/Quat.pyx":67
  *         return Quat. new_static(api_core.godot_quat_slerp(&self._native, &b._native, t))
  * 
  *     def slerpni(self, Quat b, godot_real t):             # <<<<<<<<<<<<<<
@@ -2864,7 +2905,7 @@ static PyObject *__pyx_pf_4core_4quat_4Quat_4Quat_38slerpni(struct __pyx_obj_4co
   return __pyx_r;
 }
 
-/* "core/quat/Quat.pyx":67
+/* "core/quat/Quat.pyx":70
  *         return Quat. new_static(api_core.godot_quat_slerpni(&self._native, &b._native, t))
  * 
  *     def cubic_slerp(self, Quat b, Quat pre_a, Quat post_b, godot_real t):             # <<<<<<<<<<<<<<
@@ -2912,23 +2953,23 @@ static PyObject *__pyx_pw_4core_4quat_4Quat_4Quat_41cubic_slerp(PyObject *__pyx_
         case  1:
         if (likely((values[1] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_pre_a)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("cubic_slerp", 1, 4, 4, 1); __PYX_ERR(1, 67, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("cubic_slerp", 1, 4, 4, 1); __PYX_ERR(1, 70, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  2:
         if (likely((values[2] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_post_b)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("cubic_slerp", 1, 4, 4, 2); __PYX_ERR(1, 67, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("cubic_slerp", 1, 4, 4, 2); __PYX_ERR(1, 70, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  3:
         if (likely((values[3] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_t)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("cubic_slerp", 1, 4, 4, 3); __PYX_ERR(1, 67, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("cubic_slerp", 1, 4, 4, 3); __PYX_ERR(1, 70, __pyx_L3_error)
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "cubic_slerp") < 0)) __PYX_ERR(1, 67, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "cubic_slerp") < 0)) __PYX_ERR(1, 70, __pyx_L3_error)
       }
     } else if (PyTuple_GET_SIZE(__pyx_args) != 4) {
       goto __pyx_L5_argtuple_error;
@@ -2941,19 +2982,19 @@ static PyObject *__pyx_pw_4core_4quat_4Quat_4Quat_41cubic_slerp(PyObject *__pyx_
     __pyx_v_b = ((struct __pyx_obj_4core_4quat_4Quat_Quat *)values[0]);
     __pyx_v_pre_a = ((struct __pyx_obj_4core_4quat_4Quat_Quat *)values[1]);
     __pyx_v_post_b = ((struct __pyx_obj_4core_4quat_4Quat_Quat *)values[2]);
-    __pyx_v_t = __pyx_PyFloat_AsFloat(values[3]); if (unlikely((__pyx_v_t == ((godot_real)-1)) && PyErr_Occurred())) __PYX_ERR(1, 67, __pyx_L3_error)
+    __pyx_v_t = __pyx_PyFloat_AsFloat(values[3]); if (unlikely((__pyx_v_t == ((godot_real)-1)) && PyErr_Occurred())) __PYX_ERR(1, 70, __pyx_L3_error)
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("cubic_slerp", 1, 4, 4, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(1, 67, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("cubic_slerp", 1, 4, 4, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(1, 70, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("core.quat.Quat.Quat.cubic_slerp", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_b), __pyx_ptype_4core_4quat_4Quat_Quat, 1, "b", 0))) __PYX_ERR(1, 67, __pyx_L1_error)
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_pre_a), __pyx_ptype_4core_4quat_4Quat_Quat, 1, "pre_a", 0))) __PYX_ERR(1, 67, __pyx_L1_error)
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_post_b), __pyx_ptype_4core_4quat_4Quat_Quat, 1, "post_b", 0))) __PYX_ERR(1, 67, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_b), __pyx_ptype_4core_4quat_4Quat_Quat, 1, "b", 0))) __PYX_ERR(1, 70, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_pre_a), __pyx_ptype_4core_4quat_4Quat_Quat, 1, "pre_a", 0))) __PYX_ERR(1, 70, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_post_b), __pyx_ptype_4core_4quat_4Quat_Quat, 1, "post_b", 0))) __PYX_ERR(1, 70, __pyx_L1_error)
   __pyx_r = __pyx_pf_4core_4quat_4Quat_4Quat_40cubic_slerp(((struct __pyx_obj_4core_4quat_4Quat_Quat *)__pyx_v_self), __pyx_v_b, __pyx_v_pre_a, __pyx_v_post_b, __pyx_v_t);
 
   /* function exit code */
@@ -2975,7 +3016,7 @@ static PyObject *__pyx_pf_4core_4quat_4Quat_4Quat_40cubic_slerp(struct __pyx_obj
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("cubic_slerp", 0);
 
-  /* "core/quat/Quat.pyx":68
+  /* "core/quat/Quat.pyx":71
  * 
  *     def cubic_slerp(self, Quat b, Quat pre_a, Quat post_b, godot_real t):
  *         return Quat(api_core.godot_quat_cubic_slerp(&self._native, &b._native, &pre_a._native, &post_b._native, t))             # <<<<<<<<<<<<<<
@@ -2983,16 +3024,16 @@ static PyObject *__pyx_pf_4core_4quat_4Quat_4Quat_40cubic_slerp(struct __pyx_obj
  *     def mult(self, godot_real b):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __pyx_convert__to_py_godot_quat(api_core->godot_quat_cubic_slerp((&__pyx_v_self->_native), (&__pyx_v_b->_native), (&__pyx_v_pre_a->_native), (&__pyx_v_post_b->_native), __pyx_v_t)); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 68, __pyx_L1_error)
+  __pyx_t_1 = __pyx_convert__to_py_godot_quat(api_core->godot_quat_cubic_slerp((&__pyx_v_self->_native), (&__pyx_v_b->_native), (&__pyx_v_pre_a->_native), (&__pyx_v_post_b->_native), __pyx_v_t)); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 71, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = __Pyx_PyObject_CallOneArg(((PyObject *)__pyx_ptype_4core_4quat_4Quat_Quat), __pyx_t_1); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 68, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_CallOneArg(((PyObject *)__pyx_ptype_4core_4quat_4Quat_Quat), __pyx_t_1); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 71, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_r = __pyx_t_2;
   __pyx_t_2 = 0;
   goto __pyx_L0;
 
-  /* "core/quat/Quat.pyx":67
+  /* "core/quat/Quat.pyx":70
  *         return Quat. new_static(api_core.godot_quat_slerpni(&self._native, &b._native, t))
  * 
  *     def cubic_slerp(self, Quat b, Quat pre_a, Quat post_b, godot_real t):             # <<<<<<<<<<<<<<
@@ -3012,7 +3053,7 @@ static PyObject *__pyx_pf_4core_4quat_4Quat_4Quat_40cubic_slerp(struct __pyx_obj
   return __pyx_r;
 }
 
-/* "core/quat/Quat.pyx":70
+/* "core/quat/Quat.pyx":73
  *         return Quat(api_core.godot_quat_cubic_slerp(&self._native, &b._native, &pre_a._native, &post_b._native, t))
  * 
  *     def mult(self, godot_real b):             # <<<<<<<<<<<<<<
@@ -3031,7 +3072,7 @@ static PyObject *__pyx_pw_4core_4quat_4Quat_4Quat_43mult(PyObject *__pyx_v_self,
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("mult (wrapper)", 0);
   assert(__pyx_arg_b); {
-    __pyx_v_b = __pyx_PyFloat_AsFloat(__pyx_arg_b); if (unlikely((__pyx_v_b == ((godot_real)-1)) && PyErr_Occurred())) __PYX_ERR(1, 70, __pyx_L3_error)
+    __pyx_v_b = __pyx_PyFloat_AsFloat(__pyx_arg_b); if (unlikely((__pyx_v_b == ((godot_real)-1)) && PyErr_Occurred())) __PYX_ERR(1, 73, __pyx_L3_error)
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -3055,7 +3096,7 @@ static PyObject *__pyx_pf_4core_4quat_4Quat_4Quat_42mult(struct __pyx_obj_4core_
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("mult", 0);
 
-  /* "core/quat/Quat.pyx":71
+  /* "core/quat/Quat.pyx":74
  * 
  *     def mult(self, godot_real b):
  *         return Quat. new_static(api_core.godot_quat_operator_multiply(&self._native, b))             # <<<<<<<<<<<<<<
@@ -3063,13 +3104,13 @@ static PyObject *__pyx_pf_4core_4quat_4Quat_4Quat_42mult(struct __pyx_obj_4core_
  *     def add(self, Quat b):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = ((PyObject *)__pyx_f_4core_4quat_4Quat_4Quat_new_static(api_core->godot_quat_operator_multiply((&__pyx_v_self->_native), __pyx_v_b))); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 71, __pyx_L1_error)
+  __pyx_t_1 = ((PyObject *)__pyx_f_4core_4quat_4Quat_4Quat_new_static(api_core->godot_quat_operator_multiply((&__pyx_v_self->_native), __pyx_v_b))); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 74, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "core/quat/Quat.pyx":70
+  /* "core/quat/Quat.pyx":73
  *         return Quat(api_core.godot_quat_cubic_slerp(&self._native, &b._native, &pre_a._native, &post_b._native, t))
  * 
  *     def mult(self, godot_real b):             # <<<<<<<<<<<<<<
@@ -3088,7 +3129,7 @@ static PyObject *__pyx_pf_4core_4quat_4Quat_4Quat_42mult(struct __pyx_obj_4core_
   return __pyx_r;
 }
 
-/* "core/quat/Quat.pyx":73
+/* "core/quat/Quat.pyx":76
  *         return Quat. new_static(api_core.godot_quat_operator_multiply(&self._native, b))
  * 
  *     def add(self, Quat b):             # <<<<<<<<<<<<<<
@@ -3105,7 +3146,7 @@ static PyObject *__pyx_pw_4core_4quat_4Quat_4Quat_45add(PyObject *__pyx_v_self, 
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("add (wrapper)", 0);
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_b), __pyx_ptype_4core_4quat_4Quat_Quat, 1, "b", 0))) __PYX_ERR(1, 73, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_b), __pyx_ptype_4core_4quat_4Quat_Quat, 1, "b", 0))) __PYX_ERR(1, 76, __pyx_L1_error)
   __pyx_r = __pyx_pf_4core_4quat_4Quat_4Quat_44add(((struct __pyx_obj_4core_4quat_4Quat_Quat *)__pyx_v_self), ((struct __pyx_obj_4core_4quat_4Quat_Quat *)__pyx_v_b));
 
   /* function exit code */
@@ -3126,7 +3167,7 @@ static PyObject *__pyx_pf_4core_4quat_4Quat_4Quat_44add(struct __pyx_obj_4core_4
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("add", 0);
 
-  /* "core/quat/Quat.pyx":74
+  /* "core/quat/Quat.pyx":77
  * 
  *     def add(self, Quat b):
  *         return Quat. new_static(api_core.godot_quat_operator_add(&self._native, &b._native))             # <<<<<<<<<<<<<<
@@ -3134,13 +3175,13 @@ static PyObject *__pyx_pf_4core_4quat_4Quat_4Quat_44add(struct __pyx_obj_4core_4
  *     def sub(self, Quat b):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = ((PyObject *)__pyx_f_4core_4quat_4Quat_4Quat_new_static(api_core->godot_quat_operator_add((&__pyx_v_self->_native), (&__pyx_v_b->_native)))); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 74, __pyx_L1_error)
+  __pyx_t_1 = ((PyObject *)__pyx_f_4core_4quat_4Quat_4Quat_new_static(api_core->godot_quat_operator_add((&__pyx_v_self->_native), (&__pyx_v_b->_native)))); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 77, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "core/quat/Quat.pyx":73
+  /* "core/quat/Quat.pyx":76
  *         return Quat. new_static(api_core.godot_quat_operator_multiply(&self._native, b))
  * 
  *     def add(self, Quat b):             # <<<<<<<<<<<<<<
@@ -3159,7 +3200,7 @@ static PyObject *__pyx_pf_4core_4quat_4Quat_4Quat_44add(struct __pyx_obj_4core_4
   return __pyx_r;
 }
 
-/* "core/quat/Quat.pyx":76
+/* "core/quat/Quat.pyx":79
  *         return Quat. new_static(api_core.godot_quat_operator_add(&self._native, &b._native))
  * 
  *     def sub(self, Quat b):             # <<<<<<<<<<<<<<
@@ -3176,7 +3217,7 @@ static PyObject *__pyx_pw_4core_4quat_4Quat_4Quat_47sub(PyObject *__pyx_v_self, 
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("sub (wrapper)", 0);
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_b), __pyx_ptype_4core_4quat_4Quat_Quat, 1, "b", 0))) __PYX_ERR(1, 76, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_b), __pyx_ptype_4core_4quat_4Quat_Quat, 1, "b", 0))) __PYX_ERR(1, 79, __pyx_L1_error)
   __pyx_r = __pyx_pf_4core_4quat_4Quat_4Quat_46sub(((struct __pyx_obj_4core_4quat_4Quat_Quat *)__pyx_v_self), ((struct __pyx_obj_4core_4quat_4Quat_Quat *)__pyx_v_b));
 
   /* function exit code */
@@ -3197,7 +3238,7 @@ static PyObject *__pyx_pf_4core_4quat_4Quat_4Quat_46sub(struct __pyx_obj_4core_4
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("sub", 0);
 
-  /* "core/quat/Quat.pyx":77
+  /* "core/quat/Quat.pyx":80
  * 
  *     def sub(self, Quat b):
  *         return Quat. new_static(api_core.godot_quat_operator_subtract(&self._native, &b._native))             # <<<<<<<<<<<<<<
@@ -3205,13 +3246,13 @@ static PyObject *__pyx_pf_4core_4quat_4Quat_4Quat_46sub(struct __pyx_obj_4core_4
  *     def div(self, godot_real b):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = ((PyObject *)__pyx_f_4core_4quat_4Quat_4Quat_new_static(api_core->godot_quat_operator_subtract((&__pyx_v_self->_native), (&__pyx_v_b->_native)))); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 77, __pyx_L1_error)
+  __pyx_t_1 = ((PyObject *)__pyx_f_4core_4quat_4Quat_4Quat_new_static(api_core->godot_quat_operator_subtract((&__pyx_v_self->_native), (&__pyx_v_b->_native)))); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 80, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "core/quat/Quat.pyx":76
+  /* "core/quat/Quat.pyx":79
  *         return Quat. new_static(api_core.godot_quat_operator_add(&self._native, &b._native))
  * 
  *     def sub(self, Quat b):             # <<<<<<<<<<<<<<
@@ -3230,7 +3271,7 @@ static PyObject *__pyx_pf_4core_4quat_4Quat_4Quat_46sub(struct __pyx_obj_4core_4
   return __pyx_r;
 }
 
-/* "core/quat/Quat.pyx":79
+/* "core/quat/Quat.pyx":82
  *         return Quat. new_static(api_core.godot_quat_operator_subtract(&self._native, &b._native))
  * 
  *     def div(self, godot_real b):             # <<<<<<<<<<<<<<
@@ -3249,7 +3290,7 @@ static PyObject *__pyx_pw_4core_4quat_4Quat_4Quat_49div(PyObject *__pyx_v_self, 
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("div (wrapper)", 0);
   assert(__pyx_arg_b); {
-    __pyx_v_b = __pyx_PyFloat_AsFloat(__pyx_arg_b); if (unlikely((__pyx_v_b == ((godot_real)-1)) && PyErr_Occurred())) __PYX_ERR(1, 79, __pyx_L3_error)
+    __pyx_v_b = __pyx_PyFloat_AsFloat(__pyx_arg_b); if (unlikely((__pyx_v_b == ((godot_real)-1)) && PyErr_Occurred())) __PYX_ERR(1, 82, __pyx_L3_error)
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -3273,7 +3314,7 @@ static PyObject *__pyx_pf_4core_4quat_4Quat_4Quat_48div(struct __pyx_obj_4core_4
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("div", 0);
 
-  /* "core/quat/Quat.pyx":80
+  /* "core/quat/Quat.pyx":83
  * 
  *     def div(self, godot_real b):
  *         return Quat. new_static(api_core.godot_quat_operator_divide(&self._native, b))             # <<<<<<<<<<<<<<
@@ -3281,13 +3322,13 @@ static PyObject *__pyx_pf_4core_4quat_4Quat_4Quat_48div(struct __pyx_obj_4core_4
  *     def eq(self, Quat b):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = ((PyObject *)__pyx_f_4core_4quat_4Quat_4Quat_new_static(api_core->godot_quat_operator_divide((&__pyx_v_self->_native), __pyx_v_b))); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 80, __pyx_L1_error)
+  __pyx_t_1 = ((PyObject *)__pyx_f_4core_4quat_4Quat_4Quat_new_static(api_core->godot_quat_operator_divide((&__pyx_v_self->_native), __pyx_v_b))); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 83, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "core/quat/Quat.pyx":79
+  /* "core/quat/Quat.pyx":82
  *         return Quat. new_static(api_core.godot_quat_operator_subtract(&self._native, &b._native))
  * 
  *     def div(self, godot_real b):             # <<<<<<<<<<<<<<
@@ -3306,7 +3347,7 @@ static PyObject *__pyx_pf_4core_4quat_4Quat_4Quat_48div(struct __pyx_obj_4core_4
   return __pyx_r;
 }
 
-/* "core/quat/Quat.pyx":82
+/* "core/quat/Quat.pyx":85
  *         return Quat. new_static(api_core.godot_quat_operator_divide(&self._native, b))
  * 
  *     def eq(self, Quat b):             # <<<<<<<<<<<<<<
@@ -3323,7 +3364,7 @@ static PyObject *__pyx_pw_4core_4quat_4Quat_4Quat_51eq(PyObject *__pyx_v_self, P
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("eq (wrapper)", 0);
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_b), __pyx_ptype_4core_4quat_4Quat_Quat, 1, "b", 0))) __PYX_ERR(1, 82, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_b), __pyx_ptype_4core_4quat_4Quat_Quat, 1, "b", 0))) __PYX_ERR(1, 85, __pyx_L1_error)
   __pyx_r = __pyx_pf_4core_4quat_4Quat_4Quat_50eq(((struct __pyx_obj_4core_4quat_4Quat_Quat *)__pyx_v_self), ((struct __pyx_obj_4core_4quat_4Quat_Quat *)__pyx_v_b));
 
   /* function exit code */
@@ -3344,7 +3385,7 @@ static PyObject *__pyx_pf_4core_4quat_4Quat_4Quat_50eq(struct __pyx_obj_4core_4q
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("eq", 0);
 
-  /* "core/quat/Quat.pyx":83
+  /* "core/quat/Quat.pyx":86
  * 
  *     def eq(self, Quat b):
  *         return api_core.godot_quat_operator_equal(&self._native, &b._native)             # <<<<<<<<<<<<<<
@@ -3352,13 +3393,13 @@ static PyObject *__pyx_pf_4core_4quat_4Quat_4Quat_50eq(struct __pyx_obj_4core_4q
  *     def neg(self):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_PyBool_FromLong(api_core->godot_quat_operator_equal((&__pyx_v_self->_native), (&__pyx_v_b->_native))); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 83, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyBool_FromLong(api_core->godot_quat_operator_equal((&__pyx_v_self->_native), (&__pyx_v_b->_native))); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 86, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "core/quat/Quat.pyx":82
+  /* "core/quat/Quat.pyx":85
  *         return Quat. new_static(api_core.godot_quat_operator_divide(&self._native, b))
  * 
  *     def eq(self, Quat b):             # <<<<<<<<<<<<<<
@@ -3377,7 +3418,7 @@ static PyObject *__pyx_pf_4core_4quat_4Quat_4Quat_50eq(struct __pyx_obj_4core_4q
   return __pyx_r;
 }
 
-/* "core/quat/Quat.pyx":85
+/* "core/quat/Quat.pyx":88
  *         return api_core.godot_quat_operator_equal(&self._native, &b._native)
  * 
  *     def neg(self):             # <<<<<<<<<<<<<<
@@ -3406,19 +3447,19 @@ static PyObject *__pyx_pf_4core_4quat_4Quat_4Quat_52neg(struct __pyx_obj_4core_4
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("neg", 0);
 
-  /* "core/quat/Quat.pyx":86
+  /* "core/quat/Quat.pyx":89
  * 
  *     def neg(self):
  *         return Quat. new_static(api_core.godot_quat_operator_neg(&self._native))             # <<<<<<<<<<<<<<
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = ((PyObject *)__pyx_f_4core_4quat_4Quat_4Quat_new_static(api_core->godot_quat_operator_neg((&__pyx_v_self->_native)))); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 86, __pyx_L1_error)
+  __pyx_t_1 = ((PyObject *)__pyx_f_4core_4quat_4Quat_4Quat_new_static(api_core->godot_quat_operator_neg((&__pyx_v_self->_native)))); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 89, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "core/quat/Quat.pyx":85
+  /* "core/quat/Quat.pyx":88
  *         return api_core.godot_quat_operator_equal(&self._native, &b._native)
  * 
  *     def neg(self):             # <<<<<<<<<<<<<<
@@ -4022,10 +4063,17 @@ static int __Pyx_modinit_variable_export_code(void) {
 
 static int __Pyx_modinit_function_export_code(void) {
   __Pyx_RefNannyDeclarations
+  int __pyx_lineno = 0;
+  const char *__pyx_filename = NULL;
+  int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__Pyx_modinit_function_export_code", 0);
   /*--- Function export code ---*/
+  if (__Pyx_ExportFunction("set_api_core_quat", (void (*)(void))__pyx_f_4core_4quat_4Quat_set_api_core_quat, "PyObject *(struct godot_gdnative_core_api_struct *)") < 0) __PYX_ERR(1, 1, __pyx_L1_error)
   __Pyx_RefNannyFinishContext();
   return 0;
+  __pyx_L1_error:;
+  __Pyx_RefNannyFinishContext();
+  return -1;
 }
 
 static int __Pyx_modinit_type_init_code(void) {
@@ -4038,16 +4086,16 @@ static int __Pyx_modinit_type_init_code(void) {
   __pyx_vtabptr_4core_4quat_4Quat_Quat = &__pyx_vtable_4core_4quat_4Quat_Quat;
   __pyx_vtable_4core_4quat_4Quat_Quat.set_native = (void (*)(struct __pyx_obj_4core_4quat_4Quat_Quat *, godot_quat))__pyx_f_4core_4quat_4Quat_4Quat_set_native;
   __pyx_vtable_4core_4quat_4Quat_Quat.new_static = (struct __pyx_obj_4core_4quat_4Quat_Quat *(*)(godot_quat))__pyx_f_4core_4quat_4Quat_4Quat_new_static;
-  if (PyType_Ready(&__pyx_type_4core_4quat_4Quat_Quat) < 0) __PYX_ERR(1, 5, __pyx_L1_error)
+  if (PyType_Ready(&__pyx_type_4core_4quat_4Quat_Quat) < 0) __PYX_ERR(1, 8, __pyx_L1_error)
   #if PY_VERSION_HEX < 0x030800B1
   __pyx_type_4core_4quat_4Quat_Quat.tp_print = 0;
   #endif
   if ((CYTHON_USE_TYPE_SLOTS && CYTHON_USE_PYTYPE_LOOKUP) && likely(!__pyx_type_4core_4quat_4Quat_Quat.tp_dictoffset && __pyx_type_4core_4quat_4Quat_Quat.tp_getattro == PyObject_GenericGetAttr)) {
     __pyx_type_4core_4quat_4Quat_Quat.tp_getattro = __Pyx_PyObject_GenericGetAttr;
   }
-  if (__Pyx_SetVtable(__pyx_type_4core_4quat_4Quat_Quat.tp_dict, __pyx_vtabptr_4core_4quat_4Quat_Quat) < 0) __PYX_ERR(1, 5, __pyx_L1_error)
-  if (PyObject_SetAttr(__pyx_m, __pyx_n_s_Quat, (PyObject *)&__pyx_type_4core_4quat_4Quat_Quat) < 0) __PYX_ERR(1, 5, __pyx_L1_error)
-  if (__Pyx_setup_reduce((PyObject*)&__pyx_type_4core_4quat_4Quat_Quat) < 0) __PYX_ERR(1, 5, __pyx_L1_error)
+  if (__Pyx_SetVtable(__pyx_type_4core_4quat_4Quat_Quat.tp_dict, __pyx_vtabptr_4core_4quat_4Quat_Quat) < 0) __PYX_ERR(1, 8, __pyx_L1_error)
+  if (PyObject_SetAttr(__pyx_m, __pyx_n_s_Quat, (PyObject *)&__pyx_type_4core_4quat_4Quat_Quat) < 0) __PYX_ERR(1, 8, __pyx_L1_error)
+  if (__Pyx_setup_reduce((PyObject*)&__pyx_type_4core_4quat_4Quat_Quat) < 0) __PYX_ERR(1, 8, __pyx_L1_error)
   __pyx_ptype_4core_4quat_4Quat_Quat = &__pyx_type_4core_4quat_4Quat_Quat;
   __Pyx_RefNannyFinishContext();
   return 0;
@@ -4295,7 +4343,7 @@ if (!__Pyx_RefNanny) {
   /*--- Global type/function init code ---*/
   (void)__Pyx_modinit_global_init_code();
   (void)__Pyx_modinit_variable_export_code();
-  (void)__Pyx_modinit_function_export_code();
+  if (unlikely(__Pyx_modinit_function_export_code() < 0)) __PYX_ERR(1, 1, __pyx_L1_error)
   if (unlikely(__Pyx_modinit_type_init_code() < 0)) __PYX_ERR(1, 1, __pyx_L1_error)
   if (unlikely(__Pyx_modinit_type_import_code() < 0)) __PYX_ERR(1, 1, __pyx_L1_error)
   (void)__Pyx_modinit_variable_import_code();
@@ -6076,6 +6124,43 @@ static int __Pyx_check_binary_version(void) {
         return PyErr_WarnEx(NULL, message, 1);
     }
     return 0;
+}
+
+/* FunctionExport */
+static int __Pyx_ExportFunction(const char *name, void (*f)(void), const char *sig) {
+    PyObject *d = 0;
+    PyObject *cobj = 0;
+    union {
+        void (*fp)(void);
+        void *p;
+    } tmp;
+    d = PyObject_GetAttrString(__pyx_m, (char *)"__pyx_capi__");
+    if (!d) {
+        PyErr_Clear();
+        d = PyDict_New();
+        if (!d)
+            goto bad;
+        Py_INCREF(d);
+        if (PyModule_AddObject(__pyx_m, (char *)"__pyx_capi__", d) < 0)
+            goto bad;
+    }
+    tmp.fp = f;
+#if PY_VERSION_HEX >= 0x02070000
+    cobj = PyCapsule_New(tmp.p, sig, 0);
+#else
+    cobj = PyCObject_FromVoidPtrAndDesc(tmp.p, (void *)sig, 0);
+#endif
+    if (!cobj)
+        goto bad;
+    if (PyDict_SetItemString(d, name, cobj) < 0)
+        goto bad;
+    Py_DECREF(cobj);
+    Py_DECREF(d);
+    return 0;
+bad:
+    Py_XDECREF(cobj);
+    Py_XDECREF(d);
+    return -1;
 }
 
 /* InitStrings */
