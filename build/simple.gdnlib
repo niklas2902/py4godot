@@ -7,7 +7,7 @@ reloadable=true
 
 [entry]
 
-Windows.64="res://addons/godot_api/main.cp39-win_amd64.pyd"
+Windows.64="res://addons/godot_api/main.pyd"
 
 [dependencies]
 

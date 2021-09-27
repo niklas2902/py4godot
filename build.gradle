@@ -1,5 +1,8 @@
+apply plugin: 'c'
+
+// custom tasks
 task build_python (type:Exec) {
-    commandLine "cmd","/c","python setup.py build_ext --compiler=msvc"
+    commandLine "cmd","/c","python setup.py build_ext --compiler=msvc -DMS_WIN64"
 }
 
 task createAddons(type: Copy) {
