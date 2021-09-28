@@ -1,5 +1,14 @@
 project('tutorial', 'c')
-add_global_arguments('-DMS_WIN64', language : 'c')
+#add_global_arguments('-DMS_WIN64', language : 'c')
+
+extra_args = []
+message(meson.get_compiler('c').get_id())
+if meson.get_compiler('c').get_id() == 'msvc'
+  extra_args = ['/bigobj']
+else
+  extra_args = []
+endif
+
 
 py = import('python').find_installation()
 dep_py = py.dependency()
@@ -11,10 +20,10 @@ glob = run_command('python', files(meson.current_source_dir()+'/meson_scripts/gl
 sources = glob.stdout().strip().split('\n')
 message(sources)
 
-#foreach source : sources
-#    shared_library(source, source+'.c',
-#    dependencies:[dep_py], include_directories:internal_inc,name_prefix:'', )
-#endforeach
+foreach source : sources
+    shared_library(source, source+'.c',
+    dependencies:[dep_py], include_directories:internal_inc,name_prefix:'',c_args:extra_args )
+endforeach
 
 copy = run_command('python', files(meson.current_source_dir()+'/meson_scripts/copy_tools.py'))
 message(copy.stdout().strip().split('\n'))

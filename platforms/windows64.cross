@@ -1,0 +1,12 @@
+[binaries]
+c = 'cl'
+ar = 'ar'
+strip = 'strip'
+exe_wrapper = 'wine' # A command used to run generated executables.
+
+
+[host_machine]
+system = 'windows'
+cpu_family = 'x86_64'
+cpu = 'x86_64'
+endian = 'little'
