@@ -25,6 +25,4 @@ foreach source : sources
     dependencies:[dep_py], include_directories:internal_inc,name_prefix:'',c_args:extra_args )
 endforeach
 
-copy = run_command('python', files(meson.current_source_dir()+'/meson_scripts/copy_tools.py'))
-message(copy.stdout().strip().split('\n'))
 
