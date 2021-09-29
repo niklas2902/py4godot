@@ -3,10 +3,6 @@ project('tutorial', 'c')
 extra_args = []
 message(meson.get_compiler('c').get_id())
 
-if meson.get_compiler('c').get_id() == 'msvc'
-  extra_args = ['/bigobj']
-endif
-
 if meson.get_compiler('c').get_id() == 'gcc'
     add_global_arguments('-DMS_WIN64', language : 'c')
 endif

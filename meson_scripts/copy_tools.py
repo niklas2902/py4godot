@@ -12,11 +12,11 @@ def run():
     for entry in liste:
         if(entry.startswith("build_meson")):
             print(os.path.dirname("build/addons"+entry.lstrip("build_meson").lstrip("\\linux").
-                                  lstrip("\\windows")))
+                                  lstrip("\\windows64")))
             os.makedirs(os.path.dirname("build/addons/"+(entry.lstrip("build_meson").lstrip("\\linux")
-                                                         .lstrip("\\windows"))),exist_ok=True)
+                                                         .lstrip("\\64"))),exist_ok=True)
             copy(entry, "build/addons/"+(entry.lstrip("build_meson").lstrip("\\linux").
-                                         lstrip("\\windows")).
+                                         lstrip("\\windows64")).
                  replace(".dll", ".pyd"))  # dst can be a folder; use copy2() to preserve timestamp
 
 if __name__ == "__main__":

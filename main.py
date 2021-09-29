@@ -98,7 +98,6 @@ def generate_methods(obj, import_string):
                     return_type = "godot_object"
                 if (return_type in types and not return_type_save in return_type):
                     return_type = types[return_type]
-                    # print(return_type+"|"+return_type_save)
                 result += f"    return {return_type_save + '.new_static(ret)' if return_type_save in types else 'ret'}\n\n"
             elif not return_type_save.startswith("Pool") and return_type != "void":
                 result += f"    cdef {return_type} obj = {return_type}()\n"
