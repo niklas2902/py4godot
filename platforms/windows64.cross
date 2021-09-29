@@ -1,5 +1,4 @@
 [binaries]
-c = 'cl'
 ar = 'ar'
 strip = 'strip'
 exe_wrapper = 'wine' # A command used to run generated executables.
