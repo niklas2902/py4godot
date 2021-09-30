@@ -1,36 +1,54 @@
-import os,subprocess, time
+import subprocess, time
 from main import *
 from Cython.Build import cythonize
 from meson_scripts import copy_tools
 # fromfile_example.py
 import argparse
 
-my_parser = argparse.ArgumentParser(fromfile_prefix_chars='@')
+def cythonize_files():
+    module = cythonize('core/*/*.pyx', language_level=3)
+    # module += cythonize("classes/*.pyx", language_level=3, nthreads=8)
+    module += cythonize("classes/*.pyx", language_level=3)
+    module += cythonize("utils/*.pyx", language_level=3)
+    module += cythonize("godot_api/*.pyx", language_level=3)
+    module += cythonize("pluginscript_api/*.pyx", language_level=3)
+    module += cythonize("pluginscript_api/*/*.pyx", language_level=3)
+    module += cythonize("enums/*.pyx", language_level=3)
 
+def get_compiler():
+    res = subprocess.run("vcvarsall", shell=True,stdout=subprocess.DEVNULL,
+    stderr=subprocess.STDOUT)
+    print(res)
+    if(res.returncode == 0):
+        return "msvc"
+
+    res = subprocess.run("gcc --version", shell=True,stdout=subprocess.DEVNULL,
+    stderr=subprocess.STDOUT)
+    if(res.returncode == 0):
+        return "gcc"
+
+    raise Exception("No compiler found")
+
+
+
+my_parser = argparse.ArgumentParser(fromfile_prefix_chars='@')
 my_parser.add_argument('--compiler',
                        help='specify the compiler, you want to use to compile')
-
 my_parser.add_argument('--target_platform',
                        help='specify the platform, you want to go build for')
-
-
 # Execute parse_args()
 args = my_parser.parse_args()
-print("compiler:",args.compiler)
-print("platform:", args.target_platform)
+
+
 
 start = time.time()
+if(args.compiler == None):
+    print("Checking for compilers")
+    args.compiler = get_compiler()
+    print(f"Got compiler:{args.compiler}")
 
 build()
-
-module = cythonize('core/*/*.pyx', language_level=3)
-#module += cythonize("classes/*.pyx", language_level=3, nthreads=8)
-module += cythonize("classes/*.pyx", language_level=3)
-module += cythonize("utils/*.pyx", language_level=3)
-module += cythonize("godot_api/*.pyx", language_level=3)
-module += cythonize("pluginscript_api/*.pyx", language_level=3)
-module += cythonize("pluginscript_api/*/*.pyx", language_level=3)
-module += cythonize("enums/*.pyx", language_level=3)
+cythonize_files()
 
 
 res = subprocess.Popen("vcvarsall.bat x86_amd64 "
@@ -44,6 +62,4 @@ res.wait()
 copy_tools.run()
 
 print("=================================Build finished==================================")
-print("Build took:", time.time()- start)
-#res = subprocess.call(r"""meson build_meson/windows --cross-file platforms/windows64.cross
-#""", shell=True)
+print("Build took:", time.time()- start, "seconds")

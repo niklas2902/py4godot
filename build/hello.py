@@ -6,23 +6,31 @@ from core import *
 print(PropertyHint)
 print(PropertyHint.GODOT_PROPERTY_HINT_RANGE.value)
 
+DEFAULT_VEL = 5
 @gdclass
 class Ball(Spatial):
 
-	@gdproperty(int, 5, hint=PropertyHint.GODOT_PROPERTY_HINT_RANGE.value, hint_string="1,100,5,slider")
+	@gdproperty(int, DEFAULT_VEL, hint=PropertyHint.GODOT_PROPERTY_HINT_RANGE.value, hint_string="1,100,5,slider")
 	def vel(self):
-		return 1
+		return self._vel
 
 	@vel.setter
 	def vel(self, value):
 		print("set_value", value)
+		self._vel = value
 
+	@gdmethod
+	def _ready(self):
+		print("_ready:")
+		print(self.vel)
+		if(self.vel == None):
+			self.vel = DEFAULT_VEL
+		print(self.vel)
 
 	@gdmethod
 	def _process(self, delta):
-		print(delta)
-		print(self.get_transform())
+		#print("delta:", delta)
 		transform = self.get_transform()
-		transform.set_origin(Vector3(4,0,0))
+		transform.set_origin(Vector3(5,0,2))
 		self.set_transform(transform)
 		

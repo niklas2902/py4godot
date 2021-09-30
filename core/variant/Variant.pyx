@@ -178,7 +178,6 @@ cdef class Variant:
         return api_core.godot_variant_as_uint(&self._native)
     @staticmethod
     cdef int as_int(self):
-        print("as_int")
         return api_core.godot_variant_as_int(&self._native)
     @staticmethod
     cdef as_real(self):

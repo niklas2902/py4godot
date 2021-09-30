@@ -56,8 +56,6 @@ def generate_methods(obj, import_string):
             if ("." in return_type):
                 return_type = return_type.split(".")[-1]
 
-            if (return_type in core):
-                print(return_type, obj["name"])
             if (return_type != "void"):
                 if ("::" in return_type):
                     import_class, return_type = return_type.split("::")
@@ -72,8 +70,7 @@ def generate_methods(obj, import_string):
                 else:
                     return_type_imported = return_type if return_type.split(".")[0] in objects else return_type
                     result += f"    cdef {return_type_imported if return_type_imported not in types else types[return_type_imported]} ret\n\n"
-            if(return_type == "godot_object"):
-                print("##############return_type:"+ return_type)
+
             if (len(method['arguments']) > 0):
                 result += f"    cdef void *args[{len(method['arguments'])}]\n\n"
 
@@ -86,11 +83,9 @@ def generate_methods(obj, import_string):
                         result += f"    args[{i}] = {'&' + arg_name + '._native' if method['arguments'][i]['type'] in core else ('&' + arg_name)}\n"
             else:
                 result += f"""    cdef void * args[1]\n    args[0] = NULL\n"""
-            result += f"    print('call_method_native:{method['name']}')\n"
             if(not method["is_virtual"]):
                 result += f"    api_core.godot_method_bind_ptrcall(bind_{obj['name'].lower()}_{method['name']}," \
                           f"self.godot_owner,{'args' if len(method['arguments']) > 0 else 'NULL'},{'&ret' if return_type != 'void' else 'NULL'})\n"
-            result += f"    hello('hallo2')\n"
             if return_type != "void" and not return_type in objects and not return_type_save.startswith("Pool"):
                 if ("." in return_type):
                     return_type = return_type
@@ -132,8 +127,6 @@ def generate_classes(obj):
 
     result += "\n############################Generated class###################################\n"
 
-    if (obj["name"] == "GlobalConstants"):
-        print(obj["name"], "|", obj["base_class"], obj["base_class"] == "")
     result += f"""cdef class {obj['name']}({obj['base_class'] if obj['base_class'] != "" else "Wrapper"}):\n"""
     result += f"""  def __init__(self):\n"""
     result += f"""    super().__init__()\n"""
@@ -160,9 +153,6 @@ def generate_enums(class_, obj):
 
 
 def generate_pxd(class_, base_class, obj):
-    base_class = base_class.strip()
-    if (class_ == "GlobalConstants"):
-        print(class_, "|", base_class)
 
     string_to_write = "\n"
     # if(class_ == "Object"):
@@ -245,7 +235,6 @@ def build(test=False):
         obj = json.loads(data)
 
     objects = set([element["name"] for element in obj])
-    print(objects)
 
     bindings_file = ""
     pxd_file = """from enum import *
@@ -255,7 +244,6 @@ from utils.Wrapper cimport *"""
     # generate all the class files
     for element in obj:
         if (element["name"].startswith("_")):
-            print(element["name"])
             continue
 
         init_methods_string += f"  init_method_bindings_{element['name']}()\n"
@@ -265,41 +253,7 @@ from utils.Wrapper cimport *"""
         bindings_file += generated_file[1] + "\n"
         pxd_file += generated_file[2]
         create_set(generated_file[0], set_)
-        """try:
-            with open(f"classes/{element['name']}.pyx", "r") as generateFile:
-                file = generateFile.read()
-        except:
-            print(f"File classes/{element['name']}.pyx not found!")
-        if(generated_file != file):
-            print("###########################################write into file#########################################")
-            with open(f"classes/{element['name']}.pyx", "w") as generateFile:
-                generateFile.write(generated_file[0]+generated_file[1])
 
-
-        #generate main file
-        string_file = ""
-        try:
-            with open("classes/api.pyx", "r") as mainFile:
-                string_file = mainFile.read()
-        except:
-            print("File classes/api.pyx not found")
-        import_string = ""
-        init_method_bindings_string= "cdef api init_method_bindings():\n"
-        for element in obj:
-            if (element["name"].startswith("_")):
-                continue
-
-            import_string += f"from classes.{element['name']} cimport {element['name']}\n"
-            init_method_bindings_string += f"  {element['name']}.init_method_bindings()\n"
-
-        if(import_string + "\n\n" + init_method_bindings_string != string_file):
-            with open("classes/api.pyx", "w") as mainFile:
-                print("write main")
-                mainFile.write(import_string+"\n\n")
-                mainFile.write(init_method_bindings_string)
-        """
-
-    print(set_)
     with open("classes/generated.pyx", "w") as bindings:
         bindings.write(base_import_string + main_string + bindings_file + init_methods_string + register_types_string)
     with open("classes/generated.pxd", "w") as bindings_pxd:

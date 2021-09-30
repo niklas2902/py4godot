@@ -39,7 +39,7 @@ cdef api  godot_pluginscript_script_manifest init_pluginscript_desc (godot_plugi
     cdef PyObject* class_obj
     cdef godot_pluginscript_script_manifest manifest;
     cdef PyObject* obj
-    print("\n############################################create_manifest##############################################\n");
+    #print("\n############################################create_manifest##############################################\n");
 
 
     reset()
@@ -61,18 +61,18 @@ cdef api  godot_pluginscript_script_manifest init_pluginscript_desc (godot_plugi
         properties_array = Array()
         for p in properties:
             properties_array.append(Variant(p.to_dict()))
-            print("dict:",p.to_dict())
         for m in methods:
             methods_array.append(Variant(m.to_dict()))
 
         manifest.properties = properties_array._native
         manifest.methods = methods_array._native
 
+        (<Wrapper>class_obj).PROPERTIES = [p.name for p in properties]
         manifest.data = class_obj
     else:
         create_empty_manifest(&manifest)
     reset()
-    print("\n################################return_manifest########################################################\n");
+    #print("\n################################return_manifest########################################################\n");
     return manifest;
 
 cdef api  void finish_pluginscript_desc (godot_pluginscript_script_data *p_data) with gil:
@@ -83,16 +83,15 @@ cdef api  void finish_pluginscript_desc (godot_pluginscript_script_data *p_data)
 ###############################################pluginscript_instance#######################################################
 cdef api godot_pluginscript_instance_data * init_pluginscript_instance(godot_pluginscript_script_data *p_data,
  godot_object *p_owner) with gil:
-    print("\n####################################################################instance_init########################\n");
+    #print("\n####################################################################instance_init########################\n");
     cdef Wrapper instance
     (<Wrapper>p_data)()
-    print("instance created")
     instance = (<Wrapper>p_data)()
-    print(instance)
     instance.set_godot_owner(p_owner)
+    for prop in instance.PROPERTIES:
+        setattr(instance,prop,None)
     Py_INCREF(instance)
     return <PyObject*>instance
-
 
 cdef api void finish_pluginscript_instance(godot_pluginscript_instance_data *p_data) with gil:
     cdef Wrapper instance
@@ -103,10 +102,8 @@ cdef api void finish_pluginscript_instance(godot_pluginscript_instance_data *p_d
 cdef api bool set_prop_pluginscript_instance(godot_pluginscript_instance_data *p_data,
  const godot_string *p_name, const godot_variant *p_value) with gil:
     cdef Wrapper instance = (<Wrapper ?>p_data)
-    print("\n#########################################################set_prop#######################################\n");
+    #print("\n#########################################################set_prop#######################################\n");
     api_core.godot_print(p_name)
-    print(CVariant.Variant.new_static(dereference(p_value)).get_type())
-    print(CVariant.Variant.new_static(dereference(p_value)).get_converted_value())
 
     #Todo:is there a speedier way?
     value = CVariant.Variant.new_static(dereference(p_value)).get_converted_value()
@@ -115,14 +112,13 @@ cdef api bool set_prop_pluginscript_instance(godot_pluginscript_instance_data *p
 
 cdef api bool get_prop_pluginscript_instance(godot_pluginscript_instance_data *p_data,
 const godot_string *p_name, godot_variant *r_ret) with gil:
-        print("\n###################################################get_prop########################################\n");
+        #print("\n###################################################get_prop########################################\n");
         return False;
 
 cdef api godot_variant call_method_pluginscript_instance(godot_pluginscript_instance_data *p_data,const godot_string_name *p_method,
 const godot_variant **p_args,int p_argcount, godot_variant_call_error *r_error) with gil:
-        print("\n#################################################call_method#############################################");
+        #print("\n#################################################call_method#############################################");
         method_name = str(StringName.new_static(p_method))
-        print(method_name)
 
         cdef Wrapper instance = (<Wrapper>p_data)
         if(hasattr(instance,method_name)):
@@ -137,7 +133,6 @@ const godot_variant **p_args,int p_argcount, godot_variant_call_error *r_error) 
 
 cdef api godot_string pluginscript_get_template_source_code(godot_pluginscript_language_data *p_data,
  const godot_string *p_class_name, const godot_string *p_base_class_name) with gil:
-    print("get_template_source_code")
     return String(f"""
 from enums.enums import *
 from core import *
@@ -183,8 +178,9 @@ cdef void create_empty_manifest(godot_pluginscript_script_manifest* manifest):
 
 cdef api void notification_pluginscript_instance(godot_pluginscript_instance_data *p_data,
 int p_notification) with gil:
-    print("\n#####################################################notification_instance###############################");
-    print(p_notification)
+    pass
+    #print("\n#####################################################notification_instance###############################");
+    #print(p_notification)
 
 cdef unicode get_python_string_from_w_string(const godot_string* string):
     cdef const wchar_t* c_string = api_core.godot_string_wide_str(string)

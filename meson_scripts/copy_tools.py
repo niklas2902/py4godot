@@ -14,7 +14,7 @@ def run():
             print(os.path.dirname("build/addons"+entry.lstrip("build_meson").lstrip("\\linux").
                                   lstrip("\\windows64")))
             os.makedirs(os.path.dirname("build/addons/"+(entry.lstrip("build_meson").lstrip("\\linux")
-                                                         .lstrip("\\64"))),exist_ok=True)
+                                                         .lstrip("\\windows64"))),exist_ok=True)
             copy(entry, "build/addons/"+(entry.lstrip("build_meson").lstrip("\\linux").
                                          lstrip("\\windows64")).
                  replace(".dll", ".pyd"))  # dst can be a folder; use copy2() to preserve timestamp

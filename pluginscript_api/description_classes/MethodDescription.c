@@ -1909,7 +1909,7 @@ static PyObject *__pyx_pf_16pluginscript_api_19description_classes_17MethodDescr
  *             #Todo: improve this
  *             prop_desc = PropertyDescription(i, None, 0, "",0, 0,0)             # <<<<<<<<<<<<<<
  *             a.append(Variant(prop_desc.to_dict()))
- *         #a.append(Variant(Dictionary()))
+ *         d.set(Variant(String("name")), Variant(String(self.name)))
  */
     __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_n_s_PropertyDescription); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 34, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
@@ -1980,8 +1980,8 @@ static PyObject *__pyx_pf_16pluginscript_api_19description_classes_17MethodDescr
  *             #Todo: improve this
  *             prop_desc = PropertyDescription(i, None, 0, "",0, 0,0)
  *             a.append(Variant(prop_desc.to_dict()))             # <<<<<<<<<<<<<<
- *         #a.append(Variant(Dictionary()))
  *         d.set(Variant(String("name")), Variant(String(self.name)))
+ *         d.set(Variant(String("args")), Variant(a))
  */
     __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_n_s_Variant); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 35, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
@@ -2031,18 +2031,18 @@ static PyObject *__pyx_pf_16pluginscript_api_19description_classes_17MethodDescr
   }
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "pluginscript_api/description_classes/MethodDescription.pyx":37
+  /* "pluginscript_api/description_classes/MethodDescription.pyx":36
+ *             prop_desc = PropertyDescription(i, None, 0, "",0, 0,0)
  *             a.append(Variant(prop_desc.to_dict()))
- *         #a.append(Variant(Dictionary()))
  *         d.set(Variant(String("name")), Variant(String(self.name)))             # <<<<<<<<<<<<<<
  *         d.set(Variant(String("args")), Variant(a))
  *         d.set(Variant(String("default_args")), Variant(Array()))
  */
-  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_d, __pyx_n_s_set); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 37, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_d, __pyx_n_s_set); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 36, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __Pyx_GetModuleGlobalName(__pyx_t_8, __pyx_n_s_Variant); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 37, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_8, __pyx_n_s_Variant); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 36, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_8);
-  __pyx_t_6 = __Pyx_PyObject_Call(((PyObject *)__pyx_ptype_4core_6string_6String_String), __pyx_tuple__2, NULL); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 37, __pyx_L1_error)
+  __pyx_t_6 = __Pyx_PyObject_Call(((PyObject *)__pyx_ptype_4core_6string_6String_String), __pyx_tuple__2, NULL); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 36, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
   __pyx_t_9 = NULL;
   if (CYTHON_UNPACK_METHODS && unlikely(PyMethod_Check(__pyx_t_8))) {
@@ -2057,14 +2057,14 @@ static PyObject *__pyx_pf_16pluginscript_api_19description_classes_17MethodDescr
   __pyx_t_3 = (__pyx_t_9) ? __Pyx_PyObject_Call2Args(__pyx_t_8, __pyx_t_9, __pyx_t_6) : __Pyx_PyObject_CallOneArg(__pyx_t_8, __pyx_t_6);
   __Pyx_XDECREF(__pyx_t_9); __pyx_t_9 = 0;
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-  if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 37, __pyx_L1_error)
+  if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 36, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
-  __Pyx_GetModuleGlobalName(__pyx_t_6, __pyx_n_s_Variant); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 37, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_6, __pyx_n_s_Variant); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 36, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
-  __pyx_t_9 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_name); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 37, __pyx_L1_error)
+  __pyx_t_9 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_name); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 36, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_9);
-  __pyx_t_11 = __Pyx_PyObject_CallOneArg(((PyObject *)__pyx_ptype_4core_6string_6String_String), __pyx_t_9); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 37, __pyx_L1_error)
+  __pyx_t_11 = __Pyx_PyObject_CallOneArg(((PyObject *)__pyx_ptype_4core_6string_6String_String), __pyx_t_9); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 36, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_11);
   __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
   __pyx_t_9 = NULL;
@@ -2080,7 +2080,7 @@ static PyObject *__pyx_pf_16pluginscript_api_19description_classes_17MethodDescr
   __pyx_t_8 = (__pyx_t_9) ? __Pyx_PyObject_Call2Args(__pyx_t_6, __pyx_t_9, __pyx_t_11) : __Pyx_PyObject_CallOneArg(__pyx_t_6, __pyx_t_11);
   __Pyx_XDECREF(__pyx_t_9); __pyx_t_9 = 0;
   __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
-  if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 37, __pyx_L1_error)
+  if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 36, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_8);
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
   __pyx_t_6 = NULL;
@@ -2098,7 +2098,7 @@ static PyObject *__pyx_pf_16pluginscript_api_19description_classes_17MethodDescr
   #if CYTHON_FAST_PYCALL
   if (PyFunction_Check(__pyx_t_1)) {
     PyObject *__pyx_temp[3] = {__pyx_t_6, __pyx_t_3, __pyx_t_8};
-    __pyx_t_2 = __Pyx_PyFunction_FastCall(__pyx_t_1, __pyx_temp+1-__pyx_t_7, 2+__pyx_t_7); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 37, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_PyFunction_FastCall(__pyx_t_1, __pyx_temp+1-__pyx_t_7, 2+__pyx_t_7); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 36, __pyx_L1_error)
     __Pyx_XDECREF(__pyx_t_6); __pyx_t_6 = 0;
     __Pyx_GOTREF(__pyx_t_2);
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
@@ -2108,7 +2108,7 @@ static PyObject *__pyx_pf_16pluginscript_api_19description_classes_17MethodDescr
   #if CYTHON_FAST_PYCCALL
   if (__Pyx_PyFastCFunction_Check(__pyx_t_1)) {
     PyObject *__pyx_temp[3] = {__pyx_t_6, __pyx_t_3, __pyx_t_8};
-    __pyx_t_2 = __Pyx_PyCFunction_FastCall(__pyx_t_1, __pyx_temp+1-__pyx_t_7, 2+__pyx_t_7); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 37, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_PyCFunction_FastCall(__pyx_t_1, __pyx_temp+1-__pyx_t_7, 2+__pyx_t_7); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 36, __pyx_L1_error)
     __Pyx_XDECREF(__pyx_t_6); __pyx_t_6 = 0;
     __Pyx_GOTREF(__pyx_t_2);
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
@@ -2116,7 +2116,7 @@ static PyObject *__pyx_pf_16pluginscript_api_19description_classes_17MethodDescr
   } else
   #endif
   {
-    __pyx_t_11 = PyTuple_New(2+__pyx_t_7); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 37, __pyx_L1_error)
+    __pyx_t_11 = PyTuple_New(2+__pyx_t_7); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 36, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_11);
     if (__pyx_t_6) {
       __Pyx_GIVEREF(__pyx_t_6); PyTuple_SET_ITEM(__pyx_t_11, 0, __pyx_t_6); __pyx_t_6 = NULL;
@@ -2127,25 +2127,25 @@ static PyObject *__pyx_pf_16pluginscript_api_19description_classes_17MethodDescr
     PyTuple_SET_ITEM(__pyx_t_11, 1+__pyx_t_7, __pyx_t_8);
     __pyx_t_3 = 0;
     __pyx_t_8 = 0;
-    __pyx_t_2 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_t_11, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 37, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_t_11, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 36, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
     __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
   }
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "pluginscript_api/description_classes/MethodDescription.pyx":38
- *         #a.append(Variant(Dictionary()))
+  /* "pluginscript_api/description_classes/MethodDescription.pyx":37
+ *             a.append(Variant(prop_desc.to_dict()))
  *         d.set(Variant(String("name")), Variant(String(self.name)))
  *         d.set(Variant(String("args")), Variant(a))             # <<<<<<<<<<<<<<
  *         d.set(Variant(String("default_args")), Variant(Array()))
  *         d.set(Variant(String("return")),Variant(Dictionary()))
  */
-  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_d, __pyx_n_s_set); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 38, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_d, __pyx_n_s_set); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 37, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __Pyx_GetModuleGlobalName(__pyx_t_8, __pyx_n_s_Variant); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 38, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_8, __pyx_n_s_Variant); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 37, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_8);
-  __pyx_t_3 = __Pyx_PyObject_Call(((PyObject *)__pyx_ptype_4core_6string_6String_String), __pyx_tuple__3, NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 38, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_Call(((PyObject *)__pyx_ptype_4core_6string_6String_String), __pyx_tuple__3, NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 37, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __pyx_t_6 = NULL;
   if (CYTHON_UNPACK_METHODS && unlikely(PyMethod_Check(__pyx_t_8))) {
@@ -2160,10 +2160,10 @@ static PyObject *__pyx_pf_16pluginscript_api_19description_classes_17MethodDescr
   __pyx_t_11 = (__pyx_t_6) ? __Pyx_PyObject_Call2Args(__pyx_t_8, __pyx_t_6, __pyx_t_3) : __Pyx_PyObject_CallOneArg(__pyx_t_8, __pyx_t_3);
   __Pyx_XDECREF(__pyx_t_6); __pyx_t_6 = 0;
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 38, __pyx_L1_error)
+  if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 37, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_11);
   __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
-  __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_n_s_Variant); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 38, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_n_s_Variant); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 37, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __pyx_t_6 = NULL;
   if (CYTHON_UNPACK_METHODS && unlikely(PyMethod_Check(__pyx_t_3))) {
@@ -2177,7 +2177,7 @@ static PyObject *__pyx_pf_16pluginscript_api_19description_classes_17MethodDescr
   }
   __pyx_t_8 = (__pyx_t_6) ? __Pyx_PyObject_Call2Args(__pyx_t_3, __pyx_t_6, ((PyObject *)__pyx_v_a)) : __Pyx_PyObject_CallOneArg(__pyx_t_3, ((PyObject *)__pyx_v_a));
   __Pyx_XDECREF(__pyx_t_6); __pyx_t_6 = 0;
-  if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 38, __pyx_L1_error)
+  if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 37, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_8);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __pyx_t_3 = NULL;
@@ -2195,7 +2195,7 @@ static PyObject *__pyx_pf_16pluginscript_api_19description_classes_17MethodDescr
   #if CYTHON_FAST_PYCALL
   if (PyFunction_Check(__pyx_t_1)) {
     PyObject *__pyx_temp[3] = {__pyx_t_3, __pyx_t_11, __pyx_t_8};
-    __pyx_t_2 = __Pyx_PyFunction_FastCall(__pyx_t_1, __pyx_temp+1-__pyx_t_7, 2+__pyx_t_7); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 38, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_PyFunction_FastCall(__pyx_t_1, __pyx_temp+1-__pyx_t_7, 2+__pyx_t_7); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 37, __pyx_L1_error)
     __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
     __Pyx_GOTREF(__pyx_t_2);
     __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
@@ -2205,7 +2205,7 @@ static PyObject *__pyx_pf_16pluginscript_api_19description_classes_17MethodDescr
   #if CYTHON_FAST_PYCCALL
   if (__Pyx_PyFastCFunction_Check(__pyx_t_1)) {
     PyObject *__pyx_temp[3] = {__pyx_t_3, __pyx_t_11, __pyx_t_8};
-    __pyx_t_2 = __Pyx_PyCFunction_FastCall(__pyx_t_1, __pyx_temp+1-__pyx_t_7, 2+__pyx_t_7); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 38, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_PyCFunction_FastCall(__pyx_t_1, __pyx_temp+1-__pyx_t_7, 2+__pyx_t_7); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 37, __pyx_L1_error)
     __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
     __Pyx_GOTREF(__pyx_t_2);
     __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
@@ -2213,7 +2213,7 @@ static PyObject *__pyx_pf_16pluginscript_api_19description_classes_17MethodDescr
   } else
   #endif
   {
-    __pyx_t_6 = PyTuple_New(2+__pyx_t_7); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 38, __pyx_L1_error)
+    __pyx_t_6 = PyTuple_New(2+__pyx_t_7); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 37, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_6);
     if (__pyx_t_3) {
       __Pyx_GIVEREF(__pyx_t_3); PyTuple_SET_ITEM(__pyx_t_6, 0, __pyx_t_3); __pyx_t_3 = NULL;
@@ -2224,25 +2224,25 @@ static PyObject *__pyx_pf_16pluginscript_api_19description_classes_17MethodDescr
     PyTuple_SET_ITEM(__pyx_t_6, 1+__pyx_t_7, __pyx_t_8);
     __pyx_t_11 = 0;
     __pyx_t_8 = 0;
-    __pyx_t_2 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_t_6, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 38, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_t_6, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 37, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
     __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
   }
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "pluginscript_api/description_classes/MethodDescription.pyx":39
+  /* "pluginscript_api/description_classes/MethodDescription.pyx":38
  *         d.set(Variant(String("name")), Variant(String(self.name)))
  *         d.set(Variant(String("args")), Variant(a))
  *         d.set(Variant(String("default_args")), Variant(Array()))             # <<<<<<<<<<<<<<
  *         d.set(Variant(String("return")),Variant(Dictionary()))
  *         d.set(Variant(String("flags")), Variant(0))
  */
-  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_d, __pyx_n_s_set); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 39, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_d, __pyx_n_s_set); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 38, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __Pyx_GetModuleGlobalName(__pyx_t_8, __pyx_n_s_Variant); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 39, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_8, __pyx_n_s_Variant); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 38, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_8);
-  __pyx_t_11 = __Pyx_PyObject_Call(((PyObject *)__pyx_ptype_4core_6string_6String_String), __pyx_tuple__4, NULL); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 39, __pyx_L1_error)
+  __pyx_t_11 = __Pyx_PyObject_Call(((PyObject *)__pyx_ptype_4core_6string_6String_String), __pyx_tuple__4, NULL); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 38, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_11);
   __pyx_t_3 = NULL;
   if (CYTHON_UNPACK_METHODS && unlikely(PyMethod_Check(__pyx_t_8))) {
@@ -2257,12 +2257,12 @@ static PyObject *__pyx_pf_16pluginscript_api_19description_classes_17MethodDescr
   __pyx_t_6 = (__pyx_t_3) ? __Pyx_PyObject_Call2Args(__pyx_t_8, __pyx_t_3, __pyx_t_11) : __Pyx_PyObject_CallOneArg(__pyx_t_8, __pyx_t_11);
   __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
   __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
-  if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 39, __pyx_L1_error)
+  if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 38, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
   __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
-  __Pyx_GetModuleGlobalName(__pyx_t_11, __pyx_n_s_Variant); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 39, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_11, __pyx_n_s_Variant); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 38, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_11);
-  __pyx_t_3 = __Pyx_PyObject_CallNoArg(((PyObject *)__pyx_ptype_4core_5array_5Array_Array)); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 39, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_CallNoArg(((PyObject *)__pyx_ptype_4core_5array_5Array_Array)); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 38, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __pyx_t_9 = NULL;
   if (CYTHON_UNPACK_METHODS && unlikely(PyMethod_Check(__pyx_t_11))) {
@@ -2277,7 +2277,7 @@ static PyObject *__pyx_pf_16pluginscript_api_19description_classes_17MethodDescr
   __pyx_t_8 = (__pyx_t_9) ? __Pyx_PyObject_Call2Args(__pyx_t_11, __pyx_t_9, __pyx_t_3) : __Pyx_PyObject_CallOneArg(__pyx_t_11, __pyx_t_3);
   __Pyx_XDECREF(__pyx_t_9); __pyx_t_9 = 0;
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 39, __pyx_L1_error)
+  if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 38, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_8);
   __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
   __pyx_t_11 = NULL;
@@ -2295,7 +2295,7 @@ static PyObject *__pyx_pf_16pluginscript_api_19description_classes_17MethodDescr
   #if CYTHON_FAST_PYCALL
   if (PyFunction_Check(__pyx_t_1)) {
     PyObject *__pyx_temp[3] = {__pyx_t_11, __pyx_t_6, __pyx_t_8};
-    __pyx_t_2 = __Pyx_PyFunction_FastCall(__pyx_t_1, __pyx_temp+1-__pyx_t_7, 2+__pyx_t_7); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 39, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_PyFunction_FastCall(__pyx_t_1, __pyx_temp+1-__pyx_t_7, 2+__pyx_t_7); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 38, __pyx_L1_error)
     __Pyx_XDECREF(__pyx_t_11); __pyx_t_11 = 0;
     __Pyx_GOTREF(__pyx_t_2);
     __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
@@ -2305,7 +2305,7 @@ static PyObject *__pyx_pf_16pluginscript_api_19description_classes_17MethodDescr
   #if CYTHON_FAST_PYCCALL
   if (__Pyx_PyFastCFunction_Check(__pyx_t_1)) {
     PyObject *__pyx_temp[3] = {__pyx_t_11, __pyx_t_6, __pyx_t_8};
-    __pyx_t_2 = __Pyx_PyCFunction_FastCall(__pyx_t_1, __pyx_temp+1-__pyx_t_7, 2+__pyx_t_7); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 39, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_PyCFunction_FastCall(__pyx_t_1, __pyx_temp+1-__pyx_t_7, 2+__pyx_t_7); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 38, __pyx_L1_error)
     __Pyx_XDECREF(__pyx_t_11); __pyx_t_11 = 0;
     __Pyx_GOTREF(__pyx_t_2);
     __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
@@ -2313,7 +2313,7 @@ static PyObject *__pyx_pf_16pluginscript_api_19description_classes_17MethodDescr
   } else
   #endif
   {
-    __pyx_t_3 = PyTuple_New(2+__pyx_t_7); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 39, __pyx_L1_error)
+    __pyx_t_3 = PyTuple_New(2+__pyx_t_7); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 38, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
     if (__pyx_t_11) {
       __Pyx_GIVEREF(__pyx_t_11); PyTuple_SET_ITEM(__pyx_t_3, 0, __pyx_t_11); __pyx_t_11 = NULL;
@@ -2324,25 +2324,25 @@ static PyObject *__pyx_pf_16pluginscript_api_19description_classes_17MethodDescr
     PyTuple_SET_ITEM(__pyx_t_3, 1+__pyx_t_7, __pyx_t_8);
     __pyx_t_6 = 0;
     __pyx_t_8 = 0;
-    __pyx_t_2 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_t_3, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 39, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_t_3, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 38, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   }
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "pluginscript_api/description_classes/MethodDescription.pyx":40
+  /* "pluginscript_api/description_classes/MethodDescription.pyx":39
  *         d.set(Variant(String("args")), Variant(a))
  *         d.set(Variant(String("default_args")), Variant(Array()))
  *         d.set(Variant(String("return")),Variant(Dictionary()))             # <<<<<<<<<<<<<<
  *         d.set(Variant(String("flags")), Variant(0))
  *         d.set(Variant(String("rpc_mode")),Variant(0))
  */
-  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_d, __pyx_n_s_set); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 40, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_d, __pyx_n_s_set); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 39, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __Pyx_GetModuleGlobalName(__pyx_t_8, __pyx_n_s_Variant); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 40, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_8, __pyx_n_s_Variant); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 39, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_8);
-  __pyx_t_6 = __Pyx_PyObject_Call(((PyObject *)__pyx_ptype_4core_6string_6String_String), __pyx_tuple__5, NULL); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 40, __pyx_L1_error)
+  __pyx_t_6 = __Pyx_PyObject_Call(((PyObject *)__pyx_ptype_4core_6string_6String_String), __pyx_tuple__5, NULL); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 39, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
   __pyx_t_11 = NULL;
   if (CYTHON_UNPACK_METHODS && unlikely(PyMethod_Check(__pyx_t_8))) {
@@ -2357,12 +2357,12 @@ static PyObject *__pyx_pf_16pluginscript_api_19description_classes_17MethodDescr
   __pyx_t_3 = (__pyx_t_11) ? __Pyx_PyObject_Call2Args(__pyx_t_8, __pyx_t_11, __pyx_t_6) : __Pyx_PyObject_CallOneArg(__pyx_t_8, __pyx_t_6);
   __Pyx_XDECREF(__pyx_t_11); __pyx_t_11 = 0;
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-  if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 40, __pyx_L1_error)
+  if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 39, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
-  __Pyx_GetModuleGlobalName(__pyx_t_6, __pyx_n_s_Variant); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 40, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_6, __pyx_n_s_Variant); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 39, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
-  __Pyx_GetModuleGlobalName(__pyx_t_9, __pyx_n_s_Dictionary); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 40, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_9, __pyx_n_s_Dictionary); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 39, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_9);
   __pyx_t_12 = NULL;
   if (CYTHON_UNPACK_METHODS && unlikely(PyMethod_Check(__pyx_t_9))) {
@@ -2376,7 +2376,7 @@ static PyObject *__pyx_pf_16pluginscript_api_19description_classes_17MethodDescr
   }
   __pyx_t_11 = (__pyx_t_12) ? __Pyx_PyObject_CallOneArg(__pyx_t_9, __pyx_t_12) : __Pyx_PyObject_CallNoArg(__pyx_t_9);
   __Pyx_XDECREF(__pyx_t_12); __pyx_t_12 = 0;
-  if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 40, __pyx_L1_error)
+  if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 39, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_11);
   __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
   __pyx_t_9 = NULL;
@@ -2392,7 +2392,7 @@ static PyObject *__pyx_pf_16pluginscript_api_19description_classes_17MethodDescr
   __pyx_t_8 = (__pyx_t_9) ? __Pyx_PyObject_Call2Args(__pyx_t_6, __pyx_t_9, __pyx_t_11) : __Pyx_PyObject_CallOneArg(__pyx_t_6, __pyx_t_11);
   __Pyx_XDECREF(__pyx_t_9); __pyx_t_9 = 0;
   __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
-  if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 40, __pyx_L1_error)
+  if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 39, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_8);
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
   __pyx_t_6 = NULL;
@@ -2410,7 +2410,7 @@ static PyObject *__pyx_pf_16pluginscript_api_19description_classes_17MethodDescr
   #if CYTHON_FAST_PYCALL
   if (PyFunction_Check(__pyx_t_1)) {
     PyObject *__pyx_temp[3] = {__pyx_t_6, __pyx_t_3, __pyx_t_8};
-    __pyx_t_2 = __Pyx_PyFunction_FastCall(__pyx_t_1, __pyx_temp+1-__pyx_t_7, 2+__pyx_t_7); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 40, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_PyFunction_FastCall(__pyx_t_1, __pyx_temp+1-__pyx_t_7, 2+__pyx_t_7); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 39, __pyx_L1_error)
     __Pyx_XDECREF(__pyx_t_6); __pyx_t_6 = 0;
     __Pyx_GOTREF(__pyx_t_2);
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
@@ -2420,7 +2420,7 @@ static PyObject *__pyx_pf_16pluginscript_api_19description_classes_17MethodDescr
   #if CYTHON_FAST_PYCCALL
   if (__Pyx_PyFastCFunction_Check(__pyx_t_1)) {
     PyObject *__pyx_temp[3] = {__pyx_t_6, __pyx_t_3, __pyx_t_8};
-    __pyx_t_2 = __Pyx_PyCFunction_FastCall(__pyx_t_1, __pyx_temp+1-__pyx_t_7, 2+__pyx_t_7); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 40, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_PyCFunction_FastCall(__pyx_t_1, __pyx_temp+1-__pyx_t_7, 2+__pyx_t_7); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 39, __pyx_L1_error)
     __Pyx_XDECREF(__pyx_t_6); __pyx_t_6 = 0;
     __Pyx_GOTREF(__pyx_t_2);
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
@@ -2428,7 +2428,7 @@ static PyObject *__pyx_pf_16pluginscript_api_19description_classes_17MethodDescr
   } else
   #endif
   {
-    __pyx_t_11 = PyTuple_New(2+__pyx_t_7); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 40, __pyx_L1_error)
+    __pyx_t_11 = PyTuple_New(2+__pyx_t_7); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 39, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_11);
     if (__pyx_t_6) {
       __Pyx_GIVEREF(__pyx_t_6); PyTuple_SET_ITEM(__pyx_t_11, 0, __pyx_t_6); __pyx_t_6 = NULL;
@@ -2439,25 +2439,25 @@ static PyObject *__pyx_pf_16pluginscript_api_19description_classes_17MethodDescr
     PyTuple_SET_ITEM(__pyx_t_11, 1+__pyx_t_7, __pyx_t_8);
     __pyx_t_3 = 0;
     __pyx_t_8 = 0;
-    __pyx_t_2 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_t_11, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 40, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_t_11, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 39, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
     __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
   }
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "pluginscript_api/description_classes/MethodDescription.pyx":41
+  /* "pluginscript_api/description_classes/MethodDescription.pyx":40
  *         d.set(Variant(String("default_args")), Variant(Array()))
  *         d.set(Variant(String("return")),Variant(Dictionary()))
  *         d.set(Variant(String("flags")), Variant(0))             # <<<<<<<<<<<<<<
  *         d.set(Variant(String("rpc_mode")),Variant(0))
  *         return d
  */
-  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_d, __pyx_n_s_set); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 41, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_d, __pyx_n_s_set); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 40, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __Pyx_GetModuleGlobalName(__pyx_t_8, __pyx_n_s_Variant); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 41, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_8, __pyx_n_s_Variant); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 40, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_8);
-  __pyx_t_3 = __Pyx_PyObject_Call(((PyObject *)__pyx_ptype_4core_6string_6String_String), __pyx_tuple__6, NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 41, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_Call(((PyObject *)__pyx_ptype_4core_6string_6String_String), __pyx_tuple__6, NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 40, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __pyx_t_6 = NULL;
   if (CYTHON_UNPACK_METHODS && unlikely(PyMethod_Check(__pyx_t_8))) {
@@ -2472,10 +2472,10 @@ static PyObject *__pyx_pf_16pluginscript_api_19description_classes_17MethodDescr
   __pyx_t_11 = (__pyx_t_6) ? __Pyx_PyObject_Call2Args(__pyx_t_8, __pyx_t_6, __pyx_t_3) : __Pyx_PyObject_CallOneArg(__pyx_t_8, __pyx_t_3);
   __Pyx_XDECREF(__pyx_t_6); __pyx_t_6 = 0;
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 41, __pyx_L1_error)
+  if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 40, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_11);
   __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
-  __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_n_s_Variant); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 41, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_n_s_Variant); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 40, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __pyx_t_6 = NULL;
   if (CYTHON_UNPACK_METHODS && unlikely(PyMethod_Check(__pyx_t_3))) {
@@ -2489,7 +2489,7 @@ static PyObject *__pyx_pf_16pluginscript_api_19description_classes_17MethodDescr
   }
   __pyx_t_8 = (__pyx_t_6) ? __Pyx_PyObject_Call2Args(__pyx_t_3, __pyx_t_6, __pyx_int_0) : __Pyx_PyObject_CallOneArg(__pyx_t_3, __pyx_int_0);
   __Pyx_XDECREF(__pyx_t_6); __pyx_t_6 = 0;
-  if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 41, __pyx_L1_error)
+  if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 40, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_8);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __pyx_t_3 = NULL;
@@ -2507,7 +2507,7 @@ static PyObject *__pyx_pf_16pluginscript_api_19description_classes_17MethodDescr
   #if CYTHON_FAST_PYCALL
   if (PyFunction_Check(__pyx_t_1)) {
     PyObject *__pyx_temp[3] = {__pyx_t_3, __pyx_t_11, __pyx_t_8};
-    __pyx_t_2 = __Pyx_PyFunction_FastCall(__pyx_t_1, __pyx_temp+1-__pyx_t_7, 2+__pyx_t_7); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 41, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_PyFunction_FastCall(__pyx_t_1, __pyx_temp+1-__pyx_t_7, 2+__pyx_t_7); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 40, __pyx_L1_error)
     __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
     __Pyx_GOTREF(__pyx_t_2);
     __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
@@ -2517,7 +2517,7 @@ static PyObject *__pyx_pf_16pluginscript_api_19description_classes_17MethodDescr
   #if CYTHON_FAST_PYCCALL
   if (__Pyx_PyFastCFunction_Check(__pyx_t_1)) {
     PyObject *__pyx_temp[3] = {__pyx_t_3, __pyx_t_11, __pyx_t_8};
-    __pyx_t_2 = __Pyx_PyCFunction_FastCall(__pyx_t_1, __pyx_temp+1-__pyx_t_7, 2+__pyx_t_7); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 41, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_PyCFunction_FastCall(__pyx_t_1, __pyx_temp+1-__pyx_t_7, 2+__pyx_t_7); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 40, __pyx_L1_error)
     __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
     __Pyx_GOTREF(__pyx_t_2);
     __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
@@ -2525,7 +2525,7 @@ static PyObject *__pyx_pf_16pluginscript_api_19description_classes_17MethodDescr
   } else
   #endif
   {
-    __pyx_t_6 = PyTuple_New(2+__pyx_t_7); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 41, __pyx_L1_error)
+    __pyx_t_6 = PyTuple_New(2+__pyx_t_7); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 40, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_6);
     if (__pyx_t_3) {
       __Pyx_GIVEREF(__pyx_t_3); PyTuple_SET_ITEM(__pyx_t_6, 0, __pyx_t_3); __pyx_t_3 = NULL;
@@ -2536,24 +2536,24 @@ static PyObject *__pyx_pf_16pluginscript_api_19description_classes_17MethodDescr
     PyTuple_SET_ITEM(__pyx_t_6, 1+__pyx_t_7, __pyx_t_8);
     __pyx_t_11 = 0;
     __pyx_t_8 = 0;
-    __pyx_t_2 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_t_6, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 41, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_t_6, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 40, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
     __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
   }
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "pluginscript_api/description_classes/MethodDescription.pyx":42
+  /* "pluginscript_api/description_classes/MethodDescription.pyx":41
  *         d.set(Variant(String("return")),Variant(Dictionary()))
  *         d.set(Variant(String("flags")), Variant(0))
  *         d.set(Variant(String("rpc_mode")),Variant(0))             # <<<<<<<<<<<<<<
  *         return d
  */
-  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_d, __pyx_n_s_set); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 42, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_d, __pyx_n_s_set); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 41, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __Pyx_GetModuleGlobalName(__pyx_t_8, __pyx_n_s_Variant); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 42, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_8, __pyx_n_s_Variant); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 41, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_8);
-  __pyx_t_11 = __Pyx_PyObject_Call(((PyObject *)__pyx_ptype_4core_6string_6String_String), __pyx_tuple__7, NULL); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 42, __pyx_L1_error)
+  __pyx_t_11 = __Pyx_PyObject_Call(((PyObject *)__pyx_ptype_4core_6string_6String_String), __pyx_tuple__7, NULL); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 41, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_11);
   __pyx_t_3 = NULL;
   if (CYTHON_UNPACK_METHODS && unlikely(PyMethod_Check(__pyx_t_8))) {
@@ -2568,10 +2568,10 @@ static PyObject *__pyx_pf_16pluginscript_api_19description_classes_17MethodDescr
   __pyx_t_6 = (__pyx_t_3) ? __Pyx_PyObject_Call2Args(__pyx_t_8, __pyx_t_3, __pyx_t_11) : __Pyx_PyObject_CallOneArg(__pyx_t_8, __pyx_t_11);
   __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
   __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
-  if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 42, __pyx_L1_error)
+  if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 41, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
   __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
-  __Pyx_GetModuleGlobalName(__pyx_t_11, __pyx_n_s_Variant); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 42, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_11, __pyx_n_s_Variant); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 41, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_11);
   __pyx_t_3 = NULL;
   if (CYTHON_UNPACK_METHODS && unlikely(PyMethod_Check(__pyx_t_11))) {
@@ -2585,7 +2585,7 @@ static PyObject *__pyx_pf_16pluginscript_api_19description_classes_17MethodDescr
   }
   __pyx_t_8 = (__pyx_t_3) ? __Pyx_PyObject_Call2Args(__pyx_t_11, __pyx_t_3, __pyx_int_0) : __Pyx_PyObject_CallOneArg(__pyx_t_11, __pyx_int_0);
   __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
-  if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 42, __pyx_L1_error)
+  if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 41, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_8);
   __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
   __pyx_t_11 = NULL;
@@ -2603,7 +2603,7 @@ static PyObject *__pyx_pf_16pluginscript_api_19description_classes_17MethodDescr
   #if CYTHON_FAST_PYCALL
   if (PyFunction_Check(__pyx_t_1)) {
     PyObject *__pyx_temp[3] = {__pyx_t_11, __pyx_t_6, __pyx_t_8};
-    __pyx_t_2 = __Pyx_PyFunction_FastCall(__pyx_t_1, __pyx_temp+1-__pyx_t_7, 2+__pyx_t_7); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 42, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_PyFunction_FastCall(__pyx_t_1, __pyx_temp+1-__pyx_t_7, 2+__pyx_t_7); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 41, __pyx_L1_error)
     __Pyx_XDECREF(__pyx_t_11); __pyx_t_11 = 0;
     __Pyx_GOTREF(__pyx_t_2);
     __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
@@ -2613,7 +2613,7 @@ static PyObject *__pyx_pf_16pluginscript_api_19description_classes_17MethodDescr
   #if CYTHON_FAST_PYCCALL
   if (__Pyx_PyFastCFunction_Check(__pyx_t_1)) {
     PyObject *__pyx_temp[3] = {__pyx_t_11, __pyx_t_6, __pyx_t_8};
-    __pyx_t_2 = __Pyx_PyCFunction_FastCall(__pyx_t_1, __pyx_temp+1-__pyx_t_7, 2+__pyx_t_7); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 42, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_PyCFunction_FastCall(__pyx_t_1, __pyx_temp+1-__pyx_t_7, 2+__pyx_t_7); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 41, __pyx_L1_error)
     __Pyx_XDECREF(__pyx_t_11); __pyx_t_11 = 0;
     __Pyx_GOTREF(__pyx_t_2);
     __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
@@ -2621,7 +2621,7 @@ static PyObject *__pyx_pf_16pluginscript_api_19description_classes_17MethodDescr
   } else
   #endif
   {
-    __pyx_t_3 = PyTuple_New(2+__pyx_t_7); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 42, __pyx_L1_error)
+    __pyx_t_3 = PyTuple_New(2+__pyx_t_7); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 41, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
     if (__pyx_t_11) {
       __Pyx_GIVEREF(__pyx_t_11); PyTuple_SET_ITEM(__pyx_t_3, 0, __pyx_t_11); __pyx_t_11 = NULL;
@@ -2632,14 +2632,14 @@ static PyObject *__pyx_pf_16pluginscript_api_19description_classes_17MethodDescr
     PyTuple_SET_ITEM(__pyx_t_3, 1+__pyx_t_7, __pyx_t_8);
     __pyx_t_6 = 0;
     __pyx_t_8 = 0;
-    __pyx_t_2 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_t_3, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 42, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_t_3, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 41, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   }
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "pluginscript_api/description_classes/MethodDescription.pyx":43
+  /* "pluginscript_api/description_classes/MethodDescription.pyx":42
  *         d.set(Variant(String("flags")), Variant(0))
  *         d.set(Variant(String("rpc_mode")),Variant(0))
  *         return d             # <<<<<<<<<<<<<<
@@ -3195,68 +3195,68 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__Pyx_InitCachedConstants", 0);
 
-  /* "pluginscript_api/description_classes/MethodDescription.pyx":37
+  /* "pluginscript_api/description_classes/MethodDescription.pyx":36
+ *             prop_desc = PropertyDescription(i, None, 0, "",0, 0,0)
  *             a.append(Variant(prop_desc.to_dict()))
- *         #a.append(Variant(Dictionary()))
  *         d.set(Variant(String("name")), Variant(String(self.name)))             # <<<<<<<<<<<<<<
  *         d.set(Variant(String("args")), Variant(a))
  *         d.set(Variant(String("default_args")), Variant(Array()))
  */
-  __pyx_tuple__2 = PyTuple_Pack(1, __pyx_n_u_name); if (unlikely(!__pyx_tuple__2)) __PYX_ERR(0, 37, __pyx_L1_error)
+  __pyx_tuple__2 = PyTuple_Pack(1, __pyx_n_u_name); if (unlikely(!__pyx_tuple__2)) __PYX_ERR(0, 36, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__2);
   __Pyx_GIVEREF(__pyx_tuple__2);
 
-  /* "pluginscript_api/description_classes/MethodDescription.pyx":38
- *         #a.append(Variant(Dictionary()))
+  /* "pluginscript_api/description_classes/MethodDescription.pyx":37
+ *             a.append(Variant(prop_desc.to_dict()))
  *         d.set(Variant(String("name")), Variant(String(self.name)))
  *         d.set(Variant(String("args")), Variant(a))             # <<<<<<<<<<<<<<
  *         d.set(Variant(String("default_args")), Variant(Array()))
  *         d.set(Variant(String("return")),Variant(Dictionary()))
  */
-  __pyx_tuple__3 = PyTuple_Pack(1, __pyx_n_u_args); if (unlikely(!__pyx_tuple__3)) __PYX_ERR(0, 38, __pyx_L1_error)
+  __pyx_tuple__3 = PyTuple_Pack(1, __pyx_n_u_args); if (unlikely(!__pyx_tuple__3)) __PYX_ERR(0, 37, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__3);
   __Pyx_GIVEREF(__pyx_tuple__3);
 
-  /* "pluginscript_api/description_classes/MethodDescription.pyx":39
+  /* "pluginscript_api/description_classes/MethodDescription.pyx":38
  *         d.set(Variant(String("name")), Variant(String(self.name)))
  *         d.set(Variant(String("args")), Variant(a))
  *         d.set(Variant(String("default_args")), Variant(Array()))             # <<<<<<<<<<<<<<
  *         d.set(Variant(String("return")),Variant(Dictionary()))
  *         d.set(Variant(String("flags")), Variant(0))
  */
-  __pyx_tuple__4 = PyTuple_Pack(1, __pyx_n_u_default_args); if (unlikely(!__pyx_tuple__4)) __PYX_ERR(0, 39, __pyx_L1_error)
+  __pyx_tuple__4 = PyTuple_Pack(1, __pyx_n_u_default_args); if (unlikely(!__pyx_tuple__4)) __PYX_ERR(0, 38, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__4);
   __Pyx_GIVEREF(__pyx_tuple__4);
 
-  /* "pluginscript_api/description_classes/MethodDescription.pyx":40
+  /* "pluginscript_api/description_classes/MethodDescription.pyx":39
  *         d.set(Variant(String("args")), Variant(a))
  *         d.set(Variant(String("default_args")), Variant(Array()))
  *         d.set(Variant(String("return")),Variant(Dictionary()))             # <<<<<<<<<<<<<<
  *         d.set(Variant(String("flags")), Variant(0))
  *         d.set(Variant(String("rpc_mode")),Variant(0))
  */
-  __pyx_tuple__5 = PyTuple_Pack(1, __pyx_n_u_return_2); if (unlikely(!__pyx_tuple__5)) __PYX_ERR(0, 40, __pyx_L1_error)
+  __pyx_tuple__5 = PyTuple_Pack(1, __pyx_n_u_return_2); if (unlikely(!__pyx_tuple__5)) __PYX_ERR(0, 39, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__5);
   __Pyx_GIVEREF(__pyx_tuple__5);
 
-  /* "pluginscript_api/description_classes/MethodDescription.pyx":41
+  /* "pluginscript_api/description_classes/MethodDescription.pyx":40
  *         d.set(Variant(String("default_args")), Variant(Array()))
  *         d.set(Variant(String("return")),Variant(Dictionary()))
  *         d.set(Variant(String("flags")), Variant(0))             # <<<<<<<<<<<<<<
  *         d.set(Variant(String("rpc_mode")),Variant(0))
  *         return d
  */
-  __pyx_tuple__6 = PyTuple_Pack(1, __pyx_n_u_flags); if (unlikely(!__pyx_tuple__6)) __PYX_ERR(0, 41, __pyx_L1_error)
+  __pyx_tuple__6 = PyTuple_Pack(1, __pyx_n_u_flags); if (unlikely(!__pyx_tuple__6)) __PYX_ERR(0, 40, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__6);
   __Pyx_GIVEREF(__pyx_tuple__6);
 
-  /* "pluginscript_api/description_classes/MethodDescription.pyx":42
+  /* "pluginscript_api/description_classes/MethodDescription.pyx":41
  *         d.set(Variant(String("return")),Variant(Dictionary()))
  *         d.set(Variant(String("flags")), Variant(0))
  *         d.set(Variant(String("rpc_mode")),Variant(0))             # <<<<<<<<<<<<<<
  *         return d
  */
-  __pyx_tuple__7 = PyTuple_Pack(1, __pyx_n_u_rpc_mode); if (unlikely(!__pyx_tuple__7)) __PYX_ERR(0, 42, __pyx_L1_error)
+  __pyx_tuple__7 = PyTuple_Pack(1, __pyx_n_u_rpc_mode); if (unlikely(!__pyx_tuple__7)) __PYX_ERR(0, 41, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__7);
   __Pyx_GIVEREF(__pyx_tuple__7);
 
