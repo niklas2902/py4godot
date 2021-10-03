@@ -848,11 +848,27 @@ static const char *__pyx_f[] = {
   "core\\vector2\\Vector2.pxd",
   "stringsource",
   "core\\vector2\\Vector2.pyx",
+  "core\\string\\String.pxd",
   "type.pxd",
 };
 
 /*--- Type declarations ---*/
+struct __pyx_obj_4core_6string_6String_String;
 struct __pyx_obj_4core_7vector2_7Vector2_Vector2;
+
+/* "core/string/String.pxd":3
+ * from core.string.string_binding cimport *
+ * 
+ * cdef class String:             # <<<<<<<<<<<<<<
+ *     cdef godot_string _native
+ * 
+ */
+struct __pyx_obj_4core_6string_6String_String {
+  PyObject_HEAD
+  struct __pyx_vtabstruct_4core_6string_6String_String *__pyx_vtab;
+  godot_string _native;
+};
+
 
 /* "core/vector2/Vector2.pxd":3
  * from core.vector2.vector2_binding cimport *
@@ -869,7 +885,24 @@ struct __pyx_obj_4core_7vector2_7Vector2_Vector2 {
 
 
 
-/* "core/vector2/Vector2.pyx":7
+/* "core/string/String.pxd":3
+ * from core.string.string_binding cimport *
+ * 
+ * cdef class String:             # <<<<<<<<<<<<<<
+ *     cdef godot_string _native
+ * 
+ */
+
+struct __pyx_vtabstruct_4core_6string_6String_String {
+  void (*set_native)(struct __pyx_obj_4core_6string_6String_String *, godot_string);
+  struct __pyx_obj_4core_6string_6String_String *(*new_static)(godot_string);
+};
+static struct __pyx_vtabstruct_4core_6string_6String_String *__pyx_vtabptr_4core_6string_6String_String;
+static CYTHON_INLINE void __pyx_f_4core_6string_6String_6String_set_native(struct __pyx_obj_4core_6string_6String_String *, godot_string);
+static CYTHON_INLINE struct __pyx_obj_4core_6string_6String_String *__pyx_f_4core_6string_6String_6String_new_static(godot_string);
+
+
+/* "core/vector2/Vector2.pyx":8
  *     api_core = core
  * 
  * cdef class Vector2:             # <<<<<<<<<<<<<<
@@ -1112,6 +1145,9 @@ enum __Pyx_ImportType_CheckSize {
 static PyTypeObject *__Pyx_ImportType(PyObject* module, const char *module_name, const char *class_name, size_t size, enum __Pyx_ImportType_CheckSize check_size);
 #endif
 
+/* GetVTable.proto */
+static void* __Pyx_GetVtable(PyObject *dict);
+
 /* PyDictVersioning.proto */
 #if CYTHON_USE_DICT_VERSIONS && CYTHON_USE_TYPE_SLOTS
 #define __PYX_DICT_VERSION_INIT  ((PY_UINT64_T) -1)
@@ -1204,6 +1240,8 @@ static int __Pyx_InitStrings(__Pyx_StringTabEntry *t);
 
 static CYTHON_INLINE void __pyx_f_4core_7vector2_7Vector2_7Vector2_set_native(struct __pyx_obj_4core_7vector2_7Vector2_Vector2 *__pyx_v_self, godot_vector2 __pyx_v__native); /* proto*/
 static CYTHON_INLINE struct __pyx_obj_4core_7vector2_7Vector2_Vector2 *__pyx_f_4core_7vector2_7Vector2_7Vector2_new_static(godot_vector2 __pyx_v__native); /* proto*/
+static CYTHON_INLINE void __pyx_f_4core_6string_6String_6String_set_native(struct __pyx_obj_4core_6string_6String_String *__pyx_v_self, godot_string __pyx_v__native); /* proto*/
+static CYTHON_INLINE struct __pyx_obj_4core_6string_6String_String *__pyx_f_4core_6string_6String_6String_new_static(godot_string __pyx_v__native); /* proto*/
 
 /* Module declarations from 'libcpp' */
 
@@ -1227,6 +1265,11 @@ static PyTypeObject *__pyx_ptype_7cpython_4type_type = 0;
 /* Module declarations from 'godot_api.binding' */
 
 /* Module declarations from 'core.vector2.vector2_binding' */
+
+/* Module declarations from 'core.string.string_binding' */
+
+/* Module declarations from 'core.string.String' */
+static PyTypeObject *__pyx_ptype_4core_6string_6String_String = 0;
 
 /* Module declarations from 'core.vector2.Vector2' */
 static PyTypeObject *__pyx_ptype_4core_7vector2_7Vector2_Vector2 = 0;
@@ -1325,8 +1368,9 @@ static PyObject *__pyx_pf_4core_7vector2_7Vector2_7Vector2_66set_x(struct __pyx_
 static PyObject *__pyx_pf_4core_7vector2_7Vector2_7Vector2_68set_y(struct __pyx_obj_4core_7vector2_7Vector2_Vector2 *__pyx_v_self, godot_real __pyx_v_y); /* proto */
 static PyObject *__pyx_pf_4core_7vector2_7Vector2_7Vector2_70get_x(struct __pyx_obj_4core_7vector2_7Vector2_Vector2 *__pyx_v_self); /* proto */
 static PyObject *__pyx_pf_4core_7vector2_7Vector2_7Vector2_72get_y(struct __pyx_obj_4core_7vector2_7Vector2_Vector2 *__pyx_v_self); /* proto */
-static PyObject *__pyx_pf_4core_7vector2_7Vector2_7Vector2_74__reduce_cython__(CYTHON_UNUSED struct __pyx_obj_4core_7vector2_7Vector2_Vector2 *__pyx_v_self); /* proto */
-static PyObject *__pyx_pf_4core_7vector2_7Vector2_7Vector2_76__setstate_cython__(CYTHON_UNUSED struct __pyx_obj_4core_7vector2_7Vector2_Vector2 *__pyx_v_self, CYTHON_UNUSED PyObject *__pyx_v___pyx_state); /* proto */
+static PyObject *__pyx_pf_4core_7vector2_7Vector2_7Vector2_74__str__(struct __pyx_obj_4core_7vector2_7Vector2_Vector2 *__pyx_v_self); /* proto */
+static PyObject *__pyx_pf_4core_7vector2_7Vector2_7Vector2_76__reduce_cython__(CYTHON_UNUSED struct __pyx_obj_4core_7vector2_7Vector2_Vector2 *__pyx_v_self); /* proto */
+static PyObject *__pyx_pf_4core_7vector2_7Vector2_7Vector2_78__setstate_cython__(CYTHON_UNUSED struct __pyx_obj_4core_7vector2_7Vector2_Vector2 *__pyx_v_self, CYTHON_UNUSED PyObject *__pyx_v___pyx_state); /* proto */
 static PyObject *__pyx_tp_new_4core_7vector2_7Vector2_Vector2(PyTypeObject *t, PyObject *a, PyObject *k); /*proto*/
 static PyObject *__pyx_tuple_;
 static PyObject *__pyx_tuple__2;
@@ -1335,7 +1379,7 @@ static PyObject *__pyx_tuple__4;
 static PyObject *__pyx_tuple__5;
 /* Late includes */
 
-/* "core/vector2/Vector2.pyx":3
+/* "core/vector2/Vector2.pyx":4
  * from core.vector2.vector2_binding cimport *
  * 
  * cdef api set_api_core_vector2(godot_gdnative_core_api_struct * core):             # <<<<<<<<<<<<<<
@@ -1348,7 +1392,7 @@ static PyObject *__pyx_f_4core_7vector2_7Vector2_set_api_core_vector2(struct god
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("set_api_core_vector2", 0);
 
-  /* "core/vector2/Vector2.pyx":5
+  /* "core/vector2/Vector2.pyx":6
  * cdef api set_api_core_vector2(godot_gdnative_core_api_struct * core):
  *     global api_core
  *     api_core = core             # <<<<<<<<<<<<<<
@@ -1357,7 +1401,7 @@ static PyObject *__pyx_f_4core_7vector2_7Vector2_set_api_core_vector2(struct god
  */
   api_core = __pyx_v_core;
 
-  /* "core/vector2/Vector2.pyx":3
+  /* "core/vector2/Vector2.pyx":4
  * from core.vector2.vector2_binding cimport *
  * 
  * cdef api set_api_core_vector2(godot_gdnative_core_api_struct * core):             # <<<<<<<<<<<<<<
@@ -1372,7 +1416,7 @@ static PyObject *__pyx_f_4core_7vector2_7Vector2_set_api_core_vector2(struct god
   return __pyx_r;
 }
 
-/* "core/vector2/Vector2.pyx":9
+/* "core/vector2/Vector2.pyx":10
  * cdef class Vector2:
  * 
  *     def __init__(self, godot_real x = 0, godot_real y = 0):             # <<<<<<<<<<<<<<
@@ -1420,7 +1464,7 @@ static int __pyx_pw_4core_7vector2_7Vector2_7Vector2_1__init__(PyObject *__pyx_v
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "__init__") < 0)) __PYX_ERR(2, 9, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "__init__") < 0)) __PYX_ERR(2, 10, __pyx_L3_error)
       }
     } else {
       switch (PyTuple_GET_SIZE(__pyx_args)) {
@@ -1433,19 +1477,19 @@ static int __pyx_pw_4core_7vector2_7Vector2_7Vector2_1__init__(PyObject *__pyx_v
       }
     }
     if (values[0]) {
-      __pyx_v_x = __pyx_PyFloat_AsFloat(values[0]); if (unlikely((__pyx_v_x == ((godot_real)-1)) && PyErr_Occurred())) __PYX_ERR(2, 9, __pyx_L3_error)
+      __pyx_v_x = __pyx_PyFloat_AsFloat(values[0]); if (unlikely((__pyx_v_x == ((godot_real)-1)) && PyErr_Occurred())) __PYX_ERR(2, 10, __pyx_L3_error)
     } else {
       __pyx_v_x = ((godot_real)0.0);
     }
     if (values[1]) {
-      __pyx_v_y = __pyx_PyFloat_AsFloat(values[1]); if (unlikely((__pyx_v_y == ((godot_real)-1)) && PyErr_Occurred())) __PYX_ERR(2, 9, __pyx_L3_error)
+      __pyx_v_y = __pyx_PyFloat_AsFloat(values[1]); if (unlikely((__pyx_v_y == ((godot_real)-1)) && PyErr_Occurred())) __PYX_ERR(2, 10, __pyx_L3_error)
     } else {
       __pyx_v_y = ((godot_real)0.0);
     }
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("__init__", 0, 0, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(2, 9, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("__init__", 0, 0, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(2, 10, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("core.vector2.Vector2.Vector2.__init__", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
@@ -1463,7 +1507,7 @@ static int __pyx_pf_4core_7vector2_7Vector2_7Vector2___init__(struct __pyx_obj_4
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__init__", 0);
 
-  /* "core/vector2/Vector2.pyx":10
+  /* "core/vector2/Vector2.pyx":11
  * 
  *     def __init__(self, godot_real x = 0, godot_real y = 0):
  *         api_core.godot_vector2_new(&self._native, x, y)             # <<<<<<<<<<<<<<
@@ -1472,7 +1516,7 @@ static int __pyx_pf_4core_7vector2_7Vector2_7Vector2___init__(struct __pyx_obj_4
  */
   api_core->godot_vector2_new((&__pyx_v_self->_native), __pyx_v_x, __pyx_v_y);
 
-  /* "core/vector2/Vector2.pyx":9
+  /* "core/vector2/Vector2.pyx":10
  * cdef class Vector2:
  * 
  *     def __init__(self, godot_real x = 0, godot_real y = 0):             # <<<<<<<<<<<<<<
@@ -1486,7 +1530,7 @@ static int __pyx_pf_4core_7vector2_7Vector2_7Vector2___init__(struct __pyx_obj_4
   return __pyx_r;
 }
 
-/* "core/vector2/Vector2.pyx":12
+/* "core/vector2/Vector2.pyx":13
  *         api_core.godot_vector2_new(&self._native, x, y)
  * 
  *     def __str__(self):             # <<<<<<<<<<<<<<
@@ -1516,7 +1560,7 @@ static PyObject *__pyx_pf_4core_7vector2_7Vector2_7Vector2_2__str__(struct __pyx
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__str__", 0);
 
-  /* "core/vector2/Vector2.pyx":13
+  /* "core/vector2/Vector2.pyx":14
  * 
  *     def __str__(self):
  *         return api_core.godot_vector2_as_string(&self._native)             # <<<<<<<<<<<<<<
@@ -1524,13 +1568,13 @@ static PyObject *__pyx_pf_4core_7vector2_7Vector2_7Vector2_2__str__(struct __pyx
  *     def normalized(self):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __pyx_convert__to_py_godot_string(api_core->godot_vector2_as_string((&__pyx_v_self->_native))); if (unlikely(!__pyx_t_1)) __PYX_ERR(2, 13, __pyx_L1_error)
+  __pyx_t_1 = __pyx_convert__to_py_godot_string(api_core->godot_vector2_as_string((&__pyx_v_self->_native))); if (unlikely(!__pyx_t_1)) __PYX_ERR(2, 14, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "core/vector2/Vector2.pyx":12
+  /* "core/vector2/Vector2.pyx":13
  *         api_core.godot_vector2_new(&self._native, x, y)
  * 
  *     def __str__(self):             # <<<<<<<<<<<<<<
@@ -1549,7 +1593,7 @@ static PyObject *__pyx_pf_4core_7vector2_7Vector2_7Vector2_2__str__(struct __pyx
   return __pyx_r;
 }
 
-/* "core/vector2/Vector2.pyx":15
+/* "core/vector2/Vector2.pyx":16
  *         return api_core.godot_vector2_as_string(&self._native)
  * 
  *     def normalized(self):             # <<<<<<<<<<<<<<
@@ -1579,7 +1623,7 @@ static PyObject *__pyx_pf_4core_7vector2_7Vector2_7Vector2_4normalized(struct __
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("normalized", 0);
 
-  /* "core/vector2/Vector2.pyx":16
+  /* "core/vector2/Vector2.pyx":17
  * 
  *     def normalized(self):
  *         return Vector2.new_static(api_core.godot_vector2_normalized(&self._native))             # <<<<<<<<<<<<<<
@@ -1587,13 +1631,13 @@ static PyObject *__pyx_pf_4core_7vector2_7Vector2_7Vector2_4normalized(struct __
  *     def length(self):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = ((PyObject *)__pyx_f_4core_7vector2_7Vector2_7Vector2_new_static(api_core->godot_vector2_normalized((&__pyx_v_self->_native)))); if (unlikely(!__pyx_t_1)) __PYX_ERR(2, 16, __pyx_L1_error)
+  __pyx_t_1 = ((PyObject *)__pyx_f_4core_7vector2_7Vector2_7Vector2_new_static(api_core->godot_vector2_normalized((&__pyx_v_self->_native)))); if (unlikely(!__pyx_t_1)) __PYX_ERR(2, 17, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "core/vector2/Vector2.pyx":15
+  /* "core/vector2/Vector2.pyx":16
  *         return api_core.godot_vector2_as_string(&self._native)
  * 
  *     def normalized(self):             # <<<<<<<<<<<<<<
@@ -1612,7 +1656,7 @@ static PyObject *__pyx_pf_4core_7vector2_7Vector2_7Vector2_4normalized(struct __
   return __pyx_r;
 }
 
-/* "core/vector2/Vector2.pyx":18
+/* "core/vector2/Vector2.pyx":19
  *         return Vector2.new_static(api_core.godot_vector2_normalized(&self._native))
  * 
  *     def length(self):             # <<<<<<<<<<<<<<
@@ -1642,7 +1686,7 @@ static PyObject *__pyx_pf_4core_7vector2_7Vector2_7Vector2_6length(struct __pyx_
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("length", 0);
 
-  /* "core/vector2/Vector2.pyx":19
+  /* "core/vector2/Vector2.pyx":20
  * 
  *     def length(self):
  *         return api_core.godot_vector2_length(&self._native)             # <<<<<<<<<<<<<<
@@ -1650,13 +1694,13 @@ static PyObject *__pyx_pf_4core_7vector2_7Vector2_7Vector2_6length(struct __pyx_
  *     def angle(self):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = PyFloat_FromDouble(api_core->godot_vector2_length((&__pyx_v_self->_native))); if (unlikely(!__pyx_t_1)) __PYX_ERR(2, 19, __pyx_L1_error)
+  __pyx_t_1 = PyFloat_FromDouble(api_core->godot_vector2_length((&__pyx_v_self->_native))); if (unlikely(!__pyx_t_1)) __PYX_ERR(2, 20, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "core/vector2/Vector2.pyx":18
+  /* "core/vector2/Vector2.pyx":19
  *         return Vector2.new_static(api_core.godot_vector2_normalized(&self._native))
  * 
  *     def length(self):             # <<<<<<<<<<<<<<
@@ -1675,7 +1719,7 @@ static PyObject *__pyx_pf_4core_7vector2_7Vector2_7Vector2_6length(struct __pyx_
   return __pyx_r;
 }
 
-/* "core/vector2/Vector2.pyx":21
+/* "core/vector2/Vector2.pyx":22
  *         return api_core.godot_vector2_length(&self._native)
  * 
  *     def angle(self):             # <<<<<<<<<<<<<<
@@ -1705,7 +1749,7 @@ static PyObject *__pyx_pf_4core_7vector2_7Vector2_7Vector2_8angle(struct __pyx_o
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("angle", 0);
 
-  /* "core/vector2/Vector2.pyx":22
+  /* "core/vector2/Vector2.pyx":23
  * 
  *     def angle(self):
  *         return api_core.godot_vector2_angle(&self._native)             # <<<<<<<<<<<<<<
@@ -1713,13 +1757,13 @@ static PyObject *__pyx_pf_4core_7vector2_7Vector2_7Vector2_8angle(struct __pyx_o
  *     def length_squared(self):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = PyFloat_FromDouble(api_core->godot_vector2_angle((&__pyx_v_self->_native))); if (unlikely(!__pyx_t_1)) __PYX_ERR(2, 22, __pyx_L1_error)
+  __pyx_t_1 = PyFloat_FromDouble(api_core->godot_vector2_angle((&__pyx_v_self->_native))); if (unlikely(!__pyx_t_1)) __PYX_ERR(2, 23, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "core/vector2/Vector2.pyx":21
+  /* "core/vector2/Vector2.pyx":22
  *         return api_core.godot_vector2_length(&self._native)
  * 
  *     def angle(self):             # <<<<<<<<<<<<<<
@@ -1738,7 +1782,7 @@ static PyObject *__pyx_pf_4core_7vector2_7Vector2_7Vector2_8angle(struct __pyx_o
   return __pyx_r;
 }
 
-/* "core/vector2/Vector2.pyx":24
+/* "core/vector2/Vector2.pyx":25
  *         return api_core.godot_vector2_angle(&self._native)
  * 
  *     def length_squared(self):             # <<<<<<<<<<<<<<
@@ -1768,7 +1812,7 @@ static PyObject *__pyx_pf_4core_7vector2_7Vector2_7Vector2_10length_squared(stru
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("length_squared", 0);
 
-  /* "core/vector2/Vector2.pyx":25
+  /* "core/vector2/Vector2.pyx":26
  * 
  *     def length_squared(self):
  *         return api_core.godot_vector2_length_squared(&self._native)             # <<<<<<<<<<<<<<
@@ -1776,13 +1820,13 @@ static PyObject *__pyx_pf_4core_7vector2_7Vector2_7Vector2_10length_squared(stru
  *     def is_normalied(self):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = PyFloat_FromDouble(api_core->godot_vector2_length_squared((&__pyx_v_self->_native))); if (unlikely(!__pyx_t_1)) __PYX_ERR(2, 25, __pyx_L1_error)
+  __pyx_t_1 = PyFloat_FromDouble(api_core->godot_vector2_length_squared((&__pyx_v_self->_native))); if (unlikely(!__pyx_t_1)) __PYX_ERR(2, 26, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "core/vector2/Vector2.pyx":24
+  /* "core/vector2/Vector2.pyx":25
  *         return api_core.godot_vector2_angle(&self._native)
  * 
  *     def length_squared(self):             # <<<<<<<<<<<<<<
@@ -1801,7 +1845,7 @@ static PyObject *__pyx_pf_4core_7vector2_7Vector2_7Vector2_10length_squared(stru
   return __pyx_r;
 }
 
-/* "core/vector2/Vector2.pyx":27
+/* "core/vector2/Vector2.pyx":28
  *         return api_core.godot_vector2_length_squared(&self._native)
  * 
  *     def is_normalied(self):             # <<<<<<<<<<<<<<
@@ -1831,7 +1875,7 @@ static PyObject *__pyx_pf_4core_7vector2_7Vector2_7Vector2_12is_normalied(struct
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("is_normalied", 0);
 
-  /* "core/vector2/Vector2.pyx":28
+  /* "core/vector2/Vector2.pyx":29
  * 
  *     def is_normalied(self):
  *         return api_core.godot_vector2_is_normalized(&self._native)             # <<<<<<<<<<<<<<
@@ -1839,13 +1883,13 @@ static PyObject *__pyx_pf_4core_7vector2_7Vector2_7Vector2_12is_normalied(struct
  *     def distance_to(self, Vector2 to):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_PyBool_FromLong(api_core->godot_vector2_is_normalized((&__pyx_v_self->_native))); if (unlikely(!__pyx_t_1)) __PYX_ERR(2, 28, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyBool_FromLong(api_core->godot_vector2_is_normalized((&__pyx_v_self->_native))); if (unlikely(!__pyx_t_1)) __PYX_ERR(2, 29, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "core/vector2/Vector2.pyx":27
+  /* "core/vector2/Vector2.pyx":28
  *         return api_core.godot_vector2_length_squared(&self._native)
  * 
  *     def is_normalied(self):             # <<<<<<<<<<<<<<
@@ -1864,7 +1908,7 @@ static PyObject *__pyx_pf_4core_7vector2_7Vector2_7Vector2_12is_normalied(struct
   return __pyx_r;
 }
 
-/* "core/vector2/Vector2.pyx":30
+/* "core/vector2/Vector2.pyx":31
  *         return api_core.godot_vector2_is_normalized(&self._native)
  * 
  *     def distance_to(self, Vector2 to):             # <<<<<<<<<<<<<<
@@ -1881,7 +1925,7 @@ static PyObject *__pyx_pw_4core_7vector2_7Vector2_7Vector2_15distance_to(PyObjec
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("distance_to (wrapper)", 0);
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_to), __pyx_ptype_4core_7vector2_7Vector2_Vector2, 1, "to", 0))) __PYX_ERR(2, 30, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_to), __pyx_ptype_4core_7vector2_7Vector2_Vector2, 1, "to", 0))) __PYX_ERR(2, 31, __pyx_L1_error)
   __pyx_r = __pyx_pf_4core_7vector2_7Vector2_7Vector2_14distance_to(((struct __pyx_obj_4core_7vector2_7Vector2_Vector2 *)__pyx_v_self), ((struct __pyx_obj_4core_7vector2_7Vector2_Vector2 *)__pyx_v_to));
 
   /* function exit code */
@@ -1902,7 +1946,7 @@ static PyObject *__pyx_pf_4core_7vector2_7Vector2_7Vector2_14distance_to(struct 
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("distance_to", 0);
 
-  /* "core/vector2/Vector2.pyx":31
+  /* "core/vector2/Vector2.pyx":32
  * 
  *     def distance_to(self, Vector2 to):
  *         return api_core.godot_vector2_distance_to(&self._native, &to._native)             # <<<<<<<<<<<<<<
@@ -1910,13 +1954,13 @@ static PyObject *__pyx_pf_4core_7vector2_7Vector2_7Vector2_14distance_to(struct 
  *     def distance_squared_to(self, Vector2 to):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = PyFloat_FromDouble(api_core->godot_vector2_distance_to((&__pyx_v_self->_native), (&__pyx_v_to->_native))); if (unlikely(!__pyx_t_1)) __PYX_ERR(2, 31, __pyx_L1_error)
+  __pyx_t_1 = PyFloat_FromDouble(api_core->godot_vector2_distance_to((&__pyx_v_self->_native), (&__pyx_v_to->_native))); if (unlikely(!__pyx_t_1)) __PYX_ERR(2, 32, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "core/vector2/Vector2.pyx":30
+  /* "core/vector2/Vector2.pyx":31
  *         return api_core.godot_vector2_is_normalized(&self._native)
  * 
  *     def distance_to(self, Vector2 to):             # <<<<<<<<<<<<<<
@@ -1935,7 +1979,7 @@ static PyObject *__pyx_pf_4core_7vector2_7Vector2_7Vector2_14distance_to(struct 
   return __pyx_r;
 }
 
-/* "core/vector2/Vector2.pyx":33
+/* "core/vector2/Vector2.pyx":34
  *         return api_core.godot_vector2_distance_to(&self._native, &to._native)
  * 
  *     def distance_squared_to(self, Vector2 to):             # <<<<<<<<<<<<<<
@@ -1952,7 +1996,7 @@ static PyObject *__pyx_pw_4core_7vector2_7Vector2_7Vector2_17distance_squared_to
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("distance_squared_to (wrapper)", 0);
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_to), __pyx_ptype_4core_7vector2_7Vector2_Vector2, 1, "to", 0))) __PYX_ERR(2, 33, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_to), __pyx_ptype_4core_7vector2_7Vector2_Vector2, 1, "to", 0))) __PYX_ERR(2, 34, __pyx_L1_error)
   __pyx_r = __pyx_pf_4core_7vector2_7Vector2_7Vector2_16distance_squared_to(((struct __pyx_obj_4core_7vector2_7Vector2_Vector2 *)__pyx_v_self), ((struct __pyx_obj_4core_7vector2_7Vector2_Vector2 *)__pyx_v_to));
 
   /* function exit code */
@@ -1973,7 +2017,7 @@ static PyObject *__pyx_pf_4core_7vector2_7Vector2_7Vector2_16distance_squared_to
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("distance_squared_to", 0);
 
-  /* "core/vector2/Vector2.pyx":34
+  /* "core/vector2/Vector2.pyx":35
  * 
  *     def distance_squared_to(self, Vector2 to):
  *         return api_core.godot_vector2_distance_squared_to(&self._native, &to._native)             # <<<<<<<<<<<<<<
@@ -1981,13 +2025,13 @@ static PyObject *__pyx_pf_4core_7vector2_7Vector2_7Vector2_16distance_squared_to
  *     def angle_to(self, Vector2 to):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = PyFloat_FromDouble(api_core->godot_vector2_distance_squared_to((&__pyx_v_self->_native), (&__pyx_v_to->_native))); if (unlikely(!__pyx_t_1)) __PYX_ERR(2, 34, __pyx_L1_error)
+  __pyx_t_1 = PyFloat_FromDouble(api_core->godot_vector2_distance_squared_to((&__pyx_v_self->_native), (&__pyx_v_to->_native))); if (unlikely(!__pyx_t_1)) __PYX_ERR(2, 35, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "core/vector2/Vector2.pyx":33
+  /* "core/vector2/Vector2.pyx":34
  *         return api_core.godot_vector2_distance_to(&self._native, &to._native)
  * 
  *     def distance_squared_to(self, Vector2 to):             # <<<<<<<<<<<<<<
@@ -2006,7 +2050,7 @@ static PyObject *__pyx_pf_4core_7vector2_7Vector2_7Vector2_16distance_squared_to
   return __pyx_r;
 }
 
-/* "core/vector2/Vector2.pyx":36
+/* "core/vector2/Vector2.pyx":37
  *         return api_core.godot_vector2_distance_squared_to(&self._native, &to._native)
  * 
  *     def angle_to(self, Vector2 to):             # <<<<<<<<<<<<<<
@@ -2023,7 +2067,7 @@ static PyObject *__pyx_pw_4core_7vector2_7Vector2_7Vector2_19angle_to(PyObject *
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("angle_to (wrapper)", 0);
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_to), __pyx_ptype_4core_7vector2_7Vector2_Vector2, 1, "to", 0))) __PYX_ERR(2, 36, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_to), __pyx_ptype_4core_7vector2_7Vector2_Vector2, 1, "to", 0))) __PYX_ERR(2, 37, __pyx_L1_error)
   __pyx_r = __pyx_pf_4core_7vector2_7Vector2_7Vector2_18angle_to(((struct __pyx_obj_4core_7vector2_7Vector2_Vector2 *)__pyx_v_self), ((struct __pyx_obj_4core_7vector2_7Vector2_Vector2 *)__pyx_v_to));
 
   /* function exit code */
@@ -2044,7 +2088,7 @@ static PyObject *__pyx_pf_4core_7vector2_7Vector2_7Vector2_18angle_to(struct __p
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("angle_to", 0);
 
-  /* "core/vector2/Vector2.pyx":37
+  /* "core/vector2/Vector2.pyx":38
  * 
  *     def angle_to(self, Vector2 to):
  *         return api_core.godot_vector2_angle_to(&self._native, &to._native)             # <<<<<<<<<<<<<<
@@ -2052,13 +2096,13 @@ static PyObject *__pyx_pf_4core_7vector2_7Vector2_7Vector2_18angle_to(struct __p
  *     def angle_to_point(self, Vector2 to):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = PyFloat_FromDouble(api_core->godot_vector2_angle_to((&__pyx_v_self->_native), (&__pyx_v_to->_native))); if (unlikely(!__pyx_t_1)) __PYX_ERR(2, 37, __pyx_L1_error)
+  __pyx_t_1 = PyFloat_FromDouble(api_core->godot_vector2_angle_to((&__pyx_v_self->_native), (&__pyx_v_to->_native))); if (unlikely(!__pyx_t_1)) __PYX_ERR(2, 38, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "core/vector2/Vector2.pyx":36
+  /* "core/vector2/Vector2.pyx":37
  *         return api_core.godot_vector2_distance_squared_to(&self._native, &to._native)
  * 
  *     def angle_to(self, Vector2 to):             # <<<<<<<<<<<<<<
@@ -2077,7 +2121,7 @@ static PyObject *__pyx_pf_4core_7vector2_7Vector2_7Vector2_18angle_to(struct __p
   return __pyx_r;
 }
 
-/* "core/vector2/Vector2.pyx":39
+/* "core/vector2/Vector2.pyx":40
  *         return api_core.godot_vector2_angle_to(&self._native, &to._native)
  * 
  *     def angle_to_point(self, Vector2 to):             # <<<<<<<<<<<<<<
@@ -2094,7 +2138,7 @@ static PyObject *__pyx_pw_4core_7vector2_7Vector2_7Vector2_21angle_to_point(PyOb
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("angle_to_point (wrapper)", 0);
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_to), __pyx_ptype_4core_7vector2_7Vector2_Vector2, 1, "to", 0))) __PYX_ERR(2, 39, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_to), __pyx_ptype_4core_7vector2_7Vector2_Vector2, 1, "to", 0))) __PYX_ERR(2, 40, __pyx_L1_error)
   __pyx_r = __pyx_pf_4core_7vector2_7Vector2_7Vector2_20angle_to_point(((struct __pyx_obj_4core_7vector2_7Vector2_Vector2 *)__pyx_v_self), ((struct __pyx_obj_4core_7vector2_7Vector2_Vector2 *)__pyx_v_to));
 
   /* function exit code */
@@ -2115,7 +2159,7 @@ static PyObject *__pyx_pf_4core_7vector2_7Vector2_7Vector2_20angle_to_point(stru
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("angle_to_point", 0);
 
-  /* "core/vector2/Vector2.pyx":40
+  /* "core/vector2/Vector2.pyx":41
  * 
  *     def angle_to_point(self, Vector2 to):
  *         return api_core.godot_vector2_angle_to_point(&self._native, &to._native)             # <<<<<<<<<<<<<<
@@ -2123,13 +2167,13 @@ static PyObject *__pyx_pf_4core_7vector2_7Vector2_7Vector2_20angle_to_point(stru
  *     def linear_interpolate(self, Vector2 b, godot_real t):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = PyFloat_FromDouble(api_core->godot_vector2_angle_to_point((&__pyx_v_self->_native), (&__pyx_v_to->_native))); if (unlikely(!__pyx_t_1)) __PYX_ERR(2, 40, __pyx_L1_error)
+  __pyx_t_1 = PyFloat_FromDouble(api_core->godot_vector2_angle_to_point((&__pyx_v_self->_native), (&__pyx_v_to->_native))); if (unlikely(!__pyx_t_1)) __PYX_ERR(2, 41, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "core/vector2/Vector2.pyx":39
+  /* "core/vector2/Vector2.pyx":40
  *         return api_core.godot_vector2_angle_to(&self._native, &to._native)
  * 
  *     def angle_to_point(self, Vector2 to):             # <<<<<<<<<<<<<<
@@ -2148,7 +2192,7 @@ static PyObject *__pyx_pf_4core_7vector2_7Vector2_7Vector2_20angle_to_point(stru
   return __pyx_r;
 }
 
-/* "core/vector2/Vector2.pyx":42
+/* "core/vector2/Vector2.pyx":43
  *         return api_core.godot_vector2_angle_to_point(&self._native, &to._native)
  * 
  *     def linear_interpolate(self, Vector2 b, godot_real t):             # <<<<<<<<<<<<<<
@@ -2190,11 +2234,11 @@ static PyObject *__pyx_pw_4core_7vector2_7Vector2_7Vector2_23linear_interpolate(
         case  1:
         if (likely((values[1] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_t)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("linear_interpolate", 1, 2, 2, 1); __PYX_ERR(2, 42, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("linear_interpolate", 1, 2, 2, 1); __PYX_ERR(2, 43, __pyx_L3_error)
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "linear_interpolate") < 0)) __PYX_ERR(2, 42, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "linear_interpolate") < 0)) __PYX_ERR(2, 43, __pyx_L3_error)
       }
     } else if (PyTuple_GET_SIZE(__pyx_args) != 2) {
       goto __pyx_L5_argtuple_error;
@@ -2203,17 +2247,17 @@ static PyObject *__pyx_pw_4core_7vector2_7Vector2_7Vector2_23linear_interpolate(
       values[1] = PyTuple_GET_ITEM(__pyx_args, 1);
     }
     __pyx_v_b = ((struct __pyx_obj_4core_7vector2_7Vector2_Vector2 *)values[0]);
-    __pyx_v_t = __pyx_PyFloat_AsFloat(values[1]); if (unlikely((__pyx_v_t == ((godot_real)-1)) && PyErr_Occurred())) __PYX_ERR(2, 42, __pyx_L3_error)
+    __pyx_v_t = __pyx_PyFloat_AsFloat(values[1]); if (unlikely((__pyx_v_t == ((godot_real)-1)) && PyErr_Occurred())) __PYX_ERR(2, 43, __pyx_L3_error)
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("linear_interpolate", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(2, 42, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("linear_interpolate", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(2, 43, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("core.vector2.Vector2.Vector2.linear_interpolate", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_b), __pyx_ptype_4core_7vector2_7Vector2_Vector2, 1, "b", 0))) __PYX_ERR(2, 42, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_b), __pyx_ptype_4core_7vector2_7Vector2_Vector2, 1, "b", 0))) __PYX_ERR(2, 43, __pyx_L1_error)
   __pyx_r = __pyx_pf_4core_7vector2_7Vector2_7Vector2_22linear_interpolate(((struct __pyx_obj_4core_7vector2_7Vector2_Vector2 *)__pyx_v_self), __pyx_v_b, __pyx_v_t);
 
   /* function exit code */
@@ -2234,7 +2278,7 @@ static PyObject *__pyx_pf_4core_7vector2_7Vector2_7Vector2_22linear_interpolate(
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("linear_interpolate", 0);
 
-  /* "core/vector2/Vector2.pyx":43
+  /* "core/vector2/Vector2.pyx":44
  * 
  *     def linear_interpolate(self, Vector2 b, godot_real t):
  *         return Vector2.new_static(api_core.godot_vector2_linear_interpolate(&self._native, &b._native, t))             # <<<<<<<<<<<<<<
@@ -2242,13 +2286,13 @@ static PyObject *__pyx_pf_4core_7vector2_7Vector2_7Vector2_22linear_interpolate(
  *     def cubic_interpolate(self, Vector2 b, Vector2 pre_a, Vector2 post_b, godot_real t):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = ((PyObject *)__pyx_f_4core_7vector2_7Vector2_7Vector2_new_static(api_core->godot_vector2_linear_interpolate((&__pyx_v_self->_native), (&__pyx_v_b->_native), __pyx_v_t))); if (unlikely(!__pyx_t_1)) __PYX_ERR(2, 43, __pyx_L1_error)
+  __pyx_t_1 = ((PyObject *)__pyx_f_4core_7vector2_7Vector2_7Vector2_new_static(api_core->godot_vector2_linear_interpolate((&__pyx_v_self->_native), (&__pyx_v_b->_native), __pyx_v_t))); if (unlikely(!__pyx_t_1)) __PYX_ERR(2, 44, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "core/vector2/Vector2.pyx":42
+  /* "core/vector2/Vector2.pyx":43
  *         return api_core.godot_vector2_angle_to_point(&self._native, &to._native)
  * 
  *     def linear_interpolate(self, Vector2 b, godot_real t):             # <<<<<<<<<<<<<<
@@ -2267,7 +2311,7 @@ static PyObject *__pyx_pf_4core_7vector2_7Vector2_7Vector2_22linear_interpolate(
   return __pyx_r;
 }
 
-/* "core/vector2/Vector2.pyx":45
+/* "core/vector2/Vector2.pyx":46
  *         return Vector2.new_static(api_core.godot_vector2_linear_interpolate(&self._native, &b._native, t))
  * 
  *     def cubic_interpolate(self, Vector2 b, Vector2 pre_a, Vector2 post_b, godot_real t):             # <<<<<<<<<<<<<<
@@ -2315,23 +2359,23 @@ static PyObject *__pyx_pw_4core_7vector2_7Vector2_7Vector2_25cubic_interpolate(P
         case  1:
         if (likely((values[1] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_pre_a)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("cubic_interpolate", 1, 4, 4, 1); __PYX_ERR(2, 45, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("cubic_interpolate", 1, 4, 4, 1); __PYX_ERR(2, 46, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  2:
         if (likely((values[2] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_post_b)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("cubic_interpolate", 1, 4, 4, 2); __PYX_ERR(2, 45, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("cubic_interpolate", 1, 4, 4, 2); __PYX_ERR(2, 46, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  3:
         if (likely((values[3] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_t)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("cubic_interpolate", 1, 4, 4, 3); __PYX_ERR(2, 45, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("cubic_interpolate", 1, 4, 4, 3); __PYX_ERR(2, 46, __pyx_L3_error)
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "cubic_interpolate") < 0)) __PYX_ERR(2, 45, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "cubic_interpolate") < 0)) __PYX_ERR(2, 46, __pyx_L3_error)
       }
     } else if (PyTuple_GET_SIZE(__pyx_args) != 4) {
       goto __pyx_L5_argtuple_error;
@@ -2344,19 +2388,19 @@ static PyObject *__pyx_pw_4core_7vector2_7Vector2_7Vector2_25cubic_interpolate(P
     __pyx_v_b = ((struct __pyx_obj_4core_7vector2_7Vector2_Vector2 *)values[0]);
     __pyx_v_pre_a = ((struct __pyx_obj_4core_7vector2_7Vector2_Vector2 *)values[1]);
     __pyx_v_post_b = ((struct __pyx_obj_4core_7vector2_7Vector2_Vector2 *)values[2]);
-    __pyx_v_t = __pyx_PyFloat_AsFloat(values[3]); if (unlikely((__pyx_v_t == ((godot_real)-1)) && PyErr_Occurred())) __PYX_ERR(2, 45, __pyx_L3_error)
+    __pyx_v_t = __pyx_PyFloat_AsFloat(values[3]); if (unlikely((__pyx_v_t == ((godot_real)-1)) && PyErr_Occurred())) __PYX_ERR(2, 46, __pyx_L3_error)
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("cubic_interpolate", 1, 4, 4, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(2, 45, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("cubic_interpolate", 1, 4, 4, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(2, 46, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("core.vector2.Vector2.Vector2.cubic_interpolate", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_b), __pyx_ptype_4core_7vector2_7Vector2_Vector2, 1, "b", 0))) __PYX_ERR(2, 45, __pyx_L1_error)
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_pre_a), __pyx_ptype_4core_7vector2_7Vector2_Vector2, 1, "pre_a", 0))) __PYX_ERR(2, 45, __pyx_L1_error)
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_post_b), __pyx_ptype_4core_7vector2_7Vector2_Vector2, 1, "post_b", 0))) __PYX_ERR(2, 45, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_b), __pyx_ptype_4core_7vector2_7Vector2_Vector2, 1, "b", 0))) __PYX_ERR(2, 46, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_pre_a), __pyx_ptype_4core_7vector2_7Vector2_Vector2, 1, "pre_a", 0))) __PYX_ERR(2, 46, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_post_b), __pyx_ptype_4core_7vector2_7Vector2_Vector2, 1, "post_b", 0))) __PYX_ERR(2, 46, __pyx_L1_error)
   __pyx_r = __pyx_pf_4core_7vector2_7Vector2_7Vector2_24cubic_interpolate(((struct __pyx_obj_4core_7vector2_7Vector2_Vector2 *)__pyx_v_self), __pyx_v_b, __pyx_v_pre_a, __pyx_v_post_b, __pyx_v_t);
 
   /* function exit code */
@@ -2377,7 +2421,7 @@ static PyObject *__pyx_pf_4core_7vector2_7Vector2_7Vector2_24cubic_interpolate(s
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("cubic_interpolate", 0);
 
-  /* "core/vector2/Vector2.pyx":46
+  /* "core/vector2/Vector2.pyx":47
  * 
  *     def cubic_interpolate(self, Vector2 b, Vector2 pre_a, Vector2 post_b, godot_real t):
  *         return Vector2.new_static(api_core.godot_vector2_cubic_interpolate(&self._native, &b._native, &pre_a._native, &post_b._native, t))             # <<<<<<<<<<<<<<
@@ -2385,13 +2429,13 @@ static PyObject *__pyx_pf_4core_7vector2_7Vector2_7Vector2_24cubic_interpolate(s
  *     def rotated(self, godot_real phi):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = ((PyObject *)__pyx_f_4core_7vector2_7Vector2_7Vector2_new_static(api_core->godot_vector2_cubic_interpolate((&__pyx_v_self->_native), (&__pyx_v_b->_native), (&__pyx_v_pre_a->_native), (&__pyx_v_post_b->_native), __pyx_v_t))); if (unlikely(!__pyx_t_1)) __PYX_ERR(2, 46, __pyx_L1_error)
+  __pyx_t_1 = ((PyObject *)__pyx_f_4core_7vector2_7Vector2_7Vector2_new_static(api_core->godot_vector2_cubic_interpolate((&__pyx_v_self->_native), (&__pyx_v_b->_native), (&__pyx_v_pre_a->_native), (&__pyx_v_post_b->_native), __pyx_v_t))); if (unlikely(!__pyx_t_1)) __PYX_ERR(2, 47, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "core/vector2/Vector2.pyx":45
+  /* "core/vector2/Vector2.pyx":46
  *         return Vector2.new_static(api_core.godot_vector2_linear_interpolate(&self._native, &b._native, t))
  * 
  *     def cubic_interpolate(self, Vector2 b, Vector2 pre_a, Vector2 post_b, godot_real t):             # <<<<<<<<<<<<<<
@@ -2410,7 +2454,7 @@ static PyObject *__pyx_pf_4core_7vector2_7Vector2_7Vector2_24cubic_interpolate(s
   return __pyx_r;
 }
 
-/* "core/vector2/Vector2.pyx":48
+/* "core/vector2/Vector2.pyx":49
  *         return Vector2.new_static(api_core.godot_vector2_cubic_interpolate(&self._native, &b._native, &pre_a._native, &post_b._native, t))
  * 
  *     def rotated(self, godot_real phi):             # <<<<<<<<<<<<<<
@@ -2429,7 +2473,7 @@ static PyObject *__pyx_pw_4core_7vector2_7Vector2_7Vector2_27rotated(PyObject *_
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("rotated (wrapper)", 0);
   assert(__pyx_arg_phi); {
-    __pyx_v_phi = __pyx_PyFloat_AsFloat(__pyx_arg_phi); if (unlikely((__pyx_v_phi == ((godot_real)-1)) && PyErr_Occurred())) __PYX_ERR(2, 48, __pyx_L3_error)
+    __pyx_v_phi = __pyx_PyFloat_AsFloat(__pyx_arg_phi); if (unlikely((__pyx_v_phi == ((godot_real)-1)) && PyErr_Occurred())) __PYX_ERR(2, 49, __pyx_L3_error)
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -2453,7 +2497,7 @@ static PyObject *__pyx_pf_4core_7vector2_7Vector2_7Vector2_26rotated(struct __py
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("rotated", 0);
 
-  /* "core/vector2/Vector2.pyx":49
+  /* "core/vector2/Vector2.pyx":50
  * 
  *     def rotated(self, godot_real phi):
  *         return Vector2.new_static(api_core.godot_vector2_rotated(&self._native, phi))             # <<<<<<<<<<<<<<
@@ -2461,13 +2505,13 @@ static PyObject *__pyx_pf_4core_7vector2_7Vector2_7Vector2_26rotated(struct __py
  *     def tangent(self):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = ((PyObject *)__pyx_f_4core_7vector2_7Vector2_7Vector2_new_static(api_core->godot_vector2_rotated((&__pyx_v_self->_native), __pyx_v_phi))); if (unlikely(!__pyx_t_1)) __PYX_ERR(2, 49, __pyx_L1_error)
+  __pyx_t_1 = ((PyObject *)__pyx_f_4core_7vector2_7Vector2_7Vector2_new_static(api_core->godot_vector2_rotated((&__pyx_v_self->_native), __pyx_v_phi))); if (unlikely(!__pyx_t_1)) __PYX_ERR(2, 50, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "core/vector2/Vector2.pyx":48
+  /* "core/vector2/Vector2.pyx":49
  *         return Vector2.new_static(api_core.godot_vector2_cubic_interpolate(&self._native, &b._native, &pre_a._native, &post_b._native, t))
  * 
  *     def rotated(self, godot_real phi):             # <<<<<<<<<<<<<<
@@ -2486,7 +2530,7 @@ static PyObject *__pyx_pf_4core_7vector2_7Vector2_7Vector2_26rotated(struct __py
   return __pyx_r;
 }
 
-/* "core/vector2/Vector2.pyx":51
+/* "core/vector2/Vector2.pyx":52
  *         return Vector2.new_static(api_core.godot_vector2_rotated(&self._native, phi))
  * 
  *     def tangent(self):             # <<<<<<<<<<<<<<
@@ -2516,7 +2560,7 @@ static PyObject *__pyx_pf_4core_7vector2_7Vector2_7Vector2_28tangent(struct __py
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("tangent", 0);
 
-  /* "core/vector2/Vector2.pyx":52
+  /* "core/vector2/Vector2.pyx":53
  * 
  *     def tangent(self):
  *         return Vector2.new_static(api_core.godot_vector2_tangent(&self._native))             # <<<<<<<<<<<<<<
@@ -2524,13 +2568,13 @@ static PyObject *__pyx_pf_4core_7vector2_7Vector2_7Vector2_28tangent(struct __py
  *     def floor(self):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = ((PyObject *)__pyx_f_4core_7vector2_7Vector2_7Vector2_new_static(api_core->godot_vector2_tangent((&__pyx_v_self->_native)))); if (unlikely(!__pyx_t_1)) __PYX_ERR(2, 52, __pyx_L1_error)
+  __pyx_t_1 = ((PyObject *)__pyx_f_4core_7vector2_7Vector2_7Vector2_new_static(api_core->godot_vector2_tangent((&__pyx_v_self->_native)))); if (unlikely(!__pyx_t_1)) __PYX_ERR(2, 53, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "core/vector2/Vector2.pyx":51
+  /* "core/vector2/Vector2.pyx":52
  *         return Vector2.new_static(api_core.godot_vector2_rotated(&self._native, phi))
  * 
  *     def tangent(self):             # <<<<<<<<<<<<<<
@@ -2549,7 +2593,7 @@ static PyObject *__pyx_pf_4core_7vector2_7Vector2_7Vector2_28tangent(struct __py
   return __pyx_r;
 }
 
-/* "core/vector2/Vector2.pyx":54
+/* "core/vector2/Vector2.pyx":55
  *         return Vector2.new_static(api_core.godot_vector2_tangent(&self._native))
  * 
  *     def floor(self):             # <<<<<<<<<<<<<<
@@ -2579,7 +2623,7 @@ static PyObject *__pyx_pf_4core_7vector2_7Vector2_7Vector2_30floor(struct __pyx_
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("floor", 0);
 
-  /* "core/vector2/Vector2.pyx":55
+  /* "core/vector2/Vector2.pyx":56
  * 
  *     def floor(self):
  *         return Vector2.new_static(api_core.godot_vector2_floor(&self._native))             # <<<<<<<<<<<<<<
@@ -2587,13 +2631,13 @@ static PyObject *__pyx_pf_4core_7vector2_7Vector2_7Vector2_30floor(struct __pyx_
  *     def snapped(self, Vector2 by):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = ((PyObject *)__pyx_f_4core_7vector2_7Vector2_7Vector2_new_static(api_core->godot_vector2_floor((&__pyx_v_self->_native)))); if (unlikely(!__pyx_t_1)) __PYX_ERR(2, 55, __pyx_L1_error)
+  __pyx_t_1 = ((PyObject *)__pyx_f_4core_7vector2_7Vector2_7Vector2_new_static(api_core->godot_vector2_floor((&__pyx_v_self->_native)))); if (unlikely(!__pyx_t_1)) __PYX_ERR(2, 56, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "core/vector2/Vector2.pyx":54
+  /* "core/vector2/Vector2.pyx":55
  *         return Vector2.new_static(api_core.godot_vector2_tangent(&self._native))
  * 
  *     def floor(self):             # <<<<<<<<<<<<<<
@@ -2612,7 +2656,7 @@ static PyObject *__pyx_pf_4core_7vector2_7Vector2_7Vector2_30floor(struct __pyx_
   return __pyx_r;
 }
 
-/* "core/vector2/Vector2.pyx":57
+/* "core/vector2/Vector2.pyx":58
  *         return Vector2.new_static(api_core.godot_vector2_floor(&self._native))
  * 
  *     def snapped(self, Vector2 by):             # <<<<<<<<<<<<<<
@@ -2629,7 +2673,7 @@ static PyObject *__pyx_pw_4core_7vector2_7Vector2_7Vector2_33snapped(PyObject *_
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("snapped (wrapper)", 0);
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_by), __pyx_ptype_4core_7vector2_7Vector2_Vector2, 1, "by", 0))) __PYX_ERR(2, 57, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_by), __pyx_ptype_4core_7vector2_7Vector2_Vector2, 1, "by", 0))) __PYX_ERR(2, 58, __pyx_L1_error)
   __pyx_r = __pyx_pf_4core_7vector2_7Vector2_7Vector2_32snapped(((struct __pyx_obj_4core_7vector2_7Vector2_Vector2 *)__pyx_v_self), ((struct __pyx_obj_4core_7vector2_7Vector2_Vector2 *)__pyx_v_by));
 
   /* function exit code */
@@ -2650,7 +2694,7 @@ static PyObject *__pyx_pf_4core_7vector2_7Vector2_7Vector2_32snapped(struct __py
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("snapped", 0);
 
-  /* "core/vector2/Vector2.pyx":58
+  /* "core/vector2/Vector2.pyx":59
  * 
  *     def snapped(self, Vector2 by):
  *         return Vector2.new_static(api_core.godot_vector2_snapped(&self._native, &by._native))             # <<<<<<<<<<<<<<
@@ -2658,13 +2702,13 @@ static PyObject *__pyx_pf_4core_7vector2_7Vector2_7Vector2_32snapped(struct __py
  *     def aspect(self):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = ((PyObject *)__pyx_f_4core_7vector2_7Vector2_7Vector2_new_static(api_core->godot_vector2_snapped((&__pyx_v_self->_native), (&__pyx_v_by->_native)))); if (unlikely(!__pyx_t_1)) __PYX_ERR(2, 58, __pyx_L1_error)
+  __pyx_t_1 = ((PyObject *)__pyx_f_4core_7vector2_7Vector2_7Vector2_new_static(api_core->godot_vector2_snapped((&__pyx_v_self->_native), (&__pyx_v_by->_native)))); if (unlikely(!__pyx_t_1)) __PYX_ERR(2, 59, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "core/vector2/Vector2.pyx":57
+  /* "core/vector2/Vector2.pyx":58
  *         return Vector2.new_static(api_core.godot_vector2_floor(&self._native))
  * 
  *     def snapped(self, Vector2 by):             # <<<<<<<<<<<<<<
@@ -2683,7 +2727,7 @@ static PyObject *__pyx_pf_4core_7vector2_7Vector2_7Vector2_32snapped(struct __py
   return __pyx_r;
 }
 
-/* "core/vector2/Vector2.pyx":60
+/* "core/vector2/Vector2.pyx":61
  *         return Vector2.new_static(api_core.godot_vector2_snapped(&self._native, &by._native))
  * 
  *     def aspect(self):             # <<<<<<<<<<<<<<
@@ -2713,7 +2757,7 @@ static PyObject *__pyx_pf_4core_7vector2_7Vector2_7Vector2_34aspect(struct __pyx
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("aspect", 0);
 
-  /* "core/vector2/Vector2.pyx":61
+  /* "core/vector2/Vector2.pyx":62
  * 
  *     def aspect(self):
  *         return api_core.godot_vector2_aspect(&self._native)             # <<<<<<<<<<<<<<
@@ -2721,13 +2765,13 @@ static PyObject *__pyx_pf_4core_7vector2_7Vector2_7Vector2_34aspect(struct __pyx
  *     def dot(self, Vector2 with_):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = PyFloat_FromDouble(api_core->godot_vector2_aspect((&__pyx_v_self->_native))); if (unlikely(!__pyx_t_1)) __PYX_ERR(2, 61, __pyx_L1_error)
+  __pyx_t_1 = PyFloat_FromDouble(api_core->godot_vector2_aspect((&__pyx_v_self->_native))); if (unlikely(!__pyx_t_1)) __PYX_ERR(2, 62, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "core/vector2/Vector2.pyx":60
+  /* "core/vector2/Vector2.pyx":61
  *         return Vector2.new_static(api_core.godot_vector2_snapped(&self._native, &by._native))
  * 
  *     def aspect(self):             # <<<<<<<<<<<<<<
@@ -2746,7 +2790,7 @@ static PyObject *__pyx_pf_4core_7vector2_7Vector2_7Vector2_34aspect(struct __pyx
   return __pyx_r;
 }
 
-/* "core/vector2/Vector2.pyx":63
+/* "core/vector2/Vector2.pyx":64
  *         return api_core.godot_vector2_aspect(&self._native)
  * 
  *     def dot(self, Vector2 with_):             # <<<<<<<<<<<<<<
@@ -2763,7 +2807,7 @@ static PyObject *__pyx_pw_4core_7vector2_7Vector2_7Vector2_37dot(PyObject *__pyx
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("dot (wrapper)", 0);
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_with_), __pyx_ptype_4core_7vector2_7Vector2_Vector2, 1, "with_", 0))) __PYX_ERR(2, 63, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_with_), __pyx_ptype_4core_7vector2_7Vector2_Vector2, 1, "with_", 0))) __PYX_ERR(2, 64, __pyx_L1_error)
   __pyx_r = __pyx_pf_4core_7vector2_7Vector2_7Vector2_36dot(((struct __pyx_obj_4core_7vector2_7Vector2_Vector2 *)__pyx_v_self), ((struct __pyx_obj_4core_7vector2_7Vector2_Vector2 *)__pyx_v_with_));
 
   /* function exit code */
@@ -2784,7 +2828,7 @@ static PyObject *__pyx_pf_4core_7vector2_7Vector2_7Vector2_36dot(struct __pyx_ob
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("dot", 0);
 
-  /* "core/vector2/Vector2.pyx":64
+  /* "core/vector2/Vector2.pyx":65
  * 
  *     def dot(self, Vector2 with_):
  *         return api_core.godot_vector2_dot(&self._native, &with_._native)             # <<<<<<<<<<<<<<
@@ -2792,13 +2836,13 @@ static PyObject *__pyx_pf_4core_7vector2_7Vector2_7Vector2_36dot(struct __pyx_ob
  *     def slide(self, Vector2 n):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = PyFloat_FromDouble(api_core->godot_vector2_dot((&__pyx_v_self->_native), (&__pyx_v_with_->_native))); if (unlikely(!__pyx_t_1)) __PYX_ERR(2, 64, __pyx_L1_error)
+  __pyx_t_1 = PyFloat_FromDouble(api_core->godot_vector2_dot((&__pyx_v_self->_native), (&__pyx_v_with_->_native))); if (unlikely(!__pyx_t_1)) __PYX_ERR(2, 65, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "core/vector2/Vector2.pyx":63
+  /* "core/vector2/Vector2.pyx":64
  *         return api_core.godot_vector2_aspect(&self._native)
  * 
  *     def dot(self, Vector2 with_):             # <<<<<<<<<<<<<<
@@ -2817,7 +2861,7 @@ static PyObject *__pyx_pf_4core_7vector2_7Vector2_7Vector2_36dot(struct __pyx_ob
   return __pyx_r;
 }
 
-/* "core/vector2/Vector2.pyx":66
+/* "core/vector2/Vector2.pyx":67
  *         return api_core.godot_vector2_dot(&self._native, &with_._native)
  * 
  *     def slide(self, Vector2 n):             # <<<<<<<<<<<<<<
@@ -2834,7 +2878,7 @@ static PyObject *__pyx_pw_4core_7vector2_7Vector2_7Vector2_39slide(PyObject *__p
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("slide (wrapper)", 0);
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_n), __pyx_ptype_4core_7vector2_7Vector2_Vector2, 1, "n", 0))) __PYX_ERR(2, 66, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_n), __pyx_ptype_4core_7vector2_7Vector2_Vector2, 1, "n", 0))) __PYX_ERR(2, 67, __pyx_L1_error)
   __pyx_r = __pyx_pf_4core_7vector2_7Vector2_7Vector2_38slide(((struct __pyx_obj_4core_7vector2_7Vector2_Vector2 *)__pyx_v_self), ((struct __pyx_obj_4core_7vector2_7Vector2_Vector2 *)__pyx_v_n));
 
   /* function exit code */
@@ -2855,7 +2899,7 @@ static PyObject *__pyx_pf_4core_7vector2_7Vector2_7Vector2_38slide(struct __pyx_
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("slide", 0);
 
-  /* "core/vector2/Vector2.pyx":67
+  /* "core/vector2/Vector2.pyx":68
  * 
  *     def slide(self, Vector2 n):
  *         return Vector2.new_static(api_core.godot_vector2_slide(&self._native, &n._native))             # <<<<<<<<<<<<<<
@@ -2863,13 +2907,13 @@ static PyObject *__pyx_pf_4core_7vector2_7Vector2_7Vector2_38slide(struct __pyx_
  *     def bounce(self, Vector2 n):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = ((PyObject *)__pyx_f_4core_7vector2_7Vector2_7Vector2_new_static(api_core->godot_vector2_slide((&__pyx_v_self->_native), (&__pyx_v_n->_native)))); if (unlikely(!__pyx_t_1)) __PYX_ERR(2, 67, __pyx_L1_error)
+  __pyx_t_1 = ((PyObject *)__pyx_f_4core_7vector2_7Vector2_7Vector2_new_static(api_core->godot_vector2_slide((&__pyx_v_self->_native), (&__pyx_v_n->_native)))); if (unlikely(!__pyx_t_1)) __PYX_ERR(2, 68, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "core/vector2/Vector2.pyx":66
+  /* "core/vector2/Vector2.pyx":67
  *         return api_core.godot_vector2_dot(&self._native, &with_._native)
  * 
  *     def slide(self, Vector2 n):             # <<<<<<<<<<<<<<
@@ -2888,7 +2932,7 @@ static PyObject *__pyx_pf_4core_7vector2_7Vector2_7Vector2_38slide(struct __pyx_
   return __pyx_r;
 }
 
-/* "core/vector2/Vector2.pyx":69
+/* "core/vector2/Vector2.pyx":70
  *         return Vector2.new_static(api_core.godot_vector2_slide(&self._native, &n._native))
  * 
  *     def bounce(self, Vector2 n):             # <<<<<<<<<<<<<<
@@ -2905,7 +2949,7 @@ static PyObject *__pyx_pw_4core_7vector2_7Vector2_7Vector2_41bounce(PyObject *__
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("bounce (wrapper)", 0);
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_n), __pyx_ptype_4core_7vector2_7Vector2_Vector2, 1, "n", 0))) __PYX_ERR(2, 69, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_n), __pyx_ptype_4core_7vector2_7Vector2_Vector2, 1, "n", 0))) __PYX_ERR(2, 70, __pyx_L1_error)
   __pyx_r = __pyx_pf_4core_7vector2_7Vector2_7Vector2_40bounce(((struct __pyx_obj_4core_7vector2_7Vector2_Vector2 *)__pyx_v_self), ((struct __pyx_obj_4core_7vector2_7Vector2_Vector2 *)__pyx_v_n));
 
   /* function exit code */
@@ -2926,7 +2970,7 @@ static PyObject *__pyx_pf_4core_7vector2_7Vector2_7Vector2_40bounce(struct __pyx
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("bounce", 0);
 
-  /* "core/vector2/Vector2.pyx":70
+  /* "core/vector2/Vector2.pyx":71
  * 
  *     def bounce(self, Vector2 n):
  *         return Vector2.new_static(api_core.godot_vector2_bounce(&self._native, &n._native))             # <<<<<<<<<<<<<<
@@ -2934,13 +2978,13 @@ static PyObject *__pyx_pf_4core_7vector2_7Vector2_7Vector2_40bounce(struct __pyx
  *     def reflect(self, Vector2 n):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = ((PyObject *)__pyx_f_4core_7vector2_7Vector2_7Vector2_new_static(api_core->godot_vector2_bounce((&__pyx_v_self->_native), (&__pyx_v_n->_native)))); if (unlikely(!__pyx_t_1)) __PYX_ERR(2, 70, __pyx_L1_error)
+  __pyx_t_1 = ((PyObject *)__pyx_f_4core_7vector2_7Vector2_7Vector2_new_static(api_core->godot_vector2_bounce((&__pyx_v_self->_native), (&__pyx_v_n->_native)))); if (unlikely(!__pyx_t_1)) __PYX_ERR(2, 71, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "core/vector2/Vector2.pyx":69
+  /* "core/vector2/Vector2.pyx":70
  *         return Vector2.new_static(api_core.godot_vector2_slide(&self._native, &n._native))
  * 
  *     def bounce(self, Vector2 n):             # <<<<<<<<<<<<<<
@@ -2959,7 +3003,7 @@ static PyObject *__pyx_pf_4core_7vector2_7Vector2_7Vector2_40bounce(struct __pyx
   return __pyx_r;
 }
 
-/* "core/vector2/Vector2.pyx":72
+/* "core/vector2/Vector2.pyx":73
  *         return Vector2.new_static(api_core.godot_vector2_bounce(&self._native, &n._native))
  * 
  *     def reflect(self, Vector2 n):             # <<<<<<<<<<<<<<
@@ -2976,7 +3020,7 @@ static PyObject *__pyx_pw_4core_7vector2_7Vector2_7Vector2_43reflect(PyObject *_
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("reflect (wrapper)", 0);
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_n), __pyx_ptype_4core_7vector2_7Vector2_Vector2, 1, "n", 0))) __PYX_ERR(2, 72, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_n), __pyx_ptype_4core_7vector2_7Vector2_Vector2, 1, "n", 0))) __PYX_ERR(2, 73, __pyx_L1_error)
   __pyx_r = __pyx_pf_4core_7vector2_7Vector2_7Vector2_42reflect(((struct __pyx_obj_4core_7vector2_7Vector2_Vector2 *)__pyx_v_self), ((struct __pyx_obj_4core_7vector2_7Vector2_Vector2 *)__pyx_v_n));
 
   /* function exit code */
@@ -2997,7 +3041,7 @@ static PyObject *__pyx_pf_4core_7vector2_7Vector2_7Vector2_42reflect(struct __py
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("reflect", 0);
 
-  /* "core/vector2/Vector2.pyx":73
+  /* "core/vector2/Vector2.pyx":74
  * 
  *     def reflect(self, Vector2 n):
  *         return Vector2.new_static(api_core.godot_vector2_reflect(&self._native, &n._native))             # <<<<<<<<<<<<<<
@@ -3005,13 +3049,13 @@ static PyObject *__pyx_pf_4core_7vector2_7Vector2_7Vector2_42reflect(struct __py
  *     def abs(self):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = ((PyObject *)__pyx_f_4core_7vector2_7Vector2_7Vector2_new_static(api_core->godot_vector2_reflect((&__pyx_v_self->_native), (&__pyx_v_n->_native)))); if (unlikely(!__pyx_t_1)) __PYX_ERR(2, 73, __pyx_L1_error)
+  __pyx_t_1 = ((PyObject *)__pyx_f_4core_7vector2_7Vector2_7Vector2_new_static(api_core->godot_vector2_reflect((&__pyx_v_self->_native), (&__pyx_v_n->_native)))); if (unlikely(!__pyx_t_1)) __PYX_ERR(2, 74, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "core/vector2/Vector2.pyx":72
+  /* "core/vector2/Vector2.pyx":73
  *         return Vector2.new_static(api_core.godot_vector2_bounce(&self._native, &n._native))
  * 
  *     def reflect(self, Vector2 n):             # <<<<<<<<<<<<<<
@@ -3030,7 +3074,7 @@ static PyObject *__pyx_pf_4core_7vector2_7Vector2_7Vector2_42reflect(struct __py
   return __pyx_r;
 }
 
-/* "core/vector2/Vector2.pyx":75
+/* "core/vector2/Vector2.pyx":76
  *         return Vector2.new_static(api_core.godot_vector2_reflect(&self._native, &n._native))
  * 
  *     def abs(self):             # <<<<<<<<<<<<<<
@@ -3060,7 +3104,7 @@ static PyObject *__pyx_pf_4core_7vector2_7Vector2_7Vector2_44abs(struct __pyx_ob
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("abs", 0);
 
-  /* "core/vector2/Vector2.pyx":76
+  /* "core/vector2/Vector2.pyx":77
  * 
  *     def abs(self):
  *         return Vector2.new_static(api_core.godot_vector2_abs(&self._native))             # <<<<<<<<<<<<<<
@@ -3068,13 +3112,13 @@ static PyObject *__pyx_pf_4core_7vector2_7Vector2_7Vector2_44abs(struct __pyx_ob
  *     def clamped(self, godot_real length):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = ((PyObject *)__pyx_f_4core_7vector2_7Vector2_7Vector2_new_static(api_core->godot_vector2_abs((&__pyx_v_self->_native)))); if (unlikely(!__pyx_t_1)) __PYX_ERR(2, 76, __pyx_L1_error)
+  __pyx_t_1 = ((PyObject *)__pyx_f_4core_7vector2_7Vector2_7Vector2_new_static(api_core->godot_vector2_abs((&__pyx_v_self->_native)))); if (unlikely(!__pyx_t_1)) __PYX_ERR(2, 77, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "core/vector2/Vector2.pyx":75
+  /* "core/vector2/Vector2.pyx":76
  *         return Vector2.new_static(api_core.godot_vector2_reflect(&self._native, &n._native))
  * 
  *     def abs(self):             # <<<<<<<<<<<<<<
@@ -3093,7 +3137,7 @@ static PyObject *__pyx_pf_4core_7vector2_7Vector2_7Vector2_44abs(struct __pyx_ob
   return __pyx_r;
 }
 
-/* "core/vector2/Vector2.pyx":78
+/* "core/vector2/Vector2.pyx":79
  *         return Vector2.new_static(api_core.godot_vector2_abs(&self._native))
  * 
  *     def clamped(self, godot_real length):             # <<<<<<<<<<<<<<
@@ -3112,7 +3156,7 @@ static PyObject *__pyx_pw_4core_7vector2_7Vector2_7Vector2_47clamped(PyObject *_
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("clamped (wrapper)", 0);
   assert(__pyx_arg_length); {
-    __pyx_v_length = __pyx_PyFloat_AsFloat(__pyx_arg_length); if (unlikely((__pyx_v_length == ((godot_real)-1)) && PyErr_Occurred())) __PYX_ERR(2, 78, __pyx_L3_error)
+    __pyx_v_length = __pyx_PyFloat_AsFloat(__pyx_arg_length); if (unlikely((__pyx_v_length == ((godot_real)-1)) && PyErr_Occurred())) __PYX_ERR(2, 79, __pyx_L3_error)
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -3136,7 +3180,7 @@ static PyObject *__pyx_pf_4core_7vector2_7Vector2_7Vector2_46clamped(struct __py
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("clamped", 0);
 
-  /* "core/vector2/Vector2.pyx":79
+  /* "core/vector2/Vector2.pyx":80
  * 
  *     def clamped(self, godot_real length):
  *         return Vector2.new_static(api_core.godot_vector2_clamped(&self._native, length))             # <<<<<<<<<<<<<<
@@ -3144,13 +3188,13 @@ static PyObject *__pyx_pf_4core_7vector2_7Vector2_7Vector2_46clamped(struct __py
  *     def add(self, Vector2 other):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = ((PyObject *)__pyx_f_4core_7vector2_7Vector2_7Vector2_new_static(api_core->godot_vector2_clamped((&__pyx_v_self->_native), __pyx_v_length))); if (unlikely(!__pyx_t_1)) __PYX_ERR(2, 79, __pyx_L1_error)
+  __pyx_t_1 = ((PyObject *)__pyx_f_4core_7vector2_7Vector2_7Vector2_new_static(api_core->godot_vector2_clamped((&__pyx_v_self->_native), __pyx_v_length))); if (unlikely(!__pyx_t_1)) __PYX_ERR(2, 80, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "core/vector2/Vector2.pyx":78
+  /* "core/vector2/Vector2.pyx":79
  *         return Vector2.new_static(api_core.godot_vector2_abs(&self._native))
  * 
  *     def clamped(self, godot_real length):             # <<<<<<<<<<<<<<
@@ -3169,7 +3213,7 @@ static PyObject *__pyx_pf_4core_7vector2_7Vector2_7Vector2_46clamped(struct __py
   return __pyx_r;
 }
 
-/* "core/vector2/Vector2.pyx":81
+/* "core/vector2/Vector2.pyx":82
  *         return Vector2.new_static(api_core.godot_vector2_clamped(&self._native, length))
  * 
  *     def add(self, Vector2 other):             # <<<<<<<<<<<<<<
@@ -3186,7 +3230,7 @@ static PyObject *__pyx_pw_4core_7vector2_7Vector2_7Vector2_49add(PyObject *__pyx
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("add (wrapper)", 0);
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_other), __pyx_ptype_4core_7vector2_7Vector2_Vector2, 1, "other", 0))) __PYX_ERR(2, 81, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_other), __pyx_ptype_4core_7vector2_7Vector2_Vector2, 1, "other", 0))) __PYX_ERR(2, 82, __pyx_L1_error)
   __pyx_r = __pyx_pf_4core_7vector2_7Vector2_7Vector2_48add(((struct __pyx_obj_4core_7vector2_7Vector2_Vector2 *)__pyx_v_self), ((struct __pyx_obj_4core_7vector2_7Vector2_Vector2 *)__pyx_v_other));
 
   /* function exit code */
@@ -3207,7 +3251,7 @@ static PyObject *__pyx_pf_4core_7vector2_7Vector2_7Vector2_48add(struct __pyx_ob
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("add", 0);
 
-  /* "core/vector2/Vector2.pyx":82
+  /* "core/vector2/Vector2.pyx":83
  * 
  *     def add(self, Vector2 other):
  *         return Vector2.new_static(api_core.godot_vector2_operator_add(&self._native, &other._native))             # <<<<<<<<<<<<<<
@@ -3215,13 +3259,13 @@ static PyObject *__pyx_pf_4core_7vector2_7Vector2_7Vector2_48add(struct __pyx_ob
  *     def sub(self, Vector2 other):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = ((PyObject *)__pyx_f_4core_7vector2_7Vector2_7Vector2_new_static(api_core->godot_vector2_operator_add((&__pyx_v_self->_native), (&__pyx_v_other->_native)))); if (unlikely(!__pyx_t_1)) __PYX_ERR(2, 82, __pyx_L1_error)
+  __pyx_t_1 = ((PyObject *)__pyx_f_4core_7vector2_7Vector2_7Vector2_new_static(api_core->godot_vector2_operator_add((&__pyx_v_self->_native), (&__pyx_v_other->_native)))); if (unlikely(!__pyx_t_1)) __PYX_ERR(2, 83, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "core/vector2/Vector2.pyx":81
+  /* "core/vector2/Vector2.pyx":82
  *         return Vector2.new_static(api_core.godot_vector2_clamped(&self._native, length))
  * 
  *     def add(self, Vector2 other):             # <<<<<<<<<<<<<<
@@ -3240,7 +3284,7 @@ static PyObject *__pyx_pf_4core_7vector2_7Vector2_7Vector2_48add(struct __pyx_ob
   return __pyx_r;
 }
 
-/* "core/vector2/Vector2.pyx":84
+/* "core/vector2/Vector2.pyx":85
  *         return Vector2.new_static(api_core.godot_vector2_operator_add(&self._native, &other._native))
  * 
  *     def sub(self, Vector2 other):             # <<<<<<<<<<<<<<
@@ -3257,7 +3301,7 @@ static PyObject *__pyx_pw_4core_7vector2_7Vector2_7Vector2_51sub(PyObject *__pyx
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("sub (wrapper)", 0);
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_other), __pyx_ptype_4core_7vector2_7Vector2_Vector2, 1, "other", 0))) __PYX_ERR(2, 84, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_other), __pyx_ptype_4core_7vector2_7Vector2_Vector2, 1, "other", 0))) __PYX_ERR(2, 85, __pyx_L1_error)
   __pyx_r = __pyx_pf_4core_7vector2_7Vector2_7Vector2_50sub(((struct __pyx_obj_4core_7vector2_7Vector2_Vector2 *)__pyx_v_self), ((struct __pyx_obj_4core_7vector2_7Vector2_Vector2 *)__pyx_v_other));
 
   /* function exit code */
@@ -3278,7 +3322,7 @@ static PyObject *__pyx_pf_4core_7vector2_7Vector2_7Vector2_50sub(struct __pyx_ob
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("sub", 0);
 
-  /* "core/vector2/Vector2.pyx":85
+  /* "core/vector2/Vector2.pyx":86
  * 
  *     def sub(self, Vector2 other):
  *         return Vector2.new_static(api_core.godot_vector2_operator_subtract(&self._native, &other._native))             # <<<<<<<<<<<<<<
@@ -3286,13 +3330,13 @@ static PyObject *__pyx_pf_4core_7vector2_7Vector2_7Vector2_50sub(struct __pyx_ob
  *     def multiply_vector(self, Vector2 other):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = ((PyObject *)__pyx_f_4core_7vector2_7Vector2_7Vector2_new_static(api_core->godot_vector2_operator_subtract((&__pyx_v_self->_native), (&__pyx_v_other->_native)))); if (unlikely(!__pyx_t_1)) __PYX_ERR(2, 85, __pyx_L1_error)
+  __pyx_t_1 = ((PyObject *)__pyx_f_4core_7vector2_7Vector2_7Vector2_new_static(api_core->godot_vector2_operator_subtract((&__pyx_v_self->_native), (&__pyx_v_other->_native)))); if (unlikely(!__pyx_t_1)) __PYX_ERR(2, 86, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "core/vector2/Vector2.pyx":84
+  /* "core/vector2/Vector2.pyx":85
  *         return Vector2.new_static(api_core.godot_vector2_operator_add(&self._native, &other._native))
  * 
  *     def sub(self, Vector2 other):             # <<<<<<<<<<<<<<
@@ -3311,7 +3355,7 @@ static PyObject *__pyx_pf_4core_7vector2_7Vector2_7Vector2_50sub(struct __pyx_ob
   return __pyx_r;
 }
 
-/* "core/vector2/Vector2.pyx":87
+/* "core/vector2/Vector2.pyx":88
  *         return Vector2.new_static(api_core.godot_vector2_operator_subtract(&self._native, &other._native))
  * 
  *     def multiply_vector(self, Vector2 other):             # <<<<<<<<<<<<<<
@@ -3328,7 +3372,7 @@ static PyObject *__pyx_pw_4core_7vector2_7Vector2_7Vector2_53multiply_vector(PyO
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("multiply_vector (wrapper)", 0);
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_other), __pyx_ptype_4core_7vector2_7Vector2_Vector2, 1, "other", 0))) __PYX_ERR(2, 87, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_other), __pyx_ptype_4core_7vector2_7Vector2_Vector2, 1, "other", 0))) __PYX_ERR(2, 88, __pyx_L1_error)
   __pyx_r = __pyx_pf_4core_7vector2_7Vector2_7Vector2_52multiply_vector(((struct __pyx_obj_4core_7vector2_7Vector2_Vector2 *)__pyx_v_self), ((struct __pyx_obj_4core_7vector2_7Vector2_Vector2 *)__pyx_v_other));
 
   /* function exit code */
@@ -3349,7 +3393,7 @@ static PyObject *__pyx_pf_4core_7vector2_7Vector2_7Vector2_52multiply_vector(str
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("multiply_vector", 0);
 
-  /* "core/vector2/Vector2.pyx":88
+  /* "core/vector2/Vector2.pyx":89
  * 
  *     def multiply_vector(self, Vector2 other):
  *         return Vector2.new_static(api_core.godot_vector2_operator_multiply_vector(&self._native, &other._native))             # <<<<<<<<<<<<<<
@@ -3357,13 +3401,13 @@ static PyObject *__pyx_pf_4core_7vector2_7Vector2_7Vector2_52multiply_vector(str
  *     def multiply_scalar(self, godot_real other):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = ((PyObject *)__pyx_f_4core_7vector2_7Vector2_7Vector2_new_static(api_core->godot_vector2_operator_multiply_vector((&__pyx_v_self->_native), (&__pyx_v_other->_native)))); if (unlikely(!__pyx_t_1)) __PYX_ERR(2, 88, __pyx_L1_error)
+  __pyx_t_1 = ((PyObject *)__pyx_f_4core_7vector2_7Vector2_7Vector2_new_static(api_core->godot_vector2_operator_multiply_vector((&__pyx_v_self->_native), (&__pyx_v_other->_native)))); if (unlikely(!__pyx_t_1)) __PYX_ERR(2, 89, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "core/vector2/Vector2.pyx":87
+  /* "core/vector2/Vector2.pyx":88
  *         return Vector2.new_static(api_core.godot_vector2_operator_subtract(&self._native, &other._native))
  * 
  *     def multiply_vector(self, Vector2 other):             # <<<<<<<<<<<<<<
@@ -3382,7 +3426,7 @@ static PyObject *__pyx_pf_4core_7vector2_7Vector2_7Vector2_52multiply_vector(str
   return __pyx_r;
 }
 
-/* "core/vector2/Vector2.pyx":90
+/* "core/vector2/Vector2.pyx":91
  *         return Vector2.new_static(api_core.godot_vector2_operator_multiply_vector(&self._native, &other._native))
  * 
  *     def multiply_scalar(self, godot_real other):             # <<<<<<<<<<<<<<
@@ -3401,7 +3445,7 @@ static PyObject *__pyx_pw_4core_7vector2_7Vector2_7Vector2_55multiply_scalar(PyO
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("multiply_scalar (wrapper)", 0);
   assert(__pyx_arg_other); {
-    __pyx_v_other = __pyx_PyFloat_AsFloat(__pyx_arg_other); if (unlikely((__pyx_v_other == ((godot_real)-1)) && PyErr_Occurred())) __PYX_ERR(2, 90, __pyx_L3_error)
+    __pyx_v_other = __pyx_PyFloat_AsFloat(__pyx_arg_other); if (unlikely((__pyx_v_other == ((godot_real)-1)) && PyErr_Occurred())) __PYX_ERR(2, 91, __pyx_L3_error)
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -3425,7 +3469,7 @@ static PyObject *__pyx_pf_4core_7vector2_7Vector2_7Vector2_54multiply_scalar(str
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("multiply_scalar", 0);
 
-  /* "core/vector2/Vector2.pyx":91
+  /* "core/vector2/Vector2.pyx":92
  * 
  *     def multiply_scalar(self, godot_real other):
  *         return Vector2.new_static(api_core.godot_vector2_operator_multiply_scalar(&self._native, other))             # <<<<<<<<<<<<<<
@@ -3433,13 +3477,13 @@ static PyObject *__pyx_pf_4core_7vector2_7Vector2_7Vector2_54multiply_scalar(str
  *     def divide_vector(self, Vector2 other):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = ((PyObject *)__pyx_f_4core_7vector2_7Vector2_7Vector2_new_static(api_core->godot_vector2_operator_multiply_scalar((&__pyx_v_self->_native), __pyx_v_other))); if (unlikely(!__pyx_t_1)) __PYX_ERR(2, 91, __pyx_L1_error)
+  __pyx_t_1 = ((PyObject *)__pyx_f_4core_7vector2_7Vector2_7Vector2_new_static(api_core->godot_vector2_operator_multiply_scalar((&__pyx_v_self->_native), __pyx_v_other))); if (unlikely(!__pyx_t_1)) __PYX_ERR(2, 92, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "core/vector2/Vector2.pyx":90
+  /* "core/vector2/Vector2.pyx":91
  *         return Vector2.new_static(api_core.godot_vector2_operator_multiply_vector(&self._native, &other._native))
  * 
  *     def multiply_scalar(self, godot_real other):             # <<<<<<<<<<<<<<
@@ -3458,7 +3502,7 @@ static PyObject *__pyx_pf_4core_7vector2_7Vector2_7Vector2_54multiply_scalar(str
   return __pyx_r;
 }
 
-/* "core/vector2/Vector2.pyx":93
+/* "core/vector2/Vector2.pyx":94
  *         return Vector2.new_static(api_core.godot_vector2_operator_multiply_scalar(&self._native, other))
  * 
  *     def divide_vector(self, Vector2 other):             # <<<<<<<<<<<<<<
@@ -3475,7 +3519,7 @@ static PyObject *__pyx_pw_4core_7vector2_7Vector2_7Vector2_57divide_vector(PyObj
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("divide_vector (wrapper)", 0);
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_other), __pyx_ptype_4core_7vector2_7Vector2_Vector2, 1, "other", 0))) __PYX_ERR(2, 93, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_other), __pyx_ptype_4core_7vector2_7Vector2_Vector2, 1, "other", 0))) __PYX_ERR(2, 94, __pyx_L1_error)
   __pyx_r = __pyx_pf_4core_7vector2_7Vector2_7Vector2_56divide_vector(((struct __pyx_obj_4core_7vector2_7Vector2_Vector2 *)__pyx_v_self), ((struct __pyx_obj_4core_7vector2_7Vector2_Vector2 *)__pyx_v_other));
 
   /* function exit code */
@@ -3496,7 +3540,7 @@ static PyObject *__pyx_pf_4core_7vector2_7Vector2_7Vector2_56divide_vector(struc
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("divide_vector", 0);
 
-  /* "core/vector2/Vector2.pyx":94
+  /* "core/vector2/Vector2.pyx":95
  * 
  *     def divide_vector(self, Vector2 other):
  *         return Vector2.new_static(api_core.godot_vector2_operator_divide_vector(&self._native, &other._native))             # <<<<<<<<<<<<<<
@@ -3504,13 +3548,13 @@ static PyObject *__pyx_pf_4core_7vector2_7Vector2_7Vector2_56divide_vector(struc
  *     def divide_scalar(self, godot_real p_b):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = ((PyObject *)__pyx_f_4core_7vector2_7Vector2_7Vector2_new_static(api_core->godot_vector2_operator_divide_vector((&__pyx_v_self->_native), (&__pyx_v_other->_native)))); if (unlikely(!__pyx_t_1)) __PYX_ERR(2, 94, __pyx_L1_error)
+  __pyx_t_1 = ((PyObject *)__pyx_f_4core_7vector2_7Vector2_7Vector2_new_static(api_core->godot_vector2_operator_divide_vector((&__pyx_v_self->_native), (&__pyx_v_other->_native)))); if (unlikely(!__pyx_t_1)) __PYX_ERR(2, 95, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "core/vector2/Vector2.pyx":93
+  /* "core/vector2/Vector2.pyx":94
  *         return Vector2.new_static(api_core.godot_vector2_operator_multiply_scalar(&self._native, other))
  * 
  *     def divide_vector(self, Vector2 other):             # <<<<<<<<<<<<<<
@@ -3529,7 +3573,7 @@ static PyObject *__pyx_pf_4core_7vector2_7Vector2_7Vector2_56divide_vector(struc
   return __pyx_r;
 }
 
-/* "core/vector2/Vector2.pyx":96
+/* "core/vector2/Vector2.pyx":97
  *         return Vector2.new_static(api_core.godot_vector2_operator_divide_vector(&self._native, &other._native))
  * 
  *     def divide_scalar(self, godot_real p_b):             # <<<<<<<<<<<<<<
@@ -3548,7 +3592,7 @@ static PyObject *__pyx_pw_4core_7vector2_7Vector2_7Vector2_59divide_scalar(PyObj
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("divide_scalar (wrapper)", 0);
   assert(__pyx_arg_p_b); {
-    __pyx_v_p_b = __pyx_PyFloat_AsFloat(__pyx_arg_p_b); if (unlikely((__pyx_v_p_b == ((godot_real)-1)) && PyErr_Occurred())) __PYX_ERR(2, 96, __pyx_L3_error)
+    __pyx_v_p_b = __pyx_PyFloat_AsFloat(__pyx_arg_p_b); if (unlikely((__pyx_v_p_b == ((godot_real)-1)) && PyErr_Occurred())) __PYX_ERR(2, 97, __pyx_L3_error)
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -3572,7 +3616,7 @@ static PyObject *__pyx_pf_4core_7vector2_7Vector2_7Vector2_58divide_scalar(struc
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("divide_scalar", 0);
 
-  /* "core/vector2/Vector2.pyx":97
+  /* "core/vector2/Vector2.pyx":98
  * 
  *     def divide_scalar(self, godot_real p_b):
  *         return Vector2.new_static(api_core.godot_vector2_operator_divide_scalar(&self._native, p_b))             # <<<<<<<<<<<<<<
@@ -3580,13 +3624,13 @@ static PyObject *__pyx_pf_4core_7vector2_7Vector2_7Vector2_58divide_scalar(struc
  *     def __eq__(self, Vector2 other):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = ((PyObject *)__pyx_f_4core_7vector2_7Vector2_7Vector2_new_static(api_core->godot_vector2_operator_divide_scalar((&__pyx_v_self->_native), __pyx_v_p_b))); if (unlikely(!__pyx_t_1)) __PYX_ERR(2, 97, __pyx_L1_error)
+  __pyx_t_1 = ((PyObject *)__pyx_f_4core_7vector2_7Vector2_7Vector2_new_static(api_core->godot_vector2_operator_divide_scalar((&__pyx_v_self->_native), __pyx_v_p_b))); if (unlikely(!__pyx_t_1)) __PYX_ERR(2, 98, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "core/vector2/Vector2.pyx":96
+  /* "core/vector2/Vector2.pyx":97
  *         return Vector2.new_static(api_core.godot_vector2_operator_divide_vector(&self._native, &other._native))
  * 
  *     def divide_scalar(self, godot_real p_b):             # <<<<<<<<<<<<<<
@@ -3605,7 +3649,7 @@ static PyObject *__pyx_pf_4core_7vector2_7Vector2_7Vector2_58divide_scalar(struc
   return __pyx_r;
 }
 
-/* "core/vector2/Vector2.pyx":99
+/* "core/vector2/Vector2.pyx":100
  *         return Vector2.new_static(api_core.godot_vector2_operator_divide_scalar(&self._native, p_b))
  * 
  *     def __eq__(self, Vector2 other):             # <<<<<<<<<<<<<<
@@ -3622,7 +3666,7 @@ static PyObject *__pyx_pw_4core_7vector2_7Vector2_7Vector2_61__eq__(PyObject *__
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__eq__ (wrapper)", 0);
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_other), __pyx_ptype_4core_7vector2_7Vector2_Vector2, 1, "other", 0))) __PYX_ERR(2, 99, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_other), __pyx_ptype_4core_7vector2_7Vector2_Vector2, 1, "other", 0))) __PYX_ERR(2, 100, __pyx_L1_error)
   __pyx_r = __pyx_pf_4core_7vector2_7Vector2_7Vector2_60__eq__(((struct __pyx_obj_4core_7vector2_7Vector2_Vector2 *)__pyx_v_self), ((struct __pyx_obj_4core_7vector2_7Vector2_Vector2 *)__pyx_v_other));
 
   /* function exit code */
@@ -3643,7 +3687,7 @@ static PyObject *__pyx_pf_4core_7vector2_7Vector2_7Vector2_60__eq__(struct __pyx
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__eq__", 0);
 
-  /* "core/vector2/Vector2.pyx":100
+  /* "core/vector2/Vector2.pyx":101
  * 
  *     def __eq__(self, Vector2 other):
  *         return api_core.godot_vector2_operator_equal(&self._native, &other._native)             # <<<<<<<<<<<<<<
@@ -3651,13 +3695,13 @@ static PyObject *__pyx_pf_4core_7vector2_7Vector2_7Vector2_60__eq__(struct __pyx
  *     def __lt__(self, Vector2 other):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_PyBool_FromLong(api_core->godot_vector2_operator_equal((&__pyx_v_self->_native), (&__pyx_v_other->_native))); if (unlikely(!__pyx_t_1)) __PYX_ERR(2, 100, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyBool_FromLong(api_core->godot_vector2_operator_equal((&__pyx_v_self->_native), (&__pyx_v_other->_native))); if (unlikely(!__pyx_t_1)) __PYX_ERR(2, 101, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "core/vector2/Vector2.pyx":99
+  /* "core/vector2/Vector2.pyx":100
  *         return Vector2.new_static(api_core.godot_vector2_operator_divide_scalar(&self._native, p_b))
  * 
  *     def __eq__(self, Vector2 other):             # <<<<<<<<<<<<<<
@@ -3676,7 +3720,7 @@ static PyObject *__pyx_pf_4core_7vector2_7Vector2_7Vector2_60__eq__(struct __pyx
   return __pyx_r;
 }
 
-/* "core/vector2/Vector2.pyx":102
+/* "core/vector2/Vector2.pyx":103
  *         return api_core.godot_vector2_operator_equal(&self._native, &other._native)
  * 
  *     def __lt__(self, Vector2 other):             # <<<<<<<<<<<<<<
@@ -3693,7 +3737,7 @@ static PyObject *__pyx_pw_4core_7vector2_7Vector2_7Vector2_63__lt__(PyObject *__
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__lt__ (wrapper)", 0);
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_other), __pyx_ptype_4core_7vector2_7Vector2_Vector2, 1, "other", 0))) __PYX_ERR(2, 102, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_other), __pyx_ptype_4core_7vector2_7Vector2_Vector2, 1, "other", 0))) __PYX_ERR(2, 103, __pyx_L1_error)
   __pyx_r = __pyx_pf_4core_7vector2_7Vector2_7Vector2_62__lt__(((struct __pyx_obj_4core_7vector2_7Vector2_Vector2 *)__pyx_v_self), ((struct __pyx_obj_4core_7vector2_7Vector2_Vector2 *)__pyx_v_other));
 
   /* function exit code */
@@ -3714,7 +3758,7 @@ static PyObject *__pyx_pf_4core_7vector2_7Vector2_7Vector2_62__lt__(struct __pyx
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__lt__", 0);
 
-  /* "core/vector2/Vector2.pyx":103
+  /* "core/vector2/Vector2.pyx":104
  * 
  *     def __lt__(self, Vector2 other):
  *         return api_core.godot_vector2_operator_less(&self._native, &other._native)             # <<<<<<<<<<<<<<
@@ -3722,13 +3766,13 @@ static PyObject *__pyx_pf_4core_7vector2_7Vector2_7Vector2_62__lt__(struct __pyx
  *     def neg(self):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_PyBool_FromLong(api_core->godot_vector2_operator_less((&__pyx_v_self->_native), (&__pyx_v_other->_native))); if (unlikely(!__pyx_t_1)) __PYX_ERR(2, 103, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyBool_FromLong(api_core->godot_vector2_operator_less((&__pyx_v_self->_native), (&__pyx_v_other->_native))); if (unlikely(!__pyx_t_1)) __PYX_ERR(2, 104, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "core/vector2/Vector2.pyx":102
+  /* "core/vector2/Vector2.pyx":103
  *         return api_core.godot_vector2_operator_equal(&self._native, &other._native)
  * 
  *     def __lt__(self, Vector2 other):             # <<<<<<<<<<<<<<
@@ -3747,7 +3791,7 @@ static PyObject *__pyx_pf_4core_7vector2_7Vector2_7Vector2_62__lt__(struct __pyx
   return __pyx_r;
 }
 
-/* "core/vector2/Vector2.pyx":105
+/* "core/vector2/Vector2.pyx":106
  *         return api_core.godot_vector2_operator_less(&self._native, &other._native)
  * 
  *     def neg(self):             # <<<<<<<<<<<<<<
@@ -3778,7 +3822,7 @@ static PyObject *__pyx_pf_4core_7vector2_7Vector2_7Vector2_64neg(struct __pyx_ob
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("neg", 0);
 
-  /* "core/vector2/Vector2.pyx":106
+  /* "core/vector2/Vector2.pyx":107
  * 
  *     def neg(self):
  *         return Vector2(api_core.godot_vector2_operator_neg(&self._native))             # <<<<<<<<<<<<<<
@@ -3786,16 +3830,16 @@ static PyObject *__pyx_pf_4core_7vector2_7Vector2_7Vector2_64neg(struct __pyx_ob
  *     def set_x(self, godot_real x):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __pyx_convert__to_py_godot_vector2(api_core->godot_vector2_operator_neg((&__pyx_v_self->_native))); if (unlikely(!__pyx_t_1)) __PYX_ERR(2, 106, __pyx_L1_error)
+  __pyx_t_1 = __pyx_convert__to_py_godot_vector2(api_core->godot_vector2_operator_neg((&__pyx_v_self->_native))); if (unlikely(!__pyx_t_1)) __PYX_ERR(2, 107, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = __Pyx_PyObject_CallOneArg(((PyObject *)__pyx_ptype_4core_7vector2_7Vector2_Vector2), __pyx_t_1); if (unlikely(!__pyx_t_2)) __PYX_ERR(2, 106, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_CallOneArg(((PyObject *)__pyx_ptype_4core_7vector2_7Vector2_Vector2), __pyx_t_1); if (unlikely(!__pyx_t_2)) __PYX_ERR(2, 107, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_r = __pyx_t_2;
   __pyx_t_2 = 0;
   goto __pyx_L0;
 
-  /* "core/vector2/Vector2.pyx":105
+  /* "core/vector2/Vector2.pyx":106
  *         return api_core.godot_vector2_operator_less(&self._native, &other._native)
  * 
  *     def neg(self):             # <<<<<<<<<<<<<<
@@ -3815,7 +3859,7 @@ static PyObject *__pyx_pf_4core_7vector2_7Vector2_7Vector2_64neg(struct __pyx_ob
   return __pyx_r;
 }
 
-/* "core/vector2/Vector2.pyx":108
+/* "core/vector2/Vector2.pyx":109
  *         return Vector2(api_core.godot_vector2_operator_neg(&self._native))
  * 
  *     def set_x(self, godot_real x):             # <<<<<<<<<<<<<<
@@ -3834,7 +3878,7 @@ static PyObject *__pyx_pw_4core_7vector2_7Vector2_7Vector2_67set_x(PyObject *__p
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("set_x (wrapper)", 0);
   assert(__pyx_arg_x); {
-    __pyx_v_x = __pyx_PyFloat_AsFloat(__pyx_arg_x); if (unlikely((__pyx_v_x == ((godot_real)-1)) && PyErr_Occurred())) __PYX_ERR(2, 108, __pyx_L3_error)
+    __pyx_v_x = __pyx_PyFloat_AsFloat(__pyx_arg_x); if (unlikely((__pyx_v_x == ((godot_real)-1)) && PyErr_Occurred())) __PYX_ERR(2, 109, __pyx_L3_error)
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -3854,7 +3898,7 @@ static PyObject *__pyx_pf_4core_7vector2_7Vector2_7Vector2_66set_x(struct __pyx_
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("set_x", 0);
 
-  /* "core/vector2/Vector2.pyx":109
+  /* "core/vector2/Vector2.pyx":110
  * 
  *     def set_x(self, godot_real x):
  *         api_core.godot_vector2_set_x(&self._native, x)             # <<<<<<<<<<<<<<
@@ -3863,7 +3907,7 @@ static PyObject *__pyx_pf_4core_7vector2_7Vector2_7Vector2_66set_x(struct __pyx_
  */
   api_core->godot_vector2_set_x((&__pyx_v_self->_native), __pyx_v_x);
 
-  /* "core/vector2/Vector2.pyx":108
+  /* "core/vector2/Vector2.pyx":109
  *         return Vector2(api_core.godot_vector2_operator_neg(&self._native))
  * 
  *     def set_x(self, godot_real x):             # <<<<<<<<<<<<<<
@@ -3878,7 +3922,7 @@ static PyObject *__pyx_pf_4core_7vector2_7Vector2_7Vector2_66set_x(struct __pyx_
   return __pyx_r;
 }
 
-/* "core/vector2/Vector2.pyx":111
+/* "core/vector2/Vector2.pyx":112
  *         api_core.godot_vector2_set_x(&self._native, x)
  * 
  *     def set_y(self, godot_real y):             # <<<<<<<<<<<<<<
@@ -3897,7 +3941,7 @@ static PyObject *__pyx_pw_4core_7vector2_7Vector2_7Vector2_69set_y(PyObject *__p
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("set_y (wrapper)", 0);
   assert(__pyx_arg_y); {
-    __pyx_v_y = __pyx_PyFloat_AsFloat(__pyx_arg_y); if (unlikely((__pyx_v_y == ((godot_real)-1)) && PyErr_Occurred())) __PYX_ERR(2, 111, __pyx_L3_error)
+    __pyx_v_y = __pyx_PyFloat_AsFloat(__pyx_arg_y); if (unlikely((__pyx_v_y == ((godot_real)-1)) && PyErr_Occurred())) __PYX_ERR(2, 112, __pyx_L3_error)
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -3917,7 +3961,7 @@ static PyObject *__pyx_pf_4core_7vector2_7Vector2_7Vector2_68set_y(struct __pyx_
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("set_y", 0);
 
-  /* "core/vector2/Vector2.pyx":112
+  /* "core/vector2/Vector2.pyx":113
  * 
  *     def set_y(self, godot_real y):
  *         api_core.godot_vector2_set_y(&self._native, y)             # <<<<<<<<<<<<<<
@@ -3926,7 +3970,7 @@ static PyObject *__pyx_pf_4core_7vector2_7Vector2_7Vector2_68set_y(struct __pyx_
  */
   api_core->godot_vector2_set_y((&__pyx_v_self->_native), __pyx_v_y);
 
-  /* "core/vector2/Vector2.pyx":111
+  /* "core/vector2/Vector2.pyx":112
  *         api_core.godot_vector2_set_x(&self._native, x)
  * 
  *     def set_y(self, godot_real y):             # <<<<<<<<<<<<<<
@@ -3941,7 +3985,7 @@ static PyObject *__pyx_pf_4core_7vector2_7Vector2_7Vector2_68set_y(struct __pyx_
   return __pyx_r;
 }
 
-/* "core/vector2/Vector2.pyx":114
+/* "core/vector2/Vector2.pyx":115
  *         api_core.godot_vector2_set_y(&self._native, y)
  * 
  *     def get_x(self):             # <<<<<<<<<<<<<<
@@ -3971,7 +4015,7 @@ static PyObject *__pyx_pf_4core_7vector2_7Vector2_7Vector2_70get_x(struct __pyx_
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("get_x", 0);
 
-  /* "core/vector2/Vector2.pyx":115
+  /* "core/vector2/Vector2.pyx":116
  * 
  *     def get_x(self):
  *         return api_core.godot_vector2_get_x(&self._native)             # <<<<<<<<<<<<<<
@@ -3979,13 +4023,13 @@ static PyObject *__pyx_pf_4core_7vector2_7Vector2_7Vector2_70get_x(struct __pyx_
  *     def get_y(self):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = PyFloat_FromDouble(api_core->godot_vector2_get_x((&__pyx_v_self->_native))); if (unlikely(!__pyx_t_1)) __PYX_ERR(2, 115, __pyx_L1_error)
+  __pyx_t_1 = PyFloat_FromDouble(api_core->godot_vector2_get_x((&__pyx_v_self->_native))); if (unlikely(!__pyx_t_1)) __PYX_ERR(2, 116, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "core/vector2/Vector2.pyx":114
+  /* "core/vector2/Vector2.pyx":115
  *         api_core.godot_vector2_set_y(&self._native, y)
  * 
  *     def get_x(self):             # <<<<<<<<<<<<<<
@@ -4004,11 +4048,12 @@ static PyObject *__pyx_pf_4core_7vector2_7Vector2_7Vector2_70get_x(struct __pyx_
   return __pyx_r;
 }
 
-/* "core/vector2/Vector2.pyx":117
+/* "core/vector2/Vector2.pyx":118
  *         return api_core.godot_vector2_get_x(&self._native)
  * 
  *     def get_y(self):             # <<<<<<<<<<<<<<
  *         return api_core.godot_vector2_get_y(&self._native)
+ * 
  */
 
 /* Python wrapper */
@@ -4033,29 +4078,96 @@ static PyObject *__pyx_pf_4core_7vector2_7Vector2_7Vector2_72get_y(struct __pyx_
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("get_y", 0);
 
-  /* "core/vector2/Vector2.pyx":118
+  /* "core/vector2/Vector2.pyx":119
  * 
  *     def get_y(self):
  *         return api_core.godot_vector2_get_y(&self._native)             # <<<<<<<<<<<<<<
+ * 
+ *     def __str__(self):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = PyFloat_FromDouble(api_core->godot_vector2_get_y((&__pyx_v_self->_native))); if (unlikely(!__pyx_t_1)) __PYX_ERR(2, 118, __pyx_L1_error)
+  __pyx_t_1 = PyFloat_FromDouble(api_core->godot_vector2_get_y((&__pyx_v_self->_native))); if (unlikely(!__pyx_t_1)) __PYX_ERR(2, 119, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "core/vector2/Vector2.pyx":117
+  /* "core/vector2/Vector2.pyx":118
  *         return api_core.godot_vector2_get_x(&self._native)
  * 
  *     def get_y(self):             # <<<<<<<<<<<<<<
  *         return api_core.godot_vector2_get_y(&self._native)
+ * 
  */
 
   /* function exit code */
   __pyx_L1_error:;
   __Pyx_XDECREF(__pyx_t_1);
   __Pyx_AddTraceback("core.vector2.Vector2.Vector2.get_y", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __pyx_r = NULL;
+  __pyx_L0:;
+  __Pyx_XGIVEREF(__pyx_r);
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+/* "core/vector2/Vector2.pyx":121
+ *         return api_core.godot_vector2_get_y(&self._native)
+ * 
+ *     def __str__(self):             # <<<<<<<<<<<<<<
+ *         return str(String.new_static(api_core.godot_vector2_as_string(&self._native)))
+ */
+
+/* Python wrapper */
+static PyObject *__pyx_pw_4core_7vector2_7Vector2_7Vector2_75__str__(PyObject *__pyx_v_self); /*proto*/
+static PyObject *__pyx_pw_4core_7vector2_7Vector2_7Vector2_75__str__(PyObject *__pyx_v_self) {
+  PyObject *__pyx_r = 0;
+  __Pyx_RefNannyDeclarations
+  __Pyx_RefNannySetupContext("__str__ (wrapper)", 0);
+  __pyx_r = __pyx_pf_4core_7vector2_7Vector2_7Vector2_74__str__(((struct __pyx_obj_4core_7vector2_7Vector2_Vector2 *)__pyx_v_self));
+
+  /* function exit code */
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+static PyObject *__pyx_pf_4core_7vector2_7Vector2_7Vector2_74__str__(struct __pyx_obj_4core_7vector2_7Vector2_Vector2 *__pyx_v_self) {
+  PyObject *__pyx_r = NULL;
+  __Pyx_RefNannyDeclarations
+  PyObject *__pyx_t_1 = NULL;
+  PyObject *__pyx_t_2 = NULL;
+  int __pyx_lineno = 0;
+  const char *__pyx_filename = NULL;
+  int __pyx_clineno = 0;
+  __Pyx_RefNannySetupContext("__str__", 0);
+
+  /* "core/vector2/Vector2.pyx":122
+ * 
+ *     def __str__(self):
+ *         return str(String.new_static(api_core.godot_vector2_as_string(&self._native)))             # <<<<<<<<<<<<<<
+ */
+  __Pyx_XDECREF(__pyx_r);
+  __pyx_t_1 = ((PyObject *)__pyx_f_4core_6string_6String_6String_new_static(api_core->godot_vector2_as_string((&__pyx_v_self->_native)))); if (unlikely(!__pyx_t_1)) __PYX_ERR(2, 122, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __pyx_t_2 = __Pyx_PyObject_CallOneArg(((PyObject *)(&PyUnicode_Type)), __pyx_t_1); if (unlikely(!__pyx_t_2)) __PYX_ERR(2, 122, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+  __pyx_r = __pyx_t_2;
+  __pyx_t_2 = 0;
+  goto __pyx_L0;
+
+  /* "core/vector2/Vector2.pyx":121
+ *         return api_core.godot_vector2_get_y(&self._native)
+ * 
+ *     def __str__(self):             # <<<<<<<<<<<<<<
+ *         return str(String.new_static(api_core.godot_vector2_as_string(&self._native)))
+ */
+
+  /* function exit code */
+  __pyx_L1_error:;
+  __Pyx_XDECREF(__pyx_t_1);
+  __Pyx_XDECREF(__pyx_t_2);
+  __Pyx_AddTraceback("core.vector2.Vector2.Vector2.__str__", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   __pyx_L0:;
   __Pyx_XGIVEREF(__pyx_r);
@@ -4070,19 +4182,19 @@ static PyObject *__pyx_pf_4core_7vector2_7Vector2_7Vector2_72get_y(struct __pyx_
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_4core_7vector2_7Vector2_7Vector2_75__reduce_cython__(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused); /*proto*/
-static PyObject *__pyx_pw_4core_7vector2_7Vector2_7Vector2_75__reduce_cython__(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused) {
+static PyObject *__pyx_pw_4core_7vector2_7Vector2_7Vector2_77__reduce_cython__(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused); /*proto*/
+static PyObject *__pyx_pw_4core_7vector2_7Vector2_7Vector2_77__reduce_cython__(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused) {
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__reduce_cython__ (wrapper)", 0);
-  __pyx_r = __pyx_pf_4core_7vector2_7Vector2_7Vector2_74__reduce_cython__(((struct __pyx_obj_4core_7vector2_7Vector2_Vector2 *)__pyx_v_self));
+  __pyx_r = __pyx_pf_4core_7vector2_7Vector2_7Vector2_76__reduce_cython__(((struct __pyx_obj_4core_7vector2_7Vector2_Vector2 *)__pyx_v_self));
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_4core_7vector2_7Vector2_7Vector2_74__reduce_cython__(CYTHON_UNUSED struct __pyx_obj_4core_7vector2_7Vector2_Vector2 *__pyx_v_self) {
+static PyObject *__pyx_pf_4core_7vector2_7Vector2_7Vector2_76__reduce_cython__(CYTHON_UNUSED struct __pyx_obj_4core_7vector2_7Vector2_Vector2 *__pyx_v_self) {
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   PyObject *__pyx_t_1 = NULL;
@@ -4127,19 +4239,19 @@ static PyObject *__pyx_pf_4core_7vector2_7Vector2_7Vector2_74__reduce_cython__(C
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_4core_7vector2_7Vector2_7Vector2_77__setstate_cython__(PyObject *__pyx_v_self, PyObject *__pyx_v___pyx_state); /*proto*/
-static PyObject *__pyx_pw_4core_7vector2_7Vector2_7Vector2_77__setstate_cython__(PyObject *__pyx_v_self, PyObject *__pyx_v___pyx_state) {
+static PyObject *__pyx_pw_4core_7vector2_7Vector2_7Vector2_79__setstate_cython__(PyObject *__pyx_v_self, PyObject *__pyx_v___pyx_state); /*proto*/
+static PyObject *__pyx_pw_4core_7vector2_7Vector2_7Vector2_79__setstate_cython__(PyObject *__pyx_v_self, PyObject *__pyx_v___pyx_state) {
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__setstate_cython__ (wrapper)", 0);
-  __pyx_r = __pyx_pf_4core_7vector2_7Vector2_7Vector2_76__setstate_cython__(((struct __pyx_obj_4core_7vector2_7Vector2_Vector2 *)__pyx_v_self), ((PyObject *)__pyx_v___pyx_state));
+  __pyx_r = __pyx_pf_4core_7vector2_7Vector2_7Vector2_78__setstate_cython__(((struct __pyx_obj_4core_7vector2_7Vector2_Vector2 *)__pyx_v_self), ((PyObject *)__pyx_v___pyx_state));
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_4core_7vector2_7Vector2_7Vector2_76__setstate_cython__(CYTHON_UNUSED struct __pyx_obj_4core_7vector2_7Vector2_Vector2 *__pyx_v_self, CYTHON_UNUSED PyObject *__pyx_v___pyx_state) {
+static PyObject *__pyx_pf_4core_7vector2_7Vector2_7Vector2_78__setstate_cython__(CYTHON_UNUSED struct __pyx_obj_4core_7vector2_7Vector2_Vector2 *__pyx_v_self, CYTHON_UNUSED PyObject *__pyx_v___pyx_state) {
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   PyObject *__pyx_t_1 = NULL;
@@ -4310,6 +4422,108 @@ static CYTHON_INLINE struct __pyx_obj_4core_7vector2_7Vector2_Vector2 *__pyx_f_4
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
+
+/* "core/string/String.pxd":6
+ *     cdef godot_string _native
+ * 
+ *     cdef inline void set_native(self, godot_string _native):             # <<<<<<<<<<<<<<
+ *         self._native = _native
+ * 
+ */
+
+static CYTHON_INLINE void __pyx_f_4core_6string_6String_6String_set_native(struct __pyx_obj_4core_6string_6String_String *__pyx_v_self, godot_string __pyx_v__native) {
+  __Pyx_RefNannyDeclarations
+  __Pyx_RefNannySetupContext("set_native", 0);
+
+  /* "core/string/String.pxd":7
+ * 
+ *     cdef inline void set_native(self, godot_string _native):
+ *         self._native = _native             # <<<<<<<<<<<<<<
+ * 
+ *     @staticmethod
+ */
+  __pyx_v_self->_native = __pyx_v__native;
+
+  /* "core/string/String.pxd":6
+ *     cdef godot_string _native
+ * 
+ *     cdef inline void set_native(self, godot_string _native):             # <<<<<<<<<<<<<<
+ *         self._native = _native
+ * 
+ */
+
+  /* function exit code */
+  __Pyx_RefNannyFinishContext();
+}
+
+/* "core/string/String.pxd":10
+ * 
+ *     @staticmethod
+ *     cdef inline String new_static(godot_string _native):             # <<<<<<<<<<<<<<
+ *         cdef String v = String.__new__(String)
+ *         v.set_native(_native)
+ */
+
+static CYTHON_INLINE struct __pyx_obj_4core_6string_6String_String *__pyx_f_4core_6string_6String_6String_new_static(godot_string __pyx_v__native) {
+  struct __pyx_obj_4core_6string_6String_String *__pyx_v_v = 0;
+  struct __pyx_obj_4core_6string_6String_String *__pyx_r = NULL;
+  __Pyx_RefNannyDeclarations
+  PyObject *__pyx_t_1 = NULL;
+  int __pyx_lineno = 0;
+  const char *__pyx_filename = NULL;
+  int __pyx_clineno = 0;
+  __Pyx_RefNannySetupContext("new_static", 0);
+
+  /* "core/string/String.pxd":11
+ *     @staticmethod
+ *     cdef inline String new_static(godot_string _native):
+ *         cdef String v = String.__new__(String)             # <<<<<<<<<<<<<<
+ *         v.set_native(_native)
+ *         return v
+ */
+  __pyx_t_1 = __Pyx_tp_new(((PyObject *)__pyx_ptype_4core_6string_6String_String), __pyx_empty_tuple); if (unlikely(!__pyx_t_1)) __PYX_ERR(3, 11, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  if (!(likely(__Pyx_TypeTest(__pyx_t_1, __pyx_ptype_4core_6string_6String_String)))) __PYX_ERR(3, 11, __pyx_L1_error)
+  __pyx_v_v = ((struct __pyx_obj_4core_6string_6String_String *)__pyx_t_1);
+  __pyx_t_1 = 0;
+
+  /* "core/string/String.pxd":12
+ *     cdef inline String new_static(godot_string _native):
+ *         cdef String v = String.__new__(String)
+ *         v.set_native(_native)             # <<<<<<<<<<<<<<
+ *         return v
+ */
+  __pyx_f_4core_6string_6String_6String_set_native(__pyx_v_v, __pyx_v__native);
+
+  /* "core/string/String.pxd":13
+ *         cdef String v = String.__new__(String)
+ *         v.set_native(_native)
+ *         return v             # <<<<<<<<<<<<<<
+ */
+  __Pyx_XDECREF(((PyObject *)__pyx_r));
+  __Pyx_INCREF(((PyObject *)__pyx_v_v));
+  __pyx_r = __pyx_v_v;
+  goto __pyx_L0;
+
+  /* "core/string/String.pxd":10
+ * 
+ *     @staticmethod
+ *     cdef inline String new_static(godot_string _native):             # <<<<<<<<<<<<<<
+ *         cdef String v = String.__new__(String)
+ *         v.set_native(_native)
+ */
+
+  /* function exit code */
+  __pyx_L1_error:;
+  __Pyx_XDECREF(__pyx_t_1);
+  __Pyx_AddTraceback("core.string.String.String.new_static", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __pyx_r = 0;
+  __pyx_L0:;
+  __Pyx_XDECREF((PyObject *)__pyx_v_v);
+  __Pyx_XGIVEREF((PyObject *)__pyx_r);
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
 static struct __pyx_vtabstruct_4core_7vector2_7Vector2_Vector2 __pyx_vtable_4core_7vector2_7Vector2_Vector2;
 
 static PyObject *__pyx_tp_new_4core_7vector2_7Vector2_Vector2(PyTypeObject *t, CYTHON_UNUSED PyObject *a, CYTHON_UNUSED PyObject *k) {
@@ -4394,8 +4608,8 @@ static PyMethodDef __pyx_methods_4core_7vector2_7Vector2_Vector2[] = {
   {"set_y", (PyCFunction)__pyx_pw_4core_7vector2_7Vector2_7Vector2_69set_y, METH_O, 0},
   {"get_x", (PyCFunction)__pyx_pw_4core_7vector2_7Vector2_7Vector2_71get_x, METH_NOARGS, 0},
   {"get_y", (PyCFunction)__pyx_pw_4core_7vector2_7Vector2_7Vector2_73get_y, METH_NOARGS, 0},
-  {"__reduce_cython__", (PyCFunction)__pyx_pw_4core_7vector2_7Vector2_7Vector2_75__reduce_cython__, METH_NOARGS, 0},
-  {"__setstate_cython__", (PyCFunction)__pyx_pw_4core_7vector2_7Vector2_7Vector2_77__setstate_cython__, METH_O, 0},
+  {"__reduce_cython__", (PyCFunction)__pyx_pw_4core_7vector2_7Vector2_7Vector2_77__reduce_cython__, METH_NOARGS, 0},
+  {"__setstate_cython__", (PyCFunction)__pyx_pw_4core_7vector2_7Vector2_7Vector2_79__setstate_cython__, METH_O, 0},
   {0, 0, 0, 0}
 };
 
@@ -4425,7 +4639,7 @@ static PyTypeObject __pyx_type_4core_7vector2_7Vector2_Vector2 = {
   0, /*tp_as_mapping*/
   0, /*tp_hash*/
   0, /*tp_call*/
-  __pyx_pw_4core_7vector2_7Vector2_7Vector2_3__str__, /*tp_str*/
+  __pyx_pw_4core_7vector2_7Vector2_7Vector2_75__str__, /*tp_str*/
   0, /*tp_getattro*/
   0, /*tp_setattro*/
   0, /*tp_as_buffer*/
@@ -4666,16 +4880,16 @@ static int __Pyx_modinit_type_init_code(void) {
   __pyx_vtabptr_4core_7vector2_7Vector2_Vector2 = &__pyx_vtable_4core_7vector2_7Vector2_Vector2;
   __pyx_vtable_4core_7vector2_7Vector2_Vector2.set_native = (void (*)(struct __pyx_obj_4core_7vector2_7Vector2_Vector2 *, godot_vector2))__pyx_f_4core_7vector2_7Vector2_7Vector2_set_native;
   __pyx_vtable_4core_7vector2_7Vector2_Vector2.new_static = (struct __pyx_obj_4core_7vector2_7Vector2_Vector2 *(*)(godot_vector2))__pyx_f_4core_7vector2_7Vector2_7Vector2_new_static;
-  if (PyType_Ready(&__pyx_type_4core_7vector2_7Vector2_Vector2) < 0) __PYX_ERR(2, 7, __pyx_L1_error)
+  if (PyType_Ready(&__pyx_type_4core_7vector2_7Vector2_Vector2) < 0) __PYX_ERR(2, 8, __pyx_L1_error)
   #if PY_VERSION_HEX < 0x030800B1
   __pyx_type_4core_7vector2_7Vector2_Vector2.tp_print = 0;
   #endif
   if ((CYTHON_USE_TYPE_SLOTS && CYTHON_USE_PYTYPE_LOOKUP) && likely(!__pyx_type_4core_7vector2_7Vector2_Vector2.tp_dictoffset && __pyx_type_4core_7vector2_7Vector2_Vector2.tp_getattro == PyObject_GenericGetAttr)) {
     __pyx_type_4core_7vector2_7Vector2_Vector2.tp_getattro = __Pyx_PyObject_GenericGetAttr;
   }
-  if (__Pyx_SetVtable(__pyx_type_4core_7vector2_7Vector2_Vector2.tp_dict, __pyx_vtabptr_4core_7vector2_7Vector2_Vector2) < 0) __PYX_ERR(2, 7, __pyx_L1_error)
-  if (PyObject_SetAttr(__pyx_m, __pyx_n_s_Vector2, (PyObject *)&__pyx_type_4core_7vector2_7Vector2_Vector2) < 0) __PYX_ERR(2, 7, __pyx_L1_error)
-  if (__Pyx_setup_reduce((PyObject*)&__pyx_type_4core_7vector2_7Vector2_Vector2) < 0) __PYX_ERR(2, 7, __pyx_L1_error)
+  if (__Pyx_SetVtable(__pyx_type_4core_7vector2_7Vector2_Vector2.tp_dict, __pyx_vtabptr_4core_7vector2_7Vector2_Vector2) < 0) __PYX_ERR(2, 8, __pyx_L1_error)
+  if (PyObject_SetAttr(__pyx_m, __pyx_n_s_Vector2, (PyObject *)&__pyx_type_4core_7vector2_7Vector2_Vector2) < 0) __PYX_ERR(2, 8, __pyx_L1_error)
+  if (__Pyx_setup_reduce((PyObject*)&__pyx_type_4core_7vector2_7Vector2_Vector2) < 0) __PYX_ERR(2, 8, __pyx_L1_error)
   __pyx_ptype_4core_7vector2_7Vector2_Vector2 = &__pyx_type_4core_7vector2_7Vector2_Vector2;
   __Pyx_RefNannyFinishContext();
   return 0;
@@ -4692,7 +4906,7 @@ static int __Pyx_modinit_type_import_code(void) {
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__Pyx_modinit_type_import_code", 0);
   /*--- Type import code ---*/
-  __pyx_t_1 = PyImport_ImportModule(__Pyx_BUILTIN_MODULE_NAME); if (unlikely(!__pyx_t_1)) __PYX_ERR(3, 9, __pyx_L1_error)
+  __pyx_t_1 = PyImport_ImportModule(__Pyx_BUILTIN_MODULE_NAME); if (unlikely(!__pyx_t_1)) __PYX_ERR(4, 9, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_ptype_7cpython_4type_type = __Pyx_ImportType(__pyx_t_1, __Pyx_BUILTIN_MODULE_NAME, "type", 
   #if defined(PYPY_VERSION_NUM) && PYPY_VERSION_NUM < 0x050B0000
@@ -4701,7 +4915,13 @@ static int __Pyx_modinit_type_import_code(void) {
   sizeof(PyHeapTypeObject),
   #endif
   __Pyx_ImportType_CheckSize_Warn);
-   if (!__pyx_ptype_7cpython_4type_type) __PYX_ERR(3, 9, __pyx_L1_error)
+   if (!__pyx_ptype_7cpython_4type_type) __PYX_ERR(4, 9, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+  __pyx_t_1 = PyImport_ImportModule("core.string.String"); if (unlikely(!__pyx_t_1)) __PYX_ERR(3, 3, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __pyx_ptype_4core_6string_6String_String = __Pyx_ImportType(__pyx_t_1, "core.string.String", "String", sizeof(struct __pyx_obj_4core_6string_6String_String), __Pyx_ImportType_CheckSize_Warn);
+   if (!__pyx_ptype_4core_6string_6String_String) __PYX_ERR(3, 3, __pyx_L1_error)
+  __pyx_vtabptr_4core_6string_6String_String = (struct __pyx_vtabstruct_4core_6string_6String_String*)__Pyx_GetVtable(__pyx_ptype_4core_6string_6String_String->tp_dict); if (unlikely(!__pyx_vtabptr_4core_6string_6String_String)) __PYX_ERR(3, 3, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __Pyx_RefNannyFinishContext();
   return 0;
@@ -4928,21 +5148,21 @@ if (!__Pyx_RefNanny) {
   #endif
 
   /* "core/vector2/Vector2.pyx":1
- * from core.vector2.vector2_binding cimport *             # <<<<<<<<<<<<<<
+ * from core.string.String cimport String             # <<<<<<<<<<<<<<
+ * from core.vector2.vector2_binding cimport *
  * 
- * cdef api set_api_core_vector2(godot_gdnative_core_api_struct * core):
  */
   __pyx_t_1 = __Pyx_PyDict_NewPresized(0); if (unlikely(!__pyx_t_1)) __PYX_ERR(2, 1, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   if (PyDict_SetItem(__pyx_d, __pyx_n_s_test, __pyx_t_1) < 0) __PYX_ERR(2, 1, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "core/vector2/Vector2.pxd":10
+  /* "core/string/String.pxd":10
  * 
  *     @staticmethod
- *     cdef inline Vector2 new_static(godot_vector2 _native):             # <<<<<<<<<<<<<<
- *         print("start_new")
- *         cdef Vector2 v = Vector2.__new__(Vector2)
+ *     cdef inline String new_static(godot_string _native):             # <<<<<<<<<<<<<<
+ *         cdef String v = String.__new__(String)
+ *         v.set_native(_native)
  */
 
   /*--- Wrapped vars code ---*/
@@ -5855,6 +6075,26 @@ bad:
     return NULL;
 }
 #endif
+
+/* GetVTable */
+static void* __Pyx_GetVtable(PyObject *dict) {
+    void* ptr;
+    PyObject *ob = PyObject_GetItem(dict, __pyx_n_s_pyx_vtable);
+    if (!ob)
+        goto bad;
+#if PY_VERSION_HEX >= 0x02070000
+    ptr = PyCapsule_GetPointer(ob, 0);
+#else
+    ptr = PyCObject_AsVoidPtr(ob);
+#endif
+    if (!ptr && !PyErr_Occurred())
+        PyErr_SetString(PyExc_RuntimeError, "invalid vtable found for imported type");
+    Py_DECREF(ob);
+    return ptr;
+bad:
+    Py_XDECREF(ob);
+    return NULL;
+}
 
 /* PyDictVersioning */
 #if CYTHON_USE_DICT_VERSIONS && CYTHON_USE_TYPE_SLOTS

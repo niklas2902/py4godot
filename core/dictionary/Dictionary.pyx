@@ -58,8 +58,10 @@ cdef class Dictionary:
         variant = (api_core.godot_dictionary_next(&self._native, &key._native))
         return Variant.new_static(dereference(variant))
 
-    def __eq__(self, Dictionary other):
-        return api_core.godot_dictionary_operator_equal(&self._native, &other._native)
+    def __eq__(self, other):
+        if(isinstance(other, Dictionary)):
+            return api_core.godot_dictionary_operator_equal(&self._native, &(<Dictionary>other)._native)
+        return False
 
     def json(self):
         return api_core.godot_dictionary_to_json(&self._native)

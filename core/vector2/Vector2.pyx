@@ -1,3 +1,4 @@
+from core.string.String cimport String
 from core.vector2.vector2_binding cimport *
 
 cdef api set_api_core_vector2(godot_gdnative_core_api_struct * core):
@@ -116,3 +117,6 @@ cdef class Vector2:
 
     def get_y(self):
         return api_core.godot_vector2_get_y(&self._native)
+
+    def __str__(self):
+        return str(String.new_static(api_core.godot_vector2_as_string(&self._native)))

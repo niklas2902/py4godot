@@ -44,3 +44,4 @@ cdef extern from "binding.h":
         godot_vector3 (*godot_vector3_operator_neg)(const godot_vector3 *p_self);
         void (*godot_vector3_set_axis)(godot_vector3 *p_self, const godot_vector3_axis p_axis, const godot_real p_val);
         godot_real (*godot_vector3_get_axis)(const godot_vector3 *p_self, const godot_vector3_axis p_axis);
+        godot_string godot_vector3_as_string(const godot_vector3 *p_self);

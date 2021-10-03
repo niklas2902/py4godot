@@ -22,7 +22,7 @@ cdef api set_api_core_variant(godot_gdnative_core_api_struct * core):
     api_core = core
 
 cdef dict_get_methods = {0:Variant.as_nil, 1:Variant.as_bool,2:Variant.as_int, 3:Variant.as_real,4:Variant.as_string, 5:Variant.as_vector2,
- 6:Variant.as_rect2, 7:Variant.as_vector2,8:Variant.as_transform2d, 9:Variant.as_plane, 10:Variant.as_quat,11:Variant.as_aabb, 12:Variant.as_basis,
+ 6:Variant.as_rect2, 7:Variant.as_vector3,8:Variant.as_transform2d, 9:Variant.as_plane, 10:Variant.as_quat,11:Variant.as_aabb, 12:Variant.as_basis,
   13:Variant.as_transform, 14:Variant.as_color, 15:Variant.as_node_path, 16:Variant.as_rid, 17:Variant.as_object, 18:Variant.as_dictionary}
 
 
@@ -36,6 +36,10 @@ cdef class Variant:
 
         if(type(variant) == type("")):
             variant = String(variant)
+        if(variant == Vector3):
+            print("###############Vector3_created#############################")
+            self.new_vector3(Vector3(0,0,0))
+            return
 
         if(variant != None):
             if(type(variant) == int):
@@ -44,6 +48,7 @@ cdef class Variant:
                 self.new_float(variant)
             elif(type(variant)==Vector3):
                 self.new_vector3(variant)
+
             elif(type(variant)==Vector2):
                 self.new_vector2(variant)
             elif(type(variant)==AABB):
@@ -64,6 +69,8 @@ cdef class Variant:
                 self.new_dict(variant)
             elif type(variant) == Array:
                 self.new_array(variant)
+            elif variant == int:
+                self.new_int(0)
             else:
                 print("no Variant created:",variant,"|", type(variant))
         else:
@@ -126,6 +133,7 @@ cdef class Variant:
         elif (variant is godot_string):
             api_core.godot_variant_new_string(&self._native, variant)
         elif (variant is godot_vector2):
+            print("as_vector2")
             api_core.godot_variant_new_vector2(&self._native, variant)
         elif (variant is godot_rect2):
             api_core.godot_variant_new_rect2(&self._native, variant)
@@ -187,6 +195,7 @@ cdef class Variant:
         return api_core.godot_variant_as_string(&self._native)
     @staticmethod
     cdef as_vector2(self):
+        print("------------->as vector2")
         return Vector2.new_static(api_core.godot_variant_as_vector2(&self._native))
     @staticmethod
     cdef as_rect2(self):

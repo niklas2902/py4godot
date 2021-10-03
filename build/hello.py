@@ -1,5 +1,4 @@
 from pluginscript_api.utils.annotations import  *
-from utils.Wrapper import *
 from enums.enums import *
 from classes.generated import *
 from core import *
@@ -7,6 +6,7 @@ print(PropertyHint)
 print(PropertyHint.GODOT_PROPERTY_HINT_RANGE.value)
 
 DEFAULT_VEL = 5
+DEFAULT_POS = Vector3(1,2,3)
 @gdclass
 class Ball(Spatial):
 
@@ -19,18 +19,31 @@ class Ball(Spatial):
 		print("set_value", value)
 		self._vel = value
 
+	@gdproperty(Vector3, DEFAULT_POS)
+	def pos(self):
+		return self._pos
+
+	@pos.setter
+	def pos(self, value):
+		print("set_pos", value)
+		self._pos = value
+
 	@gdmethod
 	def _ready(self):
 		print("_ready:")
 		print(self.vel)
 		if(self.vel == None):
 			self.vel = DEFAULT_VEL
+		
+		if(self.pos == None):
+			print("set_pos")
+			self.pos = DEFAULT_POS		
 		print(self.vel)
 
 	@gdmethod
 	def _process(self, delta):
 		#print("delta:", delta)
 		transform = self.get_transform()
-		transform.set_origin(Vector3(5,0,2))
+		transform.set_origin(self.pos)
 		self.set_transform(transform)
 		

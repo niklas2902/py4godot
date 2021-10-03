@@ -963,7 +963,7 @@ struct __pyx_obj_4core_7variant_7Variant_Variant {
 /* "pluginscript_api/utils/annotations.pyx":22
  *     classes.append(func)
  * 
- * def gdproperty(type, defaultval, hint= None, hint_string = ""):             # <<<<<<<<<<<<<<
+ * def gdproperty(type_, defaultval, hint= None, hint_string = ""):             # <<<<<<<<<<<<<<
  *     class gdprop(property):
  *         def __init__(self,fget=None, fset=None, fdel=None, doc=None):
  */
@@ -972,6 +972,7 @@ struct __pyx_obj_16pluginscript_api_5utils_11annotations___pyx_scope_struct__gdp
   PyObject *__pyx_v_defaultval;
   PyObject *__pyx_v_hint;
   PyObject *__pyx_v_hint_string;
+  PyObject *__pyx_v_type_;
 };
 
 
@@ -1452,9 +1453,6 @@ static void __Pyx_AddTraceback(const char *funcname, int c_line,
 #endif
 
 /* CIntToPy.proto */
-static CYTHON_INLINE PyObject* __Pyx_PyInt_From_godot_variant_type(godot_variant_type value);
-
-/* CIntToPy.proto */
 static CYTHON_INLINE PyObject* __Pyx_PyInt_From_godot_property_usage_flags(godot_property_usage_flags value);
 
 /* CIntToPy.proto */
@@ -1549,7 +1547,7 @@ static const char __pyx_k_main[] = "__main__";
 static const char __pyx_k_name[] = "name";
 static const char __pyx_k_self[] = "self";
 static const char __pyx_k_test[] = "__test__";
-static const char __pyx_k_type[] = "type";
+static const char __pyx_k_type[] = "type_";
 static const char __pyx_k_clear[] = "clear";
 static const char __pyx_k_doc_2[] = "__doc__";
 static const char __pyx_k_print[] = "print";
@@ -1561,7 +1559,6 @@ static const char __pyx_k_gdprop[] = "gdprop";
 static const char __pyx_k_import[] = "__import__";
 static const char __pyx_k_module[] = "__module__";
 static const char __pyx_k_name_2[] = "__name__";
-static const char __pyx_k_type_2[] = "type_";
 static const char __pyx_k_classes[] = "classes";
 static const char __pyx_k_gdclass[] = "gdclass";
 static const char __pyx_k_inspect[] = "inspect";
@@ -1638,12 +1635,11 @@ static PyObject *__pyx_n_s_self;
 static PyObject *__pyx_n_s_super;
 static PyObject *__pyx_n_s_test;
 static PyObject *__pyx_n_s_type;
-static PyObject *__pyx_n_s_type_2;
 static PyObject *__pyx_n_s_usage;
 static PyObject *__pyx_pf_16pluginscript_api_5utils_11annotations_reset(CYTHON_UNUSED PyObject *__pyx_self); /* proto */
 static PyObject *__pyx_pf_16pluginscript_api_5utils_11annotations_2gdclass(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_func); /* proto */
 static PyObject *__pyx_pf_16pluginscript_api_5utils_11annotations_10gdproperty_6gdprop___init__(PyObject *__pyx_self, PyObject *__pyx_v_self, PyObject *__pyx_v_fget, PyObject *__pyx_v_fset, PyObject *__pyx_v_fdel, PyObject *__pyx_v_doc); /* proto */
-static PyObject *__pyx_pf_16pluginscript_api_5utils_11annotations_4gdproperty(CYTHON_UNUSED PyObject *__pyx_self, CYTHON_UNUSED PyObject *__pyx_v_type, PyObject *__pyx_v_defaultval, PyObject *__pyx_v_hint, PyObject *__pyx_v_hint_string); /* proto */
+static PyObject *__pyx_pf_16pluginscript_api_5utils_11annotations_4gdproperty(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_type_, PyObject *__pyx_v_defaultval, PyObject *__pyx_v_hint, PyObject *__pyx_v_hint_string); /* proto */
 static PyObject *__pyx_pf_16pluginscript_api_5utils_11annotations_6gdmethod(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_func); /* proto */
 static PyObject *__pyx_tp_new_16pluginscript_api_5utils_11annotations___pyx_scope_struct__gdproperty(PyTypeObject *t, PyObject *a, PyObject *k); /*proto*/
 static PyObject *__pyx_int_0;
@@ -1840,7 +1836,7 @@ static PyObject *__pyx_pf_16pluginscript_api_5utils_11annotations_2gdclass(CYTHO
  * def gdclass(func):
  *     classes.append(func)             # <<<<<<<<<<<<<<
  * 
- * def gdproperty(type, defaultval, hint= None, hint_string = ""):
+ * def gdproperty(type_, defaultval, hint= None, hint_string = ""):
  */
   __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_n_s_classes); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 20, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
@@ -1871,7 +1867,7 @@ static PyObject *__pyx_pf_16pluginscript_api_5utils_11annotations_2gdclass(CYTHO
 /* "pluginscript_api/utils/annotations.pyx":22
  *     classes.append(func)
  * 
- * def gdproperty(type, defaultval, hint= None, hint_string = ""):             # <<<<<<<<<<<<<<
+ * def gdproperty(type_, defaultval, hint= None, hint_string = ""):             # <<<<<<<<<<<<<<
  *     class gdprop(property):
  *         def __init__(self,fget=None, fset=None, fdel=None, doc=None):
  */
@@ -1880,7 +1876,7 @@ static PyObject *__pyx_pf_16pluginscript_api_5utils_11annotations_2gdclass(CYTHO
 static PyObject *__pyx_pw_16pluginscript_api_5utils_11annotations_5gdproperty(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
 static PyMethodDef __pyx_mdef_16pluginscript_api_5utils_11annotations_5gdproperty = {"gdproperty", (PyCFunction)(void*)(PyCFunctionWithKeywords)__pyx_pw_16pluginscript_api_5utils_11annotations_5gdproperty, METH_VARARGS|METH_KEYWORDS, 0};
 static PyObject *__pyx_pw_16pluginscript_api_5utils_11annotations_5gdproperty(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
-  CYTHON_UNUSED PyObject *__pyx_v_type = 0;
+  PyObject *__pyx_v_type_ = 0;
   PyObject *__pyx_v_defaultval = 0;
   PyObject *__pyx_v_hint = 0;
   PyObject *__pyx_v_hint_string = 0;
@@ -1949,7 +1945,7 @@ static PyObject *__pyx_pw_16pluginscript_api_5utils_11annotations_5gdproperty(Py
         default: goto __pyx_L5_argtuple_error;
       }
     }
-    __pyx_v_type = values[0];
+    __pyx_v_type_ = values[0];
     __pyx_v_defaultval = values[1];
     __pyx_v_hint = values[2];
     __pyx_v_hint_string = values[3];
@@ -1962,7 +1958,7 @@ static PyObject *__pyx_pw_16pluginscript_api_5utils_11annotations_5gdproperty(Py
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  __pyx_r = __pyx_pf_16pluginscript_api_5utils_11annotations_4gdproperty(__pyx_self, __pyx_v_type, __pyx_v_defaultval, __pyx_v_hint, __pyx_v_hint_string);
+  __pyx_r = __pyx_pf_16pluginscript_api_5utils_11annotations_4gdproperty(__pyx_self, __pyx_v_type_, __pyx_v_defaultval, __pyx_v_hint, __pyx_v_hint_string);
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
@@ -1970,7 +1966,7 @@ static PyObject *__pyx_pw_16pluginscript_api_5utils_11annotations_5gdproperty(Py
 }
 
 /* "pluginscript_api/utils/annotations.pyx":24
- * def gdproperty(type, defaultval, hint= None, hint_string = ""):
+ * def gdproperty(type_, defaultval, hint= None, hint_string = ""):
  *     class gdprop(property):
  *         def __init__(self,fget=None, fset=None, fdel=None, doc=None):             # <<<<<<<<<<<<<<
  *             if(not fget == None and fset == None and fdel == None and doc == None):
@@ -2111,7 +2107,7 @@ static PyObject *__pyx_pf_16pluginscript_api_5utils_11annotations_10gdproperty_6
  *         def __init__(self,fget=None, fset=None, fdel=None, doc=None):
  *             if(not fget == None and fset == None and fdel == None and doc == None):             # <<<<<<<<<<<<<<
  *                 properties.append(PropertyDescription(name = fget.__name__,
- *                 type_=godot_variant_type.GODOT_VARIANT_TYPE_INT,
+ *                 type_=type_,
  */
   __pyx_t_2 = PyObject_RichCompare(__pyx_v_fget, Py_None, Py_EQ); __Pyx_XGOTREF(__pyx_t_2); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 25, __pyx_L1_error)
   __pyx_t_3 = __Pyx_PyObject_IsTrue(__pyx_t_2); if (unlikely(__pyx_t_3 < 0)) __PYX_ERR(0, 25, __pyx_L1_error)
@@ -2149,7 +2145,7 @@ static PyObject *__pyx_pf_16pluginscript_api_5utils_11annotations_10gdproperty_6
  *         def __init__(self,fget=None, fset=None, fdel=None, doc=None):
  *             if(not fget == None and fset == None and fdel == None and doc == None):
  *                 properties.append(PropertyDescription(name = fget.__name__,             # <<<<<<<<<<<<<<
- *                 type_=godot_variant_type.GODOT_VARIANT_TYPE_INT,
+ *                 type_=type_,
  *                 hint= hint,
  */
     __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_properties); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 26, __pyx_L1_error)
@@ -2166,18 +2162,16 @@ static PyObject *__pyx_pf_16pluginscript_api_5utils_11annotations_10gdproperty_6
     /* "pluginscript_api/utils/annotations.pyx":27
  *             if(not fget == None and fset == None and fdel == None and doc == None):
  *                 properties.append(PropertyDescription(name = fget.__name__,
- *                 type_=godot_variant_type.GODOT_VARIANT_TYPE_INT,             # <<<<<<<<<<<<<<
+ *                 type_=type_,             # <<<<<<<<<<<<<<
  *                 hint= hint,
  *                 hint_string=hint_string,usage=godot_property_usage_flags. GODOT_PROPERTY_USAGE_DEFAULT,
  */
-    __pyx_t_7 = __Pyx_PyInt_From_godot_variant_type(GODOT_VARIANT_TYPE_INT); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 27, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_7);
-    if (PyDict_SetItem(__pyx_t_6, __pyx_n_s_type_2, __pyx_t_7) < 0) __PYX_ERR(0, 26, __pyx_L1_error)
-    __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
+    if (unlikely(!__pyx_cur_scope->__pyx_v_type_)) { __Pyx_RaiseClosureNameError("type_"); __PYX_ERR(0, 27, __pyx_L1_error) }
+    if (PyDict_SetItem(__pyx_t_6, __pyx_n_s_type, __pyx_cur_scope->__pyx_v_type_) < 0) __PYX_ERR(0, 26, __pyx_L1_error)
 
     /* "pluginscript_api/utils/annotations.pyx":28
  *                 properties.append(PropertyDescription(name = fget.__name__,
- *                 type_=godot_variant_type.GODOT_VARIANT_TYPE_INT,
+ *                 type_=type_,
  *                 hint= hint,             # <<<<<<<<<<<<<<
  *                 hint_string=hint_string,usage=godot_property_usage_flags. GODOT_PROPERTY_USAGE_DEFAULT,
  *                 default_value=defaultval, rset_mode=godot_method_rpc_mode.GODOT_METHOD_RPC_MODE_DISABLED))
@@ -2186,7 +2180,7 @@ static PyObject *__pyx_pf_16pluginscript_api_5utils_11annotations_10gdproperty_6
     if (PyDict_SetItem(__pyx_t_6, __pyx_n_s_hint, __pyx_cur_scope->__pyx_v_hint) < 0) __PYX_ERR(0, 26, __pyx_L1_error)
 
     /* "pluginscript_api/utils/annotations.pyx":29
- *                 type_=godot_variant_type.GODOT_VARIANT_TYPE_INT,
+ *                 type_=type_,
  *                 hint= hint,
  *                 hint_string=hint_string,usage=godot_property_usage_flags. GODOT_PROPERTY_USAGE_DEFAULT,             # <<<<<<<<<<<<<<
  *                 default_value=defaultval, rset_mode=godot_method_rpc_mode.GODOT_METHOD_RPC_MODE_DISABLED))
@@ -2217,7 +2211,7 @@ static PyObject *__pyx_pf_16pluginscript_api_5utils_11annotations_10gdproperty_6
  *         def __init__(self,fget=None, fset=None, fdel=None, doc=None):
  *             if(not fget == None and fset == None and fdel == None and doc == None):
  *                 properties.append(PropertyDescription(name = fget.__name__,             # <<<<<<<<<<<<<<
- *                 type_=godot_variant_type.GODOT_VARIANT_TYPE_INT,
+ *                 type_=type_,
  *                 hint= hint,
  */
     __pyx_t_7 = __Pyx_PyObject_Call(__pyx_t_5, __pyx_empty_tuple, __pyx_t_6); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 26, __pyx_L1_error)
@@ -2233,7 +2227,7 @@ static PyObject *__pyx_pf_16pluginscript_api_5utils_11annotations_10gdproperty_6
  *         def __init__(self,fget=None, fset=None, fdel=None, doc=None):
  *             if(not fget == None and fset == None and fdel == None and doc == None):             # <<<<<<<<<<<<<<
  *                 properties.append(PropertyDescription(name = fget.__name__,
- *                 type_=godot_variant_type.GODOT_VARIANT_TYPE_INT,
+ *                 type_=type_,
  */
   }
 
@@ -2315,7 +2309,7 @@ static PyObject *__pyx_pf_16pluginscript_api_5utils_11annotations_10gdproperty_6
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
 
   /* "pluginscript_api/utils/annotations.pyx":24
- * def gdproperty(type, defaultval, hint= None, hint_string = ""):
+ * def gdproperty(type_, defaultval, hint= None, hint_string = ""):
  *     class gdprop(property):
  *         def __init__(self,fget=None, fset=None, fdel=None, doc=None):             # <<<<<<<<<<<<<<
  *             if(not fget == None and fset == None and fdel == None and doc == None):
@@ -2341,12 +2335,12 @@ static PyObject *__pyx_pf_16pluginscript_api_5utils_11annotations_10gdproperty_6
 /* "pluginscript_api/utils/annotations.pyx":22
  *     classes.append(func)
  * 
- * def gdproperty(type, defaultval, hint= None, hint_string = ""):             # <<<<<<<<<<<<<<
+ * def gdproperty(type_, defaultval, hint= None, hint_string = ""):             # <<<<<<<<<<<<<<
  *     class gdprop(property):
  *         def __init__(self,fget=None, fset=None, fdel=None, doc=None):
  */
 
-static PyObject *__pyx_pf_16pluginscript_api_5utils_11annotations_4gdproperty(CYTHON_UNUSED PyObject *__pyx_self, CYTHON_UNUSED PyObject *__pyx_v_type, PyObject *__pyx_v_defaultval, PyObject *__pyx_v_hint, PyObject *__pyx_v_hint_string) {
+static PyObject *__pyx_pf_16pluginscript_api_5utils_11annotations_4gdproperty(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_type_, PyObject *__pyx_v_defaultval, PyObject *__pyx_v_hint, PyObject *__pyx_v_hint_string) {
   struct __pyx_obj_16pluginscript_api_5utils_11annotations___pyx_scope_struct__gdproperty *__pyx_cur_scope;
   PyObject *__pyx_v_gdprop = NULL;
   PyObject *__pyx_r = NULL;
@@ -2367,6 +2361,9 @@ static PyObject *__pyx_pf_16pluginscript_api_5utils_11annotations_4gdproperty(CY
   } else {
     __Pyx_GOTREF(__pyx_cur_scope);
   }
+  __pyx_cur_scope->__pyx_v_type_ = __pyx_v_type_;
+  __Pyx_INCREF(__pyx_cur_scope->__pyx_v_type_);
+  __Pyx_GIVEREF(__pyx_cur_scope->__pyx_v_type_);
   __pyx_cur_scope->__pyx_v_defaultval = __pyx_v_defaultval;
   __Pyx_INCREF(__pyx_cur_scope->__pyx_v_defaultval);
   __Pyx_GIVEREF(__pyx_cur_scope->__pyx_v_defaultval);
@@ -2379,7 +2376,7 @@ static PyObject *__pyx_pf_16pluginscript_api_5utils_11annotations_4gdproperty(CY
 
   /* "pluginscript_api/utils/annotations.pyx":23
  * 
- * def gdproperty(type, defaultval, hint= None, hint_string = ""):
+ * def gdproperty(type_, defaultval, hint= None, hint_string = ""):
  *     class gdprop(property):             # <<<<<<<<<<<<<<
  *         def __init__(self,fget=None, fset=None, fdel=None, doc=None):
  *             if(not fget == None and fset == None and fdel == None and doc == None):
@@ -2392,7 +2389,7 @@ static PyObject *__pyx_pf_16pluginscript_api_5utils_11annotations_4gdproperty(CY
   __Pyx_GOTREF(__pyx_t_3);
 
   /* "pluginscript_api/utils/annotations.pyx":24
- * def gdproperty(type, defaultval, hint= None, hint_string = ""):
+ * def gdproperty(type_, defaultval, hint= None, hint_string = ""):
  *     class gdprop(property):
  *         def __init__(self,fget=None, fset=None, fdel=None, doc=None):             # <<<<<<<<<<<<<<
  *             if(not fget == None and fset == None and fdel == None and doc == None):
@@ -2409,7 +2406,7 @@ static PyObject *__pyx_pf_16pluginscript_api_5utils_11annotations_4gdproperty(CY
 
   /* "pluginscript_api/utils/annotations.pyx":23
  * 
- * def gdproperty(type, defaultval, hint= None, hint_string = ""):
+ * def gdproperty(type_, defaultval, hint= None, hint_string = ""):
  *     class gdprop(property):             # <<<<<<<<<<<<<<
  *         def __init__(self,fget=None, fset=None, fdel=None, doc=None):
  *             if(not fget == None and fset == None and fdel == None and doc == None):
@@ -2438,7 +2435,7 @@ static PyObject *__pyx_pf_16pluginscript_api_5utils_11annotations_4gdproperty(CY
   /* "pluginscript_api/utils/annotations.pyx":22
  *     classes.append(func)
  * 
- * def gdproperty(type, defaultval, hint= None, hint_string = ""):             # <<<<<<<<<<<<<<
+ * def gdproperty(type_, defaultval, hint= None, hint_string = ""):             # <<<<<<<<<<<<<<
  *     class gdprop(property):
  *         def __init__(self,fget=None, fset=None, fdel=None, doc=None):
  */
@@ -2883,6 +2880,7 @@ static void __pyx_tp_dealloc_16pluginscript_api_5utils_11annotations___pyx_scope
   Py_CLEAR(p->__pyx_v_defaultval);
   Py_CLEAR(p->__pyx_v_hint);
   Py_CLEAR(p->__pyx_v_hint_string);
+  Py_CLEAR(p->__pyx_v_type_);
   if (CYTHON_COMPILING_IN_CPYTHON && ((__pyx_freecount_16pluginscript_api_5utils_11annotations___pyx_scope_struct__gdproperty < 8) & (Py_TYPE(o)->tp_basicsize == sizeof(struct __pyx_obj_16pluginscript_api_5utils_11annotations___pyx_scope_struct__gdproperty)))) {
     __pyx_freelist_16pluginscript_api_5utils_11annotations___pyx_scope_struct__gdproperty[__pyx_freecount_16pluginscript_api_5utils_11annotations___pyx_scope_struct__gdproperty++] = ((struct __pyx_obj_16pluginscript_api_5utils_11annotations___pyx_scope_struct__gdproperty *)o);
   } else {
@@ -2902,6 +2900,9 @@ static int __pyx_tp_traverse_16pluginscript_api_5utils_11annotations___pyx_scope
   if (p->__pyx_v_hint_string) {
     e = (*v)(p->__pyx_v_hint_string, a); if (e) return e;
   }
+  if (p->__pyx_v_type_) {
+    e = (*v)(p->__pyx_v_type_, a); if (e) return e;
+  }
   return 0;
 }
 
@@ -2916,6 +2917,9 @@ static int __pyx_tp_clear_16pluginscript_api_5utils_11annotations___pyx_scope_st
   Py_XDECREF(tmp);
   tmp = ((PyObject*)p->__pyx_v_hint_string);
   p->__pyx_v_hint_string = Py_None; Py_INCREF(Py_None);
+  Py_XDECREF(tmp);
+  tmp = ((PyObject*)p->__pyx_v_type_);
+  p->__pyx_v_type_ = Py_None; Py_INCREF(Py_None);
   Py_XDECREF(tmp);
   return 0;
 }
@@ -3085,7 +3089,6 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_n_s_super, __pyx_k_super, sizeof(__pyx_k_super), 0, 0, 1, 1},
   {&__pyx_n_s_test, __pyx_k_test, sizeof(__pyx_k_test), 0, 0, 1, 1},
   {&__pyx_n_s_type, __pyx_k_type, sizeof(__pyx_k_type), 0, 0, 1, 1},
-  {&__pyx_n_s_type_2, __pyx_k_type_2, sizeof(__pyx_k_type_2), 0, 0, 1, 1},
   {&__pyx_n_s_usage, __pyx_k_usage, sizeof(__pyx_k_usage), 0, 0, 1, 1},
   {0, 0, 0, 0, 0, 0, 0}
 };
@@ -3104,7 +3107,7 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
 
   /* "pluginscript_api/utils/annotations.pyx":23
  * 
- * def gdproperty(type, defaultval, hint= None, hint_string = ""):
+ * def gdproperty(type_, defaultval, hint= None, hint_string = ""):
  *     class gdprop(property):             # <<<<<<<<<<<<<<
  *         def __init__(self,fget=None, fset=None, fdel=None, doc=None):
  *             if(not fget == None and fset == None and fdel == None and doc == None):
@@ -3114,7 +3117,7 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
   __Pyx_GIVEREF(__pyx_tuple__2);
 
   /* "pluginscript_api/utils/annotations.pyx":24
- * def gdproperty(type, defaultval, hint= None, hint_string = ""):
+ * def gdproperty(type_, defaultval, hint= None, hint_string = ""):
  *     class gdprop(property):
  *         def __init__(self,fget=None, fset=None, fdel=None, doc=None):             # <<<<<<<<<<<<<<
  *             if(not fget == None and fset == None and fdel == None and doc == None):
@@ -3152,7 +3155,7 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
   /* "pluginscript_api/utils/annotations.pyx":22
  *     classes.append(func)
  * 
- * def gdproperty(type, defaultval, hint= None, hint_string = ""):             # <<<<<<<<<<<<<<
+ * def gdproperty(type_, defaultval, hint= None, hint_string = ""):             # <<<<<<<<<<<<<<
  *     class gdprop(property):
  *         def __init__(self,fget=None, fset=None, fdel=None, doc=None):
  */
@@ -3614,7 +3617,7 @@ if (!__Pyx_RefNanny) {
   /* "pluginscript_api/utils/annotations.pyx":22
  *     classes.append(func)
  * 
- * def gdproperty(type, defaultval, hint= None, hint_string = ""):             # <<<<<<<<<<<<<<
+ * def gdproperty(type_, defaultval, hint= None, hint_string = ""):             # <<<<<<<<<<<<<<
  *     class gdprop(property):
  *         def __init__(self,fget=None, fset=None, fdel=None, doc=None):
  */
@@ -5623,44 +5626,6 @@ static void __Pyx_AddTraceback(const char *funcname, int c_line,
 bad:
     Py_XDECREF(py_code);
     Py_XDECREF(py_frame);
-}
-
-/* CIntToPy */
-static CYTHON_INLINE PyObject* __Pyx_PyInt_From_godot_variant_type(godot_variant_type value) {
-#ifdef __Pyx_HAS_GCC_DIAGNOSTIC
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wconversion"
-#endif
-    const godot_variant_type neg_one = (godot_variant_type) -1, const_zero = (godot_variant_type) 0;
-#ifdef __Pyx_HAS_GCC_DIAGNOSTIC
-#pragma GCC diagnostic pop
-#endif
-    const int is_unsigned = neg_one > const_zero;
-    if (is_unsigned) {
-        if (sizeof(godot_variant_type) < sizeof(long)) {
-            return PyInt_FromLong((long) value);
-        } else if (sizeof(godot_variant_type) <= sizeof(unsigned long)) {
-            return PyLong_FromUnsignedLong((unsigned long) value);
-#ifdef HAVE_LONG_LONG
-        } else if (sizeof(godot_variant_type) <= sizeof(unsigned PY_LONG_LONG)) {
-            return PyLong_FromUnsignedLongLong((unsigned PY_LONG_LONG) value);
-#endif
-        }
-    } else {
-        if (sizeof(godot_variant_type) <= sizeof(long)) {
-            return PyInt_FromLong((long) value);
-#ifdef HAVE_LONG_LONG
-        } else if (sizeof(godot_variant_type) <= sizeof(PY_LONG_LONG)) {
-            return PyLong_FromLongLong((PY_LONG_LONG) value);
-#endif
-        }
-    }
-    {
-        int one = 1; int little = (int)*(unsigned char *)&one;
-        unsigned char *bytes = (unsigned char *)&value;
-        return _PyLong_FromByteArray(bytes, sizeof(godot_variant_type),
-                                     little, !is_unsigned);
-    }
 }
 
 /* CIntToPy */

@@ -1,4 +1,5 @@
 #from core.basis.Basis cimport *
+from core.string.String cimport String
 from core.vector3.vector3_binding cimport *
 
 cdef api set_api_core_vector3(godot_gdnative_core_api_struct * core):
@@ -91,14 +92,19 @@ cdef class Vector3:
     def divide_scalar(self, godot_real p_b):
         return Vector3. new_static(api_core.godot_vector3_operator_divide_scalar(&self._native, p_b))
 
-    def __eq__(self, Vector3 other):
-        return api_core.godot_vector3_operator_equal(&self._native, &other._native)
+    def __eq__(self, other):
+        if(isinstance(other, Vector3)):
+            return api_core.godot_vector3_operator_equal(&self._native, &(<Vector3>other)._native)
+        return False
 
     def __lt__(self, Vector3 other):
         return api_core.godot_vector3_operator_less(&self._native, &other._native)
 
     def neg(self):
         return Vector3. new_static(api_core.godot_vector3_operator_neg(&self._native))
+
+    def __str__(self):
+        return str(String.new_static(api_core.godot_vector3_as_string(&self._native)))
 
 """
     def set_axis(self, Vector3 axis, godot_real val):
