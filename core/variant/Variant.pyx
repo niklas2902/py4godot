@@ -165,61 +165,6 @@ cdef class Variant:
     def new_array(self, Array variant):
         api_core.godot_variant_new_array(&self._native, &variant._native)
 
-
-    def new(self, variant):
-        """
-        if(type(variant) is godot_bool):
-            api_core.godot_variant_new_bool(&self._native, variant)
-        elif (variant is uint64_t):
-            api_core.godot_variant_new_uint(&self._native, variant)
-        elif (variant is int64_t):
-            api_core.godot_variant_new_int(&self._native, variant)
-        elif (variant is double):
-            api_core.godot_variant_new_real(&self._native, variant)
-        elif (variant is godot_string):
-            api_core.godot_variant_new_string(&self._native, variant)
-        elif (variant is godot_vector2):
-            print("as_vector2")
-            api_core.godot_variant_new_vector2(&self._native, variant)
-        elif (variant is godot_rect2):
-            api_core.godot_variant_new_rect2(&self._native, variant)
-        elif (variant is godot_vector3):
-            api_core.godot_variant_new_vector3(&self._native, variant)
-        elif (variant is godot_transform2d):
-            api_core.godot_variant_new_transform2d(&self._native, variant)
-        elif (variant is godot_plane):
-            api_core.godot_variant_new_plane(&self._native, variant)
-        elif (variant is godot_quat):
-            api_core.godot_variant_new_quat(&self._native, variant)
-        elif (variant is godot_aabb):
-            api_core.godot_variant_new_aabb(&self._native, variant)
-        elif (variant is godot_basis):
-            api_core.godot_variant_new_godot_basis(&self._native, variant)
-        elif (variant is godot_transform):
-            api_core.godot_variant_new_transform(&self._native, variant)
-        elif (variant is godot_color):
-            api_core.godot_variant_new_color(&self._native, variant)
-        elif (variant is godot_node_path):
-            api_core.godot_variant_new_node_path(&self._native, variant)
-        elif (variant is godot_rid):
-            api_core.godot_variant_new_rid(&self._native, variant)
-        elif (variant is godot_object):
-            api_core.godot_variant_new_object(&self._native, variant)
-        elif (variant is godot_dictionary):
-            api_core.godot_variant_new_dictionary(&self._native, variant)
-        elif (variant is godot_array):
-            api_core.godot_variant_new_array(&self._native, variant)
-        elif (variant is godot_pool_byte_array):
-            api_core.godot_variant_new_pool_byte_array(&self._native, variant)
-        elif (variant is godot_pool_string_array):
-            api_core.godot_variant_new_pool_string_array(&self._native, variant)
-        elif (variant is godot_pool_vector2_array):
-            api_core.godot_variant_new_pool_vector2_array(&self._native, variant)
-        elif (variant is godot_pool_vector3_array):
-            api_core.godot_variant_new_pool_vector3_array(&self._native, variant)
-        elif (variant is godot_pool_color_array):
-            api_core.godot_variant_new_pool_color_array(&self._native, variant)
-        """
     @staticmethod
     cdef as_nil(self):
         return None
