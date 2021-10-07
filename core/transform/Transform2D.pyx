@@ -13,8 +13,11 @@ cdef class Transform2D:
     def __init__(self,godot_real rotation, Vector2 pos):
         api_core.godot_transform2d_new(&self._native, rotation, &pos._native)
 
-    #def new_with_axis_origin(self, Vector3 x_axis, Vector3 y_axis, Vector3 z_axis, Vector3 origin):
-    #    api_core.godot_transform2d_new_with_axis_origin(&self._native, &x_axis._native, &y_axis._native, &z_axis._native, &origin._native)
+    @staticmethod
+    def new_with_axis_origin(self, Vector2 x_axis, Vector2 y_axis, Vector2 origin):
+        cdef Transform2D transform = Transform2D.__new__(Transform2D)
+        api_core.godot_transform2d_new_axis_origin(&transform._native, &x_axis._native, &y_axis._native, &origin._native)
+        return transform
 
     def __str__(self):
         return api_core.godot_transform2d_as_string(&self._native)

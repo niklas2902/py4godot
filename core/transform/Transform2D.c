@@ -845,8 +845,8 @@ static const char *__pyx_filename;
 
 
 static const char *__pyx_f[] = {
-  "stringsource",
   "core\\transform\\Transform2D.pyx",
+  "stringsource",
   "core\\transform\\Transform2D.pxd",
   "core\\vector2\\Vector2.pxd",
   "core\\plane\\Plane.pxd",
@@ -1240,6 +1240,31 @@ static CYTHON_INLINE int __Pyx_object_dict_version_matches(PyObject* obj, PY_UIN
 #define __PYX_PY_DICT_LOOKUP_IF_MODIFIED(VAR, DICT, LOOKUP)  (VAR) = (LOOKUP);
 #endif
 
+/* GetModuleGlobalName.proto */
+#if CYTHON_USE_DICT_VERSIONS
+#define __Pyx_GetModuleGlobalName(var, name)  {\
+    static PY_UINT64_T __pyx_dict_version = 0;\
+    static PyObject *__pyx_dict_cached_value = NULL;\
+    (var) = (likely(__pyx_dict_version == __PYX_GET_DICT_VERSION(__pyx_d))) ?\
+        (likely(__pyx_dict_cached_value) ? __Pyx_NewRef(__pyx_dict_cached_value) : __Pyx_GetBuiltinName(name)) :\
+        __Pyx__GetModuleGlobalName(name, &__pyx_dict_version, &__pyx_dict_cached_value);\
+}
+#define __Pyx_GetModuleGlobalNameUncached(var, name)  {\
+    PY_UINT64_T __pyx_dict_version;\
+    PyObject *__pyx_dict_cached_value;\
+    (var) = __Pyx__GetModuleGlobalName(name, &__pyx_dict_version, &__pyx_dict_cached_value);\
+}
+static PyObject *__Pyx__GetModuleGlobalName(PyObject *name, PY_UINT64_T *dict_version, PyObject **dict_cached_value);
+#else
+#define __Pyx_GetModuleGlobalName(var, name)  (var) = __Pyx__GetModuleGlobalName(name)
+#define __Pyx_GetModuleGlobalNameUncached(var, name)  (var) = __Pyx__GetModuleGlobalName(name)
+static CYTHON_INLINE PyObject *__Pyx__GetModuleGlobalName(PyObject *name);
+#endif
+
+/* GetNameInClass.proto */
+#define __Pyx_GetNameInClass(var, nmspace, name)  (var) = __Pyx__GetNameInClass(nmspace, name)
+static PyObject *__Pyx__GetNameInClass(PyObject *nmspace, PyObject *name);
+
 /* CLineInTraceback.proto */
 #ifdef CYTHON_CLINE_IN_TRACEBACK
 #define __Pyx_CLineForTraceback(tstate, c_line)  (((CYTHON_CLINE_IN_TRACEBACK)) ? c_line : 0)
@@ -1359,6 +1384,7 @@ extern int __pyx_module_is_main_core__transform__Transform2D;
 int __pyx_module_is_main_core__transform__Transform2D = 0;
 
 /* Implementation of 'core.transform.Transform2D' */
+static PyObject *__pyx_builtin_staticmethod;
 static PyObject *__pyx_builtin_TypeError;
 static PyObject *__pyx_builtin_print;
 static const char __pyx_k_c[] = "c";
@@ -1366,10 +1392,14 @@ static const char __pyx_k_m[] = "m";
 static const char __pyx_k_pos[] = "pos";
 static const char __pyx_k_main[] = "__main__";
 static const char __pyx_k_name[] = "__name__";
+static const char __pyx_k_self[] = "self";
 static const char __pyx_k_test[] = "__test__";
 static const char __pyx_k_print[] = "print";
 static const char __pyx_k_middle[] = "middle";
+static const char __pyx_k_origin[] = "origin";
 static const char __pyx_k_reduce[] = "__reduce__";
+static const char __pyx_k_x_axis[] = "x_axis";
+static const char __pyx_k_y_axis[] = "y_axis";
 static const char __pyx_k_end_new[] = "end_new";
 static const char __pyx_k_getstate[] = "__getstate__";
 static const char __pyx_k_rotation[] = "rotation";
@@ -1377,18 +1407,25 @@ static const char __pyx_k_setstate[] = "__setstate__";
 static const char __pyx_k_TypeError[] = "TypeError";
 static const char __pyx_k_reduce_ex[] = "__reduce_ex__";
 static const char __pyx_k_start_new[] = "start_new";
+static const char __pyx_k_transform[] = "transform";
 static const char __pyx_k_pyx_vtable[] = "__pyx_vtable__";
 static const char __pyx_k_Transform2D[] = "Transform2D";
+static const char __pyx_k_staticmethod[] = "staticmethod";
 static const char __pyx_k_reduce_cython[] = "__reduce_cython__";
 static const char __pyx_k_dont_touch_that[] = "_dont_touch_that";
 static const char __pyx_k_setstate_cython[] = "__setstate_cython__";
 static const char __pyx_k_cline_in_traceback[] = "cline_in_traceback";
+static const char __pyx_k_new_with_axis_origin[] = "new_with_axis_origin";
+static const char __pyx_k_core_transform_Transform2D[] = "core.transform.Transform2D";
+static const char __pyx_k_core_transform_Transform2D_pyx[] = "core\\transform\\Transform2D.pyx";
 static const char __pyx_k_Pickling_of_struct_members_such[] = "Pickling of struct members such as self._native must be explicitly requested with @auto_pickle(True)";
 static PyObject *__pyx_kp_s_Pickling_of_struct_members_such;
 static PyObject *__pyx_n_s_Transform2D;
 static PyObject *__pyx_n_s_TypeError;
 static PyObject *__pyx_n_s_c;
 static PyObject *__pyx_n_s_cline_in_traceback;
+static PyObject *__pyx_n_s_core_transform_Transform2D;
+static PyObject *__pyx_kp_s_core_transform_Transform2D_pyx;
 static PyObject *__pyx_n_s_dont_touch_that;
 static PyObject *__pyx_n_u_end_new;
 static PyObject *__pyx_n_s_getstate;
@@ -1396,6 +1433,8 @@ static PyObject *__pyx_n_s_m;
 static PyObject *__pyx_n_s_main;
 static PyObject *__pyx_n_u_middle;
 static PyObject *__pyx_n_s_name;
+static PyObject *__pyx_n_s_new_with_axis_origin;
+static PyObject *__pyx_n_s_origin;
 static PyObject *__pyx_n_s_pos;
 static PyObject *__pyx_n_s_print;
 static PyObject *__pyx_n_s_pyx_vtable;
@@ -1403,35 +1442,43 @@ static PyObject *__pyx_n_s_reduce;
 static PyObject *__pyx_n_s_reduce_cython;
 static PyObject *__pyx_n_s_reduce_ex;
 static PyObject *__pyx_n_s_rotation;
+static PyObject *__pyx_n_s_self;
 static PyObject *__pyx_n_s_setstate;
 static PyObject *__pyx_n_s_setstate_cython;
 static PyObject *__pyx_n_u_start_new;
+static PyObject *__pyx_n_s_staticmethod;
 static PyObject *__pyx_n_s_test;
+static PyObject *__pyx_n_s_transform;
+static PyObject *__pyx_n_s_x_axis;
+static PyObject *__pyx_n_s_y_axis;
 static int __pyx_pf_4core_9transform_11Transform2D_11Transform2D___init__(struct __pyx_obj_4core_9transform_11Transform2D_Transform2D *__pyx_v_self, godot_real __pyx_v_rotation, struct __pyx_obj_4core_7vector2_7Vector2_Vector2 *__pyx_v_pos); /* proto */
-static PyObject *__pyx_pf_4core_9transform_11Transform2D_11Transform2D_2__str__(struct __pyx_obj_4core_9transform_11Transform2D_Transform2D *__pyx_v_self); /* proto */
-static PyObject *__pyx_pf_4core_9transform_11Transform2D_11Transform2D_4inverse(struct __pyx_obj_4core_9transform_11Transform2D_Transform2D *__pyx_v_self); /* proto */
-static PyObject *__pyx_pf_4core_9transform_11Transform2D_11Transform2D_6get_rotation(struct __pyx_obj_4core_9transform_11Transform2D_Transform2D *__pyx_v_self); /* proto */
-static PyObject *__pyx_pf_4core_9transform_11Transform2D_11Transform2D_8get_origin(struct __pyx_obj_4core_9transform_11Transform2D_Transform2D *__pyx_v_self); /* proto */
-static PyObject *__pyx_pf_4core_9transform_11Transform2D_11Transform2D_10get_scale(struct __pyx_obj_4core_9transform_11Transform2D_Transform2D *__pyx_v_self); /* proto */
-static PyObject *__pyx_pf_4core_9transform_11Transform2D_11Transform2D_12orthonormalized(struct __pyx_obj_4core_9transform_11Transform2D_Transform2D *__pyx_v_self); /* proto */
-static PyObject *__pyx_pf_4core_9transform_11Transform2D_11Transform2D_14rotated(struct __pyx_obj_4core_9transform_11Transform2D_Transform2D *__pyx_v_self, godot_real __pyx_v_phi); /* proto */
-static PyObject *__pyx_pf_4core_9transform_11Transform2D_11Transform2D_16scaled(struct __pyx_obj_4core_9transform_11Transform2D_Transform2D *__pyx_v_self, struct __pyx_obj_4core_7vector2_7Vector2_Vector2 *__pyx_v_scale); /* proto */
-static PyObject *__pyx_pf_4core_9transform_11Transform2D_11Transform2D_18xform_vector2(struct __pyx_obj_4core_9transform_11Transform2D_Transform2D *__pyx_v_self, struct __pyx_obj_4core_7vector2_7Vector2_Vector2 *__pyx_v_v); /* proto */
-static PyObject *__pyx_pf_4core_9transform_11Transform2D_11Transform2D_20xform_inv_vector2(struct __pyx_obj_4core_9transform_11Transform2D_Transform2D *__pyx_v_self, struct __pyx_obj_4core_7vector2_7Vector2_Vector2 *__pyx_v_v); /* proto */
-static PyObject *__pyx_pf_4core_9transform_11Transform2D_11Transform2D_22interpolate_with(struct __pyx_obj_4core_9transform_11Transform2D_Transform2D *__pyx_v_self, struct __pyx_obj_4core_9transform_11Transform2D_Transform2D *__pyx_v_m, godot_real __pyx_v_c); /* proto */
-static PyObject *__pyx_pf_4core_9transform_11Transform2D_11Transform2D_24__eq__(struct __pyx_obj_4core_9transform_11Transform2D_Transform2D *__pyx_v_self, struct __pyx_obj_4core_9transform_11Transform2D_Transform2D *__pyx_v_other); /* proto */
-static PyObject *__pyx_pf_4core_9transform_11Transform2D_11Transform2D_26__mult__(struct __pyx_obj_4core_9transform_11Transform2D_Transform2D *__pyx_v_self, struct __pyx_obj_4core_9transform_11Transform2D_Transform2D *__pyx_v_other); /* proto */
-static PyObject *__pyx_pf_4core_9transform_11Transform2D_11Transform2D_28xform_rect2(struct __pyx_obj_4core_9transform_11Transform2D_Transform2D *__pyx_v_self, struct __pyx_obj_4core_5rect2_5Rect2_Rect2 *__pyx_v_v); /* proto */
-static PyObject *__pyx_pf_4core_9transform_11Transform2D_11Transform2D_30xform_inv_rect2(struct __pyx_obj_4core_9transform_11Transform2D_Transform2D *__pyx_v_self, struct __pyx_obj_4core_5rect2_5Rect2_Rect2 *__pyx_v_v); /* proto */
-static PyObject *__pyx_pf_4core_9transform_11Transform2D_11Transform2D_32new_identity(struct __pyx_obj_4core_9transform_11Transform2D_Transform2D *__pyx_v_self); /* proto */
-static PyObject *__pyx_pf_4core_9transform_11Transform2D_11Transform2D_34__reduce_cython__(CYTHON_UNUSED struct __pyx_obj_4core_9transform_11Transform2D_Transform2D *__pyx_v_self); /* proto */
-static PyObject *__pyx_pf_4core_9transform_11Transform2D_11Transform2D_36__setstate_cython__(CYTHON_UNUSED struct __pyx_obj_4core_9transform_11Transform2D_Transform2D *__pyx_v_self, CYTHON_UNUSED PyObject *__pyx_v___pyx_state); /* proto */
+static PyObject *__pyx_pf_4core_9transform_11Transform2D_11Transform2D_2new_with_axis_origin(CYTHON_UNUSED PyObject *__pyx_v_self, struct __pyx_obj_4core_7vector2_7Vector2_Vector2 *__pyx_v_x_axis, struct __pyx_obj_4core_7vector2_7Vector2_Vector2 *__pyx_v_y_axis, struct __pyx_obj_4core_7vector2_7Vector2_Vector2 *__pyx_v_origin); /* proto */
+static PyObject *__pyx_pf_4core_9transform_11Transform2D_11Transform2D_4__str__(struct __pyx_obj_4core_9transform_11Transform2D_Transform2D *__pyx_v_self); /* proto */
+static PyObject *__pyx_pf_4core_9transform_11Transform2D_11Transform2D_6inverse(struct __pyx_obj_4core_9transform_11Transform2D_Transform2D *__pyx_v_self); /* proto */
+static PyObject *__pyx_pf_4core_9transform_11Transform2D_11Transform2D_8get_rotation(struct __pyx_obj_4core_9transform_11Transform2D_Transform2D *__pyx_v_self); /* proto */
+static PyObject *__pyx_pf_4core_9transform_11Transform2D_11Transform2D_10get_origin(struct __pyx_obj_4core_9transform_11Transform2D_Transform2D *__pyx_v_self); /* proto */
+static PyObject *__pyx_pf_4core_9transform_11Transform2D_11Transform2D_12get_scale(struct __pyx_obj_4core_9transform_11Transform2D_Transform2D *__pyx_v_self); /* proto */
+static PyObject *__pyx_pf_4core_9transform_11Transform2D_11Transform2D_14orthonormalized(struct __pyx_obj_4core_9transform_11Transform2D_Transform2D *__pyx_v_self); /* proto */
+static PyObject *__pyx_pf_4core_9transform_11Transform2D_11Transform2D_16rotated(struct __pyx_obj_4core_9transform_11Transform2D_Transform2D *__pyx_v_self, godot_real __pyx_v_phi); /* proto */
+static PyObject *__pyx_pf_4core_9transform_11Transform2D_11Transform2D_18scaled(struct __pyx_obj_4core_9transform_11Transform2D_Transform2D *__pyx_v_self, struct __pyx_obj_4core_7vector2_7Vector2_Vector2 *__pyx_v_scale); /* proto */
+static PyObject *__pyx_pf_4core_9transform_11Transform2D_11Transform2D_20xform_vector2(struct __pyx_obj_4core_9transform_11Transform2D_Transform2D *__pyx_v_self, struct __pyx_obj_4core_7vector2_7Vector2_Vector2 *__pyx_v_v); /* proto */
+static PyObject *__pyx_pf_4core_9transform_11Transform2D_11Transform2D_22xform_inv_vector2(struct __pyx_obj_4core_9transform_11Transform2D_Transform2D *__pyx_v_self, struct __pyx_obj_4core_7vector2_7Vector2_Vector2 *__pyx_v_v); /* proto */
+static PyObject *__pyx_pf_4core_9transform_11Transform2D_11Transform2D_24interpolate_with(struct __pyx_obj_4core_9transform_11Transform2D_Transform2D *__pyx_v_self, struct __pyx_obj_4core_9transform_11Transform2D_Transform2D *__pyx_v_m, godot_real __pyx_v_c); /* proto */
+static PyObject *__pyx_pf_4core_9transform_11Transform2D_11Transform2D_26__eq__(struct __pyx_obj_4core_9transform_11Transform2D_Transform2D *__pyx_v_self, struct __pyx_obj_4core_9transform_11Transform2D_Transform2D *__pyx_v_other); /* proto */
+static PyObject *__pyx_pf_4core_9transform_11Transform2D_11Transform2D_28__mult__(struct __pyx_obj_4core_9transform_11Transform2D_Transform2D *__pyx_v_self, struct __pyx_obj_4core_9transform_11Transform2D_Transform2D *__pyx_v_other); /* proto */
+static PyObject *__pyx_pf_4core_9transform_11Transform2D_11Transform2D_30xform_rect2(struct __pyx_obj_4core_9transform_11Transform2D_Transform2D *__pyx_v_self, struct __pyx_obj_4core_5rect2_5Rect2_Rect2 *__pyx_v_v); /* proto */
+static PyObject *__pyx_pf_4core_9transform_11Transform2D_11Transform2D_32xform_inv_rect2(struct __pyx_obj_4core_9transform_11Transform2D_Transform2D *__pyx_v_self, struct __pyx_obj_4core_5rect2_5Rect2_Rect2 *__pyx_v_v); /* proto */
+static PyObject *__pyx_pf_4core_9transform_11Transform2D_11Transform2D_34new_identity(struct __pyx_obj_4core_9transform_11Transform2D_Transform2D *__pyx_v_self); /* proto */
+static PyObject *__pyx_pf_4core_9transform_11Transform2D_11Transform2D_36__reduce_cython__(CYTHON_UNUSED struct __pyx_obj_4core_9transform_11Transform2D_Transform2D *__pyx_v_self); /* proto */
+static PyObject *__pyx_pf_4core_9transform_11Transform2D_11Transform2D_38__setstate_cython__(CYTHON_UNUSED struct __pyx_obj_4core_9transform_11Transform2D_Transform2D *__pyx_v_self, CYTHON_UNUSED PyObject *__pyx_v___pyx_state); /* proto */
 static PyObject *__pyx_tp_new_4core_9transform_11Transform2D_Transform2D(PyTypeObject *t, PyObject *a, PyObject *k); /*proto*/
 static PyObject *__pyx_tuple_;
 static PyObject *__pyx_tuple__2;
 static PyObject *__pyx_tuple__3;
 static PyObject *__pyx_tuple__4;
 static PyObject *__pyx_tuple__5;
+static PyObject *__pyx_tuple__6;
+static PyObject *__pyx_codeobj__7;
 /* Late includes */
 
 /* "core/transform/Transform2D.pyx":7
@@ -1513,11 +1560,11 @@ static int __pyx_pw_4core_9transform_11Transform2D_11Transform2D_1__init__(PyObj
         case  1:
         if (likely((values[1] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_pos)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("__init__", 1, 2, 2, 1); __PYX_ERR(1, 13, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("__init__", 1, 2, 2, 1); __PYX_ERR(0, 13, __pyx_L3_error)
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "__init__") < 0)) __PYX_ERR(1, 13, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "__init__") < 0)) __PYX_ERR(0, 13, __pyx_L3_error)
       }
     } else if (PyTuple_GET_SIZE(__pyx_args) != 2) {
       goto __pyx_L5_argtuple_error;
@@ -1525,18 +1572,18 @@ static int __pyx_pw_4core_9transform_11Transform2D_11Transform2D_1__init__(PyObj
       values[0] = PyTuple_GET_ITEM(__pyx_args, 0);
       values[1] = PyTuple_GET_ITEM(__pyx_args, 1);
     }
-    __pyx_v_rotation = __pyx_PyFloat_AsFloat(values[0]); if (unlikely((__pyx_v_rotation == ((godot_real)-1)) && PyErr_Occurred())) __PYX_ERR(1, 13, __pyx_L3_error)
+    __pyx_v_rotation = __pyx_PyFloat_AsFloat(values[0]); if (unlikely((__pyx_v_rotation == ((godot_real)-1)) && PyErr_Occurred())) __PYX_ERR(0, 13, __pyx_L3_error)
     __pyx_v_pos = ((struct __pyx_obj_4core_7vector2_7Vector2_Vector2 *)values[1]);
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("__init__", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(1, 13, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("__init__", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 13, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("core.transform.Transform2D.Transform2D.__init__", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return -1;
   __pyx_L4_argument_unpacking_done:;
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_pos), __pyx_ptype_4core_7vector2_7Vector2_Vector2, 1, "pos", 0))) __PYX_ERR(1, 13, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_pos), __pyx_ptype_4core_7vector2_7Vector2_Vector2, 1, "pos", 0))) __PYX_ERR(0, 13, __pyx_L1_error)
   __pyx_r = __pyx_pf_4core_9transform_11Transform2D_11Transform2D___init__(((struct __pyx_obj_4core_9transform_11Transform2D_Transform2D *)__pyx_v_self), __pyx_v_rotation, __pyx_v_pos);
 
   /* function exit code */
@@ -1558,7 +1605,7 @@ static int __pyx_pf_4core_9transform_11Transform2D_11Transform2D___init__(struct
  *     def __init__(self,godot_real rotation, Vector2 pos):
  *         api_core.godot_transform2d_new(&self._native, rotation, &pos._native)             # <<<<<<<<<<<<<<
  * 
- *     #def new_with_axis_origin(self, Vector3 x_axis, Vector3 y_axis, Vector3 z_axis, Vector3 origin):
+ *     @staticmethod
  */
   api_core->godot_transform2d_new((&__pyx_v_self->_native), __pyx_v_rotation, (&__pyx_v_pos->_native));
 
@@ -1576,8 +1623,173 @@ static int __pyx_pf_4core_9transform_11Transform2D_11Transform2D___init__(struct
   return __pyx_r;
 }
 
-/* "core/transform/Transform2D.pyx":19
- *     #    api_core.godot_transform2d_new_with_axis_origin(&self._native, &x_axis._native, &y_axis._native, &z_axis._native, &origin._native)
+/* "core/transform/Transform2D.pyx":17
+ * 
+ *     @staticmethod
+ *     def new_with_axis_origin(self, Vector2 x_axis, Vector2 y_axis, Vector2 origin):             # <<<<<<<<<<<<<<
+ *         cdef Transform2D transform = Transform2D.__new__(Transform2D)
+ *         api_core.godot_transform2d_new_axis_origin(&transform._native, &x_axis._native, &y_axis._native, &origin._native)
+ */
+
+/* Python wrapper */
+static PyObject *__pyx_pw_4core_9transform_11Transform2D_11Transform2D_3new_with_axis_origin(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
+static PyMethodDef __pyx_mdef_4core_9transform_11Transform2D_11Transform2D_3new_with_axis_origin = {"new_with_axis_origin", (PyCFunction)(void*)(PyCFunctionWithKeywords)__pyx_pw_4core_9transform_11Transform2D_11Transform2D_3new_with_axis_origin, METH_VARARGS|METH_KEYWORDS, 0};
+static PyObject *__pyx_pw_4core_9transform_11Transform2D_11Transform2D_3new_with_axis_origin(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
+  CYTHON_UNUSED PyObject *__pyx_v_self = 0;
+  struct __pyx_obj_4core_7vector2_7Vector2_Vector2 *__pyx_v_x_axis = 0;
+  struct __pyx_obj_4core_7vector2_7Vector2_Vector2 *__pyx_v_y_axis = 0;
+  struct __pyx_obj_4core_7vector2_7Vector2_Vector2 *__pyx_v_origin = 0;
+  int __pyx_lineno = 0;
+  const char *__pyx_filename = NULL;
+  int __pyx_clineno = 0;
+  PyObject *__pyx_r = 0;
+  __Pyx_RefNannyDeclarations
+  __Pyx_RefNannySetupContext("new_with_axis_origin (wrapper)", 0);
+  {
+    static PyObject **__pyx_pyargnames[] = {&__pyx_n_s_self,&__pyx_n_s_x_axis,&__pyx_n_s_y_axis,&__pyx_n_s_origin,0};
+    PyObject* values[4] = {0,0,0,0};
+    if (unlikely(__pyx_kwds)) {
+      Py_ssize_t kw_args;
+      const Py_ssize_t pos_args = PyTuple_GET_SIZE(__pyx_args);
+      switch (pos_args) {
+        case  4: values[3] = PyTuple_GET_ITEM(__pyx_args, 3);
+        CYTHON_FALLTHROUGH;
+        case  3: values[2] = PyTuple_GET_ITEM(__pyx_args, 2);
+        CYTHON_FALLTHROUGH;
+        case  2: values[1] = PyTuple_GET_ITEM(__pyx_args, 1);
+        CYTHON_FALLTHROUGH;
+        case  1: values[0] = PyTuple_GET_ITEM(__pyx_args, 0);
+        CYTHON_FALLTHROUGH;
+        case  0: break;
+        default: goto __pyx_L5_argtuple_error;
+      }
+      kw_args = PyDict_Size(__pyx_kwds);
+      switch (pos_args) {
+        case  0:
+        if (likely((values[0] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_self)) != 0)) kw_args--;
+        else goto __pyx_L5_argtuple_error;
+        CYTHON_FALLTHROUGH;
+        case  1:
+        if (likely((values[1] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_x_axis)) != 0)) kw_args--;
+        else {
+          __Pyx_RaiseArgtupleInvalid("new_with_axis_origin", 1, 4, 4, 1); __PYX_ERR(0, 17, __pyx_L3_error)
+        }
+        CYTHON_FALLTHROUGH;
+        case  2:
+        if (likely((values[2] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_y_axis)) != 0)) kw_args--;
+        else {
+          __Pyx_RaiseArgtupleInvalid("new_with_axis_origin", 1, 4, 4, 2); __PYX_ERR(0, 17, __pyx_L3_error)
+        }
+        CYTHON_FALLTHROUGH;
+        case  3:
+        if (likely((values[3] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_origin)) != 0)) kw_args--;
+        else {
+          __Pyx_RaiseArgtupleInvalid("new_with_axis_origin", 1, 4, 4, 3); __PYX_ERR(0, 17, __pyx_L3_error)
+        }
+      }
+      if (unlikely(kw_args > 0)) {
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "new_with_axis_origin") < 0)) __PYX_ERR(0, 17, __pyx_L3_error)
+      }
+    } else if (PyTuple_GET_SIZE(__pyx_args) != 4) {
+      goto __pyx_L5_argtuple_error;
+    } else {
+      values[0] = PyTuple_GET_ITEM(__pyx_args, 0);
+      values[1] = PyTuple_GET_ITEM(__pyx_args, 1);
+      values[2] = PyTuple_GET_ITEM(__pyx_args, 2);
+      values[3] = PyTuple_GET_ITEM(__pyx_args, 3);
+    }
+    __pyx_v_self = values[0];
+    __pyx_v_x_axis = ((struct __pyx_obj_4core_7vector2_7Vector2_Vector2 *)values[1]);
+    __pyx_v_y_axis = ((struct __pyx_obj_4core_7vector2_7Vector2_Vector2 *)values[2]);
+    __pyx_v_origin = ((struct __pyx_obj_4core_7vector2_7Vector2_Vector2 *)values[3]);
+  }
+  goto __pyx_L4_argument_unpacking_done;
+  __pyx_L5_argtuple_error:;
+  __Pyx_RaiseArgtupleInvalid("new_with_axis_origin", 1, 4, 4, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 17, __pyx_L3_error)
+  __pyx_L3_error:;
+  __Pyx_AddTraceback("core.transform.Transform2D.Transform2D.new_with_axis_origin", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_RefNannyFinishContext();
+  return NULL;
+  __pyx_L4_argument_unpacking_done:;
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_x_axis), __pyx_ptype_4core_7vector2_7Vector2_Vector2, 1, "x_axis", 0))) __PYX_ERR(0, 17, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_y_axis), __pyx_ptype_4core_7vector2_7Vector2_Vector2, 1, "y_axis", 0))) __PYX_ERR(0, 17, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_origin), __pyx_ptype_4core_7vector2_7Vector2_Vector2, 1, "origin", 0))) __PYX_ERR(0, 17, __pyx_L1_error)
+  __pyx_r = __pyx_pf_4core_9transform_11Transform2D_11Transform2D_2new_with_axis_origin(__pyx_v_self, __pyx_v_x_axis, __pyx_v_y_axis, __pyx_v_origin);
+
+  /* function exit code */
+  goto __pyx_L0;
+  __pyx_L1_error:;
+  __pyx_r = NULL;
+  __pyx_L0:;
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+static PyObject *__pyx_pf_4core_9transform_11Transform2D_11Transform2D_2new_with_axis_origin(CYTHON_UNUSED PyObject *__pyx_v_self, struct __pyx_obj_4core_7vector2_7Vector2_Vector2 *__pyx_v_x_axis, struct __pyx_obj_4core_7vector2_7Vector2_Vector2 *__pyx_v_y_axis, struct __pyx_obj_4core_7vector2_7Vector2_Vector2 *__pyx_v_origin) {
+  struct __pyx_obj_4core_9transform_11Transform2D_Transform2D *__pyx_v_transform = 0;
+  PyObject *__pyx_r = NULL;
+  __Pyx_RefNannyDeclarations
+  PyObject *__pyx_t_1 = NULL;
+  int __pyx_lineno = 0;
+  const char *__pyx_filename = NULL;
+  int __pyx_clineno = 0;
+  __Pyx_RefNannySetupContext("new_with_axis_origin", 0);
+
+  /* "core/transform/Transform2D.pyx":18
+ *     @staticmethod
+ *     def new_with_axis_origin(self, Vector2 x_axis, Vector2 y_axis, Vector2 origin):
+ *         cdef Transform2D transform = Transform2D.__new__(Transform2D)             # <<<<<<<<<<<<<<
+ *         api_core.godot_transform2d_new_axis_origin(&transform._native, &x_axis._native, &y_axis._native, &origin._native)
+ *         return transform
+ */
+  __pyx_t_1 = ((PyObject *)__pyx_tp_new_4core_9transform_11Transform2D_Transform2D(((PyTypeObject *)__pyx_ptype_4core_9transform_11Transform2D_Transform2D), __pyx_empty_tuple, NULL)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 18, __pyx_L1_error)
+  __Pyx_GOTREF(((PyObject *)__pyx_t_1));
+  __pyx_v_transform = ((struct __pyx_obj_4core_9transform_11Transform2D_Transform2D *)__pyx_t_1);
+  __pyx_t_1 = 0;
+
+  /* "core/transform/Transform2D.pyx":19
+ *     def new_with_axis_origin(self, Vector2 x_axis, Vector2 y_axis, Vector2 origin):
+ *         cdef Transform2D transform = Transform2D.__new__(Transform2D)
+ *         api_core.godot_transform2d_new_axis_origin(&transform._native, &x_axis._native, &y_axis._native, &origin._native)             # <<<<<<<<<<<<<<
+ *         return transform
+ * 
+ */
+  api_core->godot_transform2d_new_axis_origin((&__pyx_v_transform->_native), (&__pyx_v_x_axis->_native), (&__pyx_v_y_axis->_native), (&__pyx_v_origin->_native));
+
+  /* "core/transform/Transform2D.pyx":20
+ *         cdef Transform2D transform = Transform2D.__new__(Transform2D)
+ *         api_core.godot_transform2d_new_axis_origin(&transform._native, &x_axis._native, &y_axis._native, &origin._native)
+ *         return transform             # <<<<<<<<<<<<<<
+ * 
+ *     def __str__(self):
+ */
+  __Pyx_XDECREF(__pyx_r);
+  __Pyx_INCREF(((PyObject *)__pyx_v_transform));
+  __pyx_r = ((PyObject *)__pyx_v_transform);
+  goto __pyx_L0;
+
+  /* "core/transform/Transform2D.pyx":17
+ * 
+ *     @staticmethod
+ *     def new_with_axis_origin(self, Vector2 x_axis, Vector2 y_axis, Vector2 origin):             # <<<<<<<<<<<<<<
+ *         cdef Transform2D transform = Transform2D.__new__(Transform2D)
+ *         api_core.godot_transform2d_new_axis_origin(&transform._native, &x_axis._native, &y_axis._native, &origin._native)
+ */
+
+  /* function exit code */
+  __pyx_L1_error:;
+  __Pyx_XDECREF(__pyx_t_1);
+  __Pyx_AddTraceback("core.transform.Transform2D.Transform2D.new_with_axis_origin", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __pyx_r = NULL;
+  __pyx_L0:;
+  __Pyx_XDECREF((PyObject *)__pyx_v_transform);
+  __Pyx_XGIVEREF(__pyx_r);
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+/* "core/transform/Transform2D.pyx":22
+ *         return transform
  * 
  *     def __str__(self):             # <<<<<<<<<<<<<<
  *         return api_core.godot_transform2d_as_string(&self._native)
@@ -1585,19 +1797,19 @@ static int __pyx_pf_4core_9transform_11Transform2D_11Transform2D___init__(struct
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_4core_9transform_11Transform2D_11Transform2D_3__str__(PyObject *__pyx_v_self); /*proto*/
-static PyObject *__pyx_pw_4core_9transform_11Transform2D_11Transform2D_3__str__(PyObject *__pyx_v_self) {
+static PyObject *__pyx_pw_4core_9transform_11Transform2D_11Transform2D_5__str__(PyObject *__pyx_v_self); /*proto*/
+static PyObject *__pyx_pw_4core_9transform_11Transform2D_11Transform2D_5__str__(PyObject *__pyx_v_self) {
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__str__ (wrapper)", 0);
-  __pyx_r = __pyx_pf_4core_9transform_11Transform2D_11Transform2D_2__str__(((struct __pyx_obj_4core_9transform_11Transform2D_Transform2D *)__pyx_v_self));
+  __pyx_r = __pyx_pf_4core_9transform_11Transform2D_11Transform2D_4__str__(((struct __pyx_obj_4core_9transform_11Transform2D_Transform2D *)__pyx_v_self));
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_4core_9transform_11Transform2D_11Transform2D_2__str__(struct __pyx_obj_4core_9transform_11Transform2D_Transform2D *__pyx_v_self) {
+static PyObject *__pyx_pf_4core_9transform_11Transform2D_11Transform2D_4__str__(struct __pyx_obj_4core_9transform_11Transform2D_Transform2D *__pyx_v_self) {
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   PyObject *__pyx_t_1 = NULL;
@@ -1606,7 +1818,7 @@ static PyObject *__pyx_pf_4core_9transform_11Transform2D_11Transform2D_2__str__(
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__str__", 0);
 
-  /* "core/transform/Transform2D.pyx":20
+  /* "core/transform/Transform2D.pyx":23
  * 
  *     def __str__(self):
  *         return api_core.godot_transform2d_as_string(&self._native)             # <<<<<<<<<<<<<<
@@ -1614,14 +1826,14 @@ static PyObject *__pyx_pf_4core_9transform_11Transform2D_11Transform2D_2__str__(
  *     def inverse(self):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __pyx_convert__to_py_godot_string(api_core->godot_transform2d_as_string((&__pyx_v_self->_native))); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 20, __pyx_L1_error)
+  __pyx_t_1 = __pyx_convert__to_py_godot_string(api_core->godot_transform2d_as_string((&__pyx_v_self->_native))); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 23, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "core/transform/Transform2D.pyx":19
- *     #    api_core.godot_transform2d_new_with_axis_origin(&self._native, &x_axis._native, &y_axis._native, &z_axis._native, &origin._native)
+  /* "core/transform/Transform2D.pyx":22
+ *         return transform
  * 
  *     def __str__(self):             # <<<<<<<<<<<<<<
  *         return api_core.godot_transform2d_as_string(&self._native)
@@ -1639,7 +1851,7 @@ static PyObject *__pyx_pf_4core_9transform_11Transform2D_11Transform2D_2__str__(
   return __pyx_r;
 }
 
-/* "core/transform/Transform2D.pyx":22
+/* "core/transform/Transform2D.pyx":25
  *         return api_core.godot_transform2d_as_string(&self._native)
  * 
  *     def inverse(self):             # <<<<<<<<<<<<<<
@@ -1648,19 +1860,19 @@ static PyObject *__pyx_pf_4core_9transform_11Transform2D_11Transform2D_2__str__(
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_4core_9transform_11Transform2D_11Transform2D_5inverse(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused); /*proto*/
-static PyObject *__pyx_pw_4core_9transform_11Transform2D_11Transform2D_5inverse(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused) {
+static PyObject *__pyx_pw_4core_9transform_11Transform2D_11Transform2D_7inverse(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused); /*proto*/
+static PyObject *__pyx_pw_4core_9transform_11Transform2D_11Transform2D_7inverse(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused) {
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("inverse (wrapper)", 0);
-  __pyx_r = __pyx_pf_4core_9transform_11Transform2D_11Transform2D_4inverse(((struct __pyx_obj_4core_9transform_11Transform2D_Transform2D *)__pyx_v_self));
+  __pyx_r = __pyx_pf_4core_9transform_11Transform2D_11Transform2D_6inverse(((struct __pyx_obj_4core_9transform_11Transform2D_Transform2D *)__pyx_v_self));
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_4core_9transform_11Transform2D_11Transform2D_4inverse(struct __pyx_obj_4core_9transform_11Transform2D_Transform2D *__pyx_v_self) {
+static PyObject *__pyx_pf_4core_9transform_11Transform2D_11Transform2D_6inverse(struct __pyx_obj_4core_9transform_11Transform2D_Transform2D *__pyx_v_self) {
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   PyObject *__pyx_t_1 = NULL;
@@ -1670,7 +1882,7 @@ static PyObject *__pyx_pf_4core_9transform_11Transform2D_11Transform2D_4inverse(
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("inverse", 0);
 
-  /* "core/transform/Transform2D.pyx":23
+  /* "core/transform/Transform2D.pyx":26
  * 
  *     def inverse(self):
  *         return Transform2D(api_core.godot_transform2d_inverse(&self._native))             # <<<<<<<<<<<<<<
@@ -1678,16 +1890,16 @@ static PyObject *__pyx_pf_4core_9transform_11Transform2D_11Transform2D_4inverse(
  *     def get_rotation(self):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __pyx_convert__to_py_godot_transform2d(api_core->godot_transform2d_inverse((&__pyx_v_self->_native))); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 23, __pyx_L1_error)
+  __pyx_t_1 = __pyx_convert__to_py_godot_transform2d(api_core->godot_transform2d_inverse((&__pyx_v_self->_native))); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 26, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = __Pyx_PyObject_CallOneArg(((PyObject *)__pyx_ptype_4core_9transform_11Transform2D_Transform2D), __pyx_t_1); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 23, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_CallOneArg(((PyObject *)__pyx_ptype_4core_9transform_11Transform2D_Transform2D), __pyx_t_1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 26, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_r = __pyx_t_2;
   __pyx_t_2 = 0;
   goto __pyx_L0;
 
-  /* "core/transform/Transform2D.pyx":22
+  /* "core/transform/Transform2D.pyx":25
  *         return api_core.godot_transform2d_as_string(&self._native)
  * 
  *     def inverse(self):             # <<<<<<<<<<<<<<
@@ -1707,7 +1919,7 @@ static PyObject *__pyx_pf_4core_9transform_11Transform2D_11Transform2D_4inverse(
   return __pyx_r;
 }
 
-/* "core/transform/Transform2D.pyx":25
+/* "core/transform/Transform2D.pyx":28
  *         return Transform2D(api_core.godot_transform2d_inverse(&self._native))
  * 
  *     def get_rotation(self):             # <<<<<<<<<<<<<<
@@ -1716,19 +1928,19 @@ static PyObject *__pyx_pf_4core_9transform_11Transform2D_11Transform2D_4inverse(
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_4core_9transform_11Transform2D_11Transform2D_7get_rotation(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused); /*proto*/
-static PyObject *__pyx_pw_4core_9transform_11Transform2D_11Transform2D_7get_rotation(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused) {
+static PyObject *__pyx_pw_4core_9transform_11Transform2D_11Transform2D_9get_rotation(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused); /*proto*/
+static PyObject *__pyx_pw_4core_9transform_11Transform2D_11Transform2D_9get_rotation(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused) {
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("get_rotation (wrapper)", 0);
-  __pyx_r = __pyx_pf_4core_9transform_11Transform2D_11Transform2D_6get_rotation(((struct __pyx_obj_4core_9transform_11Transform2D_Transform2D *)__pyx_v_self));
+  __pyx_r = __pyx_pf_4core_9transform_11Transform2D_11Transform2D_8get_rotation(((struct __pyx_obj_4core_9transform_11Transform2D_Transform2D *)__pyx_v_self));
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_4core_9transform_11Transform2D_11Transform2D_6get_rotation(struct __pyx_obj_4core_9transform_11Transform2D_Transform2D *__pyx_v_self) {
+static PyObject *__pyx_pf_4core_9transform_11Transform2D_11Transform2D_8get_rotation(struct __pyx_obj_4core_9transform_11Transform2D_Transform2D *__pyx_v_self) {
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   PyObject *__pyx_t_1 = NULL;
@@ -1737,7 +1949,7 @@ static PyObject *__pyx_pf_4core_9transform_11Transform2D_11Transform2D_6get_rota
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("get_rotation", 0);
 
-  /* "core/transform/Transform2D.pyx":26
+  /* "core/transform/Transform2D.pyx":29
  * 
  *     def get_rotation(self):
  *         return api_core.godot_transform2d_get_rotation(&self._native)             # <<<<<<<<<<<<<<
@@ -1745,13 +1957,13 @@ static PyObject *__pyx_pf_4core_9transform_11Transform2D_11Transform2D_6get_rota
  *     def get_origin(self):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = PyFloat_FromDouble(api_core->godot_transform2d_get_rotation((&__pyx_v_self->_native))); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 26, __pyx_L1_error)
+  __pyx_t_1 = PyFloat_FromDouble(api_core->godot_transform2d_get_rotation((&__pyx_v_self->_native))); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 29, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "core/transform/Transform2D.pyx":25
+  /* "core/transform/Transform2D.pyx":28
  *         return Transform2D(api_core.godot_transform2d_inverse(&self._native))
  * 
  *     def get_rotation(self):             # <<<<<<<<<<<<<<
@@ -1770,7 +1982,7 @@ static PyObject *__pyx_pf_4core_9transform_11Transform2D_11Transform2D_6get_rota
   return __pyx_r;
 }
 
-/* "core/transform/Transform2D.pyx":28
+/* "core/transform/Transform2D.pyx":31
  *         return api_core.godot_transform2d_get_rotation(&self._native)
  * 
  *     def get_origin(self):             # <<<<<<<<<<<<<<
@@ -1779,19 +1991,19 @@ static PyObject *__pyx_pf_4core_9transform_11Transform2D_11Transform2D_6get_rota
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_4core_9transform_11Transform2D_11Transform2D_9get_origin(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused); /*proto*/
-static PyObject *__pyx_pw_4core_9transform_11Transform2D_11Transform2D_9get_origin(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused) {
+static PyObject *__pyx_pw_4core_9transform_11Transform2D_11Transform2D_11get_origin(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused); /*proto*/
+static PyObject *__pyx_pw_4core_9transform_11Transform2D_11Transform2D_11get_origin(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused) {
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("get_origin (wrapper)", 0);
-  __pyx_r = __pyx_pf_4core_9transform_11Transform2D_11Transform2D_8get_origin(((struct __pyx_obj_4core_9transform_11Transform2D_Transform2D *)__pyx_v_self));
+  __pyx_r = __pyx_pf_4core_9transform_11Transform2D_11Transform2D_10get_origin(((struct __pyx_obj_4core_9transform_11Transform2D_Transform2D *)__pyx_v_self));
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_4core_9transform_11Transform2D_11Transform2D_8get_origin(struct __pyx_obj_4core_9transform_11Transform2D_Transform2D *__pyx_v_self) {
+static PyObject *__pyx_pf_4core_9transform_11Transform2D_11Transform2D_10get_origin(struct __pyx_obj_4core_9transform_11Transform2D_Transform2D *__pyx_v_self) {
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   PyObject *__pyx_t_1 = NULL;
@@ -1800,7 +2012,7 @@ static PyObject *__pyx_pf_4core_9transform_11Transform2D_11Transform2D_8get_orig
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("get_origin", 0);
 
-  /* "core/transform/Transform2D.pyx":29
+  /* "core/transform/Transform2D.pyx":32
  * 
  *     def get_origin(self):
  *         return Vector2.new_static(api_core.godot_transform2d_get_origin(&self._native))             # <<<<<<<<<<<<<<
@@ -1808,13 +2020,13 @@ static PyObject *__pyx_pf_4core_9transform_11Transform2D_11Transform2D_8get_orig
  *     def get_scale(self):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = ((PyObject *)__pyx_f_4core_7vector2_7Vector2_7Vector2_new_static(api_core->godot_transform2d_get_origin((&__pyx_v_self->_native)))); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 29, __pyx_L1_error)
+  __pyx_t_1 = ((PyObject *)__pyx_f_4core_7vector2_7Vector2_7Vector2_new_static(api_core->godot_transform2d_get_origin((&__pyx_v_self->_native)))); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 32, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "core/transform/Transform2D.pyx":28
+  /* "core/transform/Transform2D.pyx":31
  *         return api_core.godot_transform2d_get_rotation(&self._native)
  * 
  *     def get_origin(self):             # <<<<<<<<<<<<<<
@@ -1833,7 +2045,7 @@ static PyObject *__pyx_pf_4core_9transform_11Transform2D_11Transform2D_8get_orig
   return __pyx_r;
 }
 
-/* "core/transform/Transform2D.pyx":31
+/* "core/transform/Transform2D.pyx":34
  *         return Vector2.new_static(api_core.godot_transform2d_get_origin(&self._native))
  * 
  *     def get_scale(self):             # <<<<<<<<<<<<<<
@@ -1842,19 +2054,19 @@ static PyObject *__pyx_pf_4core_9transform_11Transform2D_11Transform2D_8get_orig
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_4core_9transform_11Transform2D_11Transform2D_11get_scale(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused); /*proto*/
-static PyObject *__pyx_pw_4core_9transform_11Transform2D_11Transform2D_11get_scale(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused) {
+static PyObject *__pyx_pw_4core_9transform_11Transform2D_11Transform2D_13get_scale(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused); /*proto*/
+static PyObject *__pyx_pw_4core_9transform_11Transform2D_11Transform2D_13get_scale(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused) {
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("get_scale (wrapper)", 0);
-  __pyx_r = __pyx_pf_4core_9transform_11Transform2D_11Transform2D_10get_scale(((struct __pyx_obj_4core_9transform_11Transform2D_Transform2D *)__pyx_v_self));
+  __pyx_r = __pyx_pf_4core_9transform_11Transform2D_11Transform2D_12get_scale(((struct __pyx_obj_4core_9transform_11Transform2D_Transform2D *)__pyx_v_self));
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_4core_9transform_11Transform2D_11Transform2D_10get_scale(struct __pyx_obj_4core_9transform_11Transform2D_Transform2D *__pyx_v_self) {
+static PyObject *__pyx_pf_4core_9transform_11Transform2D_11Transform2D_12get_scale(struct __pyx_obj_4core_9transform_11Transform2D_Transform2D *__pyx_v_self) {
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   PyObject *__pyx_t_1 = NULL;
@@ -1863,7 +2075,7 @@ static PyObject *__pyx_pf_4core_9transform_11Transform2D_11Transform2D_10get_sca
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("get_scale", 0);
 
-  /* "core/transform/Transform2D.pyx":32
+  /* "core/transform/Transform2D.pyx":35
  * 
  *     def get_scale(self):
  *         return Vector2.new_static(api_core.godot_transform2d_get_scale(&self._native))             # <<<<<<<<<<<<<<
@@ -1871,13 +2083,13 @@ static PyObject *__pyx_pf_4core_9transform_11Transform2D_11Transform2D_10get_sca
  *     def orthonormalized(self):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = ((PyObject *)__pyx_f_4core_7vector2_7Vector2_7Vector2_new_static(api_core->godot_transform2d_get_scale((&__pyx_v_self->_native)))); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 32, __pyx_L1_error)
+  __pyx_t_1 = ((PyObject *)__pyx_f_4core_7vector2_7Vector2_7Vector2_new_static(api_core->godot_transform2d_get_scale((&__pyx_v_self->_native)))); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 35, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "core/transform/Transform2D.pyx":31
+  /* "core/transform/Transform2D.pyx":34
  *         return Vector2.new_static(api_core.godot_transform2d_get_origin(&self._native))
  * 
  *     def get_scale(self):             # <<<<<<<<<<<<<<
@@ -1896,7 +2108,7 @@ static PyObject *__pyx_pf_4core_9transform_11Transform2D_11Transform2D_10get_sca
   return __pyx_r;
 }
 
-/* "core/transform/Transform2D.pyx":34
+/* "core/transform/Transform2D.pyx":37
  *         return Vector2.new_static(api_core.godot_transform2d_get_scale(&self._native))
  * 
  *     def orthonormalized(self):             # <<<<<<<<<<<<<<
@@ -1905,19 +2117,19 @@ static PyObject *__pyx_pf_4core_9transform_11Transform2D_11Transform2D_10get_sca
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_4core_9transform_11Transform2D_11Transform2D_13orthonormalized(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused); /*proto*/
-static PyObject *__pyx_pw_4core_9transform_11Transform2D_11Transform2D_13orthonormalized(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused) {
+static PyObject *__pyx_pw_4core_9transform_11Transform2D_11Transform2D_15orthonormalized(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused); /*proto*/
+static PyObject *__pyx_pw_4core_9transform_11Transform2D_11Transform2D_15orthonormalized(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused) {
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("orthonormalized (wrapper)", 0);
-  __pyx_r = __pyx_pf_4core_9transform_11Transform2D_11Transform2D_12orthonormalized(((struct __pyx_obj_4core_9transform_11Transform2D_Transform2D *)__pyx_v_self));
+  __pyx_r = __pyx_pf_4core_9transform_11Transform2D_11Transform2D_14orthonormalized(((struct __pyx_obj_4core_9transform_11Transform2D_Transform2D *)__pyx_v_self));
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_4core_9transform_11Transform2D_11Transform2D_12orthonormalized(struct __pyx_obj_4core_9transform_11Transform2D_Transform2D *__pyx_v_self) {
+static PyObject *__pyx_pf_4core_9transform_11Transform2D_11Transform2D_14orthonormalized(struct __pyx_obj_4core_9transform_11Transform2D_Transform2D *__pyx_v_self) {
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   PyObject *__pyx_t_1 = NULL;
@@ -1926,7 +2138,7 @@ static PyObject *__pyx_pf_4core_9transform_11Transform2D_11Transform2D_12orthono
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("orthonormalized", 0);
 
-  /* "core/transform/Transform2D.pyx":35
+  /* "core/transform/Transform2D.pyx":38
  * 
  *     def orthonormalized(self):
  *         return Transform2D.new_static(api_core.godot_transform2d_orthonormalized(&self._native))             # <<<<<<<<<<<<<<
@@ -1934,13 +2146,13 @@ static PyObject *__pyx_pf_4core_9transform_11Transform2D_11Transform2D_12orthono
  *     def rotated(self, godot_real phi):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = ((PyObject *)__pyx_f_4core_9transform_11Transform2D_11Transform2D_new_static(api_core->godot_transform2d_orthonormalized((&__pyx_v_self->_native)))); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 35, __pyx_L1_error)
+  __pyx_t_1 = ((PyObject *)__pyx_f_4core_9transform_11Transform2D_11Transform2D_new_static(api_core->godot_transform2d_orthonormalized((&__pyx_v_self->_native)))); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 38, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "core/transform/Transform2D.pyx":34
+  /* "core/transform/Transform2D.pyx":37
  *         return Vector2.new_static(api_core.godot_transform2d_get_scale(&self._native))
  * 
  *     def orthonormalized(self):             # <<<<<<<<<<<<<<
@@ -1959,7 +2171,7 @@ static PyObject *__pyx_pf_4core_9transform_11Transform2D_11Transform2D_12orthono
   return __pyx_r;
 }
 
-/* "core/transform/Transform2D.pyx":37
+/* "core/transform/Transform2D.pyx":40
  *         return Transform2D.new_static(api_core.godot_transform2d_orthonormalized(&self._native))
  * 
  *     def rotated(self, godot_real phi):             # <<<<<<<<<<<<<<
@@ -1968,8 +2180,8 @@ static PyObject *__pyx_pf_4core_9transform_11Transform2D_11Transform2D_12orthono
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_4core_9transform_11Transform2D_11Transform2D_15rotated(PyObject *__pyx_v_self, PyObject *__pyx_arg_phi); /*proto*/
-static PyObject *__pyx_pw_4core_9transform_11Transform2D_11Transform2D_15rotated(PyObject *__pyx_v_self, PyObject *__pyx_arg_phi) {
+static PyObject *__pyx_pw_4core_9transform_11Transform2D_11Transform2D_17rotated(PyObject *__pyx_v_self, PyObject *__pyx_arg_phi); /*proto*/
+static PyObject *__pyx_pw_4core_9transform_11Transform2D_11Transform2D_17rotated(PyObject *__pyx_v_self, PyObject *__pyx_arg_phi) {
   godot_real __pyx_v_phi;
   int __pyx_lineno = 0;
   const char *__pyx_filename = NULL;
@@ -1978,7 +2190,7 @@ static PyObject *__pyx_pw_4core_9transform_11Transform2D_11Transform2D_15rotated
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("rotated (wrapper)", 0);
   assert(__pyx_arg_phi); {
-    __pyx_v_phi = __pyx_PyFloat_AsFloat(__pyx_arg_phi); if (unlikely((__pyx_v_phi == ((godot_real)-1)) && PyErr_Occurred())) __PYX_ERR(1, 37, __pyx_L3_error)
+    __pyx_v_phi = __pyx_PyFloat_AsFloat(__pyx_arg_phi); if (unlikely((__pyx_v_phi == ((godot_real)-1)) && PyErr_Occurred())) __PYX_ERR(0, 40, __pyx_L3_error)
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -1986,14 +2198,14 @@ static PyObject *__pyx_pw_4core_9transform_11Transform2D_11Transform2D_15rotated
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  __pyx_r = __pyx_pf_4core_9transform_11Transform2D_11Transform2D_14rotated(((struct __pyx_obj_4core_9transform_11Transform2D_Transform2D *)__pyx_v_self), ((godot_real)__pyx_v_phi));
+  __pyx_r = __pyx_pf_4core_9transform_11Transform2D_11Transform2D_16rotated(((struct __pyx_obj_4core_9transform_11Transform2D_Transform2D *)__pyx_v_self), ((godot_real)__pyx_v_phi));
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_4core_9transform_11Transform2D_11Transform2D_14rotated(struct __pyx_obj_4core_9transform_11Transform2D_Transform2D *__pyx_v_self, godot_real __pyx_v_phi) {
+static PyObject *__pyx_pf_4core_9transform_11Transform2D_11Transform2D_16rotated(struct __pyx_obj_4core_9transform_11Transform2D_Transform2D *__pyx_v_self, godot_real __pyx_v_phi) {
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   PyObject *__pyx_t_1 = NULL;
@@ -2002,7 +2214,7 @@ static PyObject *__pyx_pf_4core_9transform_11Transform2D_11Transform2D_14rotated
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("rotated", 0);
 
-  /* "core/transform/Transform2D.pyx":38
+  /* "core/transform/Transform2D.pyx":41
  * 
  *     def rotated(self, godot_real phi):
  *         return Transform2D.new_static(api_core.godot_transform2d_rotated(&self._native, phi))             # <<<<<<<<<<<<<<
@@ -2010,13 +2222,13 @@ static PyObject *__pyx_pf_4core_9transform_11Transform2D_11Transform2D_14rotated
  *     def scaled(self, Vector2 scale):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = ((PyObject *)__pyx_f_4core_9transform_11Transform2D_11Transform2D_new_static(api_core->godot_transform2d_rotated((&__pyx_v_self->_native), __pyx_v_phi))); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 38, __pyx_L1_error)
+  __pyx_t_1 = ((PyObject *)__pyx_f_4core_9transform_11Transform2D_11Transform2D_new_static(api_core->godot_transform2d_rotated((&__pyx_v_self->_native), __pyx_v_phi))); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 41, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "core/transform/Transform2D.pyx":37
+  /* "core/transform/Transform2D.pyx":40
  *         return Transform2D.new_static(api_core.godot_transform2d_orthonormalized(&self._native))
  * 
  *     def rotated(self, godot_real phi):             # <<<<<<<<<<<<<<
@@ -2035,7 +2247,7 @@ static PyObject *__pyx_pf_4core_9transform_11Transform2D_11Transform2D_14rotated
   return __pyx_r;
 }
 
-/* "core/transform/Transform2D.pyx":40
+/* "core/transform/Transform2D.pyx":43
  *         return Transform2D.new_static(api_core.godot_transform2d_rotated(&self._native, phi))
  * 
  *     def scaled(self, Vector2 scale):             # <<<<<<<<<<<<<<
@@ -2044,16 +2256,16 @@ static PyObject *__pyx_pf_4core_9transform_11Transform2D_11Transform2D_14rotated
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_4core_9transform_11Transform2D_11Transform2D_17scaled(PyObject *__pyx_v_self, PyObject *__pyx_v_scale); /*proto*/
-static PyObject *__pyx_pw_4core_9transform_11Transform2D_11Transform2D_17scaled(PyObject *__pyx_v_self, PyObject *__pyx_v_scale) {
+static PyObject *__pyx_pw_4core_9transform_11Transform2D_11Transform2D_19scaled(PyObject *__pyx_v_self, PyObject *__pyx_v_scale); /*proto*/
+static PyObject *__pyx_pw_4core_9transform_11Transform2D_11Transform2D_19scaled(PyObject *__pyx_v_self, PyObject *__pyx_v_scale) {
   int __pyx_lineno = 0;
   const char *__pyx_filename = NULL;
   int __pyx_clineno = 0;
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("scaled (wrapper)", 0);
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_scale), __pyx_ptype_4core_7vector2_7Vector2_Vector2, 1, "scale", 0))) __PYX_ERR(1, 40, __pyx_L1_error)
-  __pyx_r = __pyx_pf_4core_9transform_11Transform2D_11Transform2D_16scaled(((struct __pyx_obj_4core_9transform_11Transform2D_Transform2D *)__pyx_v_self), ((struct __pyx_obj_4core_7vector2_7Vector2_Vector2 *)__pyx_v_scale));
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_scale), __pyx_ptype_4core_7vector2_7Vector2_Vector2, 1, "scale", 0))) __PYX_ERR(0, 43, __pyx_L1_error)
+  __pyx_r = __pyx_pf_4core_9transform_11Transform2D_11Transform2D_18scaled(((struct __pyx_obj_4core_9transform_11Transform2D_Transform2D *)__pyx_v_self), ((struct __pyx_obj_4core_7vector2_7Vector2_Vector2 *)__pyx_v_scale));
 
   /* function exit code */
   goto __pyx_L0;
@@ -2064,7 +2276,7 @@ static PyObject *__pyx_pw_4core_9transform_11Transform2D_11Transform2D_17scaled(
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_4core_9transform_11Transform2D_11Transform2D_16scaled(struct __pyx_obj_4core_9transform_11Transform2D_Transform2D *__pyx_v_self, struct __pyx_obj_4core_7vector2_7Vector2_Vector2 *__pyx_v_scale) {
+static PyObject *__pyx_pf_4core_9transform_11Transform2D_11Transform2D_18scaled(struct __pyx_obj_4core_9transform_11Transform2D_Transform2D *__pyx_v_self, struct __pyx_obj_4core_7vector2_7Vector2_Vector2 *__pyx_v_scale) {
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   PyObject *__pyx_t_1 = NULL;
@@ -2073,7 +2285,7 @@ static PyObject *__pyx_pf_4core_9transform_11Transform2D_11Transform2D_16scaled(
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("scaled", 0);
 
-  /* "core/transform/Transform2D.pyx":41
+  /* "core/transform/Transform2D.pyx":44
  * 
  *     def scaled(self, Vector2 scale):
  *         return Transform2D.new_static(api_core.godot_transform2d_scaled(&self._native, &scale._native))             # <<<<<<<<<<<<<<
@@ -2081,13 +2293,13 @@ static PyObject *__pyx_pf_4core_9transform_11Transform2D_11Transform2D_16scaled(
  *     def xform_vector2(self, Vector2 v):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = ((PyObject *)__pyx_f_4core_9transform_11Transform2D_11Transform2D_new_static(api_core->godot_transform2d_scaled((&__pyx_v_self->_native), (&__pyx_v_scale->_native)))); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 41, __pyx_L1_error)
+  __pyx_t_1 = ((PyObject *)__pyx_f_4core_9transform_11Transform2D_11Transform2D_new_static(api_core->godot_transform2d_scaled((&__pyx_v_self->_native), (&__pyx_v_scale->_native)))); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 44, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "core/transform/Transform2D.pyx":40
+  /* "core/transform/Transform2D.pyx":43
  *         return Transform2D.new_static(api_core.godot_transform2d_rotated(&self._native, phi))
  * 
  *     def scaled(self, Vector2 scale):             # <<<<<<<<<<<<<<
@@ -2106,7 +2318,7 @@ static PyObject *__pyx_pf_4core_9transform_11Transform2D_11Transform2D_16scaled(
   return __pyx_r;
 }
 
-/* "core/transform/Transform2D.pyx":43
+/* "core/transform/Transform2D.pyx":46
  *         return Transform2D.new_static(api_core.godot_transform2d_scaled(&self._native, &scale._native))
  * 
  *     def xform_vector2(self, Vector2 v):             # <<<<<<<<<<<<<<
@@ -2115,16 +2327,16 @@ static PyObject *__pyx_pf_4core_9transform_11Transform2D_11Transform2D_16scaled(
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_4core_9transform_11Transform2D_11Transform2D_19xform_vector2(PyObject *__pyx_v_self, PyObject *__pyx_v_v); /*proto*/
-static PyObject *__pyx_pw_4core_9transform_11Transform2D_11Transform2D_19xform_vector2(PyObject *__pyx_v_self, PyObject *__pyx_v_v) {
+static PyObject *__pyx_pw_4core_9transform_11Transform2D_11Transform2D_21xform_vector2(PyObject *__pyx_v_self, PyObject *__pyx_v_v); /*proto*/
+static PyObject *__pyx_pw_4core_9transform_11Transform2D_11Transform2D_21xform_vector2(PyObject *__pyx_v_self, PyObject *__pyx_v_v) {
   int __pyx_lineno = 0;
   const char *__pyx_filename = NULL;
   int __pyx_clineno = 0;
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("xform_vector2 (wrapper)", 0);
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_v), __pyx_ptype_4core_7vector2_7Vector2_Vector2, 1, "v", 0))) __PYX_ERR(1, 43, __pyx_L1_error)
-  __pyx_r = __pyx_pf_4core_9transform_11Transform2D_11Transform2D_18xform_vector2(((struct __pyx_obj_4core_9transform_11Transform2D_Transform2D *)__pyx_v_self), ((struct __pyx_obj_4core_7vector2_7Vector2_Vector2 *)__pyx_v_v));
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_v), __pyx_ptype_4core_7vector2_7Vector2_Vector2, 1, "v", 0))) __PYX_ERR(0, 46, __pyx_L1_error)
+  __pyx_r = __pyx_pf_4core_9transform_11Transform2D_11Transform2D_20xform_vector2(((struct __pyx_obj_4core_9transform_11Transform2D_Transform2D *)__pyx_v_self), ((struct __pyx_obj_4core_7vector2_7Vector2_Vector2 *)__pyx_v_v));
 
   /* function exit code */
   goto __pyx_L0;
@@ -2135,7 +2347,7 @@ static PyObject *__pyx_pw_4core_9transform_11Transform2D_11Transform2D_19xform_v
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_4core_9transform_11Transform2D_11Transform2D_18xform_vector2(struct __pyx_obj_4core_9transform_11Transform2D_Transform2D *__pyx_v_self, struct __pyx_obj_4core_7vector2_7Vector2_Vector2 *__pyx_v_v) {
+static PyObject *__pyx_pf_4core_9transform_11Transform2D_11Transform2D_20xform_vector2(struct __pyx_obj_4core_9transform_11Transform2D_Transform2D *__pyx_v_self, struct __pyx_obj_4core_7vector2_7Vector2_Vector2 *__pyx_v_v) {
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   PyObject *__pyx_t_1 = NULL;
@@ -2144,7 +2356,7 @@ static PyObject *__pyx_pf_4core_9transform_11Transform2D_11Transform2D_18xform_v
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("xform_vector2", 0);
 
-  /* "core/transform/Transform2D.pyx":44
+  /* "core/transform/Transform2D.pyx":47
  * 
  *     def xform_vector2(self, Vector2 v):
  *         return Vector2.new_static(api_core.godot_transform2d_xform_vector2(&self._native, &v._native))             # <<<<<<<<<<<<<<
@@ -2152,13 +2364,13 @@ static PyObject *__pyx_pf_4core_9transform_11Transform2D_11Transform2D_18xform_v
  *     def xform_inv_vector2(self, Vector2 v):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = ((PyObject *)__pyx_f_4core_7vector2_7Vector2_7Vector2_new_static(api_core->godot_transform2d_xform_vector2((&__pyx_v_self->_native), (&__pyx_v_v->_native)))); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 44, __pyx_L1_error)
+  __pyx_t_1 = ((PyObject *)__pyx_f_4core_7vector2_7Vector2_7Vector2_new_static(api_core->godot_transform2d_xform_vector2((&__pyx_v_self->_native), (&__pyx_v_v->_native)))); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 47, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "core/transform/Transform2D.pyx":43
+  /* "core/transform/Transform2D.pyx":46
  *         return Transform2D.new_static(api_core.godot_transform2d_scaled(&self._native, &scale._native))
  * 
  *     def xform_vector2(self, Vector2 v):             # <<<<<<<<<<<<<<
@@ -2177,7 +2389,7 @@ static PyObject *__pyx_pf_4core_9transform_11Transform2D_11Transform2D_18xform_v
   return __pyx_r;
 }
 
-/* "core/transform/Transform2D.pyx":46
+/* "core/transform/Transform2D.pyx":49
  *         return Vector2.new_static(api_core.godot_transform2d_xform_vector2(&self._native, &v._native))
  * 
  *     def xform_inv_vector2(self, Vector2 v):             # <<<<<<<<<<<<<<
@@ -2186,16 +2398,16 @@ static PyObject *__pyx_pf_4core_9transform_11Transform2D_11Transform2D_18xform_v
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_4core_9transform_11Transform2D_11Transform2D_21xform_inv_vector2(PyObject *__pyx_v_self, PyObject *__pyx_v_v); /*proto*/
-static PyObject *__pyx_pw_4core_9transform_11Transform2D_11Transform2D_21xform_inv_vector2(PyObject *__pyx_v_self, PyObject *__pyx_v_v) {
+static PyObject *__pyx_pw_4core_9transform_11Transform2D_11Transform2D_23xform_inv_vector2(PyObject *__pyx_v_self, PyObject *__pyx_v_v); /*proto*/
+static PyObject *__pyx_pw_4core_9transform_11Transform2D_11Transform2D_23xform_inv_vector2(PyObject *__pyx_v_self, PyObject *__pyx_v_v) {
   int __pyx_lineno = 0;
   const char *__pyx_filename = NULL;
   int __pyx_clineno = 0;
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("xform_inv_vector2 (wrapper)", 0);
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_v), __pyx_ptype_4core_7vector2_7Vector2_Vector2, 1, "v", 0))) __PYX_ERR(1, 46, __pyx_L1_error)
-  __pyx_r = __pyx_pf_4core_9transform_11Transform2D_11Transform2D_20xform_inv_vector2(((struct __pyx_obj_4core_9transform_11Transform2D_Transform2D *)__pyx_v_self), ((struct __pyx_obj_4core_7vector2_7Vector2_Vector2 *)__pyx_v_v));
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_v), __pyx_ptype_4core_7vector2_7Vector2_Vector2, 1, "v", 0))) __PYX_ERR(0, 49, __pyx_L1_error)
+  __pyx_r = __pyx_pf_4core_9transform_11Transform2D_11Transform2D_22xform_inv_vector2(((struct __pyx_obj_4core_9transform_11Transform2D_Transform2D *)__pyx_v_self), ((struct __pyx_obj_4core_7vector2_7Vector2_Vector2 *)__pyx_v_v));
 
   /* function exit code */
   goto __pyx_L0;
@@ -2206,7 +2418,7 @@ static PyObject *__pyx_pw_4core_9transform_11Transform2D_11Transform2D_21xform_i
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_4core_9transform_11Transform2D_11Transform2D_20xform_inv_vector2(struct __pyx_obj_4core_9transform_11Transform2D_Transform2D *__pyx_v_self, struct __pyx_obj_4core_7vector2_7Vector2_Vector2 *__pyx_v_v) {
+static PyObject *__pyx_pf_4core_9transform_11Transform2D_11Transform2D_22xform_inv_vector2(struct __pyx_obj_4core_9transform_11Transform2D_Transform2D *__pyx_v_self, struct __pyx_obj_4core_7vector2_7Vector2_Vector2 *__pyx_v_v) {
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   PyObject *__pyx_t_1 = NULL;
@@ -2215,7 +2427,7 @@ static PyObject *__pyx_pf_4core_9transform_11Transform2D_11Transform2D_20xform_i
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("xform_inv_vector2", 0);
 
-  /* "core/transform/Transform2D.pyx":47
+  /* "core/transform/Transform2D.pyx":50
  * 
  *     def xform_inv_vector2(self, Vector2 v):
  *         return Vector2.new_static(api_core.godot_transform2d_xform_inv_vector2(&self._native, &v._native))             # <<<<<<<<<<<<<<
@@ -2223,13 +2435,13 @@ static PyObject *__pyx_pf_4core_9transform_11Transform2D_11Transform2D_20xform_i
  *     def interpolate_with(self, Transform2D m, godot_real c):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = ((PyObject *)__pyx_f_4core_7vector2_7Vector2_7Vector2_new_static(api_core->godot_transform2d_xform_inv_vector2((&__pyx_v_self->_native), (&__pyx_v_v->_native)))); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 47, __pyx_L1_error)
+  __pyx_t_1 = ((PyObject *)__pyx_f_4core_7vector2_7Vector2_7Vector2_new_static(api_core->godot_transform2d_xform_inv_vector2((&__pyx_v_self->_native), (&__pyx_v_v->_native)))); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 50, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "core/transform/Transform2D.pyx":46
+  /* "core/transform/Transform2D.pyx":49
  *         return Vector2.new_static(api_core.godot_transform2d_xform_vector2(&self._native, &v._native))
  * 
  *     def xform_inv_vector2(self, Vector2 v):             # <<<<<<<<<<<<<<
@@ -2248,7 +2460,7 @@ static PyObject *__pyx_pf_4core_9transform_11Transform2D_11Transform2D_20xform_i
   return __pyx_r;
 }
 
-/* "core/transform/Transform2D.pyx":49
+/* "core/transform/Transform2D.pyx":52
  *         return Vector2.new_static(api_core.godot_transform2d_xform_inv_vector2(&self._native, &v._native))
  * 
  *     def interpolate_with(self, Transform2D m, godot_real c):             # <<<<<<<<<<<<<<
@@ -2257,8 +2469,8 @@ static PyObject *__pyx_pf_4core_9transform_11Transform2D_11Transform2D_20xform_i
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_4core_9transform_11Transform2D_11Transform2D_23interpolate_with(PyObject *__pyx_v_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
-static PyObject *__pyx_pw_4core_9transform_11Transform2D_11Transform2D_23interpolate_with(PyObject *__pyx_v_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
+static PyObject *__pyx_pw_4core_9transform_11Transform2D_11Transform2D_25interpolate_with(PyObject *__pyx_v_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
+static PyObject *__pyx_pw_4core_9transform_11Transform2D_11Transform2D_25interpolate_with(PyObject *__pyx_v_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
   struct __pyx_obj_4core_9transform_11Transform2D_Transform2D *__pyx_v_m = 0;
   godot_real __pyx_v_c;
   int __pyx_lineno = 0;
@@ -2290,11 +2502,11 @@ static PyObject *__pyx_pw_4core_9transform_11Transform2D_11Transform2D_23interpo
         case  1:
         if (likely((values[1] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_c)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("interpolate_with", 1, 2, 2, 1); __PYX_ERR(1, 49, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("interpolate_with", 1, 2, 2, 1); __PYX_ERR(0, 52, __pyx_L3_error)
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "interpolate_with") < 0)) __PYX_ERR(1, 49, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "interpolate_with") < 0)) __PYX_ERR(0, 52, __pyx_L3_error)
       }
     } else if (PyTuple_GET_SIZE(__pyx_args) != 2) {
       goto __pyx_L5_argtuple_error;
@@ -2303,18 +2515,18 @@ static PyObject *__pyx_pw_4core_9transform_11Transform2D_11Transform2D_23interpo
       values[1] = PyTuple_GET_ITEM(__pyx_args, 1);
     }
     __pyx_v_m = ((struct __pyx_obj_4core_9transform_11Transform2D_Transform2D *)values[0]);
-    __pyx_v_c = __pyx_PyFloat_AsFloat(values[1]); if (unlikely((__pyx_v_c == ((godot_real)-1)) && PyErr_Occurred())) __PYX_ERR(1, 49, __pyx_L3_error)
+    __pyx_v_c = __pyx_PyFloat_AsFloat(values[1]); if (unlikely((__pyx_v_c == ((godot_real)-1)) && PyErr_Occurred())) __PYX_ERR(0, 52, __pyx_L3_error)
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("interpolate_with", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(1, 49, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("interpolate_with", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 52, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("core.transform.Transform2D.Transform2D.interpolate_with", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_m), __pyx_ptype_4core_9transform_11Transform2D_Transform2D, 1, "m", 0))) __PYX_ERR(1, 49, __pyx_L1_error)
-  __pyx_r = __pyx_pf_4core_9transform_11Transform2D_11Transform2D_22interpolate_with(((struct __pyx_obj_4core_9transform_11Transform2D_Transform2D *)__pyx_v_self), __pyx_v_m, __pyx_v_c);
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_m), __pyx_ptype_4core_9transform_11Transform2D_Transform2D, 1, "m", 0))) __PYX_ERR(0, 52, __pyx_L1_error)
+  __pyx_r = __pyx_pf_4core_9transform_11Transform2D_11Transform2D_24interpolate_with(((struct __pyx_obj_4core_9transform_11Transform2D_Transform2D *)__pyx_v_self), __pyx_v_m, __pyx_v_c);
 
   /* function exit code */
   goto __pyx_L0;
@@ -2325,7 +2537,7 @@ static PyObject *__pyx_pw_4core_9transform_11Transform2D_11Transform2D_23interpo
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_4core_9transform_11Transform2D_11Transform2D_22interpolate_with(struct __pyx_obj_4core_9transform_11Transform2D_Transform2D *__pyx_v_self, struct __pyx_obj_4core_9transform_11Transform2D_Transform2D *__pyx_v_m, godot_real __pyx_v_c) {
+static PyObject *__pyx_pf_4core_9transform_11Transform2D_11Transform2D_24interpolate_with(struct __pyx_obj_4core_9transform_11Transform2D_Transform2D *__pyx_v_self, struct __pyx_obj_4core_9transform_11Transform2D_Transform2D *__pyx_v_m, godot_real __pyx_v_c) {
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   PyObject *__pyx_t_1 = NULL;
@@ -2334,7 +2546,7 @@ static PyObject *__pyx_pf_4core_9transform_11Transform2D_11Transform2D_22interpo
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("interpolate_with", 0);
 
-  /* "core/transform/Transform2D.pyx":50
+  /* "core/transform/Transform2D.pyx":53
  * 
  *     def interpolate_with(self, Transform2D m, godot_real c):
  *         return Transform2D.new_static(api_core.godot_transform2d_interpolate_with(&self._native, &m._native, c))             # <<<<<<<<<<<<<<
@@ -2342,13 +2554,13 @@ static PyObject *__pyx_pf_4core_9transform_11Transform2D_11Transform2D_22interpo
  *     def __eq__(self, Transform2D other):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = ((PyObject *)__pyx_f_4core_9transform_11Transform2D_11Transform2D_new_static(api_core->godot_transform2d_interpolate_with((&__pyx_v_self->_native), (&__pyx_v_m->_native), __pyx_v_c))); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 50, __pyx_L1_error)
+  __pyx_t_1 = ((PyObject *)__pyx_f_4core_9transform_11Transform2D_11Transform2D_new_static(api_core->godot_transform2d_interpolate_with((&__pyx_v_self->_native), (&__pyx_v_m->_native), __pyx_v_c))); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 53, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "core/transform/Transform2D.pyx":49
+  /* "core/transform/Transform2D.pyx":52
  *         return Vector2.new_static(api_core.godot_transform2d_xform_inv_vector2(&self._native, &v._native))
  * 
  *     def interpolate_with(self, Transform2D m, godot_real c):             # <<<<<<<<<<<<<<
@@ -2367,7 +2579,7 @@ static PyObject *__pyx_pf_4core_9transform_11Transform2D_11Transform2D_22interpo
   return __pyx_r;
 }
 
-/* "core/transform/Transform2D.pyx":52
+/* "core/transform/Transform2D.pyx":55
  *         return Transform2D.new_static(api_core.godot_transform2d_interpolate_with(&self._native, &m._native, c))
  * 
  *     def __eq__(self, Transform2D other):             # <<<<<<<<<<<<<<
@@ -2376,16 +2588,16 @@ static PyObject *__pyx_pf_4core_9transform_11Transform2D_11Transform2D_22interpo
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_4core_9transform_11Transform2D_11Transform2D_25__eq__(PyObject *__pyx_v_self, PyObject *__pyx_v_other); /*proto*/
-static PyObject *__pyx_pw_4core_9transform_11Transform2D_11Transform2D_25__eq__(PyObject *__pyx_v_self, PyObject *__pyx_v_other) {
+static PyObject *__pyx_pw_4core_9transform_11Transform2D_11Transform2D_27__eq__(PyObject *__pyx_v_self, PyObject *__pyx_v_other); /*proto*/
+static PyObject *__pyx_pw_4core_9transform_11Transform2D_11Transform2D_27__eq__(PyObject *__pyx_v_self, PyObject *__pyx_v_other) {
   int __pyx_lineno = 0;
   const char *__pyx_filename = NULL;
   int __pyx_clineno = 0;
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__eq__ (wrapper)", 0);
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_other), __pyx_ptype_4core_9transform_11Transform2D_Transform2D, 1, "other", 0))) __PYX_ERR(1, 52, __pyx_L1_error)
-  __pyx_r = __pyx_pf_4core_9transform_11Transform2D_11Transform2D_24__eq__(((struct __pyx_obj_4core_9transform_11Transform2D_Transform2D *)__pyx_v_self), ((struct __pyx_obj_4core_9transform_11Transform2D_Transform2D *)__pyx_v_other));
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_other), __pyx_ptype_4core_9transform_11Transform2D_Transform2D, 1, "other", 0))) __PYX_ERR(0, 55, __pyx_L1_error)
+  __pyx_r = __pyx_pf_4core_9transform_11Transform2D_11Transform2D_26__eq__(((struct __pyx_obj_4core_9transform_11Transform2D_Transform2D *)__pyx_v_self), ((struct __pyx_obj_4core_9transform_11Transform2D_Transform2D *)__pyx_v_other));
 
   /* function exit code */
   goto __pyx_L0;
@@ -2396,7 +2608,7 @@ static PyObject *__pyx_pw_4core_9transform_11Transform2D_11Transform2D_25__eq__(
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_4core_9transform_11Transform2D_11Transform2D_24__eq__(struct __pyx_obj_4core_9transform_11Transform2D_Transform2D *__pyx_v_self, struct __pyx_obj_4core_9transform_11Transform2D_Transform2D *__pyx_v_other) {
+static PyObject *__pyx_pf_4core_9transform_11Transform2D_11Transform2D_26__eq__(struct __pyx_obj_4core_9transform_11Transform2D_Transform2D *__pyx_v_self, struct __pyx_obj_4core_9transform_11Transform2D_Transform2D *__pyx_v_other) {
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   PyObject *__pyx_t_1 = NULL;
@@ -2405,7 +2617,7 @@ static PyObject *__pyx_pf_4core_9transform_11Transform2D_11Transform2D_24__eq__(
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__eq__", 0);
 
-  /* "core/transform/Transform2D.pyx":53
+  /* "core/transform/Transform2D.pyx":56
  * 
  *     def __eq__(self, Transform2D other):
  *         return api_core.godot_transform2d_operator_equal(&self._native, &other._native)             # <<<<<<<<<<<<<<
@@ -2413,13 +2625,13 @@ static PyObject *__pyx_pf_4core_9transform_11Transform2D_11Transform2D_24__eq__(
  *     def __mult__(self, Transform2D other):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_PyBool_FromLong(api_core->godot_transform2d_operator_equal((&__pyx_v_self->_native), (&__pyx_v_other->_native))); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 53, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyBool_FromLong(api_core->godot_transform2d_operator_equal((&__pyx_v_self->_native), (&__pyx_v_other->_native))); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 56, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "core/transform/Transform2D.pyx":52
+  /* "core/transform/Transform2D.pyx":55
  *         return Transform2D.new_static(api_core.godot_transform2d_interpolate_with(&self._native, &m._native, c))
  * 
  *     def __eq__(self, Transform2D other):             # <<<<<<<<<<<<<<
@@ -2438,7 +2650,7 @@ static PyObject *__pyx_pf_4core_9transform_11Transform2D_11Transform2D_24__eq__(
   return __pyx_r;
 }
 
-/* "core/transform/Transform2D.pyx":55
+/* "core/transform/Transform2D.pyx":58
  *         return api_core.godot_transform2d_operator_equal(&self._native, &other._native)
  * 
  *     def __mult__(self, Transform2D other):             # <<<<<<<<<<<<<<
@@ -2447,16 +2659,16 @@ static PyObject *__pyx_pf_4core_9transform_11Transform2D_11Transform2D_24__eq__(
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_4core_9transform_11Transform2D_11Transform2D_27__mult__(PyObject *__pyx_v_self, PyObject *__pyx_v_other); /*proto*/
-static PyObject *__pyx_pw_4core_9transform_11Transform2D_11Transform2D_27__mult__(PyObject *__pyx_v_self, PyObject *__pyx_v_other) {
+static PyObject *__pyx_pw_4core_9transform_11Transform2D_11Transform2D_29__mult__(PyObject *__pyx_v_self, PyObject *__pyx_v_other); /*proto*/
+static PyObject *__pyx_pw_4core_9transform_11Transform2D_11Transform2D_29__mult__(PyObject *__pyx_v_self, PyObject *__pyx_v_other) {
   int __pyx_lineno = 0;
   const char *__pyx_filename = NULL;
   int __pyx_clineno = 0;
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__mult__ (wrapper)", 0);
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_other), __pyx_ptype_4core_9transform_11Transform2D_Transform2D, 1, "other", 0))) __PYX_ERR(1, 55, __pyx_L1_error)
-  __pyx_r = __pyx_pf_4core_9transform_11Transform2D_11Transform2D_26__mult__(((struct __pyx_obj_4core_9transform_11Transform2D_Transform2D *)__pyx_v_self), ((struct __pyx_obj_4core_9transform_11Transform2D_Transform2D *)__pyx_v_other));
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_other), __pyx_ptype_4core_9transform_11Transform2D_Transform2D, 1, "other", 0))) __PYX_ERR(0, 58, __pyx_L1_error)
+  __pyx_r = __pyx_pf_4core_9transform_11Transform2D_11Transform2D_28__mult__(((struct __pyx_obj_4core_9transform_11Transform2D_Transform2D *)__pyx_v_self), ((struct __pyx_obj_4core_9transform_11Transform2D_Transform2D *)__pyx_v_other));
 
   /* function exit code */
   goto __pyx_L0;
@@ -2467,7 +2679,7 @@ static PyObject *__pyx_pw_4core_9transform_11Transform2D_11Transform2D_27__mult_
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_4core_9transform_11Transform2D_11Transform2D_26__mult__(struct __pyx_obj_4core_9transform_11Transform2D_Transform2D *__pyx_v_self, struct __pyx_obj_4core_9transform_11Transform2D_Transform2D *__pyx_v_other) {
+static PyObject *__pyx_pf_4core_9transform_11Transform2D_11Transform2D_28__mult__(struct __pyx_obj_4core_9transform_11Transform2D_Transform2D *__pyx_v_self, struct __pyx_obj_4core_9transform_11Transform2D_Transform2D *__pyx_v_other) {
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   PyObject *__pyx_t_1 = NULL;
@@ -2476,7 +2688,7 @@ static PyObject *__pyx_pf_4core_9transform_11Transform2D_11Transform2D_26__mult_
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__mult__", 0);
 
-  /* "core/transform/Transform2D.pyx":56
+  /* "core/transform/Transform2D.pyx":59
  * 
  *     def __mult__(self, Transform2D other):
  *         return Transform2D.new_static(api_core.godot_transform2d_operator_multiply(&self._native, &other._native))             # <<<<<<<<<<<<<<
@@ -2484,13 +2696,13 @@ static PyObject *__pyx_pf_4core_9transform_11Transform2D_11Transform2D_26__mult_
  *     def xform_rect2(self, Rect2 v):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = ((PyObject *)__pyx_f_4core_9transform_11Transform2D_11Transform2D_new_static(api_core->godot_transform2d_operator_multiply((&__pyx_v_self->_native), (&__pyx_v_other->_native)))); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 56, __pyx_L1_error)
+  __pyx_t_1 = ((PyObject *)__pyx_f_4core_9transform_11Transform2D_11Transform2D_new_static(api_core->godot_transform2d_operator_multiply((&__pyx_v_self->_native), (&__pyx_v_other->_native)))); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 59, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "core/transform/Transform2D.pyx":55
+  /* "core/transform/Transform2D.pyx":58
  *         return api_core.godot_transform2d_operator_equal(&self._native, &other._native)
  * 
  *     def __mult__(self, Transform2D other):             # <<<<<<<<<<<<<<
@@ -2509,7 +2721,7 @@ static PyObject *__pyx_pf_4core_9transform_11Transform2D_11Transform2D_26__mult_
   return __pyx_r;
 }
 
-/* "core/transform/Transform2D.pyx":58
+/* "core/transform/Transform2D.pyx":61
  *         return Transform2D.new_static(api_core.godot_transform2d_operator_multiply(&self._native, &other._native))
  * 
  *     def xform_rect2(self, Rect2 v):             # <<<<<<<<<<<<<<
@@ -2518,16 +2730,16 @@ static PyObject *__pyx_pf_4core_9transform_11Transform2D_11Transform2D_26__mult_
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_4core_9transform_11Transform2D_11Transform2D_29xform_rect2(PyObject *__pyx_v_self, PyObject *__pyx_v_v); /*proto*/
-static PyObject *__pyx_pw_4core_9transform_11Transform2D_11Transform2D_29xform_rect2(PyObject *__pyx_v_self, PyObject *__pyx_v_v) {
+static PyObject *__pyx_pw_4core_9transform_11Transform2D_11Transform2D_31xform_rect2(PyObject *__pyx_v_self, PyObject *__pyx_v_v); /*proto*/
+static PyObject *__pyx_pw_4core_9transform_11Transform2D_11Transform2D_31xform_rect2(PyObject *__pyx_v_self, PyObject *__pyx_v_v) {
   int __pyx_lineno = 0;
   const char *__pyx_filename = NULL;
   int __pyx_clineno = 0;
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("xform_rect2 (wrapper)", 0);
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_v), __pyx_ptype_4core_5rect2_5Rect2_Rect2, 1, "v", 0))) __PYX_ERR(1, 58, __pyx_L1_error)
-  __pyx_r = __pyx_pf_4core_9transform_11Transform2D_11Transform2D_28xform_rect2(((struct __pyx_obj_4core_9transform_11Transform2D_Transform2D *)__pyx_v_self), ((struct __pyx_obj_4core_5rect2_5Rect2_Rect2 *)__pyx_v_v));
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_v), __pyx_ptype_4core_5rect2_5Rect2_Rect2, 1, "v", 0))) __PYX_ERR(0, 61, __pyx_L1_error)
+  __pyx_r = __pyx_pf_4core_9transform_11Transform2D_11Transform2D_30xform_rect2(((struct __pyx_obj_4core_9transform_11Transform2D_Transform2D *)__pyx_v_self), ((struct __pyx_obj_4core_5rect2_5Rect2_Rect2 *)__pyx_v_v));
 
   /* function exit code */
   goto __pyx_L0;
@@ -2538,7 +2750,7 @@ static PyObject *__pyx_pw_4core_9transform_11Transform2D_11Transform2D_29xform_r
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_4core_9transform_11Transform2D_11Transform2D_28xform_rect2(struct __pyx_obj_4core_9transform_11Transform2D_Transform2D *__pyx_v_self, struct __pyx_obj_4core_5rect2_5Rect2_Rect2 *__pyx_v_v) {
+static PyObject *__pyx_pf_4core_9transform_11Transform2D_11Transform2D_30xform_rect2(struct __pyx_obj_4core_9transform_11Transform2D_Transform2D *__pyx_v_self, struct __pyx_obj_4core_5rect2_5Rect2_Rect2 *__pyx_v_v) {
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   PyObject *__pyx_t_1 = NULL;
@@ -2547,7 +2759,7 @@ static PyObject *__pyx_pf_4core_9transform_11Transform2D_11Transform2D_28xform_r
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("xform_rect2", 0);
 
-  /* "core/transform/Transform2D.pyx":59
+  /* "core/transform/Transform2D.pyx":62
  * 
  *     def xform_rect2(self, Rect2 v):
  *         return Rect2.new_static(api_core.godot_transform2d_xform_rect2(&self._native, &v._native))             # <<<<<<<<<<<<<<
@@ -2555,13 +2767,13 @@ static PyObject *__pyx_pf_4core_9transform_11Transform2D_11Transform2D_28xform_r
  *     def xform_inv_rect2(self, Rect2 v):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = ((PyObject *)__pyx_f_4core_5rect2_5Rect2_5Rect2_new_static(api_core->godot_transform2d_xform_rect2((&__pyx_v_self->_native), (&__pyx_v_v->_native)))); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 59, __pyx_L1_error)
+  __pyx_t_1 = ((PyObject *)__pyx_f_4core_5rect2_5Rect2_5Rect2_new_static(api_core->godot_transform2d_xform_rect2((&__pyx_v_self->_native), (&__pyx_v_v->_native)))); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 62, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "core/transform/Transform2D.pyx":58
+  /* "core/transform/Transform2D.pyx":61
  *         return Transform2D.new_static(api_core.godot_transform2d_operator_multiply(&self._native, &other._native))
  * 
  *     def xform_rect2(self, Rect2 v):             # <<<<<<<<<<<<<<
@@ -2580,7 +2792,7 @@ static PyObject *__pyx_pf_4core_9transform_11Transform2D_11Transform2D_28xform_r
   return __pyx_r;
 }
 
-/* "core/transform/Transform2D.pyx":61
+/* "core/transform/Transform2D.pyx":64
  *         return Rect2.new_static(api_core.godot_transform2d_xform_rect2(&self._native, &v._native))
  * 
  *     def xform_inv_rect2(self, Rect2 v):             # <<<<<<<<<<<<<<
@@ -2589,16 +2801,16 @@ static PyObject *__pyx_pf_4core_9transform_11Transform2D_11Transform2D_28xform_r
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_4core_9transform_11Transform2D_11Transform2D_31xform_inv_rect2(PyObject *__pyx_v_self, PyObject *__pyx_v_v); /*proto*/
-static PyObject *__pyx_pw_4core_9transform_11Transform2D_11Transform2D_31xform_inv_rect2(PyObject *__pyx_v_self, PyObject *__pyx_v_v) {
+static PyObject *__pyx_pw_4core_9transform_11Transform2D_11Transform2D_33xform_inv_rect2(PyObject *__pyx_v_self, PyObject *__pyx_v_v); /*proto*/
+static PyObject *__pyx_pw_4core_9transform_11Transform2D_11Transform2D_33xform_inv_rect2(PyObject *__pyx_v_self, PyObject *__pyx_v_v) {
   int __pyx_lineno = 0;
   const char *__pyx_filename = NULL;
   int __pyx_clineno = 0;
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("xform_inv_rect2 (wrapper)", 0);
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_v), __pyx_ptype_4core_5rect2_5Rect2_Rect2, 1, "v", 0))) __PYX_ERR(1, 61, __pyx_L1_error)
-  __pyx_r = __pyx_pf_4core_9transform_11Transform2D_11Transform2D_30xform_inv_rect2(((struct __pyx_obj_4core_9transform_11Transform2D_Transform2D *)__pyx_v_self), ((struct __pyx_obj_4core_5rect2_5Rect2_Rect2 *)__pyx_v_v));
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_v), __pyx_ptype_4core_5rect2_5Rect2_Rect2, 1, "v", 0))) __PYX_ERR(0, 64, __pyx_L1_error)
+  __pyx_r = __pyx_pf_4core_9transform_11Transform2D_11Transform2D_32xform_inv_rect2(((struct __pyx_obj_4core_9transform_11Transform2D_Transform2D *)__pyx_v_self), ((struct __pyx_obj_4core_5rect2_5Rect2_Rect2 *)__pyx_v_v));
 
   /* function exit code */
   goto __pyx_L0;
@@ -2609,7 +2821,7 @@ static PyObject *__pyx_pw_4core_9transform_11Transform2D_11Transform2D_31xform_i
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_4core_9transform_11Transform2D_11Transform2D_30xform_inv_rect2(struct __pyx_obj_4core_9transform_11Transform2D_Transform2D *__pyx_v_self, struct __pyx_obj_4core_5rect2_5Rect2_Rect2 *__pyx_v_v) {
+static PyObject *__pyx_pf_4core_9transform_11Transform2D_11Transform2D_32xform_inv_rect2(struct __pyx_obj_4core_9transform_11Transform2D_Transform2D *__pyx_v_self, struct __pyx_obj_4core_5rect2_5Rect2_Rect2 *__pyx_v_v) {
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   PyObject *__pyx_t_1 = NULL;
@@ -2618,7 +2830,7 @@ static PyObject *__pyx_pf_4core_9transform_11Transform2D_11Transform2D_30xform_i
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("xform_inv_rect2", 0);
 
-  /* "core/transform/Transform2D.pyx":62
+  /* "core/transform/Transform2D.pyx":65
  * 
  *     def xform_inv_rect2(self, Rect2 v):
  *         return Rect2.new_static(api_core.godot_transform2d_xform_inv_rect2(&self._native, &v._native))             # <<<<<<<<<<<<<<
@@ -2626,13 +2838,13 @@ static PyObject *__pyx_pf_4core_9transform_11Transform2D_11Transform2D_30xform_i
  *     def new_identity(self):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = ((PyObject *)__pyx_f_4core_5rect2_5Rect2_5Rect2_new_static(api_core->godot_transform2d_xform_inv_rect2((&__pyx_v_self->_native), (&__pyx_v_v->_native)))); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 62, __pyx_L1_error)
+  __pyx_t_1 = ((PyObject *)__pyx_f_4core_5rect2_5Rect2_5Rect2_new_static(api_core->godot_transform2d_xform_inv_rect2((&__pyx_v_self->_native), (&__pyx_v_v->_native)))); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 65, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "core/transform/Transform2D.pyx":61
+  /* "core/transform/Transform2D.pyx":64
  *         return Rect2.new_static(api_core.godot_transform2d_xform_rect2(&self._native, &v._native))
  * 
  *     def xform_inv_rect2(self, Rect2 v):             # <<<<<<<<<<<<<<
@@ -2651,7 +2863,7 @@ static PyObject *__pyx_pf_4core_9transform_11Transform2D_11Transform2D_30xform_i
   return __pyx_r;
 }
 
-/* "core/transform/Transform2D.pyx":64
+/* "core/transform/Transform2D.pyx":67
  *         return Rect2.new_static(api_core.godot_transform2d_xform_inv_rect2(&self._native, &v._native))
  * 
  *     def new_identity(self):             # <<<<<<<<<<<<<<
@@ -2659,31 +2871,31 @@ static PyObject *__pyx_pf_4core_9transform_11Transform2D_11Transform2D_30xform_i
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_4core_9transform_11Transform2D_11Transform2D_33new_identity(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused); /*proto*/
-static PyObject *__pyx_pw_4core_9transform_11Transform2D_11Transform2D_33new_identity(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused) {
+static PyObject *__pyx_pw_4core_9transform_11Transform2D_11Transform2D_35new_identity(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused); /*proto*/
+static PyObject *__pyx_pw_4core_9transform_11Transform2D_11Transform2D_35new_identity(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused) {
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("new_identity (wrapper)", 0);
-  __pyx_r = __pyx_pf_4core_9transform_11Transform2D_11Transform2D_32new_identity(((struct __pyx_obj_4core_9transform_11Transform2D_Transform2D *)__pyx_v_self));
+  __pyx_r = __pyx_pf_4core_9transform_11Transform2D_11Transform2D_34new_identity(((struct __pyx_obj_4core_9transform_11Transform2D_Transform2D *)__pyx_v_self));
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_4core_9transform_11Transform2D_11Transform2D_32new_identity(struct __pyx_obj_4core_9transform_11Transform2D_Transform2D *__pyx_v_self) {
+static PyObject *__pyx_pf_4core_9transform_11Transform2D_11Transform2D_34new_identity(struct __pyx_obj_4core_9transform_11Transform2D_Transform2D *__pyx_v_self) {
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("new_identity", 0);
 
-  /* "core/transform/Transform2D.pyx":65
+  /* "core/transform/Transform2D.pyx":68
  * 
  *     def new_identity(self):
  *         api_core.godot_transform2d_new_identity(&self._native)             # <<<<<<<<<<<<<<
  */
   api_core->godot_transform2d_new_identity((&__pyx_v_self->_native));
 
-  /* "core/transform/Transform2D.pyx":64
+  /* "core/transform/Transform2D.pyx":67
  *         return Rect2.new_static(api_core.godot_transform2d_xform_inv_rect2(&self._native, &v._native))
  * 
  *     def new_identity(self):             # <<<<<<<<<<<<<<
@@ -2704,19 +2916,19 @@ static PyObject *__pyx_pf_4core_9transform_11Transform2D_11Transform2D_32new_ide
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_4core_9transform_11Transform2D_11Transform2D_35__reduce_cython__(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused); /*proto*/
-static PyObject *__pyx_pw_4core_9transform_11Transform2D_11Transform2D_35__reduce_cython__(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused) {
+static PyObject *__pyx_pw_4core_9transform_11Transform2D_11Transform2D_37__reduce_cython__(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused); /*proto*/
+static PyObject *__pyx_pw_4core_9transform_11Transform2D_11Transform2D_37__reduce_cython__(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused) {
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__reduce_cython__ (wrapper)", 0);
-  __pyx_r = __pyx_pf_4core_9transform_11Transform2D_11Transform2D_34__reduce_cython__(((struct __pyx_obj_4core_9transform_11Transform2D_Transform2D *)__pyx_v_self));
+  __pyx_r = __pyx_pf_4core_9transform_11Transform2D_11Transform2D_36__reduce_cython__(((struct __pyx_obj_4core_9transform_11Transform2D_Transform2D *)__pyx_v_self));
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_4core_9transform_11Transform2D_11Transform2D_34__reduce_cython__(CYTHON_UNUSED struct __pyx_obj_4core_9transform_11Transform2D_Transform2D *__pyx_v_self) {
+static PyObject *__pyx_pf_4core_9transform_11Transform2D_11Transform2D_36__reduce_cython__(CYTHON_UNUSED struct __pyx_obj_4core_9transform_11Transform2D_Transform2D *__pyx_v_self) {
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   PyObject *__pyx_t_1 = NULL;
@@ -2731,11 +2943,11 @@ static PyObject *__pyx_pf_4core_9transform_11Transform2D_11Transform2D_34__reduc
  * def __setstate_cython__(self, __pyx_state):
  *     raise TypeError("Pickling of struct members such as self._native must be explicitly requested with @auto_pickle(True)")
  */
-  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_TypeError, __pyx_tuple_, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_TypeError, __pyx_tuple_, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 2, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_Raise(__pyx_t_1, 0, 0, 0);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __PYX_ERR(0, 2, __pyx_L1_error)
+  __PYX_ERR(1, 2, __pyx_L1_error)
 
   /* "(tree fragment)":1
  * def __reduce_cython__(self):             # <<<<<<<<<<<<<<
@@ -2761,19 +2973,19 @@ static PyObject *__pyx_pf_4core_9transform_11Transform2D_11Transform2D_34__reduc
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_4core_9transform_11Transform2D_11Transform2D_37__setstate_cython__(PyObject *__pyx_v_self, PyObject *__pyx_v___pyx_state); /*proto*/
-static PyObject *__pyx_pw_4core_9transform_11Transform2D_11Transform2D_37__setstate_cython__(PyObject *__pyx_v_self, PyObject *__pyx_v___pyx_state) {
+static PyObject *__pyx_pw_4core_9transform_11Transform2D_11Transform2D_39__setstate_cython__(PyObject *__pyx_v_self, PyObject *__pyx_v___pyx_state); /*proto*/
+static PyObject *__pyx_pw_4core_9transform_11Transform2D_11Transform2D_39__setstate_cython__(PyObject *__pyx_v_self, PyObject *__pyx_v___pyx_state) {
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__setstate_cython__ (wrapper)", 0);
-  __pyx_r = __pyx_pf_4core_9transform_11Transform2D_11Transform2D_36__setstate_cython__(((struct __pyx_obj_4core_9transform_11Transform2D_Transform2D *)__pyx_v_self), ((PyObject *)__pyx_v___pyx_state));
+  __pyx_r = __pyx_pf_4core_9transform_11Transform2D_11Transform2D_38__setstate_cython__(((struct __pyx_obj_4core_9transform_11Transform2D_Transform2D *)__pyx_v_self), ((PyObject *)__pyx_v___pyx_state));
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_4core_9transform_11Transform2D_11Transform2D_36__setstate_cython__(CYTHON_UNUSED struct __pyx_obj_4core_9transform_11Transform2D_Transform2D *__pyx_v_self, CYTHON_UNUSED PyObject *__pyx_v___pyx_state) {
+static PyObject *__pyx_pf_4core_9transform_11Transform2D_11Transform2D_38__setstate_cython__(CYTHON_UNUSED struct __pyx_obj_4core_9transform_11Transform2D_Transform2D *__pyx_v_self, CYTHON_UNUSED PyObject *__pyx_v___pyx_state) {
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   PyObject *__pyx_t_1 = NULL;
@@ -2787,11 +2999,11 @@ static PyObject *__pyx_pf_4core_9transform_11Transform2D_11Transform2D_36__setst
  * def __setstate_cython__(self, __pyx_state):
  *     raise TypeError("Pickling of struct members such as self._native must be explicitly requested with @auto_pickle(True)")             # <<<<<<<<<<<<<<
  */
-  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_TypeError, __pyx_tuple__2, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 4, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_TypeError, __pyx_tuple__2, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 4, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_Raise(__pyx_t_1, 0, 0, 0);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __PYX_ERR(0, 4, __pyx_L1_error)
+  __PYX_ERR(1, 4, __pyx_L1_error)
 
   /* "(tree fragment)":3
  * def __reduce_cython__(self):
@@ -3278,11 +3490,11 @@ static void __pyx_tp_dealloc_4core_9transform_11Transform2D_Transform2D(PyObject
 static PyObject *__pyx_tp_richcompare_4core_9transform_11Transform2D_Transform2D(PyObject *o1, PyObject *o2, int op) {
   switch (op) {
     case Py_EQ: {
-      return __pyx_pw_4core_9transform_11Transform2D_11Transform2D_25__eq__(o1, o2);
+      return __pyx_pw_4core_9transform_11Transform2D_11Transform2D_27__eq__(o1, o2);
     }
     case Py_NE: {
       PyObject *ret;
-      ret = __pyx_pw_4core_9transform_11Transform2D_11Transform2D_25__eq__(o1, o2);
+      ret = __pyx_pw_4core_9transform_11Transform2D_11Transform2D_27__eq__(o1, o2);
       if (likely(ret && ret != Py_NotImplemented)) {
         int b = __Pyx_PyObject_IsTrue(ret); Py_DECREF(ret);
         if (unlikely(b < 0)) return NULL;
@@ -3298,22 +3510,23 @@ static PyObject *__pyx_tp_richcompare_4core_9transform_11Transform2D_Transform2D
 }
 
 static PyMethodDef __pyx_methods_4core_9transform_11Transform2D_Transform2D[] = {
-  {"inverse", (PyCFunction)__pyx_pw_4core_9transform_11Transform2D_11Transform2D_5inverse, METH_NOARGS, 0},
-  {"get_rotation", (PyCFunction)__pyx_pw_4core_9transform_11Transform2D_11Transform2D_7get_rotation, METH_NOARGS, 0},
-  {"get_origin", (PyCFunction)__pyx_pw_4core_9transform_11Transform2D_11Transform2D_9get_origin, METH_NOARGS, 0},
-  {"get_scale", (PyCFunction)__pyx_pw_4core_9transform_11Transform2D_11Transform2D_11get_scale, METH_NOARGS, 0},
-  {"orthonormalized", (PyCFunction)__pyx_pw_4core_9transform_11Transform2D_11Transform2D_13orthonormalized, METH_NOARGS, 0},
-  {"rotated", (PyCFunction)__pyx_pw_4core_9transform_11Transform2D_11Transform2D_15rotated, METH_O, 0},
-  {"scaled", (PyCFunction)__pyx_pw_4core_9transform_11Transform2D_11Transform2D_17scaled, METH_O, 0},
-  {"xform_vector2", (PyCFunction)__pyx_pw_4core_9transform_11Transform2D_11Transform2D_19xform_vector2, METH_O, 0},
-  {"xform_inv_vector2", (PyCFunction)__pyx_pw_4core_9transform_11Transform2D_11Transform2D_21xform_inv_vector2, METH_O, 0},
-  {"interpolate_with", (PyCFunction)(void*)(PyCFunctionWithKeywords)__pyx_pw_4core_9transform_11Transform2D_11Transform2D_23interpolate_with, METH_VARARGS|METH_KEYWORDS, 0},
-  {"__mult__", (PyCFunction)__pyx_pw_4core_9transform_11Transform2D_11Transform2D_27__mult__, METH_O, 0},
-  {"xform_rect2", (PyCFunction)__pyx_pw_4core_9transform_11Transform2D_11Transform2D_29xform_rect2, METH_O, 0},
-  {"xform_inv_rect2", (PyCFunction)__pyx_pw_4core_9transform_11Transform2D_11Transform2D_31xform_inv_rect2, METH_O, 0},
-  {"new_identity", (PyCFunction)__pyx_pw_4core_9transform_11Transform2D_11Transform2D_33new_identity, METH_NOARGS, 0},
-  {"__reduce_cython__", (PyCFunction)__pyx_pw_4core_9transform_11Transform2D_11Transform2D_35__reduce_cython__, METH_NOARGS, 0},
-  {"__setstate_cython__", (PyCFunction)__pyx_pw_4core_9transform_11Transform2D_11Transform2D_37__setstate_cython__, METH_O, 0},
+  {"new_with_axis_origin", (PyCFunction)(void*)(PyCFunctionWithKeywords)__pyx_pw_4core_9transform_11Transform2D_11Transform2D_3new_with_axis_origin, METH_VARARGS|METH_KEYWORDS, 0},
+  {"inverse", (PyCFunction)__pyx_pw_4core_9transform_11Transform2D_11Transform2D_7inverse, METH_NOARGS, 0},
+  {"get_rotation", (PyCFunction)__pyx_pw_4core_9transform_11Transform2D_11Transform2D_9get_rotation, METH_NOARGS, 0},
+  {"get_origin", (PyCFunction)__pyx_pw_4core_9transform_11Transform2D_11Transform2D_11get_origin, METH_NOARGS, 0},
+  {"get_scale", (PyCFunction)__pyx_pw_4core_9transform_11Transform2D_11Transform2D_13get_scale, METH_NOARGS, 0},
+  {"orthonormalized", (PyCFunction)__pyx_pw_4core_9transform_11Transform2D_11Transform2D_15orthonormalized, METH_NOARGS, 0},
+  {"rotated", (PyCFunction)__pyx_pw_4core_9transform_11Transform2D_11Transform2D_17rotated, METH_O, 0},
+  {"scaled", (PyCFunction)__pyx_pw_4core_9transform_11Transform2D_11Transform2D_19scaled, METH_O, 0},
+  {"xform_vector2", (PyCFunction)__pyx_pw_4core_9transform_11Transform2D_11Transform2D_21xform_vector2, METH_O, 0},
+  {"xform_inv_vector2", (PyCFunction)__pyx_pw_4core_9transform_11Transform2D_11Transform2D_23xform_inv_vector2, METH_O, 0},
+  {"interpolate_with", (PyCFunction)(void*)(PyCFunctionWithKeywords)__pyx_pw_4core_9transform_11Transform2D_11Transform2D_25interpolate_with, METH_VARARGS|METH_KEYWORDS, 0},
+  {"__mult__", (PyCFunction)__pyx_pw_4core_9transform_11Transform2D_11Transform2D_29__mult__, METH_O, 0},
+  {"xform_rect2", (PyCFunction)__pyx_pw_4core_9transform_11Transform2D_11Transform2D_31xform_rect2, METH_O, 0},
+  {"xform_inv_rect2", (PyCFunction)__pyx_pw_4core_9transform_11Transform2D_11Transform2D_33xform_inv_rect2, METH_O, 0},
+  {"new_identity", (PyCFunction)__pyx_pw_4core_9transform_11Transform2D_11Transform2D_35new_identity, METH_NOARGS, 0},
+  {"__reduce_cython__", (PyCFunction)__pyx_pw_4core_9transform_11Transform2D_11Transform2D_37__reduce_cython__, METH_NOARGS, 0},
+  {"__setstate_cython__", (PyCFunction)__pyx_pw_4core_9transform_11Transform2D_11Transform2D_39__setstate_cython__, METH_O, 0},
   {0, 0, 0, 0}
 };
 
@@ -3343,7 +3556,7 @@ static PyTypeObject __pyx_type_4core_9transform_11Transform2D_Transform2D = {
   0, /*tp_as_mapping*/
   0, /*tp_hash*/
   0, /*tp_call*/
-  __pyx_pw_4core_9transform_11Transform2D_11Transform2D_3__str__, /*tp_str*/
+  __pyx_pw_4core_9transform_11Transform2D_11Transform2D_5__str__, /*tp_str*/
   0, /*tp_getattro*/
   0, /*tp_setattro*/
   0, /*tp_as_buffer*/
@@ -3437,6 +3650,8 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_n_s_TypeError, __pyx_k_TypeError, sizeof(__pyx_k_TypeError), 0, 0, 1, 1},
   {&__pyx_n_s_c, __pyx_k_c, sizeof(__pyx_k_c), 0, 0, 1, 1},
   {&__pyx_n_s_cline_in_traceback, __pyx_k_cline_in_traceback, sizeof(__pyx_k_cline_in_traceback), 0, 0, 1, 1},
+  {&__pyx_n_s_core_transform_Transform2D, __pyx_k_core_transform_Transform2D, sizeof(__pyx_k_core_transform_Transform2D), 0, 0, 1, 1},
+  {&__pyx_kp_s_core_transform_Transform2D_pyx, __pyx_k_core_transform_Transform2D_pyx, sizeof(__pyx_k_core_transform_Transform2D_pyx), 0, 0, 1, 0},
   {&__pyx_n_s_dont_touch_that, __pyx_k_dont_touch_that, sizeof(__pyx_k_dont_touch_that), 0, 0, 1, 1},
   {&__pyx_n_u_end_new, __pyx_k_end_new, sizeof(__pyx_k_end_new), 0, 1, 0, 1},
   {&__pyx_n_s_getstate, __pyx_k_getstate, sizeof(__pyx_k_getstate), 0, 0, 1, 1},
@@ -3444,6 +3659,8 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_n_s_main, __pyx_k_main, sizeof(__pyx_k_main), 0, 0, 1, 1},
   {&__pyx_n_u_middle, __pyx_k_middle, sizeof(__pyx_k_middle), 0, 1, 0, 1},
   {&__pyx_n_s_name, __pyx_k_name, sizeof(__pyx_k_name), 0, 0, 1, 1},
+  {&__pyx_n_s_new_with_axis_origin, __pyx_k_new_with_axis_origin, sizeof(__pyx_k_new_with_axis_origin), 0, 0, 1, 1},
+  {&__pyx_n_s_origin, __pyx_k_origin, sizeof(__pyx_k_origin), 0, 0, 1, 1},
   {&__pyx_n_s_pos, __pyx_k_pos, sizeof(__pyx_k_pos), 0, 0, 1, 1},
   {&__pyx_n_s_print, __pyx_k_print, sizeof(__pyx_k_print), 0, 0, 1, 1},
   {&__pyx_n_s_pyx_vtable, __pyx_k_pyx_vtable, sizeof(__pyx_k_pyx_vtable), 0, 0, 1, 1},
@@ -3451,14 +3668,20 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_n_s_reduce_cython, __pyx_k_reduce_cython, sizeof(__pyx_k_reduce_cython), 0, 0, 1, 1},
   {&__pyx_n_s_reduce_ex, __pyx_k_reduce_ex, sizeof(__pyx_k_reduce_ex), 0, 0, 1, 1},
   {&__pyx_n_s_rotation, __pyx_k_rotation, sizeof(__pyx_k_rotation), 0, 0, 1, 1},
+  {&__pyx_n_s_self, __pyx_k_self, sizeof(__pyx_k_self), 0, 0, 1, 1},
   {&__pyx_n_s_setstate, __pyx_k_setstate, sizeof(__pyx_k_setstate), 0, 0, 1, 1},
   {&__pyx_n_s_setstate_cython, __pyx_k_setstate_cython, sizeof(__pyx_k_setstate_cython), 0, 0, 1, 1},
   {&__pyx_n_u_start_new, __pyx_k_start_new, sizeof(__pyx_k_start_new), 0, 1, 0, 1},
+  {&__pyx_n_s_staticmethod, __pyx_k_staticmethod, sizeof(__pyx_k_staticmethod), 0, 0, 1, 1},
   {&__pyx_n_s_test, __pyx_k_test, sizeof(__pyx_k_test), 0, 0, 1, 1},
+  {&__pyx_n_s_transform, __pyx_k_transform, sizeof(__pyx_k_transform), 0, 0, 1, 1},
+  {&__pyx_n_s_x_axis, __pyx_k_x_axis, sizeof(__pyx_k_x_axis), 0, 0, 1, 1},
+  {&__pyx_n_s_y_axis, __pyx_k_y_axis, sizeof(__pyx_k_y_axis), 0, 0, 1, 1},
   {0, 0, 0, 0, 0, 0, 0}
 };
 static CYTHON_SMALL_CODE int __Pyx_InitCachedBuiltins(void) {
-  __pyx_builtin_TypeError = __Pyx_GetBuiltinName(__pyx_n_s_TypeError); if (!__pyx_builtin_TypeError) __PYX_ERR(0, 2, __pyx_L1_error)
+  __pyx_builtin_staticmethod = __Pyx_GetBuiltinName(__pyx_n_s_staticmethod); if (!__pyx_builtin_staticmethod) __PYX_ERR(0, 16, __pyx_L1_error)
+  __pyx_builtin_TypeError = __Pyx_GetBuiltinName(__pyx_n_s_TypeError); if (!__pyx_builtin_TypeError) __PYX_ERR(1, 2, __pyx_L1_error)
   __pyx_builtin_print = __Pyx_GetBuiltinName(__pyx_n_s_print); if (!__pyx_builtin_print) __PYX_ERR(3, 11, __pyx_L1_error)
   return 0;
   __pyx_L1_error:;
@@ -3475,7 +3698,7 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
  * def __setstate_cython__(self, __pyx_state):
  *     raise TypeError("Pickling of struct members such as self._native must be explicitly requested with @auto_pickle(True)")
  */
-  __pyx_tuple_ = PyTuple_Pack(1, __pyx_kp_s_Pickling_of_struct_members_such); if (unlikely(!__pyx_tuple_)) __PYX_ERR(0, 2, __pyx_L1_error)
+  __pyx_tuple_ = PyTuple_Pack(1, __pyx_kp_s_Pickling_of_struct_members_such); if (unlikely(!__pyx_tuple_)) __PYX_ERR(1, 2, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple_);
   __Pyx_GIVEREF(__pyx_tuple_);
 
@@ -3484,7 +3707,7 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
  * def __setstate_cython__(self, __pyx_state):
  *     raise TypeError("Pickling of struct members such as self._native must be explicitly requested with @auto_pickle(True)")             # <<<<<<<<<<<<<<
  */
-  __pyx_tuple__2 = PyTuple_Pack(1, __pyx_kp_s_Pickling_of_struct_members_such); if (unlikely(!__pyx_tuple__2)) __PYX_ERR(0, 4, __pyx_L1_error)
+  __pyx_tuple__2 = PyTuple_Pack(1, __pyx_kp_s_Pickling_of_struct_members_such); if (unlikely(!__pyx_tuple__2)) __PYX_ERR(1, 4, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__2);
   __Pyx_GIVEREF(__pyx_tuple__2);
 
@@ -3519,6 +3742,18 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
   __pyx_tuple__5 = PyTuple_Pack(1, __pyx_n_u_end_new); if (unlikely(!__pyx_tuple__5)) __PYX_ERR(3, 15, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__5);
   __Pyx_GIVEREF(__pyx_tuple__5);
+
+  /* "core/transform/Transform2D.pyx":17
+ * 
+ *     @staticmethod
+ *     def new_with_axis_origin(self, Vector2 x_axis, Vector2 y_axis, Vector2 origin):             # <<<<<<<<<<<<<<
+ *         cdef Transform2D transform = Transform2D.__new__(Transform2D)
+ *         api_core.godot_transform2d_new_axis_origin(&transform._native, &x_axis._native, &y_axis._native, &origin._native)
+ */
+  __pyx_tuple__6 = PyTuple_Pack(5, __pyx_n_s_self, __pyx_n_s_x_axis, __pyx_n_s_y_axis, __pyx_n_s_origin, __pyx_n_s_transform); if (unlikely(!__pyx_tuple__6)) __PYX_ERR(0, 17, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__6);
+  __Pyx_GIVEREF(__pyx_tuple__6);
+  __pyx_codeobj__7 = (PyObject*)__Pyx_PyCode_New(4, 0, 5, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__6, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_core_transform_Transform2D_pyx, __pyx_n_s_new_with_axis_origin, 17, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__7)) __PYX_ERR(0, 17, __pyx_L1_error)
   __Pyx_RefNannyFinishContext();
   return 0;
   __pyx_L1_error:;
@@ -3527,7 +3762,7 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
 }
 
 static CYTHON_SMALL_CODE int __Pyx_InitGlobals(void) {
-  if (__Pyx_InitStrings(__pyx_string_tab) < 0) __PYX_ERR(1, 1, __pyx_L1_error);
+  if (__Pyx_InitStrings(__pyx_string_tab) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
   return 0;
   __pyx_L1_error:;
   return -1;
@@ -3564,7 +3799,7 @@ static int __Pyx_modinit_function_export_code(void) {
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__Pyx_modinit_function_export_code", 0);
   /*--- Function export code ---*/
-  if (__Pyx_ExportFunction("set_api_core_transform2d", (void (*)(void))__pyx_f_4core_9transform_11Transform2D_set_api_core_transform2d, "PyObject *(struct godot_gdnative_core_api_struct *)") < 0) __PYX_ERR(1, 1, __pyx_L1_error)
+  if (__Pyx_ExportFunction("set_api_core_transform2d", (void (*)(void))__pyx_f_4core_9transform_11Transform2D_set_api_core_transform2d, "PyObject *(struct godot_gdnative_core_api_struct *)") < 0) __PYX_ERR(0, 1, __pyx_L1_error)
   __Pyx_RefNannyFinishContext();
   return 0;
   __pyx_L1_error:;
@@ -3582,16 +3817,16 @@ static int __Pyx_modinit_type_init_code(void) {
   __pyx_vtabptr_4core_9transform_11Transform2D_Transform2D = &__pyx_vtable_4core_9transform_11Transform2D_Transform2D;
   __pyx_vtable_4core_9transform_11Transform2D_Transform2D.set_native = (void (*)(struct __pyx_obj_4core_9transform_11Transform2D_Transform2D *, godot_transform2d))__pyx_f_4core_9transform_11Transform2D_11Transform2D_set_native;
   __pyx_vtable_4core_9transform_11Transform2D_Transform2D.new_static = (struct __pyx_obj_4core_9transform_11Transform2D_Transform2D *(*)(godot_transform2d))__pyx_f_4core_9transform_11Transform2D_11Transform2D_new_static;
-  if (PyType_Ready(&__pyx_type_4core_9transform_11Transform2D_Transform2D) < 0) __PYX_ERR(1, 11, __pyx_L1_error)
+  if (PyType_Ready(&__pyx_type_4core_9transform_11Transform2D_Transform2D) < 0) __PYX_ERR(0, 11, __pyx_L1_error)
   #if PY_VERSION_HEX < 0x030800B1
   __pyx_type_4core_9transform_11Transform2D_Transform2D.tp_print = 0;
   #endif
   if ((CYTHON_USE_TYPE_SLOTS && CYTHON_USE_PYTYPE_LOOKUP) && likely(!__pyx_type_4core_9transform_11Transform2D_Transform2D.tp_dictoffset && __pyx_type_4core_9transform_11Transform2D_Transform2D.tp_getattro == PyObject_GenericGetAttr)) {
     __pyx_type_4core_9transform_11Transform2D_Transform2D.tp_getattro = __Pyx_PyObject_GenericGetAttr;
   }
-  if (__Pyx_SetVtable(__pyx_type_4core_9transform_11Transform2D_Transform2D.tp_dict, __pyx_vtabptr_4core_9transform_11Transform2D_Transform2D) < 0) __PYX_ERR(1, 11, __pyx_L1_error)
-  if (PyObject_SetAttr(__pyx_m, __pyx_n_s_Transform2D, (PyObject *)&__pyx_type_4core_9transform_11Transform2D_Transform2D) < 0) __PYX_ERR(1, 11, __pyx_L1_error)
-  if (__Pyx_setup_reduce((PyObject*)&__pyx_type_4core_9transform_11Transform2D_Transform2D) < 0) __PYX_ERR(1, 11, __pyx_L1_error)
+  if (__Pyx_SetVtable(__pyx_type_4core_9transform_11Transform2D_Transform2D.tp_dict, __pyx_vtabptr_4core_9transform_11Transform2D_Transform2D) < 0) __PYX_ERR(0, 11, __pyx_L1_error)
+  if (PyObject_SetAttr(__pyx_m, __pyx_n_s_Transform2D, (PyObject *)&__pyx_type_4core_9transform_11Transform2D_Transform2D) < 0) __PYX_ERR(0, 11, __pyx_L1_error)
+  if (__Pyx_setup_reduce((PyObject*)&__pyx_type_4core_9transform_11Transform2D_Transform2D) < 0) __PYX_ERR(0, 11, __pyx_L1_error)
   __pyx_ptype_4core_9transform_11Transform2D_Transform2D = &__pyx_type_4core_9transform_11Transform2D_Transform2D;
   __Pyx_RefNannyFinishContext();
   return 0;
@@ -3756,6 +3991,7 @@ static CYTHON_SMALL_CODE int __pyx_pymod_exec_Transform2D(PyObject *__pyx_pyinit
 #endif
 {
   PyObject *__pyx_t_1 = NULL;
+  PyObject *__pyx_t_2 = NULL;
   int __pyx_lineno = 0;
   const char *__pyx_filename = NULL;
   int __pyx_clineno = 0;
@@ -3779,30 +4015,30 @@ if (!__Pyx_RefNanny) {
 }
 #endif
   __Pyx_RefNannySetupContext("__Pyx_PyMODINIT_FUNC PyInit_Transform2D(void)", 0);
-  if (__Pyx_check_binary_version() < 0) __PYX_ERR(1, 1, __pyx_L1_error)
+  if (__Pyx_check_binary_version() < 0) __PYX_ERR(0, 1, __pyx_L1_error)
   #ifdef __Pxy_PyFrame_Initialize_Offsets
   __Pxy_PyFrame_Initialize_Offsets();
   #endif
-  __pyx_empty_tuple = PyTuple_New(0); if (unlikely(!__pyx_empty_tuple)) __PYX_ERR(1, 1, __pyx_L1_error)
-  __pyx_empty_bytes = PyBytes_FromStringAndSize("", 0); if (unlikely(!__pyx_empty_bytes)) __PYX_ERR(1, 1, __pyx_L1_error)
-  __pyx_empty_unicode = PyUnicode_FromStringAndSize("", 0); if (unlikely(!__pyx_empty_unicode)) __PYX_ERR(1, 1, __pyx_L1_error)
+  __pyx_empty_tuple = PyTuple_New(0); if (unlikely(!__pyx_empty_tuple)) __PYX_ERR(0, 1, __pyx_L1_error)
+  __pyx_empty_bytes = PyBytes_FromStringAndSize("", 0); if (unlikely(!__pyx_empty_bytes)) __PYX_ERR(0, 1, __pyx_L1_error)
+  __pyx_empty_unicode = PyUnicode_FromStringAndSize("", 0); if (unlikely(!__pyx_empty_unicode)) __PYX_ERR(0, 1, __pyx_L1_error)
   #ifdef __Pyx_CyFunction_USED
-  if (__pyx_CyFunction_init() < 0) __PYX_ERR(1, 1, __pyx_L1_error)
+  if (__pyx_CyFunction_init() < 0) __PYX_ERR(0, 1, __pyx_L1_error)
   #endif
   #ifdef __Pyx_FusedFunction_USED
-  if (__pyx_FusedFunction_init() < 0) __PYX_ERR(1, 1, __pyx_L1_error)
+  if (__pyx_FusedFunction_init() < 0) __PYX_ERR(0, 1, __pyx_L1_error)
   #endif
   #ifdef __Pyx_Coroutine_USED
-  if (__pyx_Coroutine_init() < 0) __PYX_ERR(1, 1, __pyx_L1_error)
+  if (__pyx_Coroutine_init() < 0) __PYX_ERR(0, 1, __pyx_L1_error)
   #endif
   #ifdef __Pyx_Generator_USED
-  if (__pyx_Generator_init() < 0) __PYX_ERR(1, 1, __pyx_L1_error)
+  if (__pyx_Generator_init() < 0) __PYX_ERR(0, 1, __pyx_L1_error)
   #endif
   #ifdef __Pyx_AsyncGen_USED
-  if (__pyx_AsyncGen_init() < 0) __PYX_ERR(1, 1, __pyx_L1_error)
+  if (__pyx_AsyncGen_init() < 0) __PYX_ERR(0, 1, __pyx_L1_error)
   #endif
   #ifdef __Pyx_StopAsyncIteration_USED
-  if (__pyx_StopAsyncIteration_init() < 0) __PYX_ERR(1, 1, __pyx_L1_error)
+  if (__pyx_StopAsyncIteration_init() < 0) __PYX_ERR(0, 1, __pyx_L1_error)
   #endif
   /*--- Library function declarations ---*/
   /*--- Threads initialization code ---*/
@@ -3819,57 +4055,86 @@ if (!__Pyx_RefNanny) {
   #else
   __pyx_m = PyModule_Create(&__pyx_moduledef);
   #endif
-  if (unlikely(!__pyx_m)) __PYX_ERR(1, 1, __pyx_L1_error)
+  if (unlikely(!__pyx_m)) __PYX_ERR(0, 1, __pyx_L1_error)
   #endif
-  __pyx_d = PyModule_GetDict(__pyx_m); if (unlikely(!__pyx_d)) __PYX_ERR(1, 1, __pyx_L1_error)
+  __pyx_d = PyModule_GetDict(__pyx_m); if (unlikely(!__pyx_d)) __PYX_ERR(0, 1, __pyx_L1_error)
   Py_INCREF(__pyx_d);
-  __pyx_b = PyImport_AddModule(__Pyx_BUILTIN_MODULE_NAME); if (unlikely(!__pyx_b)) __PYX_ERR(1, 1, __pyx_L1_error)
+  __pyx_b = PyImport_AddModule(__Pyx_BUILTIN_MODULE_NAME); if (unlikely(!__pyx_b)) __PYX_ERR(0, 1, __pyx_L1_error)
   Py_INCREF(__pyx_b);
-  __pyx_cython_runtime = PyImport_AddModule((char *) "cython_runtime"); if (unlikely(!__pyx_cython_runtime)) __PYX_ERR(1, 1, __pyx_L1_error)
+  __pyx_cython_runtime = PyImport_AddModule((char *) "cython_runtime"); if (unlikely(!__pyx_cython_runtime)) __PYX_ERR(0, 1, __pyx_L1_error)
   Py_INCREF(__pyx_cython_runtime);
-  if (PyObject_SetAttrString(__pyx_m, "__builtins__", __pyx_b) < 0) __PYX_ERR(1, 1, __pyx_L1_error);
+  if (PyObject_SetAttrString(__pyx_m, "__builtins__", __pyx_b) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
   /*--- Initialize various global constants etc. ---*/
-  if (__Pyx_InitGlobals() < 0) __PYX_ERR(1, 1, __pyx_L1_error)
+  if (__Pyx_InitGlobals() < 0) __PYX_ERR(0, 1, __pyx_L1_error)
   #if PY_MAJOR_VERSION < 3 && (__PYX_DEFAULT_STRING_ENCODING_IS_ASCII || __PYX_DEFAULT_STRING_ENCODING_IS_DEFAULT)
-  if (__Pyx_init_sys_getdefaultencoding_params() < 0) __PYX_ERR(1, 1, __pyx_L1_error)
+  if (__Pyx_init_sys_getdefaultencoding_params() < 0) __PYX_ERR(0, 1, __pyx_L1_error)
   #endif
   if (__pyx_module_is_main_core__transform__Transform2D) {
-    if (PyObject_SetAttr(__pyx_m, __pyx_n_s_name, __pyx_n_s_main) < 0) __PYX_ERR(1, 1, __pyx_L1_error)
+    if (PyObject_SetAttr(__pyx_m, __pyx_n_s_name, __pyx_n_s_main) < 0) __PYX_ERR(0, 1, __pyx_L1_error)
   }
   #if PY_MAJOR_VERSION >= 3
   {
-    PyObject *modules = PyImport_GetModuleDict(); if (unlikely(!modules)) __PYX_ERR(1, 1, __pyx_L1_error)
+    PyObject *modules = PyImport_GetModuleDict(); if (unlikely(!modules)) __PYX_ERR(0, 1, __pyx_L1_error)
     if (!PyDict_GetItemString(modules, "core.transform.Transform2D")) {
-      if (unlikely(PyDict_SetItemString(modules, "core.transform.Transform2D", __pyx_m) < 0)) __PYX_ERR(1, 1, __pyx_L1_error)
+      if (unlikely(PyDict_SetItemString(modules, "core.transform.Transform2D", __pyx_m) < 0)) __PYX_ERR(0, 1, __pyx_L1_error)
     }
   }
   #endif
   /*--- Builtin init code ---*/
-  if (__Pyx_InitCachedBuiltins() < 0) __PYX_ERR(1, 1, __pyx_L1_error)
+  if (__Pyx_InitCachedBuiltins() < 0) __PYX_ERR(0, 1, __pyx_L1_error)
   /*--- Constants init code ---*/
-  if (__Pyx_InitCachedConstants() < 0) __PYX_ERR(1, 1, __pyx_L1_error)
+  if (__Pyx_InitCachedConstants() < 0) __PYX_ERR(0, 1, __pyx_L1_error)
   /*--- Global type/function init code ---*/
   (void)__Pyx_modinit_global_init_code();
   (void)__Pyx_modinit_variable_export_code();
-  if (unlikely(__Pyx_modinit_function_export_code() < 0)) __PYX_ERR(1, 1, __pyx_L1_error)
-  if (unlikely(__Pyx_modinit_type_init_code() < 0)) __PYX_ERR(1, 1, __pyx_L1_error)
-  if (unlikely(__Pyx_modinit_type_import_code() < 0)) __PYX_ERR(1, 1, __pyx_L1_error)
+  if (unlikely(__Pyx_modinit_function_export_code() < 0)) __PYX_ERR(0, 1, __pyx_L1_error)
+  if (unlikely(__Pyx_modinit_type_init_code() < 0)) __PYX_ERR(0, 1, __pyx_L1_error)
+  if (unlikely(__Pyx_modinit_type_import_code() < 0)) __PYX_ERR(0, 1, __pyx_L1_error)
   (void)__Pyx_modinit_variable_import_code();
   (void)__Pyx_modinit_function_import_code();
   /*--- Execution code ---*/
   #if defined(__Pyx_Generator_USED) || defined(__Pyx_Coroutine_USED)
-  if (__Pyx_patch_abc() < 0) __PYX_ERR(1, 1, __pyx_L1_error)
+  if (__Pyx_patch_abc() < 0) __PYX_ERR(0, 1, __pyx_L1_error)
   #endif
+
+  /* "core/transform/Transform2D.pyx":17
+ * 
+ *     @staticmethod
+ *     def new_with_axis_origin(self, Vector2 x_axis, Vector2 y_axis, Vector2 origin):             # <<<<<<<<<<<<<<
+ *         cdef Transform2D transform = Transform2D.__new__(Transform2D)
+ *         api_core.godot_transform2d_new_axis_origin(&transform._native, &x_axis._native, &y_axis._native, &origin._native)
+ */
+  __pyx_t_1 = PyCFunction_NewEx(&__pyx_mdef_4core_9transform_11Transform2D_11Transform2D_3new_with_axis_origin, NULL, __pyx_n_s_core_transform_Transform2D); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 17, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  if (PyDict_SetItem((PyObject *)__pyx_ptype_4core_9transform_11Transform2D_Transform2D->tp_dict, __pyx_n_s_new_with_axis_origin, __pyx_t_1) < 0) __PYX_ERR(0, 17, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+  PyType_Modified(__pyx_ptype_4core_9transform_11Transform2D_Transform2D);
+
+  /* "core/transform/Transform2D.pyx":16
+ *         api_core.godot_transform2d_new(&self._native, rotation, &pos._native)
+ * 
+ *     @staticmethod             # <<<<<<<<<<<<<<
+ *     def new_with_axis_origin(self, Vector2 x_axis, Vector2 y_axis, Vector2 origin):
+ *         cdef Transform2D transform = Transform2D.__new__(Transform2D)
+ */
+  __Pyx_GetNameInClass(__pyx_t_1, (PyObject *)__pyx_ptype_4core_9transform_11Transform2D_Transform2D, __pyx_n_s_new_with_axis_origin); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 17, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __pyx_t_2 = __Pyx_PyObject_CallOneArg(__pyx_builtin_staticmethod, __pyx_t_1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 16, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+  if (PyDict_SetItem((PyObject *)__pyx_ptype_4core_9transform_11Transform2D_Transform2D->tp_dict, __pyx_n_s_new_with_axis_origin, __pyx_t_2) < 0) __PYX_ERR(0, 17, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+  PyType_Modified(__pyx_ptype_4core_9transform_11Transform2D_Transform2D);
 
   /* "core/transform/Transform2D.pyx":1
  * from core.vector2.Vector2 cimport *             # <<<<<<<<<<<<<<
  * from core.plane.Plane cimport *
  * from core.rect2.Rect2 cimport *
  */
-  __pyx_t_1 = __Pyx_PyDict_NewPresized(0); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 1, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_1);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_test, __pyx_t_1) < 0) __PYX_ERR(1, 1, __pyx_L1_error)
-  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+  __pyx_t_2 = __Pyx_PyDict_NewPresized(0); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 1, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_test, __pyx_t_2) < 0) __PYX_ERR(0, 1, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
   /* "core/rect2/Rect2.pxd":10
  * 
@@ -3884,6 +4149,7 @@ if (!__Pyx_RefNanny) {
   goto __pyx_L0;
   __pyx_L1_error:;
   __Pyx_XDECREF(__pyx_t_1);
+  __Pyx_XDECREF(__pyx_t_2);
   if (__pyx_m) {
     if (__pyx_d) {
       __Pyx_AddTraceback("init core.transform.Transform2D", __pyx_clineno, __pyx_lineno, __pyx_filename);
@@ -4835,6 +5101,61 @@ static CYTHON_INLINE int __Pyx_object_dict_version_matches(PyObject* obj, PY_UIN
     return obj_dict_version == __Pyx_get_object_dict_version(obj);
 }
 #endif
+
+/* GetModuleGlobalName */
+#if CYTHON_USE_DICT_VERSIONS
+static PyObject *__Pyx__GetModuleGlobalName(PyObject *name, PY_UINT64_T *dict_version, PyObject **dict_cached_value)
+#else
+static CYTHON_INLINE PyObject *__Pyx__GetModuleGlobalName(PyObject *name)
+#endif
+{
+    PyObject *result;
+#if !CYTHON_AVOID_BORROWED_REFS
+#if CYTHON_COMPILING_IN_CPYTHON && PY_VERSION_HEX >= 0x030500A1
+    result = _PyDict_GetItem_KnownHash(__pyx_d, name, ((PyASCIIObject *) name)->hash);
+    __PYX_UPDATE_DICT_CACHE(__pyx_d, result, *dict_cached_value, *dict_version)
+    if (likely(result)) {
+        return __Pyx_NewRef(result);
+    } else if (unlikely(PyErr_Occurred())) {
+        return NULL;
+    }
+#else
+    result = PyDict_GetItem(__pyx_d, name);
+    __PYX_UPDATE_DICT_CACHE(__pyx_d, result, *dict_cached_value, *dict_version)
+    if (likely(result)) {
+        return __Pyx_NewRef(result);
+    }
+#endif
+#else
+    result = PyObject_GetItem(__pyx_d, name);
+    __PYX_UPDATE_DICT_CACHE(__pyx_d, result, *dict_cached_value, *dict_version)
+    if (likely(result)) {
+        return __Pyx_NewRef(result);
+    }
+    PyErr_Clear();
+#endif
+    return __Pyx_GetBuiltinName(name);
+}
+
+/* GetNameInClass */
+static PyObject *__Pyx_GetGlobalNameAfterAttributeLookup(PyObject *name) {
+    PyObject *result;
+    __Pyx_PyThreadState_declare
+    __Pyx_PyThreadState_assign
+    if (unlikely(!__Pyx_PyErr_ExceptionMatches(PyExc_AttributeError)))
+        return NULL;
+    __Pyx_PyErr_Clear();
+    __Pyx_GetModuleGlobalNameUncached(result, name);
+    return result;
+}
+static PyObject *__Pyx__GetNameInClass(PyObject *nmspace, PyObject *name) {
+    PyObject *result;
+    result = __Pyx_PyObject_GetAttrStr(nmspace, name);
+    if (!result) {
+        result = __Pyx_GetGlobalNameAfterAttributeLookup(name);
+    }
+    return result;
+}
 
 /* CLineInTraceback */
 #ifndef CYTHON_CLINE_IN_TRACEBACK

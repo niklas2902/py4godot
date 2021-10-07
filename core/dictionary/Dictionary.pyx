@@ -14,8 +14,11 @@ cdef class Dictionary:
     def __init__(self):
         api_core.godot_dictionary_new(&self._native)
 
+    @staticmethod
     def new_copy(self, Dictionary src):
-        api_core.godot_dictionary_new_copy(&self._native, &src._native)
+        cdef Dictionary d = Dictionary.__new__(Dictionary)
+        api_core.godot_dictionary_new_copy(&d._native, &src._native)
+        return d
 
     def destroy(self):
         api_core.godot_dictionary_destroy(&self._native)

@@ -12,14 +12,23 @@ cdef class Basis:
     def __init__(self):
         api_core.godot_basis_new(&self._native)
 
-    def new_with_rows(self, Vector3 x_axis, Vector3 y_axis, Vector3 z_axis):
-        api_core.godot_basis_new_with_rows(&self._native, &x_axis._native, &y_axis._native, &z_axis._native)
+    @staticmethod
+    def new_with_rows(Vector3 x_axis, Vector3 y_axis, Vector3 z_axis):
+        cdef Basis b = Basis.__new__(Basis)
+        api_core.godot_basis_new_with_rows(&b._native, &x_axis._native, &y_axis._native, &z_axis._native)
+        return b
 
-    def new_with_axis_and_angle(Basis dest, Vector3 axis, godot_real p_phi):
-        api_core.godot_basis_new_with_axis_and_angle(&dest._native, &axis._native, p_phi)
+    @staticmethod
+    def new_with_axis_and_angle(Vector3 axis, godot_real p_phi):
+        cdef Basis b = Basis.__new__(Basis)
+        api_core.godot_basis_new_with_axis_and_angle(&b._native, &axis._native, p_phi)
+        return b
 
+    @staticmethod
     def new_with_euler(Basis dest, Vector3 euler):
-        api_core.godot_basis_new_with_euler(&dest._native, &euler._native)
+        cdef Basis b = Basis.__new__(Basis)
+        api_core.godot_basis_new_with_euler(&b._native, &euler._native)
+        return b
 
     def as_string(self):
         return api_core.godot_basis_as_string(&self._native)

@@ -9,11 +9,17 @@ cdef class Color:
     def __init__(self, godot_real red, godot_real green, godot_real blue, godot_real alpha = 255):
         api_core.godot_color_new_rgba(&self._native, red, green,blue, alpha)
 
-    def new_rgba(self, godot_real red, godot_real green, godot_real blue, godot_real alpha):
-        api_core.godot_color_new_rgba(&self._native, red, green, blue, alpha)
+    @staticmethod
+    def new_rgba(godot_real red, godot_real green, godot_real blue, godot_real alpha):
+        cdef Color c = Color.__new__(Color)
+        api_core.godot_color_new_rgba(&c._native, red, green, blue, alpha)
+        return c
 
-    def new_rgb(self, godot_real red, godot_real green, godot_real blue):
-        api_core.godot_color_new_rgb(&self._native, red, green, blue)
+    @staticmethod
+    def new_rgb(godot_real red, godot_real green, godot_real blue):
+        cdef Color c = Color.__new__(Color)
+        api_core.godot_color_new_rgb(&c._native, red, green, blue)
+        return c
 
     def get_red(self):
         return api_core.godot_color_get_r(&self._native)

@@ -8,12 +8,8 @@ cdef api set_api_core_aabb(godot_gdnative_core_api_struct * core):
 
 cdef class AABB:
 
-    def __init__(self, godot_aabb _native, Vector3 v, Vector3 v2):
-        if (_native != None):
-            self._native = _native
-        else:
-            pass
-            #api_core.godot_aabb_new(&self._native, &v._native, &v2._native)
+    def __init__(self, Vector3 v, Vector3 v2):
+        api_core.godot_aabb_new(&self._native, &v._native, &v2._native)
 
     def intersects(self, AABB other):
         return api_core.godot_aabb_intersects(&self._native, &other._native)

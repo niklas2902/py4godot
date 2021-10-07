@@ -36,11 +36,6 @@ cdef class Variant:
 
         if(type(variant) == type("")):
             variant = String(variant)
-        if(variant == Vector3):
-            print("###############Vector3_created#############################")
-            self.new_vector3(Vector3(0,0,0))
-            return
-
         if(variant != None):
             if(type(variant) == int):
                 self.new_int(variant)
@@ -48,27 +43,78 @@ cdef class Variant:
                 self.new_float(variant)
             elif(type(variant)==Vector3):
                 self.new_vector3(variant)
+            elif(variant == Vector3):
+                self.new_vector3(Vector3(0,0,0))
 
             elif(type(variant)==Vector2):
                 self.new_vector2(variant)
+            elif(variant == Vector2):
+                self.new_vector2(Vector2(0,0))
+
             elif(type(variant)==AABB):
                 self.new_aabb(variant)
+            elif(variant==AABB):
+                self.new_aabb(AABB(Vector3(0,0,0),Vector3(0,0,0)))
+
             elif(type(variant)==String):
                 self.new_string(variant)
+            elif(variant==AABB):
+                self.new_string(String(""))
+
             elif(type(variant)==Rect2):
                 self.new_rect2(variant)
+            elif(variant==Rect2):
+                self.new_rect2(Rect2(0,0,0,0))
+
+            elif(type(variant)==Basis):
+                self.new_Basis(variant)
+            elif(variant==Basis):
+                self.new_basis(Basis())
+
             elif(type(variant)==Quat):
                 self.new_quat(variant)
+            elif(variant==Quat):
+                self.new_quat(Quat(0,0,0,0))
+
+            elif(type(variant)==Plane):
+                self.new_plane(variant)
+            elif(variant==Plane):
+                self.new_plane(Plane(0,0,0,0))
+
+            elif(type(variant)==Transform):
+                self.new_transform(variant)
+            elif(variant==Transform):
+                self.new_transform(Transform(Basis(), Vector3()))
+
+            elif(type(variant)==Transform2D):
+                self.new_transform(variant)
+            elif(variant==Transform2D):
+                self.new_transform(Transform2D(0, Vector2()))
+
             elif(type(variant)==Color):
                 self.new_color(variant)
+            elif(variant==Color):
+                self.new_color(Color(0,0,0))
+
             elif(type(variant)==NodePath):
                 self.new_node_path(variant)
+            elif(variant==NodePath):
+                self.new_node_path(NodePath(String("")))
+
+
             elif(type(variant)==type(True)):
                 self.new_bool(variant)
+
             elif type(variant) == Dictionary:
                 self.new_dict(variant)
+            elif variant == Dictionary:
+                self.new_dict(Dictionary)
+
             elif type(variant) == Array:
                 self.new_array(variant)
+            elif variant == Array:
+                self.new_array(Array())
+
             elif variant == int:
                 self.new_int(0)
             else:

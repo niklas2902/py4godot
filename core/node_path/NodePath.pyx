@@ -10,8 +10,11 @@ cdef class NodePath:
     def __init__(self, String path):
         api_core.godot_node_path_new(&self._native, &path._native)
 
-    def new_copy(self, NodePath src):
-        api_core.godot_node_path_new_copy(&self._native, &src._native)
+    @staticmethod
+    def new_copy(NodePath src):
+        cdef NodePath node_path = NodePath.__new__(NodePath)
+        api_core.godot_node_path_new_copy(&node_path._native, &src._native)
+        return node_path
 
     def destroy(self):
         api_core.godot_node_path_destroy(&self._native)

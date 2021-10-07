@@ -845,8 +845,8 @@ static const char *__pyx_filename;
 
 
 static const char *__pyx_f[] = {
-  "stringsource",
   "core\\node_path\\NodePath.pyx",
+  "stringsource",
   "core\\node_path\\NodePath.pxd",
   "core\\string\\String.pxd",
   "type.pxd",
@@ -1136,6 +1136,69 @@ static CYTHON_INLINE int __Pyx_object_dict_version_matches(PyObject* obj, PY_UIN
 #define __PYX_PY_DICT_LOOKUP_IF_MODIFIED(VAR, DICT, LOOKUP)  (VAR) = (LOOKUP);
 #endif
 
+/* GetModuleGlobalName.proto */
+#if CYTHON_USE_DICT_VERSIONS
+#define __Pyx_GetModuleGlobalName(var, name)  {\
+    static PY_UINT64_T __pyx_dict_version = 0;\
+    static PyObject *__pyx_dict_cached_value = NULL;\
+    (var) = (likely(__pyx_dict_version == __PYX_GET_DICT_VERSION(__pyx_d))) ?\
+        (likely(__pyx_dict_cached_value) ? __Pyx_NewRef(__pyx_dict_cached_value) : __Pyx_GetBuiltinName(name)) :\
+        __Pyx__GetModuleGlobalName(name, &__pyx_dict_version, &__pyx_dict_cached_value);\
+}
+#define __Pyx_GetModuleGlobalNameUncached(var, name)  {\
+    PY_UINT64_T __pyx_dict_version;\
+    PyObject *__pyx_dict_cached_value;\
+    (var) = __Pyx__GetModuleGlobalName(name, &__pyx_dict_version, &__pyx_dict_cached_value);\
+}
+static PyObject *__Pyx__GetModuleGlobalName(PyObject *name, PY_UINT64_T *dict_version, PyObject **dict_cached_value);
+#else
+#define __Pyx_GetModuleGlobalName(var, name)  (var) = __Pyx__GetModuleGlobalName(name)
+#define __Pyx_GetModuleGlobalNameUncached(var, name)  (var) = __Pyx__GetModuleGlobalName(name)
+static CYTHON_INLINE PyObject *__Pyx__GetModuleGlobalName(PyObject *name);
+#endif
+
+/* GetNameInClass.proto */
+#define __Pyx_GetNameInClass(var, nmspace, name)  (var) = __Pyx__GetNameInClass(nmspace, name)
+static PyObject *__Pyx__GetNameInClass(PyObject *nmspace, PyObject *name);
+
+/* PyCFunctionFastCall.proto */
+#if CYTHON_FAST_PYCCALL
+static CYTHON_INLINE PyObject *__Pyx_PyCFunction_FastCall(PyObject *func, PyObject **args, Py_ssize_t nargs);
+#else
+#define __Pyx_PyCFunction_FastCall(func, args, nargs)  (assert(0), NULL)
+#endif
+
+/* PyFunctionFastCall.proto */
+#if CYTHON_FAST_PYCALL
+#define __Pyx_PyFunction_FastCall(func, args, nargs)\
+    __Pyx_PyFunction_FastCallDict((func), (args), (nargs), NULL)
+#if 1 || PY_VERSION_HEX < 0x030600B1
+static PyObject *__Pyx_PyFunction_FastCallDict(PyObject *func, PyObject **args, Py_ssize_t nargs, PyObject *kwargs);
+#else
+#define __Pyx_PyFunction_FastCallDict(func, args, nargs, kwargs) _PyFunction_FastCallDict(func, args, nargs, kwargs)
+#endif
+#define __Pyx_BUILD_ASSERT_EXPR(cond)\
+    (sizeof(char [1 - 2*!(cond)]) - 1)
+#ifndef Py_MEMBER_SIZE
+#define Py_MEMBER_SIZE(type, member) sizeof(((type *)0)->member)
+#endif
+  static size_t __pyx_pyframe_localsplus_offset = 0;
+  #include "frameobject.h"
+  #define __Pxy_PyFrame_Initialize_Offsets()\
+    ((void)__Pyx_BUILD_ASSERT_EXPR(sizeof(PyFrameObject) == offsetof(PyFrameObject, f_localsplus) + Py_MEMBER_SIZE(PyFrameObject, f_localsplus)),\
+     (void)(__pyx_pyframe_localsplus_offset = ((size_t)PyFrame_Type.tp_basicsize) - Py_MEMBER_SIZE(PyFrameObject, f_localsplus)))
+  #define __Pyx_PyFrame_GetLocalsplus(frame)\
+    (assert(__pyx_pyframe_localsplus_offset), (PyObject **)(((char *)(frame)) + __pyx_pyframe_localsplus_offset))
+#endif
+
+/* PyObjectCallMethO.proto */
+#if CYTHON_COMPILING_IN_CPYTHON
+static CYTHON_INLINE PyObject* __Pyx_PyObject_CallMethO(PyObject *func, PyObject *arg);
+#endif
+
+/* PyObjectCallOneArg.proto */
+static CYTHON_INLINE PyObject* __Pyx_PyObject_CallOneArg(PyObject *func, PyObject *arg);
+
 /* CLineInTraceback.proto */
 #ifdef CYTHON_CLINE_IN_TRACEBACK
 #define __Pyx_CLineForTraceback(tstate, c_line)  (((CYTHON_CLINE_IN_TRACEBACK)) ? c_line : 0)
@@ -1248,7 +1311,9 @@ extern int __pyx_module_is_main_core__node_path__NodePath;
 int __pyx_module_is_main_core__node_path__NodePath = 0;
 
 /* Implementation of 'core.node_path.NodePath' */
+static PyObject *__pyx_builtin_staticmethod;
 static PyObject *__pyx_builtin_TypeError;
+static const char __pyx_k_src[] = "src";
 static const char __pyx_k_main[] = "__main__";
 static const char __pyx_k_name[] = "__name__";
 static const char __pyx_k_path[] = "path";
@@ -1256,21 +1321,30 @@ static const char __pyx_k_test[] = "__test__";
 static const char __pyx_k_reduce[] = "__reduce__";
 static const char __pyx_k_NodePath[] = "NodePath";
 static const char __pyx_k_getstate[] = "__getstate__";
+static const char __pyx_k_new_copy[] = "new_copy";
 static const char __pyx_k_setstate[] = "__setstate__";
 static const char __pyx_k_TypeError[] = "TypeError";
+static const char __pyx_k_node_path[] = "node_path";
 static const char __pyx_k_reduce_ex[] = "__reduce_ex__";
 static const char __pyx_k_pyx_vtable[] = "__pyx_vtable__";
+static const char __pyx_k_staticmethod[] = "staticmethod";
 static const char __pyx_k_reduce_cython[] = "__reduce_cython__";
 static const char __pyx_k_setstate_cython[] = "__setstate_cython__";
 static const char __pyx_k_cline_in_traceback[] = "cline_in_traceback";
+static const char __pyx_k_core_node_path_NodePath[] = "core.node_path.NodePath";
+static const char __pyx_k_core_node_path_NodePath_pyx[] = "core\\node_path\\NodePath.pyx";
 static const char __pyx_k_Pickling_of_struct_members_such[] = "Pickling of struct members such as self._native must be explicitly requested with @auto_pickle(True)";
 static PyObject *__pyx_n_s_NodePath;
 static PyObject *__pyx_kp_s_Pickling_of_struct_members_such;
 static PyObject *__pyx_n_s_TypeError;
 static PyObject *__pyx_n_s_cline_in_traceback;
+static PyObject *__pyx_n_s_core_node_path_NodePath;
+static PyObject *__pyx_kp_s_core_node_path_NodePath_pyx;
 static PyObject *__pyx_n_s_getstate;
 static PyObject *__pyx_n_s_main;
 static PyObject *__pyx_n_s_name;
+static PyObject *__pyx_n_s_new_copy;
+static PyObject *__pyx_n_s_node_path;
 static PyObject *__pyx_n_s_path;
 static PyObject *__pyx_n_s_pyx_vtable;
 static PyObject *__pyx_n_s_reduce;
@@ -1278,9 +1352,11 @@ static PyObject *__pyx_n_s_reduce_cython;
 static PyObject *__pyx_n_s_reduce_ex;
 static PyObject *__pyx_n_s_setstate;
 static PyObject *__pyx_n_s_setstate_cython;
+static PyObject *__pyx_n_s_src;
+static PyObject *__pyx_n_s_staticmethod;
 static PyObject *__pyx_n_s_test;
 static int __pyx_pf_4core_9node_path_8NodePath_8NodePath___init__(struct __pyx_obj_4core_9node_path_8NodePath_NodePath *__pyx_v_self, struct __pyx_obj_4core_6string_6String_String *__pyx_v_path); /* proto */
-static PyObject *__pyx_pf_4core_9node_path_8NodePath_8NodePath_2new_copy(struct __pyx_obj_4core_9node_path_8NodePath_NodePath *__pyx_v_self, struct __pyx_obj_4core_9node_path_8NodePath_NodePath *__pyx_v_src); /* proto */
+static PyObject *__pyx_pf_4core_9node_path_8NodePath_8NodePath_2new_copy(struct __pyx_obj_4core_9node_path_8NodePath_NodePath *__pyx_v_src); /* proto */
 static PyObject *__pyx_pf_4core_9node_path_8NodePath_8NodePath_4destroy(struct __pyx_obj_4core_9node_path_8NodePath_NodePath *__pyx_v_self); /* proto */
 static PyObject *__pyx_pf_4core_9node_path_8NodePath_8NodePath_6__str__(struct __pyx_obj_4core_9node_path_8NodePath_NodePath *__pyx_v_self); /* proto */
 static PyObject *__pyx_pf_4core_9node_path_8NodePath_8NodePath_8is_absolute(struct __pyx_obj_4core_9node_path_8NodePath_NodePath *__pyx_v_self); /* proto */
@@ -1296,6 +1372,8 @@ static PyObject *__pyx_pf_4core_9node_path_8NodePath_8NodePath_26__setstate_cyth
 static PyObject *__pyx_tp_new_4core_9node_path_8NodePath_NodePath(PyTypeObject *t, PyObject *a, PyObject *k); /*proto*/
 static PyObject *__pyx_tuple_;
 static PyObject *__pyx_tuple__2;
+static PyObject *__pyx_tuple__3;
+static PyObject *__pyx_codeobj__4;
 /* Late includes */
 
 /* "core/node_path/NodePath.pyx":4
@@ -1372,7 +1450,7 @@ static int __pyx_pw_4core_9node_path_8NodePath_8NodePath_1__init__(PyObject *__p
         else goto __pyx_L5_argtuple_error;
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "__init__") < 0)) __PYX_ERR(1, 10, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "__init__") < 0)) __PYX_ERR(0, 10, __pyx_L3_error)
       }
     } else if (PyTuple_GET_SIZE(__pyx_args) != 1) {
       goto __pyx_L5_argtuple_error;
@@ -1383,13 +1461,13 @@ static int __pyx_pw_4core_9node_path_8NodePath_8NodePath_1__init__(PyObject *__p
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("__init__", 1, 1, 1, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(1, 10, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("__init__", 1, 1, 1, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 10, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("core.node_path.NodePath.NodePath.__init__", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return -1;
   __pyx_L4_argument_unpacking_done:;
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_path), __pyx_ptype_4core_6string_6String_String, 1, "path", 0))) __PYX_ERR(1, 10, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_path), __pyx_ptype_4core_6string_6String_String, 1, "path", 0))) __PYX_ERR(0, 10, __pyx_L1_error)
   __pyx_r = __pyx_pf_4core_9node_path_8NodePath_8NodePath___init__(((struct __pyx_obj_4core_9node_path_8NodePath_NodePath *)__pyx_v_self), __pyx_v_path);
 
   /* function exit code */
@@ -1411,7 +1489,7 @@ static int __pyx_pf_4core_9node_path_8NodePath_8NodePath___init__(struct __pyx_o
  *     def __init__(self, String path):
  *         api_core.godot_node_path_new(&self._native, &path._native)             # <<<<<<<<<<<<<<
  * 
- *     def new_copy(self, NodePath src):
+ *     @staticmethod
  */
   api_core->godot_node_path_new((&__pyx_v_self->_native), (&__pyx_v_path->_native));
 
@@ -1429,25 +1507,63 @@ static int __pyx_pf_4core_9node_path_8NodePath_8NodePath___init__(struct __pyx_o
   return __pyx_r;
 }
 
-/* "core/node_path/NodePath.pyx":13
- *         api_core.godot_node_path_new(&self._native, &path._native)
+/* "core/node_path/NodePath.pyx":14
  * 
- *     def new_copy(self, NodePath src):             # <<<<<<<<<<<<<<
- *         api_core.godot_node_path_new_copy(&self._native, &src._native)
- * 
+ *     @staticmethod
+ *     def new_copy(NodePath src):             # <<<<<<<<<<<<<<
+ *         cdef NodePath node_path = NodePath.__new__(NodePath)
+ *         api_core.godot_node_path_new_copy(&node_path._native, &src._native)
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_4core_9node_path_8NodePath_8NodePath_3new_copy(PyObject *__pyx_v_self, PyObject *__pyx_v_src); /*proto*/
-static PyObject *__pyx_pw_4core_9node_path_8NodePath_8NodePath_3new_copy(PyObject *__pyx_v_self, PyObject *__pyx_v_src) {
+static PyObject *__pyx_pw_4core_9node_path_8NodePath_8NodePath_3new_copy(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
+static PyMethodDef __pyx_mdef_4core_9node_path_8NodePath_8NodePath_3new_copy = {"new_copy", (PyCFunction)(void*)(PyCFunctionWithKeywords)__pyx_pw_4core_9node_path_8NodePath_8NodePath_3new_copy, METH_VARARGS|METH_KEYWORDS, 0};
+static PyObject *__pyx_pw_4core_9node_path_8NodePath_8NodePath_3new_copy(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
+  struct __pyx_obj_4core_9node_path_8NodePath_NodePath *__pyx_v_src = 0;
   int __pyx_lineno = 0;
   const char *__pyx_filename = NULL;
   int __pyx_clineno = 0;
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("new_copy (wrapper)", 0);
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_src), __pyx_ptype_4core_9node_path_8NodePath_NodePath, 1, "src", 0))) __PYX_ERR(1, 13, __pyx_L1_error)
-  __pyx_r = __pyx_pf_4core_9node_path_8NodePath_8NodePath_2new_copy(((struct __pyx_obj_4core_9node_path_8NodePath_NodePath *)__pyx_v_self), ((struct __pyx_obj_4core_9node_path_8NodePath_NodePath *)__pyx_v_src));
+  {
+    static PyObject **__pyx_pyargnames[] = {&__pyx_n_s_src,0};
+    PyObject* values[1] = {0};
+    if (unlikely(__pyx_kwds)) {
+      Py_ssize_t kw_args;
+      const Py_ssize_t pos_args = PyTuple_GET_SIZE(__pyx_args);
+      switch (pos_args) {
+        case  1: values[0] = PyTuple_GET_ITEM(__pyx_args, 0);
+        CYTHON_FALLTHROUGH;
+        case  0: break;
+        default: goto __pyx_L5_argtuple_error;
+      }
+      kw_args = PyDict_Size(__pyx_kwds);
+      switch (pos_args) {
+        case  0:
+        if (likely((values[0] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_src)) != 0)) kw_args--;
+        else goto __pyx_L5_argtuple_error;
+      }
+      if (unlikely(kw_args > 0)) {
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "new_copy") < 0)) __PYX_ERR(0, 14, __pyx_L3_error)
+      }
+    } else if (PyTuple_GET_SIZE(__pyx_args) != 1) {
+      goto __pyx_L5_argtuple_error;
+    } else {
+      values[0] = PyTuple_GET_ITEM(__pyx_args, 0);
+    }
+    __pyx_v_src = ((struct __pyx_obj_4core_9node_path_8NodePath_NodePath *)values[0]);
+  }
+  goto __pyx_L4_argument_unpacking_done;
+  __pyx_L5_argtuple_error:;
+  __Pyx_RaiseArgtupleInvalid("new_copy", 1, 1, 1, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 14, __pyx_L3_error)
+  __pyx_L3_error:;
+  __Pyx_AddTraceback("core.node_path.NodePath.NodePath.new_copy", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_RefNannyFinishContext();
+  return NULL;
+  __pyx_L4_argument_unpacking_done:;
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_src), __pyx_ptype_4core_9node_path_8NodePath_NodePath, 1, "src", 0))) __PYX_ERR(0, 14, __pyx_L1_error)
+  __pyx_r = __pyx_pf_4core_9node_path_8NodePath_8NodePath_2new_copy(__pyx_v_src);
 
   /* function exit code */
   goto __pyx_L0;
@@ -1458,37 +1574,71 @@ static PyObject *__pyx_pw_4core_9node_path_8NodePath_8NodePath_3new_copy(PyObjec
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_4core_9node_path_8NodePath_8NodePath_2new_copy(struct __pyx_obj_4core_9node_path_8NodePath_NodePath *__pyx_v_self, struct __pyx_obj_4core_9node_path_8NodePath_NodePath *__pyx_v_src) {
+static PyObject *__pyx_pf_4core_9node_path_8NodePath_8NodePath_2new_copy(struct __pyx_obj_4core_9node_path_8NodePath_NodePath *__pyx_v_src) {
+  struct __pyx_obj_4core_9node_path_8NodePath_NodePath *__pyx_v_node_path = 0;
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
+  PyObject *__pyx_t_1 = NULL;
+  int __pyx_lineno = 0;
+  const char *__pyx_filename = NULL;
+  int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("new_copy", 0);
 
-  /* "core/node_path/NodePath.pyx":14
+  /* "core/node_path/NodePath.pyx":15
+ *     @staticmethod
+ *     def new_copy(NodePath src):
+ *         cdef NodePath node_path = NodePath.__new__(NodePath)             # <<<<<<<<<<<<<<
+ *         api_core.godot_node_path_new_copy(&node_path._native, &src._native)
+ *         return node_path
+ */
+  __pyx_t_1 = ((PyObject *)__pyx_tp_new_4core_9node_path_8NodePath_NodePath(((PyTypeObject *)__pyx_ptype_4core_9node_path_8NodePath_NodePath), __pyx_empty_tuple, NULL)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 15, __pyx_L1_error)
+  __Pyx_GOTREF(((PyObject *)__pyx_t_1));
+  __pyx_v_node_path = ((struct __pyx_obj_4core_9node_path_8NodePath_NodePath *)__pyx_t_1);
+  __pyx_t_1 = 0;
+
+  /* "core/node_path/NodePath.pyx":16
+ *     def new_copy(NodePath src):
+ *         cdef NodePath node_path = NodePath.__new__(NodePath)
+ *         api_core.godot_node_path_new_copy(&node_path._native, &src._native)             # <<<<<<<<<<<<<<
+ *         return node_path
  * 
- *     def new_copy(self, NodePath src):
- *         api_core.godot_node_path_new_copy(&self._native, &src._native)             # <<<<<<<<<<<<<<
+ */
+  api_core->godot_node_path_new_copy((&__pyx_v_node_path->_native), (&__pyx_v_src->_native));
+
+  /* "core/node_path/NodePath.pyx":17
+ *         cdef NodePath node_path = NodePath.__new__(NodePath)
+ *         api_core.godot_node_path_new_copy(&node_path._native, &src._native)
+ *         return node_path             # <<<<<<<<<<<<<<
  * 
  *     def destroy(self):
  */
-  api_core->godot_node_path_new_copy((&__pyx_v_self->_native), (&__pyx_v_src->_native));
+  __Pyx_XDECREF(__pyx_r);
+  __Pyx_INCREF(((PyObject *)__pyx_v_node_path));
+  __pyx_r = ((PyObject *)__pyx_v_node_path);
+  goto __pyx_L0;
 
-  /* "core/node_path/NodePath.pyx":13
- *         api_core.godot_node_path_new(&self._native, &path._native)
+  /* "core/node_path/NodePath.pyx":14
  * 
- *     def new_copy(self, NodePath src):             # <<<<<<<<<<<<<<
- *         api_core.godot_node_path_new_copy(&self._native, &src._native)
- * 
+ *     @staticmethod
+ *     def new_copy(NodePath src):             # <<<<<<<<<<<<<<
+ *         cdef NodePath node_path = NodePath.__new__(NodePath)
+ *         api_core.godot_node_path_new_copy(&node_path._native, &src._native)
  */
 
   /* function exit code */
-  __pyx_r = Py_None; __Pyx_INCREF(Py_None);
+  __pyx_L1_error:;
+  __Pyx_XDECREF(__pyx_t_1);
+  __Pyx_AddTraceback("core.node_path.NodePath.NodePath.new_copy", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __pyx_r = NULL;
+  __pyx_L0:;
+  __Pyx_XDECREF((PyObject *)__pyx_v_node_path);
   __Pyx_XGIVEREF(__pyx_r);
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-/* "core/node_path/NodePath.pyx":16
- *         api_core.godot_node_path_new_copy(&self._native, &src._native)
+/* "core/node_path/NodePath.pyx":19
+ *         return node_path
  * 
  *     def destroy(self):             # <<<<<<<<<<<<<<
  *         api_core.godot_node_path_destroy(&self._native)
@@ -1513,7 +1663,7 @@ static PyObject *__pyx_pf_4core_9node_path_8NodePath_8NodePath_4destroy(struct _
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("destroy", 0);
 
-  /* "core/node_path/NodePath.pyx":17
+  /* "core/node_path/NodePath.pyx":20
  * 
  *     def destroy(self):
  *         api_core.godot_node_path_destroy(&self._native)             # <<<<<<<<<<<<<<
@@ -1522,8 +1672,8 @@ static PyObject *__pyx_pf_4core_9node_path_8NodePath_8NodePath_4destroy(struct _
  */
   api_core->godot_node_path_destroy((&__pyx_v_self->_native));
 
-  /* "core/node_path/NodePath.pyx":16
- *         api_core.godot_node_path_new_copy(&self._native, &src._native)
+  /* "core/node_path/NodePath.pyx":19
+ *         return node_path
  * 
  *     def destroy(self):             # <<<<<<<<<<<<<<
  *         api_core.godot_node_path_destroy(&self._native)
@@ -1537,7 +1687,7 @@ static PyObject *__pyx_pf_4core_9node_path_8NodePath_8NodePath_4destroy(struct _
   return __pyx_r;
 }
 
-/* "core/node_path/NodePath.pyx":19
+/* "core/node_path/NodePath.pyx":22
  *         api_core.godot_node_path_destroy(&self._native)
  * 
  *     def __str__(self):             # <<<<<<<<<<<<<<
@@ -1567,7 +1717,7 @@ static PyObject *__pyx_pf_4core_9node_path_8NodePath_8NodePath_6__str__(struct _
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__str__", 0);
 
-  /* "core/node_path/NodePath.pyx":20
+  /* "core/node_path/NodePath.pyx":23
  * 
  *     def __str__(self):
  *         return api_core.godot_node_path_as_string(&self._native)             # <<<<<<<<<<<<<<
@@ -1575,13 +1725,13 @@ static PyObject *__pyx_pf_4core_9node_path_8NodePath_8NodePath_6__str__(struct _
  *     def is_absolute(self):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __pyx_convert__to_py_godot_string(api_core->godot_node_path_as_string((&__pyx_v_self->_native))); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 20, __pyx_L1_error)
+  __pyx_t_1 = __pyx_convert__to_py_godot_string(api_core->godot_node_path_as_string((&__pyx_v_self->_native))); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 23, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "core/node_path/NodePath.pyx":19
+  /* "core/node_path/NodePath.pyx":22
  *         api_core.godot_node_path_destroy(&self._native)
  * 
  *     def __str__(self):             # <<<<<<<<<<<<<<
@@ -1600,7 +1750,7 @@ static PyObject *__pyx_pf_4core_9node_path_8NodePath_8NodePath_6__str__(struct _
   return __pyx_r;
 }
 
-/* "core/node_path/NodePath.pyx":22
+/* "core/node_path/NodePath.pyx":25
  *         return api_core.godot_node_path_as_string(&self._native)
  * 
  *     def is_absolute(self):             # <<<<<<<<<<<<<<
@@ -1630,7 +1780,7 @@ static PyObject *__pyx_pf_4core_9node_path_8NodePath_8NodePath_8is_absolute(stru
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("is_absolute", 0);
 
-  /* "core/node_path/NodePath.pyx":23
+  /* "core/node_path/NodePath.pyx":26
  * 
  *     def is_absolute(self):
  *         return api_core.godot_node_path_is_absolute(&self._native)             # <<<<<<<<<<<<<<
@@ -1638,13 +1788,13 @@ static PyObject *__pyx_pf_4core_9node_path_8NodePath_8NodePath_8is_absolute(stru
  *     def get_name_count(self):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_PyBool_FromLong(api_core->godot_node_path_is_absolute((&__pyx_v_self->_native))); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 23, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyBool_FromLong(api_core->godot_node_path_is_absolute((&__pyx_v_self->_native))); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 26, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "core/node_path/NodePath.pyx":22
+  /* "core/node_path/NodePath.pyx":25
  *         return api_core.godot_node_path_as_string(&self._native)
  * 
  *     def is_absolute(self):             # <<<<<<<<<<<<<<
@@ -1663,7 +1813,7 @@ static PyObject *__pyx_pf_4core_9node_path_8NodePath_8NodePath_8is_absolute(stru
   return __pyx_r;
 }
 
-/* "core/node_path/NodePath.pyx":25
+/* "core/node_path/NodePath.pyx":28
  *         return api_core.godot_node_path_is_absolute(&self._native)
  * 
  *     def get_name_count(self):             # <<<<<<<<<<<<<<
@@ -1693,7 +1843,7 @@ static PyObject *__pyx_pf_4core_9node_path_8NodePath_8NodePath_10get_name_count(
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("get_name_count", 0);
 
-  /* "core/node_path/NodePath.pyx":26
+  /* "core/node_path/NodePath.pyx":29
  * 
  *     def get_name_count(self):
  *         return api_core.godot_node_path_get_name_count(&self._native)             # <<<<<<<<<<<<<<
@@ -1701,13 +1851,13 @@ static PyObject *__pyx_pf_4core_9node_path_8NodePath_8NodePath_10get_name_count(
  *     def get_name(self, godot_int idx):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_PyInt_From_godot_int(api_core->godot_node_path_get_name_count((&__pyx_v_self->_native))); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 26, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyInt_From_godot_int(api_core->godot_node_path_get_name_count((&__pyx_v_self->_native))); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 29, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "core/node_path/NodePath.pyx":25
+  /* "core/node_path/NodePath.pyx":28
  *         return api_core.godot_node_path_is_absolute(&self._native)
  * 
  *     def get_name_count(self):             # <<<<<<<<<<<<<<
@@ -1726,7 +1876,7 @@ static PyObject *__pyx_pf_4core_9node_path_8NodePath_8NodePath_10get_name_count(
   return __pyx_r;
 }
 
-/* "core/node_path/NodePath.pyx":28
+/* "core/node_path/NodePath.pyx":31
  *         return api_core.godot_node_path_get_name_count(&self._native)
  * 
  *     def get_name(self, godot_int idx):             # <<<<<<<<<<<<<<
@@ -1745,7 +1895,7 @@ static PyObject *__pyx_pw_4core_9node_path_8NodePath_8NodePath_13get_name(PyObje
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("get_name (wrapper)", 0);
   assert(__pyx_arg_idx); {
-    __pyx_v_idx = __Pyx_PyInt_As_godot_int(__pyx_arg_idx); if (unlikely((__pyx_v_idx == ((godot_int)-1)) && PyErr_Occurred())) __PYX_ERR(1, 28, __pyx_L3_error)
+    __pyx_v_idx = __Pyx_PyInt_As_godot_int(__pyx_arg_idx); if (unlikely((__pyx_v_idx == ((godot_int)-1)) && PyErr_Occurred())) __PYX_ERR(0, 31, __pyx_L3_error)
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -1769,7 +1919,7 @@ static PyObject *__pyx_pf_4core_9node_path_8NodePath_8NodePath_12get_name(struct
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("get_name", 0);
 
-  /* "core/node_path/NodePath.pyx":29
+  /* "core/node_path/NodePath.pyx":32
  * 
  *     def get_name(self, godot_int idx):
  *         return api_core.godot_node_path_get_name(&self._native, idx)             # <<<<<<<<<<<<<<
@@ -1777,13 +1927,13 @@ static PyObject *__pyx_pf_4core_9node_path_8NodePath_8NodePath_12get_name(struct
  *     def get_subname_count(self):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __pyx_convert__to_py_godot_string(api_core->godot_node_path_get_name((&__pyx_v_self->_native), __pyx_v_idx)); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 29, __pyx_L1_error)
+  __pyx_t_1 = __pyx_convert__to_py_godot_string(api_core->godot_node_path_get_name((&__pyx_v_self->_native), __pyx_v_idx)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 32, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "core/node_path/NodePath.pyx":28
+  /* "core/node_path/NodePath.pyx":31
  *         return api_core.godot_node_path_get_name_count(&self._native)
  * 
  *     def get_name(self, godot_int idx):             # <<<<<<<<<<<<<<
@@ -1802,7 +1952,7 @@ static PyObject *__pyx_pf_4core_9node_path_8NodePath_8NodePath_12get_name(struct
   return __pyx_r;
 }
 
-/* "core/node_path/NodePath.pyx":31
+/* "core/node_path/NodePath.pyx":34
  *         return api_core.godot_node_path_get_name(&self._native, idx)
  * 
  *     def get_subname_count(self):             # <<<<<<<<<<<<<<
@@ -1832,7 +1982,7 @@ static PyObject *__pyx_pf_4core_9node_path_8NodePath_8NodePath_14get_subname_cou
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("get_subname_count", 0);
 
-  /* "core/node_path/NodePath.pyx":32
+  /* "core/node_path/NodePath.pyx":35
  * 
  *     def get_subname_count(self):
  *         return api_core.godot_node_path_get_subname_count(&self._native)             # <<<<<<<<<<<<<<
@@ -1840,13 +1990,13 @@ static PyObject *__pyx_pf_4core_9node_path_8NodePath_8NodePath_14get_subname_cou
  *     def get_subname(self, godot_int idx):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_PyInt_From_godot_int(api_core->godot_node_path_get_subname_count((&__pyx_v_self->_native))); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 32, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyInt_From_godot_int(api_core->godot_node_path_get_subname_count((&__pyx_v_self->_native))); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 35, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "core/node_path/NodePath.pyx":31
+  /* "core/node_path/NodePath.pyx":34
  *         return api_core.godot_node_path_get_name(&self._native, idx)
  * 
  *     def get_subname_count(self):             # <<<<<<<<<<<<<<
@@ -1865,7 +2015,7 @@ static PyObject *__pyx_pf_4core_9node_path_8NodePath_8NodePath_14get_subname_cou
   return __pyx_r;
 }
 
-/* "core/node_path/NodePath.pyx":34
+/* "core/node_path/NodePath.pyx":37
  *         return api_core.godot_node_path_get_subname_count(&self._native)
  * 
  *     def get_subname(self, godot_int idx):             # <<<<<<<<<<<<<<
@@ -1884,7 +2034,7 @@ static PyObject *__pyx_pw_4core_9node_path_8NodePath_8NodePath_17get_subname(PyO
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("get_subname (wrapper)", 0);
   assert(__pyx_arg_idx); {
-    __pyx_v_idx = __Pyx_PyInt_As_godot_int(__pyx_arg_idx); if (unlikely((__pyx_v_idx == ((godot_int)-1)) && PyErr_Occurred())) __PYX_ERR(1, 34, __pyx_L3_error)
+    __pyx_v_idx = __Pyx_PyInt_As_godot_int(__pyx_arg_idx); if (unlikely((__pyx_v_idx == ((godot_int)-1)) && PyErr_Occurred())) __PYX_ERR(0, 37, __pyx_L3_error)
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -1908,7 +2058,7 @@ static PyObject *__pyx_pf_4core_9node_path_8NodePath_8NodePath_16get_subname(str
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("get_subname", 0);
 
-  /* "core/node_path/NodePath.pyx":35
+  /* "core/node_path/NodePath.pyx":38
  * 
  *     def get_subname(self, godot_int idx):
  *         return api_core.godot_node_path_get_subname(&self._native, idx)             # <<<<<<<<<<<<<<
@@ -1916,13 +2066,13 @@ static PyObject *__pyx_pf_4core_9node_path_8NodePath_8NodePath_16get_subname(str
  *     def get_concatenated_subnames(self):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __pyx_convert__to_py_godot_string(api_core->godot_node_path_get_subname((&__pyx_v_self->_native), __pyx_v_idx)); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 35, __pyx_L1_error)
+  __pyx_t_1 = __pyx_convert__to_py_godot_string(api_core->godot_node_path_get_subname((&__pyx_v_self->_native), __pyx_v_idx)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 38, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "core/node_path/NodePath.pyx":34
+  /* "core/node_path/NodePath.pyx":37
  *         return api_core.godot_node_path_get_subname_count(&self._native)
  * 
  *     def get_subname(self, godot_int idx):             # <<<<<<<<<<<<<<
@@ -1941,7 +2091,7 @@ static PyObject *__pyx_pf_4core_9node_path_8NodePath_8NodePath_16get_subname(str
   return __pyx_r;
 }
 
-/* "core/node_path/NodePath.pyx":37
+/* "core/node_path/NodePath.pyx":40
  *         return api_core.godot_node_path_get_subname(&self._native, idx)
  * 
  *     def get_concatenated_subnames(self):             # <<<<<<<<<<<<<<
@@ -1971,7 +2121,7 @@ static PyObject *__pyx_pf_4core_9node_path_8NodePath_8NodePath_18get_concatenate
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("get_concatenated_subnames", 0);
 
-  /* "core/node_path/NodePath.pyx":38
+  /* "core/node_path/NodePath.pyx":41
  * 
  *     def get_concatenated_subnames(self):
  *         return api_core.godot_node_path_get_concatenated_subnames(&self._native)             # <<<<<<<<<<<<<<
@@ -1979,13 +2129,13 @@ static PyObject *__pyx_pf_4core_9node_path_8NodePath_8NodePath_18get_concatenate
  *     def is_empty(self):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __pyx_convert__to_py_godot_string(api_core->godot_node_path_get_concatenated_subnames((&__pyx_v_self->_native))); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 38, __pyx_L1_error)
+  __pyx_t_1 = __pyx_convert__to_py_godot_string(api_core->godot_node_path_get_concatenated_subnames((&__pyx_v_self->_native))); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 41, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "core/node_path/NodePath.pyx":37
+  /* "core/node_path/NodePath.pyx":40
  *         return api_core.godot_node_path_get_subname(&self._native, idx)
  * 
  *     def get_concatenated_subnames(self):             # <<<<<<<<<<<<<<
@@ -2004,7 +2154,7 @@ static PyObject *__pyx_pf_4core_9node_path_8NodePath_8NodePath_18get_concatenate
   return __pyx_r;
 }
 
-/* "core/node_path/NodePath.pyx":40
+/* "core/node_path/NodePath.pyx":43
  *         return api_core.godot_node_path_get_concatenated_subnames(&self._native)
  * 
  *     def is_empty(self):             # <<<<<<<<<<<<<<
@@ -2034,7 +2184,7 @@ static PyObject *__pyx_pf_4core_9node_path_8NodePath_8NodePath_20is_empty(struct
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("is_empty", 0);
 
-  /* "core/node_path/NodePath.pyx":41
+  /* "core/node_path/NodePath.pyx":44
  * 
  *     def is_empty(self):
  *         return api_core.godot_node_path_is_empty(&self._native)             # <<<<<<<<<<<<<<
@@ -2042,13 +2192,13 @@ static PyObject *__pyx_pf_4core_9node_path_8NodePath_8NodePath_20is_empty(struct
  *     def __eq__(self, NodePath b):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_PyBool_FromLong(api_core->godot_node_path_is_empty((&__pyx_v_self->_native))); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 41, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyBool_FromLong(api_core->godot_node_path_is_empty((&__pyx_v_self->_native))); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 44, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "core/node_path/NodePath.pyx":40
+  /* "core/node_path/NodePath.pyx":43
  *         return api_core.godot_node_path_get_concatenated_subnames(&self._native)
  * 
  *     def is_empty(self):             # <<<<<<<<<<<<<<
@@ -2067,7 +2217,7 @@ static PyObject *__pyx_pf_4core_9node_path_8NodePath_8NodePath_20is_empty(struct
   return __pyx_r;
 }
 
-/* "core/node_path/NodePath.pyx":43
+/* "core/node_path/NodePath.pyx":46
  *         return api_core.godot_node_path_is_empty(&self._native)
  * 
  *     def __eq__(self, NodePath b):             # <<<<<<<<<<<<<<
@@ -2084,7 +2234,7 @@ static PyObject *__pyx_pw_4core_9node_path_8NodePath_8NodePath_23__eq__(PyObject
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__eq__ (wrapper)", 0);
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_b), __pyx_ptype_4core_9node_path_8NodePath_NodePath, 1, "b", 0))) __PYX_ERR(1, 43, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_b), __pyx_ptype_4core_9node_path_8NodePath_NodePath, 1, "b", 0))) __PYX_ERR(0, 46, __pyx_L1_error)
   __pyx_r = __pyx_pf_4core_9node_path_8NodePath_8NodePath_22__eq__(((struct __pyx_obj_4core_9node_path_8NodePath_NodePath *)__pyx_v_self), ((struct __pyx_obj_4core_9node_path_8NodePath_NodePath *)__pyx_v_b));
 
   /* function exit code */
@@ -2105,20 +2255,20 @@ static PyObject *__pyx_pf_4core_9node_path_8NodePath_8NodePath_22__eq__(struct _
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__eq__", 0);
 
-  /* "core/node_path/NodePath.pyx":44
+  /* "core/node_path/NodePath.pyx":47
  * 
  *     def __eq__(self, NodePath b):
  *         return api_core.godot_node_path_operator_equal(&self._native, &b._native)             # <<<<<<<<<<<<<<
  * 
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_PyBool_FromLong(api_core->godot_node_path_operator_equal((&__pyx_v_self->_native), (&__pyx_v_b->_native))); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 44, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyBool_FromLong(api_core->godot_node_path_operator_equal((&__pyx_v_self->_native), (&__pyx_v_b->_native))); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 47, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "core/node_path/NodePath.pyx":43
+  /* "core/node_path/NodePath.pyx":46
  *         return api_core.godot_node_path_is_empty(&self._native)
  * 
  *     def __eq__(self, NodePath b):             # <<<<<<<<<<<<<<
@@ -2171,11 +2321,11 @@ static PyObject *__pyx_pf_4core_9node_path_8NodePath_8NodePath_24__reduce_cython
  * def __setstate_cython__(self, __pyx_state):
  *     raise TypeError("Pickling of struct members such as self._native must be explicitly requested with @auto_pickle(True)")
  */
-  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_TypeError, __pyx_tuple_, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_TypeError, __pyx_tuple_, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 2, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_Raise(__pyx_t_1, 0, 0, 0);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __PYX_ERR(0, 2, __pyx_L1_error)
+  __PYX_ERR(1, 2, __pyx_L1_error)
 
   /* "(tree fragment)":1
  * def __reduce_cython__(self):             # <<<<<<<<<<<<<<
@@ -2227,11 +2377,11 @@ static PyObject *__pyx_pf_4core_9node_path_8NodePath_8NodePath_26__setstate_cyth
  * def __setstate_cython__(self, __pyx_state):
  *     raise TypeError("Pickling of struct members such as self._native must be explicitly requested with @auto_pickle(True)")             # <<<<<<<<<<<<<<
  */
-  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_TypeError, __pyx_tuple__2, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 4, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_TypeError, __pyx_tuple__2, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 4, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_Raise(__pyx_t_1, 0, 0, 0);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __PYX_ERR(0, 4, __pyx_L1_error)
+  __PYX_ERR(1, 4, __pyx_L1_error)
 
   /* "(tree fragment)":3
  * def __reduce_cython__(self):
@@ -2501,7 +2651,7 @@ static PyObject *__pyx_tp_richcompare_4core_9node_path_8NodePath_NodePath(PyObje
 }
 
 static PyMethodDef __pyx_methods_4core_9node_path_8NodePath_NodePath[] = {
-  {"new_copy", (PyCFunction)__pyx_pw_4core_9node_path_8NodePath_8NodePath_3new_copy, METH_O, 0},
+  {"new_copy", (PyCFunction)(void*)(PyCFunctionWithKeywords)__pyx_pw_4core_9node_path_8NodePath_8NodePath_3new_copy, METH_VARARGS|METH_KEYWORDS, 0},
   {"destroy", (PyCFunction)__pyx_pw_4core_9node_path_8NodePath_8NodePath_5destroy, METH_NOARGS, 0},
   {"is_absolute", (PyCFunction)__pyx_pw_4core_9node_path_8NodePath_8NodePath_9is_absolute, METH_NOARGS, 0},
   {"get_name_count", (PyCFunction)__pyx_pw_4core_9node_path_8NodePath_8NodePath_11get_name_count, METH_NOARGS, 0},
@@ -2634,9 +2784,13 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_kp_s_Pickling_of_struct_members_such, __pyx_k_Pickling_of_struct_members_such, sizeof(__pyx_k_Pickling_of_struct_members_such), 0, 0, 1, 0},
   {&__pyx_n_s_TypeError, __pyx_k_TypeError, sizeof(__pyx_k_TypeError), 0, 0, 1, 1},
   {&__pyx_n_s_cline_in_traceback, __pyx_k_cline_in_traceback, sizeof(__pyx_k_cline_in_traceback), 0, 0, 1, 1},
+  {&__pyx_n_s_core_node_path_NodePath, __pyx_k_core_node_path_NodePath, sizeof(__pyx_k_core_node_path_NodePath), 0, 0, 1, 1},
+  {&__pyx_kp_s_core_node_path_NodePath_pyx, __pyx_k_core_node_path_NodePath_pyx, sizeof(__pyx_k_core_node_path_NodePath_pyx), 0, 0, 1, 0},
   {&__pyx_n_s_getstate, __pyx_k_getstate, sizeof(__pyx_k_getstate), 0, 0, 1, 1},
   {&__pyx_n_s_main, __pyx_k_main, sizeof(__pyx_k_main), 0, 0, 1, 1},
   {&__pyx_n_s_name, __pyx_k_name, sizeof(__pyx_k_name), 0, 0, 1, 1},
+  {&__pyx_n_s_new_copy, __pyx_k_new_copy, sizeof(__pyx_k_new_copy), 0, 0, 1, 1},
+  {&__pyx_n_s_node_path, __pyx_k_node_path, sizeof(__pyx_k_node_path), 0, 0, 1, 1},
   {&__pyx_n_s_path, __pyx_k_path, sizeof(__pyx_k_path), 0, 0, 1, 1},
   {&__pyx_n_s_pyx_vtable, __pyx_k_pyx_vtable, sizeof(__pyx_k_pyx_vtable), 0, 0, 1, 1},
   {&__pyx_n_s_reduce, __pyx_k_reduce, sizeof(__pyx_k_reduce), 0, 0, 1, 1},
@@ -2644,11 +2798,14 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_n_s_reduce_ex, __pyx_k_reduce_ex, sizeof(__pyx_k_reduce_ex), 0, 0, 1, 1},
   {&__pyx_n_s_setstate, __pyx_k_setstate, sizeof(__pyx_k_setstate), 0, 0, 1, 1},
   {&__pyx_n_s_setstate_cython, __pyx_k_setstate_cython, sizeof(__pyx_k_setstate_cython), 0, 0, 1, 1},
+  {&__pyx_n_s_src, __pyx_k_src, sizeof(__pyx_k_src), 0, 0, 1, 1},
+  {&__pyx_n_s_staticmethod, __pyx_k_staticmethod, sizeof(__pyx_k_staticmethod), 0, 0, 1, 1},
   {&__pyx_n_s_test, __pyx_k_test, sizeof(__pyx_k_test), 0, 0, 1, 1},
   {0, 0, 0, 0, 0, 0, 0}
 };
 static CYTHON_SMALL_CODE int __Pyx_InitCachedBuiltins(void) {
-  __pyx_builtin_TypeError = __Pyx_GetBuiltinName(__pyx_n_s_TypeError); if (!__pyx_builtin_TypeError) __PYX_ERR(0, 2, __pyx_L1_error)
+  __pyx_builtin_staticmethod = __Pyx_GetBuiltinName(__pyx_n_s_staticmethod); if (!__pyx_builtin_staticmethod) __PYX_ERR(0, 13, __pyx_L1_error)
+  __pyx_builtin_TypeError = __Pyx_GetBuiltinName(__pyx_n_s_TypeError); if (!__pyx_builtin_TypeError) __PYX_ERR(1, 2, __pyx_L1_error)
   return 0;
   __pyx_L1_error:;
   return -1;
@@ -2664,7 +2821,7 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
  * def __setstate_cython__(self, __pyx_state):
  *     raise TypeError("Pickling of struct members such as self._native must be explicitly requested with @auto_pickle(True)")
  */
-  __pyx_tuple_ = PyTuple_Pack(1, __pyx_kp_s_Pickling_of_struct_members_such); if (unlikely(!__pyx_tuple_)) __PYX_ERR(0, 2, __pyx_L1_error)
+  __pyx_tuple_ = PyTuple_Pack(1, __pyx_kp_s_Pickling_of_struct_members_such); if (unlikely(!__pyx_tuple_)) __PYX_ERR(1, 2, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple_);
   __Pyx_GIVEREF(__pyx_tuple_);
 
@@ -2673,9 +2830,21 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
  * def __setstate_cython__(self, __pyx_state):
  *     raise TypeError("Pickling of struct members such as self._native must be explicitly requested with @auto_pickle(True)")             # <<<<<<<<<<<<<<
  */
-  __pyx_tuple__2 = PyTuple_Pack(1, __pyx_kp_s_Pickling_of_struct_members_such); if (unlikely(!__pyx_tuple__2)) __PYX_ERR(0, 4, __pyx_L1_error)
+  __pyx_tuple__2 = PyTuple_Pack(1, __pyx_kp_s_Pickling_of_struct_members_such); if (unlikely(!__pyx_tuple__2)) __PYX_ERR(1, 4, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__2);
   __Pyx_GIVEREF(__pyx_tuple__2);
+
+  /* "core/node_path/NodePath.pyx":14
+ * 
+ *     @staticmethod
+ *     def new_copy(NodePath src):             # <<<<<<<<<<<<<<
+ *         cdef NodePath node_path = NodePath.__new__(NodePath)
+ *         api_core.godot_node_path_new_copy(&node_path._native, &src._native)
+ */
+  __pyx_tuple__3 = PyTuple_Pack(2, __pyx_n_s_src, __pyx_n_s_node_path); if (unlikely(!__pyx_tuple__3)) __PYX_ERR(0, 14, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__3);
+  __Pyx_GIVEREF(__pyx_tuple__3);
+  __pyx_codeobj__4 = (PyObject*)__Pyx_PyCode_New(1, 0, 2, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__3, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_core_node_path_NodePath_pyx, __pyx_n_s_new_copy, 14, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__4)) __PYX_ERR(0, 14, __pyx_L1_error)
   __Pyx_RefNannyFinishContext();
   return 0;
   __pyx_L1_error:;
@@ -2684,7 +2853,7 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
 }
 
 static CYTHON_SMALL_CODE int __Pyx_InitGlobals(void) {
-  if (__Pyx_InitStrings(__pyx_string_tab) < 0) __PYX_ERR(1, 1, __pyx_L1_error);
+  if (__Pyx_InitStrings(__pyx_string_tab) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
   return 0;
   __pyx_L1_error:;
   return -1;
@@ -2721,7 +2890,7 @@ static int __Pyx_modinit_function_export_code(void) {
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__Pyx_modinit_function_export_code", 0);
   /*--- Function export code ---*/
-  if (__Pyx_ExportFunction("set_api_core_node_path", (void (*)(void))__pyx_f_4core_9node_path_8NodePath_set_api_core_node_path, "PyObject *(struct godot_gdnative_core_api_struct *)") < 0) __PYX_ERR(1, 1, __pyx_L1_error)
+  if (__Pyx_ExportFunction("set_api_core_node_path", (void (*)(void))__pyx_f_4core_9node_path_8NodePath_set_api_core_node_path, "PyObject *(struct godot_gdnative_core_api_struct *)") < 0) __PYX_ERR(0, 1, __pyx_L1_error)
   __Pyx_RefNannyFinishContext();
   return 0;
   __pyx_L1_error:;
@@ -2739,16 +2908,16 @@ static int __Pyx_modinit_type_init_code(void) {
   __pyx_vtabptr_4core_9node_path_8NodePath_NodePath = &__pyx_vtable_4core_9node_path_8NodePath_NodePath;
   __pyx_vtable_4core_9node_path_8NodePath_NodePath.set_native = (void (*)(struct __pyx_obj_4core_9node_path_8NodePath_NodePath *, godot_node_path))__pyx_f_4core_9node_path_8NodePath_8NodePath_set_native;
   __pyx_vtable_4core_9node_path_8NodePath_NodePath.new_static = (struct __pyx_obj_4core_9node_path_8NodePath_NodePath *(*)(godot_node_path))__pyx_f_4core_9node_path_8NodePath_8NodePath_new_static;
-  if (PyType_Ready(&__pyx_type_4core_9node_path_8NodePath_NodePath) < 0) __PYX_ERR(1, 8, __pyx_L1_error)
+  if (PyType_Ready(&__pyx_type_4core_9node_path_8NodePath_NodePath) < 0) __PYX_ERR(0, 8, __pyx_L1_error)
   #if PY_VERSION_HEX < 0x030800B1
   __pyx_type_4core_9node_path_8NodePath_NodePath.tp_print = 0;
   #endif
   if ((CYTHON_USE_TYPE_SLOTS && CYTHON_USE_PYTYPE_LOOKUP) && likely(!__pyx_type_4core_9node_path_8NodePath_NodePath.tp_dictoffset && __pyx_type_4core_9node_path_8NodePath_NodePath.tp_getattro == PyObject_GenericGetAttr)) {
     __pyx_type_4core_9node_path_8NodePath_NodePath.tp_getattro = __Pyx_PyObject_GenericGetAttr;
   }
-  if (__Pyx_SetVtable(__pyx_type_4core_9node_path_8NodePath_NodePath.tp_dict, __pyx_vtabptr_4core_9node_path_8NodePath_NodePath) < 0) __PYX_ERR(1, 8, __pyx_L1_error)
-  if (PyObject_SetAttr(__pyx_m, __pyx_n_s_NodePath, (PyObject *)&__pyx_type_4core_9node_path_8NodePath_NodePath) < 0) __PYX_ERR(1, 8, __pyx_L1_error)
-  if (__Pyx_setup_reduce((PyObject*)&__pyx_type_4core_9node_path_8NodePath_NodePath) < 0) __PYX_ERR(1, 8, __pyx_L1_error)
+  if (__Pyx_SetVtable(__pyx_type_4core_9node_path_8NodePath_NodePath.tp_dict, __pyx_vtabptr_4core_9node_path_8NodePath_NodePath) < 0) __PYX_ERR(0, 8, __pyx_L1_error)
+  if (PyObject_SetAttr(__pyx_m, __pyx_n_s_NodePath, (PyObject *)&__pyx_type_4core_9node_path_8NodePath_NodePath) < 0) __PYX_ERR(0, 8, __pyx_L1_error)
+  if (__Pyx_setup_reduce((PyObject*)&__pyx_type_4core_9node_path_8NodePath_NodePath) < 0) __PYX_ERR(0, 8, __pyx_L1_error)
   __pyx_ptype_4core_9node_path_8NodePath_NodePath = &__pyx_type_4core_9node_path_8NodePath_NodePath;
   __Pyx_RefNannyFinishContext();
   return 0;
@@ -2901,6 +3070,7 @@ static CYTHON_SMALL_CODE int __pyx_pymod_exec_NodePath(PyObject *__pyx_pyinit_mo
 #endif
 {
   PyObject *__pyx_t_1 = NULL;
+  PyObject *__pyx_t_2 = NULL;
   int __pyx_lineno = 0;
   const char *__pyx_filename = NULL;
   int __pyx_clineno = 0;
@@ -2924,30 +3094,30 @@ if (!__Pyx_RefNanny) {
 }
 #endif
   __Pyx_RefNannySetupContext("__Pyx_PyMODINIT_FUNC PyInit_NodePath(void)", 0);
-  if (__Pyx_check_binary_version() < 0) __PYX_ERR(1, 1, __pyx_L1_error)
+  if (__Pyx_check_binary_version() < 0) __PYX_ERR(0, 1, __pyx_L1_error)
   #ifdef __Pxy_PyFrame_Initialize_Offsets
   __Pxy_PyFrame_Initialize_Offsets();
   #endif
-  __pyx_empty_tuple = PyTuple_New(0); if (unlikely(!__pyx_empty_tuple)) __PYX_ERR(1, 1, __pyx_L1_error)
-  __pyx_empty_bytes = PyBytes_FromStringAndSize("", 0); if (unlikely(!__pyx_empty_bytes)) __PYX_ERR(1, 1, __pyx_L1_error)
-  __pyx_empty_unicode = PyUnicode_FromStringAndSize("", 0); if (unlikely(!__pyx_empty_unicode)) __PYX_ERR(1, 1, __pyx_L1_error)
+  __pyx_empty_tuple = PyTuple_New(0); if (unlikely(!__pyx_empty_tuple)) __PYX_ERR(0, 1, __pyx_L1_error)
+  __pyx_empty_bytes = PyBytes_FromStringAndSize("", 0); if (unlikely(!__pyx_empty_bytes)) __PYX_ERR(0, 1, __pyx_L1_error)
+  __pyx_empty_unicode = PyUnicode_FromStringAndSize("", 0); if (unlikely(!__pyx_empty_unicode)) __PYX_ERR(0, 1, __pyx_L1_error)
   #ifdef __Pyx_CyFunction_USED
-  if (__pyx_CyFunction_init() < 0) __PYX_ERR(1, 1, __pyx_L1_error)
+  if (__pyx_CyFunction_init() < 0) __PYX_ERR(0, 1, __pyx_L1_error)
   #endif
   #ifdef __Pyx_FusedFunction_USED
-  if (__pyx_FusedFunction_init() < 0) __PYX_ERR(1, 1, __pyx_L1_error)
+  if (__pyx_FusedFunction_init() < 0) __PYX_ERR(0, 1, __pyx_L1_error)
   #endif
   #ifdef __Pyx_Coroutine_USED
-  if (__pyx_Coroutine_init() < 0) __PYX_ERR(1, 1, __pyx_L1_error)
+  if (__pyx_Coroutine_init() < 0) __PYX_ERR(0, 1, __pyx_L1_error)
   #endif
   #ifdef __Pyx_Generator_USED
-  if (__pyx_Generator_init() < 0) __PYX_ERR(1, 1, __pyx_L1_error)
+  if (__pyx_Generator_init() < 0) __PYX_ERR(0, 1, __pyx_L1_error)
   #endif
   #ifdef __Pyx_AsyncGen_USED
-  if (__pyx_AsyncGen_init() < 0) __PYX_ERR(1, 1, __pyx_L1_error)
+  if (__pyx_AsyncGen_init() < 0) __PYX_ERR(0, 1, __pyx_L1_error)
   #endif
   #ifdef __Pyx_StopAsyncIteration_USED
-  if (__pyx_StopAsyncIteration_init() < 0) __PYX_ERR(1, 1, __pyx_L1_error)
+  if (__pyx_StopAsyncIteration_init() < 0) __PYX_ERR(0, 1, __pyx_L1_error)
   #endif
   /*--- Library function declarations ---*/
   /*--- Threads initialization code ---*/
@@ -2964,57 +3134,86 @@ if (!__Pyx_RefNanny) {
   #else
   __pyx_m = PyModule_Create(&__pyx_moduledef);
   #endif
-  if (unlikely(!__pyx_m)) __PYX_ERR(1, 1, __pyx_L1_error)
+  if (unlikely(!__pyx_m)) __PYX_ERR(0, 1, __pyx_L1_error)
   #endif
-  __pyx_d = PyModule_GetDict(__pyx_m); if (unlikely(!__pyx_d)) __PYX_ERR(1, 1, __pyx_L1_error)
+  __pyx_d = PyModule_GetDict(__pyx_m); if (unlikely(!__pyx_d)) __PYX_ERR(0, 1, __pyx_L1_error)
   Py_INCREF(__pyx_d);
-  __pyx_b = PyImport_AddModule(__Pyx_BUILTIN_MODULE_NAME); if (unlikely(!__pyx_b)) __PYX_ERR(1, 1, __pyx_L1_error)
+  __pyx_b = PyImport_AddModule(__Pyx_BUILTIN_MODULE_NAME); if (unlikely(!__pyx_b)) __PYX_ERR(0, 1, __pyx_L1_error)
   Py_INCREF(__pyx_b);
-  __pyx_cython_runtime = PyImport_AddModule((char *) "cython_runtime"); if (unlikely(!__pyx_cython_runtime)) __PYX_ERR(1, 1, __pyx_L1_error)
+  __pyx_cython_runtime = PyImport_AddModule((char *) "cython_runtime"); if (unlikely(!__pyx_cython_runtime)) __PYX_ERR(0, 1, __pyx_L1_error)
   Py_INCREF(__pyx_cython_runtime);
-  if (PyObject_SetAttrString(__pyx_m, "__builtins__", __pyx_b) < 0) __PYX_ERR(1, 1, __pyx_L1_error);
+  if (PyObject_SetAttrString(__pyx_m, "__builtins__", __pyx_b) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
   /*--- Initialize various global constants etc. ---*/
-  if (__Pyx_InitGlobals() < 0) __PYX_ERR(1, 1, __pyx_L1_error)
+  if (__Pyx_InitGlobals() < 0) __PYX_ERR(0, 1, __pyx_L1_error)
   #if PY_MAJOR_VERSION < 3 && (__PYX_DEFAULT_STRING_ENCODING_IS_ASCII || __PYX_DEFAULT_STRING_ENCODING_IS_DEFAULT)
-  if (__Pyx_init_sys_getdefaultencoding_params() < 0) __PYX_ERR(1, 1, __pyx_L1_error)
+  if (__Pyx_init_sys_getdefaultencoding_params() < 0) __PYX_ERR(0, 1, __pyx_L1_error)
   #endif
   if (__pyx_module_is_main_core__node_path__NodePath) {
-    if (PyObject_SetAttr(__pyx_m, __pyx_n_s_name, __pyx_n_s_main) < 0) __PYX_ERR(1, 1, __pyx_L1_error)
+    if (PyObject_SetAttr(__pyx_m, __pyx_n_s_name, __pyx_n_s_main) < 0) __PYX_ERR(0, 1, __pyx_L1_error)
   }
   #if PY_MAJOR_VERSION >= 3
   {
-    PyObject *modules = PyImport_GetModuleDict(); if (unlikely(!modules)) __PYX_ERR(1, 1, __pyx_L1_error)
+    PyObject *modules = PyImport_GetModuleDict(); if (unlikely(!modules)) __PYX_ERR(0, 1, __pyx_L1_error)
     if (!PyDict_GetItemString(modules, "core.node_path.NodePath")) {
-      if (unlikely(PyDict_SetItemString(modules, "core.node_path.NodePath", __pyx_m) < 0)) __PYX_ERR(1, 1, __pyx_L1_error)
+      if (unlikely(PyDict_SetItemString(modules, "core.node_path.NodePath", __pyx_m) < 0)) __PYX_ERR(0, 1, __pyx_L1_error)
     }
   }
   #endif
   /*--- Builtin init code ---*/
-  if (__Pyx_InitCachedBuiltins() < 0) __PYX_ERR(1, 1, __pyx_L1_error)
+  if (__Pyx_InitCachedBuiltins() < 0) __PYX_ERR(0, 1, __pyx_L1_error)
   /*--- Constants init code ---*/
-  if (__Pyx_InitCachedConstants() < 0) __PYX_ERR(1, 1, __pyx_L1_error)
+  if (__Pyx_InitCachedConstants() < 0) __PYX_ERR(0, 1, __pyx_L1_error)
   /*--- Global type/function init code ---*/
   (void)__Pyx_modinit_global_init_code();
   (void)__Pyx_modinit_variable_export_code();
-  if (unlikely(__Pyx_modinit_function_export_code() < 0)) __PYX_ERR(1, 1, __pyx_L1_error)
-  if (unlikely(__Pyx_modinit_type_init_code() < 0)) __PYX_ERR(1, 1, __pyx_L1_error)
-  if (unlikely(__Pyx_modinit_type_import_code() < 0)) __PYX_ERR(1, 1, __pyx_L1_error)
+  if (unlikely(__Pyx_modinit_function_export_code() < 0)) __PYX_ERR(0, 1, __pyx_L1_error)
+  if (unlikely(__Pyx_modinit_type_init_code() < 0)) __PYX_ERR(0, 1, __pyx_L1_error)
+  if (unlikely(__Pyx_modinit_type_import_code() < 0)) __PYX_ERR(0, 1, __pyx_L1_error)
   (void)__Pyx_modinit_variable_import_code();
   (void)__Pyx_modinit_function_import_code();
   /*--- Execution code ---*/
   #if defined(__Pyx_Generator_USED) || defined(__Pyx_Coroutine_USED)
-  if (__Pyx_patch_abc() < 0) __PYX_ERR(1, 1, __pyx_L1_error)
+  if (__Pyx_patch_abc() < 0) __PYX_ERR(0, 1, __pyx_L1_error)
   #endif
+
+  /* "core/node_path/NodePath.pyx":14
+ * 
+ *     @staticmethod
+ *     def new_copy(NodePath src):             # <<<<<<<<<<<<<<
+ *         cdef NodePath node_path = NodePath.__new__(NodePath)
+ *         api_core.godot_node_path_new_copy(&node_path._native, &src._native)
+ */
+  __pyx_t_1 = PyCFunction_NewEx(&__pyx_mdef_4core_9node_path_8NodePath_8NodePath_3new_copy, NULL, __pyx_n_s_core_node_path_NodePath); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 14, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  if (PyDict_SetItem((PyObject *)__pyx_ptype_4core_9node_path_8NodePath_NodePath->tp_dict, __pyx_n_s_new_copy, __pyx_t_1) < 0) __PYX_ERR(0, 14, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+  PyType_Modified(__pyx_ptype_4core_9node_path_8NodePath_NodePath);
+
+  /* "core/node_path/NodePath.pyx":13
+ *         api_core.godot_node_path_new(&self._native, &path._native)
+ * 
+ *     @staticmethod             # <<<<<<<<<<<<<<
+ *     def new_copy(NodePath src):
+ *         cdef NodePath node_path = NodePath.__new__(NodePath)
+ */
+  __Pyx_GetNameInClass(__pyx_t_1, (PyObject *)__pyx_ptype_4core_9node_path_8NodePath_NodePath, __pyx_n_s_new_copy); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 14, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __pyx_t_2 = __Pyx_PyObject_CallOneArg(__pyx_builtin_staticmethod, __pyx_t_1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 13, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+  if (PyDict_SetItem((PyObject *)__pyx_ptype_4core_9node_path_8NodePath_NodePath->tp_dict, __pyx_n_s_new_copy, __pyx_t_2) < 0) __PYX_ERR(0, 14, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+  PyType_Modified(__pyx_ptype_4core_9node_path_8NodePath_NodePath);
 
   /* "core/node_path/NodePath.pyx":1
  * from core.string.String cimport *             # <<<<<<<<<<<<<<
  * from core.node_path.node_path_binding cimport *
  * 
  */
-  __pyx_t_1 = __Pyx_PyDict_NewPresized(0); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 1, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_1);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_test, __pyx_t_1) < 0) __PYX_ERR(1, 1, __pyx_L1_error)
-  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+  __pyx_t_2 = __Pyx_PyDict_NewPresized(0); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 1, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_test, __pyx_t_2) < 0) __PYX_ERR(0, 1, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
   /* "core/string/String.pxd":10
  * 
@@ -3029,6 +3228,7 @@ if (!__Pyx_RefNanny) {
   goto __pyx_L0;
   __pyx_L1_error:;
   __Pyx_XDECREF(__pyx_t_1);
+  __Pyx_XDECREF(__pyx_t_2);
   if (__pyx_m) {
     if (__pyx_d) {
       __Pyx_AddTraceback("init core.node_path.NodePath", __pyx_clineno, __pyx_lineno, __pyx_filename);
@@ -3776,6 +3976,263 @@ static CYTHON_INLINE int __Pyx_object_dict_version_matches(PyObject* obj, PY_UIN
     if (unlikely(!dict) || unlikely(tp_dict_version != __PYX_GET_DICT_VERSION(dict)))
         return 0;
     return obj_dict_version == __Pyx_get_object_dict_version(obj);
+}
+#endif
+
+/* GetModuleGlobalName */
+#if CYTHON_USE_DICT_VERSIONS
+static PyObject *__Pyx__GetModuleGlobalName(PyObject *name, PY_UINT64_T *dict_version, PyObject **dict_cached_value)
+#else
+static CYTHON_INLINE PyObject *__Pyx__GetModuleGlobalName(PyObject *name)
+#endif
+{
+    PyObject *result;
+#if !CYTHON_AVOID_BORROWED_REFS
+#if CYTHON_COMPILING_IN_CPYTHON && PY_VERSION_HEX >= 0x030500A1
+    result = _PyDict_GetItem_KnownHash(__pyx_d, name, ((PyASCIIObject *) name)->hash);
+    __PYX_UPDATE_DICT_CACHE(__pyx_d, result, *dict_cached_value, *dict_version)
+    if (likely(result)) {
+        return __Pyx_NewRef(result);
+    } else if (unlikely(PyErr_Occurred())) {
+        return NULL;
+    }
+#else
+    result = PyDict_GetItem(__pyx_d, name);
+    __PYX_UPDATE_DICT_CACHE(__pyx_d, result, *dict_cached_value, *dict_version)
+    if (likely(result)) {
+        return __Pyx_NewRef(result);
+    }
+#endif
+#else
+    result = PyObject_GetItem(__pyx_d, name);
+    __PYX_UPDATE_DICT_CACHE(__pyx_d, result, *dict_cached_value, *dict_version)
+    if (likely(result)) {
+        return __Pyx_NewRef(result);
+    }
+    PyErr_Clear();
+#endif
+    return __Pyx_GetBuiltinName(name);
+}
+
+/* GetNameInClass */
+static PyObject *__Pyx_GetGlobalNameAfterAttributeLookup(PyObject *name) {
+    PyObject *result;
+    __Pyx_PyThreadState_declare
+    __Pyx_PyThreadState_assign
+    if (unlikely(!__Pyx_PyErr_ExceptionMatches(PyExc_AttributeError)))
+        return NULL;
+    __Pyx_PyErr_Clear();
+    __Pyx_GetModuleGlobalNameUncached(result, name);
+    return result;
+}
+static PyObject *__Pyx__GetNameInClass(PyObject *nmspace, PyObject *name) {
+    PyObject *result;
+    result = __Pyx_PyObject_GetAttrStr(nmspace, name);
+    if (!result) {
+        result = __Pyx_GetGlobalNameAfterAttributeLookup(name);
+    }
+    return result;
+}
+
+/* PyCFunctionFastCall */
+#if CYTHON_FAST_PYCCALL
+static CYTHON_INLINE PyObject * __Pyx_PyCFunction_FastCall(PyObject *func_obj, PyObject **args, Py_ssize_t nargs) {
+    PyCFunctionObject *func = (PyCFunctionObject*)func_obj;
+    PyCFunction meth = PyCFunction_GET_FUNCTION(func);
+    PyObject *self = PyCFunction_GET_SELF(func);
+    int flags = PyCFunction_GET_FLAGS(func);
+    assert(PyCFunction_Check(func));
+    assert(METH_FASTCALL == (flags & ~(METH_CLASS | METH_STATIC | METH_COEXIST | METH_KEYWORDS | METH_STACKLESS)));
+    assert(nargs >= 0);
+    assert(nargs == 0 || args != NULL);
+    /* _PyCFunction_FastCallDict() must not be called with an exception set,
+       because it may clear it (directly or indirectly) and so the
+       caller loses its exception */
+    assert(!PyErr_Occurred());
+    if ((PY_VERSION_HEX < 0x030700A0) || unlikely(flags & METH_KEYWORDS)) {
+        return (*((__Pyx_PyCFunctionFastWithKeywords)(void*)meth)) (self, args, nargs, NULL);
+    } else {
+        return (*((__Pyx_PyCFunctionFast)(void*)meth)) (self, args, nargs);
+    }
+}
+#endif
+
+/* PyFunctionFastCall */
+#if CYTHON_FAST_PYCALL
+static PyObject* __Pyx_PyFunction_FastCallNoKw(PyCodeObject *co, PyObject **args, Py_ssize_t na,
+                                               PyObject *globals) {
+    PyFrameObject *f;
+    PyThreadState *tstate = __Pyx_PyThreadState_Current;
+    PyObject **fastlocals;
+    Py_ssize_t i;
+    PyObject *result;
+    assert(globals != NULL);
+    /* XXX Perhaps we should create a specialized
+       PyFrame_New() that doesn't take locals, but does
+       take builtins without sanity checking them.
+       */
+    assert(tstate != NULL);
+    f = PyFrame_New(tstate, co, globals, NULL);
+    if (f == NULL) {
+        return NULL;
+    }
+    fastlocals = __Pyx_PyFrame_GetLocalsplus(f);
+    for (i = 0; i < na; i++) {
+        Py_INCREF(*args);
+        fastlocals[i] = *args++;
+    }
+    result = PyEval_EvalFrameEx(f,0);
+    ++tstate->recursion_depth;
+    Py_DECREF(f);
+    --tstate->recursion_depth;
+    return result;
+}
+#if 1 || PY_VERSION_HEX < 0x030600B1
+static PyObject *__Pyx_PyFunction_FastCallDict(PyObject *func, PyObject **args, Py_ssize_t nargs, PyObject *kwargs) {
+    PyCodeObject *co = (PyCodeObject *)PyFunction_GET_CODE(func);
+    PyObject *globals = PyFunction_GET_GLOBALS(func);
+    PyObject *argdefs = PyFunction_GET_DEFAULTS(func);
+    PyObject *closure;
+#if PY_MAJOR_VERSION >= 3
+    PyObject *kwdefs;
+#endif
+    PyObject *kwtuple, **k;
+    PyObject **d;
+    Py_ssize_t nd;
+    Py_ssize_t nk;
+    PyObject *result;
+    assert(kwargs == NULL || PyDict_Check(kwargs));
+    nk = kwargs ? PyDict_Size(kwargs) : 0;
+    if (Py_EnterRecursiveCall((char*)" while calling a Python object")) {
+        return NULL;
+    }
+    if (
+#if PY_MAJOR_VERSION >= 3
+            co->co_kwonlyargcount == 0 &&
+#endif
+            likely(kwargs == NULL || nk == 0) &&
+            co->co_flags == (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)) {
+        if (argdefs == NULL && co->co_argcount == nargs) {
+            result = __Pyx_PyFunction_FastCallNoKw(co, args, nargs, globals);
+            goto done;
+        }
+        else if (nargs == 0 && argdefs != NULL
+                 && co->co_argcount == Py_SIZE(argdefs)) {
+            /* function called with no arguments, but all parameters have
+               a default value: use default values as arguments .*/
+            args = &PyTuple_GET_ITEM(argdefs, 0);
+            result =__Pyx_PyFunction_FastCallNoKw(co, args, Py_SIZE(argdefs), globals);
+            goto done;
+        }
+    }
+    if (kwargs != NULL) {
+        Py_ssize_t pos, i;
+        kwtuple = PyTuple_New(2 * nk);
+        if (kwtuple == NULL) {
+            result = NULL;
+            goto done;
+        }
+        k = &PyTuple_GET_ITEM(kwtuple, 0);
+        pos = i = 0;
+        while (PyDict_Next(kwargs, &pos, &k[i], &k[i+1])) {
+            Py_INCREF(k[i]);
+            Py_INCREF(k[i+1]);
+            i += 2;
+        }
+        nk = i / 2;
+    }
+    else {
+        kwtuple = NULL;
+        k = NULL;
+    }
+    closure = PyFunction_GET_CLOSURE(func);
+#if PY_MAJOR_VERSION >= 3
+    kwdefs = PyFunction_GET_KW_DEFAULTS(func);
+#endif
+    if (argdefs != NULL) {
+        d = &PyTuple_GET_ITEM(argdefs, 0);
+        nd = Py_SIZE(argdefs);
+    }
+    else {
+        d = NULL;
+        nd = 0;
+    }
+#if PY_MAJOR_VERSION >= 3
+    result = PyEval_EvalCodeEx((PyObject*)co, globals, (PyObject *)NULL,
+                               args, (int)nargs,
+                               k, (int)nk,
+                               d, (int)nd, kwdefs, closure);
+#else
+    result = PyEval_EvalCodeEx(co, globals, (PyObject *)NULL,
+                               args, (int)nargs,
+                               k, (int)nk,
+                               d, (int)nd, closure);
+#endif
+    Py_XDECREF(kwtuple);
+done:
+    Py_LeaveRecursiveCall();
+    return result;
+}
+#endif
+#endif
+
+/* PyObjectCallMethO */
+#if CYTHON_COMPILING_IN_CPYTHON
+static CYTHON_INLINE PyObject* __Pyx_PyObject_CallMethO(PyObject *func, PyObject *arg) {
+    PyObject *self, *result;
+    PyCFunction cfunc;
+    cfunc = PyCFunction_GET_FUNCTION(func);
+    self = PyCFunction_GET_SELF(func);
+    if (unlikely(Py_EnterRecursiveCall((char*)" while calling a Python object")))
+        return NULL;
+    result = cfunc(self, arg);
+    Py_LeaveRecursiveCall();
+    if (unlikely(!result) && unlikely(!PyErr_Occurred())) {
+        PyErr_SetString(
+            PyExc_SystemError,
+            "NULL result without error in PyObject_Call");
+    }
+    return result;
+}
+#endif
+
+/* PyObjectCallOneArg */
+#if CYTHON_COMPILING_IN_CPYTHON
+static PyObject* __Pyx__PyObject_CallOneArg(PyObject *func, PyObject *arg) {
+    PyObject *result;
+    PyObject *args = PyTuple_New(1);
+    if (unlikely(!args)) return NULL;
+    Py_INCREF(arg);
+    PyTuple_SET_ITEM(args, 0, arg);
+    result = __Pyx_PyObject_Call(func, args, NULL);
+    Py_DECREF(args);
+    return result;
+}
+static CYTHON_INLINE PyObject* __Pyx_PyObject_CallOneArg(PyObject *func, PyObject *arg) {
+#if CYTHON_FAST_PYCALL
+    if (PyFunction_Check(func)) {
+        return __Pyx_PyFunction_FastCall(func, &arg, 1);
+    }
+#endif
+    if (likely(PyCFunction_Check(func))) {
+        if (likely(PyCFunction_GET_FLAGS(func) & METH_O)) {
+            return __Pyx_PyObject_CallMethO(func, arg);
+#if CYTHON_FAST_PYCCALL
+        } else if (__Pyx_PyFastCFunction_Check(func)) {
+            return __Pyx_PyCFunction_FastCall(func, &arg, 1);
+#endif
+        }
+    }
+    return __Pyx__PyObject_CallOneArg(func, arg);
+}
+#else
+static CYTHON_INLINE PyObject* __Pyx_PyObject_CallOneArg(PyObject *func, PyObject *arg) {
+    PyObject *result;
+    PyObject *args = PyTuple_Pack(1, arg);
+    if (unlikely(!args)) return NULL;
+    result = __Pyx_PyObject_Call(func, args, NULL);
+    Py_DECREF(args);
+    return result;
 }
 #endif
 
