@@ -851,6 +851,17 @@ static const char *__pyx_f[] = {
   "core\\variant\\Variant.pxd",
   "core\\color\\Color.pxd",
   "core\\vector3\\Vector3.pxd",
+  "core\\node_path\\NodePath.pxd",
+  "core\\aabb\\AABB.pxd",
+  "core\\array\\Array.pxd",
+  "core\\basis\\Basis.pxd",
+  "core\\plane\\Plane.pxd",
+  "core\\quat\\Quat.pxd",
+  "core\\rect2\\Rect2.pxd",
+  "core\\rid\\RID.pxd",
+  "core\\transform\\Transform.pxd",
+  "core\\transform\\Transform2D.pxd",
+  "core\\vector2\\Vector2.pxd",
   "type.pxd",
 };
 
@@ -860,6 +871,17 @@ struct __pyx_obj_4core_6string_6String_String;
 struct __pyx_obj_4core_7variant_7Variant_Variant;
 struct __pyx_obj_4core_5color_5Color_Color;
 struct __pyx_obj_4core_7vector3_7Vector3_Vector3;
+struct __pyx_obj_4core_9node_path_8NodePath_NodePath;
+struct __pyx_obj_4core_4aabb_4AABB_AABB;
+struct __pyx_obj_4core_5array_5Array_Array;
+struct __pyx_obj_4core_5basis_5Basis_Basis;
+struct __pyx_obj_4core_5plane_5Plane_Plane;
+struct __pyx_obj_4core_4quat_4Quat_Quat;
+struct __pyx_obj_4core_5rect2_5Rect2_Rect2;
+struct __pyx_obj_4core_3rid_3RID_RID;
+struct __pyx_obj_4core_9transform_9Transform_Transform;
+struct __pyx_obj_4core_9transform_11Transform2D_Transform2D;
+struct __pyx_obj_4core_7vector2_7Vector2_Vector2;
 
 /* "core/variant/Variant.pxd":71
  *     cdef inline  as_pool_vector3_array(self)
@@ -1021,6 +1043,160 @@ struct __pyx_obj_4core_7vector3_7Vector3_Vector3 {
 };
 
 
+/* "core/node_path/NodePath.pxd":3
+ * from core.dictionary.dictionary_binding cimport *
+ * 
+ * cdef class NodePath:             # <<<<<<<<<<<<<<
+ *     cdef godot_node_path _native
+ * 
+ */
+struct __pyx_obj_4core_9node_path_8NodePath_NodePath {
+  PyObject_HEAD
+  struct __pyx_vtabstruct_4core_9node_path_8NodePath_NodePath *__pyx_vtab;
+  godot_node_path _native;
+};
+
+
+/* "core/aabb/AABB.pxd":3
+ * from core.aabb.aabb_binding cimport *
+ * 
+ * cdef class AABB:             # <<<<<<<<<<<<<<
+ *     cdef godot_aabb _native
+ * 
+ */
+struct __pyx_obj_4core_4aabb_4AABB_AABB {
+  PyObject_HEAD
+  struct __pyx_vtabstruct_4core_4aabb_4AABB_AABB *__pyx_vtab;
+  godot_aabb _native;
+};
+
+
+/* "core/array/Array.pxd":3
+ * from core.array.array_binding cimport *
+ * 
+ * cdef class Array:             # <<<<<<<<<<<<<<
+ *     cdef godot_array _native
+ * 
+ */
+struct __pyx_obj_4core_5array_5Array_Array {
+  PyObject_HEAD
+  struct __pyx_vtabstruct_4core_5array_5Array_Array *__pyx_vtab;
+  godot_array _native;
+};
+
+
+/* "core/basis/Basis.pxd":4
+ * from core.vector3 cimport *
+ * 
+ * cdef class Basis:             # <<<<<<<<<<<<<<
+ *     cdef godot_basis _native
+ * 
+ */
+struct __pyx_obj_4core_5basis_5Basis_Basis {
+  PyObject_HEAD
+  struct __pyx_vtabstruct_4core_5basis_5Basis_Basis *__pyx_vtab;
+  godot_basis _native;
+};
+
+
+/* "core/plane/Plane.pxd":3
+ * from core.plane.plane_binding cimport *
+ * 
+ * cdef class Plane:             # <<<<<<<<<<<<<<
+ *     cdef godot_plane _native
+ * 
+ */
+struct __pyx_obj_4core_5plane_5Plane_Plane {
+  PyObject_HEAD
+  struct __pyx_vtabstruct_4core_5plane_5Plane_Plane *__pyx_vtab;
+  godot_plane _native;
+};
+
+
+/* "core/quat/Quat.pxd":3
+ * from core.quat.quat_binding cimport *
+ * 
+ * cdef class Quat:             # <<<<<<<<<<<<<<
+ *     cdef godot_quat _native
+ * 
+ */
+struct __pyx_obj_4core_4quat_4Quat_Quat {
+  PyObject_HEAD
+  struct __pyx_vtabstruct_4core_4quat_4Quat_Quat *__pyx_vtab;
+  godot_quat _native;
+};
+
+
+/* "core/rect2/Rect2.pxd":3
+ * from core.quat.quat_binding cimport *
+ * 
+ * cdef class Rect2:             # <<<<<<<<<<<<<<
+ *     cdef godot_rect2 _native
+ * 
+ */
+struct __pyx_obj_4core_5rect2_5Rect2_Rect2 {
+  PyObject_HEAD
+  struct __pyx_vtabstruct_4core_5rect2_5Rect2_Rect2 *__pyx_vtab;
+  godot_rect2 _native;
+};
+
+
+/* "core/rid/RID.pxd":3
+ * from core.rid.rid_binding cimport *
+ * 
+ * cdef class RID:             # <<<<<<<<<<<<<<
+ *     cdef godot_rid _native
+ * 
+ */
+struct __pyx_obj_4core_3rid_3RID_RID {
+  PyObject_HEAD
+  struct __pyx_vtabstruct_4core_3rid_3RID_RID *__pyx_vtab;
+  godot_rid _native;
+};
+
+
+/* "core/transform/Transform.pxd":3
+ * from core.transform.transform_binding cimport *
+ * 
+ * cdef class Transform:             # <<<<<<<<<<<<<<
+ *     cdef godot_transform _native
+ * 
+ */
+struct __pyx_obj_4core_9transform_9Transform_Transform {
+  PyObject_HEAD
+  struct __pyx_vtabstruct_4core_9transform_9Transform_Transform *__pyx_vtab;
+  godot_transform _native;
+};
+
+
+/* "core/transform/Transform2D.pxd":3
+ * from core.transform.transform_binding cimport *
+ * 
+ * cdef class Transform2D:             # <<<<<<<<<<<<<<
+ *     cdef godot_transform2d _native
+ * 
+ */
+struct __pyx_obj_4core_9transform_11Transform2D_Transform2D {
+  PyObject_HEAD
+  struct __pyx_vtabstruct_4core_9transform_11Transform2D_Transform2D *__pyx_vtab;
+  godot_transform2d _native;
+};
+
+
+/* "core/vector2/Vector2.pxd":3
+ * from core.vector2.vector2_binding cimport *
+ * 
+ * cdef class Vector2:             # <<<<<<<<<<<<<<
+ *     cdef godot_vector2 _native
+ * 
+ */
+struct __pyx_obj_4core_7vector2_7Vector2_Vector2 {
+  PyObject_HEAD
+  struct __pyx_vtabstruct_4core_7vector2_7Vector2_Vector2 *__pyx_vtab;
+  godot_vector2 _native;
+};
+
+
 
 /* "core/dictionary/Dictionary.pxd":4
  * from libc.stdio cimport printf
@@ -1132,6 +1308,193 @@ struct __pyx_vtabstruct_4core_7vector3_7Vector3_Vector3 {
 static struct __pyx_vtabstruct_4core_7vector3_7Vector3_Vector3 *__pyx_vtabptr_4core_7vector3_7Vector3_Vector3;
 static CYTHON_INLINE void __pyx_f_4core_7vector3_7Vector3_7Vector3_set_native(struct __pyx_obj_4core_7vector3_7Vector3_Vector3 *, godot_vector3);
 static CYTHON_INLINE struct __pyx_obj_4core_7vector3_7Vector3_Vector3 *__pyx_f_4core_7vector3_7Vector3_7Vector3_new_static(godot_vector3);
+
+
+/* "core/node_path/NodePath.pxd":3
+ * from core.dictionary.dictionary_binding cimport *
+ * 
+ * cdef class NodePath:             # <<<<<<<<<<<<<<
+ *     cdef godot_node_path _native
+ * 
+ */
+
+struct __pyx_vtabstruct_4core_9node_path_8NodePath_NodePath {
+  void (*set_native)(struct __pyx_obj_4core_9node_path_8NodePath_NodePath *, godot_node_path);
+  struct __pyx_obj_4core_9node_path_8NodePath_NodePath *(*new_static)(godot_node_path);
+};
+static struct __pyx_vtabstruct_4core_9node_path_8NodePath_NodePath *__pyx_vtabptr_4core_9node_path_8NodePath_NodePath;
+static CYTHON_INLINE void __pyx_f_4core_9node_path_8NodePath_8NodePath_set_native(struct __pyx_obj_4core_9node_path_8NodePath_NodePath *, godot_node_path);
+static CYTHON_INLINE struct __pyx_obj_4core_9node_path_8NodePath_NodePath *__pyx_f_4core_9node_path_8NodePath_8NodePath_new_static(godot_node_path);
+
+
+/* "core/aabb/AABB.pxd":3
+ * from core.aabb.aabb_binding cimport *
+ * 
+ * cdef class AABB:             # <<<<<<<<<<<<<<
+ *     cdef godot_aabb _native
+ * 
+ */
+
+struct __pyx_vtabstruct_4core_4aabb_4AABB_AABB {
+  void (*set_native)(struct __pyx_obj_4core_4aabb_4AABB_AABB *, godot_aabb);
+  void (*new_static)(godot_aabb);
+};
+static struct __pyx_vtabstruct_4core_4aabb_4AABB_AABB *__pyx_vtabptr_4core_4aabb_4AABB_AABB;
+static CYTHON_INLINE void __pyx_f_4core_4aabb_4AABB_4AABB_set_native(struct __pyx_obj_4core_4aabb_4AABB_AABB *, godot_aabb);
+static CYTHON_INLINE void __pyx_f_4core_4aabb_4AABB_4AABB_new_static(godot_aabb);
+
+
+/* "core/array/Array.pxd":3
+ * from core.array.array_binding cimport *
+ * 
+ * cdef class Array:             # <<<<<<<<<<<<<<
+ *     cdef godot_array _native
+ * 
+ */
+
+struct __pyx_vtabstruct_4core_5array_5Array_Array {
+  void (*set_native)(struct __pyx_obj_4core_5array_5Array_Array *, godot_array);
+  struct __pyx_obj_4core_5array_5Array_Array *(*new_static)(godot_array);
+};
+static struct __pyx_vtabstruct_4core_5array_5Array_Array *__pyx_vtabptr_4core_5array_5Array_Array;
+static CYTHON_INLINE void __pyx_f_4core_5array_5Array_5Array_set_native(struct __pyx_obj_4core_5array_5Array_Array *, godot_array);
+static CYTHON_INLINE struct __pyx_obj_4core_5array_5Array_Array *__pyx_f_4core_5array_5Array_5Array_new_static(godot_array);
+
+
+/* "core/basis/Basis.pxd":4
+ * from core.vector3 cimport *
+ * 
+ * cdef class Basis:             # <<<<<<<<<<<<<<
+ *     cdef godot_basis _native
+ * 
+ */
+
+struct __pyx_vtabstruct_4core_5basis_5Basis_Basis {
+  void (*set_native)(struct __pyx_obj_4core_5basis_5Basis_Basis *, godot_basis);
+  struct __pyx_obj_4core_5basis_5Basis_Basis *(*new_static)(godot_basis);
+};
+static struct __pyx_vtabstruct_4core_5basis_5Basis_Basis *__pyx_vtabptr_4core_5basis_5Basis_Basis;
+static CYTHON_INLINE void __pyx_f_4core_5basis_5Basis_5Basis_set_native(struct __pyx_obj_4core_5basis_5Basis_Basis *, godot_basis);
+static CYTHON_INLINE struct __pyx_obj_4core_5basis_5Basis_Basis *__pyx_f_4core_5basis_5Basis_5Basis_new_static(godot_basis);
+
+
+/* "core/plane/Plane.pxd":3
+ * from core.plane.plane_binding cimport *
+ * 
+ * cdef class Plane:             # <<<<<<<<<<<<<<
+ *     cdef godot_plane _native
+ * 
+ */
+
+struct __pyx_vtabstruct_4core_5plane_5Plane_Plane {
+  void (*set_native)(struct __pyx_obj_4core_5plane_5Plane_Plane *, godot_plane);
+  struct __pyx_obj_4core_5plane_5Plane_Plane *(*new_static)(godot_plane);
+};
+static struct __pyx_vtabstruct_4core_5plane_5Plane_Plane *__pyx_vtabptr_4core_5plane_5Plane_Plane;
+static CYTHON_INLINE void __pyx_f_4core_5plane_5Plane_5Plane_set_native(struct __pyx_obj_4core_5plane_5Plane_Plane *, godot_plane);
+static CYTHON_INLINE struct __pyx_obj_4core_5plane_5Plane_Plane *__pyx_f_4core_5plane_5Plane_5Plane_new_static(godot_plane);
+
+
+/* "core/quat/Quat.pxd":3
+ * from core.quat.quat_binding cimport *
+ * 
+ * cdef class Quat:             # <<<<<<<<<<<<<<
+ *     cdef godot_quat _native
+ * 
+ */
+
+struct __pyx_vtabstruct_4core_4quat_4Quat_Quat {
+  void (*set_native)(struct __pyx_obj_4core_4quat_4Quat_Quat *, godot_quat);
+  struct __pyx_obj_4core_4quat_4Quat_Quat *(*new_static)(godot_quat);
+};
+static struct __pyx_vtabstruct_4core_4quat_4Quat_Quat *__pyx_vtabptr_4core_4quat_4Quat_Quat;
+static CYTHON_INLINE void __pyx_f_4core_4quat_4Quat_4Quat_set_native(struct __pyx_obj_4core_4quat_4Quat_Quat *, godot_quat);
+static CYTHON_INLINE struct __pyx_obj_4core_4quat_4Quat_Quat *__pyx_f_4core_4quat_4Quat_4Quat_new_static(godot_quat);
+
+
+/* "core/rect2/Rect2.pxd":3
+ * from core.quat.quat_binding cimport *
+ * 
+ * cdef class Rect2:             # <<<<<<<<<<<<<<
+ *     cdef godot_rect2 _native
+ * 
+ */
+
+struct __pyx_vtabstruct_4core_5rect2_5Rect2_Rect2 {
+  void (*set_native)(struct __pyx_obj_4core_5rect2_5Rect2_Rect2 *, godot_rect2);
+  struct __pyx_obj_4core_5rect2_5Rect2_Rect2 *(*new_static)(godot_rect2);
+};
+static struct __pyx_vtabstruct_4core_5rect2_5Rect2_Rect2 *__pyx_vtabptr_4core_5rect2_5Rect2_Rect2;
+static CYTHON_INLINE void __pyx_f_4core_5rect2_5Rect2_5Rect2_set_native(struct __pyx_obj_4core_5rect2_5Rect2_Rect2 *, godot_rect2);
+static CYTHON_INLINE struct __pyx_obj_4core_5rect2_5Rect2_Rect2 *__pyx_f_4core_5rect2_5Rect2_5Rect2_new_static(godot_rect2);
+
+
+/* "core/rid/RID.pxd":3
+ * from core.rid.rid_binding cimport *
+ * 
+ * cdef class RID:             # <<<<<<<<<<<<<<
+ *     cdef godot_rid _native
+ * 
+ */
+
+struct __pyx_vtabstruct_4core_3rid_3RID_RID {
+  void (*set_native)(struct __pyx_obj_4core_3rid_3RID_RID *, godot_rid);
+  struct __pyx_obj_4core_3rid_3RID_RID *(*new_static)(godot_rid);
+};
+static struct __pyx_vtabstruct_4core_3rid_3RID_RID *__pyx_vtabptr_4core_3rid_3RID_RID;
+static CYTHON_INLINE void __pyx_f_4core_3rid_3RID_3RID_set_native(struct __pyx_obj_4core_3rid_3RID_RID *, godot_rid);
+static CYTHON_INLINE struct __pyx_obj_4core_3rid_3RID_RID *__pyx_f_4core_3rid_3RID_3RID_new_static(godot_rid);
+
+
+/* "core/transform/Transform.pxd":3
+ * from core.transform.transform_binding cimport *
+ * 
+ * cdef class Transform:             # <<<<<<<<<<<<<<
+ *     cdef godot_transform _native
+ * 
+ */
+
+struct __pyx_vtabstruct_4core_9transform_9Transform_Transform {
+  void (*set_native)(struct __pyx_obj_4core_9transform_9Transform_Transform *, godot_transform);
+  struct __pyx_obj_4core_9transform_9Transform_Transform *(*new_static)(godot_transform);
+};
+static struct __pyx_vtabstruct_4core_9transform_9Transform_Transform *__pyx_vtabptr_4core_9transform_9Transform_Transform;
+static CYTHON_INLINE void __pyx_f_4core_9transform_9Transform_9Transform_set_native(struct __pyx_obj_4core_9transform_9Transform_Transform *, godot_transform);
+static CYTHON_INLINE struct __pyx_obj_4core_9transform_9Transform_Transform *__pyx_f_4core_9transform_9Transform_9Transform_new_static(godot_transform);
+
+
+/* "core/transform/Transform2D.pxd":3
+ * from core.transform.transform_binding cimport *
+ * 
+ * cdef class Transform2D:             # <<<<<<<<<<<<<<
+ *     cdef godot_transform2d _native
+ * 
+ */
+
+struct __pyx_vtabstruct_4core_9transform_11Transform2D_Transform2D {
+  void (*set_native)(struct __pyx_obj_4core_9transform_11Transform2D_Transform2D *, godot_transform2d);
+  struct __pyx_obj_4core_9transform_11Transform2D_Transform2D *(*new_static)(godot_transform2d);
+};
+static struct __pyx_vtabstruct_4core_9transform_11Transform2D_Transform2D *__pyx_vtabptr_4core_9transform_11Transform2D_Transform2D;
+static CYTHON_INLINE void __pyx_f_4core_9transform_11Transform2D_11Transform2D_set_native(struct __pyx_obj_4core_9transform_11Transform2D_Transform2D *, godot_transform2d);
+static CYTHON_INLINE struct __pyx_obj_4core_9transform_11Transform2D_Transform2D *__pyx_f_4core_9transform_11Transform2D_11Transform2D_new_static(godot_transform2d);
+
+
+/* "core/vector2/Vector2.pxd":3
+ * from core.vector2.vector2_binding cimport *
+ * 
+ * cdef class Vector2:             # <<<<<<<<<<<<<<
+ *     cdef godot_vector2 _native
+ * 
+ */
+
+struct __pyx_vtabstruct_4core_7vector2_7Vector2_Vector2 {
+  void (*set_native)(struct __pyx_obj_4core_7vector2_7Vector2_Vector2 *, godot_vector2);
+  struct __pyx_obj_4core_7vector2_7Vector2_Vector2 *(*new_static)(godot_vector2);
+};
+static struct __pyx_vtabstruct_4core_7vector2_7Vector2_Vector2 *__pyx_vtabptr_4core_7vector2_7Vector2_Vector2;
+static CYTHON_INLINE void __pyx_f_4core_7vector2_7Vector2_7Vector2_set_native(struct __pyx_obj_4core_7vector2_7Vector2_Vector2 *, godot_vector2);
+static CYTHON_INLINE struct __pyx_obj_4core_7vector2_7Vector2_Vector2 *__pyx_f_4core_7vector2_7Vector2_7Vector2_new_static(godot_vector2);
 
 /* --- Runtime support code (head) --- */
 /* Refnanny.proto */
@@ -1374,6 +1737,47 @@ static CYTHON_INLINE PyObject* __Pyx_tp_new_kwargs(PyObject* type_obj, PyObject*
 /* ExtTypeTest.proto */
 static CYTHON_INLINE int __Pyx_TypeTest(PyObject *obj, PyTypeObject *type);
 
+/* PyThreadStateGet.proto */
+#if CYTHON_FAST_THREAD_STATE
+#define __Pyx_PyThreadState_declare  PyThreadState *__pyx_tstate;
+#define __Pyx_PyThreadState_assign  __pyx_tstate = __Pyx_PyThreadState_Current;
+#define __Pyx_PyErr_Occurred()  __pyx_tstate->curexc_type
+#else
+#define __Pyx_PyThreadState_declare
+#define __Pyx_PyThreadState_assign
+#define __Pyx_PyErr_Occurred()  PyErr_Occurred()
+#endif
+
+/* PyErrFetchRestore.proto */
+#if CYTHON_FAST_THREAD_STATE
+#define __Pyx_PyErr_Clear() __Pyx_ErrRestore(NULL, NULL, NULL)
+#define __Pyx_ErrRestoreWithState(type, value, tb)  __Pyx_ErrRestoreInState(PyThreadState_GET(), type, value, tb)
+#define __Pyx_ErrFetchWithState(type, value, tb)    __Pyx_ErrFetchInState(PyThreadState_GET(), type, value, tb)
+#define __Pyx_ErrRestore(type, value, tb)  __Pyx_ErrRestoreInState(__pyx_tstate, type, value, tb)
+#define __Pyx_ErrFetch(type, value, tb)    __Pyx_ErrFetchInState(__pyx_tstate, type, value, tb)
+static CYTHON_INLINE void __Pyx_ErrRestoreInState(PyThreadState *tstate, PyObject *type, PyObject *value, PyObject *tb);
+static CYTHON_INLINE void __Pyx_ErrFetchInState(PyThreadState *tstate, PyObject **type, PyObject **value, PyObject **tb);
+#if CYTHON_COMPILING_IN_CPYTHON
+#define __Pyx_PyErr_SetNone(exc) (Py_INCREF(exc), __Pyx_ErrRestore((exc), NULL, NULL))
+#else
+#define __Pyx_PyErr_SetNone(exc) PyErr_SetNone(exc)
+#endif
+#else
+#define __Pyx_PyErr_Clear() PyErr_Clear()
+#define __Pyx_PyErr_SetNone(exc) PyErr_SetNone(exc)
+#define __Pyx_ErrRestoreWithState(type, value, tb)  PyErr_Restore(type, value, tb)
+#define __Pyx_ErrFetchWithState(type, value, tb)  PyErr_Fetch(type, value, tb)
+#define __Pyx_ErrRestoreInState(tstate, type, value, tb)  PyErr_Restore(type, value, tb)
+#define __Pyx_ErrFetchInState(tstate, type, value, tb)  PyErr_Fetch(type, value, tb)
+#define __Pyx_ErrRestore(type, value, tb)  PyErr_Restore(type, value, tb)
+#define __Pyx_ErrFetch(type, value, tb)  PyErr_Fetch(type, value, tb)
+#endif
+
+/* WriteUnraisableException.proto */
+static void __Pyx_WriteUnraisable(const char *name, int clineno,
+                                  int lineno, const char *filename,
+                                  int full_traceback, int nogil);
+
 /* TypeImport.proto */
 #ifndef __PYX_HAVE_RT_ImportType_proto
 #define __PYX_HAVE_RT_ImportType_proto
@@ -1474,42 +1878,6 @@ static PyObject *__Pyx_Py3MetaclassPrepare(PyObject *metaclass, PyObject *bases,
 static PyObject *__Pyx_Py3ClassCreate(PyObject *metaclass, PyObject *name, PyObject *bases, PyObject *dict,
                                       PyObject *mkw, int calculate_metaclass, int allow_py2_metaclass);
 
-/* PyThreadStateGet.proto */
-#if CYTHON_FAST_THREAD_STATE
-#define __Pyx_PyThreadState_declare  PyThreadState *__pyx_tstate;
-#define __Pyx_PyThreadState_assign  __pyx_tstate = __Pyx_PyThreadState_Current;
-#define __Pyx_PyErr_Occurred()  __pyx_tstate->curexc_type
-#else
-#define __Pyx_PyThreadState_declare
-#define __Pyx_PyThreadState_assign
-#define __Pyx_PyErr_Occurred()  PyErr_Occurred()
-#endif
-
-/* PyErrFetchRestore.proto */
-#if CYTHON_FAST_THREAD_STATE
-#define __Pyx_PyErr_Clear() __Pyx_ErrRestore(NULL, NULL, NULL)
-#define __Pyx_ErrRestoreWithState(type, value, tb)  __Pyx_ErrRestoreInState(PyThreadState_GET(), type, value, tb)
-#define __Pyx_ErrFetchWithState(type, value, tb)    __Pyx_ErrFetchInState(PyThreadState_GET(), type, value, tb)
-#define __Pyx_ErrRestore(type, value, tb)  __Pyx_ErrRestoreInState(__pyx_tstate, type, value, tb)
-#define __Pyx_ErrFetch(type, value, tb)    __Pyx_ErrFetchInState(__pyx_tstate, type, value, tb)
-static CYTHON_INLINE void __Pyx_ErrRestoreInState(PyThreadState *tstate, PyObject *type, PyObject *value, PyObject *tb);
-static CYTHON_INLINE void __Pyx_ErrFetchInState(PyThreadState *tstate, PyObject **type, PyObject **value, PyObject **tb);
-#if CYTHON_COMPILING_IN_CPYTHON
-#define __Pyx_PyErr_SetNone(exc) (Py_INCREF(exc), __Pyx_ErrRestore((exc), NULL, NULL))
-#else
-#define __Pyx_PyErr_SetNone(exc) PyErr_SetNone(exc)
-#endif
-#else
-#define __Pyx_PyErr_Clear() PyErr_Clear()
-#define __Pyx_PyErr_SetNone(exc) PyErr_SetNone(exc)
-#define __Pyx_ErrRestoreWithState(type, value, tb)  PyErr_Restore(type, value, tb)
-#define __Pyx_ErrFetchWithState(type, value, tb)  PyErr_Fetch(type, value, tb)
-#define __Pyx_ErrRestoreInState(tstate, type, value, tb)  PyErr_Restore(type, value, tb)
-#define __Pyx_ErrFetchInState(tstate, type, value, tb)  PyErr_Fetch(type, value, tb)
-#define __Pyx_ErrRestore(type, value, tb)  PyErr_Restore(type, value, tb)
-#define __Pyx_ErrFetch(type, value, tb)  PyErr_Fetch(type, value, tb)
-#endif
-
 /* CLineInTraceback.proto */
 #ifdef CYTHON_CLINE_IN_TRACEBACK
 #define __Pyx_CLineForTraceback(tstate, c_line)  (((CYTHON_CLINE_IN_TRACEBACK)) ? c_line : 0)
@@ -1588,6 +1956,28 @@ static CYTHON_INLINE void __pyx_f_4core_5color_5Color_5Color_set_native(struct _
 static CYTHON_INLINE struct __pyx_obj_4core_5color_5Color_Color *__pyx_f_4core_5color_5Color_5Color_new_static(godot_color __pyx_v__native); /* proto*/
 static CYTHON_INLINE void __pyx_f_4core_7vector3_7Vector3_7Vector3_set_native(struct __pyx_obj_4core_7vector3_7Vector3_Vector3 *__pyx_v_self, godot_vector3 __pyx_v__native); /* proto*/
 static CYTHON_INLINE struct __pyx_obj_4core_7vector3_7Vector3_Vector3 *__pyx_f_4core_7vector3_7Vector3_7Vector3_new_static(godot_vector3 __pyx_v__native); /* proto*/
+static CYTHON_INLINE void __pyx_f_4core_9node_path_8NodePath_8NodePath_set_native(struct __pyx_obj_4core_9node_path_8NodePath_NodePath *__pyx_v_self, godot_node_path __pyx_v__native); /* proto*/
+static CYTHON_INLINE struct __pyx_obj_4core_9node_path_8NodePath_NodePath *__pyx_f_4core_9node_path_8NodePath_8NodePath_new_static(godot_node_path __pyx_v__native); /* proto*/
+static CYTHON_INLINE void __pyx_f_4core_4aabb_4AABB_4AABB_set_native(struct __pyx_obj_4core_4aabb_4AABB_AABB *__pyx_v_self, godot_aabb __pyx_v__native); /* proto*/
+static CYTHON_INLINE void __pyx_f_4core_4aabb_4AABB_4AABB_new_static(godot_aabb __pyx_v__native); /* proto*/
+static CYTHON_INLINE void __pyx_f_4core_5array_5Array_5Array_set_native(struct __pyx_obj_4core_5array_5Array_Array *__pyx_v_self, godot_array __pyx_v__native); /* proto*/
+static CYTHON_INLINE struct __pyx_obj_4core_5array_5Array_Array *__pyx_f_4core_5array_5Array_5Array_new_static(godot_array __pyx_v__native); /* proto*/
+static CYTHON_INLINE void __pyx_f_4core_5basis_5Basis_5Basis_set_native(struct __pyx_obj_4core_5basis_5Basis_Basis *__pyx_v_self, godot_basis __pyx_v__native); /* proto*/
+static CYTHON_INLINE struct __pyx_obj_4core_5basis_5Basis_Basis *__pyx_f_4core_5basis_5Basis_5Basis_new_static(godot_basis __pyx_v__native); /* proto*/
+static CYTHON_INLINE void __pyx_f_4core_5plane_5Plane_5Plane_set_native(struct __pyx_obj_4core_5plane_5Plane_Plane *__pyx_v_self, godot_plane __pyx_v__native); /* proto*/
+static CYTHON_INLINE struct __pyx_obj_4core_5plane_5Plane_Plane *__pyx_f_4core_5plane_5Plane_5Plane_new_static(godot_plane __pyx_v__native); /* proto*/
+static CYTHON_INLINE void __pyx_f_4core_4quat_4Quat_4Quat_set_native(struct __pyx_obj_4core_4quat_4Quat_Quat *__pyx_v_self, godot_quat __pyx_v__native); /* proto*/
+static CYTHON_INLINE struct __pyx_obj_4core_4quat_4Quat_Quat *__pyx_f_4core_4quat_4Quat_4Quat_new_static(godot_quat __pyx_v__native); /* proto*/
+static CYTHON_INLINE void __pyx_f_4core_5rect2_5Rect2_5Rect2_set_native(struct __pyx_obj_4core_5rect2_5Rect2_Rect2 *__pyx_v_self, godot_rect2 __pyx_v__native); /* proto*/
+static CYTHON_INLINE struct __pyx_obj_4core_5rect2_5Rect2_Rect2 *__pyx_f_4core_5rect2_5Rect2_5Rect2_new_static(godot_rect2 __pyx_v__native); /* proto*/
+static CYTHON_INLINE void __pyx_f_4core_3rid_3RID_3RID_set_native(struct __pyx_obj_4core_3rid_3RID_RID *__pyx_v_self, godot_rid __pyx_v__native); /* proto*/
+static CYTHON_INLINE struct __pyx_obj_4core_3rid_3RID_RID *__pyx_f_4core_3rid_3RID_3RID_new_static(godot_rid __pyx_v__native); /* proto*/
+static CYTHON_INLINE void __pyx_f_4core_9transform_9Transform_9Transform_set_native(struct __pyx_obj_4core_9transform_9Transform_Transform *__pyx_v_self, godot_transform __pyx_v__native); /* proto*/
+static CYTHON_INLINE struct __pyx_obj_4core_9transform_9Transform_Transform *__pyx_f_4core_9transform_9Transform_9Transform_new_static(godot_transform __pyx_v__native); /* proto*/
+static CYTHON_INLINE void __pyx_f_4core_9transform_11Transform2D_11Transform2D_set_native(struct __pyx_obj_4core_9transform_11Transform2D_Transform2D *__pyx_v_self, godot_transform2d __pyx_v__native); /* proto*/
+static CYTHON_INLINE struct __pyx_obj_4core_9transform_11Transform2D_Transform2D *__pyx_f_4core_9transform_11Transform2D_11Transform2D_new_static(godot_transform2d __pyx_v__native); /* proto*/
+static CYTHON_INLINE void __pyx_f_4core_7vector2_7Vector2_7Vector2_set_native(struct __pyx_obj_4core_7vector2_7Vector2_Vector2 *__pyx_v_self, godot_vector2 __pyx_v__native); /* proto*/
+static CYTHON_INLINE struct __pyx_obj_4core_7vector2_7Vector2_Vector2 *__pyx_f_4core_7vector2_7Vector2_7Vector2_new_static(godot_vector2 __pyx_v__native); /* proto*/
 
 /* Module declarations from 'libcpp' */
 
@@ -1635,6 +2025,57 @@ static PyTypeObject *__pyx_ptype_4core_5color_5Color_Color = 0;
 /* Module declarations from 'core.vector3.Vector3' */
 static PyTypeObject *__pyx_ptype_4core_7vector3_7Vector3_Vector3 = 0;
 
+/* Module declarations from 'core.node_path.NodePath' */
+static PyTypeObject *__pyx_ptype_4core_9node_path_8NodePath_NodePath = 0;
+
+/* Module declarations from 'core.aabb.aabb_binding' */
+
+/* Module declarations from 'core.aabb.AABB' */
+static PyTypeObject *__pyx_ptype_4core_4aabb_4AABB_AABB = 0;
+
+/* Module declarations from 'core.array.array_binding' */
+
+/* Module declarations from 'core.array.Array' */
+static PyTypeObject *__pyx_ptype_4core_5array_5Array_Array = 0;
+
+/* Module declarations from 'core.basis.basis_binding' */
+
+/* Module declarations from 'core.vector3' */
+
+/* Module declarations from 'core.basis.Basis' */
+static PyTypeObject *__pyx_ptype_4core_5basis_5Basis_Basis = 0;
+
+/* Module declarations from 'core.plane.plane_binding' */
+
+/* Module declarations from 'core.plane.Plane' */
+static PyTypeObject *__pyx_ptype_4core_5plane_5Plane_Plane = 0;
+
+/* Module declarations from 'core.quat.quat_binding' */
+
+/* Module declarations from 'core.quat.Quat' */
+static PyTypeObject *__pyx_ptype_4core_4quat_4Quat_Quat = 0;
+
+/* Module declarations from 'core.rect2.Rect2' */
+static PyTypeObject *__pyx_ptype_4core_5rect2_5Rect2_Rect2 = 0;
+
+/* Module declarations from 'core.rid.rid_binding' */
+
+/* Module declarations from 'core.rid.RID' */
+static PyTypeObject *__pyx_ptype_4core_3rid_3RID_RID = 0;
+
+/* Module declarations from 'core.transform.transform_binding' */
+
+/* Module declarations from 'core.transform.Transform' */
+static PyTypeObject *__pyx_ptype_4core_9transform_9Transform_Transform = 0;
+
+/* Module declarations from 'core.transform.Transform2D' */
+static PyTypeObject *__pyx_ptype_4core_9transform_11Transform2D_Transform2D = 0;
+
+/* Module declarations from 'core.vector2.vector2_binding' */
+
+/* Module declarations from 'core.vector2.Vector2' */
+static PyTypeObject *__pyx_ptype_4core_7vector2_7Vector2_Vector2 = 0;
+
 /* Module declarations from 'godot_api.binding_external' */
 
 /* Module declarations from 'pluginscript_api.description_classes.PropertyDescription' */
@@ -1645,7 +2086,6 @@ int __pyx_module_is_main_pluginscript_api__description_classes__PropertyDescript
 /* Implementation of 'pluginscript_api.description_classes.PropertyDescription' */
 static PyObject *__pyx_builtin_print;
 static const char __pyx_k_d[] = "d";
-static const char __pyx_k__3[] = "|";
 static const char __pyx_k__11[] = "*";
 static const char __pyx_k_doc[] = "__doc__";
 static const char __pyx_k_set[] = "set";
@@ -1659,18 +2099,19 @@ static const char __pyx_k_type[] = "type_";
 static const char __pyx_k_print[] = "print";
 static const char __pyx_k_usage[] = "usage";
 static const char __pyx_k_import[] = "__import__";
+static const char __pyx_k_middle[] = "middle";
 static const char __pyx_k_module[] = "__module__";
 static const char __pyx_k_name_2[] = "__name__";
 static const char __pyx_k_type_2[] = "type";
+static const char __pyx_k_end_new[] = "end_new";
 static const char __pyx_k_prepare[] = "__prepare__";
-static const char __pyx_k_to_dict[] = "----------to_dict:";
+static const char __pyx_k_to_dict[] = "to_dict";
 static const char __pyx_k_Resource[] = "Resource";
 static const char __pyx_k_TextFile[] = "TextFile";
 static const char __pyx_k_qualname[] = "__qualname__";
 static const char __pyx_k_metaclass[] = "__metaclass__";
 static const char __pyx_k_rset_mode[] = "rset_mode";
-static const char __pyx_k_to_dict_2[] = "to_dict";
-static const char __pyx_k_check_hint[] = "----------------------------check_hint-------------------------------";
+static const char __pyx_k_start_new[] = "start_new";
 static const char __pyx_k_pyx_vtable[] = "__pyx_vtable__";
 static const char __pyx_k_hint_string[] = "hint_string";
 static const char __pyx_k_SpriteFrames[] = "SpriteFrames";
@@ -1680,7 +2121,6 @@ static const char __pyx_k_transform_type[] = "transform_type";
 static const char __pyx_k_classes_generated[] = "classes.generated";
 static const char __pyx_k_cline_in_traceback[] = "cline_in_traceback";
 static const char __pyx_k_PropertyDescription[] = "PropertyDescription";
-static const char __pyx_k_checked_hint_map_True[] = "----------------------------checked hint_map=True-------------------------------";
 static const char __pyx_k_type_variant_type_map[] = "type_variant_type_map";
 static const char __pyx_k_PropertyDescription___init[] = "PropertyDescription.__init__";
 static const char __pyx_k_PropertyDescription_to_dict[] = "PropertyDescription.to_dict";
@@ -1693,15 +2133,13 @@ static PyObject *__pyx_n_s_Resource;
 static PyObject *__pyx_n_s_SpriteFrames;
 static PyObject *__pyx_n_s_TextFile;
 static PyObject *__pyx_n_s__11;
-static PyObject *__pyx_kp_u__3;
-static PyObject *__pyx_kp_u_check_hint;
-static PyObject *__pyx_kp_u_checked_hint_map_True;
 static PyObject *__pyx_n_s_classes_generated;
 static PyObject *__pyx_n_s_cline_in_traceback;
 static PyObject *__pyx_n_s_d;
 static PyObject *__pyx_n_s_default_value;
 static PyObject *__pyx_n_u_default_value;
 static PyObject *__pyx_n_s_doc;
+static PyObject *__pyx_n_u_end_new;
 static PyObject *__pyx_n_s_hint;
 static PyObject *__pyx_n_u_hint;
 static PyObject *__pyx_n_s_hint_string;
@@ -1710,6 +2148,7 @@ static PyObject *__pyx_n_s_import;
 static PyObject *__pyx_n_s_init;
 static PyObject *__pyx_n_s_main;
 static PyObject *__pyx_n_s_metaclass;
+static PyObject *__pyx_n_u_middle;
 static PyObject *__pyx_n_s_module;
 static PyObject *__pyx_n_s_name;
 static PyObject *__pyx_n_u_name;
@@ -1724,9 +2163,9 @@ static PyObject *__pyx_n_s_rset_mode;
 static PyObject *__pyx_n_u_rset_mode;
 static PyObject *__pyx_n_s_self;
 static PyObject *__pyx_n_s_set;
+static PyObject *__pyx_n_u_start_new;
 static PyObject *__pyx_n_s_test;
-static PyObject *__pyx_kp_u_to_dict;
-static PyObject *__pyx_n_s_to_dict_2;
+static PyObject *__pyx_n_s_to_dict;
 static PyObject *__pyx_n_s_transform_type;
 static PyObject *__pyx_n_s_type;
 static PyObject *__pyx_n_u_type_2;
@@ -1737,9 +2176,9 @@ static PyObject *__pyx_n_u_usage;
 static PyObject *__pyx_pf_16pluginscript_api_19description_classes_19PropertyDescription_transform_type(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_type_); /* proto */
 static PyObject *__pyx_pf_16pluginscript_api_19description_classes_19PropertyDescription_19PropertyDescription___init__(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self, PyObject *__pyx_v_name, PyObject *__pyx_v_type_, PyObject *__pyx_v_hint, PyObject *__pyx_v_hint_string, PyObject *__pyx_v_usage, PyObject *__pyx_v_default_value, PyObject *__pyx_v_rset_mode); /* proto */
 static PyObject *__pyx_pf_16pluginscript_api_19description_classes_19PropertyDescription_19PropertyDescription_2to_dict(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self); /* proto */
-static PyObject *__pyx_int_7;
 static PyObject *__pyx_tuple_;
 static PyObject *__pyx_tuple__2;
+static PyObject *__pyx_tuple__3;
 static PyObject *__pyx_tuple__4;
 static PyObject *__pyx_tuple__5;
 static PyObject *__pyx_tuple__6;
@@ -1755,8 +2194,8 @@ static PyObject *__pyx_codeobj__15;
 static PyObject *__pyx_codeobj__17;
 /* Late includes */
 
-/* "pluginscript_api/description_classes/PropertyDescription.pyx":27
- * type_variant_type_map = {int:GODOT_VARIANT_TYPE_INT, Vector3:7}
+/* "pluginscript_api/description_classes/PropertyDescription.pyx":66
+ * }
  * 
  * def transform_type(type_):             # <<<<<<<<<<<<<<
  *     if(type_ in type_variant_type_map):
@@ -1789,21 +2228,21 @@ static PyObject *__pyx_pf_16pluginscript_api_19description_classes_19PropertyDes
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("transform_type", 0);
 
-  /* "pluginscript_api/description_classes/PropertyDescription.pyx":28
+  /* "pluginscript_api/description_classes/PropertyDescription.pyx":67
  * 
  * def transform_type(type_):
  *     if(type_ in type_variant_type_map):             # <<<<<<<<<<<<<<
  *         return type_variant_type_map[type_]
  *     return
  */
-  __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_n_s_type_variant_type_map); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 28, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_n_s_type_variant_type_map); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 67, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = (__Pyx_PySequence_ContainsTF(__pyx_v_type_, __pyx_t_1, Py_EQ)); if (unlikely(__pyx_t_2 < 0)) __PYX_ERR(0, 28, __pyx_L1_error)
+  __pyx_t_2 = (__Pyx_PySequence_ContainsTF(__pyx_v_type_, __pyx_t_1, Py_EQ)); if (unlikely(__pyx_t_2 < 0)) __PYX_ERR(0, 67, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_t_3 = (__pyx_t_2 != 0);
   if (__pyx_t_3) {
 
-    /* "pluginscript_api/description_classes/PropertyDescription.pyx":29
+    /* "pluginscript_api/description_classes/PropertyDescription.pyx":68
  * def transform_type(type_):
  *     if(type_ in type_variant_type_map):
  *         return type_variant_type_map[type_]             # <<<<<<<<<<<<<<
@@ -1811,16 +2250,16 @@ static PyObject *__pyx_pf_16pluginscript_api_19description_classes_19PropertyDes
  * class PropertyDescription:
  */
     __Pyx_XDECREF(__pyx_r);
-    __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_n_s_type_variant_type_map); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 29, __pyx_L1_error)
+    __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_n_s_type_variant_type_map); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 68, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
-    __pyx_t_4 = __Pyx_PyObject_GetItem(__pyx_t_1, __pyx_v_type_); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 29, __pyx_L1_error)
+    __pyx_t_4 = __Pyx_PyObject_GetItem(__pyx_t_1, __pyx_v_type_); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 68, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     __pyx_r = __pyx_t_4;
     __pyx_t_4 = 0;
     goto __pyx_L0;
 
-    /* "pluginscript_api/description_classes/PropertyDescription.pyx":28
+    /* "pluginscript_api/description_classes/PropertyDescription.pyx":67
  * 
  * def transform_type(type_):
  *     if(type_ in type_variant_type_map):             # <<<<<<<<<<<<<<
@@ -1829,7 +2268,7 @@ static PyObject *__pyx_pf_16pluginscript_api_19description_classes_19PropertyDes
  */
   }
 
-  /* "pluginscript_api/description_classes/PropertyDescription.pyx":30
+  /* "pluginscript_api/description_classes/PropertyDescription.pyx":69
  *     if(type_ in type_variant_type_map):
  *         return type_variant_type_map[type_]
  *     return             # <<<<<<<<<<<<<<
@@ -1840,8 +2279,8 @@ static PyObject *__pyx_pf_16pluginscript_api_19description_classes_19PropertyDes
   __pyx_r = Py_None; __Pyx_INCREF(Py_None);
   goto __pyx_L0;
 
-  /* "pluginscript_api/description_classes/PropertyDescription.pyx":27
- * type_variant_type_map = {int:GODOT_VARIANT_TYPE_INT, Vector3:7}
+  /* "pluginscript_api/description_classes/PropertyDescription.pyx":66
+ * }
  * 
  * def transform_type(type_):             # <<<<<<<<<<<<<<
  *     if(type_ in type_variant_type_map):
@@ -1860,7 +2299,7 @@ static PyObject *__pyx_pf_16pluginscript_api_19description_classes_19PropertyDes
   return __pyx_r;
 }
 
-/* "pluginscript_api/description_classes/PropertyDescription.pyx":32
+/* "pluginscript_api/description_classes/PropertyDescription.pyx":71
  *     return
  * class PropertyDescription:
  *     def __init__(self, name,type_, hint, hint_string, usage, default_value, rset_mode):             # <<<<<<<<<<<<<<
@@ -1921,47 +2360,47 @@ static PyObject *__pyx_pw_16pluginscript_api_19description_classes_19PropertyDes
         case  1:
         if (likely((values[1] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_name)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("__init__", 1, 8, 8, 1); __PYX_ERR(0, 32, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("__init__", 1, 8, 8, 1); __PYX_ERR(0, 71, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  2:
         if (likely((values[2] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_type)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("__init__", 1, 8, 8, 2); __PYX_ERR(0, 32, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("__init__", 1, 8, 8, 2); __PYX_ERR(0, 71, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  3:
         if (likely((values[3] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_hint)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("__init__", 1, 8, 8, 3); __PYX_ERR(0, 32, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("__init__", 1, 8, 8, 3); __PYX_ERR(0, 71, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  4:
         if (likely((values[4] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_hint_string)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("__init__", 1, 8, 8, 4); __PYX_ERR(0, 32, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("__init__", 1, 8, 8, 4); __PYX_ERR(0, 71, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  5:
         if (likely((values[5] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_usage)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("__init__", 1, 8, 8, 5); __PYX_ERR(0, 32, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("__init__", 1, 8, 8, 5); __PYX_ERR(0, 71, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  6:
         if (likely((values[6] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_default_value)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("__init__", 1, 8, 8, 6); __PYX_ERR(0, 32, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("__init__", 1, 8, 8, 6); __PYX_ERR(0, 71, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  7:
         if (likely((values[7] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_rset_mode)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("__init__", 1, 8, 8, 7); __PYX_ERR(0, 32, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("__init__", 1, 8, 8, 7); __PYX_ERR(0, 71, __pyx_L3_error)
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "__init__") < 0)) __PYX_ERR(0, 32, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "__init__") < 0)) __PYX_ERR(0, 71, __pyx_L3_error)
       }
     } else if (PyTuple_GET_SIZE(__pyx_args) != 8) {
       goto __pyx_L5_argtuple_error;
@@ -1986,7 +2425,7 @@ static PyObject *__pyx_pw_16pluginscript_api_19description_classes_19PropertyDes
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("__init__", 1, 8, 8, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 32, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("__init__", 1, 8, 8, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 71, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("pluginscript_api.description_classes.PropertyDescription.PropertyDescription.__init__", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
@@ -2012,23 +2451,23 @@ static PyObject *__pyx_pf_16pluginscript_api_19description_classes_19PropertyDes
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__init__", 0);
 
-  /* "pluginscript_api/description_classes/PropertyDescription.pyx":33
+  /* "pluginscript_api/description_classes/PropertyDescription.pyx":72
  * class PropertyDescription:
  *     def __init__(self, name,type_, hint, hint_string, usage, default_value, rset_mode):
  *         self.name = name             # <<<<<<<<<<<<<<
  *         self.type_ = transform_type(type_)
  *         self.hint = hint
  */
-  if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_name, __pyx_v_name) < 0) __PYX_ERR(0, 33, __pyx_L1_error)
+  if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_name, __pyx_v_name) < 0) __PYX_ERR(0, 72, __pyx_L1_error)
 
-  /* "pluginscript_api/description_classes/PropertyDescription.pyx":34
+  /* "pluginscript_api/description_classes/PropertyDescription.pyx":73
  *     def __init__(self, name,type_, hint, hint_string, usage, default_value, rset_mode):
  *         self.name = name
  *         self.type_ = transform_type(type_)             # <<<<<<<<<<<<<<
  *         self.hint = hint
  *         if(hint == None):
  */
-  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_transform_type); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 34, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_transform_type); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 73, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_t_3 = NULL;
   if (CYTHON_UNPACK_METHODS && unlikely(PyMethod_Check(__pyx_t_2))) {
@@ -2042,95 +2481,73 @@ static PyObject *__pyx_pf_16pluginscript_api_19description_classes_19PropertyDes
   }
   __pyx_t_1 = (__pyx_t_3) ? __Pyx_PyObject_Call2Args(__pyx_t_2, __pyx_t_3, __pyx_v_type_) : __Pyx_PyObject_CallOneArg(__pyx_t_2, __pyx_v_type_);
   __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
-  if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 34, __pyx_L1_error)
+  if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 73, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_type, __pyx_t_1) < 0) __PYX_ERR(0, 34, __pyx_L1_error)
+  if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_type, __pyx_t_1) < 0) __PYX_ERR(0, 73, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "pluginscript_api/description_classes/PropertyDescription.pyx":35
+  /* "pluginscript_api/description_classes/PropertyDescription.pyx":74
  *         self.name = name
  *         self.type_ = transform_type(type_)
  *         self.hint = hint             # <<<<<<<<<<<<<<
  *         if(hint == None):
- *             print("----------------------------check_hint-------------------------------")
+ *             if(type_ in type_hint_map):
  */
-  if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_hint, __pyx_v_hint) < 0) __PYX_ERR(0, 35, __pyx_L1_error)
+  if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_hint, __pyx_v_hint) < 0) __PYX_ERR(0, 74, __pyx_L1_error)
 
-  /* "pluginscript_api/description_classes/PropertyDescription.pyx":36
+  /* "pluginscript_api/description_classes/PropertyDescription.pyx":75
  *         self.type_ = transform_type(type_)
  *         self.hint = hint
  *         if(hint == None):             # <<<<<<<<<<<<<<
- *             print("----------------------------check_hint-------------------------------")
  *             if(type_ in type_hint_map):
+ *                 self.hint = type_hint_map[type_]
  */
-  __pyx_t_1 = PyObject_RichCompare(__pyx_v_hint, Py_None, Py_EQ); __Pyx_XGOTREF(__pyx_t_1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 36, __pyx_L1_error)
-  __pyx_t_4 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely(__pyx_t_4 < 0)) __PYX_ERR(0, 36, __pyx_L1_error)
+  __pyx_t_1 = PyObject_RichCompare(__pyx_v_hint, Py_None, Py_EQ); __Pyx_XGOTREF(__pyx_t_1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 75, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely(__pyx_t_4 < 0)) __PYX_ERR(0, 75, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   if (__pyx_t_4) {
 
-    /* "pluginscript_api/description_classes/PropertyDescription.pyx":37
+    /* "pluginscript_api/description_classes/PropertyDescription.pyx":76
  *         self.hint = hint
  *         if(hint == None):
- *             print("----------------------------check_hint-------------------------------")             # <<<<<<<<<<<<<<
- *             if(type_ in type_hint_map):
- *                 print("----------------------------checked hint_map=True-------------------------------")
- */
-    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_print, __pyx_tuple_, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 37, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_1);
-    __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-
-    /* "pluginscript_api/description_classes/PropertyDescription.pyx":38
- *         if(hint == None):
- *             print("----------------------------check_hint-------------------------------")
  *             if(type_ in type_hint_map):             # <<<<<<<<<<<<<<
- *                 print("----------------------------checked hint_map=True-------------------------------")
  *                 self.hint = type_hint_map[type_]
+ *             else:
  */
-    __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_n_s_type_hint_map); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 38, __pyx_L1_error)
+    __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_n_s_type_hint_map); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 76, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
-    __pyx_t_4 = (__Pyx_PySequence_ContainsTF(__pyx_v_type_, __pyx_t_1, Py_EQ)); if (unlikely(__pyx_t_4 < 0)) __PYX_ERR(0, 38, __pyx_L1_error)
+    __pyx_t_4 = (__Pyx_PySequence_ContainsTF(__pyx_v_type_, __pyx_t_1, Py_EQ)); if (unlikely(__pyx_t_4 < 0)) __PYX_ERR(0, 76, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     __pyx_t_5 = (__pyx_t_4 != 0);
     if (__pyx_t_5) {
 
-      /* "pluginscript_api/description_classes/PropertyDescription.pyx":39
- *             print("----------------------------check_hint-------------------------------")
+      /* "pluginscript_api/description_classes/PropertyDescription.pyx":77
+ *         if(hint == None):
  *             if(type_ in type_hint_map):
- *                 print("----------------------------checked hint_map=True-------------------------------")             # <<<<<<<<<<<<<<
- *                 self.hint = type_hint_map[type_]
- *             else:
- */
-      __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_print, __pyx_tuple__2, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 39, __pyx_L1_error)
-      __Pyx_GOTREF(__pyx_t_1);
-      __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-
-      /* "pluginscript_api/description_classes/PropertyDescription.pyx":40
- *             if(type_ in type_hint_map):
- *                 print("----------------------------checked hint_map=True-------------------------------")
  *                 self.hint = type_hint_map[type_]             # <<<<<<<<<<<<<<
  *             else:
  *                 self.hint = GODOT_PROPERTY_HINT_NONE
  */
-      __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_n_s_type_hint_map); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 40, __pyx_L1_error)
+      __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_n_s_type_hint_map); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 77, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_1);
-      __pyx_t_2 = __Pyx_PyObject_GetItem(__pyx_t_1, __pyx_v_type_); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 40, __pyx_L1_error)
+      __pyx_t_2 = __Pyx_PyObject_GetItem(__pyx_t_1, __pyx_v_type_); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 77, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_2);
       __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-      if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_hint, __pyx_t_2) < 0) __PYX_ERR(0, 40, __pyx_L1_error)
+      if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_hint, __pyx_t_2) < 0) __PYX_ERR(0, 77, __pyx_L1_error)
       __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-      /* "pluginscript_api/description_classes/PropertyDescription.pyx":38
+      /* "pluginscript_api/description_classes/PropertyDescription.pyx":76
+ *         self.hint = hint
  *         if(hint == None):
- *             print("----------------------------check_hint-------------------------------")
  *             if(type_ in type_hint_map):             # <<<<<<<<<<<<<<
- *                 print("----------------------------checked hint_map=True-------------------------------")
  *                 self.hint = type_hint_map[type_]
+ *             else:
  */
       goto __pyx_L4;
     }
 
-    /* "pluginscript_api/description_classes/PropertyDescription.pyx":42
+    /* "pluginscript_api/description_classes/PropertyDescription.pyx":79
  *                 self.hint = type_hint_map[type_]
  *             else:
  *                 self.hint = GODOT_PROPERTY_HINT_NONE             # <<<<<<<<<<<<<<
@@ -2138,59 +2555,59 @@ static PyObject *__pyx_pf_16pluginscript_api_19description_classes_19PropertyDes
  *         self.usage = usage
  */
     /*else*/ {
-      __pyx_t_2 = __Pyx_PyInt_From_godot_property_hint(GODOT_PROPERTY_HINT_NONE); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 42, __pyx_L1_error)
+      __pyx_t_2 = __Pyx_PyInt_From_godot_property_hint(GODOT_PROPERTY_HINT_NONE); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 79, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_2);
-      if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_hint, __pyx_t_2) < 0) __PYX_ERR(0, 42, __pyx_L1_error)
+      if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_hint, __pyx_t_2) < 0) __PYX_ERR(0, 79, __pyx_L1_error)
       __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
     }
     __pyx_L4:;
 
-    /* "pluginscript_api/description_classes/PropertyDescription.pyx":36
+    /* "pluginscript_api/description_classes/PropertyDescription.pyx":75
  *         self.type_ = transform_type(type_)
  *         self.hint = hint
  *         if(hint == None):             # <<<<<<<<<<<<<<
- *             print("----------------------------check_hint-------------------------------")
  *             if(type_ in type_hint_map):
+ *                 self.hint = type_hint_map[type_]
  */
   }
 
-  /* "pluginscript_api/description_classes/PropertyDescription.pyx":43
+  /* "pluginscript_api/description_classes/PropertyDescription.pyx":80
  *             else:
  *                 self.hint = GODOT_PROPERTY_HINT_NONE
  *         self.hint_string = hint_string             # <<<<<<<<<<<<<<
  *         self.usage = usage
  *         self.default_value = default_value
  */
-  if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_hint_string, __pyx_v_hint_string) < 0) __PYX_ERR(0, 43, __pyx_L1_error)
+  if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_hint_string, __pyx_v_hint_string) < 0) __PYX_ERR(0, 80, __pyx_L1_error)
 
-  /* "pluginscript_api/description_classes/PropertyDescription.pyx":44
+  /* "pluginscript_api/description_classes/PropertyDescription.pyx":81
  *                 self.hint = GODOT_PROPERTY_HINT_NONE
  *         self.hint_string = hint_string
  *         self.usage = usage             # <<<<<<<<<<<<<<
  *         self.default_value = default_value
  *         self.rset_mode = rset_mode
  */
-  if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_usage, __pyx_v_usage) < 0) __PYX_ERR(0, 44, __pyx_L1_error)
+  if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_usage, __pyx_v_usage) < 0) __PYX_ERR(0, 81, __pyx_L1_error)
 
-  /* "pluginscript_api/description_classes/PropertyDescription.pyx":45
+  /* "pluginscript_api/description_classes/PropertyDescription.pyx":82
  *         self.hint_string = hint_string
  *         self.usage = usage
  *         self.default_value = default_value             # <<<<<<<<<<<<<<
  *         self.rset_mode = rset_mode
  *     def to_dict(self):
  */
-  if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_default_value, __pyx_v_default_value) < 0) __PYX_ERR(0, 45, __pyx_L1_error)
+  if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_default_value, __pyx_v_default_value) < 0) __PYX_ERR(0, 82, __pyx_L1_error)
 
-  /* "pluginscript_api/description_classes/PropertyDescription.pyx":46
+  /* "pluginscript_api/description_classes/PropertyDescription.pyx":83
  *         self.usage = usage
  *         self.default_value = default_value
  *         self.rset_mode = rset_mode             # <<<<<<<<<<<<<<
  *     def to_dict(self):
- *         print("----------to_dict:",self.name,"|", self.type_,"|", self.hint)
+ *         d = Dictionary()
  */
-  if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_rset_mode, __pyx_v_rset_mode) < 0) __PYX_ERR(0, 46, __pyx_L1_error)
+  if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_rset_mode, __pyx_v_rset_mode) < 0) __PYX_ERR(0, 83, __pyx_L1_error)
 
-  /* "pluginscript_api/description_classes/PropertyDescription.pyx":32
+  /* "pluginscript_api/description_classes/PropertyDescription.pyx":71
  *     return
  * class PropertyDescription:
  *     def __init__(self, name,type_, hint, hint_string, usage, default_value, rset_mode):             # <<<<<<<<<<<<<<
@@ -2213,12 +2630,12 @@ static PyObject *__pyx_pf_16pluginscript_api_19description_classes_19PropertyDes
   return __pyx_r;
 }
 
-/* "pluginscript_api/description_classes/PropertyDescription.pyx":47
+/* "pluginscript_api/description_classes/PropertyDescription.pyx":84
  *         self.default_value = default_value
  *         self.rset_mode = rset_mode
  *     def to_dict(self):             # <<<<<<<<<<<<<<
- *         print("----------to_dict:",self.name,"|", self.type_,"|", self.hint)
  *         d = Dictionary()
+ *         d.set(Variant(String("name")), Variant(String(self.name)))
  */
 
 /* Python wrapper */
@@ -2251,549 +2668,511 @@ static PyObject *__pyx_pf_16pluginscript_api_19description_classes_19PropertyDes
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("to_dict", 0);
 
-  /* "pluginscript_api/description_classes/PropertyDescription.pyx":48
+  /* "pluginscript_api/description_classes/PropertyDescription.pyx":85
  *         self.rset_mode = rset_mode
  *     def to_dict(self):
- *         print("----------to_dict:",self.name,"|", self.type_,"|", self.hint)             # <<<<<<<<<<<<<<
- *         d = Dictionary()
- *         d.set(Variant(String("name")), Variant(String(self.name)))
- */
-  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_name); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 48, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_type); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 48, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_hint); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 48, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_3);
-  __pyx_t_4 = PyTuple_New(6); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 48, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_4);
-  __Pyx_INCREF(__pyx_kp_u_to_dict);
-  __Pyx_GIVEREF(__pyx_kp_u_to_dict);
-  PyTuple_SET_ITEM(__pyx_t_4, 0, __pyx_kp_u_to_dict);
-  __Pyx_GIVEREF(__pyx_t_1);
-  PyTuple_SET_ITEM(__pyx_t_4, 1, __pyx_t_1);
-  __Pyx_INCREF(__pyx_kp_u__3);
-  __Pyx_GIVEREF(__pyx_kp_u__3);
-  PyTuple_SET_ITEM(__pyx_t_4, 2, __pyx_kp_u__3);
-  __Pyx_GIVEREF(__pyx_t_2);
-  PyTuple_SET_ITEM(__pyx_t_4, 3, __pyx_t_2);
-  __Pyx_INCREF(__pyx_kp_u__3);
-  __Pyx_GIVEREF(__pyx_kp_u__3);
-  PyTuple_SET_ITEM(__pyx_t_4, 4, __pyx_kp_u__3);
-  __Pyx_GIVEREF(__pyx_t_3);
-  PyTuple_SET_ITEM(__pyx_t_4, 5, __pyx_t_3);
-  __pyx_t_1 = 0;
-  __pyx_t_2 = 0;
-  __pyx_t_3 = 0;
-  __pyx_t_3 = __Pyx_PyObject_Call(__pyx_builtin_print, __pyx_t_4, NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 48, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_3);
-  __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-
-  /* "pluginscript_api/description_classes/PropertyDescription.pyx":49
- *     def to_dict(self):
- *         print("----------to_dict:",self.name,"|", self.type_,"|", self.hint)
  *         d = Dictionary()             # <<<<<<<<<<<<<<
  *         d.set(Variant(String("name")), Variant(String(self.name)))
  *         d.set(Variant(String("type")), Variant(self.type_))
  */
-  __pyx_t_3 = __Pyx_PyObject_CallNoArg(((PyObject *)__pyx_ptype_4core_10dictionary_10Dictionary_Dictionary)); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 49, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_3);
-  __pyx_v_d = ((struct __pyx_obj_4core_10dictionary_10Dictionary_Dictionary *)__pyx_t_3);
-  __pyx_t_3 = 0;
+  __pyx_t_1 = __Pyx_PyObject_CallNoArg(((PyObject *)__pyx_ptype_4core_10dictionary_10Dictionary_Dictionary)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 85, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __pyx_v_d = ((struct __pyx_obj_4core_10dictionary_10Dictionary_Dictionary *)__pyx_t_1);
+  __pyx_t_1 = 0;
 
-  /* "pluginscript_api/description_classes/PropertyDescription.pyx":50
- *         print("----------to_dict:",self.name,"|", self.type_,"|", self.hint)
+  /* "pluginscript_api/description_classes/PropertyDescription.pyx":86
+ *     def to_dict(self):
  *         d = Dictionary()
  *         d.set(Variant(String("name")), Variant(String(self.name)))             # <<<<<<<<<<<<<<
  *         d.set(Variant(String("type")), Variant(self.type_))
  *         d.set(Variant(String("hint")), Variant(self.hint))
  */
-  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_d), __pyx_n_s_set); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 50, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_d), __pyx_n_s_set); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 86, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
+  __pyx_t_3 = __Pyx_PyObject_Call(((PyObject *)__pyx_ptype_4core_6string_6String_String), __pyx_tuple_, NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 86, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_3);
+  __pyx_t_4 = __Pyx_PyObject_CallOneArg(((PyObject *)__pyx_ptype_4core_7variant_7Variant_Variant), __pyx_t_3); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 86, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
-  __pyx_t_2 = __Pyx_PyObject_Call(((PyObject *)__pyx_ptype_4core_6string_6String_String), __pyx_tuple__4, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 50, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_1 = __Pyx_PyObject_CallOneArg(((PyObject *)__pyx_ptype_4core_7variant_7Variant_Variant), __pyx_t_2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 50, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_1);
-  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_name); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 50, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_5 = __Pyx_PyObject_CallOneArg(((PyObject *)__pyx_ptype_4core_6string_6String_String), __pyx_t_2); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 50, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_name); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 86, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_3);
+  __pyx_t_5 = __Pyx_PyObject_CallOneArg(((PyObject *)__pyx_ptype_4core_6string_6String_String), __pyx_t_3); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 86, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
-  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_2 = __Pyx_PyObject_CallOneArg(((PyObject *)__pyx_ptype_4core_7variant_7Variant_Variant), __pyx_t_5); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 50, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_2);
+  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+  __pyx_t_3 = __Pyx_PyObject_CallOneArg(((PyObject *)__pyx_ptype_4core_7variant_7Variant_Variant), __pyx_t_5); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 86, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
   __pyx_t_5 = NULL;
   __pyx_t_6 = 0;
-  if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_4))) {
-    __pyx_t_5 = PyMethod_GET_SELF(__pyx_t_4);
+  if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_2))) {
+    __pyx_t_5 = PyMethod_GET_SELF(__pyx_t_2);
     if (likely(__pyx_t_5)) {
-      PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_4);
+      PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_2);
       __Pyx_INCREF(__pyx_t_5);
       __Pyx_INCREF(function);
-      __Pyx_DECREF_SET(__pyx_t_4, function);
+      __Pyx_DECREF_SET(__pyx_t_2, function);
       __pyx_t_6 = 1;
     }
   }
   #if CYTHON_FAST_PYCALL
-  if (PyFunction_Check(__pyx_t_4)) {
-    PyObject *__pyx_temp[3] = {__pyx_t_5, __pyx_t_1, __pyx_t_2};
-    __pyx_t_3 = __Pyx_PyFunction_FastCall(__pyx_t_4, __pyx_temp+1-__pyx_t_6, 2+__pyx_t_6); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 50, __pyx_L1_error)
+  if (PyFunction_Check(__pyx_t_2)) {
+    PyObject *__pyx_temp[3] = {__pyx_t_5, __pyx_t_4, __pyx_t_3};
+    __pyx_t_1 = __Pyx_PyFunction_FastCall(__pyx_t_2, __pyx_temp+1-__pyx_t_6, 2+__pyx_t_6); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 86, __pyx_L1_error)
     __Pyx_XDECREF(__pyx_t_5); __pyx_t_5 = 0;
-    __Pyx_GOTREF(__pyx_t_3);
-    __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-    __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+    __Pyx_GOTREF(__pyx_t_1);
+    __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
+    __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   } else
   #endif
   #if CYTHON_FAST_PYCCALL
-  if (__Pyx_PyFastCFunction_Check(__pyx_t_4)) {
-    PyObject *__pyx_temp[3] = {__pyx_t_5, __pyx_t_1, __pyx_t_2};
-    __pyx_t_3 = __Pyx_PyCFunction_FastCall(__pyx_t_4, __pyx_temp+1-__pyx_t_6, 2+__pyx_t_6); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 50, __pyx_L1_error)
+  if (__Pyx_PyFastCFunction_Check(__pyx_t_2)) {
+    PyObject *__pyx_temp[3] = {__pyx_t_5, __pyx_t_4, __pyx_t_3};
+    __pyx_t_1 = __Pyx_PyCFunction_FastCall(__pyx_t_2, __pyx_temp+1-__pyx_t_6, 2+__pyx_t_6); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 86, __pyx_L1_error)
     __Pyx_XDECREF(__pyx_t_5); __pyx_t_5 = 0;
-    __Pyx_GOTREF(__pyx_t_3);
-    __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-    __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+    __Pyx_GOTREF(__pyx_t_1);
+    __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
+    __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   } else
   #endif
   {
-    __pyx_t_7 = PyTuple_New(2+__pyx_t_6); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 50, __pyx_L1_error)
+    __pyx_t_7 = PyTuple_New(2+__pyx_t_6); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 86, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_7);
     if (__pyx_t_5) {
       __Pyx_GIVEREF(__pyx_t_5); PyTuple_SET_ITEM(__pyx_t_7, 0, __pyx_t_5); __pyx_t_5 = NULL;
     }
-    __Pyx_GIVEREF(__pyx_t_1);
-    PyTuple_SET_ITEM(__pyx_t_7, 0+__pyx_t_6, __pyx_t_1);
-    __Pyx_GIVEREF(__pyx_t_2);
-    PyTuple_SET_ITEM(__pyx_t_7, 1+__pyx_t_6, __pyx_t_2);
-    __pyx_t_1 = 0;
-    __pyx_t_2 = 0;
-    __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_4, __pyx_t_7, NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 50, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_3);
+    __Pyx_GIVEREF(__pyx_t_4);
+    PyTuple_SET_ITEM(__pyx_t_7, 0+__pyx_t_6, __pyx_t_4);
+    __Pyx_GIVEREF(__pyx_t_3);
+    PyTuple_SET_ITEM(__pyx_t_7, 1+__pyx_t_6, __pyx_t_3);
+    __pyx_t_4 = 0;
+    __pyx_t_3 = 0;
+    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_t_7, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 86, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
   }
-  __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "pluginscript_api/description_classes/PropertyDescription.pyx":51
+  /* "pluginscript_api/description_classes/PropertyDescription.pyx":87
  *         d = Dictionary()
  *         d.set(Variant(String("name")), Variant(String(self.name)))
  *         d.set(Variant(String("type")), Variant(self.type_))             # <<<<<<<<<<<<<<
  *         d.set(Variant(String("hint")), Variant(self.hint))
  *         d.set(Variant(String("hint_string")),Variant(self.hint_string))
  */
-  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_d), __pyx_n_s_set); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 51, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_4);
-  __pyx_t_7 = __Pyx_PyObject_Call(((PyObject *)__pyx_ptype_4core_6string_6String_String), __pyx_tuple__5, NULL); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 51, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_7);
-  __pyx_t_2 = __Pyx_PyObject_CallOneArg(((PyObject *)__pyx_ptype_4core_7variant_7Variant_Variant), __pyx_t_7); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 51, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_d), __pyx_n_s_set); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 87, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
-  __pyx_t_7 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_type); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 51, __pyx_L1_error)
+  __pyx_t_7 = __Pyx_PyObject_Call(((PyObject *)__pyx_ptype_4core_6string_6String_String), __pyx_tuple__2, NULL); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 87, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
-  __pyx_t_1 = __Pyx_PyObject_CallOneArg(((PyObject *)__pyx_ptype_4core_7variant_7Variant_Variant), __pyx_t_7); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 51, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_1);
+  __pyx_t_3 = __Pyx_PyObject_CallOneArg(((PyObject *)__pyx_ptype_4core_7variant_7Variant_Variant), __pyx_t_7); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 87, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_3);
+  __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
+  __pyx_t_7 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_type); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 87, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_7);
+  __pyx_t_4 = __Pyx_PyObject_CallOneArg(((PyObject *)__pyx_ptype_4core_7variant_7Variant_Variant), __pyx_t_7); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 87, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_4);
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
   __pyx_t_7 = NULL;
   __pyx_t_6 = 0;
-  if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_4))) {
-    __pyx_t_7 = PyMethod_GET_SELF(__pyx_t_4);
+  if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_2))) {
+    __pyx_t_7 = PyMethod_GET_SELF(__pyx_t_2);
     if (likely(__pyx_t_7)) {
-      PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_4);
+      PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_2);
       __Pyx_INCREF(__pyx_t_7);
       __Pyx_INCREF(function);
-      __Pyx_DECREF_SET(__pyx_t_4, function);
+      __Pyx_DECREF_SET(__pyx_t_2, function);
       __pyx_t_6 = 1;
     }
   }
   #if CYTHON_FAST_PYCALL
-  if (PyFunction_Check(__pyx_t_4)) {
-    PyObject *__pyx_temp[3] = {__pyx_t_7, __pyx_t_2, __pyx_t_1};
-    __pyx_t_3 = __Pyx_PyFunction_FastCall(__pyx_t_4, __pyx_temp+1-__pyx_t_6, 2+__pyx_t_6); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 51, __pyx_L1_error)
+  if (PyFunction_Check(__pyx_t_2)) {
+    PyObject *__pyx_temp[3] = {__pyx_t_7, __pyx_t_3, __pyx_t_4};
+    __pyx_t_1 = __Pyx_PyFunction_FastCall(__pyx_t_2, __pyx_temp+1-__pyx_t_6, 2+__pyx_t_6); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 87, __pyx_L1_error)
     __Pyx_XDECREF(__pyx_t_7); __pyx_t_7 = 0;
-    __Pyx_GOTREF(__pyx_t_3);
-    __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+    __Pyx_GOTREF(__pyx_t_1);
+    __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+    __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   } else
   #endif
   #if CYTHON_FAST_PYCCALL
-  if (__Pyx_PyFastCFunction_Check(__pyx_t_4)) {
-    PyObject *__pyx_temp[3] = {__pyx_t_7, __pyx_t_2, __pyx_t_1};
-    __pyx_t_3 = __Pyx_PyCFunction_FastCall(__pyx_t_4, __pyx_temp+1-__pyx_t_6, 2+__pyx_t_6); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 51, __pyx_L1_error)
+  if (__Pyx_PyFastCFunction_Check(__pyx_t_2)) {
+    PyObject *__pyx_temp[3] = {__pyx_t_7, __pyx_t_3, __pyx_t_4};
+    __pyx_t_1 = __Pyx_PyCFunction_FastCall(__pyx_t_2, __pyx_temp+1-__pyx_t_6, 2+__pyx_t_6); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 87, __pyx_L1_error)
     __Pyx_XDECREF(__pyx_t_7); __pyx_t_7 = 0;
-    __Pyx_GOTREF(__pyx_t_3);
-    __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+    __Pyx_GOTREF(__pyx_t_1);
+    __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+    __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   } else
   #endif
   {
-    __pyx_t_5 = PyTuple_New(2+__pyx_t_6); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 51, __pyx_L1_error)
+    __pyx_t_5 = PyTuple_New(2+__pyx_t_6); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 87, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_5);
     if (__pyx_t_7) {
       __Pyx_GIVEREF(__pyx_t_7); PyTuple_SET_ITEM(__pyx_t_5, 0, __pyx_t_7); __pyx_t_7 = NULL;
     }
-    __Pyx_GIVEREF(__pyx_t_2);
-    PyTuple_SET_ITEM(__pyx_t_5, 0+__pyx_t_6, __pyx_t_2);
-    __Pyx_GIVEREF(__pyx_t_1);
-    PyTuple_SET_ITEM(__pyx_t_5, 1+__pyx_t_6, __pyx_t_1);
-    __pyx_t_2 = 0;
-    __pyx_t_1 = 0;
-    __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_4, __pyx_t_5, NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 51, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_3);
+    __Pyx_GIVEREF(__pyx_t_3);
+    PyTuple_SET_ITEM(__pyx_t_5, 0+__pyx_t_6, __pyx_t_3);
+    __Pyx_GIVEREF(__pyx_t_4);
+    PyTuple_SET_ITEM(__pyx_t_5, 1+__pyx_t_6, __pyx_t_4);
+    __pyx_t_3 = 0;
+    __pyx_t_4 = 0;
+    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_t_5, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 87, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
   }
-  __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "pluginscript_api/description_classes/PropertyDescription.pyx":52
+  /* "pluginscript_api/description_classes/PropertyDescription.pyx":88
  *         d.set(Variant(String("name")), Variant(String(self.name)))
  *         d.set(Variant(String("type")), Variant(self.type_))
  *         d.set(Variant(String("hint")), Variant(self.hint))             # <<<<<<<<<<<<<<
  *         d.set(Variant(String("hint_string")),Variant(self.hint_string))
  *         d.set(Variant(String("usage")), Variant(self.usage))
  */
-  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_d), __pyx_n_s_set); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 52, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_4);
-  __pyx_t_5 = __Pyx_PyObject_Call(((PyObject *)__pyx_ptype_4core_6string_6String_String), __pyx_tuple__6, NULL); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 52, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_5);
-  __pyx_t_1 = __Pyx_PyObject_CallOneArg(((PyObject *)__pyx_ptype_4core_7variant_7Variant_Variant), __pyx_t_5); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 52, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_1);
-  __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-  __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_hint); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 52, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_5);
-  __pyx_t_2 = __Pyx_PyObject_CallOneArg(((PyObject *)__pyx_ptype_4core_7variant_7Variant_Variant), __pyx_t_5); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 52, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_d), __pyx_n_s_set); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 88, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
+  __pyx_t_5 = __Pyx_PyObject_Call(((PyObject *)__pyx_ptype_4core_6string_6String_String), __pyx_tuple__3, NULL); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 88, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_5);
+  __pyx_t_4 = __Pyx_PyObject_CallOneArg(((PyObject *)__pyx_ptype_4core_7variant_7Variant_Variant), __pyx_t_5); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 88, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_4);
+  __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
+  __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_hint); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 88, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_5);
+  __pyx_t_3 = __Pyx_PyObject_CallOneArg(((PyObject *)__pyx_ptype_4core_7variant_7Variant_Variant), __pyx_t_5); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 88, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
   __pyx_t_5 = NULL;
   __pyx_t_6 = 0;
-  if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_4))) {
-    __pyx_t_5 = PyMethod_GET_SELF(__pyx_t_4);
+  if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_2))) {
+    __pyx_t_5 = PyMethod_GET_SELF(__pyx_t_2);
     if (likely(__pyx_t_5)) {
-      PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_4);
+      PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_2);
       __Pyx_INCREF(__pyx_t_5);
       __Pyx_INCREF(function);
-      __Pyx_DECREF_SET(__pyx_t_4, function);
+      __Pyx_DECREF_SET(__pyx_t_2, function);
       __pyx_t_6 = 1;
     }
   }
   #if CYTHON_FAST_PYCALL
-  if (PyFunction_Check(__pyx_t_4)) {
-    PyObject *__pyx_temp[3] = {__pyx_t_5, __pyx_t_1, __pyx_t_2};
-    __pyx_t_3 = __Pyx_PyFunction_FastCall(__pyx_t_4, __pyx_temp+1-__pyx_t_6, 2+__pyx_t_6); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 52, __pyx_L1_error)
+  if (PyFunction_Check(__pyx_t_2)) {
+    PyObject *__pyx_temp[3] = {__pyx_t_5, __pyx_t_4, __pyx_t_3};
+    __pyx_t_1 = __Pyx_PyFunction_FastCall(__pyx_t_2, __pyx_temp+1-__pyx_t_6, 2+__pyx_t_6); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 88, __pyx_L1_error)
     __Pyx_XDECREF(__pyx_t_5); __pyx_t_5 = 0;
-    __Pyx_GOTREF(__pyx_t_3);
-    __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-    __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+    __Pyx_GOTREF(__pyx_t_1);
+    __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
+    __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   } else
   #endif
   #if CYTHON_FAST_PYCCALL
-  if (__Pyx_PyFastCFunction_Check(__pyx_t_4)) {
-    PyObject *__pyx_temp[3] = {__pyx_t_5, __pyx_t_1, __pyx_t_2};
-    __pyx_t_3 = __Pyx_PyCFunction_FastCall(__pyx_t_4, __pyx_temp+1-__pyx_t_6, 2+__pyx_t_6); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 52, __pyx_L1_error)
+  if (__Pyx_PyFastCFunction_Check(__pyx_t_2)) {
+    PyObject *__pyx_temp[3] = {__pyx_t_5, __pyx_t_4, __pyx_t_3};
+    __pyx_t_1 = __Pyx_PyCFunction_FastCall(__pyx_t_2, __pyx_temp+1-__pyx_t_6, 2+__pyx_t_6); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 88, __pyx_L1_error)
     __Pyx_XDECREF(__pyx_t_5); __pyx_t_5 = 0;
-    __Pyx_GOTREF(__pyx_t_3);
-    __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-    __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+    __Pyx_GOTREF(__pyx_t_1);
+    __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
+    __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   } else
   #endif
   {
-    __pyx_t_7 = PyTuple_New(2+__pyx_t_6); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 52, __pyx_L1_error)
+    __pyx_t_7 = PyTuple_New(2+__pyx_t_6); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 88, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_7);
     if (__pyx_t_5) {
       __Pyx_GIVEREF(__pyx_t_5); PyTuple_SET_ITEM(__pyx_t_7, 0, __pyx_t_5); __pyx_t_5 = NULL;
     }
-    __Pyx_GIVEREF(__pyx_t_1);
-    PyTuple_SET_ITEM(__pyx_t_7, 0+__pyx_t_6, __pyx_t_1);
-    __Pyx_GIVEREF(__pyx_t_2);
-    PyTuple_SET_ITEM(__pyx_t_7, 1+__pyx_t_6, __pyx_t_2);
-    __pyx_t_1 = 0;
-    __pyx_t_2 = 0;
-    __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_4, __pyx_t_7, NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 52, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_3);
+    __Pyx_GIVEREF(__pyx_t_4);
+    PyTuple_SET_ITEM(__pyx_t_7, 0+__pyx_t_6, __pyx_t_4);
+    __Pyx_GIVEREF(__pyx_t_3);
+    PyTuple_SET_ITEM(__pyx_t_7, 1+__pyx_t_6, __pyx_t_3);
+    __pyx_t_4 = 0;
+    __pyx_t_3 = 0;
+    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_t_7, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 88, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
   }
-  __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "pluginscript_api/description_classes/PropertyDescription.pyx":53
+  /* "pluginscript_api/description_classes/PropertyDescription.pyx":89
  *         d.set(Variant(String("type")), Variant(self.type_))
  *         d.set(Variant(String("hint")), Variant(self.hint))
  *         d.set(Variant(String("hint_string")),Variant(self.hint_string))             # <<<<<<<<<<<<<<
  *         d.set(Variant(String("usage")), Variant(self.usage))
  *         d.set(Variant(String("default_value")), Variant(self.default_value))
  */
-  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_d), __pyx_n_s_set); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 53, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_4);
-  __pyx_t_7 = __Pyx_PyObject_Call(((PyObject *)__pyx_ptype_4core_6string_6String_String), __pyx_tuple__7, NULL); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 53, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_7);
-  __pyx_t_2 = __Pyx_PyObject_CallOneArg(((PyObject *)__pyx_ptype_4core_7variant_7Variant_Variant), __pyx_t_7); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 53, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_d), __pyx_n_s_set); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 89, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
-  __pyx_t_7 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_hint_string); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 53, __pyx_L1_error)
+  __pyx_t_7 = __Pyx_PyObject_Call(((PyObject *)__pyx_ptype_4core_6string_6String_String), __pyx_tuple__4, NULL); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 89, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
-  __pyx_t_1 = __Pyx_PyObject_CallOneArg(((PyObject *)__pyx_ptype_4core_7variant_7Variant_Variant), __pyx_t_7); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 53, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_1);
+  __pyx_t_3 = __Pyx_PyObject_CallOneArg(((PyObject *)__pyx_ptype_4core_7variant_7Variant_Variant), __pyx_t_7); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 89, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_3);
+  __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
+  __pyx_t_7 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_hint_string); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 89, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_7);
+  __pyx_t_4 = __Pyx_PyObject_CallOneArg(((PyObject *)__pyx_ptype_4core_7variant_7Variant_Variant), __pyx_t_7); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 89, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_4);
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
   __pyx_t_7 = NULL;
   __pyx_t_6 = 0;
-  if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_4))) {
-    __pyx_t_7 = PyMethod_GET_SELF(__pyx_t_4);
+  if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_2))) {
+    __pyx_t_7 = PyMethod_GET_SELF(__pyx_t_2);
     if (likely(__pyx_t_7)) {
-      PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_4);
+      PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_2);
       __Pyx_INCREF(__pyx_t_7);
       __Pyx_INCREF(function);
-      __Pyx_DECREF_SET(__pyx_t_4, function);
+      __Pyx_DECREF_SET(__pyx_t_2, function);
       __pyx_t_6 = 1;
     }
   }
   #if CYTHON_FAST_PYCALL
-  if (PyFunction_Check(__pyx_t_4)) {
-    PyObject *__pyx_temp[3] = {__pyx_t_7, __pyx_t_2, __pyx_t_1};
-    __pyx_t_3 = __Pyx_PyFunction_FastCall(__pyx_t_4, __pyx_temp+1-__pyx_t_6, 2+__pyx_t_6); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 53, __pyx_L1_error)
+  if (PyFunction_Check(__pyx_t_2)) {
+    PyObject *__pyx_temp[3] = {__pyx_t_7, __pyx_t_3, __pyx_t_4};
+    __pyx_t_1 = __Pyx_PyFunction_FastCall(__pyx_t_2, __pyx_temp+1-__pyx_t_6, 2+__pyx_t_6); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 89, __pyx_L1_error)
     __Pyx_XDECREF(__pyx_t_7); __pyx_t_7 = 0;
-    __Pyx_GOTREF(__pyx_t_3);
-    __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+    __Pyx_GOTREF(__pyx_t_1);
+    __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+    __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   } else
   #endif
   #if CYTHON_FAST_PYCCALL
-  if (__Pyx_PyFastCFunction_Check(__pyx_t_4)) {
-    PyObject *__pyx_temp[3] = {__pyx_t_7, __pyx_t_2, __pyx_t_1};
-    __pyx_t_3 = __Pyx_PyCFunction_FastCall(__pyx_t_4, __pyx_temp+1-__pyx_t_6, 2+__pyx_t_6); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 53, __pyx_L1_error)
+  if (__Pyx_PyFastCFunction_Check(__pyx_t_2)) {
+    PyObject *__pyx_temp[3] = {__pyx_t_7, __pyx_t_3, __pyx_t_4};
+    __pyx_t_1 = __Pyx_PyCFunction_FastCall(__pyx_t_2, __pyx_temp+1-__pyx_t_6, 2+__pyx_t_6); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 89, __pyx_L1_error)
     __Pyx_XDECREF(__pyx_t_7); __pyx_t_7 = 0;
-    __Pyx_GOTREF(__pyx_t_3);
-    __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+    __Pyx_GOTREF(__pyx_t_1);
+    __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+    __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   } else
   #endif
   {
-    __pyx_t_5 = PyTuple_New(2+__pyx_t_6); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 53, __pyx_L1_error)
+    __pyx_t_5 = PyTuple_New(2+__pyx_t_6); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 89, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_5);
     if (__pyx_t_7) {
       __Pyx_GIVEREF(__pyx_t_7); PyTuple_SET_ITEM(__pyx_t_5, 0, __pyx_t_7); __pyx_t_7 = NULL;
     }
-    __Pyx_GIVEREF(__pyx_t_2);
-    PyTuple_SET_ITEM(__pyx_t_5, 0+__pyx_t_6, __pyx_t_2);
-    __Pyx_GIVEREF(__pyx_t_1);
-    PyTuple_SET_ITEM(__pyx_t_5, 1+__pyx_t_6, __pyx_t_1);
-    __pyx_t_2 = 0;
-    __pyx_t_1 = 0;
-    __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_4, __pyx_t_5, NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 53, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_3);
+    __Pyx_GIVEREF(__pyx_t_3);
+    PyTuple_SET_ITEM(__pyx_t_5, 0+__pyx_t_6, __pyx_t_3);
+    __Pyx_GIVEREF(__pyx_t_4);
+    PyTuple_SET_ITEM(__pyx_t_5, 1+__pyx_t_6, __pyx_t_4);
+    __pyx_t_3 = 0;
+    __pyx_t_4 = 0;
+    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_t_5, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 89, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
   }
-  __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "pluginscript_api/description_classes/PropertyDescription.pyx":54
+  /* "pluginscript_api/description_classes/PropertyDescription.pyx":90
  *         d.set(Variant(String("hint")), Variant(self.hint))
  *         d.set(Variant(String("hint_string")),Variant(self.hint_string))
  *         d.set(Variant(String("usage")), Variant(self.usage))             # <<<<<<<<<<<<<<
  *         d.set(Variant(String("default_value")), Variant(self.default_value))
  *         d.set(Variant(String("rset_mode")), Variant(self.rset_mode))
  */
-  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_d), __pyx_n_s_set); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 54, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_4);
-  __pyx_t_5 = __Pyx_PyObject_Call(((PyObject *)__pyx_ptype_4core_6string_6String_String), __pyx_tuple__8, NULL); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 54, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_5);
-  __pyx_t_1 = __Pyx_PyObject_CallOneArg(((PyObject *)__pyx_ptype_4core_7variant_7Variant_Variant), __pyx_t_5); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 54, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_1);
-  __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-  __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_usage); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 54, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_5);
-  __pyx_t_2 = __Pyx_PyObject_CallOneArg(((PyObject *)__pyx_ptype_4core_7variant_7Variant_Variant), __pyx_t_5); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 54, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_d), __pyx_n_s_set); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 90, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
+  __pyx_t_5 = __Pyx_PyObject_Call(((PyObject *)__pyx_ptype_4core_6string_6String_String), __pyx_tuple__5, NULL); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 90, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_5);
+  __pyx_t_4 = __Pyx_PyObject_CallOneArg(((PyObject *)__pyx_ptype_4core_7variant_7Variant_Variant), __pyx_t_5); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 90, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_4);
+  __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
+  __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_usage); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 90, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_5);
+  __pyx_t_3 = __Pyx_PyObject_CallOneArg(((PyObject *)__pyx_ptype_4core_7variant_7Variant_Variant), __pyx_t_5); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 90, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
   __pyx_t_5 = NULL;
   __pyx_t_6 = 0;
-  if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_4))) {
-    __pyx_t_5 = PyMethod_GET_SELF(__pyx_t_4);
+  if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_2))) {
+    __pyx_t_5 = PyMethod_GET_SELF(__pyx_t_2);
     if (likely(__pyx_t_5)) {
-      PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_4);
+      PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_2);
       __Pyx_INCREF(__pyx_t_5);
       __Pyx_INCREF(function);
-      __Pyx_DECREF_SET(__pyx_t_4, function);
+      __Pyx_DECREF_SET(__pyx_t_2, function);
       __pyx_t_6 = 1;
     }
   }
   #if CYTHON_FAST_PYCALL
-  if (PyFunction_Check(__pyx_t_4)) {
-    PyObject *__pyx_temp[3] = {__pyx_t_5, __pyx_t_1, __pyx_t_2};
-    __pyx_t_3 = __Pyx_PyFunction_FastCall(__pyx_t_4, __pyx_temp+1-__pyx_t_6, 2+__pyx_t_6); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 54, __pyx_L1_error)
+  if (PyFunction_Check(__pyx_t_2)) {
+    PyObject *__pyx_temp[3] = {__pyx_t_5, __pyx_t_4, __pyx_t_3};
+    __pyx_t_1 = __Pyx_PyFunction_FastCall(__pyx_t_2, __pyx_temp+1-__pyx_t_6, 2+__pyx_t_6); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 90, __pyx_L1_error)
     __Pyx_XDECREF(__pyx_t_5); __pyx_t_5 = 0;
-    __Pyx_GOTREF(__pyx_t_3);
-    __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-    __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+    __Pyx_GOTREF(__pyx_t_1);
+    __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
+    __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   } else
   #endif
   #if CYTHON_FAST_PYCCALL
-  if (__Pyx_PyFastCFunction_Check(__pyx_t_4)) {
-    PyObject *__pyx_temp[3] = {__pyx_t_5, __pyx_t_1, __pyx_t_2};
-    __pyx_t_3 = __Pyx_PyCFunction_FastCall(__pyx_t_4, __pyx_temp+1-__pyx_t_6, 2+__pyx_t_6); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 54, __pyx_L1_error)
+  if (__Pyx_PyFastCFunction_Check(__pyx_t_2)) {
+    PyObject *__pyx_temp[3] = {__pyx_t_5, __pyx_t_4, __pyx_t_3};
+    __pyx_t_1 = __Pyx_PyCFunction_FastCall(__pyx_t_2, __pyx_temp+1-__pyx_t_6, 2+__pyx_t_6); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 90, __pyx_L1_error)
     __Pyx_XDECREF(__pyx_t_5); __pyx_t_5 = 0;
-    __Pyx_GOTREF(__pyx_t_3);
-    __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-    __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+    __Pyx_GOTREF(__pyx_t_1);
+    __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
+    __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   } else
   #endif
   {
-    __pyx_t_7 = PyTuple_New(2+__pyx_t_6); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 54, __pyx_L1_error)
+    __pyx_t_7 = PyTuple_New(2+__pyx_t_6); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 90, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_7);
     if (__pyx_t_5) {
       __Pyx_GIVEREF(__pyx_t_5); PyTuple_SET_ITEM(__pyx_t_7, 0, __pyx_t_5); __pyx_t_5 = NULL;
     }
-    __Pyx_GIVEREF(__pyx_t_1);
-    PyTuple_SET_ITEM(__pyx_t_7, 0+__pyx_t_6, __pyx_t_1);
-    __Pyx_GIVEREF(__pyx_t_2);
-    PyTuple_SET_ITEM(__pyx_t_7, 1+__pyx_t_6, __pyx_t_2);
-    __pyx_t_1 = 0;
-    __pyx_t_2 = 0;
-    __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_4, __pyx_t_7, NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 54, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_3);
+    __Pyx_GIVEREF(__pyx_t_4);
+    PyTuple_SET_ITEM(__pyx_t_7, 0+__pyx_t_6, __pyx_t_4);
+    __Pyx_GIVEREF(__pyx_t_3);
+    PyTuple_SET_ITEM(__pyx_t_7, 1+__pyx_t_6, __pyx_t_3);
+    __pyx_t_4 = 0;
+    __pyx_t_3 = 0;
+    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_t_7, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 90, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
   }
-  __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "pluginscript_api/description_classes/PropertyDescription.pyx":55
+  /* "pluginscript_api/description_classes/PropertyDescription.pyx":91
  *         d.set(Variant(String("hint_string")),Variant(self.hint_string))
  *         d.set(Variant(String("usage")), Variant(self.usage))
  *         d.set(Variant(String("default_value")), Variant(self.default_value))             # <<<<<<<<<<<<<<
  *         d.set(Variant(String("rset_mode")), Variant(self.rset_mode))
  *         return d
  */
-  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_d), __pyx_n_s_set); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 55, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_4);
-  __pyx_t_7 = __Pyx_PyObject_Call(((PyObject *)__pyx_ptype_4core_6string_6String_String), __pyx_tuple__9, NULL); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 55, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_7);
-  __pyx_t_2 = __Pyx_PyObject_CallOneArg(((PyObject *)__pyx_ptype_4core_7variant_7Variant_Variant), __pyx_t_7); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 55, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_d), __pyx_n_s_set); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 91, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
-  __pyx_t_7 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_default_value); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 55, __pyx_L1_error)
+  __pyx_t_7 = __Pyx_PyObject_Call(((PyObject *)__pyx_ptype_4core_6string_6String_String), __pyx_tuple__6, NULL); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 91, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
-  __pyx_t_1 = __Pyx_PyObject_CallOneArg(((PyObject *)__pyx_ptype_4core_7variant_7Variant_Variant), __pyx_t_7); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 55, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_1);
+  __pyx_t_3 = __Pyx_PyObject_CallOneArg(((PyObject *)__pyx_ptype_4core_7variant_7Variant_Variant), __pyx_t_7); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 91, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_3);
+  __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
+  __pyx_t_7 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_default_value); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 91, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_7);
+  __pyx_t_4 = __Pyx_PyObject_CallOneArg(((PyObject *)__pyx_ptype_4core_7variant_7Variant_Variant), __pyx_t_7); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 91, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_4);
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
   __pyx_t_7 = NULL;
   __pyx_t_6 = 0;
-  if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_4))) {
-    __pyx_t_7 = PyMethod_GET_SELF(__pyx_t_4);
+  if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_2))) {
+    __pyx_t_7 = PyMethod_GET_SELF(__pyx_t_2);
     if (likely(__pyx_t_7)) {
-      PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_4);
+      PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_2);
       __Pyx_INCREF(__pyx_t_7);
       __Pyx_INCREF(function);
-      __Pyx_DECREF_SET(__pyx_t_4, function);
+      __Pyx_DECREF_SET(__pyx_t_2, function);
       __pyx_t_6 = 1;
     }
   }
   #if CYTHON_FAST_PYCALL
-  if (PyFunction_Check(__pyx_t_4)) {
-    PyObject *__pyx_temp[3] = {__pyx_t_7, __pyx_t_2, __pyx_t_1};
-    __pyx_t_3 = __Pyx_PyFunction_FastCall(__pyx_t_4, __pyx_temp+1-__pyx_t_6, 2+__pyx_t_6); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 55, __pyx_L1_error)
+  if (PyFunction_Check(__pyx_t_2)) {
+    PyObject *__pyx_temp[3] = {__pyx_t_7, __pyx_t_3, __pyx_t_4};
+    __pyx_t_1 = __Pyx_PyFunction_FastCall(__pyx_t_2, __pyx_temp+1-__pyx_t_6, 2+__pyx_t_6); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 91, __pyx_L1_error)
     __Pyx_XDECREF(__pyx_t_7); __pyx_t_7 = 0;
-    __Pyx_GOTREF(__pyx_t_3);
-    __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+    __Pyx_GOTREF(__pyx_t_1);
+    __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+    __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   } else
   #endif
   #if CYTHON_FAST_PYCCALL
-  if (__Pyx_PyFastCFunction_Check(__pyx_t_4)) {
-    PyObject *__pyx_temp[3] = {__pyx_t_7, __pyx_t_2, __pyx_t_1};
-    __pyx_t_3 = __Pyx_PyCFunction_FastCall(__pyx_t_4, __pyx_temp+1-__pyx_t_6, 2+__pyx_t_6); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 55, __pyx_L1_error)
+  if (__Pyx_PyFastCFunction_Check(__pyx_t_2)) {
+    PyObject *__pyx_temp[3] = {__pyx_t_7, __pyx_t_3, __pyx_t_4};
+    __pyx_t_1 = __Pyx_PyCFunction_FastCall(__pyx_t_2, __pyx_temp+1-__pyx_t_6, 2+__pyx_t_6); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 91, __pyx_L1_error)
     __Pyx_XDECREF(__pyx_t_7); __pyx_t_7 = 0;
-    __Pyx_GOTREF(__pyx_t_3);
-    __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+    __Pyx_GOTREF(__pyx_t_1);
+    __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+    __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   } else
   #endif
   {
-    __pyx_t_5 = PyTuple_New(2+__pyx_t_6); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 55, __pyx_L1_error)
+    __pyx_t_5 = PyTuple_New(2+__pyx_t_6); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 91, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_5);
     if (__pyx_t_7) {
       __Pyx_GIVEREF(__pyx_t_7); PyTuple_SET_ITEM(__pyx_t_5, 0, __pyx_t_7); __pyx_t_7 = NULL;
     }
-    __Pyx_GIVEREF(__pyx_t_2);
-    PyTuple_SET_ITEM(__pyx_t_5, 0+__pyx_t_6, __pyx_t_2);
-    __Pyx_GIVEREF(__pyx_t_1);
-    PyTuple_SET_ITEM(__pyx_t_5, 1+__pyx_t_6, __pyx_t_1);
-    __pyx_t_2 = 0;
-    __pyx_t_1 = 0;
-    __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_4, __pyx_t_5, NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 55, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_3);
+    __Pyx_GIVEREF(__pyx_t_3);
+    PyTuple_SET_ITEM(__pyx_t_5, 0+__pyx_t_6, __pyx_t_3);
+    __Pyx_GIVEREF(__pyx_t_4);
+    PyTuple_SET_ITEM(__pyx_t_5, 1+__pyx_t_6, __pyx_t_4);
+    __pyx_t_3 = 0;
+    __pyx_t_4 = 0;
+    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_t_5, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 91, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
   }
-  __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "pluginscript_api/description_classes/PropertyDescription.pyx":56
+  /* "pluginscript_api/description_classes/PropertyDescription.pyx":92
  *         d.set(Variant(String("usage")), Variant(self.usage))
  *         d.set(Variant(String("default_value")), Variant(self.default_value))
  *         d.set(Variant(String("rset_mode")), Variant(self.rset_mode))             # <<<<<<<<<<<<<<
  *         return d
  */
-  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_d), __pyx_n_s_set); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 56, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_4);
-  __pyx_t_5 = __Pyx_PyObject_Call(((PyObject *)__pyx_ptype_4core_6string_6String_String), __pyx_tuple__10, NULL); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 56, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_5);
-  __pyx_t_1 = __Pyx_PyObject_CallOneArg(((PyObject *)__pyx_ptype_4core_7variant_7Variant_Variant), __pyx_t_5); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 56, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_1);
-  __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-  __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_rset_mode); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 56, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_5);
-  __pyx_t_2 = __Pyx_PyObject_CallOneArg(((PyObject *)__pyx_ptype_4core_7variant_7Variant_Variant), __pyx_t_5); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 56, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_d), __pyx_n_s_set); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 92, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
+  __pyx_t_5 = __Pyx_PyObject_Call(((PyObject *)__pyx_ptype_4core_6string_6String_String), __pyx_tuple__7, NULL); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 92, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_5);
+  __pyx_t_4 = __Pyx_PyObject_CallOneArg(((PyObject *)__pyx_ptype_4core_7variant_7Variant_Variant), __pyx_t_5); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 92, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_4);
+  __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
+  __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_rset_mode); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 92, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_5);
+  __pyx_t_3 = __Pyx_PyObject_CallOneArg(((PyObject *)__pyx_ptype_4core_7variant_7Variant_Variant), __pyx_t_5); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 92, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
   __pyx_t_5 = NULL;
   __pyx_t_6 = 0;
-  if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_4))) {
-    __pyx_t_5 = PyMethod_GET_SELF(__pyx_t_4);
+  if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_2))) {
+    __pyx_t_5 = PyMethod_GET_SELF(__pyx_t_2);
     if (likely(__pyx_t_5)) {
-      PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_4);
+      PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_2);
       __Pyx_INCREF(__pyx_t_5);
       __Pyx_INCREF(function);
-      __Pyx_DECREF_SET(__pyx_t_4, function);
+      __Pyx_DECREF_SET(__pyx_t_2, function);
       __pyx_t_6 = 1;
     }
   }
   #if CYTHON_FAST_PYCALL
-  if (PyFunction_Check(__pyx_t_4)) {
-    PyObject *__pyx_temp[3] = {__pyx_t_5, __pyx_t_1, __pyx_t_2};
-    __pyx_t_3 = __Pyx_PyFunction_FastCall(__pyx_t_4, __pyx_temp+1-__pyx_t_6, 2+__pyx_t_6); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 56, __pyx_L1_error)
+  if (PyFunction_Check(__pyx_t_2)) {
+    PyObject *__pyx_temp[3] = {__pyx_t_5, __pyx_t_4, __pyx_t_3};
+    __pyx_t_1 = __Pyx_PyFunction_FastCall(__pyx_t_2, __pyx_temp+1-__pyx_t_6, 2+__pyx_t_6); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 92, __pyx_L1_error)
     __Pyx_XDECREF(__pyx_t_5); __pyx_t_5 = 0;
-    __Pyx_GOTREF(__pyx_t_3);
-    __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-    __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+    __Pyx_GOTREF(__pyx_t_1);
+    __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
+    __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   } else
   #endif
   #if CYTHON_FAST_PYCCALL
-  if (__Pyx_PyFastCFunction_Check(__pyx_t_4)) {
-    PyObject *__pyx_temp[3] = {__pyx_t_5, __pyx_t_1, __pyx_t_2};
-    __pyx_t_3 = __Pyx_PyCFunction_FastCall(__pyx_t_4, __pyx_temp+1-__pyx_t_6, 2+__pyx_t_6); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 56, __pyx_L1_error)
+  if (__Pyx_PyFastCFunction_Check(__pyx_t_2)) {
+    PyObject *__pyx_temp[3] = {__pyx_t_5, __pyx_t_4, __pyx_t_3};
+    __pyx_t_1 = __Pyx_PyCFunction_FastCall(__pyx_t_2, __pyx_temp+1-__pyx_t_6, 2+__pyx_t_6); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 92, __pyx_L1_error)
     __Pyx_XDECREF(__pyx_t_5); __pyx_t_5 = 0;
-    __Pyx_GOTREF(__pyx_t_3);
-    __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-    __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+    __Pyx_GOTREF(__pyx_t_1);
+    __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
+    __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   } else
   #endif
   {
-    __pyx_t_7 = PyTuple_New(2+__pyx_t_6); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 56, __pyx_L1_error)
+    __pyx_t_7 = PyTuple_New(2+__pyx_t_6); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 92, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_7);
     if (__pyx_t_5) {
       __Pyx_GIVEREF(__pyx_t_5); PyTuple_SET_ITEM(__pyx_t_7, 0, __pyx_t_5); __pyx_t_5 = NULL;
     }
-    __Pyx_GIVEREF(__pyx_t_1);
-    PyTuple_SET_ITEM(__pyx_t_7, 0+__pyx_t_6, __pyx_t_1);
-    __Pyx_GIVEREF(__pyx_t_2);
-    PyTuple_SET_ITEM(__pyx_t_7, 1+__pyx_t_6, __pyx_t_2);
-    __pyx_t_1 = 0;
-    __pyx_t_2 = 0;
-    __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_4, __pyx_t_7, NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 56, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_3);
+    __Pyx_GIVEREF(__pyx_t_4);
+    PyTuple_SET_ITEM(__pyx_t_7, 0+__pyx_t_6, __pyx_t_4);
+    __Pyx_GIVEREF(__pyx_t_3);
+    PyTuple_SET_ITEM(__pyx_t_7, 1+__pyx_t_6, __pyx_t_3);
+    __pyx_t_4 = 0;
+    __pyx_t_3 = 0;
+    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_t_7, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 92, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
   }
-  __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "pluginscript_api/description_classes/PropertyDescription.pyx":57
+  /* "pluginscript_api/description_classes/PropertyDescription.pyx":93
  *         d.set(Variant(String("default_value")), Variant(self.default_value))
  *         d.set(Variant(String("rset_mode")), Variant(self.rset_mode))
  *         return d             # <<<<<<<<<<<<<<
@@ -2803,12 +3182,12 @@ static PyObject *__pyx_pf_16pluginscript_api_19description_classes_19PropertyDes
   __pyx_r = ((PyObject *)__pyx_v_d);
   goto __pyx_L0;
 
-  /* "pluginscript_api/description_classes/PropertyDescription.pyx":47
+  /* "pluginscript_api/description_classes/PropertyDescription.pyx":84
  *         self.default_value = default_value
  *         self.rset_mode = rset_mode
  *     def to_dict(self):             # <<<<<<<<<<<<<<
- *         print("----------to_dict:",self.name,"|", self.type_,"|", self.hint)
  *         d = Dictionary()
+ *         d.set(Variant(String("name")), Variant(String(self.name)))
  */
 
   /* function exit code */
@@ -3344,17 +3723,1168 @@ static CYTHON_INLINE struct __pyx_obj_4core_7vector3_7Vector3_Vector3 *__pyx_f_4
   return __pyx_r;
 }
 
+/* "core/node_path/NodePath.pxd":6
+ *     cdef godot_node_path _native
+ * 
+ *     cdef inline void set_native(self, godot_node_path _native):             # <<<<<<<<<<<<<<
+ *         self._native = _native
+ * 
+ */
+
+static CYTHON_INLINE void __pyx_f_4core_9node_path_8NodePath_8NodePath_set_native(struct __pyx_obj_4core_9node_path_8NodePath_NodePath *__pyx_v_self, godot_node_path __pyx_v__native) {
+  __Pyx_RefNannyDeclarations
+  __Pyx_RefNannySetupContext("set_native", 0);
+
+  /* "core/node_path/NodePath.pxd":7
+ * 
+ *     cdef inline void set_native(self, godot_node_path _native):
+ *         self._native = _native             # <<<<<<<<<<<<<<
+ * 
+ *     @staticmethod
+ */
+  __pyx_v_self->_native = __pyx_v__native;
+
+  /* "core/node_path/NodePath.pxd":6
+ *     cdef godot_node_path _native
+ * 
+ *     cdef inline void set_native(self, godot_node_path _native):             # <<<<<<<<<<<<<<
+ *         self._native = _native
+ * 
+ */
+
+  /* function exit code */
+  __Pyx_RefNannyFinishContext();
+}
+
+/* "core/node_path/NodePath.pxd":10
+ * 
+ *     @staticmethod
+ *     cdef inline NodePath new_static(godot_node_path _native):             # <<<<<<<<<<<<<<
+ *         cdef NodePath o = NodePath.__new__(NodePath)
+ *         o.set_native(_native)
+ */
+
+static CYTHON_INLINE struct __pyx_obj_4core_9node_path_8NodePath_NodePath *__pyx_f_4core_9node_path_8NodePath_8NodePath_new_static(godot_node_path __pyx_v__native) {
+  struct __pyx_obj_4core_9node_path_8NodePath_NodePath *__pyx_v_o = 0;
+  struct __pyx_obj_4core_9node_path_8NodePath_NodePath *__pyx_r = NULL;
+  __Pyx_RefNannyDeclarations
+  PyObject *__pyx_t_1 = NULL;
+  int __pyx_lineno = 0;
+  const char *__pyx_filename = NULL;
+  int __pyx_clineno = 0;
+  __Pyx_RefNannySetupContext("new_static", 0);
+
+  /* "core/node_path/NodePath.pxd":11
+ *     @staticmethod
+ *     cdef inline NodePath new_static(godot_node_path _native):
+ *         cdef NodePath o = NodePath.__new__(NodePath)             # <<<<<<<<<<<<<<
+ *         o.set_native(_native)
+ *         return o
+ */
+  __pyx_t_1 = __Pyx_tp_new(((PyObject *)__pyx_ptype_4core_9node_path_8NodePath_NodePath), __pyx_empty_tuple); if (unlikely(!__pyx_t_1)) __PYX_ERR(6, 11, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  if (!(likely(__Pyx_TypeTest(__pyx_t_1, __pyx_ptype_4core_9node_path_8NodePath_NodePath)))) __PYX_ERR(6, 11, __pyx_L1_error)
+  __pyx_v_o = ((struct __pyx_obj_4core_9node_path_8NodePath_NodePath *)__pyx_t_1);
+  __pyx_t_1 = 0;
+
+  /* "core/node_path/NodePath.pxd":12
+ *     cdef inline NodePath new_static(godot_node_path _native):
+ *         cdef NodePath o = NodePath.__new__(NodePath)
+ *         o.set_native(_native)             # <<<<<<<<<<<<<<
+ *         return o
+ */
+  __pyx_f_4core_9node_path_8NodePath_8NodePath_set_native(__pyx_v_o, __pyx_v__native);
+
+  /* "core/node_path/NodePath.pxd":13
+ *         cdef NodePath o = NodePath.__new__(NodePath)
+ *         o.set_native(_native)
+ *         return o             # <<<<<<<<<<<<<<
+ */
+  __Pyx_XDECREF(((PyObject *)__pyx_r));
+  __Pyx_INCREF(((PyObject *)__pyx_v_o));
+  __pyx_r = __pyx_v_o;
+  goto __pyx_L0;
+
+  /* "core/node_path/NodePath.pxd":10
+ * 
+ *     @staticmethod
+ *     cdef inline NodePath new_static(godot_node_path _native):             # <<<<<<<<<<<<<<
+ *         cdef NodePath o = NodePath.__new__(NodePath)
+ *         o.set_native(_native)
+ */
+
+  /* function exit code */
+  __pyx_L1_error:;
+  __Pyx_XDECREF(__pyx_t_1);
+  __Pyx_AddTraceback("core.node_path.NodePath.NodePath.new_static", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __pyx_r = 0;
+  __pyx_L0:;
+  __Pyx_XDECREF((PyObject *)__pyx_v_o);
+  __Pyx_XGIVEREF((PyObject *)__pyx_r);
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+/* "core/aabb/AABB.pxd":6
+ *     cdef godot_aabb _native
+ * 
+ *     cdef inline void set_native(self, godot_aabb _native):             # <<<<<<<<<<<<<<
+ *         self._native = _native
+ * 
+ */
+
+static CYTHON_INLINE void __pyx_f_4core_4aabb_4AABB_4AABB_set_native(struct __pyx_obj_4core_4aabb_4AABB_AABB *__pyx_v_self, godot_aabb __pyx_v__native) {
+  __Pyx_RefNannyDeclarations
+  __Pyx_RefNannySetupContext("set_native", 0);
+
+  /* "core/aabb/AABB.pxd":7
+ * 
+ *     cdef inline void set_native(self, godot_aabb _native):
+ *         self._native = _native             # <<<<<<<<<<<<<<
+ * 
+ *     @staticmethod
+ */
+  __pyx_v_self->_native = __pyx_v__native;
+
+  /* "core/aabb/AABB.pxd":6
+ *     cdef godot_aabb _native
+ * 
+ *     cdef inline void set_native(self, godot_aabb _native):             # <<<<<<<<<<<<<<
+ *         self._native = _native
+ * 
+ */
+
+  /* function exit code */
+  __Pyx_RefNannyFinishContext();
+}
+
+/* "core/aabb/AABB.pxd":10
+ * 
+ *     @staticmethod
+ *     cdef inline void new_static(godot_aabb _native):             # <<<<<<<<<<<<<<
+ *         cdef AABB o = AABB.__new__(AABB)
+ *         o.set_native(_native)
+ */
+
+static CYTHON_INLINE void __pyx_f_4core_4aabb_4AABB_4AABB_new_static(godot_aabb __pyx_v__native) {
+  struct __pyx_obj_4core_4aabb_4AABB_AABB *__pyx_v_o = 0;
+  __Pyx_RefNannyDeclarations
+  PyObject *__pyx_t_1 = NULL;
+  int __pyx_lineno = 0;
+  const char *__pyx_filename = NULL;
+  int __pyx_clineno = 0;
+  __Pyx_RefNannySetupContext("new_static", 0);
+
+  /* "core/aabb/AABB.pxd":11
+ *     @staticmethod
+ *     cdef inline void new_static(godot_aabb _native):
+ *         cdef AABB o = AABB.__new__(AABB)             # <<<<<<<<<<<<<<
+ *         o.set_native(_native)
+ */
+  __pyx_t_1 = __Pyx_tp_new(((PyObject *)__pyx_ptype_4core_4aabb_4AABB_AABB), __pyx_empty_tuple); if (unlikely(!__pyx_t_1)) __PYX_ERR(7, 11, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  if (!(likely(__Pyx_TypeTest(__pyx_t_1, __pyx_ptype_4core_4aabb_4AABB_AABB)))) __PYX_ERR(7, 11, __pyx_L1_error)
+  __pyx_v_o = ((struct __pyx_obj_4core_4aabb_4AABB_AABB *)__pyx_t_1);
+  __pyx_t_1 = 0;
+
+  /* "core/aabb/AABB.pxd":12
+ *     cdef inline void new_static(godot_aabb _native):
+ *         cdef AABB o = AABB.__new__(AABB)
+ *         o.set_native(_native)             # <<<<<<<<<<<<<<
+ */
+  __pyx_f_4core_4aabb_4AABB_4AABB_set_native(__pyx_v_o, __pyx_v__native);
+
+  /* "core/aabb/AABB.pxd":10
+ * 
+ *     @staticmethod
+ *     cdef inline void new_static(godot_aabb _native):             # <<<<<<<<<<<<<<
+ *         cdef AABB o = AABB.__new__(AABB)
+ *         o.set_native(_native)
+ */
+
+  /* function exit code */
+  goto __pyx_L0;
+  __pyx_L1_error:;
+  __Pyx_XDECREF(__pyx_t_1);
+  __Pyx_WriteUnraisable("core.aabb.AABB.AABB.new_static", __pyx_clineno, __pyx_lineno, __pyx_filename, 1, 0);
+  __pyx_L0:;
+  __Pyx_XDECREF((PyObject *)__pyx_v_o);
+  __Pyx_RefNannyFinishContext();
+}
+
+/* "core/array/Array.pxd":6
+ *     cdef godot_array _native
+ * 
+ *     cdef inline void set_native(self, godot_array _native):             # <<<<<<<<<<<<<<
+ *         self._native = _native
+ * 
+ */
+
+static CYTHON_INLINE void __pyx_f_4core_5array_5Array_5Array_set_native(struct __pyx_obj_4core_5array_5Array_Array *__pyx_v_self, godot_array __pyx_v__native) {
+  __Pyx_RefNannyDeclarations
+  __Pyx_RefNannySetupContext("set_native", 0);
+
+  /* "core/array/Array.pxd":7
+ * 
+ *     cdef inline void set_native(self, godot_array _native):
+ *         self._native = _native             # <<<<<<<<<<<<<<
+ * 
+ *     @staticmethod
+ */
+  __pyx_v_self->_native = __pyx_v__native;
+
+  /* "core/array/Array.pxd":6
+ *     cdef godot_array _native
+ * 
+ *     cdef inline void set_native(self, godot_array _native):             # <<<<<<<<<<<<<<
+ *         self._native = _native
+ * 
+ */
+
+  /* function exit code */
+  __Pyx_RefNannyFinishContext();
+}
+
+/* "core/array/Array.pxd":10
+ * 
+ *     @staticmethod
+ *     cdef inline Array new_static(godot_array _native):             # <<<<<<<<<<<<<<
+ *         cdef Array o = Array.__new__(Array)
+ *         o.set_native(_native)
+ */
+
+static CYTHON_INLINE struct __pyx_obj_4core_5array_5Array_Array *__pyx_f_4core_5array_5Array_5Array_new_static(godot_array __pyx_v__native) {
+  struct __pyx_obj_4core_5array_5Array_Array *__pyx_v_o = 0;
+  struct __pyx_obj_4core_5array_5Array_Array *__pyx_r = NULL;
+  __Pyx_RefNannyDeclarations
+  PyObject *__pyx_t_1 = NULL;
+  int __pyx_lineno = 0;
+  const char *__pyx_filename = NULL;
+  int __pyx_clineno = 0;
+  __Pyx_RefNannySetupContext("new_static", 0);
+
+  /* "core/array/Array.pxd":11
+ *     @staticmethod
+ *     cdef inline Array new_static(godot_array _native):
+ *         cdef Array o = Array.__new__(Array)             # <<<<<<<<<<<<<<
+ *         o.set_native(_native)
+ *         return o
+ */
+  __pyx_t_1 = __Pyx_tp_new(((PyObject *)__pyx_ptype_4core_5array_5Array_Array), __pyx_empty_tuple); if (unlikely(!__pyx_t_1)) __PYX_ERR(8, 11, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  if (!(likely(__Pyx_TypeTest(__pyx_t_1, __pyx_ptype_4core_5array_5Array_Array)))) __PYX_ERR(8, 11, __pyx_L1_error)
+  __pyx_v_o = ((struct __pyx_obj_4core_5array_5Array_Array *)__pyx_t_1);
+  __pyx_t_1 = 0;
+
+  /* "core/array/Array.pxd":12
+ *     cdef inline Array new_static(godot_array _native):
+ *         cdef Array o = Array.__new__(Array)
+ *         o.set_native(_native)             # <<<<<<<<<<<<<<
+ *         return o
+ */
+  __pyx_f_4core_5array_5Array_5Array_set_native(__pyx_v_o, __pyx_v__native);
+
+  /* "core/array/Array.pxd":13
+ *         cdef Array o = Array.__new__(Array)
+ *         o.set_native(_native)
+ *         return o             # <<<<<<<<<<<<<<
+ */
+  __Pyx_XDECREF(((PyObject *)__pyx_r));
+  __Pyx_INCREF(((PyObject *)__pyx_v_o));
+  __pyx_r = __pyx_v_o;
+  goto __pyx_L0;
+
+  /* "core/array/Array.pxd":10
+ * 
+ *     @staticmethod
+ *     cdef inline Array new_static(godot_array _native):             # <<<<<<<<<<<<<<
+ *         cdef Array o = Array.__new__(Array)
+ *         o.set_native(_native)
+ */
+
+  /* function exit code */
+  __pyx_L1_error:;
+  __Pyx_XDECREF(__pyx_t_1);
+  __Pyx_AddTraceback("core.array.Array.Array.new_static", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __pyx_r = 0;
+  __pyx_L0:;
+  __Pyx_XDECREF((PyObject *)__pyx_v_o);
+  __Pyx_XGIVEREF((PyObject *)__pyx_r);
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+/* "core/basis/Basis.pxd":7
+ *     cdef godot_basis _native
+ * 
+ *     cdef inline void set_native(self, godot_basis _native):             # <<<<<<<<<<<<<<
+ *         self._native = _native
+ * 
+ */
+
+static CYTHON_INLINE void __pyx_f_4core_5basis_5Basis_5Basis_set_native(struct __pyx_obj_4core_5basis_5Basis_Basis *__pyx_v_self, godot_basis __pyx_v__native) {
+  __Pyx_RefNannyDeclarations
+  __Pyx_RefNannySetupContext("set_native", 0);
+
+  /* "core/basis/Basis.pxd":8
+ * 
+ *     cdef inline void set_native(self, godot_basis _native):
+ *         self._native = _native             # <<<<<<<<<<<<<<
+ * 
+ *     @staticmethod
+ */
+  __pyx_v_self->_native = __pyx_v__native;
+
+  /* "core/basis/Basis.pxd":7
+ *     cdef godot_basis _native
+ * 
+ *     cdef inline void set_native(self, godot_basis _native):             # <<<<<<<<<<<<<<
+ *         self._native = _native
+ * 
+ */
+
+  /* function exit code */
+  __Pyx_RefNannyFinishContext();
+}
+
+/* "core/basis/Basis.pxd":11
+ * 
+ *     @staticmethod
+ *     cdef inline Basis new_static(godot_basis _native):             # <<<<<<<<<<<<<<
+ *         cdef Basis o = Basis.__new__(Basis)
+ *         o.set_native(_native)
+ */
+
+static CYTHON_INLINE struct __pyx_obj_4core_5basis_5Basis_Basis *__pyx_f_4core_5basis_5Basis_5Basis_new_static(godot_basis __pyx_v__native) {
+  struct __pyx_obj_4core_5basis_5Basis_Basis *__pyx_v_o = 0;
+  struct __pyx_obj_4core_5basis_5Basis_Basis *__pyx_r = NULL;
+  __Pyx_RefNannyDeclarations
+  PyObject *__pyx_t_1 = NULL;
+  int __pyx_lineno = 0;
+  const char *__pyx_filename = NULL;
+  int __pyx_clineno = 0;
+  __Pyx_RefNannySetupContext("new_static", 0);
+
+  /* "core/basis/Basis.pxd":12
+ *     @staticmethod
+ *     cdef inline Basis new_static(godot_basis _native):
+ *         cdef Basis o = Basis.__new__(Basis)             # <<<<<<<<<<<<<<
+ *         o.set_native(_native)
+ *         return o
+ */
+  __pyx_t_1 = __Pyx_tp_new(((PyObject *)__pyx_ptype_4core_5basis_5Basis_Basis), __pyx_empty_tuple); if (unlikely(!__pyx_t_1)) __PYX_ERR(9, 12, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  if (!(likely(__Pyx_TypeTest(__pyx_t_1, __pyx_ptype_4core_5basis_5Basis_Basis)))) __PYX_ERR(9, 12, __pyx_L1_error)
+  __pyx_v_o = ((struct __pyx_obj_4core_5basis_5Basis_Basis *)__pyx_t_1);
+  __pyx_t_1 = 0;
+
+  /* "core/basis/Basis.pxd":13
+ *     cdef inline Basis new_static(godot_basis _native):
+ *         cdef Basis o = Basis.__new__(Basis)
+ *         o.set_native(_native)             # <<<<<<<<<<<<<<
+ *         return o
+ */
+  __pyx_f_4core_5basis_5Basis_5Basis_set_native(__pyx_v_o, __pyx_v__native);
+
+  /* "core/basis/Basis.pxd":14
+ *         cdef Basis o = Basis.__new__(Basis)
+ *         o.set_native(_native)
+ *         return o             # <<<<<<<<<<<<<<
+ */
+  __Pyx_XDECREF(((PyObject *)__pyx_r));
+  __Pyx_INCREF(((PyObject *)__pyx_v_o));
+  __pyx_r = __pyx_v_o;
+  goto __pyx_L0;
+
+  /* "core/basis/Basis.pxd":11
+ * 
+ *     @staticmethod
+ *     cdef inline Basis new_static(godot_basis _native):             # <<<<<<<<<<<<<<
+ *         cdef Basis o = Basis.__new__(Basis)
+ *         o.set_native(_native)
+ */
+
+  /* function exit code */
+  __pyx_L1_error:;
+  __Pyx_XDECREF(__pyx_t_1);
+  __Pyx_AddTraceback("core.basis.Basis.Basis.new_static", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __pyx_r = 0;
+  __pyx_L0:;
+  __Pyx_XDECREF((PyObject *)__pyx_v_o);
+  __Pyx_XGIVEREF((PyObject *)__pyx_r);
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+/* "core/plane/Plane.pxd":6
+ *     cdef godot_plane _native
+ * 
+ *     cdef inline void set_native(self, godot_plane _native):             # <<<<<<<<<<<<<<
+ *         self._native = _native
+ * 
+ */
+
+static CYTHON_INLINE void __pyx_f_4core_5plane_5Plane_5Plane_set_native(struct __pyx_obj_4core_5plane_5Plane_Plane *__pyx_v_self, godot_plane __pyx_v__native) {
+  __Pyx_RefNannyDeclarations
+  __Pyx_RefNannySetupContext("set_native", 0);
+
+  /* "core/plane/Plane.pxd":7
+ * 
+ *     cdef inline void set_native(self, godot_plane _native):
+ *         self._native = _native             # <<<<<<<<<<<<<<
+ * 
+ *     @staticmethod
+ */
+  __pyx_v_self->_native = __pyx_v__native;
+
+  /* "core/plane/Plane.pxd":6
+ *     cdef godot_plane _native
+ * 
+ *     cdef inline void set_native(self, godot_plane _native):             # <<<<<<<<<<<<<<
+ *         self._native = _native
+ * 
+ */
+
+  /* function exit code */
+  __Pyx_RefNannyFinishContext();
+}
+
+/* "core/plane/Plane.pxd":10
+ * 
+ *     @staticmethod
+ *     cdef inline Plane new_static(godot_plane _native):             # <<<<<<<<<<<<<<
+ *         cdef Plane o = Plane.__new__(Plane)
+ *         o.set_native(_native)
+ */
+
+static CYTHON_INLINE struct __pyx_obj_4core_5plane_5Plane_Plane *__pyx_f_4core_5plane_5Plane_5Plane_new_static(godot_plane __pyx_v__native) {
+  struct __pyx_obj_4core_5plane_5Plane_Plane *__pyx_v_o = 0;
+  struct __pyx_obj_4core_5plane_5Plane_Plane *__pyx_r = NULL;
+  __Pyx_RefNannyDeclarations
+  PyObject *__pyx_t_1 = NULL;
+  int __pyx_lineno = 0;
+  const char *__pyx_filename = NULL;
+  int __pyx_clineno = 0;
+  __Pyx_RefNannySetupContext("new_static", 0);
+
+  /* "core/plane/Plane.pxd":11
+ *     @staticmethod
+ *     cdef inline Plane new_static(godot_plane _native):
+ *         cdef Plane o = Plane.__new__(Plane)             # <<<<<<<<<<<<<<
+ *         o.set_native(_native)
+ *         return o
+ */
+  __pyx_t_1 = __Pyx_tp_new(((PyObject *)__pyx_ptype_4core_5plane_5Plane_Plane), __pyx_empty_tuple); if (unlikely(!__pyx_t_1)) __PYX_ERR(10, 11, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  if (!(likely(__Pyx_TypeTest(__pyx_t_1, __pyx_ptype_4core_5plane_5Plane_Plane)))) __PYX_ERR(10, 11, __pyx_L1_error)
+  __pyx_v_o = ((struct __pyx_obj_4core_5plane_5Plane_Plane *)__pyx_t_1);
+  __pyx_t_1 = 0;
+
+  /* "core/plane/Plane.pxd":12
+ *     cdef inline Plane new_static(godot_plane _native):
+ *         cdef Plane o = Plane.__new__(Plane)
+ *         o.set_native(_native)             # <<<<<<<<<<<<<<
+ *         return o
+ */
+  __pyx_f_4core_5plane_5Plane_5Plane_set_native(__pyx_v_o, __pyx_v__native);
+
+  /* "core/plane/Plane.pxd":13
+ *         cdef Plane o = Plane.__new__(Plane)
+ *         o.set_native(_native)
+ *         return o             # <<<<<<<<<<<<<<
+ */
+  __Pyx_XDECREF(((PyObject *)__pyx_r));
+  __Pyx_INCREF(((PyObject *)__pyx_v_o));
+  __pyx_r = __pyx_v_o;
+  goto __pyx_L0;
+
+  /* "core/plane/Plane.pxd":10
+ * 
+ *     @staticmethod
+ *     cdef inline Plane new_static(godot_plane _native):             # <<<<<<<<<<<<<<
+ *         cdef Plane o = Plane.__new__(Plane)
+ *         o.set_native(_native)
+ */
+
+  /* function exit code */
+  __pyx_L1_error:;
+  __Pyx_XDECREF(__pyx_t_1);
+  __Pyx_AddTraceback("core.plane.Plane.Plane.new_static", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __pyx_r = 0;
+  __pyx_L0:;
+  __Pyx_XDECREF((PyObject *)__pyx_v_o);
+  __Pyx_XGIVEREF((PyObject *)__pyx_r);
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+/* "core/quat/Quat.pxd":6
+ *     cdef godot_quat _native
+ * 
+ *     cdef inline void set_native(self, godot_quat _native):             # <<<<<<<<<<<<<<
+ *         self._native = _native
+ * 
+ */
+
+static CYTHON_INLINE void __pyx_f_4core_4quat_4Quat_4Quat_set_native(struct __pyx_obj_4core_4quat_4Quat_Quat *__pyx_v_self, godot_quat __pyx_v__native) {
+  __Pyx_RefNannyDeclarations
+  __Pyx_RefNannySetupContext("set_native", 0);
+
+  /* "core/quat/Quat.pxd":7
+ * 
+ *     cdef inline void set_native(self, godot_quat _native):
+ *         self._native = _native             # <<<<<<<<<<<<<<
+ * 
+ *     @staticmethod
+ */
+  __pyx_v_self->_native = __pyx_v__native;
+
+  /* "core/quat/Quat.pxd":6
+ *     cdef godot_quat _native
+ * 
+ *     cdef inline void set_native(self, godot_quat _native):             # <<<<<<<<<<<<<<
+ *         self._native = _native
+ * 
+ */
+
+  /* function exit code */
+  __Pyx_RefNannyFinishContext();
+}
+
+/* "core/quat/Quat.pxd":10
+ * 
+ *     @staticmethod
+ *     cdef inline Quat new_static(godot_quat _native):             # <<<<<<<<<<<<<<
+ *         cdef Quat o = Quat.__new__(Quat)
+ *         o.set_native(_native)
+ */
+
+static CYTHON_INLINE struct __pyx_obj_4core_4quat_4Quat_Quat *__pyx_f_4core_4quat_4Quat_4Quat_new_static(godot_quat __pyx_v__native) {
+  struct __pyx_obj_4core_4quat_4Quat_Quat *__pyx_v_o = 0;
+  struct __pyx_obj_4core_4quat_4Quat_Quat *__pyx_r = NULL;
+  __Pyx_RefNannyDeclarations
+  PyObject *__pyx_t_1 = NULL;
+  int __pyx_lineno = 0;
+  const char *__pyx_filename = NULL;
+  int __pyx_clineno = 0;
+  __Pyx_RefNannySetupContext("new_static", 0);
+
+  /* "core/quat/Quat.pxd":11
+ *     @staticmethod
+ *     cdef inline Quat new_static(godot_quat _native):
+ *         cdef Quat o = Quat.__new__(Quat)             # <<<<<<<<<<<<<<
+ *         o.set_native(_native)
+ *         return o
+ */
+  __pyx_t_1 = __Pyx_tp_new(((PyObject *)__pyx_ptype_4core_4quat_4Quat_Quat), __pyx_empty_tuple); if (unlikely(!__pyx_t_1)) __PYX_ERR(11, 11, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  if (!(likely(__Pyx_TypeTest(__pyx_t_1, __pyx_ptype_4core_4quat_4Quat_Quat)))) __PYX_ERR(11, 11, __pyx_L1_error)
+  __pyx_v_o = ((struct __pyx_obj_4core_4quat_4Quat_Quat *)__pyx_t_1);
+  __pyx_t_1 = 0;
+
+  /* "core/quat/Quat.pxd":12
+ *     cdef inline Quat new_static(godot_quat _native):
+ *         cdef Quat o = Quat.__new__(Quat)
+ *         o.set_native(_native)             # <<<<<<<<<<<<<<
+ *         return o
+ */
+  __pyx_f_4core_4quat_4Quat_4Quat_set_native(__pyx_v_o, __pyx_v__native);
+
+  /* "core/quat/Quat.pxd":13
+ *         cdef Quat o = Quat.__new__(Quat)
+ *         o.set_native(_native)
+ *         return o             # <<<<<<<<<<<<<<
+ */
+  __Pyx_XDECREF(((PyObject *)__pyx_r));
+  __Pyx_INCREF(((PyObject *)__pyx_v_o));
+  __pyx_r = __pyx_v_o;
+  goto __pyx_L0;
+
+  /* "core/quat/Quat.pxd":10
+ * 
+ *     @staticmethod
+ *     cdef inline Quat new_static(godot_quat _native):             # <<<<<<<<<<<<<<
+ *         cdef Quat o = Quat.__new__(Quat)
+ *         o.set_native(_native)
+ */
+
+  /* function exit code */
+  __pyx_L1_error:;
+  __Pyx_XDECREF(__pyx_t_1);
+  __Pyx_AddTraceback("core.quat.Quat.Quat.new_static", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __pyx_r = 0;
+  __pyx_L0:;
+  __Pyx_XDECREF((PyObject *)__pyx_v_o);
+  __Pyx_XGIVEREF((PyObject *)__pyx_r);
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+/* "core/rect2/Rect2.pxd":6
+ *     cdef godot_rect2 _native
+ * 
+ *     cdef inline void set_native(self, godot_rect2 _native):             # <<<<<<<<<<<<<<
+ *         self._native = _native
+ * 
+ */
+
+static CYTHON_INLINE void __pyx_f_4core_5rect2_5Rect2_5Rect2_set_native(struct __pyx_obj_4core_5rect2_5Rect2_Rect2 *__pyx_v_self, godot_rect2 __pyx_v__native) {
+  __Pyx_RefNannyDeclarations
+  __Pyx_RefNannySetupContext("set_native", 0);
+
+  /* "core/rect2/Rect2.pxd":7
+ * 
+ *     cdef inline void set_native(self, godot_rect2 _native):
+ *         self._native = _native             # <<<<<<<<<<<<<<
+ * 
+ *     @staticmethod
+ */
+  __pyx_v_self->_native = __pyx_v__native;
+
+  /* "core/rect2/Rect2.pxd":6
+ *     cdef godot_rect2 _native
+ * 
+ *     cdef inline void set_native(self, godot_rect2 _native):             # <<<<<<<<<<<<<<
+ *         self._native = _native
+ * 
+ */
+
+  /* function exit code */
+  __Pyx_RefNannyFinishContext();
+}
+
+/* "core/rect2/Rect2.pxd":10
+ * 
+ *     @staticmethod
+ *     cdef inline Rect2 new_static(godot_rect2 _native):             # <<<<<<<<<<<<<<
+ *         cdef Rect2 o = Rect2.__new__(Rect2)
+ *         o.set_native(_native)
+ */
+
+static CYTHON_INLINE struct __pyx_obj_4core_5rect2_5Rect2_Rect2 *__pyx_f_4core_5rect2_5Rect2_5Rect2_new_static(godot_rect2 __pyx_v__native) {
+  struct __pyx_obj_4core_5rect2_5Rect2_Rect2 *__pyx_v_o = 0;
+  struct __pyx_obj_4core_5rect2_5Rect2_Rect2 *__pyx_r = NULL;
+  __Pyx_RefNannyDeclarations
+  PyObject *__pyx_t_1 = NULL;
+  int __pyx_lineno = 0;
+  const char *__pyx_filename = NULL;
+  int __pyx_clineno = 0;
+  __Pyx_RefNannySetupContext("new_static", 0);
+
+  /* "core/rect2/Rect2.pxd":11
+ *     @staticmethod
+ *     cdef inline Rect2 new_static(godot_rect2 _native):
+ *         cdef Rect2 o = Rect2.__new__(Rect2)             # <<<<<<<<<<<<<<
+ *         o.set_native(_native)
+ *         return o
+ */
+  __pyx_t_1 = __Pyx_tp_new(((PyObject *)__pyx_ptype_4core_5rect2_5Rect2_Rect2), __pyx_empty_tuple); if (unlikely(!__pyx_t_1)) __PYX_ERR(12, 11, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  if (!(likely(__Pyx_TypeTest(__pyx_t_1, __pyx_ptype_4core_5rect2_5Rect2_Rect2)))) __PYX_ERR(12, 11, __pyx_L1_error)
+  __pyx_v_o = ((struct __pyx_obj_4core_5rect2_5Rect2_Rect2 *)__pyx_t_1);
+  __pyx_t_1 = 0;
+
+  /* "core/rect2/Rect2.pxd":12
+ *     cdef inline Rect2 new_static(godot_rect2 _native):
+ *         cdef Rect2 o = Rect2.__new__(Rect2)
+ *         o.set_native(_native)             # <<<<<<<<<<<<<<
+ *         return o
+ */
+  __pyx_f_4core_5rect2_5Rect2_5Rect2_set_native(__pyx_v_o, __pyx_v__native);
+
+  /* "core/rect2/Rect2.pxd":13
+ *         cdef Rect2 o = Rect2.__new__(Rect2)
+ *         o.set_native(_native)
+ *         return o             # <<<<<<<<<<<<<<
+ */
+  __Pyx_XDECREF(((PyObject *)__pyx_r));
+  __Pyx_INCREF(((PyObject *)__pyx_v_o));
+  __pyx_r = __pyx_v_o;
+  goto __pyx_L0;
+
+  /* "core/rect2/Rect2.pxd":10
+ * 
+ *     @staticmethod
+ *     cdef inline Rect2 new_static(godot_rect2 _native):             # <<<<<<<<<<<<<<
+ *         cdef Rect2 o = Rect2.__new__(Rect2)
+ *         o.set_native(_native)
+ */
+
+  /* function exit code */
+  __pyx_L1_error:;
+  __Pyx_XDECREF(__pyx_t_1);
+  __Pyx_AddTraceback("core.rect2.Rect2.Rect2.new_static", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __pyx_r = 0;
+  __pyx_L0:;
+  __Pyx_XDECREF((PyObject *)__pyx_v_o);
+  __Pyx_XGIVEREF((PyObject *)__pyx_r);
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+/* "core/rid/RID.pxd":6
+ *     cdef godot_rid _native
+ * 
+ *     cdef inline void set_native(self, godot_rid _native):             # <<<<<<<<<<<<<<
+ *         self._native = _native
+ * 
+ */
+
+static CYTHON_INLINE void __pyx_f_4core_3rid_3RID_3RID_set_native(struct __pyx_obj_4core_3rid_3RID_RID *__pyx_v_self, godot_rid __pyx_v__native) {
+  __Pyx_RefNannyDeclarations
+  __Pyx_RefNannySetupContext("set_native", 0);
+
+  /* "core/rid/RID.pxd":7
+ * 
+ *     cdef inline void set_native(self, godot_rid _native):
+ *         self._native = _native             # <<<<<<<<<<<<<<
+ * 
+ *     @staticmethod
+ */
+  __pyx_v_self->_native = __pyx_v__native;
+
+  /* "core/rid/RID.pxd":6
+ *     cdef godot_rid _native
+ * 
+ *     cdef inline void set_native(self, godot_rid _native):             # <<<<<<<<<<<<<<
+ *         self._native = _native
+ * 
+ */
+
+  /* function exit code */
+  __Pyx_RefNannyFinishContext();
+}
+
+/* "core/rid/RID.pxd":10
+ * 
+ *     @staticmethod
+ *     cdef inline RID new_static(godot_rid _native):             # <<<<<<<<<<<<<<
+ *         cdef RID o = RID.__new__(RID)
+ *         o.set_native(_native)
+ */
+
+static CYTHON_INLINE struct __pyx_obj_4core_3rid_3RID_RID *__pyx_f_4core_3rid_3RID_3RID_new_static(godot_rid __pyx_v__native) {
+  struct __pyx_obj_4core_3rid_3RID_RID *__pyx_v_o = 0;
+  struct __pyx_obj_4core_3rid_3RID_RID *__pyx_r = NULL;
+  __Pyx_RefNannyDeclarations
+  PyObject *__pyx_t_1 = NULL;
+  int __pyx_lineno = 0;
+  const char *__pyx_filename = NULL;
+  int __pyx_clineno = 0;
+  __Pyx_RefNannySetupContext("new_static", 0);
+
+  /* "core/rid/RID.pxd":11
+ *     @staticmethod
+ *     cdef inline RID new_static(godot_rid _native):
+ *         cdef RID o = RID.__new__(RID)             # <<<<<<<<<<<<<<
+ *         o.set_native(_native)
+ *         return o
+ */
+  __pyx_t_1 = __Pyx_tp_new(((PyObject *)__pyx_ptype_4core_3rid_3RID_RID), __pyx_empty_tuple); if (unlikely(!__pyx_t_1)) __PYX_ERR(13, 11, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  if (!(likely(__Pyx_TypeTest(__pyx_t_1, __pyx_ptype_4core_3rid_3RID_RID)))) __PYX_ERR(13, 11, __pyx_L1_error)
+  __pyx_v_o = ((struct __pyx_obj_4core_3rid_3RID_RID *)__pyx_t_1);
+  __pyx_t_1 = 0;
+
+  /* "core/rid/RID.pxd":12
+ *     cdef inline RID new_static(godot_rid _native):
+ *         cdef RID o = RID.__new__(RID)
+ *         o.set_native(_native)             # <<<<<<<<<<<<<<
+ *         return o
+ */
+  __pyx_f_4core_3rid_3RID_3RID_set_native(__pyx_v_o, __pyx_v__native);
+
+  /* "core/rid/RID.pxd":13
+ *         cdef RID o = RID.__new__(RID)
+ *         o.set_native(_native)
+ *         return o             # <<<<<<<<<<<<<<
+ */
+  __Pyx_XDECREF(((PyObject *)__pyx_r));
+  __Pyx_INCREF(((PyObject *)__pyx_v_o));
+  __pyx_r = __pyx_v_o;
+  goto __pyx_L0;
+
+  /* "core/rid/RID.pxd":10
+ * 
+ *     @staticmethod
+ *     cdef inline RID new_static(godot_rid _native):             # <<<<<<<<<<<<<<
+ *         cdef RID o = RID.__new__(RID)
+ *         o.set_native(_native)
+ */
+
+  /* function exit code */
+  __pyx_L1_error:;
+  __Pyx_XDECREF(__pyx_t_1);
+  __Pyx_AddTraceback("core.rid.RID.RID.new_static", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __pyx_r = 0;
+  __pyx_L0:;
+  __Pyx_XDECREF((PyObject *)__pyx_v_o);
+  __Pyx_XGIVEREF((PyObject *)__pyx_r);
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+/* "core/transform/Transform.pxd":6
+ *     cdef godot_transform _native
+ * 
+ *     cdef inline void set_native(self, godot_transform _native):             # <<<<<<<<<<<<<<
+ *         self._native = _native
+ * 
+ */
+
+static CYTHON_INLINE void __pyx_f_4core_9transform_9Transform_9Transform_set_native(struct __pyx_obj_4core_9transform_9Transform_Transform *__pyx_v_self, godot_transform __pyx_v__native) {
+  __Pyx_RefNannyDeclarations
+  __Pyx_RefNannySetupContext("set_native", 0);
+
+  /* "core/transform/Transform.pxd":7
+ * 
+ *     cdef inline void set_native(self, godot_transform _native):
+ *         self._native = _native             # <<<<<<<<<<<<<<
+ * 
+ *     @staticmethod
+ */
+  __pyx_v_self->_native = __pyx_v__native;
+
+  /* "core/transform/Transform.pxd":6
+ *     cdef godot_transform _native
+ * 
+ *     cdef inline void set_native(self, godot_transform _native):             # <<<<<<<<<<<<<<
+ *         self._native = _native
+ * 
+ */
+
+  /* function exit code */
+  __Pyx_RefNannyFinishContext();
+}
+
+/* "core/transform/Transform.pxd":10
+ * 
+ *     @staticmethod
+ *     cdef inline Transform new_static(godot_transform _native):             # <<<<<<<<<<<<<<
+ *         cdef Transform v = Transform.__new__(Transform)
+ *         v.set_native(_native)
+ */
+
+static CYTHON_INLINE struct __pyx_obj_4core_9transform_9Transform_Transform *__pyx_f_4core_9transform_9Transform_9Transform_new_static(godot_transform __pyx_v__native) {
+  struct __pyx_obj_4core_9transform_9Transform_Transform *__pyx_v_v = 0;
+  struct __pyx_obj_4core_9transform_9Transform_Transform *__pyx_r = NULL;
+  __Pyx_RefNannyDeclarations
+  PyObject *__pyx_t_1 = NULL;
+  int __pyx_lineno = 0;
+  const char *__pyx_filename = NULL;
+  int __pyx_clineno = 0;
+  __Pyx_RefNannySetupContext("new_static", 0);
+
+  /* "core/transform/Transform.pxd":11
+ *     @staticmethod
+ *     cdef inline Transform new_static(godot_transform _native):
+ *         cdef Transform v = Transform.__new__(Transform)             # <<<<<<<<<<<<<<
+ *         v.set_native(_native)
+ *         return v
+ */
+  __pyx_t_1 = __Pyx_tp_new(((PyObject *)__pyx_ptype_4core_9transform_9Transform_Transform), __pyx_empty_tuple); if (unlikely(!__pyx_t_1)) __PYX_ERR(14, 11, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  if (!(likely(__Pyx_TypeTest(__pyx_t_1, __pyx_ptype_4core_9transform_9Transform_Transform)))) __PYX_ERR(14, 11, __pyx_L1_error)
+  __pyx_v_v = ((struct __pyx_obj_4core_9transform_9Transform_Transform *)__pyx_t_1);
+  __pyx_t_1 = 0;
+
+  /* "core/transform/Transform.pxd":12
+ *     cdef inline Transform new_static(godot_transform _native):
+ *         cdef Transform v = Transform.__new__(Transform)
+ *         v.set_native(_native)             # <<<<<<<<<<<<<<
+ *         return v
+ */
+  __pyx_f_4core_9transform_9Transform_9Transform_set_native(__pyx_v_v, __pyx_v__native);
+
+  /* "core/transform/Transform.pxd":13
+ *         cdef Transform v = Transform.__new__(Transform)
+ *         v.set_native(_native)
+ *         return v             # <<<<<<<<<<<<<<
+ */
+  __Pyx_XDECREF(((PyObject *)__pyx_r));
+  __Pyx_INCREF(((PyObject *)__pyx_v_v));
+  __pyx_r = __pyx_v_v;
+  goto __pyx_L0;
+
+  /* "core/transform/Transform.pxd":10
+ * 
+ *     @staticmethod
+ *     cdef inline Transform new_static(godot_transform _native):             # <<<<<<<<<<<<<<
+ *         cdef Transform v = Transform.__new__(Transform)
+ *         v.set_native(_native)
+ */
+
+  /* function exit code */
+  __pyx_L1_error:;
+  __Pyx_XDECREF(__pyx_t_1);
+  __Pyx_AddTraceback("core.transform.Transform.Transform.new_static", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __pyx_r = 0;
+  __pyx_L0:;
+  __Pyx_XDECREF((PyObject *)__pyx_v_v);
+  __Pyx_XGIVEREF((PyObject *)__pyx_r);
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+/* "core/transform/Transform2D.pxd":6
+ *     cdef godot_transform2d _native
+ * 
+ *     cdef inline void set_native(self, godot_transform2d _native):             # <<<<<<<<<<<<<<
+ *         self._native = _native
+ * 
+ */
+
+static CYTHON_INLINE void __pyx_f_4core_9transform_11Transform2D_11Transform2D_set_native(struct __pyx_obj_4core_9transform_11Transform2D_Transform2D *__pyx_v_self, godot_transform2d __pyx_v__native) {
+  __Pyx_RefNannyDeclarations
+  __Pyx_RefNannySetupContext("set_native", 0);
+
+  /* "core/transform/Transform2D.pxd":7
+ * 
+ *     cdef inline void set_native(self, godot_transform2d _native):
+ *         self._native = _native             # <<<<<<<<<<<<<<
+ * 
+ *     @staticmethod
+ */
+  __pyx_v_self->_native = __pyx_v__native;
+
+  /* "core/transform/Transform2D.pxd":6
+ *     cdef godot_transform2d _native
+ * 
+ *     cdef inline void set_native(self, godot_transform2d _native):             # <<<<<<<<<<<<<<
+ *         self._native = _native
+ * 
+ */
+
+  /* function exit code */
+  __Pyx_RefNannyFinishContext();
+}
+
+/* "core/transform/Transform2D.pxd":10
+ * 
+ *     @staticmethod
+ *     cdef inline Transform2D new_static(godot_transform2d _native):             # <<<<<<<<<<<<<<
+ *         cdef Transform2D v = Transform2D.__new__(Transform2D)
+ *         v.set_native(_native)
+ */
+
+static CYTHON_INLINE struct __pyx_obj_4core_9transform_11Transform2D_Transform2D *__pyx_f_4core_9transform_11Transform2D_11Transform2D_new_static(godot_transform2d __pyx_v__native) {
+  struct __pyx_obj_4core_9transform_11Transform2D_Transform2D *__pyx_v_v = 0;
+  struct __pyx_obj_4core_9transform_11Transform2D_Transform2D *__pyx_r = NULL;
+  __Pyx_RefNannyDeclarations
+  PyObject *__pyx_t_1 = NULL;
+  int __pyx_lineno = 0;
+  const char *__pyx_filename = NULL;
+  int __pyx_clineno = 0;
+  __Pyx_RefNannySetupContext("new_static", 0);
+
+  /* "core/transform/Transform2D.pxd":11
+ *     @staticmethod
+ *     cdef inline Transform2D new_static(godot_transform2d _native):
+ *         cdef Transform2D v = Transform2D.__new__(Transform2D)             # <<<<<<<<<<<<<<
+ *         v.set_native(_native)
+ *         return v
+ */
+  __pyx_t_1 = __Pyx_tp_new(((PyObject *)__pyx_ptype_4core_9transform_11Transform2D_Transform2D), __pyx_empty_tuple); if (unlikely(!__pyx_t_1)) __PYX_ERR(15, 11, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  if (!(likely(__Pyx_TypeTest(__pyx_t_1, __pyx_ptype_4core_9transform_11Transform2D_Transform2D)))) __PYX_ERR(15, 11, __pyx_L1_error)
+  __pyx_v_v = ((struct __pyx_obj_4core_9transform_11Transform2D_Transform2D *)__pyx_t_1);
+  __pyx_t_1 = 0;
+
+  /* "core/transform/Transform2D.pxd":12
+ *     cdef inline Transform2D new_static(godot_transform2d _native):
+ *         cdef Transform2D v = Transform2D.__new__(Transform2D)
+ *         v.set_native(_native)             # <<<<<<<<<<<<<<
+ *         return v
+ */
+  __pyx_f_4core_9transform_11Transform2D_11Transform2D_set_native(__pyx_v_v, __pyx_v__native);
+
+  /* "core/transform/Transform2D.pxd":13
+ *         cdef Transform2D v = Transform2D.__new__(Transform2D)
+ *         v.set_native(_native)
+ *         return v             # <<<<<<<<<<<<<<
+ */
+  __Pyx_XDECREF(((PyObject *)__pyx_r));
+  __Pyx_INCREF(((PyObject *)__pyx_v_v));
+  __pyx_r = __pyx_v_v;
+  goto __pyx_L0;
+
+  /* "core/transform/Transform2D.pxd":10
+ * 
+ *     @staticmethod
+ *     cdef inline Transform2D new_static(godot_transform2d _native):             # <<<<<<<<<<<<<<
+ *         cdef Transform2D v = Transform2D.__new__(Transform2D)
+ *         v.set_native(_native)
+ */
+
+  /* function exit code */
+  __pyx_L1_error:;
+  __Pyx_XDECREF(__pyx_t_1);
+  __Pyx_AddTraceback("core.transform.Transform2D.Transform2D.new_static", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __pyx_r = 0;
+  __pyx_L0:;
+  __Pyx_XDECREF((PyObject *)__pyx_v_v);
+  __Pyx_XGIVEREF((PyObject *)__pyx_r);
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+/* "core/vector2/Vector2.pxd":6
+ *     cdef godot_vector2 _native
+ * 
+ *     cdef inline void set_native(self, godot_vector2 _native):             # <<<<<<<<<<<<<<
+ *         self._native = _native
+ * 
+ */
+
+static CYTHON_INLINE void __pyx_f_4core_7vector2_7Vector2_7Vector2_set_native(struct __pyx_obj_4core_7vector2_7Vector2_Vector2 *__pyx_v_self, godot_vector2 __pyx_v__native) {
+  __Pyx_RefNannyDeclarations
+  __Pyx_RefNannySetupContext("set_native", 0);
+
+  /* "core/vector2/Vector2.pxd":7
+ * 
+ *     cdef inline void set_native(self, godot_vector2 _native):
+ *         self._native = _native             # <<<<<<<<<<<<<<
+ * 
+ *     @staticmethod
+ */
+  __pyx_v_self->_native = __pyx_v__native;
+
+  /* "core/vector2/Vector2.pxd":6
+ *     cdef godot_vector2 _native
+ * 
+ *     cdef inline void set_native(self, godot_vector2 _native):             # <<<<<<<<<<<<<<
+ *         self._native = _native
+ * 
+ */
+
+  /* function exit code */
+  __Pyx_RefNannyFinishContext();
+}
+
+/* "core/vector2/Vector2.pxd":10
+ * 
+ *     @staticmethod
+ *     cdef inline Vector2 new_static(godot_vector2 _native):             # <<<<<<<<<<<<<<
+ *         print("start_new")
+ *         cdef Vector2 v = Vector2.__new__(Vector2)
+ */
+
+static CYTHON_INLINE struct __pyx_obj_4core_7vector2_7Vector2_Vector2 *__pyx_f_4core_7vector2_7Vector2_7Vector2_new_static(godot_vector2 __pyx_v__native) {
+  struct __pyx_obj_4core_7vector2_7Vector2_Vector2 *__pyx_v_v = 0;
+  struct __pyx_obj_4core_7vector2_7Vector2_Vector2 *__pyx_r = NULL;
+  __Pyx_RefNannyDeclarations
+  PyObject *__pyx_t_1 = NULL;
+  int __pyx_lineno = 0;
+  const char *__pyx_filename = NULL;
+  int __pyx_clineno = 0;
+  __Pyx_RefNannySetupContext("new_static", 0);
+
+  /* "core/vector2/Vector2.pxd":11
+ *     @staticmethod
+ *     cdef inline Vector2 new_static(godot_vector2 _native):
+ *         print("start_new")             # <<<<<<<<<<<<<<
+ *         cdef Vector2 v = Vector2.__new__(Vector2)
+ *         print("middle")
+ */
+  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_print, __pyx_tuple__8, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(16, 11, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+
+  /* "core/vector2/Vector2.pxd":12
+ *     cdef inline Vector2 new_static(godot_vector2 _native):
+ *         print("start_new")
+ *         cdef Vector2 v = Vector2.__new__(Vector2)             # <<<<<<<<<<<<<<
+ *         print("middle")
+ *         v.set_native(_native)
+ */
+  __pyx_t_1 = __Pyx_tp_new(((PyObject *)__pyx_ptype_4core_7vector2_7Vector2_Vector2), __pyx_empty_tuple); if (unlikely(!__pyx_t_1)) __PYX_ERR(16, 12, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  if (!(likely(__Pyx_TypeTest(__pyx_t_1, __pyx_ptype_4core_7vector2_7Vector2_Vector2)))) __PYX_ERR(16, 12, __pyx_L1_error)
+  __pyx_v_v = ((struct __pyx_obj_4core_7vector2_7Vector2_Vector2 *)__pyx_t_1);
+  __pyx_t_1 = 0;
+
+  /* "core/vector2/Vector2.pxd":13
+ *         print("start_new")
+ *         cdef Vector2 v = Vector2.__new__(Vector2)
+ *         print("middle")             # <<<<<<<<<<<<<<
+ *         v.set_native(_native)
+ *         print("end_new")
+ */
+  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_print, __pyx_tuple__9, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(16, 13, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+
+  /* "core/vector2/Vector2.pxd":14
+ *         cdef Vector2 v = Vector2.__new__(Vector2)
+ *         print("middle")
+ *         v.set_native(_native)             # <<<<<<<<<<<<<<
+ *         print("end_new")
+ *         return v
+ */
+  __pyx_f_4core_7vector2_7Vector2_7Vector2_set_native(__pyx_v_v, __pyx_v__native);
+
+  /* "core/vector2/Vector2.pxd":15
+ *         print("middle")
+ *         v.set_native(_native)
+ *         print("end_new")             # <<<<<<<<<<<<<<
+ *         return v
+ */
+  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_print, __pyx_tuple__10, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(16, 15, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+
+  /* "core/vector2/Vector2.pxd":16
+ *         v.set_native(_native)
+ *         print("end_new")
+ *         return v             # <<<<<<<<<<<<<<
+ */
+  __Pyx_XDECREF(((PyObject *)__pyx_r));
+  __Pyx_INCREF(((PyObject *)__pyx_v_v));
+  __pyx_r = __pyx_v_v;
+  goto __pyx_L0;
+
+  /* "core/vector2/Vector2.pxd":10
+ * 
+ *     @staticmethod
+ *     cdef inline Vector2 new_static(godot_vector2 _native):             # <<<<<<<<<<<<<<
+ *         print("start_new")
+ *         cdef Vector2 v = Vector2.__new__(Vector2)
+ */
+
+  /* function exit code */
+  __pyx_L1_error:;
+  __Pyx_XDECREF(__pyx_t_1);
+  __Pyx_AddTraceback("core.vector2.Vector2.Vector2.new_static", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __pyx_r = 0;
+  __pyx_L0:;
+  __Pyx_XDECREF((PyObject *)__pyx_v_v);
+  __Pyx_XGIVEREF((PyObject *)__pyx_r);
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
 static PyMethodDef __pyx_methods[] = {
   {0, 0, 0, 0}
 };
 
 static int __pyx_import_star_set(PyObject *o, PyObject* py_name, char *name) {
   static const char* internal_type_names[] = {
+    "AABB",
+    "Array",
+    "Basis",
     "Color",
     "Dictionary",
+    "NodePath",
+    "Plane",
     "PyObject",
+    "Quat",
+    "RID",
+    "Rect2",
     "String",
+    "Transform",
+    "Transform2D",
     "Variant",
+    "Vector2",
     "Vector3",
     "bool",
     "godot_aabb",
@@ -3604,15 +5134,13 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_n_s_SpriteFrames, __pyx_k_SpriteFrames, sizeof(__pyx_k_SpriteFrames), 0, 0, 1, 1},
   {&__pyx_n_s_TextFile, __pyx_k_TextFile, sizeof(__pyx_k_TextFile), 0, 0, 1, 1},
   {&__pyx_n_s__11, __pyx_k__11, sizeof(__pyx_k__11), 0, 0, 1, 1},
-  {&__pyx_kp_u__3, __pyx_k__3, sizeof(__pyx_k__3), 0, 1, 0, 0},
-  {&__pyx_kp_u_check_hint, __pyx_k_check_hint, sizeof(__pyx_k_check_hint), 0, 1, 0, 0},
-  {&__pyx_kp_u_checked_hint_map_True, __pyx_k_checked_hint_map_True, sizeof(__pyx_k_checked_hint_map_True), 0, 1, 0, 0},
   {&__pyx_n_s_classes_generated, __pyx_k_classes_generated, sizeof(__pyx_k_classes_generated), 0, 0, 1, 1},
   {&__pyx_n_s_cline_in_traceback, __pyx_k_cline_in_traceback, sizeof(__pyx_k_cline_in_traceback), 0, 0, 1, 1},
   {&__pyx_n_s_d, __pyx_k_d, sizeof(__pyx_k_d), 0, 0, 1, 1},
   {&__pyx_n_s_default_value, __pyx_k_default_value, sizeof(__pyx_k_default_value), 0, 0, 1, 1},
   {&__pyx_n_u_default_value, __pyx_k_default_value, sizeof(__pyx_k_default_value), 0, 1, 0, 1},
   {&__pyx_n_s_doc, __pyx_k_doc, sizeof(__pyx_k_doc), 0, 0, 1, 1},
+  {&__pyx_n_u_end_new, __pyx_k_end_new, sizeof(__pyx_k_end_new), 0, 1, 0, 1},
   {&__pyx_n_s_hint, __pyx_k_hint, sizeof(__pyx_k_hint), 0, 0, 1, 1},
   {&__pyx_n_u_hint, __pyx_k_hint, sizeof(__pyx_k_hint), 0, 1, 0, 1},
   {&__pyx_n_s_hint_string, __pyx_k_hint_string, sizeof(__pyx_k_hint_string), 0, 0, 1, 1},
@@ -3621,6 +5149,7 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_n_s_init, __pyx_k_init, sizeof(__pyx_k_init), 0, 0, 1, 1},
   {&__pyx_n_s_main, __pyx_k_main, sizeof(__pyx_k_main), 0, 0, 1, 1},
   {&__pyx_n_s_metaclass, __pyx_k_metaclass, sizeof(__pyx_k_metaclass), 0, 0, 1, 1},
+  {&__pyx_n_u_middle, __pyx_k_middle, sizeof(__pyx_k_middle), 0, 1, 0, 1},
   {&__pyx_n_s_module, __pyx_k_module, sizeof(__pyx_k_module), 0, 0, 1, 1},
   {&__pyx_n_s_name, __pyx_k_name, sizeof(__pyx_k_name), 0, 0, 1, 1},
   {&__pyx_n_u_name, __pyx_k_name, sizeof(__pyx_k_name), 0, 1, 0, 1},
@@ -3635,9 +5164,9 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_n_u_rset_mode, __pyx_k_rset_mode, sizeof(__pyx_k_rset_mode), 0, 1, 0, 1},
   {&__pyx_n_s_self, __pyx_k_self, sizeof(__pyx_k_self), 0, 0, 1, 1},
   {&__pyx_n_s_set, __pyx_k_set, sizeof(__pyx_k_set), 0, 0, 1, 1},
+  {&__pyx_n_u_start_new, __pyx_k_start_new, sizeof(__pyx_k_start_new), 0, 1, 0, 1},
   {&__pyx_n_s_test, __pyx_k_test, sizeof(__pyx_k_test), 0, 0, 1, 1},
-  {&__pyx_kp_u_to_dict, __pyx_k_to_dict, sizeof(__pyx_k_to_dict), 0, 1, 0, 0},
-  {&__pyx_n_s_to_dict_2, __pyx_k_to_dict_2, sizeof(__pyx_k_to_dict_2), 0, 0, 1, 1},
+  {&__pyx_n_s_to_dict, __pyx_k_to_dict, sizeof(__pyx_k_to_dict), 0, 0, 1, 1},
   {&__pyx_n_s_transform_type, __pyx_k_transform_type, sizeof(__pyx_k_transform_type), 0, 0, 1, 1},
   {&__pyx_n_s_type, __pyx_k_type, sizeof(__pyx_k_type), 0, 0, 1, 1},
   {&__pyx_n_u_type_2, __pyx_k_type_2, sizeof(__pyx_k_type_2), 0, 1, 0, 1},
@@ -3648,7 +5177,7 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {0, 0, 0, 0, 0, 0, 0}
 };
 static CYTHON_SMALL_CODE int __Pyx_InitCachedBuiltins(void) {
-  __pyx_builtin_print = __Pyx_GetBuiltinName(__pyx_n_s_print); if (!__pyx_builtin_print) __PYX_ERR(0, 37, __pyx_L1_error)
+  __pyx_builtin_print = __Pyx_GetBuiltinName(__pyx_n_s_print); if (!__pyx_builtin_print) __PYX_ERR(16, 11, __pyx_L1_error)
   return 0;
   __pyx_L1_error:;
   return -1;
@@ -3658,139 +5187,149 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__Pyx_InitCachedConstants", 0);
 
-  /* "pluginscript_api/description_classes/PropertyDescription.pyx":37
- *         self.hint = hint
- *         if(hint == None):
- *             print("----------------------------check_hint-------------------------------")             # <<<<<<<<<<<<<<
- *             if(type_ in type_hint_map):
- *                 print("----------------------------checked hint_map=True-------------------------------")
- */
-  __pyx_tuple_ = PyTuple_Pack(1, __pyx_kp_u_check_hint); if (unlikely(!__pyx_tuple_)) __PYX_ERR(0, 37, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple_);
-  __Pyx_GIVEREF(__pyx_tuple_);
-
-  /* "pluginscript_api/description_classes/PropertyDescription.pyx":39
- *             print("----------------------------check_hint-------------------------------")
- *             if(type_ in type_hint_map):
- *                 print("----------------------------checked hint_map=True-------------------------------")             # <<<<<<<<<<<<<<
- *                 self.hint = type_hint_map[type_]
- *             else:
- */
-  __pyx_tuple__2 = PyTuple_Pack(1, __pyx_kp_u_checked_hint_map_True); if (unlikely(!__pyx_tuple__2)) __PYX_ERR(0, 39, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple__2);
-  __Pyx_GIVEREF(__pyx_tuple__2);
-
-  /* "pluginscript_api/description_classes/PropertyDescription.pyx":50
- *         print("----------to_dict:",self.name,"|", self.type_,"|", self.hint)
+  /* "pluginscript_api/description_classes/PropertyDescription.pyx":86
+ *     def to_dict(self):
  *         d = Dictionary()
  *         d.set(Variant(String("name")), Variant(String(self.name)))             # <<<<<<<<<<<<<<
  *         d.set(Variant(String("type")), Variant(self.type_))
  *         d.set(Variant(String("hint")), Variant(self.hint))
  */
-  __pyx_tuple__4 = PyTuple_Pack(1, __pyx_n_u_name); if (unlikely(!__pyx_tuple__4)) __PYX_ERR(0, 50, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple__4);
-  __Pyx_GIVEREF(__pyx_tuple__4);
+  __pyx_tuple_ = PyTuple_Pack(1, __pyx_n_u_name); if (unlikely(!__pyx_tuple_)) __PYX_ERR(0, 86, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple_);
+  __Pyx_GIVEREF(__pyx_tuple_);
 
-  /* "pluginscript_api/description_classes/PropertyDescription.pyx":51
+  /* "pluginscript_api/description_classes/PropertyDescription.pyx":87
  *         d = Dictionary()
  *         d.set(Variant(String("name")), Variant(String(self.name)))
  *         d.set(Variant(String("type")), Variant(self.type_))             # <<<<<<<<<<<<<<
  *         d.set(Variant(String("hint")), Variant(self.hint))
  *         d.set(Variant(String("hint_string")),Variant(self.hint_string))
  */
-  __pyx_tuple__5 = PyTuple_Pack(1, __pyx_n_u_type_2); if (unlikely(!__pyx_tuple__5)) __PYX_ERR(0, 51, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple__5);
-  __Pyx_GIVEREF(__pyx_tuple__5);
+  __pyx_tuple__2 = PyTuple_Pack(1, __pyx_n_u_type_2); if (unlikely(!__pyx_tuple__2)) __PYX_ERR(0, 87, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__2);
+  __Pyx_GIVEREF(__pyx_tuple__2);
 
-  /* "pluginscript_api/description_classes/PropertyDescription.pyx":52
+  /* "pluginscript_api/description_classes/PropertyDescription.pyx":88
  *         d.set(Variant(String("name")), Variant(String(self.name)))
  *         d.set(Variant(String("type")), Variant(self.type_))
  *         d.set(Variant(String("hint")), Variant(self.hint))             # <<<<<<<<<<<<<<
  *         d.set(Variant(String("hint_string")),Variant(self.hint_string))
  *         d.set(Variant(String("usage")), Variant(self.usage))
  */
-  __pyx_tuple__6 = PyTuple_Pack(1, __pyx_n_u_hint); if (unlikely(!__pyx_tuple__6)) __PYX_ERR(0, 52, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple__6);
-  __Pyx_GIVEREF(__pyx_tuple__6);
+  __pyx_tuple__3 = PyTuple_Pack(1, __pyx_n_u_hint); if (unlikely(!__pyx_tuple__3)) __PYX_ERR(0, 88, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__3);
+  __Pyx_GIVEREF(__pyx_tuple__3);
 
-  /* "pluginscript_api/description_classes/PropertyDescription.pyx":53
+  /* "pluginscript_api/description_classes/PropertyDescription.pyx":89
  *         d.set(Variant(String("type")), Variant(self.type_))
  *         d.set(Variant(String("hint")), Variant(self.hint))
  *         d.set(Variant(String("hint_string")),Variant(self.hint_string))             # <<<<<<<<<<<<<<
  *         d.set(Variant(String("usage")), Variant(self.usage))
  *         d.set(Variant(String("default_value")), Variant(self.default_value))
  */
-  __pyx_tuple__7 = PyTuple_Pack(1, __pyx_n_u_hint_string); if (unlikely(!__pyx_tuple__7)) __PYX_ERR(0, 53, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple__7);
-  __Pyx_GIVEREF(__pyx_tuple__7);
+  __pyx_tuple__4 = PyTuple_Pack(1, __pyx_n_u_hint_string); if (unlikely(!__pyx_tuple__4)) __PYX_ERR(0, 89, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__4);
+  __Pyx_GIVEREF(__pyx_tuple__4);
 
-  /* "pluginscript_api/description_classes/PropertyDescription.pyx":54
+  /* "pluginscript_api/description_classes/PropertyDescription.pyx":90
  *         d.set(Variant(String("hint")), Variant(self.hint))
  *         d.set(Variant(String("hint_string")),Variant(self.hint_string))
  *         d.set(Variant(String("usage")), Variant(self.usage))             # <<<<<<<<<<<<<<
  *         d.set(Variant(String("default_value")), Variant(self.default_value))
  *         d.set(Variant(String("rset_mode")), Variant(self.rset_mode))
  */
-  __pyx_tuple__8 = PyTuple_Pack(1, __pyx_n_u_usage); if (unlikely(!__pyx_tuple__8)) __PYX_ERR(0, 54, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple__8);
-  __Pyx_GIVEREF(__pyx_tuple__8);
+  __pyx_tuple__5 = PyTuple_Pack(1, __pyx_n_u_usage); if (unlikely(!__pyx_tuple__5)) __PYX_ERR(0, 90, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__5);
+  __Pyx_GIVEREF(__pyx_tuple__5);
 
-  /* "pluginscript_api/description_classes/PropertyDescription.pyx":55
+  /* "pluginscript_api/description_classes/PropertyDescription.pyx":91
  *         d.set(Variant(String("hint_string")),Variant(self.hint_string))
  *         d.set(Variant(String("usage")), Variant(self.usage))
  *         d.set(Variant(String("default_value")), Variant(self.default_value))             # <<<<<<<<<<<<<<
  *         d.set(Variant(String("rset_mode")), Variant(self.rset_mode))
  *         return d
  */
-  __pyx_tuple__9 = PyTuple_Pack(1, __pyx_n_u_default_value); if (unlikely(!__pyx_tuple__9)) __PYX_ERR(0, 55, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple__9);
-  __Pyx_GIVEREF(__pyx_tuple__9);
+  __pyx_tuple__6 = PyTuple_Pack(1, __pyx_n_u_default_value); if (unlikely(!__pyx_tuple__6)) __PYX_ERR(0, 91, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__6);
+  __Pyx_GIVEREF(__pyx_tuple__6);
 
-  /* "pluginscript_api/description_classes/PropertyDescription.pyx":56
+  /* "pluginscript_api/description_classes/PropertyDescription.pyx":92
  *         d.set(Variant(String("usage")), Variant(self.usage))
  *         d.set(Variant(String("default_value")), Variant(self.default_value))
  *         d.set(Variant(String("rset_mode")), Variant(self.rset_mode))             # <<<<<<<<<<<<<<
  *         return d
  */
-  __pyx_tuple__10 = PyTuple_Pack(1, __pyx_n_u_rset_mode); if (unlikely(!__pyx_tuple__10)) __PYX_ERR(0, 56, __pyx_L1_error)
+  __pyx_tuple__7 = PyTuple_Pack(1, __pyx_n_u_rset_mode); if (unlikely(!__pyx_tuple__7)) __PYX_ERR(0, 92, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__7);
+  __Pyx_GIVEREF(__pyx_tuple__7);
+
+  /* "core/vector2/Vector2.pxd":11
+ *     @staticmethod
+ *     cdef inline Vector2 new_static(godot_vector2 _native):
+ *         print("start_new")             # <<<<<<<<<<<<<<
+ *         cdef Vector2 v = Vector2.__new__(Vector2)
+ *         print("middle")
+ */
+  __pyx_tuple__8 = PyTuple_Pack(1, __pyx_n_u_start_new); if (unlikely(!__pyx_tuple__8)) __PYX_ERR(16, 11, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__8);
+  __Pyx_GIVEREF(__pyx_tuple__8);
+
+  /* "core/vector2/Vector2.pxd":13
+ *         print("start_new")
+ *         cdef Vector2 v = Vector2.__new__(Vector2)
+ *         print("middle")             # <<<<<<<<<<<<<<
+ *         v.set_native(_native)
+ *         print("end_new")
+ */
+  __pyx_tuple__9 = PyTuple_Pack(1, __pyx_n_u_middle); if (unlikely(!__pyx_tuple__9)) __PYX_ERR(16, 13, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__9);
+  __Pyx_GIVEREF(__pyx_tuple__9);
+
+  /* "core/vector2/Vector2.pxd":15
+ *         print("middle")
+ *         v.set_native(_native)
+ *         print("end_new")             # <<<<<<<<<<<<<<
+ *         return v
+ */
+  __pyx_tuple__10 = PyTuple_Pack(1, __pyx_n_u_end_new); if (unlikely(!__pyx_tuple__10)) __PYX_ERR(16, 15, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__10);
   __Pyx_GIVEREF(__pyx_tuple__10);
 
-  /* "pluginscript_api/description_classes/PropertyDescription.pyx":27
- * type_variant_type_map = {int:GODOT_VARIANT_TYPE_INT, Vector3:7}
+  /* "pluginscript_api/description_classes/PropertyDescription.pyx":66
+ * }
  * 
  * def transform_type(type_):             # <<<<<<<<<<<<<<
  *     if(type_ in type_variant_type_map):
  *         return type_variant_type_map[type_]
  */
-  __pyx_tuple__12 = PyTuple_Pack(1, __pyx_n_s_type); if (unlikely(!__pyx_tuple__12)) __PYX_ERR(0, 27, __pyx_L1_error)
+  __pyx_tuple__12 = PyTuple_Pack(1, __pyx_n_s_type); if (unlikely(!__pyx_tuple__12)) __PYX_ERR(0, 66, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__12);
   __Pyx_GIVEREF(__pyx_tuple__12);
-  __pyx_codeobj__13 = (PyObject*)__Pyx_PyCode_New(1, 0, 1, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__12, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_pluginscript_api_description_cla, __pyx_n_s_transform_type, 27, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__13)) __PYX_ERR(0, 27, __pyx_L1_error)
+  __pyx_codeobj__13 = (PyObject*)__Pyx_PyCode_New(1, 0, 1, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__12, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_pluginscript_api_description_cla, __pyx_n_s_transform_type, 66, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__13)) __PYX_ERR(0, 66, __pyx_L1_error)
 
-  /* "pluginscript_api/description_classes/PropertyDescription.pyx":32
+  /* "pluginscript_api/description_classes/PropertyDescription.pyx":71
  *     return
  * class PropertyDescription:
  *     def __init__(self, name,type_, hint, hint_string, usage, default_value, rset_mode):             # <<<<<<<<<<<<<<
  *         self.name = name
  *         self.type_ = transform_type(type_)
  */
-  __pyx_tuple__14 = PyTuple_Pack(8, __pyx_n_s_self, __pyx_n_s_name, __pyx_n_s_type, __pyx_n_s_hint, __pyx_n_s_hint_string, __pyx_n_s_usage, __pyx_n_s_default_value, __pyx_n_s_rset_mode); if (unlikely(!__pyx_tuple__14)) __PYX_ERR(0, 32, __pyx_L1_error)
+  __pyx_tuple__14 = PyTuple_Pack(8, __pyx_n_s_self, __pyx_n_s_name, __pyx_n_s_type, __pyx_n_s_hint, __pyx_n_s_hint_string, __pyx_n_s_usage, __pyx_n_s_default_value, __pyx_n_s_rset_mode); if (unlikely(!__pyx_tuple__14)) __PYX_ERR(0, 71, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__14);
   __Pyx_GIVEREF(__pyx_tuple__14);
-  __pyx_codeobj__15 = (PyObject*)__Pyx_PyCode_New(8, 0, 8, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__14, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_pluginscript_api_description_cla, __pyx_n_s_init, 32, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__15)) __PYX_ERR(0, 32, __pyx_L1_error)
+  __pyx_codeobj__15 = (PyObject*)__Pyx_PyCode_New(8, 0, 8, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__14, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_pluginscript_api_description_cla, __pyx_n_s_init, 71, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__15)) __PYX_ERR(0, 71, __pyx_L1_error)
 
-  /* "pluginscript_api/description_classes/PropertyDescription.pyx":47
+  /* "pluginscript_api/description_classes/PropertyDescription.pyx":84
  *         self.default_value = default_value
  *         self.rset_mode = rset_mode
  *     def to_dict(self):             # <<<<<<<<<<<<<<
- *         print("----------to_dict:",self.name,"|", self.type_,"|", self.hint)
  *         d = Dictionary()
+ *         d.set(Variant(String("name")), Variant(String(self.name)))
  */
-  __pyx_tuple__16 = PyTuple_Pack(2, __pyx_n_s_self, __pyx_n_s_d); if (unlikely(!__pyx_tuple__16)) __PYX_ERR(0, 47, __pyx_L1_error)
+  __pyx_tuple__16 = PyTuple_Pack(2, __pyx_n_s_self, __pyx_n_s_d); if (unlikely(!__pyx_tuple__16)) __PYX_ERR(0, 84, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__16);
   __Pyx_GIVEREF(__pyx_tuple__16);
-  __pyx_codeobj__17 = (PyObject*)__Pyx_PyCode_New(1, 0, 2, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__16, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_pluginscript_api_description_cla, __pyx_n_s_to_dict_2, 47, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__17)) __PYX_ERR(0, 47, __pyx_L1_error)
+  __pyx_codeobj__17 = (PyObject*)__Pyx_PyCode_New(1, 0, 2, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__16, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_pluginscript_api_description_cla, __pyx_n_s_to_dict, 84, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__17)) __PYX_ERR(0, 84, __pyx_L1_error)
   __Pyx_RefNannyFinishContext();
   return 0;
   __pyx_L1_error:;
@@ -3800,7 +5339,6 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
 
 static CYTHON_SMALL_CODE int __Pyx_InitGlobals(void) {
   if (__Pyx_InitStrings(__pyx_string_tab) < 0) __PYX_ERR(0, 12, __pyx_L1_error);
-  __pyx_int_7 = PyInt_FromLong(7); if (unlikely(!__pyx_int_7)) __PYX_ERR(0, 12, __pyx_L1_error)
   return 0;
   __pyx_L1_error:;
   return -1;
@@ -3854,7 +5392,7 @@ static int __Pyx_modinit_type_import_code(void) {
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__Pyx_modinit_type_import_code", 0);
   /*--- Type import code ---*/
-  __pyx_t_1 = PyImport_ImportModule(__Pyx_BUILTIN_MODULE_NAME); if (unlikely(!__pyx_t_1)) __PYX_ERR(6, 9, __pyx_L1_error)
+  __pyx_t_1 = PyImport_ImportModule(__Pyx_BUILTIN_MODULE_NAME); if (unlikely(!__pyx_t_1)) __PYX_ERR(17, 9, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_ptype_7cpython_4type_type = __Pyx_ImportType(__pyx_t_1, __Pyx_BUILTIN_MODULE_NAME, "type", 
   #if defined(PYPY_VERSION_NUM) && PYPY_VERSION_NUM < 0x050B0000
@@ -3863,7 +5401,7 @@ static int __Pyx_modinit_type_import_code(void) {
   sizeof(PyHeapTypeObject),
   #endif
   __Pyx_ImportType_CheckSize_Warn);
-   if (!__pyx_ptype_7cpython_4type_type) __PYX_ERR(6, 9, __pyx_L1_error)
+   if (!__pyx_ptype_7cpython_4type_type) __PYX_ERR(17, 9, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_t_1 = PyImport_ImportModule("core.dictionary.Dictionary"); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 4, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
@@ -3894,6 +5432,72 @@ static int __Pyx_modinit_type_import_code(void) {
   __pyx_ptype_4core_7vector3_7Vector3_Vector3 = __Pyx_ImportType(__pyx_t_1, "core.vector3.Vector3", "Vector3", sizeof(struct __pyx_obj_4core_7vector3_7Vector3_Vector3), __Pyx_ImportType_CheckSize_Warn);
    if (!__pyx_ptype_4core_7vector3_7Vector3_Vector3) __PYX_ERR(5, 3, __pyx_L1_error)
   __pyx_vtabptr_4core_7vector3_7Vector3_Vector3 = (struct __pyx_vtabstruct_4core_7vector3_7Vector3_Vector3*)__Pyx_GetVtable(__pyx_ptype_4core_7vector3_7Vector3_Vector3->tp_dict); if (unlikely(!__pyx_vtabptr_4core_7vector3_7Vector3_Vector3)) __PYX_ERR(5, 3, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+  __pyx_t_1 = PyImport_ImportModule("core.node_path.NodePath"); if (unlikely(!__pyx_t_1)) __PYX_ERR(6, 3, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __pyx_ptype_4core_9node_path_8NodePath_NodePath = __Pyx_ImportType(__pyx_t_1, "core.node_path.NodePath", "NodePath", sizeof(struct __pyx_obj_4core_9node_path_8NodePath_NodePath), __Pyx_ImportType_CheckSize_Warn);
+   if (!__pyx_ptype_4core_9node_path_8NodePath_NodePath) __PYX_ERR(6, 3, __pyx_L1_error)
+  __pyx_vtabptr_4core_9node_path_8NodePath_NodePath = (struct __pyx_vtabstruct_4core_9node_path_8NodePath_NodePath*)__Pyx_GetVtable(__pyx_ptype_4core_9node_path_8NodePath_NodePath->tp_dict); if (unlikely(!__pyx_vtabptr_4core_9node_path_8NodePath_NodePath)) __PYX_ERR(6, 3, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+  __pyx_t_1 = PyImport_ImportModule("core.aabb.AABB"); if (unlikely(!__pyx_t_1)) __PYX_ERR(7, 3, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __pyx_ptype_4core_4aabb_4AABB_AABB = __Pyx_ImportType(__pyx_t_1, "core.aabb.AABB", "AABB", sizeof(struct __pyx_obj_4core_4aabb_4AABB_AABB), __Pyx_ImportType_CheckSize_Warn);
+   if (!__pyx_ptype_4core_4aabb_4AABB_AABB) __PYX_ERR(7, 3, __pyx_L1_error)
+  __pyx_vtabptr_4core_4aabb_4AABB_AABB = (struct __pyx_vtabstruct_4core_4aabb_4AABB_AABB*)__Pyx_GetVtable(__pyx_ptype_4core_4aabb_4AABB_AABB->tp_dict); if (unlikely(!__pyx_vtabptr_4core_4aabb_4AABB_AABB)) __PYX_ERR(7, 3, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+  __pyx_t_1 = PyImport_ImportModule("core.array.Array"); if (unlikely(!__pyx_t_1)) __PYX_ERR(8, 3, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __pyx_ptype_4core_5array_5Array_Array = __Pyx_ImportType(__pyx_t_1, "core.array.Array", "Array", sizeof(struct __pyx_obj_4core_5array_5Array_Array), __Pyx_ImportType_CheckSize_Warn);
+   if (!__pyx_ptype_4core_5array_5Array_Array) __PYX_ERR(8, 3, __pyx_L1_error)
+  __pyx_vtabptr_4core_5array_5Array_Array = (struct __pyx_vtabstruct_4core_5array_5Array_Array*)__Pyx_GetVtable(__pyx_ptype_4core_5array_5Array_Array->tp_dict); if (unlikely(!__pyx_vtabptr_4core_5array_5Array_Array)) __PYX_ERR(8, 3, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+  __pyx_t_1 = PyImport_ImportModule("core.basis.Basis"); if (unlikely(!__pyx_t_1)) __PYX_ERR(9, 4, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __pyx_ptype_4core_5basis_5Basis_Basis = __Pyx_ImportType(__pyx_t_1, "core.basis.Basis", "Basis", sizeof(struct __pyx_obj_4core_5basis_5Basis_Basis), __Pyx_ImportType_CheckSize_Warn);
+   if (!__pyx_ptype_4core_5basis_5Basis_Basis) __PYX_ERR(9, 4, __pyx_L1_error)
+  __pyx_vtabptr_4core_5basis_5Basis_Basis = (struct __pyx_vtabstruct_4core_5basis_5Basis_Basis*)__Pyx_GetVtable(__pyx_ptype_4core_5basis_5Basis_Basis->tp_dict); if (unlikely(!__pyx_vtabptr_4core_5basis_5Basis_Basis)) __PYX_ERR(9, 4, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+  __pyx_t_1 = PyImport_ImportModule("core.plane.Plane"); if (unlikely(!__pyx_t_1)) __PYX_ERR(10, 3, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __pyx_ptype_4core_5plane_5Plane_Plane = __Pyx_ImportType(__pyx_t_1, "core.plane.Plane", "Plane", sizeof(struct __pyx_obj_4core_5plane_5Plane_Plane), __Pyx_ImportType_CheckSize_Warn);
+   if (!__pyx_ptype_4core_5plane_5Plane_Plane) __PYX_ERR(10, 3, __pyx_L1_error)
+  __pyx_vtabptr_4core_5plane_5Plane_Plane = (struct __pyx_vtabstruct_4core_5plane_5Plane_Plane*)__Pyx_GetVtable(__pyx_ptype_4core_5plane_5Plane_Plane->tp_dict); if (unlikely(!__pyx_vtabptr_4core_5plane_5Plane_Plane)) __PYX_ERR(10, 3, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+  __pyx_t_1 = PyImport_ImportModule("core.quat.Quat"); if (unlikely(!__pyx_t_1)) __PYX_ERR(11, 3, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __pyx_ptype_4core_4quat_4Quat_Quat = __Pyx_ImportType(__pyx_t_1, "core.quat.Quat", "Quat", sizeof(struct __pyx_obj_4core_4quat_4Quat_Quat), __Pyx_ImportType_CheckSize_Warn);
+   if (!__pyx_ptype_4core_4quat_4Quat_Quat) __PYX_ERR(11, 3, __pyx_L1_error)
+  __pyx_vtabptr_4core_4quat_4Quat_Quat = (struct __pyx_vtabstruct_4core_4quat_4Quat_Quat*)__Pyx_GetVtable(__pyx_ptype_4core_4quat_4Quat_Quat->tp_dict); if (unlikely(!__pyx_vtabptr_4core_4quat_4Quat_Quat)) __PYX_ERR(11, 3, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+  __pyx_t_1 = PyImport_ImportModule("core.rect2.Rect2"); if (unlikely(!__pyx_t_1)) __PYX_ERR(12, 3, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __pyx_ptype_4core_5rect2_5Rect2_Rect2 = __Pyx_ImportType(__pyx_t_1, "core.rect2.Rect2", "Rect2", sizeof(struct __pyx_obj_4core_5rect2_5Rect2_Rect2), __Pyx_ImportType_CheckSize_Warn);
+   if (!__pyx_ptype_4core_5rect2_5Rect2_Rect2) __PYX_ERR(12, 3, __pyx_L1_error)
+  __pyx_vtabptr_4core_5rect2_5Rect2_Rect2 = (struct __pyx_vtabstruct_4core_5rect2_5Rect2_Rect2*)__Pyx_GetVtable(__pyx_ptype_4core_5rect2_5Rect2_Rect2->tp_dict); if (unlikely(!__pyx_vtabptr_4core_5rect2_5Rect2_Rect2)) __PYX_ERR(12, 3, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+  __pyx_t_1 = PyImport_ImportModule("core.rid.RID"); if (unlikely(!__pyx_t_1)) __PYX_ERR(13, 3, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __pyx_ptype_4core_3rid_3RID_RID = __Pyx_ImportType(__pyx_t_1, "core.rid.RID", "RID", sizeof(struct __pyx_obj_4core_3rid_3RID_RID), __Pyx_ImportType_CheckSize_Warn);
+   if (!__pyx_ptype_4core_3rid_3RID_RID) __PYX_ERR(13, 3, __pyx_L1_error)
+  __pyx_vtabptr_4core_3rid_3RID_RID = (struct __pyx_vtabstruct_4core_3rid_3RID_RID*)__Pyx_GetVtable(__pyx_ptype_4core_3rid_3RID_RID->tp_dict); if (unlikely(!__pyx_vtabptr_4core_3rid_3RID_RID)) __PYX_ERR(13, 3, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+  __pyx_t_1 = PyImport_ImportModule("core.transform.Transform"); if (unlikely(!__pyx_t_1)) __PYX_ERR(14, 3, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __pyx_ptype_4core_9transform_9Transform_Transform = __Pyx_ImportType(__pyx_t_1, "core.transform.Transform", "Transform", sizeof(struct __pyx_obj_4core_9transform_9Transform_Transform), __Pyx_ImportType_CheckSize_Warn);
+   if (!__pyx_ptype_4core_9transform_9Transform_Transform) __PYX_ERR(14, 3, __pyx_L1_error)
+  __pyx_vtabptr_4core_9transform_9Transform_Transform = (struct __pyx_vtabstruct_4core_9transform_9Transform_Transform*)__Pyx_GetVtable(__pyx_ptype_4core_9transform_9Transform_Transform->tp_dict); if (unlikely(!__pyx_vtabptr_4core_9transform_9Transform_Transform)) __PYX_ERR(14, 3, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+  __pyx_t_1 = PyImport_ImportModule("core.transform.Transform2D"); if (unlikely(!__pyx_t_1)) __PYX_ERR(15, 3, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __pyx_ptype_4core_9transform_11Transform2D_Transform2D = __Pyx_ImportType(__pyx_t_1, "core.transform.Transform2D", "Transform2D", sizeof(struct __pyx_obj_4core_9transform_11Transform2D_Transform2D), __Pyx_ImportType_CheckSize_Warn);
+   if (!__pyx_ptype_4core_9transform_11Transform2D_Transform2D) __PYX_ERR(15, 3, __pyx_L1_error)
+  __pyx_vtabptr_4core_9transform_11Transform2D_Transform2D = (struct __pyx_vtabstruct_4core_9transform_11Transform2D_Transform2D*)__Pyx_GetVtable(__pyx_ptype_4core_9transform_11Transform2D_Transform2D->tp_dict); if (unlikely(!__pyx_vtabptr_4core_9transform_11Transform2D_Transform2D)) __PYX_ERR(15, 3, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+  __pyx_t_1 = PyImport_ImportModule("core.vector2.Vector2"); if (unlikely(!__pyx_t_1)) __PYX_ERR(16, 3, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __pyx_ptype_4core_7vector2_7Vector2_Vector2 = __Pyx_ImportType(__pyx_t_1, "core.vector2.Vector2", "Vector2", sizeof(struct __pyx_obj_4core_7vector2_7Vector2_Vector2), __Pyx_ImportType_CheckSize_Warn);
+   if (!__pyx_ptype_4core_7vector2_7Vector2_Vector2) __PYX_ERR(16, 3, __pyx_L1_error)
+  __pyx_vtabptr_4core_7vector2_7Vector2_Vector2 = (struct __pyx_vtabstruct_4core_7vector2_7Vector2_Vector2*)__Pyx_GetVtable(__pyx_ptype_4core_7vector2_7Vector2_Vector2->tp_dict); if (unlikely(!__pyx_vtabptr_4core_7vector2_7Vector2_Vector2)) __PYX_ERR(16, 3, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __Pyx_RefNannyFinishContext();
   return 0;
@@ -4121,158 +5725,441 @@ if (!__Pyx_RefNanny) {
   if (__Pyx_patch_abc() < 0) __PYX_ERR(0, 12, __pyx_L1_error)
   #endif
 
-  /* "pluginscript_api/description_classes/PropertyDescription.pyx":19
- * from core.vector3.Vector3 cimport Vector3
+  /* "pluginscript_api/description_classes/PropertyDescription.pyx":31
+ * from core.vector2.Vector2 cimport Vector2
  * from godot_api.binding_external cimport *
  * from classes.generated import *             # <<<<<<<<<<<<<<
  * 
  * type_hint_map = {int: GODOT_PROPERTY_HINT_RANGE, SpriteFrames:GODOT_PROPERTY_HINT_SPRITE_FRAME,
  */
-  __pyx_t_1 = PyList_New(1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 19, __pyx_L1_error)
+  __pyx_t_1 = PyList_New(1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 31, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_INCREF(__pyx_n_s__11);
   __Pyx_GIVEREF(__pyx_n_s__11);
   PyList_SET_ITEM(__pyx_t_1, 0, __pyx_n_s__11);
-  __pyx_t_2 = __Pyx_Import(__pyx_n_s_classes_generated, __pyx_t_1, 0); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 19, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_Import(__pyx_n_s_classes_generated, __pyx_t_1, 0); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 31, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  if (__pyx_import_star(__pyx_t_2) < 0) __PYX_ERR(0, 19, __pyx_L1_error);
+  if (__pyx_import_star(__pyx_t_2) < 0) __PYX_ERR(0, 31, __pyx_L1_error);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "pluginscript_api/description_classes/PropertyDescription.pyx":21
+  /* "pluginscript_api/description_classes/PropertyDescription.pyx":33
  * from classes.generated import *
  * 
  * type_hint_map = {int: GODOT_PROPERTY_HINT_RANGE, SpriteFrames:GODOT_PROPERTY_HINT_SPRITE_FRAME,             # <<<<<<<<<<<<<<
  * TextFile:GODOT_PROPERTY_HINT_FILE, Resource:GODOT_PROPERTY_HINT_RESOURCE_TYPE,
- * String: GODOT_PROPERTY_HINT_TYPE_STRING, Vector3:GODOT_PROPERTY_HINT_METHOD_OF_VARIANT_TYPE}
+ * String: GODOT_PROPERTY_HINT_TYPE_STRING,
  */
-  __pyx_t_2 = __Pyx_PyDict_NewPresized(6); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 21, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyDict_NewPresized(17); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 33, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_1 = __Pyx_PyInt_From_godot_property_hint(GODOT_PROPERTY_HINT_RANGE); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 21, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyInt_From_godot_property_hint(GODOT_PROPERTY_HINT_RANGE); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 33, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  if (PyDict_SetItem(__pyx_t_2, ((PyObject *)(&PyInt_Type)), __pyx_t_1) < 0) __PYX_ERR(0, 21, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_2, ((PyObject *)(&PyInt_Type)), __pyx_t_1) < 0) __PYX_ERR(0, 33, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_n_s_SpriteFrames); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 21, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_n_s_SpriteFrames); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 33, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_3 = __Pyx_PyInt_From_godot_property_hint(GODOT_PROPERTY_HINT_SPRITE_FRAME); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 21, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyInt_From_godot_property_hint(GODOT_PROPERTY_HINT_SPRITE_FRAME); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 33, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  if (PyDict_SetItem(__pyx_t_2, __pyx_t_1, __pyx_t_3) < 0) __PYX_ERR(0, 21, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_2, __pyx_t_1, __pyx_t_3) < 0) __PYX_ERR(0, 33, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-  /* "pluginscript_api/description_classes/PropertyDescription.pyx":22
+  /* "pluginscript_api/description_classes/PropertyDescription.pyx":34
  * 
  * type_hint_map = {int: GODOT_PROPERTY_HINT_RANGE, SpriteFrames:GODOT_PROPERTY_HINT_SPRITE_FRAME,
  * TextFile:GODOT_PROPERTY_HINT_FILE, Resource:GODOT_PROPERTY_HINT_RESOURCE_TYPE,             # <<<<<<<<<<<<<<
- * String: GODOT_PROPERTY_HINT_TYPE_STRING, Vector3:GODOT_PROPERTY_HINT_METHOD_OF_VARIANT_TYPE}
- * 
+ * String: GODOT_PROPERTY_HINT_TYPE_STRING,
+ * Vector3:GODOT_PROPERTY_HINT_METHOD_OF_VARIANT_TYPE,
  */
-  __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_n_s_TextFile); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 22, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_n_s_TextFile); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 34, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  __pyx_t_1 = __Pyx_PyInt_From_godot_property_hint(GODOT_PROPERTY_HINT_FILE); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 22, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyInt_From_godot_property_hint(GODOT_PROPERTY_HINT_FILE); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 34, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  if (PyDict_SetItem(__pyx_t_2, __pyx_t_3, __pyx_t_1) < 0) __PYX_ERR(0, 21, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_2, __pyx_t_3, __pyx_t_1) < 0) __PYX_ERR(0, 33, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_n_s_Resource); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 22, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_n_s_Resource); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 34, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_3 = __Pyx_PyInt_From_godot_property_hint(GODOT_PROPERTY_HINT_RESOURCE_TYPE); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 22, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyInt_From_godot_property_hint(GODOT_PROPERTY_HINT_RESOURCE_TYPE); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 34, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  if (PyDict_SetItem(__pyx_t_2, __pyx_t_1, __pyx_t_3) < 0) __PYX_ERR(0, 21, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_2, __pyx_t_1, __pyx_t_3) < 0) __PYX_ERR(0, 33, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-  /* "pluginscript_api/description_classes/PropertyDescription.pyx":23
+  /* "pluginscript_api/description_classes/PropertyDescription.pyx":35
  * type_hint_map = {int: GODOT_PROPERTY_HINT_RANGE, SpriteFrames:GODOT_PROPERTY_HINT_SPRITE_FRAME,
  * TextFile:GODOT_PROPERTY_HINT_FILE, Resource:GODOT_PROPERTY_HINT_RESOURCE_TYPE,
- * String: GODOT_PROPERTY_HINT_TYPE_STRING, Vector3:GODOT_PROPERTY_HINT_METHOD_OF_VARIANT_TYPE}             # <<<<<<<<<<<<<<
- * 
- * type_variant_type_map = {int:GODOT_VARIANT_TYPE_INT, Vector3:7}
+ * String: GODOT_PROPERTY_HINT_TYPE_STRING,             # <<<<<<<<<<<<<<
+ * Vector3:GODOT_PROPERTY_HINT_METHOD_OF_VARIANT_TYPE,
+ * Vector2:GODOT_PROPERTY_HINT_METHOD_OF_VARIANT_TYPE,
  */
-  __pyx_t_3 = __Pyx_PyInt_From_godot_property_hint(GODOT_PROPERTY_HINT_TYPE_STRING); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 23, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyInt_From_godot_property_hint(GODOT_PROPERTY_HINT_TYPE_STRING); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 35, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  if (PyDict_SetItem(__pyx_t_2, ((PyObject *)__pyx_ptype_4core_6string_6String_String), __pyx_t_3) < 0) __PYX_ERR(0, 21, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_2, ((PyObject *)__pyx_ptype_4core_6string_6String_String), __pyx_t_3) < 0) __PYX_ERR(0, 33, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  __pyx_t_3 = __Pyx_PyInt_From_godot_property_hint(GODOT_PROPERTY_HINT_METHOD_OF_VARIANT_TYPE); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 23, __pyx_L1_error)
+
+  /* "pluginscript_api/description_classes/PropertyDescription.pyx":36
+ * TextFile:GODOT_PROPERTY_HINT_FILE, Resource:GODOT_PROPERTY_HINT_RESOURCE_TYPE,
+ * String: GODOT_PROPERTY_HINT_TYPE_STRING,
+ * Vector3:GODOT_PROPERTY_HINT_METHOD_OF_VARIANT_TYPE,             # <<<<<<<<<<<<<<
+ * Vector2:GODOT_PROPERTY_HINT_METHOD_OF_VARIANT_TYPE,
+ * NodePath:GODOT_PROPERTY_HINT_METHOD_OF_VARIANT_TYPE,
+ */
+  __pyx_t_3 = __Pyx_PyInt_From_godot_property_hint(GODOT_PROPERTY_HINT_METHOD_OF_VARIANT_TYPE); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 36, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  if (PyDict_SetItem(__pyx_t_2, ((PyObject *)__pyx_ptype_4core_7vector3_7Vector3_Vector3), __pyx_t_3) < 0) __PYX_ERR(0, 21, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_2, ((PyObject *)__pyx_ptype_4core_7vector3_7Vector3_Vector3), __pyx_t_3) < 0) __PYX_ERR(0, 33, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_type_hint_map, __pyx_t_2) < 0) __PYX_ERR(0, 21, __pyx_L1_error)
+
+  /* "pluginscript_api/description_classes/PropertyDescription.pyx":37
+ * String: GODOT_PROPERTY_HINT_TYPE_STRING,
+ * Vector3:GODOT_PROPERTY_HINT_METHOD_OF_VARIANT_TYPE,
+ * Vector2:GODOT_PROPERTY_HINT_METHOD_OF_VARIANT_TYPE,             # <<<<<<<<<<<<<<
+ * NodePath:GODOT_PROPERTY_HINT_METHOD_OF_VARIANT_TYPE,
+ * AABB:GODOT_PROPERTY_HINT_METHOD_OF_VARIANT_TYPE,
+ */
+  __pyx_t_3 = __Pyx_PyInt_From_godot_property_hint(GODOT_PROPERTY_HINT_METHOD_OF_VARIANT_TYPE); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 37, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_3);
+  if (PyDict_SetItem(__pyx_t_2, ((PyObject *)__pyx_ptype_4core_7vector2_7Vector2_Vector2), __pyx_t_3) < 0) __PYX_ERR(0, 33, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+
+  /* "pluginscript_api/description_classes/PropertyDescription.pyx":38
+ * Vector3:GODOT_PROPERTY_HINT_METHOD_OF_VARIANT_TYPE,
+ * Vector2:GODOT_PROPERTY_HINT_METHOD_OF_VARIANT_TYPE,
+ * NodePath:GODOT_PROPERTY_HINT_METHOD_OF_VARIANT_TYPE,             # <<<<<<<<<<<<<<
+ * AABB:GODOT_PROPERTY_HINT_METHOD_OF_VARIANT_TYPE,
+ * Array:GODOT_PROPERTY_HINT_METHOD_OF_VARIANT_TYPE,
+ */
+  __pyx_t_3 = __Pyx_PyInt_From_godot_property_hint(GODOT_PROPERTY_HINT_METHOD_OF_VARIANT_TYPE); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 38, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_3);
+  if (PyDict_SetItem(__pyx_t_2, ((PyObject *)__pyx_ptype_4core_9node_path_8NodePath_NodePath), __pyx_t_3) < 0) __PYX_ERR(0, 33, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+
+  /* "pluginscript_api/description_classes/PropertyDescription.pyx":39
+ * Vector2:GODOT_PROPERTY_HINT_METHOD_OF_VARIANT_TYPE,
+ * NodePath:GODOT_PROPERTY_HINT_METHOD_OF_VARIANT_TYPE,
+ * AABB:GODOT_PROPERTY_HINT_METHOD_OF_VARIANT_TYPE,             # <<<<<<<<<<<<<<
+ * Array:GODOT_PROPERTY_HINT_METHOD_OF_VARIANT_TYPE,
+ * Basis:GODOT_PROPERTY_HINT_METHOD_OF_VARIANT_TYPE,
+ */
+  __pyx_t_3 = __Pyx_PyInt_From_godot_property_hint(GODOT_PROPERTY_HINT_METHOD_OF_VARIANT_TYPE); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 39, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_3);
+  if (PyDict_SetItem(__pyx_t_2, ((PyObject *)__pyx_ptype_4core_4aabb_4AABB_AABB), __pyx_t_3) < 0) __PYX_ERR(0, 33, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+
+  /* "pluginscript_api/description_classes/PropertyDescription.pyx":40
+ * NodePath:GODOT_PROPERTY_HINT_METHOD_OF_VARIANT_TYPE,
+ * AABB:GODOT_PROPERTY_HINT_METHOD_OF_VARIANT_TYPE,
+ * Array:GODOT_PROPERTY_HINT_METHOD_OF_VARIANT_TYPE,             # <<<<<<<<<<<<<<
+ * Basis:GODOT_PROPERTY_HINT_METHOD_OF_VARIANT_TYPE,
+ * Color:GODOT_PROPERTY_HINT_METHOD_OF_VARIANT_TYPE,
+ */
+  __pyx_t_3 = __Pyx_PyInt_From_godot_property_hint(GODOT_PROPERTY_HINT_METHOD_OF_VARIANT_TYPE); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 40, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_3);
+  if (PyDict_SetItem(__pyx_t_2, ((PyObject *)__pyx_ptype_4core_5array_5Array_Array), __pyx_t_3) < 0) __PYX_ERR(0, 33, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+
+  /* "pluginscript_api/description_classes/PropertyDescription.pyx":41
+ * AABB:GODOT_PROPERTY_HINT_METHOD_OF_VARIANT_TYPE,
+ * Array:GODOT_PROPERTY_HINT_METHOD_OF_VARIANT_TYPE,
+ * Basis:GODOT_PROPERTY_HINT_METHOD_OF_VARIANT_TYPE,             # <<<<<<<<<<<<<<
+ * Color:GODOT_PROPERTY_HINT_METHOD_OF_VARIANT_TYPE,
+ * Plane:GODOT_PROPERTY_HINT_METHOD_OF_VARIANT_TYPE,
+ */
+  __pyx_t_3 = __Pyx_PyInt_From_godot_property_hint(GODOT_PROPERTY_HINT_METHOD_OF_VARIANT_TYPE); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 41, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_3);
+  if (PyDict_SetItem(__pyx_t_2, ((PyObject *)__pyx_ptype_4core_5basis_5Basis_Basis), __pyx_t_3) < 0) __PYX_ERR(0, 33, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+
+  /* "pluginscript_api/description_classes/PropertyDescription.pyx":42
+ * Array:GODOT_PROPERTY_HINT_METHOD_OF_VARIANT_TYPE,
+ * Basis:GODOT_PROPERTY_HINT_METHOD_OF_VARIANT_TYPE,
+ * Color:GODOT_PROPERTY_HINT_METHOD_OF_VARIANT_TYPE,             # <<<<<<<<<<<<<<
+ * Plane:GODOT_PROPERTY_HINT_METHOD_OF_VARIANT_TYPE,
+ * Quat:GODOT_PROPERTY_HINT_METHOD_OF_VARIANT_TYPE,
+ */
+  __pyx_t_3 = __Pyx_PyInt_From_godot_property_hint(GODOT_PROPERTY_HINT_METHOD_OF_VARIANT_TYPE); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 42, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_3);
+  if (PyDict_SetItem(__pyx_t_2, ((PyObject *)__pyx_ptype_4core_5color_5Color_Color), __pyx_t_3) < 0) __PYX_ERR(0, 33, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+
+  /* "pluginscript_api/description_classes/PropertyDescription.pyx":43
+ * Basis:GODOT_PROPERTY_HINT_METHOD_OF_VARIANT_TYPE,
+ * Color:GODOT_PROPERTY_HINT_METHOD_OF_VARIANT_TYPE,
+ * Plane:GODOT_PROPERTY_HINT_METHOD_OF_VARIANT_TYPE,             # <<<<<<<<<<<<<<
+ * Quat:GODOT_PROPERTY_HINT_METHOD_OF_VARIANT_TYPE,
+ * Rect2:GODOT_PROPERTY_HINT_METHOD_OF_VARIANT_TYPE,
+ */
+  __pyx_t_3 = __Pyx_PyInt_From_godot_property_hint(GODOT_PROPERTY_HINT_METHOD_OF_VARIANT_TYPE); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 43, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_3);
+  if (PyDict_SetItem(__pyx_t_2, ((PyObject *)__pyx_ptype_4core_5plane_5Plane_Plane), __pyx_t_3) < 0) __PYX_ERR(0, 33, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+
+  /* "pluginscript_api/description_classes/PropertyDescription.pyx":44
+ * Color:GODOT_PROPERTY_HINT_METHOD_OF_VARIANT_TYPE,
+ * Plane:GODOT_PROPERTY_HINT_METHOD_OF_VARIANT_TYPE,
+ * Quat:GODOT_PROPERTY_HINT_METHOD_OF_VARIANT_TYPE,             # <<<<<<<<<<<<<<
+ * Rect2:GODOT_PROPERTY_HINT_METHOD_OF_VARIANT_TYPE,
+ * RID:GODOT_PROPERTY_HINT_METHOD_OF_VARIANT_TYPE,
+ */
+  __pyx_t_3 = __Pyx_PyInt_From_godot_property_hint(GODOT_PROPERTY_HINT_METHOD_OF_VARIANT_TYPE); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 44, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_3);
+  if (PyDict_SetItem(__pyx_t_2, ((PyObject *)__pyx_ptype_4core_4quat_4Quat_Quat), __pyx_t_3) < 0) __PYX_ERR(0, 33, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+
+  /* "pluginscript_api/description_classes/PropertyDescription.pyx":45
+ * Plane:GODOT_PROPERTY_HINT_METHOD_OF_VARIANT_TYPE,
+ * Quat:GODOT_PROPERTY_HINT_METHOD_OF_VARIANT_TYPE,
+ * Rect2:GODOT_PROPERTY_HINT_METHOD_OF_VARIANT_TYPE,             # <<<<<<<<<<<<<<
+ * RID:GODOT_PROPERTY_HINT_METHOD_OF_VARIANT_TYPE,
+ * Transform:GODOT_PROPERTY_HINT_METHOD_OF_VARIANT_TYPE,
+ */
+  __pyx_t_3 = __Pyx_PyInt_From_godot_property_hint(GODOT_PROPERTY_HINT_METHOD_OF_VARIANT_TYPE); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 45, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_3);
+  if (PyDict_SetItem(__pyx_t_2, ((PyObject *)__pyx_ptype_4core_5rect2_5Rect2_Rect2), __pyx_t_3) < 0) __PYX_ERR(0, 33, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+
+  /* "pluginscript_api/description_classes/PropertyDescription.pyx":46
+ * Quat:GODOT_PROPERTY_HINT_METHOD_OF_VARIANT_TYPE,
+ * Rect2:GODOT_PROPERTY_HINT_METHOD_OF_VARIANT_TYPE,
+ * RID:GODOT_PROPERTY_HINT_METHOD_OF_VARIANT_TYPE,             # <<<<<<<<<<<<<<
+ * Transform:GODOT_PROPERTY_HINT_METHOD_OF_VARIANT_TYPE,
+ * }
+ */
+  __pyx_t_3 = __Pyx_PyInt_From_godot_property_hint(GODOT_PROPERTY_HINT_METHOD_OF_VARIANT_TYPE); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 46, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_3);
+  if (PyDict_SetItem(__pyx_t_2, ((PyObject *)__pyx_ptype_4core_3rid_3RID_RID), __pyx_t_3) < 0) __PYX_ERR(0, 33, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+
+  /* "pluginscript_api/description_classes/PropertyDescription.pyx":47
+ * Rect2:GODOT_PROPERTY_HINT_METHOD_OF_VARIANT_TYPE,
+ * RID:GODOT_PROPERTY_HINT_METHOD_OF_VARIANT_TYPE,
+ * Transform:GODOT_PROPERTY_HINT_METHOD_OF_VARIANT_TYPE,             # <<<<<<<<<<<<<<
+ * }
+ * 
+ */
+  __pyx_t_3 = __Pyx_PyInt_From_godot_property_hint(GODOT_PROPERTY_HINT_METHOD_OF_VARIANT_TYPE); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 47, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_3);
+  if (PyDict_SetItem(__pyx_t_2, ((PyObject *)__pyx_ptype_4core_9transform_9Transform_Transform), __pyx_t_3) < 0) __PYX_ERR(0, 33, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_type_hint_map, __pyx_t_2) < 0) __PYX_ERR(0, 33, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "pluginscript_api/description_classes/PropertyDescription.pyx":25
- * String: GODOT_PROPERTY_HINT_TYPE_STRING, Vector3:GODOT_PROPERTY_HINT_METHOD_OF_VARIANT_TYPE}
+  /* "pluginscript_api/description_classes/PropertyDescription.pyx":51
  * 
- * type_variant_type_map = {int:GODOT_VARIANT_TYPE_INT, Vector3:7}             # <<<<<<<<<<<<<<
- * 
- * def transform_type(type_):
+ * type_variant_type_map = {
+ * int:GODOT_VARIANT_TYPE_INT,             # <<<<<<<<<<<<<<
+ * NodePath:GODOT_VARIANT_TYPE_NODE_PATH,
+ * Vector2 : GODOT_VARIANT_TYPE_VECTOR2,
  */
-  __pyx_t_2 = __Pyx_PyDict_NewPresized(2); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 25, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyDict_NewPresized(13); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 51, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_3 = __Pyx_PyInt_From_godot_variant_type(GODOT_VARIANT_TYPE_INT); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 25, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyInt_From_godot_variant_type(GODOT_VARIANT_TYPE_INT); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 51, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  if (PyDict_SetItem(__pyx_t_2, ((PyObject *)(&PyInt_Type)), __pyx_t_3) < 0) __PYX_ERR(0, 25, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_2, ((PyObject *)(&PyInt_Type)), __pyx_t_3) < 0) __PYX_ERR(0, 51, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  if (PyDict_SetItem(__pyx_t_2, ((PyObject *)__pyx_ptype_4core_7vector3_7Vector3_Vector3), __pyx_int_7) < 0) __PYX_ERR(0, 25, __pyx_L1_error)
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_type_variant_type_map, __pyx_t_2) < 0) __PYX_ERR(0, 25, __pyx_L1_error)
+
+  /* "pluginscript_api/description_classes/PropertyDescription.pyx":52
+ * type_variant_type_map = {
+ * int:GODOT_VARIANT_TYPE_INT,
+ * NodePath:GODOT_VARIANT_TYPE_NODE_PATH,             # <<<<<<<<<<<<<<
+ * Vector2 : GODOT_VARIANT_TYPE_VECTOR2,
+ * Vector3:GODOT_VARIANT_TYPE_VECTOR3,
+ */
+  __pyx_t_3 = __Pyx_PyInt_From_godot_variant_type(GODOT_VARIANT_TYPE_NODE_PATH); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 52, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_3);
+  if (PyDict_SetItem(__pyx_t_2, ((PyObject *)__pyx_ptype_4core_9node_path_8NodePath_NodePath), __pyx_t_3) < 0) __PYX_ERR(0, 51, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+
+  /* "pluginscript_api/description_classes/PropertyDescription.pyx":53
+ * int:GODOT_VARIANT_TYPE_INT,
+ * NodePath:GODOT_VARIANT_TYPE_NODE_PATH,
+ * Vector2 : GODOT_VARIANT_TYPE_VECTOR2,             # <<<<<<<<<<<<<<
+ * Vector3:GODOT_VARIANT_TYPE_VECTOR3,
+ * AABB:GODOT_VARIANT_TYPE_AABB,
+ */
+  __pyx_t_3 = __Pyx_PyInt_From_godot_variant_type(GODOT_VARIANT_TYPE_VECTOR2); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 53, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_3);
+  if (PyDict_SetItem(__pyx_t_2, ((PyObject *)__pyx_ptype_4core_7vector2_7Vector2_Vector2), __pyx_t_3) < 0) __PYX_ERR(0, 51, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+
+  /* "pluginscript_api/description_classes/PropertyDescription.pyx":54
+ * NodePath:GODOT_VARIANT_TYPE_NODE_PATH,
+ * Vector2 : GODOT_VARIANT_TYPE_VECTOR2,
+ * Vector3:GODOT_VARIANT_TYPE_VECTOR3,             # <<<<<<<<<<<<<<
+ * AABB:GODOT_VARIANT_TYPE_AABB,
+ * Array:GODOT_VARIANT_TYPE_ARRAY,
+ */
+  __pyx_t_3 = __Pyx_PyInt_From_godot_variant_type(GODOT_VARIANT_TYPE_VECTOR3); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 54, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_3);
+  if (PyDict_SetItem(__pyx_t_2, ((PyObject *)__pyx_ptype_4core_7vector3_7Vector3_Vector3), __pyx_t_3) < 0) __PYX_ERR(0, 51, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+
+  /* "pluginscript_api/description_classes/PropertyDescription.pyx":55
+ * Vector2 : GODOT_VARIANT_TYPE_VECTOR2,
+ * Vector3:GODOT_VARIANT_TYPE_VECTOR3,
+ * AABB:GODOT_VARIANT_TYPE_AABB,             # <<<<<<<<<<<<<<
+ * Array:GODOT_VARIANT_TYPE_ARRAY,
+ * Basis:GODOT_VARIANT_TYPE_BASIS,
+ */
+  __pyx_t_3 = __Pyx_PyInt_From_godot_variant_type(GODOT_VARIANT_TYPE_AABB); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 55, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_3);
+  if (PyDict_SetItem(__pyx_t_2, ((PyObject *)__pyx_ptype_4core_4aabb_4AABB_AABB), __pyx_t_3) < 0) __PYX_ERR(0, 51, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+
+  /* "pluginscript_api/description_classes/PropertyDescription.pyx":56
+ * Vector3:GODOT_VARIANT_TYPE_VECTOR3,
+ * AABB:GODOT_VARIANT_TYPE_AABB,
+ * Array:GODOT_VARIANT_TYPE_ARRAY,             # <<<<<<<<<<<<<<
+ * Basis:GODOT_VARIANT_TYPE_BASIS,
+ * Color:GODOT_VARIANT_TYPE_COLOR,
+ */
+  __pyx_t_3 = __Pyx_PyInt_From_godot_variant_type(GODOT_VARIANT_TYPE_ARRAY); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 56, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_3);
+  if (PyDict_SetItem(__pyx_t_2, ((PyObject *)__pyx_ptype_4core_5array_5Array_Array), __pyx_t_3) < 0) __PYX_ERR(0, 51, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+
+  /* "pluginscript_api/description_classes/PropertyDescription.pyx":57
+ * AABB:GODOT_VARIANT_TYPE_AABB,
+ * Array:GODOT_VARIANT_TYPE_ARRAY,
+ * Basis:GODOT_VARIANT_TYPE_BASIS,             # <<<<<<<<<<<<<<
+ * Color:GODOT_VARIANT_TYPE_COLOR,
+ * Plane:GODOT_VARIANT_TYPE_PLANE,
+ */
+  __pyx_t_3 = __Pyx_PyInt_From_godot_variant_type(GODOT_VARIANT_TYPE_BASIS); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 57, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_3);
+  if (PyDict_SetItem(__pyx_t_2, ((PyObject *)__pyx_ptype_4core_5basis_5Basis_Basis), __pyx_t_3) < 0) __PYX_ERR(0, 51, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+
+  /* "pluginscript_api/description_classes/PropertyDescription.pyx":58
+ * Array:GODOT_VARIANT_TYPE_ARRAY,
+ * Basis:GODOT_VARIANT_TYPE_BASIS,
+ * Color:GODOT_VARIANT_TYPE_COLOR,             # <<<<<<<<<<<<<<
+ * Plane:GODOT_VARIANT_TYPE_PLANE,
+ * Quat:GODOT_VARIANT_TYPE_QUAT,
+ */
+  __pyx_t_3 = __Pyx_PyInt_From_godot_variant_type(GODOT_VARIANT_TYPE_COLOR); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 58, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_3);
+  if (PyDict_SetItem(__pyx_t_2, ((PyObject *)__pyx_ptype_4core_5color_5Color_Color), __pyx_t_3) < 0) __PYX_ERR(0, 51, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+
+  /* "pluginscript_api/description_classes/PropertyDescription.pyx":59
+ * Basis:GODOT_VARIANT_TYPE_BASIS,
+ * Color:GODOT_VARIANT_TYPE_COLOR,
+ * Plane:GODOT_VARIANT_TYPE_PLANE,             # <<<<<<<<<<<<<<
+ * Quat:GODOT_VARIANT_TYPE_QUAT,
+ * Rect2:GODOT_VARIANT_TYPE_RECT2,
+ */
+  __pyx_t_3 = __Pyx_PyInt_From_godot_variant_type(GODOT_VARIANT_TYPE_PLANE); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 59, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_3);
+  if (PyDict_SetItem(__pyx_t_2, ((PyObject *)__pyx_ptype_4core_5plane_5Plane_Plane), __pyx_t_3) < 0) __PYX_ERR(0, 51, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+
+  /* "pluginscript_api/description_classes/PropertyDescription.pyx":60
+ * Color:GODOT_VARIANT_TYPE_COLOR,
+ * Plane:GODOT_VARIANT_TYPE_PLANE,
+ * Quat:GODOT_VARIANT_TYPE_QUAT,             # <<<<<<<<<<<<<<
+ * Rect2:GODOT_VARIANT_TYPE_RECT2,
+ * RID:GODOT_VARIANT_TYPE_RID,
+ */
+  __pyx_t_3 = __Pyx_PyInt_From_godot_variant_type(GODOT_VARIANT_TYPE_QUAT); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 60, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_3);
+  if (PyDict_SetItem(__pyx_t_2, ((PyObject *)__pyx_ptype_4core_4quat_4Quat_Quat), __pyx_t_3) < 0) __PYX_ERR(0, 51, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+
+  /* "pluginscript_api/description_classes/PropertyDescription.pyx":61
+ * Plane:GODOT_VARIANT_TYPE_PLANE,
+ * Quat:GODOT_VARIANT_TYPE_QUAT,
+ * Rect2:GODOT_VARIANT_TYPE_RECT2,             # <<<<<<<<<<<<<<
+ * RID:GODOT_VARIANT_TYPE_RID,
+ * Transform:GODOT_VARIANT_TYPE_TRANSFORM,
+ */
+  __pyx_t_3 = __Pyx_PyInt_From_godot_variant_type(GODOT_VARIANT_TYPE_RECT2); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 61, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_3);
+  if (PyDict_SetItem(__pyx_t_2, ((PyObject *)__pyx_ptype_4core_5rect2_5Rect2_Rect2), __pyx_t_3) < 0) __PYX_ERR(0, 51, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+
+  /* "pluginscript_api/description_classes/PropertyDescription.pyx":62
+ * Quat:GODOT_VARIANT_TYPE_QUAT,
+ * Rect2:GODOT_VARIANT_TYPE_RECT2,
+ * RID:GODOT_VARIANT_TYPE_RID,             # <<<<<<<<<<<<<<
+ * Transform:GODOT_VARIANT_TYPE_TRANSFORM,
+ * }
+ */
+  __pyx_t_3 = __Pyx_PyInt_From_godot_variant_type(GODOT_VARIANT_TYPE_RID); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 62, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_3);
+  if (PyDict_SetItem(__pyx_t_2, ((PyObject *)__pyx_ptype_4core_3rid_3RID_RID), __pyx_t_3) < 0) __PYX_ERR(0, 51, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+
+  /* "pluginscript_api/description_classes/PropertyDescription.pyx":63
+ * Rect2:GODOT_VARIANT_TYPE_RECT2,
+ * RID:GODOT_VARIANT_TYPE_RID,
+ * Transform:GODOT_VARIANT_TYPE_TRANSFORM,             # <<<<<<<<<<<<<<
+ * }
+ * 
+ */
+  __pyx_t_3 = __Pyx_PyInt_From_godot_variant_type(GODOT_VARIANT_TYPE_TRANSFORM); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 63, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_3);
+  if (PyDict_SetItem(__pyx_t_2, ((PyObject *)__pyx_ptype_4core_9transform_9Transform_Transform), __pyx_t_3) < 0) __PYX_ERR(0, 51, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_type_variant_type_map, __pyx_t_2) < 0) __PYX_ERR(0, 50, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "pluginscript_api/description_classes/PropertyDescription.pyx":27
- * type_variant_type_map = {int:GODOT_VARIANT_TYPE_INT, Vector3:7}
+  /* "pluginscript_api/description_classes/PropertyDescription.pyx":66
+ * }
  * 
  * def transform_type(type_):             # <<<<<<<<<<<<<<
  *     if(type_ in type_variant_type_map):
  *         return type_variant_type_map[type_]
  */
-  __pyx_t_2 = PyCFunction_NewEx(&__pyx_mdef_16pluginscript_api_19description_classes_19PropertyDescription_1transform_type, NULL, __pyx_n_s_pluginscript_api_description_cla_2); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 27, __pyx_L1_error)
+  __pyx_t_2 = PyCFunction_NewEx(&__pyx_mdef_16pluginscript_api_19description_classes_19PropertyDescription_1transform_type, NULL, __pyx_n_s_pluginscript_api_description_cla_2); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 66, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_transform_type, __pyx_t_2) < 0) __PYX_ERR(0, 27, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_transform_type, __pyx_t_2) < 0) __PYX_ERR(0, 66, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "pluginscript_api/description_classes/PropertyDescription.pyx":31
+  /* "pluginscript_api/description_classes/PropertyDescription.pyx":70
  *         return type_variant_type_map[type_]
  *     return
  * class PropertyDescription:             # <<<<<<<<<<<<<<
  *     def __init__(self, name,type_, hint, hint_string, usage, default_value, rset_mode):
  *         self.name = name
  */
-  __pyx_t_2 = __Pyx_Py3MetaclassPrepare((PyObject *) NULL, __pyx_empty_tuple, __pyx_n_s_PropertyDescription, __pyx_n_s_PropertyDescription, (PyObject *) NULL, __pyx_n_s_pluginscript_api_description_cla_2, (PyObject *) NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 31, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_Py3MetaclassPrepare((PyObject *) NULL, __pyx_empty_tuple, __pyx_n_s_PropertyDescription, __pyx_n_s_PropertyDescription, (PyObject *) NULL, __pyx_n_s_pluginscript_api_description_cla_2, (PyObject *) NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 70, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
 
-  /* "pluginscript_api/description_classes/PropertyDescription.pyx":32
+  /* "pluginscript_api/description_classes/PropertyDescription.pyx":71
  *     return
  * class PropertyDescription:
  *     def __init__(self, name,type_, hint, hint_string, usage, default_value, rset_mode):             # <<<<<<<<<<<<<<
  *         self.name = name
  *         self.type_ = transform_type(type_)
  */
-  __pyx_t_3 = __Pyx_CyFunction_New(&__pyx_mdef_16pluginscript_api_19description_classes_19PropertyDescription_19PropertyDescription_1__init__, 0, __pyx_n_s_PropertyDescription___init, NULL, __pyx_n_s_pluginscript_api_description_cla_2, __pyx_d, ((PyObject *)__pyx_codeobj__15)); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 32, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_CyFunction_New(&__pyx_mdef_16pluginscript_api_19description_classes_19PropertyDescription_19PropertyDescription_1__init__, 0, __pyx_n_s_PropertyDescription___init, NULL, __pyx_n_s_pluginscript_api_description_cla_2, __pyx_d, ((PyObject *)__pyx_codeobj__15)); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 71, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  if (__Pyx_SetNameInClass(__pyx_t_2, __pyx_n_s_init, __pyx_t_3) < 0) __PYX_ERR(0, 32, __pyx_L1_error)
+  if (__Pyx_SetNameInClass(__pyx_t_2, __pyx_n_s_init, __pyx_t_3) < 0) __PYX_ERR(0, 71, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-  /* "pluginscript_api/description_classes/PropertyDescription.pyx":47
+  /* "pluginscript_api/description_classes/PropertyDescription.pyx":84
  *         self.default_value = default_value
  *         self.rset_mode = rset_mode
  *     def to_dict(self):             # <<<<<<<<<<<<<<
- *         print("----------to_dict:",self.name,"|", self.type_,"|", self.hint)
  *         d = Dictionary()
+ *         d.set(Variant(String("name")), Variant(String(self.name)))
  */
-  __pyx_t_3 = __Pyx_CyFunction_New(&__pyx_mdef_16pluginscript_api_19description_classes_19PropertyDescription_19PropertyDescription_3to_dict, 0, __pyx_n_s_PropertyDescription_to_dict, NULL, __pyx_n_s_pluginscript_api_description_cla_2, __pyx_d, ((PyObject *)__pyx_codeobj__17)); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 47, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_CyFunction_New(&__pyx_mdef_16pluginscript_api_19description_classes_19PropertyDescription_19PropertyDescription_3to_dict, 0, __pyx_n_s_PropertyDescription_to_dict, NULL, __pyx_n_s_pluginscript_api_description_cla_2, __pyx_d, ((PyObject *)__pyx_codeobj__17)); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 84, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  if (__Pyx_SetNameInClass(__pyx_t_2, __pyx_n_s_to_dict_2, __pyx_t_3) < 0) __PYX_ERR(0, 47, __pyx_L1_error)
+  if (__Pyx_SetNameInClass(__pyx_t_2, __pyx_n_s_to_dict, __pyx_t_3) < 0) __PYX_ERR(0, 84, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-  /* "pluginscript_api/description_classes/PropertyDescription.pyx":31
+  /* "pluginscript_api/description_classes/PropertyDescription.pyx":70
  *         return type_variant_type_map[type_]
  *     return
  * class PropertyDescription:             # <<<<<<<<<<<<<<
  *     def __init__(self, name,type_, hint, hint_string, usage, default_value, rset_mode):
  *         self.name = name
  */
-  __pyx_t_3 = __Pyx_Py3ClassCreate(((PyObject*)&__Pyx_DefaultClassType), __pyx_n_s_PropertyDescription, __pyx_empty_tuple, __pyx_t_2, NULL, 0, 0); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 31, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_Py3ClassCreate(((PyObject*)&__Pyx_DefaultClassType), __pyx_n_s_PropertyDescription, __pyx_empty_tuple, __pyx_t_2, NULL, 0, 0); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 70, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_PropertyDescription, __pyx_t_3) < 0) __PYX_ERR(0, 31, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_PropertyDescription, __pyx_t_3) < 0) __PYX_ERR(0, 70, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
@@ -4288,12 +6175,12 @@ if (!__Pyx_RefNanny) {
   if (PyDict_SetItem(__pyx_d, __pyx_n_s_test, __pyx_t_2) < 0) __PYX_ERR(0, 12, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "core/vector3/Vector3.pxd":10
+  /* "core/vector2/Vector2.pxd":10
  * 
  *     @staticmethod
- *     cdef inline Vector3 new_static(godot_vector3 _native):             # <<<<<<<<<<<<<<
- *         cdef Vector3 v = Vector3.__new__(Vector3)
- *         v.set_native(_native)
+ *     cdef inline Vector2 new_static(godot_vector2 _native):             # <<<<<<<<<<<<<<
+ *         print("start_new")
+ *         cdef Vector2 v = Vector2.__new__(Vector2)
  */
 
   /*--- Wrapped vars code ---*/
@@ -4985,6 +6872,72 @@ static CYTHON_INLINE int __Pyx_TypeTest(PyObject *obj, PyTypeObject *type) {
     PyErr_Format(PyExc_TypeError, "Cannot convert %.200s to %.200s",
                  Py_TYPE(obj)->tp_name, type->tp_name);
     return 0;
+}
+
+/* PyErrFetchRestore */
+#if CYTHON_FAST_THREAD_STATE
+static CYTHON_INLINE void __Pyx_ErrRestoreInState(PyThreadState *tstate, PyObject *type, PyObject *value, PyObject *tb) {
+    PyObject *tmp_type, *tmp_value, *tmp_tb;
+    tmp_type = tstate->curexc_type;
+    tmp_value = tstate->curexc_value;
+    tmp_tb = tstate->curexc_traceback;
+    tstate->curexc_type = type;
+    tstate->curexc_value = value;
+    tstate->curexc_traceback = tb;
+    Py_XDECREF(tmp_type);
+    Py_XDECREF(tmp_value);
+    Py_XDECREF(tmp_tb);
+}
+static CYTHON_INLINE void __Pyx_ErrFetchInState(PyThreadState *tstate, PyObject **type, PyObject **value, PyObject **tb) {
+    *type = tstate->curexc_type;
+    *value = tstate->curexc_value;
+    *tb = tstate->curexc_traceback;
+    tstate->curexc_type = 0;
+    tstate->curexc_value = 0;
+    tstate->curexc_traceback = 0;
+}
+#endif
+
+/* WriteUnraisableException */
+static void __Pyx_WriteUnraisable(const char *name, CYTHON_UNUSED int clineno,
+                                  CYTHON_UNUSED int lineno, CYTHON_UNUSED const char *filename,
+                                  int full_traceback, CYTHON_UNUSED int nogil) {
+    PyObject *old_exc, *old_val, *old_tb;
+    PyObject *ctx;
+    __Pyx_PyThreadState_declare
+#ifdef WITH_THREAD
+    PyGILState_STATE state;
+    if (nogil)
+        state = PyGILState_Ensure();
+#ifdef _MSC_VER
+    else state = (PyGILState_STATE)-1;
+#endif
+#endif
+    __Pyx_PyThreadState_assign
+    __Pyx_ErrFetch(&old_exc, &old_val, &old_tb);
+    if (full_traceback) {
+        Py_XINCREF(old_exc);
+        Py_XINCREF(old_val);
+        Py_XINCREF(old_tb);
+        __Pyx_ErrRestore(old_exc, old_val, old_tb);
+        PyErr_PrintEx(1);
+    }
+    #if PY_MAJOR_VERSION < 3
+    ctx = PyString_FromString(name);
+    #else
+    ctx = PyUnicode_FromString(name);
+    #endif
+    __Pyx_ErrRestore(old_exc, old_val, old_tb);
+    if (!ctx) {
+        PyErr_WriteUnraisable(Py_None);
+    } else {
+        PyErr_WriteUnraisable(ctx);
+        Py_DECREF(ctx);
+    }
+#ifdef WITH_THREAD
+    if (nogil)
+        PyGILState_Release(state);
+#endif
 }
 
 /* TypeImport */
@@ -5895,30 +7848,6 @@ static PyObject *__Pyx_Py3ClassCreate(PyObject *metaclass, PyObject *name, PyObj
     Py_XDECREF(owned_metaclass);
     return result;
 }
-
-/* PyErrFetchRestore */
-#if CYTHON_FAST_THREAD_STATE
-static CYTHON_INLINE void __Pyx_ErrRestoreInState(PyThreadState *tstate, PyObject *type, PyObject *value, PyObject *tb) {
-    PyObject *tmp_type, *tmp_value, *tmp_tb;
-    tmp_type = tstate->curexc_type;
-    tmp_value = tstate->curexc_value;
-    tmp_tb = tstate->curexc_traceback;
-    tstate->curexc_type = type;
-    tstate->curexc_value = value;
-    tstate->curexc_traceback = tb;
-    Py_XDECREF(tmp_type);
-    Py_XDECREF(tmp_value);
-    Py_XDECREF(tmp_tb);
-}
-static CYTHON_INLINE void __Pyx_ErrFetchInState(PyThreadState *tstate, PyObject **type, PyObject **value, PyObject **tb) {
-    *type = tstate->curexc_type;
-    *value = tstate->curexc_value;
-    *tb = tstate->curexc_traceback;
-    tstate->curexc_type = 0;
-    tstate->curexc_value = 0;
-    tstate->curexc_traceback = 0;
-}
-#endif
 
 /* CLineInTraceback */
 #ifndef CYTHON_CLINE_IN_TRACEBACK

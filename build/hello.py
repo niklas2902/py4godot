@@ -28,6 +28,23 @@ class Ball(Spatial):
 		print("set_pos", value)
 		self._pos = value
 
+	@gdproperty(Rect2, None)
+	def rect(self):
+		pass
+
+	@rect.setter
+	def rect(self, value):
+		pass
+		
+		
+	@gdproperty(NodePath, None)
+	def path(self):
+		return self._pas
+
+	@path.setter
+	def path(self, value):
+		self._path = value
+
 	@gdmethod
 	def _ready(self):
 		print("_ready:")
@@ -37,7 +54,9 @@ class Ball(Spatial):
 		
 		if(self.pos == None):
 			print("set_pos")
-			self.pos = DEFAULT_POS		
+			self.pos = DEFAULT_POS	
+			
+		self._path = None
 		print(self.vel)
 
 	@gdmethod
