@@ -1,9 +1,14 @@
 import subprocess, time
+
+import main
 from main import *
 from Cython.Build import cythonize
 from meson_scripts import copy_tools
-# fromfile_example.py
+
+
 import argparse
+
+main.build()
 
 def cythonize_files():
     module = cythonize('core/*/*.pyx', language_level=3)

@@ -19,6 +19,7 @@ core = ["Dictionary", "Array", "Variant", "NodePath", "String", "Vector3", "Vect
 
 
 def generate_properties(obj):
+    """generate properties for the object"""
     result = ""
     if (len(obj["properties"])):
         result += "\n##################################Generated Properties#########################################\n"
@@ -33,74 +34,107 @@ def generate_properties(obj):
 
 
 def generate_methods(obj, import_string):
+    """generate the methods"""
     result = ""
     if (len(obj["methods"])):
         result += "\n##################################Generated Methods#########################################\n"
         for method in obj["methods"]:
+
+            #Generate head of method
             result += f"  def {'' if method['is_const'] == False else ''} {method['name'] if method['name'] not in exclude_words else method['name'] + '_'}("
-            args = "self, "
 
-            for argument in method["arguments"]:
-                args += " " + (argument["type"] if not argument["type"] in objects else argument["type"]) + " "
-                args += (argument["name"] if argument["name"] not in exclude_words else argument["name"] + "_") + ", "
+            #Generate arguments in head
+            import_string, result = generate_args(import_string, method, result)
 
-                if (argument["type"] in objects):
-                    import_string += f"cimport classes.{argument['type']}\n"
-
-            result += args.rstrip(", ") + "):\n"
+            #Start with body
             result += f"    cdef godot_object *_owner = self.godot_owner\n\n"
 
-            return_type = method["return_type"]
-            return_type_save = return_type
+            # create return type
+            import_string, result, return_type, return_type_save = generate_return_type(import_string, method, obj,
+                                                                                        result)
 
-            if ("." in return_type):
-                return_type = return_type.split(".")[-1]
+            # generate array with arguments
+            result = generate_method_argument_array(method, result)
 
-            if (return_type != "void"):
-                if ("::" in return_type):
-                    import_class, return_type = return_type.split("::")
-                    if (import_class != obj["name"] and not import_class in core):
-                        import_string += f"cimport classes.{import_class}\n"
-                        return_type = import_class + "_" + return_type
-                    else:
-                        return_type = import_class + "_" + return_type
-
-                if (return_type in objects):
-                    result += f"    cdef godot_object* ret\n\n"
-                else:
-                    return_type_imported = return_type if return_type.split(".")[0] in objects else return_type
-                    result += f"    cdef {return_type_imported if return_type_imported not in types else types[return_type_imported]} ret\n\n"
-
-            if (len(method['arguments']) > 0):
-                result += f"    cdef void *args[{len(method['arguments'])}]\n\n"
-
-                for i in range(len(method["arguments"])):
-                    argument = method["arguments"][i]
-                    arg_name = (argument["name"] if argument["name"] not in exclude_words else argument["name"] + "_")
-                    if (argument["type"] in objects):
-                        result += f"    args[{i}] = {arg_name}.godot_owner\n"
-                    else:
-                        result += f"    args[{i}] = {'&' + arg_name + '._native' if method['arguments'][i]['type'] in core else ('&' + arg_name)}\n"
-            else:
-                result += f"""    cdef void * args[1]\n    args[0] = NULL\n"""
-            if(not method["is_virtual"]):
-                result += f"    api_core.godot_method_bind_ptrcall(bind_{obj['name'].lower()}_{method['name']}," \
-                          f"self.godot_owner,{'args' if len(method['arguments']) > 0 else 'NULL'},{'&ret' if return_type != 'void' else 'NULL'})\n"
-            if return_type != "void" and not return_type in objects and not return_type_save.startswith("Pool"):
-                if ("." in return_type):
-                    return_type = return_type
-                if (return_type in objects and return_type_save not in types):
-                    return_type = "godot_object"
-                if (return_type in types and not return_type_save in return_type):
-                    return_type = types[return_type]
-                result += f"    return {return_type_save + '.new_static(ret)' if return_type_save in types else 'ret'}\n\n"
-            elif not return_type_save.startswith("Pool") and return_type != "void":
-                result += f"    cdef {return_type} obj = {return_type}()\n"
-                result += f"    obj.set_godot_owner(ret)\n"
+            # make call to godot api
+            result = make_method_api_call(method, obj, result, return_type, return_type_save)
     return result, import_string
 
 
+def generate_args(import_string, method, result):
+    """generate the arguments in the method head"""
+    args = "self, "
+    for argument in method["arguments"]:
+        args += " " + (argument["type"] if not argument["type"] in objects else argument["type"]) + " "
+        args += (argument["name"] if argument["name"] not in exclude_words else argument["name"] + "_") + ", "
+
+        if (argument["type"] in objects):
+            import_string += f"cimport classes.{argument['type']}\n"
+    result += args.rstrip(", ") + "):\n"
+    return import_string, result
+
+
+def generate_return_type(import_string, method, obj, result):
+    """generate the return_type"""
+    return_type = method["return_type"]
+    return_type_save = return_type
+    if ("." in return_type):
+        return_type = return_type.split(".")[-1]
+    if (return_type != "void"):
+        if ("::" in return_type):
+            import_class, return_type = return_type.split("::")
+            if (import_class != obj["name"] and not import_class in core):
+                import_string += f"cimport classes.{import_class}\n"
+                return_type = import_class + "_" + return_type
+            else:
+                return_type = import_class + "_" + return_type
+
+        if (return_type in objects):
+            result += f"    cdef godot_object* ret\n\n"
+        else:
+            return_type_imported = return_type if return_type.split(".")[0] in objects else return_type
+            result += f"    cdef {return_type_imported if return_type_imported not in types else types[return_type_imported]} ret\n\n"
+    return import_string, result, return_type, return_type_save
+
+
+def generate_method_argument_array(method, result):
+    """generate an argument array for the api calls"""
+    if (len(method['arguments']) > 0):
+        result += f"    cdef void *args[{len(method['arguments'])}]\n\n"
+
+        for i in range(len(method["arguments"])):
+            argument = method["arguments"][i]
+            arg_name = (argument["name"] if argument["name"] not in exclude_words else argument["name"] + "_")
+            if (argument["type"] in objects):
+                result += f"    args[{i}] = {arg_name}.godot_owner\n"
+            else:
+                result += f"    args[{i}] = {'&' + arg_name + '._native' if method['arguments'][i]['type'] in core else ('&' + arg_name)}\n"
+    else:
+        result += f"""    cdef void * args[1]\n    args[0] = NULL\n"""
+    return result
+
+
+def make_method_api_call(method, obj, result, return_type, return_type_save):
+    """make the api call and return the return value"""
+    if (not method["is_virtual"]):
+        result += f"    api_core.godot_method_bind_ptrcall(bind_{obj['name'].lower()}_{method['name']}," \
+                  f"self.godot_owner,{'args' if len(method['arguments']) > 0 else 'NULL'},{'&ret' if return_type != 'void' else 'NULL'})\n"
+    if return_type != "void" and not return_type in objects and not return_type_save.startswith("Pool"):
+        if ("." in return_type):
+            return_type = return_type
+        if (return_type in objects and return_type_save not in types):
+            return_type = "godot_object"
+
+        result += f"    return {return_type_save + '.new_static(ret)' if return_type_save in types else 'ret'}\n\n"
+    elif not return_type_save.startswith("Pool") and return_type != "void":
+        result += f"    cdef {return_type} obj = {return_type}()\n"
+        result += f"    obj.set_godot_owner(ret)\n"
+        result += f"    return obj\n"
+    return result
+
+
 def generate_method_bindings(obj):
+    """Function to create the function calls, which contain calls to the godot apis"""
     result = "\n##################################Generated method bindings#########################################\n"
     result += f"cdef godot_method_bind *bind_{obj['name']}\n"
     for method in obj["methods"]:
@@ -117,6 +151,7 @@ def generate_method_bindings(obj):
 
 
 def generate_classes(obj):
+    """function to generate the godot class for the given object"""
     result = ""
     import_string = ""
     if (obj["base_class"] != ""):
@@ -136,7 +171,7 @@ def generate_classes(obj):
     result += results[0]
     import_string = results[1]
 
-    pxd_file = generate_pxd(obj["name"], obj["base_class"], obj)
+    pxd_file = generate_pxd(obj["name"],  obj)
     return import_string, result, pxd_file
 
 
@@ -152,26 +187,9 @@ def generate_enums(class_, obj):
     return result
 
 
-def generate_pxd(class_, base_class, obj):
+def generate_pxd(class_, obj):
 
     string_to_write = "\n"
-    # if(class_ == "Object"):
-    #    string_to_write = (f"""
-    # cdef class Object(Wrapper):
-    #    pass\n""")
-    #    else:
-    #        if(base_class != ""):
-    #            string_to_write = (f"""
-
-    # cdef class {class_}({base_class}):
-    #    pass\n""")
-    #        else:
-    #            string_to_write = (f"""
-
-    # cdef class {class_}(Wrapper):
-    #    pass\n""")
-    #    file =""
-
     string_to_write += (generate_enums(class_, obj))
     return string_to_write
 
@@ -224,7 +242,8 @@ main_string = ""
 import_string = ""
 
 
-def build(test=False):
+def build():
+    """function to start the generation of the of the godot classes"""
     init_methods_string = "def init_method_bindings():\n"
     register_types_string = "cdef register_types():\n"
 
