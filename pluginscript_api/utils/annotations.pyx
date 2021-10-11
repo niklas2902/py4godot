@@ -4,12 +4,11 @@ from pluginscript_api.description_classes.MethodDescription import MethodDescrip
 from pluginscript_api.description_classes.PropertyDescription import PropertyDescription
 import inspect
 
-
+"""annotations used to define all the godot members"""
 methods = []
 classes = []
 properties = []
 
-#TODO: look for methods to improve behavior (cdef reset?)
 def reset():
     global methods, classes, properties
     methods.clear()

@@ -12,7 +12,6 @@ main.build()
 
 def cythonize_files():
     module = cythonize('core/*/*.pyx', language_level=3)
-    # module += cythonize("classes/*.pyx", language_level=3, nthreads=8)
     module += cythonize("classes/*.pyx", language_level=3)
     module += cythonize("utils/*.pyx", language_level=3)
     module += cythonize("godot_api/*.pyx", language_level=3)
@@ -23,7 +22,6 @@ def cythonize_files():
 def get_compiler():
     res = subprocess.run("vcvarsall", shell=True,stdout=subprocess.DEVNULL,
     stderr=subprocess.STDOUT)
-    print(res)
     if(res.returncode == 0):
         return "msvc"
 

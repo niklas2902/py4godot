@@ -11,10 +11,6 @@ cdef extern from "binding.h":
 
     cdef const godot_gdnative_core_api_struct *api_core;
 
-    void hello(const char *name)
-    godot_variant simple_get_data(godot_object *p_instance, void *p_method_data, void *p_user_data, int p_num_args, godot_variant **p_args)
-
-
     ctypedef enum godot_error :
         GODOT_OK = 0
         GODOT_FAILED= 1

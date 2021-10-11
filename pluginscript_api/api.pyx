@@ -16,6 +16,8 @@ from godot_api.binding_external cimport *
 
 from pluginscript_api.utils.annotations import methods, classes, properties, reset
 
+"""This class contains all the functions, thath are needed to crate a pluginscript"""
+
 
 cdef godot_dictionary dictionary
 cdef api set_api_core_pluginscript(const godot_gdnative_core_api_struct* core):
@@ -179,8 +181,6 @@ cdef void create_empty_manifest(godot_pluginscript_script_manifest* manifest):
 cdef api void notification_pluginscript_instance(godot_pluginscript_instance_data *p_data,
 int p_notification) with gil:
     pass
-    #print("\n#####################################################notification_instance###############################");
-    #print(p_notification)
 
 cdef unicode get_python_string_from_w_string(const godot_string* string):
     cdef const wchar_t* c_string = api_core.godot_string_wide_str(string)

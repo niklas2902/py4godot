@@ -30,7 +30,8 @@ from core.vector2.Vector2 cimport Vector2
 from godot_api.binding_external cimport *
 from classes.generated import *
 
-type_hint_map = {int: GODOT_PROPERTY_HINT_RANGE, SpriteFrames:GODOT_PROPERTY_HINT_SPRITE_FRAME,
+type_hint_map = {
+int: GODOT_PROPERTY_HINT_RANGE, SpriteFrames:GODOT_PROPERTY_HINT_SPRITE_FRAME,
 TextFile:GODOT_PROPERTY_HINT_FILE, Resource:GODOT_PROPERTY_HINT_RESOURCE_TYPE,
 String: GODOT_PROPERTY_HINT_TYPE_STRING,
 Vector3:GODOT_PROPERTY_HINT_METHOD_OF_VARIANT_TYPE,
@@ -68,6 +69,7 @@ def transform_type(type_):
         return type_variant_type_map[type_]
     return
 class PropertyDescription:
+    """"Description class for the properties, a gdclass can have"""
     def __init__(self, name,type_, hint, hint_string, usage, default_value, rset_mode):
         self.name = name
         self.type_ = transform_type(type_)
