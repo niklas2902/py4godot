@@ -11,8 +11,8 @@ from utils.Wrapper cimport Wrapper
 from cpython cimport Py_INCREF, Py_DECREF, PyObject
 cimport core.variant.Variant as CVariant
 from cpython.mem cimport PyMem_Malloc, PyMem_Realloc, PyMem_Free
-from godot_api.binding cimport *
-from godot_api.binding_external cimport *
+from godot_bindings.binding cimport *
+from godot_bindings.binding_external cimport *
 
 from pluginscript_api.utils.annotations import methods, classes, properties, reset
 

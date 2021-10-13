@@ -4,10 +4,10 @@
 {
     "distutils": {
         "depends": [
-            "godot_api\\binding.h"
+            "godot_bindings\\binding.h"
         ],
         "include_dirs": [
-            ".\\godot_api"
+            ".\\godot_bindings"
         ],
         "name": "classes.classes",
         "sources": [
@@ -6682,7 +6682,7 @@ enum __pyx_t_7classes_9generated_XMLParser_NodeType {
 typedef enum __pyx_t_7classes_9generated_XMLParser_NodeType __pyx_t_7classes_9generated_XMLParser_NodeType;
 
 /* "utils/Wrapper.pxd":2
- * from godot_api.binding cimport *
+ * from godot_bindings.binding cimport *
  * cdef class Wrapper(object):             # <<<<<<<<<<<<<<
  *     cdef godot_object *godot_owner
  * 
@@ -7021,9 +7021,9 @@ static PyTypeObject *__pyx_ptype_7cpython_4type_type = 0;
 
 /* Module declarations from 'cpython.ref' */
 
-/* Module declarations from 'godot_api.binding' */
+/* Module declarations from 'godot_bindings.binding' */
 
-/* Module declarations from 'godot_api.binding_external' */
+/* Module declarations from 'godot_bindings.binding_external' */
 
 /* Module declarations from 'utils.Wrapper' */
 static PyTypeObject *__pyx_ptype_5utils_7Wrapper_Wrapper = 0;
@@ -7078,7 +7078,7 @@ static PyObject *__pyx_tuple__4;
 /* Late includes */
 
 /* "classes/classes.pyx":5
- * from godot_api.binding_external cimport *
+ * from godot_bindings.binding_external cimport *
  * 
  * cdef api set_native_script_classes(godot_gdnative_ext_nativescript_1_1_api_struct* api):             # <<<<<<<<<<<<<<
  *     print("\n\n######################set_api##############################\n\n")
@@ -7117,7 +7117,7 @@ static PyObject *__pyx_f_7classes_7classes_set_native_script_classes(struct godo
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
   /* "classes/classes.pyx":5
- * from godot_api.binding_external cimport *
+ * from godot_bindings.binding_external cimport *
  * 
  * cdef api set_native_script_classes(godot_gdnative_ext_nativescript_1_1_api_struct* api):             # <<<<<<<<<<<<<<
  *     print("\n\n######################set_api##############################\n\n")
@@ -7773,7 +7773,7 @@ if (!__Pyx_RefNanny) {
   /* "classes/classes.pyx":2
  * cimport classes.generated as c_generated
  * import classes.generated             # <<<<<<<<<<<<<<
- * from godot_api.binding_external cimport *
+ * from godot_bindings.binding_external cimport *
  * 
  */
   __pyx_t_1 = __Pyx_Import(__pyx_n_s_classes_generated, 0, 0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2, __pyx_L1_error)
@@ -7784,7 +7784,7 @@ if (!__Pyx_RefNanny) {
   /* "classes/classes.pyx":1
  * cimport classes.generated as c_generated             # <<<<<<<<<<<<<<
  * import classes.generated
- * from godot_api.binding_external cimport *
+ * from godot_bindings.binding_external cimport *
  */
   __pyx_t_1 = __Pyx_PyDict_NewPresized(0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 1, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);

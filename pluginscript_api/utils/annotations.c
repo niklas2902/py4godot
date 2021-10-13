@@ -3,12 +3,7 @@
 /* BEGIN: Cython Metadata
 {
     "distutils": {
-        "depends": [
-            "godot_api\\binding.h"
-        ],
-        "include_dirs": [
-            ".\\godot_api"
-        ],
+        "depends": [],
         "name": "pluginscript_api.utils.annotations",
         "sources": [
             "pluginscript_api\\utils\\annotations.pyx"
@@ -1510,7 +1505,7 @@ static PyTypeObject *__pyx_ptype_7cpython_4type_type = 0;
 
 /* Module declarations from 'cpython.ref' */
 
-/* Module declarations from 'godot_api.binding' */
+/* Module declarations from 'godot_bindings.binding' */
 
 /* Module declarations from 'core.dictionary.dictionary_binding' */
 
@@ -1522,7 +1517,7 @@ static PyTypeObject *__pyx_ptype_4core_10dictionary_10Dictionary_Dictionary = 0;
 /* Module declarations from 'core.variant.Variant' */
 static PyTypeObject *__pyx_ptype_4core_7variant_7Variant_Variant = 0;
 
-/* Module declarations from 'godot_api.binding_external' */
+/* Module declarations from 'godot_bindings.binding_external' */
 
 /* Module declarations from 'pluginscript_api.utils.annotations' */
 static PyTypeObject *__pyx_ptype_16pluginscript_api_5utils_11annotations___pyx_scope_struct__gdproperty = 0;
@@ -3502,7 +3497,7 @@ if (!__Pyx_RefNanny) {
 
   /* "pluginscript_api/utils/annotations.pyx":3
  * from core.variant.Variant cimport *
- * from godot_api.binding_external cimport *
+ * from godot_bindings.binding_external cimport *
  * from pluginscript_api.description_classes.MethodDescription import MethodDescription             # <<<<<<<<<<<<<<
  * from pluginscript_api.description_classes.PropertyDescription import PropertyDescription
  * import inspect
@@ -3522,7 +3517,7 @@ if (!__Pyx_RefNanny) {
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
   /* "pluginscript_api/utils/annotations.pyx":4
- * from godot_api.binding_external cimport *
+ * from godot_bindings.binding_external cimport *
  * from pluginscript_api.description_classes.MethodDescription import MethodDescription
  * from pluginscript_api.description_classes.PropertyDescription import PropertyDescription             # <<<<<<<<<<<<<<
  * import inspect
@@ -3640,7 +3635,7 @@ if (!__Pyx_RefNanny) {
 
   /* "pluginscript_api/utils/annotations.pyx":1
  * from core.variant.Variant cimport *             # <<<<<<<<<<<<<<
- * from godot_api.binding_external cimport *
+ * from godot_bindings.binding_external cimport *
  * from pluginscript_api.description_classes.MethodDescription import MethodDescription
  */
   __pyx_t_1 = __Pyx_PyDict_NewPresized(0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 1, __pyx_L1_error)

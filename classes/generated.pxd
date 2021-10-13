@@ -1,5 +1,5 @@
 from enum import *
-from godot_api.binding_external cimport *
+from godot_bindings.binding_external cimport *
 from utils.Wrapper cimport *
 
 

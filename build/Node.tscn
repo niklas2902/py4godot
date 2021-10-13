@@ -12,6 +12,7 @@ __meta__ = {
 "_editor_description_": "test"
 }
 pos = Vector3( 2, 2, 3 )
+vel = 70
 
 [node name="CSGMesh" type="CSGMesh" parent="Spatial"]
 mesh = SubResource( 1 )

@@ -7,8 +7,8 @@ reloadable=true
 
 [entry]
 
-Windows.64="res://addons/godot_api/main.pyd"
+Windows.64="res://addons/godot_bindings/main.pyd"
 
 [dependencies]
 
-Windows.64=[ "res://addons/godot_api/python39.dll" ]
+Windows.64=[ "res://addons/godot_bindings/python39.dll" ]

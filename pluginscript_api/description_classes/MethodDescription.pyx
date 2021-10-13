@@ -1,4 +1,4 @@
-from godot_api.binding_external cimport *
+from godot_bindings.binding_external cimport *
 from classes.generated import *
 from core.dictionary.Dictionary import *
 from core.variant.Variant import *
@@ -17,6 +17,7 @@ from pluginscript_api.description_classes.PropertyDescription import *
 #}
 
 class MethodDescription:
+    """"Description class for the methods, a gdclass can have"""
     def __init__(self, name, args,return_, flags, rpc_mode, default_args=[]):
         self.name = name
         self.args = args

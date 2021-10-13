@@ -3,12 +3,7 @@
 /* BEGIN: Cython Metadata
 {
     "distutils": {
-        "depends": [
-            "godot_api\\binding.h"
-        ],
-        "include_dirs": [
-            ".\\godot_api"
-        ],
+        "depends": [],
         "name": "pluginscript_api.api",
         "sources": [
             "pluginscript_api\\api.pyx"
@@ -853,7 +848,7 @@ static const char *__pyx_f[] = {
   "utils\\Wrapper.pxd",
   "core\\dictionary\\Dictionary.pxd",
   "core\\variant\\Variant.pxd",
-  "godot_api\\binding_external.pxd",
+  "godot_bindings\\binding_external.pxd",
   "type.pxd",
   "bool.pxd",
   "complex.pxd",
@@ -998,7 +993,7 @@ struct __pyx_obj_4core_6string_6String_String {
 
 
 /* "utils/Wrapper.pxd":2
- * from godot_api.binding cimport *
+ * from godot_bindings.binding cimport *
  * cdef class Wrapper(object):             # <<<<<<<<<<<<<<
  *     cdef godot_object *godot_owner
  * 
@@ -1091,7 +1086,7 @@ static CYTHON_INLINE struct __pyx_obj_4core_6string_6String_String *__pyx_f_4cor
 
 
 /* "utils/Wrapper.pxd":2
- * from godot_api.binding cimport *
+ * from godot_bindings.binding cimport *
  * cdef class Wrapper(object):             # <<<<<<<<<<<<<<
  *     cdef godot_object *godot_owner
  * 
@@ -1677,7 +1672,7 @@ static PyTypeObject *__pyx_ptype_7cpython_7complex_complex = 0;
 
 /* Module declarations from 'cpython.ref' */
 
-/* Module declarations from 'godot_api.binding' */
+/* Module declarations from 'godot_bindings.binding' */
 
 /* Module declarations from 'core.array.array_binding' */
 
@@ -1707,7 +1702,7 @@ static PyTypeObject *__pyx_ptype_4core_10dictionary_10Dictionary_Dictionary = 0;
 /* Module declarations from 'core.variant.Variant' */
 static PyTypeObject *__pyx_ptype_4core_7variant_7Variant_Variant = 0;
 
-/* Module declarations from 'godot_api.binding_external' */
+/* Module declarations from 'godot_bindings.binding_external' */
 
 /* Module declarations from 'pluginscript_api.api' */
 static godot_dictionary __pyx_v_16pluginscript_api_3api_dictionary;
@@ -5097,7 +5092,7 @@ if (!__Pyx_RefNanny) {
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
   /* "pluginscript_api/api.pyx":17
- * from godot_api.binding_external cimport *
+ * from godot_bindings.binding_external cimport *
  * 
  * from pluginscript_api.utils.annotations import methods, classes, properties, reset             # <<<<<<<<<<<<<<
  * 

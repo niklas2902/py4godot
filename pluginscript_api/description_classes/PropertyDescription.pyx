@@ -27,7 +27,7 @@ from core.rid.RID cimport RID
 from core.transform.Transform cimport Transform
 from core.transform.Transform2D cimport Transform2D
 from core.vector2.Vector2 cimport Vector2
-from godot_api.binding_external cimport *
+from godot_bindings.binding_external cimport *
 from classes.generated import *
 
 type_hint_map = {
@@ -69,7 +69,7 @@ def transform_type(type_):
         return type_variant_type_map[type_]
     return
 class PropertyDescription:
-    """"Description class for the properties, a gdclass can have"""
+    """"Description class for the properties, a gdclass can have and which can be found in the editor"""
     def __init__(self, name,type_, hint, hint_string, usage, default_value, rset_mode):
         self.name = name
         self.type_ = transform_type(type_)

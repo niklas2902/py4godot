@@ -1,4 +1,4 @@
-from godot_api.binding cimport *
+from godot_bindings.binding cimport *
 cdef class Wrapper(object):
     cdef godot_object *godot_owner
 

@@ -1,5 +1,5 @@
 from core.variant.Variant cimport *
-from godot_api.binding_external cimport *
+from godot_bindings.binding_external cimport *
 from pluginscript_api.description_classes.MethodDescription import MethodDescription
 from pluginscript_api.description_classes.PropertyDescription import PropertyDescription
 import inspect

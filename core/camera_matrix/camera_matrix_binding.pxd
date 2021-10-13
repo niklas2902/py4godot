@@ -1,5 +1,4 @@
-from godot_api.binding cimport *
-
+from godot_bindigns.binding cimport *
 
 cdef extern from "binding.h":
     ctypedef struct godot_basis:

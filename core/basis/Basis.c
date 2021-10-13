@@ -3,12 +3,7 @@
 /* BEGIN: Cython Metadata
 {
     "distutils": {
-        "depends": [
-            "godot_api\\binding.h"
-        ],
-        "include_dirs": [
-            ".\\godot_api"
-        ],
+        "depends": [],
         "name": "core.basis.Basis",
         "sources": [
             "core\\basis\\Basis.pyx"
@@ -1380,7 +1375,7 @@ static PyTypeObject *__pyx_ptype_7cpython_4type_type = 0;
 
 /* Module declarations from 'cpython.ref' */
 
-/* Module declarations from 'godot_api.binding' */
+/* Module declarations from 'godot_bindings.binding' */
 
 /* Module declarations from 'core.basis.basis_binding' */
 

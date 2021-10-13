@@ -3,12 +3,7 @@
 /* BEGIN: Cython Metadata
 {
     "distutils": {
-        "depends": [
-            "godot_api\\binding.h"
-        ],
-        "include_dirs": [
-            ".\\godot_api"
-        ],
+        "depends": [],
         "name": "pluginscript_api.description_classes.PropertyDescription",
         "sources": [
             "pluginscript_api\\description_classes\\PropertyDescription.pyx"
@@ -1998,7 +1993,7 @@ static PyTypeObject *__pyx_ptype_7cpython_4type_type = 0;
 
 /* Module declarations from 'cpython.ref' */
 
-/* Module declarations from 'godot_api.binding' */
+/* Module declarations from 'godot_bindings.binding' */
 
 /* Module declarations from 'core.dictionary.dictionary_binding' */
 
@@ -2076,7 +2071,7 @@ static PyTypeObject *__pyx_ptype_4core_9transform_11Transform2D_Transform2D = 0;
 /* Module declarations from 'core.vector2.Vector2' */
 static PyTypeObject *__pyx_ptype_4core_7vector2_7Vector2_Vector2 = 0;
 
-/* Module declarations from 'godot_api.binding_external' */
+/* Module declarations from 'godot_bindings.binding_external' */
 
 /* Module declarations from 'pluginscript_api.description_classes.PropertyDescription' */
 #define __Pyx_MODULE_NAME "pluginscript_api.description_classes.PropertyDescription"
@@ -2124,7 +2119,7 @@ static const char __pyx_k_PropertyDescription[] = "PropertyDescription";
 static const char __pyx_k_type_variant_type_map[] = "type_variant_type_map";
 static const char __pyx_k_PropertyDescription___init[] = "PropertyDescription.__init__";
 static const char __pyx_k_PropertyDescription_to_dict[] = "PropertyDescription.to_dict";
-static const char __pyx_k_Description_class_for_the_prope[] = "\"Description class for the properties, a gdclass can have";
+static const char __pyx_k_Description_class_for_the_prope[] = "\"Description class for the properties, a gdclass can have and which can be found in the editor";
 static const char __pyx_k_pluginscript_api_description_cla[] = "pluginscript_api\\description_classes\\PropertyDescription.pyx";
 static const char __pyx_k_pluginscript_api_description_cla_2[] = "pluginscript_api.description_classes.PropertyDescription";
 static PyObject *__pyx_kp_s_Description_class_for_the_prope;
@@ -2275,7 +2270,7 @@ static PyObject *__pyx_pf_16pluginscript_api_19description_classes_19PropertyDes
  *         return type_variant_type_map[type_]
  *     return             # <<<<<<<<<<<<<<
  * class PropertyDescription:
- *     """"Description class for the properties, a gdclass can have"""
+ *     """"Description class for the properties, a gdclass can have and which can be found in the editor"""
  */
   __Pyx_XDECREF(__pyx_r);
   __pyx_r = Py_None; __Pyx_INCREF(Py_None);
@@ -2303,7 +2298,7 @@ static PyObject *__pyx_pf_16pluginscript_api_19description_classes_19PropertyDes
 
 /* "pluginscript_api/description_classes/PropertyDescription.pyx":73
  * class PropertyDescription:
- *     """"Description class for the properties, a gdclass can have"""
+ *     """"Description class for the properties, a gdclass can have and which can be found in the editor"""
  *     def __init__(self, name,type_, hint, hint_string, usage, default_value, rset_mode):             # <<<<<<<<<<<<<<
  *         self.name = name
  *         self.type_ = transform_type(type_)
@@ -2454,7 +2449,7 @@ static PyObject *__pyx_pf_16pluginscript_api_19description_classes_19PropertyDes
   __Pyx_RefNannySetupContext("__init__", 0);
 
   /* "pluginscript_api/description_classes/PropertyDescription.pyx":74
- *     """"Description class for the properties, a gdclass can have"""
+ *     """"Description class for the properties, a gdclass can have and which can be found in the editor"""
  *     def __init__(self, name,type_, hint, hint_string, usage, default_value, rset_mode):
  *         self.name = name             # <<<<<<<<<<<<<<
  *         self.type_ = transform_type(type_)
@@ -2611,7 +2606,7 @@ static PyObject *__pyx_pf_16pluginscript_api_19description_classes_19PropertyDes
 
   /* "pluginscript_api/description_classes/PropertyDescription.pyx":73
  * class PropertyDescription:
- *     """"Description class for the properties, a gdclass can have"""
+ *     """"Description class for the properties, a gdclass can have and which can be found in the editor"""
  *     def __init__(self, name,type_, hint, hint_string, usage, default_value, rset_mode):             # <<<<<<<<<<<<<<
  *         self.name = name
  *         self.type_ = transform_type(type_)
@@ -5312,7 +5307,7 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
 
   /* "pluginscript_api/description_classes/PropertyDescription.pyx":73
  * class PropertyDescription:
- *     """"Description class for the properties, a gdclass can have"""
+ *     """"Description class for the properties, a gdclass can have and which can be found in the editor"""
  *     def __init__(self, name,type_, hint, hint_string, usage, default_value, rset_mode):             # <<<<<<<<<<<<<<
  *         self.name = name
  *         self.type_ = transform_type(type_)
@@ -5730,7 +5725,7 @@ if (!__Pyx_RefNanny) {
 
   /* "pluginscript_api/description_classes/PropertyDescription.pyx":31
  * from core.vector2.Vector2 cimport Vector2
- * from godot_api.binding_external cimport *
+ * from godot_bindings.binding_external cimport *
  * from classes.generated import *             # <<<<<<<<<<<<<<
  * 
  * type_hint_map = {
@@ -6123,7 +6118,7 @@ if (!__Pyx_RefNanny) {
  *         return type_variant_type_map[type_]
  *     return
  * class PropertyDescription:             # <<<<<<<<<<<<<<
- *     """"Description class for the properties, a gdclass can have"""
+ *     """"Description class for the properties, a gdclass can have and which can be found in the editor"""
  *     def __init__(self, name,type_, hint, hint_string, usage, default_value, rset_mode):
  */
   __pyx_t_2 = __Pyx_Py3MetaclassPrepare((PyObject *) NULL, __pyx_empty_tuple, __pyx_n_s_PropertyDescription, __pyx_n_s_PropertyDescription, (PyObject *) NULL, __pyx_n_s_pluginscript_api_description_cla_2, __pyx_kp_s_Description_class_for_the_prope); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 71, __pyx_L1_error)
@@ -6131,7 +6126,7 @@ if (!__Pyx_RefNanny) {
 
   /* "pluginscript_api/description_classes/PropertyDescription.pyx":73
  * class PropertyDescription:
- *     """"Description class for the properties, a gdclass can have"""
+ *     """"Description class for the properties, a gdclass can have and which can be found in the editor"""
  *     def __init__(self, name,type_, hint, hint_string, usage, default_value, rset_mode):             # <<<<<<<<<<<<<<
  *         self.name = name
  *         self.type_ = transform_type(type_)
@@ -6157,7 +6152,7 @@ if (!__Pyx_RefNanny) {
  *         return type_variant_type_map[type_]
  *     return
  * class PropertyDescription:             # <<<<<<<<<<<<<<
- *     """"Description class for the properties, a gdclass can have"""
+ *     """"Description class for the properties, a gdclass can have and which can be found in the editor"""
  *     def __init__(self, name,type_, hint, hint_string, usage, default_value, rset_mode):
  */
   __pyx_t_3 = __Pyx_Py3ClassCreate(((PyObject*)&__Pyx_DefaultClassType), __pyx_n_s_PropertyDescription, __pyx_empty_tuple, __pyx_t_2, NULL, 0, 0); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 71, __pyx_L1_error)

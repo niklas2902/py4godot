@@ -1,4 +1,4 @@
-from godot_api.binding cimport *
+from godot_bindings.binding cimport *
 
 
 cdef extern from "binding.h":

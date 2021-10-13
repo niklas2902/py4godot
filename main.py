@@ -229,7 +229,7 @@ base_import_string += f"from core.variant.Variant cimport Variant_Operator\n"
 base_import_string += f"from core.vector3.Vector3 cimport Vector3_Axis\n"
 base_import_string += f"from core.color.Color cimport Color\n"
 base_import_string += f"from cython.operator cimport dereference\n"
-base_import_string += f"from godot_api.binding_external cimport *\n\n\n" \
+base_import_string += f"from godot_bindings.binding_external cimport *\n\n\n" \
                       f"cdef set_core(godot_gdnative_core_api_struct* core):\n" \
                       f"    global api_core\n" \
                       f"    api_core = core\n\n" \
@@ -257,7 +257,7 @@ def build():
 
     bindings_file = ""
     pxd_file = """from enum import *
-from godot_api.binding_external cimport *
+from godot_bindings.binding_external cimport *
 from utils.Wrapper cimport *"""
     set_ = set()
     # generate all the class files
