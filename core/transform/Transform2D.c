@@ -3,7 +3,12 @@
 /* BEGIN: Cython Metadata
 {
     "distutils": {
-        "depends": [],
+        "depends": [
+            "godot_bindings\\binding.h"
+        ],
+        "include_dirs": [
+            ".\\godot_bindings"
+        ],
         "name": "core.transform.Transform2D",
         "sources": [
             "core\\transform\\Transform2D.pyx"
@@ -628,9 +633,9 @@ static CYTHON_INLINE float __PYX_NAN() {
 #define __PYX_HAVE__core__transform__Transform2D
 #define __PYX_HAVE_API__core__transform__Transform2D
 /* Early includes */
-#include <stddef.h>
 #include <string.h>
 #include <stdio.h>
+#include <stddef.h>
 #include "binding.h"
 #ifdef _OPENMP
 #include <omp.h>
@@ -1333,10 +1338,6 @@ static CYTHON_INLINE struct __pyx_obj_4core_5plane_5Plane_Plane *__pyx_f_4core_5
 static CYTHON_INLINE void __pyx_f_4core_5rect2_5Rect2_5Rect2_set_native(struct __pyx_obj_4core_5rect2_5Rect2_Rect2 *__pyx_v_self, godot_rect2 __pyx_v__native); /* proto*/
 static CYTHON_INLINE struct __pyx_obj_4core_5rect2_5Rect2_Rect2 *__pyx_f_4core_5rect2_5Rect2_5Rect2_new_static(godot_rect2 __pyx_v__native); /* proto*/
 
-/* Module declarations from 'libcpp' */
-
-/* Module declarations from 'libc.stddef' */
-
 /* Module declarations from 'libc.string' */
 
 /* Module declarations from 'libc.stdio' */
@@ -1351,6 +1352,12 @@ static PyTypeObject *__pyx_ptype_7cpython_4type_type = 0;
 /* Module declarations from 'cpython.object' */
 
 /* Module declarations from 'cpython.ref' */
+
+/* Module declarations from 'libcpp' */
+
+/* Module declarations from 'libc.stddef' */
+
+/* Module declarations from 'godot_bindings.types' */
 
 /* Module declarations from 'godot_bindings.binding' */
 

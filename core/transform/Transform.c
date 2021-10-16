@@ -3,7 +3,12 @@
 /* BEGIN: Cython Metadata
 {
     "distutils": {
-        "depends": [],
+        "depends": [
+            "godot_bindings\\binding.h"
+        ],
+        "include_dirs": [
+            ".\\godot_bindings"
+        ],
         "name": "core.transform.Transform",
         "sources": [
             "core\\transform\\Transform.pyx"
@@ -628,9 +633,9 @@ static CYTHON_INLINE float __PYX_NAN() {
 #define __PYX_HAVE__core__transform__Transform
 #define __PYX_HAVE_API__core__transform__Transform
 /* Early includes */
-#include <stddef.h>
 #include <string.h>
 #include <stdio.h>
+#include <stddef.h>
 #include "binding.h"
 #ifdef _OPENMP
 #include <omp.h>
@@ -1395,10 +1400,6 @@ static CYTHON_INLINE void __pyx_f_4core_4aabb_4AABB_4AABB_new_static(godot_aabb 
 static CYTHON_INLINE void __pyx_f_4core_6string_6String_6String_set_native(struct __pyx_obj_4core_6string_6String_String *__pyx_v_self, godot_string __pyx_v__native); /* proto*/
 static CYTHON_INLINE struct __pyx_obj_4core_6string_6String_String *__pyx_f_4core_6string_6String_6String_new_static(godot_string __pyx_v__native); /* proto*/
 
-/* Module declarations from 'libcpp' */
-
-/* Module declarations from 'libc.stddef' */
-
 /* Module declarations from 'libc.string' */
 
 /* Module declarations from 'libc.stdio' */
@@ -1413,6 +1414,12 @@ static PyTypeObject *__pyx_ptype_7cpython_4type_type = 0;
 /* Module declarations from 'cpython.object' */
 
 /* Module declarations from 'cpython.ref' */
+
+/* Module declarations from 'libcpp' */
+
+/* Module declarations from 'libc.stddef' */
+
+/* Module declarations from 'godot_bindings.types' */
 
 /* Module declarations from 'godot_bindings.binding' */
 

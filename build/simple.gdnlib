@@ -11,4 +11,4 @@ Windows.64="res://addons/godot_bindings/main.pyd"
 
 [dependencies]
 
-Windows.64=[ "res://addons/godot_bindings/python39.dll" ]
+Windows.64=[ "res://addons/python-3.9.7-embed-amd64/python3.dll" ]

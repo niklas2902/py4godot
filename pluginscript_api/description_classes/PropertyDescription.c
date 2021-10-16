@@ -3,7 +3,12 @@
 /* BEGIN: Cython Metadata
 {
     "distutils": {
-        "depends": [],
+        "depends": [
+            "godot_bindings\\binding.h"
+        ],
+        "include_dirs": [
+            ".\\godot_bindings"
+        ],
         "name": "pluginscript_api.description_classes.PropertyDescription",
         "sources": [
             "pluginscript_api\\description_classes\\PropertyDescription.pyx"
@@ -628,9 +633,9 @@ static CYTHON_INLINE float __PYX_NAN() {
 #define __PYX_HAVE__pluginscript_api__description_classes__PropertyDescription
 #define __PYX_HAVE_API__pluginscript_api__description_classes__PropertyDescription
 /* Early includes */
-#include <stddef.h>
 #include <string.h>
 #include <stdio.h>
+#include <stddef.h>
 #include "binding.h"
 #ifdef _OPENMP
 #include <omp.h>
@@ -1974,10 +1979,6 @@ static CYTHON_INLINE struct __pyx_obj_4core_9transform_11Transform2D_Transform2D
 static CYTHON_INLINE void __pyx_f_4core_7vector2_7Vector2_7Vector2_set_native(struct __pyx_obj_4core_7vector2_7Vector2_Vector2 *__pyx_v_self, godot_vector2 __pyx_v__native); /* proto*/
 static CYTHON_INLINE struct __pyx_obj_4core_7vector2_7Vector2_Vector2 *__pyx_f_4core_7vector2_7Vector2_7Vector2_new_static(godot_vector2 __pyx_v__native); /* proto*/
 
-/* Module declarations from 'libcpp' */
-
-/* Module declarations from 'libc.stddef' */
-
 /* Module declarations from 'libc.string' */
 
 /* Module declarations from 'libc.stdio' */
@@ -1992,6 +1993,12 @@ static PyTypeObject *__pyx_ptype_7cpython_4type_type = 0;
 /* Module declarations from 'cpython.object' */
 
 /* Module declarations from 'cpython.ref' */
+
+/* Module declarations from 'libcpp' */
+
+/* Module declarations from 'libc.stddef' */
+
+/* Module declarations from 'godot_bindings.types' */
 
 /* Module declarations from 'godot_bindings.binding' */
 
@@ -2072,6 +2079,8 @@ static PyTypeObject *__pyx_ptype_4core_9transform_11Transform2D_Transform2D = 0;
 static PyTypeObject *__pyx_ptype_4core_7vector2_7Vector2_Vector2 = 0;
 
 /* Module declarations from 'godot_bindings.binding_external' */
+
+/* Module declarations from 'enums.enums' */
 
 /* Module declarations from 'pluginscript_api.description_classes.PropertyDescription' */
 #define __Pyx_MODULE_NAME "pluginscript_api.description_classes.PropertyDescription"
@@ -2191,7 +2200,7 @@ static PyObject *__pyx_codeobj__15;
 static PyObject *__pyx_codeobj__17;
 /* Late includes */
 
-/* "pluginscript_api/description_classes/PropertyDescription.pyx":67
+/* "pluginscript_api/description_classes/PropertyDescription.pyx":68
  * }
  * 
  * def transform_type(type_):             # <<<<<<<<<<<<<<
@@ -2225,21 +2234,21 @@ static PyObject *__pyx_pf_16pluginscript_api_19description_classes_19PropertyDes
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("transform_type", 0);
 
-  /* "pluginscript_api/description_classes/PropertyDescription.pyx":68
+  /* "pluginscript_api/description_classes/PropertyDescription.pyx":69
  * 
  * def transform_type(type_):
  *     if(type_ in type_variant_type_map):             # <<<<<<<<<<<<<<
  *         return type_variant_type_map[type_]
  *     return
  */
-  __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_n_s_type_variant_type_map); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 68, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_n_s_type_variant_type_map); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 69, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = (__Pyx_PySequence_ContainsTF(__pyx_v_type_, __pyx_t_1, Py_EQ)); if (unlikely(__pyx_t_2 < 0)) __PYX_ERR(0, 68, __pyx_L1_error)
+  __pyx_t_2 = (__Pyx_PySequence_ContainsTF(__pyx_v_type_, __pyx_t_1, Py_EQ)); if (unlikely(__pyx_t_2 < 0)) __PYX_ERR(0, 69, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_t_3 = (__pyx_t_2 != 0);
   if (__pyx_t_3) {
 
-    /* "pluginscript_api/description_classes/PropertyDescription.pyx":69
+    /* "pluginscript_api/description_classes/PropertyDescription.pyx":70
  * def transform_type(type_):
  *     if(type_ in type_variant_type_map):
  *         return type_variant_type_map[type_]             # <<<<<<<<<<<<<<
@@ -2247,16 +2256,16 @@ static PyObject *__pyx_pf_16pluginscript_api_19description_classes_19PropertyDes
  * class PropertyDescription:
  */
     __Pyx_XDECREF(__pyx_r);
-    __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_n_s_type_variant_type_map); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 69, __pyx_L1_error)
+    __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_n_s_type_variant_type_map); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 70, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
-    __pyx_t_4 = __Pyx_PyObject_GetItem(__pyx_t_1, __pyx_v_type_); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 69, __pyx_L1_error)
+    __pyx_t_4 = __Pyx_PyObject_GetItem(__pyx_t_1, __pyx_v_type_); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 70, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     __pyx_r = __pyx_t_4;
     __pyx_t_4 = 0;
     goto __pyx_L0;
 
-    /* "pluginscript_api/description_classes/PropertyDescription.pyx":68
+    /* "pluginscript_api/description_classes/PropertyDescription.pyx":69
  * 
  * def transform_type(type_):
  *     if(type_ in type_variant_type_map):             # <<<<<<<<<<<<<<
@@ -2265,7 +2274,7 @@ static PyObject *__pyx_pf_16pluginscript_api_19description_classes_19PropertyDes
  */
   }
 
-  /* "pluginscript_api/description_classes/PropertyDescription.pyx":70
+  /* "pluginscript_api/description_classes/PropertyDescription.pyx":71
  *     if(type_ in type_variant_type_map):
  *         return type_variant_type_map[type_]
  *     return             # <<<<<<<<<<<<<<
@@ -2276,7 +2285,7 @@ static PyObject *__pyx_pf_16pluginscript_api_19description_classes_19PropertyDes
   __pyx_r = Py_None; __Pyx_INCREF(Py_None);
   goto __pyx_L0;
 
-  /* "pluginscript_api/description_classes/PropertyDescription.pyx":67
+  /* "pluginscript_api/description_classes/PropertyDescription.pyx":68
  * }
  * 
  * def transform_type(type_):             # <<<<<<<<<<<<<<
@@ -2296,7 +2305,7 @@ static PyObject *__pyx_pf_16pluginscript_api_19description_classes_19PropertyDes
   return __pyx_r;
 }
 
-/* "pluginscript_api/description_classes/PropertyDescription.pyx":73
+/* "pluginscript_api/description_classes/PropertyDescription.pyx":74
  * class PropertyDescription:
  *     """"Description class for the properties, a gdclass can have and which can be found in the editor"""
  *     def __init__(self, name,type_, hint, hint_string, usage, default_value, rset_mode):             # <<<<<<<<<<<<<<
@@ -2357,47 +2366,47 @@ static PyObject *__pyx_pw_16pluginscript_api_19description_classes_19PropertyDes
         case  1:
         if (likely((values[1] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_name)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("__init__", 1, 8, 8, 1); __PYX_ERR(0, 73, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("__init__", 1, 8, 8, 1); __PYX_ERR(0, 74, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  2:
         if (likely((values[2] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_type)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("__init__", 1, 8, 8, 2); __PYX_ERR(0, 73, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("__init__", 1, 8, 8, 2); __PYX_ERR(0, 74, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  3:
         if (likely((values[3] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_hint)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("__init__", 1, 8, 8, 3); __PYX_ERR(0, 73, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("__init__", 1, 8, 8, 3); __PYX_ERR(0, 74, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  4:
         if (likely((values[4] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_hint_string)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("__init__", 1, 8, 8, 4); __PYX_ERR(0, 73, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("__init__", 1, 8, 8, 4); __PYX_ERR(0, 74, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  5:
         if (likely((values[5] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_usage)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("__init__", 1, 8, 8, 5); __PYX_ERR(0, 73, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("__init__", 1, 8, 8, 5); __PYX_ERR(0, 74, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  6:
         if (likely((values[6] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_default_value)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("__init__", 1, 8, 8, 6); __PYX_ERR(0, 73, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("__init__", 1, 8, 8, 6); __PYX_ERR(0, 74, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  7:
         if (likely((values[7] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_rset_mode)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("__init__", 1, 8, 8, 7); __PYX_ERR(0, 73, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("__init__", 1, 8, 8, 7); __PYX_ERR(0, 74, __pyx_L3_error)
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "__init__") < 0)) __PYX_ERR(0, 73, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "__init__") < 0)) __PYX_ERR(0, 74, __pyx_L3_error)
       }
     } else if (PyTuple_GET_SIZE(__pyx_args) != 8) {
       goto __pyx_L5_argtuple_error;
@@ -2422,7 +2431,7 @@ static PyObject *__pyx_pw_16pluginscript_api_19description_classes_19PropertyDes
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("__init__", 1, 8, 8, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 73, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("__init__", 1, 8, 8, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 74, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("pluginscript_api.description_classes.PropertyDescription.PropertyDescription.__init__", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
@@ -2448,23 +2457,23 @@ static PyObject *__pyx_pf_16pluginscript_api_19description_classes_19PropertyDes
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__init__", 0);
 
-  /* "pluginscript_api/description_classes/PropertyDescription.pyx":74
+  /* "pluginscript_api/description_classes/PropertyDescription.pyx":75
  *     """"Description class for the properties, a gdclass can have and which can be found in the editor"""
  *     def __init__(self, name,type_, hint, hint_string, usage, default_value, rset_mode):
  *         self.name = name             # <<<<<<<<<<<<<<
  *         self.type_ = transform_type(type_)
  *         self.hint = hint
  */
-  if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_name, __pyx_v_name) < 0) __PYX_ERR(0, 74, __pyx_L1_error)
+  if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_name, __pyx_v_name) < 0) __PYX_ERR(0, 75, __pyx_L1_error)
 
-  /* "pluginscript_api/description_classes/PropertyDescription.pyx":75
+  /* "pluginscript_api/description_classes/PropertyDescription.pyx":76
  *     def __init__(self, name,type_, hint, hint_string, usage, default_value, rset_mode):
  *         self.name = name
  *         self.type_ = transform_type(type_)             # <<<<<<<<<<<<<<
  *         self.hint = hint
  *         if(hint == None):
  */
-  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_transform_type); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 75, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_transform_type); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 76, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_t_3 = NULL;
   if (CYTHON_UNPACK_METHODS && unlikely(PyMethod_Check(__pyx_t_2))) {
@@ -2478,63 +2487,63 @@ static PyObject *__pyx_pf_16pluginscript_api_19description_classes_19PropertyDes
   }
   __pyx_t_1 = (__pyx_t_3) ? __Pyx_PyObject_Call2Args(__pyx_t_2, __pyx_t_3, __pyx_v_type_) : __Pyx_PyObject_CallOneArg(__pyx_t_2, __pyx_v_type_);
   __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
-  if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 75, __pyx_L1_error)
+  if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 76, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_type, __pyx_t_1) < 0) __PYX_ERR(0, 75, __pyx_L1_error)
+  if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_type, __pyx_t_1) < 0) __PYX_ERR(0, 76, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "pluginscript_api/description_classes/PropertyDescription.pyx":76
+  /* "pluginscript_api/description_classes/PropertyDescription.pyx":77
  *         self.name = name
  *         self.type_ = transform_type(type_)
  *         self.hint = hint             # <<<<<<<<<<<<<<
  *         if(hint == None):
  *             if(type_ in type_hint_map):
  */
-  if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_hint, __pyx_v_hint) < 0) __PYX_ERR(0, 76, __pyx_L1_error)
+  if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_hint, __pyx_v_hint) < 0) __PYX_ERR(0, 77, __pyx_L1_error)
 
-  /* "pluginscript_api/description_classes/PropertyDescription.pyx":77
+  /* "pluginscript_api/description_classes/PropertyDescription.pyx":78
  *         self.type_ = transform_type(type_)
  *         self.hint = hint
  *         if(hint == None):             # <<<<<<<<<<<<<<
  *             if(type_ in type_hint_map):
  *                 self.hint = type_hint_map[type_]
  */
-  __pyx_t_1 = PyObject_RichCompare(__pyx_v_hint, Py_None, Py_EQ); __Pyx_XGOTREF(__pyx_t_1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 77, __pyx_L1_error)
-  __pyx_t_4 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely(__pyx_t_4 < 0)) __PYX_ERR(0, 77, __pyx_L1_error)
+  __pyx_t_1 = PyObject_RichCompare(__pyx_v_hint, Py_None, Py_EQ); __Pyx_XGOTREF(__pyx_t_1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 78, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely(__pyx_t_4 < 0)) __PYX_ERR(0, 78, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   if (__pyx_t_4) {
 
-    /* "pluginscript_api/description_classes/PropertyDescription.pyx":78
+    /* "pluginscript_api/description_classes/PropertyDescription.pyx":79
  *         self.hint = hint
  *         if(hint == None):
  *             if(type_ in type_hint_map):             # <<<<<<<<<<<<<<
  *                 self.hint = type_hint_map[type_]
  *             else:
  */
-    __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_n_s_type_hint_map); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 78, __pyx_L1_error)
+    __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_n_s_type_hint_map); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 79, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
-    __pyx_t_4 = (__Pyx_PySequence_ContainsTF(__pyx_v_type_, __pyx_t_1, Py_EQ)); if (unlikely(__pyx_t_4 < 0)) __PYX_ERR(0, 78, __pyx_L1_error)
+    __pyx_t_4 = (__Pyx_PySequence_ContainsTF(__pyx_v_type_, __pyx_t_1, Py_EQ)); if (unlikely(__pyx_t_4 < 0)) __PYX_ERR(0, 79, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     __pyx_t_5 = (__pyx_t_4 != 0);
     if (__pyx_t_5) {
 
-      /* "pluginscript_api/description_classes/PropertyDescription.pyx":79
+      /* "pluginscript_api/description_classes/PropertyDescription.pyx":80
  *         if(hint == None):
  *             if(type_ in type_hint_map):
  *                 self.hint = type_hint_map[type_]             # <<<<<<<<<<<<<<
  *             else:
  *                 self.hint = GODOT_PROPERTY_HINT_NONE
  */
-      __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_n_s_type_hint_map); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 79, __pyx_L1_error)
+      __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_n_s_type_hint_map); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 80, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_1);
-      __pyx_t_2 = __Pyx_PyObject_GetItem(__pyx_t_1, __pyx_v_type_); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 79, __pyx_L1_error)
+      __pyx_t_2 = __Pyx_PyObject_GetItem(__pyx_t_1, __pyx_v_type_); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 80, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_2);
       __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-      if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_hint, __pyx_t_2) < 0) __PYX_ERR(0, 79, __pyx_L1_error)
+      if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_hint, __pyx_t_2) < 0) __PYX_ERR(0, 80, __pyx_L1_error)
       __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-      /* "pluginscript_api/description_classes/PropertyDescription.pyx":78
+      /* "pluginscript_api/description_classes/PropertyDescription.pyx":79
  *         self.hint = hint
  *         if(hint == None):
  *             if(type_ in type_hint_map):             # <<<<<<<<<<<<<<
@@ -2544,7 +2553,7 @@ static PyObject *__pyx_pf_16pluginscript_api_19description_classes_19PropertyDes
       goto __pyx_L4;
     }
 
-    /* "pluginscript_api/description_classes/PropertyDescription.pyx":81
+    /* "pluginscript_api/description_classes/PropertyDescription.pyx":82
  *                 self.hint = type_hint_map[type_]
  *             else:
  *                 self.hint = GODOT_PROPERTY_HINT_NONE             # <<<<<<<<<<<<<<
@@ -2552,14 +2561,14 @@ static PyObject *__pyx_pf_16pluginscript_api_19description_classes_19PropertyDes
  *         self.usage = usage
  */
     /*else*/ {
-      __pyx_t_2 = __Pyx_PyInt_From_godot_property_hint(GODOT_PROPERTY_HINT_NONE); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 81, __pyx_L1_error)
+      __pyx_t_2 = __Pyx_PyInt_From_godot_property_hint(GODOT_PROPERTY_HINT_NONE); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 82, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_2);
-      if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_hint, __pyx_t_2) < 0) __PYX_ERR(0, 81, __pyx_L1_error)
+      if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_hint, __pyx_t_2) < 0) __PYX_ERR(0, 82, __pyx_L1_error)
       __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
     }
     __pyx_L4:;
 
-    /* "pluginscript_api/description_classes/PropertyDescription.pyx":77
+    /* "pluginscript_api/description_classes/PropertyDescription.pyx":78
  *         self.type_ = transform_type(type_)
  *         self.hint = hint
  *         if(hint == None):             # <<<<<<<<<<<<<<
@@ -2568,43 +2577,43 @@ static PyObject *__pyx_pf_16pluginscript_api_19description_classes_19PropertyDes
  */
   }
 
-  /* "pluginscript_api/description_classes/PropertyDescription.pyx":82
+  /* "pluginscript_api/description_classes/PropertyDescription.pyx":83
  *             else:
  *                 self.hint = GODOT_PROPERTY_HINT_NONE
  *         self.hint_string = hint_string             # <<<<<<<<<<<<<<
  *         self.usage = usage
  *         self.default_value = default_value
  */
-  if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_hint_string, __pyx_v_hint_string) < 0) __PYX_ERR(0, 82, __pyx_L1_error)
+  if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_hint_string, __pyx_v_hint_string) < 0) __PYX_ERR(0, 83, __pyx_L1_error)
 
-  /* "pluginscript_api/description_classes/PropertyDescription.pyx":83
+  /* "pluginscript_api/description_classes/PropertyDescription.pyx":84
  *                 self.hint = GODOT_PROPERTY_HINT_NONE
  *         self.hint_string = hint_string
  *         self.usage = usage             # <<<<<<<<<<<<<<
  *         self.default_value = default_value
  *         self.rset_mode = rset_mode
  */
-  if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_usage, __pyx_v_usage) < 0) __PYX_ERR(0, 83, __pyx_L1_error)
+  if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_usage, __pyx_v_usage) < 0) __PYX_ERR(0, 84, __pyx_L1_error)
 
-  /* "pluginscript_api/description_classes/PropertyDescription.pyx":84
+  /* "pluginscript_api/description_classes/PropertyDescription.pyx":85
  *         self.hint_string = hint_string
  *         self.usage = usage
  *         self.default_value = default_value             # <<<<<<<<<<<<<<
  *         self.rset_mode = rset_mode
  *     def to_dict(self):
  */
-  if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_default_value, __pyx_v_default_value) < 0) __PYX_ERR(0, 84, __pyx_L1_error)
+  if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_default_value, __pyx_v_default_value) < 0) __PYX_ERR(0, 85, __pyx_L1_error)
 
-  /* "pluginscript_api/description_classes/PropertyDescription.pyx":85
+  /* "pluginscript_api/description_classes/PropertyDescription.pyx":86
  *         self.usage = usage
  *         self.default_value = default_value
  *         self.rset_mode = rset_mode             # <<<<<<<<<<<<<<
  *     def to_dict(self):
  *         d = Dictionary()
  */
-  if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_rset_mode, __pyx_v_rset_mode) < 0) __PYX_ERR(0, 85, __pyx_L1_error)
+  if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_rset_mode, __pyx_v_rset_mode) < 0) __PYX_ERR(0, 86, __pyx_L1_error)
 
-  /* "pluginscript_api/description_classes/PropertyDescription.pyx":73
+  /* "pluginscript_api/description_classes/PropertyDescription.pyx":74
  * class PropertyDescription:
  *     """"Description class for the properties, a gdclass can have and which can be found in the editor"""
  *     def __init__(self, name,type_, hint, hint_string, usage, default_value, rset_mode):             # <<<<<<<<<<<<<<
@@ -2627,7 +2636,7 @@ static PyObject *__pyx_pf_16pluginscript_api_19description_classes_19PropertyDes
   return __pyx_r;
 }
 
-/* "pluginscript_api/description_classes/PropertyDescription.pyx":86
+/* "pluginscript_api/description_classes/PropertyDescription.pyx":87
  *         self.default_value = default_value
  *         self.rset_mode = rset_mode
  *     def to_dict(self):             # <<<<<<<<<<<<<<
@@ -2665,38 +2674,38 @@ static PyObject *__pyx_pf_16pluginscript_api_19description_classes_19PropertyDes
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("to_dict", 0);
 
-  /* "pluginscript_api/description_classes/PropertyDescription.pyx":87
+  /* "pluginscript_api/description_classes/PropertyDescription.pyx":88
  *         self.rset_mode = rset_mode
  *     def to_dict(self):
  *         d = Dictionary()             # <<<<<<<<<<<<<<
  *         d.set(Variant(String("name")), Variant(String(self.name)))
  *         d.set(Variant(String("type")), Variant(self.type_))
  */
-  __pyx_t_1 = __Pyx_PyObject_CallNoArg(((PyObject *)__pyx_ptype_4core_10dictionary_10Dictionary_Dictionary)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 87, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_CallNoArg(((PyObject *)__pyx_ptype_4core_10dictionary_10Dictionary_Dictionary)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 88, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_v_d = ((struct __pyx_obj_4core_10dictionary_10Dictionary_Dictionary *)__pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "pluginscript_api/description_classes/PropertyDescription.pyx":88
+  /* "pluginscript_api/description_classes/PropertyDescription.pyx":89
  *     def to_dict(self):
  *         d = Dictionary()
  *         d.set(Variant(String("name")), Variant(String(self.name)))             # <<<<<<<<<<<<<<
  *         d.set(Variant(String("type")), Variant(self.type_))
  *         d.set(Variant(String("hint")), Variant(self.hint))
  */
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_d), __pyx_n_s_set); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 88, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_d), __pyx_n_s_set); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 89, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_3 = __Pyx_PyObject_Call(((PyObject *)__pyx_ptype_4core_6string_6String_String), __pyx_tuple_, NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 88, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_Call(((PyObject *)__pyx_ptype_4core_6string_6String_String), __pyx_tuple_, NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 89, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  __pyx_t_4 = __Pyx_PyObject_CallOneArg(((PyObject *)__pyx_ptype_4core_7variant_7Variant_Variant), __pyx_t_3); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 88, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyObject_CallOneArg(((PyObject *)__pyx_ptype_4core_7variant_7Variant_Variant), __pyx_t_3); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 89, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_name); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 88, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_name); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 89, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  __pyx_t_5 = __Pyx_PyObject_CallOneArg(((PyObject *)__pyx_ptype_4core_6string_6String_String), __pyx_t_3); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 88, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_PyObject_CallOneArg(((PyObject *)__pyx_ptype_4core_6string_6String_String), __pyx_t_3); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 89, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  __pyx_t_3 = __Pyx_PyObject_CallOneArg(((PyObject *)__pyx_ptype_4core_7variant_7Variant_Variant), __pyx_t_5); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 88, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_CallOneArg(((PyObject *)__pyx_ptype_4core_7variant_7Variant_Variant), __pyx_t_5); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 89, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
   __pyx_t_5 = NULL;
@@ -2714,7 +2723,7 @@ static PyObject *__pyx_pf_16pluginscript_api_19description_classes_19PropertyDes
   #if CYTHON_FAST_PYCALL
   if (PyFunction_Check(__pyx_t_2)) {
     PyObject *__pyx_temp[3] = {__pyx_t_5, __pyx_t_4, __pyx_t_3};
-    __pyx_t_1 = __Pyx_PyFunction_FastCall(__pyx_t_2, __pyx_temp+1-__pyx_t_6, 2+__pyx_t_6); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 88, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyFunction_FastCall(__pyx_t_2, __pyx_temp+1-__pyx_t_6, 2+__pyx_t_6); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 89, __pyx_L1_error)
     __Pyx_XDECREF(__pyx_t_5); __pyx_t_5 = 0;
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
@@ -2724,7 +2733,7 @@ static PyObject *__pyx_pf_16pluginscript_api_19description_classes_19PropertyDes
   #if CYTHON_FAST_PYCCALL
   if (__Pyx_PyFastCFunction_Check(__pyx_t_2)) {
     PyObject *__pyx_temp[3] = {__pyx_t_5, __pyx_t_4, __pyx_t_3};
-    __pyx_t_1 = __Pyx_PyCFunction_FastCall(__pyx_t_2, __pyx_temp+1-__pyx_t_6, 2+__pyx_t_6); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 88, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyCFunction_FastCall(__pyx_t_2, __pyx_temp+1-__pyx_t_6, 2+__pyx_t_6); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 89, __pyx_L1_error)
     __Pyx_XDECREF(__pyx_t_5); __pyx_t_5 = 0;
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
@@ -2732,7 +2741,7 @@ static PyObject *__pyx_pf_16pluginscript_api_19description_classes_19PropertyDes
   } else
   #endif
   {
-    __pyx_t_7 = PyTuple_New(2+__pyx_t_6); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 88, __pyx_L1_error)
+    __pyx_t_7 = PyTuple_New(2+__pyx_t_6); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 89, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_7);
     if (__pyx_t_5) {
       __Pyx_GIVEREF(__pyx_t_5); PyTuple_SET_ITEM(__pyx_t_7, 0, __pyx_t_5); __pyx_t_5 = NULL;
@@ -2743,30 +2752,30 @@ static PyObject *__pyx_pf_16pluginscript_api_19description_classes_19PropertyDes
     PyTuple_SET_ITEM(__pyx_t_7, 1+__pyx_t_6, __pyx_t_3);
     __pyx_t_4 = 0;
     __pyx_t_3 = 0;
-    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_t_7, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 88, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_t_7, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 89, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
   }
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "pluginscript_api/description_classes/PropertyDescription.pyx":89
+  /* "pluginscript_api/description_classes/PropertyDescription.pyx":90
  *         d = Dictionary()
  *         d.set(Variant(String("name")), Variant(String(self.name)))
  *         d.set(Variant(String("type")), Variant(self.type_))             # <<<<<<<<<<<<<<
  *         d.set(Variant(String("hint")), Variant(self.hint))
  *         d.set(Variant(String("hint_string")),Variant(self.hint_string))
  */
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_d), __pyx_n_s_set); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 89, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_d), __pyx_n_s_set); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 90, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_7 = __Pyx_PyObject_Call(((PyObject *)__pyx_ptype_4core_6string_6String_String), __pyx_tuple__2, NULL); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 89, __pyx_L1_error)
+  __pyx_t_7 = __Pyx_PyObject_Call(((PyObject *)__pyx_ptype_4core_6string_6String_String), __pyx_tuple__2, NULL); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 90, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
-  __pyx_t_3 = __Pyx_PyObject_CallOneArg(((PyObject *)__pyx_ptype_4core_7variant_7Variant_Variant), __pyx_t_7); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 89, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_CallOneArg(((PyObject *)__pyx_ptype_4core_7variant_7Variant_Variant), __pyx_t_7); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 90, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
-  __pyx_t_7 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_type); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 89, __pyx_L1_error)
+  __pyx_t_7 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_type); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 90, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
-  __pyx_t_4 = __Pyx_PyObject_CallOneArg(((PyObject *)__pyx_ptype_4core_7variant_7Variant_Variant), __pyx_t_7); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 89, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyObject_CallOneArg(((PyObject *)__pyx_ptype_4core_7variant_7Variant_Variant), __pyx_t_7); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 90, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
   __pyx_t_7 = NULL;
@@ -2784,7 +2793,7 @@ static PyObject *__pyx_pf_16pluginscript_api_19description_classes_19PropertyDes
   #if CYTHON_FAST_PYCALL
   if (PyFunction_Check(__pyx_t_2)) {
     PyObject *__pyx_temp[3] = {__pyx_t_7, __pyx_t_3, __pyx_t_4};
-    __pyx_t_1 = __Pyx_PyFunction_FastCall(__pyx_t_2, __pyx_temp+1-__pyx_t_6, 2+__pyx_t_6); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 89, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyFunction_FastCall(__pyx_t_2, __pyx_temp+1-__pyx_t_6, 2+__pyx_t_6); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 90, __pyx_L1_error)
     __Pyx_XDECREF(__pyx_t_7); __pyx_t_7 = 0;
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
@@ -2794,7 +2803,7 @@ static PyObject *__pyx_pf_16pluginscript_api_19description_classes_19PropertyDes
   #if CYTHON_FAST_PYCCALL
   if (__Pyx_PyFastCFunction_Check(__pyx_t_2)) {
     PyObject *__pyx_temp[3] = {__pyx_t_7, __pyx_t_3, __pyx_t_4};
-    __pyx_t_1 = __Pyx_PyCFunction_FastCall(__pyx_t_2, __pyx_temp+1-__pyx_t_6, 2+__pyx_t_6); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 89, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyCFunction_FastCall(__pyx_t_2, __pyx_temp+1-__pyx_t_6, 2+__pyx_t_6); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 90, __pyx_L1_error)
     __Pyx_XDECREF(__pyx_t_7); __pyx_t_7 = 0;
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
@@ -2802,7 +2811,7 @@ static PyObject *__pyx_pf_16pluginscript_api_19description_classes_19PropertyDes
   } else
   #endif
   {
-    __pyx_t_5 = PyTuple_New(2+__pyx_t_6); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 89, __pyx_L1_error)
+    __pyx_t_5 = PyTuple_New(2+__pyx_t_6); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 90, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_5);
     if (__pyx_t_7) {
       __Pyx_GIVEREF(__pyx_t_7); PyTuple_SET_ITEM(__pyx_t_5, 0, __pyx_t_7); __pyx_t_7 = NULL;
@@ -2813,30 +2822,30 @@ static PyObject *__pyx_pf_16pluginscript_api_19description_classes_19PropertyDes
     PyTuple_SET_ITEM(__pyx_t_5, 1+__pyx_t_6, __pyx_t_4);
     __pyx_t_3 = 0;
     __pyx_t_4 = 0;
-    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_t_5, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 89, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_t_5, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 90, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
   }
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "pluginscript_api/description_classes/PropertyDescription.pyx":90
+  /* "pluginscript_api/description_classes/PropertyDescription.pyx":91
  *         d.set(Variant(String("name")), Variant(String(self.name)))
  *         d.set(Variant(String("type")), Variant(self.type_))
  *         d.set(Variant(String("hint")), Variant(self.hint))             # <<<<<<<<<<<<<<
  *         d.set(Variant(String("hint_string")),Variant(self.hint_string))
  *         d.set(Variant(String("usage")), Variant(self.usage))
  */
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_d), __pyx_n_s_set); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 90, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_d), __pyx_n_s_set); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 91, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_5 = __Pyx_PyObject_Call(((PyObject *)__pyx_ptype_4core_6string_6String_String), __pyx_tuple__3, NULL); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 90, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_PyObject_Call(((PyObject *)__pyx_ptype_4core_6string_6String_String), __pyx_tuple__3, NULL); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 91, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
-  __pyx_t_4 = __Pyx_PyObject_CallOneArg(((PyObject *)__pyx_ptype_4core_7variant_7Variant_Variant), __pyx_t_5); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 90, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyObject_CallOneArg(((PyObject *)__pyx_ptype_4core_7variant_7Variant_Variant), __pyx_t_5); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 91, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-  __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_hint); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 90, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_hint); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 91, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
-  __pyx_t_3 = __Pyx_PyObject_CallOneArg(((PyObject *)__pyx_ptype_4core_7variant_7Variant_Variant), __pyx_t_5); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 90, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_CallOneArg(((PyObject *)__pyx_ptype_4core_7variant_7Variant_Variant), __pyx_t_5); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 91, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
   __pyx_t_5 = NULL;
@@ -2854,7 +2863,7 @@ static PyObject *__pyx_pf_16pluginscript_api_19description_classes_19PropertyDes
   #if CYTHON_FAST_PYCALL
   if (PyFunction_Check(__pyx_t_2)) {
     PyObject *__pyx_temp[3] = {__pyx_t_5, __pyx_t_4, __pyx_t_3};
-    __pyx_t_1 = __Pyx_PyFunction_FastCall(__pyx_t_2, __pyx_temp+1-__pyx_t_6, 2+__pyx_t_6); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 90, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyFunction_FastCall(__pyx_t_2, __pyx_temp+1-__pyx_t_6, 2+__pyx_t_6); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 91, __pyx_L1_error)
     __Pyx_XDECREF(__pyx_t_5); __pyx_t_5 = 0;
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
@@ -2864,7 +2873,7 @@ static PyObject *__pyx_pf_16pluginscript_api_19description_classes_19PropertyDes
   #if CYTHON_FAST_PYCCALL
   if (__Pyx_PyFastCFunction_Check(__pyx_t_2)) {
     PyObject *__pyx_temp[3] = {__pyx_t_5, __pyx_t_4, __pyx_t_3};
-    __pyx_t_1 = __Pyx_PyCFunction_FastCall(__pyx_t_2, __pyx_temp+1-__pyx_t_6, 2+__pyx_t_6); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 90, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyCFunction_FastCall(__pyx_t_2, __pyx_temp+1-__pyx_t_6, 2+__pyx_t_6); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 91, __pyx_L1_error)
     __Pyx_XDECREF(__pyx_t_5); __pyx_t_5 = 0;
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
@@ -2872,7 +2881,7 @@ static PyObject *__pyx_pf_16pluginscript_api_19description_classes_19PropertyDes
   } else
   #endif
   {
-    __pyx_t_7 = PyTuple_New(2+__pyx_t_6); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 90, __pyx_L1_error)
+    __pyx_t_7 = PyTuple_New(2+__pyx_t_6); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 91, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_7);
     if (__pyx_t_5) {
       __Pyx_GIVEREF(__pyx_t_5); PyTuple_SET_ITEM(__pyx_t_7, 0, __pyx_t_5); __pyx_t_5 = NULL;
@@ -2883,30 +2892,30 @@ static PyObject *__pyx_pf_16pluginscript_api_19description_classes_19PropertyDes
     PyTuple_SET_ITEM(__pyx_t_7, 1+__pyx_t_6, __pyx_t_3);
     __pyx_t_4 = 0;
     __pyx_t_3 = 0;
-    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_t_7, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 90, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_t_7, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 91, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
   }
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "pluginscript_api/description_classes/PropertyDescription.pyx":91
+  /* "pluginscript_api/description_classes/PropertyDescription.pyx":92
  *         d.set(Variant(String("type")), Variant(self.type_))
  *         d.set(Variant(String("hint")), Variant(self.hint))
  *         d.set(Variant(String("hint_string")),Variant(self.hint_string))             # <<<<<<<<<<<<<<
  *         d.set(Variant(String("usage")), Variant(self.usage))
  *         d.set(Variant(String("default_value")), Variant(self.default_value))
  */
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_d), __pyx_n_s_set); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 91, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_d), __pyx_n_s_set); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 92, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_7 = __Pyx_PyObject_Call(((PyObject *)__pyx_ptype_4core_6string_6String_String), __pyx_tuple__4, NULL); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 91, __pyx_L1_error)
+  __pyx_t_7 = __Pyx_PyObject_Call(((PyObject *)__pyx_ptype_4core_6string_6String_String), __pyx_tuple__4, NULL); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 92, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
-  __pyx_t_3 = __Pyx_PyObject_CallOneArg(((PyObject *)__pyx_ptype_4core_7variant_7Variant_Variant), __pyx_t_7); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 91, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_CallOneArg(((PyObject *)__pyx_ptype_4core_7variant_7Variant_Variant), __pyx_t_7); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 92, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
-  __pyx_t_7 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_hint_string); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 91, __pyx_L1_error)
+  __pyx_t_7 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_hint_string); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 92, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
-  __pyx_t_4 = __Pyx_PyObject_CallOneArg(((PyObject *)__pyx_ptype_4core_7variant_7Variant_Variant), __pyx_t_7); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 91, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyObject_CallOneArg(((PyObject *)__pyx_ptype_4core_7variant_7Variant_Variant), __pyx_t_7); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 92, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
   __pyx_t_7 = NULL;
@@ -2924,7 +2933,7 @@ static PyObject *__pyx_pf_16pluginscript_api_19description_classes_19PropertyDes
   #if CYTHON_FAST_PYCALL
   if (PyFunction_Check(__pyx_t_2)) {
     PyObject *__pyx_temp[3] = {__pyx_t_7, __pyx_t_3, __pyx_t_4};
-    __pyx_t_1 = __Pyx_PyFunction_FastCall(__pyx_t_2, __pyx_temp+1-__pyx_t_6, 2+__pyx_t_6); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 91, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyFunction_FastCall(__pyx_t_2, __pyx_temp+1-__pyx_t_6, 2+__pyx_t_6); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 92, __pyx_L1_error)
     __Pyx_XDECREF(__pyx_t_7); __pyx_t_7 = 0;
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
@@ -2934,7 +2943,7 @@ static PyObject *__pyx_pf_16pluginscript_api_19description_classes_19PropertyDes
   #if CYTHON_FAST_PYCCALL
   if (__Pyx_PyFastCFunction_Check(__pyx_t_2)) {
     PyObject *__pyx_temp[3] = {__pyx_t_7, __pyx_t_3, __pyx_t_4};
-    __pyx_t_1 = __Pyx_PyCFunction_FastCall(__pyx_t_2, __pyx_temp+1-__pyx_t_6, 2+__pyx_t_6); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 91, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyCFunction_FastCall(__pyx_t_2, __pyx_temp+1-__pyx_t_6, 2+__pyx_t_6); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 92, __pyx_L1_error)
     __Pyx_XDECREF(__pyx_t_7); __pyx_t_7 = 0;
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
@@ -2942,7 +2951,7 @@ static PyObject *__pyx_pf_16pluginscript_api_19description_classes_19PropertyDes
   } else
   #endif
   {
-    __pyx_t_5 = PyTuple_New(2+__pyx_t_6); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 91, __pyx_L1_error)
+    __pyx_t_5 = PyTuple_New(2+__pyx_t_6); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 92, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_5);
     if (__pyx_t_7) {
       __Pyx_GIVEREF(__pyx_t_7); PyTuple_SET_ITEM(__pyx_t_5, 0, __pyx_t_7); __pyx_t_7 = NULL;
@@ -2953,30 +2962,30 @@ static PyObject *__pyx_pf_16pluginscript_api_19description_classes_19PropertyDes
     PyTuple_SET_ITEM(__pyx_t_5, 1+__pyx_t_6, __pyx_t_4);
     __pyx_t_3 = 0;
     __pyx_t_4 = 0;
-    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_t_5, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 91, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_t_5, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 92, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
   }
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "pluginscript_api/description_classes/PropertyDescription.pyx":92
+  /* "pluginscript_api/description_classes/PropertyDescription.pyx":93
  *         d.set(Variant(String("hint")), Variant(self.hint))
  *         d.set(Variant(String("hint_string")),Variant(self.hint_string))
  *         d.set(Variant(String("usage")), Variant(self.usage))             # <<<<<<<<<<<<<<
  *         d.set(Variant(String("default_value")), Variant(self.default_value))
  *         d.set(Variant(String("rset_mode")), Variant(self.rset_mode))
  */
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_d), __pyx_n_s_set); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 92, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_d), __pyx_n_s_set); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 93, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_5 = __Pyx_PyObject_Call(((PyObject *)__pyx_ptype_4core_6string_6String_String), __pyx_tuple__5, NULL); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 92, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_PyObject_Call(((PyObject *)__pyx_ptype_4core_6string_6String_String), __pyx_tuple__5, NULL); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 93, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
-  __pyx_t_4 = __Pyx_PyObject_CallOneArg(((PyObject *)__pyx_ptype_4core_7variant_7Variant_Variant), __pyx_t_5); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 92, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyObject_CallOneArg(((PyObject *)__pyx_ptype_4core_7variant_7Variant_Variant), __pyx_t_5); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 93, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-  __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_usage); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 92, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_usage); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 93, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
-  __pyx_t_3 = __Pyx_PyObject_CallOneArg(((PyObject *)__pyx_ptype_4core_7variant_7Variant_Variant), __pyx_t_5); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 92, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_CallOneArg(((PyObject *)__pyx_ptype_4core_7variant_7Variant_Variant), __pyx_t_5); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 93, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
   __pyx_t_5 = NULL;
@@ -2994,7 +3003,7 @@ static PyObject *__pyx_pf_16pluginscript_api_19description_classes_19PropertyDes
   #if CYTHON_FAST_PYCALL
   if (PyFunction_Check(__pyx_t_2)) {
     PyObject *__pyx_temp[3] = {__pyx_t_5, __pyx_t_4, __pyx_t_3};
-    __pyx_t_1 = __Pyx_PyFunction_FastCall(__pyx_t_2, __pyx_temp+1-__pyx_t_6, 2+__pyx_t_6); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 92, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyFunction_FastCall(__pyx_t_2, __pyx_temp+1-__pyx_t_6, 2+__pyx_t_6); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 93, __pyx_L1_error)
     __Pyx_XDECREF(__pyx_t_5); __pyx_t_5 = 0;
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
@@ -3004,7 +3013,7 @@ static PyObject *__pyx_pf_16pluginscript_api_19description_classes_19PropertyDes
   #if CYTHON_FAST_PYCCALL
   if (__Pyx_PyFastCFunction_Check(__pyx_t_2)) {
     PyObject *__pyx_temp[3] = {__pyx_t_5, __pyx_t_4, __pyx_t_3};
-    __pyx_t_1 = __Pyx_PyCFunction_FastCall(__pyx_t_2, __pyx_temp+1-__pyx_t_6, 2+__pyx_t_6); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 92, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyCFunction_FastCall(__pyx_t_2, __pyx_temp+1-__pyx_t_6, 2+__pyx_t_6); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 93, __pyx_L1_error)
     __Pyx_XDECREF(__pyx_t_5); __pyx_t_5 = 0;
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
@@ -3012,7 +3021,7 @@ static PyObject *__pyx_pf_16pluginscript_api_19description_classes_19PropertyDes
   } else
   #endif
   {
-    __pyx_t_7 = PyTuple_New(2+__pyx_t_6); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 92, __pyx_L1_error)
+    __pyx_t_7 = PyTuple_New(2+__pyx_t_6); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 93, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_7);
     if (__pyx_t_5) {
       __Pyx_GIVEREF(__pyx_t_5); PyTuple_SET_ITEM(__pyx_t_7, 0, __pyx_t_5); __pyx_t_5 = NULL;
@@ -3023,30 +3032,30 @@ static PyObject *__pyx_pf_16pluginscript_api_19description_classes_19PropertyDes
     PyTuple_SET_ITEM(__pyx_t_7, 1+__pyx_t_6, __pyx_t_3);
     __pyx_t_4 = 0;
     __pyx_t_3 = 0;
-    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_t_7, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 92, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_t_7, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 93, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
   }
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "pluginscript_api/description_classes/PropertyDescription.pyx":93
+  /* "pluginscript_api/description_classes/PropertyDescription.pyx":94
  *         d.set(Variant(String("hint_string")),Variant(self.hint_string))
  *         d.set(Variant(String("usage")), Variant(self.usage))
  *         d.set(Variant(String("default_value")), Variant(self.default_value))             # <<<<<<<<<<<<<<
  *         d.set(Variant(String("rset_mode")), Variant(self.rset_mode))
  *         return d
  */
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_d), __pyx_n_s_set); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 93, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_d), __pyx_n_s_set); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 94, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_7 = __Pyx_PyObject_Call(((PyObject *)__pyx_ptype_4core_6string_6String_String), __pyx_tuple__6, NULL); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 93, __pyx_L1_error)
+  __pyx_t_7 = __Pyx_PyObject_Call(((PyObject *)__pyx_ptype_4core_6string_6String_String), __pyx_tuple__6, NULL); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 94, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
-  __pyx_t_3 = __Pyx_PyObject_CallOneArg(((PyObject *)__pyx_ptype_4core_7variant_7Variant_Variant), __pyx_t_7); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 93, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_CallOneArg(((PyObject *)__pyx_ptype_4core_7variant_7Variant_Variant), __pyx_t_7); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 94, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
-  __pyx_t_7 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_default_value); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 93, __pyx_L1_error)
+  __pyx_t_7 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_default_value); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 94, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
-  __pyx_t_4 = __Pyx_PyObject_CallOneArg(((PyObject *)__pyx_ptype_4core_7variant_7Variant_Variant), __pyx_t_7); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 93, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyObject_CallOneArg(((PyObject *)__pyx_ptype_4core_7variant_7Variant_Variant), __pyx_t_7); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 94, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
   __pyx_t_7 = NULL;
@@ -3064,7 +3073,7 @@ static PyObject *__pyx_pf_16pluginscript_api_19description_classes_19PropertyDes
   #if CYTHON_FAST_PYCALL
   if (PyFunction_Check(__pyx_t_2)) {
     PyObject *__pyx_temp[3] = {__pyx_t_7, __pyx_t_3, __pyx_t_4};
-    __pyx_t_1 = __Pyx_PyFunction_FastCall(__pyx_t_2, __pyx_temp+1-__pyx_t_6, 2+__pyx_t_6); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 93, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyFunction_FastCall(__pyx_t_2, __pyx_temp+1-__pyx_t_6, 2+__pyx_t_6); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 94, __pyx_L1_error)
     __Pyx_XDECREF(__pyx_t_7); __pyx_t_7 = 0;
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
@@ -3074,7 +3083,7 @@ static PyObject *__pyx_pf_16pluginscript_api_19description_classes_19PropertyDes
   #if CYTHON_FAST_PYCCALL
   if (__Pyx_PyFastCFunction_Check(__pyx_t_2)) {
     PyObject *__pyx_temp[3] = {__pyx_t_7, __pyx_t_3, __pyx_t_4};
-    __pyx_t_1 = __Pyx_PyCFunction_FastCall(__pyx_t_2, __pyx_temp+1-__pyx_t_6, 2+__pyx_t_6); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 93, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyCFunction_FastCall(__pyx_t_2, __pyx_temp+1-__pyx_t_6, 2+__pyx_t_6); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 94, __pyx_L1_error)
     __Pyx_XDECREF(__pyx_t_7); __pyx_t_7 = 0;
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
@@ -3082,7 +3091,7 @@ static PyObject *__pyx_pf_16pluginscript_api_19description_classes_19PropertyDes
   } else
   #endif
   {
-    __pyx_t_5 = PyTuple_New(2+__pyx_t_6); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 93, __pyx_L1_error)
+    __pyx_t_5 = PyTuple_New(2+__pyx_t_6); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 94, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_5);
     if (__pyx_t_7) {
       __Pyx_GIVEREF(__pyx_t_7); PyTuple_SET_ITEM(__pyx_t_5, 0, __pyx_t_7); __pyx_t_7 = NULL;
@@ -3093,29 +3102,29 @@ static PyObject *__pyx_pf_16pluginscript_api_19description_classes_19PropertyDes
     PyTuple_SET_ITEM(__pyx_t_5, 1+__pyx_t_6, __pyx_t_4);
     __pyx_t_3 = 0;
     __pyx_t_4 = 0;
-    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_t_5, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 93, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_t_5, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 94, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
   }
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "pluginscript_api/description_classes/PropertyDescription.pyx":94
+  /* "pluginscript_api/description_classes/PropertyDescription.pyx":95
  *         d.set(Variant(String("usage")), Variant(self.usage))
  *         d.set(Variant(String("default_value")), Variant(self.default_value))
  *         d.set(Variant(String("rset_mode")), Variant(self.rset_mode))             # <<<<<<<<<<<<<<
  *         return d
  */
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_d), __pyx_n_s_set); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 94, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_d), __pyx_n_s_set); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 95, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_5 = __Pyx_PyObject_Call(((PyObject *)__pyx_ptype_4core_6string_6String_String), __pyx_tuple__7, NULL); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 94, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_PyObject_Call(((PyObject *)__pyx_ptype_4core_6string_6String_String), __pyx_tuple__7, NULL); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 95, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
-  __pyx_t_4 = __Pyx_PyObject_CallOneArg(((PyObject *)__pyx_ptype_4core_7variant_7Variant_Variant), __pyx_t_5); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 94, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyObject_CallOneArg(((PyObject *)__pyx_ptype_4core_7variant_7Variant_Variant), __pyx_t_5); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 95, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-  __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_rset_mode); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 94, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_rset_mode); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 95, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
-  __pyx_t_3 = __Pyx_PyObject_CallOneArg(((PyObject *)__pyx_ptype_4core_7variant_7Variant_Variant), __pyx_t_5); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 94, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_CallOneArg(((PyObject *)__pyx_ptype_4core_7variant_7Variant_Variant), __pyx_t_5); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 95, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
   __pyx_t_5 = NULL;
@@ -3133,7 +3142,7 @@ static PyObject *__pyx_pf_16pluginscript_api_19description_classes_19PropertyDes
   #if CYTHON_FAST_PYCALL
   if (PyFunction_Check(__pyx_t_2)) {
     PyObject *__pyx_temp[3] = {__pyx_t_5, __pyx_t_4, __pyx_t_3};
-    __pyx_t_1 = __Pyx_PyFunction_FastCall(__pyx_t_2, __pyx_temp+1-__pyx_t_6, 2+__pyx_t_6); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 94, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyFunction_FastCall(__pyx_t_2, __pyx_temp+1-__pyx_t_6, 2+__pyx_t_6); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 95, __pyx_L1_error)
     __Pyx_XDECREF(__pyx_t_5); __pyx_t_5 = 0;
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
@@ -3143,7 +3152,7 @@ static PyObject *__pyx_pf_16pluginscript_api_19description_classes_19PropertyDes
   #if CYTHON_FAST_PYCCALL
   if (__Pyx_PyFastCFunction_Check(__pyx_t_2)) {
     PyObject *__pyx_temp[3] = {__pyx_t_5, __pyx_t_4, __pyx_t_3};
-    __pyx_t_1 = __Pyx_PyCFunction_FastCall(__pyx_t_2, __pyx_temp+1-__pyx_t_6, 2+__pyx_t_6); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 94, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyCFunction_FastCall(__pyx_t_2, __pyx_temp+1-__pyx_t_6, 2+__pyx_t_6); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 95, __pyx_L1_error)
     __Pyx_XDECREF(__pyx_t_5); __pyx_t_5 = 0;
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
@@ -3151,7 +3160,7 @@ static PyObject *__pyx_pf_16pluginscript_api_19description_classes_19PropertyDes
   } else
   #endif
   {
-    __pyx_t_7 = PyTuple_New(2+__pyx_t_6); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 94, __pyx_L1_error)
+    __pyx_t_7 = PyTuple_New(2+__pyx_t_6); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 95, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_7);
     if (__pyx_t_5) {
       __Pyx_GIVEREF(__pyx_t_5); PyTuple_SET_ITEM(__pyx_t_7, 0, __pyx_t_5); __pyx_t_5 = NULL;
@@ -3162,14 +3171,14 @@ static PyObject *__pyx_pf_16pluginscript_api_19description_classes_19PropertyDes
     PyTuple_SET_ITEM(__pyx_t_7, 1+__pyx_t_6, __pyx_t_3);
     __pyx_t_4 = 0;
     __pyx_t_3 = 0;
-    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_t_7, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 94, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_t_7, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 95, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
   }
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "pluginscript_api/description_classes/PropertyDescription.pyx":95
+  /* "pluginscript_api/description_classes/PropertyDescription.pyx":96
  *         d.set(Variant(String("default_value")), Variant(self.default_value))
  *         d.set(Variant(String("rset_mode")), Variant(self.rset_mode))
  *         return d             # <<<<<<<<<<<<<<
@@ -3179,7 +3188,7 @@ static PyObject *__pyx_pf_16pluginscript_api_19description_classes_19PropertyDes
   __pyx_r = ((PyObject *)__pyx_v_d);
   goto __pyx_L0;
 
-  /* "pluginscript_api/description_classes/PropertyDescription.pyx":86
+  /* "pluginscript_api/description_classes/PropertyDescription.pyx":87
  *         self.default_value = default_value
  *         self.rset_mode = rset_mode
  *     def to_dict(self):             # <<<<<<<<<<<<<<
@@ -4894,8 +4903,6 @@ static int __pyx_import_star_set(PyObject *o, PyObject* py_name, char *name) {
     "godot_dictionary",
     "godot_error",
     "godot_gdnative_core_api_struct",
-    "godot_gdnative_ext_nativescript_1_1_api_struct",
-    "godot_gdnative_ext_nativescript_api_struct",
     "godot_int",
     "godot_method_bind",
     "godot_method_rpc_mode",
@@ -5185,79 +5192,79 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__Pyx_InitCachedConstants", 0);
 
-  /* "pluginscript_api/description_classes/PropertyDescription.pyx":88
+  /* "pluginscript_api/description_classes/PropertyDescription.pyx":89
  *     def to_dict(self):
  *         d = Dictionary()
  *         d.set(Variant(String("name")), Variant(String(self.name)))             # <<<<<<<<<<<<<<
  *         d.set(Variant(String("type")), Variant(self.type_))
  *         d.set(Variant(String("hint")), Variant(self.hint))
  */
-  __pyx_tuple_ = PyTuple_Pack(1, __pyx_n_u_name); if (unlikely(!__pyx_tuple_)) __PYX_ERR(0, 88, __pyx_L1_error)
+  __pyx_tuple_ = PyTuple_Pack(1, __pyx_n_u_name); if (unlikely(!__pyx_tuple_)) __PYX_ERR(0, 89, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple_);
   __Pyx_GIVEREF(__pyx_tuple_);
 
-  /* "pluginscript_api/description_classes/PropertyDescription.pyx":89
+  /* "pluginscript_api/description_classes/PropertyDescription.pyx":90
  *         d = Dictionary()
  *         d.set(Variant(String("name")), Variant(String(self.name)))
  *         d.set(Variant(String("type")), Variant(self.type_))             # <<<<<<<<<<<<<<
  *         d.set(Variant(String("hint")), Variant(self.hint))
  *         d.set(Variant(String("hint_string")),Variant(self.hint_string))
  */
-  __pyx_tuple__2 = PyTuple_Pack(1, __pyx_n_u_type_2); if (unlikely(!__pyx_tuple__2)) __PYX_ERR(0, 89, __pyx_L1_error)
+  __pyx_tuple__2 = PyTuple_Pack(1, __pyx_n_u_type_2); if (unlikely(!__pyx_tuple__2)) __PYX_ERR(0, 90, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__2);
   __Pyx_GIVEREF(__pyx_tuple__2);
 
-  /* "pluginscript_api/description_classes/PropertyDescription.pyx":90
+  /* "pluginscript_api/description_classes/PropertyDescription.pyx":91
  *         d.set(Variant(String("name")), Variant(String(self.name)))
  *         d.set(Variant(String("type")), Variant(self.type_))
  *         d.set(Variant(String("hint")), Variant(self.hint))             # <<<<<<<<<<<<<<
  *         d.set(Variant(String("hint_string")),Variant(self.hint_string))
  *         d.set(Variant(String("usage")), Variant(self.usage))
  */
-  __pyx_tuple__3 = PyTuple_Pack(1, __pyx_n_u_hint); if (unlikely(!__pyx_tuple__3)) __PYX_ERR(0, 90, __pyx_L1_error)
+  __pyx_tuple__3 = PyTuple_Pack(1, __pyx_n_u_hint); if (unlikely(!__pyx_tuple__3)) __PYX_ERR(0, 91, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__3);
   __Pyx_GIVEREF(__pyx_tuple__3);
 
-  /* "pluginscript_api/description_classes/PropertyDescription.pyx":91
+  /* "pluginscript_api/description_classes/PropertyDescription.pyx":92
  *         d.set(Variant(String("type")), Variant(self.type_))
  *         d.set(Variant(String("hint")), Variant(self.hint))
  *         d.set(Variant(String("hint_string")),Variant(self.hint_string))             # <<<<<<<<<<<<<<
  *         d.set(Variant(String("usage")), Variant(self.usage))
  *         d.set(Variant(String("default_value")), Variant(self.default_value))
  */
-  __pyx_tuple__4 = PyTuple_Pack(1, __pyx_n_u_hint_string); if (unlikely(!__pyx_tuple__4)) __PYX_ERR(0, 91, __pyx_L1_error)
+  __pyx_tuple__4 = PyTuple_Pack(1, __pyx_n_u_hint_string); if (unlikely(!__pyx_tuple__4)) __PYX_ERR(0, 92, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__4);
   __Pyx_GIVEREF(__pyx_tuple__4);
 
-  /* "pluginscript_api/description_classes/PropertyDescription.pyx":92
+  /* "pluginscript_api/description_classes/PropertyDescription.pyx":93
  *         d.set(Variant(String("hint")), Variant(self.hint))
  *         d.set(Variant(String("hint_string")),Variant(self.hint_string))
  *         d.set(Variant(String("usage")), Variant(self.usage))             # <<<<<<<<<<<<<<
  *         d.set(Variant(String("default_value")), Variant(self.default_value))
  *         d.set(Variant(String("rset_mode")), Variant(self.rset_mode))
  */
-  __pyx_tuple__5 = PyTuple_Pack(1, __pyx_n_u_usage); if (unlikely(!__pyx_tuple__5)) __PYX_ERR(0, 92, __pyx_L1_error)
+  __pyx_tuple__5 = PyTuple_Pack(1, __pyx_n_u_usage); if (unlikely(!__pyx_tuple__5)) __PYX_ERR(0, 93, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__5);
   __Pyx_GIVEREF(__pyx_tuple__5);
 
-  /* "pluginscript_api/description_classes/PropertyDescription.pyx":93
+  /* "pluginscript_api/description_classes/PropertyDescription.pyx":94
  *         d.set(Variant(String("hint_string")),Variant(self.hint_string))
  *         d.set(Variant(String("usage")), Variant(self.usage))
  *         d.set(Variant(String("default_value")), Variant(self.default_value))             # <<<<<<<<<<<<<<
  *         d.set(Variant(String("rset_mode")), Variant(self.rset_mode))
  *         return d
  */
-  __pyx_tuple__6 = PyTuple_Pack(1, __pyx_n_u_default_value); if (unlikely(!__pyx_tuple__6)) __PYX_ERR(0, 93, __pyx_L1_error)
+  __pyx_tuple__6 = PyTuple_Pack(1, __pyx_n_u_default_value); if (unlikely(!__pyx_tuple__6)) __PYX_ERR(0, 94, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__6);
   __Pyx_GIVEREF(__pyx_tuple__6);
 
-  /* "pluginscript_api/description_classes/PropertyDescription.pyx":94
+  /* "pluginscript_api/description_classes/PropertyDescription.pyx":95
  *         d.set(Variant(String("usage")), Variant(self.usage))
  *         d.set(Variant(String("default_value")), Variant(self.default_value))
  *         d.set(Variant(String("rset_mode")), Variant(self.rset_mode))             # <<<<<<<<<<<<<<
  *         return d
  */
-  __pyx_tuple__7 = PyTuple_Pack(1, __pyx_n_u_rset_mode); if (unlikely(!__pyx_tuple__7)) __PYX_ERR(0, 94, __pyx_L1_error)
+  __pyx_tuple__7 = PyTuple_Pack(1, __pyx_n_u_rset_mode); if (unlikely(!__pyx_tuple__7)) __PYX_ERR(0, 95, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__7);
   __Pyx_GIVEREF(__pyx_tuple__7);
 
@@ -5293,41 +5300,41 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
   __Pyx_GOTREF(__pyx_tuple__10);
   __Pyx_GIVEREF(__pyx_tuple__10);
 
-  /* "pluginscript_api/description_classes/PropertyDescription.pyx":67
+  /* "pluginscript_api/description_classes/PropertyDescription.pyx":68
  * }
  * 
  * def transform_type(type_):             # <<<<<<<<<<<<<<
  *     if(type_ in type_variant_type_map):
  *         return type_variant_type_map[type_]
  */
-  __pyx_tuple__12 = PyTuple_Pack(1, __pyx_n_s_type); if (unlikely(!__pyx_tuple__12)) __PYX_ERR(0, 67, __pyx_L1_error)
+  __pyx_tuple__12 = PyTuple_Pack(1, __pyx_n_s_type); if (unlikely(!__pyx_tuple__12)) __PYX_ERR(0, 68, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__12);
   __Pyx_GIVEREF(__pyx_tuple__12);
-  __pyx_codeobj__13 = (PyObject*)__Pyx_PyCode_New(1, 0, 1, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__12, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_pluginscript_api_description_cla, __pyx_n_s_transform_type, 67, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__13)) __PYX_ERR(0, 67, __pyx_L1_error)
+  __pyx_codeobj__13 = (PyObject*)__Pyx_PyCode_New(1, 0, 1, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__12, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_pluginscript_api_description_cla, __pyx_n_s_transform_type, 68, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__13)) __PYX_ERR(0, 68, __pyx_L1_error)
 
-  /* "pluginscript_api/description_classes/PropertyDescription.pyx":73
+  /* "pluginscript_api/description_classes/PropertyDescription.pyx":74
  * class PropertyDescription:
  *     """"Description class for the properties, a gdclass can have and which can be found in the editor"""
  *     def __init__(self, name,type_, hint, hint_string, usage, default_value, rset_mode):             # <<<<<<<<<<<<<<
  *         self.name = name
  *         self.type_ = transform_type(type_)
  */
-  __pyx_tuple__14 = PyTuple_Pack(8, __pyx_n_s_self, __pyx_n_s_name, __pyx_n_s_type, __pyx_n_s_hint, __pyx_n_s_hint_string, __pyx_n_s_usage, __pyx_n_s_default_value, __pyx_n_s_rset_mode); if (unlikely(!__pyx_tuple__14)) __PYX_ERR(0, 73, __pyx_L1_error)
+  __pyx_tuple__14 = PyTuple_Pack(8, __pyx_n_s_self, __pyx_n_s_name, __pyx_n_s_type, __pyx_n_s_hint, __pyx_n_s_hint_string, __pyx_n_s_usage, __pyx_n_s_default_value, __pyx_n_s_rset_mode); if (unlikely(!__pyx_tuple__14)) __PYX_ERR(0, 74, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__14);
   __Pyx_GIVEREF(__pyx_tuple__14);
-  __pyx_codeobj__15 = (PyObject*)__Pyx_PyCode_New(8, 0, 8, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__14, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_pluginscript_api_description_cla, __pyx_n_s_init, 73, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__15)) __PYX_ERR(0, 73, __pyx_L1_error)
+  __pyx_codeobj__15 = (PyObject*)__Pyx_PyCode_New(8, 0, 8, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__14, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_pluginscript_api_description_cla, __pyx_n_s_init, 74, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__15)) __PYX_ERR(0, 74, __pyx_L1_error)
 
-  /* "pluginscript_api/description_classes/PropertyDescription.pyx":86
+  /* "pluginscript_api/description_classes/PropertyDescription.pyx":87
  *         self.default_value = default_value
  *         self.rset_mode = rset_mode
  *     def to_dict(self):             # <<<<<<<<<<<<<<
  *         d = Dictionary()
  *         d.set(Variant(String("name")), Variant(String(self.name)))
  */
-  __pyx_tuple__16 = PyTuple_Pack(2, __pyx_n_s_self, __pyx_n_s_d); if (unlikely(!__pyx_tuple__16)) __PYX_ERR(0, 86, __pyx_L1_error)
+  __pyx_tuple__16 = PyTuple_Pack(2, __pyx_n_s_self, __pyx_n_s_d); if (unlikely(!__pyx_tuple__16)) __PYX_ERR(0, 87, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__16);
   __Pyx_GIVEREF(__pyx_tuple__16);
-  __pyx_codeobj__17 = (PyObject*)__Pyx_PyCode_New(1, 0, 2, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__16, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_pluginscript_api_description_cla, __pyx_n_s_to_dict, 86, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__17)) __PYX_ERR(0, 86, __pyx_L1_error)
+  __pyx_codeobj__17 = (PyObject*)__Pyx_PyCode_New(1, 0, 2, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__16, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_pluginscript_api_description_cla, __pyx_n_s_to_dict, 87, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__17)) __PYX_ERR(0, 87, __pyx_L1_error)
   __Pyx_RefNannyFinishContext();
   return 0;
   __pyx_L1_error:;
@@ -5723,441 +5730,441 @@ if (!__Pyx_RefNanny) {
   if (__Pyx_patch_abc() < 0) __PYX_ERR(0, 12, __pyx_L1_error)
   #endif
 
-  /* "pluginscript_api/description_classes/PropertyDescription.pyx":31
- * from core.vector2.Vector2 cimport Vector2
+  /* "pluginscript_api/description_classes/PropertyDescription.pyx":32
  * from godot_bindings.binding_external cimport *
+ * from enums.enums cimport *
  * from classes.generated import *             # <<<<<<<<<<<<<<
  * 
  * type_hint_map = {
  */
-  __pyx_t_1 = PyList_New(1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 31, __pyx_L1_error)
+  __pyx_t_1 = PyList_New(1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 32, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_INCREF(__pyx_n_s__11);
   __Pyx_GIVEREF(__pyx_n_s__11);
   PyList_SET_ITEM(__pyx_t_1, 0, __pyx_n_s__11);
-  __pyx_t_2 = __Pyx_Import(__pyx_n_s_classes_generated, __pyx_t_1, 0); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 31, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_Import(__pyx_n_s_classes_generated, __pyx_t_1, 0); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 32, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  if (__pyx_import_star(__pyx_t_2) < 0) __PYX_ERR(0, 31, __pyx_L1_error);
+  if (__pyx_import_star(__pyx_t_2) < 0) __PYX_ERR(0, 32, __pyx_L1_error);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "pluginscript_api/description_classes/PropertyDescription.pyx":34
+  /* "pluginscript_api/description_classes/PropertyDescription.pyx":35
  * 
  * type_hint_map = {
  * int: GODOT_PROPERTY_HINT_RANGE, SpriteFrames:GODOT_PROPERTY_HINT_SPRITE_FRAME,             # <<<<<<<<<<<<<<
  * TextFile:GODOT_PROPERTY_HINT_FILE, Resource:GODOT_PROPERTY_HINT_RESOURCE_TYPE,
  * String: GODOT_PROPERTY_HINT_TYPE_STRING,
  */
-  __pyx_t_2 = __Pyx_PyDict_NewPresized(17); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 34, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyDict_NewPresized(17); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 35, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_1 = __Pyx_PyInt_From_godot_property_hint(GODOT_PROPERTY_HINT_RANGE); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 34, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyInt_From_godot_property_hint(GODOT_PROPERTY_HINT_RANGE); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 35, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  if (PyDict_SetItem(__pyx_t_2, ((PyObject *)(&PyInt_Type)), __pyx_t_1) < 0) __PYX_ERR(0, 34, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_2, ((PyObject *)(&PyInt_Type)), __pyx_t_1) < 0) __PYX_ERR(0, 35, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_n_s_SpriteFrames); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 34, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_n_s_SpriteFrames); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 35, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_3 = __Pyx_PyInt_From_godot_property_hint(GODOT_PROPERTY_HINT_SPRITE_FRAME); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 34, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyInt_From_godot_property_hint(GODOT_PROPERTY_HINT_SPRITE_FRAME); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 35, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  if (PyDict_SetItem(__pyx_t_2, __pyx_t_1, __pyx_t_3) < 0) __PYX_ERR(0, 34, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_2, __pyx_t_1, __pyx_t_3) < 0) __PYX_ERR(0, 35, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-  /* "pluginscript_api/description_classes/PropertyDescription.pyx":35
+  /* "pluginscript_api/description_classes/PropertyDescription.pyx":36
  * type_hint_map = {
  * int: GODOT_PROPERTY_HINT_RANGE, SpriteFrames:GODOT_PROPERTY_HINT_SPRITE_FRAME,
  * TextFile:GODOT_PROPERTY_HINT_FILE, Resource:GODOT_PROPERTY_HINT_RESOURCE_TYPE,             # <<<<<<<<<<<<<<
  * String: GODOT_PROPERTY_HINT_TYPE_STRING,
  * Vector3:GODOT_PROPERTY_HINT_METHOD_OF_VARIANT_TYPE,
  */
-  __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_n_s_TextFile); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 35, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_n_s_TextFile); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 36, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  __pyx_t_1 = __Pyx_PyInt_From_godot_property_hint(GODOT_PROPERTY_HINT_FILE); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 35, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyInt_From_godot_property_hint(GODOT_PROPERTY_HINT_FILE); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 36, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  if (PyDict_SetItem(__pyx_t_2, __pyx_t_3, __pyx_t_1) < 0) __PYX_ERR(0, 34, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_2, __pyx_t_3, __pyx_t_1) < 0) __PYX_ERR(0, 35, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_n_s_Resource); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 35, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_n_s_Resource); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 36, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_3 = __Pyx_PyInt_From_godot_property_hint(GODOT_PROPERTY_HINT_RESOURCE_TYPE); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 35, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyInt_From_godot_property_hint(GODOT_PROPERTY_HINT_RESOURCE_TYPE); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 36, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  if (PyDict_SetItem(__pyx_t_2, __pyx_t_1, __pyx_t_3) < 0) __PYX_ERR(0, 34, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_2, __pyx_t_1, __pyx_t_3) < 0) __PYX_ERR(0, 35, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-  /* "pluginscript_api/description_classes/PropertyDescription.pyx":36
+  /* "pluginscript_api/description_classes/PropertyDescription.pyx":37
  * int: GODOT_PROPERTY_HINT_RANGE, SpriteFrames:GODOT_PROPERTY_HINT_SPRITE_FRAME,
  * TextFile:GODOT_PROPERTY_HINT_FILE, Resource:GODOT_PROPERTY_HINT_RESOURCE_TYPE,
  * String: GODOT_PROPERTY_HINT_TYPE_STRING,             # <<<<<<<<<<<<<<
  * Vector3:GODOT_PROPERTY_HINT_METHOD_OF_VARIANT_TYPE,
  * Vector2:GODOT_PROPERTY_HINT_METHOD_OF_VARIANT_TYPE,
  */
-  __pyx_t_3 = __Pyx_PyInt_From_godot_property_hint(GODOT_PROPERTY_HINT_TYPE_STRING); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 36, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyInt_From_godot_property_hint(GODOT_PROPERTY_HINT_TYPE_STRING); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 37, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  if (PyDict_SetItem(__pyx_t_2, ((PyObject *)__pyx_ptype_4core_6string_6String_String), __pyx_t_3) < 0) __PYX_ERR(0, 34, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_2, ((PyObject *)__pyx_ptype_4core_6string_6String_String), __pyx_t_3) < 0) __PYX_ERR(0, 35, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-  /* "pluginscript_api/description_classes/PropertyDescription.pyx":37
+  /* "pluginscript_api/description_classes/PropertyDescription.pyx":38
  * TextFile:GODOT_PROPERTY_HINT_FILE, Resource:GODOT_PROPERTY_HINT_RESOURCE_TYPE,
  * String: GODOT_PROPERTY_HINT_TYPE_STRING,
  * Vector3:GODOT_PROPERTY_HINT_METHOD_OF_VARIANT_TYPE,             # <<<<<<<<<<<<<<
  * Vector2:GODOT_PROPERTY_HINT_METHOD_OF_VARIANT_TYPE,
  * NodePath:GODOT_PROPERTY_HINT_METHOD_OF_VARIANT_TYPE,
  */
-  __pyx_t_3 = __Pyx_PyInt_From_godot_property_hint(GODOT_PROPERTY_HINT_METHOD_OF_VARIANT_TYPE); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 37, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyInt_From_godot_property_hint(GODOT_PROPERTY_HINT_METHOD_OF_VARIANT_TYPE); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 38, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  if (PyDict_SetItem(__pyx_t_2, ((PyObject *)__pyx_ptype_4core_7vector3_7Vector3_Vector3), __pyx_t_3) < 0) __PYX_ERR(0, 34, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_2, ((PyObject *)__pyx_ptype_4core_7vector3_7Vector3_Vector3), __pyx_t_3) < 0) __PYX_ERR(0, 35, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-  /* "pluginscript_api/description_classes/PropertyDescription.pyx":38
+  /* "pluginscript_api/description_classes/PropertyDescription.pyx":39
  * String: GODOT_PROPERTY_HINT_TYPE_STRING,
  * Vector3:GODOT_PROPERTY_HINT_METHOD_OF_VARIANT_TYPE,
  * Vector2:GODOT_PROPERTY_HINT_METHOD_OF_VARIANT_TYPE,             # <<<<<<<<<<<<<<
  * NodePath:GODOT_PROPERTY_HINT_METHOD_OF_VARIANT_TYPE,
  * AABB:GODOT_PROPERTY_HINT_METHOD_OF_VARIANT_TYPE,
  */
-  __pyx_t_3 = __Pyx_PyInt_From_godot_property_hint(GODOT_PROPERTY_HINT_METHOD_OF_VARIANT_TYPE); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 38, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyInt_From_godot_property_hint(GODOT_PROPERTY_HINT_METHOD_OF_VARIANT_TYPE); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 39, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  if (PyDict_SetItem(__pyx_t_2, ((PyObject *)__pyx_ptype_4core_7vector2_7Vector2_Vector2), __pyx_t_3) < 0) __PYX_ERR(0, 34, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_2, ((PyObject *)__pyx_ptype_4core_7vector2_7Vector2_Vector2), __pyx_t_3) < 0) __PYX_ERR(0, 35, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-  /* "pluginscript_api/description_classes/PropertyDescription.pyx":39
+  /* "pluginscript_api/description_classes/PropertyDescription.pyx":40
  * Vector3:GODOT_PROPERTY_HINT_METHOD_OF_VARIANT_TYPE,
  * Vector2:GODOT_PROPERTY_HINT_METHOD_OF_VARIANT_TYPE,
  * NodePath:GODOT_PROPERTY_HINT_METHOD_OF_VARIANT_TYPE,             # <<<<<<<<<<<<<<
  * AABB:GODOT_PROPERTY_HINT_METHOD_OF_VARIANT_TYPE,
  * Array:GODOT_PROPERTY_HINT_METHOD_OF_VARIANT_TYPE,
  */
-  __pyx_t_3 = __Pyx_PyInt_From_godot_property_hint(GODOT_PROPERTY_HINT_METHOD_OF_VARIANT_TYPE); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 39, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyInt_From_godot_property_hint(GODOT_PROPERTY_HINT_METHOD_OF_VARIANT_TYPE); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 40, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  if (PyDict_SetItem(__pyx_t_2, ((PyObject *)__pyx_ptype_4core_9node_path_8NodePath_NodePath), __pyx_t_3) < 0) __PYX_ERR(0, 34, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_2, ((PyObject *)__pyx_ptype_4core_9node_path_8NodePath_NodePath), __pyx_t_3) < 0) __PYX_ERR(0, 35, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-  /* "pluginscript_api/description_classes/PropertyDescription.pyx":40
+  /* "pluginscript_api/description_classes/PropertyDescription.pyx":41
  * Vector2:GODOT_PROPERTY_HINT_METHOD_OF_VARIANT_TYPE,
  * NodePath:GODOT_PROPERTY_HINT_METHOD_OF_VARIANT_TYPE,
  * AABB:GODOT_PROPERTY_HINT_METHOD_OF_VARIANT_TYPE,             # <<<<<<<<<<<<<<
  * Array:GODOT_PROPERTY_HINT_METHOD_OF_VARIANT_TYPE,
  * Basis:GODOT_PROPERTY_HINT_METHOD_OF_VARIANT_TYPE,
  */
-  __pyx_t_3 = __Pyx_PyInt_From_godot_property_hint(GODOT_PROPERTY_HINT_METHOD_OF_VARIANT_TYPE); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 40, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyInt_From_godot_property_hint(GODOT_PROPERTY_HINT_METHOD_OF_VARIANT_TYPE); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 41, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  if (PyDict_SetItem(__pyx_t_2, ((PyObject *)__pyx_ptype_4core_4aabb_4AABB_AABB), __pyx_t_3) < 0) __PYX_ERR(0, 34, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_2, ((PyObject *)__pyx_ptype_4core_4aabb_4AABB_AABB), __pyx_t_3) < 0) __PYX_ERR(0, 35, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-  /* "pluginscript_api/description_classes/PropertyDescription.pyx":41
+  /* "pluginscript_api/description_classes/PropertyDescription.pyx":42
  * NodePath:GODOT_PROPERTY_HINT_METHOD_OF_VARIANT_TYPE,
  * AABB:GODOT_PROPERTY_HINT_METHOD_OF_VARIANT_TYPE,
  * Array:GODOT_PROPERTY_HINT_METHOD_OF_VARIANT_TYPE,             # <<<<<<<<<<<<<<
  * Basis:GODOT_PROPERTY_HINT_METHOD_OF_VARIANT_TYPE,
  * Color:GODOT_PROPERTY_HINT_METHOD_OF_VARIANT_TYPE,
  */
-  __pyx_t_3 = __Pyx_PyInt_From_godot_property_hint(GODOT_PROPERTY_HINT_METHOD_OF_VARIANT_TYPE); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 41, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyInt_From_godot_property_hint(GODOT_PROPERTY_HINT_METHOD_OF_VARIANT_TYPE); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 42, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  if (PyDict_SetItem(__pyx_t_2, ((PyObject *)__pyx_ptype_4core_5array_5Array_Array), __pyx_t_3) < 0) __PYX_ERR(0, 34, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_2, ((PyObject *)__pyx_ptype_4core_5array_5Array_Array), __pyx_t_3) < 0) __PYX_ERR(0, 35, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-  /* "pluginscript_api/description_classes/PropertyDescription.pyx":42
+  /* "pluginscript_api/description_classes/PropertyDescription.pyx":43
  * AABB:GODOT_PROPERTY_HINT_METHOD_OF_VARIANT_TYPE,
  * Array:GODOT_PROPERTY_HINT_METHOD_OF_VARIANT_TYPE,
  * Basis:GODOT_PROPERTY_HINT_METHOD_OF_VARIANT_TYPE,             # <<<<<<<<<<<<<<
  * Color:GODOT_PROPERTY_HINT_METHOD_OF_VARIANT_TYPE,
  * Plane:GODOT_PROPERTY_HINT_METHOD_OF_VARIANT_TYPE,
  */
-  __pyx_t_3 = __Pyx_PyInt_From_godot_property_hint(GODOT_PROPERTY_HINT_METHOD_OF_VARIANT_TYPE); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 42, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyInt_From_godot_property_hint(GODOT_PROPERTY_HINT_METHOD_OF_VARIANT_TYPE); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 43, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  if (PyDict_SetItem(__pyx_t_2, ((PyObject *)__pyx_ptype_4core_5basis_5Basis_Basis), __pyx_t_3) < 0) __PYX_ERR(0, 34, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_2, ((PyObject *)__pyx_ptype_4core_5basis_5Basis_Basis), __pyx_t_3) < 0) __PYX_ERR(0, 35, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-  /* "pluginscript_api/description_classes/PropertyDescription.pyx":43
+  /* "pluginscript_api/description_classes/PropertyDescription.pyx":44
  * Array:GODOT_PROPERTY_HINT_METHOD_OF_VARIANT_TYPE,
  * Basis:GODOT_PROPERTY_HINT_METHOD_OF_VARIANT_TYPE,
  * Color:GODOT_PROPERTY_HINT_METHOD_OF_VARIANT_TYPE,             # <<<<<<<<<<<<<<
  * Plane:GODOT_PROPERTY_HINT_METHOD_OF_VARIANT_TYPE,
  * Quat:GODOT_PROPERTY_HINT_METHOD_OF_VARIANT_TYPE,
  */
-  __pyx_t_3 = __Pyx_PyInt_From_godot_property_hint(GODOT_PROPERTY_HINT_METHOD_OF_VARIANT_TYPE); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 43, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyInt_From_godot_property_hint(GODOT_PROPERTY_HINT_METHOD_OF_VARIANT_TYPE); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 44, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  if (PyDict_SetItem(__pyx_t_2, ((PyObject *)__pyx_ptype_4core_5color_5Color_Color), __pyx_t_3) < 0) __PYX_ERR(0, 34, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_2, ((PyObject *)__pyx_ptype_4core_5color_5Color_Color), __pyx_t_3) < 0) __PYX_ERR(0, 35, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-  /* "pluginscript_api/description_classes/PropertyDescription.pyx":44
+  /* "pluginscript_api/description_classes/PropertyDescription.pyx":45
  * Basis:GODOT_PROPERTY_HINT_METHOD_OF_VARIANT_TYPE,
  * Color:GODOT_PROPERTY_HINT_METHOD_OF_VARIANT_TYPE,
  * Plane:GODOT_PROPERTY_HINT_METHOD_OF_VARIANT_TYPE,             # <<<<<<<<<<<<<<
  * Quat:GODOT_PROPERTY_HINT_METHOD_OF_VARIANT_TYPE,
  * Rect2:GODOT_PROPERTY_HINT_METHOD_OF_VARIANT_TYPE,
  */
-  __pyx_t_3 = __Pyx_PyInt_From_godot_property_hint(GODOT_PROPERTY_HINT_METHOD_OF_VARIANT_TYPE); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 44, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyInt_From_godot_property_hint(GODOT_PROPERTY_HINT_METHOD_OF_VARIANT_TYPE); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 45, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  if (PyDict_SetItem(__pyx_t_2, ((PyObject *)__pyx_ptype_4core_5plane_5Plane_Plane), __pyx_t_3) < 0) __PYX_ERR(0, 34, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_2, ((PyObject *)__pyx_ptype_4core_5plane_5Plane_Plane), __pyx_t_3) < 0) __PYX_ERR(0, 35, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-  /* "pluginscript_api/description_classes/PropertyDescription.pyx":45
+  /* "pluginscript_api/description_classes/PropertyDescription.pyx":46
  * Color:GODOT_PROPERTY_HINT_METHOD_OF_VARIANT_TYPE,
  * Plane:GODOT_PROPERTY_HINT_METHOD_OF_VARIANT_TYPE,
  * Quat:GODOT_PROPERTY_HINT_METHOD_OF_VARIANT_TYPE,             # <<<<<<<<<<<<<<
  * Rect2:GODOT_PROPERTY_HINT_METHOD_OF_VARIANT_TYPE,
  * RID:GODOT_PROPERTY_HINT_METHOD_OF_VARIANT_TYPE,
  */
-  __pyx_t_3 = __Pyx_PyInt_From_godot_property_hint(GODOT_PROPERTY_HINT_METHOD_OF_VARIANT_TYPE); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 45, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyInt_From_godot_property_hint(GODOT_PROPERTY_HINT_METHOD_OF_VARIANT_TYPE); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 46, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  if (PyDict_SetItem(__pyx_t_2, ((PyObject *)__pyx_ptype_4core_4quat_4Quat_Quat), __pyx_t_3) < 0) __PYX_ERR(0, 34, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_2, ((PyObject *)__pyx_ptype_4core_4quat_4Quat_Quat), __pyx_t_3) < 0) __PYX_ERR(0, 35, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-  /* "pluginscript_api/description_classes/PropertyDescription.pyx":46
+  /* "pluginscript_api/description_classes/PropertyDescription.pyx":47
  * Plane:GODOT_PROPERTY_HINT_METHOD_OF_VARIANT_TYPE,
  * Quat:GODOT_PROPERTY_HINT_METHOD_OF_VARIANT_TYPE,
  * Rect2:GODOT_PROPERTY_HINT_METHOD_OF_VARIANT_TYPE,             # <<<<<<<<<<<<<<
  * RID:GODOT_PROPERTY_HINT_METHOD_OF_VARIANT_TYPE,
  * Transform:GODOT_PROPERTY_HINT_METHOD_OF_VARIANT_TYPE,
  */
-  __pyx_t_3 = __Pyx_PyInt_From_godot_property_hint(GODOT_PROPERTY_HINT_METHOD_OF_VARIANT_TYPE); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 46, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyInt_From_godot_property_hint(GODOT_PROPERTY_HINT_METHOD_OF_VARIANT_TYPE); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 47, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  if (PyDict_SetItem(__pyx_t_2, ((PyObject *)__pyx_ptype_4core_5rect2_5Rect2_Rect2), __pyx_t_3) < 0) __PYX_ERR(0, 34, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_2, ((PyObject *)__pyx_ptype_4core_5rect2_5Rect2_Rect2), __pyx_t_3) < 0) __PYX_ERR(0, 35, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-  /* "pluginscript_api/description_classes/PropertyDescription.pyx":47
+  /* "pluginscript_api/description_classes/PropertyDescription.pyx":48
  * Quat:GODOT_PROPERTY_HINT_METHOD_OF_VARIANT_TYPE,
  * Rect2:GODOT_PROPERTY_HINT_METHOD_OF_VARIANT_TYPE,
  * RID:GODOT_PROPERTY_HINT_METHOD_OF_VARIANT_TYPE,             # <<<<<<<<<<<<<<
  * Transform:GODOT_PROPERTY_HINT_METHOD_OF_VARIANT_TYPE,
  * }
  */
-  __pyx_t_3 = __Pyx_PyInt_From_godot_property_hint(GODOT_PROPERTY_HINT_METHOD_OF_VARIANT_TYPE); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 47, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyInt_From_godot_property_hint(GODOT_PROPERTY_HINT_METHOD_OF_VARIANT_TYPE); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 48, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  if (PyDict_SetItem(__pyx_t_2, ((PyObject *)__pyx_ptype_4core_3rid_3RID_RID), __pyx_t_3) < 0) __PYX_ERR(0, 34, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_2, ((PyObject *)__pyx_ptype_4core_3rid_3RID_RID), __pyx_t_3) < 0) __PYX_ERR(0, 35, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-  /* "pluginscript_api/description_classes/PropertyDescription.pyx":48
+  /* "pluginscript_api/description_classes/PropertyDescription.pyx":49
  * Rect2:GODOT_PROPERTY_HINT_METHOD_OF_VARIANT_TYPE,
  * RID:GODOT_PROPERTY_HINT_METHOD_OF_VARIANT_TYPE,
  * Transform:GODOT_PROPERTY_HINT_METHOD_OF_VARIANT_TYPE,             # <<<<<<<<<<<<<<
  * }
  * 
  */
-  __pyx_t_3 = __Pyx_PyInt_From_godot_property_hint(GODOT_PROPERTY_HINT_METHOD_OF_VARIANT_TYPE); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 48, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyInt_From_godot_property_hint(GODOT_PROPERTY_HINT_METHOD_OF_VARIANT_TYPE); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 49, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  if (PyDict_SetItem(__pyx_t_2, ((PyObject *)__pyx_ptype_4core_9transform_9Transform_Transform), __pyx_t_3) < 0) __PYX_ERR(0, 34, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_2, ((PyObject *)__pyx_ptype_4core_9transform_9Transform_Transform), __pyx_t_3) < 0) __PYX_ERR(0, 35, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_type_hint_map, __pyx_t_2) < 0) __PYX_ERR(0, 33, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_type_hint_map, __pyx_t_2) < 0) __PYX_ERR(0, 34, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "pluginscript_api/description_classes/PropertyDescription.pyx":52
+  /* "pluginscript_api/description_classes/PropertyDescription.pyx":53
  * 
  * type_variant_type_map = {
  * int:GODOT_VARIANT_TYPE_INT,             # <<<<<<<<<<<<<<
  * NodePath:GODOT_VARIANT_TYPE_NODE_PATH,
  * Vector2 : GODOT_VARIANT_TYPE_VECTOR2,
  */
-  __pyx_t_2 = __Pyx_PyDict_NewPresized(13); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 52, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyDict_NewPresized(13); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 53, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_3 = __Pyx_PyInt_From_godot_variant_type(GODOT_VARIANT_TYPE_INT); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 52, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyInt_From_godot_variant_type(GODOT_VARIANT_TYPE_INT); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 53, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  if (PyDict_SetItem(__pyx_t_2, ((PyObject *)(&PyInt_Type)), __pyx_t_3) < 0) __PYX_ERR(0, 52, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_2, ((PyObject *)(&PyInt_Type)), __pyx_t_3) < 0) __PYX_ERR(0, 53, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-  /* "pluginscript_api/description_classes/PropertyDescription.pyx":53
+  /* "pluginscript_api/description_classes/PropertyDescription.pyx":54
  * type_variant_type_map = {
  * int:GODOT_VARIANT_TYPE_INT,
  * NodePath:GODOT_VARIANT_TYPE_NODE_PATH,             # <<<<<<<<<<<<<<
  * Vector2 : GODOT_VARIANT_TYPE_VECTOR2,
  * Vector3:GODOT_VARIANT_TYPE_VECTOR3,
  */
-  __pyx_t_3 = __Pyx_PyInt_From_godot_variant_type(GODOT_VARIANT_TYPE_NODE_PATH); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 53, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyInt_From_godot_variant_type(GODOT_VARIANT_TYPE_NODE_PATH); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 54, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  if (PyDict_SetItem(__pyx_t_2, ((PyObject *)__pyx_ptype_4core_9node_path_8NodePath_NodePath), __pyx_t_3) < 0) __PYX_ERR(0, 52, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_2, ((PyObject *)__pyx_ptype_4core_9node_path_8NodePath_NodePath), __pyx_t_3) < 0) __PYX_ERR(0, 53, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-  /* "pluginscript_api/description_classes/PropertyDescription.pyx":54
+  /* "pluginscript_api/description_classes/PropertyDescription.pyx":55
  * int:GODOT_VARIANT_TYPE_INT,
  * NodePath:GODOT_VARIANT_TYPE_NODE_PATH,
  * Vector2 : GODOT_VARIANT_TYPE_VECTOR2,             # <<<<<<<<<<<<<<
  * Vector3:GODOT_VARIANT_TYPE_VECTOR3,
  * AABB:GODOT_VARIANT_TYPE_AABB,
  */
-  __pyx_t_3 = __Pyx_PyInt_From_godot_variant_type(GODOT_VARIANT_TYPE_VECTOR2); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 54, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyInt_From_godot_variant_type(GODOT_VARIANT_TYPE_VECTOR2); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 55, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  if (PyDict_SetItem(__pyx_t_2, ((PyObject *)__pyx_ptype_4core_7vector2_7Vector2_Vector2), __pyx_t_3) < 0) __PYX_ERR(0, 52, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_2, ((PyObject *)__pyx_ptype_4core_7vector2_7Vector2_Vector2), __pyx_t_3) < 0) __PYX_ERR(0, 53, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-  /* "pluginscript_api/description_classes/PropertyDescription.pyx":55
+  /* "pluginscript_api/description_classes/PropertyDescription.pyx":56
  * NodePath:GODOT_VARIANT_TYPE_NODE_PATH,
  * Vector2 : GODOT_VARIANT_TYPE_VECTOR2,
  * Vector3:GODOT_VARIANT_TYPE_VECTOR3,             # <<<<<<<<<<<<<<
  * AABB:GODOT_VARIANT_TYPE_AABB,
  * Array:GODOT_VARIANT_TYPE_ARRAY,
  */
-  __pyx_t_3 = __Pyx_PyInt_From_godot_variant_type(GODOT_VARIANT_TYPE_VECTOR3); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 55, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyInt_From_godot_variant_type(GODOT_VARIANT_TYPE_VECTOR3); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 56, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  if (PyDict_SetItem(__pyx_t_2, ((PyObject *)__pyx_ptype_4core_7vector3_7Vector3_Vector3), __pyx_t_3) < 0) __PYX_ERR(0, 52, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_2, ((PyObject *)__pyx_ptype_4core_7vector3_7Vector3_Vector3), __pyx_t_3) < 0) __PYX_ERR(0, 53, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-  /* "pluginscript_api/description_classes/PropertyDescription.pyx":56
+  /* "pluginscript_api/description_classes/PropertyDescription.pyx":57
  * Vector2 : GODOT_VARIANT_TYPE_VECTOR2,
  * Vector3:GODOT_VARIANT_TYPE_VECTOR3,
  * AABB:GODOT_VARIANT_TYPE_AABB,             # <<<<<<<<<<<<<<
  * Array:GODOT_VARIANT_TYPE_ARRAY,
  * Basis:GODOT_VARIANT_TYPE_BASIS,
  */
-  __pyx_t_3 = __Pyx_PyInt_From_godot_variant_type(GODOT_VARIANT_TYPE_AABB); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 56, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyInt_From_godot_variant_type(GODOT_VARIANT_TYPE_AABB); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 57, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  if (PyDict_SetItem(__pyx_t_2, ((PyObject *)__pyx_ptype_4core_4aabb_4AABB_AABB), __pyx_t_3) < 0) __PYX_ERR(0, 52, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_2, ((PyObject *)__pyx_ptype_4core_4aabb_4AABB_AABB), __pyx_t_3) < 0) __PYX_ERR(0, 53, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-  /* "pluginscript_api/description_classes/PropertyDescription.pyx":57
+  /* "pluginscript_api/description_classes/PropertyDescription.pyx":58
  * Vector3:GODOT_VARIANT_TYPE_VECTOR3,
  * AABB:GODOT_VARIANT_TYPE_AABB,
  * Array:GODOT_VARIANT_TYPE_ARRAY,             # <<<<<<<<<<<<<<
  * Basis:GODOT_VARIANT_TYPE_BASIS,
  * Color:GODOT_VARIANT_TYPE_COLOR,
  */
-  __pyx_t_3 = __Pyx_PyInt_From_godot_variant_type(GODOT_VARIANT_TYPE_ARRAY); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 57, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyInt_From_godot_variant_type(GODOT_VARIANT_TYPE_ARRAY); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 58, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  if (PyDict_SetItem(__pyx_t_2, ((PyObject *)__pyx_ptype_4core_5array_5Array_Array), __pyx_t_3) < 0) __PYX_ERR(0, 52, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_2, ((PyObject *)__pyx_ptype_4core_5array_5Array_Array), __pyx_t_3) < 0) __PYX_ERR(0, 53, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-  /* "pluginscript_api/description_classes/PropertyDescription.pyx":58
+  /* "pluginscript_api/description_classes/PropertyDescription.pyx":59
  * AABB:GODOT_VARIANT_TYPE_AABB,
  * Array:GODOT_VARIANT_TYPE_ARRAY,
  * Basis:GODOT_VARIANT_TYPE_BASIS,             # <<<<<<<<<<<<<<
  * Color:GODOT_VARIANT_TYPE_COLOR,
  * Plane:GODOT_VARIANT_TYPE_PLANE,
  */
-  __pyx_t_3 = __Pyx_PyInt_From_godot_variant_type(GODOT_VARIANT_TYPE_BASIS); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 58, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyInt_From_godot_variant_type(GODOT_VARIANT_TYPE_BASIS); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 59, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  if (PyDict_SetItem(__pyx_t_2, ((PyObject *)__pyx_ptype_4core_5basis_5Basis_Basis), __pyx_t_3) < 0) __PYX_ERR(0, 52, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_2, ((PyObject *)__pyx_ptype_4core_5basis_5Basis_Basis), __pyx_t_3) < 0) __PYX_ERR(0, 53, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-  /* "pluginscript_api/description_classes/PropertyDescription.pyx":59
+  /* "pluginscript_api/description_classes/PropertyDescription.pyx":60
  * Array:GODOT_VARIANT_TYPE_ARRAY,
  * Basis:GODOT_VARIANT_TYPE_BASIS,
  * Color:GODOT_VARIANT_TYPE_COLOR,             # <<<<<<<<<<<<<<
  * Plane:GODOT_VARIANT_TYPE_PLANE,
  * Quat:GODOT_VARIANT_TYPE_QUAT,
  */
-  __pyx_t_3 = __Pyx_PyInt_From_godot_variant_type(GODOT_VARIANT_TYPE_COLOR); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 59, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyInt_From_godot_variant_type(GODOT_VARIANT_TYPE_COLOR); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 60, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  if (PyDict_SetItem(__pyx_t_2, ((PyObject *)__pyx_ptype_4core_5color_5Color_Color), __pyx_t_3) < 0) __PYX_ERR(0, 52, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_2, ((PyObject *)__pyx_ptype_4core_5color_5Color_Color), __pyx_t_3) < 0) __PYX_ERR(0, 53, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-  /* "pluginscript_api/description_classes/PropertyDescription.pyx":60
+  /* "pluginscript_api/description_classes/PropertyDescription.pyx":61
  * Basis:GODOT_VARIANT_TYPE_BASIS,
  * Color:GODOT_VARIANT_TYPE_COLOR,
  * Plane:GODOT_VARIANT_TYPE_PLANE,             # <<<<<<<<<<<<<<
  * Quat:GODOT_VARIANT_TYPE_QUAT,
  * Rect2:GODOT_VARIANT_TYPE_RECT2,
  */
-  __pyx_t_3 = __Pyx_PyInt_From_godot_variant_type(GODOT_VARIANT_TYPE_PLANE); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 60, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyInt_From_godot_variant_type(GODOT_VARIANT_TYPE_PLANE); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 61, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  if (PyDict_SetItem(__pyx_t_2, ((PyObject *)__pyx_ptype_4core_5plane_5Plane_Plane), __pyx_t_3) < 0) __PYX_ERR(0, 52, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_2, ((PyObject *)__pyx_ptype_4core_5plane_5Plane_Plane), __pyx_t_3) < 0) __PYX_ERR(0, 53, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-  /* "pluginscript_api/description_classes/PropertyDescription.pyx":61
+  /* "pluginscript_api/description_classes/PropertyDescription.pyx":62
  * Color:GODOT_VARIANT_TYPE_COLOR,
  * Plane:GODOT_VARIANT_TYPE_PLANE,
  * Quat:GODOT_VARIANT_TYPE_QUAT,             # <<<<<<<<<<<<<<
  * Rect2:GODOT_VARIANT_TYPE_RECT2,
  * RID:GODOT_VARIANT_TYPE_RID,
  */
-  __pyx_t_3 = __Pyx_PyInt_From_godot_variant_type(GODOT_VARIANT_TYPE_QUAT); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 61, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyInt_From_godot_variant_type(GODOT_VARIANT_TYPE_QUAT); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 62, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  if (PyDict_SetItem(__pyx_t_2, ((PyObject *)__pyx_ptype_4core_4quat_4Quat_Quat), __pyx_t_3) < 0) __PYX_ERR(0, 52, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_2, ((PyObject *)__pyx_ptype_4core_4quat_4Quat_Quat), __pyx_t_3) < 0) __PYX_ERR(0, 53, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-  /* "pluginscript_api/description_classes/PropertyDescription.pyx":62
+  /* "pluginscript_api/description_classes/PropertyDescription.pyx":63
  * Plane:GODOT_VARIANT_TYPE_PLANE,
  * Quat:GODOT_VARIANT_TYPE_QUAT,
  * Rect2:GODOT_VARIANT_TYPE_RECT2,             # <<<<<<<<<<<<<<
  * RID:GODOT_VARIANT_TYPE_RID,
  * Transform:GODOT_VARIANT_TYPE_TRANSFORM,
  */
-  __pyx_t_3 = __Pyx_PyInt_From_godot_variant_type(GODOT_VARIANT_TYPE_RECT2); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 62, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyInt_From_godot_variant_type(GODOT_VARIANT_TYPE_RECT2); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 63, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  if (PyDict_SetItem(__pyx_t_2, ((PyObject *)__pyx_ptype_4core_5rect2_5Rect2_Rect2), __pyx_t_3) < 0) __PYX_ERR(0, 52, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_2, ((PyObject *)__pyx_ptype_4core_5rect2_5Rect2_Rect2), __pyx_t_3) < 0) __PYX_ERR(0, 53, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-  /* "pluginscript_api/description_classes/PropertyDescription.pyx":63
+  /* "pluginscript_api/description_classes/PropertyDescription.pyx":64
  * Quat:GODOT_VARIANT_TYPE_QUAT,
  * Rect2:GODOT_VARIANT_TYPE_RECT2,
  * RID:GODOT_VARIANT_TYPE_RID,             # <<<<<<<<<<<<<<
  * Transform:GODOT_VARIANT_TYPE_TRANSFORM,
  * }
  */
-  __pyx_t_3 = __Pyx_PyInt_From_godot_variant_type(GODOT_VARIANT_TYPE_RID); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 63, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyInt_From_godot_variant_type(GODOT_VARIANT_TYPE_RID); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 64, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  if (PyDict_SetItem(__pyx_t_2, ((PyObject *)__pyx_ptype_4core_3rid_3RID_RID), __pyx_t_3) < 0) __PYX_ERR(0, 52, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_2, ((PyObject *)__pyx_ptype_4core_3rid_3RID_RID), __pyx_t_3) < 0) __PYX_ERR(0, 53, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-  /* "pluginscript_api/description_classes/PropertyDescription.pyx":64
+  /* "pluginscript_api/description_classes/PropertyDescription.pyx":65
  * Rect2:GODOT_VARIANT_TYPE_RECT2,
  * RID:GODOT_VARIANT_TYPE_RID,
  * Transform:GODOT_VARIANT_TYPE_TRANSFORM,             # <<<<<<<<<<<<<<
  * }
  * 
  */
-  __pyx_t_3 = __Pyx_PyInt_From_godot_variant_type(GODOT_VARIANT_TYPE_TRANSFORM); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 64, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyInt_From_godot_variant_type(GODOT_VARIANT_TYPE_TRANSFORM); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 65, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  if (PyDict_SetItem(__pyx_t_2, ((PyObject *)__pyx_ptype_4core_9transform_9Transform_Transform), __pyx_t_3) < 0) __PYX_ERR(0, 52, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_2, ((PyObject *)__pyx_ptype_4core_9transform_9Transform_Transform), __pyx_t_3) < 0) __PYX_ERR(0, 53, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_type_variant_type_map, __pyx_t_2) < 0) __PYX_ERR(0, 51, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_type_variant_type_map, __pyx_t_2) < 0) __PYX_ERR(0, 52, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "pluginscript_api/description_classes/PropertyDescription.pyx":67
+  /* "pluginscript_api/description_classes/PropertyDescription.pyx":68
  * }
  * 
  * def transform_type(type_):             # <<<<<<<<<<<<<<
  *     if(type_ in type_variant_type_map):
  *         return type_variant_type_map[type_]
  */
-  __pyx_t_2 = PyCFunction_NewEx(&__pyx_mdef_16pluginscript_api_19description_classes_19PropertyDescription_1transform_type, NULL, __pyx_n_s_pluginscript_api_description_cla_2); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 67, __pyx_L1_error)
+  __pyx_t_2 = PyCFunction_NewEx(&__pyx_mdef_16pluginscript_api_19description_classes_19PropertyDescription_1transform_type, NULL, __pyx_n_s_pluginscript_api_description_cla_2); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 68, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_transform_type, __pyx_t_2) < 0) __PYX_ERR(0, 67, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_transform_type, __pyx_t_2) < 0) __PYX_ERR(0, 68, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "pluginscript_api/description_classes/PropertyDescription.pyx":71
+  /* "pluginscript_api/description_classes/PropertyDescription.pyx":72
  *         return type_variant_type_map[type_]
  *     return
  * class PropertyDescription:             # <<<<<<<<<<<<<<
  *     """"Description class for the properties, a gdclass can have and which can be found in the editor"""
  *     def __init__(self, name,type_, hint, hint_string, usage, default_value, rset_mode):
  */
-  __pyx_t_2 = __Pyx_Py3MetaclassPrepare((PyObject *) NULL, __pyx_empty_tuple, __pyx_n_s_PropertyDescription, __pyx_n_s_PropertyDescription, (PyObject *) NULL, __pyx_n_s_pluginscript_api_description_cla_2, __pyx_kp_s_Description_class_for_the_prope); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 71, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_Py3MetaclassPrepare((PyObject *) NULL, __pyx_empty_tuple, __pyx_n_s_PropertyDescription, __pyx_n_s_PropertyDescription, (PyObject *) NULL, __pyx_n_s_pluginscript_api_description_cla_2, __pyx_kp_s_Description_class_for_the_prope); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 72, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
 
-  /* "pluginscript_api/description_classes/PropertyDescription.pyx":73
+  /* "pluginscript_api/description_classes/PropertyDescription.pyx":74
  * class PropertyDescription:
  *     """"Description class for the properties, a gdclass can have and which can be found in the editor"""
  *     def __init__(self, name,type_, hint, hint_string, usage, default_value, rset_mode):             # <<<<<<<<<<<<<<
  *         self.name = name
  *         self.type_ = transform_type(type_)
  */
-  __pyx_t_3 = __Pyx_CyFunction_New(&__pyx_mdef_16pluginscript_api_19description_classes_19PropertyDescription_19PropertyDescription_1__init__, 0, __pyx_n_s_PropertyDescription___init, NULL, __pyx_n_s_pluginscript_api_description_cla_2, __pyx_d, ((PyObject *)__pyx_codeobj__15)); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 73, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_CyFunction_New(&__pyx_mdef_16pluginscript_api_19description_classes_19PropertyDescription_19PropertyDescription_1__init__, 0, __pyx_n_s_PropertyDescription___init, NULL, __pyx_n_s_pluginscript_api_description_cla_2, __pyx_d, ((PyObject *)__pyx_codeobj__15)); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 74, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  if (__Pyx_SetNameInClass(__pyx_t_2, __pyx_n_s_init, __pyx_t_3) < 0) __PYX_ERR(0, 73, __pyx_L1_error)
+  if (__Pyx_SetNameInClass(__pyx_t_2, __pyx_n_s_init, __pyx_t_3) < 0) __PYX_ERR(0, 74, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-  /* "pluginscript_api/description_classes/PropertyDescription.pyx":86
+  /* "pluginscript_api/description_classes/PropertyDescription.pyx":87
  *         self.default_value = default_value
  *         self.rset_mode = rset_mode
  *     def to_dict(self):             # <<<<<<<<<<<<<<
  *         d = Dictionary()
  *         d.set(Variant(String("name")), Variant(String(self.name)))
  */
-  __pyx_t_3 = __Pyx_CyFunction_New(&__pyx_mdef_16pluginscript_api_19description_classes_19PropertyDescription_19PropertyDescription_3to_dict, 0, __pyx_n_s_PropertyDescription_to_dict, NULL, __pyx_n_s_pluginscript_api_description_cla_2, __pyx_d, ((PyObject *)__pyx_codeobj__17)); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 86, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_CyFunction_New(&__pyx_mdef_16pluginscript_api_19description_classes_19PropertyDescription_19PropertyDescription_3to_dict, 0, __pyx_n_s_PropertyDescription_to_dict, NULL, __pyx_n_s_pluginscript_api_description_cla_2, __pyx_d, ((PyObject *)__pyx_codeobj__17)); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 87, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  if (__Pyx_SetNameInClass(__pyx_t_2, __pyx_n_s_to_dict, __pyx_t_3) < 0) __PYX_ERR(0, 86, __pyx_L1_error)
+  if (__Pyx_SetNameInClass(__pyx_t_2, __pyx_n_s_to_dict, __pyx_t_3) < 0) __PYX_ERR(0, 87, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-  /* "pluginscript_api/description_classes/PropertyDescription.pyx":71
+  /* "pluginscript_api/description_classes/PropertyDescription.pyx":72
  *         return type_variant_type_map[type_]
  *     return
  * class PropertyDescription:             # <<<<<<<<<<<<<<
  *     """"Description class for the properties, a gdclass can have and which can be found in the editor"""
  *     def __init__(self, name,type_, hint, hint_string, usage, default_value, rset_mode):
  */
-  __pyx_t_3 = __Pyx_Py3ClassCreate(((PyObject*)&__Pyx_DefaultClassType), __pyx_n_s_PropertyDescription, __pyx_empty_tuple, __pyx_t_2, NULL, 0, 0); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 71, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_Py3ClassCreate(((PyObject*)&__Pyx_DefaultClassType), __pyx_n_s_PropertyDescription, __pyx_empty_tuple, __pyx_t_2, NULL, 0, 0); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 72, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_PropertyDescription, __pyx_t_3) < 0) __PYX_ERR(0, 71, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_PropertyDescription, __pyx_t_3) < 0) __PYX_ERR(0, 72, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 

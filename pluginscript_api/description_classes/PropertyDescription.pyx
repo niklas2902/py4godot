@@ -28,6 +28,7 @@ from core.transform.Transform cimport Transform
 from core.transform.Transform2D cimport Transform2D
 from core.vector2.Vector2 cimport Vector2
 from godot_bindings.binding_external cimport *
+from enums.enums cimport *
 from classes.generated import *
 
 type_hint_map = {

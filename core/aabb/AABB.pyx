@@ -1,6 +1,7 @@
 from core.plane.Plane cimport Plane
 from core.vector3.Vector3 cimport Vector3
 from core.aabb.aabb_binding cimport *
+from godot_bindings.types cimport *
 
 cdef api set_api_core_aabb(godot_gdnative_core_api_struct * core):
     global api_core

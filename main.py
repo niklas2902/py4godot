@@ -229,6 +229,8 @@ base_import_string += f"from core.variant.Variant cimport Variant_Operator\n"
 base_import_string += f"from core.vector3.Vector3 cimport Vector3_Axis\n"
 base_import_string += f"from core.color.Color cimport Color\n"
 base_import_string += f"from cython.operator cimport dereference\n"
+base_import_string += f"from enums.enums cimport *\n"
+base_import_string += f"from godot_bindings.types cimport *\n"
 base_import_string += f"from godot_bindings.binding_external cimport *\n\n\n" \
                       f"cdef set_core(godot_gdnative_core_api_struct* core):\n" \
                       f"    global api_core\n" \

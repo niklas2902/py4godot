@@ -2,6 +2,7 @@ from core.variant.Variant cimport *
 from godot_bindings.binding_external cimport *
 from pluginscript_api.description_classes.MethodDescription import MethodDescription
 from pluginscript_api.description_classes.PropertyDescription import PropertyDescription
+from enums.enums cimport *
 import inspect
 
 """annotations used to define all the godot members"""

@@ -3,6 +3,7 @@
 /* BEGIN: Cython Metadata
 {
     "distutils": {
+        "depends": [],
         "name": "enums.enums",
         "sources": [
             "enums\\enums.pyx"
@@ -627,6 +628,7 @@ static CYTHON_INLINE float __PYX_NAN() {
 #define __PYX_HAVE__enums__enums
 #define __PYX_HAVE_API__enums__enums
 /* Early includes */
+#include "binding.h"
 #ifdef _OPENMP
 #include <omp.h>
 #endif /* _OPENMP */

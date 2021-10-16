@@ -6684,8 +6684,8 @@ typedef enum __pyx_t_7classes_9generated_XMLParser_NodeType __pyx_t_7classes_9ge
 /* "utils/Wrapper.pxd":2
  * from godot_bindings.binding cimport *
  * cdef class Wrapper(object):             # <<<<<<<<<<<<<<
- *     cdef godot_object *godot_owner
- * 
+ *     """This class holds the c pointer of the godot_owner. The godot_owner is used when calling api methods,
+ *     to identify the object"""
  */
 struct __pyx_obj_5utils_7Wrapper_Wrapper {
   PyObject_HEAD
@@ -7021,9 +7021,11 @@ static PyTypeObject *__pyx_ptype_7cpython_4type_type = 0;
 
 /* Module declarations from 'cpython.ref' */
 
-/* Module declarations from 'godot_bindings.binding' */
+/* Module declarations from 'godot_bindings.types' */
 
 /* Module declarations from 'godot_bindings.binding_external' */
+
+/* Module declarations from 'godot_bindings.binding' */
 
 /* Module declarations from 'utils.Wrapper' */
 static PyTypeObject *__pyx_ptype_5utils_7Wrapper_Wrapper = 0;
@@ -7077,8 +7079,8 @@ static PyObject *__pyx_tuple__3;
 static PyObject *__pyx_tuple__4;
 /* Late includes */
 
-/* "classes/classes.pyx":5
- * from godot_bindings.binding_external cimport *
+/* "classes/classes.pyx":7
+ * from godot_bindings.types cimport *
  * 
  * cdef api set_native_script_classes(godot_gdnative_ext_nativescript_1_1_api_struct* api):             # <<<<<<<<<<<<<<
  *     print("\n\n######################set_api##############################\n\n")
@@ -7094,30 +7096,30 @@ static PyObject *__pyx_f_7classes_7classes_set_native_script_classes(struct godo
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("set_native_script_classes", 0);
 
-  /* "classes/classes.pyx":6
+  /* "classes/classes.pyx":8
  * 
  * cdef api set_native_script_classes(godot_gdnative_ext_nativescript_1_1_api_struct* api):
  *     print("\n\n######################set_api##############################\n\n")             # <<<<<<<<<<<<<<
  *     c_generated.set_native_script(api)
  * 
  */
-  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_print, __pyx_tuple_, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 6, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_print, __pyx_tuple_, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 8, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "classes/classes.pyx":7
+  /* "classes/classes.pyx":9
  * cdef api set_native_script_classes(godot_gdnative_ext_nativescript_1_1_api_struct* api):
  *     print("\n\n######################set_api##############################\n\n")
  *     c_generated.set_native_script(api)             # <<<<<<<<<<<<<<
  * 
  * cdef api init_method_bindings(godot_gdnative_core_api_struct* core):
  */
-  __pyx_t_1 = __pyx_f_7classes_9generated_set_native_script(__pyx_v_api); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 7, __pyx_L1_error)
+  __pyx_t_1 = __pyx_f_7classes_9generated_set_native_script(__pyx_v_api); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 9, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "classes/classes.pyx":5
- * from godot_bindings.binding_external cimport *
+  /* "classes/classes.pyx":7
+ * from godot_bindings.types cimport *
  * 
  * cdef api set_native_script_classes(godot_gdnative_ext_nativescript_1_1_api_struct* api):             # <<<<<<<<<<<<<<
  *     print("\n\n######################set_api##############################\n\n")
@@ -7137,7 +7139,7 @@ static PyObject *__pyx_f_7classes_7classes_set_native_script_classes(struct godo
   return __pyx_r;
 }
 
-/* "classes/classes.pyx":9
+/* "classes/classes.pyx":11
  *     c_generated.set_native_script(api)
  * 
  * cdef api init_method_bindings(godot_gdnative_core_api_struct* core):             # <<<<<<<<<<<<<<
@@ -7156,40 +7158,40 @@ static PyObject *__pyx_f_7classes_7classes_init_method_bindings(struct godot_gdn
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("init_method_bindings", 0);
 
-  /* "classes/classes.pyx":10
+  /* "classes/classes.pyx":12
  * 
  * cdef api init_method_bindings(godot_gdnative_core_api_struct* core):
  *     print("\n\n#####################init_method_bindings###############################\n\n")             # <<<<<<<<<<<<<<
  *     c_generated.set_core(core)
  *     classes.generated.init_method_bindings()
  */
-  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_print, __pyx_tuple__2, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 10, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_print, __pyx_tuple__2, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 12, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "classes/classes.pyx":11
+  /* "classes/classes.pyx":13
  * cdef api init_method_bindings(godot_gdnative_core_api_struct* core):
  *     print("\n\n#####################init_method_bindings###############################\n\n")
  *     c_generated.set_core(core)             # <<<<<<<<<<<<<<
  *     classes.generated.init_method_bindings()
  *     print("\n\n#####################end init_method_bindings###############################\n\n")
  */
-  __pyx_t_1 = __pyx_f_7classes_9generated_set_core(__pyx_v_core); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 11, __pyx_L1_error)
+  __pyx_t_1 = __pyx_f_7classes_9generated_set_core(__pyx_v_core); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 13, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "classes/classes.pyx":12
+  /* "classes/classes.pyx":14
  *     print("\n\n#####################init_method_bindings###############################\n\n")
  *     c_generated.set_core(core)
  *     classes.generated.init_method_bindings()             # <<<<<<<<<<<<<<
  *     print("\n\n#####################end init_method_bindings###############################\n\n")
  */
-  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_classes); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 12, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_classes); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 14, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_generated); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 12, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_generated); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 14, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_init_method_bindings_2); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 12, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_init_method_bindings_2); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 14, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __pyx_t_3 = NULL;
@@ -7204,21 +7206,21 @@ static PyObject *__pyx_f_7classes_7classes_init_method_bindings(struct godot_gdn
   }
   __pyx_t_1 = (__pyx_t_3) ? __Pyx_PyObject_CallOneArg(__pyx_t_2, __pyx_t_3) : __Pyx_PyObject_CallNoArg(__pyx_t_2);
   __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
-  if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 12, __pyx_L1_error)
+  if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 14, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "classes/classes.pyx":13
+  /* "classes/classes.pyx":15
  *     c_generated.set_core(core)
  *     classes.generated.init_method_bindings()
  *     print("\n\n#####################end init_method_bindings###############################\n\n")             # <<<<<<<<<<<<<<
  */
-  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_print, __pyx_tuple__3, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 13, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_print, __pyx_tuple__3, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 15, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "classes/classes.pyx":9
+  /* "classes/classes.pyx":11
  *     c_generated.set_native_script(api)
  * 
  * cdef api init_method_bindings(godot_gdnative_core_api_struct* core):             # <<<<<<<<<<<<<<
@@ -7241,7 +7243,7 @@ static PyObject *__pyx_f_7classes_7classes_init_method_bindings(struct godot_gdn
   return __pyx_r;
 }
 
-/* "utils/Wrapper.pxd":5
+/* "utils/Wrapper.pxd":7
  *     cdef godot_object *godot_owner
  * 
  *     cdef inline void set_godot_owner(self,godot_object* owner):             # <<<<<<<<<<<<<<
@@ -7257,18 +7259,18 @@ static CYTHON_INLINE void __pyx_f_5utils_7Wrapper_7Wrapper_set_godot_owner(struc
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("set_godot_owner", 0);
 
-  /* "utils/Wrapper.pxd":6
+  /* "utils/Wrapper.pxd":8
  * 
  *     cdef inline void set_godot_owner(self,godot_object* owner):
  *         print("set_godot_owner")             # <<<<<<<<<<<<<<
  *         self.godot_owner = owner
  * 
  */
-  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_print, __pyx_tuple__4, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 6, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_print, __pyx_tuple__4, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 8, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "utils/Wrapper.pxd":7
+  /* "utils/Wrapper.pxd":9
  *     cdef inline void set_godot_owner(self,godot_object* owner):
  *         print("set_godot_owner")
  *         self.godot_owner = owner             # <<<<<<<<<<<<<<
@@ -7277,7 +7279,7 @@ static CYTHON_INLINE void __pyx_f_5utils_7Wrapper_7Wrapper_set_godot_owner(struc
  */
   __pyx_v_self->godot_owner = __pyx_v_owner;
 
-  /* "utils/Wrapper.pxd":5
+  /* "utils/Wrapper.pxd":7
  *     cdef godot_object *godot_owner
  * 
  *     cdef inline void set_godot_owner(self,godot_object* owner):             # <<<<<<<<<<<<<<
@@ -7294,7 +7296,7 @@ static CYTHON_INLINE void __pyx_f_5utils_7Wrapper_7Wrapper_set_godot_owner(struc
   __Pyx_RefNannyFinishContext();
 }
 
-/* "utils/Wrapper.pxd":9
+/* "utils/Wrapper.pxd":11
  *         self.godot_owner = owner
  * 
  *     cdef inline godot_object* get_godot_owner(self):             # <<<<<<<<<<<<<<
@@ -7307,7 +7309,7 @@ static CYTHON_INLINE godot_object *__pyx_f_5utils_7Wrapper_7Wrapper_get_godot_ow
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("get_godot_owner", 0);
 
-  /* "utils/Wrapper.pxd":10
+  /* "utils/Wrapper.pxd":12
  * 
  *     cdef inline godot_object* get_godot_owner(self):
  *         return self.godot_owner             # <<<<<<<<<<<<<<
@@ -7317,7 +7319,7 @@ static CYTHON_INLINE godot_object *__pyx_f_5utils_7Wrapper_7Wrapper_get_godot_ow
   __pyx_r = __pyx_v_self->godot_owner;
   goto __pyx_L0;
 
-  /* "utils/Wrapper.pxd":9
+  /* "utils/Wrapper.pxd":11
  *         self.godot_owner = owner
  * 
  *     cdef inline godot_object* get_godot_owner(self):             # <<<<<<<<<<<<<<
@@ -7395,7 +7397,7 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {0, 0, 0, 0, 0, 0, 0}
 };
 static CYTHON_SMALL_CODE int __Pyx_InitCachedBuiltins(void) {
-  __pyx_builtin_print = __Pyx_GetBuiltinName(__pyx_n_s_print); if (!__pyx_builtin_print) __PYX_ERR(0, 6, __pyx_L1_error)
+  __pyx_builtin_print = __Pyx_GetBuiltinName(__pyx_n_s_print); if (!__pyx_builtin_print) __PYX_ERR(0, 8, __pyx_L1_error)
   return 0;
   __pyx_L1_error:;
   return -1;
@@ -7405,45 +7407,45 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__Pyx_InitCachedConstants", 0);
 
-  /* "classes/classes.pyx":6
+  /* "classes/classes.pyx":8
  * 
  * cdef api set_native_script_classes(godot_gdnative_ext_nativescript_1_1_api_struct* api):
  *     print("\n\n######################set_api##############################\n\n")             # <<<<<<<<<<<<<<
  *     c_generated.set_native_script(api)
  * 
  */
-  __pyx_tuple_ = PyTuple_Pack(1, __pyx_kp_u_set_api); if (unlikely(!__pyx_tuple_)) __PYX_ERR(0, 6, __pyx_L1_error)
+  __pyx_tuple_ = PyTuple_Pack(1, __pyx_kp_u_set_api); if (unlikely(!__pyx_tuple_)) __PYX_ERR(0, 8, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple_);
   __Pyx_GIVEREF(__pyx_tuple_);
 
-  /* "classes/classes.pyx":10
+  /* "classes/classes.pyx":12
  * 
  * cdef api init_method_bindings(godot_gdnative_core_api_struct* core):
  *     print("\n\n#####################init_method_bindings###############################\n\n")             # <<<<<<<<<<<<<<
  *     c_generated.set_core(core)
  *     classes.generated.init_method_bindings()
  */
-  __pyx_tuple__2 = PyTuple_Pack(1, __pyx_kp_u_init_method_bindings); if (unlikely(!__pyx_tuple__2)) __PYX_ERR(0, 10, __pyx_L1_error)
+  __pyx_tuple__2 = PyTuple_Pack(1, __pyx_kp_u_init_method_bindings); if (unlikely(!__pyx_tuple__2)) __PYX_ERR(0, 12, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__2);
   __Pyx_GIVEREF(__pyx_tuple__2);
 
-  /* "classes/classes.pyx":13
+  /* "classes/classes.pyx":15
  *     c_generated.set_core(core)
  *     classes.generated.init_method_bindings()
  *     print("\n\n#####################end init_method_bindings###############################\n\n")             # <<<<<<<<<<<<<<
  */
-  __pyx_tuple__3 = PyTuple_Pack(1, __pyx_kp_u_end_init_method_bindings); if (unlikely(!__pyx_tuple__3)) __PYX_ERR(0, 13, __pyx_L1_error)
+  __pyx_tuple__3 = PyTuple_Pack(1, __pyx_kp_u_end_init_method_bindings); if (unlikely(!__pyx_tuple__3)) __PYX_ERR(0, 15, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__3);
   __Pyx_GIVEREF(__pyx_tuple__3);
 
-  /* "utils/Wrapper.pxd":6
+  /* "utils/Wrapper.pxd":8
  * 
  *     cdef inline void set_godot_owner(self,godot_object* owner):
  *         print("set_godot_owner")             # <<<<<<<<<<<<<<
  *         self.godot_owner = owner
  * 
  */
-  __pyx_tuple__4 = PyTuple_Pack(1, __pyx_n_u_set_godot_owner); if (unlikely(!__pyx_tuple__4)) __PYX_ERR(1, 6, __pyx_L1_error)
+  __pyx_tuple__4 = PyTuple_Pack(1, __pyx_n_u_set_godot_owner); if (unlikely(!__pyx_tuple__4)) __PYX_ERR(1, 8, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__4);
   __Pyx_GIVEREF(__pyx_tuple__4);
   __Pyx_RefNannyFinishContext();
@@ -7773,8 +7775,8 @@ if (!__Pyx_RefNanny) {
   /* "classes/classes.pyx":2
  * cimport classes.generated as c_generated
  * import classes.generated             # <<<<<<<<<<<<<<
+ * from godot_bindings.binding cimport *
  * from godot_bindings.binding_external cimport *
- * 
  */
   __pyx_t_1 = __Pyx_Import(__pyx_n_s_classes_generated, 0, 0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
@@ -7784,14 +7786,14 @@ if (!__Pyx_RefNanny) {
   /* "classes/classes.pyx":1
  * cimport classes.generated as c_generated             # <<<<<<<<<<<<<<
  * import classes.generated
- * from godot_bindings.binding_external cimport *
+ * from godot_bindings.binding cimport *
  */
   __pyx_t_1 = __Pyx_PyDict_NewPresized(0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 1, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   if (PyDict_SetItem(__pyx_d, __pyx_n_s_test, __pyx_t_1) < 0) __PYX_ERR(0, 1, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "utils/Wrapper.pxd":9
+  /* "utils/Wrapper.pxd":11
  *         self.godot_owner = owner
  * 
  *     cdef inline godot_object* get_godot_owner(self):             # <<<<<<<<<<<<<<

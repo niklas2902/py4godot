@@ -13,10 +13,11 @@ cimport core.variant.Variant as CVariant
 from cpython.mem cimport PyMem_Malloc, PyMem_Realloc, PyMem_Free
 from godot_bindings.binding cimport *
 from godot_bindings.binding_external cimport *
+from enums.enums cimport *
 
 from pluginscript_api.utils.annotations import methods, classes, properties, reset
 
-"""This class contains all the functions, thath are needed to crate a pluginscript"""
+"""This file contains all the functions, that are needed to crate a pluginscript"""
 
 
 cdef godot_dictionary dictionary

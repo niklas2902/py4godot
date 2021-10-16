@@ -3,7 +3,12 @@
 /* BEGIN: Cython Metadata
 {
     "distutils": {
-        "depends": [],
+        "depends": [
+            "godot_bindings\\binding.h"
+        ],
+        "include_dirs": [
+            ".\\godot_bindings"
+        ],
         "name": "pluginscript_api.description_classes.MethodDescription",
         "sources": [
             "pluginscript_api\\description_classes\\MethodDescription.pyx"
@@ -1371,9 +1376,11 @@ static PyTypeObject *__pyx_ptype_7cpython_4type_type = 0;
 
 /* Module declarations from 'cpython.ref' */
 
-/* Module declarations from 'godot_bindings.binding' */
+/* Module declarations from 'godot_bindings.types' */
 
 /* Module declarations from 'godot_bindings.binding_external' */
+
+/* Module declarations from 'godot_bindings.binding' */
 
 /* Module declarations from 'core.array.array_binding' */
 
@@ -2900,13 +2907,9 @@ static int __pyx_import_star_set(PyObject *o, PyObject* py_name, char *name) {
     "godot_class_constructor",
     "godot_color",
     "godot_dictionary",
-    "godot_error",
     "godot_gdnative_core_api_struct",
-    "godot_gdnative_ext_nativescript_1_1_api_struct",
-    "godot_gdnative_ext_nativescript_api_struct",
     "godot_int",
     "godot_method_bind",
-    "godot_method_rpc_mode",
     "godot_node_path",
     "godot_object",
     "godot_plane",
@@ -2921,8 +2924,6 @@ static int __pyx_import_star_set(PyObject *o, PyObject* py_name, char *name) {
     "godot_pool_string_array",
     "godot_pool_vector2_array",
     "godot_pool_vector3_array",
-    "godot_property_hint",
-    "godot_property_usage_flags",
     "godot_quat",
     "godot_real",
     "godot_rect2",
@@ -2932,9 +2933,6 @@ static int __pyx_import_star_set(PyObject *o, PyObject* py_name, char *name) {
     "godot_transform",
     "godot_transform2d",
     "godot_variant",
-    "godot_variant_call_error",
-    "godot_variant_call_error_error",
-    "godot_variant_type",
     "godot_vector2",
     "godot_vector3",
     "int16_t",
