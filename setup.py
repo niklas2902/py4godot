@@ -15,7 +15,7 @@ module += cythonize("enums/*.pyx", language_level=3)
 setup(
     ext_modules=module,
     version="0.0.1",
-    platforms = ["linux.cross"]
+    platforms = ["linux64.cross"]
 )
 
 "build:python setup.py build_ext --compiler=C:/Windows/System32/gcc.exe"

@@ -3,7 +3,7 @@ import subprocess, time
 import main
 from main import *
 from Cython.Build import cythonize
-from meson_scripts import copy_tools
+from meson_scripts import copy_tools, download_python
 
 
 import argparse
@@ -61,8 +61,9 @@ res = subprocess.Popen("vcvarsall.bat x86_amd64 "
                  f"& ninja -C build_meson/{args.target_platform}", shell=True)
 
 res.wait()
-
 copy_tools.run()
+
+download_python.download_file(args.target_platform)
 
 print("=================================Build finished==================================")
 print("Build took:", time.time()- start, "seconds")
