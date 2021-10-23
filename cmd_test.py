@@ -16,7 +16,7 @@ def cythonize_files():
     module += cythonize("utils/*.pyx", language_level=3)
     module += cythonize("pluginscript_api/*.pyx", language_level=3)
     module += cythonize("pluginscript_api/*/*.pyx", language_level=3)
-    module += cythonize("godot_bindings/*.pyx", language_level=3)
+#    module += cythonize("godot_bindings/*.pyx", language_level=3)
     module += cythonize("enums/*.pyx", language_level=3)
 
 def get_compiler():

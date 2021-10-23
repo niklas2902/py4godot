@@ -2,14 +2,15 @@ from shutil import copy
 import os
 import glob
 
+"""This file is for copying the generated so/dll files from ninja/meson into the build folder"""
 def run():
-    liste = glob.glob("**/*.dll", recursive=True)
-    liste2 = glob.glob("**/*.so", recursive=True)
+    liste_dll = glob.glob("**/*.dll", recursive=True)
+    liste_so = glob.glob("**/*.so", recursive=True)
 
     print("------------------------------------------copy------------------------------------------------\n")
-    liste += liste2
-    print(liste)
-    for entry in liste:
+    liste_dll += liste_so
+    print(liste_dll)
+    for entry in liste_dll:
         if(entry.startswith("build_meson")):
             print(os.path.dirname("build/addons"+entry.lstrip("build_meson").lstrip("\\linux").
                                   lstrip("\\windows64")))

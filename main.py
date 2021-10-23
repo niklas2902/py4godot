@@ -176,6 +176,7 @@ def generate_classes(obj):
 
 
 def generate_enums(class_, obj):
+    """generate the enums definend in the godot binding classes"""
     result = ""
     for enum in obj["enums"]:
         result += f"""ctypedef enum {class_}_{enum["name"]} :"""
@@ -188,7 +189,7 @@ def generate_enums(class_, obj):
 
 
 def generate_pxd(class_, obj):
-
+    """generate the pxd file for the binding classes"""
     string_to_write = "\n"
     string_to_write += (generate_enums(class_, obj))
     return string_to_write
@@ -202,7 +203,7 @@ def create_set(string, set):
     for s in strings:
         set.add(s)
 
-
+# The import string at the start of the file
 base_import_string = ""
 base_import_string += f"\n##################################Import gdnative api#########################################\n"
 base_import_string += f"from enum import *\n"

@@ -27,18 +27,23 @@ cdef api set_api_core_pluginscript(const godot_gdnative_core_api_struct* core):
     api_core.godot_dictionary_new(&dictionary)
     print("\n#############################set_api_core############################################################")
 cdef api godot_pluginscript_language_data * init_pluginscript() with gil:
+    """empty placeholder function, as this is necessary to implement"""
     print("\n######################################################init_python_pluginscript####################################\n");
 
 cdef api void finish_pluginscript(godot_pluginscript_instance_data *p_data) with gil:
+    """currently empty function which is necessary to implement. It could later be used to delete resources"""
     print("finish_python_test\n");
 
 cdef api  void add_global_constant_pluginscript(godot_pluginscript_language_data *p_data,
 const godot_string *p_variable, const godot_variant *p_value) with gil:
+    """empty placeholder function, as this is necessary to implement"""
     print("\n######################################################add_global_constant#############################\n");
 
 ###############################################pluginscript_desc#######################################################
 cdef api  godot_pluginscript_script_manifest init_pluginscript_desc (godot_pluginscript_language_data *p_data,
  const godot_string *p_path, const godot_string *p_source, godot_error *r_error) with gil:
+    """Function for creating the manifest. The manifest describes things like the properties oder methods for the class,
+    that should be created. If the file does not contain a class or is for example a __init__ file, we just create a empty manifest"""
     cdef PyObject* class_obj
     cdef godot_pluginscript_script_manifest manifest;
     cdef PyObject* obj
@@ -49,8 +54,9 @@ cdef api  godot_pluginscript_script_manifest init_pluginscript_desc (godot_plugi
 
     print("\n############################################create_manifest##############################################\n");
     reset()
-    exec(get_python_string_from_w_string(p_source))
+    exec(str(String.new_static(dereference(p_source))))
     if(len(classes) > 0):
+        #creating a valid manifest
         gd_obj = classes[0]
         api_core.godot_string_name_new_data(&manifest.name, "python_manifest");
         manifest.is_tool = False;
@@ -73,7 +79,7 @@ cdef api  godot_pluginscript_script_manifest init_pluginscript_desc (godot_plugi
         manifest.methods = methods_array._native
 
         (<Wrapper>class_obj).PROPERTIES = [p.name for p in properties]
-        manifest.data = class_obj
+        manifest.data = class_obj#The data contains the class, we want later instantiate in method init_pluginscript_instance
     else:
         create_empty_manifest(&manifest)
     reset()
@@ -81,6 +87,7 @@ cdef api  godot_pluginscript_script_manifest init_pluginscript_desc (godot_plugi
     return manifest;
 
 cdef api  void finish_pluginscript_desc (godot_pluginscript_script_data *p_data) with gil:
+    """empty placeholder function, as this is necessary to implement"""
     print("finish_desc\n");
 
 
@@ -89,9 +96,10 @@ cdef api  void finish_pluginscript_desc (godot_pluginscript_script_data *p_data)
 cdef api godot_pluginscript_instance_data * init_pluginscript_instance(godot_pluginscript_script_data *p_data,
  godot_object *p_owner) with gil:
     #print("\n####################################################################instance_init########################\n");
+    """Here we are instanciating the class and setting a godot owner for it, so that it can be managed by godot"""
     cdef Wrapper instance
     (<Wrapper>p_data)()
-    instance = (<Wrapper>p_data)()
+    instance = (<Wrapper>p_data)()#instanciating the the class given by manifest.data
     instance.set_godot_owner(p_owner)
     for prop in instance.PROPERTIES:
         setattr(instance,prop,None)
@@ -99,45 +107,48 @@ cdef api godot_pluginscript_instance_data * init_pluginscript_instance(godot_plu
     return <PyObject*>instance
 
 cdef api void finish_pluginscript_instance(godot_pluginscript_instance_data *p_data) with gil:
+    """This method is for dereferencing the instance, when godot says it can be deleted """
     cdef Wrapper instance
-    print("instance_finish\n");
     instance = (<Wrapper ?>p_data)
     Py_DECREF(instance)
 
 cdef api bool set_prop_pluginscript_instance(godot_pluginscript_instance_data *p_data,
  const godot_string *p_name, const godot_variant *p_value) with gil:
+    """Trying to set the proprerty for the class given by godot"""
     cdef Wrapper instance = (<Wrapper ?>p_data)
     #print("\n#########################################################set_prop#######################################\n");
     api_core.godot_print(p_name)
 
-    #Todo:is there a speedier way?
     value = CVariant.Variant.new_static(dereference(p_value)).get_converted_value()
-    instance.set_property(get_python_string_from_w_string(p_name), value)
+    instance.set_property(str(String.new_static(dereference(p_name))), value)
     return True;
 
 cdef api bool get_prop_pluginscript_instance(godot_pluginscript_instance_data *p_data,
 const godot_string *p_name, godot_variant *r_ret) with gil:
         #print("\n###################################################get_prop########################################\n");
+        #Todo: implement this
         return False;
 
 cdef api godot_variant call_method_pluginscript_instance(godot_pluginscript_instance_data *p_data,const godot_string_name *p_method,
 const godot_variant **p_args,int p_argcount, godot_variant_call_error *r_error) with gil:
         #print("\n#################################################call_method#############################################");
+        """function for calling methods defined in the manifest from an external source"""
         method_name = str(StringName.new_static(p_method))
 
         cdef Wrapper instance = (<Wrapper>p_data)
-        if(hasattr(instance,method_name)):
+        if(hasattr(instance,method_name)): #checking if function exists
             args = []
-            for i in range(0, p_argcount):
+            for i in range(0, p_argcount): #for loop for creating a list of arguments given to us by godot
                 variant=CVariant.Variant.new_static(dereference(p_args[i]))
                 args.append(variant.get_converted_value())
-            ret = getattr(instance,method_name)(*args)
-            return CVariant.Variant()._native
+            ret = getattr(instance,method_name)(*args) #calling the method with the given arguments
+            return CVariant.Variant()._native #Todo: return value
         return CVariant.Variant()._native
 
 
 cdef api godot_string pluginscript_get_template_source_code(godot_pluginscript_language_data *p_data,
  const godot_string *p_class_name, const godot_string *p_base_class_name) with gil:
+    """generate a template string for the godot class, when creating ones"""
     return String(f"""
 from enums.enums import *
 from core import *
@@ -183,9 +194,5 @@ cdef void create_empty_manifest(godot_pluginscript_script_manifest* manifest):
 
 cdef api void notification_pluginscript_instance(godot_pluginscript_instance_data *p_data,
 int p_notification) with gil:
+    #Todo:Notification
     pass
-
-cdef unicode get_python_string_from_w_string(const godot_string* string):
-    cdef const wchar_t* c_string = api_core.godot_string_wide_str(string)
-    return <unicode>PyUnicode_FromWideChar(c_string,-1)
-
