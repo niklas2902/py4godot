@@ -2,6 +2,7 @@ from pluginscript_api.utils.annotations import  *
 from enums.enums import *
 from classes.generated import *
 from core import *
+
 print(PropertyHint)
 print(PropertyHint.GODOT_PROPERTY_HINT_RANGE.value)
 

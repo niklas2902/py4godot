@@ -5,17 +5,18 @@ import tarfile
 import os
 from shutil import copytree, ignore_patterns
 
-platform_dict = {"windows64": "x86_64-pc-windows-msvc-shared-pgo", "windows":"i686-pc-windows-msvc-shared-pgo",
+platform_dict = {"windows64": "x86_64-pc-windows-msvc-static-noopt", "windows":"i686-pc-windows-msvc-shared-pgo",
                  "linux64":"x86_64-unknown-linux-gnu-pgo", "linux":"i686-unknown-linux-gnu-pgo"}
 python_files_dir = "python_files"
 copy_dir = "build/addons"
+python_ver = "cpython-3.9.7"
 
 def download_file(key):
-    python_folder = "cpython - 3.9.7 - "+key
+    python_folder = f"{python_ver}-"+key
 
-    url = f'https://github.com/indygreg/python-build-standalone/releases/download/20211017/cpython-3.9.7-{platform_dict[key]}-20211017T1616.tar.zst'
-    python_file = f'{python_files_dir}/cpython-3.9.7-{platform_dict[key]}.tar.zst'
-    export_name = "cpython-3.9.7-"+key
+    url = f'https://github.com/indygreg/python-build-standalone/releases/download/20210103/{python_ver}-{platform_dict[key]}-20210103T1125.tar.zst'
+    python_file = f'{python_files_dir}/{python_ver}-{platform_dict[key]}.tar.zst'
+    export_name = f"{python_ver}-"+key
 
     if(not os.path.isfile(python_file)):
         wget.download(url, python_file)
@@ -41,4 +42,4 @@ def extract_tar(file, export_name):
 
 def copy_to_build(export_folder):
     if (not os.path.isdir(copy_dir+"/"+export_folder)):
-        copytree(python_files_dir+"/"+export_folder, copy_dir+"/"+export_folder, ignore=ignore_patterns("build"))
+        copytree(python_files_dir+"/"+export_folder, copy_dir+"/"+export_folder, ignore=ignore_patterns("build", "Lib"))

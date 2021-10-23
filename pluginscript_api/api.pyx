@@ -42,12 +42,14 @@ cdef api  godot_pluginscript_script_manifest init_pluginscript_desc (godot_plugi
     cdef PyObject* class_obj
     cdef godot_pluginscript_script_manifest manifest;
     cdef PyObject* obj
-    #print("\n############################################create_manifest##############################################\n");
 
+    if("python/install" in str(String.new_static(dereference(p_path)))):
+        create_empty_manifest(&manifest)
+        return manifest
 
+    print("\n############################################create_manifest##############################################\n");
     reset()
     exec(get_python_string_from_w_string(p_source))
-
     if(len(classes) > 0):
         gd_obj = classes[0]
         api_core.godot_string_name_new_data(&manifest.name, "python_manifest");
