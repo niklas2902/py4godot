@@ -1,4 +1,4 @@
-# godot_python_bindings_private
+# py4godot
 Trying to create a plugin for the godot engine based on this project: https://github.com/touilleMan/godot-python
 
 # Todo

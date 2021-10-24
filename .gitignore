@@ -1,0 +1,13 @@
+build
+build_meson
+enums/*.c
+core/**/*.c
+core/**/*.h
+pluginscript_api/*.c
+pluginscript_api/*.h
+pluginscript_api/**/*.c
+utils/*.c
+
+classes/*.c
+classes/*.h
+classes/generated.pxd

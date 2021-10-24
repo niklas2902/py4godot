@@ -154,7 +154,6 @@ void GDN_EXPORT godot_gdnative_terminate(godot_gdnative_terminate_options *p_opt
 // this function as part of loading a GDNative library and communicates
 // back to the engine what objects we make available.
 void GDN_EXPORT godot_nativescript_init(void *p_handle) {
-    //Todo: register method process
     printf("..................................native_script_init.................................................\n");
 
 
