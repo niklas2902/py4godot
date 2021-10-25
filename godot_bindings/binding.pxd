@@ -8,13 +8,6 @@ cdef extern from "Python.h":
     cdef  PyObject* PyObject_Str(PyObject *o);
 
 cdef extern from "binding.h":
-    void hello(const char *name)
-    void print_pointer(void* pointer)
-    void new_variant(const char *test)
-    #void new_variant(double test)
-    void show_api()
-
-
     struct godot_gdnative_ext_nativescript_api_struct:
         void *(*godot_nativescript_get_userdata)(godot_object *p_instance)
 
@@ -24,6 +17,8 @@ cdef extern from "binding.h":
 
     const godot_gdnative_ext_nativescript_api_struct *nativescript_api
     const godot_gdnative_ext_nativescript_1_1_api_struct *nativescript_api_11
+
+
 
     godot_object *_owner
 
