@@ -11,3 +11,4 @@ utils/*.c
 classes/*.c
 classes/*.h
 classes/generated.pxd
+classes/generated.pyx
