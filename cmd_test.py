@@ -64,7 +64,7 @@ res = subprocess.Popen("vcvarsall.bat x86_amd64 "
                  f"& ninja -C build_meson/{args.target_platform}", shell=True)
 
 res.wait()
-copy_tools.run()
+copy_tools.run(args.target_platform)
 
 download_python.download_file(args.target_platform)
 
