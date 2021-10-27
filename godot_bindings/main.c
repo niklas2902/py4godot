@@ -227,7 +227,7 @@ godot_variant simple_get_data(godot_object *p_instance, void *p_method_data, voi
 
 void set_up_bindings(){
 	PyRun_SimpleString("import sys,os\nprint(sys.path, os.getcwd())");
-	PyRun_SimpleString("import sys, os\nsys.path.insert(0,os.getcwd()+'/addons')");
+	PyRun_SimpleString("import sys, os\nsys.path.insert(0,os.getcwd()+'/addons/windows64')");
 	PyRun_SimpleString("import sys,os\nprint(sys.path, os.getcwd())");
 	import_classes__classes();
     if (PyErr_Occurred())
