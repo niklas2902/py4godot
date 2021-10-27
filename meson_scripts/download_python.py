@@ -5,7 +5,7 @@ import tarfile
 import os
 from shutil import copytree, ignore_patterns
 
-platform_dict = {"windows64": "x86_64-pc-windows-msvc-static-noopt", "windows":"i686-pc-windows-msvc-shared-pgo",
+platform_dict = {"windows64": "x86_64-pc-windows-msvc-shared-pgo", "windows":"i686-pc-windows-msvc-shared-pgo",
                  "linux64":"x86_64-unknown-linux-gnu-lto", "linux":"i686-unknown-linux-gnu-pgo"}
 python_files_dir = "python_files"
 copy_dir = "build/addons"
@@ -21,6 +21,8 @@ def download_file(key):
 
     if(not os.path.isfile(python_file)):# checking whether file was already downloaded
         print(f"downloading {python_ver} from :\n {url}")
+        if(not os.path.isdir(python_files_dir)):
+            os.mkdir(python_files_dir)
         wget.download(url, python_file) # download .tar.zst file
         print()
     if(not os.path.isfile(python_file.replace(".zst",""))): #extracting the .zst file if it doesn't exist
