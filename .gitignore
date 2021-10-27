@@ -1,5 +1,9 @@
 build
 build_meson
+.idea
+__pycache__
+.vscode
+
 enums/*.c
 core/**/*.c
 core/**/*.h
