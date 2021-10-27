@@ -2,6 +2,7 @@ build
 build_meson
 .idea
 __pycache__
+python_files
 .vscode
 
 enums/*.c
