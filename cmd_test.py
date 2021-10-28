@@ -4,8 +4,7 @@ import main
 import os
 from main import *
 from Cython.Build import cythonize
-from meson_scripts import copy_tools, download_python
-
+from meson_scripts import copy_tools, download_python, generate_init_files
 
 import argparse
 
@@ -65,6 +64,7 @@ res = subprocess.Popen("vcvarsall.bat x86_amd64 "
 
 res.wait()
 copy_tools.run(args.target_platform)
+generate_init_files.create_init_file(args.target_platform)
 
 download_python.download_file(args.target_platform)
 
