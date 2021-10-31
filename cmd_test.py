@@ -55,8 +55,9 @@ if(args.compiler == None):
 build()
 cythonize_files()
 
+download_python.download_file(args.target_platform)
 
-res = subprocess.Popen("vcvarsall.bat x86_amd64 "
+res = subprocess.Popen(f"vcvarsall.bat {'x86_amd64' if args.target_platform == 'windows64' else 'x86'} "
                  "& cl"
                  f"& meson {build_dir} --cross-file platforms/{args.target_platform}.cross "
                  f"--cross-file platforms/compilers/{args.compiler}_compiler.native --buildtype=release {'--wipe' if os.path.isdir(build_dir) else ''}"
@@ -64,9 +65,8 @@ res = subprocess.Popen("vcvarsall.bat x86_amd64 "
 
 res.wait()
 copy_tools.run(args.target_platform)
+copy_tools.copy_main(args.target_platform)
 generate_init_files.create_init_file(args.target_platform)
-
-download_python.download_file(args.target_platform)
 
 print("=================================Build finished==================================")
 print("Build took:", time.time()- start, "seconds")

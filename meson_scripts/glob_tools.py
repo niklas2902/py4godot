@@ -7,5 +7,5 @@ if __name__=="__main__":
 
 
     for entry in l:
-        if(not entry.startswith("build_meson") and not entry.startswith("python_files") and not entry.startswith("build")):
+        if(not entry.startswith("build_meson") and not entry.startswith("python_files") and not entry.startswith("build") and not entry.startswith("venv")):
             print(entry.lstrip("../").rstrip(".c"))

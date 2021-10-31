@@ -54,4 +54,4 @@ def copy_to_build(export_folder, platform):
     if (not os.path.isdir(copy_dir +"/" + platform + "/" + export_folder)):
         print (f"copying python files to {copy_dir +'/' + platform + '/' + export_folder}")
         copytree(python_files_dir +"/" + export_folder, copy_dir +"/" + platform + "/" + export_folder,
-                 ignore=ignore_patterns("build", "Lib")) # build and lib are unnecessary
+                 ignore=ignore_patterns("build")) # build and lib are unnecessary
