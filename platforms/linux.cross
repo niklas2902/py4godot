@@ -4,11 +4,11 @@ cpp = 'g++'
 ar = 'ar'
 strip = 'strip'
 exe_wrapper = 'wine' # A command used to run generated executables.
-python = 'python_files/cpython-3.9.7-windows64/python/install/python.exe'
+python = 'python_files/cpython-3.9.7-linux/python/install/bin/python3.9'
 
 
 [host_machine]
 system = 'linux'
-cpu_family = 'x86_64'
-cpu = 'x86_64'
+cpu_family = 'x86'
+cpu = 'x86'
 endian = 'little'

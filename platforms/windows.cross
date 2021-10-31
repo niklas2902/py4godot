@@ -1,0 +1,12 @@
+[binaries]
+ar = 'ar'
+strip = 'strip'
+exe_wrapper = 'wine' # A command used to run generated executables.
+python = 'python_files/cpython-3.9.7-windows/python/install/python.exe'
+
+
+[host_machine]
+system = 'windows'
+cpu_family = 'x86'
+cpu = 'x86'
+endian = 'little'
