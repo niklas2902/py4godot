@@ -124,6 +124,7 @@ void GDN_EXPORT godot_gdnative_init(godot_gdnative_init_options *p_options) {
     printf("\n");
 
     Py_SetProgramName(L"godot");
+    Py_SetPythonHome(L"addons/windows64/cpython-3.9.7-windows64/python/install");
     // Initialize interpreter but skip initialization registration of signal handlers
     Py_InitializeEx(0);
     // PyEval_InitThreads acquires the GIL, so we must release it later.
@@ -226,9 +227,9 @@ godot_variant simple_get_data(godot_object *p_instance, void *p_method_data, voi
 }
 
 void set_up_bindings(){
-	PyRun_SimpleString("import sys,os\nprint(sys.path, os.getcwd())");
-	PyRun_SimpleString("import sys, os\nsys.path.insert(0,os.getcwd()+'/addons/windows64')");
-	PyRun_SimpleString("import sys,os\nprint(sys.path, os.getcwd())");
+	PyRun_SimpleString("import sys, os\n\
+sys.path.insert(0,os.getcwd()+'/addons/windows64/')");
+
 	import_classes__classes();
     if (PyErr_Occurred())
     {

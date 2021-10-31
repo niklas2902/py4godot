@@ -18,8 +18,6 @@ from enums.enums cimport *
 from pluginscript_api.utils.annotations import methods, classes, properties, reset
 
 """This file contains all the functions, that are needed to crate a pluginscript"""
-
-
 cdef godot_dictionary dictionary
 cdef api set_api_core_pluginscript(const godot_gdnative_core_api_struct* core):
     global api_core

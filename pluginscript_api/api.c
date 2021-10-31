@@ -854,9 +854,9 @@ static const char *__pyx_f[] = {
   "core\\dictionary\\Dictionary.pxd",
   "core\\variant\\Variant.pxd",
   "godot_bindings\\binding_external.pxd",
-  "type.pxd",
-  "bool.pxd",
-  "complex.pxd",
+  "python_files\\cpython-3.9.7-windows64\\python\\install\\lib\\site-packages\\Cython\\Includes\\cpython\\type.pxd",
+  "python_files\\cpython-3.9.7-windows64\\python\\install\\lib\\site-packages\\Cython\\Includes\\cpython\\bool.pxd",
+  "python_files\\cpython-3.9.7-windows64\\python\\install\\lib\\site-packages\\Cython\\Includes\\cpython\\complex.pxd",
 };
 /* ForceInitThreads.proto */
 #ifndef __PYX_FORCE_INIT_THREADS
@@ -1821,8 +1821,8 @@ static PyObject *__pyx_tuple__6;
 static PyObject *__pyx_tuple__8;
 /* Late includes */
 
-/* "pluginscript_api/api.pyx":24
- * 
+/* "pluginscript_api/api.pyx":22
+ * """This file contains all the functions, that are needed to crate a pluginscript"""
  * cdef godot_dictionary dictionary
  * cdef api set_api_core_pluginscript(const godot_gdnative_core_api_struct* core):             # <<<<<<<<<<<<<<
  *     global api_core
@@ -1838,7 +1838,7 @@ static PyObject *__pyx_f_16pluginscript_api_3api_set_api_core_pluginscript(struc
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("set_api_core_pluginscript", 0);
 
-  /* "pluginscript_api/api.pyx":26
+  /* "pluginscript_api/api.pyx":24
  * cdef api set_api_core_pluginscript(const godot_gdnative_core_api_struct* core):
  *     global api_core
  *     api_core = core             # <<<<<<<<<<<<<<
@@ -1847,7 +1847,7 @@ static PyObject *__pyx_f_16pluginscript_api_3api_set_api_core_pluginscript(struc
  */
   api_core = __pyx_v_core;
 
-  /* "pluginscript_api/api.pyx":27
+  /* "pluginscript_api/api.pyx":25
  *     global api_core
  *     api_core = core
  *     api_core.godot_dictionary_new(&dictionary)             # <<<<<<<<<<<<<<
@@ -1856,19 +1856,19 @@ static PyObject *__pyx_f_16pluginscript_api_3api_set_api_core_pluginscript(struc
  */
   api_core->godot_dictionary_new((&__pyx_v_16pluginscript_api_3api_dictionary));
 
-  /* "pluginscript_api/api.pyx":28
+  /* "pluginscript_api/api.pyx":26
  *     api_core = core
  *     api_core.godot_dictionary_new(&dictionary)
  *     print("\n#############################set_api_core############################################################")             # <<<<<<<<<<<<<<
  * cdef api godot_pluginscript_language_data * init_pluginscript() with gil:
  *     """empty placeholder function, as this is necessary to implement"""
  */
-  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_print, __pyx_tuple_, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 28, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_print, __pyx_tuple_, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 26, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "pluginscript_api/api.pyx":24
- * 
+  /* "pluginscript_api/api.pyx":22
+ * """This file contains all the functions, that are needed to crate a pluginscript"""
  * cdef godot_dictionary dictionary
  * cdef api set_api_core_pluginscript(const godot_gdnative_core_api_struct* core):             # <<<<<<<<<<<<<<
  *     global api_core
@@ -1888,7 +1888,7 @@ static PyObject *__pyx_f_16pluginscript_api_3api_set_api_core_pluginscript(struc
   return __pyx_r;
 }
 
-/* "pluginscript_api/api.pyx":29
+/* "pluginscript_api/api.pyx":27
  *     api_core.godot_dictionary_new(&dictionary)
  *     print("\n#############################set_api_core############################################################")
  * cdef api godot_pluginscript_language_data * init_pluginscript() with gil:             # <<<<<<<<<<<<<<
@@ -1908,18 +1908,18 @@ static godot_pluginscript_language_data *__pyx_f_16pluginscript_api_3api_init_pl
   #endif
   __Pyx_RefNannySetupContext("init_pluginscript", 0);
 
-  /* "pluginscript_api/api.pyx":31
+  /* "pluginscript_api/api.pyx":29
  * cdef api godot_pluginscript_language_data * init_pluginscript() with gil:
  *     """empty placeholder function, as this is necessary to implement"""
  *     print("\n######################################################init_python_pluginscript####################################\n");             # <<<<<<<<<<<<<<
  * 
  * cdef api void finish_pluginscript(godot_pluginscript_instance_data *p_data) with gil:
  */
-  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_print, __pyx_tuple__2, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 31, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_print, __pyx_tuple__2, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 29, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "pluginscript_api/api.pyx":29
+  /* "pluginscript_api/api.pyx":27
  *     api_core.godot_dictionary_new(&dictionary)
  *     print("\n#############################set_api_core############################################################")
  * cdef api godot_pluginscript_language_data * init_pluginscript() with gil:             # <<<<<<<<<<<<<<
@@ -1942,7 +1942,7 @@ static godot_pluginscript_language_data *__pyx_f_16pluginscript_api_3api_init_pl
   return __pyx_r;
 }
 
-/* "pluginscript_api/api.pyx":33
+/* "pluginscript_api/api.pyx":31
  *     print("\n######################################################init_python_pluginscript####################################\n");
  * 
  * cdef api void finish_pluginscript(godot_pluginscript_instance_data *p_data) with gil:             # <<<<<<<<<<<<<<
@@ -1961,18 +1961,18 @@ static void __pyx_f_16pluginscript_api_3api_finish_pluginscript(CYTHON_UNUSED go
   #endif
   __Pyx_RefNannySetupContext("finish_pluginscript", 0);
 
-  /* "pluginscript_api/api.pyx":35
+  /* "pluginscript_api/api.pyx":33
  * cdef api void finish_pluginscript(godot_pluginscript_instance_data *p_data) with gil:
  *     """currently empty function which is necessary to implement. It could later be used to delete resources"""
  *     print("finish_python_test\n");             # <<<<<<<<<<<<<<
  * 
  * cdef api  void add_global_constant_pluginscript(godot_pluginscript_language_data *p_data,
  */
-  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_print, __pyx_tuple__3, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 35, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_print, __pyx_tuple__3, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 33, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "pluginscript_api/api.pyx":33
+  /* "pluginscript_api/api.pyx":31
  *     print("\n######################################################init_python_pluginscript####################################\n");
  * 
  * cdef api void finish_pluginscript(godot_pluginscript_instance_data *p_data) with gil:             # <<<<<<<<<<<<<<
@@ -1992,7 +1992,7 @@ static void __pyx_f_16pluginscript_api_3api_finish_pluginscript(CYTHON_UNUSED go
   #endif
 }
 
-/* "pluginscript_api/api.pyx":37
+/* "pluginscript_api/api.pyx":35
  *     print("finish_python_test\n");
  * 
  * cdef api  void add_global_constant_pluginscript(godot_pluginscript_language_data *p_data,             # <<<<<<<<<<<<<<
@@ -2011,18 +2011,18 @@ static void __pyx_f_16pluginscript_api_3api_add_global_constant_pluginscript(CYT
   #endif
   __Pyx_RefNannySetupContext("add_global_constant_pluginscript", 0);
 
-  /* "pluginscript_api/api.pyx":40
+  /* "pluginscript_api/api.pyx":38
  * const godot_string *p_variable, const godot_variant *p_value) with gil:
  *     """empty placeholder function, as this is necessary to implement"""
  *     print("\n######################################################add_global_constant#############################\n");             # <<<<<<<<<<<<<<
  * 
  * ###############################################pluginscript_desc#######################################################
  */
-  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_print, __pyx_tuple__4, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 40, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_print, __pyx_tuple__4, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 38, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "pluginscript_api/api.pyx":37
+  /* "pluginscript_api/api.pyx":35
  *     print("finish_python_test\n");
  * 
  * cdef api  void add_global_constant_pluginscript(godot_pluginscript_language_data *p_data,             # <<<<<<<<<<<<<<
@@ -2042,7 +2042,7 @@ static void __pyx_f_16pluginscript_api_3api_add_global_constant_pluginscript(CYT
   #endif
 }
 
-/* "pluginscript_api/api.pyx":43
+/* "pluginscript_api/api.pyx":41
  * 
  * ###############################################pluginscript_desc#######################################################
  * cdef api  godot_pluginscript_script_manifest init_pluginscript_desc (godot_pluginscript_language_data *p_data,             # <<<<<<<<<<<<<<
@@ -2081,24 +2081,24 @@ static godot_pluginscript_script_manifest __pyx_f_16pluginscript_api_3api_init_p
   #endif
   __Pyx_RefNannySetupContext("init_pluginscript_desc", 0);
 
-  /* "pluginscript_api/api.pyx":51
+  /* "pluginscript_api/api.pyx":49
  *     cdef PyObject* obj
  * 
  *     if("python/install" in str(String.new_static(dereference(p_path)))):             # <<<<<<<<<<<<<<
  *         create_empty_manifest(&manifest)
  *         return manifest
  */
-  __pyx_t_1 = ((PyObject *)__pyx_f_4core_6string_6String_6String_new_static((*__pyx_v_p_path))); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 51, __pyx_L1_error)
+  __pyx_t_1 = ((PyObject *)__pyx_f_4core_6string_6String_6String_new_static((*__pyx_v_p_path))); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 49, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = __Pyx_PyObject_CallOneArg(((PyObject *)(&PyUnicode_Type)), __pyx_t_1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 51, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_CallOneArg(((PyObject *)(&PyUnicode_Type)), __pyx_t_1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 49, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_3 = (__Pyx_PyUnicode_ContainsTF(__pyx_kp_u_python_install, __pyx_t_2, Py_EQ)); if (unlikely(__pyx_t_3 < 0)) __PYX_ERR(0, 51, __pyx_L1_error)
+  __pyx_t_3 = (__Pyx_PyUnicode_ContainsTF(__pyx_kp_u_python_install, __pyx_t_2, Py_EQ)); if (unlikely(__pyx_t_3 < 0)) __PYX_ERR(0, 49, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __pyx_t_4 = (__pyx_t_3 != 0);
   if (__pyx_t_4) {
 
-    /* "pluginscript_api/api.pyx":52
+    /* "pluginscript_api/api.pyx":50
  * 
  *     if("python/install" in str(String.new_static(dereference(p_path)))):
  *         create_empty_manifest(&manifest)             # <<<<<<<<<<<<<<
@@ -2107,7 +2107,7 @@ static godot_pluginscript_script_manifest __pyx_f_16pluginscript_api_3api_init_p
  */
     __pyx_f_16pluginscript_api_3api_create_empty_manifest((&__pyx_v_manifest));
 
-    /* "pluginscript_api/api.pyx":53
+    /* "pluginscript_api/api.pyx":51
  *     if("python/install" in str(String.new_static(dereference(p_path)))):
  *         create_empty_manifest(&manifest)
  *         return manifest             # <<<<<<<<<<<<<<
@@ -2117,7 +2117,7 @@ static godot_pluginscript_script_manifest __pyx_f_16pluginscript_api_3api_init_p
     __pyx_r = __pyx_v_manifest;
     goto __pyx_L0;
 
-    /* "pluginscript_api/api.pyx":51
+    /* "pluginscript_api/api.pyx":49
  *     cdef PyObject* obj
  * 
  *     if("python/install" in str(String.new_static(dereference(p_path)))):             # <<<<<<<<<<<<<<
@@ -2126,25 +2126,25 @@ static godot_pluginscript_script_manifest __pyx_f_16pluginscript_api_3api_init_p
  */
   }
 
-  /* "pluginscript_api/api.pyx":55
+  /* "pluginscript_api/api.pyx":53
  *         return manifest
  * 
  *     print("\n############################################create_manifest##############################################\n");             # <<<<<<<<<<<<<<
  *     reset()
  *     exec(str(String.new_static(dereference(p_source))))
  */
-  __pyx_t_2 = __Pyx_PyObject_Call(__pyx_builtin_print, __pyx_tuple__5, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 55, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_Call(__pyx_builtin_print, __pyx_tuple__5, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 53, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "pluginscript_api/api.pyx":56
+  /* "pluginscript_api/api.pyx":54
  * 
  *     print("\n############################################create_manifest##############################################\n");
  *     reset()             # <<<<<<<<<<<<<<
  *     exec(str(String.new_static(dereference(p_source))))
  *     if(len(classes) > 0):
  */
-  __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_n_s_reset); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 56, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_n_s_reset); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 54, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_t_5 = NULL;
   if (CYTHON_UNPACK_METHODS && unlikely(PyMethod_Check(__pyx_t_1))) {
@@ -2158,58 +2158,58 @@ static godot_pluginscript_script_manifest __pyx_f_16pluginscript_api_3api_init_p
   }
   __pyx_t_2 = (__pyx_t_5) ? __Pyx_PyObject_CallOneArg(__pyx_t_1, __pyx_t_5) : __Pyx_PyObject_CallNoArg(__pyx_t_1);
   __Pyx_XDECREF(__pyx_t_5); __pyx_t_5 = 0;
-  if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 56, __pyx_L1_error)
+  if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 54, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "pluginscript_api/api.pyx":57
+  /* "pluginscript_api/api.pyx":55
  *     print("\n############################################create_manifest##############################################\n");
  *     reset()
  *     exec(str(String.new_static(dereference(p_source))))             # <<<<<<<<<<<<<<
  *     if(len(classes) > 0):
  *         #creating a valid manifest
  */
-  __pyx_t_2 = ((PyObject *)__pyx_f_4core_6string_6String_6String_new_static((*__pyx_v_p_source))); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 57, __pyx_L1_error)
+  __pyx_t_2 = ((PyObject *)__pyx_f_4core_6string_6String_6String_new_static((*__pyx_v_p_source))); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 55, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_1 = __Pyx_PyObject_CallOneArg(((PyObject *)(&PyUnicode_Type)), __pyx_t_2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 57, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_CallOneArg(((PyObject *)(&PyUnicode_Type)), __pyx_t_2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 55, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_2 = __Pyx_PyExecGlobals(__pyx_t_1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 57, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyExecGlobals(__pyx_t_1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 55, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "pluginscript_api/api.pyx":58
+  /* "pluginscript_api/api.pyx":56
  *     reset()
  *     exec(str(String.new_static(dereference(p_source))))
  *     if(len(classes) > 0):             # <<<<<<<<<<<<<<
  *         #creating a valid manifest
  *         gd_obj = classes[0]
  */
-  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_classes); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 58, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_classes); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 56, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_6 = PyObject_Length(__pyx_t_2); if (unlikely(__pyx_t_6 == ((Py_ssize_t)-1))) __PYX_ERR(0, 58, __pyx_L1_error)
+  __pyx_t_6 = PyObject_Length(__pyx_t_2); if (unlikely(__pyx_t_6 == ((Py_ssize_t)-1))) __PYX_ERR(0, 56, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __pyx_t_4 = ((__pyx_t_6 > 0) != 0);
   if (__pyx_t_4) {
 
-    /* "pluginscript_api/api.pyx":60
+    /* "pluginscript_api/api.pyx":58
  *     if(len(classes) > 0):
  *         #creating a valid manifest
  *         gd_obj = classes[0]             # <<<<<<<<<<<<<<
  *         api_core.godot_string_name_new_data(&manifest.name, "python_manifest");
  *         manifest.is_tool = False;
  */
-    __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_classes); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 60, __pyx_L1_error)
+    __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_classes); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 58, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
-    __pyx_t_1 = __Pyx_GetItemInt(__pyx_t_2, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 60, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_GetItemInt(__pyx_t_2, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 58, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
     __pyx_v_gd_obj = __pyx_t_1;
     __pyx_t_1 = 0;
 
-    /* "pluginscript_api/api.pyx":61
+    /* "pluginscript_api/api.pyx":59
  *         #creating a valid manifest
  *         gd_obj = classes[0]
  *         api_core.godot_string_name_new_data(&manifest.name, "python_manifest");             # <<<<<<<<<<<<<<
@@ -2218,7 +2218,7 @@ static godot_pluginscript_script_manifest __pyx_f_16pluginscript_api_3api_init_p
  */
     api_core->godot_string_name_new_data((&__pyx_v_manifest.name), ((char const *)"python_manifest"));
 
-    /* "pluginscript_api/api.pyx":62
+    /* "pluginscript_api/api.pyx":60
  *         gd_obj = classes[0]
  *         api_core.godot_string_name_new_data(&manifest.name, "python_manifest");
  *         manifest.is_tool = False;             # <<<<<<<<<<<<<<
@@ -2227,7 +2227,7 @@ static godot_pluginscript_script_manifest __pyx_f_16pluginscript_api_3api_init_p
  */
     __pyx_v_manifest.is_tool = 0;
 
-    /* "pluginscript_api/api.pyx":63
+    /* "pluginscript_api/api.pyx":61
  *         api_core.godot_string_name_new_data(&manifest.name, "python_manifest");
  *         manifest.is_tool = False;
  *         api_core.godot_string_name_new_data(&manifest.base, "");             # <<<<<<<<<<<<<<
@@ -2236,7 +2236,7 @@ static godot_pluginscript_script_manifest __pyx_f_16pluginscript_api_3api_init_p
  */
     api_core->godot_string_name_new_data((&__pyx_v_manifest.base), ((char const *)""));
 
-    /* "pluginscript_api/api.pyx":64
+    /* "pluginscript_api/api.pyx":62
  *         manifest.is_tool = False;
  *         api_core.godot_string_name_new_data(&manifest.base, "");
  *         api_core.godot_dictionary_new(&manifest.member_lines);             # <<<<<<<<<<<<<<
@@ -2245,7 +2245,7 @@ static godot_pluginscript_script_manifest __pyx_f_16pluginscript_api_3api_init_p
  */
     api_core->godot_dictionary_new((&__pyx_v_manifest.member_lines));
 
-    /* "pluginscript_api/api.pyx":65
+    /* "pluginscript_api/api.pyx":63
  *         api_core.godot_string_name_new_data(&manifest.base, "");
  *         api_core.godot_dictionary_new(&manifest.member_lines);
  *         api_core.godot_array_new(&manifest.signals);             # <<<<<<<<<<<<<<
@@ -2254,19 +2254,19 @@ static godot_pluginscript_script_manifest __pyx_f_16pluginscript_api_3api_init_p
  */
     api_core->godot_array_new((&__pyx_v_manifest.signals));
 
-    /* "pluginscript_api/api.pyx":66
+    /* "pluginscript_api/api.pyx":64
  *         api_core.godot_dictionary_new(&manifest.member_lines);
  *         api_core.godot_array_new(&manifest.signals);
  *         methods_array = Array()             # <<<<<<<<<<<<<<
  *         api_core.godot_print(p_source)
  *         api_core.godot_print(p_path)
  */
-    __pyx_t_1 = __Pyx_PyObject_CallNoArg(((PyObject *)__pyx_ptype_4core_5array_5Array_Array)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 66, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_CallNoArg(((PyObject *)__pyx_ptype_4core_5array_5Array_Array)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 64, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __pyx_v_methods_array = ((struct __pyx_obj_4core_5array_5Array_Array *)__pyx_t_1);
     __pyx_t_1 = 0;
 
-    /* "pluginscript_api/api.pyx":67
+    /* "pluginscript_api/api.pyx":65
  *         api_core.godot_array_new(&manifest.signals);
  *         methods_array = Array()
  *         api_core.godot_print(p_source)             # <<<<<<<<<<<<<<
@@ -2275,7 +2275,7 @@ static godot_pluginscript_script_manifest __pyx_f_16pluginscript_api_3api_init_p
  */
     api_core->godot_print(__pyx_v_p_source);
 
-    /* "pluginscript_api/api.pyx":68
+    /* "pluginscript_api/api.pyx":66
  *         methods_array = Array()
  *         api_core.godot_print(p_source)
  *         api_core.godot_print(p_path)             # <<<<<<<<<<<<<<
@@ -2284,7 +2284,7 @@ static godot_pluginscript_script_manifest __pyx_f_16pluginscript_api_3api_init_p
  */
     api_core->godot_print(__pyx_v_p_path);
 
-    /* "pluginscript_api/api.pyx":70
+    /* "pluginscript_api/api.pyx":68
  *         api_core.godot_print(p_path)
  * 
  *         class_obj = <PyObject*> gd_obj             # <<<<<<<<<<<<<<
@@ -2293,34 +2293,34 @@ static godot_pluginscript_script_manifest __pyx_f_16pluginscript_api_3api_init_p
  */
     __pyx_v_class_obj = ((PyObject *)__pyx_v_gd_obj);
 
-    /* "pluginscript_api/api.pyx":72
+    /* "pluginscript_api/api.pyx":70
  *         class_obj = <PyObject*> gd_obj
  * 
  *         properties_array = Array()             # <<<<<<<<<<<<<<
  *         for p in properties:
  *             properties_array.append(Variant(p.to_dict()))
  */
-    __pyx_t_1 = __Pyx_PyObject_CallNoArg(((PyObject *)__pyx_ptype_4core_5array_5Array_Array)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 72, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_CallNoArg(((PyObject *)__pyx_ptype_4core_5array_5Array_Array)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 70, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __pyx_v_properties_array = ((struct __pyx_obj_4core_5array_5Array_Array *)__pyx_t_1);
     __pyx_t_1 = 0;
 
-    /* "pluginscript_api/api.pyx":73
+    /* "pluginscript_api/api.pyx":71
  * 
  *         properties_array = Array()
  *         for p in properties:             # <<<<<<<<<<<<<<
  *             properties_array.append(Variant(p.to_dict()))
  *         for m in methods:
  */
-    __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_n_s_properties); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 73, __pyx_L1_error)
+    __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_n_s_properties); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 71, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     if (likely(PyList_CheckExact(__pyx_t_1)) || PyTuple_CheckExact(__pyx_t_1)) {
       __pyx_t_2 = __pyx_t_1; __Pyx_INCREF(__pyx_t_2); __pyx_t_6 = 0;
       __pyx_t_7 = NULL;
     } else {
-      __pyx_t_6 = -1; __pyx_t_2 = PyObject_GetIter(__pyx_t_1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 73, __pyx_L1_error)
+      __pyx_t_6 = -1; __pyx_t_2 = PyObject_GetIter(__pyx_t_1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 71, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_2);
-      __pyx_t_7 = Py_TYPE(__pyx_t_2)->tp_iternext; if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 73, __pyx_L1_error)
+      __pyx_t_7 = Py_TYPE(__pyx_t_2)->tp_iternext; if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 71, __pyx_L1_error)
     }
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     for (;;) {
@@ -2328,17 +2328,17 @@ static godot_pluginscript_script_manifest __pyx_f_16pluginscript_api_3api_init_p
         if (likely(PyList_CheckExact(__pyx_t_2))) {
           if (__pyx_t_6 >= PyList_GET_SIZE(__pyx_t_2)) break;
           #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
-          __pyx_t_1 = PyList_GET_ITEM(__pyx_t_2, __pyx_t_6); __Pyx_INCREF(__pyx_t_1); __pyx_t_6++; if (unlikely(0 < 0)) __PYX_ERR(0, 73, __pyx_L1_error)
+          __pyx_t_1 = PyList_GET_ITEM(__pyx_t_2, __pyx_t_6); __Pyx_INCREF(__pyx_t_1); __pyx_t_6++; if (unlikely(0 < 0)) __PYX_ERR(0, 71, __pyx_L1_error)
           #else
-          __pyx_t_1 = PySequence_ITEM(__pyx_t_2, __pyx_t_6); __pyx_t_6++; if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 73, __pyx_L1_error)
+          __pyx_t_1 = PySequence_ITEM(__pyx_t_2, __pyx_t_6); __pyx_t_6++; if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 71, __pyx_L1_error)
           __Pyx_GOTREF(__pyx_t_1);
           #endif
         } else {
           if (__pyx_t_6 >= PyTuple_GET_SIZE(__pyx_t_2)) break;
           #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
-          __pyx_t_1 = PyTuple_GET_ITEM(__pyx_t_2, __pyx_t_6); __Pyx_INCREF(__pyx_t_1); __pyx_t_6++; if (unlikely(0 < 0)) __PYX_ERR(0, 73, __pyx_L1_error)
+          __pyx_t_1 = PyTuple_GET_ITEM(__pyx_t_2, __pyx_t_6); __Pyx_INCREF(__pyx_t_1); __pyx_t_6++; if (unlikely(0 < 0)) __PYX_ERR(0, 71, __pyx_L1_error)
           #else
-          __pyx_t_1 = PySequence_ITEM(__pyx_t_2, __pyx_t_6); __pyx_t_6++; if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 73, __pyx_L1_error)
+          __pyx_t_1 = PySequence_ITEM(__pyx_t_2, __pyx_t_6); __pyx_t_6++; if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 71, __pyx_L1_error)
           __Pyx_GOTREF(__pyx_t_1);
           #endif
         }
@@ -2348,7 +2348,7 @@ static godot_pluginscript_script_manifest __pyx_f_16pluginscript_api_3api_init_p
           PyObject* exc_type = PyErr_Occurred();
           if (exc_type) {
             if (likely(__Pyx_PyErr_GivenExceptionMatches(exc_type, PyExc_StopIteration))) PyErr_Clear();
-            else __PYX_ERR(0, 73, __pyx_L1_error)
+            else __PYX_ERR(0, 71, __pyx_L1_error)
           }
           break;
         }
@@ -2357,16 +2357,123 @@ static godot_pluginscript_script_manifest __pyx_f_16pluginscript_api_3api_init_p
       __Pyx_XDECREF_SET(__pyx_v_p, __pyx_t_1);
       __pyx_t_1 = 0;
 
-      /* "pluginscript_api/api.pyx":74
+      /* "pluginscript_api/api.pyx":72
  *         properties_array = Array()
  *         for p in properties:
  *             properties_array.append(Variant(p.to_dict()))             # <<<<<<<<<<<<<<
  *         for m in methods:
  *             methods_array.append(Variant(m.to_dict()))
  */
+      __Pyx_GetModuleGlobalName(__pyx_t_5, __pyx_n_s_Variant); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 72, __pyx_L1_error)
+      __Pyx_GOTREF(__pyx_t_5);
+      __pyx_t_9 = __Pyx_PyObject_GetAttrStr(__pyx_v_p, __pyx_n_s_to_dict); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 72, __pyx_L1_error)
+      __Pyx_GOTREF(__pyx_t_9);
+      __pyx_t_10 = NULL;
+      if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_9))) {
+        __pyx_t_10 = PyMethod_GET_SELF(__pyx_t_9);
+        if (likely(__pyx_t_10)) {
+          PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_9);
+          __Pyx_INCREF(__pyx_t_10);
+          __Pyx_INCREF(function);
+          __Pyx_DECREF_SET(__pyx_t_9, function);
+        }
+      }
+      __pyx_t_8 = (__pyx_t_10) ? __Pyx_PyObject_CallOneArg(__pyx_t_9, __pyx_t_10) : __Pyx_PyObject_CallNoArg(__pyx_t_9);
+      __Pyx_XDECREF(__pyx_t_10); __pyx_t_10 = 0;
+      if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 72, __pyx_L1_error)
+      __Pyx_GOTREF(__pyx_t_8);
+      __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
+      __pyx_t_9 = NULL;
+      if (CYTHON_UNPACK_METHODS && unlikely(PyMethod_Check(__pyx_t_5))) {
+        __pyx_t_9 = PyMethod_GET_SELF(__pyx_t_5);
+        if (likely(__pyx_t_9)) {
+          PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_5);
+          __Pyx_INCREF(__pyx_t_9);
+          __Pyx_INCREF(function);
+          __Pyx_DECREF_SET(__pyx_t_5, function);
+        }
+      }
+      __pyx_t_1 = (__pyx_t_9) ? __Pyx_PyObject_Call2Args(__pyx_t_5, __pyx_t_9, __pyx_t_8) : __Pyx_PyObject_CallOneArg(__pyx_t_5, __pyx_t_8);
+      __Pyx_XDECREF(__pyx_t_9); __pyx_t_9 = 0;
+      __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
+      if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 72, __pyx_L1_error)
+      __Pyx_GOTREF(__pyx_t_1);
+      __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
+      __pyx_t_11 = __Pyx_PyObject_Append(((PyObject *)__pyx_v_properties_array), __pyx_t_1); if (unlikely(__pyx_t_11 == ((int)-1))) __PYX_ERR(0, 72, __pyx_L1_error)
+      __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+
+      /* "pluginscript_api/api.pyx":71
+ * 
+ *         properties_array = Array()
+ *         for p in properties:             # <<<<<<<<<<<<<<
+ *             properties_array.append(Variant(p.to_dict()))
+ *         for m in methods:
+ */
+    }
+    __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+
+    /* "pluginscript_api/api.pyx":73
+ *         for p in properties:
+ *             properties_array.append(Variant(p.to_dict()))
+ *         for m in methods:             # <<<<<<<<<<<<<<
+ *             methods_array.append(Variant(m.to_dict()))
+ * 
+ */
+    __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_methods); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 73, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_2);
+    if (likely(PyList_CheckExact(__pyx_t_2)) || PyTuple_CheckExact(__pyx_t_2)) {
+      __pyx_t_1 = __pyx_t_2; __Pyx_INCREF(__pyx_t_1); __pyx_t_6 = 0;
+      __pyx_t_7 = NULL;
+    } else {
+      __pyx_t_6 = -1; __pyx_t_1 = PyObject_GetIter(__pyx_t_2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 73, __pyx_L1_error)
+      __Pyx_GOTREF(__pyx_t_1);
+      __pyx_t_7 = Py_TYPE(__pyx_t_1)->tp_iternext; if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 73, __pyx_L1_error)
+    }
+    __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+    for (;;) {
+      if (likely(!__pyx_t_7)) {
+        if (likely(PyList_CheckExact(__pyx_t_1))) {
+          if (__pyx_t_6 >= PyList_GET_SIZE(__pyx_t_1)) break;
+          #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
+          __pyx_t_2 = PyList_GET_ITEM(__pyx_t_1, __pyx_t_6); __Pyx_INCREF(__pyx_t_2); __pyx_t_6++; if (unlikely(0 < 0)) __PYX_ERR(0, 73, __pyx_L1_error)
+          #else
+          __pyx_t_2 = PySequence_ITEM(__pyx_t_1, __pyx_t_6); __pyx_t_6++; if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 73, __pyx_L1_error)
+          __Pyx_GOTREF(__pyx_t_2);
+          #endif
+        } else {
+          if (__pyx_t_6 >= PyTuple_GET_SIZE(__pyx_t_1)) break;
+          #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
+          __pyx_t_2 = PyTuple_GET_ITEM(__pyx_t_1, __pyx_t_6); __Pyx_INCREF(__pyx_t_2); __pyx_t_6++; if (unlikely(0 < 0)) __PYX_ERR(0, 73, __pyx_L1_error)
+          #else
+          __pyx_t_2 = PySequence_ITEM(__pyx_t_1, __pyx_t_6); __pyx_t_6++; if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 73, __pyx_L1_error)
+          __Pyx_GOTREF(__pyx_t_2);
+          #endif
+        }
+      } else {
+        __pyx_t_2 = __pyx_t_7(__pyx_t_1);
+        if (unlikely(!__pyx_t_2)) {
+          PyObject* exc_type = PyErr_Occurred();
+          if (exc_type) {
+            if (likely(__Pyx_PyErr_GivenExceptionMatches(exc_type, PyExc_StopIteration))) PyErr_Clear();
+            else __PYX_ERR(0, 73, __pyx_L1_error)
+          }
+          break;
+        }
+        __Pyx_GOTREF(__pyx_t_2);
+      }
+      __Pyx_XDECREF_SET(__pyx_v_m, __pyx_t_2);
+      __pyx_t_2 = 0;
+
+      /* "pluginscript_api/api.pyx":74
+ *             properties_array.append(Variant(p.to_dict()))
+ *         for m in methods:
+ *             methods_array.append(Variant(m.to_dict()))             # <<<<<<<<<<<<<<
+ * 
+ *         manifest.properties = properties_array._native
+ */
       __Pyx_GetModuleGlobalName(__pyx_t_5, __pyx_n_s_Variant); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 74, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_5);
-      __pyx_t_9 = __Pyx_PyObject_GetAttrStr(__pyx_v_p, __pyx_n_s_to_dict); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 74, __pyx_L1_error)
+      __pyx_t_9 = __Pyx_PyObject_GetAttrStr(__pyx_v_m, __pyx_n_s_to_dict); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 74, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_9);
       __pyx_t_10 = NULL;
       if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_9))) {
@@ -2393,123 +2500,16 @@ static godot_pluginscript_script_manifest __pyx_f_16pluginscript_api_3api_init_p
           __Pyx_DECREF_SET(__pyx_t_5, function);
         }
       }
-      __pyx_t_1 = (__pyx_t_9) ? __Pyx_PyObject_Call2Args(__pyx_t_5, __pyx_t_9, __pyx_t_8) : __Pyx_PyObject_CallOneArg(__pyx_t_5, __pyx_t_8);
-      __Pyx_XDECREF(__pyx_t_9); __pyx_t_9 = 0;
-      __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
-      if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 74, __pyx_L1_error)
-      __Pyx_GOTREF(__pyx_t_1);
-      __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-      __pyx_t_11 = __Pyx_PyObject_Append(((PyObject *)__pyx_v_properties_array), __pyx_t_1); if (unlikely(__pyx_t_11 == ((int)-1))) __PYX_ERR(0, 74, __pyx_L1_error)
-      __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-
-      /* "pluginscript_api/api.pyx":73
- * 
- *         properties_array = Array()
- *         for p in properties:             # <<<<<<<<<<<<<<
- *             properties_array.append(Variant(p.to_dict()))
- *         for m in methods:
- */
-    }
-    __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-
-    /* "pluginscript_api/api.pyx":75
- *         for p in properties:
- *             properties_array.append(Variant(p.to_dict()))
- *         for m in methods:             # <<<<<<<<<<<<<<
- *             methods_array.append(Variant(m.to_dict()))
- * 
- */
-    __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_methods); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 75, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_2);
-    if (likely(PyList_CheckExact(__pyx_t_2)) || PyTuple_CheckExact(__pyx_t_2)) {
-      __pyx_t_1 = __pyx_t_2; __Pyx_INCREF(__pyx_t_1); __pyx_t_6 = 0;
-      __pyx_t_7 = NULL;
-    } else {
-      __pyx_t_6 = -1; __pyx_t_1 = PyObject_GetIter(__pyx_t_2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 75, __pyx_L1_error)
-      __Pyx_GOTREF(__pyx_t_1);
-      __pyx_t_7 = Py_TYPE(__pyx_t_1)->tp_iternext; if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 75, __pyx_L1_error)
-    }
-    __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    for (;;) {
-      if (likely(!__pyx_t_7)) {
-        if (likely(PyList_CheckExact(__pyx_t_1))) {
-          if (__pyx_t_6 >= PyList_GET_SIZE(__pyx_t_1)) break;
-          #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
-          __pyx_t_2 = PyList_GET_ITEM(__pyx_t_1, __pyx_t_6); __Pyx_INCREF(__pyx_t_2); __pyx_t_6++; if (unlikely(0 < 0)) __PYX_ERR(0, 75, __pyx_L1_error)
-          #else
-          __pyx_t_2 = PySequence_ITEM(__pyx_t_1, __pyx_t_6); __pyx_t_6++; if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 75, __pyx_L1_error)
-          __Pyx_GOTREF(__pyx_t_2);
-          #endif
-        } else {
-          if (__pyx_t_6 >= PyTuple_GET_SIZE(__pyx_t_1)) break;
-          #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
-          __pyx_t_2 = PyTuple_GET_ITEM(__pyx_t_1, __pyx_t_6); __Pyx_INCREF(__pyx_t_2); __pyx_t_6++; if (unlikely(0 < 0)) __PYX_ERR(0, 75, __pyx_L1_error)
-          #else
-          __pyx_t_2 = PySequence_ITEM(__pyx_t_1, __pyx_t_6); __pyx_t_6++; if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 75, __pyx_L1_error)
-          __Pyx_GOTREF(__pyx_t_2);
-          #endif
-        }
-      } else {
-        __pyx_t_2 = __pyx_t_7(__pyx_t_1);
-        if (unlikely(!__pyx_t_2)) {
-          PyObject* exc_type = PyErr_Occurred();
-          if (exc_type) {
-            if (likely(__Pyx_PyErr_GivenExceptionMatches(exc_type, PyExc_StopIteration))) PyErr_Clear();
-            else __PYX_ERR(0, 75, __pyx_L1_error)
-          }
-          break;
-        }
-        __Pyx_GOTREF(__pyx_t_2);
-      }
-      __Pyx_XDECREF_SET(__pyx_v_m, __pyx_t_2);
-      __pyx_t_2 = 0;
-
-      /* "pluginscript_api/api.pyx":76
- *             properties_array.append(Variant(p.to_dict()))
- *         for m in methods:
- *             methods_array.append(Variant(m.to_dict()))             # <<<<<<<<<<<<<<
- * 
- *         manifest.properties = properties_array._native
- */
-      __Pyx_GetModuleGlobalName(__pyx_t_5, __pyx_n_s_Variant); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 76, __pyx_L1_error)
-      __Pyx_GOTREF(__pyx_t_5);
-      __pyx_t_9 = __Pyx_PyObject_GetAttrStr(__pyx_v_m, __pyx_n_s_to_dict); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 76, __pyx_L1_error)
-      __Pyx_GOTREF(__pyx_t_9);
-      __pyx_t_10 = NULL;
-      if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_9))) {
-        __pyx_t_10 = PyMethod_GET_SELF(__pyx_t_9);
-        if (likely(__pyx_t_10)) {
-          PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_9);
-          __Pyx_INCREF(__pyx_t_10);
-          __Pyx_INCREF(function);
-          __Pyx_DECREF_SET(__pyx_t_9, function);
-        }
-      }
-      __pyx_t_8 = (__pyx_t_10) ? __Pyx_PyObject_CallOneArg(__pyx_t_9, __pyx_t_10) : __Pyx_PyObject_CallNoArg(__pyx_t_9);
-      __Pyx_XDECREF(__pyx_t_10); __pyx_t_10 = 0;
-      if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 76, __pyx_L1_error)
-      __Pyx_GOTREF(__pyx_t_8);
-      __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
-      __pyx_t_9 = NULL;
-      if (CYTHON_UNPACK_METHODS && unlikely(PyMethod_Check(__pyx_t_5))) {
-        __pyx_t_9 = PyMethod_GET_SELF(__pyx_t_5);
-        if (likely(__pyx_t_9)) {
-          PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_5);
-          __Pyx_INCREF(__pyx_t_9);
-          __Pyx_INCREF(function);
-          __Pyx_DECREF_SET(__pyx_t_5, function);
-        }
-      }
       __pyx_t_2 = (__pyx_t_9) ? __Pyx_PyObject_Call2Args(__pyx_t_5, __pyx_t_9, __pyx_t_8) : __Pyx_PyObject_CallOneArg(__pyx_t_5, __pyx_t_8);
       __Pyx_XDECREF(__pyx_t_9); __pyx_t_9 = 0;
       __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
-      if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 76, __pyx_L1_error)
+      if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 74, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_2);
       __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-      __pyx_t_11 = __Pyx_PyObject_Append(((PyObject *)__pyx_v_methods_array), __pyx_t_2); if (unlikely(__pyx_t_11 == ((int)-1))) __PYX_ERR(0, 76, __pyx_L1_error)
+      __pyx_t_11 = __Pyx_PyObject_Append(((PyObject *)__pyx_v_methods_array), __pyx_t_2); if (unlikely(__pyx_t_11 == ((int)-1))) __PYX_ERR(0, 74, __pyx_L1_error)
       __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-      /* "pluginscript_api/api.pyx":75
+      /* "pluginscript_api/api.pyx":73
  *         for p in properties:
  *             properties_array.append(Variant(p.to_dict()))
  *         for m in methods:             # <<<<<<<<<<<<<<
@@ -2519,7 +2519,7 @@ static godot_pluginscript_script_manifest __pyx_f_16pluginscript_api_3api_init_p
     }
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-    /* "pluginscript_api/api.pyx":78
+    /* "pluginscript_api/api.pyx":76
  *             methods_array.append(Variant(m.to_dict()))
  * 
  *         manifest.properties = properties_array._native             # <<<<<<<<<<<<<<
@@ -2529,7 +2529,7 @@ static godot_pluginscript_script_manifest __pyx_f_16pluginscript_api_3api_init_p
     __pyx_t_12 = __pyx_v_properties_array->_native;
     __pyx_v_manifest.properties = __pyx_t_12;
 
-    /* "pluginscript_api/api.pyx":79
+    /* "pluginscript_api/api.pyx":77
  * 
  *         manifest.properties = properties_array._native
  *         manifest.methods = methods_array._native             # <<<<<<<<<<<<<<
@@ -2539,7 +2539,7 @@ static godot_pluginscript_script_manifest __pyx_f_16pluginscript_api_3api_init_p
     __pyx_t_12 = __pyx_v_methods_array->_native;
     __pyx_v_manifest.methods = __pyx_t_12;
 
-    /* "pluginscript_api/api.pyx":81
+    /* "pluginscript_api/api.pyx":79
  *         manifest.methods = methods_array._native
  * 
  *         (<Wrapper>class_obj).PROPERTIES = [p.name for p in properties]             # <<<<<<<<<<<<<<
@@ -2547,17 +2547,17 @@ static godot_pluginscript_script_manifest __pyx_f_16pluginscript_api_3api_init_p
  *     else:
  */
     { /* enter inner scope */
-      __pyx_t_1 = PyList_New(0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 81, __pyx_L11_error)
+      __pyx_t_1 = PyList_New(0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 79, __pyx_L11_error)
       __Pyx_GOTREF(__pyx_t_1);
-      __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_properties); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 81, __pyx_L11_error)
+      __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_properties); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 79, __pyx_L11_error)
       __Pyx_GOTREF(__pyx_t_2);
       if (likely(PyList_CheckExact(__pyx_t_2)) || PyTuple_CheckExact(__pyx_t_2)) {
         __pyx_t_5 = __pyx_t_2; __Pyx_INCREF(__pyx_t_5); __pyx_t_6 = 0;
         __pyx_t_7 = NULL;
       } else {
-        __pyx_t_6 = -1; __pyx_t_5 = PyObject_GetIter(__pyx_t_2); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 81, __pyx_L11_error)
+        __pyx_t_6 = -1; __pyx_t_5 = PyObject_GetIter(__pyx_t_2); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 79, __pyx_L11_error)
         __Pyx_GOTREF(__pyx_t_5);
-        __pyx_t_7 = Py_TYPE(__pyx_t_5)->tp_iternext; if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 81, __pyx_L11_error)
+        __pyx_t_7 = Py_TYPE(__pyx_t_5)->tp_iternext; if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 79, __pyx_L11_error)
       }
       __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
       for (;;) {
@@ -2565,17 +2565,17 @@ static godot_pluginscript_script_manifest __pyx_f_16pluginscript_api_3api_init_p
           if (likely(PyList_CheckExact(__pyx_t_5))) {
             if (__pyx_t_6 >= PyList_GET_SIZE(__pyx_t_5)) break;
             #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
-            __pyx_t_2 = PyList_GET_ITEM(__pyx_t_5, __pyx_t_6); __Pyx_INCREF(__pyx_t_2); __pyx_t_6++; if (unlikely(0 < 0)) __PYX_ERR(0, 81, __pyx_L11_error)
+            __pyx_t_2 = PyList_GET_ITEM(__pyx_t_5, __pyx_t_6); __Pyx_INCREF(__pyx_t_2); __pyx_t_6++; if (unlikely(0 < 0)) __PYX_ERR(0, 79, __pyx_L11_error)
             #else
-            __pyx_t_2 = PySequence_ITEM(__pyx_t_5, __pyx_t_6); __pyx_t_6++; if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 81, __pyx_L11_error)
+            __pyx_t_2 = PySequence_ITEM(__pyx_t_5, __pyx_t_6); __pyx_t_6++; if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 79, __pyx_L11_error)
             __Pyx_GOTREF(__pyx_t_2);
             #endif
           } else {
             if (__pyx_t_6 >= PyTuple_GET_SIZE(__pyx_t_5)) break;
             #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
-            __pyx_t_2 = PyTuple_GET_ITEM(__pyx_t_5, __pyx_t_6); __Pyx_INCREF(__pyx_t_2); __pyx_t_6++; if (unlikely(0 < 0)) __PYX_ERR(0, 81, __pyx_L11_error)
+            __pyx_t_2 = PyTuple_GET_ITEM(__pyx_t_5, __pyx_t_6); __Pyx_INCREF(__pyx_t_2); __pyx_t_6++; if (unlikely(0 < 0)) __PYX_ERR(0, 79, __pyx_L11_error)
             #else
-            __pyx_t_2 = PySequence_ITEM(__pyx_t_5, __pyx_t_6); __pyx_t_6++; if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 81, __pyx_L11_error)
+            __pyx_t_2 = PySequence_ITEM(__pyx_t_5, __pyx_t_6); __pyx_t_6++; if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 79, __pyx_L11_error)
             __Pyx_GOTREF(__pyx_t_2);
             #endif
           }
@@ -2585,7 +2585,7 @@ static godot_pluginscript_script_manifest __pyx_f_16pluginscript_api_3api_init_p
             PyObject* exc_type = PyErr_Occurred();
             if (exc_type) {
               if (likely(__Pyx_PyErr_GivenExceptionMatches(exc_type, PyExc_StopIteration))) PyErr_Clear();
-              else __PYX_ERR(0, 81, __pyx_L11_error)
+              else __PYX_ERR(0, 79, __pyx_L11_error)
             }
             break;
           }
@@ -2593,9 +2593,9 @@ static godot_pluginscript_script_manifest __pyx_f_16pluginscript_api_3api_init_p
         }
         __Pyx_XDECREF_SET(__pyx_7genexpr__pyx_v_p, __pyx_t_2);
         __pyx_t_2 = 0;
-        __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_7genexpr__pyx_v_p, __pyx_n_s_name); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 81, __pyx_L11_error)
+        __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_7genexpr__pyx_v_p, __pyx_n_s_name); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 79, __pyx_L11_error)
         __Pyx_GOTREF(__pyx_t_2);
-        if (unlikely(__Pyx_ListComp_Append(__pyx_t_1, (PyObject*)__pyx_t_2))) __PYX_ERR(0, 81, __pyx_L11_error)
+        if (unlikely(__Pyx_ListComp_Append(__pyx_t_1, (PyObject*)__pyx_t_2))) __PYX_ERR(0, 79, __pyx_L11_error)
         __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
       }
       __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
@@ -2606,10 +2606,10 @@ static godot_pluginscript_script_manifest __pyx_f_16pluginscript_api_3api_init_p
       goto __pyx_L1_error;
       __pyx_L14_exit_scope:;
     } /* exit inner scope */
-    if (__Pyx_PyObject_SetAttrStr(((PyObject *)__pyx_v_class_obj), __pyx_n_s_PROPERTIES, __pyx_t_1) < 0) __PYX_ERR(0, 81, __pyx_L1_error)
+    if (__Pyx_PyObject_SetAttrStr(((PyObject *)__pyx_v_class_obj), __pyx_n_s_PROPERTIES, __pyx_t_1) < 0) __PYX_ERR(0, 79, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-    /* "pluginscript_api/api.pyx":82
+    /* "pluginscript_api/api.pyx":80
  * 
  *         (<Wrapper>class_obj).PROPERTIES = [p.name for p in properties]
  *         manifest.data = class_obj#The data contains the class, we want later instantiate in method init_pluginscript_instance             # <<<<<<<<<<<<<<
@@ -2618,7 +2618,7 @@ static godot_pluginscript_script_manifest __pyx_f_16pluginscript_api_3api_init_p
  */
     __pyx_v_manifest.data = __pyx_v_class_obj;
 
-    /* "pluginscript_api/api.pyx":58
+    /* "pluginscript_api/api.pyx":56
  *     reset()
  *     exec(str(String.new_static(dereference(p_source))))
  *     if(len(classes) > 0):             # <<<<<<<<<<<<<<
@@ -2628,7 +2628,7 @@ static godot_pluginscript_script_manifest __pyx_f_16pluginscript_api_3api_init_p
     goto __pyx_L4;
   }
 
-  /* "pluginscript_api/api.pyx":84
+  /* "pluginscript_api/api.pyx":82
  *         manifest.data = class_obj#The data contains the class, we want later instantiate in method init_pluginscript_instance
  *     else:
  *         create_empty_manifest(&manifest)             # <<<<<<<<<<<<<<
@@ -2640,14 +2640,14 @@ static godot_pluginscript_script_manifest __pyx_f_16pluginscript_api_3api_init_p
   }
   __pyx_L4:;
 
-  /* "pluginscript_api/api.pyx":85
+  /* "pluginscript_api/api.pyx":83
  *     else:
  *         create_empty_manifest(&manifest)
  *     reset()             # <<<<<<<<<<<<<<
  *     #print("\n################################return_manifest########################################################\n");
  *     return manifest;
  */
-  __Pyx_GetModuleGlobalName(__pyx_t_5, __pyx_n_s_reset); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 85, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_5, __pyx_n_s_reset); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 83, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
   __pyx_t_2 = NULL;
   if (CYTHON_UNPACK_METHODS && unlikely(PyMethod_Check(__pyx_t_5))) {
@@ -2661,12 +2661,12 @@ static godot_pluginscript_script_manifest __pyx_f_16pluginscript_api_3api_init_p
   }
   __pyx_t_1 = (__pyx_t_2) ? __Pyx_PyObject_CallOneArg(__pyx_t_5, __pyx_t_2) : __Pyx_PyObject_CallNoArg(__pyx_t_5);
   __Pyx_XDECREF(__pyx_t_2); __pyx_t_2 = 0;
-  if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 85, __pyx_L1_error)
+  if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 83, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "pluginscript_api/api.pyx":87
+  /* "pluginscript_api/api.pyx":85
  *     reset()
  *     #print("\n################################return_manifest########################################################\n");
  *     return manifest;             # <<<<<<<<<<<<<<
@@ -2676,7 +2676,7 @@ static godot_pluginscript_script_manifest __pyx_f_16pluginscript_api_3api_init_p
   __pyx_r = __pyx_v_manifest;
   goto __pyx_L0;
 
-  /* "pluginscript_api/api.pyx":43
+  /* "pluginscript_api/api.pyx":41
  * 
  * ###############################################pluginscript_desc#######################################################
  * cdef api  godot_pluginscript_script_manifest init_pluginscript_desc (godot_pluginscript_language_data *p_data,             # <<<<<<<<<<<<<<
@@ -2708,7 +2708,7 @@ static godot_pluginscript_script_manifest __pyx_f_16pluginscript_api_3api_init_p
   return __pyx_r;
 }
 
-/* "pluginscript_api/api.pyx":89
+/* "pluginscript_api/api.pyx":87
  *     return manifest;
  * 
  * cdef api  void finish_pluginscript_desc (godot_pluginscript_script_data *p_data) with gil:             # <<<<<<<<<<<<<<
@@ -2727,18 +2727,18 @@ static void __pyx_f_16pluginscript_api_3api_finish_pluginscript_desc(CYTHON_UNUS
   #endif
   __Pyx_RefNannySetupContext("finish_pluginscript_desc", 0);
 
-  /* "pluginscript_api/api.pyx":91
+  /* "pluginscript_api/api.pyx":89
  * cdef api  void finish_pluginscript_desc (godot_pluginscript_script_data *p_data) with gil:
  *     """empty placeholder function, as this is necessary to implement"""
  *     print("finish_desc\n");             # <<<<<<<<<<<<<<
  * 
  * 
  */
-  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_print, __pyx_tuple__6, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 91, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_print, __pyx_tuple__6, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 89, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "pluginscript_api/api.pyx":89
+  /* "pluginscript_api/api.pyx":87
  *     return manifest;
  * 
  * cdef api  void finish_pluginscript_desc (godot_pluginscript_script_data *p_data) with gil:             # <<<<<<<<<<<<<<
@@ -2758,7 +2758,7 @@ static void __pyx_f_16pluginscript_api_3api_finish_pluginscript_desc(CYTHON_UNUS
   #endif
 }
 
-/* "pluginscript_api/api.pyx":96
+/* "pluginscript_api/api.pyx":94
  * 
  * ###############################################pluginscript_instance#######################################################
  * cdef api godot_pluginscript_instance_data * init_pluginscript_instance(godot_pluginscript_script_data *p_data,             # <<<<<<<<<<<<<<
@@ -2785,7 +2785,7 @@ static godot_pluginscript_instance_data *__pyx_f_16pluginscript_api_3api_init_pl
   #endif
   __Pyx_RefNannySetupContext("init_pluginscript_instance", 0);
 
-  /* "pluginscript_api/api.pyx":101
+  /* "pluginscript_api/api.pyx":99
  *     """Here we are instanciating the class and setting a godot owner for it, so that it can be managed by godot"""
  *     cdef Wrapper instance
  *     (<Wrapper>p_data)()             # <<<<<<<<<<<<<<
@@ -2805,12 +2805,12 @@ static godot_pluginscript_instance_data *__pyx_f_16pluginscript_api_3api_init_pl
   }
   __pyx_t_1 = (__pyx_t_3) ? __Pyx_PyObject_CallOneArg(__pyx_t_2, __pyx_t_3) : __Pyx_PyObject_CallNoArg(__pyx_t_2);
   __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
-  if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 101, __pyx_L1_error)
+  if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 99, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "pluginscript_api/api.pyx":102
+  /* "pluginscript_api/api.pyx":100
  *     cdef Wrapper instance
  *     (<Wrapper>p_data)()
  *     instance = (<Wrapper>p_data)()#instanciating the the class given by manifest.data             # <<<<<<<<<<<<<<
@@ -2830,14 +2830,14 @@ static godot_pluginscript_instance_data *__pyx_f_16pluginscript_api_3api_init_pl
   }
   __pyx_t_1 = (__pyx_t_3) ? __Pyx_PyObject_CallOneArg(__pyx_t_2, __pyx_t_3) : __Pyx_PyObject_CallNoArg(__pyx_t_2);
   __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
-  if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 102, __pyx_L1_error)
+  if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 100, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  if (!(likely(((__pyx_t_1) == Py_None) || likely(__Pyx_TypeTest(__pyx_t_1, __pyx_ptype_5utils_7Wrapper_Wrapper))))) __PYX_ERR(0, 102, __pyx_L1_error)
+  if (!(likely(((__pyx_t_1) == Py_None) || likely(__Pyx_TypeTest(__pyx_t_1, __pyx_ptype_5utils_7Wrapper_Wrapper))))) __PYX_ERR(0, 100, __pyx_L1_error)
   __pyx_v_instance = ((struct __pyx_obj_5utils_7Wrapper_Wrapper *)__pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "pluginscript_api/api.pyx":103
+  /* "pluginscript_api/api.pyx":101
  *     (<Wrapper>p_data)()
  *     instance = (<Wrapper>p_data)()#instanciating the the class given by manifest.data
  *     instance.set_godot_owner(p_owner)             # <<<<<<<<<<<<<<
@@ -2846,22 +2846,22 @@ static godot_pluginscript_instance_data *__pyx_f_16pluginscript_api_3api_init_pl
  */
   __pyx_f_5utils_7Wrapper_7Wrapper_set_godot_owner(__pyx_v_instance, __pyx_v_p_owner);
 
-  /* "pluginscript_api/api.pyx":104
+  /* "pluginscript_api/api.pyx":102
  *     instance = (<Wrapper>p_data)()#instanciating the the class given by manifest.data
  *     instance.set_godot_owner(p_owner)
  *     for prop in instance.PROPERTIES:             # <<<<<<<<<<<<<<
  *         setattr(instance,prop,None)
  *     Py_INCREF(instance)
  */
-  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_instance), __pyx_n_s_PROPERTIES); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 104, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_instance), __pyx_n_s_PROPERTIES); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 102, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   if (likely(PyList_CheckExact(__pyx_t_1)) || PyTuple_CheckExact(__pyx_t_1)) {
     __pyx_t_2 = __pyx_t_1; __Pyx_INCREF(__pyx_t_2); __pyx_t_4 = 0;
     __pyx_t_5 = NULL;
   } else {
-    __pyx_t_4 = -1; __pyx_t_2 = PyObject_GetIter(__pyx_t_1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 104, __pyx_L1_error)
+    __pyx_t_4 = -1; __pyx_t_2 = PyObject_GetIter(__pyx_t_1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 102, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
-    __pyx_t_5 = Py_TYPE(__pyx_t_2)->tp_iternext; if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 104, __pyx_L1_error)
+    __pyx_t_5 = Py_TYPE(__pyx_t_2)->tp_iternext; if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 102, __pyx_L1_error)
   }
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   for (;;) {
@@ -2869,17 +2869,17 @@ static godot_pluginscript_instance_data *__pyx_f_16pluginscript_api_3api_init_pl
       if (likely(PyList_CheckExact(__pyx_t_2))) {
         if (__pyx_t_4 >= PyList_GET_SIZE(__pyx_t_2)) break;
         #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
-        __pyx_t_1 = PyList_GET_ITEM(__pyx_t_2, __pyx_t_4); __Pyx_INCREF(__pyx_t_1); __pyx_t_4++; if (unlikely(0 < 0)) __PYX_ERR(0, 104, __pyx_L1_error)
+        __pyx_t_1 = PyList_GET_ITEM(__pyx_t_2, __pyx_t_4); __Pyx_INCREF(__pyx_t_1); __pyx_t_4++; if (unlikely(0 < 0)) __PYX_ERR(0, 102, __pyx_L1_error)
         #else
-        __pyx_t_1 = PySequence_ITEM(__pyx_t_2, __pyx_t_4); __pyx_t_4++; if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 104, __pyx_L1_error)
+        __pyx_t_1 = PySequence_ITEM(__pyx_t_2, __pyx_t_4); __pyx_t_4++; if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 102, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_1);
         #endif
       } else {
         if (__pyx_t_4 >= PyTuple_GET_SIZE(__pyx_t_2)) break;
         #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
-        __pyx_t_1 = PyTuple_GET_ITEM(__pyx_t_2, __pyx_t_4); __Pyx_INCREF(__pyx_t_1); __pyx_t_4++; if (unlikely(0 < 0)) __PYX_ERR(0, 104, __pyx_L1_error)
+        __pyx_t_1 = PyTuple_GET_ITEM(__pyx_t_2, __pyx_t_4); __Pyx_INCREF(__pyx_t_1); __pyx_t_4++; if (unlikely(0 < 0)) __PYX_ERR(0, 102, __pyx_L1_error)
         #else
-        __pyx_t_1 = PySequence_ITEM(__pyx_t_2, __pyx_t_4); __pyx_t_4++; if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 104, __pyx_L1_error)
+        __pyx_t_1 = PySequence_ITEM(__pyx_t_2, __pyx_t_4); __pyx_t_4++; if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 102, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_1);
         #endif
       }
@@ -2889,7 +2889,7 @@ static godot_pluginscript_instance_data *__pyx_f_16pluginscript_api_3api_init_pl
         PyObject* exc_type = PyErr_Occurred();
         if (exc_type) {
           if (likely(__Pyx_PyErr_GivenExceptionMatches(exc_type, PyExc_StopIteration))) PyErr_Clear();
-          else __PYX_ERR(0, 104, __pyx_L1_error)
+          else __PYX_ERR(0, 102, __pyx_L1_error)
         }
         break;
       }
@@ -2898,16 +2898,16 @@ static godot_pluginscript_instance_data *__pyx_f_16pluginscript_api_3api_init_pl
     __Pyx_XDECREF_SET(__pyx_v_prop, __pyx_t_1);
     __pyx_t_1 = 0;
 
-    /* "pluginscript_api/api.pyx":105
+    /* "pluginscript_api/api.pyx":103
  *     instance.set_godot_owner(p_owner)
  *     for prop in instance.PROPERTIES:
  *         setattr(instance,prop,None)             # <<<<<<<<<<<<<<
  *     Py_INCREF(instance)
  *     return <PyObject*>instance
  */
-    __pyx_t_6 = PyObject_SetAttr(((PyObject *)__pyx_v_instance), __pyx_v_prop, Py_None); if (unlikely(__pyx_t_6 == ((int)-1))) __PYX_ERR(0, 105, __pyx_L1_error)
+    __pyx_t_6 = PyObject_SetAttr(((PyObject *)__pyx_v_instance), __pyx_v_prop, Py_None); if (unlikely(__pyx_t_6 == ((int)-1))) __PYX_ERR(0, 103, __pyx_L1_error)
 
-    /* "pluginscript_api/api.pyx":104
+    /* "pluginscript_api/api.pyx":102
  *     instance = (<Wrapper>p_data)()#instanciating the the class given by manifest.data
  *     instance.set_godot_owner(p_owner)
  *     for prop in instance.PROPERTIES:             # <<<<<<<<<<<<<<
@@ -2917,7 +2917,7 @@ static godot_pluginscript_instance_data *__pyx_f_16pluginscript_api_3api_init_pl
   }
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "pluginscript_api/api.pyx":106
+  /* "pluginscript_api/api.pyx":104
  *     for prop in instance.PROPERTIES:
  *         setattr(instance,prop,None)
  *     Py_INCREF(instance)             # <<<<<<<<<<<<<<
@@ -2926,7 +2926,7 @@ static godot_pluginscript_instance_data *__pyx_f_16pluginscript_api_3api_init_pl
  */
   Py_INCREF(((PyObject *)__pyx_v_instance));
 
-  /* "pluginscript_api/api.pyx":107
+  /* "pluginscript_api/api.pyx":105
  *         setattr(instance,prop,None)
  *     Py_INCREF(instance)
  *     return <PyObject*>instance             # <<<<<<<<<<<<<<
@@ -2936,7 +2936,7 @@ static godot_pluginscript_instance_data *__pyx_f_16pluginscript_api_3api_init_pl
   __pyx_r = ((PyObject *)__pyx_v_instance);
   goto __pyx_L0;
 
-  /* "pluginscript_api/api.pyx":96
+  /* "pluginscript_api/api.pyx":94
  * 
  * ###############################################pluginscript_instance#######################################################
  * cdef api godot_pluginscript_instance_data * init_pluginscript_instance(godot_pluginscript_script_data *p_data,             # <<<<<<<<<<<<<<
@@ -2961,7 +2961,7 @@ static godot_pluginscript_instance_data *__pyx_f_16pluginscript_api_3api_init_pl
   return __pyx_r;
 }
 
-/* "pluginscript_api/api.pyx":109
+/* "pluginscript_api/api.pyx":107
  *     return <PyObject*>instance
  * 
  * cdef api void finish_pluginscript_instance(godot_pluginscript_instance_data *p_data) with gil:             # <<<<<<<<<<<<<<
@@ -2978,7 +2978,7 @@ static void __pyx_f_16pluginscript_api_3api_finish_pluginscript_instance(godot_p
   #endif
   __Pyx_RefNannySetupContext("finish_pluginscript_instance", 0);
 
-  /* "pluginscript_api/api.pyx":112
+  /* "pluginscript_api/api.pyx":110
  *     """This method is for dereferencing the instance, when godot says it can be deleted """
  *     cdef Wrapper instance
  *     instance = (<Wrapper ?>p_data)             # <<<<<<<<<<<<<<
@@ -2990,7 +2990,7 @@ static void __pyx_f_16pluginscript_api_3api_finish_pluginscript_instance(godot_p
   __pyx_v_instance = ((struct __pyx_obj_5utils_7Wrapper_Wrapper *)__pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "pluginscript_api/api.pyx":113
+  /* "pluginscript_api/api.pyx":111
  *     cdef Wrapper instance
  *     instance = (<Wrapper ?>p_data)
  *     Py_DECREF(instance)             # <<<<<<<<<<<<<<
@@ -2999,7 +2999,7 @@ static void __pyx_f_16pluginscript_api_3api_finish_pluginscript_instance(godot_p
  */
   Py_DECREF(((PyObject *)__pyx_v_instance));
 
-  /* "pluginscript_api/api.pyx":109
+  /* "pluginscript_api/api.pyx":107
  *     return <PyObject*>instance
  * 
  * cdef api void finish_pluginscript_instance(godot_pluginscript_instance_data *p_data) with gil:             # <<<<<<<<<<<<<<
@@ -3015,7 +3015,7 @@ static void __pyx_f_16pluginscript_api_3api_finish_pluginscript_instance(godot_p
   #endif
 }
 
-/* "pluginscript_api/api.pyx":115
+/* "pluginscript_api/api.pyx":113
  *     Py_DECREF(instance)
  * 
  * cdef api bool set_prop_pluginscript_instance(godot_pluginscript_instance_data *p_data,             # <<<<<<<<<<<<<<
@@ -3042,7 +3042,7 @@ static bool __pyx_f_16pluginscript_api_3api_set_prop_pluginscript_instance(godot
   #endif
   __Pyx_RefNannySetupContext("set_prop_pluginscript_instance", 0);
 
-  /* "pluginscript_api/api.pyx":118
+  /* "pluginscript_api/api.pyx":116
  *  const godot_string *p_name, const godot_variant *p_value) with gil:
  *     """Trying to set the proprerty for the class given by godot"""
  *     cdef Wrapper instance = (<Wrapper ?>p_data)             # <<<<<<<<<<<<<<
@@ -3054,7 +3054,7 @@ static bool __pyx_f_16pluginscript_api_3api_set_prop_pluginscript_instance(godot
   __pyx_v_instance = ((struct __pyx_obj_5utils_7Wrapper_Wrapper *)__pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "pluginscript_api/api.pyx":120
+  /* "pluginscript_api/api.pyx":118
  *     cdef Wrapper instance = (<Wrapper ?>p_data)
  *     #print("\n#########################################################set_prop#######################################\n");
  *     api_core.godot_print(p_name)             # <<<<<<<<<<<<<<
@@ -3063,16 +3063,16 @@ static bool __pyx_f_16pluginscript_api_3api_set_prop_pluginscript_instance(godot
  */
   api_core->godot_print(__pyx_v_p_name);
 
-  /* "pluginscript_api/api.pyx":122
+  /* "pluginscript_api/api.pyx":120
  *     api_core.godot_print(p_name)
  * 
  *     value = CVariant.Variant.new_static(dereference(p_value)).get_converted_value()             # <<<<<<<<<<<<<<
  *     instance.set_property(str(String.new_static(dereference(p_name))), value)
  *     return True;
  */
-  __pyx_t_2 = ((PyObject *)__pyx_f_4core_7variant_7Variant_7Variant_new_static((*__pyx_v_p_value))); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 122, __pyx_L1_error)
+  __pyx_t_2 = ((PyObject *)__pyx_f_4core_7variant_7Variant_7Variant_new_static((*__pyx_v_p_value))); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 120, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_get_converted_value); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 122, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_get_converted_value); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 120, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __pyx_t_2 = NULL;
@@ -3087,24 +3087,24 @@ static bool __pyx_f_16pluginscript_api_3api_set_prop_pluginscript_instance(godot
   }
   __pyx_t_1 = (__pyx_t_2) ? __Pyx_PyObject_CallOneArg(__pyx_t_3, __pyx_t_2) : __Pyx_PyObject_CallNoArg(__pyx_t_3);
   __Pyx_XDECREF(__pyx_t_2); __pyx_t_2 = 0;
-  if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 122, __pyx_L1_error)
+  if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 120, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __pyx_v_value = __pyx_t_1;
   __pyx_t_1 = 0;
 
-  /* "pluginscript_api/api.pyx":123
+  /* "pluginscript_api/api.pyx":121
  * 
  *     value = CVariant.Variant.new_static(dereference(p_value)).get_converted_value()
  *     instance.set_property(str(String.new_static(dereference(p_name))), value)             # <<<<<<<<<<<<<<
  *     return True;
  * 
  */
-  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_instance), __pyx_n_s_set_property); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 123, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_instance), __pyx_n_s_set_property); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 121, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  __pyx_t_2 = ((PyObject *)__pyx_f_4core_6string_6String_6String_new_static((*__pyx_v_p_name))); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 123, __pyx_L1_error)
+  __pyx_t_2 = ((PyObject *)__pyx_f_4core_6string_6String_6String_new_static((*__pyx_v_p_name))); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 121, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_4 = __Pyx_PyObject_CallOneArg(((PyObject *)(&PyUnicode_Type)), __pyx_t_2); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 123, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyObject_CallOneArg(((PyObject *)(&PyUnicode_Type)), __pyx_t_2); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 121, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __pyx_t_2 = NULL;
@@ -3122,7 +3122,7 @@ static bool __pyx_f_16pluginscript_api_3api_set_prop_pluginscript_instance(godot
   #if CYTHON_FAST_PYCALL
   if (PyFunction_Check(__pyx_t_3)) {
     PyObject *__pyx_temp[3] = {__pyx_t_2, __pyx_t_4, __pyx_v_value};
-    __pyx_t_1 = __Pyx_PyFunction_FastCall(__pyx_t_3, __pyx_temp+1-__pyx_t_5, 2+__pyx_t_5); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 123, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyFunction_FastCall(__pyx_t_3, __pyx_temp+1-__pyx_t_5, 2+__pyx_t_5); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 121, __pyx_L1_error)
     __Pyx_XDECREF(__pyx_t_2); __pyx_t_2 = 0;
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
@@ -3131,14 +3131,14 @@ static bool __pyx_f_16pluginscript_api_3api_set_prop_pluginscript_instance(godot
   #if CYTHON_FAST_PYCCALL
   if (__Pyx_PyFastCFunction_Check(__pyx_t_3)) {
     PyObject *__pyx_temp[3] = {__pyx_t_2, __pyx_t_4, __pyx_v_value};
-    __pyx_t_1 = __Pyx_PyCFunction_FastCall(__pyx_t_3, __pyx_temp+1-__pyx_t_5, 2+__pyx_t_5); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 123, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyCFunction_FastCall(__pyx_t_3, __pyx_temp+1-__pyx_t_5, 2+__pyx_t_5); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 121, __pyx_L1_error)
     __Pyx_XDECREF(__pyx_t_2); __pyx_t_2 = 0;
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   } else
   #endif
   {
-    __pyx_t_6 = PyTuple_New(2+__pyx_t_5); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 123, __pyx_L1_error)
+    __pyx_t_6 = PyTuple_New(2+__pyx_t_5); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 121, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_6);
     if (__pyx_t_2) {
       __Pyx_GIVEREF(__pyx_t_2); PyTuple_SET_ITEM(__pyx_t_6, 0, __pyx_t_2); __pyx_t_2 = NULL;
@@ -3149,14 +3149,14 @@ static bool __pyx_f_16pluginscript_api_3api_set_prop_pluginscript_instance(godot
     __Pyx_GIVEREF(__pyx_v_value);
     PyTuple_SET_ITEM(__pyx_t_6, 1+__pyx_t_5, __pyx_v_value);
     __pyx_t_4 = 0;
-    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_t_6, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 123, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_t_6, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 121, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
   }
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "pluginscript_api/api.pyx":124
+  /* "pluginscript_api/api.pyx":122
  *     value = CVariant.Variant.new_static(dereference(p_value)).get_converted_value()
  *     instance.set_property(str(String.new_static(dereference(p_name))), value)
  *     return True;             # <<<<<<<<<<<<<<
@@ -3166,7 +3166,7 @@ static bool __pyx_f_16pluginscript_api_3api_set_prop_pluginscript_instance(godot
   __pyx_r = 1;
   goto __pyx_L0;
 
-  /* "pluginscript_api/api.pyx":115
+  /* "pluginscript_api/api.pyx":113
  *     Py_DECREF(instance)
  * 
  * cdef api bool set_prop_pluginscript_instance(godot_pluginscript_instance_data *p_data,             # <<<<<<<<<<<<<<
@@ -3193,7 +3193,7 @@ static bool __pyx_f_16pluginscript_api_3api_set_prop_pluginscript_instance(godot
   return __pyx_r;
 }
 
-/* "pluginscript_api/api.pyx":126
+/* "pluginscript_api/api.pyx":124
  *     return True;
  * 
  * cdef api bool get_prop_pluginscript_instance(godot_pluginscript_instance_data *p_data,             # <<<<<<<<<<<<<<
@@ -3209,7 +3209,7 @@ static bool __pyx_f_16pluginscript_api_3api_get_prop_pluginscript_instance(CYTHO
   #endif
   __Pyx_RefNannySetupContext("get_prop_pluginscript_instance", 0);
 
-  /* "pluginscript_api/api.pyx":130
+  /* "pluginscript_api/api.pyx":128
  *         #print("\n###################################################get_prop########################################\n");
  *         #Todo: implement this
  *         return False;             # <<<<<<<<<<<<<<
@@ -3219,7 +3219,7 @@ static bool __pyx_f_16pluginscript_api_3api_get_prop_pluginscript_instance(CYTHO
   __pyx_r = 0;
   goto __pyx_L0;
 
-  /* "pluginscript_api/api.pyx":126
+  /* "pluginscript_api/api.pyx":124
  *     return True;
  * 
  * cdef api bool get_prop_pluginscript_instance(godot_pluginscript_instance_data *p_data,             # <<<<<<<<<<<<<<
@@ -3236,7 +3236,7 @@ static bool __pyx_f_16pluginscript_api_3api_get_prop_pluginscript_instance(CYTHO
   return __pyx_r;
 }
 
-/* "pluginscript_api/api.pyx":132
+/* "pluginscript_api/api.pyx":130
  *         return False;
  * 
  * cdef api godot_variant call_method_pluginscript_instance(godot_pluginscript_instance_data *p_data,const godot_string_name *p_method,             # <<<<<<<<<<<<<<
@@ -3270,22 +3270,22 @@ static godot_variant __pyx_f_16pluginscript_api_3api_call_method_pluginscript_in
   #endif
   __Pyx_RefNannySetupContext("call_method_pluginscript_instance", 0);
 
-  /* "pluginscript_api/api.pyx":136
+  /* "pluginscript_api/api.pyx":134
  *         #print("\n#################################################call_method#############################################");
  *         """function for calling methods defined in the manifest from an external source"""
  *         method_name = str(StringName.new_static(p_method))             # <<<<<<<<<<<<<<
  * 
  *         cdef Wrapper instance = (<Wrapper>p_data)
  */
-  __pyx_t_1 = ((PyObject *)__pyx_f_4core_11string_name_10StringName_10StringName_new_static(__pyx_v_p_method)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 136, __pyx_L1_error)
+  __pyx_t_1 = ((PyObject *)__pyx_f_4core_11string_name_10StringName_10StringName_new_static(__pyx_v_p_method)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 134, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = __Pyx_PyObject_CallOneArg(((PyObject *)(&PyUnicode_Type)), __pyx_t_1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 136, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_CallOneArg(((PyObject *)(&PyUnicode_Type)), __pyx_t_1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 134, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_v_method_name = __pyx_t_2;
   __pyx_t_2 = 0;
 
-  /* "pluginscript_api/api.pyx":138
+  /* "pluginscript_api/api.pyx":136
  *         method_name = str(StringName.new_static(p_method))
  * 
  *         cdef Wrapper instance = (<Wrapper>p_data)             # <<<<<<<<<<<<<<
@@ -3297,30 +3297,30 @@ static godot_variant __pyx_f_16pluginscript_api_3api_call_method_pluginscript_in
   __pyx_v_instance = ((struct __pyx_obj_5utils_7Wrapper_Wrapper *)__pyx_t_2);
   __pyx_t_2 = 0;
 
-  /* "pluginscript_api/api.pyx":139
+  /* "pluginscript_api/api.pyx":137
  * 
  *         cdef Wrapper instance = (<Wrapper>p_data)
  *         if(hasattr(instance,method_name)): #checking if function exists             # <<<<<<<<<<<<<<
  *             args = []
  *             for i in range(0, p_argcount): #for loop for creating a list of arguments given to us by godot
  */
-  __pyx_t_3 = __Pyx_HasAttr(((PyObject *)__pyx_v_instance), __pyx_v_method_name); if (unlikely(__pyx_t_3 == ((int)-1))) __PYX_ERR(0, 139, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_HasAttr(((PyObject *)__pyx_v_instance), __pyx_v_method_name); if (unlikely(__pyx_t_3 == ((int)-1))) __PYX_ERR(0, 137, __pyx_L1_error)
   __pyx_t_4 = (__pyx_t_3 != 0);
   if (__pyx_t_4) {
 
-    /* "pluginscript_api/api.pyx":140
+    /* "pluginscript_api/api.pyx":138
  *         cdef Wrapper instance = (<Wrapper>p_data)
  *         if(hasattr(instance,method_name)): #checking if function exists
  *             args = []             # <<<<<<<<<<<<<<
  *             for i in range(0, p_argcount): #for loop for creating a list of arguments given to us by godot
  *                 variant=CVariant.Variant.new_static(dereference(p_args[i]))
  */
-    __pyx_t_2 = PyList_New(0); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 140, __pyx_L1_error)
+    __pyx_t_2 = PyList_New(0); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 138, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
     __pyx_v_args = ((PyObject*)__pyx_t_2);
     __pyx_t_2 = 0;
 
-    /* "pluginscript_api/api.pyx":141
+    /* "pluginscript_api/api.pyx":139
  *         if(hasattr(instance,method_name)): #checking if function exists
  *             args = []
  *             for i in range(0, p_argcount): #for loop for creating a list of arguments given to us by godot             # <<<<<<<<<<<<<<
@@ -3332,26 +3332,26 @@ static godot_variant __pyx_f_16pluginscript_api_3api_call_method_pluginscript_in
     for (__pyx_t_7 = 0; __pyx_t_7 < __pyx_t_6; __pyx_t_7+=1) {
       __pyx_v_i = __pyx_t_7;
 
-      /* "pluginscript_api/api.pyx":142
+      /* "pluginscript_api/api.pyx":140
  *             args = []
  *             for i in range(0, p_argcount): #for loop for creating a list of arguments given to us by godot
  *                 variant=CVariant.Variant.new_static(dereference(p_args[i]))             # <<<<<<<<<<<<<<
  *                 args.append(variant.get_converted_value())
  *             ret = getattr(instance,method_name)(*args) #calling the method with the given arguments
  */
-      __pyx_t_2 = ((PyObject *)__pyx_f_4core_7variant_7Variant_7Variant_new_static((*(__pyx_v_p_args[__pyx_v_i])))); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 142, __pyx_L1_error)
+      __pyx_t_2 = ((PyObject *)__pyx_f_4core_7variant_7Variant_7Variant_new_static((*(__pyx_v_p_args[__pyx_v_i])))); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 140, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_2);
       __Pyx_XDECREF_SET(__pyx_v_variant, ((struct __pyx_obj_4core_7variant_7Variant_Variant *)__pyx_t_2));
       __pyx_t_2 = 0;
 
-      /* "pluginscript_api/api.pyx":143
+      /* "pluginscript_api/api.pyx":141
  *             for i in range(0, p_argcount): #for loop for creating a list of arguments given to us by godot
  *                 variant=CVariant.Variant.new_static(dereference(p_args[i]))
  *                 args.append(variant.get_converted_value())             # <<<<<<<<<<<<<<
  *             ret = getattr(instance,method_name)(*args) #calling the method with the given arguments
  *             return CVariant.Variant()._native #Todo: return value
  */
-      __pyx_t_1 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_variant), __pyx_n_s_get_converted_value); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 143, __pyx_L1_error)
+      __pyx_t_1 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_variant), __pyx_n_s_get_converted_value); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 141, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_1);
       __pyx_t_8 = NULL;
       if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_1))) {
@@ -3365,45 +3365,45 @@ static godot_variant __pyx_f_16pluginscript_api_3api_call_method_pluginscript_in
       }
       __pyx_t_2 = (__pyx_t_8) ? __Pyx_PyObject_CallOneArg(__pyx_t_1, __pyx_t_8) : __Pyx_PyObject_CallNoArg(__pyx_t_1);
       __Pyx_XDECREF(__pyx_t_8); __pyx_t_8 = 0;
-      if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 143, __pyx_L1_error)
+      if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 141, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_2);
       __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-      __pyx_t_9 = __Pyx_PyList_Append(__pyx_v_args, __pyx_t_2); if (unlikely(__pyx_t_9 == ((int)-1))) __PYX_ERR(0, 143, __pyx_L1_error)
+      __pyx_t_9 = __Pyx_PyList_Append(__pyx_v_args, __pyx_t_2); if (unlikely(__pyx_t_9 == ((int)-1))) __PYX_ERR(0, 141, __pyx_L1_error)
       __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
     }
 
-    /* "pluginscript_api/api.pyx":144
+    /* "pluginscript_api/api.pyx":142
  *                 variant=CVariant.Variant.new_static(dereference(p_args[i]))
  *                 args.append(variant.get_converted_value())
  *             ret = getattr(instance,method_name)(*args) #calling the method with the given arguments             # <<<<<<<<<<<<<<
  *             return CVariant.Variant()._native #Todo: return value
  *         return CVariant.Variant()._native
  */
-    __pyx_t_2 = __Pyx_GetAttr(((PyObject *)__pyx_v_instance), __pyx_v_method_name); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 144, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_GetAttr(((PyObject *)__pyx_v_instance), __pyx_v_method_name); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 142, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
-    __pyx_t_1 = PySequence_Tuple(__pyx_v_args); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 144, __pyx_L1_error)
+    __pyx_t_1 = PySequence_Tuple(__pyx_v_args); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 142, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
-    __pyx_t_8 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_t_1, NULL); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 144, __pyx_L1_error)
+    __pyx_t_8 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_t_1, NULL); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 142, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_8);
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     __pyx_v_ret = __pyx_t_8;
     __pyx_t_8 = 0;
 
-    /* "pluginscript_api/api.pyx":145
+    /* "pluginscript_api/api.pyx":143
  *                 args.append(variant.get_converted_value())
  *             ret = getattr(instance,method_name)(*args) #calling the method with the given arguments
  *             return CVariant.Variant()._native #Todo: return value             # <<<<<<<<<<<<<<
  *         return CVariant.Variant()._native
  * 
  */
-    __pyx_t_8 = __Pyx_PyObject_CallNoArg(((PyObject *)__pyx_ptype_4core_7variant_7Variant_Variant)); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 145, __pyx_L1_error)
+    __pyx_t_8 = __Pyx_PyObject_CallNoArg(((PyObject *)__pyx_ptype_4core_7variant_7Variant_Variant)); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 143, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_8);
     __pyx_r = ((struct __pyx_obj_4core_7variant_7Variant_Variant *)__pyx_t_8)->_native;
     __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
     goto __pyx_L0;
 
-    /* "pluginscript_api/api.pyx":139
+    /* "pluginscript_api/api.pyx":137
  * 
  *         cdef Wrapper instance = (<Wrapper>p_data)
  *         if(hasattr(instance,method_name)): #checking if function exists             # <<<<<<<<<<<<<<
@@ -3412,20 +3412,20 @@ static godot_variant __pyx_f_16pluginscript_api_3api_call_method_pluginscript_in
  */
   }
 
-  /* "pluginscript_api/api.pyx":146
+  /* "pluginscript_api/api.pyx":144
  *             ret = getattr(instance,method_name)(*args) #calling the method with the given arguments
  *             return CVariant.Variant()._native #Todo: return value
  *         return CVariant.Variant()._native             # <<<<<<<<<<<<<<
  * 
  * 
  */
-  __pyx_t_8 = __Pyx_PyObject_CallNoArg(((PyObject *)__pyx_ptype_4core_7variant_7Variant_Variant)); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 146, __pyx_L1_error)
+  __pyx_t_8 = __Pyx_PyObject_CallNoArg(((PyObject *)__pyx_ptype_4core_7variant_7Variant_Variant)); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 144, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_8);
   __pyx_r = ((struct __pyx_obj_4core_7variant_7Variant_Variant *)__pyx_t_8)->_native;
   __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
   goto __pyx_L0;
 
-  /* "pluginscript_api/api.pyx":132
+  /* "pluginscript_api/api.pyx":130
  *         return False;
  * 
  * cdef api godot_variant call_method_pluginscript_instance(godot_pluginscript_instance_data *p_data,const godot_string_name *p_method,             # <<<<<<<<<<<<<<
@@ -3453,7 +3453,7 @@ static godot_variant __pyx_f_16pluginscript_api_3api_call_method_pluginscript_in
   return __pyx_r;
 }
 
-/* "pluginscript_api/api.pyx":149
+/* "pluginscript_api/api.pyx":147
  * 
  * 
  * cdef api godot_string pluginscript_get_template_source_code(godot_pluginscript_language_data *p_data,             # <<<<<<<<<<<<<<
@@ -3477,14 +3477,14 @@ static godot_string __pyx_f_16pluginscript_api_3api_pluginscript_get_template_so
   #endif
   __Pyx_RefNannySetupContext("pluginscript_get_template_source_code", 0);
 
-  /* "pluginscript_api/api.pyx":152
+  /* "pluginscript_api/api.pyx":150
  *  const godot_string *p_class_name, const godot_string *p_base_class_name) with gil:
  *     """generate a template string for the godot class, when creating ones"""
  *     return String(f"""             # <<<<<<<<<<<<<<
  * from enums.enums import *
  * from core import *
  */
-  __pyx_t_1 = PyTuple_New(5); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 152, __pyx_L1_error)
+  __pyx_t_1 = PyTuple_New(5); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 150, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_t_2 = 0;
   __pyx_t_3 = 127;
@@ -3492,9 +3492,9 @@ static godot_string __pyx_f_16pluginscript_api_3api_pluginscript_get_template_so
   __pyx_t_2 += 94;
   __Pyx_GIVEREF(__pyx_kp_u_from_enums_enums_import_from_co);
   PyTuple_SET_ITEM(__pyx_t_1, 0, __pyx_kp_u_from_enums_enums_import_from_co);
-  __pyx_t_4 = ((PyObject *)__pyx_f_4core_6string_6String_6String_new_static((*__pyx_v_p_class_name))); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 152, __pyx_L1_error)
+  __pyx_t_4 = ((PyObject *)__pyx_f_4core_6string_6String_6String_new_static((*__pyx_v_p_class_name))); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 150, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
-  __pyx_t_5 = __Pyx_PyObject_CallOneArg(((PyObject *)(&PyUnicode_Type)), __pyx_t_4); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 152, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_PyObject_CallOneArg(((PyObject *)(&PyUnicode_Type)), __pyx_t_4); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 150, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   __pyx_t_3 = (__Pyx_PyUnicode_MAX_CHAR_VALUE(__pyx_t_5) > __pyx_t_3) ? __Pyx_PyUnicode_MAX_CHAR_VALUE(__pyx_t_5) : __pyx_t_3;
@@ -3506,9 +3506,9 @@ static godot_string __pyx_f_16pluginscript_api_3api_pluginscript_get_template_so
   __pyx_t_2 += 1;
   __Pyx_GIVEREF(__pyx_kp_u__7);
   PyTuple_SET_ITEM(__pyx_t_1, 2, __pyx_kp_u__7);
-  __pyx_t_5 = ((PyObject *)__pyx_f_4core_6string_6String_6String_new_static((*__pyx_v_p_base_class_name))); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 152, __pyx_L1_error)
+  __pyx_t_5 = ((PyObject *)__pyx_f_4core_6string_6String_6String_new_static((*__pyx_v_p_base_class_name))); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 150, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
-  __pyx_t_4 = __Pyx_PyObject_CallOneArg(((PyObject *)(&PyUnicode_Type)), __pyx_t_5); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 152, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyObject_CallOneArg(((PyObject *)(&PyUnicode_Type)), __pyx_t_5); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 150, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
   __pyx_t_3 = (__Pyx_PyUnicode_MAX_CHAR_VALUE(__pyx_t_4) > __pyx_t_3) ? __Pyx_PyUnicode_MAX_CHAR_VALUE(__pyx_t_4) : __pyx_t_3;
@@ -3520,14 +3520,14 @@ static godot_string __pyx_f_16pluginscript_api_3api_pluginscript_get_template_so
   __pyx_t_2 += 426;
   __Pyx_GIVEREF(__pyx_kp_u_gdproperty_int_5_hint_PropertyH);
   PyTuple_SET_ITEM(__pyx_t_1, 4, __pyx_kp_u_gdproperty_int_5_hint_PropertyH);
-  __pyx_t_4 = __Pyx_PyUnicode_Join(__pyx_t_1, 5, __pyx_t_2, __pyx_t_3); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 152, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyUnicode_Join(__pyx_t_1, 5, __pyx_t_2, __pyx_t_3); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 150, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_1 = __Pyx_PyObject_CallOneArg(((PyObject *)__pyx_ptype_4core_6string_6String_String), __pyx_t_4); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 152, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_CallOneArg(((PyObject *)__pyx_ptype_4core_6string_6String_String), __pyx_t_4); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 150, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
 
-  /* "pluginscript_api/api.pyx":179
+  /* "pluginscript_api/api.pyx":177
  *         print(delta)
  * 
  * """)._native             # <<<<<<<<<<<<<<
@@ -3538,7 +3538,7 @@ static godot_string __pyx_f_16pluginscript_api_3api_pluginscript_get_template_so
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "pluginscript_api/api.pyx":149
+  /* "pluginscript_api/api.pyx":147
  * 
  * 
  * cdef api godot_string pluginscript_get_template_source_code(godot_pluginscript_language_data *p_data,             # <<<<<<<<<<<<<<
@@ -3561,7 +3561,7 @@ static godot_string __pyx_f_16pluginscript_api_3api_pluginscript_get_template_so
   return __pyx_r;
 }
 
-/* "pluginscript_api/api.pyx":181
+/* "pluginscript_api/api.pyx":179
  * """)._native
  * 
  * cdef void create_empty_manifest(godot_pluginscript_script_manifest* manifest):             # <<<<<<<<<<<<<<
@@ -3580,7 +3580,7 @@ static void __pyx_f_16pluginscript_api_3api_create_empty_manifest(godot_pluginsc
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("create_empty_manifest", 0);
 
-  /* "pluginscript_api/api.pyx":182
+  /* "pluginscript_api/api.pyx":180
  * 
  * cdef void create_empty_manifest(godot_pluginscript_script_manifest* manifest):
  *     api_core.godot_string_name_new_data(&manifest.name, "python_manifest");             # <<<<<<<<<<<<<<
@@ -3589,7 +3589,7 @@ static void __pyx_f_16pluginscript_api_3api_create_empty_manifest(godot_pluginsc
  */
   api_core->godot_string_name_new_data((&__pyx_v_manifest->name), ((char const *)"python_manifest"));
 
-  /* "pluginscript_api/api.pyx":183
+  /* "pluginscript_api/api.pyx":181
  * cdef void create_empty_manifest(godot_pluginscript_script_manifest* manifest):
  *     api_core.godot_string_name_new_data(&manifest.name, "python_manifest");
  *     manifest.is_tool = False;             # <<<<<<<<<<<<<<
@@ -3598,7 +3598,7 @@ static void __pyx_f_16pluginscript_api_3api_create_empty_manifest(godot_pluginsc
  */
   __pyx_v_manifest->is_tool = 0;
 
-  /* "pluginscript_api/api.pyx":184
+  /* "pluginscript_api/api.pyx":182
  *     api_core.godot_string_name_new_data(&manifest.name, "python_manifest");
  *     manifest.is_tool = False;
  *     api_core.godot_string_name_new_data(&manifest.base, "");             # <<<<<<<<<<<<<<
@@ -3607,7 +3607,7 @@ static void __pyx_f_16pluginscript_api_3api_create_empty_manifest(godot_pluginsc
  */
   api_core->godot_string_name_new_data((&__pyx_v_manifest->base), ((char const *)""));
 
-  /* "pluginscript_api/api.pyx":185
+  /* "pluginscript_api/api.pyx":183
  *     manifest.is_tool = False;
  *     api_core.godot_string_name_new_data(&manifest.base, "");
  *     api_core.godot_dictionary_new(&manifest.member_lines);             # <<<<<<<<<<<<<<
@@ -3616,7 +3616,7 @@ static void __pyx_f_16pluginscript_api_3api_create_empty_manifest(godot_pluginsc
  */
   api_core->godot_dictionary_new((&__pyx_v_manifest->member_lines));
 
-  /* "pluginscript_api/api.pyx":186
+  /* "pluginscript_api/api.pyx":184
  *     api_core.godot_string_name_new_data(&manifest.base, "");
  *     api_core.godot_dictionary_new(&manifest.member_lines);
  *     api_core.godot_array_new(&manifest.signals);             # <<<<<<<<<<<<<<
@@ -3625,31 +3625,31 @@ static void __pyx_f_16pluginscript_api_3api_create_empty_manifest(godot_pluginsc
  */
   api_core->godot_array_new((&__pyx_v_manifest->signals));
 
-  /* "pluginscript_api/api.pyx":187
+  /* "pluginscript_api/api.pyx":185
  *     api_core.godot_dictionary_new(&manifest.member_lines);
  *     api_core.godot_array_new(&manifest.signals);
  *     methods_array = Array()             # <<<<<<<<<<<<<<
  *     properties_array = Array()
  * 
  */
-  __pyx_t_1 = __Pyx_PyObject_CallNoArg(((PyObject *)__pyx_ptype_4core_5array_5Array_Array)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 187, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_CallNoArg(((PyObject *)__pyx_ptype_4core_5array_5Array_Array)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 185, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_v_methods_array = ((struct __pyx_obj_4core_5array_5Array_Array *)__pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "pluginscript_api/api.pyx":188
+  /* "pluginscript_api/api.pyx":186
  *     api_core.godot_array_new(&manifest.signals);
  *     methods_array = Array()
  *     properties_array = Array()             # <<<<<<<<<<<<<<
  * 
  *     manifest.properties = properties_array._native
  */
-  __pyx_t_1 = __Pyx_PyObject_CallNoArg(((PyObject *)__pyx_ptype_4core_5array_5Array_Array)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 188, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_CallNoArg(((PyObject *)__pyx_ptype_4core_5array_5Array_Array)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 186, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_v_properties_array = ((struct __pyx_obj_4core_5array_5Array_Array *)__pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "pluginscript_api/api.pyx":190
+  /* "pluginscript_api/api.pyx":188
  *     properties_array = Array()
  * 
  *     manifest.properties = properties_array._native             # <<<<<<<<<<<<<<
@@ -3659,7 +3659,7 @@ static void __pyx_f_16pluginscript_api_3api_create_empty_manifest(godot_pluginsc
   __pyx_t_2 = __pyx_v_properties_array->_native;
   __pyx_v_manifest->properties = __pyx_t_2;
 
-  /* "pluginscript_api/api.pyx":191
+  /* "pluginscript_api/api.pyx":189
  * 
  *     manifest.properties = properties_array._native
  *     manifest.methods = methods_array._native             # <<<<<<<<<<<<<<
@@ -3669,7 +3669,7 @@ static void __pyx_f_16pluginscript_api_3api_create_empty_manifest(godot_pluginsc
   __pyx_t_2 = __pyx_v_methods_array->_native;
   __pyx_v_manifest->methods = __pyx_t_2;
 
-  /* "pluginscript_api/api.pyx":181
+  /* "pluginscript_api/api.pyx":179
  * """)._native
  * 
  * cdef void create_empty_manifest(godot_pluginscript_script_manifest* manifest):             # <<<<<<<<<<<<<<
@@ -3688,7 +3688,7 @@ static void __pyx_f_16pluginscript_api_3api_create_empty_manifest(godot_pluginsc
   __Pyx_RefNannyFinishContext();
 }
 
-/* "pluginscript_api/api.pyx":195
+/* "pluginscript_api/api.pyx":193
  * 
  * 
  * cdef api void notification_pluginscript_instance(godot_pluginscript_instance_data *p_data,             # <<<<<<<<<<<<<<
@@ -4416,7 +4416,7 @@ static int __pyx_import_star_set(PyObject *o, PyObject* py_name, char *name) {
   }
   else if (__Pyx_StrEq(name, "dictionary")) {
     PyErr_Format(PyExc_TypeError, "Cannot convert Python object dictionary to godot_dictionary");
-    __PYX_ERR(0, 23, __pyx_L2_error)
+    __PYX_ERR(0, 21, __pyx_L2_error)
   }
   else {
     if (PyObject_SetAttr(__pyx_m, py_name, o) < 0) goto bad;
@@ -4615,8 +4615,8 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {0, 0, 0, 0, 0, 0, 0}
 };
 static CYTHON_SMALL_CODE int __Pyx_InitCachedBuiltins(void) {
-  __pyx_builtin_print = __Pyx_GetBuiltinName(__pyx_n_s_print); if (!__pyx_builtin_print) __PYX_ERR(0, 28, __pyx_L1_error)
-  __pyx_builtin_range = __Pyx_GetBuiltinName(__pyx_n_s_range); if (!__pyx_builtin_range) __PYX_ERR(0, 141, __pyx_L1_error)
+  __pyx_builtin_print = __Pyx_GetBuiltinName(__pyx_n_s_print); if (!__pyx_builtin_print) __PYX_ERR(0, 26, __pyx_L1_error)
+  __pyx_builtin_range = __Pyx_GetBuiltinName(__pyx_n_s_range); if (!__pyx_builtin_range) __PYX_ERR(0, 139, __pyx_L1_error)
   return 0;
   __pyx_L1_error:;
   return -1;
@@ -4626,69 +4626,69 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__Pyx_InitCachedConstants", 0);
 
-  /* "pluginscript_api/api.pyx":28
+  /* "pluginscript_api/api.pyx":26
  *     api_core = core
  *     api_core.godot_dictionary_new(&dictionary)
  *     print("\n#############################set_api_core############################################################")             # <<<<<<<<<<<<<<
  * cdef api godot_pluginscript_language_data * init_pluginscript() with gil:
  *     """empty placeholder function, as this is necessary to implement"""
  */
-  __pyx_tuple_ = PyTuple_Pack(1, __pyx_kp_u_set_api_core); if (unlikely(!__pyx_tuple_)) __PYX_ERR(0, 28, __pyx_L1_error)
+  __pyx_tuple_ = PyTuple_Pack(1, __pyx_kp_u_set_api_core); if (unlikely(!__pyx_tuple_)) __PYX_ERR(0, 26, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple_);
   __Pyx_GIVEREF(__pyx_tuple_);
 
-  /* "pluginscript_api/api.pyx":31
+  /* "pluginscript_api/api.pyx":29
  * cdef api godot_pluginscript_language_data * init_pluginscript() with gil:
  *     """empty placeholder function, as this is necessary to implement"""
  *     print("\n######################################################init_python_pluginscript####################################\n");             # <<<<<<<<<<<<<<
  * 
  * cdef api void finish_pluginscript(godot_pluginscript_instance_data *p_data) with gil:
  */
-  __pyx_tuple__2 = PyTuple_Pack(1, __pyx_kp_u_init_python_pluginscript); if (unlikely(!__pyx_tuple__2)) __PYX_ERR(0, 31, __pyx_L1_error)
+  __pyx_tuple__2 = PyTuple_Pack(1, __pyx_kp_u_init_python_pluginscript); if (unlikely(!__pyx_tuple__2)) __PYX_ERR(0, 29, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__2);
   __Pyx_GIVEREF(__pyx_tuple__2);
 
-  /* "pluginscript_api/api.pyx":35
+  /* "pluginscript_api/api.pyx":33
  * cdef api void finish_pluginscript(godot_pluginscript_instance_data *p_data) with gil:
  *     """currently empty function which is necessary to implement. It could later be used to delete resources"""
  *     print("finish_python_test\n");             # <<<<<<<<<<<<<<
  * 
  * cdef api  void add_global_constant_pluginscript(godot_pluginscript_language_data *p_data,
  */
-  __pyx_tuple__3 = PyTuple_Pack(1, __pyx_n_u_finish_python_test); if (unlikely(!__pyx_tuple__3)) __PYX_ERR(0, 35, __pyx_L1_error)
+  __pyx_tuple__3 = PyTuple_Pack(1, __pyx_n_u_finish_python_test); if (unlikely(!__pyx_tuple__3)) __PYX_ERR(0, 33, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__3);
   __Pyx_GIVEREF(__pyx_tuple__3);
 
-  /* "pluginscript_api/api.pyx":40
+  /* "pluginscript_api/api.pyx":38
  * const godot_string *p_variable, const godot_variant *p_value) with gil:
  *     """empty placeholder function, as this is necessary to implement"""
  *     print("\n######################################################add_global_constant#############################\n");             # <<<<<<<<<<<<<<
  * 
  * ###############################################pluginscript_desc#######################################################
  */
-  __pyx_tuple__4 = PyTuple_Pack(1, __pyx_kp_u_add_global_constant); if (unlikely(!__pyx_tuple__4)) __PYX_ERR(0, 40, __pyx_L1_error)
+  __pyx_tuple__4 = PyTuple_Pack(1, __pyx_kp_u_add_global_constant); if (unlikely(!__pyx_tuple__4)) __PYX_ERR(0, 38, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__4);
   __Pyx_GIVEREF(__pyx_tuple__4);
 
-  /* "pluginscript_api/api.pyx":55
+  /* "pluginscript_api/api.pyx":53
  *         return manifest
  * 
  *     print("\n############################################create_manifest##############################################\n");             # <<<<<<<<<<<<<<
  *     reset()
  *     exec(str(String.new_static(dereference(p_source))))
  */
-  __pyx_tuple__5 = PyTuple_Pack(1, __pyx_kp_u_create_manifest); if (unlikely(!__pyx_tuple__5)) __PYX_ERR(0, 55, __pyx_L1_error)
+  __pyx_tuple__5 = PyTuple_Pack(1, __pyx_kp_u_create_manifest); if (unlikely(!__pyx_tuple__5)) __PYX_ERR(0, 53, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__5);
   __Pyx_GIVEREF(__pyx_tuple__5);
 
-  /* "pluginscript_api/api.pyx":91
+  /* "pluginscript_api/api.pyx":89
  * cdef api  void finish_pluginscript_desc (godot_pluginscript_script_data *p_data) with gil:
  *     """empty placeholder function, as this is necessary to implement"""
  *     print("finish_desc\n");             # <<<<<<<<<<<<<<
  * 
  * 
  */
-  __pyx_tuple__6 = PyTuple_Pack(1, __pyx_n_u_finish_desc); if (unlikely(!__pyx_tuple__6)) __PYX_ERR(0, 91, __pyx_L1_error)
+  __pyx_tuple__6 = PyTuple_Pack(1, __pyx_n_u_finish_desc); if (unlikely(!__pyx_tuple__6)) __PYX_ERR(0, 89, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__6);
   __Pyx_GIVEREF(__pyx_tuple__6);
 
