@@ -4,7 +4,6 @@ cpp = 'g++'
 ar = 'ar'
 strip = 'strip'
 exe_wrapper = 'wine' # A command used to run generated executables.
-python = 'python_files/cpython-3.9.7-windows64/python/install/python.exe'
 
 
 [host_machine]

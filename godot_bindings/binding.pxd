@@ -8,6 +8,7 @@ cdef extern from "Python.h":
     cdef  PyObject* PyObject_Str(PyObject *o);
 
 cdef extern from "binding.h":
+
     struct godot_gdnative_ext_nativescript_api_struct:
         void *(*godot_nativescript_get_userdata)(godot_object *p_instance)
 

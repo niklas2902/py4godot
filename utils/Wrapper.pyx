@@ -1,5 +1,10 @@
-from godot_bindings.binding cimport *
+from godot_bindings.binding_external cimport *
 cdef class Wrapper(object):
 
     def set_property(self, name, value):
         setattr(self, name, value)
+    def __del__(self):
+        print_ptr(self.godot_owner)
+        if(self.godot_owner !=NULL):
+            #Free space, if obtained
+            api_core.godot_free(self.godot_owner)

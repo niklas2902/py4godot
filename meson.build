@@ -7,12 +7,13 @@ if meson.get_compiler('c').get_id() == 'gcc'
     add_global_arguments('-DMS_WIN64', language : 'c')
 endif
 
+message(meson.current_source_dir())
 
 py = import('python').find_installation('python3')
 dep_py = py.dependency()
+
 internal_inc = include_directories('godot-headers', 'core', 'enums', 'classes', 'pluginscript_api', 'godot_bindings')
 
-message(meson.current_source_dir())
 glob = run_command('python', files(meson.current_source_dir()+'/meson_scripts/glob_tools.py'))
 
 sources = glob.stdout().strip().split('\n')

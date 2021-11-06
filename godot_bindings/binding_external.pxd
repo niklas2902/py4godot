@@ -10,6 +10,7 @@ cdef extern from "Python.h":
 cdef extern from "binding.h":
 
     cdef const godot_gdnative_core_api_struct *api_core;
+    void print_ptr(void* owner);
 
     struct godot_gdnative_core_api_struct:
         godot_method_bind *(*godot_method_bind_get_method)(const char *p_classname, const char *p_methodname)
@@ -28,3 +29,4 @@ cdef extern from "binding.h":
         godot_bool (*godot_string_name_operator_equal)(const godot_string_name *p_self, const godot_string_name *p_other);
         godot_bool (*godot_string_name_operator_less)(const godot_string_name *p_self, const godot_string_name *p_other);
         void (*godot_string_name_destroy)(godot_string_name *p_self);
+        void (*godot_free)(void *p_ptr);
