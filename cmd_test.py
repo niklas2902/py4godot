@@ -4,7 +4,7 @@ import main
 import os
 from main import *
 from Cython.Build import cythonize
-from meson_scripts import copy_tools, download_python, generate_init_files, python_loc
+from meson_scripts import copy_tools, download_python, generate_init_files, python_loc, platform_check
 
 import argparse
 
@@ -44,6 +44,7 @@ def get_compiler():
 
 
 
+current_platform = platform_check.get_platform()
 my_parser = argparse.ArgumentParser(fromfile_prefix_chars='@')
 my_parser.add_argument('--compiler',
                        help='specify the compiler, you want to use to compile')
@@ -65,8 +66,13 @@ if(args.compiler == None):
 build()
 cythonize_files()
 
+#loading the needed python files for the target platform
 download_python.download_file(args.target_platform)
-compile_python_ver_file(args.target_platform)
+
+#downlaod needed python files for the current platform
+download_python.download_file(current_platform)
+
+compile_python_ver_file(current_platform)
 
 res = subprocess.Popen(f"vcvarsall.bat {'x86_amd64'} "
                  "& cl"
