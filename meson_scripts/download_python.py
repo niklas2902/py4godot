@@ -45,9 +45,10 @@ def decompress_zstandard_to_folder(input_file):
 
 def extract_tar(file, export_name):
     """function for extracting .tar archieve"""
-    my_tar = tarfile.open(file)
-    my_tar.extractall(python_files_dir+"/"+export_name)  # specify which folder to extract to
-    my_tar.close()
+    if(not os.path.isdir(python_files_dir+"/"+export_name)):
+        my_tar = tarfile.open(file)
+        my_tar.extractall(python_files_dir+"/"+export_name)  # specify which folder to extract to
+        my_tar.close()
 
 def copy_to_build(export_folder, platform):
     """function for copying files to build folder"""

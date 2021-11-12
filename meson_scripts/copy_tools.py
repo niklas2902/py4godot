@@ -4,11 +4,14 @@ import glob
 
 """This file is for copying the generated so/dll files from ninja/meson into the build folder"""
 def run(platform):
-    liste_dll = glob.glob("**/*.dll", recursive=True)
-    liste_so = glob.glob("**/*.so", recursive=True)
+    #copying all the files from build to the folder of the addon
+    liste_dll = []
+    if("windows" in platform):
+        liste_dll = glob.glob("**/*.dll", recursive=True)
+    elif "linux" in platform:
+        liste_dll = glob.glob("**/*.so", recursive=True)
 
     print("------------------------------------------copy------------------------------------------------\n")
-    liste_dll += liste_so
     print(liste_dll)
     for entry in liste_dll:
         if(entry.startswith("build_meson")):
@@ -22,7 +25,12 @@ def run(platform):
 
 def copy_main(platform):
     #Todo: check whether python39.dll can be in another path
-    #copying the main.pyd inside the python version, as the pythin39.dll must currently be in the same directory as main.pys
-    copy(f"build/addons/{platform}/godot_bindings/main.pyd", f"build/addons/{platform}/cpython-3.9.7-{platform}/python/install/main.pyd")
+    #copying the main.pyd inside the python version, as the pythin39.dll must currently be in the same directory as main.pyd/main.so
+    if("windows" in platform):
+        copy(f"build/addons/{platform}/godot_bindings/main.pyd",
+             f"build/addons/{platform}/cpython-3.9.7-{platform}/python/install/main.pyd")
+    elif("linux" in platform):
+        copy(f"build/addons/{platform}/godot_bindings/main.so",
+             f"build/addons/{platform}/cpython-3.9.7-{platform}/python/install/lib/main.so")
 if __name__ == "__main__":
     run()
