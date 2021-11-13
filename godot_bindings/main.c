@@ -228,7 +228,8 @@ godot_variant simple_get_data(godot_object *p_instance, void *p_method_data, voi
 
 void set_up_bindings(){
 	PyRun_SimpleString("import sys, os\n\
-sys.path.insert(0,os.getcwd()+'/addons/windows64/')");
+sys.path.insert(0,os.getcwd()+'/addons/windows64/')\n\
+sys.path.insert(0,os.getcwd())");
 
 	import_classes__classes();
     if (PyErr_Occurred())
@@ -237,9 +238,7 @@ sys.path.insert(0,os.getcwd()+'/addons/windows64/')");
         return ;
     }
 
-    //print_();
     init_method_bindings(api_core);
-	//Py_Finalize();
 }
 
 void GDN_EXPORT godot_singleton_init() {
