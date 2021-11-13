@@ -67,10 +67,10 @@ build()
 cythonize_files()
 
 #loading the needed python files for the target platform
-download_python.download_file(args.target_platform)
+download_python.download_file(args.target_platform, allow_copy=True)
 
 #downlaod needed python files for the current platform
-download_python.download_file(current_platform)
+download_python.download_file(current_platform, allow_copy=False)
 
 compile_python_ver_file(current_platform)
 
