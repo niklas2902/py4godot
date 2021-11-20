@@ -1,23 +1,22 @@
 from enums.enums import *
 from classes.generated import *
 from pluginscript_api.utils.annotations import *
+import PythonTest
+import unittest
 import sys
 import os
 
 @gdclass
 class TestRunner(Spatial):
-	def __init__(self):
-		super().__init__()
-		self.velocity = 0
-		print("--------------------------hallo----------------------------")
-		print(sys.path)
-		print(os.getcwd())
-		import PythonTest
-		import unittest
-		suite = unittest.TestLoader().loadTestsFromModule(PythonTest)
-		unittest.TextTestRunner().run(suite)
 	@gdmethod
-	def _start():
+	def _ready(self):
 		print("##########start#############")
+		self.velocity = 0
+		suite = unittest.TestLoader().loadTestsFromModule(PythonTest)
+		res = unittest.TextTestRunner().run(suite)
+		if(len(res.failures) == 0):
+			self.get_tree().quit(0)
+		else:
+			self.get_tree().quit(1)
 
 

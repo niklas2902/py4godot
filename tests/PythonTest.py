@@ -13,6 +13,5 @@ class PythonTest(unittest.TestCase):
 	def test_equal_vector3(self):
 		self.assertEqual(Vector3(1,1,1), Vector3(1,1,1))
 
-	def test_always_fail(self):
-		self.assertEqual(1,2)
+
 

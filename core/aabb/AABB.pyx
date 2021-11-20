@@ -90,5 +90,3 @@ cdef class AABB:
 
     def __eq__(self, AABB other):
         return api_core.godot_aabb_operator_equal(&self._native, &other._native)
-
-

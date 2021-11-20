@@ -149,6 +149,8 @@ void GDN_EXPORT godot_gdnative_terminate(godot_gdnative_terminate_options *p_opt
     PyEval_RestoreThread(gilstate);
 
     int ret = Py_FinalizeEx();
+
+    printf("finialize finished\n");
 }
 
 // `nativescript_init` is the most important function. Godot calls

@@ -23,19 +23,19 @@ cdef api set_api_core_pluginscript(const godot_gdnative_core_api_struct* core):
     global api_core
     api_core = core
     api_core.godot_dictionary_new(&dictionary)
-    print("\n#############################set_api_core############################################################")
+    #print("\n#############################set_api_core############################################################")
 cdef api godot_pluginscript_language_data * init_pluginscript() with gil:
     """empty placeholder function, as this is necessary to implement"""
-    print("\n######################################################init_python_pluginscript####################################\n");
+    #print("\n######################################################init_python_pluginscript####################################\n");
 
 cdef api void finish_pluginscript(godot_pluginscript_instance_data *p_data) with gil:
     """currently empty function which is necessary to implement. It could later be used to delete resources"""
-    print("finish_python_test\n");
+    #print("finish_python_test\n")
 
 cdef api  void add_global_constant_pluginscript(godot_pluginscript_language_data *p_data,
 const godot_string *p_variable, const godot_variant *p_value) with gil:
     """empty placeholder function, as this is necessary to implement"""
-    print("\n######################################################add_global_constant#############################\n");
+    #print("\n######################################################add_global_constant#############################\n");
 
 ###############################################pluginscript_desc#######################################################
 cdef api  godot_pluginscript_script_manifest init_pluginscript_desc (godot_pluginscript_language_data *p_data,
@@ -50,7 +50,7 @@ cdef api  godot_pluginscript_script_manifest init_pluginscript_desc (godot_plugi
         create_empty_manifest(&manifest)
         return manifest
 
-    print("\n############################################create_manifest##############################################\n");
+    #print("\n############################################create_manifest##############################################\n");
     reset()
     exec(str(String.new_static(dereference(p_source))))
     if(len(classes) > 0):
@@ -86,7 +86,7 @@ cdef api  godot_pluginscript_script_manifest init_pluginscript_desc (godot_plugi
 
 cdef api  void finish_pluginscript_desc (godot_pluginscript_script_data *p_data) with gil:
     """empty placeholder function, as this is necessary to implement"""
-    print("finish_desc\n");
+    #print("finish_desc\n");
 
 
 

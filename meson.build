@@ -15,6 +15,7 @@ dep_py = py.dependency()
 internal_inc = include_directories('godot-headers', 'core', 'enums', 'classes', 'pluginscript_api', 'godot_bindings')
 
 glob = run_command('python', files(meson.current_source_dir()+'/meson_scripts/glob_tools.py'))
+godot_program = find_program('godot')
 
 sources = glob.stdout().strip().split('\n')
 message(sources)
@@ -24,4 +25,6 @@ foreach source : sources
     dependencies:[dep_py], include_directories:internal_inc,name_prefix:'',c_args:extra_args )
 endforeach
 
+
+test('test', godot_program, args : ['--path', 'tests'], workdir:meson.source_root())
 

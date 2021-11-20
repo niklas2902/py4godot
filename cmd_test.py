@@ -2,7 +2,6 @@ import subprocess, time
 
 import main
 import os
-from main import *
 from Cython.Build import cythonize
 from meson_scripts import copy_tools, download_python, generate_init_files, python_loc, platform_check
 
@@ -63,7 +62,6 @@ if(args.compiler == None):
     args.compiler = get_compiler()
     print(f"Got compiler:{args.compiler}")
 
-build()
 cythonize_files()
 
 #loading the needed python files for the target platform
