@@ -42,6 +42,13 @@ cdef extern from "binding.h":
     ctypedef bool godot_bool
 
     ctypedef void godot_object;
+    ctypedef struct godot_instance_binding_functions:
+        void *(*alloc_instance_binding_data)(void *, const void *, godot_object *);
+        void (*free_instance_binding_data)(void *, void *);
+        void (*refcount_incremented_instance_binding)(void *, godot_object *);
+        bool (*refcount_decremented_instance_binding)(void *, godot_object *);
+        void *data;
+        void (*free_func)(void *);
     ##################################c types########################################
 
     #Todo:Remove [1] arrays

@@ -10,6 +10,8 @@ cdef extern from "Python.h":
 cdef extern from "binding.h":
 
     cdef const godot_gdnative_core_api_struct *api_core;
+    cdef godot_instance_binding_functions binding_funcs;
+    cdef int language_index;
     void print_ptr(void* owner);
 
     struct godot_gdnative_core_api_struct:

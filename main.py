@@ -165,6 +165,16 @@ def generate_classes(obj):
     result += f"""cdef class {obj['name']}({obj['base_class'] if obj['base_class'] != "" else "Wrapper"}):\n"""
     result += f"""  def __init__(self):\n"""
     result += f"""    super().__init__()\n"""
+    result += f"""  @staticmethod\n"""
+    result += f"""  def _new():\n"""
+    result += f"""      print("call_new")\n"""
+    result += f"""      print_ptr(nativescript_api_11)\n"""
+    result += f"""      print_ptr(api_core)\n"""
+    result += f"""      print(language_index)\n"""
+    result += f"""      cdef char* name = <char*> "{obj["name"]}"\n"""
+    result += f"""      api_core.godot_get_class_constructor(name)\n"""
+    result += f"""      print("call_api")\n"""
+    result += f"""      nativescript_api_11.godot_nativescript_get_instance_binding_data(0, api_core.godot_get_class_constructor(name));\n"""
 
     result += generate_properties(obj)
     results = generate_methods(obj, import_string)
@@ -238,7 +248,12 @@ base_import_string += f"from godot_bindings.binding_external cimport *\n\n\n" \
                       f"    api_core = core\n\n" \
                       f"cdef set_native_script(godot_gdnative_ext_nativescript_1_1_api_struct* api):\n" \
                       f"    global nativescript_api_11\n" \
-                      f"    nativescript_api_11 = api\n\n\n"
+                      f"    nativescript_api_11 = api\n\n"\
+                      f"cdef set_bindings_funcs(godot_instance_binding_functions binding_funcs_, int lang_ind):\n" \
+                      f"    global binding_funcs\n" \
+                      f"    global language_index\n" \
+                      f"    binding_funcs = binding_funcs_\n" \
+                      f"    language_index = lang_ind\n\n"
 
 main_string = ""
 
@@ -269,15 +284,23 @@ from utils.Wrapper cimport *"""
             continue
 
         init_methods_string += f"  init_method_bindings_{element['name']}()\n"
-        register_types_string += f"  api_core\n"
         file = ""
         generated_file = generate_classes(element)
         bindings_file += generated_file[1] + "\n"
         pxd_file += generated_file[2]
         create_set(generated_file[0], set_)
 
+    #Registering types for later use
+    type_ind = 0
+    for element in obj:
+        register_types_string += f"  nativescript_api_11.godot_nativescript_set_global_type_tag(language_index, <char *>'{element['name']}', <void*>{type_ind})\n"
+        type_ind += 1
+
+
     with open("classes/generated.pyx", "w") as bindings:
         bindings.write(base_import_string + main_string + bindings_file + init_methods_string + register_types_string)
     with open("classes/generated.pxd", "w") as bindings_pxd:
         bindings_pxd.write(pxd_file + "\ncdef set_core(godot_gdnative_core_api_struct* core)" +
-                           "\ncdef set_native_script(godot_gdnative_ext_nativescript_1_1_api_struct* api)")
+                           "\ncdef set_native_script(godot_gdnative_ext_nativescript_1_1_api_struct* api)\n"+
+                           "cdef set_bindings_funcs(godot_instance_binding_functions bindings_funcs_, int lang_ind)\n"
+                           "cdef register_types()")

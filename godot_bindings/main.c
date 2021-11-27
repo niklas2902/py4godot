@@ -18,6 +18,8 @@
 #include "../core/quat/Quat_api.h"
 #include "../core/rect2/Rect2_api.h"
 #include "../core/rid/RID_api.h"
+
+#include "../gdnative_api/api_api.h"
 #include <string.h>
 
 
@@ -109,6 +111,15 @@ void GDN_EXPORT godot_gdnative_init(godot_gdnative_init_options *p_options) {
 		switch (api_core->extensions[i]->type) {
 			case GDNATIVE_EXT_NATIVESCRIPT: {
 				nativescript_api = (godot_gdnative_ext_nativescript_api_struct *)api_core->extensions[i];
+				const godot_gdnative_api_struct *extension = nativescript_api->next;
+
+				while (extension) {
+					if (extension->version.major == 1 && extension->version.minor == 1) {
+						nativescript_api_11 = (const godot_gdnative_ext_nativescript_1_1_api_struct *)extension;
+					}
+
+					extension = extension->next;
+			    }
 			}; break;
             case GDNATIVE_EXT_PLUGINSCRIPT:
                 gdapi_ext_pluginscript = (const godot_gdnative_ext_pluginscript_api_struct *)api_core->extensions[i];
@@ -240,7 +251,24 @@ sys.path.insert(0,os.getcwd())");
         return ;
     }
 
+    import_gdnative_api__api();
+    if (PyErr_Occurred())
+    {
+        PyErr_Print();
+        return ;
+    }
+    // from godot-cpp
+    // Initialize the `language_index` here since `__register_types()` makes use of it.
+	godot_instance_binding_functions binding_funcs = { .alloc_instance_binding_data = wrapper_create, .free_instance_binding_data = wrapper_destroy };
+
+	int language_index = nativescript_api_11->godot_nativescript_register_instance_binding_data_functions(binding_funcs);
+	printf("language_index:");
+	printf("%d", language_index);
+
     init_method_bindings(api_core);
+    set_native_script_classes(nativescript_api_11);
+    set_bindings_funcs(binding_funcs, language_index);
+    register_types();
 }
 
 void GDN_EXPORT godot_singleton_init() {
