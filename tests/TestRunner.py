@@ -8,6 +8,9 @@ import os
 
 @gdclass
 class TestRunner(Spatial):
+	
+	def __init__(self):
+		print("__init__")
 	@gdmethod
 	def _ready(self):
 		print("##########start#############")

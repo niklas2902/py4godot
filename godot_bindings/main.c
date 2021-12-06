@@ -257,6 +257,11 @@ sys.path.insert(0,os.getcwd())");
         PyErr_Print();
         return ;
     }
+
+    init_method_bindings(api_core);
+    set_native_script_classes(nativescript_api_11);
+    register_types();
+
     // from godot-cpp
     // Initialize the `language_index` here since `__register_types()` makes use of it.
 	godot_instance_binding_functions binding_funcs = { .alloc_instance_binding_data = wrapper_create, .free_instance_binding_data = wrapper_destroy };
@@ -264,11 +269,7 @@ sys.path.insert(0,os.getcwd())");
 	int language_index = nativescript_api_11->godot_nativescript_register_instance_binding_data_functions(binding_funcs);
 	printf("language_index:");
 	printf("%d", language_index);
-
-    init_method_bindings(api_core);
-    set_native_script_classes(nativescript_api_11);
     set_bindings_funcs(binding_funcs, language_index);
-    register_types();
 }
 
 void GDN_EXPORT godot_singleton_init() {

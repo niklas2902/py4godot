@@ -168,13 +168,9 @@ def generate_classes(obj):
     result += f"""  @staticmethod\n"""
     result += f"""  def _new():\n"""
     result += f"""      print("call_new")\n"""
-    result += f"""      print_ptr(nativescript_api_11)\n"""
-    result += f"""      print_ptr(api_core)\n"""
-    result += f"""      print(language_index)\n"""
     result += f"""      cdef char* name = <char*> "{obj["name"]}"\n"""
-    result += f"""      api_core.godot_get_class_constructor(name)\n"""
-    result += f"""      print("call_api")\n"""
-    result += f"""      nativescript_api_11.godot_nativescript_get_instance_binding_data(0, api_core.godot_get_class_constructor(name));\n"""
+    result += f"""      cdef {obj['name']} obj = <{obj['name']}> nativescript_api_11.godot_nativescript_get_instance_binding_data(language_index,api_core.godot_get_class_constructor(name)());\n"""
+    result += f"""      return obj\n"""
 
     result += generate_properties(obj)
     results = generate_methods(obj, import_string)
@@ -293,8 +289,9 @@ from utils.Wrapper cimport *"""
     #Registering types for later use
     type_ind = 0
     for element in obj:
-        register_types_string += f"  nativescript_api_11.godot_nativescript_set_global_type_tag(language_index, <char *>'{element['name']}', <void*>{type_ind})\n"
+        register_types_string += f"  nativescript_api_11.godot_nativescript_set_global_type_tag(language_index, <char *>'{element['name']}', <void*>{element['name']})\n"
         type_ind += 1
+    register_types_string += "print('successfully registered_types')"
 
 
     with open("classes/generated.pyx", "w") as bindings:

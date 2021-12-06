@@ -124,3 +124,16 @@ cdef extern from "binding.h":
     ctypedef struct godot_method_bind:
         uint8_t _dont_touch_that[1];
     ctypedef godot_object *(*godot_class_constructor)()
+
+
+    ctypedef struct godot_instance_create_func:
+        # instance pointer, method_data - return user data
+        void *(*create_func)(godot_object *, void *);
+        void *method_data;
+        void (*free_func)(void *);
+
+    ctypedef struct godot_instance_destroy_func:
+	    # instance pointer, method data, user data
+        void (*destroy_func)(godot_object *, void *, void *);
+        void *method_data;
+        void (*free_func)(void *);

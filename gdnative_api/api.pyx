@@ -5,13 +5,13 @@ from cpython cimport Py_INCREF, Py_DECREF, PyObject
 
 cdef api void* wrapper_create(void *data, const void *type_tag, godot_object *instance):
     print("create_wrapper")
-    cdef Wrapper wrapper = Wrapper()
+    cdef Wrapper wrapper = (<Wrapper>type_tag)()
     print("set_godot_owner")
     wrapper.godot_owner = instance
     print("incref")
     Py_INCREF(wrapper)
     print("return instance")
-    return instance
+    return <PyObject*>wrapper
 cdef api void wrapper_destroy(void *data, void *wrapper):
     print("destroy")
     """
