@@ -165,13 +165,25 @@ def generate_classes(obj):
     result += f"""cdef class {obj['name']}({obj['base_class'] if obj['base_class'] != "" else "Wrapper"}):\n"""
     result += f"""  def __init__(self):\n"""
     result += f"""    super().__init__()\n"""
-    result += f"""  @staticmethod\n"""
-    result += f"""  def _new():\n"""
-    result += f"""      print("call_new")\n"""
-    result += f"""      cdef char* name = <char*> "{obj["name"]}"\n"""
-    result += f"""      cdef {obj['name']} obj = <{obj['name']}> nativescript_api_11.godot_nativescript_get_instance_binding_data(language_index,api_core.godot_get_class_constructor(name)());\n"""
-    result += f"""      return obj\n"""
 
+    #only generate constructor if instanciable
+    if(obj["instanciable"]):
+        result += f"""  @staticmethod\n"""
+        result += f"""  def _new():\n"""
+        result += f"""      print("call_new")\n"""
+        result += f"""      cdef char* name = <char*> "{obj["name"]}"\n"""
+        result += f"""      cdef {obj['name']} obj = <{obj['name']}> nativescript_api_11.godot_nativescript_get_instance_binding_data(language_index,api_core.godot_get_class_constructor(name)());\n"""
+        result += f"""      return obj\n"""
+
+    #TODO:Try to improve this
+    if(obj["singleton"]):
+        result += f"""  @staticmethod\n"""
+        result += f"""  def _new():\n"""
+        result += f"""      print("call_new")\n"""
+        result += f"""      cdef char* name = <char*> "{obj["name"]}"\n"""
+        result += f"""      cdef {obj['name']} obj = <{obj['name']}>{obj['name']}()\n"""
+        result += f"""      obj.godot_owner = api_core.godot_get_class_constructor(name)()\n"""
+        result += f"""      return obj\n"""
     result += generate_properties(obj)
     results = generate_methods(obj, import_string)
     result += results[0]
@@ -208,6 +220,15 @@ def create_set(string, set):
     strings = string.split("\n")
     for s in strings:
         set.add(s)
+
+def generate_singleton(obj):
+    return f"""class {obj['name'].strip('_')}():
+    _instance = None
+    @classmethod
+    def instance(cls):
+        if not cls._instance:
+            cls._instance = {obj['name']}._new()
+        return cls._instance\n\n"""
 
 # The import string at the start of the file
 base_import_string = ""
@@ -276,7 +297,7 @@ from utils.Wrapper cimport *"""
     set_ = set()
     # generate all the class files
     for element in obj:
-        if (element["name"].startswith("_")):
+        if (element["name"].startswith("_") and element["singleton"] == False):
             continue
 
         init_methods_string += f"  init_method_bindings_{element['name']}()\n"
@@ -285,6 +306,9 @@ from utils.Wrapper cimport *"""
         bindings_file += generated_file[1] + "\n"
         pxd_file += generated_file[2]
         create_set(generated_file[0], set_)
+
+        if(element["singleton"] and element["name"].startswith("_")):
+            bindings_file += generate_singleton(element)
 
     #Registering types for later use
     type_ind = 0

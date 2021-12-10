@@ -5,6 +5,7 @@ from cpython cimport Py_INCREF, Py_DECREF, PyObject
 
 cdef api void* wrapper_create(void *data, const void *type_tag, godot_object *instance):
     print("create_wrapper")
+    print(<object>type_tag)
     cdef Wrapper wrapper = (<Wrapper>type_tag)()
     print("set_godot_owner")
     wrapper.godot_owner = instance
