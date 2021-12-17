@@ -171,7 +171,6 @@ def generate_classes(obj):
     if(obj["instanciable"]):
         result += f"""  @staticmethod\n"""
         result += f"""  def _new():\n"""
-        result += f"""      print("call_new")\n"""
         result += f"""      cdef char* name = <char*> "{obj["name"]}"\n"""
         result += f"""      cdef {obj['name']} obj = <{obj['name']}> nativescript_api_11.godot_nativescript_get_instance_binding_data(language_index,api_core.godot_get_class_constructor(name)());\n"""
         result += f"""      return obj\n"""
@@ -180,10 +179,13 @@ def generate_classes(obj):
     if(obj["singleton"]):
         result += f"""  @staticmethod\n"""
         result += f"""  def _new():\n"""
-        result += f"""      print("call_new")\n"""
         result += f"""      cdef char* name = <char*> "{obj["name"]}"\n"""
         result += f"""      cdef {obj['name']} obj = <{obj['name']}>{obj['name']}()\n"""
-        result += f"""      obj.godot_owner = api_core.godot_global_get_singleton(name)\n"""
+        if(not obj["name"].startswith("_")):
+            result += f"""      obj.godot_owner = api_core.godot_global_get_singleton(name)\n"""
+        else:
+            #Todo: check why I have to make a difference here
+            result += f"""      obj.godot_owner = api_core.godot_get_class_constructor(name)()\n"""
         result += f"""      return obj\n"""
     result += generate_properties(obj)
     results = generate_methods(obj, import_string)
@@ -323,8 +325,6 @@ from utils.Wrapper cimport *"""
     for element in obj:
         register_types_string += f"  nativescript_api_11.godot_nativescript_set_global_type_tag(language_index, <char *>'{element['name']}', <void*>{element['name']})\n"
         type_ind += 1
-    register_types_string += "print('successfully registered_types')"
-
 
     with open("classes/generated.pyx", "w") as bindings:
         bindings.write(base_import_string + main_string + bindings_file + init_methods_string + register_types_string)
