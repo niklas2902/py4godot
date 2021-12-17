@@ -165,6 +165,7 @@ def generate_classes(obj):
     result += f"""cdef class {obj['name']}({obj['base_class'] if obj['base_class'] != "" else "Wrapper"}):\n"""
     result += f"""  def __init__(self):\n"""
     result += f"""    super().__init__()\n"""
+    result += generate_constants(obj)
 
     #only generate constructor if instanciable
     if(obj["instanciable"]):
@@ -182,7 +183,7 @@ def generate_classes(obj):
         result += f"""      print("call_new")\n"""
         result += f"""      cdef char* name = <char*> "{obj["name"]}"\n"""
         result += f"""      cdef {obj['name']} obj = <{obj['name']}>{obj['name']}()\n"""
-        result += f"""      obj.godot_owner = api_core.godot_get_class_constructor(name)()\n"""
+        result += f"""      obj.godot_owner = api_core.godot_global_get_singleton(name)\n"""
         result += f"""      return obj\n"""
     result += generate_properties(obj)
     results = generate_methods(obj, import_string)
@@ -191,6 +192,13 @@ def generate_classes(obj):
 
     pxd_file = generate_pxd(obj["name"],  obj)
     return import_string, result, pxd_file
+
+def generate_constants(obj):
+    result = "#########################################begin constants#######################################\n"
+    for constant in obj["constants"]:
+        result += f"""  {constant} = {obj["constants"][constant]}\n"""
+    result += "#########################################end constants#######################################\n\n"
+    return result
 
 
 def generate_enums(class_, obj):

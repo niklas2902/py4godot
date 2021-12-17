@@ -20,3 +20,5 @@ classes/*.h
 classes/generated.pxd
 classes/generated.pyx
 /tests/addons/
+/gdnative_api/api.c
+/gdnative_api/api_api.h
