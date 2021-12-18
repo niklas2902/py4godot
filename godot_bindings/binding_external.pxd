@@ -33,3 +33,4 @@ cdef extern from "binding.h":
         void (*godot_string_name_destroy)(godot_string_name *p_self);
         void (*godot_free)(void *p_ptr);
         godot_object* godot_global_get_singleton(char *p_name)
+        godot_variant godot_method_bind_call(godot_method_bind *p_method_bind, godot_object *p_instance, const godot_variant **p_args, const int p_arg_count, godot_variant_call_error *p_call_error);

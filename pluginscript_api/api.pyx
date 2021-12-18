@@ -60,21 +60,22 @@ cdef api  godot_pluginscript_script_manifest init_pluginscript_desc (godot_plugi
         manifest.is_tool = False;
         api_core.godot_string_name_new_data(&manifest.base, "");
         api_core.godot_dictionary_new(&manifest.member_lines);
-        api_core.godot_array_new(&manifest.signals);
-        methods_array = Array()
-        api_core.godot_print(p_source)
-        api_core.godot_print(p_path)
 
         class_obj = <PyObject*> gd_obj
 
         properties_array = Array()
+        methods_array = Array()
+        signals_array = Array()
         for p in properties:
             properties_array.append(Variant(p.to_dict()))
         for m in methods:
             methods_array.append(Variant(m.to_dict()))
+        for signal in signals:
+            signals_array.append(Variant(signal.to_dict()))
 
         manifest.properties = properties_array._native
         manifest.methods = methods_array._native
+        manifest.signals = signals_array._native
 
         (<Wrapper>class_obj).PROPERTIES = [p.name for p in properties]
         manifest.data = class_obj#The data contains the class, we want later instantiate in method init_pluginscript_instance

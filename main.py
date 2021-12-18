@@ -70,6 +70,8 @@ def generate_args(import_string, method, result):
 
         if (argument["type"] in objects):
             import_string += f"cimport classes.{argument['type']}\n"
+    if(method["has_varargs"]):
+        args += "*varargs,"
     result += args.rstrip(", ") + "):\n"
     return import_string, result
 
@@ -111,6 +113,15 @@ def generate_method_argument_array(method, result):
                 result += f"    args[{i}] = {'&' + arg_name + '._native' if method['arguments'][i]['type'] in core else ('&' + arg_name)}\n"
     else:
         result += f"""    cdef void * args[1]\n    args[0] = NULL\n"""
+
+    if (method["has_varargs"]):
+        result += f"""    cdef godot_variant** combined_array = <godot_variant**> PyMem_Malloc(sizeof(godot_variant *) * len(varargs) + {len(method['arguments'])})\n"""
+        for i in range(len(method["arguments"])):
+            arg_name = (argument["name"] if argument["name"] not in exclude_words else argument["name"] + "_")
+            result += f"""    combined_array[{i}] = &Variant({arg_name})._native\n"""
+        result += f"""    for i in range(len(varargs)):\n"""
+        result += f"""      combined_array[i] = &Variant(varargs[i])._native\n"""
+
     return result
 
 
@@ -269,6 +280,7 @@ base_import_string += f"from core.color.Color cimport Color\n"
 base_import_string += f"from cython.operator cimport dereference\n"
 base_import_string += f"from enums.enums cimport *\n"
 base_import_string += f"from godot_bindings.types cimport *\n"
+base_import_string += f"from cpython.mem cimport PyMem_Malloc, PyMem_Realloc, PyMem_Free\n"
 base_import_string += f"from godot_bindings.binding_external cimport *\n\n\n" \
                       f"cdef set_core(godot_gdnative_core_api_struct* core):\n" \
                       f"    global api_core\n" \

@@ -39,9 +39,6 @@ cdef extern from "binding.h":
         GODOT_VARIANT_TYPE_POOL_VECTOR3_ARRAY
         GODOT_VARIANT_TYPE_POOL_COLOR_ARRAY
 
-    ctypedef struct godot_variant_call_error:
-        pass
-
     const godot_gdnative_core_api_struct *api_core
     struct godot_gdnative_core_api_struct:
         godot_variant_type (*godot_variant_get_type)(const godot_variant *p_v);
