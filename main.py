@@ -122,7 +122,7 @@ def generate_method_argument_array(method, result):
             result += f"""    cdef godot_variant __var_{arg_name} = Variant({arg_name})._native\n"""
             result += f"""    combined_array[{i}] = &__var_{arg_name}\n"""
         result += f"""    for i in range(len(varargs)):\n"""
-        result += f"""      combined_array[i] = &Variant(varargs[i])._native\n"""
+        result += f"""      combined_array[i+{len(method['arguments'])}] = &Variant(varargs[i])._native\n"""
 
     return result
 
