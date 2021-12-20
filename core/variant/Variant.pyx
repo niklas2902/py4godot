@@ -33,7 +33,6 @@ cdef class Variant:
                 AABB:self.new_aabb, String:self.new_string, Rect2:self.new_rect2, Quat:self.new_quat,
                 Color:self.new_color, NodePath:self.new_node_path, type(True):self.new_bool }"""
 
-
         if(type(variant) == type("")):
             variant = String(variant)
         if(variant != None):
@@ -256,8 +255,6 @@ cdef class Variant:
         return api_core.godot_variant_hash_compare(&self._native, &other._native)
     def booleanize(self):
         return api_core.godot_variant_booleanize(&self._native)
-    def __del__(self):
-        api_core.godot_variant_destroy(&self._native)
 
     def get_converted_value(self):
         return dict_get_methods[self.get_type()](self)

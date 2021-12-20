@@ -117,8 +117,10 @@ def generate_method_argument_array(method, result):
     if (method["has_varargs"]):
         result += f"""    cdef godot_variant** combined_array = <godot_variant**> PyMem_Malloc(sizeof(godot_variant *) * len(varargs) + {len(method['arguments'])})\n"""
         for i in range(len(method["arguments"])):
+            argument = method["arguments"][i]
             arg_name = (argument["name"] if argument["name"] not in exclude_words else argument["name"] + "_")
-            result += f"""    combined_array[{i}] = &Variant({arg_name})._native\n"""
+            result += f"""    cdef godot_variant __var_{arg_name} = Variant({arg_name})._native\n"""
+            result += f"""    combined_array[{i}] = &__var_{arg_name}\n"""
         result += f"""    for i in range(len(varargs)):\n"""
         result += f"""      combined_array[i] = &Variant(varargs[i])._native\n"""
 
@@ -127,9 +129,14 @@ def generate_method_argument_array(method, result):
 
 def make_method_api_call(method, obj, result, return_type, return_type_save):
     """make the api call and return the return value"""
-    if (not method["is_virtual"]):
-        result += f"    api_core.godot_method_bind_ptrcall(bind_{obj['name'].lower()}_{method['name']}," \
-                  f"self.godot_owner,{'args' if len(method['arguments']) > 0 else 'NULL'},{'&ret' if return_type != 'void' else 'NULL'})\n"
+    if(not method["has_varargs"]):
+        if (not method["is_virtual"]):
+            result += f"    api_core.godot_method_bind_ptrcall(bind_{obj['name'].lower()}_{method['name']}," \
+                      f"self.godot_owner,{'args' if len(method['arguments']) > 0 else 'NULL'},{'&ret' if return_type != 'void' else 'NULL'})\n"
+    else:
+        result += f"    api_core.godot_method_bind_call(bind_{obj['name'].lower()}_{method['name']}," \
+                  f"self.godot_owner,combined_array, {len(method['arguments'])} + len(varargs),NULL)\n"
+
     if return_type != "void" and not return_type in objects and not return_type_save.startswith("Pool"):
         if ("." in return_type):
             return_type = return_type
