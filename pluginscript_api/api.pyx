@@ -117,7 +117,6 @@ cdef api bool set_prop_pluginscript_instance(godot_pluginscript_instance_data *p
     cdef Wrapper instance = (<Wrapper ?>p_data)
     #print("\n#########################################################set_prop#######################################\n");
     api_core.godot_print(p_name)
-
     value = CVariant.Variant.new_static(dereference(p_value)).get_converted_value()
     instance.set_property(str(String.new_static(dereference(p_name))), value)
     return True;

@@ -40,5 +40,5 @@ def gdmethod(func):
     methods.append(MethodDescription(func.__name__, inspect.getfullargspec(func).args, None, None, 0,GODOT_METHOD_RPC_MODE_DISABLED))
     return func
 
-def register_signal(signal_name):
-    signals.append(MethodDescription(signal_name, [], None, None, 0,GODOT_METHOD_RPC_MODE_DISABLED))
+def register_signal(signal_name, args = dict()):
+    signals.append(MethodDescription(signal_name, args, None, None, 0,GODOT_METHOD_RPC_MODE_DISABLED))

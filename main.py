@@ -313,7 +313,7 @@ def build():
 
     global objects
     # read file
-    with open('headers/api.json', 'r') as myfile:
+    with open('godot-headers/api.json', 'r') as myfile:
         data = myfile.read()
         obj = json.loads(data)
 
