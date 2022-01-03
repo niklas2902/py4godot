@@ -134,8 +134,15 @@ def make_method_api_call(method, obj, result, return_type, return_type_save):
             result += f"    api_core.godot_method_bind_ptrcall(bind_{obj['name'].lower()}_{method['name']}," \
                       f"self.godot_owner,{'args' if len(method['arguments']) > 0 else 'NULL'},{'&ret' if return_type != 'void' else 'NULL'})\n"
     else:
-        result += f"    api_core.godot_method_bind_call(bind_{obj['name'].lower()}_{method['name']}," \
-                  f"self.godot_owner,combined_array, {len(method['arguments'])} + len(varargs),NULL)\n"
+        #making method call with varargs, when method has return type
+        if(method["return_type"] == "void"):
+            result += f"    api_core.godot_method_bind_call(bind_{obj['name'].lower()}_{method['name']}," \
+                      f"self.godot_owner,combined_array, {len(method['arguments'])} + len(varargs),NULL)\n"
+        #making method call with varargs, when method doesn't have return type
+        else:
+            result += f"    return Variant.new_static(api_core.godot_method_bind_call(bind_{obj['name'].lower()}_{method['name']}," \
+                      f"self.godot_owner,combined_array, {len(method['arguments'])} + len(varargs),NULL))\n"
+
 
     if return_type != "void" and not return_type in objects and not return_type_save.startswith("Pool"):
         if ("." in return_type):
