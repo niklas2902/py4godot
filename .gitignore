@@ -7,16 +7,16 @@ venv
 platforms/python_ver/python_ver_compile.cross
 .vscode
 
-enums/*.c
-core/**/*.c
-core/**/*.h
-pluginscript_api/*.c
-pluginscript_api/*.h
-pluginscript_api/**/*.c
-utils/*.c
+py4godot/enums/*.c
+py4godot/core/**/*.c
+py4godot/core/**/*.h
+py4godot/pluginscript_api/*.c
+py4godot/pluginscript_api/*.h
+py4godot/pluginscript_api/**/*.c
+py4godot/utils/*.c
 
-classes/*.c
-classes/*.h
+py4godot/classes/*.c
+py4godot/classes/*.h
 py4godot/classes/generated.pxd
 py4godot/classes/generated.pyx
 /tests/addons/
