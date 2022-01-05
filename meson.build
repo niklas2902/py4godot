@@ -12,7 +12,8 @@ message(meson.current_source_dir())
 py = import('python').find_installation('python3')
 dep_py = py.dependency()
 
-internal_inc = include_directories('godot-headers', 'core', 'enums', 'classes', 'pluginscript_api', 'godot_bindings')
+internal_inc = include_directories('py4godot/godot-headers', 'py4godot/core', 'py4godot/enums',
+'py4godot/classes', 'py4godot/pluginscript_api', 'py4godot/godot_bindings')
 
 glob = run_command('python', files(meson.current_source_dir()+'/meson_scripts/glob_tools.py'))
 godot_program = find_program('godot')

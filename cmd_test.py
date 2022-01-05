@@ -10,14 +10,14 @@ import argparse
 main.build()
 
 def cythonize_files():
-    module = cythonize('core/*/*.pyx', language_level=3)
-    module += cythonize("classes/*.pyx", language_level=3)
-    module += cythonize("utils/*.pyx", language_level=3)
-    module += cythonize("pluginscript_api/*.pyx", language_level=3)
-    module += cythonize("pluginscript_api/*/*.pyx", language_level=3)
-    module += cythonize("gdnative_api/*.pyx", language_level=3)
+    module = cythonize('py4godot/core/*/*.pyx', language_level=3)
+    module += cythonize("py4godot/classes/*.pyx", language_level=3)
+    module += cythonize("py4godot/utils/*.pyx", language_level=3)
+    module += cythonize("py4godot/pluginscript_api/*.pyx", language_level=3)
+    module += cythonize("py4godot/pluginscript_api/*/*.pyx", language_level=3)
+    module += cythonize("py4godot/gdnative_api/*.pyx", language_level=3)
 #    module += cythonize("godot_bindings/*.pyx", language_level=3)
-    module += cythonize("enums/*.pyx", language_level=3)
+    module += cythonize("py4godot/enums/*.pyx", language_level=3)
 
 def compile_python_ver_file(platform):
     """compile python file, to find the matching python version"""

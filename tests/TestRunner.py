@@ -1,6 +1,6 @@
-from enums.enums import *
-from classes.generated import *
-from pluginscript_api.utils.annotations import *
+from py4godot.enums import *
+from py4godot.classes import *
+from py4godot.pluginscript_api.utils import *
 import PythonTest
 import unittest
 import sys

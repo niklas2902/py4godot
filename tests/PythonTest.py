@@ -1,8 +1,8 @@
 import unittest
 import time
-from core import *
-from classes.generated import *
-from pluginscript_api.utils.annotations import *
+from py4godot.core import *
+from py4godot.classes import *
+from py4godot.pluginscript_api.utils import *
 
 class PythonTest(unittest.TestCase):
 

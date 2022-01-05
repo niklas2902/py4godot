@@ -17,8 +17,8 @@ utils/*.c
 
 classes/*.c
 classes/*.h
-classes/generated.pxd
-classes/generated.pyx
+py4godot/classes/generated.pxd
+py4godot/classes/generated.pyx
 /tests/addons/
-/gdnative_api/api.c
-/gdnative_api/api_api.h
+/py4godot/gdnative_api/api.c
+/py4godot/gdnative_api/api_api.h

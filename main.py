@@ -261,34 +261,33 @@ def generate_singleton(obj):
 # The import string at the start of the file
 base_import_string = ""
 base_import_string += f"\n##################################Import gdnative api#########################################\n"
-base_import_string += f"from enum import *\n"
-base_import_string += f"from utils.Wrapper cimport *\n"
-base_import_string += f"from core.node_path.NodePath cimport NodePath\n"
-base_import_string += f"from core.string.String cimport String\n"
-base_import_string += f"from core.variant.Variant cimport Variant\n"
-base_import_string += f"from core.array.Array cimport Array\n"
-base_import_string += f"from core.color.Color cimport Color\n"
-base_import_string += f"from core.plane.Plane cimport Plane\n"
-base_import_string += f"from core.basis.Basis cimport Basis\n"
-base_import_string += f"from core.aabb.AABB cimport AABB\n"
-base_import_string += f"from core.dictionary.Dictionary cimport Dictionary\n"
-base_import_string += f"from core.pool_array.PoolArrays cimport *\n"
-base_import_string += f"from core.quat.Quat cimport Quat\n"
-base_import_string += f"from core.rect2.Rect2 cimport Rect2\n"
-base_import_string += f"from core.rid.RID cimport RID\n"
-base_import_string += f"from core.transform.Transform cimport Transform\n"
-base_import_string += f"from core.transform.Transform2D cimport Transform2D\n"
-base_import_string += f"from core.vector2.Vector2 cimport Vector2\n"
-base_import_string += f"from core.vector3.Vector3 cimport Vector3\n"
-base_import_string += f"from core.variant.Variant cimport Variant_Type\n"
-base_import_string += f"from core.variant.Variant cimport Variant_Operator\n"
-base_import_string += f"from core.vector3.Vector3 cimport Vector3_Axis\n"
-base_import_string += f"from core.color.Color cimport Color\n"
+base_import_string += f"from py4godot.utils.Wrapper cimport *\n"
+base_import_string += f"from py4godot.core.node_path.NodePath cimport NodePath\n"
+base_import_string += f"from py4godot.core.string.String cimport String\n"
+base_import_string += f"from py4godot.core.variant.Variant cimport Variant\n"
+base_import_string += f"from py4godot.core.array.Array cimport Array\n"
+base_import_string += f"from py4godot.core.color.Color cimport Color\n"
+base_import_string += f"from py4godot.core.plane.Plane cimport Plane\n"
+base_import_string += f"from py4godot.core.basis.Basis cimport Basis\n"
+base_import_string += f"from py4godot.core.aabb.AABB cimport AABB\n"
+base_import_string += f"from py4godot.core.dictionary.Dictionary cimport Dictionary\n"
+base_import_string += f"from py4godot.core.pool_array.PoolArrays cimport *\n"
+base_import_string += f"from py4godot.core.quat.Quat cimport Quat\n"
+base_import_string += f"from py4godot.core.rect2.Rect2 cimport Rect2\n"
+base_import_string += f"from py4godot.core.rid.RID cimport RID\n"
+base_import_string += f"from py4godot.core.transform.Transform cimport Transform\n"
+base_import_string += f"from py4godot.core.transform.Transform2D cimport Transform2D\n"
+base_import_string += f"from py4godot.core.vector2.Vector2 cimport Vector2\n"
+base_import_string += f"from py4godot.core.vector3.Vector3 cimport Vector3\n"
+base_import_string += f"from py4godot.core.variant.Variant cimport Variant_Type\n"
+base_import_string += f"from py4godot.core.variant.Variant cimport Variant_Operator\n"
+base_import_string += f"from py4godot.core.vector3.Vector3 cimport Vector3_Axis\n"
+base_import_string += f"from py4godot.core.color.Color cimport Color\n"
 base_import_string += f"from cython.operator cimport dereference\n"
-base_import_string += f"from enums.enums cimport *\n"
-base_import_string += f"from godot_bindings.types cimport *\n"
+base_import_string += f"from py4godot.enums.enums cimport *\n"
+base_import_string += f"from py4godot.godot_bindings.types cimport *\n"
 base_import_string += f"from cpython.mem cimport PyMem_Malloc, PyMem_Realloc, PyMem_Free\n"
-base_import_string += f"from godot_bindings.binding_external cimport *\n\n\n" \
+base_import_string += f"from py4godot.godot_bindings.binding_external cimport *\n\n\n" \
                       f"cdef set_core(godot_gdnative_core_api_struct* core):\n" \
                       f"    global api_core\n" \
                       f"    api_core = core\n\n" \
@@ -313,7 +312,7 @@ def build():
 
     global objects
     # read file
-    with open('headers/api.json', 'r') as myfile:
+    with open('py4godot/godot-headers/api.json', 'r') as myfile:
         data = myfile.read()
         obj = json.loads(data)
 
@@ -321,8 +320,8 @@ def build():
 
     bindings_file = ""
     pxd_file = """from enum import *
-from godot_bindings.binding_external cimport *
-from utils.Wrapper cimport *"""
+from py4godot.godot_bindings.binding_external cimport *
+from py4godot.utils.Wrapper cimport *"""
     set_ = set()
     # generate all the class files
     for element in obj:
@@ -345,9 +344,9 @@ from utils.Wrapper cimport *"""
         register_types_string += f"  nativescript_api_11.godot_nativescript_set_global_type_tag(language_index, <char *>'{element['name']}', <void*>{element['name']})\n"
         type_ind += 1
 
-    with open("classes/generated.pyx", "w") as bindings:
+    with open("py4godot/classes/generated.pyx", "w") as bindings:
         bindings.write(base_import_string + main_string + bindings_file + init_methods_string + register_types_string)
-    with open("classes/generated.pxd", "w") as bindings_pxd:
+    with open("py4godot/classes/generated.pxd", "w") as bindings_pxd:
         bindings_pxd.write(pxd_file + "\ncdef set_core(godot_gdnative_core_api_struct* core)" +
                            "\ncdef set_native_script(godot_gdnative_ext_nativescript_1_1_api_struct* api)\n"+
                            "cdef set_bindings_funcs(godot_instance_binding_functions bindings_funcs_, int lang_ind)\n"

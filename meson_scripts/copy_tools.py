@@ -27,10 +27,10 @@ def copy_main(platform):
     #Todo: check whether python39.dll can be in another path
     #copying the main.pyd inside the python version, as the pythin39.dll must currently be in the same directory as main.pyd/main.so
     if("windows" in platform):
-        copy(f"build/addons/{platform}/godot_bindings/main.pyd",
+        copy(f"build/addons/{platform}/py4godot/godot_bindings/main.pyd",
              f"build/addons/{platform}/cpython-3.9.7-{platform}/python/install/main.pyd")
     elif("linux" in platform):
-        copy(f"build/addons/{platform}/godot_bindings/main.so",
+        copy(f"build/addons/{platform}/py4godot/godot_bindings/main.so",
              f"build/addons/{platform}/cpython-3.9.7-{platform}/python/install/lib/main.so")
 if __name__ == "__main__":
     run()
