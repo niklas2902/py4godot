@@ -1,3 +1,3 @@
-[submodule "godot-headers"]
-	path = godot-headers
+[submodule "py4godot/godot-headers"]
+	path = py4godot/godot-headers
 	url = https://github.com/godotengine/godot-headers.git
