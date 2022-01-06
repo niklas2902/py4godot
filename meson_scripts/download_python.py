@@ -11,6 +11,15 @@ python_files_dir = "python_files"
 copy_dir = "build/addons"
 python_ver = "cpython-3.9.7"
 
+sitecustomize_py = """
+import site
+import os
+
+site.addsitedir(os.getcwd()+'/addons/{platform}')
+site.addsitedir(os.getcwd())
+"""
+
+
 def download_file(platform, allow_copy = False):
     """Function for downloading python versions for various platforms and extracting them to the build folder"""
     python_folder = f"{python_ver}-" + platform
@@ -35,6 +44,7 @@ def download_file(platform, allow_copy = False):
         extract_tar(python_file.replace(".zst",""),export_name)
 
     if(allow_copy):
+        create_sitecustomization(export_name, platform)
         copy_to_build(export_name +"/", platform)
 
 
@@ -59,3 +69,7 @@ def copy_to_build(export_folder, platform):
     if (not os.path.isdir(copy_dir +"/" + platform + "/" + export_folder)):
         copytree(python_files_dir +"/" + export_folder, copy_dir +"/" + platform + "/" + export_folder,
                  ignore=ignore_patterns("build")) # build and lib are unnecessary
+
+def create_sitecustomization(export_folder, platform):
+    with open(f"python_files/{export_folder}/python/install/Lib/site-packages/sitecustomize.py", "w") as sitecustomize_file:
+        sitecustomize_file.write(sitecustomize_py.replace("{platform}", platform))

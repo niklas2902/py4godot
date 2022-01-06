@@ -240,10 +240,6 @@ godot_variant simple_get_data(godot_object *p_instance, void *p_method_data, voi
 }
 
 void set_up_bindings(){
-	PyRun_SimpleString("import sys, os\n\
-sys.path.insert(0,os.getcwd()+'/addons/windows64')\n\
-sys.path.insert(0,os.getcwd())");
-
 	import_py4godot__classes__classes();
     if (PyErr_Occurred())
     {
