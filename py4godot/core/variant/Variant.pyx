@@ -57,7 +57,8 @@ cdef class Variant:
 
             elif(type(variant)==String):
                 self.new_string(variant)
-            elif(variant==AABB):
+
+            elif(variant==String):
                 self.new_string(String(""))
 
             elif(type(variant)==Rect2):
@@ -118,6 +119,7 @@ cdef class Variant:
                 self.new_int(0)
             else:
                 print("no Variant created:",variant,"|", type(variant))
+                raise Exception("no Variant could be created")
         else:
             self.new_nil()
 
@@ -182,7 +184,7 @@ cdef class Variant:
         return api_core.godot_variant_as_real(&self._native)
     @staticmethod
     cdef as_string(self):
-        return api_core.godot_variant_as_string(&self._native)
+        return String.new_static(api_core.godot_variant_as_string(&self._native))
     @staticmethod
     cdef as_vector2(self):
         print("------------->as vector2")

@@ -5,6 +5,7 @@ from py4godot.core.variant.Variant import *
 from py4godot.core.array.Array cimport Array
 from py4godot.core.string.String cimport String
 from py4godot.pluginscript_api.description_classes.PropertyDescription import *
+from py4godot.enums.enums cimport *
 
 #Method info dictionary format
 #{
@@ -28,14 +29,22 @@ class MethodDescription:
 
     def to_dict(self):
         d = Dictionary()
-        a = Array()
-        for i in self.args:
-            print(i)
-            #Todo: improve this
-            prop_desc = PropertyDescription(i, None, 0, "",0, 0,0)
-            a.append(Variant(prop_desc.to_dict()))
+        dictionary_args = Dictionary()
+        if(type(self.args) == type({})):
+            for key in self.args:
+                #Todo: improve this
+                prop_desc = PropertyDescription(key, self.args[key], None,
+                 "",godot_property_usage_flags.GODOT_PROPERTY_USAGE_DEFAULT, 0,0)
+                d.set(Variant(String(key)), Variant(prop_desc.to_dict()))
+        else:
+            for element in self.args:
+                #Todo: improve this
+                prop_desc = PropertyDescription(element, None, None,
+                 "",godot_property_usage_flags.GODOT_PROPERTY_USAGE_DEFAULT, 0,0)
+                d.set(Variant(String(element)), Variant(prop_desc.to_dict()))
+
         d.set(Variant(String("name")), Variant(String(self.name)))
-        d.set(Variant(String("args")), Variant(a))
+        d.set(Variant(String("args")), Variant(dictionary_args))
         d.set(Variant(String("default_args")), Variant(Array()))
         d.set(Variant(String("return")),Variant(Dictionary()))
         d.set(Variant(String("flags")), Variant(0))

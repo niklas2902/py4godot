@@ -12,7 +12,6 @@ cdef extern from "binding.h":
         GODOT_VARIANT_TYPE_STRING
 
         # math types
-
         GODOT_VARIANT_TYPE_VECTOR2 # 5
         GODOT_VARIANT_TYPE_RECT2
         GODOT_VARIANT_TYPE_VECTOR3
