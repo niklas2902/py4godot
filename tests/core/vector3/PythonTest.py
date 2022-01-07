@@ -47,6 +47,7 @@ class PythonTest(unittest.TestCase):
         self.assertEqual(Vector3(0, -2, 0).length(), 2)
         self.assertEqual(Vector3(0, 0, 1).length(), 1)
         self.assertEqual(Vector3(20, 0, 0).length(), 20)
+        self.assertEqual(Vector3(1, 1, 0).length(),  1.4142135381698608)
 
     def test_length_squared(self):
         self.assertEqual(Vector3(1,0,0).length_squared(), 1)
@@ -86,4 +87,3 @@ class PythonTest(unittest.TestCase):
         self.assertEqual(Vector3(10, 0, 0)+Vector3(1, 0, 0), Vector3(11, 0, 0))
         self.assertEqual(Vector3(0, 0, -10)+Vector3(0, 0, 1), Vector3(0, 0, -9))
         self.assertEqual(Vector3(0, -8, -5)+Vector3(0, 2, 3), Vector3(0, -6, -2))
-
