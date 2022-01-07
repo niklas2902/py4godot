@@ -1,6 +1,4 @@
-from py4godot.enums import *
-from py4godot.classes import *
-from py4godot.pluginscript_api.utils import *
+from py4godot import *
 import PythonTest
 import unittest
 import sys
