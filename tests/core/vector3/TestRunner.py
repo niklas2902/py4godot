@@ -12,7 +12,6 @@ class TestRunner(Spatial):
 	@gdmethod
 	def _ready(self):
 		print("##########start#############")
-		self.velocity = 0
 		suite = unittest.TestLoader().loadTestsFromModule(PythonTest)
 		res = unittest.TextTestRunner().run(suite)
 		if(len(res.failures) == 0):

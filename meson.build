@@ -27,5 +27,5 @@ foreach source : sources
 endforeach
 
 
-test('test', godot_program, args : ['--path', 'tests'], workdir:meson.source_root())
+test('test_vector3', godot_program, args : ['--path', 'tests/core/vector3'], workdir:meson.source_root())
 

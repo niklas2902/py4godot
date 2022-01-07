@@ -1,4 +1,4 @@
-#from py4godot.core.basis.Basis cimport *
+from py4godot.core.basis.Basis cimport *
 from py4godot.core.string.String cimport String
 from py4godot.core.vector3.vector3_binding cimport *
 
@@ -56,8 +56,7 @@ cdef class Vector3:
         return api_core.godot_vector3_dot(&self._native, &with_._native)
 
     def outer(self, Vector3 other):
-        pass
-        #return Basis. new_static(api_core.godot_vector3_outer(&self._native, &other._native))
+        return Basis. new_static(api_core.godot_vector3_outer(&self._native, &other._native))
 
     def ceil(self):
         return Vector3. new_static(api_core.godot_vector3_ceil(&self._native))
@@ -102,6 +101,12 @@ cdef class Vector3:
 
     def neg(self):
         return Vector3. new_static(api_core.godot_vector3_operator_neg(&self._native))
+
+    def __add__(self, Vector3 other):
+        return self.add(other)
+
+    def __sub__(self, Vector3 other):
+        return self.sub(other)
 
     def __str__(self):
         return str(String.new_static(api_core.godot_vector3_as_string(&self._native)))
