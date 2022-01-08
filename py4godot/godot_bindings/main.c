@@ -272,6 +272,10 @@ void GDN_EXPORT godot_singleton_init() {
     printf("init_singleton\n");
 }
 
+void GDN_EXPORT godot_gdnative_singleton() {
+    printf("init_singleton\n");
+}
+
 
 void set_up_pluginscript(){
     printf("###################################set_up_pluginscript#################################################\n");
