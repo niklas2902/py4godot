@@ -14,7 +14,7 @@ cdef class Vector3:
         return Vector3. new_static(api_core.godot_vector3_normalized(&self._native))
 
     def inverse(self):
-        return Vector3(api_core.godot_vector3_inverse(&self._native))
+        return Vector3.new_static(api_core.godot_vector3_inverse(&self._native))
 
     def length(self):
         return api_core.godot_vector3_length(&self._native)
