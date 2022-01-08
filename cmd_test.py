@@ -3,7 +3,7 @@ import subprocess, time
 import main
 import os
 from Cython.Build import cythonize
-from meson_scripts import copy_tools, download_python, generate_init_files, python_loc, platform_check
+from meson_scripts import copy_tools, download_python, generate_init_files, python_loc, platform_check, generate_godot
 
 import argparse
 
@@ -86,6 +86,8 @@ res.wait()
 copy_tools.run(args.target_platform)
 generate_init_files.create_init_file(args.target_platform)
 copy_tools.copy_main(args.target_platform)
+generate_godot.generate_lib(args.target_platform)
+generate_godot.generate_gdignore()
 
 print("=================================Build finished==================================")
 print("Build took:", time.time()- start, "seconds")
