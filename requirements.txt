@@ -3,3 +3,4 @@ Cython~=0.29.24
 zstandard==0.13.0
 wget==3.2
 meson==0.59.3
+ninja==1.10.2.3
