@@ -79,6 +79,11 @@ class PythonTest(unittest.TestCase):
 		self.assertEqual(Vector3(1,0,0).angle_to(Vector3(0.5,1,0)), 1.1071487665176392)
 		self.assertEqual(Vector3(1,0,0).angle_to(Vector3(0,1,1)), 1.5707963705062866)
 		self.assertEqual(Vector3(100,0,0).angle_to(Vector3(0,1,0)), 1.5707963705062866)
+	
+	def test_linear_interpolate(self):
+		self.assertEqual(Vector3(1,1,1).linear_interpolate(Vector3(1,2,3),1), Vector3(1,2,3))
+		self.assertEqual(Vector3(1,1,1).linear_interpolate(Vector3(1,2,3),2), Vector3(1,3,5))
+		self.assertEqual(Vector3(1,1,1).linear_interpolate(Vector3(1,2,3),0), Vector3(1,1,1))
 
 	def test_add_method(self):
 		self.assertEqual(Vector3(1,0,0).add(Vector3(1,0,0)), Vector3(2,0,0))

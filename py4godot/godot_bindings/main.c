@@ -100,11 +100,6 @@ void set_up_pluginscript();
 void GDN_EXPORT godot_gdnative_init(godot_gdnative_init_options *p_options) {
 	api_core = p_options->api_struct;
 	printf("godot_python version 0.1\n");
-	printf("set_api_core:\n");
-	printf("%p",api_core);
-	printf("godot_gdnative_init\n");
-	printf("\n");
-
 
 	// Find NativeScript extensions.
 	for (unsigned int i = 0; i < api_core->num_extensions; i++) {
@@ -129,11 +124,6 @@ void GDN_EXPORT godot_gdnative_init(godot_gdnative_init_options *p_options) {
 				break;
 		};
 	};
-
-    printf("api_core:\n");
-    printf("%p",api_core);
-    printf("\n");
-
     Py_SetProgramName(L"godot");
     Py_SetPythonHome(L"addons/windows64/cpython-3.9.7-windows64/python/install");
     // Initialize interpreter but skip initialization registration of signal handlers
@@ -154,14 +144,11 @@ void GDN_EXPORT godot_gdnative_init(godot_gdnative_init_options *p_options) {
 // `gdnative_terminate` which is called before the library is unloaded.
 // Godot will unload the library when no object uses it anymore.
 void GDN_EXPORT godot_gdnative_terminate(godot_gdnative_terminate_options *p_options) {
-    printf("terminate\n");
 
     // Re-acquire the gil in order to finalize properly
     PyEval_RestoreThread(gilstate);
 
     int ret = Py_FinalizeEx();
-
-    printf("finialize finished\n");
 }
 
 // `nativescript_init` is the most important function. Godot calls
@@ -263,23 +250,16 @@ void set_up_bindings(){
 	godot_instance_binding_functions binding_funcs = { .alloc_instance_binding_data = wrapper_create, .free_instance_binding_data = wrapper_destroy };
 
 	int language_index = nativescript_api_11->godot_nativescript_register_instance_binding_data_functions(binding_funcs);
-	printf("language_index:");
-	printf("%d", language_index);
     set_bindings_funcs(binding_funcs, language_index);
 }
 
-void GDN_EXPORT godot_singleton_init() {
-    printf("init_singleton\n");
-}
 
 void GDN_EXPORT godot_gdnative_singleton() {
-    printf("init_singleton\n");
+    //placeholder to prevent error from being raised
 }
 
 
 void set_up_pluginscript(){
-    printf("###################################set_up_pluginscript#################################################\n");
-
     import_py4godot__pluginscript_api__api();
     if (PyErr_Occurred())
     {
@@ -446,7 +426,6 @@ void set_up_pluginscript(){
 
     desc.get_template_source_code = pluginscript_get_template_source_code;
 
-    printf("###################################finish_pluginscript###################################################\n");
 
     // TODO: make python api to c
     //Todo: look at terminate

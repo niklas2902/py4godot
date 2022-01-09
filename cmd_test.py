@@ -16,7 +16,6 @@ def cythonize_files():
     module += cythonize("py4godot/pluginscript_api/*.pyx", language_level=3)
     module += cythonize("py4godot/pluginscript_api/*/*.pyx", language_level=3)
     module += cythonize("py4godot/gdnative_api/*.pyx", language_level=3)
-#    module += cythonize("godot_bindings/*.pyx", language_level=3)
     module += cythonize("py4godot/enums/*.pyx", language_level=3)
 
 def compile_python_ver_file(platform):

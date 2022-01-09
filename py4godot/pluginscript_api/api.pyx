@@ -6,7 +6,6 @@ from py4godot.pluginscript_api.description_classes.PropertyDescription import *
 from py4godot.core.array.Array cimport Array
 from py4godot.core.string_name.StringName cimport StringName
 from py4godot.core.string.String cimport String
-from libc.stdio cimport printf
 from py4godot.utils.Wrapper cimport Wrapper
 from cpython cimport Py_INCREF, Py_DECREF, PyObject
 cimport py4godot.core.variant.Variant as CVariant
@@ -23,19 +22,15 @@ cdef api set_api_core_pluginscript(const godot_gdnative_core_api_struct* core):
     global api_core
     api_core = core
     api_core.godot_dictionary_new(&dictionary)
-    #print("\n#############################set_api_core############################################################")
 cdef api godot_pluginscript_language_data * init_pluginscript() with gil:
     """empty placeholder function, as this is necessary to implement"""
-    #print("\n######################################################init_python_pluginscript####################################\n");
 
 cdef api void finish_pluginscript(godot_pluginscript_instance_data *p_data) with gil:
     """currently empty function which is necessary to implement. It could later be used to delete resources"""
-    #print("finish_python_test\n")
 
 cdef api  void add_global_constant_pluginscript(godot_pluginscript_language_data *p_data,
 const godot_string *p_variable, const godot_variant *p_value) with gil:
     """empty placeholder function, as this is necessary to implement"""
-    #print("\n######################################################add_global_constant#############################\n");
 
 ###############################################pluginscript_desc#######################################################
 cdef api  godot_pluginscript_script_manifest init_pluginscript_desc (godot_pluginscript_language_data *p_data,
@@ -50,7 +45,6 @@ cdef api  godot_pluginscript_script_manifest init_pluginscript_desc (godot_plugi
         create_empty_manifest(&manifest)
         return manifest
 
-    #print("\n############################################create_manifest##############################################\n");
     reset()
     exec(str(String.new_static(dereference(p_source))))
     if(len(classes_list) > 0):
@@ -82,19 +76,16 @@ cdef api  godot_pluginscript_script_manifest init_pluginscript_desc (godot_plugi
     else:
         create_empty_manifest(&manifest)
     reset()
-    #print("\n################################return_manifest########################################################\n");
     return manifest;
 
 cdef api  void finish_pluginscript_desc (godot_pluginscript_script_data *p_data) with gil:
     """empty placeholder function, as this is necessary to implement"""
-    #print("finish_desc\n");
 
 
 
 ###############################################pluginscript_instance#######################################################
 cdef api godot_pluginscript_instance_data * init_pluginscript_instance(godot_pluginscript_script_data *p_data,
  godot_object *p_owner) with gil:
-    #print("\n####################################################################instance_init########################\n");
     """Here we are instanciating the class and setting a godot owner for it, so that it can be managed by godot"""
     cdef Wrapper instance
     (<Wrapper>p_data)()
@@ -115,7 +106,6 @@ cdef api bool set_prop_pluginscript_instance(godot_pluginscript_instance_data *p
  const godot_string *p_name, const godot_variant *p_value) with gil:
     """Trying to set the proprerty for the class given by godot"""
     cdef Wrapper instance = (<Wrapper ?>p_data)
-    #print("\n#########################################################set_prop#######################################\n");
 
     value = CVariant.Variant.new_static(dereference(p_value)).get_converted_value()
     instance.set_property(str(String.new_static(dereference(p_name))), value)
@@ -123,13 +113,11 @@ cdef api bool set_prop_pluginscript_instance(godot_pluginscript_instance_data *p
 
 cdef api bool get_prop_pluginscript_instance(godot_pluginscript_instance_data *p_data,
 const godot_string *p_name, godot_variant *r_ret) with gil:
-        #print("\n###################################################get_prop########################################\n");
         #Todo: implement this
         return False;
 
 cdef api godot_variant call_method_pluginscript_instance(godot_pluginscript_instance_data *p_data,const godot_string_name *p_method,
 const godot_variant **p_args,int p_argcount, godot_variant_call_error *r_error) with gil:
-        #print("\n#################################################call_method#############################################");
         """function for calling methods defined in the manifest from an external source"""
         method_name = str(StringName.new_static(p_method))
 
