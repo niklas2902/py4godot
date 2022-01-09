@@ -13,6 +13,7 @@ from cpython.mem cimport PyMem_Malloc, PyMem_Realloc, PyMem_Free
 from py4godot.godot_bindings.binding cimport *
 from py4godot.godot_bindings.binding_external cimport *
 from py4godot.enums.enums cimport *
+import traceback
 
 from py4godot.pluginscript_api.utils.annotations import methods, classes_list, properties, reset
 
@@ -46,7 +47,13 @@ cdef api  godot_pluginscript_script_manifest init_pluginscript_desc (godot_plugi
         return manifest
 
     reset()
-    exec(str(String.new_static(dereference(p_source))))
+
+    try:
+        exec(str(String.new_static(dereference(p_source))))
+    except Exception as e:
+        print("An Error occured while parsing:\n")
+        traceback.print_exc()
+
     if(len(classes_list) > 0):
         #creating a valid manifest
         gd_obj = classes_list[0]
