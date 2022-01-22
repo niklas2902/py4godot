@@ -9,6 +9,7 @@ cdef api set_api_core_vector3(godot_gdnative_core_api_struct * core):
 cdef class Vector3:
     def __init__(self, godot_real x, godot_real y, godot_real z):
         api_core.godot_vector3_new(&self._native,x,y,z)
+        self.update_event = UpdateEvent()
 
     def normalized(self):
         return Vector3. new_static(api_core.godot_vector3_normalized(&self._native))

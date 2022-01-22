@@ -9,6 +9,7 @@ cdef class Plane:
 
     def __init__(self, godot_real a, godot_real b, godot_real c, godot_real d):
         api_core.godot_plane_new_with_reals(&self._native, a,b,c,d)
+        self.update_event = UpdateEvent()
 
     def new_with_reals(self, godot_real a, godot_real b, godot_real c, godot_real d):
         api_core.godot_plane_new_with_reals(&self._native, a,b,c,d)

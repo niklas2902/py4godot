@@ -9,6 +9,7 @@ cdef class Vector2:
 
     def __init__(self, godot_real x = 0, godot_real y = 0):
         api_core.godot_vector2_new(&self._native, x, y)
+        self.update_event = UpdateEvent()
 
     def __str__(self):
         return api_core.godot_vector2_as_string(&self._native)

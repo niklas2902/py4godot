@@ -11,6 +11,8 @@ cdef class Basis:
 
     def __init__(self):
         api_core.godot_basis_new(&self._native)
+        self.update_event = UpdateEvent()
+
 
     @staticmethod
     def new_with_rows(Vector3 x_axis, Vector3 y_axis, Vector3 z_axis):

@@ -26,7 +26,12 @@ def generate_properties(obj):
         for property in obj["properties"]:
             result += "  @property\n"
             result += f"  def {property['name'].replace('/', '_')}(self): \n"
-            result += f"    return self.get_{property['name'].replace('/', '_')}()\n"
+            if(not property["type"] in core):
+                result += f"    return self.get_{property['name'].replace('/', '_')}()\n"
+            else:
+                result += f"    cdef {property['type']} val = self.get_{property['name'].replace('/', '_')}()\n"
+                result += f"    val.update_event.register_method(lambda:self.set_{property['name']}(val))\n"
+                result += f"    return val\n"
             result += f"  @{property['name'].replace('/', '_')}.setter \n"
             result += f"  def {property['name'].replace('/', '_')}(self,value): \n"
             result += f"    self.set_{property['name'].replace('/', '_')}(value)\n"
@@ -289,6 +294,7 @@ base_import_string += f"from py4godot.core.vector3.Vector3 cimport Vector3\n"
 base_import_string += f"from py4godot.core.variant.Variant cimport Variant_Type\n"
 base_import_string += f"from py4godot.core.variant.Variant cimport Variant_Operator\n"
 base_import_string += f"from py4godot.core.vector3.Vector3 cimport Vector3_Axis\n"
+base_import_string += f"from py4godot.events.events cimport UpdateEvent\n"
 base_import_string += f"from py4godot.core.color.Color cimport Color\n"
 base_import_string += f"from cython.operator cimport dereference\n"
 base_import_string += f"from py4godot.enums.enums cimport *\n"

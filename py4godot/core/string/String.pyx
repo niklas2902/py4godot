@@ -13,6 +13,7 @@ cdef class String:
             api_core.godot_string_new(&self._native)
         else:
             api_core.godot_string_new_with_wide_string(&self._native,  PyUnicode_AsWideCharString(string, NULL), len(string))
+        self.update_event = UpdateEvent()
 
     def new(String dest):
         api_core.godot_string_new(&dest._native)

@@ -12,6 +12,7 @@ cdef class Transform2D:
 
     def __init__(self,godot_real rotation, Vector2 pos):
         api_core.godot_transform2d_new(&self._native, rotation, &pos._native)
+        self.update_event = UpdateEvent()
 
     @staticmethod
     def new_with_axis_origin(self, Vector2 x_axis, Vector2 y_axis, Vector2 origin):

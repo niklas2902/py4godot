@@ -13,6 +13,7 @@ cdef class Dictionary:
 
     def __init__(self):
         api_core.godot_dictionary_new(&self._native)
+        self.update_event = UpdateEvent()
 
     @staticmethod
     def new_copy(self, Dictionary src):

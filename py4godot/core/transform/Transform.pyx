@@ -13,6 +13,7 @@ cdef class Transform:
 
     def __init__(self,Basis basis, Vector3 origin):
         api_core.godot_transform_new(&self._native, &basis._native, &origin._native)
+        self.update_event = UpdateEvent()
 
     def new_with_axis_origin(self, Vector3 x_axis, Vector3 y_axis, Vector3 z_axis, Vector3 origin):
         api_core.godot_transform_new_with_axis_origin(&self._native, &x_axis._native, &y_axis._native, &z_axis._native, &origin._native)
@@ -28,6 +29,7 @@ cdef class Transform:
 
     def set_origin(Transform self, Vector3 v):
         api_core.godot_transform_set_origin(&self._native, &v._native)
+        self.update_event.notify()
 
     def __str__(self):
         return str(String.new_static(api_core.godot_transform_as_string(&self._native)))

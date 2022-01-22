@@ -10,6 +10,7 @@ cdef class Array:
 
     def __init__(self):
         api_core.godot_array_new(&self._native)
+        self.update_event = UpdateEvent()
 
     def set(self, godot_int index, Variant value):
         api_core.godot_array_set(&self._native, index, &value._native)

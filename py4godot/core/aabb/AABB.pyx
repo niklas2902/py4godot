@@ -11,6 +11,7 @@ cdef class AABB:
 
     def __init__(self, Vector3 v, Vector3 v2):
         api_core.godot_aabb_new(&self._native, &v._native, &v2._native)
+        self.update_event = UpdateEvent()
 
     def intersects(self, AABB other):
         return api_core.godot_aabb_intersects(&self._native, &other._native)

@@ -14,6 +14,7 @@ cdef class StringName:
             api_core.godot_string_name_new(self._native, &(<String>string)._native)
         else:
             api_core.godot_string_name_new_data(self._native, <char*>string)
+        self.update_event = UpdateEvent()
 
 
     def get_name(self):

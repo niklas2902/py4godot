@@ -4,10 +4,12 @@ from py4godot.core.pool_array.pool_array_binding cimport *
 cdef class PoolByteArray:
     def __init__(self):
         pass
+        self.update_event = UpdateEvent()
         #api_core.godot_pool_byte_array_new(&self._native)
 
 cdef class PoolRealArray:
     def __init__(self, godot_pool_real_array _native):
+        self.update_event = UpdateEvent()
         if (_native != None):
             self._native = _native
         else:
@@ -16,6 +18,7 @@ cdef class PoolRealArray:
 
 cdef class PoolIntArray:
     def __init__(self, godot_pool_int_array _native):
+        self.update_event = UpdateEvent()
         if (_native != None):
             self._native = _native
         else:
@@ -24,6 +27,7 @@ cdef class PoolIntArray:
 
 cdef class PoolStringArray:
     def __init__(self, godot_pool_string_array _native):
+        self.update_event = UpdateEvent()
         if (_native != None):
             self._native = _native
         else:
@@ -32,6 +36,7 @@ cdef class PoolStringArray:
 
 cdef class PoolVector2Array:
     def __init__(self, godot_pool_vector2_array _native):
+        self.update_event = UpdateEvent()
         if (_native != None):
             self._native = _native
         else:
@@ -40,6 +45,7 @@ cdef class PoolVector2Array:
 
 cdef class PoolVector3Array:
     def __init__(self, godot_pool_vector3_array _native):
+        self.update_event = UpdateEvent()
         if (_native != None):
             self._native = _native
         else:
@@ -48,6 +54,7 @@ cdef class PoolVector3Array:
 
 cdef class PoolColorArray:
     def __init__(self, godot_pool_color_array _native):
+        self.update_event = UpdateEvent()
         if (_native != None):
             self._native = _native
         else:

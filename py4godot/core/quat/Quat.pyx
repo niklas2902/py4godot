@@ -9,6 +9,7 @@ cdef class Quat:
 
     def __init__(self,godot_real x, godot_real y, godot_real z, godot_real w):
             api_core.godot_quat_new(&self._native,x,y,z,w)
+            self.update_events = UpdateEvent()
 
     def new_with_axis_angle(self, Vector3 axis, godot_real angle):
         api_core.godot_quat_new_with_axis_angle(&self._native, &axis._native, angle)

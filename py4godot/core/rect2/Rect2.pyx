@@ -9,6 +9,7 @@ cdef class Rect2:
 
     def __init__(self,godot_real x, godot_real y, godot_real width, godot_real height):
         api_core.godot_rect2_new(&self._native,x,y,width,height)
+        self.update_event = UpdateEvent()
 
     def new_with_position_and_size(self, Vector2 pos, Vector2 size):
         api_core.godot_rect2_new_with_position_and_size(&self._native, &pos._native, &size._native)

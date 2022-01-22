@@ -8,6 +8,7 @@ cdef class Color:
 
     def __init__(self, godot_real red, godot_real green, godot_real blue, godot_real alpha = 255):
         api_core.godot_color_new_rgba(&self._native, red, green,blue, alpha)
+        self.update_event = UpdateEvent()
 
     @staticmethod
     def new_rgba(godot_real red, godot_real green, godot_real blue, godot_real alpha):

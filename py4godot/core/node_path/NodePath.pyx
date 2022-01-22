@@ -9,6 +9,7 @@ cdef class NodePath:
 
     def __init__(self, String path):
         api_core.godot_node_path_new(&self._native, &path._native)
+        self.update_event = UpdateEvent()
 
     @staticmethod
     def new_copy(NodePath src):
