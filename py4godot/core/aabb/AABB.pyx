@@ -21,11 +21,13 @@ cdef class AABB:
 
     def set_position(self, Vector3 v):
         api_core.godot_aabb_set_position(&self._native, &v._native)
+        self.update_event.notify()
 
     def get_size(self):
         return Vector3. new_static(api_core.godot_aabb_get_size(&self._native))
     def set_size(self, Vector3 v):
         api_core.godot_aabb_set_size(&self._native,&v._native)
+        self.update_event.notify()
 
     def as_string(self):
         return api_core.godot_aabb_as_string(&self._native)

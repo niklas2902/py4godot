@@ -19,24 +19,28 @@ cdef class Quat:
 
     def set_x(self, godot_real val):
         api_core.godot_quat_set_x(&self._native, val)
+        self.update_event.notify()
 
     def get_y(self):
         return api_core.godot_quat_get_y(&self._native)
 
     def set_y(self, godot_real val):
         api_core.godot_quat_set_y(&self._native, val)
+        self.update_event.notify()
 
     def get_z(self):
         return api_core.godot_quat_get_z(&self._native)
 
     def set_z(self, godot_real val):
         api_core.godot_quat_set_z(&self._native, val)
+        self.update_event.notify()
 
     def get_w(self):
         return api_core.godot_quat_get_w(&self._native)
 
     def set_w(self, godot_real val):
         api_core.godot_quat_set_w(&self._native, val)
+        self.update_event.notify()
 
     def __str__(self):
         return api_core.godot_quat_as_string(&self._native)

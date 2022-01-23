@@ -67,3 +67,4 @@ cdef class Transform2D:
 
     def new_identity(self):
         api_core.godot_transform2d_new_identity(&self._native)
+        self.update_event.notify()

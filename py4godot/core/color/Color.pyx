@@ -27,30 +27,36 @@ cdef class Color:
 
     def set_red(self, godot_real red):
         api_core.godot_color_set_r(&self._native, red)
+        self.update_event.notify()
 
     def get_blue(self):
         return api_core.godot_color_get_b(&self._native)
 
     def set_blue(self, godot_real blue):
         api_core.godot_color_set_b(&self._native, blue)
+        self.update_event.notify()
 
     def get_green(self):
         return api_core.godot_color_get_g(&self._native)
 
     def set_green(self, godot_real green):
         api_core.godot_color_set_g(&self._native, green)
+        self.update_event.notify()
 
     def set_alpha(self, godot_real alpha):
         api_core.godot_color_set_a(&self._native, alpha)
+        self.update_event.notify()
 
     def get_alpha(self):
         return api_core.godot_color_get_a(&self._native)
+        self.update_event.notify()
 
     def get_h(self):
         return api_core.godot_color_get_h(&self._native)
 
     def get_s(self):
         return api_core.godot_color_get_s(&self._native)
+        self.update_event.notify()
 
     def get_v(self):
         return api_core.godot_color_get_v(&self._native)

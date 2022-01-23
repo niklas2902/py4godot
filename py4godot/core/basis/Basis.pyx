@@ -88,12 +88,14 @@ cdef class Basis:
 
     def set_axis(self, godot_int axis, Vector3 value):
         api_core.godot_basis_set_axis(&self._native, axis, &value._native)
+        self.update_event.notify()
 
     def get_row(self, godot_int row):
         return Vector3. new_static(api_core.godot_basis_get_row(&self._native, row))
 
     def set_row(self, godot_int row, Vector3 value):
         api_core.godot_basis_set_row(&self._native, row, &value._native)
+        self.update_event.notify()
 
     def __eq__(self, Basis other):
         return api_core.godot_basis_operator_equal(&self._native, &other._native)

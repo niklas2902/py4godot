@@ -55,6 +55,8 @@ cdef class Rect2:
 
     def set_position(self, Vector2 pos):
         api_core.godot_rect2_set_position(&self._native, &pos._native)
+        self.update_event.notify()
 
     def set_size(self, Vector2 size):
         api_core.godot_rect2_set_size(&self._native, &size._native)
+        self.update_event.notify()

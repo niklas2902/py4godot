@@ -112,9 +112,11 @@ cdef class Vector2:
 
     def set_y(self, godot_real y):
         api_core.godot_vector2_set_y(&self._native, y)
+        self.update_event.notify()
 
     def get_x(self):
         return api_core.godot_vector2_get_x(&self._native)
+        self.update_event.notify()
 
     def get_y(self):
         return api_core.godot_vector2_get_y(&self._native)

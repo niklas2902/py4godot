@@ -23,6 +23,7 @@ cdef class Transform:
 
     def set_basis(self, Basis v):
         api_core.godot_transform_set_basis(&self._native, &v._native)
+        self.update_event.notify()
 
     def get_origin(self):
         return Vector3. new_static(api_core.godot_transform_get_origin(&self._native))
@@ -60,6 +61,7 @@ cdef class Transform:
 
     def new_identity(self):
         api_core.godot_transform_new_identity(&self._native)
+        self.update_event.notify()
 
     def __eq__(self, Transform other):
         return api_core.godot_transform_operator_equal(&self._native, &other._native)
