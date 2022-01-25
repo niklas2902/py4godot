@@ -208,16 +208,12 @@ def generate_classes(obj):
     #TODO:Try to improve this
     if(obj["singleton"]):
         result += f"""  @staticmethod\n"""
-        result += f"""  def _new():\n"""
+        #TODO: How to handle class Input
+        result += f"""  def instance():\n"""
         result += f"""      cdef char* name = <char*> "{obj["name"].strip('_')}"\n"""
-        if(obj["name"].startswith("_")):
-            result += f"""      cdef {obj['name']} obj = <{obj['name']}>{obj['name']}()\n"""
-            result += f"""      obj.godot_owner = api_core.godot_global_get_singleton(name)\n"""
-            result += f"""      return obj\n"""
-        else:
-            #Todo: check why I have to make a difference here
-            result += f"""      cdef {obj['name']} obj = <{obj['name']}> nativescript_api_11.godot_nativescript_get_instance_binding_data(language_index,api_core.godot_get_class_constructor(name)())\n"""
-            result += f"""      return obj\n"""
+        result += f"""      cdef {obj['name']} obj = <{obj['name']}>{obj['name']}()\n"""
+        result += f"""      obj.godot_owner = api_core.godot_global_get_singleton(name)\n"""
+        result += f"""      return obj\n"""
     result += generate_properties(obj)
     results = generate_methods(obj, import_string)
     result += results[0]
@@ -268,7 +264,7 @@ def generate_singleton(obj):
     @classmethod
     def instance(cls):
         if not cls._instance:
-            cls._instance = {obj['name']}._new()
+            cls._instance = {obj['name']}.instance()
         return cls._instance\n\n"""
 
 # The import string at the start of the file

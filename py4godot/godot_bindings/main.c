@@ -22,6 +22,19 @@
 #include "../gdnative_api/api_api.h"
 #include <string.h>
 
+#ifdef _WIN64
+#define PYTHONHOME L"addons/windows64/cpython-3.9.7-windows64/python/install"
+
+#elif _WIN32
+#define PYTHONHOME L"addons/windows64/cpython-3.9.7-windows32/python/install"
+
+#elif __LINUX__
+#define PYTHONHOME L"addons/windows64/cpython-3.9.7-windows32/python/install"
+
+#elif __APPLE__
+#define PYTHONHOME L"addons/windows64/cpython-3.9.7-windows32/python/install"
+#endif
+
 
 typedef struct user_data_struct {
 	char data[256];
@@ -125,7 +138,7 @@ void GDN_EXPORT godot_gdnative_init(godot_gdnative_init_options *p_options) {
 		};
 	};
     Py_SetProgramName(L"godot");
-    Py_SetPythonHome(L"addons/windows64/cpython-3.9.7-windows64/python/install");
+    Py_SetPythonHome(PYTHONHOME);
     // Initialize interpreter but skip initialization registration of signal handlers
     Py_InitializeEx(0);
     // PyEval_InitThreads acquires the GIL, so we must release it later.
