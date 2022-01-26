@@ -75,3 +75,8 @@ class Variant_Type(Enum):
     POOL_COLOR_ARRAY = auto()
 
     VARIANT_MAX = auto()
+
+class Vector3_Axis(Enum):
+    X = 0
+    Y = auto()
+    Z = auto()

@@ -1,13 +1,14 @@
 from py4godot.godot_bindings.binding cimport *
-
 cdef extern from "binding.h":
 
+    ctypedef enum godot_vector3_axis:
+        GODOT_VECTOR3_AXIS_X = 0
+        GODOT_VECTOR3_AXIS_Y = 1
+        GODOT_VECTOR3_AXIS_Z = 2
+
+    ctypedef godot_vector3_axis        Vector3_Axis
+
     const godot_gdnative_core_api_struct *api_core
-
-    ctypedef struct godot_vector3_axis:
-        pass
-
-
     struct godot_gdnative_core_api_struct:
         void (*godot_vector3_new)(godot_vector3 *r_dest, const godot_real p_x, const godot_real p_y, const godot_real p_z);
         godot_real (*godot_vector3_length)(const godot_vector3 *p_self);

@@ -112,10 +112,8 @@ cdef class Vector3:
     def __str__(self):
         return str(String.new_static(api_core.godot_vector3_as_string(&self._native)))
 
-"""
-    def set_axis(self, Vector3 axis, godot_real val):
-        api_core.godot_vector3_set_axis(&self._native, &axis._native, val)
+    def set_axis(self, godot_vector3_axis axis, godot_real val):
+        api_core.godot_vector3_set_axis(&self._native, axis, val)
 
-    def get_axis(self, Vector3 axis):
-        return api_core.godot_vector3_get_axis(&self._native, &axis._native)
-"""
+    def get_axis(self,  godot_vector3_axis axis):
+        return api_core.godot_vector3_get_axis(&self._native, axis)

@@ -84,6 +84,19 @@ class PythonTest(unittest.TestCase):
 		self.assertEqual(Vector3(1,1,1).linear_interpolate(Vector3(1,2,3),1), Vector3(1,2,3))
 		self.assertEqual(Vector3(1,1,1).linear_interpolate(Vector3(1,2,3),2), Vector3(1,3,5))
 		self.assertEqual(Vector3(1,1,1).linear_interpolate(Vector3(1,2,3),0), Vector3(1,1,1))
+		
+	def test_cubic_interpolate(self):
+		#TODO: Find out what this does
+		self.assertEqual(Vector3(1,1,1).cubic_interpolate(Vector3(1,2,3), Vector3(1,2,3), 
+		Vector3(1,2,3), 5), Vector3(1,-124,-249))
+	
+	def test_rotated(self):
+		self.assertEqual(Vector3(1,0,0).rotated(Vector3(0,1,0),
+		3.14159265359).get_axis(Vector3_Axis.X.value), -1)
+		self.assertEqual(Vector3(1,0,0).rotated(Vector3(0,1,0),
+		0).get_axis(Vector3_Axis.X.value), 1)
+		self.assertEqual(int(Vector3(1,0,0).rotated(Vector3(0,1,0),
+		1.57079632679).get_axis(Vector3_Axis.X.value)), 0)
 
 	def test_add_method(self):
 		self.assertEqual(Vector3(1,0,0).add(Vector3(1,0,0)), Vector3(2,0,0))

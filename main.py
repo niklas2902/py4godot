@@ -100,6 +100,10 @@ def generate_return_type(import_string, method, obj, result):
             result += f"    cdef godot_object* ret\n\n"
         else:
             return_type_imported = return_type if return_type.split(".")[0] in objects else return_type
+
+            if(return_type_imported == "Vector3_Axis"):
+                return_type_imported = "godot_vector3_axis"
+
             result += f"    cdef {return_type_imported if return_type_imported not in types else types[return_type_imported]} ret\n\n"
     return import_string, result, return_type, return_type_save
 
@@ -290,7 +294,6 @@ base_import_string += f"from py4godot.core.vector2.Vector2 cimport Vector2\n"
 base_import_string += f"from py4godot.core.vector3.Vector3 cimport Vector3\n"
 base_import_string += f"from py4godot.core.variant.Variant cimport Variant_Type\n"
 base_import_string += f"from py4godot.core.variant.Variant cimport Variant_Operator\n"
-base_import_string += f"from py4godot.core.vector3.Vector3 cimport Vector3_Axis\n"
 base_import_string += f"from py4godot.events.events cimport UpdateEvent\n"
 base_import_string += f"from py4godot.core.color.Color cimport Color\n"
 base_import_string += f"from cython.operator cimport dereference\n"
