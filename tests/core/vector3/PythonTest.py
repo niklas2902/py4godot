@@ -97,6 +97,45 @@ class PythonTest(unittest.TestCase):
 		0).get_axis(Vector3_Axis.X.value), 1)
 		self.assertEqual(int(Vector3(1,0,0).rotated(Vector3(0,1,0),
 		1.57079632679).get_axis(Vector3_Axis.X.value)), 0)
+	
+	def test_crossed(self):
+		self.assertEqual(Vector3(1,0,0).cross(Vector3(0,1,0)), Vector3(0,0,1))
+		self.assertEqual(Vector3(1,2,3).cross(Vector3(3,2,1)), Vector3(-4,8,-4))
+		self.assertEqual(Vector3(0,0,0).cross(Vector3(0,1,0)), Vector3(0,0,0))
+		self.assertEqual(Vector3(2,2,2).cross(Vector3(2,2,2)), Vector3(0,0,0))
+
+	def test_floor(self):
+		self.assertEqual(Vector3(-3.1,1,1).floor(), Vector3(-4,1,1))
+		self.assertEqual(Vector3(-3,1,1).floor(), Vector3(-3,1,1))
+		self.assertEqual(Vector3(2.9,1,1).floor(), Vector3(2,1,1))
+		self.assertEqual(Vector3(1,2.1,1).floor(), Vector3(1,2,1))
+		self.assertEqual(Vector3(1,2,2.1).floor(), Vector3(1,2,2))
+	
+	def test_snapped(self):
+		self.assertEqual(Vector3(1,3.1,0).snapped(Vector3(1,1,1)), Vector3(1,3,0))
+		self.assertEqual(Vector3(1.3,3.21,0).snapped(Vector3(1,0.1,1)), Vector3(1,3.2,0))
+		self.assertEqual(Vector3(1.3,3.21,2.21).snapped(Vector3(1,0.1,0.1)), Vector3(1,3.2,2.2))
+		
+		
+	def test_dot(self):
+		self.assertEqual(Vector3(1,0,0).dot(Vector3(0,1,0)), 0)
+		self.assertEqual(Vector3(1,2,3).dot(Vector3(1,2,3)), 14)
+		self.assertEqual(Vector3(1,1,1).dot(Vector3(1,1,1)), 3)
+	
+	def test_ceil(self):
+		self.assertEqual(Vector3(1,0,0).ceil(), Vector3(1,0,0))
+		self.assertEqual(Vector3(1.5,0,0).ceil(), Vector3(2,0,0))
+		self.assertEqual(Vector3(1.1,1.1,1.1).ceil(), Vector3(2,2,2))
+	
+	def test_slide(self):
+		self.assertEqual(Vector3(1,2,1).slide(Vector3(0,0,1)), Vector3(1,2,0))
+		self.assertEqual(Vector3(3,2,1).slide(Vector3(0,1,0)), Vector3(3,0,1))
+		self.assertEqual(Vector3(1,2,1).slide(Vector3(1,0,0)), Vector3(0,2,1))
+	
+	def test_bounce(self):
+		self.assertEqual(Vector3(1,2,1).bounce(Vector3(0,0,1)), Vector3(1,2,-1))
+		self.assertEqual(Vector3(3,2,1).bounce(Vector3(0,1,0)), Vector3(3,-2,1))
+		self.assertEqual(Vector3(1,2,1).bounce(Vector3(1,0,0)), Vector3(-1,2,1))
 
 	def test_add_method(self):
 		self.assertEqual(Vector3(1,0,0).add(Vector3(1,0,0)), Vector3(2,0,0))
