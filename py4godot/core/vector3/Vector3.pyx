@@ -106,6 +106,31 @@ cdef class Vector3:
     def __add__(self, Vector3 other):
         return self.add(other)
 
+    def __mul__(self, other):
+        if(isinstance(other,Vector3)):
+            return self.multiply_vector(other)
+        elif (isinstance(other,float) or isinstance(other,int)):
+            return self.multiply_scalar(other)
+        #TODO: Exception not supported
+        raise Exception(f"multiplication for type {type(other)} not supported")
+
+
+    def __floordiv__(self, other):
+        if(isinstance(other,Vector3)):
+            return self.divide_vector(other)
+        elif (isinstance(other,float) or isinstance(other,int)):
+            return self.divide_scalar(other)
+        #TODO: Exception not supported
+        raise Exception(f"division for type {type(other)} not supported")
+
+    def __truediv__(self, other):
+        if(isinstance(other,Vector3)):
+            return self.divide_vector(other)
+        elif (isinstance(other,float) or isinstance(other,int)):
+            return self.divide_scalar(other)
+        #TODO: Exception not supported
+        raise Exception(f"division for type {type(other)} not supported")
+
     def __sub__(self, Vector3 other):
         return self.sub(other)
 

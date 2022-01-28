@@ -116,7 +116,6 @@ class PythonTest(unittest.TestCase):
 		self.assertEqual(Vector3(1.3,3.21,0).snapped(Vector3(1,0.1,1)), Vector3(1,3.2,0))
 		self.assertEqual(Vector3(1.3,3.21,2.21).snapped(Vector3(1,0.1,0.1)), Vector3(1,3.2,2.2))
 		
-		
 	def test_dot(self):
 		self.assertEqual(Vector3(1,0,0).dot(Vector3(0,1,0)), 0)
 		self.assertEqual(Vector3(1,2,3).dot(Vector3(1,2,3)), 14)
@@ -136,7 +135,85 @@ class PythonTest(unittest.TestCase):
 		self.assertEqual(Vector3(1,2,1).bounce(Vector3(0,0,1)), Vector3(1,2,-1))
 		self.assertEqual(Vector3(3,2,1).bounce(Vector3(0,1,0)), Vector3(3,-2,1))
 		self.assertEqual(Vector3(1,2,1).bounce(Vector3(1,0,0)), Vector3(-1,2,1))
-
+	
+	def test_reflect(self):
+		print(Vector3(1,2,1).reflect(Vector3(0,0,1)))
+		self.assertEqual(Vector3(1,2,1).reflect(Vector3(0,0,1)), Vector3(-1,-2,1))
+		self.assertEqual(Vector3(1,2,3).reflect(Vector3(1,0,0)), Vector3(1,-2,-3))
+		self.assertEqual(Vector3(1,2,3).reflect(Vector3(0,1,0)), Vector3(-1,2,-3))
+	
+	def test_abs(self):
+		self.assertEqual(Vector3(1,2,3).abs(), Vector3(1,2,3))
+		self.assertEqual(Vector3(-1,2,3).abs(), Vector3(1,2,3))
+		self.assertEqual(Vector3(1,-2,3).abs(), Vector3(1,2,3))
+		self.assertEqual(Vector3(1,2,-3).abs(), Vector3(1,2,3))
+	
+	def test_sub(self):
+		self.assertEqual(Vector3(1,2,3).sub(Vector3(1,0,0)), Vector3(0,2,3))
+		self.assertEqual(Vector3(1,2,3).sub(Vector3(0,1,0)), Vector3(1,1,3))
+		self.assertEqual(Vector3(1,2,3).sub(Vector3(0,0,1)), Vector3(1,2,2))
+	
+	def test_sub_operator(self):
+		self.assertEqual(Vector3(1,2,3)-Vector3(1,0,0), Vector3(0,2,3))
+		self.assertEqual(Vector3(1,2,3)-Vector3(0,1,0), Vector3(1,1,3))
+		self.assertEqual(Vector3(1,2,3)-(Vector3(0,0,1)), Vector3(1,2,2))
+	
+	def test_neg(self):
+		self.assertEqual(Vector3(1,2,3).neg(), Vector3(-1,-2,-3))
+		self.assertEqual(Vector3(-1,2,3).neg(), Vector3(1,-2,-3))
+		self.assertEqual(Vector3(1,-2,3).neg(), Vector3(-1,2,-3))
+		self.assertEqual(Vector3(1,2,-3).neg(), Vector3(-1,-2,3))
+	
+	def test_multiplay_vector(self):
+		self.assertEqual(Vector3(1,2,3).multiply_vector(Vector3(1,2,3)), Vector3(1,4,9))
+		self.assertEqual(Vector3(-1,2,5).multiply_vector(Vector3(1,2,3)), Vector3(-1,4,15))
+		self.assertEqual(Vector3(4,-5,6).multiply_vector(Vector3(7,8,9)), Vector3(28,-40,54))
+		self.assertEqual(Vector3(1,2,-3).multiply_vector(Vector3(1,2,3)), Vector3(1,4,-9))
+	
+	def test_multiply_scalar(self):
+		self.assertEqual(Vector3(1,2,3).multiply_scalar(3), Vector3(3,6,9))
+		self.assertEqual(Vector3(1,2,3).multiply_scalar(-1), Vector3(-1,-2,-3))
+	
+	def test_multiplay_operator(self):
+		self.assertEqual(Vector3(1,2,3)*Vector3(1,2,3), Vector3(1,4,9))
+		self.assertEqual(Vector3(-1,2,5)*Vector3(1,2,3), Vector3(-1,4,15))
+		self.assertEqual(Vector3(4,-5,6)*Vector3(7,8,9), Vector3(28,-40,54))
+		self.assertEqual(Vector3(1,2,-3)*Vector3(1,2,3), Vector3(1,4,-9))
+		
+		self.assertEqual(Vector3(1,2,3)*3, Vector3(3,6,9))
+		self.assertEqual(Vector3(1,2,3)*(-1), Vector3(-1,-2,-3))
+	
+	def test_divicde_scalar(self):
+		self.assertEqual(Vector3(3,3,3).divide_scalar(3), Vector3(1,1,1))
+		self.assertEqual(Vector3(2,2,2).divide_scalar(-1), Vector3(-2,-2,-2))
+		
+	def test_divide_vector(self):
+		self.assertEqual(Vector3(1,2,3).divide_vector(Vector3(1,2,3)), Vector3(1,1,1))
+		self.assertEqual(Vector3(1,2,3).divide_vector(Vector3(-1,-2,-3)), Vector3(-1,-1,-1))
+	
+	def test_divide_operator(self):
+		self.assertEqual(Vector3(1,2,3)/Vector3(1,2,3), Vector3(1,1,1))
+		self.assertEqual(Vector3(1,2,3)/Vector3(-1,-2,-3), Vector3(-1,-1,-1))
+		
+		self.assertEqual(Vector3(1,2,3)/1, Vector3(1,2,3))
+		self.assertEqual(Vector3(1,2,-3)/-1, Vector3(-1,-2,3))
+	
+	def test_get_axis(self):
+		self.assertEqual(Vector3(1,2,3).get_axis(Vector3_Axis.X.value), 1)
+		self.assertEqual(Vector3(1,2,3).get_axis(Vector3_Axis.Y.value), 2)
+		self.assertEqual(Vector3(1,2,3).get_axis(Vector3_Axis.Z.value), 3)
+		
+	def test_set_axis(self):
+		vector = Vector3(1,2,3)
+		vector.set_axis(Vector3_Axis.X.value, 4)
+		self.assertEqual(vector.get_axis(Vector3_Axis.X.value), 4)
+		
+		vector.set_axis(Vector3_Axis.Y.value, 5)
+		self.assertEqual(vector.get_axis(Vector3_Axis.Y.value), 5)
+		
+		vector.set_axis(Vector3_Axis.Z.value, 6)
+		self.assertEqual(vector.get_axis(Vector3_Axis.Z.value), 6)
+		
 	def test_add_method(self):
 		self.assertEqual(Vector3(1,0,0).add(Vector3(1,0,0)), Vector3(2,0,0))
 		self.assertEqual(Vector3(-1, 0, 0).add(Vector3(1, 0, 0)), Vector3(0, 0, 0))
