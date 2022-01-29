@@ -77,6 +77,11 @@ compile_python_ver_file(current_platform)
 # initializing for msvc if wanted as compiler (todo:should be improved sometime)
 msvc_init = f"vcvarsall.bat {'x86_amd64'} & cl & " if "msvc" in args.compiler else ""
 
+#TODO:remove
+#making build path
+if not os.path.exists(build_dir):
+    os.makedirs(build_dir)
+
 res = subprocess.Popen(msvc_init +
                        f"meson {build_dir} --cross-file platforms/{args.target_platform}.cross "
                        f"--cross-file platforms/compilers/{args.compiler}_compiler.native "
