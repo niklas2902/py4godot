@@ -77,23 +77,15 @@ compile_python_ver_file(current_platform)
 # initializing for msvc if wanted as compiler (todo:should be improved sometime)
 msvc_init = f"vcvarsall.bat {'x86_amd64'} & cl & " if "msvc" in args.compiler else ""
 
-res = subprocess.Popen("meson")
-"""
+res = subprocess.Popen("meson", shell = True)
 res = subprocess.Popen(msvc_init +
                        f"meson {build_dir} --cross-file platforms/{args.target_platform}.cross "
                        f"--cross-file platforms/compilers/{args.compiler}_compiler.native "
                        f"--cross-file platforms/python_ver/python_ver_compile.cross "
                        f"--buildtype=release {'--wipe' if os.path.isdir(build_dir) else ''}"
-                       #f"& ninja -C build_meson/{args.target_platform}"
+                       f"& ninja -C build_meson/{args.target_platform}"
                        , shell=True)
-"""
 
-res = subprocess.Popen(msvc_init +
-                       f"meson {build_dir} --cross-file platforms/{args.target_platform}.cross "
-                       f"--cross-file platforms/compilers/{args.compiler}_compiler.native "
-                       f"--cross-file platforms/python_ver/python_ver_compile.cross "
-                       f"--buildtype=release {'--wipe' if os.path.isdir(build_dir) else ''}"
-                       f"& ninja -C build_meson/{args.target_platform}")
 
 res.wait()
 copy_tools.run(args.target_platform)
