@@ -10,9 +10,14 @@ on:
     branches: [ master ]
 
 jobs:
-  build:
-
-    runs-on: ubuntu-latest
+  windows-build:
+    runs-on: windows-latest
+    strategy:
+      matrix:
+        include:
+          - PLATFORM: 'windows-64'
+            PYTHON_ARCH: 'x64'
+            VS_ARCH: 'amd64'
 
     steps:
     - uses: actions/checkout@v2
