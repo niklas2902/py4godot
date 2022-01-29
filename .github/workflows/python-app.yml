@@ -39,5 +39,6 @@ jobs:
         flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
     - name: build
       run: |
-         python cmd_test.py --target_platform=windows64 --compiler=gcc -run_tests=false
+         python cmd_test.py --target_platform=windows64 --compiler=gcc -run_tests=true -download_godot=true
+
 
