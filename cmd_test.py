@@ -88,6 +88,13 @@ res = subprocess.Popen(msvc_init +
                        , shell=True)
 """
 
+res = subprocess.Popen(msvc_init +
+                       f"meson {build_dir} --cross-file platforms/{args.target_platform}.cross "
+                       f"--cross-file platforms/compilers/{args.compiler}_compiler.native "
+                       f"--cross-file platforms/python_ver/python_ver_compile.cross "
+                       f"--buildtype=release {'--wipe' if os.path.isdir(build_dir) else ''}"
+                       f"& ninja -C build_meson/{args.target_platform}")
+
 res.wait()
 copy_tools.run(args.target_platform)
 generate_init_files.create_init_file(args.target_platform)
