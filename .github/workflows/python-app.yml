@@ -6,7 +6,7 @@ name: Python application
 on:
   schedule:
     - cron: '0 2 * * *' # run at 2 AM UTC
-
+    
 jobs:
   windows-build:
     runs-on: windows-latest
@@ -39,5 +39,5 @@ jobs:
         flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
     - name: build
       run: |
-         python cmd_test.py --target_platform=windows64 --compiler=gcc -run_tests=true
+         python cmd_test.py --target_platform=windows64 --compiler=gcc -run_tests=false
 
