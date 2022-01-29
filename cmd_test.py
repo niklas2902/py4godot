@@ -82,7 +82,7 @@ res = subprocess.Popen(msvc_init +
                        f"--cross-file platforms/compilers/{args.compiler}_compiler.native "
                        f"--cross-file platforms/python_ver/python_ver_compile.cross "
                        f"--buildtype=release {'--wipe' if os.path.isdir(build_dir) else ''}"
-                       f"& ninja -C build_meson/{args.target_platform}"
+                       #f"& ninja -C build_meson/{args.target_platform}"
                        , shell=True)
 
 res.wait()
