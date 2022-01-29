@@ -3,7 +3,7 @@ import subprocess, time
 import main
 import os
 from Cython.Build import cythonize
-from meson_scripts import copy_tools, download_python, generate_init_files, python_loc, platform_check, generate_godot
+from meson_scripts import copy_tools, download_python, generate_init_files, python_loc, platform_check, generate_godot, download_godot
 
 import argparse
 
@@ -50,11 +50,14 @@ my_parser.add_argument('--compiler',
 my_parser.add_argument('--target_platform',
                        help='specify the platform, you want to go build for')
 my_parser.add_argument("-run_tests", help="should tests be run", default="False")
+my_parser.add_argument("-download_godot", help="should tests be run", default="False")
 # Execute parse_args()
 args = my_parser.parse_args()
 
 #Determining if tests should be run
 should_run_tests = args.run_tests.lower() == "true"
+#Determining if godot binary should be downloaded
+should_download_godot = args.download_godot.lower() == "true"
 
 build_dir = f"build_meson/{args.target_platform}"
 
@@ -94,6 +97,11 @@ generate_godot.generate_gdignore()
 
 print("=================================Build finished==================================")
 print("Build took:", time.time() - start, "seconds")
+
+if(should_download_godot):
+    print("=================================Start download==================================")
+    download_godot.run()
+    print("=================================Fnish download==================================")
 
 # running tests
 if(should_run_tests):
