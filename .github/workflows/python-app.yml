@@ -6,12 +6,7 @@ name: Python application
 on:
   schedule:
     - cron: '0 2 * * *' # run at 2 AM UTC
-  push:
-  pull_request:
-    branches:
-      - develop
-      - staging
-
+    
 jobs:
   windows-build:
     runs-on: windows-latest
