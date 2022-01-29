@@ -24,3 +24,4 @@ py4godot/classes/generated.pyx
 /py4godot/gdnative_api/api_api.h
 /tests/core/vector3/addons/
 /py4godot/events/*.c
+/tests/core/vector2/addons/

@@ -1,4 +1,4 @@
-from shutil import copy
+from shutil import copy, copytree, rmtree
 import os
 import glob
 
@@ -32,5 +32,12 @@ def copy_main(platform):
     elif("linux" in platform):
         copy(f"build/addons/{platform}/py4godot/godot_bindings/main.so",
              f"build/addons/{platform}/cpython-3.9.7-{platform}/python/install/lib/main.so")
+
+def copy_tests(platform):
+    core_tests = ["vector2", "vector3"]
+    for core_test in core_tests:
+        if os.path.exists(f"tests/core/{core_test}/addons/{platform}"):
+            rmtree(f"tests/core/{core_test}/addons/{platform}")
+        copytree(f"build/addons/{platform}", f"tests/core/{core_test}/addons/{platform}")
 if __name__ == "__main__":
     run()
