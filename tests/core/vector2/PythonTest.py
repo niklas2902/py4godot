@@ -7,25 +7,24 @@ from py4godot import *
 class PythonTest(unittest.TestCase):
 
 	def test_equal(self):
-		self.assertEqual(Vector3(1,1,1), Vector3(1,1,1))
-		self.assertEqual(Vector3(0, 0, 0), Vector3(0, 0, 0))
-		self.assertEqual(Vector3(0, 0, 1), Vector3(0, 0, 1))
-		self.assertEqual(Vector3(1, 0, 0), Vector3(1, 0, 0))
-		self.assertEqual(Vector3(1, 1, 0), Vector3(1, 1, 0))
-		self.assertEqual(Vector3(100, 0, 0), Vector3(100, 0, 0))
-		self.assertEqual(Vector3(0, 1, 0), Vector3(0, 1, 0))
-		self.assertEqual(Vector3(0, -1, 0), Vector3(0, -1, 0))
-		self.assertEqual(Vector3(0, -1, 1), Vector3(0, -1, 1))
+		self.assertEqual(Vector2(1,1), Vector2(1,1))
+		self.assertEqual(Vector2(0, 0), Vector2(0, 0))
+		self.assertEqual(Vector2(0, 1), Vector2(0, 1))
+		self.assertEqual(Vector2(1, 0), Vector2(1, 0))
+		self.assertEqual(Vector2(1, 1), Vector2(1, 1))
+		self.assertEqual(Vector2(100, 0), Vector2(100, 0))
+		self.assertEqual(Vector2(0, -1), Vector2(0, -1))
+		self.assertEqual(Vector2(-1, 1), Vector2(-1, 1))
 
 	def test_normailized(self):
-		self.assertEqual(Vector3(1,0,0).normalized(), Vector3(1,0,0))
-		self.assertEqual(Vector3(5,0,0).normalized(), Vector3(1,0,0))
-		self.assertEqual(Vector3(-1,0,0).normalized(), Vector3(-1,0,0))
-		self.assertEqual(Vector3(0,-1,0).normalized(), Vector3(0,-1,0))
-		self.assertEqual(Vector3(0,5,0).normalized(), Vector3(0,1,0))
-		self.assertEqual(Vector3(0,0,10).normalized(), Vector3(0,0,1))
-		self.assertEqual(Vector3(0,0,0).normalized(), Vector3(0,0,0))
-		self.assertEqual(Vector3(0,2.5,0).normalized(), Vector3(0,1,0))
+		self.assertEqual(Vector2(1,0).normalized(), Vector2(1,0))
+		self.assertEqual(Vector2(5,0).normalized(), Vector2(1,0))
+		self.assertEqual(Vector2(-1,0).normalized(), Vector2(-1,0))
+		self.assertEqual(Vector2(0,-1).normalized(), Vector2(0,-1))
+		self.assertEqual(Vector2(0,5).normalized(), Vector2(0,1))
+		self.assertEqual(Vector2(0,10).normalized(), Vector2(0,1))
+		self.assertEqual(Vector2(0,0).normalized(), Vector2(0,0))
+		self.assertEqual(Vector2(0,2.5).normalized(), Vector2(0,1))
 
 	def test_inverse(self):
 		self.assertEqual(Vector3(2,2,2).inverse(), Vector3(0.5,0.5,0.5))
