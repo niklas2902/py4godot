@@ -52,7 +52,7 @@ def generate_methods(obj, import_string):
             import_string, result = generate_args(import_string, method, result)
 
             #Start with body
-            result += f"    cdef godot_object *_owner = self.godot_owner\n\n"
+            result += f"    cdef const godot_object *_owner = self.godot_owner\n\n"
 
             # create return type
             import_string, result, return_type, return_type_save = generate_return_type(import_string, method, obj,
@@ -85,6 +85,12 @@ def generate_return_type(import_string, method, obj, result):
     """generate the return_type"""
     return_type = method["return_type"]
     return_type_save = return_type
+
+    if(method["has_varargs"]):
+        # This code should not be executed with varargs
+        #TODO: improve this
+        return import_string, result, return_type, return_type_save
+
     if ("." in return_type):
         return_type = return_type.split(".")[-1]
     if (return_type != "void"):
@@ -97,7 +103,7 @@ def generate_return_type(import_string, method, obj, result):
                 return_type = import_class + "_" + return_type
 
         if (return_type in objects):
-            result += f"    cdef godot_object* ret\n\n"
+            result += f"    cdef godot_object* ret = NULL\n\n"
         else:
             return_type_imported = return_type if return_type.split(".")[0] in objects else return_type
 
@@ -142,6 +148,19 @@ def make_method_api_call(method, obj, result, return_type, return_type_save):
         if (not method["is_virtual"]):
             result += f"    api_core.godot_method_bind_ptrcall(bind_{obj['name'].lower()}_{method['name']}," \
                       f"self.godot_owner,{'args' if len(method['arguments']) > 0 else 'NULL'},{'&ret' if return_type != 'void' else 'NULL'})\n"
+
+        if return_type != "void" and not return_type in objects and not return_type_save.startswith("Pool"):
+            if ("." in return_type):
+                return_type = return_type
+            if (return_type in objects and return_type_save not in types):
+                return_type = "godot_object"
+
+            result += f"    return {return_type_save + '.new_static(ret)' if return_type_save in types else 'ret'}\n\n"
+        elif not return_type_save.startswith("Pool") and return_type != "void":
+            result += f"    cdef {return_type} obj = {return_type}()\n"
+            result += f"    obj.set_godot_owner(ret)\n"
+            result += f"    return obj\n"
+
     else:
         #making method call with varargs, when method has return type
         if(method["return_type"] == "void"):
@@ -151,19 +170,6 @@ def make_method_api_call(method, obj, result, return_type, return_type_save):
         else:
             result += f"    return Variant.new_static(api_core.godot_method_bind_call(bind_{obj['name'].lower()}_{method['name']}," \
                       f"self.godot_owner,combined_array, {len(method['arguments'])} + len(varargs),NULL))\n"
-
-
-    if return_type != "void" and not return_type in objects and not return_type_save.startswith("Pool"):
-        if ("." in return_type):
-            return_type = return_type
-        if (return_type in objects and return_type_save not in types):
-            return_type = "godot_object"
-
-        result += f"    return {return_type_save + '.new_static(ret)' if return_type_save in types else 'ret'}\n\n"
-    elif not return_type_save.startswith("Pool") and return_type != "void":
-        result += f"    cdef {return_type} obj = {return_type}()\n"
-        result += f"    obj.set_godot_owner(ret)\n"
-        result += f"    return obj\n"
     return result
 
 

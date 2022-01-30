@@ -1,13 +1,16 @@
-import subprocess, time
+import argparse
+import os
+import subprocess
+import time
+from Cython.Build import cythonize
 
 import main
-import os
-from Cython.Build import cythonize
-from meson_scripts import copy_tools, download_python, generate_init_files, python_loc, platform_check, generate_godot, download_godot
-
-import argparse
+from meson_scripts import copy_tools, download_python, generate_init_files, \
+    python_loc, platform_check, generate_godot, \
+    download_godot
 
 main.build()
+
 
 def cythonize_files():
     module = cythonize('py4godot/core/*/*.pyx', language_level=3)
@@ -30,14 +33,13 @@ def compile_python_ver_file(platform):
 
 
 def get_compiler():
-    res = subprocess.run("vcvarsall", shell=True, stdout=subprocess.DEVNULL,
-                         stderr=subprocess.STDOUT)
-    if (res.returncode == 0):
+    compiler_res = subprocess.run("vcvarsall", shell=True, stdout=subprocess.DEVNULL,
+                                  stderr=subprocess.STDOUT)
+    if compiler_res.returncode == 0:
         return "msvc"
 
-    res = subprocess.run("gcc --version", shell=True, stdout=subprocess.DEVNULL,
-                         stderr=subprocess.STDOUT)
-    if (res.returncode == 0):
+    compiler_res = subprocess.run("gcc --version", shell=True, stdout=subprocess.DEVNULL, stderr=subprocess.STDOUT)
+    if compiler_res.returncode == 0:
         return "gcc"
 
     raise Exception("No compiler found")
@@ -54,15 +56,15 @@ my_parser.add_argument("-download_godot", help="should tests be run", default="F
 # Execute parse_args()
 args = my_parser.parse_args()
 
-#Determining if tests should be run
+# Determining if tests should be run
 should_run_tests = args.run_tests.lower() == "true"
-#Determining if godot binary should be downloaded
+# Determining if godot binary should be downloaded
 should_download_godot = args.download_godot.lower() == "true"
 
 build_dir = f"build_meson/{args.target_platform}"
 
 start = time.time()
-if (args.compiler == None):
+if args.compiler is None:
     print("Checking for compilers")
     args.compiler = get_compiler()
     print(f"Got compiler:{args.compiler}")
@@ -85,8 +87,8 @@ res = subprocess.Popen(msvc_init +
                        f"--cross-file platforms/compilers/{args.compiler}_compiler.native "
                        f"--cross-file platforms/python_ver/python_ver_compile.cross "
                        f"--buildtype=release {'--wipe' if os.path.isdir(build_dir) else ''}"
-                       f"& ninja -C build_meson/{args.target_platform}"
-                       , shell=True)
+                       f"& ninja -C build_meson/{args.target_platform}",
+                       shell=True)
 
 res.wait()
 copy_tools.run(args.target_platform)
@@ -98,13 +100,13 @@ generate_godot.generate_gdignore()
 print("=================================Build finished==================================")
 print("Build took:", time.time() - start, "seconds")
 
-if(should_download_godot):
+if should_download_godot:
     print("=================================Start download==================================")
     download_godot.run()
     print("=================================Fnish download==================================")
 
 # running tests
-if(should_run_tests):
+if should_run_tests:
     print("=================================Start tests==================================")
     start = time.time()
     copy_tools.copy_tests(args.target_platform)
@@ -114,6 +116,3 @@ if(should_run_tests):
 
     print("=================================Build finished==================================")
     print("Running tests took:", time.time() - start, "seconds")
-
-
-
