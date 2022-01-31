@@ -10,10 +10,7 @@ cdef class Vector2:
 
     @staticmethod
     cdef inline Vector2 new_static(godot_vector2 _native):
-        print("start_new")
         cdef Vector2 v = Vector2.__new__(Vector2)
-        print("middle")
         v.set_native(_native)
         v.update_event = UpdateEvent()
-        print("end_new")
         return v

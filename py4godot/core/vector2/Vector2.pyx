@@ -26,7 +26,7 @@ cdef class Vector2:
     def length_squared(self):
         return api_core.godot_vector2_length_squared(&self._native)
 
-    def is_normalied(self):
+    def is_normalized(self):
         return api_core.godot_vector2_is_normalized(&self._native)
 
     def distance_to(self, Vector2 to):
@@ -104,8 +104,39 @@ cdef class Vector2:
     def __lt__(self, Vector2 other):
         return api_core.godot_vector2_operator_less(&self._native, &other._native)
 
+    def __add__(self, Vector2 other):
+        return self.add(other)
+
+    def __mul__(self, other):
+        if(isinstance(other,Vector2)):
+            return self.multiply_vector(other)
+        elif (isinstance(other,float) or isinstance(other,int)):
+            return self.multiply_scalar(other)
+        #TODO: Exception not supported
+        raise Exception(f"multiplication for type {type(other)} not supported")
+
+
+    def __floordiv__(self, other):
+        if(isinstance(other,Vector2)):
+            return self.divide_vector(other)
+        elif (isinstance(other,float) or isinstance(other,int)):
+            return self.divide_scalar(other)
+        #TODO: Exception not supported
+        raise Exception(f"division for type {type(other)} not supported")
+
+    def __truediv__(self, other):
+        if(isinstance(other,Vector2)):
+            return self.divide_vector(other)
+        elif (isinstance(other,float) or isinstance(other,int)):
+            return self.divide_scalar(other)
+        #TODO: Exception not supported
+        raise Exception(f"division for type {type(other)} not supported")
+
+    def __sub__(self, Vector2 other):
+        return self.sub(other)
+
     def neg(self):
-        return Vector2(api_core.godot_vector2_operator_neg(&self._native))
+        return Vector2.new_static(api_core.godot_vector2_operator_neg(&self._native))
 
     def set_x(self, godot_real x):
         api_core.godot_vector2_set_x(&self._native, x)
