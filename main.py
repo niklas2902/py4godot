@@ -8,8 +8,8 @@ types = {"Dictionary": "godot_dictionary", "Variant": "godot_variant", "Array": 
          "Vector3": "godot_vector3", "Vector2": "godot_vector2", "Plane": "godot_plane",
          "Basis": "godot_basis", "Transform": "godot_transform",
          "PoolIntArray": "godot_object *", "PoolVector3Array": "godot_object*", "PoolVector2Array": "godot_object*",
-         "Quat": "godot_quat", "AABB": "godot_aabb"
-    , "Rect2": "godot_rect2", "PoolByteArray": "godot_object *", "Transform2D": "godot_transform2d",
+         "Quat": "godot_quat", "AABB": "godot_aabb", "Rect2": "godot_rect2", "PoolByteArray": "godot_object *",
+         "Transform2D": "godot_transform2d",
          "PoolColorArray": "godot_object * ",
          "Color": "godot_color", "RID": "godot_rid", "PoolRealArray": "godot_object *", }
 core = ["Dictionary", "Array", "Variant", "NodePath", "String", "Vector3", "Vector2", "Plane", "Basis", "Quat",
@@ -18,114 +18,164 @@ core = ["Dictionary", "Array", "Variant", "NodePath", "String", "Vector3", "Vect
         "PoolColorArray", "Color", "RID", "PoolRealArray", "PoolStringArray"]
 
 
+# The import string at the start of the file
+base_import_string = ""
+base_import_string += f"\n################################Import gdnative api#######################################\n"
+base_import_string += f"from py4godot.utils.Wrapper cimport *\n"
+base_import_string += f"from py4godot.core.node_path.NodePath cimport NodePath\n"
+base_import_string += f"from py4godot.core.string.String cimport String\n"
+base_import_string += f"from py4godot.core.variant.Variant cimport Variant\n"
+base_import_string += f"from py4godot.core.array.Array cimport Array\n"
+base_import_string += f"from py4godot.core.color.Color cimport Color\n"
+base_import_string += f"from py4godot.core.plane.Plane cimport Plane\n"
+base_import_string += f"from py4godot.core.basis.Basis cimport Basis\n"
+base_import_string += f"from py4godot.core.aabb.AABB cimport AABB\n"
+base_import_string += f"from py4godot.core.dictionary.Dictionary cimport Dictionary\n"
+base_import_string += f"from py4godot.core.pool_array.PoolArrays cimport *\n"
+base_import_string += f"from py4godot.core.quat.Quat cimport Quat\n"
+base_import_string += f"from py4godot.core.rect2.Rect2 cimport Rect2\n"
+base_import_string += f"from py4godot.core.rid.RID cimport RID\n"
+base_import_string += f"from py4godot.core.transform.Transform cimport Transform\n"
+base_import_string += f"from py4godot.core.transform.Transform2D cimport Transform2D\n"
+base_import_string += f"from py4godot.core.vector2.Vector2 cimport Vector2\n"
+base_import_string += f"from py4godot.core.vector3.Vector3 cimport Vector3\n"
+base_import_string += f"from py4godot.core.variant.Variant cimport Variant_Type\n"
+base_import_string += f"from py4godot.core.variant.Variant cimport Variant_Operator\n"
+base_import_string += f"from py4godot.events.events cimport UpdateEvent\n"
+base_import_string += f"from py4godot.core.color.Color cimport Color\n"
+base_import_string += f"from cython.operator cimport dereference\n"
+base_import_string += f"from py4godot.enums.enums cimport *\n"
+base_import_string += f"from py4godot.godot_bindings.types cimport *\n"
+base_import_string += f"from cpython.mem cimport PyMem_Malloc, PyMem_Realloc, PyMem_Free\n"
+base_import_string += f"from py4godot.godot_bindings.binding_external cimport *\n\n\n" \
+                      f"cdef set_core(godot_gdnative_core_api_struct* core):\n" \
+                      f"    global api_core\n" \
+                      f"    api_core = core\n\n" \
+                      f"cdef set_native_script(godot_gdnative_ext_nativescript_1_1_api_struct* api):\n" \
+                      f"    global nativescript_api_11\n" \
+                      f"    nativescript_api_11 = api\n\n" \
+                      f"cdef set_bindings_funcs(godot_instance_binding_functions binding_funcs_, int lang_ind):\n" \
+                      f"    global binding_funcs\n" \
+                      f"    global language_index\n" \
+                      f"    binding_funcs = binding_funcs_\n" \
+                      f"    language_index = lang_ind\n\n"
+
+main_string = ""
+
+import_string = ""
+objects = set()
+
+
 def generate_properties(obj):
     """generate properties for the object"""
     result = ""
-    if (len(obj["properties"])):
+    if len(obj["properties"]):
         result += "\n##################################Generated Properties#########################################\n"
-        for property in obj["properties"]:
+        for gd_property in obj["properties"]:
             result += "  @property\n"
-            result += f"  def {property['name'].replace('/', '_')}(self): \n"
-            if(not property["type"] in core):
-                result += f"    return self.get_{property['name'].replace('/', '_')}()\n"
+            result += f"  def {gd_property['name'].replace('/', '_')}(self): \n"
+            if not gd_property["type"] in core:
+                result += f"    return self.get_{gd_property['name'].replace('/', '_')}()\n"
             else:
-                result += f"    cdef {property['type']} val = self.get_{property['name'].replace('/', '_')}()\n"
-                result += f"    val.update_event.register_method(lambda:self.set_{property['name']}(val))\n"
+                result += f"    cdef {gd_property['type']} val = self.get_{gd_property['name'].replace('/', '_')}()\n"
+                result += f"    val.update_event.register_method(lambda:self.set_{gd_property['name']}(val))\n"
                 result += f"    return val\n"
-            result += f"  @{property['name'].replace('/', '_')}.setter \n"
-            result += f"  def {property['name'].replace('/', '_')}(self,value): \n"
-            result += f"    self.set_{property['name'].replace('/', '_')}(value)\n"
+            result += f"  @{gd_property['name'].replace('/', '_')}.setter \n"
+            result += f"  def {gd_property['name'].replace('/', '_')}(self,value): \n"
+            result += f"    self.set_{gd_property['name'].replace('/', '_')}(value)\n"
     return result
 
 
-def generate_methods(obj, import_string):
+def generate_methods(obj, objs_to_import):
     """generate the methods"""
     result = ""
-    if (len(obj["methods"])):
+    if len(obj["methods"]):
         result += "\n##################################Generated Methods#########################################\n"
         for method in obj["methods"]:
+            # Generate head of method
+            result += f"""  def {'' if method['is_const'] == False else ''} {method['name'] if method['name'] 
+            not in exclude_words else method['name'] + '_'}("""
 
-            #Generate head of method
-            result += f"  def {'' if method['is_const'] == False else ''} {method['name'] if method['name'] not in exclude_words else method['name'] + '_'}("
+            # Generate arguments in head
+            objs_to_import, result = generate_args(objs_to_import, method, result)
 
-            #Generate arguments in head
-            import_string, result = generate_args(import_string, method, result)
-
-            #Start with body
+            # Start with body
             result += f"    cdef const godot_object *_owner = self.godot_owner\n\n"
 
             # create return type
-            import_string, result, return_type, return_type_save = generate_return_type(import_string, method, obj,
-                                                                                        result)
+            objs_to_import, result, return_type, return_type_save = generate_return_type(objs_to_import, method, obj,
+                                                                                         result)
 
             # generate array with arguments
             result = generate_method_argument_array(method, result)
 
             # make call to godot api
             result = make_method_api_call(method, obj, result, return_type, return_type_save)
-    return result, import_string
+    return result, objs_to_import
 
 
-def generate_args(import_string, method, result):
+def generate_args(objs_to_import, method, result):
     """generate the arguments in the method head"""
     args = "self, "
     for argument in method["arguments"]:
         args += " " + (argument["type"] if not argument["type"] in objects else argument["type"]) + " "
         args += (argument["name"] if argument["name"] not in exclude_words else argument["name"] + "_") + ", "
 
-        if (argument["type"] in objects):
-            import_string += f"cimport classes.{argument['type']}\n"
-    if(method["has_varargs"]):
+        if argument["type"] in objects:
+            objs_to_import += f"cimport classes.{argument['type']}\n"
+    if method["has_varargs"]:
         args += "*varargs,"
     result += args.rstrip(", ") + "):\n"
-    return import_string, result
+    return objs_to_import, result
 
 
-def generate_return_type(import_string, method, obj, result):
+def generate_return_type(objs_to_import, method, obj, result):
     """generate the return_type"""
     return_type = method["return_type"]
     return_type_save = return_type
 
-    if(method["has_varargs"]):
+    if method["has_varargs"]:
         # This code should not be executed with varargs
-        #TODO: improve this
-        return import_string, result, return_type, return_type_save
+        # TODO: improve this
+        return objs_to_import, result, return_type, return_type_save
 
-    if ("." in return_type):
+    if "." in return_type:
         return_type = return_type.split(".")[-1]
-    if (return_type != "void"):
-        if ("::" in return_type):
+    if return_type != "void":
+        if "::" in return_type:
             import_class, return_type = return_type.split("::")
-            if (import_class != obj["name"] and not import_class in core):
-                import_string += f"cimport classes.{import_class}\n"
+            if import_class != obj["name"] and import_class not in core:
+                objs_to_import += f"cimport classes.{import_class}\n"
                 return_type = import_class + "_" + return_type
             else:
                 return_type = import_class + "_" + return_type
 
-        if (return_type in objects):
+        if return_type in objects:
             result += f"    cdef godot_object* ret = NULL\n\n"
         else:
             return_type_imported = return_type if return_type.split(".")[0] in objects else return_type
 
-            if(return_type_imported == "Vector3_Axis"):
+            if return_type_imported == "Vector3_Axis":
                 return_type_imported = "godot_vector3_axis"
 
-            result += f"    cdef {return_type_imported if return_type_imported not in types else types[return_type_imported]} ret\n\n"
-    return import_string, result, return_type, return_type_save
+            result += f"""    cdef {return_type_imported if return_type_imported not in types
+            else types[return_type_imported]} ret\n\n"""
+    return objs_to_import, result, return_type, return_type_save
 
 
 def generate_method_argument_array(method, result):
     """generate an argument array for the api calls"""
-    if (len(method['arguments']) > 0):
+    if len(method['arguments']) > 0:
         result += f"    cdef void *args[{len(method['arguments'])}]\n\n"
 
         for i in range(len(method["arguments"])):
             argument = method["arguments"][i]
             arg_name = (argument["name"] if argument["name"] not in exclude_words else argument["name"] + "_")
-            if (argument["type"] in objects):
+            if argument["type"] in objects:
                 result += f"    args[{i}] = {arg_name}.godot_owner\n"
             else:
-                result += f"    args[{i}] = {'&' + arg_name + '._native' if method['arguments'][i]['type'] in core else ('&' + arg_name)}\n"
+                result += f"""    args[{i}] = {'&' + arg_name + '._native'
+                if method['arguments'][i]['type'] in core else ('&' + arg_name)}\n"""
     else:
         result += f"""    cdef void * args[1]\n    args[0] = NULL\n"""
 
@@ -162,13 +212,14 @@ def make_method_api_call(method, obj, result, return_type, return_type_save):
             result += f"    return obj\n"
 
     else:
-        #making method call with varargs, when method has return type
-        if(method["return_type"] == "void"):
+        # making method call with varargs, when method has return type
+        if method["return_type"] == "void":
             result += f"    api_core.godot_method_bind_call(bind_{obj['name'].lower()}_{method['name']}," \
                       f"self.godot_owner,combined_array, {len(method['arguments'])} + len(varargs),NULL)\n"
-        #making method call with varargs, when method doesn't have return type
+        # making method call with varargs, when method doesn't have return type
         else:
-            result += f"    return Variant.new_static(api_core.godot_method_bind_call(bind_{obj['name'].lower()}_{method['name']}," \
+            result += f"""    return Variant.new_static(api_core.godot_method_bind_call(bind_{
+            obj['name'].lower()}_{method['name']},""" \
                       f"self.godot_owner,combined_array, {len(method['arguments'])} + len(varargs),NULL))\n"
     return result
 
@@ -186,17 +237,19 @@ def generate_method_bindings(obj):
         result += f"  global bind_{obj['name'].lower()}_{method['name']}\n"
 
     for method in obj["methods"]:
-        result += f"  bind_{obj['name'].lower()}_{method['name']} = api_core.godot_method_bind_get_method('{obj['name']}', '{method['name']}')\n"
+        result += f"""  bind_{obj['name'].lower()}_{method['name']} = api_core.godot_method_bind_get_method('{
+        obj['name']}', '{method['name']}')\n"""
+
     return result
 
 
 def generate_classes(obj):
     """function to generate the godot class for the given object"""
     result = ""
-    import_string = ""
-    if (obj["base_class"] != ""):
-        import_string += f"cimport classes.{obj['base_class']} \n"
-    import_string += ""
+    generate_classes_import = ""
+    if obj["base_class"] != "":
+        generate_classes_import += f"cimport classes.{obj['base_class']} \n"
+    generate_classes_import += ""
 
     result += generate_method_bindings(obj)
 
@@ -207,30 +260,33 @@ def generate_classes(obj):
     result += f"""    super().__init__()\n"""
     result += generate_constants(obj)
 
-    #only generate constructor if instanciable
-    if(obj["instanciable"]):
+    # only generate constructor if instanciable
+    if obj["instanciable"]:
         result += f"""  @staticmethod\n"""
         result += f"""  def _new():\n"""
         result += f"""      cdef char* name = <char*> "{obj["name"]}"\n"""
-        result += f"""      cdef {obj['name']} obj = <{obj['name']}> nativescript_api_11.godot_nativescript_get_instance_binding_data(language_index,api_core.godot_get_class_constructor(name)());\n"""
+        result += f"""      cdef {obj['name']} obj = <{obj['name']}> nativescript_api_11."""\
+                  f"godot_nativescript_get_instance_binding_data(language_index,api_core.godot_get_class_constructor"\
+                  f"(name)());\n"
         result += f"""      return obj\n"""
 
-    #TODO:Try to improve this
-    if(obj["singleton"]):
+    # TODO:Try to improve this
+    if obj["singleton"]:
         result += f"""  @staticmethod\n"""
-        #TODO: How to handle class Input
+        # TODO: How to handle class Input
         result += f"""  def instance():\n"""
         result += f"""      cdef char* name = <char*> "{obj["name"].strip('_')}"\n"""
         result += f"""      cdef {obj['name']} obj = <{obj['name']}>{obj['name']}()\n"""
         result += f"""      obj.godot_owner = api_core.godot_global_get_singleton(name)\n"""
         result += f"""      return obj\n"""
     result += generate_properties(obj)
-    results = generate_methods(obj, import_string)
+    results = generate_methods(obj, generate_classes_import)
     result += results[0]
-    import_string = results[1]
+    generate_classes_import = results[1]
 
-    pxd_file = generate_pxd(obj["name"],  obj)
-    return import_string, result, pxd_file
+    pxd_file = generate_pxd(obj["name"], obj)
+    return generate_classes_import, result, pxd_file
+
 
 def generate_constants(obj):
     result = "#########################################begin constants#######################################\n"
@@ -263,10 +319,11 @@ def generate_pxd(class_, obj):
 test_mode = False
 
 
-def create_set(string, set):
+def create_set(string, string_set):
     strings = string.split("\n")
     for s in strings:
-        set.add(s)
+        string_set.add(s)
+
 
 def generate_singleton(obj):
     return f"""class {obj['name'].strip('_')}():
@@ -276,52 +333,6 @@ def generate_singleton(obj):
         if not cls._instance:
             cls._instance = {obj['name']}.instance()
         return cls._instance\n\n"""
-
-# The import string at the start of the file
-base_import_string = ""
-base_import_string += f"\n##################################Import gdnative api#########################################\n"
-base_import_string += f"from py4godot.utils.Wrapper cimport *\n"
-base_import_string += f"from py4godot.core.node_path.NodePath cimport NodePath\n"
-base_import_string += f"from py4godot.core.string.String cimport String\n"
-base_import_string += f"from py4godot.core.variant.Variant cimport Variant\n"
-base_import_string += f"from py4godot.core.array.Array cimport Array\n"
-base_import_string += f"from py4godot.core.color.Color cimport Color\n"
-base_import_string += f"from py4godot.core.plane.Plane cimport Plane\n"
-base_import_string += f"from py4godot.core.basis.Basis cimport Basis\n"
-base_import_string += f"from py4godot.core.aabb.AABB cimport AABB\n"
-base_import_string += f"from py4godot.core.dictionary.Dictionary cimport Dictionary\n"
-base_import_string += f"from py4godot.core.pool_array.PoolArrays cimport *\n"
-base_import_string += f"from py4godot.core.quat.Quat cimport Quat\n"
-base_import_string += f"from py4godot.core.rect2.Rect2 cimport Rect2\n"
-base_import_string += f"from py4godot.core.rid.RID cimport RID\n"
-base_import_string += f"from py4godot.core.transform.Transform cimport Transform\n"
-base_import_string += f"from py4godot.core.transform.Transform2D cimport Transform2D\n"
-base_import_string += f"from py4godot.core.vector2.Vector2 cimport Vector2\n"
-base_import_string += f"from py4godot.core.vector3.Vector3 cimport Vector3\n"
-base_import_string += f"from py4godot.core.variant.Variant cimport Variant_Type\n"
-base_import_string += f"from py4godot.core.variant.Variant cimport Variant_Operator\n"
-base_import_string += f"from py4godot.events.events cimport UpdateEvent\n"
-base_import_string += f"from py4godot.core.color.Color cimport Color\n"
-base_import_string += f"from cython.operator cimport dereference\n"
-base_import_string += f"from py4godot.enums.enums cimport *\n"
-base_import_string += f"from py4godot.godot_bindings.types cimport *\n"
-base_import_string += f"from cpython.mem cimport PyMem_Malloc, PyMem_Realloc, PyMem_Free\n"
-base_import_string += f"from py4godot.godot_bindings.binding_external cimport *\n\n\n" \
-                      f"cdef set_core(godot_gdnative_core_api_struct* core):\n" \
-                      f"    global api_core\n" \
-                      f"    api_core = core\n\n" \
-                      f"cdef set_native_script(godot_gdnative_ext_nativescript_1_1_api_struct* api):\n" \
-                      f"    global nativescript_api_11\n" \
-                      f"    nativescript_api_11 = api\n\n"\
-                      f"cdef set_bindings_funcs(godot_instance_binding_functions binding_funcs_, int lang_ind):\n" \
-                      f"    global binding_funcs\n" \
-                      f"    global language_index\n" \
-                      f"    binding_funcs = binding_funcs_\n" \
-                      f"    language_index = lang_ind\n\n"
-
-main_string = ""
-
-import_string = ""
 
 
 def build():
@@ -348,7 +359,6 @@ from py4godot.utils.Wrapper cimport *"""
             continue
 
         init_methods_string += f"  init_method_bindings_{element['name']}()\n"
-        file = ""
         generated_file = generate_classes(element)
         bindings_file += generated_file[1] + "\n"
         pxd_file += generated_file[2]
