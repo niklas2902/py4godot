@@ -7,7 +7,7 @@ from Cython.Build import cythonize
 import main
 from meson_scripts import copy_tools, download_python, generate_init_files, \
     python_loc, platform_check, generate_godot, \
-    download_godot
+    download_godot, print_tools
 
 main.build()
 
@@ -117,3 +117,5 @@ if should_run_tests:
 
     print("=================================Tests finished==================================")
     print("Running tests took:", time.time() - start, "seconds")
+    print("log:")
+    print_tools.print_meson(args.target_platform)
