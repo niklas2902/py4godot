@@ -34,7 +34,7 @@ def copy_main(platform):
              f"build/addons/{platform}/cpython-3.9.7-{platform}/python/install/lib/main.so")
 
 def copy_tests(platform):
-    core_tests = ["vector2", "vector3"]
+    core_tests = ["vector2", "vector3", "rect2"]
     for core_test in core_tests:
         if os.path.exists(f"tests/core/{core_test}/addons/{platform}"):
             rmtree(f"tests/core/{core_test}/addons/{platform}")

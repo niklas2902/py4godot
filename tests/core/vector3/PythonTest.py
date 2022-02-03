@@ -1,6 +1,6 @@
 import unittest
 
-from py4godot import Vector3
+from py4godot import Vector3, Vector3_Axis
 
 
 class PythonTest(unittest.TestCase):
