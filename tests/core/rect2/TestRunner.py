@@ -1,8 +1,6 @@
 from py4godot import *
 import PythonTest
 import unittest
-import sys
-import os
 
 @gdclass
 class TestRunner(Spatial):

@@ -100,7 +100,7 @@ def generate_methods(obj, objs_to_import):
             objs_to_import, result = generate_args(objs_to_import, method, result)
 
             # Start with body
-            result += f"    cdef const godot_object *_owner = self.godot_owner\n\n"
+            result += "    cdef const godot_object *_owner = self.godot_owner\n\n"
 
             # create return type
             objs_to_import, result, return_type, return_type_save = generate_return_type(objs_to_import, method, obj,
@@ -151,7 +151,7 @@ def generate_return_type(objs_to_import, method, obj, result):
                 return_type = import_class + "_" + return_type
 
         if return_type in objects:
-            result += f"    cdef godot_object* ret = NULL\n\n"
+            result += "    cdef godot_object* ret = NULL\n\n"
         else:
             return_type_imported = return_type if return_type.split(".")[0] in objects else return_type
 
@@ -177,16 +177,16 @@ def generate_method_argument_array(method, result):
                 result += f"""    args[{i}] = {'&' + arg_name + '._native'
                 if method['arguments'][i]['type'] in core else ('&' + arg_name)}\n"""
     else:
-        result += f"""    cdef void * args[1]\n    args[0] = NULL\n"""
+        result += """    cdef void * args[1]\n    args[0] = NULL\n"""
 
-    if (method["has_varargs"]):
+    if method["has_varargs"]:
         result += f"""    cdef godot_variant** combined_array = <godot_variant**> PyMem_Malloc(sizeof(godot_variant *) * len(varargs) + {len(method['arguments'])})\n"""
         for i in range(len(method["arguments"])):
             argument = method["arguments"][i]
             arg_name = (argument["name"] if argument["name"] not in exclude_words else argument["name"] + "_")
             result += f"""    cdef godot_variant __var_{arg_name} = Variant({arg_name})._native\n"""
             result += f"""    combined_array[{i}] = &__var_{arg_name}\n"""
-        result += f"""    for i in range(len(varargs)):\n"""
+        result += "    for i in range(len(varargs)):\n"
         result += f"""      combined_array[i+{len(method['arguments'])}] = &Variant(varargs[i])._native\n"""
 
     return result
@@ -194,22 +194,17 @@ def generate_method_argument_array(method, result):
 
 def make_method_api_call(method, obj, result, return_type, return_type_save):
     """make the api call and return the return value"""
-    if(not method["has_varargs"]):
-        if (not method["is_virtual"]):
+    if not method["has_varargs"]:
+        if not method["is_virtual"]:
             result += f"    api_core.godot_method_bind_ptrcall(bind_{obj['name'].lower()}_{method['name']}," \
                       f"self.godot_owner,{'args' if len(method['arguments']) > 0 else 'NULL'},{'&ret' if return_type != 'void' else 'NULL'})\n"
 
-        if return_type != "void" and not return_type in objects and not return_type_save.startswith("Pool"):
-            if ("." in return_type):
-                return_type = return_type
-            if (return_type in objects and return_type_save not in types):
-                return_type = "godot_object"
-
+        if return_type != "void" and return_type not in objects and not return_type_save.startswith("Pool"):
             result += f"    return {return_type_save + '.new_static(ret)' if return_type_save in types else 'ret'}\n\n"
         elif not return_type_save.startswith("Pool") and return_type != "void":
             result += f"    cdef {return_type} obj = {return_type}()\n"
-            result += f"    obj.set_godot_owner(ret)\n"
-            result += f"    return obj\n"
+            result += "    obj.set_godot_owner(ret)\n"
+            result += "    return obj\n"
 
     else:
         # making method call with varargs, when method has return type
@@ -256,8 +251,8 @@ def generate_classes(obj):
     result += "\n############################Generated class###################################\n"
 
     result += f"""cdef class {obj['name']}({obj['base_class'] if obj['base_class'] != "" else "Wrapper"}):\n"""
-    result += f"""  def __init__(self):\n"""
-    result += f"""    super().__init__()\n"""
+    result += "  def __init__(self):\n"
+    result += "    super().__init__()\n"
     result += generate_constants(obj)
 
     # only generate constructor if instanciable
@@ -277,8 +272,8 @@ def generate_classes(obj):
         result += f"""  def instance():\n"""
         result += f"""      cdef char* name = <char*> "{obj["name"].strip('_')}"\n"""
         result += f"""      cdef {obj['name']} obj = <{obj['name']}>{obj['name']}()\n"""
-        result += f"""      obj.godot_owner = api_core.godot_global_get_singleton(name)\n"""
-        result += f"""      return obj\n"""
+        result += "      obj.godot_owner = api_core.godot_global_get_singleton(name)\n"
+        result += "      return obj\n"
     result += generate_properties(obj)
     results = generate_methods(obj, generate_classes_import)
     result += results[0]
@@ -355,7 +350,7 @@ from py4godot.utils.Wrapper cimport *"""
     set_ = set()
     # generate all the class files
     for element in obj:
-        if (element["name"].startswith("_") and element["singleton"] == False):
+        if element["name"].startswith("_") and not element["singleton"]:
             continue
 
         init_methods_string += f"  init_method_bindings_{element['name']}()\n"
@@ -364,10 +359,10 @@ from py4godot.utils.Wrapper cimport *"""
         pxd_file += generated_file[2]
         create_set(generated_file[0], set_)
 
-        if(element["singleton"] and element["name"].startswith("_")):
+        if element["singleton"] and element["name"].startswith("_"):
             bindings_file += generate_singleton(element)
 
-    #Registering types for later use
+    # Registering types for later use
     type_ind = 0
     for element in obj:
         register_types_string += f"  nativescript_api_11.godot_nativescript_set_global_type_tag(language_index, <char *>'{element['name']}', <void*>{element['name']})\n"
@@ -377,6 +372,6 @@ from py4godot.utils.Wrapper cimport *"""
         bindings.write(base_import_string + main_string + bindings_file + init_methods_string + register_types_string)
     with open("py4godot/classes/generated.pxd", "w") as bindings_pxd:
         bindings_pxd.write(pxd_file + "\ncdef set_core(godot_gdnative_core_api_struct* core)" +
-                           "\ncdef set_native_script(godot_gdnative_ext_nativescript_1_1_api_struct* api)\n"+
+                           "\ncdef set_native_script(godot_gdnative_ext_nativescript_1_1_api_struct* api)\n" +
                            "cdef set_bindings_funcs(godot_instance_binding_functions bindings_funcs_, int lang_ind)\n"
                            "cdef register_types()")
