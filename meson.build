@@ -27,7 +27,7 @@ foreach source : sources
 endforeach
 
 
-test('test_vector3', godot_program, args : ['--path', 'tests/core/vector3'], workdir:meson.source_root())
-test('test_vector2', godot_program, args : ['--path', 'tests/core/vector2'], workdir:meson.source_root())
-test('test_rect2', godot_program, args : ['--path', 'tests/core/rect2'], workdir:meson.source_root())
+test('test_vector3', godot_program, args : ['--path', 'tests/core/vector3'], workdir:meson.source_root(), is_parallel:false, timeout:60)
+test('test_vector2', godot_program, args : ['--path', 'tests/core/vector2'], workdir:meson.source_root(), is_parallel:false, timeout:60)
+test('test_rect2', godot_program, args : ['--path', 'tests/core/rect2'], workdir:meson.source_root(), is_parallel:false, timeout:60)
 

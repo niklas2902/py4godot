@@ -11,8 +11,12 @@ cdef class Rect2:
         api_core.godot_rect2_new(&self._native,x,y,width,height)
         self.update_event = UpdateEvent()
 
-    def new_with_position_and_size(self, Vector2 pos, Vector2 size):
-        api_core.godot_rect2_new_with_position_and_size(&self._native, &pos._native, &size._native)
+    @staticmethod
+    def new_with_position_and_size(Vector2 pos, Vector2 size):
+        cdef Rect2 r = Rect2.__new__(Rect2)
+        api_core.godot_rect2_new_with_position_and_size(&r._native, &pos._native, &size._native)
+        r.update_event = UpdateEvent()
+        return r
 
     def __str__(self):
         return api_core.godot_rect2_as_string(&self._native)

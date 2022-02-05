@@ -107,7 +107,7 @@ if should_download_godot:
 
 # running tests
 if should_run_tests:
-    print("=================================Start tests==================================")
+    print("=================================Start tests====================================")
     start = time.time()
     copy_tools.copy_tests(args.target_platform)
     res = subprocess.Popen(
