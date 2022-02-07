@@ -113,7 +113,6 @@ if should_run_tests:
     res = subprocess.Popen(
         f"meson test -C build_meson/{args.target_platform}", shell=True)
     res.wait()
-    print(res.communicate())
 
     print("=================================Tests finished==================================")
     print("Running tests took:", time.time() - start, "seconds")
