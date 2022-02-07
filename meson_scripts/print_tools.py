@@ -1,4 +1,4 @@
-import glob
+import glob, os
 
 def print_meson(platform):
     try:
@@ -19,4 +19,5 @@ if __name__=="__main__":
     print("print build_meson:")
     print_tree("build_meson", 0)
     print("print root")
-    print_tree("", 0, 7)
+    print_tree(os.getcwd().rstrip("\\"), 0, 4)
+    print(os.getcwd())
