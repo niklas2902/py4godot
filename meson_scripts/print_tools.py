@@ -18,3 +18,5 @@ def print_tree(path, layer, max_layer=3):
 if __name__=="__main__":
     print("print build_meson:")
     print_tree("build_meson", 0)
+    print("print root")
+    print_tree("", 0)
