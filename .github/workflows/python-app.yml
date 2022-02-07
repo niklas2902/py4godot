@@ -41,6 +41,9 @@ jobs:
     - name: build
       run: |
          python cmd_test.py --target_platform=windows64 --compiler=clang -run_tests=true -download_godot=true
+    - name: print structure
+      run: |
+         python meson_scripts/print_tools.py
     - name: test
       run: |
          meson test -C build_meson/windows64
