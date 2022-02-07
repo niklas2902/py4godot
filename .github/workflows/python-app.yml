@@ -41,5 +41,8 @@ jobs:
     - name: build
       run: |
          python cmd_test.py --target_platform=windows64 --compiler=clang -run_tests=true -download_godot=true
+    - name: test
+      run: |
+         meson test -C build_meson/windows64
 
 
