@@ -77,6 +77,14 @@ download_python.download_file(args.target_platform, allow_copy=True)
 # downlaod needed python files for the current platform
 download_python.download_file(current_platform, allow_copy=False)
 
+# download godot if needed
+if should_download_godot:
+    print("downloading godot binary")
+    
+    print("=================================Start download==================================")
+    download_godot.run()
+    print("=================================Fnish download==================================")
+
 compile_python_ver_file(current_platform)
 
 # initializing for msvc if wanted as compiler (todo:should be improved sometime)
@@ -99,11 +107,6 @@ generate_godot.generate_gdignore()
 
 print("=================================Build finished==================================")
 print("Build took:", time.time() - start, "seconds")
-
-if should_download_godot:
-    print("=================================Start download==================================")
-    download_godot.run()
-    print("=================================Fnish download==================================")
 
 # running tests
 if should_run_tests:
