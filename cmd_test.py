@@ -6,7 +6,7 @@ from Cython.Build import cythonize
 
 import main
 from meson_scripts import copy_tools, download_python, generate_init_files, \
-    python_loc, platform_check, generate_godot, \
+    locations, platform_check, generate_godot, \
     download_godot, print_tools
 
 main.build()
@@ -25,11 +25,16 @@ def cythonize_files():
 
 def compile_python_ver_file(platform):
     """compile python file, to find the matching python version"""
-    python_dir = python_loc.get_python_dir(platform)
-    with open("platforms/python_ver/python_ver_temp.cross", "r") as python_temp:
+    python_dir = locations.get_python_dir(platform)
+    godot_dir = locations.get_godot_dir(platform)
+    with open("platforms/binary_dirs/python_ver_temp.cross", "r") as python_temp:
         file_string = python_temp.read()
-        with open("platforms/python_ver/python_ver_compile.cross", "w") as python_compile:
-            python_compile.write(file_string.replace("{python_ver}", python_dir))
+        # Replacing things like in a template
+        file_string = file_string.replace("{python_ver}", python_dir)
+        file_string = file_string.replace("{godot}", godot_dir)
+        with open("platforms/binary_dirs/python_ver_compile.cross", "w") as python_compile:
+            python_compile.write(file_string)
+
 
 
 def get_compiler():
@@ -80,7 +85,7 @@ download_python.download_file(current_platform, allow_copy=False)
 # download godot if needed
 if should_download_godot:
     print("downloading godot binary")
-    
+
     print("=================================Start download==================================")
     download_godot.run()
     print("=================================Fnish download==================================")
@@ -93,7 +98,7 @@ msvc_init = f"vcvarsall.bat {'x86_amd64'} & cl & " if "msvc" in args.compiler el
 res = subprocess.Popen(msvc_init +
                        f"meson {build_dir} --cross-file platforms/{args.target_platform}.cross "
                        f"--cross-file platforms/compilers/{args.compiler}_compiler.native "
-                       f"--cross-file platforms/python_ver/python_ver_compile.cross "
+                       f"--cross-file platforms/binary_dirs/python_ver_compile.cross "
                        f"--buildtype=release {'--wipe' if os.path.isdir(build_dir) else ''}"
                        f"& meson compile -C build_meson/{args.target_platform}",
                        shell=True)

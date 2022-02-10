@@ -1,0 +1,3 @@
+[binaries]
+python = '{python_ver}'
+godot= '{godot}'

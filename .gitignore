@@ -4,7 +4,7 @@ build_meson
 __pycache__
 python_files
 venv
-platforms/python_ver/python_ver_compile.cross
+platforms/binary_dirs/python_ver_compile.cross
 .vscode
 
 py4godot/enums/*.c
