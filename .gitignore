@@ -25,3 +25,4 @@ py4godot/classes/generated.pyx
 /tests/core/vector3/addons/
 /py4godot/events/*.c
 /tests/core/vector2/addons/
+/godot/

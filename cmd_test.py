@@ -36,8 +36,6 @@ def compile_python_ver_file(platform):
             python_compile.write(file_string)
 
 
-
-
 def get_compiler():
     compiler_res = subprocess.run("vcvarsall", shell=True, stdout=subprocess.DEVNULL,
                                   stderr=subprocess.STDOUT)
@@ -119,6 +117,10 @@ if should_run_tests:
     res = subprocess.Popen(
         f"ninja -C build_meson/{args.target_platform} test", shell=True)
     res.wait()
-
+    streamdata = res.communicate()[0]
+    rc = res.returncode
     print("=================================Build finished==================================")
     print("Running tests took:", time.time() - start, "seconds")
+
+    if rc != 0:
+        raise Exception("Tests failed")
