@@ -243,6 +243,7 @@ void set_up_bindings(){
 	import_py4godot__classes__classes();
     if (PyErr_Occurred())
     {
+        printf("module not found\n");
         PyErr_Print();
         return ;
     }
@@ -276,6 +277,7 @@ void set_up_pluginscript(){
     import_py4godot__pluginscript_api__api();
     if (PyErr_Occurred())
     {
+        printf("error importing\n");
         PyErr_Print();
         return ;
     }

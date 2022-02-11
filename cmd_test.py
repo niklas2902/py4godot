@@ -7,7 +7,7 @@ from Cython.Build import cythonize
 import main
 from meson_scripts import copy_tools, download_python, generate_init_files, \
     locations, platform_check, generate_godot, \
-    download_godot, print_tools
+    download_godot
 
 main.build()
 
@@ -34,6 +34,7 @@ def compile_python_ver_file(platform):
         file_string = file_string.replace("{godot}", godot_dir)
         with open("platforms/binary_dirs/python_ver_compile.cross", "w") as python_compile:
             python_compile.write(file_string)
+
 
 
 
@@ -82,14 +83,6 @@ download_python.download_file(args.target_platform, allow_copy=True)
 # downlaod needed python files for the current platform
 download_python.download_file(current_platform, allow_copy=False)
 
-# download godot if needed
-if should_download_godot:
-    print("downloading godot binary")
-
-    print("=================================Start download==================================")
-    download_godot.run()
-    print("=================================Fnish download==================================")
-
 compile_python_ver_file(current_platform)
 
 # initializing for msvc if wanted as compiler (todo:should be improved sometime)
@@ -100,7 +93,7 @@ res = subprocess.Popen(msvc_init +
                        f"--cross-file platforms/compilers/{args.compiler}_compiler.native "
                        f"--cross-file platforms/binary_dirs/python_ver_compile.cross "
                        f"--buildtype=release {'--wipe' if os.path.isdir(build_dir) else ''}"
-                       f"& meson compile -C build_meson/{args.target_platform}",
+                       f"& ninja -C build_meson/{args.target_platform}",
                        shell=True)
 
 res.wait()
@@ -113,16 +106,19 @@ generate_godot.generate_gdignore()
 print("=================================Build finished==================================")
 print("Build took:", time.time() - start, "seconds")
 
+if should_download_godot:
+    print("=================================Start download==================================")
+    download_godot.run()
+    print("=================================Fnish download==================================")
+
 # running tests
 if should_run_tests:
-    print("=================================Start tests====================================")
+    print("=================================Start tests==================================")
     start = time.time()
     copy_tools.copy_tests(args.target_platform)
     res = subprocess.Popen(
-        f"meson test -C build_meson/{args.target_platform}", shell=True)
+        f"ninja -C build_meson/{args.target_platform} test", shell=True)
     res.wait()
 
-    print("=================================Tests finished==================================")
+    print("=================================Build finished==================================")
     print("Running tests took:", time.time() - start, "seconds")
-    print("log:")
-    print_tools.print_meson(args.target_platform)
