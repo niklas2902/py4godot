@@ -33,6 +33,10 @@ jobs:
         mkdir godot
         mklink opengl32.dll "godot\opengl32.dll"
         mklink libglapi.dll "godot\libglapi.dll"
+    
+    - name: print structure
+      run: |
+         python meson_scripts/print_tools.py
       
     - name: Install dependencies
       run: |
@@ -51,6 +55,7 @@ jobs:
     - name: build
       run: |
          python cmd_test.py --target_platform=windows64 --compiler=clang -run_tests=true -download_godot=true
+         
     - name: print structure
       run: |
          python meson_scripts/print_tools.py
