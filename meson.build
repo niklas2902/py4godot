@@ -1,4 +1,4 @@
-project('tutorial', 'c')
+project('py4godot', 'c')
 
 extra_args = []
 message(meson.get_compiler('c').get_id())
@@ -26,7 +26,7 @@ foreach source : sources
     dependencies:[dep_py], include_directories:internal_inc,name_prefix:'',c_args:extra_args )
 endforeach
 
-test('test_vector3', godot_program, args : ['--path', 'tests/core/vector3'], workdir:meson.source_root(), timeout:300)
-test('test_vector2', godot_program, args : ['--path', 'tests/core/vector2'], workdir:meson.source_root(),  timeout:300)
-test('test_rect2', godot_program, args : ['--path', 'tests/core/rect2'], workdir:meson.source_root(), timeout:300)
+test('test_vector3', godot_program, args : ['--path', 'tests/core/vector3'], workdir:meson.source_root(), timeout:3600)
+test('test_vector2', godot_program, args : ['--path', 'tests/core/vector2'], workdir:meson.source_root(),  timeout:3600)
+test('test_rect2', godot_program, args : ['--path', 'tests/core/rect2'], workdir:meson.source_root(), timeout:3600)
 
