@@ -30,8 +30,8 @@ jobs:
       run: |
         curl.exe -L --output mesa.7z --url https://github.com/pal1000/mesa-dist-win/releases/download/20.3.2/mesa3d-20.3.2-release-msvc.7z
         "C:\Program Files\7-Zip\7z.exe" x mesa.7z
-        mklink opengl32.dll "py4godot\godot\opengl32.dll"
-        mklink libglapi.dll "py4godot\godot\libglapi.dll"
+        mklink opengl32.dll "godot\opengl32.dll"
+        mklink libglapi.dll "godot\libglapi.dll"
       
     - name: Install dependencies
       run: |
