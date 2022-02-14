@@ -26,3 +26,4 @@ py4godot/classes/generated.pyx
 /py4godot/events/*.c
 /tests/core/vector2/addons/
 /godot/
+/tests/core/aabb/addons/
