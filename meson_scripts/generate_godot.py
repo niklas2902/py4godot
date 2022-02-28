@@ -12,7 +12,7 @@ symbol_prefix="godot_"
 {dependencies}
 """
 
-platforms_dict = {"windows64":"Windows.64"}
+platforms_dict = {"windows64":"Windows.64", "windows32":"Windows.32", "linux64":"Linux.64"}
 python_ver = "cpython-3.9.7"
 
 def generate_lib(platform):

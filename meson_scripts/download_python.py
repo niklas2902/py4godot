@@ -71,5 +71,9 @@ def copy_to_build(export_folder, platform):
                  ignore=ignore_patterns("build")) # build and lib are unnecessary
 
 def create_sitecustomization(export_folder, platform):
-    with open(f"python_files/{export_folder}/python/install/Lib/site-packages/sitecustomize.py", "w") as sitecustomize_file:
-        sitecustomize_file.write(sitecustomize_py.replace("{platform}", platform))
+    if "windows" in platform:
+        with open(f"python_files/{export_folder}/python/install/Lib/site-packages/sitecustomize.py", "w") as sitecustomize_file:
+            sitecustomize_file.write(sitecustomize_py.replace("{platform}", platform))
+    elif "linux" in platform:
+        with open(f"python_files/{export_folder}/python/install/lib/python3.9/site-packages.py", "w") as sitecustomize_file:
+            sitecustomize_file.write(sitecustomize_py.replace("{platform}", platform))
