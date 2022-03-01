@@ -1,5 +1,6 @@
 from py4godot.core.plane.Plane cimport Plane
 from py4godot.core.vector3.Vector3 cimport Vector3
+from py4godot.core.string.String cimport String
 from py4godot.core.aabb.aabb_binding cimport *
 from py4godot.godot_bindings.types cimport *
 
@@ -30,7 +31,7 @@ cdef class AABB:
         self.update_event.notify()
 
     def as_string(self):
-        return api_core.godot_aabb_as_string(&self._native)
+        return str(String.new_static(api_core.godot_aabb_as_string(&self._native)))
 
     def get_area(self):
         return api_core.godot_aabb_get_area(&self._native)
@@ -83,7 +84,7 @@ cdef class AABB:
         return api_core.godot_aabb_get_shortest_axis_size(&self._native)
 
     def expand(self, Vector3 to_point):
-        return api_core.godot_aabb_expand(&self._native, &to_point._native)
+        return AABB.new_static(api_core.godot_aabb_expand(&self._native, &to_point._native))
 
     def grow(self, godot_real by):
         return AABB. new_static(api_core.godot_aabb_grow(&self._native, by))
@@ -93,3 +94,6 @@ cdef class AABB:
 
     def __eq__(self, AABB other):
         return api_core.godot_aabb_operator_equal(&self._native, &other._native)
+
+    def __str__(self):
+        return self.as_string()
