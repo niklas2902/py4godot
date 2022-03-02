@@ -106,7 +106,7 @@ print("Build took:", time.time() - start, "seconds")
 
 if should_download_godot:
     print("=================================Start download==================================")
-    download_godot.run()
+    download_godot.run(current_platform)
     print("=================================Fnish download==================================")
 
 # running tests

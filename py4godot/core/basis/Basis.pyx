@@ -18,31 +18,34 @@ cdef class Basis:
     def new_with_rows(Vector3 x_axis, Vector3 y_axis, Vector3 z_axis):
         cdef Basis b = Basis.__new__(Basis)
         api_core.godot_basis_new_with_rows(&b._native, &x_axis._native, &y_axis._native, &z_axis._native)
+        b.update_event = UpdateEvent()
         return b
 
     @staticmethod
     def new_with_axis_and_angle(Vector3 axis, godot_real p_phi):
         cdef Basis b = Basis.__new__(Basis)
         api_core.godot_basis_new_with_axis_and_angle(&b._native, &axis._native, p_phi)
+        b.update_event = UpdateEvent()
         return b
 
     @staticmethod
     def new_with_euler(Basis dest, Vector3 euler):
         cdef Basis b = Basis.__new__(Basis)
         api_core.godot_basis_new_with_euler(&b._native, &euler._native)
+        b.update_event = UpdateEvent()
         return b
 
     def as_string(self):
-        return api_core.godot_basis_as_string(&self._native)
+        return str(String.new_static(api_core.godot_basis_as_string(&self._native)))
 
     def inverse(self):
-        return String. new_static(api_core.godot_basis_as_string(&self._native))
+        return Basis. new_static(api_core.godot_basis_inverse(&self._native))
 
     def transposed(self):
         return Basis. new_static(api_core.godot_basis_transposed(&self._native))
 
     def orthonormalized(self):
-        return Basis. new_static(api_core.godot_basis_transposed(&self._native))
+        return Basis. new_static(api_core.godot_basis_orthonormalized(&self._native))
 
     def determinant(self):
         return api_core.godot_basis_determinant(&self._native)
@@ -51,7 +54,7 @@ cdef class Basis:
         return Basis. new_static(api_core.godot_basis_rotated(&self._native, &axis._native, phi))
 
     def scaled(self, Vector3 scale):
-        return Basis(api_core.godot_basis_scaled(&self._native, &scale._native))
+        return Basis.new_static(api_core.godot_basis_scaled(&self._native, &scale._native))
 
     def get_scale(self):
         return Vector3. new_static(api_core.godot_basis_get_scale(&self._native))
@@ -111,3 +114,6 @@ cdef class Basis:
 
     def multiply_scalar(self, godot_real value):
         return Basis. new_static(api_core.godot_basis_operator_multiply_scalar(&self._native, value))
+
+    def __str__(self):
+        return self.as_string()

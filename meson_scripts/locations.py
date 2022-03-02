@@ -8,3 +8,5 @@ def get_python_dir(platform):
 def get_godot_dir(platform):
     if "windows" in platform:
         return (os.getcwd()+f"/godot/Godot_v3.4.2-stable_win64.exe")
+    elif "linux" in platform:
+        return (os.getcwd()+f"/godot/Godot_v3.4.3-stable_x11.64")

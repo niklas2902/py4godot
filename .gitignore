@@ -28,3 +28,4 @@ py4godot/classes/generated.pyx
 /godot/
 /tests/core/aabb/addons/
 /logs/
+/tests/core/basis/addons/
