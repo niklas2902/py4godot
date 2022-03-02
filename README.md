@@ -9,7 +9,7 @@ You need a Python 3 version of at least 3.6 with pip installed.
 
 ### Windows
 Unfortunately windows is currently the only platform, where building is possible. I'm currently working on building for linux
-####Setting up a virtual environment (optional)
+#### Setting up a virtual environment (optional)
 As this project depends on some modules which are downloaded by pip, if you don't want to mess with your packages, you should set up a virtual enviroment.
 The following should be executed after cloning the repo
 ```console
@@ -22,7 +22,7 @@ pip install -r requirements.txt #load dependencies from the textfile requirement
 python build.py --target_platform=windows64 --compiler=clang 
 ```
 
-##Example Code
+## Example Code
 Here you can see a basic example of how this project can be used
 ```python
 from py4godot import *
