@@ -138,7 +138,7 @@ void GDN_EXPORT godot_gdnative_init(godot_gdnative_init_options *p_options) {
 		};
 	};
     Py_SetProgramName(L"godot");
-    Py_SetPythonHome(PYTHONHOME);
+    Py_SetPythonHome('PYTHONHOME');
     // Initialize interpreter but skip initialization registration of signal handlers
     Py_InitializeEx(0);
     // PyEval_InitThreads acquires the GIL, so we must release it later.

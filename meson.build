@@ -1,5 +1,9 @@
 project('py4godot', 'c')
 
+cc = meson.get_compiler('c')
+message(meson.current_source_dir())
+lib_py = cc.find_library('python3.9', dirs:meson.current_source_dir()+'/python_files/cpython-3.9.7-linux64/python/install/lib')
+pkg = import('pkgconfig')
 extra_args = []
 message(meson.get_compiler('c').get_id())
 
@@ -10,12 +14,13 @@ endif
 message(meson.current_source_dir())
 
 py = import('python').find_installation('python3')
-dep_py = py.dependency()
+#dep_py = dependency('python3')
+import('pkgconfig')
 
 internal_inc = include_directories('py4godot/godot-headers', 'py4godot/core', 'py4godot/enums',
-'py4godot/classes', 'py4godot/pluginscript_api', 'py4godot/godot_bindings')
+'py4godot/classes', 'py4godot/pluginscript_api', 'py4godot/godot_bindings', 'python_files/cpython-3.9.7-linux64/python/install/include/python3.9')
 
-glob = run_command('python', files(meson.current_source_dir()+'/meson_scripts/glob_tools.py'))
+glob = run_command('python3', files(meson.current_source_dir()+'/meson_scripts/glob_tools.py'))
 godot_program = find_program('godot')
 
 sources = glob.stdout().strip().split('\n')
@@ -23,7 +28,7 @@ message(sources)
 
 foreach source : sources
     shared_library(source, source+'.c',
-    dependencies:[dep_py], include_directories:internal_inc,name_prefix:'',c_args:extra_args )
+    dependencies:[lib_py], include_directories:internal_inc,name_prefix:'',c_args:extra_args )
 endforeach
 
 test('test_vector3', godot_program, args : ['--path', 'tests/core/vector3', '--no-window'], workdir:meson.source_root(), timeout:60, is_parallel:false)
