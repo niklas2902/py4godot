@@ -4,6 +4,10 @@ import glob
 
 """This file is for copying the generated so/dll files from ninja/meson into the build folder"""
 
+def strip_platform(text):
+    print("strip_text:",text)
+    text = text[1:]
+    return text.lstrip("linux64").lstrip("windows64").lstrip("windows").lstrip("linux")
 
 def run(platform):
     # copying all the files from build to the folder of the addon
@@ -16,13 +20,12 @@ def run(platform):
     print("------------------------------------------copy------------------------------------------------\n")
     print(list_dll)
     for entry in list_dll:
+        entry = entry.lstrip("/")
         if entry.startswith("build_meson"):
-            print(os.path.dirname(f"build/addons/{platform}" + entry.lstrip("build_meson").lstrip("\\linux").
-                                  lstrip("\\windows64")))
-            os.makedirs(os.path.dirname(f"build/addons/{platform}/" + (entry.lstrip("build_meson").lstrip("\\linux")
-                                                                       .lstrip("\\windows64"))), exist_ok=True)
-            copy(entry, f"build/addons/{platform}/" + (entry.lstrip("build_meson").lstrip("\\linux").
-                                                       lstrip("\\windows64")).
+            print(os.path.dirname(f"build/addons/{platform}" + strip_platform(entry.lstrip("build_meson"))))
+            os.makedirs(os.path.dirname(f"build/addons/{platform}/" + strip_platform(entry.lstrip("build_meson"))),
+                        exist_ok=True)
+            copy(entry, f"build/addons/{platform}/" + strip_platform(entry.lstrip("build_meson")).
                  replace(".dll", ".pyd"))  # dst can be a folder; use copy2() to preserve timestamp
 
 

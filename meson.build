@@ -1,8 +1,20 @@
 project('py4godot', 'c')
 
 cc = meson.get_compiler('c')
-message(meson.current_source_dir())
-lib_py = cc.find_library('python3.9', dirs:meson.current_source_dir()+'/python_files/cpython-3.9.7-linux64/python/install/lib')
+#message(current_platform)
+message('system:'+build_machine.system())
+message(build_machine.cpu_family())
+platform_format = ''
+machine = build_machine.system()
+if build_machine.cpu_family()=='x86_64'
+    message('strip')
+    platform_format='64'
+endif
+
+message('platform:'+platform_format)
+message('machine:'+machine)
+
+lib_py = cc.find_library('python3.9', dirs:meson.current_source_dir()+'/python_files/cpython-3.9.7-'+machine+platform_format+'/python/install/lib')
 pkg = import('pkgconfig')
 extra_args = []
 message(meson.get_compiler('c').get_id())

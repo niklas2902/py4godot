@@ -17,7 +17,10 @@ python_ver = "cpython-3.9.7"
 
 def generate_lib(platform):
     dependencies = f"{platforms_dict[platform]}=[ ]"
-    entries = f'{platforms_dict[platform]}="res://addons/{platform}/{python_ver}-{platform}/python/install/main.pyd"'
+    if "windows" in platform:
+        entries = f'{platforms_dict[platform]}="res://addons/{platform}/{python_ver}-{platform}/python/install/main.pyd"'
+    elif "linux" in platform:
+        entries = f'{platforms_dict[platform]}="res://addons/{platform}/{python_ver}-{platform}/python/install/main.so"'
     with open("build/py4godot.gdnlib", "w") as lib_file:
         lib_file.write(lib_file_template.replace("{entries}", entries).replace("{dependencies}", dependencies))
 def generate_gdignore():
