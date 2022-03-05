@@ -2,6 +2,7 @@ import wget
 import zipfile
 import glob
 import os
+import stat
 
 
 url = 'https://github.com/godotengine/godot/releases/download/3.4.2-stable/Godot_v3.4.2-stable_win64.exe.zip'
@@ -16,6 +17,12 @@ def run(platform):
     wget.download(url, download_dir) # download .zip file
     with zipfile.ZipFile(download_dir, 'r') as zip_ref:
         zip_ref.extractall(dir_zipfile_extract_to)
+    
+    if("linux" in platform):
+        for entry in glob.glob("godot/*"):
+            st = os.stat(entry)
+            os.chmod(entry, st.st_mode|stat.S_IEXEC)
+        
 
 
 

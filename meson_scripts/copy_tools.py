@@ -37,7 +37,7 @@ def copy_main(platform):
              f"build/addons/{platform}/cpython-3.9.7-{platform}/python/install/main.pyd")
     elif "linux" in platform:
         copy(f"build/addons/{platform}/py4godot/godot_bindings/main.so",
-             f"build/addons/{platform}/cpython-3.9.7-{platform}/python/install/lib/main.so")
+             f"build/addons/{platform}/cpython-3.9.7-{platform}/main.so")
 
 
 def copy_tests(platform):

@@ -75,5 +75,5 @@ def create_sitecustomization(export_folder, platform):
         with open(f"python_files/{export_folder}/python/install/Lib/site-packages/sitecustomize.py", "w") as sitecustomize_file:
             sitecustomize_file.write(sitecustomize_py.replace("{platform}", platform))
     elif "linux" in platform:
-        with open(f"python_files/{export_folder}/python/install/lib/python3.9/site-packages.py", "w") as sitecustomize_file:
+        with open(f"python_files/{export_folder}/python/install/lib/python3.9/site-packages/sitecustomize.py", "w") as sitecustomize_file:
             sitecustomize_file.write(sitecustomize_py.replace("{platform}", platform))
