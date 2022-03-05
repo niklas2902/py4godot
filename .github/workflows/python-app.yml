@@ -91,7 +91,7 @@ jobs:
     strategy:
       matrix:
         include:
-          - PLATFORM: 'linux-64'
+          - PLATFORM: 'linux64'
             PYTHON_ARCH: 'x64'
             VS_ARCH: 'amd64'
 
