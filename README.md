@@ -5,10 +5,10 @@ This project is currently in an early phase of development. Consider this more a
 ## Prerequesits
 You need a Python 3 version of at least 3.6 with pip installed.
 
-## How to install
+## How to build
 
 ### Windows
-Unfortunately windows is currently the only platform, where building is possible. I'm currently working on building for linux
+
 #### Setting up a virtual environment (optional)
 As this project depends on some modules which are downloaded by pip, if you don't want to mess with your packages, you should set up a virtual enviroment.
 The following should be executed after cloning the repo
@@ -20,6 +20,20 @@ python -m venv virtual_python #creating the folder with the virtual environemnt
 ```console
 pip install -r requirements.txt #load dependencies from the textfile requirements.txt
 python build.py --target_platform=windows64 --compiler=clang 
+```
+
+###Linux
+Building for linux was testet on Ubuntu 20.04.4 LTS
+#### Setting up a virtual environment (
+The following should be executed after cloning the repo
+```console
+python3 -m venv virtual_python #creating the folder with the virtual environemnt
+.\virtual_python\Scripts\activate #starting the virtual enviromnent 
+```
+#### Compile project
+```console
+pip3 install -r requirements.txt #load dependencies from the textfile requirements.txt
+python3 build.py --target_platform=linux64 --compiler=clang 
 ```
 
 ## Example Code
