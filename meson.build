@@ -23,7 +23,7 @@ message(meson.current_source_dir())
 
 if build_machine.system() == 'windows'
     py = import('python').find_installation('python3')
-    dep_py = dependency('python3')
+    dep_py = py.dependency()
     internal_inc = include_directories('py4godot/godot-headers', 'py4godot/core', 'py4godot/enums',
     'py4godot/classes', 'py4godot/pluginscript_api', 'py4godot/godot_bindings',)
     glob = run_command('python', files(meson.current_source_dir()+'/meson_scripts/glob_tools.py'))
