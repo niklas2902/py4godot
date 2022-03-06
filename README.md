@@ -24,7 +24,7 @@ python build.py --target_platform=windows64 --compiler=clang
 
 ### Linux
 Building for linux was testet on Ubuntu 20.04.4 LTS
-#### Setting up a virtual environment (
+#### Setting up a virtual environment (optional)
 The following should be executed after cloning the repo
 ```console
 python3 -m venv virtual_python #creating the folder with the virtual environemnt
