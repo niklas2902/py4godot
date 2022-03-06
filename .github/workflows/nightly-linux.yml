@@ -37,8 +37,6 @@ jobs:
             VS_ARCH: 'amd64'
 
     steps:
-    - env:
-          "DISPLAY" : ":0" 
     - uses: actions/checkout@v2
     - name: Set up Python 3.8.8
       uses: actions/setup-python@v2
@@ -50,8 +48,9 @@ jobs:
       run: |
         options: --user root
         sudo apt-get install libglu1-mesa-dev freeglut3-dev mesa-common-dev
-        apt -y -o Acquire::ForceIPv4=true update && apt -y -o Acquire::ForceIPv4=true install xvfb libxcursor-dev libxinerama1 libxrandr2 libxi6 libasound2 libpulse0 libgl1-mesa-glx
-        xvfb-run -a -n 55 -s "-screen 0 1400x900x24 -ac +extension GLX +render -noreset" ./i-like-walls.x86_64
+        sudo apt-get install -y xvfb libxkbcommon-x11-0 libxcb-icccm4 libxcb-image0 libxcb-keysyms1 libxcb-randr0 libxcb-render-util0 libxcb-xinerama0 libxcb-xinput0 libxcb-xfixes0
+        # start xvfb in the background
+        sudo /usr/bin/Xvfb $DISPLAY -screen 0 1280x1024x24 &
     
     - name: print structure
       run: |
