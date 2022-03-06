@@ -35,9 +35,7 @@ jobs:
           - PLATFORM: 'linux64'
             PYTHON_ARCH: 'x64'
             VS_ARCH: 'amd64'
-    env:
-      DISPLAY: :0
-
+            
     steps:
     - uses: actions/checkout@v2
     - name: Set up Python 3.8.8
@@ -70,7 +68,7 @@ jobs:
         flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
     - name: build
       run: |
-         sudo /usr/bin/Xvfb $DISPLAY -screen 0 1280x1024x24 &
+         xvfb-run --auto-servernum &
          python3 build.py --target_platform=linux64 --compiler=clang -run_tests=true -download_godot=true
          
     - name: print structure
@@ -78,6 +76,6 @@ jobs:
          python3 meson_scripts/print_tools.py
     - name: test
       run: |
-         sudo /usr/bin/Xvfb $DISPLAY -screen 0 1280x1024x24 &
+         xvfb-run --auto-servernum &
          meson test -C build_meson/linux64
          
