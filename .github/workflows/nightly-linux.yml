@@ -68,14 +68,12 @@ jobs:
         flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
     - name: build
       run: |
-         xvfb-run --auto-servernum &
-         python3 build.py --target_platform=linux64 --compiler=clang -run_tests=true -download_godot=true
+         xvfb-run --auto-servernum python3 build.py --target_platform=linux64 --compiler=clang -run_tests=true -download_godot=true
          
     - name: print structure
       run: |
          python3 meson_scripts/print_tools.py
     - name: test
       run: |
-         xvfb-run --auto-servernum &
-         meson test -C build_meson/linux64
+         xvfb-run --auto-servernum meson test -C build_meson/linux64
          
