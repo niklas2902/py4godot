@@ -46,8 +46,8 @@ jobs:
     - name: Install Mesa
       run: |
         sudo apt-get install libglu1-mesa-dev freeglut3-dev mesa-common-dev
-        sudo apt -y -o Acquire::ForceIPv4=true update && apt -y -o Acquire::ForceIPv4=true install xvfb libxcursor-dev libxinerama1 libxrandr2 libxi6 libasound2 libpulse0 libgl1-mesa-glx
-        sudo xvfb-run -a -n 55 -s "-screen 0 1400x900x24 -ac +extension GLX +render -noreset" ./i-like-walls.x86_64
+        root apt -y -o Acquire::ForceIPv4=true update && apt -y -o Acquire::ForceIPv4=true install xvfb libxcursor-dev libxinerama1 libxrandr2 libxi6 libasound2 libpulse0 libgl1-mesa-glx
+        root xvfb-run -a -n 55 -s "-screen 0 1400x900x24 -ac +extension GLX +render -noreset" ./i-like-walls.x86_64
     
     - name: print structure
       run: |
