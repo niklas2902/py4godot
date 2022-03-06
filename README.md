@@ -11,29 +11,29 @@ You need a Python 3 version of at least 3.6 with pip installed.
 
 #### Setting up a virtual environment (optional)
 As this project depends on some modules which are downloaded by pip, if you don't want to mess with your packages, you should set up a virtual enviroment.
-The following should be executed after cloning the repo
+The following code should be executed after cloning the repo
 ```console
-python -m venv virtual_python #creating the folder with the virtual environemnt
-.\virtual_python\Scripts\activate #starting the virtual enviromnent 
+$ python -m venv virtual_python #creating the folder with the virtual environemnt
+$ .\virtual_python\Scripts\activate #starting the virtual enviromnent 
 ```
 #### Compile project
 ```console
-pip install -r requirements.txt #load dependencies from the textfile requirements.txt
-python build.py --target_platform=windows64 --compiler=clang 
+$ pip install -r requirements.txt #load dependencies from the textfile requirements.txt
+$ python build.py --target_platform=windows64 --compiler=clang 
 ```
 
 ### Linux
 Building for linux was testet on Ubuntu 20.04.4 LTS
 #### Setting up a virtual environment (optional)
-The following should be executed after cloning the repo
+The following code should be executed after cloning the repo
 ```console
-python3 -m venv virtual_python #creating the folder with the virtual environemnt
-.\virtual_python\Scripts\activate #starting the virtual enviromnent 
+$ python3 -m venv virtual_python #creating the folder with the virtual environemnt
+$ .\virtual_python\Scripts\activate #starting the virtual enviromnent 
 ```
 #### Compile project
 ```console
-pip3 install -r requirements.txt #load dependencies from the textfile requirements.txt
-python3 build.py --target_platform=linux64 --compiler=clang 
+$ pip3 install -r requirements.txt #load dependencies from the textfile requirements.txt
+$ python3 build.py --target_platform=linux64 --compiler=clang 
 ```
 
 ## Example Code
