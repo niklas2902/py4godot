@@ -22,7 +22,7 @@ pip install -r requirements.txt #load dependencies from the textfile requirement
 python build.py --target_platform=windows64 --compiler=clang 
 ```
 
-###Linux
+### Linux
 Building for linux was testet on Ubuntu 20.04.4 LTS
 #### Setting up a virtual environment (
 The following should be executed after cloning the repo
