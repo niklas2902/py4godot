@@ -71,7 +71,6 @@ jobs:
         flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
     - name: build
       run: |
-         sudo /usr/bin/Xvfb $DISPLAY -screen 0 1280x1024x24 &
          python3 build.py --target_platform=linux64 --compiler=clang -run_tests=true -download_godot=true
          
     - name: print structure
@@ -79,6 +78,5 @@ jobs:
          python3 meson_scripts/print_tools.py
     - name: test
       run: |
-        sudo /usr/bin/Xvfb $DISPLAY -screen 0 1280x1024x24 &
         meson test -C build_meson/linux64
          
