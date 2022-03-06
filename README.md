@@ -5,21 +5,35 @@ This project is currently in an early phase of development. Consider this more a
 ## Prerequesits
 You need a Python 3 version of at least 3.6 with pip installed.
 
-## How to install
+## How to build
 
 ### Windows
-Unfortunately windows is currently the only platform, where building is possible. I'm currently working on building for linux
+
 #### Setting up a virtual environment (optional)
 As this project depends on some modules which are downloaded by pip, if you don't want to mess with your packages, you should set up a virtual enviroment.
-The following should be executed after cloning the repo
+The following code should be executed after cloning the repo
 ```console
-python -m venv virtual_python #creating the folder with the virtual environemnt
-.\virtual_python\Scripts\activate #starting the virtual enviromnent 
+$ python -m venv virtual_python #creating the folder with the virtual environemnt
+$ .\virtual_python\Scripts\activate #starting the virtual enviromnent 
 ```
 #### Compile project
 ```console
-pip install -r requirements.txt #load dependencies from the textfile requirements.txt
-python build.py --target_platform=windows64 --compiler=clang 
+$ pip install -r requirements.txt #load dependencies from the textfile requirements.txt
+$ python build.py --target_platform=windows64 --compiler=clang 
+```
+
+### Linux
+Building for linux was testet on Ubuntu 20.04.4 LTS
+#### Setting up a virtual environment (optional)
+The following code should be executed after cloning the repo
+```console
+$ python3 -m venv virtual_python #creating the folder with the virtual environemnt
+$ .\virtual_python\Scripts\activate #starting the virtual enviromnent 
+```
+#### Compile project
+```console
+$ pip3 install -r requirements.txt #load dependencies from the textfile requirements.txt
+$ python3 build.py --target_platform=linux64 --compiler=clang 
 ```
 
 ## Example Code
@@ -31,13 +45,14 @@ DEFAULT_VEL = 5
 @gdclass
 class TestRunner(Spatial):
 	register_signal("test") #declaring the signals which could later be used
-		
+	
+	# expose godot-specific methods.
 	@gdmethod
 	def _ready(self):
 		self.velocity = DEFAULT_VEL
 		self.emit_signal(String("test"), "hallo")
 		
-	
+	# creating a property which can be edited in the editor. Hint and hint_string are optional 
 	@gdproperty(int, DEFAULT_VEL, hint=PropertyHint.GODOT_PROPERTY_HINT_RANGE.value,
 	 hint_string="1,100,5,slider")
 	def vel(self):
