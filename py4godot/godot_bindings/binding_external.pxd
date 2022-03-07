@@ -4,7 +4,7 @@ from cpython.ref cimport PyObject
 
 cdef extern from "Python.h":
     cdef PyObject* PyUnicode_FromWideChar(const wchar_t *w, Py_ssize_t size);
-    cdef wchar_t* PyUnicode_AsWideCharString(object, Py_ssize_t *)
+    cdef wchar_t* PyUnicode_AsWideCharString(object, Py_ssize_t *) except NULL
 
 
 cdef extern from "binding.h":
