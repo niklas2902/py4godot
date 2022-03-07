@@ -30,10 +30,14 @@ cdef class Basis:
 
     @staticmethod
     def new_with_euler(Basis dest, Vector3 euler):
-        cdef Basis b = Basis.__new__(Basis)
-        api_core.godot_basis_new_with_euler(&b._native, &euler._native)
-        b.update_event = UpdateEvent()
-        return b
+        api_core.godot_basis_new_with_euler(&dest._native, &euler._native)
+        dest.update_event = UpdateEvent()
+        return dest
+
+    @staticmethod
+    def new_with_euler_quat(Basis r_dest, Quat euler):
+        api_core.godot_basis_new_with_euler_quat(&r_dest._native, &euler._native)
+        return r_dest
 
     def as_string(self):
         return str(String.new_static(api_core.godot_basis_as_string(&self._native)))
@@ -80,9 +84,6 @@ cdef class Basis:
     def get_orthogonal_index(self):
         return api_core.godot_basis_get_orthogonal_index(&self._native)
 
-    def new_with_euler_quat(self, Basis r_dest, Quat euler):
-        api_core.godot_basis_new_with_euler_quat(&r_dest._native, &euler._native)
-
     def get_elements(self, Vector3 elements):
         api_core.godot_basis_get_elements(&self._native, &elements._native)
 
@@ -106,8 +107,22 @@ cdef class Basis:
     def add(self, Basis other):
         return Basis. new_static(api_core.godot_basis_operator_add(&self._native, &other._native))
 
+    def __add__(self, Basis other):
+        return self.add(other)
+
     def sub(self, Basis other):
         return Basis. new_static(api_core.godot_basis_operator_subtract(&self._native, &other._native))
+
+    def __sub__(self, Basis other):
+        return self.sub(other)
+
+    def __mul__(self, other):
+        if(isinstance(other,Basis)):
+            return self.multiply_vector(other)
+        elif (isinstance(other,float) or isinstance(other,int)):
+            return self.multiply_scalar(other)
+        #TODO: Exception not supported
+        raise Exception(f"multiplication for type {type(other)} not supported")
 
     def multiply_vector(self, Basis other):
         return Basis. new_static(api_core.godot_basis_operator_multiply_vector(&self._native, &other._native))
