@@ -4,7 +4,7 @@ from py4godot.godot_bindings.types cimport *
 
 cdef extern from "Python.h":
     cdef PyObject* PyUnicode_FromWideChar(const wchar_t *w, Py_ssize_t size);
-    cdef wchar_t* PyUnicode_AsWideCharString(object, Py_ssize_t *)
+    cdef wchar_t* PyUnicode_AsWideCharString(object, Py_ssize_t *) except NULL
     cdef  PyObject* PyObject_Str(PyObject *o);
 
 cdef extern from "binding.h":
