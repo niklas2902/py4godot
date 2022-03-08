@@ -29,3 +29,5 @@ py4godot/classes/generated.pyx
 /tests/core/aabb/addons/
 /logs/
 /tests/core/basis/addons/
+/tests/core/array/addons/
+/tests/core/rect2/addons/

@@ -59,4 +59,5 @@ test('test_vector2', godot_program, args : ['--path', 'tests/core/vector2', '--n
 test('test_rect2', godot_program, args : ['--path', 'tests/core/rect2', '--no-window'], workdir:meson.source_root(), timeout:60, is_parallel:false)
 test('test_aabb', godot_program, args : ['--path', 'tests/core/aabb', '--no-window'], workdir:meson.source_root(), timeout:60, is_parallel:false)
 test('test_basis', godot_program, args : ['--path', 'tests/core/basis', '--no-window'], workdir:meson.source_root(), timeout:60, is_parallel:false)
+test('test_array', godot_program, args : ['--path', 'tests/core/basis', '--no-window'], workdir:meson.source_root(), timeout:60, is_parallel:false)
 

@@ -86,6 +86,8 @@ cdef class Array:
 
     def sort(self):
         api_core.godot_array_sort(&self._native)
+
+    #TODO: is there any possibility to implement this?
     """
     def sort_custom(self, godot_object * p_obj, godot_string * func):
         api_core.godot_array_sort_custom(&self._native, p_obj, func)
