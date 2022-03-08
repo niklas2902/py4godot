@@ -115,7 +115,15 @@ void set_up_pluginscript();
 // information we may find useful among which the pointers to our API structures.
 void GDN_EXPORT godot_gdnative_init(godot_gdnative_init_options *p_options) {
 	api_core = p_options->api_struct;
-	printf("godot_python version 0.1\n");
+	printf(
+    "              _  _                   _       _     \n"
+    "  _ __  _   _| || |   __ _  ___   __| | ___ | |_   \n"
+    " | '_ \\| | | | || |_ / _` |/ _ \\ / _` |/ _ \\| __|  \n"
+    " | |_) | |_| |__   _| (_| | (_) | (_| | (_) | |_   \n"
+    " | .__/ \\__, |  |_|  \\__, |\\___/ \\__,_|\\___/ \\__|  \n"
+    " |_|    |___/        |___/                         \n"
+    );
+    printf("py4godot - version 0.1\n");
 
 	// Find NativeScript extensions.
 	for (unsigned int i = 0; i < api_core->num_extensions; i++) {
