@@ -1,3 +1,4 @@
+from py4godot.core.string.String cimport String
 from py4godot.core.color.Color cimport *
 
 cdef api set_api_core_color(godot_gdnative_core_api_struct * core):
@@ -14,12 +15,14 @@ cdef class Color:
     def new_rgba(godot_real red, godot_real green, godot_real blue, godot_real alpha):
         cdef Color c = Color.__new__(Color)
         api_core.godot_color_new_rgba(&c._native, red, green, blue, alpha)
+        c.update_event = UpdateEvent()
         return c
 
     @staticmethod
     def new_rgb(godot_real red, godot_real green, godot_real blue):
         cdef Color c = Color.__new__(Color)
         api_core.godot_color_new_rgb(&c._native, red, green, blue)
+        c.update_event = UpdateEvent()
         return c
 
     def get_red(self):
@@ -62,7 +65,7 @@ cdef class Color:
         return api_core.godot_color_get_v(&self._native)
 
     def __str__(self):
-        return api_core.godot_color_as_string(&self._native)
+        return str(String.new_static(api_core.godot_color_as_string(&self._native)))
 
     def to_rgba32(self):
         return api_core.godot_color_to_rgba32(&self._native)
@@ -74,19 +77,19 @@ cdef class Color:
         return api_core.godot_color_gray(&self._native)
 
     def inverted(self):
-        return Color(api_core.godot_color_inverted(&self._native))
+        return Color.new_static(api_core.godot_color_inverted(&self._native))
 
     def contrasted(self):
-        return Color(api_core.godot_color_contrasted(&self._native))
+        return Color.new_static(api_core.godot_color_contrasted(&self._native))
 
     def linear_interpolate(self, Color b, godot_real t):
-        return Color(api_core.godot_color_linear_interpolate(&self._native, &b._native, t))
+        return Color.new_static(api_core.godot_color_linear_interpolate(&self._native, &b._native, t))
 
     def blend(self, Color over):
-        return Color(api_core.godot_color_blend(&self._native, &over._native))
+        return Color.new_static(api_core.godot_color_blend(&self._native, &over._native))
 
     def to_html(self, godot_bool with_alpha):
-        return api_core.godot_color_to_html(&self._native, with_alpha)
+        return str(String.new_static(api_core.godot_color_to_html(&self._native, with_alpha)))
 
     def __eq__(self, Color other):
         return api_core.godot_color_operator_equal(&self._native, &other._native)

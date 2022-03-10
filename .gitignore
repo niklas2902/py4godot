@@ -31,3 +31,7 @@ py4godot/classes/generated.pyx
 /tests/core/basis/addons/
 /tests/core/array/addons/
 /tests/core/rect2/addons/
+/tests/core/color/addons/
+/tests/core/rid/addons/
+/tests/core/quat/addons/
+/tests/core/node_path/addons/

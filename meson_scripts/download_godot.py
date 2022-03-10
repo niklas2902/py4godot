@@ -15,6 +15,7 @@ def run(platform):
     if os.path.exists(download_dir):
         os.remove(download_dir)
     wget.download(url, download_dir) # download .zip file
+    print()
     with zipfile.ZipFile(download_dir, 'r') as zip_ref:
         zip_ref.extractall(dir_zipfile_extract_to)
     
@@ -22,9 +23,6 @@ def run(platform):
         for entry in glob.glob("godot/*"):
             st = os.stat(entry)
             os.chmod(entry, st.st_mode|stat.S_IEXEC)
-        
-
-
 
 if __name__ == "__main__":
     run()

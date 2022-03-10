@@ -18,9 +18,6 @@ cdef class Array:
     def get(self, godot_int index):
         return Variant. new_static(api_core.godot_array_get(&self._native, index))
 
-    def __getitem__(self, godot_int index):
-        return Variant. new_static(api_core.godot_array_get(&self._native, index))
-
     def append(self, Variant value):
         api_core.godot_array_append(&self._native, &value._native)
 
@@ -86,6 +83,12 @@ cdef class Array:
 
     def sort(self):
         api_core.godot_array_sort(&self._native)
+
+    def __getitem__(self, godot_int index):
+        return Variant. new_static(api_core.godot_array_get(&self._native, index))
+
+    def __setitem__(self, godot_int index, Variant value):
+        self.set(index, value)
 
     #TODO: is there any possibility to implement this?
     """

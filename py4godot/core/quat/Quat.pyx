@@ -1,4 +1,5 @@
-from py4godot.core.vector3.Vector3 cimport *
+from py4godot.core.vector3.Vector3 cimport Vector3
+from py4godot.core.string.String cimport String
 from py4godot.core.quat.quat_binding cimport *
 
 cdef api set_api_core_quat(godot_gdnative_core_api_struct * core):
@@ -9,10 +10,14 @@ cdef class Quat:
 
     def __init__(self,godot_real x, godot_real y, godot_real z, godot_real w):
             api_core.godot_quat_new(&self._native,x,y,z,w)
-            self.update_events = UpdateEvent()
+            self.update_event = UpdateEvent()
 
-    def new_with_axis_angle(self, Vector3 axis, godot_real angle):
-        api_core.godot_quat_new_with_axis_angle(&self._native, &axis._native, angle)
+    @staticmethod
+    def new_with_axis_angle(Vector3 axis, godot_real angle):
+        cdef Quat quat = Quat.__new__(Quat)
+        quat.update_event = UpdateEvent()
+        api_core.godot_quat_new_with_axis_angle(&quat._native, &axis._native, angle)
+        return quat
 
     def get_x(self):
         return api_core.godot_quat_get_x(&self._native)
@@ -43,7 +48,7 @@ cdef class Quat:
         self.update_event.notify()
 
     def __str__(self):
-        return api_core.godot_quat_as_string(&self._native)
+        return str(String.new_static(api_core.godot_quat_as_string(&self._native)))
 
     def length(self):
         return api_core.godot_quat_length(&self._native)
@@ -73,7 +78,7 @@ cdef class Quat:
         return Quat. new_static(api_core.godot_quat_slerpni(&self._native, &b._native, t))
 
     def cubic_slerp(self, Quat b, Quat pre_a, Quat post_b, godot_real t):
-        return Quat(api_core.godot_quat_cubic_slerp(&self._native, &b._native, &pre_a._native, &post_b._native, t))
+        return Quat.new_static(api_core.godot_quat_cubic_slerp(&self._native, &b._native, &pre_a._native, &post_b._native, t))
 
     def mult(self, godot_real b):
         return Quat. new_static(api_core.godot_quat_operator_multiply(&self._native, b))
@@ -87,8 +92,26 @@ cdef class Quat:
     def div(self, godot_real b):
         return Quat. new_static(api_core.godot_quat_operator_divide(&self._native, b))
 
-    def eq(self, Quat b):
+    def __add__(self, Quat b):
+        return self.add(b)
+
+    def __sub__(self, Quat b):
+        return self.sub(b)
+
+    def __mul__(self, godot_real b):
+        return self.mult(b)
+
+    def __eq__(self, Quat b):
         return api_core.godot_quat_operator_equal(&self._native, &b._native)
+
+    def __floordiv__(self, other):
+        return self.div(other)
+
+    def __truediv__(self, godot_real other):
+        return self.div(other)
+
+    def __neg__(self):
+        return self.neg()
 
     def neg(self):
         return Quat. new_static(api_core.godot_quat_operator_neg(&self._native))

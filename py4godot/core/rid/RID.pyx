@@ -10,7 +10,7 @@ cdef class RID:
         api_core.godot_rid_new(&self._native)
         self.update_event = UpdateEvent()
 
-    def get_rid(self):
+    def get_id(self):
         return api_core.godot_rid_get_id(&self._native)
 
     def  __eq__(self, RID other):

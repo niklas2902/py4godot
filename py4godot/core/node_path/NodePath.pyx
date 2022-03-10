@@ -7,14 +7,16 @@ cdef api set_api_core_node_path(godot_gdnative_core_api_struct * core):
 
 cdef class NodePath:
 
-    def __init__(self, String path):
-        api_core.godot_node_path_new(&self._native, &path._native)
+    def __init__(self, path = None):
+        print(type(path))
+        api_core.godot_node_path_new(&self._native, &String(path)._native)
         self.update_event = UpdateEvent()
 
     @staticmethod
     def new_copy(NodePath src):
         cdef NodePath node_path = NodePath.__new__(NodePath)
         api_core.godot_node_path_new_copy(&node_path._native, &src._native)
+        node_path.update_event = UpdateEvent()
         return node_path
 
     def destroy(self):
@@ -30,16 +32,16 @@ cdef class NodePath:
         return api_core.godot_node_path_get_name_count(&self._native)
 
     def get_name(self, godot_int idx):
-        return api_core.godot_node_path_get_name(&self._native, idx)
+        return String.new_static(api_core.godot_node_path_get_name(&self._native, idx))
 
     def get_subname_count(self):
         return api_core.godot_node_path_get_subname_count(&self._native)
 
     def get_subname(self, godot_int idx):
-        return api_core.godot_node_path_get_subname(&self._native, idx)
+        return String.new_static(api_core.godot_node_path_get_subname(&self._native, idx))
 
     def get_concatenated_subnames(self):
-        return api_core.godot_node_path_get_concatenated_subnames(&self._native)
+        return String.new_static(api_core.godot_node_path_get_concatenated_subnames(&self._native))
 
     def is_empty(self):
         return api_core.godot_node_path_is_empty(&self._native)

@@ -16,9 +16,10 @@ cdef class Dictionary:
         self.update_event = UpdateEvent()
 
     @staticmethod
-    def new_copy(self, Dictionary src):
+    def new_copy(Dictionary src):
         cdef Dictionary d = Dictionary.__new__(Dictionary)
         api_core.godot_dictionary_new_copy(&d._native, &src._native)
+        d.update_event = UpdateEvent()
         return d
 
     def destroy(self):
@@ -60,7 +61,15 @@ cdef class Dictionary:
     def next_(self, Variant key):
         cdef godot_variant * variant
         variant = (api_core.godot_dictionary_next(&self._native, &key._native))
-        return Variant.new_static(dereference(variant))
+        if variant != NULL :
+            return Variant.new_static(dereference(variant))
+        return None
+
+    def __setitem__(self, Variant key, Variant value):
+        self.set(key, value)
+
+    def __delitem(self, Variant key):
+        self.erase(key)
 
     def __eq__(self, other):
         if(isinstance(other, Dictionary)):

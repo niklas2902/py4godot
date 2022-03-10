@@ -59,5 +59,10 @@ test('test_vector2', godot_program, args : ['--path', 'tests/core/vector2', '--n
 test('test_rect2', godot_program, args : ['--path', 'tests/core/rect2', '--no-window'], workdir:meson.source_root(), timeout:60, is_parallel:false)
 test('test_aabb', godot_program, args : ['--path', 'tests/core/aabb', '--no-window'], workdir:meson.source_root(), timeout:60, is_parallel:false)
 test('test_basis', godot_program, args : ['--path', 'tests/core/basis', '--no-window'], workdir:meson.source_root(), timeout:60, is_parallel:false)
-test('test_array', godot_program, args : ['--path', 'tests/core/basis', '--no-window'], workdir:meson.source_root(), timeout:60, is_parallel:false)
+test('test_array', godot_program, args : ['--path', 'tests/core/array', '--no-window'], workdir:meson.source_root(), timeout:60, is_parallel:false)
+test('test_color', godot_program, args : ['--path', 'tests/core/color', '--no-window'], workdir:meson.source_root(), timeout:60, is_parallel:false)
+test('test_dictionary', godot_program, args : ['--path', 'tests/core/dictionary', '--no-window'], workdir:meson.source_root(), timeout:60, is_parallel:false)
+test('test_node_path', godot_program, args : ['--path', 'tests/core/node_path', '--no-window'], workdir:meson.source_root(), timeout:60, is_parallel:false)
+test('test_rid', godot_program, args : ['--path', 'tests/core/rid', '--no-window'], workdir:meson.source_root(), timeout:60, is_parallel:false)
+test('test_quat', godot_program, args : ['--path', 'tests/core/quat', '--no-window'], workdir:meson.source_root(), timeout:60, is_parallel:false)
 
