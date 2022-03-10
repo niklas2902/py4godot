@@ -15,8 +15,12 @@ cdef class Transform:
         api_core.godot_transform_new(&self._native, &basis._native, &origin._native)
         self.update_event = UpdateEvent()
 
-    def new_with_axis_origin(self, Vector3 x_axis, Vector3 y_axis, Vector3 z_axis, Vector3 origin):
-        api_core.godot_transform_new_with_axis_origin(&self._native, &x_axis._native, &y_axis._native, &z_axis._native, &origin._native)
+    @staticmethod
+    def new_with_axis_origin(Vector3 x_axis, Vector3 y_axis, Vector3 z_axis, Vector3 origin):
+        cdef Transform transform = Transform.__new__(Transform)
+        transform.update_event = UpdateEvent()
+        api_core.godot_transform_new_with_axis_origin(&transform._native, &x_axis._native, &y_axis._native, &z_axis._native, &origin._native)
+        return transform
 
     def get_basis(self):
         return Basis. new_static(api_core.godot_transform_get_basis(&self._native))
@@ -66,13 +70,16 @@ cdef class Transform:
     def __eq__(self, Transform other):
         return api_core.godot_transform_operator_equal(&self._native, &other._native)
 
-    def __mult__(self, Transform b):
+    def mult(self, Transform b):
         return Transform. new_static(api_core.godot_transform_operator_multiply(&self._native, &b._native))
 
-    def transform_xform_vector3(self, Vector3 v):
+    def __mul__(self, Transform b):
+        return self.mult(b)
+
+    def xform_vector3(self, Vector3 v):
         return Vector3. new_static(api_core.godot_transform_xform_vector3(&self._native, &v._native))
 
-    def transform_xform_inv_vector3(self, Vector3 v):
+    def xform_inv_vector3(self, Vector3 v):
         return Vector3. new_static(api_core.godot_transform_xform_inv_vector3(&self._native, &v._native))
 
     def xform_aabb(self, AABB v):

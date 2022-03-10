@@ -1,4 +1,5 @@
 from py4godot.core.vector3.Vector3 cimport *
+from py4godot.core.string.String cimport String
 from py4godot.core.plane.plane_binding cimport *
 
 cdef api set_api_core_plane(godot_gdnative_core_api_struct * core):
@@ -24,7 +25,7 @@ cdef class Plane:
         self.update_event.notify()
 
     def __str__(self):
-        return api_core.godot_plane_as_string(&self._native)
+        return str(String.new_static(api_core.godot_plane_as_string(&self._native)))
 
     def normalized(self):
         Plane. new_static(api_core.godot_plane_normalized(&self._native))

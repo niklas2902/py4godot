@@ -18,6 +18,7 @@ cdef class Transform2D:
     def new_with_axis_origin(self, Vector2 x_axis, Vector2 y_axis, Vector2 origin):
         cdef Transform2D transform = Transform2D.__new__(Transform2D)
         api_core.godot_transform2d_new_axis_origin(&transform._native, &x_axis._native, &y_axis._native, &origin._native)
+        transform.updateEvent = UpdateEvent()
         return transform
 
     def __str__(self):
