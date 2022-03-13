@@ -66,4 +66,4 @@ test('test_node_path', godot_program, args : ['--path', 'tests/core/node_path', 
 test('test_rid', godot_program, args : ['--path', 'tests/core/rid', '--no-window'], workdir:meson.source_root(), timeout:60, is_parallel:false)
 test('test_quat', godot_program, args : ['--path', 'tests/core/quat', '--no-window'], workdir:meson.source_root(), timeout:60, is_parallel:false)
 test('test_transform', godot_program, args : ['--path', 'tests/core/transform', '--no-window'], workdir:meson.source_root(), timeout:60, is_parallel:false)
-
+test('test_transform2d', godot_program, args : ['--path', 'tests/core/transform2d', '--no-window'], workdir:meson.source_root(), timeout:60, is_parallel:false)

@@ -415,6 +415,7 @@ void set_up_pluginscript(){
     set_api_core_string(api_core);
     set_api_core_string_name(api_core);
     set_api_core_transform(api_core);
+    set_api_core_transform2d(api_core);
     set_api_core_vector3(api_core);
     set_api_core_aabb(api_core);
     set_api_core_basis(api_core);
