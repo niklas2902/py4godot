@@ -1,8 +1,9 @@
-from py4godot import *
-import PythonTest
 import unittest
+from py4godot import *
+import TestClass
+import PythonTest
 
-@gclass
+@gdclass
 class TestRunner(Spatial):
 
 	def __init__(self):
@@ -16,5 +17,5 @@ class TestRunner(Spatial):
 			self.get_tree().quit(0)
 		else:
 			self.get_tree().quit(1)
-
+		
 

@@ -101,12 +101,6 @@ static const godot_gdnative_ext_nativescript_api_struct *nativescript_api = NULL
 static const godot_gdnative_ext_nativescript_1_1_api_struct *nativescript_api_11 = NULL;
 static const godot_gdnative_ext_pluginscript_api_struct *gdapi_ext_pluginscript = NULL;
 
-// These are forward declarations for the functions we'll be implementing
-// for our object. A constructor and destructor are both necessary.
-GDCALLINGCONV void *simple_constructor(godot_object *p_instance, void *p_method_data);
-GDCALLINGCONV void simple_destructor(godot_object *p_instance, void *p_method_data, void *p_user_data);
-godot_variant simple_get_data(godot_object *p_instance, void *p_method_data, void *p_user_data, int p_num_args, godot_variant **p_args);
-
 void set_up_bindings();
 void set_up_pluginscript();
 
@@ -173,81 +167,6 @@ void GDN_EXPORT godot_gdnative_terminate(godot_gdnative_terminate_options *p_opt
     PyEval_RestoreThread(gilstate);
 
     int ret = Py_FinalizeEx();
-}
-
-// `nativescript_init` is the most important function. Godot calls
-// this function as part of loading a GDNative library and communicates
-// back to the engine what objects we make available.
-void GDN_EXPORT godot_nativescript_init(void *p_handle) {
-    printf("..................................native_script_init.................................................\n");
-
-
-	godot_instance_create_func create = { NULL, NULL, NULL };
-	create.create_func = &simple_constructor;
-
-	godot_instance_destroy_func destroy = { NULL, NULL, NULL };
-	destroy.destroy_func = &simple_destructor;
-
-	// We first tell the engine which classes are implemented by calling this.
-	// * The first parameter here is the handle pointer given to us.
-	// * The second is the name of our object class.
-	// * The third is the type of object in Godot that we 'inherit' from;
-	//   this is not true inheritance but it's close enough.
-	// * Finally, the fourth and fifth parameters are descriptions
-	//   for our constructor and destructor, respectively.
-	nativescript_api->godot_nativescript_register_class(p_handle, "SIMPLE", "Reference", create, destroy);
-
-	godot_instance_method get_data = { NULL, NULL, NULL };
-	get_data.method = &simple_get_data;
-
-	godot_method_attributes attributes = { GODOT_METHOD_RPC_MODE_DISABLED };
-
-	// We then tell Godot about our methods by calling this for each
-	// method of our class. In our case, this is just `get_data`.
-	// * Our first parameter is yet again our handle pointer.
-	// * The second is again the name of the object class we're registering.
-	// * The third is the name of our function as it will be known to GDScript.
-	// * The fourth is our attributes setting (see godot_method_rpc_mode enum in
-	//   `godot_headers/nativescript/godot_nativescript.h` for possible values).
-	// * The fifth and final parameter is a description of which function
-	//   to call when the method gets called.
-	nativescript_api->godot_nativescript_register_method(p_handle, "SIMPLE", "get_data", attributes, get_data);
-}
-
-
-// In our constructor, allocate memory for our structure and fill
-// it with some data. Note that we use Godot's memory functions
-// so the memory gets tracked and then return the pointer to
-// our new structure. This pointer will act as our instance
-// identifier in case multiple objects are instantiated.
-GDCALLINGCONV void *simple_constructor(godot_object *p_instance, void *p_method_data) {
-	user_data_struct *user_data = api_core->godot_alloc(sizeof(user_data_struct));
-	strcpy(user_data->data, "World from GDNative!");
-
-	return user_data;
-}
-
-// The destructor is called when Godot is done with our
-// object and we free our instances' member data.
-GDCALLINGCONV void simple_destructor(godot_object *p_instance, void *p_method_data, void *p_user_data) {
-	api_core->godot_free(p_user_data);
-}
-
-// Data is always sent and returned as variants so in order to
-// return our data, which is a string, we first need to convert
-// our C string to a Godot string object, and then copy that
-// string object into the variant we are returning.
-godot_variant simple_get_data(godot_object *p_instance, void *p_method_data, void *p_user_data, int p_num_args, godot_variant **p_args) {
-	godot_string data;
-	godot_variant ret;
-	user_data_struct *user_data = (user_data_struct *)p_user_data;
-
-	api_core->godot_string_new(&data);
-	api_core->godot_string_parse_utf8(&data, user_data->data);
-	api_core->godot_variant_new_string(&ret, &data);
-	api_core->godot_string_destroy(&data);
-
-	return ret;
 }
 
 void set_up_bindings(){
@@ -461,14 +380,4 @@ void set_up_pluginscript(){
 
 void hello(const char *name) {
     printf("hello %s\n", name);
-}
-
-
-godot_variant call_method (godot_pluginscript_instance_data *p_data,
-			const godot_string_name *p_method, const godot_variant **p_args,
-			int p_argcount, godot_variant_call_error *r_error){
-    api_core->godot_string_name_get_name(p_method);
-    godot_variant* var;
-    api_core->godot_variant_new_nil(var);
-    return *(var);
 }

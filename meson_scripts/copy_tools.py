@@ -46,3 +46,9 @@ def copy_tests(platform):
         if os.path.exists(f"{core_test}/addons/{platform}"):
             rmtree(f"{core_test}/addons/{platform}")
         copytree(f"build/addons/{platform}", f"{core_test}/addons/{platform}")
+
+    binding_tests = glob.glob("tests/binding/*")
+    for binding_test in binding_tests:
+        if os.path.exists(f"{binding_test}/addons/{platform}"):
+            rmtree(f"{binding_test}/addons/{platform}")
+        copytree(f"build/addons/{platform}", f"{binding_test}/addons/{platform}")

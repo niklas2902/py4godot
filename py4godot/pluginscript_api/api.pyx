@@ -15,7 +15,7 @@ from py4godot.godot_bindings.binding_external cimport *
 from py4godot.enums.enums cimport *
 import traceback
 
-from py4godot.pluginscript_api.utils.annotations import methods, classes_list, properties, reset
+from py4godot.pluginscript_api.utils.annotations import *
 
 """This file contains all the functions, that are needed to crate a pluginscript"""
 cdef godot_dictionary dictionary
@@ -38,55 +38,55 @@ cdef api  godot_pluginscript_script_manifest init_pluginscript_desc (godot_plugi
  const godot_string *p_path, const godot_string *p_source, godot_error *r_error) with gil:
     """Function for creating the manifest. The manifest describes things like the properties oder methods for the class,
     that should be created. If the file does not contain a class or is for example a __init__ file, we just create a empty manifest"""
-    cdef PyObject* class_obj
+    cdef Wrapper gd_classs
     cdef godot_pluginscript_script_manifest manifest;
-    cdef PyObject* obj
 
     if("python/install" in str(String.new_static(dereference(p_path)))):
         create_empty_manifest(&manifest)
         return manifest
-
-    reset()
-
+    result = None
     try:
-        exec(str(String.new_static(dereference(p_source))))
+        result = exec_class(str(String.new_static(dereference(p_source))))
     except Exception as e:
-        print("An Error occured while parsing:\n")
         traceback.print_exc()
-
-    if(len(classes_list) > 0):
+    if(result != None and result.gd_class != None):
         #creating a valid manifest
-        gd_obj = classes_list[0]
+        gd_obj = result.gd_class
         api_core.godot_string_name_new_data(&manifest.name, "python_manifest");
         manifest.is_tool = False;
         api_core.godot_string_name_new_data(&manifest.base, "");
         api_core.godot_dictionary_new(&manifest.member_lines);
 
-        class_obj = <PyObject*> gd_obj
+        gd_classs = <Wrapper> gd_obj
 
         properties_array = Array()
         methods_array = Array()
         signals_array = Array()
-        for p in properties:
+        for p in result.properties:
             properties_array.append(Variant(p.to_dict()))
-        for m in methods:
+        for m in result.methods:
             methods_array.append(Variant(m.to_dict()))
-        for signal in signals:
+        for signal in result.signals:
             signals_array.append(Variant(signal.to_dict()))
 
         manifest.properties = properties_array._native
         manifest.methods = methods_array._native
         manifest.signals = signals_array._native
 
-        (<Wrapper>class_obj).PROPERTIES = [p.name for p in properties]
-        manifest.data = class_obj#The data contains the class, we want later instantiate in method init_pluginscript_instance
+        (<Wrapper>gd_classs).PROPERTIES = [p.name for p in result.properties]
+        Py_INCREF(gd_classs)
+        manifest.data = <PyObject*>gd_classs #The data contains the class, we want later instantiate in method init_pluginscript_instance
+
     else:
         create_empty_manifest(&manifest)
-    reset()
     return manifest;
 
 cdef api  void finish_pluginscript_desc (godot_pluginscript_script_data *p_data) with gil:
     """empty placeholder function, as this is necessary to implement"""
+    cdef Wrapper wrapper
+    if(p_data != NULL):
+        wrapper = <Wrapper?> p_data
+        Py_DECREF(wrapper)
 
 
 
@@ -94,14 +94,14 @@ cdef api  void finish_pluginscript_desc (godot_pluginscript_script_data *p_data)
 cdef api godot_pluginscript_instance_data * init_pluginscript_instance(godot_pluginscript_script_data *p_data,
  godot_object *p_owner) with gil:
     """Here we are instanciating the class and setting a godot owner for it, so that it can be managed by godot"""
+
     cdef Wrapper instance
-    (<Wrapper>p_data)()
-    instance = (<Wrapper>p_data)()#instanciating the the class given by manifest.data
+    instance = (<object>p_data)()#instanciating the the class given by manifest.data
     instance.set_godot_owner(p_owner)
     for prop in instance.PROPERTIES:
         setattr(instance,prop,None)
     Py_INCREF(instance)
-    return <PyObject*>instance
+    return <PyObject*> instance
 
 cdef api void finish_pluginscript_instance(godot_pluginscript_instance_data *p_data) with gil:
     """This method is for dereferencing the instance, when godot says it can be deleted """
@@ -180,6 +180,7 @@ cdef void create_empty_manifest(godot_pluginscript_script_manifest* manifest):
 
     manifest.properties = properties_array._native
     manifest.methods = methods_array._native
+    manifest.data = NULL
 
 
 
