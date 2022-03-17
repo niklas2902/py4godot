@@ -1,11 +1,11 @@
 # This workflow will install Python dependencies, run tests and lint with a single version of Python
 # For more information see: https://help.github.com/actions/language-and-framework-guides/using-python-with-github-actions
 
-name: nightly linux🌃
+name: weekly linux
 on:
   workflow_dispatch:
   schedule:
-    - cron: '0 2 * * *' # run at 2 AM UTC
+    - cron: '0 3 * * 1' # run at 2 AM UTC
     
 jobs:
   check_date:
@@ -45,7 +45,9 @@ jobs:
         
     - name: Install Mesa
       run: |
-        sudo apt-get install libglu1-mesa-dev freeglut3-dev mesa-common-dev
+        sudo add-apt-repository ppa:oibaf/graphics-drivers
+        sudo apt update
+        sudo apt upgrade
         sudo apt-get install xvfb
     
     - name: print structure
