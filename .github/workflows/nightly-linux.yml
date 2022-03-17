@@ -45,7 +45,9 @@ jobs:
         
     - name: Install Mesa
       run: |
-        sudo apt-get install libglu1-mesa-dev freeglut3-dev mesa-common-dev
+        sudo add-apt-repository ppa:oibaf/graphics-drivers
+        sudo apt update
+        sudo apt upgrade
         sudo apt-get install xvfb
     
     - name: print structure
