@@ -42,63 +42,63 @@ cdef class Variant:
                 self.new_float(variant)
             elif(type(variant)==Vector3):
                 self.new_vector3(variant)
-            elif(variant == Vector3):
+            elif(variant is Vector3):
                 self.new_vector3(Vector3(0,0,0))
 
             elif(type(variant)==Vector2):
                 self.new_vector2(variant)
-            elif(variant == Vector2):
+            elif(variant is Vector2):
                 self.new_vector2(Vector2(0,0))
 
             elif(type(variant)==AABB):
                 self.new_aabb(variant)
-            elif(variant==AABB):
+            elif(variant is AABB):
                 self.new_aabb(AABB(Vector3(0,0,0),Vector3(0,0,0)))
 
             elif(type(variant)==String):
                 self.new_string(variant)
 
-            elif(variant==String):
+            elif(variant is String):
                 self.new_string(String(""))
 
             elif(type(variant)==Rect2):
                 self.new_rect2(variant)
-            elif(variant==Rect2):
+            elif(variant is Rect2):
                 self.new_rect2(Rect2(0,0,0,0))
 
             elif(type(variant)==Basis):
                 self.new_Basis(variant)
-            elif(variant==Basis):
+            elif(variant is Basis):
                 self.new_basis(Basis())
 
             elif(type(variant)==Quat):
                 self.new_quat(variant)
-            elif(variant==Quat):
+            elif(variant is Quat):
                 self.new_quat(Quat(0,0,0,0))
 
             elif(type(variant)==Plane):
                 self.new_plane(variant)
-            elif(variant==Plane):
+            elif(variant is Plane):
                 self.new_plane(Plane(0,0,0,0))
 
             elif(type(variant)==Transform):
                 self.new_transform(variant)
-            elif(variant==Transform):
+            elif(variant is Transform):
                 self.new_transform(Transform(Basis(), Vector3()))
 
             elif(type(variant)==Transform2D):
                 self.new_transform(variant)
-            elif(variant==Transform2D):
+            elif(variant is Transform2D):
                 self.new_transform(Transform2D(0, Vector2()))
 
             elif(type(variant)==Color):
                 self.new_color(variant)
-            elif(variant==Color):
+            elif(variant is Color):
                 self.new_color(Color(0,0,0))
 
             elif(type(variant)==NodePath):
                 self.new_node_path(variant)
-            elif(variant==NodePath):
+            elif(variant is NodePath):
                 self.new_node_path(NodePath(String("")))
 
 
@@ -107,12 +107,12 @@ cdef class Variant:
 
             elif type(variant) == Dictionary:
                 self.new_dict(variant)
-            elif variant == Dictionary:
+            elif variant is Dictionary:
                 self.new_dict(Dictionary)
 
             elif type(variant) == Array:
                 self.new_array(variant)
-            elif variant == Array:
+            elif variant is Array:
                 self.new_array(Array())
 
             elif variant == int:
@@ -187,7 +187,6 @@ cdef class Variant:
         return String.new_static(api_core.godot_variant_as_string(&self._native))
     @staticmethod
     cdef as_vector2(self):
-        print("------------->as vector2")
         return Vector2.new_static(api_core.godot_variant_as_vector2(&self._native))
     @staticmethod
     cdef as_rect2(self):

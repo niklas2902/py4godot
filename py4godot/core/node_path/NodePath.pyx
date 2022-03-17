@@ -23,7 +23,7 @@ cdef class NodePath:
         api_core.godot_node_path_destroy(&self._native)
 
     def __str__(self):
-        return api_core.godot_node_path_as_string(&self._native)
+        return "NodePath<"+str(String.new_static(api_core.godot_node_path_as_string(&self._native)))+">"
 
     def is_absolute(self):
         return api_core.godot_node_path_is_absolute(&self._native)

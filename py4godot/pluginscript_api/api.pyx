@@ -65,6 +65,7 @@ cdef api  godot_pluginscript_script_manifest init_pluginscript_desc (godot_plugi
         for p in result.properties:
             properties_array.append(Variant(p.to_dict()))
         for m in result.methods:
+            print("register_method:",m.name)
             methods_array.append(Variant(m.to_dict()))
         for signal in result.signals:
             signals_array.append(Variant(signal.to_dict()))
@@ -127,6 +128,7 @@ cdef api godot_variant call_method_pluginscript_instance(godot_pluginscript_inst
 const godot_variant **p_args,int p_argcount, godot_variant_call_error *r_error) with gil:
         """function for calling methods defined in the manifest from an external source"""
         method_name = str(StringName.new_static(p_method))
+        print("call method", method_name)
 
         cdef Wrapper instance = (<Wrapper>p_data)
         if(hasattr(instance,method_name)): #checking if function exists
