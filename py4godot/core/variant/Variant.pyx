@@ -115,7 +115,7 @@ cdef class Variant:
             elif variant is Array:
                 self.new_array(Array())
 
-            elif variant == int:
+            elif variant is int:
                 self.new_int(0)
             else:
                 print("no Variant created:",variant,"|", type(variant))
@@ -184,7 +184,7 @@ cdef class Variant:
         return api_core.godot_variant_as_real(&self._native)
     @staticmethod
     cdef as_string(self):
-        return String.new_static(api_core.godot_variant_as_string(&self._native))
+        return str(String.new_static(api_core.godot_variant_as_string(&self._native)))
     @staticmethod
     cdef as_vector2(self):
         return Vector2.new_static(api_core.godot_variant_as_vector2(&self._native))

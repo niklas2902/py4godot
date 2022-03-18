@@ -23,15 +23,17 @@ class TestRunner(Spatial):
 		node = self.get_node(self._node)
 		PythonTest.objectToTest = node
 		print("node:",node)
-		print(node.get_script())
 		print(dir(node))
-		print(node.call(String("hallo")))
+		print(node.get_parent())
+		print("end _method_list")
+		print(node.call("hallo"))
 		
-		
+
 		suite = unittest.TestLoader().loadTestsFromModule(PythonTest)
 		res = unittest.TextTestRunner().run(suite)
 		if len(res.failures) == 0:
 			self.get_tree().quit(0)
 		else:
 			self.get_tree().quit(1)
+		
 		print(self._node)

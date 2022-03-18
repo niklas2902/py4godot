@@ -14,7 +14,7 @@ class TestObj(Spatial):
 	
 	@gdmethod
 	def test_signal(self):
-		self.emit_signal(String("test"), "hallo")
+		self.emit_signal("test", "hallo")
 	
 	# creating a property which can be edited in the editor. Hint and hint_string are optional 
 	@gdproperty(int, DEFAULT_VEL, hint=PropertyHint.GODOT_PROPERTY_HINT_RANGE.value,

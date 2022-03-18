@@ -34,14 +34,14 @@ cdef class Dictionary:
     def clear(self):
         api_core.godot_dictionary_clear(&self._native)
 
-    def has(self, Variant key):
-        return api_core.godot_dictionary_has(&self._native, &key._native)
+    def has(self, key):
+        return api_core.godot_dictionary_has(&self._native, &Variant(key)._native)
 
     def has_all(self, Array keys):
         return api_core.godot_dictionary_has_all(&self._native, &keys._native)
 
-    def erase(self, Variant key):
-        return api_core.godot_dictionary_erase(&self._native, &key._native)
+    def erase(self, key):
+        return api_core.godot_dictionary_erase(&self._native, &Variant(key)._native)
 
     def hash(self):
         return api_core.godot_dictionary_hash(&self._native)
@@ -52,23 +52,23 @@ cdef class Dictionary:
     def values(self):
         return Array. new_static(api_core.godot_dictionary_values(&self._native))
 
-    def get(self, Variant key):
-        return Variant. new_static(api_core.godot_dictionary_get(&self._native, &key._native))
+    def get(self, key):
+        return Variant. new_static(api_core.godot_dictionary_get(&self._native, &Variant(key)._native)).get_converted_value()
 
-    def set(self, Variant key, Variant value):
-        api_core.godot_dictionary_set(&self._native, &key._native, &value._native)
+    def set(self, key, value):
+        api_core.godot_dictionary_set(&self._native, &Variant(key)._native, &Variant(value)._native)
 
-    def next_(self, Variant key):
+    def next_(self, key):
         cdef godot_variant * variant
-        variant = (api_core.godot_dictionary_next(&self._native, &key._native))
+        variant = (api_core.godot_dictionary_next(&self._native, &Variant(key)._native))
         if variant != NULL :
-            return Variant.new_static(dereference(variant))
+            return Variant.new_static(dereference(variant)).get_converted_value()
         return None
 
-    def __setitem__(self, Variant key, Variant value):
+    def __setitem__(self, key, value):
         self.set(key, value)
 
-    def __delitem(self, Variant key):
+    def __delitem(self, key):
         self.erase(key)
 
     def __eq__(self, other):

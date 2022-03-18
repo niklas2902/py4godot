@@ -118,7 +118,10 @@ def generate_args(objs_to_import, method, result):
     """generate the arguments in the method head"""
     args = "self, "
     for argument in method["arguments"]:
-        args += " " + (argument["type"] if not argument["type"] in objects else argument["type"]) + " "
+        if argument["type"] != "String":
+            args += " " + (argument["type"] if not argument["type"] in objects else argument["type"]) + " "
+        else:
+            args += " str "
         args += (argument["name"] if argument["name"] not in exclude_words else argument["name"] + "_") + ", "
 
         if argument["type"] in objects:
@@ -173,6 +176,9 @@ def generate_method_argument_array(method, result):
             arg_name = (argument["name"] if argument["name"] not in exclude_words else argument["name"] + "_")
             if argument["type"] in objects:
                 result += f"    args[{i}] = {arg_name}.godot_owner\n"
+
+            elif argument["type"] == "String":
+                result += f"    args[{i}] = &String({arg_name})._native\n"
             else:
                 result += f"""    args[{i}] = {'&' + arg_name + '._native'
                 if method['arguments'][i]['type'] in core else ('&' + arg_name)}\n"""
@@ -197,10 +203,14 @@ def make_method_api_call(method, obj, result, return_type, return_type_save):
     if not method["has_varargs"]:
         if not method["is_virtual"]:
             result += f"    api_core.godot_method_bind_ptrcall(bind_{obj['name'].lower()}_{method['name']}," \
-                      f"self.godot_owner,{'args' if len(method['arguments']) > 0 else 'NULL'},{'&ret' if return_type != 'void' else 'NULL'})\n"
+                      f"self.godot_owner, args,{'&ret' if return_type != 'void' else 'NULL'})\n"
 
         if return_type != "void" and return_type not in objects and not return_type_save.startswith("Pool"):
-            result += f"    return {return_type_save + '.new_static(ret)' if return_type_save in types else 'ret'}\n\n"
+            # String should be handled immediately
+            if return_type == "String":
+                result += f"    return str({return_type_save + '.new_static(ret))' if return_type_save in types else 'ret'}\n\n"
+            else:
+                result += f"    return {return_type_save + '.new_static(ret)' if return_type_save in types else 'ret'}\n\n"
         elif not return_type_save.startswith("Pool") and return_type != "void":
             result += f"    cdef {return_type} obj = {return_type}()\n"
             result += "    obj.set_godot_owner(ret)\n"

@@ -12,62 +12,62 @@ cdef class Array:
         api_core.godot_array_new(&self._native)
         self.update_event = UpdateEvent()
 
-    def set(self, godot_int index, Variant value):
-        api_core.godot_array_set(&self._native, index, &value._native)
+    def set(self, godot_int index, value):
+        api_core.godot_array_set(&self._native, index, &Variant(value)._native)
 
     def get(self, godot_int index):
-        return Variant. new_static(api_core.godot_array_get(&self._native, index))
+        return Variant. new_static(api_core.godot_array_get(&self._native, index)).get_converted_value()
 
-    def append(self, Variant value):
-        api_core.godot_array_append(&self._native, &value._native)
+    def append(self, value):
+        api_core.godot_array_append(&self._native, &Variant(value)._native)
 
     def clear(self):
         api_core.godot_array_clear(&self._native)
 
-    def count(self, Variant value):
-        return api_core.godot_array_count(&self._native, &value._native)
+    def count(self, value):
+        return api_core.godot_array_count(&self._native, &Variant(value)._native)
 
     def empty(self):
         return api_core.godot_array_empty(&self._native)
 
-    def erase(self, Variant value):
-        api_core.godot_array_erase(&self._native, &value._native)
+    def erase(self, value):
+        api_core.godot_array_erase(&self._native, &Variant(value)._native)
 
     def front(self):
-        return Variant. new_static(api_core.godot_array_front(&self._native))
+        return Variant. new_static(api_core.godot_array_front(&self._native)).get_converted_value()
 
     def back(self):
-        return Variant. new_static(api_core.godot_array_back(&self._native))
+        return Variant. new_static(api_core.godot_array_back(&self._native)).get_converted_value()
 
-    def find(self, Variant what, godot_int from_):
-        return api_core.godot_array_find(&self._native, &what._native, from_)
+    def find(self, what, godot_int from_):
+        return api_core.godot_array_find(&self._native, &Variant(what)._native, from_)
 
-    def find_last(self, Variant what):
-        return api_core.godot_array_find_last(&self._native, &what._native)
+    def find_last(self, what):
+        return api_core.godot_array_find_last(&self._native, &Variant(what)._native)
 
-    def has(self, Variant value):
-        return api_core.godot_array_has(&self._native, &value._native)
+    def has(self, value):
+        return api_core.godot_array_has(&self._native, &Variant(value)._native)
 
     def hash(self):
         return api_core.godot_array_hash(&self._native)
 
-    def insert(self, godot_int pos, Variant value):
-        return api_core.godot_array_insert(&self._native, pos, &value._native)
+    def insert(self, godot_int pos, value):
+        return api_core.godot_array_insert(&self._native, pos, &Variant(value)._native)
 
     def invert(self):
         return api_core.godot_array_invert(&self._native)
 
     def pop_back(self):
-        return Variant. new_static(api_core.godot_array_pop_back(&self._native))
+        return Variant. new_static(api_core.godot_array_pop_back(&self._native)).get_converted_value()
 
     def pop_front(self):
-        return Variant. new_static(api_core.godot_array_pop_front(&self._native))
+        return Variant. new_static(api_core.godot_array_pop_front(&self._native)).get_converted_value()
 
-    def push_back(self, Variant value):
-        api_core.godot_array_push_back(&self._native, &value._native)
+    def push_back(self, value):
+        api_core.godot_array_push_back(&self._native, &Variant(value)._native)
 
-    def push_front(self, Variant value):
-        api_core.godot_array_push_front(&self._native, &value._native)
+    def push_front(self, value):
+        api_core.godot_array_push_front(&self._native, &Variant(value)._native)
 
     def remove(self, godot_int index):
         api_core.godot_array_remove(&self._native, index)
@@ -75,8 +75,8 @@ cdef class Array:
     def resize(self, godot_int size):
         api_core.godot_array_resize(&self._native, size)
 
-    def rfind(self, Variant what, godot_int from_):
-        return api_core.godot_array_rfind(&self._native, &what._native, from_)
+    def rfind(self, what, godot_int from_):
+        return api_core.godot_array_rfind(&self._native, &Variant(what)._native, from_)
 
     def size(self):
         return api_core.godot_array_size(&self._native)
@@ -85,10 +85,10 @@ cdef class Array:
         api_core.godot_array_sort(&self._native)
 
     def __getitem__(self, godot_int index):
-        return Variant. new_static(api_core.godot_array_get(&self._native, index))
+        return Variant. new_static(api_core.godot_array_get(&self._native, index)).get_converted_value()
 
-    def __setitem__(self, godot_int index, Variant value):
-        self.set(index, value)
+    def __setitem__(self, godot_int index, value):
+        self.set(index, value).get_converted_value()
 
     #TODO: is there any possibility to implement this?
     """

@@ -87,11 +87,11 @@ class PropertyDescription:
         self.rset_mode = rset_mode
     def to_dict(self):
         d = Dictionary()
-        d.set(Variant(String("name")), Variant(String(self.name)))
-        d.set(Variant(String("type")), Variant(self.type_))
-        d.set(Variant(String("hint")), Variant(self.hint))
-        d.set(Variant(String("hint_string")),Variant(self.hint_string))
-        d.set(Variant(String("usage")), Variant(self.usage))
-        d.set(Variant(String("default_value")), Variant(self.default_value))
-        d.set(Variant(String("rset_mode")), Variant(self.rset_mode))
+        d.set(String("name"), String(self.name))
+        d.set(String("type"), self.type_)
+        d.set(String("hint"), self.hint)
+        d.set(String("hint_string"),self.hint_string)
+        d.set(String("usage"), self.usage)
+        d.set(String("default_value"), self.default_value)
+        d.set(String("rset_mode"), self.rset_mode)
         return d

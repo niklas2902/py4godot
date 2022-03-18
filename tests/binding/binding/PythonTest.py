@@ -8,5 +8,5 @@ class PythonTest(unittest.TestCase):
 
 	def test_a(self):
 		print("objectToTest:",objectToTest)
-		objectToTest.call(String("test_signal"))
-		self.assertTrue(objectToTest.get(String("signal_emitted")))
+		objectToTest.call("test_signal")
+		self.assertTrue(objectToTest.get("signal_emitted"))

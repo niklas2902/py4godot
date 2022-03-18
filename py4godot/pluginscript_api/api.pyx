@@ -63,12 +63,12 @@ cdef api  godot_pluginscript_script_manifest init_pluginscript_desc (godot_plugi
         methods_array = Array()
         signals_array = Array()
         for p in result.properties:
-            properties_array.append(Variant(p.to_dict()))
+            properties_array.append(p.to_dict())
         for m in result.methods:
             print("register_method:",m.name)
-            methods_array.append(Variant(m.to_dict()))
+            methods_array.append(m.to_dict())
         for signal in result.signals:
-            signals_array.append(Variant(signal.to_dict()))
+            signals_array.append(signal.to_dict())
 
         manifest.properties = properties_array._native
         manifest.methods = methods_array._native
