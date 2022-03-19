@@ -128,7 +128,6 @@ cdef api godot_variant call_method_pluginscript_instance(godot_pluginscript_inst
 const godot_variant **p_args,int p_argcount, godot_variant_call_error *r_error) with gil:
         """function for calling methods defined in the manifest from an external source"""
         method_name = str(StringName.new_static(p_method))
-        print("call method", method_name)
 
         cdef Wrapper instance = (<Wrapper>p_data)
         if(hasattr(instance,method_name)): #checking if function exists
@@ -150,19 +149,19 @@ from py4godot import *
 @gdclass
 class {str(String.new_static(dereference(p_class_name)))}({str(String.new_static(dereference(p_base_class_name)))}):
 
-    @gdproperty(int, 5, hint=PropertyHint.GODOT_PROPERTY_HINT_RANGE.value, hint_string="1,100,5,slider")
-    def vel(self):
-        return 1
-    @vel.setter
-    def vel(self, value):
-        print("set_value", value)
-
     def __init__(self):
+        #Don't call any godot-methods here
         super().__init__()
         self.velocity = 0
+    @gdproperty(int, 5, hint=PropertyHint.GODOT_PROPERTY_HINT_RANGE.value, hint_string="1,100,5,slider")
+    def vel(self):
+        return self.velocity
+    @vel.setter
+    def vel(self, value):
+        self.velocity = value
 
     @gdmethod
-    def _init(self):
+    def _ready(self):
         print("_init")
 
     @gdmethod

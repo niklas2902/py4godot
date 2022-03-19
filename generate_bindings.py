@@ -122,7 +122,17 @@ def generate_args(objs_to_import, method, result):
             args += " " + (argument["type"] if not argument["type"] in objects else argument["type"]) + " "
         else:
             args += " str "
-        args += (argument["name"] if argument["name"] not in exclude_words else argument["name"] + "_") + ", "
+        args += (argument["name"] if argument["name"] not in exclude_words else argument["name"] + "_")
+
+        # Set default values for arguments
+        if argument["has_default_value"]:
+            if argument["type"] in core and argument["type"] != "String":
+                args += f" = {argument['type']}({argument['default_value']})"
+            elif argument["type"] != "String":
+                args += " = " + argument["default_value"].replace("[Object:null]", "Object._new()")
+            elif argument["type"] == "String":
+                args += f' = "{argument["default_value"]}"'
+        args += ", "
 
         if argument["type"] in objects:
             objs_to_import += f"cimport classes.{argument['type']}\n"
@@ -263,6 +273,11 @@ def generate_classes(obj):
     result += f"""cdef class {obj['name']}({obj['base_class'] if obj['base_class'] != "" else "Wrapper"}):\n"""
     result += "  def __init__(self):\n"
     result += "    super().__init__()\n"
+    result += "  @staticmethod\n"
+    result += f"  def cast(Wrapper other):\n"
+    result += f"    cdef {obj['name']} obj = {obj['name']}()\n"
+    result += "    obj.godot_owner = other.godot_owner\n"
+    result += "    return obj\n"
     result += generate_constants(obj)
 
     # only generate constructor if instanciable
