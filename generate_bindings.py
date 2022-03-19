@@ -126,10 +126,16 @@ def generate_args(objs_to_import, method, result):
 
         # Set default values for arguments
         if argument["has_default_value"]:
+            #TODO: improve this
             if argument["type"] in core and argument["type"] != "String":
-                args += f" = {argument['type']}({argument['default_value']})"
+                if argument["type"].startswith("Vector"):
+                    #args += f" = {argument['type']}{argument['default_value']}"
+                    args += f" = None"
+                else:
+                    #args += f" = {argument['type']}({argument['default_value']})"
+                    args += f" = None"
             elif argument["type"] != "String":
-                args += " = " + argument["default_value"].replace("[Object:null]", "Object._new()")
+                args += " = " + argument["default_value"].replace("[Object:null]", "None").replace("Null", "None")
             elif argument["type"] == "String":
                 args += f' = "{argument["default_value"]}"'
         args += ", "
