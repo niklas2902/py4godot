@@ -1,9 +1,8 @@
 from py4godot.core.string.String cimport String
+from py4godot.utils.core_holder cimport get_core
 from py4godot.core.color.Color cimport *
 
-cdef api set_api_core_color(godot_gdnative_core_api_struct * core):
-    global api_core
-    api_core = core
+api_core = get_core()
 
 cdef class Color:
 
