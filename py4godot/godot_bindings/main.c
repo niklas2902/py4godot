@@ -134,6 +134,14 @@ void GDN_EXPORT godot_gdnative_init(godot_gdnative_init_options *p_options) {
     // Since python3.7 PyEval_InitThreads is automatically called by Py_InitializeEx, but it's better to leave it here
     // to be explicit. Calling it again does nothing.
     PyEval_InitThreads();
+    import_py4godot__utils__core_holder();
+    if (PyErr_Occurred())
+    {
+        PyErr_Print();
+        return ;
+    }
+    set_core_holder(api_core);
+    set_native_script_holder(nativescript_api_11);
 
     set_up_pluginscript();
     set_up_bindings();
@@ -171,7 +179,6 @@ void set_up_bindings(){
     }
 
     init_method_bindings(api_core);
-    set_native_script_classes(nativescript_api_11);
     register_types();
 
     // from godot-cpp
@@ -190,14 +197,6 @@ void GDN_EXPORT godot_gdnative_singleton() {
 
 void set_up_pluginscript(){
     printf("set up pluginscript\n");
-    import_py4godot__utils__core_holder();
-    if (PyErr_Occurred())
-    {
-        PyErr_Print();
-        return ;
-    }
-    set_core_holder(api_core);
-
     import_py4godot__pluginscript_api__api();
     if (PyErr_Occurred())
     {
