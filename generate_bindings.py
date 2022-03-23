@@ -47,6 +47,7 @@ base_import_string += f"from cython.operator cimport dereference\n"
 base_import_string += f"from py4godot.enums.enums cimport *\n"
 base_import_string += f"from py4godot.godot_bindings.types cimport *\n"
 base_import_string += f"from cpython.mem cimport PyMem_Malloc, PyMem_Realloc, PyMem_Free\n"
+base_import_string += f"from py4godot.utils.core_holder cimport get_core, get_nativescript\n"
 base_import_string += f"from py4godot.godot_bindings.binding_external cimport *\n\n\n" \
                       f"cdef set_core(godot_gdnative_core_api_struct* core):\n" \
                       f"    global api_core\n" \
@@ -58,7 +59,9 @@ base_import_string += f"from py4godot.godot_bindings.binding_external cimport *\
                       f"    global binding_funcs\n" \
                       f"    global language_index\n" \
                       f"    binding_funcs = binding_funcs_\n" \
-                      f"    language_index = lang_ind\n\n"
+                      f"    language_index = lang_ind\n\n"\
+                      f"\napi_core = get_core()\n"\
+                      f"\nnativescript_api_11 = get_nativescript()\n"
 
 main_string = ""
 
