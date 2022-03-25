@@ -102,6 +102,9 @@ def generate_methods(obj, objs_to_import):
             # Generate arguments in head
             objs_to_import, result = generate_args(objs_to_import, method, result)
 
+            # body for initializing values if not set by user
+            result = init_unset_defaults(method, result)
+
             # Start with body
             result += "    cdef const godot_object *_owner = self.godot_owner\n\n"
 
@@ -162,7 +165,6 @@ def generate_args(objs_to_import, method, result):
                 args += " = " + argument["default_value"].replace("[Object:null]", "None").replace("Null", "None")
             elif argument["type"] == "String":
                 args += f' = "{argument["default_value"]}"'
-        print(args)
         args += ", "
 
         if argument["type"] in objects:
@@ -171,6 +173,16 @@ def generate_args(objs_to_import, method, result):
         args += "*varargs,"
     result += args.rstrip(", ") + "):\n"
     return objs_to_import, result
+
+def init_unset_defaults(method, result):
+    for argument in method["arguments"]:
+        arg_name = (argument["name"] if argument["name"] not in exclude_words else argument["name"] + "_")
+        # init default  values for arguments if not set
+        if argument["has_default_value"]:
+            if argument["type"] in objects:
+                result += f"    if {arg_name} == None:\n" \
+                          f"      {arg_name} = {argument['type']}._new()\n"
+    return result
 
 
 def generate_return_type(objs_to_import, method, obj, result):
