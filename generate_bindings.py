@@ -130,17 +130,39 @@ def generate_args(objs_to_import, method, result):
         # Set default values for arguments
         if argument["has_default_value"]:
             #TODO: improve this
+            #generating default values for the core
             if argument["type"] in core and argument["type"] != "String":
                 if argument["type"].startswith("Vector"):
-                    #args += f" = {argument['type']}{argument['default_value']}"
-                    args += f" = None"
+                    args += f" = {argument['type']}{argument['default_value']}"
+                elif argument["type"] == "Variant":
+                    args += f" = {argument['type']}()"
+                elif argument["type"] == "Array":
+                    args += f" = {argument['type']}()"
+                elif argument["type"] == "Dictionary":
+                    args += f" = {argument['type']}()"
+                elif argument["type"] == "Transform2D":
+                    vector = argument["default_value"].replace("(", "").replace(")","").split(",")
+                    args += f" = Transform2D.new_with_axis_origin(Vector2({vector[0] +','+ vector[1]})," \
+                            f" Vector2({vector[2]+','+ vector[3]}), Vector2({vector[4] +','+ vector[5]}))"
+                elif argument["type"] == "Transform":
+                    vals = argument["default_value"].split("-")
+                    axis = vals[0].split(",")
+                    origin = vals[1].replace("(","").replace(")","").split(",")
+
+                    args += f" = Transform.new_with_axis_origin(Vector3({axis[0] + ',' + axis[1] + ', '+axis[2]})," \
+                            f" Vector3({axis[3] + ',' + axis[4] + ',' + axis[5]}), " \
+                            f"Vector3({axis[6] + ',' + axis[7]+ ',' + axis[8]}), Vector3({origin[0] +','+ origin[1]+ ','+ origin[2]}))"
+                elif argument["type"] == "RID":
+                    args += " = RID()"
+                elif argument["type"] == "Rect2":
+                    args += f" = {argument['type']}{argument['default_value']}"
                 else:
-                    #args += f" = {argument['type']}({argument['default_value']})"
-                    args += f" = None"
+                    args += f" = {argument['type']}({argument['default_value']})"
             elif argument["type"] != "String":
                 args += " = " + argument["default_value"].replace("[Object:null]", "None").replace("Null", "None")
             elif argument["type"] == "String":
                 args += f' = "{argument["default_value"]}"'
+        print(args)
         args += ", "
 
         if argument["type"] in objects:
