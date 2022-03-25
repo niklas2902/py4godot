@@ -384,8 +384,6 @@ from py4godot.utils.Wrapper cimport *"""
     set_ = set()
     # generate all the class files
     for element in obj:
-        if element["name"].startswith("_") and not element["singleton"]:
-            continue
 
         init_methods_string += f"  init_method_bindings_{element['name']}()\n"
         generated_file = generate_classes(element)
