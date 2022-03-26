@@ -1,6 +1,8 @@
 import unittest
-from py4godot import Array, Variant
-
+from py4godot.enums.enums import *
+from py4godot.core import *
+from py4godot.classes.generated import *
+from py4godot.pluginscript_api.utils.annotations import *
 
 class PythonTest(unittest.TestCase):
 	def test_append(self):

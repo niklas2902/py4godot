@@ -162,7 +162,6 @@ void GDN_EXPORT godot_gdnative_terminate(godot_gdnative_terminate_options *p_opt
 }
 
 void set_up_bindings(){
-    printf("set up bindings\n");
 	import_py4godot__classes__classes();
     if (PyErr_Occurred())
     {
@@ -196,7 +195,6 @@ void GDN_EXPORT godot_gdnative_singleton() {
 
 
 void set_up_pluginscript(){
-    printf("set up pluginscript\n");
     import_py4godot__pluginscript_api__api();
     if (PyErr_Occurred())
     {
