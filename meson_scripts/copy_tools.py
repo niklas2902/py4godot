@@ -41,6 +41,7 @@ def copy_main(platform):
 
 
 def copy_tests(platform):
+    """copy plugin inside godot"""
     core_tests = glob.glob("tests/core/*")
     for core_test in core_tests:
         if os.path.exists(f"{core_test}/addons/{platform}"):
