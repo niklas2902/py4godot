@@ -2,25 +2,29 @@ import re
 import warnings
 
 string_to_parse = """
-        void (*godot_pool_byte_array_new)(godot_pool_byte_array *r_dest);
-        void (*godot_pool_byte_array_new_copy)(godot_pool_byte_array *r_dest, const godot_pool_byte_array *p_src);
-        void (*godot_pool_byte_array_new_with_array)(godot_pool_byte_array *r_dest, const godot_array *p_a);
-        void (*godot_pool_byte_array_append)(godot_pool_byte_array *p_self, const uint8_t p_data);
-        void (*godot_pool_byte_array_append_array)(godot_pool_byte_array *p_self, const godot_pool_byte_array *p_array);
-        godot_error (*godot_pool_byte_array_insert)(godot_pool_byte_array *p_self, const godot_int p_idx, const uint8_t p_data);
-        void (*godot_pool_byte_array_invert)(godot_pool_byte_array *p_self);
-        void (*godot_pool_byte_array_push_back)(godot_pool_byte_array *p_self, const uint8_t p_data);
-        void (*godot_pool_byte_array_remove)(godot_pool_byte_array *p_self, const godot_int p_idx);
-        void (*godot_pool_byte_array_resize)(godot_pool_byte_array *p_self, const godot_int p_size);
-        godot_pool_byte_array_read_access *(*godot_pool_byte_array_read)(const godot_pool_byte_array *p_self);
-        godot_pool_byte_array_write_access *(*godot_pool_byte_array_write)(godot_pool_byte_array *p_self);
-        void (*godot_pool_byte_array_set)(godot_pool_byte_array *p_self, const godot_int p_idx, const uint8_t p_data);
-        uint8_t (*godot_pool_byte_array_get)(const godot_pool_byte_array *p_self, const godot_int p_idx);
-        godot_int (*godot_pool_byte_array_size)(const godot_pool_byte_array *p_self);
-        void (*godot_pool_byte_array_destroy)(godot_pool_byte_array *p_self);
+        void (*godot_pool_color_array_new)(godot_pool_color_array *r_dest);
+        void (*godot_pool_color_array_new_copy)(godot_pool_color_array *r_dest, const godot_pool_color_array *p_src);
+        void (*godot_pool_color_array_new_with_array)(godot_pool_color_array *r_dest, const godot_array *p_a);
+        void (*godot_pool_color_array_append)(godot_pool_color_array *p_self, const godot_color *p_data);
+        void (*godot_pool_color_array_append_array)(godot_pool_color_array *p_self, const godot_pool_color_array *p_array);
+        godot_error (*godot_pool_color_array_insert)(godot_pool_color_array *p_self, const godot_int p_idx, const godot_color *p_data);
+        void (*godot_pool_color_array_invert)(godot_pool_color_array *p_self);
+        void (*godot_pool_color_array_push_back)(godot_pool_color_array *p_self, const godot_color *p_data);
+        void (*godot_pool_color_array_remove)(godot_pool_color_array *p_self, const godot_int p_idx);
+        void (*godot_pool_color_array_resize)(godot_pool_color_array *p_self, const godot_int p_size);
+        godot_pool_color_array_read_access *(*godot_pool_color_array_read)(const godot_pool_color_array *p_self);
+        godot_pool_color_array_write_access *(*godot_pool_color_array_write)(godot_pool_color_array *p_self);
+        void (*godot_pool_color_array_set)(godot_pool_color_array *p_self, const godot_int p_idx, const godot_color *p_data);
+        godot_color (*godot_pool_color_array_get)(const godot_pool_color_array *p_self, const godot_int p_idx);
+        godot_int (*godot_pool_color_array_size)(const godot_pool_color_array *p_self);
+        void (*godot_pool_color_array_destroy)(godot_pool_color_array *p_self);
         """
-class_ = "godot_pool_byte_array"
-dict_core = {"godot_pool_byte_array": "PoolByteArray"}
+class_ = "godot_pool_color_array"
+dict_core = {"godot_pool_byte_array": "PoolByteArray", "godot_pool_real_array": "PoolRealArray",
+             "godot_pool_int_array": "PoolIntArray", "godot_string":"String", "godot_pool_string_array":"PoolStringArray",
+             "godot_vector2":"Vector2", "godot_vector3":"Vector3", "godot_pool_vector3_array":"PoolVector3Array",
+             "godot_pool_color_array":"PoolColorArray",
+             "godot_color":"Color"}
 
 
 def generate_args(line):
@@ -41,6 +45,10 @@ def generate_args(line):
                 if not self_set:
                     #TODO: Improve this expression
                     break
+                if arg.split(" ")[-2] in dict_core:
+                    arg = arg.replace(arg.split(" ")[-2] + " *", dict_core[arg.split(" ")[-2]]+" ")
+
+                arg = arg.replace("const ", "")
                 result += arg + ", "
         result = result.rstrip(", ")
         result += "):\n"
@@ -71,5 +79,6 @@ for line in string_to_parse.split("\n"):
         continue
     generated_file += generate_args(line)
     generated_file += generate_method_body(line)
+    generated_file += "\n"
 
 print(generated_file)

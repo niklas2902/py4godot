@@ -1,6 +1,8 @@
 from py4godot.godot_bindings.binding cimport *
 
 cdef extern from "binding.h":
+    const godot_gdnative_core_api_struct *api_core
+
     ctypedef struct godot_error:
         pass
     ctypedef struct godot_pool_array_write_access:
