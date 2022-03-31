@@ -5,6 +5,7 @@ from py4godot.core.vector2.Vector2 cimport Vector2
 from py4godot.core.vector3.Vector3 cimport Vector3
 from py4godot.core.color.Color cimport Color
 from py4godot.core.pool_array.pool_array_binding cimport *
+from py4godot.enums.enums cimport godot_error
 
 api_core = get_core()
 
@@ -98,7 +99,9 @@ cdef class PoolRealArray:
       api_core.godot_pool_real_array_append_array(&self._native, &p_array._native)
 
     def insert(self, godot_int p_idx, godot_real p_data):
-      return api_core.godot_pool_real_array_insert(&self._native, p_idx, p_data)
+      cdef godot_error error = api_core.godot_pool_real_array_insert(&self._native, p_idx, p_data)
+      if(error != godot_error.GODOT_OK):
+        raise RuntimeError(f"Could not insert into PoolArray. Returned error code {error}")
 
     def invert(self):
       api_core.godot_pool_real_array_invert(&self._native)
@@ -162,7 +165,9 @@ cdef class PoolIntArray:
       api_core.godot_pool_int_array_append_array(&self._native, &p_array._native)
 
     def insert(self, godot_int p_idx, godot_int p_data):
-      return api_core.godot_pool_int_array_insert(&self._native, p_idx, p_data)
+      cdef godot_error error = api_core.godot_pool_int_array_insert(&self._native, p_idx, p_data)
+      if(error != godot_error.GODOT_OK):
+        raise RuntimeError(f"Could not insert into PoolArray. Returned error code {error}")
 
     def invert(self):
       api_core.godot_pool_int_array_invert(&self._native)
@@ -227,7 +232,9 @@ cdef class PoolStringArray:
       api_core.godot_pool_string_array_append_array(&self._native, &p_array._native)
 
     def insert(self, godot_int p_idx, String p_data):
-      return api_core.godot_pool_string_array_insert(&self._native, p_idx, &p_data._native)
+      cdef godot_error error = api_core.godot_pool_string_array_insert(&self._native, p_idx, &p_data._native)
+      if(error != godot_error.GODOT_OK):
+        raise RuntimeError(f"Could not insert into PoolArray. Returned error code {error}")
 
     def invert(self):
       api_core.godot_pool_string_array_invert(&self._native)
@@ -292,7 +299,9 @@ cdef class PoolVector2Array:
       api_core.godot_pool_vector2_array_append_array(&self._native, &p_array._native)
 
     def insert(self, godot_int p_idx, Vector2 p_data):
-      return api_core.godot_pool_vector2_array_insert(&self._native, p_idx, &p_data._native)
+      cdef godot_error error = api_core.godot_pool_vector2_array_insert(&self._native, p_idx, &p_data._native)
+      if(error != godot_error.GODOT_OK):
+        raise RuntimeError(f"Could not insert into PoolArray. Returned error code {error}")
 
     def invert(self):
       api_core.godot_pool_vector2_array_invert(&self._native)
@@ -356,7 +365,9 @@ cdef class PoolVector3Array:
       api_core.godot_pool_vector3_array_append_array(&self._native, &p_array._native)
 
     def insert(self, godot_int p_idx, Vector3 p_data):
-      return api_core.godot_pool_vector3_array_insert(&self._native, p_idx, &p_data._native)
+      cdef godot_error error = api_core.godot_pool_vector3_array_insert(&self._native, p_idx, &p_data._native)
+      if(error != godot_error.GODOT_OK):
+        raise RuntimeError(f"Could not insert into PoolArray. Returned error code {error}")
 
     def invert(self):
       api_core.godot_pool_vector3_array_invert(&self._native)
@@ -420,7 +431,9 @@ cdef class PoolColorArray:
       api_core.godot_pool_color_array_append_array(&self._native, &p_array._native)
 
     def insert(self, godot_int p_idx, Color p_data):
-      return api_core.godot_pool_color_array_insert(&self._native, p_idx, &p_data._native)
+      cdef godot_error error = api_core.godot_pool_color_array_insert(&self._native, p_idx, &p_data._native)
+      if(error != godot_error.GODOT_OK):
+        raise RuntimeError(f"Could not insert into PoolArray. Returned error code {error}")
 
     def invert(self):
       api_core.godot_pool_color_array_invert(&self._native)

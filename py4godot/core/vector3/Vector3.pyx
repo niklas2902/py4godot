@@ -6,6 +6,13 @@ from py4godot.core.vector3.vector3_binding cimport *
 api_core = get_core()
 
 cdef class Vector3:
+    LEFT = Vector3( -1, 0, 0)
+    RIGHT = Vector3( 1, 0, 0 )
+    UP = Vector3( 0, 1, 0 )
+    DOWN = Vector3( 0, -1, 0 )
+    FORWARD = Vector3( 0, 0, -1 )
+    BACK = Vector3( 0, 0, 1 )
+
     def __init__(self, godot_real x, godot_real y, godot_real z):
         api_core.godot_vector3_new(&self._native,x,y,z)
         self.update_event = UpdateEvent()
