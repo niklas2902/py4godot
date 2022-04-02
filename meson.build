@@ -67,4 +67,5 @@ test('test_rid', godot_program, args : ['--path', 'tests/core/rid', '--no-window
 test('test_quat', godot_program, args : ['--path', 'tests/core/quat', '--no-window'], workdir:meson.source_root(), timeout:60, is_parallel:false)
 test('test_transform', godot_program, args : ['--path', 'tests/core/transform', '--no-window'], workdir:meson.source_root(), timeout:60, is_parallel:false)
 test('test_transform2d', godot_program, args : ['--path', 'tests/core/transform2d', '--no-window'], workdir:meson.source_root(), timeout:60, is_parallel:false)
+test('test_pool_array', godot_program, args : ['--path', 'tests/core/pool_array', '--no-window'], workdir:meson.source_root(), timeout:60, is_parallel:false)
 test('test_binding', godot_program, args : ['--path', 'tests/binding/binding', '--no-window'], workdir:meson.source_root(), timeout:60, is_parallel:false)

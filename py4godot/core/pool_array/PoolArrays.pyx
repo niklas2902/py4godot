@@ -10,7 +10,7 @@ from py4godot.enums.enums cimport godot_error
 api_core = get_core()
 
 cdef class PoolByteArray:
-    def __init__(self, List_):
+    def __init__(self, list_ = []):
         self.update_event = UpdateEvent()
         api_core.godot_pool_byte_array_new(&self._native)
 

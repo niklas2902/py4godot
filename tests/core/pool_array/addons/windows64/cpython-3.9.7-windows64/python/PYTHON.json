@@ -1,0 +1,1661 @@
+{
+    "build_info": {
+        "core": {
+            "links": [
+                {
+                    "name": "shlwapi",
+                    "system": true
+                },
+                {
+                    "name": "version",
+                    "system": true
+                },
+                {
+                    "name": "ws2_32",
+                    "system": true
+                },
+                {
+                    "name": "pathcch",
+                    "system": true
+                },
+                {
+                    "name": "Ole32",
+                    "system": true
+                },
+                {
+                    "name": "OleAut32",
+                    "system": true
+                },
+                {
+                    "name": "User32",
+                    "system": true
+                }
+            ],
+            "objs": [
+                "build/core/Python-ast.obj",
+                "build/core/_abc.obj",
+                "build/core/_bisectmodule.obj",
+                "build/core/_codecs_cn.obj",
+                "build/core/_codecs_hk.obj",
+                "build/core/_codecs_iso2022.obj",
+                "build/core/_codecs_jp.obj",
+                "build/core/_codecs_kr.obj",
+                "build/core/_codecs_tw.obj",
+                "build/core/_codecsmodule.obj",
+                "build/core/_collectionsmodule.obj",
+                "build/core/_contextvarsmodule.obj",
+                "build/core/_csv.obj",
+                "build/core/_datetimemodule.obj",
+                "build/core/_functoolsmodule.obj",
+                "build/core/_heapqmodule.obj",
+                "build/core/_iomodule.obj",
+                "build/core/_json.obj",
+                "build/core/_localemodule.obj",
+                "build/core/_lsprof.obj",
+                "build/core/_math.obj",
+                "build/core/_opcode.obj",
+                "build/core/_operator.obj",
+                "build/core/_peg_parser.obj",
+                "build/core/_pickle.obj",
+                "build/core/_randommodule.obj",
+                "build/core/_sre.obj",
+                "build/core/_stat.obj",
+                "build/core/_statisticsmodule.obj",
+                "build/core/_struct.obj",
+                "build/core/_threadmodule.obj",
+                "build/core/_tracemalloc.obj",
+                "build/core/_warnings.obj",
+                "build/core/_weakref.obj",
+                "build/core/_winapi.obj",
+                "build/core/_xxsubinterpretersmodule.obj",
+                "build/core/abstract.obj",
+                "build/core/acceler.obj",
+                "build/core/accu.obj",
+                "build/core/adler32.obj",
+                "build/core/arraymodule.obj",
+                "build/core/asdl.obj",
+                "build/core/ast.obj",
+                "build/core/ast_opt.obj",
+                "build/core/ast_unparse.obj",
+                "build/core/atexitmodule.obj",
+                "build/core/audioop.obj",
+                "build/core/binascii.obj",
+                "build/core/blake2b_impl.obj",
+                "build/core/blake2module.obj",
+                "build/core/blake2s_impl.obj",
+                "build/core/bltinmodule.obj",
+                "build/core/boolobject.obj",
+                "build/core/bootstrap_hash.obj",
+                "build/core/bufferedio.obj",
+                "build/core/bytearrayobject.obj",
+                "build/core/bytes_methods.obj",
+                "build/core/bytesio.obj",
+                "build/core/bytesobject.obj",
+                "build/core/call.obj",
+                "build/core/capsule.obj",
+                "build/core/cellobject.obj",
+                "build/core/ceval.obj",
+                "build/core/classobject.obj",
+                "build/core/cmathmodule.obj",
+                "build/core/codecs.obj",
+                "build/core/codeobject.obj",
+                "build/core/compile.obj",
+                "build/core/complexobject.obj",
+                "build/core/compress.obj",
+                "build/core/config.obj",
+                "build/core/context.obj",
+                "build/core/crc32.obj",
+                "build/core/deflate.obj",
+                "build/core/descrobject.obj",
+                "build/core/dictobject.obj",
+                "build/core/dl_nt.obj",
+                "build/core/dtoa.obj",
+                "build/core/dynamic_annotations.obj",
+                "build/core/dynload_win.obj",
+                "build/core/enumobject.obj",
+                "build/core/errnomodule.obj",
+                "build/core/errors.obj",
+                "build/core/exceptions.obj",
+                "build/core/faulthandler.obj",
+                "build/core/fileio.obj",
+                "build/core/fileobject.obj",
+                "build/core/fileutils.obj",
+                "build/core/floatobject.obj",
+                "build/core/formatter_unicode.obj",
+                "build/core/frameobject.obj",
+                "build/core/frozen.obj",
+                "build/core/funcobject.obj",
+                "build/core/future.obj",
+                "build/core/gcmodule.obj",
+                "build/core/genericaliasobject.obj",
+                "build/core/genobject.obj",
+                "build/core/getargs.obj",
+                "build/core/getbuildinfo.obj",
+                "build/core/getcompiler.obj",
+                "build/core/getcopyright.obj",
+                "build/core/getopt.obj",
+                "build/core/getpathp.obj",
+                "build/core/getplatform.obj",
+                "build/core/getversion.obj",
+                "build/core/graminit.obj",
+                "build/core/grammar1.obj",
+                "build/core/hamt.obj",
+                "build/core/hashtable.obj",
+                "build/core/import.obj",
+                "build/core/importdl.obj",
+                "build/core/infback.obj",
+                "build/core/inffast.obj",
+                "build/core/inflate.obj",
+                "build/core/inftrees.obj",
+                "build/core/initconfig.obj",
+                "build/core/interpreteridobject.obj",
+                "build/core/invalid_parameter_handler.obj",
+                "build/core/iobase.obj",
+                "build/core/iterobject.obj",
+                "build/core/itertoolsmodule.obj",
+                "build/core/listnode.obj",
+                "build/core/listobject.obj",
+                "build/core/longobject.obj",
+                "build/core/main.obj",
+                "build/core/marshal.obj",
+                "build/core/mathmodule.obj",
+                "build/core/md5module.obj",
+                "build/core/memoryobject.obj",
+                "build/core/methodobject.obj",
+                "build/core/mmapmodule.obj",
+                "build/core/modsupport.obj",
+                "build/core/moduleobject.obj",
+                "build/core/msvcrtmodule.obj",
+                "build/core/multibytecodec.obj",
+                "build/core/myreadline.obj",
+                "build/core/mysnprintf.obj",
+                "build/core/mystrtoul.obj",
+                "build/core/namespaceobject.obj",
+                "build/core/node.obj",
+                "build/core/object.obj",
+                "build/core/obmalloc.obj",
+                "build/core/odictobject.obj",
+                "build/core/parse.obj",
+                "build/core/parse_string.obj",
+                "build/core/parser.obj",
+                "build/core/parsermodule.obj",
+                "build/core/parsetok.obj",
+                "build/core/pathconfig.obj",
+                "build/core/peephole.obj",
+                "build/core/peg_api.obj",
+                "build/core/pegen.obj",
+                "build/core/picklebufobject.obj",
+                "build/core/posixmodule.obj",
+                "build/core/preconfig.obj",
+                "build/core/pyarena.obj",
+                "build/core/pyctype.obj",
+                "build/core/pyfpe.obj",
+                "build/core/pyhash.obj",
+                "build/core/pylifecycle.obj",
+                "build/core/pymath.obj",
+                "build/core/pystate.obj",
+                "build/core/pystrcmp.obj",
+                "build/core/pystrhex.obj",
+                "build/core/pystrtod.obj",
+                "build/core/pythonrun.obj",
+                "build/core/pytime.obj",
+                "build/core/rangeobject.obj",
+                "build/core/rotatingtree.obj",
+                "build/core/setobject.obj",
+                "build/core/sha1module.obj",
+                "build/core/sha256module.obj",
+                "build/core/sha3module.obj",
+                "build/core/sha512module.obj",
+                "build/core/signalmodule.obj",
+                "build/core/sliceobject.obj",
+                "build/core/stringio.obj",
+                "build/core/structmember.obj",
+                "build/core/structseq.obj",
+                "build/core/symtable.obj",
+                "build/core/symtablemodule.obj",
+                "build/core/sysmodule.obj",
+                "build/core/textio.obj",
+                "build/core/thread.obj",
+                "build/core/timemodule.obj",
+                "build/core/token.obj",
+                "build/core/tokenizer.obj",
+                "build/core/traceback.obj",
+                "build/core/trees.obj",
+                "build/core/tupleobject.obj",
+                "build/core/typeobject.obj",
+                "build/core/uncompr.obj",
+                "build/core/unicodectype.obj",
+                "build/core/unicodeobject.obj",
+                "build/core/weakrefobject.obj",
+                "build/core/winconsoleio.obj",
+                "build/core/winreg.obj",
+                "build/core/xxsubtype.obj",
+                "build/core/zlibmodule.obj",
+                "build/core/zutil.obj"
+            ],
+            "shared_lib": "install/python39.dll"
+        },
+        "extensions": {
+            "_abc": [
+                {
+                    "in_core": true,
+                    "init_fn": "PyInit__abc",
+                    "links": [],
+                    "objs": [],
+                    "required": false,
+                    "shared_lib": null,
+                    "static_lib": null,
+                    "variant": "default"
+                }
+            ],
+            "_ast": [
+                {
+                    "in_core": true,
+                    "init_fn": "PyInit__ast",
+                    "links": [],
+                    "objs": [],
+                    "required": false,
+                    "shared_lib": null,
+                    "static_lib": null,
+                    "variant": "default"
+                }
+            ],
+            "_asyncio": [
+                {
+                    "in_core": false,
+                    "init_fn": "PyInit__asyncio",
+                    "links": [],
+                    "objs": [
+                        "build/extensions/_asyncio/_asynciomodule.obj"
+                    ],
+                    "required": false,
+                    "shared_lib": "install/DLLs/_asyncio.pyd",
+                    "static_lib": null,
+                    "variant": "default"
+                }
+            ],
+            "_bisect": [
+                {
+                    "in_core": true,
+                    "init_fn": "PyInit__bisect",
+                    "links": [],
+                    "objs": [],
+                    "required": false,
+                    "shared_lib": null,
+                    "static_lib": null,
+                    "variant": "default"
+                }
+            ],
+            "_blake2": [
+                {
+                    "in_core": true,
+                    "init_fn": "PyInit__blake2",
+                    "links": [],
+                    "objs": [],
+                    "required": false,
+                    "shared_lib": null,
+                    "static_lib": null,
+                    "variant": "default"
+                }
+            ],
+            "_bz2": [
+                {
+                    "in_core": false,
+                    "init_fn": "PyInit__bz2",
+                    "license_paths": [
+                        "licenses/LICENSE.bzip2.txt"
+                    ],
+                    "license_public_domain": null,
+                    "licenses": [
+                        "bzip2-1.0.6"
+                    ],
+                    "links": [],
+                    "objs": [
+                        "build/extensions/_bz2/_bz2module.obj",
+                        "build/extensions/_bz2/blocksort.obj",
+                        "build/extensions/_bz2/bzlib.obj",
+                        "build/extensions/_bz2/compress.obj",
+                        "build/extensions/_bz2/crctable.obj",
+                        "build/extensions/_bz2/decompress.obj",
+                        "build/extensions/_bz2/huffman.obj",
+                        "build/extensions/_bz2/randtable.obj"
+                    ],
+                    "required": false,
+                    "shared_lib": "install/DLLs/_bz2.pyd",
+                    "static_lib": null,
+                    "variant": "default"
+                }
+            ],
+            "_codecs": [
+                {
+                    "in_core": true,
+                    "init_fn": "PyInit__codecs",
+                    "links": [],
+                    "objs": [],
+                    "required": true,
+                    "shared_lib": null,
+                    "static_lib": null,
+                    "variant": "default"
+                }
+            ],
+            "_codecs_cn": [
+                {
+                    "in_core": true,
+                    "init_fn": "PyInit__codecs_cn",
+                    "links": [],
+                    "objs": [],
+                    "required": false,
+                    "shared_lib": null,
+                    "static_lib": null,
+                    "variant": "default"
+                }
+            ],
+            "_codecs_hk": [
+                {
+                    "in_core": true,
+                    "init_fn": "PyInit__codecs_hk",
+                    "links": [],
+                    "objs": [],
+                    "required": false,
+                    "shared_lib": null,
+                    "static_lib": null,
+                    "variant": "default"
+                }
+            ],
+            "_codecs_iso2022": [
+                {
+                    "in_core": true,
+                    "init_fn": "PyInit__codecs_iso2022",
+                    "links": [],
+                    "objs": [],
+                    "required": false,
+                    "shared_lib": null,
+                    "static_lib": null,
+                    "variant": "default"
+                }
+            ],
+            "_codecs_jp": [
+                {
+                    "in_core": true,
+                    "init_fn": "PyInit__codecs_jp",
+                    "links": [],
+                    "objs": [],
+                    "required": false,
+                    "shared_lib": null,
+                    "static_lib": null,
+                    "variant": "default"
+                }
+            ],
+            "_codecs_kr": [
+                {
+                    "in_core": true,
+                    "init_fn": "PyInit__codecs_kr",
+                    "links": [],
+                    "objs": [],
+                    "required": false,
+                    "shared_lib": null,
+                    "static_lib": null,
+                    "variant": "default"
+                }
+            ],
+            "_codecs_tw": [
+                {
+                    "in_core": true,
+                    "init_fn": "PyInit__codecs_tw",
+                    "links": [],
+                    "objs": [],
+                    "required": false,
+                    "shared_lib": null,
+                    "static_lib": null,
+                    "variant": "default"
+                }
+            ],
+            "_collections": [
+                {
+                    "in_core": true,
+                    "init_fn": "PyInit__collections",
+                    "links": [],
+                    "objs": [],
+                    "required": false,
+                    "shared_lib": null,
+                    "static_lib": null,
+                    "variant": "default"
+                }
+            ],
+            "_contextvars": [
+                {
+                    "in_core": true,
+                    "init_fn": "PyInit__contextvars",
+                    "links": [],
+                    "objs": [],
+                    "required": false,
+                    "shared_lib": null,
+                    "static_lib": null,
+                    "variant": "default"
+                }
+            ],
+            "_csv": [
+                {
+                    "in_core": true,
+                    "init_fn": "PyInit__csv",
+                    "links": [],
+                    "objs": [],
+                    "required": false,
+                    "shared_lib": null,
+                    "static_lib": null,
+                    "variant": "default"
+                }
+            ],
+            "_ctypes": [
+                {
+                    "in_core": false,
+                    "init_fn": "PyInit__ctypes",
+                    "license_paths": [
+                        "licenses/LICENSE.libffi.txt"
+                    ],
+                    "license_public_domain": null,
+                    "licenses": [
+                        "MIT"
+                    ],
+                    "links": [
+                        {
+                            "name": "libffi-7",
+                            "path_dynamic": "install/DLLs/libffi-7.dll"
+                        }
+                    ],
+                    "objs": [
+                        "build/extensions/_ctypes/_ctypes.obj",
+                        "build/extensions/_ctypes/callbacks.obj",
+                        "build/extensions/_ctypes/callproc.obj",
+                        "build/extensions/_ctypes/cfield.obj",
+                        "build/extensions/_ctypes/malloc_closure.obj",
+                        "build/extensions/_ctypes/stgdict.obj"
+                    ],
+                    "required": false,
+                    "shared_lib": "install/DLLs/_ctypes.pyd",
+                    "static_lib": null,
+                    "variant": "default"
+                }
+            ],
+            "_datetime": [
+                {
+                    "in_core": true,
+                    "init_fn": "PyInit__datetime",
+                    "links": [],
+                    "objs": [],
+                    "required": false,
+                    "shared_lib": null,
+                    "static_lib": null,
+                    "variant": "default"
+                }
+            ],
+            "_decimal": [
+                {
+                    "in_core": false,
+                    "init_fn": "PyInit__decimal",
+                    "links": [],
+                    "objs": [
+                        "build/extensions/_decimal/_decimal.obj",
+                        "build/extensions/_decimal/basearith.obj",
+                        "build/extensions/_decimal/constants.obj",
+                        "build/extensions/_decimal/context.obj",
+                        "build/extensions/_decimal/convolute.obj",
+                        "build/extensions/_decimal/crt.obj",
+                        "build/extensions/_decimal/difradix2.obj",
+                        "build/extensions/_decimal/fnt.obj",
+                        "build/extensions/_decimal/fourstep.obj",
+                        "build/extensions/_decimal/io.obj",
+                        "build/extensions/_decimal/mpalloc.obj",
+                        "build/extensions/_decimal/mpdecimal.obj",
+                        "build/extensions/_decimal/numbertheory.obj",
+                        "build/extensions/_decimal/sixstep.obj",
+                        "build/extensions/_decimal/transpose.obj",
+                        "build/extensions/_decimal/vcdiv64.obj"
+                    ],
+                    "required": false,
+                    "shared_lib": "install/DLLs/_decimal.pyd",
+                    "static_lib": null,
+                    "variant": "default"
+                }
+            ],
+            "_elementtree": [
+                {
+                    "in_core": false,
+                    "init_fn": "PyInit__elementtree",
+                    "links": [],
+                    "objs": [
+                        "build/extensions/_elementtree/_elementtree.obj",
+                        "build/extensions/_elementtree/xmlparse.obj",
+                        "build/extensions/_elementtree/xmlrole.obj",
+                        "build/extensions/_elementtree/xmltok.obj"
+                    ],
+                    "required": false,
+                    "shared_lib": "install/DLLs/_elementtree.pyd",
+                    "static_lib": null,
+                    "variant": "default"
+                }
+            ],
+            "_functools": [
+                {
+                    "in_core": true,
+                    "init_fn": "PyInit__functools",
+                    "links": [],
+                    "objs": [],
+                    "required": false,
+                    "shared_lib": null,
+                    "static_lib": null,
+                    "variant": "default"
+                }
+            ],
+            "_hashlib": [
+                {
+                    "in_core": false,
+                    "init_fn": "PyInit__hashlib",
+                    "license_paths": [
+                        "licenses/LICENSE.openssl.txt"
+                    ],
+                    "license_public_domain": null,
+                    "licenses": [
+                        "OpenSSL"
+                    ],
+                    "links": [
+                        {
+                            "name": "ws2_32",
+                            "system": true
+                        },
+                        {
+                            "name": "libcrypto-1_1-x64",
+                            "path_dynamic": "install/DLLs/libcrypto-1_1-x64.dll"
+                        }
+                    ],
+                    "objs": [
+                        "build/extensions/_hashlib/_hashopenssl.obj"
+                    ],
+                    "required": false,
+                    "shared_lib": "install/DLLs/_hashlib.pyd",
+                    "static_lib": null,
+                    "variant": "default"
+                }
+            ],
+            "_heapq": [
+                {
+                    "in_core": true,
+                    "init_fn": "PyInit__heapq",
+                    "links": [],
+                    "objs": [],
+                    "required": false,
+                    "shared_lib": null,
+                    "static_lib": null,
+                    "variant": "default"
+                }
+            ],
+            "_imp": [
+                {
+                    "in_core": true,
+                    "init_fn": "PyInit__imp",
+                    "links": [],
+                    "objs": [],
+                    "required": false,
+                    "shared_lib": null,
+                    "static_lib": null,
+                    "variant": "default"
+                }
+            ],
+            "_io": [
+                {
+                    "in_core": true,
+                    "init_fn": "PyInit__io",
+                    "links": [],
+                    "objs": [],
+                    "required": true,
+                    "shared_lib": null,
+                    "static_lib": null,
+                    "variant": "default"
+                }
+            ],
+            "_json": [
+                {
+                    "in_core": true,
+                    "init_fn": "PyInit__json",
+                    "links": [],
+                    "objs": [],
+                    "required": false,
+                    "shared_lib": null,
+                    "static_lib": null,
+                    "variant": "default"
+                }
+            ],
+            "_locale": [
+                {
+                    "in_core": true,
+                    "init_fn": "PyInit__locale",
+                    "links": [],
+                    "objs": [],
+                    "required": false,
+                    "shared_lib": null,
+                    "static_lib": null,
+                    "variant": "default"
+                }
+            ],
+            "_lsprof": [
+                {
+                    "in_core": true,
+                    "init_fn": "PyInit__lsprof",
+                    "links": [],
+                    "objs": [],
+                    "required": false,
+                    "shared_lib": null,
+                    "static_lib": null,
+                    "variant": "default"
+                }
+            ],
+            "_lzma": [
+                {
+                    "in_core": false,
+                    "init_fn": "PyInit__lzma",
+                    "license_paths": [
+                        "licenses/LICENSE.liblzma.txt"
+                    ],
+                    "license_public_domain": true,
+                    "licenses": [],
+                    "links": [],
+                    "objs": [
+                        "build/extensions/_lzma/_lzmamodule.obj"
+                    ],
+                    "required": false,
+                    "shared_lib": "install/DLLs/_lzma.pyd",
+                    "static_lib": null,
+                    "variant": "default"
+                }
+            ],
+            "_md5": [
+                {
+                    "in_core": true,
+                    "init_fn": "PyInit__md5",
+                    "links": [],
+                    "objs": [],
+                    "required": false,
+                    "shared_lib": null,
+                    "static_lib": null,
+                    "variant": "default"
+                }
+            ],
+            "_msi": [
+                {
+                    "in_core": false,
+                    "init_fn": "PyInit__msi",
+                    "links": [
+                        {
+                            "name": "cabinet",
+                            "system": true
+                        },
+                        {
+                            "name": "msi",
+                            "system": true
+                        },
+                        {
+                            "name": "rpcrt4",
+                            "system": true
+                        }
+                    ],
+                    "objs": [
+                        "build/extensions/_msi/_msi.obj"
+                    ],
+                    "required": false,
+                    "shared_lib": "install/DLLs/_msi.pyd",
+                    "static_lib": null,
+                    "variant": "default"
+                }
+            ],
+            "_multibytecodec": [
+                {
+                    "in_core": true,
+                    "init_fn": "PyInit__multibytecodec",
+                    "links": [],
+                    "objs": [],
+                    "required": false,
+                    "shared_lib": null,
+                    "static_lib": null,
+                    "variant": "default"
+                }
+            ],
+            "_multiprocessing": [
+                {
+                    "in_core": false,
+                    "init_fn": "PyInit__multiprocessing",
+                    "links": [
+                        {
+                            "name": "ws2_32",
+                            "system": true
+                        }
+                    ],
+                    "objs": [
+                        "build/extensions/_multiprocessing/multiprocessing.obj",
+                        "build/extensions/_multiprocessing/semaphore.obj"
+                    ],
+                    "required": false,
+                    "shared_lib": "install/DLLs/_multiprocessing.pyd",
+                    "static_lib": null,
+                    "variant": "default"
+                }
+            ],
+            "_opcode": [
+                {
+                    "in_core": true,
+                    "init_fn": "PyInit__opcode",
+                    "links": [],
+                    "objs": [],
+                    "required": false,
+                    "shared_lib": null,
+                    "static_lib": null,
+                    "variant": "default"
+                }
+            ],
+            "_operator": [
+                {
+                    "in_core": true,
+                    "init_fn": "PyInit__operator",
+                    "links": [],
+                    "objs": [],
+                    "required": false,
+                    "shared_lib": null,
+                    "static_lib": null,
+                    "variant": "default"
+                }
+            ],
+            "_overlapped": [
+                {
+                    "in_core": false,
+                    "init_fn": "PyInit__overlapped",
+                    "links": [
+                        {
+                            "name": "ws2_32",
+                            "system": true
+                        }
+                    ],
+                    "objs": [
+                        "build/extensions/_overlapped/overlapped.obj"
+                    ],
+                    "required": false,
+                    "shared_lib": "install/DLLs/_overlapped.pyd",
+                    "static_lib": null,
+                    "variant": "default"
+                }
+            ],
+            "_peg_parser": [
+                {
+                    "in_core": true,
+                    "init_fn": "PyInit__peg_parser",
+                    "links": [],
+                    "objs": [],
+                    "required": false,
+                    "shared_lib": null,
+                    "static_lib": null,
+                    "variant": "default"
+                }
+            ],
+            "_pickle": [
+                {
+                    "in_core": true,
+                    "init_fn": "PyInit__pickle",
+                    "links": [],
+                    "objs": [],
+                    "required": false,
+                    "shared_lib": null,
+                    "static_lib": null,
+                    "variant": "default"
+                }
+            ],
+            "_queue": [
+                {
+                    "in_core": false,
+                    "init_fn": "PyInit__queue",
+                    "links": [],
+                    "objs": [
+                        "build/extensions/_queue/_queuemodule.obj"
+                    ],
+                    "required": false,
+                    "shared_lib": "install/DLLs/_queue.pyd",
+                    "static_lib": null,
+                    "variant": "default"
+                }
+            ],
+            "_random": [
+                {
+                    "in_core": true,
+                    "init_fn": "PyInit__random",
+                    "links": [],
+                    "objs": [],
+                    "required": false,
+                    "shared_lib": null,
+                    "static_lib": null,
+                    "variant": "default"
+                }
+            ],
+            "_sha1": [
+                {
+                    "in_core": true,
+                    "init_fn": "PyInit__sha1",
+                    "links": [],
+                    "objs": [],
+                    "required": false,
+                    "shared_lib": null,
+                    "static_lib": null,
+                    "variant": "default"
+                }
+            ],
+            "_sha256": [
+                {
+                    "in_core": true,
+                    "init_fn": "PyInit__sha256",
+                    "links": [],
+                    "objs": [],
+                    "required": false,
+                    "shared_lib": null,
+                    "static_lib": null,
+                    "variant": "default"
+                }
+            ],
+            "_sha3": [
+                {
+                    "in_core": true,
+                    "init_fn": "PyInit__sha3",
+                    "links": [],
+                    "objs": [],
+                    "required": false,
+                    "shared_lib": null,
+                    "static_lib": null,
+                    "variant": "default"
+                }
+            ],
+            "_sha512": [
+                {
+                    "in_core": true,
+                    "init_fn": "PyInit__sha512",
+                    "links": [],
+                    "objs": [],
+                    "required": false,
+                    "shared_lib": null,
+                    "static_lib": null,
+                    "variant": "default"
+                }
+            ],
+            "_signal": [
+                {
+                    "in_core": true,
+                    "init_fn": "PyInit__signal",
+                    "links": [],
+                    "objs": [],
+                    "required": true,
+                    "shared_lib": null,
+                    "static_lib": null,
+                    "variant": "default"
+                }
+            ],
+            "_socket": [
+                {
+                    "in_core": false,
+                    "init_fn": "PyInit__socket",
+                    "links": [
+                        {
+                            "name": "iphlpapi",
+                            "system": true
+                        },
+                        {
+                            "name": "ws2_32",
+                            "system": true
+                        }
+                    ],
+                    "objs": [
+                        "build/extensions/_socket/socketmodule.obj"
+                    ],
+                    "required": false,
+                    "shared_lib": "install/DLLs/_socket.pyd",
+                    "static_lib": null,
+                    "variant": "default"
+                }
+            ],
+            "_sqlite3": [
+                {
+                    "in_core": false,
+                    "init_fn": "PyInit__sqlite3",
+                    "license_paths": [
+                        "licenses/LICENSE.sqlite.txt"
+                    ],
+                    "license_public_domain": true,
+                    "licenses": [],
+                    "links": [
+                        {
+                            "name": "sqlite3",
+                            "path_dynamic": "install/DLLs/sqlite3.dll"
+                        }
+                    ],
+                    "objs": [
+                        "build/extensions/_sqlite3/cache.obj",
+                        "build/extensions/_sqlite3/connection.obj",
+                        "build/extensions/_sqlite3/cursor.obj",
+                        "build/extensions/_sqlite3/microprotocols.obj",
+                        "build/extensions/_sqlite3/module.obj",
+                        "build/extensions/_sqlite3/prepare_protocol.obj",
+                        "build/extensions/_sqlite3/row.obj",
+                        "build/extensions/_sqlite3/statement.obj",
+                        "build/extensions/_sqlite3/util.obj"
+                    ],
+                    "required": false,
+                    "shared_lib": "install/DLLs/_sqlite3.pyd",
+                    "static_lib": null,
+                    "variant": "default"
+                }
+            ],
+            "_sre": [
+                {
+                    "in_core": true,
+                    "init_fn": "PyInit__sre",
+                    "links": [],
+                    "objs": [],
+                    "required": false,
+                    "shared_lib": null,
+                    "static_lib": null,
+                    "variant": "default"
+                }
+            ],
+            "_ssl": [
+                {
+                    "in_core": false,
+                    "init_fn": "PyInit__ssl",
+                    "license_paths": [
+                        "licenses/LICENSE.openssl.txt"
+                    ],
+                    "license_public_domain": null,
+                    "licenses": [
+                        "OpenSSL"
+                    ],
+                    "links": [
+                        {
+                            "name": "crypt32",
+                            "system": true
+                        },
+                        {
+                            "name": "ws2_32",
+                            "system": true
+                        },
+                        {
+                            "name": "libcrypto-1_1-x64",
+                            "path_dynamic": "install/DLLs/libcrypto-1_1-x64.dll"
+                        },
+                        {
+                            "name": "libssl-1_1-x64",
+                            "path_dynamic": "install/DLLs/libssl-1_1-x64.dll"
+                        }
+                    ],
+                    "objs": [
+                        "build/extensions/_ssl/_ssl.obj",
+                        "build/extensions/_ssl/applink.obj"
+                    ],
+                    "required": false,
+                    "shared_lib": "install/DLLs/_ssl.pyd",
+                    "static_lib": null,
+                    "variant": "default"
+                }
+            ],
+            "_stat": [
+                {
+                    "in_core": true,
+                    "init_fn": "PyInit__stat",
+                    "links": [],
+                    "objs": [],
+                    "required": false,
+                    "shared_lib": null,
+                    "static_lib": null,
+                    "variant": "default"
+                }
+            ],
+            "_statistics": [
+                {
+                    "in_core": true,
+                    "init_fn": "PyInit__statistics",
+                    "links": [],
+                    "objs": [],
+                    "required": false,
+                    "shared_lib": null,
+                    "static_lib": null,
+                    "variant": "default"
+                }
+            ],
+            "_string": [
+                {
+                    "in_core": true,
+                    "init_fn": "PyInit__string",
+                    "links": [],
+                    "objs": [],
+                    "required": false,
+                    "shared_lib": null,
+                    "static_lib": null,
+                    "variant": "default"
+                }
+            ],
+            "_struct": [
+                {
+                    "in_core": true,
+                    "init_fn": "PyInit__struct",
+                    "links": [],
+                    "objs": [],
+                    "required": false,
+                    "shared_lib": null,
+                    "static_lib": null,
+                    "variant": "default"
+                }
+            ],
+            "_symtable": [
+                {
+                    "in_core": true,
+                    "init_fn": "PyInit__symtable",
+                    "links": [],
+                    "objs": [],
+                    "required": false,
+                    "shared_lib": null,
+                    "static_lib": null,
+                    "variant": "default"
+                }
+            ],
+            "_thread": [
+                {
+                    "in_core": true,
+                    "init_fn": "PyInit__thread",
+                    "links": [],
+                    "objs": [],
+                    "required": true,
+                    "shared_lib": null,
+                    "static_lib": null,
+                    "variant": "default"
+                }
+            ],
+            "_tkinter": [
+                {
+                    "in_core": false,
+                    "init_fn": "PyInit__tkinter",
+                    "license_paths": [
+                        "licenses/LICENSE.tcl.txt",
+                        "licenses/LICENSE.tix.txt"
+                    ],
+                    "license_public_domain": null,
+                    "licenses": [
+                        "TCL"
+                    ],
+                    "links": [
+                        {
+                            "name": "$(tcltk",
+                            "system": true
+                        },
+                        {
+                            "name": "tcl86t",
+                            "path_dynamic": "install/DLLs/tcl86t.dll"
+                        },
+                        {
+                            "name": "tk86t",
+                            "path_dynamic": "install/DLLs/tk86t.dll"
+                        }
+                    ],
+                    "objs": [
+                        "build/extensions/_tkinter/_tkinter.obj",
+                        "build/extensions/_tkinter/tkappinit.obj"
+                    ],
+                    "required": false,
+                    "shared_lib": "install/DLLs/_tkinter.pyd",
+                    "static_lib": null,
+                    "variant": "default"
+                }
+            ],
+            "_tracemalloc": [
+                {
+                    "in_core": true,
+                    "init_fn": "PyInit__tracemalloc",
+                    "links": [],
+                    "objs": [],
+                    "required": true,
+                    "shared_lib": null,
+                    "static_lib": null,
+                    "variant": "default"
+                }
+            ],
+            "_uuid": [
+                {
+                    "in_core": false,
+                    "init_fn": "PyInit__uuid",
+                    "license_paths": [
+                        "licenses/LICENSE.libuuid.txt"
+                    ],
+                    "license_public_domain": null,
+                    "licenses": [
+                        "BSD-3-Clause"
+                    ],
+                    "links": [
+                        {
+                            "name": "rpcrt4",
+                            "system": true
+                        }
+                    ],
+                    "objs": [
+                        "build/extensions/_uuid/_uuidmodule.obj"
+                    ],
+                    "required": false,
+                    "shared_lib": "install/DLLs/_uuid.pyd",
+                    "static_lib": null,
+                    "variant": "default"
+                }
+            ],
+            "_warnings": [
+                {
+                    "in_core": true,
+                    "init_fn": "_PyWarnings_Init",
+                    "links": [],
+                    "objs": [],
+                    "required": false,
+                    "shared_lib": null,
+                    "static_lib": null,
+                    "variant": "default"
+                }
+            ],
+            "_weakref": [
+                {
+                    "in_core": true,
+                    "init_fn": "PyInit__weakref",
+                    "links": [],
+                    "objs": [],
+                    "required": true,
+                    "shared_lib": null,
+                    "static_lib": null,
+                    "variant": "default"
+                }
+            ],
+            "_winapi": [
+                {
+                    "in_core": true,
+                    "init_fn": "PyInit__winapi",
+                    "links": [],
+                    "objs": [],
+                    "required": false,
+                    "shared_lib": null,
+                    "static_lib": null,
+                    "variant": "default"
+                }
+            ],
+            "_xxsubinterpreters": [
+                {
+                    "in_core": true,
+                    "init_fn": "PyInit__xxsubinterpreters",
+                    "links": [],
+                    "objs": [],
+                    "required": false,
+                    "shared_lib": null,
+                    "static_lib": null,
+                    "variant": "default"
+                }
+            ],
+            "_zoneinfo": [
+                {
+                    "in_core": false,
+                    "init_fn": "PyInit__zoneinfo",
+                    "links": [],
+                    "objs": [
+                        "build/extensions/_zoneinfo/_zoneinfo.obj"
+                    ],
+                    "required": false,
+                    "shared_lib": "install/DLLs/_zoneinfo.pyd",
+                    "static_lib": null,
+                    "variant": "default"
+                }
+            ],
+            "array": [
+                {
+                    "in_core": true,
+                    "init_fn": "PyInit_array",
+                    "links": [],
+                    "objs": [],
+                    "required": false,
+                    "shared_lib": null,
+                    "static_lib": null,
+                    "variant": "default"
+                }
+            ],
+            "atexit": [
+                {
+                    "in_core": true,
+                    "init_fn": "PyInit_atexit",
+                    "links": [],
+                    "objs": [],
+                    "required": false,
+                    "shared_lib": null,
+                    "static_lib": null,
+                    "variant": "default"
+                }
+            ],
+            "audioop": [
+                {
+                    "in_core": true,
+                    "init_fn": "PyInit_audioop",
+                    "links": [],
+                    "objs": [],
+                    "required": false,
+                    "shared_lib": null,
+                    "static_lib": null,
+                    "variant": "default"
+                }
+            ],
+            "binascii": [
+                {
+                    "in_core": true,
+                    "init_fn": "PyInit_binascii",
+                    "links": [],
+                    "objs": [],
+                    "required": false,
+                    "shared_lib": null,
+                    "static_lib": null,
+                    "variant": "default"
+                }
+            ],
+            "builtins": [
+                {
+                    "in_core": true,
+                    "init_fn": "NULL",
+                    "links": [],
+                    "objs": [],
+                    "required": false,
+                    "shared_lib": null,
+                    "static_lib": null,
+                    "variant": "default"
+                }
+            ],
+            "cmath": [
+                {
+                    "in_core": true,
+                    "init_fn": "PyInit_cmath",
+                    "links": [],
+                    "objs": [],
+                    "required": false,
+                    "shared_lib": null,
+                    "static_lib": null,
+                    "variant": "default"
+                }
+            ],
+            "errno": [
+                {
+                    "in_core": true,
+                    "init_fn": "PyInit_errno",
+                    "links": [],
+                    "objs": [],
+                    "required": false,
+                    "shared_lib": null,
+                    "static_lib": null,
+                    "variant": "default"
+                }
+            ],
+            "faulthandler": [
+                {
+                    "in_core": true,
+                    "init_fn": "PyInit_faulthandler",
+                    "links": [],
+                    "objs": [],
+                    "required": true,
+                    "shared_lib": null,
+                    "static_lib": null,
+                    "variant": "default"
+                }
+            ],
+            "gc": [
+                {
+                    "in_core": true,
+                    "init_fn": "PyInit_gc",
+                    "links": [],
+                    "objs": [],
+                    "required": false,
+                    "shared_lib": null,
+                    "static_lib": null,
+                    "variant": "default"
+                }
+            ],
+            "itertools": [
+                {
+                    "in_core": true,
+                    "init_fn": "PyInit_itertools",
+                    "links": [],
+                    "objs": [],
+                    "required": false,
+                    "shared_lib": null,
+                    "static_lib": null,
+                    "variant": "default"
+                }
+            ],
+            "marshal": [
+                {
+                    "in_core": true,
+                    "init_fn": "PyMarshal_Init",
+                    "links": [],
+                    "objs": [],
+                    "required": false,
+                    "shared_lib": null,
+                    "static_lib": null,
+                    "variant": "default"
+                }
+            ],
+            "math": [
+                {
+                    "in_core": true,
+                    "init_fn": "PyInit_math",
+                    "links": [],
+                    "objs": [],
+                    "required": false,
+                    "shared_lib": null,
+                    "static_lib": null,
+                    "variant": "default"
+                }
+            ],
+            "mmap": [
+                {
+                    "in_core": true,
+                    "init_fn": "PyInit_mmap",
+                    "links": [],
+                    "objs": [],
+                    "required": false,
+                    "shared_lib": null,
+                    "static_lib": null,
+                    "variant": "default"
+                }
+            ],
+            "msvcrt": [
+                {
+                    "in_core": true,
+                    "init_fn": "PyInit_msvcrt",
+                    "links": [],
+                    "objs": [],
+                    "required": false,
+                    "shared_lib": null,
+                    "static_lib": null,
+                    "variant": "default"
+                }
+            ],
+            "nt": [
+                {
+                    "in_core": true,
+                    "init_fn": "PyInit_nt",
+                    "links": [],
+                    "objs": [],
+                    "required": false,
+                    "shared_lib": null,
+                    "static_lib": null,
+                    "variant": "default"
+                }
+            ],
+            "parser": [
+                {
+                    "in_core": true,
+                    "init_fn": "PyInit_parser",
+                    "links": [],
+                    "objs": [],
+                    "required": false,
+                    "shared_lib": null,
+                    "static_lib": null,
+                    "variant": "default"
+                }
+            ],
+            "pyexpat": [
+                {
+                    "in_core": false,
+                    "init_fn": "PyInit_pyexpat",
+                    "links": [],
+                    "objs": [
+                        "build/extensions/pyexpat/pyexpat.obj",
+                        "build/extensions/pyexpat/xmlparse.obj",
+                        "build/extensions/pyexpat/xmlrole.obj",
+                        "build/extensions/pyexpat/xmltok.obj"
+                    ],
+                    "required": false,
+                    "shared_lib": "install/DLLs/pyexpat.pyd",
+                    "static_lib": null,
+                    "variant": "default"
+                }
+            ],
+            "select": [
+                {
+                    "in_core": false,
+                    "init_fn": "PyInit_select",
+                    "links": [
+                        {
+                            "name": "ws2_32",
+                            "system": true
+                        }
+                    ],
+                    "objs": [
+                        "build/extensions/select/selectmodule.obj"
+                    ],
+                    "required": false,
+                    "shared_lib": "install/DLLs/select.pyd",
+                    "static_lib": null,
+                    "variant": "default"
+                }
+            ],
+            "sys": [
+                {
+                    "in_core": true,
+                    "init_fn": "NULL",
+                    "links": [],
+                    "objs": [],
+                    "required": false,
+                    "shared_lib": null,
+                    "static_lib": null,
+                    "variant": "default"
+                }
+            ],
+            "time": [
+                {
+                    "in_core": true,
+                    "init_fn": "PyInit_time",
+                    "links": [],
+                    "objs": [],
+                    "required": false,
+                    "shared_lib": null,
+                    "static_lib": null,
+                    "variant": "default"
+                }
+            ],
+            "unicodedata": [
+                {
+                    "in_core": false,
+                    "init_fn": "PyInit_unicodedata",
+                    "links": [],
+                    "objs": [
+                        "build/extensions/unicodedata/unicodedata.obj"
+                    ],
+                    "required": false,
+                    "shared_lib": "install/DLLs/unicodedata.pyd",
+                    "static_lib": null,
+                    "variant": "default"
+                }
+            ],
+            "winreg": [
+                {
+                    "in_core": true,
+                    "init_fn": "PyInit_winreg",
+                    "links": [],
+                    "objs": [],
+                    "required": false,
+                    "shared_lib": null,
+                    "static_lib": null,
+                    "variant": "default"
+                }
+            ],
+            "winsound": [
+                {
+                    "in_core": false,
+                    "init_fn": "PyInit_winsound",
+                    "links": [
+                        {
+                            "name": "winmm",
+                            "system": true
+                        }
+                    ],
+                    "objs": [
+                        "build/extensions/winsound/winsound.obj"
+                    ],
+                    "required": false,
+                    "shared_lib": "install/DLLs/winsound.pyd",
+                    "static_lib": null,
+                    "variant": "default"
+                }
+            ],
+            "xxsubtype": [
+                {
+                    "in_core": true,
+                    "init_fn": "PyInit_xxsubtype",
+                    "links": [],
+                    "objs": [],
+                    "required": false,
+                    "shared_lib": null,
+                    "static_lib": null,
+                    "variant": "default"
+                }
+            ],
+            "zlib": [
+                {
+                    "in_core": true,
+                    "init_fn": "PyInit_zlib",
+                    "links": [],
+                    "objs": [],
+                    "required": false,
+                    "shared_lib": null,
+                    "static_lib": null,
+                    "variant": "default"
+                }
+            ]
+        },
+        "inittab_cflags": [
+            "-DNDEBUG",
+            "-DPy_BUILD_CORE"
+        ],
+        "inittab_object": "build/core/config.obj",
+        "inittab_source": "build/core/config.c",
+        "object_file_format": "coff"
+    },
+    "crt_features": [
+        "vcruntime:140"
+    ],
+    "libpython_link_mode": "shared",
+    "license_path": "licenses/LICENSE.cpython.txt",
+    "licenses": [
+        "Python-2.0",
+        "CNRI-Python"
+    ],
+    "optimizations": "pgo",
+    "python_abi_tag": null,
+    "python_bytecode_magic_number": "610d0d0a",
+    "python_config_vars": {
+        "BINDIR": "C:\\Users\\runneradmin\\AppData\\Local\\Temp\\python-build-y7px_lvm\\out\\python\\install",
+        "BINLIBDEST": "C:\\Users\\RUNNER~1\\AppData\\Local\\Temp\\python-build-y7px_lvm\\out\\python\\install\\Lib",
+        "EXE": ".exe",
+        "EXT_SUFFIX": ".cp39-win_amd64.pyd",
+        "INCLUDEPY": "C:\\Users\\RUNNER~1\\AppData\\Local\\Temp\\python-build-y7px_lvm\\out\\python\\install\\Include",
+        "LIBDEST": "C:\\Users\\RUNNER~1\\AppData\\Local\\Temp\\python-build-y7px_lvm\\out\\python\\install\\Lib",
+        "SO": ".cp39-win_amd64.pyd",
+        "TZPATH": "",
+        "VERSION": "39",
+        "abiflags": "",
+        "base": "C:\\Users\\RUNNER~1\\AppData\\Local\\Temp\\python-build-y7px_lvm\\out\\python\\install",
+        "exec_prefix": "C:\\Users\\RUNNER~1\\AppData\\Local\\Temp\\python-build-y7px_lvm\\out\\python\\install",
+        "installed_base": "C:\\Users\\RUNNER~1\\AppData\\Local\\Temp\\python-build-y7px_lvm\\out\\python\\install",
+        "installed_platbase": "C:\\Users\\RUNNER~1\\AppData\\Local\\Temp\\python-build-y7px_lvm\\out\\python\\install",
+        "platbase": "C:\\Users\\RUNNER~1\\AppData\\Local\\Temp\\python-build-y7px_lvm\\out\\python\\install",
+        "platlibdir": "lib",
+        "prefix": "C:\\Users\\RUNNER~1\\AppData\\Local\\Temp\\python-build-y7px_lvm\\out\\python\\install",
+        "projectbase": "C:\\Users\\runneradmin\\AppData\\Local\\Temp\\python-build-y7px_lvm\\out\\python\\install",
+        "py_version": "3.9.7",
+        "py_version_nodot": "39",
+        "py_version_short": "3.9",
+        "srcdir": "C:\\Users\\runneradmin\\AppData\\Local\\Temp\\python-build-y7px_lvm\\out\\python\\install",
+        "userbase": "C:\\Users\\runneradmin\\AppData\\Roaming\\Python"
+    },
+    "python_exe": "install/python.exe",
+    "python_extension_module_loading": [
+        "builtin",
+        "shared-library"
+    ],
+    "python_implementation_cache_tag": "cpython-39",
+    "python_implementation_hex_version": 50923504,
+    "python_implementation_name": "cpython",
+    "python_implementation_version": [
+        "3",
+        "9",
+        "7",
+        "final",
+        "0"
+    ],
+    "python_major_minor_version": "3.9",
+    "python_paths": {
+        "data": "install",
+        "include": "install/include",
+        "platinclude": "install/include",
+        "platlib": "install/Lib/site-packages",
+        "platstdlib": "install/Lib",
+        "purelib": "install/Lib/site-packages",
+        "scripts": "install/Scripts",
+        "stdlib": "install/Lib"
+    },
+    "python_paths_abstract": {
+        "data": "{base}",
+        "include": "{installed_base}/Include",
+        "platinclude": "{installed_base}/Include",
+        "platlib": "{base}/Lib/site-packages",
+        "platstdlib": "{base}/Lib",
+        "purelib": "{base}/Lib/site-packages",
+        "scripts": "{base}/Scripts",
+        "stdlib": "{installed_base}/Lib"
+    },
+    "python_platform_tag": "win-amd64",
+    "python_stdlib_test_packages": [
+        "bsddb.test",
+        "ctypes.test",
+        "distutils.tests",
+        "email.test",
+        "idlelib.idle_test",
+        "json.tests",
+        "lib-tk.test",
+        "lib2to3.tests",
+        "sqlite3.test",
+        "test",
+        "tkinter.test",
+        "unittest.test"
+    ],
+    "python_suffixes": {
+        "bytecode": [
+            ".pyc"
+        ],
+        "debug_bytecode": [
+            ".pyc"
+        ],
+        "extension": [
+            ".cp39-win_amd64.pyd",
+            ".pyd"
+        ],
+        "optimized_bytecode": [
+            ".pyc"
+        ],
+        "source": [
+            ".py",
+            ".pyw"
+        ]
+    },
+    "python_symbol_visibility": "dllexport",
+    "python_tag": "cp39",
+    "python_version": "3.9.7",
+    "run_tests": "build/run_tests.py",
+    "target_triple": "x86_64-pc-windows-msvc",
+    "tcl_library_path": "install/tcl",
+    "tcl_library_paths": [
+        "dde1.4",
+        "reg1.3",
+        "tcl8.6",
+        "tk8.6",
+        "tcl8",
+        "tix8.4.3"
+    ],
+    "version": "7"
+}
