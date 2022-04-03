@@ -11,17 +11,26 @@ cdef class Plane:
         api_core.godot_plane_new_with_reals(&self._native, a,b,c,d)
         self.update_event = UpdateEvent()
 
-    def new_with_reals(self, godot_real a, godot_real b, godot_real c, godot_real d):
-        api_core.godot_plane_new_with_reals(&self._native, a,b,c,d)
-        self.update_event.notify()
+    @staticmethod
+    def new_with_reals(godot_real a, godot_real b, godot_real c, godot_real d):
+        cdef Plane plane = Plane.__new__(Plane)
+        plane.update_event = UpdateEvent()
+        api_core.godot_plane_new_with_reals(&plane._native, a,b,c,d)
+        return plane
 
-    def new_with_vectors(self, Vector3 v1, Vector3 v2, Vector3 v3):
-        api_core.godot_plane_new_with_vectors(&self._native, &v2._native, &v2._native, &v3._native)
-        self.update_event.notify()
+    @staticmethod
+    def new_with_vectors(Vector3 v1, Vector3 v2, Vector3 v3):
+        cdef Plane plane = Plane.__new__(Plane)
+        plane.update_event = UpdateEvent()
+        api_core.godot_plane_new_with_vectors(&plane._native, &v2._native, &v2._native, &v3._native)
+        return plane
 
-    def new_with_normal(self, Vector3 normal, godot_real d):
-        api_core.godot_plane_new_with_normal(&self._native, &normal._native, d)
-        self.update_event.notify()
+    @staticmethod
+    def new_with_normal(Vector3 normal, godot_real d):
+        cdef Plane plane = Plane.__new__(Plane)
+        plane.update_event = UpdateEvent()
+        api_core.godot_plane_new_with_normal(&plane._native, &normal._native, d)
+        return plane
 
     def __str__(self):
         return str(String.new_static(api_core.godot_plane_as_string(&self._native)))
