@@ -65,7 +65,6 @@ cdef api  godot_pluginscript_script_manifest init_pluginscript_desc (godot_plugi
         for p in result.properties:
             properties_array.append(p.to_dict())
         for m in result.methods:
-            print("register_method:",m.name)
             methods_array.append(m.to_dict())
         for signal in result.signals:
             signals_array.append(signal.to_dict())
@@ -80,7 +79,6 @@ cdef api  godot_pluginscript_script_manifest init_pluginscript_desc (godot_plugi
 
     else:
         create_empty_manifest(&manifest)
-    print("------------------finish pluginscript------------")
     return manifest;
 
 cdef api  void finish_pluginscript_desc (godot_pluginscript_script_data *p_data) with gil:

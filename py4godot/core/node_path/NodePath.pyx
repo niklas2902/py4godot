@@ -7,7 +7,6 @@ api_core = get_core()
 cdef class NodePath:
 
     def __init__(self, path = None):
-        print(type(path))
         api_core.godot_node_path_new(&self._native, &String(path)._native)
         self.update_event = UpdateEvent()
 

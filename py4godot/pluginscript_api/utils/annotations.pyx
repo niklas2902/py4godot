@@ -22,7 +22,6 @@ class TransferObject():
 
 def exec_class(source_string):
     global methods, gd_class, properties,signals
-    print("--------------exec_class-----------------")
     methods = []
     gd_class = None
     properties = []
