@@ -5,8 +5,7 @@ from py4godot.classes.generated import *
 from py4godot.pluginscript_api.utils.annotations import *
 
 class PythonTest(unittest.TestCase):
-	def test_append(self):
-		int_array = PoolIntArray([])
-		#int_array.write()
+	def test_append_int(self):
+		int_array = PoolIntArray()
 		int_array.append(1)
-		print("value:",int_array[0])
+		self.assertEqual(int_array[0], 1)

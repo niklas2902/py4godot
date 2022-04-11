@@ -141,6 +141,8 @@ def generate_args(objs_to_import, method, result):
                     args += f" = {argument['type']}()"
                 elif argument["type"] == "Array":
                     args += f" = {argument['type']}()"
+                elif "Pool" in argument["type"]:
+                    args += f" = {argument['type']}()"
                 elif argument["type"] == "Dictionary":
                     args += f" = {argument['type']}()"
                 elif argument["type"] == "Transform2D":

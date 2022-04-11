@@ -10,7 +10,7 @@ from py4godot.enums.enums cimport godot_error
 api_core = get_core()
 
 cdef class PoolByteArray:
-    def __init__(self, list_ = []):
+    def __init__(self):
         self.update_event = UpdateEvent()
         api_core.godot_pool_byte_array_new(&self._native)
 
@@ -74,7 +74,7 @@ cdef class PoolByteArray:
       api_core.godot_pool_byte_array_destroy(&self._native)
 
 cdef class PoolRealArray:
-    def __init__(self, list_):
+    def __init__(self):
         self.update_event = UpdateEvent()
         api_core.godot_pool_real_array_new(&self._native)
 
@@ -140,7 +140,7 @@ cdef class PoolRealArray:
       api_core.godot_pool_real_array_destroy(&self._native)
 
 cdef class PoolIntArray:
-    def __init__(self, list_):
+    def __init__(self):
         self.update_event = UpdateEvent()
         api_core.godot_pool_int_array_new(&self._native)
 
@@ -207,7 +207,7 @@ cdef class PoolIntArray:
 
 
 cdef class PoolStringArray:
-    def __init__(self, list_):
+    def __init__(self):
         self.update_event = UpdateEvent()
         api_core.godot_pool_string_array_new(&self._native)
 
@@ -274,7 +274,7 @@ cdef class PoolStringArray:
 
 
 cdef class PoolVector2Array:
-    def __init__(self, list_):
+    def __init__(self):
         self.update_event = UpdateEvent()
         api_core.godot_pool_vector2_array_new(&self._native)
 
@@ -340,7 +340,7 @@ cdef class PoolVector2Array:
       api_core.godot_pool_vector2_array_destroy(&self._native)
 
 cdef class PoolVector3Array:
-    def __init__(self, list_):
+    def __init__(self):
         self.update_event = UpdateEvent()
         api_core.godot_pool_vector3_array_new(&self._native)
 
@@ -406,7 +406,7 @@ cdef class PoolVector3Array:
       api_core.godot_pool_vector3_array_destroy(&self._native)
 
 cdef class PoolColorArray:
-    def __init__(self, list_):
+    def __init__(self):
         self.update_event = UpdateEvent()
         api_core.godot_pool_color_array_new(&self._native)
 
