@@ -38,3 +38,4 @@ py4godot/classes/generated.pyx
 /tests/core/transform/addons/
 /tests/core/transform2d/addons/
 /py4godot/utils/core_holder_api.h
+/tests/core/pool_array/addons/

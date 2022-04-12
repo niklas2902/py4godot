@@ -30,6 +30,7 @@ from py4godot.core.vector2.Vector2 cimport Vector2
 from py4godot.godot_bindings.binding_external cimport *
 from py4godot.enums.enums cimport *
 from py4godot.classes.generated import *
+from py4godot.pluginscript_api.hints import *
 
 type_hint_map = {
 int: GODOT_PROPERTY_HINT_RANGE, SpriteFrames:GODOT_PROPERTY_HINT_SPRITE_FRAME,
@@ -74,15 +75,17 @@ def transform_type(type_):
     return
 class PropertyDescription:
     """"Description class for the properties, a gdclass can have and which can be found in the editor"""
-    def __init__(self, name,type_, hint, hint_string, usage, default_value, rset_mode):
+    def __init__(self, name,type_,hint_class, hint_string, usage, default_value, rset_mode):
         self.name = name
         self.type_ = transform_type(type_)
-        self.hint = hint
-        if(hint == None):
-            if(type_ in type_hint_map):
-                self.hint = type_hint_map[type_]
-            else:
-                self.hint = GODOT_PROPERTY_HINT_NONE
+
+        if hint_class != None:
+            hint_string = str(hint_class)
+
+        if(type_ in type_hint_map):
+            self.hint = type_hint_map[type_]
+        else:
+            self.hint = GODOT_PROPERTY_HINT_NONE
         self.hint_string = hint_string
         self.usage = usage
         self.default_value = default_value
