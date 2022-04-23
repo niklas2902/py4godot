@@ -1,4 +1,4 @@
-"""Tests for events.pyx."""
+"""Tests for events.py."""
 
 import collections.abc
 import concurrent.futures

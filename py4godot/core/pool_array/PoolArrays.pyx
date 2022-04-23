@@ -225,22 +225,22 @@ cdef class PoolStringArray:
       array.update_event = UpdateEvent()
       return array
 
-    def append(self, String p_data):
-      api_core.godot_pool_string_array_append(&self._native, &p_data._native)
+    def append(self, str p_data):
+      api_core.godot_pool_string_array_append(&self._native, &String(p_data)._native)
 
     def append_array(self, PoolStringArray p_array):
       api_core.godot_pool_string_array_append_array(&self._native, &p_array._native)
 
-    def insert(self, godot_int p_idx, String p_data):
-      cdef godot_error error = api_core.godot_pool_string_array_insert(&self._native, p_idx, &p_data._native)
+    def insert(self, godot_int p_idx, str p_data):
+      cdef godot_error error = api_core.godot_pool_string_array_insert(&self._native, p_idx, &String(p_data)._native)
       if(error != godot_error.GODOT_OK):
         raise RuntimeError(f"Could not insert into PoolArray. Returned error code {error}")
 
     def invert(self):
       api_core.godot_pool_string_array_invert(&self._native)
 
-    def push_back(self, String p_data):
-      api_core.godot_pool_string_array_push_back(&self._native, &p_data._native)
+    def push_back(self, str p_data):
+      api_core.godot_pool_string_array_push_back(&self._native, &String(p_data)._native)
 
     def remove(self, godot_int p_idx):
       api_core.godot_pool_string_array_remove(&self._native, p_idx)
@@ -254,11 +254,11 @@ cdef class PoolStringArray:
     def write(self):
       api_core.godot_pool_string_array_write(&self._native)
 
-    def set(self, godot_int p_idx, String p_data):
-      api_core.godot_pool_string_array_set(&self._native, p_idx, &p_data._native)
+    def set(self, godot_int p_idx, str p_data):
+      api_core.godot_pool_string_array_set(&self._native, p_idx, &String(p_data)._native)
 
     def get(self, godot_int p_idx):
-      return String.new_static(api_core.godot_pool_string_array_get(&self._native, p_idx))
+      return str(String.new_static(api_core.godot_pool_string_array_get(&self._native, p_idx)))
 
     def size(self):
       return api_core.godot_pool_string_array_size(&self._native)
@@ -266,7 +266,7 @@ cdef class PoolStringArray:
     def __getitem__(self, godot_int index):
         return self.get(index)
 
-    def __setitem__(self, godot_int index,  String value):
+    def __setitem__(self, godot_int index,  str value):
         self.set(index, value)
 
     def destroy(self):

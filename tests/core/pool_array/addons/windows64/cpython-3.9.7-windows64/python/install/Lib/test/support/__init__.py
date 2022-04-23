@@ -873,11 +873,11 @@ TESTFN = TESTFN_NONASCII or TESTFN_ASCII
 # Save the initial cwd
 SAVEDCWD = os.getcwd()
 
-# Set by libregrtest/generate_bindings.py so we can skip tests that are not
+# Set by libregrtest/main.py so we can skip tests that are not
 # useful for PGO
 PGO = False
 
-# Set by libregrtest/generate_bindings.py if we are running the extended (time consuming)
+# Set by libregrtest/main.py if we are running the extended (time consuming)
 # PGO task.  If this is True, PGO is also True.
 PGO_EXTENDED = False
 

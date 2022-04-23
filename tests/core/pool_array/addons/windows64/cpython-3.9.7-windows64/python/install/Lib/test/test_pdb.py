@@ -1310,7 +1310,7 @@ class PdbTestCase(unittest.TestCase):
 
     def run_pdb_script(self, script, commands):
         """Run 'script' lines with pdb and the pdb 'commands'."""
-        filename = 'generate_bindings.py'
+        filename = 'main.py'
         with open(filename, 'w') as f:
             f.write(textwrap.dedent(script))
         self.addCleanup(support.unlink, filename)
@@ -1433,7 +1433,7 @@ def bœr():
         self.addCleanup(support.unlink, 'bar.py')
         stdout, stderr = self.run_pdb_script(script, commands)
         self.assertTrue(
-            any('generate_bindings.py(5)foo()->None' in l for l in stdout.splitlines()),
+            any('main.py(5)foo()->None' in l for l in stdout.splitlines()),
             'Fail to step into the caller after a return')
 
     def test_issue13120(self):
@@ -1532,10 +1532,10 @@ def bœr():
                 with open('.pdbrc', 'w') as f:
                     f.write("invalid\n")
 
-                with open('generate_bindings.py', 'w') as f:
+                with open('main.py', 'w') as f:
                     f.write(script)
 
-                cmd = [sys.executable, 'generate_bindings.py']
+                cmd = [sys.executable, 'main.py']
                 proc = subprocess.Popen(
                     cmd,
                     stdout=subprocess.PIPE,
