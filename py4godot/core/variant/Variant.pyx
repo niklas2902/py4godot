@@ -218,7 +218,7 @@ cdef class Variant:
         return NodePath.new_static(api_core.godot_variant_as_node_path(&self._native))
     @staticmethod
     cdef as_rid(self):
-        return RID(api_core.godot_variant_as_rid(&self._native))
+        return RID.new_static(api_core.godot_variant_as_rid(&self._native))
     @staticmethod
     cdef as_object(self):
         api_core.godot_variant_as_object(&self._native)
