@@ -18,6 +18,8 @@ def cythonize_files():
     module += cythonize("py4godot/utils/*.pyx", language_level=3)
     module += cythonize("py4godot/pluginscript_api/*.pyx", language_level=3)
     module += cythonize("py4godot/pluginscript_api/*/*.pyx", language_level=3)
+    module += cythonize("py4godot/pluginscript_api/*/*/*.pyx", language_level=3)
+    module += cythonize("py4godot/pluginscript_api/*/*/*/*.pyx", language_level=3)
     module += cythonize("py4godot/gdnative_api/*.pyx", language_level=3)
     module += cythonize("py4godot/enums/*.pyx", language_level=3)
     module += cythonize("py4godot/events/*.pyx", language_level=3)

@@ -1,0 +1,7 @@
+{
+  "python_ver": "cpython-3.9.7",
+  "output_dir": "build/addons",
+  "python_dir": "python_files",
+  "core_folder": "core"
+
+}

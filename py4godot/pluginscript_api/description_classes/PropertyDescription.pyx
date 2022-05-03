@@ -29,6 +29,7 @@ from py4godot.core.transform.Transform2D cimport Transform2D
 from py4godot.core.vector2.Vector2 cimport Vector2
 from py4godot.godot_bindings.binding_external cimport *
 from py4godot.enums.enums cimport *
+from py4godot.pluginscript_api.description_classes.hints.BaseHint cimport *
 from py4godot.classes.generated import *
 
 type_hint_map = {
@@ -72,16 +73,16 @@ def transform_type(type_):
     return
 class PropertyDescription:
     """"Description class for the properties, a gdclass can have and which can be found in the editor"""
-    def __init__(self, name,type_, hint, hint_string, usage, default_value, rset_mode):
+    def __init__(self, name,type_, BaseHint hint, usage, default_value, rset_mode):
         self.name = name
         self.type_ = transform_type(type_)
         self.hint = hint
-        if(hint == None):
+        if(type(hint) == BaseHint):
             if(type_ in type_hint_map):
-                self.hint = type_hint_map[type_]
+                self.hint.hint = type_hint_map[type_]
             else:
-                self.hint = GODOT_PROPERTY_HINT_NONE
-        self.hint_string = hint_string
+                self.hint.hint = GODOT_PROPERTY_HINT_NONE
+        self.hint_string = hint.hint_string
         self.usage = usage
         self.default_value = default_value
         self.rset_mode = rset_mode
@@ -89,7 +90,7 @@ class PropertyDescription:
         d = Dictionary()
         d.set(String("name"), String(self.name))
         d.set(String("type"), self.type_)
-        d.set(String("hint"), self.hint)
+        d.set(String("hint"), self.hint.get_hint())
         d.set(String("hint_string"),self.hint_string)
         d.set(String("usage"), self.usage)
         d.set(String("default_value"), self.default_value)
