@@ -35,24 +35,22 @@ if build_machine.system() == 'linux'
     'py4godot/classes', 'py4godot/pluginscript_api', 'py4godot/godot_bindings',
     'python_files/cpython-3.9.7-linux'+platform_format+'/python/install/include/python3.9')
     glob = run_command('python3', files(meson.current_source_dir()+'/meson_scripts/glob_tools.py'))
+    dep_py = lib_py
 endif
 
 godot_program = find_program('godot')
 sources = glob.stdout().strip().split('\n')
-message(sources)
-if build_machine.system() == 'linux'
-    foreach source : sources
-        shared_library(source, source+'.c',
-        dependencies:[lib_py], include_directories:internal_inc,name_prefix:'',c_args:extra_args )
-    endforeach
-endif
-
-if build_machine.system() == 'windows'
-    foreach source : sources
-        shared_library(source, source+'.c',
-        dependencies:[dep_py], include_directories:internal_inc,name_prefix:'',c_args:extra_args )
-    endforeach
-endif
+foreach source : sources
+    cache_output = run_command('python', files(meson.current_source_dir()+'/meson_scripts/build_cache_checker.py'), source, build_machine.system()+platform_format)
+    output = cache_output.stdout().strip()
+    message(output)
+    message('source:'+source)
+    if cache_output.returncode() == 0
+        continue
+    endif
+    shared_library(source, source+'.c',
+    dependencies:[dep_py], include_directories:internal_inc,name_prefix:'',c_args:extra_args )
+endforeach
 
 test('test_vector3', godot_program, args : ['--path', 'tests/core/vector3', '--no-window'], workdir:meson.source_root(), timeout:60, is_parallel:false)
 test('test_vector2', godot_program, args : ['--path', 'tests/core/vector2', '--no-window'], workdir:meson.source_root(),  timeout:60, is_parallel:false)
