@@ -82,7 +82,7 @@ class PropertyDescription:
                 self.hint.hint = type_hint_map[type_]
             else:
                 self.hint.hint = GODOT_PROPERTY_HINT_NONE
-        self.hint_string = hint.hint_string
+        self.hint_string = hint.get_string()
         self.usage = usage
         self.default_value = default_value
         self.rset_mode = rset_mode

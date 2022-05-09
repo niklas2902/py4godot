@@ -7,6 +7,7 @@ cdef class RangeHint(BaseHint):
         self.start = start
         self.stop = stop
         self.step = step
-        self.is_slider = self.is_slider
+        self.is_slider = is_slider
     def get_string(self):
-        return f"{self.start},{self.stop},{self.step},{'slider' if self.is_slider else ''}"
+        print("get_string:",f"{self.start},{self.stop},{self.step}{',slider' if self.is_slider else ''};")
+        return f"{self.start},{self.stop},{self.step}{',true' if self.is_slider else ''};"

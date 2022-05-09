@@ -27,7 +27,7 @@ if __name__ == "__main__":
 
     except Exception as e:
         print("an exception happened:", e)
-    dir_path = config_data["meson_dir"]+"/"+platform+"/"+source
+    dir_path = config_data["meson_dir"]+"/"+platform+"/"+source.replace(".c", ".dll")
     os.makedirs(os.path.dirname(dir_path), exist_ok=True)
     copy(source, dir_path )
     sys.exit(0)

@@ -43,7 +43,7 @@ def gdproperty(type_, defaultval, hint= BaseHint()):
         def __init__(self,fget=None, fset=None, fdel=None, doc=None):
             if(not fget == None and fset == None and fdel == None and doc == None):
                 properties.append(PropertyDescription(name = fget.__name__,
-                type_=type_,
+                type_=type_,hint = hint,usage = godot_property_usage_flags.GODOT_PROPERTY_USAGE_DEFAULT,
                 default_value=defaultval, rset_mode=godot_method_rpc_mode.GODOT_METHOD_RPC_MODE_DISABLED))
             super().__init__(fget, fset, fdel,doc)
     return gdprop
