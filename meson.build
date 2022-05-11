@@ -41,13 +41,13 @@ endif
 godot_program = find_program('godot')
 sources = glob.stdout().strip().split('\n')
 foreach source : sources
-#    cache_output = run_command('python', files(meson.current_source_dir()+'/meson_scripts/build_cache_checker.py'), source, build_machine.system()+platform_format)
-#    output = cache_output.stdout().strip()
-#    message(output)
-#    message('source:'+source)
-#    if cache_output.returncode() == 0
-#        continue
-#    endif
+    #cache_output = run_command('python', files(meson.current_source_dir()+'/meson_scripts/build_cache_checker.py'), source, build_machine.system()+platform_format)
+    #output = cache_output.stdout().strip()
+    #message(output)
+    #message('source:'+source)
+    #if cache_output.returncode() == 0
+    #    continue
+    #endif
     shared_library(source, source+'.c',
     dependencies:[dep_py], include_directories:internal_inc,name_prefix:'',c_args:extra_args )
 endforeach
