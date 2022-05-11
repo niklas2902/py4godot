@@ -29,7 +29,7 @@ from py4godot.core.transform.Transform2D cimport Transform2D
 from py4godot.core.vector2.Vector2 cimport Vector2
 from py4godot.godot_bindings.binding_external cimport *
 from py4godot.enums.enums cimport *
-from py4godot.pluginscript_api.description_classes.hints.BaseHint cimport *
+from py4godot.pluginscript_api.hints.BaseHint cimport *
 from py4godot.classes.generated import *
 
 type_hint_map = {
