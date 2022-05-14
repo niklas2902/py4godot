@@ -145,7 +145,10 @@ cdef api godot_string pluginscript_get_template_source_code(godot_pluginscript_l
  const godot_string *p_class_name, const godot_string *p_base_class_name) with gil:
     """generate a template string for the godot class, when creating ones"""
     return String(f"""
-from py4godot import *
+from py4godot.enums.enums import *
+from py4godot.classes.generated import *
+from py4godot.pluginscript_api.utils.annotations import *
+from py4godot.pluginscript_api.hints import *
 
 @gdclass
 class {str(String.new_static(dereference(p_class_name)))}({str(String.new_static(dereference(p_base_class_name)))}):
