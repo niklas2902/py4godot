@@ -1,8 +1,11 @@
 from shutil import copy, copytree, rmtree
 import os
 import glob
+import json
 
 """This file is for copying the generated so/dll files from ninja/meson into the build folder"""
+with open('config.json', 'r') as f:
+    config_data = json.load(f)
 
 def strip_platform(text):
     print("strip_text:",text)
@@ -53,3 +56,26 @@ def copy_tests(platform):
         if os.path.exists(f"{binding_test}/addons/{platform}"):
             rmtree(f"{binding_test}/addons/{platform}")
         copytree(f"build/addons/{platform}", f"{binding_test}/addons/{platform}")
+
+def copy_c_into_cache(platform):
+    l = [i for i in glob.glob("**/*.c", recursive=True) if i.startswith("py4godot") ]
+    for entry in l:
+        dir_path = config_data["build_cache"]+"/"+platform+"/"+entry
+        os.makedirs(os.path.dirname(dir_path), exist_ok=True)
+        copy(entry, dir_path )
+
+    print(glob.glob("**/*.dll", recursive=True))
+    beginning_path = config_data["meson_dir"]+f"\\{platform}\\"+"py4godot"
+    l = [i for i in glob.glob("**/*.dll", recursive=True) if i.startswith(beginning_path) ]
+    for entry in l:
+        print("entry found:",entry)
+        dir_path = config_data["build_cache"]+"/"+platform+"/py4godot/"+entry.replace(beginning_path,"")
+        print("copy_to:",dir_path+"\n")
+        os.makedirs(os.path.dirname(dir_path), exist_ok=True)
+        copy(entry, dir_path )
+
+
+if __name__ == "__main__":
+    copy_c_into_cache("windows64")
+
+

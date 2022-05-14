@@ -39,7 +39,10 @@ $ python3 build.py --target_platform=linux64 --compiler=clang
 ## Example Code
 Here you can see a basic example of how this project can be used
 ```python
-from py4godot import *
+from py4godot.enums.enums import *
+from py4godot.classes.generated import *
+from py4godot.pluginscript_api.utils.annotations import *
+from py4godot.pluginscript_api.hints import *
 
 DEFAULT_VEL = 5
 @gdclass

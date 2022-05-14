@@ -18,6 +18,7 @@ def cythonize_files():
     module += cythonize("py4godot/utils/*.pyx", language_level=3)
     module += cythonize("py4godot/pluginscript_api/*.pyx", language_level=3)
     module += cythonize("py4godot/pluginscript_api/*/*.pyx", language_level=3)
+    module += cythonize("py4godot/pluginscript_api/*/*/*.pyx", language_level=3)
     module += cythonize("py4godot/gdnative_api/*.pyx", language_level=3)
     module += cythonize("py4godot/enums/*.pyx", language_level=3)
     module += cythonize("py4godot/events/*.pyx", language_level=3)
@@ -101,10 +102,11 @@ res = subprocess.Popen(msvc_init +
 
 res.wait()
 copy_tools.run(args.target_platform)
-generate_init_files.create_init_file(args.target_platform)
 copy_tools.copy_main(args.target_platform)
 generate_godot.generate_lib(args.target_platform)
 generate_godot.generate_gdignore()
+generate_init_files.create_init_file(args.target_platform)
+copy_tools.copy_c_into_cache(args.target_platform)
 
 print("=================================Build finished==================================")
 print("Build took:", time.time() - start, "seconds")

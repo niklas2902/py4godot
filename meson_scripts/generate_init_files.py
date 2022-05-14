@@ -21,6 +21,13 @@ from py4godot.core.aabb.AABB import *
 
 import_string_py4godot = """
 """
+
+import_string_hints = """
+from py4godot.pluginscript_api.hints.range_hint.RangeHint import *
+from py4godot.pluginscript_api.hints.custom_hint.CustomHint import *
+from py4godot.pluginscript_api.hints.exp_range_hint.ExpRangeHint import *
+from py4godot.pluginscript_api.hints.enum_hint.EnumHint import *
+"""
 build_folder = "build/addons"
 core_folder = "core"
 def create_init_file(platform):
@@ -31,3 +38,6 @@ def create_init_file(platform):
     """generate the __init__ file needed for the py4godot module"""
     with open(f"{build_folder}/{platform}/py4godot/__init__.py", "w") as init_file:
         init_file.write(import_string_py4godot)
+
+    with open(f"{build_folder}/{platform}/py4godot/pluginscript_api/hints/__init__.py", "w") as init_file:
+        init_file.write(import_string_hints)

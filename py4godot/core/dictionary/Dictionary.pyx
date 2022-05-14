@@ -13,12 +13,14 @@ cdef class Dictionary:
     def __init__(self):
         api_core.godot_dictionary_new(&self._native)
         self.update_event = UpdateEvent()
+        self._index = 0
 
     @staticmethod
     def new_copy(Dictionary src):
         cdef Dictionary d = Dictionary.__new__(Dictionary)
         api_core.godot_dictionary_new_copy(&d._native, &src._native)
         d.update_event = UpdateEvent()
+        d._index = 0
         return d
 
     def destroy(self):
@@ -63,6 +65,20 @@ cdef class Dictionary:
         if variant != NULL :
             return Variant.new_static(dereference(variant)).get_converted_value()
         return None
+
+    def __iter__(self):
+        self._index = 0
+        return self
+
+    def __next__(self):
+        key, val = self.keys()[self._index], self.values()[self._index]
+        self._index += 1
+        return (key,val)
+
+
+
+    def __getitem__(self, key):
+        return self.get(key)
 
     def __setitem__(self, key, value):
         self.set(key, value)

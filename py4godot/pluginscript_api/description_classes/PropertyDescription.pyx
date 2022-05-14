@@ -29,11 +29,12 @@ from py4godot.core.transform.Transform2D cimport Transform2D
 from py4godot.core.vector2.Vector2 cimport Vector2
 from py4godot.godot_bindings.binding_external cimport *
 from py4godot.enums.enums cimport *
+from py4godot.pluginscript_api.hints.BaseHint cimport *
 from py4godot.classes.generated import *
-from py4godot.pluginscript_api.hints import *
 
 type_hint_map = {
 int: GODOT_PROPERTY_HINT_RANGE, SpriteFrames:GODOT_PROPERTY_HINT_SPRITE_FRAME,
+float: GODOT_PROPERTY_HINT_RANGE,
 TextFile:GODOT_PROPERTY_HINT_FILE, Resource:GODOT_PROPERTY_HINT_RESOURCE_TYPE,
 String: GODOT_PROPERTY_HINT_TYPE_STRING,
 Vector3:GODOT_PROPERTY_HINT_METHOD_OF_VARIANT_TYPE,
@@ -52,7 +53,7 @@ Transform:GODOT_PROPERTY_HINT_METHOD_OF_VARIANT_TYPE,
 
 type_variant_type_map = {
 int:GODOT_VARIANT_TYPE_INT,
-float: GODOT_VARIANT_TYPE_REAL,
+float:GODOT_VARIANT_TYPE_REAL,
 String:GODOT_VARIANT_TYPE_STRING,
 NodePath:GODOT_VARIANT_TYPE_NODE_PATH,
 Vector2 : GODOT_VARIANT_TYPE_VECTOR2,
@@ -66,7 +67,6 @@ Quat:GODOT_VARIANT_TYPE_QUAT,
 Rect2:GODOT_VARIANT_TYPE_RECT2,
 RID:GODOT_VARIANT_TYPE_RID,
 Transform:GODOT_VARIANT_TYPE_TRANSFORM,
-Transform2D:GODOT_VARIANT_TYPE_TRANSFORM2D,
 }
 
 def transform_type(type_):
@@ -75,18 +75,16 @@ def transform_type(type_):
     return
 class PropertyDescription:
     """"Description class for the properties, a gdclass can have and which can be found in the editor"""
-    def __init__(self, name,type_,hint_class, hint_string, usage, default_value, rset_mode):
+    def __init__(self, name,type_, BaseHint hint, usage, default_value, rset_mode):
         self.name = name
         self.type_ = transform_type(type_)
-
-        if hint_class != None:
-            hint_string = str(hint_class)
-
-        if(type_ in type_hint_map):
-            self.hint = type_hint_map[type_]
-        else:
-            self.hint = GODOT_PROPERTY_HINT_NONE
-        self.hint_string = hint_string
+        self.hint = hint
+        if(type(hint) == BaseHint):
+            if(type_ in type_hint_map):
+                self.hint.set_hint(type_hint_map[type_])
+            else:
+                self.hint.set_hint(GODOT_PROPERTY_HINT_NONE)
+        self.hint_string = hint.get_string()
         self.usage = usage
         self.default_value = default_value
         self.rset_mode = rset_mode
@@ -94,7 +92,7 @@ class PropertyDescription:
         d = Dictionary()
         d.set(String("name"), self.name)
         d.set(String("type"), self.type_)
-        d.set(String("hint"), self.hint)
+        d.set(String("hint"), self.hint.get_hint())
         d.set(String("hint_string"),self.hint_string)
         d.set(String("usage"), self.usage)
         d.set(String("default_value"), self.default_value)

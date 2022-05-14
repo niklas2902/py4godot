@@ -14,6 +14,7 @@ from py4godot.core.pool_array.PoolArrays cimport *
 from py4godot.core.array.Array cimport *
 from py4godot.core.dictionary.Dictionary cimport *
 from py4godot.core.rid.RID cimport *
+from py4godot.utils.Wrapper cimport *
 from py4godot.utils.core_holder cimport get_core
 from py4godot.core.variant.variant_binding cimport *
 
@@ -21,7 +22,7 @@ api_core = get_core()
 
 cdef dict_get_methods = {0:Variant.as_nil, 1:Variant.as_bool,2:Variant.as_int, 3:Variant.as_real,4:Variant.as_string, 5:Variant.as_vector2,
  6:Variant.as_rect2, 7:Variant.as_vector3,8:Variant.as_transform2d, 9:Variant.as_plane, 10:Variant.as_quat,11:Variant.as_aabb, 12:Variant.as_basis,
-  13:Variant.as_transform, 14:Variant.as_color, 15:Variant.as_node_path, 16:Variant.as_rid, 17:Variant.as_object, 18:Variant.as_dictionary}
+  13:Variant.as_transform, 14:Variant.as_color, 15:Variant.as_node_path, 16:Variant.as_rid, 17:Variant.as_godot_object, 18:Variant.as_dictionary}
 
 
 cdef class Variant:
@@ -115,6 +116,8 @@ cdef class Variant:
 
             elif variant is int:
                 self.new_int(0)
+            elif isinstance(type(variant), Wrapper):
+                self.new
             else:
                 print("no Variant created:",variant,"|", type(variant))
                 raise Exception("no Variant could be created")
@@ -163,6 +166,9 @@ cdef class Variant:
 
     def new_array(self, Array variant):
         api_core.godot_variant_new_array(&self._native, &variant._native)
+
+    def new_godot_object(self, Wrapper variant):
+        api_core.godot_variant_new_object(&self._native, (variant.get_godot_owner()))
 
     @staticmethod
     cdef as_nil(self):
@@ -230,22 +236,27 @@ cdef class Variant:
         return Array.new_static(api_core.godot_variant_as_array(&self._native))
     @staticmethod
     cdef as_pool_byte_array(self):
-        return PoolByteArray(api_core.godot_variant_as_pool_byte_array(&self._native))
+        return PoolByteArray.new_static(api_core.godot_variant_as_pool_byte_array(&self._native))
     @staticmethod
     cdef as_pool_int_array(self):
-        return PoolIntArray(api_core.godot_variant_as_pool_int_array(&self._native))
+        return PoolIntArray.new_static(api_core.godot_variant_as_pool_int_array(&self._native))
     @staticmethod
     cdef as_pool_real_array(self):
-        return PoolRealArray(api_core.godot_variant_as_pool_real_array(&self._native))
+        return PoolRealArray.new_static(api_core.godot_variant_as_pool_real_array(&self._native))
     @staticmethod
     cdef as_pool_string_array(self):
-        return PoolStringArray(api_core.godot_variant_as_pool_string_array(&self._native))
+        return PoolStringArray.new_static(api_core.godot_variant_as_pool_string_array(&self._native))
     @staticmethod
     cdef as_pool_vector2_array(self):
-        return PoolVector2Array(api_core.godot_variant_as_pool_vector2_array(&self._native))
+        return PoolVector2Array.new_static(api_core.godot_variant_as_pool_vector2_array(&self._native))
     @staticmethod
     cdef as_pool_vector3_array(self):
-        return PoolVector3Array(api_core.godot_variant_as_pool_vector3_array(&self._native))
+        return PoolVector3Array.new_static(api_core.godot_variant_as_pool_vector3_array(&self._native))
+    @staticmethod
+    cdef as_godot_object(self):
+        cdef Wrapper wrapper = Wrapper()
+        wrapper.set_godot_owner(api_core.godot_variant_as_object(&self._native))
+        return wrapper
     def __eq__(self, Variant other):
         return api_core.godot_variant_operator_equal(&self._native, &other._native)
     def __lt__(self, Variant other):

@@ -20,6 +20,7 @@ from py4godot.utils.core_holder cimport get_core, get_nativescript
 
 
 """This file contains all the functions, that are needed to crate a pluginscript"""
+cdef godot_dictionary dictionary
 cdef api set_api_core_pluginscript(const godot_gdnative_core_api_struct* core):
     global api_core
     api_core = get_core()
@@ -65,6 +66,8 @@ cdef api  godot_pluginscript_script_manifest init_pluginscript_desc (godot_plugi
         for p in result.properties:
             properties_array.append(p.to_dict())
         for m in result.methods:
+            print("register_method:",m.name)
+            print("args:",m.args)
             methods_array.append(m.to_dict())
         for signal in result.signals:
             signals_array.append(signal.to_dict())
@@ -147,6 +150,7 @@ from py4godot.enums.enums import *
 from py4godot.core import *
 from py4godot.classes.generated import *
 from py4godot.pluginscript_api.utils.annotations import *
+from py4godot.pluginscript_api.hints import *
 
 @gdclass
 class {str(String.new_static(dereference(p_class_name)))}({str(String.new_static(dereference(p_base_class_name)))}):
