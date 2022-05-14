@@ -226,6 +226,9 @@ cdef class Variant:
     cdef as_rid(self):
         return RID.new_static(api_core.godot_variant_as_rid(&self._native))
     @staticmethod
+    cdef as_object(self):
+        api_core.godot_variant_as_object(&self._native)
+    @staticmethod
     cdef Dictionary as_dictionary(self):
         return Dictionary.new_static(api_core.godot_variant_as_dictionary(&self._native))
     @staticmethod

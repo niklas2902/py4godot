@@ -43,6 +43,7 @@ class MethodDescription:
                 prop_desc = PropertyDescription(element, None, BaseHint()
                 ,godot_property_usage_flags.GODOT_PROPERTY_USAGE_DEFAULT, 0,0)
                 d.set(String(element), prop_desc.to_dict())
+        print("register_method:", self.args)
 
         d.set("name", self.name)
         d.set(String("args"), dictionary_args)
