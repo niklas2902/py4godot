@@ -1,47 +1,32 @@
 from py4godot.godot_bindings.binding cimport *
 
 cdef extern from "binding.h":
-
-    ctypedef struct uint8_t:
-        pass
+    const godot_gdnative_core_api_struct *api_core
 
     ctypedef struct godot_error:
         pass
+    ctypedef struct godot_pool_array_write_access:
+        uint8_t _dont_touch_that[1]
 
-    ctypedef struct godot_pool_byte_array_read_access:
-        pass
-    ctypedef struct godot_pool_byte_array_write_access:
-        pass
+    ctypedef godot_pool_array_write_access godot_pool_byte_array_write_access
+    ctypedef godot_pool_array_write_access godot_pool_int_array_write_access
+    ctypedef godot_pool_array_write_access godot_pool_real_array_write_access
+    ctypedef godot_pool_array_write_access godot_pool_string_array_write_access
+    ctypedef godot_pool_array_write_access godot_pool_vector2_array_write_access
+    ctypedef godot_pool_array_write_access godot_pool_vector3_array_write_access
+    ctypedef godot_pool_array_write_access godot_pool_color_array_write_access
 
-    ctypedef struct godot_pool_int_array_read_access:
-        pass
-    ctypedef struct godot_pool_int_array_write_access:
-        pass
 
-    ctypedef struct godot_pool_real_array_read_access:
-        pass
-    ctypedef struct godot_pool_real_array_write_access:
-        pass
+    ctypedef struct godot_pool_array_read_access:
+        uint8_t _dont_touch_that[1]
 
-    ctypedef struct godot_pool_color_array_read_access:
-        pass
-    ctypedef struct godot_pool_color_array_write_access:
-        pass
-
-    ctypedef struct godot_pool_string_array_read_access:
-        pass
-    ctypedef struct godot_pool_string_array_write_access:
-        pass
-
-    ctypedef struct godot_pool_vector2_array_read_access:
-        pass
-    ctypedef struct godot_pool_vector2_array_write_access:
-        pass
-
-    ctypedef struct godot_pool_vector3_array_read_access:
-        pass
-    ctypedef struct godot_pool_vector3_array_write_access:
-        pass
+    ctypedef godot_pool_array_read_access godot_pool_byte_array_read_access;
+    ctypedef godot_pool_array_read_access godot_pool_int_array_read_access;
+    ctypedef godot_pool_array_read_access godot_pool_real_array_read_access;
+    ctypedef godot_pool_array_read_access godot_pool_string_array_read_access;
+    ctypedef godot_pool_array_read_access godot_pool_vector2_array_read_access;
+    ctypedef godot_pool_array_read_access godot_pool_vector3_array_read_access;
+    ctypedef godot_pool_array_read_access godot_pool_color_array_read_access;
 
     struct godot_gdnative_core_api_struct:
         void (*godot_pool_byte_array_new)(godot_pool_byte_array *r_dest);
@@ -60,6 +45,7 @@ cdef extern from "binding.h":
         uint8_t (*godot_pool_byte_array_get)(const godot_pool_byte_array *p_self, const godot_int p_idx);
         godot_int (*godot_pool_byte_array_size)(const godot_pool_byte_array *p_self);
         void (*godot_pool_byte_array_destroy)(godot_pool_byte_array *p_self);
+
         void (*godot_pool_int_array_new)(godot_pool_int_array *r_dest);
         void (*godot_pool_int_array_new_copy)(godot_pool_int_array *r_dest, const godot_pool_int_array *p_src);
         void (*godot_pool_int_array_new_with_array)(godot_pool_int_array *r_dest, const godot_array *p_a);
@@ -76,6 +62,7 @@ cdef extern from "binding.h":
         godot_int (*godot_pool_int_array_get)(const godot_pool_int_array *p_self, const godot_int p_idx);
         godot_int (*godot_pool_int_array_size)(const godot_pool_int_array *p_self);
         void (*godot_pool_int_array_destroy)(godot_pool_int_array *p_self);
+
         void (*godot_pool_real_array_new)(godot_pool_real_array *r_dest);
         void (*godot_pool_real_array_new_copy)(godot_pool_real_array *r_dest, const godot_pool_real_array *p_src);
         void (*godot_pool_real_array_new_with_array)(godot_pool_real_array *r_dest, const godot_array *p_a);
@@ -92,6 +79,7 @@ cdef extern from "binding.h":
         godot_real (*godot_pool_real_array_get)(const godot_pool_real_array *p_self, const godot_int p_idx);
         godot_int (*godot_pool_real_array_size)(const godot_pool_real_array *p_self);
         void (*godot_pool_real_array_destroy)(godot_pool_real_array *p_self);
+
         void (*godot_pool_string_array_new)(godot_pool_string_array *r_dest);
         void (*godot_pool_string_array_new_copy)(godot_pool_string_array *r_dest, const godot_pool_string_array *p_src);
         void (*godot_pool_string_array_new_with_array)(godot_pool_string_array *r_dest, const godot_array *p_a);
@@ -108,6 +96,7 @@ cdef extern from "binding.h":
         godot_string (*godot_pool_string_array_get)(const godot_pool_string_array *p_self, const godot_int p_idx);
         godot_int (*godot_pool_string_array_size)(const godot_pool_string_array *p_self);
         void (*godot_pool_string_array_destroy)(godot_pool_string_array *p_self);
+
         void (*godot_pool_vector2_array_new)(godot_pool_vector2_array *r_dest);
         void (*godot_pool_vector2_array_new_copy)(godot_pool_vector2_array *r_dest, const godot_pool_vector2_array *p_src);
         void (*godot_pool_vector2_array_new_with_array)(godot_pool_vector2_array *r_dest, const godot_array *p_a);
@@ -124,6 +113,7 @@ cdef extern from "binding.h":
         godot_vector2 (*godot_pool_vector2_array_get)(const godot_pool_vector2_array *p_self, const godot_int p_idx);
         godot_int (*godot_pool_vector2_array_size)(const godot_pool_vector2_array *p_self);
         void (*godot_pool_vector2_array_destroy)(godot_pool_vector2_array *p_self);
+
         void (*godot_pool_vector3_array_new)(godot_pool_vector3_array *r_dest);
         void (*godot_pool_vector3_array_new_copy)(godot_pool_vector3_array *r_dest, const godot_pool_vector3_array *p_src);
         void (*godot_pool_vector3_array_new_with_array)(godot_pool_vector3_array *r_dest, const godot_array *p_a);
@@ -140,6 +130,7 @@ cdef extern from "binding.h":
         godot_vector3 (*godot_pool_vector3_array_get)(const godot_pool_vector3_array *p_self, const godot_int p_idx);
         godot_int (*godot_pool_vector3_array_size)(const godot_pool_vector3_array *p_self);
         void (*godot_pool_vector3_array_destroy)(godot_pool_vector3_array *p_self);
+
         void (*godot_pool_color_array_new)(godot_pool_color_array *r_dest);
         void (*godot_pool_color_array_new_copy)(godot_pool_color_array *r_dest, const godot_pool_color_array *p_src);
         void (*godot_pool_color_array_new_with_array)(godot_pool_color_array *r_dest, const godot_array *p_a);
@@ -156,6 +147,7 @@ cdef extern from "binding.h":
         godot_color (*godot_pool_color_array_get)(const godot_pool_color_array *p_self, const godot_int p_idx);
         godot_int (*godot_pool_color_array_size)(const godot_pool_color_array *p_self);
         void (*godot_pool_color_array_destroy)(godot_pool_color_array *p_self);
+
         godot_pool_byte_array_read_access *(*godot_pool_byte_array_read_access_copy)(const godot_pool_byte_array_read_access *p_read);
         const uint8_t *(*godot_pool_byte_array_read_access_ptr)(const godot_pool_byte_array_read_access *p_read);
         void (*godot_pool_byte_array_read_access_operator_assign)(godot_pool_byte_array_read_access *p_read, godot_pool_byte_array_read_access *p_other);

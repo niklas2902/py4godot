@@ -1,14 +1,12 @@
 from py4godot.core.string.String cimport *
+from py4godot.utils.core_holder cimport get_core
 from py4godot.core.node_path.node_path_binding cimport *
 
-cdef api set_api_core_node_path(godot_gdnative_core_api_struct * core):
-    global api_core
-    api_core = core
+api_core = get_core()
 
 cdef class NodePath:
 
     def __init__(self, path = None):
-        print(type(path))
         api_core.godot_node_path_new(&self._native, &String(path)._native)
         self.update_event = UpdateEvent()
 

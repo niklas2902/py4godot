@@ -15,12 +15,10 @@ from py4godot.core.array.Array cimport *
 from py4godot.core.dictionary.Dictionary cimport *
 from py4godot.core.rid.RID cimport *
 from py4godot.utils.Wrapper cimport *
+from py4godot.utils.core_holder cimport get_core
 from py4godot.core.variant.variant_binding cimport *
 
-
-cdef api set_api_core_variant(godot_gdnative_core_api_struct * core):
-    global api_core
-    api_core = core
+api_core = get_core()
 
 cdef dict_get_methods = {0:Variant.as_nil, 1:Variant.as_bool,2:Variant.as_int, 3:Variant.as_real,4:Variant.as_string, 5:Variant.as_vector2,
  6:Variant.as_rect2, 7:Variant.as_vector3,8:Variant.as_transform2d, 9:Variant.as_plane, 10:Variant.as_quat,11:Variant.as_aabb, 12:Variant.as_basis,
@@ -115,6 +113,7 @@ cdef class Variant:
                 self.new_array(variant)
             elif variant is Array:
                 self.new_array(Array())
+
             elif variant is int:
                 self.new_int(0)
             elif isinstance(type(variant), Wrapper):
@@ -269,3 +268,5 @@ cdef class Variant:
 
     def get_type(self):
         return api_core.godot_variant_get_type(&self._native);
+
+

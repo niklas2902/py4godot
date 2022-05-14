@@ -3,8 +3,8 @@ import os
 import subprocess
 import time
 from Cython.Build import cythonize
-
 import generate_bindings
+
 from meson_scripts import copy_tools, download_python, generate_init_files, \
     locations, platform_check, generate_godot, \
     download_godot

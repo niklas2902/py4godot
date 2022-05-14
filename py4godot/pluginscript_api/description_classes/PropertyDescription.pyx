@@ -90,7 +90,7 @@ class PropertyDescription:
         self.rset_mode = rset_mode
     def to_dict(self):
         d = Dictionary()
-        d.set(String("name"), String(self.name))
+        d.set(String("name"), self.name)
         d.set(String("type"), self.type_)
         d.set(String("hint"), self.hint.get_hint())
         d.set(String("hint_string"),self.hint_string)

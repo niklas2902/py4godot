@@ -38,7 +38,7 @@ def gdclass(cls):
         else:
             raise Exception("More than one class was marked as gd_class in one file")
 
-def gdproperty(type_, defaultval, hint= BaseHint()):
+def gdproperty(type_, defaultval, hint= None, hint_string = ""):
     class gdprop(property):
         def __init__(self,fget=None, fset=None, fdel=None, doc=None):
             if(not fget == None and fset == None and fdel == None and doc == None):

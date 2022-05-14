@@ -16,13 +16,14 @@ from py4godot.enums.enums cimport *
 import traceback
 
 from py4godot.pluginscript_api.utils.annotations import *
+from py4godot.utils.core_holder cimport get_core, get_nativescript
+
 
 """This file contains all the functions, that are needed to crate a pluginscript"""
 cdef godot_dictionary dictionary
 cdef api set_api_core_pluginscript(const godot_gdnative_core_api_struct* core):
     global api_core
-    api_core = core
-    api_core.godot_dictionary_new(&dictionary)
+    api_core = get_core()
 cdef api godot_pluginscript_language_data * init_pluginscript() with gil:
     """empty placeholder function, as this is necessary to implement"""
 

@@ -22,7 +22,5 @@ cdef extern from "binding.h":
     const godot_gdnative_ext_nativescript_api_struct *nativescript_api
     const godot_gdnative_ext_nativescript_1_1_api_struct *nativescript_api_11
 
-
-
     godot_object *_owner
 

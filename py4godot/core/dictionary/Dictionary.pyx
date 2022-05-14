@@ -1,12 +1,11 @@
 from py4godot.core.variant.Variant cimport *
 from py4godot.core.array.Array cimport *
+from py4godot.utils.core_holder cimport get_core
 from py4godot.core.dictionary.dictionary_binding cimport *
 from cython.operator cimport dereference
 from libc.stdio cimport printf
 
-cdef api set_api_core_dict(godot_gdnative_core_api_struct * core):
-    global api_core
-    api_core = core
+api_core = get_core()
 
 
 cdef class Dictionary:

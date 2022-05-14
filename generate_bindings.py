@@ -47,6 +47,7 @@ base_import_string += f"from cython.operator cimport dereference\n"
 base_import_string += f"from py4godot.enums.enums cimport *\n"
 base_import_string += f"from py4godot.godot_bindings.types cimport *\n"
 base_import_string += f"from cpython.mem cimport PyMem_Malloc, PyMem_Realloc, PyMem_Free\n"
+base_import_string += f"from py4godot.utils.core_holder cimport get_core, get_nativescript\n"
 base_import_string += f"from py4godot.godot_bindings.binding_external cimport *\n\n\n" \
                       f"cdef set_core(godot_gdnative_core_api_struct* core):\n" \
                       f"    global api_core\n" \
@@ -58,7 +59,9 @@ base_import_string += f"from py4godot.godot_bindings.binding_external cimport *\
                       f"    global binding_funcs\n" \
                       f"    global language_index\n" \
                       f"    binding_funcs = binding_funcs_\n" \
-                      f"    language_index = lang_ind\n\n"
+                      f"    language_index = lang_ind\n\n"\
+                      f"\napi_core = get_core()\n"\
+                      f"\nnativescript_api_11 = get_nativescript()\n"
 
 main_string = ""
 
@@ -99,6 +102,9 @@ def generate_methods(obj, objs_to_import):
             # Generate arguments in head
             objs_to_import, result = generate_args(objs_to_import, method, result)
 
+            # body for initializing values if not set by user
+            result = init_unset_defaults(method, result)
+
             # Start with body
             result += "    cdef const godot_object *_owner = self.godot_owner\n\n"
 
@@ -127,13 +133,36 @@ def generate_args(objs_to_import, method, result):
         # Set default values for arguments
         if argument["has_default_value"]:
             #TODO: improve this
+            #generating default values for the core
             if argument["type"] in core and argument["type"] != "String":
                 if argument["type"].startswith("Vector"):
-                    #args += f" = {argument['type']}{argument['default_value']}"
-                    args += f" = None"
+                    args += f" = {argument['type']}{argument['default_value']}"
+                elif argument["type"] == "Variant":
+                    args += f" = {argument['type']}()"
+                elif argument["type"] == "Array":
+                    args += f" = {argument['type']}()"
+                elif "Pool" in argument["type"]:
+                    args += f" = {argument['type']}()"
+                elif argument["type"] == "Dictionary":
+                    args += f" = {argument['type']}()"
+                elif argument["type"] == "Transform2D":
+                    vector = argument["default_value"].replace("(", "").replace(")","").split(",")
+                    args += f" = Transform2D.new_with_axis_origin(Vector2({vector[0] +','+ vector[1]})," \
+                            f" Vector2({vector[2]+','+ vector[3]}), Vector2({vector[4] +','+ vector[5]}))"
+                elif argument["type"] == "Transform":
+                    vals = argument["default_value"].split("-")
+                    axis = vals[0].split(",")
+                    origin = vals[1].replace("(","").replace(")","").split(",")
+
+                    args += f" = Transform.new_with_axis_origin(Vector3({axis[0] + ',' + axis[1] + ', '+axis[2]})," \
+                            f" Vector3({axis[3] + ',' + axis[4] + ',' + axis[5]}), " \
+                            f"Vector3({axis[6] + ',' + axis[7]+ ',' + axis[8]}), Vector3({origin[0] +','+ origin[1]+ ','+ origin[2]}))"
+                elif argument["type"] == "RID":
+                    args += " = RID()"
+                elif argument["type"] == "Rect2":
+                    args += f" = {argument['type']}{argument['default_value']}"
                 else:
-                    #args += f" = {argument['type']}({argument['default_value']})"
-                    args += f" = None"
+                    args += f" = {argument['type']}({argument['default_value']})"
             elif argument["type"] != "String":
                 args += " = " + argument["default_value"].replace("[Object:null]", "None").replace("Null", "None")
             elif argument["type"] == "String":
@@ -146,6 +175,16 @@ def generate_args(objs_to_import, method, result):
         args += "*varargs,"
     result += args.rstrip(", ") + "):\n"
     return objs_to_import, result
+
+def init_unset_defaults(method, result):
+    for argument in method["arguments"]:
+        arg_name = (argument["name"] if argument["name"] not in exclude_words else argument["name"] + "_")
+        # init default  values for arguments if not set
+        if argument["has_default_value"]:
+            if argument["type"] in objects:
+                result += f"    if {arg_name} == None:\n" \
+                          f"      {arg_name} = {argument['type']}._new()\n"
+    return result
 
 
 def generate_return_type(objs_to_import, method, obj, result):
@@ -381,8 +420,6 @@ from py4godot.utils.Wrapper cimport *"""
     set_ = set()
     # generate all the class files
     for element in obj:
-        if element["name"].startswith("_") and not element["singleton"]:
-            continue
 
         init_methods_string += f"  init_method_bindings_{element['name']}()\n"
         generated_file = generate_classes(element)

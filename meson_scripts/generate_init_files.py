@@ -15,14 +15,11 @@ from py4godot.core.dictionary.Dictionary import *
 from py4godot.core.color.Color import *
 from py4godot.core.basis.Basis import *
 from py4godot.core.array.Array import *
+from py4godot.core.pool_array.PoolArrays import *
 from py4godot.core.aabb.AABB import *
 """
 
 import_string_py4godot = """
-from py4godot.enums.enums import *
-from py4godot.core import *
-from py4godot.classes.generated import *
-from py4godot.pluginscript_api.utils.annotations import *
 """
 
 import_string_hints = """

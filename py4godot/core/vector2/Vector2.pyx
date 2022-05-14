@@ -1,11 +1,14 @@
 from py4godot.core.string.String cimport String
+from py4godot.utils.core_holder cimport get_core
 from py4godot.core.vector2.vector2_binding cimport *
 
-cdef api set_api_core_vector2(godot_gdnative_core_api_struct * core):
-    global api_core
-    api_core = core
+api_core = get_core()
 
 cdef class Vector2:
+    LEFT = Vector2( -1, 0)
+    RIGHT = Vector2( 1, 0)
+    UP = Vector2( 0, 1)
+    DOWN = Vector2( 0, -1)
 
     def __init__(self, godot_real x = 0, godot_real y = 0):
         api_core.godot_vector2_new(&self._native, x, y)
