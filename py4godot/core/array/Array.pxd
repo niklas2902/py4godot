@@ -13,4 +13,5 @@ cdef class Array:
         cdef Array o = Array.__new__(Array)
         o.set_native(_native)
         o.update_event = UpdateEvent()
+        o._index = 0
         return o

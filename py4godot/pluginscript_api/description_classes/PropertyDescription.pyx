@@ -81,9 +81,9 @@ class PropertyDescription:
         self.hint = hint
         if(type(hint) == BaseHint):
             if(type_ in type_hint_map):
-                self.hint.hint = type_hint_map[type_]
+                self.hint.set_hint(type_hint_map[type_])
             else:
-                self.hint.hint = GODOT_PROPERTY_HINT_NONE
+                self.hint.set_hint(GODOT_PROPERTY_HINT_NONE)
         self.hint_string = hint.get_string()
         self.usage = usage
         self.default_value = default_value

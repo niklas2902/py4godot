@@ -15,4 +15,5 @@ cdef class Dictionary:
         cdef Dictionary o = Dictionary.__new__(Dictionary)
         o.set_native(_native)
         o.update_event = UpdateEvent()
+        o._index = 0
         return o

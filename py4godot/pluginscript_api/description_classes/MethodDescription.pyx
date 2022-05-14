@@ -6,7 +6,7 @@ from py4godot.core.array.Array cimport Array
 from py4godot.core.string.String cimport String
 from py4godot.pluginscript_api.description_classes.PropertyDescription import *
 from py4godot.enums.enums cimport *
-from py4godot.pluginscript_api.description_classes.hints.BaseHint cimport *
+from py4godot.pluginscript_api.hints.BaseHint cimport *
 
 #Method info dictionary format
 #{
