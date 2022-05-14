@@ -6,6 +6,7 @@ from py4godot.events.events cimport *
 cdef class Dictionary:
     cdef godot_dictionary _native
     cdef UpdateEvent update_event
+    cdef godot_int _index
 
     cdef inline void set_native(self, godot_dictionary _native):
         self._native = _native
