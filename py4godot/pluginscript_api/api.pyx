@@ -12,6 +12,7 @@ cimport py4godot.core.variant.Variant as CVariant
 from cpython.mem cimport PyMem_Malloc, PyMem_Realloc, PyMem_Free
 from py4godot.godot_bindings.binding cimport *
 from py4godot.godot_bindings.binding_external cimport *
+from py4godot.classes.generated cimport *
 from py4godot.enums.enums cimport *
 import traceback
 

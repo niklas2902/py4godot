@@ -116,8 +116,8 @@ cdef class Variant:
 
             elif variant is int:
                 self.new_int(0)
-            elif isinstance(type(variant), Wrapper):
-                self.new
+            elif isinstance(variant, Wrapper):
+                self.new_godot_object(variant)
             else:
                 print("no Variant created:",variant,"|", type(variant))
                 raise Exception("no Variant could be created")
