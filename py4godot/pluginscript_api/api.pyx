@@ -51,11 +51,11 @@ cdef api  godot_pluginscript_script_manifest init_pluginscript_desc (godot_plugi
         result = exec_class(str(String.new_static(dereference(p_source))))
     except Exception as e:
         traceback.print_exc()
-    if(result != None and result.gd_class != None):
+    if(result != None and (result.gd_class != None or result.gd_tool_class != None)):
         #creating a valid manifest
-        gd_obj = result.gd_class
+        gd_obj = result.gd_class if result.gd_class != None else result.gd_tool_class
         api_core.godot_string_name_new_data(&manifest.name, "python_manifest");
-        manifest.is_tool = False;
+        manifest.is_tool = result.gd_tool_class != None;
         api_core.godot_string_name_new_data(&manifest.base, "");
         api_core.godot_dictionary_new(&manifest.member_lines);
 

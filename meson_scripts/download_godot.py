@@ -3,11 +3,15 @@ import zipfile
 import glob
 import os
 import stat
+import json
 
+"""This file is for copying the generated so/dll files from ninja/meson into the build folder"""
+with open('config.json', 'r') as f:
+    config_data = json.load(f)
 
 url = 'https://github.com/godotengine/godot/releases/download/3.4.2-stable/Godot_v3.4.2-stable_win64.exe.zip'
-download_dir = "godot_zipfile.zip"
-dir_zipfile_extract_to = "godot"
+download_dir = config_data["download_godot_dir"]
+dir_zipfile_extract_to = config_data["dir_godot_extract_to"]
 def run(platform):
     global url
     if("linux" in platform):

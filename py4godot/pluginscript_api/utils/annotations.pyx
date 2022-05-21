@@ -11,24 +11,27 @@ import inspect
 """annotations used to define all the godot members"""
 """methods = []
 gd_class = None
+gd_tool_class = None
 properties = []
 signals = []"""
 
 class TransferObject():
-    def __init__(self, methods, gd_class, properties, signals):
+    def __init__(self, methods, gd_class, gd_tool_class, properties, signals):
         self.methods = methods
         self.gd_class = gd_class
+        self.gd_tool_class = gd_tool_class
         self.properties = properties
         self.signals = signals
 
 def exec_class(source_string):
-    global methods, gd_class, properties,signals
+    global methods, gd_class, gd_tool_class, properties,signals
     methods = []
     gd_class = None
+    gd_tool_class = None
     properties = []
     signals = []
     exec(source_string, locals())
-    return TransferObject(methods, gd_class, properties, signals)
+    return TransferObject(methods, gd_class, gd_tool_class, properties, signals)
 
 
 def gdclass(cls):
@@ -36,7 +39,14 @@ def gdclass(cls):
         if(gd_class == None):
             gd_class = cls
         else:
-            raise Exception("More than one class was marked as gd_class in one file")
+            raise Exception("More than one class was marked as gd_class or gd_tool_class in one file")
+
+def gdtool(cls):
+        global gd_tool_class
+        if(gd_tool_class == None):
+            gd_tool_class = cls
+        else:
+            raise Exception("More than one class was marked as gd_class or gd_tool_class in one file")
 
 def gdproperty(type_, defaultval, hint = BaseHint(), hint_string = ""):
     class gdprop(property):

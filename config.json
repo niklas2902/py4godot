@@ -4,6 +4,8 @@
   "python_dir": "python_files",
   "core_folder": "core",
   "build_cache": "meson_cache",
-  "meson_dir": "build_meson"
+  "meson_dir": "build_meson",
+  "download_godot_dir" :"godot_zipfile.zip",
+  "dir_godot_extract_to" : "godot"
 
 }
