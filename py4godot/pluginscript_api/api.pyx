@@ -48,7 +48,7 @@ cdef api  godot_pluginscript_script_manifest init_pluginscript_desc (godot_plugi
         return manifest
     result = None
     try:
-        result = exec_class(str(String.new_static(dereference(p_source))))
+        result = exec_class(str(String.new_static(dereference(p_source))), str(String.new_static(dereference(p_path))))
     except Exception as e:
         traceback.print_exc()
     if(result != None and (result.gd_class != None or result.gd_tool_class != None)):

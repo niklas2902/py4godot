@@ -14,6 +14,7 @@ gd_class = None
 gd_tool_class = None
 properties = []
 signals = []"""
+class_name = ""
 
 class TransferObject():
     def __init__(self, methods, gd_class, gd_tool_class, properties, signals):
@@ -23,19 +24,23 @@ class TransferObject():
         self.properties = properties
         self.signals = signals
 
-def exec_class(source_string):
-    global methods, gd_class, gd_tool_class, properties,signals
+def exec_class(source_string, class_name_):
+    global methods, gd_class, gd_tool_class, properties,signals, class_name
     methods = []
     gd_class = None
     gd_tool_class = None
     properties = []
     signals = []
+    class_name = class_name_
+    print("class_name:", class_name)
     exec(source_string, locals())
     return TransferObject(methods, gd_class, gd_tool_class, properties, signals)
 
 
 def gdclass(cls):
         global gd_class
+        if cls.__name__ != class_name:
+            return
         if(gd_class == None):
             gd_class = cls
         else:
@@ -43,6 +48,8 @@ def gdclass(cls):
 
 def gdtool(cls):
         global gd_tool_class
+        if cls.__name__ != class_name:
+            return
         if(gd_tool_class == None):
             gd_tool_class = cls
         else:
