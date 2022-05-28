@@ -93,7 +93,11 @@ compile_python_ver_file(current_platform)
 msvc_init = f"vcvarsall.bat {'x86_amd64'} {command_separator} cl {command_separator} " if "msvc" in args.compiler else ""
 
 res = subprocess.Popen(msvc_init +
-                       f"meson compile -C build_meson/windows64",
+                       f"meson {build_dir} --cross-file platforms/{args.target_platform}.cross "
+                       f"--cross-file platforms/compilers/{args.compiler}_compiler.native "
+                       f"--cross-file platforms/binary_dirs/python_ver_compile.cross "
+                       f"--buildtype=release {'--wipe' if os.path.isdir(build_dir) else ''}"
+                       f"{command_separator} ninja -C build_meson/{args.target_platform}",
                        shell=True)
 
 res.wait()

@@ -16,7 +16,7 @@
 #define PYTHONHOME L"addons/linux/cpython-3.9.7-linux/python/install/lib"
 
 #elif __linux__
-#define PYTHONHOME L"/home/niklas/Documents/py4godot/build/addons/linux64/cpython-3.9.7-linux64/python/install"
+#define PYTHONHOME L"addons/linux64/cpython-3.9.7-linux64/python/install"
 
 #elif __APPLE__
 #define PYTHONHOME L"addons/windows64/cpython-3.9.7-windows32/python/install"
