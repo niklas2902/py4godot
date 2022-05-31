@@ -148,3 +148,26 @@ cdef class Vector3:
 
     def get_axis(self,  godot_vector3_axis axis):
         return api_core.godot_vector3_get_axis(&self._native, axis)
+
+    @property
+    def y(self):
+        return self.get_axis(1)
+    @y.setter
+    def y(self, value):
+        self.set_axis(1,value)
+
+
+    @property
+    def x(self):
+        return self.get_axis(0)
+    @x.setter
+    def x(self, value):
+        self.set_axis(0,value)
+
+
+    @property
+    def z(self):
+        return self.get_axis(2)
+    @z.setter
+    def z(self, value):
+        self.set_axis(2,value)
