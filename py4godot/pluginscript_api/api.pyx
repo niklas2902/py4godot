@@ -138,8 +138,14 @@ const godot_variant **p_args,int p_argcount, godot_variant_call_error *r_error) 
             for i in range(0, p_argcount): #for loop for creating a list of arguments given to us by godot
                 variant=CVariant.Variant.new_static(dereference(p_args[i]))
                 args.append(variant.get_converted_value())
-            ret = getattr(instance,method_name)(*args) #calling the method with the given arguments
-            return CVariant.Variant()._native #Todo: return value
+            try:
+                ret = getattr(instance,method_name)(*args) #calling the method with the given arguments
+                return CVariant.Variant()._native #Todo: return value
+            except Exception as e:
+                print("Error in method:", method_name)
+                print("Instance:", instance)
+                traceback.print_exc()
+
         return CVariant.Variant()._native
 
 

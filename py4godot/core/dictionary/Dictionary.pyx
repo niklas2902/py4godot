@@ -23,6 +23,9 @@ cdef class Dictionary:
         d._index = 0
         return d
 
+
+    def __dealloc__(self):
+        self.destroy()
     def destroy(self):
         api_core.godot_dictionary_destroy(&self._native)
 

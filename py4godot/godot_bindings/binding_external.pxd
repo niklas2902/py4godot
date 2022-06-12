@@ -16,7 +16,7 @@ cdef extern from "binding.h":
 
     struct godot_gdnative_core_api_struct:
         godot_method_bind *(*godot_method_bind_get_method)(const char *p_classname, const char *p_methodname)
-        void (*godot_method_bind_ptrcall)(godot_method_bind *p_method_bind, godot_object *p_instance, const void **p_args, void *p_ret);
+        void (*godot_method_bind_ptrcall)(godot_method_bind *p_method_bind, godot_object *p_instance, const void **p_args, void *p_ret) nogil;
         godot_class_constructor (*godot_get_class_constructor)(const char *p_classname)
         godot_bool (*godot_aabb_intersects)(const godot_aabb *p_self, const godot_aabb *p_with)
         void (*godot_array_new)(godot_array *r_dest);

@@ -125,7 +125,10 @@ def generate_args(objs_to_import, method, result):
     args = "self, "
     for argument in method["arguments"]:
         if argument["type"] != "String":
-            args += " " + (argument["type"] if not argument["type"] in objects else argument["type"]) + " "
+            if(argument["type"] == "Object"): #TODO: look for option to remove this
+                args += " Wrapper "
+            else:
+                args += " " + (argument["type"] if not argument["type"] in objects else argument["type"]) + " "
         else:
             args += " str "
         args += (argument["name"] if argument["name"] not in exclude_words else argument["name"] + "_")
@@ -216,8 +219,11 @@ def generate_return_type(objs_to_import, method, obj, result):
             if return_type_imported == "Vector3_Axis":
                 return_type_imported = "godot_vector3_axis"
 
-            result += f"""    cdef {return_type_imported if return_type_imported not in types
-            else types[return_type_imported]} ret\n\n"""
+            if return_type_imported == "Dictionary" or "Array" in return_type_imported:
+                result += f"""    cdef {return_type_imported} ret = {return_type_imported}()\n\n"""
+            else:
+                result += f"""    cdef {return_type_imported if return_type_imported not in types
+                else types[return_type_imported]} ret\n\n"""
     return objs_to_import, result, return_type, return_type_save
 
 
@@ -257,13 +263,21 @@ def make_method_api_call(method, obj, result, return_type, return_type_save):
     """make the api call and return the return value"""
     if not method["has_varargs"]:
         if not method["is_virtual"]:
-            result += f"    api_core.godot_method_bind_ptrcall(bind_{obj['name'].lower()}_{method['name']}," \
+            if method["return_type"] == "Dictionary" or "Array" == method["return_type"] or \
+                    (method["return_type"].startswith("Pool") and method["return_type"].endswith("Array")):
+                print("return-type:",method["return_type"])
+                result += f"    api_core.godot_method_bind_ptrcall(bind_{obj['name'].lower()}_{method['name']}," \
+                          f"self.godot_owner, args,&ret._native)\n"
+            else:
+                result += f"    api_core.godot_method_bind_ptrcall(bind_{obj['name'].lower()}_{method['name']}," \
                       f"self.godot_owner, args,{'&ret' if return_type != 'void' else 'NULL'})\n"
 
         if return_type != "void" and return_type not in objects and not return_type_save.startswith("Pool"):
             # String should be handled immediately
             if return_type == "String":
                 result += f"    return str({return_type_save + '.new_static(ret))' if return_type_save in types else 'ret'}\n\n"
+            elif return_type == "Dictionary" or "Array" in return_type:
+                result += f"    return ret\n\n" #Look over this special case
             else:
                 result += f"    return {return_type_save + '.new_static(ret)' if return_type_save in types else 'ret'}\n\n"
         elif not return_type_save.startswith("Pool") and return_type != "void":

@@ -5,8 +5,7 @@ cdef class Wrapper(object):
         setattr(self, name, value)
     def __del__(self):
         print_ptr(self.godot_owner)
-        if(self.godot_owner !=NULL):
-            pass
+        #if(self.godot_owner !=NULL):
             #Free space, if obtained
             #print("Free", self)
             #api_core.godot_free(self.godot_owner)
