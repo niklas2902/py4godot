@@ -284,6 +284,8 @@ def make_method_api_call(method, obj, result, return_type, return_type_save):
             result += f"    cdef {return_type} obj = {return_type}()\n"
             result += "    obj.set_godot_owner(ret)\n"
             result += "    return obj\n"
+        elif return_type_save.startswith("Pool"):
+            result += f"    return ret\n\n"
 
     else:
         # making method call with varargs, when method has return type
