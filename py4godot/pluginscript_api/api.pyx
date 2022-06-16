@@ -138,6 +138,9 @@ const godot_variant **p_args,int p_argcount, godot_variant_call_error *r_error) 
             for i in range(0, p_argcount): #for loop for creating a list of arguments given to us by godot
                 variant=CVariant.Variant.new_static(dereference(p_args[i]))
                 args.append(variant.get_converted_value())
+            for i in range(len(args)):
+                if isinstance(args[i], Wrapper):
+                    args[i] = getattr(instance, "signature_"+method_name)[i].cast(args[i])
             try:
                 ret = getattr(instance,method_name)(*args) #calling the method with the given arguments
                 return CVariant.Variant()._native #Todo: return value

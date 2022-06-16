@@ -18,7 +18,6 @@ cdef extern from "binding.h":
         void godot_nativescript_register_class(void *p_gdnative_handle, const char *p_name, const char *p_base, godot_instance_create_func p_create_func, godot_instance_destroy_func p_destroy_func);
 
 
-
     const godot_gdnative_ext_nativescript_api_struct *nativescript_api
     const godot_gdnative_ext_nativescript_1_1_api_struct *nativescript_api_11
 

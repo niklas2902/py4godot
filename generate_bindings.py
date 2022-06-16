@@ -45,10 +45,11 @@ base_import_string += f"from py4godot.events.events cimport UpdateEvent\n"
 base_import_string += f"from py4godot.core.color.Color cimport Color\n"
 base_import_string += f"from cython.operator cimport dereference\n"
 base_import_string += f"from py4godot.enums.enums cimport *\n"
-base_import_string += f"from py4godot.godot_bindings.types cimport *\n"
 base_import_string += f"from cpython.mem cimport PyMem_Malloc, PyMem_Realloc, PyMem_Free\n"
 base_import_string += f"from py4godot.utils.core_holder cimport get_core, get_nativescript\n"
-base_import_string += f"from py4godot.godot_bindings.binding_external cimport *\n\n\n" \
+base_import_string += f"from py4godot.godot_bindings.binding_external cimport *\n"
+base_import_string += f"from py4godot.godot_bindings.types cimport *\n"
+base_import_string += f"from libcpp cimport bool\n\n\n"\
                       f"cdef set_core(godot_gdnative_core_api_struct* core):\n" \
                       f"    global api_core\n" \
                       f"    api_core = core\n\n" \
@@ -96,6 +97,7 @@ def generate_methods(obj, objs_to_import):
         result += "\n##################################Generated Methods#########################################\n"
         for method in obj["methods"]:
             # Generate head of method
+            result += f"  signature_{method['name']} = {generate_signature_arg_dict(method)}\n"
             result += f"""  def {'' if method['is_const'] == False else ''} {method['name'] if method['name'] 
             not in exclude_words else method['name'] + '_'}("""
 
@@ -178,6 +180,20 @@ def generate_args(objs_to_import, method, result):
         args += "*varargs,"
     result += args.rstrip(", ") + "):\n"
     return objs_to_import, result
+
+def generate_signature_arg_dict(method):
+    dict_result = dict()
+    i = 0
+    for argument in method["arguments"]:
+        if not argument["type"] in objects:
+            continue
+        dict_result[i] = argument["type"] if not argument["type"] in objects else argument["type"]
+        i+=1
+    dict_result_string = "{"
+    for key in dict_result.keys():
+        dict_result_string+= str(key)+":"+ dict_result[key]+","
+    dict_result_string +="}"
+    return dict_result_string
 
 def init_unset_defaults(method, result):
     for argument in method["arguments"]:
