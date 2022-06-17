@@ -7,10 +7,12 @@ api_core = get_core()
 
 cdef class Array:
 
-    def __init__(self):
+    def __init__(self, * values):
         api_core.godot_array_new(&self._native)
         self._index = 0
         self.update_event = UpdateEvent()
+        for val in values:
+            self.append(val)
 
     def set(self, godot_int index, value):
         api_core.godot_array_set(&self._native, index, &Variant(value)._native)

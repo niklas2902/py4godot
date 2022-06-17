@@ -10,10 +10,12 @@ api_core = get_core()
 
 cdef class Dictionary:
 
-    def __init__(self):
+    def __init__(self, ** values):
         api_core.godot_dictionary_new(&self._native)
         self.update_event = UpdateEvent()
         self._index = 0
+        for key in values:
+            self[key] = values[key]
 
     @staticmethod
     def new_copy(Dictionary src):
