@@ -97,6 +97,8 @@ cdef class Array:
         return self
 
     def __next__(self):
+        if self._index >= self.size():
+             raise StopIteration
         val = self.get(self._index)
         self._index += 1
         return val

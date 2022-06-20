@@ -76,6 +76,9 @@ cdef class Dictionary:
         return self
 
     def __next__(self):
+        if self._index >= self.size():
+             raise StopIteration
+
         key, val = self.keys()[self._index], self.values()[self._index]
         self._index += 1
         return (key,val)
