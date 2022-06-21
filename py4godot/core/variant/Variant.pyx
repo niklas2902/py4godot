@@ -22,7 +22,7 @@ api_core = get_core()
 
 cdef dict_get_methods = {0:Variant.as_nil, 1:Variant.as_bool,2:Variant.as_int, 3:Variant.as_real,4:Variant.as_string, 5:Variant.as_vector2,
  6:Variant.as_rect2, 7:Variant.as_vector3,8:Variant.as_transform2d, 9:Variant.as_plane, 10:Variant.as_quat,11:Variant.as_aabb, 12:Variant.as_basis,
-  13:Variant.as_transform, 14:Variant.as_color, 15:Variant.as_node_path, 16:Variant.as_rid, 17:Variant.as_godot_object, 18:Variant.as_dictionary}
+  13:Variant.as_transform, 14:Variant.as_color, 15:Variant.as_node_path, 16:Variant.as_rid, 17:Variant.as_godot_object, 18:Variant.as_dictionary, 19:Variant.as_array}
 
 
 cdef class Variant:
@@ -109,6 +109,11 @@ cdef class Variant:
             elif variant is Dictionary:
                 self.new_dict(Dictionary)
 
+            elif type(variant) == RID:
+                self.new_rid(variant)
+            elif variant is RID:
+                self.new_rid(RID)
+
             elif type(variant) == Array:
                 self.new_array(variant)
             elif variant is Array:
@@ -163,6 +168,9 @@ cdef class Variant:
 
     def new_dict(self, Dictionary variant):
         api_core.godot_variant_new_dictionary(&self._native, &variant._native);
+
+    def new_rid(self, RID variant):
+        api_core.godot_variant_new_rid(&self._native, &variant._native)
 
     def new_array(self, Array variant):
         api_core.godot_variant_new_array(&self._native, &variant._native)

@@ -143,7 +143,8 @@ const godot_variant **p_args,int p_argcount, godot_variant_call_error *r_error) 
                     args[i] = getattr(instance, "signature_"+method_name)[i].cast(args[i])
             try:
                 ret = getattr(instance,method_name)(*args) #calling the method with the given arguments
-                return CVariant.Variant()._native #Todo: return value
+                if ret != None:
+                    return CVariant.Variant(ret)._native #Todo: return value
             except Exception as e:
                 print("#############")
                 print(getattr(instance,"signature_"+method_name))
