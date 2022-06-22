@@ -235,7 +235,7 @@ def generate_return_type(objs_to_import, method, obj, result):
             if return_type_imported == "Vector3_Axis":
                 return_type_imported = "godot_vector3_axis"
 
-            if return_type_imported == "Dictionary" or "Array" in return_type_imported:
+            if return_type_imported == "Dictionary" or return_type_imported == "String" or "Array" in return_type_imported:
                 result += f"""    cdef {return_type_imported} ret = {return_type_imported}()\n\n"""
             else:
                 result += f"""    cdef {return_type_imported if return_type_imported not in types
@@ -279,7 +279,7 @@ def make_method_api_call(method, obj, result, return_type, return_type_save):
     """make the api call and return the return value"""
     if not method["has_varargs"]:
         if not method["is_virtual"]:
-            if method["return_type"] == "Dictionary" or "Array" == method["return_type"] or \
+            if method["return_type"] == "Dictionary" or method["return_type"] == "String" or "Array" == method["return_type"] or \
                     (method["return_type"].startswith("Pool") and method["return_type"].endswith("Array")):
                 print("return-type:",method["return_type"])
                 result += f"    api_core.godot_method_bind_ptrcall(bind_{obj['name'].lower()}_{method['name']}," \
@@ -291,7 +291,7 @@ def make_method_api_call(method, obj, result, return_type, return_type_save):
         if return_type != "void" and return_type not in objects and not return_type_save.startswith("Pool"):
             # String should be handled immediately
             if return_type == "String":
-                result += f"    return str({return_type_save + '.new_static(ret))' if return_type_save in types else 'ret'}\n\n"
+                result += f"    return str(ret)\n\n"
             elif return_type == "Dictionary" or "Array" in return_type:
                 result += f"    return ret\n\n" #Look over this special case
             else:
@@ -480,3 +480,16 @@ from py4godot.utils.Wrapper cimport *"""
                            "\ncdef set_native_script(godot_gdnative_ext_nativescript_1_1_api_struct* api)\n" +
                            "cdef set_bindings_funcs(godot_instance_binding_functions bindings_funcs_, int lang_ind)\n"
                            "cdef register_types()")
+    with open("py4godot/classes/convert.pyx", "w") as convert:
+        convert.write("from py4godot.classes.generated import *\n")
+        convert.write("from py4godot.godot_bindings.binding_external cimport *\n")
+        convert.write("from py4godot.utils.Wrapper cimport *\n")
+        convert.write("dict_convert = {\n")
+        for element in obj:
+            convert.write(f"'{element['name']}':{element['name']},\n")
+        convert.write("\n}\n\n")
+
+        convert.write(
+f"""cdef convert(Wrapper wrapper):
+    return dict_convert[Object.cast(wrapper).get_class()].cast(wrapper)""")
+
