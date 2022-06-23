@@ -481,15 +481,14 @@ from py4godot.utils.Wrapper cimport *"""
                            "cdef set_bindings_funcs(godot_instance_binding_functions bindings_funcs_, int lang_ind)\n"
                            "cdef register_types()")
     with open("py4godot/classes/convert.pyx", "w") as convert:
-        convert.write("from py4godot.classes.generated import *\n")
-        convert.write("from py4godot.godot_bindings.binding_external cimport *\n")
+        #convert.write("from py4godot.classes.generated import *\n")
         convert.write("from py4godot.utils.Wrapper cimport *\n")
-        convert.write("dict_convert = {\n")
-        for element in obj:
-            convert.write(f"'{element['name']}':{element['name']},\n")
-        convert.write("\n}\n\n")
+        #convert.write("dict_convert = {\n")
+        #for element in obj:
+        #    convert.write(f"'{element['name']}':{element['name']},\n")
+        #convert.write("\n}\n\n")
 
         convert.write(
 f"""cdef convert(Wrapper wrapper):
-    return dict_convert[Object.cast(wrapper).get_class()].cast(wrapper)""")
+    return wrapper""")
 
