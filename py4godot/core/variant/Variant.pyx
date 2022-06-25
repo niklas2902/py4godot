@@ -15,7 +15,7 @@ from py4godot.core.array.Array cimport *
 from py4godot.core.dictionary.Dictionary cimport *
 from py4godot.core.rid.RID cimport *
 from py4godot.utils.Wrapper cimport *
-from py4godot.classes.convert cimport *
+cimport py4godot.classes.convert as pygodot_convert
 from py4godot.utils.core_holder cimport get_core
 from py4godot.core.variant.variant_binding cimport *
 
@@ -266,9 +266,7 @@ cdef class Variant:
         print("as_godot_object")
         cdef Wrapper wrapper = Wrapper()
         wrapper.set_godot_owner(api_core.godot_variant_as_object(&self._native))
-        if wrapper.godot_owner == NULL or api_core == NULL:
-            return wrapper
-        return convert(wrapper)
+        return pygodot_convert.convert(wrapper)
     def __eq__(self, Variant other):
         return api_core.godot_variant_operator_equal(&self._native, &other._native)
     def __lt__(self, Variant other):

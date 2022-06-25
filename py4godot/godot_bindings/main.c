@@ -143,8 +143,8 @@ void GDN_EXPORT godot_gdnative_init(godot_gdnative_init_options *p_options) {
     set_core_holder(api_core);
     set_native_script_holder(nativescript_api_11);
 
-    set_up_pluginscript();
     set_up_bindings();
+    set_up_pluginscript();
 
     // Release the Kraken... er I mean the GIL !
     gilstate = PyEval_SaveThread();
@@ -179,6 +179,8 @@ void set_up_bindings(){
 
     init_method_bindings(api_core);
     register_types();
+    printf("####################before_init_convert############################################\n");
+    get_init_convert();
 
     // from godot-cpp
     // Initialize the `language_index` here since `__register_types()` makes use of it.
