@@ -263,7 +263,6 @@ cdef class Variant:
         return PoolVector3Array.new_static(api_core.godot_variant_as_pool_vector3_array(&self._native))
     @staticmethod
     cdef as_godot_object(self):
-        print("as_godot_object")
         cdef Wrapper wrapper = Wrapper()
         wrapper.set_godot_owner(api_core.godot_variant_as_object(&self._native))
         return pygodot_convert.convert(wrapper)

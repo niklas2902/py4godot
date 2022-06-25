@@ -17,9 +17,6 @@ cdef api register_types():
     c_generated.register_types()
 
 cdef api get_init_convert():
-    print("get_init_covert_called")
-    print("Object:", py_generated.Object)
-    print("init_convert")
     dict_convert = {
     'MobileVRInterface':py_generated.MobileVRInterface,
     'MarginContainer':py_generated.MarginContainer,
@@ -681,8 +678,6 @@ cdef api get_init_convert():
     'BoneAttachment':py_generated.BoneAttachment,
     'Position2D':py_generated.Position2D,
                             }
-
-    print("!!!!!!!!!!!!!!init_convert:", dict_convert,get_class)
     convert.init_convert(dict_convert, get_class)
 
 def get_class(Wrapper wrapper):
