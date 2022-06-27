@@ -9,7 +9,7 @@ from meson_scripts import copy_tools, download_python, generate_init_files, \
     locations, platform_check, generate_godot, \
     download_godot
 
-#generate_bindings.build()
+generate_bindings.build()
 
 
 def cythonize_files():
