@@ -1,6 +1,6 @@
 cimport py4godot.classes.generated as c_generated
 import py4godot.classes.generated as py_generated
-cimport py4godot.classes.convert as convert
+import py4godot.classes.convert as convert
 from py4godot.utils.Wrapper cimport *
 from py4godot.godot_bindings.binding cimport *
 from py4godot.godot_bindings.binding_external cimport *

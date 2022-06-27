@@ -15,7 +15,7 @@ from py4godot.core.array.Array cimport *
 from py4godot.core.dictionary.Dictionary cimport *
 from py4godot.core.rid.RID cimport *
 from py4godot.utils.Wrapper cimport *
-cimport py4godot.classes.convert as pygodot_convert
+import py4godot.classes.convert as pygodot_convert
 from py4godot.utils.core_holder cimport get_core
 from py4godot.core.variant.variant_binding cimport *
 
