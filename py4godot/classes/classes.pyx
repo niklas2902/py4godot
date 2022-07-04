@@ -677,7 +677,7 @@ cdef api get_init_convert():
     'RayCast':py_generated.RayCast,
     'BoneAttachment':py_generated.BoneAttachment,
     'Position2D':py_generated.Position2D,
-                            }
+    }
     convert.init_convert(dict_convert, get_class)
 
 def get_class(Wrapper wrapper):
