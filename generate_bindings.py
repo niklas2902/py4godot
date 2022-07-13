@@ -263,7 +263,7 @@ def generate_method_argument_array(method, result):
         result += """    cdef void * args[1]\n    args[0] = NULL\n"""
 
     if method["has_varargs"]:
-        result += f"""    cdef godot_variant** combined_array = <godot_variant**> PyMem_Malloc(sizeof(godot_variant *) * len(varargs) + {len(method['arguments'])})\n"""
+        result += f"""    cdef godot_variant** combined_array = <godot_variant**> PyMem_Malloc(sizeof(godot_variant *) * (len(varargs) + {len(method['arguments'])}))\n"""
         for i in range(len(method["arguments"])):
             argument = method["arguments"][i]
             arg_name = (argument["name"] if argument["name"] not in exclude_words else argument["name"] + "_")
