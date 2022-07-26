@@ -2,16 +2,7 @@ import json
 
 exclude_words = ["import", "raise", "class", "from", "pass", "with", "global", "print", "short", "in", "args"]
 
-types = {"Dictionary": "godot_dictionary", "Variant": "godot_variant", "Array": "godot_array", "String": "godot_string",
-         "PoolStringArray": "godot_pool_string_array", "Error": "godot_error",
-         "NodePath": "godot_node_path",
-         "Vector3": "godot_vector3", "Vector2": "godot_vector2", "Plane": "godot_plane",
-         "Basis": "godot_basis", "Transform": "godot_transform",
-         "PoolIntArray": "godot_object *", "PoolVector3Array": "godot_object*", "PoolVector2Array": "godot_object*",
-         "Quat": "godot_quat", "AABB": "godot_aabb", "Rect2": "godot_rect2", "PoolByteArray": "godot_object *",
-         "Transform2D": "godot_transform2d",
-         "PoolColorArray": "godot_object * ",
-         "Color": "godot_color", "RID": "godot_rid", "PoolRealArray": "godot_object *", }
+types = { }
 core = ["Dictionary", "Array", "Variant", "NodePath", "String", "Vector3", "Vector2", "Plane", "Basis", "Quat",
         "PoolIntArray", "RID", "AABB", "Transform", "PoolByteArray", "Rect2", "PoolVector2Array", "Transform2D",
         "PoolVector3Array",
@@ -94,6 +85,7 @@ def generate_properties(obj):
     if len(obj["properties"]):
         result += "\n#########################f#########Generated Properties#########################################\n"
         for gd_property in obj["properties"]:
+            result += f"#{gd_property['type']}\n"
             result += "  @property\n"
             result += f"  def {gd_property['name'].replace('/', '_')}(self)->{gd_property['type']}:pass \n"
             result += f"  @{gd_property['name'].replace('/', '_')}.setter \n"

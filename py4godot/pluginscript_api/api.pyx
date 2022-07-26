@@ -102,8 +102,9 @@ cdef api godot_pluginscript_instance_data * init_pluginscript_instance(godot_plu
     cdef Wrapper instance
     instance = (<object>p_data)()#instanciating the the class given by manifest.data
     instance.set_godot_owner(p_owner)
-    for prop in instance.PROPERTIES:
-        setattr(instance,prop,None)
+    #TODO: look over these lines
+    #for prop in instance.PROPERTIES:
+    #    setattr(instance,prop,None)
     Py_INCREF(instance)
     return <PyObject*> instance
 

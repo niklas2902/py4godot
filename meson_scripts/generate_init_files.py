@@ -27,6 +27,7 @@ from py4godot.pluginscript_api.hints.range_hint.RangeHint import *
 from py4godot.pluginscript_api.hints.custom_hint.CustomHint import *
 from py4godot.pluginscript_api.hints.exp_range_hint.ExpRangeHint import *
 from py4godot.pluginscript_api.hints.enum_hint.EnumHint import *
+from py4godot.pluginscript_api.hints.flags_hint.FlagsHint import *
 """
 build_folder = "build/addons"
 core_folder = "core"
