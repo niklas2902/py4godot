@@ -58,6 +58,11 @@ def gdtool(cls):
             raise Exception("More than one class was marked as gd_class or gd_tool_class in one file")
         return cls
 
+def prop(name,type_, defaultval, hint = BaseHint(), hint_string = ""):
+    properties.append(PropertyDescription(name = name,
+                type_=type_,hint = hint,usage = godot_property_usage_flags.GODOT_PROPERTY_USAGE_DEFAULT,
+                default_value=defaultval, rset_mode=godot_method_rpc_mode.GODOT_METHOD_RPC_MODE_DISABLED))
+
 def gdproperty(type_, defaultval, hint = BaseHint(), hint_string = ""):
     class gdprop(property):
         def __init__(self,fget=None, fset=None, fdel=None, doc=None):

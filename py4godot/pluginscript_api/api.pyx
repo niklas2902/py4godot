@@ -77,7 +77,7 @@ cdef api  godot_pluginscript_script_manifest init_pluginscript_desc (godot_plugi
         manifest.methods = methods_array._native
         manifest.signals = signals_array._native
 
-        (<Wrapper>gd_classs).PROPERTIES = [p.name for p in result.properties]
+        (<Wrapper>gd_classs).PROPERTIES = [p for p in result.properties]
         Py_INCREF(gd_classs)
         manifest.data = <PyObject*>gd_classs #The data contains the class, we want later instantiate in method init_pluginscript_instance
 
@@ -102,9 +102,14 @@ cdef api godot_pluginscript_instance_data * init_pluginscript_instance(godot_plu
     cdef Wrapper instance
     instance = (<object>p_data)()#instanciating the the class given by manifest.data
     instance.set_godot_owner(p_owner)
+
     #TODO: look over these lines
-    #for prop in instance.PROPERTIES:
-    #    setattr(instance,prop,None)
+    for prop in instance.PROPERTIES:
+        try:
+            setattr(instance,prop.name,prop.default_value)
+        except Exception as e:
+            print("Exception:")
+            print(e)
     Py_INCREF(instance)
     return <PyObject*> instance
 
