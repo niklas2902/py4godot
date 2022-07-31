@@ -34,13 +34,7 @@ base_import_string += f"from py4godot.core.variant.Variant import Variant_Type\n
 base_import_string += f"from py4godot.core.variant.Variant import Variant_Operator\n"
 base_import_string += f"from py4godot.events.events import UpdateEvent\n"
 base_import_string += f"from py4godot.core.color.Color import Color\n"
-base_import_string += f"from cython.operator import dereference\n"
-base_import_string += f"from py4godot.enums.enums import *\n"
-base_import_string += f"from cpython.mem import PyMem_Malloc, PyMem_Realloc, PyMem_Free\n"
-base_import_string += f"from py4godot.utils.core_holder import get_core, get_nativescript\n"
-base_import_string += f"from py4godot.godot_bindings.binding_external import *\n"
-base_import_string += f"from py4godot.godot_bindings.types import *\n"
-base_import_string += f"from libcpp cimport bool\n\n\n"\
+base_import_string += f"from py4godot.enums.enums import *\n\n\n"
 
 
 def generate_constants(obj):
@@ -85,11 +79,14 @@ def generate_properties(obj):
     if len(obj["properties"]):
         result += "\n#########################f#########Generated Properties#########################################\n"
         for gd_property in obj["properties"]:
-            result += f"#{gd_property['type']}\n"
+            _type = gd_property['type']
+            if "," in _type:
+                _type = _type.split(",") [-1].strip()
+            result += f"#{_type}\n"
             result += "  @property\n"
-            result += f"  def {gd_property['name'].replace('/', '_')}(self)->{gd_property['type']}:pass \n"
+            result += f"  def {gd_property['name'].replace('/', '_')}(self)->{_type}:pass \n"
             result += f"  @{gd_property['name'].replace('/', '_')}.setter \n"
-            result += f"  def {gd_property['name'].replace('/', '_')}(self,value:{gd_property['type']})->None:pass \n"
+            result += f"  def {gd_property['name'].replace('/', '_')}(self,value:{_type})->None:pass \n"
     return result
 
 
