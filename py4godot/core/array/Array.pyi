@@ -3,7 +3,7 @@ from py4godot.core.plane.Plane import *
 from py4godot.core.variant.Variant import *
 
 class Array:
-    def __init__(self)->None:pass
+    def __init__(self,*objects)->None:pass
     def set(self, idx:int, value:Variant)->None:pass
     def get(self, idx:int)->Variant:pass
     def operator_index(self, idx:int)->Variant:pass
