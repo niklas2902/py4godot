@@ -18,7 +18,12 @@ class Dictionary:
     def get(self, key:Variant)->Variant:pass
     def set(self, key:Variant, value:Variant)->None:pass
     def operator_index(self, key:Variant)->Variant:pass
-    def operator_index_const(self, key:Variant)->const:pass
     def next(self, key:Variant)->Variant:pass
     def operator_equal(self, b:Array)->bool:pass
     def to_json(self)->str:pass
+    def next_(self, key:object)->object:pass
+    def __iter__(self):pass
+    def __next__(self):pass
+    def __getitem__(self, key:object)->object:pass
+    def __setitem__(self, key:object, value:object)->None:pass
+    def __delitem(self, key:object)->None:pass

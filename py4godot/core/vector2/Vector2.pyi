@@ -36,3 +36,8 @@ class Vector2:
     def set_y(self, y:float)->None:pass
     def get_x(self)->float:pass
     def get_y(self)->float:pass
+    def __add__(self, other:Vector2)->Vector2:pass
+    def __sub__(self, other:Vector2)->Vector2:pass
+    def __mul__(self, other)->Vector2:pass
+    def __floordiv__(self, other)->Vector2:pass
+    def __truediv__(self, other)->Vector2:pass

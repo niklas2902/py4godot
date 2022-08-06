@@ -36,3 +36,8 @@ class Vector3:
     def set_axis(self, axis:Vector3_Axis, val:float)->None:pass
     def get_axis(self, axis:Vector3_Axis)->float:pass
     def __str__(self)->str:pass
+    def __add__(self, other:Vector3)->Vector3:pass
+    def __sub__(self, other:Vector3)->Vector3:pass
+    def __mul__(self, other)->Vector3:pass
+    def __floordiv__(self, other)->Vector3:pass
+    def __truediv__(self, other)->Vector3:pass

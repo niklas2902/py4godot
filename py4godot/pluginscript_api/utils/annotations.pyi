@@ -5,7 +5,7 @@ def gdtool(cls:object)->None:pass
 
 def prop(name:str,type_:object, defaultval:object, hint:BaseHint = BaseHint(""), hint_string:str = "")->None:pass
 
-def gdproperty(type_:object, defaultval:object, hint:BaseHint = BaseHint(""), hint_string:str = "")->property:return property
+def gdproperty(type_:object, defaultval:object, hint:BaseHint = BaseHint(""), hint_string:str = ""):pass
 
 
 def gdmethod(func)->None:pass
