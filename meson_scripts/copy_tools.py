@@ -25,10 +25,9 @@ def run(platform):
     for entry in list_dll:
         entry = entry.lstrip("/")
         if entry.startswith("build_meson"):
-            print(os.path.dirname(f"build/addons/{platform}" + strip_platform(entry.lstrip("build_meson"))))
-            os.makedirs(os.path.dirname(f"build/addons/{platform}/" + strip_platform(entry.lstrip("build_meson"))),
+            os.makedirs(os.path.dirname(f"build/addons/{platform}/{config_data['python_ver']}-{platform}/python/install/Lib/site-packages/" + strip_platform(entry.lstrip("build_meson"))),
                         exist_ok=True)
-            copy(entry, f"build/addons/{platform}/" + strip_platform(entry.lstrip("build_meson")).
+            copy(entry, f"build/addons/{platform}/{config_data['python_ver']}-{platform}/python/install/Lib/site-packages/" + strip_platform(entry.lstrip("build_meson")).
                  replace(".dll", ".pyd"))  # dst can be a folder; use copy2() to preserve timestamp
 
 
@@ -74,8 +73,19 @@ def copy_c_into_cache(platform):
         os.makedirs(os.path.dirname(dir_path), exist_ok=True)
         copy(entry, dir_path )
 
+def copy_stub_files(platform):
+    for file in (glob.glob("**/*.pyi", recursive=True)):
+        if not file.startswith("py4godot"):
+            continue
+        os.makedirs(os.path.dirname(f"build/addons/{platform}/{config_data['python_ver']}-{platform}/python/install/Lib/site-packages/" + file),
+                    exist_ok=True)
+        copy(file, f"build/addons/{platform}/{config_data['python_ver']}-{platform}/python/install/Lib/site-packages/" + file)
+
+        print(f"build/addons/{platform}/{config_data['python_ver']}-{platform}/python/install/Lib/site-packages/" + file)
+
 
 if __name__ == "__main__":
-    copy_c_into_cache("windows64")
+    #copy_c_into_cache("windows64")
+    copy_stub_files("windows64")
 
 

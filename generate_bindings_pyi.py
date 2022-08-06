@@ -31,7 +31,6 @@ base_import_string += f"from py4godot.core.transform.Transform2D import Transfor
 base_import_string += f"from py4godot.core.vector2.Vector2 import Vector2\n"
 base_import_string += f"from py4godot.core.vector3.Vector3 import Vector3\n"
 base_import_string += f"from py4godot.core.variant.Variant import Variant_Type\n"
-base_import_string += f"from py4godot.core.variant.Variant import Variant_Operator\n"
 base_import_string += f"from py4godot.events.events import UpdateEvent\n"
 base_import_string += f"from py4godot.core.color.Color import Color\n"
 base_import_string += f"from py4godot.enums.enums import *\n\n\n"

@@ -102,10 +102,10 @@ res = subprocess.Popen(msvc_init +
 res.wait()
 copy_tools.run(args.target_platform)
 copy_tools.copy_main(args.target_platform)
+copy_tools.copy_stub_files(args.target_platform)
 generate_godot.generate_lib(args.target_platform)
 generate_godot.generate_gdignore()
 generate_init_files.create_init_file(args.target_platform)
-copy_tools.copy_c_into_cache(args.target_platform)
 
 print("=================================Build finished==================================")
 print("Build took:", time.time() - start, "seconds")
