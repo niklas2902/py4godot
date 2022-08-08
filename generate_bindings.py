@@ -87,7 +87,7 @@ def generate_properties(obj):
                 result += f"    return val\n"
             result += f"  @{gd_property['name'].replace('/', '_')}.setter \n"
             result += f"  def {gd_property['name'].replace('/', '_')}(self,value): \n"
-            result += f"    assert value != None, 'please give a value, value for property \"{gd_property['name'].replace('/', '_')}\" must not be None'\n"
+            result += f"    assert not value is None, 'please give a value, value for property \"{gd_property['name'].replace('/', '_')}\" must not be None'\n"
             result += f"    self.set_{gd_property['name'].replace('/', '_')}(value)\n"
     return result
 
@@ -253,7 +253,7 @@ def generate_method_argument_array(method, result):
         for i in range(len(method["arguments"])):
             argument = method["arguments"][i]
             arg_name = (argument["name"] if argument["name"] not in exclude_words else argument["name"] + "_")
-            result += f"    assert {arg_name} != None, 'argument \"{arg_name}\" must not be null. Please provide a value'\n"
+            result += f"    assert not {arg_name} is None, 'argument \"{arg_name}\" must not be null. Please provide a value'\n"
 
         result += f"    cdef void *args[{len(method['arguments'])}]\n\n"
         for i in range(len(method["arguments"])):
