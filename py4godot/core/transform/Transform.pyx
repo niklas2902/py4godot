@@ -3,7 +3,7 @@ from py4godot.core.vector3.Vector3 cimport *
 from py4godot.core.plane.Plane cimport *
 from py4godot.core.aabb.AABB cimport *
 from py4godot.core.string.String cimport *
-from py4godot.utils.core_holder cimport get_core
+from py4godot_core_holder.core_holder cimport get_core
 from py4godot.core.transform.transform_binding cimport *
 
 api_core = get_core()

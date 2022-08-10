@@ -12,6 +12,7 @@ generate_bindings_pyi.build()
 generate_bindings.build()
 
 def cythonize_files():
+    module = cythonize('py4godot_core_holder/*.pyx', language_level=3)
     module = cythonize('py4godot/core/*/*.pyx', language_level=3)
     module += cythonize("py4godot/classes/*.pyx", language_level=3)
     module += cythonize("py4godot/utils/*.pyx", language_level=3)
