@@ -67,8 +67,6 @@ cdef api  godot_pluginscript_script_manifest init_pluginscript_desc (godot_plugi
         for p in result.properties:
             properties_array.append(p.to_dict())
         for m in result.methods:
-            print("register_method:",m.name)
-            print("args:",m.args)
             methods_array.append(m.to_dict())
         for signal in result.signals:
             signals_array.append(signal.to_dict())
