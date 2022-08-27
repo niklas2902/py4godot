@@ -1,6 +1,9 @@
 import unittest
 
-from py4godot import Transform, Vector3, Basis, Plane, AABB
+from py4godot.enums.enums import *
+from py4godot.core import *
+from py4godot.classes.generated import *
+from py4godot.pluginscript_api.utils.annotations import *
 
 
 class PythonTest(unittest.TestCase):

@@ -1,27 +1,33 @@
 from py4godot.core.variant.Variant cimport *
 from py4godot.core.array.Array cimport *
+from py4godot_core_holder.core_holder cimport get_core
 from py4godot.core.dictionary.dictionary_binding cimport *
 from cython.operator cimport dereference
 from libc.stdio cimport printf
 
-cdef api set_api_core_dict(godot_gdnative_core_api_struct * core):
-    global api_core
-    api_core = core
+api_core = get_core()
 
 
 cdef class Dictionary:
 
-    def __init__(self):
+    def __init__(self, ** values):
         api_core.godot_dictionary_new(&self._native)
         self.update_event = UpdateEvent()
+        self._index = 0
+        for key in values:
+            self[key] = values[key]
 
     @staticmethod
     def new_copy(Dictionary src):
         cdef Dictionary d = Dictionary.__new__(Dictionary)
         api_core.godot_dictionary_new_copy(&d._native, &src._native)
         d.update_event = UpdateEvent()
+        d._index = 0
         return d
 
+
+    def __dealloc__(self):
+        self.destroy()
     def destroy(self):
         api_core.godot_dictionary_destroy(&self._native)
 
@@ -64,6 +70,23 @@ cdef class Dictionary:
         if variant != NULL :
             return Variant.new_static(dereference(variant)).get_converted_value()
         return None
+
+    def __iter__(self):
+        self._index = 0
+        return self
+
+    def __next__(self):
+        if self._index >= self.size():
+             raise StopIteration
+
+        key, val = self.keys()[self._index], self.values()[self._index]
+        self._index += 1
+        return (key,val)
+
+
+
+    def __getitem__(self, key):
+        return self.get(key)
 
     def __setitem__(self, key, value):
         self.set(key, value)

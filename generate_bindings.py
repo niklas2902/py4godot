@@ -45,9 +45,11 @@ base_import_string += f"from py4godot.events.events cimport UpdateEvent\n"
 base_import_string += f"from py4godot.core.color.Color cimport Color\n"
 base_import_string += f"from cython.operator cimport dereference\n"
 base_import_string += f"from py4godot.enums.enums cimport *\n"
-base_import_string += f"from py4godot.godot_bindings.types cimport *\n"
 base_import_string += f"from cpython.mem cimport PyMem_Malloc, PyMem_Realloc, PyMem_Free\n"
-base_import_string += f"from py4godot.godot_bindings.binding_external cimport *\n\n\n" \
+base_import_string += f"from py4godot_core_holder.core_holder cimport get_core, get_nativescript\n"
+base_import_string += f"from py4godot.godot_bindings.binding_external cimport *\n"
+base_import_string += f"from py4godot.godot_bindings.types cimport *\n"
+base_import_string += f"from libcpp cimport bool\n\n\n"\
                       f"cdef set_core(godot_gdnative_core_api_struct* core):\n" \
                       f"    global api_core\n" \
                       f"    api_core = core\n\n" \
@@ -58,7 +60,9 @@ base_import_string += f"from py4godot.godot_bindings.binding_external cimport *\
                       f"    global binding_funcs\n" \
                       f"    global language_index\n" \
                       f"    binding_funcs = binding_funcs_\n" \
-                      f"    language_index = lang_ind\n\n"
+                      f"    language_index = lang_ind\n\n"\
+                      f"\napi_core = get_core()\n"\
+                      f"\nnativescript_api_11 = get_nativescript()\n"
 
 main_string = ""
 
@@ -75,6 +79,7 @@ def generate_properties(obj):
             result += "  @property\n"
             result += f"  def {gd_property['name'].replace('/', '_')}(self): \n"
             if not gd_property["type"] in core:
+                result += f"    assert api_core != NULL, 'api_core must not be NULL'\n"
                 result += f"    return self.get_{gd_property['name'].replace('/', '_')}()\n"
             else:
                 result += f"    cdef {gd_property['type']} val = self.get_{gd_property['name'].replace('/', '_')}()\n"
@@ -82,6 +87,7 @@ def generate_properties(obj):
                 result += f"    return val\n"
             result += f"  @{gd_property['name'].replace('/', '_')}.setter \n"
             result += f"  def {gd_property['name'].replace('/', '_')}(self,value): \n"
+            result += f"    assert not value is None, 'please give a value, value for property \"{gd_property['name'].replace('/', '_')}\" must not be None'\n"
             result += f"    self.set_{gd_property['name'].replace('/', '_')}(value)\n"
     return result
 
@@ -93,11 +99,15 @@ def generate_methods(obj, objs_to_import):
         result += "\n##################################Generated Methods#########################################\n"
         for method in obj["methods"]:
             # Generate head of method
+            result += f"  signature_{method['name']} = {generate_signature_arg_dict(method)}\n"
             result += f"""  def {'' if method['is_const'] == False else ''} {method['name'] if method['name'] 
             not in exclude_words else method['name'] + '_'}("""
 
             # Generate arguments in head
             objs_to_import, result = generate_args(objs_to_import, method, result)
+
+            # body for initializing values if not set by user
+            result = init_unset_defaults(method, result)
 
             # Start with body
             result += "    cdef const godot_object *_owner = self.godot_owner\n\n"
@@ -119,7 +129,10 @@ def generate_args(objs_to_import, method, result):
     args = "self, "
     for argument in method["arguments"]:
         if argument["type"] != "String":
-            args += " " + (argument["type"] if not argument["type"] in objects else argument["type"]) + " "
+            if(argument["type"] == "Object"): #TODO: look for option to remove this
+                args += " Wrapper "
+            else:
+                args += " " + (argument["type"] if not argument["type"] in objects else argument["type"]) + " "
         else:
             args += " str "
         args += (argument["name"] if argument["name"] not in exclude_words else argument["name"] + "_")
@@ -127,13 +140,36 @@ def generate_args(objs_to_import, method, result):
         # Set default values for arguments
         if argument["has_default_value"]:
             #TODO: improve this
+            #generating default values for the core
             if argument["type"] in core and argument["type"] != "String":
                 if argument["type"].startswith("Vector"):
-                    #args += f" = {argument['type']}{argument['default_value']}"
-                    args += f" = None"
+                    args += f" = {argument['type']}{argument['default_value']}"
+                elif argument["type"] == "Variant":
+                    args += f" = {argument['type']}()"
+                elif argument["type"] == "Array":
+                    args += f" = {argument['type']}()"
+                elif "Pool" in argument["type"]:
+                    args += f" = {argument['type']}()"
+                elif argument["type"] == "Dictionary":
+                    args += f" = {argument['type']}()"
+                elif argument["type"] == "Transform2D":
+                    vector = argument["default_value"].replace("(", "").replace(")","").split(",")
+                    args += f" = Transform2D.new_with_axis_origin(Vector2({vector[0] +','+ vector[1]})," \
+                            f" Vector2({vector[2]+','+ vector[3]}), Vector2({vector[4] +','+ vector[5]}))"
+                elif argument["type"] == "Transform":
+                    vals = argument["default_value"].split("-")
+                    axis = vals[0].split(",")
+                    origin = vals[1].replace("(","").replace(")","").split(",")
+
+                    args += f" = Transform.new_with_axis_origin(Vector3({axis[0] + ',' + axis[1] + ', '+axis[2]})," \
+                            f" Vector3({axis[3] + ',' + axis[4] + ',' + axis[5]}), " \
+                            f"Vector3({axis[6] + ',' + axis[7]+ ',' + axis[8]}), Vector3({origin[0] +','+ origin[1]+ ','+ origin[2]}))"
+                elif argument["type"] == "RID":
+                    args += " = RID()"
+                elif argument["type"] == "Rect2":
+                    args += f" = {argument['type']}{argument['default_value']}"
                 else:
-                    #args += f" = {argument['type']}({argument['default_value']})"
-                    args += f" = None"
+                    args += f" = {argument['type']}({argument['default_value']})"
             elif argument["type"] != "String":
                 args += " = " + argument["default_value"].replace("[Object:null]", "None").replace("Null", "None")
             elif argument["type"] == "String":
@@ -146,6 +182,30 @@ def generate_args(objs_to_import, method, result):
         args += "*varargs,"
     result += args.rstrip(", ") + "):\n"
     return objs_to_import, result
+
+def generate_signature_arg_dict(method):
+    dict_result = dict()
+    i = 0
+    for argument in method["arguments"]:
+        if not argument["type"] in objects:
+            continue
+        dict_result[i] = argument["type"] if not argument["type"] in objects else argument["type"]
+        i+=1
+    dict_result_string = "{"
+    for key in dict_result.keys():
+        dict_result_string+= str(key)+":"+ dict_result[key]+","
+    dict_result_string +="}"
+    return dict_result_string
+
+def init_unset_defaults(method, result):
+    for argument in method["arguments"]:
+        arg_name = (argument["name"] if argument["name"] not in exclude_words else argument["name"] + "_")
+        # init default  values for arguments if not set
+        if argument["has_default_value"]:
+            if argument["type"] in objects:
+                result += f"    if {arg_name} == None:\n" \
+                          f"      {arg_name} = {argument['type']}._new()\n"
+    return result
 
 
 def generate_return_type(objs_to_import, method, obj, result):
@@ -177,16 +237,25 @@ def generate_return_type(objs_to_import, method, obj, result):
             if return_type_imported == "Vector3_Axis":
                 return_type_imported = "godot_vector3_axis"
 
-            result += f"""    cdef {return_type_imported if return_type_imported not in types
-            else types[return_type_imported]} ret\n\n"""
+            if return_type_imported == "Dictionary" or return_type_imported == "String" or "Array" in return_type_imported:
+                result += f"""    cdef {return_type_imported} ret = {return_type_imported}()\n\n"""
+            else:
+                result += f"""    cdef {return_type_imported if return_type_imported not in types
+                else types[return_type_imported]} ret\n\n"""
     return objs_to_import, result, return_type, return_type_save
 
 
 def generate_method_argument_array(method, result):
     """generate an argument array for the api calls"""
+    result += f"    assert api_core != NULL, 'api_core must not be NULL, unexpected error'\n"
     if len(method['arguments']) > 0:
-        result += f"    cdef void *args[{len(method['arguments'])}]\n\n"
 
+        for i in range(len(method["arguments"])):
+            argument = method["arguments"][i]
+            arg_name = (argument["name"] if argument["name"] not in exclude_words else argument["name"] + "_")
+            result += f"    assert not {arg_name} is None, 'argument \"{arg_name}\" must not be null. Please provide a value'\n"
+
+        result += f"    cdef void *args[{len(method['arguments'])}]\n\n"
         for i in range(len(method["arguments"])):
             argument = method["arguments"][i]
             arg_name = (argument["name"] if argument["name"] not in exclude_words else argument["name"] + "_")
@@ -202,7 +271,7 @@ def generate_method_argument_array(method, result):
         result += """    cdef void * args[1]\n    args[0] = NULL\n"""
 
     if method["has_varargs"]:
-        result += f"""    cdef godot_variant** combined_array = <godot_variant**> PyMem_Malloc(sizeof(godot_variant *) * len(varargs) + {len(method['arguments'])})\n"""
+        result += f"""    cdef godot_variant** combined_array = <godot_variant**> PyMem_Malloc(sizeof(godot_variant *) * (len(varargs) + {len(method['arguments'])}))\n"""
         for i in range(len(method["arguments"])):
             argument = method["arguments"][i]
             arg_name = (argument["name"] if argument["name"] not in exclude_words else argument["name"] + "_")
@@ -218,19 +287,29 @@ def make_method_api_call(method, obj, result, return_type, return_type_save):
     """make the api call and return the return value"""
     if not method["has_varargs"]:
         if not method["is_virtual"]:
-            result += f"    api_core.godot_method_bind_ptrcall(bind_{obj['name'].lower()}_{method['name']}," \
+            if method["return_type"] == "Dictionary" or method["return_type"] == "String" or "Array" == method["return_type"] or \
+                    (method["return_type"].startswith("Pool") and method["return_type"].endswith("Array")):
+                print("return-type:",method["return_type"])
+                result += f"    api_core.godot_method_bind_ptrcall(bind_{obj['name'].lower()}_{method['name']}," \
+                          f"self.godot_owner, args,&ret._native)\n"
+            else:
+                result += f"    api_core.godot_method_bind_ptrcall(bind_{obj['name'].lower()}_{method['name']}," \
                       f"self.godot_owner, args,{'&ret' if return_type != 'void' else 'NULL'})\n"
 
         if return_type != "void" and return_type not in objects and not return_type_save.startswith("Pool"):
             # String should be handled immediately
             if return_type == "String":
-                result += f"    return str({return_type_save + '.new_static(ret))' if return_type_save in types else 'ret'}\n\n"
+                result += f"    return str(ret)\n\n"
+            elif return_type == "Dictionary" or "Array" in return_type:
+                result += f"    return ret\n\n" #Look over this special case
             else:
                 result += f"    return {return_type_save + '.new_static(ret)' if return_type_save in types else 'ret'}\n\n"
         elif not return_type_save.startswith("Pool") and return_type != "void":
             result += f"    cdef {return_type} obj = {return_type}()\n"
             result += "    obj.set_godot_owner(ret)\n"
             result += "    return obj\n"
+        elif return_type_save.startswith("Pool"):
+            result += f"    return ret\n\n"
 
     else:
         # making method call with varargs, when method has return type
@@ -279,6 +358,11 @@ def generate_classes(obj):
     result += f"""cdef class {obj['name']}({obj['base_class'] if obj['base_class'] != "" else "Wrapper"}):\n"""
     result += "  def __init__(self):\n"
     result += "    super().__init__()\n"
+    result += "  @staticmethod\n"
+    result += f"  cdef cast(Wrapper other):\n"
+    result += f"    cdef {obj['name']} obj = {obj['name']}()\n"
+    result += "    obj.godot_owner = other.godot_owner\n"
+    result += "    return obj\n"
     result += "  @staticmethod\n"
     result += f"  def cast(Wrapper other):\n"
     result += f"    cdef {obj['name']} obj = {obj['name']}()\n"
@@ -381,8 +465,6 @@ from py4godot.utils.Wrapper cimport *"""
     set_ = set()
     # generate all the class files
     for element in obj:
-        if element["name"].startswith("_") and not element["singleton"]:
-            continue
 
         init_methods_string += f"  init_method_bindings_{element['name']}()\n"
         generated_file = generate_classes(element)
@@ -406,3 +488,4 @@ from py4godot.utils.Wrapper cimport *"""
                            "\ncdef set_native_script(godot_gdnative_ext_nativescript_1_1_api_struct* api)\n" +
                            "cdef set_bindings_funcs(godot_instance_binding_functions bindings_funcs_, int lang_ind)\n"
                            "cdef register_types()")
+

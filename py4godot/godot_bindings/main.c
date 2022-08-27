@@ -1,23 +1,7 @@
 #include "gdnative_api_struct.gen.h"
 #include "../classes/classes_api.h"
 #include "../pluginscript_api/api_api.h"
-#include "../core/dictionary/Dictionary_api.h"
-#include "../core/variant/Variant_api.h"
-#include "../core/array/Array_api.h"
-#include "../core/transform/Transform_api.h"
-#include "../core/transform/Transform2D_api.h"
-#include "../core/string/String_api.h"
-#include "../core/string_name/StringName_api.h"
-#include "../core/vector3/Vector3_api.h"
-#include "../core/vector2/Vector2_api.h"
-#include "../core/aabb/AABB_api.h"
-#include "../core/basis/Basis_api.h"
-#include "../core/color/Color_api.h"
-#include "../core/node_path/NodePath_api.h"
-#include "../core/plane/Plane_api.h"
-#include "../core/quat/Quat_api.h"
-#include "../core/rect2/Rect2_api.h"
-#include "../core/rid/RID_api.h"
+#include "../../py4godot_core_holder/core_holder_api.h"
 
 #include "../gdnative_api/api_api.h"
 #include <string.h>
@@ -32,7 +16,7 @@
 #define PYTHONHOME L"addons/linux/cpython-3.9.7-linux/python/install/lib"
 
 #elif __linux__
-#define PYTHONHOME L"/home/niklas/Documents/py4godot/build/addons/linux64/cpython-3.9.7-linux64/python/install"
+#define PYTHONHOME L"addons/linux64/cpython-3.9.7-linux64/python/install"
 
 #elif __APPLE__
 #define PYTHONHOME L"addons/windows64/cpython-3.9.7-windows32/python/install"
@@ -150,6 +134,14 @@ void GDN_EXPORT godot_gdnative_init(godot_gdnative_init_options *p_options) {
     // Since python3.7 PyEval_InitThreads is automatically called by Py_InitializeEx, but it's better to leave it here
     // to be explicit. Calling it again does nothing.
     PyEval_InitThreads();
+    import_py4godot_core_holder__core_holder();
+    if (PyErr_Occurred())
+    {
+        PyErr_Print();
+        return ;
+    }
+    set_core_holder(api_core);
+    set_native_script_holder(nativescript_api_11);
 
     set_up_bindings();
     set_up_pluginscript();
@@ -186,8 +178,9 @@ void set_up_bindings(){
     }
 
     init_method_bindings(api_core);
-    set_native_script_classes(nativescript_api_11);
     register_types();
+    printf("####################before_init_convert############################################\n");
+    get_init_convert();
 
     // from godot-cpp
     // Initialize the `language_index` here since `__register_types()` makes use of it.
@@ -211,140 +204,6 @@ void set_up_pluginscript(){
         PyErr_Print();
         return ;
     }
-    import_py4godot__core__dictionary__Dictionary();
-    if (PyErr_Occurred())
-    {
-        PyErr_Print();
-        return ;
-    }
-    import_py4godot__core__array__Array();
-    if (PyErr_Occurred())
-    {
-        PyErr_Print();
-        return ;
-    }
-
-    import_py4godot__core__variant__Variant();
-    if (PyErr_Occurred())
-    {
-        PyErr_Print();
-        return ;
-    }
-
-    import_py4godot__core__string__String();
-    if (PyErr_Occurred())
-    {
-        PyErr_Print();
-        return ;
-    }
-
-    import_py4godot__core__string_name__StringName();
-    if (PyErr_Occurred())
-    {
-        PyErr_Print();
-        return ;
-    }
-
-    import_py4godot__core__transform__Transform();
-    if (PyErr_Occurred())
-    {
-        PyErr_Print();
-        return ;
-    }
-    import_py4godot__core__transform__Transform2D();
-    if (PyErr_Occurred())
-    {
-        PyErr_Print();
-        return ;
-    }
-
-    import_py4godot__core__vector3__Vector3();
-    if (PyErr_Occurred())
-    {
-        PyErr_Print();
-        return ;
-    }
-
-    import_py4godot__core__vector2__Vector2();
-    if (PyErr_Occurred())
-    {
-        PyErr_Print();
-        return ;
-    }
-
-    import_py4godot__core__rid__RID();
-    if (PyErr_Occurred())
-    {
-        PyErr_Print();
-        return ;
-    }
-
-    import_py4godot__core__rect2__Rect2();
-    if (PyErr_Occurred())
-    {
-        PyErr_Print();
-        return ;
-    }
-
-    import_py4godot__core__quat__Quat();
-    if (PyErr_Occurred())
-    {
-        PyErr_Print();
-        return ;
-    }
-
-    import_py4godot__core__plane__Plane();
-    if (PyErr_Occurred())
-    {
-        PyErr_Print();
-        return ;
-    }
-
-    import_py4godot__core__node_path__NodePath();
-    if (PyErr_Occurred())
-    {
-        PyErr_Print();
-        return ;
-    }
-
-    import_py4godot__core__color__Color();
-    if (PyErr_Occurred())
-    {
-        PyErr_Print();
-        return ;
-    }
-
-    import_py4godot__core__basis__Basis();
-    if (PyErr_Occurred())
-    {
-        PyErr_Print();
-        return ;
-    }
-
-    import_py4godot__core__aabb__AABB();
-    if (PyErr_Occurred())
-    {
-        PyErr_Print();
-        return ;
-    }
-
-    set_api_core_dict(api_core);
-    set_api_core_variant(api_core);
-    set_api_core_array(api_core);
-    set_api_core_string(api_core);
-    set_api_core_string_name(api_core);
-    set_api_core_transform(api_core);
-    set_api_core_transform2d(api_core);
-    set_api_core_vector3(api_core);
-    set_api_core_aabb(api_core);
-    set_api_core_basis(api_core);
-    set_api_core_color(api_core);
-    set_api_core_node_path(api_core);
-    set_api_core_plane(api_core);
-    set_api_core_quat(api_core);
-    set_api_core_rect2(api_core);
-    set_api_core_rid(api_core);
-    set_api_core_vector2(api_core);
     set_api_core_pluginscript(api_core);
 
 

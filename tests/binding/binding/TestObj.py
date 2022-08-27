@@ -1,4 +1,7 @@
-from py4godot import *
+from py4godot.enums.enums import *
+from py4godot.classes.generated import *
+from py4godot.pluginscript_api.utils.annotations import *
+from py4godot.pluginscript_api.hints import *
 
 DEFAULT_VEL=5
 @gdclass
@@ -17,8 +20,7 @@ class TestObj(Spatial):
 		self.emit_signal("test", "hallo")
 	
 	# creating a property which can be edited in the editor. Hint and hint_string are optional 
-	@gdproperty(int, DEFAULT_VEL, hint=PropertyHint.GODOT_PROPERTY_HINT_RANGE.value,
-	 hint_string="1,100,5,slider")
+	@gdproperty(int, DEFAULT_VEL,hint=RangeHint(1,100,5))
 	def vel(self):
 		return self.velocity
 	@vel.setter

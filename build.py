@@ -3,23 +3,22 @@ import os
 import subprocess
 import time
 from Cython.Build import cythonize
+import generate_bindings,generate_bindings_pyi
 
-import generate_bindings
 from meson_scripts import copy_tools, download_python, generate_init_files, \
     locations, platform_check, generate_godot, \
     download_godot
-
+generate_bindings_pyi.build()
 generate_bindings.build()
 
-
 def cythonize_files():
+    module = cythonize('py4godot_core_holder/*.pyx', language_level=3)
     module = cythonize('py4godot/core/*/*.pyx', language_level=3)
     module += cythonize("py4godot/classes/*.pyx", language_level=3)
     module += cythonize("py4godot/utils/*.pyx", language_level=3)
     module += cythonize("py4godot/pluginscript_api/*.pyx", language_level=3)
     module += cythonize("py4godot/pluginscript_api/*/*.pyx", language_level=3)
     module += cythonize("py4godot/pluginscript_api/*/*/*.pyx", language_level=3)
-    module += cythonize("py4godot/pluginscript_api/*/*/*/*.pyx", language_level=3)
     module += cythonize("py4godot/gdnative_api/*.pyx", language_level=3)
     module += cythonize("py4godot/enums/*.pyx", language_level=3)
     module += cythonize("py4godot/events/*.pyx", language_level=3)
@@ -103,10 +102,11 @@ res = subprocess.Popen(msvc_init +
 
 res.wait()
 copy_tools.run(args.target_platform)
-generate_init_files.create_init_file(args.target_platform)
 copy_tools.copy_main(args.target_platform)
+copy_tools.copy_stub_files(args.target_platform)
 generate_godot.generate_lib(args.target_platform)
 generate_godot.generate_gdignore()
+generate_init_files.create_init_file(args.target_platform)
 
 print("=================================Build finished==================================")
 print("Build took:", time.time() - start, "seconds")

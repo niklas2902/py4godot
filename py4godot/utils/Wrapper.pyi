@@ -1,0 +1,2 @@
+class Wrapper:
+    pass

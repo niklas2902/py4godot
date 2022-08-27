@@ -1,5 +1,9 @@
 import unittest
-from py4godot import *
+from py4godot.enums.enums import *
+from py4godot.classes.generated import *
+from py4godot.core import *
+from py4godot.pluginscript_api.utils.annotations import *
+from py4godot.pluginscript_api.hints import *
 import PythonTest
 
 DEFAULT_NODE = None

@@ -1,10 +1,9 @@
 from py4godot.core.array.Array cimport *
 from py4godot.core.variant.Variant cimport *
+from py4godot_core_holder.core_holder cimport get_core
 from py4godot.core.string.string_binding cimport *
 
-cdef api set_api_core_string(godot_gdnative_core_api_struct * core):
-    global api_core
-    api_core = core
+api_core = get_core()
 
 cdef class String:
 

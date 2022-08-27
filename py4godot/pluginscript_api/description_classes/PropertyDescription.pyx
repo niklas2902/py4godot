@@ -29,13 +29,15 @@ from py4godot.core.transform.Transform2D cimport Transform2D
 from py4godot.core.vector2.Vector2 cimport Vector2
 from py4godot.godot_bindings.binding_external cimport *
 from py4godot.enums.enums cimport *
-from py4godot.pluginscript_api.description_classes.hints.BaseHint cimport *
+from py4godot.pluginscript_api.hints.BaseHint cimport *
 from py4godot.classes.generated import *
 
 type_hint_map = {
 int: GODOT_PROPERTY_HINT_RANGE, SpriteFrames:GODOT_PROPERTY_HINT_SPRITE_FRAME,
+float: GODOT_PROPERTY_HINT_RANGE,
 TextFile:GODOT_PROPERTY_HINT_FILE, Resource:GODOT_PROPERTY_HINT_RESOURCE_TYPE,
 String: GODOT_PROPERTY_HINT_TYPE_STRING,
+type(True):GODOT_PROPERTY_HINT_METHOD_OF_VARIANT_TYPE,
 Vector3:GODOT_PROPERTY_HINT_METHOD_OF_VARIANT_TYPE,
 Vector2:GODOT_PROPERTY_HINT_METHOD_OF_VARIANT_TYPE,
 NodePath:GODOT_PROPERTY_HINT_METHOD_OF_VARIANT_TYPE,
@@ -52,6 +54,7 @@ Transform:GODOT_PROPERTY_HINT_METHOD_OF_VARIANT_TYPE,
 
 type_variant_type_map = {
 int:GODOT_VARIANT_TYPE_INT,
+float:GODOT_VARIANT_TYPE_REAL,
 String:GODOT_VARIANT_TYPE_STRING,
 NodePath:GODOT_VARIANT_TYPE_NODE_PATH,
 Vector2 : GODOT_VARIANT_TYPE_VECTOR2,
@@ -79,16 +82,16 @@ class PropertyDescription:
         self.hint = hint
         if(type(hint) == BaseHint):
             if(type_ in type_hint_map):
-                self.hint.hint = type_hint_map[type_]
+                self.hint.set_hint(type_hint_map[type_])
             else:
-                self.hint.hint = GODOT_PROPERTY_HINT_NONE
-        self.hint_string = hint.hint_string
+                self.hint.set_hint(GODOT_PROPERTY_HINT_NONE)
+        self.hint_string = hint.get_string()
         self.usage = usage
         self.default_value = default_value
         self.rset_mode = rset_mode
     def to_dict(self):
         d = Dictionary()
-        d.set(String("name"), String(self.name))
+        d.set(String("name"), self.name)
         d.set(String("type"), self.type_)
         d.set(String("hint"), self.hint.get_hint())
         d.set(String("hint_string"),self.hint_string)

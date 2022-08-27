@@ -12,17 +12,19 @@ cimport py4godot.core.variant.Variant as CVariant
 from cpython.mem cimport PyMem_Malloc, PyMem_Realloc, PyMem_Free
 from py4godot.godot_bindings.binding cimport *
 from py4godot.godot_bindings.binding_external cimport *
+from py4godot.classes.generated cimport *
 from py4godot.enums.enums cimport *
 import traceback
 
 from py4godot.pluginscript_api.utils.annotations import *
+from py4godot_core_holder.core_holder cimport get_core, get_nativescript
+
 
 """This file contains all the functions, that are needed to crate a pluginscript"""
 cdef godot_dictionary dictionary
 cdef api set_api_core_pluginscript(const godot_gdnative_core_api_struct* core):
     global api_core
-    api_core = core
-    api_core.godot_dictionary_new(&dictionary)
+    api_core = get_core()
 cdef api godot_pluginscript_language_data * init_pluginscript() with gil:
     """empty placeholder function, as this is necessary to implement"""
 
@@ -46,14 +48,14 @@ cdef api  godot_pluginscript_script_manifest init_pluginscript_desc (godot_plugi
         return manifest
     result = None
     try:
-        result = exec_class(str(String.new_static(dereference(p_source))))
+        result = exec_class(str(String.new_static(dereference(p_source))), str(String.new_static(dereference(p_path))))
     except Exception as e:
         traceback.print_exc()
-    if(result != None and result.gd_class != None):
+    if(result != None and (result.gd_class != None or result.gd_tool_class != None)):
         #creating a valid manifest
-        gd_obj = result.gd_class
+        gd_obj = result.gd_class if result.gd_class != None else result.gd_tool_class
         api_core.godot_string_name_new_data(&manifest.name, "python_manifest");
-        manifest.is_tool = False;
+        manifest.is_tool = result.gd_tool_class != None;
         api_core.godot_string_name_new_data(&manifest.base, "");
         api_core.godot_dictionary_new(&manifest.member_lines);
 
@@ -75,7 +77,7 @@ cdef api  godot_pluginscript_script_manifest init_pluginscript_desc (godot_plugi
         manifest.methods = methods_array._native
         manifest.signals = signals_array._native
 
-        (<Wrapper>gd_classs).PROPERTIES = [p.name for p in result.properties]
+        (<Wrapper>gd_classs).PROPERTIES = [p for p in result.properties]
         Py_INCREF(gd_classs)
         manifest.data = <PyObject*>gd_classs #The data contains the class, we want later instantiate in method init_pluginscript_instance
 
@@ -100,8 +102,14 @@ cdef api godot_pluginscript_instance_data * init_pluginscript_instance(godot_plu
     cdef Wrapper instance
     instance = (<object>p_data)()#instanciating the the class given by manifest.data
     instance.set_godot_owner(p_owner)
+
+    #TODO: look over these lines
     for prop in instance.PROPERTIES:
-        setattr(instance,prop,None)
+        try:
+            setattr(instance,prop.name,prop.default_value)
+        except Exception as e:
+            print("Exception:")
+            print(e)
     Py_INCREF(instance)
     return <PyObject*> instance
 
@@ -136,8 +144,21 @@ const godot_variant **p_args,int p_argcount, godot_variant_call_error *r_error) 
             for i in range(0, p_argcount): #for loop for creating a list of arguments given to us by godot
                 variant=CVariant.Variant.new_static(dereference(p_args[i]))
                 args.append(variant.get_converted_value())
-            ret = getattr(instance,method_name)(*args) #calling the method with the given arguments
-            return CVariant.Variant()._native #Todo: return value
+            if(hasattr(instance, "signature_"+method_name)):
+                for i in range(len(args)):
+                    if(isinstance(args[i], Wrapper)):
+                        args[i] = getattr(instance, "signature_"+method_name)[i].cast(args[i])
+            try:
+                ret = getattr(instance,method_name)(*args) #calling the method with the given arguments
+                if ret != None:
+                    return CVariant.Variant(ret)._native #Todo: return value
+            except Exception as e:
+                print("#############")
+                print(getattr(instance,"signature_"+method_name))
+                print("Error in method:", method_name)
+                print("Instance:", instance)
+                traceback.print_exc()
+
         return CVariant.Variant()._native
 
 
@@ -145,7 +166,11 @@ cdef api godot_string pluginscript_get_template_source_code(godot_pluginscript_l
  const godot_string *p_class_name, const godot_string *p_base_class_name) with gil:
     """generate a template string for the godot class, when creating ones"""
     return String(f"""
-from py4godot import *
+from py4godot.enums.enums import *
+from py4godot.core import *
+from py4godot.classes.generated import *
+from py4godot.pluginscript_api.utils.annotations import *
+from py4godot.pluginscript_api.hints import *
 
 @gdclass
 class {str(String.new_static(dereference(p_class_name)))}({str(String.new_static(dereference(p_base_class_name)))}):

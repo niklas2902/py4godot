@@ -3,11 +3,10 @@ from py4godot.core.plane.Plane cimport *
 from py4godot.core.rect2.Rect2 cimport *
 from py4godot.core.string.String cimport String
 from py4godot.core.transform.Transform2D cimport *
+from py4godot_core_holder.core_holder cimport get_core
 from py4godot.core.transform.transform_binding cimport *
 
-cdef api set_api_core_transform2d(godot_gdnative_core_api_struct * core):
-    global api_core
-    api_core = core
+api_core = get_core()
 
 cdef class Transform2D:
 

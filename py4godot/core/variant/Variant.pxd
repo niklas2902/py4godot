@@ -50,6 +50,8 @@ cdef class Variant:
     @staticmethod
     cdef inline  as_rid(self)
     @staticmethod
+    cdef inline  as_godot_object(self)
+    @staticmethod
     cdef inline  as_object(self)
     @staticmethod
     cdef inline Dictionary as_dictionary(self)

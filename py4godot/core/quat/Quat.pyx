@@ -1,10 +1,9 @@
 from py4godot.core.vector3.Vector3 cimport Vector3
 from py4godot.core.string.String cimport String
+from py4godot_core_holder.core_holder cimport get_core
 from py4godot.core.quat.quat_binding cimport *
 
-cdef api set_api_core_quat(godot_gdnative_core_api_struct * core):
-    global api_core
-    api_core = core
+api_core = get_core()
 
 cdef class Quat:
 

@@ -6,7 +6,7 @@ from py4godot.core.array.Array cimport Array
 from py4godot.core.string.String cimport String
 from py4godot.pluginscript_api.description_classes.PropertyDescription import *
 from py4godot.enums.enums cimport *
-from py4godot.pluginscript_api.description_classes.hints.BaseHint cimport *
+from py4godot.pluginscript_api.hints.BaseHint cimport *
 
 #Method info dictionary format
 #{
@@ -43,6 +43,7 @@ class MethodDescription:
                 prop_desc = PropertyDescription(element, None, BaseHint()
                 ,godot_property_usage_flags.GODOT_PROPERTY_USAGE_DEFAULT, 0,0)
                 d.set(String(element), prop_desc.to_dict())
+        print("register_method:", self.args)
 
         d.set("name", self.name)
         d.set(String("args"), dictionary_args)

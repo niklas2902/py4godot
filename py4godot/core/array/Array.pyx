@@ -1,16 +1,18 @@
 from py4godot.core.variant.Variant cimport *
+from py4godot_core_holder.core_holder cimport get_core
 from py4godot.core.array.array_binding cimport *
 
-cdef api set_api_core_array(godot_gdnative_core_api_struct * core):
-    global api_core
-    api_core = core
+api_core = get_core()
 
 
 cdef class Array:
 
-    def __init__(self):
+    def __init__(self, * values):
         api_core.godot_array_new(&self._native)
+        self._index = 0
         self.update_event = UpdateEvent()
+        for val in values:
+            self.append(val)
 
     def set(self, godot_int index, value):
         api_core.godot_array_set(&self._native, index, &Variant(value)._native)
@@ -89,6 +91,17 @@ cdef class Array:
 
     def __setitem__(self, godot_int index, value):
         self.set(index, value).get_converted_value()
+
+    def __iter__(self):
+        self._index = 0
+        return self
+
+    def __next__(self):
+        if self._index >= self.size():
+             raise StopIteration
+        val = self.get(self._index)
+        self._index += 1
+        return val
 
     #TODO: is there any possibility to implement this?
     """

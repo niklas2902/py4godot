@@ -4,6 +4,7 @@ from py4godot.events.events cimport *
 cdef class Array:
     cdef godot_array _native
     cdef UpdateEvent update_event
+    cdef godot_int _index
 
     cdef inline void set_native(self, godot_array _native):
         self._native = _native
@@ -13,4 +14,5 @@ cdef class Array:
         cdef Array o = Array.__new__(Array)
         o.set_native(_native)
         o.update_event = UpdateEvent()
+        o._index = 0
         return o

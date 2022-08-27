@@ -1,12 +1,18 @@
 from py4godot.core.basis.Basis cimport *
 from py4godot.core.string.String cimport String
+from py4godot_core_holder.core_holder cimport get_core
 from py4godot.core.vector3.vector3_binding cimport *
 
-cdef api set_api_core_vector3(godot_gdnative_core_api_struct * core):
-    global api_core
-    api_core = core
+api_core = get_core()
 
 cdef class Vector3:
+    LEFT = Vector3( -1, 0, 0)
+    RIGHT = Vector3( 1, 0, 0 )
+    UP = Vector3( 0, 1, 0 )
+    DOWN = Vector3( 0, -1, 0 )
+    FORWARD = Vector3( 0, 0, -1 )
+    BACK = Vector3( 0, 0, 1 )
+
     def __init__(self, godot_real x, godot_real y, godot_real z):
         api_core.godot_vector3_new(&self._native,x,y,z)
         self.update_event = UpdateEvent()
@@ -142,3 +148,26 @@ cdef class Vector3:
 
     def get_axis(self,  godot_vector3_axis axis):
         return api_core.godot_vector3_get_axis(&self._native, axis)
+
+    @property
+    def y(self):
+        return self.get_axis(1)
+    @y.setter
+    def y(self, value):
+        self.set_axis(1,value)
+
+
+    @property
+    def x(self):
+        return self.get_axis(0)
+    @x.setter
+    def x(self, value):
+        self.set_axis(0,value)
+
+
+    @property
+    def z(self):
+        return self.get_axis(2)
+    @z.setter
+    def z(self, value):
+        self.set_axis(2,value)
