@@ -17,7 +17,7 @@ from py4godot.enums.enums cimport *
 import traceback
 
 from py4godot.pluginscript_api.utils.annotations import *
-from py4godot.utils.core_holder cimport get_core, get_nativescript
+from py4godot_core_holder.core_holder cimport get_core, get_nativescript
 
 
 """This file contains all the functions, that are needed to crate a pluginscript"""

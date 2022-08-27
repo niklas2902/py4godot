@@ -1,7 +1,7 @@
 #include "gdnative_api_struct.gen.h"
 #include "../classes/classes_api.h"
 #include "../pluginscript_api/api_api.h"
-#include "../utils/core_holder_api.h"
+#include "../../py4godot_core_holder/core_holder_api.h"
 
 #include "../gdnative_api/api_api.h"
 #include <string.h>
@@ -134,7 +134,7 @@ void GDN_EXPORT godot_gdnative_init(godot_gdnative_init_options *p_options) {
     // Since python3.7 PyEval_InitThreads is automatically called by Py_InitializeEx, but it's better to leave it here
     // to be explicit. Calling it again does nothing.
     PyEval_InitThreads();
-    import_py4godot__utils__core_holder();
+    import_py4godot_core_holder__core_holder();
     if (PyErr_Occurred())
     {
         PyErr_Print();

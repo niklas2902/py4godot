@@ -1,6 +1,6 @@
 from py4godot.core.vector2.Vector2 cimport *
 from py4godot.core.string.String cimport String
-from py4godot.utils.core_holder cimport get_core
+from py4godot_core_holder.core_holder cimport get_core
 from py4godot.core.rect2.rect2_binding cimport *
 
 api_core = get_core()

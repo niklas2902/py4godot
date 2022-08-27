@@ -1,5 +1,5 @@
 from py4godot.core.string.String cimport String
-from py4godot.utils.core_holder cimport get_core
+from py4godot_core_holder.core_holder cimport get_core
 from py4godot.core.color.Color cimport *
 
 api_core = get_core()

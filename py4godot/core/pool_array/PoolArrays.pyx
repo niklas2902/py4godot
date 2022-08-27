@@ -1,4 +1,4 @@
-from py4godot.utils.core_holder cimport get_core
+from py4godot_core_holder.core_holder cimport get_core
 from py4godot.core.string.String cimport String
 from py4godot.core.array.Array cimport Array
 from py4godot.core.vector2.Vector2 cimport Vector2
