@@ -371,8 +371,6 @@ def generate_classes(obj):
     result += "    return obj\n"
     result += "  @staticmethod\n"
     result += f"  def cast(Wrapper other):\n"
-    result += "    print('cast')\n"
-    result += "    print_ptr(other.godot_owner)\n"
     result += "    if other == None:\n"
     result += "      return None\n"
     result += f"    cdef {obj['name']} obj = {obj['name']}()\n"
