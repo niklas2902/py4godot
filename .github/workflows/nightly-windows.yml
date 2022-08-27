@@ -16,7 +16,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
         with:
-          ref: develop
+          ref: master
       - name: print latest_commit
         run: echo ${{ github.sha }}
 
