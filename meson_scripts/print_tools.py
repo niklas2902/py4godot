@@ -1,4 +1,4 @@
-import glob, os
+import glob, os, json
 
 def print_meson(platform):
     try:
@@ -15,7 +15,7 @@ def print_tree(path, layer, max_layer=3):
         print(layer *2* " "+i.replace(path+"\\", ""))
         print_tree(i, layer + 1, max_layer)
 
-if __name__=="__main__":
+if __name__ == "__main__":
     print("print build_meson:")
     print_tree("build_meson", 0)
     print_tree("godot", 0)
