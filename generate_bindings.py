@@ -80,15 +80,17 @@ def generate_properties(obj):
             result += f"  def {gd_property['name'].replace('/', '_')}(self): \n"
             if not gd_property["type"] in core:
                 result += f"    assert api_core != NULL, 'api_core must not be NULL'\n"
-                result += f"    return self.get_{gd_property['name'].replace('/', '_')}()\n"
+                result += f"    return self.{gd_property['getter'].replace('/', '_')}()\n"
             else:
-                result += f"    cdef {gd_property['type']} val = self.get_{gd_property['name'].replace('/', '_')}()\n"
-                result += f"    val.update_event.register_method(lambda:self.set_{gd_property['name']}(val))\n"
+                result += f"    cdef {gd_property['type']} val = self.{gd_property['getter'].replace('/', '_')}()\n"
+                if gd_property["setter"]:
+                    result += f"    val.update_event.register_method(lambda:self.{gd_property['setter']}(val))\n"
                 result += f"    return val\n"
-            result += f"  @{gd_property['name'].replace('/', '_')}.setter \n"
-            result += f"  def {gd_property['name'].replace('/', '_')}(self,value): \n"
-            result += f"    assert not value is None, 'please give a value, value for property \"{gd_property['name'].replace('/', '_')}\" must not be None'\n"
-            result += f"    self.set_{gd_property['name'].replace('/', '_')}(value)\n"
+            if gd_property["setter"]:
+                result += f"  @{gd_property['name'].replace('/', '_')}.setter \n"
+                result += f"  def {gd_property['name'].replace('/', '_')}(self,value): \n"
+                result += f"    assert not value is None, 'please give a value, value for property \"{gd_property['name'].replace('/', '_')}\" must not be None'\n"
+                result += f"    self.{gd_property['setter'].replace('/', '_')}(value)\n"
     return result
 
 
@@ -305,6 +307,8 @@ def make_method_api_call(method, obj, result, return_type, return_type_save):
             else:
                 result += f"    return {return_type_save + '.new_static(ret)' if return_type_save in types else 'ret'}\n\n"
         elif not return_type_save.startswith("Pool") and return_type != "void":
+            result += "    if ret == NULL:\n"
+            result += "      return None\n\n"
             result += f"    cdef {return_type} obj = {return_type}()\n"
             result += "    obj.set_godot_owner(ret)\n"
             result += "    return obj\n"
@@ -360,11 +364,15 @@ def generate_classes(obj):
     result += "    super().__init__()\n"
     result += "  @staticmethod\n"
     result += f"  cdef cast(Wrapper other):\n"
+    result += "    if other == None:\n"
+    result += "      return None\n"
     result += f"    cdef {obj['name']} obj = {obj['name']}()\n"
     result += "    obj.godot_owner = other.godot_owner\n"
     result += "    return obj\n"
     result += "  @staticmethod\n"
     result += f"  def cast(Wrapper other):\n"
+    result += "    if other == None:\n"
+    result += "      return None\n"
     result += f"    cdef {obj['name']} obj = {obj['name']}()\n"
     result += "    obj.godot_owner = other.godot_owner\n"
     result += "    return obj\n"
