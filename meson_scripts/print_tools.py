@@ -1,8 +1,14 @@
 import glob, os, json
+with open('config.json', 'r') as f:
+    config_data = json.load(f)
+
+meson_dir = config_data['meson_dir']
+dir_godot_extract_to = config_data["dir_godot_extract_to"]
+core_folder = config_data['core_folder']
 
 def print_meson(platform):
     try:
-        with open (f"build_meson/{platform}/meson-logs/testlog.txt") as file:
+        with open (f"{meson_dir}/{platform}/meson-logs/testlog.txt") as file:
             print(file.read())
     except Exception as e:
         print(f"Exception occurred:{e.with_traceback()}")
@@ -17,8 +23,8 @@ def print_tree(path, layer, max_layer=3):
 
 if __name__ == "__main__":
     print("print build_meson:")
-    print_tree("build_meson", 0)
-    print_tree("godot", 0)
+    print_tree(f"{meson_dir}", 0)
+    print_tree(f"{dir_godot_extract_to}", 0)
     print("print root")
     print_tree(os.getcwd().rstrip("\\"), 0, 4)
     print(os.getcwd())
