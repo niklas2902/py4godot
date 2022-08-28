@@ -26,6 +26,7 @@ from py4godot.core import *
 from py4godot.classes.generated import *
 from py4godot.pluginscript_api.utils.annotations import *
 from py4godot.pluginscript_api.hints import *
+from py4godot.utils.print_tools import print
 """
 
 import_string_hints = """

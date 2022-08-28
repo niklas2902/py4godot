@@ -21,6 +21,8 @@ cdef extern from "binding.h":
         godot_bool (*godot_aabb_intersects)(const godot_aabb *p_self, const godot_aabb *p_with)
         void (*godot_array_new)(godot_array *r_dest);
         void (*godot_dictionary_new)(godot_dictionary *r_dest);
+        void (*godot_print_error)(const char *p_description, const char *p_function, const char *p_file, int p_line);
+        void (*godot_print_warning)(const char *p_description, const char *p_function, const char *p_file, int p_line);
         void (*godot_print)(const godot_string *p_message);
         const wchar_t *(*godot_string_wide_str)(const godot_string *p_self);
         void (*godot_string_name_new)(godot_string_name *r_dest, const godot_string *p_name);
