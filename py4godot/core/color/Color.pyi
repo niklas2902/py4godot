@@ -1,6 +1,10 @@
 class Color:
-    def __init___rgba(self,r:float, g:float, b:float, a:float)->None:pass
-    def new_rgb(r_dest:Color, r:float, g:float, b:float)->None:pass
+    def __init___(self):pass
+
+    @staticmethod
+    def new_rgba(self,r:float, g:float, b:float, a:float)->Color:pass
+    @staticmethod
+    def new_rgb( r:float, g:float, b:float)->Color:pass
     def get_r(self)->float:pass
     def set_r(self, r:float)->None:pass
     def get_g(self)->float:pass
