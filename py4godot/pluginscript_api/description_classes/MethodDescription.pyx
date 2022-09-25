@@ -7,6 +7,7 @@ from py4godot.core.string.String cimport String
 from py4godot.pluginscript_api.description_classes.PropertyDescription import *
 from py4godot.enums.enums cimport *
 from py4godot.pluginscript_api.hints.BaseHint cimport *
+from py4godot.utils.print_tools import print
 
 #Method info dictionary format
 #{
@@ -31,6 +32,8 @@ class MethodDescription:
     def to_dict(self):
         d = Dictionary()
         dictionary_args = Dictionary()
+        print("name:", self.name)
+        print("args:", self.args)
         if(type(self.args) == type({})):
             for key in self.args:
                 #Todo: improve this
