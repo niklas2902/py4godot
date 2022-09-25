@@ -1,4 +1,4 @@
-#include "gdnative_api_struct.gen.h"
+#include "binding4.h"
 
 ctypedef void *GDNativeVariantPtr;
 ctypedef void *GDNativeStringNamePtr;
@@ -10,6 +10,23 @@ ctypedef void *GDNativeMethodBindPtr;
 ctypedef int64_t GDNativeInt;
 ctypedef uint8_t GDNativeBool;
 ctypedef uint64_t GDObjectInstanceID;
+
+
+# VARIANT DATA I/O
+
+ctypedef enum GDNativeCallErrorType:
+	GDNATIVE_CALL_OK = 0,
+	GDNATIVE_CALL_ERROR_INVALID_METHOD = 1,
+	GDNATIVE_CALL_ERROR_INVALID_ARGUMENT = 2, # expected is variant type
+	GDNATIVE_CALL_ERROR_TOO_MANY_ARGUMENTS = 3, # expected is number of arguments
+	GDNATIVE_CALL_ERROR_TOO_FEW_ARGUMENTS = 4, # expected is number of arguments
+	GDNATIVE_CALL_ERROR_INSTANCE_IS_NULL = 5,
+	GDNATIVE_CALL_ERROR_METHOD_NOT_CONST = 6, #used for const call
+
+ctypedef struct:
+	GDNativeCallErrorType error;
+	int32_t argument;
+	int32_t expected;
 
 ctypedef struct GDNativeInterface:
     cdef void *object_method_bind_call (const GDNativeMethodBindPtr p_method_bind, GDNativeObjectPtr p_instance, const GDNativeVariantPtr *p_args, GDNativeInt p_arg_count, GDNativeVariantPtr r_ret, GDNativeCallError *r_error);
