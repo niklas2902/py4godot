@@ -1,4 +1,4 @@
-from py4godot.godot_bindings.binding4 cimport *
+from py4godot.godot_bindings.binding4_godot4 cimport *
 cdef class Wrapper4(object):
 
     def set_property(self, name, value):

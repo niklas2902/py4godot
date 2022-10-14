@@ -10,7 +10,9 @@ class ReturnType():
 def generate_import():
     result = \
     """from py4godot.utils.Wrapper4 cimport *
-from py4godot.godot_bindings.binding4_godot4 cimport *"""
+from py4godot.godot_bindings.binding4_godot4 cimport *
+from libcpp cimport bool
+"""
     return result
 
 
@@ -67,10 +69,10 @@ def generate_method(class_, mMethod):
 
 
 def generate_args_array(method):
-    result = f"{INDENT * 2}cdef GDNativeVariantPtr[] args"
-    result = generate_newline(result)
     if 'arguments' not in method.keys():
-        return result
+        return ""
+    result = f"{INDENT * 2}cdef GDNativeVariantPtr args[{len(method['arguments'])}]"
+    result = generate_newline(result)
     for i in range(0, len(method['arguments'])):
         result += f"{INDENT * 2}args[{i}] = {pythonize_name(method['arguments'][i]['name'])}"
         result = generate_newline(result)
@@ -109,8 +111,9 @@ def generate_common_methods(class_):
     return result
 
 def pythonize_name(name):
-    if name in ("from_", "len", "in", "for"):
+    if name in ("from", "len", "in", "for"):
         return name +"_"
+    return name
 
 
 def generate_args(method_with_args):
