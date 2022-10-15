@@ -7,10 +7,13 @@ class ReturnType():
         self.type = type
         self.name = name
         self.is_primitive = False
+
+IGNORED_CLASSES = ("Nil", "bool", "float", "int")
 def generate_import():
     result = \
     """from py4godot.utils.Wrapper4 cimport *
 from py4godot.godot_bindings.binding4_godot4 cimport *
+from py4godot.core.variant4.Variant4 cimport *
 from libcpp cimport bool
 """
     return result
@@ -25,7 +28,7 @@ def generate_return_value(method):
         ret_val = ReturnType("ret",method['return_value']['type'])
         result += f"{INDENT*2}cdef {ret_val.type} {ret_val.name}"
     else:
-        result+= f"{INDENT*2}cdef void* ret = NULL"
+        result+= f"{INDENT*2}cdef GDNativeTypePtr ret = NULL"
     return result
 
 def is_primitive(type):
@@ -67,14 +70,23 @@ def generate_method(class_, mMethod):
     res = generate_newline(res)
     return res
 
-
+def generate_ret_value_assign(argument):
+    print(argument)
+    if argument["type"] in classes:
+        return f"{pythonize_name(argument['name'])}.get_godot_owner()"
+    elif argument["type"] == "Variant":
+        return f"{pythonize_name(argument['name'])}.get_native_ptr()"
+    return f"&{pythonize_name(argument['name'])}"
 def generate_args_array(method):
     if 'arguments' not in method.keys():
-        return ""
-    result = f"{INDENT * 2}cdef GDNativeVariantPtr args[{len(method['arguments'])}]"
+        return f"{INDENT * 2}cdef GDNativeVariantPtr args[0]"
+    result = f"{INDENT * 2}cdef void* args[{len(method['arguments'])}]"
     result = generate_newline(result)
     for i in range(0, len(method['arguments'])):
-        result += f"{INDENT * 2}args[{i}] = {pythonize_name(method['arguments'][i]['name'])}"
+        #TODO: rework
+        #result += f"{INDENT * 2}args[{i}] = NULL"
+        #TODO: enable again
+        result += f"{INDENT * 2}args[{i}] = {generate_ret_value_assign(method['arguments'][i])}"
         result = generate_newline(result)
     return result
 
@@ -102,7 +114,7 @@ def generate_method_body(class_, method):
 def address_ret(method):
     if "return_value" in method.keys():
         return "&ret"
-    return "1"
+    return "NULL"
 
 def generate_common_methods(class_):
     result = f"{INDENT}def new(self):"
@@ -134,12 +146,15 @@ if __name__ == "__main__":
     with open('py4godot/godot-headers/extension_api.json', 'r') as myfile:
         data = myfile.read()
         obj = json.loads(data)
-        classes = set([class_['name'] for class_ in obj['classes']])
+        print(obj["native_structures"])
+        classes = set([class_['name'] if class_["name"] not in IGNORED_CLASSES else None for class_ in obj['classes'] + obj["builtin_classes"]])
         for class_ in obj["classes"] + obj["builtin_classes"]:
+            if(class_["name"] in IGNORED_CLASSES):
+                continue
             if not class_["name"] == "String":
                 continue
             res += generate_method_binds(class_)
-            res += f"class {class_['name']}(Wrapper4):"
+            res += f"cdef class {class_['name']}(Wrapper4):"
             res = generate_newline(res)
             res += generate_common_methods(class_)
             res = generate_newline(res)

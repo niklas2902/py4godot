@@ -275,3 +275,7 @@ ctypedef struct GDNativeExtensionScriptInstanceInfo:
     GDNativeExtensionScriptInstanceGetLanguage get_language_func;
 
     GDNativeExtensionScriptInstanceFree free_func;
+
+
+#TODO: improve this
+cdef GDNativeInterface gdnative_interface
