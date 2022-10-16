@@ -18,6 +18,7 @@ def generate_import():
         """from py4godot.utils.Wrapper4 cimport *
 from py4godot.godot_bindings.binding4_godot4 cimport *
 from py4godot.core.variant4.Variant4 cimport *
+from py4godot.enums.enums4 cimport *
 from libcpp cimport bool
 """
     return result
@@ -30,10 +31,15 @@ def generate_newline(str_):
 def generate_return_value(method_):
     result = ""
     if "return_value" in method_.keys():
-        ret_val = ReturnType("ret", method_['return_value']['type'])
-        result += f"{INDENT * 2}cdef {unenumize_type(ret_val.type)} {ret_val.name}"
+        ret_val = ReturnType("_ret", method_['return_value']['type'])
+        if ret_val.type in classes:
+            result += f"{INDENT * 2}cdef {ret_val.type} {ret_val.name} = {ret_val.type}()"
+        elif ret_val.type == "Variant":
+            result += f"{INDENT * 2}cdef {ret_val.type} {ret_val.name} = {ret_val.type}()"
+        else:
+            result += f"{INDENT * 2}cdef {unbitfield_type(unenumize_type(ret_val.type))} {ret_val.name}"
     else:
-        result += f"{INDENT * 2}cdef GDNativeTypePtr ret = NULL"
+        result += f"{INDENT * 2}cdef GDNativeTypePtr _ret = NULL"
     return result
 
 
@@ -47,7 +53,7 @@ def generate_return_statement():
 
 
 def generate_error():
-    return f"{INDENT * 2}cdef GDNativeCallError error"
+    return f"{INDENT * 2}cdef GDNativeCallError _error"
 
 
 def generate_method_bind_name(class_name, method_name):
@@ -71,7 +77,7 @@ def generate_method_binds(current_class):
 def generate_method(class_, mMethod):
     res = ""
     args = generate_args(mMethod)
-    def_function = f"{INDENT}def {mMethod['name']}({args}):"
+    def_function = f"{INDENT}def {pythonize_name(mMethod['name'])}({args}):"
     res += def_function
     res = generate_newline(res)
     res += generate_method_body(class_, mMethod)
@@ -80,7 +86,6 @@ def generate_method(class_, mMethod):
 
 
 def generate_ret_value_assign(argument):
-    print(argument)
     if argument["type"] in classes:
         return f"{pythonize_name(argument['name'])}.get_godot_owner()"
     elif argument["type"] == "Variant":
@@ -90,11 +95,11 @@ def generate_ret_value_assign(argument):
 
 def generate_args_array(method):
     if 'arguments' not in method.keys():
-        return f"{INDENT * 2}cdef GDNativeVariantPtr args[0]"
-    result = f"{INDENT * 2}cdef void* args[{len(method['arguments'])}]"
+        return f"{INDENT * 2}cdef GDNativeVariantPtr _args[0]"
+    result = f"{INDENT * 2}cdef void* _args[{len(method['arguments'])}]"
     result = generate_newline(result)
     for i in range(0, len(method['arguments'])):
-        result += f"{INDENT * 2}args[{i}] = {generate_ret_value_assign(method['arguments'][i])}"
+        result += f"{INDENT * 2}_args[{i}] = {generate_ret_value_assign(method['arguments'][i])}"
         result = generate_newline(result)
     return result
 
@@ -113,7 +118,7 @@ def generate_method_body(class_, method):
     result += generate_error()
     result = generate_newline(result)
     result += f"{INDENT * 2}gdnative_interface.object_method_bind_call({generate_method_bind_name(class_['name'], method['name'])}," \
-              f" self.godot_owner, args, {number_arguments}, {address_ret(method)}, &error)"
+              f" self.godot_owner, _args, {number_arguments}, {address_ret(method)}, &_error)"
 
     if ("return_value" in method.keys() and is_primitive(method['return_value']['type'])):
         result += generate_return_statement()
@@ -122,7 +127,12 @@ def generate_method_body(class_, method):
 
 def address_ret(method):
     if "return_value" in method.keys():
-        return "&ret"
+
+        if method["return_value"]["type"] in classes:
+            return "_ret.get_godot_owner()"
+        if method["return_value"]["type"] == "Variant":
+            return "_ret.get_native_ptr()"
+        return "&_ret"
     return "NULL"
 
 
@@ -148,10 +158,14 @@ def generate_enums(class_):
 
 
 def pythonize_name(name):
-    if name in ("from", "len", "in", "for", "with"):
+    if name in ("from", "len", "in", "for", "with", "class", "pass", "raise", "global"):
         return name + "_"
     return name
 
+def unbitfield_type(arg_type):
+    if arg_type.startswith("bitfield::"):
+        return "int"
+    return arg_type
 
 def generate_args(method_with_args):
     result = "self, "
@@ -160,7 +174,7 @@ def generate_args(method_with_args):
 
     for arg in method_with_args["arguments"]:
         if not arg["type"].startswith("enum::"):
-            result += f"{arg['type']} {pythonize_name(arg['name'])}, "
+            result += f"{unbitfield_type(arg['type'])} {pythonize_name(arg['name'])}, "
         else:
             #enums are marked with enum:: . To be able to use this, we have to strip this
             arg_type = arg["type"].replace("enum::", "")
@@ -188,8 +202,6 @@ if __name__ == "__main__":
                        obj['classes'] + obj["builtin_classes"]])
         for class_ in obj["classes"] + obj["builtin_classes"]:
             if (class_["name"] in IGNORED_CLASSES):
-                continue
-            if not class_["name"] in ("String", "Vector3", "Vector4", "Quat", "Transform", "Transform2D", "AESContext"):
                 continue
             res += generate_method_binds(class_)
             res += generate_enums(class_)
