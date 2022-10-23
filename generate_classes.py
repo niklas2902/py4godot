@@ -155,6 +155,37 @@ def generate_enums(class_):
     res = generate_newline(res)
     return res
 
+def generate_properties(class_):
+    result = ""
+    if("properties" in class_.keys()):
+        print("properties:")
+        print(class_["properties"])
+        for property in class_["properties"]:
+            result += generate_property(property)
+    return result
+
+def simplify_type(type):
+    list_types = type.split(",")
+    return list_types[-1]
+def generate_property(property):
+    result = ""
+    result += f"{INDENT}@property"
+    result = generate_newline(result)
+    result += f"{INDENT}def {pythonize_name(property['name'])}(self):"
+    result = generate_newline(result)
+    result += f"{INDENT * 2}return self. {pythonize_name(property['getter'])}()"
+    result = generate_newline(result)
+
+    if property["setter"] != "":
+        result += f"{INDENT}@{pythonize_name(property['name'])}.setter"
+        result = generate_newline(result)
+        result += f"{INDENT}def {pythonize_name(property['name'])}(self, {simplify_type(property['type'])} value):"
+        result = generate_newline(result)
+        result += f"{INDENT * 2}self.{pythonize_name(property['setter'])}(value)"
+        result = generate_newline(result)
+        result = generate_newline(result)
+
+    return result
 
 
 def pythonize_name(name):
@@ -212,6 +243,7 @@ if __name__ == "__main__":
             res = generate_newline(res)
             if "methods" not in class_.keys():
                 continue
+            res += generate_properties(class_)
             for method in class_["methods"]:
                 if ("is_virtual" in method.keys() and method["is_virtual"]):
                     continue
