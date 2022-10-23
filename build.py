@@ -8,8 +8,8 @@ import generate_bindings,generate_bindings_pyi
 from meson_scripts import copy_tools, download_python, generate_init_files, \
     locations, platform_check, generate_godot, \
     download_godot
-generate_bindings_pyi.build()
-generate_bindings.build()
+#generate_bindings_pyi.build()
+#generate_bindings.build()
 
 def cythonize_files():
     module = cythonize('py4godot_core_holder/*.pyx', language_level=3)
@@ -79,7 +79,7 @@ if args.compiler is None:
     args.compiler = get_compiler()
     print(f"Got compiler:{args.compiler}")
 
-cythonize_files()
+#cythonize_files()
 
 # loading the needed python files for the target platform
 download_python.download_file(args.target_platform, allow_copy=True)
