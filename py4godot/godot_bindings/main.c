@@ -95,6 +95,7 @@ GDN_EXPORT GDNativeBool py4godot_init(const GDNativeInterface *p_interface, cons
     " |_|    |___/        |___/                         \n"
     );
     printf("py4godot - version 0.1\n");
+    p_interface->print_warning("test", "test", "test",1);
 
     Py_SetProgramName(L"godot");
     Py_SetPythonHome(PYTHONHOME);
