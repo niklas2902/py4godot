@@ -18,6 +18,10 @@ message(meson.get_compiler('c').get_id())
 if meson.get_compiler('c').get_id() == 'gcc'
     add_global_arguments('-DMS_WIN64', language : 'c')
 endif
+if meson.get_compiler('c').get_id() == 'msvc'
+    add_global_arguments('/bigobj', language : 'c')
+    add_global_arguments('-d2SSAOptimizer-', language : 'c')
+endif
 
 message(meson.current_source_dir())
 

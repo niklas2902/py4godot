@@ -12,10 +12,14 @@ def generate_newline(str_):
     return str_ + "\n"
 
 
+def get_base_class(class_):
+    if "inherits" in class_.keys():
+        return class_["inherits"]
+    return "Wrapper4"
 def generate_pxd_class(pxd_class):
     result = ""
 
-    result += f"cdef class {pxd_class['name']}(Wrapper4):"
+    result += f"cdef class {pxd_class['name']}({get_base_class(pxd_class)}):"
     result = generate_newline(result)
     result += f"{INDENT}pass"
     result = generate_newline(result)

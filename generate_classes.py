@@ -10,8 +10,11 @@ class ReturnType:
         self.is_primitive = False
 
 
-IGNORED_CLASSES = ("Nil", "bool", "float", "int")
+IGNORED_CLASSES = {"Nil", "bool", "float", "int"}
 
+ACCEPTED_CLASSES = {"Object", "String"}
+
+native_structs = {}
 
 def generate_import():
     result = \
@@ -19,7 +22,6 @@ def generate_import():
 from py4godot.godot_bindings.binding4_godot4 cimport *
 from py4godot.core.variant4.Variant4 cimport *
 from py4godot.enums.enums4 cimport *
-from libcpp cimport bool
 """
     return result
 
@@ -42,6 +44,25 @@ def generate_return_value(method_):
         result += f"{INDENT * 2}cdef GDNativeTypePtr _ret = NULL"
     return result
 
+def get_base_class(class_):
+    if "inherits" in class_.keys():
+        return class_["inherits"]
+    return "Wrapper4"
+
+def strip_symbols_from_type(type):
+    return type.replace("*","").replace("const","").strip()
+def native_structs_in_method(mMethod):
+    #TODO: check whether this method makes sense for later
+    if("arguments" in mMethod):
+        for arg in mMethod["arguments"]:
+            if("*" in arg["type"]):
+                print("type:",strip_symbols_from_type(arg["type"]))
+            if strip_symbols_from_type(arg["type"]) in native_structs:
+                return True
+    if "return_value" in mMethod.keys():
+        if strip_symbols_from_type(mMethod["return_value"]["type"]) in native_structs:
+            return True
+    return False
 
 def is_primitive(type_):
     return type_ in obj["classes"]
@@ -74,13 +95,35 @@ def generate_method_binds(current_class):
     return res
 
 
+def generate_virtual_return_type(return_type):
+    if return_type == "bool":
+        return "False"
+    elif return_type == "int":
+        return "0"
+    elif return_type == "String":
+        return "String()"
+
+    return return_type+"()"
+def generate_method_body_virtual(class_, mMethod):
+    res = ""
+    if "return_type" in mMethod.keys():
+        res += f"{INDENT*2}return {generate_virtual_return_type(mMethod['return_type'])}"
+    else:
+        res += f"{INDENT*2}pass"
+    res = generate_newline(res)
+    return res
+
+
 def generate_method(class_, mMethod):
     res = ""
     args = generate_args(mMethod)
     def_function = f"{INDENT}def {pythonize_name(mMethod['name'])}({args}):"
     res += def_function
     res = generate_newline(res)
-    res += generate_method_body(class_, mMethod)
+    if("is_virtual" in mMethod.keys() and mMethod["is_virtual"]):
+        res += generate_method_body_standard(class_, mMethod)
+    else:
+        res += generate_method_body_virtual(class_, mMethod)
     res = generate_newline(res)
     return res
 
@@ -95,7 +138,7 @@ def generate_ret_value_assign(argument):
 
 def generate_args_array(method):
     if 'arguments' not in method.keys():
-        return f"{INDENT * 2}cdef GDNativeVariantPtr _args[0]"
+        return f"{INDENT * 2}cdef GDNativeVariantPtr _args[1]"
     result = f"{INDENT * 2}cdef void* _args[{len(method['arguments'])}]"
     result = generate_newline(result)
     for i in range(0, len(method['arguments'])):
@@ -104,7 +147,7 @@ def generate_args_array(method):
     return result
 
 
-def generate_method_body(class_, method):
+def generate_method_body_standard(class_, method):
     number_arguments = 0
     result = ""
     if 'arguments' in method.keys():
@@ -231,13 +274,19 @@ if __name__ == "__main__":
         obj = json.loads(data)
         classes = set([class_['name'] if class_["name"] not in IGNORED_CLASSES else None for class_ in
                        obj['classes'] + obj["builtin_classes"]])
+        native_structs = set([native_struct["name"] for native_struct in obj["native_structures"]])
         for class_ in obj["classes"] + obj["builtin_classes"]:
             if (class_["name"] in IGNORED_CLASSES):
                 continue
+            """
+            #TODO: Remove this
+            if not class_["name"] in ACCEPTED_CLASSES:
+                continue
+            """
             res += generate_method_binds(class_)
             res += generate_enums(class_)
             res = generate_newline(res)
-            res += f"cdef class {class_['name']}(Wrapper4):"
+            res += f"cdef class {class_['name']}({get_base_class(class_)}):"
             res = generate_newline(res)
             res += generate_common_methods(class_)
             res = generate_newline(res)
@@ -245,7 +294,10 @@ if __name__ == "__main__":
                 continue
             res += generate_properties(class_)
             for method in class_["methods"]:
-                if ("is_virtual" in method.keys() and method["is_virtual"]):
+                if("is_virtual" in method.keys() and method["is_virtual"]):
+                    continue
+                if native_structs_in_method(method):
+                    #TODO: Check if this makes sense
                     continue
                 res += generate_method(class_, method)
                 res = generate_newline(res)

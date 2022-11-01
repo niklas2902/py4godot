@@ -5,7 +5,7 @@ from libc.stdint cimport uint8_t
 from libc.stdint cimport uint64_t
 from libc.stdint cimport int64_t
 
-
+ctypedef bint bool
 ctypedef void *GDNativeVariantPtr;
 ctypedef void* GodotObject;
 ctypedef void *GDNativeStringNamePtr;
