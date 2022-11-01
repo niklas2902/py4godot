@@ -198,6 +198,10 @@ ctypedef struct GDNativeInterface:
     void (*classdb_register_extension_class_signal)(const GDNativeExtensionClassLibraryPtr p_library, const char *p_class_name, const char *p_signal_name, const GDNativePropertyInfo *p_argument_info, GDNativeInt p_argument_count);
     void (*classdb_unregister_extension_class)(const GDNativeExtensionClassLibraryPtr p_library, const char *p_class_name); # Unregistering a parent class before a class that inherits it will result in failure. Inheritors must be unregistered first.
 
+    #utils
+    void (*print_error)(const char *p_description, const char *p_function, const char *p_file, int32_t p_line);
+    void (*print_warning)(const char *p_description, const char *p_function, const char *p_file, int32_t p_line);
+    void (*print_script_error)(const char *p_description, const char *p_function, const char *p_file, int32_t p_line);
 
 # SCRIPT INSTANCE EXTENSION
 
@@ -278,4 +282,4 @@ ctypedef struct GDNativeExtensionScriptInstanceInfo:
 
 
 #TODO: improve this
-cdef GDNativeInterface gdnative_interface
+cdef GDNativeInterface* gdnative_interface

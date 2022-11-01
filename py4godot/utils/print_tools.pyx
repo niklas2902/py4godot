@@ -1,9 +1,8 @@
 import builtins
-from py4godot.godot_bindings.binding_external cimport *
-from py4godot_core_holder.core_holder cimport get_core
-cimport py4godot.core.string.String as GDString
+from py4godot.godot_bindings.binding4_godot4 cimport *
+from py4godot_core_holder.core_holder cimport get_interface
 
-api_core = get_core()
+gdnative_interface = get_interface()
 
 def print(*objects, sep=' ', end=''):
     string = ""
@@ -11,4 +10,4 @@ def print(*objects, sep=' ', end=''):
         string += str(object) + sep
     string.rstrip(sep)
     string += end
-    api_core.godot_print(&GDString.String(string)._native)
+    gdnative_interface.print_warning(string, "test", "test",1);

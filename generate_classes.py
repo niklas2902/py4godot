@@ -22,9 +22,14 @@ def generate_import():
 from py4godot.godot_bindings.binding4_godot4 cimport *
 from py4godot.core.variant4.Variant4 cimport *
 from py4godot.enums.enums4 cimport *
+from py4godot_core_holder.core_holder cimport *
 """
     return result
 
+def generate_header_statements():
+    res = "gdnative_interface = get_interface()"
+    res = generate_newline(res)
+    return res
 
 def generate_newline(str_):
     return str_ + "\n"
@@ -269,6 +274,7 @@ classes = set()
 if __name__ == "__main__":
     res = generate_import()
     res = generate_newline(res)
+    res += generate_header_statements()
     with open('py4godot/godot-headers/extension_api.json', 'r') as myfile:
         data = myfile.read()
         obj = json.loads(data)
