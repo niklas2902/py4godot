@@ -1,4 +1,5 @@
 import json
+import os.path
 
 INDENT = "  "
 
@@ -15,6 +16,7 @@ IGNORED_CLASSES = {"Nil", "bool", "float", "int"}
 ACCEPTED_CLASSES = {"Object", "String"}
 
 native_structs = {}
+normal_classes = set()
 
 def generate_import():
     result = \
@@ -25,6 +27,15 @@ from py4godot.enums.enums4 cimport *
 from py4godot_core_holder.core_holder cimport *
 """
     return result
+
+def generate_class_imports(classes):
+    result = "from py4godot.classes.generated4_core import *"
+    result = generate_newline(result)
+    for class_ in classes:
+        result += f"from py4godot.classes.{class_}.{class_} import *"
+        result = generate_newline(result)
+    return result
+
 
 def generate_header_statements():
     res = "gdnative_interface = get_interface()"
@@ -268,46 +279,71 @@ def unenumize_type(type_):
         return type_list[0]+ "__" + type_list[1]
     return type_list[0]
 
+def get_classes_to_import(classes):
+    classes_to_import = set()
+    for class_ in classes:
+        if( "inherits" in class_.keys()):
+            classes_to_import.add(class_["inherits"])
+        if "methods" not in class_.keys():
+            continue
+        for method in class_["methods"]:
+            if("arguments" not in method.keys()):
+                continue
+            for argument in method["arguments"]:
+                if argument["type"] in normal_classes:
+                    classes_to_import.add(argument["type"])
+            if("return_value" in method.keys() and method["return_value"]["type"] in normal_classes):
+                classes_to_import.add(method["return_value"]["type"])
+    return classes_to_import
+
+def generate_classes(classes, filename, is_core=False):
+    res = generate_import()
+    res = generate_newline(res)
+    if not is_core:
+        res += generate_class_imports(get_classes_to_import(classes))
+        res = generate_newline(res)
+
+    res += generate_header_statements()
+    for class_ in classes:
+        if (class_["name"] in IGNORED_CLASSES):
+            continue
+        res += generate_method_binds(class_)
+        res += generate_enums(class_)
+        res = generate_newline(res)
+        res += f"cdef class {class_['name']}({get_base_class(class_)}):"
+        res = generate_newline(res)
+        res += generate_common_methods(class_)
+        res = generate_newline(res)
+        if "methods" not in class_.keys():
+            continue
+        res += generate_properties(class_)
+        for method in class_["methods"]:
+            if ("is_virtual" in method.keys() and method["is_virtual"]):
+                continue
+            if native_structs_in_method(method):
+                # TODO: Check if this makes sense
+                continue
+            res += generate_method(class_, method)
+            res = generate_newline(res)
+
+    with open(filename, "w") as f:
+        f.write(res)
+
 
 classes = set()
 
 if __name__ == "__main__":
-    res = generate_import()
-    res = generate_newline(res)
-    res += generate_header_statements()
     with open('py4godot/godot-headers/extension_api.json', 'r') as myfile:
         data = myfile.read()
         obj = json.loads(data)
         classes = set([class_['name'] if class_["name"] not in IGNORED_CLASSES else None for class_ in
                        obj['classes'] + obj["builtin_classes"]])
+        normal_classes = set([class_['name'] for class_ in obj['classes']])
         native_structs = set([native_struct["name"] for native_struct in obj["native_structures"]])
-        for class_ in obj["classes"] + obj["builtin_classes"]:
-            if (class_["name"] in IGNORED_CLASSES):
-                continue
-            """
-            #TODO: Remove this
-            if not class_["name"] in ACCEPTED_CLASSES:
-                continue
-            """
-            res += generate_method_binds(class_)
-            res += generate_enums(class_)
-            res = generate_newline(res)
-            res += f"cdef class {class_['name']}({get_base_class(class_)}):"
-            res = generate_newline(res)
-            res += generate_common_methods(class_)
-            res = generate_newline(res)
-            if "methods" not in class_.keys():
-                continue
-            res += generate_properties(class_)
-            for method in class_["methods"]:
-                if("is_virtual" in method.keys() and method["is_virtual"]):
-                    continue
-                if native_structs_in_method(method):
-                    #TODO: Check if this makes sense
-                    continue
-                res += generate_method(class_, method)
-                res = generate_newline(res)
+        for class_ in obj["classes"]:
+            if(not os.path.exists(f"py4godot/classes/{class_['name']}/")):
+                os.mkdir(f"py4godot/classes/{class_['name']}/")
+            generate_classes([class_], f"py4godot/classes/{class_['name']}/{class_['name']}.pyx")
 
-        print(res)
-        with open("py4godot/classes/generated4.pyx", "w") as f:
-            f.write(res)
+        generate_classes(obj["builtin_classes"], f"py4godot/classes/generated4_core.pyx", is_core=False)
+
