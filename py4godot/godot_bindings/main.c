@@ -1,4 +1,6 @@
 #include "gdnative_interface.h"
+#include "api4_api.h"
+#include "../../py4godot_core_holder/core_holder_api.h"
 #include <python.h>
 
 #include <string.h>
@@ -98,21 +100,63 @@ GDN_EXPORT GDNativeBool py4godot_init(const GDNativeInterface *p_interface, cons
     p_interface->print_warning("test", "test", "test",1);
 
     Py_SetProgramName(L"godot");
+    p_interface->print_warning("test2", "test", "test",1);
     Py_SetPythonHome(PYTHONHOME);
+    p_interface->print_warning("test3", "test", "test",1);
     // Initialize interpreter but skip initialization registration of signal handlers
     Py_InitializeEx(0);
+    p_interface->print_warning("test4", "test", "test",1);
     // PyEval_InitThreads acquires the GIL, so we must release it later.
     // Since python3.7 PyEval_InitThreads is automatically called by Py_InitializeEx, but it's better to leave it here
     // to be explicit. Calling it again does nothing.
+    p_interface->print_warning("test6", "test", "test",1);
+
+    import_py4godot_core_holder__core_holder();
+    if (PyErr_Occurred())
+    {
+        PyObject *ptype, *pvalue, *ptraceback;
+        p_interface->print_warning("Error import core_holder", "test", "test",1);
+        PyErr_Fetch(&ptype, &pvalue, &ptraceback);
+
+        PyObject* str_exc_type = PyObject_Repr(pvalue); //Now a unicode
+        PyObject* pyStr = PyUnicode_AsEncodedString(str_exc_type, "utf-8","Error ~");
+        const char *strExcType = PyBytes_AS_STRING(pyStr);
+        p_interface->print_warning(strExcType,  "test", "test",1);
+        PyErr_Print();
+        return 0;
+    }
+    p_interface->print_warning("before setting interface", "test", "test",1);
+    set_interface(p_interface);
+    p_interface->print_warning("test7", "test", "test",1);
+    import_py4godot__pluginscript_api__api4();
+    p_interface->print_warning("test9", "test", "test",1);
+    if (PyErr_Occurred())
+    {
+        PyObject *ptype, *pvalue, *ptraceback;
+        p_interface->print_warning("Error import pluginscript", "test", "test",1);
+        PyErr_Fetch(&ptype, &pvalue, &ptraceback);
+
+        PyObject* str_exc_type = PyObject_Repr(pvalue); //Now a unicode
+        PyObject* pyStr = PyUnicode_AsEncodedString(str_exc_type, "utf-8","Error ~");
+        const char *strExcType = PyBytes_AS_STRING(pyStr);
+        p_interface->print_warning(strExcType,  "test", "test",1);
+        PyErr_Print();
+        return 0;
+    }
+    p_interface->print_warning("test8", "test", "test",1);
+    init_py_language();
+    p_interface->print_warning("test9", "test", "test",1);
+
     PyEval_InitThreads();
     if (PyErr_Occurred())
     {
         PyErr_Print();
-        return 1;
+        return 0;
     }
 
     // Release the Kraken... er I mean the GIL !
     gilstate = PyEval_SaveThread();
+    p_interface->print_warning("test10", "test", "test",1);
     return 1;
 }
 // `gdnative_terminate` which is called before the library is unloaded.

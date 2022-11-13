@@ -201,9 +201,7 @@ def address_ret(method):
 
 
 def generate_common_methods(class_):
-    result = f"{INDENT}def new(self):"
-    result = generate_newline(result)
-    result += f"{INDENT * 2}pass"
+    result = generate_constructor(class_["name"])
     return result
 
 def generate_enums(class_):
@@ -313,6 +311,20 @@ def get_classes_to_import(classes):
                     classes_to_import.add(simplify_type(prop["type"]))
 
     return classes_to_import
+
+def generate_constructor(classname):
+    res = ""
+    res += f"{INDENT}@staticmethod"
+    res = generate_newline(res)
+    res += f"{INDENT}def constructor():"
+    res = generate_newline(res)
+    res += f"{INDENT*2}cdef {classname} class_ = {classname}()"
+    res = generate_newline(res)
+    res += f"{INDENT*2}class_.set_godot_owner(gdnative_interface.classdb_construct_object(\"{classname}\"))"
+    res = generate_newline(res)
+    res += f"{INDENT*2}gdnative_interface.object_set_instance(class_.get_godot_owner(),\"{classname}\" , <void*>class_)"
+    res = generate_newline(res)
+    return res
 
 def generate_classes(classes, filename, is_core=False):
     res = generate_import()
