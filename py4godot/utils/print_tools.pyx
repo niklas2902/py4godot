@@ -2,7 +2,7 @@
 from py4godot.godot_bindings.binding4_godot4 cimport *
 from py4godot_core_holder.core_holder cimport *
 
-gdnative_interface = get_interface()
+cdef GDNativeInterface* gdnative_interface = get_interface()
 
 def print_warning(*objects, sep=' ', end=''):
     cdef char * string = ""

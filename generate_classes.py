@@ -39,7 +39,7 @@ def generate_class_imports(classes):
 
 
 def generate_header_statements():
-    res = "gdnative_interface = get_interface()"
+    res = "cdef GDNativeInterface* gdnative_interface = get_interface()"
     res = generate_newline(res)
     return res
 

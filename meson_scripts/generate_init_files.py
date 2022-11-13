@@ -2,7 +2,6 @@ import json
 import_string_core = """"""
 
 import_string_py4godot = """
-from py4godot.utils.print_tools import print
 """
 
 import_string_hints = """
