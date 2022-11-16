@@ -30,13 +30,21 @@ def run(platform):
             copy(entry, f"build/addons/{platform}/{config_data['python_ver']}-{platform}/python/install/Lib/site-packages/" + strip_platform(entry.lstrip("build_meson")).
                  replace(".dll", ".pyd"))  # dst can be a folder; use copy2() to preserve timestamp
 
+    if "windows" in platform:
+        list_dll = glob.glob("**/*.pdb", recursive=True)
+    for entry in list_dll:
+        entry = entry.lstrip("/")
+        if entry.startswith("build_meson"):
+            os.makedirs(os.path.dirname(f"build/addons/{platform}/{config_data['python_ver']}-{platform}/python/install/Lib/site-packages/" + strip_platform(entry.lstrip("build_meson"))),
+                        exist_ok=True)
+            copy(entry, f"build/addons/{platform}/{config_data['python_ver']}-{platform}/python/install/Lib/site-packages/" + strip_platform(entry.lstrip("build_meson"))) # dst can be a folder; use copy2() to preserve timestamp
 
 def copy_main(platform):
     # Todo: check whether python39.dll can be in another path copying the main.pyd inside the python version,
     #  as the pythin39.dll must currently be in the same directory as main.pyd/main.so
     if "windows" in platform:
         copy(f"build_meson/{platform}/py4godot/godot_bindings/main.dll",
-             f"build/addons/{platform}/{config_data['python_ver']}-{platform}/python/install/main.pyd")
+             f"build/addons/{platform}/{config_data['python_ver']}-{platform}/python/install/main.dll")
     elif "linux" in platform:
         copy(f"build_meson/{platform}/py4godot/godot_bindings/main.so",
              f"build/addons/{platform}/{config_data['python_ver']}-{platform}/main.so")

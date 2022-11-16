@@ -5,7 +5,6 @@ from py4godot_core_holder.core_holder cimport *
 cdef GDNativeInterface* gdnative_interface = get_interface()
 
 def print_warning(*objects, sep=' ', end=''):
-    gdnative_interface.print_warning("print_warning", "test", "test",1);
     cdef str string = ""
     for object in objects:
         string += str(object) + sep
