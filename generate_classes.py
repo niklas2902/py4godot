@@ -18,6 +18,7 @@ ACCEPTED_CLASSES = {"Object", "String"}
 native_structs = {}
 forbidden_types = {"cont void*", "void*"}
 normal_classes = set()
+singletons = set()
 
 def generate_import():
     result = \
@@ -28,6 +29,34 @@ from py4godot.enums.enums4 cimport *
 from py4godot_core_holder.core_holder cimport *
 """
     return result
+
+def generate_constructor_args(constructor):
+    result = ""
+    if "arguments" not in constructor:
+        return result
+
+    for arg in constructor["arguments"]:
+        if not arg["type"].startswith("enum::"):
+            result += f"{untypearray(unbitfield_type(arg['type']))} {pythonize_name(arg['name'])}, "
+        else:
+            #enums are marked with enum:: . To be able to use this, we have to strip this
+            arg_type = arg["type"].replace("enum::", "")
+            result += f"{untypearray(unenumize_type(arg_type))} {pythonize_name(arg['name'])}, "
+    result = result[:-2]
+    return result
+
+def generate_constructors(class_):
+    res = ""
+    if "constructors" not in class_.keys():
+        return res
+    for constructor in class_["constructors"]:
+        res += f"{INDENT}@staticmethod"
+        res = generate_newline(res)
+        res += f"{INDENT}def new{constructor['index']}({generate_constructor_args(constructor)}):"
+        res = generate_newline(res)
+        res += f"{INDENT*2}pass"
+        res = generate_newline(res)
+    return res
 
 def generate_class_imports(classes):
     result = "from py4godot.classes.generated4_core cimport *"
@@ -55,6 +84,8 @@ def generate_return_value(method_):
             result += f"{INDENT * 2}cdef {ret_val.type} {ret_val.name} = {ret_val.type}()"
         elif ret_val.type == "Variant":
             result += f"{INDENT * 2}cdef {ret_val.type} {ret_val.name} = {ret_val.type}()"
+        elif "typedarray" in ret_val.type:
+            result += f"{INDENT * 2}cdef Array _ret = Array()"
         else:
             result += f"{INDENT * 2}cdef {unbitfield_type(unenumize_type(ret_val.type))} {ret_val.name}"
     else:
@@ -93,6 +124,31 @@ def generate_return_statement():
     # TODO handle primitive types
     return f"return ret"
 
+def generate_singleton_constructor(classname):
+    res = ""
+    res += f"{INDENT}@staticmethod"
+    res = generate_newline(res)
+    res += f"{INDENT}def get_instance():"
+    res = generate_newline(res)
+    res += f"{INDENT*2}cdef {classname} singleton = {classname}()"
+    res = generate_newline(res)
+    res += f"{INDENT*2}cdef char* class_name = \"{classname}\""
+    res = generate_newline(res)
+    res += f"{INDENT*2}cdef GodotObject object = gdnative_interface.global_get_singleton(class_name)"
+    res = generate_newline(res)
+    res += f"{INDENT*2}singleton.set_godot_owner(object)"
+    res = generate_newline(res)
+    res += f"{INDENT*2}return singleton"
+    res = generate_newline(res)
+    return res
+def generate_construction(class_):
+    res = ""
+    if is_singleton(class_["name"]):
+        res += generate_singleton_constructor(class_["name"])
+    return res
+
+def is_singleton(class_name):
+    return class_name in singletons
 
 def generate_error():
     return f"{INDENT * 2}cdef GDNativeCallError _error"
@@ -102,17 +158,17 @@ def generate_method_bind_name(class_name, method_name):
     return f"method_bind__{class_name}_{method_name}"
 
 
-def generate_method_binds(current_class):
+def generate_method_bind(current_class, method):
     res = ""
-    if not "methods" in current_class.keys():
-        return ""
-    for mMethod in current_class["methods"]:
-        if ("hash" not in mMethod.keys()):
-            continue
-        res += f"""cdef GDNativeMethodBindPtr {generate_method_bind_name(current_class['name'], mMethod['name'])} = """ + \
-               f"""gdnative_interface.classdb_get_method_bind("{current_class['name']}",""" + \
-               f""""{mMethod['name']}", {mMethod['hash']})"""
-        res = generate_newline(res)
+    res += f"{INDENT*2}cdef char* _class_name = \"{current_class['name']}\""
+    res = generate_newline(res)
+
+    res += f"{INDENT*2}cdef char* _method_name = \"{method['name']}\""
+    res = generate_newline(res)
+    res += f"""{INDENT*2}cdef GDNativeMethodBindPtr method_bind = """ + \
+           f"""gdnative_interface.classdb_get_method_bind(_class_name,""" + \
+           f"""_method_name, {method['hash']})"""
+    res = generate_newline(res)
     return res
 
 
@@ -154,6 +210,8 @@ def generate_ret_value_assign(argument):
         return f"{pythonize_name(argument['name'])}.get_godot_owner()"
     elif argument["type"] == "Variant":
         return f"{pythonize_name(argument['name'])}.get_native_ptr()"
+    elif "typedarray" in argument["type"]:
+        return f"{pythonize_name(argument['name'])}.get_godot_owner()"
     return f"&{pythonize_name(argument['name'])}"
 
 
@@ -179,9 +237,13 @@ def generate_method_body_standard(class_, method):
     result += generate_return_value(method)
     result = generate_newline(result)
 
+    result = generate_newline(result)
+    result += generate_method_bind(class_, method)
+    result = generate_newline(result)
+
     result += generate_error()
     result = generate_newline(result)
-    result += f"{INDENT * 2}gdnative_interface.object_method_bind_call({generate_method_bind_name(class_['name'], method['name'])}," \
+    result += f"{INDENT * 2}gdnative_interface.object_method_bind_call(method_bind," \
               f" self.godot_owner, _args, {number_arguments}, {address_ret(method)}, &_error)"
 
     if ("return_value" in method.keys() and is_primitive(method['return_value']['type'])):
@@ -196,12 +258,17 @@ def address_ret(method):
             return "_ret.get_godot_owner()"
         if method["return_value"]["type"] == "Variant":
             return "_ret.get_native_ptr()"
+        if "typedarray" in method["return_value"]["type"]:
+            return "_ret.get_godot_owner()"
         return "&_ret"
     return "NULL"
 
 
 def generate_common_methods(class_):
     result = generate_constructor(class_["name"])
+    result = generate_newline(result)
+    result += generate_constructors(class_)
+    result = generate_newline(result)
     return result
 
 def generate_enums(class_):
@@ -239,7 +306,7 @@ def generate_property(property):
     if property["setter"] != "":
         result += f"{INDENT}@{pythonize_name(property['name'])}.setter"
         result = generate_newline(result)
-        result += f"{INDENT}def {pythonize_name(property['name'])}(self, {simplify_type(property['type'])} value):"
+        result += f"{INDENT}def {pythonize_name(property['name'])}(self, {untypearray(simplify_type(property['type']))} value):"
         result = generate_newline(result)
         result += f"{INDENT * 2}self.{pythonize_name(property['setter'])}(value)"
         result = generate_newline(result)
@@ -265,11 +332,11 @@ def generate_args(method_with_args):
 
     for arg in method_with_args["arguments"]:
         if not arg["type"].startswith("enum::"):
-            result += f"{unbitfield_type(arg['type'])} {pythonize_name(arg['name'])}, "
+            result += f"{untypearray(unbitfield_type(arg['type']))} {pythonize_name(arg['name'])}, "
         else:
             #enums are marked with enum:: . To be able to use this, we have to strip this
             arg_type = arg["type"].replace("enum::", "")
-            result += f"{unenumize_type(arg_type)} {pythonize_name(arg['name'])}, "
+            result += f"{untypearray(unenumize_type(arg_type))} {pythonize_name(arg['name'])}, "
     result = result[:-2]
     return result
 
@@ -279,6 +346,12 @@ def unenumize_type(type_):
     if len(type_list) > 1:
         return type_list[0]+ "__" + type_list[1]
     return type_list[0]
+
+def untypearray(type_):
+    #TODO improve this by creating actually typed arrays
+    if "typedarray" in type_:
+        return "Array"
+    return type_
 
 def get_class_from_enum(type_):
     enum_type = type_.replace("enum::", "")
@@ -339,11 +412,12 @@ def generate_classes(classes, filename, is_core=False):
     for class_ in classes:
         if (class_["name"] in IGNORED_CLASSES):
             continue
-        res += generate_method_binds(class_)
         res = generate_newline(res)
         res += f"cdef class {class_['name']}({get_base_class(class_)}):"
         res = generate_newline(res)
         res += generate_common_methods(class_)
+        res = generate_newline(res)
+        res += generate_construction(class_)
         res = generate_newline(res)
         if "methods" not in class_.keys():
             continue
@@ -373,6 +447,7 @@ if __name__ == "__main__":
                        obj['classes'] + obj["builtin_classes"]])
         normal_classes = set([class_['name'] for class_ in obj['classes']])
         native_structs = set([native_struct["name"] for native_struct in obj["native_structures"]])
+        singletons = set([singleton["name"] for singleton in obj["singletons"]])
         for class_ in obj["classes"]:
             if(not os.path.exists(f"py4godot/classes/{class_['name']}/")):
                 os.mkdir(f"py4godot/classes/{class_['name']}/")
