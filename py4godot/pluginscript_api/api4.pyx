@@ -7,7 +7,9 @@ cdef GDNativeInterface* _interface = get_interface()
 cdef api void init_py_language() with gil:
     print_warning ("init_py_langauge")
     _interface.print_warning("-------------------test", "hallo", "hallo", 1)
-    StringName stringName = StringName.
+    cdef String string = String.new0()
+    _interface.string_new_with_utf8_chars(string.godot_owner, "Engine")
+    cdef StringName stringName2 = StringName.new2(string)
     cdef Engine engine = Engine()
     _interface.print_warning("-------------------befpre_getting_singleton", "hallo", "hallo", 1)
     cdef Engine engine2 = Engine.get_instance()

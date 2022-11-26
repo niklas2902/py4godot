@@ -28,6 +28,11 @@ cdef extern from "binding4.h":
     ctypedef void (*GDNativeExtensionClassMethodGetArgumentInfo)(void *p_method_userdata, int32_t p_argument, GDNativePropertyInfo *r_info);
     ctypedef GDNativeExtensionClassMethodArgumentMetadata (*GDNativeExtensionClassMethodGetArgumentMetadata)(void *p_method_userdata, int32_t p_argument);
 
+    ctypedef void (*GDNativePtrBuiltInMethod)(GDNativeTypePtr p_base, const GDNativeTypePtr *p_args, GDNativeTypePtr r_return, int p_argument_count);
+    ctypedef void (*GDNativePtrConstructor)(GDNativeTypePtr p_base, const GDNativeTypePtr *p_args);
+    ctypedef void (*GDNativePtrDestructor)(GDNativeTypePtr p_base);
+    ctypedef void (*GDNativePtrSetter)(GDNativeTypePtr p_base, const GDNativeTypePtr p_value);
+    ctypedef void (*GDNativePtrGetter)(const GDNativeTypePtr p_base, GDNativeTypePtr r_value);
 
     ctypedef struct GDNativePropertyInfo:
         uint32_t type;
@@ -203,6 +208,20 @@ cdef extern from "binding4.h":
         void (*print_warning)(const char *p_description, const char *p_function, const char *p_file, int32_t p_line);
         void (*print_script_error)(const char *p_description, const char *p_function, const char *p_file, int32_t p_line);
         GDNativeObjectPtr (*global_get_singleton)(const char *p_name);
+        GDNativePtrBuiltInMethod (*variant_get_ptr_builtin_method)(GDNativeVariantType p_type, const GDNativeStringNamePtr p_method, GDNativeInt p_hash);
+        GDNativePtrConstructor (*variant_get_ptr_constructor)(GDNativeVariantType p_type, int32_t p_constructor);
+        GDNativePtrDestructor (*variant_get_ptr_destructor)(GDNativeVariantType p_type);
+
+        void (*string_new_with_latin1_chars)(GDNativeStringPtr r_dest, const char *p_contents);
+        void (*string_new_with_utf8_chars)(GDNativeStringPtr r_dest, const char *p_contents);
+        #void (*string_new_with_utf16_chars)(GDNativeStringPtr r_dest, const char16_t *p_contents);
+        #void (*string_new_with_utf32_chars)(GDNativeStringPtr r_dest, const char32_t *p_contents);
+        #void (*string_new_with_wide_chars)(GDNativeStringPtr r_dest, const wchar_t *p_contents);
+        void (*string_new_with_latin1_chars_and_len)(GDNativeStringPtr r_dest, const char *p_contents, const GDNativeInt p_size);
+        void (*string_new_with_utf8_chars_and_len)(GDNativeStringPtr r_dest, const char *p_contents, const GDNativeInt p_size);
+        #void (*string_new_with_utf16_chars_and_len)(GDNativeStringPtr r_dest, const char16_t *p_contents, const GDNativeInt p_size);
+        #void (*string_new_with_utf32_chars_and_len)(GDNativeStringPtr r_dest, const char32_t *p_contents, const GDNativeInt p_size);
+        #void (*string_new_with_wide_chars_and_len)(GDNativeStringPtr r_dest, const wchar_t *p_contents, const GDNativeInt p_size);
 
     # SCRIPT INSTANCE EXTENSION
 

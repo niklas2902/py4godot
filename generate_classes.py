@@ -19,10 +19,12 @@ native_structs = {}
 forbidden_types = {"cont void*", "void*"}
 normal_classes = set()
 singletons = set()
+builtin_classes = set()
 
 def generate_import():
     result = \
         """from py4godot.utils.Wrapper4 cimport *
+from py4godot.utils.VariantTypeWrapper4 cimport *
 from py4godot.godot_bindings.binding4_godot4 cimport *
 from py4godot.core.variant4.Variant4 cimport *
 from py4godot.enums.enums4 cimport *
@@ -45,6 +47,43 @@ def generate_constructor_args(constructor):
     result = result[:-2]
     return result
 
+def generate_constructor_args_array(constructor):
+    num_of_constructor_args = len(constructor["arguments"]) if "arguments" in constructor.keys() else 1
+    res = f"{INDENT*2}cdef GDNativeTypePtr _args[{num_of_constructor_args}]"
+    res = generate_newline(res)
+    if "arguments" not in constructor.keys():
+        return res
+    index = 0
+    for arg in constructor["arguments"]:
+        res += f"{INDENT * 2}_args[{index}] = {generate_ret_value_assign(arg)}"
+        res = generate_newline(res)
+        index += 1
+    res = generate_newline(res)
+    return res
+
+def convert_camel_case_to_underscore(string):
+    res = ""
+    was_upper = True
+    was_number = False
+    for char in string:
+        if char.isupper():
+            if was_upper or was_number:
+                res += char
+
+            else:
+                res += "_"+char
+        else:
+            res += char
+        was_upper = char.isupper()
+        was_number = char in {"1", "2", "3", "4", "5", "6", "7", "8", "9", "0"}
+    if (("vector3" in res.lower() or "vector2" in res.lower()) or "float64" in res.lower() or "float32" in res.lower() or "int64" in res.lower() or "int32" in res.lower()):
+        res = res.replace("Array", "_Array")
+    return res
+def generate_variant_type(class_):
+    if class_["name"] in builtin_classes:
+        return f"GDNativeVariantType.GDNATIVE_VARIANT_TYPE_{convert_camel_case_to_underscore(class_['name']).upper()}"
+    else:
+        return f"GDNativeVariantType.GDNATIVE_VARIANT_TYPE_NIL"
 def generate_constructors(class_):
     res = ""
     if "constructors" not in class_.keys():
@@ -54,7 +93,19 @@ def generate_constructors(class_):
         res = generate_newline(res)
         res += f"{INDENT}def new{constructor['index']}({generate_constructor_args(constructor)}):"
         res = generate_newline(res)
-        res += f"{INDENT*2}pass"
+        res += f"{INDENT*2}cdef {class_['name']} _class = {class_['name']}()"
+        res = generate_newline(res)
+        res += f"{INDENT*2}_class.set_variant_type({generate_variant_type(class_)})"
+        res = generate_newline(res)
+        res += f"{INDENT*2}cdef GDNativePtrConstructor constructor = _interface.variant_get_ptr_constructor(_class.variant_type, {constructor['index']})"
+        res = generate_newline(res)
+        #TODO:improve - fill with args
+        res += generate_constructor_args_array(constructor)
+        res = generate_newline(res)
+        res += f"{INDENT*2}constructor(_class.godot_owner,_args)"
+        res = generate_newline(res)
+        res += f"{INDENT*2}return _class"
+        res = generate_newline(res)
         res = generate_newline(res)
     return res
 
@@ -95,6 +146,8 @@ def generate_return_value(method_):
 def get_base_class(class_):
     if "inherits" in class_.keys():
         return class_["inherits"]
+    if class_["name"] in builtin_classes:
+        return "VariantTypeWrapper4"
     return "Wrapper4"
 
 def strip_symbols_from_type(type):
@@ -130,9 +183,16 @@ def generate_singleton_constructor(classname):
     res = generate_newline(res)
     res += f"{INDENT}def get_instance():"
     res = generate_newline(res)
-    res += f"{INDENT*2}cdef {classname} singleton = {classname}()"
+
+    res += f"{INDENT*2}cdef String class_name_string = String.new0()"
     res = generate_newline(res)
-    res += f"{INDENT*2}cdef char* class_name = \"{classname}\""
+    res += f"{INDENT*2}_interface.string_new_with_utf8_chars(class_name_string.godot_owner, \"{classname}\")"
+    res = generate_newline(res)
+    res += f"{INDENT * 2}cdef StringName class_name = StringName.new2(class_name_string)"
+    res = generate_newline(res)
+    res = generate_newline(res)
+
+    res += f"{INDENT*2}cdef {classname} singleton = {classname}()"
     res = generate_newline(res)
     res += f"{INDENT*2}cdef GodotObject object = gdnative_interface.global_get_singleton(class_name)"
     res = generate_newline(res)
@@ -445,6 +505,7 @@ if __name__ == "__main__":
         obj = json.loads(data)
         classes = set([class_['name'] if class_["name"] not in IGNORED_CLASSES else None for class_ in
                        obj['classes'] + obj["builtin_classes"]])
+        builtin_classes = set(class_["name"] for class_ in obj["builtin_classes"])
         normal_classes = set([class_['name'] for class_ in obj['classes']])
         native_structs = set([native_struct["name"] for native_struct in obj["native_structures"]])
         singletons = set([singleton["name"] for singleton in obj["singletons"]])
