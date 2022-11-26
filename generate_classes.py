@@ -194,7 +194,7 @@ def generate_singleton_constructor(classname):
 
     res += f"{INDENT*2}cdef {classname} singleton = {classname}()"
     res = generate_newline(res)
-    res += f"{INDENT*2}cdef GodotObject object = gdnative_interface.global_get_singleton(class_name)"
+    res += f"{INDENT*2}cdef GodotObject object = gdnative_interface.global_get_singleton(class_name.godot_owner)"
     res = generate_newline(res)
     res += f"{INDENT*2}singleton.set_godot_owner(object)"
     res = generate_newline(res)
@@ -220,10 +220,22 @@ def generate_method_bind_name(class_name, method_name):
 
 def generate_method_bind(current_class, method):
     res = ""
-    res += f"{INDENT*2}cdef char* _class_name = \"{current_class['name']}\""
+    res += f"{INDENT * 2}cdef String _class_name_string = String.new0()"
+    res = generate_newline(res)
+    res += f"{INDENT * 2}_interface.string_new_with_utf8_chars(_class_name_string.godot_owner, \"{current_class['name']}\")"
+    res = generate_newline(res)
+    res += f"{INDENT * 2}cdef StringName _class_name = StringName.new2(_class_name_string)"
+    res = generate_newline(res)
     res = generate_newline(res)
 
-    res += f"{INDENT*2}cdef char* _method_name = \"{method['name']}\""
+    res += f"{INDENT * 2}cdef String _method_name_string = String.new0()"
+    res = generate_newline(res)
+    res += f"{INDENT * 2}_interface.string_new_with_utf8_chars(_method_name_string.godot_owner, \"{method['name']}\")"
+    res = generate_newline(res)
+    res += f"{INDENT * 2}cdef StringName _method_name = StringName.new2(_method_name_string)"
+    res = generate_newline(res)
+    res = generate_newline(res)
+
     res = generate_newline(res)
     res += f"""{INDENT*2}cdef GDNativeMethodBindPtr method_bind = """ + \
            f"""gdnative_interface.classdb_get_method_bind(_class_name,""" + \

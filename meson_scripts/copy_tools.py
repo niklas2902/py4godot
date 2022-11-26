@@ -8,7 +8,6 @@ with open('config.json', 'r') as f:
     config_data = json.load(f)
 
 def strip_platform(text):
-    print("strip_text:",text)
     text = text[1:]
     return text.lstrip("linux64").lstrip("windows64").lstrip("windows").lstrip("linux")
 

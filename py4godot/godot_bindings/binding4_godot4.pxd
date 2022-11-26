@@ -207,7 +207,7 @@ cdef extern from "binding4.h":
         void (*print_error)(const char *p_description, const char *p_function, const char *p_file, int32_t p_line);
         void (*print_warning)(const char *p_description, const char *p_function, const char *p_file, int32_t p_line);
         void (*print_script_error)(const char *p_description, const char *p_function, const char *p_file, int32_t p_line);
-        GDNativeObjectPtr (*global_get_singleton)(const char *p_name);
+        GDNativeObjectPtr (*global_get_singleton)(const GDNativeStringNamePtr p_name);
         GDNativePtrBuiltInMethod (*variant_get_ptr_builtin_method)(GDNativeVariantType p_type, const GDNativeStringNamePtr p_method, GDNativeInt p_hash);
         GDNativePtrConstructor (*variant_get_ptr_constructor)(GDNativeVariantType p_type, int32_t p_constructor);
         GDNativePtrDestructor (*variant_get_ptr_destructor)(GDNativeVariantType p_type);

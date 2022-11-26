@@ -14,3 +14,5 @@ cdef api void init_py_language() with gil:
     _interface.print_warning("-------------------befpre_getting_singleton", "hallo", "hallo", 1)
     cdef Engine engine2 = Engine.get_instance()
     print_warning("-------------------after constructing engine")
+
+    print_warning("editor_hint:"+str(engine.is_editor_hint()))
