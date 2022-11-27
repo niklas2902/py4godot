@@ -8,6 +8,8 @@ from py4godot.classes.ScriptLanguage.ScriptLanguage cimport *
 from py4godot.classes.Script.Script cimport *
 from py4godot.classes.Object.Object cimport *
 
+cdef register_class()
+cdef register_methods()
 
 cdef class PyLanguage(ScriptLanguageExtension):
   cdef new(self)

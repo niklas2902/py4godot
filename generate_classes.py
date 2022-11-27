@@ -25,10 +25,12 @@ def generate_import():
     result = \
         """from py4godot.utils.Wrapper4 cimport *
 from py4godot.utils.VariantTypeWrapper4 cimport *
+from py4godot.utils.utils cimport *
 from py4godot.godot_bindings.binding4_godot4 cimport *
 from py4godot.core.variant4.Variant4 cimport *
 from py4godot.enums.enums4 cimport *
 from py4godot_core_holder.core_holder cimport *
+from py4godot.godot_bindings.binding4_godot4 cimport *
 """
     return result
 
@@ -238,8 +240,8 @@ def generate_method_bind(current_class, method):
 
     res = generate_newline(res)
     res += f"""{INDENT*2}cdef GDNativeMethodBindPtr method_bind = """ + \
-           f"""gdnative_interface.classdb_get_method_bind(_class_name,""" + \
-           f"""_method_name, {method['hash']})"""
+           f"""gdnative_interface.classdb_get_method_bind(_class_name.godot_owner,""" + \
+           f"""_method_name.godot_owner, {method['hash']})"""
     res = generate_newline(res)
     return res
 
@@ -465,9 +467,14 @@ def generate_constructor(classname):
     res = generate_newline(res)
     res += f"{INDENT*2}cdef {classname} class_ = {classname}()"
     res = generate_newline(res)
-    res += f"{INDENT*2}class_.set_godot_owner(gdnative_interface.classdb_construct_object(\"{classname}\"))"
+    res += f"{INDENT*2}cdef StringName class_name =  c_string_to_string_name(\"{classname}\")"
     res = generate_newline(res)
-    res += f"{INDENT*2}gdnative_interface.object_set_instance(class_.get_godot_owner(),\"{classname}\" , <void*>class_)"
+
+    res += f"{INDENT*2}class_.set_godot_owner(gdnative_interface.classdb_construct_object(class_name.godot_owner))"
+    res = generate_newline(res)
+    res += f"{INDENT*2}gdnative_interface.object_set_instance(class_.get_godot_owner(),class_name.godot_owner , <void*>class_)"
+    res = generate_newline(res)
+    res += f"{INDENT*2}return class_"
     res = generate_newline(res)
     return res
 

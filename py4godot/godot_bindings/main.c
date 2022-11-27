@@ -169,6 +169,7 @@ GDN_EXPORT GDNativeBool py4godot_init(const GDNativeInterface *p_interface, cons
     }
     p_interface->print_warning("before setting interface", "test", "test",1);
     set_interface(p_interface);
+    set_library(p_library);
     p_interface->print_warning("test7", "test", "test",1);
     p_interface->print_warning("test8", "test", "test",1);
     r_initialization->initialize = initialize_py4godot;
