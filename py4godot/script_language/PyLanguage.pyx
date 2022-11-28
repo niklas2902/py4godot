@@ -187,8 +187,9 @@ cdef class PyLanguage(ScriptLanguageExtension):
 cdef GDNativeObjectPtr create_instance(void* userdata):
     print_warning("create_instance")
     #TODO: This makes no sense
-    cdef ScriptLanguageExtension extension = ScriptLanguageExtension.constructor()
-    return extension.godot_owner
+    cdef StringName class_name = c_string_to_string_name("ScriptLanguageExtension")
+    cdef GDNativeObjectPtr gdnative_object = gdnative_interface.classdb_construct_object(class_name.godot_owner)
+    return gdnative_object
 
 cdef void free_instance(void *p_userdata, GDExtensionClassInstancePtr p_instance):
     print_warning("free_instance")
