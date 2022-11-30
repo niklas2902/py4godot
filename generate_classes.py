@@ -292,7 +292,7 @@ def generate_ret_value_assign(argument):
 def generate_args_array(method):
     if 'arguments' not in method.keys():
         return f"{INDENT * 2}cdef GDNativeVariantPtr _args[1]"
-    result = f"{INDENT * 2}cdef void* _args[{len(method['arguments'])}]"
+    result = f"{INDENT * 2}cdef GDNativeTypePtr _args[{len(method['arguments'])}]"
     result = generate_newline(result)
     for i in range(0, len(method['arguments'])):
         result += f"{INDENT * 2}_args[{i}] = {generate_ret_value_assign(method['arguments'][i])}"
@@ -317,8 +317,8 @@ def generate_method_body_standard(class_, method):
 
     result += generate_error()
     result = generate_newline(result)
-    result += f"{INDENT * 2}gdnative_interface.object_method_bind_call(method_bind," \
-              f" self.godot_owner, _args, {number_arguments}, {address_ret(method)}, &_error)"
+    result += f"{INDENT * 2}gdnative_interface.object_method_bind_ptrcall(method_bind," \
+              f" self.godot_owner, _args, {address_ret(method)})"
 
     if ("return_value" in method.keys() and is_primitive(method['return_value']['type'])):
         result += generate_return_statement()

@@ -226,8 +226,6 @@ cdef register_class():
     _interface.string_new_with_utf8_chars(parent_class_name_string.godot_owner, "ScriptLanguageExtension")
     cdef StringName parent_class_name = StringName.new2(parent_class_name_string)
 
-
-    #void (*classdb_register_extension_class)(const GDNativeExtensionClassLibraryPtr p_library, const char *p_class_name, const char *p_parent_class_name, const GDNativeExtensionClassCreationInfo *p_extension_funcs);
     gdnative_interface.classdb_register_extension_class(get_library(), class_name.godot_owner, parent_class_name.godot_owner, &creation_info)
 cdef register_methods():
     pass
