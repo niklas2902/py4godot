@@ -35,12 +35,12 @@ cdef extern from "binding4.h":
     ctypedef void (*GDNativePtrGetter)(const GDNativeTypePtr p_base, GDNativeTypePtr r_value);
 
     ctypedef struct GDNativePropertyInfo:
-        uint32_t type;
-        const char *name;
-        const char *class_name;
-        uint32_t hint;
-        const char *hint_string;
-        uint32_t usage;
+        GDNativeVariantType type;
+        GDNativeStringNamePtr name;
+        GDNativeStringNamePtr class_name;
+        uint32_t hint; # Bitfield of `PropertyHint` (defined in `extension_api.json`).
+        GDNativeStringPtr hint_string;
+        uint32_t usage; # Bitfield of `PropertyUsageFlags` (defined in `extension_api.json`).
 
 
     ctypedef struct GDNativeMethodInfo:
@@ -54,16 +54,25 @@ cdef extern from "binding4.h":
         uint32_t default_argument_count;
 
     ctypedef struct GDNativeExtensionClassMethodInfo:
-        const char *name;
+        GDNativeStringNamePtr name;
         void *method_userdata;
         GDNativeExtensionClassMethodCall call_func;
         GDNativeExtensionClassMethodPtrCall ptrcall_func;
-        uint32_t method_flags; # GDNativeExtensionClassMethodFlags
-        uint32_t argument_count;
+        uint32_t method_flags; # Bitfield of `GDNativeExtensionClassMethodFlags`.
+
+        # If `has_return_value` is false, `return_value_info` and `return_value_metadata` are ignored.
         GDNativeBool has_return_value;
-        GDNativeExtensionClassMethodGetArgumentType get_argument_type_func;
-        GDNativeExtensionClassMethodGetArgumentInfo get_argument_info_func; # name and hint information for the argument can be omitted in release builds. Class name should always be present if it applies.
-        GDNativeExtensionClassMethodGetArgumentMetadata get_argument_metadata_func;
+        GDNativePropertyInfo *return_value_info;
+        GDNativeExtensionClassMethodArgumentMetadata return_value_metadata;
+
+        # Arguments: `arguments_info` and `arguments_metadata` are array of size `argument_count`.
+        # Name and hint information for the argument can be omitted in release builds. Class name should always be present if it applies.
+
+        uint32_t argument_count;
+        GDNativePropertyInfo *arguments_info;
+        GDNativeExtensionClassMethodArgumentMetadata *arguments_metadata;
+
+        # Default arguments: `default_arguments` is an array of size `default_argument_count`.
         uint32_t default_argument_count;
         GDNativeVariantPtr *default_arguments;
 

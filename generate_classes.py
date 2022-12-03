@@ -164,11 +164,11 @@ def native_structs_in_method(mMethod):
                 return True
             if strip_symbols_from_type(arg["type"]) in native_structs:
                 return True
-    if "return_value" in mMethod.keys():
-        if mMethod["return_value"]["type"] in forbidden_types:
-            return True
-        if strip_symbols_from_type(mMethod["return_value"]["type"]) in native_structs:
-            return True
+    #if "return_value" in mMethod.keys():
+    #    if mMethod["return_value"]["type"] in forbidden_types:
+    #        return True
+    #    if strip_symbols_from_type(mMethod["return_value"]["type"]) in native_structs:
+    #        return True
     return False
 
 def is_primitive(type_):

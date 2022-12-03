@@ -227,5 +227,74 @@ cdef register_class():
     cdef StringName parent_class_name = StringName.new2(parent_class_name_string)
 
     gdnative_interface.classdb_register_extension_class(get_library(), class_name.godot_owner, parent_class_name.godot_owner, &creation_info)
-cdef register_methods():
+
+cdef void call_func (void *method_userdata, GDExtensionClassInstancePtr p_instance, const GDNativeVariantPtr *p_args, const GDNativeInt p_argument_count, GDNativeVariantPtr r_return, GDNativeCallError *r_error):
+    cdef PyLanguage pylanguage = <PyLanguage> p_instance
     pass
+
+cdef GDNativeVariantType get_argument_type(void *p_method_userdata, int32_t p_argument):
+    return GDNativeVariantType.GDNATIVE_VARIANT_TYPE_STRING
+
+cdef void get_argument_info(void *p_method_userdata, int32_t p_argument, GDNativePropertyInfo *r_info):
+    pass
+cdef GDNativeExtensionClassMethodArgumentMetadata get_argument_metadata(void *p_method_userdata, int32_t p_argument):
+    return GDNativeExtensionClassMethodArgumentMetadata.GDNATIVE_EXTENSION_METHOD_ARGUMENT_METADATA_NONE
+
+
+cdef register_methods():
+    """
+    ctypedef struct GDNativePropertyInfo:
+        GDNativeVariantType type;
+        GDNativeStringNamePtr name;
+        GDNativeStringNamePtr class_name;
+        uint32_t hint; # Bitfield of `PropertyHint` (defined in `extension_api.json`).
+        GDNativeStringPtr hint_string;
+        uint32_t usage; # Bitfield of `PropertyUsageFlags` (defined in `extension_api.json`).
+    """
+    """
+        ctypedef struct GDNativeExtensionClassMethodInfo:
+        const char *name;
+        void *method_userdata;
+        GDNativeExtensionClassMethodCall call_func;
+        GDNativeExtensionClassMethodPtrCall ptrcall_func;
+        uint32_t method_flags; # GDNativeExtensionClassMethodFlags
+        uint32_t argument_count;
+        GDNativeBool has_return_value;
+        GDNativeExtensionClassMethodGetArgumentType get_argument_type_func;
+        GDNativeExtensionClassMethodGetArgumentInfo get_argument_info_func; # name and hint information for the argument can be omitted in release builds. Class name should always be present if it applies.
+        GDNativeExtensionClassMethodGetArgumentMetadata get_argument_metadata_func;
+        uint32_t default_argument_count;
+        GDNativeVariantPtr *default_arguments;
+    """
+    #        void (*classdb_register_extension_class_method)(const GDNativeExtensionClassLibraryPtr p_library, const GDNativeStringNamePtr p_class_name, const GDNativeExtensionClassMethodInfo *p_method_info);
+
+    cdef GDNativeExtensionClassMethodInfo method_info
+
+    cdef StringName method_name = c_string_to_string_name("_get_name")
+    method_info.name = method_name.godot_owner
+    method_info.method_flags = 0
+    method_info.argument_count = 0
+    method_info.has_return_value = 1
+    method_info.default_argument_count = 0
+    method_info.default_arguments = NULL
+    method_info.call_func = call_func
+    #method_info.get_argument_type_func = get_argument_type
+    #method_info.get_argument_info_func = get_argument_info # name and hint information for the argument can be omitted in release builds. Class name should always be present if it applies.
+    #method_infoget_argument_metadata_func = get_argument_metadata
+
+    cdef GDNativePropertyInfo property_info
+    property_info.type = GDNativeVariantType.GDNATIVE_VARIANT_TYPE_STRING
+    cdef StringName property_name = c_string_to_string_name("return")
+    cdef StringName property_class_name = c_string_to_string_name("PyLanguage")
+    property_info.name =  property_name.godot_owner
+    property_info.class_name = property_class_name.godot_owner
+    property_info.hint = 0
+
+    cdef String string = String.new0()
+    property_info.hint_string = string.godot_owner
+    property_info.usage = 0
+
+    method_info.return_value_info = &property_info
+
+    cdef StringName class_name = c_string_to_string_name("PyLanguage")
+    gdnative_interface.classdb_register_extension_class_method(get_library(), class_name.godot_owner, &method_info)
