@@ -377,7 +377,7 @@ def generate_property(property):
     result += f"{INDENT * 2}return self. {pythonize_name(property['getter'])}()"
     result = generate_newline(result)
 
-    if property["setter"] != "":
+    if "setter" in property and property["setter"] != "":
         result += f"{INDENT}@{pythonize_name(property['name'])}.setter"
         result = generate_newline(result)
         result += f"{INDENT}def {pythonize_name(property['name'])}(self, {untypearray(simplify_type(property['type']))} value):"

@@ -12,7 +12,6 @@ cdef api void init_py_language() with gil:
     try:
         print_warning("--------------before registering")
         register_class()
-        register_methods()
 
         print_warning("--------------after registering")
 

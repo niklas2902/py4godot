@@ -18,6 +18,8 @@ ctypedef uint8_t GDNativeBool;
 ctypedef uint64_t GDObjectInstanceID;
 ctypedef public void *GDNativeExtensionClassLibraryPtr;
 ctypedef void *GDExtensionClassInstancePtr;
+ctypedef const void *GDNativeConstTypePtr;
+ctypedef const void *GDNativeConstStringNamePtr;
 
 cdef extern from "binding4.h":
     ctypedef void (*GDNativeExtensionClassMethodCall)(void *method_userdata, GDExtensionClassInstancePtr p_instance, const GDNativeVariantPtr *p_args, const GDNativeInt p_argument_count, GDNativeVariantPtr r_return, GDNativeCallError *r_error);
@@ -89,11 +91,13 @@ cdef extern from "binding4.h":
     ctypedef void (*GDNativeExtensionClassToString)(GDExtensionClassInstancePtr p_instance, GDNativeStringPtr p_out);
     ctypedef void (*GDNativeExtensionClassReference)(GDExtensionClassInstancePtr p_instance);
     ctypedef void (*GDNativeExtensionClassUnreference)(GDExtensionClassInstancePtr p_instance);
-    ctypedef void (*GDNativeExtensionClassCallVirtual)(GDExtensionClassInstancePtr p_instance, const GDNativeTypePtr *p_args, GDNativeTypePtr r_ret);
     ctypedef GDNativeObjectPtr (*GDNativeExtensionClassCreateInstance)(void *p_userdata);
     ctypedef void (*GDNativeExtensionClassFreeInstance)(void *p_userdata, GDExtensionClassInstancePtr p_instance);
     ctypedef void (*GDNativeExtensionClassObjectInstance)(GDExtensionClassInstancePtr p_instance, GDNativeObjectPtr p_object_instance);
-    ctypedef GDNativeExtensionClassCallVirtual (*GDNativeExtensionClassGetVirtual)(void *p_userdata, const char *p_name);
+    ctypedef void (*GDNativeExtensionClassCallVirtual)(GDExtensionClassInstancePtr p_instance, GDNativeConstTypePtr *p_args, GDNativeTypePtr r_ret);
+    ctypedef GDNativeExtensionClassCallVirtual (*GDNativeExtensionClassGetVirtual)(void *p_userdata, GDNativeConstStringNamePtr p_name);
+
+
 
 
     # VARIANT DATA I/O
@@ -157,6 +161,15 @@ cdef extern from "binding4.h":
         GDNATIVE_VARIANT_TYPE_PACKED_COLOR_ARRAY,
 
         GDNATIVE_VARIANT_TYPE_VARIANT_MAX
+
+    ctypedef enum GDNativeExtensionClassMethodFlags :
+        GDNATIVE_EXTENSION_METHOD_FLAG_NORMAL = 1,
+        GDNATIVE_EXTENSION_METHOD_FLAG_EDITOR = 2,
+        GDNATIVE_EXTENSION_METHOD_FLAG_CONST = 4,
+        GDNATIVE_EXTENSION_METHOD_FLAG_VIRTUAL = 8,
+        GDNATIVE_EXTENSION_METHOD_FLAG_VARARG = 16,
+        GDNATIVE_EXTENSION_METHOD_FLAG_STATIC = 32,
+        GDNATIVE_EXTENSION_METHOD_FLAGS_DEFAULT = GDNATIVE_EXTENSION_METHOD_FLAG_NORMAL
 
     ctypedef enum GDNativeExtensionClassMethodArgumentMetadata:
         GDNATIVE_EXTENSION_METHOD_ARGUMENT_METADATA_NONE,
