@@ -4,6 +4,8 @@ from libc.stdint cimport int32_t
 from libc.stdint cimport uint8_t
 from libc.stdint cimport uint64_t
 from libc.stdint cimport int64_t
+from libc.stdint cimport int8_t
+
 ctypedef bint bool
 ctypedef void *GDNativeVariantPtr;
 ctypedef void * GodotObject;
@@ -35,6 +37,8 @@ cdef extern from "binding4.h":
     ctypedef void (*GDNativePtrDestructor)(GDNativeTypePtr p_base);
     ctypedef void (*GDNativePtrSetter)(GDNativeTypePtr p_base, const GDNativeTypePtr p_value);
     ctypedef void (*GDNativePtrGetter)(const GDNativeTypePtr p_base, GDNativeTypePtr r_value);
+    ctypedef void (*GDNativePtrOperatorEvaluator)(GDNativeConstTypePtr p_left, GDNativeConstTypePtr p_right, GDNativeTypePtr r_result);
+
 
     ctypedef struct GDNativePropertyInfo:
         GDNativeVariantType type;
@@ -110,6 +114,45 @@ cdef extern from "binding4.h":
         GDNATIVE_CALL_ERROR_TOO_FEW_ARGUMENTS = 4, # expected is number of arguments
         GDNATIVE_CALL_ERROR_INSTANCE_IS_NULL = 5,
         GDNATIVE_CALL_ERROR_METHOD_NOT_CONST = 6, #used for const call
+
+
+    ctypedef enum GDNativeVariantOperator:
+        # comparison
+        GDNATIVE_VARIANT_OP_EQUAL = 0
+        GDNATIVE_VARIANT_OP_NOT_EQUAL = 1
+        GDNATIVE_VARIANT_OP_LESS = 2
+        GDNATIVE_VARIANT_OP_LESS_EQUAL = 3
+        GDNATIVE_VARIANT_OP_GREATER = 4
+        GDNATIVE_VARIANT_OP_GREATER_EQUAL = 5
+
+        # mathematic
+        GDNATIVE_VARIANT_OP_ADD = 6
+        GDNATIVE_VARIANT_OP_SUBTRACT = 7
+        GDNATIVE_VARIANT_OP_MULTIPLY = 8
+        GDNATIVE_VARIANT_OP_DIVIDE = 9
+        GDNATIVE_VARIANT_OP_NEGATE = 10
+        GDNATIVE_VARIANT_OP_POSITIVE = 11
+        GDNATIVE_VARIANT_OP_MODULE = 12
+        GDNATIVE_VARIANT_OP_POWER = 13
+
+        # bitwise
+        GDNATIVE_VARIANT_OP_SHIFT_LEFT = 14
+        GDNATIVE_VARIANT_OP_SHIFT_RIGHT = 15
+        GDNATIVE_VARIANT_OP_BIT_AND = 16
+        GDNATIVE_VARIANT_OP_BIT_OR = 17
+        GDNATIVE_VARIANT_OP_BIT_XOR = 18
+        GDNATIVE_VARIANT_OP_BIT_NEGATE = 19
+
+        # logic
+        GDNATIVE_VARIANT_OP_AND = 20
+        GDNATIVE_VARIANT_OP_OR = 21
+        GDNATIVE_VARIANT_OP_XOR = 22
+        GDNATIVE_VARIANT_OP_NOT = 23
+
+        # containment
+        GDNATIVE_VARIANT_OP_IN = 24
+        GDNATIVE_VARIANT_OP_MAX = 25
+
 
 
     ctypedef enum GDNativeVariantType:
@@ -233,6 +276,8 @@ cdef extern from "binding4.h":
         GDNativePtrBuiltInMethod (*variant_get_ptr_builtin_method)(GDNativeVariantType p_type, const GDNativeStringNamePtr p_method, GDNativeInt p_hash);
         GDNativePtrConstructor (*variant_get_ptr_constructor)(GDNativeVariantType p_type, int32_t p_constructor);
         GDNativePtrDestructor (*variant_get_ptr_destructor)(GDNativeVariantType p_type);
+
+        GDNativePtrOperatorEvaluator (*variant_get_ptr_operator_evaluator)(GDNativeVariantOperator p_operator, GDNativeVariantType p_type_a, GDNativeVariantType p_type_b);
 
         void (*string_new_with_latin1_chars)(GDNativeStringPtr r_dest, const char *p_contents);
         void (*string_new_with_utf8_chars)(GDNativeStringPtr r_dest, const char *p_contents);

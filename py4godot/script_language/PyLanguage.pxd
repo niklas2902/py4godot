@@ -11,6 +11,7 @@ from py4godot.classes.Object.Object cimport *
 cdef register_class()
 
 cdef class PyLanguage(ScriptLanguageExtension):
+  cdef String script_name
   cdef new(self)
   cdef _get_name(self)
   cdef _init(self)

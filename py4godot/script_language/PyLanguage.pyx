@@ -18,12 +18,14 @@ cdef class PyLanguage(ScriptLanguageExtension):
     gdnative_interface.object_set_instance(class_.get_godot_owner(),class_name.godot_owner , <void*>class_)
 
     print_warning("----------------end of calling _constructor")
+    class_.script_name = c_string_to_string("PyLanguage")
+    Py_INCREF(class_)
     return class_
 
   cdef new(self):
     pass
   cdef _get_name(self):
-    return c_string_to_string("Python")
+    return self.script_name
 
   cdef _init(self):
     pass
@@ -184,6 +186,20 @@ cdef class PyLanguage(ScriptLanguageExtension):
   cdef _get_global_class_name(self, String path):
     pass
 
+cdef String script_name = c_string_to_string("Python")
+cdef GDNativeTypePtr ptr =  script_name.godot_owner
+
+cdef GDNativePtrOperatorEvaluator operator_equal_string_name = gdnative_interface.variant_get_ptr_operator_evaluator(
+GDNativeVariantOperator.GDNATIVE_VARIANT_OP_EQUAL,
+ GDNativeVariantType.GDNATIVE_VARIANT_TYPE_STRING_NAME,
+ GDNativeVariantType.GDNATIVE_VARIANT_TYPE_STRING_NAME);
+
+cdef bool string_names_equal(StringName left, StringName right):
+    cdef int8_t ret
+    operator_equal_string_name(left.godot_owner, right.godot_owner, &ret)
+    return ret != 0
+
+
 cdef GDNativeObjectPtr create_instance(void* userdata):
     print_warning("create_instance")
     #TODO: This makes no sense
@@ -229,7 +245,6 @@ cdef register_class():
 
     gdnative_interface.classdb_register_extension_class(get_library(), class_name.godot_owner, parent_class_name.godot_owner, &creation_info)
 
-cdef String py_language_name = c_string_to_string("Python")
 cdef void call_func (void *method_userdata, GDExtensionClassInstancePtr p_instance, const GDNativeVariantPtr *p_args, const GDNativeInt p_argument_count, GDNativeVariantPtr r_return, GDNativeCallError *r_error):
     print_warning("-----------------------method called")
     cdef PyLanguage pylanguage = <PyLanguage> p_instance
@@ -238,12 +253,32 @@ cdef void call_func (void *method_userdata, GDExtensionClassInstancePtr p_instan
     r_return = <GDNativeVariantPtr>pylanguage_name.godot_owner
     print_warning("method called")
 
-cdef void* call_virutal_func(GDExtensionClassInstancePtr p_instance, GDNativeConstTypePtr *p_args, GDNativeTypePtr r_ret):
+cdef void* call_virtual_func(GDExtensionClassInstancePtr p_instance, GDNativeConstTypePtr *p_args, GDNativeTypePtr r_ret) with gil:
     cdef PyLanguage pylanguage = <PyLanguage> p_instance
-    r_return = <GDNativeVariantPtr>py_language_name
+    #print_warning("call_virtual")
+    cdef String ret_val = pylanguage._get_name()
+    cdef GDNativeTypePtr ret_ptr = ret_val.godot_owner
+    r_ret = ret_ptr
 
 
-cdef GDNativeExtensionClassCallVirtual call_virtual_func_def = <GDNativeExtensionClassCallVirtual>call_virutal_func
-cdef GDNativeExtensionClassCallVirtual get_virtual_func(void *p_userdata, GDNativeConstStringNamePtr p_name):
+cdef void* call_virtual_func__get_name(GDExtensionClassInstancePtr p_instance, GDNativeConstTypePtr *p_args, GDNativeTypePtr r_ret) with gil:
+    cdef PyLanguage pylanguage = <PyLanguage> p_instance
+    #print_warning("call_virtual")
+    cdef args = []
+
+
+    cdef String ret_val = pylanguage._get_name()
+    cdef GDNativeTypePtr ret_ptr = ret_val.godot_owner
+    r_ret = ret_ptr
+
+cdef StringName func_name_get_name = c_string_to_string_name("_get_name")
+
+cdef GDNativeExtensionClassCallVirtual call_virtual_get_name_def = <GDNativeExtensionClassCallVirtual>call_virtual_func__get_name
+cdef GDNativeExtensionClassCallVirtual call_virtual_func_def = <GDNativeExtensionClassCallVirtual>call_virtual_func
+cdef GDNativeExtensionClassCallVirtual get_virtual_func(void *p_userdata, GDNativeConstStringNamePtr p_name) with gil:
     gdnative_interface = get_interface()
-    return call_virtual_func_def
+    cdef StringName name = StringName()
+    name.godot_owner = p_name
+
+    if(string_names_equal(func_name_get_name, name)):
+        return call_virtual_get_name_def
