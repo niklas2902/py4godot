@@ -341,6 +341,8 @@ def address_ret(method):
 def generate_common_methods(class_):
     result = generate_constructor(class_["name"])
     result = generate_newline(result)
+    result = generate_new_static(class_)
+    result = generate_newline(result)
     result += generate_constructors(class_)
     result = generate_newline(result)
     return result
@@ -476,6 +478,24 @@ def generate_constructor(classname):
     res = generate_newline(res)
     res += f"{INDENT*2}return class_"
     res = generate_newline(res)
+    return res
+
+def generate_new_static(class_):
+    res = ""
+    res += f"{INDENT}@staticmethod"
+    res = generate_newline(res)
+    if (class_["name"] in builtin_classes):
+        res += f"{INDENT}cdef {class_['name']} new_static(GDNativeTypePtr owner):"
+    else:
+        res += f"{INDENT}cdef {class_['name']} new_static(GodotObject owner):"
+
+    res = generate_newline(res)
+    res += f"{INDENT*2}cdef {class_['name']} obj = {class_['name']}()"
+    res = generate_newline(res)
+    res += f"{INDENT * 2}obj.godot_owner = owner"
+    res = generate_newline(res)
+    res += f"{INDENT * 2}return obj"
+
     return res
 
 def generate_classes(classes, filename, is_core=False):

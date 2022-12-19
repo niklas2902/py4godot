@@ -367,6 +367,7 @@ cdef extern from "binding4.h":
 
         GDNativeExtensionScriptInstanceFree free_func;
 
-
+cdef extern from "utils.c":
+    GDNativeConstTypePtr* get_incremented_pointer(GDNativeConstTypePtr* ptr, int val)
 #TODO: improve this
 cdef GDNativeInterface* gdnative_interface

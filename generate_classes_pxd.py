@@ -47,9 +47,19 @@ def generate_pxd_class(pxd_class):
     result = generate_newline(result)
     result += f"cdef class {pxd_class['name']}({get_base_class(pxd_class)}):"
     result = generate_newline(result)
-    result += f"{INDENT}pass"
+    result += generate_new_static(class_)
     result = generate_newline(result)
     return result
+
+def generate_new_static(class_):
+    res = ""
+    res += f"{INDENT}@staticmethod"
+    res = generate_newline(res)
+    if (class_["name"] in builtin_classes):
+        res += f"{INDENT}cdef {class_['name']} new_static(GDNativeTypePtr owner)"
+    else:
+        res += f"{INDENT}cdef {class_['name']} new_static(GodotObject owner)"
+    return res
 
 
 def get_inherited_class(class_):
