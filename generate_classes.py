@@ -142,7 +142,7 @@ def generate_return_value(method_):
         else:
             result += f"{INDENT * 2}cdef {unbitfield_type(unenumize_type(ret_val.type))} {ret_val.name}"
     else:
-        result += f"{INDENT * 2}cdef GDNativeTypePtr _ret = NULL"
+        result += f"{INDENT * 2}cdef GDNativeTypePtr _ret"
     return result
 
 def get_base_class(class_):
@@ -219,7 +219,58 @@ def generate_error():
 def generate_method_bind_name(class_name, method_name):
     return f"method_bind__{class_name}_{method_name}"
 
+def get_variant_type(class_name):
+    DICT = {
 
+        "Nil":"GDNATIVE_VARIANT_TYPE_NIL",
+
+        #  atomic types
+        "bool":"GDNATIVE_VARIANT_TYPE_BOOL",
+        "int":"GDNATIVE_VARIANT_TYPE_INT",
+        "float":"GDNATIVE_VARIANT_TYPE_FLOAT",
+        "string":"GDNATIVE_VARIANT_TYPE_STRING",
+
+        # math types
+        "vector2":"GDNATIVE_VARIANT_TYPE_VECTOR2",
+        "vector2i":"GDNATIVE_VARIANT_TYPE_VECTOR2I",
+        "rect2":"GDNATIVE_VARIANT_TYPE_RECT2",
+        "rect2i":"GDNATIVE_VARIANT_TYPE_RECT2I",
+        "vector3":"GDNATIVE_VARIANT_TYPE_VECTOR3",
+        "vector3i":"GDNATIVE_VARIANT_TYPE_VECTOR3I",
+        "transform2d":"GDNATIVE_VARIANT_TYPE_TRANSFORM2D",
+        "vector4":"GDNATIVE_VARIANT_TYPE_VECTOR4",
+        "vector4i":"GDNATIVE_VARIANT_TYPE_VECTOR4I",
+        "plane":"GDNATIVE_VARIANT_TYPE_PLANE",
+        "quaternion":"GDNATIVE_VARIANT_TYPE_QUATERNION",
+        "aabb":"GDNATIVE_VARIANT_TYPE_AABB",
+        "basis":"GDNATIVE_VARIANT_TYPE_BASIS",
+        "transform3d":"GDNATIVE_VARIANT_TYPE_TRANSFORM3D",
+        "projection":"GDNATIVE_VARIANT_TYPE_PROJECTION",
+
+        # misc types
+        "color":"GDNATIVE_VARIANT_TYPE_COLOR",
+        "stringname":"GDNATIVE_VARIANT_TYPE_STRING_NAME",
+        "nodepath":"GDNATIVE_VARIANT_TYPE_NODE_PATH",
+        "rid":"GDNATIVE_VARIANT_TYPE_RID",
+        "object":"GDNATIVE_VARIANT_TYPE_OBJECT",
+        "callable":"GDNATIVE_VARIANT_TYPE_CALLABLE",
+        "signal":"GDNATIVE_VARIANT_TYPE_SIGNAL",
+        "dictionary":"GDNATIVE_VARIANT_TYPE_DICTIONARY",
+        "array":"GDNATIVE_VARIANT_TYPE_ARRAY",
+
+        # typed arrays
+        "packedbytearray":"GDNATIVE_VARIANT_TYPE_PACKED_BYTE_ARRAY",
+        "packedint32array":"GDNATIVE_VARIANT_TYPE_PACKED_INT32_ARRAY",
+        "packedint64array":"GDNATIVE_VARIANT_TYPE_PACKED_INT64_ARRAY",
+        "packedfloat32array":"GDNATIVE_VARIANT_TYPE_PACKED_FLOAT32_ARRAY",
+        "packedfloat64array":"GDNATIVE_VARIANT_TYPE_PACKED_FLOAT64_ARRAY",
+        "packedstringarray":"GDNATIVE_VARIANT_TYPE_PACKED_STRING_ARRAY",
+        "packedvector2array":"GDNATIVE_VARIANT_TYPE_PACKED_VECTOR2_ARRAY",
+        "packedvector3array":"GDNATIVE_VARIANT_TYPE_PACKED_VECTOR3_ARRAY",
+        "packedcolorarray":"GDNATIVE_VARIANT_TYPE_PACKED_COLOR_ARRAY"
+    }
+
+    return DICT[class_name.lower()]
 def generate_method_bind(current_class, method):
     res = ""
     res += f"{INDENT * 2}cdef String _class_name_string = String.new0()"
@@ -239,9 +290,15 @@ def generate_method_bind(current_class, method):
     res = generate_newline(res)
 
     res = generate_newline(res)
-    res += f"""{INDENT*2}cdef GDNativeMethodBindPtr method_bind = """ + \
-           f"""gdnative_interface.classdb_get_method_bind(_class_name.godot_owner,""" + \
-           f"""_method_name.godot_owner, {method['hash']})"""
+    if current_class['name'] in builtin_classes:
+        res += f"""{INDENT * 2}cdef GDNativePtrBuiltInMethod method_to_call = """ + \
+               f"""gdnative_interface.variant_get_ptr_builtin_method(GDNativeVariantType.{get_variant_type(current_class['name'])}, """ + \
+               f"""_method_name.godot_owner, {method['hash']})"""
+    else:
+        res += f"""{INDENT*2}cdef GDNativeMethodBindPtr method_bind = """ + \
+               f"""gdnative_interface.classdb_get_method_bind(_class_name.godot_owner,""" + \
+               f"""_method_name.godot_owner, {method['hash']})"""
+
     res = generate_newline(res)
     return res
 
@@ -299,6 +356,15 @@ def generate_args_array(method):
         result = generate_newline(result)
     return result
 
+def get_first_args_native(method_):
+    if "arguments" not in method_:
+        return "NULL"
+    return "&_args[0]"
+
+def get_args_count(method):
+    if "arguments" in method:
+        return len(method["arguments"])
+    return 0
 
 def generate_method_body_standard(class_, method):
     number_arguments = 0
@@ -317,8 +383,11 @@ def generate_method_body_standard(class_, method):
 
     result += generate_error()
     result = generate_newline(result)
-    result += f"{INDENT * 2}gdnative_interface.object_method_bind_ptrcall(method_bind," \
-              f" self.godot_owner, _args, {address_ret(method)})"
+    if(class_['name'] in builtin_classes):
+        result += f"{INDENT * 2}method_to_call(self.godot_owner, {get_first_args_native(method)}, {address_ret(method)}, {get_args_count(method)})"
+    else:
+        result += f"{INDENT * 2}gdnative_interface.object_method_bind_ptrcall(method_bind," \
+                  f" self.godot_owner, _args, {address_ret(method)})"
 
     if ("return_value" in method.keys() and is_primitive(method['return_value']['type'])):
         result += generate_return_statement()
@@ -335,7 +404,7 @@ def address_ret(method):
         if "typedarray" in method["return_value"]["type"]:
             return "_ret.get_godot_owner()"
         return "&_ret"
-    return "NULL"
+    return "&_ret"
 
 
 def generate_common_methods(class_):

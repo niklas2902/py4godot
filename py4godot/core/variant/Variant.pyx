@@ -33,6 +33,7 @@ cdef class Variant:
                 AABB:self.new_aabb, String:self.new_string, Rect2:self.new_rect2, Quat:self.new_quat,
                 Color:self.new_color, NodePath:self.new_node_path, type(True):self.new_bool }"""
 
+        get_variant_from_type_constructor
         if(type(variant) == type("")):
             variant = String(variant)
         if(variant != None):

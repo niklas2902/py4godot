@@ -23,7 +23,12 @@ ctypedef void *GDExtensionClassInstancePtr;
 ctypedef const void *GDNativeConstTypePtr;
 ctypedef const void *GDNativeConstStringNamePtr;
 
+cdef extern from "c_utils.h":
+    void set_gdnative_ptr(GDNativeTypePtr* a, GDNativeTypePtr b)
+
 cdef extern from "binding4.h":
+    ctypedef void (*GDNativeVariantFromTypeConstructorFunc)(GDNativeVariantPtr, GDNativeTypePtr);
+    ctypedef void (*GDNativeTypeFromVariantConstructorFunc)(GDNativeTypePtr, GDNativeVariantPtr);
     ctypedef void (*GDNativeExtensionClassMethodCall)(void *method_userdata, GDExtensionClassInstancePtr p_instance, const GDNativeVariantPtr *p_args, const GDNativeInt p_argument_count, GDNativeVariantPtr r_return, GDNativeCallError *r_error);
     ctypedef void (*GDNativeExtensionClassMethodPtrCall)(void *method_userdata, GDExtensionClassInstancePtr p_instance, const GDNativeTypePtr *p_args, GDNativeTypePtr r_ret);
 
@@ -250,6 +255,9 @@ cdef extern from "binding4.h":
         void *class_userdata;
 
     ctypedef struct GDNativeInterface:
+        GDNativeVariantFromTypeConstructorFunc (*get_variant_from_type_constructor)(GDNativeVariantType p_type);
+        GDNativeTypeFromVariantConstructorFunc (*get_variant_to_type_constructor)(GDNativeVariantType p_type);
+
         void *object_method_bind_call (const GDNativeMethodBindPtr p_method_bind, GDNativeObjectPtr p_instance, const GDNativeVariantPtr *p_args, GDNativeInt p_arg_count, GDNativeVariantPtr r_ret, GDNativeCallError *r_error);
         void *object_method_bind_ptrcall (const GDNativeMethodBindPtr p_method_bind, GDNativeObjectPtr p_instance, const GDNativeTypePtr *p_args, GDNativeTypePtr r_ret);
         GDNativeObjectPtr (*classdb_construct_object)(const GDNativeStringNamePtr p_classname); #The passed class must be a built-in godot class, or an already-registered extension class. In both case, object_set_instance should be called to fully initialize the object.
@@ -366,8 +374,5 @@ cdef extern from "binding4.h":
         GDNativeExtensionScriptInstanceGetLanguage get_language_func;
 
         GDNativeExtensionScriptInstanceFree free_func;
-
-cdef extern from "utils.c":
-    GDNativeConstTypePtr* get_incremented_pointer(GDNativeConstTypePtr* ptr, int val)
 #TODO: improve this
 cdef GDNativeInterface* gdnative_interface

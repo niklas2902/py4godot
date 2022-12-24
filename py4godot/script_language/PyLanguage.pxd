@@ -11,9 +11,14 @@ from py4godot.classes.Object.Object cimport *
 cdef register_class()
 
 cdef class PyLanguage(ScriptLanguageExtension):
+  cdef char* language_name
+  cdef String extension
   cdef String script_name
+  cdef PackedStringArray extension_array
+
+  cdef void _init_values(self) # self-defined
   cdef new(self)
-  cdef _get_name(self)
+  cdef _get_name(self, GDNativeTypePtr res)
   cdef _init(self)
   cdef _get_type(self)
   cdef _get_extension(self)

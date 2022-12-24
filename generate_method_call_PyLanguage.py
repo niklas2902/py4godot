@@ -168,3 +168,14 @@ if __name__ == "__main__":
     for cls in obj["classes"]:
         if cls["name"] == "ScriptLanguageExtension":
             generate_methods(cls)
+
+    for cls in obj["classes"]:
+        if cls["name"] == "ScriptLanguageExtension":
+            for method in cls["methods"]:
+                if are_forbidden_types_in_method(method):
+                    continue
+                else:
+                    print(f"""
+    elif (string_names_equal(func_name_{method['name']}, name)):
+        print_warning("----------------{method['name']}")
+        return call_virtual_{method['name']}_def""")

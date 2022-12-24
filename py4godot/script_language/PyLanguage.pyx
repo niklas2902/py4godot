@@ -2,7 +2,6 @@ from py4godot_core_holder.core_holder cimport *
 from py4godot.utils.print_tools import *
 from py4godot.utils.utils cimport *
 from py4godot.enums.enums4 cimport *
-from py4godot.godot_bindings.binding4_godot4 cimport get_incremented_pointer
 from py4godot.classes.ScriptLanguageExtension.ScriptLanguageExtension cimport *
 from py4godot.classes.Object.Object cimport *
 from py4godot.classes.generated4_core cimport *
@@ -15,22 +14,32 @@ cdef class PyLanguage(ScriptLanguageExtension):
   @staticmethod
   def constructor():
     cdef PyLanguage class_ = PyLanguage()
-    print_warning("----------------calling _constructor")
+    ""
 
     cdef StringName class_name = c_string_to_string_name("PyLanguage")
 
     class_.set_godot_owner(gdnative_interface.classdb_construct_object(class_name.godot_owner))
     gdnative_interface.object_set_instance(class_.get_godot_owner(),class_name.godot_owner , <void*>class_)
 
-    print_warning("----------------end of calling _constructor")
+    ""
     class_.script_name = c_string_to_string("PyLanguage")
     Py_INCREF(class_)
+    class_._init_values()
     return class_
+
+  cdef void _init_values(self):
+    self.extension_array = PackedStringArray.new0()
+    self.language_name = "Python"
+    cdef String py = c_string_to_string("py")
+    self.extension = c_string_to_string("py")
+    self.script_name = c_string_to_string("Python")
+    Py_INCREF(py)
+    self.extension_array.push_back(py)
 
   cdef new(self):
     pass
-  cdef _get_name(self):
-    return self.script_name
+  cdef _get_name(self, GDNativeTypePtr res):
+    gdnative_interface.string_new_with_utf8_chars(res, self.language_name)
 
   cdef _init(self):
     pass
@@ -69,10 +78,10 @@ cdef class PyLanguage(ScriptLanguageExtension):
     pass
 
   cdef _validate(self, String script, String path, bool validate_functions, bool validate_errors, bool validate_warnings, bool validate_safe_lines):
-    pass
+    return True
 
   cdef _validate_path(self, String path):
-    pass
+    String.new0()
 
   cdef _create_script(self):
     pass
@@ -159,7 +168,7 @@ cdef class PyLanguage(ScriptLanguageExtension):
     pass
 
   cdef _get_recognized_extensions(self):
-    pass
+    return self.extension_array
 
   cdef _get_public_functions(self):
     pass
@@ -202,18 +211,19 @@ GDNativeVariantOperator.GDNATIVE_VARIANT_OP_EQUAL,
 cdef bool string_names_equal(StringName left, StringName right):
     cdef int8_t ret
     operator_equal_string_name(left.godot_owner, right.godot_owner, &ret)
+    ""
     return ret != 0
 
 
 cdef GDNativeObjectPtr create_instance(void* userdata):
-    print_warning("create_instance")
+    ""
     #TODO: This makes no sense
     cdef StringName class_name = c_string_to_string_name("ScriptLanguageExtension")
     cdef GDNativeObjectPtr gdnative_object = gdnative_interface.classdb_construct_object(class_name.godot_owner)
     return gdnative_object
 
 cdef void free_instance(void *p_userdata, GDExtensionClassInstancePtr p_instance):
-    print_warning("free_instance")
+    ""
 
 cdef register_class():
     """
@@ -250,36 +260,23 @@ cdef register_class():
 
     gdnative_interface.classdb_register_extension_class(get_library(), class_name.godot_owner, parent_class_name.godot_owner, &creation_info)
 
-cdef void call_func (void *method_userdata, GDExtensionClassInstancePtr p_instance, const GDNativeVariantPtr *p_args, const GDNativeInt p_argument_count, GDNativeVariantPtr r_return, GDNativeCallError *r_error):
-    print_warning("-----------------------method called")
-    cdef PyLanguage pylanguage = <PyLanguage> p_instance
-    cdef char* name = <char*>method_userdata
-    cdef String py_language_name = pylanguage.get_name()
-    r_return = <GDNativeVariantPtr>pylanguage_name.godot_owner
-    print_warning("method called")
-
-cdef void* call_virtual_func(GDExtensionClassInstancePtr p_instance, GDNativeConstTypePtr *p_args, GDNativeTypePtr r_ret) with gil:
-    cdef PyLanguage pylanguage = <PyLanguage> p_instance
-    #print_warning("call_virtual")
-    cdef String ret_val = pylanguage._get_name()
-    cdef GDNativeTypePtr ret_ptr = ret_val.godot_owner
-    r_ret = ret_ptr
 
 cdef void* call_virtual_func__get_name(GDExtensionClassInstancePtr p_instance, GDNativeConstTypePtr *p_args, GDNativeTypePtr r_ret) with gil:
     cdef PyLanguage pylanguage = <PyLanguage> p_instance
-    print_warning("call_virtual _get_name")
-
-
-    cdef String ret_val = pylanguage._get_name()
-    cdef GDNativeTypePtr ret_ptr = ret_val.godot_owner
-    r_ret = ret_ptr
+    ""
+    cdef String ret_string
+    cdef String ret_val
+    try:
+        pylanguage._get_name(r_ret)
+    except:
+        pass
 cdef StringName func_name__get_name = c_string_to_string_name("_get_name")
 cdef GDNativeExtensionClassCallVirtual call_virtual__get_name_def = <GDNativeExtensionClassCallVirtual>call_virtual_func__get_name
 
 
 cdef void* call_virtual_func__init(GDExtensionClassInstancePtr p_instance, GDNativeConstTypePtr *p_args, GDNativeTypePtr r_ret) with gil:
     cdef PyLanguage pylanguage = <PyLanguage> p_instance
-    print_warning("call_virtual _init")
+    ""
 
 
     pylanguage._init()
@@ -290,7 +287,7 @@ cdef GDNativeExtensionClassCallVirtual call_virtual__init_def = <GDNativeExtensi
 
 cdef void* call_virtual_func__get_type(GDExtensionClassInstancePtr p_instance, GDNativeConstTypePtr *p_args, GDNativeTypePtr r_ret) with gil:
     cdef PyLanguage pylanguage = <PyLanguage> p_instance
-    print_warning("call_virtual _get_type")
+    ""
 
 
     cdef String ret_val = pylanguage._get_type()
@@ -302,19 +299,20 @@ cdef GDNativeExtensionClassCallVirtual call_virtual__get_type_def = <GDNativeExt
 
 cdef void* call_virtual_func__get_extension(GDExtensionClassInstancePtr p_instance, GDNativeConstTypePtr *p_args, GDNativeTypePtr r_ret) with gil:
     cdef PyLanguage pylanguage = <PyLanguage> p_instance
-    print_warning("call_virtual _get_extension")
-
+    ""
 
     cdef String ret_val = pylanguage._get_extension()
     cdef GDNativeTypePtr ret_ptr = ret_val.godot_owner
-    r_ret = ret_ptr
+    cdef char * c_string = "py"
+    gdnative_interface.string_new_with_utf8_chars(r_ret, c_string)
+
 cdef StringName func_name__get_extension = c_string_to_string_name("_get_extension")
 cdef GDNativeExtensionClassCallVirtual call_virtual__get_extension_def = <GDNativeExtensionClassCallVirtual>call_virtual_func__get_extension
 
 
 cdef void* call_virtual_func__execute_file(GDExtensionClassInstancePtr p_instance, GDNativeConstTypePtr *p_args, GDNativeTypePtr r_ret) with gil:
     cdef PyLanguage pylanguage = <PyLanguage> p_instance
-    print_warning("call_virtual _execute_file")
+    ""
     cdef String args0 = String.new_static(dereference(p_args + 0))
 
 
@@ -327,7 +325,7 @@ cdef GDNativeExtensionClassCallVirtual call_virtual__execute_file_def = <GDNativ
 
 cdef void* call_virtual_func__finish(GDExtensionClassInstancePtr p_instance, GDNativeConstTypePtr *p_args, GDNativeTypePtr r_ret) with gil:
     cdef PyLanguage pylanguage = <PyLanguage> p_instance
-    print_warning("call_virtual _finish")
+    ""
 
 
     pylanguage._finish()
@@ -338,7 +336,7 @@ cdef GDNativeExtensionClassCallVirtual call_virtual__finish_def = <GDNativeExten
 
 cdef void* call_virtual_func__get_reserved_words(GDExtensionClassInstancePtr p_instance, GDNativeConstTypePtr *p_args, GDNativeTypePtr r_ret) with gil:
     cdef PyLanguage pylanguage = <PyLanguage> p_instance
-    print_warning("call_virtual _get_reserved_words")
+    ""
 
 
     cdef PackedStringArray ret_val = pylanguage._get_reserved_words()
@@ -350,7 +348,7 @@ cdef GDNativeExtensionClassCallVirtual call_virtual__get_reserved_words_def = <G
 
 cdef void* call_virtual_func__is_control_flow_keyword(GDExtensionClassInstancePtr p_instance, GDNativeConstTypePtr *p_args, GDNativeTypePtr r_ret) with gil:
     cdef PyLanguage pylanguage = <PyLanguage> p_instance
-    print_warning("call_virtual _is_control_flow_keyword")
+    ""
     cdef String args0 = String.new_static(dereference(p_args + 0))
 
 
@@ -364,7 +362,7 @@ cdef GDNativeExtensionClassCallVirtual call_virtual__is_control_flow_keyword_def
 
 cdef void* call_virtual_func__get_comment_delimiters(GDExtensionClassInstancePtr p_instance, GDNativeConstTypePtr *p_args, GDNativeTypePtr r_ret) with gil:
     cdef PyLanguage pylanguage = <PyLanguage> p_instance
-    print_warning("call_virtual _get_comment_delimiters")
+    ""
 
 
     cdef PackedStringArray ret_val = pylanguage._get_comment_delimiters()
@@ -376,7 +374,7 @@ cdef GDNativeExtensionClassCallVirtual call_virtual__get_comment_delimiters_def 
 
 cdef void* call_virtual_func__get_string_delimiters(GDExtensionClassInstancePtr p_instance, GDNativeConstTypePtr *p_args, GDNativeTypePtr r_ret) with gil:
     cdef PyLanguage pylanguage = <PyLanguage> p_instance
-    print_warning("call_virtual _get_string_delimiters")
+    ""
 
 
     cdef PackedStringArray ret_val = pylanguage._get_string_delimiters()
@@ -388,7 +386,7 @@ cdef GDNativeExtensionClassCallVirtual call_virtual__get_string_delimiters_def =
 
 cdef void* call_virtual_func__make_template(GDExtensionClassInstancePtr p_instance, GDNativeConstTypePtr *p_args, GDNativeTypePtr r_ret) with gil:
     cdef PyLanguage pylanguage = <PyLanguage> p_instance
-    print_warning("call_virtual _make_template")
+    ""
     cdef String args0 = String.new_static(dereference(p_args + 0))
     cdef String args1 = String.new_static(dereference(p_args + 1))
     cdef String args2 = String.new_static(dereference(p_args + 2))
@@ -403,7 +401,7 @@ cdef GDNativeExtensionClassCallVirtual call_virtual__make_template_def = <GDNati
 
 cdef void* call_virtual_func__get_built_in_templates(GDExtensionClassInstancePtr p_instance, GDNativeConstTypePtr *p_args, GDNativeTypePtr r_ret) with gil:
     cdef PyLanguage pylanguage = <PyLanguage> p_instance
-    print_warning("call_virtual _get_built_in_templates")
+    ""
     cdef StringName args0 = StringName.new_static(dereference(p_args + 0))
 
 
@@ -416,7 +414,7 @@ cdef GDNativeExtensionClassCallVirtual call_virtual__get_built_in_templates_def 
 
 cdef void* call_virtual_func__is_using_templates(GDExtensionClassInstancePtr p_instance, GDNativeConstTypePtr *p_args, GDNativeTypePtr r_ret) with gil:
     cdef PyLanguage pylanguage = <PyLanguage> p_instance
-    print_warning("call_virtual _is_using_templates")
+    ""
 
 
     cdef bool ret_val = pylanguage._is_using_templates()
@@ -429,7 +427,7 @@ cdef GDNativeExtensionClassCallVirtual call_virtual__is_using_templates_def = <G
 
 cdef void* call_virtual_func__validate(GDExtensionClassInstancePtr p_instance, GDNativeConstTypePtr *p_args, GDNativeTypePtr r_ret) with gil:
     cdef PyLanguage pylanguage = <PyLanguage> p_instance
-    print_warning("call_virtual _validate")
+    ""
     cdef String args0 = String.new_static(dereference(p_args + 0))
     cdef String args1 = String.new_static(dereference(p_args + 1))
     cdef bool args2 = <bool>dereference(p_args + 2)
@@ -447,7 +445,7 @@ cdef GDNativeExtensionClassCallVirtual call_virtual__validate_def = <GDNativeExt
 
 cdef void* call_virtual_func__validate_path(GDExtensionClassInstancePtr p_instance, GDNativeConstTypePtr *p_args, GDNativeTypePtr r_ret) with gil:
     cdef PyLanguage pylanguage = <PyLanguage> p_instance
-    print_warning("call_virtual _validate_path")
+    ""
     cdef String args0 = String.new_static(dereference(p_args + 0))
 
 
@@ -460,7 +458,7 @@ cdef GDNativeExtensionClassCallVirtual call_virtual__validate_path_def = <GDNati
 
 cdef void* call_virtual_func__create_script(GDExtensionClassInstancePtr p_instance, GDNativeConstTypePtr *p_args, GDNativeTypePtr r_ret) with gil:
     cdef PyLanguage pylanguage = <PyLanguage> p_instance
-    print_warning("call_virtual _create_script")
+    ""
 
 
     cdef Object ret_val = pylanguage._create_script()
@@ -472,7 +470,7 @@ cdef GDNativeExtensionClassCallVirtual call_virtual__create_script_def = <GDNati
 
 cdef void* call_virtual_func__has_named_classes(GDExtensionClassInstancePtr p_instance, GDNativeConstTypePtr *p_args, GDNativeTypePtr r_ret) with gil:
     cdef PyLanguage pylanguage = <PyLanguage> p_instance
-    print_warning("call_virtual _has_named_classes")
+    ""
 
 
     cdef bool ret_val = pylanguage._has_named_classes()
@@ -485,7 +483,7 @@ cdef GDNativeExtensionClassCallVirtual call_virtual__has_named_classes_def = <GD
 
 cdef void* call_virtual_func__supports_builtin_mode(GDExtensionClassInstancePtr p_instance, GDNativeConstTypePtr *p_args, GDNativeTypePtr r_ret) with gil:
     cdef PyLanguage pylanguage = <PyLanguage> p_instance
-    print_warning("call_virtual _supports_builtin_mode")
+    ""
 
 
     cdef bool ret_val = pylanguage._supports_builtin_mode()
@@ -498,7 +496,7 @@ cdef GDNativeExtensionClassCallVirtual call_virtual__supports_builtin_mode_def =
 
 cdef void* call_virtual_func__supports_documentation(GDExtensionClassInstancePtr p_instance, GDNativeConstTypePtr *p_args, GDNativeTypePtr r_ret) with gil:
     cdef PyLanguage pylanguage = <PyLanguage> p_instance
-    print_warning("call_virtual _supports_documentation")
+    ""
 
 
     cdef bool ret_val = pylanguage._supports_documentation()
@@ -511,7 +509,7 @@ cdef GDNativeExtensionClassCallVirtual call_virtual__supports_documentation_def 
 
 cdef void* call_virtual_func__can_inherit_from_file(GDExtensionClassInstancePtr p_instance, GDNativeConstTypePtr *p_args, GDNativeTypePtr r_ret) with gil:
     cdef PyLanguage pylanguage = <PyLanguage> p_instance
-    print_warning("call_virtual _can_inherit_from_file")
+    ""
 
 
     cdef bool ret_val = pylanguage._can_inherit_from_file()
@@ -524,7 +522,7 @@ cdef GDNativeExtensionClassCallVirtual call_virtual__can_inherit_from_file_def =
 
 cdef void* call_virtual_func__find_function(GDExtensionClassInstancePtr p_instance, GDNativeConstTypePtr *p_args, GDNativeTypePtr r_ret) with gil:
     cdef PyLanguage pylanguage = <PyLanguage> p_instance
-    print_warning("call_virtual _find_function")
+    ""
     cdef String args0 = String.new_static(dereference(p_args + 0))
     cdef String args1 = String.new_static(dereference(p_args + 1))
 
@@ -538,7 +536,7 @@ cdef GDNativeExtensionClassCallVirtual call_virtual__find_function_def = <GDNati
 
 cdef void* call_virtual_func__make_function(GDExtensionClassInstancePtr p_instance, GDNativeConstTypePtr *p_args, GDNativeTypePtr r_ret) with gil:
     cdef PyLanguage pylanguage = <PyLanguage> p_instance
-    print_warning("call_virtual _make_function")
+    ""
     cdef String args0 = String.new_static(dereference(p_args + 0))
     cdef String args1 = String.new_static(dereference(p_args + 1))
     cdef PackedStringArray args2 = PackedStringArray.new_static(dereference(p_args + 2))
@@ -553,7 +551,7 @@ cdef GDNativeExtensionClassCallVirtual call_virtual__make_function_def = <GDNati
 
 cdef void* call_virtual_func__open_in_external_editor(GDExtensionClassInstancePtr p_instance, GDNativeConstTypePtr *p_args, GDNativeTypePtr r_ret) with gil:
     cdef PyLanguage pylanguage = <PyLanguage> p_instance
-    print_warning("call_virtual _open_in_external_editor")
+    ""
     cdef Script args0 = <Script>dereference(p_args + 0)
     cdef int args1 = <int>dereference(p_args + 1)
     cdef int args2 = <int>dereference(p_args + 2)
@@ -568,7 +566,7 @@ cdef GDNativeExtensionClassCallVirtual call_virtual__open_in_external_editor_def
 
 cdef void* call_virtual_func__overrides_external_editor(GDExtensionClassInstancePtr p_instance, GDNativeConstTypePtr *p_args, GDNativeTypePtr r_ret) with gil:
     cdef PyLanguage pylanguage = <PyLanguage> p_instance
-    print_warning("call_virtual _overrides_external_editor")
+    ""
 
 
     cdef bool ret_val = pylanguage._overrides_external_editor()
@@ -581,7 +579,7 @@ cdef GDNativeExtensionClassCallVirtual call_virtual__overrides_external_editor_d
 
 cdef void* call_virtual_func__complete_code(GDExtensionClassInstancePtr p_instance, GDNativeConstTypePtr *p_args, GDNativeTypePtr r_ret) with gil:
     cdef PyLanguage pylanguage = <PyLanguage> p_instance
-    print_warning("call_virtual _complete_code")
+    ""
     cdef String args0 = String.new_static(dereference(p_args + 0))
     cdef String args1 = String.new_static(dereference(p_args + 1))
     cdef Object args2 = <Object>dereference(p_args + 2)
@@ -596,7 +594,7 @@ cdef GDNativeExtensionClassCallVirtual call_virtual__complete_code_def = <GDNati
 
 cdef void* call_virtual_func__lookup_code(GDExtensionClassInstancePtr p_instance, GDNativeConstTypePtr *p_args, GDNativeTypePtr r_ret) with gil:
     cdef PyLanguage pylanguage = <PyLanguage> p_instance
-    print_warning("call_virtual _lookup_code")
+    ""
     cdef String args0 = String.new_static(dereference(p_args + 0))
     cdef String args1 = String.new_static(dereference(p_args + 1))
     cdef String args2 = String.new_static(dereference(p_args + 2))
@@ -612,7 +610,7 @@ cdef GDNativeExtensionClassCallVirtual call_virtual__lookup_code_def = <GDNative
 
 cdef void* call_virtual_func__auto_indent_code(GDExtensionClassInstancePtr p_instance, GDNativeConstTypePtr *p_args, GDNativeTypePtr r_ret) with gil:
     cdef PyLanguage pylanguage = <PyLanguage> p_instance
-    print_warning("call_virtual _auto_indent_code")
+    ""
     cdef String args0 = String.new_static(dereference(p_args + 0))
     cdef int args1 = <int>dereference(p_args + 1)
     cdef int args2 = <int>dereference(p_args + 2)
@@ -627,7 +625,7 @@ cdef GDNativeExtensionClassCallVirtual call_virtual__auto_indent_code_def = <GDN
 
 cdef void* call_virtual_func__add_global_constant(GDExtensionClassInstancePtr p_instance, GDNativeConstTypePtr *p_args, GDNativeTypePtr r_ret) with gil:
     cdef PyLanguage pylanguage = <PyLanguage> p_instance
-    print_warning("call_virtual _add_global_constant")
+    ""
     cdef StringName args0 = StringName.new_static(dereference(p_args + 0))
     cdef Variant args1 = <Variant>dereference(p_args + 1)
 
@@ -640,7 +638,7 @@ cdef GDNativeExtensionClassCallVirtual call_virtual__add_global_constant_def = <
 
 cdef void* call_virtual_func__add_named_global_constant(GDExtensionClassInstancePtr p_instance, GDNativeConstTypePtr *p_args, GDNativeTypePtr r_ret) with gil:
     cdef PyLanguage pylanguage = <PyLanguage> p_instance
-    print_warning("call_virtual _add_named_global_constant")
+    ""
     cdef StringName args0 = StringName.new_static(dereference(p_args + 0))
     cdef Variant args1 = <Variant>dereference(p_args + 1)
 
@@ -653,7 +651,7 @@ cdef GDNativeExtensionClassCallVirtual call_virtual__add_named_global_constant_d
 
 cdef void* call_virtual_func__remove_named_global_constant(GDExtensionClassInstancePtr p_instance, GDNativeConstTypePtr *p_args, GDNativeTypePtr r_ret) with gil:
     cdef PyLanguage pylanguage = <PyLanguage> p_instance
-    print_warning("call_virtual _remove_named_global_constant")
+    ""
     cdef StringName args0 = StringName.new_static(dereference(p_args + 0))
 
 
@@ -665,7 +663,7 @@ cdef GDNativeExtensionClassCallVirtual call_virtual__remove_named_global_constan
 
 cdef void* call_virtual_func__thread_enter(GDExtensionClassInstancePtr p_instance, GDNativeConstTypePtr *p_args, GDNativeTypePtr r_ret) with gil:
     cdef PyLanguage pylanguage = <PyLanguage> p_instance
-    print_warning("call_virtual _thread_enter")
+    ""
 
 
     pylanguage._thread_enter()
@@ -676,7 +674,7 @@ cdef GDNativeExtensionClassCallVirtual call_virtual__thread_enter_def = <GDNativ
 
 cdef void* call_virtual_func__thread_exit(GDExtensionClassInstancePtr p_instance, GDNativeConstTypePtr *p_args, GDNativeTypePtr r_ret) with gil:
     cdef PyLanguage pylanguage = <PyLanguage> p_instance
-    print_warning("call_virtual _thread_exit")
+    ""
 
 
     pylanguage._thread_exit()
@@ -687,7 +685,7 @@ cdef GDNativeExtensionClassCallVirtual call_virtual__thread_exit_def = <GDNative
 
 cdef void* call_virtual_func__debug_get_error(GDExtensionClassInstancePtr p_instance, GDNativeConstTypePtr *p_args, GDNativeTypePtr r_ret) with gil:
     cdef PyLanguage pylanguage = <PyLanguage> p_instance
-    print_warning("call_virtual _debug_get_error")
+    ""
 
 
     cdef String ret_val = pylanguage._debug_get_error()
@@ -699,7 +697,7 @@ cdef GDNativeExtensionClassCallVirtual call_virtual__debug_get_error_def = <GDNa
 
 cdef void* call_virtual_func__debug_get_stack_level_count(GDExtensionClassInstancePtr p_instance, GDNativeConstTypePtr *p_args, GDNativeTypePtr r_ret) with gil:
     cdef PyLanguage pylanguage = <PyLanguage> p_instance
-    print_warning("call_virtual _debug_get_stack_level_count")
+    ""
 
 
     cdef int ret_val = pylanguage._debug_get_stack_level_count()
@@ -711,7 +709,7 @@ cdef GDNativeExtensionClassCallVirtual call_virtual__debug_get_stack_level_count
 
 cdef void* call_virtual_func__debug_get_stack_level_line(GDExtensionClassInstancePtr p_instance, GDNativeConstTypePtr *p_args, GDNativeTypePtr r_ret) with gil:
     cdef PyLanguage pylanguage = <PyLanguage> p_instance
-    print_warning("call_virtual _debug_get_stack_level_line")
+    ""
     cdef int args0 = <int>dereference(p_args + 0)
 
 
@@ -724,7 +722,7 @@ cdef GDNativeExtensionClassCallVirtual call_virtual__debug_get_stack_level_line_
 
 cdef void* call_virtual_func__debug_get_stack_level_function(GDExtensionClassInstancePtr p_instance, GDNativeConstTypePtr *p_args, GDNativeTypePtr r_ret) with gil:
     cdef PyLanguage pylanguage = <PyLanguage> p_instance
-    print_warning("call_virtual _debug_get_stack_level_function")
+    ""
     cdef int args0 = <int>dereference(p_args + 0)
 
 
@@ -737,7 +735,7 @@ cdef GDNativeExtensionClassCallVirtual call_virtual__debug_get_stack_level_funct
 
 cdef void* call_virtual_func__debug_get_stack_level_locals(GDExtensionClassInstancePtr p_instance, GDNativeConstTypePtr *p_args, GDNativeTypePtr r_ret) with gil:
     cdef PyLanguage pylanguage = <PyLanguage> p_instance
-    print_warning("call_virtual _debug_get_stack_level_locals")
+    ""
     cdef int args0 = <int>dereference(p_args + 0)
     cdef int args1 = <int>dereference(p_args + 1)
     cdef int args2 = <int>dereference(p_args + 2)
@@ -752,7 +750,7 @@ cdef GDNativeExtensionClassCallVirtual call_virtual__debug_get_stack_level_local
 
 cdef void* call_virtual_func__debug_get_stack_level_members(GDExtensionClassInstancePtr p_instance, GDNativeConstTypePtr *p_args, GDNativeTypePtr r_ret) with gil:
     cdef PyLanguage pylanguage = <PyLanguage> p_instance
-    print_warning("call_virtual _debug_get_stack_level_members")
+    ""
     cdef int args0 = <int>dereference(p_args + 0)
     cdef int args1 = <int>dereference(p_args + 1)
     cdef int args2 = <int>dereference(p_args + 2)
@@ -767,7 +765,7 @@ cdef GDNativeExtensionClassCallVirtual call_virtual__debug_get_stack_level_membe
 
 cdef void* call_virtual_func__debug_get_stack_level_instance(GDExtensionClassInstancePtr p_instance, GDNativeConstTypePtr *p_args, GDNativeTypePtr r_ret) with gil:
     cdef PyLanguage pylanguage = <PyLanguage> p_instance
-    print_warning("call_virtual _debug_get_stack_level_instance")
+    ""
     cdef int args0 = <int>dereference(p_args + 0)
 
     cdef object obj = <object>pylanguage._debug_get_stack_level_instance(args0)
@@ -780,7 +778,7 @@ cdef GDNativeExtensionClassCallVirtual call_virtual__debug_get_stack_level_insta
 
 cdef void* call_virtual_func__debug_get_globals(GDExtensionClassInstancePtr p_instance, GDNativeConstTypePtr *p_args, GDNativeTypePtr r_ret) with gil:
     cdef PyLanguage pylanguage = <PyLanguage> p_instance
-    print_warning("call_virtual _debug_get_globals")
+    ""
     cdef int args0 = <int>dereference(p_args + 0)
     cdef int args1 = <int>dereference(p_args + 1)
 
@@ -794,7 +792,7 @@ cdef GDNativeExtensionClassCallVirtual call_virtual__debug_get_globals_def = <GD
 
 cdef void* call_virtual_func__debug_parse_stack_level_expression(GDExtensionClassInstancePtr p_instance, GDNativeConstTypePtr *p_args, GDNativeTypePtr r_ret) with gil:
     cdef PyLanguage pylanguage = <PyLanguage> p_instance
-    print_warning("call_virtual _debug_parse_stack_level_expression")
+    ""
     cdef int args0 = <int>dereference(p_args + 0)
     cdef String args1 = String.new_static(dereference(p_args + 1))
     cdef int args2 = <int>dereference(p_args + 2)
@@ -810,7 +808,7 @@ cdef GDNativeExtensionClassCallVirtual call_virtual__debug_parse_stack_level_exp
 
 cdef void* call_virtual_func__debug_get_current_stack_info(GDExtensionClassInstancePtr p_instance, GDNativeConstTypePtr *p_args, GDNativeTypePtr r_ret) with gil:
     cdef PyLanguage pylanguage = <PyLanguage> p_instance
-    print_warning("call_virtual _debug_get_current_stack_info")
+    ""
 
 
     cdef Array ret_val = pylanguage._debug_get_current_stack_info()
@@ -822,7 +820,7 @@ cdef GDNativeExtensionClassCallVirtual call_virtual__debug_get_current_stack_inf
 
 cdef void* call_virtual_func__reload_all_scripts(GDExtensionClassInstancePtr p_instance, GDNativeConstTypePtr *p_args, GDNativeTypePtr r_ret) with gil:
     cdef PyLanguage pylanguage = <PyLanguage> p_instance
-    print_warning("call_virtual _reload_all_scripts")
+    ""
 
 
     pylanguage._reload_all_scripts()
@@ -833,7 +831,7 @@ cdef GDNativeExtensionClassCallVirtual call_virtual__reload_all_scripts_def = <G
 
 cdef void* call_virtual_func__reload_tool_script(GDExtensionClassInstancePtr p_instance, GDNativeConstTypePtr *p_args, GDNativeTypePtr r_ret) with gil:
     cdef PyLanguage pylanguage = <PyLanguage> p_instance
-    print_warning("call_virtual _reload_tool_script")
+    ""
     cdef Script args0 = <Script>dereference(p_args + 0)
     cdef bool args1 = <bool>dereference(p_args + 1)
 
@@ -845,20 +843,27 @@ cdef GDNativeExtensionClassCallVirtual call_virtual__reload_tool_script_def = <G
 
 
 cdef void* call_virtual_func__get_recognized_extensions(GDExtensionClassInstancePtr p_instance, GDNativeConstTypePtr *p_args, GDNativeTypePtr r_ret) with gil:
+    print_warning("get_recoginzed_extension")
     cdef PyLanguage pylanguage = <PyLanguage> p_instance
-    print_warning("call_virtual _get_recognized_extensions")
+    cdef PackedStringArray ret_val
+    cdef String py = c_string_to_string("py")
+    Py_INCREF(py)
+    try:
+        ""
 
 
-    cdef PackedStringArray ret_val = pylanguage._get_recognized_extensions()
-    cdef GDNativeTypePtr ret_ptr = ret_val.godot_owner
-    r_ret = ret_ptr
+        ret_val = PackedStringArray.new_static(r_ret)
+        ret_val.append(py)
+    except Exception as e:
+        print_warning("Exception:" + str(e))
+    print_warning("ending - get recognized extension")
 cdef StringName func_name__get_recognized_extensions = c_string_to_string_name("_get_recognized_extensions")
 cdef GDNativeExtensionClassCallVirtual call_virtual__get_recognized_extensions_def = <GDNativeExtensionClassCallVirtual>call_virtual_func__get_recognized_extensions
 
 
 cdef void* call_virtual_func__get_public_functions(GDExtensionClassInstancePtr p_instance, GDNativeConstTypePtr *p_args, GDNativeTypePtr r_ret) with gil:
     cdef PyLanguage pylanguage = <PyLanguage> p_instance
-    print_warning("call_virtual _get_public_functions")
+    ""
 
 
     cdef Array ret_val = pylanguage._get_public_functions()
@@ -870,7 +875,7 @@ cdef GDNativeExtensionClassCallVirtual call_virtual__get_public_functions_def = 
 
 cdef void* call_virtual_func__get_public_constants(GDExtensionClassInstancePtr p_instance, GDNativeConstTypePtr *p_args, GDNativeTypePtr r_ret) with gil:
     cdef PyLanguage pylanguage = <PyLanguage> p_instance
-    print_warning("call_virtual _get_public_constants")
+    ""
 
 
     cdef Dictionary ret_val = pylanguage._get_public_constants()
@@ -882,7 +887,7 @@ cdef GDNativeExtensionClassCallVirtual call_virtual__get_public_constants_def = 
 
 cdef void* call_virtual_func__get_public_annotations(GDExtensionClassInstancePtr p_instance, GDNativeConstTypePtr *p_args, GDNativeTypePtr r_ret) with gil:
     cdef PyLanguage pylanguage = <PyLanguage> p_instance
-    print_warning("call_virtual _get_public_annotations")
+    ""
 
 
     cdef Array ret_val = pylanguage._get_public_annotations()
@@ -894,7 +899,7 @@ cdef GDNativeExtensionClassCallVirtual call_virtual__get_public_annotations_def 
 
 cdef void* call_virtual_func__profiling_start(GDExtensionClassInstancePtr p_instance, GDNativeConstTypePtr *p_args, GDNativeTypePtr r_ret) with gil:
     cdef PyLanguage pylanguage = <PyLanguage> p_instance
-    print_warning("call_virtual _profiling_start")
+    ""
 
 
     pylanguage._profiling_start()
@@ -905,7 +910,7 @@ cdef GDNativeExtensionClassCallVirtual call_virtual__profiling_start_def = <GDNa
 
 cdef void* call_virtual_func__profiling_stop(GDExtensionClassInstancePtr p_instance, GDNativeConstTypePtr *p_args, GDNativeTypePtr r_ret) with gil:
     cdef PyLanguage pylanguage = <PyLanguage> p_instance
-    print_warning("call_virtual _profiling_stop")
+    ""
 
 
     pylanguage._profiling_stop()
@@ -916,7 +921,7 @@ cdef GDNativeExtensionClassCallVirtual call_virtual__profiling_stop_def = <GDNat
 
 cdef void* call_virtual_func__alloc_instance_binding_data(GDExtensionClassInstancePtr p_instance, GDNativeConstTypePtr *p_args, GDNativeTypePtr r_ret) with gil:
     cdef PyLanguage pylanguage = <PyLanguage> p_instance
-    print_warning("call_virtual _alloc_instance_binding_data")
+    ""
     cdef Object args0 = <Object>dereference(p_args + 0)
 
     cdef object obj = <object>pylanguage._alloc_instance_binding_data(args0)
@@ -929,7 +934,7 @@ cdef GDNativeExtensionClassCallVirtual call_virtual__alloc_instance_binding_data
 
 cdef void* call_virtual_func__free_instance_binding_data(GDExtensionClassInstancePtr p_instance, GDNativeConstTypePtr *p_args, GDNativeTypePtr r_ret) with gil:
     cdef PyLanguage pylanguage = <PyLanguage> p_instance
-    print_warning("call_virtual _free_instance_binding_data")
+    ""
     cdef object args0 = <object>dereference(p_args + 0)
 
 
@@ -941,7 +946,7 @@ cdef GDNativeExtensionClassCallVirtual call_virtual__free_instance_binding_data_
 
 cdef void* call_virtual_func__refcount_incremented_instance_binding(GDExtensionClassInstancePtr p_instance, GDNativeConstTypePtr *p_args, GDNativeTypePtr r_ret) with gil:
     cdef PyLanguage pylanguage = <PyLanguage> p_instance
-    print_warning("call_virtual _refcount_incremented_instance_binding")
+    ""
     cdef Object args0 = <Object>dereference(p_args + 0)
 
 
@@ -953,7 +958,7 @@ cdef GDNativeExtensionClassCallVirtual call_virtual__refcount_incremented_instan
 
 cdef void* call_virtual_func__refcount_decremented_instance_binding(GDExtensionClassInstancePtr p_instance, GDNativeConstTypePtr *p_args, GDNativeTypePtr r_ret) with gil:
     cdef PyLanguage pylanguage = <PyLanguage> p_instance
-    print_warning("call_virtual _refcount_decremented_instance_binding")
+    ""
     cdef Object args0 = <Object>dereference(p_args + 0)
 
 
@@ -967,7 +972,7 @@ cdef GDNativeExtensionClassCallVirtual call_virtual__refcount_decremented_instan
 
 cdef void* call_virtual_func__frame(GDExtensionClassInstancePtr p_instance, GDNativeConstTypePtr *p_args, GDNativeTypePtr r_ret) with gil:
     cdef PyLanguage pylanguage = <PyLanguage> p_instance
-    print_warning("call_virtual _frame")
+    ""
 
 
     pylanguage._frame()
@@ -978,7 +983,7 @@ cdef GDNativeExtensionClassCallVirtual call_virtual__frame_def = <GDNativeExtens
 
 cdef void* call_virtual_func__handles_global_class_type(GDExtensionClassInstancePtr p_instance, GDNativeConstTypePtr *p_args, GDNativeTypePtr r_ret) with gil:
     cdef PyLanguage pylanguage = <PyLanguage> p_instance
-    print_warning("call_virtual _handles_global_class_type")
+    ""
     cdef String args0 = String.new_static(dereference(p_args + 0))
 
 
@@ -992,7 +997,7 @@ cdef GDNativeExtensionClassCallVirtual call_virtual__handles_global_class_type_d
 
 cdef void* call_virtual_func__get_global_class_name(GDExtensionClassInstancePtr p_instance, GDNativeConstTypePtr *p_args, GDNativeTypePtr r_ret) with gil:
     cdef PyLanguage pylanguage = <PyLanguage> p_instance
-    print_warning("call_virtual _get_global_class_name")
+    ""
     cdef String args0 = String.new_static(dereference(p_args + 0))
 
 
@@ -1002,12 +1007,235 @@ cdef void* call_virtual_func__get_global_class_name(GDExtensionClassInstancePtr 
 cdef StringName func_name__get_global_class_name = c_string_to_string_name("_get_global_class_name")
 cdef GDNativeExtensionClassCallVirtual call_virtual__get_global_class_name_def = <GDNativeExtensionClassCallVirtual>call_virtual_func__get_global_class_name
 
-cdef GDNativeExtensionClassCallVirtual call_virtual_func_def = <GDNativeExtensionClassCallVirtual>call_virtual_func
 cdef GDNativeExtensionClassCallVirtual get_virtual_func(void *p_userdata, GDNativeConstStringNamePtr p_name) with gil:
     gdnative_interface = get_interface()
     cdef StringName name = StringName()
     name.godot_owner = p_name
 
-    if(string_names_equal(func_name__get_name, name)):
-        print_warning("----------------get_name")
+    if (string_names_equal(func_name__get_name, name)):
+        ""
         return call_virtual__get_name_def
+
+    elif (string_names_equal(func_name__init, name)):
+        ""
+        return call_virtual__init_def
+
+    elif (string_names_equal(func_name__get_type, name)):
+        ""
+        return call_virtual__get_type_def
+
+    elif (string_names_equal(func_name__get_extension, name)):
+        ""
+        return call_virtual__get_extension_def
+
+    elif (string_names_equal(func_name__execute_file, name)):
+        ""
+        return call_virtual__execute_file_def
+
+    elif (string_names_equal(func_name__finish, name)):
+        ""
+        return call_virtual__finish_def
+
+    elif (string_names_equal(func_name__get_reserved_words, name)):
+        ""
+        return call_virtual__get_reserved_words_def
+
+    elif (string_names_equal(func_name__is_control_flow_keyword, name)):
+        ""
+        return call_virtual__is_control_flow_keyword_def
+
+    elif (string_names_equal(func_name__get_comment_delimiters, name)):
+        ""
+        return call_virtual__get_comment_delimiters_def
+
+    elif (string_names_equal(func_name__get_string_delimiters, name)):
+        ""
+        return call_virtual__get_string_delimiters_def
+
+    elif (string_names_equal(func_name__make_template, name)):
+        ""
+        return call_virtual__make_template_def
+
+    elif (string_names_equal(func_name__get_built_in_templates, name)):
+        ""
+        return call_virtual__get_built_in_templates_def
+
+    elif (string_names_equal(func_name__is_using_templates, name)):
+        ""
+        return call_virtual__is_using_templates_def
+
+    elif (string_names_equal(func_name__validate, name)):
+        ""
+        return call_virtual__validate_def
+
+    elif (string_names_equal(func_name__validate_path, name)):
+        ""
+        return call_virtual__validate_path_def
+
+    elif (string_names_equal(func_name__create_script, name)):
+        ""
+        return call_virtual__create_script_def
+
+    elif (string_names_equal(func_name__has_named_classes, name)):
+        ""
+        return call_virtual__has_named_classes_def
+
+    elif (string_names_equal(func_name__supports_builtin_mode, name)):
+        ""
+        return call_virtual__supports_builtin_mode_def
+
+    elif (string_names_equal(func_name__supports_documentation, name)):
+        ""
+        return call_virtual__supports_documentation_def
+
+    elif (string_names_equal(func_name__can_inherit_from_file, name)):
+        ""
+        return call_virtual__can_inherit_from_file_def
+
+    elif (string_names_equal(func_name__find_function, name)):
+        ""
+        return call_virtual__find_function_def
+
+    elif (string_names_equal(func_name__make_function, name)):
+        ""
+        return call_virtual__make_function_def
+
+    elif (string_names_equal(func_name__open_in_external_editor, name)):
+        ""
+        return call_virtual__open_in_external_editor_def
+
+    elif (string_names_equal(func_name__overrides_external_editor, name)):
+        ""
+        return call_virtual__overrides_external_editor_def
+
+    elif (string_names_equal(func_name__complete_code, name)):
+        ""
+        return call_virtual__complete_code_def
+
+    elif (string_names_equal(func_name__lookup_code, name)):
+        ""
+        return call_virtual__lookup_code_def
+
+    elif (string_names_equal(func_name__auto_indent_code, name)):
+        ""
+        return call_virtual__auto_indent_code_def
+
+    elif (string_names_equal(func_name__add_global_constant, name)):
+        ""
+        return call_virtual__add_global_constant_def
+
+    elif (string_names_equal(func_name__add_named_global_constant, name)):
+        ""
+        return call_virtual__add_named_global_constant_def
+
+    elif (string_names_equal(func_name__remove_named_global_constant, name)):
+        ""
+        return call_virtual__remove_named_global_constant_def
+
+    elif (string_names_equal(func_name__thread_enter, name)):
+        ""
+        return call_virtual__thread_enter_def
+
+    elif (string_names_equal(func_name__thread_exit, name)):
+        ""
+        return call_virtual__thread_exit_def
+
+    elif (string_names_equal(func_name__debug_get_error, name)):
+        ""
+        return call_virtual__debug_get_error_def
+
+    elif (string_names_equal(func_name__debug_get_stack_level_count, name)):
+        ""
+        return call_virtual__debug_get_stack_level_count_def
+
+    elif (string_names_equal(func_name__debug_get_stack_level_line, name)):
+        ""
+        return call_virtual__debug_get_stack_level_line_def
+
+    elif (string_names_equal(func_name__debug_get_stack_level_function, name)):
+        ""
+        return call_virtual__debug_get_stack_level_function_def
+
+    elif (string_names_equal(func_name__debug_get_stack_level_locals, name)):
+        ""
+        return call_virtual__debug_get_stack_level_locals_def
+
+    elif (string_names_equal(func_name__debug_get_stack_level_members, name)):
+        ""
+        return call_virtual__debug_get_stack_level_members_def
+
+    elif (string_names_equal(func_name__debug_get_stack_level_instance, name)):
+        ""
+        return call_virtual__debug_get_stack_level_instance_def
+
+    elif (string_names_equal(func_name__debug_get_globals, name)):
+        ""
+        return call_virtual__debug_get_globals_def
+
+    elif (string_names_equal(func_name__debug_parse_stack_level_expression, name)):
+        ""
+        return call_virtual__debug_parse_stack_level_expression_def
+
+    elif (string_names_equal(func_name__debug_get_current_stack_info, name)):
+        ""
+        return call_virtual__debug_get_current_stack_info_def
+
+    elif (string_names_equal(func_name__reload_all_scripts, name)):
+        ""
+        return call_virtual__reload_all_scripts_def
+
+    elif (string_names_equal(func_name__reload_tool_script, name)):
+        ""
+        return call_virtual__reload_tool_script_def
+
+    elif (string_names_equal(func_name__get_recognized_extensions, name)):
+        ""
+        return call_virtual__get_recognized_extensions_def
+
+    elif (string_names_equal(func_name__get_public_functions, name)):
+        ""
+        return call_virtual__get_public_functions_def
+
+    elif (string_names_equal(func_name__get_public_constants, name)):
+        ""
+        return call_virtual__get_public_constants_def
+
+    elif (string_names_equal(func_name__get_public_annotations, name)):
+        ""
+        return call_virtual__get_public_annotations_def
+
+    elif (string_names_equal(func_name__profiling_start, name)):
+        ""
+        return call_virtual__profiling_start_def
+
+    elif (string_names_equal(func_name__profiling_stop, name)):
+        ""
+        return call_virtual__profiling_stop_def
+
+    elif (string_names_equal(func_name__alloc_instance_binding_data, name)):
+        ""
+        return call_virtual__alloc_instance_binding_data_def
+
+    elif (string_names_equal(func_name__free_instance_binding_data, name)):
+        ""
+        return call_virtual__free_instance_binding_data_def
+
+    elif (string_names_equal(func_name__refcount_incremented_instance_binding, name)):
+        ""
+        return call_virtual__refcount_incremented_instance_binding_def
+
+    elif (string_names_equal(func_name__refcount_decremented_instance_binding, name)):
+        ""
+        return call_virtual__refcount_decremented_instance_binding_def
+
+    elif (string_names_equal(func_name__frame, name)):
+        ""
+        return call_virtual__frame_def
+
+    elif (string_names_equal(func_name__handles_global_class_type, name)):
+        ""
+        return call_virtual__handles_global_class_type_def
+
+    elif (string_names_equal(func_name__get_global_class_name, name)):
+        ""
+        return call_virtual__get_global_class_name_def
