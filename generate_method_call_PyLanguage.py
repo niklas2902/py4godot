@@ -83,7 +83,8 @@ def generate_method_call_args(method):
     if "arguments" in method.keys():
         for i in range(len(method["arguments"])):
             str += f"args{i},"
-    return str[:-1]
+    str += "r_ret"
+    return str
 
 def generate_dereference_type(index,type_):
     if (type_ in builtin_classes):
@@ -100,17 +101,6 @@ def get_arg_type(type_):
 
 def generate_set_ret_val(method):
     str = ""
-    if "return_value" in method.keys():
-        if untypearray(method["return_value"]["type"]) in builtin_classes + normal_classes:
-            str =  """    cdef GDNativeTypePtr ret_ptr = ret_val.godot_owner\n"""
-        elif "bool" in method["return_value"]["type"]:
-            str  = """    cdef uint8_t bool_res = <uint8_t> int(ret_val)\n"""
-            str += """    cdef GDNativeTypePtr ret_ptr = &bool_res\n"""
-        
-        else :
-            str =  """    cdef GDNativeTypePtr ret_ptr = &ret_val\n"""
-
-        str += "    r_ret = ret_ptr"
 
     return str
 def are_forbidden_types_in_method(method):
@@ -134,7 +124,6 @@ def generate_binding_for_method(method):
     str = f"""
 cdef void* call_virtual_func_{method['name']}(GDExtensionClassInstancePtr p_instance, GDNativeConstTypePtr *p_args, GDNativeTypePtr r_ret) with gil:
     cdef PyLanguage pylanguage = <PyLanguage> p_instance
-    print_warning("call_virtual {method['name']}")
     {generate_args_array(method)}
     {pregenerate_method(method)}
     """
@@ -142,7 +131,7 @@ cdef void* call_virtual_func_{method['name']}(GDExtensionClassInstancePtr p_inst
         if "void*" in method["return_value"]["type"]:
             str += f"""cdef {generate_ret_val(method)} ret_val = <void*>obj\n"""
         else:
-            str += f"""cdef {generate_ret_val(method)} ret_val = pylanguage.{method["name"]}({generate_method_call_args(method)})\n"""
+            str += f"""pylanguage.{method["name"]}({generate_method_call_args(method)})\n"""
     else:
         str += f"""pylanguage.{method["name"]}({generate_method_call_args(method)})\n"""
     str += generate_set_ret_val(method)
@@ -177,5 +166,4 @@ if __name__ == "__main__":
                 else:
                     print(f"""
     elif (string_names_equal(func_name_{method['name']}, name)):
-        print_warning("----------------{method['name']}")
         return call_virtual_{method['name']}_def""")
