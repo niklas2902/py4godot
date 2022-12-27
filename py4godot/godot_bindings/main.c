@@ -104,8 +104,9 @@ void initialize_py4godot(void *userdata, GDNativeInitializationLevel p_level){
         PyErr_Print();
         return ;
     }
+    gdnative_interface->print_warning("test- before- init_py_language", "test", "test",1);
     init_py_language();
-
+    gdnative_interface->print_warning("test-after- init_py_language", "test", "test",1);
 
     PyEval_InitThreads();
     if (PyErr_Occurred())
