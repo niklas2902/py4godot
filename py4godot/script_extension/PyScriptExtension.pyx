@@ -18,11 +18,10 @@ cdef class PyScriptExtension(ScriptExtension):
     cdef StringName class_name = c_string_to_string_name("PyScriptExtension")
 
     class_.set_godot_owner(gdnative_interface.classdb_construct_object(class_name.godot_owner))
-    print_warning("godot_owner == NULL:"+str(class_.get_godot_owner() == NULL))
+    Py_INCREF(class_)
     gdnative_interface.object_set_instance(class_.get_godot_owner(),class_name.godot_owner , <void*>class_)
 
     ""
-    Py_INCREF(class_)
     class_._init_values()
     return class_
 
@@ -56,8 +55,8 @@ cdef GDNativeObjectPtr create_instance(void* userdata) with gil:
     #return NULL
 
 cdef void free_instance(void *p_userdata, GDExtensionClassInstancePtr p_instance):
-    ""
-    print_warning("free_instance")
+    pass
+    #print_warning("free_instance")
 
 cdef void register_class_py_script_extension() with gil:
     print_warning("register PyScript")

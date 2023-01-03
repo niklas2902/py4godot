@@ -71,24 +71,9 @@ cdef class PyLanguage(ScriptLanguageExtension):
     pass
 
   cdef _make_template(self, String template, String class_name, String base_class_name,GDNativeTypePtr res):
-    #TODO
-    print_warning("###########make_templace_called")
-    print_warning("res:"+str(res == NULL))
-    #self._create_script(res)
     cdef py_extension.PyScriptExtension extension_py = py_extension.PyScriptExtension.constructor()
     Py_INCREF(extension_py)
-    #set_gdnative_ptr(&res, extension_py.godot_owner)
-    #cdef Object o = Object.new_static(dereference(<void**>res))
-    cdef int max = 0
-    #cdef char text_of_class[50]
-    #cdef String string_class = o.get_class()
-    #gdnative_interface.string_to_utf8_chars(string_class.godot_owner, &text_of_class[0], max);
-    #print_wraning("class_found:"+text_of_class)
-    #print_warning("ret_value:"+str(o.get_class().contains(c_string_to_string("PyScriptExtension"))))
     set_gdnative_ptr(<GDNativeTypePtr*> res, extension_py.godot_owner)
-    print_warning("##########finish make_template")
-    print_warning(res == NULL)
-    print_warning(dereference(<GDNativeTypePtr*>res) == NULL)
 
   cdef _get_built_in_templates(self, StringName object, GDNativeTypePtr res):
     pass
