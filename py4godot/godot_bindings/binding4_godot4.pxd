@@ -26,6 +26,7 @@ ctypedef const void *GDNativeConstStringPtr;
 
 cdef extern from "c_utils.h":
     void set_gdnative_ptr(GDNativeTypePtr* a, GDNativeTypePtr b)
+    void set_gdnative_reference(GDNativeTypePtr& a, GDNativeTypePtr& b)
 
 cdef extern from "binding4.h":
     ctypedef void (*GDNativeVariantFromTypeConstructorFunc)(GDNativeVariantPtr, GDNativeTypePtr);
@@ -299,6 +300,7 @@ cdef extern from "binding4.h":
         #void (*string_new_with_utf32_chars_and_len)(GDNativeStringPtr r_dest, const char32_t *p_contents, const GDNativeInt p_size);
         #void (*string_new_with_wide_chars_and_len)(GDNativeStringPtr r_dest, const wchar_t *p_contents, const GDNativeInt p_size);
 
+        GDNativeInt (*string_to_utf8_chars)(GDNativeConstStringPtr p_self, char *r_text, GDNativeInt p_max_write_length);
     # SCRIPT INSTANCE EXTENSION
 
     ctypedef void *GDNativeExtensionScriptInstanceDataPtr; # Pointer to custom ScriptInstance native implementation

@@ -172,12 +172,12 @@ def native_structs_in_method(mMethod):
     return False
 
 def is_primitive(type_):
-    return type_ in obj["classes"]
+    return type_ in normal_classes.copy().union(builtin_classes)
 
 
 def generate_return_statement():
     # TODO handle primitive types
-    return f"return ret"
+    return f"{INDENT*2}return _ret"
 
 def generate_singleton_constructor(classname):
     res = ""
@@ -389,7 +389,8 @@ def generate_method_body_standard(class_, method):
         result += f"{INDENT * 2}gdnative_interface.object_method_bind_ptrcall(method_bind," \
                   f" self.godot_owner, _args, {address_ret(method)})"
 
-    if ("return_value" in method.keys() and is_primitive(method['return_value']['type'])):
+    if ("return_value" in method.keys()):
+        result = generate_newline(result)
         result += generate_return_statement()
     return result
 

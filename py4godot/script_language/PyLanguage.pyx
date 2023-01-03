@@ -3,7 +3,8 @@ from py4godot.utils.print_tools import *
 from py4godot.utils.utils cimport *
 from py4godot.enums.enums4 cimport *
 from py4godot.classes.ScriptLanguageExtension.ScriptLanguageExtension cimport *
-#cimport py4godot.script_extension.PyScriptExtension as py_extension
+from py4godot.classes.Object.Object cimport *
+cimport py4godot.script_extension.PyScriptExtension as py_extension
 from py4godot.classes.Object.Object cimport *
 from py4godot.classes.generated4_core cimport *
 from cpython cimport Py_INCREF, Py_DECREF, PyObject
@@ -71,8 +72,23 @@ cdef class PyLanguage(ScriptLanguageExtension):
 
   cdef _make_template(self, String template, String class_name, String base_class_name,GDNativeTypePtr res):
     #TODO
-    cdef char* template_string = "template"
-    gdnative_interface.string_new_with_utf8_chars(res, template_string)
+    print_warning("###########make_templace_called")
+    print_warning("res:"+str(res == NULL))
+    #self._create_script(res)
+    cdef py_extension.PyScriptExtension extension_py = py_extension.PyScriptExtension.constructor()
+    Py_INCREF(extension_py)
+    #set_gdnative_ptr(&res, extension_py.godot_owner)
+    #cdef Object o = Object.new_static(dereference(<void**>res))
+    cdef int max = 0
+    #cdef char text_of_class[50]
+    #cdef String string_class = o.get_class()
+    #gdnative_interface.string_to_utf8_chars(string_class.godot_owner, &text_of_class[0], max);
+    #print_wraning("class_found:"+text_of_class)
+    #print_warning("ret_value:"+str(o.get_class().contains(c_string_to_string("PyScriptExtension"))))
+    set_gdnative_ptr(<GDNativeTypePtr*> res, extension_py.godot_owner)
+    print_warning("##########finish make_template")
+    print_warning(res == NULL)
+    print_warning(dereference(<GDNativeTypePtr*>res) == NULL)
 
   cdef _get_built_in_templates(self, StringName object, GDNativeTypePtr res):
     pass
@@ -87,15 +103,16 @@ cdef class PyLanguage(ScriptLanguageExtension):
     res = <GDNativeTypePtr>1
 
   cdef _create_script(self, GDNativeTypePtr res):
-    """print_warning("------------create_script-start---------")
-    cdef py_extension.PyScriptExtension extension = py_extensionPyScriptExtension()
-    extension.godot_owner = res
+    print_warning("------------create_script-start---------")
+    cdef py_extension.PyScriptExtension extension = py_extension.PyScriptExtension.constructor()
     cdef StringName class_name = c_string_to_string_name("PyScriptExtension")
-    PY_INCREF(extension)
-    gdnative_interface.object_set_instance(res,class_name.godot_owner , <void*>extension)
-
+    try:
+        res = extension.godot_owner
+        Py_INCREF(extension)
+    except Exception as e:
+        print_warning(str(e))
     print_warning("------------create_script-end---------")
-    """
+
   cdef _has_named_classes(self, GDNativeTypePtr res):
     res = <GDNativeTypePtr>0
 
