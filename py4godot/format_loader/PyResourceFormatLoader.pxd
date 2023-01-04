@@ -13,3 +13,13 @@ cdef class PyResourceFormatLoader(ResourceFormatLoader):
   cdef char* script_name
 
   cdef void _init_values(self) # self-defined
+  cdef _get_recognized_extensions(self, GDNativeTypePtr res)
+  cdef _recognize_path(self, String path, StringName type, GDNativeTypePtr res)
+  cdef _handles_type(self, StringName type, GDNativeTypePtr res)
+  cdef _get_resource_type(self, String path, GDNativeTypePtr res)
+  cdef _get_resource_uid(self, String path, GDNativeTypePtr res)
+  cdef _get_dependencies(self, String path, bool add_types, GDNativeTypePtr res)
+  cdef _rename_dependencies(self, String path, Dictionary renames, GDNativeTypePtr res)
+  cdef _exists(self, String path, GDNativeTypePtr res)
+  cdef _get_classes_used(self, String path, GDNativeTypePtr res)
+  cdef _load(self, String path, String original_path, bool use_sub_threads, int cache_mode, GDNativeTypePtr res)

@@ -13,3 +13,7 @@ cdef class PyResourceFormatSaver(ResourceFormatSaver):
   cdef char* script_name
 
   cdef void _init_values(self) # self-defined
+  cdef void _save(self, Resource resource, String path, int flags, GDNativeTypePtr res)
+  cdef void _recognize(self, Resource resource, GDNativeTypePtr res)
+  cdef void _get_recognized_extensions(self, Resource resource, GDNativeTypePtr res)
+  cdef void _recognize_path(self, Resource resource, String path, GDNativeTypePtr res)

@@ -28,9 +28,45 @@ cdef class PyResourceFormatLoader(ResourceFormatLoader):
   cdef void _init_values(self):
     pass
 
+  cdef _get_recognized_extensions(self, GDNativeTypePtr res):
+    pass
 
-cdef String script_name = c_string_to_string("Python")
-cdef GDNativeTypePtr ptr =  script_name.godot_owner
+
+  cdef _recognize_path(self, String path, StringName type, GDNativeTypePtr res):
+    pass
+
+
+  cdef _handles_type(self, StringName type, GDNativeTypePtr res):
+    pass
+
+
+  cdef _get_resource_type(self, String path, GDNativeTypePtr res):
+    pass
+
+
+  cdef _get_resource_uid(self, String path, GDNativeTypePtr res):
+    pass
+
+
+  cdef _get_dependencies(self, String path, bool add_types, GDNativeTypePtr res):
+    pass
+
+
+  cdef _rename_dependencies(self, String path, Dictionary renames, GDNativeTypePtr res):
+    pass
+
+
+  cdef _exists(self, String path, GDNativeTypePtr res):
+    pass
+
+
+  cdef _get_classes_used(self, String path, GDNativeTypePtr res):
+    pass
+
+
+  cdef _load(self, String path, String original_path, bool use_sub_threads, int cache_mode, GDNativeTypePtr res):
+    pass
+
 
 cdef GDNativePtrOperatorEvaluator operator_equal_string_name = gdnative_interface.variant_get_ptr_operator_evaluator(
 GDNativeVariantOperator.GDNATIVE_VARIANT_OP_EQUAL,
@@ -95,8 +131,152 @@ cdef void register_class_py_format_loader() with gil:
     _interface.classdb_register_extension_class(get_library(), class_name.godot_owner, parent_class_name.godot_owner, &creation_info)
     print_warning("-----------registered PyResourceFormatLoader----------------")
 
+cdef void* call_virtual_func__get_recognized_extensions(GDExtensionClassInstancePtr p_instance, GDNativeConstTypePtr *p_args, GDNativeTypePtr r_ret) with gil:
+    cdef PyResourceFormatLoader pylanguage = <PyResourceFormatLoader> p_instance
+
+
+    pylanguage._get_recognized_extensions(r_ret)
+
+cdef StringName func_name__get_recognized_extensions = c_string_to_string_name("_get_recognized_extensions")
+cdef GDNativeExtensionClassCallVirtual call_virtual__get_recognized_extensions_def = <GDNativeExtensionClassCallVirtual>call_virtual_func__get_recognized_extensions
+
+
+cdef void* call_virtual_func__recognize_path(GDExtensionClassInstancePtr p_instance, GDNativeConstTypePtr *p_args, GDNativeTypePtr r_ret) with gil:
+    cdef PyResourceFormatLoader pylanguage = <PyResourceFormatLoader> p_instance
+    cdef String args0 = String.new_static(dereference(p_args + 0))
+    cdef StringName args1 = StringName.new_static(dereference(p_args + 1))
+
+
+    pylanguage._recognize_path(args0,args1,r_ret)
+
+cdef StringName func_name__recognize_path = c_string_to_string_name("_recognize_path")
+cdef GDNativeExtensionClassCallVirtual call_virtual__recognize_path_def = <GDNativeExtensionClassCallVirtual>call_virtual_func__recognize_path
+
+
+cdef void* call_virtual_func__handles_type(GDExtensionClassInstancePtr p_instance, GDNativeConstTypePtr *p_args, GDNativeTypePtr r_ret) with gil:
+    cdef PyResourceFormatLoader pylanguage = <PyResourceFormatLoader> p_instance
+    cdef StringName args0 = StringName.new_static(dereference(p_args + 0))
+
+
+    pylanguage._handles_type(args0,r_ret)
+
+cdef StringName func_name__handles_type = c_string_to_string_name("_handles_type")
+cdef GDNativeExtensionClassCallVirtual call_virtual__handles_type_def = <GDNativeExtensionClassCallVirtual>call_virtual_func__handles_type
+
+
+cdef void* call_virtual_func__get_resource_type(GDExtensionClassInstancePtr p_instance, GDNativeConstTypePtr *p_args, GDNativeTypePtr r_ret) with gil:
+    cdef PyResourceFormatLoader pylanguage = <PyResourceFormatLoader> p_instance
+    cdef String args0 = String.new_static(dereference(p_args + 0))
+
+
+    pylanguage._get_resource_type(args0,r_ret)
+
+cdef StringName func_name__get_resource_type = c_string_to_string_name("_get_resource_type")
+cdef GDNativeExtensionClassCallVirtual call_virtual__get_resource_type_def = <GDNativeExtensionClassCallVirtual>call_virtual_func__get_resource_type
+
+
+cdef void* call_virtual_func__get_resource_uid(GDExtensionClassInstancePtr p_instance, GDNativeConstTypePtr *p_args, GDNativeTypePtr r_ret) with gil:
+    cdef PyResourceFormatLoader pylanguage = <PyResourceFormatLoader> p_instance
+    cdef String args0 = String.new_static(dereference(p_args + 0))
+
+
+    pylanguage._get_resource_uid(args0,r_ret)
+
+cdef StringName func_name__get_resource_uid = c_string_to_string_name("_get_resource_uid")
+cdef GDNativeExtensionClassCallVirtual call_virtual__get_resource_uid_def = <GDNativeExtensionClassCallVirtual>call_virtual_func__get_resource_uid
+
+
+cdef void* call_virtual_func__get_dependencies(GDExtensionClassInstancePtr p_instance, GDNativeConstTypePtr *p_args, GDNativeTypePtr r_ret) with gil:
+    cdef PyResourceFormatLoader pylanguage = <PyResourceFormatLoader> p_instance
+    cdef String args0 = String.new_static(dereference(p_args + 0))
+    cdef bool args1 = <bool>dereference(p_args + 1)
+
+
+    pylanguage._get_dependencies(args0,args1,r_ret)
+
+cdef StringName func_name__get_dependencies = c_string_to_string_name("_get_dependencies")
+cdef GDNativeExtensionClassCallVirtual call_virtual__get_dependencies_def = <GDNativeExtensionClassCallVirtual>call_virtual_func__get_dependencies
+
+
+cdef void* call_virtual_func__rename_dependencies(GDExtensionClassInstancePtr p_instance, GDNativeConstTypePtr *p_args, GDNativeTypePtr r_ret) with gil:
+    cdef PyResourceFormatLoader pylanguage = <PyResourceFormatLoader> p_instance
+    cdef String args0 = String.new_static(dereference(p_args + 0))
+    cdef Dictionary args1 = Dictionary.new_static(dereference(p_args + 1))
+
+
+    pylanguage._rename_dependencies(args0,args1,r_ret)
+
+cdef StringName func_name__rename_dependencies = c_string_to_string_name("_rename_dependencies")
+cdef GDNativeExtensionClassCallVirtual call_virtual__rename_dependencies_def = <GDNativeExtensionClassCallVirtual>call_virtual_func__rename_dependencies
+
+
+cdef void* call_virtual_func__exists(GDExtensionClassInstancePtr p_instance, GDNativeConstTypePtr *p_args, GDNativeTypePtr r_ret) with gil:
+    cdef PyResourceFormatLoader pylanguage = <PyResourceFormatLoader> p_instance
+    cdef String args0 = String.new_static(dereference(p_args + 0))
+
+
+    pylanguage._exists(args0,r_ret)
+
+cdef StringName func_name__exists = c_string_to_string_name("_exists")
+cdef GDNativeExtensionClassCallVirtual call_virtual__exists_def = <GDNativeExtensionClassCallVirtual>call_virtual_func__exists
+
+
+cdef void* call_virtual_func__get_classes_used(GDExtensionClassInstancePtr p_instance, GDNativeConstTypePtr *p_args, GDNativeTypePtr r_ret) with gil:
+    cdef PyResourceFormatLoader pylanguage = <PyResourceFormatLoader> p_instance
+    cdef String args0 = String.new_static(dereference(p_args + 0))
+
+
+    pylanguage._get_classes_used(args0,r_ret)
+
+cdef StringName func_name__get_classes_used = c_string_to_string_name("_get_classes_used")
+cdef GDNativeExtensionClassCallVirtual call_virtual__get_classes_used_def = <GDNativeExtensionClassCallVirtual>call_virtual_func__get_classes_used
+
+
+cdef void* call_virtual_func__load(GDExtensionClassInstancePtr p_instance, GDNativeConstTypePtr *p_args, GDNativeTypePtr r_ret) with gil:
+    cdef PyResourceFormatLoader pylanguage = <PyResourceFormatLoader> p_instance
+    cdef String args0 = String.new_static(dereference(p_args + 0))
+    cdef String args1 = String.new_static(dereference(p_args + 1))
+    cdef bool args2 = <bool>dereference(p_args + 2)
+    cdef int args3 = <int>dereference(p_args + 3)
+
+
+    pylanguage._load(args0,args1,args2,args3,r_ret)
+
+cdef StringName func_name__load = c_string_to_string_name("_load")
+cdef GDNativeExtensionClassCallVirtual call_virtual__load_def = <GDNativeExtensionClassCallVirtual>call_virtual_func__load
+
 cdef GDNativeExtensionClassCallVirtual get_virtual_func(void *p_userdata, GDNativeConstStringNamePtr p_name) with gil:
     print_warning("------------pyscript-get_virtual_func---------")
     gdnative_interface = get_interface()
     cdef StringName name = StringName()
     name.godot_owner = p_name
+
+    if (string_names_equal(func_name__get_recognized_extensions, name)):
+        return call_virtual__get_recognized_extensions_def
+
+    elif (string_names_equal(func_name__recognize_path, name)):
+        return call_virtual__recognize_path_def
+
+    elif (string_names_equal(func_name__handles_type, name)):
+        return call_virtual__handles_type_def
+
+    elif (string_names_equal(func_name__get_resource_type, name)):
+        return call_virtual__get_resource_type_def
+
+    elif (string_names_equal(func_name__get_resource_uid, name)):
+        return call_virtual__get_resource_uid_def
+
+    elif (string_names_equal(func_name__get_dependencies, name)):
+        return call_virtual__get_dependencies_def
+
+    elif (string_names_equal(func_name__rename_dependencies, name)):
+        return call_virtual__rename_dependencies_def
+
+    elif (string_names_equal(func_name__exists, name)):
+        return call_virtual__exists_def
+
+    elif (string_names_equal(func_name__get_classes_used, name)):
+        return call_virtual__get_classes_used_def
+
+    elif (string_names_equal(func_name__load, name)):
+        return call_virtual__load_def

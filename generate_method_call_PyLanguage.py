@@ -1,6 +1,8 @@
 import json
 
 builtin_classes = []
+CLASS_NAME = "ResourceFormatSaver"
+CURRENT_CLASS_NAME = "PyResourceFormatSaver"
 def generate_methods(class_):
     for method in class_["methods"]:
         if are_forbidden_types_in_method(method):
@@ -123,7 +125,7 @@ def pregenerate_method(method):
 def generate_binding_for_method(method):
     str = f"""
 cdef void* call_virtual_func_{method['name']}(GDExtensionClassInstancePtr p_instance, GDNativeConstTypePtr *p_args, GDNativeTypePtr r_ret) with gil:
-    cdef PyLanguage pylanguage = <PyLanguage> p_instance
+    cdef {CURRENT_CLASS_NAME} pylanguage = <{CURRENT_CLASS_NAME}> p_instance
     {generate_args_array(method)}
     {pregenerate_method(method)}
     """
@@ -155,11 +157,11 @@ if __name__ == "__main__":
     builtin_classes.append("Array")
 
     for cls in obj["classes"]:
-        if cls["name"] == "ScriptLanguageExtension":
+        if cls["name"] == CLASS_NAME:
             generate_methods(cls)
 
     for cls in obj["classes"]:
-        if cls["name"] == "ScriptLanguageExtension":
+        if cls["name"] == CLASS_NAME:
             for method in cls["methods"]:
                 if are_forbidden_types_in_method(method):
                     continue

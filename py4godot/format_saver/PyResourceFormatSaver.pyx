@@ -28,6 +28,64 @@ cdef class PyResourceFormatSaver(ResourceFormatSaver):
   cdef void _init_values(self):
     pass
 
+  cdef void _save(self, Resource resource, String path, int flags, GDNativeTypePtr res):
+    print_warning("save")
+
+  cdef void _recognize(self, Resource resource, GDNativeTypePtr res):
+    pass
+
+  cdef void _get_recognized_extensions(self, Resource resource, GDNativeTypePtr res):
+    pass
+
+  cdef void _recognize_path(self, Resource resource, String path, GDNativeTypePtr res):
+    pass
+
+cdef void* call_virtual_func__save(GDExtensionClassInstancePtr p_instance, GDNativeConstTypePtr *p_args, GDNativeTypePtr r_ret) with gil:
+    cdef PyResourceFormatSaver pylanguage = <PyResourceFormatSaver> p_instance
+    cdef Resource args0 = <Resource>dereference(p_args + 0)
+    cdef String args1 = String.new_static(dereference(p_args + 1))
+    cdef int args2 = <int>dereference(p_args + 2)
+
+
+    pylanguage._save(args0,args1,args2,r_ret)
+
+cdef StringName func_name__save = c_string_to_string_name("_save")
+cdef GDNativeExtensionClassCallVirtual call_virtual__save_def = <GDNativeExtensionClassCallVirtual>call_virtual_func__save
+
+
+cdef void* call_virtual_func__recognize(GDExtensionClassInstancePtr p_instance, GDNativeConstTypePtr *p_args, GDNativeTypePtr r_ret) with gil:
+    cdef PyResourceFormatSaver pylanguage = <PyResourceFormatSaver> p_instance
+    cdef Resource args0 = <Resource>dereference(p_args + 0)
+
+
+    pylanguage._recognize(args0,r_ret)
+
+cdef StringName func_name__recognize = c_string_to_string_name("_recognize")
+cdef GDNativeExtensionClassCallVirtual call_virtual__recognize_def = <GDNativeExtensionClassCallVirtual>call_virtual_func__recognize
+
+
+cdef void* call_virtual_func__get_recognized_extensions(GDExtensionClassInstancePtr p_instance, GDNativeConstTypePtr *p_args, GDNativeTypePtr r_ret) with gil:
+    cdef PyResourceFormatSaver pylanguage = <PyResourceFormatSaver> p_instance
+    cdef Resource args0 = <Resource>dereference(p_args + 0)
+
+
+    pylanguage._get_recognized_extensions(args0,r_ret)
+
+cdef StringName func_name__get_recognized_extensions = c_string_to_string_name("_get_recognized_extensions")
+cdef GDNativeExtensionClassCallVirtual call_virtual__get_recognized_extensions_def = <GDNativeExtensionClassCallVirtual>call_virtual_func__get_recognized_extensions
+
+
+cdef void* call_virtual_func__recognize_path(GDExtensionClassInstancePtr p_instance, GDNativeConstTypePtr *p_args, GDNativeTypePtr r_ret) with gil:
+    cdef PyResourceFormatSaver pylanguage = <PyResourceFormatSaver> p_instance
+    cdef Resource args0 = <Resource>dereference(p_args + 0)
+    cdef String args1 = String.new_static(dereference(p_args + 1))
+
+
+    pylanguage._recognize_path(args0,args1,r_ret)
+
+cdef StringName func_name__recognize_path = c_string_to_string_name("_recognize_path")
+cdef GDNativeExtensionClassCallVirtual call_virtual__recognize_path_def = <GDNativeExtensionClassCallVirtual>call_virtual_func__recognize_path
+
 
 cdef String script_name = c_string_to_string("Python")
 cdef GDNativeTypePtr ptr =  script_name.godot_owner
@@ -96,7 +154,19 @@ cdef void register_class_py_format_saver() with gil:
     print_warning("-----------registered PyResourceFormatSaver----------------")
 
 cdef GDNativeExtensionClassCallVirtual get_virtual_func(void *p_userdata, GDNativeConstStringNamePtr p_name) with gil:
-    print_warning("------------pyscript-get_virtual_func---------")
+    print_warning("------------pyformatsaver-get_virtual_func---------")
     gdnative_interface = get_interface()
     cdef StringName name = StringName()
     name.godot_owner = p_name
+
+    if (string_names_equal(func_name__save, name)):
+        return call_virtual__save_def
+
+    elif (string_names_equal(func_name__recognize, name)):
+        return call_virtual__recognize_def
+
+    elif (string_names_equal(func_name__get_recognized_extensions, name)):
+        return call_virtual__get_recognized_extensions_def
+
+    elif (string_names_equal(func_name__recognize_path, name)):
+        return call_virtual__recognize_path_def
