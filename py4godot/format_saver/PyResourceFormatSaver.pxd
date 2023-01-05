@@ -10,7 +10,7 @@ from py4godot.classes.Script.Script cimport *
 cdef void register_class_py_format_saver() with gil
 
 cdef class PyResourceFormatSaver(ResourceFormatSaver):
-  cdef char* script_name
+  cdef list extensions
 
   cdef void _init_values(self) # self-defined
   cdef void _save(self, Resource resource, String path, int flags, GDNativeTypePtr res)

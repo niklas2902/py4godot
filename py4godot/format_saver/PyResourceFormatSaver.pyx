@@ -26,16 +26,18 @@ cdef class PyResourceFormatSaver(ResourceFormatSaver):
     return class_
 
   cdef void _init_values(self):
-    pass
+    self.extensions = ["py", "pyw", "pyi"]
 
   cdef void _save(self, Resource resource, String path, int flags, GDNativeTypePtr res):
     print_warning("save")
 
   cdef void _recognize(self, Resource resource, GDNativeTypePtr res):
-    pass
+    set_gdnative_ptr(<GDNativeTypePtr *>res, <GDNativeTypePtr>(<bint> (resource.godot_owner != NULL)))
 
   cdef void _get_recognized_extensions(self, Resource resource, GDNativeTypePtr res):
-    pass
+    cdef PackedStringArray gdextensions = PackedStringArray.new_static(res)
+    for extension in self.extensions:
+        gdextensions.push_back(extension)
 
   cdef void _recognize_path(self, Resource resource, String path, GDNativeTypePtr res):
     pass
