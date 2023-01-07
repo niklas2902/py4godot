@@ -3,6 +3,8 @@ from py4godot.utils.print_tools import *
 from py4godot.utils.utils cimport *
 from py4godot.enums.enums4 cimport *
 from py4godot.classes.ResourceFormatSaver.ResourceFormatSaver cimport *
+from py4godot.classes.FileAccess.FileAccess cimport *
+from py4godot.classes.Script.Script cimport *
 from py4godot.classes.generated4_core cimport *
 from cpython cimport Py_INCREF, Py_DECREF, PyObject
 from cython.operator cimport dereference
@@ -29,7 +31,29 @@ cdef class PyResourceFormatSaver(ResourceFormatSaver):
     self.extensions = ["py", "pyw", "pyi"]
 
   cdef void _save(self, Resource resource, String path, int flags, GDNativeTypePtr res):
-    print_warning("save")
+    print_warning("PyResourceFormatSaver::save")
+
+    cdef Script script = Script.new_static(resource.godot_owner)
+    #Ref<LuaScript> script = p_resource;
+
+    #if (script.is_null())
+    #	return ERR_INVALID_PARAMETER;
+
+    #cdef String source = script.get_source_code();
+
+    cdef Error error;
+    cdef FileAccess file = FileAccess.open(path, FileAccess__ModeFlags.FileAccess__WRITE);
+
+    #set_gdnative_ptr(<GDNativeTypePtr *>res, <GDNativeTypePtr>(error))
+    #if (error != OK)
+    #	return error;
+
+    #file.store_string(source);
+    #if (file->get_error() != OK && file->get_error() != ERR_FILE_EOF) {
+    #	return ERR_CANT_CREATE;
+    #}
+    set_gdnative_ptr(<GDNativeTypePtr*> res, <GDNativeObjectPtr>Error.OK)
+
 
   cdef void _recognize(self, Resource resource, GDNativeTypePtr res):
     set_gdnative_ptr(<GDNativeTypePtr *>res, <GDNativeTypePtr>(<bint> (resource.godot_owner != NULL)))

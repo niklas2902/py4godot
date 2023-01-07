@@ -321,11 +321,21 @@ def generate_method_body_virtual(class_, mMethod):
     res = generate_newline(res)
     return res
 
+def is_static(mMethod):
+    return mMethod["is_static"]
+def generate_method_headers(mMethod):
+    res = ""
+    if is_static(mMethod):
+        res = f"{INDENT}@staticmethod"
+        res = generate_newline(res)
+        return res
+    return ""
 
 def generate_method(class_, mMethod):
     res = ""
     args = generate_args(mMethod)
     def_function = f"{INDENT}def {pythonize_name(mMethod['name'])}({args}):"
+    res += generate_method_headers(mMethod)
     res += def_function
     res = generate_newline(res)
     if("hash" in mMethod.keys()):
@@ -366,6 +376,10 @@ def get_args_count(method):
         return len(method["arguments"])
     return 0
 
+def get_godot_owner(method):
+    if is_static(method):
+        return "NULL"
+    return "self.godot_owner"
 def generate_method_body_standard(class_, method):
     number_arguments = 0
     result = ""
@@ -384,10 +398,10 @@ def generate_method_body_standard(class_, method):
     result += generate_error()
     result = generate_newline(result)
     if(class_['name'] in builtin_classes):
-        result += f"{INDENT * 2}method_to_call(self.godot_owner, {get_first_args_native(method)}, {address_ret(method)}, {get_args_count(method)})"
+        result += f"{INDENT * 2}method_to_call({get_godot_owner(method)}, {get_first_args_native(method)}, {address_ret(method)}, {get_args_count(method)})"
     else:
         result += f"{INDENT * 2}gdnative_interface.object_method_bind_ptrcall(method_bind," \
-                  f" self.godot_owner, _args, {address_ret(method)})"
+                  f" {get_godot_owner(method)}, _args, {address_ret(method)})"
 
     if ("return_value" in method.keys()):
         result = generate_newline(result)
@@ -399,11 +413,11 @@ def address_ret(method):
     if "return_value" in method.keys():
 
         if method["return_value"]["type"] in classes:
-            return "_ret.get_godot_owner()"
+            return "&(_ret.godot_owner)"
         if method["return_value"]["type"] == "Variant":
-            return "_ret.get_native_ptr()"
+            return "&(_ret.native_ptr)"
         if "typedarray" in method["return_value"]["type"]:
-            return "_ret.get_godot_owner()"
+            return "&(_ret.godot_owner)"
         return "&_ret"
     return "&_ret"
 
@@ -473,6 +487,8 @@ def unbitfield_type(arg_type):
 
 def generate_args(method_with_args):
     result = "self, "
+    if(is_static(method_with_args)):
+        result = ""
     if "arguments" not in method_with_args:
         return result[:-2]
 
