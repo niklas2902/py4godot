@@ -26,18 +26,22 @@ cdef class PyResourceFormatLoader(ResourceFormatLoader):
     return class_
 
   cdef void _init_values(self):
-    pass
+    self.extensions.append(c_string_to_string("py"))
+    self.extensions.append(c_string_to_string("pyw"))
+    self.extensions.append(c_string_to_string("pyi"))
 
   cdef _get_recognized_extensions(self, GDNativeTypePtr res):
-    pass
+    cdef PackedStringArray gdextensions = PackedStringArray.new_static(res)
+    for extension in self.extensions:
+        gdextensions.push_back(extension)
 
 
   cdef _recognize_path(self, String path, StringName type, GDNativeTypePtr res):
-    pass
+    set_gdnative_ptr(<GDNativeTypePtr*> res, <GDNativeObjectPtr>1)
 
 
   cdef _handles_type(self, StringName type, GDNativeTypePtr res):
-    pass
+    set_gdnative_ptr(<GDNativeTypePtr*> res, <GDNativeObjectPtr>1)
 
 
   cdef _get_resource_type(self, String path, GDNativeTypePtr res):

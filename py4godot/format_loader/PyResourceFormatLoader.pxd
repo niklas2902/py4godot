@@ -11,6 +11,7 @@ cdef void register_class_py_format_loader() with gil
 
 cdef class PyResourceFormatLoader(ResourceFormatLoader):
   cdef char* script_name
+  cdef list extensions
 
   cdef void _init_values(self) # self-defined
   cdef _get_recognized_extensions(self, GDNativeTypePtr res)

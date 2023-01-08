@@ -32,15 +32,17 @@ cdef class PyResourceFormatSaver(ResourceFormatSaver):
 
   cdef void _save(self, Resource resource, String path, int flags, GDNativeTypePtr res):
     print_warning("PyResourceFormatSaver::save")
-
-    cdef Script script = Script.new_static(resource.godot_owner)
+    cdef void* script_tag = gdnative_interface.classdb_get_class_tag(c_string_to_string_name("Script").godot_owner)
+    #cdef GodotObject _godot_object = gdnative_interface.object_cast_to(&(resource.godot_owner), script_tag)
+    #cdef Script script = Script.new_static(_godot_object)
     #Ref<LuaScript> script = p_resource;
+#    resource.get_path()
 
     #if (script.is_null())
     #	return ERR_INVALID_PARAMETER;
 
     #cdef String source = script.get_source_code();
-
+    cdef String source = c_string_to_string("test")
     cdef Error error;
     cdef FileAccess file = FileAccess.open(path, FileAccess__ModeFlags.FileAccess__WRITE);
 
@@ -48,10 +50,12 @@ cdef class PyResourceFormatSaver(ResourceFormatSaver):
     #if (error != OK)
     #	return error;
 
-    #file.store_string(source);
+    file.store_string(source);
     #if (file->get_error() != OK && file->get_error() != ERR_FILE_EOF) {
     #	return ERR_CANT_CREATE;
     #}
+    file.flush()
+    gdnative_interface.object_destroy(file.godot_owner)
     set_gdnative_ptr(<GDNativeTypePtr*> res, <GDNativeObjectPtr>Error.OK)
 
 

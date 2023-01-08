@@ -12,6 +12,7 @@ ctypedef void * GodotObject;
 ctypedef void *GDNativeStringNamePtr;
 ctypedef void *GDNativeStringPtr;
 ctypedef void *GDNativeObjectPtr;
+ctypedef const void *GDNativeConstObjectPtr;
 ctypedef void *GDNativeTypePtr;
 ctypedef void *GDNativeExtensionPtr;
 ctypedef void *GDNativeMethodBindPtr;
@@ -265,7 +266,6 @@ cdef extern from "binding4.h":
         GDNativeObjectPtr (*classdb_construct_object)(const GDNativeStringNamePtr p_classname); #The passed class must be a built-in godot class, or an already-registered extension class. In both case, object_set_instance should be called to fully initialize the object.
         GDNativeMethodBindPtr (*classdb_get_method_bind)(GDNativeConstStringNamePtr p_classname, GDNativeConstStringNamePtr p_methodname, GDNativeInt p_hash);
         void (*object_set_instance)(GDNativeObjectPtr p_o, const GDNativeStringNamePtr p_classname, GDExtensionClassInstancePtr p_instance); #p_classname should be a registered extension class and should extend the p_o object's class.
-        void *(*classdb_get_class_tag)(const char *p_classname);
 
         # CLASSDB EXTENSION
 
@@ -301,6 +301,10 @@ cdef extern from "binding4.h":
         #void (*string_new_with_wide_chars_and_len)(GDNativeStringPtr r_dest, const wchar_t *p_contents, const GDNativeInt p_size);
 
         GDNativeInt (*string_to_utf8_chars)(GDNativeConstStringPtr p_self, char *r_text, GDNativeInt p_max_write_length);
+        void *(*classdb_get_class_tag)(GDNativeConstStringNamePtr p_classname);
+        GDNativeObjectPtr (*object_cast_to)(GDNativeConstObjectPtr p_object, void *p_class_tag);
+        void (*object_destroy)(GDNativeObjectPtr p_o);
+
     # SCRIPT INSTANCE EXTENSION
 
     ctypedef void *GDNativeExtensionScriptInstanceDataPtr; # Pointer to custom ScriptInstance native implementation
