@@ -3,6 +3,7 @@ from py4godot.utils.print_tools import *
 from py4godot.utils.utils cimport *
 from py4godot.enums.enums4 cimport *
 from py4godot.classes.ResourceFormatLoader.ResourceFormatLoader cimport *
+from py4godot.script_extension.PyScriptExtension cimport *
 from py4godot.classes.generated4_core cimport *
 from cpython cimport Py_INCREF, Py_DECREF, PyObject
 from cython.operator cimport dereference
@@ -13,7 +14,7 @@ cdef class PyResourceFormatLoader(ResourceFormatLoader):
   @staticmethod
   def constructor():
     cdef PyResourceFormatLoader class_ = PyResourceFormatLoader()
-    ""
+
     print_warning("-------------construct PyResourceFormatLoader--------------------")
     cdef StringName class_name = c_string_to_string_name("PyResourceFormatLoader")
 
@@ -21,11 +22,11 @@ cdef class PyResourceFormatLoader(ResourceFormatLoader):
     Py_INCREF(class_)
     gdnative_interface.object_set_instance(class_.get_godot_owner(),class_name.godot_owner , <void*>class_)
 
-    ""
     class_._init_values()
     return class_
 
   cdef void _init_values(self):
+    self.extensions = list()
     self.extensions.append(c_string_to_string("py"))
     self.extensions.append(c_string_to_string("pyw"))
     self.extensions.append(c_string_to_string("pyi"))
@@ -35,17 +36,16 @@ cdef class PyResourceFormatLoader(ResourceFormatLoader):
     for extension in self.extensions:
         gdextensions.push_back(extension)
 
-
   cdef _recognize_path(self, String path, StringName type, GDNativeTypePtr res):
     set_gdnative_ptr(<GDNativeTypePtr*> res, <GDNativeObjectPtr>1)
 
 
   cdef _handles_type(self, StringName type, GDNativeTypePtr res):
-    set_gdnative_ptr(<GDNativeTypePtr*> res, <GDNativeObjectPtr>1)
+    set_gdnative_ptr(<GDNativeTypePtr*> res, <GDNativeObjectPtr>0)
 
 
   cdef _get_resource_type(self, String path, GDNativeTypePtr res):
-    pass
+    _interface.string_new_with_utf8_chars(res, "Python")
 
 
   cdef _get_resource_uid(self, String path, GDNativeTypePtr res):
@@ -69,8 +69,15 @@ cdef class PyResourceFormatLoader(ResourceFormatLoader):
 
 
   cdef _load(self, String path, String original_path, bool use_sub_threads, int cache_mode, GDNativeTypePtr res):
-    pass
-
+    print_warning("---------------------load_loader-----------------")
+    cdef PyScriptExtension script = PyScriptExtension.constructor()
+    try:
+        return
+        script.set_path(original_path)
+        script.source_code = c_string_to_string("test_code")
+        set_gdnative_ptr(<GDNativeTypePtr*> res, <GDNativeObjectPtr>script.godot_owner)
+    except Exception as e:
+        print_warning(str(e))
 
 cdef GDNativePtrOperatorEvaluator operator_equal_string_name = gdnative_interface.variant_get_ptr_operator_evaluator(
 GDNativeVariantOperator.GDNATIVE_VARIANT_OP_EQUAL,
