@@ -1,8 +1,8 @@
 import json
 
 builtin_classes = []
-CLASS_NAME = "ResourceFormatSaver"
-CURRENT_CLASS_NAME = "PyResourceFormatSaver"
+CLASS_NAME = "ScriptExtension"
+CURRENT_CLASS_NAME = "PyScriptExtension"
 def generate_methods(class_):
     for method in class_["methods"]:
         if are_forbidden_types_in_method(method):

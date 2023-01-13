@@ -32,6 +32,8 @@ cdef api void init_py_language() with gil:
         py_resource_format_loader = PyResourceFormatLoader.constructor()
         py_resource_format_saver = PyResourceFormatSaver.constructor()
 
+        py_resource_format_loader.set_language(py_language)
+
 
         print_warning("------------before register_script_language")
         engine.register_script_language(py_language)
