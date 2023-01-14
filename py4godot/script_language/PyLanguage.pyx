@@ -82,7 +82,8 @@ cdef class PyLanguage(ScriptLanguageExtension):
     pass
 
   cdef _validate(self, String script, String path, bool validate_functions, bool validate_errors, bool validate_warnings, bool validate_safe_lines, GDNativeTypePtr res):
-    return True
+    cdef Dictionary res_dictionary = Dictionary.new_static(res)
+    #set_gdnative_ptr(<GDNativeTypePtr*> res, <GDNativeTypePtr>1)
 
   cdef _validate_path(self, String path, GDNativeTypePtr res):
     res = <GDNativeTypePtr>1

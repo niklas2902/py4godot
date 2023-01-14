@@ -32,7 +32,9 @@ cdef class PyResourceFormatLoader(ResourceFormatLoader):
     self.extensions.append(c_string_to_string("pyi"))
 
   cdef void set_language(self, ScriptLanguageExtension language):
+    print_warning("set_lang")
     self.language = language
+    print_warning("set_lang successful")
   cdef _get_recognized_extensions(self, GDNativeTypePtr res):
     cdef PackedStringArray gdextensions = PackedStringArray.new_static(res)
     for extension in self.extensions:
@@ -73,12 +75,14 @@ cdef class PyResourceFormatLoader(ResourceFormatLoader):
   cdef _load(self, String path, String original_path, bool use_sub_threads, int cache_mode, GDNativeTypePtr res):
     print_warning("---------------------load_loader-----------------")
     cdef PyScriptExtension script = PyScriptExtension.constructor()
-    script.set_language(language)
     cdef GDNativeVariantFromTypeConstructorFunc constructor_func
     cdef Variant var
     cdef int float_val = 4
     try:
+        print_warning("start_try"+str(self.language))
+        script.set_language(<ScriptLanguage>self.language)
         script.set_path(original_path)
+
         #script.source_code = c_string_to_string("test_code")
         constructor_func = gdnative_interface.get_variant_from_type_constructor(GDNativeVariantType.GDNATIVE_VARIANT_TYPE_OBJECT)
         print_warning("after_get_constructor")
@@ -86,6 +90,7 @@ cdef class PyResourceFormatLoader(ResourceFormatLoader):
         print_warning("after_calling_constructor")
     except Exception as e:
         print_warning(str(e))
+    print_warning("_________________end_load___________________")
 
 cdef GDNativePtrOperatorEvaluator operator_equal_string_name = gdnative_interface.variant_get_ptr_operator_evaluator(
 GDNativeVariantOperator.GDNATIVE_VARIANT_OP_EQUAL,
