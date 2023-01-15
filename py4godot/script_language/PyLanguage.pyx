@@ -83,6 +83,18 @@ cdef class PyLanguage(ScriptLanguageExtension):
 
   cdef _validate(self, String script, String path, bool validate_functions, bool validate_errors, bool validate_warnings, bool validate_safe_lines, GDNativeTypePtr res):
     cdef Dictionary res_dictionary = Dictionary.new_static(res)
+    cdef GDNativeVariantPtr varptr
+    cdef String key = c_string_to_string("valid")
+    Py_INCREF(key)
+    cdef int i = 0
+    Py_INCREF (i)
+    cdef GDNativeVariantFromTypeConstructorFunc constructor_func = gdnative_interface.get_variant_from_type_constructor(GDNativeVariantType.GDNATIVE_VARIANT_TYPE_STRING)
+    print_warning("after_get_constructor")
+    varptr = create_variant(gdnative_interface)
+    constructor_func(varptr,key.godot_owner)
+
+    cdef GDNativeVariantPtr value_var = gdnative_interface.dictionary_operator_index(res_dictionary.godot_owner, varptr)
+    print_warning("after_dictionary")
     #set_gdnative_ptr(<GDNativeTypePtr*> res, <GDNativeTypePtr>1)
 
   cdef _validate_path(self, String path, GDNativeTypePtr res):

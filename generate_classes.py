@@ -394,6 +394,8 @@ def generate_method_body_standard(class_, method):
     result = generate_newline(result)
     result += generate_method_bind(class_, method)
     result = generate_newline(result)
+    result += generate_operators(class_)
+    result = generate_newline(result)
 
     result += generate_error()
     result = generate_newline(result)
@@ -420,6 +422,14 @@ def address_ret(method):
             return "&(_ret.godot_owner)"
         return "&_ret"
     return "&_ret"
+
+def generate_operators(class_):
+    if class_["name"] == "Dictionary":
+        print(class_["name"])
+        if("operators" in class_.keys()):
+            for operator in class_["operators"]:
+                print(operator)
+    return ""
 
 
 def generate_common_methods(class_):

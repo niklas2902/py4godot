@@ -8,6 +8,7 @@ from libc.stdint cimport int8_t
 
 ctypedef bint bool
 ctypedef void *GDNativeVariantPtr;
+ctypedef const void *GDNativeConstVariantPtr;
 ctypedef void * GodotObject;
 ctypedef void *GDNativeStringNamePtr;
 ctypedef void *GDNativeStringPtr;
@@ -28,6 +29,7 @@ ctypedef const void *GDNativeConstStringPtr;
 cdef extern from "c_utils.h":
     void set_gdnative_ptr(GDNativeTypePtr* a, GDNativeTypePtr b)
     void set_gdnative_reference(GDNativeTypePtr& a, GDNativeTypePtr& b)
+    GDNativeVariantPtr create_variant(GDNativeInterface * interface_ptr)
 
 cdef extern from "binding4.h":
     ctypedef void (*GDNativeVariantFromTypeConstructorFunc)(GDNativeVariantPtr, GDNativeTypePtr);
@@ -260,7 +262,7 @@ cdef extern from "binding4.h":
     ctypedef struct GDNativeInterface:
         GDNativeVariantFromTypeConstructorFunc (*get_variant_from_type_constructor)(GDNativeVariantType p_type);
         GDNativeTypeFromVariantConstructorFunc (*get_variant_to_type_constructor)(GDNativeVariantType p_type);
-
+        void (*variant_new_nil)(GDNativeVariantPtr r_dest);
         void *object_method_bind_call (const GDNativeMethodBindPtr p_method_bind, GDNativeObjectPtr p_instance, const GDNativeVariantPtr *p_args, GDNativeInt p_arg_count, GDNativeVariantPtr r_ret, GDNativeCallError *r_error);
         void *object_method_bind_ptrcall (const GDNativeMethodBindPtr p_method_bind, GDNativeObjectPtr p_instance, const GDNativeTypePtr *p_args, GDNativeTypePtr r_ret);
         GDNativeObjectPtr (*classdb_construct_object)(const GDNativeStringNamePtr p_classname); #The passed class must be a built-in godot class, or an already-registered extension class. In both case, object_set_instance should be called to fully initialize the object.
@@ -304,6 +306,11 @@ cdef extern from "binding4.h":
         void *(*classdb_get_class_tag)(GDNativeConstStringNamePtr p_classname);
         GDNativeObjectPtr (*object_cast_to)(GDNativeConstObjectPtr p_object, void *p_class_tag);
         void (*object_destroy)(GDNativeObjectPtr p_o);
+
+        # Dictionary functions
+        GDNativeVariantPtr (*dictionary_operator_index)(GDNativeTypePtr p_self, GDNativeConstVariantPtr p_key); #p_self should be an Dictionary ptr
+        GDNativeVariantPtr (*dictionary_operator_index_const)(GDNativeConstTypePtr p_self, GDNativeConstVariantPtr p_key); # p_self should be an Dictionary ptr
+
 
     # SCRIPT INSTANCE EXTENSION
 
