@@ -26,11 +26,6 @@ ctypedef const void *GDNativeConstTypePtr;
 ctypedef const void *GDNativeConstStringNamePtr;
 ctypedef const void *GDNativeConstStringPtr;
 
-cdef extern from "c_utils.h":
-    void set_gdnative_ptr(GDNativeTypePtr* a, GDNativeTypePtr b)
-    void set_gdnative_reference(GDNativeTypePtr& a, GDNativeTypePtr& b)
-    GDNativeVariantPtr create_variant(GDNativeInterface * interface_ptr)
-
 cdef extern from "binding4.h":
     ctypedef void (*GDNativeVariantFromTypeConstructorFunc)(GDNativeVariantPtr, GDNativeTypePtr);
     ctypedef void (*GDNativeTypeFromVariantConstructorFunc)(GDNativeTypePtr, GDNativeVariantPtr);
@@ -302,6 +297,8 @@ cdef extern from "binding4.h":
         #void (*string_new_with_utf32_chars_and_len)(GDNativeStringPtr r_dest, const char32_t *p_contents, const GDNativeInt p_size);
         #void (*string_new_with_wide_chars_and_len)(GDNativeStringPtr r_dest, const wchar_t *p_contents, const GDNativeInt p_size);
 
+
+        GDNativeVariantType (*variant_get_type)(GDNativeConstVariantPtr p_self);
         GDNativeInt (*string_to_utf8_chars)(GDNativeConstStringPtr p_self, char *r_text, GDNativeInt p_max_write_length);
         void *(*classdb_get_class_tag)(GDNativeConstStringNamePtr p_classname);
         GDNativeObjectPtr (*object_cast_to)(GDNativeConstObjectPtr p_object, void *p_class_tag);
@@ -389,4 +386,10 @@ cdef extern from "binding4.h":
 
         GDNativeExtensionScriptInstanceFree free_func;
 #TODO: improve this
+cdef extern from "c_utils.h":
+    void set_gdnative_ptr(GDNativeTypePtr* a, GDNativeTypePtr b)
+    void set_gdnative_reference(GDNativeTypePtr& a, GDNativeTypePtr& b)
+    GDNativeVariantPtr create_variant(GDNativeInterface * interface_ptr)
+    void create_variant_bool(GDNativeInterface * interface_ptr, GDNativeVariantPtr variant_ptr, uint8_t val)
+
 cdef GDNativeInterface* gdnative_interface

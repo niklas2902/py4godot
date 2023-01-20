@@ -86,14 +86,25 @@ cdef class PyLanguage(ScriptLanguageExtension):
     cdef GDNativeVariantPtr varptr
     cdef String key = c_string_to_string("valid")
     Py_INCREF(key)
-    cdef int i = 0
-    Py_INCREF (i)
     cdef GDNativeVariantFromTypeConstructorFunc constructor_func = gdnative_interface.get_variant_from_type_constructor(GDNativeVariantType.GDNATIVE_VARIANT_TYPE_STRING)
     print_warning("after_get_constructor")
     varptr = create_variant(gdnative_interface)
     constructor_func(varptr,key.godot_owner)
 
+    cdef uint8_t valid = 1
     cdef GDNativeVariantPtr value_var = gdnative_interface.dictionary_operator_index(res_dictionary.godot_owner, varptr)
+    #gdnative_interface.variant_new_nil(&value_var);
+    cdef GDNativeVariantFromTypeConstructorFunc constructor_func_valid = gdnative_interface.get_variant_from_type_constructor(GDNativeVariantType.GDNATIVE_VARIANT_TYPE_BOOL);
+
+    try:
+        print_warning(gdnative_interface.variant_get_type(value_var))
+        print_warning("Before creating bool variant")
+        constructor_func_valid(value_var, &valid)
+        print_warning("After creating bool variant")
+        print_warning(gdnative_interface.variant_get_type(value_var))
+        #create_variant_bool(gdnative_interface, &value_var, valid)
+    except Exception as e:
+        print_warning("Error:", str(e))
     print_warning("after_dictionary")
     #set_gdnative_ptr(<GDNativeTypePtr*> res, <GDNativeTypePtr>1)
 

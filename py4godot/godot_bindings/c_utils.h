@@ -10,3 +10,10 @@ GDNativeVariantPtr create_variant(GDNativeInterface * interface_ptr){
     return r_dest;
 }
 
+void create_variant_bool(GDNativeInterface * interface_ptr, GDNativeVariantPtr variant_ptr, uint8_t val){
+    interface_ptr->variant_new_nil(variant_ptr);
+    uint8_t* val_to_set = &val;
+    GDNativeVariantFromTypeConstructorFunc constructor_func_valid = interface_ptr->get_variant_from_type_constructor(GDNATIVE_VARIANT_TYPE_BOOL);
+    constructor_func_valid(variant_ptr, &val_to_set);
+}
+
