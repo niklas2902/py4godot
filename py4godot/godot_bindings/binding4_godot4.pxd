@@ -391,5 +391,6 @@ cdef extern from "c_utils.h":
     void set_gdnative_reference(GDNativeTypePtr& a, GDNativeTypePtr& b)
     GDNativeVariantPtr create_variant(GDNativeInterface * interface_ptr)
     void create_variant_bool(GDNativeInterface * interface_ptr, GDNativeVariantPtr variant_ptr, uint8_t val)
+    char * gd_string_c_string(GDNativeInterface* interface_ptr, GDNativeConstStringPtr string_ptr, int length)
 
 cdef GDNativeInterface* gdnative_interface

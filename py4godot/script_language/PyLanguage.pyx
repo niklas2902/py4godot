@@ -140,6 +140,7 @@ cdef class PyLanguage(ScriptLanguageExtension):
     pass
 
   cdef _complete_code(self, String code, String path, Object owner, GDNativeTypePtr res):
+    print_warning("complete_code")
     pass
 
   cdef _lookup_code(self, String code, String symbol, String path, Object owner, GDNativeTypePtr res):
@@ -563,9 +564,9 @@ cdef GDNativeExtensionClassCallVirtual call_virtual__overrides_external_editor_d
 
 cdef void* call_virtual_func__complete_code(GDExtensionClassInstancePtr p_instance, GDNativeConstTypePtr *p_args, GDNativeTypePtr r_ret) with gil:
     cdef PyLanguage pylanguage = <PyLanguage> p_instance
-    cdef String args0 = String.new_static(dereference(p_args + 0))
-    cdef String args1 = String.new_static(dereference(p_args + 1))
-    cdef Object args2 = <Object>dereference(p_args + 2)
+    #cdef String args0 = String.new_static(dereference(p_args + 0))
+    #cdef String args1 = String.new_static(dereference(p_args + 1))
+    #cdef Object args2 = object.new_static(dereference(p_args + 2)
 
 
     pylanguage._complete_code(args0,args1,args2,r_ret)

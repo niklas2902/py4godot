@@ -13,8 +13,11 @@ cdef void register_class_py_script_extension() with gil
 cdef class PyScriptExtension(ScriptExtension):
   cdef char* script_name
   cdef ScriptLanguageExtension language
+  cdef str source_code
 
   cdef void _init_values(self) # self-defined
+  cdef void set_py_source_code(self, str source_code) #self-defined
+
   cdef void set_language(self, ScriptLanguageExtension language) # self-defined
   cdef void _editor_can_reload_from_file(self, GDNativeTypePtr res)
   cdef void _can_instantiate(self, GDNativeTypePtr res)

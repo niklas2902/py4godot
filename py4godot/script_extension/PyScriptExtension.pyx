@@ -27,7 +27,10 @@ cdef class PyScriptExtension(ScriptExtension):
     return class_
 
   cdef void _init_values(self):
-    pass
+    self.source_code = ""
+
+  cdef void set_py_source_code(self, str source_code):
+    self.source_code = source_code
 
   cdef void set_language(self, ScriptLanguageExtension language):
     self.language = language
@@ -66,15 +69,20 @@ cdef class PyScriptExtension(ScriptExtension):
 
 
   cdef void _has_source_code(self, GDNativeTypePtr res):
-    pass
+    set_gdnative_ptr(<GDNativeTypePtr*>res, <GDNativeTypePtr>1)
 
 
   cdef void _get_source_code(self, GDNativeTypePtr res):
-    pass
+    print_warning("self.source_code:", self.source_code)
+    cdef bytes bytes_str = self.source_code.encode('utf-8')
+    cdef char* c_str = bytes_str
+    gdnative_interface.string_new_with_utf8_chars(res, bytes_str)
+    #set_gdnative_ptr(&res, <GDNativeTypePtr>self.source_gode.godot_owner)
+
 
 
   cdef void _set_source_code(self, String code, GDNativeTypePtr res):
-    pass
+    self.source_code = code
 
 
   cdef void _reload(self, bool keep_state, GDNativeTypePtr res):
