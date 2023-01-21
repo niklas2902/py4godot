@@ -23,20 +23,13 @@ cdef class PyLanguage(ScriptLanguageExtension):
     class_.set_godot_owner(gdnative_interface.classdb_construct_object(class_name.godot_owner))
     gdnative_interface.object_set_instance(class_.get_godot_owner(),class_name.godot_owner , <void*>class_)
 
-    ""
-    class_.script_name = c_string_to_string("PyLanguage")
     Py_INCREF(class_)
     class_._init_values()
     return class_
 
   cdef void _init_values(self):
-    self.extension_array = PackedStringArray.new0()
     self.language_name = "Python"
-    cdef String py = c_string_to_string("py")
     self.extension = "py"
-    self.script_name = c_string_to_string("Python")
-    Py_INCREF(py)
-    self.extension_array.push_back(py)
 
   cdef new(self, GDNativeTypePtr res):
     pass
@@ -297,13 +290,11 @@ cdef register_class():
     creation_info.class_userdata = <PyObject *>PyLanguage
     creation_info.get_virtual_func = get_virtual_func
 
-    cdef String class_name_string = String.new0()
-    _interface.string_new_with_utf8_chars(class_name_string.godot_owner, "PyLanguage")
+    cdef String class_name_string = c_string_to_string("PyLanguage")
     cdef StringName class_name = StringName.new2(class_name_string)
 
 
-    cdef String parent_class_name_string = String.new0()
-    _interface.string_new_with_utf8_chars(parent_class_name_string.godot_owner, "ScriptLanguageExtension")
+    cdef String parent_class_name_string = c_string_to_string("ScriptLanguageExtension")
     cdef StringName parent_class_name = StringName.new2(parent_class_name_string)
 
     gdnative_interface.classdb_register_extension_class(get_library(), class_name.godot_owner, parent_class_name.godot_owner, &creation_info)

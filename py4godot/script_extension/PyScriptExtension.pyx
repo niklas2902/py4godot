@@ -11,7 +11,8 @@ gdnative_interface = get_interface()
 cdef GDNativeExtensionClassCreationInfo creation_info
 cdef class PyScriptExtension(ScriptExtension):
   @staticmethod
-  def constructor():
+  #TODO remove *args
+  def constructor(*args):
     cdef PyScriptExtension class_ = PyScriptExtension()
     ""
     print_warning("-------------construct PyScriptExtension--------------------")

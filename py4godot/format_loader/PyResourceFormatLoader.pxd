@@ -14,6 +14,7 @@ cdef class PyResourceFormatLoader(ResourceFormatLoader):
   cdef char* script_name
   cdef list extensions
   cdef ScriptLanguageExtension language
+  cdef String py
 
   cdef void _init_values(self) # self-defined
   cdef void set_language(self, ScriptLanguageExtension language) # self-defined

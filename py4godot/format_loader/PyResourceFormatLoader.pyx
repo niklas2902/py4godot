@@ -7,6 +7,7 @@ from py4godot.script_extension.PyScriptExtension cimport *
 from py4godot.classes.generated4_core cimport *
 from cpython cimport Py_INCREF, Py_DECREF, PyObject
 from cython.operator cimport dereference
+from py4godot.classes.FileAccess.FileAccess cimport *
 
 gdnative_interface = get_interface()
 cdef GDNativeExtensionClassCreationInfo creation_info
@@ -27,25 +28,31 @@ cdef class PyResourceFormatLoader(ResourceFormatLoader):
 
   cdef void _init_values(self):
     self.extensions = list()
-    self.extensions.append(c_string_to_string("py"))
-    self.extensions.append(c_string_to_string("pyw"))
-    self.extensions.append(c_string_to_string("pyi"))
+    self.py = c_string_to_string("py")
+    Py_INCREF(py)
+    cdef String pyw = c_string_to_string("pyw")
+    Py_INCREF("pyw")
+    cdef String pyi = c_string_to_string("pyi")
+    Py_INCREF(pyi)
+    self.extensions.append(py)
+    self.extensions.append(pyw)
+    self.extensions.append(pyi)
 
   cdef void set_language(self, ScriptLanguageExtension language):
     print_warning("set_lang")
     self.language = language
     print_warning("set_lang successful")
   cdef _get_recognized_extensions(self, GDNativeTypePtr res):
+    print_warning("get_recognized_extensions_called")
     cdef PackedStringArray gdextensions = PackedStringArray.new_static(res)
-    for extension in self.extensions:
-        gdextensions.push_back(extension)
+    gdextensions.push_back(self.py)
 
   cdef _recognize_path(self, String path, StringName type, GDNativeTypePtr res):
     set_gdnative_ptr(<GDNativeTypePtr*> res, <GDNativeObjectPtr>1)
 
 
   cdef _handles_type(self, StringName type, GDNativeTypePtr res):
-    set_gdnative_ptr(<GDNativeTypePtr*> res, <GDNativeObjectPtr>0)
+    set_gdnative_ptr(<GDNativeTypePtr*> res, <GDNativeObjectPtr>1)
 
 
   cdef _get_resource_type(self, String path, GDNativeTypePtr res):
@@ -78,10 +85,17 @@ cdef class PyResourceFormatLoader(ResourceFormatLoader):
     cdef GDNativeVariantFromTypeConstructorFunc constructor_func
     cdef Variant var
     cdef int float_val = 4
+    cdef FileAccess file
+    cdef String source_code
     try:
+        file = FileAccess.open(original_path, FileAccess__ModeFlags.FileAccess__READ);
+        if(not file.godot_owner):
+            return
+        source_code = file.get_as_text(False)
         print_warning("start_try"+str(self.language))
         script.set_language(<ScriptLanguage>self.language)
         script.set_path(original_path)
+        #script.set_source_code(source_code)
 
         #script.source_code = c_string_to_string("test_code")
         constructor_func = gdnative_interface.get_variant_from_type_constructor(GDNativeVariantType.GDNATIVE_VARIANT_TYPE_OBJECT)
