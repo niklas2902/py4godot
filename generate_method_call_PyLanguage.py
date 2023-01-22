@@ -1,8 +1,8 @@
 import json
 
 builtin_classes = []
-CLASS_NAME = "ScriptExtension"
-CURRENT_CLASS_NAME = "PyScriptExtension"
+CLASS_NAME = "ScriptLanguageExtension"
+CURRENT_CLASS_NAME = "PyLanguageExtension"
 def generate_methods(class_):
     for method in class_["methods"]:
         if are_forbidden_types_in_method(method):
@@ -152,6 +152,7 @@ if __name__ == "__main__":
 
     normal_classes = [cls["name"] for cls in obj["classes"]]
     builtin_classes = [cls["name"] for cls in obj["builtin_classes"]]
+    builtin_classes += ["Object", "Variant"]
     builtin_classes.remove("bool")
     builtin_classes.remove("int")
     builtin_classes.append("Array")

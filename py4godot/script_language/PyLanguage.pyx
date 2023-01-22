@@ -564,9 +564,9 @@ cdef GDNativeExtensionClassCallVirtual call_virtual__overrides_external_editor_d
 
 cdef void* call_virtual_func__complete_code(GDExtensionClassInstancePtr p_instance, GDNativeConstTypePtr *p_args, GDNativeTypePtr r_ret) with gil:
     cdef PyLanguage pylanguage = <PyLanguage> p_instance
-    #cdef String args0 = String.new_static(dereference(p_args + 0))
-    #cdef String args1 = String.new_static(dereference(p_args + 1))
-    #cdef Object args2 = object.new_static(dereference(p_args + 2)
+    cdef String args0 = String.new_static(dereference(p_args + 0))
+    cdef String args1 = String.new_static(dereference(p_args + 1))
+    cdef Object args2 = Object.new_static(dereference(p_args + 2))
 
 
     pylanguage._complete_code(args0,args1,args2,r_ret)
@@ -580,7 +580,7 @@ cdef void* call_virtual_func__lookup_code(GDExtensionClassInstancePtr p_instance
     cdef String args0 = String.new_static(dereference(p_args + 0))
     cdef String args1 = String.new_static(dereference(p_args + 1))
     cdef String args2 = String.new_static(dereference(p_args + 2))
-    cdef Object args3 = <Object>dereference(p_args + 3)
+    cdef Object args3 = Object.new_static(dereference(p_args + 3))
 
 
     pylanguage._lookup_code(args0,args1,args2,args3,r_ret)
@@ -605,7 +605,7 @@ cdef GDNativeExtensionClassCallVirtual call_virtual__auto_indent_code_def = <GDN
 cdef void* call_virtual_func__add_global_constant(GDExtensionClassInstancePtr p_instance, GDNativeConstTypePtr *p_args, GDNativeTypePtr r_ret) with gil:
     cdef PyLanguage pylanguage = <PyLanguage> p_instance
     cdef StringName args0 = StringName.new_static(dereference(p_args + 0))
-    cdef Variant args1 = <Variant>dereference(p_args + 1)
+    cdef Variant args1 = Variant.new_static(dereference(p_args + 1))
 
 
     pylanguage._add_global_constant(args0,args1,r_ret)
@@ -617,7 +617,7 @@ cdef GDNativeExtensionClassCallVirtual call_virtual__add_global_constant_def = <
 cdef void* call_virtual_func__add_named_global_constant(GDExtensionClassInstancePtr p_instance, GDNativeConstTypePtr *p_args, GDNativeTypePtr r_ret) with gil:
     cdef PyLanguage pylanguage = <PyLanguage> p_instance
     cdef StringName args0 = StringName.new_static(dereference(p_args + 0))
-    cdef Variant args1 = <Variant>dereference(p_args + 1)
+    cdef Variant args1 = Variant.new_static(dereference(p_args + 1))
 
 
     pylanguage._add_named_global_constant(args0,args1,r_ret)
@@ -856,7 +856,7 @@ cdef GDNativeExtensionClassCallVirtual call_virtual__profiling_stop_def = <GDNat
 
 cdef void* call_virtual_func__alloc_instance_binding_data(GDExtensionClassInstancePtr p_instance, GDNativeConstTypePtr *p_args, GDNativeTypePtr r_ret) with gil:
     cdef PyLanguage pylanguage = <PyLanguage> p_instance
-    cdef Object args0 = <Object>dereference(p_args + 0)
+    cdef Object args0 = Object.new_static(dereference(p_args + 0))
 
     cdef object obj = <object>pylanguage._alloc_instance_binding_data(args0,r_ret)
     cdef void* ret_val = <void*>obj
@@ -878,7 +878,7 @@ cdef GDNativeExtensionClassCallVirtual call_virtual__free_instance_binding_data_
 
 cdef void* call_virtual_func__refcount_incremented_instance_binding(GDExtensionClassInstancePtr p_instance, GDNativeConstTypePtr *p_args, GDNativeTypePtr r_ret) with gil:
     cdef PyLanguage pylanguage = <PyLanguage> p_instance
-    cdef Object args0 = <Object>dereference(p_args + 0)
+    cdef Object args0 = Object.new_static(dereference(p_args + 0))
 
 
     pylanguage._refcount_incremented_instance_binding(args0,r_ret)
@@ -889,7 +889,7 @@ cdef GDNativeExtensionClassCallVirtual call_virtual__refcount_incremented_instan
 
 cdef void* call_virtual_func__refcount_decremented_instance_binding(GDExtensionClassInstancePtr p_instance, GDNativeConstTypePtr *p_args, GDNativeTypePtr r_ret) with gil:
     cdef PyLanguage pylanguage = <PyLanguage> p_instance
-    cdef Object args0 = <Object>dereference(p_args + 0)
+    cdef Object args0 = Object.new_static(dereference(p_args + 0))
 
 
     pylanguage._refcount_decremented_instance_binding(args0,r_ret)
