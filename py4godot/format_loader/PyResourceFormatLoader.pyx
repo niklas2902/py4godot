@@ -88,6 +88,7 @@ cdef class PyResourceFormatLoader(ResourceFormatLoader):
     cdef FileAccess file
     cdef String source_code
     cdef str py_string
+    cdef String test = c_string_to_string("test_code")
     try:
         file = FileAccess.open(original_path, FileAccess__ModeFlags.FileAccess__READ);
         if(not file.godot_owner):
@@ -95,9 +96,10 @@ cdef class PyResourceFormatLoader(ResourceFormatLoader):
         source_code = file.get_as_text(False)
         print_warning("start_try"+str(self.language))
         script.set_language(<ScriptLanguage>self.language)
+        print_warning("length:", source_code.length())
         script.set_path(original_path)
         #TODO: Use real string length
-        py_string = (<bytes>gd_string_c_string(gdnative_interface,&source_code.godot_owner, 100)).decode("utf-8")
+        py_string = (<bytes>gd_string_c_string(gdnative_interface,source_code.godot_owner, source_code.length())).decode("utf-8")
         print_warning("--------source_code:", py_string)
         script.set_py_source_code(py_string)
 

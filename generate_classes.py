@@ -135,8 +135,12 @@ def generate_newline(str_):
 
 def generate_return_value(method_):
     result = ""
-    if "return_value" in method_.keys():
-        ret_val = ReturnType("_ret", method_['return_value']['type'])
+    if "return_value" in method_.keys() or "return_type" in method_.keys():
+        ret_val = None
+        if("return_value" in method_.keys()):
+            ret_val = ReturnType("_ret", method_['return_value']['type'])
+        else:
+            ret_val = ReturnType("_ret", method_['return_type'])
         if ret_val.type in classes:
             result += f"{INDENT * 2}cdef {ret_val.type} {ret_val.name} = {ret_val.type}()"
         elif ret_val.type == "Variant":
@@ -409,20 +413,29 @@ def generate_method_body_standard(class_, method):
         result += f"{INDENT * 2}gdnative_interface.object_method_bind_ptrcall(method_bind," \
                   f" {get_godot_owner(method)}, _args, {address_ret(method)})"
 
-    if ("return_value" in method.keys()):
+    if ("return_value" in method.keys() or "return_type" in method.keys()):
         result = generate_newline(result)
         result += generate_return_statement()
     return result
 
 
 def address_ret(method):
-    if "return_value" in method.keys():
+    if "return_value" in method.keys() or "return_type" in method.keys():
 
-        if method["return_value"]["type"] in classes:
+        if "return_value" in method.keys():
+            return_type = method["return_value"]["type"]
+        else:
+            return_type = method["return_type"]
+
+        if return_type in {"int", "float","bool"}:
+            return "&_ret"
+        if return_type in builtin_classes:
+            return "_ret.godot_owner"
+        if return_type in classes:
             return "&(_ret.godot_owner)"
-        if method["return_value"]["type"] == "Variant":
+        if return_type == "Variant":
             return "&(_ret.native_ptr)"
-        if "typedarray" in method["return_value"]["type"]:
+        if "typedarray" in return_type:
             return "&(_ret.godot_owner)"
         return "&_ret"
     return "&_ret"

@@ -41,7 +41,7 @@ cdef class PyScriptExtension(ScriptExtension):
 
 
   cdef void _can_instantiate(self, GDNativeTypePtr res):
-    pass
+    set_gdnative_ptr(<GDNativeTypePtr*>res, <GDNativeTypePtr>1)
 
 
   cdef void _get_base_script(self, GDNativeTypePtr res):
@@ -57,6 +57,7 @@ cdef class PyScriptExtension(ScriptExtension):
 
 
   cdef void _instance_create(self, Object for_object, GDNativeTypePtr res):
+    print_warning("instance_create_called")
     pass
 
 
@@ -106,7 +107,7 @@ cdef class PyScriptExtension(ScriptExtension):
 
 
   cdef void _is_valid(self, GDNativeTypePtr res):
-    pass
+    set_gdnative_ptr(<GDNativeTypePtr*>res, <GDNativeTypePtr>1)
 
 
   cdef void _get_language(self, GDNativeTypePtr res):
