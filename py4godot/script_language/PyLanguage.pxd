@@ -13,6 +13,7 @@ cdef register_class()
 cdef class PyLanguage(ScriptLanguageExtension):
   cdef char* language_name
   cdef char* extension
+  cdef set keywords
 
   cdef void _init_values(self) # self-defined
   cdef new(self, GDNativeTypePtr res)

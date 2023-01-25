@@ -12,6 +12,8 @@ from cython.operator cimport dereference
 
 gdnative_interface = get_interface()
 cdef GDNativeExtensionClassCreationInfo creation_info
+
+
 cdef class PyLanguage(ScriptLanguageExtension):
   @staticmethod
   def constructor():
@@ -30,6 +32,8 @@ cdef class PyLanguage(ScriptLanguageExtension):
   cdef void _init_values(self):
     self.language_name = "Python"
     self.extension = "py"
+    self.keywords = {"False", "await", "else", "import", "pass", "None", "break", "except", "in", "raise", "True", "class", "finally", "is", "return"
+,"and", "continue", "for", "lambda", "try", "as", "def", "from", "nonlocal", "while", "assert", "del", "global", "not", "with", "async", "elif", "if", "or", "yield"}
 
   cdef new(self, GDNativeTypePtr res):
     pass
@@ -52,16 +56,63 @@ cdef class PyLanguage(ScriptLanguageExtension):
     pass
 
   cdef _get_reserved_words(self, GDNativeTypePtr res):
-    pass
-
+    print_warning("get_reserved_words")
+    cdef PackedStringArray array = PackedStringArray.new_static(res)
+    try:
+        array.push_back(c_string_to_string("del"))
+        array.push_back(c_string_to_string("nonlocal"))
+        array.push_back(c_string_to_string("yield"))
+        array.push_back(c_string_to_string("finally"))
+        array.push_back(c_string_to_string("for"))
+        array.push_back(c_string_to_string("lambda"))
+        array.push_back(c_string_to_string("return"))
+        array.push_back(c_string_to_string("try"))
+        array.push_back(c_string_to_string("assert"))
+        array.push_back(c_string_to_string("True"))
+        array.push_back(c_string_to_string("and"))
+        array.push_back(c_string_to_string("continue"))
+        array.push_back(c_string_to_string("in"))
+        array.push_back(c_string_to_string("not"))
+        array.push_back(c_string_to_string("from"))
+        array.push_back(c_string_to_string("False"))
+        array.push_back(c_string_to_string("raise"))
+        array.push_back(c_string_to_string("while"))
+        array.push_back(c_string_to_string("as"))
+        array.push_back(c_string_to_string("else"))
+        array.push_back(c_string_to_string("or"))
+        array.push_back(c_string_to_string("except"))
+        array.push_back(c_string_to_string("with"))
+        array.push_back(c_string_to_string("pass"))
+        array.push_back(c_string_to_string("import"))
+        array.push_back(c_string_to_string("async"))
+        array.push_back(c_string_to_string("break"))
+        array.push_back(c_string_to_string("elif"))
+        array.push_back(c_string_to_string("global"))
+        array.push_back(c_string_to_string("None"))
+        array.push_back(c_string_to_string("if"))
+        array.push_back(c_string_to_string("def"))
+        array.push_back(c_string_to_string("class"))
+        array.push_back(c_string_to_string("is"))
+        array.push_back(c_string_to_string("await"))
+    except Exception as e:
+      print_warning("Exception:", str(e))
   cdef _is_control_flow_keyword(self, String keyword, GDNativeTypePtr res):
-    pass
+    print_warning("is_control_flow_keyword")
+    cdef str py_string = (<bytes>gd_string_c_string(gdnative_interface,keyword.godot_owner, keyword.length())).decode("utf-8")
+    cdef bint is_in_keywords = py_string in keywords
+    print_warning("is_flow_control_keyword:", py_string,"|", is_in_keywords)
+    set_gdnative_ptr(<GDNativeTypePtr*>res, <GDNativeTypePtr>is_in_keywords)
 
   cdef _get_comment_delimiters(self, GDNativeTypePtr res):
-    pass
+    cdef PackedStringArray array = PackedStringArray.new_static(res)
+    array.push_back(c_string_to_string("#"))
 
   cdef _get_string_delimiters(self, GDNativeTypePtr res):
-    pass
+    cdef PackedStringArray array = PackedStringArray.new_static(res)
+    array.push_back(c_string_to_string('"'))
+    array.push_back(c_string_to_string("'"))
+    array.push_back(c_string_to_string("'''"))
+    array.push_back(c_string_to_string('"""'))
 
   cdef _make_template(self, String template, String class_name, String base_class_name,GDNativeTypePtr res):
     cdef py_extension.PyScriptExtension extension_py = py_extension.PyScriptExtension.constructor()
