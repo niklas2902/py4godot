@@ -53,7 +53,17 @@ cdef class PyScriptExtension(ScriptExtension):
 
 
   cdef void _get_instance_base_type(self, GDNativeTypePtr res):
-    pass
+    cdef String gd_string = String.new0()
+    _interface.string_new_with_utf8_chars(gd_string.godot_owner, "Node3D")
+
+    cdef StringName gd_string_name = StringName.new_static(res)
+    gd_string_name.set_variant_type(GDNativeVariantType.GDNATIVE_VARIANT_TYPE_STRING_NAME)
+    cdef GDNativePtrConstructor constructor = _interface.variant_get_ptr_constructor(gd_string_name.variant_type, 2)
+
+    cdef GDNativeTypePtr _args[1]
+    _args[0] = gd_string.get_godot_owner()
+
+    constructor(gd_string_name.godot_owner,_args)
 
 
   cdef void _instance_create(self, Object for_object, GDNativeTypePtr res):
