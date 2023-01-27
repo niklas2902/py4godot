@@ -1,4 +1,4 @@
-#include "gdnative_interface.h"
+#include "gdextension_interface.h"
 #include "api4_api.h"
 #include "../../py4godot_core_holder/core_holder_api.h"
 #include <python.h>
@@ -36,7 +36,7 @@ typedef struct user_data_struct {
 } user_data_struct;
 
 static PyThreadState *gilstate = NULL;
-static GDNativeInterface* gdnative_interface = NULL;
+static GDExtensionInterface* gdnative_interface = NULL;
 
 static const char *RECOGNIZED_EXTENSIONS[] = { "py", "pyc", "pyo", "pyd", 0 };
 static const char *RESERVED_WORDS[] = {
@@ -78,7 +78,7 @@ static const char *RESERVED_WORDS[] = {
 static const char *COMMENT_DELIMITERS[] = { "#", "\"\"\"\"\"\"", 0 };
 static const char *STRING_DELIMITERS[] = { "\" \"", "' '", 0 };
 
-void initialize_py4godot(void *userdata, GDNativeInitializationLevel p_level){
+void initialize_py4godot(void *userdata, GDExtensionInitializationLevel p_level){
     if (p_level != 3){
         return;
     }
@@ -120,11 +120,11 @@ void initialize_py4godot(void *userdata, GDNativeInitializationLevel p_level){
     gdnative_interface->print_warning("test10", "test", "test",1);
 
 }
-void deinitialize_py4godot(void *userdata, GDNativeInitializationLevel p_level){
+void deinitialize_py4godot(void *userdata, GDExtensionInitializationLevel p_level){
 
 }
 
-GDN_EXPORT GDNativeBool py4godot_init(const GDNativeInterface *p_interface, const GDNativeExtensionClassLibraryPtr p_library, GDNativeInitialization *r_initialization)
+GDN_EXPORT GDExtensionBool py4godot_init(const GDExtensionInterface *p_interface, const GDExtensionClassLibraryPtr p_library, GDExtensionInitialization *r_initialization)
 {
     gdnative_interface = p_interface;
     /*GDExtensionBinding::InitObject init_obj(p_interface, p_library, r_initialization);

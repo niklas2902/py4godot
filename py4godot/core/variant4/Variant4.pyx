@@ -19,11 +19,11 @@ cdef class Variant:
     cdef void init_string(self, String object):
         print_warning("init_string")
         Py_INCREF(object)
-        cdef GDNativeVariantFromTypeConstructorFunc constructor_func = gdnative_interface.get_variant_from_type_constructor(GDNativeVariantType.GDNATIVE_VARIANT_TYPE_STRING)
+        cdef GDExtensionVariantFromTypeConstructorFunc constructor_func = gdnative_interface.get_variant_from_type_constructor(GDExtensionVariantType.GDEXTENSION_VARIANT_TYPE_STRING)
         constructor_func(self.native_ptr,&(object.godot_owner))
         print_warning("after_init_string")
 
     cdef void init_object(self, ScriptExtension object):
-        cdef GDNativeVariantFromTypeConstructorFunc constructor_func = gdnative_interface.get_variant_from_type_constructor(GDNativeVariantType.GDNATIVE_VARIANT_TYPE_STRING)
+        cdef GDExtensionVariantFromTypeConstructorFunc constructor_func = gdnative_interface.get_variant_from_type_constructor(GDExtensionVariantType.GDEXTENSION_VARIANT_TYPE_STRING)
         constructor_func(self.native_ptr,object.godot_owner)
 

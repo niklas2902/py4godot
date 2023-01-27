@@ -10,7 +10,7 @@ from cpython cimport Py_INCREF, Py_DECREF, PyObject
 from cython.operator cimport dereference
 
 gdnative_interface = get_interface()
-cdef GDNativeExtensionClassCreationInfo creation_info
+cdef GDExtensionClassCreationInfo creation_info
 cdef class PyResourceFormatSaver(ResourceFormatSaver):
   @staticmethod
   def constructor():
@@ -30,7 +30,7 @@ cdef class PyResourceFormatSaver(ResourceFormatSaver):
   cdef void _init_values(self):
     self.extensions = ["py", "pyw", "pyi"]
 
-  cdef void _save(self, Resource resource, String path, int flags, GDNativeTypePtr res):
+  cdef void _save(self, Resource resource, String path, int flags, GDExtensionTypePtr res):
     print_warning("PyResourceFormatSaver::save")
     cdef void* script_tag = gdnative_interface.classdb_get_class_tag(c_string_to_string_name("Script").godot_owner)
     #cdef GodotObject _godot_object = gdnative_interface.object_cast_to(&(resource.godot_owner), script_tag)
@@ -46,7 +46,7 @@ cdef class PyResourceFormatSaver(ResourceFormatSaver):
     cdef Error error;
     cdef FileAccess file = FileAccess.open(path, FileAccess__ModeFlags.FileAccess__WRITE);
 
-    #set_gdnative_ptr(<GDNativeTypePtr *>res, <GDNativeTypePtr>(error))
+    #set_gdnative_ptr(<GDExtensionTypePtr *>res, <GDExtensionTypePtr>(error))
     #if (error != OK)
     #	return error;
 
@@ -56,21 +56,21 @@ cdef class PyResourceFormatSaver(ResourceFormatSaver):
     #}
     file.flush()
     gdnative_interface.object_destroy(file.godot_owner)
-    set_gdnative_ptr(<GDNativeTypePtr*> res, <GDNativeObjectPtr>Error.OK)
+    set_gdnative_ptr(<GDExtensionTypePtr*> res, <GDExtensionObjectPtr>Error.OK)
 
 
-  cdef void _recognize(self, Resource resource, GDNativeTypePtr res):
-    set_gdnative_ptr(<GDNativeTypePtr *>res, <GDNativeTypePtr>(<bint> (resource.godot_owner != NULL)))
+  cdef void _recognize(self, Resource resource, GDExtensionTypePtr res):
+    set_gdnative_ptr(<GDExtensionTypePtr *>res, <GDExtensionTypePtr>(<bint> (resource.godot_owner != NULL)))
 
-  cdef void _get_recognized_extensions(self, Resource resource, GDNativeTypePtr res):
+  cdef void _get_recognized_extensions(self, Resource resource, GDExtensionTypePtr res):
     cdef PackedStringArray gdextensions = PackedStringArray.new_static(res)
     for extension in self.extensions:
         gdextensions.push_back(extension)
 
-  cdef void _recognize_path(self, Resource resource, String path, GDNativeTypePtr res):
+  cdef void _recognize_path(self, Resource resource, String path, GDExtensionTypePtr res):
     pass
 
-cdef void* call_virtual_func__save(GDExtensionClassInstancePtr p_instance, GDNativeConstTypePtr *p_args, GDNativeTypePtr r_ret) with gil:
+cdef void* call_virtual_func__save(GDExtensionClassInstancePtr p_instance, GDExtensionConstTypePtr *p_args, GDExtensionTypePtr r_ret) with gil:
     cdef PyResourceFormatSaver pylanguage = <PyResourceFormatSaver> p_instance
     cdef Resource args0 = <Resource>dereference(p_args + 0)
     cdef String args1 = String.new_static(dereference(p_args + 1))
@@ -80,10 +80,10 @@ cdef void* call_virtual_func__save(GDExtensionClassInstancePtr p_instance, GDNat
     pylanguage._save(args0,args1,args2,r_ret)
 
 cdef StringName func_name__save = c_string_to_string_name("_save")
-cdef GDNativeExtensionClassCallVirtual call_virtual__save_def = <GDNativeExtensionClassCallVirtual>call_virtual_func__save
+cdef GDExtensionClassCallVirtual call_virtual__save_def = <GDExtensionClassCallVirtual>call_virtual_func__save
 
 
-cdef void* call_virtual_func__recognize(GDExtensionClassInstancePtr p_instance, GDNativeConstTypePtr *p_args, GDNativeTypePtr r_ret) with gil:
+cdef void* call_virtual_func__recognize(GDExtensionClassInstancePtr p_instance, GDExtensionConstTypePtr *p_args, GDExtensionTypePtr r_ret) with gil:
     cdef PyResourceFormatSaver pylanguage = <PyResourceFormatSaver> p_instance
     cdef Resource args0 = <Resource>dereference(p_args + 0)
 
@@ -91,10 +91,10 @@ cdef void* call_virtual_func__recognize(GDExtensionClassInstancePtr p_instance, 
     pylanguage._recognize(args0,r_ret)
 
 cdef StringName func_name__recognize = c_string_to_string_name("_recognize")
-cdef GDNativeExtensionClassCallVirtual call_virtual__recognize_def = <GDNativeExtensionClassCallVirtual>call_virtual_func__recognize
+cdef GDExtensionClassCallVirtual call_virtual__recognize_def = <GDExtensionClassCallVirtual>call_virtual_func__recognize
 
 
-cdef void* call_virtual_func__get_recognized_extensions(GDExtensionClassInstancePtr p_instance, GDNativeConstTypePtr *p_args, GDNativeTypePtr r_ret) with gil:
+cdef void* call_virtual_func__get_recognized_extensions(GDExtensionClassInstancePtr p_instance, GDExtensionConstTypePtr *p_args, GDExtensionTypePtr r_ret) with gil:
     cdef PyResourceFormatSaver pylanguage = <PyResourceFormatSaver> p_instance
     cdef Resource args0 = <Resource>dereference(p_args + 0)
 
@@ -102,10 +102,10 @@ cdef void* call_virtual_func__get_recognized_extensions(GDExtensionClassInstance
     pylanguage._get_recognized_extensions(args0,r_ret)
 
 cdef StringName func_name__get_recognized_extensions = c_string_to_string_name("_get_recognized_extensions")
-cdef GDNativeExtensionClassCallVirtual call_virtual__get_recognized_extensions_def = <GDNativeExtensionClassCallVirtual>call_virtual_func__get_recognized_extensions
+cdef GDExtensionClassCallVirtual call_virtual__get_recognized_extensions_def = <GDExtensionClassCallVirtual>call_virtual_func__get_recognized_extensions
 
 
-cdef void* call_virtual_func__recognize_path(GDExtensionClassInstancePtr p_instance, GDNativeConstTypePtr *p_args, GDNativeTypePtr r_ret) with gil:
+cdef void* call_virtual_func__recognize_path(GDExtensionClassInstancePtr p_instance, GDExtensionConstTypePtr *p_args, GDExtensionTypePtr r_ret) with gil:
     cdef PyResourceFormatSaver pylanguage = <PyResourceFormatSaver> p_instance
     cdef Resource args0 = <Resource>dereference(p_args + 0)
     cdef String args1 = String.new_static(dereference(p_args + 1))
@@ -114,16 +114,16 @@ cdef void* call_virtual_func__recognize_path(GDExtensionClassInstancePtr p_insta
     pylanguage._recognize_path(args0,args1,r_ret)
 
 cdef StringName func_name__recognize_path = c_string_to_string_name("_recognize_path")
-cdef GDNativeExtensionClassCallVirtual call_virtual__recognize_path_def = <GDNativeExtensionClassCallVirtual>call_virtual_func__recognize_path
+cdef GDExtensionClassCallVirtual call_virtual__recognize_path_def = <GDExtensionClassCallVirtual>call_virtual_func__recognize_path
 
 
 cdef String script_name = c_string_to_string("Python")
-cdef GDNativeTypePtr ptr =  script_name.godot_owner
+cdef GDExtensionTypePtr ptr =  script_name.godot_owner
 
-cdef GDNativePtrOperatorEvaluator operator_equal_string_name = gdnative_interface.variant_get_ptr_operator_evaluator(
-GDNativeVariantOperator.GDNATIVE_VARIANT_OP_EQUAL,
- GDNativeVariantType.GDNATIVE_VARIANT_TYPE_STRING_NAME,
- GDNativeVariantType.GDNATIVE_VARIANT_TYPE_STRING_NAME);
+cdef GDExtensionPtrOperatorEvaluator operator_equal_string_name = gdnative_interface.variant_get_ptr_operator_evaluator(
+GDExtensionVariantOperator.GDEXTENSION_VARIANT_OP_EQUAL,
+ GDExtensionVariantType.GDEXTENSION_VARIANT_TYPE_STRING_NAME,
+ GDExtensionVariantType.GDEXTENSION_VARIANT_TYPE_STRING_NAME);
 
 cdef bool string_names_equal(StringName left, StringName right):
     cdef int8_t ret
@@ -132,12 +132,12 @@ cdef bool string_names_equal(StringName left, StringName right):
     return ret != 0
 
 
-cdef GDNativeObjectPtr create_instance(void* userdata) with gil:
+cdef GDExtensionObjectPtr create_instance(void* userdata) with gil:
     ""
     #TODO: This makes no sense
     print_warning("------------create_script-create_instance---------")
     cdef StringName class_name = c_string_to_string_name("ResourceFormatSaver")
-    cdef GDNativeObjectPtr gdnative_object = gdnative_interface.classdb_construct_object(class_name.godot_owner)
+    cdef GDExtensionObjectPtr gdnative_object = gdnative_interface.classdb_construct_object(class_name.godot_owner)
     print_warning(gdnative_object == NULL)
     return gdnative_object
     #return NULL
@@ -149,21 +149,21 @@ cdef void free_instance(void *p_userdata, GDExtensionClassInstancePtr p_instance
 cdef void register_class_py_format_saver() with gil:
     print_warning("register PyFormatSaver")
     """
-    ctypedef struct GDNativeExtensionClassCreationInfo:
-        GDNativeExtensionClassSet set_func;
-        GDNativeExtensionClassGet get_func;
-        GDNativeExtensionClassGetPropertyList get_property_list_func;
-        GDNativeExtensionClassFreePropertyList free_property_list_func;
-        GDNativeExtensionClassPropertyCanRevert property_can_revert_func;
-        GDNativeExtensionClassPropertyGetRevert property_get_revert_func;
-        GDNativeExtensionClassNotification notification_func;
-        GDNativeExtensionClassToString to_string_func;
-        GDNativeExtensionClassReference reference_func;
-        GDNativeExtensionClassUnreference unreference_func;
-        GDNativeExtensionClassCreateInstance create_instance_func; # this one is mandatory
-        GDNativeExtensionClassFreeInstance free_instance_func; # this one is mandatory
-        GDNativeExtensionClassGetVirtual get_virtual_func;
-        GDNativeExtensionClassGetRID get_rid_func;
+    ctypedef struct GDExtensionClassCreationInfo:
+        GDExtensionClassSet set_func;
+        GDExtensionClassGet get_func;
+        GDExtensionClassGetPropertyList get_property_list_func;
+        GDExtensionClassFreePropertyList free_property_list_func;
+        GDExtensionClassPropertyCanRevert property_can_revert_func;
+        GDExtensionClassPropertyGetRevert property_get_revert_func;
+        GDExtensionClassNotification notification_func;
+        GDExtensionClassToString to_string_func;
+        GDExtensionClassReference reference_func;
+        GDExtensionClassUnreference unreference_func;
+        GDExtensionClassCreateInstance create_instance_func; # this one is mandatory
+        GDExtensionClassFreeInstance free_instance_func; # this one is mandatory
+        GDExtensionClassGetVirtual get_virtual_func;
+        GDExtensionClassGetRID get_rid_func;
         void *class_userdata;
     """
 
@@ -183,7 +183,7 @@ cdef void register_class_py_format_saver() with gil:
     _interface.classdb_register_extension_class(get_library(), class_name.godot_owner, parent_class_name.godot_owner, &creation_info)
     print_warning("-----------registered PyResourceFormatSaver----------------")
 
-cdef GDNativeExtensionClassCallVirtual get_virtual_func(void *p_userdata, GDNativeConstStringNamePtr p_name) with gil:
+cdef GDExtensionClassCallVirtual get_virtual_func(void *p_userdata, GDExtensionConstStringNamePtr p_name) with gil:
     print_warning("------------pyformatsaver-get_virtual_func---------")
     gdnative_interface = get_interface()
     cdef StringName name = StringName()

@@ -7,390 +7,390 @@ from libc.stdint cimport int64_t
 from libc.stdint cimport int8_t
 
 ctypedef bint bool
-ctypedef void *GDNativeVariantPtr;
-ctypedef const void *GDNativeConstVariantPtr;
+ctypedef void *GDExtensionVariantPtr;
+ctypedef const void *GDExtensionConstVariantPtr;
 ctypedef void * GodotObject;
-ctypedef void *GDNativeStringNamePtr;
-ctypedef void *GDNativeStringPtr;
-ctypedef void *GDNativeObjectPtr;
-ctypedef const void *GDNativeConstObjectPtr;
-ctypedef void *GDNativeTypePtr;
-ctypedef void *GDNativeExtensionPtr;
-ctypedef void *GDNativeMethodBindPtr;
-ctypedef int64_t GDNativeInt;
-ctypedef uint8_t GDNativeBool;
+ctypedef void *GDExtensionStringNamePtr;
+ctypedef void *GDExtensionStringPtr;
+ctypedef void *GDExtensionObjectPtr;
+ctypedef const void *GDExtensionConstObjectPtr;
+ctypedef void *GDExtensionTypePtr;
+ctypedef void *GDExtensionPtr;
+ctypedef void *GDExtensionMethodBindPtr;
+ctypedef int64_t GDExtensionInt;
+ctypedef uint8_t GDExtensionBool;
 ctypedef uint64_t GDObjectInstanceID;
-ctypedef public void *GDNativeExtensionClassLibraryPtr;
+ctypedef public void *GDExtensionClassLibraryPtr;
 ctypedef void *GDExtensionClassInstancePtr;
-ctypedef const void *GDNativeConstTypePtr;
-ctypedef const void *GDNativeConstStringNamePtr;
-ctypedef const void *GDNativeConstStringPtr;
+ctypedef const void *GDExtensionConstTypePtr;
+ctypedef const void *GDExtensionConstStringNamePtr;
+ctypedef const void *GDExtensionConstStringPtr;
 
 cdef extern from "binding4.h":
-    ctypedef void (*GDNativeVariantFromTypeConstructorFunc)(GDNativeVariantPtr, GDNativeTypePtr);
-    ctypedef void (*GDNativeTypeFromVariantConstructorFunc)(GDNativeTypePtr, GDNativeVariantPtr);
-    ctypedef void (*GDNativeExtensionClassMethodCall)(void *method_userdata, GDExtensionClassInstancePtr p_instance, const GDNativeVariantPtr *p_args, const GDNativeInt p_argument_count, GDNativeVariantPtr r_return, GDNativeCallError *r_error);
-    ctypedef void (*GDNativeExtensionClassMethodPtrCall)(void *method_userdata, GDExtensionClassInstancePtr p_instance, const GDNativeTypePtr *p_args, GDNativeTypePtr r_ret);
+    ctypedef void (*GDExtensionVariantFromTypeConstructorFunc)(GDExtensionVariantPtr, GDExtensionTypePtr);
+    ctypedef void (*GDExtensionTypeFromVariantConstructorFunc)(GDExtensionTypePtr, GDExtensionVariantPtr);
+    ctypedef void (*GDExtensionClassMethodCall)(void *method_userdata, GDExtensionClassInstancePtr p_instance, const GDExtensionVariantPtr *p_args, const GDExtensionInt p_argument_count, GDExtensionVariantPtr r_return, GDExtensionCallError *r_error);
+    ctypedef void (*GDExtensionClassMethodPtrCall)(void *method_userdata, GDExtensionClassInstancePtr p_instance, const GDExtensionTypePtr *p_args, GDExtensionTypePtr r_ret);
 
 
-    ctypedef GDNativeVariantType (*GDNativeExtensionClassMethodGetArgumentType)(void *p_method_userdata, int32_t p_argument);
-    ctypedef void (*GDNativeExtensionClassMethodGetArgumentInfo)(void *p_method_userdata, int32_t p_argument, GDNativePropertyInfo *r_info);
-    ctypedef GDNativeExtensionClassMethodArgumentMetadata (*GDNativeExtensionClassMethodGetArgumentMetadata)(void *p_method_userdata, int32_t p_argument);
+    ctypedef GDExtensionVariantType (*GDExtensionClassMethodGetArgumentType)(void *p_method_userdata, int32_t p_argument);
+    ctypedef void (*GDExtensionClassMethodGetArgumentInfo)(void *p_method_userdata, int32_t p_argument, GDExtensionPropertyInfo *r_info);
+    ctypedef GDExtensionClassMethodArgumentMetadata (*GDExtensionClassMethodGetArgumentMetadata)(void *p_method_userdata, int32_t p_argument);
 
-    ctypedef void (*GDNativePtrBuiltInMethod)(GDNativeTypePtr p_base, const GDNativeTypePtr *p_args, GDNativeTypePtr r_return, int p_argument_count);
-    ctypedef void (*GDNativePtrConstructor)(GDNativeTypePtr p_base, const GDNativeTypePtr *p_args);
-    ctypedef void (*GDNativePtrDestructor)(GDNativeTypePtr p_base);
-    ctypedef void (*GDNativePtrSetter)(GDNativeTypePtr p_base, const GDNativeTypePtr p_value);
-    ctypedef void (*GDNativePtrGetter)(const GDNativeTypePtr p_base, GDNativeTypePtr r_value);
-    ctypedef void (*GDNativePtrOperatorEvaluator)(GDNativeConstTypePtr p_left, GDNativeConstTypePtr p_right, GDNativeTypePtr r_result);
+    ctypedef void (*GDExtensionPtrBuiltInMethod)(GDExtensionTypePtr p_base, const GDExtensionTypePtr *p_args, GDExtensionTypePtr r_return, int p_argument_count);
+    ctypedef void (*GDExtensionPtrConstructor)(GDExtensionTypePtr p_base, const GDExtensionTypePtr *p_args);
+    ctypedef void (*GDExtensionPtrDestructor)(GDExtensionTypePtr p_base);
+    ctypedef void (*GDExtensionPtrSetter)(GDExtensionTypePtr p_base, const GDExtensionTypePtr p_value);
+    ctypedef void (*GDExtensionPtrGetter)(const GDExtensionTypePtr p_base, GDExtensionTypePtr r_value);
+    ctypedef void (*GDExtensionPtrOperatorEvaluator)(GDExtensionConstTypePtr p_left, GDExtensionConstTypePtr p_right, GDExtensionTypePtr r_result);
 
 
-    ctypedef struct GDNativePropertyInfo:
-        GDNativeVariantType type;
-        GDNativeStringNamePtr name;
-        GDNativeStringNamePtr class_name;
+    ctypedef struct GDExtensionPropertyInfo:
+        GDExtensionVariantType type;
+        GDExtensionStringNamePtr name;
+        GDExtensionStringNamePtr class_name;
         uint32_t hint; # Bitfield of `PropertyHint` (defined in `extension_api.json`).
-        GDNativeStringPtr hint_string;
+        GDExtensionStringPtr hint_string;
         uint32_t usage; # Bitfield of `PropertyUsageFlags` (defined in `extension_api.json`).
 
 
-    ctypedef struct GDNativeMethodInfo:
+    ctypedef struct GDExtensionMethodInfo:
         const char *name;
-        GDNativePropertyInfo return_value;
-        uint32_t flags; # From GDNativeExtensionClassMethodFlags
+        GDExtensionPropertyInfo return_value;
+        uint32_t flags; # From GDExtensionClassMethodFlags
         int32_t id;
-        GDNativePropertyInfo *arguments;
+        GDExtensionPropertyInfo *arguments;
         uint32_t argument_count;
-        GDNativeVariantPtr default_arguments;
+        GDExtensionVariantPtr default_arguments;
         uint32_t default_argument_count;
 
-    ctypedef struct GDNativeExtensionClassMethodInfo:
-        GDNativeStringNamePtr name;
+    ctypedef struct GDExtensionClassMethodInfo:
+        GDExtensionStringNamePtr name;
         void *method_userdata;
-        GDNativeExtensionClassMethodCall call_func;
-        GDNativeExtensionClassMethodPtrCall ptrcall_func;
-        uint32_t method_flags; # Bitfield of `GDNativeExtensionClassMethodFlags`.
+        GDExtensionClassMethodCall call_func;
+        GDExtensionClassMethodPtrCall ptrcall_func;
+        uint32_t method_flags; # Bitfield of `GDExtensionClassMethodFlags`.
 
         # If `has_return_value` is false, `return_value_info` and `return_value_metadata` are ignored.
-        GDNativeBool has_return_value;
-        GDNativePropertyInfo *return_value_info;
-        GDNativeExtensionClassMethodArgumentMetadata return_value_metadata;
+        GDExtensionBool has_return_value;
+        GDExtensionPropertyInfo *return_value_info;
+        GDExtensionClassMethodArgumentMetadata return_value_metadata;
 
         # Arguments: `arguments_info` and `arguments_metadata` are array of size `argument_count`.
         # Name and hint information for the argument can be omitted in release builds. Class name should always be present if it applies.
 
         uint32_t argument_count;
-        GDNativePropertyInfo *arguments_info;
-        GDNativeExtensionClassMethodArgumentMetadata *arguments_metadata;
+        GDExtensionPropertyInfo *arguments_info;
+        GDExtensionClassMethodArgumentMetadata *arguments_metadata;
 
         # Default arguments: `default_arguments` is an array of size `default_argument_count`.
         uint32_t default_argument_count;
-        GDNativeVariantPtr *default_arguments;
+        GDExtensionVariantPtr *default_arguments;
 
 
-    ctypedef GDNativeBool (*GDNativeExtensionClassSet)(GDExtensionClassInstancePtr p_instance, const GDNativeStringNamePtr p_name, const GDNativeVariantPtr p_value);
-    ctypedef GDNativeBool (*GDNativeExtensionClassGet)(GDExtensionClassInstancePtr p_instance, const GDNativeStringNamePtr p_name, GDNativeVariantPtr r_ret);
-    ctypedef uint64_t (*GDNativeExtensionClassGetRID)(GDExtensionClassInstancePtr p_instance);
+    ctypedef GDExtensionBool (*GDExtensionClassSet)(GDExtensionClassInstancePtr p_instance, const GDExtensionStringNamePtr p_name, const GDExtensionVariantPtr p_value);
+    ctypedef GDExtensionBool (*GDExtensionClassGet)(GDExtensionClassInstancePtr p_instance, const GDExtensionStringNamePtr p_name, GDExtensionVariantPtr r_ret);
+    ctypedef uint64_t (*GDExtensionClassGetRID)(GDExtensionClassInstancePtr p_instance);
 
-    ctypedef const GDNativePropertyInfo *(*GDNativeExtensionClassGetPropertyList)(GDExtensionClassInstancePtr p_instance, uint32_t *r_count);
-    ctypedef void (*GDNativeExtensionClassFreePropertyList)(GDExtensionClassInstancePtr p_instance, const GDNativePropertyInfo *p_list);
-    ctypedef GDNativeBool (*GDNativeExtensionClassPropertyCanRevert)(GDExtensionClassInstancePtr p_instance, const GDNativeStringNamePtr p_name);
-    ctypedef GDNativeBool (*GDNativeExtensionClassPropertyGetRevert)(GDExtensionClassInstancePtr p_instance, const GDNativeStringNamePtr p_name, GDNativeVariantPtr r_ret);
-    ctypedef void (*GDNativeExtensionClassNotification)(GDExtensionClassInstancePtr p_instance, int32_t p_what);
-    ctypedef void (*GDNativeExtensionClassToString)(GDExtensionClassInstancePtr p_instance, GDNativeStringPtr p_out);
-    ctypedef void (*GDNativeExtensionClassReference)(GDExtensionClassInstancePtr p_instance);
-    ctypedef void (*GDNativeExtensionClassUnreference)(GDExtensionClassInstancePtr p_instance);
-    ctypedef GDNativeObjectPtr (*GDNativeExtensionClassCreateInstance)(void *p_userdata);
-    ctypedef void (*GDNativeExtensionClassFreeInstance)(void *p_userdata, GDExtensionClassInstancePtr p_instance);
-    ctypedef void (*GDNativeExtensionClassObjectInstance)(GDExtensionClassInstancePtr p_instance, GDNativeObjectPtr p_object_instance);
-    ctypedef void (*GDNativeExtensionClassCallVirtual)(GDExtensionClassInstancePtr p_instance, GDNativeConstTypePtr *p_args, GDNativeTypePtr r_ret);
-    ctypedef GDNativeExtensionClassCallVirtual (*GDNativeExtensionClassGetVirtual)(void *p_userdata, GDNativeConstStringNamePtr p_name);
+    ctypedef const GDExtensionPropertyInfo *(*GDExtensionClassGetPropertyList)(GDExtensionClassInstancePtr p_instance, uint32_t *r_count);
+    ctypedef void (*GDExtensionClassFreePropertyList)(GDExtensionClassInstancePtr p_instance, const GDExtensionPropertyInfo *p_list);
+    ctypedef GDExtensionBool (*GDExtensionClassPropertyCanRevert)(GDExtensionClassInstancePtr p_instance, const GDExtensionStringNamePtr p_name);
+    ctypedef GDExtensionBool (*GDExtensionClassPropertyGetRevert)(GDExtensionClassInstancePtr p_instance, const GDExtensionStringNamePtr p_name, GDExtensionVariantPtr r_ret);
+    ctypedef void (*GDExtensionClassNotification)(GDExtensionClassInstancePtr p_instance, int32_t p_what);
+    ctypedef void (*GDExtensionClassToString)(GDExtensionClassInstancePtr p_instance, GDExtensionStringPtr p_out);
+    ctypedef void (*GDExtensionClassReference)(GDExtensionClassInstancePtr p_instance);
+    ctypedef void (*GDExtensionClassUnreference)(GDExtensionClassInstancePtr p_instance);
+    ctypedef GDExtensionObjectPtr (*GDExtensionClassCreateInstance)(void *p_userdata);
+    ctypedef void (*GDExtensionClassFreeInstance)(void *p_userdata, GDExtensionClassInstancePtr p_instance);
+    ctypedef void (*GDExtensionClassObjectInstance)(GDExtensionClassInstancePtr p_instance, GDExtensionObjectPtr p_object_instance);
+    ctypedef void (*GDExtensionClassCallVirtual)(GDExtensionClassInstancePtr p_instance, GDExtensionConstTypePtr *p_args, GDExtensionTypePtr r_ret);
+    ctypedef GDExtensionClassCallVirtual (*GDExtensionClassGetVirtual)(void *p_userdata, GDExtensionConstStringNamePtr p_name);
 
 
 
 
     # VARIANT DATA I/O
 
-    ctypedef enum GDNativeCallErrorType:
-        GDNATIVE_CALL_OK = 0,
-        GDNATIVE_CALL_ERROR_INVALID_METHOD = 1,
-        GDNATIVE_CALL_ERROR_INVALID_ARGUMENT = 2, # expected is variant type
-        GDNATIVE_CALL_ERROR_TOO_MANY_ARGUMENTS = 3, # expected is number of arguments
-        GDNATIVE_CALL_ERROR_TOO_FEW_ARGUMENTS = 4, # expected is number of arguments
-        GDNATIVE_CALL_ERROR_INSTANCE_IS_NULL = 5,
-        GDNATIVE_CALL_ERROR_METHOD_NOT_CONST = 6, #used for const call
+    ctypedef enum GDExtensionCallErrorType:
+        GDEXTENSION_CALL_OK = 0,
+        GDEXTENSION_CALL_ERROR_INVALID_METHOD = 1,
+        GDEXTENSION_CALL_ERROR_INVALID_ARGUMENT = 2, # expected is variant type
+        GDEXTENSION_CALL_ERROR_TOO_MANY_ARGUMENTS = 3, # expected is number of arguments
+        GDEXTENSION_CALL_ERROR_TOO_FEW_ARGUMENTS = 4, # expected is number of arguments
+        GDEXTENSION_CALL_ERROR_INSTANCE_IS_NULL = 5,
+        GDEXTENSION_CALL_ERROR_METHOD_NOT_CONST = 6, #used for const call
 
 
-    ctypedef enum GDNativeVariantOperator:
+    ctypedef enum GDExtensionVariantOperator:
         # comparison
-        GDNATIVE_VARIANT_OP_EQUAL = 0
-        GDNATIVE_VARIANT_OP_NOT_EQUAL = 1
-        GDNATIVE_VARIANT_OP_LESS = 2
-        GDNATIVE_VARIANT_OP_LESS_EQUAL = 3
-        GDNATIVE_VARIANT_OP_GREATER = 4
-        GDNATIVE_VARIANT_OP_GREATER_EQUAL = 5
+        GDEXTENSION_VARIANT_OP_EQUAL = 0
+        GDEXTENSION_VARIANT_OP_NOT_EQUAL = 1
+        GDEXTENSION_VARIANT_OP_LESS = 2
+        GDEXTENSION_VARIANT_OP_LESS_EQUAL = 3
+        GDEXTENSION_VARIANT_OP_GREATER = 4
+        GDEXTENSION_VARIANT_OP_GREATER_EQUAL = 5
 
         # mathematic
-        GDNATIVE_VARIANT_OP_ADD = 6
-        GDNATIVE_VARIANT_OP_SUBTRACT = 7
-        GDNATIVE_VARIANT_OP_MULTIPLY = 8
-        GDNATIVE_VARIANT_OP_DIVIDE = 9
-        GDNATIVE_VARIANT_OP_NEGATE = 10
-        GDNATIVE_VARIANT_OP_POSITIVE = 11
-        GDNATIVE_VARIANT_OP_MODULE = 12
-        GDNATIVE_VARIANT_OP_POWER = 13
+        GDEXTENSION_VARIANT_OP_ADD = 6
+        GDEXTENSION_VARIANT_OP_SUBTRACT = 7
+        GDEXTENSION_VARIANT_OP_MULTIPLY = 8
+        GDEXTENSION_VARIANT_OP_DIVIDE = 9
+        GDEXTENSION_VARIANT_OP_NEGATE = 10
+        GDEXTENSION_VARIANT_OP_POSITIVE = 11
+        GDEXTENSION_VARIANT_OP_MODULE = 12
+        GDEXTENSION_VARIANT_OP_POWER = 13
 
         # bitwise
-        GDNATIVE_VARIANT_OP_SHIFT_LEFT = 14
-        GDNATIVE_VARIANT_OP_SHIFT_RIGHT = 15
-        GDNATIVE_VARIANT_OP_BIT_AND = 16
-        GDNATIVE_VARIANT_OP_BIT_OR = 17
-        GDNATIVE_VARIANT_OP_BIT_XOR = 18
-        GDNATIVE_VARIANT_OP_BIT_NEGATE = 19
+        GDEXTENSION_VARIANT_OP_SHIFT_LEFT = 14
+        GDEXTENSION_VARIANT_OP_SHIFT_RIGHT = 15
+        GDEXTENSION_VARIANT_OP_BIT_AND = 16
+        GDEXTENSION_VARIANT_OP_BIT_OR = 17
+        GDEXTENSION_VARIANT_OP_BIT_XOR = 18
+        GDEXTENSION_VARIANT_OP_BIT_NEGATE = 19
 
         # logic
-        GDNATIVE_VARIANT_OP_AND = 20
-        GDNATIVE_VARIANT_OP_OR = 21
-        GDNATIVE_VARIANT_OP_XOR = 22
-        GDNATIVE_VARIANT_OP_NOT = 23
+        GDEXTENSION_VARIANT_OP_AND = 20
+        GDEXTENSION_VARIANT_OP_OR = 21
+        GDEXTENSION_VARIANT_OP_XOR = 22
+        GDEXTENSION_VARIANT_OP_NOT = 23
 
         # containment
-        GDNATIVE_VARIANT_OP_IN = 24
-        GDNATIVE_VARIANT_OP_MAX = 25
+        GDEXTENSION_VARIANT_OP_IN = 24
+        GDEXTENSION_VARIANT_OP_MAX = 25
 
 
 
-    ctypedef enum GDNativeVariantType:
-        GDNATIVE_VARIANT_TYPE_NIL,
+    ctypedef enum GDExtensionVariantType:
+        GDEXTENSION_VARIANT_TYPE_NIL,
 
         #  atomic types
-        GDNATIVE_VARIANT_TYPE_BOOL,
-        GDNATIVE_VARIANT_TYPE_INT,
-        GDNATIVE_VARIANT_TYPE_FLOAT,
-        GDNATIVE_VARIANT_TYPE_STRING,
+        GDEXTENSION_VARIANT_TYPE_BOOL,
+        GDEXTENSION_VARIANT_TYPE_INT,
+        GDEXTENSION_VARIANT_TYPE_FLOAT,
+        GDEXTENSION_VARIANT_TYPE_STRING,
 
         # math types
-        GDNATIVE_VARIANT_TYPE_VECTOR2,
-        GDNATIVE_VARIANT_TYPE_VECTOR2I,
-        GDNATIVE_VARIANT_TYPE_RECT2,
-        GDNATIVE_VARIANT_TYPE_RECT2I,
-        GDNATIVE_VARIANT_TYPE_VECTOR3,
-        GDNATIVE_VARIANT_TYPE_VECTOR3I,
-        GDNATIVE_VARIANT_TYPE_TRANSFORM2D,
-        GDNATIVE_VARIANT_TYPE_VECTOR4,
-        GDNATIVE_VARIANT_TYPE_VECTOR4I,
-        GDNATIVE_VARIANT_TYPE_PLANE,
-        GDNATIVE_VARIANT_TYPE_QUATERNION,
-        GDNATIVE_VARIANT_TYPE_AABB,
-        GDNATIVE_VARIANT_TYPE_BASIS,
-        GDNATIVE_VARIANT_TYPE_TRANSFORM3D,
-        GDNATIVE_VARIANT_TYPE_PROJECTION,
+        GDEXTENSION_VARIANT_TYPE_VECTOR2,
+        GDEXTENSION_VARIANT_TYPE_VECTOR2I,
+        GDEXTENSION_VARIANT_TYPE_RECT2,
+        GDEXTENSION_VARIANT_TYPE_RECT2I,
+        GDEXTENSION_VARIANT_TYPE_VECTOR3,
+        GDEXTENSION_VARIANT_TYPE_VECTOR3I,
+        GDEXTENSION_VARIANT_TYPE_TRANSFORM2D,
+        GDEXTENSION_VARIANT_TYPE_VECTOR4,
+        GDEXTENSION_VARIANT_TYPE_VECTOR4I,
+        GDEXTENSION_VARIANT_TYPE_PLANE,
+        GDEXTENSION_VARIANT_TYPE_QUATERNION,
+        GDEXTENSION_VARIANT_TYPE_AABB,
+        GDEXTENSION_VARIANT_TYPE_BASIS,
+        GDEXTENSION_VARIANT_TYPE_TRANSFORM3D,
+        GDEXTENSION_VARIANT_TYPE_PROJECTION,
 
         # misc types
-        GDNATIVE_VARIANT_TYPE_COLOR,
-        GDNATIVE_VARIANT_TYPE_STRING_NAME,
-        GDNATIVE_VARIANT_TYPE_NODE_PATH,
-        GDNATIVE_VARIANT_TYPE_RID,
-        GDNATIVE_VARIANT_TYPE_OBJECT,
-        GDNATIVE_VARIANT_TYPE_CALLABLE,
-        GDNATIVE_VARIANT_TYPE_SIGNAL,
-        GDNATIVE_VARIANT_TYPE_DICTIONARY,
-        GDNATIVE_VARIANT_TYPE_ARRAY,
+        GDEXTENSION_VARIANT_TYPE_COLOR,
+        GDEXTENSION_VARIANT_TYPE_STRING_NAME,
+        GDEXTENSION_VARIANT_TYPE_NODE_PATH,
+        GDEXTENSION_VARIANT_TYPE_RID,
+        GDEXTENSION_VARIANT_TYPE_OBJECT,
+        GDEXTENSION_VARIANT_TYPE_CALLABLE,
+        GDEXTENSION_VARIANT_TYPE_SIGNAL,
+        GDEXTENSION_VARIANT_TYPE_DICTIONARY,
+        GDEXTENSION_VARIANT_TYPE_ARRAY,
 
         # typed arrays
-        GDNATIVE_VARIANT_TYPE_PACKED_BYTE_ARRAY,
-        GDNATIVE_VARIANT_TYPE_PACKED_INT32_ARRAY,
-        GDNATIVE_VARIANT_TYPE_PACKED_INT64_ARRAY,
-        GDNATIVE_VARIANT_TYPE_PACKED_FLOAT32_ARRAY,
-        GDNATIVE_VARIANT_TYPE_PACKED_FLOAT64_ARRAY,
-        GDNATIVE_VARIANT_TYPE_PACKED_STRING_ARRAY,
-        GDNATIVE_VARIANT_TYPE_PACKED_VECTOR2_ARRAY,
-        GDNATIVE_VARIANT_TYPE_PACKED_VECTOR3_ARRAY,
-        GDNATIVE_VARIANT_TYPE_PACKED_COLOR_ARRAY,
+        GDEXTENSION_VARIANT_TYPE_PACKED_BYTE_ARRAY,
+        GDEXTENSION_VARIANT_TYPE_PACKED_INT32_ARRAY,
+        GDEXTENSION_VARIANT_TYPE_PACKED_INT64_ARRAY,
+        GDEXTENSION_VARIANT_TYPE_PACKED_FLOAT32_ARRAY,
+        GDEXTENSION_VARIANT_TYPE_PACKED_FLOAT64_ARRAY,
+        GDEXTENSION_VARIANT_TYPE_PACKED_STRING_ARRAY,
+        GDEXTENSION_VARIANT_TYPE_PACKED_VECTOR2_ARRAY,
+        GDEXTENSION_VARIANT_TYPE_PACKED_VECTOR3_ARRAY,
+        GDEXTENSION_VARIANT_TYPE_PACKED_COLOR_ARRAY,
 
-        GDNATIVE_VARIANT_TYPE_VARIANT_MAX
+        GDEXTENSION_VARIANT_TYPE_VARIANT_MAX
 
-    ctypedef enum GDNativeExtensionClassMethodFlags :
-        GDNATIVE_EXTENSION_METHOD_FLAG_NORMAL = 1,
-        GDNATIVE_EXTENSION_METHOD_FLAG_EDITOR = 2,
-        GDNATIVE_EXTENSION_METHOD_FLAG_CONST = 4,
-        GDNATIVE_EXTENSION_METHOD_FLAG_VIRTUAL = 8,
-        GDNATIVE_EXTENSION_METHOD_FLAG_VARARG = 16,
-        GDNATIVE_EXTENSION_METHOD_FLAG_STATIC = 32,
-        GDNATIVE_EXTENSION_METHOD_FLAGS_DEFAULT = GDNATIVE_EXTENSION_METHOD_FLAG_NORMAL
+    ctypedef enum GDExtensionClassMethodFlags :
+        GDEXTENSION_EXTENSION_METHOD_FLAG_NORMAL = 1,
+        GDEXTENSION_EXTENSION_METHOD_FLAG_EDITOR = 2,
+        GDEXTENSION_EXTENSION_METHOD_FLAG_CONST = 4,
+        GDEXTENSION_EXTENSION_METHOD_FLAG_VIRTUAL = 8,
+        GDEXTENSION_EXTENSION_METHOD_FLAG_VARARG = 16,
+        GDEXTENSION_EXTENSION_METHOD_FLAG_STATIC = 32,
+        GDEXTENSION_EXTENSION_METHOD_FLAGS_DEFAULT = GDEXTENSION_EXTENSION_METHOD_FLAG_NORMAL
 
-    ctypedef enum GDNativeExtensionClassMethodArgumentMetadata:
-        GDNATIVE_EXTENSION_METHOD_ARGUMENT_METADATA_NONE,
-        GDNATIVE_EXTENSION_METHOD_ARGUMENT_METADATA_INT_IS_INT8,
-        GDNATIVE_EXTENSION_METHOD_ARGUMENT_METADATA_INT_IS_INT16,
-        GDNATIVE_EXTENSION_METHOD_ARGUMENT_METADATA_INT_IS_INT32,
-        GDNATIVE_EXTENSION_METHOD_ARGUMENT_METADATA_INT_IS_INT64,
-        GDNATIVE_EXTENSION_METHOD_ARGUMENT_METADATA_INT_IS_UINT8,
-        GDNATIVE_EXTENSION_METHOD_ARGUMENT_METADATA_INT_IS_UINT16,
-        GDNATIVE_EXTENSION_METHOD_ARGUMENT_METADATA_INT_IS_UINT32,
-        GDNATIVE_EXTENSION_METHOD_ARGUMENT_METADATA_INT_IS_UINT64,
-        GDNATIVE_EXTENSION_METHOD_ARGUMENT_METADATA_REAL_IS_FLOAT,
-        GDNATIVE_EXTENSION_METHOD_ARGUMENT_METADATA_REAL_IS_DOUBLE
+    ctypedef enum GDExtensionClassMethodArgumentMetadata:
+        GDEXTENSION_EXTENSION_METHOD_ARGUMENT_METADATA_NONE,
+        GDEXTENSION_EXTENSION_METHOD_ARGUMENT_METADATA_INT_IS_INT8,
+        GDEXTENSION_EXTENSION_METHOD_ARGUMENT_METADATA_INT_IS_INT16,
+        GDEXTENSION_EXTENSION_METHOD_ARGUMENT_METADATA_INT_IS_INT32,
+        GDEXTENSION_EXTENSION_METHOD_ARGUMENT_METADATA_INT_IS_INT64,
+        GDEXTENSION_EXTENSION_METHOD_ARGUMENT_METADATA_INT_IS_UINT8,
+        GDEXTENSION_EXTENSION_METHOD_ARGUMENT_METADATA_INT_IS_UINT16,
+        GDEXTENSION_EXTENSION_METHOD_ARGUMENT_METADATA_INT_IS_UINT32,
+        GDEXTENSION_EXTENSION_METHOD_ARGUMENT_METADATA_INT_IS_UINT64,
+        GDEXTENSION_EXTENSION_METHOD_ARGUMENT_METADATA_REAL_IS_FLOAT,
+        GDEXTENSION_EXTENSION_METHOD_ARGUMENT_METADATA_REAL_IS_DOUBLE
 
-    ctypedef struct GDNativeCallError:
-        GDNativeCallErrorType error;
+    ctypedef struct GDExtensionCallError:
+        GDExtensionCallErrorType error;
         int32_t argument;
         int32_t expected;
 
-    ctypedef struct GDNativeExtensionClassCreationInfo:
-        GDNativeExtensionClassSet set_func;
-        GDNativeExtensionClassGet get_func;
-        GDNativeExtensionClassGetPropertyList get_property_list_func;
-        GDNativeExtensionClassFreePropertyList free_property_list_func;
-        GDNativeExtensionClassPropertyCanRevert property_can_revert_func;
-        GDNativeExtensionClassPropertyGetRevert property_get_revert_func;
-        GDNativeExtensionClassNotification notification_func;
-        GDNativeExtensionClassToString to_string_func;
-        GDNativeExtensionClassReference reference_func;
-        GDNativeExtensionClassUnreference unreference_func;
-        GDNativeExtensionClassCreateInstance create_instance_func; # this one is mandatory
-        GDNativeExtensionClassFreeInstance free_instance_func; # this one is mandatory
-        GDNativeExtensionClassGetVirtual get_virtual_func;
-        GDNativeExtensionClassGetRID get_rid_func;
+    ctypedef struct GDExtensionClassCreationInfo:
+        GDExtensionClassSet set_func;
+        GDExtensionClassGet get_func;
+        GDExtensionClassGetPropertyList get_property_list_func;
+        GDExtensionClassFreePropertyList free_property_list_func;
+        GDExtensionClassPropertyCanRevert property_can_revert_func;
+        GDExtensionClassPropertyGetRevert property_get_revert_func;
+        GDExtensionClassNotification notification_func;
+        GDExtensionClassToString to_string_func;
+        GDExtensionClassReference reference_func;
+        GDExtensionClassUnreference unreference_func;
+        GDExtensionClassCreateInstance create_instance_func; # this one is mandatory
+        GDExtensionClassFreeInstance free_instance_func; # this one is mandatory
+        GDExtensionClassGetVirtual get_virtual_func;
+        GDExtensionClassGetRID get_rid_func;
         void *class_userdata;
 
-    ctypedef struct GDNativeInterface:
-        GDNativeVariantFromTypeConstructorFunc (*get_variant_from_type_constructor)(GDNativeVariantType p_type);
-        GDNativeTypeFromVariantConstructorFunc (*get_variant_to_type_constructor)(GDNativeVariantType p_type);
-        void (*variant_new_nil)(GDNativeVariantPtr r_dest);
-        void *object_method_bind_call (const GDNativeMethodBindPtr p_method_bind, GDNativeObjectPtr p_instance, const GDNativeVariantPtr *p_args, GDNativeInt p_arg_count, GDNativeVariantPtr r_ret, GDNativeCallError *r_error);
-        void *object_method_bind_ptrcall (const GDNativeMethodBindPtr p_method_bind, GDNativeObjectPtr p_instance, const GDNativeTypePtr *p_args, GDNativeTypePtr r_ret);
-        GDNativeObjectPtr (*classdb_construct_object)(const GDNativeStringNamePtr p_classname); #The passed class must be a built-in godot class, or an already-registered extension class. In both case, object_set_instance should be called to fully initialize the object.
-        GDNativeMethodBindPtr (*classdb_get_method_bind)(GDNativeConstStringNamePtr p_classname, GDNativeConstStringNamePtr p_methodname, GDNativeInt p_hash);
-        void (*object_set_instance)(GDNativeObjectPtr p_o, const GDNativeStringNamePtr p_classname, GDExtensionClassInstancePtr p_instance); #p_classname should be a registered extension class and should extend the p_o object's class.
+    ctypedef struct GDExtensionInterface:
+        GDExtensionVariantFromTypeConstructorFunc (*get_variant_from_type_constructor)(GDExtensionVariantType p_type);
+        GDExtensionTypeFromVariantConstructorFunc (*get_variant_to_type_constructor)(GDExtensionVariantType p_type);
+        void (*variant_new_nil)(GDExtensionVariantPtr r_dest);
+        void *object_method_bind_call (const GDExtensionMethodBindPtr p_method_bind, GDExtensionObjectPtr p_instance, const GDExtensionVariantPtr *p_args, GDExtensionInt p_arg_count, GDExtensionVariantPtr r_ret, GDExtensionCallError *r_error);
+        void *object_method_bind_ptrcall (const GDExtensionMethodBindPtr p_method_bind, GDExtensionObjectPtr p_instance, const GDExtensionTypePtr *p_args, GDExtensionTypePtr r_ret);
+        GDExtensionObjectPtr (*classdb_construct_object)(const GDExtensionStringNamePtr p_classname); #The passed class must be a built-in godot class, or an already-registered extension class. In both case, object_set_instance should be called to fully initialize the object.
+        GDExtensionMethodBindPtr (*classdb_get_method_bind)(GDExtensionConstStringNamePtr p_classname, GDExtensionConstStringNamePtr p_methodname, GDExtensionInt p_hash);
+        void (*object_set_instance)(GDExtensionObjectPtr p_o, const GDExtensionStringNamePtr p_classname, GDExtensionClassInstancePtr p_instance); #p_classname should be a registered extension class and should extend the p_o object's class.
 
         # CLASSDB EXTENSION
 
-        void (*classdb_register_extension_class)(GDNativeExtensionClassLibraryPtr p_library, GDNativeConstStringNamePtr p_class_name, GDNativeConstStringNamePtr p_parent_class_name, const GDNativeExtensionClassCreationInfo *p_extension_funcs);
-        void (*classdb_register_extension_class_method)(GDNativeExtensionClassLibraryPtr p_library, GDNativeConstStringNamePtr p_class_name, const GDNativeExtensionClassMethodInfo *p_method_info);
-        void (*classdb_register_extension_class_integer_constant)(GDNativeExtensionClassLibraryPtr p_library, GDNativeConstStringNamePtr p_class_name, GDNativeConstStringNamePtr p_enum_name, GDNativeConstStringNamePtr p_constant_name, GDNativeInt p_constant_value, GDNativeBool p_is_bitfield);
-        void (*classdb_register_extension_class_property)(GDNativeExtensionClassLibraryPtr p_library, GDNativeConstStringNamePtr p_class_name, const GDNativePropertyInfo *p_info, GDNativeConstStringNamePtr p_setter, GDNativeConstStringNamePtr p_getter);
-        void (*classdb_register_extension_class_property_group)(GDNativeExtensionClassLibraryPtr p_library, GDNativeConstStringNamePtr p_class_name, GDNativeConstStringPtr p_group_name, GDNativeConstStringPtr p_prefix);
-        void (*classdb_register_extension_class_property_subgroup)(GDNativeExtensionClassLibraryPtr p_library, GDNativeConstStringNamePtr p_class_name, GDNativeConstStringPtr p_subgroup_name, GDNativeConstStringPtr p_prefix);
-        void (*classdb_register_extension_class_signal)(GDNativeExtensionClassLibraryPtr p_library, GDNativeConstStringNamePtr p_class_name, GDNativeConstStringNamePtr p_signal_name, const GDNativePropertyInfo *p_argument_info, GDNativeInt p_argument_count);
-        void (*classdb_unregister_extension_class)(GDNativeExtensionClassLibraryPtr p_library, GDNativeConstStringNamePtr p_class_name); # Unregistering a parent class before a class that inherits it will result in failure. Inheritors must be unregistered first.
+        void (*classdb_register_extension_class)(GDExtensionClassLibraryPtr p_library, GDExtensionConstStringNamePtr p_class_name, GDExtensionConstStringNamePtr p_parent_class_name, const GDExtensionClassCreationInfo *p_extension_funcs);
+        void (*classdb_register_extension_class_method)(GDExtensionClassLibraryPtr p_library, GDExtensionConstStringNamePtr p_class_name, const GDExtensionClassMethodInfo *p_method_info);
+        void (*classdb_register_extension_class_integer_constant)(GDExtensionClassLibraryPtr p_library, GDExtensionConstStringNamePtr p_class_name, GDExtensionConstStringNamePtr p_enum_name, GDExtensionConstStringNamePtr p_constant_name, GDExtensionInt p_constant_value, GDExtensionBool p_is_bitfield);
+        void (*classdb_register_extension_class_property)(GDExtensionClassLibraryPtr p_library, GDExtensionConstStringNamePtr p_class_name, const GDExtensionPropertyInfo *p_info, GDExtensionConstStringNamePtr p_setter, GDExtensionConstStringNamePtr p_getter);
+        void (*classdb_register_extension_class_property_group)(GDExtensionClassLibraryPtr p_library, GDExtensionConstStringNamePtr p_class_name, GDExtensionConstStringPtr p_group_name, GDExtensionConstStringPtr p_prefix);
+        void (*classdb_register_extension_class_property_subgroup)(GDExtensionClassLibraryPtr p_library, GDExtensionConstStringNamePtr p_class_name, GDExtensionConstStringPtr p_subgroup_name, GDExtensionConstStringPtr p_prefix);
+        void (*classdb_register_extension_class_signal)(GDExtensionClassLibraryPtr p_library, GDExtensionConstStringNamePtr p_class_name, GDExtensionConstStringNamePtr p_signal_name, const GDExtensionPropertyInfo *p_argument_info, GDExtensionInt p_argument_count);
+        void (*classdb_unregister_extension_class)(GDExtensionClassLibraryPtr p_library, GDExtensionConstStringNamePtr p_class_name); # Unregistering a parent class before a class that inherits it will result in failure. Inheritors must be unregistered first.
 
         #utils
         void (*print_error)(const char *p_description, const char *p_function, const char *p_file, int32_t p_line);
         void (*print_warning)(const char *p_description, const char *p_function, const char *p_file, int32_t p_line);
         void (*print_script_error)(const char *p_description, const char *p_function, const char *p_file, int32_t p_line);
-        GDNativeObjectPtr (*global_get_singleton)(const GDNativeStringNamePtr p_name);
-        GDNativePtrBuiltInMethod (*variant_get_ptr_builtin_method)(GDNativeVariantType p_type, const GDNativeStringNamePtr p_method, GDNativeInt p_hash);
-        GDNativePtrConstructor (*variant_get_ptr_constructor)(GDNativeVariantType p_type, int32_t p_constructor);
-        GDNativePtrDestructor (*variant_get_ptr_destructor)(GDNativeVariantType p_type);
+        GDExtensionObjectPtr (*global_get_singleton)(const GDExtensionStringNamePtr p_name);
+        GDExtensionPtrBuiltInMethod (*variant_get_ptr_builtin_method)(GDExtensionVariantType p_type, const GDExtensionStringNamePtr p_method, GDExtensionInt p_hash);
+        GDExtensionPtrConstructor (*variant_get_ptr_constructor)(GDExtensionVariantType p_type, int32_t p_constructor);
+        GDExtensionPtrDestructor (*variant_get_ptr_destructor)(GDExtensionVariantType p_type);
 
-        GDNativePtrOperatorEvaluator (*variant_get_ptr_operator_evaluator)(GDNativeVariantOperator p_operator, GDNativeVariantType p_type_a, GDNativeVariantType p_type_b);
+        GDExtensionPtrOperatorEvaluator (*variant_get_ptr_operator_evaluator)(GDExtensionVariantOperator p_operator, GDExtensionVariantType p_type_a, GDExtensionVariantType p_type_b);
 
-        void (*string_new_with_latin1_chars)(GDNativeStringPtr r_dest, const char *p_contents);
-        void (*string_new_with_utf8_chars)(GDNativeStringPtr r_dest, const char *p_contents);
-        #void (*string_new_with_utf16_chars)(GDNativeStringPtr r_dest, const char16_t *p_contents);
-        #void (*string_new_with_utf32_chars)(GDNativeStringPtr r_dest, const char32_t *p_contents);
-        #void (*string_new_with_wide_chars)(GDNativeStringPtr r_dest, const wchar_t *p_contents);
-        void (*string_new_with_latin1_chars_and_len)(GDNativeStringPtr r_dest, const char *p_contents, const GDNativeInt p_size);
-        void (*string_new_with_utf8_chars_and_len)(GDNativeStringPtr r_dest, const char *p_contents, const GDNativeInt p_size);
-        #void (*string_new_with_utf16_chars_and_len)(GDNativeStringPtr r_dest, const char16_t *p_contents, const GDNativeInt p_size);
-        #void (*string_new_with_utf32_chars_and_len)(GDNativeStringPtr r_dest, const char32_t *p_contents, const GDNativeInt p_size);
-        #void (*string_new_with_wide_chars_and_len)(GDNativeStringPtr r_dest, const wchar_t *p_contents, const GDNativeInt p_size);
+        void (*string_new_with_latin1_chars)(GDExtensionStringPtr r_dest, const char *p_contents);
+        void (*string_new_with_utf8_chars)(GDExtensionStringPtr r_dest, const char *p_contents);
+        #void (*string_new_with_utf16_chars)(GDExtensionStringPtr r_dest, const char16_t *p_contents);
+        #void (*string_new_with_utf32_chars)(GDExtensionStringPtr r_dest, const char32_t *p_contents);
+        #void (*string_new_with_wide_chars)(GDExtensionStringPtr r_dest, const wchar_t *p_contents);
+        void (*string_new_with_latin1_chars_and_len)(GDExtensionStringPtr r_dest, const char *p_contents, const GDExtensionInt p_size);
+        void (*string_new_with_utf8_chars_and_len)(GDExtensionStringPtr r_dest, const char *p_contents, const GDExtensionInt p_size);
+        #void (*string_new_with_utf16_chars_and_len)(GDExtensionStringPtr r_dest, const char16_t *p_contents, const GDExtensionInt p_size);
+        #void (*string_new_with_utf32_chars_and_len)(GDExtensionStringPtr r_dest, const char32_t *p_contents, const GDExtensionInt p_size);
+        #void (*string_new_with_wide_chars_and_len)(GDExtensionStringPtr r_dest, const wchar_t *p_contents, const GDExtensionInt p_size);
 
 
-        GDNativeVariantType (*variant_get_type)(GDNativeConstVariantPtr p_self);
-        GDNativeInt (*string_to_utf8_chars)(GDNativeConstStringPtr p_self, char *r_text, GDNativeInt p_max_write_length);
-        void *(*classdb_get_class_tag)(GDNativeConstStringNamePtr p_classname);
-        GDNativeObjectPtr (*object_cast_to)(GDNativeConstObjectPtr p_object, void *p_class_tag);
-        void (*object_destroy)(GDNativeObjectPtr p_o);
+        GDExtensionVariantType (*variant_get_type)(GDExtensionConstVariantPtr p_self);
+        GDExtensionInt (*string_to_utf8_chars)(GDExtensionConstStringPtr p_self, char *r_text, GDExtensionInt p_max_write_length);
+        void *(*classdb_get_class_tag)(GDExtensionConstStringNamePtr p_classname);
+        GDExtensionObjectPtr (*object_cast_to)(GDExtensionConstObjectPtr p_object, void *p_class_tag);
+        void (*object_destroy)(GDExtensionObjectPtr p_o);
 
         # Dictionary functions
-        GDNativeVariantPtr (*dictionary_operator_index)(GDNativeTypePtr p_self, GDNativeConstVariantPtr p_key); #p_self should be an Dictionary ptr
-        GDNativeVariantPtr (*dictionary_operator_index_const)(GDNativeConstTypePtr p_self, GDNativeConstVariantPtr p_key); # p_self should be an Dictionary ptr
+        GDExtensionVariantPtr (*dictionary_operator_index)(GDExtensionTypePtr p_self, GDExtensionConstVariantPtr p_key); #p_self should be an Dictionary ptr
+        GDExtensionVariantPtr (*dictionary_operator_index_const)(GDExtensionConstTypePtr p_self, GDExtensionConstVariantPtr p_key); # p_self should be an Dictionary ptr
 
 
     # SCRIPT INSTANCE EXTENSION
 
-    ctypedef void *GDNativeExtensionScriptInstanceDataPtr; # Pointer to custom ScriptInstance native implementation
+    ctypedef void *GDExtensionScriptInstanceDataPtr; # Pointer to custom ScriptInstance native implementation
 
-    ctypedef GDNativeBool (*GDNativeExtensionScriptInstanceSet)(GDNativeExtensionScriptInstanceDataPtr p_instance, const GDNativeStringNamePtr p_name, const GDNativeVariantPtr p_value);
-    ctypedef GDNativeBool (*GDNativeExtensionScriptInstanceGet)(GDNativeExtensionScriptInstanceDataPtr p_instance, const GDNativeStringNamePtr p_name, GDNativeVariantPtr r_ret);
-    ctypedef const GDNativePropertyInfo *(*GDNativeExtensionScriptInstanceGetPropertyList)(GDNativeExtensionScriptInstanceDataPtr p_instance, uint32_t *r_count);
-    ctypedef void (*GDNativeExtensionScriptInstanceFreePropertyList)(GDNativeExtensionScriptInstanceDataPtr p_instance, const GDNativePropertyInfo *p_list);
-    ctypedef GDNativeVariantType (*GDNativeExtensionScriptInstanceGetPropertyType)(GDNativeExtensionScriptInstanceDataPtr p_instance, const GDNativeStringNamePtr p_name, GDNativeBool *r_is_valid);
+    ctypedef GDExtensionBool (*GDExtensionScriptInstanceSet)(GDExtensionScriptInstanceDataPtr p_instance, const GDExtensionStringNamePtr p_name, const GDExtensionVariantPtr p_value);
+    ctypedef GDExtensionBool (*GDExtensionScriptInstanceGet)(GDExtensionScriptInstanceDataPtr p_instance, const GDExtensionStringNamePtr p_name, GDExtensionVariantPtr r_ret);
+    ctypedef const GDExtensionPropertyInfo *(*GDExtensionScriptInstanceGetPropertyList)(GDExtensionScriptInstanceDataPtr p_instance, uint32_t *r_count);
+    ctypedef void (*GDExtensionScriptInstanceFreePropertyList)(GDExtensionScriptInstanceDataPtr p_instance, const GDExtensionPropertyInfo *p_list);
+    ctypedef GDExtensionVariantType (*GDExtensionScriptInstanceGetPropertyType)(GDExtensionScriptInstanceDataPtr p_instance, const GDExtensionStringNamePtr p_name, GDExtensionBool *r_is_valid);
 
-    ctypedef GDNativeBool (*GDNativeExtensionScriptInstancePropertyCanRevert)(GDNativeExtensionScriptInstanceDataPtr p_instance, const GDNativeStringNamePtr p_name);
-    ctypedef GDNativeBool (*GDNativeExtensionScriptInstancePropertyGetRevert)(GDNativeExtensionScriptInstanceDataPtr p_instance, const GDNativeStringNamePtr p_name, GDNativeVariantPtr r_ret);
+    ctypedef GDExtensionBool (*GDExtensionScriptInstancePropertyCanRevert)(GDExtensionScriptInstanceDataPtr p_instance, const GDExtensionStringNamePtr p_name);
+    ctypedef GDExtensionBool (*GDExtensionScriptInstancePropertyGetRevert)(GDExtensionScriptInstanceDataPtr p_instance, const GDExtensionStringNamePtr p_name, GDExtensionVariantPtr r_ret);
 
-    ctypedef GDNativeObjectPtr (*GDNativeExtensionScriptInstanceGetOwner)(GDNativeExtensionScriptInstanceDataPtr p_instance);
-    ctypedef void (*GDNativeExtensionScriptInstancePropertyStateAdd)(const GDNativeStringNamePtr p_name, const GDNativeVariantPtr p_value, void *p_userdata);
-    ctypedef void (*GDNativeExtensionScriptInstanceGetPropertyState)(GDNativeExtensionScriptInstanceDataPtr p_instance, GDNativeExtensionScriptInstancePropertyStateAdd p_add_func, void *p_userdata);
+    ctypedef GDExtensionObjectPtr (*GDExtensionScriptInstanceGetOwner)(GDExtensionScriptInstanceDataPtr p_instance);
+    ctypedef void (*GDExtensionScriptInstancePropertyStateAdd)(const GDExtensionStringNamePtr p_name, const GDExtensionVariantPtr p_value, void *p_userdata);
+    ctypedef void (*GDExtensionScriptInstanceGetPropertyState)(GDExtensionScriptInstanceDataPtr p_instance, GDExtensionScriptInstancePropertyStateAdd p_add_func, void *p_userdata);
 
-    ctypedef const GDNativeMethodInfo *(*GDNativeExtensionScriptInstanceGetMethodList)(GDNativeExtensionScriptInstanceDataPtr p_instance, uint32_t *r_count);
-    ctypedef void (*GDNativeExtensionScriptInstanceFreeMethodList)(GDNativeExtensionScriptInstanceDataPtr p_instance, const GDNativeMethodInfo *p_list);
+    ctypedef const GDExtensionMethodInfo *(*GDExtensionScriptInstanceGetMethodList)(GDExtensionScriptInstanceDataPtr p_instance, uint32_t *r_count);
+    ctypedef void (*GDExtensionScriptInstanceFreeMethodList)(GDExtensionScriptInstanceDataPtr p_instance, const GDExtensionMethodInfo *p_list);
 
-    ctypedef GDNativeBool (*GDNativeExtensionScriptInstanceHasMethod)(GDNativeExtensionScriptInstanceDataPtr p_instance, const GDNativeStringNamePtr p_name);
+    ctypedef GDExtensionBool (*GDExtensionScriptInstanceHasMethod)(GDExtensionScriptInstanceDataPtr p_instance, const GDExtensionStringNamePtr p_name);
 
-    ctypedef void (*GDNativeExtensionScriptInstanceCall)(GDNativeExtensionScriptInstanceDataPtr p_self, const GDNativeStringNamePtr p_method, const GDNativeVariantPtr *p_args, const GDNativeInt p_argument_count, GDNativeVariantPtr r_return, GDNativeCallError *r_error);
-    ctypedef void (*GDNativeExtensionScriptInstanceNotification)(GDNativeExtensionScriptInstanceDataPtr p_instance, int32_t p_what);
-    ctypedef const char *(*GDNativeExtensionScriptInstanceToString)(GDNativeExtensionScriptInstanceDataPtr p_instance, GDNativeBool *r_is_valid);
+    ctypedef void (*GDExtensionScriptInstanceCall)(GDExtensionScriptInstanceDataPtr p_self, const GDExtensionStringNamePtr p_method, const GDExtensionVariantPtr *p_args, const GDExtensionInt p_argument_count, GDExtensionVariantPtr r_return, GDExtensionCallError *r_error);
+    ctypedef void (*GDExtensionScriptInstanceNotification)(GDExtensionScriptInstanceDataPtr p_instance, int32_t p_what);
+    ctypedef const char *(*GDExtensionScriptInstanceToString)(GDExtensionScriptInstanceDataPtr p_instance, GDExtensionBool *r_is_valid);
 
-    ctypedef void (*GDNativeExtensionScriptInstanceRefCountIncremented)(GDNativeExtensionScriptInstanceDataPtr p_instance);
-    ctypedef GDNativeBool (*GDNativeExtensionScriptInstanceRefCountDecremented)(GDNativeExtensionScriptInstanceDataPtr p_instance);
+    ctypedef void (*GDExtensionScriptInstanceRefCountIncremented)(GDExtensionScriptInstanceDataPtr p_instance);
+    ctypedef GDExtensionBool (*GDExtensionScriptInstanceRefCountDecremented)(GDExtensionScriptInstanceDataPtr p_instance);
 
-    ctypedef GDNativeObjectPtr (*GDNativeExtensionScriptInstanceGetScript)(GDNativeExtensionScriptInstanceDataPtr p_instance);
-    ctypedef GDNativeBool (*GDNativeExtensionScriptInstanceIsPlaceholder)(GDNativeExtensionScriptInstanceDataPtr p_instance);
+    ctypedef GDExtensionObjectPtr (*GDExtensionScriptInstanceGetScript)(GDExtensionScriptInstanceDataPtr p_instance);
+    ctypedef GDExtensionBool (*GDExtensionScriptInstanceIsPlaceholder)(GDExtensionScriptInstanceDataPtr p_instance);
 
-    ctypedef void *GDNativeExtensionScriptLanguagePtr;
+    ctypedef void *GDExtensionScriptLanguagePtr;
 
-    ctypedef GDNativeExtensionScriptLanguagePtr (*GDNativeExtensionScriptInstanceGetLanguage)(GDNativeExtensionScriptInstanceDataPtr p_instance);
+    ctypedef GDExtensionScriptLanguagePtr (*GDExtensionScriptInstanceGetLanguage)(GDExtensionScriptInstanceDataPtr p_instance);
 
-    ctypedef void (*GDNativeExtensionScriptInstanceFree)(GDNativeExtensionScriptInstanceDataPtr p_instance);
+    ctypedef void (*GDExtensionScriptInstanceFree)(GDExtensionScriptInstanceDataPtr p_instance);
 
-    ctypedef void *GDNativeScriptInstancePtr; # Pointer to ScriptInstance.
+    ctypedef void *GDExtensionScriptInstancePtr; # Pointer to ScriptInstance.
 
-    ctypedef struct GDNativeExtensionScriptInstanceInfo:
-        GDNativeExtensionScriptInstanceSet set_func;
-        GDNativeExtensionScriptInstanceGet get_func;
-        GDNativeExtensionScriptInstanceGetPropertyList get_property_list_func;
-        GDNativeExtensionScriptInstanceFreePropertyList free_property_list_func;
-        GDNativeExtensionScriptInstanceGetPropertyType get_property_type_func;
+    ctypedef struct GDExtensionScriptInstanceInfo:
+        GDExtensionScriptInstanceSet set_func;
+        GDExtensionScriptInstanceGet get_func;
+        GDExtensionScriptInstanceGetPropertyList get_property_list_func;
+        GDExtensionScriptInstanceFreePropertyList free_property_list_func;
+        GDExtensionScriptInstanceGetPropertyType get_property_type_func;
 
-        GDNativeExtensionScriptInstancePropertyCanRevert property_can_revert_func;
-        GDNativeExtensionScriptInstancePropertyGetRevert property_get_revert_func;
+        GDExtensionScriptInstancePropertyCanRevert property_can_revert_func;
+        GDExtensionScriptInstancePropertyGetRevert property_get_revert_func;
 
-        GDNativeExtensionScriptInstanceGetOwner get_owner_func;
-        GDNativeExtensionScriptInstanceGetPropertyState get_property_state_func;
+        GDExtensionScriptInstanceGetOwner get_owner_func;
+        GDExtensionScriptInstanceGetPropertyState get_property_state_func;
 
-        GDNativeExtensionScriptInstanceGetMethodList get_method_list_func;
-        GDNativeExtensionScriptInstanceFreeMethodList free_method_list_func;
+        GDExtensionScriptInstanceGetMethodList get_method_list_func;
+        GDExtensionScriptInstanceFreeMethodList free_method_list_func;
 
-        GDNativeExtensionScriptInstanceHasMethod has_method_func;
+        GDExtensionScriptInstanceHasMethod has_method_func;
 
-        GDNativeExtensionScriptInstanceCall call_func;
-        GDNativeExtensionScriptInstanceNotification notification_func;
+        GDExtensionScriptInstanceCall call_func;
+        GDExtensionScriptInstanceNotification notification_func;
 
-        GDNativeExtensionScriptInstanceToString to_string_func;
+        GDExtensionScriptInstanceToString to_string_func;
 
-        GDNativeExtensionScriptInstanceRefCountIncremented refcount_incremented_func;
-        GDNativeExtensionScriptInstanceRefCountDecremented refcount_decremented_func;
+        GDExtensionScriptInstanceRefCountIncremented refcount_incremented_func;
+        GDExtensionScriptInstanceRefCountDecremented refcount_decremented_func;
 
-        GDNativeExtensionScriptInstanceGetScript get_script_func;
+        GDExtensionScriptInstanceGetScript get_script_func;
 
-        GDNativeExtensionScriptInstanceIsPlaceholder is_placeholder_func;
+        GDExtensionScriptInstanceIsPlaceholder is_placeholder_func;
 
-        GDNativeExtensionScriptInstanceSet set_fallback_func;
-        GDNativeExtensionScriptInstanceGet get_fallback_func;
+        GDExtensionScriptInstanceSet set_fallback_func;
+        GDExtensionScriptInstanceGet get_fallback_func;
 
-        GDNativeExtensionScriptInstanceGetLanguage get_language_func;
+        GDExtensionScriptInstanceGetLanguage get_language_func;
 
-        GDNativeExtensionScriptInstanceFree free_func;
+        GDExtensionScriptInstanceFree free_func;
 #TODO: improve this
 cdef extern from "c_utils.h":
-    void set_gdnative_ptr(GDNativeTypePtr* a, GDNativeTypePtr b)
-    void set_gdnative_reference(GDNativeTypePtr& a, GDNativeTypePtr& b)
-    GDNativeVariantPtr create_variant(GDNativeInterface * interface_ptr)
-    void create_variant_bool(GDNativeInterface * interface_ptr, GDNativeVariantPtr variant_ptr, uint8_t val)
-    char * gd_string_c_string(GDNativeInterface* interface_ptr, GDNativeConstStringPtr string_ptr, int length)
+    void set_gdnative_ptr(GDExtensionTypePtr* a, GDExtensionTypePtr b)
+    void set_gdnative_reference(GDExtensionTypePtr& a, GDExtensionTypePtr& b)
+    GDExtensionVariantPtr create_variant(GDExtensionInterface * interface_ptr)
+    void create_variant_bool(GDExtensionInterface * interface_ptr, GDExtensionVariantPtr variant_ptr, uint8_t val)
+    char * gd_string_c_string(GDExtensionInterface* interface_ptr, GDExtensionConstStringPtr string_ptr, int length)
 
-cdef GDNativeInterface* gdnative_interface
+cdef GDExtensionInterface* gdnative_interface

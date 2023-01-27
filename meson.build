@@ -29,14 +29,14 @@ message(meson.current_source_dir())
 if build_machine.system() == 'windows'
     py = import('python').find_installation('python3')
     dep_py = py.dependency()
-    internal_inc = include_directories('py4godot/godot-headers/godot/', 'py4godot/core', 'py4godot/enums',
+    internal_inc = include_directories('py4godot/gdextension-api/', 'py4godot/core', 'py4godot/enums',
     'py4godot/classes', 'py4godot/pluginscript_api', 'py4godot/godot_bindings',)
     glob = run_command('python', files(meson.current_source_dir()+'/meson_scripts/glob_tools.py'))
 endif
 
 if build_machine.system() == 'linux'
     lib_py = cc.find_library('python3.9', dirs:meson.current_source_dir()+'/python_files/cpython-3.9.7-'+machine+platform_format+'/python/install/lib')
-    internal_inc = include_directories('py4godot/godot-headers', 'py4godot/core', 'py4godot/enums',
+    internal_inc = include_directories('py4godot/gdextension-api/', 'py4godot/core', 'py4godot/enums',
     'py4godot/classes', 'py4godot/pluginscript_api', 'py4godot/godot_bindings',
     'python_files/cpython-3.9.7-linux'+platform_format+'/python/install/include/python3.9')
     glob = run_command('python3', files(meson.current_source_dir()+'/meson_scripts/glob_tools.py'))

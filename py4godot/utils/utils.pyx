@@ -1,7 +1,7 @@
 from py4godot.godot_bindings.binding4_godot4 cimport *
 from py4godot_core_holder.core_holder cimport *
 
-cdef GDNativeInterface* _interface = get_interface()
+cdef GDExtensionInterface* _interface = get_interface()
 cdef StringName c_string_to_string_name(char* string):
 
     cdef String gd_string = String.new0()

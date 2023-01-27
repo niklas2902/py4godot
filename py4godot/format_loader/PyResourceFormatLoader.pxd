@@ -18,13 +18,13 @@ cdef class PyResourceFormatLoader(ResourceFormatLoader):
 
   cdef void _init_values(self) # self-defined
   cdef void set_language(self, ScriptLanguageExtension language) # self-defined
-  cdef _get_recognized_extensions(self, GDNativeTypePtr res)
-  cdef _recognize_path(self, String path, StringName type, GDNativeTypePtr res)
-  cdef _handles_type(self, StringName type, GDNativeTypePtr res)
-  cdef _get_resource_type(self, String path, GDNativeTypePtr res)
-  cdef _get_resource_uid(self, String path, GDNativeTypePtr res)
-  cdef _get_dependencies(self, String path, bool add_types, GDNativeTypePtr res)
-  cdef _rename_dependencies(self, String path, Dictionary renames, GDNativeTypePtr res)
-  cdef _exists(self, String path, GDNativeTypePtr res)
-  cdef _get_classes_used(self, String path, GDNativeTypePtr res)
-  cdef _load(self, String path, String original_path, bool use_sub_threads, int cache_mode, GDNativeTypePtr res)
+  cdef _get_recognized_extensions(self, GDExtensionTypePtr res)
+  cdef _recognize_path(self, String path, StringName type, GDExtensionTypePtr res)
+  cdef _handles_type(self, StringName type, GDExtensionTypePtr res)
+  cdef _get_resource_type(self, String path, GDExtensionTypePtr res)
+  cdef _get_resource_uid(self, String path, GDExtensionTypePtr res)
+  cdef _get_dependencies(self, String path, bool add_types, GDExtensionTypePtr res)
+  cdef _rename_dependencies(self, String path, Dictionary renames, GDExtensionTypePtr res)
+  cdef _exists(self, String path, GDExtensionTypePtr res)
+  cdef _get_classes_used(self, String path, GDExtensionTypePtr res)
+  cdef _load(self, String path, String original_path, bool use_sub_threads, int cache_mode, GDExtensionTypePtr res)

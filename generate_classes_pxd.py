@@ -56,7 +56,7 @@ def generate_new_static(class_):
     res += f"{INDENT}@staticmethod"
     res = generate_newline(res)
     if (class_["name"] in builtin_classes):
-        res += f"{INDENT}cdef {class_['name']} new_static(GDNativeTypePtr owner)"
+        res += f"{INDENT}cdef {class_['name']} new_static(GDExtensionTypePtr owner)"
     else:
         res += f"{INDENT}cdef {class_['name']} new_static(GodotObject owner)"
     return res
@@ -69,7 +69,7 @@ def get_inherited_class(class_):
 
 
 if __name__ == "__main__":
-    with open('py4godot/godot-headers/extension_api.json', 'r') as myfile:
+    with open('py4godot/gdextension-api/extension_api.json', 'r') as myfile:
         data = myfile.read()
         obj = json.loads(data)
         classes = set([class_['name'] if class_["name"] not in IGNORED_CLASSES else None for class_ in

@@ -8,9 +8,10 @@ from py4godot.classes.ResourceLoader.ResourceLoader cimport *
 from py4godot.classes.ResourceSaver.ResourceSaver cimport *
 from py4godot.format_saver.PyResourceFormatSaver cimport *
 from py4godot.format_loader.PyResourceFormatLoader cimport *
-cdef GDNativeInterface* _interface = get_interface()
+cdef GDExtensionInterface* _interface = get_interface()
 
 cdef api void init_py_language() with gil:
+    print_warning("########start############")
 
     cdef Engine engine = Engine.get_instance()
     cdef ResourceLoader resource_loader = ResourceLoader.get_instance()

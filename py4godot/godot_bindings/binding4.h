@@ -1,3 +1,3 @@
-#include "gdnative_interface.h"
+#include "gdextension_interface.h"
 
-GDNativeInterface gdnative_interface;
+GDExtensionInterface gdnative_interface;

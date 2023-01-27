@@ -51,7 +51,7 @@ def generate_constructor_args(constructor):
 
 def generate_constructor_args_array(constructor):
     num_of_constructor_args = len(constructor["arguments"]) if "arguments" in constructor.keys() else 1
-    res = f"{INDENT*2}cdef GDNativeTypePtr _args[{num_of_constructor_args}]"
+    res = f"{INDENT*2}cdef GDExtensionTypePtr _args[{num_of_constructor_args}]"
     res = generate_newline(res)
     if "arguments" not in constructor.keys():
         return res
@@ -83,9 +83,9 @@ def convert_camel_case_to_underscore(string):
     return res
 def generate_variant_type(class_):
     if class_["name"] in builtin_classes:
-        return f"GDNativeVariantType.GDNATIVE_VARIANT_TYPE_{convert_camel_case_to_underscore(class_['name']).upper()}"
+        return f"GDExtensionVariantType.GDEXTENSION_VARIANT_TYPE_{convert_camel_case_to_underscore(class_['name']).upper()}"
     else:
-        return f"GDNativeVariantType.GDNATIVE_VARIANT_TYPE_NIL"
+        return f"GDExtensionVariantType.GDEXTENSION_VARIANT_TYPE_NIL"
 def generate_constructors(class_):
     res = ""
     if "constructors" not in class_.keys():
@@ -103,7 +103,7 @@ def generate_constructors(class_):
         res = generate_newline(res)
         res += f"{INDENT*2}_class.set_variant_type({generate_variant_type(class_)})"
         res = generate_newline(res)
-        res += f"{INDENT*2}cdef GDNativePtrConstructor constructor = _interface.variant_get_ptr_constructor(_class.variant_type, {constructor['index']})"
+        res += f"{INDENT*2}cdef GDExtensionPtrConstructor constructor = _interface.variant_get_ptr_constructor(_class.variant_type, {constructor['index']})"
         res = generate_newline(res)
         #TODO:improve - fill with args
         res += generate_constructor_args_array(constructor)
@@ -125,7 +125,7 @@ def generate_class_imports(classes):
 
 
 def generate_header_statements():
-    res = "cdef GDNativeInterface* gdnative_interface = get_interface()"
+    res = "cdef GDExtensionInterface* gdnative_interface = get_interface()"
     res = generate_newline(res)
     return res
 
@@ -150,7 +150,7 @@ def generate_return_value(method_):
         else:
             result += f"{INDENT * 2}cdef {unbitfield_type(unenumize_type(ret_val.type))} {ret_val.name}"
     else:
-        result += f"{INDENT * 2}cdef GDNativeTypePtr _ret"
+        result += f"{INDENT * 2}cdef GDExtensionTypePtr _ret"
     return result
 
 def get_base_class(class_):
@@ -221,7 +221,7 @@ def is_singleton(class_name):
     return class_name in singletons
 
 def generate_error():
-    return f"{INDENT * 2}cdef GDNativeCallError _error"
+    return f"{INDENT * 2}cdef GDExtensionCallError _error"
 
 
 def generate_method_bind_name(class_name, method_name):
@@ -230,52 +230,52 @@ def generate_method_bind_name(class_name, method_name):
 def get_variant_type(class_name):
     DICT = {
 
-        "Nil":"GDNATIVE_VARIANT_TYPE_NIL",
+        "Nil":"GDEXTENSION_VARIANT_TYPE_NIL",
 
         #  atomic types
-        "bool":"GDNATIVE_VARIANT_TYPE_BOOL",
-        "int":"GDNATIVE_VARIANT_TYPE_INT",
-        "float":"GDNATIVE_VARIANT_TYPE_FLOAT",
-        "string":"GDNATIVE_VARIANT_TYPE_STRING",
+        "bool":"GDEXTENSION_VARIANT_TYPE_BOOL",
+        "int":"GDEXTENSION_VARIANT_TYPE_INT",
+        "float":"GDEXTENSION_VARIANT_TYPE_FLOAT",
+        "string":"GDEXTENSION_VARIANT_TYPE_STRING",
 
         # math types
-        "vector2":"GDNATIVE_VARIANT_TYPE_VECTOR2",
-        "vector2i":"GDNATIVE_VARIANT_TYPE_VECTOR2I",
-        "rect2":"GDNATIVE_VARIANT_TYPE_RECT2",
-        "rect2i":"GDNATIVE_VARIANT_TYPE_RECT2I",
-        "vector3":"GDNATIVE_VARIANT_TYPE_VECTOR3",
-        "vector3i":"GDNATIVE_VARIANT_TYPE_VECTOR3I",
-        "transform2d":"GDNATIVE_VARIANT_TYPE_TRANSFORM2D",
-        "vector4":"GDNATIVE_VARIANT_TYPE_VECTOR4",
-        "vector4i":"GDNATIVE_VARIANT_TYPE_VECTOR4I",
-        "plane":"GDNATIVE_VARIANT_TYPE_PLANE",
-        "quaternion":"GDNATIVE_VARIANT_TYPE_QUATERNION",
-        "aabb":"GDNATIVE_VARIANT_TYPE_AABB",
-        "basis":"GDNATIVE_VARIANT_TYPE_BASIS",
-        "transform3d":"GDNATIVE_VARIANT_TYPE_TRANSFORM3D",
-        "projection":"GDNATIVE_VARIANT_TYPE_PROJECTION",
+        "vector2":"GDEXTENSION_VARIANT_TYPE_VECTOR2",
+        "vector2i":"GDEXTENSION_VARIANT_TYPE_VECTOR2I",
+        "rect2":"GDEXTENSION_VARIANT_TYPE_RECT2",
+        "rect2i":"GDEXTENSION_VARIANT_TYPE_RECT2I",
+        "vector3":"GDEXTENSION_VARIANT_TYPE_VECTOR3",
+        "vector3i":"GDEXTENSION_VARIANT_TYPE_VECTOR3I",
+        "transform2d":"GDEXTENSION_VARIANT_TYPE_TRANSFORM2D",
+        "vector4":"GDEXTENSION_VARIANT_TYPE_VECTOR4",
+        "vector4i":"GDEXTENSION_VARIANT_TYPE_VECTOR4I",
+        "plane":"GDEXTENSION_VARIANT_TYPE_PLANE",
+        "quaternion":"GDEXTENSION_VARIANT_TYPE_QUATERNION",
+        "aabb":"GDEXTENSION_VARIANT_TYPE_AABB",
+        "basis":"GDEXTENSION_VARIANT_TYPE_BASIS",
+        "transform3d":"GDEXTENSION_VARIANT_TYPE_TRANSFORM3D",
+        "projection":"GDEXTENSION_VARIANT_TYPE_PROJECTION",
 
         # misc types
-        "color":"GDNATIVE_VARIANT_TYPE_COLOR",
-        "stringname":"GDNATIVE_VARIANT_TYPE_STRING_NAME",
-        "nodepath":"GDNATIVE_VARIANT_TYPE_NODE_PATH",
-        "rid":"GDNATIVE_VARIANT_TYPE_RID",
-        "object":"GDNATIVE_VARIANT_TYPE_OBJECT",
-        "callable":"GDNATIVE_VARIANT_TYPE_CALLABLE",
-        "signal":"GDNATIVE_VARIANT_TYPE_SIGNAL",
-        "dictionary":"GDNATIVE_VARIANT_TYPE_DICTIONARY",
-        "array":"GDNATIVE_VARIANT_TYPE_ARRAY",
+        "color":"GDEXTENSION_VARIANT_TYPE_COLOR",
+        "stringname":"GDEXTENSION_VARIANT_TYPE_STRING_NAME",
+        "nodepath":"GDEXTENSION_VARIANT_TYPE_NODE_PATH",
+        "rid":"GDEXTENSION_VARIANT_TYPE_RID",
+        "object":"GDEXTENSION_VARIANT_TYPE_OBJECT",
+        "callable":"GDEXTENSION_VARIANT_TYPE_CALLABLE",
+        "signal":"GDEXTENSION_VARIANT_TYPE_SIGNAL",
+        "dictionary":"GDEXTENSION_VARIANT_TYPE_DICTIONARY",
+        "array":"GDEXTENSION_VARIANT_TYPE_ARRAY",
 
         # typed arrays
-        "packedbytearray":"GDNATIVE_VARIANT_TYPE_PACKED_BYTE_ARRAY",
-        "packedint32array":"GDNATIVE_VARIANT_TYPE_PACKED_INT32_ARRAY",
-        "packedint64array":"GDNATIVE_VARIANT_TYPE_PACKED_INT64_ARRAY",
-        "packedfloat32array":"GDNATIVE_VARIANT_TYPE_PACKED_FLOAT32_ARRAY",
-        "packedfloat64array":"GDNATIVE_VARIANT_TYPE_PACKED_FLOAT64_ARRAY",
-        "packedstringarray":"GDNATIVE_VARIANT_TYPE_PACKED_STRING_ARRAY",
-        "packedvector2array":"GDNATIVE_VARIANT_TYPE_PACKED_VECTOR2_ARRAY",
-        "packedvector3array":"GDNATIVE_VARIANT_TYPE_PACKED_VECTOR3_ARRAY",
-        "packedcolorarray":"GDNATIVE_VARIANT_TYPE_PACKED_COLOR_ARRAY"
+        "packedbytearray":"GDEXTENSION_VARIANT_TYPE_PACKED_BYTE_ARRAY",
+        "packedint32array":"GDEXTENSION_VARIANT_TYPE_PACKED_INT32_ARRAY",
+        "packedint64array":"GDEXTENSION_VARIANT_TYPE_PACKED_INT64_ARRAY",
+        "packedfloat32array":"GDEXTENSION_VARIANT_TYPE_PACKED_FLOAT32_ARRAY",
+        "packedfloat64array":"GDEXTENSION_VARIANT_TYPE_PACKED_FLOAT64_ARRAY",
+        "packedstringarray":"GDEXTENSION_VARIANT_TYPE_PACKED_STRING_ARRAY",
+        "packedvector2array":"GDEXTENSION_VARIANT_TYPE_PACKED_VECTOR2_ARRAY",
+        "packedvector3array":"GDEXTENSION_VARIANT_TYPE_PACKED_VECTOR3_ARRAY",
+        "packedcolorarray":"GDEXTENSION_VARIANT_TYPE_PACKED_COLOR_ARRAY"
     }
 
     return DICT[class_name.lower()]
@@ -299,11 +299,11 @@ def generate_method_bind(current_class, method):
 
     res = generate_newline(res)
     if current_class['name'] in builtin_classes:
-        res += f"""{INDENT * 2}cdef GDNativePtrBuiltInMethod method_to_call = """ + \
-               f"""gdnative_interface.variant_get_ptr_builtin_method(GDNativeVariantType.{get_variant_type(current_class['name'])}, """ + \
+        res += f"""{INDENT * 2}cdef GDExtensionPtrBuiltInMethod method_to_call = """ + \
+               f"""gdnative_interface.variant_get_ptr_builtin_method(GDExtensionVariantType.{get_variant_type(current_class['name'])}, """ + \
                f"""_method_name.godot_owner, {method['hash']})"""
     else:
-        res += f"""{INDENT*2}cdef GDNativeMethodBindPtr method_bind = """ + \
+        res += f"""{INDENT*2}cdef GDExtensionMethodBindPtr method_bind = """ + \
                f"""gdnative_interface.classdb_get_method_bind(_class_name.godot_owner,""" + \
                f"""_method_name.godot_owner, {method['hash']})"""
 
@@ -366,8 +366,8 @@ def generate_ret_value_assign(argument):
 
 def generate_args_array(method):
     if 'arguments' not in method.keys():
-        return f"{INDENT * 2}cdef GDNativeVariantPtr _args[1]"
-    result = f"{INDENT * 2}cdef GDNativeTypePtr _args[{len(method['arguments'])}]"
+        return f"{INDENT * 2}cdef GDExtensionVariantPtr _args[1]"
+    result = f"{INDENT * 2}cdef GDExtensionTypePtr _args[{len(method['arguments'])}]"
     result = generate_newline(result)
     for i in range(0, len(method['arguments'])):
         result += f"{INDENT * 2}_args[{i}] = {generate_ret_value_assign(method['arguments'][i])}"
@@ -598,7 +598,7 @@ def generate_new_static(class_):
     res += f"{INDENT}@staticmethod"
     res = generate_newline(res)
     if (class_["name"] in builtin_classes):
-        res += f"{INDENT}cdef {class_['name']} new_static(GDNativeTypePtr owner):"
+        res += f"{INDENT}cdef {class_['name']} new_static(GDExtensionTypePtr owner):"
     else:
         res += f"{INDENT}cdef {class_['name']} new_static(GodotObject owner):"
 
@@ -652,7 +652,7 @@ def generate_classes(classes, filename, is_core=False):
 classes = set()
 
 if __name__ == "__main__":
-    with open('py4godot/godot-headers/extension_api.json', 'r') as myfile:
+    with open('py4godot/gdextension-api/extension_api.json', 'r') as myfile:
         data = myfile.read()
         obj = json.loads(data)
         classes = set([class_['name'] if class_["name"] not in IGNORED_CLASSES else None for class_ in
