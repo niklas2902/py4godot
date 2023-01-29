@@ -25,6 +25,8 @@ ctypedef void *GDExtensionClassInstancePtr;
 ctypedef const void *GDExtensionConstTypePtr;
 ctypedef const void *GDExtensionConstStringNamePtr;
 ctypedef const void *GDExtensionConstStringPtr;
+ctypedef void *GDExtensionScriptInstanceDataPtr;
+ctypedef void *GDExtensionScriptInstancePtr
 
 cdef extern from "binding4.h":
     ctypedef void (*GDExtensionVariantFromTypeConstructorFunc)(GDExtensionVariantPtr, GDExtensionTypePtr);
@@ -308,10 +310,9 @@ cdef extern from "binding4.h":
         GDExtensionVariantPtr (*dictionary_operator_index)(GDExtensionTypePtr p_self, GDExtensionConstVariantPtr p_key); #p_self should be an Dictionary ptr
         GDExtensionVariantPtr (*dictionary_operator_index_const)(GDExtensionConstTypePtr p_self, GDExtensionConstVariantPtr p_key); # p_self should be an Dictionary ptr
 
+        GDExtensionScriptInstancePtr (*script_instance_create)(const GDExtensionScriptInstanceInfo *p_info, GDExtensionScriptInstanceDataPtr p_instance_data);
 
     # SCRIPT INSTANCE EXTENSION
-
-    ctypedef void *GDExtensionScriptInstanceDataPtr; # Pointer to custom ScriptInstance native implementation
 
     ctypedef GDExtensionBool (*GDExtensionScriptInstanceSet)(GDExtensionScriptInstanceDataPtr p_instance, const GDExtensionStringNamePtr p_name, const GDExtensionVariantPtr p_value);
     ctypedef GDExtensionBool (*GDExtensionScriptInstanceGet)(GDExtensionScriptInstanceDataPtr p_instance, const GDExtensionStringNamePtr p_name, GDExtensionVariantPtr r_ret);
@@ -346,8 +347,6 @@ cdef extern from "binding4.h":
     ctypedef GDExtensionScriptLanguagePtr (*GDExtensionScriptInstanceGetLanguage)(GDExtensionScriptInstanceDataPtr p_instance);
 
     ctypedef void (*GDExtensionScriptInstanceFree)(GDExtensionScriptInstanceDataPtr p_instance);
-
-    ctypedef void *GDExtensionScriptInstancePtr; # Pointer to ScriptInstance.
 
     ctypedef struct GDExtensionScriptInstanceInfo:
         GDExtensionScriptInstanceSet set_func;
@@ -392,5 +391,7 @@ cdef extern from "c_utils.h":
     GDExtensionVariantPtr create_variant(GDExtensionInterface * interface_ptr)
     void create_variant_bool(GDExtensionInterface * interface_ptr, GDExtensionVariantPtr variant_ptr, uint8_t val)
     char * gd_string_c_string(GDExtensionInterface* interface_ptr, GDExtensionConstStringPtr string_ptr, int length)
+    GDExtensionScriptInstanceInfo* create_extension_class_ptr(GDExtensionTypePtr* a)
+    GDExtensionVariantPtr create_variant2(GDExtensionInterface * interface_ptr)
 
 cdef GDExtensionInterface* gdnative_interface

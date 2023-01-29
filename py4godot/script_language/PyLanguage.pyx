@@ -98,8 +98,7 @@ cdef class PyLanguage(ScriptLanguageExtension):
   cdef _is_control_flow_keyword(self, String keyword, GDExtensionTypePtr res):
     print_warning("is_control_flow_keyword")
     cdef str py_string = (<bytes>gd_string_c_string(gdnative_interface,keyword.godot_owner, keyword.length())).decode("utf-8")
-    cdef bint is_in_keywords = py_string in keywords
-    print_warning("is_flow_control_keyword:", py_string,"|", is_in_keywords)
+    cdef bint is_in_keywords = py_string in self.keywords
     set_gdnative_ptr(<GDExtensionTypePtr*>res, <GDExtensionTypePtr>is_in_keywords)
 
   cdef _get_comment_delimiters(self, GDExtensionTypePtr res):
@@ -281,8 +280,9 @@ cdef class PyLanguage(ScriptLanguageExtension):
     pass
 
   cdef _get_global_class_name(self, String path, GDExtensionTypePtr res):
-    cdef char* class_name = "PythonClass"
-    gdnative_interface.string_new_with_utf8_chars(res, class_name)
+    #cdef char* class_name = "PythonClass"
+    #gdnative_interface.string_new_with_utf8_chars(res, class_name)
+    pass
 
   cdef _free_instance_binding_data(self, Object o, GDExtensionTypePtr res):
     pass

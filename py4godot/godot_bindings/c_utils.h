@@ -1,9 +1,20 @@
 #include "gdextension_interface.h"
 #include<stdio.h>
 #include<stdlib.h>
-
+GDExtensionScriptInstanceInfo info;
 void set_gdnative_ptr(GDExtensionTypePtr* a, GDExtensionTypePtr b){
     *a = b;
+}
+
+GDExtensionScriptInstanceInfo* create_extension_class_ptr(GDExtensionTypePtr* a){
+    *a = &info;
+}
+
+
+GDExtensionVariantPtr create_variant2(GDExtensionInterface * interface_ptr){
+    GDExtensionVariantPtr r_dest = malloc(sizeof(char));
+    interface_ptr->variant_new_nil(r_dest);
+    return r_dest;
 }
 
 GDExtensionVariantPtr create_variant(GDExtensionInterface * interface_ptr){

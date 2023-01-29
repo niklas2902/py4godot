@@ -4,10 +4,12 @@ from py4godot.utils.utils cimport *
 from py4godot.enums.enums4 cimport *
 from py4godot.classes.Object.Object cimport *
 from py4godot.classes.generated4_core cimport *
+from py4godot.script_instance.PyScriptInstance cimport *
 from cpython cimport Py_INCREF, Py_DECREF, PyObject
 from cython.operator cimport dereference
 
 gdnative_interface = get_interface()
+cdef GDExtensionScriptInstanceInfo* instance_ptr = get_instance_ptr()
 cdef GDExtensionClassCreationInfo creation_info
 cdef class PyScriptExtension(ScriptExtension):
   @staticmethod
@@ -67,9 +69,32 @@ cdef class PyScriptExtension(ScriptExtension):
 
 
   cdef void _instance_create(self, Object for_object, GDExtensionTypePtr res):
-    print_warning("instance_create_called")
-    pass
+    print_warning("_instance_create")
+    create_extension_class_ptr(<GDExtensionTypePtr*>res)
 
+    cdef GDExtensionVariantFromTypeConstructorFunc constructor_func
+    cdef Variant var
+    cdef GDExtensionVariantPtr varptr
+    cdef GDExtensionScriptInstancePtr instance_ptr
+    cdef GDExtensionScriptInstanceInfo* instance_info = get_instance_ptr()
+    cdef uint8_t placeholder = 1
+    try:
+        varptr = create_variant2(_interface)
+        constructor_func = gdnative_interface.get_variant_from_type_constructor(GDExtensionVariantType.GDEXTENSION_VARIANT_TYPE_OBJECT)
+        constructor_func(varptr,<GDExtensionTypePtr>&self.godot_owner)
+        var = Variant.new_static(varptr)
+        for_object.set_script(var)
+
+        #TODO: work further on here
+        instance_ptr = _interface.script_instance_create(instance_info, &placeholder)
+
+        create_extension_class_ptr(<GDExtensionTypePtr*>res)
+    except Exception as e:
+        print_warning("instance_create failed because of:"+ str(e))
+
+    print_warning("_instance_create-end")
+
+    
 
   cdef void _placeholder_instance_create(self, Object for_object, GDExtensionTypePtr res):
     print_warning("place_holder_instance_create")

@@ -20,7 +20,7 @@ if meson.get_compiler('c').get_id() == 'gcc'
 endif
 if meson.get_compiler('c').get_id() == 'msvc'
     add_global_arguments('/bigobj', language : 'c')
-    add_global_arguments('/DEBUG', language : 'c')
+    add_global_arguments('/DEBUG:FULL', language : 'c')
     add_global_arguments('-d2SSAOptimizer-', language : 'c')
 endif
 

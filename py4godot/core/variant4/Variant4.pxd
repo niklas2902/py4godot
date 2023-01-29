@@ -11,7 +11,7 @@ cdef class Variant:
 
     @staticmethod
     cdef inline Variant new_static(GDExtensionVariantPtr ptr):
-        cdef Variant var = Variant.new()
+        cdef Variant var = Variant.__new__(Variant)
         var.set_native_ptr(ptr)
         return var
 

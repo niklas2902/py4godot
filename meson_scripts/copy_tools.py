@@ -19,8 +19,6 @@ def run(platform):
     elif "linux" in platform:
         list_dll = glob.glob("**/*.so", recursive=True)
 
-    print("------------------------------------------copy------------------------------------------------\n")
-    print(list_dll)
     for entry in list_dll:
         entry = entry.lstrip("/")
         if entry.startswith("build_meson"):
@@ -70,13 +68,10 @@ def copy_c_into_cache(platform):
         os.makedirs(os.path.dirname(dir_path), exist_ok=True)
         copy(entry, dir_path )
 
-    print(glob.glob("**/*.dll", recursive=True))
     beginning_path = config_data["meson_dir"]+f"\\{platform}\\"+"py4godot"
     l = [i for i in glob.glob("**/*.dll", recursive=True) if i.startswith(beginning_path) ]
     for entry in l:
-        print("entry found:",entry)
         dir_path = config_data["build_cache"]+"/"+platform+"/py4godot/"+entry.replace(beginning_path,"")
-        print("copy_to:",dir_path+"\n")
         os.makedirs(os.path.dirname(dir_path), exist_ok=True)
         copy(entry, dir_path )
 
@@ -87,8 +82,6 @@ def copy_stub_files(platform):
         os.makedirs(os.path.dirname(f"build/addons/{platform}/{config_data['python_ver']}-{platform}/python/install/Lib/site-packages/" + file),
                     exist_ok=True)
         copy(file, f"build/addons/{platform}/{config_data['python_ver']}-{platform}/python/install/Lib/site-packages/" + file)
-
-        print(f"build/addons/{platform}/{config_data['python_ver']}-{platform}/python/install/Lib/site-packages/" + file)
 
 
 if __name__ == "__main__":
