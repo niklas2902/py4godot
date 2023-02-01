@@ -8,6 +8,15 @@ from py4godot.script_instance.PyScriptInstance cimport *
 from cpython cimport Py_INCREF, Py_DECREF, PyObject
 from cython.operator cimport dereference
 
+
+cdef PyLanguage py_language
+
+cdef void set_lang(PyLanguage lang):
+    global py_language
+    py_language = lang
+    Py_INCREF(py_language)
+
+
 gdnative_interface = get_interface()
 cdef GDExtensionScriptInstanceInfo* instance_ptr = get_instance_ptr()
 cdef GDExtensionClassCreationInfo creation_info
@@ -79,16 +88,18 @@ cdef class PyScriptExtension(ScriptExtension):
     cdef GDExtensionScriptInstanceInfo* instance_info = get_instance_ptr()
     cdef uint8_t placeholder = 1
     try:
+        pass
         varptr = create_variant2(_interface)
-        constructor_func = gdnative_interface.get_variant_from_type_constructor(GDExtensionVariantType.GDEXTENSION_VARIANT_TYPE_OBJECT)
-        constructor_func(varptr,<GDExtensionTypePtr>&self.godot_owner)
-        var = Variant.new_static(varptr)
-        for_object.set_script(var)
+        constructor_func = _interface.get_variant_from_type_constructor(GDExtensionVariantType.GDEXTENSION_VARIANT_TYPE_OBJECT)
+        #constructor_func(varptr,<GDExtensionTypePtr>self.godot_owner)
+        #var = Variant.new_static(varptr)
+        #for_object.set_script(var)
 
         #TODO: work further on here
         instance_ptr = _interface.script_instance_create(instance_info, &placeholder)
+        set_gdnative_ptr(<GDExtensionTypePtr*>res, <GDExtensionTypePtr>instance_ptr)
 
-        create_extension_class_ptr(<GDExtensionTypePtr*>res)
+        #create_extension_class_ptr(<GDExtensionTypePtr*>res)
     except Exception as e:
         print_warning("instance_create failed because of:"+ str(e))
 
@@ -147,7 +158,7 @@ cdef class PyScriptExtension(ScriptExtension):
 
 
   cdef void _get_language(self, GDExtensionTypePtr res):
-    set_gdnative_ptr(<GDExtensionTypePtr*> res, self.language.godot_owner)
+    set_gdnative_ptr(<GDExtensionTypePtr*> res, py_language.godot_owner)
 
 
   cdef void _has_script_signal(self, StringName signal, GDExtensionTypePtr res):

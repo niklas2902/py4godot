@@ -30,6 +30,7 @@ cdef api void init_py_language() with gil:
         print_warning("--------------after registering")
 
         py_language = PyLanguage.constructor()
+        set_lang(py_language)
         py_resource_format_loader = PyResourceFormatLoader.constructor()
         py_resource_format_saver = PyResourceFormatSaver.constructor()
 

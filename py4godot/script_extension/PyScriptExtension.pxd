@@ -8,7 +8,11 @@ from py4godot.classes.generated4_core cimport *
 from py4godot.classes.Object.Object cimport *
 from py4godot.classes.Script.Script cimport *
 
+from py4godot.script_language.PyLanguage cimport *
 cdef void register_class_py_script_extension() with gil
+cdef PyLanguage py_language
+
+cdef void set_lang(PyLanguage lang)
 
 cdef class PyScriptExtension(ScriptExtension):
   cdef char* script_name
