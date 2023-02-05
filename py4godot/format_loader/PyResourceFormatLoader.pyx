@@ -56,7 +56,7 @@ cdef class PyResourceFormatLoader(ResourceFormatLoader):
 
 
   cdef _get_resource_type(self, String path, GDExtensionTypePtr res):
-    _interface.string_new_with_utf8_chars(res, "Python")
+    _interface.string_new_with_utf8_chars(res, "PyScriptExtension")
 
 
   cdef _get_resource_uid(self, String path, GDExtensionTypePtr res):
@@ -94,6 +94,8 @@ cdef class PyResourceFormatLoader(ResourceFormatLoader):
         if(not file.godot_owner):
             return
         source_code = file.get_as_text(False)
+        gdnative_interface.object_destroy(file.godot_owner)
+
         print_warning("start_try"+str(self.language))
         script.set_language(<ScriptLanguage>self.language)
         print_warning("length:", source_code.length())

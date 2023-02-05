@@ -106,7 +106,7 @@ else :
                            f"meson {build_dir} --cross-file platforms/{args.target_platform}.cross "
                            f"--cross-file platforms/compilers/{args.compiler}_compiler.native "
                            f"--cross-file platforms/binary_dirs/python_ver_compile.cross "
-                           f"--buildtype=release --wipe"
+                           f"--buildtype=release"
                            f"{command_separator} meson compile -C build_meson/{args.target_platform}",
                            shell=True)
 

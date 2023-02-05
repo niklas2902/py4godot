@@ -1,13 +1,9 @@
 #include "gdextension_interface.h"
 #include<stdio.h>
 #include<stdlib.h>
-GDExtensionScriptInstanceInfo info;
+
 void set_gdnative_ptr(GDExtensionTypePtr* a, GDExtensionTypePtr b){
     *a = b;
-}
-
-GDExtensionScriptInstanceInfo* create_extension_class_ptr(GDExtensionTypePtr* a){
-    *a = &info;
 }
 
 

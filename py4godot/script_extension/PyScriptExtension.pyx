@@ -39,9 +39,13 @@ cdef class PyScriptExtension(ScriptExtension):
 
   cdef void _init_values(self):
     self.source_code = ""
+    Py_INCREF(self.source_code)
 
   cdef void set_py_source_code(self, str source_code):
     self.source_code = source_code
+
+  cdef str get_py_source_code(self):
+    return self.source_code
 
   cdef void set_language(self, ScriptLanguageExtension language):
     self.language = language
@@ -52,7 +56,7 @@ cdef class PyScriptExtension(ScriptExtension):
 
 
   cdef void _can_instantiate(self, GDExtensionTypePtr res):
-    set_gdnative_ptr(<GDExtensionTypePtr*>res, <GDExtensionTypePtr>1)
+    set_gdnative_ptr(<GDExtensionTypePtr*>res, <GDExtensionTypePtr>0)
 
 
   cdef void _get_base_script(self, GDExtensionTypePtr res):
@@ -79,16 +83,17 @@ cdef class PyScriptExtension(ScriptExtension):
 
   cdef void _instance_create(self, Object for_object, GDExtensionTypePtr res):
     print_warning("_instance_create")
-    create_extension_class_ptr(<GDExtensionTypePtr*>res)
 
     cdef GDExtensionVariantFromTypeConstructorFunc constructor_func
     cdef Variant var
     cdef GDExtensionVariantPtr varptr
     cdef GDExtensionScriptInstancePtr instance_ptr
     cdef GDExtensionScriptInstanceInfo* instance_info = get_instance_ptr()
+    cdef InstanceData instance_data = InstanceData()
     cdef uint8_t placeholder = 1
     try:
-        pass
+        Py_INCREF(instance_data)
+        instance_data.owner = for_object
         varptr = create_variant2(_interface)
         constructor_func = _interface.get_variant_from_type_constructor(GDExtensionVariantType.GDEXTENSION_VARIANT_TYPE_OBJECT)
         #constructor_func(varptr,<GDExtensionTypePtr>self.godot_owner)
@@ -96,7 +101,7 @@ cdef class PyScriptExtension(ScriptExtension):
         #for_object.set_script(var)
 
         #TODO: work further on here
-        instance_ptr = _interface.script_instance_create(instance_info, &placeholder)
+        instance_ptr = _interface.script_instance_create(instance_info, <PyObject*>instance_data)
         set_gdnative_ptr(<GDExtensionTypePtr*>res, <GDExtensionTypePtr>instance_ptr)
 
         #create_extension_class_ptr(<GDExtensionTypePtr*>res)
@@ -108,9 +113,33 @@ cdef class PyScriptExtension(ScriptExtension):
     
 
   cdef void _placeholder_instance_create(self, Object for_object, GDExtensionTypePtr res):
-    print_warning("place_holder_instance_create")
-    pass
+    print_warning("_placeholder_instance_create")
 
+    cdef GDExtensionVariantFromTypeConstructorFunc constructor_func
+    cdef Variant var
+    cdef GDExtensionVariantPtr varptr
+    cdef GDExtensionScriptInstancePtr instance_ptr
+    cdef GDExtensionScriptInstanceInfo* instance_info = get_instance_ptr()
+    cdef InstanceData instance_data = InstanceData()
+    cdef uint8_t placeholder = 1
+    try:
+        Py_INCREF(instance_data)
+        instance_data.owner = for_object
+        varptr = create_variant2(_interface)
+        constructor_func = _interface.get_variant_from_type_constructor(GDExtensionVariantType.GDEXTENSION_VARIANT_TYPE_OBJECT)
+        #constructor_func(varptr,<GDExtensionTypePtr>self.godot_owner)
+        #var = Variant.new_static(varptr)
+        #for_object.set_script(var)
+
+        #TODO: work further on here
+        instance_ptr = _interface.script_instance_create(instance_info, <PyObject*>instance_data)
+        set_gdnative_ptr(<GDExtensionTypePtr*>res, <GDExtensionTypePtr>instance_ptr)
+
+        #create_extension_class_ptr(<GDExtensionTypePtr*>res)
+    except Exception as e:
+        print_warning("instance_create failed because of:"+ str(e))
+
+    print_warning("_instance_create-end")
 
   cdef void _instance_has(self, Object object, GDExtensionTypePtr res):
     pass
@@ -150,7 +179,7 @@ cdef class PyScriptExtension(ScriptExtension):
 
 
   cdef void _is_tool(self, GDExtensionTypePtr res):
-    pass
+    set_gdnative_ptr(<GDExtensionTypePtr*>res, <GDExtensionTypePtr>0)
 
 
   cdef void _is_valid(self, GDExtensionTypePtr res):

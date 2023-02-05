@@ -30,7 +30,7 @@ cdef class PyLanguage(ScriptLanguageExtension):
     return class_
 
   cdef void _init_values(self):
-    self.language_name = "Python"
+    self.language_name = "PyScriptExtension"
     self.extension = "py"
     self.keywords = {"if","elif", "else"}
 
@@ -186,7 +186,7 @@ cdef class PyLanguage(ScriptLanguageExtension):
     pass
 
   cdef _overrides_external_editor(self, GDExtensionTypePtr res):
-    pass
+    set_gdnative_ptr(<GDExtensionTypePtr*>res, <GDExtensionTypePtr>0)
 
   cdef _complete_code(self, String code, String path, Object owner, GDExtensionTypePtr res):
     print_warning("complete_code")
@@ -291,9 +291,6 @@ cdef class PyLanguage(ScriptLanguageExtension):
 
   cdef _debug_get_stack_level_instance(self,int val, GDExtensionTypePtr res):
     pass
-
-cdef String script_name = c_string_to_string("Python")
-cdef GDExtensionTypePtr ptr =  script_name.godot_owner
 
 cdef GDExtensionPtrOperatorEvaluator operator_equal_string_name = gdnative_interface.variant_get_ptr_operator_evaluator(
 GDExtensionVariantOperator.GDEXTENSION_VARIANT_OP_EQUAL,

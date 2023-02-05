@@ -391,7 +391,6 @@ cdef extern from "c_utils.h":
     GDExtensionVariantPtr create_variant(GDExtensionInterface * interface_ptr)
     void create_variant_bool(GDExtensionInterface * interface_ptr, GDExtensionVariantPtr variant_ptr, uint8_t val)
     char * gd_string_c_string(GDExtensionInterface* interface_ptr, GDExtensionConstStringPtr string_ptr, int length)
-    GDExtensionScriptInstanceInfo* create_extension_class_ptr(GDExtensionTypePtr* a)
     GDExtensionVariantPtr create_variant2(GDExtensionInterface * interface_ptr)
 
 cdef GDExtensionInterface* gdnative_interface

@@ -5,6 +5,7 @@ from py4godot.enums.enums4 cimport *
 from py4godot.classes.ResourceFormatSaver.ResourceFormatSaver cimport *
 from py4godot.classes.FileAccess.FileAccess cimport *
 from py4godot.classes.Script.Script cimport *
+from py4godot.script_extension.PyScriptExtension cimport *
 from py4godot.classes.generated4_core cimport *
 from cpython cimport Py_INCREF, Py_DECREF, PyObject
 from cython.operator cimport dereference
@@ -35,14 +36,24 @@ cdef class PyResourceFormatSaver(ResourceFormatSaver):
     cdef void* script_tag = gdnative_interface.classdb_get_class_tag(c_string_to_string_name("Script").godot_owner)
     #cdef GodotObject _godot_object = gdnative_interface.object_cast_to(&(resource.godot_owner), script_tag)
     #cdef Script script = Script.new_static(_godot_object)
-    #Ref<LuaScript> script = p_resource;
 #    resource.get_path()
+    cdef String source_code
+    cdef Script script
+    try:
 
+        source_code = resource.get_path()
+        script = Script.new_static(NULL)
+        script.godot_owner = resource.godot_owner
+        #source_code = script.source_code
+        print_warning("after getting source code")
+    except Exception as e:
+        print_warning("Exception:"+ str(e))
+
+    print_warning("source_code:"+ source_code)
     #if (script.is_null())
     #	return ERR_INVALID_PARAMETER;
 
-    #cdef String source = script.get_source_code();
-    cdef String source = c_string_to_string("test")
+    cdef String source = source_code
     cdef Error error;
     cdef FileAccess file = FileAccess.open(path, FileAccess__ModeFlags.FileAccess__WRITE);
 
@@ -57,6 +68,7 @@ cdef class PyResourceFormatSaver(ResourceFormatSaver):
     file.flush()
     gdnative_interface.object_destroy(file.godot_owner)
     set_gdnative_ptr(<GDExtensionTypePtr*> res, <GDExtensionObjectPtr>Error.OK)
+    print_warning("--------------storing_string_successful-------------------")
 
 
   cdef void _recognize(self, Resource resource, GDExtensionTypePtr res):
@@ -72,7 +84,7 @@ cdef class PyResourceFormatSaver(ResourceFormatSaver):
 
 cdef void* call_virtual_func__save(GDExtensionClassInstancePtr p_instance, GDExtensionConstTypePtr *p_args, GDExtensionTypePtr r_ret) with gil:
     cdef PyResourceFormatSaver pylanguage = <PyResourceFormatSaver> p_instance
-    cdef Resource args0 = <Resource>dereference(p_args + 0)
+    cdef Resource args0 = Resource.new_static(dereference(p_args + 0))
     cdef String args1 = String.new_static(dereference(p_args + 1))
     cdef int args2 = <int>dereference(p_args + 2)
 
@@ -116,9 +128,6 @@ cdef void* call_virtual_func__recognize_path(GDExtensionClassInstancePtr p_insta
 cdef StringName func_name__recognize_path = c_string_to_string_name("_recognize_path")
 cdef GDExtensionClassCallVirtual call_virtual__recognize_path_def = <GDExtensionClassCallVirtual>call_virtual_func__recognize_path
 
-
-cdef String script_name = c_string_to_string("Python")
-cdef GDExtensionTypePtr ptr =  script_name.godot_owner
 
 cdef GDExtensionPtrOperatorEvaluator operator_equal_string_name = gdnative_interface.variant_get_ptr_operator_evaluator(
 GDExtensionVariantOperator.GDEXTENSION_VARIANT_OP_EQUAL,
