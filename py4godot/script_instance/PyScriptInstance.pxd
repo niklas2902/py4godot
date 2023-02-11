@@ -9,10 +9,6 @@ from py4godot.classes.ScriptLanguage.ScriptLanguage cimport *
 from py4godot.classes.Script.Script cimport *
 from py4godot.classes.Object.Object cimport *
 
-
-cdef class InstanceData():
-    cdef Object owner
-
 cdef GDExtensionObjectPtr get_owner (GDExtensionScriptInstanceDataPtr p_instance) with gil
 cdef GDExtensionBool is_placeholder(GDExtensionScriptInstanceDataPtr p_instance) with gil
 cdef GDExtensionBool instance_set(GDExtensionScriptInstanceDataPtr p_instance, GDExtensionConstStringNamePtr p_name, GDExtensionConstVariantPtr p_value) with gil

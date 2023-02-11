@@ -5,6 +5,8 @@ from py4godot.enums.enums4 cimport *
 from py4godot.classes.Object.Object cimport *
 from py4godot.classes.generated4_core cimport *
 from py4godot.script_instance.PyScriptInstance cimport *
+from py4godot.pluginscript_api.utils.annotations import *
+from py4godot.utils.Wrapper4 cimport *
 from cpython cimport Py_INCREF, Py_DECREF, PyObject
 from cython.operator cimport dereference
 
@@ -89,7 +91,6 @@ cdef class PyScriptExtension(ScriptExtension):
     cdef GDExtensionVariantPtr varptr
     cdef GDExtensionScriptInstancePtr instance_ptr
     cdef GDExtensionScriptInstanceInfo* instance_info = get_instance_ptr()
-    cdef InstanceData instance_data = InstanceData()
     cdef uint8_t placeholder = 1
     try:
         Py_INCREF(instance_data)
@@ -120,11 +121,21 @@ cdef class PyScriptExtension(ScriptExtension):
     cdef GDExtensionVariantPtr varptr
     cdef GDExtensionScriptInstancePtr instance_ptr
     cdef GDExtensionScriptInstanceInfo* instance_info = get_instance_ptr()
-    cdef InstanceData instance_data = InstanceData()
     cdef uint8_t placeholder = 1
+    result = None
+    cdef object gd_class
+    cdef Wrapper4 gd_instance
     try:
-        Py_INCREF(instance_data)
-        instance_data.owner = for_object
+        result = exec_class(self.source_code)
+    except Exception as e:
+        print_warning("Creating_class failed:"+str(e))
+    if(result != None and (result.gd_class != None or result.gd_tool_class != None)):
+        gd_obj = result.gd_class if result.gd_class != None else result.gd_tool_class
+        gd_class = <Wrapper4> gd_obj
+
+    try:
+        gd_instance = gd_class()
+        Py_INCREF(gd_instance)
         varptr = create_variant2(_interface)
         constructor_func = _interface.get_variant_from_type_constructor(GDExtensionVariantType.GDEXTENSION_VARIANT_TYPE_OBJECT)
         #constructor_func(varptr,<GDExtensionTypePtr>self.godot_owner)
@@ -132,7 +143,9 @@ cdef class PyScriptExtension(ScriptExtension):
         #for_object.set_script(var)
 
         #TODO: work further on here
-        instance_ptr = _interface.script_instance_create(instance_info, <PyObject*>instance_data)
+        print_warning("before instance_create")
+        instance_ptr = _interface.script_instance_create(instance_info, <PyObject*>gd_instance)
+        print_warning("after instance_create")
         set_gdnative_ptr(<GDExtensionTypePtr*>res, <GDExtensionTypePtr>instance_ptr)
 
         #create_extension_class_ptr(<GDExtensionTypePtr*>res)

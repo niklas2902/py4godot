@@ -34,7 +34,7 @@ cdef class PyResourceFormatSaver(ResourceFormatSaver):
   cdef void _save(self, Resource resource, String path, int flags, GDExtensionTypePtr res):
     print_warning("PyResourceFormatSaver::save")
     cdef void* script_tag = gdnative_interface.classdb_get_class_tag(c_string_to_string_name("Script").godot_owner)
-    #cdef GodotObject _godot_object = gdnative_interface.object_cast_to(&(resource.godot_owner), script_tag)
+    cdef GodotObject _godot_object = gdnative_interface.object_cast_to(&resource.godot_owner, script_tag)
     #cdef Script script = Script.new_static(_godot_object)
 #    resource.get_path()
     cdef String source_code

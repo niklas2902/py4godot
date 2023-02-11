@@ -4,8 +4,8 @@ from py4godot.utils.print_tools import *
 
 cdef GDExtensionObjectPtr get_owner (GDExtensionScriptInstanceDataPtr p_instance) with gil:
     print_warning("-------------------instance:get_owner---------------")
-    cdef InstanceData data = <InstanceData>p_instance
-    return data.owner.godot_owner
+    cdef Wrapper4 instance = <Wrapper4>p_instance
+    return instance.get_godot_owner()
 
 cdef GDExtensionBool is_placeholder(GDExtensionScriptInstanceDataPtr p_instance) with gil:
     print_warning("------is_place-holder-------")
