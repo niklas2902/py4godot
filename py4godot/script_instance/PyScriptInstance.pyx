@@ -1,11 +1,12 @@
 from cython.operator cimport dereference
 from cpython cimport Py_INCREF, Py_DECREF, PyObject
 from py4godot.utils.print_tools import *
+from py4godot.Instance_data.InstanceData cimport *
 
 cdef GDExtensionObjectPtr get_owner (GDExtensionScriptInstanceDataPtr p_instance) with gil:
     print_warning("-------------------instance:get_owner---------------")
-    cdef Wrapper4 instance = <Wrapper4>p_instance
-    return instance.get_godot_owner()
+    cdef InstanceData instance = <InstanceData>p_instance
+    return instance.owner.get_godot_owner()
 
 cdef GDExtensionBool is_placeholder(GDExtensionScriptInstanceDataPtr p_instance) with gil:
     print_warning("------is_place-holder-------")
@@ -16,6 +17,8 @@ cdef GDExtensionBool instance_set(GDExtensionScriptInstanceDataPtr p_instance, G
 cdef GDExtensionBool instance_get(GDExtensionScriptInstanceDataPtr p_instance, GDExtensionConstStringNamePtr p_name, GDExtensionVariantPtr r_ret) with gil:
     return 1
 cdef const GDExtensionPropertyInfo *instance_get_property_list(GDExtensionScriptInstanceDataPtr p_instance, uint32_t *r_count) with gil:
+    r_count[0] = 0 #TODO enable properties
+    print_warning("prop_count:"+ str(dereference(r_count)))
     return NULL
 cdef void instance_free_property_list(GDExtensionScriptInstanceDataPtr p_instance, const GDExtensionPropertyInfo *p_list) with gil:
     pass
@@ -53,7 +56,8 @@ cdef GDExtensionBool instance_ref_count_decremented(GDExtensionScriptInstanceDat
     pass
 
 cdef GDExtensionObjectPtr instance_get_script(GDExtensionScriptInstanceDataPtr p_instance) with gil:
-    return NULL
+    cdef InstanceData instance = <InstanceData>p_instance
+    return instance.script.godot_owner
 
 cdef GDExtensionScriptLanguagePtr instance_get_language(GDExtensionScriptInstanceDataPtr p_instance) with gil:
     return NULL

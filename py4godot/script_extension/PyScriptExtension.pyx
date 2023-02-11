@@ -7,6 +7,7 @@ from py4godot.classes.generated4_core cimport *
 from py4godot.script_instance.PyScriptInstance cimport *
 from py4godot.pluginscript_api.utils.annotations import *
 from py4godot.utils.Wrapper4 cimport *
+from py4godot.Instance_data.InstanceData cimport *
 from cpython cimport Py_INCREF, Py_DECREF, PyObject
 from cython.operator cimport dereference
 
@@ -124,7 +125,7 @@ cdef class PyScriptExtension(ScriptExtension):
     cdef uint8_t placeholder = 1
     result = None
     cdef object gd_class
-    cdef Wrapper4 gd_instance
+    cdef InstanceData gd_instance = InstanceData()
     try:
         result = exec_class(self.source_code)
     except Exception as e:
@@ -134,7 +135,8 @@ cdef class PyScriptExtension(ScriptExtension):
         gd_class = <Wrapper4> gd_obj
 
     try:
-        gd_instance = gd_class()
+        gd_instance.owner = gd_class()
+        gd_instance.script = self
         Py_INCREF(gd_instance)
         varptr = create_variant2(_interface)
         constructor_func = _interface.get_variant_from_type_constructor(GDExtensionVariantType.GDEXTENSION_VARIANT_TYPE_OBJECT)
