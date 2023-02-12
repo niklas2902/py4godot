@@ -2,5 +2,5 @@ setuptools~=49.2.1
 Cython~=0.29.24
 zstandard==0.13.0
 wget==3.2
-meson==0.59.4
+meson>=1.0.0
 ninja==1.10.2.3
