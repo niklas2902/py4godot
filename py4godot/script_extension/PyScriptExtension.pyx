@@ -126,6 +126,7 @@ cdef class PyScriptExtension(ScriptExtension):
     result = None
     cdef object gd_class
     cdef InstanceData gd_instance = InstanceData()
+    print_warning("before trying to execute code")
     try:
         result = exec_class(self.source_code)
     except Exception as e:
@@ -138,11 +139,6 @@ cdef class PyScriptExtension(ScriptExtension):
         gd_instance.owner = gd_class()
         gd_instance.script = self
         Py_INCREF(gd_instance)
-        varptr = create_variant2(_interface)
-        constructor_func = _interface.get_variant_from_type_constructor(GDExtensionVariantType.GDEXTENSION_VARIANT_TYPE_OBJECT)
-        #constructor_func(varptr,<GDExtensionTypePtr>self.godot_owner)
-        #var = Variant.new_static(varptr)
-        #for_object.set_script(var)
 
         #TODO: work further on here
         print_warning("before instance_create")
@@ -226,6 +222,7 @@ cdef class PyScriptExtension(ScriptExtension):
 
 
   cdef void _get_script_method_list(self, GDExtensionTypePtr res):
+    print_warning("get_script_method_list")
     pass
 
 

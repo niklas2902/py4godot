@@ -36,15 +36,25 @@ cdef void instance_get_property_state(GDExtensionScriptInstanceDataPtr p_instanc
     pass
 
 cdef const GDExtensionMethodInfo * instance_get_method_list(GDExtensionScriptInstanceDataPtr p_instance, uint32_t *r_count) with gil:
+    print_warning("get_method_list")
     return NULL
 cdef void instance_free_method_list(GDExtensionScriptInstanceDataPtr p_instance, const GDExtensionMethodInfo *p_list) with gil:
     pass
 
 cdef GDExtensionBool instance_has_method(GDExtensionScriptInstanceDataPtr p_instance, GDExtensionConstStringNamePtr p_name) with gil:
+    cdef StringName method_name = StringName.new_static(p_name)
+    cdef String method_name_str = String.new2(method_name)
+    cdef str py_method_name_str = (<bytes>gd_string_c_string(gdnative_interface,method_name_str.godot_owner, method_name_str.length())).decode("utf-8")
+    print_warning("has_method:" + py_method_name_str)
     return 1
 
-cdef void instance_call(GDExtensionScriptInstanceDataPtr p_self, GDExtensionConstStringNamePtr p_method, const GDExtensionConstVariantPtr *p_args, GDExtensionInt p_argument_count, GDExtensionVariantPtr r_return, GDExtensionCallError *r_error)with gil:
-    pass
+cdef void instance_call(GDExtensionScriptInstanceDataPtr p_self, GDExtensionConstStringNamePtr p_method, const GDExtensionConstVariantPtr *p_args, GDExtensionInt p_argument_count, GDExtensionVariantPtr r_return, GDExtensionCallError *r_error) with gil:
+    cdef StringName method_name = StringName.new_static(p_method)
+    cdef String method_name_str = String.new2(method_name)
+    cdef str py_method_name_str = (<bytes>gd_string_c_string(gdnative_interface,method_name_str.godot_owner, method_name_str.length())).decode("utf-8")
+    cdef list args = []
+    for index in range(0, p_argument_count):
+        args.append(Variant.new_static(p_args[index]))
 cdef void instance_notification(GDExtensionScriptInstanceDataPtr p_instance, int32_t p_what) with gil:
     pass
 cdef void instance_to_string(GDExtensionScriptInstanceDataPtr p_instance, GDExtensionBool *r_is_valid, GDExtensionStringPtr r_out) with gil:
