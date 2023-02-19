@@ -10,7 +10,7 @@ cdef GDExtensionObjectPtr get_owner (GDExtensionScriptInstanceDataPtr p_instance
 
 cdef GDExtensionBool is_placeholder(GDExtensionScriptInstanceDataPtr p_instance) with gil:
     print_warning("------is_place-holder-------")
-    return 1
+    return 0
 
 cdef GDExtensionBool instance_set(GDExtensionScriptInstanceDataPtr p_instance, GDExtensionConstStringNamePtr p_name, GDExtensionConstVariantPtr p_value) with gil:
     return 1
@@ -52,6 +52,7 @@ cdef void instance_call(GDExtensionScriptInstanceDataPtr p_self, GDExtensionCons
     cdef StringName method_name = StringName.new_static(p_method)
     cdef String method_name_str = String.new2(method_name)
     cdef str py_method_name_str = (<bytes>gd_string_c_string(gdnative_interface,method_name_str.godot_owner, method_name_str.length())).decode("utf-8")
+    print_warning("print_method:"+py_method_name_str)
     cdef list args = []
     for index in range(0, p_argument_count):
         args.append(Variant.new_static(p_args[index]))

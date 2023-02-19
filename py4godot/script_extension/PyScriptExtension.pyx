@@ -59,7 +59,7 @@ cdef class PyScriptExtension(ScriptExtension):
 
 
   cdef void _can_instantiate(self, GDExtensionTypePtr res):
-    set_gdnative_ptr(<GDExtensionTypePtr*>res, <GDExtensionTypePtr>0)
+    set_gdnative_ptr(<GDExtensionTypePtr*>res, <GDExtensionTypePtr>1)
 
 
   cdef void _get_base_script(self, GDExtensionTypePtr res):
@@ -85,7 +85,6 @@ cdef class PyScriptExtension(ScriptExtension):
 
 
   cdef void _instance_create(self, Object for_object, GDExtensionTypePtr res):
-    print_warning("_instance_create")
 
     cdef GDExtensionVariantFromTypeConstructorFunc constructor_func
     cdef Variant var
@@ -93,17 +92,28 @@ cdef class PyScriptExtension(ScriptExtension):
     cdef GDExtensionScriptInstancePtr instance_ptr
     cdef GDExtensionScriptInstanceInfo* instance_info = get_instance_ptr()
     cdef uint8_t placeholder = 1
+    result = None
+    cdef object gd_class
+    cdef InstanceData gd_instance = InstanceData()
+    print_warning("before trying to execute code")
     try:
-        Py_INCREF(instance_data)
-        instance_data.owner = for_object
-        varptr = create_variant2(_interface)
-        constructor_func = _interface.get_variant_from_type_constructor(GDExtensionVariantType.GDEXTENSION_VARIANT_TYPE_OBJECT)
-        #constructor_func(varptr,<GDExtensionTypePtr>self.godot_owner)
-        #var = Variant.new_static(varptr)
-        #for_object.set_script(var)
+        result = exec_class(self.source_code)
+    except Exception as e:
+        print_warning("Creating_class failed:"+str(e))
+    if(result != None and (result.gd_class != None or result.gd_tool_class != None)):
+        print_warning("result not None")
+        gd_obj = result.gd_class if result.gd_class != None else result.gd_tool_class
+        gd_class = <Wrapper4> gd_obj
+
+    try:
+        gd_instance.owner = gd_class()
+        gd_instance.script = self
+        Py_INCREF(gd_instance)
 
         #TODO: work further on here
-        instance_ptr = _interface.script_instance_create(instance_info, <PyObject*>instance_data)
+        print_warning("before instance_create")
+        instance_ptr = _interface.script_instance_create(instance_info, <PyObject*>gd_instance)
+        print_warning("after instance_create")
         set_gdnative_ptr(<GDExtensionTypePtr*>res, <GDExtensionTypePtr>instance_ptr)
 
         #create_extension_class_ptr(<GDExtensionTypePtr*>res)
@@ -111,6 +121,7 @@ cdef class PyScriptExtension(ScriptExtension):
         print_warning("instance_create failed because of:"+ str(e))
 
     print_warning("_instance_create-end")
+
 
     
 
@@ -182,10 +193,12 @@ cdef class PyScriptExtension(ScriptExtension):
 
 
   cdef void _has_method(self, StringName method, GDExtensionTypePtr res):
+    print_warning("has_method:script_extension")
     pass
 
 
   cdef void _get_method_info(self, StringName method, GDExtensionTypePtr res):
+    print_warning("get_method_info:script_extension")
     pass
 
 
@@ -222,7 +235,7 @@ cdef class PyScriptExtension(ScriptExtension):
 
 
   cdef void _get_script_method_list(self, GDExtensionTypePtr res):
-    print_warning("get_script_method_list")
+    print_warning("get_script_method_list:extension")
     pass
 
 
