@@ -15,6 +15,9 @@ cdef GDExtensionBool is_placeholder(GDExtensionScriptInstanceDataPtr p_instance)
 cdef GDExtensionBool instance_set(GDExtensionScriptInstanceDataPtr p_instance, GDExtensionConstStringNamePtr p_name, GDExtensionConstVariantPtr p_value) with gil:
     return 1
 cdef GDExtensionBool instance_get(GDExtensionScriptInstanceDataPtr p_instance, GDExtensionConstStringNamePtr p_name, GDExtensionVariantPtr r_ret) with gil:
+    cdef InstanceData instance = <InstanceData>p_instance
+    cdef Variant var = Variant.new_static(r_ret)
+    var.init_object(instance.script)
     return 1
 cdef const GDExtensionPropertyInfo *instance_get_property_list(GDExtensionScriptInstanceDataPtr p_instance, uint32_t *r_count) with gil:
     r_count[0] = 0 #TODO enable properties
@@ -67,6 +70,7 @@ cdef GDExtensionBool instance_ref_count_decremented(GDExtensionScriptInstanceDat
     pass
 
 cdef GDExtensionObjectPtr instance_get_script(GDExtensionScriptInstanceDataPtr p_instance) with gil:
+    print_warning("instance_get_script")
     cdef InstanceData instance = <InstanceData>p_instance
     return instance.script.godot_owner
 

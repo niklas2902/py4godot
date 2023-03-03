@@ -117,6 +117,10 @@ cdef class PyScriptExtension(ScriptExtension):
         set_gdnative_ptr(<GDExtensionTypePtr*>res, <GDExtensionTypePtr>instance_ptr)
 
         #create_extension_class_ptr(<GDExtensionTypePtr*>res)
+        print_warning("before_creating_variant")
+        #var = Variant(self)
+        print_warning("before setting script")
+        #for_object.set_script(var)
     except Exception as e:
         print_warning("instance_create failed because of:"+ str(e))
 
@@ -318,7 +322,7 @@ cdef GDExtensionClassCallVirtual call_virtual__get_instance_base_type_def = <GDE
 
 cdef void* call_virtual_func__instance_create(GDExtensionClassInstancePtr p_instance, GDExtensionConstTypePtr *p_args, GDExtensionTypePtr r_ret) with gil:
     cdef PyScriptExtension pylanguage = <PyScriptExtension> p_instance
-    cdef Object args0 = <Object>dereference(p_args + 0)
+    cdef Object args0 = Object.new_static(dereference(p_args + 0))
 
     cdef object obj = <object>pylanguage._instance_create(args0,r_ret)
     cdef void* ret_val = <void*>obj
@@ -329,7 +333,7 @@ cdef GDExtensionClassCallVirtual call_virtual__instance_create_def = <GDExtensio
 
 cdef void* call_virtual_func__placeholder_instance_create(GDExtensionClassInstancePtr p_instance, GDExtensionConstTypePtr *p_args, GDExtensionTypePtr r_ret) with gil:
     cdef PyScriptExtension pylanguage = <PyScriptExtension> p_instance
-    cdef Object args0 = <Object>dereference(p_args + 0)
+    cdef Object args0 = Object.new_static(dereference(p_args + 0))
 
     cdef object obj = <object>pylanguage._placeholder_instance_create(args0,r_ret)
     cdef void* ret_val = <void*>obj

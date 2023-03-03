@@ -9,11 +9,12 @@ gdnative_interface = get_interface()
 cdef class Variant:
     def __init__(self, object):
         #TODO: implement this
+        self.native_ptr = create_variant(gdnative_interface)
         print_warning("init_variant")
-        print_warning(isinstance(object, String))
+        print_warning(type(object))
         if isinstance(object, String):
             self.init_string(object)
-        elif (object is ScriptExtension):
+        elif isinstance(object,ScriptExtension):
             self.init_object(object)
 
     cdef void init_string(self, String object):
@@ -24,6 +25,9 @@ cdef class Variant:
         print_warning("after_init_string")
 
     cdef void init_object(self, ScriptExtension object):
-        cdef GDExtensionVariantFromTypeConstructorFunc constructor_func = gdnative_interface.get_variant_from_type_constructor(GDExtensionVariantType.GDEXTENSION_VARIANT_TYPE_STRING)
-        constructor_func(self.native_ptr,object.godot_owner)
+        print_warning("init_object")
+        Py_INCREF(object)
+        cdef GDExtensionVariantFromTypeConstructorFunc constructor_func = gdnative_interface.get_variant_from_type_constructor(GDExtensionVariantType.GDEXTENSION_VARIANT_TYPE_OBJECT)
+        constructor_func(self.native_ptr,&(object.godot_owner))
+        print_warning("after_init_object")
 
