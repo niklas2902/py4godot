@@ -107,6 +107,8 @@ cdef class PyScriptExtension(ScriptExtension):
 
     try:
         gd_instance.owner = gd_class()
+        gd_instance.owner.godot_owner = for_object.godot_owner
+        gd_instance.owner.script = self
         gd_instance.script = self
         Py_INCREF(gd_instance)
 

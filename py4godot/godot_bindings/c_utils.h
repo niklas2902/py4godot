@@ -27,8 +27,8 @@ void create_variant_bool(GDExtensionInterface * interface_ptr, GDExtensionVarian
 }
 
 char * gd_string_c_string(GDExtensionInterface* interface_ptr, GDExtensionConstStringPtr string_ptr, int length){
-    char *native_string = (char *)malloc(sizeof(char) * length+1);
-    interface_ptr->string_to_utf8_chars(string_ptr, native_string, length+1);
+    char *native_string = (char *)malloc(sizeof(char) * (length));
+    interface_ptr->string_to_utf8_chars(string_ptr, native_string, length);
     return native_string;
 }
 

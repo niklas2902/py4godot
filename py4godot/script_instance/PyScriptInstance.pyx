@@ -17,6 +17,20 @@ cdef GDExtensionBool instance_set(GDExtensionScriptInstanceDataPtr p_instance, G
 cdef GDExtensionBool instance_get(GDExtensionScriptInstanceDataPtr p_instance, GDExtensionConstStringNamePtr p_name, GDExtensionVariantPtr r_ret) with gil:
     cdef InstanceData instance = <InstanceData>p_instance
     cdef Variant var = Variant.new_static(r_ret)
+    cdef StringName name = StringName.new_static(p_name)
+    cdef String gdstring_prop_name = String.new2(name)
+    cdef const char* c_str = gd_string_c_string(gdnative_interface,gdstring_prop_name.godot_owner, gdstring_prop_name.length())
+    cdef unicode prop_name = <unicode>PyUnicode_FromStringAndSize(c_str,gdstring_prop_name.length())
+    cdef object prop_val
+    try:
+        if(prop_name != "script"):
+            prop_val = getattr(instance.owner, prop_name)
+            print_warning("get_prop:"+str(prop_name)+"|" + str(prop_val))
+        else:
+            prop_val = instance.script
+
+    except Exception as e:
+       print_warning("Exception:", e)
     var.init_object(instance.script)
     return 1
 cdef const GDExtensionPropertyInfo *instance_get_property_list(GDExtensionScriptInstanceDataPtr p_instance, uint32_t *r_count) with gil:
@@ -54,7 +68,8 @@ cdef GDExtensionBool instance_has_method(GDExtensionScriptInstanceDataPtr p_inst
 cdef void instance_call(GDExtensionScriptInstanceDataPtr p_self, GDExtensionConstStringNamePtr p_method, const GDExtensionConstVariantPtr *p_args, GDExtensionInt p_argument_count, GDExtensionVariantPtr r_return, GDExtensionCallError *r_error) with gil:
     cdef StringName method_name = StringName.new_static(p_method)
     cdef String method_name_str = String.new2(method_name)
-    cdef str py_method_name_str = (<bytes>gd_string_c_string(gdnative_interface,method_name_str.godot_owner, method_name_str.length())).decode("utf-8")
+    cdef const char* c_str = gd_string_c_string(gdnative_interface,method_name_str.godot_owner, method_name_str.length())
+    cdef unicode py_method_name_str = <unicode>PyUnicode_FromStringAndSize(c_str,method_name_str.length())
     print_warning("print_method:"+py_method_name_str)
     cdef list args = []
     for index in range(0, p_argument_count):

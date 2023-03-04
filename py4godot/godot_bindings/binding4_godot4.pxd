@@ -5,6 +5,7 @@ from libc.stdint cimport uint8_t
 from libc.stdint cimport uint64_t
 from libc.stdint cimport int64_t
 from libc.stdint cimport int8_t
+from cpython.ref cimport PyObject
 
 ctypedef bint bool
 ctypedef void *GDExtensionVariantPtr;
@@ -390,7 +391,12 @@ cdef extern from "c_utils.h":
     void set_gdnative_reference(GDExtensionTypePtr& a, GDExtensionTypePtr& b)
     GDExtensionVariantPtr create_variant(GDExtensionInterface * interface_ptr)
     void create_variant_bool(GDExtensionInterface * interface_ptr, GDExtensionVariantPtr variant_ptr, uint8_t val)
-    char * gd_string_c_string(GDExtensionInterface* interface_ptr, GDExtensionConstStringPtr string_ptr, int length)
+    char * gd_string_c_string(GDExtensionInterface* interface_ptr, GDExtensionConstStringPtr string_ptr, int length) with gil
     GDExtensionVariantPtr create_variant2(GDExtensionInterface * interface_ptr)
 
+
+cdef extern from "Python.h":
+    cdef PyObject* PyUnicode_FromString(const char* s);
+    cdef  PyObject* PyObject_Str(PyObject *o);
+    PyUnicode_FromStringAndSize(const char *u, Py_ssize_t size)
 cdef GDExtensionInterface* gdnative_interface
