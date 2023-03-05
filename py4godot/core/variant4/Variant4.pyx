@@ -3,6 +3,7 @@ from py4godot.classes.generated4_core cimport *
 from py4godot.classes.Object.Object cimport *
 from py4godot_core_holder.core_holder cimport *
 from py4godot.utils.print_tools import *
+from py4godot.utils.utils cimport *
 from cpython cimport Py_INCREF, Py_DECREF, PyObject
 gdnative_interface = get_interface()
 
@@ -15,13 +16,10 @@ cdef class Variant:
 
         self. init_type(object)
     cdef void init_string(self, String object):
-        Py_INCREF(object)
         cdef GDExtensionVariantFromTypeConstructorFunc constructor_func = gdnative_interface.get_variant_from_type_constructor(GDExtensionVariantType.GDEXTENSION_VARIANT_TYPE_STRING)
-        constructor_func(self.native_ptr,&(object.godot_owner))
+        constructor_func(self.native_ptr,object.godot_owner)
 
     cdef void init_object(self, Object object):
-        print_warning("init_object:"+str(object))
-        Py_INCREF(object)
         cdef GDExtensionVariantFromTypeConstructorFunc constructor_func = gdnative_interface.get_variant_from_type_constructor(GDExtensionVariantType.GDEXTENSION_VARIANT_TYPE_OBJECT)
         constructor_func(self.native_ptr,&(object.godot_owner))
 
@@ -35,11 +33,10 @@ cdef class Variant:
     cdef void init_type(self, object obj):
         try:
             print_warning("start_init_type" +str( obj))
-            if isinstance(obj, String):
-               self.init_string(obj)
-            elif isinstance(obj, type(True)):
-                print_warning("init_bool:"+str(boj))
+            if isinstance(obj, type(True)):
                 self.init_bool(obj)
+            elif isinstance(obj, String):
+               self.init_string(obj)
             elif isinstance(obj,Object):
                 self.init_object(obj)
             else:

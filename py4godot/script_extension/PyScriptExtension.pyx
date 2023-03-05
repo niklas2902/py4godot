@@ -111,7 +111,6 @@ cdef class PyScriptExtension(ScriptExtension):
         gd_instance.owner.script = self
         gd_instance.script = self
         Py_INCREF(gd_instance)
-
         #TODO: work further on here
         print_warning("before instance_create")
         instance_ptr = _interface.script_instance_create(instance_info, <PyObject*>gd_instance)
@@ -122,7 +121,6 @@ cdef class PyScriptExtension(ScriptExtension):
         print_warning("before_creating_variant")
         #var = Variant(self)
         print_warning("before setting script")
-        for_object.set_editor_description(c_string_to_string("test_description"))
     except Exception as e:
         print_warning("instance_create failed because of:"+ str(e))
 
