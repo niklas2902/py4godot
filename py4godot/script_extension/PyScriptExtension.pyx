@@ -122,7 +122,7 @@ cdef class PyScriptExtension(ScriptExtension):
         print_warning("before_creating_variant")
         #var = Variant(self)
         print_warning("before setting script")
-        #for_object.set_script(var)
+        for_object.set_editor_description(c_string_to_string("test_description"))
     except Exception as e:
         print_warning("instance_create failed because of:"+ str(e))
 

@@ -25,13 +25,16 @@ cdef GDExtensionBool instance_get(GDExtensionScriptInstanceDataPtr p_instance, G
     try:
         if(prop_name != "script"):
             prop_val = getattr(instance.owner, prop_name)
-            print_warning("get_prop:"+str(prop_name)+"|" + str(prop_val))
         else:
-            prop_val = instance.script
+            #prop_val = instance.script
+            var.init_type(instance.script)
+            return 1
+        print_warning("get_prop:"+str(prop_name)+"|" + str(prop_val))
+
 
     except Exception as e:
        print_warning("Exception:", e)
-    var.init_object(instance.script)
+    var.init_type(prop_val)
     return 1
 cdef const GDExtensionPropertyInfo *instance_get_property_list(GDExtensionScriptInstanceDataPtr p_instance, uint32_t *r_count) with gil:
     r_count[0] = 0 #TODO enable properties
