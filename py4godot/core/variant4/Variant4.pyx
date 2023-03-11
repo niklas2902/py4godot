@@ -30,6 +30,15 @@ cdef class Variant:
     cdef void init_nil(self):
       gdnative_interface.variant_new_nil(self.native_ptr)
 
+    cdef object get_converted_value(self):
+        cdef GDExtensionVariantType variant_type = gdnative_interface.variant_get_type(self.native_ptr)
+        cdef GDExtensionTypeFromVariantConstructorFunc constructor = gdnative_interface.get_variant_to_type_constructor(variant_type)
+
+        #TODO
+        cdef uint8_t[4] type_ptr
+        constructor(type_ptr, self.native_ptr)
+        Vector3.new_static(type_ptr)
+
     cdef void init_type(self, object obj):
         try:
             print_warning("start_init_type" +str( obj))

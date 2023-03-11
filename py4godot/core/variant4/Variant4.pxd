@@ -14,6 +14,10 @@ cdef class Variant:
 
     cdef void init_type(self, object obj)
 
+    #convert values
+    cdef object get_converted_value(self)
+
+
     @staticmethod
     cdef inline Variant new_static(GDExtensionVariantPtr ptr):
         cdef Variant var = Variant.__new__(Variant)
