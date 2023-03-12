@@ -14,7 +14,7 @@ cdef class ConverterBase:
 
 cdef class Vector3Converter(ConverterBase):
     cdef object from_ptr(self,GDExtensionTypePtr type_ptr):
-        cdef Vector3 position =  Vector3.new_static(dereference(<void**>type_ptr))
+        cdef Vector3 position =  Vector3.new_static(type_ptr)
         print_warning(f"set_position successful:")
         return position
 
@@ -48,6 +48,10 @@ cdef class Variant:
         self. init_type(object)
     cdef void init_string(self, String object):
         cdef GDExtensionVariantFromTypeConstructorFunc constructor_func = gdnative_interface.get_variant_from_type_constructor(GDExtensionVariantType.GDEXTENSION_VARIANT_TYPE_STRING)
+        constructor_func(self.native_ptr,object.godot_owner)
+
+    cdef void init_vector3(self, Vector3 object):
+        cdef GDExtensionVariantFromTypeConstructorFunc constructor_func = gdnative_interface.get_variant_from_type_constructor(GDExtensionVariantType.GDEXTENSION_VARIANT_TYPE_VECTOR3)
         constructor_func(self.native_ptr,object.godot_owner)
 
     cdef void init_object(self, Object object):
@@ -84,6 +88,8 @@ cdef class Variant:
                self.init_string(obj)
             elif isinstance(obj,Object):
                 self.init_object(obj)
+            elif isinstance(obj,Vector3):
+                self.init_vector3(obj)
             else:
                 print_warning("new_nil called")
                 print_warning("object:"+str(obj))

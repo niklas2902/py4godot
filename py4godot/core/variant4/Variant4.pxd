@@ -20,6 +20,7 @@ cdef class Variant:
     cdef inline void set_native_ptr(self,GDExtensionVariantPtr ptr):
       self.native_ptr = ptr
 
+    cdef void init_vector3(self, Vector3 object)
     cdef void init_string(self, String object)
     cdef void init_object(self, Object object)
     cdef void init_bool(self, bint object)
