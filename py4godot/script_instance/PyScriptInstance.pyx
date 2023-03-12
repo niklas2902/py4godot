@@ -13,6 +13,7 @@ cdef GDExtensionBool is_placeholder(GDExtensionScriptInstanceDataPtr p_instance)
     return 0
 
 cdef GDExtensionBool instance_set(GDExtensionScriptInstanceDataPtr p_instance, GDExtensionConstStringNamePtr p_name, GDExtensionConstVariantPtr p_value) with gil:
+    cdef InstanceData instance = <InstanceData>p_instance
     cdef Variant var = Variant.new_static(p_value)
     cdef StringName name = StringName.new_static(p_name)
     cdef String gdstring_prop_name = String.new2(name)
@@ -20,7 +21,12 @@ cdef GDExtensionBool instance_set(GDExtensionScriptInstanceDataPtr p_instance, G
     cdef unicode prop_name = <unicode>PyUnicode_FromStringAndSize(c_str,gdstring_prop_name.length())
     print_warning(f"instance_set:{prop_name}")
     cdef object converted_val = var.get_converted_value()
-    return 1
+    try:
+        setattr(instance.owner, prop_name, converted_val)
+    except Exception as e:
+        print_warning(f"Exception:{e}")
+    print_warning("setting_prop successful")
+    return True
 cdef GDExtensionBool instance_get(GDExtensionScriptInstanceDataPtr p_instance, GDExtensionConstStringNamePtr p_name, GDExtensionVariantPtr r_ret) with gil:
     cdef InstanceData instance = <InstanceData>p_instance
     cdef Variant var = Variant.new_static(r_ret)

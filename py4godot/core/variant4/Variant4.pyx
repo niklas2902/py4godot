@@ -5,7 +5,38 @@ from py4godot_core_holder.core_holder cimport *
 from py4godot.utils.print_tools import *
 from py4godot.utils.utils cimport *
 from cpython cimport Py_INCREF, Py_DECREF, PyObject
+from cython.operator cimport dereference
 gdnative_interface = get_interface()
+
+cdef class ConverterBase:
+    cdef object from_ptr(self,GDExtensionTypePtr type_ptr):
+        print_warning("Converter Base called")
+
+cdef class Vector3Converter(ConverterBase):
+    cdef object from_ptr(self,GDExtensionTypePtr type_ptr):
+        cdef Vector3 position =  Vector3.new_static(dereference(<void**>type_ptr))
+        print_warning(f"set_position successful:")
+        return position
+
+cdef class Vector2Converter(ConverterBase):
+    cdef object from_ptr(self,GDExtensionTypePtr type_ptr):
+        return Vector2.new_static(dereference(<void**>type_ptr))
+
+cdef class BoolConverter(ConverterBase):
+    cdef object from_ptr(self,GDExtensionTypePtr type_ptr):
+        return <bool>dereference(<void**>type_ptr)
+
+cdef class IntConverter(ConverterBase):
+    cdef object from_ptr(self,GDExtensionTypePtr type_ptr):
+        return <int>(dereference(<void**>type_ptr))
+
+
+cdef dict_type_conversion_methods = {
+GDExtensionVariantType.GDEXTENSION_VARIANT_TYPE_VECTOR3:Vector3Converter(),
+GDExtensionVariantType.GDEXTENSION_VARIANT_TYPE_VECTOR2:Vector2Converter(),
+GDExtensionVariantType.GDEXTENSION_VARIANT_TYPE_BOOL:BoolConverter(),
+GDExtensionVariantType.GDEXTENSION_VARIANT_TYPE_INT:IntConverter()
+}
 
 cdef class Variant:
     def __init__(self, object):
@@ -37,7 +68,12 @@ cdef class Variant:
         #TODO
         cdef uint8_t[4] type_ptr
         constructor(type_ptr, self.native_ptr)
-        Vector3.new_static(type_ptr)
+        cdef ConverterBase converter =  dict_type_conversion_methods[variant_type]
+        try:
+            return converter.from_ptr(type_ptr)
+        except Exception as e:
+            print_warning(f"An Exception happened:{e}")
+        return None
 
     cdef void init_type(self, object obj):
         try:

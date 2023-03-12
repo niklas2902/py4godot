@@ -2,6 +2,19 @@ from py4godot.godot_bindings.binding4_godot4 cimport *
 from py4godot.classes.generated4_core cimport *
 from py4godot.classes.ScriptExtension.ScriptExtension cimport *
 from py4godot.classes.Object.Object cimport *
+
+cdef class ConverterBase:
+    cdef object from_ptr(self,GDExtensionTypePtr type_ptr)
+
+cdef class Vector3Converter(ConverterBase):
+    cdef object from_ptr(self,GDExtensionTypePtr type_ptr)
+cdef class Vector2Converter(ConverterBase):
+    cdef object from_ptr(self,GDExtensionTypePtr type_ptr)
+cdef class BoolConverter(ConverterBase):
+    cdef object from_ptr(self,GDExtensionTypePtr type_ptr)
+cdef class IntConverter(ConverterBase):
+    cdef object from_ptr(self,GDExtensionTypePtr type_ptr)
+
 cdef class Variant:
     cdef GDExtensionVariantPtr native_ptr
     cdef inline void set_native_ptr(self,GDExtensionVariantPtr ptr):
