@@ -1,5 +1,6 @@
 #include "gdextension_interface.h"
-#include "api4_api.h"
+static GDExtensionInterface* gdnative_interface = NULL;
+/*#include "api4_api.h"
 #include "../../py4godot_core_holder/core_holder_api.h"
 #include <python.h>
 
@@ -20,7 +21,7 @@
 #elif __APPLE__
 #define PYTHONHOME L"addons/windows64/cpython-3.9.7-windows32/python/install"
 #endif
-
+*/
 #if !defined(GDN_EXPORT)
 #if defined(_WIN32)
 #define GDN_EXPORT __declspec(dllexport)
@@ -30,13 +31,12 @@
 #define GDN_EXPORT
 #endif
 #endif
-
+/*
 typedef struct user_data_struct {
 	char data[256];
 } user_data_struct;
 
 static PyThreadState *gilstate = NULL;
-static GDExtensionInterface* gdnative_interface = NULL;
 
 static const char *RECOGNIZED_EXTENSIONS[] = { "py", "pyc", "pyo", "pyd", 0 };
 static const char *RESERVED_WORDS[] = {
@@ -77,9 +77,10 @@ static const char *RESERVED_WORDS[] = {
 };
 static const char *COMMENT_DELIMITERS[] = { "#", "\"\"\"\"\"\"", 0 };
 static const char *STRING_DELIMITERS[] = { "\" \"", "' '", 0 };
+*/
 
 void initialize_py4godot(void *userdata, GDExtensionInitializationLevel p_level){
-    if (p_level != 3){
+    /*if (p_level != 3){
         return;
     }
 
@@ -112,38 +113,28 @@ void initialize_py4godot(void *userdata, GDExtensionInitializationLevel p_level)
     if (PyErr_Occurred())
     {
         PyErr_Print();
-        return 0;
+        return ;
     }
 
     // Release the Kraken... er I mean the GIL !
     gilstate = PyEval_SaveThread();
     gdnative_interface->print_warning("test10", "test", "test",1);
-
+    */
 }
+
 void deinitialize_py4godot(void *userdata, GDExtensionInitializationLevel p_level){
 
 }
 
-GDN_EXPORT GDExtensionBool py4godot_init(const GDExtensionInterface *p_interface, const GDExtensionClassLibraryPtr p_library, GDExtensionInitialization *r_initialization)
+GDExtensionBool GDN_EXPORT py4godot_init(const GDExtensionInterface *p_interface, const GDExtensionClassLibraryPtr p_library, GDExtensionInitialization *r_initialization)
 {
+
+    p_interface->print_error("start of initialization", "test2", "test3",1);
     gdnative_interface = p_interface;
-    /*GDExtensionBinding::InitObject init_obj(p_interface, p_library, r_initialization);
-
-    init_obj.register_initializer(initialize_summator_types);
-    init_obj.register_terminator(uninitialize_summator_types);
-    init_obj.set_minimum_library_initialization_level(MODULE_INITIALIZATION_LEVEL_SCENE);
-    */
-
-        printf(
-    "              _  _                   _       _     \n"
-    "  _ __  _   _| || |   __ _  ___   __| | ___ | |_   \n"
-    " | '_ \\| | | | || |_ / _` |/ _ \\ / _` |/ _ \\| __|  \n"
-    " | |_) | |_| |__   _| (_| | (_) | (_| | (_) | |_   \n"
-    " | .__/ \\__, |  |_|  \\__, |\\___/ \\__,_|\\___/ \\__|  \n"
-    " |_|    |___/        |___/                         \n"
-    );
-    printf("py4godot - version 0.1\n");
-    p_interface->print_warning("test", "test", "test",1);
+    r_initialization->initialize = initialize_py4godot;
+    r_initialization->deinitialize = deinitialize_py4godot;
+    /*
+    p_interface->print_warning("start of initialization", "test", "test",1);
 
     Py_SetProgramName(L"godot");
     Py_SetPythonHome(PYTHONHOME);
@@ -173,12 +164,11 @@ GDN_EXPORT GDExtensionBool py4godot_init(const GDExtensionInterface *p_interface
     set_library(p_library);
     p_interface->print_warning("test7", "test", "test",1);
     p_interface->print_warning("test8", "test", "test",1);
-    r_initialization->initialize = initialize_py4godot;
-    r_initialization->deinitialize = deinitialize_py4godot;
     p_interface->print_warning("test9", "test", "test",1);
-
+    */
     return 1;
 }
+/*
 // `gdnative_terminate` which is called before the library is unloaded.
 // Godot will unload the library when no object uses it anymore.
 void godot_gdnative_terminate() {
@@ -191,3 +181,4 @@ void godot_gdnative_terminate() {
 void godot_gdnative_singleton() {
     //placeholder to prevent error from being raised
 }
+*/
