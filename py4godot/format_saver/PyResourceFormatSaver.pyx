@@ -17,7 +17,7 @@ cdef class PyResourceFormatSaver(ResourceFormatSaver):
   def constructor():
     cdef PyResourceFormatSaver class_ = PyResourceFormatSaver()
     ""
-    print_warning("-------------construct PyResourceFormatSaver--------------------")
+    print_error("-------------construct PyResourceFormatSaver--------------------")
     cdef StringName class_name = c_string_to_string_name("PyResourceFormatSaver")
 
     class_.set_godot_owner(gdnative_interface.classdb_construct_object(class_name.godot_owner))
@@ -32,27 +32,27 @@ cdef class PyResourceFormatSaver(ResourceFormatSaver):
     self.extensions = ["py", "pyw", "pyi"]
 
   cdef void _save(self, Resource resource, String path, int flags, GDExtensionTypePtr res):
-    print_warning("PyResourceFormatSaver::save")
+    print_error("PyResourceFormatSaver::save")
     #cdef Script script = Script.new_static(_godot_object)
     #cdef void* script_tag = gdnative_interface.classdb_get_class_tag(c_string_to_string_name("PyScriptExtension").godot_owner)
     #cdef GodotObject _godot_object = gdnative_interface.object_cast_to(&resource.godot_owner, script_tag)
 #    resource.get_path()
     cdef PyScriptExtension script
-    print_warning("before_cast")
+    print_error("before_cast")
     cdef object o
     cdef String source
     try:
-        print_warning(resource.godot_owner == NULL)
+        print_error(resource.godot_owner == NULL)
         source = resource.get_path()
         #o = <object>dereference(<GDExtensionTypePtr*>(resource.godot_owner))
-        #print_warning("after_cast")
-        #print_warning("object:",str(o))
+        #print_error("after_cast")
+        #print_error("object:",str(o))
         #script = <PyScriptExtension>resource.godot_owner[0]
-        #print_warning("script:",script)
+        #print_error("script:",script)
         #source_code = script.source_code
-        print_warning("after getting source code")
+        print_error("after getting source code")
     except Exception as e:
-        print_warning("Exception:"+ str(e))
+        print_error("Exception:"+ str(e))
 
     #if (script.is_null())
     #	return ERR_INVALID_PARAMETER;
@@ -71,7 +71,7 @@ cdef class PyResourceFormatSaver(ResourceFormatSaver):
     file.flush()
     gdnative_interface.object_destroy(file.godot_owner)
     set_gdnative_ptr(<GDExtensionTypePtr*> res, <GDExtensionObjectPtr>Error.OK)
-    print_warning("--------------storing_string_successful-------------------")
+    print_error("--------------storing_string_successful-------------------")
 
 
   cdef void _recognize(self, Resource resource, GDExtensionTypePtr res):
@@ -147,19 +147,19 @@ cdef bool string_names_equal(StringName left, StringName right):
 cdef GDExtensionObjectPtr create_instance(void* userdata) with gil:
     ""
     #TODO: This makes no sense
-    print_warning("------------create_script-create_instance---------")
+    print_error("------------create_script-create_instance---------")
     cdef StringName class_name = c_string_to_string_name("ResourceFormatSaver")
     cdef GDExtensionObjectPtr gdnative_object = gdnative_interface.classdb_construct_object(class_name.godot_owner)
-    print_warning(gdnative_object == NULL)
+    print_error(gdnative_object == NULL)
     return gdnative_object
     #return NULL
 
 cdef void free_instance(void *p_userdata, GDExtensionClassInstancePtr p_instance):
     pass
-    #print_warning("free_instance")
+    #print_error("free_instance")
 
 cdef void register_class_py_format_saver() with gil:
-    print_warning("register PyFormatSaver")
+    print_error("register PyFormatSaver")
     """
     ctypedef struct GDExtensionClassCreationInfo:
         GDExtensionClassSet set_func;
@@ -193,10 +193,10 @@ cdef void register_class_py_format_saver() with gil:
     _interface.string_new_with_utf8_chars(parent_class_name_string.godot_owner, "ResourceFormatSaver")
     cdef StringName parent_class_name = StringName.new2(parent_class_name_string)
     _interface.classdb_register_extension_class(get_library(), class_name.godot_owner, parent_class_name.godot_owner, &creation_info)
-    print_warning("-----------registered PyResourceFormatSaver----------------")
+    print_error("-----------registered PyResourceFormatSaver----------------")
 
 cdef GDExtensionClassCallVirtual get_virtual_func(void *p_userdata, GDExtensionConstStringNamePtr p_name) with gil:
-    print_warning("------------pyformatsaver-get_virtual_func---------")
+    print_error("------------pyformatsaver-get_virtual_func---------")
     gdnative_interface = get_interface()
     cdef StringName name = StringName()
     name.godot_owner = p_name

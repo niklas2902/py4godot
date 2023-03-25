@@ -10,12 +10,12 @@ gdnative_interface = get_interface()
 
 cdef class ConverterBase:
     cdef object from_ptr(self,GDExtensionTypePtr type_ptr):
-        print_warning("Converter Base called")
+        print_error("Converter Base called")
 
 cdef class Vector3Converter(ConverterBase):
     cdef object from_ptr(self,GDExtensionTypePtr type_ptr):
         cdef Vector3 position =  Vector3.new_static(type_ptr)
-        print_warning(f"set_position successful:")
+        print_error(f"set_position successful:")
         return position
 
 cdef class Vector2Converter(ConverterBase):
@@ -42,8 +42,8 @@ cdef class Variant:
     def __init__(self, object):
         #TODO: implement this
         self.native_ptr = create_variant(gdnative_interface)
-        print_warning("init_variant")
-        print_warning(type(object))
+        print_error("init_variant")
+        print_error(type(object))
 
         self. init_type(object)
     cdef void init_string(self, String object):
@@ -76,12 +76,12 @@ cdef class Variant:
         try:
             return converter.from_ptr(type_ptr)
         except Exception as e:
-            print_warning(f"An Exception happened:{e}")
+            print_error(f"An Exception happened:{e}")
         return None
 
     cdef void init_type(self, object obj):
         try:
-            print_warning("start_init_type" +str( obj))
+            print_error("start_init_type" +str( obj))
             if isinstance(obj, type(True)):
                 self.init_bool(obj)
             elif isinstance(obj, String):
@@ -91,12 +91,12 @@ cdef class Variant:
             elif isinstance(obj,Vector3):
                 self.init_vector3(obj)
             else:
-                print_warning("new_nil called")
-                print_warning("object:"+str(obj))
+                print_error("new_nil called")
+                print_error("object:"+str(obj))
                 self.init_nil()
-            print_warning("after init_type")
+            print_error("after init_type")
         except Exception as e:
-            print_warning("an exception happened:"+str(e))
+            print_error("an exception happened:"+str(e))
 
 
 

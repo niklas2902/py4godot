@@ -16,7 +16,7 @@ cdef class PyResourceFormatLoader(ResourceFormatLoader):
   def constructor():
     cdef PyResourceFormatLoader class_ = PyResourceFormatLoader()
 
-    print_warning("-------------construct PyResourceFormatLoader--------------------")
+    print_error("-------------construct PyResourceFormatLoader--------------------")
     cdef StringName class_name = c_string_to_string_name("PyResourceFormatLoader")
 
     class_.set_godot_owner(gdnative_interface.classdb_construct_object(class_name.godot_owner))
@@ -39,11 +39,11 @@ cdef class PyResourceFormatLoader(ResourceFormatLoader):
     self.extensions.append(pyi)
 
   cdef void set_language(self, ScriptLanguageExtension language):
-    print_warning("set_lang")
+    print_error("set_lang")
     self.language = language
-    print_warning("set_lang successful")
+    print_error("set_lang successful")
   cdef _get_recognized_extensions(self, GDExtensionTypePtr res):
-    print_warning("get_recognized_extensions_called")
+    print_error("get_recognized_extensions_called")
     cdef PackedStringArray gdextensions = PackedStringArray.new_static(res)
     gdextensions.push_back(self.py)
 
@@ -80,7 +80,7 @@ cdef class PyResourceFormatLoader(ResourceFormatLoader):
 
 
   cdef _load(self, String path, String original_path, bool use_sub_threads, int cache_mode, GDExtensionTypePtr res):
-    print_warning("---------------------load_loader-----------------")
+    print_error("---------------------load_loader-----------------")
     cdef PyScriptExtension script = PyScriptExtension.constructor()
     cdef GDExtensionVariantFromTypeConstructorFunc constructor_func
     cdef Variant var
@@ -96,23 +96,23 @@ cdef class PyResourceFormatLoader(ResourceFormatLoader):
         source_code = file.get_as_text(False)
         gdnative_interface.object_destroy(file.godot_owner)
 
-        print_warning("start_try"+str(self.language))
+        print_error("start_try"+str(self.language))
         script.set_language(<ScriptLanguage>self.language)
-        print_warning("length:", source_code.length())
+        print_error("length:", source_code.length())
         script.set_path(original_path)
         #TODO: Use real string length
         py_string = (<bytes>gd_string_c_string(gdnative_interface,source_code.godot_owner, source_code.length())).decode("utf-8")
-        print_warning("--------source_code:", py_string)
+        print_error("--------source_code:", py_string)
         script.set_py_source_code(py_string)
 
         #script.source_code = c_string_to_string("test_code")
         constructor_func = gdnative_interface.get_variant_from_type_constructor(GDExtensionVariantType.GDEXTENSION_VARIANT_TYPE_OBJECT)
-        print_warning("after_get_constructor")
+        print_error("after_get_constructor")
         constructor_func(res,<GDExtensionTypePtr>&script.godot_owner)
-        print_warning("after_calling_constructor")
+        print_error("after_calling_constructor")
     except Exception as e:
-        print_warning(str(e))
-    print_warning("_________________end_load___________________")
+        print_error(str(e))
+    print_error("_________________end_load___________________")
 
 cdef GDExtensionPtrOperatorEvaluator operator_equal_string_name = gdnative_interface.variant_get_ptr_operator_evaluator(
 GDExtensionVariantOperator.GDEXTENSION_VARIANT_OP_EQUAL,
@@ -129,19 +129,19 @@ cdef bool string_names_equal(StringName left, StringName right):
 cdef GDExtensionObjectPtr create_instance(void* userdata) with gil:
     ""
     #TODO: This makes no sense
-    print_warning("------------create_script-create_instance---------")
+    print_error("------------create_script-create_instance---------")
     cdef StringName class_name = c_string_to_string_name("ResourceFormatLoader")
     cdef GDExtensionObjectPtr gdnative_object = gdnative_interface.classdb_construct_object(class_name.godot_owner)
-    print_warning(gdnative_object == NULL)
+    print_error(gdnative_object == NULL)
     return gdnative_object
     #return NULL
 
 cdef void free_instance(void *p_userdata, GDExtensionClassInstancePtr p_instance):
     pass
-    #print_warning("free_instance")
+    #print_error("free_instance")
 
 cdef void register_class_py_format_loader() with gil:
-    print_warning("register PyFormatLoader")
+    print_error("register PyFormatLoader")
     """
     ctypedef struct GDExtensionClassCreationInfo:
         GDExtensionClassSet set_func;
@@ -175,7 +175,7 @@ cdef void register_class_py_format_loader() with gil:
     _interface.string_new_with_utf8_chars(parent_class_name_string.godot_owner, "ResourceFormatLoader")
     cdef StringName parent_class_name = StringName.new2(parent_class_name_string)
     _interface.classdb_register_extension_class(get_library(), class_name.godot_owner, parent_class_name.godot_owner, &creation_info)
-    print_warning("-----------registered PyResourceFormatLoader----------------")
+    print_error("-----------registered PyResourceFormatLoader----------------")
 
 cdef void* call_virtual_func__get_recognized_extensions(GDExtensionClassInstancePtr p_instance, GDExtensionConstTypePtr *p_args, GDExtensionTypePtr r_ret) with gil:
     cdef PyResourceFormatLoader pylanguage = <PyResourceFormatLoader> p_instance
@@ -292,7 +292,7 @@ cdef StringName func_name__load = c_string_to_string_name("_load")
 cdef GDExtensionClassCallVirtual call_virtual__load_def = <GDExtensionClassCallVirtual>call_virtual_func__load
 
 cdef GDExtensionClassCallVirtual get_virtual_func(void *p_userdata, GDExtensionConstStringNamePtr p_name) with gil:
-    print_warning("------------pyscript-get_virtual_func---------")
+    print_error("------------pyscript-get_virtual_func---------")
     gdnative_interface = get_interface()
     cdef StringName name = StringName()
     name.godot_owner = p_name

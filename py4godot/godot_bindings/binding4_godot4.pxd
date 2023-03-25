@@ -279,8 +279,8 @@ cdef extern from "binding4.h":
         void (*classdb_unregister_extension_class)(GDExtensionClassLibraryPtr p_library, GDExtensionConstStringNamePtr p_class_name); # Unregistering a parent class before a class that inherits it will result in failure. Inheritors must be unregistered first.
 
         #utils
-        void (*print_error)(const char *p_description, const char *p_function, const char *p_file, int32_t p_line);
-        void (*print_warning)(const char *p_description, const char *p_function, const char *p_file, int32_t p_line);
+        void (*print_error)(const char *p_description, const char *p_function, const char *p_file, int32_t p_line, GDExtensionBool notify_editor);
+        void (*print_warning)(const char *p_description, const char *p_function, const char *p_file, int32_t p_line, GDExtensionBool notify_editor);
         void (*print_script_error)(const char *p_description, const char *p_function, const char *p_file, int32_t p_line);
         GDExtensionObjectPtr (*global_get_singleton)(const GDExtensionStringNamePtr p_name);
         GDExtensionPtrBuiltInMethod (*variant_get_ptr_builtin_method)(GDExtensionVariantType p_type, const GDExtensionStringNamePtr p_method, GDExtensionInt p_hash);

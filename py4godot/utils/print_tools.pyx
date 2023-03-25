@@ -4,7 +4,7 @@ from py4godot_core_holder.core_holder cimport *
 
 cdef GDExtensionInterface* gdnative_interface = get_interface()
 
-def print_warning(*objects, sep=' ', end=''):
+def print_error(*objects, sep=' ', end=''):
     cdef str string = ""
     for object in objects:
         string += str(object) + sep
@@ -12,7 +12,7 @@ def print_warning(*objects, sep=' ', end=''):
     string += end
     b_str = string.encode('utf-8')
     cdef char* c_str = b_str
-    gdnative_interface.print_warning(c_str, "test", "test",1);
+    gdnative_interface.print_error(c_str, "test", "test",1, 1);
 
 def print(*objects, sep=' ', end=''):
     string = ""
@@ -20,4 +20,4 @@ def print(*objects, sep=' ', end=''):
         string += str(object) + sep
     string.rstrip(sep)
     string += end
-    gdnative_interface.print_warning(string, "test", "test",1);
+    gdnative_interface.print_error(string, "test", "test",1, 1);

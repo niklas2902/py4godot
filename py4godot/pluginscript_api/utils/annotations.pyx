@@ -20,13 +20,13 @@ def exec_class(source_string):
     gd_tool_class = None
     properties = []
     signals = []
-    print_warning("before exec_source_string:", source_string)
+    print_error("before exec_source_string:", source_string)
     cdef str string = source_string
     try:
         exec(string)
     except Exception as e:
-        print_warning("An Exception happened:", e)
-    print_warning("After exec")
+        print_error("An Exception happened:", e)
+    print_error("After exec")
     return TransferObject(gd_class)
 
 

@@ -4,12 +4,12 @@ from py4godot.utils.print_tools import *
 from py4godot.Instance_data.InstanceData cimport *
 
 cdef GDExtensionObjectPtr get_owner (GDExtensionScriptInstanceDataPtr p_instance) with gil:
-    print_warning("-------------------instance:get_owner---------------")
+    print_error("-------------------instance:get_owner---------------")
     cdef InstanceData instance = <InstanceData>p_instance
     return instance.owner.get_godot_owner()
 
 cdef GDExtensionBool is_placeholder(GDExtensionScriptInstanceDataPtr p_instance) with gil:
-    print_warning("------is_place-holder-------")
+    print_error("------is_place-holder-------")
     return 0
 
 cdef GDExtensionBool instance_set(GDExtensionScriptInstanceDataPtr p_instance, GDExtensionConstStringNamePtr p_name, GDExtensionConstVariantPtr p_value) with gil:
@@ -19,13 +19,13 @@ cdef GDExtensionBool instance_set(GDExtensionScriptInstanceDataPtr p_instance, G
     cdef String gdstring_prop_name = String.new2(name)
     cdef const char* c_str = gd_string_c_string(gdnative_interface,gdstring_prop_name.godot_owner, gdstring_prop_name.length())
     cdef unicode prop_name = <unicode>PyUnicode_FromStringAndSize(c_str,gdstring_prop_name.length())
-    print_warning(f"instance_set:{prop_name}")
+    print_error(f"instance_set:{prop_name}")
     cdef object converted_val = var.get_converted_value()
     try:
         setattr(instance.owner, prop_name, converted_val)
     except Exception as e:
-        print_warning(f"Exception:{e}")
-    print_warning("setting_prop successful")
+        print_error(f"Exception:{e}")
+    print_error("setting_prop successful")
     return True
 cdef GDExtensionBool instance_get(GDExtensionScriptInstanceDataPtr p_instance, GDExtensionConstStringNamePtr p_name, GDExtensionVariantPtr r_ret) with gil:
     cdef InstanceData instance = <InstanceData>p_instance
@@ -40,17 +40,17 @@ cdef GDExtensionBool instance_get(GDExtensionScriptInstanceDataPtr p_instance, G
             prop_val = getattr(instance.owner, prop_name)
         else:
             prop_val = instance.script
-        print_warning("get_prop:"+str(prop_name)+"|" + str(prop_val))
+        print_error("get_prop:"+str(prop_name)+"|" + str(prop_val))
 
 
     except Exception as e:
-       print_warning("Exception:"+str( e))
+       print_error("Exception:"+str( e))
     var.init_type(prop_val)
     return 1
 
 cdef const GDExtensionPropertyInfo *instance_get_property_list(GDExtensionScriptInstanceDataPtr p_instance, uint32_t *r_count) with gil:
     r_count[0] = 0 #TODO enable properties
-    print_warning("prop_count:"+ str(dereference(r_count)))
+    print_error("prop_count:"+ str(dereference(r_count)))
     return NULL
 cdef void instance_free_property_list(GDExtensionScriptInstanceDataPtr p_instance, const GDExtensionPropertyInfo *p_list) with gil:
     pass
@@ -68,7 +68,7 @@ cdef void instance_get_property_state(GDExtensionScriptInstanceDataPtr p_instanc
     pass
 
 cdef const GDExtensionMethodInfo * instance_get_method_list(GDExtensionScriptInstanceDataPtr p_instance, uint32_t *r_count) with gil:
-    print_warning("get_method_list")
+    print_error("get_method_list")
     return NULL
 cdef void instance_free_method_list(GDExtensionScriptInstanceDataPtr p_instance, const GDExtensionMethodInfo *p_list) with gil:
     pass
@@ -77,7 +77,7 @@ cdef GDExtensionBool instance_has_method(GDExtensionScriptInstanceDataPtr p_inst
     cdef StringName method_name = StringName.new_static(p_name)
     cdef String method_name_str = String.new2(method_name)
     cdef str py_method_name_str = (<bytes>gd_string_c_string(gdnative_interface,method_name_str.godot_owner, method_name_str.length())).decode("utf-8")
-    print_warning("has_method:" + py_method_name_str)
+    print_error("has_method:" + py_method_name_str)
     return 1
 
 cdef void instance_call(GDExtensionScriptInstanceDataPtr p_self, GDExtensionConstStringNamePtr p_method, const GDExtensionConstVariantPtr *p_args, GDExtensionInt p_argument_count, GDExtensionVariantPtr r_return, GDExtensionCallError *r_error) with gil:
@@ -85,7 +85,7 @@ cdef void instance_call(GDExtensionScriptInstanceDataPtr p_self, GDExtensionCons
     cdef String method_name_str = String.new2(method_name)
     cdef const char* c_str = gd_string_c_string(gdnative_interface,method_name_str.godot_owner, method_name_str.length())
     cdef unicode py_method_name_str = <unicode>PyUnicode_FromStringAndSize(c_str,method_name_str.length())
-    print_warning("print_method:"+py_method_name_str)
+    print_error("print_method:"+py_method_name_str)
     cdef list args = []
     for index in range(0, p_argument_count):
         args.append(Variant.new_static(p_args[index]))
@@ -100,7 +100,7 @@ cdef GDExtensionBool instance_ref_count_decremented(GDExtensionScriptInstanceDat
     pass
 
 cdef GDExtensionObjectPtr instance_get_script(GDExtensionScriptInstanceDataPtr p_instance) with gil:
-    print_warning("instance_get_script")
+    print_error("instance_get_script")
     cdef InstanceData instance = <InstanceData>p_instance
     return instance.script.godot_owner
 

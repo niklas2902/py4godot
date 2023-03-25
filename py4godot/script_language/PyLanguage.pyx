@@ -55,7 +55,7 @@ cdef class PyLanguage(ScriptLanguageExtension):
     pass
 
   cdef _get_reserved_words(self, GDExtensionTypePtr res):
-    print_warning("get_reserved_words")
+    print_error("get_reserved_words")
     cdef PackedStringArray array = PackedStringArray.new_static(res)
     try:
         array.push_back(c_string_to_string("del"))
@@ -94,9 +94,9 @@ cdef class PyLanguage(ScriptLanguageExtension):
         array.push_back(c_string_to_string("is"))
         array.push_back(c_string_to_string("await"))
     except Exception as e:
-      print_warning("Exception:", str(e))
+      print_error("Exception:", str(e))
   cdef _is_control_flow_keyword(self, String keyword, GDExtensionTypePtr res):
-    print_warning("is_control_flow_keyword")
+    print_error("is_control_flow_keyword")
     cdef str py_string = (<bytes>gd_string_c_string(gdnative_interface,keyword.godot_owner, keyword.length())).decode("utf-8")
     cdef bint is_in_keywords = py_string in self.keywords
     set_gdnative_ptr(<GDExtensionTypePtr*>res, <GDExtensionTypePtr>is_in_keywords)
@@ -129,7 +129,7 @@ cdef class PyLanguage(ScriptLanguageExtension):
     cdef String key = c_string_to_string("valid")
     Py_INCREF(key)
     cdef GDExtensionVariantFromTypeConstructorFunc constructor_func = gdnative_interface.get_variant_from_type_constructor(GDExtensionVariantType.GDEXTENSION_VARIANT_TYPE_STRING)
-    print_warning("after_get_constructor")
+    print_error("after_get_constructor")
     varptr = create_variant(gdnative_interface)
     constructor_func(varptr,key.godot_owner)
 
@@ -139,30 +139,30 @@ cdef class PyLanguage(ScriptLanguageExtension):
     cdef GDExtensionVariantFromTypeConstructorFunc constructor_func_valid = gdnative_interface.get_variant_from_type_constructor(GDExtensionVariantType.GDEXTENSION_VARIANT_TYPE_BOOL);
 
     try:
-        print_warning(gdnative_interface.variant_get_type(value_var))
-        print_warning("Before creating bool variant")
+        print_error(gdnative_interface.variant_get_type(value_var))
+        print_error("Before creating bool variant")
         constructor_func_valid(value_var, &valid)
-        print_warning("After creating bool variant")
-        print_warning(gdnative_interface.variant_get_type(value_var))
+        print_error("After creating bool variant")
+        print_error(gdnative_interface.variant_get_type(value_var))
         #create_variant_bool(gdnative_interface, &value_var, valid)
     except Exception as e:
-        print_warning("Error:", str(e))
-    print_warning("after_dictionary")
+        print_error("Error:", str(e))
+    print_error("after_dictionary")
     #set_gdnative_ptr(<GDExtensionTypePtr*> res, <GDExtensionTypePtr>1)
 
   cdef _validate_path(self, String path, GDExtensionTypePtr res):
     res = <GDExtensionTypePtr>1
 
   cdef _create_script(self, GDExtensionTypePtr res):
-    print_warning("------------create_script-start---------")
+    print_error("------------create_script-start---------")
     cdef py_extension.PyScriptExtension extension = py_extension.PyScriptExtension.constructor()
     cdef StringName class_name = c_string_to_string_name("PyScriptExtension")
     try:
         res = extension.godot_owner
         Py_INCREF(extension)
     except Exception as e:
-        print_warning(str(e))
-    print_warning("------------create_script-end---------")
+        print_error(str(e))
+    print_error("------------create_script-end---------")
 
   cdef _has_named_classes(self, GDExtensionTypePtr res):
     res = <GDExtensionTypePtr>0
@@ -189,7 +189,7 @@ cdef class PyLanguage(ScriptLanguageExtension):
     set_gdnative_ptr(<GDExtensionTypePtr*>res, <GDExtensionTypePtr>0)
 
   cdef _complete_code(self, String code, String path, Object owner, GDExtensionTypePtr res):
-    print_warning("complete_code")
+    print_error("complete_code")
     pass
 
   cdef _lookup_code(self, String code, String symbol, String path, Object owner, GDExtensionTypePtr res):
