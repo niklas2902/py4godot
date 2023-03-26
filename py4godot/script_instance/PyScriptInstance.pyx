@@ -20,11 +20,13 @@ cdef GDExtensionBool instance_set(GDExtensionScriptInstanceDataPtr p_instance, G
     cdef const char* c_str = gd_string_c_string(gdnative_interface,gdstring_prop_name.godot_owner, gdstring_prop_name.length())
     cdef unicode prop_name = <unicode>PyUnicode_FromStringAndSize(c_str,gdstring_prop_name.length())
     print_error(f"instance_set:{prop_name}")
-    cdef object converted_val = var.get_converted_value()
+    cdef object converted_val
     try:
-        setattr(instance.owner, prop_name, converted_val)
-    except Exception as e:
-        print_error(f"Exception:{e}")
+        converted_val = var.get_converted_value()
+        print_error("before setting property")
+        getattr(instance.owner, prop_name, converted_val)
+    except Exception as exception:
+        print_error(f"Exception:{str(exception)}")
     print_error("setting_prop successful")
     return True
 cdef GDExtensionBool instance_get(GDExtensionScriptInstanceDataPtr p_instance, GDExtensionConstStringNamePtr p_name, GDExtensionVariantPtr r_ret) with gil:
@@ -36,6 +38,7 @@ cdef GDExtensionBool instance_get(GDExtensionScriptInstanceDataPtr p_instance, G
     cdef unicode prop_name = <unicode>PyUnicode_FromStringAndSize(c_str,gdstring_prop_name.length())
     cdef object prop_val
     try:
+        print_error("get_prop:"+str(prop_name))
         if(prop_name != "script"):
             prop_val = getattr(instance.owner, prop_name)
         else:
@@ -81,6 +84,7 @@ cdef GDExtensionBool instance_has_method(GDExtensionScriptInstanceDataPtr p_inst
     return 1
 
 cdef void instance_call(GDExtensionScriptInstanceDataPtr p_self, GDExtensionConstStringNamePtr p_method, const GDExtensionConstVariantPtr *p_args, GDExtensionInt p_argument_count, GDExtensionVariantPtr r_return, GDExtensionCallError *r_error) with gil:
+    print_error("call_method")
     cdef StringName method_name = StringName.new_static(p_method)
     cdef String method_name_str = String.new2(method_name)
     cdef const char* c_str = gd_string_c_string(gdnative_interface,method_name_str.godot_owner, method_name_str.length())

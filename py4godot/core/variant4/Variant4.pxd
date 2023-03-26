@@ -14,6 +14,8 @@ cdef class BoolConverter(ConverterBase):
     cdef object from_ptr(self,GDExtensionTypePtr type_ptr)
 cdef class IntConverter(ConverterBase):
     cdef object from_ptr(self,GDExtensionTypePtr type_ptr)
+cdef class StringConverter(ConverterBase):
+    cdef object from_ptr(self,GDExtensionTypePtr type_ptr)
 
 cdef class Variant:
     cdef GDExtensionVariantPtr native_ptr

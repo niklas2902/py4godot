@@ -15,3 +15,13 @@ cdef String c_string_to_string(char* string):
     _interface.string_new_with_utf8_chars(gd_string.godot_owner, string)
     return gd_string
 
+cdef unicode gd_string_to_py_string(String string):
+    cdef const char* c_str = gd_string_c_string(gdnative_interface,string.godot_owner, string.length())
+    cdef unicode py_string = <unicode>PyUnicode_FromStringAndSize(c_str,string.length())
+    return py_string
+
+cdef unicode gd_string_name_to_py_string(StringName string_name):
+    cdef String string = String.new2(string_name)
+    cdef const char* c_str = gd_string_c_string(gdnative_interface,string.godot_owner, string.length())
+    cdef unicode py_string = <unicode>PyUnicode_FromStringAndSize(c_str,string.length())
+    return py_string

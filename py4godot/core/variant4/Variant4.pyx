@@ -18,6 +18,12 @@ cdef class Vector3Converter(ConverterBase):
         print_error(f"set_position successful:")
         return position
 
+
+cdef class StringConverter(ConverterBase):
+    cdef object from_ptr(self,GDExtensionTypePtr type_ptr):
+        cdef String string =  String.new_static(type_ptr)
+        return string
+
 cdef class Vector2Converter(ConverterBase):
     cdef object from_ptr(self,GDExtensionTypePtr type_ptr):
         return Vector2.new_static(dereference(<void**>type_ptr))
@@ -35,7 +41,8 @@ cdef dict_type_conversion_methods = {
 GDExtensionVariantType.GDEXTENSION_VARIANT_TYPE_VECTOR3:Vector3Converter(),
 GDExtensionVariantType.GDEXTENSION_VARIANT_TYPE_VECTOR2:Vector2Converter(),
 GDExtensionVariantType.GDEXTENSION_VARIANT_TYPE_BOOL:BoolConverter(),
-GDExtensionVariantType.GDEXTENSION_VARIANT_TYPE_INT:IntConverter()
+GDExtensionVariantType.GDEXTENSION_VARIANT_TYPE_INT:IntConverter(),
+GDExtensionVariantType.GDEXTENSION_VARIANT_TYPE_STRING:StringConverter(),
 }
 
 cdef class Variant:
@@ -48,6 +55,8 @@ cdef class Variant:
         self. init_type(object)
     cdef void init_string(self, String object):
         cdef GDExtensionVariantFromTypeConstructorFunc constructor_func = gdnative_interface.get_variant_from_type_constructor(GDExtensionVariantType.GDEXTENSION_VARIANT_TYPE_STRING)
+        #cdef String res_string = c_string_to_string("test description from conversion") #TODO:remove!!
+        print_error("init_string:",gd_string_to_py_string(object))
         constructor_func(self.native_ptr,object.godot_owner)
 
     cdef void init_vector3(self, Vector3 object):
@@ -66,6 +75,7 @@ cdef class Variant:
       gdnative_interface.variant_new_nil(self.native_ptr)
 
     cdef object get_converted_value(self):
+        print_error("get_converted_val")
         cdef GDExtensionVariantType variant_type = gdnative_interface.variant_get_type(self.native_ptr)
         cdef GDExtensionTypeFromVariantConstructorFunc constructor = gdnative_interface.get_variant_to_type_constructor(variant_type)
 
