@@ -28,6 +28,8 @@ ctypedef const void *GDExtensionConstStringNamePtr;
 ctypedef const void *GDExtensionConstStringPtr;
 ctypedef void *GDExtensionScriptInstanceDataPtr;
 ctypedef void *GDExtensionScriptInstancePtr
+ctypedef void *GDExtensionRefPtr;
+ctypedef const void *GDExtensionConstRefPtr;
 
 cdef extern from "binding4.h":
     ctypedef void (*GDExtensionVariantFromTypeConstructorFunc)(GDExtensionVariantPtr, GDExtensionTypePtr);
@@ -258,6 +260,8 @@ cdef extern from "binding4.h":
         void *class_userdata;
 
     ctypedef struct GDExtensionInterface:
+
+        GDExtensionObjectPtr (*ref_get_object)(GDExtensionConstRefPtr p_ref);
         GDExtensionVariantFromTypeConstructorFunc (*get_variant_from_type_constructor)(GDExtensionVariantType p_type);
         GDExtensionTypeFromVariantConstructorFunc (*get_variant_to_type_constructor)(GDExtensionVariantType p_type);
         void (*variant_new_nil)(GDExtensionVariantPtr r_dest);

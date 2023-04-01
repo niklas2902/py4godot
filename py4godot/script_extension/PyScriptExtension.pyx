@@ -85,7 +85,8 @@ cdef class PyScriptExtension(ScriptExtension):
 
 
   cdef void _instance_create(self, Object for_object, GDExtensionTypePtr res):
-
+    print_error("before get_class")
+    for_object.get_class()
     cdef GDExtensionVariantFromTypeConstructorFunc constructor_func
     cdef Variant var
     cdef GDExtensionVariantPtr varptr
@@ -153,6 +154,7 @@ cdef class PyScriptExtension(ScriptExtension):
     try:
         gd_instance.owner = gd_class()
         gd_instance.script = self
+        gd_instance.owner.set_godot_owner(for_object.godot_owner)
         Py_INCREF(gd_instance)
         Py_INCREF(gd_instance.owner)
         Py_INCREF(gd_instance.script)
@@ -165,7 +167,7 @@ cdef class PyScriptExtension(ScriptExtension):
 
         #create_extension_class_ptr(<GDExtensionTypePtr*>res)
     except Exception as e:
-        print_error("instance_create failed because of:"+ str(e))
+        print_error("Exception instance_create failed because of:"+ str(e))
 
     print_error("_instance_create-end")
 
@@ -324,7 +326,7 @@ cdef GDExtensionClassCallVirtual call_virtual__get_instance_base_type_def = <GDE
 
 cdef void* call_virtual_func__instance_create(GDExtensionClassInstancePtr p_instance, GDExtensionConstTypePtr *p_args, GDExtensionTypePtr r_ret) with gil:
     cdef PyScriptExtension pylanguage = <PyScriptExtension> p_instance
-    cdef Object args0 = Object.new_static(dereference(p_args + 0))
+    cdef Object args0 = Object.new_static(gdnative_interface.ref_get_object(p_args[0]))
 
     cdef object obj = <object>pylanguage._instance_create(args0,r_ret)
     cdef void* ret_val = <void*>obj
