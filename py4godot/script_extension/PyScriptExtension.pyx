@@ -7,6 +7,7 @@ from py4godot.classes.generated4_core cimport *
 from py4godot.script_instance.PyScriptInstance cimport *
 from py4godot.pluginscript_api.utils.annotations import *
 from py4godot.utils.Wrapper4 cimport *
+from py4godot.classes.Node3D.Node3D cimport *
 from py4godot.Instance_data.InstanceData cimport *
 from cpython cimport Py_INCREF, Py_DECREF, PyObject
 from cython.operator cimport dereference
@@ -42,10 +43,21 @@ cdef class PyScriptExtension(ScriptExtension):
 
   cdef void _init_values(self):
     self.source_code = ""
+    self.gd_obj = None
+    self.gd_class = None
     Py_INCREF(self.source_code)
 
   cdef void set_py_source_code(self, str source_code):
     self.source_code = source_code
+    print_error("before exec source code")
+    try:
+        result = exec_class(self.source_code)
+    except Exception as e:
+        print_error("Creating_class failed:"+str(e))
+    if(result != None and (result.gd_class != None or result.gd_tool_class != None)):
+        print_error("result not None")
+        self.gd_class = result.gd_class if result.gd_class != None else result.gd_tool_class
+        self.gd_obj = <Wrapper4> self.gd_class()
 
   cdef str get_py_source_code(self):
     return self.source_code
@@ -84,7 +96,7 @@ cdef class PyScriptExtension(ScriptExtension):
     constructor(gd_string_name.godot_owner,_args)
 
 
-  cdef void _instance_create(self, Object for_object, GDExtensionTypePtr res):
+  cdef void _instance_create(self, Object for_object, GDExtensionTypePtr res) with gil:
     print_error("before get_class")
     for_object.get_class()
     cdef GDExtensionVariantFromTypeConstructorFunc constructor_func
@@ -97,20 +109,11 @@ cdef class PyScriptExtension(ScriptExtension):
     cdef object gd_class
     cdef InstanceData gd_instance = InstanceData()
     print_error("before trying to execute code")
-    try:
-        result = exec_class(self.source_code)
-    except Exception as e:
-        print_error("Creating_class failed:"+str(e))
-    if(result != None and (result.gd_class != None or result.gd_tool_class != None)):
-        print_error("result not None")
-        gd_obj = result.gd_class if result.gd_class != None else result.gd_tool_class
-        gd_class = <Wrapper4> gd_obj
 
     try:
-        gd_instance.owner = gd_class()
-        gd_instance.owner.godot_owner = for_object.godot_owner
-        gd_instance.owner.script = self
-        gd_instance.script = self
+        gd_instance.set_owner(self.gd_obj)
+        self.gd_obj.set_godot_owner(for_object.godot_owner)
+        gd_instance.set_script(self)
         Py_INCREF(gd_instance)
         #TODO: work further on here
         print_error("before instance_create")

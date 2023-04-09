@@ -1,6 +1,7 @@
 from py4godot.classes.ScriptExtension.ScriptExtension cimport *
 from py4godot.classes.ScriptLanguageExtension.ScriptLanguageExtension cimport *
 from py4godot.core.variant4.Variant4 cimport *
+from py4godot.utils.Wrapper4 cimport *
 from py4godot.enums.enums4 cimport *
 from py4godot_core_holder.core_holder cimport *
 
@@ -18,6 +19,8 @@ cdef class PyScriptExtension(ScriptExtension):
   cdef char* script_name
   cdef ScriptLanguageExtension language
   cdef str source_code
+  cdef Wrapper4 gd_obj
+  cdef object gd_class
 
   cdef void _init_values(self) # self-defined
   cdef void set_py_source_code(self, str source_code) #self-defined
@@ -29,7 +32,7 @@ cdef class PyScriptExtension(ScriptExtension):
   cdef void _get_base_script(self, GDExtensionTypePtr res)
   cdef void _inherits_script(self, Script script, GDExtensionTypePtr res)
   cdef void _get_instance_base_type(self, GDExtensionTypePtr res)
-  cdef void _instance_create(self, Object for_object, GDExtensionTypePtr res)
+  cdef void _instance_create(self, Object for_object, GDExtensionTypePtr res) with gil
   cdef void _placeholder_instance_create(self, Object for_object, GDExtensionTypePtr res)
   cdef void _instance_has(self, Object object, GDExtensionTypePtr res)
   cdef void _has_source_code(self, GDExtensionTypePtr res)

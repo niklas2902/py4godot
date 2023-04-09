@@ -27,5 +27,5 @@ def create_init_file(platform):
     with open(f"{build_folder}/{platform}/{config_data['python_ver']}-{platform}/python/install/Lib/site-packages/py4godot/__init__.py", "w") as init_file:
         init_file.write(import_string_py4godot)
 
-    with open(f"{build_folder}/{platform}/{config_data['python_ver']}-{platform}/python/install/Lib/site-packages/py4godot/pluginscript_api/hints/__init__.py", "w") as init_file:
-        init_file.write(import_string_hints)
+    #with open(f"{build_folder}/{platform}/{config_data['python_ver']}-{platform}/python/install/Lib/site-packages/py4godot/pluginscript_api/hints/__init__.py", "w") as init_file:
+    #    init_file.write(import_string_hints)
