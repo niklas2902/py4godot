@@ -9,32 +9,40 @@ from cython.operator cimport dereference
 gdnative_interface = get_interface()
 
 cdef class ConverterBase:
-    cdef object from_ptr(self,GDExtensionTypePtr type_ptr):
+    cdef object from_ptr(self,GDExtensionTypeFromVariantConstructorFunc constructor, GDExtensionVariantPtr var_ptr):
         print_error("Converter Base called")
 
 cdef class Vector3Converter(ConverterBase):
-    cdef object from_ptr(self,GDExtensionTypePtr type_ptr):
-        cdef Vector3 position =  Vector3.new_static(type_ptr)
-        print_error(f"set_position successful:")
+    cdef object from_ptr(self,GDExtensionTypeFromVariantConstructorFunc constructor, GDExtensionVariantPtr var_ptr):
+        cdef Vector3 position =  Vector3.new0()
+        constructor(position.godot_owner, var_ptr)
         return position
 
 
 cdef class StringConverter(ConverterBase):
-    cdef object from_ptr(self,GDExtensionTypePtr type_ptr):
-        cdef String string =  String.new_static(type_ptr)
+    cdef object from_ptr(self,GDExtensionTypeFromVariantConstructorFunc constructor, GDExtensionVariantPtr var_ptr):
+        cdef String string = String.new0()
+        constructor(string.godot_owner, var_ptr)
         return string
 
 cdef class Vector2Converter(ConverterBase):
-    cdef object from_ptr(self,GDExtensionTypePtr type_ptr):
-        return Vector2.new_static(dereference(<void**>type_ptr))
+    cdef object from_ptr(self,GDExtensionTypeFromVariantConstructorFunc constructor, GDExtensionVariantPtr var_ptr):
+        cdef Vector2 val = Vector2.new0()
+        constructor(val.godot_owner, var_ptr)
+        return val
 
 cdef class BoolConverter(ConverterBase):
-    cdef object from_ptr(self,GDExtensionTypePtr type_ptr):
-        return <bool>dereference(<void**>type_ptr)
+    cdef object from_ptr(self,GDExtensionTypeFromVariantConstructorFunc constructor, GDExtensionVariantPtr var_ptr):
+        cdef bint val = True
+        constructor(&val, var_ptr)
+        print_error("visibility:", val)
+        return val
 
 cdef class IntConverter(ConverterBase):
-    cdef object from_ptr(self,GDExtensionTypePtr type_ptr):
-        return <int>(dereference(<void**>type_ptr))
+    cdef object from_ptr(self,GDExtensionTypeFromVariantConstructorFunc constructor, GDExtensionVariantPtr var_ptr):
+        cdef int val = 0
+        constructor(&val, var_ptr)
+        return val
 
 
 cdef dict_type_conversion_methods = {
@@ -80,11 +88,10 @@ cdef class Variant:
         cdef GDExtensionTypeFromVariantConstructorFunc constructor = gdnative_interface.get_variant_to_type_constructor(variant_type)
 
         #TODO
-        cdef uint8_t[4] type_ptr
-        constructor(type_ptr, self.native_ptr)
         cdef ConverterBase converter =  dict_type_conversion_methods[variant_type]
         try:
-            return converter.from_ptr(type_ptr)
+            print_error("converter:", converter)
+            return converter.from_ptr(constructor,self.native_ptr)
         except Exception as e:
             print_error(f"An Exception happened:{e}")
         return None

@@ -4,18 +4,18 @@ from py4godot.classes.ScriptExtension.ScriptExtension cimport *
 from py4godot.classes.Object.Object cimport *
 
 cdef class ConverterBase:
-    cdef object from_ptr(self,GDExtensionTypePtr type_ptr)
+    cdef object from_ptr(self,GDExtensionTypeFromVariantConstructorFunc constructor, GDExtensionVariantPtr var_ptr)
 
 cdef class Vector3Converter(ConverterBase):
-    cdef object from_ptr(self,GDExtensionTypePtr type_ptr)
+    cdef object from_ptr(self,GDExtensionTypeFromVariantConstructorFunc constructor, GDExtensionVariantPtr var_ptr)
 cdef class Vector2Converter(ConverterBase):
-    cdef object from_ptr(self,GDExtensionTypePtr type_ptr)
+    cdef object from_ptr(self,GDExtensionTypeFromVariantConstructorFunc constructor, GDExtensionVariantPtr var_ptr)
 cdef class BoolConverter(ConverterBase):
-    cdef object from_ptr(self,GDExtensionTypePtr type_ptr)
+    cdef object from_ptr(self,GDExtensionTypeFromVariantConstructorFunc constructor, GDExtensionVariantPtr var_ptr)
 cdef class IntConverter(ConverterBase):
-    cdef object from_ptr(self,GDExtensionTypePtr type_ptr)
+    cdef object from_ptr(self,GDExtensionTypeFromVariantConstructorFunc constructor, GDExtensionVariantPtr var_ptr)
 cdef class StringConverter(ConverterBase):
-    cdef object from_ptr(self,GDExtensionTypePtr type_ptr)
+    cdef object from_ptr(self,GDExtensionTypeFromVariantConstructorFunc constructor, GDExtensionVariantPtr var_ptr)
 
 cdef class Variant:
     cdef GDExtensionVariantPtr native_ptr

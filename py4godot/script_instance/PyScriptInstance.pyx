@@ -1,6 +1,7 @@
 from cython.operator cimport dereference
 from cpython cimport Py_INCREF, Py_DECREF, PyObject
 from py4godot.utils.print_tools import *
+from py4godot.utils.utils cimport *
 from py4godot.Instance_data.InstanceData cimport *
 
 cdef GDExtensionObjectPtr get_owner (GDExtensionScriptInstanceDataPtr p_instance) with gil:
@@ -23,10 +24,9 @@ cdef GDExtensionBool instance_set(GDExtensionScriptInstanceDataPtr p_instance, G
     cdef object converted_val
     try:
         converted_val = var.get_converted_value()
-        print_error("before setting property")
-        getattr(instance.owner, prop_name, converted_val)
     except Exception as exception:
         print_error(f"Exception:{str(exception)}")
+    setattr(instance.owner, prop_name, converted_val)
     print_error("setting_prop successful")
     return True
 cdef GDExtensionBool instance_get(GDExtensionScriptInstanceDataPtr p_instance, GDExtensionConstStringNamePtr p_name, GDExtensionVariantPtr r_ret) with gil:
