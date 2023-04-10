@@ -49,7 +49,7 @@ cdef GDExtensionBool instance_get(GDExtensionScriptInstanceDataPtr p_instance, G
     except Exception as e:
        print_error("Exception:"+str( e))
     var.init_type(prop_val)
-    return 1
+    return var
 
 cdef const GDExtensionPropertyInfo *instance_get_property_list(GDExtensionScriptInstanceDataPtr p_instance, uint32_t *r_count) with gil:
     r_count[0] = 0 #TODO enable properties

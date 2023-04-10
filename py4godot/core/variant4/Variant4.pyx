@@ -35,13 +35,13 @@ cdef class BoolConverter(ConverterBase):
     cdef object from_ptr(self,GDExtensionTypeFromVariantConstructorFunc constructor, GDExtensionVariantPtr var_ptr):
         cdef bint val = True
         constructor(&val, var_ptr)
-        print_error("visibility:", val)
         return val
 
 cdef class IntConverter(ConverterBase):
     cdef object from_ptr(self,GDExtensionTypeFromVariantConstructorFunc constructor, GDExtensionVariantPtr var_ptr):
         cdef int val = 0
         constructor(&val, var_ptr)
+        print_error("convert_from_int:", val)
         return val
 
 
@@ -79,6 +79,10 @@ cdef class Variant:
         cdef GDExtensionVariantFromTypeConstructorFunc constructor_func = gdnative_interface.get_variant_from_type_constructor(GDExtensionVariantType.GDEXTENSION_VARIANT_TYPE_BOOL)
         constructor_func(self.native_ptr,&object)
 
+    cdef void init_int(self, int object):
+        cdef GDExtensionVariantFromTypeConstructorFunc constructor_func = gdnative_interface.get_variant_from_type_constructor(GDExtensionVariantType.GDEXTENSION_VARIANT_TYPE_BOOL)
+        constructor_func(self.native_ptr,&object)
+
     cdef void init_nil(self):
       gdnative_interface.variant_new_nil(self.native_ptr)
 
@@ -99,17 +103,22 @@ cdef class Variant:
     cdef void init_type(self, object obj):
         try:
             print_error("start_init_type" +str( obj))
-            if isinstance(obj, type(True)):
-                self.init_bool(obj)
-            elif isinstance(obj, String):
+            if isinstance(obj, String):
                self.init_string(obj)
             elif isinstance(obj,Object):
                 self.init_object(obj)
             elif isinstance(obj,Vector3):
                 self.init_vector3(obj)
+            elif isinstance(obj,int):
+                print_error("init_int")
+                self.init_int(obj)
+            elif isinstance(obj, type(True)):
+                print_error("init_bool")
+                self.init_bool(obj)
             else:
                 print_error("new_nil called")
                 print_error("object:"+str(obj))
+                print_error("type:"+type(str(obj)))
                 self.init_nil()
             print_error("after init_type")
         except Exception as e:

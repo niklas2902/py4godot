@@ -26,6 +26,7 @@ cdef class Variant:
     cdef void init_string(self, String object)
     cdef void init_object(self, Object object)
     cdef void init_bool(self, bint object)
+    cdef void init_int(self, int object)
     cdef void init_nil(self)
 
     cdef void init_type(self, object obj)
