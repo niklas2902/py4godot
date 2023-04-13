@@ -101,7 +101,7 @@ cdef class PyResourceFormatLoader(ResourceFormatLoader):
         print_error("length:", source_code.length())
         script.set_path(original_path)
         #TODO: Use real string length
-        py_string = (<bytes>gd_string_c_string(gdnative_interface,source_code.godot_owner, source_code.length())).decode("utf-8")
+        py_string = gd_string_to_py_string(source_code)
         print_error("--------source_code:", py_string)
         script.set_py_source_code(py_string)
 

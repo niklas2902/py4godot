@@ -32,42 +32,16 @@ cdef class PyResourceFormatSaver(ResourceFormatSaver):
     self.extensions = ["py", "pyw", "pyi"]
 
   cdef void _save(self, Resource resource, String path, int flags, GDExtensionTypePtr res):
-    print_error("PyResourceFormatSaver::save")
-    #cdef Script script = Script.new_static(_godot_object)
-    #cdef void* script_tag = gdnative_interface.classdb_get_class_tag(c_string_to_string_name("PyScriptExtension").godot_owner)
-    #cdef GodotObject _godot_object = gdnative_interface.object_cast_to(&resource.godot_owner, script_tag)
-#    resource.get_path()
-    cdef PyScriptExtension script
-    print_error("before_cast")
+    cdef Script script = Script.new_static(resource.godot_owner)
+
     cdef object o
     cdef String source
-    try:
-        print_error(resource.godot_owner == NULL)
-        source = resource.get_path()
-        #o = <object>dereference(<GDExtensionTypePtr*>(resource.godot_owner))
-        #print_error("after_cast")
-        #print_error("object:",str(o))
-        #script = <PyScriptExtension>resource.godot_owner[0]
-        #print_error("script:",script)
-        #source_code = script.source_code
-        print_error("after getting source code")
-    except Exception as e:
-        print_error("Exception:"+ str(e))
-
-    #if (script.is_null())
-    #	return ERR_INVALID_PARAMETER;
+    source = script.source_code
 
     cdef Error error;
     cdef FileAccess file = FileAccess.open(path, FileAccess__ModeFlags.FileAccess__WRITE);
 
-    #set_gdnative_ptr(<GDExtensionTypePtr *>res, <GDExtensionTypePtr>(error))
-    #if (error != OK)
-    #	return error;
-
     file.store_string(source);
-    #if (file->get_error() != OK && file->get_error() != ERR_FILE_EOF) {
-    #	return ERR_CANT_CREATE;
-    #}
     file.flush()
     gdnative_interface.object_destroy(file.godot_owner)
     set_gdnative_ptr(<GDExtensionTypePtr*> res, <GDExtensionObjectPtr>Error.OK)
@@ -87,7 +61,7 @@ cdef class PyResourceFormatSaver(ResourceFormatSaver):
 
 cdef void* call_virtual_func__save(GDExtensionClassInstancePtr p_instance, GDExtensionConstTypePtr *p_args, GDExtensionTypePtr r_ret) with gil:
     cdef PyResourceFormatSaver pylanguage = <PyResourceFormatSaver> p_instance
-    cdef Resource args0 = Resource.new_static(dereference(p_args + 0))
+    cdef Resource args0 = Resource.new_static(gdnative_interface.ref_get_object(dereference(p_args + 0)))
     cdef String args1 = String.new_static(dereference(p_args + 1))
     cdef int args2 = <int>dereference(p_args + 2)
 

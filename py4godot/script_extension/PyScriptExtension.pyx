@@ -194,8 +194,12 @@ cdef class PyScriptExtension(ScriptExtension):
 
 
   cdef void _set_source_code(self, String code, GDExtensionTypePtr res):
-    self.source_code = code
-
+    print_error("set_source_code")
+    try:
+        self.source_code = gd_string_to_py_string(code)
+    except Exception as e:
+        print_error("Exception:",e)
+    print_error("set_source_code successful")
 
   cdef void _reload(self, bool keep_state, GDExtensionTypePtr res):
     pass
