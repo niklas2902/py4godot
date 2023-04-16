@@ -117,8 +117,8 @@ cdef class Variant:
                 self.init_bool(obj)
             else:
                 print_error("new_nil called")
-                print_error("object:"+str(obj))
-                print_error("type:"+type(str(obj)))
+                print_error("object:",str(obj))
+                print_error("type:",type(str(obj)))
                 self.init_nil()
             print_error("after init_type")
         except Exception as e:

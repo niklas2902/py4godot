@@ -3,17 +3,8 @@ from cpython cimport Py_INCREF, Py_DECREF, PyObject
 from py4godot.utils.print_tools import *
 from py4godot.utils.utils cimport *
 from py4godot.Instance_data.InstanceData cimport *
-
-cdef GDExtensionPropertyInfo property
-cdef StringName name = StringName.new2(c_string_to_string("test"))
-cdef StringName class_ = StringName.new2(c_string_to_string("int"))
-cdef String hint = c_string_to_string("test")
-property.type = GDExtensionVariantType.GDEXTENSION_VARIANT_TYPE_INT
-property.name = name.godot_owner
-property.class_name = class_.godot_owner
-property.hint = 0
-property.hint_string = hint.godot_owner
-property.usage = 6
+from py4godot.pluginscript_api.utils.PropertyDescription cimport *
+from cython.cimports.libc.stdlib import malloc, free
 
 cdef GDExtensionObjectPtr get_owner (GDExtensionScriptInstanceDataPtr p_instance) with gil:
     print_error("-------------------instance:get_owner---------------")
@@ -63,9 +54,13 @@ cdef GDExtensionBool instance_get(GDExtensionScriptInstanceDataPtr p_instance, G
     return var
 
 cdef const GDExtensionPropertyInfo *instance_get_property_list(GDExtensionScriptInstanceDataPtr p_instance, uint32_t *r_count) with gil:
-    r_count[0] = 1 #TODO enable properties
+    cdef InstanceData instance = <InstanceData>p_instance
+    r_count[0] = len(instance.properties) #TODO enable properties
+    print_error("list of properties from python:", len(instance.properties))
     print_error("prop_count:"+ str(dereference(r_count)))
-    return &property
+    print_error("after getting property_info")
+    #cdef GDExtensionPropertyInfo * property_infos = malloc
+    return &(<PropertyDescription>(instance.properties[0])).property_info
 cdef void instance_free_property_list(GDExtensionScriptInstanceDataPtr p_instance, const GDExtensionPropertyInfo *p_list) with gil:
     pass
 cdef GDExtensionVariantType instance_get_property_type(GDExtensionScriptInstanceDataPtr p_instance, GDExtensionConstStringNamePtr p_name, GDExtensionBool *r_is_valid) with gil:

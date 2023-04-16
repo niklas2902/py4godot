@@ -21,6 +21,7 @@ cdef class PyScriptExtension(ScriptExtension):
   cdef str source_code
   cdef Wrapper4 gd_obj
   cdef object gd_class
+  cdef list properties
 
   cdef void _init_values(self) # self-defined
   cdef void set_py_source_code(self, str source_code) #self-defined

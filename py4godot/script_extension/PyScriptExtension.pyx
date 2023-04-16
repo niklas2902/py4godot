@@ -45,6 +45,7 @@ cdef class PyScriptExtension(ScriptExtension):
     self.source_code = ""
     self.gd_obj = None
     self.gd_class = None
+    self.properties = []
     Py_INCREF(self.source_code)
 
   cdef void set_py_source_code(self, str source_code):
@@ -60,6 +61,7 @@ cdef class PyScriptExtension(ScriptExtension):
         print_error("result not None")
         self.gd_class = result.gd_class if result.gd_class != None else result.gd_tool_class
         self.gd_obj = <Wrapper4> self.gd_class()
+        self.properties = result.properties
 
   cdef str get_py_source_code(self):
     return self.source_code
@@ -114,6 +116,7 @@ cdef class PyScriptExtension(ScriptExtension):
 
     try:
         gd_instance.set_owner(self.gd_obj)
+        gd_instance.set_properties(self.properties)
         self.gd_obj.set_godot_owner(for_object.godot_owner)
         gd_instance.set_script(self)
         Py_INCREF(gd_instance)
