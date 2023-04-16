@@ -4,7 +4,9 @@ from py4godot.utils.print_tools import *
 from py4godot.utils.utils cimport *
 from py4godot.Instance_data.InstanceData cimport *
 from py4godot.pluginscript_api.utils.PropertyDescription cimport *
-from cython.cimports.libc.stdlib import malloc, free
+from libc.stdlib cimport malloc, free
+
+cdef GDExtensionPropertyInfo * property_infos
 
 cdef GDExtensionObjectPtr get_owner (GDExtensionScriptInstanceDataPtr p_instance) with gil:
     print_error("-------------------instance:get_owner---------------")
@@ -54,13 +56,21 @@ cdef GDExtensionBool instance_get(GDExtensionScriptInstanceDataPtr p_instance, G
     return var
 
 cdef const GDExtensionPropertyInfo *instance_get_property_list(GDExtensionScriptInstanceDataPtr p_instance, uint32_t *r_count) with gil:
+    global property_infos
     cdef InstanceData instance = <InstanceData>p_instance
     r_count[0] = len(instance.properties) #TODO enable properties
     print_error("list of properties from python:", len(instance.properties))
     print_error("prop_count:"+ str(dereference(r_count)))
     print_error("after getting property_info")
-    #cdef GDExtensionPropertyInfo * property_infos = malloc
-    return &(<PropertyDescription>(instance.properties[0])).property_info
+
+    if property_infos != NULL:
+        return property_infos
+
+    property_infos = <GDExtensionPropertyInfo*>malloc(sizeof(GDExtensionPropertyInfo)* len(instance.properties))
+    for index in range(0, len(instance.properties)):
+        property_infos[index] = (<PropertyDescription>(instance.properties[index])).property_info
+
+    return property_infos
 cdef void instance_free_property_list(GDExtensionScriptInstanceDataPtr p_instance, const GDExtensionPropertyInfo *p_list) with gil:
     pass
 cdef GDExtensionVariantType instance_get_property_type(GDExtensionScriptInstanceDataPtr p_instance, GDExtensionConstStringNamePtr p_name, GDExtensionBool *r_is_valid) with gil:
