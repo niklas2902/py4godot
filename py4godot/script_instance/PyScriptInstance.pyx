@@ -114,13 +114,14 @@ cdef void instance_call(GDExtensionScriptInstanceDataPtr p_self, GDExtensionCons
     for index in range(0, p_argument_count):
         args.append(Variant.new_static(p_args[index]).get_converted_value())
     try:
-        result = getattr(instance.owner, py_method_name_str)(*args)
+        if(hasattr(instance.owner, py_method_name_str)):
+            result = getattr(instance.owner, py_method_name_str)(*args)
     except Exception as e:
-        print_error("An Exception happened:{e}")
+        print_error(f"An Exception happened:{e}|owner:{instance.owner}" )
 
     cdef Variant var = Variant.new_static(r_return)
     var.init_type(result)
-    print_error(f"called method({method_name}):", result)
+    print_error(f"called method({py_method_name_str}):", result)
 cdef void instance_notification(GDExtensionScriptInstanceDataPtr p_instance, int32_t p_what) with gil:
     pass
 cdef void instance_to_string(GDExtensionScriptInstanceDataPtr p_instance, GDExtensionBool *r_is_valid, GDExtensionStringPtr r_out) with gil:

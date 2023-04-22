@@ -30,6 +30,7 @@ def exec_class(source_string):
     except Exception as e:
         print_error("exec_class: Exception happened:", traceback.format_exc())
     print_error("After exec")
+    print_error("gd_class:", gd_class)
     return TransferObject(gd_class, properties)
 
 
@@ -52,5 +53,5 @@ def gdtool(cls):
 
 def prop(name,type_, defaultval, hint = BaseHint(), hint_string = ""):
     properties.append(PropertyDescription(name = name,
-                type_=type_,hint = hint,usage = 6,
+                type_=type_,hint = hint,usage = 4,
                 default_value=defaultval))

@@ -117,6 +117,11 @@ cdef class PyScriptExtension(ScriptExtension):
     try:
         gd_instance.set_owner(self.gd_obj)
         gd_instance.set_properties(self.properties)
+
+        for property in self.properties:
+            print_error(f"create_property:{gd_string_name_to_py_string(property.get_name())}->{property.get_default_value()}")
+            setattr(self.gd_obj, gd_string_name_to_py_string(property.get_name()), property.get_default_value())
+
         self.gd_obj.set_godot_owner(for_object.godot_owner)
         gd_instance.set_script(self)
         Py_INCREF(gd_instance)

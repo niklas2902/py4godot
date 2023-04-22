@@ -122,7 +122,7 @@ cdef class Variant:
                 self.init_nil()
             print_error("after init_type")
         except Exception as e:
-            print_error("an exception happened:"+str(e))
+            print_error(f"an exception happened:"+str(e))
 
 
 
