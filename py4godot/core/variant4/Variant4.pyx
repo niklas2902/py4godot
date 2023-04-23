@@ -80,8 +80,9 @@ cdef class Variant:
         constructor_func(self.native_ptr,&object)
 
     cdef void init_int(self, int object):
-        cdef GDExtensionVariantFromTypeConstructorFunc constructor_func = gdnative_interface.get_variant_from_type_constructor(GDExtensionVariantType.GDEXTENSION_VARIANT_TYPE_BOOL)
-        constructor_func(self.native_ptr,&object)
+        cdef int* val = &object
+        cdef GDExtensionVariantFromTypeConstructorFunc constructor_func = gdnative_interface.get_variant_from_type_constructor(GDExtensionVariantType.GDEXTENSION_VARIANT_TYPE_INT)
+        constructor_func(self.native_ptr,val)
 
     cdef void init_nil(self):
       gdnative_interface.variant_new_nil(self.native_ptr)

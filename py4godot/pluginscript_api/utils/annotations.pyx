@@ -53,5 +53,5 @@ def gdtool(cls):
 
 def prop(name,type_, defaultval, hint = BaseHint(), hint_string = ""):
     properties.append(PropertyDescription(name = name,
-                type_=type_,hint = hint,usage = 4,
+                type_=type_,hint = hint,usage = 4096|6|32768,
                 default_value=defaultval))

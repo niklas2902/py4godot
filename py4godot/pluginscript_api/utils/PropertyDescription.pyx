@@ -69,6 +69,6 @@ cdef class PropertyDescription:
         #self.property_info.class_name = class_.godot_owner
         #self.property_info.hint = 0
         #self.property_info.hint_string = hint.godot_owner
-        #self.property_info.usage = 6
+        #self.property_info.usage = 32768
 
 

@@ -32,7 +32,7 @@ cdef GDExtensionBool instance_set(GDExtensionScriptInstanceDataPtr p_instance, G
         print_error(f"Exception:{str(exception)}")
     setattr(instance.owner, prop_name, converted_val)
     print_error("setting_prop successful")
-    return True
+    return 1
 cdef GDExtensionBool instance_get(GDExtensionScriptInstanceDataPtr p_instance, GDExtensionConstStringNamePtr p_name, GDExtensionVariantPtr r_ret) with gil:
     cdef InstanceData instance = <InstanceData>p_instance
     cdef Variant var = Variant.new_static(r_ret)
@@ -53,7 +53,7 @@ cdef GDExtensionBool instance_get(GDExtensionScriptInstanceDataPtr p_instance, G
     except Exception as e:
        print_error("Exception:"+str( e))
     var.init_type(prop_val)
-    return var
+    return 1
 
 cdef const GDExtensionPropertyInfo *instance_get_property_list(GDExtensionScriptInstanceDataPtr p_instance, uint32_t *r_count) with gil:
     global property_infos
@@ -114,8 +114,7 @@ cdef void instance_call(GDExtensionScriptInstanceDataPtr p_self, GDExtensionCons
     for index in range(0, p_argument_count):
         args.append(Variant.new_static(p_args[index]).get_converted_value())
     try:
-        if(hasattr(instance.owner, py_method_name_str)):
-            result = getattr(instance.owner, py_method_name_str)(*args)
+        result = getattr(instance.owner, py_method_name_str)(*args)
     except Exception as e:
         print_error(f"An Exception happened:{e}|owner:{instance.owner}" )
 
