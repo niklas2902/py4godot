@@ -28,6 +28,7 @@ cdef class Variant:
     cdef void init_bool(self, bint object)
     cdef void init_int(self, int object)
     cdef void init_nil(self)
+    cdef int int_val
 
     cdef void init_type(self, object obj)
 
