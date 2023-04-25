@@ -16,6 +16,8 @@ cdef class IntConverter(ConverterBase):
     cdef object from_ptr(self,GDExtensionTypeFromVariantConstructorFunc constructor, GDExtensionVariantPtr var_ptr)
 cdef class StringConverter(ConverterBase):
     cdef object from_ptr(self,GDExtensionTypeFromVariantConstructorFunc constructor, GDExtensionVariantPtr var_ptr)
+cdef class FloatConverter(ConverterBase):
+    cdef object from_ptr(self,GDExtensionTypeFromVariantConstructorFunc constructor, GDExtensionVariantPtr var_ptr)
 
 cdef class Variant:
     cdef GDExtensionVariantPtr native_ptr
@@ -28,7 +30,43 @@ cdef class Variant:
     cdef void init_bool(self, bint object)
     cdef void init_int(self, int object)
     cdef void init_nil(self)
+
+    cdef void init_float(self, float object)
+    cdef void init_packedint32array(self, PackedInt32Array object)
+    cdef void init_basis(self, Basis object)
+    cdef void init_array(self, Array object)
+    cdef void init_vector3i(self, Vector3i object)
+    cdef void init_stringname(self, StringName object)
+    cdef void init_transform3d(self, Transform3D object)
+    cdef void init_signal(self, Signal object)
+    cdef void init_quaternion(self, Quaternion object)
+    cdef void init_packedcolorarray(self, PackedColorArray object)
+    cdef void init_plane(self, Plane object)
+    cdef void init_transform2d(self, Transform2D object)
+    cdef void init_aabb(self, AABB object)
+    cdef void init_vector2i(self, Vector2i object)
+    cdef void init_color(self, Color object)
+    cdef void init_packedvector3array(self, PackedVector3Array object)
+    cdef void init_packedfloat64array(self, PackedFloat64Array object)
+    cdef void init_dictionary(self, Dictionary object)
+    cdef void init_packedvector2array(self, PackedVector2Array object)
+    cdef void init_vector4(self, Vector4 object)
+    cdef void init_rid(self, RID object)
+    cdef void init_packedfloat32array(self, PackedFloat32Array object)
+    cdef void init_nodepath(self, NodePath object)
+    cdef void init_rect2(self, Rect2 object)
+    cdef void init_rect2i(self, Rect2i object)
+    cdef void init_packedbytearray(self, PackedByteArray object)
+    cdef void init_packedstringarray(self, PackedStringArray object)
+    cdef void init_packedint64array(self, PackedInt64Array object)
+    cdef void init_vector2(self, Vector2 object)
+    cdef void init_vector4i(self, Vector4i object)
+    cdef void init_callable(self, Callable object)
+    cdef void init_projection(self, Projection object)
+
     cdef int int_val
+    cdef bint bool_val
+    cdef float float_val
 
     cdef void init_type(self, object obj)
 
