@@ -18,6 +18,66 @@ cdef class StringConverter(ConverterBase):
     cdef object from_ptr(self,GDExtensionTypeFromVariantConstructorFunc constructor, GDExtensionVariantPtr var_ptr)
 cdef class FloatConverter(ConverterBase):
     cdef object from_ptr(self,GDExtensionTypeFromVariantConstructorFunc constructor, GDExtensionVariantPtr var_ptr)
+cdef class QuaternionConverter(ConverterBase):
+    cdef object from_ptr(self, GDExtensionTypeFromVariantConstructorFunc constructor, GDExtensionVariantPtr var_ptr)
+cdef class PackedFloat64ArrayConverter(ConverterBase):
+    cdef object from_ptr(self, GDExtensionTypeFromVariantConstructorFunc constructor, GDExtensionVariantPtr var_ptr)
+cdef class DictionaryConverter(ConverterBase):
+    cdef object from_ptr(self, GDExtensionTypeFromVariantConstructorFunc constructor, GDExtensionVariantPtr var_ptr)
+cdef class Transform3DConverter(ConverterBase):
+    cdef object from_ptr(self, GDExtensionTypeFromVariantConstructorFunc constructor, GDExtensionVariantPtr var_ptr)
+cdef class Vector2iConverter(ConverterBase):
+    cdef object from_ptr(self, GDExtensionTypeFromVariantConstructorFunc constructor, GDExtensionVariantPtr var_ptr)
+cdef class PackedByteArrayConverter(ConverterBase):
+    cdef object from_ptr(self, GDExtensionTypeFromVariantConstructorFunc constructor, GDExtensionVariantPtr var_ptr)
+cdef class PackedFloat32ArrayConverter(ConverterBase):
+    cdef object from_ptr(self, GDExtensionTypeFromVariantConstructorFunc constructor, GDExtensionVariantPtr var_ptr)
+cdef class Rect2Converter(ConverterBase):
+    cdef object from_ptr(self, GDExtensionTypeFromVariantConstructorFunc constructor, GDExtensionVariantPtr var_ptr)
+cdef class PlaneConverter(ConverterBase):
+    cdef object from_ptr(self, GDExtensionTypeFromVariantConstructorFunc constructor, GDExtensionVariantPtr var_ptr)
+cdef class PackedInt32ArrayConverter(ConverterBase):
+    cdef object from_ptr(self, GDExtensionTypeFromVariantConstructorFunc constructor, GDExtensionVariantPtr var_ptr)
+cdef class RIDConverter(ConverterBase):
+    cdef object from_ptr(self, GDExtensionTypeFromVariantConstructorFunc constructor, GDExtensionVariantPtr var_ptr)
+cdef class ArrayConverter(ConverterBase):
+    cdef object from_ptr(self, GDExtensionTypeFromVariantConstructorFunc constructor, GDExtensionVariantPtr var_ptr)
+cdef class Vector3iConverter(ConverterBase):
+    cdef object from_ptr(self, GDExtensionTypeFromVariantConstructorFunc constructor, GDExtensionVariantPtr var_ptr)
+cdef class StringNameConverter(ConverterBase):
+    cdef object from_ptr(self, GDExtensionTypeFromVariantConstructorFunc constructor, GDExtensionVariantPtr var_ptr)
+cdef class SignalConverter(ConverterBase):
+    cdef object from_ptr(self, GDExtensionTypeFromVariantConstructorFunc constructor, GDExtensionVariantPtr var_ptr)
+cdef class PackedVector2ArrayConverter(ConverterBase):
+    cdef object from_ptr(self, GDExtensionTypeFromVariantConstructorFunc constructor, GDExtensionVariantPtr var_ptr)
+cdef class ProjectionConverter(ConverterBase):
+    cdef object from_ptr(self, GDExtensionTypeFromVariantConstructorFunc constructor, GDExtensionVariantPtr var_ptr)
+cdef class BasisConverter(ConverterBase):
+    cdef object from_ptr(self, GDExtensionTypeFromVariantConstructorFunc constructor, GDExtensionVariantPtr var_ptr)
+cdef class Vector4iConverter(ConverterBase):
+    cdef object from_ptr(self, GDExtensionTypeFromVariantConstructorFunc constructor, GDExtensionVariantPtr var_ptr)
+cdef class Transform2DConverter(ConverterBase):
+    cdef object from_ptr(self, GDExtensionTypeFromVariantConstructorFunc constructor, GDExtensionVariantPtr var_ptr)
+cdef class AABBConverter(ConverterBase):
+    cdef object from_ptr(self, GDExtensionTypeFromVariantConstructorFunc constructor, GDExtensionVariantPtr var_ptr)
+cdef class ColorConverter(ConverterBase):
+    cdef object from_ptr(self, GDExtensionTypeFromVariantConstructorFunc constructor, GDExtensionVariantPtr var_ptr)
+cdef class PackedInt64ArrayConverter(ConverterBase):
+    cdef object from_ptr(self, GDExtensionTypeFromVariantConstructorFunc constructor, GDExtensionVariantPtr var_ptr)
+cdef class Vector4Converter(ConverterBase):
+    cdef object from_ptr(self, GDExtensionTypeFromVariantConstructorFunc constructor, GDExtensionVariantPtr var_ptr)
+cdef class PackedColorArrayConverter(ConverterBase):
+    cdef object from_ptr(self, GDExtensionTypeFromVariantConstructorFunc constructor, GDExtensionVariantPtr var_ptr)
+cdef class NodePathConverter(ConverterBase):
+    cdef object from_ptr(self, GDExtensionTypeFromVariantConstructorFunc constructor, GDExtensionVariantPtr var_ptr)
+cdef class CallableConverter(ConverterBase):
+    cdef object from_ptr(self, GDExtensionTypeFromVariantConstructorFunc constructor, GDExtensionVariantPtr var_ptr)
+cdef class Rect2iConverter(ConverterBase):
+    cdef object from_ptr(self, GDExtensionTypeFromVariantConstructorFunc constructor, GDExtensionVariantPtr var_ptr)
+cdef class PackedStringArrayConverter(ConverterBase):
+    cdef object from_ptr(self, GDExtensionTypeFromVariantConstructorFunc constructor, GDExtensionVariantPtr var_ptr)
+cdef class PackedVector3ArrayConverter(ConverterBase):
+    cdef object from_ptr(self, GDExtensionTypeFromVariantConstructorFunc constructor, GDExtensionVariantPtr var_ptr)
 
 cdef class Variant:
     cdef GDExtensionVariantPtr native_ptr
