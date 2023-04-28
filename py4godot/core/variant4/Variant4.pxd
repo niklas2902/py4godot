@@ -126,7 +126,7 @@ cdef class Variant:
 
     cdef int int_val
     cdef bint bool_val
-    cdef float float_val
+    cdef double float_val
 
     cdef void init_type(self, object obj)
 

@@ -45,7 +45,7 @@ cdef class IntConverter(ConverterBase):
 
 cdef class FloatConverter(ConverterBase):
     cdef object from_ptr(self,GDExtensionTypeFromVariantConstructorFunc constructor, GDExtensionVariantPtr var_ptr):
-        cdef float val = 0
+        cdef double val = 0
         constructor(&val, var_ptr)
         return val
 
@@ -277,6 +277,7 @@ cdef class Variant:
         self.float_val = object
         cdef GDExtensionVariantFromTypeConstructorFunc constructor_func = gdnative_interface.get_variant_from_type_constructor(GDExtensionVariantType.GDEXTENSION_VARIANT_TYPE_FLOAT)
         constructor_func(self.native_ptr,&self.float_val)
+        print("init_float:",self.float_val)
 
 
     cdef void init_int(self, int object):
