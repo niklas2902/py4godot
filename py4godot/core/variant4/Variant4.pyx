@@ -331,6 +331,7 @@ cdef class Variant:
         cdef GDExtensionVariantFromTypeConstructorFunc constructor_func = gdnative_interface.get_variant_from_type_constructor(GDExtensionVariantType.GDEXTENSION_VARIANT_TYPE_PACKED_FLOAT64_ARRAY)
         constructor_func(self.native_ptr,object.godot_owner)
     cdef void init_dictionary(self, Dictionary object):
+        print_error("init_dictionary")
         cdef GDExtensionVariantFromTypeConstructorFunc constructor_func = gdnative_interface.get_variant_from_type_constructor(GDExtensionVariantType.GDEXTENSION_VARIANT_TYPE_DICTIONARY)
         constructor_func(self.native_ptr,object.godot_owner)
     cdef void init_packedvector2array(self, PackedVector2Array object):

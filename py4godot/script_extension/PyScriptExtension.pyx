@@ -8,12 +8,10 @@ from py4godot.script_instance.PyScriptInstance cimport *
 from py4godot.pluginscript_api.utils.annotations import *
 from py4godot.utils.Wrapper4 cimport *
 from py4godot.classes.Node3D.Node3D cimport *
+from py4godot.classes.typed_arrays cimport *
 from py4godot.Instance_data.InstanceData cimport *
 from cpython cimport Py_INCREF, Py_DECREF, PyObject
 from cython.operator cimport dereference
-
-
-cdef PyLanguage py_language
 
 cdef void set_lang(PyLanguage lang):
     global py_language
@@ -22,6 +20,13 @@ cdef void set_lang(PyLanguage lang):
 
 
 gdnative_interface = get_interface()
+
+
+cdef Dictionary dict = Dictionary.new0()
+cdef StringName dictionary_name = c_string_to_string_name("")
+cdef PyLanguage py_language
+cdef Variant var
+
 cdef GDExtensionScriptInstanceInfo* instance_ptr = get_instance_ptr()
 cdef GDExtensionClassCreationInfo creation_info
 cdef class PyScriptExtension(ScriptExtension):
@@ -141,7 +146,6 @@ cdef class PyScriptExtension(ScriptExtension):
     print_error("_instance_create-end")
 
 
-    
 
   cdef void _placeholder_instance_create(self, Object for_object, GDExtensionTypePtr res):
     print_error("_placeholder_instance_create")
@@ -244,7 +248,24 @@ cdef class PyScriptExtension(ScriptExtension):
 
 
   cdef void _get_script_signal_list(self, GDExtensionTypePtr res):
-    pass
+    print_error("get script signal list")
+    cdef DictionaryArray array = DictionaryArray.new_static(res)
+    cdef Variant v2
+    try:
+        print_error("before push back")
+        var = Variant.new_static(create_variant2(gdnative_interface))
+        #var.init_dictionary(dict)
+        print_error("after Variant")
+        gdnative_interface.array_set_typed(array.godot_owner, GDExtensionVariantType.GDEXTENSION_VARIANT_TYPE_DICTIONARY,  dictionary_name.godot_owner, var.get_native_ptr());
+        print_error("before push back")
+        var2 = Variant.new_static(create_variant2(gdnative_interface))
+        var2.init_dictionary(dict)
+        array.push_back(var2)
+        print_error("after push back")
+    except Exception as e:
+        print_error(f"An Exception happened(get signal list):{e}")
+    print_error("size:", array.size())
+    print_error("after getting scrip signal list")
 
 
   cdef void _has_property_default_value(self, StringName property, GDExtensionTypePtr res):

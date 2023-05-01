@@ -317,6 +317,8 @@ cdef extern from "binding4.h":
 
         GDExtensionScriptInstancePtr (*script_instance_create)(const GDExtensionScriptInstanceInfo *p_info, GDExtensionScriptInstanceDataPtr p_instance_data);
 
+        void array_set_typed(GDExtensionTypePtr p_self, GDExtensionVariantType p_type, GDExtensionConstStringNamePtr p_class_name, GDExtensionConstVariantPtr p_script); # p_self should be an Array ptr
+
     # SCRIPT INSTANCE EXTENSION
 
     ctypedef GDExtensionBool (*GDExtensionScriptInstanceSet)(GDExtensionScriptInstanceDataPtr p_instance, const GDExtensionStringNamePtr p_name, const GDExtensionVariantPtr p_value);

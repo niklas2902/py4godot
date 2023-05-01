@@ -8,7 +8,7 @@ void set_gdnative_ptr(GDExtensionTypePtr* a, GDExtensionTypePtr b){
 
 
 GDExtensionVariantPtr create_variant2(GDExtensionInterface * interface_ptr){
-    GDExtensionVariantPtr r_dest = malloc(sizeof(char));
+    GDExtensionVariantPtr r_dest = malloc(sizeof(char)*4);
     interface_ptr->variant_new_nil(r_dest);
     return r_dest;
 }
