@@ -253,12 +253,16 @@ cdef class PyScriptExtension(ScriptExtension):
     print_error("get script signal list")
     array = DictionaryArray.new_static(res)
     cdef object noneObject = None
+    cdef Variant var_name
+    cdef Variant var_key = Variant(c_string_to_string("name"))
     try:
         print_error("before push back")
         var = Variant(dict)
         print_error("after Variant")
         gdnative_interface.array_set_typed(array.godot_owner, GDExtensionVariantType.GDEXTENSION_VARIANT_TYPE_DICTIONARY,  dictionary_name.godot_owner, var.get_native_ptr());
         print_error("before push back")
+        var_name = Variant.new_static(gdnative_interface.dictionary_operator_index(dict.godot_owner, var_key.get_native_ptr()))
+        var_name.init_type(c_string_to_string("test_signal"))
         var2 = Variant(dict)
         array.push_back(var2)
         print_error("after push back")
