@@ -242,7 +242,7 @@ GDEXTENSION_VARIANT_TYPE_PACKED_VECTOR3_ARRAY:PackedVector3ArrayConverter(),
 cdef class Variant:
     def __init__(self, object):
         #TODO: implement this
-        self.native_ptr = create_variant(gdnative_interface)
+        self.native_ptr = &self.native_arr
         print_error("init_variant")
         print_error(type(object))
         self.int_val = 0

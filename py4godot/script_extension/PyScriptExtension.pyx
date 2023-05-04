@@ -25,6 +25,8 @@ gdnative_interface = get_interface()
 cdef Dictionary dict = Dictionary.new0()
 cdef StringName dictionary_name = c_string_to_string_name("")
 cdef PyLanguage py_language
+cdef DictionaryArray array
+cdef Variant v2
 cdef Variant var
 
 cdef GDExtensionScriptInstanceInfo* instance_ptr = get_instance_ptr()
@@ -249,22 +251,20 @@ cdef class PyScriptExtension(ScriptExtension):
 
   cdef void _get_script_signal_list(self, GDExtensionTypePtr res):
     print_error("get script signal list")
-    cdef DictionaryArray array = DictionaryArray.new_static(res)
-    cdef Variant v2
+    array = DictionaryArray.new_static(res)
+    cdef object noneObject = None
     try:
         print_error("before push back")
-        var = Variant.new_static(create_variant2(gdnative_interface))
-        #var.init_dictionary(dict)
+        var = Variant(dict)
         print_error("after Variant")
         gdnative_interface.array_set_typed(array.godot_owner, GDExtensionVariantType.GDEXTENSION_VARIANT_TYPE_DICTIONARY,  dictionary_name.godot_owner, var.get_native_ptr());
         print_error("before push back")
-        var2 = Variant.new_static(create_variant2(gdnative_interface))
-        var2.init_dictionary(dict)
+        var2 = Variant(dict)
         array.push_back(var2)
         print_error("after push back")
     except Exception as e:
         print_error(f"An Exception happened(get signal list):{e}")
-    print_error("size:", array.size())
+    #print_error("size:", array.size())
     print_error("after getting scrip signal list")
 
 
