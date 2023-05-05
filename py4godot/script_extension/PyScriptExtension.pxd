@@ -8,7 +8,7 @@ from py4godot_core_holder.core_holder cimport *
 from py4godot.classes.generated4_core cimport *
 from py4godot.classes.Object.Object cimport *
 from py4godot.classes.Script.Script cimport *
-
+from py4godot.classes.typed_arrays cimport *
 from py4godot.script_language.PyLanguage cimport *
 cdef void register_class_py_script_extension() with gil
 cdef PyLanguage py_language
@@ -22,6 +22,8 @@ cdef class PyScriptExtension(ScriptExtension):
   cdef Wrapper4 gd_obj
   cdef object gd_class
   cdef list properties
+  cdef list signals
+  cdef DictionaryArray array
 
   cdef void _init_values(self) # self-defined
   cdef void set_py_source_code(self, str source_code) #self-defined

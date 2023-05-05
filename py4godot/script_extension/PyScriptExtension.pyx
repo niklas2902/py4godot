@@ -25,7 +25,6 @@ gdnative_interface = get_interface()
 cdef Dictionary dict = Dictionary.new0()
 cdef StringName dictionary_name = c_string_to_string_name("")
 cdef PyLanguage py_language
-cdef DictionaryArray array
 cdef Variant v2
 cdef Variant var
 
@@ -53,6 +52,8 @@ cdef class PyScriptExtension(ScriptExtension):
     self.gd_obj = None
     self.gd_class = None
     self.properties = []
+    self.signals = []
+    self.array = None
     Py_INCREF(self.source_code)
 
   cdef void set_py_source_code(self, str source_code):
@@ -69,6 +70,7 @@ cdef class PyScriptExtension(ScriptExtension):
         self.gd_class = result.gd_class if result.gd_class != None else result.gd_tool_class
         self.gd_obj = <Wrapper4> self.gd_class()
         self.properties = result.properties
+        self.signals = result.signals
 
   cdef str get_py_source_code(self):
     return self.source_code
@@ -251,25 +253,14 @@ cdef class PyScriptExtension(ScriptExtension):
 
   cdef void _get_script_signal_list(self, GDExtensionTypePtr res):
     print_error("get script signal list")
-    array = DictionaryArray.new_static(res)
-    cdef object noneObject = None
-    cdef Variant var_name
-    cdef Variant var_key = Variant(c_string_to_string("name"))
+    self.array = DictionaryArray.new_static(res)
     try:
-        print_error("before push back")
         var = Variant(dict)
-        print_error("after Variant")
-        gdnative_interface.array_set_typed(array.godot_owner, GDExtensionVariantType.GDEXTENSION_VARIANT_TYPE_DICTIONARY,  dictionary_name.godot_owner, var.get_native_ptr());
-        print_error("before push back")
-        var_name = Variant.new_static(gdnative_interface.dictionary_operator_index(dict.godot_owner, var_key.get_native_ptr()))
-        var_name.init_type(c_string_to_string("test_signal"))
-        var2 = Variant(dict)
-        array.push_back(var2)
-        print_error("after push back")
+        gdnative_interface.array_set_typed(self.array.godot_owner, GDExtensionVariantType.GDEXTENSION_VARIANT_TYPE_DICTIONARY,  dictionary_name.godot_owner, var.get_native_ptr());
+        for signal in self.signals:
+            self.array.push_back(signal.get_var_signal_dict())
     except Exception as e:
         print_error(f"An Exception happened(get signal list):{e}")
-    #print_error("size:", array.size())
-    print_error("after getting scrip signal list")
 
 
   cdef void _has_property_default_value(self, StringName property, GDExtensionTypePtr res):
