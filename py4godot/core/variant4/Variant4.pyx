@@ -482,7 +482,3 @@ cdef class Variant:
             print_error("after init_type")
         except Exception as e:
             print_error(f"an exception happened:"+str(e))
-
-
-
-
