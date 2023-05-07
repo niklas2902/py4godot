@@ -1,4 +1,5 @@
 from py4godot.pluginscript_api.hints.BaseHint cimport *
+from py4godot.pluginscript_api.utils.SignalArg cimport *
 from py4godot.godot_bindings.binding4_godot4 cimport *
 from py4godot.classes.generated4_core cimport *
 from py4godot.classes.Object.Object cimport *
@@ -36,7 +37,11 @@ cdef class SignalDescription:
 
         self.arg_type_key = c_string_to_string("type")
         self.arg_type_key_variant = Variant(self.arg_type_key)
-        cdef Variant var_args_dict = self.create_signal_arg(c_string_to_string("test_arg2"), 1)
+        cdef SignalArg signal_arg
+        cdef Variant var_args_dict
+        for arg in args:
+            signal_arg = arg
+            var_args_dict = self.create_signal_arg(signal_arg.name, signal_arg.variant_type)
         self.args_array.push_back(var_args_dict)
 
         #add args dictionaries to args array

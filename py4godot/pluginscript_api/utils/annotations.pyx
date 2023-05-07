@@ -4,6 +4,7 @@ from py4godot.utils.print_tools import *
 from py4godot.pluginscript_api.hints.BaseHint cimport *
 from py4godot.pluginscript_api.utils.PropertyDescription cimport *
 from py4godot.pluginscript_api.utils.SignalDescription cimport *
+from py4godot.pluginscript_api.utils.SignalArg cimport *
 
 """annotations used to define all the godot members"""
 """methods = []
@@ -59,5 +60,5 @@ def prop(name,type_, defaultval, hint = BaseHint(), hint_string = ""):
                 default_value=defaultval))
 
 
-def signal(name):
-    signals.append(SignalDescription(name, []))
+def signal(name, list args = []):
+    signals.append(SignalDescription(name, args))
