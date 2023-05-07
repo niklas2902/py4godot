@@ -28,3 +28,5 @@ cdef class SignalDescription:
 
     cdef String arg_type_key
     cdef Variant arg_type_key_variant
+
+    cdef Variant create_signal_arg(self, String name, int type)

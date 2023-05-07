@@ -60,4 +60,4 @@ def prop(name,type_, defaultval, hint = BaseHint(), hint_string = ""):
 
 
 def signal(name):
-    signals.append(SignalDescription(name))
+    signals.append(SignalDescription(name, []))

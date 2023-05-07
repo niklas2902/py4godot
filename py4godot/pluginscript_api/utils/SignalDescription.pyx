@@ -9,7 +9,7 @@ from py4godot.classes.Object.Object cimport *
 
 cdef class SignalDescription:
     """"Description class for the properties, a gdclass can have and which can be found in the editor"""
-    def __init__(self, name):
+    def __init__(self, name, args):
         self.signal_dict = Dictionary.new0()
         self.signal_name = c_string_to_string(name.encode("utf-8"))
         self.signal_key = c_string_to_string("name")
@@ -31,27 +31,30 @@ cdef class SignalDescription:
         #create a signal arg
         self.args_dicts = []
         self.variant_args_dicts = []
-        cdef Dictionary arg_dict = Dictionary.new0()
-        self.args_dicts.append(arg_dict)
-
         self.arg_name_key = c_string_to_string("name")
         self.arg_name_key_variant = Variant(self.arg_name_key)
 
         self.arg_type_key = c_string_to_string("type")
         self.arg_type_key_variant = Variant(self.arg_type_key)
-
-        cdef Variant var_name_arg = Variant.new_static(gdnative_interface.dictionary_operator_index(arg_dict.godot_owner, self.arg_name_key_variant.get_native_ptr()))
-        var_name_arg.init_type(c_string_to_string("test_arg"))
-
-        cdef Variant var_type_arg = Variant.new_static(gdnative_interface.dictionary_operator_index(arg_dict.godot_owner, self.arg_type_key_variant.get_native_ptr()))
-        var_type_arg.init_type(1)
-
-        cdef Variant var_args_dict = Variant(arg_dict)
-        self.variant_args_dicts.append(var_args_dict)
+        cdef Variant var_args_dict = self.create_signal_arg(c_string_to_string("test_arg2"), 1)
         self.args_array.push_back(var_args_dict)
 
         #add args dictionaries to args array
         var_args.init_type(self.args_array)
+
+    cdef Variant create_signal_arg(self, String name, int variant_type):
+        cdef Dictionary arg_dict = Dictionary.new0()
+        self.args_dicts.append(arg_dict)
+
+        cdef Variant var_name_arg = Variant.new_static(gdnative_interface.dictionary_operator_index(arg_dict.godot_owner, self.arg_name_key_variant.get_native_ptr()))
+        var_name_arg.init_type(name)
+
+        cdef Variant var_type_arg = Variant.new_static(gdnative_interface.dictionary_operator_index(arg_dict.godot_owner, self.arg_type_key_variant.get_native_ptr()))
+        var_type_arg.init_type(variant_type)
+
+        cdef Variant var_args_dict = Variant(arg_dict)
+        self.variant_args_dicts.append(var_args_dict)
+        return var_args_dict
 
     def get_var_signal_dict(self):
         return self.var_signal_dict
