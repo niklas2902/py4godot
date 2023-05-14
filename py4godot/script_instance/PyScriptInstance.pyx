@@ -40,6 +40,8 @@ cdef GDExtensionBool instance_get(GDExtensionScriptInstanceDataPtr p_instance, G
     cdef String gdstring_prop_name = String.new2(name)
     cdef const char* c_str = gd_string_c_string(gdnative_interface,gdstring_prop_name.godot_owner, gdstring_prop_name.length())
     cdef unicode prop_name = <unicode>PyUnicode_FromStringAndSize(c_str,gdstring_prop_name.length())
+    if prop_name == "_dont_undo_redo":
+        return 0
     cdef object prop_val
     try:
         print_error("get_prop:"+str(prop_name))
@@ -111,9 +113,18 @@ cdef void instance_call(GDExtensionScriptInstanceDataPtr p_self, GDExtensionCons
     print_error("print_method:"+py_method_name_str)
     cdef list args = []
     cdef object result = None
+
+    if(py_method_name_str == "_get_linked_undo_properties"):
+        return
+
+    if(py_method_name_str == "_dont_undo_redo"):
+        return
+
     for index in range(0, p_argument_count):
         args.append(Variant.new_static(p_args[index]).get_converted_value())
     try:
+        if not hasattr(instance.owner,py_method_name_str):
+            return
         result = getattr(instance.owner, py_method_name_str)(*args)
     except Exception as e:
         print_error(f"An Exception happened:{e}|owner:{instance.owner}" )
