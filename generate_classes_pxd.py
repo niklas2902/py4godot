@@ -41,12 +41,21 @@ def get_base_class(class_):
     if class_["name"] in builtin_classes:
         return "VariantTypeWrapper4"
     return "Wrapper4"
+
+
+def generate_c_props():
+    return f"{INDENT}cdef uint8_t opaque[8]"
+
+
 def generate_pxd_class(pxd_class):
     result = ""
     result += generate_enums(class_)
     result = generate_newline(result)
     result += f"cdef class {pxd_class['name']}({get_base_class(pxd_class)}):"
     result = generate_newline(result)
+    if pxd_class["name"] in builtin_classes:
+        result += generate_c_props()
+        result = generate_newline(result)
     result += generate_new_static(class_)
     result = generate_newline(result)
     return result

@@ -611,6 +611,16 @@ def generate_new_static(class_):
 
     return res
 
+
+def generate_init(class_):
+    res = ""
+    res += f"{INDENT}def __init__(self):"
+    res = generate_newline(res)
+    res += f"{INDENT*2}self.godot_owner = &self.opaque"
+    res = generate_newline(res)
+    return res
+
+
 def generate_classes(classes, filename, is_core=False):
     res = generate_import()
     res = generate_newline(res)
@@ -627,6 +637,9 @@ def generate_classes(classes, filename, is_core=False):
         res = generate_newline(res)
         res += f"cdef class {class_['name']}({get_base_class(class_)}):"
         res = generate_newline(res)
+        if(is_core):
+            res = generate_newline(res)
+            res += generate_init(class_)
         res += generate_common_methods(class_)
         res = generate_newline(res)
         res += generate_construction(class_)
