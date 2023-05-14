@@ -614,7 +614,7 @@ def generate_new_static(class_):
 
 def generate_init(class_):
     res = ""
-    res += f"{INDENT}def __init__(self):"
+    res += f"{INDENT}def __init__(self, *args):"
     res = generate_newline(res)
     res += f"{INDENT*2}self.godot_owner = &self.opaque"
     res = generate_newline(res)
