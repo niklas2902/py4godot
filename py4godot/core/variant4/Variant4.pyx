@@ -387,13 +387,13 @@ cdef class Variant:
 
         #TODO
         cdef ConverterBase converter =  dict_type_conversion_methods[variant_type]
-        cdef object converted_val = None
+        self.converted_val = None
         try:
             print_error("converter:", converter)
-            converted_val = converter.from_ptr(constructor,self.native_ptr)
+            self.converted_val = converter.from_ptr(constructor,self.native_ptr)
         except Exception as e:
             print_error(f"An Exception happened:{e}")
-        return converted_val
+        return self.converted_val
 
     cdef void init_type(self, object obj):
         try:

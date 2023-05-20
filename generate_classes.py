@@ -31,6 +31,17 @@ from py4godot.core.variant4.Variant4 cimport *
 from py4godot.enums.enums4 cimport *
 from py4godot_core_holder.core_holder cimport *
 from py4godot.godot_bindings.binding4_godot4 cimport *
+
+def print_error(*objects, sep=' ', end=''):
+    cdef str string = ""
+    for object in objects:
+        string += str(object) + sep
+    string.rstrip(sep)
+    string += end
+    b_str = string.encode('utf-8')
+    cdef char* c_str = b_str
+    gdnative_interface.print_error(c_str, "test", "test",1, 1);
+
 """
     return result
 
@@ -220,9 +231,6 @@ def generate_construction(class_):
 def is_singleton(class_name):
     return class_name in singletons
 
-def generate_error():
-    return f"{INDENT * 2}cdef GDExtensionCallError _error"
-
 
 def generate_method_bind_name(class_name, method_name):
     return f"method_bind__{class_name}_{method_name}"
@@ -405,8 +413,6 @@ def generate_method_body_standard(class_, method):
     result += generate_operators(class_)
     result = generate_newline(result)
 
-    result += generate_error()
-    result = generate_newline(result)
     if(class_['name'] in builtin_classes):
         result += f"{INDENT * 2}method_to_call({get_godot_owner(method)}, {get_first_args_native(method)}, {address_ret(method)}, {get_args_count(method)})"
     else:
