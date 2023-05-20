@@ -397,6 +397,7 @@ cdef class Variant:
 
     cdef void init_type(self, object obj):
         try:
+            self.obj = obj
             #TODO: get rid of if/elif: Use some kind of converter logic with a dictionary
             print_error("start_init_type" +str( obj))
             if isinstance(obj, String):
