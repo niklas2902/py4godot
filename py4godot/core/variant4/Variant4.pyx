@@ -401,81 +401,81 @@ cdef class Variant:
             #TODO: get rid of if/elif: Use some kind of converter logic with a dictionary
             print_error("start_init_type" +str( obj))
             if isinstance(obj, String):
-               self.init_string(obj)
+               self.init_string(self.obj)
             elif isinstance(obj,Object):
-                self.init_object(obj)
+                self.init_object(self.obj)
             elif isinstance(obj,Vector3):
-                self.init_vector3(obj)
+                self.init_vector3(self.obj)
             elif isinstance(obj,int):
                 print_error("init_int")
-                self.init_int(obj)
+                self.init_int(self.obj)
             elif isinstance(obj, float):
-                self.init_float(obj)
+                self.init_float(self.obj)
             elif isinstance(obj, type(True)):
                 print_error("init_bool")
-                self.init_bool(obj)
+                self.init_bool(self.obj)
             elif isinstance(obj, PackedInt32Array):
-                self.init_packedint32array(obj)
+                self.init_packedint32array(self.obj)
             elif isinstance(obj, Basis):
-                self.init_basis(obj)
+                self.init_basis(self.obj)
             elif isinstance(obj, Array):
-                self.init_array(obj)
+                self.init_array(self.obj)
             elif isinstance(obj, Vector3i):
-                self.init_vector3i(obj)
+                self.init_vector3i(self.obj)
             elif isinstance(obj, StringName):
-                self.init_stringname(obj)
+                self.init_stringname(self.obj)
             elif isinstance(obj, Transform3D):
-                self.init_transform3d(obj)
+                self.init_transform3d(self.obj)
             elif isinstance(obj, Signal):
-                self.init_signal(obj)
+                self.init_signal(self.obj)
             elif isinstance(obj, Quaternion):
-                self.init_quaternion(obj)
+                self.init_quaternion(self.obj)
             elif isinstance(obj, PackedColorArray):
-                self.init_packedcolorarray(obj)
+                self.init_packedcolorarray(self.obj)
             elif isinstance(obj, Plane):
-                self.init_plane(obj)
+                self.init_plane(self.obj)
             elif isinstance(obj, Transform2D):
-                self.init_transform2d(obj)
+                self.init_transform2d(self.obj)
             elif isinstance(obj, AABB):
-                self.init_aabb(obj)
+                self.init_aabb(self.obj)
             elif isinstance(obj, Vector2i):
-                self.init_vector2i(obj)
+                self.init_vector2i(self.obj)
             elif isinstance(obj, Color):
-                self.init_color(obj)
+                self.init_color(self.obj)
             elif isinstance(obj, PackedVector3Array):
-                self.init_packedvector3array(obj)
+                self.init_packedvector3array(self.obj)
             elif isinstance(obj, PackedFloat64Array):
-                self.init_packedfloat64array(obj)
+                self.init_packedfloat64array(self.obj)
             elif isinstance(obj, Dictionary):
-                self.init_dictionary(obj)
+                self.init_dictionary(self.obj)
             elif isinstance(obj, PackedVector2Array):
-                self.init_packedvector2array(obj)
+                self.init_packedvector2array(self.obj)
             elif isinstance(obj, Vector4):
-                self.init_vector4(obj)
+                self.init_vector4(self.obj)
             elif isinstance(obj, RID):
-                self.init_rid(obj)
+                self.init_rid(self.obj)
             elif isinstance(obj, PackedFloat32Array):
-                self.init_packedfloat32array(obj)
+                self.init_packedfloat32array(self.obj)
             elif isinstance(obj, NodePath):
-                self.init_nodepath(obj)
+                self.init_nodepath(self.obj)
             elif isinstance(obj, Rect2):
-                self.init_rect2(obj)
+                self.init_rect2(self.obj)
             elif isinstance(obj, Rect2i):
-                self.init_rect2i(obj)
+                self.init_rect2i(self.obj)
             elif isinstance(obj, PackedByteArray):
-                self.init_packedbytearray(obj)
+                self.init_packedbytearray(self.obj)
             elif isinstance(obj, PackedStringArray):
-                self.init_packedstringarray(obj)
+                self.init_packedstringarray(self.obj)
             elif isinstance(obj, PackedInt64Array):
-                self.init_packedint64array(obj)
+                self.init_packedint64array(self.obj)
             elif isinstance(obj, Vector2):
-                self.init_vector2(obj)
+                self.init_vector2(self.obj)
             elif isinstance(obj, Vector4i):
-                self.init_vector4i(obj)
+                self.init_vector4i(self.obj)
             elif isinstance(obj, Callable):
-                self.init_callable(obj)
+                self.init_callable(self.obj)
             elif isinstance(obj, Projection):
-                self.init_projection(obj)
+                self.init_projection(self.obj)
             else:
                 print_error("new_nil called")
                 print_error("object:",str(obj))
