@@ -130,7 +130,6 @@ cdef class Variant:
     cdef double float_val
 
     cdef void init_type(self, object obj)
-
     #convert values
     cdef object get_converted_value(self)
 

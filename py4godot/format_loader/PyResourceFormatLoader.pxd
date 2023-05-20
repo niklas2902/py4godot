@@ -18,7 +18,7 @@ cdef class PyResourceFormatLoader(ResourceFormatLoader):
 
   cdef void _init_values(self) # self-defined
   cdef void set_language(self, ScriptLanguageExtension language) # self-defined
-  cdef _get_recognized_extensions(self, GDExtensionTypePtr res)
+  cdef _get_recognized_extensions(self, GDExtensionTypePtr res) with gil
   cdef _recognize_path(self, String path, StringName type, GDExtensionTypePtr res)
   cdef _handles_type(self, StringName type, GDExtensionTypePtr res)
   cdef _get_resource_type(self, String path, GDExtensionTypePtr res)

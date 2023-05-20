@@ -42,7 +42,7 @@ cdef class PyResourceFormatLoader(ResourceFormatLoader):
     print_error("set_lang")
     self.language = language
     print_error("set_lang successful")
-  cdef _get_recognized_extensions(self, GDExtensionTypePtr res):
+  cdef _get_recognized_extensions(self, GDExtensionTypePtr res) with gil:
     print_error("get_recognized_extensions_called")
     cdef PackedStringArray gdextensions = PackedStringArray.new_static(res)
     gdextensions.push_back(self.py)

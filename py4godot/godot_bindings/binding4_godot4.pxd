@@ -7,29 +7,29 @@ from libc.stdint cimport int64_t
 from libc.stdint cimport int8_t
 from cpython.ref cimport PyObject
 
-ctypedef bint bool
-ctypedef void *GDExtensionVariantPtr;
-ctypedef const void *GDExtensionConstVariantPtr;
-ctypedef void * GodotObject;
-ctypedef void *GDExtensionStringNamePtr;
-ctypedef void *GDExtensionStringPtr;
-ctypedef void *GDExtensionObjectPtr;
-ctypedef const void *GDExtensionConstObjectPtr;
-ctypedef void *GDExtensionTypePtr;
-ctypedef void *GDExtensionPtr;
-ctypedef void *GDExtensionMethodBindPtr;
-ctypedef int64_t GDExtensionInt;
-ctypedef uint8_t GDExtensionBool;
-ctypedef uint64_t GDObjectInstanceID;
+ctypedef public bint bool
+ctypedef public void *GDExtensionVariantPtr;
+ctypedef public const void *GDExtensionConstVariantPtr;
+ctypedef public void * GodotObject;
+ctypedef public void *GDExtensionStringNamePtr;
+ctypedef public void *GDExtensionStringPtr;
+ctypedef public void *GDExtensionObjectPtr;
+ctypedef public const void *GDExtensionConstObjectPtr;
+ctypedef public void *GDExtensionTypePtr;
+ctypedef public void *GDExtensionPtr;
+ctypedef void * GDExtensionMethodBindPtr;
+ctypedef public int64_t GDExtensionInt;
+ctypedef public uint8_t GDExtensionBool;
+ctypedef public uint64_t GDObjectInstanceID;
 ctypedef public void *GDExtensionClassLibraryPtr;
-ctypedef void *GDExtensionClassInstancePtr;
-ctypedef const void *GDExtensionConstTypePtr;
-ctypedef const void *GDExtensionConstStringNamePtr;
-ctypedef const void *GDExtensionConstStringPtr;
-ctypedef void *GDExtensionScriptInstanceDataPtr;
-ctypedef void *GDExtensionScriptInstancePtr
-ctypedef void *GDExtensionRefPtr;
-ctypedef const void *GDExtensionConstRefPtr;
+ctypedef public void *GDExtensionClassInstancePtr;
+ctypedef public const void *GDExtensionConstTypePtr;
+ctypedef public const void *GDExtensionConstStringNamePtr;
+ctypedef public const void *GDExtensionConstStringPtr;
+ctypedef public void *GDExtensionScriptInstanceDataPtr;
+ctypedef public void *GDExtensionScriptInstancePtr
+ctypedef public void *GDExtensionRefPtr;
+ctypedef public const void *GDExtensionConstRefPtr;
 
 cdef extern from "binding4.h":
     ctypedef void (*GDExtensionVariantFromTypeConstructorFunc)(GDExtensionVariantPtr, GDExtensionTypePtr);
@@ -321,8 +321,8 @@ cdef extern from "binding4.h":
 
     # SCRIPT INSTANCE EXTENSION
 
-    ctypedef GDExtensionBool (*GDExtensionScriptInstanceSet)(GDExtensionScriptInstanceDataPtr p_instance, const GDExtensionStringNamePtr p_name, const GDExtensionVariantPtr p_value);
-    ctypedef GDExtensionBool (*GDExtensionScriptInstanceGet)(GDExtensionScriptInstanceDataPtr p_instance, const GDExtensionStringNamePtr p_name, GDExtensionVariantPtr r_ret);
+    ctypedef GDExtensionBool (*GDExtensionScriptInstanceSet)(GDExtensionScriptInstanceDataPtr p_instance, GDExtensionConstStringNamePtr p_name, GDExtensionConstVariantPtr p_value);
+    ctypedef GDExtensionBool (*GDExtensionScriptInstanceGet)(GDExtensionScriptInstanceDataPtr p_instance, GDExtensionConstStringNamePtr p_name, GDExtensionVariantPtr r_ret);
     ctypedef const GDExtensionPropertyInfo *(*GDExtensionScriptInstanceGetPropertyList)(GDExtensionScriptInstanceDataPtr p_instance, uint32_t *r_count);
     ctypedef void (*GDExtensionScriptInstanceFreePropertyList)(GDExtensionScriptInstanceDataPtr p_instance, const GDExtensionPropertyInfo *p_list);
     ctypedef GDExtensionVariantType (*GDExtensionScriptInstanceGetPropertyType)(GDExtensionScriptInstanceDataPtr p_instance, const GDExtensionStringNamePtr p_name, GDExtensionBool *r_is_valid);
@@ -399,7 +399,6 @@ cdef extern from "c_utils.h":
     void create_variant_bool(GDExtensionInterface * interface_ptr, GDExtensionVariantPtr variant_ptr, uint8_t val)
     char * gd_string_c_string(GDExtensionInterface* interface_ptr, GDExtensionConstStringPtr string_ptr, int length) with gil
     GDExtensionVariantPtr create_variant2(GDExtensionInterface * interface_ptr)
-
 
 cdef extern from "Python.h":
     cdef PyObject* PyUnicode_FromString(const char* s);
