@@ -28,8 +28,9 @@ cdef api GDExtensionBool instance_set(GDExtensionScriptInstanceDataPtr p_instanc
     print_error(f"instance_set:{prop_name}")
     cdef object converted_val
     converted_val = var.get_converted_value()
+    print_error("converted_val:", converted_val)
     print_error("before setattr")
-    set_attr_proxy(owner, prop_name, converted_val)
+    setattr(owner, prop_name, converted_val)
     print_error("setting_prop successful")
     return 1
 
@@ -50,18 +51,12 @@ cdef api GDExtensionBool instance_get(GDExtensionScriptInstanceDataPtr p_instanc
         return 0
     print_error("get_prop:"+str(prop_name))
     if(prop_name != "script"):
-        val = get_attr_proxy(instance.owner, prop_name)
+        val = getattr(instance.owner, prop_name)
         print("val:", val)
         var.init_type(val)
     else:
         var.init_type(instance.script)
     return 1
-
-cdef object get_attr_proxy(object_, property):
-    return getattr(object_, property)
-
-cdef void set_attr_proxy(object_, property, value):
-    setattr(object_,property,value)
 
 cdef api const GDExtensionPropertyInfo *instance_get_property_list(GDExtensionScriptInstanceDataPtr p_instance, uint32_t *r_count) with gil:
     global property_infos
@@ -131,7 +126,7 @@ cdef api void instance_call(GDExtensionScriptInstanceDataPtr p_self, GDExtension
     try:
         if not hasattr(instance.owner,py_method_name_str):
             return
-        result = get_attr_proxy(instance.owner, py_method_name_str)(*args)
+        result = getattr(instance.owner, py_method_name_str)(*args)
     except Exception as e:
         print_error(f"An Exception happened:{e}|owner:{instance.owner}" )
 

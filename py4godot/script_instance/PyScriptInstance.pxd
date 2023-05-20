@@ -39,6 +39,3 @@ cdef api GDExtensionObjectPtr instance_get_script(GDExtensionScriptInstanceDataP
 cdef api GDExtensionScriptLanguagePtr instance_get_language(GDExtensionScriptInstanceDataPtr p_instance) with gil;
 
 cdef api void instance_free(GDExtensionScriptInstanceDataPtr p_instance) with gil;
-cdef object get_attr_proxy(object_, property)
-
-cdef void set_attr_proxy(object_, property, value)
