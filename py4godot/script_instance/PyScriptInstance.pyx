@@ -36,6 +36,7 @@ cdef api GDExtensionBool instance_set(GDExtensionScriptInstanceDataPtr p_instanc
 
 cdef api GDExtensionBool instance_get(GDExtensionScriptInstanceDataPtr p_instance, GDExtensionConstStringNamePtr p_name, GDExtensionVariantPtr r_ret) with gil:
     print_error("before converting instance")
+    cdef object val = None
     cdef InstanceData instance = <InstanceData>p_instance
     print_error("before creating variant")
     cdef Variant var = Variant.new_static(r_ret)
@@ -52,7 +53,7 @@ cdef api GDExtensionBool instance_get(GDExtensionScriptInstanceDataPtr p_instanc
     print_error("get_prop:"+str(prop_name))
     if(prop_name != "script"):
         val = getattr(instance.owner, prop_name)
-        print("val:", val)
+        print_error("val:", val)
         var.init_type(val)
     else:
         var.init_type(instance.script)
