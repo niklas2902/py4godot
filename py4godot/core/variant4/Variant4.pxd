@@ -81,8 +81,12 @@ cdef class PackedVector3ArrayConverter(ConverterBase):
 
 cdef class Variant:
     cdef GDExtensionVariantPtr native_ptr
-    cdef uint8_t[4] native_arr
+    cdef ConverterBase converter
+    cdef GDExtensionTypeFromVariantConstructorFunc constructor
+    cdef uint8_t[8] native_arr
     cdef object obj
+    cdef object converted_val
+    cdef GDExtensionVariantType variant_type
     cdef inline void set_native_ptr(self,GDExtensionVariantPtr ptr):
       self.native_ptr = ptr
 

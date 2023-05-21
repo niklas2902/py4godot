@@ -26,6 +26,7 @@ cdef api GDExtensionBool instance_set(GDExtensionScriptInstanceDataPtr p_instanc
     cdef char* c_str = gd_string_c_string(gdnative_interface,gdstring_prop_name.godot_owner, gdstring_prop_name.length())
     cdef unicode prop_name = <unicode>PyUnicode_FromStringAndSize(c_str,gdstring_prop_name.length())
     print_error(f"instance_set:{prop_name}")
+
     cdef object converted_val
     converted_val = var.get_converted_value()
     print_error("converted_val:", converted_val)
