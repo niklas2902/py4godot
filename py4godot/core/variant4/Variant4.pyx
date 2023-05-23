@@ -1,4 +1,4 @@
-from py4godot.godot_bindings.binding4_godot4 cimport *
+from py4godot.core.variant4.variant_utils cimport *
 from py4godot.classes.generated4_core cimport *
 from py4godot.classes.Object.Object cimport *
 from py4godot_core_holder.core_holder cimport *
@@ -6,6 +6,7 @@ from py4godot.utils.print_tools import *
 from py4godot.utils.utils cimport *
 from cpython cimport Py_INCREF, Py_DECREF, PyObject
 from cython.operator cimport dereference
+from libc.stdlib cimport malloc, free
 gdnative_interface = get_interface()
 
 cdef class ConverterBase:
@@ -387,19 +388,23 @@ cdef class Variant:
 
         #TODO
         print_error("before getting converter")
-        self.converter =  dict_type_conversion_methods[self.variant_type]
+        #self.converter =  dict_type_conversion_methods[self.variant_type]
         print_error("after getting converter")
-        self.converted_val = None
+        self.converted_val = Vector3.new_static(NULL)
         try:
             if(self.variant_type == GDExtensionVariantType.GDEXTENSION_VARIANT_TYPE_VECTOR3):
-                self.converted_val =  Vector3()
-                self.constructor((<Vector3>self.converted_val).godot_owner, self.native_ptr)
+
+                #self.converted_val = Vector3()
+
+                self.converted_val =  Vector3.new_static(exec_constructor(gdnative_interface, self.native_ptr,(<Vector3>self.converted_val).godot_owner, self.constructor))
+                #self.constructor(self.type_ptr, self.native_ptr)
                 return self.converted_val
             print_error("converter:", self.converter)
-            self.converted_val = self.converter.from_ptr(self.constructor,self.native_ptr)
+
+            #self.converted_val = self.converter.from_ptr(self.constructor,self.native_ptr)
         except Exception as e:
             print_error(f"An Exception happened:{e}")
-        return self.converted_val
+        return None
 
     cdef void init_type(self, object obj):
         try:

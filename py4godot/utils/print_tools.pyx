@@ -5,6 +5,7 @@ from py4godot_core_holder.core_holder cimport *
 cdef GDExtensionInterface* gdnative_interface = get_interface()
 
 def print_error(*objects, sep=' ', end=''):
+    return
     cdef str string = ""
     for object in objects:
         string += str(object) + sep

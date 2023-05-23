@@ -1,4 +1,4 @@
-from py4godot.godot_bindings.binding4_godot4 cimport *
+from py4godot.core.variant4.variant_utils cimport *
 from py4godot.classes.generated4_core cimport *
 from py4godot.classes.ScriptExtension.ScriptExtension cimport *
 from py4godot.classes.Object.Object cimport *
@@ -87,6 +87,7 @@ cdef class Variant:
     cdef object obj
     cdef object converted_val
     cdef GDExtensionVariantType variant_type
+    cdef void * type_ptr
     cdef inline void set_native_ptr(self,GDExtensionVariantPtr ptr):
       self.native_ptr = ptr
 

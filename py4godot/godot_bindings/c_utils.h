@@ -1,6 +1,3 @@
-#include "gdextension_interface.h"
-#include<stdio.h>
-#include<stdlib.h>
 
 void set_gdnative_ptr(GDExtensionTypePtr* a, GDExtensionTypePtr b){
     *a = b;

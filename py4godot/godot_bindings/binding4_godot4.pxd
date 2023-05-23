@@ -399,7 +399,6 @@ cdef extern from "c_utils.h":
     void create_variant_bool(GDExtensionInterface * interface_ptr, GDExtensionVariantPtr variant_ptr, uint8_t val)
     char * gd_string_c_string(GDExtensionInterface* interface_ptr, GDExtensionConstStringPtr string_ptr, int length) with gil
     GDExtensionVariantPtr create_variant2(GDExtensionInterface * interface_ptr)
-
 cdef extern from "Python.h":
     cdef PyObject* PyUnicode_FromString(const char* s);
     cdef  PyObject* PyObject_Str(PyObject *o);
