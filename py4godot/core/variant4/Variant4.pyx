@@ -9,6 +9,10 @@ from cython.operator cimport dereference
 from libc.stdlib cimport malloc, free
 gdnative_interface = get_interface()
 
+
+primitive_types = {GDExtensionVariantType.GDEXTENSION_VARIANT_TYPE_INT,GDExtensionVariantType.GDEXTENSION_VARIANT_TYPE_FLOAT, GDExtensionVariantType.GDEXTENSION_VARIANT_TYPE_BOOL}
+
+
 cdef class ConverterBase:
     cdef object from_ptr(self,GDExtensionTypeFromVariantConstructorFunc constructor, GDExtensionVariantPtr var_ptr):
         print_error("Converter Base called")
@@ -388,18 +392,45 @@ cdef class Variant:
 
         #TODO
         print_error("before getting converter")
-        #self.converter =  dict_type_conversion_methods[self.variant_type]
+        self.converter =  dict_type_conversion_methods[self.variant_type]
+        return self.converter.from_ptr(self.constructor, self.native_ptr)
         print_error("after getting converter")
         self.converted_val = Vector3.new_static(NULL)
+        cdef int int_val = 0
+        cdef bint bool_val = 0
+        cdef double float_val = 0
         try:
-            if(self.variant_type == GDExtensionVariantType.GDEXTENSION_VARIANT_TYPE_VECTOR3):
+            if(self.variant_type !=  GDExtensionVariantType.GDEXTENSION_VARIANT_TYPE_INT and self.variant_type != GDExtensionVariantType.GDEXTENSION_VARIANT_TYPE_FLOAT and self.variant_type != GDExtensionVariantType.GDEXTENSION_VARIANT_TYPE_BOOL):
+                self.type_ptr = malloc(sizeof(uint8_t)*8)
+                if self.variant_type == GDExtensionVariantType.GDEXTENSION_VARIANT_TYPE_VECTOR3:
+                    self.converted_val =  Vector3.new_static(exec_constructor(gdnative_interface, self.native_ptr, self.type_ptr, self.constructor))
+                    return self.converted_val
+                elif self.variant_type == GDExtensionVariantType.GDEXTENSION_VARIANT_TYPE_STRING:
+                    self.converted_val =  String.new_static(exec_constructor(gdnative_interface, self.native_ptr, self.type_ptr, self.constructor))
+                    return self.converted_val
+                elif self.variant_type == GDExtensionVariantType.GDEXTENSION_VARIANT_TYPE_TRANSFORM3D:
+                    self.converted_val =  Transform3D.new_static(exec_constructor(gdnative_interface, self.native_ptr, self.type_ptr, self.constructor))
+                    return self.converted_val
+                elif self.variant_type == GDExtensionVariantType.GDEXTENSION_VARIANT_TYPE_TRANSFORM2D:
+                    self.converted_val =  Transform2D.new_static(exec_constructor(gdnative_interface, self.native_ptr, self.type_ptr, self.constructor))
+                    return self.converted_val
+                elif self.variant_type == GDExtensionVariantType.GDEXTENSION_VARIANT_TYPE_QUATERNION:
+                    self.converted_val =  Quaternion.new_static(exec_constructor(gdnative_interface, self.native_ptr, self.type_ptr, self.constructor))
+                    return self.converted_val
+                elif self.variant_type == GDExtensionVariantType.GDEXTENSION_VARIANT_TYPE_BASIS:
+                    self.converted_val =  Basis.new_static(exec_constructor(gdnative_interface, self.native_ptr, self.type_ptr, self.constructor))
+                    return self.converted_val
+            else:
+                if self.variant_type == GDExtensionVariantType.GDEXTENSION_VARIANT_TYPE_INT:
+                    exec_constructor_primitive(gdnative_interface, self.native_ptr, &int_val, self.constructor)
+                    return int_val
+                elif self.variant_type == GDExtensionVariantType.GDEXTENSION_VARIANT_TYPE_FLOAT:
+                    exec_constructor_primitive(gdnative_interface, self.native_ptr, &float_val, self.constructor)
+                    return float_val
+                elif self.variant_type == GDExtensionVariantType.GDEXTENSION_VARIANT_TYPE_BOOL:
+                    exec_constructor_primitive(gdnative_interface, self.native_ptr, &bool_val, self.constructor)
+                    return bool_val
 
-                #self.converted_val = Vector3()
-
-                self.converted_val =  Vector3.new_static(exec_constructor(gdnative_interface, self.native_ptr,(<Vector3>self.converted_val).godot_owner, self.constructor))
-                #self.constructor(self.type_ptr, self.native_ptr)
-                return self.converted_val
-            print_error("converter:", self.converter)
 
             #self.converted_val = self.converter.from_ptr(self.constructor,self.native_ptr)
         except Exception as e:

@@ -3,6 +3,9 @@ from py4godot.classes.generated4_core cimport *
 from py4godot.classes.ScriptExtension.ScriptExtension cimport *
 from py4godot.classes.Object.Object cimport *
 
+
+cdef set primitive_types = {GDExtensionVariantType.GDEXTENSION_VARIANT_TYPE_INT,GDExtensionVariantType.GDEXTENSION_VARIANT_TYPE_FLOAT, GDExtensionVariantType.GDEXTENSION_VARIANT_TYPE_BOOL}
+
 cdef class ConverterBase:
     cdef object from_ptr(self,GDExtensionTypeFromVariantConstructorFunc constructor, GDExtensionVariantPtr var_ptr)
 
