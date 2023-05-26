@@ -13,237 +13,6 @@ gdnative_interface = get_interface()
 primitive_types = {GDExtensionVariantType.GDEXTENSION_VARIANT_TYPE_INT,GDExtensionVariantType.GDEXTENSION_VARIANT_TYPE_FLOAT, GDExtensionVariantType.GDEXTENSION_VARIANT_TYPE_BOOL}
 
 
-cdef class ConverterBase:
-    cdef object from_ptr(self,GDExtensionTypeFromVariantConstructorFunc constructor, GDExtensionVariantPtr var_ptr):
-        print_error("Converter Base called")
-
-cdef class Vector3Converter(ConverterBase):
-    cdef object from_ptr(self,GDExtensionTypeFromVariantConstructorFunc constructor, GDExtensionVariantPtr var_ptr):
-        cdef Vector3 position =  Vector3()
-        constructor(position.godot_owner, var_ptr)
-        return position
-
-cdef class StringConverter(ConverterBase):
-    cdef object from_ptr(self,GDExtensionTypeFromVariantConstructorFunc constructor, GDExtensionVariantPtr var_ptr):
-        cdef String string = String()
-        constructor(string.godot_owner, var_ptr)
-        return string
-
-cdef class Vector2Converter(ConverterBase):
-    cdef object from_ptr(self,GDExtensionTypeFromVariantConstructorFunc constructor, GDExtensionVariantPtr var_ptr):
-        cdef Vector2 val = Vector2
-        constructor(val.godot_owner, var_ptr)
-        return val
-
-cdef class BoolConverter(ConverterBase):
-    cdef object from_ptr(self,GDExtensionTypeFromVariantConstructorFunc constructor, GDExtensionVariantPtr var_ptr):
-        cdef bint val = True
-        constructor(&val, var_ptr)
-        return val
-
-cdef class IntConverter(ConverterBase):
-    cdef object from_ptr(self,GDExtensionTypeFromVariantConstructorFunc constructor, GDExtensionVariantPtr var_ptr):
-        cdef int val = 0
-        constructor(&val, var_ptr)
-        return val
-
-
-cdef class FloatConverter(ConverterBase):
-    cdef object from_ptr(self,GDExtensionTypeFromVariantConstructorFunc constructor, GDExtensionVariantPtr var_ptr):
-        cdef double val = 0
-        constructor(&val, var_ptr)
-        return val
-
-cdef class QuaternionConverter(ConverterBase):
-    cdef object from_ptr(self, GDExtensionTypeFromVariantConstructorFunc constructor, GDExtensionVariantPtr var_ptr):
-        cdef Quaternion gdobject =  Quaternion
-        constructor(gdobject.godot_owner, var_ptr)
-        return gdobject
-cdef class PackedFloat64ArrayConverter(ConverterBase):
-    cdef object from_ptr(self, GDExtensionTypeFromVariantConstructorFunc constructor, GDExtensionVariantPtr var_ptr):
-        cdef PackedFloat64Array gdobject =  PackedFloat64Array
-        constructor(gdobject.godot_owner, var_ptr)
-        return gdobject
-cdef class DictionaryConverter(ConverterBase):
-    cdef object from_ptr(self, GDExtensionTypeFromVariantConstructorFunc constructor, GDExtensionVariantPtr var_ptr):
-        cdef Dictionary gdobject =  Dictionary
-        constructor(gdobject.godot_owner, var_ptr)
-        return gdobject
-cdef class Transform3DConverter(ConverterBase):
-    cdef object from_ptr(self, GDExtensionTypeFromVariantConstructorFunc constructor, GDExtensionVariantPtr var_ptr):
-        cdef Transform3D gdobject =  Transform3D
-        constructor(gdobject.godot_owner, var_ptr)
-        return gdobject
-cdef class Vector2iConverter(ConverterBase):
-    cdef object from_ptr(self, GDExtensionTypeFromVariantConstructorFunc constructor, GDExtensionVariantPtr var_ptr):
-        cdef Vector2i gdobject =  Vector2i
-        constructor(gdobject.godot_owner, var_ptr)
-        return gdobject
-cdef class PackedByteArrayConverter(ConverterBase):
-    cdef object from_ptr(self, GDExtensionTypeFromVariantConstructorFunc constructor, GDExtensionVariantPtr var_ptr):
-        cdef PackedByteArray gdobject =  PackedByteArray
-        constructor(gdobject.godot_owner, var_ptr)
-        return gdobject
-cdef class PackedFloat32ArrayConverter(ConverterBase):
-    cdef object from_ptr(self, GDExtensionTypeFromVariantConstructorFunc constructor, GDExtensionVariantPtr var_ptr):
-        cdef PackedFloat32Array gdobject =  PackedFloat32Array
-        constructor(gdobject.godot_owner, var_ptr)
-        return gdobject
-cdef class Rect2Converter(ConverterBase):
-    cdef object from_ptr(self, GDExtensionTypeFromVariantConstructorFunc constructor, GDExtensionVariantPtr var_ptr):
-        cdef Rect2 gdobject =  Rect2
-        constructor(gdobject.godot_owner, var_ptr)
-        return gdobject
-cdef class PlaneConverter(ConverterBase):
-    cdef object from_ptr(self, GDExtensionTypeFromVariantConstructorFunc constructor, GDExtensionVariantPtr var_ptr):
-        cdef Plane gdobject =  Plane
-        constructor(gdobject.godot_owner, var_ptr)
-        return gdobject
-cdef class PackedInt32ArrayConverter(ConverterBase):
-    cdef object from_ptr(self, GDExtensionTypeFromVariantConstructorFunc constructor, GDExtensionVariantPtr var_ptr):
-        cdef PackedInt32Array gdobject =  PackedInt32Array
-        constructor(gdobject.godot_owner, var_ptr)
-        return gdobject
-cdef class RIDConverter(ConverterBase):
-    cdef object from_ptr(self, GDExtensionTypeFromVariantConstructorFunc constructor, GDExtensionVariantPtr var_ptr):
-        cdef RID gdobject =  RID
-        constructor(gdobject.godot_owner, var_ptr)
-        return gdobject
-cdef class ArrayConverter(ConverterBase):
-    cdef object from_ptr(self, GDExtensionTypeFromVariantConstructorFunc constructor, GDExtensionVariantPtr var_ptr):
-        cdef Array gdobject =  Array
-        constructor(gdobject.godot_owner, var_ptr)
-        return gdobject
-cdef class Vector3iConverter(ConverterBase):
-    cdef object from_ptr(self, GDExtensionTypeFromVariantConstructorFunc constructor, GDExtensionVariantPtr var_ptr):
-        cdef Vector3i gdobject =  Vector3i
-        constructor(gdobject.godot_owner, var_ptr)
-        return gdobject
-cdef class StringNameConverter(ConverterBase):
-    cdef object from_ptr(self, GDExtensionTypeFromVariantConstructorFunc constructor, GDExtensionVariantPtr var_ptr):
-        cdef StringName gdobject =  StringName
-        constructor(gdobject.godot_owner, var_ptr)
-        return gdobject
-cdef class SignalConverter(ConverterBase):
-    cdef object from_ptr(self, GDExtensionTypeFromVariantConstructorFunc constructor, GDExtensionVariantPtr var_ptr):
-        cdef Signal gdobject =  Signal
-        constructor(gdobject.godot_owner, var_ptr)
-        return gdobject
-cdef class PackedVector2ArrayConverter(ConverterBase):
-    cdef object from_ptr(self, GDExtensionTypeFromVariantConstructorFunc constructor, GDExtensionVariantPtr var_ptr):
-        cdef PackedVector2Array gdobject =  PackedVector2Array
-        constructor(gdobject.godot_owner, var_ptr)
-        return gdobject
-cdef class ProjectionConverter(ConverterBase):
-    cdef object from_ptr(self, GDExtensionTypeFromVariantConstructorFunc constructor, GDExtensionVariantPtr var_ptr):
-        cdef Projection gdobject =  Projection
-        constructor(gdobject.godot_owner, var_ptr)
-        return gdobject
-cdef class BasisConverter(ConverterBase):
-    cdef object from_ptr(self, GDExtensionTypeFromVariantConstructorFunc constructor, GDExtensionVariantPtr var_ptr):
-        cdef Basis gdobject =  Basis
-        constructor(gdobject.godot_owner, var_ptr)
-        return gdobject
-cdef class Vector4iConverter(ConverterBase):
-    cdef object from_ptr(self, GDExtensionTypeFromVariantConstructorFunc constructor, GDExtensionVariantPtr var_ptr):
-        cdef Vector4i gdobject =  Vector4i
-        constructor(gdobject.godot_owner, var_ptr)
-        return gdobject
-cdef class Transform2DConverter(ConverterBase):
-    cdef object from_ptr(self, GDExtensionTypeFromVariantConstructorFunc constructor, GDExtensionVariantPtr var_ptr):
-        cdef Transform2D gdobject =  Transform2D
-        constructor(gdobject.godot_owner, var_ptr)
-        return gdobject
-cdef class AABBConverter(ConverterBase):
-    cdef object from_ptr(self, GDExtensionTypeFromVariantConstructorFunc constructor, GDExtensionVariantPtr var_ptr):
-        cdef AABB gdobject =  AABB
-        constructor(gdobject.godot_owner, var_ptr)
-        return gdobject
-cdef class ColorConverter(ConverterBase):
-    cdef object from_ptr(self, GDExtensionTypeFromVariantConstructorFunc constructor, GDExtensionVariantPtr var_ptr):
-        cdef Color gdobject =  Color
-        constructor(gdobject.godot_owner, var_ptr)
-        return gdobject
-cdef class PackedInt64ArrayConverter(ConverterBase):
-    cdef object from_ptr(self, GDExtensionTypeFromVariantConstructorFunc constructor, GDExtensionVariantPtr var_ptr):
-        cdef PackedInt64Array gdobject =  PackedInt64Array
-        constructor(gdobject.godot_owner, var_ptr)
-        return gdobject
-cdef class Vector4Converter(ConverterBase):
-    cdef object from_ptr(self, GDExtensionTypeFromVariantConstructorFunc constructor, GDExtensionVariantPtr var_ptr):
-        cdef Vector4 gdobject =  Vector4
-        constructor(gdobject.godot_owner, var_ptr)
-        return gdobject
-cdef class PackedColorArrayConverter(ConverterBase):
-    cdef object from_ptr(self, GDExtensionTypeFromVariantConstructorFunc constructor, GDExtensionVariantPtr var_ptr):
-        cdef PackedColorArray gdobject =  PackedColorArray
-        constructor(gdobject.godot_owner, var_ptr)
-        return gdobject
-cdef class NodePathConverter(ConverterBase):
-    cdef object from_ptr(self, GDExtensionTypeFromVariantConstructorFunc constructor, GDExtensionVariantPtr var_ptr):
-        cdef NodePath gdobject =  NodePath
-        constructor(gdobject.godot_owner, var_ptr)
-        return gdobject
-cdef class CallableConverter(ConverterBase):
-    cdef object from_ptr(self, GDExtensionTypeFromVariantConstructorFunc constructor, GDExtensionVariantPtr var_ptr):
-        cdef Callable gdobject =  Callable
-        constructor(gdobject.godot_owner, var_ptr)
-        return gdobject
-cdef class Rect2iConverter(ConverterBase):
-    cdef object from_ptr(self, GDExtensionTypeFromVariantConstructorFunc constructor, GDExtensionVariantPtr var_ptr):
-        cdef Rect2i gdobject =  Rect2i
-        constructor(gdobject.godot_owner, var_ptr)
-        return gdobject
-cdef class PackedStringArrayConverter(ConverterBase):
-    cdef object from_ptr(self, GDExtensionTypeFromVariantConstructorFunc constructor, GDExtensionVariantPtr var_ptr):
-        cdef PackedStringArray gdobject =  PackedStringArray
-        constructor(gdobject.godot_owner, var_ptr)
-        return gdobject
-cdef class PackedVector3ArrayConverter(ConverterBase):
-    cdef object from_ptr(self, GDExtensionTypeFromVariantConstructorFunc constructor, GDExtensionVariantPtr var_ptr):
-        cdef PackedVector3Array gdobject =  PackedVector3Array
-        constructor(gdobject.godot_owner, var_ptr)
-        return gdobject
-
-cdef dict_type_conversion_methods = {
-GDExtensionVariantType.GDEXTENSION_VARIANT_TYPE_VECTOR3:Vector3Converter(),
-GDExtensionVariantType.GDEXTENSION_VARIANT_TYPE_VECTOR2:Vector2Converter(),
-GDExtensionVariantType.GDEXTENSION_VARIANT_TYPE_BOOL:BoolConverter(),
-GDExtensionVariantType.GDEXTENSION_VARIANT_TYPE_INT:IntConverter(),
-GDExtensionVariantType.GDEXTENSION_VARIANT_TYPE_STRING:StringConverter(),
-GDExtensionVariantType.GDEXTENSION_VARIANT_TYPE_FLOAT:FloatConverter(),
-GDEXTENSION_VARIANT_TYPE_QUATERNION:QuaternionConverter(),
-GDEXTENSION_VARIANT_TYPE_PACKED_FLOAT64_ARRAY:PackedFloat64ArrayConverter(),
-GDEXTENSION_VARIANT_TYPE_DICTIONARY:DictionaryConverter(),
-GDEXTENSION_VARIANT_TYPE_TRANSFORM3D:Transform3DConverter(),
-GDEXTENSION_VARIANT_TYPE_VECTOR2I:Vector2iConverter(),
-GDEXTENSION_VARIANT_TYPE_PACKED_BYTE_ARRAY:PackedByteArrayConverter(),
-GDEXTENSION_VARIANT_TYPE_PACKED_FLOAT32_ARRAY:PackedFloat32ArrayConverter(),
-GDEXTENSION_VARIANT_TYPE_RECT2:Rect2Converter(),
-GDEXTENSION_VARIANT_TYPE_PLANE:PlaneConverter(),
-GDEXTENSION_VARIANT_TYPE_PACKED_INT32_ARRAY:PackedInt32ArrayConverter(),
-GDEXTENSION_VARIANT_TYPE_RID:RIDConverter(),
-GDEXTENSION_VARIANT_TYPE_ARRAY:ArrayConverter(),
-GDEXTENSION_VARIANT_TYPE_VECTOR3I:Vector3iConverter(),
-GDEXTENSION_VARIANT_TYPE_STRING_NAME:StringNameConverter(),
-GDEXTENSION_VARIANT_TYPE_SIGNAL:SignalConverter(),
-GDEXTENSION_VARIANT_TYPE_PACKED_VECTOR2_ARRAY:PackedVector2ArrayConverter(),
-GDEXTENSION_VARIANT_TYPE_PROJECTION:ProjectionConverter(),
-GDEXTENSION_VARIANT_TYPE_BASIS:BasisConverter(),
-GDEXTENSION_VARIANT_TYPE_VECTOR4I:Vector4iConverter(),
-GDEXTENSION_VARIANT_TYPE_TRANSFORM2D:Transform2DConverter(),
-GDEXTENSION_VARIANT_TYPE_AABB:AABBConverter(),
-GDEXTENSION_VARIANT_TYPE_COLOR:ColorConverter(),
-GDEXTENSION_VARIANT_TYPE_PACKED_INT64_ARRAY:PackedInt64ArrayConverter(),
-GDEXTENSION_VARIANT_TYPE_VECTOR4:Vector4Converter(),
-GDEXTENSION_VARIANT_TYPE_PACKED_COLOR_ARRAY:PackedColorArrayConverter(),
-GDEXTENSION_VARIANT_TYPE_NODE_PATH:NodePathConverter(),
-GDEXTENSION_VARIANT_TYPE_CALLABLE:CallableConverter(),
-GDEXTENSION_VARIANT_TYPE_RECT2I:Rect2iConverter(),
-GDEXTENSION_VARIANT_TYPE_PACKED_STRING_ARRAY:PackedStringArrayConverter(),
-GDEXTENSION_VARIANT_TYPE_PACKED_VECTOR3_ARRAY:PackedVector3ArrayConverter(),
-}
-
 cdef class Variant:
     def __init__(self, object):
         #TODO: implement this
@@ -386,12 +155,52 @@ cdef class Variant:
       gdnative_interface.variant_new_nil(self.native_ptr)
 
     cdef object get_converted_value(self):
+        print_error("get_converted_val")
         self.variant_type = gdnative_interface.variant_get_type(self.native_ptr)
         self.constructor = gdnative_interface.get_variant_to_type_constructor(self.variant_type)
 
-        print_error("before getting converter")
-        self.converter =  dict_type_conversion_methods[self.variant_type]
-        return self.converter.from_ptr(self.constructor, self.native_ptr)
+        #TODO
+        self.converted_val = Vector3.new_static(NULL)
+        cdef int int_val = 0
+        cdef bint bool_val = 0
+        cdef double float_val = 0
+        #TODO: Improve, speed, add more types
+        try:
+            if(self.variant_type !=  GDExtensionVariantType.GDEXTENSION_VARIANT_TYPE_INT and self.variant_type != GDExtensionVariantType.GDEXTENSION_VARIANT_TYPE_FLOAT and self.variant_type != GDExtensionVariantType.GDEXTENSION_VARIANT_TYPE_BOOL):
+                self.type_ptr = malloc(sizeof(uint8_t)*8)
+                if self.variant_type == GDExtensionVariantType.GDEXTENSION_VARIANT_TYPE_VECTOR3:
+                    self.converted_val =  Vector3.new_static(exec_constructor(gdnative_interface, self.native_ptr, self.type_ptr, self.constructor))
+                    return self.converted_val
+                elif self.variant_type == GDExtensionVariantType.GDEXTENSION_VARIANT_TYPE_STRING:
+                    self.converted_val =  String.new_static(exec_constructor(gdnative_interface, self.native_ptr, self.type_ptr, self.constructor))
+                    return self.converted_val
+                elif self.variant_type == GDExtensionVariantType.GDEXTENSION_VARIANT_TYPE_TRANSFORM3D:
+                    self.converted_val =  Transform3D.new_static(exec_constructor(gdnative_interface, self.native_ptr, self.type_ptr, self.constructor))
+                    return self.converted_val
+                elif self.variant_type == GDExtensionVariantType.GDEXTENSION_VARIANT_TYPE_TRANSFORM2D:
+                    self.converted_val =  Transform2D.new_static(exec_constructor(gdnative_interface, self.native_ptr, self.type_ptr, self.constructor))
+                    return self.converted_val
+                elif self.variant_type == GDExtensionVariantType.GDEXTENSION_VARIANT_TYPE_QUATERNION:
+                    self.converted_val =  Quaternion.new_static(exec_constructor(gdnative_interface, self.native_ptr, self.type_ptr, self.constructor))
+                    return self.converted_val
+                elif self.variant_type == GDExtensionVariantType.GDEXTENSION_VARIANT_TYPE_BASIS:
+                    self.converted_val =  Basis.new_static(exec_constructor(gdnative_interface, self.native_ptr, self.type_ptr, self.constructor))
+                    return self.converted_val
+            else:
+                if self.variant_type == GDExtensionVariantType.GDEXTENSION_VARIANT_TYPE_INT:
+                    exec_constructor_primitive(gdnative_interface, self.native_ptr, &int_val, self.constructor)
+                    return int_val
+                elif self.variant_type == GDExtensionVariantType.GDEXTENSION_VARIANT_TYPE_FLOAT:
+                    exec_constructor_primitive(gdnative_interface, self.native_ptr, &float_val, self.constructor)
+                    return float_val
+                elif self.variant_type == GDExtensionVariantType.GDEXTENSION_VARIANT_TYPE_BOOL:
+                    exec_constructor_primitive(gdnative_interface, self.native_ptr, &bool_val, self.constructor)
+                    return bool_val
+
+
+        except Exception as e:
+            print_error(f"An Exception happened:{e}")
+        return None
 
     cdef void init_type(self, object obj):
         try:

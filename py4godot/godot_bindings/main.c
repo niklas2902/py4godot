@@ -8,19 +8,19 @@ static GDExtensionInterface* gdnative_interface = NULL;
 #include <string.h>
 
 #ifdef _WIN64
-#define PYTHONHOME L"addons/windows64/cpython-3.9.7-windows64/python/install"
+#define PYTHONHOME L"addons/windows64/cpython-3.11.3-windows64/python/install"
 
 #elif _WIN32
-#define PYTHONHOME L"addons/windows64/cpython-3.9.7-lnux64/python/install"
+#define PYTHONHOME L"addons/windows64/cpython-3.11.3-lnux64/python/install"
 
 #elif __linux32__
-#define PYTHONHOME L"addons/linux/cpython-3.9.7-linux/python/install/lib"
+#define PYTHONHOME L"addons/linux/cpython-3.11.3-linux/python/install/lib"
 
 #elif __linux__
-#define PYTHONHOME L"addons/linux64/cpython-3.9.7-linux64/python/install"
+#define PYTHONHOME L"addons/linux64/cpython-3.11.3-linux64/python/install"
 
 #elif __APPLE__
-#define PYTHONHOME L"addons/windows64/cpython-3.9.7-windows32/python/install"
+#define PYTHONHOME L"addons/windows64/cpython-3.11.3-windows32/python/install"
 #endif
 
 #if !defined(GDN_EXPORT)

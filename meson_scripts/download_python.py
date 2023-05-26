@@ -9,7 +9,7 @@ platform_dict = {"windows64": "x86_64-pc-windows-msvc-shared-pgo", "windows":"i6
                  "linux64":"x86_64-unknown-linux-gnu-lto", "linux":"i686-unknown-linux-gnu-pgo"}
 python_files_dir = "python_files"
 copy_dir = "build/addons"
-python_ver = "cpython-3.9.7"
+python_ver = "cpython-3.11.3"
 
 sitecustomize_py = """
 import site
@@ -26,7 +26,7 @@ def download_file(platform, allow_copy = False):
 
     print("download:"+platform)
 
-    url = f'https://github.com/indygreg/python-build-standalone/releases/download/20211017/{python_ver}-{platform_dict[platform]}-20211017T1616.tar.zst'
+    url = f'https://github.com/indygreg/python-build-standalone/releases/download/20230507/{python_ver}+20230507-{platform_dict[platform]}-full.tar.zst'
     python_file = f'{python_files_dir}/{python_ver}-{platform_dict[platform]}.tar.zst'
     export_name = f"{python_ver}-" + platform
 

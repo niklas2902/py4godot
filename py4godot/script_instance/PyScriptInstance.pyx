@@ -7,7 +7,11 @@ from py4godot.pluginscript_api.utils.PropertyDescription cimport *
 from libc.stdlib cimport malloc, free
 
 cdef GDExtensionPropertyInfo * property_infos
-
+cdef object vector = None
+cdef list converted_vals = []
+cdef list variants = []
+cdef object get_val
+cdef Variant get_variant
 cdef GDExtensionObjectPtr get_owner (GDExtensionScriptInstanceDataPtr p_instance) with gil:
     print_error("-------------------instance:get_owner---------------")
     cdef InstanceData instance = <InstanceData>p_instance
@@ -19,45 +23,47 @@ cdef api GDExtensionBool is_placeholder(GDExtensionScriptInstanceDataPtr p_insta
 
 cdef api GDExtensionBool instance_set(GDExtensionScriptInstanceDataPtr p_instance, GDExtensionConstStringNamePtr p_name, GDExtensionConstVariantPtr p_value) with gil:
     cdef InstanceData instance = <InstanceData>p_instance
-    cdef object owner = instance.owner
-    cdef Variant var = Variant.new_static(p_value)
-    cdef StringName name = StringName.new_static(p_name)
-    cdef String gdstring_prop_name = String.new2(name)
-    cdef char* c_str = gd_string_c_string(gdnative_interface,gdstring_prop_name.godot_owner, gdstring_prop_name.length())
-    cdef unicode prop_name = <unicode>PyUnicode_FromStringAndSize(c_str,gdstring_prop_name.length())
-    print_error(f"instance_set:{prop_name}")
 
-    cdef object converted_val
-    converted_val = var.get_converted_value()
-    print_error("converted_val:", converted_val)
-    print_error("before setattr")
-    setattr(owner, prop_name, converted_val)
-    print_error("setting_prop successful")
+    cdef StringName method_name = StringName.new_static(p_name)
+    cdef String method_name_str = String.new2(method_name)
+    cdef char* c_str = gd_string_c_string(gdnative_interface,method_name_str.godot_owner, method_name_str.length())
+    cdef unicode py_method_name_str = gd_string_to_py_string(method_name_str)
+    print_error("print_method:"+py_method_name_str)
+    cdef Variant var
+    try:
+        var = Variant.new_static(p_value)
+        #variants.append(var)
+        vector = var.get_converted_value()
+        setattr(instance.owner,py_method_name_str, vector)
+    except Exception as e:
+        print_error(f"An Exception happened:{e}|owner:{instance.owner}" )
+    print_error("after set method")
     return 1
 
 cdef api GDExtensionBool instance_get(GDExtensionScriptInstanceDataPtr p_instance, GDExtensionConstStringNamePtr p_name, GDExtensionVariantPtr r_ret) with gil:
-    print_error("before converting instance")
-    cdef object val = None
+    global get_val, get_var
     cdef InstanceData instance = <InstanceData>p_instance
-    print_error("before creating variant")
-    cdef Variant var = Variant.new_static(r_ret)
-    print_error("before creating StringName")
-    cdef StringName name = StringName.new_static(p_name)
-    print_error("before creating prop_name")
-    cdef String gdstring_prop_name = String.new2(name)
-    print_error("before creting c_str")
-    cdef char* c_str = gd_string_c_string(gdnative_interface,gdstring_prop_name.godot_owner, gdstring_prop_name.length())
-    print_error("before creating py_string")
-    cdef unicode prop_name = <unicode>PyUnicode_FromStringAndSize(c_str,gdstring_prop_name.length())
-    if prop_name == "_dont_undo_redo":
+
+    cdef StringName method_name = StringName.new_static(p_name)
+    cdef String method_name_str = String.new2(method_name)
+    cdef char* c_str = gd_string_c_string(gdnative_interface,method_name_str.godot_owner, method_name_str.length())
+    cdef unicode py_method_name_str = gd_string_to_py_string(method_name_str)
+    print_error("print_method_get:"+py_method_name_str)
+
+    get_var = Variant.new_static(r_ret)
+
+    get_val = None
+    get_val = getattr(instance.owner, py_method_name_str)
+    if py_method_name_str == "_dont_undo_redo":
         return 0
-    print_error("get_prop:"+str(prop_name))
-    if(prop_name != "script"):
-        val = getattr(instance.owner, prop_name)
-        print_error("val:", val)
-        var.init_type(val)
+    print_error("get_prop:"+str(py_method_name_str))
+    if(py_method_name_str != "script"):
+        get_val = getattr(instance.owner, py_method_name_str)
+        print_error("val:", get_val)
+        get_var.init_type(get_val)
     else:
-        var.init_type(instance.script)
+        get_var.init_type(instance.script)
+    print_error("finish_get_prop:"+str(py_method_name_str))
     return 1
 
 cdef api const GDExtensionPropertyInfo *instance_get_property_list(GDExtensionScriptInstanceDataPtr p_instance, uint32_t *r_count) with gil:
