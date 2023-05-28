@@ -29,3 +29,10 @@ char * gd_string_c_string(GDExtensionInterface* interface_ptr, GDExtensionConstS
     return native_string;
 }
 
+void * create_native_ptr(GDExtensionInterface* interface_ptr){
+    interface_ptr->print_error("before creating ptr", "test", "test",1,1);
+    void* ptr =  interface_ptr->mem_alloc(8);
+    interface_ptr->print_error("after creating ptr", "test", "test",1,1);
+    return ptr;
+}
+

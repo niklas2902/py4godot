@@ -153,7 +153,10 @@ def generate_return_value(method_):
         else:
             ret_val = ReturnType("_ret", method_['return_type'])
         if ret_val.type in classes:
-            result += f"{INDENT * 2}cdef {ret_val.type} {ret_val.name} = {ret_val.type}()"
+            if ret_val.type in builtin_classes:
+                result += f"{INDENT * 2}cdef {ret_val.type} {ret_val.name} = {ret_val.type}.new_native_ptr(create_native_ptr(gdnative_interface))"
+            else:
+                result += f"{INDENT * 2}cdef {ret_val.type} {ret_val.name} = {ret_val.type}()"
         elif ret_val.type == "Variant":
             result += f"{INDENT * 2}cdef {ret_val.type} {ret_val.name} = {ret_val.type}()"
         elif "typedarray" in ret_val.type:
@@ -194,9 +197,19 @@ def is_primitive(type_):
     return type_ in normal_classes.copy().union(builtin_classes)
 
 
-def generate_return_statement():
+def generate_return_statement(method_):
     # TODO handle primitive types
-    return f"{INDENT*2}return _ret"
+    ret_val = None
+    if ("return_value" in method_.keys()):
+        ret_val = ReturnType("_ret", method_['return_value']['type'])
+    else:
+        ret_val = ReturnType("_ret", method_['return_type'])
+    result = ""
+    if ret_val.type in classes and ret_val.type in builtin_classes:
+        result += f"{INDENT*2}_ret.godot_owner = &_ret.native_ptr"
+        result = generate_newline(result)
+    result += f"{INDENT*2}return _ret"
+    return result
 
 def generate_singleton_constructor(classname):
     res = ""
@@ -421,7 +434,7 @@ def generate_method_body_standard(class_, method):
 
     if ("return_value" in method.keys() or "return_type" in method.keys()):
         result = generate_newline(result)
-        result += generate_return_statement()
+        result += generate_return_statement(method)
     return result
 
 
@@ -436,7 +449,7 @@ def address_ret(method):
         if return_type in {"int", "float","bool"}:
             return "&_ret"
         if return_type in builtin_classes:
-            return "_ret.godot_owner"
+            return "&(_ret.native_ptr)"
         if return_type in classes:
             return "&(_ret.godot_owner)"
         if return_type == "Variant":
@@ -458,7 +471,9 @@ def generate_operators(class_):
 def generate_common_methods(class_):
     result = generate_constructor(class_["name"])
     result = generate_newline(result)
-    result = generate_new_static(class_)
+    result += generate_new_static(class_)
+    result = generate_newline(result)
+    result += generate_new_native_ptr(class_)
     result = generate_newline(result)
     result += generate_constructors(class_)
     result = generate_newline(result)
@@ -612,6 +627,25 @@ def generate_new_static(class_):
     res += f"{INDENT*2}cdef {class_['name']} obj = {class_['name']}()"
     res = generate_newline(res)
     res += f"{INDENT * 2}obj.godot_owner = owner"
+    res = generate_newline(res)
+    res += f"{INDENT * 2}return obj"
+
+    return res
+
+
+def generate_new_native_ptr(class_):
+    res = ""
+    res += f"{INDENT}@staticmethod"
+    res = generate_newline(res)
+    if (class_["name"] in builtin_classes):
+        res += f"{INDENT}cdef {class_['name']} new_native_ptr(void* ptr):"
+    else:
+        return ""
+
+    res = generate_newline(res)
+    res += f"{INDENT*2}cdef {class_['name']} obj = {class_['name']}()"
+    res = generate_newline(res)
+    res += f"{INDENT * 2}obj.native_ptr = ptr"
     res = generate_newline(res)
     res += f"{INDENT * 2}return obj"
 

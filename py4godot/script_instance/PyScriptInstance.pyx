@@ -4,6 +4,7 @@ from py4godot.utils.print_tools import *
 from py4godot.utils.utils cimport *
 from py4godot.Instance_data.InstanceData cimport *
 from py4godot.pluginscript_api.utils.PropertyDescription cimport *
+from py4godot.core.variant4.Variant4 cimport *
 from libc.stdlib cimport malloc, free
 
 cdef GDExtensionPropertyInfo * property_infos
@@ -12,6 +13,7 @@ cdef list converted_vals = []
 cdef list variants = []
 cdef object get_val
 cdef Variant get_variant
+cdef list objects = []
 cdef GDExtensionObjectPtr get_owner (GDExtensionScriptInstanceDataPtr p_instance) with gil:
     print_error("-------------------instance:get_owner---------------")
     cdef InstanceData instance = <InstanceData>p_instance
@@ -23,7 +25,7 @@ cdef api GDExtensionBool is_placeholder(GDExtensionScriptInstanceDataPtr p_insta
 
 cdef api GDExtensionBool instance_set(GDExtensionScriptInstanceDataPtr p_instance, GDExtensionConstStringNamePtr p_name, GDExtensionConstVariantPtr p_value) with gil:
     cdef InstanceData instance = <InstanceData>p_instance
-
+    #TODO still a problem with custom string attributes. Why is this still crashing?
     cdef StringName method_name = StringName.new_static(p_name)
     cdef String method_name_str = String.new2(method_name)
     cdef char* c_str = gd_string_c_string(gdnative_interface,method_name_str.godot_owner, method_name_str.length())
@@ -41,7 +43,7 @@ cdef api GDExtensionBool instance_set(GDExtensionScriptInstanceDataPtr p_instanc
     return 1
 
 cdef api GDExtensionBool instance_get(GDExtensionScriptInstanceDataPtr p_instance, GDExtensionConstStringNamePtr p_name, GDExtensionVariantPtr r_ret) with gil:
-    global get_val, get_var
+    global get_val
     cdef InstanceData instance = <InstanceData>p_instance
 
     cdef StringName method_name = StringName.new_static(p_name)
@@ -50,17 +52,18 @@ cdef api GDExtensionBool instance_get(GDExtensionScriptInstanceDataPtr p_instanc
     cdef unicode py_method_name_str = gd_string_to_py_string(method_name_str)
     print_error("print_method_get:"+py_method_name_str)
 
-    get_var = Variant.new_static(r_ret)
-
     get_val = None
-    get_val = getattr(instance.owner, py_method_name_str)
+    cdef Variant get_var = Variant.new_static(r_ret)
     if py_method_name_str == "_dont_undo_redo":
         return 0
     print_error("get_prop:"+str(py_method_name_str))
     if(py_method_name_str != "script"):
-        get_val = getattr(instance.owner, py_method_name_str)
-        print_error("val:", get_val)
-        get_var.init_type(get_val)
+        print_error("before get_val")
+        get_val = getattr(instance.owner,py_method_name_str)
+        try:
+            get_var.init_type(get_val)
+        except Exception as e:
+            print_error("exception:",e)
     else:
         get_var.init_type(instance.script)
     print_error("finish_get_prop:"+str(py_method_name_str))

@@ -44,7 +44,10 @@ def get_base_class(class_):
 
 
 def generate_c_props():
-    return f"{INDENT}cdef uint8_t opaque[8]"
+    res = f"{INDENT}cdef uint8_t opaque[8]"
+    res = generate_newline(res)
+    res += f"{INDENT}cdef void* native_ptr"
+    return res
 
 
 def generate_pxd_class(pxd_class):
@@ -58,6 +61,8 @@ def generate_pxd_class(pxd_class):
         result = generate_newline(result)
     result += generate_new_static(class_)
     result = generate_newline(result)
+    result += generate_new_native_ptr(class_)
+    result = generate_newline(result)
     return result
 
 def generate_new_static(class_):
@@ -68,6 +73,17 @@ def generate_new_static(class_):
         res += f"{INDENT}cdef {class_['name']} new_static(GDExtensionTypePtr owner)"
     else:
         res += f"{INDENT}cdef {class_['name']} new_static(GodotObject owner)"
+    return res
+
+
+def generate_new_native_ptr(class_):
+    res = ""
+    res += f"{INDENT}@staticmethod"
+    res = generate_newline(res)
+    if (class_["name"] in builtin_classes):
+        res += f"{INDENT}cdef {class_['name']} new_native_ptr(void* ptr)"
+    else:
+        return ""
     return res
 
 
