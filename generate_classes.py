@@ -475,6 +475,8 @@ def generate_common_methods(class_):
     result = generate_newline(result)
     result += generate_new_native_ptr(class_)
     result = generate_newline(result)
+    result += generate_from_variant(class_)
+    result = generate_newline(result)
     result += generate_constructors(class_)
     result = generate_newline(result)
     return result
@@ -629,6 +631,21 @@ def generate_new_static(class_):
     res += f"{INDENT * 2}obj.godot_owner = owner"
     res = generate_newline(res)
     res += f"{INDENT * 2}return obj"
+
+    return res
+
+def generate_from_variant(class_):
+    res = ""
+    res += f"{INDENT}@staticmethod"
+    res = generate_newline(res)
+    if (class_["name"] in builtin_classes):
+        res += f"{INDENT}cdef {class_['name']} from_variant(GDExtensionVariantPtr variant_ptr, GDExtensionTypeFromVariantConstructorFunc constructor):"
+    else:
+        return ""
+
+    res = generate_newline(res)
+    res += f"{INDENT*2}return {class_['name']}.new_static(exec_constructor(gdnative_interface, variant_ptr,NULL,constructor))"
+    res = generate_newline(res)
 
     return res
 

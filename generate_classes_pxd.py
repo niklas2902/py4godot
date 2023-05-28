@@ -63,6 +63,8 @@ def generate_pxd_class(pxd_class):
     result = generate_newline(result)
     result += generate_new_native_ptr(class_)
     result = generate_newline(result)
+    result += generate_from_variant(class_)
+    result = generate_newline(result)
     return result
 
 def generate_new_static(class_):
@@ -73,6 +75,16 @@ def generate_new_static(class_):
         res += f"{INDENT}cdef {class_['name']} new_static(GDExtensionTypePtr owner)"
     else:
         res += f"{INDENT}cdef {class_['name']} new_static(GodotObject owner)"
+    return res
+
+def generate_from_variant(class_):
+    res = ""
+    res += f"{INDENT}@staticmethod"
+    res = generate_newline(res)
+    if (class_["name"] in builtin_classes):
+        res += f"{INDENT}cdef {class_['name']} from_variant(GDExtensionVariantPtr variant_ptr, GDExtensionTypeFromVariantConstructorFunc constructor)"
+    else:
+        return ""
     return res
 
 

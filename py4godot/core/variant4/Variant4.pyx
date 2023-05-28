@@ -27,6 +27,7 @@ cdef class Variant:
     cdef void init_string(self, String object):
         cdef GDExtensionVariantFromTypeConstructorFunc constructor_func = gdnative_interface.get_variant_from_type_constructor(GDExtensionVariantType.GDEXTENSION_VARIANT_TYPE_STRING)
         #cdef String res_string = c_string_to_string("test description from conversion") #TODO:remove!!
+        print_error("before init string:")
         print_error("init_string:",gd_string_to_py_string(object))
         constructor_func(self.native_ptr,object.godot_owner)
 
@@ -160,7 +161,7 @@ cdef class Variant:
         self.constructor = gdnative_interface.get_variant_to_type_constructor(self.variant_type)
 
         #TODO
-        self.converted_val = Vector3.new_static(NULL)
+        self.converted_val = None
         cdef int int_val = 0
         cdef bint bool_val = 0
         cdef double float_val = 0
@@ -172,8 +173,7 @@ cdef class Variant:
                     self.converted_val =  Vector3.new_static(exec_constructor(gdnative_interface, self.native_ptr, self.type_ptr, self.constructor))
                     return self.converted_val
                 elif self.variant_type == GDExtensionVariantType.GDEXTENSION_VARIANT_TYPE_STRING:
-                    self.converted_val =  String.new_static(exec_constructor(gdnative_interface, self.native_ptr, self.type_ptr, self.constructor))
-                    return self.converted_val
+                    return String.from_variant(self.native_ptr, self.constructor) #TODO: Check why this only works for string
                 elif self.variant_type == GDExtensionVariantType.GDEXTENSION_VARIANT_TYPE_TRANSFORM3D:
                     self.converted_val =  Transform3D.new_static(exec_constructor(gdnative_interface, self.native_ptr, self.type_ptr, self.constructor))
                     return self.converted_val

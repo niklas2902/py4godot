@@ -14,6 +14,9 @@ cdef list variants = []
 cdef object get_val
 cdef Variant get_variant
 cdef list objects = []
+#cdef object test_string
+cdef void* test_ptr
+cdef void* test_ptr_native
 cdef GDExtensionObjectPtr get_owner (GDExtensionScriptInstanceDataPtr p_instance) with gil:
     print_error("-------------------instance:get_owner---------------")
     cdef InstanceData instance = <InstanceData>p_instance
@@ -24,6 +27,7 @@ cdef api GDExtensionBool is_placeholder(GDExtensionScriptInstanceDataPtr p_insta
     return 0
 
 cdef api GDExtensionBool instance_set(GDExtensionScriptInstanceDataPtr p_instance, GDExtensionConstStringNamePtr p_name, GDExtensionConstVariantPtr p_value) with gil:
+    global test_string
     cdef InstanceData instance = <InstanceData>p_instance
     #TODO still a problem with custom string attributes. Why is this still crashing?
     cdef StringName method_name = StringName.new_static(p_name)
@@ -37,13 +41,17 @@ cdef api GDExtensionBool instance_set(GDExtensionScriptInstanceDataPtr p_instanc
         #variants.append(var)
         vector = var.get_converted_value()
         setattr(instance.owner,py_method_name_str, vector)
+        if py_method_name_str == "test_string":
+            test_string = vector
+            Py_INCREF(var)
+            print_error("length:",(<String>vector).length())
+
     except Exception as e:
         print_error(f"An Exception happened:{e}|owner:{instance.owner}" )
     print_error("after set method")
     return 1
 
 cdef api GDExtensionBool instance_get(GDExtensionScriptInstanceDataPtr p_instance, GDExtensionConstStringNamePtr p_name, GDExtensionVariantPtr r_ret) with gil:
-    global get_val
     cdef InstanceData instance = <InstanceData>p_instance
 
     cdef StringName method_name = StringName.new_static(p_name)
@@ -52,7 +60,7 @@ cdef api GDExtensionBool instance_get(GDExtensionScriptInstanceDataPtr p_instanc
     cdef unicode py_method_name_str = gd_string_to_py_string(method_name_str)
     print_error("print_method_get:"+py_method_name_str)
 
-    get_val = None
+    cdef object get_val = None
     cdef Variant get_var = Variant.new_static(r_ret)
     if py_method_name_str == "_dont_undo_redo":
         return 0
@@ -60,8 +68,12 @@ cdef api GDExtensionBool instance_get(GDExtensionScriptInstanceDataPtr p_instanc
     if(py_method_name_str != "script"):
         print_error("before get_val")
         get_val = getattr(instance.owner,py_method_name_str)
+        print_error("get_val:", get_val)
         try:
             get_var.init_type(get_val)
+            #if py_method_name_str == "test_string":
+            #    Py_INCREF(get_var)
+            #    Py_INCREF(get_val)
         except Exception as e:
             print_error("exception:",e)
     else:
