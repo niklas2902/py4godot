@@ -153,7 +153,7 @@ def generate_return_value(method_):
         else:
             ret_val = ReturnType("_ret", method_['return_type'])
         if ret_val.type in classes:
-            if ret_val.type in builtin_classes:
+            if ret_val.type in builtin_classes and ret_val.type != "NodePath": #TODO check why NodePath behaves differently
                 result += f"{INDENT * 2}cdef {ret_val.type} {ret_val.name} = {ret_val.type}.new_native_ptr(create_native_ptr(gdnative_interface))"
             else:
                 result += f"{INDENT * 2}cdef {ret_val.type} {ret_val.name} = {ret_val.type}()"

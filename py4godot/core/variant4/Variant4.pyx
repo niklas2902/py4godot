@@ -186,6 +186,9 @@ cdef class Variant:
                 elif self.variant_type == GDExtensionVariantType.GDEXTENSION_VARIANT_TYPE_BASIS:
                     self.converted_val =  Basis.new_static(exec_constructor(gdnative_interface, self.native_ptr, self.type_ptr, self.constructor))
                     return self.converted_val
+                elif self.variant_type == GDExtensionVariantType.GDEXTENSION_VARIANT_TYPE_NODE_PATH:
+                    self.converted_val =  NodePath.new_static(exec_constructor(gdnative_interface, self.native_ptr, self.type_ptr, self.constructor))
+                    return self.converted_val
             else:
                 if self.variant_type == GDExtensionVariantType.GDEXTENSION_VARIANT_TYPE_INT:
                     exec_constructor_primitive(gdnative_interface, self.native_ptr, &int_val, self.constructor)
