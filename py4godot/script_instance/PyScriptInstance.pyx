@@ -32,6 +32,8 @@ cdef api GDExtensionBool instance_set(GDExtensionScriptInstanceDataPtr p_instanc
     cdef unicode py_method_name_str = gd_string_to_py_string(method_name_str)
     print_error("print_method:"+py_method_name_str)
     cdef Variant var
+    if py_method_name_str == "visibility_parent":
+        return 0
     try:
         var = Variant.new_static(p_value)
         #variants.append(var)
@@ -55,6 +57,8 @@ cdef api GDExtensionBool instance_get(GDExtensionScriptInstanceDataPtr p_instanc
     get_val = None
     cdef Variant get_var = Variant.new_static(r_ret)
     if py_method_name_str == "_dont_undo_redo":
+        return 0
+    if py_method_name_str == "visibility_parent":
         return 0
     print_error("get_prop:"+str(py_method_name_str))
     if(py_method_name_str != "script"):
