@@ -31,6 +31,7 @@ from py4godot.core.variant4.Variant4 cimport *
 from py4godot.enums.enums4 cimport *
 from py4godot_core_holder.core_holder cimport *
 from py4godot.godot_bindings.binding4_godot4 cimport *
+from libc.stdlib cimport malloc, free
 
 def print_error(*objects, sep=' ', end=''):
     cdef str string = ""
@@ -644,7 +645,13 @@ def generate_from_variant(class_):
         return ""
 
     res = generate_newline(res)
-    res += f"{INDENT*2}return {class_['name']}.new_static(exec_constructor(gdnative_interface, variant_ptr,NULL,constructor))"
+    res += f"{INDENT*2}cdef {class_['name']} obj = {class_['name']}.new_native_ptr(malloc(sizeof(uint8_t)*8))"
+    res = generate_newline(res)
+    res += f"{INDENT*2}obj.native_ptr = exec_constructor_string(gdnative_interface, variant_ptr,obj.native_ptr,constructor)"
+    res = generate_newline(res)
+    res += f"{INDENT*2}obj.godot_owner = &obj.native_ptr"
+    res = generate_newline(res)
+    res += f"{INDENT*2}return obj"
     res = generate_newline(res)
 
     return res
