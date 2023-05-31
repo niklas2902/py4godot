@@ -41,10 +41,6 @@ cdef api GDExtensionBool instance_set(GDExtensionScriptInstanceDataPtr p_instanc
         #variants.append(var)
         vector = var.get_converted_value()
         setattr(instance.owner,py_method_name_str, vector)
-        if py_method_name_str == "test_string":
-            test_string = vector
-            Py_INCREF(var)
-            print_error("length:",(<String>vector).length())
 
     except Exception as e:
         print_error(f"An Exception happened:{e}|owner:{instance.owner}" )
