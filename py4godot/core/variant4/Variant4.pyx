@@ -170,31 +170,19 @@ cdef class Variant:
             if(self.variant_type !=  GDExtensionVariantType.GDEXTENSION_VARIANT_TYPE_INT and self.variant_type != GDExtensionVariantType.GDEXTENSION_VARIANT_TYPE_FLOAT and self.variant_type != GDExtensionVariantType.GDEXTENSION_VARIANT_TYPE_BOOL):
                 self.type_ptr = malloc(sizeof(uint8_t)*8)
                 if self.variant_type == GDExtensionVariantType.GDEXTENSION_VARIANT_TYPE_VECTOR3:
-                    exec_constructor(gdnative_interface, self.native_ptr, &self.type_ptr, self.constructor)
-                    self.converted_val = Vector3.new_static(&self.type_ptr)
-                    return self.converted_val
+                    return Vector3.from_variant(self.native_ptr, self.constructor)
                 elif self.variant_type == GDExtensionVariantType.GDEXTENSION_VARIANT_TYPE_STRING:
                     return String.from_variant(self.native_ptr, self.constructor) #TODO: Check why this only works for string
                 elif self.variant_type == GDExtensionVariantType.GDEXTENSION_VARIANT_TYPE_TRANSFORM3D:
-                    exec_constructor(gdnative_interface, self.native_ptr, &self.type_ptr, self.constructor)
-                    self. converted_val = Transform3D.new_static(&self.type_ptr)
-                    return self.converted_val
+                    return Transform3D.from_variant(self.native_ptr, self.constructor)
                 elif self.variant_type == GDExtensionVariantType.GDEXTENSION_VARIANT_TYPE_TRANSFORM2D:
-                    exec_constructor(gdnative_interface, self.native_ptr, &self.type_ptr, self.constructor)
-                    self. converted_val = Transform2D.new_static(&self.type_ptr)
-                    return self.converted_val
+                    return Transform2D.from_variant(self.native_ptr, self.constructor)
                 elif self.variant_type == GDExtensionVariantType.GDEXTENSION_VARIANT_TYPE_QUATERNION:
-                    exec_constructor(gdnative_interface, self.native_ptr, &self.type_ptr, self.constructor)
-                    self. converted_val = Quaternion.new_static(&self.type_ptr)
-                    return self.converted_val
+                    return Quaternion.from_variant(self.native_ptr, self.constructor)
                 elif self.variant_type == GDExtensionVariantType.GDEXTENSION_VARIANT_TYPE_BASIS:
-                    exec_constructor(gdnative_interface, self.native_ptr, &self.type_ptr, self.constructor)
-                    self. converted_val = Basis.new_static(&self.type_ptr)
-                    return self.converted_val
+                    return Basis.from_variant(self.native_ptr, self.constructor)
                 elif self.variant_type == GDExtensionVariantType.GDEXTENSION_VARIANT_TYPE_NODE_PATH:
-                    exec_constructor(gdnative_interface, self.native_ptr, &self.type_ptr, self.constructor)
-                    self. converted_val = NodePath.new_static(&self.type_ptr)
-                    return self.converted_val
+                    return NodePath.from_variant(self.native_ptr, self.constructor)
             else:
                 if self.variant_type == GDExtensionVariantType.GDEXTENSION_VARIANT_TYPE_INT:
                     exec_constructor_primitive(gdnative_interface, self.native_ptr, &int_val, self.constructor)

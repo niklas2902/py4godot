@@ -645,9 +645,11 @@ def generate_from_variant(class_):
         return ""
 
     res = generate_newline(res)
-    res += f"{INDENT*2}cdef {class_['name']} obj = {class_['name']}.new_native_ptr(malloc(sizeof(uint8_t)*8))"
+    res += f"{INDENT*2}cdef {class_['name']} obj = {class_['name']}()"
     res = generate_newline(res)
-    res += f"{INDENT*2}obj.native_ptr = exec_constructor_string(gdnative_interface, variant_ptr,obj.native_ptr,constructor)"
+    res += f"{INDENT*2}obj.native_ptr = malloc(sizeof(uint8_t)*8)"
+    res = generate_newline(res)
+    res += f"{INDENT*2}exec_constructor(gdnative_interface, variant_ptr,&obj.native_ptr,constructor)"
     res = generate_newline(res)
     res += f"{INDENT*2}obj.godot_owner = &obj.native_ptr"
     res = generate_newline(res)
