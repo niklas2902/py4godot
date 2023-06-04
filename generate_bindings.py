@@ -347,7 +347,6 @@ def generate_method_bindings(obj):
 
     return result
 
-
 def generate_classes(obj):
     """function to generate the godot class for the given object"""
     result = ""
