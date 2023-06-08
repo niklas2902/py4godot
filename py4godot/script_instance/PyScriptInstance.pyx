@@ -136,6 +136,8 @@ cdef api void instance_free_method_list(GDExtensionScriptInstanceDataPtr p_insta
     pass
 
 cdef api GDExtensionBool instance_has_method(GDExtensionScriptInstanceDataPtr p_instance, GDExtensionConstStringNamePtr p_name) with gil:
+    cdef InstanceData instance = <InstanceData>p_instance
+
     cdef StringName method_name = StringName.new_static(p_name)
     cdef String method_name_str = String.new2(method_name)
     cdef str py_method_name_str = gd_string_to_py_string(method_name_str)

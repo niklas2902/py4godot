@@ -119,7 +119,6 @@ cdef class PyScriptExtension(ScriptExtension):
     cdef GDExtensionVariantPtr varptr
     cdef GDExtensionScriptInstancePtr instance_ptr
     cdef GDExtensionScriptInstanceInfo* instance_info
-    cdef uint8_t placeholder = 1
     result = None
     cdef object gd_class
     cdef InstanceData gd_instance = InstanceData()
