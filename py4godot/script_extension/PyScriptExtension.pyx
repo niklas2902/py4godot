@@ -4,6 +4,7 @@ from py4godot.utils.print_tools import *
 from py4godot.utils.utils cimport *
 from py4godot.enums.enums4 cimport *
 from py4godot.classes.Object.Object cimport *
+from py4godot.classes.Engine.Engine cimport *
 from py4godot.classes.generated4_core cimport *
 from py4godot.pluginscript_api.utils.annotations import *
 from py4godot.utils.Wrapper4 cimport *
@@ -86,8 +87,15 @@ cdef class PyScriptExtension(ScriptExtension):
 
 
   cdef void _can_instantiate(self, GDExtensionTypePtr res):
-    set_gdnative_ptr(<GDExtensionTypePtr*>res, <GDExtensionTypePtr>1)
-
+    cdef Engine engine = Engine.get_instance()
+    print_error("is_editor_hint:", engine.is_editor_hint())
+    try:
+        if not engine.is_editor_hint():
+            set_gdnative_ptr(<GDExtensionTypePtr*>res, <GDExtensionTypePtr>1)
+        else:
+            set_gdnative_ptr(<GDExtensionTypePtr*>res, <GDExtensionTypePtr>0)
+    except Exception as e:
+        print_error("an Exception happened:", e)
 
   cdef void _get_base_script(self, GDExtensionTypePtr res):
     pass

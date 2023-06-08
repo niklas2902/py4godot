@@ -81,7 +81,7 @@ static const char *STRING_DELIMITERS[] = { "\" \"", "' '", 0 };
 
 
 void initialize_py4godot(void *userdata, GDExtensionInitializationLevel p_level){
-    if (p_level != 3){
+    if (p_level != GDEXTENSION_INITIALIZATION_EDITOR){
         return;
     }
 

@@ -470,8 +470,10 @@ def generate_operators(class_):
 
 
 def generate_common_methods(class_):
-    result = generate_constructor(class_["name"])
-    result = generate_newline(result)
+    result = ""
+    if not is_singleton(class_["name"]):
+        result += generate_constructor(class_["name"])
+        result = generate_newline(result)
     result += generate_new_static(class_)
     result = generate_newline(result)
     result += generate_new_native_ptr(class_)
