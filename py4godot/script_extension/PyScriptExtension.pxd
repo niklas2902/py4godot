@@ -22,6 +22,7 @@ cdef class PyScriptExtension(ScriptExtension):
   cdef Wrapper4 gd_obj
   cdef object gd_class
   cdef list properties
+  cdef list methods
   cdef list signals
   cdef DictionaryArray array
 

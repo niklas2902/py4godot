@@ -52,6 +52,7 @@ cdef class PyScriptExtension(ScriptExtension):
     self.gd_obj = None
     self.gd_class = None
     self.properties = []
+    self.methods = []
     self.signals = []
     self.array = None
     Py_INCREF(self.source_code)
@@ -70,6 +71,7 @@ cdef class PyScriptExtension(ScriptExtension):
         self.gd_class = result.gd_class if result.gd_class != None else result.gd_tool_class
         self.gd_obj = <Wrapper4> self.gd_class()
         self.properties = result.properties
+        self.methods = result.methods
         self.signals = result.signals
 
   cdef str get_py_source_code(self):
@@ -126,6 +128,7 @@ cdef class PyScriptExtension(ScriptExtension):
     try:
         gd_instance.set_owner(self.gd_obj)
         gd_instance.set_properties(self.properties)
+        gd_instance.set_methods(self.methods)
         instance_info = get_instance_ptr(gdnative_interface)
 
         for property in self.properties:
@@ -143,7 +146,7 @@ cdef class PyScriptExtension(ScriptExtension):
         print_error("after instance_create")
         set_gdnative_ptr(<GDExtensionTypePtr*>res, <GDExtensionTypePtr>instance_ptr)
     except Exception as e:
-        print_error("instance_create failed because of:"+ str(e))
+        print_error("Exception - instance_create failed because of:"+ str(e))
     print_error("_instance_create-end")
 
 

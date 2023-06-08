@@ -67,7 +67,7 @@ cdef extern from "binding4.h":
 
 
     ctypedef struct GDExtensionMethodInfo:
-        const char *name;
+        GDExtensionStringNamePtr name;
         GDExtensionPropertyInfo return_value;
         uint32_t flags; # From GDExtensionClassMethodFlags
         int32_t id;

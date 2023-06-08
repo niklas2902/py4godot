@@ -6,7 +6,8 @@ cdef uint32_t id_counter = 0
 cdef inc_id_counter()
 cdef class MethodDescription:
 
-    cdef StringName name;
+    cdef StringName name
+    cdef String name_str
     cdef PropertyDescription return_value;
     cdef uint32_t flags; # Bitfield of `GDExtensionClassMethodFlags`.
     cdef int32_t id;

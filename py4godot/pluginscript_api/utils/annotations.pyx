@@ -4,6 +4,7 @@ from py4godot.utils.print_tools import *
 from py4godot.pluginscript_api.hints.BaseHint cimport *
 from py4godot.pluginscript_api.utils.PropertyDescription cimport *
 from py4godot.pluginscript_api.utils.SignalDescription cimport *
+from py4godot.pluginscript_api.utils.MethodDescription cimport *
 from py4godot.pluginscript_api.utils.SignalArg cimport *
 
 """annotations used to define all the godot members"""
@@ -67,7 +68,7 @@ def gdmethod(func):
         list_args.append(PropertyDescription(arg, None, BaseHint(),4096|6|32768, None))
     methods.append(
     MethodDescription(func.__name__,
-    None, 0,list_args, []))
+    PropertyDescription(name = "return", type_ = None, hint = BaseHint(),usage = 4096|6|32768, default_value =  None), 0,list_args, []))
     return func
 
 def signal(name, list args = []):

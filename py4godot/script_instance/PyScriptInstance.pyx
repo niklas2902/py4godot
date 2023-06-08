@@ -4,10 +4,12 @@ from py4godot.utils.print_tools import *
 from py4godot.utils.utils cimport *
 from py4godot.Instance_data.InstanceData cimport *
 from py4godot.pluginscript_api.utils.PropertyDescription cimport *
+from py4godot.pluginscript_api.utils.MethodDescription cimport *
 from py4godot.core.variant4.Variant4 cimport *
 from libc.stdlib cimport malloc, free
 
 cdef GDExtensionPropertyInfo * property_infos
+cdef GDExtensionMethodInfo * method_infos
 cdef object vector = None
 cdef list converted_vals = []
 cdef list variants = []
@@ -109,8 +111,27 @@ cdef api void instance_get_property_state(GDExtensionScriptInstanceDataPtr p_ins
     pass
 
 cdef api const GDExtensionMethodInfo * instance_get_method_list(GDExtensionScriptInstanceDataPtr p_instance, uint32_t *r_count) with gil:
-    print_error("get_method_list")
-    return NULL
+    global method_infos
+    print_error("call_method_list")
+    cdef InstanceData instance = <InstanceData>p_instance
+    try:
+        r_count[0] = len(instance.methods) #TODO enable properties
+        print_error("list of properties from python:", len(instance.methods))
+        print_error("prop_count:"+ str(dereference(r_count)))
+        print_error("after getting property_info")
+
+        if method_infos != NULL:
+            return method_infos
+
+        method_infos = <GDExtensionMethodInfo*>malloc(sizeof(GDExtensionMethodInfo)* len(instance.methods))
+        for index in range(0, len(instance.methods)):
+            method_infos[index] = (<MethodDescription>(instance.methods[index])).method_info
+            print_error("set method_info",
+            (<MethodDescription>(instance.methods[index])).method_info.argument_count,
+            (<MethodDescription>(instance.methods[index])).argument_count)
+    except Exception as e:
+        print_error("Exception in method_list:", e)
+    return method_infos
 cdef api void instance_free_method_list(GDExtensionScriptInstanceDataPtr p_instance, const GDExtensionMethodInfo *p_list) with gil:
     pass
 
