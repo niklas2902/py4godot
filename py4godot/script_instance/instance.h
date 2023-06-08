@@ -2,6 +2,7 @@
 
 #include "PyScriptInstance_api.h"
 
+GDExtensionScriptInstanceInfo native_script_instance_placeholder;
 GDExtensionScriptInstanceInfo native_script_instance;
 GDExtensionInterface *native_script;
 GDExtensionScriptInstanceInfo get_instance(){
@@ -43,11 +44,38 @@ void init_instance(GDExtensionInterface *p_interface){
     native_script_instance.get_script_func = instance_get_script;
     native_script_instance.get_language_func = instance_get_language;
     native_script_instance.free_func = instance_free;
+
+
+    native_script_instance_placeholder.get_owner_func = get_owner;
+    native_script_instance_placeholder.is_placeholder_func = is_placeholder;
+    native_script_instance_placeholder.set_func = instance_set;
+    native_script_instance_placeholder.get_func = instance_get;
+    native_script_instance_placeholder.get_property_list_func = instance_get_property_list;
+    native_script_instance_placeholder.free_property_list_func = instance_free_property_list;
+    native_script_instance_placeholder.property_can_revert_func = instance_property_can_revert;
+    native_script_instance_placeholder.property_get_revert_func = instance_property_get_revert;
+    native_script_instance_placeholder.get_property_state_func = instance_get_property_state;
+    native_script_instance_placeholder.get_method_list_func = instance_get_method_list;
+    native_script_instance_placeholder.free_method_list_func = instance_free_method_list;
+    native_script_instance_placeholder.get_property_type_func = instance_get_property_type;
+    native_script_instance_placeholder.call_func = instance_call;
+    native_script_instance_placeholder.notification_func = instance_notification;
+    //native_script_instance.to_string_func = instance_to_string;
+    native_script_instance_placeholder.refcount_incremented_func = instance_ref_count_incremented;
+    native_script_instance_placeholder.refcount_decremented_func = instance_ref_count_decremented;
+    native_script_instance_placeholder.get_script_func = instance_get_script;
+    native_script_instance_placeholder.get_language_func = instance_get_language;
+    native_script_instance_placeholder.free_func = instance_free;
     p_interface->print_error("init_instance3", "test", "test",1,1);
 }
 
 GDExtensionScriptInstanceInfo* get_instance_ptr(GDExtensionInterface *p_interface){
     init_instance(p_interface);
-    //native_script->print_error("get_instance_ptr", "test", "test",1,1);
     return &native_script_instance;
+}
+
+
+GDExtensionScriptInstanceInfo* get_placeholder_instance_ptr(GDExtensionInterface *p_interface){
+    init_instance(p_interface);
+    return &native_script_instance_placeholder;
 }

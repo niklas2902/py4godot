@@ -159,7 +159,42 @@ cdef class PyScriptExtension(ScriptExtension):
 
 
   cdef void _placeholder_instance_create(self, Object for_object, GDExtensionTypePtr res):
-    print_error("_placeholder_instance_create")
+    print_error("before get_class")
+    for_object.get_class()
+    cdef GDExtensionVariantFromTypeConstructorFunc constructor_func
+    cdef Variant var
+    cdef GDExtensionVariantPtr varptr
+    cdef GDExtensionScriptInstancePtr instance_ptr
+    cdef GDExtensionScriptInstanceInfo* instance_info
+    result = None
+    cdef object gd_class
+    cdef InstanceData gd_instance = InstanceData()
+    print_error("before trying to execute code")
+
+    try:
+        gd_instance.set_owner(self.gd_obj)
+        gd_instance.set_properties(self.properties)
+        gd_instance.set_methods(self.methods)
+        instance_info = get_placeholder_instance_ptr(gdnative_interface)
+
+        for property in self.properties:
+            print_error(f"create_property:{gd_string_name_to_py_string(property.get_name())}->{property.get_default_value()}")
+            setattr(self.gd_obj, gd_string_name_to_py_string(property.get_name()), property.get_default_value())
+
+        self.gd_obj.set_godot_owner(for_object.godot_owner)
+        gd_instance.set_script(self)
+        #TODO: work further on here
+        print_error("before instance_create")
+        Py_INCREF(gd_instance)
+        Py_INCREF(gd_instance.owner)
+        Py_INCREF(self.gd_obj)
+        instance_ptr = _interface.script_instance_create(instance_info, <PyObject*>gd_instance)
+        print_error("after instance_create")
+        set_gdnative_ptr(<GDExtensionTypePtr*>res, <GDExtensionTypePtr>instance_ptr)
+    except Exception as e:
+        print_error("Exception - instance_create failed because of:"+ str(e))
+    print_error("_instance_create-end")
+
 
   cdef void _instance_has(self, Object object, GDExtensionTypePtr res):
     pass
@@ -339,7 +374,7 @@ cdef GDExtensionClassCallVirtual call_virtual__instance_create_def = <GDExtensio
 
 cdef void* call_virtual_func__placeholder_instance_create(GDExtensionClassInstancePtr p_instance, GDExtensionConstTypePtr *p_args, GDExtensionTypePtr r_ret) with gil:
     cdef PyScriptExtension pylanguage = <PyScriptExtension> p_instance
-    cdef Object args0 = Object.new_static(dereference(p_args + 0))
+    cdef Object args0 = Object.new_static(gdnative_interface.ref_get_object(p_args[0]))
 
     cdef object obj = <object>pylanguage._placeholder_instance_create(args0,r_ret)
     cdef void* ret_val = <void*>obj
