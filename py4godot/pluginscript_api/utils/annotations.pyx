@@ -14,18 +14,19 @@ properties = []
 signals = []"""
 
 class TransferObject():
-    def __init__(self, gd_class, properties,signals):
+    def __init__(self, gd_class, properties,signals, methods):
         self.gd_class = gd_class
         self.properties = properties
         self.signals = signals
-
+        self.methods = methods
 def exec_class(source_string):
-    global  gd_class, properties, signals
+    global  gd_class, properties, signals, methods
     methods = []
     gd_class = None
     gd_tool_class = None
     properties = []
     signals = []
+    methods = []
     print_error("before exec_source_string:", source_string)
     cdef str string = source_string
     try:
@@ -34,7 +35,7 @@ def exec_class(source_string):
         print_error("exec_class: Exception happened:", traceback.format_exc())
     print_error("After exec")
     print_error("gd_class:", gd_class)
-    return TransferObject(gd_class, properties, signals)
+    return TransferObject(gd_class, properties, signals, methods)
 
 
 def gdclass(cls):
@@ -59,6 +60,15 @@ def prop(name,type_, defaultval, hint = BaseHint(), hint_string = ""):
                 type_=type_,hint = hint,usage = 4096|6|32768,
                 default_value=defaultval))
 
+def gdmethod(func):
+    args = inspect.getfullargspec(func).args
+    list_args = []
+    for arg in args:
+        list_args.append(PropertyDescription(arg, None, BaseHint(),4096|6|32768, None))
+    methods.append(
+    MethodDescription(func.__name__,
+    None, 0,list_args, []))
+    return func
 
 def signal(name, list args = []):
     signals.append(SignalDescription(name, args))

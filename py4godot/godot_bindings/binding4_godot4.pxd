@@ -30,6 +30,10 @@ ctypedef public void *GDExtensionScriptInstanceDataPtr;
 ctypedef public void *GDExtensionScriptInstancePtr
 ctypedef public void *GDExtensionRefPtr;
 ctypedef public const void *GDExtensionConstRefPtr;
+ctypedef void (*GDExtensionPtrSetter)(GDExtensionTypePtr p_base, GDExtensionConstTypePtr p_value);
+ctypedef void (*GDExtensionPtrGetter)(GDExtensionConstTypePtr p_base, GDExtensionTypePtr r_value);
+ctypedef void (*GDExtensionPtrIndexedSetter)(GDExtensionTypePtr p_base, GDExtensionInt p_index, GDExtensionConstTypePtr p_value);
+ctypedef void (*GDExtensionPtrIndexedGetter)(GDExtensionConstTypePtr p_base, GDExtensionInt p_index, GDExtensionTypePtr r_value);
 
 cdef extern from "binding4.h":
     ctypedef void (*GDExtensionVariantFromTypeConstructorFunc)(GDExtensionVariantPtr, GDExtensionTypePtr);
@@ -45,8 +49,11 @@ cdef extern from "binding4.h":
     ctypedef void (*GDExtensionPtrBuiltInMethod)(GDExtensionTypePtr p_base, const GDExtensionTypePtr *p_args, GDExtensionTypePtr r_return, int p_argument_count);
     ctypedef void (*GDExtensionPtrConstructor)(GDExtensionTypePtr p_base, const GDExtensionTypePtr *p_args);
     ctypedef void (*GDExtensionPtrDestructor)(GDExtensionTypePtr p_base);
-    ctypedef void (*GDExtensionPtrSetter)(GDExtensionTypePtr p_base, const GDExtensionTypePtr p_value);
-    ctypedef void (*GDExtensionPtrGetter)(const GDExtensionTypePtr p_base, GDExtensionTypePtr r_value);
+    GDExtensionPtrIndexedSetter (*variant_get_ptr_indexed_setter)(GDExtensionVariantType p_type);
+    GDExtensionPtrIndexedGetter (*variant_get_ptr_indexed_getter)(GDExtensionVariantType p_type);
+    GDExtensionPtrSetter (*variant_get_ptr_setter)(GDExtensionVariantType p_type, GDExtensionConstStringNamePtr p_member);
+    GDExtensionPtrGetter (*variant_get_ptr_getter)(GDExtensionVariantType p_type, GDExtensionConstStringNamePtr p_member);
+
     ctypedef void (*GDExtensionPtrOperatorEvaluator)(GDExtensionConstTypePtr p_left, GDExtensionConstTypePtr p_right, GDExtensionTypePtr r_result);
 
 
