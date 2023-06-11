@@ -1,5 +1,4 @@
 #include "gdextension_interface.h"
-#include "instance.h"
 static GDExtensionInterface* gdnative_interface = NULL;
 #include "api4_api.h"
 #include "../../py4godot_core_holder/core_holder_api.h"
@@ -106,7 +105,6 @@ void initialize_py4godot(void *userdata, GDExtensionInitializationLevel p_level)
         PyErr_Print();
         return ;
     }
-    init_instance(gdnative_interface);
 
     gdnative_interface->print_error("test- before- init_py_language", "test", "test",1,1);
     init_py_language();
