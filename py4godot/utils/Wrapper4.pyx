@@ -11,3 +11,6 @@ cdef class Wrapper4(object):
             #print("Free", self)
             #api_core.godot_free(self.godot_owner)
             #print("Free successfull")
+
+    cdef object get_script(self):
+        return get_script_holder().get_script(self.get_instance_id)
