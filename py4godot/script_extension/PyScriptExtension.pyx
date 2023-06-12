@@ -136,7 +136,7 @@ cdef class PyScriptExtension(ScriptExtension):
         gd_instance.set_owner(self.gd_obj)
         gd_instance.set_properties(self.properties)
         gd_instance.set_methods(self.methods)
-        instance_info = get_instance_ptr(gdnative_interface)
+        get_instance_ptr(gdnative_interface, &(gd_instance.info))
 
         for property in self.properties:
             print_error(f"create_property:{gd_string_name_to_py_string(property.get_name())}->{property.get_default_value()}")
@@ -149,7 +149,7 @@ cdef class PyScriptExtension(ScriptExtension):
         Py_INCREF(gd_instance)
         Py_INCREF(gd_instance.owner)
         Py_INCREF(self.gd_obj)
-        instance_ptr = _interface.script_instance_create(instance_info, <PyObject*>gd_instance)
+        instance_ptr = _interface.script_instance_create(&(gd_instance.info), <PyObject*>gd_instance)
         print_error("after instance_create")
         set_gdnative_ptr(<GDExtensionTypePtr*>res, <GDExtensionTypePtr>instance_ptr)
     except Exception as e:
@@ -175,7 +175,7 @@ cdef class PyScriptExtension(ScriptExtension):
         gd_instance.set_owner(self.gd_obj)
         gd_instance.set_properties(self.properties)
         gd_instance.set_methods(self.methods)
-        instance_info = get_placeholder_instance_ptr(gdnative_interface)
+        get_placeholder_instance_ptr(gdnative_interface, &(gd_instance.info))
 
         for property in self.properties:
             print_error(f"create_property:{gd_string_name_to_py_string(property.get_name())}->{property.get_default_value()}")
@@ -188,7 +188,7 @@ cdef class PyScriptExtension(ScriptExtension):
         Py_INCREF(gd_instance)
         Py_INCREF(gd_instance.owner)
         Py_INCREF(self.gd_obj)
-        instance_ptr = _interface.script_instance_create(instance_info, <PyObject*>gd_instance)
+        instance_ptr = _interface.script_instance_create(&(gd_instance.info), <PyObject*>gd_instance)
         print_error("after instance_create")
         set_gdnative_ptr(<GDExtensionTypePtr*>res, <GDExtensionTypePtr>instance_ptr)
     except Exception as e:

@@ -5,6 +5,7 @@ cdef class InstanceData:
     cdef list properties
     cdef list methods
     cdef PyScriptExtension script
+    cdef GDExtensionScriptInstanceInfo info
 
     cdef inline Wrapper4 set_owner(self, Wrapper4 _owner):
         self.owner = _owner

@@ -49,15 +49,15 @@ void init_instance(GDExtensionInterface *p_interface, GDExtensionScriptInstanceI
     p_interface->print_error("init_instance3", "test", "test",1,1);
 }
 
-GDExtensionScriptInstanceInfo* get_instance_ptr(GDExtensionInterface *p_interface){
-    GDExtensionScriptInstanceInfo * info = malloc(sizeof(GDExtensionScriptInstanceInfo));
+void get_instance_ptr(GDExtensionInterface *p_interface,GDExtensionScriptInstanceInfo* info ){
+    //GDExtensionScriptInstanceInfo * info = malloc(sizeof(GDExtensionScriptInstanceInfo));
     init_instance(p_interface, info, 0);
     return info;
 }
 
 
-GDExtensionScriptInstanceInfo* get_placeholder_instance_ptr(GDExtensionInterface *p_interface){
-    GDExtensionScriptInstanceInfo * info = malloc(sizeof(GDExtensionScriptInstanceInfo));
+void get_placeholder_instance_ptr(GDExtensionInterface *p_interface, GDExtensionScriptInstanceInfo* info){
+    //GDExtensionScriptInstanceInfo * info = malloc(sizeof(GDExtensionScriptInstanceInfo));
     init_instance(p_interface, info, 1);
     return info;
 }
