@@ -10,6 +10,15 @@ class ReturnType:
         self.name = name
         self.is_primitive = False
 
+class BuiltinClass:
+    def __init__(self, name):
+        self.name = name
+        self.core_members = []
+class CoreMember:
+    def __init__(self, name, type_):
+        self.name = name
+        self.type_  = type_
+
 
 IGNORED_CLASSES = {"Nil", "bool", "float", "int"}
 
@@ -20,7 +29,7 @@ forbidden_types = {"cont void*", "void*"}
 normal_classes = set()
 singletons = set()
 builtin_classes = set()
-
+core_classes = dict()
 def generate_import():
     result = \
         """from py4godot.utils.Wrapper4 cimport *
@@ -94,8 +103,8 @@ def convert_camel_case_to_underscore(string):
         res = res.replace("Array", "_Array")
     return res
 def generate_variant_type(class_):
-    if class_["name"] in builtin_classes:
-        return f"GDExtensionVariantType.GDEXTENSION_VARIANT_TYPE_{convert_camel_case_to_underscore(class_['name']).upper()}"
+    if class_ in builtin_classes:
+        return f"GDExtensionVariantType.GDEXTENSION_VARIANT_TYPE_{convert_camel_case_to_underscore(class_).upper()}"
     else:
         return f"GDExtensionVariantType.GDEXTENSION_VARIANT_TYPE_NIL"
 def generate_constructors(class_):
@@ -113,7 +122,7 @@ def generate_constructors(class_):
         res = generate_newline(res)
         res += f"{INDENT*2}cdef {class_['name']} _class = {class_['name']}()"
         res = generate_newline(res)
-        res += f"{INDENT*2}_class.set_variant_type({generate_variant_type(class_)})"
+        res += f"{INDENT*2}_class.set_variant_type({generate_variant_type(class_['name'])})"
         res = generate_newline(res)
         res += f"{INDENT*2}cdef GDExtensionPtrConstructor constructor = _interface.variant_get_ptr_constructor(_class.variant_type, {constructor['index']})"
         res = generate_newline(res)
@@ -468,6 +477,16 @@ def generate_operators(class_):
                 print(operator)
     return ""
 
+def collect_members(obj):
+    global core_classes
+    print(obj["builtin_class_member_offsets"][3])
+    for class_ in obj["builtin_class_member_offsets"][3]["classes"]:
+        core_class = BuiltinClass(class_["name"])
+        for member in class_["members"]:
+            core_member = CoreMember(member["member"], member["meta"].replace("32", ""))
+            core_class.core_members.append(core_member)
+        core_classes[class_["name"]] = core_class
+    print(core_classes)
 
 def generate_common_methods(class_):
     result = ""
@@ -503,6 +522,65 @@ def generate_properties(class_):
         for property in class_["properties"]:
             result += generate_property(property)
     return result
+
+def generate_member_getter(class_,member):
+    res = ""
+    res += f"{INDENT}@property"
+    res = generate_newline(res)
+    res += f"{INDENT}def {member.name}(self):"
+    res = generate_newline(res)
+    res += f"{INDENT*2}cdef String _member_name_string = String.new0()"
+    res = generate_newline(res)
+    res += f'{INDENT*2}_interface.string_new_with_utf8_chars(_member_name_string.godot_owner, "{member.name}")'
+    res = generate_newline(res)
+    res += f'{INDENT*2}cdef StringName _member_name = StringName.new2(_member_name_string)'
+    res = generate_newline(res)
+    res += f"{INDENT*2}cdef GDExtensionPtrGetter getter = gdnative_interface.variant_get_ptr_getter({generate_variant_type(class_)},_member_name.godot_owner)"
+    res = generate_newline(res)
+    if member.type_ == "int" or member.type_ == "float" or member.type_ == "double":
+        res += f"{INDENT*2}cdef {member.type_} _ret"
+    else:
+        res += f"{INDENT * 2}cdef {member.type_} _ret = {member.type_}.new0()"
+    res = generate_newline(res)
+    if member.type_ != "int" and member.type_ != "float" and member.type_ != "double":
+        res += f"{INDENT * 2}getter(self.godot_owner, _ret.godot_owner)"
+    else:
+        res += f"{INDENT*2}getter(self.godot_owner, &_ret)"
+    res = generate_newline(res)
+    res += f"{INDENT*2}return _ret"
+    res = generate_newline(res)
+    return res
+
+def generate_member_setter(class_,member):
+    res = ""
+    res += f"{INDENT}@{member.name}.setter"
+    res = generate_newline(res)
+    res += f"{INDENT}def {member.name}(self, {member.type_} value):"
+    res = generate_newline(res)
+    res += f"{INDENT * 2}cdef String _member_name_string = String.new0()"
+    res = generate_newline(res)
+    res += f'{INDENT * 2}_interface.string_new_with_utf8_chars(_member_name_string.godot_owner, "{member.name}")'
+    res = generate_newline(res)
+    res += f'{INDENT * 2}cdef StringName _member_name = StringName.new2(_member_name_string)'
+    res = generate_newline(res)
+    res += f"{INDENT * 2}cdef GDExtensionPtrSetter setter = gdnative_interface.variant_get_ptr_setter({generate_variant_type(class_)},_member_name.godot_owner)"
+    res = generate_newline(res)
+    if member.type_ != "int" and member.type_ != "float" and member.type_ != "double":
+        res += f"{INDENT * 2}setter(self.godot_owner, value.godot_owner)"
+    else:
+        res += f"{INDENT * 2}setter(self.godot_owner, &value)"
+    res = generate_newline(res)
+    return res
+
+
+def generate_members_of_class(class_):
+    res = ""
+    if class_["name"] in core_classes.keys():
+        for member in core_classes[class_["name"]].core_members:
+            res += generate_member_getter(class_["name"],member)
+            res = generate_newline(res)
+            res += generate_member_setter(class_["name"],member)
+    return res
 
 def simplify_type(type):
     list_types = type.split(",")
@@ -716,6 +794,7 @@ def generate_classes(classes, filename, is_core=False):
         if "methods" not in class_.keys():
             continue
         res += generate_properties(class_)
+        res += generate_members_of_class(class_)
         for method in class_["methods"]:
             if native_structs_in_method(method):
                 # TODO: Check if this makes sense
@@ -882,6 +961,7 @@ if __name__ == "__main__":
         normal_classes = set([class_['name'] for class_ in obj['classes']])
         native_structs = set([native_struct["name"] for native_struct in obj["native_structures"]])
         singletons = set([singleton["name"] for singleton in obj["singletons"]])
+        collect_members(obj)
         for class_ in obj["classes"]:
             if(not os.path.exists(f"py4godot/classes/{class_['name']}/")):
                 os.mkdir(f"py4godot/classes/{class_['name']}/")

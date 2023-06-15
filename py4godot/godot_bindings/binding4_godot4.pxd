@@ -49,10 +49,6 @@ cdef extern from "binding4.h":
     ctypedef void (*GDExtensionPtrBuiltInMethod)(GDExtensionTypePtr p_base, const GDExtensionTypePtr *p_args, GDExtensionTypePtr r_return, int p_argument_count);
     ctypedef void (*GDExtensionPtrConstructor)(GDExtensionTypePtr p_base, const GDExtensionTypePtr *p_args);
     ctypedef void (*GDExtensionPtrDestructor)(GDExtensionTypePtr p_base);
-    GDExtensionPtrIndexedSetter (*variant_get_ptr_indexed_setter)(GDExtensionVariantType p_type);
-    GDExtensionPtrIndexedGetter (*variant_get_ptr_indexed_getter)(GDExtensionVariantType p_type);
-    GDExtensionPtrSetter (*variant_get_ptr_setter)(GDExtensionVariantType p_type, GDExtensionConstStringNamePtr p_member);
-    GDExtensionPtrGetter (*variant_get_ptr_getter)(GDExtensionVariantType p_type, GDExtensionConstStringNamePtr p_member);
 
     ctypedef void (*GDExtensionPtrOperatorEvaluator)(GDExtensionConstTypePtr p_left, GDExtensionConstTypePtr p_right, GDExtensionTypePtr r_result);
 
@@ -277,6 +273,12 @@ cdef extern from "binding4.h":
         GDExtensionObjectPtr (*classdb_construct_object)(const GDExtensionStringNamePtr p_classname); #The passed class must be a built-in godot class, or an already-registered extension class. In both case, object_set_instance should be called to fully initialize the object.
         GDExtensionMethodBindPtr (*classdb_get_method_bind)(GDExtensionConstStringNamePtr p_classname, GDExtensionConstStringNamePtr p_methodname, GDExtensionInt p_hash);
         void (*object_set_instance)(GDExtensionObjectPtr p_o, const GDExtensionStringNamePtr p_classname, GDExtensionClassInstancePtr p_instance); #p_classname should be a registered extension class and should extend the p_o object's class.
+
+        GDExtensionPtrIndexedSetter (*variant_get_ptr_indexed_setter)(GDExtensionVariantType p_type);
+        GDExtensionPtrIndexedGetter (*variant_get_ptr_indexed_getter)(GDExtensionVariantType p_type);
+        GDExtensionPtrSetter (*variant_get_ptr_setter)(GDExtensionVariantType p_type, GDExtensionConstStringNamePtr p_member);
+        GDExtensionPtrGetter (*variant_get_ptr_getter)(GDExtensionVariantType p_type, GDExtensionConstStringNamePtr p_member);
+
 
         # CLASSDB EXTENSION
 
