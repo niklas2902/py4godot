@@ -40,7 +40,10 @@ from py4godot.core.variant4.Variant4 cimport *
 from py4godot.enums.enums4 cimport *
 from py4godot_core_holder.core_holder cimport *
 from py4godot.godot_bindings.binding4_godot4 cimport *
+from py4godot.events.EventHolder cimport *
 from libc.stdlib cimport malloc, free
+
+cdef EventHolder event_holder = get_event_holder()
 
 def print_error(*objects, sep=' ', end=''):
     cdef str string = ""
@@ -120,7 +123,7 @@ def generate_constructors(class_):
         else:
             res += f"{INDENT}def new{constructor['index']}({generate_constructor_args(constructor)}):"
         res = generate_newline(res)
-        res += f"{INDENT*2}cdef {class_['name']} _class = {class_['name']}()"
+        res += f"{INDENT*2}cdef {class_['name']} _class = {class_['name']}.__new__({class_['name']})"
         res = generate_newline(res)
         res += f"{INDENT*2}_class.set_variant_type({generate_variant_type(class_['name'])})"
         res = generate_newline(res)
@@ -129,7 +132,11 @@ def generate_constructors(class_):
         #TODO:improve - fill with args
         res += generate_constructor_args_array(constructor)
         res = generate_newline(res)
-        res += f"{INDENT*2}constructor(_class.godot_owner,_args)"
+        res += f"{INDENT*2}_class.native_ptr = create_native_ptr(_interface)"
+        res = generate_newline(res)
+        res += f"{INDENT*2}constructor(&_class.native_ptr,_args)"
+        res = generate_newline(res)
+        res += f"{INDENT*2}_class.godot_owner = &_class.native_ptr"
         res = generate_newline(res)
         res += f"{INDENT*2}return _class"
         res = generate_newline(res)
@@ -163,14 +170,16 @@ def generate_return_value(method_):
         else:
             ret_val = ReturnType("_ret", method_['return_type'])
         if ret_val.type in classes:
-            if ret_val.type in builtin_classes and ret_val.type != "NodePath": #TODO check why NodePath behaves differently
-                result += f"{INDENT * 2}cdef {ret_val.type} {ret_val.name} = {ret_val.type}.new_native_ptr(create_native_ptr(gdnative_interface))"
+            if ret_val.type in builtin_classes:
+                result += f"{INDENT * 2}cdef {ret_val.type} {ret_val.name} = {ret_val.type}.__new__({ret_val.type})"
+                result = generate_newline(result)
+                result += f"{INDENT * 2}create_native_ptr_from_ptr(gdnative_interface, &_ret.native_ptr)"
             else:
                 result += f"{INDENT * 2}cdef {ret_val.type} {ret_val.name} = {ret_val.type}()"
         elif ret_val.type == "Variant":
             result += f"{INDENT * 2}cdef {ret_val.type} {ret_val.name} = {ret_val.type}()"
         elif "typedarray" in ret_val.type:
-            result += f"{INDENT * 2}cdef Array _ret = Array()"
+            result += f"{INDENT * 2}cdef Array _ret = Array.new0()"
         else:
             result += f"{INDENT * 2}cdef {unbitfield_type(unenumize_type(ret_val.type))} {ret_val.name}"
     else:
@@ -215,9 +224,6 @@ def generate_return_statement(method_):
     else:
         ret_val = ReturnType("_ret", method_['return_type'])
     result = ""
-    if ret_val.type in classes and ret_val.type in builtin_classes:
-        result += f"{INDENT*2}_ret.godot_owner = &_ret.native_ptr"
-        result = generate_newline(result)
     result += f"{INDENT*2}return _ret"
     return result
 
@@ -438,11 +444,17 @@ def generate_method_body_standard(class_, method):
 
     if(class_['name'] in builtin_classes):
         result += f"{INDENT * 2}method_to_call({get_godot_owner(method)}, {get_first_args_native(method)}, {address_ret(method)}, {get_args_count(method)})"
+        result = generate_newline(result)
     else:
         result += f"{INDENT * 2}gdnative_interface.object_method_bind_ptrcall(method_bind," \
                   f" {get_godot_owner(method)}, _args, {address_ret(method)})"
 
     if ("return_value" in method.keys() or "return_type" in method.keys()):
+        if ("return_value" in method.keys() and method["return_value"]["type"] in builtin_classes - {"int", "float", "bool"}) or\
+                ("return_type" in method.keys() and method["return_type"] in builtin_classes - {"int", "float", "bool"}):
+            result = generate_newline(result)
+            result += f"{INDENT * 2}_ret.godot_owner = &_ret.native_ptr"
+
         result = generate_newline(result)
         result += generate_return_statement(method)
     return result
@@ -725,9 +737,9 @@ def generate_from_variant(class_):
         return ""
 
     res = generate_newline(res)
-    res += f"{INDENT*2}cdef {class_['name']} obj = {class_['name']}()"
+    res += f"{INDENT*2}cdef {class_['name']} obj = {class_['name']}.__new__({class_['name']})"
     res = generate_newline(res)
-    res += f"{INDENT*2}obj.native_ptr = malloc(sizeof(uint8_t)*8)"
+    res += f"{INDENT*2}obj.native_ptr = create_native_ptr(gdnative_interface)"
     res = generate_newline(res)
     res += f"{INDENT*2}exec_constructor(gdnative_interface, variant_ptr,&obj.native_ptr,constructor)"
     res = generate_newline(res)
@@ -749,7 +761,7 @@ def generate_new_native_ptr(class_):
         return ""
 
     res = generate_newline(res)
-    res += f"{INDENT*2}cdef {class_['name']} obj = {class_['name']}()"
+    res += f"{INDENT*2}cdef {class_['name']} obj = {class_['name']}.__new__({class_['name']})"
     res = generate_newline(res)
     res += f"{INDENT * 2}obj.native_ptr = ptr"
     res = generate_newline(res)

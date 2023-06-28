@@ -36,3 +36,8 @@ void * create_native_ptr(GDExtensionInterface* interface_ptr){
     return ptr;
 }
 
+void create_native_ptr_from_ptr(GDExtensionInterface* interface_ptr, void** from_ptr ){
+    * (from_ptr) =  interface_ptr->mem_alloc(8);
+
+}
+

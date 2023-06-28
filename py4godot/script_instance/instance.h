@@ -1,14 +1,26 @@
 #include "gdextension_interface.h"
 
 #include "PyScriptInstance_api.h"
+#include <windows.h>
 
 GDExtensionScriptInstanceInfo native_script_instance_placeholder;
 GDExtensionScriptInstanceInfo native_script_instance;
 GDExtensionInterface *native_script;
+
+HANDLE ghMutex;
+
 GDExtensionScriptInstanceInfo get_instance(){
     return native_script_instance;
 }
 
+void c_instance_get(GDExtensionScriptInstanceDataPtr p_instance, GDExtensionConstStringNamePtr p_name, GDExtensionVariantPtr r_ret){
+    ghMutex = CreateMutex(
+    NULL,              // default security attributes
+    FALSE,             // initially not owned
+    NULL);
+    instance_get(p_instance, p_name, r_ret);
+    CloseHandle(ghMutex);
+}
 
 void init_instance(GDExtensionInterface *p_interface, GDExtensionScriptInstanceInfo* native_script_instance, int is_placeholder){
     p_interface->print_error("init_instance 1", "test", "test",1,1);
@@ -26,7 +38,7 @@ void init_instance(GDExtensionInterface *p_interface, GDExtensionScriptInstanceI
     native_script_instance->get_owner_func = get_owner;
     native_script_instance->is_placeholder_func = is_placeholder;
     native_script_instance->set_func = instance_set;
-    native_script_instance->get_func = instance_get;
+    native_script_instance->get_func = c_instance_get;
     native_script_instance->get_property_list_func = instance_get_property_list;
     native_script_instance->free_property_list_func = instance_free_property_list;
     native_script_instance->property_can_revert_func = instance_property_can_revert;

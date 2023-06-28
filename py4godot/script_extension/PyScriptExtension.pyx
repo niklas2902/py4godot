@@ -64,17 +64,17 @@ cdef class PyScriptExtension(ScriptExtension):
     result = None
     try:
         result = exec_class(self.source_code)
+        print_error("result:", result)
+        if(result != None and (result.gd_class != None or result.gd_tool_class != None)):
+            print_error("result not None")
+            self.gd_class = result.gd_class if result.gd_class != None else result.gd_tool_class
+            self.gd_obj = <Wrapper4> self.gd_class()
+            self.properties = result.properties
+            self.methods = result.methods
+            self.signals = result.signals
+            print_error(self.gd_obj)
     except Exception as e:
         print_error("Creating_class failed:"+str(e))
-    print_error("result:", result)
-    if(result != None and (result.gd_class != None or result.gd_tool_class != None)):
-        print_error("result not None")
-        self.gd_class = result.gd_class if result.gd_class != None else result.gd_tool_class
-        self.gd_obj = <Wrapper4> self.gd_class()
-        self.properties = result.properties
-        self.methods = result.methods
-        self.signals = result.signals
-
   cdef str get_py_source_code(self):
     return self.source_code
 
