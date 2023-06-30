@@ -344,6 +344,8 @@ def generate_method_bind(current_class, method):
         res = generate_newline(res)
         res += f"{INDENT*3}event_holder.add_event(lambda:print_error('notifiy'), 1)"
         res = generate_newline(res)
+        res += f"{INDENT*3}event_holder.notify_event(1)"
+        res = generate_newline(res)
         res += f"{INDENT * 2}except Exception as e:"
         res = generate_newline(res)
         res += f"{INDENT*3}print_error('Exception:',e)"
