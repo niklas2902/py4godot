@@ -234,11 +234,7 @@ def generate_singleton_constructor(classname):
     res += f"{INDENT}def get_instance():"
     res = generate_newline(res)
 
-    res += f"{INDENT*2}cdef String class_name_string = String.new0()"
-    res = generate_newline(res)
-    res += f"{INDENT*2}_interface.string_new_with_utf8_chars(class_name_string.godot_owner, \"{classname}\")"
-    res = generate_newline(res)
-    res += f"{INDENT * 2}cdef StringName class_name = StringName.new2(class_name_string)"
+    res += f"{INDENT * 2}cdef StringName class_name = c_string_to_string_name('{classname}')"
     res = generate_newline(res)
     res = generate_newline(res)
 
@@ -318,19 +314,11 @@ def get_variant_type(class_name):
     return DICT[class_name.lower()]
 def generate_method_bind(current_class, method):
     res = ""
-    res += f"{INDENT * 2}cdef String _class_name_string = String.new0()"
-    res = generate_newline(res)
-    res += f"{INDENT * 2}_interface.string_new_with_utf8_chars(_class_name_string.godot_owner, \"{current_class['name']}\")"
-    res = generate_newline(res)
-    res += f"{INDENT * 2}cdef StringName _class_name = StringName.new2(_class_name_string)"
+    res += f"{INDENT * 2}cdef StringName _class_name = c_string_to_string_name('{current_class['name']}')"
     res = generate_newline(res)
     res = generate_newline(res)
 
-    res += f"{INDENT * 2}cdef String _method_name_string = String.new0()"
-    res = generate_newline(res)
-    res += f"{INDENT * 2}_interface.string_new_with_utf8_chars(_method_name_string.godot_owner, \"{method['name']}\")"
-    res = generate_newline(res)
-    res += f"{INDENT * 2}cdef StringName _method_name = StringName.new2(_method_name_string)"
+    res += f"{INDENT * 2}cdef StringName _method_name = c_string_to_string_name('{method['name']}')"
     res = generate_newline(res)
     res = generate_newline(res)
 
