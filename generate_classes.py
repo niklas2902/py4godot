@@ -339,6 +339,14 @@ def generate_method_bind(current_class, method):
         res += f"""{INDENT * 2}cdef GDExtensionPtrBuiltInMethod method_to_call = """ + \
                f"""gdnative_interface.variant_get_ptr_builtin_method(GDExtensionVariantType.{get_variant_type(current_class['name'])}, """ + \
                f"""_method_name.godot_owner, {method['hash']})"""
+        res = generate_newline(res)
+        res += f"{INDENT * 2}try:"
+        res = generate_newline(res)
+        res += f"{INDENT*3}event_holder.add_event(lambda:print_error('notifiy'), 1)"
+        res = generate_newline(res)
+        res += f"{INDENT * 2}except Exception as e:"
+        res = generate_newline(res)
+        res += f"{INDENT*3}print_error('Exception:',e)"
     else:
         res += f"""{INDENT*2}cdef GDExtensionMethodBindPtr method_bind = """ + \
                f"""gdnative_interface.classdb_get_method_bind(_class_name.godot_owner,""" + \
