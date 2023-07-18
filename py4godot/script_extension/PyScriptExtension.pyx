@@ -119,7 +119,7 @@ cdef class PyScriptExtension(ScriptExtension):
     constructor(gd_string_name.godot_owner,_args)
 
 
-  cdef void _instance_create(self, Object for_object, GDExtensionTypePtr res) with gil:
+  cdef void _instance_create(self, Object for_object, GDExtensionTypePtr res):
     print_error("before get_class")
     for_object.get_class()
     cdef GDExtensionVariantFromTypeConstructorFunc constructor_func

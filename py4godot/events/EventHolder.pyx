@@ -8,13 +8,14 @@ cdef class EventHolder:
 
     def __init__(self):
         self.events_dict = dict()
-    cdef add_event(self, object update_event, int addr):
-        self.events_dict[addr] = update_event
+    def add_event(self, update_event, addr):
+        with lock:
+            self.events_dict[addr] = update_event
 
-    def notify_event(self, addr):
+    def notify_event(self, addr, parameter):
         with lock:
             if(addr in self.events_dict.keys()):
-                self.events_dict[addr]()
+                self.events_dict[addr](parameter)
 
     def test_method(self, a, b):
         pass

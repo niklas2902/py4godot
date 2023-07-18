@@ -42,6 +42,7 @@ from py4godot_core_holder.core_holder cimport *
 from py4godot.godot_bindings.binding4_godot4 cimport *
 from py4godot.events.EventHolder cimport *
 from libc.stdlib cimport malloc, free
+from cpython cimport Py_INCREF, Py_DECREF, PyObject
 
 cdef EventHolder event_holder = get_event_holder()
 
@@ -327,16 +328,6 @@ def generate_method_bind(current_class, method):
         res += f"""{INDENT * 2}cdef GDExtensionPtrBuiltInMethod method_to_call = """ + \
                f"""gdnative_interface.variant_get_ptr_builtin_method(GDExtensionVariantType.{get_variant_type(current_class['name'])}, """ + \
                f"""_method_name.godot_owner, {method['hash']})"""
-        res = generate_newline(res)
-        res += f"{INDENT * 2}try:"
-        res = generate_newline(res)
-        res += f"{INDENT*3}event_holder.add_event(lambda:print_error('notifiy'), 1)"
-        res = generate_newline(res)
-        res += f"{INDENT*3}event_holder.notify_event(1)"
-        res = generate_newline(res)
-        res += f"{INDENT * 2}except Exception as e:"
-        res = generate_newline(res)
-        res += f"{INDENT*3}print_error('Exception:',e)"
     else:
         res += f"""{INDENT*2}cdef GDExtensionMethodBindPtr method_bind = """ + \
                f"""gdnative_interface.classdb_get_method_bind(_class_name.godot_owner,""" + \
@@ -557,6 +548,11 @@ def generate_member_getter(class_,member):
     else:
         res += f"{INDENT*2}getter(self.godot_owner, &_ret)"
     res = generate_newline(res)
+    if member.type_ in builtin_classes:
+        res = generate_newline(res)
+        res += f"{INDENT * 2}event_holder.add_event(self.set_{member.name}, <int>(&(<VariantTypeWrapper4>_ret).godot_owner))"
+        res = generate_newline(res)
+    res = generate_newline(res)
     res += f"{INDENT*2}return _ret"
     res = generate_newline(res)
     return res
@@ -580,6 +576,10 @@ def generate_member_setter(class_,member):
     else:
         res += f"{INDENT * 2}setter(self.godot_owner, &value)"
     res = generate_newline(res)
+    if class_ in builtin_classes:
+        res = generate_newline(res)
+        res += f"{INDENT * 2}event_holder.notify_event(<int>(&self.godot_owner), self)"
+        res = generate_newline(res)
     return res
 
 
@@ -601,7 +601,15 @@ def generate_property(property):
     result = generate_newline(result)
     result += f"{INDENT}def {pythonize_name(property['name'])}(self):"
     result = generate_newline(result)
-    result += f"{INDENT * 2}return self. {pythonize_name(property['getter'])}()"
+    result += f"{INDENT * 2}cdef _ret = self. {pythonize_name(property['getter'])}()"
+    result = generate_newline(result)
+
+    if "setter" in property and property["setter"] != "":
+        if(property["type"] in builtin_classes):
+            result = generate_newline(result)
+            result += f"{INDENT * 2}event_holder.add_event(self.{pythonize_name(property['setter'])}, <int>(&(<VariantTypeWrapper4>_ret).godot_owner))"
+            result = generate_newline(result)
+    result += f"{INDENT * 2}return _ret"
     result = generate_newline(result)
 
     if "setter" in property and property["setter"] != "":
@@ -612,6 +620,10 @@ def generate_property(property):
         result += f"{INDENT * 2}self.{pythonize_name(property['setter'])}(value)"
         result = generate_newline(result)
         result = generate_newline(result)
+        if (property["type"] in builtin_classes):
+            res = generate_newline(result)
+            res += f"{INDENT * 2}event_holder.notify_event(<int>(&(<VariantTypeWrapper4>self).godot_owner),self)"
+            res = generate_newline(result)
 
     return result
 
