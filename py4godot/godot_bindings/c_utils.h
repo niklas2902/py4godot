@@ -1,4 +1,9 @@
+struct PtrWrapperStruct {
+   void* val;
+};
 
+struct PtrWrapperStruct ptr_wrapper_array[1000000];
+int index;
 void set_gdnative_ptr(GDExtensionTypePtr* a, GDExtensionTypePtr b){
     *a = b;
 }
@@ -30,14 +35,17 @@ char * gd_string_c_string(GDExtensionInterface* interface_ptr, GDExtensionConstS
 }
 
 void * create_native_ptr(GDExtensionInterface* interface_ptr){
-    interface_ptr->print_error("before creating ptr", "test", "test",1,1);
-    void* ptr =  interface_ptr->mem_alloc(8);
-    interface_ptr->print_error("after creating ptr", "test", "test",1,1);
-    return ptr;
+     return ptr_wrapper_array[index++].val;
 }
 
 void create_native_ptr_from_ptr(GDExtensionInterface* interface_ptr, void** from_ptr ){
-    * (from_ptr) =  interface_ptr->mem_alloc(8);
+    *(from_ptr) = &ptr_wrapper_array[index].val;
+     index ++;
+}
 
+void exec_method(GDExtensionInterface* interface_ptr, GDExtensionMethodBindPtr method_bind, void * gd_owner, void ** args, void** ret ){
+    interface_ptr->object_method_bind_ptrcall(method_bind, gd_owner, args, &ptr_wrapper_array[index].val);
+     *(ret) = &ptr_wrapper_array[index].val;
+     index ++;
 }
 

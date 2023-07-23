@@ -263,6 +263,9 @@ cdef extern from "binding4.h":
         void *class_userdata;
 
     ctypedef struct GDExtensionInterface:
+        void *(*mem_alloc)(size_t p_bytes);
+        void *(*mem_realloc)(void *p_ptr, size_t p_bytes);
+        void (*mem_free)(void *p_ptr);
 
         GDExtensionObjectPtr (*ref_get_object)(GDExtensionConstRefPtr p_ref);
         GDExtensionVariantFromTypeConstructorFunc (*get_variant_from_type_constructor)(GDExtensionVariantType p_type);
@@ -437,6 +440,7 @@ cdef extern from "c_utils.h":
     GDExtensionVariantPtr create_variant2(GDExtensionInterface * interface_ptr)
     void * create_native_ptr(GDExtensionInterface* interface_ptr)
     void create_native_ptr_from_ptr(GDExtensionInterface* interface_ptr, void** from_ptr )
+    void exec_method(GDExtensionInterface* interface_ptr, GDExtensionMethodBindPtr method_bind, void * gd_owner, void ** args, void** ret )
 cdef extern from "Python.h":
     cdef PyObject* PyUnicode_FromString(const char* s);
     cdef  PyObject* PyObject_Str(PyObject *o);

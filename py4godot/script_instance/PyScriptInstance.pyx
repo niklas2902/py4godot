@@ -69,9 +69,6 @@ cdef api GDExtensionBool instance_get(GDExtensionScriptInstanceDataPtr p_instanc
         print_error("get_val:", get_val)
         try:
             get_var.init_type(get_val)
-            #if py_method_name_str == "test_string":
-            #    Py_INCREF(get_var)
-            #    Py_INCREF(get_val)
         except Exception as e:
             print_error("exception:",e)
     else:
@@ -116,9 +113,6 @@ cdef api const GDExtensionMethodInfo * instance_get_method_list(GDExtensionScrip
     cdef InstanceData instance = <InstanceData>p_instance
     try:
         r_count[0] = len(instance.methods) #TODO enable properties
-        print_error("list of properties from python:", len(instance.methods))
-        print_error("prop_count:"+ str(dereference(r_count)))
-        print_error("after getting property_info")
 
         if method_infos != NULL:
             return method_infos

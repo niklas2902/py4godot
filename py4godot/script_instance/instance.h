@@ -22,6 +22,26 @@ void c_instance_get(GDExtensionScriptInstanceDataPtr p_instance, GDExtensionCons
     CloseHandle(ghMutex);
 }
 
+
+void c_instance_call(GDExtensionScriptInstanceDataPtr p_self, GDExtensionConstStringNamePtr p_method, const GDExtensionConstVariantPtr *p_args, GDExtensionInt p_argument_count, GDExtensionVariantPtr r_return, GDExtensionCallError *r_error){
+    ghMutex = CreateMutex(
+    NULL,              // default security attributes
+    FALSE,             // initially not owned
+    NULL);
+    instance_call(p_self, p_method, p_args, p_argument_count, r_return, r_error);
+    CloseHandle(ghMutex);
+}
+
+
+void c_instance_set(GDExtensionScriptInstanceDataPtr p_instance, GDExtensionConstStringNamePtr p_name, GDExtensionConstVariantPtr p_value){
+    ghMutex = CreateMutex(
+    NULL,              // default security attributes
+    FALSE,             // initially not owned
+    NULL);
+    instance_set(p_instance, p_name, p_value);
+    CloseHandle(ghMutex);
+}
+
 void init_instance(GDExtensionInterface *p_interface, GDExtensionScriptInstanceInfo* native_script_instance, int is_placeholder){
     p_interface->print_error("init_instance 1", "test", "test",1,1);
     native_script = p_interface;

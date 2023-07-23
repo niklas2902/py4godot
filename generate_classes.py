@@ -435,12 +435,22 @@ def generate_method_body_standard(class_, method):
         result += f"{INDENT * 2}method_to_call({get_godot_owner(method)}, {get_first_args_native(method)}, {address_ret(method)}, {get_args_count(method)})"
         result = generate_newline(result)
     else:
-        result += f"{INDENT * 2}gdnative_interface.object_method_bind_ptrcall(method_bind," \
-                  f" {get_godot_owner(method)}, _args, {address_ret(method)})"
+        if ("return_value" in method.keys() or "return_type" in method.keys()):
+            if ("return_value" in method.keys() and method["return_value"]["type"] in {"Transform3D"}) or \
+                ("return_type" in method.keys() and method["return_type"] in {"Transform3D"}):
+                result += f"{INDENT * 2}exec_method(gdnative_interface, method_bind," \
+                          f" {get_godot_owner(method)}, _args, {address_ret(method)})"
+                result = generate_newline(result)
+            else:
+                result += f"{INDENT * 2}gdnative_interface.object_method_bind_ptrcall(method_bind," \
+                          f" {get_godot_owner(method)}, _args, {address_ret(method)})"
+        else:
+            result += f"{INDENT * 2}gdnative_interface.object_method_bind_ptrcall(method_bind," \
+                      f" {get_godot_owner(method)}, _args, {address_ret(method)})"
 
     if ("return_value" in method.keys() or "return_type" in method.keys()):
-        if ("return_value" in method.keys() and method["return_value"]["type"] in builtin_classes - {"int", "float", "bool"}) or\
-                ("return_type" in method.keys() and method["return_type"] in builtin_classes - {"int", "float", "bool"}):
+        if ("return_value" in method.keys() and method["return_value"]["type"] in builtin_classes - {"int", "float", "bool", "Transform3D"}) or\
+                ("return_type" in method.keys() and method["return_type"] in builtin_classes - {"int", "float", "bool", "Transform3D"}):
             result = generate_newline(result)
             result += f"{INDENT * 2}_ret.godot_owner = &_ret.native_ptr"
 
@@ -459,6 +469,8 @@ def address_ret(method):
 
         if return_type in {"int", "float","bool"}:
             return "&_ret"
+        if return_type == "Transform3D":
+            return "&_ret.godot_owner"
         if return_type in builtin_classes:
             return "&(_ret.native_ptr)"
         if return_type in classes:
