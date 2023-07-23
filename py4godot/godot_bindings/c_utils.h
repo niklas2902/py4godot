@@ -35,12 +35,11 @@ char * gd_string_c_string(GDExtensionInterface* interface_ptr, GDExtensionConstS
 }
 
 void * create_native_ptr(GDExtensionInterface* interface_ptr){
-     return ptr_wrapper_array[index++].val;
+     return interface_ptr->mem_alloc(8);
 }
 
 void create_native_ptr_from_ptr(GDExtensionInterface* interface_ptr, void** from_ptr ){
-    *(from_ptr) = &ptr_wrapper_array[index].val;
-     index ++;
+    //* (from_ptr) =  interface_ptr->mem_alloc(8);
 }
 
 void run_constructor( GDExtensionPtrConstructor constructor, void** gd_owner, void ** args){
