@@ -135,9 +135,13 @@ def generate_constructors(class_):
         res = generate_newline(res)
         res += f"{INDENT*2}_class.native_ptr = create_native_ptr(_interface)"
         res = generate_newline(res)
-        res += f"{INDENT*2}constructor(&_class.native_ptr,_args)"
-        res = generate_newline(res)
-        res += f"{INDENT*2}_class.godot_owner = &_class.native_ptr"
+
+        if (class_["name"] != "Transform3D"):
+            res += f"{INDENT*2}constructor(&_class.native_ptr,_args)"
+            res = generate_newline(res)
+            res += f"{INDENT*2}_class.godot_owner = &_class.native_ptr"
+        else:
+            res += f"{INDENT*2}run_constructor(constructor, &_class.godot_owner, _args)"
         res = generate_newline(res)
         res += f"{INDENT*2}return _class"
         res = generate_newline(res)

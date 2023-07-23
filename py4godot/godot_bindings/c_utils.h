@@ -43,6 +43,12 @@ void create_native_ptr_from_ptr(GDExtensionInterface* interface_ptr, void** from
      index ++;
 }
 
+void run_constructor( GDExtensionPtrConstructor constructor, void** gd_owner, void ** args){
+    constructor(&ptr_wrapper_array[index].val, args);
+     *(gd_owner) = &ptr_wrapper_array[index].val;
+     index ++;
+}
+
 void exec_method(GDExtensionInterface* interface_ptr, GDExtensionMethodBindPtr method_bind, void * gd_owner, void ** args, void** ret ){
     interface_ptr->object_method_bind_ptrcall(method_bind, gd_owner, args, &ptr_wrapper_array[index].val);
      *(ret) = &ptr_wrapper_array[index].val;

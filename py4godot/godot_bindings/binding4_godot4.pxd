@@ -441,6 +441,7 @@ cdef extern from "c_utils.h":
     void * create_native_ptr(GDExtensionInterface* interface_ptr)
     void create_native_ptr_from_ptr(GDExtensionInterface* interface_ptr, void** from_ptr )
     void exec_method(GDExtensionInterface* interface_ptr, GDExtensionMethodBindPtr method_bind, void * gd_owner, void ** args, void** ret )
+    void run_constructor( GDExtensionPtrConstructor constructor, void** gd_owner, void ** args)
 cdef extern from "Python.h":
     cdef PyObject* PyUnicode_FromString(const char* s);
     cdef  PyObject* PyObject_Str(PyObject *o);
