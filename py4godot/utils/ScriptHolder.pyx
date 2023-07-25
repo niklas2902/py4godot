@@ -10,7 +10,7 @@ cdef class ScriptHolder:
             return self.instances[id]
         return None
     cdef object register_script(self,int id, object script):
-        self. instances[id] = object
+        self. instances[id] = script
     cdef object remove_script(self,int id):
         del self.instances[id]
 

@@ -10,5 +10,3 @@ cdef class Wrapper4(object):
 
     cdef inline GodotObject get_godot_owner(self):
         return self.godot_owner
-
-    cdef object get_script(self)

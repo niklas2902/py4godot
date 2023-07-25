@@ -13,6 +13,8 @@ from py4godot.classes.typed_arrays cimport *
 from py4godot.Instance_data.InstanceData cimport *
 from cpython cimport Py_INCREF, Py_DECREF, PyObject
 from cython.operator cimport dereference
+from py4godot.utils.ScriptHolder cimport *
+
 
 cdef void set_lang(PyLanguage lang):
     global py_language
@@ -58,16 +60,17 @@ cdef class PyScriptExtension(ScriptExtension):
     self.array = None
     Py_INCREF(self.source_code)
 
-  cdef void set_py_source_code(self, str source_code):
+  cdef void set_py_source_code(self,str path, str source_code):
     self.source_code = source_code
     print_error("before exec py_source code")
     result = None
     try:
-        result = exec_class(self.source_code)
+        result = exec_class(self.source_code, path)
         print_error("result:", result)
         if(result != None and (result.gd_class != None or result.gd_tool_class != None)):
             print_error("result not None")
             self.gd_class = result.gd_class if result.gd_class != None else result.gd_tool_class
+            print_error("gd_class:", self.gd_class)
             self.gd_obj = <Wrapper4> self.gd_class()
             self.properties = result.properties
             self.methods = result.methods
@@ -152,6 +155,8 @@ cdef class PyScriptExtension(ScriptExtension):
         instance_ptr = _interface.script_instance_create(&(gd_instance.info), <PyObject*>gd_instance)
         print_error("after instance_create")
         set_gdnative_ptr(<GDExtensionTypePtr*>res, <GDExtensionTypePtr>instance_ptr)
+        get_script_holder().register_script(<int>(&self.gd_obj.godot_owner), self.gd_obj)
+        print_error("gd_obj for script:", self.gd_obj)
     except Exception as e:
         print_error("Exception - instance_create failed because of:"+ str(e))
     print_error("_instance_create-end")

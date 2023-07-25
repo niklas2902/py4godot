@@ -103,7 +103,9 @@ cdef class PyResourceFormatLoader(ResourceFormatLoader):
         #TODO: Use real string length
         py_string = gd_string_to_py_string(source_code)
         print_error("--------source_code:", py_string)
-        script.set_py_source_code(py_string)
+        py_string_path = gd_string_to_py_string(path)
+        print_error("path:", path)
+        script.set_py_source_code(py_string_path, py_string)
 
         #script.source_code = c_string_to_string("test_code")
         constructor_func = gdnative_interface.get_variant_from_type_constructor(GDExtensionVariantType.GDEXTENSION_VARIANT_TYPE_OBJECT)

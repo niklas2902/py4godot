@@ -27,7 +27,7 @@ cdef class PyScriptExtension(ScriptExtension):
   cdef DictionaryArray array
 
   cdef void _init_values(self) # self-defined
-  cdef void set_py_source_code(self, str source_code) #self-defined
+  cdef void set_py_source_code(self, str path, str source_code) #self-defined
   cdef str get_py_source_code(self) #self-defined
 
   cdef void set_language(self, ScriptLanguageExtension language) # self-defined

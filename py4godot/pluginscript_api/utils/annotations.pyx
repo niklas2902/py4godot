@@ -7,6 +7,8 @@ from py4godot.pluginscript_api.utils.SignalDescription cimport *
 from py4godot.pluginscript_api.utils.MethodDescription cimport *
 from py4godot.pluginscript_api.utils.SignalArg cimport *
 
+from importlib.machinery import SourceFileLoader
+
 """annotations used to define all the godot members"""
 """methods = []
 gd_class = None
@@ -20,7 +22,7 @@ class TransferObject():
         self.properties = properties
         self.signals = signals
         self.methods = methods
-def exec_class(source_string):
+def exec_class(source_string, class_name_):
     global  gd_class, properties, signals, methods
     methods = []
     gd_class = None
@@ -31,7 +33,9 @@ def exec_class(source_string):
     print_error("before exec_source_string:", source_string)
     cdef str string = source_string
     try:
-        exec(string)
+        module_name = class_name_.replace("res://", "")+".py"
+        module = SourceFileLoader(class_name_.replace(".py", "").replace("res://", "").replace("/","."),
+        class_name_.replace("res://", "")).load_module()
     except Exception as e:
         print_error("exec_class: Exception happened:", traceback.format_exc())
     print_error("After exec")
@@ -43,6 +47,7 @@ def gdclass(cls):
         global gd_class
         if(gd_class == None):
             gd_class = cls
+            print_error("class:", gd_class)
         else:
             raise Exception("More than one class was marked as gd_class or gd_tool_class in one file")
         return cls
