@@ -83,7 +83,6 @@ void initialize_py4godot(void *userdata, GDExtensionInitializationLevel p_level)
     if (p_level != GDEXTENSION_INITIALIZATION_EDITOR){
         return;
     }
-
     Py_SetProgramName(L"godot");
     Py_SetPythonHome(PYTHONHOME);
     // Initialize interpreter but skip initialization registration of signal handlers
@@ -106,9 +105,6 @@ void initialize_py4godot(void *userdata, GDExtensionInitializationLevel p_level)
         return ;
     }
 
-    gdnative_interface->print_error("test- before- init_py_language", "test", "test",1,1);
-    init_py_language();
-    gdnative_interface->print_error("test-after- init_py_language", "test", "test",1,1);
 
     PyEval_InitThreads();
     if (PyErr_Occurred())
@@ -119,6 +115,10 @@ void initialize_py4godot(void *userdata, GDExtensionInitializationLevel p_level)
 
     // Release the Kraken... er I mean the GIL !
     gilstate = PyEval_SaveThread();
+
+    gdnative_interface->print_error("test- before- init_py_language", "test", "test",1,1);
+    init_py_language();
+    gdnative_interface->print_error("test-after- init_py_language", "test", "test",1,1);
     gdnative_interface->print_error("test10", "test", "test",1,1);
 
 }

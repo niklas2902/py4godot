@@ -3,17 +3,17 @@ from py4godot.events.events import *
 import threading
 from cpython cimport Py_INCREF, Py_DECREF, PyObject
 
-lock = threading.Lock()
+#lock = threading.Lock()
 cdef class EventHolder:
 
     def __init__(self):
         self.events_dict = dict()
     def add_event(self, update_event, addr):
-        with lock:
+        #with lock:
             self.events_dict[addr] = update_event
 
     def notify_event(self, addr, parameter):
-        with lock:
+        #with lock:
             if(addr in self.events_dict.keys()):
                 self.events_dict[addr](parameter)
 

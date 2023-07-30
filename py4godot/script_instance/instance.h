@@ -57,7 +57,7 @@ void init_instance(GDExtensionInterface *p_interface, GDExtensionScriptInstanceI
     p_interface->print_error("init_instance2", "test", "test",1,1);
     native_script_instance->get_owner_func = get_owner;
     native_script_instance->is_placeholder_func = is_placeholder;
-    native_script_instance->set_func = instance_set;
+    native_script_instance->set_func = c_instance_set;
     native_script_instance->get_func = c_instance_get;
     native_script_instance->get_property_list_func = instance_get_property_list;
     native_script_instance->free_property_list_func = instance_free_property_list;
@@ -70,7 +70,7 @@ void init_instance(GDExtensionInterface *p_interface, GDExtensionScriptInstanceI
     if(!is_placeholder){
         native_script_instance->has_method_func = instance_has_method;
     }
-    native_script_instance->call_func = instance_call;
+    native_script_instance->call_func = c_instance_call;
     native_script_instance->notification_func = instance_notification;
     //native_script_instance->to_string_func = instance_to_string;
     native_script_instance-> refcount_incremented_func = instance_ref_count_incremented;

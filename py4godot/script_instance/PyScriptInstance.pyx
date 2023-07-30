@@ -7,6 +7,9 @@ from py4godot.pluginscript_api.utils.PropertyDescription cimport *
 from py4godot.pluginscript_api.utils.MethodDescription cimport *
 from py4godot.core.variant4.Variant4 cimport *
 from libc.stdlib cimport malloc, free
+import threading
+
+lock = threading.Lock()
 
 cdef GDExtensionPropertyInfo * property_infos
 cdef GDExtensionMethodInfo * method_infos
@@ -64,10 +67,13 @@ cdef api GDExtensionBool instance_get(GDExtensionScriptInstanceDataPtr p_instanc
         return 0
     print_error("get_prop:"+str(py_method_name_str))
     if(py_method_name_str != "script"):
-        print_error("before get_val")
-        get_val = getattr(instance.owner,py_method_name_str)
-        print_error("get_val:", get_val)
         try:
+            print_error("before lock")
+            print_error("before get_val")
+            get_val = getattr(instance.owner,py_method_name_str)
+            print_error("get_val:", get_val)
+            if ("position" in py_method_name_str):
+                print_error(get_val.x)
             get_var.init_type(get_val)
         except Exception as e:
             print_error("exception:",e)
