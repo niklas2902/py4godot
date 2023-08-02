@@ -14,7 +14,7 @@ from py4godot.Instance_data.InstanceData cimport *
 from cpython cimport Py_INCREF, Py_DECREF, PyObject
 from cython.operator cimport dereference
 from py4godot.utils.ScriptHolder cimport *
-
+from py4godot.events.EventHolder cimport *
 
 cdef void set_lang(PyLanguage lang):
     global py_language
@@ -165,6 +165,7 @@ cdef class PyScriptExtension(ScriptExtension):
 
   cdef void _placeholder_instance_create(self, Object for_object, GDExtensionTypePtr res):
     print_error("before get_class")
+    get_event_holder().activated = False
     for_object.get_class()
     cdef GDExtensionVariantFromTypeConstructorFunc constructor_func
     cdef Variant var
