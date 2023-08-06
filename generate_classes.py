@@ -36,7 +36,32 @@ singletons = set()
 builtin_classes = set()
 core_classes = dict()
 operator_dict = dict()
-operator_to_method = {"+": "__add__"}
+operator_to_method = {"+": "__add__",
+                      "*": "__mul__",
+                      "-": "__sub__",
+                      "/": "__div__",
+                      "%": "__mod__",
+                      "**": "__pow__",
+                      "==": "__eq__",
+                      "!=": "__ne__",
+                      "<": "__lt__",
+                      "<=": "__le__",
+                      ">": "__gt__",
+                      ">=": "__ge__",
+                    }
+operator_to_variant_operator = {"+":"GDExtensionVariantOperator.GDEXTENSION_VARIANT_OP_ADD",
+                                "*":"GDExtensionVariantOperator.GDEXTENSION_VARIANT_OP_MULTIPLY",
+                                "-":"GDExtensionVariantOperator.GDEXTENSION_VARIANT_OP_SUBTRACT",
+                                "/":"GDExtensionVariantOperator.GDEXTENSION_VARIANT_OP_DIVIDE",
+                                "%":"GDExtensionVariantOperator.GDEXTENSION_VARIANT_OP_MODULE",
+                                "**":"GDExtensionVariantOperator.GDEXTENSION_VARIANT_OP_POWER",
+                                "==":"GDExtensionVariantOperator.GDEXTENSION_VARIANT_OP_EQUAL",
+                                "!=":"GDExtensionVariantOperator.GDEXTENSION_VARIANT_OP_NOT_EQUAL",
+                                "<": "GDExtensionVariantOperator.GDEXTENSION_VARIANT_OP_LESS",
+                                "<=": "GDExtensionVariantOperator.GDEXTENSION_VARIANT_OP_LESS_EQUAL",
+                                ">": "GDExtensionVariantOperator.GDEXTENSION_VARIANT_OP_GREATER",
+                                ">=": "GDExtensionVariantOperator.GDEXTENSION_VARIANT_OP_GREATER_EQUAL",
+                                }
 def generate_import():
     result = \
         """from py4godot.utils.Wrapper4 cimport *
@@ -470,6 +495,7 @@ def generate_method_body_standard(class_, method):
     return result
 
 
+
 def address_ret(method):
     if "return_value" in method.keys() or "return_type" in method.keys():
 
@@ -478,20 +504,25 @@ def address_ret(method):
         else:
             return_type = method["return_type"]
 
-        if return_type in {"int", "float","bool"}:
-            return "&_ret"
-        if return_type == "Transform3D":
-            return "&_ret.godot_owner"
-        if return_type in builtin_classes:
-            return "&(_ret.native_ptr)"
-        if return_type in classes:
-            return "&(_ret.godot_owner)"
-        if return_type == "Variant":
-            return "&(_ret.native_ptr)"
-        if "typedarray" in return_type:
-            return "&(_ret.godot_owner)"
-        return "&_ret"
+        return address_ret_decision(return_type)
     return "&_ret"
+
+
+def address_ret_decision(return_type):
+    if return_type in {"int", "float", "bool"}:
+        return "&_ret"
+    if return_type == "Transform3D":
+        return "&_ret.godot_owner"
+    if return_type in builtin_classes:
+        return "&(_ret.native_ptr)"
+    if return_type in classes:
+        return "&(_ret.godot_owner)"
+    if return_type == "Variant":
+        return "&(_ret.native_ptr)"
+    if "typedarray" in return_type:
+        return "&(_ret.godot_owner)"
+    return "&_ret"
+
 
 def generate_operators(class_):
     if class_["name"] == "Dictionary":
@@ -818,23 +849,75 @@ def get_parameters_operator(operator):
     return "self"
 
 
+def init_return_type(return_type):
+    if(return_type in ("int", "float")):
+        return "0"
+    elif return_type == "bool":
+        return "False"
+    else:
+        return f"{return_type}()"
+
+
+def address_param(target):
+    if target in builtin_classes- {"int", "float", "bool", "Nil"}:
+        return f"(<{target}>other).godot_owner"
+    if target == "int":
+        return "&primitive_val_int"
+    if target == "float":
+        return "&primitive_val_float"
+    if target == "bool":
+        return "&primitive_val_bool"
+    if target == "Nil":
+        return "NULL"
+    return "NULL"
+
+
+def get_instance_type(target):
+    if target != "bool":
+        return target
+    return "type(True)"
+
+
 def generate_operators_for_class(class_name):
     res = ""
-    if class_name in operator_dict.keys() and class_name in "Vector3":
+    if class_name in operator_dict.keys():
         for operator in operator_dict[class_name]:
             if operator in operator_to_method.keys():
+                op = operator_dict[class_name][operator]
                 res += f"{INDENT}def {operator_to_method[operator]}({get_parameters_operator(operator_dict[class_name][operator])}):"
                 res = generate_newline(res)
-                res += f"{INDENT*2}cdef GDExtensionPtrOperatorEvaluator operator_evaluator = {INDENT*2}_interface.variant_get_ptr_operator_evaluator(GDExtensionVariantOperator.GDEXTENSION_VARIANT_OP_ADD, GDExtensionVariantType.GDEXTENSION_VARIANT_TYPE_VECTOR3, GDExtensionVariantType.GDEXTENSION_VARIANT_TYPE_VECTOR3)"
+                res += f"{INDENT * 2}cdef {op.return_type} _ret = {init_return_type(op.return_type)}"
+                res = generate_newline(res)
 
                 res = generate_newline(res)
-                res += f"{INDENT * 2}cdef Vector3 result = Vector3()"
+                res += f"{INDENT * 2}cdef GDExtensionPtrOperatorEvaluator operator_evaluator"
                 res = generate_newline(res)
-                res += f"{INDENT*2}operator_evaluator((<Vector3>self).godot_owner, (<Vector3>other).godot_owner, &result.native_ptr)"
+                res += f"{INDENT * 2}cdef bint handled = False"
                 res = generate_newline(res)
-                res += f"{INDENT*2}result.godot_owner = &result.native_ptr"
+                for target in op.right_type_values:
+
+                    if target in {"float", "int", "bool", "Nil"}:
+                        res += f"{INDENT*2}cdef {target} primitive_val_{target} = <{target}>other"
+                        res = generate_newline(res)
+                    res += f"{INDENT*2}if isinstance(other, {get_instance_type(target)}):"
+                    res = generate_newline(res)
+                    res += f"{INDENT * 3}handled = True"
+                    res = generate_newline(res)
+                    res += f"{INDENT * 3}operator_evaluator = {INDENT * 2}_interface.variant_get_ptr_operator_evaluator({operator_to_variant_operator[operator]}, {generate_variant_type(op.class_)}, {generate_variant_type(target)})"
+                    res = generate_newline(res)
+                    res += f"{INDENT*3}operator_evaluator((<{op.class_}>self).godot_owner, {address_param(target)}, {address_ret_decision(op.return_type)})"
+                    res = generate_newline(res)
+                    if op.return_type in builtin_classes - {"float", "int" , "bool", "Nil"}:
+                        res += f"{INDENT*3}_ret.godot_owner = &_ret.native_ptr"
+                        res = generate_newline(res)
+
+                res += f"{INDENT * 2}if not handled:"
                 res = generate_newline(res)
-                res += f"{INDENT*2}return result"
+
+                res += f"{INDENT * 3}raise Exception(f'type \"'+type(other)+'\" not supported')"
+                res = generate_newline(res)
+                res += f"{INDENT*2}return _ret"
+                res = generate_newline(res)
     res = generate_newline(res)
     return res
 
