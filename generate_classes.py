@@ -19,7 +19,12 @@ class CoreMember:
         self.name = name
         self.type_  = type_
 
-
+class Operator:
+    def __init__(self, class_, operator_string, return_type):
+        self.right_type_values = []
+        self.class_ = class_
+        self.operator_string = operator_string
+        self.return_type = return_type
 IGNORED_CLASSES = {"Nil", "bool", "float", "int"}
 
 ACCEPTED_CLASSES = {"Object", "String"}
@@ -30,6 +35,8 @@ normal_classes = set()
 singletons = set()
 builtin_classes = set()
 core_classes = dict()
+operator_dict = dict()
+operator_to_method = {"+": "__add__"}
 def generate_import():
     result = \
         """from py4godot.utils.Wrapper4 cimport *
@@ -805,6 +812,34 @@ def generate_init(class_):
     return res
 
 
+def get_parameters_operator(operator):
+    if len(operator.right_type_values) > 0:
+        return "self, other"
+    return "self"
+
+
+def generate_operators_for_class(class_name):
+    res = ""
+    if class_name in operator_dict.keys() and class_name in "Vector3":
+        for operator in operator_dict[class_name]:
+            if operator in operator_to_method.keys():
+                res += f"{INDENT}def {operator_to_method[operator]}({get_parameters_operator(operator_dict[class_name][operator])}):"
+                res = generate_newline(res)
+                res += f"{INDENT*2}cdef GDExtensionPtrOperatorEvaluator operator_evaluator = {INDENT*2}_interface.variant_get_ptr_operator_evaluator(GDExtensionVariantOperator.GDEXTENSION_VARIANT_OP_ADD, GDExtensionVariantType.GDEXTENSION_VARIANT_TYPE_VECTOR3, GDExtensionVariantType.GDEXTENSION_VARIANT_TYPE_VECTOR3)"
+
+                res = generate_newline(res)
+                res += f"{INDENT * 2}cdef Vector3 result = Vector3()"
+                res = generate_newline(res)
+                res += f"{INDENT*2}operator_evaluator((<Vector3>self).godot_owner, (<Vector3>other).godot_owner, &result.native_ptr)"
+                res = generate_newline(res)
+                res += f"{INDENT*2}result.godot_owner = &result.native_ptr"
+                res = generate_newline(res)
+                res += f"{INDENT*2}return result"
+    res = generate_newline(res)
+    return res
+
+
+
 def generate_classes(classes, filename, is_core=False):
     res = generate_import()
     res = generate_newline(res)
@@ -839,7 +874,7 @@ def generate_classes(classes, filename, is_core=False):
                 continue
             res += generate_method(class_, method)
             res = generate_newline(res)
-
+        res += generate_operators_for_class(class_["name"])
     if(os.path.exists(filename)):
         with open(filename, "r") as already_existing_file:
             if already_existing_file.read() == res:
@@ -986,6 +1021,17 @@ def generate_special_methods(class_):
 
     return res
 
+def generate_operators_set(class_):
+    for operator in class_["operators"]:
+        print(operator)
+        if not class_["name"] in operator_dict.keys():
+            operator_dict[class_["name"]] = dict()
+        if not operator["name"] in operator_dict[class_["name"]]:
+            operator_dict[class_["name"]][operator["name"]] = Operator(class_["name"], operator["name"], operator["return_type"])
+        if "right_type" in operator.keys():
+            operator_dict[class_["name"]][operator["name"]].right_type_values.append(operator["right_type"])
+
+
 
 classes = set()
 
@@ -1000,6 +1046,8 @@ if __name__ == "__main__":
         native_structs = set([native_struct["name"] for native_struct in obj["native_structures"]])
         singletons = set([singleton["name"] for singleton in obj["singletons"]])
         collect_members(obj)
+        for class_ in obj["builtin_classes"]:
+            generate_operators_set(class_)
         for class_ in obj["classes"]:
             if(not os.path.exists(f"py4godot/classes/{class_['name']}/")):
                 os.mkdir(f"py4godot/classes/{class_['name']}/")
