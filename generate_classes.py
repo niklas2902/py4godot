@@ -261,7 +261,14 @@ def generate_return_statement(method_):
     else:
         ret_val = ReturnType("_ret", method_['return_type'])
     result = ""
-    result += f"{INDENT*2}return _ret"
+    if(ret_val.type not in ("Variant", "String", "StringNmae")):
+        result += f"{INDENT*2}return _ret"
+    elif ret_val.type == "String":
+        result += f"{INDENT * 2}return gd_string_to_py_string(_ret)"
+    elif ret_val.type == "StringName":
+        result += f"{INDENT * 2}return gd_string_name_to_py_string(_ret)"
+    else:
+        result += f"{INDENT*2}return _ret.get_converted_value()"
     return result
 
 def generate_singleton_constructor(classname):
@@ -607,7 +614,12 @@ def generate_member_getter(class_,member):
         res += f"{INDENT * 2}event_holder.add_event(self.set_{member.name}, <int>(&(<VariantTypeWrapper4>_ret).godot_owner))"
         res = generate_newline(res)
     res = generate_newline(res)
-    res += f"{INDENT*2}return _ret"
+    if member.type_  == "String":
+        res += f"{INDENT*2}return gd_string_to_py_string(_ret)"
+    elif member.type_  == "StringName":
+        res += f"{INDENT*2}return gd_string_name_to_py_string(_ret)"
+    else:
+        res += f"{INDENT*2}return _ret"
     res = generate_newline(res)
     return res
 
