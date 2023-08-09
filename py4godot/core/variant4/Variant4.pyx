@@ -280,6 +280,8 @@ cdef class Variant:
                 self.init_callable(self.obj)
             elif isinstance(obj, Projection):
                 self.init_projection(self.obj)
+            elif isinstance(obj, str):
+                self.init_string(c_string_to_string(self.obj.encode("utf-8")))
             else:
                 print_error("new_nil called")
                 print_error("object:",str(obj))

@@ -93,7 +93,7 @@ cdef class PyResourceFormatLoader(ResourceFormatLoader):
         file = FileAccess.open(original_path, FileAccess__ModeFlags.FileAccess__READ);
         if(not file.godot_owner):
             return
-        source_code = file.get_as_text(False)
+        source_code = c_string_to_string(file.get_as_text(False).encode("utf-8"))
         gdnative_interface.object_destroy(file.godot_owner)
 
         print_error("start_try"+str(self.language))
@@ -113,7 +113,7 @@ cdef class PyResourceFormatLoader(ResourceFormatLoader):
         constructor_func(res,<GDExtensionTypePtr>&script.godot_owner)
         print_error("after_calling_constructor")
     except Exception as e:
-        print_error(str(e))
+        print_error("error while loading:"+str(e))
     print_error("_________________end_load___________________")
 
 cdef GDExtensionPtrOperatorEvaluator operator_equal_string_name = gdnative_interface.variant_get_ptr_operator_evaluator(
