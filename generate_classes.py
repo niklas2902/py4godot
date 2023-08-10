@@ -114,7 +114,7 @@ def generate_constructor_args_array(constructor):
         return res
     index = 0
     for arg in constructor["arguments"]:
-        res += f"{INDENT * 2}_args[{index}] = {generate_ret_value_assign(arg)}"
+        res += f"{INDENT * 2}_args[{index}] = {generate_ret_value_assign_constructor(arg)}"
         res = generate_newline(res)
         index += 1
     res = generate_newline(res)
@@ -143,6 +143,7 @@ def generate_variant_type(class_):
         return f"GDExtensionVariantType.GDEXTENSION_VARIANT_TYPE_{convert_camel_case_to_underscore(class_).upper()}"
     else:
         return f"GDExtensionVariantType.GDEXTENSION_VARIANT_TYPE_NIL"
+
 def generate_constructors(class_):
     res = ""
     if "constructors" not in class_.keys():
@@ -408,12 +409,33 @@ def generate_method_headers(mMethod):
         return res
     return ""
 
+
+def generate_native_params(mMethod):
+    if "arguments" not in mMethod.keys():
+        return ""
+    res = ""
+    for arg in mMethod["arguments"]:
+        if arg["type"] == "String":
+            res += f"{INDENT*2}cdef String string_{arg['name']} = c_string_to_string({pythonize_name(arg['name'])}.encode('utf-8'))"
+            res = generate_newline(res)
+        if arg["type"] == "StringName":
+            res += f"{INDENT*2}cdef StringName string_name_{arg['name']} = c_string_to_string_name({pythonize_name(arg['name'])}.encode('utf-8'))"
+            res = generate_newline(res)
+        if arg["type"] == "Variant":
+            res += f"{INDENT*2}cdef Variant variant_{arg['name']} = Variant({pythonize_name(arg['name'])})"
+            res = generate_newline(res)
+    return res
+
+
+
 def generate_method(class_, mMethod):
     res = ""
     args = generate_args(mMethod)
     def_function = f"{INDENT}def {pythonize_name(mMethod['name'])}({args}):"
     res += generate_method_headers(mMethod)
     res += def_function
+    res = generate_newline(res)
+    res += generate_native_params(mMethod)
     res = generate_newline(res)
     if("hash" in mMethod.keys()):
         res += generate_method_body_standard(class_, mMethod)
@@ -424,10 +446,24 @@ def generate_method(class_, mMethod):
 
 
 def generate_ret_value_assign(argument):
+    if argument["type"] == "String":
+        return f"string_{argument['name']}.get_godot_owner()"
+    if argument["type"] == "StringName":
+        return f"string_name_{argument['name']}.get_godot_owner()"
+    elif argument["type"] in classes:
+        return f"{pythonize_name(argument['name'])}.get_godot_owner()"
+    elif argument["type"] == "Variant":
+        return f"variant_{argument['name']}.get_native_ptr()"
+    elif "typedarray" in argument["type"]:
+        return f"{pythonize_name(argument['name'])}.get_godot_owner()"
+    return f"&{pythonize_name(argument['name'])}"
+
+
+def generate_ret_value_assign_constructor(argument):
     if argument["type"] in classes:
         return f"{pythonize_name(argument['name'])}.get_godot_owner()"
     elif argument["type"] == "Variant":
-        return f"{pythonize_name(argument['name'])}.get_native_ptr()"
+        return f"{argument['name']}.get_native_ptr()"
     elif "typedarray" in argument["type"]:
         return f"{pythonize_name(argument['name'])}.get_godot_owner()"
     return f"&{pythonize_name(argument['name'])}"
@@ -681,7 +717,7 @@ def generate_property(property):
     if "setter" in property and property["setter"] != "":
         result += f"{INDENT}@{pythonize_name(property['name'])}.setter"
         result = generate_newline(result)
-        result += f"{INDENT}def {pythonize_name(property['name'])}(self, {untypearray(simplify_type(property['type']))} value):"
+        result += f"{INDENT}def {pythonize_name(property['name'])}(self, {ungodottype(untypearray(simplify_type(property['type'])))} value):"
         result = generate_newline(result)
         result += f"{INDENT * 2}self.{pythonize_name(property['setter'])}(value)"
         result = generate_newline(result)
@@ -704,6 +740,17 @@ def unbitfield_type(arg_type):
         return "int"
     return arg_type
 
+
+def ungodottype(type_):
+    if(type_ == "String"):
+        return "str"
+    if(type_ == "StringName"):
+        return "str"
+    if (type_ == "Variant"):
+        return "object"
+    return type_
+
+
 def generate_args(method_with_args):
     result = "self, "
     if(is_static(method_with_args)):
@@ -713,11 +760,11 @@ def generate_args(method_with_args):
 
     for arg in method_with_args["arguments"]:
         if not arg["type"].startswith("enum::"):
-            result += f"{untypearray(unbitfield_type(arg['type']))} {pythonize_name(arg['name'])}, "
+            result += f"{ungodottype(untypearray(unbitfield_type(arg['type'])))} {pythonize_name(arg['name'])}, "
         else:
             #enums are marked with enum:: . To be able to use this, we have to strip this
             arg_type = arg["type"].replace("enum::", "")
-            result += f"{untypearray(unenumize_type(arg_type))} {pythonize_name(arg['name'])}, "
+            result += f"{ungodottype(untypearray(unenumize_type(arg_type)))} {pythonize_name(arg['name'])}, "
     result = result[:-2]
     return result
 

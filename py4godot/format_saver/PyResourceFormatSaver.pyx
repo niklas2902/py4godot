@@ -39,9 +39,9 @@ cdef class PyResourceFormatSaver(ResourceFormatSaver):
     source = script.source_code
 
     cdef Error error;
-    cdef FileAccess file = FileAccess.open(path, FileAccess__ModeFlags.FileAccess__WRITE);
+    cdef FileAccess file = FileAccess.open(gd_string_to_py_string(path), FileAccess__ModeFlags.FileAccess__WRITE);
 
-    file.store_string(source);
+    file.store_string(gd_string_name_to_py_string(source));
     file.flush()
     gdnative_interface.object_destroy(file.godot_owner)
     set_gdnative_ptr(<GDExtensionTypePtr*> res, <GDExtensionObjectPtr>Error.OK)

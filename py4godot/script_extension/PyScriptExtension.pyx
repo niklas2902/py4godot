@@ -696,6 +696,7 @@ cdef GDExtensionClassCallVirtual get_virtual_func(void *p_userdata, GDExtensionC
     gdnative_interface = get_interface()
     cdef StringName name = StringName()
     name.godot_owner = p_name
+    print_error("function being called:", gd_string_name_to_py_string(name))
 
     if (string_names_equal(func_name__editor_can_reload_from_file, name)):
         return call_virtual__editor_can_reload_from_file_def

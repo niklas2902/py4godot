@@ -28,7 +28,7 @@ cdef class PyResourceFormatLoader(ResourceFormatLoader):
 
   cdef void _init_values(self):
     self.extensions = list()
-    self.py = c_string_to_string("py")
+    self.py = "py"
     Py_INCREF(py)
     cdef String pyw = c_string_to_string("pyw")
     Py_INCREF("pyw")
@@ -46,6 +46,7 @@ cdef class PyResourceFormatLoader(ResourceFormatLoader):
     print_error("get_recognized_extensions_called")
     cdef PackedStringArray gdextensions = PackedStringArray.new_static(res)
     gdextensions.push_back(self.py)
+    print_error("recognized_extensions finished")
 
   cdef _recognize_path(self, String path, StringName type, GDExtensionTypePtr res):
     set_gdnative_ptr(<GDExtensionTypePtr*> res, <GDExtensionObjectPtr>1)
@@ -90,7 +91,9 @@ cdef class PyResourceFormatLoader(ResourceFormatLoader):
     cdef str py_string
     cdef String test = c_string_to_string("test_code")
     try:
-        file = FileAccess.open(original_path, FileAccess__ModeFlags.FileAccess__READ);
+        print_error("before loading file")
+        file = FileAccess.open(gd_string_to_py_string(original_path), FileAccess__ModeFlags.FileAccess__READ);
+        print_error("after loading file")
         if(not file.godot_owner):
             return
         source_code = c_string_to_string(file.get_as_text(False).encode("utf-8"))
@@ -99,7 +102,7 @@ cdef class PyResourceFormatLoader(ResourceFormatLoader):
         print_error("start_try"+str(self.language))
         script.set_language(<ScriptLanguage>self.language)
         print_error("length:", source_code.length())
-        script.set_path(original_path)
+        script.set_path(gd_string_to_py_string(original_path))
         #TODO: Use real string length
         py_string = gd_string_to_py_string(source_code)
         print_error("--------source_code:", py_string)
