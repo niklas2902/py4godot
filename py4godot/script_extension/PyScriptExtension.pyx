@@ -165,7 +165,6 @@ cdef class PyScriptExtension(ScriptExtension):
 
   cdef void _placeholder_instance_create(self, Object for_object, GDExtensionTypePtr res):
     print_error("before get_class")
-    get_event_holder().activated = False
     for_object.get_class()
     cdef GDExtensionVariantFromTypeConstructorFunc constructor_func
     cdef Variant var

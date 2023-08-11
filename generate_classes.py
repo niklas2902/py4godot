@@ -75,9 +75,6 @@ from py4godot.godot_bindings.binding4_godot4 cimport *
 from py4godot.events.EventHolder cimport *
 from libc.stdlib cimport malloc, free
 from cpython cimport Py_INCREF, Py_DECREF, PyObject
-
-cdef EventHolder event_holder = get_event_holder()
-
 def print_error(*objects, sep=' ', end=''):
     cdef str string = ""
     for object in objects:
@@ -647,7 +644,7 @@ def generate_member_getter(class_,member):
     res = generate_newline(res)
     if member.type_ in builtin_classes:
         res = generate_newline(res)
-        res += f"{INDENT * 2}event_holder.add_event(self.set_{member.name}, <int>(&(<VariantTypeWrapper4>_ret).godot_owner))"
+        res += f"{INDENT * 2}get_event_holder().add_event(self.set_{member.name}, <int>(&(<VariantTypeWrapper4>_ret).godot_owner))"
         res = generate_newline(res)
     res = generate_newline(res)
     if member.type_  == "String":
@@ -680,7 +677,7 @@ def generate_member_setter(class_,member):
     res = generate_newline(res)
     if class_ in builtin_classes:
         res = generate_newline(res)
-        res += f"{INDENT * 2}event_holder.notify_event(<int>(&self.godot_owner), self)"
+        res += f"{INDENT * 2}get_event_holder().notify_event(<int>(&self.godot_owner), self)"
         res = generate_newline(res)
     return res
 
@@ -709,7 +706,7 @@ def generate_property(property):
     if "setter" in property and property["setter"] != "":
         if(property["type"] in builtin_classes):
             result = generate_newline(result)
-            result += f"{INDENT * 2}event_holder.add_event(self.{pythonize_name(property['setter'])}, <int>(&(<VariantTypeWrapper4>_ret).godot_owner))"
+            result += f"{INDENT * 2}get_event_holder().add_event(self.{pythonize_name(property['setter'])}, <int>(&(<VariantTypeWrapper4>_ret).godot_owner))"
             result = generate_newline(result)
     result += f"{INDENT * 2}return _ret"
     result = generate_newline(result)
@@ -724,7 +721,7 @@ def generate_property(property):
         result = generate_newline(result)
         if (property["type"] in builtin_classes):
             res = generate_newline(result)
-            res += f"{INDENT * 2}event_holder.notify_event(<int>(&(<VariantTypeWrapper4>self).godot_owner),self)"
+            res += f"{INDENT * 2}get_event_holder().notify_event(<int>(&(<VariantTypeWrapper4>self).godot_owner),self)"
             res = generate_newline(result)
 
     return result

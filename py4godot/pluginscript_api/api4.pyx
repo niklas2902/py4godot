@@ -8,6 +8,7 @@ from py4godot.classes.ResourceLoader.ResourceLoader cimport *
 from py4godot.classes.ResourceSaver.ResourceSaver cimport *
 from py4godot.format_saver.PyResourceFormatSaver cimport *
 from py4godot.format_loader.PyResourceFormatLoader cimport *
+from py4godot.events.EventHolder cimport *
 cdef GDExtensionInterface* _interface = get_interface()
 
 cdef api void init_py_language() with gil:
@@ -19,9 +20,10 @@ cdef api void init_py_language() with gil:
     cdef PyLanguage py_language
     cdef PyResourceFormatLoader py_resource_format_loader
     cdef PyResourceFormatSaver py_resource_format_saver
-
     try:
         print_error("--------------before registering")
+
+        get_event_holder().activated = not engine.is_editor_hint()
         register_class_py_script_extension()
         register_class_py_format_loader()
         register_class_py_format_saver()

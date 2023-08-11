@@ -6,4 +6,5 @@ cdef class EventHolder:
 
     #cdef notify_event(self, int addr)
 
+cdef EventHolder event_holder
 cdef EventHolder get_event_holder()

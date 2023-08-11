@@ -1,5 +1,6 @@
 from py4godot.godot_bindings.binding4_godot4 cimport *
 from py4godot.events.events import *
+from py4godot.classes.Engine.Engine cimport *
 import threading
 from cpython cimport Py_INCREF, Py_DECREF, PyObject
 
@@ -15,10 +16,10 @@ cdef class EventHolder:
                 self.events_dict[addr] = update_event
 
     def notify_event(self, addr, parameter):
-        if self.activated:
-            with lock: #TODO check why this doesn't work in editor
-                if(addr in self.events_dict.keys()):
-                    self.events_dict[addr](parameter)
+            if self.activated:
+                with lock: #TODO check why this doesn't work in editor
+                    if(addr in self.events_dict.keys()):
+                        self.events_dict[addr](parameter)
 
     def test_method(self, a, b):
         pass
