@@ -267,6 +267,7 @@ cdef class PyScriptExtension(ScriptExtension):
         var = Variant(dict)
         gdnative_interface.array_set_typed(self.array.godot_owner, GDExtensionVariantType.GDEXTENSION_VARIANT_TYPE_DICTIONARY,  dictionary_name.godot_owner, var.get_native_ptr());
         for signal in self.signals:
+            print_error(signal.get_var_signal_dict())
             self.array.push_back(signal.get_var_signal_dict())
     except Exception as e:
         print_error(f"An Exception happened(get signal list):{e}")

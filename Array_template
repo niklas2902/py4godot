@@ -127,7 +127,7 @@ cdef class {name}Array(VariantTypeWrapper4):
     cdef GDExtensionCallError _error
     method_to_call(self.godot_owner, &_args[0], &_ret, 1)
 
-  def push_back(self, {name} value):
+  def push_back(self, Variant value):
     cdef GDExtensionTypePtr _args[1]
     _args[0] = value.godot_owner
 
@@ -148,7 +148,7 @@ cdef class {name}Array(VariantTypeWrapper4):
     cdef GDExtensionCallError _error
     method_to_call(self.godot_owner, &_args[0], &_ret, 1)
 
-  def push_front(self, {name} value):
+  def push_front(self, Variant value):
     cdef GDExtensionTypePtr _args[1]
     _args[0] = value.godot_owner
 

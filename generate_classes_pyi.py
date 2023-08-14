@@ -1,6 +1,9 @@
 import json
 import os.path
 
+from generate_classes import  pythonize_boolean_types, unref_type, \
+    unnull_type
+
 INDENT = "  "
 
 
@@ -459,14 +462,26 @@ def generate_args(method_with_args):
 
     for arg in method_with_args["arguments"]:
         if not arg["type"].startswith("enum::"):
-            result += f"{pythonize_name(arg['name'])}:{ungodottype(untypearray(unbitfield_type(arg['type'])))}, "
+            result += f"{pythonize_name(arg['name'])}:{ungodottype(untypearray(unbitfield_type(arg['type'])))}{generate_default_arg(arg,arg['type'])}, "
         else:
             #enums are marked with enum:: . To be able to use this, we have to strip this
             arg_type = arg["type"].replace("enum::", "")
-            result += f"{pythonize_name(arg['name'])}:{ungodottype(untypearray(unenumize_type(arg_type)))} , "
+            result += f"{pythonize_name(arg['name'])}:{ungodottype(untypearray(unenumize_type(arg_type)))} {generate_default_arg(arg,arg['type'])}, "
     result = result[:-2]
     return result
 
+def generate_default_arg(arg, arg_type):
+    set_to_iterate = builtin_classes.union(classes) - {"int", "float", "bool", "Nil"}
+    if "default_value" in arg:
+        if arg_type in set_to_iterate:
+            if arg_type in builtin_classes:
+                return f"= {arg_type}.new0()"
+            else:
+                return f"= {arg_type}.constructor()"
+        else:
+            return f"={pythonize_boolean_types(unref_type(unnull_type(arg['default_value'])))}"
+
+    return ""
 def unenumize_type(type_):
     enum_type = type_.replace("enum::", "")
     type_list = enum_type.split(".")

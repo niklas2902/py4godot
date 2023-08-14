@@ -1,6 +1,8 @@
 import json
 import os.path
 
+from generate_enums import enumize_name
+
 INDENT = "  "
 
 
@@ -36,6 +38,7 @@ singletons = set()
 builtin_classes = set()
 core_classes = dict()
 operator_dict = dict()
+enums = list()
 operator_to_method = {"+": "__add__",
                       "*": "__mul__",
                       "-": "__sub__",
@@ -180,6 +183,7 @@ def generate_constructors(class_):
 
 def generate_class_imports(classes):
     result = "from py4godot.classes.generated4_core cimport *"
+    result = "import py4godot.classes.generated4_core as generated_core"
     result = generate_newline(result)
     for class_ in classes:
         result += f"from py4godot.classes.{class_}.{class_} cimport *"
@@ -424,13 +428,34 @@ def generate_native_params(mMethod):
     return res
 
 
+def generate_default_args(mMethod):
+    res = ""
+    if "arguments" not in mMethod:
+        return ""
+
+    for arg in mMethod["arguments"]:
+        if "default_value" not in arg["type"]:
+            return ""
+        if arg["type"] in {"float", "int", "Nil", "bool"}:
+            continue
+        if not arg["type"].startswith("enum::") and not arg["type"].startswith("typedarray::") and not arg["type"].startswith("bitfield::"):
+            type_ = ungodottype(untypearray(unbitfield_type(arg['type'])))
+            if arg["type"] in builtin_classes:
+                res += f"{INDENT*2}{pythonize_name(arg['name'])} = {arg['type']}.new0()"
+            else:
+                res += f"{INDENT*2}{pythonize_name(arg['name'])} = {arg['type']}.constructor()"
+        res = generate_newline(res)
+    return res
+
 
 def generate_method(class_, mMethod):
     res = ""
-    args = generate_args(mMethod)
+    args = generate_args(class_, mMethod)
     def_function = f"{INDENT}def {pythonize_name(mMethod['name'])}({args}):"
     res += generate_method_headers(mMethod)
     res += def_function
+    res = generate_newline(res)
+    res += generate_default_args(mMethod)
     res = generate_newline(res)
     res += generate_native_params(mMethod)
     res = generate_newline(res)
@@ -748,7 +773,54 @@ def ungodottype(type_):
     return type_
 
 
-def generate_args(method_with_args):
+def unnull_type(value_to_return):
+    if value_to_return == "null":
+        return "None"
+    return value_to_return
+
+
+def pythonize_boolean_types(arg_val):
+    if arg_val == "true":
+        return "True"
+    elif arg_val == "false":
+        return "False"
+    return arg_val
+
+
+def unref_type(arg_val):
+    if("&" in arg_val):
+        return '""'
+    return arg_val
+
+
+def generate_default_constructor_args(values):
+    return values
+
+
+def unnull_arg(default_value, arg_type):
+    if default_value == "" or default_value == "null" or default_value == "{}":
+        return arg_type
+    return default_value
+
+
+def core_import(class_):
+    if class_["name"] in builtin_classes:
+        return ""
+    return "generated_core."
+
+
+def generate_default_arg(class_, arg, arg_type):
+    set_to_iterate = builtin_classes.union(classes) - {"int", "float", "bool", "Nil"}
+    if "default_value" in arg:
+        if arg_type in set_to_iterate:
+            return "= None"
+        else:
+            return f"={pythonize_boolean_types(unref_type(unnull_type(arg['default_value'])))}"
+
+    return ""
+
+
+def generate_args(class_, method_with_args):
     result = "self, "
     if(is_static(method_with_args)):
         result = ""
@@ -757,11 +829,13 @@ def generate_args(method_with_args):
 
     for arg in method_with_args["arguments"]:
         if not arg["type"].startswith("enum::"):
-            result += f"{ungodottype(untypearray(unbitfield_type(arg['type'])))} {pythonize_name(arg['name'])}, "
+            type_ = ungodottype(untypearray(unbitfield_type(arg['type'])))
+            result += f"{type_} {pythonize_name(arg['name'])} {generate_default_arg(class_, arg, type_)}, "
         else:
             #enums are marked with enum:: . To be able to use this, we have to strip this
             arg_type = arg["type"].replace("enum::", "")
-            result += f"{ungodottype(untypearray(unenumize_type(arg_type)))} {pythonize_name(arg['name'])}, "
+            type_ = ungodottype(untypearray(unenumize_type(arg_type)))
+            result += f"{type_} {pythonize_name(arg['name'])} {generate_default_arg(class_, arg, type_)}, "
     result = result[:-2]
     return result
 
@@ -769,7 +843,11 @@ def unenumize_type(type_):
     enum_type = type_.replace("enum::", "")
     type_list = enum_type.split(".")
     if len(type_list) > 1:
-        return type_list[0]+ "__" + type_list[1]
+        #return "int"
+        #TODO: enable later
+        return "int"
+    elif type_ in enums:
+        return "int"
     return type_list[0]
 
 def untypearray(type_):
@@ -915,7 +993,7 @@ def init_return_type(return_type):
 
 
 def address_param(target):
-    if target in builtin_classes- {"int", "float", "bool", "Nil"}:
+    if target in builtin_classes - {"int", "float", "bool", "Nil"}:
         return f"(<{target}>other).godot_owner"
     if target == "int":
         return "&primitive_val_int"
@@ -1180,6 +1258,8 @@ if __name__ == "__main__":
         obj = json.loads(data)
         classes = set([class_['name'] if class_["name"] not in IGNORED_CLASSES else None for class_ in
                        obj['classes'] + obj["builtin_classes"]])
+        for enum_def in obj["global_enums"]:
+            enums.append( f"{enumize_name(enum_def['name'])}")
         builtin_classes = set(class_["name"] for class_ in obj["builtin_classes"])
         normal_classes = set([class_['name'] for class_ in obj['classes']])
         native_structs = set([native_struct["name"] for native_struct in obj["native_structures"]])
