@@ -55,7 +55,7 @@ cdef api GDExtensionBool instance_set(GDExtensionScriptInstanceDataPtr p_instanc
             setattr(instance.owner,py_method_name_str, vector)
 
     except Exception as e:
-        print_error(f"An Exception happened:{e}|owner:{instance.owner}" )
+        error(f"An Exception happened:{e}|owner:{instance.owner}" )
     print_error("after set method")
     return 1
 
@@ -83,7 +83,7 @@ cdef api GDExtensionBool instance_get(GDExtensionScriptInstanceDataPtr p_instanc
                 print_error(get_val.x)
             get_var.init_type(get_val)
         except Exception as e:
-            print_error("exception:",e)
+            error("exception:",e)
     else:
         get_var.init_type(instance.script)
     print_error("finish_get_prop:"+str(py_method_name_str))
@@ -137,7 +137,7 @@ cdef api const GDExtensionMethodInfo * instance_get_method_list(GDExtensionScrip
             (<MethodDescription>(instance.methods[index])).method_info.argument_count,
             (<MethodDescription>(instance.methods[index])).argument_count)
     except Exception as e:
-        print_error("Exception in method_list:", e)
+        error("Exception in method_list:", e)
     return method_infos
 cdef api void instance_free_method_list(GDExtensionScriptInstanceDataPtr p_instance, const GDExtensionMethodInfo *p_list) with gil:
     pass
