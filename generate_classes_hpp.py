@@ -117,20 +117,19 @@ def generate_constructors(class_):
     if "constructors" not in class_.keys():
         return res
     for constructor in class_["constructors"]:
-        res += f"{INDENT}@staticmethod"
-        res = generate_newline(res)
         if constructor["index"] == 0 and class_["name"] == "String":
             #TODO: Remove this behavior. Same problem as VariantTypeWrapper. I don't really understand why you need *args against assertions
-            res += f"{INDENT}def new{constructor['index']}(*args):"
+            res += f"{INDENT}static {class_['name']} new{constructor['index']}(*args);"
         else:
-            res += f"{INDENT}def new{constructor['index']}({generate_constructor_args(constructor)}) -> {class_['name']}:pass"
+            res += f"{INDENT}static {class_['name']} new{constructor['index']}({generate_constructor_args(constructor)});"
         return res
 
 def generate_class_imports(classes):
-    result = '#include "py4godot/classes/generated4_core.h"'
+    result = '#include "py4godot/cppclasses/generated4_core.h"'
     result = generate_newline(result)
+    result += '#include "py4godot/gdextension-api/gdextension_interface.h"'
     for class_ in classes:
-        result += f'#include "py4godot/classes/{class_}/{class_}.h"'
+        result += f'#include "py4godot/cppclasses/{class_}/{class_}.h"'
         result = generate_newline(result)
     return result
 
@@ -172,9 +171,7 @@ def generate_properties(class_):
     return result
 def generate_singleton_constructor(classname):
     res = ""
-    res += f"{INDENT}@staticmethod"
-    res = generate_newline(res)
-    res += f"{INDENT}def get_instance()->{classname}:pass"
+    res += f"{INDENT}static {classname} get_instance();"
     res = generate_newline(res)
     return res
 def generate_construction(class_):
@@ -412,9 +409,9 @@ def generate_default_arg(arg, arg_type):
     if "default_value" in arg:
         if arg_type in set_to_iterate:
             if arg_type in builtin_classes:
-                return f"= {arg_type}.new0()"
+                return f"= {arg_type}::new0()"
             else:
-                return f"= {arg_type}.constructor()"
+                return f"= {arg_type}::constructor()"
         else:
             return f"={pythonize_boolean_types(unref_type(unnull_type(arg['default_value'])))}"
 
@@ -466,7 +463,7 @@ def get_classes_to_import(classes):
 
 def generate_constructor(classname):
     res = ""
-    res += f"{INDENT}{classname}();"
+    res += f"{INDENT}static {classname}::constructor();"
     res = generate_newline(res)
     return res
 
@@ -495,7 +492,7 @@ def generate_classes(classes, filename, is_core=False):
         res += generate_class_imports(get_classes_to_import(classes))
         res = generate_newline(res)
     else:
-        res += '#include "py4godot/classes/Object/Object.h'
+        res += '#include "py4godot/cppclasses/Object/Object.h'
         res = generate_newline(res)
     for class_ in classes:
         if (class_["name"] in IGNORED_CLASSES):
@@ -503,7 +500,7 @@ def generate_classes(classes, filename, is_core=False):
         res = generate_newline(res)
         res += "namespace godot{"
         res = generate_newline(res)
-        res += f"class {class_['name']}({get_base_class(class_)})"+"{"
+        res += f"class {class_['name']}:public {get_base_class(class_)}"+"{"
         res = generate_newline(res)
         res += generate_common_methods(class_)
         res += generate_special_methods(class_)
@@ -534,14 +531,12 @@ def generate_classes(classes, filename, is_core=False):
 
 def generate_dictionary_set_item():
     res = ""
-    res += f"{INDENT}void __setitem__(Variant value, Variant key);"
+    res += f"{INDENT}Variant& operator[](Variant key);"
     res = generate_newline(res)
     return res
-
-
 def generate_dictionary_get_item():
     res = ""
-    res += f"{INDENT}Variant __getitem__(Variantkey);"
+    res += f"{INDENT}const Variant& operator[](Variant key);"
     res = generate_newline(res)
     return res
 
@@ -556,15 +551,59 @@ def generate_special_methods_dictionary():
 
 def generate_array_set_item(class_):
     res = ""
-    res += f"{INDENT}def __setitem__(Variant value,  int index);"
-    res = generate_newline(res)
+    if class_["name"] == "PackedInt32Array":
+        res += f"{INDENT}int& operator[](int index);"
+    elif class_["name"] == "PackedInt64Array":
+        res += f"{INDENT}long& operator[](int index);"
+    elif class_["name"] == "PackedFloat32Array":
+        res += f"{INDENT}float& operator[](int index);"
+    elif class_["name"] == "PackedFloat64Array":
+        res += f"{INDENT}double& operator[](int index);"
+    elif class_["name"] == "PackedBoolArray":
+        res += f"{INDENT}bool& operator[](int index);"
+    elif class_["name"] == "PackedByteArray":
+        res += f"{INDENT}byte& operator[](int index);"
+
+    elif class_["name"] == "PackedColorArray":
+        res += f"{INDENT}Color& operator[](int index);"
+    elif class_["name"] == "PackedVector3Array":
+        res += f"{INDENT}Vector3& operator[](int index);"
+    elif class_["name"] == "PackedVector2Array":
+        res += f"{INDENT}Vector2& operator[](int index);"
+    elif class_["name"] == "PackedStringArray":
+        res += f"{INDENT}String& operator[](int index);"
+    elif class_["name"] == "Array":
+        res += f"{INDENT}Variant& operator[](int index);"
     return res
 
 def generate_array_get_item(class_):
     res = ""
-    res += f"{INDENT}def __getitem__(int index);"
-    res = generate_newline(res)
+    if class_["name"] == "PackedInt32Array":
+        res += f"{INDENT}const int& operator[](int index);"
+    elif class_["name"] == "PackedInt64Array":
+        res += f"{INDENT}const long& operator[](int index);"
+    elif class_["name"] == "PackedFloat32Array":
+        res += f"{INDENT}const float& operator[](int index);"
+    elif class_["name"] == "PackedFloat64Array":
+        res += f"{INDENT}const double& operator[](int index);"
+    elif class_["name"] == "PackedBoolArray":
+        res += f"{INDENT}const bool& operator[](int index);"
+    elif class_["name"] == "PackedByteArray":
+        res += f"{INDENT}const byte& operator[](int index);"
+
+    elif class_["name"] == "PackedColorArray":
+        res += f"{INDENT}const Color& operator[](int index);"
+    elif class_["name"] == "PackedVector3Array":
+        res += f"{INDENT}const Vector3& operator[](int index);"
+    elif class_["name"] == "PackedVector2Array":
+        res += f"{INDENT}const Vector2& operator[](int index);"
+    elif class_["name"] == "PackedStringArray":
+        res += f"{INDENT}const String& operator[](int index);"
+    elif class_["name"] == "Array":
+        res += f"{INDENT}const Array& operator[](int index);"
+
     return res
+
 
 def generate_special_methods_array(class_):
     res = ""
@@ -628,11 +667,9 @@ if __name__ == "__main__":
         for class_ in obj["builtin_classes"]:
             generate_operators_set(class_)
         for class_ in obj["classes"]:
-            if(not os.path.exists(f"py4godot/classes/{class_['name']}/")):
-                os.mkdir(f"py4godot/classes/{class_['name']}/")
-            with open (f"py4godot/classes/{class_['name']}/__init__.py", "w"):
-                pass
-            generate_classes([class_], f"py4godot/classes/{class_['name']}/{class_['name']}.h")
+            if(not os.path.exists(f"py4godot/cppclasses/{class_['name']}/")):
+                os.mkdir(f"py4godot/cppclasses/{class_['name']}/")
+            generate_classes([class_], f"py4godot/cppclasses/{class_['name']}/{class_['name']}.h")
 
-        generate_classes(obj["builtin_classes"], f"py4godot/classes/generated4_core.h", is_core=True)
+        generate_classes(obj["builtin_classes"], f"py4godot/cppclasses/generated4_core.h", is_core=True)
 
