@@ -90,7 +90,7 @@ def generate_constructor_args(constructor):
 
 def generate_constructor_args_array(constructor):
     num_of_constructor_args = len(constructor["arguments"]) if "arguments" in constructor.keys() else 1
-    res = f"{INDENT*2}GDExtensionTypePtr _args[{num_of_constructor_args}]"
+    res = f"{INDENT*2}GDExtensionTypePtr _args[{num_of_constructor_args}];"
     res = generate_newline(res)
     if "arguments" not in constructor.keys():
         return res
@@ -194,7 +194,7 @@ def generate_return_value(method_):
         else:
             result += f"{INDENT * 2}{unbitfield_type(unenumize_type(ret_val.type))} {ret_val.name}"
     else:
-        result += f"{INDENT * 2}GDExtensionTypePtr _ret"
+        result += f"{INDENT * 2}GDExtensionTypePtr _ret;"
     return result
 
 def get_base_class(class_):
@@ -332,11 +332,11 @@ def get_variant_type(class_name):
     return DICT[class_name.lower()]
 def generate_method_bind(current_class, method):
     res = ""
-    res += f"{INDENT * 2}StringName _class_name = c_string_to_string_name('{current_class['name']}')"
+    res += f"{INDENT * 2}StringName _class_name = c_string_to_string_name('{current_class['name']}');"
     res = generate_newline(res)
     res = generate_newline(res)
 
-    res += f"{INDENT * 2}StringName _method_name = c_string_to_string_name('{method['name']}')"
+    res += f"{INDENT * 2}StringName _method_name = c_string_to_string_name('{method['name']}');"
     res = generate_newline(res)
     res = generate_newline(res)
 
@@ -344,11 +344,11 @@ def generate_method_bind(current_class, method):
     if current_class['name'] in builtin_classes:
         res += f"""{INDENT * 2}GDExtensionPtrBuiltInMethod method_to_call = """ + \
                f"""gdnative_interface.variant_get_ptr_builtin_method(GDExtensionVariantType.{get_variant_type(current_class['name'])}, """ + \
-               f"""_method_name.godot_owner, {method['hash']})"""
+               f"""_method_name.godot_owner, {method['hash']});"""
     else:
         res += f"""{INDENT*2}GDExtensionMethodBindPtr method_bind = """ + \
                f"""gdnative_interface.classdb_get_method_bind(_class_name.godot_owner,""" + \
-               f"""_method_name.godot_owner, {method['hash']})"""
+               f"""_method_name.godot_owner, {method['hash']});"""
 
     res = generate_newline(res)
     return res
@@ -389,10 +389,10 @@ def generate_native_params(mMethod):
     res = ""
     for arg in mMethod["arguments"]:
         if arg["type"] == "String":
-            res += f"{INDENT*2}String string_{arg['name']} = c_string_to_string({pythonize_name(arg['name'])}.encode('utf-8'))"
+            res += f"{INDENT*2}String string_{arg['name']} = c_string_to_string({pythonize_name(arg['name'])}.encode('utf-8'));"
             res = generate_newline(res)
         if arg["type"] == "StringName":
-            res += f"{INDENT*2}StringName string_name_{arg['name']} = c_string_to_string_name({pythonize_name(arg['name'])}.encode('utf-8'))"
+            res += f"{INDENT*2}StringName string_name_{arg['name']} = c_string_to_string_name({pythonize_name(arg['name'])}.encode('utf-8'));"
             res = generate_newline(res)
         if arg["type"] == "Variant":
             res += f"{INDENT*2}Variant variant_{arg['name']} = Variant({pythonize_name(arg['name'])})"
@@ -466,11 +466,11 @@ def generate_ret_value_assign_constructor(argument):
 
 def generate_args_array(method):
     if 'arguments' not in method.keys():
-        return f"{INDENT * 2}GDExtensionVariantPtr _args[1]"
-    result = f"{INDENT * 2}GDExtensionTypePtr _args[{len(method['arguments'])}]"
+        return f"{INDENT * 2}GDExtensionVariantPtr _args[1];"
+    result = f"{INDENT * 2}GDExtensionTypePtr _args[{len(method['arguments'])}];"
     result = generate_newline(result)
     for i in range(0, len(method['arguments'])):
-        result += f"{INDENT * 2}_args[{i}] = {generate_ret_value_assign(method['arguments'][i])}"
+        result += f"{INDENT * 2}_args[{i}] = {generate_ret_value_assign(method['arguments'][i])};"
         result = generate_newline(result)
     return result
 
@@ -513,21 +513,16 @@ def generate_method_body_standard(class_, method):
             if ("return_value" in method.keys() and method["return_value"]["type"] in {"Transform3D"}) or \
                 ("return_type" in method.keys() and method["return_type"] in {"Transform3D"}):
                 result += f"{INDENT * 2}exec_method(gdnative_interface, method_bind," \
-                          f" {get_godot_owner(method)}, _args, {address_ret(method)})"
+                          f" {get_godot_owner(method)}, _args, {address_ret(method)});"
                 result = generate_newline(result)
             else:
                 result += f"{INDENT * 2}gdnative_interface.object_method_bind_ptrcall(method_bind," \
-                          f" {get_godot_owner(method)}, _args, {address_ret(method)})"
+                          f" {get_godot_owner(method)}, _args, {address_ret(method)});"
         else:
             result += f"{INDENT * 2}gdnative_interface.object_method_bind_ptrcall(method_bind," \
-                      f" {get_godot_owner(method)}, _args, {address_ret(method)})"
+                      f" {get_godot_owner(method)}, _args, {address_ret(method)});"
 
     if ("return_value" in method.keys() or "return_type" in method.keys()):
-        if ("return_value" in method.keys() and method["return_value"]["type"] in builtin_classes - {"int", "float", "bool", "Transform3D"}) or\
-                ("return_type" in method.keys() and method["return_type"] in builtin_classes - {"int", "float", "bool", "Transform3D"}):
-            result = generate_newline(result)
-            result += f"{INDENT * 2}_ret.godot_owner = &_ret.native_ptr"
-
         result = generate_newline(result)
         result += generate_return_statement(method)
     return result
@@ -629,9 +624,9 @@ def generate_member_getter(class_,member):
     res += f"{INDENT*2}GDExtensionPtrGetter getter = gdnative_interface.variant_get_ptr_getter({generate_variant_type(class_)},_member_name.godot_owner)"
     res = generate_newline(res)
     if member.type_ == "int" or member.type_ == "float" or member.type_ == "double":
-        res += f"{INDENT*2}{member.type_} _ret"
+        res += f"{INDENT*2}{member.type_} _ret;"
     else:
-        res += f"{INDENT * 2}{member.type_} _ret = {member.type_}.new0()"
+        res += f"{INDENT * 2}{member.type_} _ret = {member.type_}.new0();"
     res = generate_newline(res)
     if member.type_ != "int" and member.type_ != "float" and member.type_ != "double":
         res += f"{INDENT * 2}getter(self.godot_owner, _ret.godot_owner)"
@@ -700,7 +695,7 @@ def generate_property(class_, property):
     result = generate_newline(result)
     result += f"{INDENT}{unbitfield_type(unenumize_type((property['type'])))} {class_['name']}::{pythonize_name(property['name'])}()"+"{"
     result = generate_newline(result)
-    result += f"{INDENT * 2}{unbitfield_type(unenumize_type((property['type'])))} _ret = {pythonize_name(property['getter'])}()"
+    result += f"{INDENT * 2}{unbitfield_type(unenumize_type((property['type'])))} _ret = {pythonize_name(property['getter'])}();"
     result = generate_newline(result)
 
     if "setter" in property and property["setter"] != "":
@@ -709,7 +704,7 @@ def generate_property(class_, property):
             #result = generate_newline(result)
             #result += f"{INDENT * 2}get_event_holder().add_event({pythonize_name(property['setter'])}, <int>(&(<VariantTypeWrapper4>_ret).godot_owner))"
             result = generate_newline(result)
-    result += f"{INDENT * 2}return _ret"
+    result += f"{INDENT * 2}return _ret;"
     result = generate_newline(result)
 
     result += INDENT + "}"
@@ -718,7 +713,7 @@ def generate_property(class_, property):
     if "setter" in property and property["setter"] != "":
         result += f"{INDENT}void {class_['name']}::{pythonize_name(property['name'])}({ungodottype(untypearray(simplify_type(property['type'])))} value)"+"{"
         result = generate_newline(result)
-        result += f"{INDENT * 2}{pythonize_name(property['setter'])}(value)"
+        result += f"{INDENT * 2}{pythonize_name(property['setter'])}(value);"
         result = generate_newline(result)
         result = generate_newline(result)
         if (property["type"] in builtin_classes):
@@ -1208,13 +1203,13 @@ def generate_copy_methods(class_name):
     res = ""
     res += f"{INDENT}def copy_from_other(self, {class_name} from_)"+"{"
     res = generate_newline(res)
-    res += f"{INDENT*2}GDExtensionPtrConstructor constructor = _interface.variant_get_ptr_constructor(GDExtensionVariantType.GDEXTENSION_VARIANT_TYPE_{class_name.upper()}, 1)"
+    res += f"{INDENT*2}GDExtensionPtrConstructor constructor = _interface.variant_get_ptr_constructor(GDExtensionVariantType.GDEXTENSION_VARIANT_TYPE_{class_name.upper()}, 1);"
     res = generate_newline(res)
-    res += f"{INDENT*2}GDExtensionTypePtr _args[1]"
+    res += f"{INDENT*2}GDExtensionTypePtr _args[1];"
     res = generate_newline(res)
-    res += f"{INDENT*2}_args[0] = from_.get_godot_owner()"
+    res += f"{INDENT*2}_args[0] = from_.get_godot_owner();"
     res = generate_newline(res)
-    res += f"{INDENT * 2}constructor(self.godot_owner, _args)"
+    res += f"{INDENT * 2}constructor(self.godot_owner, _args);"
     res = generate_newline(res)
     res += "}"
     res = generate_newline(res)

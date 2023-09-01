@@ -68,8 +68,9 @@ operator_to_variant_operator = {"+":"GDExtensionVariantOperator.GDEXTENSION_VARI
 def generate_import():
     result = \
         """#pragma once
-        #include "py4godot/utils/Wrapper4.h"
+#include "py4godot/utils/Wrapper4.h"
 #include "py4godot/utils/VariantTypeWrapper4.h"
+#include "py4godot/cpputils/core_holder.h"
 """
     return result
 
@@ -128,6 +129,7 @@ def generate_class_imports(classes):
     result = '#include "py4godot/cppclasses/generated4_core.h"'
     result = generate_newline(result)
     result += '#include "py4godot/gdextension-api/gdextension_interface.h"'
+    result = generate_newline(result)
     for class_ in classes:
         result += f'#include "py4godot/cppclasses/{class_}/{class_}.h"'
         result = generate_newline(result)
