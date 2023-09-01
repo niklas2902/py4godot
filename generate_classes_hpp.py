@@ -251,11 +251,10 @@ def generate_virtual_return_type(return_type):
     return return_type+"()"
 def is_static(mMethod):
     return mMethod["is_static"]
-def generate_method_headers(mMethod):
+def generate_method_modifiers(mMethod):
     res = ""
     if is_static(mMethod):
-        res = f"{INDENT}@staticmethod"
-        res = generate_newline(res)
+        res = f"{INDENT}static"
         return res
     return ""
 
@@ -281,8 +280,8 @@ def generate_native_params(mMethod):
 def generate_method(class_, mMethod):
     res = ""
     args = generate_args(mMethod)
-    def_function = f"{INDENT}{get_ret_value(mMethod)} {pythonize_name(mMethod['name'])}({args});"
-    res += generate_method_headers(mMethod)
+    def_function = f"{INDENT}{generate_method_modifiers(mMethod)} {get_ret_value(mMethod)} {pythonize_name(mMethod['name'])}({args});"
+    res = generate_newline(res)
     res += def_function
     res = generate_newline(res)
     return res
@@ -479,10 +478,12 @@ def generate_operators_for_class(class_name):
         for operator in operator_dict[class_name]:
             if operator in operator_to_method.keys():
                 op = operator_dict[class_name][operator]
-                res += f"{INDENT}def {operator_to_method[operator]}({get_parameters_operator(operator_dict[class_name][operator])}) -> {op.return_type}: pass"
+                if op.right_type_values:
+                    for right_type in op.right_type_values:
+                        res += f"{INDENT}{op.return_type} {class_name}:: operator{operator_to_method[operator]}({right_type} other);"
+                        res = generate_newline(res)
     res = generate_newline(res)
     return res
-
 
 
 def generate_classes(classes, filename, is_core=False):

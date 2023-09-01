@@ -247,9 +247,7 @@ def generate_return_statement(method_):
 
 def generate_singleton_constructor(classname):
     res = ""
-    res += f"{INDENT}@staticmethod"
-    res = generate_newline(res)
-    res += f"{INDENT}def get_instance()"+"{"
+    res += f"{INDENT}{classname} {classname}::get_instance()"+"{"
     res = generate_newline(res)
 
     res += f"{INDENT * 2}StringName class_name = c_string_to_string_name('{classname}')"
@@ -425,8 +423,7 @@ def generate_default_args(mMethod):
 def generate_method(class_, mMethod):
     res = ""
     args = generate_args(class_, mMethod)
-    def_function = f"{INDENT}{get_ret_value(mMethod)} {pythonize_name(mMethod['name'])}({args})"+"{"
-    res += generate_method_headers(mMethod)
+    def_function = f"{INDENT}{get_ret_value(mMethod)} {class_['name']}::{pythonize_name(mMethod['name'])}({args})"+"{"
     res += def_function
     res = generate_newline(res)
     res += generate_default_args(mMethod)
@@ -555,7 +552,7 @@ def address_ret_decision(return_type):
     if return_type == "Transform3D":
         return "&_ret.godot_owner"
     if return_type in builtin_classes:
-        return "&(_ret.native_ptr)"
+        return "&(_ret.godot_owner)"
     if return_type in classes:
         return "&(_ret.godot_owner)"
     if return_type == "Variant":
@@ -642,8 +639,9 @@ def generate_member_getter(class_,member):
         res += f"{INDENT*2}getter(self.godot_owner, &_ret)"
     res = generate_newline(res)
     if member.type_ in builtin_classes:
-        res = generate_newline(res)
-        res += f"{INDENT * 2}get_event_holder().add_event(self.set_{member.name}, <int>(&(<VariantTypeWrapper4>_ret).godot_owner))"
+        #TODO:enable this again
+        #res = generate_newline(res)
+        #res += f"{INDENT * 2}get_event_holder().add_event(self.set_{member.name}, <int>(&(<VariantTypeWrapper4>_ret).godot_owner))"
         res = generate_newline(res)
     res = generate_newline(res)
     if member.type_  == "String":
@@ -675,8 +673,9 @@ def generate_member_setter(class_,member):
         res += f"{INDENT * 2}setter(self.godot_owner, &value)"
     res = generate_newline(res)
     if class_ in builtin_classes:
-        res = generate_newline(res)
-        res += f"{INDENT * 2}get_event_holder().notify_event(<int>(&self.godot_owner), self)"
+        #TODO: enable this again
+        #res = generate_newline(res)
+        #res += f"{INDENT * 2}get_event_holder().notify_event(<int>(&self.godot_owner), self)"
         res = generate_newline(res)
     res = generate_newline(res)
     res += "}"
@@ -706,8 +705,9 @@ def generate_property(class_, property):
 
     if "setter" in property and property["setter"] != "":
         if(property["type"] in builtin_classes):
-            result = generate_newline(result)
-            result += f"{INDENT * 2}get_event_holder().add_event({pythonize_name(property['setter'])}, <int>(&(<VariantTypeWrapper4>_ret).godot_owner))"
+            #TODO: enable this again
+            #result = generate_newline(result)
+            #result += f"{INDENT * 2}get_event_holder().add_event({pythonize_name(property['setter'])}, <int>(&(<VariantTypeWrapper4>_ret).godot_owner))"
             result = generate_newline(result)
     result += f"{INDENT * 2}return _ret"
     result = generate_newline(result)
@@ -722,8 +722,9 @@ def generate_property(class_, property):
         result = generate_newline(result)
         result = generate_newline(result)
         if (property["type"] in builtin_classes):
-            result = generate_newline(result)
-            result += f"{INDENT * 2}get_event_holder().notify_event(<int>(&(<VariantTypeWrapper4>self).godot_owner),self)"
+            #TODO: enable this again
+            #result = generate_newline(result)
+            #result += f"{INDENT * 2}get_event_holder().notify_event(<int>(&(<VariantTypeWrapper4>self).godot_owner),self)"
             result = generate_newline(result)
         result += INDENT+"}"
         result = generate_newline(result)
@@ -949,10 +950,6 @@ def generate_new_native_ptr(class_):
     return res
 
 
-def get_parameters_operator(operator):
-    if len(operator.right_type_values) > 0:
-        return "self, other"
-    return "self"
 
 
 def init_return_type(return_type):
@@ -990,40 +987,28 @@ def generate_operators_for_class(class_name):
         for operator in operator_dict[class_name]:
             if operator in operator_to_method.keys():
                 op = operator_dict[class_name][operator]
-                res += f"{INDENT}def {operator_to_method[operator]}({get_parameters_operator(operator_dict[class_name][operator])}):"
-                res = generate_newline(res)
-                res += f"{INDENT * 2}{op.return_type} _ret = {init_return_type(op.return_type)}"
-                res = generate_newline(res)
-
-                res = generate_newline(res)
-                res += f"{INDENT * 2}GDExtensionPtrOperatorEvaluator operator_evaluator"
-                res = generate_newline(res)
-                res += f"{INDENT * 2}bint handled = False"
-                res = generate_newline(res)
-                for target in op.right_type_values:
-
-                    if target in {"float", "int", "bool", "Nil"}:
-                        res += f"{INDENT*2}{target} primitive_val_{target} = <{target}>other"
+                if op.right_type_values:
+                    for right_type in op.right_type_values:
+                        res += f"{INDENT}{op.return_type} {class_name}::operator {operator_to_method[operator]}({right_type} other)"+"{"
                         res = generate_newline(res)
-                    res += f"{INDENT*2}if isinstance(other, {get_instance_type(target)}):"
-                    res = generate_newline(res)
-                    res += f"{INDENT * 3}handled = True"
-                    res = generate_newline(res)
-                    res += f"{INDENT * 3}operator_evaluator = {INDENT * 2}_interface.variant_get_ptr_operator_evaluator({operator_to_variant_operator[operator]}, {generate_variant_type(op.class_)}, {generate_variant_type(target)})"
-                    res = generate_newline(res)
-                    res += f"{INDENT*3}operator_evaluator((<{op.class_}>self).godot_owner, {address_param(target)}, {address_ret_decision(op.return_type)})"
-                    res = generate_newline(res)
-                    if op.return_type in builtin_classes - {"float", "int" , "bool", "Nil"}:
-                        res += f"{INDENT*3}_ret.godot_owner = &_ret.native_ptr"
+                        res += f"{INDENT * 2}{op.return_type} _ret = {init_return_type(op.return_type)};"
                         res = generate_newline(res)
 
-                res += f"{INDENT * 2}if not handled:"
-                res = generate_newline(res)
+                        res = generate_newline(res)
+                        res += f"{INDENT * 2}GDExtensionPtrOperatorEvaluator operator_evaluator;"
+                        res = generate_newline(res)
+                        if right_type in {"float", "int", "bool", "Nil"}:
+                            res += f"{INDENT*2}{right_type} primitive_val_{right_type} = other;"
+                        res = generate_newline(res)
+                        res += f"{INDENT * 2}operator_evaluator = {INDENT * 2}_interface.variant_get_ptr_operator_evaluator({operator_to_variant_operator[operator]}, {generate_variant_type(op.class_)}, {generate_variant_type(right_type)});"
+                        res = generate_newline(res)
+                        res += f"{INDENT*2}operator_evaluator(godot_owner, {address_param(right_type)}, {address_ret_decision(op.return_type)});"
+                        res = generate_newline(res)
 
-                res += f"{INDENT * 3}raise Exception(f'type \"'+type(other)+'\" not supported')"
-                res = generate_newline(res)
-                res += f"{INDENT*2}return _ret"
-                res = generate_newline(res)
+                        res += f"{INDENT*2}return _ret;"
+                        res = generate_newline(res)
+                        res +=INDENT + "}"
+                        res = generate_newline(res)
     res = generate_newline(res)
     return res
 
