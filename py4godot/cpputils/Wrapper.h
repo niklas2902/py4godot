@@ -1,13 +1,14 @@
-#include "gdextension_interface.h"
+#pragma once
+#include "py4godot/gdextension-api/gdextension_interface.h"
 class Wrapper{
-    GodotObject godot_owner;
 
     public:
-    void set_godot_owner(self,GodotObject owner) {
+        GDExtensionObjectPtr godot_owner;
+    void set_godot_owner(GDExtensionObjectPtr owner) {
         godot_owner = owner;
     }
 
-    GodotObject get_godot_owner() {
+    GDExtensionObjectPtr get_godot_owner() {
         return godot_owner;
     }
 };

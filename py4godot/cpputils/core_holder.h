@@ -1,4 +1,5 @@
-#include "gdextension_interface.h"
+#pragma once
+#include "py4godot/gdextension-api/gdextension_interface.h"
 
 static GDExtensionInterface* gdnative_interface;
 
