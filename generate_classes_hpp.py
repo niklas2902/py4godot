@@ -65,17 +65,19 @@ operator_to_variant_operator = {"+":"GDExtensionVariantOperator.GDEXTENSION_VARI
                                 ">": "GDExtensionVariantOperator.GDEXTENSION_VARIANT_OP_GREATER",
                                 ">=": "GDExtensionVariantOperator.GDEXTENSION_VARIANT_OP_GREATER_EQUAL",
                                 }
-def generate_import():
+def generate_import(class_name):
     result = \
-        """#pragma once
+        f"""#ifndef {class_name.upper()}_
+#define {class_name.upper()}_
 #include "py4godot/cpputils/Wrapper.h"
 #include "py4godot/cpputils/VariantTypeWrapper.h"
 #include "py4godot/cpputils/core_holder.h"
 #include "py4godot/cppcore/Variant.h"
-#include "py4godot/cppclasses/class_defs.h"
 #include "py4godot/cppenums/cppenums.h"
-
+#ifndef BOOLDEFINED
+#define BOODEFINED
 typedef unsigned char byte;
+#endif
 """
     return result
 
@@ -128,13 +130,8 @@ def generate_constructors(class_):
     return res
 
 def generate_class_imports(classes):
-    result = '#include "py4godot/cppclasses/generated4_core.h"'
+    result = '#include "py4godot/gdextension-api/gdextension_interface.h"'
     result = generate_newline(result)
-    result += '#include "py4godot/gdextension-api/gdextension_interface.h"'
-    result = generate_newline(result)
-    for class_ in classes:
-        result += f'#include "py4godot/cppclasses/{class_}/{class_}.h"'
-        result = generate_newline(result)
     return result
 
 def generate_newline(str_):
@@ -265,7 +262,7 @@ def generate_method_modifiers(mMethod):
 def generate_method(class_, mMethod):
     res = ""
     args = generate_args(mMethod)
-    def_function = f"{INDENT}{generate_method_modifiers(mMethod)} {untypearray(get_ret_value(mMethod))} {pythonize_name(mMethod['name'])}({args});"
+    def_function = f"{INDENT}{generate_method_modifiers(mMethod)} {unenumize_type(untypearray(get_ret_value(mMethod)))} {pythonize_name(mMethod['name'])}({args});"
     res = generate_newline(res)
     res += def_function
     res = generate_newline(res)
@@ -352,7 +349,7 @@ def simplify_type(type):
     return list_types[-1]
 def generate_property(property):
     result = ""
-    result += f"{INDENT}{unbitfield_type(unenumize_type((property['type'])))} prop_get_{pythonize_name(property['name'])}()"+";"
+    result += f"{INDENT}{simplify_type(untypearray(unbitfield_type(unenumize_type((property['type'])))))} prop_get_{pythonize_name(property['name'])}()"+";"
     result = generate_newline(result)
 
     if "setter" in property and property["setter"] != "":
@@ -363,7 +360,7 @@ def generate_property(property):
 
 
 def pythonize_name(name):
-    if name in ("from", "len", "in", "for", "with", "class", "pass", "raise", "global", "char", "default"):
+    if name in ("from", "len", "in", "for", "with", "class", "pass", "raise", "global", "char", "default", "get_interface"):
         return name + "_"
     return name
 
@@ -382,18 +379,21 @@ def generate_args(method_with_args):
 
     for arg in method_with_args["arguments"]:
         if not arg["type"].startswith("enum::"):
-            result += f"{untypearray(unbitfield_type(arg['type']))} {pythonize_name(arg['name'])}, "
+            result += f"{unenumize_type(untypearray(unbitfield_type(arg['type'])))} {pythonize_name(arg['name'])}, "
         else:
             #enums are marked with enum:: . To be able to use this, we have to strip this
             arg_type = arg["type"].replace("enum::", "")
-            result += f"{untypearray(unenumize_type(arg_type))} {pythonize_name(arg['name'])} , "
+            result += f"int {pythonize_name(arg['name'])} , " #TODO: Look over this, enable enums again
     result = result[:-2]
     return result
 def unenumize_type(type_):
+    if "enum::" in type_:
+        return "int" #TODO throw this out when enabling enums
     enum_type = type_.replace("enum::", "")
     type_list = enum_type.split(".")
     if len(type_list) > 1:
-        return type_list[0]+ "__" + type_list[1]
+        return "int"
+        #TODO: enable againreturn type_list[0]+ "__" + type_list[1]
     return type_list[0]
 
 def untypearray(type_):
@@ -466,14 +466,30 @@ def generate_operators_for_class(class_name):
 
 
 def generate_classes(classes, filename, is_core=False):
-    res = generate_import()
+    res = generate_import(filename.split("/")[-1].replace(".h", ""))
     res = generate_newline(res)
+    class_names = [cls["name"] for cls in classes]
+
     if not is_core:
-        res += generate_class_imports(get_classes_to_import(classes))
+        res += f'''
+#include "py4godot/cpputils/utils.h"
+#include "py4godot/cppclasses/generated4_core.h"
+'''
+        for class_ in classes:
+            if ("inherits" in class_.keys()):
+                res += f'#include "py4godot/cppclasses/{class_["inherits"]}/{class_["inherits"]}.h"'
+        #for cls in get_classes_to_import(classes):
+        #    if cls in class_names:
+        #        continue
+        #    res += f'#include "py4godot/cppclasses/{cls}/{cls}.h"'
+        #    res = generate_newline(res)
         res = generate_newline(res)
     else:
+        res += '#include "py4godot/cppclasses/class_defs.h"'
+        res = generate_newline(res)
         res += '#include "py4godot/cppclasses/Object/Object.h"'
         res = generate_newline(res)
+    res = generate_newline(res)
     res += "namespace godot{"
     #for class_ in classes:
     #    res += f"{INDENT}class {class_['name']};"
@@ -493,6 +509,8 @@ def generate_classes(classes, filename, is_core=False):
         res += generate_construction(class_)
         res = generate_newline(res)
         if "methods" not in class_.keys():
+            res += "};"
+            res = generate_newline(res)
             continue
         res += generate_properties(class_)
         res += generate_members_of_class(class_)
@@ -506,6 +524,8 @@ def generate_classes(classes, filename, is_core=False):
         res = generate_newline(res)
         res += "};"
     res += "}"
+    res = generate_newline(res)
+    res += "#endif"
     if(os.path.exists(filename)):
         with open(filename, "r") as already_existing_file:
             if already_existing_file.read() == res:
@@ -613,7 +633,8 @@ if __name__ == "__main__":
 
         generate_classes(obj["builtin_classes"], f"py4godot/cppclasses/generated4_core.h", is_core=True)
 
-        class_defs = "namespace godot{"
+        class_defs = ("#pragma once\n"
+                      "namespace godot{")
         for class_ in (obj["builtin_classes"] + obj["classes"]):
             if class_["name"] in {"Nil", "bool", "float", "int"}:
                 continue

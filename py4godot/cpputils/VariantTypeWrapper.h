@@ -1,24 +1,26 @@
 #pragma once
 #include "py4godot/gdextension-api/gdextension_interface.h"
-class VariantTypeWrapper {
+namespace godot{
+    class VariantTypeWrapper {
 
-public:
-    GDExtensionVariantType variant_type;
-    GDExtensionTypePtr godot_owner;
+    public:
+        GDExtensionVariantType variant_type;
+        GDExtensionTypePtr godot_owner;
 
-    void set_godot_owner(GDExtensionTypePtr owner) {
-        godot_owner = owner;
-    }
+        void set_godot_owner(GDExtensionTypePtr owner) {
+            godot_owner = owner;
+        }
 
-    GDExtensionTypePtr get_godot_owner() {
-        return godot_owner;
-    }
+        GDExtensionTypePtr get_godot_owner() {
+            return godot_owner;
+        }
 
-    void set_variant_type(GDExtensionVariantType variant_type) {
-        variant_type = variant_type;
-    }
+        void set_variant_type(GDExtensionVariantType variant_type) {
+            variant_type = variant_type;
+        }
 
-    GDExtensionVariantType get_variant_type() {
-        return variant_type;
-    }
-};
+        GDExtensionVariantType get_variant_type() {
+            return variant_type;
+        }
+    };
+}

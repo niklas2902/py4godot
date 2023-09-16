@@ -1,6 +1,6 @@
 from Cython.Build import cythonize
 
-cythonize("py4godot/test_bridge.pyx", language_level=3, language="cpp")
+cythonize("py4godot/test_bridge.pyx", language_level=3, language="c++")
 #cythonize("py4godot/core/variant4/Variant4.pyx", language_level=3)
 cythonize("py4godot_core_holder/core_holder.pyx", language_level=3)
 #cythonize("py4godot/classes/*.pyx", language_level=3)

@@ -66,18 +66,23 @@ operator_to_variant_operator = {"+":"GDExtensionVariantOperator::GDEXTENSION_VAR
                                 ">": "GDExtensionVariantOperator::GDEXTENSION_VARIANT_OP_GREATER",
                                 ">=": "GDExtensionVariantOperator::GDEXTENSION_VARIANT_OP_GREATER_EQUAL",
                                 }
-def generate_import(class_name, is_core):
+def generate_import(class_, is_core):
 
     if not is_core:
-        return f'''
-#include "pch.h"
+        res = f'''
 #include "py4godot/cpputils/utils.h"
-#include "py4godot/cppclasses/{class_name}/{class_name}.h"'''
-    else:
-        return (
-            f'#include "pch.h"\n'
-            f'#include "py4godot/cpputils/utils.h"\n'
-                f'#include "py4godot/cppclasses/generated4_core.h"')
+#include "py4godot/cppclasses/generated4_core.h"
+'''
+        for cls in get_classes_to_import([class_]):
+            res += f'#include "py4godot/cppclasses/{cls}/{cls}.h"'
+            res = generate_newline(res)
+        res += f'''#include "py4godot/cppclasses/{class_['name']}/{class_['name']}.h"'''
+        res = generate_newline(res)
+        return res
+
+    result = f'#include "py4godot/cpputils/utils.h"\n'\
+             f'#include "py4godot/cppclasses/generated4_core.h"\n'
+    return result
 
 def generate_constructor_args(constructor):
     result = ""
@@ -342,20 +347,18 @@ def generate_method_bind(current_class, method):
 
 def generate_virtual_return_type(return_type):
     if return_type == "bool":
-        return "false"
-    elif return_type == "int":
-        return "0"
+        return "false;"
+    elif return_type in ("int", "float"):
+        return "0;"
     elif return_type == "String":
-        return "String()"
+        return "String();"
 
-    return return_type+"()"
+    return untypearray(return_type)+"();"
 def generate_method_body_virtual(class_, mMethod):
     res = ""
-    if "return_type" in mMethod.keys():
-        res += f"{INDENT*2}return {generate_virtual_return_type(mMethod['return_type'])};"
-    else:
-        res += f"{INDENT*2}pass"
-    res = generate_newline(res)
+    if "return_value" in mMethod.keys():
+        res += f"{INDENT*2}return {generate_virtual_return_type(mMethod['return_value']['type'])};"
+        res = generate_newline(res)
     return res
 
 def is_static(mMethod):
@@ -392,7 +395,7 @@ def generate_default_args(mMethod):
 def generate_method(class_, mMethod):
     res = ""
     args = generate_args(class_, mMethod)
-    def_function = f"{INDENT}{untypearray(get_ret_value(mMethod))} {class_['name']}::{pythonize_name(mMethod['name'])}({args})"+"{"
+    def_function = f"{INDENT}{unenumize_type(untypearray(get_ret_value(mMethod)))} {class_['name']}::{pythonize_name(mMethod['name'])}({args})"+"{"
     res += def_function
     res = generate_newline(res)
     res += generate_default_args(mMethod)
@@ -471,14 +474,8 @@ def generate_method_body_standard(class_, method):
         result = generate_newline(result)
     else:
         if ("return_value" in method.keys() or "return_type" in method.keys()):
-            if ("return_value" in method.keys() and method["return_value"]["type"] in {"Transform3D"}) or \
-                ("return_type" in method.keys() and method["return_type"] in {"Transform3D"}):
-                result += f"{INDENT * 2}exec_method(get_interface(), method_bind," \
-                          f" {get_godot_owner(method)}, _args, {address_ret(method)});"
-                result = generate_newline(result)
-            else:
-                result += f"{INDENT * 2}get_interface()->object_method_bind_ptrcall(method_bind," \
-                          f" {get_godot_owner(method)}, _args, {address_ret(method)});"
+            result += f"{INDENT * 2}get_interface()->object_method_bind_ptrcall(method_bind," \
+                      f" {get_godot_owner(method)}, _args, {address_ret(method)});"
         else:
             result += f"{INDENT * 2}get_interface()->object_method_bind_ptrcall(method_bind," \
                       f" {get_godot_owner(method)}, _args, {address_ret(method)});"
@@ -645,7 +642,7 @@ def generate_property(class_, property):
     result = ""
     result += f"{INDENT}"
     result = generate_newline(result)
-    result += f"{INDENT}{unbitfield_type(unenumize_type((property['type'])))} {class_['name']}::prop_get{pythonize_name(property['name'])}()"+"{"
+    result += f"{INDENT}{simplify_type(untypearray(unbitfield_type(unenumize_type((property['type'])))))} {class_['name']}::prop_get_{pythonize_name(property['name'])}()"+"{"
     result = generate_newline(result)
     result += f"{INDENT * 2}{unbitfield_type(unenumize_type((property['type'])))} _ret = {pythonize_name(property['getter'])}();"
     result = generate_newline(result)
@@ -680,7 +677,7 @@ def generate_property(class_, property):
 
 
 def pythonize_name(name):
-    if name in ("from", "len", "in", "for", "with", "class", "pass", "raise", "global", "char", "default"):
+    if name in ("from", "len", "in", "for", "with", "class", "pass", "raise", "global", "char", "default", "get_interface"):
         return name + "_"
     return name
 
@@ -738,7 +735,7 @@ def generate_args(class_, method_with_args):
 
     for arg in method_with_args["arguments"]:
         if not arg["type"].startswith("enum::"):
-            type_ = untypearray(unbitfield_type(arg['type']))
+            type_ = unenumize_type(untypearray(unbitfield_type(arg['type'])))
             result += f"{type_} {pythonize_name(arg['name'])}, "
         else:
             #enums are marked with enum:: . To be able to use this, we have to strip this
@@ -896,10 +893,9 @@ def generate_operators_for_class(class_name):
 
 
 def generate_classes(classes, filename, is_core=False):
-    res = generate_import(classes[0]["name"], is_core)
+    res = generate_import(classes[0], is_core)
     res = generate_newline(res)
     res += generate_header_statements()
-    res += "namespace godot {"
     res = generate_newline(res)
     for class_ in classes:
         if (class_["name"] in IGNORED_CLASSES):
@@ -921,8 +917,6 @@ def generate_classes(classes, filename, is_core=False):
             res += generate_method(class_, method)
             res = generate_newline(res)
         res += generate_operators_for_class(class_["name"])
-    res +="}"
-    res = generate_newline(res)
     if(os.path.exists(filename)):
         with open(filename, "r") as already_existing_file:
             if already_existing_file.read() == res:

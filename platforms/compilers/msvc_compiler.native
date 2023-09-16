@@ -1,5 +1,5 @@
 [binaries]
-c = ['cl']
+cpp = ['cl']
 
 [built-in options]]
 c_args = ['/bigobj']

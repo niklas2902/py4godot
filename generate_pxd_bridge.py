@@ -83,13 +83,6 @@ cdef cppclass Error:
     pass
 cdef cppclass Variant:
     pass
-cdef cppclass Wrapper:
-    pass
-cdef cppclass VariantTypeWrapper:
-    pass
-
-cdef cppclass Wrapper:
-    pass
 """
     return result
 
@@ -494,6 +487,20 @@ def generate_operators_for_class(class_name):
 def generate_classes(classes, filename, is_core=False):
     res = generate_import()
     res = generate_newline(res)
+    res += f'cdef extern from "py4godot/cpputils/Wrapper.h" namespace "godot":'
+    res = generate_newline(res)
+    res += f'{INDENT}cdef cppclass Wrapper:'
+    res = generate_newline(res)
+    res += f'{INDENT*2}pass'
+    res = generate_newline(res)
+
+    res += f'cdef extern from "py4godot/cpputils/VariantTypeWrapper.h" namespace "godot":'
+    res = generate_newline(res)
+    res += f'{INDENT}cdef cppclass VariantTypeWrapper:'
+    res = generate_newline(res)
+    res += f'{INDENT * 2}pass'
+    res = generate_newline(res)
+
     for class_ in classes:
         if (class_["name"] in IGNORED_CLASSES):
             continue

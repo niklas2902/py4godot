@@ -62,7 +62,7 @@ def copy_tests(platform):
         copytree(f"build/addons/{platform}", f"{binding_test}/addons/{platform}")
 
 def copy_c_into_cache(platform):
-    l = [i for i in glob.glob("**/*.c", recursive=True) if i.startswith("py4godot") ]
+    l = [i for i in glob.glob("**/*.cpp", recursive=True) if i.startswith("py4godot") ]
     for entry in l:
         dir_path = config_data["build_cache"]+"/"+platform+"/"+entry
         os.makedirs(os.path.dirname(dir_path), exist_ok=True)
