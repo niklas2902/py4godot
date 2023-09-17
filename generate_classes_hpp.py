@@ -508,7 +508,6 @@ def generate_classes(classes, filename, is_core=False):
 
     if not is_core:
         res += f'''
-#include "py4godot/cpputils/utils.h"
 #include "py4godot/cppclasses/generated4_core.h"
 '''
         for class_ in classes:

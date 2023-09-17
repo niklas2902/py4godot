@@ -3,6 +3,7 @@ import os.path
 
 from generate_classes import  pythonize_boolean_types, unref_type, \
     unnull_type
+from generate_classes_hpp import has_native_struct
 
 INDENT = "  "
 
@@ -274,6 +275,8 @@ def generate_method_modifiers(mMethod):
 
 def generate_method(class_, mMethod):
     res = ""
+    if has_native_struct(mMethod):
+        return res
     args = generate_args(mMethod)
     def_function = f"{INDENT*2}{untypearray(get_ret_value(mMethod))} {pythonize_name(mMethod['name'])}({args});"
     res = generate_newline(res)
@@ -399,11 +402,12 @@ def generate_args(method_with_args):
             result += f"{untypearray(unbitfield_type(arg['type']))} {pythonize_name(arg['name'])}, "
         else:
             #enums are marked with enum:: . To be able to use this, we have to strip this
-            arg_type = arg["type"].replace("enum::", "")
-            result += f"{untypearray(unenumize_type(arg_type))} {pythonize_name(arg['name'])} , "
+            result += f"{untypearray(unenumize_type(arg['type']))} {pythonize_name(arg['name'])} , "
     result = result[:-2]
     return result
 def unenumize_type(type_):
+    if "enum" in type_:
+        return "int"
     enum_type = type_.replace("enum::", "")
     type_list = enum_type.split(".")
     if len(type_list) > 1:
