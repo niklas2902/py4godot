@@ -1,7 +1,7 @@
 import json
 import os.path
 
-from generate_classes_hpp import get_ret_value
+from generate_classes_hpp import get_ret_value, has_native_struct
 from generate_enums import enumize_name
 
 INDENT = "  "
@@ -352,12 +352,14 @@ def generate_virtual_return_type(return_type):
         return "0;"
     elif return_type == "String":
         return "String();"
+    elif return_type == "void*":
+        return "nullptr;"
 
     return untypearray(return_type)+"();"
 def generate_method_body_virtual(class_, mMethod):
     res = ""
     if "return_value" in mMethod.keys():
-        res += f"{INDENT*2}return {generate_virtual_return_type(mMethod['return_value']['type'])};"
+        res += f"{INDENT*2}return {generate_virtual_return_type(unenumize_type(mMethod['return_value']['type']))};"
         res = generate_newline(res)
     return res
 
@@ -394,6 +396,8 @@ def generate_default_args(mMethod):
 
 def generate_method(class_, mMethod):
     res = ""
+    if has_native_struct(mMethod):
+        return res
     args = generate_args(class_, mMethod)
     def_function = f"{INDENT}{unenumize_type(untypearray(get_ret_value(mMethod)))} {class_['name']}::{pythonize_name(mMethod['name'])}({args})"+"{"
     res += def_function
@@ -640,11 +644,42 @@ def simplify_type(type):
     return list_types[-1]
 def generate_property(class_, property):
     result = ""
+    if property["name"] == "autoplay":
+        return result
+    if "get_filters" in property["getter"]:
+        return result
+    if "data" in property["name"]:
+        return result
+    if "light_textures" == property["name"]:
+        return result
+    if "camera_attributes" == property["name"]:
+        return result
+    if "get_triangles" in property["getter"]:
+        return result
+    if "right_icon" in property["getter"]:
+        return result
+    if "get_color" in property["getter"]:
+        return result
+    if "get_transform2d_array" in property["getter"]:
+        return result
+    if "get_transform_array" in property["getter"]:
+        return result
+    if "tree_root" == property["name"]:
+        return result
+    if "assigned_animation" == property["name"]:
+        return result
+    if "current_animation" == property["name"]:
+        return result
+    if "packet_sequence" == property["name"]:
+        return result
     result += f"{INDENT}"
     result = generate_newline(result)
     result += f"{INDENT}{simplify_type(untypearray(unbitfield_type(unenumize_type((property['type'])))))} {class_['name']}::prop_get_{pythonize_name(property['name'])}()"+"{"
     result = generate_newline(result)
-    result += f"{INDENT * 2}{unbitfield_type(unenumize_type((property['type'])))} _ret = {pythonize_name(property['getter'])}();"
+    if "index" not in property.keys():
+        result += f"{INDENT * 2}{simplify_type(unbitfield_type(unenumize_type((property['type']))))} _ret = {pythonize_name(property['getter'])}();"
+    else:
+        result += f"{INDENT * 2}{simplify_type(unbitfield_type(unenumize_type((property['type']))))} _ret = {pythonize_name(property['getter'])}({property['index']});"
     result = generate_newline(result)
 
     if "setter" in property and property["setter"] != "":
@@ -662,7 +697,10 @@ def generate_property(class_, property):
     if "setter" in property and property["setter"] != "":
         result += f"{INDENT}void {class_['name']}::prop_set_{pythonize_name(property['name'])}({untypearray(simplify_type(property['type']))} value)"+"{"
         result = generate_newline(result)
-        result += f"{INDENT * 2}{pythonize_name(property['setter'])}(value);"
+        if "index" not in property.keys():
+            result += f"{INDENT * 2}{pythonize_name(property['setter'])}(value);"
+        else:
+            result += f"{INDENT * 2}{pythonize_name(property['setter'])}({property['index']},value);"
         result = generate_newline(result)
         result = generate_newline(result)
         if (property["type"] in builtin_classes):
@@ -677,7 +715,8 @@ def generate_property(class_, property):
 
 
 def pythonize_name(name):
-    if name in ("from", "len", "in", "for", "with", "class", "pass", "raise", "global", "char", "default", "get_interface"):
+    if name in ("from", "len", "in", "for", "with", "class", "pass", "raise", "global", "char", "default",
+                "get_interface", "operator", "enum", "new", "template", "bool"):
         return name + "_"
     return name
 
@@ -908,7 +947,7 @@ def generate_classes(classes, filename, is_core=False):
         res = generate_newline(res)
         if "methods" not in class_.keys():
             continue
-        res += generate_properties(class_)
+        #res += generate_properties(class_)
         res += generate_members_of_class(class_)
         for method in class_["methods"]:
             if native_structs_in_method(method):

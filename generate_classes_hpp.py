@@ -240,16 +240,6 @@ def get_variant_type(class_name):
     }
 
     return DICT[class_name.lower()]
-
-def generate_virtual_return_type(return_type):
-    if return_type == "bool":
-        return "False"
-    elif return_type == "int":
-        return "0"
-    elif return_type == "String":
-        return "String()"
-
-    return return_type+"()"
 def is_static(mMethod):
     return mMethod["is_static"]
 def generate_method_modifiers(mMethod):
@@ -261,12 +251,25 @@ def generate_method_modifiers(mMethod):
 
 def generate_method(class_, mMethod):
     res = ""
+    if has_native_struct(mMethod):
+        return res
     args = generate_args(mMethod)
     def_function = f"{INDENT}{generate_method_modifiers(mMethod)} {unenumize_type(untypearray(get_ret_value(mMethod)))} {pythonize_name(mMethod['name'])}({args});"
     res = generate_newline(res)
     res += def_function
     res = generate_newline(res)
     return res
+
+def has_native_struct(method):
+    if "return_value" in method.keys() or "return_type" in method.keys():
+        if "return_value" in method.keys():
+            if "Glyph" in method["return_value"]["type"]:
+                return True
+        else:
+            if "Glyph*" in method["return_type"] :
+               return True
+    return False
+
 
 def get_ret_value(method):
     if "return_value" in method.keys() or "return_type" in method.keys():
@@ -349,6 +352,38 @@ def simplify_type(type):
     return list_types[-1]
 def generate_property(property):
     result = ""
+    if property["name"] == "autoplay":
+        return result
+    if "get_filters" in property["getter"]:
+        return result
+
+    if "get_triangles" in property["getter"]:
+        return result
+    if "data" in property["name"]:
+        return result
+    if "light_textures" == property["name"]:
+        return result
+    if "camera_attributes" == property["name"]:
+        return result
+    if "right_icon" == property["name"]:
+        return result
+    if "get_color" in property["getter"]:
+        return result
+    if "get_transform2d_array" in property["getter"]:
+        return result
+    if "get_transform_array" in property["getter"]:
+        return result
+    if "tree_root" == property["name"]:
+        return result
+    if "assigned_animation" == property["name"]:
+        return result
+    if "current_animation" == property["name"]:
+        return result
+    if "material" == property["name"]:
+        return result
+    if "packet_sequence" == property["name"]:
+        return result
+
     result += f"{INDENT}{simplify_type(untypearray(unbitfield_type(unenumize_type((property['type'])))))} prop_get_{pythonize_name(property['name'])}()"+";"
     result = generate_newline(result)
 
@@ -360,7 +395,8 @@ def generate_property(property):
 
 
 def pythonize_name(name):
-    if name in ("from", "len", "in", "for", "with", "class", "pass", "raise", "global", "char", "default", "get_interface"):
+    if name in ("from", "len", "in", "for", "with", "class", "pass", "raise", "global", "char", "default",
+                "get_interface", "operator", "enum", "new", "template", "bool"):
         return name + "_"
     return name
 
@@ -512,7 +548,7 @@ def generate_classes(classes, filename, is_core=False):
             res += "};"
             res = generate_newline(res)
             continue
-        res += generate_properties(class_)
+        #res += generate_properties(class_)
         res += generate_members_of_class(class_)
         for method in class_["methods"]:
             if native_structs_in_method(method):
