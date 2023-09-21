@@ -862,9 +862,9 @@ def generate_constructor(classname):
 def generate_new_static(class_):
     res = ""
     if (class_["name"] in builtin_classes):
-        res += f"{INDENT}{class_['name']} {class_['name']}::new_static(GDExtensionTypePtr owner)"+"{"
+        res += f"{INDENT}{class_['name']} {class_['name']}::new_static(GDExtensionTypePtr& owner)"+"{"
     else:
-        res += f"{INDENT}{class_['name']} {class_['name']}::new_static(GDExtensionObjectPtr owner)"+"{"
+        res += f"{INDENT}{class_['name']} {class_['name']}::new_static(GDExtensionObjectPtr& owner)"+"{"
 
     res = generate_newline(res)
     res += f"{INDENT*2}{class_['name']} obj = {class_['name']}();"

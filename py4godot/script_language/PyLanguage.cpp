@@ -126,7 +126,6 @@ GDExtensionClassCreationInfo* creation_info;
     }
 
   void PyLanguage::_validate_path(String path, GDExtensionTypePtr res){
-    *static_cast<uint8_t*>(res) = 1;
   }
 
   void PyLanguage::_create_script(GDExtensionTypePtr res){
@@ -136,7 +135,7 @@ GDExtensionClassCreationInfo* creation_info;
 }
 
   void PyLanguage::_has_named_classes(GDExtensionTypePtr res){
-    *static_cast<uint8_t*>(res) = 0;
+     *static_cast<bool*>(res) = 0;
   }
 
   void PyLanguage::_supports_builtin_mode(GDExtensionTypePtr res){
@@ -196,11 +195,10 @@ GDExtensionClassCreationInfo* creation_info;
   void PyLanguage::_reload_tool_script(Script script, bool soft_reload, GDExtensionTypePtr res){}
 
   void  PyLanguage::_get_recognized_extensions(GDExtensionTypePtr res){
-    /*PackedStringArray extensions = PackedStringArray::new_static(res);
+    PackedStringArray extensions = PackedStringArray::new_static(res);
     extensions.append(c_string_to_string("py"));
     extensions.append(c_string_to_string("pyw"));
     extensions.append(c_string_to_string("pyi"));
-*/
   }
 
   void PyLanguage::_get_public_functions(GDExtensionTypePtr res){}
