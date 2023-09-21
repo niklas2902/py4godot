@@ -2,7 +2,7 @@ import json
 
 builtin_classes = []
 CLASS_NAME = "ScriptLanguageExtension"
-CURRENT_CLASS_NAME = "PyLanguageExtension"
+CURRENT_CLASS_NAME = "PyLanguage"
 def generate_methods(class_):
     for method in class_["methods"]:
         if are_forbidden_types_in_method(method):
@@ -53,7 +53,7 @@ def generate_args_array(method):
     res = ""
     if "arguments" in method.keys():
         for i in range(len(method["arguments"])):
-            res += f"cdef {unvoid_return(untypearray(untypearray(method['arguments'][i]['type'])))} args{i} = {generate_dereference_type(i, untypearray(untypearray(method['arguments'][i]['type'])))}\n    "
+            res += f"{unvoid_return(untypearray(untypearray(method['arguments'][i]['type'])))} args{i} = {generate_dereference_type(i, untypearray(untypearray(method['arguments'][i]['type'])))};\n    "
     return res
 
 def generate_ret_val(method):
@@ -90,11 +90,11 @@ def generate_method_call_args(method):
 
 def generate_dereference_type(index,type_):
     if (type_ in builtin_classes):
-        return f"{type_}.new_static(dereference(p_args + {index}))"
+        return f"{type_}::new_static((p_args + {index}))"
     elif "void" in type_:
-        return f"<object>dereference(p_args + {index})"
+        return f"(p_args + {index})"
     else:
-        return f"<{type_}>dereference(p_args + {index})"
+        return f"*(({type_}*)(p_args + {index}))"
 
 def get_arg_type(type_):
     if "bool" in type_:
@@ -119,34 +119,37 @@ def are_forbidden_types_in_method(method):
 def pregenerate_method(method):
     if("return_value" in method):
         if "void*" in method["return_value"]["type"]:
-            return f"""cdef object obj = <object>pylanguage.{method["name"]}({generate_method_call_args(method)})"""
+            return f"""void* obj = pylanguage->{method["name"]}({generate_method_call_args(method)})"""
     return ""
 
 def generate_binding_for_method(method):
     str = f"""
-cdef void* call_virtual_func_{method['name']}(GDExtensionClassInstancePtr p_instance, GDNativeConstTypePtr *p_args, GDNativeTypePtr r_ret) with gil:
-    cdef {CURRENT_CLASS_NAME} pylanguage = <{CURRENT_CLASS_NAME}> p_instance
+void call_virtual_func_{method['name']}(GDExtensionClassInstancePtr p_instance, const GDExtensionConstTypePtr* p_args, GDExtensionTypePtr r_ret) {{
+    {CURRENT_CLASS_NAME}* pylanguage = static_cast<{CURRENT_CLASS_NAME}*> (p_instance);
     {generate_args_array(method)}
     {pregenerate_method(method)}
+    
     """
     if ("return_value" in method):
         if "void*" in method["return_value"]["type"]:
-            str += f"""cdef {generate_ret_val(method)} ret_val = <void*>obj\n"""
+            str += f""" {generate_ret_val(method)} ret_val = obj\n"""
         else:
-            str += f"""pylanguage.{method["name"]}({generate_method_call_args(method)})\n"""
+            str += f"""pylanguage->{method["name"]}({generate_method_call_args(method)});\n"""
     else:
-        str += f"""pylanguage.{method["name"]}({generate_method_call_args(method)})\n"""
+        str += f"""pylanguage->{method["name"]}({generate_method_call_args(method)});\n"""
     str += generate_set_ret_val(method)
+    str += "}\n"
     str += f"""
-cdef StringName func_name_{method["name"]} = c_string_to_string_name("{method["name"]}")
-cdef GDNativeExtensionClassCallVirtual call_virtual_{method["name"]}_def = <GDNativeExtensionClassCallVirtual>call_virtual_func_{method["name"]}
+StringName func_name_{method["name"]} = c_string_to_string_name("{method["name"]}");
     """
 
     return str
 
+def generate_method_string_name(method):
+    return f'func_name_{method["name"]} = c_string_to_string_name("{method["name"]}")';
 
 if __name__ == "__main__":
-    with open('py4godot/godot-headers/extension_api.json', 'r') as myfile:
+    with open('py4godot/gdextension-api/extension_api.json', 'r') as myfile:
         data = myfile.read()
         obj = json.loads(data)
 
@@ -168,5 +171,11 @@ if __name__ == "__main__":
                     continue
                 else:
                     print(f"""
-    elif (string_names_equal(func_name_{method['name']}, name)):
-        return call_virtual_{method['name']}_def""")
+    else if (string_names_equal(func_name_{method['name']}, name)){{
+        return call_virtual_func_{method['name']};
+    }}""".replace("[", "{").replace("]", "}"))
+            print ("void init_func_names(){")
+            for method in cls["methods"]:
+                if not are_forbidden_types_in_method(method):
+                    print(generate_method_string_name(method))
+            print("}")

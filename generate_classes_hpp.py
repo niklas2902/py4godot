@@ -71,7 +71,6 @@ def generate_import(class_name):
 #define {class_name.upper()}_
 #include "py4godot/cpputils/Wrapper.h"
 #include "py4godot/cpputils/VariantTypeWrapper.h"
-#include "py4godot/cpputils/core_holder.h"
 #include "py4godot/cppcore/Variant.h"
 #include "py4godot/cppenums/cppenums.h"
 #ifndef BOOLDEFINED
@@ -414,8 +413,13 @@ def generate_args(method_with_args):
         return result[:-2]
 
     for arg in method_with_args["arguments"]:
-        if not arg["type"].startswith("enum::"):
+        if not arg["type"].startswith("enum::") and not arg["type"] in builtin_classes:
+            result += f"{unenumize_type(untypearray(unbitfield_type(arg['type'])))}* {pythonize_name(arg['name'])}, "
+        elif arg["type"] in builtin_classes - {"int", "float", "bool", "Nil"}:
+            result += f"{unenumize_type(untypearray(unbitfield_type(arg['type'])))}&& {pythonize_name(arg['name'])}, "
+        elif arg["type"] in {"int", "float", "bool"}:
             result += f"{unenumize_type(untypearray(unbitfield_type(arg['type'])))} {pythonize_name(arg['name'])}, "
+
         else:
             #enums are marked with enum:: . To be able to use this, we have to strip this
             arg_type = arg["type"].replace("enum::", "")

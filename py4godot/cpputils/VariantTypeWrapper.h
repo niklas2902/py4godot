@@ -16,7 +16,7 @@ namespace godot{
         }
 
         void set_variant_type(GDExtensionVariantType variant_type) {
-            variant_type = variant_type;
+            this->variant_type = variant_type;
         }
 
         GDExtensionVariantType get_variant_type() {

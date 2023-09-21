@@ -21,6 +21,8 @@ endif
 if meson.get_compiler('cpp').get_id() == 'msvc'
     add_global_arguments('/bigobj', language : 'cpp')
     add_global_arguments('-d2SSAOptimizer-', language : 'cpp')
+    add_global_arguments('/DEBUG:FULL', language : 'cpp')
+    add_global_arguments('/Z7', language : 'cpp')
 endif
 
 message(meson.current_source_dir())
@@ -31,7 +33,7 @@ if build_machine.system() == 'windows'
     internal_inc = include_directories('py4godot/gdextension-api/', 'py4godot/core', 'py4godot/enums',
     'py4godot/classes', 'py4godot/pluginscript_api', 'py4godot/godot_bindings',
     'py4godot/script_instance', 'py4godot/core/variant4', 'py4godot/cppcore', 'py4godot/cppenums',
-    'py4godot/cppclasses', 'py4godot/cpputils')
+    'py4godot/cppclasses', 'py4godot/cpputils', 'py4godot/script_language', 'py4godot/pluginscript_api')
     glob = run_command('python', files(meson.current_source_dir()+'/meson_scripts/glob_tools.py'))
     glob_cpp = run_command('python', files(meson.current_source_dir()+'/meson_scripts/glob_tools_cpp.py'))
 endif
@@ -49,12 +51,13 @@ godot_program = find_program('godot')
 sources = glob.stdout().strip().split('\n')
 
 cppsources = glob_cpp.stdout().strip().split('\n')
-foreach source : cppsources
-    message(source)
+foreach entry : cppsources
+    message(entry)
 endforeach
-#foreach source : sources
-shared_library('test_bridge',cppsources,
-dependencies:[dep_py], include_directories:internal_inc,name_prefix:'',c_args:extra_args )
+
+shared_library('main',cppsources,
+dependencies:[dep_py], include_directories:internal_inc,name_prefix:'',c_args:extra_args,
+ link_args : ['/DEBUG:FULL'])
 #endforeach
 
 test('test_vector3', godot_program, args : ['--path', 'tests/core/vector3', '--no-window'], workdir:meson.source_root(), timeout:1000, is_parallel:false)

@@ -398,8 +398,12 @@ def generate_args(method_with_args):
         return result[:-2]
 
     for arg in method_with_args["arguments"]:
-        if not arg["type"].startswith("enum::"):
-            result += f"{untypearray(unbitfield_type(arg['type']))} {pythonize_name(arg['name'])}, "
+        if not arg["type"].startswith("enum::") and not arg["type"] in builtin_classes:
+            result += f"{unenumize_type(untypearray(unbitfield_type(arg['type'])))}* {pythonize_name(arg['name'])}, "
+        elif arg["type"] in builtin_classes - {"int", "float", "bool", "Nil"}:
+            result += f"{unenumize_type(untypearray(unbitfield_type(arg['type'])))}&& {pythonize_name(arg['name'])}, "
+        elif arg["type"] in {"int", "float", "bool"}:
+            result += f"{unenumize_type(untypearray(unbitfield_type(arg['type'])))} {pythonize_name(arg['name'])}, "
         else:
             #enums are marked with enum:: . To be able to use this, we have to strip this
             result += f"{untypearray(unenumize_type(arg['type']))} {pythonize_name(arg['name'])} , "

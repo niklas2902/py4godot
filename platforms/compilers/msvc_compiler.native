@@ -2,4 +2,4 @@
 cpp = ['cl']
 
 [built-in options]]
-c_args = ['/bigobj']
+c_args = ['/bigobj', '/DEBUG:FULL', '/Z7']
