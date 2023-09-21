@@ -5,34 +5,39 @@
 #include "py4godot/cppcore/Variant.h"
 #include <cassert>
 
-GDExtensionClassCreationInfo creation_info;
+GDExtensionClassCreationInfo* creation_info;
 
-  PyLanguage PyLanguage::constructor(){
+  PyLanguage* PyLanguage::constructor(){
     PyLanguage* class_ = new PyLanguage();
 
     StringName class_name = c_string_to_string_name("PyLanguage");
 
-    class_->set_godot_owner(_interface->classdb_construct_object(&class_name.godot_owner));
-    _interface->object_set_instance(&class_->godot_owner,&class_name.godot_owner , &class_);
+    class_->godot_owner = _interface->classdb_construct_object(&class_name.godot_owner);
+    _interface->object_set_instance(class_->godot_owner,&class_name.godot_owner , class_);
 
     class_->_init_values();
-    return *class_;
+    main_interface->print_error("constructor", "test", "test", 1, 1);
+    main_interface->print_error(class_->language_name, "test", "test", 1, 1);
+    return class_;
 }
 
   void PyLanguage::_init_values(){
-    language_name = "PyScriptExtension";
+    //language_name = "PyScriptExtension";
     extension = "py";
     keywords = {"if","elif", "else"};
    }
 
   void PyLanguage::_new(GDExtensionTypePtr res){}
-  void PyLanguage::_get_name(GDExtensionTypePtr res){}
+  void PyLanguage::_get_name(GDExtensionTypePtr res){
+  main_interface->print_error("get_name called", "test", "test", 1, 1);
+    main_interface->string_new_with_utf8_chars(res, language_name);
+  }
   void PyLanguage::_init(GDExtensionTypePtr res){}
 
   void PyLanguage::_get_type(GDExtensionTypePtr res){}
 
   void PyLanguage::_get_extension(GDExtensionTypePtr res){
-    _interface->string_new_with_utf8_chars(res, extension);
+    _interface->string_new_with_utf8_chars(res, "py");
   }
 
   void PyLanguage::_finish(GDExtensionTypePtr res){}
@@ -82,12 +87,12 @@ GDExtensionClassCreationInfo creation_info;
   }
 
   void PyLanguage::_get_comment_delimiters(GDExtensionTypePtr res){
-    PackedStringArray array = PackedStringArray::new_static(res);
+    PackedStringArray array = PackedStringArray::new_static(&res);
     array.push_back(c_string_to_string("#"));
   }
 
   void PyLanguage::_get_string_delimiters(GDExtensionTypePtr res){
-    PackedStringArray array = PackedStringArray::new_static(res);
+    PackedStringArray array = PackedStringArray::new_static(&res);
     array.push_back(c_string_to_string("\""));
     array.push_back(c_string_to_string("'"));
     array.push_back(c_string_to_string("'''"));
@@ -191,10 +196,11 @@ GDExtensionClassCreationInfo creation_info;
   void PyLanguage::_reload_tool_script(Script script, bool soft_reload, GDExtensionTypePtr res){}
 
   void  PyLanguage::_get_recognized_extensions(GDExtensionTypePtr res){
-    PackedStringArray extensions = PackedStringArray::new_static(res);
+    /*PackedStringArray extensions = PackedStringArray::new_static(res);
     extensions.append(c_string_to_string("py"));
     extensions.append(c_string_to_string("pyw"));
     extensions.append(c_string_to_string("pyi"));
+*/
   }
 
   void PyLanguage::_get_public_functions(GDExtensionTypePtr res){}
@@ -220,15 +226,16 @@ GDExtensionClassCreationInfo creation_info;
   GDExtensionPtrOperatorEvaluator operator_equal_string_name;
 
 bool string_names_equal(StringName left, StringName right){
-     int8_t ret;
-    operator_equal_string_name(left.godot_owner, right.godot_owner, &ret);
+    uint8_t ret;
+    operator_equal_string_name(&left.godot_owner, &right.godot_owner, &ret);
     return ret != 0;
 }
 
-
+GDExtensionObjectPtr gdnative_object;
 void* create_instance_language(void* userdata){
-     StringName class_name = c_string_to_string_name("ScriptLanguageExtension");
-     GDExtensionObjectPtr gdnative_object = _interface->classdb_construct_object(&class_name.godot_owner);
+    main_interface->print_error("create_instance_language", "test", "test",1,1);
+    StringName class_name = c_string_to_string_name("ScriptLanguageExtension");
+    gdnative_object = _interface->classdb_construct_object(&class_name.godot_owner);
     return gdnative_object;
 }
 
@@ -857,9 +864,14 @@ void call_virtual_func__get_global_class_name(GDExtensionClassInstancePtr p_inst
 
 StringName func_name__get_global_class_name;
 
-GDExtensionClassCallVirtual get_virtual_func(void* p_userdata, GDExtensionConstStringNamePtr p_name) {
-    StringName name = StringName::new_static(const_cast<GDExtensionTypePtr>(p_name));
-
+extern "C"{
+GDExtensionClassCallVirtual get_virtual(void *p_userdata, GDExtensionConstStringNamePtr p_name) {
+    
+    StringName name = StringName::new_static(((void**)const_cast<GDExtensionTypePtr>(p_name))[0]);
+    auto test_str = String::new2(name);
+    const char* c_name_str = gd_string_to_c_string(main_interface, &test_str.godot_owner, test_str.length());
+    main_interface->print_error("c_str:", "test", "test", 1, 1);
+    main_interface->print_error(c_name_str, "test", "test", 1, 1);
     if (string_names_equal(func_name__get_name, name)){
         return call_virtual_func__get_name;
     }
@@ -1072,6 +1084,7 @@ GDExtensionClassCallVirtual get_virtual_func(void* p_userdata, GDExtensionConstS
     assert(false); // There are methods not being handled
     return nullptr;
 }
+}
 
 
 void init_func_names(){
@@ -1156,13 +1169,14 @@ void register_class(){
         GDExtensionClassGetRID get_rid_func;
         void *class_userdata;
     */
-    creation_info.create_instance_func = create_instance_language;
-    creation_info.free_instance_func = free_instance;
-    //creation_info.class_userdata = nullptr;
-    creation_info.get_virtual_func = get_virtual_func;
+    creation_info = new GDExtensionClassCreationInfo();
+    creation_info->create_instance_func = create_instance_language;
+    creation_info->free_instance_func = free_instance;
+    creation_info->class_userdata = creation_info;
+    creation_info->get_virtual_func = get_virtual;
 
     StringName class_name = c_string_to_string_name("PyLanguage");
-     StringName parent_class_name = c_string_to_string_name("ScriptLanguageExtension");
+    StringName parent_class_name = c_string_to_string_name("ScriptLanguageExtension");
 
-    _interface->classdb_register_extension_class(_library, &class_name.godot_owner, &parent_class_name.godot_owner, &creation_info);
+    _interface->classdb_register_extension_class(_library, &class_name.godot_owner, &parent_class_name.godot_owner, creation_info);
 }

@@ -130,12 +130,10 @@ void deinitialize_py4godot(void *userdata, GDExtensionInitializationLevel p_leve
 GDExtensionBool GDN_EXPORT py4godot_init(const GDExtensionInterface *p_interface, const GDExtensionClassLibraryPtr p_library, GDExtensionInitialization *r_initialization)
 {
 
-    p_interface->print_error("start of initialization", "test2", "test3",1,1);
     gdnative_interface = p_interface;
     r_initialization->initialize = initialize_py4godot;
     r_initialization->deinitialize = deinitialize_py4godot;
 
-    p_interface->print_error("start of initialization", "test", "test",1,1);
 
     Py_SetProgramName(L"godot");
     Py_SetPythonHome(PYTHONHOME);

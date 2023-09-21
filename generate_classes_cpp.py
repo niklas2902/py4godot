@@ -459,7 +459,7 @@ def get_args_count(method):
 def get_godot_owner(method):
     if is_static(method):
         return "NULL"
-    return "godot_owner"
+    return "&godot_owner"
 def generate_method_body_standard(class_, method):
     number_arguments = 0
     result = ""

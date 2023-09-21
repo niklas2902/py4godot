@@ -6,12 +6,12 @@
 void register_class();
 namespace godot{
     class PyLanguage:public ScriptLanguageExtension{
-      const char* language_name;
+      const char* language_name = "Python";
       const char* extension;
       std::unordered_set<const char*> keywords;
 
       public:
-          static PyLanguage constructor();
+          static PyLanguage* constructor();
           void _init_values(); //# self-defined
           void _new(GDExtensionTypePtr res);
           void _get_name(GDExtensionTypePtr res);

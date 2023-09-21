@@ -114,7 +114,6 @@ extern "C"{
     GDExtensionBool GDN_EXPORT py4godot_init(GDExtensionInterface *p_interface, const GDExtensionClassLibraryPtr p_library, GDExtensionInitialization *r_initialization)
     {
 
-        p_interface->print_error("start of initialization", "test2", "test3",1,1);
         _interface = p_interface;
         _interface = p_interface;
         main_interface = _interface;
@@ -123,8 +122,6 @@ extern "C"{
         //set_interface(p_interface);
         r_initialization->initialize = initialize_py4godot;
         r_initialization->deinitialize = deinitialize_py4godot;
-
-        p_interface->print_error("start of initialization", "test", "test",1,1);
 
         Py_SetProgramName(L"godot");
         Py_SetPythonHome(PYTHONHOME);
