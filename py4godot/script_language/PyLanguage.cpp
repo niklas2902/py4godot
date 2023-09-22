@@ -1,4 +1,5 @@
 #include "py4godot/script_language/PyLanguage.h"
+#include "py4godot/script_extension/PyScriptExtension.h"
 #include "py4godot/godot_bindings/main.h"
 #include "py4godot/cpputils/utils.h"
 #include "py4godot/cppclasses/Script/Script.h"
@@ -100,9 +101,8 @@ GDExtensionClassCreationInfo* creation_info;
   }
 
   void PyLanguage::_make_template(String template_, String class_name, String base_class_name,GDExtensionTypePtr res){
-    /*cdef py_extension.PyScriptExtension extension_py = py_extension.PyScriptExtension.constructor()
-    Py_INCREF(extension_py)
-    set_gdnative_ptr(<GDExtensionTypePtr*> res, extension_py.godot_owner)*/
+    PyScriptExtension* extension_py = PyScriptExtension::constructor();
+    *((void**)res) = extension_py->godot_owner;
   }
 
   void PyLanguage::_get_built_in_templates(StringName object, GDExtensionTypePtr res){
@@ -229,11 +229,10 @@ bool string_names_equal(StringName left, StringName right){
     return ret != 0;
 }
 
-GDExtensionObjectPtr gdnative_object;
 void* create_instance_language(void* userdata){
     main_interface->print_error("create_instance_language", "test", "test",1,1);
     StringName class_name = c_string_to_string_name("ScriptLanguageExtension");
-    gdnative_object = _interface->classdb_construct_object(&class_name.godot_owner);
+    auto gdnative_object = _interface->classdb_construct_object(&class_name.godot_owner);
     return gdnative_object;
 }
 
@@ -862,14 +861,9 @@ void call_virtual_func__get_global_class_name(GDExtensionClassInstancePtr p_inst
 
 StringName func_name__get_global_class_name;
 
-extern "C"{
 GDExtensionClassCallVirtual get_virtual(void *p_userdata, GDExtensionConstStringNamePtr p_name) {
     
     StringName name = StringName::new_static(((void**)const_cast<GDExtensionTypePtr>(p_name))[0]);
-    auto test_str = String::new2(name);
-    const char* c_name_str = gd_string_to_c_string(main_interface, &test_str.godot_owner, test_str.length());
-    main_interface->print_error("c_str:", "test", "test", 1, 1);
-    main_interface->print_error(c_name_str, "test", "test", 1, 1);
     if (string_names_equal(func_name__get_name, name)){
         return call_virtual_func__get_name;
     }
@@ -1081,7 +1075,6 @@ GDExtensionClassCallVirtual get_virtual(void *p_userdata, GDExtensionConstString
 
     assert(false); // There are methods not being handled
     return nullptr;
-}
 }
 
 
