@@ -416,7 +416,7 @@ def generate_args(method_with_args):
         if not arg["type"].startswith("enum::") and not arg["type"] in builtin_classes:
             result += f"{unenumize_type(untypearray(unbitfield_type(arg['type'])))}* {pythonize_name(arg['name'])}, "
         elif arg["type"] in builtin_classes - {"int", "float", "bool", "Nil"}:
-            result += f"{unenumize_type(untypearray(unbitfield_type(arg['type'])))}&& {pythonize_name(arg['name'])}, "
+            result += f"{unenumize_type(untypearray(unbitfield_type(arg['type'])))}& {pythonize_name(arg['name'])}, "
         elif arg["type"] in {"int", "float", "bool"}:
             result += f"{unenumize_type(untypearray(unbitfield_type(arg['type'])))} {pythonize_name(arg['name'])}, "
 
@@ -483,9 +483,9 @@ def generate_constructor(classname):
 def generate_new_static(class_):
     res = ""
     if (class_["name"] in builtin_classes):
-        res += f"{INDENT}static {class_['name']} new_static(GDExtensionTypePtr& owner);"
+        res += f"{INDENT}static {class_['name']} new_static(GDExtensionTypePtr owner);"
     else:
-        res += f"{INDENT}static {class_['name']} new_static(GDExtensionObjectPtr& owner);"
+        res += f"{INDENT}static {class_['name']} new_static(GDExtensionObjectPtr owner);"
 
     return res
 

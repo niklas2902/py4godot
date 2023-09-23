@@ -90,7 +90,7 @@ def generate_method_call_args(method):
 
 def generate_dereference_type(index,type_):
     if (type_ in builtin_classes):
-        return f"{type_}::new_static((p_args + {index}))"
+        return f"{type_}::new_static(const_cast<GDExtensionStringPtr*>(p_args + {index}))"
     elif "void" in type_:
         return f"(p_args + {index})"
     else:

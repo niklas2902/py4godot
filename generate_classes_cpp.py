@@ -459,7 +459,13 @@ def get_args_count(method):
 def get_godot_owner(method):
     if is_static(method):
         return "NULL"
+    return "godot_owner"
+
+def get_godot_owner_core(method):
+    if is_static(method):
+        return "NULL"
     return "&godot_owner"
+
 def generate_method_body_standard(class_, method):
     number_arguments = 0
     result = ""
@@ -478,7 +484,7 @@ def generate_method_body_standard(class_, method):
     result = generate_newline(result)
 
     if(class_['name'] in builtin_classes):
-        result += f"{INDENT * 2}method_to_call({get_godot_owner(method)}, {get_first_args_native(method)}, {address_ret(method)}, {get_args_count(method)});"
+        result += f"{INDENT * 2}method_to_call({get_godot_owner_core(method)}, {get_first_args_native(method)}, {address_ret(method)}, {get_args_count(method)});"
         result = generate_newline(result)
     else:
         if ("return_value" in method.keys() or "return_type" in method.keys()):
@@ -780,7 +786,7 @@ def generate_args(class_, method_with_args):
         if not arg["type"].startswith("enum::") and not arg["type"] in builtin_classes:
             result += f"{unenumize_type(untypearray(unbitfield_type(arg['type'])))}* {pythonize_name(arg['name'])}, "
         elif arg["type"] in builtin_classes - {"int", "float", "bool", "Nil"}:
-            result += f"{unenumize_type(untypearray(unbitfield_type(arg['type'])))}&& {pythonize_name(arg['name'])}, "
+            result += f"{unenumize_type(untypearray(unbitfield_type(arg['type'])))}& {pythonize_name(arg['name'])}, "
         elif arg["type"] in {"int", "float", "bool"}:
             result += f"{unenumize_type(untypearray(unbitfield_type(arg['type'])))} {pythonize_name(arg['name'])}, "
         else:
@@ -862,9 +868,9 @@ def generate_constructor(classname):
 def generate_new_static(class_):
     res = ""
     if (class_["name"] in builtin_classes):
-        res += f"{INDENT}{class_['name']} {class_['name']}::new_static(GDExtensionTypePtr& owner)"+"{"
+        res += f"{INDENT}{class_['name']} {class_['name']}::new_static(GDExtensionTypePtr owner)"+"{"
     else:
-        res += f"{INDENT}{class_['name']} {class_['name']}::new_static(GDExtensionObjectPtr& owner)"+"{"
+        res += f"{INDENT}{class_['name']} {class_['name']}::new_static(GDExtensionObjectPtr owner)"+"{"
 
     res = generate_newline(res)
     res += f"{INDENT*2}{class_['name']} obj = {class_['name']}();"

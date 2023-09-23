@@ -15,5 +15,6 @@ if __name__=="__main__":
         if(not entry.startswith("build_meson") and not entry.startswith("python_files") and not entry.startswith("build")\
                 and not entry.startswith("venv") and not entry.startswith('tests') and not entry.startswith("meson_cache")):
             if "cppclasses" in entry or "test_bridge.cpp" in entry or "main.cpp" in entry or "PyLanguage.cpp" in entry or \
-                "api.cpp" in entry or "PyScriptExtension.cpp" in entry :
+                "api.cpp" in entry or "PyScriptExtension.cpp" in entry or "PyResourceFormatSaver.cpp" in entry or\
+                    "PyResourceFormatLoader.cpp" in entry:
                 print(entry.lstrip("../"))

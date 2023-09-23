@@ -6,6 +6,7 @@ namespace godot{
     public:
         GDExtensionVariantType variant_type;
         GDExtensionTypePtr godot_owner;
+        void* native_ptr;
 
         void set_godot_owner(GDExtensionTypePtr owner) {
             godot_owner = owner;

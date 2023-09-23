@@ -101,7 +101,7 @@ GDExtensionClassCreationInfo* creation_info;
   }
 
   void PyLanguage::_make_template(String template_, String class_name, String base_class_name,GDExtensionTypePtr res){
-    PyScriptExtension* extension_py = PyScriptExtension::constructor();
+    PyScriptExtension* extension_py = PyScriptExtension::constructor(*this);
     *((void**)res) = extension_py->godot_owner;
   }
 
@@ -116,7 +116,7 @@ GDExtensionClassCreationInfo* creation_info;
     GDExtensionVariantPtr varptr = malloc(sizeof(uint8_t)*8);
     String key = c_string_to_string("valid");
     GDExtensionVariantFromTypeConstructorFunc constructor_func = _interface->get_variant_from_type_constructor(GDExtensionVariantType::GDEXTENSION_VARIANT_TYPE_STRING);
-    constructor_func(varptr,const_cast<GDExtensionTypePtr>(key.godot_owner));
+    constructor_func(varptr,const_cast<GDExtensionTypePtr*>(&key.godot_owner));
 
     uint8_t valid = 1;
     GDExtensionVariantPtr value_var = _interface->dictionary_operator_index(const_cast<GDExtensionTypePtr>(res_dictionary.godot_owner), varptr);
@@ -1168,6 +1168,9 @@ void register_class(){
 
     StringName class_name = c_string_to_string_name("PyLanguage");
     StringName parent_class_name = c_string_to_string_name("ScriptLanguageExtension");
+
+    String test_str = c_string_to_string("test_str");
+    auto length = test_str.length();
 
     _interface->classdb_register_extension_class(_library, &class_name.godot_owner, &parent_class_name.godot_owner, creation_info);
 }
