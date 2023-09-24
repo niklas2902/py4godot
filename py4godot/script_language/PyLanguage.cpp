@@ -23,7 +23,6 @@ GDExtensionClassCreationInfo* creation_info;
 }
 
   void PyLanguage::_init_values(){
-    //language_name = "PyScriptExtension";
     extension = "py";
     keywords = {"if","elif", "else"};
    }
@@ -44,6 +43,7 @@ GDExtensionClassCreationInfo* creation_info;
   void PyLanguage::_finish(GDExtensionTypePtr res){}
 
   void PyLanguage::_get_reserved_words(GDExtensionTypePtr res){
+  /*
     PackedStringArray array = PackedStringArray::new_static(res);
     array.push_back(c_string_to_string("del"));
     array.push_back(c_string_to_string("nonlocal"));
@@ -80,6 +80,7 @@ GDExtensionClassCreationInfo* creation_info;
     array.push_back(c_string_to_string("class"));
     array.push_back(c_string_to_string("is"));
     array.push_back(c_string_to_string("await"));
+    */
   }
   void PyLanguage::_is_control_flow_keyword(String keyword, GDExtensionTypePtr res){
     const char* py_string = gd_string_to_c_string(_interface,keyword.godot_owner, keyword.length());
@@ -88,20 +89,23 @@ GDExtensionClassCreationInfo* creation_info;
   }
 
   void PyLanguage::_get_comment_delimiters(GDExtensionTypePtr res){
-    PackedStringArray array = PackedStringArray::new_static(&res);
+    /*PackedStringArray array = PackedStringArray::new_static(&res);
     array.push_back(c_string_to_string("#"));
+    */
   }
 
   void PyLanguage::_get_string_delimiters(GDExtensionTypePtr res){
+    /*
     PackedStringArray array = PackedStringArray::new_static(&res);
     array.push_back(c_string_to_string("\""));
     array.push_back(c_string_to_string("'"));
     array.push_back(c_string_to_string("'''"));
     array.push_back(c_string_to_string("\"\"\""));
+    */
   }
 
   void PyLanguage::_make_template(String template_, String class_name, String base_class_name,GDExtensionTypePtr res){
-    PyScriptExtension* extension_py = PyScriptExtension::constructor(*this);
+    PyScriptExtension* extension_py = PyScriptExtension::constructor(this);
     *((void**)res) = extension_py->godot_owner;
   }
 
@@ -112,15 +116,14 @@ GDExtensionClassCreationInfo* creation_info;
   }
 
   void PyLanguage::_validate(String script, String path, bool validate_functions, bool validate_errors, bool validate_warnings, bool validate_safe_lines, GDExtensionTypePtr res){
-    Dictionary res_dictionary = Dictionary::new_static(res);
-    GDExtensionVariantPtr varptr = malloc(sizeof(uint8_t)*8);
+    GDExtensionVariantPtr varptr;
     String key = c_string_to_string("valid");
     GDExtensionVariantFromTypeConstructorFunc constructor_func = _interface->get_variant_from_type_constructor(GDExtensionVariantType::GDEXTENSION_VARIANT_TYPE_STRING);
-    constructor_func(varptr,const_cast<GDExtensionTypePtr*>(&key.godot_owner));
+    constructor_func(&varptr,const_cast<GDExtensionTypePtr*>(&key.godot_owner));
 
-    uint8_t valid = 1;
-    GDExtensionVariantPtr value_var = _interface->dictionary_operator_index(const_cast<GDExtensionTypePtr>(res_dictionary.godot_owner), varptr);
-     GDExtensionVariantFromTypeConstructorFunc constructor_func_valid = _interface->get_variant_from_type_constructor(GDExtensionVariantType::GDEXTENSION_VARIANT_TYPE_BOOL);
+    bool valid = true;
+    GDExtensionVariantPtr value_var = _interface->dictionary_operator_index(const_cast<GDExtensionTypePtr>(res), &varptr);
+    GDExtensionVariantFromTypeConstructorFunc constructor_func_valid = _interface->get_variant_from_type_constructor(GDExtensionVariantType::GDEXTENSION_VARIANT_TYPE_BOOL);
 
     constructor_func_valid(value_var, &valid);
     }
@@ -129,9 +132,8 @@ GDExtensionClassCreationInfo* creation_info;
   }
 
   void PyLanguage::_create_script(GDExtensionTypePtr res){
-    //py_extension.PyScriptExtension extension = py_extension.PyScriptExtension.constructor();
-    //res = extension.godot_owner;
-    //print_error("------------create_script-end---------");
+    PyScriptExtension* extension_py = PyScriptExtension::constructor(this);
+    *((void**)res) = extension_py->godot_owner;
 }
 
   void PyLanguage::_has_named_classes(GDExtensionTypePtr res){
@@ -139,9 +141,12 @@ GDExtensionClassCreationInfo* creation_info;
   }
 
   void PyLanguage::_supports_builtin_mode(GDExtensionTypePtr res){
-}
+    *((bool*)res) = false;
+  }
 
-  void PyLanguage::_supports_documentation(GDExtensionTypePtr res){}
+  void PyLanguage::_supports_documentation(GDExtensionTypePtr res){
+  *((bool*)res) = false;
+  }
 
   void PyLanguage::_can_inherit_from_file(GDExtensionTypePtr res){};
 
@@ -195,10 +200,9 @@ GDExtensionClassCreationInfo* creation_info;
   void PyLanguage::_reload_tool_script(Script script, bool soft_reload, GDExtensionTypePtr res){}
 
   void  PyLanguage::_get_recognized_extensions(GDExtensionTypePtr res){
-    PackedStringArray extensions = PackedStringArray::new_static(res);
-    extensions.append(c_string_to_string("py"));
-    extensions.append(c_string_to_string("pyw"));
-    extensions.append(c_string_to_string("pyi"));
+    add_string_to_array(res, c_string_to_string("py"));
+    add_string_to_array(res, c_string_to_string("pyw"));
+    add_string_to_array(res, c_string_to_string("pyi"));
   }
 
   void PyLanguage::_get_public_functions(GDExtensionTypePtr res){}

@@ -12,6 +12,7 @@
 godot::PyLanguage* py_language;
 godot::PyResourceFormatLoader * py_resource_format_loader;
 godot::PyResourceFormatSaver * py_resource_format_saver;
+
 void godot::init_py_language(){
     register_class();
     register_class_script();
@@ -19,7 +20,7 @@ void godot::init_py_language(){
     register_class_saver();
 
     py_language = godot::PyLanguage::constructor();
-    py_resource_format_loader = godot::PyResourceFormatLoader::constructor(*py_language);
+    py_resource_format_loader = godot::PyResourceFormatLoader::constructor(py_language);
     py_resource_format_saver = godot::PyResourceFormatSaver::constructor();
 
     godot::ResourceLoader resource_loader = godot::ResourceLoader::get_instance();

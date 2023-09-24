@@ -15,7 +15,7 @@ bool string_names_equal_loader(StringName left, StringName right){
     operator_equal_string_name_loader(&left.godot_owner, &right.godot_owner, &ret);
     return ret != 0;
 }
-  PyResourceFormatLoader* PyResourceFormatLoader::constructor(PyLanguage language){
+  PyResourceFormatLoader* PyResourceFormatLoader::constructor(PyLanguage* language){
     PyResourceFormatLoader* class_ = new PyResourceFormatLoader();
 
     StringName class_name = c_string_to_string_name("PyResourceFormatLoader");
@@ -36,16 +36,6 @@ void* create_instance_loader(void* userdata){
 void free_instance_loader(void *p_userdata, GDExtensionClassInstancePtr p_instance){}
 
 void PyResourceFormatLoader::_init_values(){}
-
-void PyResourceFormatLoader::add_string_to_array(GDExtensionTypePtr array, String string){
-     GDExtensionTypePtr _args[1];
-    _args[0] = &string.godot_owner;
-    bool _ret;
-    StringName _class_name = c_string_to_string_name("PackedStringArray");
-    StringName _method_name = c_string_to_string_name("push_back");
-    GDExtensionPtrBuiltInMethod method_to_call = _interface->variant_get_ptr_builtin_method(GDExtensionVariantType::GDEXTENSION_VARIANT_TYPE_PACKED_STRING_ARRAY, &_method_name.godot_owner, 816187996);
-    method_to_call(array, &_args[0], &_ret, 1);
-}
 
 void PyResourceFormatLoader::_get_recognized_extensions(GDExtensionTypePtr res){
     add_string_to_array(res, c_string_to_string("py"));
@@ -68,7 +58,6 @@ void PyResourceFormatLoader::_rename_dependencies( String& path, Dictionary& ren
 void PyResourceFormatLoader::_exists( String& path, GDExtensionTypePtr res){}
 void PyResourceFormatLoader::_get_classes_used( String& path, GDExtensionTypePtr res){}
 void PyResourceFormatLoader::_load( String& path, String& original_path, bool use_sub_threads, int cache_mode, GDExtensionTypePtr res){
-    PyScriptExtension* script = PyScriptExtension::constructor(lang);
     GDExtensionVariantFromTypeConstructorFunc constructor_func;
     FileAccess file;
     file = FileAccess::open(path, 1/*Read*/);
@@ -79,12 +68,11 @@ void PyResourceFormatLoader::_load( String& path, String& original_path, bool us
 
     auto source_code = file.get_as_text(false);
     main_interface->object_destroy(file.godot_owner);
-
-    //script->set_path(gd_string_to_py_string(original_path));
-    //script.set_py_source_code(py_string_path, py_string)
+    auto script_extension = PyScriptExtension::constructor(lang);
+    script_extension ->_set_source_code_internal(source_code);
 
     constructor_func = main_interface->get_variant_from_type_constructor(GDExtensionVariantType::GDEXTENSION_VARIANT_TYPE_OBJECT);
-    constructor_func(res,(GDExtensionTypePtr)&script->godot_owner);
+    constructor_func(res,&script_extension->godot_owner);
 }
 
 #pragma region: generated

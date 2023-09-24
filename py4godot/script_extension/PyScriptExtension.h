@@ -2,13 +2,13 @@
 #include "py4godot/gdextension-api/gdextension_interface.h"
 #include "py4godot/cppclasses/ScriptExtension/ScriptExtension.h"
 #include "py4godot/script_language/PyLanguage.h"
+#include "Python.h"
 #include <unordered_set>
 
 void register_class_script();
 namespace godot{
     class PyScriptExtension:public ScriptExtension{
       const char* script_name;
-      //cdef ScriptLanguageExtension language
       const char* source_code;
       /*cdef Wrapper4 gd_obj
       cdef object gd_class
@@ -17,10 +17,12 @@ namespace godot{
       cdef list signals
       cdef DictionaryArray array
       */
-      PyLanguage lang;
+
 
       public:
-          static PyScriptExtension* constructor(PyLanguage language);
+          PyLanguage* lang;
+
+          static PyScriptExtension* constructor(PyLanguage* language);
           void _init_values(); //# self-defined
            void _editor_can_reload_from_file(GDExtensionTypePtr res);
            void _can_instantiate(GDExtensionTypePtr res);
@@ -32,7 +34,7 @@ namespace godot{
            void _placeholder_instance_create( Object& for_object, GDExtensionTypePtr res);
            void _instance_has( Object& object, GDExtensionTypePtr res);
            void _has_source_code(GDExtensionTypePtr res);
-           void _get_source_code(GDExtensionTypePtr res);
+           void _get_source_code(GDExtensionTypePtr& res);
            void _set_source_code( String& code, GDExtensionTypePtr res);
            void _reload( bool keep_state, GDExtensionTypePtr res);
            void _get_documentation(GDExtensionTypePtr res);
@@ -53,5 +55,6 @@ namespace godot{
            void _get_members(GDExtensionTypePtr res);
            void _is_placeholder_fallback_enabled(GDExtensionTypePtr res);
            void _get_rpc_config(GDExtensionTypePtr res);
+           void _set_source_code_internal(String source_code);
     };
 }

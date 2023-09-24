@@ -4,9 +4,11 @@
 #include "py4godot/cpputils/utils.h"
 #include "py4godot/cppclasses/Script/Script.h"
 #include "py4godot/cppcore/Variant.h"
+#include "py4godot/pluginscript_api/api.h"
 #include <cassert>
 
 GDExtensionPtrOperatorEvaluator operator_equal_string_namescript;
+PyScriptExtension extension;
 
 bool string_names_equal_script(StringName left, StringName right){
     uint8_t ret;
@@ -14,7 +16,7 @@ bool string_names_equal_script(StringName left, StringName right){
     return ret != 0;
 }
 
-  PyScriptExtension* PyScriptExtension::constructor(PyLanguage language){
+  PyScriptExtension* PyScriptExtension::constructor(PyLanguage* language){
     PyScriptExtension* class_ = new PyScriptExtension();
 
     StringName class_name = c_string_to_string_name("PyScriptExtension");
@@ -46,30 +48,52 @@ void PyScriptExtension::_instance_create( Object& for_object, GDExtensionTypePtr
 void PyScriptExtension::_placeholder_instance_create( Object& for_object, GDExtensionTypePtr res){}
 void PyScriptExtension::_instance_has( Object& object, GDExtensionTypePtr res){}
 void PyScriptExtension::_has_source_code(GDExtensionTypePtr res){}
-void PyScriptExtension::_get_source_code(GDExtensionTypePtr res){}
+void PyScriptExtension::_get_source_code(GDExtensionTypePtr& res){
+    //main_interface->print_error("get_source_code:", "test", "test",1,1);
+    //main_interface->print_error(this->source_code, "test", "test",1,1);
+
+    main_interface->string_new_with_utf8_chars(res, source_code);
+}
 void PyScriptExtension::_set_source_code( String& code, GDExtensionTypePtr res){}
 void PyScriptExtension::_reload( bool keep_state, GDExtensionTypePtr res){}
 void PyScriptExtension::_get_documentation(GDExtensionTypePtr res){}
-void PyScriptExtension::_has_method( StringName& method, GDExtensionTypePtr res){}
-void PyScriptExtension::_get_method_info( StringName& method, GDExtensionTypePtr res){}
-void PyScriptExtension::_is_tool(GDExtensionTypePtr res){}
-void PyScriptExtension::_is_valid(GDExtensionTypePtr res){}
-void PyScriptExtension::_get_language(GDExtensionTypePtr res){
-    *((GDExtensionTypePtr*)res) = lang.godot_owner;
+void PyScriptExtension::_has_method( StringName& method, GDExtensionTypePtr res){
+    *static_cast<bool*>(res) = false;
 }
-void PyScriptExtension::_has_script_signal( StringName& signal, GDExtensionTypePtr res){}
+void PyScriptExtension::_get_method_info( StringName& method, GDExtensionTypePtr res){
+}
+void PyScriptExtension::_is_tool(GDExtensionTypePtr res){
+    *static_cast<bool*>(res) = false;
+}
+void PyScriptExtension::_is_valid(GDExtensionTypePtr res){
+    *static_cast<bool*>(res) = false;
+}
+void PyScriptExtension::_get_language(GDExtensionTypePtr res){
+    *((GDExtensionTypePtr*)res) = lang->godot_owner;
+}
+void PyScriptExtension::_has_script_signal( StringName& signal, GDExtensionTypePtr res){
+    *static_cast<bool*>(res) = false;
+}
 void PyScriptExtension::_get_script_signal_list(GDExtensionTypePtr res){}
-void PyScriptExtension::_has_property_default_value( StringName& property, GDExtensionTypePtr res){}
+void PyScriptExtension::_has_property_default_value( StringName& property, GDExtensionTypePtr res){
+    *static_cast<bool*>(res) = false;
+}
 void PyScriptExtension::_get_property_default_value( StringName& property, GDExtensionTypePtr res){}
 void PyScriptExtension::_update_exports(GDExtensionTypePtr res){}
 void PyScriptExtension::_get_script_method_list(GDExtensionTypePtr res){}
 void PyScriptExtension::_get_script_property_list(GDExtensionTypePtr res){}
-void PyScriptExtension::_get_member_line( StringName& member, GDExtensionTypePtr res){}
+void PyScriptExtension::_get_member_line( StringName& member, GDExtensionTypePtr res){
+    *static_cast<int*>(res) = 0;
+}
 void PyScriptExtension::_get_constants(GDExtensionTypePtr res){}
 void PyScriptExtension::_get_members(GDExtensionTypePtr res){}
-void PyScriptExtension::_is_placeholder_fallback_enabled(GDExtensionTypePtr res){}
+void PyScriptExtension::_is_placeholder_fallback_enabled(GDExtensionTypePtr res){
+    *static_cast<bool*>(res) = false;
+}
 void PyScriptExtension::_get_rpc_config(GDExtensionTypePtr res){}
-
+void PyScriptExtension::_set_source_code_internal(String source_code){
+    this->source_code = gd_string_to_c_string(main_interface, &source_code.godot_owner, source_code.length());
+}
 namespace script{
 void call_virtual_func__editor_can_reload_from_file(GDExtensionClassInstancePtr p_instance, const GDExtensionConstTypePtr* p_args, GDExtensionTypePtr r_ret) {
     PyScriptExtension* pylanguage = static_cast<PyScriptExtension*> (p_instance);

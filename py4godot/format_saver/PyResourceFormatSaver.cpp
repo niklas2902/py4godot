@@ -3,6 +3,7 @@
 #include "py4godot/cpputils/utils.h"
 #include "py4godot/cppclasses/Script/Script.h"
 #include "py4godot/cppcore/Variant.h"
+#include "py4godot/cppclasses/FileAccess/FileAccess.h"
 #include <cassert>
 
  GDExtensionPtrOperatorEvaluator operator_equal_string_name_save;
@@ -33,10 +34,28 @@ void free_instance_saver(void *p_userdata, GDExtensionClassInstancePtr p_instanc
 
 void PyResourceFormatSaver::_init_values(){}
 
-  void PyResourceFormatSaver::_save( Resource& resource, String& path, int flags, GDExtensionTypePtr res){}
+  void PyResourceFormatSaver::_save( Resource& resource, String& path, int flags, GDExtensionTypePtr res){
+    Script script = Script::new_static(resource.godot_owner);
+
+    auto source = script.get_source_code();
+
+    Error error;
+    FileAccess file = FileAccess::open(path, 2/*WRITE*/);
+    file.store_string(source);
+    file.flush();
+    main_interface->object_destroy(file.godot_owner);
+
+    *((GDExtensionTypePtr*) res) = 0/*OK*/;
+    }
   void PyResourceFormatSaver::_set_uid( String& path, int uid, GDExtensionTypePtr res){}
-  void PyResourceFormatSaver::_recognize( Resource& resource, GDExtensionTypePtr res){}
-  void PyResourceFormatSaver::_get_recognized_extensions( Resource& resource, GDExtensionTypePtr res){}
+  void PyResourceFormatSaver::_recognize( Resource& resource, GDExtensionTypePtr res){
+      *((bool*)res) =  resource.godot_owner != nullptr;
+    }
+  void PyResourceFormatSaver::_get_recognized_extensions( Resource& resource, GDExtensionTypePtr res){
+    add_string_to_array(res, c_string_to_string("py"));
+    add_string_to_array(res, c_string_to_string("pyw"));
+    add_string_to_array(res, c_string_to_string("pyi"));
+  }
   void PyResourceFormatSaver::_recognize_path( Resource& resource, String& path, GDExtensionTypePtr res){}
 
 
@@ -44,11 +63,9 @@ void PyResourceFormatSaver::_init_values(){}
 namespace saver{
     static void call_virtual_func__save(GDExtensionClassInstancePtr p_instance, const GDExtensionConstTypePtr* p_args, GDExtensionTypePtr r_ret) {
         PyResourceFormatSaver* pylanguage = static_cast<PyResourceFormatSaver*> (p_instance);
-        Resource args0 = *((Resource*)(p_args + 0));
-        String args1 = String::new_static(const_cast<GDExtensionStringPtr*>(p_args + 1));
+        Resource args0 = Resource::new_static(main_interface->ref_get_object(p_args[0]));
+        String args1 = String::new_static((*((void**)const_cast<GDExtensionStringPtr>(p_args[1]))));
         int args2 = *((int*)(p_args + 2));
-
-
 
         pylanguage->_save(args0,args1,args2,r_ret);
     }
@@ -68,7 +85,7 @@ namespace saver{
 
     static void call_virtual_func__recognize(GDExtensionClassInstancePtr p_instance, const GDExtensionConstTypePtr* p_args, GDExtensionTypePtr r_ret) {
         PyResourceFormatSaver* pylanguage = static_cast<PyResourceFormatSaver*> (p_instance);
-        Resource args0 = *((Resource*)(p_args + 0));
+        Resource args0 = Resource::new_static(main_interface->ref_get_object(p_args[0]));
         pylanguage->_recognize(args0,r_ret);
     }
 

@@ -9,8 +9,8 @@ namespace godot{
 
     class PyResourceFormatLoader:public ResourceFormatLoader{
       public:
-          PyLanguage lang;
-          static PyResourceFormatLoader* constructor(PyLanguage language);
+          PyLanguage* lang;
+          static PyResourceFormatLoader* constructor(PyLanguage* language);
           void _init_values(); // self-defined
           void _get_recognized_extensions(GDExtensionTypePtr res);
           void _recognize_path( String& path, StringName& type, GDExtensionTypePtr res);
@@ -23,7 +23,5 @@ namespace godot{
           void _exists( String& path, GDExtensionTypePtr res);
           void _get_classes_used( String& path, GDExtensionTypePtr res);
           void _load( String& path, String& original_path, bool use_sub_threads, int cache_mode, GDExtensionTypePtr res);
-
-          void add_string_to_array(GDExtensionTypePtr array, String string);
     };
 }
