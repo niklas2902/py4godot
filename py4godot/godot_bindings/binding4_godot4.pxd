@@ -6,8 +6,9 @@ from libc.stdint cimport uint64_t
 from libc.stdint cimport int64_t
 from libc.stdint cimport int8_t
 from cpython.ref cimport PyObject
+from libcpp cimport bool
 
-ctypedef public bint bool
+
 ctypedef public void *GDExtensionVariantPtr;
 ctypedef public const void *GDExtensionConstVariantPtr;
 ctypedef public void * GodotObject;
@@ -431,6 +432,7 @@ cdef extern from "binding4.h":
 
         GDExtensionScriptInstanceFree free_func;
 #TODO: improve this
+"""
 cdef extern from "c_utils.h":
     void set_gdnative_ptr(GDExtensionTypePtr* a, GDExtensionTypePtr b)
     void set_gdnative_reference(GDExtensionTypePtr& a, GDExtensionTypePtr& b)
@@ -442,6 +444,7 @@ cdef extern from "c_utils.h":
     void create_native_ptr_from_ptr(GDExtensionInterface* interface_ptr, void** from_ptr )
     void exec_method(GDExtensionInterface* interface_ptr, GDExtensionMethodBindPtr method_bind, void * gd_owner, void ** args, void** ret )
     void run_constructor( GDExtensionPtrConstructor constructor, void** gd_owner, void ** args)
+"""
 cdef extern from "Python.h":
     cdef PyObject* PyUnicode_FromString(const char* s);
     cdef  PyObject* PyObject_Str(PyObject *o);

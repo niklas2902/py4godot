@@ -2,7 +2,6 @@
 #include "py4godot/gdextension-api/gdextension_interface.h"
 #include "py4godot/cppclasses/ScriptExtension/ScriptExtension.h"
 #include "py4godot/script_language/PyLanguage.h"
-#include "Python.h"
 #include <unordered_set>
 
 void register_class_script();

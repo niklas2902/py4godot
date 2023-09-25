@@ -14,4 +14,7 @@ if __name__=="__main__":
     for entry in l:
         if(not entry.startswith("build_meson") and not entry.startswith("python_files") and not entry.startswith("build")\
                 and not entry.startswith("venv") and not entry.startswith('tests') and not entry.startswith("meson_cache")):
+            if "cppclasses" in entry or "PyScriptExtension" in entry or "PyLanguage" in entry or entry.endswith("main.cpp")\
+                    or entry.endswith("api.cpp") or "PyResourceFormatLoader" in entry or "PyResourceFormatSaver" in entry:
+                continue
             print(entry.lstrip("../").replace(".cpp", ""))

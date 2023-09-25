@@ -1,4 +1,4 @@
-from py4godot.godot_bindings.binding4_godot4 cimport *
+"""from py4godot.godot_bindings.binding4_godot4 cimport *
 from py4godot_core_holder.core_holder cimport *
 
 cdef GDExtensionInterface* _interface = get_interface()
@@ -25,3 +25,4 @@ cdef unicode gd_string_name_to_py_string(StringName string_name):
     cdef const char* c_str = gd_string_c_string(gdnative_interface,string.godot_owner, string.length())
     cdef unicode py_string = <unicode>PyUnicode_FromStringAndSize(c_str,string.length())
     return py_string
+"""

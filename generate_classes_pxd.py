@@ -1,5 +1,7 @@
 import json
 
+import generate_pxd_bridge
+
 IGNORED_CLASSES = ("Nil", "bool", "float", "int")
 INDENT = " "
 builtin_classes = set()
@@ -61,43 +63,10 @@ def generate_pxd_class(pxd_class):
         result = generate_newline(result)
     result += generate_new_static(class_)
     result = generate_newline(result)
-    result += generate_new_native_ptr(class_)
-    result = generate_newline(result)
-    result += generate_from_variant(class_)
-    result = generate_newline(result)
     return result
 
 def generate_new_static(class_):
-    res = ""
-    res += f"{INDENT}@staticmethod"
-    res = generate_newline(res)
-    if (class_["name"] in builtin_classes):
-        res += f"{INDENT}cdef {class_['name']} new_static(GDExtensionTypePtr owner)"
-    else:
-        res += f"{INDENT}cdef {class_['name']} new_static(GodotObject owner)"
-    return res
-
-def generate_from_variant(class_):
-    res = ""
-    res += f"{INDENT}@staticmethod"
-    res = generate_newline(res)
-    if (class_["name"] in builtin_classes):
-        res += f"{INDENT}cdef {class_['name']} from_variant(GDExtensionVariantPtr variant_ptr, GDExtensionTypeFromVariantConstructorFunc constructor)"
-    else:
-        return ""
-    return res
-
-
-def generate_new_native_ptr(class_):
-    res = ""
-    res += f"{INDENT}@staticmethod"
-    res = generate_newline(res)
-    if (class_["name"] in builtin_classes):
-        res += f"{INDENT}cdef {class_['name']} new_native_ptr(void* ptr)"
-    else:
-        return ""
-    return res
-
+    return f"{INDENT}cdef CPP{class_['name']} {class_['name']}_internal_class"
 
 def get_inherited_class(class_):
     if "inherits" in class_.keys():
@@ -113,6 +82,12 @@ if __name__ == "__main__":
                        obj['classes'] + obj["builtin_classes"]])
         builtin_classes = set(class_["name"] for class_ in obj["builtin_classes"])
         res = generate_import()
+        res = generate_newline(res)
+        for class_ in builtin_classes:
+            if class_ in IGNORED_CLASSES:
+                continue
+            res += f"from py4godot.classes.cpp_bridge cimport {class_} as CPP{class_} "
+            res = generate_newline(res)
         res = generate_newline(res)
         for class_ in obj["builtin_classes"]:
             if class_["name"] in IGNORED_CLASSES:
@@ -130,6 +105,10 @@ if __name__ == "__main__":
             res = generate_import(class_to_import=get_inherited_class(class_))
             res = generate_newline(res)
 
+            res += f"from py4godot.classes.cpp_bridge cimport {class_['name']} as CPP{class_['name']} "
+            res = generate_newline(res)
+            res += f"from py4godot.classes.generated4_core cimport *"
+            res = generate_newline(res)
             res += generate_pxd_class(class_)
 
             with open(f"py4godot/classes/{class_['name']}/{class_['name']}.pxd", "w") as f:

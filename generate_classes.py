@@ -106,20 +106,6 @@ def generate_constructor_args(constructor):
     result = result[:-2]
     return result
 
-def generate_constructor_args_array(constructor):
-    num_of_constructor_args = len(constructor["arguments"]) if "arguments" in constructor.keys() else 1
-    res = f"{INDENT*2}cdef GDExtensionTypePtr _args[{num_of_constructor_args}]"
-    res = generate_newline(res)
-    if "arguments" not in constructor.keys():
-        return res
-    index = 0
-    for arg in constructor["arguments"]:
-        res += f"{INDENT * 2}_args[{index}] = {generate_ret_value_assign_constructor(arg)}"
-        res = generate_newline(res)
-        index += 1
-    res = generate_newline(res)
-    return res
-
 def convert_camel_case_to_underscore(string):
     res = ""
     was_upper = True
@@ -144,6 +130,19 @@ def generate_variant_type(class_):
     else:
         return f"GDExtensionVariantType.GDEXTENSION_VARIANT_TYPE_NIL"
 
+def generate_constructor_call_args(constructor):
+    result = ""
+    if "arguments" not in constructor:
+        return result
+
+    for arg in constructor["arguments"]:
+        if arg["type"] in classes - IGNORED_CLASSES:
+            result += f"{pythonize_name(arg['name'])}.{arg['type']}_internal_class, "
+        else:
+            result += f"{pythonize_name(arg['name'])}, "
+    result = result[:-2]
+    return result
+
 def generate_constructors(class_):
     res = ""
     if "constructors" not in class_.keys():
@@ -151,33 +150,13 @@ def generate_constructors(class_):
     for constructor in class_["constructors"]:
         res += f"{INDENT}@staticmethod"
         res = generate_newline(res)
-        if constructor["index"] == 0 and class_["name"] == "String":
-            #TODO: Remove this behavior. Same problem as VariantTypeWrapper. I don't really understand why you need *args against assertions
-            res += f"{INDENT}def new{constructor['index']}(*args):"
-        else:
-            res += f"{INDENT}def new{constructor['index']}({generate_constructor_args(constructor)}):"
+        res += f"{INDENT}def new{constructor['index']}({generate_constructor_args(constructor)}):"
         res = generate_newline(res)
         res += f"{INDENT*2}cdef {class_['name']} _class = {class_['name']}.__new__({class_['name']})"
         res = generate_newline(res)
-        res += f"{INDENT*2}_class.set_variant_type({generate_variant_type(class_['name'])})"
-        res = generate_newline(res)
-        res += f"{INDENT*2}cdef GDExtensionPtrConstructor constructor = _interface.variant_get_ptr_constructor(_class.variant_type, {constructor['index']})"
-        res = generate_newline(res)
-        #TODO:improve - fill with args
-        res += generate_constructor_args_array(constructor)
-        res = generate_newline(res)
-        res += f"{INDENT*2}_class.native_ptr = create_native_ptr(_interface)"
-        res = generate_newline(res)
-
-        if (class_["name"] != "Transform3D"):
-            res += f"{INDENT*2}constructor(&_class.native_ptr,_args)"
-            res = generate_newline(res)
-            res += f"{INDENT*2}_class.godot_owner = &_class.native_ptr"
-        else:
-            res += f"{INDENT*2}run_constructor(constructor, &_class.godot_owner, _args)"
+        res += f"{INDENT*2}_class.{class_['name']}_internal_class = (CPP{class_['name']}.new{constructor['index']}({generate_constructor_call_args(constructor)}))"
         res = generate_newline(res)
         res += f"{INDENT*2}return _class"
-        res = generate_newline(res)
         res = generate_newline(res)
     return res
 
@@ -186,8 +165,10 @@ def generate_class_imports(classes):
     result = "import py4godot.classes.generated4_core as generated_core"
     result = generate_newline(result)
     for class_ in classes:
-        result += f"from py4godot.classes.{class_}.{class_} cimport *"
-        result = generate_newline(result)
+        if not class_ in IGNORED_CLASSES:
+            result += f"from py4godot.classes.cpp_bridge cimport {class_} as CPP{class_}"
+            result = generate_newline(result)
+
     return result
 
 
@@ -257,20 +238,7 @@ def is_primitive(type_):
 
 def generate_return_statement(method_):
     # TODO handle primitive types
-    ret_val = None
-    if ("return_value" in method_.keys()):
-        ret_val = ReturnType("_ret", method_['return_value']['type'])
-    else:
-        ret_val = ReturnType("_ret", method_['return_type'])
     result = ""
-    if(ret_val.type not in ("Variant", "String", "StringNmae")):
-        result += f"{INDENT*2}return _ret"
-    elif ret_val.type == "String":
-        result += f"{INDENT * 2}return gd_string_to_py_string(_ret)"
-    elif ret_val.type == "StringName":
-        result += f"{INDENT * 2}return gd_string_name_to_py_string(_ret)"
-    else:
-        result += f"{INDENT*2}return _ret.get_converted_value()"
     return result
 
 def generate_singleton_constructor(classname):
@@ -280,15 +248,9 @@ def generate_singleton_constructor(classname):
     res += f"{INDENT}def get_instance():"
     res = generate_newline(res)
 
-    res += f"{INDENT * 2}cdef StringName class_name = c_string_to_string_name('{classname}')"
-    res = generate_newline(res)
-    res = generate_newline(res)
-
     res += f"{INDENT*2}cdef {classname} singleton = {classname}()"
     res = generate_newline(res)
-    res += f"{INDENT*2}cdef GodotObject object = gdnative_interface.global_get_singleton(class_name.godot_owner)"
-    res = generate_newline(res)
-    res += f"{INDENT*2}singleton.set_godot_owner(object)"
+    res += f"{INDENT*2}singleton.{classname}_internal_class = CPP{classname}.get_instance()"
     res = generate_newline(res)
     res += f"{INDENT*2}return singleton"
     res = generate_newline(res)
@@ -358,30 +320,6 @@ def get_variant_type(class_name):
     }
 
     return DICT[class_name.lower()]
-def generate_method_bind(current_class, method):
-    res = ""
-    res += f"{INDENT * 2}cdef StringName _class_name = c_string_to_string_name('{current_class['name']}')"
-    res = generate_newline(res)
-    res = generate_newline(res)
-
-    res += f"{INDENT * 2}cdef StringName _method_name = c_string_to_string_name('{method['name']}')"
-    res = generate_newline(res)
-    res = generate_newline(res)
-
-    res = generate_newline(res)
-    if current_class['name'] in builtin_classes:
-        res += f"""{INDENT * 2}cdef GDExtensionPtrBuiltInMethod method_to_call = """ + \
-               f"""gdnative_interface.variant_get_ptr_builtin_method(GDExtensionVariantType.{get_variant_type(current_class['name'])}, """ + \
-               f"""_method_name.godot_owner, {method['hash']})"""
-    else:
-        res += f"""{INDENT*2}cdef GDExtensionMethodBindPtr method_bind = """ + \
-               f"""gdnative_interface.classdb_get_method_bind(_class_name.godot_owner,""" + \
-               f"""_method_name.godot_owner, {method['hash']})"""
-
-    res = generate_newline(res)
-    return res
-
-
 def generate_virtual_return_type(return_type):
     if return_type == "bool":
         return "False"
@@ -457,49 +395,12 @@ def generate_method(class_, mMethod):
     res = generate_newline(res)
     res += generate_default_args(mMethod)
     res = generate_newline(res)
-    res += generate_native_params(mMethod)
-    res = generate_newline(res)
     if("hash" in mMethod.keys()):
         res += generate_method_body_standard(class_, mMethod)
     else:
         res += generate_method_body_virtual(class_, mMethod)
     res = generate_newline(res)
     return res
-
-
-def generate_ret_value_assign(argument):
-    if argument["type"] == "String":
-        return f"string_{argument['name']}.get_godot_owner()"
-    if argument["type"] == "StringName":
-        return f"string_name_{argument['name']}.get_godot_owner()"
-    elif argument["type"] in classes:
-        return f"{pythonize_name(argument['name'])}.get_godot_owner()"
-    elif argument["type"] == "Variant":
-        return f"variant_{argument['name']}.get_native_ptr()"
-    elif "typedarray" in argument["type"]:
-        return f"{pythonize_name(argument['name'])}.get_godot_owner()"
-    return f"&{pythonize_name(argument['name'])}"
-
-
-def generate_ret_value_assign_constructor(argument):
-    if argument["type"] in classes:
-        return f"{pythonize_name(argument['name'])}.get_godot_owner()"
-    elif argument["type"] == "Variant":
-        return f"{argument['name']}.get_native_ptr()"
-    elif "typedarray" in argument["type"]:
-        return f"{pythonize_name(argument['name'])}.get_godot_owner()"
-    return f"&{pythonize_name(argument['name'])}"
-
-
-def generate_args_array(method):
-    if 'arguments' not in method.keys():
-        return f"{INDENT * 2}cdef GDExtensionVariantPtr _args[1]"
-    result = f"{INDENT * 2}cdef GDExtensionTypePtr _args[{len(method['arguments'])}]"
-    result = generate_newline(result)
-    for i in range(0, len(method['arguments'])):
-        result += f"{INDENT * 2}_args[{i}] = {generate_ret_value_assign(method['arguments'][i])}"
-        result = generate_newline(result)
-    return result
 
 def get_first_args_native(method_):
     if "arguments" not in method_:
@@ -521,57 +422,34 @@ def generate_method_body_standard(class_, method):
     if 'arguments' in method.keys():
         number_arguments = len(method['arguments'])
 
-    result += generate_args_array(method)
-    result = generate_newline(result)
-    result += generate_return_value(method)
-    result = generate_newline(result)
-
-    result = generate_newline(result)
-    result += generate_method_bind(class_, method)
     result = generate_newline(result)
     result += generate_operators(class_)
     result = generate_newline(result)
-
-    if(class_['name'] in builtin_classes):
-        result += f"{INDENT * 2}method_to_call({get_godot_owner(method)}, {get_first_args_native(method)}, {address_ret(method)}, {get_args_count(method)})"
-        result = generate_newline(result)
+    if not is_static(method):
+        result += f"{INDENT*2}self.{class_['name']}_internal_class.{pythonize_name(method['name'])}({generate_method_args(method)})"
     else:
-        if ("return_value" in method.keys() or "return_type" in method.keys()):
-            if ("return_value" in method.keys() and method["return_value"]["type"] in {"Transform3D"}) or \
-                ("return_type" in method.keys() and method["return_type"] in {"Transform3D"}):
-                result += f"{INDENT * 2}exec_method(gdnative_interface, method_bind," \
-                          f" {get_godot_owner(method)}, _args, {address_ret(method)})"
-                result = generate_newline(result)
-            else:
-                result += f"{INDENT * 2}gdnative_interface.object_method_bind_ptrcall(method_bind," \
-                          f" {get_godot_owner(method)}, _args, {address_ret(method)})"
-        else:
-            result += f"{INDENT * 2}gdnative_interface.object_method_bind_ptrcall(method_bind," \
-                      f" {get_godot_owner(method)}, _args, {address_ret(method)})"
+        result += f"{INDENT * 2}CPP{class_['name']}.{pythonize_name(method['name'])}({generate_method_args(method)})"
 
-    if ("return_value" in method.keys() or "return_type" in method.keys()):
-        if ("return_value" in method.keys() and method["return_value"]["type"] in builtin_classes - {"int", "float", "bool", "Transform3D"}) or\
-                ("return_type" in method.keys() and method["return_type"] in builtin_classes - {"int", "float", "bool", "Transform3D"}):
-            result = generate_newline(result)
-            result += f"{INDENT * 2}_ret.godot_owner = &_ret.native_ptr"
-
-        result = generate_newline(result)
-        result += generate_return_statement(method)
+    result += generate_return_statement(method)
     return result
 
+def generate_method_args(method):
 
-
-def address_ret(method):
-    if "return_value" in method.keys() or "return_type" in method.keys():
-
-        if "return_value" in method.keys():
-            return_type = method["return_value"]["type"]
+    res = ""
+    if "arguments" not in method.keys():
+        return res
+    for arg in method["arguments"]:
+        if untypearray(arg["type"]) in classes - IGNORED_CLASSES - builtin_classes:
+            res += f"&{pythonize_name(arg['name'])}.{untypearray(arg['type'])}_internal_class, "
+        elif untypearray(arg["type"]) in builtin_classes - IGNORED_CLASSES:
+            res += f"{pythonize_name(arg['name'])}.{untypearray(arg['type'])}_internal_class, "
+        elif arg["type"] == "Variant":
+            res += f"NULL, " #TODO: implement
         else:
-            return_type = method["return_type"]
-
-        return address_ret_decision(return_type)
-    return "&_ret"
-
+            res += f"{pythonize_name(arg['name'])}, "
+    if len (res) > 2:
+        return res[:-2]
+    return res
 
 def address_ret_decision(return_type):
     if return_type in {"int", "float", "bool"}:
@@ -613,14 +491,10 @@ def generate_common_methods(class_):
     if not is_singleton(class_["name"]):
         result += generate_constructor(class_["name"])
         result = generate_newline(result)
-    result += generate_new_static(class_)
     result = generate_newline(result)
-    result += generate_new_native_ptr(class_)
-    result = generate_newline(result)
-    result += generate_from_variant(class_)
-    result = generate_newline(result)
-    result += generate_constructors(class_)
-    result = generate_newline(result)
+    if class_["name"] not in builtin_classes:
+        result += generate_constructors(class_)
+        result = generate_newline(result)
     return result
 
 def generate_enums(class_):
@@ -645,6 +519,7 @@ def generate_properties(class_):
 
 def generate_member_getter(class_,member):
     res = ""
+    return res
     res += f"{INDENT}@property"
     res = generate_newline(res)
     res += f"{INDENT}def {member.name}(self):"
@@ -667,10 +542,7 @@ def generate_member_getter(class_,member):
     else:
         res += f"{INDENT*2}getter(self.godot_owner, &_ret)"
     res = generate_newline(res)
-    if member.type_ in builtin_classes:
-        res = generate_newline(res)
-        res += f"{INDENT * 2}get_event_holder().add_event(self.set_{member.name}, <int>(&(<VariantTypeWrapper4>_ret).godot_owner))"
-        res = generate_newline(res)
+
     res = generate_newline(res)
     if member.type_  == "String":
         res += f"{INDENT*2}return gd_string_to_py_string(_ret)"
@@ -700,15 +572,13 @@ def generate_member_setter(class_,member):
     else:
         res += f"{INDENT * 2}setter(self.godot_owner, &value)"
     res = generate_newline(res)
-    if class_ in builtin_classes:
-        res = generate_newline(res)
-        res += f"{INDENT * 2}get_event_holder().notify_event(<int>(&self.godot_owner), self)"
-        res = generate_newline(res)
     return res
 
 
 def generate_members_of_class(class_):
     res = ""
+    #TODO:enable again
+    return res
     if class_["name"] in core_classes.keys():
         for member in core_classes[class_["name"]].core_members:
             res += generate_member_getter(class_["name"],member)
@@ -728,11 +598,6 @@ def generate_property(property):
     result += f"{INDENT * 2}cdef _ret = self. {pythonize_name(property['getter'])}()"
     result = generate_newline(result)
 
-    if "setter" in property and property["setter"] != "":
-        if(property["type"] in builtin_classes):
-            result = generate_newline(result)
-            result += f"{INDENT * 2}get_event_holder().add_event(self.{pythonize_name(property['setter'])}, <int>(&(<VariantTypeWrapper4>_ret).godot_owner))"
-            result = generate_newline(result)
     result += f"{INDENT * 2}return _ret"
     result = generate_newline(result)
 
@@ -743,17 +608,12 @@ def generate_property(property):
         result = generate_newline(result)
         result += f"{INDENT * 2}self.{pythonize_name(property['setter'])}(value)"
         result = generate_newline(result)
-        result = generate_newline(result)
-        if (property["type"] in builtin_classes):
-            res = generate_newline(result)
-            res += f"{INDENT * 2}get_event_holder().notify_event(<int>(&(<VariantTypeWrapper4>self).godot_owner),self)"
-            res = generate_newline(result)
 
     return result
 
 
 def pythonize_name(name):
-    if name in ("from", "len", "in", "for", "with", "class", "pass", "raise", "global"):
+    if name in ("from", "len", "in", "for", "with", "class", "pass", "raise", "global", "new", "get_interface"):
         return name + "_"
     return name
 
@@ -764,12 +624,14 @@ def unbitfield_type(arg_type):
 
 
 def ungodottype(type_):
-    if(type_ == "String"):
+    #TODO:enable this again
+    """if(type_ == "String"):
         return "str"
     if(type_ == "StringName"):
         return "str"
     if (type_ == "Variant"):
         return "object"
+    """
     return type_
 
 
@@ -890,89 +752,26 @@ def get_classes_to_import(classes):
 
 def generate_constructor(classname):
     res = ""
+    if classname in builtin_classes:
+        return res
     res += f"{INDENT}@staticmethod"
     res = generate_newline(res)
     res += f"{INDENT}def constructor():"
     res = generate_newline(res)
     res += f"{INDENT*2}cdef {classname} class_ = {classname}()"
     res = generate_newline(res)
-    res += f"{INDENT*2}cdef StringName class_name =  c_string_to_string_name(\"{classname}\")"
-    res = generate_newline(res)
+    #res += f"{INDENT * 2}class_.{class_['name']}_internal_class = CPP{class_['name']}.constructor()"
+    #res = generate_newline(res)
 
-    res += f"{INDENT*2}class_.set_godot_owner(gdnative_interface.classdb_construct_object(class_name.godot_owner))"
-    res = generate_newline(res)
-    res += f"{INDENT*2}gdnative_interface.object_set_instance(class_.get_godot_owner(),class_name.godot_owner , <void*>class_)"
-    res = generate_newline(res)
     res += f"{INDENT*2}return class_"
     res = generate_newline(res)
     return res
-
-def generate_new_static(class_):
-    res = ""
-    res += f"{INDENT}@staticmethod"
-    res = generate_newline(res)
-    if (class_["name"] in builtin_classes):
-        res += f"{INDENT}cdef {class_['name']} new_static(GDExtensionTypePtr owner):"
-    else:
-        res += f"{INDENT}cdef {class_['name']} new_static(GodotObject owner):"
-
-    res = generate_newline(res)
-    res += f"{INDENT*2}cdef {class_['name']} obj = {class_['name']}()"
-    res = generate_newline(res)
-    res += f"{INDENT * 2}obj.godot_owner = owner"
-    res = generate_newline(res)
-    res += f"{INDENT * 2}return obj"
-
-    return res
-
-def generate_from_variant(class_):
-    res = ""
-    res += f"{INDENT}@staticmethod"
-    res = generate_newline(res)
-    if (class_["name"] in builtin_classes):
-        res += f"{INDENT}cdef {class_['name']} from_variant(GDExtensionVariantPtr variant_ptr, GDExtensionTypeFromVariantConstructorFunc constructor):"
-    else:
-        return ""
-
-    res = generate_newline(res)
-    res += f"{INDENT*2}cdef {class_['name']} obj = {class_['name']}.__new__({class_['name']})"
-    res = generate_newline(res)
-    res += f"{INDENT*2}obj.native_ptr = create_native_ptr(gdnative_interface)"
-    res = generate_newline(res)
-    res += f"{INDENT*2}exec_constructor(gdnative_interface, variant_ptr,&obj.native_ptr,constructor)"
-    res = generate_newline(res)
-    res += f"{INDENT*2}obj.godot_owner = &obj.native_ptr"
-    res = generate_newline(res)
-    res += f"{INDENT*2}return obj"
-    res = generate_newline(res)
-
-    return res
-
-
-def generate_new_native_ptr(class_):
-    res = ""
-    res += f"{INDENT}@staticmethod"
-    res = generate_newline(res)
-    if (class_["name"] in builtin_classes):
-        res += f"{INDENT}cdef {class_['name']} new_native_ptr(void* ptr):"
-    else:
-        return ""
-
-    res = generate_newline(res)
-    res += f"{INDENT*2}cdef {class_['name']} obj = {class_['name']}.__new__({class_['name']})"
-    res = generate_newline(res)
-    res += f"{INDENT * 2}obj.native_ptr = ptr"
-    res = generate_newline(res)
-    res += f"{INDENT * 2}return obj"
-
-    return res
-
 
 def generate_init(class_):
     res = ""
     res += f"{INDENT}def __init__(self, *args):"
     res = generate_newline(res)
-    res += f"{INDENT*2}self.godot_owner = &self.opaque"
+    res += f"{INDENT*2}pass"
     res = generate_newline(res)
     return res
 
@@ -1020,37 +819,7 @@ def generate_operators_for_class(class_name):
                 op = operator_dict[class_name][operator]
                 res += f"{INDENT}def {operator_to_method[operator]}({get_parameters_operator(operator_dict[class_name][operator])}):"
                 res = generate_newline(res)
-                res += f"{INDENT * 2}cdef {op.return_type} _ret = {init_return_type(op.return_type)}"
-                res = generate_newline(res)
-
-                res = generate_newline(res)
-                res += f"{INDENT * 2}cdef GDExtensionPtrOperatorEvaluator operator_evaluator"
-                res = generate_newline(res)
-                res += f"{INDENT * 2}cdef bint handled = False"
-                res = generate_newline(res)
-                for target in op.right_type_values:
-
-                    if target in {"float", "int", "bool", "Nil"}:
-                        res += f"{INDENT*2}cdef {target} primitive_val_{target} = <{target}>other"
-                        res = generate_newline(res)
-                    res += f"{INDENT*2}if isinstance(other, {get_instance_type(target)}):"
-                    res = generate_newline(res)
-                    res += f"{INDENT * 3}handled = True"
-                    res = generate_newline(res)
-                    res += f"{INDENT * 3}operator_evaluator = {INDENT * 2}_interface.variant_get_ptr_operator_evaluator({operator_to_variant_operator[operator]}, {generate_variant_type(op.class_)}, {generate_variant_type(target)})"
-                    res = generate_newline(res)
-                    res += f"{INDENT*3}operator_evaluator((<{op.class_}>self).godot_owner, {address_param(target)}, {address_ret_decision(op.return_type)})"
-                    res = generate_newline(res)
-                    if op.return_type in builtin_classes - {"float", "int" , "bool", "Nil"}:
-                        res += f"{INDENT*3}_ret.godot_owner = &_ret.native_ptr"
-                        res = generate_newline(res)
-
-                res += f"{INDENT * 2}if not handled:"
-                res = generate_newline(res)
-
-                res += f"{INDENT * 3}raise Exception(f'type \"'+type(other)+'\" not supported')"
-                res = generate_newline(res)
-                res += f"{INDENT*2}return _ret"
+                res += f"{INDENT * 2}pass"
                 res = generate_newline(res)
     res = generate_newline(res)
     return res
@@ -1059,13 +828,11 @@ def generate_operators_for_class(class_name):
 
 def generate_classes(classes, filename, is_core=False):
     res = generate_import()
-    res = generate_newline(res)
     if not is_core:
-        res += generate_class_imports(get_classes_to_import(classes))
-        res = generate_newline(res)
-    else:
-        res += "from py4godot.classes.Object.Object cimport *"
-        res = generate_newline(res)
+        classes_to_import = get_classes_to_import(classes)
+        for cls in classes_to_import:
+            res += f"from py4godot.classes.{cls}.{cls} cimport *"
+            res = generate_newline(res)
     res += generate_header_statements()
     for class_ in classes:
         if (class_["name"] in IGNORED_CLASSES):
@@ -1102,6 +869,7 @@ def generate_classes(classes, filename, is_core=False):
 
 def generate_dictionary_set_item():
     res = ""
+    return res
     res += f"{INDENT}def __setitem__(self, value, key):"
     res = generate_newline(res)
     res += f"{INDENT * 2}cdef Variant var_key = Variant(key)"
@@ -1114,8 +882,10 @@ def generate_dictionary_set_item():
 
 def generate_dictionary_get_item():
     res = ""
+    return res
     res += f"{INDENT}def __getitem__(self,  key):"
     res = generate_newline(res)
+    res += "pass"
     res += f"{INDENT * 2}cdef Variant var_key = Variant(key)"
     res = generate_newline(res)
     res += f"{INDENT * 2}if not self.has(var_key):"
@@ -1138,6 +908,7 @@ def generate_special_methods_dictionary():
 
 def generate_array_set_item(class_):
     res = ""
+    return res
     res += f"{INDENT}def __setitem__(self, value,  index):"
     res = generate_newline(res)
     if class_["name"] == "PackedInt32Array":
@@ -1153,6 +924,8 @@ def generate_array_set_item(class_):
     elif class_["name"] == "PackedByteArray":
         res += f"{INDENT * 2}gdnative_interface.packed_byte_array_operator_index(self.godot_owner, index)[0] = value"
 
+    #TODO:enable
+    """
     elif class_["name"] == "PackedColorArray":
         res += f"{INDENT * 2}Color.new_static(gdnative_interface.packed_color_array_operator_index(self.godot_owner, index)).copy_from(value)"
     elif class_["name"] == "PackedVector3Array":
@@ -1165,13 +938,14 @@ def generate_array_set_item(class_):
     elif class_["name"] == "Array":
         res += f"{INDENT * 2}Variant.new_static(gdnative_interface.array_operator_index(self.godot_owner, index)).init_value(value)"
 
-
+    """
     res = generate_newline(res)
     res += f"{INDENT * 2}pass"
     return res
 
 def generate_array_get_item(class_):
     res = ""
+    return res
     res += f"{INDENT}def __getitem__(self,  index):"
     res = generate_newline(res)
     if class_["name"] == "PackedInt32Array":
@@ -1187,7 +961,8 @@ def generate_array_get_item(class_):
     elif class_["name"] == "PackedByteArray":
         res += f"{INDENT * 2}return gdnative_interface.packed_byte_array_operator_index(self.godot_owner, index)[0]"
 
-    elif class_["name"] == "PackedColorArray":
+    return res
+    if class_["name"] == "PackedColorArray":
         res += f"{INDENT * 2}Color.new_static(gdnative_interface.packed_color_array_operator_index(self.godot_owner, index))"
     elif class_["name"] == "PackedVector3Array":
         res += f"{INDENT * 2}return Vector3.new_static(gdnative_interface.packed_vector3_array_operator_index(self.godot_owner, index))"
@@ -1211,19 +986,6 @@ def generate_special_methods_array(class_):
     res += generate_array_get_item(class_)
     return res
 
-def generate_copy_methods(class_name):
-    res = ""
-    res += f"{INDENT}def copy_from_other(self, {class_name} from_):"
-    res = generate_newline(res)
-    res += f"{INDENT*2}cdef GDExtensionPtrConstructor constructor = _interface.variant_get_ptr_constructor(GDExtensionVariantType.GDEXTENSION_VARIANT_TYPE_{class_name.upper()}, 1)"
-    res = generate_newline(res)
-    res += f"{INDENT*2}cdef GDExtensionTypePtr _args[1]"
-    res = generate_newline(res)
-    res += f"{INDENT*2}_args[0] = from_.get_godot_owner()"
-    res = generate_newline(res)
-    res += f"{INDENT * 2}constructor(self.godot_owner, _args)"
-    res = generate_newline(res)
-    return res
 
 def generate_special_methods(class_):
     res = ""
@@ -1232,9 +994,6 @@ def generate_special_methods(class_):
     
     if "array" in class_["name"].lower():
         res += generate_special_methods_array(class_)
-
-    if class_["name"] in {"Vector3", "Vector2", "String", "Color"}:
-        res += generate_copy_methods(class_["name"])
 
     return res
 
@@ -1267,6 +1026,7 @@ if __name__ == "__main__":
         collect_members(obj)
         for class_ in obj["builtin_classes"]:
             generate_operators_set(class_)
+
         for class_ in obj["classes"]:
             if(not os.path.exists(f"py4godot/classes/{class_['name']}/")):
                 os.mkdir(f"py4godot/classes/{class_['name']}/")

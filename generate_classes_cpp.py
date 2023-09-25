@@ -1,7 +1,7 @@
 import json
 import os.path
 
-from generate_classes_hpp import get_ret_value, has_native_struct
+from generate_classes_hpp import get_ret_value, has_native_struct, generate_args
 from generate_enums import enumize_name
 
 INDENT = "  "
@@ -400,7 +400,7 @@ def generate_method(class_, mMethod):
     res = ""
     if has_native_struct(mMethod):
         return res
-    args = generate_args(class_, mMethod)
+    args = generate_args(mMethod, builtin_classes)
     def_function = f"{INDENT}{unenumize_type(untypearray(get_ret_value(mMethod)))} {class_['name']}::{pythonize_name(mMethod['name'])}({args})"+"{"
     res += def_function
     res = generate_newline(res)
@@ -422,7 +422,7 @@ def generate_ret_value_assign(argument):
     elif argument["type"] in classes - {"int", "float", "bool", "Nil"}:
         return f"&{pythonize_name(argument['name'])}.godot_owner"
     elif "typedarray" in argument["type"]:
-        return f"{pythonize_name(argument['name'])}->get_godot_owner()"
+        return f"{pythonize_name(argument['name'])}.godot_owner"
     return f"&{pythonize_name(argument['name'])}"
 
 
@@ -772,30 +772,6 @@ def core_import(class_):
         return ""
     return "generated_core."
 
-
-
-
-def generate_args(class_, method_with_args):
-    result = ""
-    if(is_static(method_with_args)):
-        result = ""
-    if "arguments" not in method_with_args:
-        return result[:-2]
-
-    for arg in method_with_args["arguments"]:
-        if not arg["type"].startswith("enum::") and not arg["type"] in builtin_classes:
-            result += f"{unenumize_type(untypearray(unbitfield_type(arg['type'])))}* {pythonize_name(arg['name'])}, "
-        elif arg["type"] in builtin_classes - {"int", "float", "bool", "Nil"}:
-            result += f"{unenumize_type(untypearray(unbitfield_type(arg['type'])))}& {pythonize_name(arg['name'])}, "
-        elif arg["type"] in {"int", "float", "bool"}:
-            result += f"{unenumize_type(untypearray(unbitfield_type(arg['type'])))} {pythonize_name(arg['name'])}, "
-        else:
-            #enums are marked with enum:: . To be able to use this, we have to strip this
-            arg_type = arg["type"].replace("enum::", "")
-            type_ = untypearray(unenumize_type(arg_type))
-            result += f"{type_} {pythonize_name(arg['name'])}, "
-    result = result[:-2]
-    return result
 
 def unenumize_type(type_):
     enum_type = type_.replace("enum::", "")

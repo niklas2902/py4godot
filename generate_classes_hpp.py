@@ -33,7 +33,7 @@ IGNORED_CLASSES = {"Nil", "bool", "float", "int"}
 ACCEPTED_CLASSES = {"Object", "String"}
 
 native_structs = {}
-forbidden_types = {"cont void*", "void*"}
+forbidden_types = {"const void*", "void*"}
 normal_classes = set()
 singletons = set()
 builtin_classes = set()
@@ -252,7 +252,7 @@ def generate_method(class_, mMethod):
     res = ""
     if has_native_struct(mMethod):
         return res
-    args = generate_args(mMethod)
+    args = generate_args(mMethod, builtin_classes)
     def_function = f"{INDENT}{generate_method_modifiers(mMethod)} {unenumize_type(untypearray(get_ret_value(mMethod)))} {pythonize_name(mMethod['name'])}({args});"
     res = generate_newline(res)
     res += def_function
@@ -405,7 +405,7 @@ def unbitfield_type(arg_type):
     return arg_type
 
 
-def generate_args(method_with_args):
+def generate_args(method_with_args, builtin_classes):
     result = " "
     if(is_static(method_with_args)):
         result = ""
@@ -413,9 +413,9 @@ def generate_args(method_with_args):
         return result[:-2]
 
     for arg in method_with_args["arguments"]:
-        if not arg["type"].startswith("enum::") and not arg["type"] in builtin_classes:
+        if arg["type"] not in builtin_classes and  not arg["type"].startswith("enum::") and not arg["type"].startswith("bitfield::") and not arg["type"].startswith("typedarray::"):
             result += f"{unenumize_type(untypearray(unbitfield_type(arg['type'])))}* {pythonize_name(arg['name'])}, "
-        elif arg["type"] in builtin_classes - {"int", "float", "bool", "Nil"}:
+        elif untypearray(arg["type"]) in builtin_classes - {"int", "float", "bool", "Nil"}:
             result += f"{unenumize_type(untypearray(unbitfield_type(arg['type'])))}& {pythonize_name(arg['name'])}, "
         elif arg["type"] in {"int", "float", "bool"}:
             result += f"{unenumize_type(untypearray(unbitfield_type(arg['type'])))} {pythonize_name(arg['name'])}, "
@@ -538,7 +538,7 @@ def generate_classes(classes, filename, is_core=False):
             continue
         res = generate_newline(res)
         res = generate_newline(res)
-        res += f"class {class_['name']}:public {get_base_class(class_)}"+"{"
+        res += f"class LIBRARY_API  {class_['name']}:public {get_base_class(class_)}"+"{"
         res = generate_newline(res)
         res += f"{INDENT} public:"
         res = generate_newline(res)
@@ -672,12 +672,14 @@ if __name__ == "__main__":
 
         generate_classes(obj["builtin_classes"], f"py4godot/cppclasses/generated4_core.h", is_core=True)
 
-        class_defs = ("#pragma once\n"
-                      "namespace godot{")
+        class_defs = (
+            "#pragma once\n"
+            '#include "py4godot/godot_bindings/macros.h"\n'
+            "namespace godot{")
         for class_ in (obj["builtin_classes"] + obj["classes"]):
             if class_["name"] in {"Nil", "bool", "float", "int"}:
                 continue
-            class_defs += f"{INDENT} class {class_['name']};"
+            class_defs += f"{INDENT}class {class_['name']};"
             class_defs = generate_newline(class_defs)
         class_defs += "}"
         with open ("py4godot/cppclasses/class_defs.h", "w") as f:

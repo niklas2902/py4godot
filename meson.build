@@ -51,14 +51,18 @@ godot_program = find_program('godot')
 sources = glob.stdout().strip().split('\n')
 
 cppsources = glob_cpp.stdout().strip().split('\n')
-foreach entry : cppsources
+foreach entry : sources
     message(entry)
 endforeach
 
-shared_library('main',cppsources,
+main_lib = shared_library('main',cppsources,
 dependencies:[dep_py], include_directories:internal_inc,name_prefix:'',c_args:extra_args,
- link_args : ['/DEBUG:FULL'])
-#endforeach
+ link_args : ['/DEBUG:FULL'], cpp_args:['/DLIBRARY_EXPORTS=1'])
+
+foreach source : sources
+    shared_library(source.replace('\\','#'), [source+'.cpp'],
+    dependencies:[dep_py], include_directories:internal_inc,name_prefix:'',c_args:extra_args, link_args : ['/DEBUG:FULL'], link_with : main_lib )
+endforeach
 
 test('test_vector3', godot_program, args : ['--path', 'tests/core/vector3', '--no-window'], workdir:meson.source_root(), timeout:1000, is_parallel:false)
 test('test_vector2', godot_program, args : ['--path', 'tests/core/vector2', '--no-window'], workdir:meson.source_root(),  timeout:1000, is_parallel:false)

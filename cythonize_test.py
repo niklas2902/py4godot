@@ -1,10 +1,16 @@
+import datetime
+from datetime import time
+
 from Cython.Build import cythonize
 
+_time = datetime.datetime.now()
 cythonize("py4godot/test_bridge.pyx", language_level=3, language="c++")
 #cythonize("py4godot/core/variant4/Variant4.pyx", language_level=3)
 cythonize("py4godot_core_holder/core_holder.pyx", language_level=3)
-#cythonize("py4godot/classes/*.pyx", language_level=3)
-#cythonize("py4godot/classes/*/*.pyx", language_level=3)
+cythonize("py4godot/classes/generated4_core.pyx", language_level=3, language="c++")
+cythonize("py4godot/classes/Object/Object.pyx", language_level=3, language="c++")
+cythonize("py4godot/classes/Node3D/Node3D.pyx", language_level=3, language="c++")
+print("took:", (datetime.datetime.now() - _time).total_seconds() / 60.)
 #cythonize("py4godot/script_language/*.pyx", language_level=3)
 #cythonize("py4godot/script_extension/*.pyx", language_level=3)
 #cythonize("py4godot/format_saver/*.pyx", language_level=3)
