@@ -9,6 +9,7 @@ namespace godot{
     class PyScriptExtension:public ScriptExtension{
       const char* script_name;
       const char* source_code;
+      const char* path;
       /*cdef Wrapper4 gd_obj
       cdef object gd_class
       cdef list properties
@@ -54,6 +55,8 @@ namespace godot{
            void _get_members(GDExtensionTypePtr res);
            void _is_placeholder_fallback_enabled(GDExtensionTypePtr res);
            void _get_rpc_config(GDExtensionTypePtr res);
+
            void _set_source_code_internal(String source_code);
+           void set_path(const char* path);
     };
 }

@@ -5,6 +5,7 @@
 #include "py4godot/cppclasses/Script/Script.h"
 #include "py4godot/cppcore/Variant.h"
 #include "py4godot/pluginscript_api/api.h"
+#include "py4godot/script_instance/PyScriptInstance.h"
 #include <cassert>
 
 GDExtensionPtrOperatorEvaluator operator_equal_string_namescript;
@@ -44,14 +45,17 @@ void  PyScriptExtension::_get_base_script(GDExtensionTypePtr res){}
 void PyScriptExtension::_get_global_name(GDExtensionTypePtr res){}
 void PyScriptExtension::_inherits_script( Script* script, GDExtensionTypePtr res){}
 void PyScriptExtension::_get_instance_base_type(GDExtensionTypePtr res){}
-void PyScriptExtension::_instance_create( Object& for_object, GDExtensionTypePtr res){}
-void PyScriptExtension::_placeholder_instance_create( Object& for_object, GDExtensionTypePtr res){}
+void PyScriptExtension::_instance_create( Object& for_object, GDExtensionTypePtr res){
+    auto instance_ptr = main_interface->script_instance_create(&native_script_instance, NULL);
+    *((GDExtensionTypePtr*)res) = instance_ptr;
+}
+void PyScriptExtension::_placeholder_instance_create( Object& for_object, GDExtensionTypePtr res){
+    auto instance_ptr = main_interface->script_instance_create(&native_script_instance, NULL);
+    *((GDExtensionTypePtr*)res) = instance_ptr;
+}
 void PyScriptExtension::_instance_has( Object& object, GDExtensionTypePtr res){}
 void PyScriptExtension::_has_source_code(GDExtensionTypePtr res){}
 void PyScriptExtension::_get_source_code(GDExtensionTypePtr& res){
-    //main_interface->print_error("get_source_code:", "test", "test",1,1);
-    //main_interface->print_error(this->source_code, "test", "test",1,1);
-
     main_interface->string_new_with_utf8_chars(res, source_code);
 }
 void PyScriptExtension::_set_source_code( String& code, GDExtensionTypePtr res){}
@@ -93,6 +97,11 @@ void PyScriptExtension::_is_placeholder_fallback_enabled(GDExtensionTypePtr res)
 void PyScriptExtension::_get_rpc_config(GDExtensionTypePtr res){}
 void PyScriptExtension::_set_source_code_internal(String source_code){
     this->source_code = gd_string_to_c_string(main_interface, &source_code.godot_owner, source_code.length());
+    //exec_class(source_code, path);
+}
+
+void PyScriptExtension::set_path( const char* path){
+    this->path = path;
 }
 namespace script{
 void call_virtual_func__editor_can_reload_from_file(GDExtensionClassInstancePtr p_instance, const GDExtensionConstTypePtr* p_args, GDExtensionTypePtr r_ret) {
@@ -162,28 +171,22 @@ StringName func_name__get_instance_base_type ;
 
 
 void call_virtual_func__instance_create(GDExtensionClassInstancePtr p_instance, const GDExtensionConstTypePtr* p_args, GDExtensionTypePtr r_ret) {
-    /*
+
     PyScriptExtension* pylanguage = static_cast<PyScriptExtension*> (p_instance);
     Object args0 = Object::new_static(const_cast<GDExtensionStringPtr*>(p_args + 0));
 
-    void* obj = pylanguage->_instance_create(args0,r_ret)
-
-    void* ret_val = obj
-    */
+    pylanguage->_instance_create(args0,r_ret);
 }
 
 StringName func_name__instance_create ;
 
 
 void call_virtual_func__placeholder_instance_create(GDExtensionClassInstancePtr p_instance, const GDExtensionConstTypePtr* p_args, GDExtensionTypePtr r_ret) {
-    /*
+
     PyScriptExtension* pylanguage = static_cast<PyScriptExtension*> (p_instance);
     Object args0 = Object::new_static(const_cast<GDExtensionStringPtr*>(p_args + 0));
 
-    void* obj = pylanguage->_placeholder_instance_create(args0,r_ret)
-
-     void* ret_val = obj
-     */
+    pylanguage->_placeholder_instance_create(args0,r_ret);
 }
 
 StringName func_name__placeholder_instance_create ;

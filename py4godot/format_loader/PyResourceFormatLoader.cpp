@@ -69,6 +69,8 @@ void PyResourceFormatLoader::_load( String& path, String& original_path, bool us
     auto source_code = file.get_as_text(false);
     main_interface->object_destroy(file.godot_owner);
     auto script_extension = PyScriptExtension::constructor(lang);
+
+    script_extension->set_path(gd_string_to_c_string(main_interface, &path.godot_owner, path.length()));
     script_extension ->_set_source_code_internal(source_code);
 
     constructor_func = main_interface->get_variant_from_type_constructor(GDExtensionVariantType::GDEXTENSION_VARIANT_TYPE_OBJECT);
