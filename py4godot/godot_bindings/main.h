@@ -1,7 +1,29 @@
 #pragma once
 #include "py4godot/godot_bindings/macros.h"
 #include "gdextension_interface.h"
+#include <python.h>
+
+
+#ifdef _WIN64
+#define PYTHONHOME L"addons/windows64/cpython-3.11.3-windows64/python/install"
+
+#elif _WIN32
+#define PYTHONHOME L"addons/windows64/cpython-3.11.3-lnux64/python/install"
+
+#elif __linux32__
+#define PYTHONHOME L"addons/linux/cpython-3.11.3-linux/python/install/lib"
+
+#elif __linux__
+#define PYTHONHOME L"addons/linux64/cpython-3.11.3-linux64/python/install"
+
+#elif __APPLE__
+#define PYTHONHOME L"addons/windows64/cpython-3.11.3-windows32/python/install"
+#endif
 
 GDExtensionInterface* _interface = nullptr;
 GDExtensionInterface* main_interface = nullptr;
 GDExtensionClassLibraryPtr _library = nullptr;
+
+LIBRARY_API GDExtensionInterface* get_interface();
+
+static PyThreadState *gilstate = NULL;

@@ -8,17 +8,11 @@ builtin_classes = set()
 
 
 def generate_import(class_to_import = None):
-    res = "from py4godot.utils.Wrapper4 cimport *"
-    res = generate_newline(res)
-    res += "from py4godot.utils.VariantTypeWrapper4 cimport *"
-    res = generate_newline(res)
+    res = ""
     if class_to_import:
         if class_to_import != "Wrapper4":
             res += f"from py4godot.classes.{class_to_import}.{class_to_import} cimport *"
-        else:
-            res += f"from py4godot.utils.Wrapper4 cimport *"
-    else:
-        res += f"from py4godot.utils.Wrapper4 cimport *"
+
     return res
 
 def generate_enums(class_):
@@ -40,15 +34,10 @@ def generate_newline(str_):
 def get_base_class(class_):
     if "inherits" in class_.keys():
         return class_["inherits"]
-    if class_["name"] in builtin_classes:
-        return "VariantTypeWrapper4"
-    return "Wrapper4"
+    return ""
 
 
 def generate_c_props():
-    res = f"{INDENT}cdef uint8_t opaque[8]"
-    res = generate_newline(res)
-    res += f"{INDENT}cdef void* native_ptr"
     return res
 
 
@@ -58,9 +47,6 @@ def generate_pxd_class(pxd_class):
     result = generate_newline(result)
     result += f"cdef class {pxd_class['name']}({get_base_class(pxd_class)}):"
     result = generate_newline(result)
-    if pxd_class["name"] in builtin_classes:
-        result += generate_c_props()
-        result = generate_newline(result)
     result += generate_new_static(class_)
     result = generate_newline(result)
     return result
@@ -71,7 +57,7 @@ def generate_new_static(class_):
 def get_inherited_class(class_):
     if "inherits" in class_.keys():
         return class_["inherits"]
-    return "Wrapper4"
+    return ""
 
 
 if __name__ == "__main__":

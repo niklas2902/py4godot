@@ -3,13 +3,14 @@
 #include "py4godot/cppclasses/ScriptExtension/ScriptExtension.h"
 #include "py4godot/script_language/PyLanguage.h"
 #include <unordered_set>
+#include <string>
 
 void register_class_script();
 namespace godot{
     class PyScriptExtension:public ScriptExtension{
       const char* script_name;
-      const char* source_code;
-      const char* path;
+      std::string source_code;
+      std::string path;
       /*cdef Wrapper4 gd_obj
       cdef object gd_class
       cdef list properties

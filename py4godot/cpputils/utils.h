@@ -11,20 +11,21 @@ static const char* gd_string_to_c_string(GDExtensionInterface* interface_ptr, GD
     return native_string;
 }
 
-static void gd_string_to_c_string(GDExtensionInterface* interface_ptr, GDExtensionConstStringPtr string_ptr, int length, char* res_string) {
-    res_string = (char*)malloc(sizeof(char) * (length));
-    interface_ptr->string_to_utf8_chars(string_ptr, res_string, length);
+static void gd_string_to_c_string(GDExtensionInterface* interface_ptr, GDExtensionConstStringPtr string_ptr, int length, char** res_string) {
+    *res_string = (char*)malloc(sizeof(char) * (length+1));
+    interface_ptr->string_to_utf8_chars(string_ptr, *res_string, length);
+    (*res_string)[length] = '\0';
 }
 
 static StringName c_string_to_string_name(const char* string){
     String gd_string = String::new0();
-    main_interface->string_new_with_utf8_chars(&gd_string.godot_owner, string);
+    get_interface()->string_new_with_utf8_chars(&gd_string.godot_owner, string);
     StringName gd_string_name = StringName::new2(gd_string);
     return gd_string_name;
 }
 static String c_string_to_string(const char* string){
     String gd_string = String::new0();
-    main_interface->string_new_with_utf8_chars(&gd_string.godot_owner, string);
+    get_interface()->string_new_with_utf8_chars(&gd_string.godot_owner, string);
     return gd_string;
 }
 

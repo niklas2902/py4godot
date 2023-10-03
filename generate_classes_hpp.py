@@ -413,9 +413,10 @@ def generate_args(method_with_args, builtin_classes):
         return result[:-2]
 
     for arg in method_with_args["arguments"]:
-        if arg["type"] not in builtin_classes and  not arg["type"].startswith("enum::") and not arg["type"].startswith("bitfield::") and not arg["type"].startswith("typedarray::"):
+        if arg["type"] not in builtin_classes and  not arg["type"].startswith("enum::") and not arg["type"].startswith("bitfield::") and not arg["type"].startswith("typedarray::")\
+                and not arg["type"] == "Variant":
             result += f"{unenumize_type(untypearray(unbitfield_type(arg['type'])))}* {pythonize_name(arg['name'])}, "
-        elif untypearray(arg["type"]) in builtin_classes - {"int", "float", "bool", "Nil"}:
+        elif untypearray(arg["type"]) in builtin_classes - {"int", "float", "bool", "Nil"} or arg["type"] == "Variant":
             result += f"{unenumize_type(untypearray(unbitfield_type(arg['type'])))}& {pythonize_name(arg['name'])}, "
         elif arg["type"] in {"int", "float", "bool"}:
             result += f"{unenumize_type(untypearray(unbitfield_type(arg['type'])))} {pythonize_name(arg['name'])}, "

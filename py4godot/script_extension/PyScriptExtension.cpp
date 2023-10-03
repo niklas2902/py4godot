@@ -6,10 +6,55 @@
 #include "py4godot/cppcore/Variant.h"
 #include "py4godot/pluginscript_api/api.h"
 #include "py4godot/script_instance/PyScriptInstance.h"
+#include "py4godot/pluginscript_api/utils/annotations_api.h"
 #include <cassert>
+#include "Python.h"
+#include <mutex>
+
+std::mutex m;
 
 GDExtensionPtrOperatorEvaluator operator_equal_string_namescript;
 PyScriptExtension extension;
+
+bool pluginscript_initialized = false;
+void init_pluginscript_api(){
+    if (pluginscript_initialized){
+        return;
+    }
+    pluginscript_initialized = true;
+
+    Py_SetProgramName(L"godot");
+    Py_SetPythonHome(PYTHONHOME);
+    // Initialize interpreter but skip initialization registration of signal handlers
+    Py_InitializeEx(0);
+
+    import_py4godot__pluginscript_api__utils__annotations();
+    if (PyErr_Occurred())
+    {
+        PyObject *ptype, *pvalue, *ptraceback;
+        PyErr_Fetch(&ptype, &pvalue, &ptraceback);
+
+        PyObject* str_exc_type = PyObject_Repr(pvalue); //Now a unicode
+        PyObject* pyStr = PyUnicode_AsEncodedString(str_exc_type, "utf-8","Error ~");
+        const char *strExcType = PyBytes_AS_STRING(pyStr);
+        PyErr_Print();
+        _interface->print_error(strExcType, "test", "test", 1, 1);
+        assert(false);
+        return;
+    }
+
+    PyEval_InitThreads();
+    if (PyErr_Occurred())
+    {
+        PyErr_Print();
+        assert(false);
+        return ;
+    }
+
+    // Release the Kraken... er I mean the GIL !
+    gilstate = PyEval_SaveThread();
+}
+
 
 bool string_names_equal_script(StringName left, StringName right){
     uint8_t ret;
@@ -56,7 +101,7 @@ void PyScriptExtension::_placeholder_instance_create( Object& for_object, GDExte
 void PyScriptExtension::_instance_has( Object& object, GDExtensionTypePtr res){}
 void PyScriptExtension::_has_source_code(GDExtensionTypePtr res){}
 void PyScriptExtension::_get_source_code(GDExtensionTypePtr& res){
-    main_interface->string_new_with_utf8_chars(res, source_code);
+    main_interface->string_new_with_utf8_chars(res, source_code.c_str());
 }
 void PyScriptExtension::_set_source_code( String& code, GDExtensionTypePtr res){}
 void PyScriptExtension::_reload( bool keep_state, GDExtensionTypePtr res){}
@@ -96,12 +141,23 @@ void PyScriptExtension::_is_placeholder_fallback_enabled(GDExtensionTypePtr res)
 }
 void PyScriptExtension::_get_rpc_config(GDExtensionTypePtr res){}
 void PyScriptExtension::_set_source_code_internal(String source_code){
-    this->source_code = gd_string_to_c_string(main_interface, &source_code.godot_owner, source_code.length());
-    //exec_class(source_code, path);
+    m.lock();
+    auto gil_state = PyGILState_Ensure();
+    char* c_source_code;
+    gd_string_to_c_string(main_interface, &source_code.godot_owner, source_code.length(), &c_source_code);
+    this->source_code = std::string(c_source_code);
+    main_interface->print_error("exec_class: before", "test", "test",1,1);
+    auto source = PyUnicode_FromString(this->source_code.c_str());
+    auto _path = PyUnicode_FromString(path.c_str());
+    assert(source != nullptr);
+    assert(_path != nullptr);
+    exec_class(source, _path, main_interface);
+    PyGILState_Release(gil_state);
+    m.unlock();
 }
 
 void PyScriptExtension::set_path( const char* path){
-    this->path = path;
+    this->path = std::string{path};
 }
 namespace script{
 void call_virtual_func__editor_can_reload_from_file(GDExtensionClassInstancePtr p_instance, const GDExtensionConstTypePtr* p_args, GDExtensionTypePtr r_ret) {
@@ -618,6 +674,7 @@ void init_func_names_script(){
 
 void register_class_script(){
     init_func_names_script();
+    init_pluginscript_api();
     operator_equal_string_namescript = _interface->variant_get_ptr_operator_evaluator(
         GDExtensionVariantOperator::GDEXTENSION_VARIANT_OP_EQUAL,
         GDExtensionVariantType::GDEXTENSION_VARIANT_TYPE_STRING_NAME,

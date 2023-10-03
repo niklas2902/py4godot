@@ -66,29 +66,8 @@ operator_to_variant_operator = {"+":"GDExtensionVariantOperator.GDEXTENSION_VARI
                                 ">=": "GDExtensionVariantOperator.GDEXTENSION_VARIANT_OP_GREATER_EQUAL",
                                 }
 def generate_import():
-    result = \
-        """from py4godot.utils.Wrapper4 cimport *
-from py4godot.utils.VariantTypeWrapper4 cimport *
-from py4godot.utils.utils cimport *
-from py4godot.godot_bindings.binding4_godot4 cimport *
-from py4godot.core.variant4.Variant4 cimport *
-from py4godot.enums.enums4 cimport *
-from py4godot_core_holder.core_holder cimport *
-from py4godot.godot_bindings.binding4_godot4 cimport *
-from py4godot.events.EventHolder cimport *
-from libc.stdlib cimport malloc, free
-from cpython cimport Py_INCREF, Py_DECREF, PyObject
-def print_error(*objects, sep=' ', end=''):
-    cdef str string = ""
-    for object in objects:
-        string += str(object) + sep
-    string.rstrip(sep)
-    string += end
-    b_str = string.encode('utf-8')
-    cdef char* c_str = b_str
-    gdnative_interface.print_error(c_str, "test", "test",1, 1);
-
-"""
+    result = ("from py4godot.core.variant4.Variant4 cimport *\n"
+              "from libcpp cimport bool\n")
     return result
 
 def generate_constructor_args(constructor):
@@ -172,11 +151,6 @@ def generate_class_imports(classes):
     return result
 
 
-def generate_header_statements():
-    res = "cdef GDExtensionInterface* gdnative_interface = get_interface()"
-    res = generate_newline(res)
-    return res
-
 def generate_newline(str_):
     return str_ + "\n"
 
@@ -210,8 +184,8 @@ def get_base_class(class_):
     if "inherits" in class_.keys():
         return class_["inherits"]
     if class_["name"] in builtin_classes:
-        return "VariantTypeWrapper4"
-    return "Wrapper4"
+        return ""
+    return ""
 
 def strip_symbols_from_type(type):
     return type.replace("*","").replace("const","").strip()
@@ -444,7 +418,7 @@ def generate_method_args(method):
         elif untypearray(arg["type"]) in builtin_classes - IGNORED_CLASSES:
             res += f"{pythonize_name(arg['name'])}.{untypearray(arg['type'])}_internal_class, "
         elif arg["type"] == "Variant":
-            res += f"NULL, " #TODO: implement
+            res += f"{pythonize_name(arg['name'])}.variant, " #TODO: implement
         else:
             res += f"{pythonize_name(arg['name'])}, "
     if len (res) > 2:
@@ -632,6 +606,9 @@ def ungodottype(type_):
     if (type_ == "Variant"):
         return "object"
     """
+    if (type_ == "Variant"):
+        return "PyVariant"
+
     return type_
 
 
@@ -794,6 +771,8 @@ def init_return_type(return_type):
 def address_param(target):
     if target in builtin_classes - {"int", "float", "bool", "Nil"}:
         return f"(<{target}>other).godot_owner"
+    if target == "Variant":
+        return "other.variant"
     if target == "int":
         return "&primitive_val_int"
     if target == "float":
@@ -833,7 +812,6 @@ def generate_classes(classes, filename, is_core=False):
         for cls in classes_to_import:
             res += f"from py4godot.classes.{cls}.{cls} cimport *"
             res = generate_newline(res)
-    res += generate_header_statements()
     for class_ in classes:
         if (class_["name"] in IGNORED_CLASSES):
             continue

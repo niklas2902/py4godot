@@ -423,6 +423,8 @@ def generate_ret_value_assign(argument):
         return f"&{pythonize_name(argument['name'])}.godot_owner"
     elif "typedarray" in argument["type"]:
         return f"{pythonize_name(argument['name'])}.godot_owner"
+    elif "Variant" == argument["type"]:
+        return f"&{pythonize_name(argument['name'])}.native_ptr"
     return f"&{pythonize_name(argument['name'])}"
 
 

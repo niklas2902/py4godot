@@ -449,4 +449,5 @@ cdef extern from "Python.h":
     cdef PyObject* PyUnicode_FromString(const char* s);
     cdef  PyObject* PyObject_Str(PyObject *o);
     PyUnicode_FromStringAndSize(const char *u, Py_ssize_t size)
+
 cdef GDExtensionInterface* gdnative_interface

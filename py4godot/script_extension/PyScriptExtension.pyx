@@ -13,7 +13,6 @@ from py4godot.classes.typed_arrays cimport *
 from py4godot.Instance_data.InstanceData cimport *
 from cpython cimport Py_INCREF, Py_DECREF, PyObject
 from cython.operator cimport dereference
-from py4godot.utils.ScriptHolder cimport *
 from py4godot.events.EventHolder cimport *
 
 cdef void set_lang(PyLanguage lang):
