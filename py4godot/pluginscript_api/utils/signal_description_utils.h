@@ -8,7 +8,7 @@ void print_error(char* text){
     get_interface()->print_error(text, "test", "test", 1, 1);
 }
 
-void create_signal_arg(char* name, int variant_type, Array& args_dicts){
+void create_signal_arg(const char* name, int variant_type, Array& args_dicts){
     Dictionary arg_dict = Dictionary::new0();
     Variant arg_name_key_variant = Variant(c_string_to_string("name"));
 
@@ -33,7 +33,8 @@ Dictionary init_signal_description(char* name, std::vector<CPPSignalArg> args){
     Variant signal_key_variant = Variant(signal_key);
     Variant signal_name_variant = Variant(c_string_to_string(name));
     Variant var_name = Variant::new_static(get_interface()->dictionary_operator_index(&signal_dict.godot_owner, &signal_key_variant.native_ptr));
-    var_name.init_type(c_string_to_string(name));
+    auto string_name = c_string_to_string(name);
+    var_name.init_type(string_name);
     auto var_signal_dict = Variant(signal_dict);
 
     // add args
