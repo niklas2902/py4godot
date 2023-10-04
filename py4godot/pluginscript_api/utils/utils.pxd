@@ -3,6 +3,10 @@ from py4godot.classes.cpp_bridge cimport *
 from libcpp.vector cimport vector
 
 cdef extern from "help_types.h":
+    ctypedef struct TransferObject:
+        vector[Dictionary] signals
+
+
     ctypedef struct CPPSignalArg:
         char* name;
         GDExtensionVariantType type;

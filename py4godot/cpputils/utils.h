@@ -38,3 +38,13 @@ static void add_string_to_array(GDExtensionTypePtr array, String string){
     GDExtensionPtrBuiltInMethod method_to_call = _interface->variant_get_ptr_builtin_method(GDExtensionVariantType::GDEXTENSION_VARIANT_TYPE_PACKED_STRING_ARRAY, &_method_name.godot_owner, 816187996);
     method_to_call(array, &_args[0], &_ret, 1);
 }
+
+static void add_variant_to_array(GDExtensionTypePtr var_array, Variant& val){
+     GDExtensionTypePtr _args[1];
+    _args[0] = &val.native_ptr;
+    GDExtensionTypePtr _ret;
+    StringName _class_name = c_string_to_string_name("Array");
+    StringName _method_name = c_string_to_string_name("push_back");
+    GDExtensionPtrBuiltInMethod method_to_call = _interface->variant_get_ptr_builtin_method(GDExtensionVariantType::GDEXTENSION_VARIANT_TYPE_ARRAY, &_method_name.godot_owner, 3316032543);
+    method_to_call(var_array, &_args[0], &_ret, 1);
+}

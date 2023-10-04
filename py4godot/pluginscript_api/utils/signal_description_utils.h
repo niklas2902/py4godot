@@ -47,17 +47,13 @@ Dictionary init_signal_description(char* name, std::vector<CPPSignalArg> args){
     get_interface()->array_set_typed(&args_array.godot_owner, GDExtensionVariantType::GDEXTENSION_VARIANT_TYPE_DICTIONARY,  &dictionary_signal_args.godot_owner, &dictionary_var.native_ptr);
 
     // create a signal arg
-    Variant var_args_dict;
     for (const auto& arg: args){
          create_signal_arg(arg.name, arg.type, args_array);
      }
-    //    signal_arg = arg
-    //    var_args_dict = self.create_signal_arg(signal_arg.name, signal_arg.variant_type)
-    //self.args_array.push_back(var_args_dict)
 
 
     //add args dictionaries to args array
-    //var_args.init_type(args_array);
+    var_args.init_type(args_array);
 
     return signal_dict;
 }

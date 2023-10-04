@@ -123,10 +123,23 @@ void PyScriptExtension::_get_language(GDExtensionTypePtr res){
 void PyScriptExtension::_has_script_signal( StringName& signal, GDExtensionTypePtr res){
     *static_cast<bool*>(res) = false;
 }
-void PyScriptExtension::_get_script_signal_list(GDExtensionTypePtr res){}
-void PyScriptExtension::_has_property_default_value( StringName& property, GDExtensionTypePtr res){
-    *static_cast<bool*>(res) = false;
+void PyScriptExtension::_get_script_signal_list(GDExtensionTypePtr res){
+    //auto res_array = Array::new_static(&res);
+    int index;
+    for (auto& signal_dict : transfer_object.signals) {
+        Variant var_signal = Variant{};
+
+        //res_array.push_back(var_signal);
+        auto constructor = get_interface()->get_variant_from_type_constructor(GDExtensionVariantType::GDEXTENSION_VARIANT_TYPE_DICTIONARY);
+        constructor(&(var_signal.native_ptr), &signal_dict.godot_owner);
+
+        add_variant_to_array(res, var_signal);
+        main_interface->print_error("create_signal_dict", "test", "test", 1, 1);
+    }
+
+    //assert(false);
 }
+void PyScriptExtension::_has_property_default_value( StringName& property, GDExtensionTypePtr res){}
 void PyScriptExtension::_get_property_default_value( StringName& property, GDExtensionTypePtr res){}
 void PyScriptExtension::_update_exports(GDExtensionTypePtr res){}
 void PyScriptExtension::_get_script_method_list(GDExtensionTypePtr res){}
@@ -151,7 +164,7 @@ void PyScriptExtension::_set_source_code_internal(String source_code){
     auto _path = PyUnicode_FromString(path.c_str());
     assert(source != nullptr);
     assert(_path != nullptr);
-    exec_class(source, _path, main_interface);
+    transfer_object = exec_class(source, _path, main_interface);
     PyGILState_Release(gil_state);
     m.unlock();
 }

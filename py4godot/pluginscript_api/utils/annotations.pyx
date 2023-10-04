@@ -11,20 +11,15 @@ from py4godot.pluginscript_api.utils.SignalArg cimport *
 """
 from importlib.machinery import SourceFileLoader
 
-class TransferObject():
-    def __init__(self, gd_class, properties,signals, methods):
-        self.gd_class = gd_class
-        self.properties = properties
-        self.signals = signals
-        self.methods = methods
-
-cdef api void exec_class(str source_string, str class_name_, GDExtensionInterface* main_interface):
+cdef api TransferObject exec_class(str source_string, str class_name_, GDExtensionInterface* main_interface):
     global  gd_class, properties, signals, methods, interface_ptr
     set_interface_ptr(main_interface)
     interface_ptr = main_interface
 
     cdef str py_source_string = source_string
     cdef str py_class_name_ = class_name_
+
+    cdef TransferObject transfer_object = TransferObject()
 
     main_interface.print_error("exec_class: start", "test", "test",1,1)
     methods = []
@@ -47,7 +42,9 @@ cdef api void exec_class(str source_string, str class_name_, GDExtensionInterfac
         main_interface.print_error("exec_class: Exception happened:", "test", "test",1,1)
         main_interface.print_error(py_class_name_.encode("utf-8"), "test", "test",1,1)
         main_interface.print_error(("exec_class: Exception happened:" + traceback.format_exc()).encode("utf-8"), "test", "test",1,1)
-    #return TransferObject(gd_class, properties, signals, methods)
+    for signal in signals:
+        transfer_object.signals.push_back((<SignalDescription>signal).get_signal_dict().Dictionary_internal_class)
+    return transfer_object
 
 def gdclass(cls):
     global gd_class

@@ -2,6 +2,7 @@
 #include "py4godot/gdextension-api/gdextension_interface.h"
 #include "py4godot/cppclasses/ScriptExtension/ScriptExtension.h"
 #include "py4godot/script_language/PyLanguage.h"
+#include "py4godot/godot_bindings/help_types.h"
 #include <unordered_set>
 #include <string>
 
@@ -11,6 +12,9 @@ namespace godot{
       const char* script_name;
       std::string source_code;
       std::string path;
+
+      TransferObject transfer_object;
+
       /*cdef Wrapper4 gd_obj
       cdef object gd_class
       cdef list properties
