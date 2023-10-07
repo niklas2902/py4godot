@@ -5,8 +5,9 @@
 #include "py4godot/cppclasses/Script/Script.h"
 #include "py4godot/cppcore/Variant.h"
 #include "py4godot/pluginscript_api/api.h"
-#include "py4godot/script_instance/PyScriptInstance.h"
+#include "py4godot/script_instance/instance.h"
 #include "py4godot/pluginscript_api/utils/annotations_api.h"
+#include "py4godot/instance_data/CPPInstanceData.h"
 #include <cassert>
 #include "Python.h"
 #include <mutex>
@@ -91,12 +92,69 @@ void PyScriptExtension::_get_global_name(GDExtensionTypePtr res){}
 void PyScriptExtension::_inherits_script( Script* script, GDExtensionTypePtr res){}
 void PyScriptExtension::_get_instance_base_type(GDExtensionTypePtr res){}
 void PyScriptExtension::_instance_create( Object& for_object, GDExtensionTypePtr res){
-    auto instance_ptr = main_interface->script_instance_create(&native_script_instance, NULL);
+    m.lock();
+    auto gil_state = PyGILState_Ensure();
+    auto instance = PyObject_CallObject(transfer_object.class_, nullptr);
+
+    //print_error("before get_class")
+    //for_object.get_class()
+    GDExtensionVariantFromTypeConstructorFunc constructor_func;
+    GDExtensionScriptInstancePtr instance_ptr;
+    GDExtensionScriptInstanceInfo* instance_info;
+    InstanceData* gd_instance = new InstanceData();
+
+    gd_instance->owner = instance;
+    gd_instance->properties = transfer_object.properties;
+    //gd_instance.set_methods(methods)
+    get_placeholder_instance_ptr(get_interface(), &(gd_instance->info));
+
+    for (auto& property : transfer_object.properties) {
+        //print_error(f"create_property:{gd_string_name_to_py_string(property.get_name())}->{property.get_default_value()}");
+        //setattr(gd_obj, gd_string_name_to_py_string(property.get_name()), property.get_default_value());
+//        auto property_name = gd_string_to_c_string(get_interface(), property.name, String::new_static(property.name).length());
+//        int ret = PyObject_SetAttrString( instance, property_name, property.default_value );
+
+//        if( ret == -1 )
+//          assert(false);
+    }
+    //instance.godot_owner = for_object.godot_owner;
+    gd_instance->script = this;
+    //assert(false);
+    Py_INCREF(instance);
+    instance_ptr = get_interface()->script_instance_create(&(gd_instance->info), gd_instance);
     *((GDExtensionTypePtr*)res) = instance_ptr;
+    PyGILState_Release(gil_state);
+    m.unlock();
 }
 void PyScriptExtension::_placeholder_instance_create( Object& for_object, GDExtensionTypePtr res){
-    auto instance_ptr = main_interface->script_instance_create(&native_script_instance, NULL);
-    *((GDExtensionTypePtr*)res) = instance_ptr;
+    m.lock();
+    auto gil_state = PyGILState_Ensure();
+
+    auto instance = PyObject_CallObject(transfer_object.class_, nullptr);
+
+    //print_error("before get_class")
+    //for_object.get_class()
+    GDExtensionVariantFromTypeConstructorFunc constructor_func;
+    GDExtensionScriptInstancePtr instance_ptr;
+    GDExtensionScriptInstanceInfo* instance_info;
+    InstanceData* gd_instance = new InstanceData();
+
+    gd_instance->owner = instance;
+    gd_instance->properties = transfer_object.properties;
+    //gd_instance.set_methods(methods)
+    get_placeholder_instance_ptr(get_interface(), &(gd_instance->info));
+
+    for (auto& property : transfer_object.properties){
+        //print_error(f"create_property:{gd_string_name_to_py_string(property.get_name())}->{property.get_default_value()}");
+        //setattr(gd_obj, gd_string_name_to_py_string(property.get_name()), property.get_default_value());
+    }
+    //instance.godot_owner = for_object.godot_owner;
+    gd_instance->script = this;
+    Py_INCREF(instance);
+    instance_ptr = get_interface()->script_instance_create(&(gd_instance->info), gd_instance);
+    *((GDExtensionTypePtr*)res) =  instance_ptr;
+    PyGILState_Release(gil_state);
+    m.unlock();
 }
 void PyScriptExtension::_instance_has( Object& object, GDExtensionTypePtr res){}
 void PyScriptExtension::_has_source_code(GDExtensionTypePtr res){}
@@ -137,7 +195,6 @@ void PyScriptExtension::_get_script_signal_list(GDExtensionTypePtr res){
         main_interface->print_error("create_signal_dict", "test", "test", 1, 1);
     }
 
-    //assert(false);
 }
 void PyScriptExtension::_has_property_default_value( StringName& property, GDExtensionTypePtr res){}
 void PyScriptExtension::_get_property_default_value( StringName& property, GDExtensionTypePtr res){}

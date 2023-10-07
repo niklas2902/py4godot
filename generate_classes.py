@@ -77,11 +77,11 @@ def generate_constructor_args(constructor):
 
     for arg in constructor["arguments"]:
         if not arg["type"].startswith("enum::"):
-            result += f"{untypearray(unbitfield_type(arg['type']))} {pythonize_name(arg['name'])}, "
+            result += f"{ungodottype(untypearray(unbitfield_type(arg['type'])))} {pythonize_name(arg['name'])}, "
         else:
             #enums are marked with enum:: . To be able to use this, we have to strip this
             arg_type = arg["type"].replace("enum::", "")
-            result += f"{untypearray(unenumize_type(arg_type))} {pythonize_name(arg['name'])}, "
+            result += f"{ungodottype(untypearray(unenumize_type(arg_type)))} {pythonize_name(arg['name'])}, "
     result = result[:-2]
     return result
 
@@ -117,6 +117,8 @@ def generate_constructor_call_args(constructor):
     for arg in constructor["arguments"]:
         if arg["type"] in classes - IGNORED_CLASSES:
             result += f"{pythonize_name(arg['name'])}.{arg['type']}_internal_class, "
+        elif arg["type"] == "Variant":
+            result += f"{pythonize_name(arg['name'])}.variant, "
         else:
             result += f"{pythonize_name(arg['name'])}, "
     result = result[:-2]
@@ -466,7 +468,7 @@ def generate_common_methods(class_):
         result += generate_constructor(class_["name"])
         result = generate_newline(result)
     result = generate_newline(result)
-    if class_["name"] not in builtin_classes:
+    if class_["name"] in builtin_classes:
         result += generate_constructors(class_)
         result = generate_newline(result)
     return result
@@ -587,7 +589,7 @@ def generate_property(property):
 
 
 def pythonize_name(name):
-    if name in ("from", "len", "in", "for", "with", "class", "pass", "raise", "global", "new", "get_interface"):
+    if name in ("from", "len", "in", "for", "with", "class", "pass", "raise", "global", "new", "get_interface", "object"):
         return name + "_"
     return name
 
@@ -812,6 +814,9 @@ def generate_classes(classes, filename, is_core=False):
         for cls in classes_to_import:
             res += f"from py4godot.classes.{cls}.{cls} cimport *"
             res = generate_newline(res)
+    else:
+        res += f"from py4godot.classes.Object.Object cimport *"
+        res = generate_newline(res)
     for class_ in classes:
         if (class_["name"] in IGNORED_CLASSES):
             continue

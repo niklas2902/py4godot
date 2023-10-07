@@ -1,5 +1,6 @@
 from py4godot.classes.generated4_core cimport *
 from py4godot.classes.Object.Object cimport *
+cimport py4godot.utils.utils as utils
 
 cdef dict types_dict = {
 int:GDExtensionVariantType.GDEXTENSION_VARIANT_TYPE_INT,
@@ -41,11 +42,10 @@ PackedVector3Array:GDExtensionVariantType.GDEXTENSION_VARIANT_TYPE_PACKED_VECTOR
 Basis:GDExtensionVariantType.GDEXTENSION_VARIANT_TYPE_BASIS,
 }
 
-"""cdef object convert_val(object val):
+cdef object convert_val(object val):
     if(type(val) == str):
-        return c_string_to_string(val.encode("utf-8"))
+        return utils.py_c_string_to_string(val.encode("utf-8"))
     return val
-"""
 
 cdef GDExtensionVariantType get_variant_type(object type_):
     if(type_ in types_dict.keys()):

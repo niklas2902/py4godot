@@ -438,6 +438,7 @@ cdef extern from "c_utils.h":
     void set_gdnative_reference(GDExtensionTypePtr& a, GDExtensionTypePtr& b)
     GDExtensionVariantPtr create_variant(GDExtensionInterface * interface_ptr)
     void create_variant_bool(GDExtensionInterface * interface_ptr, GDExtensionVariantPtr variant_ptr, uint8_t val)
+
     char * gd_string_c_string(GDExtensionInterface* interface_ptr, GDExtensionConstStringPtr string_ptr, int length) with gil
     GDExtensionVariantPtr create_variant2(GDExtensionInterface * interface_ptr)
     void * create_native_ptr(GDExtensionInterface* interface_ptr)

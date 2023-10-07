@@ -1,8 +1,10 @@
+#pragma once
 #include "gdextension_interface.h"
 
 #include "PyScriptInstance_api.h"
+#include "py4godot/instance_data/CPPInstanceData.h"
 #include <windows.h>
-
+#include <cassert>
 GDExtensionScriptInstanceInfo native_script_instance_placeholder;
 GDExtensionScriptInstanceInfo native_script_instance;
 GDExtensionInterface *native_script;
@@ -42,11 +44,27 @@ void c_instance_set(GDExtensionScriptInstanceDataPtr p_instance, GDExtensionCons
     CloseHandle(ghMutex);
 }
 
+const GDExtensionPropertyInfo * c_instance_get_property_list(GDExtensionScriptInstanceDataPtr p_instance, uint32_t *r_count){
+    auto p_instance_data = (InstanceData*) p_instance;
+    auto properties = p_instance_data->properties;
+    *r_count = properties.size();
+    if (properties.size() == 0) {
+        return nullptr;
+    }
+    return &properties[0];
+}
+
+GDExtensionObjectPtr c_instance_get_script(GDExtensionScriptInstanceDataPtr p_instance){
+    auto p_instance_data = (InstanceData*) p_instance;
+    return p_instance_data->script->godot_owner;
+}
+
+
 void init_instance(GDExtensionInterface *p_interface, GDExtensionScriptInstanceInfo* native_script_instance, int is_placeholder){
     p_interface->print_error("init_instance 1", "test", "test",1,1);
     native_script = p_interface;
     import_py4godot__script_instance__PyScriptInstance();
-    if (PyErr_Occurred())
+    /*if (PyErr_Occurred())
     {
         p_interface->print_error("module not found", "test", "test",1,1);
 
@@ -54,9 +72,12 @@ void init_instance(GDExtensionInterface *p_interface, GDExtensionScriptInstanceI
         PyErr_Print();
         return ;
     }
+    */
     p_interface->print_error("init_instance2", "test", "test",1,1);
     native_script_instance->get_owner_func = get_owner;
-    native_script_instance->is_placeholder_func = is_placeholder;
+    native_script_instance->get_property_list_func = c_instance_get_property_list;
+    native_script_instance->get_script_func = c_instance_get_script;
+    /*native_script_instance->is_placeholder_func = is_placeholder;
     native_script_instance->set_func = c_instance_set;
     native_script_instance->get_func = c_instance_get;
     native_script_instance->get_property_list_func = instance_get_property_list;
@@ -79,17 +100,18 @@ void init_instance(GDExtensionInterface *p_interface, GDExtensionScriptInstanceI
     native_script_instance->get_language_func = instance_get_language;
     native_script_instance->free_func = instance_free;
     p_interface->print_error("init_instance3", "test", "test",1,1);
+    */
 }
 
 void get_instance_ptr(GDExtensionInterface *p_interface,GDExtensionScriptInstanceInfo* info ){
     //GDExtensionScriptInstanceInfo * info = malloc(sizeof(GDExtensionScriptInstanceInfo));
     init_instance(p_interface, info, 0);
-    return info;
+    //return info;
 }
 
 
 void get_placeholder_instance_ptr(GDExtensionInterface *p_interface, GDExtensionScriptInstanceInfo* info){
     //GDExtensionScriptInstanceInfo * info = malloc(sizeof(GDExtensionScriptInstanceInfo));
     init_instance(p_interface, info, 1);
-    return info;
+    //return info;
 }

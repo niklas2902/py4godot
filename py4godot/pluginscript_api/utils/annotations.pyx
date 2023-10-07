@@ -3,9 +3,10 @@ import inspect, traceback
 from py4godot.pluginscript_api.hints.BaseHint cimport *
 from py4godot.godot_bindings.binding4_godot4 cimport *
 from py4godot.pluginscript_api.utils.utils cimport *
-
+from cpython cimport Py_INCREF, Py_DECREF, PyObject
 
 from py4godot.pluginscript_api.utils.SignalDescription cimport *
+from py4godot.pluginscript_api.utils.PropertyDescription cimport *
 """from py4godot.pluginscript_api.utils.MethodDescription cimport *
 from py4godot.pluginscript_api.utils.SignalArg cimport *
 """
@@ -44,13 +45,20 @@ cdef api TransferObject exec_class(str source_string, str class_name_, GDExtensi
         main_interface.print_error(("exec_class: Exception happened:" + traceback.format_exc()).encode("utf-8"), "test", "test",1,1)
     for signal in signals:
         transfer_object.signals.push_back((<SignalDescription>signal).get_signal_dict().Dictionary_internal_class)
+
+    cdef GDExtensionPropertyInfo property_info
+    for property in properties:
+        property_info = (<PropertyDescription>property).property_info
+        transfer_object.properties.push_back(property_info)
+
+    Py_INCREF(gd_class)
+    transfer_object.class_ = <PyObject*>gd_class
     return transfer_object
 
 def gdclass(cls):
     global gd_class
     if(gd_class == None):
         gd_class = cls
-        #print_error("class:", gd_class)
     else:
         raise Exception("More than one class was marked as gd_class or gd_tool_class in one file")
     return cls
@@ -65,10 +73,9 @@ def gdtool(cls):
         return cls
 
 def prop(name,type_, defaultval, hint = BaseHint(), hint_string = ""):
-    pass
-    #properties.append(PropertyDescription(name = name,
-    #            type_=type_,hint = hint,usage = 4096|6|32768,
-    #            default_value=defaultval))
+    properties.append(PropertyDescription(name = name,
+                type_=type_,hint = hint,usage = 4096|6|32768,
+                default_value=defaultval))
 
 def gdmethod(func):
     args = inspect.getfullargspec(func).args
