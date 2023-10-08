@@ -20,7 +20,7 @@ void c_instance_get(GDExtensionScriptInstanceDataPtr p_instance, GDExtensionCons
     NULL,              // default security attributes
     FALSE,             // initially not owned
     NULL);
-    instance_get(p_instance, p_name, r_ret);
+    //instance_get(p_instance, p_name, r_ret);
     CloseHandle(ghMutex);
 }
 
@@ -30,18 +30,13 @@ void c_instance_call(GDExtensionScriptInstanceDataPtr p_self, GDExtensionConstSt
     NULL,              // default security attributes
     FALSE,             // initially not owned
     NULL);
-    instance_call(p_self, p_method, p_args, p_argument_count, r_return, r_error);
+    //instance_call(p_self, p_method, p_args, p_argument_count, r_return, r_error);
     CloseHandle(ghMutex);
 }
 
 
-void c_instance_set(GDExtensionScriptInstanceDataPtr p_instance, GDExtensionConstStringNamePtr p_name, GDExtensionConstVariantPtr p_value){
-    ghMutex = CreateMutex(
-    NULL,              // default security attributes
-    FALSE,             // initially not owned
-    NULL);
-    instance_set(p_instance, p_name, p_value);
-    CloseHandle(ghMutex);
+GDExtensionBool c_instance_set(GDExtensionScriptInstanceDataPtr p_instance, GDExtensionConstStringNamePtr p_name, GDExtensionConstVariantPtr p_value){
+    return instance_set(p_instance, p_name, p_value);
 }
 
 const GDExtensionPropertyInfo * c_instance_get_property_list(GDExtensionScriptInstanceDataPtr p_instance, uint32_t *r_count){
@@ -56,27 +51,31 @@ const GDExtensionPropertyInfo * c_instance_get_property_list(GDExtensionScriptIn
 
 GDExtensionObjectPtr c_instance_get_script(GDExtensionScriptInstanceDataPtr p_instance){
     auto p_instance_data = (InstanceData*) p_instance;
-    return p_instance_data->script->godot_owner;
+    return ((PyScriptExtension*)(p_instance_data->script))->godot_owner;
 }
 
 
 void init_instance(GDExtensionInterface *p_interface, GDExtensionScriptInstanceInfo* native_script_instance, int is_placeholder){
-    p_interface->print_error("init_instance 1", "test", "test",1,1);
     native_script = p_interface;
     import_py4godot__script_instance__PyScriptInstance();
-    /*if (PyErr_Occurred())
+    if (PyErr_Occurred())
     {
-        p_interface->print_error("module not found", "test", "test",1,1);
+        PyObject *ptype, *pvalue, *ptraceback;
+        PyErr_Fetch(&ptype, &pvalue, &ptraceback);
 
-        printf("module not found\n");
+        PyObject* str_exc_type = PyObject_Repr(pvalue); //Now a unicode
+        PyObject* pyStr = PyUnicode_AsEncodedString(str_exc_type, "utf-8","Error ~");
+        const char *strExcType = PyBytes_AS_STRING(pyStr);
         PyErr_Print();
-        return ;
+        _interface->print_error(strExcType, "test", "test", 1, 1);
+        assert(false);
+        return;
     }
-    */
-    p_interface->print_error("init_instance2", "test", "test",1,1);
-    native_script_instance->get_owner_func = get_owner;
+
+    //native_script_instance->get_owner_func = get_owner;
     native_script_instance->get_property_list_func = c_instance_get_property_list;
     native_script_instance->get_script_func = c_instance_get_script;
+    native_script_instance->set_func = c_instance_set;
     /*native_script_instance->is_placeholder_func = is_placeholder;
     native_script_instance->set_func = c_instance_set;
     native_script_instance->get_func = c_instance_get;

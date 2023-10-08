@@ -11,6 +11,12 @@ static const char* gd_string_to_c_string(GDExtensionInterface* interface_ptr, GD
     return native_string;
 }
 
+static void gd_string_to_c_string(GDExtensionInterface* interface_ptr, String string, int length,  char** res_string) {
+    *res_string = (char*)malloc(sizeof(char) * (length+1));
+    interface_ptr->string_to_utf8_chars(&string.godot_owner, *res_string, length);
+    (*res_string)[length] = '\0';
+}
+
 static void gd_string_to_c_string(GDExtensionInterface* interface_ptr, GDExtensionConstStringPtr string_ptr, int length, char** res_string) {
     *res_string = (char*)malloc(sizeof(char) * (length+1));
     interface_ptr->string_to_utf8_chars(string_ptr, *res_string, length);
@@ -47,4 +53,8 @@ static void add_variant_to_array(GDExtensionTypePtr var_array, Variant& val){
     StringName _method_name = c_string_to_string_name("push_back");
     GDExtensionPtrBuiltInMethod method_to_call = _interface->variant_get_ptr_builtin_method(GDExtensionVariantType::GDEXTENSION_VARIANT_TYPE_ARRAY, &_method_name.godot_owner, 3316032543);
     method_to_call(var_array, &_args[0], &_ret, 1);
+}
+
+static GDExtensionInterface* get_interface_utils(){
+    return get_interface();
 }

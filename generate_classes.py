@@ -213,8 +213,33 @@ def is_primitive(type_):
 
 
 def generate_return_statement(method_):
-    # TODO handle primitive types
+    # TODO generate returns
     result = ""
+    if "return_value" in method_.keys() or "return_type" in method_.keys():
+        ret_val = None
+        if("return_value" in method_.keys()):
+            ret_val = ReturnType("_ret", method_['return_value']['type'])
+        else:
+            ret_val = ReturnType("_ret", method_['return_type'])
+        if ret_val.type in classes:
+            if ret_val.type in builtin_classes:
+                pass
+                #result += f"{INDENT * 2}cdef {ret_val.type} {ret_val.name} = {ret_val.type}.__new__({ret_val.type})"
+                #result = generate_newline(result)
+                #result += f"{INDENT * 2}create_native_ptr_from_ptr(gdnative_interface, &_ret.native_ptr)"
+            else:
+                pass
+                #result += f"{INDENT * 2}cdef {ret_val.type} {ret_val.name} = {ret_val.type}()"
+        elif ret_val.type == "Variant":
+            pass
+            #result += f"{INDENT * 2}cdef {ret_val.type} {ret_val.name} = {ret_val.type}()"
+        elif "typedarray" in ret_val.type:
+            pass
+            #result += f"{INDENT * 2}cdef Array _ret = Array.new0()"
+        else:
+            result += f"{INDENT * 2}return ret"
+    else:
+        result += f""
     return result
 
 def generate_singleton_constructor(classname):
@@ -402,10 +427,10 @@ def generate_method_body_standard(class_, method):
     result += generate_operators(class_)
     result = generate_newline(result)
     if not is_static(method):
-        result += f"{INDENT*2}self.{class_['name']}_internal_class.{pythonize_name(method['name'])}({generate_method_args(method)})"
+        result += f"{INDENT*2}ret = self.{class_['name']}_internal_class.{pythonize_name(method['name'])}({generate_method_args(method)})"
     else:
-        result += f"{INDENT * 2}CPP{class_['name']}.{pythonize_name(method['name'])}({generate_method_args(method)})"
-
+        result += f"{INDENT * 2}ret = CPP{class_['name']}.{pythonize_name(method['name'])}({generate_method_args(method)})"
+    result = generate_newline(result)
     result += generate_return_statement(method)
     return result
 

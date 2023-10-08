@@ -1,46 +1,27 @@
 from cython.operator cimport dereference
 from cpython cimport Py_INCREF, Py_DECREF, PyObject
-from py4godot.utils.print_tools import *
 from py4godot.utils.utils cimport *
 from py4godot.Instance_data.InstanceData cimport *
-from py4godot.pluginscript_api.utils.PropertyDescription cimport *
-from py4godot.pluginscript_api.utils.MethodDescription cimport *
+cimport py4godot.classes.cpp_bridge as cppbridge
+from py4godot.classes.generated4_core cimport *
 from py4godot.core.variant4.Variant4 cimport *
+from py4godot.utils.print_tools import *
 from libc.stdlib cimport malloc, free
 import threading
 
 lock = threading.Lock()
 
-cdef GDExtensionPropertyInfo * property_infos
-cdef GDExtensionMethodInfo * method_infos
-cdef object vector = None
-cdef list converted_vals = []
-cdef list variants = []
-cdef object get_val
-cdef Variant get_variant
-cdef list objects = []
-#cdef object test_string
-cdef void* test_ptr
-cdef void* test_ptr_native
-cdef GDExtensionObjectPtr get_owner (GDExtensionScriptInstanceDataPtr p_instance) with gil:
-    print_error("-------------------instance:get_owner---------------")
-    cdef InstanceData instance = <InstanceData>p_instance
-    return instance.owner.get_godot_owner()
-
-cdef api GDExtensionBool is_placeholder(GDExtensionScriptInstanceDataPtr p_instance) with gil:
-    print_error("------is_place-holder-------")
-    return 0
-
 cdef api GDExtensionBool instance_set(GDExtensionScriptInstanceDataPtr p_instance, GDExtensionConstStringNamePtr p_name, GDExtensionConstVariantPtr p_value) with gil:
-    global test_string
-    cdef InstanceData instance = <InstanceData>p_instance
+    cdef InstanceData* instance = <InstanceData*>p_instance
     #TODO still a problem with custom string attributes. Why is this still crashing?
-    cdef StringName method_name = StringName.new_static(p_name)
+    cdef StringName method_name = StringName.__new__(StringName)
+    cdef cppbridge.StringName internal_method_name = cppbridge.StringName.new_static((<void**>p_name)[0]) #TODO: Create unconst helper
+    method_name.StringName_internal_class = internal_method_name
     cdef String method_name_str = String.new2(method_name)
-    cdef char* c_str = gd_string_c_string(gdnative_interface,method_name_str.godot_owner, method_name_str.length())
     cdef unicode py_method_name_str = gd_string_to_py_string(method_name_str)
     print_error("print_method:"+py_method_name_str)
     cdef Variant var
+    """
     try:
         var = Variant.new_static(p_value)
         #variants.append(var)
@@ -56,9 +37,10 @@ cdef api GDExtensionBool instance_set(GDExtensionScriptInstanceDataPtr p_instanc
 
     except Exception as e:
         error(f"An Exception happened:{e}|owner:{instance.owner}" )
-    print_error("after set method")
+    """
     return 1
 
+"""
 cdef api GDExtensionBool instance_get(GDExtensionScriptInstanceDataPtr p_instance, GDExtensionConstStringNamePtr p_name, GDExtensionVariantPtr r_ret) with gil:
     cdef InstanceData instance = <InstanceData>p_instance
 
@@ -88,39 +70,8 @@ cdef api GDExtensionBool instance_get(GDExtensionScriptInstanceDataPtr p_instanc
         get_var.init_type(instance.script)
     print_error("finish_get_prop:"+str(py_method_name_str))
     return 1
-
-cdef api const GDExtensionPropertyInfo *instance_get_property_list(GDExtensionScriptInstanceDataPtr p_instance, uint32_t *r_count) with gil:
-    global property_infos
-    cdef InstanceData instance = <InstanceData>p_instance
-    r_count[0] = len(instance.properties) #TODO enable properties
-    print_error("list of properties from python:", len(instance.properties))
-    print_error("prop_count:"+ str(dereference(r_count)))
-    print_error("after getting property_info")
-
-    if property_infos != NULL:
-        return property_infos
-
-    property_infos = <GDExtensionPropertyInfo*>malloc(sizeof(GDExtensionPropertyInfo)* len(instance.properties))
-    for index in range(0, len(instance.properties)):
-        property_infos[index] = (<PropertyDescription>(instance.properties[index])).property_info
-
-    return property_infos
-cdef api void instance_free_property_list(GDExtensionScriptInstanceDataPtr p_instance, const GDExtensionPropertyInfo *p_list) with gil:
-    pass
-cdef api GDExtensionVariantType instance_get_property_type(GDExtensionScriptInstanceDataPtr p_instance, GDExtensionConstStringNamePtr p_name, GDExtensionBool *r_is_valid) with gil:
-    return GDExtensionVariantType.GDEXTENSION_VARIANT_TYPE_NIL
-
-cdef api GDExtensionBool instance_property_can_revert(GDExtensionScriptInstanceDataPtr p_instance, GDExtensionConstStringNamePtr p_name) with gil:
-    return 1
-cdef api GDExtensionBool instance_property_get_revert(GDExtensionScriptInstanceDataPtr p_instance, GDExtensionConstStringNamePtr p_name, GDExtensionVariantPtr r_ret) with gil:
-    return 1
-
-cdef api void instance_property_state_add(GDExtensionConstStringNamePtr p_name, GDExtensionConstVariantPtr p_value, void *p_userdata) with gil:
-    pass
-cdef api void instance_get_property_state(GDExtensionScriptInstanceDataPtr p_instance, GDExtensionScriptInstancePropertyStateAdd p_add_func, void *p_userdata) with gil:
-    pass
-
-cdef api const GDExtensionMethodInfo * instance_get_method_list(GDExtensionScriptInstanceDataPtr p_instance, uint32_t *r_count) with gil:
+"""
+"""cdef api const GDExtensionMethodInfo * instance_get_method_list(GDExtensionScriptInstanceDataPtr p_instance, uint32_t *r_count) with gil:
     global method_infos
     print_error("call_method_list")
     cdef InstanceData instance = <InstanceData>p_instance
@@ -139,9 +90,8 @@ cdef api const GDExtensionMethodInfo * instance_get_method_list(GDExtensionScrip
     except Exception as e:
         error("Exception in method_list:", e)
     return method_infos
-cdef api void instance_free_method_list(GDExtensionScriptInstanceDataPtr p_instance, const GDExtensionMethodInfo *p_list) with gil:
-    pass
-
+"""
+"""
 cdef api GDExtensionBool instance_has_method(GDExtensionScriptInstanceDataPtr p_instance, GDExtensionConstStringNamePtr p_name) with gil:
     cdef InstanceData instance = <InstanceData>p_instance
 
@@ -182,23 +132,4 @@ cdef api void instance_call(GDExtensionScriptInstanceDataPtr p_self, GDExtension
     cdef Variant var = Variant.new_static(r_return)
     var.init_type(result)
     print_error(f"called method({py_method_name_str}):", result)
-cdef api void instance_notification(GDExtensionScriptInstanceDataPtr p_instance, int32_t p_what) with gil:
-    pass
-cdef api void instance_to_string(GDExtensionScriptInstanceDataPtr p_instance, GDExtensionBool *r_is_valid, GDExtensionStringPtr r_out) with gil:
-    pass
-
-cdef api void instance_ref_count_incremented(GDExtensionScriptInstanceDataPtr p_instance) with gil:
-    pass
-cdef api GDExtensionBool instance_ref_count_decremented(GDExtensionScriptInstanceDataPtr p_instance) with gil:
-    pass
-
-cdef api GDExtensionObjectPtr instance_get_script(GDExtensionScriptInstanceDataPtr p_instance) with gil:
-    print_error("instance_get_script")
-    cdef InstanceData instance = <InstanceData>p_instance
-    return instance.script.godot_owner
-
-cdef api GDExtensionScriptLanguagePtr instance_get_language(GDExtensionScriptInstanceDataPtr p_instance) with gil:
-    return NULL
-
-cdef api void instance_free(GDExtensionScriptInstanceDataPtr p_instance) with gil:
-    pass
+"""

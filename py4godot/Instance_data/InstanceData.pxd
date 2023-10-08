@@ -7,10 +7,10 @@ cdef extern from "py4godot/script_extension/PyScriptExtension.h" namespace "godo
         pass
 
 
-#cdef extern from "py4godot/instance_data/CPPInstanceData.h":
-#   cdef cppclass InstanceData:
-#        PyObject* owner
-#        vector[GDExtensionPropertyInfo] properties;
-#        vector[Dictionary] methods;
-#        PyScriptExtension script;
-#        GDExtensionScriptInstanceInfo info;
+cdef extern from "py4godot/instance_data/CPPInstanceData.h":
+   cdef cppclass InstanceData:
+        PyObject* owner
+        vector[GDExtensionPropertyInfo] properties;
+        vector[Dictionary] methods;
+        void* script;
+        GDExtensionScriptInstanceInfo info;
