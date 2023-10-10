@@ -145,10 +145,6 @@ def generate_class_imports(classes):
     result = "from py4godot.classes.generated4_core cimport *"
     result = "import py4godot.classes.generated4_core as generated_core"
     result = generate_newline(result)
-    for class_ in classes:
-        if not class_ in IGNORED_CLASSES:
-            result += f"from py4godot.classes.cpp_bridge cimport {class_} as CPP{class_}"
-            result = generate_newline(result)
 
     return result
 
@@ -184,7 +180,7 @@ def generate_return_value(method_):
 
 def get_base_class(class_):
     if "inherits" in class_.keys():
-        return class_["inherits"]
+        return import_type(class_["inherits"], class_["name"])
     if class_["name"] in builtin_classes:
         return ""
     return ""
@@ -426,10 +422,17 @@ def generate_method_body_standard(class_, method):
     result = generate_newline(result)
     result += generate_operators(class_)
     result = generate_newline(result)
-    if not is_static(method):
-        result += f"{INDENT*2}ret = self.{class_['name']}_internal_class.{pythonize_name(method['name'])}({generate_method_args(method)})"
+    if "return_value" in method.keys() or "return_type" in method.keys():
+        if not is_static(method):
+            result += f"{INDENT * 2}ret = self.{class_['name']}_internal_class.{pythonize_name(method['name'])}({generate_method_args(method)})"
+        else:
+            result += f"{INDENT * 2}ret = CPP{class_['name']}.{pythonize_name(method['name'])}({generate_method_args(method)})"
     else:
-        result += f"{INDENT * 2}ret = CPP{class_['name']}.{pythonize_name(method['name'])}({generate_method_args(method)})"
+        if not is_static(method):
+            result += f"{INDENT * 2}self.{class_['name']}_internal_class.{pythonize_name(method['name'])}({generate_method_args(method)})"
+        else:
+            result += f"{INDENT * 2}CPP{class_['name']}.{pythonize_name(method['name'])}({generate_method_args(method)})"
+
     result = generate_newline(result)
     result += generate_return_statement(method)
     return result
@@ -496,7 +499,18 @@ def generate_common_methods(class_):
     if class_["name"] in builtin_classes:
         result += generate_constructors(class_)
         result = generate_newline(result)
+
+    result += generate_new_static(class_)
+
     return result
+
+def generate_new_static(class_):
+    res = ""
+    res += f"{INDENT*1}cdef void set_gdowner(self, void* owner):"
+    res = generate_newline(res)
+    res += f"{INDENT*2}self.{class_['name']}_internal_class.set_gdowner_{class_['name']}(owner)"
+    res = generate_newline(res)
+    return res
 
 def generate_enums(class_):
     if not "enums" in class_.keys():
@@ -515,7 +529,7 @@ def generate_properties(class_):
     result = ""
     if("properties" in class_.keys()):
         for property in class_["properties"]:
-            result += generate_property(property)
+            result += generate_property(property, class_["name"])
     return result
 
 def generate_member_getter(class_,member):
@@ -590,7 +604,7 @@ def generate_members_of_class(class_):
 def simplify_type(type):
     list_types = type.split(",")
     return list_types[-1]
-def generate_property(property):
+def generate_property(property, classname):
     result = ""
     result += f"{INDENT}@property"
     result = generate_newline(result)
@@ -605,7 +619,7 @@ def generate_property(property):
     if "setter" in property and property["setter"] != "":
         result += f"{INDENT}@{pythonize_name(property['name'])}.setter"
         result = generate_newline(result)
-        result += f"{INDENT}def {pythonize_name(property['name'])}(self, {ungodottype(untypearray(simplify_type(property['type'])))} value):"
+        result += f"{INDENT}def {pythonize_name(property['name'])}(self, {import_type(ungodottype(untypearray(simplify_type(property['type']))), classname)} value):"
         result = generate_newline(result)
         result += f"{INDENT * 2}self.{pythonize_name(property['setter'])}(value)"
         result = generate_newline(result)
@@ -685,6 +699,16 @@ def generate_default_arg(class_, arg, arg_type):
 
     return ""
 
+def import_type(type_, classname):
+    if type_ == classname:
+        return type_
+    if type_ in builtin_classes:
+        return type_
+    elif type_ == "PyVariant":
+        return type_
+    elif type_ == "Object":
+        return type_
+    return "py4godot_"+type_.lower()+"."+type_
 
 def generate_args(class_, method_with_args):
     result = "self, "
@@ -696,12 +720,12 @@ def generate_args(class_, method_with_args):
     for arg in method_with_args["arguments"]:
         if not arg["type"].startswith("enum::"):
             type_ = ungodottype(untypearray(unbitfield_type(arg['type'])))
-            result += f"{type_} {pythonize_name(arg['name'])} {generate_default_arg(class_, arg, type_)}, "
+            result += f"{import_type(type_, class_['name'])} {pythonize_name(arg['name'])} {generate_default_arg(class_, arg, type_)}, "
         else:
             #enums are marked with enum:: . To be able to use this, we have to strip this
             arg_type = arg["type"].replace("enum::", "")
             type_ = ungodottype(untypearray(unenumize_type(arg_type)))
-            result += f"{type_} {pythonize_name(arg['name'])} {generate_default_arg(class_, arg, type_)}, "
+            result += f"{import_type(type_, class_['name'])} {pythonize_name(arg['name'])} {generate_default_arg(class_, arg, type_)}, "
     result = result[:-2]
     return result
 
@@ -837,7 +861,9 @@ def generate_classes(classes, filename, is_core=False):
     if not is_core:
         classes_to_import = get_classes_to_import(classes)
         for cls in classes_to_import:
-            res += f"from py4godot.classes.{cls}.{cls} cimport *"
+            if cls in [class_["name"] for class_ in classes]:
+                continue
+            res += f"cimport py4godot.classes.{cls}.{cls} as py4godot_{cls.lower()} "
             res = generate_newline(res)
     else:
         res += f"from py4godot.classes.Object.Object cimport *"
@@ -1014,6 +1040,7 @@ def generate_operators_set(class_):
             operator_dict[class_["name"]][operator["name"]] = Operator(class_["name"], operator["name"], operator["return_type"])
         if "right_type" in operator.keys():
             operator_dict[class_["name"]][operator["name"]].right_type_values.append(operator["right_type"])
+
 
 
 

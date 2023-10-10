@@ -8,7 +8,6 @@ from py4godot.classes.Engine.Engine cimport *
 from py4godot.classes.generated4_core cimport *
 from py4godot.pluginscript_api.utils.annotations import *
 from py4godot.utils.Wrapper4 cimport *
-from py4godot.classes.Node3D.Node3D cimport *
 from py4godot.classes.typed_arrays cimport *
 from py4godot.Instance_data.InstanceData cimport *
 from cpython cimport Py_INCREF, Py_DECREF, PyObject

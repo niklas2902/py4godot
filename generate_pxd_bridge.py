@@ -77,12 +77,8 @@ operator_to_variant_operator = {"+":"GDExtensionVariantOperator.GDEXTENSION_VARI
 def generate_import():
     result = \
         """
-ctypedef void * GDExtensionObjectPtr
-ctypedef void * GDExtensionTypePtr
-ctypedef bint bool
+from py4godot.core.variant4.Variant4 cimport *
 cdef cppclass Error:
-    pass
-cdef cppclass Variant:
     pass
 """
     return result
@@ -324,6 +320,8 @@ def generate_common_methods(class_):
     result = generate_newline(result)
     result += generate_new_static(class_)
     result = generate_newline(result)
+    result += generate_set_owner(class_)
+    result = generate_newline(result)
     return result
 
 def generate_enums(class_):
@@ -474,6 +472,12 @@ def generate_new_static(class_):
     else:
         res += f"{INDENT*2}{class_['name']} new_static(GDExtensionObjectPtr owner);"
 
+    return res
+
+def generate_set_owner(class_):
+    res = f""
+    res += f"{INDENT*2}void set_gdowner_{class_['name']}(void* owner);"
+    res = generate_newline(res)
     return res
 
 

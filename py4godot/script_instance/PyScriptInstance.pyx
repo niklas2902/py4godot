@@ -21,23 +21,22 @@ cdef api GDExtensionBool instance_set(GDExtensionScriptInstanceDataPtr p_instanc
     cdef unicode py_method_name_str = gd_string_to_py_string(method_name_str)
     print_error("print_method:"+py_method_name_str)
     cdef Variant var
-    """
     try:
-        var = Variant.new_static(p_value)
-        #variants.append(var)
-        vector = var.get_converted_value()
-        if(type(vector) == String):
-            setattr(instance.owner,py_method_name_str, gd_string_to_py_string(vector))
-        elif (type(vector) == StringName):
-            setattr(instance.owner,py_method_name_str, gd_string_name_to_py_string(vector))
-        elif (type(vector) == Variant):
-            setattr(instance.owner,py_method_name_str, vector.get_converted_value())
-        else:
-            setattr(instance.owner,py_method_name_str, vector)
+        var.native_ptr = <void*>p_value
+        val = var.get_converted_value()
+        setattr(<object>(instance.owner),py_method_name_str, <object>val)
+        #if(type(vector) == String):
+        #    setattr(instance.owner,py_method_name_str, gd_string_to_py_string(vector))
+        #elif (type(vector) == StringName):
+        #    setattr(instance.owner,py_method_name_str, gd_string_name_to_py_string(vector))
+        #elif (type(vector) == Variant):
+        #    setattr(instance.owner,py_method_name_str, vector.get_converted_value())
+        #else:
+        #    setattr(instance.owner,py_method_name_str, vector)
 
     except Exception as e:
-        error(f"An Exception happened:{e}|owner:{instance.owner}" )
-    """
+        error(f"An Exception happened while setting attribute:{e}" )
+
     return 1
 
 """

@@ -8,6 +8,7 @@
 #include "py4godot/script_instance/instance.h"
 #include "py4godot/pluginscript_api/utils/annotations_api.h"
 #include "py4godot/instance_data/CPPInstanceData.h"
+#include "py4godot/utils/instance_utils_api.h"
 #include <cassert>
 #include "Python.h"
 #include <mutex>
@@ -43,6 +44,23 @@ void init_pluginscript_api(){
         assert(false);
         return;
     }
+
+    import_py4godot__utils__instance_utils();
+    if (PyErr_Occurred())
+    {
+        PyObject *ptype, *pvalue, *ptraceback;
+        PyErr_Fetch(&ptype, &pvalue, &ptraceback);
+
+        PyObject* str_exc_type = PyObject_Repr(pvalue); //Now a unicode
+        PyObject* pyStr = PyUnicode_AsEncodedString(str_exc_type, "utf-8","Error ~");
+        const char *strExcType = PyBytes_AS_STRING(pyStr);
+        PyErr_Print();
+        _interface->print_error(strExcType, "test", "test", 1, 1);
+        assert(false);
+        return;
+    }
+
+    Variant::init_variant();
 
     PyEval_InitThreads();
     if (PyErr_Occurred())
@@ -98,6 +116,7 @@ void PyScriptExtension::_instance_create( Object& for_object, GDExtensionTypePtr
 
     //print_error("before get_class")
     //for_object.get_class()
+    set_owner(instance, ((void**)for_object.godot_owner)[0]);
     GDExtensionVariantFromTypeConstructorFunc constructor_func;
     GDExtensionScriptInstancePtr instance_ptr;
     GDExtensionScriptInstanceInfo* instance_info;
@@ -131,7 +150,7 @@ void PyScriptExtension::_placeholder_instance_create( Object& for_object, GDExte
     auto gil_state = PyGILState_Ensure();
 
     auto instance = PyObject_CallObject(transfer_object.class_, nullptr);
-
+    set_owner(instance, ((void**)for_object.godot_owner)[0]);
     //print_error("before get_class")
     //for_object.get_class()
     GDExtensionVariantFromTypeConstructorFunc constructor_func;
@@ -299,7 +318,7 @@ StringName func_name__get_instance_base_type ;
 void call_virtual_func__instance_create(GDExtensionClassInstancePtr p_instance, const GDExtensionConstTypePtr* p_args, GDExtensionTypePtr r_ret) {
 
     PyScriptExtension* pylanguage = static_cast<PyScriptExtension*> (p_instance);
-    Object args0 = Object::new_static(const_cast<GDExtensionStringPtr*>(p_args + 0));
+    Object args0 = Object::new_static(const_cast<GDExtensionStringPtr>(p_args[0]));
 
     pylanguage->_instance_create(args0,r_ret);
 }
@@ -310,7 +329,7 @@ StringName func_name__instance_create ;
 void call_virtual_func__placeholder_instance_create(GDExtensionClassInstancePtr p_instance, const GDExtensionConstTypePtr* p_args, GDExtensionTypePtr r_ret) {
 
     PyScriptExtension* pylanguage = static_cast<PyScriptExtension*> (p_instance);
-    Object args0 = Object::new_static(const_cast<GDExtensionStringPtr*>(p_args + 0));
+    Object args0 = Object::new_static(const_cast<GDExtensionStringPtr>(p_args[0]));
 
     pylanguage->_placeholder_instance_create(args0,r_ret);
 }

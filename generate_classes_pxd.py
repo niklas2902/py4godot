@@ -1,6 +1,7 @@
 import json
 
 import generate_pxd_bridge
+from generate_classes import import_type
 
 IGNORED_CLASSES = ("Nil", "bool", "float", "int")
 INDENT = " "
@@ -11,8 +12,9 @@ def generate_import(class_to_import = None):
     res = ""
     if class_to_import:
         if class_to_import != "Wrapper4":
-            res += f"from py4godot.classes.{class_to_import}.{class_to_import} cimport *"
-
+            res += f"cimport py4godot.classes.{class_to_import}.{class_to_import} as py4godot_{class_to_import.lower()}"
+            res = generate_newline(res)
+    res +=  f"from py4godot.classes.Object.Object cimport *"
     return res
 
 def generate_enums(class_):
@@ -33,8 +35,14 @@ def generate_newline(str_):
 
 def get_base_class(class_):
     if "inherits" in class_.keys():
-        return class_["inherits"]
+        return  import_type(class_["inherits"], class_["name"])
     return ""
+
+def generate_common_methods(class_):
+    res = ""
+    res += f"{INDENT*1}cdef void set_gdowner(self, void* owner)"
+    res = generate_newline(res)
+    return res
 
 
 def generate_c_props():
@@ -47,11 +55,13 @@ def generate_pxd_class(pxd_class):
     result = generate_newline(result)
     result += f"cdef class {pxd_class['name']}({get_base_class(pxd_class)}):"
     result = generate_newline(result)
-    result += generate_new_static(class_)
+    result += generate_wrapped_attribute(class_)
+    result = generate_newline(result)
+    result += generate_common_methods(class_)
     result = generate_newline(result)
     return result
 
-def generate_new_static(class_):
+def generate_wrapped_attribute(class_):
     return f"{INDENT}cdef CPP{class_['name']} {class_['name']}_internal_class"
 
 def get_inherited_class(class_):

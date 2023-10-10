@@ -308,6 +308,8 @@ def generate_common_methods(class_):
     result = generate_newline(result)
     result += generate_new_static(class_)
     result = generate_newline(result)
+    result += generate_set_owner(class_)
+    result = generate_newline(result)
     return result
 
 def generate_enums(class_):
@@ -490,7 +492,14 @@ def generate_new_static(class_):
 
     return res
 
+def generate_set_owner(class_):
+    res = ""
+    if (class_["name"] in builtin_classes):
+        res += f"{INDENT}void set_gdowner_{class_['name']}(GDExtensionTypePtr owner);"
+    else:
+        res += f"{INDENT}void set_gdowner_{class_['name']}(GDExtensionObjectPtr owner);"
 
+    return res
 
 def generate_operators_for_class(class_name):
     res = ""
