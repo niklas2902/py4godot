@@ -504,12 +504,26 @@ def generate_common_methods(class_):
 
     return result
 
+def find_class(name):
+    for cls in obj["classes"]:
+        if cls["name"] == name:
+            return cls
+
 def generate_new_static(class_):
     res = ""
     res += f"{INDENT*1}cdef void set_gdowner(self, void* owner):"
     res = generate_newline(res)
     res += f"{INDENT*2}self.{class_['name']}_internal_class.set_gdowner_{class_['name']}(owner)"
     res = generate_newline(res)
+    if "inherits" in class_.keys():
+        cls = find_class(class_["inherits"])
+        while cls:
+            if "inherits" not in cls.keys():
+                break
+            res += f"{INDENT * 2}self.{cls['name']}_internal_class.set_gdowner_{cls['name']}(owner)"
+            res = generate_newline(res)
+            cls = find_class(cls["inherits"])
+
     return res
 
 def generate_enums(class_):

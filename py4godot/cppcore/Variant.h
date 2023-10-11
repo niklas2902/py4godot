@@ -22,6 +22,7 @@ namespace godot{
         void init_type(Array& val);
 
         PyObject* Variant::create_vector3();
+        PyObject* Variant::create_string();
         PyObject* get_converted_value();
 
         static Variant new_static(GDExtensionTypePtr ptr) {

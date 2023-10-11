@@ -6,3 +6,9 @@ cdef api object type_helper_create_vector3(bridge.Vector3 bridge_vector):
     val.Vector3_internal_class = bridge_vector
     Py_INCREF(val)
     return val
+
+cdef api object type_helper_create_string(bridge.String bridge_string):
+    cdef String val = String()
+    val.String_internal_class = bridge_string
+    Py_INCREF(val)
+    return val

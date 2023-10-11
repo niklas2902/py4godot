@@ -76,11 +76,22 @@ PyObject* Variant::create_vector3(){
     return val;
 }
 
+PyObject* Variant::create_string(){
+    GDExtensionVariantType type = get_interface()->variant_get_type(native_ptr);
+    auto constructor = get_interface()->get_variant_to_type_constructor(type);
+    String string = String();
+    constructor(&string.godot_owner, native_ptr);
+
+    auto val = type_helper_create_string(string);
+    return val;
+}
+
 PyObject* Variant::get_converted_value(){
-    assert(false);
     switch(get_interface()->variant_get_type(native_ptr)){
         case GDExtensionVariantType::GDEXTENSION_VARIANT_TYPE_VECTOR3:
             return create_vector3();
+        case GDExtensionVariantType::GDEXTENSION_VARIANT_TYPE_STRING:
+            return create_string();
     }
     return nullptr;
 }
