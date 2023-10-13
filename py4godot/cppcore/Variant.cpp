@@ -451,10 +451,302 @@ void Variant::init_from_py_object(PyObject* object, const char* type_name){
     GDExtensionVariantFromTypeConstructorFunc constructor;
     get_interface()->print_error(type_name, "test", "test",1,1);
     switch(str2int(type_name)){
-        case str2int("Vector3"):
-            Vector3 val = get_vector3_from_pyobject(object);
-            constructor = get_interface()->get_variant_from_type_constructor(GDExtensionVariantType::GDEXTENSION_VARIANT_TYPE_VECTOR3);
-            constructor(native_ptr, &val.godot_owner);
+        case str2int("Rect2i"):
+            construct_Rect2i(object);
             break;
+        case str2int("Callable"):
+            construct_Callable(object);
+            break;
+        case str2int("NodePath"):
+            construct_NodePath(object);
+            break;
+        case str2int("int"):
+            construct_int(object);
+            break;
+        case str2int("String"):
+            construct_String(object);
+            break;
+        case str2int("PackedVector3Array"):
+            construct_PackedVector3Array(object);
+            break;
+        case str2int("Vector3"):
+            construct_Vector3(object);
+            break;
+        case str2int("Dictionary"):
+            construct_Dictionary(object);
+            break;
+        case str2int("Projection"):
+            construct_Projection(object);
+            break;
+        case str2int("RID"):
+            construct_RID(object);
+            break;
+        case str2int("Vector2i"):
+            construct_Vector2i(object);
+            break;
+        case str2int("Transform2D"):
+            construct_Transform2D(object);
+            break;
+        case str2int("AABB"):
+            construct_AABB(object);
+            break;
+        case str2int("float"):
+            construct_float(object);
+            break;
+        case str2int("Vector3i"):
+            construct_Vector3i(object);
+            break;
+        case str2int("PackedInt64Array"):
+            construct_PackedInt64Array(object);
+            break;
+        case str2int("Nil"):
+            construct_Nil(object);
+            break;
+        case str2int("PackedInt32Array"):
+            construct_PackedInt32Array(object);
+            break;
+        case str2int("PackedFloat32Array"):
+            construct_PackedFloat32Array(object);
+            break;
+        case str2int("PackedByteArray"):
+            construct_PackedByteArray(object);
+            break;
+        case str2int("Vector4"):
+            construct_Vector4(object);
+            break;
+        case str2int("Rect2"):
+            construct_Rect2(object);
+            break;
+        case str2int("Vector2"):
+            construct_Vector2(object);
+            break;
+        case str2int("Transform3D"):
+            construct_Transform3D(object);
+            break;
+        case str2int("PackedColorArray"):
+            construct_PackedColorArray(object);
+            break;
+        case str2int("Signal"):
+            construct_Signal(object);
+            break;
+        case str2int("PackedVector2Array"):
+            construct_PackedVector2Array(object);
+            break;
+        case str2int("Plane"):
+            construct_Plane(object);
+            break;
+        case str2int("PackedFloat64Array"):
+            construct_PackedFloat64Array(object);
+            break;
+        case str2int("bool"):
+            construct_bool(object);
+            break;
+        case str2int("Basis"):
+            construct_Basis(object);
+            break;
+        case str2int("Color"):
+            construct_Color(object);
+            break;
+        case str2int("Vector4i"):
+            construct_Vector4i(object);
+            break;
+        case str2int("Array"):
+            construct_Array(object);
+            break;
+        case str2int("Quaternion"):
+            construct_Quaternion(object);
+            break;
+        case str2int("PackedStringArray"):
+            construct_PackedStringArray(object);
+            break;
+        case str2int("StringName"):
+            construct_StringName(object);
+            break;
+
+
     }
+}
+void Variant::construct_Rect2i(PyObject* object){
+        Rect2i converted_val = get_rect2i_from_pyobject(object);
+        auto constructor = get_interface()->get_variant_from_type_constructor(GDExtensionVariantType::GDEXTENSION_VARIANT_TYPE_RECT2I);
+        constructor(native_ptr, &converted_val.godot_owner);
+}
+void Variant::construct_Callable(PyObject* object){
+        Callable converted_val = get_callable_from_pyobject(object);
+        auto constructor = get_interface()->get_variant_from_type_constructor(GDExtensionVariantType::GDEXTENSION_VARIANT_TYPE_CALLABLE);
+        constructor(native_ptr, &converted_val.godot_owner);
+}
+void Variant::construct_NodePath(PyObject* object){
+        NodePath converted_val = get_nodepath_from_pyobject(object);
+        auto constructor = get_interface()->get_variant_from_type_constructor(GDExtensionVariantType::GDEXTENSION_VARIANT_TYPE_NODE_PATH);
+        constructor(native_ptr, &converted_val.godot_owner);
+}
+void Variant::construct_int(PyObject* object){
+        long converted_val = PyLong_AsLong(object);
+        auto constructor = get_interface()->get_variant_from_type_constructor(GDExtensionVariantType::GDEXTENSION_VARIANT_TYPE_INT);
+        constructor(native_ptr, &converted_val);
+}
+void Variant::construct_String(PyObject* object){
+        String converted_val = get_string_from_pyobject(object);
+        auto constructor = get_interface()->get_variant_from_type_constructor(GDExtensionVariantType::GDEXTENSION_VARIANT_TYPE_STRING);
+        constructor(native_ptr, &converted_val.godot_owner);
+}
+void Variant::construct_PackedVector3Array(PyObject* object){
+        PackedVector3Array converted_val = get_packedvector3array_from_pyobject(object);
+        auto constructor = get_interface()->get_variant_from_type_constructor(GDExtensionVariantType::GDEXTENSION_VARIANT_TYPE_PACKED_VECTOR3_ARRAY);
+        constructor(native_ptr, &converted_val.godot_owner);
+}
+void Variant::construct_Vector3(PyObject* object){
+        Vector3 converted_val = get_vector3_from_pyobject(object);
+        auto constructor = get_interface()->get_variant_from_type_constructor(GDExtensionVariantType::GDEXTENSION_VARIANT_TYPE_VECTOR3);
+        constructor(native_ptr, &converted_val.godot_owner);
+}
+void Variant::construct_Dictionary(PyObject* object){
+        Dictionary converted_val = get_dictionary_from_pyobject(object);
+        auto constructor = get_interface()->get_variant_from_type_constructor(GDExtensionVariantType::GDEXTENSION_VARIANT_TYPE_DICTIONARY);
+        constructor(native_ptr, &converted_val.godot_owner);
+}
+void Variant::construct_Projection(PyObject* object){
+        Projection converted_val = get_projection_from_pyobject(object);
+        auto constructor = get_interface()->get_variant_from_type_constructor(GDExtensionVariantType::GDEXTENSION_VARIANT_TYPE_PROJECTION);
+        constructor(native_ptr, &converted_val.godot_owner);
+}
+void Variant::construct_RID(PyObject* object){
+        RID converted_val = get_rid_from_pyobject(object);
+        auto constructor = get_interface()->get_variant_from_type_constructor(GDExtensionVariantType::GDEXTENSION_VARIANT_TYPE_RID);
+        constructor(native_ptr, &converted_val.godot_owner);
+}
+void Variant::construct_Vector2i(PyObject* object){
+        Vector2i converted_val = get_vector2i_from_pyobject(object);
+        auto constructor = get_interface()->get_variant_from_type_constructor(GDExtensionVariantType::GDEXTENSION_VARIANT_TYPE_VECTOR2I);
+        constructor(native_ptr, &converted_val.godot_owner);
+}
+void Variant::construct_Transform2D(PyObject* object){
+        Transform2D converted_val = get_transform2d_from_pyobject(object);
+        auto constructor = get_interface()->get_variant_from_type_constructor(GDExtensionVariantType::GDEXTENSION_VARIANT_TYPE_TRANSFORM2D);
+        constructor(native_ptr, &converted_val.godot_owner);
+}
+void Variant::construct_AABB(PyObject* object){
+        AABB converted_val = get_aabb_from_pyobject(object);
+        auto constructor = get_interface()->get_variant_from_type_constructor(GDExtensionVariantType::GDEXTENSION_VARIANT_TYPE_AABB);
+        constructor(native_ptr, &converted_val.godot_owner);
+}
+void Variant::construct_float(PyObject* object){
+        double converted_val = PyFloat_AsDouble(object);
+        auto constructor = get_interface()->get_variant_from_type_constructor(GDExtensionVariantType::GDEXTENSION_VARIANT_TYPE_FLOAT);
+        constructor(native_ptr, &converted_val);
+}
+void Variant::construct_Vector3i(PyObject* object){
+        Vector3i converted_val = get_vector3i_from_pyobject(object);
+        auto constructor = get_interface()->get_variant_from_type_constructor(GDExtensionVariantType::GDEXTENSION_VARIANT_TYPE_VECTOR3I);
+        constructor(native_ptr, &converted_val.godot_owner);
+}
+void Variant::construct_PackedInt64Array(PyObject* object){
+        PackedInt64Array converted_val = get_packedint64array_from_pyobject(object);
+        auto constructor = get_interface()->get_variant_from_type_constructor(GDExtensionVariantType::GDEXTENSION_VARIANT_TYPE_PACKED_INT64_ARRAY);
+        constructor(native_ptr, &converted_val.godot_owner);
+}
+void Variant::construct_Nil(PyObject* object){
+        auto constructor = get_interface()->get_variant_from_type_constructor(GDExtensionVariantType::GDEXTENSION_VARIANT_TYPE_NIL);
+        constructor(native_ptr, nullptr);
+}
+void Variant::construct_PackedInt32Array(PyObject* object){
+        PackedInt32Array converted_val = get_packedint32array_from_pyobject(object);
+        auto constructor = get_interface()->get_variant_from_type_constructor(GDExtensionVariantType::GDEXTENSION_VARIANT_TYPE_PACKED_INT32_ARRAY);
+        constructor(native_ptr, &converted_val.godot_owner);
+}
+void Variant::construct_PackedFloat32Array(PyObject* object){
+        PackedFloat32Array converted_val = get_packedfloat32array_from_pyobject(object);
+        auto constructor = get_interface()->get_variant_from_type_constructor(GDExtensionVariantType::GDEXTENSION_VARIANT_TYPE_PACKED_FLOAT32_ARRAY);
+        constructor(native_ptr, &converted_val.godot_owner);
+}
+void Variant::construct_PackedByteArray(PyObject* object){
+        PackedByteArray converted_val = get_packedbytearray_from_pyobject(object);
+        auto constructor = get_interface()->get_variant_from_type_constructor(GDExtensionVariantType::GDEXTENSION_VARIANT_TYPE_PACKED_BYTE_ARRAY);
+        constructor(native_ptr, &converted_val.godot_owner);
+}
+void Variant::construct_Vector4(PyObject* object){
+        Vector4 converted_val = get_vector4_from_pyobject(object);
+        auto constructor = get_interface()->get_variant_from_type_constructor(GDExtensionVariantType::GDEXTENSION_VARIANT_TYPE_VECTOR4);
+        constructor(native_ptr, &converted_val.godot_owner);
+}
+void Variant::construct_Rect2(PyObject* object){
+        Rect2 converted_val = get_rect2_from_pyobject(object);
+        auto constructor = get_interface()->get_variant_from_type_constructor(GDExtensionVariantType::GDEXTENSION_VARIANT_TYPE_RECT2);
+        constructor(native_ptr, &converted_val.godot_owner);
+}
+void Variant::construct_Vector2(PyObject* object){
+        Vector2 converted_val = get_vector2_from_pyobject(object);
+        auto constructor = get_interface()->get_variant_from_type_constructor(GDExtensionVariantType::GDEXTENSION_VARIANT_TYPE_VECTOR2);
+        constructor(native_ptr, &converted_val.godot_owner);
+}
+void Variant::construct_Transform3D(PyObject* object){
+        Transform3D converted_val = get_transform3d_from_pyobject(object);
+        auto constructor = get_interface()->get_variant_from_type_constructor(GDExtensionVariantType::GDEXTENSION_VARIANT_TYPE_TRANSFORM3D);
+        constructor(native_ptr, &converted_val.godot_owner);
+}
+void Variant::construct_PackedColorArray(PyObject* object){
+        PackedColorArray converted_val = get_packedcolorarray_from_pyobject(object);
+        auto constructor = get_interface()->get_variant_from_type_constructor(GDExtensionVariantType::GDEXTENSION_VARIANT_TYPE_PACKED_COLOR_ARRAY);
+        constructor(native_ptr, &converted_val.godot_owner);
+}
+void Variant::construct_Signal(PyObject* object){
+        Signal converted_val = get_signal_from_pyobject(object);
+        auto constructor = get_interface()->get_variant_from_type_constructor(GDExtensionVariantType::GDEXTENSION_VARIANT_TYPE_SIGNAL);
+        constructor(native_ptr, &converted_val.godot_owner);
+}
+void Variant::construct_PackedVector2Array(PyObject* object){
+        PackedVector2Array converted_val = get_packedvector2array_from_pyobject(object);
+        auto constructor = get_interface()->get_variant_from_type_constructor(GDExtensionVariantType::GDEXTENSION_VARIANT_TYPE_PACKED_VECTOR2_ARRAY);
+        constructor(native_ptr, &converted_val.godot_owner);
+}
+void Variant::construct_Plane(PyObject* object){
+        Plane converted_val = get_plane_from_pyobject(object);
+        auto constructor = get_interface()->get_variant_from_type_constructor(GDExtensionVariantType::GDEXTENSION_VARIANT_TYPE_PLANE);
+        constructor(native_ptr, &converted_val.godot_owner);
+}
+void Variant::construct_PackedFloat64Array(PyObject* object){
+        PackedFloat64Array converted_val = get_packedfloat64array_from_pyobject(object);
+        auto constructor = get_interface()->get_variant_from_type_constructor(GDExtensionVariantType::GDEXTENSION_VARIANT_TYPE_PACKED_FLOAT64_ARRAY);
+        constructor(native_ptr, &converted_val.godot_owner);
+}
+void Variant::construct_bool(PyObject* object){
+        bool converted_val = PyObject_IsTrue(object);
+        auto constructor = get_interface()->get_variant_from_type_constructor(GDExtensionVariantType::GDEXTENSION_VARIANT_TYPE_BOOL);
+        constructor(native_ptr, &converted_val);
+}
+void Variant::construct_Basis(PyObject* object){
+        Basis converted_val = get_basis_from_pyobject(object);
+        auto constructor = get_interface()->get_variant_from_type_constructor(GDExtensionVariantType::GDEXTENSION_VARIANT_TYPE_BASIS);
+        constructor(native_ptr, &converted_val.godot_owner);
+}
+void Variant::construct_Color(PyObject* object){
+        Color converted_val = get_color_from_pyobject(object);
+        auto constructor = get_interface()->get_variant_from_type_constructor(GDExtensionVariantType::GDEXTENSION_VARIANT_TYPE_COLOR);
+        constructor(native_ptr, &converted_val.godot_owner);
+}
+void Variant::construct_Vector4i(PyObject* object){
+        Vector4i converted_val = get_vector4i_from_pyobject(object);
+        auto constructor = get_interface()->get_variant_from_type_constructor(GDExtensionVariantType::GDEXTENSION_VARIANT_TYPE_VECTOR4I);
+        constructor(native_ptr, &converted_val.godot_owner);
+}
+void Variant::construct_Array(PyObject* object){
+        Array converted_val = get_array_from_pyobject(object);
+        auto constructor = get_interface()->get_variant_from_type_constructor(GDExtensionVariantType::GDEXTENSION_VARIANT_TYPE_ARRAY);
+        constructor(native_ptr, &converted_val.godot_owner);
+}
+void Variant::construct_Quaternion(PyObject* object){
+        Quaternion converted_val = get_quaternion_from_pyobject(object);
+        auto constructor = get_interface()->get_variant_from_type_constructor(GDExtensionVariantType::GDEXTENSION_VARIANT_TYPE_QUATERNION);
+        constructor(native_ptr, &converted_val.godot_owner);
+}
+void Variant::construct_PackedStringArray(PyObject* object){
+        PackedStringArray converted_val = get_packedstringarray_from_pyobject(object);
+        auto constructor = get_interface()->get_variant_from_type_constructor(GDExtensionVariantType::GDEXTENSION_VARIANT_TYPE_PACKED_STRING_ARRAY);
+        constructor(native_ptr, &converted_val.godot_owner);
+}
+void Variant::construct_StringName(PyObject* object){
+        StringName converted_val = get_stringname_from_pyobject(object);
+        auto constructor = get_interface()->get_variant_from_type_constructor(GDExtensionVariantType::GDEXTENSION_VARIANT_TYPE_STRING_NAME);
+        constructor(native_ptr, &converted_val.godot_owner);
 }

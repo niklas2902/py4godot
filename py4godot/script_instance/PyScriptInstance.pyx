@@ -49,6 +49,8 @@ cdef api GDExtensionBool instance_get(GDExtensionScriptInstanceDataPtr p_instanc
     if py_method_name_str == "_dont_undo_redo":
         return 0
     print_error("before try")
+    if py_method_name_str == "transform":
+        return 0
     if(py_method_name_str != "script"):
         try:
             get_var.native_ptr = <void*>r_ret

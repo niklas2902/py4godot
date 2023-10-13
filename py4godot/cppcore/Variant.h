@@ -58,6 +58,44 @@ namespace godot{
         PyObject* create_quaternion();
         PyObject* create_packedstringarray();
         PyObject* create_stringname();
+
+        void construct_Rect2i(PyObject* object);
+        void construct_Callable(PyObject* object);
+        void construct_NodePath(PyObject* object);
+        void construct_int(PyObject* object);
+        void construct_String(PyObject* object);
+        void construct_PackedVector3Array(PyObject* object);
+        void construct_Vector3(PyObject* object);
+        void construct_Dictionary(PyObject* object);
+        void construct_Projection(PyObject* object);
+        void construct_RID(PyObject* object);
+        void construct_Vector2i(PyObject* object);
+        void construct_Transform2D(PyObject* object);
+        void construct_AABB(PyObject* object);
+        void construct_float(PyObject* object);
+        void construct_Vector3i(PyObject* object);
+        void construct_PackedInt64Array(PyObject* object);
+        void construct_Nil(PyObject* object);
+        void construct_PackedInt32Array(PyObject* object);
+        void construct_PackedFloat32Array(PyObject* object);
+        void construct_PackedByteArray(PyObject* object);
+        void construct_Vector4(PyObject* object);
+        void construct_Rect2(PyObject* object);
+        void construct_Vector2(PyObject* object);
+        void construct_Transform3D(PyObject* object);
+        void construct_PackedColorArray(PyObject* object);
+        void construct_Signal(PyObject* object);
+        void construct_PackedVector2Array(PyObject* object);
+        void construct_Plane(PyObject* object);
+        void construct_PackedFloat64Array(PyObject* object);
+        void construct_bool(PyObject* object);
+        void construct_Basis(PyObject* object);
+        void construct_Color(PyObject* object);
+        void construct_Vector4i(PyObject* object);
+        void construct_Array(PyObject* object);
+        void construct_Quaternion(PyObject* object);
+        void construct_PackedStringArray(PyObject* object);
+        void construct_StringName(PyObject* object);
         #pragma endregion
 
 
