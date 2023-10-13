@@ -40,29 +40,28 @@ cdef api GDExtensionBool instance_get(GDExtensionScriptInstanceDataPtr p_instanc
     method_name.StringName_internal_class = internal_method_name
     cdef String method_name_str = String.new2(method_name)
     cdef unicode py_method_name_str = gd_string_to_py_string(method_name_str)
+    cdef char* typename;
+    cdef str py_typename;
 
+    print_error("Before init methods")
     cdef object get_val = None
-    """
-    cdef Variant get_var = Variant.new_static(r_ret)
+    cdef Variant get_var
     if py_method_name_str == "_dont_undo_redo":
         return 0
-    print_error("get_prop:"+str(py_method_name_str))
+    print_error("before try")
     if(py_method_name_str != "script"):
         try:
-            print_error("before lock")
-            print_error("before get_val")
-            get_val = getattr(instance.owner,py_method_name_str)
-            print_error("get_val:", get_val)
-            if ("position" in py_method_name_str):
-                print_error(get_val.x)
-            get_var.init_type(get_val)
+            get_var.native_ptr = <void*>r_ret
+            print_error(py_method_name_str)
+            get_val = getattr(<object>(instance.owner),py_method_name_str)
+            py_typename = str(type(get_val).__name__)
+            get_var.init_from_py_object(<PyObject*>get_val, py_typename.encode("utf-8"))
         except Exception as e:
-            error("exception:",e)
+            print_error("exception:",e)
     else:
-        get_var.init_type(instance.script)
-    print_error("finish_get_prop:"+str(py_method_name_str))
+        pass
+        #get_var.init_type(instance.script)
     return 1
-"""
 """cdef api const GDExtensionMethodInfo * instance_get_method_list(GDExtensionScriptInstanceDataPtr p_instance, uint32_t *r_count) with gil:
     global method_infos
     print_error("call_method_list")

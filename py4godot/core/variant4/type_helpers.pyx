@@ -170,3 +170,7 @@ cdef api object type_helper_create_stringname(bridge.StringName bridge_val):
     val.StringName_internal_class = bridge_val
     Py_INCREF(val)
     return val
+
+
+cdef api bridge.Vector3 get_vector3_from_pyobject(PyObject* py_object):
+    return (<Vector3>py_object).Vector3_internal_class

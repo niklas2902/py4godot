@@ -15,8 +15,8 @@ GDExtensionScriptInstanceInfo get_instance(){
     return native_script_instance;
 }
 
-void c_instance_get(GDExtensionScriptInstanceDataPtr p_instance, GDExtensionConstStringNamePtr p_name, GDExtensionVariantPtr r_ret){
-    instance_get(p_instance, p_name, r_ret);
+GDExtensionBool c_instance_get(GDExtensionScriptInstanceDataPtr p_instance, GDExtensionConstStringNamePtr p_name, GDExtensionVariantPtr r_ret){
+    return instance_get(p_instance, p_name, r_ret);
 }
 
 
@@ -71,9 +71,9 @@ void init_instance(GDExtensionInterface *p_interface, GDExtensionScriptInstanceI
     native_script_instance->get_property_list_func = c_instance_get_property_list;
     native_script_instance->get_script_func = c_instance_get_script;
     native_script_instance->set_func = c_instance_set;
+    native_script_instance->get_func = c_instance_get;
     /*native_script_instance->is_placeholder_func = is_placeholder;
     native_script_instance->set_func = c_instance_set;
-    native_script_instance->get_func = c_instance_get;
     native_script_instance->get_property_list_func = instance_get_property_list;
     native_script_instance->free_property_list_func = instance_free_property_list;
     native_script_instance->property_can_revert_func = instance_property_can_revert;

@@ -447,9 +447,14 @@ PyObject* Variant::get_converted_value(){
 
 
 
-void Variant::init_from_py_object(PyObject* object, const char* type){
-    switch(str2int(type)){
+void Variant::init_from_py_object(PyObject* object, const char* type_name){
+    GDExtensionVariantFromTypeConstructorFunc constructor;
+    get_interface()->print_error(type_name, "test", "test",1,1);
+    switch(str2int(type_name)){
         case str2int("Vector3"):
+            Vector3 val = get_vector3_from_pyobject(object);
+            constructor = get_interface()->get_variant_from_type_constructor(GDExtensionVariantType::GDEXTENSION_VARIANT_TYPE_VECTOR3);
+            constructor(native_ptr, &val.godot_owner);
             break;
     }
 }
