@@ -19,37 +19,30 @@ cdef api GDExtensionBool instance_set(GDExtensionScriptInstanceDataPtr p_instanc
     method_name.StringName_internal_class = internal_method_name
     cdef String method_name_str = String.new2(method_name)
     cdef unicode py_method_name_str = gd_string_to_py_string(method_name_str)
-    print_error("print_method:"+py_method_name_str)
+
     cdef Variant var
     try:
         var.native_ptr = <void*>p_value
         val = var.get_converted_value()
         setattr(<object>(instance.owner),py_method_name_str, <object>val)
-        #if(type(vector) == String):
-        #    setattr(instance.owner,py_method_name_str, gd_string_to_py_string(vector))
-        #elif (type(vector) == StringName):
-        #    setattr(instance.owner,py_method_name_str, gd_string_name_to_py_string(vector))
-        #elif (type(vector) == Variant):
-        #    setattr(instance.owner,py_method_name_str, vector.get_converted_value())
-        #else:
-        #    setattr(instance.owner,py_method_name_str, vector)
+        Py_DECREF(<object>val)#TODO: is this necessary?
 
     except Exception as e:
         error(f"An Exception happened while setting attribute:{e}" )
 
     return 1
 
-"""
 cdef api GDExtensionBool instance_get(GDExtensionScriptInstanceDataPtr p_instance, GDExtensionConstStringNamePtr p_name, GDExtensionVariantPtr r_ret) with gil:
-    cdef InstanceData instance = <InstanceData>p_instance
-
-    cdef StringName method_name = StringName.new_static(p_name)
+    cdef InstanceData* instance = <InstanceData*>p_instance
+    #TODO still a problem with custom string attributes. Why is this still crashing?
+    cdef StringName method_name = StringName.__new__(StringName)
+    cdef cppbridge.StringName internal_method_name = cppbridge.StringName.new_static((<void**>p_name)[0]) #TODO: Create unconst helper
+    method_name.StringName_internal_class = internal_method_name
     cdef String method_name_str = String.new2(method_name)
-    cdef char* c_str = gd_string_c_string(gdnative_interface,method_name_str.godot_owner, method_name_str.length())
     cdef unicode py_method_name_str = gd_string_to_py_string(method_name_str)
-    print_error("print_method_get:"+py_method_name_str)
 
     cdef object get_val = None
+    """
     cdef Variant get_var = Variant.new_static(r_ret)
     if py_method_name_str == "_dont_undo_redo":
         return 0

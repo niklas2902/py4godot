@@ -16,12 +16,7 @@ GDExtensionScriptInstanceInfo get_instance(){
 }
 
 void c_instance_get(GDExtensionScriptInstanceDataPtr p_instance, GDExtensionConstStringNamePtr p_name, GDExtensionVariantPtr r_ret){
-    ghMutex = CreateMutex(
-    NULL,              // default security attributes
-    FALSE,             // initially not owned
-    NULL);
-    //instance_get(p_instance, p_name, r_ret);
-    CloseHandle(ghMutex);
+    instance_get(p_instance, p_name, r_ret);
 }
 
 

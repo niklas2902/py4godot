@@ -5,6 +5,10 @@
 
 using namespace godot;
 
+constexpr unsigned int str2int(const char* str, int h = 0)
+{
+    return !str[h] ? 5381 : (str2int(str, h+1) * 33) ^ str[h];
+}
 
 void Variant::init_variant(){
     import_py4godot__core__variant4__type_helpers();
@@ -439,4 +443,13 @@ PyObject* Variant::get_converted_value(){
         return create_stringname();
     }
     return nullptr;
+}
+
+
+
+void Variant::init_from_py_object(PyObject* object, const char* type){
+    switch(str2int(type)){
+        case str2int("Vector3"):
+            break;
+    }
 }

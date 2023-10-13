@@ -60,7 +60,10 @@ namespace godot{
         PyObject* create_stringname();
         #pragma endregion
 
+
         PyObject* get_converted_value();
+
+        void init_from_py_object(PyObject* object, const char* type);
 
         static Variant new_static(GDExtensionTypePtr ptr) {
             Variant var{};

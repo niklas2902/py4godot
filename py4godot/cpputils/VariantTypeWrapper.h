@@ -12,7 +12,7 @@ namespace godot{
             godot_owner = owner;
         }
 
-        GDExtensionTypePtr get_godot_owner() {
+        GDExtensionTypePtr& get_godot_owner() {
             return godot_owner;
         }
 

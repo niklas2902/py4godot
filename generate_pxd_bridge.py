@@ -505,14 +505,14 @@ def generate_classes(classes, filename, is_core=False):
     res = generate_newline(res)
     res += f'{INDENT}cdef cppclass Wrapper:'
     res = generate_newline(res)
-    res += f'{INDENT*2}pass'
+    res += f'{INDENT*2}GDExtensionObjectPtr& get_godot_owner()'
     res = generate_newline(res)
 
     res += f'cdef extern from "py4godot/cpputils/VariantTypeWrapper.h" namespace "godot":'
     res = generate_newline(res)
     res += f'{INDENT}cdef cppclass VariantTypeWrapper:'
     res = generate_newline(res)
-    res += f'{INDENT * 2}pass'
+    res += f'{INDENT * 2}GDExtensionTypePtr& get_godot_owner()'
     res = generate_newline(res)
 
     for class_ in classes:
