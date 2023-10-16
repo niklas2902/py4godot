@@ -11,7 +11,7 @@ constexpr unsigned int str2int(const char* str, int h = 0)
 }
 void Variant::init_godot_owner(void* owner, GDExtensionVariantType type){
     auto constructor = get_interface()->get_variant_from_type_constructor(type);
-    constructor(&native_ptr, owner);
+    constructor(&native_ptr, &owner);
 }
 void Variant::init_variant(){
     import_py4godot__core__variant4__type_helpers();

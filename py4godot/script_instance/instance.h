@@ -23,14 +23,17 @@ GDExtensionBool c_instance_get(GDExtensionScriptInstanceDataPtr p_instance, GDEx
     InstanceData* instance = (InstanceData*)p_instance;
     StringName method_name = StringName::new_static(((void**)p_name)[0]);
     String method_name_str = String::new2(method_name);
-    const char* c_method_name = gd_string_to_c_string(get_interface(), &method_name_str.godot_owner, method_name_str.length());
+    char* c_method_name;
+    gd_string_to_c_string(get_interface(), &method_name_str.godot_owner, method_name_str.length(), &c_method_name);
     if(std::string{c_method_name} == std::string{"script"}){
-        Variant var = Variant();
-        var.native_ptr = r_ret;
-        var.init_godot_owner(&(((PyScriptExtension*)instance->script)->godot_owner), GDExtensionVariantType::GDEXTENSION_VARIANT_TYPE_OBJECT);
+        auto constructor = get_interface()->get_variant_from_type_constructor(GDExtensionVariantType::GDEXTENSION_VARIANT_TYPE_OBJECT);
+        constructor(r_ret, &((PyScriptExtension*)instance->script)->godot_owner);
         return 1;
     }
-    return instance_get(p_instance, p_name, r_ret);
+    else{
+        return instance_get(p_instance, p_name, r_ret);
+    }
+    return 1;
 }
 
 
