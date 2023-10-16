@@ -1,4 +1,5 @@
 from py4godot.classes.generated4_core cimport *
+from py4godot.classes.Object.Object cimport *
 cimport py4godot.classes.cpp_bridge as bridge
 from cpython cimport Py_INCREF, Py_DECREF, PyObject
 from libcpp cimport bool
@@ -238,3 +239,5 @@ cdef api bridge.PackedStringArray get_packedstringarray_from_pyobject(PyObject* 
     return (<PackedStringArray>py_object).PackedStringArray_internal_class;
 cdef api bridge.StringName get_stringname_from_pyobject(PyObject* py_object):
     return (<StringName>py_object).StringName_internal_class;
+cdef api bridge.Object get_object_from_pyobject(PyObject* py_object):
+    return (<Object>py_object).Object_internal_class;

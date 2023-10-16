@@ -9,7 +9,10 @@ constexpr unsigned int str2int(const char* str, int h = 0)
 {
     return !str[h] ? 5381 : (str2int(str, h+1) * 33) ^ str[h];
 }
-
+void Variant::init_godot_owner(void* owner, GDExtensionVariantType type){
+    auto constructor = get_interface()->get_variant_from_type_constructor(type);
+    constructor(&native_ptr, owner);
+}
 void Variant::init_variant(){
     import_py4godot__core__variant4__type_helpers();
     if (PyErr_Occurred())
@@ -449,7 +452,6 @@ PyObject* Variant::get_converted_value(){
 
 void Variant::init_from_py_object(PyObject* object, const char* type_name){
     GDExtensionVariantFromTypeConstructorFunc constructor;
-    get_interface()->print_error(type_name, "test", "test",1,1);
     switch(str2int(type_name)){
         case str2int("Rect2i"):
             construct_Rect2i(object);
@@ -562,6 +564,8 @@ void Variant::init_from_py_object(PyObject* object, const char* type_name){
         case str2int("StringName"):
             construct_StringName(object);
             break;
+        default:
+            construct_Object(object);
 
 
     }
@@ -582,7 +586,8 @@ void Variant::construct_NodePath(PyObject* object){
         constructor(native_ptr, &converted_val.godot_owner);
 }
 void Variant::construct_int(PyObject* object){
-        long converted_val = PyLong_AsLong(object);
+        int64_t converted_val = (int64_t)PyLong_AsLong(object);
+        //assert(false);
         auto constructor = get_interface()->get_variant_from_type_constructor(GDExtensionVariantType::GDEXTENSION_VARIANT_TYPE_INT);
         constructor(native_ptr, &converted_val);
 }
@@ -713,6 +718,7 @@ void Variant::construct_PackedFloat64Array(PyObject* object){
 void Variant::construct_bool(PyObject* object){
         bool converted_val = PyObject_IsTrue(object);
         auto constructor = get_interface()->get_variant_from_type_constructor(GDExtensionVariantType::GDEXTENSION_VARIANT_TYPE_BOOL);
+        //assert(false);
         constructor(native_ptr, &converted_val);
 }
 void Variant::construct_Basis(PyObject* object){
@@ -749,4 +755,11 @@ void Variant::construct_StringName(PyObject* object){
         StringName converted_val = get_stringname_from_pyobject(object);
         auto constructor = get_interface()->get_variant_from_type_constructor(GDExtensionVariantType::GDEXTENSION_VARIANT_TYPE_STRING_NAME);
         constructor(native_ptr, &converted_val.godot_owner);
+}
+
+void Variant::construct_Object(PyObject* object){
+        Object converted_val = get_object_from_pyobject(object);
+        auto constructor = get_interface()->get_variant_from_type_constructor(GDExtensionVariantType::GDEXTENSION_VARIANT_TYPE_OBJECT);
+        constructor(native_ptr, &converted_val.godot_owner);
+        //assert(false);
 }

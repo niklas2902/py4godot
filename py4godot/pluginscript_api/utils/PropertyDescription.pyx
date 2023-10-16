@@ -23,6 +23,7 @@ cdef class PropertyDescription:
 
     def get_default_value(self):
         return self.default_value
+
     cdef void to_c(self):
         """
         self.property_info.type = self.type_

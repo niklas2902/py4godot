@@ -6,6 +6,7 @@ cdef extern from "help_types.h":
     ctypedef struct TransferObject:
         vector[Dictionary] signals
         vector[GDExtensionPropertyInfo] properties
+        vector [PyObject*] default_values
         PyObject* class_
         PyObject* instance
 

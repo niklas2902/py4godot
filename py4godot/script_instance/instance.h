@@ -3,6 +3,10 @@
 
 #include "PyScriptInstance_api.h"
 #include "py4godot/instance_data/CPPInstanceData.h"
+#include "py4godot/script_extension/PyScriptExtension.h"
+#include "py4godot/cpputils/utils.h"
+#include "py4godot/cppcore/Variant.h"
+#include <string>
 #include <windows.h>
 #include <cassert>
 GDExtensionScriptInstanceInfo native_script_instance_placeholder;
@@ -16,17 +20,22 @@ GDExtensionScriptInstanceInfo get_instance(){
 }
 
 GDExtensionBool c_instance_get(GDExtensionScriptInstanceDataPtr p_instance, GDExtensionConstStringNamePtr p_name, GDExtensionVariantPtr r_ret){
+    InstanceData* instance = (InstanceData*)p_instance;
+    StringName method_name = StringName::new_static(((void**)p_name)[0]);
+    String method_name_str = String::new2(method_name);
+    const char* c_method_name = gd_string_to_c_string(get_interface(), &method_name_str.godot_owner, method_name_str.length());
+    if(std::string{c_method_name} == std::string{"script"}){
+        Variant var = Variant();
+        var.native_ptr = r_ret;
+        var.init_godot_owner(&(((PyScriptExtension*)instance->script)->godot_owner), GDExtensionVariantType::GDEXTENSION_VARIANT_TYPE_OBJECT);
+        return 1;
+    }
     return instance_get(p_instance, p_name, r_ret);
 }
 
 
 void c_instance_call(GDExtensionScriptInstanceDataPtr p_self, GDExtensionConstStringNamePtr p_method, const GDExtensionConstVariantPtr *p_args, GDExtensionInt p_argument_count, GDExtensionVariantPtr r_return, GDExtensionCallError *r_error){
-    ghMutex = CreateMutex(
-    NULL,              // default security attributes
-    FALSE,             // initially not owned
-    NULL);
-    //instance_call(p_self, p_method, p_args, p_argument_count, r_return, r_error);
-    CloseHandle(ghMutex);
+    instance_call(p_self, p_method, p_args, p_argument_count, r_return, r_error);
 }
 
 
@@ -72,6 +81,7 @@ void init_instance(GDExtensionInterface *p_interface, GDExtensionScriptInstanceI
     native_script_instance->get_script_func = c_instance_get_script;
     native_script_instance->set_func = c_instance_set;
     native_script_instance->get_func = c_instance_get;
+    native_script_instance->call_func = c_instance_call;
     /*native_script_instance->is_placeholder_func = is_placeholder;
     native_script_instance->set_func = c_instance_set;
     native_script_instance->get_property_list_func = instance_get_property_list;

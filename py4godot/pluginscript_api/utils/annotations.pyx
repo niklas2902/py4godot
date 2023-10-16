@@ -13,7 +13,7 @@ from py4godot.pluginscript_api.utils.SignalArg cimport *
 from importlib.machinery import SourceFileLoader
 
 cdef api TransferObject exec_class(str source_string, str class_name_, GDExtensionInterface* main_interface):
-    global  gd_class, properties, signals, methods, interface_ptr
+    global  gd_class, properties, signals, methods,default_values, interface_ptr
     set_interface_ptr(main_interface)
     interface_ptr = main_interface
 
@@ -29,6 +29,7 @@ cdef api TransferObject exec_class(str source_string, str class_name_, GDExtensi
     properties = []
     signals = []
     methods = []
+    default_values = []
     try:
 
         if py_class_name_.endswith("\\") or py_class_name_.endswith("/"):
@@ -50,6 +51,10 @@ cdef api TransferObject exec_class(str source_string, str class_name_, GDExtensi
     for property in properties:
         property_info = (<PropertyDescription>property).property_info
         transfer_object.properties.push_back(property_info)
+
+    for default_value in default_values:
+        Py_INCREF(default_value)
+        transfer_object.default_values.push_back(<PyObject*>default_value)
 
     Py_INCREF(gd_class)
     transfer_object.class_ = <PyObject*>gd_class
@@ -73,6 +78,7 @@ def gdtool(cls):
         return cls
 
 def prop(name,type_, defaultval, hint = BaseHint(), hint_string = ""):
+    default_values.append(defaultval)
     properties.append(PropertyDescription(name = name,
                 type_=type_,hint = hint,usage = 4096|6|32768,
                 default_value=defaultval))

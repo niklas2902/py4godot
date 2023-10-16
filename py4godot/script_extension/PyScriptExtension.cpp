@@ -127,14 +127,13 @@ void PyScriptExtension::_instance_create( Object& for_object, GDExtensionTypePtr
     //gd_instance.set_methods(methods)
     get_placeholder_instance_ptr(get_interface(), &(gd_instance->info));
 
-    for (auto& property : transfer_object.properties) {
-        //print_error(f"create_property:{gd_string_name_to_py_string(property.get_name())}->{property.get_default_value()}");
-        //setattr(gd_obj, gd_string_name_to_py_string(property.get_name()), property.get_default_value());
-//        auto property_name = gd_string_to_c_string(get_interface(), property.name, String::new_static(property.name).length());
-//        int ret = PyObject_SetAttrString( instance, property_name, property.default_value );
-
-//        if( ret == -1 )
-//          assert(false);
+    int index = 0;
+    for (auto& default_value: transfer_object.default_values){
+        String property_name = String::new2(StringName::new_static(((void**)transfer_object.properties[index].name)[0]));
+        char* c_property_name;
+        gd_string_to_c_string(get_interface(), &property_name.godot_owner, property_name.length(), &c_property_name);
+        set_default_val(instance, PyUnicode_FromStringAndSize(c_property_name, property_name.length()), default_value);
+        index ++;
     }
     //instance.godot_owner = for_object.godot_owner;
     gd_instance->script = this;
@@ -163,9 +162,13 @@ void PyScriptExtension::_placeholder_instance_create( Object& for_object, GDExte
     //gd_instance.set_methods(methods)
     get_placeholder_instance_ptr(get_interface(), &(gd_instance->info));
 
-    for (auto& property : transfer_object.properties){
-        //print_error(f"create_property:{gd_string_name_to_py_string(property.get_name())}->{property.get_default_value()}");
-        //setattr(gd_obj, gd_string_name_to_py_string(property.get_name()), property.get_default_value());
+    int index = 0;
+    for (auto& default_value: transfer_object.default_values){
+        String property_name = String::new2(StringName::new_static(transfer_object.properties[index].name));
+        char* c_property_name;
+        gd_string_to_c_string(get_interface(), &property_name.godot_owner, property_name.length(), &c_property_name);
+        set_default_val(instance, PyUnicode_FromStringAndSize(c_property_name, property_name.length()), default_value);
+        index ++;
     }
     //instance.godot_owner = for_object.godot_owner;
     gd_instance->script = this;

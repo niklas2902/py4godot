@@ -20,6 +20,7 @@ namespace godot{
         void init_type(Dictionary& val);
         void init_type(int val);
         void init_type(Array& val);
+        void init_godot_owner(void* owner, GDExtensionVariantType type);
 
         #pragma region generated
         PyObject* create_vector3();
@@ -96,6 +97,7 @@ namespace godot{
         void construct_Quaternion(PyObject* object);
         void construct_PackedStringArray(PyObject* object);
         void construct_StringName(PyObject* object);
+        void construct_Object(PyObject* object);
         #pragma endregion
 
 

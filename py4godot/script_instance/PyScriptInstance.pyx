@@ -40,29 +40,21 @@ cdef api GDExtensionBool instance_get(GDExtensionScriptInstanceDataPtr p_instanc
     method_name.StringName_internal_class = internal_method_name
     cdef String method_name_str = String.new2(method_name)
     cdef unicode py_method_name_str = gd_string_to_py_string(method_name_str)
-    cdef char* typename;
     cdef str py_typename;
 
-    print_error("Before init methods")
     cdef object get_val = None
     cdef Variant get_var
     if py_method_name_str == "_dont_undo_redo":
         return 0
-    print_error("before try")
     if py_method_name_str == "transform":
         return 0
-    if(py_method_name_str != "script"):
-        try:
-            get_var.native_ptr = <void*>r_ret
-            print_error(py_method_name_str)
-            get_val = getattr(<object>(instance.owner),py_method_name_str)
-            py_typename = str(type(get_val).__name__)
-            get_var.init_from_py_object(<PyObject*>get_val, py_typename.encode("utf-8"))
-        except Exception as e:
-            print_error("exception:",e)
-    else:
-        pass
-        #get_var.init_type(instance.script)
+    try:
+        get_var.native_ptr = <void*>r_ret
+        get_val = getattr(<object>(instance.owner),py_method_name_str)
+        py_typename = str(type(get_val).__name__)
+        get_var.init_from_py_object(<PyObject*>get_val, py_typename.encode("utf-8"))
+    except Exception as e:
+        print_error("exception:",e)
     return 1
 """cdef api const GDExtensionMethodInfo * instance_get_method_list(GDExtensionScriptInstanceDataPtr p_instance, uint32_t *r_count) with gil:
     global method_infos
@@ -94,35 +86,34 @@ cdef api GDExtensionBool instance_has_method(GDExtensionScriptInstanceDataPtr p_
     print_error("has_method:" + py_method_name_str)
 
     return int(hasattr(instance.owner, py_method_name_str))
-
-cdef api void instance_call(GDExtensionScriptInstanceDataPtr p_self, GDExtensionConstStringNamePtr p_method, const GDExtensionConstVariantPtr *p_args, GDExtensionInt p_argument_count, GDExtensionVariantPtr r_return, GDExtensionCallError *r_error) with gil:
-    print_error("call_method")
-    cdef InstanceData instance = <InstanceData>p_self
-
-    cdef StringName method_name = StringName.new_static(p_method)
+"""
+cdef api bint instance_call(GDExtensionScriptInstanceDataPtr p_self, GDExtensionConstStringNamePtr p_method, const GDExtensionConstVariantPtr *p_args, GDExtensionInt p_argument_count, GDExtensionVariantPtr r_return, GDExtensionCallError *r_error) with gil:
+    cdef InstanceData* instance = <InstanceData*>p_self
+    #TODO still a problem with custom string attributes. Why is this still crashing?
+    cdef StringName method_name = StringName.__new__(StringName)
+    cdef cppbridge.StringName internal_method_name = cppbridge.StringName.new_static((<void**>p_method)[0]) #TODO: Create unconst helper
+    method_name.StringName_internal_class = internal_method_name
     cdef String method_name_str = String.new2(method_name)
-    cdef char* c_str = gd_string_c_string(gdnative_interface,method_name_str.godot_owner, method_name_str.length())
     cdef unicode py_method_name_str = gd_string_to_py_string(method_name_str)
-    print_error("print_method:"+py_method_name_str)
-    cdef list args = []
-    cdef object result = None
 
     if(py_method_name_str == "_get_linked_undo_properties"):
-        return
+        return 0
 
     if(py_method_name_str == "_dont_undo_redo"):
-        return
+        return 0
 
+    cdef Variant var
     for index in range(0, p_argument_count):
-        args.append(Variant.new_static(p_args[index]).get_converted_value())
+        var.native_ptr = <void*>p_args[index]
+        args.append(<object>var.get_converted_value())
     try:
-        if not hasattr(instance.owner,py_method_name_str):
-            return
-        result = getattr(instance.owner, py_method_name_str)(*args)
+        if not hasattr(<object>instance.owner,py_method_name_str):
+            return 1
+        result = getattr(<object>instance.owner, py_method_name_str)(*args)
     except Exception as e:
-        print_error(f"An Exception happened:{e}|owner:{instance.owner}" )
+        print_error(f"An Exception happened:{e}|owner:{<object>instance.owner}" )
 
-    cdef Variant var = Variant.new_static(r_return)
-    var.init_type(result)
-    print_error(f"called method({py_method_name_str}):", result)
-"""
+    var.native_ptr = r_return
+    py_typename = str(type(result).__name__)
+    get_var.init_from_py_object(<object>result, py_typename.encode("utf-8"))
+    return 1
