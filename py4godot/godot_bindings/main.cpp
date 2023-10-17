@@ -68,9 +68,8 @@ void initialize_py4godot(void *userdata, GDExtensionInitializationLevel p_level)
     if (p_level != GDEXTENSION_INITIALIZATION_EDITOR){
         return;
     }
-
-    godot::init_py_language();
     _interface->print_error("test- before- init_py_language", "test", "test",1,1);
+    godot::init_py_language();
     _interface->print_error("test-after- init_py_language", "test", "test",1,1);
     _interface->print_error("test10", "test", "test",1,1);
 }
@@ -82,28 +81,15 @@ extern "C"{
     GDExtensionBool GDN_EXPORT py4godot_init(GDExtensionInterface *p_interface, const GDExtensionClassLibraryPtr p_library, GDExtensionInitialization *r_initialization)
     {
 
-        _interface = p_interface;
+        p_interface->print_error("init py4godot", "test", "test",1,1);
         _interface = p_interface;
         main_interface = _interface;
         _library = p_library;
-        //set_library(p_library);
-        //set_interface(p_interface);
+
         r_initialization->initialize = initialize_py4godot;
         r_initialization->deinitialize = deinitialize_py4godot;
 
-        Py_SetProgramName(L"godot");
-        Py_SetPythonHome(PYTHONHOME);
-        // Initialize interpreter but skip initialization registration of signal handlers
-        Py_InitializeEx(0);
-        // PyEval_InitThreads acquires the GIL, so we must release it later.
-        // Since python3.7 PyEval_InitThreads is automatically called by Py_InitializeEx, but it's better to leave it here
-        // to be explicit. Calling it again does nothing.
         p_interface->print_error("test6", "test", "test",1,1);
-
-        p_interface->print_error("test7", "test", "test",1,1);
-        p_interface->print_error("test8", "test", "test",1,1);
-        p_interface->print_error("test9", "test", "test",1,1);
-
         return 1;
     }
 }

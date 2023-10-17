@@ -103,6 +103,7 @@ cdef api bint instance_call(GDExtensionScriptInstanceDataPtr p_self, GDExtension
         return 0
 
     cdef Variant var
+    args = []
     for index in range(0, p_argument_count):
         var.native_ptr = <void*>p_args[index]
         args.append(<object>var.get_converted_value())
@@ -111,7 +112,7 @@ cdef api bint instance_call(GDExtensionScriptInstanceDataPtr p_self, GDExtension
             return 1
         result = getattr(<object>instance.owner, py_method_name_str)(*args)
     except Exception as e:
-        print_error(f"An Exception happened:{e}|owner:{<object>instance.owner}" )
+        print_error(f"An Exception happened2:{e}|owner:{<object>instance.owner}" )
 
     var.native_ptr = r_return
     py_typename = str(type(result).__name__)
