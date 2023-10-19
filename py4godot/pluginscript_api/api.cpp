@@ -14,6 +14,7 @@ godot::PyResourceFormatLoader * py_resource_format_loader;
 godot::PyResourceFormatSaver * py_resource_format_saver;
 
 void godot::init_py_language(){
+    _interface->print_error("init pylanguage", "test", "test",1,1);
     register_class();
     register_class_script();
     register_class_loader();

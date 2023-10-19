@@ -91,7 +91,7 @@ def gdmethod(func):
     #methods.append(
     #MethodDescription(func.__name__,
     #PropertyDescription(name = "return", type_ = None, hint = BaseHint(),usage = 4096|6|32768, default_value =  None), 0,list_args, []))
-    #return func
+    return func
 
 def signal(name, list args = []):
     interface_ptr.print_error("exec_class: start", "test", "test",1,1)

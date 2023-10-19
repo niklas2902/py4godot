@@ -61,6 +61,10 @@ GDExtensionObjectPtr c_instance_get_script(GDExtensionScriptInstanceDataPtr p_in
     return ((PyScriptExtension*)(p_instance_data->script))->godot_owner;
 }
 
+GDExtensionBool c_instance_has_method(GDExtensionScriptInstanceDataPtr p_instance, GDExtensionConstStringNamePtr p_name){
+    return instance_has_method(p_instance, p_name);
+}
+
 
 void init_instance(GDExtensionInterface *p_interface, GDExtensionScriptInstanceInfo* native_script_instance, int is_placeholder){
     native_script = p_interface;
@@ -85,6 +89,9 @@ void init_instance(GDExtensionInterface *p_interface, GDExtensionScriptInstanceI
     native_script_instance->set_func = c_instance_set;
     native_script_instance->get_func = c_instance_get;
     native_script_instance->call_func = c_instance_call;
+    if(!is_placeholder){
+        native_script_instance->has_method_func = c_instance_has_method;
+    }
     /*native_script_instance->is_placeholder_func = is_placeholder;
     native_script_instance->set_func = c_instance_set;
     native_script_instance->get_property_list_func = instance_get_property_list;
@@ -95,9 +102,6 @@ void init_instance(GDExtensionInterface *p_interface, GDExtensionScriptInstanceI
     native_script_instance->get_method_list_func = instance_get_method_list;
     native_script_instance->free_method_list_func = instance_free_method_list;
     native_script_instance->get_property_type_func = instance_get_property_type;
-    if(!is_placeholder){
-        native_script_instance->has_method_func = instance_has_method;
-    }
     native_script_instance->call_func = c_instance_call;
     native_script_instance->notification_func = instance_notification;
     //native_script_instance->to_string_func = instance_to_string;

@@ -575,37 +575,21 @@ def generate_properties(class_):
 
 def generate_member_getter(class_,member):
     res = ""
-    return res
     res += f"{INDENT}@property"
     res = generate_newline(res)
     res += f"{INDENT}def {member.name}(self):"
     res = generate_newline(res)
-    res += f"{INDENT*2}cdef String _member_name_string = String.new0()"
-    res = generate_newline(res)
-    res += f'{INDENT*2}_interface.string_new_with_utf8_chars(_member_name_string.godot_owner, "{member.name}")'
-    res = generate_newline(res)
-    res += f'{INDENT*2}cdef StringName _member_name = StringName.new2(_member_name_string)'
-    res = generate_newline(res)
-    res += f"{INDENT*2}cdef GDExtensionPtrGetter getter = gdnative_interface.variant_get_ptr_getter({generate_variant_type(class_)},_member_name.godot_owner)"
-    res = generate_newline(res)
-    if member.type_ == "int" or member.type_ == "float" or member.type_ == "double":
-        res += f"{INDENT*2}cdef {member.type_} _ret"
-    else:
-        res += f"{INDENT * 2}cdef {member.type_} _ret = {member.type_}.new0()"
-    res = generate_newline(res)
     if member.type_ != "int" and member.type_ != "float" and member.type_ != "double":
-        res += f"{INDENT * 2}getter(self.godot_owner, _ret.godot_owner)"
+        res += f"{INDENT * 2}cdef {member.type_} _ret = {member.type_}()"
+        res = generate_newline(res)
+        res += f"{INDENT * 2}_ret.{member.type_}_internal_class = self.{class_}_internal_class.member_get_{member.name}()"
+        res = generate_newline(res)
+        res += f"{INDENT * 2}_ret.set_gdowner(_ret.{member.type_}_internal_class.get_godot_owner())"
+        res = generate_newline(res)
     else:
-        res += f"{INDENT*2}getter(self.godot_owner, &_ret)"
+        res += f"{INDENT*2}cdef {member.type_} _ret = self.{class_}_internal_class.member_get_{member.name}()"
     res = generate_newline(res)
-
-    res = generate_newline(res)
-    if member.type_  == "String":
-        res += f"{INDENT*2}return gd_string_to_py_string(_ret)"
-    elif member.type_  == "StringName":
-        res += f"{INDENT*2}return gd_string_name_to_py_string(_ret)"
-    else:
-        res += f"{INDENT*2}return _ret"
+    res += f"{INDENT*2}return _ret"
     res = generate_newline(res)
     return res
 
@@ -615,26 +599,16 @@ def generate_member_setter(class_,member):
     res = generate_newline(res)
     res += f"{INDENT}def {member.name}(self, {member.type_} value):"
     res = generate_newline(res)
-    res += f"{INDENT * 2}cdef String _member_name_string = String.new0()"
-    res = generate_newline(res)
-    res += f'{INDENT * 2}_interface.string_new_with_utf8_chars(_member_name_string.godot_owner, "{member.name}")'
-    res = generate_newline(res)
-    res += f'{INDENT * 2}cdef StringName _member_name = StringName.new2(_member_name_string)'
-    res = generate_newline(res)
-    res += f"{INDENT * 2}cdef GDExtensionPtrSetter setter = gdnative_interface.variant_get_ptr_setter({generate_variant_type(class_)},_member_name.godot_owner)"
-    res = generate_newline(res)
     if member.type_ != "int" and member.type_ != "float" and member.type_ != "double":
-        res += f"{INDENT * 2}setter(self.godot_owner, value.godot_owner)"
+        res += f"{INDENT * 2}self.{class_}_internal_class.member_set_{member.name}(value.{member.type_}_internal_class)"
     else:
-        res += f"{INDENT * 2}setter(self.godot_owner, &value)"
+        res += f"{INDENT * 2}self.{class_}_internal_class.member_set_{member.name}(value)"
     res = generate_newline(res)
     return res
 
 
 def generate_members_of_class(class_):
     res = ""
-    #TODO:enable again
-    return res
     if class_["name"] in core_classes.keys():
         for member in core_classes[class_["name"]].core_members:
             res += generate_member_getter(class_["name"],member)

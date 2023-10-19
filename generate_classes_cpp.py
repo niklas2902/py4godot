@@ -589,11 +589,11 @@ def generate_member_getter(class_,member):
     res = generate_newline(res)
     res += f"{INDENT*2}String _member_name_string = String::new0();"
     res = generate_newline(res)
-    res += f'{INDENT*2}_interface->string_new_with_utf8_chars(_member_name_string.godot_owner, "{member.name}");'
+    res += f'{INDENT*2}_interface->string_new_with_utf8_chars(&_member_name_string.godot_owner, "{member.name}");'
     res = generate_newline(res)
     res += f'{INDENT*2}StringName _member_name = StringName::new2(_member_name_string);'
     res = generate_newline(res)
-    res += f"{INDENT*2}GDExtensionPtrGetter getter = _interface->variant_get_ptr_getter({generate_variant_type(class_)},_member_name.godot_owner);"
+    res += f"{INDENT*2}GDExtensionPtrGetter getter = _interface->variant_get_ptr_getter({generate_variant_type(class_)},&_member_name.godot_owner);"
     res = generate_newline(res)
     if member.type_ == "int" or member.type_ == "float" or member.type_ == "double":
         res += f"{INDENT*2}{member.type_} _ret;"
@@ -601,9 +601,9 @@ def generate_member_getter(class_,member):
         res += f"{INDENT * 2}{member.type_} _ret = {member.type_}::new0();"
     res = generate_newline(res)
     if member.type_ != "int" and member.type_ != "float" and member.type_ != "double":
-        res += f"{INDENT * 2}getter(godot_owner, _ret.godot_owner);"
+        res += f"{INDENT * 2}getter(&godot_owner, &_ret.godot_owner);"
     else:
-        res += f"{INDENT*2}getter(godot_owner, &_ret);"
+        res += f"{INDENT*2}getter(&godot_owner, &_ret);"
     res = generate_newline(res)
     if member.type_ in builtin_classes:
         #TODO:enable this again
@@ -623,16 +623,16 @@ def generate_member_setter(class_,member):
     res = generate_newline(res)
     res += f"{INDENT * 2}String _member_name_string = String::new0();"
     res = generate_newline(res)
-    res += f'{INDENT * 2}_interface->string_new_with_utf8_chars(_member_name_string.godot_owner, "{member.name}");'
+    res += f'{INDENT * 2}_interface->string_new_with_utf8_chars(&_member_name_string.godot_owner, "{member.name}");'
     res = generate_newline(res)
     res += f'{INDENT * 2}StringName _member_name = StringName::new2(_member_name_string);'
     res = generate_newline(res)
-    res += f"{INDENT * 2}GDExtensionPtrSetter setter = _interface->variant_get_ptr_setter({generate_variant_type(class_)},_member_name.godot_owner);"
+    res += f"{INDENT * 2}GDExtensionPtrSetter setter = _interface->variant_get_ptr_setter({generate_variant_type(class_)},&_member_name.godot_owner);"
     res = generate_newline(res)
     if member.type_ != "int" and member.type_ != "float" and member.type_ != "double":
-        res += f"{INDENT * 2}setter(godot_owner, value.godot_owner);"
+        res += f"{INDENT * 2}setter(&godot_owner, &value.godot_owner);"
     else:
-        res += f"{INDENT * 2}setter(godot_owner, &value);"
+        res += f"{INDENT * 2}setter(&godot_owner, &value);"
     res = generate_newline(res)
     if class_ in builtin_classes:
         #TODO: enable this again

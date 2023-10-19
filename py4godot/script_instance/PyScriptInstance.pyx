@@ -76,17 +76,17 @@ cdef api GDExtensionBool instance_get(GDExtensionScriptInstanceDataPtr p_instanc
         error("Exception in method_list:", e)
     return method_infos
 """
-"""
 cdef api GDExtensionBool instance_has_method(GDExtensionScriptInstanceDataPtr p_instance, GDExtensionConstStringNamePtr p_name) with gil:
-    cdef InstanceData instance = <InstanceData>p_instance
+    cdef InstanceData* instance = <InstanceData*>p_instance
 
-    cdef StringName method_name = StringName.new_static(p_name)
+    cdef StringName method_name = StringName.__new__(StringName)
+    cdef cppbridge.StringName internal_method_name = cppbridge.StringName.new_static((<void**>p_name)[0]) #TODO: Create unconst helper
+    method_name.StringName_internal_class = internal_method_name
     cdef String method_name_str = String.new2(method_name)
-    cdef str py_method_name_str = gd_string_to_py_string(method_name_str)
-    print_error("has_method:" + py_method_name_str)
+    cdef unicode py_method_name_str = gd_string_to_py_string(method_name_str)
 
-    return int(hasattr(instance.owner, py_method_name_str))
-"""
+    return hasattr(<object>(instance.owner), py_method_name_str)
+
 cdef api bint instance_call(GDExtensionScriptInstanceDataPtr p_self, GDExtensionConstStringNamePtr p_method, const GDExtensionConstVariantPtr *p_args, GDExtensionInt p_argument_count, GDExtensionVariantPtr r_return, GDExtensionCallError *r_error) with gil:
     cdef InstanceData* instance = <InstanceData*>p_self
     #TODO still a problem with custom string attributes. Why is this still crashing?
@@ -95,7 +95,6 @@ cdef api bint instance_call(GDExtensionScriptInstanceDataPtr p_self, GDExtension
     method_name.StringName_internal_class = internal_method_name
     cdef String method_name_str = String.new2(method_name)
     cdef unicode py_method_name_str = gd_string_to_py_string(method_name_str)
-
     if(py_method_name_str == "_get_linked_undo_properties"):
         return 0
 
@@ -104,13 +103,17 @@ cdef api bint instance_call(GDExtensionScriptInstanceDataPtr p_self, GDExtension
 
     cdef Variant var
     args = []
+    cdef object instance_object = <object>instance.owner
+    cdef object method
     for index in range(0, p_argument_count):
         var.native_ptr = <void*>p_args[index]
         args.append(<object>var.get_converted_value())
     try:
-        if not hasattr(<object>instance.owner,py_method_name_str):
+        if not hasattr(instance_object,py_method_name_str):
             return 1
-        result = getattr(<object>instance.owner, py_method_name_str)(*args)
+        print_error("method:", py_method_name_str)
+        method = getattr(instance_object,py_method_name_str)
+        result = method(*args)
     except Exception as e:
         print_error(f"An Exception happened2:{e}|owner:{<object>instance.owner}" )
 

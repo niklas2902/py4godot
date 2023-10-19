@@ -3,6 +3,7 @@
 #include "py4godot/godot_bindings/main.h"
 #include "py4godot/cpputils/utils.h"
 #include "py4godot/cppclasses/Script/Script.h"
+#include "py4godot/cppclasses/Engine/Engine.h"
 #include "py4godot/cppcore/Variant.h"
 #include "py4godot/pluginscript_api/api.h"
 #include "py4godot/script_instance/instance.h"
@@ -104,7 +105,16 @@ void free_instance_script(void *p_userdata, GDExtensionClassInstancePtr p_instan
 void PyScriptExtension::_init_values(){}
 
 void PyScriptExtension::_editor_can_reload_from_file(GDExtensionTypePtr res){}
-void PyScriptExtension::_can_instantiate(GDExtensionTypePtr res){}
+void PyScriptExtension::_can_instantiate(GDExtensionTypePtr res){
+    Engine engine = Engine::get_instance();
+    if (!engine.is_editor_hint()){
+        *(bool*)res = true;
+    }
+    else{
+        *(bool*)res = false;
+    }
+}
+
 void  PyScriptExtension::_get_base_script(GDExtensionTypePtr res){}
 void PyScriptExtension::_get_global_name(GDExtensionTypePtr res){}
 void PyScriptExtension::_inherits_script( Script* script, GDExtensionTypePtr res){}
@@ -125,7 +135,7 @@ void PyScriptExtension::_instance_create( Object& for_object, GDExtensionTypePtr
     gd_instance->owner = instance;
     gd_instance->properties = transfer_object.properties;
     //gd_instance.set_methods(methods)
-    get_placeholder_instance_ptr(get_interface(), &(gd_instance->info));
+    get_instance_ptr(get_interface(), &(gd_instance->info));
 
     int index = 0;
     for (auto& default_value: transfer_object.default_values){
@@ -137,7 +147,6 @@ void PyScriptExtension::_instance_create( Object& for_object, GDExtensionTypePtr
     }
     //instance.godot_owner = for_object.godot_owner;
     gd_instance->script = this;
-    //assert(false);
     Py_INCREF(instance);
     instance_ptr = get_interface()->script_instance_create(&(gd_instance->info), gd_instance);
     *((GDExtensionTypePtr*)res) = instance_ptr;
@@ -147,11 +156,11 @@ void PyScriptExtension::_instance_create( Object& for_object, GDExtensionTypePtr
 void PyScriptExtension::_placeholder_instance_create( Object& for_object, GDExtensionTypePtr res){
     m.lock();
     auto gil_state = PyGILState_Ensure();
-
     auto instance = PyObject_CallObject(transfer_object.class_, nullptr);
-    set_owner(instance, ((void**)for_object.godot_owner)[0]);
+
     //print_error("before get_class")
     //for_object.get_class()
+    set_owner(instance, ((void**)for_object.godot_owner)[0]);
     GDExtensionVariantFromTypeConstructorFunc constructor_func;
     GDExtensionScriptInstancePtr instance_ptr;
     GDExtensionScriptInstanceInfo* instance_info;
@@ -163,18 +172,19 @@ void PyScriptExtension::_placeholder_instance_create( Object& for_object, GDExte
     get_placeholder_instance_ptr(get_interface(), &(gd_instance->info));
 
     int index = 0;
-    for (auto& default_value: transfer_object.default_values){
-        String property_name = String::new2(StringName::new_static(transfer_object.properties[index].name));
+    for (auto& default_value : transfer_object.default_values) {
+        String property_name = String::new2(StringName::new_static(((void**)transfer_object.properties[index].name)[0]));
         char* c_property_name;
         gd_string_to_c_string(get_interface(), &property_name.godot_owner, property_name.length(), &c_property_name);
         set_default_val(instance, PyUnicode_FromStringAndSize(c_property_name, property_name.length()), default_value);
-        index ++;
+        index++;
     }
     //instance.godot_owner = for_object.godot_owner;
     gd_instance->script = this;
+    //assert(false);
     Py_INCREF(instance);
     instance_ptr = get_interface()->script_instance_create(&(gd_instance->info), gd_instance);
-    *((GDExtensionTypePtr*)res) =  instance_ptr;
+    *((GDExtensionTypePtr*)res) = instance_ptr;
     PyGILState_Release(gil_state);
     m.unlock();
 }
