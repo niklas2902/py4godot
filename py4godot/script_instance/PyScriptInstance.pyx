@@ -111,7 +111,6 @@ cdef api bint instance_call(GDExtensionScriptInstanceDataPtr p_self, GDExtension
     try:
         if not hasattr(instance_object,py_method_name_str):
             return 1
-        print_error("method:", py_method_name_str)
         method = getattr(instance_object,py_method_name_str)
         result = method(*args)
     except Exception as e:

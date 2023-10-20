@@ -252,6 +252,8 @@ def generate_method(class_, mMethod):
     res = ""
     if has_native_struct(mMethod):
         return res
+    if get_ret_value(mMethod) == "Transform3D":
+        res += f"{INDENT}{generate_method_modifiers(mMethod)} VariantTypeWrapper* buffer_{class_['name']}_{mMethod['name']};"
     args = generate_args(mMethod, builtin_classes)
     def_function = f"{INDENT}{generate_method_modifiers(mMethod)} {unenumize_type(untypearray(get_ret_value(mMethod)))} {pythonize_name(mMethod['name'])}({args});"
     res = generate_newline(res)

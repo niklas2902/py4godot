@@ -174,7 +174,7 @@ def generate_newline(str_):
     return str_ + "\n"
 
 
-def generate_return_value(method_):
+def generate_return_value(method_,classname):
     result = ""
     if "return_value" in method_.keys() or "return_type" in method_.keys():
         ret_val = None
@@ -183,7 +183,11 @@ def generate_return_value(method_):
         else:
             ret_val = ReturnType("_ret", method_['return_type'])
         if ret_val.type in classes:
-            if ret_val.type in builtin_classes:
+            if ret_val.type == "Transform3D" and not is_static(method_): #TODO get rid of is_static
+                result += f"{INDENT * 2}buffer_{classname}_{method_['name']}= new Transform3D();"
+                result = generate_newline(result)
+                result += f"{INDENT * 2}{ret_val.type}& {ret_val.name}"+f"= *(static_cast<Transform3D*>(buffer_{classname}_{method_['name']}));"
+            elif ret_val.type in builtin_classes:
                 result += f"{INDENT * 2}{ret_val.type} {ret_val.name}"+"{};"
             else:
                 result += f"{INDENT * 2}{ret_val.type} {ret_val.name} = {ret_val.type}();"
@@ -476,7 +480,7 @@ def generate_method_body_standard(class_, method):
 
     result += generate_args_array(method)
     result = generate_newline(result)
-    result += generate_return_value(method)
+    result += generate_return_value(method, class_["name"])
     result = generate_newline(result)
 
     result = generate_newline(result)
