@@ -84,6 +84,7 @@ def generate_import(class_, is_core):
 
     result = f'#include "py4godot/cpputils/utils.h"\n'\
              f'#include "py4godot/cppclasses/generated4_core.h"\n'
+    f'#include <memory>"\n'
     return result
 
 def generate_constructor_args(constructor):
@@ -183,10 +184,10 @@ def generate_return_value(method_,classname):
         else:
             ret_val = ReturnType("_ret", method_['return_type'])
         if ret_val.type in classes:
-            if ret_val.type == "Transform3D" and not is_static(method_): #TODO get rid of is_static
-                result += f"{INDENT * 2}buffer_{classname}_{method_['name']}= new Transform3D();"
+            if ret_val.type in builtin_classes-{"float", "int", "bool", "Nil"} and not is_static(method_): #TODO get rid of is_static
+                result += f"{INDENT * 2}buffer_{classname}_{method_['name']}= new {ret_val.type}();"
                 result = generate_newline(result)
-                result += f"{INDENT * 2}{ret_val.type}& {ret_val.name}"+f"= *(static_cast<Transform3D*>(buffer_{classname}_{method_['name']}));"
+                result += f"{INDENT * 2}{ret_val.type}& {ret_val.name}"+f"= *(buffer_{classname}_{method_['name']});"
             elif ret_val.type in builtin_classes:
                 result += f"{INDENT * 2}{ret_val.type} {ret_val.name}"+"{};"
             else:
@@ -472,6 +473,39 @@ def get_godot_owner_core(method):
         return "NULL"
     return "&godot_owner"
 
+
+def generate_callback(class_, method):
+    if is_static(method):
+        return ""
+    if "return_value" in method.keys() or "return_type" in method.keys():
+        ret_val = None
+        if("return_value" in method.keys()):
+            ret_val = ReturnType("_ret", method['return_value']['type'])
+        else:
+            ret_val = ReturnType("_ret", method['return_type'])
+        if is_property_setter(class_, method["name"]) and class_["name"] in builtin_classes:
+            result = ""
+            result += f"{INDENT * 2}Callback<{ret_val.type}>* _update_callback = (Callback<{ret_val.type}>*)_callback"
+            result = generate_newline(result)
+            result += f"{INDENT * 2}if(_update_callback) _update_callback->callback(*this, _update_callback->instance);"
+            result = generate_newline(result)
+            return result
+        if is_property_getter(class_, method["name"]) and ret_val.type in builtin_classes - {"float", "int", "bool", "Nil"}:
+            setter = get_setter_for_getter(class_, method["name"], ret_val.type)
+            if setter and "arguments" not in method.keys():
+                result = ""
+                result += f"{INDENT * 2}Callback<{ret_val.type}>* _update_callback = new Callback<{ret_val.type}>();"
+                result = generate_newline(result)
+                result += f"{INDENT * 2}_update_callback->callback = []({ret_val.type}& arg, void* _instance){{static_cast<{class_['name']}*>(_instance)->{setter}(arg);}};"
+                result = generate_newline(result)
+                result += f"{INDENT * 2}_update_callback->instance = this;"
+                result = generate_newline(result)
+                result += f"{INDENT * 2}_ret._callback = (Callback<{ret_val.type}>*)_update_callback;"
+                result = generate_newline(result)
+                return result
+    return ""
+
+
 def generate_method_body_standard(class_, method):
     number_arguments = 0
     result = ""
@@ -501,6 +535,8 @@ def generate_method_body_standard(class_, method):
                       f" {get_godot_owner(method)}, _args, {address_ret(method)});"
 
     if ("return_value" in method.keys() or "return_type" in method.keys()):
+        result = generate_newline(result)
+        result += generate_callback(class_, method)
         result = generate_newline(result)
         result += generate_return_statement(method)
     return result
@@ -609,10 +645,14 @@ def generate_member_getter(class_,member):
     else:
         res += f"{INDENT*2}getter(&godot_owner, &_ret);"
     res = generate_newline(res)
-    if member.type_ in builtin_classes:
-        #TODO:enable this again
-        #res = generate_newline(res)
-        #res += f"{INDENT * 2}get_event_holder().add_event(self.set_{member.name}, <int>(&(<VariantTypeWrapper4>_ret).godot_owner))"
+    if member.type_ in builtin_classes - {"int", "float", "bool", "Nil"}:
+        res += f"{INDENT * 2}Callback<{member.type_}>* _update_callback = new Callback<{member.type_}>();"
+        res = generate_newline(res)
+        res += f"{INDENT * 2}_update_callback->callback = []({member.type_}& arg, void* _instance){{static_cast<{class_}*>(_instance)->member_set_{member.name}(arg);}};"
+        res = generate_newline(res)
+        res += f"{INDENT * 2}_update_callback->instance = this;"
+        res = generate_newline(res)
+        res += f"{INDENT * 2}_ret._callback = (Callback<{member.type_}>*)_update_callback;"
         res = generate_newline(res)
     res = generate_newline(res)
     res += f"{INDENT*2}return _ret;"
@@ -644,7 +684,12 @@ def generate_member_setter(class_,member):
         #res += f"{INDENT * 2}get_event_holder().notify_event(<int>(&self.godot_owner), self)"
         res = generate_newline(res)
     res = generate_newline(res)
+    res += f"{INDENT * 2}Callback<{class_}>* _update_callback = (Callback<{class_}>*)_callback;"
+    res = generate_newline(res)
+    res += f"{INDENT * 2}if(_update_callback) _update_callback->callback(*this, _update_callback->instance);"
+    res = generate_newline(res)
     res += "}"
+    res = generate_newline(res)
     return res
 
 
@@ -1087,9 +1132,35 @@ def generate_operators_set(class_):
         if "right_type" in operator.keys():
             operator_dict[class_["name"]][operator["name"]].right_type_values.append(operator["right_type"])
 
+def is_property_setter(class_, methodname):
+    if("properties" in class_.keys()):
+        for property in class_["properties"]:
+            if "setter" in property.keys():
+                if methodname == property["setter"]:
+                    return True
+    return False
 
+def is_property_getter(class_, methodname):
+    if("properties" in class_.keys()):
+        for property in class_["properties"]:
+            if methodname == property["getter"]:
+                return True
+    return False
+
+def get_setter_for_getter(class_, methodname, ret_type):
+    if("properties" in class_.keys()):
+        for property in class_["properties"]:
+            if "setter" in property.keys():
+                if methodname == property["getter"]:
+                    for method in class_["methods"]:
+                        if method["name"] == property["setter"] and are_types_same(method, ret_type):
+                            return property["setter"]
+
+def are_types_same(method, ret_type):
+    return method["arguments"][0]["type"] == ret_type
 
 classes = set()
+
 
 if __name__ == "__main__":
     with open('py4godot/gdextension-api/extension_api.json', 'r') as myfile:

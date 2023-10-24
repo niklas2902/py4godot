@@ -252,8 +252,8 @@ def generate_method(class_, mMethod):
     res = ""
     if has_native_struct(mMethod):
         return res
-    if get_ret_value(mMethod) == "Transform3D":
-        res += f"{INDENT}{generate_method_modifiers(mMethod)} VariantTypeWrapper* buffer_{class_['name']}_{mMethod['name']};"
+    if get_ret_value(mMethod) in builtin_classes-{"float", "int", "bool", "Nil"}:
+        res += f"{INDENT}{generate_method_modifiers(mMethod)} {get_ret_value(mMethod)}* buffer_{class_['name']}_{mMethod['name']};"
     args = generate_args(mMethod, builtin_classes)
     def_function = f"{INDENT}{generate_method_modifiers(mMethod)} {unenumize_type(untypearray(get_ret_value(mMethod)))} {pythonize_name(mMethod['name'])}({args});"
     res = generate_newline(res)
@@ -300,12 +300,16 @@ def collect_members(obj):
         core_classes[class_["name"]] = core_class
     print(core_classes)
 
+
+def generate_callback():
+    return f"{INDENT}std::function<void(void)> _internal_update_callback;"
+
+
 def generate_common_methods(class_):
     result = ""
     if not is_singleton(class_["name"]):
         result += generate_constructor(class_["name"])
         result = generate_newline(result)
-    result = generate_newline(result)
     result += generate_constructors(class_)
     result = generate_newline(result)
     result += generate_new_static(class_)

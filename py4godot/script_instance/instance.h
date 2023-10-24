@@ -9,6 +9,9 @@
 #include <string>
 #include <windows.h>
 #include <cassert>
+#include <mutex>
+
+std::mutex mutex_script;
 GDExtensionScriptInstanceInfo native_script_instance_placeholder;
 GDExtensionScriptInstanceInfo native_script_instance;
 GDExtensionInterface *native_script;
@@ -38,7 +41,11 @@ GDExtensionBool c_instance_get(GDExtensionScriptInstanceDataPtr p_instance, GDEx
 
 
 void c_instance_call(GDExtensionScriptInstanceDataPtr p_self, GDExtensionConstStringNamePtr p_method, const GDExtensionConstVariantPtr *p_args, GDExtensionInt p_argument_count, GDExtensionVariantPtr r_return, GDExtensionCallError *r_error){
+    mutex_script.lock();
+    auto gil_state = PyGILState_Ensure();
     instance_call(p_self, p_method, p_args, p_argument_count, r_return, r_error);
+    PyGILState_Release(gil_state);
+    mutex_script.unlock();
 }
 
 

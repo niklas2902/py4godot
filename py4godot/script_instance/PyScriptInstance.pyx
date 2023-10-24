@@ -87,7 +87,7 @@ cdef api GDExtensionBool instance_has_method(GDExtensionScriptInstanceDataPtr p_
 
     return hasattr(<object>(instance.owner), py_method_name_str)
 
-cdef api bint instance_call(GDExtensionScriptInstanceDataPtr p_self, GDExtensionConstStringNamePtr p_method, const GDExtensionConstVariantPtr *p_args, GDExtensionInt p_argument_count, GDExtensionVariantPtr r_return, GDExtensionCallError *r_error) with gil:
+cdef api bint instance_call(GDExtensionScriptInstanceDataPtr p_self, GDExtensionConstStringNamePtr p_method, const GDExtensionConstVariantPtr *p_args, GDExtensionInt p_argument_count, GDExtensionVariantPtr r_return, GDExtensionCallError *r_error):
     cdef InstanceData* instance = <InstanceData*>p_self
     #TODO still a problem with custom string attributes. Why is this still crashing?
     cdef StringName method_name = StringName.__new__(StringName)

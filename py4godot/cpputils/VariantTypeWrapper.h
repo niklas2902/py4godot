@@ -1,5 +1,8 @@
 #pragma once
 #include "py4godot/gdextension-api/gdextension_interface.h"
+#include "py4godot/cpputils/Callback.h"
+#include <memory>
+#include <vector>
 namespace godot{
     class VariantTypeWrapper {
 
@@ -7,9 +10,15 @@ namespace godot{
         GDExtensionVariantType variant_type;
         GDExtensionTypePtr godot_owner;
         void* native_ptr;
-
+        void* _callback = nullptr;
+        bool initialized = false;
+        long long __id;
         void set_godot_owner(GDExtensionTypePtr owner) {
             godot_owner = owner;
+        }
+
+        void set_callback(BaseCallback* callback){
+            //_internal_update_callback = callback;
         }
 
         GDExtensionTypePtr& get_godot_owner() {
