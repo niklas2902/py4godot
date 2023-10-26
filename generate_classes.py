@@ -68,7 +68,8 @@ operator_to_variant_operator = {"+":"GDExtensionVariantOperator.GDEXTENSION_VARI
 def generate_import():
     result = ("from py4godot.core.variant4.Variant4 cimport *\n"
               "from libcpp cimport bool\n"
-              "from py4godot.enums.enums4 cimport *\n")
+              "from py4godot.enums.enums4 cimport *\n"
+              "from py4godot.utils.utils cimport *\n")
     return result
 
 def generate_constructor_args(constructor):
@@ -214,7 +215,16 @@ def is_primitive(type_):
 
 def generate_return_statement(method_):
     # TODO generate returns
-    result = f"{INDENT*2}return _ret"
+    if "return_value" in method_.keys() or "return_type" in method_.keys():
+        ret_val = None
+        if("return_value" in method_.keys()):
+            ret_val = ReturnType("_ret", method_['return_value']['type'])
+        else:
+            ret_val = ReturnType("_ret", method_['return_type'])
+        if ret_val.type == "String":
+            result = f"{INDENT*2}return gd_string_to_py_string(_ret)"
+        else :
+            result = f"{INDENT*2}return _ret"
     result = generate_newline(result)
     return result
 
@@ -473,7 +483,10 @@ def generate_method_args(method):
         if untypearray(arg["type"]) in classes - IGNORED_CLASSES - builtin_classes:
             res += f"&{pythonize_name(arg['name'])}.{untypearray(arg['type'])}_internal_class, "
         elif untypearray(arg["type"]) in builtin_classes - IGNORED_CLASSES:
-            res += f"{pythonize_name(arg['name'])}.{untypearray(arg['type'])}_internal_class, "
+            if arg["type"] == "String":
+                res +=  f"py_c_string_to_string({pythonize_name(arg['name'])}.encode('utf-8')).{untypearray(arg['type'])}_internal_class, "
+            else:
+                res += f"{pythonize_name(arg['name'])}.{untypearray(arg['type'])}_internal_class, "
         elif arg["type"] == "Variant":
             res += f"{pythonize_name(arg['name'])}.variant, " #TODO: implement
         else:
@@ -634,7 +647,7 @@ def generate_property(property, classname):
     if "setter" in property and property["setter"] != "":
         result += f"{INDENT}@{pythonize_name(property['name'])}.setter"
         result = generate_newline(result)
-        result += f"{INDENT}def {pythonize_name(property['name'])}(self, {import_type(ungodottype(untypearray(simplify_type(property['type']))), classname)} value):"
+        result += f"{INDENT}def {pythonize_name(property['name'])}(self, {import_type(ungodottype(unstring(untypearray(simplify_type(property['type'])))), classname)} value):"
         result = generate_newline(result)
         result += f"{INDENT * 2}self.{pythonize_name(property['setter'])}(value)"
         result = generate_newline(result)
@@ -708,6 +721,8 @@ def generate_default_arg(class_, arg, arg_type):
     set_to_iterate = builtin_classes.union(classes) - {"int", "float", "bool", "Nil"}
     if "default_value" in arg:
         if arg_type in set_to_iterate:
+            if arg_type == "String":
+                return "= ''"
             return "= None"
         else:
             return f"={pythonize_boolean_types(unref_type(unnull_type(arg['default_value'])))}"
@@ -723,7 +738,14 @@ def import_type(type_, classname):
         return type_
     elif type_ == "Object":
         return type_
+    elif type_ == "str":
+        return type_
     return "py4godot_"+type_.lower()+"."+type_
+
+
+def unstring(type_):
+    return "str" if type_ == "String" else type_
+
 
 def generate_args(class_, method_with_args):
     result = "self, "
@@ -734,12 +756,12 @@ def generate_args(class_, method_with_args):
 
     for arg in method_with_args["arguments"]:
         if not arg["type"].startswith("enum::"):
-            type_ = ungodottype(untypearray(unbitfield_type(arg['type'])))
+            type_ = unstring(ungodottype(untypearray(unbitfield_type(arg['type']))))
             result += f"{import_type(type_, class_['name'])} {pythonize_name(arg['name'])} {generate_default_arg(class_, arg, type_)}, "
         else:
             #enums are marked with enum:: . To be able to use this, we have to strip this
             arg_type = arg["type"].replace("enum::", "")
-            type_ = ungodottype(untypearray(unenumize_type(arg_type)))
+            type_ = unstring(ungodottype(untypearray(unenumize_type(arg_type))))
             result += f"{import_type(type_, class_['name'])} {pythonize_name(arg['name'])} {generate_default_arg(class_, arg, type_)}, "
     result = result[:-2]
     return result

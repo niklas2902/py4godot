@@ -3,7 +3,7 @@ from py4godot.godot_bindings.binding4_godot4 cimport *
 cdef extern from "py4godot/cppcore/Variant.h" namespace "godot":
     cdef cppclass Variant:
         GDExtensionVariantPtr native_ptr
-        PyObject* get_converted_value()
+        PyObject* get_converted_value(bint should_return_pystring)
         void init_from_py_object(PyObject* , const char* type_name)
 
 cdef class PyVariant:

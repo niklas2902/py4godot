@@ -94,6 +94,16 @@ PyObject* Variant::create_string(){
     return val;
 }
 
+PyObject* Variant::create_py_string(){
+    GDExtensionVariantType type = get_interface()->variant_get_type(native_ptr);
+    auto constructor = get_interface()->get_variant_to_type_constructor(type);
+    String string = String();
+    constructor(&string.godot_owner, native_ptr);
+
+    auto val = type_helper_create_py_string(string);
+    return val;
+}
+
 PyObject* Variant::create_rect2i(){
     GDExtensionVariantType type = get_interface()->variant_get_type(native_ptr);
     auto constructor = get_interface()->get_variant_to_type_constructor(type);
@@ -370,7 +380,7 @@ PyObject* Variant::create_stringname(){
 
 #pragma endregion
 
-PyObject* Variant::get_converted_value(){
+PyObject* Variant::get_converted_value(bool should_return_pystring){
     switch(get_interface()->variant_get_type(native_ptr)){
     case GDExtensionVariantType::GDEXTENSION_VARIANT_TYPE_RECT2I:
         return create_rect2i();
@@ -381,7 +391,9 @@ PyObject* Variant::get_converted_value(){
     case GDExtensionVariantType::GDEXTENSION_VARIANT_TYPE_INT:
         return create_int();
     case GDExtensionVariantType::GDEXTENSION_VARIANT_TYPE_STRING:
-        return create_string();
+        if (!should_return_pystring)
+            return create_string();
+        return create_py_string();
     case GDExtensionVariantType::GDEXTENSION_VARIANT_TYPE_PACKED_VECTOR3_ARRAY:
         return create_packedvector3array();
     case GDExtensionVariantType::GDEXTENSION_VARIANT_TYPE_VECTOR3:
@@ -564,6 +576,9 @@ void Variant::init_from_py_object(PyObject* object, const char* type_name){
         case str2int("StringName"):
             construct_StringName(object);
             break;
+        case str2int("str"):
+            construct_py_string(object);
+            break;
         default:
             construct_Object(object);
 
@@ -591,6 +606,12 @@ void Variant::construct_int(PyObject* object){
         auto constructor = get_interface()->get_variant_from_type_constructor(GDExtensionVariantType::GDEXTENSION_VARIANT_TYPE_INT);
         constructor(native_ptr, &converted_val);
 }
+void Variant::construct_py_string(PyObject* object){
+        String converted_val = get_string_from_py_string(object);
+        auto constructor = get_interface()->get_variant_from_type_constructor(GDExtensionVariantType::GDEXTENSION_VARIANT_TYPE_STRING);
+        constructor(native_ptr, &converted_val.godot_owner);
+}
+
 void Variant::construct_String(PyObject* object){
         String converted_val = get_string_from_pyobject(object);
         auto constructor = get_interface()->get_variant_from_type_constructor(GDExtensionVariantType::GDEXTENSION_VARIANT_TYPE_STRING);

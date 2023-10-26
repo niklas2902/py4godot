@@ -23,7 +23,7 @@ cdef api GDExtensionBool instance_set(GDExtensionScriptInstanceDataPtr p_instanc
     cdef Variant var
     try:
         var.native_ptr = <void*>p_value
-        val = var.get_converted_value()
+        val = var.get_converted_value(True)
         setattr(<object>(instance.owner),py_method_name_str, <object>val)
         Py_DECREF(<object>val)#TODO: is this necessary?
 
@@ -107,7 +107,7 @@ cdef api bint instance_call(GDExtensionScriptInstanceDataPtr p_self, GDExtension
     cdef object method
     for index in range(0, p_argument_count):
         var.native_ptr = <void*>p_args[index]
-        args.append(<object>var.get_converted_value())
+        args.append(<object>var.get_converted_value(True))
     try:
         if not hasattr(instance_object,py_method_name_str):
             return 1

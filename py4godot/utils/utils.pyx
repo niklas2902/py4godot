@@ -4,6 +4,7 @@ cdef core.StringName py_c_string_to_string_name(char* string):
     gd_string_name.StringName_internal_class = c_string_to_string_name(string)
     return gd_string_name
 
+
 cdef core.String py_c_string_to_string(char* string):
 
     cdef core.String gd_string = core.String.__new__(core.String)
@@ -11,7 +12,7 @@ cdef core.String py_c_string_to_string(char* string):
     return gd_string
 
 cdef unicode gd_string_to_py_string(core.String string):
-    cdef String internal_string = string.String_internal_class
+    cdef bridge.String internal_string = string.String_internal_class
     cdef char* c_str
     try:
         gd_string_to_c_string(get_interface_utils(), internal_string, string.length(), &c_str)

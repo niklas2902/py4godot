@@ -2,7 +2,13 @@ from py4godot.classes.generated4_core cimport *
 from py4godot.classes.Object.Object cimport *
 cimport py4godot.classes.cpp_bridge as bridge
 from cpython cimport Py_INCREF, Py_DECREF, PyObject
+from py4godot.utils.utils cimport *
+from py4godot.utils.print_tools import *
 from libcpp cimport bool
+
+cdef api bridge.String type_helper_pystring_to_gdstring(str string):
+    cdef core.String gd_string = py_c_string_to_string(string.encode("utf-8"))
+    return gd_string.String_internal_class
 
 cdef api object type_helper_create_vector3(bridge.Vector3 bridge_vector):
     cdef Vector3 val = Vector3()
@@ -13,6 +19,14 @@ cdef api object type_helper_create_vector3(bridge.Vector3 bridge_vector):
 cdef api object type_helper_create_string(bridge.String bridge_string):
     cdef String val = String()
     val.String_internal_class = bridge_string
+    Py_INCREF(val)
+    return val
+
+
+cdef api object type_helper_create_py_string(bridge.String bridge_string):
+    cdef String gen_string = String()
+    gen_string.String_internal_class = bridge_string
+    cdef unicode val = gd_string_to_py_string(gen_string)
     Py_INCREF(val)
     return val
 
@@ -179,6 +193,8 @@ cdef api bridge.Callable get_callable_from_pyobject(PyObject* py_object):
     return (<Callable>py_object).Callable_internal_class;
 cdef api bridge.NodePath get_nodepath_from_pyobject(PyObject* py_object):
     return (<NodePath>py_object).NodePath_internal_class;
+cdef api bridge.String get_string_from_py_string(str py_object):
+    return py_c_string_to_string(py_object.encode("utf-8")).String_internal_class;
 cdef api bridge.String get_string_from_pyobject(PyObject* py_object):
     return (<String>py_object).String_internal_class;
 cdef api bridge.PackedVector3Array get_packedvector3array_from_pyobject(PyObject* py_object):

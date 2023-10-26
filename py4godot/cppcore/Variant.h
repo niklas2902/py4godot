@@ -25,6 +25,7 @@ namespace godot{
         #pragma region generated
         PyObject* create_vector3();
         PyObject* create_string();
+        PyObject* create_py_string();
         PyObject* create_rect2i();
         PyObject* create_callable();
         PyObject* create_nodepath();
@@ -60,6 +61,8 @@ namespace godot{
         PyObject* create_packedstringarray();
         PyObject* create_stringname();
 
+
+        void Variant::construct_py_string(PyObject* object);
         void construct_Rect2i(PyObject* object);
         void construct_Callable(PyObject* object);
         void construct_NodePath(PyObject* object);
@@ -101,7 +104,7 @@ namespace godot{
         #pragma endregion
 
 
-        PyObject* get_converted_value();
+        PyObject* get_converted_value(bool should_return_pystring = false);
 
         void init_from_py_object(PyObject* object, const char* type);
 
