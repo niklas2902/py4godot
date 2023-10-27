@@ -79,11 +79,11 @@ def generate_constructor_args(constructor):
 
     for arg in constructor["arguments"]:
         if not arg["type"].startswith("enum::"):
-            result += f"{ungodottype(untypearray(unbitfield_type(arg['type'])))} {pythonize_name(arg['name'])}, "
+            result += f"{unstring(ungodottype(untypearray(unbitfield_type(arg['type']))))} {pythonize_name(arg['name'])}, "
         else:
             #enums are marked with enum:: . To be able to use this, we have to strip this
             arg_type = arg["type"].replace("enum::", "")
-            result += f"{ungodottype(untypearray(unenumize_type(arg_type)))} {pythonize_name(arg['name'])}, "
+            result += f"{unstring(ungodottype(untypearray(unenumize_type(arg_type))))} {pythonize_name(arg['name'])}, "
     result = result[:-2]
     return result
 
@@ -118,7 +118,10 @@ def generate_constructor_call_args(constructor):
 
     for arg in constructor["arguments"]:
         if arg["type"] in classes - IGNORED_CLASSES:
-            result += f"{pythonize_name(arg['name'])}.{arg['type']}_internal_class, "
+            if arg["type"] == "String":
+                result += f"py_c_string_to_string({pythonize_name(arg['name'])}.encode('utf-8')).{untypearray(arg['type'])}_internal_class, "
+            else:
+                result += f"{pythonize_name(arg['name'])}.{arg['type']}_internal_class, "
         elif arg["type"] == "Variant":
             result += f"{pythonize_name(arg['name'])}.variant, "
         else:
