@@ -10,6 +10,7 @@
 #include "py4godot/pluginscript_api/utils/annotations_api.h"
 #include "py4godot/instance_data/CPPInstanceData.h"
 #include "py4godot/utils/instance_utils_api.h"
+#include "py4godot/cpputils/ScriptHolder.h"
 #include <cassert>
 #include "Python.h"
 #include <mutex>
@@ -148,6 +149,9 @@ void PyScriptExtension::_instance_create( Object& for_object, GDExtensionTypePtr
     //instance.godot_owner = for_object.godot_owner;
     gd_instance->script = this;
     Py_INCREF(instance);
+
+    for_object.godot_owner = ((void**)for_object.godot_owner)[0];
+    ScriptDatabase::instance()->register_script(for_object.get_instance_id(), instance);
     instance_ptr = get_interface()->script_instance_create(&(gd_instance->info), gd_instance);
     *((GDExtensionTypePtr*)res) = instance_ptr;
     PyGILState_Release(gil_state);
@@ -185,6 +189,10 @@ void PyScriptExtension::_placeholder_instance_create( Object& for_object, GDExte
     Py_INCREF(instance);
     instance_ptr = get_interface()->script_instance_create(&(gd_instance->info), gd_instance);
     *((GDExtensionTypePtr*)res) = instance_ptr;
+
+    for_object.godot_owner = ((void**)for_object.godot_owner)[0];
+    auto instance_id = for_object.get_instance_id();
+    ScriptDatabase::instance()->register_script(for_object.get_instance_id(), instance);
     PyGILState_Release(gil_state);
     m.unlock();
 }

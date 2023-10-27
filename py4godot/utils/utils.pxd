@@ -8,6 +8,9 @@ cdef extern from "py4godot/cpputils/utils.h":
     #const char * gd_string_to_c_string(GDExtensionInterface* interface_ptr, bridge.String string, int length)
     void gd_string_to_c_string(GDExtensionInterface* interface_ptr, bridge.String string, int length, char** res_string)
 
+cdef extern from "py4godot/cpputils/ScriptHolder.h":
+    PyObject* get_py_script(int id)
+
 
 cdef core.StringName py_c_string_to_string_name(char* string)
 cdef core.String py_c_string_to_string(char* string)

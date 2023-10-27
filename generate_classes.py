@@ -561,10 +561,10 @@ def generate_new_static(class_):
     if "inherits" in class_.keys():
         cls = find_class(class_["inherits"])
         while cls:
-            if "inherits" not in cls.keys():
-                break
             res += f"{INDENT * 2}self.{cls['name']}_internal_class.set_gdowner_{cls['name']}(owner)"
             res = generate_newline(res)
+            if "inherits" not in cls.keys():
+                break
             cls = find_class(cls["inherits"])
 
     return res
