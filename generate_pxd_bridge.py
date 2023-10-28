@@ -490,10 +490,8 @@ def generate_operators_for_class(class_name):
                 op = operator_dict[class_name][operator]
                 if op.right_type_values:
                     for right_type in op.right_type_values:
-                        pass
-                        #TODO: implement
-                        #res += f"{INDENT*2}{op.return_type} operator {operator} ({right_type} other);"
-                        #res = generate_newline(res)
+                        res += f"{INDENT*2}{op.return_type} operator{operator}({right_type} other);"
+                        res = generate_newline(res)
     res = generate_newline(res)
     return res
 
@@ -683,6 +681,9 @@ if __name__ == "__main__":
         singletons = set([singleton["name"] for singleton in obj["singletons"]])
         collect_members(obj)
         classes_to_generate = []
+
+        for class_ in obj["builtin_classes"]:
+            generate_operators_set(class_)
 
         root_node = GraphNode(find_class("Object", obj["classes"]))
         for class_ in obj["classes"]:

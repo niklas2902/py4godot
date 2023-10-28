@@ -935,7 +935,7 @@ def init_return_type(return_type):
 
 def address_param(target):
     if target in builtin_classes - {"int", "float", "bool", "Nil"}:
-        return f"other.godot_owner"
+        return f"&other.godot_owner"
     if target == "int":
         return "&primitive_val_int"
     if target == "float":
@@ -974,7 +974,7 @@ def generate_operators_for_class(class_name):
                         res = generate_newline(res)
                         res += f"{INDENT * 2}operator_evaluator = {INDENT * 2}_interface->variant_get_ptr_operator_evaluator({operator_to_variant_operator[operator]}, {generate_variant_type(op.class_)}, {generate_variant_type(right_type)});"
                         res = generate_newline(res)
-                        res += f"{INDENT*2}operator_evaluator(godot_owner, {address_param(right_type)}, {address_ret_decision(op.return_type)});"
+                        res += f"{INDENT*2}operator_evaluator(&godot_owner, {address_param(right_type)}, {address_ret_decision(op.return_type)});"
                         res = generate_newline(res)
 
                         res += f"{INDENT*2}return _ret;"

@@ -542,10 +542,26 @@ def generate_common_methods(class_):
     if class_["name"] in builtin_classes:
         result += generate_constructors(class_)
         result = generate_newline(result)
+    if class_["name"] == "Object":
+        result += generate_get_py_script_method()
 
     result += generate_new_static(class_)
 
     return result
+
+
+def generate_get_py_script_method():
+    result = ""
+    result += f"{INDENT}def get_pyscript(self):"
+    result = generate_newline(result)
+    result += f"{INDENT * 2}cdef int id = self.get_instance_id()"
+    result = generate_newline(result)
+    result += f"{INDENT * 2}cdef object script = <object>get_py_script(id)"
+    result = generate_newline(result)
+    result += f"{INDENT * 2}return script"
+    result = generate_newline(result)
+    return result
+
 
 def find_class(name):
     for cls in obj["classes"]:
@@ -859,17 +875,25 @@ def init_return_type(return_type):
         return f"{return_type}()"
 
 
-def address_param(target):
+def address_param(name, target):
     if target in builtin_classes - {"int", "float", "bool", "Nil"}:
-        return f"(<{target}>other).godot_owner"
+        if name != "self":
+            return f"complex_val_{target}.{target}_internal_class"
+        else:
+            return f"self_val.{target}_internal_class"
+    elif target == "Object":
+        if name != "self":
+            return f"complex_val_{target}.{target}_internal_class"
+        else:
+            return f"self_val.{target}_internal_class"
     if target == "Variant":
-        return "other.variant"
+        return "complex_val_variant.variant"
     if target == "int":
-        return "&primitive_val_int"
+        return "primitive_val_int"
     if target == "float":
-        return "&primitive_val_float"
+        return "primitive_val_float"
     if target == "bool":
-        return "&primitive_val_bool"
+        return "primitive_val_bool"
     if target == "Nil":
         return "NULL"
     return "NULL"
@@ -889,7 +913,50 @@ def generate_operators_for_class(class_name):
                 op = operator_dict[class_name][operator]
                 res += f"{INDENT}def {operator_to_method[operator]}({get_parameters_operator(operator_dict[class_name][operator])}):"
                 res = generate_newline(res)
-                res += f"{INDENT * 2}pass"
+                res += f"{INDENT*2}cdef {op.return_type} _ret = {init_return_type(op.return_type)}"
+                res = generate_newline(res)
+
+                res = generate_newline(res)
+                res += f"{INDENT*2}cdef bint handled = False"
+                res = generate_newline(res)
+                res += f"{INDENT * 2}cdef {class_name} self_val = self"
+                res = generate_newline(res)
+
+                for target in op.right_type_values:
+
+                    if target in {"float", "int", "bool", "Nil"}:
+                        res += f"{INDENT * 2}cdef {target} primitive_val_{target} = <{target}>other"
+                        res = generate_newline(res)
+                    elif target in builtin_classes.union(classes):
+                        res += f"{INDENT*2}cdef {target} complex_val_{target}"
+                        res = generate_newline(res)
+                    elif target == "Variant":
+                        res += f"{INDENT*2}cdef PyVariant complex_val_variant"
+                        res = generate_newline(res)
+                    res += f"{INDENT * 2}if isinstance(other, {ungodottype(get_instance_type(target))}):"
+                    res = generate_newline(res)
+
+                    if target in builtin_classes.union(classes):
+                        res += f"{INDENT*3}complex_val_{target} = <{target}>other"
+                        res = generate_newline(res)
+                    elif target == "Variant":
+                        res += f"{INDENT*3}complex_val_variant = <PyVariant>other"
+                        res = generate_newline(res)
+
+                    res += f"{INDENT * 3}handled = True"
+                    res = generate_newline(res)
+                    if op.return_type in builtin_classes:
+                        res += f"{INDENT * 3}_ret.{op.return_type}_internal_class = {address_param('self', class_name)} {operator} {address_param('other',target)}"
+                    else:
+                        res += f"{INDENT * 3}_ret = {address_param('self', class_name)} {operator} {address_param('other', target)}"
+                    res = generate_newline(res)
+
+                res += f"{INDENT * 2}if not handled:"
+                res = generate_newline(res)
+
+                res += f"{INDENT * 3}raise Exception(f'type \"'+type(other)+'\" not supported')"
+                res = generate_newline(res)
+                res += f"{INDENT * 2}return _ret"
                 res = generate_newline(res)
     res = generate_newline(res)
     return res
