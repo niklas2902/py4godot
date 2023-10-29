@@ -6,9 +6,12 @@ namespace godot{
     class LIBRARY_API Variant {
     public:
         GDExtensionVariantPtr native_ptr;
+        GDExtensionVariantPtr _inner_ptr;
 
 
         static void init_variant();
+        void construct_inner();
+        void switch_native_and_inner();
 
         Variant();
         Variant(String& val);

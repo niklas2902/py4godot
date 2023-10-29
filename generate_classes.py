@@ -79,11 +79,11 @@ def generate_constructor_args(constructor):
 
     for arg in constructor["arguments"]:
         if not arg["type"].startswith("enum::"):
-            result += f"{unstring(ungodottype(untypearray(unbitfield_type(arg['type']))))} {pythonize_name(arg['name'])}, "
+            result += f"{unstring(unvariant(untypearray(unbitfield_type(arg['type']))))} {pythonize_name(arg['name'])}, "
         else:
             #enums are marked with enum:: . To be able to use this, we have to strip this
             arg_type = arg["type"].replace("enum::", "")
-            result += f"{unstring(ungodottype(untypearray(unenumize_type(arg_type))))} {pythonize_name(arg['name'])}, "
+            result += f"{unstring(unvariant(untypearray(unenumize_type(arg_type))))} {pythonize_name(arg['name'])}, "
     result = result[:-2]
     return result
 
@@ -123,7 +123,7 @@ def generate_constructor_call_args(constructor):
             else:
                 result += f"{pythonize_name(arg['name'])}.{arg['type']}_internal_class, "
         elif arg["type"] == "Variant":
-            result += f"{pythonize_name(arg['name'])}.variant, "
+            result += f"{convert_to_variant(pythonize_name(arg['name']))}.variant, "
         else:
             result += f"{pythonize_name(arg['name'])}, "
     result = result[:-2]
@@ -174,7 +174,7 @@ def generate_return_value(classname, method_):
             else:
                 result += f"{INDENT * 2}cdef py4godot_{ret_val.type.lower()}.{ret_val.type} {ret_val.name} = py4godot_{ret_val.type.lower()}.{ret_val.type}.__new__(py4godot_{ret_val.type.lower()}.{ret_val.type})"
         elif ret_val.type == "Variant":
-            result += f"{INDENT * 2}cdef Py{ret_val.type} {ret_val.name} = Py{ret_val.type}()"
+            result += f"{INDENT * 2}cdef PyVariant {ret_val.name} = PyVariant()"
         elif "typedarray" in ret_val.type:
             result += f"{INDENT * 2}cdef Array _ret = Array.new0()"
         elif "enum::" in ret_val.type:
@@ -226,6 +226,8 @@ def generate_return_statement(method_):
             ret_val = ReturnType("_ret", method_['return_type'])
         if ret_val.type == "String":
             result = f"{INDENT*2}return gd_string_to_py_string(_ret)"
+        elif ret_val.type == "Variant":
+            result = f"{INDENT*2}return _ret.get_converted_value(True)"
         else :
             result = f"{INDENT*2}return _ret"
     result = generate_newline(result)
@@ -367,7 +369,7 @@ def generate_default_args(mMethod):
         if arg["type"] in {"float", "int", "Nil", "bool"}:
             continue
         if not arg["type"].startswith("enum::") and not arg["type"].startswith("typedarray::") and not arg["type"].startswith("bitfield::"):
-            type_ = ungodottype(untypearray(unbitfield_type(arg['type'])))
+            type_ = unvariant(untypearray(unbitfield_type(arg['type'])))
             if arg["type"] in builtin_classes:
                 res += f"{INDENT*2}{pythonize_name(arg['name'])} = {arg['type']}.new0()"
             else:
@@ -461,6 +463,7 @@ def generate_method_body_standard(class_, method):
     if "return_value" in method.keys() or "return_type" in method.keys():
         result += generate_return_value(class_["name"], method)
         if not is_static(method):
+
             result += f"{INDENT * 2}{generate_ret_call(method)} = self.{class_['name']}_internal_class.{pythonize_name(method['name'])}({generate_method_args(method)})"
             result = generate_newline(result)
             result += generate_set_gd_owner_for_ret(method)
@@ -491,7 +494,7 @@ def generate_method_args(method):
             else:
                 res += f"{pythonize_name(arg['name'])}.{untypearray(arg['type'])}_internal_class, "
         elif arg["type"] == "Variant":
-            res += f"{pythonize_name(arg['name'])}.variant, " #TODO: implement
+            res += f"{convert_to_variant(pythonize_name(arg['name']))}.variant, "
         else:
             res += f"{pythonize_name(arg['name'])}, "
     if len (res) > 2:
@@ -666,7 +669,7 @@ def generate_property(property, classname):
     if "setter" in property and property["setter"] != "":
         result += f"{INDENT}@{pythonize_name(property['name'])}.setter"
         result = generate_newline(result)
-        result += f"{INDENT}def {pythonize_name(property['name'])}(self, {import_type(ungodottype(unstring(untypearray(simplify_type(property['type'])))), classname)} value):"
+        result += f"{INDENT}def {pythonize_name(property['name'])}(self, {import_type(unvariant(unstring(untypearray(simplify_type(property['type'])))), classname)} value):"
         result = generate_newline(result)
         result += f"{INDENT * 2}self.{pythonize_name(property['setter'])}(value)"
         result = generate_newline(result)
@@ -685,19 +688,16 @@ def unbitfield_type(arg_type):
     return arg_type
 
 
-def ungodottype(type_):
-    #TODO:enable this again
-    """if(type_ == "String"):
-        return "str"
-    if(type_ == "StringName"):
-        return "str"
+def unvariant(type_):
     if (type_ == "Variant"):
         return "object"
-    """
-    if (type_ == "Variant"):
-        return "PyVariant"
-
     return type_
+
+def convert_from_variant(arg_name):
+    return f"{arg_name}.get_converted_value()"
+
+def convert_to_variant(arg_name):
+    return f"create_variant_from_py_object({arg_name})"
 
 
 def unnull_type(value_to_return):
@@ -755,6 +755,8 @@ def import_type(type_, classname):
         return type_
     elif type_ == "PyVariant":
         return type_
+    elif type_ == "object": #TODO merge with PyVariant
+        return type_
     elif type_ == "Object":
         return type_
     elif type_ == "str":
@@ -775,12 +777,12 @@ def generate_args(class_, method_with_args):
 
     for arg in method_with_args["arguments"]:
         if not arg["type"].startswith("enum::"):
-            type_ = unstring(ungodottype(untypearray(unbitfield_type(arg['type']))))
+            type_ = unstring(unvariant(untypearray(unbitfield_type(arg['type']))))
             result += f"{import_type(type_, class_['name'])} {pythonize_name(arg['name'])} {generate_default_arg(class_, arg, type_)}, "
         else:
             #enums are marked with enum:: . To be able to use this, we have to strip this
             arg_type = arg["type"].replace("enum::", "")
-            type_ = unstring(ungodottype(untypearray(unenumize_type(arg_type))))
+            type_ = unstring(unvariant(untypearray(unenumize_type(arg_type))))
             result += f"{import_type(type_, class_['name'])} {pythonize_name(arg['name'])} {generate_default_arg(class_, arg, type_)}, "
     result = result[:-2]
     return result
@@ -871,6 +873,8 @@ def init_return_type(return_type):
         return "0"
     elif return_type == "bool":
         return "False"
+    elif return_type in {"Variant", "object", "PyVariant"}:
+        return "None"
     else:
         return f"{return_type}()"
 
@@ -913,7 +917,7 @@ def generate_operators_for_class(class_name):
                 op = operator_dict[class_name][operator]
                 res += f"{INDENT}def {operator_to_method[operator]}({get_parameters_operator(operator_dict[class_name][operator])}):"
                 res = generate_newline(res)
-                res += f"{INDENT*2}cdef {op.return_type} _ret = {init_return_type(op.return_type)}"
+                res += f"{INDENT*2}cdef {unvariant(op.return_type)} _ret = {init_return_type(op.return_type)}"
                 res = generate_newline(res)
 
                 res = generate_newline(res)
@@ -933,20 +937,22 @@ def generate_operators_for_class(class_name):
                     elif target == "Variant":
                         res += f"{INDENT*2}cdef PyVariant complex_val_variant"
                         res = generate_newline(res)
-                    res += f"{INDENT * 2}if isinstance(other, {ungodottype(get_instance_type(target))}):"
+                    res += f"{INDENT * 2}if isinstance(other, {unvariant(get_instance_type(target))}):"
                     res = generate_newline(res)
 
                     if target in builtin_classes.union(classes):
                         res += f"{INDENT*3}complex_val_{target} = <{target}>other"
                         res = generate_newline(res)
                     elif target == "Variant":
-                        res += f"{INDENT*3}complex_val_variant = <PyVariant>other"
+                        res += f"{INDENT*3}complex_val_variant = create_variant_from_py_object(other)"
                         res = generate_newline(res)
 
                     res += f"{INDENT * 3}handled = True"
                     res = generate_newline(res)
                     if op.return_type in builtin_classes:
                         res += f"{INDENT * 3}_ret.{op.return_type}_internal_class = {address_param('self', class_name)} {operator} {address_param('other',target)}"
+                    elif op.return_type in {"Variant", "PyVariant", "object"}: #I don't know the correct type, use only one
+                        res += f"{INDENT * 3}_ret = {address_param('self', class_name)} {operator} {address_param('other', target)}.get_converted_value()"
                     else:
                         res += f"{INDENT * 3}_ret = {address_param('self', class_name)} {operator} {address_param('other', target)}"
                     res = generate_newline(res)

@@ -31,8 +31,21 @@ void Variant::init_variant(){
 }
 
 Variant::Variant(){
-    //auto constructor = get_interface()->get_variant_from_type_constructor(GDExtensionVariantType::GDEXTENSION_VARIANT_TYPE_NIL);
-    //constructor(&native_ptr, NULL);
+    /*int dummy = 0;
+    auto constructor = get_interface()->get_variant_from_type_constructor(GDExtensionVariantType::GDEXTENSION_VARIANT_TYPE_INT);
+    constructor(&native_ptr, &dummy);
+    */
+}
+
+void Variant::construct_inner(){
+    auto constructor = get_interface()->get_variant_from_type_constructor(GDExtensionVariantType::GDEXTENSION_VARIANT_TYPE_INT);
+    int val = 0;
+    constructor(&_inner_ptr, &val);
+    native_ptr = &_inner_ptr;
+}
+
+void Variant::switch_native_and_inner(){
+    native_ptr = ((void**)native_ptr)[0];
 }
 
 
