@@ -13,4 +13,4 @@ cdef PyVariant create_variant_from_py_object(object pyobject):
 
 cdef object get_object_from_variant(Variant var):
     #var.native_ptr = var.
-    return <object>(var.get_converted_value(False))
+    return <object>(var.get_converted_value(True))
