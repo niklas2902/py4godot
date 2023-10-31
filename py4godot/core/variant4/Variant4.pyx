@@ -1,6 +1,8 @@
 cdef class PyVariant:
     cdef object get_converted_value(self, bint should_return_pystring):
         return <object>self.variant.get_converted_value(should_return_pystring)
+    cdef object get_converted_value_native_ptr(self, bint should_return_pystring):
+        return <object>self.variant.get_converted_value_native_ptr(should_return_pystring)
     cdef void init_from_py_object(self, object pyobject):
         self.variant.init_from_py_object(<PyObject*>pyobject, str(type(pyobject).__name__).encode("utf-8"))
 

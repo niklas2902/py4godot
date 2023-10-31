@@ -10,10 +10,12 @@ namespace godot{
 
 
         static void init_variant();
+        static Variant construct();
         void construct_inner();
         void switch_native_and_inner();
 
         Variant();
+        Variant(int* val); // for inner construction
         Variant(String& val);
         Variant(StringName& val);
         Variant(Dictionary& val);
@@ -64,6 +66,44 @@ namespace godot{
         PyObject* create_packedstringarray();
         PyObject* create_stringname();
 
+        PyObject* create_vector3_native_ptr();
+        PyObject* create_string_native_ptr();
+        PyObject* create_py_string_native_ptr();
+        PyObject* create_rect2i_native_ptr();
+        PyObject* create_callable_native_ptr();
+        PyObject* create_nodepath_native_ptr();
+        PyObject* create_int_native_ptr();
+        PyObject* create_packedvector3array_native_ptr();
+        PyObject* create_dictionary_native_ptr();
+        PyObject* create_projection_native_ptr();
+        PyObject* create_rid_native_ptr();
+        PyObject* create_vector2i_native_ptr();
+        PyObject* create_transform2d_native_ptr();
+        PyObject* create_aabb_native_ptr();
+        PyObject* create_float_native_ptr();
+        PyObject* create_vector3i_native_ptr();
+        PyObject* create_packedint64array_native_ptr();
+        PyObject* create_packedint32array_native_ptr();
+        PyObject* create_packedfloat32array_native_ptr();
+        PyObject* create_packedbytearray_native_ptr();
+        PyObject* create_vector4_native_ptr();
+        PyObject* create_rect2_native_ptr();
+        PyObject* create_vector2_native_ptr();
+        PyObject* create_transform3d_native_ptr();
+        PyObject* create_packedcolorarray_native_ptr();
+        PyObject* create_signal_native_ptr();
+        PyObject* create_packedvector2array_native_ptr();
+        PyObject* create_plane_native_ptr();
+        PyObject* create_packedfloat64array_native_ptr();
+        PyObject* create_bool_native_ptr();
+        PyObject* create_basis_native_ptr();
+        PyObject* create_color_native_ptr();
+        PyObject* create_vector4i_native_ptr();
+        PyObject* create_array_native_ptr();
+        PyObject* create_quaternion_native_ptr();
+        PyObject* create_packedstringarray_native_ptr();
+        PyObject* create_stringname_native_ptr();
+
 
         void Variant::construct_py_string(PyObject* object);
         void construct_Rect2i(PyObject* object);
@@ -108,6 +148,7 @@ namespace godot{
 
 
         PyObject* get_converted_value(bool should_return_pystring = false);
+        PyObject* get_converted_value_native_ptr(bool should_return_pystring = false);
 
         void init_from_py_object(PyObject* object, const char* type);
 

@@ -37,6 +37,15 @@ Variant::Variant(){
     */
 }
 
+Variant Variant::construct(){
+    Variant var{};
+    int dummy = 0;
+    auto constructor = get_interface()->get_variant_from_type_constructor(GDExtensionVariantType::GDEXTENSION_VARIANT_TYPE_INT);
+    constructor(&var._inner_ptr, &dummy);
+    var.native_ptr = &var._inner_ptr;
+    return var;
+}
+
 void Variant::construct_inner(){
     auto constructor = get_interface()->get_variant_from_type_constructor(GDExtensionVariantType::GDEXTENSION_VARIANT_TYPE_INT);
     int val = 0;
@@ -48,6 +57,10 @@ void Variant::switch_native_and_inner(){
     native_ptr = ((void**)native_ptr)[0];
 }
 
+Variant::Variant(int* val){
+    auto constructor = get_interface()->get_variant_from_type_constructor(GDExtensionVariantType::GDEXTENSION_VARIANT_TYPE_INT);
+    constructor(&_inner_ptr, &val);
+}
 
 Variant::Variant(String& val){
     auto constructor = get_interface()->get_variant_from_type_constructor(GDExtensionVariantType::GDEXTENSION_VARIANT_TYPE_STRING);
@@ -391,6 +404,309 @@ PyObject* Variant::create_stringname(){
 }
 
 
+PyObject* Variant::create_vector3_native_ptr(){
+    GDExtensionVariantType type = get_interface()->variant_get_type(&native_ptr);
+    auto constructor = get_interface()->get_variant_to_type_constructor(type);
+    Vector3 vector = Vector3();
+    constructor(&vector.godot_owner, &native_ptr);
+
+    auto val = type_helper_create_vector3(vector);
+    return val;
+}
+
+PyObject* Variant::create_string_native_ptr(){
+    GDExtensionVariantType type = get_interface()->variant_get_type(&native_ptr);
+    auto constructor = get_interface()->get_variant_to_type_constructor(type);
+    String string = String();
+    constructor(&string.godot_owner, &native_ptr);
+
+    auto val = type_helper_create_string(string);
+    return val;
+}
+
+PyObject* Variant::create_py_string_native_ptr(){
+    GDExtensionVariantType type = get_interface()->variant_get_type(&native_ptr);
+    auto constructor = get_interface()->get_variant_to_type_constructor(type);
+    String string = String();
+    constructor(&string.godot_owner, &native_ptr);
+
+    auto val = type_helper_create_py_string(string);
+    return val;
+}
+
+PyObject* Variant::create_rect2i_native_ptr(){
+    GDExtensionVariantType type = get_interface()->variant_get_type(&native_ptr);
+    auto constructor = get_interface()->get_variant_to_type_constructor(type);
+    Rect2i string = Rect2i();
+    constructor(&string.godot_owner, &native_ptr);
+    auto val = type_helper_create_rect2i(string);
+    return val;
+}
+PyObject* Variant::create_callable_native_ptr(){
+    GDExtensionVariantType type = get_interface()->variant_get_type(&native_ptr);
+    auto constructor = get_interface()->get_variant_to_type_constructor(type);
+    Callable string = Callable();
+    constructor(&string.godot_owner, &native_ptr);
+    auto val = type_helper_create_callable(string);
+    return val;
+}
+PyObject* Variant::create_nodepath_native_ptr(){
+    GDExtensionVariantType type = get_interface()->variant_get_type(&native_ptr);
+    auto constructor = get_interface()->get_variant_to_type_constructor(type);
+    NodePath string = NodePath();
+    constructor(&string.godot_owner, &native_ptr);
+    auto val = type_helper_create_nodepath(string);
+    return val;
+}
+PyObject* Variant::create_int_native_ptr(){
+    GDExtensionVariantType type = get_interface()->variant_get_type(&native_ptr);
+    auto constructor = get_interface()->get_variant_to_type_constructor(type);
+    int val = 0;
+    constructor(&val, &native_ptr);
+    return PyLong_FromLong(val);
+}
+
+PyObject* Variant::create_packedvector3array_native_ptr(){
+    GDExtensionVariantType type = get_interface()->variant_get_type(&native_ptr);
+    auto constructor = get_interface()->get_variant_to_type_constructor(type);
+    PackedVector3Array string = PackedVector3Array();
+    constructor(&string.godot_owner, &native_ptr);
+    auto val = type_helper_create_packedvector3array(string);
+    return val;
+}
+
+PyObject* Variant::create_dictionary_native_ptr(){
+    GDExtensionVariantType type = get_interface()->variant_get_type(&native_ptr);
+    auto constructor = get_interface()->get_variant_to_type_constructor(type);
+    Dictionary string = Dictionary();
+    constructor(&string.godot_owner, &native_ptr);
+    auto val = type_helper_create_dictionary(string);
+    return val;
+}
+PyObject* Variant::create_projection_native_ptr(){
+    GDExtensionVariantType type = get_interface()->variant_get_type(&native_ptr);
+    auto constructor = get_interface()->get_variant_to_type_constructor(type);
+    Projection string = Projection();
+    constructor(&string.godot_owner, &native_ptr);
+    auto val = type_helper_create_projection(string);
+    return val;
+}
+PyObject* Variant::create_rid_native_ptr(){
+    GDExtensionVariantType type = get_interface()->variant_get_type(&native_ptr);
+    auto constructor = get_interface()->get_variant_to_type_constructor(type);
+    RID string = RID();
+    constructor(&string.godot_owner, &native_ptr);
+    auto val = type_helper_create_rid(string);
+    return val;
+}
+PyObject* Variant::create_vector2i_native_ptr(){
+    GDExtensionVariantType type = get_interface()->variant_get_type(&native_ptr);
+    auto constructor = get_interface()->get_variant_to_type_constructor(type);
+    Vector2i string = Vector2i();
+    constructor(&string.godot_owner, &native_ptr);
+    auto val = type_helper_create_vector2i(string);
+    return val;
+}
+PyObject* Variant::create_transform2d_native_ptr(){
+    GDExtensionVariantType type = get_interface()->variant_get_type(&native_ptr);
+    auto constructor = get_interface()->get_variant_to_type_constructor(type);
+    Transform2D string = Transform2D();
+    constructor(&string.godot_owner, &native_ptr);
+    auto val = type_helper_create_transform2d(string);
+    return val;
+}
+PyObject* Variant::create_aabb_native_ptr(){
+    GDExtensionVariantType type = get_interface()->variant_get_type(&native_ptr);
+    auto constructor = get_interface()->get_variant_to_type_constructor(type);
+    AABB string = AABB();
+    constructor(&string.godot_owner, &native_ptr);
+    auto val = type_helper_create_aabb(string);
+    return val;
+}
+PyObject* Variant::create_float_native_ptr(){
+    GDExtensionVariantType type = get_interface()->variant_get_type(&native_ptr);
+    auto constructor = get_interface()->get_variant_to_type_constructor(type);
+    double val = 0;
+    constructor(&val, &native_ptr);
+    return PyFloat_FromDouble(val);
+}
+PyObject* Variant::create_vector3i_native_ptr(){
+    GDExtensionVariantType type = get_interface()->variant_get_type(&native_ptr);
+    auto constructor = get_interface()->get_variant_to_type_constructor(type);
+    Vector3i string = Vector3i();
+    constructor(&string.godot_owner, &native_ptr);
+    auto val = type_helper_create_vector3i(string);
+    return val;
+}
+PyObject* Variant::create_packedint64array_native_ptr(){
+    GDExtensionVariantType type = get_interface()->variant_get_type(&native_ptr);
+    auto constructor = get_interface()->get_variant_to_type_constructor(type);
+    PackedInt64Array string = PackedInt64Array();
+    constructor(&string.godot_owner, &native_ptr);
+    auto val = type_helper_create_packedint64array(string);
+    return val;
+}
+PyObject* Variant::create_packedint32array_native_ptr(){
+    GDExtensionVariantType type = get_interface()->variant_get_type(&native_ptr);
+    auto constructor = get_interface()->get_variant_to_type_constructor(type);
+    PackedInt32Array string = PackedInt32Array();
+    constructor(&string.godot_owner, &native_ptr);
+    auto val = type_helper_create_packedint32array(string);
+    return val;
+}
+PyObject* Variant::create_packedfloat32array_native_ptr(){
+    GDExtensionVariantType type = get_interface()->variant_get_type(&native_ptr);
+    auto constructor = get_interface()->get_variant_to_type_constructor(type);
+    PackedFloat32Array string = PackedFloat32Array();
+    constructor(&string.godot_owner, &native_ptr);
+    auto val = type_helper_create_packedfloat32array(string);
+    return val;
+}
+PyObject* Variant::create_packedbytearray_native_ptr(){
+    GDExtensionVariantType type = get_interface()->variant_get_type(&native_ptr);
+    auto constructor = get_interface()->get_variant_to_type_constructor(type);
+    PackedByteArray string = PackedByteArray();
+    constructor(&string.godot_owner, &native_ptr);
+    auto val = type_helper_create_packedbytearray(string);
+    return val;
+}
+PyObject* Variant::create_vector4_native_ptr(){
+    GDExtensionVariantType type = get_interface()->variant_get_type(&native_ptr);
+    auto constructor = get_interface()->get_variant_to_type_constructor(type);
+    Vector4 string = Vector4();
+    constructor(&string.godot_owner, &native_ptr);
+    auto val = type_helper_create_vector4(string);
+    return val;
+}
+PyObject* Variant::create_rect2_native_ptr(){
+    GDExtensionVariantType type = get_interface()->variant_get_type(&native_ptr);
+    auto constructor = get_interface()->get_variant_to_type_constructor(type);
+    Rect2 string = Rect2();
+    constructor(&string.godot_owner, &native_ptr);
+    auto val = type_helper_create_rect2(string);
+    return val;
+}
+PyObject* Variant::create_vector2_native_ptr(){
+    GDExtensionVariantType type = get_interface()->variant_get_type(&native_ptr);
+    auto constructor = get_interface()->get_variant_to_type_constructor(type);
+    Vector2 string = Vector2();
+    constructor(&string.godot_owner, &native_ptr);
+    auto val = type_helper_create_vector2(string);
+    return val;
+}
+PyObject* Variant::create_transform3d_native_ptr(){
+    GDExtensionVariantType type = get_interface()->variant_get_type(&native_ptr);
+    auto constructor = get_interface()->get_variant_to_type_constructor(type);
+    Transform3D string = Transform3D();
+    constructor(&string.godot_owner, &native_ptr);
+    auto val = type_helper_create_transform3d(string);
+    return val;
+}
+PyObject* Variant::create_packedcolorarray_native_ptr(){
+    GDExtensionVariantType type = get_interface()->variant_get_type(&native_ptr);
+    auto constructor = get_interface()->get_variant_to_type_constructor(type);
+    PackedColorArray string = PackedColorArray();
+    constructor(&string.godot_owner, &native_ptr);
+    auto val = type_helper_create_packedcolorarray(string);
+    return val;
+}
+PyObject* Variant::create_signal_native_ptr(){
+    GDExtensionVariantType type = get_interface()->variant_get_type(&native_ptr);
+    auto constructor = get_interface()->get_variant_to_type_constructor(type);
+    Signal string = Signal();
+    constructor(&string.godot_owner, &native_ptr);
+    auto val = type_helper_create_signal(string);
+    return val;
+}
+PyObject* Variant::create_packedvector2array_native_ptr(){
+    GDExtensionVariantType type = get_interface()->variant_get_type(&native_ptr);
+    auto constructor = get_interface()->get_variant_to_type_constructor(type);
+    PackedVector2Array string = PackedVector2Array();
+    constructor(&string.godot_owner, &native_ptr);
+    auto val = type_helper_create_packedvector2array(string);
+    return val;
+}
+PyObject* Variant::create_plane_native_ptr(){
+    GDExtensionVariantType type = get_interface()->variant_get_type(&native_ptr);
+    auto constructor = get_interface()->get_variant_to_type_constructor(type);
+    Plane string = Plane();
+    constructor(&string.godot_owner, &native_ptr);
+    auto val = type_helper_create_plane(string);
+    return val;
+}
+PyObject* Variant::create_packedfloat64array_native_ptr(){
+    GDExtensionVariantType type = get_interface()->variant_get_type(&native_ptr);
+    auto constructor = get_interface()->get_variant_to_type_constructor(type);
+    PackedFloat64Array string = PackedFloat64Array();
+    constructor(&string.godot_owner, &native_ptr);
+    auto val = type_helper_create_packedfloat64array(string);
+    return val;
+}
+
+PyObject* Variant::create_bool_native_ptr(){
+    GDExtensionVariantType type = get_interface()->variant_get_type(&native_ptr);
+    auto constructor = get_interface()->get_variant_to_type_constructor(type);
+    bool val = false;
+    constructor(&val, &native_ptr);
+    return PyBool_FromLong(val);
+}
+PyObject* Variant::create_basis_native_ptr(){
+    GDExtensionVariantType type = get_interface()->variant_get_type(&native_ptr);
+    auto constructor = get_interface()->get_variant_to_type_constructor(type);
+    Basis string = Basis();
+    constructor(&string.godot_owner, &native_ptr);
+    auto val = type_helper_create_basis(string);
+    return val;
+}
+PyObject* Variant::create_color_native_ptr(){
+    GDExtensionVariantType type = get_interface()->variant_get_type(&native_ptr);
+    auto constructor = get_interface()->get_variant_to_type_constructor(type);
+    Color string = Color();
+    constructor(&string.godot_owner, &native_ptr);
+    auto val = type_helper_create_color(string);
+    return val;
+}
+PyObject* Variant::create_vector4i_native_ptr(){
+    GDExtensionVariantType type = get_interface()->variant_get_type(&native_ptr);
+    auto constructor = get_interface()->get_variant_to_type_constructor(type);
+    Vector4i string = Vector4i();
+    constructor(&string.godot_owner, &native_ptr);
+    auto val = type_helper_create_vector4i(string);
+    return val;
+}
+PyObject* Variant::create_array_native_ptr(){
+    GDExtensionVariantType type = get_interface()->variant_get_type(&native_ptr);
+    auto constructor = get_interface()->get_variant_to_type_constructor(type);
+    Array string = Array();
+    constructor(&string.godot_owner, &native_ptr);
+    auto val = type_helper_create_array(string);
+    return val;
+}
+PyObject* Variant::create_quaternion_native_ptr(){
+    GDExtensionVariantType type = get_interface()->variant_get_type(&native_ptr);
+    auto constructor = get_interface()->get_variant_to_type_constructor(type);
+    Quaternion string = Quaternion();
+    constructor(&string.godot_owner, &native_ptr);
+    auto val = type_helper_create_quaternion(string);
+    return val;
+}
+PyObject* Variant::create_packedstringarray_native_ptr(){
+    GDExtensionVariantType type = get_interface()->variant_get_type(&native_ptr);
+    auto constructor = get_interface()->get_variant_to_type_constructor(type);
+    PackedStringArray string = PackedStringArray();
+    constructor(&string.godot_owner, &native_ptr);
+    auto val = type_helper_create_packedstringarray(string);
+    return val;
+}
+PyObject* Variant::create_stringname_native_ptr(){
+    GDExtensionVariantType type = get_interface()->variant_get_type(&native_ptr);
+    auto constructor = get_interface()->get_variant_to_type_constructor(type);
+    StringName string = StringName();
+    constructor(&string.godot_owner, &native_ptr);
+    auto val = type_helper_create_stringname(string);
+    return val;
+}
+
 #pragma endregion
 
 PyObject* Variant::get_converted_value(bool should_return_pystring){
@@ -472,6 +788,87 @@ PyObject* Variant::get_converted_value(bool should_return_pystring){
     }
     return nullptr;
 }
+
+PyObject* Variant::get_converted_value_native_ptr(bool should_return_pystring){
+    switch(get_interface()->variant_get_type(&native_ptr)){
+    case GDExtensionVariantType::GDEXTENSION_VARIANT_TYPE_RECT2I:
+        return create_rect2i_native_ptr();
+    case GDExtensionVariantType::GDEXTENSION_VARIANT_TYPE_CALLABLE:
+        return create_callable_native_ptr();
+    case GDExtensionVariantType::GDEXTENSION_VARIANT_TYPE_NODE_PATH:
+        return create_nodepath_native_ptr();
+    case GDExtensionVariantType::GDEXTENSION_VARIANT_TYPE_INT:
+        return create_int_native_ptr();
+    case GDExtensionVariantType::GDEXTENSION_VARIANT_TYPE_STRING:
+        if (!should_return_pystring)
+            return create_string_native_ptr();
+        return create_py_string_native_ptr();
+    case GDExtensionVariantType::GDEXTENSION_VARIANT_TYPE_PACKED_VECTOR3_ARRAY:
+        return create_packedvector3array_native_ptr();
+    case GDExtensionVariantType::GDEXTENSION_VARIANT_TYPE_VECTOR3:
+        return create_vector3_native_ptr();
+    case GDExtensionVariantType::GDEXTENSION_VARIANT_TYPE_DICTIONARY:
+        return create_dictionary_native_ptr();
+    case GDExtensionVariantType::GDEXTENSION_VARIANT_TYPE_PROJECTION:
+        return create_projection_native_ptr();
+    case GDExtensionVariantType::GDEXTENSION_VARIANT_TYPE_RID:
+        return create_rid_native_ptr();
+    case GDExtensionVariantType::GDEXTENSION_VARIANT_TYPE_VECTOR2I:
+        return create_vector2i_native_ptr();
+    case GDExtensionVariantType::GDEXTENSION_VARIANT_TYPE_TRANSFORM2D:
+        return create_transform2d_native_ptr();
+    case GDExtensionVariantType::GDEXTENSION_VARIANT_TYPE_AABB:
+        return create_aabb_native_ptr();
+    case GDExtensionVariantType::GDEXTENSION_VARIANT_TYPE_FLOAT:
+        return create_float_native_ptr();
+    case GDExtensionVariantType::GDEXTENSION_VARIANT_TYPE_VECTOR3I:
+        return create_vector3i_native_ptr();
+    case GDExtensionVariantType::GDEXTENSION_VARIANT_TYPE_PACKED_INT64_ARRAY:
+        return create_packedint64array_native_ptr();
+    case GDExtensionVariantType::GDEXTENSION_VARIANT_TYPE_PACKED_INT32_ARRAY:
+        return create_packedint32array_native_ptr();
+    case GDExtensionVariantType::GDEXTENSION_VARIANT_TYPE_PACKED_FLOAT32_ARRAY:
+        return create_packedfloat32array_native_ptr();
+    case GDExtensionVariantType::GDEXTENSION_VARIANT_TYPE_PACKED_BYTE_ARRAY:
+        return create_packedbytearray_native_ptr();
+    case GDExtensionVariantType::GDEXTENSION_VARIANT_TYPE_VECTOR4:
+        return create_vector4_native_ptr();
+    case GDExtensionVariantType::GDEXTENSION_VARIANT_TYPE_RECT2:
+        return create_rect2_native_ptr();
+    case GDExtensionVariantType::GDEXTENSION_VARIANT_TYPE_VECTOR2:
+        return create_vector2_native_ptr();
+    case GDExtensionVariantType::GDEXTENSION_VARIANT_TYPE_TRANSFORM3D:
+        return create_transform3d_native_ptr();
+    case GDExtensionVariantType::GDEXTENSION_VARIANT_TYPE_PACKED_COLOR_ARRAY:
+        return create_packedcolorarray_native_ptr();
+    case GDExtensionVariantType::GDEXTENSION_VARIANT_TYPE_SIGNAL:
+        return create_signal_native_ptr();
+    case GDExtensionVariantType::GDEXTENSION_VARIANT_TYPE_PACKED_VECTOR2_ARRAY:
+        return create_packedvector2array_native_ptr();
+    case GDExtensionVariantType::GDEXTENSION_VARIANT_TYPE_PLANE:
+        return create_plane_native_ptr();
+    case GDExtensionVariantType::GDEXTENSION_VARIANT_TYPE_PACKED_FLOAT64_ARRAY:
+        return create_packedfloat64array_native_ptr();
+    case GDExtensionVariantType::GDEXTENSION_VARIANT_TYPE_BOOL:
+        return create_bool_native_ptr();
+    case GDExtensionVariantType::GDEXTENSION_VARIANT_TYPE_BASIS:
+        return create_basis_native_ptr();
+    case GDExtensionVariantType::GDEXTENSION_VARIANT_TYPE_COLOR:
+        return create_color_native_ptr();
+    case GDExtensionVariantType::GDEXTENSION_VARIANT_TYPE_VECTOR4I:
+        return create_vector4i_native_ptr();
+    case GDExtensionVariantType::GDEXTENSION_VARIANT_TYPE_ARRAY:
+        return create_array_native_ptr();
+    case GDExtensionVariantType::GDEXTENSION_VARIANT_TYPE_QUATERNION:
+        return create_quaternion_native_ptr();
+    case GDExtensionVariantType::GDEXTENSION_VARIANT_TYPE_PACKED_STRING_ARRAY:
+        return create_packedstringarray_native_ptr();
+    case GDExtensionVariantType::GDEXTENSION_VARIANT_TYPE_STRING_NAME:
+        return create_stringname_native_ptr();
+    }
+    return nullptr;
+}
+
 
 
 

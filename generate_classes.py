@@ -227,7 +227,7 @@ def generate_return_statement(method_):
         if ret_val.type == "String":
             result = f"{INDENT*2}return gd_string_to_py_string(_ret)"
         elif ret_val.type == "Variant":
-            result = f"{INDENT*2}return _ret.get_converted_value(True)"
+            result = f"{INDENT*2}return _ret.get_converted_value_native_ptr(True)"
         else :
             result = f"{INDENT*2}return _ret"
     result = generate_newline(result)

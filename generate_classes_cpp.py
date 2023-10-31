@@ -193,7 +193,7 @@ def generate_return_value(method_,classname):
             else:
                 result += f"{INDENT * 2}{ret_val.type} {ret_val.name} = {ret_val.type}();"
         elif ret_val.type == "Variant":
-            result += f"{INDENT * 2}{ret_val.type}* {ret_val.name} = new {ret_val.type}();" #TODO: get rid of this, should not be new or deleted at least
+            result += f"{INDENT * 2}{ret_val.type} {ret_val.name} = {ret_val.type}(1);" #TODO: is the constructor really necessary
         elif "typedarray" in ret_val.type:
             result += f"{INDENT * 2}Array _ret = Array::new0();"
         else:
@@ -240,16 +240,7 @@ def generate_return_statement(method_):
     else:
         ret_val = ReturnType("_ret", method_['return_type'])
     result = ""
-    if ret_val.type != "Variant":
-        result += f"{INDENT*2}return _ret;"
-    else:
-        result += f"{INDENT * 2}_ret->native_ptr = &_ret->_inner_ptr;"
-        result = generate_newline(result)
-        result += f"{INDENT * 2}auto var = *_ret;"
-        result = generate_newline(result)
-        result += f"{INDENT * 2}delete _ret;"
-        result = generate_newline(result)
-        result += f"{INDENT*2}return var;"
+    result += f"{INDENT*2}return _ret;"
     return result
 
 def generate_singleton_constructor(classname):
@@ -574,7 +565,7 @@ def address_ret_decision(return_type):
     if return_type in classes:
         return "&(_ret.godot_owner)"
     if return_type == "Variant":
-        return "&(_ret->_inner_ptr)"
+        return "&(_ret.native_ptr)"
     if "typedarray" in return_type:
         return "&(_ret.godot_owner)"
     return "&_ret"
