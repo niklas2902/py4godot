@@ -551,7 +551,7 @@ def generate_classes(classes, filename, is_core=False):
 
 def generate_dictionary_set_item():
     res = ""
-    #res += f"{INDENT}Variant operator [](Variant key);"
+    res += f"{INDENT*2}Variant operator [](Variant key);"
     res = generate_newline(res)
     return res
 
@@ -565,30 +565,29 @@ def generate_special_methods_dictionary():
 
 def generate_array_set_item(class_):
     res = ""
-    return res
     if class_["name"] == "PackedInt32Array":
-        res += f"{INDENT}int& operator [](int index);"
+        res += f"{INDENT*2}int& operator [](int index);"
     elif class_["name"] == "PackedInt64Array":
-        res += f"{INDENT}int64_t& operator [](int index);"
+        res += f"{INDENT*2}int64_t& operator [](int index);"
     elif class_["name"] == "PackedFloat32Array":
-        res += f"{INDENT}float& operator [](int index);"
+        res += f"{INDENT*2}float& operator [](int index);"
     elif class_["name"] == "PackedFloat64Array":
-        res += f"{INDENT}double& operator [](int index);"
+        res += f"{INDENT*2}double& operator [](int index);"
     elif class_["name"] == "PackedBoolArray":
-        res += f"{INDENT}bool& operator [](int index);"
-    elif class_["name"] == "PackedByteArray":
-        res += f"{INDENT}byte& operator [](int index);"
+        res += f"{INDENT*2}bool& operator [](int index);"
+    #elif class_["name"] == "PackedByteArray":
+    #    res += f"{INDENT*2}byte& operator [](int index);"
 
     elif class_["name"] == "PackedColorArray":
-        res += f"{INDENT}Color operator [](int index);"
+        res += f"{INDENT*2}Color operator [](int index);"
     elif class_["name"] == "PackedVector3Array":
-        res += f"{INDENT}Vector3 operator [](int index);"
+        res += f"{INDENT*2}Vector3 operator [](int index);"
     elif class_["name"] == "PackedVector2Array":
-        res += f"{INDENT}Vector2 operator [](int index);"
+        res += f"{INDENT*2}Vector2 operator [](int index);"
     elif class_["name"] == "PackedStringArray":
-        res += f"{INDENT}String operator [](int index);"
+        res += f"{INDENT*2}String operator [](int index);"
     elif class_["name"] == "Array":
-        res += f"{INDENT}Variant operator [](int index);"
+        res += f"{INDENT*2}Variant operator [](int index);"
     return res
 
 def generate_special_methods_array(class_):
@@ -663,7 +662,6 @@ def graph_to_list(node, liste):
     liste.append(node.class_)
     for child in node.children:
         graph_to_list(child, liste)
-
 
 
 if __name__ == "__main__":

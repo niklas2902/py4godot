@@ -5,12 +5,12 @@ cdef class PyVariant:
         return <object>self.variant.get_converted_value_native_ptr(should_return_pystring)
     cdef void init_from_py_object(self, object pyobject):
         self.variant.init_from_py_object(<PyObject*>pyobject, str(type(pyobject).__name__).encode("utf-8"))
+    cdef void init_from_py_object_native_ptr(self, object pyobject):
+        self.variant.init_from_py_object_native_ptr(<PyObject*>pyobject, str(type(pyobject).__name__).encode("utf-8"))
 
 cdef PyVariant create_variant_from_py_object(object pyobject):
     cdef PyVariant pyvariant = PyVariant()
-    pyvariant.variant.construct_inner()
-    pyvariant.init_from_py_object(pyobject)
-    pyvariant.variant.switch_native_and_inner()
+    pyvariant.init_from_py_object_native_ptr(pyobject)
     return pyvariant
 
 cdef object get_object_from_variant(Variant var):

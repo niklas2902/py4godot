@@ -1,10 +1,13 @@
 #pragma once
 #include "py4godot/cppclasses/generated4_core.h"
 #include "py4godot/godot_bindings/main.h"
+#include "Python.h"
 #include <stdlib.h>
 
 using namespace godot;
-
+static bool is_none(PyObject* pyobject){
+    return pyobject == Py_None;
+}
 static const char* gd_string_to_c_string(GDExtensionInterface* interface_ptr, GDExtensionConstStringPtr string_ptr, int length) {
     char* native_string = (char*)malloc(sizeof(char) * (length));
     interface_ptr->string_to_utf8_chars(string_ptr, native_string, length);

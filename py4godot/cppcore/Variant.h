@@ -144,6 +144,47 @@ namespace godot{
         void construct_PackedStringArray(PyObject* object);
         void construct_StringName(PyObject* object);
         void construct_Object(PyObject* object);
+
+
+        void Variant::construct_py_string_native_ptr(PyObject* object);
+        void construct_Rect2i_native_ptr(PyObject* object);
+        void construct_Callable_native_ptr(PyObject* object);
+        void construct_NodePath_native_ptr(PyObject* object);
+        void construct_int_native_ptr(PyObject* object);
+        void construct_String_native_ptr(PyObject* object);
+        void construct_PackedVector3Array_native_ptr(PyObject* object);
+        void construct_Vector3_native_ptr(PyObject* object);
+        void construct_Dictionary_native_ptr(PyObject* object);
+        void construct_Projection_native_ptr(PyObject* object);
+        void construct_RID_native_ptr(PyObject* object);
+        void construct_Vector2i_native_ptr(PyObject* object);
+        void construct_Transform2D_native_ptr(PyObject* object);
+        void construct_AABB_native_ptr(PyObject* object);
+        void construct_float_native_ptr(PyObject* object);
+        void construct_Vector3i_native_ptr(PyObject* object);
+        void construct_PackedInt64Array_native_ptr(PyObject* object);
+        void construct_Nil_native_ptr(PyObject* object);
+        void construct_PackedInt32Array_native_ptr(PyObject* object);
+        void construct_PackedFloat32Array_native_ptr(PyObject* object);
+        void construct_PackedByteArray_native_ptr(PyObject* object);
+        void construct_Vector4_native_ptr(PyObject* object);
+        void construct_Rect2_native_ptr(PyObject* object);
+        void construct_Vector2_native_ptr(PyObject* object);
+        void construct_Transform3D_native_ptr(PyObject* object);
+        void construct_PackedColorArray_native_ptr(PyObject* object);
+        void construct_Signal_native_ptr(PyObject* object);
+        void construct_PackedVector2Array_native_ptr(PyObject* object);
+        void construct_Plane_native_ptr(PyObject* object);
+        void construct_PackedFloat64Array_native_ptr(PyObject* object);
+        void construct_bool_native_ptr(PyObject* object);
+        void construct_Basis_native_ptr(PyObject* object);
+        void construct_Color_native_ptr(PyObject* object);
+        void construct_Vector4i_native_ptr(PyObject* object);
+        void construct_Array_native_ptr(PyObject* object);
+        void construct_Quaternion_native_ptr(PyObject* object);
+        void construct_PackedStringArray_native_ptr(PyObject* object);
+        void construct_StringName_native_ptr(PyObject* object);
+        void construct_Object_native_ptr(PyObject* object);
         #pragma endregion
 
 
@@ -151,7 +192,7 @@ namespace godot{
         PyObject* get_converted_value_native_ptr(bool should_return_pystring = false);
 
         void init_from_py_object(PyObject* object, const char* type);
-
+        void init_from_py_object_native_ptr(PyObject* object, const char* type_name);
         static Variant new_static(GDExtensionTypePtr ptr) {
             Variant var{};
             var.native_ptr = ptr;

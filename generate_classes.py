@@ -1016,32 +1016,33 @@ def generate_classes(classes, filename, is_core=False):
 
 def generate_dictionary_set_item():
     res = ""
-    return res
-    res += f"{INDENT}def __setitem__(self, value, key):"
+    res += f"{INDENT}def __setitem__(self, key, value):"
     res = generate_newline(res)
-    res += f"{INDENT * 2}cdef Variant var_key = Variant(key)"
+    res += f"{INDENT * 2}cdef Variant var = self.Dictionary_internal_class[create_variant_from_py_object(key).variant]"
     res = generate_newline(res)
-    res += f"{INDENT * 2}cdef Variant var_value = Variant.new_static(gdnative_interface.dictionary_operator_index(self.godot_owner, var_key.native_ptr))"
+    res += f"{INDENT * 2}cdef str typename = str(type(value).__name__)"
     res = generate_newline(res)
-    res += f"{INDENT * 2}var_value.init_type(value)"
+    res += f"{INDENT * 2}var.init_from_py_object(<PyObject*>value, typename.encode('utf-8'))"
     return res
 
 
 def generate_dictionary_get_item():
     res = ""
-    return res
     res += f"{INDENT}def __getitem__(self,  key):"
     res = generate_newline(res)
-    res += "pass"
-    res += f"{INDENT * 2}cdef Variant var_key = Variant(key)"
-    res = generate_newline(res)
-    res += f"{INDENT * 2}if not self.has(var_key):"
+    res += f"{INDENT * 2}if not self.has(key):"
     res = generate_newline(res)
     res += f"{INDENT * 3}raise KeyError(f\"Key '%s' not found\")".replace("%s", "{key}")
     res = generate_newline(res)
-    res += f"{INDENT * 2}cdef Variant var_value = Variant.new_static(gdnative_interface.dictionary_operator_index(self.godot_owner, var_key.native_ptr))"
+    res += f"{INDENT * 2}cdef PyObject * pyobject = self.Dictionary_internal_class[create_variant_from_py_object(key).variant].get_converted_value(True)"
     res = generate_newline(res)
-    res += f"{INDENT * 2}return var_value.get_converted_value()"
+    res += f"{INDENT * 2}cdef object o = None"
+    res = generate_newline(res)
+    res += f"{INDENT * 2}if not is_none(pyobject):"
+    res = generate_newline(res)
+    res += f"{INDENT * 3}o = <object>pyobject"
+    res = generate_newline(res)
+    res += f"{INDENT * 2}return o"
     return res
 
 

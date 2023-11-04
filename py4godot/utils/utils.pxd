@@ -7,7 +7,7 @@ cdef extern from "py4godot/cpputils/utils.h":
     GDExtensionInterface* get_interface_utils()
     #const char * gd_string_to_c_string(GDExtensionInterface* interface_ptr, bridge.String string, int length)
     void gd_string_to_c_string(GDExtensionInterface* interface_ptr, bridge.String string, int length, char** res_string)
-
+    bool is_none(PyObject* py_object)
 cdef extern from "py4godot/cpputils/ScriptHolder.h":
     PyObject* get_py_script(int id)
 

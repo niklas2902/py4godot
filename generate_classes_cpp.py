@@ -1023,7 +1023,7 @@ def generate_dictionary_set_item():
     res = ""
     res += f"{INDENT}Variant Dictionary::operator [](Variant key)"+"{"
     res = generate_newline(res)
-    res += f"{INDENT * 2}return Variant::new_static(_interface->dictionary_operator_index(godot_owner, key.native_ptr));"
+    res += f"{INDENT * 2}return Variant::new_static(_interface->dictionary_operator_index(&godot_owner, &key.native_ptr));"
     res = generate_newline(res)
     res += f"{INDENT}"+"}"
     res = generate_newline(res)
