@@ -377,9 +377,13 @@ def generate_default_args(mMethod):
         res = generate_newline(res)
     return res
 
+def should_skip_method(class_, method):
+    return class_["name"] == "Node" and method["name"] in {"get_tree", "get_viewport", "get_window"}
 
 def generate_method(class_, mMethod):
     res = ""
+    if should_skip_method(class_, mMethod):
+        return res
     args = generate_args(class_, mMethod)
     def_function = f"{INDENT}def {pythonize_name(mMethod['name'])}({args}):"
     res += generate_method_headers(mMethod)
@@ -809,30 +813,30 @@ def get_class_from_enum(type_):
     type_list = enum_type.split(".")
     return type_list[0]
 def get_classes_to_import(classes):
-    classes_to_import = set()
+    classes_to_import = []
     for class_ in classes:
         if( "inherits" in class_.keys()):
-            classes_to_import.add(class_["inherits"])
+            classes_to_import.append(class_["inherits"])
         if "methods" in class_.keys():
             for method in class_["methods"]:
                 if("return_value" in method.keys()):
                     if(unbitfield_type(get_class_from_enum(method["return_value"]["type"])) in normal_classes):
-                        classes_to_import.add(get_class_from_enum(method["return_value"]["type"]))
+                        classes_to_import.append(get_class_from_enum(method["return_value"]["type"]))
                 if("arguments" not in method.keys()):
                     continue
                 for argument in method["arguments"]:
                     if argument["type"] in normal_classes:
-                        classes_to_import.add(argument["type"])
+                        classes_to_import.append(argument["type"])
                     if "enum" in argument["type"]:
                         type = argument["type"].lstrip("enum::")
                         if type.split(".")[0] in normal_classes:
-                            classes_to_import.add(type.split(".")[0])
+                            classes_to_import.append(type.split(".")[0])
 
         if "properties" in class_.keys():
             for prop in class_["properties"]:
 
                 if simplify_type(prop["type"]) in normal_classes:
-                    classes_to_import.add(simplify_type(prop["type"]))
+                    classes_to_import.append(simplify_type(prop["type"]))
 
     return classes_to_import
 
@@ -968,13 +972,16 @@ def generate_operators_for_class(class_name):
     return res
 
 
-
+def should_skip_import(classname, class_to_import):
+    return classname == "Node" and class_to_import in {"SceneTree", "Viewport", "Window"}
 def generate_classes(classes, filename, is_core=False):
     res = generate_import()
     if not is_core:
         classes_to_import = get_classes_to_import(classes)
         for cls in classes_to_import:
             if cls in [class_["name"] for class_ in classes]:
+                continue
+            if should_skip_import(classes[0]["name"], cls):
                 continue
             res += f"cimport py4godot.classes.{cls}.{cls} as py4godot_{cls.lower()} "
             res = generate_newline(res)
