@@ -1045,6 +1045,47 @@ def generate_dictionary_get_item():
     res += f"{INDENT * 2}return o"
     return res
 
+def generate_get_item_from_array(classname):
+    res = ""
+    res += f"{INDENT}def __getitem__(self,  index):"
+    res = generate_newline(res)
+    res = generate_newline(res)
+    res += f"{INDENT * 2}if index < 0:"
+    res = generate_newline(res)
+    res += f"{INDENT * 3}raise KeyError(f\"Index '%s' invalid\")".replace("%s", "{index}")
+    res = generate_newline(res)
+    res += f"{INDENT * 2}cdef PyObject * pyobject = self.{classname}_internal_class[index].get_converted_value(True)"
+    res = generate_newline(res)
+    res += f"{INDENT * 2}cdef object o = None"
+    res = generate_newline(res)
+    res += f"{INDENT * 2}if not is_none(pyobject):"
+    res = generate_newline(res)
+    res += f"{INDENT * 3}o = <object>pyobject"
+    res = generate_newline(res)
+    res += f"{INDENT * 2}return o"
+    return res
+
+
+def generate_get_item_from_type_array(classname, classtype):
+    res = ""
+    res += f"{INDENT}def __getitem__(self,  index):"
+    res = generate_newline(res)
+    res = generate_newline(res)
+    res += f"{INDENT * 2}if index < 0:"
+    res = generate_newline(res)
+    res += f"{INDENT * 3}raise KeyError(f\"Index '%s' invalid\")".replace("%s", "{index}")
+    res = generate_newline(res)
+    if classtype in builtin_classes - {"int", "float", "bool", "Nil"}:
+        res = generate_newline(res)
+        res += f"{INDENT * 2}cdef {classtype} pyobject = {classtype}()"
+        res = generate_newline(res)
+        res += f"{INDENT * 2}pyobject.{classtype}_internal_class = self.{classname}_internal_class[<int>index]"
+        res = generate_newline(res)
+        res += f"{INDENT * 2}return pyobject"
+    else:
+        res += f"{INDENT * 2}return self.{classname}_internal_class[<int>index]"
+    return res
+
 
 def generate_special_methods_dictionary():
     res = ""
@@ -1056,75 +1097,93 @@ def generate_special_methods_dictionary():
 
 def generate_array_set_item(class_):
     res = ""
-    return res
-    res += f"{INDENT}def __setitem__(self, value,  index):"
-    res = generate_newline(res)
     if class_["name"] == "PackedInt32Array":
-        res += f"{INDENT*2}gdnative_interface.packed_int32_array_operator_index(self.godot_owner, index)[0] = value"
-    elif class_["name"] == "PackedInt64Array":
-        res += f"{INDENT * 2}gdnative_interface.packed_int64_array_operator_index(self.godot_owner, index)[0] = value"
-    elif class_["name"] == "PackedFloat32Array":
-        res += f"{INDENT*2}gdnative_interface.packed_float32_array_operator_index(self.godot_owner, index)[0] = value"
-    elif class_["name"] == "PackedFloat64Array":
-        res += f"{INDENT * 2}gdnative_interface.packed_float64_array_operator_index(self.godot_owner, index)[0] = value"
-    elif class_["name"] == "PackedBoolArray":
-        res += f"{INDENT * 2}gdnative_interface.packed_bool_array_operator_index(self.godot_owner, index)[0] = value"
-    elif class_["name"] == "PackedByteArray":
-        res += f"{INDENT * 2}gdnative_interface.packed_byte_array_operator_index(self.godot_owner, index)[0] = value"
+        res += f"{INDENT}def __setitem__(self,  index, value):"
+        res = generate_newline(res)
 
-    #TODO:enable
-    """
+        res += f"{INDENT*2}(&self.{class_['name']}_internal_class[index])[0] = <int>value"
+    elif class_["name"] == "PackedInt64Array":
+        res += f"{INDENT}def __setitem__(self,  index, value):"
+        res = generate_newline(res)
+
+        res += f"{INDENT * 2}(&self.{class_['name']}_internal_class[index])[0] = <int>value"
+    elif class_["name"] == "PackedFloat32Array":
+        res += f"{INDENT}def __setitem__(self,  index, value):"
+        res = generate_newline(res)
+
+        res += f"{INDENT*2}(&self.{class_['name']}_internal_class[index])[0] = value"
+    elif class_["name"] == "PackedFloat64Array":
+        res += f"{INDENT}def __setitem__(self,  index, value):"
+        res = generate_newline(res)
+
+        res += f"{INDENT * 2}(&self.{class_['name']}_internal_class[index])[0] = value"
+    elif class_["name"] == "PackedBoolArray":
+        res += f"{INDENT}def __setitem__(self,  index, value):"
+        res = generate_newline(res)
+
+        res += f"{INDENT * 2}(&self.{class_['name']}_internal_class[index])[0] = value"
+#    elif class_["name"] == "PackedByteArray":
+#        res += f"{INDENT * 2}gdnative_interface.packed_byte_array_operator_index(self.godot_owner, index)[0] = value"
+
     elif class_["name"] == "PackedColorArray":
-        res += f"{INDENT * 2}Color.new_static(gdnative_interface.packed_color_array_operator_index(self.godot_owner, index)).copy_from(value)"
+        res += f"{INDENT}def __setitem__(self,  index, value):"
+        res = generate_newline(res)
+
+        res += f"{INDENT * 2}(&self.{class_['name']}_internal_class[index])[0] = (<Color>value).Color_internal_class"
     elif class_["name"] == "PackedVector3Array":
-        res += f"{INDENT * 2}Vector3.new_static(gdnative_interface.packed_vector3_array_operator_index(self.godot_owner, index)).copy_from(value)"
+        res += f"{INDENT}def __setitem__(self,  index, value):"
+        res = generate_newline(res)
+
+        res += f"{INDENT * 2}(&self.{class_['name']}_internal_class[index])[0] = (<Vector3>value).Vector3_internal_class"
     elif class_["name"] == "PackedVector2Array":
-        res += f"{INDENT * 2}Vector2.new_static(gdnative_interface.packed_vector2_array_operator_index(self.godot_owner, index)).copy_from(value)"
+        res += f"{INDENT}def __setitem__(self,  index, value):"
+        res = generate_newline(res)
+
+        res += f"{INDENT * 2}(&self.{class_['name']}_internal_class[index])[0] = (<Vector2>value).Vector2_internal_class"
     elif class_["name"] == "PackedStringArray":
-        res += f"{INDENT * 2}String.new_static(gdnative_interface.packed_string_array_operator_index(self.godot_owner, index)).copy_from(value)"
+        res += f"{INDENT}def __setitem__(self,  index, value):"
+        res = generate_newline(res)
+
+        res += f"{INDENT * 2}(&self.{class_['name']}_internal_class[index])[0] = (<String>value).String_internal_class"
 
     elif class_["name"] == "Array":
-        res += f"{INDENT * 2}Variant.new_static(gdnative_interface.array_operator_index(self.godot_owner, index)).init_value(value)"
+        res += f"{INDENT}def __setitem__(self,  index, value):"
+        res = generate_newline(res)
 
-    """
+        res += f"{INDENT * 2}self.{class_['name']}_internal_class[index].init_from_py_object(<PyObject*>value, type(value).__name__.encode('utf-8'))"
+
     res = generate_newline(res)
-    res += f"{INDENT * 2}pass"
     return res
 
 def generate_array_get_item(class_):
     res = ""
-    return res
-    res += f"{INDENT}def __getitem__(self,  index):"
-    res = generate_newline(res)
-    if class_["name"] == "PackedInt32Array":
-        res += f"{INDENT*2}return gdnative_interface.packed_int32_array_operator_index(self.godot_owner, index)[0]"
-    elif class_["name"] == "PackedInt64Array":
-        res += f"{INDENT * 2}return gdnative_interface.packed_int64_array_operator_index(self.godot_owner, index)[0]"
-    elif class_["name"] == "PackedFloat32Array":
-        res += f"{INDENT*2}return gdnative_interface.packed_float32_array_operator_index(self.godot_owner, index)[0]"
-    elif class_["name"] == "PackedFloat64Array":
-        res += f"{INDENT * 2}return gdnative_interface.packed_float64_array_operator_index(self.godot_owner, index)[0]"
-    elif class_["name"] == "PackedBoolArray":
-        res += f"{INDENT * 2}return gdnative_interface.packed_bool_array_operator_index(self.godot_owner, index)[0]"
-    elif class_["name"] == "PackedByteArray":
-        res += f"{INDENT * 2}return gdnative_interface.packed_byte_array_operator_index(self.godot_owner, index)[0]"
 
-    return res
-    if class_["name"] == "PackedColorArray":
-        res += f"{INDENT * 2}Color.new_static(gdnative_interface.packed_color_array_operator_index(self.godot_owner, index))"
+    if class_["name"] == "PackedInt32Array":
+        res += generate_get_item_from_type_array(class_["name"], "int")
+    elif class_["name"] == "PackedInt64Array":
+        res += generate_get_item_from_type_array(class_["name"], "int")
+    elif class_["name"] == "PackedFloat32Array":
+        res += generate_get_item_from_type_array(class_["name"], "float")
+    elif class_["name"] == "PackedFloat64Array":
+        res += generate_get_item_from_type_array(class_["name"], "float")
+    elif class_["name"] == "PackedBoolArray":
+        res += generate_get_item_from_type_array(class_["name"], "bool")
+    elif class_["name"] == "PackedByteArray":
+        res += f"{INDENT*2}raise Exception('not implemented')"
+
+    elif class_["name"] == "PackedColorArray":
+        res += generate_get_item_from_type_array(class_["name"], "Color")
     elif class_["name"] == "PackedVector3Array":
-        res += f"{INDENT * 2}return Vector3.new_static(gdnative_interface.packed_vector3_array_operator_index(self.godot_owner, index))"
+        res += generate_get_item_from_type_array(class_["name"], "Vector3")
     elif class_["name"] == "PackedVector2Array":
-        res += f"{INDENT * 2}return Vector2.new_static(gdnative_interface.packed_vector2_array_operator_index(self.godot_owner, index))"
+        res += generate_get_item_from_type_array(class_["name"], "Vector2")
     elif class_["name"] == "PackedStringArray":
-        res += f"{INDENT * 2}return String.new_static(gdnative_interface.packed_string_array_operator_index(self.godot_owner, index))"
+        res += generate_get_item_from_type_array(class_["name"], "String")
 
     elif class_["name"] == "Array":
-        res += f"{INDENT * 2}return Variant.new_static(gdnative_interface.array_operator_index(self.godot_owner, index)).get_converted_value()"
-
+        res += generate_get_item_from_array(class_["name"])
 
     res = generate_newline(res)
-    res += f"{INDENT * 2}pass"
     return res
 
 def generate_special_methods_array(class_):

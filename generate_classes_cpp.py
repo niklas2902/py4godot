@@ -1053,58 +1053,58 @@ def generate_array_set_item(class_):
     if class_["name"] == "PackedInt32Array":
         res += f"{INDENT}int& {class_['name']}::operator[](int index)" + "{"
         res = generate_newline(res)
-        res += f"{INDENT*2}return _interface->packed_int32_array_operator_index(godot_owner, index)[0];"
+        res += f"{INDENT*2}return _interface->packed_int32_array_operator_index(&godot_owner, index)[0];"
         res += INDENT+"}"
     elif class_["name"] == "PackedInt64Array":
         res += f"{INDENT}int64_t& {class_['name']}::operator[](int index)" + "{"
         res = generate_newline(res)
-        res += f"{INDENT * 2}return _interface->packed_int64_array_operator_index(godot_owner, index)[0];"
+        res += f"{INDENT * 2}return _interface->packed_int64_array_operator_index(&godot_owner, index)[0];"
         res += INDENT + "}"
     elif class_["name"] == "PackedFloat32Array":
         res += f"{INDENT}float& {class_['name']}::operator[](int index)" + "{"
         res = generate_newline(res)
-        res += f"{INDENT * 2}return _interface->packed_float32_array_operator_index(godot_owner, index)[0];"
+        res += f"{INDENT * 2}return _interface->packed_float32_array_operator_index(&godot_owner, index)[0];"
         res += INDENT+"}"
     elif class_["name"] == "PackedFloat64Array":
         res += f"{INDENT}double& {class_['name']}::operator[](int index)" + "{"
         res = generate_newline(res)
-        res += f"{INDENT * 2}return _interface->packed_float64_array_operator_index(godot_owner, index)[0];"
+        res += f"{INDENT * 2}return _interface->packed_float64_array_operator_index(&godot_owner, index)[0];"
         res += INDENT + "}"
     elif class_["name"] == "PackedBoolArray":
         res += f"{INDENT}bool& {class_['name']}::operator[](int index)" + "{"
         res = generate_newline(res)
-        res += f"{INDENT * 2}return _interface->packed_bool_array_operator_index(godot_owner, index)[0];"
+        res += f"{INDENT * 2}return _interface->packed_bool_array_operator_index(&godot_owner, index)[0];"
         res += INDENT + "}"
     elif class_["name"] == "PackedByteArray":
         res += f"{INDENT}byte& {class_['name']}::operator[](int index)" + "{"
         res = generate_newline(res)
-        res += f"{INDENT * 2}return _interface->packed_byte_array_operator_index(godot_owner, index)[0];"
+        res += f"{INDENT * 2}return _interface->packed_byte_array_operator_index(&godot_owner, index)[0];"
         res += INDENT+"}"
 
     elif class_["name"] == "PackedColorArray":
         res += f"{INDENT}Color {class_['name']}::operator[](int index)" + "{"
         res = generate_newline(res)
-        res += f"{INDENT * 2}return Color::new_static(_interface->packed_color_array_operator_index(godot_owner, index));"
+        res += f"{INDENT * 2}return Color::new_static(_interface->packed_color_array_operator_index(&godot_owner, index));"
         res += INDENT + "}"
     elif class_["name"] == "PackedVector3Array":
         res += f"{INDENT}Vector3 {class_['name']}::operator[](int index)" + "{"
         res = generate_newline(res)
-        res += f"{INDENT * 2}return Vector3::new_static(_interface->packed_vector3_array_operator_index(godot_owner, index));"
+        res += f"{INDENT * 2}return Vector3::new_static(_interface->packed_vector3_array_operator_index(&godot_owner, index));"
         res += INDENT + "}"
     elif class_["name"] == "PackedVector2Array":
         res += f"{INDENT}Vector2 {class_['name']}::operator[](int index)" + "{"
         res = generate_newline(res)
-        res += f"{INDENT * 2}return Vector2::new_static(_interface->packed_vector2_array_operator_index(godot_owner, index));"
+        res += f"{INDENT * 2}return Vector2::new_static(_interface->packed_vector2_array_operator_index(&godot_owner, index));"
         res += INDENT + "}"
     elif class_["name"] == "PackedStringArray":
         res += f"{INDENT}String {class_['name']}::operator[](int index)" + "{"
         res = generate_newline(res)
-        res += f"{INDENT * 2}return String::new_static(_interface->packed_string_array_operator_index(godot_owner, index));;"
+        res += f"{INDENT * 2}return String::new_static(_interface->packed_string_array_operator_index(&godot_owner, index));;"
         res += INDENT + "}"
     elif class_["name"] == "Array":
         res += f"{INDENT}Variant {class_['name']}::operator[](int index)" + "{"
         res = generate_newline(res)
-        res += f"{INDENT * 2}return Variant::new_static(_interface->array_operator_index(godot_owner, index));"
+        res += f"{INDENT * 2}return Variant::new_static(_interface->array_operator_index(&godot_owner, index));"
         res += INDENT + "}"
     return res
 
