@@ -1112,6 +1112,18 @@ def generate_special_methods_array(class_):
     res = ""
     res += generate_array_set_item(class_)
     return res
+
+
+def generate_cast(class_):
+    res = ""
+    res+= f"{INDENT}{class_['name']} {class_['name']}::cast(Wrapper* pwrapper){{"
+    res = generate_newline(res)
+    res += f"{INDENT*2}return {class_['name']}();"
+    res += f"{INDENT}}}"
+    res = generate_newline(res)
+    return res
+
+
 def generate_special_methods(class_):
     res = ""
     if class_["name"] == "Dictionary":
@@ -1119,6 +1131,8 @@ def generate_special_methods(class_):
     
     if "array" in class_["name"].lower():
         res += generate_special_methods_array(class_)
+    if class_["name"] in classes:
+        res += generate_cast(class_)
 
     return res
 

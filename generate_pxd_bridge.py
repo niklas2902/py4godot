@@ -588,11 +588,22 @@ def generate_array_set_item(class_):
         res += f"{INDENT*2}String operator [](int index);"
     elif class_["name"] == "Array":
         res += f"{INDENT*2}Variant operator [](int index);"
+    res = generate_newline(res)
     return res
 
 def generate_special_methods_array(class_):
     res = ""
     res += generate_array_set_item(class_)
+    return res
+
+
+def generate_cast(class_):
+    res = ""
+    res +=f"{INDENT*2}@staticmethod"
+    res = generate_newline(res)
+    res+= f"{INDENT*2}{class_['name']} cast(Wrapper* pwrapper);"
+    res = generate_newline(res)
+
     return res
 
 
@@ -603,6 +614,9 @@ def generate_special_methods(class_):
     
     if "array" in class_["name"].lower():
         res += generate_special_methods_array(class_)
+
+    if class_['name'] in classes:
+        res += generate_cast(class_)
 
     return res
 

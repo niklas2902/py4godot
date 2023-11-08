@@ -1201,6 +1201,22 @@ def generate_special_methods_array(class_):
     return res
 
 
+def generate_cast(class_):
+    res = ""
+    res += f"{INDENT}@staticmethod"
+    res = generate_newline(res)
+    res += f"{INDENT}def cast(self, Object other):"
+    res = generate_newline(res)
+    res += f"{INDENT*2}cdef {class_['name']} cls = {class_['name']}()"
+    res = generate_newline(res)
+    res += f"{INDENT*2}cls.{class_['name']}_internal_class = CPP{class_['name']}.cast(&other.Object_internal_class)"
+    res = generate_newline(res)
+    res += f"{INDENT*2}other.set_gdowner(other.Object_internal_class.get_godot_owner())"
+    res = generate_newline(res)
+    res += f"{INDENT*2}return cls"
+    return res
+
+
 def generate_special_methods(class_):
     res = ""
     if class_["name"] == "Dictionary":
@@ -1208,6 +1224,9 @@ def generate_special_methods(class_):
     
     if "array" in class_["name"].lower():
         res += generate_special_methods_array(class_)
+
+    if class_["name"] in classes - builtin_classes:
+        res += generate_cast(class_)
 
     return res
 

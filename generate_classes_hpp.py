@@ -641,6 +641,12 @@ def generate_copy_methods(class_name):
     res = generate_newline(res)
     return res
 
+def generate_cast(class_):
+    res = ""
+    res+= f"{INDENT}static {class_['name']} {class_['name']}::cast(Wrapper* pwrapper);"
+    res = generate_newline(res)
+    return res
+
 def generate_special_methods(class_):
     res = ""
     if class_["name"] == "Dictionary":
@@ -651,6 +657,9 @@ def generate_special_methods(class_):
 
     if class_["name"] in {"Vector3", "Vector2", "String", "Color"}:
         res += generate_copy_methods(class_["name"])
+
+    if class_["name"] in classes:
+        res += generate_cast(class_)
 
     return res
 
