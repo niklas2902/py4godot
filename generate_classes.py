@@ -138,6 +138,9 @@ def generate_constructors(class_):
         res = generate_newline(res)
         res += f"{INDENT}def new{constructor['index']}({generate_constructor_args(constructor)}):"
         res = generate_newline(res)
+        if "arguments" in constructor:
+            res += generate_assert(constructor["arguments"])
+            res = generate_newline(res)
         res += f"{INDENT*2}cdef {class_['name']} _class = {class_['name']}.__new__({class_['name']})"
         res = generate_newline(res)
         res += f"{INDENT*2}_class.{class_['name']}_internal_class = (CPP{class_['name']}.new{constructor['index']}({generate_constructor_call_args(constructor)}))"
@@ -229,7 +232,10 @@ def generate_return_statement(method_):
         elif ret_val.type == "Variant":
             result = f"{INDENT*2}return _ret.get_converted_value_native_ptr(True)"
         else :
-            result = f"{INDENT*2}return _ret"
+            if ret_val.type in classes - builtin_classes:
+                result = f"{INDENT*2}return None if _ret.{ret_val.type}_internal_class.get_godot_owner() == NULL else _ret"
+            else:
+                result = f"{INDENT*2}return _ret"
     result = generate_newline(result)
     return result
 
@@ -378,8 +384,15 @@ def generate_default_args(mMethod):
     return res
 
 def should_skip_method(class_, method):
-    return class_["name"] == "Node" and method["name"] in {"get_tree", "get_viewport", "get_window"}
-
+    return class_["name"] == "Node" and method["name"] in {"get_tree", "get_viewport", "get_window",
+                                                           "get_last_exclusive_window"}
+def generate_assert(args):
+    res = ""
+    for arg in args:
+        if arg["type"] in classes.union(builtin_classes - {"int", "float", "bool", "Nil"}):
+            res += f"{INDENT*2}assert({pythonize_name(arg['name'])} != None)"
+            res = generate_newline(res)
+    return res
 def generate_method(class_, mMethod):
     res = ""
     if should_skip_method(class_, mMethod):
@@ -391,6 +404,9 @@ def generate_method(class_, mMethod):
     res = generate_newline(res)
     res += generate_default_args(mMethod)
     res = generate_newline(res)
+    if "arguments" in mMethod.keys():
+        res += generate_assert(mMethod["arguments"])
+        res = generate_newline(res)
     if("hash" in mMethod.keys()):
         res += generate_method_body_standard(class_, mMethod)
     else:

@@ -18,8 +18,8 @@ bool string_names_equal_save(StringName left, StringName right){
 
     StringName class_name = c_string_to_string_name("PyResourceFormatSaver");
 
-    class_->godot_owner = _interface->classdb_construct_object(&class_name.godot_owner);
-    _interface->object_set_instance(class_->godot_owner,&class_name.godot_owner , class_);
+    class_->godot_owner = functions::get_classdb_construct_object()(&class_name.godot_owner);
+    functions::get_object_set_instance()(class_->godot_owner,&class_name.godot_owner , class_);
 
     class_->_init_values();
     return class_;
@@ -27,7 +27,7 @@ bool string_names_equal_save(StringName left, StringName right){
 
 void* create_instance_saver(void* userdata){
     StringName class_name = c_string_to_string_name("ResourceFormatSaver");
-    auto gdnative_object = _interface->classdb_construct_object(&class_name.godot_owner);
+    auto gdnative_object = functions::get_classdb_construct_object()(&class_name.godot_owner);
     return gdnative_object;
 }
 void free_instance_saver(void *p_userdata, GDExtensionClassInstancePtr p_instance){}
@@ -43,7 +43,7 @@ void PyResourceFormatSaver::_init_values(){}
     FileAccess file = FileAccess::open(path, 2/*WRITE*/);
     file.store_string(source);
     file.flush();
-    main_interface->object_destroy(file.godot_owner);
+    functions::get_object_destroy()(file.godot_owner);
 
     *((GDExtensionTypePtr*) res) = 0/*OK*/;
     }
@@ -63,7 +63,7 @@ void PyResourceFormatSaver::_init_values(){}
 namespace saver{
     static void call_virtual_func__save(GDExtensionClassInstancePtr p_instance, const GDExtensionConstTypePtr* p_args, GDExtensionTypePtr r_ret) {
         PyResourceFormatSaver* pylanguage = static_cast<PyResourceFormatSaver*> (p_instance);
-        Resource args0 = Resource::new_static(main_interface->ref_get_object(p_args[0]));
+        Resource args0 = Resource::new_static(functions::get_ref_get_object()(p_args[0]));
         String args1 = String::new_static((*((void**)const_cast<GDExtensionStringPtr>(p_args[1]))));
         int args2 = *((int*)(p_args + 2));
 
@@ -85,7 +85,7 @@ namespace saver{
 
     static void call_virtual_func__recognize(GDExtensionClassInstancePtr p_instance, const GDExtensionConstTypePtr* p_args, GDExtensionTypePtr r_ret) {
         PyResourceFormatSaver* pylanguage = static_cast<PyResourceFormatSaver*> (p_instance);
-        Resource args0 = Resource::new_static(main_interface->ref_get_object(p_args[0]));
+        Resource args0 = Resource::new_static(functions::get_ref_get_object()(p_args[0]));
         pylanguage->_recognize(args0,r_ret);
     }
 
@@ -152,7 +152,7 @@ void init_func_names_save(){
 }
 void register_class_saver(){
     init_func_names_save();
-    operator_equal_string_name_save = _interface->variant_get_ptr_operator_evaluator(
+    operator_equal_string_name_save = functions::get_variant_get_ptr_operator_evaluator()(
         GDExtensionVariantOperator::GDEXTENSION_VARIANT_OP_EQUAL,
         GDExtensionVariantType::GDEXTENSION_VARIANT_TYPE_STRING_NAME,
         GDExtensionVariantType::GDEXTENSION_VARIANT_TYPE_STRING_NAME);
@@ -166,5 +166,5 @@ void register_class_saver(){
     StringName class_name = c_string_to_string_name("PyResourceFormatSaver");
     StringName parent_class_name = c_string_to_string_name("ResourceFormatSaver");
 
-    _interface->classdb_register_extension_class(_library, &class_name.godot_owner, &parent_class_name.godot_owner, creation_info);
+    functions::get_classdb_register_extension_class()(_library, &class_name.godot_owner, &parent_class_name.godot_owner, creation_info);
 }

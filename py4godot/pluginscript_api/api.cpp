@@ -14,7 +14,6 @@ godot::PyResourceFormatLoader * py_resource_format_loader;
 godot::PyResourceFormatSaver * py_resource_format_saver;
 
 void godot::init_py_language(){
-    _interface->print_error("init pylanguage", "test", "test",1,1);
     register_class();
     register_class_script();
     register_class_loader();
@@ -28,11 +27,10 @@ void godot::init_py_language(){
     godot::ResourceSaver resource_saver = godot::ResourceSaver::get_instance();
     godot::Engine engine = godot::Engine::get_instance();
 
-
+    engine.is_in_physics_frame();
     engine.register_script_language(py_language);
-
     resource_loader.add_resource_format_loader(py_resource_format_loader, false);
+
     resource_saver.add_resource_format_saver(py_resource_format_saver, false);
-    _interface->print_error("registered_language", "test", "test",1,1);
 
 }

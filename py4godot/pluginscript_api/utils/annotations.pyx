@@ -7,22 +7,18 @@ from cpython cimport Py_INCREF, Py_DECREF, PyObject
 
 from py4godot.pluginscript_api.utils.SignalDescription cimport *
 from py4godot.pluginscript_api.utils.PropertyDescription cimport *
-"""from py4godot.pluginscript_api.utils.MethodDescription cimport *
-from py4godot.pluginscript_api.utils.SignalArg cimport *
-"""
+#from py4godot.utils.print_tools import *
 from importlib.machinery import SourceFileLoader
 
-cdef api TransferObject exec_class(str source_string, str class_name_, GDExtensionInterface* main_interface):
-    global  gd_class, properties, signals, methods,default_values, interface_ptr
-    set_interface_ptr(main_interface)
-    interface_ptr = main_interface
+cdef api TransferObject exec_class(str source_string, str class_name_):
+    global  gd_class, properties, signals, methods,default_values
 
     cdef str py_source_string = source_string
     cdef str py_class_name_ = class_name_
 
     cdef TransferObject transfer_object = TransferObject()
 
-    main_interface.print_error("exec_class: start", "test", "test",1,1)
+    print_error("exec_class: start")
     methods = []
     gd_class = None
     gd_tool_class = None
@@ -30,20 +26,28 @@ cdef api TransferObject exec_class(str source_string, str class_name_, GDExtensi
     signals = []
     methods = []
     default_values = []
+    cdef char* my_str_class
+    cdef char* my_str_exception
+    cdef bytes bytes_class
+    cdef bytes bytes_exception
     try:
 
         if py_class_name_.endswith("\\") or py_class_name_.endswith("/"):
             py_class_name_ = py_class_name_[:-1]
-        main_interface.print_error("exec_class: try", "test", "test",1,1)
+        print_error("exec_class: try")
         module_name = py_class_name_.replace("res://", "").replace("/",".").replace(".py", "").replace("\\", ".")
         file_to_load = py_class_name_.replace("res://", "")
         module = SourceFileLoader(module_name,
         file_to_load).load_module()
-        main_interface.print_error("exec_class: after load module", "test", "test",1,1)
+        print_error("exec_class: after load module")
     except Exception as e:
-        main_interface.print_error("exec_class: Exception happened:", "test", "test",1,1)
-        main_interface.print_error(py_class_name_.encode("utf-8"), "test", "test",1,1)
-        main_interface.print_error(("exec_class: Exception happened:" + traceback.format_exc()).encode("utf-8"), "test", "test",1,1)
+        print_error("exec_class: Exception happened:")
+        bytes_class = py_class_name_.encode("utf-8")
+        my_str_class = bytes_class
+        print_error(my_str_class)
+        bytes_exception = (f"exec_class: Exception happened: {traceback.format_exc()}").encode("utf-8")
+        my_str_exception = bytes_exception
+        print_error(my_str_exception)
     for signal in signals:
         transfer_object.signals.push_back((<SignalDescription>signal).get_signal_dict().Dictionary_internal_class)
 
@@ -94,7 +98,5 @@ def gdmethod(func):
     return func
 
 def signal(name, list args = []):
-    interface_ptr.print_error("exec_class: start", "test", "test",1,1)
     description = SignalDescription(name, args)
-    interface_ptr.print_error("before exec description", "test", "test",1,1)
     signals.append(description)

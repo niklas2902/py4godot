@@ -1,10 +1,6 @@
 from py4godot.pluginscript_api.utils.utils cimport *
 from py4godot.pluginscript_api.utils.SignalArg cimport *
 from libcpp.vector cimport vector
-cdef GDExtensionInterface* main_interface
-
-cdef void set_interface_ptr(GDExtensionInterface* _interface):
-    main_interface = _interface
 
 cdef class SignalDescription:
     """"Description class for the properties, a gdclass can have and which can be found in the editor"""

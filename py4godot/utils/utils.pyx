@@ -15,7 +15,7 @@ cdef unicode gd_string_to_py_string(core.String string):
     cdef bridge.String internal_string = string.String_internal_class
     cdef char* c_str
     try:
-        gd_string_to_c_string(get_interface_utils(), internal_string, string.length(), &c_str)
+        gd_string_to_c_string(internal_string, string.length(), &c_str)
     except Exception as e:
         print_error("error:" + str(e))
     cdef unicode py_string = <unicode>PyUnicode_FromStringAndSize(c_str,string.length())
@@ -25,7 +25,7 @@ cdef unicode gd_string_to_py_string(core.String string):
 cdef unicode gd_string_name_to_py_string(core.StringName string_name):
     cdef core.String string = core.String.new2(string_name)
     cdef String internal_string = string.String_internal_class
-    cdef const char* c_str = gd_string_to_c_string(get_interface_utils(),internal_string, string.length())
+    cdef const char* c_str = gd_string_to_c_string(internal_string, string.length())
     cdef unicode py_string = <unicode>PyUnicode_FromStringAndSize(c_str,string.length())
     return py_string
 """

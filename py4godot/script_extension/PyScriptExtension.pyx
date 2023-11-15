@@ -20,8 +20,6 @@ cdef void set_lang(PyLanguage lang):
     Py_INCREF(py_language)
 
 
-gdnative_interface = get_interface()
-
 
 cdef Dictionary dict = Dictionary.new0()
 cdef StringName dictionary_name = c_string_to_string_name("")
@@ -40,7 +38,7 @@ cdef class PyScriptExtension(ScriptExtension):
     print_error("-------------construct PyScriptExtension--------------------")
     cdef StringName class_name = c_string_to_string_name("PyScriptExtension")
 
-    class_.set_godot_owner(gdnative_interface.classdb_construct_object(class_name.godot_owner))
+    class_.set_godot_owner(GDExtensionInterfaceClassdbConstructObject{}(class_name.godot_owner))
     Py_INCREF(class_)
     gdnative_interface.object_set_instance(class_.get_godot_owner(),class_name.godot_owner , <void*>class_)
 

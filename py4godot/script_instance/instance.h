@@ -14,7 +14,6 @@
 std::mutex mutex_script;
 GDExtensionScriptInstanceInfo native_script_instance_placeholder;
 GDExtensionScriptInstanceInfo native_script_instance;
-GDExtensionInterface *native_script;
 
 HANDLE ghMutex;
 
@@ -27,9 +26,9 @@ GDExtensionBool c_instance_get(GDExtensionScriptInstanceDataPtr p_instance, GDEx
     StringName method_name = StringName::new_static(((void**)p_name)[0]);
     String method_name_str = String::new2(method_name);
     char* c_method_name;
-    gd_string_to_c_string(get_interface(), &method_name_str.godot_owner, method_name_str.length(), &c_method_name);
+    gd_string_to_c_string(&method_name_str.godot_owner, method_name_str.length(), &c_method_name);
     if(std::string{c_method_name} == std::string{"script"}){
-        auto constructor = get_interface()->get_variant_from_type_constructor(GDExtensionVariantType::GDEXTENSION_VARIANT_TYPE_OBJECT);
+        auto constructor = functions::get_get_variant_from_type_constructor()(GDExtensionVariantType::GDEXTENSION_VARIANT_TYPE_OBJECT);
         constructor(r_ret, &((PyScriptExtension*)instance->script)->godot_owner);
         return 1;
     }
@@ -73,8 +72,7 @@ GDExtensionBool c_instance_has_method(GDExtensionScriptInstanceDataPtr p_instanc
 }
 
 
-void init_instance(GDExtensionInterface *p_interface, GDExtensionScriptInstanceInfo* native_script_instance, int is_placeholder){
-    native_script = p_interface;
+void init_instance(GDExtensionScriptInstanceInfo* native_script_instance, int is_placeholder){
     import_py4godot__script_instance__PyScriptInstance();
     if (PyErr_Occurred())
     {
@@ -85,7 +83,6 @@ void init_instance(GDExtensionInterface *p_interface, GDExtensionScriptInstanceI
         PyObject* pyStr = PyUnicode_AsEncodedString(str_exc_type, "utf-8","Error ~");
         const char *strExcType = PyBytes_AS_STRING(pyStr);
         PyErr_Print();
-        _interface->print_error(strExcType, "test", "test", 1, 1);
         assert(false);
         return;
     }
@@ -121,15 +118,15 @@ void init_instance(GDExtensionInterface *p_interface, GDExtensionScriptInstanceI
     */
 }
 
-void get_instance_ptr(GDExtensionInterface *p_interface,GDExtensionScriptInstanceInfo* info ){
+void get_instance_ptr(GDExtensionScriptInstanceInfo* info ){
     //GDExtensionScriptInstanceInfo * info = malloc(sizeof(GDExtensionScriptInstanceInfo));
-    init_instance(p_interface, info, 0);
+    init_instance(info, 0);
     //return info;
 }
 
 
-void get_placeholder_instance_ptr(GDExtensionInterface *p_interface, GDExtensionScriptInstanceInfo* info){
+void get_placeholder_instance_ptr(GDExtensionScriptInstanceInfo* info){
     //GDExtensionScriptInstanceInfo * info = malloc(sizeof(GDExtensionScriptInstanceInfo));
-    init_instance(p_interface, info, 1);
+    init_instance( info, 1);
     //return info;
 }

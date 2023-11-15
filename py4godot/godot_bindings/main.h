@@ -1,6 +1,7 @@
 #pragma once
 #include "py4godot/godot_bindings/macros.h"
 #include "gdextension_interface.h"
+#include "functions.h"
 #include <python.h>
 
 
@@ -20,10 +21,8 @@
 #define PYTHONHOME L"addons/windows64/cpython-3.11.3-windows32/python/install"
 #endif
 
-GDExtensionInterface* _interface = nullptr;
-GDExtensionInterface* main_interface = nullptr;
 GDExtensionClassLibraryPtr _library = nullptr;
 
-LIBRARY_API GDExtensionInterface* get_interface();
-
 static PyThreadState *gilstate = NULL;
+extern "C" GDExtensionInterfaceGetProcAddress gdextension_interface_get_proc_address = nullptr;
+extern "C" void *token = nullptr;

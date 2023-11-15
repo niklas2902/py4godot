@@ -263,102 +263,6 @@ cdef extern from "binding4.h":
         GDExtensionClassGetRID get_rid_func;
         void *class_userdata;
 
-    ctypedef struct GDExtensionInterface:
-        void *(*mem_alloc)(size_t p_bytes);
-        void *(*mem_realloc)(void *p_ptr, size_t p_bytes);
-        void (*mem_free)(void *p_ptr);
-
-        GDExtensionObjectPtr (*ref_get_object)(GDExtensionConstRefPtr p_ref);
-        GDExtensionVariantFromTypeConstructorFunc (*get_variant_from_type_constructor)(GDExtensionVariantType p_type);
-        GDExtensionTypeFromVariantConstructorFunc (*get_variant_to_type_constructor)(GDExtensionVariantType p_type);
-        void (*variant_new_nil)(GDExtensionVariantPtr r_dest);
-        void *object_method_bind_call (const GDExtensionMethodBindPtr p_method_bind, GDExtensionObjectPtr p_instance, const GDExtensionVariantPtr *p_args, GDExtensionInt p_arg_count, GDExtensionVariantPtr r_ret, GDExtensionCallError *r_error);
-        void *object_method_bind_ptrcall (const GDExtensionMethodBindPtr p_method_bind, GDExtensionObjectPtr p_instance, const GDExtensionTypePtr *p_args, GDExtensionTypePtr r_ret);
-        GDExtensionObjectPtr (*classdb_construct_object)(const GDExtensionStringNamePtr p_classname); #The passed class must be a built-in godot class, or an already-registered extension class. In both case, object_set_instance should be called to fully initialize the object.
-        GDExtensionMethodBindPtr (*classdb_get_method_bind)(GDExtensionConstStringNamePtr p_classname, GDExtensionConstStringNamePtr p_methodname, GDExtensionInt p_hash);
-        void (*object_set_instance)(GDExtensionObjectPtr p_o, const GDExtensionStringNamePtr p_classname, GDExtensionClassInstancePtr p_instance); #p_classname should be a registered extension class and should extend the p_o object's class.
-
-        GDExtensionPtrIndexedSetter (*variant_get_ptr_indexed_setter)(GDExtensionVariantType p_type);
-        GDExtensionPtrIndexedGetter (*variant_get_ptr_indexed_getter)(GDExtensionVariantType p_type);
-        GDExtensionPtrSetter (*variant_get_ptr_setter)(GDExtensionVariantType p_type, GDExtensionConstStringNamePtr p_member);
-        GDExtensionPtrGetter (*variant_get_ptr_getter)(GDExtensionVariantType p_type, GDExtensionConstStringNamePtr p_member);
-
-
-        # CLASSDB EXTENSION
-
-        void (*classdb_register_extension_class)(GDExtensionClassLibraryPtr p_library, GDExtensionConstStringNamePtr p_class_name, GDExtensionConstStringNamePtr p_parent_class_name, const GDExtensionClassCreationInfo *p_extension_funcs);
-        void (*classdb_register_extension_class_method)(GDExtensionClassLibraryPtr p_library, GDExtensionConstStringNamePtr p_class_name, const GDExtensionClassMethodInfo *p_method_info);
-        void (*classdb_register_extension_class_integer_constant)(GDExtensionClassLibraryPtr p_library, GDExtensionConstStringNamePtr p_class_name, GDExtensionConstStringNamePtr p_enum_name, GDExtensionConstStringNamePtr p_constant_name, GDExtensionInt p_constant_value, GDExtensionBool p_is_bitfield);
-        void (*classdb_register_extension_class_property)(GDExtensionClassLibraryPtr p_library, GDExtensionConstStringNamePtr p_class_name, const GDExtensionPropertyInfo *p_info, GDExtensionConstStringNamePtr p_setter, GDExtensionConstStringNamePtr p_getter);
-        void (*classdb_register_extension_class_property_group)(GDExtensionClassLibraryPtr p_library, GDExtensionConstStringNamePtr p_class_name, GDExtensionConstStringPtr p_group_name, GDExtensionConstStringPtr p_prefix);
-        void (*classdb_register_extension_class_property_subgroup)(GDExtensionClassLibraryPtr p_library, GDExtensionConstStringNamePtr p_class_name, GDExtensionConstStringPtr p_subgroup_name, GDExtensionConstStringPtr p_prefix);
-        void (*classdb_register_extension_class_signal)(GDExtensionClassLibraryPtr p_library, GDExtensionConstStringNamePtr p_class_name, GDExtensionConstStringNamePtr p_signal_name, const GDExtensionPropertyInfo *p_argument_info, GDExtensionInt p_argument_count);
-        void (*classdb_unregister_extension_class)(GDExtensionClassLibraryPtr p_library, GDExtensionConstStringNamePtr p_class_name); # Unregistering a parent class before a class that inherits it will result in failure. Inheritors must be unregistered first.
-
-        #utils
-        void (*print_error)(const char *p_description, const char *p_function, const char *p_file, int32_t p_line, GDExtensionBool notify_editor);
-        void (*print_warning)(const char *p_description, const char *p_function, const char *p_file, int32_t p_line, GDExtensionBool notify_editor);
-        void (*print_script_error)(const char *p_description, const char *p_function, const char *p_file, int32_t p_line);
-        GDExtensionObjectPtr (*global_get_singleton)(const GDExtensionStringNamePtr p_name);
-        GDExtensionPtrBuiltInMethod (*variant_get_ptr_builtin_method)(GDExtensionVariantType p_type, const GDExtensionStringNamePtr p_method, GDExtensionInt p_hash);
-        GDExtensionPtrConstructor (*variant_get_ptr_constructor)(GDExtensionVariantType p_type, int32_t p_constructor);
-        GDExtensionPtrDestructor (*variant_get_ptr_destructor)(GDExtensionVariantType p_type);
-
-        GDExtensionPtrOperatorEvaluator (*variant_get_ptr_operator_evaluator)(GDExtensionVariantOperator p_operator, GDExtensionVariantType p_type_a, GDExtensionVariantType p_type_b);
-
-        void (*string_new_with_latin1_chars)(GDExtensionStringPtr r_dest, const char *p_contents);
-        void (*string_new_with_utf8_chars)(GDExtensionStringPtr r_dest, const char *p_contents);
-        #void (*string_new_with_utf16_chars)(GDExtensionStringPtr r_dest, const char16_t *p_contents);
-        #void (*string_new_with_utf32_chars)(GDExtensionStringPtr r_dest, const char32_t *p_contents);
-        #void (*string_new_with_wide_chars)(GDExtensionStringPtr r_dest, const wchar_t *p_contents);
-        void (*string_new_with_latin1_chars_and_len)(GDExtensionStringPtr r_dest, const char *p_contents, const GDExtensionInt p_size);
-        void (*string_new_with_utf8_chars_and_len)(GDExtensionStringPtr r_dest, const char *p_contents, const GDExtensionInt p_size);
-        #void (*string_new_with_utf16_chars_and_len)(GDExtensionStringPtr r_dest, const char16_t *p_contents, const GDExtensionInt p_size);
-        #void (*string_new_with_utf32_chars_and_len)(GDExtensionStringPtr r_dest, const char32_t *p_contents, const GDExtensionInt p_size);
-        #void (*string_new_with_wide_chars_and_len)(GDExtensionStringPtr r_dest, const wchar_t *p_contents, const GDExtensionInt p_size);
-
-
-        GDExtensionVariantType (*variant_get_type)(GDExtensionConstVariantPtr p_self);
-        GDExtensionInt (*string_to_utf8_chars)(GDExtensionConstStringPtr p_self, char *r_text, GDExtensionInt p_max_write_length);
-        void *(*classdb_get_class_tag)(GDExtensionConstStringNamePtr p_classname);
-        GDExtensionObjectPtr (*object_cast_to)(GDExtensionConstObjectPtr p_object, void *p_class_tag);
-        void (*object_destroy)(GDExtensionObjectPtr p_o);
-
-        # Dictionary functions
-        GDExtensionVariantPtr (*dictionary_operator_index)(GDExtensionTypePtr p_self, GDExtensionConstVariantPtr p_key); #p_self should be an Dictionary ptr
-        GDExtensionVariantPtr (*dictionary_operator_index_const)(GDExtensionConstTypePtr p_self, GDExtensionConstVariantPtr p_key); # p_self should be an Dictionary ptr
-
-        GDExtensionScriptInstancePtr (*script_instance_create)(const GDExtensionScriptInstanceInfo *p_info, GDExtensionScriptInstanceDataPtr p_instance_data);
-
-        void array_set_typed(GDExtensionTypePtr p_self, GDExtensionVariantType p_type, GDExtensionConstStringNamePtr p_class_name, GDExtensionConstVariantPtr p_script); # p_self should be an Array ptr
-
-        uint8_t *(*packed_byte_array_operator_index)(GDExtensionTypePtr p_self, GDExtensionInt p_index); # p_self should be a PackedByteArray
-        const uint8_t *(*packed_byte_array_operator_index_const)(GDExtensionConstTypePtr p_self, GDExtensionInt p_index); # p_self should be a PackedByteArray
-
-        GDExtensionTypePtr (*packed_color_array_operator_index)(GDExtensionTypePtr p_self, GDExtensionInt p_index); # p_self should be a PackedColorArray, returns Color ptr
-        GDExtensionTypePtr (*packed_color_array_operator_index_const)(GDExtensionConstTypePtr p_self, GDExtensionInt p_index); # p_self should be a PackedColorArray, returns Color ptr
-
-        float *(*packed_float32_array_operator_index)(GDExtensionTypePtr p_self, GDExtensionInt p_index); # p_self should be a PackedFloat32Array
-        const float *(*packed_float32_array_operator_index_const)(GDExtensionConstTypePtr p_self, GDExtensionInt p_index); # p_self should be a PackedFloat32Array
-        double *(*packed_float64_array_operator_index)(GDExtensionTypePtr p_self, GDExtensionInt p_index); # p_self should be a PackedFloat64Array
-        const double *(*packed_float64_array_operator_index_const)(GDExtensionConstTypePtr p_self, GDExtensionInt p_index); # p_self should be a PackedFloat64Array
-
-        int32_t *(*packed_int32_array_operator_index)(GDExtensionTypePtr p_self, GDExtensionInt p_index); # p_self should be a PackedInt32Array
-        const int32_t *(*packed_int32_array_operator_index_const)(GDExtensionConstTypePtr p_self, GDExtensionInt p_index); # p_self should be a PackedInt32Array
-        int64_t *(*packed_int64_array_operator_index)(GDExtensionTypePtr p_self, GDExtensionInt p_index); # p_self should be a PackedInt32Array
-        const int64_t *(*packed_int64_array_operator_index_const)(GDExtensionConstTypePtr p_self, GDExtensionInt p_index); # p_self should be a PackedInt32Array
-
-        GDExtensionStringPtr (*packed_string_array_operator_index)(GDExtensionTypePtr p_self, GDExtensionInt p_index); # p_self should be a PackedStringArray
-        GDExtensionStringPtr (*packed_string_array_operator_index_const)(GDExtensionConstTypePtr p_self, GDExtensionInt p_index); # p_self should be a PackedStringArray
-
-        GDExtensionTypePtr (*packed_vector2_array_operator_index)(GDExtensionTypePtr p_self, GDExtensionInt p_index); # p_self should be a PackedVector2Array, returns Vector2 ptr
-        GDExtensionTypePtr (*packed_vector2_array_operator_index_const)(GDExtensionConstTypePtr p_self, GDExtensionInt p_index); # p_self should be a PackedVector2Array, returns Vector2 ptr
-        GDExtensionTypePtr (*packed_vector3_array_operator_index)(GDExtensionTypePtr p_self, GDExtensionInt p_index); # p_self should be a PackedVector3Array, returns Vector3 ptr
-        GDExtensionTypePtr (*packed_vector3_array_operator_index_const)(GDExtensionConstTypePtr p_self, GDExtensionInt p_index); # p_self should be a PackedVector3Array, returns Vector3 ptr
-
-        GDExtensionVariantPtr (*array_operator_index)(GDExtensionTypePtr p_self, GDExtensionInt p_index); # p_self should be an Array ptr
-        GDExtensionVariantPtr (*array_operator_index_const)(GDExtensionConstTypePtr p_self, GDExtensionInt p_index); # p_self should be an Array ptr
-
     # SCRIPT INSTANCE EXTENSION
 
     ctypedef GDExtensionBool (*GDExtensionScriptInstanceSet)(GDExtensionScriptInstanceDataPtr p_instance, GDExtensionConstStringNamePtr p_name, GDExtensionConstVariantPtr p_value);
@@ -394,6 +298,9 @@ cdef extern from "binding4.h":
     ctypedef GDExtensionScriptLanguagePtr (*GDExtensionScriptInstanceGetLanguage)(GDExtensionScriptInstanceDataPtr p_instance);
 
     ctypedef void (*GDExtensionScriptInstanceFree)(GDExtensionScriptInstanceDataPtr p_instance);
+
+    ctypedef void (*GDExtensionInterfacePrintWarning)(const char *p_description, const char *p_function, const char *p_file, int32_t p_line, GDExtensionBool p_editor_notify);
+    ctypedef void (*GDExtensionInterfacePrintError)(const char *p_description, const char *p_function, const char *p_file, int32_t p_line, GDExtensionBool p_editor_notify);
 
     ctypedef struct GDExtensionScriptInstanceInfo:
         GDExtensionScriptInstanceSet set_func;
@@ -446,9 +353,12 @@ cdef extern from "c_utils.h":
     void exec_method(GDExtensionInterface* interface_ptr, GDExtensionMethodBindPtr method_bind, void * gd_owner, void ** args, void** ret )
     void run_constructor( GDExtensionPtrConstructor constructor, void** gd_owner, void ** args)
 """
+
+cdef extern from "functions.h":
+    GDExtensionInterfacePrintError get_print_error()
+    GDExtensionInterfacePrintWarning get_print_warning()
+
 cdef extern from "Python.h":
     cdef PyObject* PyUnicode_FromString(const char* s);
     cdef  PyObject* PyObject_Str(PyObject *o);
     PyUnicode_FromStringAndSize(const char *u, Py_ssize_t size)
-
-cdef GDExtensionInterface* gdnative_interface

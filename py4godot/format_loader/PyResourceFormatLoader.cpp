@@ -20,8 +20,8 @@ bool string_names_equal_loader(StringName left, StringName right){
 
     StringName class_name = c_string_to_string_name("PyResourceFormatLoader");
 
-    class_->godot_owner = _interface->classdb_construct_object(&class_name.godot_owner);
-    _interface->object_set_instance(class_->godot_owner,&class_name.godot_owner , class_);
+    class_->godot_owner = functions::get_classdb_construct_object()(&class_name.godot_owner);
+    functions::get_object_set_instance()(class_->godot_owner,&class_name.godot_owner , class_);
 
     class_->_init_values();
     class_->lang = language;
@@ -30,7 +30,7 @@ bool string_names_equal_loader(StringName left, StringName right){
 
 void* create_instance_loader(void* userdata){
     StringName class_name = c_string_to_string_name("ResourceFormatLoader");
-    auto gdnative_object = _interface->classdb_construct_object(&class_name.godot_owner);
+    auto gdnative_object = functions::get_classdb_construct_object()(&class_name.godot_owner);
     return gdnative_object;
 }
 void free_instance_loader(void *p_userdata, GDExtensionClassInstancePtr p_instance){}
@@ -49,7 +49,7 @@ void PyResourceFormatLoader::_handles_type( StringName& type, GDExtensionTypePtr
   *((GDExtensionTypePtr*) res) =  (void*)handles_type;
 }
 void PyResourceFormatLoader::_get_resource_type( String& path, GDExtensionTypePtr res){
-    main_interface->string_new_with_utf8_chars(res, "PyScriptExtension");
+    functions::get_string_new_with_utf8_chars()(res, "PyScriptExtension");
 }
 void PyResourceFormatLoader::_get_resource_script_class( String& path, GDExtensionTypePtr res){}
 void PyResourceFormatLoader::_get_resource_uid( String& path, GDExtensionTypePtr res){}
@@ -67,14 +67,14 @@ void PyResourceFormatLoader::_load( String& path, String& original_path, bool us
     }
 
     auto source_code = file.get_as_text(false);
-    main_interface->object_destroy(file.godot_owner);
+    functions::get_object_destroy()(file.godot_owner);
     auto script_extension = PyScriptExtension::constructor(lang);
     char* c_path;
-    gd_string_to_c_string(main_interface, &path.godot_owner, path.length(), &c_path);
+    gd_string_to_c_string(&path.godot_owner, path.length(), &c_path);
     script_extension->set_path(c_path);
     script_extension ->_set_source_code_internal(source_code);
 
-    constructor_func = main_interface->get_variant_from_type_constructor(GDExtensionVariantType::GDEXTENSION_VARIANT_TYPE_OBJECT);
+    constructor_func = functions::get_get_variant_from_type_constructor()(GDExtensionVariantType::GDEXTENSION_VARIANT_TYPE_OBJECT);
     constructor_func(res,&script_extension->godot_owner);
 }
 
@@ -281,7 +281,7 @@ void init_func_names_loader(){
 
 void register_class_loader(){
     init_func_names_loader();
-    operator_equal_string_name_loader = _interface->variant_get_ptr_operator_evaluator(
+    operator_equal_string_name_loader = functions::get_variant_get_ptr_operator_evaluator()(
         GDExtensionVariantOperator::GDEXTENSION_VARIANT_OP_EQUAL,
         GDExtensionVariantType::GDEXTENSION_VARIANT_TYPE_STRING_NAME,
         GDExtensionVariantType::GDEXTENSION_VARIANT_TYPE_STRING_NAME);
@@ -295,5 +295,5 @@ void register_class_loader(){
     StringName class_name = c_string_to_string_name("PyResourceFormatLoader");
     StringName parent_class_name = c_string_to_string_name("ResourceFormatLoader");
 
-    _interface->classdb_register_extension_class(_library, &class_name.godot_owner, &parent_class_name.godot_owner, creation_info);
+    functions::get_classdb_register_extension_class()(_library, &class_name.godot_owner, &parent_class_name.godot_owner, creation_info);
 }

@@ -4,9 +4,8 @@ cimport py4godot.classes.cpp_bridge as bridge
 cdef extern from "py4godot/cpputils/utils.h":
     bridge.StringName c_string_to_string_name(const char* string)
     bridge.String c_string_to_string(const char* string)
-    GDExtensionInterface* get_interface_utils()
-    #const char * gd_string_to_c_string(GDExtensionInterface* interface_ptr, bridge.String string, int length)
-    void gd_string_to_c_string(GDExtensionInterface* interface_ptr, bridge.String string, int length, char** res_string)
+    #const char * gd_string_to_c_string( bridge.String string, int length)
+    void gd_string_to_c_string(bridge.String string, int length, char** res_string)
     bool is_none(PyObject* py_object)
 cdef extern from "py4godot/cpputils/ScriptHolder.h":
     PyObject* get_py_script(int id)
