@@ -390,7 +390,7 @@ def generate_assert(args):
     res = ""
     for arg in args:
         if arg["type"] in classes.union(builtin_classes - {"int", "float", "bool", "Nil"}):
-            res += f"{INDENT*2}assert({pythonize_name(arg['name'])} != None)"
+            res += f"{INDENT*2}assert(not {pythonize_name(arg['name'])} is None)"
             res = generate_newline(res)
     return res
 def generate_method(class_, mMethod):

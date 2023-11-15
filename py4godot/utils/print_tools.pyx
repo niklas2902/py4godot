@@ -4,6 +4,7 @@ cimport py4godot.utils.print_tools_tools as tools
 from py4godot.utils.utils cimport *
 
 def print_error(*objects, sep=' ', end=''):
+    cdef GDExtensionInterfacePrintError output = tools.get_print_error()
     cdef str string = ""
     for object in objects:
         string += str(object) + sep
@@ -12,8 +13,7 @@ def print_error(*objects, sep=' ', end=''):
     b_str = string.encode('utf-8')
     cdef char* c_str = b_str
 
-    #cdef GDExtensionInterfacePrintError output = tools.get_print_error()
-    #output(c_str, "test", "test",1, 1);
+    output(c_str, "test", "test",1, 1);
 
 def error(*objects, sep=' ', end=''):
     return
@@ -39,9 +39,11 @@ def debug(*objects, sep=' ', end=''):
     #get_print_error()(c_str, "test", "test",1, 1);
 
 def print(*objects, sep=' ', end=''):
+    cdef GDExtensionInterfacePrintError output = tools.get_print_error()
+
     string = ""
     for object in objects:
         string += str(object) + sep
     string.rstrip(sep)
     string += end
-    #get_print_error()(string, "test", "test",1, 1);
+    output(string, "test", "test",1, 1);
