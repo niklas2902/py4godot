@@ -177,7 +177,7 @@ def generate_return_value(classname, method_):
             else:
                 result += f"{INDENT * 2}cdef py4godot_{ret_val.type.lower()}.{ret_val.type} {ret_val.name} = py4godot_{ret_val.type.lower()}.{ret_val.type}.__new__(py4godot_{ret_val.type.lower()}.{ret_val.type})"
         elif ret_val.type == "Variant":
-            result += f"{INDENT * 2}cdef PyVariant {ret_val.name} = PyVariant()"
+            result += f"{INDENT * 2}cdef PyObject* {ret_val.name} = NULL"
         elif "typedarray" in ret_val.type:
             result += f"{INDENT * 2}cdef Array _ret = Array.new0()"
         elif "enum::" in ret_val.type:
@@ -230,7 +230,11 @@ def generate_return_statement(method_):
         if ret_val.type == "String":
             result = f"{INDENT*2}return gd_string_to_py_string(_ret)"
         elif ret_val.type == "Variant":
-            result = f"{INDENT*2}return _ret.get_converted_value_native_ptr(True)"
+            result = f"{INDENT*2}if is_none(_ret):"
+            result = generate_newline(result)
+            result += f"{INDENT * 3}return None"
+            result = generate_newline(result)
+            result += f"{INDENT*2}return <object>_ret"
         else :
             if ret_val.type in classes - builtin_classes:
                 result = f"{INDENT*2}return None if _ret.{ret_val.type}_internal_class.get_godot_owner() == NULL else _ret"
@@ -445,7 +449,7 @@ def generate_ret_call(method_):
             else:
                 result += f"{ret_val.name}.{ret_val.type}_internal_class"
         elif ret_val.type == "Variant":
-            result += f"_ret.variant"
+            result += f"_ret"
         elif "typedarray" in ret_val.type:
             result += f"_ret.{untypearray(ret_val.type)}_internal_class"
         else:
@@ -471,6 +475,20 @@ def generate_set_gd_owner_for_ret(method):
     return result
 
 
+def convert_to_py_if_variant(method_):
+    result = ""
+    if "return_value" in method_.keys() or "return_type" in method_.keys():
+        ret_val = None
+        if ("return_value" in method_.keys()):
+            ret_val = ReturnType("_ret", method_['return_value']['type'])
+        else:
+            ret_val = ReturnType("_ret", method_['return_type'])
+
+        if ret_val.type == "Variant":
+            result = ".get_converted_value_native_ptr(True)"
+
+    return result
+
 def generate_method_body_standard(class_, method):
     number_arguments = 0
     result = ""
@@ -484,11 +502,11 @@ def generate_method_body_standard(class_, method):
         result += generate_return_value(class_["name"], method)
         if not is_static(method):
 
-            result += f"{INDENT * 2}{generate_ret_call(method)} = self.{class_['name']}_internal_class.{pythonize_name(method['name'])}({generate_method_args(method)})"
+            result += f"{INDENT * 2}{generate_ret_call(method)} = self.{class_['name']}_internal_class.{pythonize_name(method['name'])}({generate_method_args(method)}){convert_to_py_if_variant(method)}"
             result = generate_newline(result)
             result += generate_set_gd_owner_for_ret(method)
         else:
-            result += f"{INDENT * 2}{generate_ret_call(method)} = CPP{class_['name']}.{pythonize_name(method['name'])}({generate_method_args(method)})"
+            result += f"{INDENT * 2}{generate_ret_call(method)} = CPP{class_['name']}.{pythonize_name(method['name'])}({generate_method_args(method)}){convert_to_py_if_variant(method)}"
             result = generate_newline(result)
             result += generate_set_gd_owner_for_ret(method)
         result = generate_newline(result)
