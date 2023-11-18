@@ -125,6 +125,10 @@ void PyScriptExtension::_instance_create( Object& for_object, GDExtensionTypePtr
 
     //print_error("before get_class")
     //for_object.get_class()
+    if(instance == Py_None || instance == nullptr){
+        assert(false);
+        return;
+    }
     set_owner(instance, ((void**)for_object.godot_owner)[0]);
     GDExtensionVariantFromTypeConstructorFunc constructor_func;
     GDExtensionScriptInstancePtr instance_ptr;
@@ -159,6 +163,10 @@ void PyScriptExtension::_placeholder_instance_create( Object& for_object, GDExte
     m.lock();
     auto gil_state = PyGILState_Ensure();
     auto instance = PyObject_CallObject(transfer_object.class_, nullptr);
+    if(instance == Py_None || instance == nullptr){
+        assert(false);
+        return;
+    }
 
     //print_error("before get_class")
     //for_object.get_class()

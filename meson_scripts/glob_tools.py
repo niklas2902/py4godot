@@ -18,4 +18,6 @@ if __name__=="__main__":
                     or entry.endswith("api.cpp") or "PyResourceFormatLoader" in entry or "PyResourceFormatSaver" in entry\
                     or entry.endswith("functions.cpp"):
                 continue
+            if len(entry) > 100:
+                continue
             print(entry.lstrip("../").replace(".cpp", ""))

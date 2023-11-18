@@ -9,9 +9,12 @@ from py4godot.pluginscript_api.utils.SignalDescription cimport *
 from py4godot.pluginscript_api.utils.PropertyDescription cimport *
 #from py4godot.utils.print_tools import *
 from importlib.machinery import SourceFileLoader
+from py4godot.classes.Node3D.Node3D cimport *
+
+class_name = ""
 
 cdef api TransferObject exec_class(str source_string, str class_name_):
-    global  gd_class, properties, signals, methods,default_values
+    global  gd_class, properties, signals, methods,default_values, class_name
 
     cdef str py_source_string = source_string
     cdef str py_class_name_ = class_name_
@@ -31,7 +34,6 @@ cdef api TransferObject exec_class(str source_string, str class_name_):
     cdef bytes bytes_class
     cdef bytes bytes_exception
     try:
-
         if py_class_name_.endswith("\\") or py_class_name_.endswith("/"):
             py_class_name_ = py_class_name_[:-1]
         print_error("exec_class: try")
@@ -40,6 +42,8 @@ cdef api TransferObject exec_class(str source_string, str class_name_):
         module = SourceFileLoader(module_name,
         file_to_load).load_module()
         print_error("exec_class: after load module")
+        class_name = class_name_.split("/")[-1].replace(".py", "")
+
     except Exception as e:
         print_error("exec_class: Exception happened:")
         bytes_class = py_class_name_.encode("utf-8")
@@ -48,6 +52,10 @@ cdef api TransferObject exec_class(str source_string, str class_name_):
         bytes_exception = (f"exec_class: Exception happened: {traceback.format_exc()}").encode("utf-8")
         my_str_exception = bytes_exception
         print_error(my_str_exception)
+        print_error("before creating gd_class error")
+        gd_class = Node3D.constructor()
+        print_error("after creating gd_class error")
+
     for signal in signals:
         transfer_object.signals.push_back((<SignalDescription>signal).get_signal_dict().Dictionary_internal_class)
 
@@ -66,6 +74,9 @@ cdef api TransferObject exec_class(str source_string, str class_name_):
 
 def gdclass(cls):
     global gd_class
+
+    if cls.__name__ != class_name:
+        return cls
     if(gd_class == None):
         gd_class = cls
     else:
@@ -86,6 +97,9 @@ def prop(name,type_, defaultval, hint = BaseHint(), hint_string = ""):
     properties.append(PropertyDescription(name = name,
                 type_=type_,hint = hint,usage = 4096|6|32768,
                 default_value=defaultval))
+
+def gdproperty(*args, ** kwargs):
+    pass
 
 def gdmethod(func):
     args = inspect.getfullargspec(func).args

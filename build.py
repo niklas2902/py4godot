@@ -3,13 +3,15 @@ import os
 import subprocess
 import time
 from Cython.Build import cythonize
-import generate_bindings,generate_bindings_pyi
+import generate_bindings, generate_bindings_pyi
 
 from meson_scripts import copy_tools, download_python, generate_init_files, \
     locations, platform_check, generate_godot, \
     download_godot
-#generate_bindings_pyi.build()
-#generate_bindings.build()
+
+
+# generate_bindings_pyi.build()
+# generate_bindings.build()
 
 def cythonize_files():
     module = cythonize('py4godot_core_holder/*.pyx', language_level=3)
@@ -22,6 +24,25 @@ def cythonize_files():
     module += cythonize("py4godot/gdnative_api/*.pyx", language_level=3)
     module += cythonize("py4godot/enums/*.pyx", language_level=3)
     module += cythonize("py4godot/events/*.pyx", language_level=3)
+
+
+def generate_files():
+    res = subprocess.Popen(f"python generate_classes.py", shell=True)
+    res.wait()
+    res = subprocess.Popen(f"python generate_classes_cpp.py", shell=True)
+    res.wait()
+
+    res = subprocess.Popen(f"python generate_classes_hpp.py", shell=True)
+    res.wait()
+    res = subprocess.Popen(f"python generate_enums.py", shell=True)
+    res.wait()
+    res = subprocess.Popen(f"python generate_enums_cpp.py", shell=True)
+    res.wait()
+    res = subprocess.Popen(f"python generate_classes_pyi.py", shell=True)
+    res.wait()
+
+    res = subprocess.Popen(f"python cythonize_test.py", shell=True)
+    res.wait()
 
 
 def compile_python_ver_file(platform):
@@ -49,6 +70,8 @@ def get_compiler():
 
     raise Exception("No compiler found")
 
+
+generate_files()
 
 current_platform = platform_check.get_platform()
 
@@ -79,7 +102,7 @@ if args.compiler is None:
     args.compiler = get_compiler()
     print(f"Got compiler:{args.compiler}")
 
-#cythonize_files()
+# cythonize_files()
 
 # loading the needed python files for the target platform
 download_python.download_file(args.target_platform, allow_copy=True)
@@ -101,7 +124,7 @@ if os.path.exists(build_dir):
                            f"--buildtype=release"
                            f"{command_separator} meson compile -C build_meson/{args.target_platform}",
                            shell=True)
-else :
+else:
     res = subprocess.Popen(msvc_init +
                            f"meson {build_dir} --cross-file platforms/{args.target_platform}.cross "
                            f"--cross-file platforms/compilers/{args.compiler}_compiler.native "
@@ -109,7 +132,6 @@ else :
                            f"--buildtype=release"
                            f"{command_separator} meson compile -C build_meson/{args.target_platform}",
                            shell=True)
-
 
 res.wait()
 copy_tools.run(args.target_platform)
