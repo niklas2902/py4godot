@@ -747,13 +747,24 @@ def simplify_type(type):
     return list_types[-1]
 
 
+def generate_property_index(property, is_setter=False):
+    if not is_setter:
+        if "index" in property.keys():
+            return str(property["index"])
+    else:
+        if "index" in property.keys():
+            return str(property["index"]) + ", "
+
+    return ""
+
+
 def generate_property(property, classname):
     result = ""
     result += f"{INDENT}@property"
     result = generate_newline(result)
     result += f"{INDENT}def {pythonize_name(property['name'])}(self):"
     result = generate_newline(result)
-    result += f"{INDENT * 2}cdef _ret = self. {pythonize_name(property['getter'])}()"
+    result += f"{INDENT * 2}cdef _ret = self. {pythonize_name(property['getter'])}({generate_property_index(property)})"
     result = generate_newline(result)
 
     result += f"{INDENT * 2}return _ret"
@@ -764,7 +775,7 @@ def generate_property(property, classname):
         result = generate_newline(result)
         result += f"{INDENT}def {pythonize_name(property['name'])}(self, {import_type(unvariant(unstring(untypearray(simplify_type(property['type'])))), classname)} value):"
         result = generate_newline(result)
-        result += f"{INDENT * 2}self.{pythonize_name(property['setter'])}(value)"
+        result += f"{INDENT * 2}self.{pythonize_name(property['setter'])}({generate_property_index(property, True)}value)"
         result = generate_newline(result)
 
     return result
