@@ -11,6 +11,7 @@
 #include "py4godot/instance_data/CPPInstanceData.h"
 #include "py4godot/utils/instance_utils_api.h"
 #include "py4godot/cpputils/ScriptHolder.h"
+#include "py4godot/script_extension/script_extension_helpers_api.h"
 #include <cassert>
 #include "Python.h"
 #include <mutex>
@@ -47,6 +48,20 @@ void init_pluginscript_api(){
     }
 
     import_py4godot__utils__instance_utils();
+    if (PyErr_Occurred())
+    {
+        PyObject *ptype, *pvalue, *ptraceback;
+        PyErr_Fetch(&ptype, &pvalue, &ptraceback);
+
+        PyObject* str_exc_type = PyObject_Repr(pvalue); //Now a unicode
+        PyObject* pyStr = PyUnicode_AsEncodedString(str_exc_type, "utf-8","Error ~");
+        const char *strExcType = PyBytes_AS_STRING(pyStr);
+        PyErr_Print();
+        assert(false);
+        return;
+    }
+
+    import_py4godot__script_extension__script_extension_helpers();
     if (PyErr_Occurred())
     {
         PyObject *ptype, *pvalue, *ptraceback;
@@ -121,10 +136,7 @@ void PyScriptExtension::_get_instance_base_type(GDExtensionTypePtr res){}
 void PyScriptExtension::_instance_create( Object& for_object, GDExtensionTypePtr res){
     m.lock();
     auto gil_state = PyGILState_Ensure();
-    auto instance = PyObject_CallObject(transfer_object.class_, nullptr);
-
-    //print_error("before get_class")
-    //for_object.get_class()
+    auto instance = instantiate_class(transfer_object.class_);
     if(instance == Py_None || instance == nullptr){
         assert(false);
         return;
@@ -162,7 +174,7 @@ void PyScriptExtension::_instance_create( Object& for_object, GDExtensionTypePtr
 void PyScriptExtension::_placeholder_instance_create( Object& for_object, GDExtensionTypePtr res){
     m.lock();
     auto gil_state = PyGILState_Ensure();
-    auto instance = PyObject_CallObject(transfer_object.class_, nullptr);
+    auto instance = instantiate_class(transfer_object.class_);
     if(instance == Py_None || instance == nullptr){
         assert(false);
         return;
