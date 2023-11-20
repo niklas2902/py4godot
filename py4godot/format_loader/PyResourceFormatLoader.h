@@ -3,13 +3,17 @@
 #include "py4godot/cppclasses/ResourceFormatLoader/ResourceFormatLoader.h"
 #include "py4godot/script_language/PyLanguage.h"
 #include <unordered_set>
-
+#include <unordered_map>
+#include<string>
+#include <cstdint>
 void register_class_loader();
 namespace godot{
 
     class PyResourceFormatLoader:public ResourceFormatLoader{
       public:
           PyLanguage* lang;
+          std::unordered_map<std::string, std::int64_t> path_to_id;
+          static std::int64_t id_counter;
           static PyResourceFormatLoader* constructor(PyLanguage* language);
           void _init_values(); // self-defined
           void _get_recognized_extensions(GDExtensionTypePtr res);
@@ -24,4 +28,5 @@ namespace godot{
           void _get_classes_used( String& path, GDExtensionTypePtr res);
           void _load( String& path, String& original_path, bool use_sub_threads, int cache_mode, GDExtensionTypePtr res);
     };
+    int64_t PyResourceFormatLoader::id_counter=0;
 }

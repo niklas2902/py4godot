@@ -231,7 +231,7 @@ void PyScriptExtension::_is_tool(GDExtensionTypePtr res){
     *static_cast<bool*>(res) = false;
 }
 void PyScriptExtension::_is_valid(GDExtensionTypePtr res){
-    *static_cast<bool*>(res) = false;
+    *static_cast<bool*>(res) = true;
 }
 void PyScriptExtension::_get_language(GDExtensionTypePtr res){
     *((GDExtensionTypePtr*)res) = lang->godot_owner;

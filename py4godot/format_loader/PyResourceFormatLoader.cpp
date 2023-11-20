@@ -52,7 +52,16 @@ void PyResourceFormatLoader::_get_resource_type( String& path, GDExtensionTypePt
     functions::get_string_new_with_utf8_chars()(res, "PyScriptExtension");
 }
 void PyResourceFormatLoader::_get_resource_script_class( String& path, GDExtensionTypePtr res){}
-void PyResourceFormatLoader::_get_resource_uid( String& path, GDExtensionTypePtr res){}
+void PyResourceFormatLoader::_get_resource_uid( String& path, GDExtensionTypePtr res){
+    char* res_string;
+    gd_string_to_c_string(path, path.length(), &res_string);
+    std::string str_res_string = std::string{res_string};
+    if(path_to_id.find(str_res_string) == path_to_id.end()){
+        PyResourceFormatLoader::id_counter ++;
+        path_to_id[str_res_string] = PyResourceFormatLoader::id_counter;
+    }
+    *((std::int64_t*)res) = path_to_id[str_res_string];
+}
 void PyResourceFormatLoader::_get_dependencies( String& path, bool add_types, GDExtensionTypePtr res){}
 void PyResourceFormatLoader::_rename_dependencies( String& path, Dictionary& renames, GDExtensionTypePtr res){}
 void PyResourceFormatLoader::_exists( String& path, GDExtensionTypePtr res){}
@@ -61,7 +70,6 @@ void PyResourceFormatLoader::_load( String& path, String& original_path, bool us
     GDExtensionVariantFromTypeConstructorFunc constructor_func;
     FileAccess file;
     file = FileAccess::open(path, 1/*Read*/);
-
     if(! file.godot_owner){
         return;
     }
