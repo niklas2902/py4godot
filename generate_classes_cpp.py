@@ -1,7 +1,7 @@
 import json
 import os.path
 
-from generate_classes_hpp import get_ret_value, has_native_struct, generate_args
+from generate_classes_hpp import get_ret_value, has_native_struct, generate_args, ungodottype
 from generate_enums import enumize_name
 
 INDENT = "  "
@@ -205,7 +205,7 @@ def generate_return_value(method_, classname):
                 result = generate_newline(result)
                 result += f"{INDENT * 2}{ret_val.type}& {ret_val.name}" + f"= *(buffer_{classname}_{method_['name']});"
             elif ret_val.type in builtin_classes:
-                result += f"{INDENT * 2}{ret_val.type} {ret_val.name}" + "{};"
+                result += f"{INDENT * 2}{ungodottype(ret_val.type)} {ret_val.name}" + "{};"
             else:
                 result += f"{INDENT * 2}{ret_val.type} {ret_val.name} = {ret_val.type}();"
         elif ret_val.type == "Variant":
@@ -213,7 +213,7 @@ def generate_return_value(method_, classname):
         elif "typedarray" in ret_val.type:
             result += f"{INDENT * 2}Array _ret = Array::new0();"
         else:
-            result += f"{INDENT * 2}{unbitfield_type(unenumize_type(ret_val.type))} {ret_val.name};"
+            result += f"{INDENT * 2}{ungodottype(unbitfield_type(unenumize_type(ret_val.type)))} {ret_val.name};"
     else:
         result += f"{INDENT * 2}GDExtensionTypePtr _ret;"
     return result
@@ -438,7 +438,7 @@ def generate_method(class_, mMethod):
     if has_native_struct(mMethod):
         return res
     args = generate_args(mMethod, builtin_classes)
-    def_function = f"{INDENT}{unenumize_type(untypearray(get_ret_value(mMethod)))} {class_['name']}::{pythonize_name(mMethod['name'])}({args})" + "{"
+    def_function = f"{INDENT}{ungodottype(unenumize_type(untypearray(get_ret_value(mMethod))))} {class_['name']}::{pythonize_name(mMethod['name'])}({args})" + "{"
     res += def_function
     res = generate_newline(res)
     res += generate_default_args(mMethod)

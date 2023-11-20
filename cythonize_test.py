@@ -28,7 +28,7 @@ if __name__ == "__main__":
     # cythonize("py4godot/format_saver/*.pyx", language_level=3)
     # cythonize("py4godot/format_loader/*.pyx", language_level=3)
     cythonize("py4godot/script_instance/*.pyx", language_level=3, language="c++")
-    cythonize("py4godot/script_extension/*.pyx", language_level=3, language="c++")
+    cythonize("py4godot/script_extension/script_extension_helpers.pyx", language_level=3, language="c++")
     # cythonize("py4godot/instance_data/*.pyx", language_level=3)
     cythonize("py4godot/enums/enums4.pyx", language_level=3)
     cythonize("py4godot/utils/utils.pyx", language_level=3, language="c++")

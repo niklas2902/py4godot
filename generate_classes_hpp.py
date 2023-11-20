@@ -286,7 +286,7 @@ def generate_method(class_, mMethod):
     if get_ret_value(mMethod) in builtin_classes - {"float", "int", "bool", "Nil"}:
         res += f"{INDENT}{generate_method_modifiers(mMethod)} {get_ret_value(mMethod)}* buffer_{class_['name']}_{mMethod['name']};"
     args = generate_args(mMethod, builtin_classes)
-    def_function = f"{INDENT}{generate_method_modifiers(mMethod)} {unenumize_type(untypearray(get_ret_value(mMethod)))} {pythonize_name(mMethod['name'])}({args});"
+    def_function = f"{INDENT}{generate_method_modifiers(mMethod)} {ungodottype(unenumize_type(untypearray(get_ret_value(mMethod))))} {pythonize_name(mMethod['name'])}({args});"
     res = generate_newline(res)
     res += def_function
     res = generate_newline(res)
@@ -454,6 +454,12 @@ def unbitfield_type(arg_type):
     return arg_type
 
 
+def ungodottype(type_):
+    if type_ == "float":
+        return "double"
+    return type_
+
+
 def generate_args(method_with_args, builtin_classes):
     result = " "
     if (is_static(method_with_args)):
@@ -469,7 +475,7 @@ def generate_args(method_with_args, builtin_classes):
         elif untypearray(arg["type"]) in builtin_classes - {"int", "float", "bool", "Nil"} or arg["type"] == "Variant":
             result += f"{unenumize_type(untypearray(unbitfield_type(arg['type'])))}& {pythonize_name(arg['name'])}, "
         elif arg["type"] in {"int", "float", "bool"}:
-            result += f"{unenumize_type(untypearray(unbitfield_type(arg['type'])))} {pythonize_name(arg['name'])}, "
+            result += f"{ungodottype(unenumize_type(untypearray(unbitfield_type(arg['type']))))} {pythonize_name(arg['name'])}, "
 
         else:
             # enums are marked with enum:: . To be able to use this, we have to strip this
