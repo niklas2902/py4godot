@@ -3,6 +3,7 @@ import inspect, traceback
 from py4godot.pluginscript_api.hints.BaseHint cimport *
 from py4godot.godot_bindings.binding4_godot4 cimport *
 from py4godot.pluginscript_api.utils.utils cimport *
+from py4godot.utils.utils cimport *
 from cpython cimport Py_INCREF, Py_DECREF, PyObject
 
 from py4godot.pluginscript_api.utils.SignalDescription cimport *
@@ -66,6 +67,8 @@ cdef api TransferObject exec_class(str source_string, str class_name_):
 
     cdef GDExtensionPropertyInfo property_info
     for property in properties:
+        (<PropertyDescription>property).class_name = py_c_string_to_string_name(class_name.encode("utf-8"))
+        (<PropertyDescription>property).to_c()
         property_info = (<PropertyDescription>property).property_info
         transfer_object.properties.push_back(property_info)
 
@@ -111,7 +114,6 @@ def gdtool(cls):
         return cls
 
 def prop(name,type_, defaultval, hint = BaseHint(), hint_string = ""):
-    print_error("prop")
     default_values.append(defaultval)
     properties.append(PropertyDescription(name = name,
                 type_=type_,hint = hint,usage = 4096|6|32768,

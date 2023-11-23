@@ -9,7 +9,7 @@
 #include <cassert>
 
 GDExtensionPtrOperatorEvaluator operator_equal_string_name_loader;
-
+std::int64_t PyResourceFormatLoader::id_counter{1000};
 bool string_names_equal_loader(StringName left, StringName right){
     uint8_t ret;
     operator_equal_string_name_loader(&left.godot_owner, &right.godot_owner, &ret);

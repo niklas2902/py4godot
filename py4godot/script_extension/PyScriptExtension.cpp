@@ -201,9 +201,9 @@ void PyScriptExtension::_placeholder_instance_create( Object& for_object, GDExte
         set_default_val(instance, PyUnicode_FromStringAndSize(c_property_name, property_name.length()), default_value);
         index++;
     }
+
     //instance.godot_owner = for_object.godot_owner;
     gd_instance->script = this;
-    //assert(false);
     Py_INCREF(instance);
     instance_ptr = functions::get_script_instance_create()(&(gd_instance->info), gd_instance);
     *((GDExtensionTypePtr*)res) = instance_ptr;

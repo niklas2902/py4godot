@@ -4,7 +4,10 @@ from py4godot.classes.generated4_core cimport *
 
 
 cdef class PropertyDescription:
-    cdef StringName name
+    cdef str name
+    cdef StringName gd_name
+    cdef bytes bname
+    cdef char* cname
     cdef GDExtensionVariantType type_
     cdef int hint
     cdef String hint_string

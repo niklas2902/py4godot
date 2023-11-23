@@ -28,5 +28,4 @@ namespace godot{
           void _get_classes_used( String& path, GDExtensionTypePtr res);
           void _load( String& path, String& original_path, bool use_sub_threads, int cache_mode, GDExtensionTypePtr res);
     };
-    int64_t PyResourceFormatLoader::id_counter=0;
 }
