@@ -457,6 +457,8 @@ def unbitfield_type(arg_type):
 def ungodottype(type_):
     if type_ == "float":
         return "double"
+    if type_ == "int":
+        return "long long"
     return type_
 
 
@@ -544,7 +546,7 @@ def generate_operators_for_class(class_name):
                 op = operator_dict[class_name][operator]
                 if op.right_type_values:
                     for right_type in op.right_type_values:
-                        res += f"{INDENT}{op.return_type} operator {operator} ({right_type} other);"
+                        res += f"{INDENT}{op.return_type} operator {operator} ({ungodottype(right_type)} other);"
                         res = generate_newline(res)
     res = generate_newline(res)
     return res
@@ -588,6 +590,7 @@ def generate_classes(classes, filename, is_core=False):
         res += f"{INDENT} public:"
         res = generate_newline(res)
         res += generate_common_methods(class_)
+        res = generate_newline(res)
         res += generate_special_methods(class_)
         res = generate_newline(res)
         res += generate_construction(class_)
@@ -660,6 +663,13 @@ def generate_array_set_item(class_):
     return res
 
 
+def generate_special_methods_object():
+    res = ""
+    res += f"{INDENT * 2}String get_import_path();"
+    res = generate_newline(res)
+    return res
+
+
 def generate_special_methods_array(class_):
     res = ""
     res += generate_array_set_item(class_)
@@ -693,6 +703,9 @@ def generate_special_methods(class_):
 
     if class_["name"] in classes:
         res += generate_cast(class_)
+
+    if class_["name"] == "Object":
+        res += generate_special_methods_object()
 
     return res
 

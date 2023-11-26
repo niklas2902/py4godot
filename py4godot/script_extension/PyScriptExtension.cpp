@@ -192,6 +192,7 @@ void PyScriptExtension::_placeholder_instance_create( Object& for_object, GDExte
     gd_instance->properties = transfer_object.properties;
     //gd_instance.set_methods(methods)
     get_placeholder_instance_ptr(&(gd_instance->info));
+    gd_instance->is_placeholder = true;
 
     int index = 0;
     for (auto& default_value : transfer_object.default_values) {

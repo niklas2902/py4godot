@@ -822,6 +822,17 @@ def generate_property(class_, property):
     return result
 
 
+def generate_special_methods_object():
+    res = ""
+    res += f"{INDENT}String Object::get_import_path(){{"
+    res = generate_newline(res)
+    res += f'{INDENT * 2}return c_string_to_string("import_path");'
+    res = generate_newline(res)
+    res += f'{INDENT}}}'
+    res = generate_newline(res)
+    return res
+
+
 def pythonize_name(name):
     if name in ("from", "len", "in", "for", "with", "class", "pass", "raise", "global", "char", "default",
                 "get_interface", "operator", "enum", "new", "template", "bool"):
@@ -1015,7 +1026,7 @@ def generate_operators_for_class(class_name):
                 op = operator_dict[class_name][operator]
                 if op.right_type_values:
                     for right_type in op.right_type_values:
-                        res += f"{INDENT}{op.return_type} {class_name}::operator {operator}({right_type} other)" + "{"
+                        res += f"{INDENT}{op.return_type} {class_name}::operator {operator}({ungodottype(right_type)} other)" + "{"
                         res = generate_newline(res)
                         res += f"{INDENT * 2}{op.return_type} _ret = {init_return_type(op.return_type)};"
                         res = generate_newline(res)
@@ -1024,7 +1035,7 @@ def generate_operators_for_class(class_name):
                         res += f"{INDENT * 2}GDExtensionPtrOperatorEvaluator operator_evaluator;"
                         res = generate_newline(res)
                         if right_type in {"float", "int", "bool", "Nil"}:
-                            res += f"{INDENT * 2}{right_type} primitive_val_{right_type} = other;"
+                            res += f"{INDENT * 2}{ungodottype(right_type)} primitive_val_{right_type} = other;"
                         res = generate_newline(res)
                         res += f"{INDENT * 2}operator_evaluator = {INDENT * 2}functions::get_variant_get_ptr_operator_evaluator()({operator_to_variant_operator[operator]}, {generate_variant_type(op.class_)}, {generate_variant_type(right_type)});"
                         res = generate_newline(res)
@@ -1182,6 +1193,9 @@ def generate_special_methods(class_):
         res += generate_special_methods_array(class_)
     if class_["name"] in classes:
         res += generate_cast(class_)
+
+    if class_["name"] == "Object":
+        res += generate_special_methods_object()
 
     return res
 

@@ -40,8 +40,13 @@ GDExtensionBool c_instance_get(GDExtensionScriptInstanceDataPtr p_instance, GDEx
 
 
 void c_instance_call(GDExtensionScriptInstanceDataPtr p_self, GDExtensionConstStringNamePtr p_method, const GDExtensionConstVariantPtr *p_args, GDExtensionInt p_argument_count, GDExtensionVariantPtr r_return, GDExtensionCallError *r_error){
+    auto name = StringName::new_static(((void**)p_method)[0]);
+    if(((InstanceData*)p_self)->is_placeholder && name == c_string_to_string_name("_ready")){
+        return;
+    }
     mutex_script.lock();
     auto gil_state = PyGILState_Ensure();
+    auto* p_instance = (InstanceData*)p_self;
     instance_call(p_self, p_method, p_args, p_argument_count, r_return, r_error);
     PyGILState_Release(gil_state);
     mutex_script.unlock();

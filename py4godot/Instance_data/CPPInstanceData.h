@@ -9,4 +9,5 @@ struct InstanceData{
     std::vector<godot::Dictionary> methods;
     void* script;
     GDExtensionScriptInstanceInfo info;
+    bool is_placeholder;
 };

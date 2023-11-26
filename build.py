@@ -14,9 +14,11 @@ from meson_scripts import copy_tools, download_python, generate_init_files, \
 # generate_bindings.build()
 
 def cythonize_files():
+    return
     module = cythonize('py4godot_core_holder/*.pyx', language_level=3)
     module = cythonize('py4godot/core/*/*.pyx', language_level=3)
     module += cythonize("py4godot/classes/*.pyx", language_level=3)
+    module += cythonize("py4godot/classes/utils.pyx", language_level=3)
     module += cythonize("py4godot/utils/*.pyx", language_level=3)
     module += cythonize("py4godot/pluginscript_api/*.pyx", language_level=3)
     module += cythonize("py4godot/pluginscript_api/*/*.pyx", language_level=3)
@@ -50,10 +52,10 @@ def generate_files():
     res.wait()
     if res.returncode != 0:
         raise Exception("generation failed")
-    res = subprocess.Popen(f"python cythonize_test.py", shell=True)
-    res.wait()
-    if res.returncode != 0:
-        raise Exception("generation failed")
+    # res = subprocess.Popen(f"python cythonize_test.py", shell=True)
+    # res.wait()
+    # if res.returncode != 0:
+    #    raise Exception("generation failed")
 
 
 def compile_python_ver_file(platform):

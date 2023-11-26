@@ -6,7 +6,7 @@ cimport py4godot.classes.Window.Window as py4godot_window
 
 
 
-  def get_viewport(Node node):
+def get_viewport(Node node):
 
     cdef py4godot_viewport.Viewport _ret = py4godot_viewport.Viewport.__new__(py4godot_viewport.Viewport)
     _ret.Viewport_internal_class = node.Node_internal_class.get_viewport()
@@ -16,9 +16,7 @@ cimport py4godot.classes.Window.Window as py4godot_window
 
 
 
-  def get_window(Node node):
-
-
+def get_window(Node node):
 
     cdef py4godot_window.Window _ret = py4godot_window.Window.__new__(py4godot_window.Window)
     _ret.Window_internal_class = node.Node_internal_class.get_window()
@@ -27,9 +25,7 @@ cimport py4godot.classes.Window.Window as py4godot_window
     return _ret
 
 
-  def get_tree(Node node):
-
-
+def get_tree(Node node):
 
     cdef py4godot_scenetree.SceneTree _ret = py4godot_scenetree.SceneTree.__new__(py4godot_scenetree.SceneTree)
     _ret.SceneTree_internal_class = node.Node_internal_class.get_tree()

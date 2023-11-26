@@ -420,7 +420,8 @@ def generate_property(property):
 
 def pythonize_name(name):
     if name in (
-    "from", "len", "in", "for", "with", "class", "pass", "raise", "global", "char", "default", "new", "get_interface"):
+            "from", "len", "in", "for", "with", "class", "pass", "raise", "global", "char", "default", "new",
+            "get_interface"):
         return name + "_"
     return name
 
@@ -542,7 +543,7 @@ def generate_operators_for_class(class_name):
                 op = operator_dict[class_name][operator]
                 if op.right_type_values:
                     for right_type in op.right_type_values:
-                        res += f"{INDENT * 2}{op.return_type} operator{operator}({right_type} other);"
+                        res += f"{INDENT * 2}{op.return_type} operator{operator}({ungodottype(right_type)} other);"
                         res = generate_newline(res)
     res = generate_newline(res)
     return res
@@ -581,6 +582,9 @@ def generate_classes(classes, filename, is_core=False):
         res = generate_newline(res)
         res += generate_construction(class_)
         res = generate_newline(res)
+        if class_["name"] == "Object":
+            res += generate_special_metods_object()
+            res = generate_newline(res)
         if "methods" not in class_.keys():
             continue
         res += generate_properties(class_)
@@ -605,6 +609,12 @@ def generate_dictionary_set_item():
     res = ""
     res += f"{INDENT * 2}Variant operator [](Variant key);"
     res = generate_newline(res)
+    return res
+
+
+def generate_special_metods_object():
+    res = ""
+    res += f"{INDENT * 2}String get_import_path()"
     return res
 
 

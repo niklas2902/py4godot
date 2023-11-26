@@ -73,6 +73,14 @@ operator_to_variant_operator = {"+": "GDExtensionVariantOperator.GDEXTENSION_VAR
                                 }
 
 
+def ungodottype(type_):
+    if type_ == "float":
+        return "double"
+    if type_ == "int":
+        return "long long"
+    return type_
+
+
 def generate_import():
     result = ("from py4godot.core.variant4.Variant4 cimport *\n"
               "from libcpp cimport bool\n"
@@ -648,6 +656,20 @@ def generate_get_py_script_method():
     result = generate_newline(result)
     result += f"{INDENT * 2}return script"
     result = generate_newline(result)
+
+    result = generate_newline(result)
+    result += f"{INDENT}@property"
+    result = generate_newline(result)
+    result += f"{INDENT}def _import_path(self):"
+    result = generate_newline(result)
+    result += f"{INDENT * 2}cdef String _ret = String.__new__(String)"
+    result = generate_newline(result)
+    result += f"{INDENT * 2}_ret.String_internal_class = self.Object_internal_class.get_import_path()"
+    result = generate_newline(result)
+    result += f"{INDENT * 2}_ret.set_gdowner(_ret.String_internal_class.get_godot_owner())"
+    result = generate_newline(result)
+    result += f"{INDENT * 2}return gd_string_to_py_string(_ret)"
+    result = generate_newline(result)
     return result
 
 
@@ -961,8 +983,10 @@ def generate_constructor(classname):
     res = generate_newline(res)
     res += f"{INDENT * 2}cdef {classname} class_ = {classname}()"
     res = generate_newline(res)
-    # res += f"{INDENT * 2}class_.{class_['name']}_internal_class = CPP{class_['name']}.constructor()"
-    # res = generate_newline(res)
+    res += f"{INDENT * 2}class_.{class_['name']}_internal_class = CPP{class_['name']}.constructor()"
+    res = generate_newline(res)
+    res += f"{INDENT * 2}class_.set_gdowner(class_.{class_['name']}_internal_class.get_godot_owner())"
+    res = generate_newline(res)
 
     res += f"{INDENT * 2}return class_"
     res = generate_newline(res)
@@ -1036,7 +1060,7 @@ def generate_operators_for_class(class_name):
                 for target in op.right_type_values:
 
                     if target in {"float", "int", "bool", "Nil"}:
-                        res += f"{INDENT * 2}cdef {target} primitive_val_{target} = <{target}>other"
+                        res += f"{INDENT * 2}cdef {ungodottype(target)} primitive_val_{target} = <{ungodottype(target)}>other"
                         res = generate_newline(res)
                     elif target in builtin_classes.union(classes):
                         res += f"{INDENT * 2}cdef {target} complex_val_{target}"
@@ -1323,13 +1347,14 @@ def generate_cast(class_):
     res = ""
     res += f"{INDENT}@staticmethod"
     res = generate_newline(res)
-    res += f"{INDENT}def cast(self, Object other):"
+    res += f"{INDENT}def cast(Object other):"
     res = generate_newline(res)
     res += f"{INDENT * 2}cdef {class_['name']} cls = {class_['name']}()"
     res = generate_newline(res)
     res += f"{INDENT * 2}cls.{class_['name']}_internal_class = CPP{class_['name']}.cast(&other.Object_internal_class)"
     res = generate_newline(res)
-    res += f"{INDENT * 2}other.set_gdowner(other.Object_internal_class.get_godot_owner())"
+    res += (f"{INDENT * 2}cls"
+            f".set_gdowner(other.Object_internal_class.get_godot_owner())")
     res = generate_newline(res)
     res += f"{INDENT * 2}return cls"
     return res
