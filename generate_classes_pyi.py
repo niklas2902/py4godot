@@ -132,13 +132,9 @@ def generate_constructors(class_):
     for constructor in class_["constructors"]:
         res += f"{INDENT}@staticmethod"
         res = generate_newline(res)
-        if constructor["index"] == 0 and class_["name"] == "String":
-            # TODO: Remove this behavior. Same problem as VariantTypeWrapper. I don't really understand why you need *args against assertions
-            res += f"{INDENT}def new{constructor['index']}(*args)->{class_['name']}:pass"
-        else:
-            res += f"{INDENT}def new{constructor['index']}({generate_constructor_args(constructor)}) -> {class_['name']}:pass"
+        res += f"{INDENT}def new{constructor['index']}({generate_constructor_args(constructor)}) -> {class_['name']}:pass"
         res = generate_newline(res)
-        return res
+    return res
 
 
 def generate_class_imports(classes):

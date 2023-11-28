@@ -1,3 +1,4 @@
+import inspect, traceback
 from cython.operator cimport dereference
 from cpython cimport Py_INCREF, Py_DECREF, PyObject
 from py4godot.utils.utils cimport *
@@ -29,6 +30,7 @@ cdef api GDExtensionBool instance_set(GDExtensionScriptInstanceDataPtr p_instanc
 
     except Exception as e:
         error(f"An Exception happened while setting attribute:{e}" )
+        print_error(f"traceback: {traceback.format_exc()}")
 
     return 1
 
@@ -54,7 +56,8 @@ cdef api GDExtensionBool instance_get(GDExtensionScriptInstanceDataPtr p_instanc
         py_typename = str(type(get_val).__name__)
         get_var.init_from_py_object(<PyObject*>get_val, py_typename.encode("utf-8"))
     except Exception as e:
-        print_error("exception:",e)
+        print_error("Exception while getting attribute:",e)
+        print_error(f"traceback: {traceback.format_exc()}")
     return 1
 """cdef api const GDExtensionMethodInfo * instance_get_method_list(GDExtensionScriptInstanceDataPtr p_instance, uint32_t *r_count) with gil:
     global method_infos
@@ -114,7 +117,8 @@ cdef api bint instance_call(GDExtensionScriptInstanceDataPtr p_self, GDExtension
         method = getattr(instance_object,py_method_name_str)
         result = method(*args)
     except Exception as e:
-        print_error(f"An Exception happened2:{e}|owner:{<object>instance.owner}" )
+        print_error(f"An Exception happened while calling a method:{e}" )
+        print_error(f"traceback: {traceback.format_exc()}")
 
     var.native_ptr = r_return
     py_typename = str(type(result).__name__)
