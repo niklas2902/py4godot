@@ -1335,11 +1335,44 @@ def generate_init(class_):
     return res
 
 
+def generate_iter_array(class_):
+    res = ""
+    res += f"{INDENT}def __iter__(self):"
+    res = generate_newline(res)
+    res += f"{INDENT * 2}self._index = 0"
+    res = generate_newline(res)
+    res += f"{INDENT * 2}return self"
+    return res
+
+
+def generate_next_array(class_):
+    res = ""
+    res += f"{INDENT}def __next__(self):"
+    res = generate_newline(res)
+    res += f"{INDENT * 2}if self._index >= self.size():"
+    res = generate_newline(res)
+    res += f"{INDENT * 3}raise StopIteration()"
+    res = generate_newline(res)
+    res += f"{INDENT * 2}val = self[self._index]"
+    res = generate_newline(res)
+    res += f"{INDENT * 2}self._index += 1"
+    res = generate_newline(res)
+    res += f"{INDENT * 2}return val"
+    res = generate_newline(res)
+
+    return res
+
+
 def generate_special_methods_array(class_):
     res = ""
     res += generate_array_set_item(class_)
     res = generate_newline(res)
     res += generate_array_get_item(class_)
+    res = generate_newline(res)
+    res += generate_iter_array(class_)
+    res = generate_newline(res)
+    res += generate_next_array(class_)
+    res = generate_newline(res)
     return res
 
 

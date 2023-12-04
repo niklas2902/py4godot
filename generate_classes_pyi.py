@@ -97,6 +97,15 @@ def generate_constructor_args(constructor):
     return result
 
 
+def generate_cast(classname):
+    res = ""
+    res += f"{INDENT}@staticmethod"
+    res = generate_newline(res)
+    res += f"{INDENT}def cast(other:Object)->{classname}:pass"
+    res = generate_newline(res)
+    return res
+
+
 def convert_camel_case_to_underscore(string):
     res = ""
     was_upper = True
@@ -644,11 +653,66 @@ def generate_array_get_item(class_):
     return res
 
 
+def generate_iter_array(class_):
+    res = ""
+    res += f"{INDENT}def __iter__(self)->{class_['name']}:pass"
+    return res
+
+
+def generate_next_from_type_array(classname, type_):
+    res = ""
+    res += f"{INDENT}def __next__(self)->{type_}:pass"
+    res = generate_newline(res)
+
+    return res
+
+
+def generate_next_for_arrays(class_):
+    res = ""
+    if class_["name"] == "PackedInt32Array":
+        res += generate_next_from_type_array(class_["name"], "int")
+    elif class_["name"] == "PackedInt64Array":
+        res += generate_next_from_type_array(class_["name"], "int")
+    elif class_["name"] == "PackedFloat32Array":
+        res += generate_next_from_type_array(class_["name"], "float")
+    elif class_["name"] == "PackedFloat64Array":
+        res += generate_next_from_type_array(class_["name"], "float")
+    elif class_["name"] == "PackedBoolArray":
+        res += generate_next_from_type_array(class_["name"], "bool")
+
+    elif class_["name"] == "PackedColorArray":
+        res += generate_next_from_type_array(class_["name"], "Color")
+    elif class_["name"] == "PackedVector3Array":
+        res += generate_next_from_type_array(class_["name"], "Vector3")
+    elif class_["name"] == "PackedVector2Array":
+        res += generate_next_from_type_array(class_["name"], "Vector2")
+    elif class_["name"] == "PackedStringArray":
+        res += generate_next_from_type_array(class_["name"], "String")
+
+    elif class_["name"] == "Array":
+        res += generate_next_array(class_["name"])
+
+    res = generate_newline(res)
+    return res
+
+
+def generate_next_array(class_):
+    res = ""
+    res += f"{INDENT}def __next__(self)->object:pass"
+    res = generate_newline(res)
+
+    return res
+
+
 def generate_special_methods_array(class_):
     res = ""
     res += generate_array_set_item(class_)
     res = generate_newline(res)
     res += generate_array_get_item(class_)
+    res = generate_newline(res)
+    res += generate_iter_array(class_)
+    res = generate_newline(res)
+    res += generate_next_for_arrays(class_)
     return res
 
 
@@ -669,6 +733,8 @@ def generate_special_methods(class_):
     if class_["name"] == "Object":
         res += generate_get_pyscript()
 
+    if class_["name"] in classes - builtin_classes:
+        res += generate_cast(class_["name"])
     return res
 
 

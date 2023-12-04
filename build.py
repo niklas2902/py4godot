@@ -29,10 +29,10 @@ def cythonize_files():
 
 
 def generate_files():
-    res = subprocess.Popen(f"python generate_classes.py", shell=True)
-    res.wait()
-    if res.returncode != 0:
-        raise Exception("generation failed")
+    # res = subprocess.Popen(f"python generate_classes.py", shell=True)
+    # res.wait()
+    # if res.returncode != 0:
+    #    raise Exception("generation failed")
     # res = subprocess.Popen(f"python generate_classes_cpp.py", shell=True)
     # res.wait()
     # if res.returncode != 0:
