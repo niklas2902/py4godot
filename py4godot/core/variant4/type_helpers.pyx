@@ -23,6 +23,13 @@ cdef api object type_helper_create_string(bridge.String bridge_string):
     return val
 
 
+cdef api object type_helper_create_object(bridge.Object bridge_object):
+    cdef Object val = Object()
+    val.Object_internal_class = bridge_object
+    Py_INCREF(val)
+    return val
+
+
 cdef api object type_helper_create_py_string(bridge.String bridge_string):
     cdef String gen_string = String()
     gen_string.String_internal_class = bridge_string

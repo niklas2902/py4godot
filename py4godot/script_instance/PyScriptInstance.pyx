@@ -119,6 +119,7 @@ cdef api bint instance_call(GDExtensionScriptInstanceDataPtr p_self, GDExtension
     except Exception as e:
         print_error(f"An Exception happened while calling a method:{e}" )
         print_error(f"traceback: {traceback.format_exc()}")
+        print_error(f"method name:{py_method_name_str}")
 
     var.native_ptr = r_return
     py_typename = str(type(result).__name__)

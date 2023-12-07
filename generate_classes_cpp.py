@@ -947,8 +947,6 @@ def generate_constructor(classname):
 
     res += f"{INDENT * 2}class_.set_godot_owner(functions::get_classdb_construct_object()(&class_name.godot_owner));"
     res = generate_newline(res)
-    res += f"{INDENT * 2}functions::get_object_set_instance()(class_.get_godot_owner(),&class_name.godot_owner , &class_);"
-    res = generate_newline(res)
     res += f"{INDENT * 2}return class_;"
     res = generate_newline(res)
     res += INDENT + "}"

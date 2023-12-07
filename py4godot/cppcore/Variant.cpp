@@ -1,7 +1,12 @@
 #include "py4godot/cppcore/Variant.h"
 #include "main.h"
 #include "py4godot/cppclasses/generated4_core.h"
+#include "py4godot/cppclasses/Object/Object.h"
 #include "type_helpers_api.h"
+#include "cast_helpers_api.h"
+#include "py4godot/cppcore/cast_type.h"
+#include "py4godot/cpputils/utils.h"
+
 #include "functions.h"
 
 using namespace godot;
@@ -28,6 +33,7 @@ void Variant::init_variant(){
         assert(false);
         return;
     }
+    init_casting();
 }
 
 Variant::Variant(){
@@ -403,6 +409,19 @@ PyObject* Variant::create_stringname(){
     return val;
 }
 
+PyObject* Variant::create_object(){
+    GDExtensionVariantType type = functions::get_variant_get_type()(native_ptr);
+    auto constructor = functions::get_get_variant_to_type_constructor()(type);
+    Object string = Object::constructor();
+    constructor(&string.godot_owner, native_ptr);
+    auto val = type_helper_create_object(string);
+    char* class_name;
+    auto class_name_string = string.get_class();
+    gd_string_to_c_string(&class_name_string.godot_owner, class_name_string.length(),&class_name);
+    auto casted = cast_to_type(class_name,val);
+    return casted;
+}
+
 
 PyObject* Variant::create_vector3_native_ptr(){
     GDExtensionVariantType type = functions::get_variant_get_type()(&native_ptr);
@@ -707,6 +726,7 @@ PyObject* Variant::create_stringname_native_ptr(){
     return val;
 }
 
+
 #pragma endregion
 
 PyObject* Variant::get_converted_value(bool should_return_pystring){
@@ -785,6 +805,9 @@ PyObject* Variant::get_converted_value(bool should_return_pystring){
         return create_packedstringarray();
     case GDExtensionVariantType::GDEXTENSION_VARIANT_TYPE_STRING_NAME:
         return create_stringname();
+
+    case GDExtensionVariantType::GDEXTENSION_VARIANT_TYPE_OBJECT:
+        return create_object();
     }
     return nullptr;
 }

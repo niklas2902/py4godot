@@ -19,6 +19,7 @@ if __name__ == "__main__":
     cythonize("py4godot/test_bridge.pyx", language_level=3, language="c++")
     cythonize("py4godot/core/variant4/Variant4.pyx", language_level=3, language="c++")
     cythonize("py4godot/core/variant4/type_helpers.pyx", language_level=3, language="c++")
+    cythonize("py4godot/core/variant4/cast_helpers.pyx", language_level=3, language="c++")
     cythonize("py4godot/classes/generated4_core.pyx", language_level=3, language="c++")
     cythonize("py4godot/classes/constants.pyx", language_level=3, language="c++")
     # cythonize("py4godot/classes/Node3D/Node3D.pyx", language_level=3, language="c++")

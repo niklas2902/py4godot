@@ -1,4 +1,4 @@
-build
+example
 build_meson
 .idea
 __pycache__

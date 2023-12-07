@@ -107,7 +107,7 @@ should_run_tests = args.run_tests.lower() == "true"
 # Determining if godot binary should be downloaded
 should_download_godot = args.download_godot.lower() == "true"
 
-build_dir = f"build_meson/{args.target_platform}"
+build_dir = f"build/{args.target_platform}"
 
 start = time.time()
 if args.compiler is None:
@@ -135,7 +135,7 @@ if os.path.exists(build_dir):
                            f"--cross-file platforms/compilers/{args.compiler}_compiler.native "
                            f"--cross-file platforms/binary_dirs/python_ver_compile.cross "
                            f"--buildtype=release"
-                           f"{command_separator} meson compile -C build_meson/{args.target_platform}",
+                           f"{command_separator} meson compile -C build/{args.target_platform}",
                            shell=True)
 else:
     res = subprocess.Popen(msvc_init +
@@ -143,7 +143,7 @@ else:
                            f"--cross-file platforms/compilers/{args.compiler}_compiler.native "
                            f"--cross-file platforms/binary_dirs/python_ver_compile.cross "
                            f"--buildtype=release"
-                           f"{command_separator} meson compile -C build_meson/{args.target_platform}",
+                           f"{command_separator} meson compile -C build/{args.target_platform}",
                            shell=True)
 
 res.wait()
@@ -168,7 +168,7 @@ if should_run_tests:
     start = time.time()
     copy_tools.copy_tests(args.target_platform)
     res = subprocess.Popen(
-        f"ninja -C build_meson/{args.target_platform} test", shell=True)
+        f"ninja -C build/{args.target_platform} test", shell=True)
     res.wait()
     streamdata = res.communicate()[0]
     rc = res.returncode
