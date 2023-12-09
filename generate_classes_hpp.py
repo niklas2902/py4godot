@@ -462,11 +462,16 @@ def ungodottype(type_):
     return type_
 
 
-def generate_args(method_with_args, builtin_classes):
+def generate_args(method_with_args, builtin_classes, is_cpp=False):
     result = " "
     if (is_static(method_with_args)):
         result = ""
     if "arguments" not in method_with_args:
+        if method_with_args["is_vararg"]:
+            if not is_cpp:
+                return "std::vector<Variant> varargs = {}"
+            else:
+                return "std::vector<Variant> varargs"
         return result[:-2]
 
     for arg in method_with_args["arguments"]:
@@ -484,6 +489,11 @@ def generate_args(method_with_args, builtin_classes):
             arg_type = arg["type"].replace("enum::", "")
             result += f"int {pythonize_name(arg['name'])} , "  # TODO: Look over this, enable enums again
     result = result[:-2]
+
+    if method_with_args["is_vararg"]:
+        result += ", std::vector<Variant> varargs "
+        if not is_cpp:
+            result += "= {}"
     return result
 
 

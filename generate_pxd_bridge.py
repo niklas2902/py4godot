@@ -85,6 +85,7 @@ def generate_import():
     result = \
         """
 from py4godot.core.variant4.Variant4 cimport *
+from libcpp.vector cimport vector
 cdef cppclass Error:
     pass
 """
@@ -437,6 +438,8 @@ def generate_args(method_with_args):
     if (is_static(method_with_args)):
         result = ""
     if "arguments" not in method_with_args:
+        if method_with_args["is_vararg"]:
+            return "vector[Variant] varargs"
         return result[:-2]
 
     for arg in method_with_args["arguments"]:
@@ -453,6 +456,8 @@ def generate_args(method_with_args):
             # enums are marked with enum:: . To be able to use this, we have to strip this
             result += f"{untypearray(unbitfield_type(unenumize_type(arg['type'])))} {pythonize_name(arg['name'])} , "
     result = result[:-2]
+    if method_with_args["is_vararg"]:
+        result += ", vector[Variant] varargs"
     return result
 
 

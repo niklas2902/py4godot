@@ -433,16 +433,53 @@ def generate_default_args(mMethod):
     return res
 
 
+def generate_varargs_variants(mMethod):
+    res = ""
+    if "arguments" not in mMethod:
+        return ""
+    if not mMethod["is_vararg"]:
+        return ""
+
+    for arg in mMethod["arguments"]:
+        if arg["type"] in builtin_classes:
+            res += f"{INDENT * 2}Variant variant_{pythonize_name(arg['name'])} = Variant({pythonize_name(arg['name'])});"
+        else:
+            res += f"{INDENT * 2}Variant variant_{pythonize_name(arg['name'])} = Variant(*{pythonize_name(arg['name'])});"
+        res = generate_newline(res)
+    return res
+
+
+def generate_variant_vector(mMethod):
+    res = ""
+    if mMethod["is_vararg"]:
+        res += f"{INDENT * 2}std::vector<void*> argument_array{{}};"
+        res = generate_newline(res)
+        if "arguments" in mMethod.keys():
+            for arg in mMethod["arguments"]:
+                res += f"{INDENT * 2}argument_array.push_back(&variant_{pythonize_name(arg['name'])}.native_ptr);"
+                res = generate_newline(res)
+        res += f"{INDENT * 2}for(auto& _variant: varargs){{"
+        res = generate_newline(res)
+        res += f"{INDENT * 3}argument_array.push_back(&_variant.native_ptr);"
+        res = generate_newline(res)
+        res += f"{INDENT * 2}}}"
+        res = generate_newline(res)
+
+    return res
+
+
 def generate_method(class_, mMethod):
     res = ""
     if has_native_struct(mMethod):
         return res
-    args = generate_args(mMethod, builtin_classes)
+    args = generate_args(mMethod, builtin_classes, True)
     def_function = f"{INDENT}{ungodottype(unenumize_type(untypearray(get_ret_value(mMethod))))} {class_['name']}::{pythonize_name(mMethod['name'])}({args})" + "{"
     res += def_function
     res = generate_newline(res)
     res += generate_default_args(mMethod)
     res = generate_newline(res)
+    res += generate_varargs_variants(mMethod)
+    res += generate_variant_vector(mMethod)
     if ("hash" in mMethod.keys()):
         res += generate_method_body_standard(class_, mMethod)
     else:
@@ -564,18 +601,38 @@ def generate_method_body_standard(class_, method):
         result += f"{INDENT * 2}method_to_call({get_godot_owner_core(method)}, {get_first_args_native(method)}, {address_ret(method)}, {get_args_count(method)});"
         result = generate_newline(result)
     else:
-        if ("return_value" in method.keys() or "return_type" in method.keys()):
-            result += f"{INDENT * 2}functions::get_object_method_bind_ptrcall()(method_bind," \
-                      f" {get_godot_owner(method)}, _args, {address_ret(method)});"
-        else:
-            result += f"{INDENT * 2}functions::get_object_method_bind_ptrcall()(method_bind," \
-                      f" {get_godot_owner(method)}, _args, {address_ret(method)});"
+        result += generate_method_call_object(method)
 
     if ("return_value" in method.keys() or "return_type" in method.keys()):
         result = generate_newline(result)
         result += generate_callback(class_, method)
         result = generate_newline(result)
         result += generate_return_statement(method)
+    return result
+
+
+def get_argument_count(method):
+    if "arguments" in method.keys():
+        return f"{len(method['arguments'])} + varargs.size()"
+    return "varargs.size()"
+
+
+def generate_method_call_object(method):
+    result = ""
+    if not method["is_vararg"]:
+        if ("return_value" in method.keys() or "return_type" in method.keys()):
+            result += f"{INDENT * 2}functions::get_object_method_bind_ptrcall()(method_bind," \
+                      f" {get_godot_owner(method)}, _args, {address_ret(method)});"
+        else:
+            result += f"{INDENT * 2}functions::get_object_method_bind_ptrcall()(method_bind," \
+                      f" {get_godot_owner(method)}, _args, {address_ret(method)});"
+    else:
+        # GDExtensionMethodBindPtr p_method_bind, GDExtensionObjectPtr p_instance, const GDExtensionConstVariantPtr *p_args, GDExtensionInt p_arg_count, GDExtensionUninitializedVariantPtr r_ret, GDExtensionCallError *r_error
+        result += f"{INDENT * 2}GDExtensionCallError call_error;"
+        result = generate_newline(result)
+        result += f"{INDENT * 2}functions::get_object_method_bind_call()(method_bind," \
+                  f" {get_godot_owner(method)}, &argument_array[0],{get_argument_count(method)}, " \
+                  f"{address_ret(method)}, &call_error);"
     return result
 
 

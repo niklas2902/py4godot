@@ -81,6 +81,11 @@ Variant::Variant(Dictionary& val){
     constructor(&native_ptr, &val.godot_owner);
 }
 
+Variant::Variant(Object& val){
+    auto constructor = functions::get_get_variant_from_type_constructor()(GDExtensionVariantType::GDEXTENSION_VARIANT_TYPE_OBJECT);
+    constructor(&native_ptr, &val.godot_owner);
+}
+
 Variant::Variant(int val){
     auto constructor = functions::get_get_variant_from_type_constructor()(GDExtensionVariantType::GDEXTENSION_VARIANT_TYPE_INT);
     constructor(&native_ptr, &val);
@@ -806,6 +811,9 @@ PyObject* Variant::get_converted_value(bool should_return_pystring){
     case GDExtensionVariantType::GDEXTENSION_VARIANT_TYPE_STRING_NAME:
         return create_stringname();
 
+    case GDExtensionVariantType::GDEXTENSION_VARIANT_TYPE_NIL:
+        return Py_None;
+
     case GDExtensionVariantType::GDEXTENSION_VARIANT_TYPE_OBJECT:
         return create_object();
     }
@@ -888,6 +896,8 @@ PyObject* Variant::get_converted_value_native_ptr(bool should_return_pystring){
         return create_packedstringarray_native_ptr();
     case GDExtensionVariantType::GDEXTENSION_VARIANT_TYPE_STRING_NAME:
         return create_stringname_native_ptr();
+    case GDExtensionVariantType::GDEXTENSION_VARIANT_TYPE_NIL:
+        return Py_None;
     }
     return nullptr;
 }

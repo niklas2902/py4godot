@@ -84,6 +84,7 @@ def ungodottype(type_):
 def generate_import():
     result = ("from py4godot.core.variant4.Variant4 cimport *\n"
               "from libcpp cimport bool\n"
+              "from libcpp.vector cimport vector\n"
               "from py4godot.enums.enums4 cimport *\n"
               "from py4godot.utils.utils cimport *\n")
     return result
@@ -541,6 +542,18 @@ def convert_to_py_if_variant(method_):
     return result
 
 
+def generate_varargs_vector(method):
+    result = ""
+    if method["is_vararg"]:
+        result += f"{INDENT * 2}cdef vector[Variant] args_vector = vector[Variant]()"
+        result = generate_newline(result)
+        result += f"{INDENT * 2}for arg in varargs:"
+        result = generate_newline(result)
+        result += f"{INDENT * 3}args_vector.push_back({convert_to_variant('arg')}.variant)"
+        result = generate_newline(result)
+    return result
+
+
 def generate_method_body_standard(class_, method):
     number_arguments = 0
     result = ""
@@ -550,6 +563,7 @@ def generate_method_body_standard(class_, method):
     result = generate_newline(result)
     result += generate_operators(class_)
     result = generate_newline(result)
+    result += generate_varargs_vector(method)
     if "return_value" in method.keys() or "return_type" in method.keys():
         result += generate_return_value(class_["name"], method)
         if not is_static(method):
@@ -574,6 +588,8 @@ def generate_method_body_standard(class_, method):
 def generate_method_args(method):
     res = ""
     if "arguments" not in method.keys():
+        if method["is_vararg"]:
+            return "args_vector"
         return res
     for arg in method["arguments"]:
         if untypearray(arg["type"]) in classes - IGNORED_CLASSES - builtin_classes:
@@ -587,6 +603,8 @@ def generate_method_args(method):
             res += f"{convert_to_variant(pythonize_name(arg['name']))}.variant, "
         else:
             res += f"{pythonize_name(arg['name'])}, "
+    if method["is_vararg"]:
+        res += "args_vector, "
     if len(res) > 2:
         return res[:-2]
     return res
@@ -904,6 +922,8 @@ def generate_args(class_, method_with_args):
     if (is_static(method_with_args)):
         result = ""
     if "arguments" not in method_with_args:
+        if method_with_args["is_vararg"]:
+            result += "*varargs, "
         return result[:-2]
 
     for arg in method_with_args["arguments"]:
@@ -915,6 +935,8 @@ def generate_args(class_, method_with_args):
             arg_type = arg["type"].replace("enum::", "")
             type_ = unstring(unvariant(untypearray(unenumize_type(arg_type))))
             result += f"{import_type(type_, class_['name'])} {pythonize_name(arg['name'])} {generate_default_arg(class_, arg, type_)}, "
+    if method_with_args["is_vararg"]:
+        result += "*varargs, "
     result = result[:-2]
     return result
 
