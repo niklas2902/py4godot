@@ -685,9 +685,21 @@ def collect_members(obj):
     print(core_classes)
 
 
+def generate_destructor(classname):
+    res = ""
+    res += f"{INDENT}{classname}::~{classname}(){{"
+    res = generate_newline(res)
+    res += f"{INDENT * 2}//functions::get_object_destroy()(&godot_owner);"
+    res = generate_newline(res)
+    res += f"{INDENT}}}"
+    return res
+
+
 def generate_common_methods(class_):
     result = ""
     if not is_singleton(class_["name"]):
+        result += generate_destructor(class_["name"])
+        result = generate_newline(result)
         result += generate_constructor(class_["name"])
         result = generate_newline(result)
     result += generate_new_static(class_)

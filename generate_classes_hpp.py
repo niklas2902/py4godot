@@ -342,6 +342,8 @@ def generate_callback():
 def generate_common_methods(class_):
     result = ""
     if not is_singleton(class_["name"]):
+        result += generate_destructor(class_["name"])
+        result = generate_newline(result)
         result += generate_constructor(class_["name"])
         result = generate_newline(result)
     result += generate_constructors(class_)
@@ -524,6 +526,13 @@ def get_class_from_enum(type_):
 def generate_constructor(classname):
     res = ""
     res += f"{INDENT}static {classname} constructor();"
+    res = generate_newline(res)
+    return res
+
+
+def generate_destructor(classname):
+    res = ""
+    res += f"{INDENT}~{classname}();"
     res = generate_newline(res)
     return res
 
