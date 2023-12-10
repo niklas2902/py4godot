@@ -49,6 +49,7 @@ base_import_string += f"from cpython.mem cimport PyMem_Malloc, PyMem_Realloc, Py
 base_import_string += f"from py4godot_core_holder.core_holder cimport get_core, get_nativescript\n"
 base_import_string += f"from py4godot.godot_bindings.binding_external cimport *\n"
 base_import_string += f"from py4godot.godot_bindings.types cimport *\n"
+base_import_string += f"from py4godot.utils.print_tools import print\n"
 base_import_string += f"from libcpp cimport bool\n\n\n"\
                       f"cdef set_core(godot_gdnative_core_api_struct* core):\n" \
                       f"    global api_core\n" \
@@ -345,7 +346,6 @@ def generate_method_bindings(obj):
         obj['name']}', '{method['name']}')\n"""
 
     return result
-
 
 def generate_classes(obj):
     """function to generate the godot class for the given object"""

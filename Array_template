@@ -1,0 +1,996 @@
+
+cdef class {name}Array(VariantTypeWrapper4):
+  @staticmethod
+  cdef {name}Array new_static(GDExtensionTypePtr owner):
+    cdef {name}Array obj = {name}Array()
+    obj.godot_owner = owner
+    return obj
+  @staticmethod
+  def new0():
+    cdef {name}Array _class = {name}Array()
+    _class.set_variant_type(GDExtensionVariantType.GDEXTENSION_VARIANT_TYPE_ARRAY)
+    cdef GDExtensionPtrConstructor constructor = _interface.variant_get_ptr_constructor(_class.variant_type, 0)
+    cdef GDExtensionTypePtr _args[1]
+
+    constructor(_class.godot_owner,_args)
+    return _class
+
+  @staticmethod
+  def new1({name}Array from_):
+    cdef {name}Array _class = {name}Array()
+    _class.set_variant_type(GDExtensionVariantType.GDEXTENSION_VARIANT_TYPE_ARRAY)
+    cdef GDExtensionPtrConstructor constructor = _interface.variant_get_ptr_constructor(_class.variant_type, 1)
+    cdef GDExtensionTypePtr _args[1]
+    _args[0] = from_.godot_owner
+
+
+    constructor(_class.godot_owner,_args)
+    return _class
+
+  def size(self):
+    cdef GDExtensionVariantPtr _args[1]
+    cdef int _ret
+
+    cdef String _class_name_string = String.new0()
+    _interface.string_new_with_utf8_chars(_class_name_string.godot_owner, "{name}Array")
+    cdef StringName _class_name = StringName.new2(_class_name_string)
+
+    cdef String _method_name_string = String.new0()
+    _interface.string_new_with_utf8_chars(_method_name_string.godot_owner, "size")
+    cdef StringName _method_name = StringName.new2(_method_name_string)
+
+
+    cdef GDExtensionPtrBuiltInMethod method_to_call = gdnative_interface.variant_get_ptr_builtin_method(GDExtensionVariantType.GDEXTENSION_VARIANT_TYPE_ARRAY, _method_name.godot_owner, 3173160232)
+
+
+    cdef GDExtensionCallError _error
+    method_to_call(self.godot_owner, NULL, &_ret, 0)
+    return _ret
+
+  def is_empty(self):
+    cdef GDExtensionVariantPtr _args[1]
+    cdef bool _ret
+
+    cdef String _class_name_string = String.new0()
+    _interface.string_new_with_utf8_chars(_class_name_string.godot_owner, "{name}Array")
+    cdef StringName _class_name = StringName.new2(_class_name_string)
+
+    cdef String _method_name_string = String.new0()
+    _interface.string_new_with_utf8_chars(_method_name_string.godot_owner, "is_empty")
+    cdef StringName _method_name = StringName.new2(_method_name_string)
+
+
+    cdef GDExtensionPtrBuiltInMethod method_to_call = gdnative_interface.variant_get_ptr_builtin_method(GDExtensionVariantType.GDEXTENSION_VARIANT_TYPE_ARRAY, _method_name.godot_owner, 3918633141)
+
+
+    cdef GDExtensionCallError _error
+    method_to_call(self.godot_owner, NULL, &_ret, 0)
+    return _ret
+
+  def clear(self):
+    cdef GDExtensionVariantPtr _args[1]
+    cdef GDExtensionTypePtr _ret
+
+    cdef String _class_name_string = String.new0()
+    _interface.string_new_with_utf8_chars(_class_name_string.godot_owner, "{name}Array")
+    cdef StringName _class_name = StringName.new2(_class_name_string)
+
+    cdef String _method_name_string = String.new0()
+    _interface.string_new_with_utf8_chars(_method_name_string.godot_owner, "clear")
+    cdef StringName _method_name = StringName.new2(_method_name_string)
+
+
+    cdef GDExtensionPtrBuiltInMethod method_to_call = gdnative_interface.variant_get_ptr_builtin_method(GDExtensionVariantType.GDEXTENSION_VARIANT_TYPE_ARRAY, _method_name.godot_owner, 3218959716)
+
+
+    cdef GDExtensionCallError _error
+    method_to_call(self.godot_owner, NULL, &_ret, 0)
+
+  def hash(self):
+    cdef GDExtensionVariantPtr _args[1]
+    cdef int _ret
+
+    cdef String _class_name_string = String.new0()
+    _interface.string_new_with_utf8_chars(_class_name_string.godot_owner, "{name}Array")
+    cdef StringName _class_name = StringName.new2(_class_name_string)
+
+    cdef String _method_name_string = String.new0()
+    _interface.string_new_with_utf8_chars(_method_name_string.godot_owner, "hash")
+    cdef StringName _method_name = StringName.new2(_method_name_string)
+
+
+    cdef GDExtensionPtrBuiltInMethod method_to_call = gdnative_interface.variant_get_ptr_builtin_method(GDExtensionVariantType.GDEXTENSION_VARIANT_TYPE_ARRAY, _method_name.godot_owner, 3173160232)
+
+
+    cdef GDExtensionCallError _error
+    method_to_call(self.godot_owner, NULL, &_ret, 0)
+    return _ret
+
+  def assign(self, {name}Array {name}Array):
+    cdef GDExtensionTypePtr _args[1]
+    _args[0] = {name}Array.godot_owner
+
+    cdef GDExtensionTypePtr _ret
+
+    cdef String _class_name_string = String.new0()
+    _interface.string_new_with_utf8_chars(_class_name_string.godot_owner, "{name}Array")
+    cdef StringName _class_name = StringName.new2(_class_name_string)
+
+    cdef String _method_name_string = String.new0()
+    _interface.string_new_with_utf8_chars(_method_name_string.godot_owner, "assign")
+    cdef StringName _method_name = StringName.new2(_method_name_string)
+
+
+    cdef GDExtensionPtrBuiltInMethod method_to_call = gdnative_interface.variant_get_ptr_builtin_method(GDExtensionVariantType.GDEXTENSION_VARIANT_TYPE_ARRAY, _method_name.godot_owner, 2307260970)
+
+
+    cdef GDExtensionCallError _error
+    method_to_call(self.godot_owner, &_args[0], &_ret, 1)
+
+  def push_back(self, Variant value):
+    cdef GDExtensionTypePtr _args[1]
+    _args[0] = value.godot_owner
+
+    cdef GDExtensionTypePtr _ret
+
+    cdef String _class_name_string = String.new0()
+    _interface.string_new_with_utf8_chars(_class_name_string.godot_owner, "{name}Array")
+    cdef StringName _class_name = StringName.new2(_class_name_string)
+
+    cdef String _method_name_string = String.new0()
+    _interface.string_new_with_utf8_chars(_method_name_string.godot_owner, "push_back")
+    cdef StringName _method_name = StringName.new2(_method_name_string)
+
+
+    cdef GDExtensionPtrBuiltInMethod method_to_call = gdnative_interface.variant_get_ptr_builtin_method(GDExtensionVariantType.GDEXTENSION_VARIANT_TYPE_ARRAY, _method_name.godot_owner, 3316032543)
+
+
+    cdef GDExtensionCallError _error
+    method_to_call(self.godot_owner, &_args[0], &_ret, 1)
+
+  def push_front(self, Variant value):
+    cdef GDExtensionTypePtr _args[1]
+    _args[0] = value.godot_owner
+
+    cdef GDExtensionTypePtr _ret
+
+    cdef String _class_name_string = String.new0()
+    _interface.string_new_with_utf8_chars(_class_name_string.godot_owner, "{name}Array")
+    cdef StringName _class_name = StringName.new2(_class_name_string)
+
+    cdef String _method_name_string = String.new0()
+    _interface.string_new_with_utf8_chars(_method_name_string.godot_owner, "push_front")
+    cdef StringName _method_name = StringName.new2(_method_name_string)
+
+
+    cdef GDExtensionPtrBuiltInMethod method_to_call = gdnative_interface.variant_get_ptr_builtin_method(GDExtensionVariantType.GDEXTENSION_VARIANT_TYPE_ARRAY, _method_name.godot_owner, 3316032543)
+
+
+    cdef GDExtensionCallError _error
+    method_to_call(self.godot_owner, &_args[0], &_ret, 1)
+
+  def append(self, {name} value):
+    cdef GDExtensionTypePtr _args[1]
+    _args[0] = value.godot_owner
+
+    cdef GDExtensionTypePtr _ret
+
+    cdef String _class_name_string = String.new0()
+    _interface.string_new_with_utf8_chars(_class_name_string.godot_owner, "{name}Array")
+    cdef StringName _class_name = StringName.new2(_class_name_string)
+
+    cdef String _method_name_string = String.new0()
+    _interface.string_new_with_utf8_chars(_method_name_string.godot_owner, "append")
+    cdef StringName _method_name = StringName.new2(_method_name_string)
+
+
+    cdef GDExtensionPtrBuiltInMethod method_to_call = gdnative_interface.variant_get_ptr_builtin_method(GDExtensionVariantType.GDEXTENSION_VARIANT_TYPE_ARRAY, _method_name.godot_owner, 3316032543)
+
+
+    cdef GDExtensionCallError _error
+    method_to_call(self.godot_owner, &_args[0], &_ret, 1)
+
+  def append_{name}Array(self, {name}Array {name}Array):
+    cdef GDExtensionTypePtr _args[1]
+    _args[0] = {name}Array.godot_owner
+
+    cdef GDExtensionTypePtr _ret
+
+    cdef String _class_name_string = String.new0()
+    _interface.string_new_with_utf8_chars(_class_name_string.godot_owner, "{name}Array")
+    cdef StringName _class_name = StringName.new2(_class_name_string)
+
+    cdef String _method_name_string = String.new0()
+    _interface.string_new_with_utf8_chars(_method_name_string.godot_owner, "append_{name}Array")
+    cdef StringName _method_name = StringName.new2(_method_name_string)
+
+
+    cdef GDExtensionPtrBuiltInMethod method_to_call = gdnative_interface.variant_get_ptr_builtin_method(GDExtensionVariantType.GDEXTENSION_VARIANT_TYPE_ARRAY, _method_name.godot_owner, 2307260970)
+
+
+    cdef GDExtensionCallError _error
+    method_to_call(self.godot_owner, &_args[0], &_ret, 1)
+
+  def resize(self, int size):
+    cdef GDExtensionTypePtr _args[1]
+    _args[0] = &size
+
+    cdef int _ret
+
+    cdef String _class_name_string = String.new0()
+    _interface.string_new_with_utf8_chars(_class_name_string.godot_owner, "{name}Array")
+    cdef StringName _class_name = StringName.new2(_class_name_string)
+
+    cdef String _method_name_string = String.new0()
+    _interface.string_new_with_utf8_chars(_method_name_string.godot_owner, "resize")
+    cdef StringName _method_name = StringName.new2(_method_name_string)
+
+
+    cdef GDExtensionPtrBuiltInMethod method_to_call = gdnative_interface.variant_get_ptr_builtin_method(GDExtensionVariantType.GDEXTENSION_VARIANT_TYPE_ARRAY, _method_name.godot_owner, 848867239)
+
+
+    cdef GDExtensionCallError _error
+    method_to_call(self.godot_owner, &_args[0], &_ret, 1)
+    return _ret
+
+  def insert(self, int position, {name} value):
+    cdef GDExtensionTypePtr _args[2]
+    _args[0] = &position
+    _args[1] = value.godot_owner
+
+    cdef int _ret
+
+    cdef String _class_name_string = String.new0()
+    _interface.string_new_with_utf8_chars(_class_name_string.godot_owner, "{name}Array")
+    cdef StringName _class_name = StringName.new2(_class_name_string)
+
+    cdef String _method_name_string = String.new0()
+    _interface.string_new_with_utf8_chars(_method_name_string.godot_owner, "insert")
+    cdef StringName _method_name = StringName.new2(_method_name_string)
+
+
+    cdef GDExtensionPtrBuiltInMethod method_to_call = gdnative_interface.variant_get_ptr_builtin_method(GDExtensionVariantType.GDEXTENSION_VARIANT_TYPE_ARRAY, _method_name.godot_owner, 3176316662)
+
+
+    cdef GDExtensionCallError _error
+    method_to_call(self.godot_owner, &_args[0], &_ret, 2)
+    return _ret
+
+  def remove_at(self, int position):
+    cdef GDExtensionTypePtr _args[1]
+    _args[0] = &position
+
+    cdef GDExtensionTypePtr _ret
+
+    cdef String _class_name_string = String.new0()
+    _interface.string_new_with_utf8_chars(_class_name_string.godot_owner, "{name}Array")
+    cdef StringName _class_name = StringName.new2(_class_name_string)
+
+    cdef String _method_name_string = String.new0()
+    _interface.string_new_with_utf8_chars(_method_name_string.godot_owner, "remove_at")
+    cdef StringName _method_name = StringName.new2(_method_name_string)
+
+
+    cdef GDExtensionPtrBuiltInMethod method_to_call = gdnative_interface.variant_get_ptr_builtin_method(GDExtensionVariantType.GDEXTENSION_VARIANT_TYPE_ARRAY, _method_name.godot_owner, 2823966027)
+
+
+    cdef GDExtensionCallError _error
+    method_to_call(self.godot_owner, &_args[0], &_ret, 1)
+
+  def fill(self, {name} value):
+    cdef GDExtensionTypePtr _args[1]
+    _args[0] = value.godot_owner
+
+    cdef GDExtensionTypePtr _ret
+
+    cdef String _class_name_string = String.new0()
+    _interface.string_new_with_utf8_chars(_class_name_string.godot_owner, "{name}Array")
+    cdef StringName _class_name = StringName.new2(_class_name_string)
+
+    cdef String _method_name_string = String.new0()
+    _interface.string_new_with_utf8_chars(_method_name_string.godot_owner, "fill")
+    cdef StringName _method_name = StringName.new2(_method_name_string)
+
+
+    cdef GDExtensionPtrBuiltInMethod method_to_call = gdnative_interface.variant_get_ptr_builtin_method(GDExtensionVariantType.GDEXTENSION_VARIANT_TYPE_ARRAY, _method_name.godot_owner, 3316032543)
+
+
+    cdef GDExtensionCallError _error
+    method_to_call(self.godot_owner, &_args[0], &_ret, 1)
+
+  def erase(self, {name} value):
+    cdef GDExtensionTypePtr _args[1]
+    _args[0] = value.godot_owner
+
+    cdef GDExtensionTypePtr _ret
+
+    cdef String _class_name_string = String.new0()
+    _interface.string_new_with_utf8_chars(_class_name_string.godot_owner, "{name}Array")
+    cdef StringName _class_name = StringName.new2(_class_name_string)
+
+    cdef String _method_name_string = String.new0()
+    _interface.string_new_with_utf8_chars(_method_name_string.godot_owner, "erase")
+    cdef StringName _method_name = StringName.new2(_method_name_string)
+
+
+    cdef GDExtensionPtrBuiltInMethod method_to_call = gdnative_interface.variant_get_ptr_builtin_method(GDExtensionVariantType.GDEXTENSION_VARIANT_TYPE_ARRAY, _method_name.godot_owner, 3316032543)
+
+
+    cdef GDExtensionCallError _error
+    method_to_call(self.godot_owner, &_args[0], &_ret, 1)
+
+  def front(self):
+    cdef GDExtensionVariantPtr _args[1]
+    cdef {name} _ret = {name}()
+
+    cdef String _class_name_string = String.new0()
+    _interface.string_new_with_utf8_chars(_class_name_string.godot_owner, "{name}Array")
+    cdef StringName _class_name = StringName.new2(_class_name_string)
+
+    cdef String _method_name_string = String.new0()
+    _interface.string_new_with_utf8_chars(_method_name_string.godot_owner, "front")
+    cdef StringName _method_name = StringName.new2(_method_name_string)
+
+
+    cdef GDExtensionPtrBuiltInMethod method_to_call = gdnative_interface.variant_get_ptr_builtin_method(GDExtensionVariantType.GDEXTENSION_VARIANT_TYPE_ARRAY, _method_name.godot_owner, 1460142086)
+
+
+    cdef GDExtensionCallError _error
+    method_to_call(self.godot_owner, NULL, &(_ret.godot_owner), 0)
+    return _ret
+
+  def back(self):
+    cdef GDExtensionVariantPtr _args[1]
+    cdef {name} _ret = {name}()
+
+    cdef String _class_name_string = String.new0()
+    _interface.string_new_with_utf8_chars(_class_name_string.godot_owner, "{name}Array")
+    cdef StringName _class_name = StringName.new2(_class_name_string)
+
+    cdef String _method_name_string = String.new0()
+    _interface.string_new_with_utf8_chars(_method_name_string.godot_owner, "back")
+    cdef StringName _method_name = StringName.new2(_method_name_string)
+
+
+    cdef GDExtensionPtrBuiltInMethod method_to_call = gdnative_interface.variant_get_ptr_builtin_method(GDExtensionVariantType.GDEXTENSION_VARIANT_TYPE_ARRAY, _method_name.godot_owner, 1460142086)
+
+
+    cdef GDExtensionCallError _error
+    method_to_call(self.godot_owner, NULL, &(_ret.godot_owner), 0)
+    return _ret
+
+  def pick_random(self):
+    cdef GDExtensionVariantPtr _args[1]
+    cdef {name} _ret = {name}()
+
+    cdef String _class_name_string = String.new0()
+    _interface.string_new_with_utf8_chars(_class_name_string.godot_owner, "{name}Array")
+    cdef StringName _class_name = StringName.new2(_class_name_string)
+
+    cdef String _method_name_string = String.new0()
+    _interface.string_new_with_utf8_chars(_method_name_string.godot_owner, "pick_random")
+    cdef StringName _method_name = StringName.new2(_method_name_string)
+
+
+    cdef GDExtensionPtrBuiltInMethod method_to_call = gdnative_interface.variant_get_ptr_builtin_method(GDExtensionVariantType.GDEXTENSION_VARIANT_TYPE_ARRAY, _method_name.godot_owner, 1460142086)
+
+
+    cdef GDExtensionCallError _error
+    method_to_call(self.godot_owner, NULL, &(_ret.godot_owner), 0)
+    return _ret
+
+  def find(self, {name} what, int from_):
+    cdef GDExtensionTypePtr _args[2]
+    _args[0] = what.godot_owner
+    _args[1] = &from_
+
+    cdef int _ret
+
+    cdef String _class_name_string = String.new0()
+    _interface.string_new_with_utf8_chars(_class_name_string.godot_owner, "{name}Array")
+    cdef StringName _class_name = StringName.new2(_class_name_string)
+
+    cdef String _method_name_string = String.new0()
+    _interface.string_new_with_utf8_chars(_method_name_string.godot_owner, "find")
+    cdef StringName _method_name = StringName.new2(_method_name_string)
+
+
+    cdef GDExtensionPtrBuiltInMethod method_to_call = gdnative_interface.variant_get_ptr_builtin_method(GDExtensionVariantType.GDEXTENSION_VARIANT_TYPE_ARRAY, _method_name.godot_owner, 2336346817)
+
+
+    cdef GDExtensionCallError _error
+    method_to_call(self.godot_owner, &_args[0], &_ret, 2)
+    return _ret
+
+  def rfind(self, {name} what, int from_):
+    cdef GDExtensionTypePtr _args[2]
+    _args[0] = what.godot_owner
+    _args[1] = &from_
+
+    cdef int _ret
+
+    cdef String _class_name_string = String.new0()
+    _interface.string_new_with_utf8_chars(_class_name_string.godot_owner, "{name}Array")
+    cdef StringName _class_name = StringName.new2(_class_name_string)
+
+    cdef String _method_name_string = String.new0()
+    _interface.string_new_with_utf8_chars(_method_name_string.godot_owner, "rfind")
+    cdef StringName _method_name = StringName.new2(_method_name_string)
+
+
+    cdef GDExtensionPtrBuiltInMethod method_to_call = gdnative_interface.variant_get_ptr_builtin_method(GDExtensionVariantType.GDEXTENSION_VARIANT_TYPE_ARRAY, _method_name.godot_owner, 2336346817)
+
+
+    cdef GDExtensionCallError _error
+    method_to_call(self.godot_owner, &_args[0], &_ret, 2)
+    return _ret
+
+  def count(self, {name} value):
+    cdef GDExtensionTypePtr _args[1]
+    _args[0] = value.godot_owner
+
+    cdef int _ret
+
+    cdef String _class_name_string = String.new0()
+    _interface.string_new_with_utf8_chars(_class_name_string.godot_owner, "{name}Array")
+    cdef StringName _class_name = StringName.new2(_class_name_string)
+
+    cdef String _method_name_string = String.new0()
+    _interface.string_new_with_utf8_chars(_method_name_string.godot_owner, "count")
+    cdef StringName _method_name = StringName.new2(_method_name_string)
+
+
+    cdef GDExtensionPtrBuiltInMethod method_to_call = gdnative_interface.variant_get_ptr_builtin_method(GDExtensionVariantType.GDEXTENSION_VARIANT_TYPE_ARRAY, _method_name.godot_owner, 1481661226)
+
+
+    cdef GDExtensionCallError _error
+    method_to_call(self.godot_owner, &_args[0], &_ret, 1)
+    return _ret
+
+  def has(self, {name} value):
+    cdef GDExtensionTypePtr _args[1]
+    _args[0] = value.godot_owner
+
+    cdef bool _ret
+
+    cdef String _class_name_string = String.new0()
+    _interface.string_new_with_utf8_chars(_class_name_string.godot_owner, "{name}Array")
+    cdef StringName _class_name = StringName.new2(_class_name_string)
+
+    cdef String _method_name_string = String.new0()
+    _interface.string_new_with_utf8_chars(_method_name_string.godot_owner, "has")
+    cdef StringName _method_name = StringName.new2(_method_name_string)
+
+
+    cdef GDExtensionPtrBuiltInMethod method_to_call = gdnative_interface.variant_get_ptr_builtin_method(GDExtensionVariantType.GDEXTENSION_VARIANT_TYPE_ARRAY, _method_name.godot_owner, 3680194679)
+
+
+    cdef GDExtensionCallError _error
+    method_to_call(self.godot_owner, &_args[0], &_ret, 1)
+    return _ret
+
+  def pop_back(self):
+    cdef GDExtensionVariantPtr _args[1]
+    cdef {name} _ret = {name}()
+
+    cdef String _class_name_string = String.new0()
+    _interface.string_new_with_utf8_chars(_class_name_string.godot_owner, "{name}Array")
+    cdef StringName _class_name = StringName.new2(_class_name_string)
+
+    cdef String _method_name_string = String.new0()
+    _interface.string_new_with_utf8_chars(_method_name_string.godot_owner, "pop_back")
+    cdef StringName _method_name = StringName.new2(_method_name_string)
+
+
+    cdef GDExtensionPtrBuiltInMethod method_to_call = gdnative_interface.variant_get_ptr_builtin_method(GDExtensionVariantType.GDEXTENSION_VARIANT_TYPE_ARRAY, _method_name.godot_owner, 1321915136)
+
+
+    cdef GDExtensionCallError _error
+    method_to_call(self.godot_owner, NULL, &(_ret.godot_owner), 0)
+    return _ret
+
+  def pop_front(self):
+    cdef GDExtensionVariantPtr _args[1]
+    cdef {name} _ret = {name}()
+
+    cdef String _class_name_string = String.new0()
+    _interface.string_new_with_utf8_chars(_class_name_string.godot_owner, "{name}Array")
+    cdef StringName _class_name = StringName.new2(_class_name_string)
+
+    cdef String _method_name_string = String.new0()
+    _interface.string_new_with_utf8_chars(_method_name_string.godot_owner, "pop_front")
+    cdef StringName _method_name = StringName.new2(_method_name_string)
+
+
+    cdef GDExtensionPtrBuiltInMethod method_to_call = gdnative_interface.variant_get_ptr_builtin_method(GDExtensionVariantType.GDEXTENSION_VARIANT_TYPE_ARRAY, _method_name.godot_owner, 1321915136)
+
+
+    cdef GDExtensionCallError _error
+    method_to_call(self.godot_owner, NULL, &(_ret.godot_owner), 0)
+    return _ret
+
+  def pop_at(self, int position):
+    cdef GDExtensionTypePtr _args[1]
+    _args[0] = &position
+
+    cdef {name} _ret = {name}()
+
+    cdef String _class_name_string = String.new0()
+    _interface.string_new_with_utf8_chars(_class_name_string.godot_owner, "{name}Array")
+    cdef StringName _class_name = StringName.new2(_class_name_string)
+
+    cdef String _method_name_string = String.new0()
+    _interface.string_new_with_utf8_chars(_method_name_string.godot_owner, "pop_at")
+    cdef StringName _method_name = StringName.new2(_method_name_string)
+
+
+    cdef GDExtensionPtrBuiltInMethod method_to_call = gdnative_interface.variant_get_ptr_builtin_method(GDExtensionVariantType.GDEXTENSION_VARIANT_TYPE_ARRAY, _method_name.godot_owner, 3518259424)
+
+
+    cdef GDExtensionCallError _error
+    method_to_call(self.godot_owner, &_args[0], &(_ret.godot_owner), 1)
+    return _ret
+
+  def sort(self):
+    cdef GDExtensionVariantPtr _args[1]
+    cdef GDExtensionTypePtr _ret
+
+    cdef String _class_name_string = String.new0()
+    _interface.string_new_with_utf8_chars(_class_name_string.godot_owner, "{name}Array")
+    cdef StringName _class_name = StringName.new2(_class_name_string)
+
+    cdef String _method_name_string = String.new0()
+    _interface.string_new_with_utf8_chars(_method_name_string.godot_owner, "sort")
+    cdef StringName _method_name = StringName.new2(_method_name_string)
+
+
+    cdef GDExtensionPtrBuiltInMethod method_to_call = gdnative_interface.variant_get_ptr_builtin_method(GDExtensionVariantType.GDEXTENSION_VARIANT_TYPE_ARRAY, _method_name.godot_owner, 3218959716)
+
+
+    cdef GDExtensionCallError _error
+    method_to_call(self.godot_owner, NULL, &_ret, 0)
+
+  def sort_custom(self, Callable func):
+    cdef GDExtensionTypePtr _args[1]
+    _args[0] = func.godot_owner
+
+    cdef GDExtensionTypePtr _ret
+
+    cdef String _class_name_string = String.new0()
+    _interface.string_new_with_utf8_chars(_class_name_string.godot_owner, "{name}Array")
+    cdef StringName _class_name = StringName.new2(_class_name_string)
+
+    cdef String _method_name_string = String.new0()
+    _interface.string_new_with_utf8_chars(_method_name_string.godot_owner, "sort_custom")
+    cdef StringName _method_name = StringName.new2(_method_name_string)
+
+
+    cdef GDExtensionPtrBuiltInMethod method_to_call = gdnative_interface.variant_get_ptr_builtin_method(GDExtensionVariantType.GDEXTENSION_VARIANT_TYPE_ARRAY, _method_name.godot_owner, 3470848906)
+
+
+    cdef GDExtensionCallError _error
+    method_to_call(self.godot_owner, &_args[0], &_ret, 1)
+
+  def shuffle(self):
+    cdef GDExtensionVariantPtr _args[1]
+    cdef GDExtensionTypePtr _ret
+
+    cdef String _class_name_string = String.new0()
+    _interface.string_new_with_utf8_chars(_class_name_string.godot_owner, "{name}Array")
+    cdef StringName _class_name = StringName.new2(_class_name_string)
+
+    cdef String _method_name_string = String.new0()
+    _interface.string_new_with_utf8_chars(_method_name_string.godot_owner, "shuffle")
+    cdef StringName _method_name = StringName.new2(_method_name_string)
+
+
+    cdef GDExtensionPtrBuiltInMethod method_to_call = gdnative_interface.variant_get_ptr_builtin_method(GDExtensionVariantType.GDEXTENSION_VARIANT_TYPE_ARRAY, _method_name.godot_owner, 3218959716)
+
+
+    cdef GDExtensionCallError _error
+    method_to_call(self.godot_owner, NULL, &_ret, 0)
+
+  def bsearch(self, {name} value, bool before):
+    cdef GDExtensionTypePtr _args[2]
+    _args[0] = value.godot_owner
+    _args[1] = &before
+
+    cdef int _ret
+
+    cdef String _class_name_string = String.new0()
+    _interface.string_new_with_utf8_chars(_class_name_string.godot_owner, "{name}Array")
+    cdef StringName _class_name = StringName.new2(_class_name_string)
+
+    cdef String _method_name_string = String.new0()
+    _interface.string_new_with_utf8_chars(_method_name_string.godot_owner, "bsearch")
+    cdef StringName _method_name = StringName.new2(_method_name_string)
+
+
+    cdef GDExtensionPtrBuiltInMethod method_to_call = gdnative_interface.variant_get_ptr_builtin_method(GDExtensionVariantType.GDEXTENSION_VARIANT_TYPE_ARRAY, _method_name.godot_owner, 3372222236)
+
+
+    cdef GDExtensionCallError _error
+    method_to_call(self.godot_owner, &_args[0], &_ret, 2)
+    return _ret
+
+  def bsearch_custom(self, {name} value, Callable func, bool before):
+    cdef GDExtensionTypePtr _args[3]
+    _args[0] = value.godot_owner
+    _args[1] = func.godot_owner
+    _args[2] = &before
+
+    cdef int _ret
+
+    cdef String _class_name_string = String.new0()
+    _interface.string_new_with_utf8_chars(_class_name_string.godot_owner, "{name}Array")
+    cdef StringName _class_name = StringName.new2(_class_name_string)
+
+    cdef String _method_name_string = String.new0()
+    _interface.string_new_with_utf8_chars(_method_name_string.godot_owner, "bsearch_custom")
+    cdef StringName _method_name = StringName.new2(_method_name_string)
+
+
+    cdef GDExtensionPtrBuiltInMethod method_to_call = gdnative_interface.variant_get_ptr_builtin_method(GDExtensionVariantType.GDEXTENSION_VARIANT_TYPE_ARRAY, _method_name.godot_owner, 161317131)
+
+
+    cdef GDExtensionCallError _error
+    method_to_call(self.godot_owner, &_args[0], &_ret, 3)
+    return _ret
+
+  def reverse(self):
+    cdef GDExtensionVariantPtr _args[1]
+    cdef GDExtensionTypePtr _ret
+
+    cdef String _class_name_string = String.new0()
+    _interface.string_new_with_utf8_chars(_class_name_string.godot_owner, "{name}Array")
+    cdef StringName _class_name = StringName.new2(_class_name_string)
+
+    cdef String _method_name_string = String.new0()
+    _interface.string_new_with_utf8_chars(_method_name_string.godot_owner, "reverse")
+    cdef StringName _method_name = StringName.new2(_method_name_string)
+
+
+    cdef GDExtensionPtrBuiltInMethod method_to_call = gdnative_interface.variant_get_ptr_builtin_method(GDExtensionVariantType.GDEXTENSION_VARIANT_TYPE_ARRAY, _method_name.godot_owner, 3218959716)
+
+
+    cdef GDExtensionCallError _error
+    method_to_call(self.godot_owner, NULL, &_ret, 0)
+
+  def duplicate(self, bool deep):
+    cdef GDExtensionTypePtr _args[1]
+    _args[0] = &deep
+
+    cdef {name}Array _ret = {name}Array()
+
+    cdef String _class_name_string = String.new0()
+    _interface.string_new_with_utf8_chars(_class_name_string.godot_owner, "{name}Array")
+    cdef StringName _class_name = StringName.new2(_class_name_string)
+
+    cdef String _method_name_string = String.new0()
+    _interface.string_new_with_utf8_chars(_method_name_string.godot_owner, "duplicate")
+    cdef StringName _method_name = StringName.new2(_method_name_string)
+
+
+    cdef GDExtensionPtrBuiltInMethod method_to_call = gdnative_interface.variant_get_ptr_builtin_method(GDExtensionVariantType.GDEXTENSION_VARIANT_TYPE_ARRAY, _method_name.godot_owner, 636440122)
+
+
+    cdef GDExtensionCallError _error
+    method_to_call(self.godot_owner, &_args[0], _ret.godot_owner, 1)
+    return _ret
+
+  def slice(self, int begin, int end, int step, bool deep):
+    cdef GDExtensionTypePtr _args[4]
+    _args[0] = &begin
+    _args[1] = &end
+    _args[2] = &step
+    _args[3] = &deep
+
+    cdef {name}Array _ret = {name}Array()
+
+    cdef String _class_name_string = String.new0()
+    _interface.string_new_with_utf8_chars(_class_name_string.godot_owner, "{name}Array")
+    cdef StringName _class_name = StringName.new2(_class_name_string)
+
+    cdef String _method_name_string = String.new0()
+    _interface.string_new_with_utf8_chars(_method_name_string.godot_owner, "slice")
+    cdef StringName _method_name = StringName.new2(_method_name_string)
+
+
+    cdef GDExtensionPtrBuiltInMethod method_to_call = gdnative_interface.variant_get_ptr_builtin_method(GDExtensionVariantType.GDEXTENSION_VARIANT_TYPE_ARRAY, _method_name.godot_owner, 1393718243)
+
+
+    cdef GDExtensionCallError _error
+    method_to_call(self.godot_owner, &_args[0], _ret.godot_owner, 4)
+    return _ret
+
+  def filter(self, Callable method):
+    cdef GDExtensionTypePtr _args[1]
+    _args[0] = method.godot_owner
+
+    cdef {name}Array _ret = {name}Array()
+
+    cdef String _class_name_string = String.new0()
+    _interface.string_new_with_utf8_chars(_class_name_string.godot_owner, "{name}Array")
+    cdef StringName _class_name = StringName.new2(_class_name_string)
+
+    cdef String _method_name_string = String.new0()
+    _interface.string_new_with_utf8_chars(_method_name_string.godot_owner, "filter")
+    cdef StringName _method_name = StringName.new2(_method_name_string)
+
+
+    cdef GDExtensionPtrBuiltInMethod method_to_call = gdnative_interface.variant_get_ptr_builtin_method(GDExtensionVariantType.GDEXTENSION_VARIANT_TYPE_ARRAY, _method_name.godot_owner, 4075186556)
+
+
+    cdef GDExtensionCallError _error
+    method_to_call(self.godot_owner, &_args[0], _ret.godot_owner, 1)
+    return _ret
+
+  def map(self, Callable method):
+    cdef GDExtensionTypePtr _args[1]
+    _args[0] = method.godot_owner
+
+    cdef {name}Array _ret = {name}Array()
+
+    cdef String _class_name_string = String.new0()
+    _interface.string_new_with_utf8_chars(_class_name_string.godot_owner, "{name}Array")
+    cdef StringName _class_name = StringName.new2(_class_name_string)
+
+    cdef String _method_name_string = String.new0()
+    _interface.string_new_with_utf8_chars(_method_name_string.godot_owner, "map")
+    cdef StringName _method_name = StringName.new2(_method_name_string)
+
+
+    cdef GDExtensionPtrBuiltInMethod method_to_call = gdnative_interface.variant_get_ptr_builtin_method(GDExtensionVariantType.GDEXTENSION_VARIANT_TYPE_ARRAY, _method_name.godot_owner, 4075186556)
+
+
+    cdef GDExtensionCallError _error
+    method_to_call(self.godot_owner, &_args[0], _ret.godot_owner, 1)
+    return _ret
+
+  def reduce(self, Callable method, {name} accum):
+    cdef GDExtensionTypePtr _args[2]
+    _args[0] = method.godot_owner
+    _args[1] = accum.godot_owner
+
+    cdef {name} _ret = {name}()
+
+    cdef String _class_name_string = String.new0()
+    _interface.string_new_with_utf8_chars(_class_name_string.godot_owner, "{name}Array")
+    cdef StringName _class_name = StringName.new2(_class_name_string)
+
+    cdef String _method_name_string = String.new0()
+    _interface.string_new_with_utf8_chars(_method_name_string.godot_owner, "reduce")
+    cdef StringName _method_name = StringName.new2(_method_name_string)
+
+
+    cdef GDExtensionPtrBuiltInMethod method_to_call = gdnative_interface.variant_get_ptr_builtin_method(GDExtensionVariantType.GDEXTENSION_VARIANT_TYPE_ARRAY, _method_name.godot_owner, 4272450342)
+
+
+    cdef GDExtensionCallError _error
+    method_to_call(self.godot_owner, &_args[0], &(_ret.godot_owner), 2)
+    return _ret
+
+  def any(self, Callable method):
+    cdef GDExtensionTypePtr _args[1]
+    _args[0] = method.godot_owner
+
+    cdef bool _ret
+
+    cdef String _class_name_string = String.new0()
+    _interface.string_new_with_utf8_chars(_class_name_string.godot_owner, "{name}Array")
+    cdef StringName _class_name = StringName.new2(_class_name_string)
+
+    cdef String _method_name_string = String.new0()
+    _interface.string_new_with_utf8_chars(_method_name_string.godot_owner, "any")
+    cdef StringName _method_name = StringName.new2(_method_name_string)
+
+
+    cdef GDExtensionPtrBuiltInMethod method_to_call = gdnative_interface.variant_get_ptr_builtin_method(GDExtensionVariantType.GDEXTENSION_VARIANT_TYPE_ARRAY, _method_name.godot_owner, 4129521963)
+
+
+    cdef GDExtensionCallError _error
+    method_to_call(self.godot_owner, &_args[0], &_ret, 1)
+    return _ret
+
+  def all(self, Callable method):
+    cdef GDExtensionTypePtr _args[1]
+    _args[0] = method.godot_owner
+
+    cdef bool _ret
+
+    cdef String _class_name_string = String.new0()
+    _interface.string_new_with_utf8_chars(_class_name_string.godot_owner, "{name}Array")
+    cdef StringName _class_name = StringName.new2(_class_name_string)
+
+    cdef String _method_name_string = String.new0()
+    _interface.string_new_with_utf8_chars(_method_name_string.godot_owner, "all")
+    cdef StringName _method_name = StringName.new2(_method_name_string)
+
+
+    cdef GDExtensionPtrBuiltInMethod method_to_call = gdnative_interface.variant_get_ptr_builtin_method(GDExtensionVariantType.GDEXTENSION_VARIANT_TYPE_ARRAY, _method_name.godot_owner, 4129521963)
+
+
+    cdef GDExtensionCallError _error
+    method_to_call(self.godot_owner, &_args[0], &_ret, 1)
+    return _ret
+
+  def max(self):
+    cdef GDExtensionVariantPtr _args[1]
+    cdef {name} _ret = {name}()
+
+    cdef String _class_name_string = String.new0()
+    _interface.string_new_with_utf8_chars(_class_name_string.godot_owner, "{name}Array")
+    cdef StringName _class_name = StringName.new2(_class_name_string)
+
+    cdef String _method_name_string = String.new0()
+    _interface.string_new_with_utf8_chars(_method_name_string.godot_owner, "max")
+    cdef StringName _method_name = StringName.new2(_method_name_string)
+
+
+    cdef GDExtensionPtrBuiltInMethod method_to_call = gdnative_interface.variant_get_ptr_builtin_method(GDExtensionVariantType.GDEXTENSION_VARIANT_TYPE_ARRAY, _method_name.godot_owner, 1460142086)
+
+
+    cdef GDExtensionCallError _error
+    method_to_call(self.godot_owner, NULL, &(_ret.godot_owner), 0)
+    return _ret
+
+  def min(self):
+    cdef GDExtensionVariantPtr _args[1]
+    cdef {name} _ret = {name}()
+
+    cdef String _class_name_string = String.new0()
+    _interface.string_new_with_utf8_chars(_class_name_string.godot_owner, "{name}Array")
+    cdef StringName _class_name = StringName.new2(_class_name_string)
+
+    cdef String _method_name_string = String.new0()
+    _interface.string_new_with_utf8_chars(_method_name_string.godot_owner, "min")
+    cdef StringName _method_name = StringName.new2(_method_name_string)
+
+
+    cdef GDExtensionPtrBuiltInMethod method_to_call = gdnative_interface.variant_get_ptr_builtin_method(GDExtensionVariantType.GDEXTENSION_VARIANT_TYPE_ARRAY, _method_name.godot_owner, 1460142086)
+
+
+    cdef GDExtensionCallError _error
+    method_to_call(self.godot_owner, NULL, &(_ret.godot_owner), 0)
+    return _ret
+
+  def is_typed(self):
+    cdef GDExtensionVariantPtr _args[1]
+    cdef bool _ret
+
+    cdef String _class_name_string = String.new0()
+    _interface.string_new_with_utf8_chars(_class_name_string.godot_owner, "{name}Array")
+    cdef StringName _class_name = StringName.new2(_class_name_string)
+
+    cdef String _method_name_string = String.new0()
+    _interface.string_new_with_utf8_chars(_method_name_string.godot_owner, "is_typed")
+    cdef StringName _method_name = StringName.new2(_method_name_string)
+
+
+    cdef GDExtensionPtrBuiltInMethod method_to_call = gdnative_interface.variant_get_ptr_builtin_method(GDExtensionVariantType.GDEXTENSION_VARIANT_TYPE_ARRAY, _method_name.godot_owner, 3918633141)
+
+
+    cdef GDExtensionCallError _error
+    method_to_call(self.godot_owner, NULL, &_ret, 0)
+    return _ret
+
+  def is_same_typed(self, {name}Array {name}Array):
+    cdef GDExtensionTypePtr _args[1]
+    _args[0] = {name}Array.godot_owner
+
+    cdef bool _ret
+
+    cdef String _class_name_string = String.new0()
+    _interface.string_new_with_utf8_chars(_class_name_string.godot_owner, "{name}Array")
+    cdef StringName _class_name = StringName.new2(_class_name_string)
+
+    cdef String _method_name_string = String.new0()
+    _interface.string_new_with_utf8_chars(_method_name_string.godot_owner, "is_same_typed")
+    cdef StringName _method_name = StringName.new2(_method_name_string)
+
+
+    cdef GDExtensionPtrBuiltInMethod method_to_call = gdnative_interface.variant_get_ptr_builtin_method(GDExtensionVariantType.GDEXTENSION_VARIANT_TYPE_ARRAY, _method_name.godot_owner, 2988181878)
+
+
+    cdef GDExtensionCallError _error
+    method_to_call(self.godot_owner, &_args[0], &_ret, 1)
+    return _ret
+
+  def get_typed_builtin(self):
+    cdef GDExtensionVariantPtr _args[1]
+    cdef int _ret
+
+    cdef String _class_name_string = String.new0()
+    _interface.string_new_with_utf8_chars(_class_name_string.godot_owner, "{name}Array")
+    cdef StringName _class_name = StringName.new2(_class_name_string)
+
+    cdef String _method_name_string = String.new0()
+    _interface.string_new_with_utf8_chars(_method_name_string.godot_owner, "get_typed_builtin")
+    cdef StringName _method_name = StringName.new2(_method_name_string)
+
+
+    cdef GDExtensionPtrBuiltInMethod method_to_call = gdnative_interface.variant_get_ptr_builtin_method(GDExtensionVariantType.GDEXTENSION_VARIANT_TYPE_ARRAY, _method_name.godot_owner, 3173160232)
+
+
+    cdef GDExtensionCallError _error
+    method_to_call(self.godot_owner, NULL, &_ret, 0)
+    return _ret
+
+  def get_typed_class_name(self):
+    cdef GDExtensionVariantPtr _args[1]
+    cdef StringName _ret = StringName()
+
+    cdef String _class_name_string = String.new0()
+    _interface.string_new_with_utf8_chars(_class_name_string.godot_owner, "{name}Array")
+    cdef StringName _class_name = StringName.new2(_class_name_string)
+
+    cdef String _method_name_string = String.new0()
+    _interface.string_new_with_utf8_chars(_method_name_string.godot_owner, "get_typed_class_name")
+    cdef StringName _method_name = StringName.new2(_method_name_string)
+
+
+    cdef GDExtensionPtrBuiltInMethod method_to_call = gdnative_interface.variant_get_ptr_builtin_method(GDExtensionVariantType.GDEXTENSION_VARIANT_TYPE_ARRAY, _method_name.godot_owner, 1825232092)
+
+
+    cdef GDExtensionCallError _error
+    method_to_call(self.godot_owner, NULL, _ret.godot_owner, 0)
+    return _ret
+
+  def get_typed_script(self):
+    cdef GDExtensionVariantPtr _args[1]
+    cdef {name} _ret = {name}()
+
+    cdef String _class_name_string = String.new0()
+    _interface.string_new_with_utf8_chars(_class_name_string.godot_owner, "{name}Array")
+    cdef StringName _class_name = StringName.new2(_class_name_string)
+
+    cdef String _method_name_string = String.new0()
+    _interface.string_new_with_utf8_chars(_method_name_string.godot_owner, "get_typed_script")
+    cdef StringName _method_name = StringName.new2(_method_name_string)
+
+
+    cdef GDExtensionPtrBuiltInMethod method_to_call = gdnative_interface.variant_get_ptr_builtin_method(GDExtensionVariantType.GDEXTENSION_VARIANT_TYPE_ARRAY, _method_name.godot_owner, 1460142086)
+
+
+    cdef GDExtensionCallError _error
+    method_to_call(self.godot_owner, NULL, &(_ret.godot_owner), 0)
+    return _ret
+
+  def make_read_only(self):
+    cdef GDExtensionVariantPtr _args[1]
+    cdef GDExtensionTypePtr _ret
+
+    cdef String _class_name_string = String.new0()
+    _interface.string_new_with_utf8_chars(_class_name_string.godot_owner, "{name}Array")
+    cdef StringName _class_name = StringName.new2(_class_name_string)
+
+    cdef String _method_name_string = String.new0()
+    _interface.string_new_with_utf8_chars(_method_name_string.godot_owner, "make_read_only")
+    cdef StringName _method_name = StringName.new2(_method_name_string)
+
+
+    cdef GDExtensionPtrBuiltInMethod method_to_call = gdnative_interface.variant_get_ptr_builtin_method(GDExtensionVariantType.GDEXTENSION_VARIANT_TYPE_ARRAY, _method_name.godot_owner, 3218959716)
+
+
+    cdef GDExtensionCallError _error
+    method_to_call(self.godot_owner, NULL, &_ret, 0)
+
+  def is_read_only(self):
+    cdef GDExtensionVariantPtr _args[1]
+    cdef bool _ret
+
+    cdef String _class_name_string = String.new0()
+    _interface.string_new_with_utf8_chars(_class_name_string.godot_owner, "{name}Array")
+    cdef StringName _class_name = StringName.new2(_class_name_string)
+
+    cdef String _method_name_string = String.new0()
+    _interface.string_new_with_utf8_chars(_method_name_string.godot_owner, "is_read_only")
+    cdef StringName _method_name = StringName.new2(_method_name_string)
+
+
+    cdef GDExtensionPtrBuiltInMethod method_to_call = gdnative_interface.variant_get_ptr_builtin_method(GDExtensionVariantType.GDEXTENSION_VARIANT_TYPE_ARRAY, _method_name.godot_owner, 3918633141)
+
+
+    cdef GDExtensionCallError _error
+    method_to_call(self.godot_owner, NULL, &_ret, 0)
+    return _ret

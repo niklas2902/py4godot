@@ -1,4 +1,4 @@
-#include "gdnative_api_struct.gen.h"
+/*#include "gdnative_api_struct.gen.h"
 
 static const godot_gdnative_core_api_struct* api_core;
 static const godot_gdnative_ext_nativescript_api_struct *nativescript_api;
@@ -28,3 +28,4 @@ void print_ptr(void* owner)
 {
    printf("%p \n", owner);
 }
+*/

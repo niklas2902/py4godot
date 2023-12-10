@@ -1,3 +1,3 @@
-[submodule "py4godot/godot-headers"]
-	path = py4godot/godot-headers
-	url = https://github.com/godotengine/godot-headers.git
+[submodule "py4godot/gdextension-api"]
+	path = py4godot/gdextension-api
+	url = https://github.com/niklas2902/gdextension-api.git

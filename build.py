@@ -3,18 +3,22 @@ import os
 import subprocess
 import time
 from Cython.Build import cythonize
-import generate_bindings,generate_bindings_pyi
+import generate_bindings, generate_bindings_pyi
 
 from meson_scripts import copy_tools, download_python, generate_init_files, \
     locations, platform_check, generate_godot, \
     download_godot
-generate_bindings_pyi.build()
-generate_bindings.build()
+
+
+# generate_bindings_pyi.build()
+# generate_bindings.build()
 
 def cythonize_files():
+    return
     module = cythonize('py4godot_core_holder/*.pyx', language_level=3)
     module = cythonize('py4godot/core/*/*.pyx', language_level=3)
     module += cythonize("py4godot/classes/*.pyx", language_level=3)
+    module += cythonize("py4godot/classes/utils.pyx", language_level=3)
     module += cythonize("py4godot/utils/*.pyx", language_level=3)
     module += cythonize("py4godot/pluginscript_api/*.pyx", language_level=3)
     module += cythonize("py4godot/pluginscript_api/*/*.pyx", language_level=3)
@@ -22,6 +26,36 @@ def cythonize_files():
     module += cythonize("py4godot/gdnative_api/*.pyx", language_level=3)
     module += cythonize("py4godot/enums/*.pyx", language_level=3)
     module += cythonize("py4godot/events/*.pyx", language_level=3)
+
+
+def generate_files():
+    # res = subprocess.Popen(f"python generate_classes.py", shell=True)
+    # res.wait()
+    # if res.returncode != 0:
+    #    raise Exception("generation failed")
+    # res = subprocess.Popen(f"python generate_classes_cpp.py", shell=True)
+    # res.wait()
+    # if res.returncode != 0:
+    #    raise Exception("generation failed")
+    # res = subprocess.Popen(f"python generate_classes_hpp.py", shell=True)
+    # res.wait()
+    # if res.returncode != 0:
+    #    raise Exception("generation failed")
+    # TODO: enable again
+    # res = subprocess.Popen(f"python generate_enums.py", shell=True)
+    # res.wait()
+    # res = subprocess.Popen(f"python generate_enums_cpp.py", shell=True)
+    # res.wait()
+    # if res.returncode != 0:
+    #    raise Exception("generation failed")
+    res = subprocess.Popen(f"python generate_classes_pyi.py", shell=True)
+    res.wait()
+    if res.returncode != 0:
+        raise Exception("generation failed")
+    # res = subprocess.Popen(f"python cythonize_test.py", shell=True)
+    # res.wait()
+    # if res.returncode != 0:
+    #    raise Exception("generation failed")
 
 
 def compile_python_ver_file(platform):
@@ -50,6 +84,8 @@ def get_compiler():
     raise Exception("No compiler found")
 
 
+generate_files()
+
 current_platform = platform_check.get_platform()
 
 command_separator = "&"
@@ -71,7 +107,7 @@ should_run_tests = args.run_tests.lower() == "true"
 # Determining if godot binary should be downloaded
 should_download_godot = args.download_godot.lower() == "true"
 
-build_dir = f"build_meson/{args.target_platform}"
+build_dir = f"build/{args.target_platform}"
 
 start = time.time()
 if args.compiler is None:
@@ -79,7 +115,7 @@ if args.compiler is None:
     args.compiler = get_compiler()
     print(f"Got compiler:{args.compiler}")
 
-cythonize_files()
+# cythonize_files()
 
 # loading the needed python files for the target platform
 download_python.download_file(args.target_platform, allow_copy=True)
@@ -92,13 +128,23 @@ compile_python_ver_file(current_platform)
 # initializing for msvc if wanted as compiler (todo:should be improved sometime)
 msvc_init = f"vcvarsall.bat {'x86_amd64'} {command_separator} cl {command_separator} " if "msvc" in args.compiler else ""
 
-res = subprocess.Popen(msvc_init +
-                       f"meson {build_dir} --cross-file platforms/{args.target_platform}.cross "
-                       f"--cross-file platforms/compilers/{args.compiler}_compiler.native "
-                       f"--cross-file platforms/binary_dirs/python_ver_compile.cross "
-                       f"--buildtype=release {'--wipe' if os.path.isdir(build_dir) else ''}"
-                       f"{command_separator} ninja -C build_meson/{args.target_platform}",
-                       shell=True)
+res = None
+if os.path.exists(build_dir):
+    res = subprocess.Popen(msvc_init +
+                           f"meson {build_dir} --cross-file platforms/{args.target_platform}.cross "
+                           f"--cross-file platforms/compilers/{args.compiler}_compiler.native "
+                           f"--cross-file platforms/binary_dirs/python_ver_compile.cross "
+                           f"--buildtype=release"
+                           f"{command_separator} meson compile -C build/{args.target_platform}",
+                           shell=True)
+else:
+    res = subprocess.Popen(msvc_init +
+                           f"meson {build_dir} --cross-file platforms/{args.target_platform}.cross "
+                           f"--cross-file platforms/compilers/{args.compiler}_compiler.native "
+                           f"--cross-file platforms/binary_dirs/python_ver_compile.cross "
+                           f"--buildtype=release"
+                           f"{command_separator} meson compile -C build/{args.target_platform}",
+                           shell=True)
 
 res.wait()
 copy_tools.run(args.target_platform)
@@ -122,7 +168,7 @@ if should_run_tests:
     start = time.time()
     copy_tools.copy_tests(args.target_platform)
     res = subprocess.Popen(
-        f"ninja -C build_meson/{args.target_platform} test", shell=True)
+        f"ninja -C build/{args.target_platform} test", shell=True)
     res.wait()
     streamdata = res.communicate()[0]
     rc = res.returncode

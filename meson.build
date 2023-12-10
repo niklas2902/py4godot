@@ -1,6 +1,6 @@
-project('py4godot', 'c')
+project('py4godot', 'cpp')
 
-cc = meson.get_compiler('c')
+cc = meson.get_compiler('cpp')
 message('system:'+build_machine.system())
 message('cpu_familiy:'+build_machine.cpu_family())
 platform_format = ''
@@ -13,10 +13,16 @@ message('platform:'+platform_format)
 message('machine:'+machine)
 
 extra_args = []
-message(meson.get_compiler('c').get_id())
+message(meson.get_compiler('cpp').get_id())
 
-if meson.get_compiler('c').get_id() == 'gcc'
-    add_global_arguments('-DMS_WIN64', language : 'c')
+if meson.get_compiler('cpp').get_id() == 'gcc'
+    add_global_arguments('-DMS_WIN64', language : 'cpp')
+endif
+if meson.get_compiler('cpp').get_id() == 'msvc'
+    add_global_arguments('/bigobj', language : 'cpp')
+    add_global_arguments('-d2SSAOptimizer-', language : 'cpp')
+    add_global_arguments('/DEBUG:FULL', language : 'cpp')
+    add_global_arguments('/Z7', language : 'cpp')
 endif
 
 message(meson.current_source_dir())
@@ -24,14 +30,18 @@ message(meson.current_source_dir())
 if build_machine.system() == 'windows'
     py = import('python').find_installation('python3')
     dep_py = py.dependency()
-    internal_inc = include_directories('py4godot/godot-headers', 'py4godot/core', 'py4godot/enums',
-    'py4godot/classes', 'py4godot/pluginscript_api', 'py4godot/godot_bindings',)
+    internal_inc = include_directories('py4godot/gdextension-api/', 'py4godot/core', 'py4godot/enums',
+    'py4godot/classes', 'py4godot/pluginscript_api', 'py4godot/godot_bindings',
+    'py4godot/script_instance', 'py4godot/core/variant4', 'py4godot/cppcore', 'py4godot/cppenums',
+    'py4godot/cppclasses', 'py4godot/cpputils', 'py4godot/script_language', 'py4godot/pluginscript_api',
+    'py4godot/pluginscript_api/utils')
     glob = run_command('python', files(meson.current_source_dir()+'/meson_scripts/glob_tools.py'))
+    glob_cpp = run_command('python', files(meson.current_source_dir()+'/meson_scripts/glob_tools_cpp.py'))
 endif
 
 if build_machine.system() == 'linux'
     lib_py = cc.find_library('python3.9', dirs:meson.current_source_dir()+'/python_files/cpython-3.9.7-'+machine+platform_format+'/python/install/lib')
-    internal_inc = include_directories('py4godot/godot-headers', 'py4godot/core', 'py4godot/enums',
+    internal_inc = include_directories('py4godot/gdextension-api/', 'py4godot/core', 'py4godot/enums',
     'py4godot/classes', 'py4godot/pluginscript_api', 'py4godot/godot_bindings',
     'python_files/cpython-3.9.7-linux'+platform_format+'/python/install/include/python3.9')
     glob = run_command('python3', files(meson.current_source_dir()+'/meson_scripts/glob_tools.py'))
@@ -40,16 +50,19 @@ endif
 
 godot_program = find_program('godot')
 sources = glob.stdout().strip().split('\n')
+
+cppsources = glob_cpp.stdout().strip().split('\n')
+foreach entry : sources
+    message(entry)
+endforeach
+
+main_lib = shared_library('main',cppsources,
+dependencies:[dep_py], include_directories:internal_inc,name_prefix:'',c_args:extra_args,
+ link_args : ['/DEBUG:FULL'], cpp_args:['/DLIBRARY_EXPORTS=1'])
+
 foreach source : sources
-    #cache_output = run_command('python', files(meson.current_source_dir()+'/meson_scripts/build_cache_checker.py'), source, build_machine.system()+platform_format)
-    #output = cache_output.stdout().strip()
-    #message(output)
-    #message('source:'+source)
-    #if cache_output.returncode() == 0
-    #    continue
-    #endif
-    shared_library(source, source+'.c',
-    dependencies:[dep_py], include_directories:internal_inc,name_prefix:'',c_args:extra_args )
+    shared_library(source.replace('\\','#'), [source+'.cpp'],
+    dependencies:[dep_py], include_directories:internal_inc,name_prefix:'',c_args:extra_args, link_args : ['/DEBUG:FULL'], link_with : main_lib )
 endforeach
 
 test('test_vector3', godot_program, args : ['--path', 'tests/core/vector3', '--no-window'], workdir:meson.source_root(), timeout:1000, is_parallel:false)

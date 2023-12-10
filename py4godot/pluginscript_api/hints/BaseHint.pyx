@@ -1,8 +1,6 @@
-from py4godot.godot_bindings.binding_external cimport *
-from py4godot.enums.enums cimport *
 cdef class BaseHint(object):
     def __init__(self):
-        self.hint = GODOT_PROPERTY_HINT_NONE
+        self.hint = 0
         self.hint_string = ""
     def get_hint(self):
         return self.hint
