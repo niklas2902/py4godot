@@ -115,7 +115,6 @@ cdef api bint instance_call(GDExtensionScriptInstanceDataPtr p_self, GDExtension
         var.native_ptr = <void*>p_args[index]
         args.append(<object>var.get_converted_value(True))
     try:
-        print_error(f"call_method:{py_method_name_str}|{instance_object}")
         if not hasattr(instance_object,py_method_name_str):
             return 1
         method = getattr(instance_object,py_method_name_str)

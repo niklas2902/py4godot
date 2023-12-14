@@ -471,9 +471,9 @@ def generate_args(method_with_args, builtin_classes, is_cpp=False):
     if "arguments" not in method_with_args:
         if method_with_args["is_vararg"]:
             if not is_cpp:
-                return "std::vector<Variant> varargs = {}"
+                return "std::vector<PyObject*>& varargs"
             else:
-                return "std::vector<Variant> varargs"
+                return "std::vector<PyObject*>& varargs"
         return result[:-2]
 
     for arg in method_with_args["arguments"]:
@@ -493,9 +493,7 @@ def generate_args(method_with_args, builtin_classes, is_cpp=False):
     result = result[:-2]
 
     if method_with_args["is_vararg"]:
-        result += ", std::vector<Variant> varargs "
-        if not is_cpp:
-            result += "= {}"
+        result += ", std::vector<PyObject*>& varargs "
     return result
 
 

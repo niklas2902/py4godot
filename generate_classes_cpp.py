@@ -442,9 +442,9 @@ def generate_varargs_variants(mMethod):
 
     for arg in mMethod["arguments"]:
         if arg["type"] in builtin_classes:
-            res += f"{INDENT * 2}Variant variant_{pythonize_name(arg['name'])} = Variant({pythonize_name(arg['name'])});"
+            res += f"{INDENT * 2}Variant* variant_{pythonize_name(arg['name'])} = new Variant({pythonize_name(arg['name'])});"
         else:
-            res += f"{INDENT * 2}Variant variant_{pythonize_name(arg['name'])} = Variant(*{pythonize_name(arg['name'])});"
+            res += f"{INDENT * 2}Variant* variant_{pythonize_name(arg['name'])} = new Variant(*{pythonize_name(arg['name'])});"
         res = generate_newline(res)
     return res
 
@@ -454,13 +454,43 @@ def generate_variant_vector(mMethod):
     if mMethod["is_vararg"]:
         res += f"{INDENT * 2}std::vector<void*> argument_array{{}};"
         res = generate_newline(res)
+        res += f"{INDENT * 2}std::vector<Variant*> variant_argument_array{{}};"
+        res = generate_newline(res)
         if "arguments" in mMethod.keys():
             for arg in mMethod["arguments"]:
-                res += f"{INDENT * 2}argument_array.push_back(&variant_{pythonize_name(arg['name'])}.native_ptr);"
+                res += f"{INDENT * 2}argument_array.push_back(&variant_{pythonize_name(arg['name'])}->native_ptr);"
                 res = generate_newline(res)
         res += f"{INDENT * 2}for(auto& _variant: varargs){{"
         res = generate_newline(res)
-        res += f"{INDENT * 3}argument_array.push_back(&_variant.native_ptr);"
+        res += f"{INDENT * 3}Variant* _var = new Variant(1);"
+        res = generate_newline(res)
+        res += f'{INDENT * 3}_var->init_from_py_object_native_ptr(_variant, "Object");'
+        res = generate_newline(res)
+        res += f'{INDENT * 3}variant_argument_array.push_back(_var);'
+        res = generate_newline(res)
+        res += f"{INDENT * 3}argument_array.push_back(&_var->native_ptr);"
+        res = generate_newline(res)
+        res += f"{INDENT * 2}}}"
+        res = generate_newline(res)
+
+    return res
+
+
+def generate_delete_varargs_variants(mMethod):
+    res = ""
+    if "arguments" not in mMethod:
+        return ""
+    if not mMethod["is_vararg"]:
+        return ""
+
+    if "arguments" in mMethod.keys():
+        for arg in mMethod["arguments"]:
+            res = generate_newline(res)
+            res += f"{INDENT * 2}delete variant_{pythonize_name(arg['name'])};"
+        res = generate_newline(res)
+        res += f"{INDENT * 2}for(auto& _variant:variant_argument_array){{"
+        res = generate_newline(res)
+        res += f"{INDENT * 3}delete _variant;"
         res = generate_newline(res)
         res += f"{INDENT * 2}}}"
         res = generate_newline(res)
@@ -484,6 +514,8 @@ def generate_method(class_, mMethod):
         res += generate_method_body_standard(class_, mMethod)
     else:
         res += generate_method_body_virtual(class_, mMethod)
+
+    res += generate_delete_varargs_variants(mMethod)
     res = generate_newline(res)
     res += "}"
     res = generate_newline(res)

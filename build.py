@@ -117,6 +117,7 @@ if args.compiler is None:
 
 # cythonize_files()
 
+copy_tools.clear_build()
 # loading the needed python files for the target platform
 download_python.download_file(args.target_platform, allow_copy=True)
 

@@ -1,3 +1,4 @@
+import shutil
 from shutil import copy, copytree, rmtree
 import os
 import glob
@@ -97,6 +98,31 @@ def copy_stub_files(platform):
             exist_ok=True)
         copy(file,
              f"build/final/{platform}/{config_data['python_ver']}-{platform}/python/install/Lib/site-packages/" + file)
+
+
+def onerror(func, path, exc_info):
+    """
+    Error handler for ``shutil.rmtree``.
+
+    If the error is due to an access error (read only file)
+    it attempts to add write permission and then retries.
+
+    If the error is for another reason it re-raises the error.
+
+    Usage : ``shutil.rmtree(path, onerror=onerror)``
+    """
+    import stat
+    # Is the error an access error?
+    if not os.access(path, os.W_OK):
+        os.chmod(path, stat.S_IWUSR)
+        func(path)
+    else:
+        raise
+
+
+def clear_build():
+    shutil.rmtree(os.path.dirname(
+        f"build/final/"), onerror=onerror)
 
 
 if __name__ == "__main__":

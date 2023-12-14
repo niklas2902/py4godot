@@ -545,11 +545,19 @@ def convert_to_py_if_variant(method_):
 def generate_varargs_vector(method):
     result = ""
     if method["is_vararg"]:
-        result += f"{INDENT * 2}cdef vector[Variant] args_vector = vector[Variant]()"
+        result += f"{INDENT * 2}cdef vector[PyObject*] args_vector"
+        result = generate_newline(result)
+        result += f"{INDENT * 2}cdef list args_list_pyvariants = []"
+        result = generate_newline(result)
+        result += f"{INDENT * 2}cdef PyVariant args_variant"
         result = generate_newline(result)
         result += f"{INDENT * 2}for arg in varargs:"
         result = generate_newline(result)
-        result += f"{INDENT * 3}args_vector.push_back({convert_to_variant('arg')}.variant)"
+        result += f"{INDENT * 3}args_variant = {convert_to_variant('arg')}"
+        result = generate_newline(result)
+        result += f"{INDENT * 3}args_list_pyvariants.append(args_variant)"
+        result = generate_newline(result)
+        result += f"{INDENT * 3}args_vector.push_back(<PyObject*>arg)"
         result = generate_newline(result)
     return result
 

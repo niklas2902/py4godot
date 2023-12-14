@@ -150,7 +150,7 @@ def generate_class_imports(classes):
     result = "from py4godot.classes.generated4_core import *"
     result = generate_newline(result)
     for class_ in classes:
-        result += f"from py4godot.classes.{class_}.{class_} import *"
+        result += f"from py4godot.classes.{class_}.{class_} import {class_}"
         result = generate_newline(result)
     return result
 
