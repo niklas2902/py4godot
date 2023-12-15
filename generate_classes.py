@@ -1110,7 +1110,7 @@ def generate_operators_for_class(class_name):
 
                     res += f"{INDENT * 3}handled = True"
                     res = generate_newline(res)
-                    if op.return_type in builtin_classes:
+                    if op.return_type in builtin_classes - {"float", "int", "bool"}:
                         res += f"{INDENT * 3}_ret.{op.return_type}_internal_class = {address_param('self', class_name)} {operator} {address_param('other', target)}"
                     elif op.return_type in {"Variant", "PyVariant",
                                             "object"}:  # I don't know the correct type, use only one
