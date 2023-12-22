@@ -77,6 +77,7 @@ def generate_import():
     result = \
         """from py4godot.utils.Wrapper4 import *
 from py4godot.utils.VariantTypeWrapper4 import *
+import py4godot.classes.Object.Object as __object__
 """
     return result
 
@@ -101,7 +102,7 @@ def generate_cast(classname):
     res = ""
     res += f"{INDENT}@staticmethod"
     res = generate_newline(res)
-    res += f"{INDENT}def cast(other:Object)->{classname}:pass"
+    res += f"{INDENT}def cast(other:__object__.Object)->{classname}:pass"
     res = generate_newline(res)
     return res
 
@@ -147,10 +148,10 @@ def generate_constructors(class_):
 
 
 def generate_class_imports(classes):
-    result = "from py4godot.classes.generated4_core import *"
+    result = "import py4godot.classes.generated4_core as __core__"
     result = generate_newline(result)
     for class_ in classes:
-        result += f"from py4godot.classes.{class_}.{class_} import {class_}"
+        result += f"import py4godot.classes.{class_}.{class_} as __{class_.lower()}__"
         result = generate_newline(result)
     return result
 
@@ -161,7 +162,7 @@ def generate_newline(str_):
 
 def get_base_class(class_):
     if "inherits" in class_.keys():
-        return class_["inherits"]
+        return "__" + class_["inherits"].lower() + "__." + class_["inherits"]
     if class_["name"] in builtin_classes:
         return "VariantTypeWrapper4"
     return "Wrapper4"
@@ -267,17 +268,6 @@ def get_variant_type(class_name):
     return DICT[class_name.lower()]
 
 
-def generate_virtual_return_type(return_type):
-    if return_type == "bool":
-        return "False"
-    elif return_type == "int":
-        return "0"
-    elif return_type == "String":
-        return "String()"
-
-    return return_type + "()"
-
-
 def is_static(mMethod):
     return mMethod["is_static"]
 
@@ -289,23 +279,6 @@ def generate_method_headers(mMethod):
         res = generate_newline(res)
         return res
     return ""
-
-
-def generate_native_params(mMethod):
-    if "arguments" not in mMethod.keys():
-        return ""
-    res = ""
-    for arg in mMethod["arguments"]:
-        if arg["type"] == "String":
-            res += f"{INDENT * 2}cdef String string_{arg['name']} = c_string_to_string({pythonize_name(arg['name'])}.encode('utf-8'))"
-            res = generate_newline(res)
-        if arg["type"] == "StringName":
-            res += f"{INDENT * 2}cdef StringName string_name_{arg['name']} = c_string_to_string_name({pythonize_name(arg['name'])}.encode('utf-8'))"
-            res = generate_newline(res)
-        if arg["type"] == "Variant":
-            res += f"{INDENT * 2}cdef Variant variant_{arg['name']} = Variant({pythonize_name(arg['name'])})"
-            res = generate_newline(res)
-    return res
 
 
 def generate_method(class_, mMethod):
@@ -324,7 +297,7 @@ def get_ret_value(method):
             return_type = method["return_value"]["type"]
         else:
             return_type = method["return_type"]
-        return untypearray(unbitfield_type(unenumize_type(ungodottype(return_type))))
+        return ungodottype(untypearray(unbitfield_type(unenumize_type(return_type))))
 
 
 def generate_operators(class_):
@@ -456,6 +429,11 @@ def ungodottype(type_):
         return "str"
     if (type_ == "Variant"):
         return "object"
+    if (type_ in classes):
+        return f"__{type_.lower()}__.{type_}"
+    elif type in builtin_classes:
+        return f"__core__.{type_}"
+
     return type_
 
 
@@ -482,9 +460,9 @@ def generate_default_arg(arg, arg_type):
     if "default_value" in arg:
         if arg_type in set_to_iterate:
             if arg_type in builtin_classes:
-                return f"= {arg_type}.new0()"
+                return f"= __core__.{arg_type}.new0()"
             else:
-                return f"= {arg_type}.constructor()"
+                return f"= __{arg_type.lower()}__.{arg_type}.constructor()"
         else:
             return f"={pythonize_boolean_types(unref_type(unnull_type(arg['default_value'])))}"
 
@@ -582,7 +560,7 @@ def generate_classes(classes, filename, is_core=False):
         res += generate_class_imports(get_classes_to_import(classes))
         res = generate_newline(res)
     else:
-        res += "from py4godot.classes.Object.Object import *"
+        res += "import py4godot.classes.Object.Object as __object__"
         res = generate_newline(res)
     for class_ in classes:
         if (class_["name"] in IGNORED_CLASSES):

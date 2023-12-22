@@ -87,10 +87,6 @@ cdef api GDExtensionBool instance_has_method(GDExtensionScriptInstanceDataPtr p_
     method_name.StringName_internal_class = internal_method_name
     cdef String method_name_str = String.new2(method_name)
     cdef unicode py_method_name_str = gd_string_to_py_string(method_name_str)
-    try:
-        print_error(f"has_method:{py_method_name_str}|{instance_owner}")
-    except Exception as e:
-        print_error("Exception:", e)
     return hasattr(<object>(instance.owner), py_method_name_str)
 
 cdef api bint instance_call(GDExtensionScriptInstanceDataPtr p_self, GDExtensionConstStringNamePtr p_method, const GDExtensionConstVariantPtr *p_args, GDExtensionInt p_argument_count, GDExtensionVariantPtr r_return, GDExtensionCallError *r_error) with gil:
@@ -126,5 +122,5 @@ cdef api bint instance_call(GDExtensionScriptInstanceDataPtr p_self, GDExtension
 
     var.native_ptr = r_return
     py_typename = str(type(result).__name__)
-    get_var.init_from_py_object(<object>result, py_typename.encode("utf-8"))
+    var.init_from_py_object_native_ptr(<PyObject*>result, py_typename.encode("utf-8"))
     return 1

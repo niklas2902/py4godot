@@ -24,9 +24,6 @@ cdef api TransferObject exec_class(str source_string, str class_name_):
 
     cdef TransferObject transfer_object = TransferObject()
 
-    print_error("exec_class: start")
-    cdef str load_file_str = "load file:" + class_name_
-    print_error(load_file_str.encode("utf-8"))
     methods = []
     gd_class = None
     gd_tool_class = None
@@ -42,12 +39,10 @@ cdef api TransferObject exec_class(str source_string, str class_name_):
         class_name = class_name_.split("/")[-1].replace(".py", "")
         if py_class_name_.endswith("\\") or py_class_name_.endswith("/"):
             py_class_name_ = py_class_name_[:-1]
-        print_error("exec_class: try")
         module_name = py_class_name_.replace("res://", "").replace("/",".").replace(".py", "").replace("\\", ".")
         file_to_load = py_class_name_.replace("res://", "")
         module = SourceFileLoader(module_name,
         file_to_load).load_module()
-        print_error("exec_class: after load module")
 
     except Exception as e:
         print_error("exec_class: Exception happened:")
@@ -59,7 +54,6 @@ cdef api TransferObject exec_class(str source_string, str class_name_):
         print_error(my_str_exception)
 
     if gd_class == None:
-        print_error("set gd_class to Object")
         gd_class = Object
 
     for signal in signals:
@@ -78,27 +72,18 @@ cdef api TransferObject exec_class(str source_string, str class_name_):
 
     Py_INCREF(gd_class)
     transfer_object.class_ = <PyObject*>gd_class
-    print_error("after exec_class")
-    print_error(str(gd_class).encode("utf-8"))
     return transfer_object
 
 def gdclass(cls):
     global gd_class
-    print_error("gdclass")
 
     cdef str global_class_name = "global class_name:"+ class_name
     cdef str __class__name = "cls.__name__:"+ cls.__name__
-    print_error(global_class_name.encode("utf-8"))
-    print_error("before classname:")
-    print_error(__class__name.encode("utf-8"))
     if cls.__name__ != class_name:
         properties.clear()
         default_values.clear()
         return cls
-    print_error(("gd_class:" + str(gd_class)).encode("utf-8"))
     if(gd_class == None):
-        print_error("set_gd_class to cls")
-        print_error(("cls:" + str(cls)).encode("utf-8"))
         gd_class = cls
     else:
         raise Exception("More than one class was marked as gd_class or gd_tool_class in one file")

@@ -7,6 +7,9 @@
 #include "py4godot/cppclasses/Script/Script.h"
 #include "py4godot/cppcore/Variant.h"
 #include <cassert>
+#include <mutex>
+
+std::mutex mutex_loader{};
 
 GDExtensionPtrOperatorEvaluator operator_equal_string_name_loader;
 std::int64_t PyResourceFormatLoader::id_counter{1000};
@@ -53,7 +56,13 @@ void PyResourceFormatLoader::_get_resource_type( String& path, GDExtensionTypePt
 }
 void PyResourceFormatLoader::_get_resource_script_class( String& path, GDExtensionTypePtr res){}
 void PyResourceFormatLoader::_get_resource_uid( String& path, GDExtensionTypePtr res){
+    mutex_loader.lock();
     char* res_string;
+    if (!path.ends_with(c_string_to_string("py")) && !path.ends_with(c_string_to_string("pyw"))){
+        *((std::int64_t*)res) = -1;
+        mutex_loader.unlock();
+        return;
+    }
     gd_string_to_c_string(path, path.length(), &res_string);
     std::string str_res_string = std::string{res_string};
     if(path_to_id.find(str_res_string) == path_to_id.end()){
@@ -61,6 +70,7 @@ void PyResourceFormatLoader::_get_resource_uid( String& path, GDExtensionTypePtr
         path_to_id[str_res_string] = PyResourceFormatLoader::id_counter;
     }
     *((std::int64_t*)res) = path_to_id[str_res_string];
+    mutex_loader.unlock();
 }
 void PyResourceFormatLoader::_get_dependencies( String& path, bool add_types, GDExtensionTypePtr res){}
 void PyResourceFormatLoader::_rename_dependencies( String& path, Dictionary& renames, GDExtensionTypePtr res){}

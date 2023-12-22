@@ -453,6 +453,8 @@ PyObject* cast_to_type(char* classname, PyObject* object_to_cast){
             return cast_to_colorpickerbutton(object_to_cast);
         case str2int("ScriptExtension"):
             return cast_to_scriptextension(object_to_cast);
+        case str2int("PyScriptExtension"):
+            return cast_to_scriptextension(object_to_cast);
         case str2int("InputEventKey"):
             return cast_to_inputeventkey(object_to_cast);
         case str2int("ConeTwistJoint3D"):

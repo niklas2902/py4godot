@@ -201,9 +201,7 @@ def generate_return_value(method_, classname):
         if ret_val.type in classes:
             if ret_val.type in builtin_classes - {"float", "int", "bool", "Nil"} and not is_static(
                     method_):  # TODO get rid of is_static
-                result += f"{INDENT * 2}buffer_{classname}_{method_['name']}= new {ret_val.type}();"
-                result = generate_newline(result)
-                result += f"{INDENT * 2}{ret_val.type}& {ret_val.name}" + f"= *(buffer_{classname}_{method_['name']});"
+                result += f"{INDENT * 2}{ret_val.type} {ret_val.name}{{}};"
             elif ret_val.type in builtin_classes:
                 result += f"{INDENT * 2}{ungodottype(ret_val.type)} {ret_val.name}" + "{};"
             else:

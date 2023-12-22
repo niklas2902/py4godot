@@ -180,7 +180,6 @@ void PyScriptExtension::_placeholder_instance_create( Object& for_object, GDExte
         return;
     }
 
-    //print_error("before get_class")
     //for_object.get_class()
     set_owner(instance, ((void**)for_object.godot_owner)[0]);
     GDExtensionVariantFromTypeConstructorFunc constructor_func;
