@@ -1,7 +1,7 @@
 import json
 import os.path
 
-from generate_classes_hpp import get_ret_value, has_native_struct, generate_args, ungodottype
+from generate_classes_hpp import get_ret_value, has_native_struct, generate_args, ungodottype, generate_args_for_call
 from generate_enums import enumize_name
 
 INDENT = "  "
@@ -154,14 +154,31 @@ def generate_variant_type(class_):
         return f"GDExtensionVariantType::GDEXTENSION_VARIANT_TYPE_NIL"
 
 
+def call_constructor_args(constructor):
+    res = ""
+    if "arguments" not in constructor.keys():
+        return res
+    for arg in constructor["arguments"]:
+        res += pythonize_name(arg['name']) + ", "
+
+    return res.rstrip(", ")
+
+
 def generate_constructors(class_):
     res = ""
     if "constructors" not in class_.keys():
         return res
+
+    res += generate_copy_constructor(class_)
+    res = generate_newline(res)
+    res += generate_copy_operator(class_)
+
     for constructor in class_["constructors"]:
         res += f"{INDENT}{class_['name']} {class_['name']}::new{constructor['index']}({generate_constructor_args(constructor)})" + "{"
         res = generate_newline(res)
         res += f"{INDENT * 2}{class_['name']} _class;"
+        res = generate_newline(res)
+        res += f"{INDENT * 2}_class.shouldBeDeleted = true;"
         res = generate_newline(res)
         res += f"{INDENT * 2}_class.set_variant_type({generate_variant_type(class_['name'])});"
         res = generate_newline(res)
@@ -177,6 +194,62 @@ def generate_constructors(class_):
         res = generate_newline(res)
         res += "}"
         res = generate_newline(res)
+
+        res += f"{INDENT}{class_['name']} {class_['name']}::py_new{constructor['index']}({generate_constructor_args(constructor)})" + "{"
+        res = generate_newline(res)
+        res += f"{INDENT * 2}auto _class = {class_['name']}::new{constructor['index']}({call_constructor_args(constructor)});"
+        res = generate_newline(res)
+        res += f"{INDENT * 2}_class.shouldBeDeleted = false;"
+        res = generate_newline(res)
+        res += f"{INDENT * 2}return _class;"
+        res = generate_newline(res)
+        res += "}"
+        res = generate_newline(res)
+    return res
+
+
+def generate_copy_constructor(class_):
+    res = ""
+    res += f"{INDENT}{class_['name']}::{class_['name']}(const {class_['name']}& copy_val)" + "{"
+    res = generate_newline(res)
+    res = generate_newline(res)
+    res += f"{INDENT * 2}this->shouldBeDeleted = true;"
+    res = generate_newline(res)
+    res += f"{INDENT * 2}this->set_variant_type({generate_variant_type(class_['name'])});"
+    res = generate_newline(res)
+    res += f"{INDENT * 2}GDExtensionPtrConstructor constructor = functions::get_variant_get_ptr_constructor()(this->variant_type, 1);"
+    res = generate_newline(res)
+    # TODO:improve - fill with args
+    res += f"{INDENT * 2}GDExtensionTypePtr _args[1];"
+    res = generate_newline(res)
+    res += f"{INDENT * 2}_args[0] = &const_cast<{class_['name']}&>(copy_val).godot_owner;"
+    res = generate_newline(res)
+    res += f"{INDENT * 2}constructor(&this->godot_owner,_args);"
+    res += f"{INDENT}}}"
+    res = generate_newline(res)
+    return res
+
+def generate_copy_operator(class_):
+    res = ""
+    res += f"{INDENT}{class_['name']}& {class_['name']}::operator=(const {class_['name']}& copy_val)" + "{"
+    res = generate_newline(res)
+    res = generate_newline(res)
+    res += f"{INDENT * 2}this->shouldBeDeleted = copy_val.shouldBeDeleted;"
+    res = generate_newline(res)
+    res += f"{INDENT * 2}this->set_variant_type({generate_variant_type(class_['name'])});"
+    res = generate_newline(res)
+    res += f"{INDENT * 2}GDExtensionPtrConstructor constructor = functions::get_variant_get_ptr_constructor()(this->variant_type, 1);"
+    res = generate_newline(res)
+    # TODO:improve - fill with args
+    res += f"{INDENT * 2}GDExtensionTypePtr _args[1];"
+    res = generate_newline(res)
+    res += f"{INDENT * 2}_args[0] = &const_cast<{class_['name']}&>(copy_val).godot_owner;"
+    res = generate_newline(res)
+    res += f"{INDENT * 2}constructor(&this->godot_owner,_args);"
+    res = generate_newline(res)
+    res += f"{INDENT * 2}return *this;"
+    res += f"{INDENT}}}"
+    res = generate_newline(res)
     return res
 
 
@@ -263,6 +336,21 @@ def generate_return_statement(method_):
     return result
 
 
+def generate_return_py_statement(method_):
+    # TODO handle primitive types
+    ret_val = None
+    if ("return_value" in method_.keys()):
+        ret_val = ReturnType("_ret", method_['return_value']['type'])
+    else:
+        ret_val = ReturnType("_ret", method_['return_type'])
+    result = ""
+    if ret_val.type in builtin_classes - {"float", "int", "bool", "Nil"} or "typedarray::" in ret_val.type:
+        result += f"{INDENT * 2}_ret.shouldBeDeleted=false;"
+        result = generate_newline(result)
+    result += f"{INDENT * 2}return _ret;"
+    return result
+
+
 def generate_singleton_constructor(classname):
     res = ""
     res += f"{INDENT}{classname} {classname}::get_instance()" + "{"
@@ -270,6 +358,8 @@ def generate_singleton_constructor(classname):
 
     res += f"{INDENT * 2}StringName class_name = c_string_to_string_name(\"{classname}\");"
     res = generate_newline(res)
+
+    res += f"{INDENT * 2}class_name.shouldBeDeleted = true;"
     res = generate_newline(res)
 
     res += f"{INDENT * 2}{classname} singleton = {classname}();"
@@ -358,9 +448,14 @@ def generate_method_bind(current_class, method):
     res = ""
     res += f"{INDENT * 2}StringName _class_name = c_string_to_string_name(\"{current_class['name']}\");"
     res = generate_newline(res)
+    res += f"{INDENT * 2}_class_name.shouldBeDeleted = true;"
+    res = generate_newline(res)
+
     res = generate_newline(res)
 
     res += f"{INDENT * 2}StringName _method_name = c_string_to_string_name(\"{method['name']}\");"
+    res = generate_newline(res)
+    res += f"{INDENT * 2}_method_name.shouldBeDeleted = true;"
     res = generate_newline(res)
     res = generate_newline(res)
 
@@ -496,11 +591,55 @@ def generate_delete_varargs_variants(mMethod):
     return res
 
 
+def generate_py_method_body(class_, method):
+    result = ""
+
+    if ("return_value" in method.keys() or "return_type" in method.keys()):
+        if not is_static(method):
+            result += f"{INDENT * 2}auto _ret = this->{pythonize_name(method['name'])}({generate_args_for_call(method)});"
+        else:
+            result += f"{INDENT * 2}auto _ret = {class_['name']}::{pythonize_name(method['name'])}({generate_args_for_call(method)});"
+    else:
+        if not is_static(method):
+            result += f"{INDENT * 2}this->{pythonize_name(method['name'])}({generate_args_for_call(method)});"
+        else:
+            result += f"{INDENT * 2}{class_['name']}::{pythonize_name(method['name'])}({generate_args_for_call(method)});"
+
+    result = generate_newline(result)
+    if ("return_value" in method.keys() or "return_type" in method.keys()):
+        result = generate_newline(result)
+        result += generate_return_py_statement(method)
+        result = generate_newline(result)
+
+    result += free_variants(method)
+    result += f"{INDENT}}}"
+    result = generate_newline(result)
+    return result
+
+
+def free_variants(mMethod):
+    res = ""
+    if "arguments" not in mMethod.keys():
+        return res
+    for argument in mMethod["arguments"]:
+        if argument["type"] == "Variant":
+            res += f"{INDENT*2}functions::get_variant_destroy()(&{pythonize_name(argument['name'])}.native_ptr);"
+            res = generate_newline(res)
+    return res
+
+
 def generate_method(class_, mMethod):
     res = ""
     if has_native_struct(mMethod):
         return res
     args = generate_args(mMethod, builtin_classes, True)
+    py_def_function = f"{INDENT}{ungodottype(unenumize_type(untypearray(get_ret_value(mMethod))))} {class_['name']}::py_{pythonize_name(mMethod['name'])}({args})" + "{"
+    res += py_def_function
+    res = generate_newline(res)
+    res += generate_py_method_body(class_, mMethod)
+    res = generate_newline(res)
+    res = generate_newline(res)
+
     def_function = f"{INDENT}{ungodottype(unenumize_type(untypearray(get_ret_value(mMethod))))} {class_['name']}::{pythonize_name(mMethod['name'])}({args})" + "{"
     res += def_function
     res = generate_newline(res)
@@ -717,9 +856,31 @@ def collect_members(obj):
 
 def generate_destructor(classname):
     res = ""
+    if classname in builtin_classes:
+        res += f"{INDENT}void {classname}::_py_destroy(){{"
+        res = generate_newline(res)
+        res += f"{INDENT * 2}auto destructor = functions::get_variant_get_ptr_destructor()({generate_variant_type(classname)});"
+        res = generate_newline(res)
+        res += f"{INDENT * 2}destructor(&godot_owner);"
+        res = generate_newline(res)
+        res += f"{INDENT}}}"
+        res = generate_newline(res)
+
     res += f"{INDENT}{classname}::~{classname}(){{"
     res = generate_newline(res)
-    res += f"{INDENT * 2}//functions::get_object_destroy()(&godot_owner);"
+    res += f"{INDENT * 2}if(shouldBeDeleted && godot_owner != nullptr){{"
+    res = generate_newline(res)
+    if classname not in builtin_classes:
+        pass
+        res += f"{INDENT * 4}functions::get_object_destroy()(&godot_owner);"
+        res = generate_newline(res)
+    else:
+        res += f"{INDENT * 4}auto destructor = functions::get_variant_get_ptr_destructor()({generate_variant_type(classname)});"
+        res = generate_newline(res)
+        res += f"{INDENT * 4}destructor(&godot_owner);"
+        res = generate_newline(res)
+
+    res += f"{INDENT * 2}}}"
     res = generate_newline(res)
     res += f"{INDENT}}}"
     return res
@@ -765,6 +926,18 @@ def generate_properties(class_):
 
 def generate_member_getter(class_, member):
     res = ""
+    res += f"{INDENT}{unbitfield_type(unenumize_type((member.type_)))} {class_}::py_member_get_{member.name}()" + "{"
+    res = generate_newline(res)
+    res += f"{INDENT}auto _ret = member_get_{member.name}();"
+    res = generate_newline(res)
+    if member.type_ in builtin_classes - {"float", "int", "bool", "Nil"}:
+        res += f"{INDENT}_ret.shouldBeDeleted=false;"
+        res = generate_newline(res)
+    res += f"{INDENT}return _ret;"
+    res = generate_newline(res)
+    res += f"{INDENT}}}"
+    res = generate_newline(res)
+
     res += f"{INDENT}{unbitfield_type(unenumize_type((member.type_)))} {class_}::member_get_{member.name}()" + "{"
     res = generate_newline(res)
     res += f"{INDENT * 2}String _member_name_string = String::new0();"
@@ -804,6 +977,13 @@ def generate_member_getter(class_, member):
 
 def generate_member_setter(class_, member):
     res = ""
+    res += f"{INDENT}void {class_}::py_member_set_{member.name}({member.type_} value)" + "{"
+    res = generate_newline(res)
+    res += f"{INDENT}member_set_{member.name}(value);"
+    res = generate_newline(res)
+    res += f"{INDENT}}}"
+    res = generate_newline(res)
+
     res += f"{INDENT}void {class_}::member_set_{member.name}({member.type_} value)" + "{"
     res = generate_newline(res)
     res += f"{INDENT * 2}String _member_name_string = String::new0();"
@@ -1043,6 +1223,8 @@ def generate_constructor(classname):
     res = generate_newline(res)
     res += f"{INDENT * 2}StringName class_name =  c_string_to_string_name(\"{classname}\");"
     res = generate_newline(res)
+    res += f"{INDENT * 2}class_name.shouldBeDeleted = true;"
+    res = generate_newline(res)
 
     res += f"{INDENT * 2}class_.set_godot_owner(functions::get_classdb_construct_object()(&class_name.godot_owner));"
     res = generate_newline(res)
@@ -1064,6 +1246,8 @@ def generate_new_static(class_):
     res += f"{INDENT * 2}{class_['name']} obj = {class_['name']}();"
     res = generate_newline(res)
     res += f"{INDENT * 2}obj.godot_owner = owner;"
+    res = generate_newline(res)
+    res += f"{INDENT * 2}obj.shouldBeDeleted = false;"
     res = generate_newline(res)
     res += f"{INDENT * 2}return obj;"
     res = generate_newline(res)

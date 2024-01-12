@@ -136,6 +136,14 @@ def generate_variant_type(class_):
         return f"GDExtensionVariantType.GDEXTENSION_VARIANT_TYPE_NIL"
 
 
+def generate_destructor(classname):
+    res = ""
+    if classname in builtin_classes:
+        res += f"{INDENT * 2}void _py_destroy();"
+        res = generate_newline(res)
+    return res
+
+
 def generate_constructors(class_):
     res = ""
     if "constructors" not in class_.keys():
@@ -144,6 +152,10 @@ def generate_constructors(class_):
         res += f"{INDENT * 2}@staticmethod"
         res = generate_newline(res)
         res += f"{INDENT * 2}{class_['name']} new{constructor['index']}({generate_constructor_args(constructor)});"
+        res = generate_newline(res)
+        res += f"{INDENT * 2}@staticmethod"
+        res = generate_newline(res)
+        res += f"{INDENT * 2}{class_['name']} py_new{constructor['index']}({generate_constructor_args(constructor)});"
         res = generate_newline(res)
     return res
 
@@ -306,7 +318,7 @@ def generate_method(class_, mMethod):
     if has_native_struct(mMethod):
         return res
     args = generate_args(mMethod)
-    def_function = f"{INDENT * 2}{ungodottype(untypearray(get_ret_value(mMethod)))} {pythonize_name(mMethod['name'])}({args});"
+    def_function = f"{INDENT * 2}{ungodottype(untypearray(get_ret_value(mMethod)))} py_{pythonize_name(mMethod['name'])}({args});"
     res = generate_newline(res)
     res += generate_method_modifiers(mMethod)
     res = generate_newline(res)
@@ -346,6 +358,13 @@ def collect_members(obj):
     print(core_classes)
 
 
+def generate_set_should_be_deleted(class_):
+    res = ""
+    res += f"{INDENT * 2}void set_shouldBeDeleted(bool val)"
+    res = generate_newline(res)
+    return res
+
+
 def generate_common_methods(class_):
     result = ""
     if not is_singleton(class_["name"]):
@@ -354,10 +373,14 @@ def generate_common_methods(class_):
     result = generate_newline(result)
     result += generate_constructors(class_)
     result = generate_newline(result)
+    result += generate_destructor(class_["name"])
+    result = generate_newline(result)
     result += generate_new_static(class_)
     result = generate_newline(result)
     result += generate_set_owner(class_)
     result = generate_newline(result)
+    if class_["name"] in builtin_classes:
+        result += generate_set_should_be_deleted(class_)
     return result
 
 
@@ -379,14 +402,14 @@ def generate_member_getter(class_, member):
     res = ""
     res += f"{INDENT}"
     res = generate_newline(res)
-    res += f"{INDENT * 2}{member.type_} member_get_{member.name}();"
+    res += f"{INDENT * 2}{member.type_} py_member_get_{member.name}();"
     res = generate_newline(res)
     return res
 
 
 def generate_member_setter(class_, member):
     res = ""
-    res += f"{INDENT * 2}void member_set_{member.name}({member.type_} value);"
+    res += f"{INDENT * 2}void py_member_set_{member.name}({member.type_} value);"
     return res
 
 

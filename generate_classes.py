@@ -167,7 +167,9 @@ def generate_constructors(class_):
             res = generate_newline(res)
         res += f"{INDENT * 2}cdef {class_['name']} _class = {class_['name']}.__new__({class_['name']})"
         res = generate_newline(res)
-        res += f"{INDENT * 2}_class.{class_['name']}_internal_class = (CPP{class_['name']}.new{constructor['index']}({generate_constructor_call_args(constructor)}))"
+        res += f"{INDENT * 2}_class.{class_['name']}_internal_class = (CPP{class_['name']}.py_new{constructor['index']}({generate_constructor_call_args(constructor)}))"
+        res = generate_newline(res)
+        res += f"{INDENT * 2}_class.{class_['name']}_internal_class = (CPP{class_['name']}.py_new{constructor['index']}({generate_constructor_call_args(constructor)}))"
         res = generate_newline(res)
         res += f"{INDENT * 2}return _class"
         res = generate_newline(res)
@@ -269,7 +271,8 @@ def generate_return_statement(method_):
             if ret_val.type in classes - builtin_classes:
                 result = f"{INDENT * 2}return None if _ret.{ret_val.type}_internal_class.get_godot_owner() == NULL else _ret"
             else:
-                result = f"{INDENT * 2}return _ret"
+                result = ""
+                result += f"{INDENT * 2}return _ret"
     result = generate_newline(result)
     return result
 
@@ -576,20 +579,20 @@ def generate_method_body_standard(class_, method):
         result += generate_return_value(class_["name"], method)
         if not is_static(method):
 
-            result += f"{INDENT * 2}{generate_ret_call(method)} = self.{class_['name']}_internal_class.{pythonize_name(method['name'])}({generate_method_args(method)}){convert_to_py_if_variant(method)}"
+            result += f"{INDENT * 2}{generate_ret_call(method)} = self.{class_['name']}_internal_class.py_{pythonize_name(method['name'])}({generate_method_args(method)}){convert_to_py_if_variant(method)}"
             result = generate_newline(result)
             result += generate_set_gd_owner_for_ret(method)
         else:
-            result += f"{INDENT * 2}{generate_ret_call(method)} = CPP{class_['name']}.{pythonize_name(method['name'])}({generate_method_args(method)}){convert_to_py_if_variant(method)}"
+            result += f"{INDENT * 2}{generate_ret_call(method)} = CPP{class_['name']}.py_{pythonize_name(method['name'])}({generate_method_args(method)}){convert_to_py_if_variant(method)}"
             result = generate_newline(result)
             result += generate_set_gd_owner_for_ret(method)
         result = generate_newline(result)
         result += generate_return_statement(method)
     else:
         if not is_static(method):
-            result += f"{INDENT * 2}self.{class_['name']}_internal_class.{pythonize_name(method['name'])}({generate_method_args(method)})"
+            result += f"{INDENT * 2}self.{class_['name']}_internal_class.py_{pythonize_name(method['name'])}({generate_method_args(method)})"
         else:
-            result += f"{INDENT * 2}CPP{class_['name']}.{pythonize_name(method['name'])}({generate_method_args(method)})"
+            result += f"{INDENT * 2}CPP{class_['name']}.py_{pythonize_name(method['name'])}({generate_method_args(method)})"
     return result
 
 
@@ -668,6 +671,7 @@ def generate_common_methods(class_):
         result += generate_get_py_script_method()
 
     result += generate_new_static(class_)
+    result += generate_del(class_)
 
     return result
 
@@ -754,12 +758,12 @@ def generate_member_getter(class_, member):
     if member.type_ != "int" and member.type_ != "float" and member.type_ != "double":
         res += f"{INDENT * 2}cdef {member.type_} _ret = {member.type_}()"
         res = generate_newline(res)
-        res += f"{INDENT * 2}_ret.{member.type_}_internal_class = self.{class_}_internal_class.member_get_{member.name}()"
+        res += f"{INDENT * 2}_ret.{member.type_}_internal_class = self.{class_}_internal_class.py_member_get_{member.name}()"
         res = generate_newline(res)
         res += f"{INDENT * 2}_ret.set_gdowner(_ret.{member.type_}_internal_class.get_godot_owner())"
         res = generate_newline(res)
     else:
-        res += f"{INDENT * 2}cdef {member.type_} _ret = self.{class_}_internal_class.member_get_{member.name}()"
+        res += f"{INDENT * 2}cdef {member.type_} _ret = self.{class_}_internal_class.py_member_get_{member.name}()"
     res = generate_newline(res)
     res += f"{INDENT * 2}return _ret"
     res = generate_newline(res)
@@ -773,9 +777,9 @@ def generate_member_setter(class_, member):
     res += f"{INDENT}def {member.name}(self, {member.type_} value):"
     res = generate_newline(res)
     if member.type_ != "int" and member.type_ != "float" and member.type_ != "double":
-        res += f"{INDENT * 2}self.{class_}_internal_class.member_set_{member.name}(value.{member.type_}_internal_class)"
+        res += f"{INDENT * 2}self.{class_}_internal_class.py_member_set_{member.name}(value.{member.type_}_internal_class)"
     else:
-        res += f"{INDENT * 2}self.{class_}_internal_class.member_set_{member.name}(value)"
+        res += f"{INDENT * 2}self.{class_}_internal_class.py_member_set_{member.name}(value)"
     res = generate_newline(res)
     return res
 
@@ -1362,6 +1366,17 @@ def generate_init(class_):
     res += f"{INDENT * 2}for arg in args:"
     res = generate_newline(res)
     res += f"{INDENT * 3}self.push_back(arg)"
+    return res
+
+
+def generate_del(class_):
+    if class_["name"] not in builtin_classes:
+        return ""
+    res = ""
+    res += f"{INDENT}def __del__(self):"
+    res = generate_newline(res)
+    res += f"{INDENT * 2}self.{class_['name']}_internal_class._py_destroy()"
+    res = generate_newline(res)
     return res
 
 

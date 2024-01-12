@@ -217,7 +217,7 @@
 
   GDExtensionPtrOperatorEvaluator operator_equal_string_name;
 
-bool string_names_equal(StringName left, StringName right){
+bool string_names_equal(StringName& left, StringName& right){
     uint8_t ret;
     operator_equal_string_name(&left.godot_owner, &right.godot_owner, &ret);
     return ret != 0;
@@ -1145,5 +1145,6 @@ void register_class(){
     StringName class_name = c_string_to_string_name("PyLanguage");
     StringName parent_class_name = c_string_to_string_name("ScriptLanguageExtension");
 
+    assert(false);
     functions::get_classdb_register_extension_class()(_library, &class_name.godot_owner, &parent_class_name.godot_owner, creation_info);
 }

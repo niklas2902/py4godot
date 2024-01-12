@@ -100,7 +100,7 @@ bool string_names_equal_script(StringName left, StringName right){
     PyScriptExtension* class_ = new PyScriptExtension();
 
     StringName class_name = c_string_to_string_name("PyScriptExtension");
-
+    class_name.shouldBeDeleted = false;
     class_->godot_owner = functions::get_classdb_construct_object()(&class_name.godot_owner);
     functions::get_object_set_instance()(class_->godot_owner,&class_name.godot_owner , class_);
 
@@ -111,6 +111,7 @@ bool string_names_equal_script(StringName left, StringName right){
 
 void* create_instance_script(void* userdata){
     StringName class_name = c_string_to_string_name("ScriptExtension");
+    class_name.shouldBeDeleted = false;
     auto gdnative_object = functions::get_classdb_construct_object()(&class_name.godot_owner);
     return gdnative_object;
 }
@@ -202,6 +203,7 @@ void PyScriptExtension::_placeholder_instance_create( Object& for_object, GDExte
         index++;
     }
 
+
     //instance.godot_owner = for_object.godot_owner;
     gd_instance->script = this;
     Py_INCREF(instance);
@@ -267,7 +269,7 @@ void PyScriptExtension::_is_placeholder_fallback_enabled(GDExtensionTypePtr res)
     *static_cast<bool*>(res) = false;
 }
 void PyScriptExtension::_get_rpc_config(GDExtensionTypePtr res){}
-void PyScriptExtension::_set_source_code_internal(String source_code){
+void PyScriptExtension::_set_source_code_internal(String& source_code){
     m.lock();
     auto gil_state = PyGILState_Ensure();
     char* c_source_code;
@@ -639,6 +641,7 @@ GDExtensionClassCallVirtual get_virtual_script(void *p_userdata, GDExtensionCons
 
     StringName name = StringName::new_static(((void**)const_cast<GDExtensionTypePtr>(p_name))[0]);
     auto test_str = String::new2(name);
+    test_str.shouldBeDeleted = false;
     const char* c_name_str = gd_string_to_c_string(&test_str.godot_owner, test_str.length());
 
     if (string_names_equal_script(script::func_name__editor_can_reload_from_file, name)){
@@ -814,6 +817,9 @@ void register_class_script(){
 
     StringName class_name = c_string_to_string_name("PyScriptExtension");
     StringName parent_class_name = c_string_to_string_name("ScriptExtension");
+    class_name.shouldBeDeleted = false;
+    parent_class_name.shouldBeDeleted = false;
+
 
     functions::get_classdb_register_extension_class()(_library, &class_name.godot_owner, &parent_class_name.godot_owner, creation_info);
 }

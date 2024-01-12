@@ -40,7 +40,7 @@ static String c_string_to_string(const char* string){
     return gd_string;
 }
 
-static void add_string_to_array(GDExtensionTypePtr array, String string){
+static void add_string_to_array(GDExtensionTypePtr array, String& string){
      GDExtensionTypePtr _args[1];
     _args[0] = &string.godot_owner;
     bool _ret;

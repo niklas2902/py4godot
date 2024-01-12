@@ -137,8 +137,17 @@ def generate_constructors(class_):
     res = ""
     if "constructors" not in class_.keys():
         return res
+
+    res += f"{INDENT}{class_['name']} (){{godot_owner = nullptr; shouldBeDeleted=false;}};"
+    res = generate_newline(res)
+    res += f"{INDENT}{class_['name']} (const {class_['name']}& copy_val);"
+    res = generate_newline(res)
+    res += f"{INDENT}{class_['name']}& operator= (const {class_['name']}& copy_val);"
+    res = generate_newline(res)
     for constructor in class_["constructors"]:
         res += f"{INDENT}static {class_['name']} new{constructor['index']}({generate_constructor_args(constructor)});"
+        res = generate_newline(res)
+        res += f"{INDENT}static {class_['name']} py_new{constructor['index']}({generate_constructor_args(constructor)});"
         res = generate_newline(res)
     return res
 
@@ -287,8 +296,11 @@ def generate_method(class_, mMethod):
         res += f"{INDENT}{generate_method_modifiers(mMethod)} {get_ret_value(mMethod)}* buffer_{class_['name']}_{mMethod['name']};"
     args = generate_args(mMethod, builtin_classes)
     def_function = f"{INDENT}{generate_method_modifiers(mMethod)} {ungodottype(unenumize_type(untypearray(get_ret_value(mMethod))))} {pythonize_name(mMethod['name'])}({args});"
+    def_function2 = f"{INDENT}{INDENT}{generate_method_modifiers(mMethod)} {ungodottype(unenumize_type(untypearray(get_ret_value(mMethod))))} py_{pythonize_name(mMethod['name'])}({args});"
     res = generate_newline(res)
     res += def_function
+    res = generate_newline(res)
+    res += def_function2
     res = generate_newline(res)
     return res
 
@@ -375,12 +387,16 @@ def generate_member_getter(class_, member):
     res = generate_newline(res)
     res += f"{INDENT}{member.type_} member_get_{member.name}();"
     res = generate_newline(res)
+    res += f"{INDENT}{member.type_} py_member_get_{member.name}();"
+    res = generate_newline(res)
     return res
 
 
 def generate_member_setter(class_, member):
     res = ""
     res += f"{INDENT}void member_set_{member.name}({member.type_} value);"
+    res = generate_newline(res)
+    res += f"{INDENT}void py_member_set_{member.name}({member.type_} value);"
     return res
 
 
@@ -497,6 +513,27 @@ def generate_args(method_with_args, builtin_classes, is_cpp=False):
     return result
 
 
+def generate_args_for_call(method_with_args, is_cpp=False):
+    result = " "
+    if (is_static(method_with_args)):
+        result = ""
+    if "arguments" not in method_with_args:
+        if method_with_args["is_vararg"]:
+            if not is_cpp:
+                return "varargs"
+            else:
+                return "varargs"
+        return result[:-2]
+
+    for arg in method_with_args["arguments"]:
+        result += f"{pythonize_name(arg['name'])}, "
+    result = result[:-2]
+
+    if method_with_args["is_vararg"]:
+        result += ", varargs "
+    return result
+
+
 def unenumize_type(type_):
     if "enum::" in type_:
         return "int"  # TODO throw this out when enabling enums
@@ -530,6 +567,9 @@ def generate_constructor(classname):
 
 def generate_destructor(classname):
     res = ""
+    if classname in builtin_classes:
+        res += f"void {INDENT}_py_destroy();"
+        res = generate_newline(res)
     res += f"{INDENT}~{classname}();"
     res = generate_newline(res)
     return res

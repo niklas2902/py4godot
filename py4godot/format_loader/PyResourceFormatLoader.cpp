@@ -22,7 +22,7 @@ bool string_names_equal_loader(StringName left, StringName right){
     PyResourceFormatLoader* class_ = new PyResourceFormatLoader();
 
     StringName class_name = c_string_to_string_name("PyResourceFormatLoader");
-
+    class_name.shouldBeDeleted = false;
     class_->godot_owner = functions::get_classdb_construct_object()(&class_name.godot_owner);
     functions::get_object_set_instance()(class_->godot_owner,&class_name.godot_owner , class_);
 
@@ -33,6 +33,7 @@ bool string_names_equal_loader(StringName left, StringName right){
 
 void* create_instance_loader(void* userdata){
     StringName class_name = c_string_to_string_name("ResourceFormatLoader");
+    class_name.shouldBeDeleted = false;
     auto gdnative_object = functions::get_classdb_construct_object()(&class_name.godot_owner);
     return gdnative_object;
 }
@@ -56,6 +57,8 @@ void PyResourceFormatLoader::_get_resource_type( String& path, GDExtensionTypePt
 }
 void PyResourceFormatLoader::_get_resource_script_class( String& path, GDExtensionTypePtr res){}
 void PyResourceFormatLoader::_get_resource_uid( String& path, GDExtensionTypePtr res){
+    *((std::int64_t*)res) = -1;
+    return; //TODO: Is there a way to be more efficient
     mutex_loader.lock();
     char* res_string;
     if (!path.ends_with(c_string_to_string("py")) && !path.ends_with(c_string_to_string("pyw"))){
@@ -85,6 +88,7 @@ void PyResourceFormatLoader::_load( String& path, String& original_path, bool us
     }
 
     auto source_code = file.get_as_text(false);
+    source_code.shouldBeDeleted = false;
     functions::get_object_destroy()(file.godot_owner);
     auto script_extension = PyScriptExtension::constructor(lang);
     char* c_path;
@@ -312,6 +316,9 @@ void register_class_loader(){
 
     StringName class_name = c_string_to_string_name("PyResourceFormatLoader");
     StringName parent_class_name = c_string_to_string_name("ResourceFormatLoader");
+    class_name.shouldBeDeleted = false;
+    parent_class_name.shouldBeDeleted = false;
+
 
     functions::get_classdb_register_extension_class()(_library, &class_name.godot_owner, &parent_class_name.godot_owner, creation_info);
 }

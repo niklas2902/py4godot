@@ -1,4 +1,5 @@
 from py4godot.utils.print_tools import *
+from libc.stdlib cimport malloc, free
 cdef core.StringName py_c_string_to_string_name(char* string):
     cdef core.StringName gd_string_name = core.StringName.__new__(core.StringName)
     gd_string_name.StringName_internal_class = c_string_to_string_name(string)
@@ -19,6 +20,7 @@ cdef unicode gd_string_to_py_string(core.String string):
     except Exception as e:
         print_error("error:" + str(e))
     cdef unicode py_string = <unicode>PyUnicode_FromStringAndSize(c_str,string.length())
+    free(c_str)
     return py_string
 
 """
