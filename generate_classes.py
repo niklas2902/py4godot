@@ -530,21 +530,6 @@ def generate_set_gd_owner_for_ret(method):
     return result
 
 
-def convert_to_py_if_variant(method_):
-    result = ""
-    if "return_value" in method_.keys() or "return_type" in method_.keys():
-        ret_val = None
-        if ("return_value" in method_.keys()):
-            ret_val = ReturnType("_ret", method_['return_value']['type'])
-        else:
-            ret_val = ReturnType("_ret", method_['return_type'])
-
-        if ret_val.type == "Variant":
-            result = ".get_converted_value_native_ptr(True)"
-
-    return result
-
-
 def generate_varargs_vector(method):
     result = ""
     if method["is_vararg"]:
@@ -565,6 +550,32 @@ def generate_varargs_vector(method):
     return result
 
 
+def is_ret_variant(method):
+    if "return_value" in method.keys() or "return_type" in method.keys():
+        ret_val = None
+        if ("return_value" in method.keys()):
+            ret_val = ReturnType("_ret", method['return_value']['type'])
+        else:
+            ret_val = ReturnType("_ret", method['return_type'])
+
+        return ret_val.type == "Variant"
+
+    return False
+
+
+def generate_variants(method):
+    result = ""
+    if "arguments" not in method.keys():
+        return result
+    for arg in method["arguments"]:
+        if arg["type"] == "Variant":
+            result += f"{INDENT * 2}cdef PyVariant py_variant_{pythonize_name(arg['name'])} = create_variant_from_py_object({pythonize_name(arg['name'])})"
+            result = generate_newline(result)
+            result += f"{INDENT * 2}cdef Variant variant_{pythonize_name(arg['name'])} = py_variant_{pythonize_name(arg['name'])}.variant"
+            result = generate_newline(result)
+    return result
+
+
 def generate_method_body_standard(class_, method):
     number_arguments = 0
     result = ""
@@ -575,15 +586,18 @@ def generate_method_body_standard(class_, method):
     result += generate_operators(class_)
     result = generate_newline(result)
     result += generate_varargs_vector(method)
+    result = generate_newline(result)
+    result += generate_variants(method)
+    result = generate_newline(result)
     if "return_value" in method.keys() or "return_type" in method.keys():
         result += generate_return_value(class_["name"], method)
         if not is_static(method):
 
-            result += f"{INDENT * 2}{generate_ret_call(method)} = self.{class_['name']}_internal_class.py_{pythonize_name(method['name'])}({generate_method_args(method)}){convert_to_py_if_variant(method)}"
+            result += f"{INDENT * 2}{generate_ret_call(method)} = self.{class_['name']}_internal_class.py_{pythonize_name(method['name'])}({generate_method_args(method)})"
             result = generate_newline(result)
             result += generate_set_gd_owner_for_ret(method)
         else:
-            result += f"{INDENT * 2}{generate_ret_call(method)} = CPP{class_['name']}.py_{pythonize_name(method['name'])}({generate_method_args(method)}){convert_to_py_if_variant(method)}"
+            result += f"{INDENT * 2}{generate_ret_call(method)} = CPP{class_['name']}.py_{pythonize_name(method['name'])}({generate_method_args(method)})"
             result = generate_newline(result)
             result += generate_set_gd_owner_for_ret(method)
         result = generate_newline(result)
@@ -611,7 +625,7 @@ def generate_method_args(method):
             else:
                 res += f"{pythonize_name(arg['name'])}.{untypearray(arg['type'])}_internal_class, "
         elif arg["type"] == "Variant":
-            res += f"{convert_to_variant(pythonize_name(arg['name']))}.variant, "
+            res += f"variant_{(pythonize_name(arg['name']))}, "
         else:
             res += f"{pythonize_name(arg['name'])}, "
     if method["is_vararg"]:
@@ -1074,6 +1088,13 @@ def get_instance_type(target):
     return "type(True)"
 
 
+def operator_to_python_name(operator_name):
+    operator_names = {"*": "mult", "/": "divide", "+": "add", "-": "subtract", "==": "equals", "!=": "unequals",
+                      "%": "modulo", "<": "lower_than", ">": "greater_than", ">=": "greater_euqals",
+                      "<=": "lower_equals"}
+    return operator_names[operator_name]
+
+
 def generate_operators_for_class(class_name):
     res = ""
     if class_name in operator_dict.keys():
@@ -1115,12 +1136,12 @@ def generate_operators_for_class(class_name):
                     res += f"{INDENT * 3}handled = True"
                     res = generate_newline(res)
                     if op.return_type in builtin_classes - {"float", "int", "bool"}:
-                        res += f"{INDENT * 3}_ret.{op.return_type}_internal_class = {address_param('self', class_name)} {operator} {address_param('other', target)}"
+                        res += f"{INDENT * 3}_ret.{op.return_type}_internal_class = {address_param('self', class_name)}.py_operator_{operator_to_python_name(operator)}({address_param('other', target)})"
                     elif op.return_type in {"Variant", "PyVariant",
                                             "object"}:  # I don't know the correct type, use only one
-                        res += f"{INDENT * 3}_ret = {address_param('self', class_name)} {operator} {address_param('other', target)}.get_converted_value()"
+                        res += f"{INDENT * 3}_ret = {address_param('self', class_name)}.py_operator_{operator_to_python_name(operator)}({address_param('other', target)}).get_converted_value()"
                     else:
-                        res += f"{INDENT * 3}_ret = {address_param('self', class_name)} {operator} {address_param('other', target)}"
+                        res += f"{INDENT * 3}_ret = {address_param('self', class_name)}.py_operator_{operator_to_python_name(operator)}({address_param('other', target)})"
                     res = generate_newline(res)
 
                 res += f"{INDENT * 2}if not handled:"

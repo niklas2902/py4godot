@@ -86,6 +86,8 @@ def generate_import():
         """
 from py4godot.core.variant4.Variant4 cimport *
 from libcpp.vector cimport vector
+from cpython cimport Py_INCREF, Py_DECREF, PyObject
+
 cdef cppclass Error:
     pass
 """
@@ -313,12 +315,18 @@ def generate_method_modifiers(mMethod):
     return ""
 
 
+def unvarianttype(type_):
+    if type_ == "Variant":
+        return "PyObject*"
+    return type_
+
+
 def generate_method(class_, mMethod):
     res = ""
     if has_native_struct(mMethod):
         return res
     args = generate_args(mMethod)
-    def_function = f"{INDENT * 2}{ungodottype(untypearray(get_ret_value(mMethod)))} py_{pythonize_name(mMethod['name'])}({args});"
+    def_function = f"{INDENT * 2}{unvarianttype(ungodottype(untypearray(get_ret_value(mMethod))))} py_{pythonize_name(mMethod['name'])}({args});"
     res = generate_newline(res)
     res += generate_method_modifiers(mMethod)
     res = generate_newline(res)
@@ -563,6 +571,19 @@ def generate_set_owner(class_):
     return res
 
 
+def operator_to_python_name(operator_name):
+    operator_names = {"*": "mult", "/": "divide", "+": "add", "-": "subtract", "==": "equals", "!=": "unequals",
+                      "%": "modulo", "<": "lower_than", ">": "greater_than", ">=": "greater_euqals",
+                      "<=": "lower_equals"}
+    return operator_names[operator_name]
+
+
+def generate_reference(type_):
+    if type_ not in {"float", "int", "bool"}:
+        return "&"
+    return ""
+
+
 def generate_operators_for_class(class_name):
     res = ""
     if class_name in operator_dict.keys():
@@ -571,7 +592,9 @@ def generate_operators_for_class(class_name):
                 op = operator_dict[class_name][operator]
                 if op.right_type_values:
                     for right_type in op.right_type_values:
-                        res += f"{INDENT * 2}{op.return_type} operator{operator}({ungodottype(right_type)} other);"
+                        res += f"{INDENT * 2}{op.return_type} operator{operator}({ungodottype(right_type)}{generate_reference(right_type)} other);"
+                        res = generate_newline(res)
+                        res += f"{INDENT * 2}{op.return_type} py_operator_{operator_to_python_name(operator)} ({ungodottype(right_type)}{generate_reference(right_type)} other);"
                         res = generate_newline(res)
     res = generate_newline(res)
     return res

@@ -229,6 +229,7 @@ def generate_copy_constructor(class_):
     res = generate_newline(res)
     return res
 
+
 def generate_copy_operator(class_):
     res = ""
     res += f"{INDENT}{class_['name']}& {class_['name']}::operator=(const {class_['name']}& copy_val)" + "{"
@@ -591,14 +592,29 @@ def generate_delete_varargs_variants(mMethod):
     return res
 
 
+def convert_to_py_if_variant(method_):
+    result = ""
+    if "return_value" in method_.keys() or "return_type" in method_.keys():
+        ret_val = None
+        if ("return_value" in method_.keys()):
+            ret_val = ReturnType("_ret", method_['return_value']['type'])
+        else:
+            ret_val = ReturnType("_ret", method_['return_type'])
+
+        if ret_val.type == "Variant":
+            result = ".get_converted_value_native_ptr(true)"
+
+    return result
+
+
 def generate_py_method_body(class_, method):
     result = ""
 
     if ("return_value" in method.keys() or "return_type" in method.keys()):
         if not is_static(method):
-            result += f"{INDENT * 2}auto _ret = this->{pythonize_name(method['name'])}({generate_args_for_call(method)});"
+            result += f"{INDENT * 2}auto _ret = this->{pythonize_name(method['name'])}({generate_args_for_call(method)}){convert_to_py_if_variant(method)};"
         else:
-            result += f"{INDENT * 2}auto _ret = {class_['name']}::{pythonize_name(method['name'])}({generate_args_for_call(method)});"
+            result += f"{INDENT * 2}auto _ret = {class_['name']}::{pythonize_name(method['name'])}({generate_args_for_call(method)}){convert_to_py_if_variant(method)};"
     else:
         if not is_static(method):
             result += f"{INDENT * 2}this->{pythonize_name(method['name'])}({generate_args_for_call(method)});"
@@ -606,12 +622,13 @@ def generate_py_method_body(class_, method):
             result += f"{INDENT * 2}{class_['name']}::{pythonize_name(method['name'])}({generate_args_for_call(method)});"
 
     result = generate_newline(result)
+    result += free_variants(method)
+    result = generate_newline(result)
     if ("return_value" in method.keys() or "return_type" in method.keys()):
         result = generate_newline(result)
         result += generate_return_py_statement(method)
         result = generate_newline(result)
 
-    result += free_variants(method)
     result += f"{INDENT}}}"
     result = generate_newline(result)
     return result
@@ -623,9 +640,15 @@ def free_variants(mMethod):
         return res
     for argument in mMethod["arguments"]:
         if argument["type"] == "Variant":
-            res += f"{INDENT*2}functions::get_variant_destroy()(&{pythonize_name(argument['name'])}.native_ptr);"
+            res += f"{INDENT * 2}functions::get_variant_destroy()(&{pythonize_name(argument['name'])}.native_ptr);"
             res = generate_newline(res)
     return res
+
+
+def unvarianttype(type_):
+    if type_ == "Variant":
+        return "PyObject*"
+    return type_
 
 
 def generate_method(class_, mMethod):
@@ -633,7 +656,7 @@ def generate_method(class_, mMethod):
     if has_native_struct(mMethod):
         return res
     args = generate_args(mMethod, builtin_classes, True)
-    py_def_function = f"{INDENT}{ungodottype(unenumize_type(untypearray(get_ret_value(mMethod))))} {class_['name']}::py_{pythonize_name(mMethod['name'])}({args})" + "{"
+    py_def_function = f"{INDENT}{unvarianttype(ungodottype(unenumize_type(untypearray(get_ret_value(mMethod)))))} {class_['name']}::py_{pythonize_name(mMethod['name'])}({args})" + "{"
     res += py_def_function
     res = generate_newline(res)
     res += generate_py_method_body(class_, mMethod)
@@ -1299,6 +1322,19 @@ def get_instance_type(target):
     return "type(True)"
 
 
+def operator_to_python_name(operator_name):
+    operator_names = {"*": "mult", "/": "divide", "+": "add", "-": "subtract", "==": "equals", "!=": "unequals",
+                      "%": "modulo", "<": "lower_than", ">": "greater_than", ">=": "greater_euqals",
+                      "<=": "lower_equals"}
+    return operator_names[operator_name]
+
+
+def generate_reference(type_):
+    if type_ not in {"float", "int", "bool"}:
+        return "&"
+    return ""
+
+
 def generate_operators_for_class(class_name):
     res = ""
     if class_name in operator_dict.keys():
@@ -1307,7 +1343,7 @@ def generate_operators_for_class(class_name):
                 op = operator_dict[class_name][operator]
                 if op.right_type_values:
                     for right_type in op.right_type_values:
-                        res += f"{INDENT}{op.return_type} {class_name}::operator {operator}({ungodottype(right_type)} other)" + "{"
+                        res += f"{INDENT}{op.return_type} {class_name}::operator {operator}({ungodottype(right_type)}{generate_reference(right_type)} other)" + "{"
                         res = generate_newline(res)
                         res += f"{INDENT * 2}{op.return_type} _ret = {init_return_type(op.return_type)};"
                         res = generate_newline(res)
@@ -1323,6 +1359,19 @@ def generate_operators_for_class(class_name):
                         res += f"{INDENT * 2}operator_evaluator(&godot_owner, {address_param(right_type)}, {address_ret_decision(op.return_type)});"
                         res = generate_newline(res)
 
+                        res += f"{INDENT * 2}return _ret;"
+                        res = generate_newline(res)
+                        res += INDENT + "}"
+                        res = generate_newline(res)
+
+                        res += f"{INDENT}{op.return_type} {class_name}::py_operator_{operator_to_python_name(operator)}({ungodottype(right_type)}{generate_reference(right_type)} other)" + "{"
+                        res = generate_newline(res)
+                        res += f"{INDENT * 2}auto _ret = *this {operator} other;"
+                        res = generate_newline(res)
+                        if op.return_type in builtin_classes - {"float", "int", "bool", "Nil"}:
+                            res += f"{INDENT * 2}_ret.shouldBeDeleted=false;"
+                            res = generate_newline(res)
+                        res = generate_newline(res)
                         res += f"{INDENT * 2}return _ret;"
                         res = generate_newline(res)
                         res += INDENT + "}"

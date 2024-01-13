@@ -288,6 +288,12 @@ def generate_method_modifiers(mMethod):
     return ""
 
 
+def unvarianttype(type_):
+    if type_ == "Variant":
+        return "PyObject*"
+    return type_
+
+
 def generate_method(class_, mMethod):
     res = ""
     if has_native_struct(mMethod):
@@ -296,7 +302,7 @@ def generate_method(class_, mMethod):
         res += f"{INDENT}{generate_method_modifiers(mMethod)} {get_ret_value(mMethod)}* buffer_{class_['name']}_{mMethod['name']};"
     args = generate_args(mMethod, builtin_classes)
     def_function = f"{INDENT}{generate_method_modifiers(mMethod)} {ungodottype(unenumize_type(untypearray(get_ret_value(mMethod))))} {pythonize_name(mMethod['name'])}({args});"
-    def_function2 = f"{INDENT}{INDENT}{generate_method_modifiers(mMethod)} {ungodottype(unenumize_type(untypearray(get_ret_value(mMethod))))} py_{pythonize_name(mMethod['name'])}({args});"
+    def_function2 = f"{INDENT}{INDENT}{generate_method_modifiers(mMethod)} {unvarianttype(ungodottype(unenumize_type(untypearray(get_ret_value(mMethod)))))} py_{pythonize_name(mMethod['name'])}({args});"
     res = generate_newline(res)
     res += def_function
     res = generate_newline(res)
@@ -595,6 +601,19 @@ def generate_set_owner(class_):
     return res
 
 
+def operator_to_python_name(operator_name):
+    operator_names = {"*": "mult", "/": "divide", "+": "add", "-": "subtract", "==": "equals", "!=": "unequals",
+                      "%": "modulo", "<": "lower_than", ">": "greater_than", ">=": "greater_euqals",
+                      "<=": "lower_equals"}
+    return operator_names[operator_name]
+
+
+def generate_reference(type_):
+    if type_ not in {"float", "int", "bool"}:
+        return "&"
+    return ""
+
+
 def generate_operators_for_class(class_name):
     res = ""
     if class_name in operator_dict.keys():
@@ -603,7 +622,10 @@ def generate_operators_for_class(class_name):
                 op = operator_dict[class_name][operator]
                 if op.right_type_values:
                     for right_type in op.right_type_values:
-                        res += f"{INDENT}{op.return_type} operator {operator} ({ungodottype(right_type)} other);"
+                        res += f"{INDENT}{op.return_type} operator {operator} ({ungodottype(right_type)}{generate_reference(right_type)} other);"
+                        res = generate_newline(res)
+
+                        res += f"{INDENT}{op.return_type} py_operator_{operator_to_python_name(operator)} ({ungodottype(right_type)}{generate_reference(right_type)} other);"
                         res = generate_newline(res)
     res = generate_newline(res)
     return res
