@@ -895,8 +895,6 @@ def generate_destructor(classname):
     res = generate_newline(res)
     if classname not in builtin_classes:
         pass
-        res += f"{INDENT * 4}functions::get_object_destroy()(&godot_owner);"
-        res = generate_newline(res)
     else:
         res += f"{INDENT * 4}auto destructor = functions::get_variant_get_ptr_destructor()({generate_variant_type(classname)});"
         res = generate_newline(res)

@@ -1319,8 +1319,9 @@ void Variant::construct_PackedInt64Array(PyObject* object){
         converted_val.shouldBeDeleted = false;
 }
 void Variant::construct_Nil(PyObject* object){
+        long long val = 0;
         auto constructor = functions::get_get_variant_from_type_constructor()(GDExtensionVariantType::GDEXTENSION_VARIANT_TYPE_NIL);
-        constructor(native_ptr, nullptr);
+        constructor(native_ptr, &val);
 }
 void Variant::construct_PackedInt32Array(PyObject* object){
         PackedInt32Array converted_val = get_packedint32array_from_pyobject(object);
@@ -1443,9 +1444,13 @@ void Variant::construct_StringName(PyObject* object){
 }
 
 void Variant::construct_Object(PyObject* object){
-        Object converted_val = get_object_from_pyobject(object);
-        auto constructor = functions::get_get_variant_from_type_constructor()(GDExtensionVariantType::GDEXTENSION_VARIANT_TYPE_OBJECT);
-        constructor(native_ptr, &converted_val.godot_owner);
+        Object converted_val;
+        if(object != Py_None){
+            get_object_from_pyobject(object, &converted_val);
+            auto constructor = functions::get_get_variant_from_type_constructor()(GDExtensionVariantType::GDEXTENSION_VARIANT_TYPE_OBJECT);
+            constructor(native_ptr, &converted_val.godot_owner);
+        }
+
 }
 
 
@@ -1676,7 +1681,8 @@ void Variant::construct_StringName_native_ptr(PyObject* object){
 }
 
 void Variant::construct_Object_native_ptr(PyObject* object){
-        Object converted_val = get_object_from_pyobject(object);
+    Object converted_val;
+        get_object_from_pyobject(object, &converted_val);
         auto constructor = functions::get_get_variant_from_type_constructor()(GDExtensionVariantType::GDEXTENSION_VARIANT_TYPE_OBJECT);
         constructor(&native_ptr, &converted_val.godot_owner);
 }

@@ -263,5 +263,7 @@ cdef api bridge.PackedStringArray get_packedstringarray_from_pyobject(PyObject* 
     return (<PackedStringArray>py_object).PackedStringArray_internal_class;
 cdef api bridge.StringName get_stringname_from_pyobject(PyObject* py_object):
     return (<StringName>py_object).StringName_internal_class;
-cdef api bridge.Object get_object_from_pyobject(PyObject* py_object):
-    return (<Object>py_object).Object_internal_class;
+cdef api bridge.Object get_object_from_pyobject(PyObject* py_object, bridge.Object* output):
+    cdef Object _object = <Object>py_object
+    output[0] = _object.Object_internal_class
+    return output[0];
