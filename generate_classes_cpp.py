@@ -684,7 +684,8 @@ def generate_method(class_, mMethod):
 
 def generate_ret_value_assign(argument):
     if argument["type"] in classes - builtin_classes:
-        return f"&({pythonize_name(argument['name'])}->godot_owner)"
+
+        return f"{pythonize_name(argument['name'])} != nullptr?&({pythonize_name(argument['name'])}->godot_owner):nullptr"
     elif argument["type"] in classes - {"int", "float", "bool", "Nil"}:
         return f"&{pythonize_name(argument['name'])}.godot_owner"
     elif "typedarray" in argument["type"]:

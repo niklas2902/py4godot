@@ -457,6 +457,7 @@ PyObject* Variant::create_object(){
     auto class_name_string = string.get_class();
     gd_string_to_c_string(&class_name_string.godot_owner, class_name_string.length(),&class_name);
     auto casted = cast_to_type(class_name,val);
+    free(class_name);
     return casted;
 }
 

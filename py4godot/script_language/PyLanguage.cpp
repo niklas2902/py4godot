@@ -1145,6 +1145,5 @@ void register_class(){
     StringName class_name = c_string_to_string_name("PyLanguage");
     StringName parent_class_name = c_string_to_string_name("ScriptLanguageExtension");
 
-    assert(false);
     functions::get_classdb_register_extension_class()(_library, &class_name.godot_owner, &parent_class_name.godot_owner, creation_info);
 }

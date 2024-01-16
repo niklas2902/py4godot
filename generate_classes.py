@@ -441,8 +441,11 @@ def should_skip_method(class_, method):
 
 def generate_assert(args):
     res = ""
+
     for arg in args:
-        if arg["type"] in classes.union(builtin_classes - {"int", "float", "bool", "Nil"}):
+        if (arg["type"] in classes.union(builtin_classes - {"int", "float", "bool", "Nil"})):
+            if "default_value" in arg:
+                continue
             res += f"{INDENT * 2}assert(not {pythonize_name(arg['name'])} is None)"
             res = generate_newline(res)
     return res
@@ -618,7 +621,7 @@ def generate_method_args(method):
         return res
     for arg in method["arguments"]:
         if untypearray(arg["type"]) in classes - IGNORED_CLASSES - builtin_classes:
-            res += f"&{pythonize_name(arg['name'])}.{untypearray(arg['type'])}_internal_class, "
+            res += f"&{pythonize_name(arg['name'])}.{untypearray(arg['type'])}_internal_class if {pythonize_name(arg['name'])} != None else NULL, "
         elif untypearray(arg["type"]) in builtin_classes - IGNORED_CLASSES:
             if arg["type"] == "String":
                 res += f"py_c_string_to_string({pythonize_name(arg['name'])}.encode('utf-8')).{untypearray(arg['type'])}_internal_class, "

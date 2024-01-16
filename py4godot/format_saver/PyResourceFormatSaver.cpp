@@ -50,19 +50,16 @@ void PyResourceFormatSaver::_init_values(){}
     *((GDExtensionTypePtr*) res) = 0/*OK*/;
     }
   void PyResourceFormatSaver::_set_uid( String& path, int uid, GDExtensionTypePtr res){
-    assert(false);
   }
   void PyResourceFormatSaver::_recognize( Resource& resource, GDExtensionTypePtr res){
       *((bool*)res) =  resource.godot_owner != nullptr;
-      assert(false);
-    }
+  }
   void PyResourceFormatSaver::_get_recognized_extensions( Resource& resource, GDExtensionTypePtr res){
     add_string_to_array(res, c_string_to_string("py"));
     add_string_to_array(res, c_string_to_string("pyw"));
     add_string_to_array(res, c_string_to_string("pyi"));
   }
   void PyResourceFormatSaver::_recognize_path( Resource& resource, String& path, GDExtensionTypePtr res){
-    assert(false);
   }
 
 
