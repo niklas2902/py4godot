@@ -197,7 +197,7 @@ def generate_return_value(classname, method_):
         else:
             ret_val = ReturnType("_ret", method_['return_type'])
         if ret_val.type in {"int", "float", "bool"}:
-            result += f"{INDENT * 2}cdef {ret_val.type} {ret_val.name} = 0"
+            result += f"{INDENT * 2}cdef {ungodottype(ret_val.type)} {ret_val.name} = 0"
         elif ret_val.type in classes:
             if ret_val.type in builtin_classes.union({"Object"}) or ret_val.type == classname:
                 result += f"{INDENT * 2}cdef {ret_val.type} {ret_val.name} = {ret_val.type}.__new__({ret_val.type})"
