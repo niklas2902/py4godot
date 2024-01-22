@@ -43,6 +43,8 @@ void init_pluginscript_api(){
         PyObject* pyStr = PyUnicode_AsEncodedString(str_exc_type, "utf-8","Error ~");
         const char *strExcType = PyBytes_AS_STRING(pyStr);
         PyErr_Print();
+        functions::get_print_error()(strExcType, "test", "test", 1, 1);
+
         assert(false);
         return;
     }
@@ -269,6 +271,10 @@ void PyScriptExtension::_is_placeholder_fallback_enabled(GDExtensionTypePtr res)
     *static_cast<bool*>(res) = false;
 }
 void PyScriptExtension::_get_rpc_config(GDExtensionTypePtr res){}
+
+void PyScriptExtension::_is_abstract( GDExtensionTypePtr res){
+    *static_cast<bool*>(res) = false;
+}
 void PyScriptExtension::_set_source_code_internal(String& source_code){
     m.lock();
     auto gil_state = PyGILState_Ensure();
@@ -287,6 +293,7 @@ void PyScriptExtension::_set_source_code_internal(String& source_code){
 void PyScriptExtension::set_path( const char* path){
     this->path = std::string{path};
 }
+
 namespace script{
 void call_virtual_func__editor_can_reload_from_file(GDExtensionClassInstancePtr p_instance, const GDExtensionConstTypePtr* p_args, GDExtensionTypePtr r_ret) {
     PyScriptExtension* pylanguage = static_cast<PyScriptExtension*> (p_instance);
@@ -634,6 +641,15 @@ void call_virtual_func__get_rpc_config(GDExtensionClassInstancePtr p_instance, c
 
     pylanguage->_get_rpc_config(r_ret);
 }
+
+StringName func_name__is_abstract;
+void call_virtual_func__is_abstract(GDExtensionClassInstancePtr p_instance, const GDExtensionConstTypePtr* p_args, GDExtensionTypePtr r_ret) {
+    PyScriptExtension* pylanguage = static_cast<PyScriptExtension*> (p_instance);
+
+
+
+    pylanguage->_is_abstract(r_ret);
+}
 }
 
 
@@ -764,6 +780,11 @@ GDExtensionClassCallVirtual get_virtual_script(void *p_userdata, GDExtensionCons
         return script::call_virtual_func__is_placeholder_fallback_enabled;
     }
 
+
+    else if (string_names_equal_script(script::func_name__is_abstract, name)){
+        return script::call_virtual_func__is_abstract;
+    }
+
     assert(false); // There are methods not being handled
     return nullptr;
 }
@@ -799,6 +820,8 @@ void init_func_names_script(){
     script::func_name__get_constants = c_string_to_string_name("_get_constants");
     script::func_name__get_members = c_string_to_string_name("_get_members");
     script::func_name__is_placeholder_fallback_enabled = c_string_to_string_name("_is_placeholder_fallback_enabled");
+    script::func_name__is_abstract = c_string_to_string_name("_is_abstract");
+
 }
 
 void register_class_script(){
