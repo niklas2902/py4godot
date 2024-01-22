@@ -205,6 +205,8 @@ PyObject* cast_to_type(char* classname, PyObject* object_to_cast){
             return cast_to_editorscript(object_to_cast);
         case str2int("PrimitiveMesh"):
             return cast_to_primitivemesh(object_to_cast);
+        case str2int("IPUnix"):
+            return cast_to_ipunix(object_to_cast);
         case str2int("NoiseTexture3D"):
             return cast_to_noisetexture3d(object_to_cast);
         case str2int("Range"):
@@ -331,6 +333,8 @@ PyObject* cast_to_type(char* classname, PyObject* object_to_cast){
             return cast_to_tabbar(object_to_cast);
         case str2int("RDUniform"):
             return cast_to_rduniform(object_to_cast);
+        case str2int("MovieWriterPNGWAV"):
+            return cast_to_moviewriterpngwav(object_to_cast);
         case str2int("AudioListener3D"):
             return cast_to_audiolistener3d(object_to_cast);
         case str2int("NavigationAgent2D"):
@@ -861,6 +865,8 @@ PyObject* cast_to_type(char* classname, PyObject* object_to_cast){
             return cast_to_audioeffectdelay(object_to_cast);
         case str2int("ShapeCast2D"):
             return cast_to_shapecast2d(object_to_cast);
+        case str2int("FramebufferCacheRD"):
+            return cast_to_framebuffercacherd(object_to_cast);
         case str2int("CameraAttributes"):
             return cast_to_cameraattributes(object_to_cast);
         case str2int("Geometry3D"):
@@ -893,6 +899,8 @@ PyObject* cast_to_type(char* classname, PyObject* object_to_cast){
             return cast_to_placeholdermesh(object_to_cast);
         case str2int("CanvasTexture"):
             return cast_to_canvastexture(object_to_cast);
+        case str2int("UniformSetCacheRD"):
+            return cast_to_uniformsetcacherd(object_to_cast);
         case str2int("PhysicsMaterial"):
             return cast_to_physicsmaterial(object_to_cast);
         case str2int("AudioEffectRecord"):
@@ -1043,6 +1051,8 @@ PyObject* cast_to_type(char* classname, PyObject* object_to_cast){
             return cast_to_hflowcontainer(object_to_cast);
         case str2int("VoxelGIData"):
             return cast_to_voxelgidata(object_to_cast);
+        case str2int("MovieWriterMJPEG"):
+            return cast_to_moviewritermjpeg(object_to_cast);
         case str2int("Cubemap"):
             return cast_to_cubemap(object_to_cast);
         case str2int("AnimationPlayer"):

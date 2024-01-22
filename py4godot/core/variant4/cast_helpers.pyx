@@ -75,6 +75,7 @@ from py4godot.classes.BoxOccluder3D.BoxOccluder3D cimport *
 from py4godot.classes.CharacterBody2D.CharacterBody2D cimport *
 from py4godot.classes.NavigationMesh.NavigationMesh cimport *
 from py4godot.classes.PhysicsServer3D.PhysicsServer3D cimport *
+from py4godot.classes.MovieWriterMJPEG.MovieWriterMJPEG cimport *
 from py4godot.classes.CSGPolygon3D.CSGPolygon3D cimport *
 from py4godot.classes.Panel.Panel cimport *
 from py4godot.classes.EditorNode3DGizmo.EditorNode3DGizmo cimport *
@@ -200,6 +201,7 @@ from py4godot.classes.InputEventGesture.InputEventGesture cimport *
 from py4godot.classes.Resource.Resource cimport *
 from py4godot.classes.Sky.Sky cimport *
 from py4godot.classes.SplitContainer.SplitContainer cimport *
+from py4godot.classes.UniformSetCacheRD.UniformSetCacheRD cimport *
 from py4godot.classes.XRNode3D.XRNode3D cimport *
 from py4godot.classes.ReflectionProbe.ReflectionProbe cimport *
 from py4godot.classes.Marker3D.Marker3D cimport *
@@ -266,6 +268,7 @@ from py4godot.classes.Path3D.Path3D cimport *
 from py4godot.classes.CanvasItem.CanvasItem cimport *
 from py4godot.classes.CSGPrimitive3D.CSGPrimitive3D cimport *
 from py4godot.classes.MeshTexture.MeshTexture cimport *
+from py4godot.classes.FramebufferCacheRD.FramebufferCacheRD cimport *
 from py4godot.classes.OmniLight3D.OmniLight3D cimport *
 from py4godot.classes.VBoxContainer.VBoxContainer cimport *
 from py4godot.classes.WebRTCDataChannel.WebRTCDataChannel cimport *
@@ -331,6 +334,7 @@ from py4godot.classes.NavigationAgent3D.NavigationAgent3D cimport *
 from py4godot.classes.JavaScriptObject.JavaScriptObject cimport *
 from py4godot.classes.RDTextureView.RDTextureView cimport *
 from py4godot.classes.World3D.World3D cimport *
+from py4godot.classes.IPUnix.IPUnix cimport *
 from py4godot.classes.InputEventShortcut.InputEventShortcut cimport *
 from py4godot.classes.ImageTexture3D.ImageTexture3D cimport *
 from py4godot.classes.GradientTexture2D.GradientTexture2D cimport *
@@ -418,6 +422,7 @@ from py4godot.classes.RegExMatch.RegExMatch cimport *
 from py4godot.classes.NavigationPolygon.NavigationPolygon cimport *
 from py4godot.classes.ScriptCreateDialog.ScriptCreateDialog cimport *
 from py4godot.classes.PinJoint3D.PinJoint3D cimport *
+from py4godot.classes.MovieWriterPNGWAV.MovieWriterPNGWAV cimport *
 from py4godot.classes.Script.Script cimport *
 from py4godot.classes.HMACContext.HMACContext cimport *
 from py4godot.classes.AudioEffectAmplify.AudioEffectAmplify cimport *
@@ -834,6 +839,10 @@ cdef api PyObject* cast_to_navigationmesh(PyObject* other):
   return <PyObject*>o
 cdef api PyObject* cast_to_physicsserver3d(PyObject* other):
   cdef PhysicsServer3D o = PhysicsServer3D.cast(<Object>other)
+  Py_INCREF( o)
+  return <PyObject*>o
+cdef api PyObject* cast_to_moviewritermjpeg(PyObject* other):
+  cdef MovieWriterMJPEG o = MovieWriterMJPEG.cast(<Object>other)
   Py_INCREF( o)
   return <PyObject*>o
 cdef api PyObject* cast_to_csgpolygon3d(PyObject* other):
@@ -1336,6 +1345,10 @@ cdef api PyObject* cast_to_splitcontainer(PyObject* other):
   cdef SplitContainer o = SplitContainer.cast(<Object>other)
   Py_INCREF( o)
   return <PyObject*>o
+cdef api PyObject* cast_to_uniformsetcacherd(PyObject* other):
+  cdef UniformSetCacheRD o = UniformSetCacheRD.cast(<Object>other)
+  Py_INCREF( o)
+  return <PyObject*>o
 cdef api PyObject* cast_to_xrnode3d(PyObject* other):
   cdef XRNode3D o = XRNode3D.cast(<Object>other)
   Py_INCREF( o)
@@ -1600,6 +1613,10 @@ cdef api PyObject* cast_to_meshtexture(PyObject* other):
   cdef MeshTexture o = MeshTexture.cast(<Object>other)
   Py_INCREF( o)
   return <PyObject*>o
+cdef api PyObject* cast_to_framebuffercacherd(PyObject* other):
+  cdef FramebufferCacheRD o = FramebufferCacheRD.cast(<Object>other)
+  Py_INCREF( o)
+  return <PyObject*>o
 cdef api PyObject* cast_to_omnilight3d(PyObject* other):
   cdef OmniLight3D o = OmniLight3D.cast(<Object>other)
   Py_INCREF( o)
@@ -1858,6 +1875,10 @@ cdef api PyObject* cast_to_rdtextureview(PyObject* other):
   return <PyObject*>o
 cdef api PyObject* cast_to_world3d(PyObject* other):
   cdef World3D o = World3D.cast(<Object>other)
+  Py_INCREF( o)
+  return <PyObject*>o
+cdef api PyObject* cast_to_ipunix(PyObject* other):
+  cdef IPUnix o = IPUnix.cast(<Object>other)
   Py_INCREF( o)
   return <PyObject*>o
 cdef api PyObject* cast_to_inputeventshortcut(PyObject* other):
@@ -2206,6 +2227,10 @@ cdef api PyObject* cast_to_scriptcreatedialog(PyObject* other):
   return <PyObject*>o
 cdef api PyObject* cast_to_pinjoint3d(PyObject* other):
   cdef PinJoint3D o = PinJoint3D.cast(<Object>other)
+  Py_INCREF( o)
+  return <PyObject*>o
+cdef api PyObject* cast_to_moviewriterpngwav(PyObject* other):
+  cdef MovieWriterPNGWAV o = MovieWriterPNGWAV.cast(<Object>other)
   Py_INCREF( o)
   return <PyObject*>o
 cdef api PyObject* cast_to_script(PyObject* other):
