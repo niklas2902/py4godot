@@ -20,7 +20,7 @@ if __name__ == "__main__":
                     "main.cpp") \
                     or entry.endswith(
                 "api.cpp") or "PyResourceFormatLoader" in entry or "PyResourceFormatSaver" in entry \
-                    or entry.endswith("functions.cpp"):
+                    or (entry.endswith("functions.cpp") and not "common_functions" in entry):
                 continue
 
             if len(entry) > 107:

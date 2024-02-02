@@ -15,8 +15,10 @@
 #include <cassert>
 #include "Python.h"
 #include <mutex>
+#include <windows.h>
 
 std::mutex m;
+char buffer[MAX_PATH];
 
 GDExtensionPtrOperatorEvaluator operator_equal_string_namescript;
 PyScriptExtension extension;
@@ -33,6 +35,8 @@ void init_pluginscript_api(){
     // Initialize interpreter but skip initialization registration of signal handlers
     Py_InitializeEx(0);
 
+    GetCurrentDirectoryA(MAX_PATH, buffer);
+    functions::get_print_error()(buffer, "test", "test", 1, 1);
     import_py4godot__pluginscript_api__utils__annotations();
     if (PyErr_Occurred())
     {
