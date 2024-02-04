@@ -9,13 +9,9 @@
 #include <string>
 #include <windows.h>
 #include <cassert>
-#include <mutex>
-
-std::mutex mutex_script;
 GDExtensionScriptInstanceInfo native_script_instance_placeholder;
 GDExtensionScriptInstanceInfo native_script_instance;
 
-HANDLE ghMutex;
 
 GDExtensionScriptInstanceInfo get_instance(){
     return native_script_instance;
@@ -44,12 +40,10 @@ void c_instance_call(GDExtensionScriptInstanceDataPtr p_self, GDExtensionConstSt
     if(((InstanceData*)p_self)->is_placeholder && name == c_string_to_string_name("_ready")){
         return;
     }
-    mutex_script.lock();
     auto gil_state = PyGILState_Ensure();
     auto* p_instance = (InstanceData*)p_self;
     instance_call(p_self, p_method, p_args, p_argument_count, r_return, r_error);
     PyGILState_Release(gil_state);
-    mutex_script.unlock();
 }
 
 
