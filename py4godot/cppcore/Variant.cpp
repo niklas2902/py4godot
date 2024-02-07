@@ -452,6 +452,9 @@ PyObject* Variant::create_object(){
     Object string = Object::constructor();
     string.shouldBeDeleted = false;
     constructor(&string.godot_owner, native_ptr);
+    if (string.godot_owner == nullptr) {
+        return Py_None;
+    }
     auto val = type_helper_create_object(string);
     char* class_name;
     auto class_name_string = string.get_class();
