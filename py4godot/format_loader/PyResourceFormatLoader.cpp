@@ -90,14 +90,25 @@ void PyResourceFormatLoader::_load( String& path, String& original_path, bool us
     auto source_code = file.get_as_text(false);
     source_code.shouldBeDeleted = false;
     functions::get_object_destroy()(file.godot_owner);
-    auto script_extension = PyScriptExtension::constructor(lang);
+
     char* c_path;
     gd_string_to_c_string(&path.godot_owner, path.length(), &c_path);
+
+    PyScriptExtension* script_extension = nullptr;
+    auto string_path = std::string{c_path};
+    script_extension = PyScriptExtension::constructor(lang);
+    if(path_to_script_extension.find(string_path) == path_to_script_extension.end()){
+        path_to_script_extension[string_path] = script_extension;
+    }
+    else{
+       path_to_script_extension[string_path]->_set_source_code_internal(source_code);
+    }
+
     script_extension->set_path(c_path);
     script_extension ->_set_source_code_internal(source_code);
-
     constructor_func = functions::get_get_variant_from_type_constructor()(GDExtensionVariantType::GDEXTENSION_VARIANT_TYPE_OBJECT);
     constructor_func(res,&script_extension->godot_owner);
+    //free(c_path);
 }
 
 #pragma region: generated

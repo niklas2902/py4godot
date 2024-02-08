@@ -8,11 +8,14 @@
 #include <cstdint>
 void register_class_loader();
 namespace godot{
+    class PyScriptExtension;
 
     class PyResourceFormatLoader:public ResourceFormatLoader{
       public:
           PyLanguage* lang;
           std::unordered_map<std::string, std::int64_t> path_to_id;
+          std::unordered_map<std::string, PyScriptExtension*> path_to_script_extension;
+
           static std::int64_t id_counter;
           static PyResourceFormatLoader* constructor(PyLanguage* language);
           void _init_values(); // self-defined
