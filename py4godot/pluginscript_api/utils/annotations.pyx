@@ -13,7 +13,6 @@ from importlib.machinery import SourceFileLoader
 from py4godot.classes.Node3D.Node3D cimport *
 from py4godot.classes.Object.Object cimport *
 
-
 class_name = ""
 gd_class = None
 cdef api TransferObject exec_class(str source_string, str class_name_):

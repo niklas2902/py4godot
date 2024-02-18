@@ -99,6 +99,11 @@ def copy_stub_files(platform):
         copy(file,
              f"build/final/{platform}/{config_data['python_ver']}-{platform}/python/install/Lib/site-packages/" + file)
 
+def copy_experimental(platform):
+    for file in ["py4godot/pluginscript_api/utils/experimental.py"]:
+        copy(file,
+            f"build/final/{platform}/{config_data['python_ver']}-{platform}/python/install/Lib/site-packages/" + file)
+
 
 def onerror(func, path, exc_info):
     """

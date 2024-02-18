@@ -1,3 +1,4 @@
+import copy
 import json
 import os.path
 
@@ -45,6 +46,7 @@ singletons = set()
 builtin_classes = set()
 core_classes = dict()
 operator_dict = dict()
+typed_arrays_names = set()
 operator_to_method = {"+": "__add__",
                       "*": "__mul__",
                       "-": "__sub__",
@@ -166,6 +168,8 @@ def get_base_class(class_):
     if "inherits" in class_.keys():
         return class_["inherits"]
     if class_["name"] in builtin_classes:
+        return "VariantTypeWrapper"
+    elif "Array" in class_["name"]:
         return "VariantTypeWrapper"
     return "Wrapper"
 
@@ -505,6 +509,8 @@ def generate_args(method_with_args, builtin_classes, is_cpp=False):
             result += f"{unenumize_type(untypearray(unbitfield_type(arg['type'])))}* {pythonize_name(arg['name'])}, "
         elif untypearray(arg["type"]) in builtin_classes - {"int", "float", "bool", "Nil"} or arg["type"] == "Variant":
             result += f"{unenumize_type(untypearray(unbitfield_type(arg['type'])))}& {pythonize_name(arg['name'])}, "
+        elif untypearray(arg["type"]) in typed_arrays_names:
+            result += f"{unenumize_type(untypearray(unbitfield_type(arg['type'])))}& {pythonize_name(arg['name'])}, "
         elif arg["type"] in {"int", "float", "bool"}:
             result += f"{ungodottype(unenumize_type(untypearray(unbitfield_type(arg['type']))))} {pythonize_name(arg['name'])}, "
 
@@ -554,7 +560,7 @@ def unenumize_type(type_):
 def untypearray(type_):
     # TODO improve this by creating actually typed arrays
     if "typedarray" in type_:
-        return "Array"
+        return generate_typed_array_name(type_)
     return type_
 
 
@@ -614,12 +620,19 @@ def generate_reference(type_):
     return ""
 
 
+def get_class_name(classname):
+    if classname in typed_arrays_names:
+        return "Array"
+    else:
+        return classname
+
+
 def generate_operators_for_class(class_name):
     res = ""
-    if class_name in operator_dict.keys():
-        for operator in operator_dict[class_name]:
+    if get_class_name(class_name) in operator_dict.keys():
+        for operator in operator_dict[get_class_name(class_name)]:
             if operator in operator_to_method.keys():
-                op = operator_dict[class_name][operator]
+                op = operator_dict[get_class_name(class_name)][operator]
                 if op.right_type_values:
                     for right_type in op.right_type_values:
                         res += f"{INDENT}{op.return_type} operator {operator} ({ungodottype(right_type)}{generate_reference(right_type)} other);"
@@ -737,7 +750,7 @@ def generate_array_set_item(class_):
         res += f"{INDENT}Vector2 operator [](int index);"
     elif class_["name"] == "PackedStringArray":
         res += f"{INDENT}String operator [](int index);"
-    elif class_["name"] == "Array":
+    elif "Array" in class_["name"]:
         res += f"{INDENT}Variant operator [](int index);"
     return res
 
@@ -801,6 +814,45 @@ def generate_operators_set(class_):
             operator_dict[class_["name"]][operator["name"]].right_type_values.append(operator["right_type"])
 
 
+def collect_typed_arrays_from_return(method_):
+    if "return_value" in method_.keys() or "return_type" in method_.keys():
+        ret_val = None
+        if ("return_value" in method_.keys()):
+            ret_val = ReturnType("_ret", method_['return_value']['type'])
+        else:
+            ret_val = ReturnType("_ret", method_['return_type'])
+        if "typedarray" in ret_val.type:
+            return [ret_val.type]
+    return []
+
+
+def collect_typed_arrays_from_args(method):
+    typed_arrays = []
+    if "arguments" not in method.keys():
+        return []
+    else:
+        for argument in method["arguments"]:
+            if ("typedarray" in argument["type"]):
+                typed_arrays.append(argument["type"])
+    return typed_arrays
+
+
+def collect_typed_arrays(classes):
+    typed_arrays = []
+    for cls in classes:
+        if not "methods" in cls.keys():
+            continue
+        for method in cls["methods"]:
+            typed_arrays += collect_typed_arrays_from_return(method)
+            typed_arrays += collect_typed_arrays_from_args(method)
+
+    return set(typed_arrays)
+
+
+def generate_typed_array_name(name):
+    return name.split("::")[1] + "TypedArray"
+
+
 classes = set()
 
 if __name__ == "__main__":
@@ -816,10 +868,24 @@ if __name__ == "__main__":
         collect_members(obj)
         for class_ in obj["builtin_classes"]:
             generate_operators_set(class_)
+
+        array_cls = None
+        arrays = []
+        for cls in obj["builtin_classes"]:
+            if cls["name"] == "Array":
+                array_cls = cls
+        print("typedarrays:", collect_typed_arrays(obj["classes"] + obj["builtin_classes"]))
+        for typed_array in collect_typed_arrays(obj["classes"] + obj["builtin_classes"]):
+            my_array_cls = copy.deepcopy(array_cls)
+            my_array_cls["name"] = generate_typed_array_name(typed_array)
+            typed_arrays_names.add(generate_typed_array_name(typed_array))
+            arrays.append(my_array_cls)
+
         for class_ in obj["classes"]:
             if (not os.path.exists(f"py4godot/cppclasses/{class_['name']}/")):
                 os.mkdir(f"py4godot/cppclasses/{class_['name']}/")
             generate_classes([class_], f"py4godot/cppclasses/{class_['name']}/{class_['name']}.h")
+        generate_classes(arrays, f"py4godot/cppclasses/typedarrays.h", is_core=True)
 
         generate_classes(obj["builtin_classes"], f"py4godot/cppclasses/generated4_core.h", is_core=True)
 
@@ -827,7 +893,7 @@ if __name__ == "__main__":
             "#pragma once\n"
             '#include "py4godot/godot_bindings/macros.h"\n'
             "namespace godot{")
-        for class_ in (obj["builtin_classes"] + obj["classes"]):
+        for class_ in (obj["builtin_classes"] + obj["classes"] + arrays):
             if class_["name"] in {"Nil", "bool", "float", "int"}:
                 continue
             class_defs += f"{INDENT}class {class_['name']};"

@@ -123,7 +123,9 @@ void free_instance_script(void *p_userdata, GDExtensionClassInstancePtr p_instan
 
 void PyScriptExtension::_init_values(){}
 
-void PyScriptExtension::_editor_can_reload_from_file(GDExtensionTypePtr res){}
+void PyScriptExtension::_editor_can_reload_from_file(GDExtensionTypePtr res){
+    *(static_cast<bool*>(res)) = true;
+}
 void PyScriptExtension::_can_instantiate(GDExtensionTypePtr res){
     Engine engine = Engine::get_instance();
     if (!engine.is_editor_hint()){
@@ -226,7 +228,8 @@ void PyScriptExtension::_get_source_code(GDExtensionTypePtr& res){
     functions::get_string_new_with_utf8_chars()(res, source_code.c_str());
 }
 void PyScriptExtension::_set_source_code( String& code, GDExtensionTypePtr res){}
-void PyScriptExtension::_reload( bool keep_state, GDExtensionTypePtr res){}
+void PyScriptExtension::_reload( bool keep_state, GDExtensionTypePtr res){
+}
 void PyScriptExtension::_get_documentation(GDExtensionTypePtr res){}
 void PyScriptExtension::_has_method( StringName& method, GDExtensionTypePtr res){
     *static_cast<bool*>(res) = false;

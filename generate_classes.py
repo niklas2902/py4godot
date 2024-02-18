@@ -1,3 +1,4 @@
+import copy
 import json
 import os.path
 
@@ -45,6 +46,7 @@ builtin_classes = set()
 core_classes = dict()
 operator_dict = dict()
 enums = list()
+typed_arrays_names = set()
 operator_to_method = {"+": "__add__",
                       "*": "__mul__",
                       "-": "__sub__",
@@ -86,7 +88,8 @@ def generate_import():
               "from libcpp cimport bool\n"
               "from libcpp.vector cimport vector\n"
               "from py4godot.enums.enums4 cimport *\n"
-              "from py4godot.utils.utils cimport *\n")
+              "from py4godot.utils.utils cimport *\n"
+              "from py4godot.classes.typedarrays cimport *\n")
     return result
 
 
@@ -169,8 +172,6 @@ def generate_constructors(class_):
         res = generate_newline(res)
         res += f"{INDENT * 2}_class.{class_['name']}_internal_class = (CPP{class_['name']}.py_new{constructor['index']}({generate_constructor_call_args(constructor)}))"
         res = generate_newline(res)
-        res += f"{INDENT * 2}_class.{class_['name']}_internal_class = (CPP{class_['name']}.py_new{constructor['index']}({generate_constructor_call_args(constructor)}))"
-        res = generate_newline(res)
         res += f"{INDENT * 2}return _class"
         res = generate_newline(res)
     return res
@@ -206,7 +207,7 @@ def generate_return_value(classname, method_):
         elif ret_val.type == "Variant":
             result += f"{INDENT * 2}cdef PyObject* {ret_val.name} = NULL"
         elif "typedarray" in ret_val.type:
-            result += f"{INDENT * 2}cdef Array _ret = Array.new0()"
+            result += f"{INDENT * 2}cdef {generate_typed_array_name(ret_val.type)} _ret = {generate_typed_array_name(ret_val.type)}.new0()"
         elif "enum::" in ret_val.type:
             result += f"{INDENT * 2}cdef int {ret_val.name}"
         else:
@@ -627,6 +628,8 @@ def generate_method_args(method):
                 res += f"py_c_string_to_string({pythonize_name(arg['name'])}.encode('utf-8')).{untypearray(arg['type'])}_internal_class, "
             else:
                 res += f"{pythonize_name(arg['name'])}.{untypearray(arg['type'])}_internal_class, "
+        elif "TypedArray" in untypearray(arg["type"]):
+            res += f"{pythonize_name(arg['name'])}.{untypearray(arg['type'])}_internal_class, "
         elif arg["type"] == "Variant":
             res += f"variant_{(pythonize_name(arg['name']))}, "
         else:
@@ -677,11 +680,11 @@ def collect_members(obj):
 
 def generate_common_methods(class_):
     result = ""
-    if not is_singleton(class_["name"]):
+    if not is_singleton(class_["name"]) and not class_["name"] in typed_arrays_names:
         result += generate_constructor(class_["name"])
         result = generate_newline(result)
     result = generate_newline(result)
-    if class_["name"] in builtin_classes:
+    if class_["name"] in builtin_classes or class_["name"] in typed_arrays_names:
         result += generate_constructors(class_)
         result = generate_newline(result)
     if class_["name"] == "Object":
@@ -697,7 +700,7 @@ def generate_get_py_script_method():
     result = ""
     result += f"{INDENT}def get_pyscript(self):"
     result = generate_newline(result)
-    result += f"{INDENT * 2}cdef int id = self.get_instance_id()"
+    result += f"{INDENT * 2}cdef long long id = self.get_instance_id()"
     result = generate_newline(result)
     result += f"{INDENT * 2}cdef object script = <object>get_py_script(id)"
     result = generate_newline(result)
@@ -842,7 +845,10 @@ def generate_property(property, classname):
     if "setter" in property and property["setter"] != "":
         result += f"{INDENT}@{pythonize_name(property['name'])}.setter"
         result = generate_newline(result)
-        result += f"{INDENT}def {pythonize_name(property['name'])}(self, {import_type(unvariant(unstring(untypearray(simplify_type(property['type'])))), classname)} value):"
+        if (classname == "RichTextLabel" and property["name"] == "custom_effects"):
+            result += f"{INDENT}def {pythonize_name(property['name'])}(self, Array value):"  # TODO remove, when properties finally are the same types as functions
+        else:
+            result += f"{INDENT}def {pythonize_name(property['name'])}(self, {import_type(unvariant(unstring(untypearray(simplify_type(property['type'])))), classname)} value):"
         result = generate_newline(result)
         result += f"{INDENT * 2}self.{pythonize_name(property['setter'])}({generate_property_index(property, True)}value)"
         result = generate_newline(result)
@@ -920,6 +926,8 @@ def generate_default_arg(class_, arg, arg_type):
             if arg_type == "String":
                 return "= ''"
             return "= None"
+        elif "TypedArray" in arg_type:
+            return "= None"
         else:
             return f"={pythonize_boolean_types(unref_type(unnull_type(arg['default_value'])))}"
 
@@ -939,6 +947,8 @@ def import_type(type_, classname):
         return type_
     elif type_ == "str":
         return type_
+    elif "TypedArray" in type_:
+        return untypearray(type_)
     return "py4godot_" + type_.lower() + "." + type_
 
 
@@ -985,7 +995,7 @@ def unenumize_type(type_):
 def untypearray(type_):
     # TODO improve this by creating actually typed arrays
     if "typedarray" in type_:
-        return "Array"
+        return generate_typed_array_name(type_)
     return type_
 
 
@@ -1490,6 +1500,48 @@ def generate_operators_set(class_):
 
 classes = set()
 
+
+def collect_typed_arrays_from_return(method_):
+    if "return_value" in method_.keys() or "return_type" in method_.keys():
+        ret_val = None
+        if ("return_value" in method_.keys()):
+            ret_val = ReturnType("_ret", method_['return_value']['type'])
+        else:
+            ret_val = ReturnType("_ret", method_['return_type'])
+        if "typedarray" in ret_val.type:
+            return [ret_val.type]
+    return []
+
+
+def collect_typed_arrays_from_args(method):
+    typed_arrays = []
+    if "arguments" not in method.keys():
+        return []
+    else:
+        for argument in method["arguments"]:
+            if ("typedarray" in argument["type"]):
+                typed_arrays.append(argument["type"])
+    return typed_arrays
+
+
+def collect_typed_arrays(classes):
+    typed_arrays = []
+    for cls in classes:
+        if not "methods" in cls.keys():
+            continue
+        for method in cls["methods"]:
+            typed_arrays += collect_typed_arrays_from_return(method)
+            typed_arrays += collect_typed_arrays_from_args(method)
+
+    return set(typed_arrays)
+
+
+def generate_typed_array_name(name):
+    if (name == "typedarray::Array"):
+        pass
+    return (name.split("::")[1] + "TypedArray").replace("24/17:", "")
+
+
 if __name__ == "__main__":
     with open('py4godot/gdextension-api/extension_api.json', 'r') as myfile:
         data = myfile.read()
@@ -1512,5 +1564,19 @@ if __name__ == "__main__":
             with open(f"py4godot/classes/{class_['name']}/__init__.py", "w"):
                 pass
             generate_classes([class_], f"py4godot/classes/{class_['name']}/{class_['name']}.pyx")
+
+        array_cls = None
+        arrays = []
+        for cls in obj["builtin_classes"]:
+            if cls["name"] == "Array":
+                array_cls = cls
+        print("typedarrays:", collect_typed_arrays(obj["classes"] + obj["builtin_classes"]))
+        for typed_array in collect_typed_arrays(obj["classes"] + obj["builtin_classes"]):
+            my_array_cls = copy.deepcopy(array_cls)
+            my_array_cls["name"] = generate_typed_array_name(typed_array)
+            typed_arrays_names.add(generate_typed_array_name(typed_array))
+            arrays.append(my_array_cls)
+
+        generate_classes(arrays, f"py4godot/classes/typedarrays.pyx", is_core=True)
 
         generate_classes(obj["builtin_classes"], f"py4godot/classes/generated4_core.pyx", is_core=True)

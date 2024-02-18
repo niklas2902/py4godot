@@ -12,7 +12,7 @@ godot::ScriptDatabase* godot::ScriptDatabase::instance()
 }
 
 
-PyObject* godot::get_py_script(int id){
+PyObject* godot::get_py_script(long long id){
     auto script = ScriptDatabase::instance()->get_script(id);
     if (script != nullptr){
         return script;

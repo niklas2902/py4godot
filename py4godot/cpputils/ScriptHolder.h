@@ -35,5 +35,5 @@ namespace godot{
             }
 
     };
-    LIBRARY_API PyObject* get_py_script(int id);
+    LIBRARY_API PyObject* get_py_script(long long id);
 }

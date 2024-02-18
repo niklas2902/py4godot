@@ -185,7 +185,9 @@
 
   void PyLanguage::_debug_get_current_stack_info(GDExtensionTypePtr res){}
 
-  void PyLanguage::_reload_all_scripts(GDExtensionTypePtr res){}
+  void PyLanguage::_reload_all_scripts(GDExtensionTypePtr res){
+    assert(false);
+  }
 
   void PyLanguage::_reload_tool_script(Script script, bool soft_reload, GDExtensionTypePtr res){}
 
