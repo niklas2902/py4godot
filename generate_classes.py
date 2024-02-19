@@ -847,6 +847,8 @@ def generate_property(property, classname):
         result = generate_newline(result)
         if (classname == "RichTextLabel" and property["name"] == "custom_effects"):
             result += f"{INDENT}def {pythonize_name(property['name'])}(self, Array value):"  # TODO remove, when properties finally are the same types as functions
+        elif classname in typed_arrays_names:
+            result += f"{INDENT}def {pythonize_name(property['name'])}(self, {import_type(unvariant_type_array(unstring(untypearray(simplify_type(property['type']))), classname), classname)} value):"
         else:
             result += f"{INDENT}def {pythonize_name(property['name'])}(self, {import_type(unvariant(unstring(untypearray(simplify_type(property['type'])))), classname)} value):"
         result = generate_newline(result)
@@ -875,6 +877,12 @@ def unvariant(type_):
     return type_
 
 
+def unvariant_type_array(type_, typedarray_name):
+    if type_ == "Variant":
+        return typedarray_name.replace("TypedArray", "")
+    return type_
+
+
 def convert_from_variant(arg_name):
     return f"{arg_name}.get_converted_value()"
 
@@ -885,6 +893,16 @@ def convert_to_variant(arg_name):
 
 def unnull_type(value_to_return):
     if value_to_return == "null":
+        return "None"
+    return value_to_return
+
+
+def unnull_type_for_given_type(value_to_return, type_):
+    if value_to_return == "null":
+        if type_ in ("float", "int"):
+            return "0"
+        elif type_ == "bool":
+            return "False"
         return "None"
     return value_to_return
 
@@ -922,14 +940,14 @@ def core_import(class_):
 def generate_default_arg(class_, arg, arg_type):
     set_to_iterate = builtin_classes.union(classes) - {"int", "float", "bool", "Nil"}
     if "default_value" in arg:
-        if arg_type in set_to_iterate:
+        if arg_type in set_to_iterate or "TypedArray" in arg_type:
             if arg_type == "String":
                 return "= ''"
             return "= None"
-        elif "TypedArray" in arg_type:
-            return "= None"
         else:
-            return f"={pythonize_boolean_types(unref_type(unnull_type(arg['default_value'])))}"
+            if pythonize_boolean_types(unref_type(unnull_type(arg['default_value']))) == None:
+                pass
+            return f"={pythonize_boolean_types(unref_type(unnull_type_for_given_type(arg['default_value'], arg_type)))}"
 
     return ""
 
@@ -968,11 +986,15 @@ def generate_args(class_, method_with_args):
     for arg in method_with_args["arguments"]:
         if not arg["type"].startswith("enum::"):
             type_ = unstring(unvariant(untypearray(unbitfield_type(arg['type']))))
+            if class_["name"] in typed_arrays_names:
+                type_ = unstring(unvariant_type_array(untypearray(unbitfield_type(arg['type'])), class_["name"]))
             result += f"{import_type(type_, class_['name'])} {pythonize_name(arg['name'])} {generate_default_arg(class_, arg, type_)}, "
         else:
             # enums are marked with enum:: . To be able to use this, we have to strip this
             arg_type = arg["type"].replace("enum::", "")
             type_ = unstring(unvariant(untypearray(unenumize_type(arg_type))))
+            if class_["name"] in typed_arrays_names:
+                type_ = unstring(unvariant_type_array(untypearray(unenumize_type(arg_type)), class_["name"]))
             result += f"{import_type(type_, class_['name'])} {pythonize_name(arg['name'])} {generate_default_arg(class_, arg, type_)}, "
     if method_with_args["is_vararg"]:
         result += "*varargs, "
@@ -1030,6 +1052,10 @@ def get_classes_to_import(classes):
 
                 if simplify_type(prop["type"]) in normal_classes:
                     classes_to_import.append(simplify_type(prop["type"]))
+        if class_["name"] in typed_arrays_names:
+            if class_["name"].replace("TypedArray", "") in builtin_classes:
+                continue
+            classes_to_import.append(simplify_type(class_["name"].replace("TypedArray", "")))
 
     return classes_to_import
 
@@ -1116,7 +1142,10 @@ def generate_operators_for_class(class_name):
                 op = operator_dict[class_name][operator]
                 res += f"{INDENT}def {operator_to_method[operator]}({get_parameters_operator(operator_dict[class_name][operator])}):"
                 res = generate_newline(res)
-                res += f"{INDENT * 2}cdef {unvariant(op.return_type)} _ret = {init_return_type(op.return_type)}"
+                if class_name not in typed_arrays_names:
+                    res += f"{INDENT * 2}cdef {unvariant(op.return_type)} _ret = {init_return_type(op.return_type)}"
+                else:
+                    res += f"{INDENT * 2}cdef {unvariant_type_array(op.return_type, class_name)} _ret = {init_return_type(op.return_type)}"
                 res = generate_newline(res)
 
                 res = generate_newline(res)
@@ -1136,7 +1165,10 @@ def generate_operators_for_class(class_name):
                     elif target == "Variant":
                         res += f"{INDENT * 2}cdef PyVariant complex_val_variant"
                         res = generate_newline(res)
-                    res += f"{INDENT * 2}if isinstance(other, {unvariant(get_instance_type(target))}):"
+                    if class_name not in typed_arrays_names:
+                        res += f"{INDENT * 2}if isinstance(other, {unvariant(get_instance_type(target))}):"
+                    else:
+                        res += f"{INDENT * 2}if isinstance(other, {unvariant_type_array(get_instance_type(target), class_name)}):"
                     res = generate_newline(res)
 
                     if target in builtin_classes.union(classes):
@@ -1172,9 +1204,24 @@ def should_skip_import(classname, class_to_import):
     return classname == "Node" and class_to_import in {"SceneTree", "Viewport", "Window"}
 
 
-def generate_classes(classes, filename, is_core=False):
+def generate_classes(classes, filename, is_core=False, is_typed_array=False):
     res = generate_import()
-    if not is_core:
+    if is_typed_array:
+        res += f"from py4godot.classes.Object.Object cimport *"
+        res = generate_newline(res)
+
+        res += f"from py4godot.classes.generated4_core cimport *"
+        res = generate_newline(res)
+        classes_to_import = get_classes_to_import(classes)
+        for cls in classes_to_import:
+            if cls in [class_["name"] for class_ in classes]:
+                continue
+            if should_skip_import(classes[0]["name"], cls):
+                continue
+            res += f"cimport py4godot.classes.{cls}.{cls} as py4godot_{cls.lower()} "
+            res = generate_newline(res)
+
+    elif not is_core:
         classes_to_import = get_classes_to_import(classes)
         for cls in classes_to_import:
             if cls in [class_["name"] for class_ in classes]:
@@ -1577,6 +1624,6 @@ if __name__ == "__main__":
             typed_arrays_names.add(generate_typed_array_name(typed_array))
             arrays.append(my_array_cls)
 
-        generate_classes(arrays, f"py4godot/classes/typedarrays.pyx", is_core=True)
+        generate_classes(arrays, f"py4godot/classes/typedarrays.pyx", is_core=False, is_typed_array=True)
 
         generate_classes(obj["builtin_classes"], f"py4godot/classes/generated4_core.pyx", is_core=True)

@@ -152,6 +152,8 @@ def generate_constructors(class_):
 def generate_class_imports(classes):
     result = "import py4godot.classes.generated4_core as __core__"
     result = generate_newline(result)
+    result += "import py4godot.classes.typedarrays as __typedarrays__"
+    result = generate_newline(result)
     for class_ in classes:
         result += f"import py4godot.classes.{class_}.{class_} as __{class_.lower()}__"
         result = generate_newline(result)
@@ -285,21 +287,21 @@ def generate_method_headers(mMethod):
 
 def generate_method(class_, mMethod):
     res = ""
-    args = generate_args(mMethod)
-    def_function = f"{INDENT}def {pythonize_name(mMethod['name'])}({args})->{get_ret_value(mMethod)}: pass"
+    args = generate_args(class_, mMethod)
+    def_function = f"{INDENT}def {pythonize_name(mMethod['name'])}({args})->{get_ret_value(mMethod, class_)}: pass"
     res += generate_method_headers(mMethod)
     res += def_function
     res = generate_newline(res)
     return res
 
 
-def get_ret_value(method):
+def get_ret_value(method, class_):
     if "return_value" in method.keys() or "return_type" in method.keys():
         if "return_value" in method.keys():
             return_type = method["return_value"]["type"]
         else:
             return_type = method["return_type"]
-        return ungodottype(untypearray(unbitfield_type(unenumize_type(return_type))))
+        return ungodottype_type_array(untypearray(unbitfield_type(unenumize_type(return_type))), class_["name"])
 
 
 def generate_operators(class_):
@@ -352,7 +354,7 @@ def generate_properties(class_):
     result = ""
     if ("properties" in class_.keys()):
         for property in class_["properties"]:
-            result += generate_property(property)
+            result += generate_property(property, class_)
     return result
 
 
@@ -396,17 +398,17 @@ def simplify_type(type):
     return list_types[-1]
 
 
-def generate_property(property):
+def generate_property(property, class_):
     result = ""
     result += f"{INDENT}@property"
     result = generate_newline(result)
-    result += f"{INDENT}def {pythonize_name(property['name'])}(self)->{unbitfield_type(unenumize_type(ungodottype((property['type']))))}: pass"
+    result += f"{INDENT}def {pythonize_name(property['name'])}(self)->{unbitfield_type(unenumize_type(ungodottype_type_array((property['type']), class_['name'])))}: pass"
     result = generate_newline(result)
 
     if "setter" in property and property["setter"] != "":
         result += f"{INDENT}@{pythonize_name(property['name'])}.setter"
         result = generate_newline(result)
-        result += f"{INDENT}def {pythonize_name(property['name'])}(self,  value:{ungodottype(untypearray(simplify_type(property['type'])))})->None: pass"
+        result += f"{INDENT}def {pythonize_name(property['name'])}(self,  value:{ungodottype_type_array(untypearray(simplify_type(property['type'])), class_['name'])})->None: pass"
         result = generate_newline(result)
 
     return result
@@ -433,13 +435,40 @@ def ungodottype(type_):
         return "object"
     elif type_ in builtin_classes - {"float", "int", "Nil", "bool"}:
         return f"__core__.{type_}"
+    elif type_ in typed_arrays_names:
+        return f"__typedarrays__.{type_}"
     if (type_ in classes):
         return f"__{type_.lower()}__.{type_}"
 
     return type_
 
 
-def generate_args(method_with_args):
+def ungodottype_type_array(type_, class_name):
+    if (type_ == "String"):
+        return "str"
+    if (type_ == "StringName"):
+        return "str"
+    if (type_ == "Variant"):
+        if class_name in typed_arrays_names:
+            typed_array_type = class_name.replace("TypedArray", "")
+
+            if typed_array_type in builtin_classes - {"float", "int", "Nil", "bool"}:
+                return f"__core__.{typed_array_type}"
+            elif (typed_array_type in classes):
+                return f"__{typed_array_type.lower()}__.{typed_array_type}"
+            return typed_array_type
+        return "object"
+    elif type_ in builtin_classes - {"float", "int", "Nil", "bool"}:
+        return f"__core__.{type_}"
+    elif type_ in typed_arrays_names:
+        return f"__typedarrays__.{type_}"
+    if (type_ in classes):
+        return f"__{type_.lower()}__.{type_}"
+
+    return type_
+
+
+def generate_args(class_, method_with_args):
     result = "self, "
     if (is_static(method_with_args)):
         result = ""
@@ -448,7 +477,11 @@ def generate_args(method_with_args):
 
     for arg in method_with_args["arguments"]:
         if not arg["type"].startswith("enum::"):
-            result += f"{pythonize_name(arg['name'])}:{ungodottype(untypearray(unbitfield_type(arg['type'])))}{generate_default_arg(arg, arg['type'])}, "
+            if class_["name"] not in typed_arrays_names:
+                result += f"{pythonize_name(arg['name'])}:{ungodottype(untypearray(unbitfield_type(arg['type'])))}{generate_default_arg(arg, arg['type'])}, "
+            else:
+                result += f"{pythonize_name(arg['name'])}:{ungodottype_type_array(untypearray(unbitfield_type(arg['type'])), class_['name'])}{generate_default_arg(arg, arg['type'])}, "
+
         else:
             # enums are marked with enum:: . To be able to use this, we have to strip this
             arg_type = arg["type"].replace("enum::", "")
@@ -555,10 +588,19 @@ def generate_operators_for_class(class_name):
     return res
 
 
-def generate_classes(classes, filename, is_core=False):
+def generate_classes(classes, filename, is_core=False, is_typed_array=False):
     res = generate_import()
     res = generate_newline(res)
-    if not is_core:
+    if is_typed_array:
+        res += generate_class_imports(get_classes_to_import(classes))
+        res = generate_newline(res)
+        for cls in classes:
+            typed_array_type = cls["name"].replace("TypedArray", "")
+            if typed_array_type in builtin_classes:
+                continue
+            res += f"import py4godot.classes.{typed_array_type}.{typed_array_type} as __{typed_array_type.lower()}__"
+            res = generate_newline(res)
+    elif not is_core:
         res += generate_class_imports(get_classes_to_import(classes))
         res = generate_newline(res)
     else:
@@ -797,7 +839,7 @@ if __name__ == "__main__":
             typed_arrays_names.add(generate_typed_array_name(typed_array))
             arrays.append(my_array_cls)
 
-        generate_classes(arrays, f"py4godot/classes/typedarrays.pyi", is_core=False)
+        generate_classes(arrays, f"py4godot/classes/typedarrays.pyi", is_core=False, is_typed_array=True)
 
         for class_ in obj["builtin_classes"]:
             generate_operators_set(class_)
