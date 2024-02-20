@@ -1451,7 +1451,7 @@ def generate_init(class_):
 
 
 def generate_del(class_):
-    if class_["name"] not in builtin_classes:
+    if class_["name"] not in builtin_classes and class_["name"] not in typed_arrays_names:
         return ""
     res = ""
     res += f"{INDENT}def __del__(self):"

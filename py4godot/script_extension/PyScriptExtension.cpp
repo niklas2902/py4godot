@@ -8,6 +8,7 @@
 #include "py4godot/pluginscript_api/api.h"
 #include "py4godot/script_instance/instance.h"
 #include "py4godot/pluginscript_api/utils/annotations_api.h"
+#include "py4godot/pluginscript_api/utils/forward_print_api.h"
 #include "py4godot/instance_data/CPPInstanceData.h"
 #include "py4godot/utils/instance_utils_api.h"
 #include "py4godot/cpputils/ScriptHolder.h"
@@ -51,6 +52,20 @@ void init_pluginscript_api(){
         return;
     }
 
+    import_py4godot__pluginscript_api__utils__forward_print();
+    if (PyErr_Occurred())
+    {
+        PyObject *ptype, *pvalue, *ptraceback;
+        PyErr_Fetch(&ptype, &pvalue, &ptraceback);
+
+        PyObject* str_exc_type = PyObject_Repr(pvalue); //Now a unicode
+        PyObject* pyStr = PyUnicode_AsEncodedString(str_exc_type, "utf-8","Error ~");
+        const char *strExcType = PyBytes_AS_STRING(pyStr);
+        PyErr_Print();
+        assert(false);
+        return;
+    }
+
     import_py4godot__utils__instance_utils();
     if (PyErr_Occurred())
     {
@@ -80,6 +95,7 @@ void init_pluginscript_api(){
     }
 
     Variant::init_variant();
+    forward_print();
 
     PyEval_InitThreads();
     if (PyErr_Occurred())

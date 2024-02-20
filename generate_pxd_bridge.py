@@ -142,7 +142,7 @@ def generate_variant_type(class_):
 
 def generate_destructor(classname):
     res = ""
-    if classname in builtin_classes:
+    if classname in builtin_classes or classname in typed_arrays_names:
         res += f"{INDENT * 2}void _py_destroy();"
         res = generate_newline(res)
     return res

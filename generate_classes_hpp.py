@@ -579,7 +579,7 @@ def generate_constructor(classname):
 
 def generate_destructor(classname):
     res = ""
-    if classname in builtin_classes:
+    if classname in builtin_classes or classname in typed_arrays_names:
         res += f"void {INDENT}_py_destroy();"
         res = generate_newline(res)
     res += f"{INDENT}~{classname}();"

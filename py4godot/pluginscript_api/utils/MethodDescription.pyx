@@ -13,14 +13,14 @@ id_counter = 0
 cdef inc_id_counter():
     global id_counter
     id_counter += 1
-
+"""
 cdef class MethodDescription:
-    """"Description class for the properties, a gdclass can have and which can be found in the editor"""
+    #Description class for the properties, a gdclass can have and which can be found in the editor
     def __init__(self, name, return_value, flags,  arguments, default_arguments):
         try:
-            print_error("constructor Method Description")
+            #print_error("constructor Method Description")
             inc_id_counter()
-            print_error("after inc_id_counter")
+            #print_error("after inc_id_counter")
             self.name_str = c_string_to_string(name.encode("utf-8"))
             self.name = StringName.new2(self.name_str)
             if return_value != None:
@@ -73,3 +73,4 @@ cdef class MethodDescription:
                 c_list_default_arguments[i] = var.get_native_ptr()
             self.method_info.default_arguments = c_list_default_arguments
         print_error("Method Info: to c successfull")
+"""
