@@ -1,6 +1,16 @@
 import sys
 from py4godot.classes.common_functions import print as gdprint
 
+welcome_text="""
+              _  _                  _       _
+             | || |                | |     | |
+  _ __  _   _| || |_ __ _  ___   __| | ___ | |_
+ | '_ \| | | |__   _/ _` |/ _ \ / _` |/ _ \| __|
+ | |_) | |_| |  | || (_| | (_) | (_| | (_) | |_
+ | .__/ \__, |  |_| \__, |\___/ \__,_|\___/ \__|
+ | |     __/ |       __/ |
+ |_|    |___/       |___/                       """
+
 class CustomPrint:
     def write(self, text):
         # Add your custom logic here
@@ -23,6 +33,8 @@ cdef api void forward_print():
 
     # Redirect sys.stdout to the custom object
     sys.stdout = custom_print
+
+    print(welcome_text)
 
     #print("Hello, World!")
 
