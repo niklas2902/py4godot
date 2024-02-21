@@ -192,6 +192,8 @@ def generate_variant_type(class_):
         return f"GDExtensionVariantType::GDEXTENSION_VARIANT_TYPE_{convert_camel_case_to_underscore(class_).upper()}"
     elif class_ in typed_arrays_names:
         return f"GDExtensionVariantType::GDEXTENSION_VARIANT_TYPE_ARRAY"
+    elif class_ == "Object":
+        return f"GDExtensionVariantType::GDEXTENSION_VARIANT_TYPE_OBJECT"
     else:
         return f"GDExtensionVariantType::GDEXTENSION_VARIANT_TYPE_NIL"
 
@@ -228,6 +230,12 @@ def address_val(classname, val_name='val'):
     return f"&val"
 
 
+def objectify_type(type_):
+    if type_ in builtin_classes:
+        return type_
+    return "Object"
+
+
 def generate_constructors(class_):
     res = ""
     if "constructors" not in class_.keys():
@@ -256,12 +264,15 @@ def generate_constructors(class_):
         res = generate_newline(res)
         if class_["name"] in typed_arrays_names:
             cls_name = class_["name"][0:-10]
-            res += f"{INDENT * 2}Variant var{{}};"
+            res += f"{INDENT * 2}Variant var{{1}};"
             res = generate_newline(res)
-            res += f"{INDENT * 2}auto val = {create_class(cls_name)};"
+            if cls_name in builtin_classes:
+                res += f'{INDENT * 2}auto type_name = c_string_to_string_name("");'
+            else:
+                res += f'{INDENT * 2}auto type_name = c_string_to_string_name("{cls_name}");'
             res = generate_newline(res)
 
-            res += f"{INDENT * 2}functions::get_array_set_typed()( & _class.godot_owner, {generate_variant_type(cls_name)}, {address_val(cls_name)}, & var.native_ptr);"
+            res += f"{INDENT * 2}functions::get_array_set_typed()( & _class.godot_owner, {generate_variant_type(objectify_type(cls_name))}, &type_name.godot_owner, & var.native_ptr);"
             res = generate_newline(res)
 
         res += f"{INDENT * 2}return _class;"

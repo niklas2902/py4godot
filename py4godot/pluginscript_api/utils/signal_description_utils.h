@@ -46,8 +46,9 @@ Dictionary init_signal_description(char* name, std::vector<CPPSignalArg> args){
 
     Array args_array = Array::py_new0();
     Dictionary dictionary_signal_args = Dictionary::py_new0();
-    Variant dictionary_var = Variant();
-    functions::get_array_set_typed()(&args_array.godot_owner, GDExtensionVariantType::GDEXTENSION_VARIANT_TYPE_DICTIONARY,  &dictionary_signal_args.godot_owner, &dictionary_var.native_ptr);
+    Variant dictionary_var = Variant(1);
+    auto type_name = c_string_to_string_name("");
+    functions::get_array_set_typed()(&args_array.godot_owner, GDExtensionVariantType::GDEXTENSION_VARIANT_TYPE_DICTIONARY,  &type_name.godot_owner, &dictionary_var.native_ptr);
 
     // create a signal arg
     for (const auto& arg: args){
