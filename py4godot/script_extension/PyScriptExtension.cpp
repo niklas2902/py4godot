@@ -243,7 +243,9 @@ void PyScriptExtension::_has_source_code(GDExtensionTypePtr res){}
 void PyScriptExtension::_get_source_code(GDExtensionTypePtr& res){
     functions::get_string_new_with_utf8_chars()(res, source_code.c_str());
 }
-void PyScriptExtension::_set_source_code( String& code, GDExtensionTypePtr res){}
+void PyScriptExtension::_set_source_code( String& code, GDExtensionTypePtr res){
+    _set_source_code_internal(code);
+}
 void PyScriptExtension::_reload( bool keep_state, GDExtensionTypePtr res){
 }
 void PyScriptExtension::_get_documentation(GDExtensionTypePtr res){}
@@ -435,7 +437,7 @@ StringName func_name__get_source_code ;
 
 void call_virtual_func__set_source_code(GDExtensionClassInstancePtr p_instance, const GDExtensionConstTypePtr* p_args, GDExtensionTypePtr r_ret) {
     PyScriptExtension* pylanguage = static_cast<PyScriptExtension*> (p_instance);
-    String args0 = String::new_static(const_cast<GDExtensionStringPtr*>(p_args + 0));
+    String args0 = String::new_static(*((void**)const_cast<GDExtensionStringPtr>(p_args[0])));
 
 
 
