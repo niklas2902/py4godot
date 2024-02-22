@@ -250,6 +250,8 @@ def generate_constructors(class_):
         res = generate_newline(res)
         res += f"{INDENT * 2}{class_['name']} _class;"
         res = generate_newline(res)
+        res += f"{INDENT * 2}_class._callback = nullptr;"
+        res = generate_newline(res)
         res += f"{INDENT * 2}_class.shouldBeDeleted = true;"
         res = generate_newline(res)
         res += f"{INDENT * 2}_class.set_variant_type({generate_variant_type(get_class_name(class_['name']))});"
@@ -286,6 +288,8 @@ def generate_constructors(class_):
         res = generate_newline(res)
         res += f"{INDENT * 2}_class.shouldBeDeleted = false;"
         res = generate_newline(res)
+        res += f"{INDENT * 2}_class._callback = nullptr;"
+        res = generate_newline(res)
         res += f"{INDENT * 2}return _class;"
         res = generate_newline(res)
         res += "}"
@@ -299,6 +303,8 @@ def generate_copy_constructor(class_):
     res = generate_newline(res)
     res = generate_newline(res)
     res += f"{INDENT * 2}this->shouldBeDeleted = true;"
+    res = generate_newline(res)
+    res += f"{INDENT * 2}this->_callback = copy_val._callback;"
     res = generate_newline(res)
     res += f"{INDENT * 2}this->set_variant_type({get_class_name(generate_variant_type(class_['name']))});"
     res = generate_newline(res)
@@ -321,6 +327,8 @@ def generate_copy_operator(class_):
     res = generate_newline(res)
     res = generate_newline(res)
     res += f"{INDENT * 2}this->shouldBeDeleted = copy_val.shouldBeDeleted;"
+    res = generate_newline(res)
+    res += f"{INDENT * 2}this->_callback = copy_val._callback;"
     res = generate_newline(res)
     res += f"{INDENT * 2}this->set_variant_type({get_class_name(generate_variant_type(class_['name']))});"
     res = generate_newline(res)
@@ -851,9 +859,13 @@ def generate_callback(class_, method):
             ret_val = ReturnType("_ret", method['return_type'])
         if is_property_setter(class_, method["name"]) and class_["name"] in builtin_classes:
             result = ""
-            result += f"{INDENT * 2}Callback<{ret_val.type}>* _update_callback = (Callback<{ret_val.type}>*)_callback"
+            result += f"{INDENT * 2}if(_callback != nullptr){{"
             result = generate_newline(result)
-            result += f"{INDENT * 2}if(_update_callback) _update_callback->callback(*this, _update_callback->instance);"
+            result += f"{INDENT * 3}Callback<{ret_val.type}>* _update_callback = (Callback<{ret_val.type}>*)_callback"
+            result = generate_newline(result)
+            result += f"{INDENT * 3}if(_update_callback) _update_callback->callback(*this, _update_callback->instance);"
+            result = generate_newline(result)
+            result += f"{INDENT * 2}}}"
             result = generate_newline(result)
             return result
         if is_property_getter(class_, method["name"]) and ret_val.type in builtin_classes - {"float", "int", "bool",
@@ -1099,14 +1111,14 @@ def generate_member_getter(class_, member):
 
 def generate_member_setter(class_, member):
     res = ""
-    res += f"{INDENT}void {class_}::py_member_set_{member.name}({member.type_} value)" + "{"
+    res += f"{INDENT}void {class_}::py_member_set_{member.name}({member.type_}& value)" + "{"
     res = generate_newline(res)
     res += f"{INDENT}member_set_{member.name}(value);"
     res = generate_newline(res)
     res += f"{INDENT}}}"
     res = generate_newline(res)
 
-    res += f"{INDENT}void {class_}::member_set_{member.name}({member.type_} value)" + "{"
+    res += f"{INDENT}void {class_}::member_set_{member.name}({member.type_}& value)" + "{"
     res = generate_newline(res)
     res += f"{INDENT * 2}String _member_name_string = String::new0();"
     res = generate_newline(res)
