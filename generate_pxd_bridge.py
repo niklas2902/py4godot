@@ -419,7 +419,7 @@ def generate_member_getter(class_, member):
 
 def generate_member_setter(class_, member):
     res = ""
-    res += f"{INDENT * 2}void py_member_set_{member.name}({member.type_} value);"
+    res += f"{INDENT * 2}void py_member_set_{member.name}({member.type_}& value);"
     return res
 
 

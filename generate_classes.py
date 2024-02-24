@@ -775,18 +775,26 @@ def generate_member_getter(class_, member):
     res = generate_newline(res)
     res += f"{INDENT}def {member.name}(self):"
     res = generate_newline(res)
+
+    body = ""
     if member.type_ != "int" and member.type_ != "float" and member.type_ != "double":
-        res += f"{INDENT * 2}cdef {member.type_} _ret = {member.type_}()"
-        res = generate_newline(res)
-        res += f"{INDENT * 2}_ret.{member.type_}_internal_class = self.{class_}_internal_class.py_member_get_{member.name}()"
-        res = generate_newline(res)
-        res += f"{INDENT * 2}_ret.set_gdowner(_ret.{member.type_}_internal_class.get_godot_owner())"
-        res = generate_newline(res)
+        body += f"{INDENT * 2}cdef {member.type_} _ret = {member.type_}()"
+        body = generate_newline(body)
+        body += f"{INDENT * 2}_ret.{member.type_}_internal_class = self.{class_}_internal_class.py_member_get_{member.name}()"
+        body = generate_newline(body)
+        body += f"{INDENT * 2}_ret.set_gdowner(_ret.{member.type_}_internal_class.get_godot_owner())"
+        body = generate_newline(body)
     else:
-        res += f"{INDENT * 2}cdef {member.type_} _ret = self.{class_}_internal_class.py_member_get_{member.name}()"
+        body += f"{INDENT * 2}cdef {member.type_} _ret = self.{class_}_internal_class.py_member_get_{member.name}()"
+    body = generate_newline(body)
+    body += f"{INDENT * 2}return _ret"
+    body = generate_newline(body)
+    res += body
+
+    res += f"{INDENT}def get_{member.name}(self):"
     res = generate_newline(res)
-    res += f"{INDENT * 2}return _ret"
-    res = generate_newline(res)
+    res += body
+
     return res
 
 
@@ -794,13 +802,21 @@ def generate_member_setter(class_, member):
     res = ""
     res += f"{INDENT}@{member.name}.setter"
     res = generate_newline(res)
+
     res += f"{INDENT}def {member.name}(self, {member.type_} value):"
     res = generate_newline(res)
+
+    body = ""
     if member.type_ != "int" and member.type_ != "float" and member.type_ != "double":
-        res += f"{INDENT * 2}self.{class_}_internal_class.py_member_set_{member.name}(value.{member.type_}_internal_class)"
+        body += f"{INDENT * 2}self.{class_}_internal_class.py_member_set_{member.name}(value.{member.type_}_internal_class)"
     else:
-        res += f"{INDENT * 2}self.{class_}_internal_class.py_member_set_{member.name}(value)"
+        body += f"{INDENT * 2}self.{class_}_internal_class.py_member_set_{member.name}(value)"
+    body = generate_newline(body)
+    res += body
+
+    res += f"{INDENT}def set_{member.name}(self, {member.type_} value):"
     res = generate_newline(res)
+    res += body
     return res
 
 

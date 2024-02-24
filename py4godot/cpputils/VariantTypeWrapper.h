@@ -11,9 +11,11 @@ namespace godot{
         GDExtensionVariantType variant_type;
         GDExtensionTypePtr godot_owner = nullptr;
         void* native_ptr = nullptr;
-        void* _callback = nullptr;
+        bool is_callback_set = false;
         bool initialized = false;
         bool shouldBeDeleted = false;
+        bool allocated_memory = false;
+        void* _callback = nullptr;
         long long __id;
         VariantTypeWrapper(){
             native_ptr = nullptr;

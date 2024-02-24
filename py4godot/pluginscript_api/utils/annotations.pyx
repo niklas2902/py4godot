@@ -15,7 +15,7 @@ from py4godot.classes.Object.Object cimport *
 
 class_name = ""
 gd_class = None
-cdef api TransferObject exec_class(str source_string, str class_name_):
+cdef api TransferObject exec_class(str source_string, str class_name_) with gil:
     global  gd_class, properties, signals, methods,default_values, class_name
 
     cdef str py_source_string = source_string

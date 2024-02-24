@@ -364,6 +364,9 @@ def generate_member_getter(class_, member):
     res = generate_newline(res)
     res += f"{INDENT}def {member.name}(self)->{undouble_type(member.type_)}:pass"
     res = generate_newline(res)
+
+    res += f"{INDENT}def get_{member.name}(self)->{undouble_type(member.type_)}:pass"
+    res = generate_newline(res)
     return res
 
 
@@ -378,6 +381,8 @@ def generate_member_setter(class_, member):
     res += f"{INDENT}@{member.name}.setter"
     res = generate_newline(res)
     res += f"{INDENT}def {member.name}(self, value:{undouble_type(member.type_)})->None:pass"
+    res = generate_newline(res)
+    res += f"{INDENT}def set_{member.name}(self, value:{undouble_type(member.type_)})->None:pass"
     res = generate_newline(res)
 
     return res

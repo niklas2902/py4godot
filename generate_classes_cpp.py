@@ -250,11 +250,9 @@ def generate_constructors(class_):
         res = generate_newline(res)
         res += f"{INDENT * 2}{class_['name']} _class;"
         res = generate_newline(res)
-        res += f"{INDENT * 2}_class._callback = nullptr;"
-        res = generate_newline(res)
         res += f"{INDENT * 2}_class.shouldBeDeleted = true;"
         res = generate_newline(res)
-        res += f"{INDENT * 2}_class.set_variant_type({generate_variant_type(get_class_name(class_['name']))});"
+        res += f"{INDENT * 2}_class.set_variant_type({generate_variant_type(class_['name'])});"
         res = generate_newline(res)
         res += f"{INDENT * 2}GDExtensionPtrConstructor constructor = functions::get_variant_get_ptr_constructor()(_class.variant_type, {constructor['index']});"
         res = generate_newline(res)
@@ -262,21 +260,14 @@ def generate_constructors(class_):
         res += generate_constructor_args_array(constructor)
         res = generate_newline(res)
 
+        res += f"{INDENT * 2}_class.godot_owner = malloc(sizeof(uint8_t)*8);"
+        res = generate_newline(res)
+
+        res += f"{INDENT * 2}_class.allocated_memory = true;"
+        res = generate_newline(res)
+
         res += f"{INDENT * 2}constructor(&_class.godot_owner,_args);"
         res = generate_newline(res)
-        if class_["name"] in typed_arrays_names:
-            cls_name = class_["name"][0:-10]
-            res += f"{INDENT * 2}Variant var{{1}};"
-            res = generate_newline(res)
-            if cls_name in builtin_classes:
-                res += f'{INDENT * 2}auto type_name = c_string_to_string_name("");'
-            else:
-                res += f'{INDENT * 2}auto type_name = c_string_to_string_name("{cls_name}");'
-            res = generate_newline(res)
-
-            res += f"{INDENT * 2}functions::get_array_set_typed()( & _class.godot_owner, {generate_variant_type(objectify_type(cls_name))}, &type_name.godot_owner, & var.native_ptr);"
-            res = generate_newline(res)
-
         res += f"{INDENT * 2}return _class;"
         res = generate_newline(res)
         res += "}"
@@ -287,8 +278,6 @@ def generate_constructors(class_):
         res += f"{INDENT * 2}auto _class = {class_['name']}::new{constructor['index']}({call_constructor_args(constructor)});"
         res = generate_newline(res)
         res += f"{INDENT * 2}_class.shouldBeDeleted = false;"
-        res = generate_newline(res)
-        res += f"{INDENT * 2}_class._callback = nullptr;"
         res = generate_newline(res)
         res += f"{INDENT * 2}return _class;"
         res = generate_newline(res)
@@ -304,7 +293,7 @@ def generate_copy_constructor(class_):
     res = generate_newline(res)
     res += f"{INDENT * 2}this->shouldBeDeleted = true;"
     res = generate_newline(res)
-    res += f"{INDENT * 2}this->_callback = copy_val._callback;"
+    res += f"{INDENT * 2}this->_callback = nullptr;"
     res = generate_newline(res)
     res += f"{INDENT * 2}this->set_variant_type({get_class_name(generate_variant_type(class_['name']))});"
     res = generate_newline(res)
@@ -314,8 +303,14 @@ def generate_copy_constructor(class_):
     res += f"{INDENT * 2}GDExtensionTypePtr _args[1];"
     res = generate_newline(res)
     res += f"{INDENT * 2}_args[0] = &const_cast<{class_['name']}&>(copy_val).godot_owner;"
+
     res = generate_newline(res)
-    res += f"{INDENT * 2}constructor(&this->godot_owner,_args);"
+    res += f"{INDENT * 2}godot_owner = malloc(sizeof(uint8_t)*8);"
+    res = generate_newline(res)
+    res += f"{INDENT * 2}allocated_memory = true;"
+    res = generate_newline(res)
+    res += f"{INDENT * 2}constructor(&godot_owner,_args);"
+    res = generate_newline(res)
     res += f"{INDENT}}}"
     res = generate_newline(res)
     return res
@@ -328,7 +323,7 @@ def generate_copy_operator(class_):
     res = generate_newline(res)
     res += f"{INDENT * 2}this->shouldBeDeleted = copy_val.shouldBeDeleted;"
     res = generate_newline(res)
-    res += f"{INDENT * 2}this->_callback = copy_val._callback;"
+    res += f"{INDENT * 2}this->_callback = nullptr;"
     res = generate_newline(res)
     res += f"{INDENT * 2}this->set_variant_type({get_class_name(generate_variant_type(class_['name']))});"
     res = generate_newline(res)
@@ -339,7 +334,9 @@ def generate_copy_operator(class_):
     res = generate_newline(res)
     res += f"{INDENT * 2}_args[0] = &const_cast<{class_['name']}&>(copy_val).godot_owner;"
     res = generate_newline(res)
-    res += f"{INDENT * 2}constructor(&this->godot_owner,_args);"
+    res += f"{INDENT * 2}godot_owner = malloc(sizeof(uint8_t)*8);"
+    res = generate_newline(res)
+    res += f"{INDENT * 2}constructor(&godot_owner,_args);"
     res = generate_newline(res)
     res += f"{INDENT * 2}return *this;"
     res += f"{INDENT}}}"
@@ -999,6 +996,8 @@ def generate_destructor(classname):
         res = generate_newline(res)
         res += f"{INDENT * 2}destructor(&godot_owner);"
         res = generate_newline(res)
+        #res += f"{INDENT * 2}if(allocated_memory)free(godot_owner);"
+        #res = generate_newline(res)
         res += f"{INDENT}}}"
         res = generate_newline(res)
 
@@ -1012,8 +1011,9 @@ def generate_destructor(classname):
         res += f"{INDENT * 4}auto destructor = functions::get_variant_get_ptr_destructor()({generate_variant_type(classname)});"
         res = generate_newline(res)
         res += f"{INDENT * 4}destructor(&godot_owner);"
+        #res = generate_newline(res)
+        #res += f"{INDENT * 4}if(allocated_memory)free(godot_owner);"
         res = generate_newline(res)
-
     res += f"{INDENT * 2}}}"
     res = generate_newline(res)
     res += f"{INDENT}}}"
@@ -1082,15 +1082,19 @@ def generate_member_getter(class_, member):
     res = generate_newline(res)
     res += f"{INDENT * 2}GDExtensionPtrGetter getter = functions::get_variant_get_ptr_getter()({generate_variant_type(class_)},&_member_name.godot_owner);"
     res = generate_newline(res)
+    res += f"{INDENT * 2}auto m_godot_owner = godot_owner;"
+    res = generate_newline(res)
     if member.type_ == "int" or member.type_ == "float" or member.type_ == "double":
         res += f"{INDENT * 2}{member.type_} _ret;"
     else:
         res += f"{INDENT * 2}{member.type_} _ret = {member.type_}::new0();"
     res = generate_newline(res)
     if member.type_ != "int" and member.type_ != "float" and member.type_ != "double":
-        res += f"{INDENT * 2}getter(&godot_owner, &_ret.godot_owner);"
+        res += f"{INDENT * 2}getter(&m_godot_owner, &_ret.godot_owner);"
     else:
-        res += f"{INDENT * 2}getter(&godot_owner, &_ret);"
+        res += f"{INDENT * 2}getter(&m_godot_owner, &_ret);"
+    res = generate_newline(res)
+    res += f"{INDENT * 2}godot_owner = m_godot_owner;"
     res = generate_newline(res)
     if member.type_ in builtin_classes - {"int", "float", "bool", "Nil"}:
         res += f"{INDENT * 2}Callback<{member.type_}>* _update_callback = new Callback<{member.type_}>();"
@@ -1128,10 +1132,14 @@ def generate_member_setter(class_, member):
     res = generate_newline(res)
     res += f"{INDENT * 2}GDExtensionPtrSetter setter = functions::get_variant_get_ptr_setter()({generate_variant_type(class_)},&_member_name.godot_owner);"
     res = generate_newline(res)
+    res += f"{INDENT * 2}auto m_godot_owner = godot_owner;"
+    res = generate_newline(res)
     if member.type_ != "int" and member.type_ != "float" and member.type_ != "double":
-        res += f"{INDENT * 2}setter(&godot_owner, &value.godot_owner);"
+        res += f"{INDENT * 2}setter(&m_godot_owner, &value.godot_owner);"
     else:
-        res += f"{INDENT * 2}setter(&godot_owner, &value);"
+        res += f"{INDENT * 2}setter(&m_godot_owner, &value);"
+    res = generate_newline(res)
+    res += f"{INDENT * 2}godot_owner = m_godot_owner;"
     res = generate_newline(res)
     if class_ in builtin_classes:
         # TODO: enable this again

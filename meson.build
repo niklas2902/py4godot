@@ -37,32 +37,37 @@ if build_machine.system() == 'windows'
     'py4godot/pluginscript_api/utils')
     glob = run_command('python', files(meson.current_source_dir()+'/meson_scripts/glob_tools.py'))
     glob_cpp = run_command('python', files(meson.current_source_dir()+'/meson_scripts/glob_tools_cpp.py'))
+    link_args = ['/DEBUG:FULL']
+    cpp_args = ['/DLIBRARY_EXPORTS=1']
 endif
 
 if build_machine.system() == 'linux'
-    lib_py = cc.find_library('python3.9', dirs:meson.current_source_dir()+'/python_files/cpython-3.9.7-'+machine+platform_format+'/python/install/lib')
+    lib_py = cc.find_library('python3.11', dirs:meson.current_source_dir()+'/python_files/cpython-3.11.3-'+machine+platform_format+'/python/install/lib')
     internal_inc = include_directories('py4godot/gdextension-api/', 'py4godot/core', 'py4godot/enums',
     'py4godot/classes', 'py4godot/pluginscript_api', 'py4godot/godot_bindings',
-    'python_files/cpython-3.9.7-linux'+platform_format+'/python/install/include/python3.9')
-    glob = run_command('python3', files(meson.current_source_dir()+'/meson_scripts/glob_tools.py'))
+    'py4godot/script_instance', 'py4godot/core/variant4', 'py4godot/cppcore', 'py4godot/cppenums',
+    'py4godot/cppclasses', 'py4godot/cpputils', 'py4godot/script_language', 'py4godot/pluginscript_api',
+    'py4godot/pluginscript_api/utils')
+    glob = run_command('python', files(meson.current_source_dir()+'/meson_scripts/glob_tools.py'))
+    glob_cpp = run_command('python', files(meson.current_source_dir()+'/meson_scripts/glob_tools_cpp.py'))
     dep_py = lib_py
+    link_args = ['/DEBUG:FULL']
+    cpp_args = []
 endif
 
 godot_program = find_program('godot')
 sources = glob.stdout().strip().split('\n')
 
 cppsources = glob_cpp.stdout().strip().split('\n')
-foreach entry : sources
-    message(entry)
-endforeach
-
 main_lib = shared_library('main',cppsources,
 dependencies:[dep_py], include_directories:internal_inc,name_prefix:'',c_args:extra_args,
- link_args : ['/DEBUG:FULL'], cpp_args:['/DLIBRARY_EXPORTS=1'])
+ link_args : link_args, cpp_args:cpp_args)
 
 foreach source : sources
-    shared_library(source.replace('\\','#'), [source+'.cpp'],
-    dependencies:[dep_py], include_directories:internal_inc,name_prefix:'',c_args:extra_args, link_args : ['/DEBUG:FULL'], link_with : main_lib )
+    converted_source = source.replace('\\','#')
+    linux_converted = converted_source.replace('/', '#')
+    shared_library(linux_converted, [source+'.cpp'],
+    dependencies:[dep_py], include_directories:internal_inc,name_prefix:'',c_args:extra_args, link_args : link_args, link_with : main_lib )
 endforeach
 
 test('test_vector3', godot_program, args : ['--path', 'tests/core/vector3', '--no-window'], workdir:meson.source_root(), timeout:1000, is_parallel:false)
