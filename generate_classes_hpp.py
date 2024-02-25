@@ -91,6 +91,10 @@ typedef unsigned char byte;
     return result
 
 
+def ref(type_):
+    return "&" if type_ not in {"float", "int", "bool"} else ""
+
+
 def generate_constructor_args(constructor):
     result = ""
     if "arguments" not in constructor:
@@ -98,7 +102,7 @@ def generate_constructor_args(constructor):
 
     for arg in constructor["arguments"]:
         if not arg["type"].startswith("enum::"):
-            result += f"{ungodottype(untypearray(unbitfield_type(arg['type'])))} {pythonize_name(arg['name'])}, "
+            result += f"{ungodottype(untypearray(unbitfield_type(arg['type'])))}{ref(arg['type'])} {pythonize_name(arg['name'])}, "
         else:
             # enums are marked with enum:: . To be able to use this, we have to strip this
             arg_type = arg["type"].replace("enum::", "")
