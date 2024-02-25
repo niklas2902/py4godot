@@ -3,6 +3,8 @@
 #include "py4godot/cppclasses/ScriptExtension/ScriptExtension.h"
 #include "py4godot/script_language/PyLanguage.h"
 #include "py4godot/godot_bindings/help_types.h"
+#include "py4godot/instance_data/CPPInstanceData.h"
+#include "Python.h"
 #include <unordered_set>
 #include <string>
 
@@ -26,9 +28,12 @@ namespace godot{
 
       public:
           PyLanguage* lang;
+          std::vector<InstanceData*> instance_datas{};
 
           static PyScriptExtension* constructor(PyLanguage* language);
           void _init_values(); //# self-defined
+          void update_instance_data(InstanceData* gd_instance, PyObject* instance); // self-defined
+
            void _editor_can_reload_from_file(GDExtensionTypePtr res);
            void _can_instantiate(GDExtensionTypePtr res);
            void  _get_base_script(GDExtensionTypePtr res);

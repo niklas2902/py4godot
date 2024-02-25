@@ -5,7 +5,7 @@ cdef api void set_owner(object o, void* owner):
     try:
         (<Object>o).set_gdowner(owner)
     except Exception as e:
-        print_error("Excception:", e)
+        print_error("Exception:", e)
 
 cdef api void set_default_val(object o, str attribute_name, object val):
     try:
