@@ -71,7 +71,7 @@ GDExtensionBool c_instance_has_method(GDExtensionScriptInstanceDataPtr p_instanc
 }
 
 
-void init_instance(GDExtensionScriptInstanceInfo* native_script_instance, int is_placeholder){
+void init_instance(GDExtensionScriptInstanceInfo* native_script_instance, bool is_placeholder){
     import_py4godot__script_instance__PyScriptInstance();
     if (PyErr_Occurred())
     {
@@ -115,17 +115,4 @@ void init_instance(GDExtensionScriptInstanceInfo* native_script_instance, int is
     native_script_instance->free_func = instance_free;
     p_interface->print_error("init_instance3", "test", "test",1,1);
     */
-}
-
-void get_instance_ptr(GDExtensionScriptInstanceInfo* info ){
-    //GDExtensionScriptInstanceInfo * info = malloc(sizeof(GDExtensionScriptInstanceInfo));
-    init_instance(info, 0);
-    //return info;
-}
-
-
-void get_placeholder_instance_ptr(GDExtensionScriptInstanceInfo* info){
-    //GDExtensionScriptInstanceInfo * info = malloc(sizeof(GDExtensionScriptInstanceInfo));
-    init_instance( info, 1);
-    //return info;
 }

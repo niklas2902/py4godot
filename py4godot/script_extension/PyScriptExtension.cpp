@@ -162,14 +162,20 @@ void PyScriptExtension::update_instance_data(InstanceData* gd_instance, PyObject
     }
     gd_instance->properties = transfer_object.properties;
     //gd_instance.set_methods(methods)
-    get_instance_ptr(&(gd_instance->info));
+    init_instance(&(gd_instance->info), gd_instance->is_placeholder);
 
     int index = 0;
     for (auto& default_value: transfer_object.default_values){
         String property_name = String::new2(StringName::new_static(((void**)transfer_object.properties[index].name)[0]));
         char* c_property_name;
         gd_string_to_c_string( &property_name.godot_owner, property_name.length(), &c_property_name);
-        set_default_val(gd_instance->owner, PyUnicode_FromStringAndSize(c_property_name, property_name.length()), default_value);
+        std::string string_property_name{c_property_name};
+        if(std::find(gd_instance->already_set_properties.begin(),
+            gd_instance->already_set_properties.end(), string_property_name) == gd_instance->already_set_properties.end()){
+           
+            set_default_val(gd_instance->owner, PyUnicode_FromStringAndSize(c_property_name, property_name.length()), default_value);
+            gd_instance->already_set_properties.push_back(string_property_name);
+        }
         index ++;
     }
 }
@@ -209,9 +215,9 @@ void PyScriptExtension::_placeholder_instance_create( Object& for_object, GDExte
     InstanceData* gd_instance = new InstanceData();
     auto instance = instantiate_class(transfer_object.class_);
     if(instance == Py_None || instance == nullptr){
-        assert(false);
         return;
     }
+    gd_instance->is_placeholder = true;
     update_instance_data(gd_instance, instance);
     instance_datas.push_back(gd_instance);
     set_owner(gd_instance->owner, ((void**)for_object.godot_owner)[0]);
