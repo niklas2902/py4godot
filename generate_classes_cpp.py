@@ -578,6 +578,8 @@ def generate_method_bind(current_class, method):
         res += f"""{INDENT * 2}GDExtensionMethodBindPtr method_bind = """ + \
                f"""functions::get_classdb_get_method_bind()(&_class_name.godot_owner,""" + \
                f"""&_method_name.godot_owner, {get_hash(method)});"""
+        res = generate_newline(res)
+        res += f"{INDENT * 2}assert(method_bind != nullptr);"
 
     res = generate_newline(res)
     return res

@@ -817,9 +817,9 @@ if __name__ == "__main__":
         for class_ in obj["builtin_classes"]:
             generate_operators_set(class_)
         arrays = []
-        for obj in obj["builtin_classes"]:
-            if obj["name"] == "Array":
-                arrays.append(obj)
+        for obj_ in obj["builtin_classes"]:
+            if obj_["name"] == "Array":
+                arrays.append(obj_)
         generate_classes(arrays, f"py4godot/typedarrays.h", is_core=True)
 
         class_defs = (

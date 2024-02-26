@@ -1524,6 +1524,8 @@ def generate_cast(class_):
     res = generate_newline(res)
     res += f"{INDENT}def cast(Object other):"
     res = generate_newline(res)
+    res += f"{INDENT * 2}assert other != None # Object to be casted must not be None"
+    res = generate_newline(res)
     res += f"{INDENT * 2}cdef {class_['name']} cls = {class_['name']}()"
     res = generate_newline(res)
     res += f"{INDENT * 2}cls.{class_['name']}_internal_class = CPP{class_['name']}.cast(&other.Object_internal_class)"
