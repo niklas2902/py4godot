@@ -252,11 +252,13 @@ def generate_constructors(class_):
     for constructor in class_["constructors"]:
         res += f"{INDENT}{class_['name']} {class_['name']}::new{constructor['index']}({generate_constructor_args(constructor)})" + "{"
         res = generate_newline(res)
-        res += f"{INDENT * 2}{class_['name']} _class;"
+        res += f"{INDENT * 2}{class_['name']} _class{{}};"
         res = generate_newline(res)
         res += f"{INDENT * 2}_class.shouldBeDeleted = true;"
         res = generate_newline(res)
         res += f"{INDENT * 2}_class.set_variant_type({generate_variant_type(class_['name'])});"
+        res = generate_newline(res)
+        res += f"{INDENT * 2}_class.godot_owner = &_class.data[0];"
         res = generate_newline(res)
         res += f"{INDENT * 2}GDExtensionPtrConstructor constructor = functions::get_variant_get_ptr_constructor()(_class.variant_type, {constructor['index']});"
         res = generate_newline(res)
@@ -264,7 +266,7 @@ def generate_constructors(class_):
         res += generate_constructor_args_array(constructor)
         res = generate_newline(res)
 
-        res += f"{INDENT * 2}_class.godot_owner = malloc(sizeof(uint8_t)*8);"
+        res += f"{INDENT * 2}_class.godot_owner = &_class.data[0];"
         res = generate_newline(res)
 
         res += f"{INDENT * 2}_class.allocated_memory = true;"
@@ -309,7 +311,7 @@ def generate_copy_constructor(class_):
     res += f"{INDENT * 2}_args[0] = &const_cast<{class_['name']}&>(copy_val).godot_owner;"
 
     res = generate_newline(res)
-    res += f"{INDENT * 2}godot_owner = malloc(sizeof(uint8_t)*8);"
+    res += f"{INDENT * 2}godot_owner = (void*)(&data);"
     res = generate_newline(res)
     res += f"{INDENT * 2}allocated_memory = true;"
     res = generate_newline(res)
@@ -338,7 +340,7 @@ def generate_copy_operator(class_):
     res = generate_newline(res)
     res += f"{INDENT * 2}_args[0] = &const_cast<{class_['name']}&>(copy_val).godot_owner;"
     res = generate_newline(res)
-    res += f"{INDENT * 2}godot_owner = malloc(sizeof(uint8_t)*8);"
+    res += f"{INDENT * 2}godot_owner = &data;"
     res = generate_newline(res)
     res += f"{INDENT * 2}constructor(&godot_owner,_args);"
     res = generate_newline(res)
@@ -998,10 +1000,10 @@ def generate_destructor(classname):
     if classname in builtin_classes or classname in typed_arrays_names:
         res += f"{INDENT}void {classname}::_py_destroy(){{"
         res = generate_newline(res)
-        res += f"{INDENT * 2}auto destructor = functions::get_variant_get_ptr_destructor()({generate_variant_type(classname)});"
-        res = generate_newline(res)
-        res += f"{INDENT * 2}destructor(&godot_owner);"
-        res = generate_newline(res)
+        # res += f"{INDENT * 2}auto destructor = functions::get_variant_get_ptr_destructor()({generate_variant_type(classname)});"
+        # res = generate_newline(res)
+        # res += f"{INDENT * 2}destructor(&godot_owner);"
+        # res = generate_newline(res)
         # res += f"{INDENT * 2}if(allocated_memory)free(godot_owner);"
         # res = generate_newline(res)
         res += f"{INDENT}}}"
@@ -1014,9 +1016,9 @@ def generate_destructor(classname):
     if classname not in builtin_classes:
         pass
     else:
-        res += f"{INDENT * 4}auto destructor = functions::get_variant_get_ptr_destructor()({generate_variant_type(classname)});"
-        res = generate_newline(res)
-        res += f"{INDENT * 4}destructor(&godot_owner);"
+        # res += f"{INDENT * 4}auto destructor = functions::get_variant_get_ptr_destructor()({generate_variant_type(classname)});"
+        # res = generate_newline(res)
+        # res += f"{INDENT * 4}destructor(&godot_owner);"
         # res = generate_newline(res)
         # res += f"{INDENT * 4}if(allocated_memory)free(godot_owner);"
         res = generate_newline(res)
@@ -1088,19 +1090,15 @@ def generate_member_getter(class_, member):
     res = generate_newline(res)
     res += f"{INDENT * 2}GDExtensionPtrGetter getter = functions::get_variant_get_ptr_getter()({generate_variant_type(class_)},&_member_name.godot_owner);"
     res = generate_newline(res)
-    res += f"{INDENT * 2}auto m_godot_owner = godot_owner;"
-    res = generate_newline(res)
     if member.type_ == "int" or member.type_ == "float" or member.type_ == "double":
         res += f"{INDENT * 2}{member.type_} _ret;"
     else:
         res += f"{INDENT * 2}{member.type_} _ret = {member.type_}::new0();"
     res = generate_newline(res)
     if member.type_ != "int" and member.type_ != "float" and member.type_ != "double":
-        res += f"{INDENT * 2}getter(&m_godot_owner, &_ret.godot_owner);"
+        res += f"{INDENT * 2}getter(&godot_owner, &_ret.godot_owner);"
     else:
-        res += f"{INDENT * 2}getter(&m_godot_owner, &_ret);"
-    res = generate_newline(res)
-    res += f"{INDENT * 2}godot_owner = m_godot_owner;"
+        res += f"{INDENT * 2}getter(&godot_owner, &_ret);"
     res = generate_newline(res)
     if member.type_ in builtin_classes - {"int", "float", "bool", "Nil"}:
         res += f"{INDENT * 2}Callback<{member.type_}>* _update_callback = new Callback<{member.type_}>();"
@@ -1138,14 +1136,10 @@ def generate_member_setter(class_, member):
     res = generate_newline(res)
     res += f"{INDENT * 2}GDExtensionPtrSetter setter = functions::get_variant_get_ptr_setter()({generate_variant_type(class_)},&_member_name.godot_owner);"
     res = generate_newline(res)
-    res += f"{INDENT * 2}auto m_godot_owner = godot_owner;"
-    res = generate_newline(res)
     if member.type_ != "int" and member.type_ != "float" and member.type_ != "double":
-        res += f"{INDENT * 2}setter(&m_godot_owner, &value.godot_owner);"
+        res += f"{INDENT * 2}setter(&godot_owner, &value.godot_owner);"
     else:
-        res += f"{INDENT * 2}setter(&m_godot_owner, &value);"
-    res = generate_newline(res)
-    res += f"{INDENT * 2}godot_owner = m_godot_owner;"
+        res += f"{INDENT * 2}setter(&godot_owner, &value);"
     res = generate_newline(res)
     if class_ in builtin_classes:
         # TODO: enable this again
@@ -1423,6 +1417,8 @@ def init_return_type(return_type):
         return "0"
     elif return_type == "bool":
         return "false"
+    elif return_type in builtin_classes - {"float", "int", "bool", "Nil"}:
+        return f"{return_type}::new0()"
     else:
         return f"{return_type}()"
 

@@ -50,7 +50,7 @@ typed_arrays_names = set()
 operator_to_method = {"+": "__add__",
                       "*": "__mul__",
                       "-": "__sub__",
-                      "/": "__div__",
+                      "/": "__truediv__",
                       "%": "__mod__",
                       "**": "__pow__",
                       "==": "__eq__",
@@ -1173,7 +1173,7 @@ def generate_operators_for_class(class_name):
                 for target in op.right_type_values:
 
                     if target in {"float", "int", "bool", "Nil"}:
-                        res += f"{INDENT * 2}cdef {ungodottype(target)} primitive_val_{target} = <{ungodottype(target)}>other"
+                        res += f"{INDENT * 2}cdef {ungodottype(target)} primitive_val_{target}"
                         res = generate_newline(res)
                     elif target in builtin_classes.union(classes):
                         res += f"{INDENT * 2}cdef {target} complex_val_{target}"
@@ -1187,7 +1187,10 @@ def generate_operators_for_class(class_name):
                         res += f"{INDENT * 2}if isinstance(other, {unvariant_type_array(get_instance_type(target), class_name)}):"
                     res = generate_newline(res)
 
-                    if target in builtin_classes.union(classes):
+                    if target in {"float", "int", "bool", "Nil"}:
+                        res += f"{INDENT * 3}primitive_val_{target} = <{ungodottype(target)}>other"
+                        res = generate_newline(res)
+                    elif target in builtin_classes.union(classes):
                         res += f"{INDENT * 3}complex_val_{target} = <{target}>other"
                         res = generate_newline(res)
                     elif target == "Variant":
