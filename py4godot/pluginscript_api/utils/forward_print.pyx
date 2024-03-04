@@ -20,7 +20,7 @@ class CustomPrint:
     # Now, when you use print, it will write to your_custom_function
     def custom_print(self, text):
         # Add your custom logic here
-        gdprint("debug", text)
+        gdprint("debug", text.strip())
 
 
 cdef api void forward_print():
