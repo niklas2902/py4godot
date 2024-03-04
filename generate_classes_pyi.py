@@ -47,6 +47,7 @@ builtin_classes = set()
 core_classes = dict()
 operator_dict = dict()
 typed_arrays_names = set()
+is_core = False
 operator_to_method = {"+": "__add__",
                       "*": "__mul__",
                       "-": "__sub__",
@@ -288,7 +289,7 @@ def generate_method_headers(mMethod):
 def generate_method(class_, mMethod):
     res = ""
     args = generate_args(class_, mMethod)
-    def_function = f"{INDENT}def {pythonize_name(mMethod['name'])}({args})->{get_ret_value(mMethod, class_)}: pass"
+    def_function = f"{INDENT}def {pythonize_name(mMethod['name'])}({args})->{ungodottype_type_array(get_ret_value(mMethod, class_), class_['name'])}: pass"
     res += generate_method_headers(mMethod)
     res += def_function
     res = generate_newline(res)
@@ -407,7 +408,7 @@ def generate_property(property, class_):
     result = ""
     result += f"{INDENT}@property"
     result = generate_newline(result)
-    result += f"{INDENT}def {pythonize_name(property['name'])}(self)->{unbitfield_type(unenumize_type(ungodottype_type_array((property['type']), class_['name'])))}: pass"
+    result += f"{INDENT}def {pythonize_name(property['name'])}(self)->{ungodottype_type_array(unbitfield_type(unenumize_type((property['type']))), class_['name'])}: pass"
     result = generate_newline(result)
 
     if "setter" in property and property["setter"] != "":
@@ -434,12 +435,13 @@ def unbitfield_type(arg_type):
 def ungodottype(type_):
     if (type_ == "String"):
         return "str"
-    if (type_ == "StringName"):
-        return "str"
     if (type_ == "Variant"):
         return "object"
     elif type_ in builtin_classes - {"float", "int", "Nil", "bool"}:
-        return f"__core__.{type_}"
+        if not is_core:
+            return f"__core__.{type_}"
+        else:
+            return type_
     elif type_ in typed_arrays_names:
         return f"__typedarrays__.{type_}"
     if (type_ in classes):
@@ -449,22 +451,28 @@ def ungodottype(type_):
 
 
 def ungodottype_type_array(type_, class_name):
+    if type_ == None:
+        return "None"
     if (type_ == "String"):
-        return "str"
-    if (type_ == "StringName"):
         return "str"
     if (type_ == "Variant"):
         if class_name in typed_arrays_names:
             typed_array_type = class_name.replace("TypedArray", "")
 
             if typed_array_type in builtin_classes - {"float", "int", "Nil", "bool"}:
-                return f"__core__.{typed_array_type}"
+                if not is_core:
+                    return f"__core__.{typed_array_type}"
+                else:
+                    return {typed_array_type}
             elif (typed_array_type in classes):
                 return f"__{typed_array_type.lower()}__.{typed_array_type}"
             return typed_array_type
         return "object"
     elif type_ in builtin_classes - {"float", "int", "Nil", "bool"}:
-        return f"__core__.{type_}"
+        if not is_core:
+            return f"__core__.{type_}"
+        else:
+            return type_
     elif type_ in typed_arrays_names:
         return f"__typedarrays__.{type_}"
     if (type_ in classes):
@@ -500,7 +508,10 @@ def generate_default_arg(arg, arg_type):
     if "default_value" in arg:
         if arg_type in set_to_iterate:
             if arg_type in builtin_classes:
-                return f"= __core__.{arg_type}.new0()"
+                if not is_core:
+                    return f"= __core__.{arg_type}.new0()"
+                else:
+                    return f"= {arg_type}.new0()"
             else:
                 return f"= __{arg_type.lower()}__.{arg_type}.constructor()"
         else:
@@ -513,7 +524,7 @@ def unenumize_type(type_):
     enum_type = type_.replace("enum::", "")
     type_list = enum_type.split(".")
     if len(type_list) > 1:
-        return type_list[0] + "__" + type_list[1]
+        return type_list[-1]
     return type_list[0]
 
 
@@ -575,9 +586,22 @@ def generate_init(class_):
     return res
 
 
+def unvariant_type(type_):
+    if type_ == "Variant":
+        return "object"
+    return type_
+
+
+def collect_right_types(operator):
+    res = ""
+    for right_type in operator.right_type_values:
+        res += unvariant_type(ungodottype(right_type)) + "|"
+    return res[:-1]
+
+
 def get_parameters_operator(operator):
     if len(operator.right_type_values) > 0:
-        return "self, other"
+        return f"self, other:{collect_right_types(operator)}"
     return "self"
 
 
@@ -855,4 +879,5 @@ if __name__ == "__main__":
                 pass
             generate_classes([class_], f"py4godot/classes/{class_['name']}/{class_['name']}.pyi")
 
+        is_core = True
         generate_classes(obj["builtin_classes"], f"py4godot/classes/generated4_core.pyi", is_core=True)
