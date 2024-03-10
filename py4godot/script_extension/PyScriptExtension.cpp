@@ -239,9 +239,13 @@ void PyScriptExtension::_get_source_code(GDExtensionTypePtr& res){
     functions::get_string_new_with_utf8_chars()(res, source_code.c_str());
 }
 void PyScriptExtension::_set_source_code( String& code, GDExtensionTypePtr res){
-    _set_source_code_internal(code);
+     char* c_source_code;
+    gd_string_to_c_string(&code.godot_owner, code.length(), &c_source_code);
+    this->source_code = std::string(c_source_code);
 }
 void PyScriptExtension::_reload( bool keep_state, GDExtensionTypePtr res){
+    auto source = c_string_to_string(source_code.c_str());
+    _set_source_code_internal(source);
 }
 void PyScriptExtension::_get_documentation(GDExtensionTypePtr res){}
 void PyScriptExtension::_has_method( StringName& method, GDExtensionTypePtr res){
@@ -291,21 +295,29 @@ void PyScriptExtension::_is_placeholder_fallback_enabled(GDExtensionTypePtr res)
 void PyScriptExtension::_get_rpc_config(GDExtensionTypePtr res){}
 void PyScriptExtension::_set_source_code_internal(String& source_code){
     m.lock();
-    auto gil_state = PyGILState_Ensure();
+    //Py_END_ALLOW_THREADS;
     char* c_source_code;
     gd_string_to_c_string(&source_code.godot_owner, source_code.length(), &c_source_code);
     this->source_code = std::string(c_source_code);
+    apply_code();
+    //Py_BEGIN_ALLOW_THREADS;
+    m.unlock();
+}
+
+void PyScriptExtension::apply_code(){
+    auto gil_state = PyGILState_Ensure();
     auto source = PyUnicode_FromString(this->source_code.c_str());
     auto _path = PyUnicode_FromString(path.c_str());
     assert(source != nullptr);
     assert(_path != nullptr);
+    PyGILState_Release(gil_state);
     transfer_object = exec_class(source, _path);
-
+    gil_state = PyGILState_Ensure();
     for(auto p_instance:instance_datas){
         update_instance_data(p_instance, nullptr);
     }
     PyGILState_Release(gil_state);
-    m.unlock();
+
 }
 
 void PyScriptExtension::set_path( const char* path){

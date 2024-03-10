@@ -40,7 +40,6 @@ void PyResourceFormatSaver::_init_values(){}
     Script script = Script::new_static(resource.godot_owner);
 
     auto source = script.get_source_code();
-
     Error error;
     FileAccess file = FileAccess::open(path, 2/*WRITE*/);
     file.store_string(source);
@@ -48,6 +47,8 @@ void PyResourceFormatSaver::_init_values(){}
     functions::get_object_destroy()(file.godot_owner);
 
     *((GDExtensionTypePtr*) res) = 0/*OK*/;
+
+    script.reload(false);//update if properties changed //TODO:Better place?
     }
   void PyResourceFormatSaver::_set_uid( String& path, int uid, GDExtensionTypePtr res){
   }

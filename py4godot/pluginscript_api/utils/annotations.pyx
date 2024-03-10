@@ -8,14 +8,16 @@ from cpython cimport Py_INCREF, Py_DECREF, PyObject
 
 from py4godot.pluginscript_api.utils.SignalDescription cimport *
 from py4godot.pluginscript_api.utils.PropertyDescription cimport *
-#from py4godot.utils.print_tools import *
+import py4godot.utils.print_tools as print_tools
 from importlib.machinery import SourceFileLoader
 from py4godot.classes.Node3D.Node3D cimport *
 from py4godot.classes.Object.Object cimport *
+import importlib
+import importlib.util
 
 class_name = ""
 gd_class = None
-cdef api TransferObject exec_class(str source_string, str class_name_):
+cdef api TransferObject exec_class(str source_string, str class_name_) with gil:
     global  gd_class, properties, signals, methods,default_values, class_name
 
     cdef str py_source_string = source_string
@@ -40,9 +42,9 @@ cdef api TransferObject exec_class(str source_string, str class_name_):
             py_class_name_ = py_class_name_[:-1]
         module_name = py_class_name_.replace("res://", "").replace("/",".").replace(".py", "").replace("\\", ".")
         file_to_load = py_class_name_.replace("res://", "")
-        module = SourceFileLoader(module_name,
-        file_to_load).load_module()
-
+        module_spec = importlib.util.spec_from_file_location(module_name, file_to_load)
+        module = importlib.util.module_from_spec(module_spec)
+        module_spec.loader.exec_module(module)
     except Exception as e:
         print_error("exec_class: Exception happened:")
         bytes_class = py_class_name_.encode("utf-8")

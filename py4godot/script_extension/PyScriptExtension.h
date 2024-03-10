@@ -33,6 +33,7 @@ namespace godot{
           static PyScriptExtension* constructor(PyLanguage* language);
           void _init_values(); //# self-defined
           void update_instance_data(InstanceData* gd_instance, PyObject* instance); // self-defined
+          void apply_code();
 
            void _editor_can_reload_from_file(GDExtensionTypePtr res);
            void _can_instantiate(GDExtensionTypePtr res);
