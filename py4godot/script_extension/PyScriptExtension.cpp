@@ -217,7 +217,7 @@ void PyScriptExtension::_placeholder_instance_create( Object& for_object, GDExte
     if(instance == Py_None || instance == nullptr){
         return;
     }
-    gd_instance->is_placeholder = true;
+    gd_instance->is_placeholder = !transfer_object.is_tool;
     update_instance_data(gd_instance, instance);
     instance_datas.push_back(gd_instance);
     set_owner(gd_instance->owner, ((void**)for_object.godot_owner)[0]);

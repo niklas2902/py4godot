@@ -17,8 +17,9 @@ import importlib.util
 
 class_name = ""
 gd_class = None
+is_tool = False
 cdef api TransferObject exec_class(str source_string, str class_name_) with gil:
-    global  gd_class, properties, signals, methods,default_values, class_name
+    global  gd_class, properties, signals, methods,default_values, class_name, is_tool
 
     cdef str py_source_string = source_string
     cdef str py_class_name_ = class_name_
@@ -27,7 +28,7 @@ cdef api TransferObject exec_class(str source_string, str class_name_) with gil:
 
     methods = []
     gd_class = None
-    gd_tool_class = None
+    is_tool = False
     properties = []
     signals = []
     methods = []
@@ -71,12 +72,13 @@ cdef api TransferObject exec_class(str source_string, str class_name_) with gil:
         Py_INCREF(default_value)
         transfer_object.default_values.push_back(<PyObject*>default_value)
 
+    transfer_object.is_tool = is_tool
     Py_INCREF(gd_class)
     transfer_object.class_ = <PyObject*>gd_class
     return transfer_object
 
 def gdclass(cls):
-    global gd_class
+    global gd_class, is_tool
 
     cdef str global_class_name = "global class_name:"+ class_name
     cdef str __class__name = "cls.__name__:"+ cls.__name__
@@ -86,18 +88,26 @@ def gdclass(cls):
         return cls
     if(gd_class == None):
         gd_class = cls
+        is_tool = False
     else:
         raise Exception("More than one class was marked as gd_class or gd_tool_class in one file")
     return cls
 
 def gdtool(cls):
-        global gd_tool_class
+    global gd_class, is_tool
 
-        if(gd_tool_class == None):
-            gd_tool_class = cls
-        else:
-            raise Exception("More than one class was marked as gd_class or gd_tool_class in one file")
+    cdef str global_class_name = "global class_name:"+ class_name
+    cdef str __class__name = "cls.__name__:"+ cls.__name__
+    if cls.__name__ != class_name:
+        properties.clear()
+        default_values.clear()
         return cls
+    if(gd_class == None):
+        gd_class = cls
+        is_tool = True
+    else:
+        raise Exception("More than one class was marked as gd_class or gd_tool_class in one file")
+    return cls
 
 def prop(name,type_, defaultval, hint = BaseHint(), hint_string = ""):
     default_values.append(defaultval)
