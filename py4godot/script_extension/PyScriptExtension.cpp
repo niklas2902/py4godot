@@ -16,6 +16,7 @@
 #include "Python.h"
 #include <mutex>
 #include <windows.h>
+#include <algorithm>
 
 std::mutex m;
 char buffer[MAX_PATH];
@@ -166,7 +167,8 @@ void PyScriptExtension::update_instance_data(InstanceData* gd_instance, PyObject
 
     int index = 0;
     for (auto& default_value: transfer_object.default_values){
-        String property_name = String::new2(StringName::new_static(((void**)transfer_object.properties[index].name)[0]));
+        auto property_string_name =  StringName::new_static(((void**)transfer_object.properties[index].name)[0]);
+        String property_name = String::new2(property_string_name);
         char* c_property_name;
         gd_string_to_c_string( &property_name.godot_owner, property_name.length(), &c_property_name);
         std::string string_property_name{c_property_name};

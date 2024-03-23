@@ -781,7 +781,7 @@ def generate_copy_methods(class_name):
 
 def generate_cast(class_):
     res = ""
-    res += f"{INDENT}static {class_['name']} {class_['name']}::cast(Wrapper* pwrapper);"
+    res += f"{INDENT}static {class_['name']} cast(Wrapper* pwrapper);"
     res = generate_newline(res)
     return res
 

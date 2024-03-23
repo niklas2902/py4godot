@@ -11,3 +11,5 @@ def gdproperty(type_:type, defaultval:T, hint:BaseHint = BaseHint(), hint_string
     name = stack[1].code_context[0].split("=")[0].split(":")[0].strip()
     prop(name, type_,defaultval, hint, hint_string)
     return defaultval
+
+

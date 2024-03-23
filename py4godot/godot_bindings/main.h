@@ -21,8 +21,6 @@
 #define PYTHONHOME L"addons/windows64/cpython-3.11.3-windows32/python/install"
 #endif
 
-GDExtensionClassLibraryPtr _library = nullptr;
+extern GDExtensionClassLibraryPtr _library;
 
 static PyThreadState *gilstate = NULL;
-extern "C" GDExtensionInterfaceGetProcAddress gdextension_interface_get_proc_address = nullptr;
-extern "C" void *token = nullptr;

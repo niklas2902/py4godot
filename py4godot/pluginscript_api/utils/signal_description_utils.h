@@ -12,10 +12,12 @@ void print_error(char* text){
 
 void create_signal_arg(const char* name, int variant_type, Array& args_dicts){
     Dictionary arg_dict = Dictionary::new0();
-    Variant arg_name_key_variant = Variant(c_string_to_string("name"));
+    auto godot_name = c_string_to_string("name");
+    Variant arg_name_key_variant = Variant(godot_name);
 
     Variant var_name_arg = Variant::new_static(functions::get_dictionary_operator_index()(&arg_dict.godot_owner, &arg_name_key_variant.native_ptr));
-    var_name_arg.init_type(c_string_to_string(name));
+    auto name_converted = c_string_to_string(name);
+    var_name_arg.init_type(name_converted);
     
     String arg_type_key = c_string_to_string("type");
     Variant arg_type_key_variant = Variant(arg_type_key);
@@ -33,7 +35,8 @@ Dictionary init_signal_description(char* name, std::vector<CPPSignalArg> args){
 
     String signal_key = c_string_to_string("name");
     Variant signal_key_variant = Variant(signal_key);
-    Variant signal_name_variant = Variant(c_string_to_string(name));
+    auto temp_name = c_string_to_string(name);
+    Variant signal_name_variant = Variant(temp_name);
     Variant var_name = Variant::new_static(functions::get_dictionary_operator_index()(&signal_dict.godot_owner, &signal_key_variant.native_ptr));
     auto string_name = c_string_to_string(name);
     var_name.init_type(string_name);

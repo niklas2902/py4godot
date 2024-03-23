@@ -42,14 +42,19 @@ void free_instance_loader(void *p_userdata, GDExtensionClassInstancePtr p_instan
 void PyResourceFormatLoader::_init_values(){}
 
 void PyResourceFormatLoader::_get_recognized_extensions(GDExtensionTypePtr res){
-    add_string_to_array(res, c_string_to_string("py"));
+    auto py = c_string_to_string("py");
+    add_string_to_array(res, py);
 }
 void PyResourceFormatLoader::_recognize_path( String& path, StringName& type, GDExtensionTypePtr res){
-    bool can_be_loaded =  path.ends_with(c_string_to_string("py")) || path.ends_with(c_string_to_string("pyw")) || path.ends_with(c_string_to_string("pyi"));
+    String py = c_string_to_string("py");
+    String pyw = c_string_to_string("pyw");
+    String pyi = c_string_to_string("pyi");
+    bool can_be_loaded =  path.ends_with(py) || path.ends_with(pyw) || path.ends_with(pyi);
     *((GDExtensionTypePtr*) res) =  (void*)can_be_loaded;
 }
 void PyResourceFormatLoader::_handles_type( StringName& type, GDExtensionTypePtr res){
-  bool handles_type = type.ends_with(c_string_to_string("Script"));
+String type_ = c_string_to_string("Script");
+  bool handles_type = type.ends_with(type_);
   *((GDExtensionTypePtr*) res) =  (void*)handles_type;
 }
 void PyResourceFormatLoader::_get_resource_type( String& path, GDExtensionTypePtr res){
@@ -58,10 +63,12 @@ void PyResourceFormatLoader::_get_resource_type( String& path, GDExtensionTypePt
 void PyResourceFormatLoader::_get_resource_script_class( String& path, GDExtensionTypePtr res){}
 void PyResourceFormatLoader::_get_resource_uid( String& path, GDExtensionTypePtr res){
     *((std::int64_t*)res) = -1;
+    String py = c_string_to_string("py");
+    String pyw = c_string_to_string("pyw");
     return; //TODO: Is there a way to be more efficient
     mutex_loader.lock();
     char* res_string;
-    if (!path.ends_with(c_string_to_string("py")) && !path.ends_with(c_string_to_string("pyw"))){
+    if (!path.ends_with(py) && !path.ends_with(pyw)){
         *((std::int64_t*)res) = -1;
         mutex_loader.unlock();
         return;

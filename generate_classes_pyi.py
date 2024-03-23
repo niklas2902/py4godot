@@ -326,6 +326,13 @@ def collect_members(obj):
     print(core_classes)
 
 
+def generate_init(class_):
+    result = ""
+    result += f"{INDENT}def __init__(self)->None:pass"
+    result = generate_newline(result)
+    return result
+
+
 def generate_common_methods(class_):
     result = ""
     if not is_singleton(class_["name"]):
@@ -579,13 +586,6 @@ def generate_constructor(classname):
     return res
 
 
-def generate_init(class_):
-    res = ""
-    res += f"{INDENT}def __init__(self, *args)->{class_['name']}:pass"
-    res = generate_newline(res)
-    return res
-
-
 def unvariant_type(type_):
     if type_ == "Variant":
         return "object"
@@ -768,7 +768,7 @@ def generate_special_methods_array(class_):
 
 
 def generate_get_pyscript():
-    res = f"{INDENT}def get_pyscript()->None:pass"
+    res = f"{INDENT}def get_pyscript(self)->None:pass"
     res = generate_newline(res)
     return res
 
@@ -868,8 +868,6 @@ if __name__ == "__main__":
             typed_arrays_names.add(generate_typed_array_name(typed_array))
             arrays.append(my_array_cls)
 
-        generate_classes(arrays, f"py4godot/classes/typedarrays.pyi", is_core=False, is_typed_array=True)
-
         for class_ in obj["builtin_classes"]:
             generate_operators_set(class_)
         for class_ in obj["classes"]:
@@ -880,4 +878,5 @@ if __name__ == "__main__":
             generate_classes([class_], f"py4godot/classes/{class_['name']}/{class_['name']}.pyi")
 
         is_core = True
+        generate_classes(arrays, f"py4godot/classes/typedarrays.pyi", is_core=False, is_typed_array=True)
         generate_classes(obj["builtin_classes"], f"py4godot/classes/generated4_core.pyi", is_core=True)

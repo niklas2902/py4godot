@@ -678,6 +678,15 @@ def collect_members(obj):
     print(core_classes)
 
 
+def generate_init(class_):
+    res = ""
+    res += f"{INDENT}def __init__(self):"
+    res = generate_newline(res)
+    res += f"{INDENT * 2}self = {class_['name']}.new0()"
+    res = generate_newline(res)
+    return res
+
+
 def generate_common_methods(class_):
     result = ""
     if not is_singleton(class_["name"]) and not class_["name"] in typed_arrays_names:
@@ -686,6 +695,8 @@ def generate_common_methods(class_):
     result = generate_newline(result)
     if class_["name"] in builtin_classes or class_["name"] in typed_arrays_names:
         result += generate_constructors(class_)
+        result = generate_newline(result)
+        result += generate_init(class_)
         result = generate_newline(result)
     if class_["name"] == "Object":
         result += generate_get_py_script_method()
@@ -1421,6 +1432,12 @@ def generate_array_set_item(class_):
 
         res += f"{INDENT * 2}self.{class_['name']}_internal_class[index].init_from_py_object(<PyObject*>value, type(value).__name__.encode('utf-8'))"
 
+    elif class_["name"] in typed_arrays_names:
+        res += f"{INDENT}def __setitem__(self,  index, value):"
+        res = generate_newline(res)
+
+        res += f"{INDENT * 2}self.{class_['name']}_internal_class[index].init_from_py_object(<PyObject*>value, type(value).__name__.encode('utf-8'))"
+
     res = generate_newline(res)
     return res
 
@@ -1451,6 +1468,8 @@ def generate_array_get_item(class_):
         res += generate_get_item_from_type_array(class_["name"], "String")
 
     elif class_["name"] == "Array":
+        res += generate_get_item_from_array(class_["name"])
+    elif class_["name"] in typed_arrays_names:
         res += generate_get_item_from_array(class_["name"])
 
     res = generate_newline(res)

@@ -1,5 +1,5 @@
 class BaseHint(object):
-    def __init__(self)->BaseHint:pass
+    def __init__(self, hint_string:str)->BaseHint:pass
     def get_hint(self)->int: pass
 
     def set_hint(self,value:int): pass

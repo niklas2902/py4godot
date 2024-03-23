@@ -56,9 +56,12 @@ void PyResourceFormatSaver::_init_values(){}
       *((bool*)res) =  resource.godot_owner != nullptr;
   }
   void PyResourceFormatSaver::_get_recognized_extensions( Resource& resource, GDExtensionTypePtr res){
-    add_string_to_array(res, c_string_to_string("py"));
-    add_string_to_array(res, c_string_to_string("pyw"));
-    add_string_to_array(res, c_string_to_string("pyi"));
+    auto py = c_string_to_string("py");
+    auto pyw = c_string_to_string("pyw");
+    auto pyi = c_string_to_string("pyi");
+    add_string_to_array(res, py);
+    add_string_to_array(res, pyw);
+    add_string_to_array(res, pyi);
   }
   void PyResourceFormatSaver::_recognize_path( Resource& resource, String& path, GDExtensionTypePtr res){
   }

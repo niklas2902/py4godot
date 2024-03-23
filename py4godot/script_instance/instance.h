@@ -37,7 +37,9 @@ GDExtensionBool c_instance_get(GDExtensionScriptInstanceDataPtr p_instance, GDEx
 
 void c_instance_call(GDExtensionScriptInstanceDataPtr p_self, GDExtensionConstStringNamePtr p_method, const GDExtensionConstVariantPtr *p_args, GDExtensionInt p_argument_count, GDExtensionVariantPtr r_return, GDExtensionCallError *r_error){
     auto name = StringName::new_static(((void**)p_method)[0]);
-    if(((InstanceData*)p_self)->is_placeholder && name == c_string_to_string_name("_ready")){
+    auto _ready = c_string_to_string_name("_ready");
+    auto _enter_tree = c_string_to_string_name("_enter_tree");
+    if(((InstanceData*)p_self)->is_placeholder && (name == _ready || name == _enter_tree)){
         return;
     }
     auto gil_state = PyGILState_Ensure();

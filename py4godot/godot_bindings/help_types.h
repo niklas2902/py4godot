@@ -2,6 +2,7 @@
 #include "py4godot/gdextension-api/gdextension_interface.h"
 #include "py4godot/cppclasses/generated4_core.h"
 #include <vector>
+#include <string>
 #include "Python.h"
 
 struct TransferObject{
@@ -10,6 +11,7 @@ struct TransferObject{
     std::vector<PyObject*> default_values;
     PyObject* class_;
     PyObject* instance;
+    bool is_tool = false;
 };
 
 struct CPPSignalArg{

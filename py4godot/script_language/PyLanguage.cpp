@@ -39,42 +39,78 @@
   void PyLanguage::_finish(GDExtensionTypePtr res){}
 
   void PyLanguage::_get_reserved_words(GDExtensionTypePtr res){
+    auto del = c_string_to_string("del");
+    auto nonlocal = c_string_to_string("nonlocal");
+    auto yield = c_string_to_string("yield");
+    auto finally = c_string_to_string("finally");
+    auto for_ = c_string_to_string("for");
+    auto  lambda = c_string_to_string("lambda");
+    auto return_ = c_string_to_string("return");
+    auto try_ = c_string_to_string("try");
+    auto assert_ = c_string_to_string("assert");
+    auto true_ = c_string_to_string("True");
+    auto and_ = c_string_to_string("and");
+    auto continue_ = c_string_to_string("continue");
+    auto in = c_string_to_string("in");
+    auto not_ = c_string_to_string("not");
+    auto from_ = c_string_to_string("from");
+    auto false_ = c_string_to_string("False");
+    auto raise_ = c_string_to_string("raise");
+    auto while_ = c_string_to_string("while");
+    auto as = c_string_to_string("as");
+    auto else_ = c_string_to_string("else");
+    auto or_ = c_string_to_string("or");
+    auto except = c_string_to_string("except");
+    auto with = c_string_to_string("with");
+    auto pass = c_string_to_string("pass");
+    auto import = c_string_to_string("import");
+    auto async = c_string_to_string("async");
+    auto break_ = c_string_to_string("break");
+    auto elif = c_string_to_string("elif");
+    auto global = c_string_to_string("global");
+    auto none = c_string_to_string("None");
+    auto if_ = c_string_to_string("if");
+    auto def = c_string_to_string("def");
+    auto class_ = c_string_to_string("class");
+    auto is_ = c_string_to_string("is");
+    auto await = c_string_to_string("await");
 
-    add_string_to_array(res,c_string_to_string("del"));
-    add_string_to_array(res,c_string_to_string("nonlocal"));
-    add_string_to_array(res,c_string_to_string("yield"));
-    add_string_to_array(res,c_string_to_string("finally"));
-    add_string_to_array(res,c_string_to_string("for"));
-    add_string_to_array(res,c_string_to_string("lambda"));
-    add_string_to_array(res,c_string_to_string("return"));
-    add_string_to_array(res,c_string_to_string("try"));
-    add_string_to_array(res,c_string_to_string("assert"));
-    add_string_to_array(res,c_string_to_string("True"));
-    add_string_to_array(res,c_string_to_string("and"));
-    add_string_to_array(res,c_string_to_string("continue"));
-    add_string_to_array(res,c_string_to_string("in"));
-    add_string_to_array(res,c_string_to_string("not"));
-    add_string_to_array(res,c_string_to_string("from"));
-    add_string_to_array(res,c_string_to_string("False"));
-    add_string_to_array(res,c_string_to_string("raise"));
-    add_string_to_array(res,c_string_to_string("while"));
-    add_string_to_array(res,c_string_to_string("as"));
-    add_string_to_array(res,c_string_to_string("else"));
-    add_string_to_array(res,c_string_to_string("or"));
-    add_string_to_array(res,c_string_to_string("except"));
-    add_string_to_array(res,c_string_to_string("with"));
-    add_string_to_array(res,c_string_to_string("pass"));
-    add_string_to_array(res,c_string_to_string("import"));
-    add_string_to_array(res,c_string_to_string("async"));
-    add_string_to_array(res,c_string_to_string("break"));
-    add_string_to_array(res,c_string_to_string("elif"));
-    add_string_to_array(res,c_string_to_string("global"));
-    add_string_to_array(res,c_string_to_string("None"));
-    add_string_to_array(res,c_string_to_string("if"));
-    add_string_to_array(res,c_string_to_string("def"));
-    add_string_to_array(res,c_string_to_string("class"));
-    add_string_to_array(res,c_string_to_string("is"));
-    add_string_to_array(res,c_string_to_string("await"));
+
+    add_string_to_array(res, del);
+    add_string_to_array(res, nonlocal);
+    add_string_to_array(res, yield);
+    add_string_to_array(res, finally);
+    add_string_to_array(res, for_);
+    add_string_to_array(res, lambda);
+    add_string_to_array(res, return_);
+    add_string_to_array(res, try_);
+    add_string_to_array(res, assert_);
+    add_string_to_array(res, true_);
+    add_string_to_array(res, and_);
+    add_string_to_array(res, continue_);
+    add_string_to_array(res, in);
+    add_string_to_array(res, not_);
+    add_string_to_array(res, from_);
+    add_string_to_array(res, false_);
+    add_string_to_array(res, raise_);
+    add_string_to_array(res, while_);
+    add_string_to_array(res, as);
+    add_string_to_array(res, else_);
+    add_string_to_array(res, or_);
+    add_string_to_array(res,except);
+    add_string_to_array(res, with);
+    add_string_to_array(res, pass);
+    add_string_to_array(res, import);
+    add_string_to_array(res, async);
+    add_string_to_array(res, break_);
+    add_string_to_array(res, elif);
+    add_string_to_array(res, global);
+    add_string_to_array(res, none);
+    add_string_to_array(res, if_);
+    add_string_to_array(res, def);
+    add_string_to_array(res, class_);
+    add_string_to_array(res, is_);
+    add_string_to_array(res, await);
   }
   void PyLanguage::_is_control_flow_keyword(String keyword, GDExtensionTypePtr res){
     const char* py_string = gd_string_to_c_string(&keyword.godot_owner, keyword.length());
@@ -83,14 +119,19 @@
   }
 
   void PyLanguage::_get_comment_delimiters(GDExtensionTypePtr res){
-    add_string_to_array(res,c_string_to_string("#"));
+    auto comment = c_string_to_string("#");
+    add_string_to_array(res,comment);
   }
 
   void PyLanguage::_get_string_delimiters(GDExtensionTypePtr res){
-    add_string_to_array(res,c_string_to_string("\""));
-    add_string_to_array(res,c_string_to_string("'"));
-    add_string_to_array(res,c_string_to_string("'''"));
-    add_string_to_array(res,c_string_to_string("\"\"\""));
+    auto string_del1 = c_string_to_string("\"");
+    auto string_del2 = c_string_to_string("'");
+    auto string_del3 = c_string_to_string("'''");
+    auto string_del4 = c_string_to_string("\"\"\"");
+    add_string_to_array(res,string_del1);
+    add_string_to_array(res,string_del2);
+    add_string_to_array(res,string_del3);
+    add_string_to_array(res,string_del4);
 
   }
 
@@ -192,9 +233,12 @@
   void PyLanguage::_reload_tool_script(Script script, bool soft_reload, GDExtensionTypePtr res){}
 
   void  PyLanguage::_get_recognized_extensions(GDExtensionTypePtr res){
-    add_string_to_array(res, c_string_to_string("py"));
-    add_string_to_array(res, c_string_to_string("pyw"));
-    add_string_to_array(res, c_string_to_string("pyi"));
+      auto py = c_string_to_string("py");
+      auto pyw = c_string_to_string("pyw");
+      auto pyi = c_string_to_string("pyi");
+    add_string_to_array(res, py);
+    add_string_to_array(res, pyw);
+    add_string_to_array(res, pyi);
   }
 
   void PyLanguage::_get_public_functions(GDExtensionTypePtr res){}
@@ -1129,7 +1173,6 @@ void init_func_names(){
 }
 
 #pragma endregion
-
 void free_instance(void *p_userdata, GDExtensionClassInstancePtr p_instance){}
 void register_class(){
     GDExtensionClassCreationInfo* creation_info = new GDExtensionClassCreationInfo{};
@@ -1144,8 +1187,8 @@ void register_class(){
     creation_info->class_userdata = creation_info;
     creation_info->get_virtual_func = get_virtual;
 
-    StringName class_name = c_string_to_string_name("PyLanguage");
+    StringName class_name_lang = c_string_to_string_name("PyLanguage");
     StringName parent_class_name = c_string_to_string_name("ScriptLanguageExtension");
 
-    functions::get_classdb_register_extension_class()(_library, &class_name.godot_owner, &parent_class_name.godot_owner, creation_info);
+    functions::get_classdb_register_extension_class()(_library, &class_name_lang.godot_owner, &parent_class_name.godot_owner, creation_info);
 }

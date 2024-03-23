@@ -9,6 +9,7 @@ cdef extern from "help_types.h":
         vector [PyObject*] default_values
         PyObject* class_
         PyObject* instance
+        bool is_tool
 
 
     ctypedef struct CPPSignalArg:

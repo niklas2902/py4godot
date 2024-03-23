@@ -15,12 +15,14 @@ namespace godot{
         bool initialized = false;
         bool shouldBeDeleted = false;
         bool allocated_memory = false;
-        void* _callback = nullptr;
         long long __id;
+        uint8_t data[16];
+        void* _callback = nullptr;
         VariantTypeWrapper(){
             native_ptr = nullptr;
-            godot_owner = nullptr;
+            godot_owner = &data[0];
             shouldBeDeleted = false;
+            bool allocated_memory = false;
         }
         void set_godot_owner(GDExtensionTypePtr owner) {
             godot_owner = owner;

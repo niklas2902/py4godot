@@ -887,7 +887,7 @@ def collect_members(obj):
 
 def generate_destructor(classname):
     res = ""
-    if classname in builtin_classes or cl:
+    if classname in builtin_classes:
         res += f"{INDENT}void {classname}::_py_destroy(){{"
         res = generate_newline(res)
         res += f"{INDENT * 2}auto destructor = functions::get_variant_get_ptr_destructor()({generate_variant_type(classname)});"

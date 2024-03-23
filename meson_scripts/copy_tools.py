@@ -99,10 +99,12 @@ def copy_stub_files(platform):
         copy(file,
              f"build/final/{platform}/{config_data['python_ver']}-{platform}/python/install/Lib/site-packages/" + file)
 
+
 def copy_experimental(platform):
-    for file in ["py4godot/pluginscript_api/utils/experimental.py"]:
+    for file in ["py4godot/pluginscript_api/utils/experimental.py",
+                 "py4godot/pluginscript_api/utils/annotation_tools.py"]:
         copy(file,
-            f"build/final/{platform}/{config_data['python_ver']}-{platform}/python/install/Lib/site-packages/" + file)
+             f"build/final/{platform}/{config_data['python_ver']}-{platform}/python/install/Lib/site-packages/" + file)
 
 
 def onerror(func, path, exc_info):
@@ -126,8 +128,9 @@ def onerror(func, path, exc_info):
 
 
 def clear_build():
-    shutil.rmtree(os.path.dirname(
-        f"build/final/"), onerror=onerror)
+    if os.path.isdir("build/final"):
+        shutil.rmtree(os.path.dirname(
+            f"build/final/"), onerror=onerror)
 
 
 if __name__ == "__main__":
