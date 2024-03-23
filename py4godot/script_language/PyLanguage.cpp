@@ -149,13 +149,11 @@
   void PyLanguage::_validate(String script, String path, bool validate_functions, bool validate_errors, bool validate_warnings, bool validate_safe_lines, GDExtensionTypePtr res){
     GDExtensionVariantPtr varptr;
     String key = c_string_to_string("valid");
-    GDExtensionVariantFromTypeConstructorFunc constructor_func = functions::get_get_variant_from_type_constructor()(GDExtensionVariantType::GDEXTENSION_VARIANT_TYPE_STRING);
-    constructor_func(&varptr,const_cast<GDExtensionTypePtr*>(&key.godot_owner));
+    auto key_var = Variant(key);
 
     bool valid = true;
-    GDExtensionVariantPtr value_var = functions::get_dictionary_operator_index()(const_cast<GDExtensionTypePtr>(res), &varptr);
+    GDExtensionVariantPtr value_var = functions::get_dictionary_operator_index()(const_cast<GDExtensionTypePtr>(res), &key_var.native_ptr);
     GDExtensionVariantFromTypeConstructorFunc constructor_func_valid = functions::get_get_variant_from_type_constructor()(GDExtensionVariantType::GDEXTENSION_VARIANT_TYPE_BOOL);
-
     constructor_func_valid(value_var, &valid);
     }
 
