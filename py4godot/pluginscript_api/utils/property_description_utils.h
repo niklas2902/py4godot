@@ -15,11 +15,12 @@ String& hint_string,
 uint32_t usage
 ){
     StringName * stringname = new StringName{name};
-
+    stringname->shouldBeDeleted = false;
     StringName *classname = new StringName{class_name};
-
-    String * ptr_hint_string = new String{c_string_to_string("")};
-
+    classname->shouldBeDeleted = false;
+    auto temp_hint_string = c_string_to_string("");
+    String * ptr_hint_string = new String{temp_hint_string};
+    ptr_hint_string->shouldBeDeleted = false;
 
     property_info.type = type_;
     property_info.name = &stringname->godot_owner;

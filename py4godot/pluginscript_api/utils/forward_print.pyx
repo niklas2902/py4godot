@@ -2,6 +2,7 @@ import sys
 from py4godot.classes.common_functions import print as gdprint
 
 welcome_text="""
+
               _  _                  _       _
              | || |                | |     | |
   _ __  _   _| || |_ __ _  ___   __| | ___ | |_

@@ -12,7 +12,6 @@ def _cythonize(filename: str):
 
 if __name__ == "__main__":
     _time = datetime.datetime.now()
-    cythonize("py4godot/test_bridge.pyx", language_level=3, language="c++")
     cythonize("py4godot/core/variant4/Variant4.pyx", language_level=3, language="c++")
     cythonize("py4godot/core/variant4/type_helpers.pyx", language_level=3, language="c++")
     cythonize("py4godot/core/variant4/cast_helpers.pyx", language_level=3, language="c++")

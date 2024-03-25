@@ -130,52 +130,59 @@ compile_python_ver_file(current_platform)
 msvc_init = f"vcvarsall.bat {'x86_amd64'} {command_separator} cl {command_separator} " if "msvc" in args.compiler else ""
 
 res = None
-if os.path.exists(build_dir):
-    res = subprocess.Popen(msvc_init +
-                           f"meson {build_dir} --cross-file platforms/{args.target_platform}.cross "
-                           f"--cross-file platforms/compilers/{args.compiler}_compiler.native "
-                           f"--cross-file platforms/binary_dirs/python_ver_compile.cross "
-                           f"--buildtype=release"
-                           f"{command_separator} meson compile -C build/{args.target_platform}",
-                           shell=True)
-else:
-    res = subprocess.Popen(msvc_init +
-                           f"meson {build_dir} --cross-file platforms/{args.target_platform}.cross "
-                           f"--cross-file platforms/compilers/{args.compiler}_compiler.native "
-                           f"--cross-file platforms/binary_dirs/python_ver_compile.cross "
-                           f"--buildtype=release"
-                           f"{command_separator} meson compile -C build/{args.target_platform}",
-                           shell=True)
+try:
+    if os.path.exists(build_dir):
+        res = subprocess.Popen(msvc_init +
+                               f"meson {build_dir} --cross-file platforms/{args.target_platform}.cross "
+                               f"--cross-file platforms/compilers/{args.compiler}_compiler.native "
+                               f"--cross-file platforms/binary_dirs/python_ver_compile.cross "
+                               f"--buildtype=release"
+                               f"{command_separator} meson compile -C build/{args.target_platform}",
+                               shell=True)
+    else:
+        res = subprocess.Popen(msvc_init +
+                               f"meson {build_dir} --cross-file platforms/{args.target_platform}.cross "
+                               f"--cross-file platforms/compilers/{args.compiler}_compiler.native "
+                               f"--cross-file platforms/binary_dirs/python_ver_compile.cross "
+                               f"--buildtype=release"
+                               f"{command_separator} meson compile -C build/{args.target_platform}",
+                               shell=True)
 
-res.wait()
-copy_tools.run(args.target_platform)
-copy_tools.copy_main(args.target_platform)
-copy_tools.copy_stub_files(args.target_platform)
-copy_tools.copy_experimental(args.target_platform)
-generate_godot.generate_lib(args.target_platform)
-generate_godot.generate_gdignore()
-generate_init_files.create_init_file(args.target_platform)
-
-print("=================================Build finished==================================")
-print("Build took:", time.time() - start, "seconds")
-
-if should_download_godot:
-    print("=================================Start download==================================")
-    download_godot.run(current_platform)
-    print("=================================Fnish download==================================")
-
-# running tests
-if should_run_tests:
-    print("=================================Start tests==================================")
-    start = time.time()
-    copy_tools.copy_tests(args.target_platform)
-    res = subprocess.Popen(
-        f"ninja -C build/{args.target_platform} test", shell=True)
     res.wait()
-    streamdata = res.communicate()[0]
-    rc = res.returncode
-    print("=================================Build finished==================================")
-    print("Running tests took:", time.time() - start, "seconds")
 
-    if rc != 0:
-        raise Exception("Tests failed")
+    copy_tools.run(args.target_platform)
+    copy_tools.copy_main(args.target_platform)
+    copy_tools.copy_stub_files(args.target_platform)
+    copy_tools.copy_experimental(args.target_platform)
+    generate_godot.generate_lib(args.target_platform)
+    generate_godot.generate_gdignore()
+    generate_init_files.create_init_file(args.target_platform)
+
+    print("=================================Build finished==================================")
+    print("Build took:", time.time() - start, "seconds")
+
+    if should_download_godot:
+        print("=================================Start download==================================")
+        download_godot.run(current_platform)
+        print("=================================Fnish download==================================")
+
+    # running tests
+    if should_run_tests:
+        print("=================================Start tests==================================")
+        start = time.time()
+        copy_tools.copy_tests(args.target_platform)
+        res = subprocess.Popen(
+            f"ninja -C build/{args.target_platform} test", shell=True)
+        res.wait()
+        streamdata = res.communicate()[0]
+        rc = res.returncode
+        print("=================================Build finished==================================")
+        print("Running tests took:", time.time() - start, "seconds")
+
+        if rc != 0:
+            raise Exception("Tests failed")
+
+except Exception as e:
+    print("---------------------------------Build failed-----------------------------------")
+    print(e)
+    time.sleep(1000)

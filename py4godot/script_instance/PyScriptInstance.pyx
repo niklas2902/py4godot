@@ -12,7 +12,7 @@ import threading
 
 lock = threading.Lock()
 
-cdef api GDExtensionBool instance_set(GDExtensionScriptInstanceDataPtr p_instance, GDExtensionConstStringNamePtr p_name, GDExtensionConstVariantPtr p_value) with gil:
+cdef api GDExtensionBool instance_set(GDExtensionScriptInstanceDataPtr p_instance, GDExtensionConstStringNamePtr p_name, GDExtensionConstVariantPtr p_value) :
     cdef InstanceData* instance = <InstanceData*>p_instance
     #TODO still a problem with custom string attributes. Why is this still crashing?
     cdef StringName method_name = StringName.__new__(StringName)
@@ -25,7 +25,6 @@ cdef api GDExtensionBool instance_set(GDExtensionScriptInstanceDataPtr p_instanc
     try:
         var.native_ptr = <void*>p_value
         val = <object>var.get_converted_value(True)
-        print_error(f"val:"+str(val))
         setattr(<object>(instance.owner),py_method_name_str, <object>val)
         #Py_DECREF(<object>val)#TODO: is this necessary?
 
@@ -35,7 +34,7 @@ cdef api GDExtensionBool instance_set(GDExtensionScriptInstanceDataPtr p_instanc
 
     return 1
 
-cdef api GDExtensionBool instance_get(GDExtensionScriptInstanceDataPtr p_instance, GDExtensionConstStringNamePtr p_name, GDExtensionVariantPtr r_ret) with gil:
+cdef api GDExtensionBool instance_get(GDExtensionScriptInstanceDataPtr p_instance, GDExtensionConstStringNamePtr p_name, GDExtensionVariantPtr r_ret) :
     cdef InstanceData* instance = <InstanceData*>p_instance
     #TODO still a problem with custom string attributes. Why is this still crashing?
     cdef StringName method_name = StringName.__new__(StringName)
@@ -60,7 +59,8 @@ cdef api GDExtensionBool instance_get(GDExtensionScriptInstanceDataPtr p_instanc
         print_error("Exception while getting attribute:",e)
         print_error(f"traceback: {traceback.format_exc()}")
     return 1
-"""cdef api const GDExtensionMethodInfo * instance_get_method_list(GDExtensionScriptInstanceDataPtr p_instance, uint32_t *r_count) with gil:
+
+"""cdef api const GDExtensionMethodInfo * instance_get_method_list(GDExtensionScriptInstanceDataPtr p_instance, uint32_t *r_count) :
     global method_infos
     print_error("call_method_list")
     cdef InstanceData instance = <InstanceData>p_instance
@@ -80,7 +80,7 @@ cdef api GDExtensionBool instance_get(GDExtensionScriptInstanceDataPtr p_instanc
         error("Exception in method_list:", e)
     return method_infos
 """
-cdef api GDExtensionBool instance_has_method(GDExtensionScriptInstanceDataPtr p_instance, GDExtensionConstStringNamePtr p_name) with gil:
+cdef api GDExtensionBool instance_has_method(GDExtensionScriptInstanceDataPtr p_instance, GDExtensionConstStringNamePtr p_name) :
     cdef InstanceData* instance = <InstanceData*>p_instance
 
     cdef StringName method_name = StringName.__new__(StringName)

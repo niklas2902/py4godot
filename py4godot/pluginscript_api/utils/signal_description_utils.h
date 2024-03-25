@@ -12,6 +12,7 @@ void print_error(char* text){
 
 void create_signal_arg(const char* name, int variant_type, Array& args_dicts){
     Dictionary arg_dict = Dictionary::new0();
+    arg_dict.shouldBeDeleted = false;
     auto godot_name = c_string_to_string("name");
     Variant arg_name_key_variant = Variant(godot_name);
 

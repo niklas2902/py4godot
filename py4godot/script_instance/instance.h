@@ -18,6 +18,8 @@ GDExtensionScriptInstanceInfo get_instance(){
 }
 
 GDExtensionBool c_instance_get(GDExtensionScriptInstanceDataPtr p_instance, GDExtensionConstStringNamePtr p_name, GDExtensionVariantPtr r_ret){
+    mtx.lock();
+    auto gil_state = PyGILState_Ensure();
     InstanceData* instance = (InstanceData*)p_instance;
     StringName method_name = StringName::new_static(((void**)p_name)[0]);
     String method_name_str = String::new2(method_name);
@@ -26,31 +28,51 @@ GDExtensionBool c_instance_get(GDExtensionScriptInstanceDataPtr p_instance, GDEx
     if(std::string{c_method_name} == std::string{"script"}){
         auto constructor = functions::get_get_variant_from_type_constructor()(GDExtensionVariantType::GDEXTENSION_VARIANT_TYPE_OBJECT);
         constructor(r_ret, &((PyScriptExtension*)instance->script)->godot_owner);
+        PyGILState_Release(gil_state);
+        mtx.unlock();
         return 1;
     }
     else{
-        return instance_get(p_instance, p_name, r_ret);
+        auto ret = instance_get(p_instance, p_name, r_ret);
+        PyGILState_Release(gil_state);
+        mtx.unlock();
+        return ret;
     }
+    mtx.unlock();
     return 1;
 }
 
 
 void c_instance_call(GDExtensionScriptInstanceDataPtr p_self, GDExtensionConstStringNamePtr p_method, const GDExtensionConstVariantPtr *p_args, GDExtensionInt p_argument_count, GDExtensionVariantPtr r_return, GDExtensionCallError *r_error){
+    mtx.lock();
     auto name = StringName::new_static(((void**)p_method)[0]);
     auto _ready = c_string_to_string_name("_ready");
     auto _enter_tree = c_string_to_string_name("_enter_tree");
     if(((InstanceData*)p_self)->is_placeholder && (name == _ready || name == _enter_tree)){
+        mtx.unlock();
         return;
     }
+
+    auto string_name = String::new2(name);
+    char *res_string;
+    gd_string_to_c_string(string_name, string_name.length(), &res_string);
+    //functions::get_print_error()(res_string, "test", "test", 1, 1);
+
     auto gil_state = PyGILState_Ensure();
     auto* p_instance = (InstanceData*)p_self;
     instance_call(p_self, p_method, p_args, p_argument_count, r_return, r_error);
     PyGILState_Release(gil_state);
+    mtx.unlock();
 }
 
 
 GDExtensionBool c_instance_set(GDExtensionScriptInstanceDataPtr p_instance, GDExtensionConstStringNamePtr p_name, GDExtensionConstVariantPtr p_value){
-    return instance_set(p_instance, p_name, p_value);
+    mtx.lock();
+    auto gil_state = PyGILState_Ensure();
+    auto ret = instance_set(p_instance, p_name, p_value);
+    PyGILState_Release(gil_state);
+    mtx.unlock();
+    return ret;
 }
 
 const GDExtensionPropertyInfo * c_instance_get_property_list(GDExtensionScriptInstanceDataPtr p_instance, uint32_t *r_count){
@@ -69,11 +91,18 @@ GDExtensionObjectPtr c_instance_get_script(GDExtensionScriptInstanceDataPtr p_in
 }
 
 GDExtensionBool c_instance_has_method(GDExtensionScriptInstanceDataPtr p_instance, GDExtensionConstStringNamePtr p_name){
-    return instance_has_method(p_instance, p_name);
+
+    mtx.lock();
+    auto gil_state = PyGILState_Ensure();
+    auto ret = instance_has_method(p_instance, p_name);
+    PyGILState_Release(gil_state);
+    mtx.unlock();
+    return ret;
 }
 
 
 void init_instance(GDExtensionScriptInstanceInfo* native_script_instance, bool is_placeholder){
+    auto gil_state = PyGILState_Ensure();
     import_py4godot__script_instance__PyScriptInstance();
     if (PyErr_Occurred())
     {
@@ -85,6 +114,7 @@ void init_instance(GDExtensionScriptInstanceInfo* native_script_instance, bool i
         const char *strExcType = PyBytes_AS_STRING(pyStr);
         PyErr_Print();
         assert(false);
+        PyGILState_Release(gil_state);
         return;
     }
 
@@ -97,6 +127,7 @@ void init_instance(GDExtensionScriptInstanceInfo* native_script_instance, bool i
     if(!is_placeholder){
         native_script_instance->has_method_func = c_instance_has_method;
     }
+    PyGILState_Release(gil_state);
     /*native_script_instance->is_placeholder_func = is_placeholder;
     native_script_instance->set_func = c_instance_set;
     native_script_instance->get_property_list_func = instance_get_property_list;

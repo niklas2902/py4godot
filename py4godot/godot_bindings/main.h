@@ -2,7 +2,8 @@
 #include "py4godot/godot_bindings/macros.h"
 #include "gdextension_interface.h"
 #include "functions.h"
-#include <python.h>
+#include "Python.h"
+#include <mutex>
 
 
 #ifdef _WIN64
@@ -20,6 +21,8 @@
 #elif __APPLE__
 #define PYTHONHOME L"addons/windows64/cpython-3.11.3-windows32/python/install"
 #endif
+
+extern std::mutex mtx; // Define a mutex
 
 extern GDExtensionClassLibraryPtr _library;
 

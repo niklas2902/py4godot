@@ -66,11 +66,11 @@ void PyResourceFormatLoader::_get_resource_uid( String& path, GDExtensionTypePtr
     String py = c_string_to_string("py");
     String pyw = c_string_to_string("pyw");
     return; //TODO: Is there a way to be more efficient
-    mutex_loader.lock();
+    mtx.lock();
     char* res_string;
     if (!path.ends_with(py) && !path.ends_with(pyw)){
         *((std::int64_t*)res) = -1;
-        mutex_loader.unlock();
+        mtx.unlock();
         return;
     }
     gd_string_to_c_string(path, path.length(), &res_string);
@@ -80,7 +80,7 @@ void PyResourceFormatLoader::_get_resource_uid( String& path, GDExtensionTypePtr
         path_to_id[str_res_string] = PyResourceFormatLoader::id_counter;
     }
     *((std::int64_t*)res) = path_to_id[str_res_string];
-    mutex_loader.unlock();
+    mtx.unlock();
 }
 void PyResourceFormatLoader::_get_dependencies( String& path, bool add_types, GDExtensionTypePtr res){}
 void PyResourceFormatLoader::_rename_dependencies( String& path, Dictionary& renames, GDExtensionTypePtr res){}

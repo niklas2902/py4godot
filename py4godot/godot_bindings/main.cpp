@@ -17,6 +17,7 @@
 #endif
 GDExtensionInterfaceGetProcAddress global_p_get_proc_address;
 GDExtensionClassLibraryPtr _library = nullptr;
+std::mutex mtx;
 typedef void (*FunctionPointer)();
 FunctionPointer load_proc_address (char* function_name){
     auto function = global_p_get_proc_address(function_name);
