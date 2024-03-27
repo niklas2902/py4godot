@@ -55,8 +55,8 @@ if build_machine.system() == 'linux'
     'py4godot/cppclasses', 'py4godot/cpputils', 'py4godot/script_language', 'py4godot/pluginscript_api',
     'py4godot/pluginscript_api/utils','python_files/cpython-3.11.3-'+machine+platform_format+'/python/install/include/python3.11',
     'py4godot/instance_data')
-    glob = run_command('python', files(meson.current_source_dir()+'/meson_scripts/glob_tools.py'))
-    glob_cpp = run_command('python', files(meson.current_source_dir()+'/meson_scripts/glob_tools_cpp.py'))
+    glob = run_command('python3', files(meson.current_source_dir()+'/meson_scripts/glob_tools.py'))
+    glob_cpp = run_command('python3', files(meson.current_source_dir()+'/meson_scripts/glob_tools_cpp.py'))
     dep_py = lib_py
 endif
 
