@@ -55,8 +55,8 @@ def copy_main(platform):
         copy(f"build/{platform}/main.dll",
              f"build/final/{platform}/{config_data['python_ver']}-{platform}/python/install/main.dll")
     elif "linux" in platform:
-        copy(f"build/{platform}/py4godot#godot_bindings#main.so",
-             f"build/final/{platform}/{config_data['python_ver']}-{platform}/main.so")
+        copy(f"build/{platform}/main.so",
+             f"build/final/{platform}/{config_data['python_ver']}-{platform}/python/install/main.so")
 
 
 def copy_tests(platform):

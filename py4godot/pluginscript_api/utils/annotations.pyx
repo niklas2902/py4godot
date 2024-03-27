@@ -18,7 +18,7 @@ import importlib.util
 class_name = ""
 gd_class = None
 is_tool = False
-cdef api TransferObject exec_class(str source_string, str class_name_) with gil:
+cdef api TransferObject exec_class(str source_string, str class_name_):
     global  gd_class, properties, signals, methods,default_values, class_name, is_tool
 
     cdef str py_source_string = source_string

@@ -42,4 +42,4 @@ py4godot/classes/generated.pyx
 /tests/binding/crash_on_call/addons/windows64/
 /py4godot/classes/generated.pyi
 /py4godot/classes/generated4.pyx
-/py4godot/Instance_data/InstanceData.c
+/py4godot/instance_data/InstanceData.c

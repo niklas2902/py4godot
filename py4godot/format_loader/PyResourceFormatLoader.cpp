@@ -13,12 +13,14 @@ std::mutex mutex_loader{};
 
 GDExtensionPtrOperatorEvaluator operator_equal_string_name_loader;
 std::int64_t PyResourceFormatLoader::id_counter{1000};
-bool string_names_equal_loader(StringName left, StringName right){
+bool string_names_equal_loader(StringName& left, StringName& right){
+    print_error("string_names_equal_loader");
     uint8_t ret;
     operator_equal_string_name_loader(&left.godot_owner, &right.godot_owner, &ret);
     return ret != 0;
 }
   PyResourceFormatLoader* PyResourceFormatLoader::constructor(PyLanguage* language){
+    print_error("constructor");
     PyResourceFormatLoader* class_ = new PyResourceFormatLoader();
 
     StringName class_name = c_string_to_string_name("PyResourceFormatLoader");
@@ -32,6 +34,7 @@ bool string_names_equal_loader(StringName left, StringName right){
 }
 
 void* create_instance_loader(void* userdata){
+    print_error("create_instance_loader");
     StringName class_name = c_string_to_string_name("ResourceFormatLoader");
     class_name.shouldBeDeleted = false;
     auto gdnative_object = functions::get_classdb_construct_object()(&class_name.godot_owner);
@@ -42,10 +45,12 @@ void free_instance_loader(void *p_userdata, GDExtensionClassInstancePtr p_instan
 void PyResourceFormatLoader::_init_values(){}
 
 void PyResourceFormatLoader::_get_recognized_extensions(GDExtensionTypePtr res){
+        print_error("_get_recognized_extensions");
     auto py = c_string_to_string("py");
     add_string_to_array(res, py);
 }
 void PyResourceFormatLoader::_recognize_path( String& path, StringName& type, GDExtensionTypePtr res){
+        print_error("_recognize_path");
     String py = c_string_to_string("py");
     String pyw = c_string_to_string("pyw");
     String pyi = c_string_to_string("pyi");
@@ -53,24 +58,31 @@ void PyResourceFormatLoader::_recognize_path( String& path, StringName& type, GD
     *((GDExtensionTypePtr*) res) =  (void*)can_be_loaded;
 }
 void PyResourceFormatLoader::_handles_type( StringName& type, GDExtensionTypePtr res){
-String type_ = c_string_to_string("Script");
+        print_error("handles_type");
+    String type_ = c_string_to_string("Script");
   bool handles_type = type.ends_with(type_);
   *((GDExtensionTypePtr*) res) =  (void*)handles_type;
 }
 void PyResourceFormatLoader::_get_resource_type( String& path, GDExtensionTypePtr res){
+        print_error("_get_resource_type");
     functions::get_string_new_with_utf8_chars()(res, "PyScriptExtension");
 }
-void PyResourceFormatLoader::_get_resource_script_class( String& path, GDExtensionTypePtr res){}
+void PyResourceFormatLoader::_get_resource_script_class( String& path, GDExtensionTypePtr res)
+{
+    print_error("_get_resource_script_class");
+}
 void PyResourceFormatLoader::_get_resource_uid( String& path, GDExtensionTypePtr res){
+    print_error("get_resource_id");
+    functions::get_print_error()("get_resource_uid", "test", "test", 1, 1);
     *((std::int64_t*)res) = -1;
     String py = c_string_to_string("py");
     String pyw = c_string_to_string("pyw");
     return; //TODO: Is there a way to be more efficient
-    mtx.lock();
+    std::lock_guard<std::mutex> lock(mtx);
     char* res_string;
     if (!path.ends_with(py) && !path.ends_with(pyw)){
         *((std::int64_t*)res) = -1;
-        mtx.unlock();
+
         return;
     }
     gd_string_to_c_string(path, path.length(), &res_string);
@@ -80,18 +92,30 @@ void PyResourceFormatLoader::_get_resource_uid( String& path, GDExtensionTypePtr
         path_to_id[str_res_string] = PyResourceFormatLoader::id_counter;
     }
     *((std::int64_t*)res) = path_to_id[str_res_string];
-    mtx.unlock();
+
 }
-void PyResourceFormatLoader::_get_dependencies( String& path, bool add_types, GDExtensionTypePtr res){}
-void PyResourceFormatLoader::_rename_dependencies( String& path, Dictionary& renames, GDExtensionTypePtr res){}
-void PyResourceFormatLoader::_exists( String& path, GDExtensionTypePtr res){}
-void PyResourceFormatLoader::_get_classes_used( String& path, GDExtensionTypePtr res){}
+void PyResourceFormatLoader::_get_dependencies( String& path, bool add_types, GDExtensionTypePtr res){
+    print_error("_get_dependencies");
+}
+void PyResourceFormatLoader::_rename_dependencies( String& path, Dictionary& renames, GDExtensionTypePtr res){
+    print_error("_rename_dependencies");
+}
+void PyResourceFormatLoader::_exists( String& path, GDExtensionTypePtr res){
+    print_error("_existes");
+}
+void PyResourceFormatLoader::_get_classes_used( String& path, GDExtensionTypePtr res){
+    print_error("_get_classes_used");
+}
 void PyResourceFormatLoader::_load( String& path, String& original_path, bool use_sub_threads, int cache_mode, GDExtensionTypePtr res){
+    functions::get_print_error()("_load", "test", "test", 1, 1);
     GDExtensionVariantFromTypeConstructorFunc constructor_func;
     FileAccess file;
-    file = FileAccess::open(path, 1/*Read*/);
-    if(! file.godot_owner){
-        return;
+    {
+        std::lock_guard<std::mutex> lock(mtx);
+        file = FileAccess::open(path, 1/*Read*/);
+        if(! file.godot_owner){
+            return;
+        }
     }
 
     auto source_code = file.get_as_text(false);
@@ -255,6 +279,14 @@ GDExtensionClassCallVirtual get_virtual_loader(void *p_userdata, GDExtensionCons
 
     StringName name = StringName::new_static(((void**)const_cast<GDExtensionTypePtr>(p_name))[0]);
     auto length = name.length();
+
+        String name_string = String::new2(name);
+
+        char* res_string;
+        gd_string_to_c_string(name_string, name_string.length(), &res_string);
+
+        print_error("called function:");
+        print_error(res_string);
 
 
     if (string_names_equal_loader(loader::func_name__get_recognized_extensions, name)){

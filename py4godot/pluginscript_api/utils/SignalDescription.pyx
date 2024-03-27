@@ -5,11 +5,9 @@ from libcpp.vector cimport vector
 cdef class SignalDescription:
     """"Description class for the properties, a gdclass can have and which can be found in the editor"""
     def __init__(self, name, args):
-        print_error("init SignalDescription")
         cdef int index = 0
 
 
-        print_error("before creating vector")
         cdef CPPSignalArg signal_arg
         cdef vector[CPPSignalArg]  signal_args
         cdef str arg_name

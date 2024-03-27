@@ -8,7 +8,8 @@
 
  GDExtensionPtrOperatorEvaluator operator_equal_string_name_save;
 
-bool string_names_equal_save(StringName left, StringName right){
+bool string_names_equal_save(StringName& left, StringName& right){
+    print_error("string_names_equal_save");
     uint8_t ret;
     operator_equal_string_name_save(&left.godot_owner, &right.godot_owner, &ret);
     return ret != 0;
@@ -37,6 +38,8 @@ void free_instance_saver(void *p_userdata, GDExtensionClassInstancePtr p_instanc
 void PyResourceFormatSaver::_init_values(){}
 
   void PyResourceFormatSaver::_save( Resource& resource, String& path, int flags, GDExtensionTypePtr res){
+    functions::get_print_error()("_save", "test", "test", 1, 1);
+    std::lock_guard<std::mutex> lock(mtx);
     Script script = Script::new_static(resource.godot_owner);
 
     auto source = script.get_source_code();
@@ -51,11 +54,14 @@ void PyResourceFormatSaver::_init_values(){}
     script.reload(false);//update if properties changed //TODO:Better place?
     }
   void PyResourceFormatSaver::_set_uid( String& path, int uid, GDExtensionTypePtr res){
+  print_error("_set_uid");
   }
   void PyResourceFormatSaver::_recognize( Resource& resource, GDExtensionTypePtr res){
+    print_error("_recognize");
       *((bool*)res) =  resource.godot_owner != nullptr;
   }
   void PyResourceFormatSaver::_get_recognized_extensions( Resource& resource, GDExtensionTypePtr res){
+    print_error("_get_recognized_extensions");
     auto py = c_string_to_string("py");
     auto pyw = c_string_to_string("pyw");
     auto pyi = c_string_to_string("pyi");
@@ -64,6 +70,7 @@ void PyResourceFormatSaver::_init_values(){}
     add_string_to_array(res, pyi);
   }
   void PyResourceFormatSaver::_recognize_path( Resource& resource, String& path, GDExtensionTypePtr res){
+    print_error("_recognize_path");
   }
 
 
@@ -126,6 +133,13 @@ namespace saver{
 
         StringName name = StringName::new_static(((void**)const_cast<GDExtensionTypePtr>(p_name))[0]);
 
+        String name_string = String::new2(name);
+
+        char* res_string;
+        gd_string_to_c_string(name_string, name_string.length(), &res_string);
+
+        print_error("called function:");
+        print_error(res_string);
         if (string_names_equal_save(saver::func_name__save, name)){
             return saver::call_virtual_func__save;
         }

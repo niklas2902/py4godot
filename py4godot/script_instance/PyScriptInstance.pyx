@@ -13,6 +13,7 @@ import threading
 lock = threading.Lock()
 
 cdef api GDExtensionBool instance_set(GDExtensionScriptInstanceDataPtr p_instance, GDExtensionConstStringNamePtr p_name, GDExtensionConstVariantPtr p_value) :
+    print_error("instance_set")
     cdef InstanceData* instance = <InstanceData*>p_instance
     #TODO still a problem with custom string attributes. Why is this still crashing?
     cdef StringName method_name = StringName.__new__(StringName)
@@ -35,6 +36,7 @@ cdef api GDExtensionBool instance_set(GDExtensionScriptInstanceDataPtr p_instanc
     return 1
 
 cdef api GDExtensionBool instance_get(GDExtensionScriptInstanceDataPtr p_instance, GDExtensionConstStringNamePtr p_name, GDExtensionVariantPtr r_ret) :
+    print_error("instance_get")
     cdef InstanceData* instance = <InstanceData*>p_instance
     #TODO still a problem with custom string attributes. Why is this still crashing?
     cdef StringName method_name = StringName.__new__(StringName)
@@ -81,6 +83,7 @@ cdef api GDExtensionBool instance_get(GDExtensionScriptInstanceDataPtr p_instanc
     return method_infos
 """
 cdef api GDExtensionBool instance_has_method(GDExtensionScriptInstanceDataPtr p_instance, GDExtensionConstStringNamePtr p_name) :
+    print_error("instance_has_method")
     cdef InstanceData* instance = <InstanceData*>p_instance
 
     cdef StringName method_name = StringName.__new__(StringName)
@@ -91,6 +94,7 @@ cdef api GDExtensionBool instance_has_method(GDExtensionScriptInstanceDataPtr p_
     return hasattr(<object>(instance.owner), py_method_name_str)
 
 cdef api bint instance_call(GDExtensionScriptInstanceDataPtr p_self, GDExtensionConstStringNamePtr p_method, const GDExtensionConstVariantPtr *p_args, GDExtensionInt p_argument_count, GDExtensionVariantPtr r_return, GDExtensionCallError *r_error):
+    print_error("instance_call")
     cdef InstanceData* instance = <InstanceData*>p_self
     #TODO still a problem with custom string attributes. Why is this still crashing?
     cdef StringName method_name = StringName.__new__(StringName)
@@ -98,6 +102,7 @@ cdef api bint instance_call(GDExtensionScriptInstanceDataPtr p_self, GDExtension
     method_name.StringName_internal_class = internal_method_name
     cdef String method_name_str = String.new2(method_name)
     cdef unicode py_method_name_str = gd_string_to_py_string(method_name_str)
+    print_error(py_method_name_str)
     if(py_method_name_str == "_get_linked_undo_properties"):
         return 0
 
@@ -120,6 +125,8 @@ cdef api bint instance_call(GDExtensionScriptInstanceDataPtr p_self, GDExtension
         print_error(f"An Exception happened while calling a method:{e}" )
         print_error(f"traceback: {traceback.format_exc()}")
         print_error(f"method name:{py_method_name_str}")
+
+    print_error("object:"+str(instance_object))
 
     var.native_ptr = r_return
     py_typename = str(type(result).__name__)

@@ -10,6 +10,10 @@ static bool is_none(PyObject* pyobject){
     return pyobject == Py_None;
 }
 
+static void print_error(char* error_message){
+    functions::get_print_error()(error_message, "test", "test", 1, 1);
+}
+
 static const char* gd_string_to_c_string( GDExtensionConstStringPtr string_ptr, int length) {
     char* native_string = (char*)malloc(sizeof(char) * (length));
     functions::get_string_to_utf8_chars()(string_ptr, native_string, length);

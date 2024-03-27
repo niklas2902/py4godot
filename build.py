@@ -2,6 +2,8 @@ import argparse
 import os
 import subprocess
 import time
+import traceback
+
 from Cython.Build import cythonize
 import generate_bindings, generate_bindings_pyi
 
@@ -185,4 +187,5 @@ try:
 except Exception as e:
     print("---------------------------------Build failed-----------------------------------")
     print(e)
+    traceback.print_exc()
     time.sleep(1000)

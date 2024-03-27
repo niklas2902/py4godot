@@ -7,18 +7,14 @@
 #include "py4godot/cpputils/utils.h"
 #include "py4godot/cppcore/Variant.h"
 #include <string>
-#include <windows.h>
 #include <cassert>
 GDExtensionScriptInstanceInfo native_script_instance_placeholder;
 GDExtensionScriptInstanceInfo native_script_instance;
 
 
-GDExtensionScriptInstanceInfo get_instance(){
-    return native_script_instance;
-}
-
 GDExtensionBool c_instance_get(GDExtensionScriptInstanceDataPtr p_instance, GDExtensionConstStringNamePtr p_name, GDExtensionVariantPtr r_ret){
-    mtx.lock();
+        print_error("_c_instance_get");
+    std::lock_guard<std::mutex> lock(mtx);
     auto gil_state = PyGILState_Ensure();
     InstanceData* instance = (InstanceData*)p_instance;
     StringName method_name = StringName::new_static(((void**)p_name)[0]);
@@ -29,27 +25,28 @@ GDExtensionBool c_instance_get(GDExtensionScriptInstanceDataPtr p_instance, GDEx
         auto constructor = functions::get_get_variant_from_type_constructor()(GDExtensionVariantType::GDEXTENSION_VARIANT_TYPE_OBJECT);
         constructor(r_ret, &((PyScriptExtension*)instance->script)->godot_owner);
         PyGILState_Release(gil_state);
-        mtx.unlock();
+
         return 1;
     }
     else{
         auto ret = instance_get(p_instance, p_name, r_ret);
         PyGILState_Release(gil_state);
-        mtx.unlock();
+
         return ret;
     }
-    mtx.unlock();
+
     return 1;
 }
 
 
 void c_instance_call(GDExtensionScriptInstanceDataPtr p_self, GDExtensionConstStringNamePtr p_method, const GDExtensionConstVariantPtr *p_args, GDExtensionInt p_argument_count, GDExtensionVariantPtr r_return, GDExtensionCallError *r_error){
-    mtx.lock();
+        print_error("_c_instance_call");
+    std::lock_guard<std::mutex> lock(mtx);
     auto name = StringName::new_static(((void**)p_method)[0]);
     auto _ready = c_string_to_string_name("_ready");
     auto _enter_tree = c_string_to_string_name("_enter_tree");
     if(((InstanceData*)p_self)->is_placeholder && (name == _ready || name == _enter_tree)){
-        mtx.unlock();
+
         return;
     }
 
@@ -62,20 +59,22 @@ void c_instance_call(GDExtensionScriptInstanceDataPtr p_self, GDExtensionConstSt
     auto* p_instance = (InstanceData*)p_self;
     instance_call(p_self, p_method, p_args, p_argument_count, r_return, r_error);
     PyGILState_Release(gil_state);
-    mtx.unlock();
+    functions::get_print_error()("after call", "test", "test", 1, 1);
 }
 
 
 GDExtensionBool c_instance_set(GDExtensionScriptInstanceDataPtr p_instance, GDExtensionConstStringNamePtr p_name, GDExtensionConstVariantPtr p_value){
-    mtx.lock();
+        print_error("_c_instance_set");
+    std::lock_guard<std::mutex> lock(mtx);
     auto gil_state = PyGILState_Ensure();
     auto ret = instance_set(p_instance, p_name, p_value);
     PyGILState_Release(gil_state);
-    mtx.unlock();
+
     return ret;
 }
 
 const GDExtensionPropertyInfo * c_instance_get_property_list(GDExtensionScriptInstanceDataPtr p_instance, uint32_t *r_count){
+        print_error("_c_instance_get_property_list");
     auto p_instance_data = (InstanceData*) p_instance;
     auto properties = p_instance_data->properties;
     *r_count = properties.size();
@@ -86,22 +85,26 @@ const GDExtensionPropertyInfo * c_instance_get_property_list(GDExtensionScriptIn
 }
 
 GDExtensionObjectPtr c_instance_get_script(GDExtensionScriptInstanceDataPtr p_instance){
+    print_error("_c_instance_get_script");
     auto p_instance_data = (InstanceData*) p_instance;
-    return ((PyScriptExtension*)(p_instance_data->script))->godot_owner;
+    PyScriptExtension* extension = (PyScriptExtension*)(p_instance_data->script);
+    print_error("extension");
+    return extension->godot_owner;
 }
 
 GDExtensionBool c_instance_has_method(GDExtensionScriptInstanceDataPtr p_instance, GDExtensionConstStringNamePtr p_name){
-
-    mtx.lock();
+    print_error("_c_instance_has_method");
+    std::lock_guard<std::mutex> lock(mtx);
     auto gil_state = PyGILState_Ensure();
     auto ret = instance_has_method(p_instance, p_name);
     PyGILState_Release(gil_state);
-    mtx.unlock();
+
     return ret;
 }
 
 
 void init_instance(GDExtensionScriptInstanceInfo* native_script_instance, bool is_placeholder){
+    print_error("init_instance");
     auto gil_state = PyGILState_Ensure();
     import_py4godot__script_instance__PyScriptInstance();
     if (PyErr_Occurred())
@@ -145,7 +148,6 @@ void init_instance(GDExtensionScriptInstanceInfo* native_script_instance, bool i
     native_script_instance->refcount_decremented_func = instance_ref_count_decremented;
     native_script_instance->get_script_func = instance_get_script;
     native_script_instance->get_language_func = instance_get_language;
-    native_script_instance->free_func = instance_free;
     p_interface->print_error("init_instance3", "test", "test",1,1);
     */
 }

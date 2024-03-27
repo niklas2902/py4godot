@@ -15,18 +15,17 @@
 #include <cassert>
 #include "Python.h"
 #include <mutex>
-#include <windows.h>
 #include <algorithm>
 
 std::mutex m;
-char buffer[MAX_PATH];
 
 GDExtensionPtrOperatorEvaluator operator_equal_string_namescript;
 PyScriptExtension extension;
 
 bool pluginscript_initialized = false;
 void init_pluginscript_api(){
-    mtx.lock();
+    print_error("_init_pluginscript_api");
+    std::lock_guard<std::mutex> lock(mtx);
     if (pluginscript_initialized){
         return;
     }
@@ -37,8 +36,6 @@ void init_pluginscript_api(){
     // Initialize interpreter but skip initialization registration of signal handlers
     Py_InitializeEx(0);
 
-    GetCurrentDirectoryA(MAX_PATH, buffer);
-    functions::get_print_error()(buffer, "test", "test", 1, 1);
     import_py4godot__pluginscript_api__utils__annotations();
     if (PyErr_Occurred())
     {
@@ -108,17 +105,19 @@ void init_pluginscript_api(){
 
     // Release the Kraken... er I mean the GIL !
     gilstate = PyEval_SaveThread();
-    mtx.unlock();
+
 }
 
 
-bool string_names_equal_script(StringName left, StringName right){
+bool string_names_equal_script(StringName& left, StringName& right){
+    print_error("stirng_names_equal_script");
     uint8_t ret;
     operator_equal_string_namescript(&left.godot_owner, &right.godot_owner, &ret);
     return ret != 0;
 }
 
   PyScriptExtension* PyScriptExtension::constructor(PyLanguage* language){
+    print_error("_constructor");
     PyScriptExtension* class_ = new PyScriptExtension();
 
     StringName class_name = c_string_to_string_name("PyScriptExtension");
@@ -132,6 +131,7 @@ bool string_names_equal_script(StringName left, StringName right){
 }
 
 void* create_instance_script(void* userdata){
+    print_error("create_instance_script");
     StringName class_name = c_string_to_string_name("ScriptExtension");
     class_name.shouldBeDeleted = false;
     auto gdnative_object = functions::get_classdb_construct_object()(&class_name.godot_owner);
@@ -142,9 +142,11 @@ void free_instance_script(void *p_userdata, GDExtensionClassInstancePtr p_instan
 void PyScriptExtension::_init_values(){}
 
 void PyScriptExtension::_editor_can_reload_from_file(GDExtensionTypePtr res){
+       print_error("_editor_can_reload_from_files");
     *(static_cast<bool*>(res)) = true;
 }
 void PyScriptExtension::_can_instantiate(GDExtensionTypePtr res){
+       print_error("_can_instantiate");
     Engine engine = Engine::get_instance();
     if (!engine.is_editor_hint()){
         *(bool*)res = true;
@@ -154,12 +156,21 @@ void PyScriptExtension::_can_instantiate(GDExtensionTypePtr res){
     }
 }
 
-void  PyScriptExtension::_get_base_script(GDExtensionTypePtr res){}
-void PyScriptExtension::_get_global_name(GDExtensionTypePtr res){}
-void PyScriptExtension::_inherits_script( Script* script, GDExtensionTypePtr res){}
-void PyScriptExtension::_get_instance_base_type(GDExtensionTypePtr res){}
+void  PyScriptExtension::_get_base_script(GDExtensionTypePtr res){
+       print_error("_get_base_script");
+}
+void PyScriptExtension::_get_global_name(GDExtensionTypePtr res){
+       print_error("_get_global_name");
+}
+void PyScriptExtension::_inherits_script( Script* script, GDExtensionTypePtr res){
+       print_error("_inherits_script");
+}
+void PyScriptExtension::_get_instance_base_type(GDExtensionTypePtr res){
+       print_error("_get_instance_base_type");
+}
 
 void PyScriptExtension::update_instance_data(InstanceData* gd_instance, PyObject* instance){
+   print_error("_update_instance_data");
     if(instance != nullptr){
         gd_instance->owner = instance;
     }
@@ -184,7 +195,9 @@ void PyScriptExtension::update_instance_data(InstanceData* gd_instance, PyObject
     }
 }
 void PyScriptExtension::_instance_create( Object& for_object, GDExtensionTypePtr res){
-    mtx.lock();
+    print_error("_instance_create");
+    functions::get_print_error()("instance_create", "test", "test", 1, 1);
+    std::lock_guard<std::mutex> lock(mtx);
     auto gil_state = PyGILState_Ensure();
     GDExtensionVariantFromTypeConstructorFunc constructor_func;
     GDExtensionScriptInstancePtr instance_ptr;
@@ -192,7 +205,7 @@ void PyScriptExtension::_instance_create( Object& for_object, GDExtensionTypePtr
     auto instance = instantiate_class(transfer_object.class_);
     if(instance == Py_None || instance == nullptr){
         assert(false);
-        mtx.unlock();
+
         return;
     }
     InstanceData* gd_instance = new InstanceData();
@@ -208,10 +221,11 @@ void PyScriptExtension::_instance_create( Object& for_object, GDExtensionTypePtr
     instance_ptr = functions::get_script_instance_create()(&(gd_instance->info), gd_instance);
     *((GDExtensionTypePtr*)res) = instance_ptr;
     PyGILState_Release(gil_state);
-    mtx.unlock();
+
 }
 void PyScriptExtension::_placeholder_instance_create( Object& for_object, GDExtensionTypePtr res){
-    mtx.lock();
+    print_error("_placeholder_instance_create");
+    std::lock_guard<std::mutex> lock(mtx);
     auto gil_state = PyGILState_Ensure();
     //for_object.get_class()
     GDExtensionVariantFromTypeConstructorFunc constructor_func;
@@ -220,7 +234,7 @@ void PyScriptExtension::_placeholder_instance_create( Object& for_object, GDExte
     InstanceData* gd_instance = new InstanceData();
     auto instance = instantiate_class(transfer_object.class_);
     if(instance == Py_None || instance == nullptr){
-        mtx.unlock();
+
         return;
     }
     gd_instance->is_placeholder = !transfer_object.is_tool;
@@ -237,43 +251,60 @@ void PyScriptExtension::_placeholder_instance_create( Object& for_object, GDExte
     auto instance_id = for_object.get_instance_id();
     ScriptDatabase::instance()->register_script(for_object.get_instance_id(), gd_instance->owner);
     PyGILState_Release(gil_state);
-    mtx.unlock();
+
 }
-void PyScriptExtension::_instance_has( Object& object, GDExtensionTypePtr res){}
-void PyScriptExtension::_has_source_code(GDExtensionTypePtr res){}
+void PyScriptExtension::_instance_has( Object& object, GDExtensionTypePtr res){
+    print_error("_instance_has");
+}
+void PyScriptExtension::_has_source_code(GDExtensionTypePtr res){
+    print_error("_has_source_code");
+}
 void PyScriptExtension::_get_source_code(GDExtensionTypePtr& res){
+    print_error("_get_source_code");
     functions::get_string_new_with_utf8_chars()(res, source_code.c_str());
 }
 void PyScriptExtension::_set_source_code( String& code, GDExtensionTypePtr res){
+    print_error("_set_source_code");
      char* c_source_code;
     gd_string_to_c_string(&code.godot_owner, code.length(), &c_source_code);
     this->source_code = std::string(c_source_code);
 }
 void PyScriptExtension::_reload( bool keep_state, GDExtensionTypePtr res){
-    mtx.lock();
+    print_error("_reload");
+    std::lock_guard<std::mutex> lock(mtx);
     auto source = c_string_to_string(source_code.c_str());
     _set_source_code_internal(source);
-    mtx.unlock();
+
 }
-void PyScriptExtension::_get_documentation(GDExtensionTypePtr res){}
+void PyScriptExtension::_get_documentation(GDExtensionTypePtr res){
+    print_error("_get_documentation");
+}
 void PyScriptExtension::_has_method( StringName& method, GDExtensionTypePtr res){
+    print_error("_has_method");
     *static_cast<bool*>(res) = false;
 }
 void PyScriptExtension::_get_method_info( StringName& method, GDExtensionTypePtr res){
+    print_error("_get_method_info");
 }
 void PyScriptExtension::_is_tool(GDExtensionTypePtr res){
+    print_error("_is_tool");
     *static_cast<bool*>(res) = false;
 }
 void PyScriptExtension::_is_valid(GDExtensionTypePtr res){
+    print_error("_is_valid");
     *static_cast<bool*>(res) = true;
 }
 void PyScriptExtension::_get_language(GDExtensionTypePtr res){
+    print_error("_PyScriptExtension_get_language");
     *((GDExtensionTypePtr*)res) = lang->godot_owner;
+    print_error("_PyScriptExtension_after_get_language");
 }
 void PyScriptExtension::_has_script_signal( StringName& signal, GDExtensionTypePtr res){
+    print_error("has_script_signal_list");
     *static_cast<bool*>(res) = false;
 }
 void PyScriptExtension::_get_script_signal_list(GDExtensionTypePtr res){
+    print_error("_get_script_signal_list");
     //auto res_array = Array::new_static(&res);
     int index;
     for (auto& signal_dict : transfer_object.signals) {
@@ -292,7 +323,7 @@ void PyScriptExtension::_get_property_default_value( StringName& property, GDExt
 void PyScriptExtension::_update_exports(GDExtensionTypePtr res){}
 void PyScriptExtension::_get_script_method_list(GDExtensionTypePtr res){}
 void PyScriptExtension::_get_script_property_list(GDExtensionTypePtr res){
-    functions::gdextension_interface_print_error("get_properties", "test", "test.py", 1, 1);
+    print_error("_get_script_property_list");
 }
 void PyScriptExtension::_get_member_line( StringName& member, GDExtensionTypePtr res){
     *static_cast<int*>(res) = 0;
@@ -304,6 +335,7 @@ void PyScriptExtension::_is_placeholder_fallback_enabled(GDExtensionTypePtr res)
 }
 void PyScriptExtension::_get_rpc_config(GDExtensionTypePtr res){}
 void PyScriptExtension::_set_source_code_internal(String& source_code){
+    print_error("_set_source_code_internal");
     char* c_source_code;
     gd_string_to_c_string(&source_code.godot_owner, source_code.length(), &c_source_code);
     this->source_code = std::string(c_source_code);
@@ -311,20 +343,19 @@ void PyScriptExtension::_set_source_code_internal(String& source_code){
 }
 
 void PyScriptExtension::apply_code(){
-    mtx.lock();
+    functions::get_print_error()("apply_code", "test", "test", 1, 1);
+    std::lock_guard<std::mutex> lock(mtx);
     auto gil_state = PyGILState_Ensure();
     auto source = PyUnicode_FromString(this->source_code.c_str());
     auto _path = PyUnicode_FromString(path.c_str());
     assert(source != nullptr);
     assert(_path != nullptr);
-    PyGILState_Release(gil_state);
     transfer_object = exec_class(source, _path);
-    gil_state = PyGILState_Ensure();
     for(auto p_instance:instance_datas){
         update_instance_data(p_instance, nullptr);
     }
     PyGILState_Release(gil_state);
-    mtx.unlock();
+
 }
 
 void PyScriptExtension::set_path( const char* path){
@@ -683,9 +714,12 @@ void call_virtual_func__get_rpc_config(GDExtensionClassInstancePtr p_instance, c
 GDExtensionClassCallVirtual get_virtual_script(void *p_userdata, GDExtensionConstStringNamePtr p_name) {
 
     StringName name = StringName::new_static(((void**)const_cast<GDExtensionTypePtr>(p_name))[0]);
-    auto test_str = String::new2(name);
-    test_str.shouldBeDeleted = false;
-    const char* c_name_str = gd_string_to_c_string(&test_str.godot_owner, test_str.length());
+    String name_string = String::new2(name);
+    char* res_string;
+    gd_string_to_c_string(name_string, name_string.length(), &res_string);
+
+    print_error("called function:");
+    print_error(res_string);
 
     if (string_names_equal_script(script::func_name__editor_can_reload_from_file, name)){
         return script::call_virtual_func__editor_can_reload_from_file;

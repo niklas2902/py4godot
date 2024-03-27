@@ -4,7 +4,6 @@ from py4godot.pluginscript_api.utils.helpers cimport *
 
 cdef class SignalArg:
     def __init__(self, name, type_):
-        print_error("SignalArg __init__")
         self.name = name
         self.variant_type = get_variant_type(type_)
 

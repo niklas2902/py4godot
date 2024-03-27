@@ -5,10 +5,6 @@
 #include "main.h"
 #include <vector>
 using namespace godot;
-void print_error(char* text){
-    char* text2 = text;
-    functions::get_print_error()(text2, "test", "test", 1, 1);
-}
 
 void create_signal_arg(const char* name, int variant_type, Array& args_dicts){
     Dictionary arg_dict = Dictionary::new0();
