@@ -118,7 +118,7 @@
     add_string_to_array(res, is_);
     add_string_to_array(res, await);
   }
-  void PyLanguage::_is_control_flow_keyword(String keyword, GDExtensionTypePtr res){
+  void PyLanguage::_is_control_flow_keyword(String& keyword, GDExtensionTypePtr res){
   print_error("_is_control_flow_keyword");
     const char* py_string = gd_string_to_c_string(&keyword.godot_owner, keyword.length());
     bool is_in_keywords = keywords.find(py_string) != keywords.end();
@@ -144,13 +144,13 @@
 
   }
 
-  void PyLanguage::_make_template(String template_, String class_name, String base_class_name,GDExtensionTypePtr res){
+  void PyLanguage::_make_template(String& template_, String& class_name, String& base_class_name,GDExtensionTypePtr res){
     print_error("_make_template");
     PyScriptExtension* extension_py = PyScriptExtension::constructor(this);
     *((void**)res) = extension_py->godot_owner;
   }
 
-  void PyLanguage::_get_built_in_templates(StringName object, GDExtensionTypePtr res){
+  void PyLanguage::_get_built_in_templates(StringName& object, GDExtensionTypePtr res){
     print_error("_get_built_int_templates");
   }
 
@@ -158,7 +158,7 @@
   print_error("_is_using_templates");
   }
 
-  void PyLanguage::_validate(String script, String path, bool validate_functions, bool validate_errors, bool validate_warnings, bool validate_safe_lines, GDExtensionTypePtr res){
+  void PyLanguage::_validate(String& script, String& path, bool validate_functions, bool validate_errors, bool validate_warnings, bool validate_safe_lines, GDExtensionTypePtr res){
     print_error("_validate");
     GDExtensionVariantPtr varptr;
     String key = c_string_to_string("valid");
@@ -170,7 +170,7 @@
     constructor_func_valid(value_var, &valid);
     }
 
-  void PyLanguage::_validate_path(String path, GDExtensionTypePtr res){
+  void PyLanguage::_validate_path(String& path, GDExtensionTypePtr res){
     print_error("_validate_path");
   }
 
@@ -199,15 +199,15 @@
     print_error("_can_inherit_from_file");
   };
 
-  void PyLanguage::_find_function(String class_name, String function_name, GDExtensionTypePtr res){
+  void PyLanguage::_find_function(String& class_name, String& function_name, GDExtensionTypePtr res){
     print_error("_find_function");
   }
 
-  void PyLanguage::_make_function(String class_name, String function_name, PackedStringArray function_args, GDExtensionTypePtr res){
+  void PyLanguage::_make_function(String& class_name, String& function_name, PackedStringArray& function_args, GDExtensionTypePtr res){
     print_error("_make_function");
   }
 
-  void PyLanguage::_open_in_external_editor(Script script, int line, int column, GDExtensionTypePtr res){
+  void PyLanguage::_open_in_external_editor(Script& script, int line, int column, GDExtensionTypePtr res){
     print_error("_open_in_external_editor");
   }
 
@@ -216,27 +216,27 @@
     *static_cast<uint8_t*>(res) = 0;
   }
 
-  void PyLanguage::_complete_code(String code, String path, Object owner, GDExtensionTypePtr res){
+  void PyLanguage::_complete_code(String& code, String& path, Object& owner, GDExtensionTypePtr res){
     print_error("_complete_code");
   }
 
-  void PyLanguage::_lookup_code(String code, String symbol, String path, Object owner, GDExtensionTypePtr res){
+  void PyLanguage::_lookup_code(String& code, String& symbol, String& path, Object& owner, GDExtensionTypePtr res){
     print_error("_lookup_code");
   }
 
-  void PyLanguage::_auto_indent_code(String code, int from_line, int to_line, GDExtensionTypePtr res){
+  void PyLanguage::_auto_indent_code(String& code, int from_line, int to_line, GDExtensionTypePtr res){
     print_error("_auto_indent_code");
   }
 
-  void PyLanguage::_add_global_constant(StringName name, Variant value, GDExtensionTypePtr res){
+  void PyLanguage::_add_global_constant(StringName& name, Variant& value, GDExtensionTypePtr res){
     print_error("_add_global_constant");
   }
 
-  void PyLanguage::_add_named_global_constant(StringName name, Variant value, GDExtensionTypePtr res){
+  void PyLanguage::_add_named_global_constant(StringName& name, Variant& value, GDExtensionTypePtr res){
     print_error("_add_named_global_constant");
   }
 
-  void PyLanguage::_remove_named_global_constant(StringName name, GDExtensionTypePtr res){
+  void PyLanguage::_remove_named_global_constant(StringName& name, GDExtensionTypePtr res){
     print_error("_remove_named_global_constnat");
   }
 
@@ -277,7 +277,7 @@
     print_error("_debug_get_globals");
   }
 
-  void PyLanguage::_debug_parse_stack_level_expression(int level, String expression, int max_subitems, int max_depth, GDExtensionTypePtr res){
+  void PyLanguage::_debug_parse_stack_level_expression(int level, String& expression, int max_subitems, int max_depth, GDExtensionTypePtr res){
     print_error("_debug_parse_stack_level_expression");
   }
 
@@ -290,7 +290,7 @@
     assert(false);
   }
 
-  void PyLanguage::_reload_tool_script(Script script, bool soft_reload, GDExtensionTypePtr res){}
+  void PyLanguage::_reload_tool_script(Script& script, bool soft_reload, GDExtensionTypePtr res){}
 
   void  PyLanguage::_get_recognized_extensions(GDExtensionTypePtr res){
     print_error("_get_recognized_extensions");
@@ -327,11 +327,11 @@
     print_error("_frame");
   }
 
-  void PyLanguage::_handles_global_class_type(String type, GDExtensionTypePtr res){
+  void PyLanguage::_handles_global_class_type(String& type, GDExtensionTypePtr res){
     print_error("_handles_global_class_type");
   }
 
-  void PyLanguage::_get_global_class_name(String path, GDExtensionTypePtr res){
+  void PyLanguage::_get_global_class_name(String& path, GDExtensionTypePtr res){
     print_error("_get_global_class_name");
     void* _args[1];
     GDExtensionPtrConstructor constructor = functions::get_variant_get_ptr_constructor()(GDExtensionVariantType::GDEXTENSION_VARIANT_TYPE_DICTIONARY, 0);

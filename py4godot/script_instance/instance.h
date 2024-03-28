@@ -13,7 +13,7 @@ GDExtensionScriptInstanceInfo native_script_instance;
 
 
 GDExtensionBool c_instance_get(GDExtensionScriptInstanceDataPtr p_instance, GDExtensionConstStringNamePtr p_name, GDExtensionVariantPtr r_ret){
-        print_error("_c_instance_get");
+    print_error("_c_instance_get");
     std::lock_guard<std::mutex> lock(mtx);
     auto gil_state = PyGILState_Ensure();
     InstanceData* instance = (InstanceData*)p_instance;
@@ -86,9 +86,9 @@ const GDExtensionPropertyInfo * c_instance_get_property_list(GDExtensionScriptIn
 
 GDExtensionObjectPtr c_instance_get_script(GDExtensionScriptInstanceDataPtr p_instance){
     print_error("_c_instance_get_script");
+    std::lock_guard<std::mutex> lock(mtx);
     auto p_instance_data = (InstanceData*) p_instance;
     PyScriptExtension* extension = (PyScriptExtension*)(p_instance_data->script);
-    print_error("extension");
     return extension->godot_owner;
 }
 

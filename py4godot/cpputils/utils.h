@@ -11,7 +11,7 @@ static bool is_none(PyObject* pyobject){
 }
 
 static void print_error(char* error_message){
-    functions::get_print_error()(error_message, "test", "test", 1, 1);
+    //functions::get_print_error()(error_message, "test", "test", 1, 1);
 }
 
 static const char* gd_string_to_c_string( GDExtensionConstStringPtr string_ptr, int length) {
@@ -20,7 +20,7 @@ static const char* gd_string_to_c_string( GDExtensionConstStringPtr string_ptr, 
     return native_string;
 }
 
-static void gd_string_to_c_string(String string, int length,  char** res_string) {
+static void gd_string_to_c_string(String& string, int length,  char** res_string) {
     *res_string = (char*)malloc(sizeof(char) * (length+1));
     functions::get_string_to_utf8_chars()(&string.godot_owner, *res_string, length);
     (*res_string)[length] = '\0';

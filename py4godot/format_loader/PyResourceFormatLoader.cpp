@@ -285,7 +285,7 @@ GDExtensionClassCallVirtual get_virtual_loader(void *p_userdata, GDExtensionCons
         char* res_string;
         gd_string_to_c_string(name_string, name_string.length(), &res_string);
 
-        print_error("called function:");
+        print_error("called function loader:");
         print_error(res_string);
 
 

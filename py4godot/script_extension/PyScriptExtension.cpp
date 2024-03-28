@@ -271,7 +271,6 @@ void PyScriptExtension::_set_source_code( String& code, GDExtensionTypePtr res){
 }
 void PyScriptExtension::_reload( bool keep_state, GDExtensionTypePtr res){
     print_error("_reload");
-    std::lock_guard<std::mutex> lock(mtx);
     auto source = c_string_to_string(source_code.c_str());
     _set_source_code_internal(source);
 
@@ -318,10 +317,18 @@ void PyScriptExtension::_get_script_signal_list(GDExtensionTypePtr res){
     }
 
 }
-void PyScriptExtension::_has_property_default_value( StringName& property, GDExtensionTypePtr res){}
-void PyScriptExtension::_get_property_default_value( StringName& property, GDExtensionTypePtr res){}
-void PyScriptExtension::_update_exports(GDExtensionTypePtr res){}
-void PyScriptExtension::_get_script_method_list(GDExtensionTypePtr res){}
+void PyScriptExtension::_has_property_default_value( StringName& property, GDExtensionTypePtr res){
+    print_error("_has_property_default_value");
+}
+void PyScriptExtension::_get_property_default_value( StringName& property, GDExtensionTypePtr res){
+    print_error("_get_property_default_value");
+}
+void PyScriptExtension::_update_exports(GDExtensionTypePtr res){
+    print_error("_update_exports");
+}
+void PyScriptExtension::_get_script_method_list(GDExtensionTypePtr res){
+    print_error("_get_script_method_list");
+}
 void PyScriptExtension::_get_script_property_list(GDExtensionTypePtr res){
     print_error("_get_script_property_list");
 }
@@ -718,7 +725,7 @@ GDExtensionClassCallVirtual get_virtual_script(void *p_userdata, GDExtensionCons
     char* res_string;
     gd_string_to_c_string(name_string, name_string.length(), &res_string);
 
-    print_error("called function:");
+    print_error("called function_script:");
     print_error(res_string);
 
     if (string_names_equal_script(script::func_name__editor_can_reload_from_file, name)){
