@@ -59,12 +59,11 @@ void c_instance_call(GDExtensionScriptInstanceDataPtr p_self, GDExtensionConstSt
     auto* p_instance = (InstanceData*)p_self;
     instance_call(p_self, p_method, p_args, p_argument_count, r_return, r_error);
     PyGILState_Release(gil_state);
-    functions::get_print_error()("after call", "test", "test", 1, 1);
 }
 
 
 GDExtensionBool c_instance_set(GDExtensionScriptInstanceDataPtr p_instance, GDExtensionConstStringNamePtr p_name, GDExtensionConstVariantPtr p_value){
-        print_error("_c_instance_set");
+    print_error("_c_instance_set");
     std::lock_guard<std::mutex> lock(mtx);
     auto gil_state = PyGILState_Ensure();
     auto ret = instance_set(p_instance, p_name, p_value);

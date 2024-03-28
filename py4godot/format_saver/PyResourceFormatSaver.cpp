@@ -38,8 +38,8 @@ void free_instance_saver(void *p_userdata, GDExtensionClassInstancePtr p_instanc
 void PyResourceFormatSaver::_init_values(){}
 
   void PyResourceFormatSaver::_save( Resource& resource, String& path, int flags, GDExtensionTypePtr res){
-    functions::get_print_error()("_save", "test", "test", 1, 1);
-    std::lock_guard<std::mutex> lock(mtx);
+    print_error("_save");
+    mtx.lock();
     Script script = Script::new_static(resource.godot_owner);
 
     auto source = script.get_source_code();
@@ -50,7 +50,7 @@ void PyResourceFormatSaver::_init_values(){}
     functions::get_object_destroy()(file.godot_owner);
 
     *((GDExtensionTypePtr*) res) = 0/*OK*/;
-
+    mtx.unlock();
     script.reload(false);//update if properties changed //TODO:Better place?
     }
   void PyResourceFormatSaver::_set_uid( String& path, int uid, GDExtensionTypePtr res){

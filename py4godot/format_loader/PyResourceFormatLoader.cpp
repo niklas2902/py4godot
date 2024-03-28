@@ -73,7 +73,6 @@ void PyResourceFormatLoader::_get_resource_script_class( String& path, GDExtensi
 }
 void PyResourceFormatLoader::_get_resource_uid( String& path, GDExtensionTypePtr res){
     print_error("get_resource_id");
-    functions::get_print_error()("get_resource_uid", "test", "test", 1, 1);
     *((std::int64_t*)res) = -1;
     String py = c_string_to_string("py");
     String pyw = c_string_to_string("pyw");
@@ -107,7 +106,7 @@ void PyResourceFormatLoader::_get_classes_used( String& path, GDExtensionTypePtr
     print_error("_get_classes_used");
 }
 void PyResourceFormatLoader::_load( String& path, String& original_path, bool use_sub_threads, int cache_mode, GDExtensionTypePtr res){
-    functions::get_print_error()("_load", "test", "test", 1, 1);
+    print_error("_load");
     GDExtensionVariantFromTypeConstructorFunc constructor_func;
     FileAccess file;
     {

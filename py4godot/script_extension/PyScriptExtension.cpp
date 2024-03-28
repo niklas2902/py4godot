@@ -350,7 +350,7 @@ void PyScriptExtension::_set_source_code_internal(String& source_code){
 }
 
 void PyScriptExtension::apply_code(){
-    functions::get_print_error()("apply_code", "test", "test", 1, 1);
+    print_error("apply_code");
     std::lock_guard<std::mutex> lock(mtx);
     auto gil_state = PyGILState_Ensure();
     auto source = PyUnicode_FromString(this->source_code.c_str());
