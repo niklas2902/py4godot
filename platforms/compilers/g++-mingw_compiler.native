@@ -1,0 +1,5 @@
+[binaries]
+cpp = ['x86_64-w64-mingw32-g++-posix']
+
+[properties]
+is_mingw = true

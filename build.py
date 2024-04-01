@@ -31,6 +31,7 @@ def cythonize_files():
 
 
 def generate_files():
+    pass
     # res = subprocess.Popen(f"python generate_classes.py", shell=True)
     # res.wait()
     # if res.returncode != 0:
@@ -50,10 +51,10 @@ def generate_files():
     # res.wait()
     # if res.returncode != 0:
     #    raise Exception("generation failed")
-    res = subprocess.Popen(f"python generate_classes_pyi.py", shell=True)
-    res.wait()
-    if res.returncode != 0:
-        raise Exception("generation failed")
+    #res = subprocess.Popen(f"python generate_classes_pyi.py", shell=True)
+    #res.wait()
+    #if res.returncode != 0:
+    #   raise Exception("generation failed")
     # res = subprocess.Popen(f"python cythonize_test.py", shell=True)
     # res.wait()
     # if res.returncode != 0:
@@ -134,6 +135,13 @@ msvc_init = f"vcvarsall.bat {'x86_amd64'} {command_separator} cl {command_separa
 res = None
 try:
     if os.path.exists(build_dir):
+        print("command:\n",
+              f"meson {build_dir} --cross-file platforms/{args.target_platform}.cross "
+              f"--cross-file platforms/compilers/{args.compiler}_compiler.native "
+              f"--cross-file platforms/binary_dirs/python_ver_compile.cross "
+              f"--buildtype=release"
+              f"{command_separator} meson compile -C build/{args.target_platform}"
+              )
         res = subprocess.Popen(msvc_init +
                                f"meson {build_dir} --cross-file platforms/{args.target_platform}.cross "
                                f"--cross-file platforms/compilers/{args.compiler}_compiler.native "
@@ -142,6 +150,13 @@ try:
                                f"{command_separator} meson compile -C build/{args.target_platform}",
                                shell=True)
     else:
+        print("command:\n",
+              f"meson {build_dir} --cross-file platforms/{args.target_platform}.cross "
+              f"--cross-file platforms/compilers/{args.compiler}_compiler.native "
+              f"--cross-file platforms/binary_dirs/python_ver_compile.cross "
+              f"--buildtype=release"
+              f"{command_separator} meson compile -C build/{args.target_platform}"
+              )
         res = subprocess.Popen(msvc_init +
                                f"meson {build_dir} --cross-file platforms/{args.target_platform}.cross "
                                f"--cross-file platforms/compilers/{args.compiler}_compiler.native "
