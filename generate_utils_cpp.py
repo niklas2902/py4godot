@@ -230,7 +230,12 @@ def generate_return_statement(method_):
     result += f"{INDENT * 2}return _ret;"
     return result
 
-
+def generate_ret_ptr(type_, _ret_name = "_ret"):
+    if type_ in builtin_classes - {"int", "float", "bool", "Nil"}:
+        return f"std::make_shared<{type_}>({_ret_name})"
+    if type_ in classes:
+        return f"std::make_shared<{type_}>({_ret_name})"
+    return _ret_name
 def generate_return_py_statement(method_):
     # TODO handle primitive types
     ret_val = None
@@ -242,7 +247,7 @@ def generate_return_py_statement(method_):
     if ret_val.type in builtin_classes - {"float", "int", "bool", "Nil"} or "typedarray::" in ret_val.type:
         result += f"{INDENT * 2}_ret.shouldBeDeleted=false;"
         result = generate_newline(result)
-    result += f"{INDENT * 2}return _ret;"
+    result += f"{INDENT * 2}return {generate_ret_ptr(ret_val.type, '_ret')};"
     return result
 
 def get_variant_type(class_name):
@@ -440,12 +445,20 @@ def generate_args_for_call(method_with_args, is_cpp=False):
         return result[:-2]
 
     for arg in method_with_args["arguments"]:
-        result += f"{pythonize_name(arg['name'])}, "
+        result += f"{unref_pointer(pythonize_name(arg['type']), pythonize_name(arg['name']))}, "
     result = result[:-2]
 
     if method_with_args["is_vararg"]:
         result += ", varargs "
     return result
+
+def unref_pointer(type_, value_name="value"):
+
+    if type_ in builtin_classes - {"int", "float", "bool", "Nil"}:
+        return f"*({value_name})"
+    if type_ in classes:
+        return f"({value_name}).get()"
+    return value_name
 
 
 def generate_py_method_body(method):
@@ -485,8 +498,14 @@ def unvarianttype(type_):
         return "PyObject*"
     return type_
 
-def generate_args(method_with_args, builtin_classes, is_cpp=False):
-    result = ""
+def make_ptr(type_):
+    if type_ in builtin_classes - {"int", "float", "bool", "Nil"}:
+        return f"std::shared_ptr<{type_}>"
+    if type_ in classes:
+        return f"std::shared_ptr<{type_}>"
+    return type_
+def generate_args(method_with_args, builtin_classes, is_cpp=False, should_make_shared=False):
+    result = " "
     if "arguments" not in method_with_args:
         if method_with_args["is_vararg"]:
             if not is_cpp:
@@ -499,9 +518,15 @@ def generate_args(method_with_args, builtin_classes, is_cpp=False):
         if arg["type"] not in builtin_classes and not arg["type"].startswith("enum::") and not arg["type"].startswith(
                 "bitfield::") and not arg["type"].startswith("typedarray::") \
                 and not arg["type"] == "Variant":
-            result += f"{unenumize_type(untypearray(unbitfield_type(arg['type'])))}* {pythonize_name(arg['name'])}, "
+            if should_make_shared:
+                result += f"{make_ptr(unenumize_type(untypearray(unbitfield_type(arg['type']))))} {pythonize_name(arg['name'])}, "
+            else:
+                result += f"{unenumize_type(untypearray(unbitfield_type(arg['type'])))}* {pythonize_name(arg['name'])}, "
         elif untypearray(arg["type"]) in builtin_classes - {"int", "float", "bool", "Nil"} or arg["type"] == "Variant":
-            result += f"{unenumize_type(untypearray(unbitfield_type(arg['type'])))}& {pythonize_name(arg['name'])}, "
+            if should_make_shared:
+                result += f"{make_ptr(unenumize_type(untypearray(unbitfield_type(arg['type']))))} {pythonize_name(arg['name'])}, "
+            else:
+                result += f"{unenumize_type(untypearray(unbitfield_type(arg['type'])))}& {pythonize_name(arg['name'])}, "
         elif arg["type"] in {"int", "float", "bool"}:
             result += f"{ungodottype(unenumize_type(untypearray(unbitfield_type(arg['type']))))} {pythonize_name(arg['name'])}, "
 
@@ -518,11 +543,13 @@ def generate_args(method_with_args, builtin_classes, is_cpp=False):
 
 
 def generate_method(mMethod):
+    class_ = None
     res = ""
     if has_native_struct(mMethod):
         return res
-    args = generate_args(mMethod, builtin_classes, True)
-    py_def_function = f"{INDENT}{unvarianttype(ungodottype(unenumize_type(untypearray(get_ret_value(mMethod)))))} godot::py_{pythonize_name(mMethod['name'])}({args})" + "{"
+    args = generate_args(mMethod, builtin_classes, True, False)
+    args_ptr = generate_args(mMethod, builtin_classes, True, True)
+    py_def_function = f"{INDENT}{make_ptr(unvarianttype(ungodottype(unenumize_type(untypearray(get_ret_value(mMethod))))))} godot::py_{pythonize_name(mMethod['name'])}({args_ptr})" + "{"
     res += py_def_function
     res = generate_newline(res)
     res += generate_py_method_body(mMethod)
@@ -544,6 +571,7 @@ def generate_method(mMethod):
     res += "}"
     res = generate_newline(res)
     return res
+
 
 
 def generate_ret_value_assign(argument):

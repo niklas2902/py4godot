@@ -15,3 +15,5 @@
 #        define FUNCTIONS_API extern "C" /*__declspec(dllimport)*/
 #    endif
 #endif
+
+#include<memory>

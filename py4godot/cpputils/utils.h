@@ -3,6 +3,7 @@
 #include "py4godot/godot_bindings/main.h"
 #include "Python.h"
 #include "functions.h"
+#include <memory>
 #include <stdlib.h>
 
 using namespace godot;
@@ -18,6 +19,13 @@ static const char* gd_string_to_c_string( GDExtensionConstStringPtr string_ptr, 
     char* native_string = (char*)malloc(sizeof(char) * (length));
     functions::get_string_to_utf8_chars()(string_ptr, native_string, length);
     return native_string;
+}
+
+#include <memory>
+
+template<typename From, typename To>
+static std::shared_ptr<To> my_static_pointer_cast(const std::shared_ptr<From>& from) {
+    return std::static_pointer_cast<To>(from);
 }
 
 static void gd_string_to_c_string(String& string, int length,  char** res_string) {
@@ -38,9 +46,23 @@ static StringName c_string_to_string_name(const char* string){
     StringName gd_string_name = StringName::new2(gd_string);
     return gd_string_name;
 }
+
+static std::shared_ptr<StringName> c_string_to_string_name_ptr(const char* string){
+    std::shared_ptr<String> gd_string = String::py_new0();
+    functions::get_string_new_with_utf8_chars()(&gd_string->godot_owner, string);
+    std::shared_ptr<StringName> gd_string_name = StringName::py_new2(gd_string);
+    return gd_string_name;
+}
 static String c_string_to_string(const char* string){
     String gd_string = String::new0();
     functions::get_string_new_with_utf8_chars()(&gd_string.godot_owner, string);
+    return gd_string;
+}
+
+static std::shared_ptr<String> c_string_to_string_ptr(const char* string){
+    std::shared_ptr<String> gd_string = String::py_new0();
+    functions::get_string_new_with_utf8_chars()(&gd_string->godot_owner, string);
+    gd_string->length();
     return gd_string;
 }
 

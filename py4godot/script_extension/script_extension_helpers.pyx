@@ -1,8 +1,9 @@
+from py4godot.utils.print_tools import *
+print_error("import script_extension_helpers")
 import traceback
 from py4godot.godot_bindings.binding4_godot4 cimport *
 cimport py4godot.classes.Node3D.Node3D as node3d
 from cpython cimport Py_INCREF, Py_DECREF, PyObject
-from py4godot.pluginscript_api.utils.utils cimport *
 
 instantiated_classes = []
 

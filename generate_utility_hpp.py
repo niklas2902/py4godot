@@ -279,21 +279,28 @@ def unvarianttype(type_):
         return "PyObject*"
     return type_
 
+def make_ptr(type_):
+    if type_ in builtin_classes - {"int", "float", "bool", "Nil"}:
+        return f"std::shared_ptr<{type_}>"
+    if type_ in classes:
+        return f"std::shared_ptr<{type_}>"
+    return type_
+
 
 def generate_method(mMethod):
     res = ""
     if has_native_struct(mMethod):
         return res
-    args = generate_args(mMethod, builtin_classes)
-    def_function = f"{INDENT}{generate_method_modifiers(mMethod)} {ungodottype(unenumize_type(untypearray(get_ret_value(mMethod))))} {pythonize_name(mMethod['name'])}({args});"
-    def_function2 = f"{INDENT}{INDENT}{generate_method_modifiers(mMethod)} {unvarianttype(ungodottype(unenumize_type(untypearray(get_ret_value(mMethod)))))} py_{pythonize_name(mMethod['name'])}({args});"
+    args = generate_args(mMethod, builtin_classes, should_make_shared=True)
+    args_normal = generate_args(mMethod, builtin_classes)
+    def_function = f"{INDENT}{generate_method_modifiers(mMethod)} {ungodottype(unenumize_type(untypearray(get_ret_value(mMethod))))} {pythonize_name(mMethod['name'])}({args_normal});"
+    def_function2 = f"{INDENT}{INDENT}{generate_method_modifiers(mMethod)} {make_ptr(unvarianttype(ungodottype(unenumize_type(untypearray(get_ret_value(mMethod))))))} py_{pythonize_name(mMethod['name'])}({args});"
     res = generate_newline(res)
     res += def_function
     res = generate_newline(res)
     res += def_function2
     res = generate_newline(res)
     return res
-
 
 def has_native_struct(method):
     if "return_value" in method.keys() or "return_type" in method.keys():
@@ -470,7 +477,8 @@ def ungodottype(type_):
     return type_
 
 
-def generate_args(method_with_args, builtin_classes, is_cpp=False):
+
+def generate_args(method_with_args, builtin_classes, is_cpp=False, should_make_shared=False):
     result = " "
     if "arguments" not in method_with_args:
         if method_with_args["is_vararg"]:
@@ -484,9 +492,15 @@ def generate_args(method_with_args, builtin_classes, is_cpp=False):
         if arg["type"] not in builtin_classes and not arg["type"].startswith("enum::") and not arg["type"].startswith(
                 "bitfield::") and not arg["type"].startswith("typedarray::") \
                 and not arg["type"] == "Variant":
-            result += f"{unenumize_type(untypearray(unbitfield_type(arg['type'])))}* {pythonize_name(arg['name'])}, "
+            if should_make_shared:
+                result += f"{make_ptr(unenumize_type(untypearray(unbitfield_type(arg['type']))))} {pythonize_name(arg['name'])}, "
+            else:
+                result += f"{unenumize_type(untypearray(unbitfield_type(arg['type'])))}* {pythonize_name(arg['name'])}, "
         elif untypearray(arg["type"]) in builtin_classes - {"int", "float", "bool", "Nil"} or arg["type"] == "Variant":
-            result += f"{unenumize_type(untypearray(unbitfield_type(arg['type'])))}& {pythonize_name(arg['name'])}, "
+            if should_make_shared:
+                result += f"{make_ptr(unenumize_type(untypearray(unbitfield_type(arg['type']))))} {pythonize_name(arg['name'])}, "
+            else:
+                result += f"{unenumize_type(untypearray(unbitfield_type(arg['type'])))}& {pythonize_name(arg['name'])}, "
         elif arg["type"] in {"int", "float", "bool"}:
             result += f"{ungodottype(unenumize_type(untypearray(unbitfield_type(arg['type']))))} {pythonize_name(arg['name'])}, "
 

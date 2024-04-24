@@ -40,10 +40,10 @@ cdef class PropertyDescription:
         """
         init_property_description( self.property_info,
                                 self.type_,
-                                self.gd_name.StringName_internal_class,
-                                self.class_name.StringName_internal_class,
+                                self.gd_name.StringName_internal_class_ptr.get()[0],
+                                self.class_name.StringName_internal_class_ptr.get()[0],
                                 self.hint,
-                                self.hint_string.String_internal_class,
+                                self.hint_string.String_internal_class_ptr.get()[0],
                                 self.usage)
 
 

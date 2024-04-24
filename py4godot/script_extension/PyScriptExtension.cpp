@@ -25,7 +25,7 @@ PyScriptExtension extension;
 bool pluginscript_initialized = false;
 void init_pluginscript_api(){
     print_error("_init_pluginscript_api");
-    std::lock_guard<std::mutex> lock(mtx);
+
     if (pluginscript_initialized){
         return;
     }
@@ -147,8 +147,8 @@ void PyScriptExtension::_editor_can_reload_from_file(GDExtensionTypePtr res){
 }
 void PyScriptExtension::_can_instantiate(GDExtensionTypePtr res){
        print_error("_can_instantiate");
-    Engine engine = Engine::get_instance();
-    if (!engine.is_editor_hint()){
+    std::shared_ptr<Engine> engine = Engine::get_instance();
+    if (!engine->is_editor_hint()){
         *(bool*)res = true;
     }
     else{
@@ -197,7 +197,6 @@ void PyScriptExtension::update_instance_data(InstanceData* gd_instance, PyObject
 void PyScriptExtension::_instance_create( Object& for_object, GDExtensionTypePtr res){
     print_error("_instance_create");
     functions::get_print_error()("instance_create", "test", "test", 1, 1);
-    std::lock_guard<std::mutex> lock(mtx);
     auto gil_state = PyGILState_Ensure();
     GDExtensionVariantFromTypeConstructorFunc constructor_func;
     GDExtensionScriptInstancePtr instance_ptr;
@@ -225,7 +224,7 @@ void PyScriptExtension::_instance_create( Object& for_object, GDExtensionTypePtr
 }
 void PyScriptExtension::_placeholder_instance_create( Object& for_object, GDExtensionTypePtr res){
     print_error("_placeholder_instance_create");
-    std::lock_guard<std::mutex> lock(mtx);
+
     auto gil_state = PyGILState_Ensure();
     //for_object.get_class()
     GDExtensionVariantFromTypeConstructorFunc constructor_func;
@@ -351,7 +350,7 @@ void PyScriptExtension::_set_source_code_internal(String& source_code){
 
 void PyScriptExtension::apply_code(){
     print_error("apply_code");
-    std::lock_guard<std::mutex> lock(mtx);
+
     auto gil_state = PyGILState_Ensure();
     auto source = PyUnicode_FromString(this->source_code.c_str());
     auto _path = PyUnicode_FromString(path.c_str());
@@ -719,6 +718,7 @@ void call_virtual_func__get_rpc_config(GDExtensionClassInstancePtr p_instance, c
 
 
 GDExtensionClassCallVirtual get_virtual_script(void *p_userdata, GDExtensionConstStringNamePtr p_name) {
+    std::lock_guard<std::mutex> lock(mtx);
 
     StringName name = StringName::new_static(((void**)const_cast<GDExtensionTypePtr>(p_name))[0]);
     String name_string = String::new2(name);

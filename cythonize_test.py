@@ -15,6 +15,7 @@ if __name__ == "__main__":
     cythonize("py4godot/core/variant4/Variant4.pyx", language_level=3, language="c++")
     cythonize("py4godot/core/variant4/type_helpers.pyx", language_level=3, language="c++")
     cythonize("py4godot/core/variant4/cast_helpers.pyx", language_level=3, language="c++")
+    cythonize("py4godot/classes/Object/Object.pyx", language_level=3, language="c++", nthreads=6)
     cythonize("py4godot/classes/*.pyx", language_level=3, language="c++", nthreads=6)
     cythonize("py4godot/classes/*/*.pyx", language_level=3, language="c++", nthreads=6)
     cythonize("py4godot/script_instance/*.pyx", language_level=3, language="c++")

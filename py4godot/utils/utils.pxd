@@ -1,12 +1,17 @@
 from py4godot.godot_bindings.binding4_godot4 cimport *
 cimport py4godot.classes.generated4_core as core
 cimport py4godot.classes.cpp_bridge as bridge
+from libcpp.memory cimport shared_ptr
 cdef extern from "py4godot/cpputils/utils.h":
     bridge.StringName c_string_to_string_name(const char* string)
     bridge.String c_string_to_string(const char* string)
     #const char * gd_string_to_c_string( bridge.String string, int length)
     void gd_string_to_c_string(bridge.String string, int length, char** res_string)
     bool is_none(PyObject* py_object)
+    shared_ptr[To] my_static_pointer_cast[From,To](const shared_ptr[From]& ptr) except +
+    shared_ptr[bridge.String] c_string_to_string_ptr(const char* string)
+    shared_ptr[bridge.StringName] c_string_to_string_name_ptr(const char* string)
+
 cdef extern from "py4godot/cpputils/ScriptHolder.h":
     PyObject* get_py_script(int id)
 

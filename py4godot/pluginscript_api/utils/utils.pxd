@@ -17,7 +17,7 @@ cdef extern from "help_types.h":
         GDExtensionVariantType type;
 
 cdef extern from "py4godot/pluginscript_api/utils/signal_description_utils.h":
-    Dictionary init_signal_description(char* name, vector[CPPSignalArg] args)
+    shared_ptr[Dictionary] init_signal_description(char* name, vector[CPPSignalArg] args)
     void print_error(char* text)
 
 cdef extern from "py4godot/pluginscript_api/utils/property_description_utils.h":

@@ -984,16 +984,17 @@ void call_virtual_func__get_global_class_name(GDExtensionClassInstancePtr p_inst
 StringName func_name__get_global_class_name;
 
 GDExtensionClassCallVirtual get_virtual(void *p_userdata, GDExtensionConstStringNamePtr p_name) {
-    
+    std::lock_guard<std::mutex> lock(mtx);
+
     StringName name = StringName::new_static(((void**)const_cast<GDExtensionTypePtr>(p_name))[0]);
 
-        String name_string = String::new2(name);
+    String name_string = String::new2(name);
 
-        char* res_string;
-        gd_string_to_c_string(name_string, name_string.length(), &res_string);
+    char* res_string;
+    gd_string_to_c_string(name_string, name_string.length(), &res_string);
 
-        print_error("called function:");
-        print_error(res_string);
+    print_error("called function:");
+    print_error(res_string);
 
     if (string_names_equal(func_name__get_name, name)){
         return call_virtual_func__get_name;

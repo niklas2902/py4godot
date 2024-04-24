@@ -27,9 +27,9 @@ void create_signal_arg(const char* name, int variant_type, Array& args_dicts){
 }
 
 
-Dictionary init_signal_description(char* name, std::vector<CPPSignalArg> args){
-    auto signal_dict =  Dictionary::py_new0();
-
+std::shared_ptr<Dictionary> init_signal_description(char* name, std::vector<CPPSignalArg> args){
+    auto signal_dict =  Dictionary::new0();
+    signal_dict.shouldBeDeleted=false;
     String signal_key = c_string_to_string("name");
     Variant signal_key_variant = Variant(signal_key);
     auto temp_name = c_string_to_string(name);
@@ -44,8 +44,10 @@ Dictionary init_signal_description(char* name, std::vector<CPPSignalArg> args){
     Variant arg_key_variant = Variant(arg_key);
     Variant var_args = Variant::new_static(functions::get_dictionary_operator_index()(&signal_dict.godot_owner, &arg_key_variant.native_ptr));
 
-    Array args_array = Array::py_new0();
-    Dictionary dictionary_signal_args = Dictionary::py_new0();
+    Array args_array = Array::new0();
+    args_array.shouldBeDeleted=false;
+    Dictionary dictionary_signal_args = Dictionary::new0();
+    dictionary_signal_args.shouldBeDeleted=false;
     Variant dictionary_var = Variant(1);
     auto type_name = c_string_to_string_name("");
     functions::get_array_set_typed()(&args_array.godot_owner, GDExtensionVariantType::GDEXTENSION_VARIANT_TYPE_DICTIONARY,  &type_name.godot_owner, &dictionary_var.native_ptr);
@@ -58,6 +60,7 @@ Dictionary init_signal_description(char* name, std::vector<CPPSignalArg> args){
 
     //add args dictionaries to args array
     var_args.init_type(args_array);
+    auto signal_dict_ptr = std::make_shared<Dictionary>(signal_dict);
 
-    return signal_dict;
+    return signal_dict_ptr;
 }

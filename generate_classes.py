@@ -86,10 +86,12 @@ def ungodottype(type_):
 def generate_import():
     result = ("from py4godot.core.variant4.Variant4 cimport *\n"
               "from libcpp cimport bool\n"
+              #"from libcpp.memory cimport static_pointer_cast\n"
               "from libcpp.vector cimport vector\n"
               "from py4godot.enums.enums4 cimport *\n"
               "from py4godot.utils.utils cimport *\n"
-              "from py4godot.classes.typedarrays cimport *\n")
+              "from py4godot.classes.typedarrays cimport *\n"
+              "from libcpp.memory cimport make_shared\n")
     return result
 
 
@@ -145,9 +147,9 @@ def generate_constructor_call_args(constructor):
     for arg in constructor["arguments"]:
         if arg["type"] in classes - IGNORED_CLASSES:
             if arg["type"] == "String":
-                result += f"py_c_string_to_string({pythonize_name(arg['name'])}.encode('utf-8')).{untypearray(arg['type'])}_internal_class, "
+                result += f"py_c_string_to_string({pythonize_name(arg['name'])}.encode('utf-8')).{untypearray(arg['type'])}_internal_class_ptr, "
             else:
-                result += f"{pythonize_name(arg['name'])}.{arg['type']}_internal_class, "
+                result += f"{pythonize_name(arg['name'])}.{arg['type']}_internal_class_ptr, "
         elif arg["type"] == "Variant":
             result += f"{convert_to_variant(pythonize_name(arg['name']))}.variant, "
         else:
@@ -170,7 +172,7 @@ def generate_constructors(class_):
             res = generate_newline(res)
         res += f"{INDENT * 2}cdef {class_['name']} _class = {class_['name']}.__new__({class_['name']})"
         res = generate_newline(res)
-        res += f"{INDENT * 2}_class.{class_['name']}_internal_class = (CPP{class_['name']}.py_new{constructor['index']}({generate_constructor_call_args(constructor)}))"
+        res += f"{INDENT * 2}_class.{class_['name']}_internal_class_ptr = (CPP{class_['name']}.py_new{constructor['index']}({generate_constructor_call_args(constructor)}))"
         res = generate_newline(res)
         res += f"{INDENT * 2}return _class"
         res = generate_newline(res)
@@ -270,7 +272,7 @@ def generate_return_statement(method_):
             result += f"{INDENT * 2}return <object>_ret"
         else:
             if ret_val.type in classes - builtin_classes:
-                result = f"{INDENT * 2}return None if _ret.{ret_val.type}_internal_class.get_godot_owner() == NULL else _ret"
+                result = f"{INDENT * 2}return None if _ret.{ret_val.type}_internal_class_ptr.get().get_godot_owner() == NULL else _ret"
             else:
                 result = ""
                 result += f"{INDENT * 2}return _ret"
@@ -287,7 +289,7 @@ def generate_singleton_constructor(classname):
 
     res += f"{INDENT * 2}cdef {classname} singleton = {classname}()"
     res = generate_newline(res)
-    res += f"{INDENT * 2}singleton.{classname}_internal_class = CPP{classname}.get_instance()"
+    res += f"{INDENT * 2}singleton.{classname}_internal_class_ptr = CPP{classname}.get_instance()"
     res = generate_newline(res)
     res += f"{INDENT * 2}return singleton"
     res = generate_newline(res)
@@ -504,18 +506,34 @@ def generate_ret_call(method_):
             if ret_val.type in {"int", "float", "bool"}:
                 result += f"_ret"
             elif ret_val.type in builtin_classes:
-                result += f"{ret_val.name}.{ret_val.type}_internal_class"
+                result += f"{ret_val.name}.{ret_val.type}_internal_class_ptr"
             else:
-                result += f"{ret_val.name}.{ret_val.type}_internal_class"
+                result += f"{ret_val.name}.{ret_val.type}_internal_class_ptr"
         elif ret_val.type == "Variant":
             result += f"_ret"
         elif "typedarray" in ret_val.type:
-            result += f"_ret.{untypearray(ret_val.type)}_internal_class"
+            result += f"_ret.{untypearray(ret_val.type)}_internal_class_ptr"
         else:
             result += f"_ret"
     else:
         result += f"_ret"
     return result
+
+def generate_ret_ptr_cast(method):
+    if "return_value" in method.keys() or "return_type" in method.keys():
+        if ("return_value" in method.keys()):
+            ret_val = ReturnType("_ret", method['return_value']['type'])
+        else:
+            ret_val = ReturnType("_ret", method['return_type'])
+        if ret_val.type in classes - builtin_classes:
+            return f"{cast_from_type_to_obj(ret_val.type)}"
+        elif ret_val.type in builtin_classes - {"bool", "int", "float"}:
+            return f""
+        elif ret_val.type == "Variant":
+            return ""
+        elif "typedarray::" in ret_val.type:
+            return f""
+        return ""
 
 
 def generate_set_gd_owner_for_ret(method):
@@ -527,9 +545,9 @@ def generate_set_gd_owner_for_ret(method):
             ret_val = ReturnType("_ret", method['return_type'])
         if ret_val.type in classes:
             if ret_val.type in builtin_classes:
-                result += f"{INDENT * 2}{ret_val.name}.set_gdowner({ret_val.name}.{ret_val.type}_internal_class.get_godot_owner())"
+                result += f"{INDENT * 2}{ret_val.name}.set_gdowner({ret_val.name}.{ret_val.type}_internal_class_ptr.get().get_godot_owner())"
             else:
-                result += f"{INDENT * 2}{ret_val.name}.set_gdowner({ret_val.name}.{ret_val.type}_internal_class.get_godot_owner())"
+                result += f"{INDENT * 2}{ret_val.name}.set_gdowner({ret_val.name}.{ret_val.type}_internal_class_ptr.get().get_godot_owner())"
         result = generate_newline(result)
     return result
 
@@ -579,6 +597,15 @@ def generate_variants(method):
             result = generate_newline(result)
     return result
 
+def cast_from_obj_to_type(typename):
+    if typename in classes - builtin_classes and typename != "Object":
+        return f"my_static_pointer_cast[CPPObject,CPP{typename}]"
+    return ""
+
+def cast_from_type_to_obj(typename):
+    if typename in classes - builtin_classes and typename!="Object":
+        return f"my_static_pointer_cast [CPP{typename}, CPPObject ]"
+    return ""
 
 def generate_method_body_standard(class_, method):
     number_arguments = 0
@@ -597,7 +624,7 @@ def generate_method_body_standard(class_, method):
         result += generate_return_value(class_["name"], method)
         if not is_static(method):
 
-            result += f"{INDENT * 2}{generate_ret_call(method)} = self.{class_['name']}_internal_class.py_{pythonize_name(method['name'])}({generate_method_args(method)})"
+            result += f"{INDENT * 2}{generate_ret_call(method)} = self.{class_['name']}_internal_class_ptr.get().py_{pythonize_name(method['name'])}({generate_method_args(method)})"
             result = generate_newline(result)
             result += generate_set_gd_owner_for_ret(method)
         else:
@@ -608,11 +635,15 @@ def generate_method_body_standard(class_, method):
         result += generate_return_statement(method)
     else:
         if not is_static(method):
-            result += f"{INDENT * 2}self.{class_['name']}_internal_class.py_{pythonize_name(method['name'])}({generate_method_args(method)})"
+            result += f"{INDENT * 2}self.{class_['name']}_internal_class_ptr.get().py_{pythonize_name(method['name'])}({generate_method_args(method)})"
         else:
             result += f"{INDENT * 2}CPP{class_['name']}.py_{pythonize_name(method['name'])}({generate_method_args(method)})"
     return result
 
+def shared_ptr_type(classname):
+    if classname in builtin_classes or classname in typed_arrays_names:
+        return "CPP"+classname
+    return "CPPObject"
 
 def generate_method_args(method):
     res = ""
@@ -622,14 +653,14 @@ def generate_method_args(method):
         return res
     for arg in method["arguments"]:
         if untypearray(arg["type"]) in classes - IGNORED_CLASSES - builtin_classes:
-            res += f"&{pythonize_name(arg['name'])}.{untypearray(arg['type'])}_internal_class if {pythonize_name(arg['name'])} != None else NULL, "
+            res += f"{pythonize_name(arg['name'])}.{untypearray(arg['type'])}_internal_class_ptr if {pythonize_name(arg['name'])} != None else {pythonize_name(arg['name'])}.{untypearray(arg['type'])}_internal_class_ptr, " # Todo: implement conditional
         elif untypearray(arg["type"]) in builtin_classes - IGNORED_CLASSES:
             if arg["type"] == "String":
-                res += f"py_c_string_to_string({pythonize_name(arg['name'])}.encode('utf-8')).{untypearray(arg['type'])}_internal_class, "
+                res += f"py_c_string_to_string({pythonize_name(arg['name'])}.encode('utf-8')).{untypearray(arg['type'])}_internal_class_ptr, "
             else:
-                res += f"{pythonize_name(arg['name'])}.{untypearray(arg['type'])}_internal_class, "
+                res += f"{pythonize_name(arg['name'])}.{untypearray(arg['type'])}_internal_class_ptr, "
         elif "TypedArray" in untypearray(arg["type"]):
-            res += f"{pythonize_name(arg['name'])}.{untypearray(arg['type'])}_internal_class, "
+            res += f"{pythonize_name(arg['name'])}.{untypearray(arg['type'])}_internal_class_ptr, "
         elif arg["type"] == "Variant":
             res += f"variant_{(pythonize_name(arg['name']))}, "
         else:
@@ -686,6 +717,24 @@ def generate_init(class_):
     res = generate_newline(res)
     return res
 
+def generate_cinit(class_):
+    res = ""
+    res = generate_newline(res)
+    res += f"{INDENT}def __cinit__(self):"
+    res = generate_newline(res)
+    res += f"{INDENT*2}self.{class_['name']}_internal_class_ptr = make_shared[CPP{class_['name']}]()"
+    res = generate_newline(res)
+
+    if "inherits" in class_.keys():
+        cls = find_class(class_["inherits"])
+        while cls:
+            res += f"{INDENT * 2}self.{cls['name']}_internal_class_ptr = make_shared[CPP{cls['name']}]()"
+            res = generate_newline(res)
+            if "inherits" not in cls.keys():
+                break
+            cls = find_class(cls["inherits"])
+    res = generate_newline(res)
+    return res
 
 def generate_common_methods(class_):
     result = ""
@@ -701,6 +750,7 @@ def generate_common_methods(class_):
     if class_["name"] == "Object":
         result += generate_get_py_script_method()
 
+    result += generate_cinit(class_)
     result += generate_new_static(class_)
     result += generate_del(class_)
 
@@ -725,9 +775,9 @@ def generate_get_py_script_method():
     result = generate_newline(result)
     result += f"{INDENT * 2}cdef String _ret = String.__new__(String)"
     result = generate_newline(result)
-    result += f"{INDENT * 2}_ret.String_internal_class = self.Object_internal_class.get_import_path()"
+    result += f"{INDENT * 2}_ret.String_internal_class_ptr = self.Object_internal_class_ptr.get().get_import_path()"
     result = generate_newline(result)
-    result += f"{INDENT * 2}_ret.set_gdowner(_ret.String_internal_class.get_godot_owner())"
+    result += f"{INDENT * 2}_ret.set_gdowner(_ret.String_internal_class_ptr.get().get_godot_owner())"
     result = generate_newline(result)
     result += f"{INDENT * 2}return gd_string_to_py_string(_ret)"
     result = generate_newline(result)
@@ -744,12 +794,12 @@ def generate_new_static(class_):
     res = ""
     res += f"{INDENT * 1}cdef void set_gdowner(self, void* owner):"
     res = generate_newline(res)
-    res += f"{INDENT * 2}self.{class_['name']}_internal_class.set_gdowner_{class_['name']}(owner)"
+    res += f"{INDENT * 2}self.{class_['name']}_internal_class_ptr.get().set_gdowner_{class_['name']}(owner)"
     res = generate_newline(res)
     if "inherits" in class_.keys():
         cls = find_class(class_["inherits"])
         while cls:
-            res += f"{INDENT * 2}self.{cls['name']}_internal_class.set_gdowner_{cls['name']}(owner)"
+            res += f"{INDENT * 2}self.{cls['name']}_internal_class_ptr.get().set_gdowner_{cls['name']}(owner)"
             res = generate_newline(res)
             if "inherits" not in cls.keys():
                 break
@@ -791,12 +841,12 @@ def generate_member_getter(class_, member):
     if member.type_ != "int" and member.type_ != "float" and member.type_ != "double":
         body += f"{INDENT * 2}cdef {member.type_} _ret = {member.type_}()"
         body = generate_newline(body)
-        body += f"{INDENT * 2}_ret.{member.type_}_internal_class = self.{class_}_internal_class.py_member_get_{member.name}()"
+        body += f"{INDENT * 2}_ret.{member.type_}_internal_class_ptr = self.{class_}_internal_class_ptr.get().py_member_get_{member.name}()"
         body = generate_newline(body)
-        body += f"{INDENT * 2}_ret.set_gdowner(_ret.{member.type_}_internal_class.get_godot_owner())"
+        body += f"{INDENT * 2}_ret.set_gdowner(_ret.{member.type_}_internal_class_ptr.get().get_godot_owner())"
         body = generate_newline(body)
     else:
-        body += f"{INDENT * 2}cdef {member.type_} _ret = self.{class_}_internal_class.py_member_get_{member.name}()"
+        body += f"{INDENT * 2}cdef {member.type_} _ret = self.{class_}_internal_class_ptr.get().py_member_get_{member.name}()"
     body = generate_newline(body)
     body += f"{INDENT * 2}return _ret"
     body = generate_newline(body)
@@ -819,9 +869,9 @@ def generate_member_setter(class_, member):
 
     body = ""
     if member.type_ != "int" and member.type_ != "float" and member.type_ != "double":
-        body += f"{INDENT * 2}self.{class_}_internal_class.py_member_set_{member.name}(value.{member.type_}_internal_class)"
+        body += f"{INDENT * 2}self.{class_}_internal_class_ptr.get().py_member_set_{member.name}(value.{member.type_}_internal_class_ptr)"
     else:
-        body += f"{INDENT * 2}self.{class_}_internal_class.py_member_set_{member.name}(value)"
+        body += f"{INDENT * 2}self.{class_}_internal_class_ptr.get().py_member_set_{member.name}(value)"
     body = generate_newline(body)
     res += body
 
@@ -1097,9 +1147,9 @@ def generate_constructor(classname):
     res = generate_newline(res)
     res += f"{INDENT * 2}cdef {classname} class_ = {classname}()"
     res = generate_newline(res)
-    res += f"{INDENT * 2}class_.{class_['name']}_internal_class = CPP{class_['name']}.constructor()"
+    res += f"{INDENT * 2}class_.{class_['name']}_internal_class_ptr = CPP{class_['name']}.constructor()"
     res = generate_newline(res)
-    res += f"{INDENT * 2}class_.set_gdowner(class_.{class_['name']}_internal_class.get_godot_owner())"
+    res += f"{INDENT * 2}class_.set_gdowner(class_.{class_['name']}_internal_class_ptr.get().get_godot_owner())"
     res = generate_newline(res)
 
     res += f"{INDENT * 2}return class_"
@@ -1124,17 +1174,18 @@ def init_return_type(return_type):
         return f"{return_type}()"
 
 
-def address_param(name, target):
+def address_param(name, target, shouldReturnCPtr):
+    appendix = ".get()" if shouldReturnCPtr else ""
     if target in builtin_classes - {"int", "float", "bool", "Nil"}:
         if name != "self":
-            return f"complex_val_{target}.{target}_internal_class"
+            return f"complex_val_{target}.{target}_internal_class_ptr{appendix}"
         else:
-            return f"self_val.{target}_internal_class"
+            return f"self_val.{target}_internal_class_ptr{appendix}"
     elif target == "Object":
         if name != "self":
-            return f"complex_val_{target}.{target}_internal_class"
+            return f"complex_val_{target}.{target}_internal_class_ptr{appendix}"
         else:
-            return f"self_val.{target}_internal_class"
+            return f"self_val.{target}_internal_class_ptr{appendix}"
     if target == "Variant":
         return "complex_val_variant.variant"
     if target == "int":
@@ -1211,12 +1262,12 @@ def generate_operators_for_class(class_name):
                     res += f"{INDENT * 3}handled = True"
                     res = generate_newline(res)
                     if op.return_type in builtin_classes - {"float", "int", "bool"}:
-                        res += f"{INDENT * 3}_ret.{op.return_type}_internal_class = {address_param('self', class_name)}.py_operator_{operator_to_python_name(operator)}({address_param('other', target)})"
+                        res += f"{INDENT * 3}_ret.{op.return_type}_internal_class_ptr = {address_param('self', class_name, True)}.py_operator_{operator_to_python_name(operator)}({address_param('other', target, False)})"
                     elif op.return_type in {"Variant", "PyVariant",
                                             "object"}:  # I don't know the correct type, use only one
-                        res += f"{INDENT * 3}_ret = {address_param('self', class_name)}.py_operator_{operator_to_python_name(operator)}({address_param('other', target)}).get_converted_value()"
+                        res += f"{INDENT * 3}_ret = {address_param('self', class_name, True)}.py_operator_{operator_to_python_name(operator)}({address_param('other', target, False)}).get_converted_value()"
                     else:
-                        res += f"{INDENT * 3}_ret = {address_param('self', class_name)}.py_operator_{operator_to_python_name(operator)}({address_param('other', target)})"
+                        res += f"{INDENT * 3}_ret = {address_param('self', class_name, True)}.py_operator_{operator_to_python_name(operator)}({address_param('other', target, False)})"
                     res = generate_newline(res)
 
                 res += f"{INDENT * 2}if not handled:"
@@ -1260,6 +1311,15 @@ def generate_classes(classes, filename, is_core=False, is_typed_array=False):
                 continue
             res += f"cimport py4godot.classes.{cls}.{cls} as py4godot_{cls.lower()} "
             res = generate_newline(res)
+
+        if "inherits" in classes[0].keys():
+            cls = find_class(classes[0]["inherits"])
+            while cls:
+                res += f"from py4godot.classes.cpp_bridge cimport {cls['name']} as CPP{cls['name']} "
+                res = generate_newline(res)
+                if "inherits" not in cls.keys():
+                    break
+                cls = find_class(cls["inherits"])
     else:
         res += f"from py4godot.classes.Object.Object cimport *"
         res = generate_newline(res)
@@ -1297,7 +1357,7 @@ def generate_dictionary_set_item():
     res = ""
     res += f"{INDENT}def __setitem__(self, key, value):"
     res = generate_newline(res)
-    res += f"{INDENT * 2}cdef Variant var = self.Dictionary_internal_class[create_variant_from_py_object(key).variant]"
+    res += f"{INDENT * 2}cdef Variant var = self.Dictionary_internal_class_ptr.get()[0][create_variant_from_py_object(key).variant]"
     res = generate_newline(res)
     res += f"{INDENT * 2}cdef str typename = str(type(value).__name__)"
     res = generate_newline(res)
@@ -1313,7 +1373,7 @@ def generate_dictionary_get_item():
     res = generate_newline(res)
     res += f"{INDENT * 3}raise KeyError(f\"Key '%s' not found\")".replace("%s", "{key}")
     res = generate_newline(res)
-    res += f"{INDENT * 2}cdef PyObject * pyobject = self.Dictionary_internal_class[create_variant_from_py_object(key).variant].get_converted_value(True)"
+    res += f"{INDENT * 2}cdef PyObject * pyobject = self.Dictionary_internal_class_ptr.get()[0][create_variant_from_py_object(key).variant].get_converted_value(True)"
     res = generate_newline(res)
     res += f"{INDENT * 2}cdef object o = None"
     res = generate_newline(res)
@@ -1334,7 +1394,7 @@ def generate_get_item_from_array(classname):
     res = generate_newline(res)
     res += f"{INDENT * 3}raise KeyError(f\"Index '%s' invalid\")".replace("%s", "{index}")
     res = generate_newline(res)
-    res += f"{INDENT * 2}cdef PyObject * pyobject = self.{classname}_internal_class[index].get_converted_value(True)"
+    res += f"{INDENT * 2}cdef PyObject * pyobject = self.{classname}_internal_class_ptr.get()[0][index].get_converted_value(True)"
     res = generate_newline(res)
     res += f"{INDENT * 2}cdef object o = None"
     res = generate_newline(res)
@@ -1359,11 +1419,11 @@ def generate_get_item_from_type_array(classname, classtype):
         res = generate_newline(res)
         res += f"{INDENT * 2}cdef {classtype} pyobject = {classtype}()"
         res = generate_newline(res)
-        res += f"{INDENT * 2}pyobject.{classtype}_internal_class = self.{classname}_internal_class[<int>index]"
+        res += f"{INDENT * 2}pyobject.{classtype}_internal_class_ptr = self.{classname}_internal_class_ptr.get()[0][<int>index]"
         res = generate_newline(res)
         res += f"{INDENT * 2}return pyobject"
     else:
-        res += f"{INDENT * 2}return self.{classname}_internal_class[<int>index]"
+        res += f"{INDENT * 2}return self.{classname}_internal_class_ptr.get()[0][<int>index]"
     return res
 
 
@@ -1381,27 +1441,27 @@ def generate_array_set_item(class_):
         res += f"{INDENT}def __setitem__(self,  index, value):"
         res = generate_newline(res)
 
-        res += f"{INDENT * 2}(&self.{class_['name']}_internal_class[index])[0] = <int>value"
+        res += f"{INDENT * 2}(&self.{class_['name']}_internal_class_ptr.get()[0][index])[0] = <int>value"
     elif class_["name"] == "PackedInt64Array":
         res += f"{INDENT}def __setitem__(self,  index, value):"
         res = generate_newline(res)
 
-        res += f"{INDENT * 2}(&self.{class_['name']}_internal_class[index])[0] = <int>value"
+        res += f"{INDENT * 2}(&self.{class_['name']}_internal_class_ptr.get()[0][index])[0] = <int>value"
     elif class_["name"] == "PackedFloat32Array":
         res += f"{INDENT}def __setitem__(self,  index, value):"
         res = generate_newline(res)
 
-        res += f"{INDENT * 2}(&self.{class_['name']}_internal_class[index])[0] = value"
+        res += f"{INDENT * 2}(&self.{class_['name']}_internal_class_ptr.get()[0][index])[0] = value"
     elif class_["name"] == "PackedFloat64Array":
         res += f"{INDENT}def __setitem__(self,  index, value):"
         res = generate_newline(res)
 
-        res += f"{INDENT * 2}(&self.{class_['name']}_internal_class[index])[0] = value"
+        res += f"{INDENT * 2}(&self.{class_['name']}_internal_class_ptr.get()[0][index])[0] = value"
     elif class_["name"] == "PackedBoolArray":
         res += f"{INDENT}def __setitem__(self,  index, value):"
         res = generate_newline(res)
 
-        res += f"{INDENT * 2}(&self.{class_['name']}_internal_class[index])[0] = value"
+        res += f"{INDENT * 2}(&self.{class_['name']}_internal_class_ptr.get()[0][index])[0] = value"
     #    elif class_["name"] == "PackedByteArray":
     #        res += f"{INDENT * 2}gdnative_interface.packed_byte_array_operator_index(self.godot_owner, index)[0] = value"
 
@@ -1409,34 +1469,34 @@ def generate_array_set_item(class_):
         res += f"{INDENT}def __setitem__(self,  index, value):"
         res = generate_newline(res)
 
-        res += f"{INDENT * 2}(&self.{class_['name']}_internal_class[index])[0] = (<Color>value).Color_internal_class"
+        res += f"{INDENT * 2}(&self.{class_['name']}_internal_class_ptr.get()[0][index])[0] = (<Color>value).Color_internal_class_ptr"
     elif class_["name"] == "PackedVector3Array":
         res += f"{INDENT}def __setitem__(self,  index, value):"
         res = generate_newline(res)
 
-        res += f"{INDENT * 2}(&self.{class_['name']}_internal_class[index])[0] = (<Vector3>value).Vector3_internal_class"
+        res += f"{INDENT * 2}(&self.{class_['name']}_internal_class_ptr.get()[0][index])[0] = (<Vector3>value).Vector3_internal_class_ptr"
     elif class_["name"] == "PackedVector2Array":
         res += f"{INDENT}def __setitem__(self,  index, value):"
         res = generate_newline(res)
 
-        res += f"{INDENT * 2}(&self.{class_['name']}_internal_class[index])[0] = (<Vector2>value).Vector2_internal_class"
+        res += f"{INDENT * 2}(&self.{class_['name']}_internal_class_ptr.get()[0][index])[0] = (<Vector2>value).Vector2_internal_class_ptr"
     elif class_["name"] == "PackedStringArray":
         res += f"{INDENT}def __setitem__(self,  index, value):"
         res = generate_newline(res)
 
-        res += f"{INDENT * 2}(&self.{class_['name']}_internal_class[index])[0] = (<String>value).String_internal_class"
+        res += f"{INDENT * 2}(&self.{class_['name']}_internal_class_ptr.get()[0][index])[0] = (<String>value).String_internal_class_ptr"
 
     elif class_["name"] == "Array":
         res += f"{INDENT}def __setitem__(self,  index, value):"
         res = generate_newline(res)
 
-        res += f"{INDENT * 2}self.{class_['name']}_internal_class[index].init_from_py_object(<PyObject*>value, type(value).__name__.encode('utf-8'))"
+        res += f"{INDENT * 2}self.{class_['name']}_internal_class_ptr.get()[0][index].init_from_py_object(<PyObject*>value, type(value).__name__.encode('utf-8'))"
 
     elif class_["name"] in typed_arrays_names:
         res += f"{INDENT}def __setitem__(self,  index, value):"
         res = generate_newline(res)
 
-        res += f"{INDENT * 2}self.{class_['name']}_internal_class[index].init_from_py_object(<PyObject*>value, type(value).__name__.encode('utf-8'))"
+        res += f"{INDENT * 2}self.{class_['name']}_internal_class_ptr.get()[0][index].init_from_py_object(<PyObject*>value, type(value).__name__.encode('utf-8'))"
 
     res = generate_newline(res)
     return res
@@ -1494,7 +1554,7 @@ def generate_del(class_):
     res = ""
     res += f"{INDENT}def __del__(self):"
     res = generate_newline(res)
-    res += f"{INDENT * 2}self.{class_['name']}_internal_class._py_destroy()"
+    res += f"{INDENT * 2}self.{class_['name']}_internal_class_ptr.get()._py_destroy()"
     res = generate_newline(res)
     return res
 
@@ -1550,10 +1610,10 @@ def generate_cast(class_):
     res = generate_newline(res)
     res += f"{INDENT * 2}cdef {class_['name']} cls = {class_['name']}()"
     res = generate_newline(res)
-    res += f"{INDENT * 2}cls.{class_['name']}_internal_class = CPP{class_['name']}.cast(&other.Object_internal_class)"
+    res += f"{INDENT * 2}cls.{class_['name']}_internal_class_ptr = CPP{class_['name']}.cast(other.Object_internal_class_ptr.get())"
     res = generate_newline(res)
     res += (f"{INDENT * 2}cls"
-            f".set_gdowner(other.Object_internal_class.get_godot_owner())")
+            f".set_gdowner(other.Object_internal_class_ptr.get().get_godot_owner())")
     res = generate_newline(res)
     res += f"{INDENT * 2}return cls"
     return res

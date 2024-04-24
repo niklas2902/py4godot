@@ -8,6 +8,7 @@ from py4godot.classes.generated4_core cimport *
 from py4godot.core.variant4.Variant4 cimport *
 from py4godot.utils.print_tools import *
 from libc.stdlib cimport malloc, free
+from libcpp.memory cimport make_shared
 import threading
 
 lock = threading.Lock()
@@ -18,7 +19,7 @@ cdef api GDExtensionBool instance_set(GDExtensionScriptInstanceDataPtr p_instanc
     #TODO still a problem with custom string attributes. Why is this still crashing?
     cdef StringName method_name = StringName.__new__(StringName)
     cdef cppbridge.StringName internal_method_name = cppbridge.StringName.new_static((<void**>p_name)[0]) #TODO: Create unconst helper
-    method_name.StringName_internal_class = internal_method_name
+    method_name.StringName_internal_class_ptr = make_shared[cppbridge.StringName](internal_method_name)
     cdef String method_name_str = String.new2(method_name)
     cdef unicode py_method_name_str = gd_string_to_py_string(method_name_str)
 
@@ -41,7 +42,7 @@ cdef api GDExtensionBool instance_get(GDExtensionScriptInstanceDataPtr p_instanc
     #TODO still a problem with custom string attributes. Why is this still crashing?
     cdef StringName method_name = StringName.__new__(StringName)
     cdef cppbridge.StringName internal_method_name = cppbridge.StringName.new_static((<void**>p_name)[0]) #TODO: Create unconst helper
-    method_name.StringName_internal_class = internal_method_name
+    method_name.StringName_internal_class_ptr = make_shared[cppbridge.StringName](internal_method_name)
     cdef String method_name_str = String.new2(method_name)
     cdef unicode py_method_name_str = gd_string_to_py_string(method_name_str)
     cdef str py_typename;
@@ -88,7 +89,7 @@ cdef api GDExtensionBool instance_has_method(GDExtensionScriptInstanceDataPtr p_
 
     cdef StringName method_name = StringName.__new__(StringName)
     cdef cppbridge.StringName internal_method_name = cppbridge.StringName.new_static((<void**>p_name)[0]) #TODO: Create unconst helper
-    method_name.StringName_internal_class = internal_method_name
+    method_name.StringName_internal_class_ptr = make_shared[cppbridge.StringName](internal_method_name)
     cdef String method_name_str = String.new2(method_name)
     cdef unicode py_method_name_str = gd_string_to_py_string(method_name_str)
     return hasattr(<object>(instance.owner), py_method_name_str)
@@ -99,7 +100,7 @@ cdef api bint instance_call(GDExtensionScriptInstanceDataPtr p_self, GDExtension
     #TODO still a problem with custom string attributes. Why is this still crashing?
     cdef StringName method_name = StringName.__new__(StringName)
     cdef cppbridge.StringName internal_method_name = cppbridge.StringName.new_static((<void**>p_method)[0]) #TODO: Create unconst helper
-    method_name.StringName_internal_class = internal_method_name
+    method_name.StringName_internal_class_ptr = make_shared[cppbridge.StringName](internal_method_name)
     cdef String method_name_str = String.new2(method_name)
     cdef unicode py_method_name_str = gd_string_to_py_string(method_name_str)
     py_log(py_method_name_str)

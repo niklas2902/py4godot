@@ -47,19 +47,19 @@ cdef api TransferObject exec_class(str source_string, str class_name_):
         module = importlib.util.module_from_spec(module_spec)
         module_spec.loader.exec_module(module)
     except Exception as e:
-        print_error("exec_class: Exception happened:")
+        print_tools.print_error("exec_class: Exception happened:")
         bytes_class = py_class_name_.encode("utf-8")
         my_str_class = bytes_class
-        print_error(my_str_class)
+        print_tools.print_error(my_str_class)
         bytes_exception = (f"exec_class: Exception happened: {traceback.format_exc()}").encode("utf-8")
         my_str_exception = bytes_exception
-        print_error(my_str_exception)
+        print_tools.print_error(my_str_exception)
 
     if gd_class == None:
         gd_class = Object
 
     for signal in signals:
-        transfer_object.signals.push_back((<SignalDescription>signal).get_signal_dict().Dictionary_internal_class)
+        transfer_object.signals.push_back((<SignalDescription>signal).get_signal_dict().Dictionary_internal_class_ptr.get()[0])
 
     cdef GDExtensionPropertyInfo property_info
     for property in properties:

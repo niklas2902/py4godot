@@ -19,7 +19,6 @@ from py4godot.godot_bindings.binding4_godot4 cimport *
 
 from py4godot.classes.Object.Object cimport *
 from py4godot.classes.generated4_core cimport *
-
 cdef GDExtensionInterface* gdnative_interface = get_interface()
 """
 res_pxd = """

@@ -17,6 +17,8 @@ def generate_import(class_to_import=None):
             res += f"cimport py4godot.classes.{class_to_import}.{class_to_import} as py4godot_{class_to_import.lower()}"
             res = generate_newline(res)
     res += f"from py4godot.classes.Object.Object cimport *"
+    res = generate_newline(res)
+    res += f"from libcpp.memory cimport shared_ptr, allocator"
     return res
 
 
@@ -77,7 +79,12 @@ def generate_pxd_class(pxd_class):
 
 
 def generate_wrapped_attribute(class_):
-    return f"{INDENT}cdef CPP{class_['name']} {class_['name']}_internal_class"
+    res = ""
+    res = generate_newline(res)
+    res += f"{INDENT}cdef shared_ptr [CPP{class_['name']}] {class_['name']}_internal_class_ptr"
+    res = generate_newline(res)
+
+    return res
 
 
 def get_inherited_class(class_):
@@ -180,6 +187,8 @@ if __name__ == "__main__":
         res = ""
         for class_ in arrays:
             res += f"from py4godot.classes.cpp_bridge cimport {class_['name']} as CPP{class_['name']} "
+            res = generate_newline(res)
+            res += f"from libcpp.memory cimport shared_ptr, allocator"
             res = generate_newline(res)
             res += generate_pxd_class(class_)
             with open(f"py4godot/classes/typedarrays.pxd", "w") as f:

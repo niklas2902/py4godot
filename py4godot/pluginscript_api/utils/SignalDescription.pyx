@@ -20,7 +20,7 @@ cdef class SignalDescription:
             signal_arg.name = c_name
             signal_arg.type = <GDExtensionVariantType>(<SignalArg>args[i]).variant_type
             signal_args.push_back(signal_arg)
-        self.dict.Dictionary_internal_class = init_signal_description(name.encode("utf-8"), signal_args);
+        self.dict.Dictionary_internal_class_ptr = init_signal_description(name.encode("utf-8"), signal_args);
 
     def get_var_signal_dict(self):
         return self.var_signal_dict

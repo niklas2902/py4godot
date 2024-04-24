@@ -1,7 +1,8 @@
+import copy
 import json
 import os.path
 
-from generate_classes_hpp import get_ret_value, has_native_struct, generate_args, ungodottype, generate_args_for_call
+from generate_classes_hpp import get_ret_value, has_native_struct, generate_args, ungodottype
 from generate_enums import enumize_name
 
 INDENT = "  "
@@ -46,6 +47,7 @@ builtin_classes = set()
 core_classes = dict()
 operator_dict = dict()
 enums = list()
+typed_arrays_names = set()
 operator_to_method = {"+": "__add__",
                       "*": "__mul__",
                       "-": "__sub__",
@@ -95,21 +97,32 @@ def generate_import(class_, is_core):
     return result
 
 
-def generate_constructor_args(constructor):
+def generate_constructor_args(constructor, should_make_shared = False):
     result = ""
     if "arguments" not in constructor:
         return result
 
     for arg in constructor["arguments"]:
         if not arg["type"].startswith("enum::"):
-            result += f"{ungodottype(untypearray(unbitfield_type(arg['type'])))} {pythonize_name(arg['name'])}, "
+            if should_make_shared:
+                result += f"{make_ptr(ungodottype(untypearray(unbitfield_type(arg['type']))))}{ref(arg['type'])} {pythonize_name(arg['name'])}, "
+            else:
+                result += f"{ungodottype(untypearray(unbitfield_type(arg['type'])))}{ref(arg['type'])} {pythonize_name(arg['name'])}, "
         else:
             # enums are marked with enum:: . To be able to use this, we have to strip this
             arg_type = arg["type"].replace("enum::", "")
             result += f"{untypearray(unenumize_type(arg_type))} {pythonize_name(arg['name'])}, "
     result = result[:-2]
     return result
+def ref(type_):
+    return "&" if type_ not in {"float", "int", "bool"} else ""
 
+def make_ptr(type_):
+    if type_ in builtin_classes - {"int", "float", "bool", "Nil"}:
+        return f"std::shared_ptr<{type_}>"
+    if type_ in classes:
+        return f"std::shared_ptr<{type_}>"
+    return type_
 
 def generate_constructor_args_array(constructor):
     num_of_constructor_args = len(constructor["arguments"]) if "arguments" in constructor.keys() else 1
@@ -657,13 +670,13 @@ def unvarianttype(type_):
         return "PyObject*"
     return type_
 
-
 def generate_method(class_, mMethod):
     res = ""
     if has_native_struct(mMethod):
         return res
-    args = generate_args(mMethod, builtin_classes, True)
-    py_def_function = f"{INDENT}{unvarianttype(ungodottype(unenumize_type(untypearray(get_ret_value(mMethod)))))} {class_['name']}::py_{pythonize_name(mMethod['name'])}({args})" + "{"
+    args = generate_args(mMethod, builtin_classes, True, False)
+    args_ptr = generate_args(mMethod, builtin_classes, True, True)
+    py_def_function = f"{INDENT}{make_ptr(unvarianttype(ungodottype(unenumize_type(untypearray(get_ret_value(mMethod))))))} {class_['name']}::py_{pythonize_name(mMethod['name'])}({args_ptr})" + "{"
     res += py_def_function
     res = generate_newline(res)
     res += generate_py_method_body(class_, mMethod)
@@ -1340,6 +1353,37 @@ def generate_reference(type_):
         return "&"
     return ""
 
+def unref_pointer(type_, value_name="value"):
+    if type_ in typed_arrays_names:
+        return f"*({value_name})"
+    if type_ in builtin_classes - {"int", "float", "bool", "Nil"}:
+        return f"*({value_name})"
+    if type_ in classes:
+        return f"*({value_name})"
+    return value_name
+
+
+def generate_args_for_call(method_with_args, is_cpp=False):
+    result = " "
+    if (is_static(method_with_args)):
+        result = ""
+    if "arguments" not in method_with_args:
+        if method_with_args["is_vararg"]:
+            if not is_cpp:
+                return "varargs"
+            else:
+                return "varargs"
+        return result[:-2]
+
+    for arg in method_with_args["arguments"]:
+        result += f"{unref_pointer(pythonize_name(arg['type']), pythonize_name(arg['name']))}, "
+    result = result[:-2]
+
+    if method_with_args["is_vararg"]:
+        result += ", varargs "
+    return result
+
+
 
 def generate_operators_for_class(class_name):
     res = ""
@@ -1370,9 +1414,9 @@ def generate_operators_for_class(class_name):
                         res += INDENT + "}"
                         res = generate_newline(res)
 
-                        res += f"{INDENT}{op.return_type} {class_name}::py_operator_{operator_to_python_name(operator)}({ungodottype(right_type)}{generate_reference(right_type)} other)" + "{"
+                        res += f"{INDENT}{op.return_type} {class_name}::py_operator_{operator_to_python_name(operator)}({ungodottype(right_type)}{make_ptr(right_type)} other)" + "{"
                         res = generate_newline(res)
-                        res += f"{INDENT * 2}auto _ret = *this {operator} other;"
+                        res += f"{INDENT * 2}auto _ret = *this {operator} {unref_pointer(type_=ungodottype(right_type), value_name='other')};"
                         res = generate_newline(res)
                         if op.return_type in builtin_classes - {"float", "int", "bool", "Nil"}:
                             res += f"{INDENT * 2}_ret.shouldBeDeleted=false;"
@@ -1614,6 +1658,14 @@ def collect_typed_arrays(classes):
     return set(typed_arrays)
 
 
+def generate_typed_array_name(name):
+    if (name == "typedarray::Array"):
+        pass
+    return name.split("::")[1] + "TypedArray"
+
+
+
+
 classes = set()
 
 if __name__ == "__main__":
@@ -1636,6 +1688,17 @@ if __name__ == "__main__":
         for cls in obj["builtin_classes"]:
             if cls["name"] == "Array":
                 arrays.append(cls)
+        array_cls = None
+        arrays = []
+        for cls in obj["builtin_classes"]:
+            if cls["name"] == "Array":
+                array_cls = cls
+        print("typedarrays:", collect_typed_arrays(obj["classes"] + obj["builtin_classes"]))
+        for typed_array in collect_typed_arrays(obj["classes"] + obj["builtin_classes"]):
+            my_array_cls = copy.deepcopy(array_cls)
+            my_array_cls["name"] = generate_typed_array_name(typed_array)
+            typed_arrays_names.add(generate_typed_array_name(typed_array))
+            arrays.append(my_array_cls)
         print("typedarrays:", collect_typed_arrays(obj["classes"] + obj["builtin_classes"]))
         generate_classes(arrays, f"py4godot/typedarrays.h", is_core=True)
         generate_classes(arrays, f"py4godot/cppclasses/typedarrays.cpp", is_core=True)

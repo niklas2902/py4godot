@@ -23,14 +23,14 @@ void godot::init_py_language(){
     py_resource_format_loader = godot::PyResourceFormatLoader::constructor(py_language);
     py_resource_format_saver = godot::PyResourceFormatSaver::constructor();
 
-    godot::ResourceLoader resource_loader = godot::ResourceLoader::get_instance();
-    godot::ResourceSaver resource_saver = godot::ResourceSaver::get_instance();
-    godot::Engine engine = godot::Engine::get_instance();
+    std::shared_ptr<godot::ResourceLoader> resource_loader = godot::ResourceLoader::get_instance();
+    std::shared_ptr<godot::ResourceSaver> resource_saver = godot::ResourceSaver::get_instance();
+    std::shared_ptr<godot::Engine> engine = godot::Engine::get_instance();
 
-    engine.is_in_physics_frame();
-    engine.register_script_language(py_language);
-    resource_loader.add_resource_format_loader(py_resource_format_loader, false);
+    engine->is_in_physics_frame();
+    engine->register_script_language(py_language);
+    resource_loader->add_resource_format_loader(py_resource_format_loader, false);
 
-    resource_saver.add_resource_format_saver(py_resource_format_saver, false);
+    resource_saver->add_resource_format_saver(py_resource_format_saver, false);
 
 }

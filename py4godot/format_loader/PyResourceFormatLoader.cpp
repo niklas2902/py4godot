@@ -77,7 +77,6 @@ void PyResourceFormatLoader::_get_resource_uid( String& path, GDExtensionTypePtr
     String py = c_string_to_string("py");
     String pyw = c_string_to_string("pyw");
     return; //TODO: Is there a way to be more efficient
-    std::lock_guard<std::mutex> lock(mtx);
     char* res_string;
     if (!path.ends_with(py) && !path.ends_with(pyw)){
         *((std::int64_t*)res) = -1;
@@ -110,7 +109,6 @@ void PyResourceFormatLoader::_load( String& path, String& original_path, bool us
     GDExtensionVariantFromTypeConstructorFunc constructor_func;
     FileAccess file;
     {
-        std::lock_guard<std::mutex> lock(mtx);
         file = FileAccess::open(path, 1/*Read*/);
         if(! file.godot_owner){
             return;
@@ -129,13 +127,15 @@ void PyResourceFormatLoader::_load( String& path, String& original_path, bool us
     script_extension = PyScriptExtension::constructor(lang);
     if(path_to_script_extension.find(string_path) == path_to_script_extension.end()){
         path_to_script_extension[string_path] = script_extension;
+
     }
     else{
        path_to_script_extension[string_path]->_set_source_code_internal(source_code);
-    }
 
+    }
     script_extension->set_path(c_path);
     script_extension ->_set_source_code_internal(source_code);
+
     constructor_func = functions::get_get_variant_from_type_constructor()(GDExtensionVariantType::GDEXTENSION_VARIANT_TYPE_OBJECT);
     constructor_func(res,&script_extension->godot_owner);
     //free(c_path);
@@ -275,6 +275,7 @@ StringName func_name__load;
 
 }
 GDExtensionClassCallVirtual get_virtual_loader(void *p_userdata, GDExtensionConstStringNamePtr p_name) {
+    std::lock_guard<std::mutex> lock(mtx);
 
     StringName name = StringName::new_static(((void**)const_cast<GDExtensionTypePtr>(p_name))[0]);
     auto length = name.length();

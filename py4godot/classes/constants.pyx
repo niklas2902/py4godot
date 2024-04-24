@@ -4,18 +4,15 @@ cdef class ConstantVector3(Vector3):
   def new3(float x, float y, float z):
 
     cdef ConstantVector3 _class = ConstantVector3.__new__(ConstantVector3)
-    cdef CPPVector3 vector3 = CPPVector3.py_new3(x, y, z)
-    vector3.set_shouldBeDeleted(False)
-    _class.Vector3_internal_class = vector3
+    cdef shared_ptr[CPPVector3] vector3 = CPPVector3.py_new3(x, y, z)
+    vector3.get().set_shouldBeDeleted(False)
+    _class.Vector3_internal_class_ptr = vector3
     return _class
-
-  cdef void set_gdowner(self, void* owner):
-    self.Vector3_internal_class.set_gdowner_Vector3(owner)
 
 
   @property
   def x(self):
-    cdef double _ret = self.Vector3_internal_class.py_member_get_x()
+    cdef double _ret = self.Vector3_internal_class_ptr.get().py_member_get_x()
     return _ret
 
   @x.setter
@@ -23,7 +20,7 @@ cdef class ConstantVector3(Vector3):
     raise Exception("setting x is not allowed for ConstantVector3")
   @property
   def y(self):
-    cdef double _ret = self.Vector3_internal_class.py_member_get_y()
+    cdef double _ret = self.Vector3_internal_class_ptr.get().py_member_get_y()
     return _ret
 
   @y.setter
@@ -31,7 +28,7 @@ cdef class ConstantVector3(Vector3):
     raise Exception("setting y is not allowed for ConstantVector3")
   @property
   def z(self):
-    cdef double _ret = self.Vector3_internal_class.py_member_get_z()
+    cdef double _ret = self.Vector3_internal_class_ptr.get().py_member_get_z()
     return _ret
 
   @z.setter

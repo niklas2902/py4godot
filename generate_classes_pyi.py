@@ -768,7 +768,7 @@ def generate_special_methods_array(class_):
 
 
 def generate_get_pyscript():
-    res = f"{INDENT}def get_pyscript(self)->None:pass"
+    res = f"{INDENT}def get_pyscript(self)->Object:pass"
     res = generate_newline(res)
     return res
 
