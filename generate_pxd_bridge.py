@@ -147,9 +147,8 @@ def generate_variant_type(class_):
 
 def generate_destructor(classname):
     res = ""
-    if classname in builtin_classes or classname in typed_arrays_names:
-        res += f"{INDENT * 2}void _py_destroy();"
-        res = generate_newline(res)
+    res += f"{INDENT * 2}void {classname}_py_destroy();"
+    res = generate_newline(res)
     return res
 
 
@@ -391,7 +390,8 @@ def generate_common_methods(class_):
     result = generate_newline(result)
     result += generate_constructors(class_)
     result = generate_newline(result)
-    result += generate_destructor(class_["name"])
+    if not is_singleton(class_["name"]):
+        result += generate_destructor(class_["name"])
     result = generate_newline(result)
     result += generate_new_static(class_)
     result = generate_newline(result)
@@ -399,6 +399,10 @@ def generate_common_methods(class_):
     result = generate_newline(result)
     if class_["name"] in builtin_classes:
         result += generate_set_should_be_deleted(class_)
+    if class_["name"] == "RefCounted":
+        result = generate_newline(result)
+        result += f"{INDENT*2}void py_destroy_ref()"
+        result = generate_newline(result)
     return result
 
 

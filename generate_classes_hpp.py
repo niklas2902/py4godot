@@ -606,9 +606,11 @@ def generate_constructor(classname):
 
 def generate_destructor(classname):
     res = ""
-    if classname in builtin_classes or classname in typed_arrays_names:
-        res += f"void {INDENT}_py_destroy();"
+    if classname == "RefCounted":
+        res += f"void {INDENT}py_destroy_ref();"
         res = generate_newline(res)
+    res += f"void {INDENT}{classname}_py_destroy();"
+    res = generate_newline(res)
     res += f"{INDENT}~{classname}();"
     res = generate_newline(res)
     return res
@@ -707,6 +709,8 @@ def generate_classes(classes, filename, is_core=False):
         res += f"class LIBRARY_API  {class_['name']}:public {get_base_class(class_)}" + "{"
         res = generate_newline(res)
         res += f"{INDENT} public:"
+        res = generate_newline(res)
+        res += f"{INDENT*2}bool already_deleted = false;"
         res = generate_newline(res)
         res += generate_common_methods(class_)
         res = generate_newline(res)

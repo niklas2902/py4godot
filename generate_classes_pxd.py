@@ -62,6 +62,14 @@ def generate_special_attributes(class_):
         return f"{INDENT}cdef int _index"
     return ""
 
+def generate_properties(class_):
+    result = ""
+    if ("properties" in class_.keys()):
+        for property in class_["properties"]:
+            if "setter" in property.keys():
+                result += f"{INDENT}cdef object py__{property['name']}"
+                result = generate_newline(result)
+    return result
 
 def generate_pxd_class(pxd_class):
     result = ""
@@ -69,11 +77,16 @@ def generate_pxd_class(pxd_class):
     result = generate_newline(result)
     result += f"cdef class {pxd_class['name']}({get_base_class(pxd_class)}):"
     result = generate_newline(result)
+    if pxd_class["name"] == "Object":
+        result += f"{INDENT}cdef bint already_deallocated"
+    result = generate_newline(result)
     result += generate_wrapped_attribute(class_)
     result = generate_newline(result)
     result += generate_special_attributes(class_)
     result = generate_newline(result)
     result += generate_common_methods(class_)
+    result = generate_newline(result)
+    result += generate_properties(class_)
     result = generate_newline(result)
     return result
 

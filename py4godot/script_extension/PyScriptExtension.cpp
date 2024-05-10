@@ -44,8 +44,10 @@ void init_pluginscript_api(){
 
         PyObject* str_exc_type = PyObject_Repr(pvalue); //Now a unicode
         PyObject* pyStr = PyUnicode_AsEncodedString(str_exc_type, "utf-8","Error ~");
-        const char *strExcType = PyBytes_AS_STRING(pyStr);
+        char *strExcType = PyBytes_AS_STRING(pyStr);
+        
         PyErr_Print();
+        print_error(strExcType);
         assert(false);
         return;
     }
@@ -58,8 +60,9 @@ void init_pluginscript_api(){
 
         PyObject* str_exc_type = PyObject_Repr(pvalue); //Now a unicode
         PyObject* pyStr = PyUnicode_AsEncodedString(str_exc_type, "utf-8","Error ~");
-        const char *strExcType = PyBytes_AS_STRING(pyStr);
+        char *strExcType = PyBytes_AS_STRING(pyStr);
         PyErr_Print();
+        print_error(strExcType);
         assert(false);
         return;
     }
@@ -72,7 +75,7 @@ void init_pluginscript_api(){
 
         PyObject* str_exc_type = PyObject_Repr(pvalue); //Now a unicode
         PyObject* pyStr = PyUnicode_AsEncodedString(str_exc_type, "utf-8","Error ~");
-        const char *strExcType = PyBytes_AS_STRING(pyStr);
+        char *strExcType = PyBytes_AS_STRING(pyStr);
         PyErr_Print();
         assert(false);
         return;
@@ -86,7 +89,7 @@ void init_pluginscript_api(){
 
         PyObject* str_exc_type = PyObject_Repr(pvalue); //Now a unicode
         PyObject* pyStr = PyUnicode_AsEncodedString(str_exc_type, "utf-8","Error ~");
-        const char *strExcType = PyBytes_AS_STRING(pyStr);
+        char *strExcType = PyBytes_AS_STRING(pyStr);
         PyErr_Print();
         assert(false);
         return;

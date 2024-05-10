@@ -4,8 +4,6 @@ cimport py4godot.classes.Viewport.Viewport as py4godot_viewport
 cimport py4godot.classes.SceneTree.SceneTree as py4godot_scenetree
 cimport py4godot.classes.Window.Window as py4godot_window
 
-
-
 def get_viewport(Node node):
 
     cdef py4godot_viewport.Viewport _ret = py4godot_viewport.Viewport.__new__(py4godot_viewport.Viewport)

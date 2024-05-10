@@ -468,6 +468,11 @@ def generate_method(class_, mMethod):
     if "arguments" in mMethod.keys():
         res += generate_assert(mMethod["arguments"])
         res = generate_newline(res)
+
+    if is_property_setter(class_, mMethod["name"]):
+        property_name = get_property_name_for_method(class_, mMethod["name"])
+        res += f"{INDENT*2}self.py__{property_name} = {pythonize_name(mMethod['arguments'][0]['name'])}"
+        res = generate_newline(res)
     if ("hash" in mMethod.keys()):
         res += generate_method_body_standard(class_, mMethod)
     else:
@@ -632,6 +637,10 @@ def generate_method_body_standard(class_, method):
             result = generate_newline(result)
             result += generate_set_gd_owner_for_ret(method)
         result = generate_newline(result)
+        if is_property_getter(class_, method["name"]):
+            property_name = get_property_name_for_method(class_, method["name"])
+            result += f"{INDENT * 2}self.py__{property_name} = _ret"
+            result = generate_newline(result)
         result += generate_return_statement(method)
     else:
         if not is_static(method):
@@ -717,6 +726,18 @@ def generate_init(class_):
     res = generate_newline(res)
     return res
 
+def is_refcounted(class_):
+    if "inherits" in class_.keys():
+        cls = find_class(class_["inherits"])
+        if cls["name"] == "RefCounted":
+            return True
+        while cls:
+            if "inherits" not in cls.keys():
+                break
+            cls = find_class(cls["inherits"])
+            if cls["name"] == "RefCounted":
+                return True
+    return False
 def generate_cinit(class_):
     res = ""
     res = generate_newline(res)
@@ -724,6 +745,9 @@ def generate_cinit(class_):
     res = generate_newline(res)
     res += f"{INDENT*2}self.{class_['name']}_internal_class_ptr = make_shared[CPP{class_['name']}]()"
     res = generate_newline(res)
+    if class_["name"] in classes - builtin_classes:
+        res += f"{INDENT * 2}self.already_deallocated = False"
+        res = generate_newline(res)
 
     if "inherits" in class_.keys():
         cls = find_class(class_["inherits"])
@@ -752,7 +776,8 @@ def generate_common_methods(class_):
 
     result += generate_cinit(class_)
     result += generate_new_static(class_)
-    result += generate_del(class_)
+    if not is_singleton(class_["name"]):
+        result += generate_del(class_)
 
     return result
 
@@ -934,6 +959,30 @@ def generate_property(property, classname):
 
     return result
 
+
+def is_property_setter(class_, methodname):
+    if ("properties" in class_.keys()):
+        for property in class_["properties"]:
+            if "setter" in property.keys():
+                if methodname == property["setter"]:
+                    return True
+    return False
+
+def is_property_getter(class_, methodname):
+    if ("properties" in class_.keys()):
+        for property in class_["properties"]:
+            if methodname == property["getter"]:
+                return True
+    return False
+
+
+def get_property_name_for_method(class_, methodname):
+    if ("properties" in class_.keys()):
+        for property in class_["properties"]:
+            if "setter" in property.keys():
+                if methodname == property["setter"]:
+                    return property["name"]
+    return ""
 
 def pythonize_name(name):
     if name in (
@@ -1550,11 +1599,29 @@ def generate_init(class_):
 
 def generate_del(class_):
     if class_["name"] not in builtin_classes and class_["name"] not in typed_arrays_names:
-        return ""
+        res = ""
+        res += f"{INDENT}def __dealloc__(self):"
+        res = generate_newline(res)
+        if is_refcounted(class_):
+            res += f"{INDENT * 2}self.RefCounted_internal_class_ptr.get().py_destroy_ref()"
+            res = generate_newline(res)
+            return res
+        #elif class_["name"] != "Object": #is node TODO: implement
+        #    res += f"{INDENT * 2}if not self.{class_['name']}_internal_class_ptr.get() == NULL and self.{class_['name']}_internal_class_ptr.get().get_godot_owner() != NULL and not self.already_deallocated and self.is_inside_tree():"
+        #    res = generate_newline(res)
+        #    res += f"{INDENT * 3}self.{class_['name']}_internal_class_ptr.get().{class_['name']}_py_destroy()"
+        #    res = generate_newline(res)
+        #    res += f"{INDENT * 3}self.already_deallocated = True"
+        #    res = generate_newline(res)
+        #    return res
+        else:
+            res += f"{INDENT*2}pass"
+            res = generate_newline(res)
+
     res = ""
     res += f"{INDENT}def __del__(self):"
     res = generate_newline(res)
-    res += f"{INDENT * 2}self.{class_['name']}_internal_class_ptr.get()._py_destroy()"
+    res += f"{INDENT * 2}self.{class_['name']}_internal_class_ptr.get().{class_['name']}_py_destroy()"
     res = generate_newline(res)
     return res
 

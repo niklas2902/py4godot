@@ -117,6 +117,8 @@ cdef api bint instance_call(GDExtensionScriptInstanceDataPtr p_self, GDExtension
     for index in range(0, p_argument_count):
         var.native_ptr = <void*>p_args[index]
         args.append(<object>var.get_converted_value(True))
+        destroy_variant(var)
+
     try:
         if not hasattr(instance_object,py_method_name_str):
             return 1

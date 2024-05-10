@@ -11,6 +11,7 @@ cdef extern from "py4godot/cpputils/utils.h":
     shared_ptr[To] my_static_pointer_cast[From,To](const shared_ptr[From]& ptr) except +
     shared_ptr[bridge.String] c_string_to_string_ptr(const char* string)
     shared_ptr[bridge.StringName] c_string_to_string_name_ptr(const char* string)
+    void destroy_object(void* godot_owner)
 
 cdef extern from "py4godot/cpputils/ScriptHolder.h":
     PyObject* get_py_script(int id)

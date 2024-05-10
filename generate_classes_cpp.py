@@ -216,7 +216,7 @@ def generate_variant_type(class_):
         return f"GDExtensionVariantType::GDEXTENSION_VARIANT_TYPE_{convert_camel_case_to_underscore(class_).upper()}"
     elif class_ in typed_arrays_names:
         return f"GDExtensionVariantType::GDEXTENSION_VARIANT_TYPE_ARRAY"
-    elif class_ == "Object":
+    elif class_ == "Object" or class_ in classes:
         return f"GDExtensionVariantType::GDEXTENSION_VARIANT_TYPE_OBJECT"
     else:
         return f"GDExtensionVariantType::GDEXTENSION_VARIANT_TYPE_NIL"
@@ -788,6 +788,13 @@ def generate_py_method_body(class_, method):
     result += free_variants(method)
     result = generate_newline(result)
     if ("return_value" in method.keys() or "return_type" in method.keys()):
+        if ("return_value" in method.keys()):
+            ret_val = ReturnType("_ret", method['return_value']['type'])
+        else:
+            ret_val = ReturnType("_ret", method['return_type'])
+        if is_refcounted(find_class(ret_val.type)):
+            result = generate_newline(result)
+            result += f"{INDENT*2}_ret.already_deleted = true;"
         result = generate_newline(result)
         result += generate_return_py_statement(method)
         result = generate_newline(result)
@@ -1045,37 +1052,92 @@ def collect_members(obj):
         core_classes[class_["name"]] = core_class
     print(core_classes)
 
-
-def generate_destructor(classname):
+def find_class(name):
+    for cls in obj["classes"]:
+        if cls["name"] == name:
+            return cls
+def is_refcounted(class_):
+    if class_ == None:
+        return False
+    if "inherits" in class_.keys():
+        cls = find_class(class_["inherits"])
+        if cls["name"] == "RefCounted":
+            return True
+        while cls:
+            if "inherits" not in cls.keys():
+                break
+            cls = find_class(cls["inherits"])
+            if cls["name"] == "RefCounted":
+                return True
+    return False
+def is_node(class_):
+    if "inherits" in class_.keys():
+        cls = find_class(class_["inherits"])
+        if cls["name"] == "Node":
+            return True
+        while cls:
+            if "inherits" not in cls.keys():
+                break
+            cls = find_class(cls["inherits"])
+            if cls["name"] == "Node":
+                return True
+    return False
+def generate_destructor(class_):
+    classname = class_["name"]
     res = ""
-    if classname in builtin_classes or classname in typed_arrays_names:
-        res += f"{INDENT}void {classname}::_py_destroy(){{"
+    if classname == "RefCounted":
+        res += f"void {INDENT}RefCounted::py_destroy_ref(){{"
         res = generate_newline(res)
-        # res += f"{INDENT * 2}auto destructor = functions::get_variant_get_ptr_destructor()({generate_variant_type(classname)});"
-        # res = generate_newline(res)
-        # res += f"{INDENT * 2}destructor(&godot_owner);"
-        # res = generate_newline(res)
-        # res += f"{INDENT * 2}if(allocated_memory)free(godot_owner);"
-        # res = generate_newline(res)
-        res += f"{INDENT}}}"
+        res += f"{INDENT * 2}if (!already_deleted && get_reference_count() == 1 ){{"
+        res = generate_newline(res)
+        res += f"{INDENT * 3}functions::get_object_destroy()(godot_owner);"
+        res = generate_newline(res)
+        res += f"{INDENT * 3}already_deleted=true;"
+        res = generate_newline(res)
+        res += f"{INDENT * 2}}}"
+        res = generate_newline(res)
+        res +=f"{INDENT}}}"
         res = generate_newline(res)
 
-    res += f"{INDENT}{classname}::~{classname}(){{"
+    res += f"{INDENT}void {classname}::{class_['name']}_py_destroy(){{"
     res = generate_newline(res)
-    #res += f"{INDENT * 2}if(shouldBeDeleted && godot_owner != nullptr){{"
-    #res = generate_newline(res)
-    if classname not in builtin_classes:
-        pass
-    else:
+
+    if classname in builtin_classes:
         res += f"{INDENT * 2}auto destructor = functions::get_variant_get_ptr_destructor()({generate_variant_type(classname)});"
         res = generate_newline(res)
-        #res += f"{INDENT * 2}assert(destructor==nullptr);"
-        #res = generate_newline(res)
-        #res += f"{INDENT * 2}destructor(&godot_owner);"
-        #res = generate_newline(res)
-        #res += f"{INDENT * 4}if(allocated_memory)free(godot_owner);"
+        res += f"{INDENT * 2}destructor(&godot_owner);"
+    elif classname == "Object":
+        res += f"{INDENT * 2}functions::get_object_destroy()(godot_owner);"
         res = generate_newline(res)
-    #res += f"{INDENT * 2}}}"
+    elif classname == "Node" or is_node(class_):
+        pass
+        #TODO: implement destruction for Node
+        #res += f"{INDENT * 2}if(godot_owner && is_inside_tree()){{"
+        #res = generate_newline(res)
+        #res += f"{INDENT * 3}functions::get_object_destroy()(godot_owner);"
+        #res = generate_newline(res)
+        #res += f"{INDENT * 2}}}"
+        #res = generate_newline(res)
+
+    res = generate_newline(res)
+    # res += f"{INDENT * 2}if(allocated_memory)free(godot_owner);"
+    # res = generate_newline(res)
+    res += f"{INDENT}}}"
+    res = generate_newline(res)
+    res += f"{INDENT}{classname}::~{classname}(){{"
+    res = generate_newline(res)
+    if classname not in builtin_classes:
+        res += f"{INDENT}}}"
+        return res
+    res += f"{INDENT * 2}if(shouldBeDeleted && godot_owner != nullptr){{"
+    res = generate_newline(res)
+    res += f"{INDENT * 3}auto destructor = functions::get_variant_get_ptr_destructor()({generate_variant_type(classname)});"
+    res = generate_newline(res)
+    res += f"{INDENT * 3}if(destructor == nullptr) return;"
+    res = generate_newline(res)
+    res += f"{INDENT * 3}destructor(&godot_owner);"
+    res = generate_newline(res)
+    res += f"{INDENT * 2}}}"
     res = generate_newline(res)
     res += f"{INDENT}}}"
     return res
@@ -1084,7 +1146,7 @@ def generate_destructor(classname):
 def generate_common_methods(class_):
     result = ""
     if not is_singleton(class_["name"]):
-        result += generate_destructor(class_["name"])
+        result += generate_destructor(class_)
         result = generate_newline(result)
         result += generate_constructor(class_["name"])
         result = generate_newline(result)

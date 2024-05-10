@@ -85,3 +85,14 @@ static void add_variant_to_array(GDExtensionTypePtr var_array, Variant& val){
     GDExtensionPtrBuiltInMethod method_to_call = functions::get_variant_get_ptr_builtin_method()(GDExtensionVariantType::GDEXTENSION_VARIANT_TYPE_ARRAY, &_method_name.godot_owner, 3316032543);
     method_to_call(var_array, &_args[0], &_ret, 1);
 }
+
+static void destroy_object(void* godot_owner){
+    functions::get_object_destroy()(godot_owner);
+}
+
+static void destroy_variant(Variant& val){
+    functions::get_variant_destroy()(val.native_ptr);
+}
+static void destroy_variant_native_ptr(Variant& val){
+    functions::get_variant_destroy()(&val.native_ptr);
+}
