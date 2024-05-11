@@ -979,8 +979,8 @@ def is_property_getter(class_, methodname):
 def get_property_name_for_method(class_, methodname):
     if ("properties" in class_.keys()):
         for property in class_["properties"]:
-            if "setter" in property.keys():
-                if methodname == property["setter"]:
+            if "getter" in property.keys():
+                if methodname == property["getter"] or ("setter" in property.keys() and methodname == property["setter"]):
                     return property["name"]
     return ""
 
@@ -1617,12 +1617,17 @@ def generate_del(class_):
         else:
             res += f"{INDENT*2}pass"
             res = generate_newline(res)
-
-    res = ""
-    res += f"{INDENT}def __del__(self):"
-    res = generate_newline(res)
-    res += f"{INDENT * 2}self.{class_['name']}_internal_class_ptr.get().{class_['name']}_py_destroy()"
-    res = generate_newline(res)
+    else:
+        res = ""
+        res += f"{INDENT}def __del__(self):"
+        res = generate_newline(res)
+        res += f"{INDENT * 2}self.{class_['name']}_internal_class_ptr.get().{class_['name']}_py_destroy()"
+        res = generate_newline(res)
+        res = generate_newline(res)
+        res += f"{INDENT}def destroy(self):"
+        res = generate_newline(res)
+        res += f"{INDENT * 2}self.{class_['name']}_internal_class_ptr.get().{class_['name']}_py_destroy()"
+        res = generate_newline(res)
     return res
 
 

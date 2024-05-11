@@ -1088,7 +1088,7 @@ def generate_destructor(class_):
     if classname == "RefCounted":
         res += f"void {INDENT}RefCounted::py_destroy_ref(){{"
         res = generate_newline(res)
-        res += f"{INDENT * 2}if (!already_deleted && get_reference_count() == 1 ){{"
+        res += f"{INDENT * 2}if (!already_deleted && godot_owner != nullptr && get_reference_count() == 1 ){{"
         res = generate_newline(res)
         res += f"{INDENT * 3}functions::get_object_destroy()(godot_owner);"
         res = generate_newline(res)
@@ -1102,7 +1102,7 @@ def generate_destructor(class_):
     res += f"{INDENT}void {classname}::{class_['name']}_py_destroy(){{"
     res = generate_newline(res)
 
-    if classname in builtin_classes:
+    if classname in builtin_classes or classname in typed_arrays_names:
         res += f"{INDENT * 2}auto destructor = functions::get_variant_get_ptr_destructor()({generate_variant_type(classname)});"
         res = generate_newline(res)
         res += f"{INDENT * 2}destructor(&godot_owner);"
