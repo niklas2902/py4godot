@@ -9,6 +9,7 @@ from py4godot.core.variant4.Variant4 cimport *
 from py4godot.utils.print_tools import *
 from libc.stdlib cimport malloc, free
 from libcpp.memory cimport make_shared
+from py4godot.core.variant4 import cast_helpers
 import threading
 
 lock = threading.Lock()
@@ -118,6 +119,8 @@ cdef api bint instance_call(GDExtensionScriptInstanceDataPtr p_self, GDExtension
         var.native_ptr = <void*>p_args[index]
         args.append(<object>var.get_converted_value(True))
         destroy_variant(var)
+    cast_helpers.clear_vals() # free memory again, now that we are safe
+    return 0
 
     try:
         if not hasattr(instance_object,py_method_name_str):
@@ -128,10 +131,10 @@ cdef api bint instance_call(GDExtensionScriptInstanceDataPtr p_self, GDExtension
         print_error(f"An Exception happened while calling a method:{e}" )
         print_error(f"traceback: {traceback.format_exc()}")
         print_error(f"method name:{py_method_name_str}")
-
     py_log("object:"+str(instance_object))
 
     var.native_ptr = r_return
     py_typename = str(type(result).__name__)
     var.init_from_py_object_native_ptr(<PyObject*>result, py_typename.encode("utf-8"))
+    print_error("__end__")
     return 1

@@ -461,9 +461,6 @@ def generate_return_py_statement(method_):
     else:
         ret_val = ReturnType("_ret", method_['return_type'])
     result = ""
-    if ret_val.type in builtin_classes - {"float", "int", "bool", "Nil"} or "typedarray::" in ret_val.type:
-        result += f"{INDENT * 2}_ret.shouldBeDeleted=false;"
-        result = generate_newline(result)
     result += f"{INDENT * 2}return {generate_ret_ptr(ret_val.type, '_ret')};"
     return result
 
@@ -1126,7 +1123,7 @@ def generate_destructor(class_):
     res = generate_newline(res)
     res += f"{INDENT}{classname}::~{classname}(){{"
     res = generate_newline(res)
-    if classname not in builtin_classes:
+    if classname not in builtin_classes and classname not in typed_arrays_names:
         res += f"{INDENT}}}"
         return res
     res += f"{INDENT * 2}if(shouldBeDeleted && godot_owner != nullptr){{"
@@ -1187,9 +1184,6 @@ def generate_member_getter(class_, member):
     res = generate_newline(res)
     res += f"{INDENT}auto _ret = member_get_{member.name}();"
     res = generate_newline(res)
-    if member.type_ in builtin_classes - {"float", "int", "bool", "Nil"}:
-        res += f"{INDENT}_ret.shouldBeDeleted=false;"
-        res = generate_newline(res)
     res += f"{INDENT}return {generate_ret_ptr(member.type_)};"
     res = generate_newline(res)
     res += f"{INDENT}}}"
@@ -1623,10 +1617,6 @@ def generate_operators_for_class(class_name):
                         res += f"{INDENT}{make_ptr(op.return_type)} {class_name}::py_operator_{operator_to_python_name(operator)}({make_ptr(ungodottype(right_type))}{generate_reference(right_type)} other)" + "{"
                         res = generate_newline(res)
                         res += f"{INDENT * 2}auto _ret = *this {operator} {unref_pointer(type_=ungodottype(right_type), value_name='other')};"
-                        res = generate_newline(res)
-                        if op.return_type in builtin_classes - {"float", "int", "bool", "Nil"}:
-                            res += f"{INDENT * 2}_ret.shouldBeDeleted=false;"
-                            res = generate_newline(res)
                         res = generate_newline(res)
                         res += f"{INDENT * 2}return {generate_ret_ptr(op.return_type)};"
                         res = generate_newline(res)

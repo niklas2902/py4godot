@@ -209,7 +209,7 @@ def generate_return_value(classname, method_):
         elif ret_val.type == "Variant":
             result += f"{INDENT * 2}cdef PyObject* {ret_val.name} = NULL"
         elif "typedarray" in ret_val.type:
-            result += f"{INDENT * 2}cdef {generate_typed_array_name(ret_val.type)} _ret = {generate_typed_array_name(ret_val.type)}.new0()"
+            result += f"{INDENT * 2}cdef {generate_typed_array_name(ret_val.type)} _ret = {generate_typed_array_name(ret_val.type)}.__new__({generate_typed_array_name(ret_val.type)})"
         elif "enum::" in ret_val.type:
             result += f"{INDENT * 2}cdef int {ret_val.name}"
         else:
@@ -637,10 +637,20 @@ def generate_method_body_standard(class_, method):
             result = generate_newline(result)
             result += generate_set_gd_owner_for_ret(method)
         result = generate_newline(result)
+
         if is_property_getter(class_, method["name"]):
             property_name = get_property_name_for_method(class_, method["name"])
-            result += f"{INDENT * 2}self.py__{property_name} = _ret"
+            ret_val = None
+            if ("return_value" in method.keys()):
+                ret_val = ReturnType("_ret", method['return_value']['type'])
+            else:
+                ret_val = ReturnType("_ret", method['return_type'])
+            if ret_val.type == "Variant":
+                result += f"{INDENT * 2}self.py__{property_name} = <object>_ret"
+            else:
+                result += f"{INDENT * 2}self.py__{property_name} = _ret"
             result = generate_newline(result)
+
         result += generate_return_statement(method)
     else:
         if not is_static(method):
