@@ -5,6 +5,7 @@ from py4godot.utils.utils cimport *
 from py4godot.Instance_data.InstanceData cimport *
 cimport py4godot.classes.cpp_bridge as cppbridge
 from py4godot.classes.generated4_core cimport *
+from py4godot.classes.Object.Object cimport *
 from py4godot.core.variant4.Variant4 cimport *
 from py4godot.utils.print_tools import *
 from libc.stdlib cimport malloc, free
@@ -13,6 +14,7 @@ from py4godot.core.variant4 import cast_helpers
 import threading
 
 lock = threading.Lock()
+cdef set types_to_decref = {type(1), type(1.), type(True)}
 
 cdef api GDExtensionBool instance_set(GDExtensionScriptInstanceDataPtr p_instance, GDExtensionConstStringNamePtr p_name, GDExtensionConstVariantPtr p_value) :
     py_log("instance_set")
@@ -92,7 +94,11 @@ cdef api GDExtensionBool instance_has_method(GDExtensionScriptInstanceDataPtr p_
     cdef cppbridge.StringName internal_method_name = cppbridge.StringName.new_static((<void**>p_name)[0]) #TODO: Create unconst helper
     method_name.StringName_internal_class_ptr = make_shared[cppbridge.StringName](internal_method_name)
     cdef String method_name_str = String.new2(method_name)
-    cdef unicode py_method_name_str = gd_string_to_py_string(method_name_str)
+    cdef unicode py_method_name_str
+    try:
+        py_method_name_str = gd_string_to_py_string_instance(method_name_str)
+    except Exception as e:
+        print_error(f"Exception: {e}")
     return hasattr(<object>(instance.owner), py_method_name_str)
 
 cdef api bint instance_call(GDExtensionScriptInstanceDataPtr p_self, GDExtensionConstStringNamePtr p_method, const GDExtensionConstVariantPtr *p_args, GDExtensionInt p_argument_count, GDExtensionVariantPtr r_return, GDExtensionCallError *r_error):
@@ -103,26 +109,32 @@ cdef api bint instance_call(GDExtensionScriptInstanceDataPtr p_self, GDExtension
     cdef cppbridge.StringName internal_method_name = cppbridge.StringName.new_static((<void**>p_method)[0]) #TODO: Create unconst helper
     method_name.StringName_internal_class_ptr = make_shared[cppbridge.StringName](internal_method_name)
     cdef String method_name_str = String.new2(method_name)
-    cdef unicode py_method_name_str = gd_string_to_py_string(method_name_str)
-    py_log(py_method_name_str)
+    cdef unicode py_method_name_str
+    try:
+        py_method_name_str = gd_string_to_py_string_instance(method_name_str)
+    except Exception as e:
+        print_error(f"Exception: {e}")
     if(py_method_name_str == "_get_linked_undo_properties"):
         return 0
 
     if(py_method_name_str == "_dont_undo_redo"):
         return 0
-
     cdef Variant var
     args = []
     cdef object instance_object = <object>instance.owner
     cdef object method
-    for index in range(0, p_argument_count):
-        var.native_ptr = <void*>p_args[index]
-        args.append(<object>var.get_converted_value(True))
-        destroy_variant(var)
-    cast_helpers.clear_vals() # free memory again, now that we are safe
-    return 0
-
+    cdef object arg
+    #if py_method_name_str not in ("_process", "_physics_process", "_input", "_unhandled_input"):
+    #    return 0
     try:
+        for index in range(0, p_argument_count):
+            var.native_ptr = <void*>p_args[index]
+            arg = <object>var.get_converted_value(True)
+            if type(arg) in types_to_decref: #or isinstance(arg, Object):
+                Py_DECREF(arg)
+            args.append(arg)
+            destroy_variant(var)
+        cast_helpers.clear_vals() # free memory again, now that we are safe
         if not hasattr(instance_object,py_method_name_str):
             return 1
         method = getattr(instance_object,py_method_name_str)
@@ -136,5 +148,4 @@ cdef api bint instance_call(GDExtensionScriptInstanceDataPtr p_self, GDExtension
     var.native_ptr = r_return
     py_typename = str(type(result).__name__)
     var.init_from_py_object_native_ptr(<PyObject*>result, py_typename.encode("utf-8"))
-    print_error("__end__")
     return 1

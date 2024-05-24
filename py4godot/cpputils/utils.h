@@ -40,6 +40,25 @@ static void gd_string_to_c_string(GDExtensionConstStringPtr string_ptr, int leng
     (*res_string)[length] = '\0';
 }
 
+static void gd_string_to_c_string_instance(String& string, int length, char** res_string) {
+
+    *res_string = new char[length + 1];
+    functions::get_string_to_utf8_chars()(&string.godot_owner, *res_string, length);
+    auto unicode_string = PyUnicode_FromString(*res_string);
+    (*res_string)[length] = '\0';
+    delete [] *res_string;
+}
+
+static PyObject* gd_string_to_unicode(String& string, int length) {
+
+    char * res_string = new char[length + 1];
+    functions::get_string_to_utf8_chars()(&string.godot_owner, res_string, length);
+    res_string[length] = '\0';
+    auto unicode_string = PyUnicode_FromString(res_string);
+    delete[]  res_string;
+    return unicode_string;
+}
+
 static StringName c_string_to_string_name(const char* string){
     String gd_string = String::new0();
     functions::get_string_new_with_utf8_chars()(&gd_string.godot_owner, string);
@@ -95,4 +114,12 @@ static void destroy_variant(Variant& val){
 }
 static void destroy_variant_native_ptr(Variant& val){
     functions::get_variant_destroy()(&val.native_ptr);
+}
+
+static void delete_char_array(char* array){
+    delete[] array;
+}
+
+static void decrefPyObject(PyObject* object){
+    Py_XDECREF(object);
 }

@@ -50,11 +50,6 @@ void c_instance_call(GDExtensionScriptInstanceDataPtr p_self, GDExtensionConstSt
         return;
     }
 
-    auto string_name = String::new2(name);
-    char *res_string;
-    gd_string_to_c_string(string_name, string_name.length(), &res_string);
-    //functions::get_print_error()(res_string, "test", "test", 1, 1);
-
     auto gil_state = PyGILState_Ensure();
     auto* p_instance = (InstanceData*)p_self;
     instance_call(p_self, p_method, p_args, p_argument_count, r_return, r_error);
