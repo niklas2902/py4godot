@@ -27,6 +27,10 @@ template<typename From, typename To>
 static std::shared_ptr<To> my_static_pointer_cast(const std::shared_ptr<From>& from) {
     return std::static_pointer_cast<To>(from);
 }
+template<typename T>
+static bool is_ptr_null(const std::shared_ptr<T>& ptr) {
+    return !ptr;
+}
 
 static void gd_string_to_c_string(String& string, int length,  char** res_string) {
     *res_string = (char*)malloc(sizeof(char) * (length+1));
@@ -52,6 +56,17 @@ static void gd_string_to_c_string_instance(String& string, int length, char** re
 static PyObject* gd_string_to_unicode(String& string, int length) {
 
     char * res_string = new char[length + 1];
+    functions::get_string_to_utf8_chars()(&string.godot_owner, res_string, length);
+    res_string[length] = '\0';
+    auto unicode_string = PyUnicode_FromString(res_string);
+    delete[]  res_string;
+    return unicode_string;
+}
+
+static PyObject* gd_string_name_to_unicode(StringName& stringname, int length) {
+
+    char * res_string = new char[length + 1];
+    String string = String::new2(stringname);
     functions::get_string_to_utf8_chars()(&string.godot_owner, res_string, length);
     res_string[length] = '\0';
     auto unicode_string = PyUnicode_FromString(res_string);

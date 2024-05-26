@@ -1631,12 +1631,16 @@ def generate_del(class_):
         res = ""
         res += f"{INDENT}def __del__(self):"
         res = generate_newline(res)
-        res += f"{INDENT * 2}self.{class_['name']}_internal_class_ptr.get().{class_['name']}_py_destroy()"
+        res += f"{INDENT * 2}if is_ptr_null(self.{class_['name']}_internal_class_ptr):"
+        res = generate_newline(res)
+        res += f"{INDENT * 3}self.{class_['name']}_internal_class_ptr.get().{class_['name']}_py_destroy()"
         res = generate_newline(res)
         res = generate_newline(res)
         res += f"{INDENT}def destroy(self):"
         res = generate_newline(res)
-        res += f"{INDENT * 2}self.{class_['name']}_internal_class_ptr.get().{class_['name']}_py_destroy()"
+        res += f"{INDENT * 2}if is_ptr_null(self.{class_['name']}_internal_class_ptr):"
+        res = generate_newline(res)
+        res += f"{INDENT * 3}self.{class_['name']}_internal_class_ptr.get().{class_['name']}_py_destroy()"
         res = generate_newline(res)
     return res
 

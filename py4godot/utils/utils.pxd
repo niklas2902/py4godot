@@ -8,6 +8,7 @@ cdef extern from "py4godot/cpputils/utils.h":
     #const char * gd_string_to_c_string( bridge.String string, int length)
     void gd_string_to_c_string(bridge.String string, int length, char** res_string)
     void gd_string_to_c_string_instance(bridge.String string, int length, char** res_string)
+    bool is_ptr_null[T](const shared_ptr[T]& ptr)
     bool is_none(PyObject* py_object)
     shared_ptr[To] my_static_pointer_cast[From,To](const shared_ptr[From]& ptr) except +
     shared_ptr[bridge.String] c_string_to_string_ptr(const char* string)
@@ -23,4 +24,4 @@ cdef core.StringName py_c_string_to_string_name(char* string)
 cdef core.String py_c_string_to_string(char* string)
 cdef unicode gd_string_to_py_string(core.String string)
 cdef unicode gd_string_to_py_string_instance(core.String string)
-#cdef unicode gd_string_name_to_py_string(core.StringName string_name)
+cdef unicode gd_string_name_to_py_string(core.StringName string_name)

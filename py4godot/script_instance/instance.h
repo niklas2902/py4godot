@@ -43,8 +43,8 @@ void c_instance_call(GDExtensionScriptInstanceDataPtr p_self, GDExtensionConstSt
     print_error("_c_instance_call");
     //std::lock_guard<std::mutex> lock(mtx);
     auto name = StringName::new_static(((void**)p_method)[0]);
-    static auto _ready = c_string_to_string_name("_ready");
-    static auto _enter_tree = c_string_to_string_name("_enter_tree");
+    auto _ready = c_string_to_string_name("_ready");
+    auto _enter_tree = c_string_to_string_name("_enter_tree");
     if(((InstanceData*)p_self)->is_placeholder && (name == _ready || name == _enter_tree)){
 
         return;

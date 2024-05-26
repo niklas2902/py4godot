@@ -482,6 +482,7 @@ static void destroy_object(Object& val){
     functions::get_object_destroy()(val.godot_owner);
 }
 PyObject* Variant::create_object(){
+
     GDExtensionVariantType type = functions::get_variant_get_type()(native_ptr);
     auto constructor = functions::get_get_variant_to_type_constructor()(type);
     std::shared_ptr<Object> string = std::make_shared<Object>();

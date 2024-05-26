@@ -93,10 +93,9 @@ cdef api GDExtensionBool instance_has_method(GDExtensionScriptInstanceDataPtr p_
     cdef StringName method_name = StringName.__new__(StringName)
     cdef cppbridge.StringName internal_method_name = cppbridge.StringName.new_static((<void**>p_name)[0]) #TODO: Create unconst helper
     method_name.StringName_internal_class_ptr = make_shared[cppbridge.StringName](internal_method_name)
-    cdef String method_name_str = String.new2(method_name)
     cdef unicode py_method_name_str
     try:
-        py_method_name_str = gd_string_to_py_string_instance(method_name_str)
+        py_method_name_str = gd_string_name_to_py_string(method_name)
     except Exception as e:
         print_error(f"Exception: {e}")
     return hasattr(<object>(instance.owner), py_method_name_str)
@@ -108,10 +107,9 @@ cdef api bint instance_call(GDExtensionScriptInstanceDataPtr p_self, GDExtension
     cdef StringName method_name = StringName.__new__(StringName)
     cdef cppbridge.StringName internal_method_name = cppbridge.StringName.new_static((<void**>p_method)[0]) #TODO: Create unconst helper
     method_name.StringName_internal_class_ptr = make_shared[cppbridge.StringName](internal_method_name)
-    cdef String method_name_str = String.new2(method_name)
     cdef unicode py_method_name_str
     try:
-        py_method_name_str = gd_string_to_py_string_instance(method_name_str)
+        py_method_name_str = gd_string_name_to_py_string(method_name)
     except Exception as e:
         print_error(f"Exception: {e}")
     if(py_method_name_str == "_get_linked_undo_properties"):
@@ -119,18 +117,17 @@ cdef api bint instance_call(GDExtensionScriptInstanceDataPtr p_self, GDExtension
 
     if(py_method_name_str == "_dont_undo_redo"):
         return 0
+
     cdef Variant var
     args = []
     cdef object instance_object = <object>instance.owner
     cdef object method
     cdef object arg
-    #if py_method_name_str not in ("_process", "_physics_process", "_input", "_unhandled_input"):
-    #    return 0
     try:
         for index in range(0, p_argument_count):
             var.native_ptr = <void*>p_args[index]
             arg = <object>var.get_converted_value(True)
-            if type(arg) in types_to_decref: #or isinstance(arg, Object):
+            if type(arg) in types_to_decref :#or isinstance(arg, Object):
                 Py_DECREF(arg)
             args.append(arg)
             destroy_variant(var)
