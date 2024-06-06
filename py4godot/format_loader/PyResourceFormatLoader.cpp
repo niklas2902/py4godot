@@ -40,7 +40,10 @@ void* create_instance_loader(void* userdata){
     auto gdnative_object = functions::get_classdb_construct_object()(&class_name.godot_owner);
     return gdnative_object;
 }
-void free_instance_loader(void *p_userdata, GDExtensionClassInstancePtr p_instance){}
+void free_instance_loader(void *p_userdata, GDExtensionClassInstancePtr p_instance){
+    //assert(false);
+    //functions::get_object_destroy()(p_instance);
+}
 
 void PyResourceFormatLoader::_init_values(){}
 

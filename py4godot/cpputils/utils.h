@@ -29,7 +29,7 @@ static std::shared_ptr<To> my_static_pointer_cast(const std::shared_ptr<From>& f
 }
 template<typename T>
 static bool is_ptr_null(const std::shared_ptr<T>& ptr) {
-    return !ptr;
+    return !ptr || ptr.get() == nullptr;
 }
 
 static void gd_string_to_c_string(String& string, int length,  char** res_string) {

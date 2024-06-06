@@ -1266,7 +1266,10 @@ void init_func_names(){
 }
 
 #pragma endregion
-void free_instance(void *p_userdata, GDExtensionClassInstancePtr p_instance){}
+void free_instance(void *p_userdata, GDExtensionClassInstancePtr p_instance){
+    assert(false);
+    //functions::get_object_destroy()(p_instance);
+}
 void register_class(){
     GDExtensionClassCreationInfo* creation_info = new GDExtensionClassCreationInfo{};
     init_func_names();

@@ -278,17 +278,11 @@ def generate_constructors(class_):
         res = generate_newline(res)
         res += f"{INDENT * 2}_class.set_variant_type({generate_variant_type(class_['name'])});"
         res = generate_newline(res)
-        res += f"{INDENT * 2}_class.godot_owner = &_class.data[0];"
-        res = generate_newline(res)
         res += f"{INDENT * 2}GDExtensionPtrConstructor constructor = functions::get_variant_get_ptr_constructor()(_class.variant_type, {constructor['index']});"
         res = generate_newline(res)
         # TODO:improve - fill with args
         res += generate_constructor_args_array(constructor)
         res = generate_newline(res)
-
-        res += f"{INDENT * 2}_class.godot_owner = &_class.data[0];"
-        res = generate_newline(res)
-
         res += f"{INDENT * 2}_class.allocated_memory = true;"
         res = generate_newline(res)
 
@@ -1096,13 +1090,44 @@ def generate_destructor(class_):
         res +=f"{INDENT}}}"
         res = generate_newline(res)
 
+    if classname == "Node":
+        res += f"void {INDENT}Node::py_destroy_node(){{"
+        res = generate_newline(res)
+        res += f"{INDENT * 2}if (!already_deleted && godot_owner != nullptr && !is_inside_tree() && is_put_in_tree){{"
+        res = generate_newline(res)
+        res += f"{INDENT * 3}functions::get_object_destroy()(godot_owner);"
+        res = generate_newline(res)
+        res += f"{INDENT * 3}already_deleted=true;"
+        res = generate_newline(res)
+        res += f"{INDENT * 2}}}"
+        res = generate_newline(res)
+        res +=f"{INDENT}}}"
+        res = generate_newline(res)
+
+    if classname == "Object":
+        res += f"void {INDENT}Object::destroy(){{"
+        res = generate_newline(res)
+        res += f"{INDENT * 2}if (godot_owner != nullptr){{"
+        res = generate_newline(res)
+        res += f"{INDENT * 3}functions::get_object_destroy()(godot_owner);"
+        res = generate_newline(res)
+        res += f"{INDENT * 2}}}"
+        res = generate_newline(res)
+        res +=f"{INDENT}}}"
+        res = generate_newline(res)
+
     res += f"{INDENT}void {classname}::{class_['name']}_py_destroy(){{"
     res = generate_newline(res)
 
     if classname in builtin_classes or classname in typed_arrays_names:
-        res += f"{INDENT * 2}auto destructor = functions::get_variant_get_ptr_destructor()({generate_variant_type(classname)});"
-        res = generate_newline(res)
-        res += f"{INDENT * 2}destructor(&godot_owner);"
+        if class_["has_destructor"]:
+            res += f"{INDENT * 2}auto destructor = functions::get_variant_get_ptr_destructor()({generate_variant_type(classname)});"
+            res = generate_newline(res)
+            res += f"{INDENT*2}if (destructor){{destructor(&godot_owner);}}"
+        else:
+            res += f"{INDENT * 2}godot_owner = nullptr;"
+            res = generate_newline(res)
+
     elif classname == "Object":
         res += f"{INDENT * 2}functions::get_object_destroy()(godot_owner);"
         res = generate_newline(res)
@@ -1126,6 +1151,14 @@ def generate_destructor(class_):
     if classname not in builtin_classes and classname not in typed_arrays_names:
         res += f"{INDENT}}}"
         return res
+
+    res += f"{INDENT * 2}if(_callback != nullptr){{"
+    res = generate_newline(res)
+    res += f"{INDENT * 3}delete _callback;"
+    res = generate_newline(res)
+    res += f"{INDENT * 2}}}"
+    res = generate_newline(res)
+
     res += f"{INDENT * 2}if(shouldBeDeleted && godot_owner != nullptr){{"
     res = generate_newline(res)
     res += f"{INDENT * 3}auto destructor = functions::get_variant_get_ptr_destructor()({generate_variant_type(classname)});"

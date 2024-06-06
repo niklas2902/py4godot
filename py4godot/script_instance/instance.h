@@ -96,6 +96,9 @@ GDExtensionBool c_instance_has_method(GDExtensionScriptInstanceDataPtr p_instanc
     return ret;
 }
 
+void c_free_func(GDExtensionScriptInstanceDataPtr p_instance){
+}
+
 
 void init_instance(GDExtensionScriptInstanceInfo* native_script_instance, bool is_placeholder){
     print_error("init_instance");
@@ -121,12 +124,13 @@ void init_instance(GDExtensionScriptInstanceInfo* native_script_instance, bool i
     native_script_instance->set_func = c_instance_set;
     native_script_instance->get_func = c_instance_get;
     native_script_instance->call_func = c_instance_call;
+    native_script_instance->free_func = c_free_func;
     if(!is_placeholder){
         native_script_instance->has_method_func = c_instance_has_method;
     }
     PyGILState_Release(gil_state);
     /*native_script_instance->is_placeholder_func = is_placeholder;
-    native_script_instance->set_func = c_instance_set;
+    native_script_instance->set_func = c_instance_set;g
     native_script_instance->get_property_list_func = instance_get_property_list;
     native_script_instance->free_property_list_func = instance_free_property_list;
     native_script_instance->property_can_revert_func = instance_property_can_revert;

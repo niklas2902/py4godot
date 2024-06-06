@@ -748,6 +748,19 @@ def is_refcounted(class_):
             if cls["name"] == "RefCounted":
                 return True
     return False
+
+def is_node(class_):
+    if "inherits" in class_.keys():
+        cls = find_class(class_["inherits"])
+        if cls["name"] == "Node":
+            return True
+        while cls:
+            if "inherits" not in cls.keys():
+                break
+            cls = find_class(cls["inherits"])
+            if cls["name"] == "Node":
+                return True
+    return False
 def generate_cinit(class_):
     res = ""
     res = generate_newline(res)
@@ -770,6 +783,17 @@ def generate_cinit(class_):
     res = generate_newline(res)
     return res
 
+
+def generate_destroy_object_method():
+    res = ""
+    res = generate_newline(res)
+    res += f"{INDENT}def destroy(self):"
+    res = generate_newline(res)
+    res += f"{INDENT*2}self.Object_internal_class_ptr.get().destroy()"
+    res = generate_newline(res)
+    return res
+
+
 def generate_common_methods(class_):
     result = ""
     if not is_singleton(class_["name"]) and not class_["name"] in typed_arrays_names:
@@ -783,6 +807,7 @@ def generate_common_methods(class_):
         result = generate_newline(result)
     if class_["name"] == "Object":
         result += generate_get_py_script_method()
+        result += generate_destroy_object_method()
 
     result += generate_cinit(class_)
     result += generate_new_static(class_)
@@ -1613,34 +1638,36 @@ def generate_del(class_):
         res += f"{INDENT}def __dealloc__(self):"
         res = generate_newline(res)
         if is_refcounted(class_):
-            res += f"{INDENT * 2}self.RefCounted_internal_class_ptr.get().py_destroy_ref()"
+            res += f"{INDENT * 2}if not is_ptr_null(self.RefCounted_internal_class_ptr):"
+            res = generate_newline(res)
+            res += f"{INDENT * 3}self.RefCounted_internal_class_ptr.get().py_destroy_ref()"
             res = generate_newline(res)
             return res
-        #elif class_["name"] != "Object": #is node TODO: implement
-        #    res += f"{INDENT * 2}if not self.{class_['name']}_internal_class_ptr.get() == NULL and self.{class_['name']}_internal_class_ptr.get().get_godot_owner() != NULL and not self.already_deallocated and self.is_inside_tree():"
-        #    res = generate_newline(res)
-        #    res += f"{INDENT * 3}self.{class_['name']}_internal_class_ptr.get().{class_['name']}_py_destroy()"
-        #    res = generate_newline(res)
-        #    res += f"{INDENT * 3}self.already_deallocated = True"
-        #    res = generate_newline(res)
+        elif is_node(class_): #is node TODO: implement
+            res += f"{INDENT * 2}if not is_ptr_null(self.Node_internal_class_ptr):"
+            res = generate_newline(res)
+            res += f"{INDENT * 3}self.Node_internal_class_ptr.get().py_destroy_node()"
+            res = generate_newline(res)
         #    return res
         else:
             res += f"{INDENT*2}pass"
             res = generate_newline(res)
     else:
         res = ""
-        res += f"{INDENT}def __del__(self):"
+        res += f"{INDENT}def __dealloc__(self):"
         res = generate_newline(res)
-        res += f"{INDENT * 2}if is_ptr_null(self.{class_['name']}_internal_class_ptr):"
+        res += f"{INDENT * 2}if not is_ptr_null(self.{class_['name']}_internal_class_ptr):"
         res = generate_newline(res)
         res += f"{INDENT * 3}self.{class_['name']}_internal_class_ptr.get().{class_['name']}_py_destroy()"
+        res = generate_newline(res)
+        res += f"{INDENT * 3}self.{class_['name']}_internal_class_ptr.reset()"
         res = generate_newline(res)
         res = generate_newline(res)
         res += f"{INDENT}def destroy(self):"
         res = generate_newline(res)
         res += f"{INDENT * 2}if is_ptr_null(self.{class_['name']}_internal_class_ptr):"
         res = generate_newline(res)
-        res += f"{INDENT * 3}self.{class_['name']}_internal_class_ptr.get().{class_['name']}_py_destroy()"
+        res += f"{INDENT * 3}pass"
         res = generate_newline(res)
     return res
 

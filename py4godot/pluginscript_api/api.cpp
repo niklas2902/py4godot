@@ -34,3 +34,15 @@ void godot::init_py_language(){
     resource_saver->add_resource_format_saver(py_resource_format_saver, false);
 
 }
+
+void godot::deinit_py_language(){
+    std::shared_ptr<godot::ResourceLoader> resource_loader = godot::ResourceLoader::get_instance();
+    std::shared_ptr<godot::ResourceSaver> resource_saver = godot::ResourceSaver::get_instance();
+    std::shared_ptr<godot::Engine> engine = godot::Engine::get_instance();
+    engine->unregister_script_language(py_language);
+
+    resource_loader->remove_resource_format_loader(py_resource_format_loader);
+
+    resource_saver->remove_resource_format_saver(py_resource_format_saver);
+
+}

@@ -609,6 +609,13 @@ def generate_destructor(classname):
     if classname == "RefCounted":
         res += f"void {INDENT}py_destroy_ref();"
         res = generate_newline(res)
+    if classname == "Node":
+        res += f"void {INDENT}py_destroy_node();"
+        res = generate_newline(res)
+
+    if classname == "Object":
+        res += f"void {INDENT}destroy();"
+        res = generate_newline(res)
     res += f"void {INDENT}{classname}_py_destroy();"
     res = generate_newline(res)
     res += f"{INDENT}~{classname}();"

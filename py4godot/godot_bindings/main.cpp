@@ -174,6 +174,10 @@ void initialize_py4godot(void *userdata, GDExtensionInitializationLevel p_level)
 }
 
 void deinitialize_py4godot(void *userdata, GDExtensionInitializationLevel p_level){
+    if (p_level != GDEXTENSION_INITIALIZATION_SCENE){
+        return;
+    }
+    godot::deinit_py_language();
 
 }
 extern "C"{

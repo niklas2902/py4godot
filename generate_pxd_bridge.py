@@ -403,6 +403,12 @@ def generate_common_methods(class_):
         result = generate_newline(result)
         result += f"{INDENT*2}void py_destroy_ref()"
         result = generate_newline(result)
+    if class_["name"] == "Object":
+        result += f"{INDENT*2}void destroy()"
+        result = generate_newline(result)
+    if class_["name"] == "Node":
+        result += f"{INDENT*2}void py_destroy_node()"
+        result = generate_newline(result)
     return result
 
 
@@ -688,6 +694,11 @@ def generate_dictionary_set_item():
 def generate_special_metods_object():
     res = ""
     res += f"{INDENT * 2}shared_ptr[String] get_import_path()"
+    res = generate_newline(res)
+    res += f"{INDENT * 2}bool py_get_is_put_in_tree()"
+    res = generate_newline(res)
+    res += f"{INDENT * 2}void py_get_is_put_in_tree(bool value)"
+    res = generate_newline(res)
     return res
 
 
