@@ -840,6 +840,13 @@ def generate_get_py_script_method():
     result += f"{INDENT * 2}_ret.set_gdowner(_ret.String_internal_class_ptr.get().get_godot_owner())"
     result = generate_newline(result)
     result += f"{INDENT * 2}return gd_string_to_py_string(_ret)"
+
+    result = generate_newline(result)
+    result += f"{INDENT}@_import_path.setter"
+    result = generate_newline(result)
+    result += f"{INDENT}def _import_path(self, val):"
+    result = generate_newline(result)
+    result += f"{INDENT * 2}pass"
     result = generate_newline(result)
     return result
 
