@@ -470,7 +470,7 @@ def generate_method_body_standard(method):
     result = generate_newline(result)
     if "return_value" in method.keys() or "return_type" in method.keys():
         result += generate_return_value(method)
-        result += f"{INDENT * 2}{generate_ret_call(method)} = py_{method['name']}({generate_method_args(method)})"
+        result += f"{INDENT * 2}{generate_ret_call(method)} = py_{pythonize_name(method['name'])}({generate_method_args(method)})"
         result = generate_newline(result)
         result += generate_set_gd_owner_for_ret(method)
         result = generate_newline(result)
@@ -594,7 +594,7 @@ def generate_property(property, classname):
 def pythonize_name(name):
     if name in (
             "from", "len", "in", "for", "with", "class", "pass", "raise", "global", "new", "get_interface", "object",
-            "str"):
+            "str", "typeof"):
         return name + "_"
     return name
 

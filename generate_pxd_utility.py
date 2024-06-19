@@ -145,7 +145,7 @@ def simplify_type(type):
 def pythonize_name(name):
     if name in (
             "from", "len", "in", "for", "with", "class", "pass", "raise", "global", "char", "default", "new",
-            "get_interface"):
+            "get_interface", "str", "typeof"):
         return name + "_"
     return name
 

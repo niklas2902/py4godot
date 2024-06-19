@@ -458,7 +458,7 @@ def generate_property(property):
 
 def pythonize_name(name):
     if name in ("from", "len", "in", "for", "with", "class", "pass", "raise", "global", "char", "default",
-                "get_interface", "operator", "enum", "new", "template", "bool"):
+                "get_interface", "operator", "enum", "new", "template", "bool", "typeof", "str"):
         return name + "_"
     return name
 
