@@ -1005,8 +1005,6 @@ PyObject* cast_to_type(char* classname, PyObject* object_to_cast){
             return cast_to_audioeffectpanner(object_to_cast);
         case str2int("FileDialog"):
             return cast_to_filedialog(object_to_cast);
-        case str2int("Label3D"):
-            return cast_to_label3d(object_to_cast);
         case str2int("AnimatedTexture"):
             return cast_to_animatedtexture(object_to_cast);
         case str2int("InputEventMouse"):

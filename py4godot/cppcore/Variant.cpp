@@ -179,7 +179,7 @@ PyObject* Variant::create_nodepath(){
 PyObject* Variant::create_int(){
     GDExtensionVariantType type = functions::get_variant_get_type()(native_ptr);
     auto constructor = functions::get_get_variant_to_type_constructor()(type);
-    int val = 0;
+    long val = 0;
     constructor(&val, native_ptr);
     return PyLong_FromLong(val);
 }
@@ -489,7 +489,6 @@ PyObject* Variant::create_object(){
     string->shouldBeDeleted=true;
     constructor(&string->godot_owner, native_ptr);
     if (string->godot_owner == nullptr) {
-        assert(false);
         return Py_None;
     }
     auto val = type_helper_create_object(string);

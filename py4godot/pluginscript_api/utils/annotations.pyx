@@ -18,9 +18,12 @@ import importlib.util
 class_name = ""
 gd_class = None
 is_tool = False
+current_class_name = ""
+
 cdef api TransferObject exec_class(str source_string, str class_name_):
     global  gd_class, properties, signals, methods,default_values, class_name, is_tool
 
+    current_class_name = class_name_
     cdef str py_source_string = source_string
     cdef str py_class_name_ = class_name_
 
@@ -90,7 +93,7 @@ def gdclass(cls):
         gd_class = cls
         is_tool = False
     else:
-        raise Exception("More than one class was marked as gd_class or gd_tool_class in one file")
+        raise Exception(f"More than one class was marked as gd_class or gd_tool_class in one file ({current_class_name})")
     return cls
 
 def gdtool(cls):
@@ -129,5 +132,6 @@ def gdmethod(func):
     return func
 
 def signal(name, list args = []):
+    return
     description = SignalDescription(name, args)
     signals.append(description)

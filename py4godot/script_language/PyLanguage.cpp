@@ -182,7 +182,7 @@
 
   void PyLanguage::_has_named_classes(GDExtensionTypePtr res){
     print_error("_has_named_classes");
-     *static_cast<bool*>(res) = 0;
+     *static_cast<bool*>(res) = true;
   }
 
   void PyLanguage::_supports_builtin_mode(GDExtensionTypePtr res){
@@ -213,7 +213,7 @@
 
   void PyLanguage::_overrides_external_editor(GDExtensionTypePtr res){
     print_error("_overrides_external_editor");
-    *static_cast<uint8_t*>(res) = 0;
+    *static_cast<bool*>(res) = false;
   }
 
   void PyLanguage::_complete_code(String& code, String& path, Object& owner, GDExtensionTypePtr res){

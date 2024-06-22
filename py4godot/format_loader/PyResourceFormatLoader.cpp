@@ -58,7 +58,7 @@ void PyResourceFormatLoader::_recognize_path( String& path, StringName& type, GD
     String pyw = c_string_to_string("pyw");
     String pyi = c_string_to_string("pyi");
     bool can_be_loaded =  path.ends_with(py) || path.ends_with(pyw) || path.ends_with(pyi);
-    *((GDExtensionTypePtr*) res) =  (void*)can_be_loaded;
+    *reinterpret_cast<void**>(res) = reinterpret_cast<void*>(can_be_loaded);
 }
 void PyResourceFormatLoader::_handles_type( StringName& type, GDExtensionTypePtr res){
         print_error("handles_type");
@@ -102,7 +102,7 @@ void PyResourceFormatLoader::_rename_dependencies( String& path, Dictionary& ren
     print_error("_rename_dependencies");
 }
 void PyResourceFormatLoader::_exists( String& path, GDExtensionTypePtr res){
-    print_error("_existes");
+    *reinterpret_cast<bool*>(res) = true;
 }
 void PyResourceFormatLoader::_get_classes_used( String& path, GDExtensionTypePtr res){
     print_error("_get_classes_used");
