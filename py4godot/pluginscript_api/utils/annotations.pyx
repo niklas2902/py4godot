@@ -66,7 +66,6 @@ cdef api TransferObject exec_class(str source_string, str class_name_):
 
     cdef GDExtensionPropertyInfo property_info
     for property in properties:
-        (<PropertyDescription>property).class_name = py_c_string_to_string_name(class_name.encode("utf-8"))
         (<PropertyDescription>property).to_c()
         property_info = (<PropertyDescription>property).property_info
         transfer_object.properties.push_back(property_info)
@@ -93,7 +92,7 @@ def gdclass(cls):
         gd_class = cls
         is_tool = False
     else:
-        raise Exception(f"More than one class was marked as gd_class or gd_tool_class in one file ({current_class_name})")
+        raise Exception(f"More than one class was marked as gd_class or gd_tool_class in one file ({current_class_name}, {gd_class}, {cls})")
     return cls
 
 def gdtool(cls):
