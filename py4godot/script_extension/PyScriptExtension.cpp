@@ -306,7 +306,6 @@ void PyScriptExtension::_has_script_signal( StringName& signal, GDExtensionTypeP
 }
 void PyScriptExtension::_get_script_signal_list(GDExtensionTypePtr res){
     print_error("_get_script_signal_list");
-    //auto res_array = Array::new_static(&res);
     int index;
     for (auto& signal_dict : transfer_object.signals) {
         Variant var_signal = Variant{};

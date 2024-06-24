@@ -131,6 +131,5 @@ def gdmethod(func):
     return func
 
 def signal(name, list args = []):
-    return
     description = SignalDescription(name, args)
     signals.append(description)
