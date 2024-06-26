@@ -1,20 +1,22 @@
 from py4godot.utils.print_tools import *
-print_error("import script_extension_helpers")
 import traceback
-from py4godot.godot_bindings.binding4_godot4 cimport *
 cimport py4godot.classes.Node3D.Node3D as node3d
 from cpython cimport Py_INCREF, Py_DECREF, PyObject
 
 instantiated_classes = []
 
 cdef api PyObject*  instantiate_class(PyObject* gd_class):
+    cdef object class_ = <object>gd_class
+    if class_ == None:
+        return NULL
+
     cdef object o
     try:
-        o = (<object>gd_class)()
+        o = (class_)()
     except Exception as e:
         print_error("Exception - creating class didn't work")
         print_error(str(e).encode("utf-8"))
         print_error(traceback.format_exc().encode("utf-8"))
-        o =node3d.Node3D()
+        return NULL
     instantiated_classes.append(o)
     return <PyObject*>o

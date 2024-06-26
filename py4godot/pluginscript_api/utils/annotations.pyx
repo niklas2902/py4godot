@@ -55,9 +55,6 @@ cdef api TransferObject exec_class(str source_string, str class_name_):
         my_str_exception = bytes_exception
         print_tools.print_error(my_str_exception)
 
-    if gd_class == None:
-        gd_class = Object
-
     for signal in signals:
         transfer_object.signals.push_back((<SignalDescription>signal).get_signal_dict().Dictionary_internal_class_ptr.get()[0])
 

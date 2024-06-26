@@ -42,7 +42,7 @@ if __name__ == "__main__":
     args = my_parser.parse_args()
 
     try:
-        res = subprocess.Popen(f"build.py --target_platform={args.target_platform} "
+        res = subprocess.Popen(f"python build.py --target_platform={args.target_platform} "
                                f"--compiler={args.compiler} -run_tests={args.run_tests} -download_godot={args.download_godot} ",
                                shell=True)
         res.wait()

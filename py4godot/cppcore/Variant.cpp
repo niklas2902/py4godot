@@ -489,7 +489,6 @@ PyObject* Variant::create_object(){
     string->shouldBeDeleted=true;
     constructor(&string->godot_owner, native_ptr);
     if (string->godot_owner == nullptr) {
-        assert(false);
         return Py_None;
     }
     auto val = type_helper_create_object(string);

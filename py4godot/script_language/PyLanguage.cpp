@@ -5,6 +5,7 @@
 #include "py4godot/cppclasses/Script/Script.h"
 #include "py4godot/cppcore/Variant.h"
 #include <cassert>
+#include "py4godot/script_language/template.h"
 
 
   PyLanguage* PyLanguage::constructor(){
@@ -146,16 +147,65 @@
 
   void PyLanguage::_make_template(String& template_, String& class_name, String& base_class_name,GDExtensionTypePtr res){
     print_error("_make_template");
+
+    String class_name_replace = c_string_to_string("{CLASSNAME}");
+    String inherits_replace = c_string_to_string("{INHERITS}");
+    template_ = template_.replace(class_name_replace, class_name);
+    template_ = template_.replace(inherits_replace, base_class_name);
     PyScriptExtension* extension_py = PyScriptExtension::constructor(this);
+    extension_py->set_source_code(template_);
     *((void**)res) = extension_py->godot_owner;
   }
 
   void PyLanguage::_get_built_in_templates(StringName& object, GDExtensionTypePtr res){
     print_error("_get_built_int_templates");
+    if(object != c_string_to_string_name("Object")){
+        return;
+    }
+
+    Array templates = Array::new_static(*((void**)res));
+    Dictionary my_dict = Dictionary::new0();
+
+    String inherits = c_string_to_string("inherit");
+    Variant val = my_dict[inherits];
+    String inherits_val = String::new2(object);
+    val.init_type(inherits_val);
+
+    String name = c_string_to_string("name");
+    Variant val_name = my_dict[name];
+    String name_val = c_string_to_string("example template");
+    val_name.init_type(name_val);
+
+    String description = c_string_to_string("description");
+    Variant val_description = my_dict[description];
+    String description_val = c_string_to_string("This is an example template to show how to start");
+    val_description.init_type(description_val);
+
+
+    String content = c_string_to_string("content");
+    Variant val_content = my_dict[content];
+    String content_val = c_string_to_string(basic_template);
+    val_content.init_type(content_val);
+
+    String origin = c_string_to_string("origin");
+    Variant val_origin = my_dict[origin];
+    int origin_val = 1;
+    val_origin.init_type(origin_val);
+
+    String id = c_string_to_string("id");
+    Variant val_id = my_dict[id];
+    int id_val = 1;
+    val_id.init_type(id_val);
+
+
+    Variant my_variant = Variant(my_dict);
+    templates.push_back(my_variant);
+    templates.size();
   }
 
   void PyLanguage::_is_using_templates(GDExtensionTypePtr res){
-  print_error("_is_using_templates");
+    print_error("_is_using_templates");
+    *((bool*)res) = true;
   }
 
   void PyLanguage::_validate(String& script, String& path, bool validate_functions, bool validate_errors, bool validate_warnings, bool validate_safe_lines, GDExtensionTypePtr res){
@@ -182,7 +232,7 @@
 
   void PyLanguage::_has_named_classes(GDExtensionTypePtr res){
     print_error("_has_named_classes");
-     *static_cast<bool*>(res) = 0;
+     *static_cast<bool*>(res) = true;
   }
 
   void PyLanguage::_supports_builtin_mode(GDExtensionTypePtr res){
@@ -462,9 +512,9 @@ StringName func_name__get_string_delimiters;
 
 void call_virtual_func__make_template(GDExtensionClassInstancePtr p_instance, const GDExtensionConstTypePtr* p_args, GDExtensionTypePtr r_ret) {
     PyLanguage* pylanguage = static_cast<PyLanguage*> (p_instance);
-    String args0 = String::new_static(const_cast<GDExtensionStringPtr*>((p_args + 0)));
-    String args1 = String::new_static(const_cast<GDExtensionStringPtr*>((p_args + 1)));
-    String args2 = String::new_static(const_cast<GDExtensionStringPtr*>((p_args + 2)));
+    String args0 = String::new_static(*((void**)const_cast<GDExtensionStringPtr>(p_args[0])));
+    String args1 = String::new_static(*((void**)const_cast<GDExtensionStringPtr>(p_args[1])));
+    String args2 = String::new_static(*((void**)const_cast<GDExtensionStringPtr>(p_args[2])));
 
 
 
@@ -476,7 +526,7 @@ StringName func_name__make_template;
 
 void call_virtual_func__get_built_in_templates(GDExtensionClassInstancePtr p_instance, const GDExtensionConstTypePtr* p_args, GDExtensionTypePtr r_ret) {
     PyLanguage* pylanguage = static_cast<PyLanguage*> (p_instance);
-    StringName args0 = StringName::new_static(const_cast<GDExtensionStringPtr*>((p_args + 0)));
+    StringName args0 = StringName::new_static(*((void**)const_cast<GDExtensionStringPtr>(p_args[0])));
 
 
 

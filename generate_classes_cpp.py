@@ -801,7 +801,11 @@ def free_variants(mMethod):
         return res
     for argument in mMethod["arguments"]:
         if argument["type"] == "Variant":
-            res += f"{INDENT * 2}functions::get_variant_destroy()(&{pythonize_name(argument['name'])}.native_ptr);"
+            res += f"{INDENT * 2}if (functions::get_variant_get_type()(&{pythonize_name(argument['name'])}.native_ptr) != GDEXTENSION_VARIANT_TYPE_OBJECT){{"
+            res = generate_newline(res)
+            res += f"{INDENT * 3}functions::get_variant_destroy()(&{pythonize_name(argument['name'])}.native_ptr);"
+            res = generate_newline(res)
+            res +=f"{INDENT*2}}}"
             res = generate_newline(res)
     return res
 
