@@ -39,7 +39,7 @@ def download_file(platform, allow_copy=False):
     if (not os.path.isfile(python_file.replace(".zst", ""))):  # extracting the .zst file if it doesn't exist
         print("extracting .zst file")
         decompress_zstandard_to_folder(python_file)
-    if (not os.path.isdir(python_folder)):  # extracting the files from the tar folder
+    if (not os.path.isdir(python_files_dir + "/" + export_name)):  # extracting the files from the tar folder
         print("extracting .tar file")
         extract_tar(python_file.replace(".zst", ""), export_name)
 

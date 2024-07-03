@@ -34,6 +34,7 @@ namespace godot{
           void _init_values(); //# self-defined
           void update_instance_data(InstanceData* gd_instance, PyObject* instance); // self-defined
           void apply_code();
+          std::string path_as_string();
 
            void _editor_can_reload_from_file(GDExtensionTypePtr res);
            void _can_instantiate(GDExtensionTypePtr res);
@@ -68,6 +69,6 @@ namespace godot{
            void _get_rpc_config(GDExtensionTypePtr res);
 
            void _set_source_code_internal(String& source_code);
-           void set_path(const char* path);
+           /*void set_path(const char* path);*/
     };
 }

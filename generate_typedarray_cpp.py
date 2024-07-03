@@ -81,6 +81,7 @@ def generate_import(class_, is_core):
         res = f'''
 #include "py4godot/cpputils/utils.h"
 #include "py4godot/cppclasses/generated4_core.h"
+#include "py4godot/cppclasses/typedarrays.h"
 #include "py4godot/godot_bindings/main.h"
 #include <stdlib.h>
 '''
@@ -92,10 +93,10 @@ def generate_import(class_, is_core):
         return res
 
     result = f'#include "py4godot/cpputils/utils.h"\n' \
-             f'#include "py4godot/cppclasses/generated4_core.h"\n'
+             f'#include "py4godot/cppclasses/generated4_core.h"\n'\
+             f'#include "py4godot/cppclasses/typedarrays.h"\n'
     f'#include <memory>"\n'
     return result
-
 
 def generate_constructor_args(constructor, should_make_shared = False):
     result = ""
@@ -114,6 +115,7 @@ def generate_constructor_args(constructor, should_make_shared = False):
             result += f"{untypearray(unenumize_type(arg_type))} {pythonize_name(arg['name'])}, "
     result = result[:-2]
     return result
+
 def ref(type_):
     return "&" if type_ not in {"float", "int", "bool"} else ""
 
@@ -172,9 +174,20 @@ def call_constructor_args(constructor):
     if "arguments" not in constructor.keys():
         return res
     for arg in constructor["arguments"]:
-        res += pythonize_name(arg['name']) + ", "
+        res += unref_pointer_constructor(type_ = arg["type"], value_name = pythonize_name(arg['name'])) + ", "
 
     return res.rstrip(", ")
+
+def unref_pointer_constructor(type_, value_name="value"):
+    if type_ in typed_arrays_names or "typedarray" in type_:
+        return f"*({value_name})"
+    if type_ in builtin_classes - {"int", "float", "bool", "Nil"}:
+        return f"*({value_name})"
+    if type_ in classes:
+        return f"*({value_name})"
+    return value_name
+
+
 
 
 def generate_constructors(class_):
@@ -208,13 +221,13 @@ def generate_constructors(class_):
         res += "}"
         res = generate_newline(res)
 
-        res += f"{INDENT}{class_['name']} {class_['name']}::py_new{constructor['index']}({generate_constructor_args(constructor)})" + "{"
+        res += f"{INDENT}std::shared_ptr<{class_['name']}> {class_['name']}::py_new{constructor['index']}({generate_constructor_args(constructor, should_make_shared=True)})" + "{"
         res = generate_newline(res)
         res += f"{INDENT * 2}auto _class = {class_['name']}::new{constructor['index']}({call_constructor_args(constructor)});"
         res = generate_newline(res)
         res += f"{INDENT * 2}_class.shouldBeDeleted = false;"
         res = generate_newline(res)
-        res += f"{INDENT * 2}return _class;"
+        res += f"{INDENT * 2}return std::make_shared<{class_['name']}>(_class);"
         res = generate_newline(res)
         res += "}"
         res = generate_newline(res)
@@ -358,11 +371,18 @@ def generate_return_py_statement(method_):
     else:
         ret_val = ReturnType("_ret", method_['return_type'])
     result = ""
-    if ret_val.type in builtin_classes - {"float", "int", "bool", "Nil"} or "typedarray::" in ret_val.type:
-        result += f"{INDENT * 2}_ret.shouldBeDeleted=false;"
-        result = generate_newline(result)
-    result += f"{INDENT * 2}return _ret;"
+    result += f"{INDENT * 2}return {generate_ret_ptr(ret_val.type, '_ret')};"
     return result
+
+def generate_ret_ptr(type_, _ret_name = "_ret"):
+    if untypearray(type_) in typed_arrays_names:
+        return f"std::make_shared<{untypearray(type_)}>({_ret_name})"
+    if type_ in builtin_classes - {"int", "float", "bool", "Nil"}:
+        return f"std::make_shared<{type_}>({_ret_name})"
+    if type_ in classes:
+        return f"std::make_shared<{type_}>({_ret_name})"
+    return _ret_name
+
 
 
 def generate_singleton_constructor(classname):
@@ -670,6 +690,50 @@ def unvarianttype(type_):
         return "PyObject*"
     return type_
 
+def generate_args(method_with_args, builtin_classes, is_cpp=False, should_make_shared=False):
+    result = " "
+    if (is_static(method_with_args)):
+        result = ""
+    if "arguments" not in method_with_args:
+        if method_with_args["is_vararg"]:
+            if not is_cpp:
+                return "std::vector<PyObject*>& varargs"
+            else:
+                return "std::vector<PyObject*>& varargs"
+        return result[:-2]
+
+    for arg in method_with_args["arguments"]:
+        if arg["type"] not in builtin_classes and not arg["type"].startswith("enum::") and not arg["type"].startswith(
+                "bitfield::") and not arg["type"].startswith("typedarray::") \
+                and not arg["type"] == "Variant":
+            if should_make_shared:
+                result += f"{make_ptr(unenumize_type(untypearray(unbitfield_type(arg['type']))))} {pythonize_name(arg['name'])}, "
+            else:
+                result += f"{unenumize_type(untypearray(unbitfield_type(arg['type'])))}* {pythonize_name(arg['name'])}, "
+        elif untypearray(arg["type"]) in builtin_classes - {"int", "float", "bool", "Nil"} or arg["type"] == "Variant":
+            if should_make_shared:
+                result += f"{make_ptr(unenumize_type(untypearray(unbitfield_type(arg['type']))))} {pythonize_name(arg['name'])}, "
+            else:
+                result += f"{unenumize_type(untypearray(unbitfield_type(arg['type'])))}& {pythonize_name(arg['name'])}, "
+        elif untypearray(arg["type"]) in typed_arrays_names:
+            if should_make_shared:
+                result += f"{make_ptr(unenumize_type(untypearray(unbitfield_type(arg['type']))))} {pythonize_name(arg['name'])}, "
+            else:
+                result += f"{unenumize_type(untypearray(unbitfield_type(arg['type'])))}& {pythonize_name(arg['name'])}, "
+        elif arg["type"] in {"int", "float", "bool"}:
+            result += f"{ungodottype(unenumize_type(untypearray(unbitfield_type(arg['type']))))} {pythonize_name(arg['name'])}, "
+
+        else:
+            # enums are marked with enum:: . To be able to use this, we have to strip this
+            arg_type = arg["type"].replace("enum::", "")
+            result += f"int {pythonize_name(arg['name'])} , "  # TODO: Look over this, enable enums again
+    result = result[:-2]
+
+    if method_with_args["is_vararg"]:
+        result += ", std::vector<PyObject*>& varargs "
+    return result
+
+
 def generate_method(class_, mMethod):
     res = ""
     if has_native_struct(mMethod):
@@ -932,8 +996,6 @@ def generate_common_methods(class_):
     result = ""
     if not is_singleton(class_["name"]):
         result += generate_destructor(class_["name"])
-        result = generate_newline(result)
-        result += generate_constructor(class_["name"])
         result = generate_newline(result)
     result += generate_new_static(class_)
     result = generate_newline(result)
@@ -1255,27 +1317,6 @@ def get_classes_to_import(classes):
                     classes_to_import.append(simplify_type(prop["type"]))
 
     return classes_to_import
-
-
-def generate_constructor(classname):
-    res = ""
-    res += f"{INDENT}{classname} {classname}::constructor()" + "{"
-    res = generate_newline(res)
-    res += f"{INDENT * 2}{classname} class_ = {classname}();"
-    res = generate_newline(res)
-    res += f"{INDENT * 2}StringName class_name =  c_string_to_string_name(\"{classname}\");"
-    res = generate_newline(res)
-    res += f"{INDENT * 2}class_name.shouldBeDeleted = true;"
-    res = generate_newline(res)
-
-    res += f"{INDENT * 2}class_.set_godot_owner(functions::get_classdb_construct_object()(&class_name.godot_owner));"
-    res = generate_newline(res)
-    res += f"{INDENT * 2}return class_;"
-    res = generate_newline(res)
-    res += INDENT + "}"
-    res = generate_newline(res)
-    return res
-
 
 def generate_new_static(class_):
     res = ""

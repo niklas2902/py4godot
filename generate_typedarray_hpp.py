@@ -378,8 +378,6 @@ def generate_common_methods(class_):
     if not is_singleton(class_["name"]):
         result += generate_destructor(class_["name"])
         result = generate_newline(result)
-        result += generate_constructor(class_["name"])
-        result = generate_newline(result)
     result += generate_constructors(class_)
     result = generate_newline(result)
     result += generate_new_static(class_)
@@ -589,13 +587,6 @@ def get_class_from_enum(type_):
     enum_type = type_.replace("enum::", "")
     type_list = enum_type.split(".")
     return type_list[0]
-
-
-def generate_constructor(classname):
-    res = ""
-    res += f"{INDENT}static {classname} constructor();"
-    res = generate_newline(res)
-    return res
 
 
 def generate_destructor(classname):

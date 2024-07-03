@@ -25,6 +25,10 @@ class CustomPrint:
         # Add your custom logic here
         gdprint("debug", text.strip())
 
+    def flush(self):
+        # Flush method to ensure compatibility with sys.stdout
+        pass
+
 
 cdef api void forward_print():
 

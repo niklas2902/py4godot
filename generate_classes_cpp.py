@@ -206,6 +206,8 @@ def convert_camel_case_to_underscore(string):
         was_upper = char.isupper()
         was_number = char in {"1", "2", "3", "4", "5", "6", "7", "8", "9", "0"}
     if ((
+            "vector4" in res.lower() or
+            ""
             "vector3" in res.lower() or "vector2" in res.lower()) or "float64" in res.lower() or "float32" in res.lower() or "int64" in res.lower() or "int32" in res.lower()):
         res = res.replace("Array", "_Array")
     return res
@@ -553,7 +555,8 @@ def get_variant_type(class_name):
         "packedstringarray": "GDEXTENSION_VARIANT_TYPE_PACKED_STRING_ARRAY",
         "packedvector2array": "GDEXTENSION_VARIANT_TYPE_PACKED_VECTOR2_ARRAY",
         "packedvector3array": "GDEXTENSION_VARIANT_TYPE_PACKED_VECTOR3_ARRAY",
-        "packedcolorarray": "GDEXTENSION_VARIANT_TYPE_PACKED_COLOR_ARRAY"
+        "packedcolorarray": "GDEXTENSION_VARIANT_TYPE_PACKED_COLOR_ARRAY",
+        "packedvector4array": "GDEXTENSION_VARIANT_TYPE_PACKED_VECTOR4_ARRAY"
     }
     if (class_name in typed_arrays_names):
         return "GDEXTENSION_VARIANT_TYPE_ARRAY"
@@ -801,7 +804,11 @@ def free_variants(mMethod):
         return res
     for argument in mMethod["arguments"]:
         if argument["type"] == "Variant":
-            res += f"{INDENT * 2}functions::get_variant_destroy()(&{pythonize_name(argument['name'])}.native_ptr);"
+            res += f"{INDENT * 2}if (functions::get_variant_get_type()(&{pythonize_name(argument['name'])}.native_ptr) != GDEXTENSION_VARIANT_TYPE_OBJECT){{"
+            res = generate_newline(res)
+            res += f"{INDENT * 3}functions::get_variant_destroy()(&{pythonize_name(argument['name'])}.native_ptr);"
+            res = generate_newline(res)
+            res +=f"{INDENT*2}}}"
             res = generate_newline(res)
     return res
 

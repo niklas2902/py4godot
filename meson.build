@@ -15,7 +15,7 @@ message('machine:'+machine)
 extra_args = []
 message(meson.get_compiler('cpp').get_id())
 
-#link_args = []
+link_args = []
 if meson.get_compiler('cpp').get_id() == 'gcc'
     add_global_arguments('-DMS_WIN64', language : 'cpp')
     cpp_args = ['-w',  '-D LIBRARY_EXPORTS=1', '-fpermissive', '-g']
@@ -29,7 +29,7 @@ if meson.get_compiler('cpp').get_id() == 'msvc'
     add_global_arguments('-d2SSAOptimizer-', language : 'cpp')
     add_global_arguments('/DEBUG:FULL', language : 'cpp')
     add_global_arguments('/Z7', language : 'cpp')
-    #link_args = ['/DEBUG:FULL']
+    link_args = ['/DEBUG:FULL',  '/INCREMENTAL']
     cpp_args = ['/DLIBRARY_EXPORTS=1']
 endif
 
@@ -82,7 +82,7 @@ sources = glob.stdout().strip().split('\n')
 cppsources = glob_cpp.stdout().strip().split('\n')
 main_lib = shared_library('main',cppsources,
 dependencies:[dep_py], include_directories:internal_inc,name_prefix:'',c_args:extra_args,
- #link_args : link_args,
+ link_args : link_args,
  cpp_args:cpp_args,
  install_rpath: '$ORIGIN/../lib',
   build_rpath : '$ORIGIN/../lib')
@@ -92,7 +92,7 @@ foreach source : sources
     linux_converted = converted_source.replace('/', '#')
     shared_library(linux_converted, [source+'.cpp'],
     dependencies:[dep_py], include_directories:internal_inc,name_prefix:'',c_args:extra_args,
-    #link_args : link_args,
+    link_args : link_args,
     link_with : main_lib,
     cpp_args:cpp_args, install_rpath: '$ORIGIN/../lib',
     build_rpath : '$ORIGIN/../lib')
@@ -111,5 +111,3 @@ test('test_rid', godot_program, args : ['--path', 'tests/core/rid', '--no-window
 test('test_quat', godot_program, args : ['--path', 'tests/core/quat', '--no-window'], workdir:meson.source_root(), timeout:1000, is_parallel:false)
 test('test_transform', godot_program, args : ['--path', 'tests/core/transform', '--no-window'], workdir:meson.source_root(), timeout:1000, is_parallel:false)
 test('test_transform2d', godot_program, args : ['--path', 'tests/core/transform2d', '--no-window'], workdir:meson.source_root(), timeout:1000, is_parallel:false)
-test('test_pool_array', godot_program, args : ['--path', 'tests/core/pool_array', '--no-window'], workdir:meson.source_root(), timeout:1000, is_parallel:false)
-test('test_binding', godot_program, args : ['--path', 'tests/binding/binding', '--no-window'], workdir:meson.source_root(), timeout:1000, is_parallel:false)

@@ -159,6 +159,15 @@ void PyScriptExtension::_can_instantiate(GDExtensionTypePtr res){
     }
 }
 
+std::string PyScriptExtension::path_as_string(){
+    auto path = get_path();
+    char* path_as_c_string;
+    gd_string_to_c_string( &path.godot_owner, path.length(), &path_as_c_string);
+    std::string path_string = std::string{path_as_c_string};
+    free(path_as_c_string);
+    return path_string;
+}
+
 void  PyScriptExtension::_get_base_script(GDExtensionTypePtr res){
        print_error("_get_base_script");
 }
@@ -201,13 +210,13 @@ void PyScriptExtension::_instance_create( Object& for_object, GDExtensionTypePtr
     print_error("_instance_create");
     functions::get_print_error()("instance_create", "test", "test", 1, 1);
     auto gil_state = PyGILState_Ensure();
+
     GDExtensionVariantFromTypeConstructorFunc constructor_func;
     GDExtensionScriptInstancePtr instance_ptr;
     GDExtensionScriptInstanceInfo* instance_info;
     auto instance = instantiate_class(transfer_object.class_);
     if(instance == Py_None || instance == nullptr){
-        assert(false);
-
+         *((GDExtensionTypePtr*)res) = nullptr;
         return;
     }
     InstanceData* gd_instance = new InstanceData();
@@ -228,15 +237,17 @@ void PyScriptExtension::_instance_create( Object& for_object, GDExtensionTypePtr
 void PyScriptExtension::_placeholder_instance_create( Object& for_object, GDExtensionTypePtr res){
     print_error("_placeholder_instance_create");
 
+    auto path = get_path();
     auto gil_state = PyGILState_Ensure();
     //for_object.get_class()
+
     GDExtensionVariantFromTypeConstructorFunc constructor_func;
     GDExtensionScriptInstancePtr instance_ptr;
     GDExtensionScriptInstanceInfo* instance_info;
     InstanceData* gd_instance = new InstanceData();
     auto instance = instantiate_class(transfer_object.class_);
     if(instance == Py_None || instance == nullptr){
-
+        *((GDExtensionTypePtr*)res) = nullptr;
         return;
     }
     gd_instance->is_placeholder = !transfer_object.is_tool;
@@ -355,7 +366,8 @@ void PyScriptExtension::apply_code(){
 
     auto gil_state = PyGILState_Ensure();
     auto source = PyUnicode_FromString(this->source_code.c_str());
-    auto _path = PyUnicode_FromString(path.c_str());
+    std::string script_path = path_as_string();
+    auto _path = PyUnicode_FromString(script_path.c_str());
     assert(source != nullptr);
     assert(_path != nullptr);
     transfer_object = exec_class(source, _path);
@@ -366,9 +378,11 @@ void PyScriptExtension::apply_code(){
 
 }
 
+/*
 void PyScriptExtension::set_path( const char* path){
     this->path = std::string{path};
 }
+*/
 namespace script{
 void call_virtual_func__editor_can_reload_from_file(GDExtensionClassInstancePtr p_instance, const GDExtensionConstTypePtr* p_args, GDExtensionTypePtr r_ret) {
     PyScriptExtension* pylanguage = static_cast<PyScriptExtension*> (p_instance);
