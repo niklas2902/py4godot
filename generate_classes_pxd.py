@@ -199,6 +199,7 @@ if __name__ == "__main__":
 
         res = ""
         for class_ in arrays:
+            print(class_["name"])
             res += f"from py4godot.classes.cpp_bridge cimport {class_['name']} as CPP{class_['name']} "
             res = generate_newline(res)
             res += f"from libcpp.memory cimport shared_ptr, allocator"
