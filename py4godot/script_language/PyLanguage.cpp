@@ -144,6 +144,12 @@
     add_string_to_array(res,string_del4);
 
   }
+    void PyLanguage::_get_doc_comment_delimiters(GDExtensionTypePtr res){
+    print_error("_get_doc_comment_delimiters");
+    auto string_del = c_string_to_string("\"\"\"");
+    add_string_to_array(res,string_del);
+  }
+
 
   void PyLanguage::_make_template(String& template_, String& class_name, String& base_class_name,GDExtensionTypePtr res){
     print_error("_make_template");
@@ -159,7 +165,8 @@
 
   void PyLanguage::_get_built_in_templates(StringName& object, GDExtensionTypePtr res){
     print_error("_get_built_int_templates");
-    if(object != c_string_to_string_name("Object")){
+    godot::String object_string = c_string_to_string("Object");
+    if(object != object_string){
         return;
     }
 
@@ -508,6 +515,17 @@ void call_virtual_func__get_string_delimiters(GDExtensionClassInstancePtr p_inst
 }
 
 StringName func_name__get_string_delimiters;
+
+
+void call_virtual_func__get_doc_comment_delimiters(GDExtensionClassInstancePtr p_instance, const GDExtensionConstTypePtr* p_args, GDExtensionTypePtr r_ret) {
+    PyLanguage* pylanguage = static_cast<PyLanguage*> (p_instance);
+
+
+
+    pylanguage->_get_doc_comment_delimiters(r_ret);
+}
+
+StringName func_name__get_doc_comment_delimiters;
 
 
 void call_virtual_func__make_template(GDExtensionClassInstancePtr p_instance, const GDExtensionConstTypePtr* p_args, GDExtensionTypePtr r_ret) {
@@ -1082,6 +1100,10 @@ GDExtensionClassCallVirtual get_virtual(void *p_userdata, GDExtensionConstString
         return call_virtual_func__get_string_delimiters;
     }
 
+    else if (string_names_equal(func_name__get_doc_comment_delimiters, name)){
+        return call_virtual_func__get_doc_comment_delimiters;
+    }
+
     else if (string_names_equal(func_name__make_template, name)){
         return call_virtual_func__make_template;
     }
@@ -1270,6 +1292,7 @@ void init_func_names(){
     func_name__is_control_flow_keyword = c_string_to_string_name("_is_control_flow_keyword");
     func_name__get_comment_delimiters = c_string_to_string_name("_get_comment_delimiters");
     func_name__get_string_delimiters = c_string_to_string_name("_get_string_delimiters");
+    func_name__get_doc_comment_delimiters = c_string_to_string_name("_get_doc_comment_delimiters");
     func_name__make_template = c_string_to_string_name("_make_template");
     func_name__get_built_in_templates = c_string_to_string_name("_get_built_in_templates");
     func_name__is_using_templates = c_string_to_string_name("_is_using_templates");

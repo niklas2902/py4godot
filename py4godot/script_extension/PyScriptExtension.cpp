@@ -159,6 +159,17 @@ void PyScriptExtension::_can_instantiate(GDExtensionTypePtr res){
     }
 }
 
+
+void PyScriptExtension::_is_abstract(GDExtensionTypePtr res){
+   print_error("_is_abstract");
+   *(bool*)res = false;
+}
+
+void PyScriptExtension::_get_class_item_path(GDExtensionTypePtr res){
+   print_error("_is_class_item_path");
+}
+
+
 std::string PyScriptExtension::path_as_string(){
     auto path = get_path();
     char* path_as_c_string;
@@ -403,6 +414,27 @@ void call_virtual_func__can_instantiate(GDExtensionClassInstancePtr p_instance, 
 }
 
 StringName func_name__can_instantiate;
+
+void call_virtual_func__is_abstract(GDExtensionClassInstancePtr p_instance, const GDExtensionConstTypePtr* p_args, GDExtensionTypePtr r_ret) {
+    PyScriptExtension* pylanguage = static_cast<PyScriptExtension*> (p_instance);
+
+
+
+    pylanguage->_is_abstract(r_ret);
+}
+
+StringName func_name__is_abstract;
+
+void call_virtual_func__get_class_item__path(GDExtensionClassInstancePtr p_instance, const GDExtensionConstTypePtr* p_args, GDExtensionTypePtr r_ret) {
+    PyScriptExtension* pylanguage = static_cast<PyScriptExtension*> (p_instance);
+
+
+
+    pylanguage->_get_class_item_path(r_ret);
+}
+
+StringName func_name__get_class_item_path;
+
 
 
 void call_virtual_func__get_base_script(GDExtensionClassInstancePtr p_instance, const GDExtensionConstTypePtr* p_args, GDExtensionTypePtr r_ret) {
@@ -864,6 +896,14 @@ GDExtensionClassCallVirtual get_virtual_script(void *p_userdata, GDExtensionCons
         return script::call_virtual_func__is_placeholder_fallback_enabled;
     }
 
+    else if (string_names_equal_script(script::func_name__is_abstract, name)){
+        return script::call_virtual_func__is_abstract;
+    }
+
+    else if (string_names_equal_script(script::func_name__get_class_item_path, name)){
+        return script::call_virtual_func__get_class_item__path;
+    }
+
     assert(false); // There are methods not being handled
     return nullptr;
 }
@@ -871,6 +911,7 @@ GDExtensionClassCallVirtual get_virtual_script(void *p_userdata, GDExtensionCons
 void init_func_names_script(){
     script::func_name__editor_can_reload_from_file = c_string_to_string_name("_editor_can_reload_from_file");
     script::func_name__can_instantiate = c_string_to_string_name("_can_instantiate");
+    script::func_name__is_abstract = c_string_to_string_name("_is_abstract");
     script::func_name__get_base_script = c_string_to_string_name("_get_base_script");
     script::func_name__get_global_name = c_string_to_string_name("_get_global_name");
     script::func_name__inherits_script = c_string_to_string_name("_inherits_script");
@@ -899,6 +940,7 @@ void init_func_names_script(){
     script::func_name__get_constants = c_string_to_string_name("_get_constants");
     script::func_name__get_members = c_string_to_string_name("_get_members");
     script::func_name__is_placeholder_fallback_enabled = c_string_to_string_name("_is_placeholder_fallback_enabled");
+    script::func_name__get_class_item_path = c_string_to_string_name("_get_class_icon_path");
 }
 
 void register_class_script(){
