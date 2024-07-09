@@ -58,6 +58,4 @@ void init_signal_description(char* name, std::vector<CPPSignalArg>& args, std::s
 
     //add args dictionaries to args array
     var_args.init_type(args_array);
-
-    return signal_dict_ptr;
 }
