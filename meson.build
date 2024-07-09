@@ -1,6 +1,7 @@
 project('py4godot', 'cpp')
 
 cc = meson.get_compiler('cpp')
+main_name = 'main'
 message('system:'+build_machine.system())
 message('cpu_familiy:'+build_machine.cpu_family())
 platform_format = ''
@@ -45,6 +46,7 @@ if build_machine.system() == 'windows'
     'py4godot/pluginscript_api/utils')
     glob = run_command('python', files(meson.current_source_dir()+'/meson_scripts/glob_tools.py'))
     glob_cpp = run_command('python', files(meson.current_source_dir()+'/meson_scripts/glob_tools_cpp.py'))
+    main_name = '~main' # This is a weird phenomenon of godot 4.2. It copies the dll and renames it. Thus, we have to change what we depend on to the real dll loaded
 endif
 if meson.has_external_property('is_mingw') and build_machine.system() == 'linux'
     message('using mingw')
@@ -58,6 +60,7 @@ if meson.has_external_property('is_mingw') and build_machine.system() == 'linux'
     glob = run_command('python3', files(meson.current_source_dir()+'/meson_scripts/glob_tools.py'))
     glob_cpp = run_command('python3', files(meson.current_source_dir()+'/meson_scripts/glob_tools_cpp.py'))
     dep_py = lib_py
+    main_name = '~main' # This is a weird phenomenon of godot 4.2. It copies the dll and renames it. Thus, we have to change what we depend on to the real dll loaded
 endif
 
 if not meson.has_external_property('is_mingw') and build_machine.system() == 'linux'
@@ -80,7 +83,7 @@ godot_program = find_program('godot')
 sources = glob.stdout().strip().split('\n')
 
 cppsources = glob_cpp.stdout().strip().split('\n')
-main_lib = shared_library('main',cppsources,
+main_lib = shared_library(main_name,cppsources,
 dependencies:[dep_py], include_directories:internal_inc,name_prefix:'',c_args:extra_args,
  link_args : link_args,
  cpp_args:cpp_args,

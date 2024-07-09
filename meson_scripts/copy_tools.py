@@ -61,7 +61,8 @@ def copy_main(platform):
     # Todo: check whether python39.dll can be in another path copying the main.pyd inside the python version,
     #  as the pythin39.dll must currently be in the same directory as main.pyd/main.so
     if "windows" in platform:
-        copy(f"build/{platform}/main.dll",
+        # This is a weird phenomenon of godot 4.2. It copies the dll and renames it. Thus, we have to change what we depend on
+        copy(f"build/{platform}/~main.dll",
              f"build/final/{platform}/{config_data['python_ver']}-{platform}/python/install/main.dll")
     elif "linux" in platform:
         copy(f"build/{platform}/main.so",
