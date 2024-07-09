@@ -173,7 +173,6 @@ from py4godot.classes.ZIPPacker.ZIPPacker cimport *
 from py4godot.classes.GraphEdit.GraphEdit cimport *
 from py4godot.classes.TileSetSource.TileSetSource cimport *
 from py4godot.classes.GDExtension.GDExtension cimport *
-from py4godot.classes.Label3D.Label3D cimport *
 from py4godot.classes.DirectionalLight2D.DirectionalLight2D cimport *
 from py4godot.classes.ArrayOccluder3D.ArrayOccluder3D cimport *
 from py4godot.classes.AnimatedSprite3D.AnimatedSprite3D cimport *
@@ -1230,10 +1229,6 @@ cdef api PyObject* cast_to_tilesetsource(PyObject* other):
   return <PyObject*>o
 cdef api PyObject* cast_to_gdextension(PyObject* other):
   cdef GDExtension o = GDExtension.cast(<Object>other)
-  vals.append(o)
-  return <PyObject*>o
-cdef api PyObject* cast_to_label3d(PyObject* other):
-  cdef Label3D o = Label3D.cast(<Object>other)
   vals.append(o)
   return <PyObject*>o
 cdef api PyObject* cast_to_directionallight2d(PyObject* other):

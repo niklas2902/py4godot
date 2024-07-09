@@ -51,7 +51,7 @@ void PyResourceFormatSaver::_init_values(){}
     file.flush();
     functions::get_object_destroy()(file.godot_owner);
 
-    *((GDExtensionTypePtr*) res) = 0/*OK*/;
+    *reinterpret_cast<int*>(res) = 0;
     script.reload(false);//update if properties changed //TODO:Better place?
     }
   void PyResourceFormatSaver::_set_uid( String& path, int uid, GDExtensionTypePtr res){
@@ -59,7 +59,8 @@ void PyResourceFormatSaver::_init_values(){}
   }
   void PyResourceFormatSaver::_recognize( Resource& resource, GDExtensionTypePtr res){
     print_error("_recognize");
-      *((bool*)res) =  resource.godot_owner != nullptr;
+    bool recognized =  resource.godot_owner != nullptr;
+    *reinterpret_cast<bool*>(res) = recognized;
   }
   void PyResourceFormatSaver::_get_recognized_extensions( Resource& resource, GDExtensionTypePtr res){
     print_error("_get_recognized_extensions");
@@ -72,6 +73,7 @@ void PyResourceFormatSaver::_init_values(){}
   }
   void PyResourceFormatSaver::_recognize_path( Resource& resource, String& path, GDExtensionTypePtr res){
     print_error("_recognize_path");
+    *reinterpret_cast<bool*>(res) = true;
   }
 
 
@@ -131,7 +133,7 @@ namespace saver{
 
 
     GDExtensionClassCallVirtual get_virtual_saver(void *p_userdata, GDExtensionConstStringNamePtr p_name) {
-            std::lock_guard<std::mutex> lock(mtx);
+        std::lock_guard<std::mutex> lock(mtx);
 
         StringName name = StringName::new_static(((void**)const_cast<GDExtensionTypePtr>(p_name))[0]);
 

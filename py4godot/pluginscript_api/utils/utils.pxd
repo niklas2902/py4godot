@@ -1,6 +1,7 @@
 from py4godot.godot_bindings.binding4_godot4 cimport *
 from py4godot.classes.cpp_bridge cimport *
 from libcpp.vector cimport vector
+from libcpp.memory cimport shared_ptr
 
 cdef extern from "help_types.h":
     ctypedef struct TransferObject:
@@ -17,7 +18,7 @@ cdef extern from "help_types.h":
         GDExtensionVariantType type;
 
 cdef extern from "py4godot/pluginscript_api/utils/signal_description_utils.h":
-    shared_ptr[Dictionary] init_signal_description(char* name, vector[CPPSignalArg] args)
+    void init_signal_description(char* name, vector[CPPSignalArg]& args, shared_ptr[Dictionary]& output)
     void print_error(char* text)
 
 cdef extern from "py4godot/pluginscript_api/utils/property_description_utils.h":

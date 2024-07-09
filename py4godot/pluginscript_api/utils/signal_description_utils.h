@@ -27,22 +27,20 @@ void create_signal_arg(const char* name, int variant_type, Array& args_dicts){
 }
 
 
-std::shared_ptr<Dictionary> init_signal_description(char* name, std::vector<CPPSignalArg> args){
-    auto signal_dict =  Dictionary::new0();
-    signal_dict.shouldBeDeleted=false;
+void init_signal_description(char* name, std::vector<CPPSignalArg>& args, std::shared_ptr<Dictionary>& signal_dict_ptr){
     String signal_key = c_string_to_string("name");
     Variant signal_key_variant = Variant(signal_key);
     auto temp_name = c_string_to_string(name);
     Variant signal_name_variant = Variant(temp_name);
-    Variant var_name = Variant::new_static(functions::get_dictionary_operator_index()(&signal_dict.godot_owner, &signal_key_variant.native_ptr));
+    Variant var_name = Variant::new_static(functions::get_dictionary_operator_index()(&(*signal_dict_ptr).godot_owner, &signal_key_variant.native_ptr));
     auto string_name = c_string_to_string(name);
     var_name.init_type(string_name);
-    auto var_signal_dict = Variant(signal_dict);
+    auto var_signal_dict = Variant(*signal_dict_ptr);
 
     // add args
     String arg_key = c_string_to_string("args");
     Variant arg_key_variant = Variant(arg_key);
-    Variant var_args = Variant::new_static(functions::get_dictionary_operator_index()(&signal_dict.godot_owner, &arg_key_variant.native_ptr));
+    Variant var_args = Variant::new_static(functions::get_dictionary_operator_index()(&(*signal_dict_ptr).godot_owner, &arg_key_variant.native_ptr));
 
     Array args_array = Array::new0();
     args_array.shouldBeDeleted=false;
@@ -60,7 +58,6 @@ std::shared_ptr<Dictionary> init_signal_description(char* name, std::vector<CPPS
 
     //add args dictionaries to args array
     var_args.init_type(args_array);
-    auto signal_dict_ptr = std::make_shared<Dictionary>(signal_dict);
 
     return signal_dict_ptr;
 }

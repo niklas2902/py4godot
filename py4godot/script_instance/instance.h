@@ -68,9 +68,9 @@ GDExtensionBool c_instance_set(GDExtensionScriptInstanceDataPtr p_instance, GDEx
 }
 
 const GDExtensionPropertyInfo * c_instance_get_property_list(GDExtensionScriptInstanceDataPtr p_instance, uint32_t *r_count){
-        print_error("_c_instance_get_property_list");
+    print_error("_c_instance_get_property_list");
     auto p_instance_data = (InstanceData*) p_instance;
-    auto properties = p_instance_data->properties;
+    auto& properties = p_instance_data->properties;
     *r_count = properties.size();
     if (properties.size() == 0) {
         return nullptr;

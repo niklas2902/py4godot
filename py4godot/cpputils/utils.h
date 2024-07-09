@@ -81,6 +81,19 @@ static StringName c_string_to_string_name(const char* string){
     return gd_string_name;
 }
 
+static void c_string_to_string_name_void(const char* string, void** stringname){
+    String gd_string = String::new0();
+    functions::get_string_new_with_utf8_chars()(&gd_string.godot_owner, string);
+    StringName gd_string_name = StringName::new2(gd_string);
+
+    auto variant_type = GDExtensionVariantType::GDEXTENSION_VARIANT_TYPE_STRING_NAME;
+    GDExtensionPtrConstructor constructor = functions::get_variant_get_ptr_constructor()(variant_type, 1);
+    GDExtensionTypePtr _args[1];
+    _args[0] = &gd_string.godot_owner;
+
+    constructor(*stringname,_args);
+}
+
 static std::shared_ptr<StringName> c_string_to_string_name_ptr(const char* string){
     std::shared_ptr<String> gd_string = String::py_new0();
     functions::get_string_new_with_utf8_chars()(&gd_string->godot_owner, string);

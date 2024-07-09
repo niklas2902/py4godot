@@ -25,7 +25,7 @@ def run(platform):
     for entry in list_dll:
         entry = entry.lstrip("/")
         if entry.startswith("build"):
-            if "windows" in platform:
+            if "windows" in entry:
                 os.makedirs(os.path.dirname(
                     f"build/final/{platform}/{config_data['python_ver']}-{platform}/python/install/Lib/site-packages/" + strip_platform(
                         entry.lstrip("build").replace("#", "/"))),
@@ -36,15 +36,18 @@ def run(platform):
                      replace(".dll", ".pyd"))  # dst can be a folder; use copy2() to preserve timestamp
             else:
                 os.makedirs(os.path.dirname(
-                    f"build/final/{platform}/{config_data['python_ver']}-{platform}/python/install/Lib/site-packages/" + strip_platform(
+                    f"build/final/{platform}/{config_data['python_ver']}-{platform}/python/install/lib/python3.11/" + strip_platform(
                         entry.lstrip("build").replace("#", "/"))),
                     exist_ok=True)
                 copy(entry,
-                     f"build/final/{platform}/{config_data['python_ver']}-{platform}/python/install/python/libs/" + strip_platform(
-                         entry.lstrip("build").replace("#", "/")))  # dst can be a folder; use copy2() to preserve timestamp
+                     f"build/final/{platform}/{config_data['python_ver']}-{platform}/python/install/lib/python3.11/" + strip_platform(
+                         entry.lstrip("build").replace("#", "/")).
+                     replace(".dll", ".pyd"))  # dst can be a folder; use copy2() to preserve timestamp
 
     if "windows" in platform:
         list_dll = glob.glob("**/*.pdb", recursive=True)
+    else:
+        return
     for entry in list_dll:
         entry = entry.lstrip("/")
         if entry.startswith("build"):
@@ -83,15 +86,23 @@ def copy_tests(platform):
             rmtree(f"{binding_test}/addons/{platform}")
         copytree(f"build/final/{platform}", f"{binding_test}/addons/{platform}")
 
+
 def copy_stub_files(platform):
     for file in (glob.glob("**/*.pyi", recursive=True)):
         if not file.startswith("py4godot"):
             continue
-        os.makedirs(os.path.dirname(
-            f"build/final/{platform}/{config_data['python_ver']}-{platform}/python/install/Lib/site-packages/" + file),
-            exist_ok=True)
-        copy(file,
-             f"build/final/{platform}/{config_data['python_ver']}-{platform}/python/install/Lib/site-packages/"+ file)
+        if "windows" in platform:
+            os.makedirs(os.path.dirname(
+                f"build/final/{platform}/{config_data['python_ver']}-{platform}/python/install/Lib/site-packages/" + file),
+                exist_ok=True)
+            copy(file,
+                 f"build/final/{platform}/{config_data['python_ver']}-{platform}/python/install/Lib/site-packages/" + file)
+        else:
+            os.makedirs(os.path.dirname(
+                f"build/final/{platform}/{config_data['python_ver']}-{platform}/python/install/lib/python3.11/" + file),
+                exist_ok=True)
+            copy(file,
+                 f"build/final/{platform}/{config_data['python_ver']}-{platform}/python/install/lib/python3.11/" + file)
 
 
 def copy_experimental(platform):
@@ -99,10 +110,10 @@ def copy_experimental(platform):
                  "py4godot/pluginscript_api/utils/annotation_tools.py"]:
         if "windows" in platform:
             copy(file,
-                 f"build/final/{platform}/{config_data['python_ver']}-{platform}/python/install/Lib/site-packages/" + file)
-        elif "linux" in platform:
+             f"build/final/{platform}/{config_data['python_ver']}-{platform}/python/install/Lib/site-packages/" + file)
+        else:
             copy(file,
-                 f"build/final/{platform}/{config_data['python_ver']}-{platform}/python/install/libs/" + file)
+             f"build/final/{platform}/{config_data['python_ver']}-{platform}/python/install/lib/python3.11/" + file)
 
 
 def onerror(func, path, exc_info):

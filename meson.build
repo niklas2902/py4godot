@@ -19,11 +19,11 @@ message(meson.get_compiler('cpp').get_id())
 link_args = []
 if meson.get_compiler('cpp').get_id() == 'gcc'
     add_global_arguments('-DMS_WIN64', language : 'cpp')
-    cpp_args = ['-w',  '-D LIBRARY_EXPORTS=1', '-fpermissive']
+    cpp_args = ['-w',  '-D LIBRARY_EXPORTS=1', '-fpermissive', '-g']
 endif
 if meson.get_compiler('cpp').get_id() == 'g++'
     add_global_arguments('-DMS_WIN64', language : 'cpp')
-    cpp_args = ['-w',   '-D LIBRARY_EXPORTS=1', '-fpermissive']
+    cpp_args = ['-w',   '-D LIBRARY_EXPORTS=1', '-fpermissive' , '-g']
 endif
 if meson.get_compiler('cpp').get_id() == 'msvc'
     add_global_arguments('/bigobj', language : 'cpp')
