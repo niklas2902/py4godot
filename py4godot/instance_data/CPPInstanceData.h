@@ -7,7 +7,7 @@
 struct InstanceData{
     PyObject* owner;
     std::vector<GDExtensionPropertyInfo> properties;
-    std::vector<godot::Dictionary> methods;
+    std::vector<GDExtensionMethodInfo> methods;
     std::vector<std::string> already_set_properties;
     void* script;
     GDExtensionScriptInstanceInfo info;

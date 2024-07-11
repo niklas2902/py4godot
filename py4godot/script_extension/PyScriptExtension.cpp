@@ -198,7 +198,7 @@ void PyScriptExtension::update_instance_data(InstanceData* gd_instance, PyObject
         gd_instance->owner = instance;
     }
     gd_instance->properties = transfer_object.properties;
-    //gd_instance.set_methods(methods)
+    gd_instance->methods = transfer_object.methods;
     init_instance(&(gd_instance->info), gd_instance->is_placeholder);
 
     int index = 0;
@@ -283,6 +283,11 @@ void PyScriptExtension::_instance_has( Object& object, GDExtensionTypePtr res){
 void PyScriptExtension::_has_source_code(GDExtensionTypePtr res){
     print_error("_has_source_code");
 }
+
+void PyScriptExtension::_has_static_method(GDExtensionTypePtr res) {
+    print_error("_has_static_method");
+    *((bool*)res) = false;
+}
 void PyScriptExtension::_get_source_code(GDExtensionTypePtr& res){
     print_error("_get_source_code");
     functions::get_string_new_with_utf8_chars()(res, source_code.c_str());
@@ -324,7 +329,7 @@ void PyScriptExtension::_get_language(GDExtensionTypePtr res){
 }
 void PyScriptExtension::_has_script_signal( StringName& signal, GDExtensionTypePtr res){
     print_error("has_script_signal_list");
-    *static_cast<bool*>(res) = false;
+    *static_cast<bool*>(res) = true; // TODOD: check for name
 }
 void PyScriptExtension::_get_script_signal_list(GDExtensionTypePtr res){
     print_error("_get_script_signal_list");
@@ -525,6 +530,17 @@ void call_virtual_func__has_source_code(GDExtensionClassInstancePtr p_instance, 
 }
 
 StringName func_name__has_source_code ;
+
+void call_virtual_func__has_static_method(GDExtensionClassInstancePtr p_instance, const GDExtensionConstTypePtr* p_args, GDExtensionTypePtr r_ret) {
+    PyScriptExtension* pylanguage = static_cast<PyScriptExtension*> (p_instance);
+
+
+
+    pylanguage->_has_static_method(r_ret);
+}
+
+StringName func_name__has_static_method;
+
 
 
 void call_virtual_func__get_source_code(GDExtensionClassInstancePtr p_instance, const GDExtensionConstTypePtr* p_args, GDExtensionTypePtr r_ret) {
@@ -766,7 +782,7 @@ void call_virtual_func__get_rpc_config(GDExtensionClassInstancePtr p_instance, c
 
 
 GDExtensionClassCallVirtual get_virtual_script(void *p_userdata, GDExtensionConstStringNamePtr p_name) {
-    std::lock_guard<std::mutex> lock(mtx);
+    //std::lock_guard<std::mutex> lock(mtx); TODO: enable again
 
     StringName name = StringName::new_static(((void**)const_cast<GDExtensionTypePtr>(p_name))[0]);
     String name_string = String::new2(name);
@@ -814,6 +830,10 @@ GDExtensionClassCallVirtual get_virtual_script(void *p_userdata, GDExtensionCons
 
     else if (string_names_equal_script(script::func_name__has_source_code, name)){
         return script::call_virtual_func__has_source_code;
+    }
+
+    else if (string_names_equal_script(script::func_name__has_static_method, name)) {
+        return script::call_virtual_func__has_static_method;
     }
 
     else if (string_names_equal_script(script::func_name__get_source_code, name)){
@@ -920,6 +940,7 @@ void init_func_names_script(){
     script::func_name__placeholder_instance_create = c_string_to_string_name("_placeholder_instance_create");
     script::func_name__instance_has = c_string_to_string_name("_instance_has");
     script::func_name__has_source_code = c_string_to_string_name("_has_source_code");
+    script::func_name__has_static_method = c_string_to_string_name("_has_static_method");
     script::func_name__get_source_code = c_string_to_string_name("_get_source_code");
     script::func_name__set_source_code = c_string_to_string_name("_set_source_code");
     script::func_name__reload = c_string_to_string_name("_reload");

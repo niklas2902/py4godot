@@ -8,6 +8,7 @@
 struct TransferObject{
     std::vector<godot::Dictionary> signals;
     std::vector<GDExtensionPropertyInfo> properties;
+    std::vector<GDExtensionMethodInfo> methods;
     std::vector<PyObject*> default_values;
     PyObject* class_;
     PyObject* instance;

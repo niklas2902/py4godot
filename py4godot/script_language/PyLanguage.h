@@ -33,6 +33,7 @@ namespace godot{
           void _supports_builtin_mode(GDExtensionTypePtr res);
           void _supports_documentation(GDExtensionTypePtr res);
           void _can_inherit_from_file(GDExtensionTypePtr res);
+          void _can_make_function(GDExtensionTypePtr res);
           void _find_function( String& class_name, String& function_name, GDExtensionTypePtr res);
           void _make_function( String& class_name, String& function_name, PackedStringArray& function_args, GDExtensionTypePtr res);
           void _open_in_external_editor( Script& script, int line, int column, GDExtensionTypePtr res);

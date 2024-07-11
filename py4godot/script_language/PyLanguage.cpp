@@ -136,18 +136,16 @@
     print_error("_get_string_delimiters");
     auto string_del1 = c_string_to_string("\"");
     auto string_del2 = c_string_to_string("'");
-    auto string_del3 = c_string_to_string("'''");
-    auto string_del4 = c_string_to_string("\"\"\"");
     add_string_to_array(res,string_del1);
     add_string_to_array(res,string_del2);
-    add_string_to_array(res,string_del3);
-    add_string_to_array(res,string_del4);
 
   }
     void PyLanguage::_get_doc_comment_delimiters(GDExtensionTypePtr res){
     print_error("_get_doc_comment_delimiters");
     auto string_del = c_string_to_string("\"\"\"");
+    auto string_del2 = c_string_to_string("'''");
     add_string_to_array(res,string_del);
+    add_string_to_array(res,string_del2);
   }
 
 
@@ -254,6 +252,12 @@
 
   void PyLanguage::_can_inherit_from_file(GDExtensionTypePtr res){
     print_error("_can_inherit_from_file");
+  };
+
+
+  void PyLanguage::_can_make_function(GDExtensionTypePtr res) {
+      print_error("_can_inherit_from_file");
+      *((bool*)res) = true;
   };
 
   void PyLanguage::_find_function(String& class_name, String& function_name, GDExtensionTypePtr res){
@@ -647,6 +651,17 @@ void call_virtual_func__can_inherit_from_file(GDExtensionClassInstancePtr p_inst
 }
 
 StringName func_name__can_inherit_from_file;
+
+void call_virtual_func__can_make_function(GDExtensionClassInstancePtr p_instance, const GDExtensionConstTypePtr* p_args, GDExtensionTypePtr r_ret) {
+    PyLanguage* pylanguage = static_cast<PyLanguage*> (p_instance);
+
+
+
+    pylanguage->_can_make_function(r_ret);
+}
+
+StringName func_name__can_make_function;
+
 
 
 void call_virtual_func__find_function(GDExtensionClassInstancePtr p_instance, const GDExtensionConstTypePtr* p_args, GDExtensionTypePtr r_ret) {
@@ -1144,6 +1159,10 @@ GDExtensionClassCallVirtual get_virtual(void *p_userdata, GDExtensionConstString
         return call_virtual_func__can_inherit_from_file;
     }
 
+    else if (string_names_equal(func_name__can_make_function, name)) {
+        return call_virtual_func__can_make_function;
+    }
+
     else if (string_names_equal(func_name__find_function, name)){
         return call_virtual_func__find_function;
     }
@@ -1303,6 +1322,7 @@ void init_func_names(){
     func_name__supports_builtin_mode = c_string_to_string_name("_supports_builtin_mode");
     func_name__supports_documentation = c_string_to_string_name("_supports_documentation");
     func_name__can_inherit_from_file = c_string_to_string_name("_can_inherit_from_file");
+    func_name__can_make_function = c_string_to_string_name("_can_make_function");
     func_name__find_function = c_string_to_string_name("_find_function");
     func_name__make_function = c_string_to_string_name("_make_function");
     func_name__open_in_external_editor = c_string_to_string_name("_open_in_external_editor");

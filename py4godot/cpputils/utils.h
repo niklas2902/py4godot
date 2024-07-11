@@ -12,7 +12,7 @@ static bool is_none(PyObject* pyobject){
 }
 
 static void print_error(char* error_message){
-    functions::get_print_error()(error_message, "test", "test", 1, 1);
+    //functions::get_print_error()(error_message, "test", "test", 1, 1);
 }
 
 static const char* gd_string_to_c_string( GDExtensionConstStringPtr string_ptr, int length) {

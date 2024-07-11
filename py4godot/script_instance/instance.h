@@ -78,6 +78,18 @@ const GDExtensionPropertyInfo * c_instance_get_property_list(GDExtensionScriptIn
     return &properties[0];
 }
 
+const GDExtensionMethodInfo * c_instance_get_method_list(GDExtensionScriptInstanceDataPtr p_instance, uint32_t *r_count){
+    print_error("_c_instance_get_property_list");
+    auto p_instance_data = (InstanceData*) p_instance;
+    auto& methods = p_instance_data->methods;
+    *r_count = methods.size();
+    if(methods.size() == 0){
+        return nullptr;
+    }
+
+    return &methods[0];
+}
+
 GDExtensionObjectPtr c_instance_get_script(GDExtensionScriptInstanceDataPtr p_instance){
     print_error("_c_instance_get_script");
     std::lock_guard<std::mutex> lock(mtx);
@@ -125,6 +137,7 @@ void init_instance(GDExtensionScriptInstanceInfo* native_script_instance, bool i
     native_script_instance->get_func = c_instance_get;
     native_script_instance->call_func = c_instance_call;
     native_script_instance->free_func = c_free_func;
+    native_script_instance->get_method_list_func = c_instance_get_method_list;
     if(!is_placeholder){
         native_script_instance->has_method_func = c_instance_has_method;
     }
@@ -136,7 +149,6 @@ void init_instance(GDExtensionScriptInstanceInfo* native_script_instance, bool i
     native_script_instance->property_can_revert_func = instance_property_can_revert;
     native_script_instance->property_get_revert_func = instance_property_get_revert;
     native_script_instance->get_property_state_func = instance_get_property_state;
-    native_script_instance->get_method_list_func = instance_get_method_list;
     native_script_instance->free_method_list_func = instance_free_method_list;
     native_script_instance->get_property_type_func = instance_get_property_type;
     native_script_instance->call_func = c_instance_call;

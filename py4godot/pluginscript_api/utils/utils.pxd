@@ -7,6 +7,7 @@ cdef extern from "help_types.h":
     ctypedef struct TransferObject:
         vector[Dictionary] signals
         vector[GDExtensionPropertyInfo] properties
+        vector[GDExtensionMethodInfo] methods
         vector [PyObject*] default_values
         PyObject* class_
         PyObject* instance
@@ -30,3 +31,6 @@ cdef extern from "py4godot/pluginscript_api/utils/property_description_utils.h":
     String hint_string,
     uint32_t usage
 )
+
+cdef extern from "py4godot/pluginscript_api/utils/method_description_utils.h":
+    void init_method_description(StringName name,  GDExtensionMethodInfo& method_info)
