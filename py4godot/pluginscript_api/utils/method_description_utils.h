@@ -36,7 +36,7 @@ void init_method_description(StringName name,  GDExtensionMethodInfo& method_inf
     StringName* return_name = new StringName{c_string_to_string_name("return")};
     StringName* return_class_name = new StringName{c_string_to_string_name("Nil")};
     String* return_hint = new String{c_string_to_string("")};
-    return_info.type = 0;
+    return_info.type = GDExtensionVariantType::GDEXTENSION_VARIANT_TYPE_NIL;
     return_info.name = &return_name->godot_owner;
     return_info.class_name = &return_class_name->godot_owner;
     return_info.hint = 0;
