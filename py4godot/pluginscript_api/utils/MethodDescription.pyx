@@ -18,6 +18,8 @@ cdef inc_id_counter():
 cdef class MethodDescription:
     #Description class for the properties, a gdclass can have and which can be found in the editor
     def __init__(self, name, return_value, flags,  arguments, default_arguments):
+        cdef vector[GDExtensionPropertyInfo] properties
+        cdef PropertyDescription property_description
         try:
             tools.print_error("constructor Method Description")
             inc_id_counter()
@@ -32,18 +34,14 @@ cdef class MethodDescription:
             tools.print_error(f"return-value:{self.return_value}")
             self.flags = flags
             self.id = id_counter
-
-            tools.print_error("after argument_count")
-            self.argument_count = len(arguments[1:])
-            self.arguments = arguments[1:]
-
             tools.print_error("before default_args")
-            self.default_argument_count = len(default_arguments)
-            self.default_arguments = default_arguments
+            for arg in arguments:
+                property_description = <PropertyDescription> arg
+                self.args.push_back(property_description.property_info)
             self.to_c()
         except Exception as e:
             tools.print_error(f"Exception:{e}")
         tools.print_error("after to_c")
 
     cdef void to_c(self):
-        init_method_description(self.name.StringName_internal_class_ptr.get()[0],  self.method_info)
+        init_method_description(self.name.StringName_internal_class_ptr.get()[0], self.args, self.method_info)

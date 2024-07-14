@@ -113,6 +113,10 @@ static std::shared_ptr<String> c_string_to_string_ptr(const char* string){
     return gd_string;
 }
 
+static void c_string_to_string_result(const char* string, void** string_ptr){
+    functions::get_string_new_with_utf8_chars()(string_ptr, string);
+}
+
 static void add_string_to_array(GDExtensionTypePtr array, String& string){
      GDExtensionTypePtr _args[1];
     _args[0] = &string.godot_owner;
@@ -150,4 +154,29 @@ static void delete_char_array(char* array){
 
 static void decrefPyObject(PyObject* object){
     Py_XDECREF(object);
+}
+
+static long long get_packed_string_array_size(void* ptr){
+    GDExtensionVariantPtr _args[1];
+    long long _ret;
+
+    StringName _class_name = c_string_to_string_name("PackedStringArray");
+    _class_name.shouldBeDeleted = true;
+
+    StringName _method_name = c_string_to_string_name("size");
+    _method_name.shouldBeDeleted = true;
+
+
+    GDExtensionPtrBuiltInMethod method_to_call = functions::get_variant_get_ptr_builtin_method()(GDExtensionVariantType::GDEXTENSION_VARIANT_TYPE_PACKED_STRING_ARRAY, &_method_name.godot_owner, 3173160232);
+
+
+    method_to_call(ptr, NULL, &_ret, 0);
+
+
+    return _ret;
+}
+
+static String get_packed_string_array_element(void* ptr, int index){
+    void* string_ptr = functions::get_packed_string_array_operator_index()(ptr, index);
+    return String::new_static(*((void**)string_ptr));
 }

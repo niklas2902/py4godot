@@ -127,11 +127,14 @@ def gdmethod(func):
     args = inspect.getfullargspec(func).args
     print_tools.print_error(f"args:{args}")
     list_args = []
+    cdef PropertyDescription property_description
     for arg in args:
-        list_args.append(PropertyDescription(name = arg,
-                                             type_=int,hint = BaseHint(),usage = 4096|6|32768,
-                                             default_value=None))
-    methods.append(MethodDescription(func.__name__,None, 0, [],[]))
+        property_description = PropertyDescription(name = arg,
+                                                   type_=int,hint = BaseHint(),usage = 4096|6|32768,
+                                                   default_value=None)
+        property_description.to_c()
+        list_args.append(property_description)
+    methods.append(MethodDescription(func.__name__,None, 0, list_args,[]))
     return func
 
 def signal(name, list args = []):

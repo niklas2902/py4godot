@@ -1,3 +1,5 @@
+from libcpp.vector cimport vector
+
 from py4godot.pluginscript_api.hints.BaseHint cimport *
 from py4godot.godot_bindings.binding4_godot4 cimport *
 from py4godot.classes.generated4_core cimport *
@@ -24,5 +26,7 @@ cdef class MethodDescription:
     cdef list default_arguments;
 
     cdef GDExtensionMethodInfo method_info
+
+    cdef vector[GDExtensionPropertyInfo] args
 
     cdef void to_c(self)
