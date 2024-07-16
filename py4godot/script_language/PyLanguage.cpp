@@ -262,10 +262,28 @@
 
   void PyLanguage::_find_function(String& class_name, String& function_name, GDExtensionTypePtr res){
     print_error("_find_function");
+    *((long*) res) = -1;
   }
 
   void PyLanguage::_make_function(String& class_name, String& function_name, PackedStringArray& function_args, GDExtensionTypePtr res){
     print_error("_make_function");
+
+    char* c_function_name;
+    gd_string_to_c_string(function_name, function_name.length(), &c_function_name);
+    std::string function_name_string{c_function_name};
+    std::string args{};
+    for(int i = 0; i< get_packed_string_array_size(function_args.godot_owner); i++){
+        godot::String arg_string = get_packed_string_array_element(function_args.godot_owner, i);
+        char* c_arg_string;
+        gd_string_to_c_string(&arg_string.godot_owner, arg_string.length(), &c_arg_string);
+        std::string komma = i == get_packed_string_array_size(function_args.godot_owner) - 1?std::string{}: std::string{", "};
+        args += std::string{c_arg_string} + komma;
+        free(c_arg_string);
+    }
+    std::string komma = get_packed_string_array_size(function_args.godot_owner) > 0? std::string{", "}:std::string{};
+    std::string result{"    def "+ function_name_string + "(self"+ komma + args + "):\n        pass"};
+    c_string_to_string_result(result.c_str(), (void**)res);
+    free(c_function_name);
   }
 
   void PyLanguage::_open_in_external_editor(Script& script, int line, int column, GDExtensionTypePtr res){
@@ -679,9 +697,9 @@ StringName func_name__find_function;
 
 void call_virtual_func__make_function(GDExtensionClassInstancePtr p_instance, const GDExtensionConstTypePtr* p_args, GDExtensionTypePtr r_ret) {
     PyLanguage* pylanguage = static_cast<PyLanguage*> (p_instance);
-    String args0 = String::new_static(const_cast<GDExtensionStringPtr*>((p_args + 0)));
-    String args1 = String::new_static(const_cast<GDExtensionStringPtr*>((p_args + 1)));
-    PackedStringArray args2 = PackedStringArray::new_static(const_cast<GDExtensionTypePtr*>((p_args + 2)));
+    String args0 = String::new_static(*((void**)const_cast<GDExtensionStringPtr>(p_args[0])));
+    String args1 = String::new_static(*((void**)const_cast<GDExtensionStringPtr>(p_args[1])));
+    PackedStringArray args2 = PackedStringArray::new_static(const_cast<GDExtensionTypePtr>(p_args[2]));
 
 
 
