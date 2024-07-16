@@ -938,8 +938,8 @@
             "py4godot/script_extension/PyScriptExtension.h"
         ],
         "include_dirs": [
-            "./py4godot/core/variant4",
             "./py4godot/godot_bindings",
+            "./py4godot/core/variant4",
             "py4godot/core/variant4"
         ],
         "language": "c++",
@@ -2506,6 +2506,7 @@ static CYTHON_INLINE float __PYX_NAN() {
 #include "py4godot/cppclasses/GPUParticlesCollisionSDF3D/GPUParticlesCollisionSDF3D.h"
 #include "py4godot/cppclasses/GPUParticlesCollisionSphere3D/GPUParticlesCollisionSphere3D.h"
 #include "py4godot/cppclasses/LightmapGI/LightmapGI.h"
+#include "py4godot/cppclasses/OccluderInstance3D/OccluderInstance3D.h"
 #include "py4godot/cppclasses/ReflectionProbe/ReflectionProbe.h"
 #include "py4godot/cppclasses/RootMotionView/RootMotionView.h"
 #include "py4godot/cppclasses/VisibleOnScreenNotifier3D/VisibleOnScreenNotifier3D.h"
@@ -2531,7 +2532,6 @@ static CYTHON_INLINE float __PYX_NAN() {
 #include "py4godot/cppclasses/NavigationLink3D/NavigationLink3D.h"
 #include "py4godot/cppclasses/NavigationObstacle3D/NavigationObstacle3D.h"
 #include "py4godot/cppclasses/NavigationRegion3D/NavigationRegion3D.h"
-#include "py4godot/cppclasses/OccluderInstance3D/OccluderInstance3D.h"
 #include "py4godot/cppclasses/OpenXRCompositionLayer/OpenXRCompositionLayer.h"
 #include "py4godot/cppclasses/OpenXRCompositionLayerCylinder/OpenXRCompositionLayerCylinder.h"
 #include "py4godot/cppclasses/OpenXRCompositionLayerEquirect/OpenXRCompositionLayerEquirect.h"
@@ -2866,9 +2866,9 @@ static const char *__pyx_filename;
 
 static const char *__pyx_f[] = {
   "py4godot/script_instance/PyScriptInstance.pyx",
-  "myenv/lib/python3.12/site-packages/Cython/Includes/cpython/type.pxd",
-  "myenv/lib/python3.12/site-packages/Cython/Includes/cpython/bool.pxd",
-  "myenv/lib/python3.12/site-packages/Cython/Includes/cpython/complex.pxd",
+  "venv/lib/python3.12/site-packages/Cython/Includes/cpython/type.pxd",
+  "venv/lib/python3.12/site-packages/Cython/Includes/cpython/bool.pxd",
+  "venv/lib/python3.12/site-packages/Cython/Includes/cpython/complex.pxd",
   "py4godot/core/variant4/Variant4.pxd",
   "py4godot/classes/Object/Object.pxd",
   "py4godot/classes/generated4_core.pxd",
