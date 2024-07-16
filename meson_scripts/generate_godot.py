@@ -26,6 +26,6 @@ def generate_lib(platform):
         lib_file.write(lib_file_template.replace("{entries}", entries).replace("{dependencies}", dependencies))
 
 
-def generate_gdignore():
-    with open("build/final/.gdignore", "w") as gdignore_file:
+def generate_gdignore(target_platform):
+    with open(f"build/final/{target_platform}/cpython-3.11.3-{target_platform}/.gdignore", "w") as gdignore_file:
         pass

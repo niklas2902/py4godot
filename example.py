@@ -49,9 +49,10 @@ if __name__ == "__main__":
     except Exception as e:
         print(e)
     print("======================Start copying files=======================")
-    if os.path.exists(f"example/addons/{args.target_platform}"):
-        shutil.rmtree(f"example/addons/{args.target_platform}/", onerror=onerror)
-    copytree(f"build/final/{args.target_platform}", f"example/addons/{args.target_platform}")
+    if os.path.exists(f"example/addons/py4godot/cpython-3.11.3-{args.target_platform}"):
+        shutil.rmtree(f"example/addons/py4godot/cpython-3.11.3-{args.target_platform}/", onerror=onerror)
+    copytree(f"build/final/{args.target_platform}/cpython-3.11.3-{args.target_platform}", f"example/addons/py4godot/cpython-3.11.3-{args.target_platform}")
+    shutil.copy("build_resources/python.gdextension", "example/addons/py4godot/python.gdextension")
     # shutil.copyfile("build_files/get-pip.py", "addons/windows64/cpython-3.11.3-windows64/python/install/get-pip.py")
 
     # try:

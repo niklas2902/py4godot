@@ -37,21 +37,19 @@ void init_pluginscript_api(){
     Py_InitializeEx(0);
 
     // Convert parentDir to Python string format
-    std::wstring pythonCode = L"import sys\n"
-                              L"import os\n"
-                              L"sys.path.append(os.getcwd() + r'/../..')";
+    std::string pythonCode = "import sys\n"
+                             "import os\n"
+                             "sys.path.append(os.getcwd() + r'/../..')";
 
     // Convert Python code to const char* for PyRun_SimpleString
-    const wchar_t *pythonCodeWchar = pythonCode.c_str();
+    const char *pythonCodeWchar = pythonCode.c_str();
 
     // Execute Python code to add parent directory to sys.path
     int runResult = PyRun_SimpleString(pythonCodeWchar);
     if (runResult != 0) {
-        std::cerr << "Failed to execute Python code" << std::endl;
-        PyMem_RawFree(programPath);
         Py_Finalize();
         assert(false);
-        return 1;
+        return ;
     }
 
     import_py4godot__pluginscript_api__utils__annotations();
