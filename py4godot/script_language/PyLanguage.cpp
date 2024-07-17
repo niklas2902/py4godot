@@ -254,6 +254,10 @@
     print_error("_can_inherit_from_file");
   };
 
+  void PyLanguage::_preferred_file_name_casing(GDExtensionTypePtr res) {
+      print_error("_preferred_file_name_casing");
+      *((long long*)res) = 0;
+  };
 
   void PyLanguage::_can_make_function(GDExtensionTypePtr res) {
       print_error("_can_inherit_from_file");
@@ -679,6 +683,16 @@ void call_virtual_func__can_make_function(GDExtensionClassInstancePtr p_instance
 }
 
 StringName func_name__can_make_function;
+
+void call_virtual_func__preferred_file_name_casing(GDExtensionClassInstancePtr p_instance, const GDExtensionConstTypePtr* p_args, GDExtensionTypePtr r_ret) {
+    PyLanguage* pylanguage = static_cast<PyLanguage*> (p_instance);
+
+
+
+    pylanguage->_preferred_file_name_casing(r_ret);
+}
+
+StringName func_name__preferred_file_name_casing;
 
 
 
@@ -1181,6 +1195,10 @@ GDExtensionClassCallVirtual get_virtual(void *p_userdata, GDExtensionConstString
         return call_virtual_func__can_make_function;
     }
 
+    else if (string_names_equal(func_name__preferred_file_name_casing, name)) {
+        return call_virtual_func__preferred_file_name_casing;
+    }
+
     else if (string_names_equal(func_name__find_function, name)){
         return call_virtual_func__find_function;
     }
@@ -1341,6 +1359,7 @@ void init_func_names(){
     func_name__supports_documentation = c_string_to_string_name("_supports_documentation");
     func_name__can_inherit_from_file = c_string_to_string_name("_can_inherit_from_file");
     func_name__can_make_function = c_string_to_string_name("_can_make_function");
+    func_name__preferred_file_name_casing = c_string_to_string_name("_preferred_file_name_casing");
     func_name__find_function = c_string_to_string_name("_find_function");
     func_name__make_function = c_string_to_string_name("_make_function");
     func_name__open_in_external_editor = c_string_to_string_name("_open_in_external_editor");
