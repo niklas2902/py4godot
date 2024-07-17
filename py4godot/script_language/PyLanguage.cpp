@@ -686,9 +686,6 @@ StringName func_name__can_make_function;
 
 void call_virtual_func__preferred_file_name_casing(GDExtensionClassInstancePtr p_instance, const GDExtensionConstTypePtr* p_args, GDExtensionTypePtr r_ret) {
     PyLanguage* pylanguage = static_cast<PyLanguage*> (p_instance);
-
-
-
     pylanguage->_preferred_file_name_casing(r_ret);
 }
 
