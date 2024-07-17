@@ -68,5 +68,6 @@ namespace godot{
           void _handles_global_class_type( String& type, GDExtensionTypePtr res);
           void _get_global_class_name( String& path, GDExtensionTypePtr res);
           void _get_doc_comment_delimiters(GDExtensionTypePtr res);
+          void _preferred_file_name_casing(GDExtensionTypePtr res);
     };
 }
