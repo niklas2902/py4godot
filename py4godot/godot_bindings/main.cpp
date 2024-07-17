@@ -16,7 +16,10 @@
 #endif
 #endif
 GDExtensionInterfaceGetProcAddress global_p_get_proc_address;
-void* load_proc_address(char* function_name){
+GDExtensionClassLibraryPtr _library = nullptr;
+std::mutex mtx;
+typedef void (*FunctionPointer)();
+FunctionPointer load_proc_address (char* function_name){
     auto function = global_p_get_proc_address(function_name);
     assert(function != nullptr);
     return function;
@@ -167,11 +170,14 @@ void initialize_py4godot(void *userdata, GDExtensionInitializationLevel p_level)
         return;
     }
     init_functions();
-    functions::gdextension_interface_print_error("test", "test", "test.py", 1, 1);
     godot::init_py_language();
 }
 
 void deinitialize_py4godot(void *userdata, GDExtensionInitializationLevel p_level){
+    if (p_level != GDEXTENSION_INITIALIZATION_SCENE){
+        return;
+    }
+    godot::deinit_py_language();
 
 }
 extern "C"{

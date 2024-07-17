@@ -1,15 +1,16 @@
+from typing import TypeVar
+
 from py4godot.pluginscript_api.hints import *
+from py4godot.pluginscript_api.hints.BaseHint import BaseHint
 from py4godot.pluginscript_api.utils.SignalArg import SignalArg
 
+T = TypeVar("T")
 
 def gdclass(cls:object)->None:pass
 
 def gdtool(cls:object)->None:pass
 
 def prop(name:str,type_:object, defaultval:object, hint:BaseHint = BaseHint(""), hint_string:str = "")->None:pass
-
-def gdproperty(type_:object, defaultval:object, hint:BaseHint = BaseHint(""), hint_string:str = ""):pass
-
 
 def gdmethod(func)->None:pass
 

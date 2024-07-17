@@ -12,6 +12,8 @@ if __name__ == "__main__":
     l = glob.glob("**/*.cpp", recursive=True)
 
     for entry in l:
+        if not entry.startswith("py4godot"):
+            continue
         if (not entry.startswith("build_meson") and not entry.startswith("python_files") and not entry.startswith(
                 "build") \
                 and not entry.startswith("venv") and not entry.startswith('tests') and not entry.startswith(
@@ -20,7 +22,7 @@ if __name__ == "__main__":
                     "main.cpp") \
                     or entry.endswith(
                 "api.cpp") or "PyResourceFormatLoader" in entry or "PyResourceFormatSaver" in entry \
-                    or entry.endswith("functions.cpp"):
+                    or (entry.endswith("functions.cpp") and not "common_functions" in entry):
                 continue
 
             if len(entry) > 107:

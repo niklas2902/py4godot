@@ -11,6 +11,6 @@ cdef extern from "py4godot/instance_data/CPPInstanceData.h":
    cdef cppclass InstanceData:
         PyObject* owner
         vector[GDExtensionPropertyInfo] properties;
-        vector[Dictionary] methods;
+        vector[GDExtensionMethodInfo] methods;
         void* script;
         GDExtensionScriptInstanceInfo info;

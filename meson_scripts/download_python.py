@@ -39,7 +39,7 @@ def download_file(platform, allow_copy=False):
     if (not os.path.isfile(python_file.replace(".zst", ""))):  # extracting the .zst file if it doesn't exist
         print("extracting .zst file")
         decompress_zstandard_to_folder(python_file)
-    if (not os.path.isdir(python_folder)):  # extracting the files from the tar folder
+    if (not os.path.isdir(python_files_dir + "/" + export_name)):  # extracting the files from the tar folder
         print("extracting .tar file")
         extract_tar(python_file.replace(".zst", ""), export_name)
 
@@ -79,6 +79,6 @@ def create_sitecustomization(export_folder, platform):
                   "w") as sitecustomize_file:
             sitecustomize_file.write(sitecustomize_py.replace("{platform}", platform))
     elif "linux" in platform:
-        with open(f"python_files/{export_folder}/python/install/lib/python3.9/site-packages/sitecustomize.py",
+        with open(f"python_files/{export_folder}/python/install/lib/python3.11/site-packages/sitecustomize.py",
                   "w") as sitecustomize_file:
             sitecustomize_file.write(sitecustomize_py.replace("{platform}", platform))

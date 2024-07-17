@@ -8,13 +8,14 @@
 #include "py4godot/pluginscript_api/api.h"
 #include "py4godot/script_instance/instance.h"
 #include "py4godot/pluginscript_api/utils/annotations_api.h"
-#include "py4godot/instance_data/CPPInstanceData.h"
+#include "py4godot/pluginscript_api/utils/forward_print_api.h"
 #include "py4godot/utils/instance_utils_api.h"
 #include "py4godot/cpputils/ScriptHolder.h"
 #include "py4godot/script_extension/script_extension_helpers_api.h"
 #include <cassert>
 #include "Python.h"
 #include <mutex>
+#include <algorithm>
 
 std::mutex m;
 
@@ -23,6 +24,8 @@ PyScriptExtension extension;
 
 bool pluginscript_initialized = false;
 void init_pluginscript_api(){
+    print_error("_init_pluginscript_api");
+
     if (pluginscript_initialized){
         return;
     }
@@ -33,6 +36,22 @@ void init_pluginscript_api(){
     // Initialize interpreter but skip initialization registration of signal handlers
     Py_InitializeEx(0);
 
+    // Convert parentDir to Python string format
+    std::string pythonCode = "import sys\n"
+                             "import os\n"
+                             "sys.path.append(os.getcwd() + r'/../..')";
+
+    // Convert Python code to const char* for PyRun_SimpleString
+    const char *pythonCodeWchar = pythonCode.c_str();
+
+    // Execute Python code to add parent directory to sys.path
+    int runResult = PyRun_SimpleString(pythonCodeWchar);
+    if (runResult != 0) {
+        Py_Finalize();
+        assert(false);
+        return ;
+    }
+
     import_py4godot__pluginscript_api__utils__annotations();
     if (PyErr_Occurred())
     {
@@ -41,8 +60,25 @@ void init_pluginscript_api(){
 
         PyObject* str_exc_type = PyObject_Repr(pvalue); //Now a unicode
         PyObject* pyStr = PyUnicode_AsEncodedString(str_exc_type, "utf-8","Error ~");
-        const char *strExcType = PyBytes_AS_STRING(pyStr);
+        char *strExcType = PyBytes_AS_STRING(pyStr);
+        
         PyErr_Print();
+        print_error(strExcType);
+        assert(false);
+        return;
+    }
+
+    import_py4godot__pluginscript_api__utils__forward_print();
+    if (PyErr_Occurred())
+    {
+        PyObject *ptype, *pvalue, *ptraceback;
+        PyErr_Fetch(&ptype, &pvalue, &ptraceback);
+
+        PyObject* str_exc_type = PyObject_Repr(pvalue); //Now a unicode
+        PyObject* pyStr = PyUnicode_AsEncodedString(str_exc_type, "utf-8","Error ~");
+        char *strExcType = PyBytes_AS_STRING(pyStr);
+        PyErr_Print();
+        print_error(strExcType);
         assert(false);
         return;
     }
@@ -55,7 +91,7 @@ void init_pluginscript_api(){
 
         PyObject* str_exc_type = PyObject_Repr(pvalue); //Now a unicode
         PyObject* pyStr = PyUnicode_AsEncodedString(str_exc_type, "utf-8","Error ~");
-        const char *strExcType = PyBytes_AS_STRING(pyStr);
+        char *strExcType = PyBytes_AS_STRING(pyStr);
         PyErr_Print();
         assert(false);
         return;
@@ -69,13 +105,14 @@ void init_pluginscript_api(){
 
         PyObject* str_exc_type = PyObject_Repr(pvalue); //Now a unicode
         PyObject* pyStr = PyUnicode_AsEncodedString(str_exc_type, "utf-8","Error ~");
-        const char *strExcType = PyBytes_AS_STRING(pyStr);
+        char *strExcType = PyBytes_AS_STRING(pyStr);
         PyErr_Print();
         assert(false);
         return;
     }
 
     Variant::init_variant();
+    forward_print();
 
     PyEval_InitThreads();
     if (PyErr_Occurred())
@@ -87,20 +124,23 @@ void init_pluginscript_api(){
 
     // Release the Kraken... er I mean the GIL !
     gilstate = PyEval_SaveThread();
+
 }
 
 
-bool string_names_equal_script(StringName left, StringName right){
+bool string_names_equal_script(StringName& left, StringName& right){
+    print_error("stirng_names_equal_script");
     uint8_t ret;
     operator_equal_string_namescript(&left.godot_owner, &right.godot_owner, &ret);
     return ret != 0;
 }
 
   PyScriptExtension* PyScriptExtension::constructor(PyLanguage* language){
+    print_error("_constructor");
     PyScriptExtension* class_ = new PyScriptExtension();
 
     StringName class_name = c_string_to_string_name("PyScriptExtension");
-
+    class_name.shouldBeDeleted = false;
     class_->godot_owner = functions::get_classdb_construct_object()(&class_name.godot_owner);
     functions::get_object_set_instance()(class_->godot_owner,&class_name.godot_owner , class_);
 
@@ -110,7 +150,9 @@ bool string_names_equal_script(StringName left, StringName right){
 }
 
 void* create_instance_script(void* userdata){
+    print_error("create_instance_script");
     StringName class_name = c_string_to_string_name("ScriptExtension");
+    class_name.shouldBeDeleted = false;
     auto gdnative_object = functions::get_classdb_construct_object()(&class_name.godot_owner);
     return gdnative_object;
 }
@@ -118,10 +160,14 @@ void free_instance_script(void *p_userdata, GDExtensionClassInstancePtr p_instan
 
 void PyScriptExtension::_init_values(){}
 
-void PyScriptExtension::_editor_can_reload_from_file(GDExtensionTypePtr res){}
+void PyScriptExtension::_editor_can_reload_from_file(GDExtensionTypePtr res){
+       print_error("_editor_can_reload_from_files");
+    *(static_cast<bool*>(res)) = true;
+}
 void PyScriptExtension::_can_instantiate(GDExtensionTypePtr res){
-    Engine engine = Engine::get_instance();
-    if (!engine.is_editor_hint()){
+       print_error("_can_instantiate");
+    std::shared_ptr<Engine> engine = Engine::get_instance();
+    if (!engine->is_editor_hint()){
         *(bool*)res = true;
     }
     else{
@@ -129,119 +175,180 @@ void PyScriptExtension::_can_instantiate(GDExtensionTypePtr res){
     }
 }
 
-void  PyScriptExtension::_get_base_script(GDExtensionTypePtr res){}
-void PyScriptExtension::_get_global_name(GDExtensionTypePtr res){}
-void PyScriptExtension::_inherits_script( Script* script, GDExtensionTypePtr res){}
-void PyScriptExtension::_get_instance_base_type(GDExtensionTypePtr res){}
-void PyScriptExtension::_instance_create( Object& for_object, GDExtensionTypePtr res){
-    m.lock();
-    auto gil_state = PyGILState_Ensure();
-    auto instance = instantiate_class(transfer_object.class_);
-    if(instance == Py_None || instance == nullptr){
-        assert(false);
-        return;
-    }
-    set_owner(instance, ((void**)for_object.godot_owner)[0]);
-    GDExtensionVariantFromTypeConstructorFunc constructor_func;
-    GDExtensionScriptInstancePtr instance_ptr;
-    GDExtensionScriptInstanceInfo* instance_info;
-    InstanceData* gd_instance = new InstanceData();
 
-    gd_instance->owner = instance;
+void PyScriptExtension::_is_abstract(GDExtensionTypePtr res){
+   print_error("_is_abstract");
+   *(bool*)res = false;
+}
+
+void PyScriptExtension::_get_class_item_path(GDExtensionTypePtr res){
+   print_error("_is_class_item_path");
+}
+
+
+std::string PyScriptExtension::path_as_string(){
+    auto path = get_path();
+    char* path_as_c_string;
+    gd_string_to_c_string( &path.godot_owner, path.length(), &path_as_c_string);
+    std::string path_string = std::string{path_as_c_string};
+    free(path_as_c_string);
+    return path_string;
+}
+
+void  PyScriptExtension::_get_base_script(GDExtensionTypePtr res){
+       print_error("_get_base_script");
+}
+void PyScriptExtension::_get_global_name(GDExtensionTypePtr res){
+       print_error("_get_global_name");
+}
+void PyScriptExtension::_inherits_script( Script* script, GDExtensionTypePtr res){
+       print_error("_inherits_script");
+}
+void PyScriptExtension::_get_instance_base_type(GDExtensionTypePtr res){
+       print_error("_get_instance_base_type");
+}
+
+void PyScriptExtension::update_instance_data(InstanceData* gd_instance, PyObject* instance){
+   print_error("_update_instance_data");
+    if(instance != nullptr){
+        gd_instance->owner = instance;
+    }
     gd_instance->properties = transfer_object.properties;
-    //gd_instance.set_methods(methods)
-    get_instance_ptr(&(gd_instance->info));
+    gd_instance->methods = transfer_object.methods;
+    init_instance(&(gd_instance->info), gd_instance->is_placeholder);
 
     int index = 0;
     for (auto& default_value: transfer_object.default_values){
-        String property_name = String::new2(StringName::new_static(((void**)transfer_object.properties[index].name)[0]));
+        auto property_string_name =  StringName::new_static(((void**)transfer_object.properties[index].name)[0]);
+        String property_name = String::new2(property_string_name);
         char* c_property_name;
         gd_string_to_c_string( &property_name.godot_owner, property_name.length(), &c_property_name);
-        set_default_val(instance, PyUnicode_FromStringAndSize(c_property_name, property_name.length()), default_value);
+        std::string string_property_name{c_property_name};
+        if(std::find(gd_instance->already_set_properties.begin(),
+            gd_instance->already_set_properties.end(), string_property_name) == gd_instance->already_set_properties.end()){
+           
+            set_default_val(gd_instance->owner, PyUnicode_FromStringAndSize(c_property_name, property_name.length()), default_value);
+            gd_instance->already_set_properties.push_back(string_property_name);
+        }
         index ++;
     }
+}
+void PyScriptExtension::_instance_create( Object& for_object, GDExtensionTypePtr res){
+    print_error("_instance_create");
+    functions::get_print_error()("instance_create", "test", "test", 1, 1);
+    auto gil_state = PyGILState_Ensure();
+
+    GDExtensionVariantFromTypeConstructorFunc constructor_func;
+    GDExtensionScriptInstancePtr instance_ptr;
+    GDExtensionScriptInstanceInfo* instance_info;
+    auto instance = instantiate_class(transfer_object.class_);
+    if(instance == Py_None || instance == nullptr){
+         *((GDExtensionTypePtr*)res) = nullptr;
+        return;
+    }
+    InstanceData* gd_instance = new InstanceData();
+    update_instance_data(gd_instance, instance);
+    instance_datas.push_back(gd_instance);
+    set_owner(gd_instance->owner, ((void**)for_object.godot_owner)[0]);
     //instance.godot_owner = for_object.godot_owner;
     gd_instance->script = this;
-    Py_INCREF(instance);
+    Py_INCREF(gd_instance->owner);
 
     for_object.godot_owner = ((void**)for_object.godot_owner)[0];
-    ScriptDatabase::instance()->register_script(for_object.get_instance_id(), instance);
+    ScriptDatabase::instance()->register_script(for_object.get_instance_id(), gd_instance->owner);
     instance_ptr = functions::get_script_instance_create()(&(gd_instance->info), gd_instance);
     *((GDExtensionTypePtr*)res) = instance_ptr;
     PyGILState_Release(gil_state);
-    m.unlock();
+
 }
 void PyScriptExtension::_placeholder_instance_create( Object& for_object, GDExtensionTypePtr res){
-    m.lock();
-    auto gil_state = PyGILState_Ensure();
-    auto instance = instantiate_class(transfer_object.class_);
-    if(instance == Py_None || instance == nullptr){
-        assert(false);
-        return;
-    }
+    print_error("_placeholder_instance_create");
 
-    //print_error("before get_class")
+    auto path = get_path();
+    auto gil_state = PyGILState_Ensure();
     //for_object.get_class()
-    set_owner(instance, ((void**)for_object.godot_owner)[0]);
+
     GDExtensionVariantFromTypeConstructorFunc constructor_func;
     GDExtensionScriptInstancePtr instance_ptr;
     GDExtensionScriptInstanceInfo* instance_info;
     InstanceData* gd_instance = new InstanceData();
-
-    gd_instance->owner = instance;
-    gd_instance->properties = transfer_object.properties;
-    //gd_instance.set_methods(methods)
-    get_placeholder_instance_ptr(&(gd_instance->info));
-    gd_instance->is_placeholder = true;
-
-    int index = 0;
-    for (auto& default_value : transfer_object.default_values) {
-        String property_name = String::new2(StringName::new_static(((void**)transfer_object.properties[index].name)[0]));
-        char* c_property_name;
-        gd_string_to_c_string(&property_name.godot_owner, property_name.length(), &c_property_name);
-        set_default_val(instance, PyUnicode_FromStringAndSize(c_property_name, property_name.length()), default_value);
-        index++;
+    auto instance = instantiate_class(transfer_object.class_);
+    if(instance == Py_None || instance == nullptr){
+        *((GDExtensionTypePtr*)res) = nullptr;
+        return;
     }
-
+    gd_instance->is_placeholder = !transfer_object.is_tool;
+    update_instance_data(gd_instance, instance);
+    instance_datas.push_back(gd_instance);
+    set_owner(gd_instance->owner, ((void**)for_object.godot_owner)[0]);
     //instance.godot_owner = for_object.godot_owner;
     gd_instance->script = this;
-    Py_INCREF(instance);
+    Py_INCREF(gd_instance->owner);
     instance_ptr = functions::get_script_instance_create()(&(gd_instance->info), gd_instance);
     *((GDExtensionTypePtr*)res) = instance_ptr;
 
     for_object.godot_owner = ((void**)for_object.godot_owner)[0];
     auto instance_id = for_object.get_instance_id();
-    ScriptDatabase::instance()->register_script(for_object.get_instance_id(), instance);
+    ScriptDatabase::instance()->register_script(for_object.get_instance_id(), gd_instance->owner);
     PyGILState_Release(gil_state);
-    m.unlock();
+
 }
-void PyScriptExtension::_instance_has( Object& object, GDExtensionTypePtr res){}
-void PyScriptExtension::_has_source_code(GDExtensionTypePtr res){}
+void PyScriptExtension::_instance_has( Object& object, GDExtensionTypePtr res){
+    print_error("_instance_has");
+}
+void PyScriptExtension::_has_source_code(GDExtensionTypePtr res){
+    print_error("_has_source_code");
+}
+
+void PyScriptExtension::_has_static_method(GDExtensionTypePtr res) {
+    print_error("_has_static_method");
+    *((bool*)res) = false;
+}
 void PyScriptExtension::_get_source_code(GDExtensionTypePtr& res){
+    print_error("_get_source_code");
     functions::get_string_new_with_utf8_chars()(res, source_code.c_str());
 }
-void PyScriptExtension::_set_source_code( String& code, GDExtensionTypePtr res){}
-void PyScriptExtension::_reload( bool keep_state, GDExtensionTypePtr res){}
-void PyScriptExtension::_get_documentation(GDExtensionTypePtr res){}
+void PyScriptExtension::_set_source_code( String& code, GDExtensionTypePtr res){
+    print_error("_set_source_code");
+     char* c_source_code;
+    gd_string_to_c_string(&code.godot_owner, code.length(), &c_source_code);
+    this->source_code = std::string(c_source_code);
+}
+void PyScriptExtension::_reload( bool keep_state, GDExtensionTypePtr res){
+    print_error("_reload");
+    auto source = c_string_to_string(source_code.c_str());
+    _set_source_code_internal(source);
+
+}
+void PyScriptExtension::_get_documentation(GDExtensionTypePtr res){
+    print_error("_get_documentation");
+}
 void PyScriptExtension::_has_method( StringName& method, GDExtensionTypePtr res){
+    print_error("_has_method");
     *static_cast<bool*>(res) = false;
 }
 void PyScriptExtension::_get_method_info( StringName& method, GDExtensionTypePtr res){
+    print_error("_get_method_info");
 }
 void PyScriptExtension::_is_tool(GDExtensionTypePtr res){
+    print_error("_is_tool");
     *static_cast<bool*>(res) = false;
 }
 void PyScriptExtension::_is_valid(GDExtensionTypePtr res){
+    print_error("_is_valid");
     *static_cast<bool*>(res) = true;
 }
 void PyScriptExtension::_get_language(GDExtensionTypePtr res){
+    print_error("_PyScriptExtension_get_language");
     *((GDExtensionTypePtr*)res) = lang->godot_owner;
+    print_error("_PyScriptExtension_after_get_language");
 }
 void PyScriptExtension::_has_script_signal( StringName& signal, GDExtensionTypePtr res){
-    *static_cast<bool*>(res) = false;
+    print_error("has_script_signal_list");
+    *static_cast<bool*>(res) = true; // TODOD: check for name
 }
 void PyScriptExtension::_get_script_signal_list(GDExtensionTypePtr res){
-    //auto res_array = Array::new_static(&res);
+    print_error("_get_script_signal_list");
     int index;
     for (auto& signal_dict : transfer_object.signals) {
         Variant var_signal = Variant{};
@@ -254,11 +361,21 @@ void PyScriptExtension::_get_script_signal_list(GDExtensionTypePtr res){
     }
 
 }
-void PyScriptExtension::_has_property_default_value( StringName& property, GDExtensionTypePtr res){}
-void PyScriptExtension::_get_property_default_value( StringName& property, GDExtensionTypePtr res){}
-void PyScriptExtension::_update_exports(GDExtensionTypePtr res){}
-void PyScriptExtension::_get_script_method_list(GDExtensionTypePtr res){}
-void PyScriptExtension::_get_script_property_list(GDExtensionTypePtr res){}
+void PyScriptExtension::_has_property_default_value( StringName& property, GDExtensionTypePtr res){
+    print_error("_has_property_default_value");
+}
+void PyScriptExtension::_get_property_default_value( StringName& property, GDExtensionTypePtr res){
+    print_error("_get_property_default_value");
+}
+void PyScriptExtension::_update_exports(GDExtensionTypePtr res){
+    print_error("_update_exports");
+}
+void PyScriptExtension::_get_script_method_list(GDExtensionTypePtr res){
+    print_error("_get_script_method_list");
+}
+void PyScriptExtension::_get_script_property_list(GDExtensionTypePtr res){
+    print_error("_get_script_property_list");
+}
 void PyScriptExtension::_get_member_line( StringName& member, GDExtensionTypePtr res){
     *static_cast<int*>(res) = 0;
 }
@@ -268,24 +385,36 @@ void PyScriptExtension::_is_placeholder_fallback_enabled(GDExtensionTypePtr res)
     *static_cast<bool*>(res) = false;
 }
 void PyScriptExtension::_get_rpc_config(GDExtensionTypePtr res){}
-void PyScriptExtension::_set_source_code_internal(String source_code){
-    m.lock();
-    auto gil_state = PyGILState_Ensure();
+void PyScriptExtension::_set_source_code_internal(String& source_code){
+    print_error("_set_source_code_internal");
     char* c_source_code;
     gd_string_to_c_string(&source_code.godot_owner, source_code.length(), &c_source_code);
     this->source_code = std::string(c_source_code);
+    apply_code();
+}
+
+void PyScriptExtension::apply_code(){
+    print_error("apply_code");
+
+    auto gil_state = PyGILState_Ensure();
     auto source = PyUnicode_FromString(this->source_code.c_str());
-    auto _path = PyUnicode_FromString(path.c_str());
+    std::string script_path = path_as_string();
+    auto _path = PyUnicode_FromString(script_path.c_str());
     assert(source != nullptr);
     assert(_path != nullptr);
     transfer_object = exec_class(source, _path);
+    for(auto p_instance:instance_datas){
+        update_instance_data(p_instance, nullptr);
+    }
     PyGILState_Release(gil_state);
-    m.unlock();
+
 }
 
+/*
 void PyScriptExtension::set_path( const char* path){
     this->path = std::string{path};
 }
+*/
 namespace script{
 void call_virtual_func__editor_can_reload_from_file(GDExtensionClassInstancePtr p_instance, const GDExtensionConstTypePtr* p_args, GDExtensionTypePtr r_ret) {
     PyScriptExtension* pylanguage = static_cast<PyScriptExtension*> (p_instance);
@@ -306,6 +435,27 @@ void call_virtual_func__can_instantiate(GDExtensionClassInstancePtr p_instance, 
 }
 
 StringName func_name__can_instantiate;
+
+void call_virtual_func__is_abstract(GDExtensionClassInstancePtr p_instance, const GDExtensionConstTypePtr* p_args, GDExtensionTypePtr r_ret) {
+    PyScriptExtension* pylanguage = static_cast<PyScriptExtension*> (p_instance);
+
+
+
+    pylanguage->_is_abstract(r_ret);
+}
+
+StringName func_name__is_abstract;
+
+void call_virtual_func__get_class_item__path(GDExtensionClassInstancePtr p_instance, const GDExtensionConstTypePtr* p_args, GDExtensionTypePtr r_ret) {
+    PyScriptExtension* pylanguage = static_cast<PyScriptExtension*> (p_instance);
+
+
+
+    pylanguage->_get_class_item_path(r_ret);
+}
+
+StringName func_name__get_class_item_path;
+
 
 
 void call_virtual_func__get_base_script(GDExtensionClassInstancePtr p_instance, const GDExtensionConstTypePtr* p_args, GDExtensionTypePtr r_ret) {
@@ -397,6 +547,17 @@ void call_virtual_func__has_source_code(GDExtensionClassInstancePtr p_instance, 
 
 StringName func_name__has_source_code ;
 
+void call_virtual_func__has_static_method(GDExtensionClassInstancePtr p_instance, const GDExtensionConstTypePtr* p_args, GDExtensionTypePtr r_ret) {
+    PyScriptExtension* pylanguage = static_cast<PyScriptExtension*> (p_instance);
+
+
+
+    pylanguage->_has_static_method(r_ret);
+}
+
+StringName func_name__has_static_method;
+
+
 
 void call_virtual_func__get_source_code(GDExtensionClassInstancePtr p_instance, const GDExtensionConstTypePtr* p_args, GDExtensionTypePtr r_ret) {
     PyScriptExtension* pylanguage = static_cast<PyScriptExtension*> (p_instance);
@@ -411,7 +572,7 @@ StringName func_name__get_source_code ;
 
 void call_virtual_func__set_source_code(GDExtensionClassInstancePtr p_instance, const GDExtensionConstTypePtr* p_args, GDExtensionTypePtr r_ret) {
     PyScriptExtension* pylanguage = static_cast<PyScriptExtension*> (p_instance);
-    String args0 = String::new_static(const_cast<GDExtensionStringPtr*>(p_args + 0));
+    String args0 = String::new_static(*((void**)const_cast<GDExtensionStringPtr>(p_args[0])));
 
 
 
@@ -637,10 +798,15 @@ void call_virtual_func__get_rpc_config(GDExtensionClassInstancePtr p_instance, c
 
 
 GDExtensionClassCallVirtual get_virtual_script(void *p_userdata, GDExtensionConstStringNamePtr p_name) {
+    //std::lock_guard<std::mutex> lock(mtx); TODO: enable again
 
     StringName name = StringName::new_static(((void**)const_cast<GDExtensionTypePtr>(p_name))[0]);
-    auto test_str = String::new2(name);
-    const char* c_name_str = gd_string_to_c_string(&test_str.godot_owner, test_str.length());
+    String name_string = String::new2(name);
+    char* res_string;
+    gd_string_to_c_string(name_string, name_string.length(), &res_string);
+
+    print_error("called function_script:");
+    print_error(res_string);
 
     if (string_names_equal_script(script::func_name__editor_can_reload_from_file, name)){
         return script::call_virtual_func__editor_can_reload_from_file;
@@ -680,6 +846,10 @@ GDExtensionClassCallVirtual get_virtual_script(void *p_userdata, GDExtensionCons
 
     else if (string_names_equal_script(script::func_name__has_source_code, name)){
         return script::call_virtual_func__has_source_code;
+    }
+
+    else if (string_names_equal_script(script::func_name__has_static_method, name)) {
+        return script::call_virtual_func__has_static_method;
     }
 
     else if (string_names_equal_script(script::func_name__get_source_code, name)){
@@ -762,6 +932,14 @@ GDExtensionClassCallVirtual get_virtual_script(void *p_userdata, GDExtensionCons
         return script::call_virtual_func__is_placeholder_fallback_enabled;
     }
 
+    else if (string_names_equal_script(script::func_name__is_abstract, name)){
+        return script::call_virtual_func__is_abstract;
+    }
+
+    else if (string_names_equal_script(script::func_name__get_class_item_path, name)){
+        return script::call_virtual_func__get_class_item__path;
+    }
+
     assert(false); // There are methods not being handled
     return nullptr;
 }
@@ -769,6 +947,7 @@ GDExtensionClassCallVirtual get_virtual_script(void *p_userdata, GDExtensionCons
 void init_func_names_script(){
     script::func_name__editor_can_reload_from_file = c_string_to_string_name("_editor_can_reload_from_file");
     script::func_name__can_instantiate = c_string_to_string_name("_can_instantiate");
+    script::func_name__is_abstract = c_string_to_string_name("_is_abstract");
     script::func_name__get_base_script = c_string_to_string_name("_get_base_script");
     script::func_name__get_global_name = c_string_to_string_name("_get_global_name");
     script::func_name__inherits_script = c_string_to_string_name("_inherits_script");
@@ -777,6 +956,7 @@ void init_func_names_script(){
     script::func_name__placeholder_instance_create = c_string_to_string_name("_placeholder_instance_create");
     script::func_name__instance_has = c_string_to_string_name("_instance_has");
     script::func_name__has_source_code = c_string_to_string_name("_has_source_code");
+    script::func_name__has_static_method = c_string_to_string_name("_has_static_method");
     script::func_name__get_source_code = c_string_to_string_name("_get_source_code");
     script::func_name__set_source_code = c_string_to_string_name("_set_source_code");
     script::func_name__reload = c_string_to_string_name("_reload");
@@ -797,6 +977,7 @@ void init_func_names_script(){
     script::func_name__get_constants = c_string_to_string_name("_get_constants");
     script::func_name__get_members = c_string_to_string_name("_get_members");
     script::func_name__is_placeholder_fallback_enabled = c_string_to_string_name("_is_placeholder_fallback_enabled");
+    script::func_name__get_class_item_path = c_string_to_string_name("_get_class_icon_path");
 }
 
 void register_class_script(){
@@ -815,6 +996,9 @@ void register_class_script(){
 
     StringName class_name = c_string_to_string_name("PyScriptExtension");
     StringName parent_class_name = c_string_to_string_name("ScriptExtension");
+    class_name.shouldBeDeleted = false;
+    parent_class_name.shouldBeDeleted = false;
+
 
     functions::get_classdb_register_extension_class()(_library, &class_name.godot_owner, &parent_class_name.godot_owner, creation_info);
 }

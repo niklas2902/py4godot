@@ -107,7 +107,7 @@ namespace godot{
         PyObject* create_stringname_native_ptr();
 
 
-        void Variant::construct_py_string(PyObject* object);
+        void construct_py_string(PyObject* object);
         void construct_Rect2i(PyObject* object);
         void construct_Callable(PyObject* object);
         void construct_NodePath(PyObject* object);
@@ -148,7 +148,7 @@ namespace godot{
         void construct_Object(PyObject* object);
 
 
-        void Variant::construct_py_string_native_ptr(PyObject* object);
+        void construct_py_string_native_ptr(PyObject* object);
         void construct_Rect2i_native_ptr(PyObject* object);
         void construct_Callable_native_ptr(PyObject* object);
         void construct_NodePath_native_ptr(PyObject* object);

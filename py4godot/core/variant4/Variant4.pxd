@@ -9,7 +9,6 @@ cdef extern from "py4godot/cppcore/Variant.h" namespace "godot":
         void init_from_py_object_native_ptr(PyObject* , const char* type_name)
         void construct_inner();
         void switch_native_and_inner()
-
 cdef class PyVariant:
     cdef Variant variant
     cdef object get_converted_value(self, bint should_return_pystring)
@@ -19,3 +18,7 @@ cdef class PyVariant:
 
 cdef object get_object_from_variant(Variant var)
 cdef PyVariant create_variant_from_py_object(object pyobject)
+
+cdef extern from "variant_utils.h":
+    void destroy_variant(Variant& variant)
+    void destroy_variant_native_ptr(Variant& variant)

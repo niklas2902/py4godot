@@ -1,3 +1,4 @@
+import copy
 import json
 import os.path
 
@@ -45,6 +46,8 @@ singletons = set()
 builtin_classes = set()
 core_classes = dict()
 operator_dict = dict()
+typed_arrays_names = set()
+is_core = False
 operator_to_method = {"+": "__add__",
                       "*": "__mul__",
                       "-": "__sub__",
@@ -77,6 +80,7 @@ def generate_import():
     result = \
         """from py4godot.utils.Wrapper4 import *
 from py4godot.utils.VariantTypeWrapper4 import *
+import py4godot.classes.Object.Object as __object__
 """
     return result
 
@@ -88,11 +92,11 @@ def generate_constructor_args(constructor):
 
     for arg in constructor["arguments"]:
         if not arg["type"].startswith("enum::"):
-            result += f"{pythonize_name(arg['name'])}:{untypearray(unbitfield_type(arg['type']))}, "
+            result += f"{pythonize_name(arg['name'])}:{ungodottype(untypearray(unbitfield_type(arg['type'])))}, "
         else:
             # enums are marked with enum:: . To be able to use this, we have to strip this
             arg_type = arg["type"].replace("enum::", "")
-            result += f"{pythonize_name(arg['name'])}:{untypearray(unenumize_type(arg_type))}, "
+            result += f"{pythonize_name(arg['name'])}:{ungodottype(untypearray(unenumize_type(arg_type)))}, "
     result = result[:-2]
     return result
 
@@ -101,7 +105,7 @@ def generate_cast(classname):
     res = ""
     res += f"{INDENT}@staticmethod"
     res = generate_newline(res)
-    res += f"{INDENT}def cast(other:Object)->{classname}:pass"
+    res += f"{INDENT}def cast(other:__object__.Object)->{classname}:pass"
     res = generate_newline(res)
     return res
 
@@ -141,16 +145,18 @@ def generate_constructors(class_):
     for constructor in class_["constructors"]:
         res += f"{INDENT}@staticmethod"
         res = generate_newline(res)
-        res += f"{INDENT}def new{constructor['index']}({generate_constructor_args(constructor)}) -> {class_['name']}:pass"
+        res += f"{INDENT}def new{constructor['index']}({generate_constructor_args(constructor)}) -> {ungodottype(class_['name'])}:pass"
         res = generate_newline(res)
     return res
 
 
 def generate_class_imports(classes):
-    result = "from py4godot.classes.generated4_core import *"
+    result = "import py4godot.classes.generated4_core as __core__"
+    result = generate_newline(result)
+    result += "import py4godot.classes.typedarrays as __typedarrays__"
     result = generate_newline(result)
     for class_ in classes:
-        result += f"from py4godot.classes.{class_}.{class_} import *"
+        result += f"import py4godot.classes.{class_}.{class_} as __{class_.lower()}__"
         result = generate_newline(result)
     return result
 
@@ -161,7 +167,7 @@ def generate_newline(str_):
 
 def get_base_class(class_):
     if "inherits" in class_.keys():
-        return class_["inherits"]
+        return "__" + class_["inherits"].lower() + "__." + class_["inherits"]
     if class_["name"] in builtin_classes:
         return "VariantTypeWrapper4"
     return "Wrapper4"
@@ -267,17 +273,6 @@ def get_variant_type(class_name):
     return DICT[class_name.lower()]
 
 
-def generate_virtual_return_type(return_type):
-    if return_type == "bool":
-        return "False"
-    elif return_type == "int":
-        return "0"
-    elif return_type == "String":
-        return "String()"
-
-    return return_type + "()"
-
-
 def is_static(mMethod):
     return mMethod["is_static"]
 
@@ -291,40 +286,23 @@ def generate_method_headers(mMethod):
     return ""
 
 
-def generate_native_params(mMethod):
-    if "arguments" not in mMethod.keys():
-        return ""
-    res = ""
-    for arg in mMethod["arguments"]:
-        if arg["type"] == "String":
-            res += f"{INDENT * 2}cdef String string_{arg['name']} = c_string_to_string({pythonize_name(arg['name'])}.encode('utf-8'))"
-            res = generate_newline(res)
-        if arg["type"] == "StringName":
-            res += f"{INDENT * 2}cdef StringName string_name_{arg['name']} = c_string_to_string_name({pythonize_name(arg['name'])}.encode('utf-8'))"
-            res = generate_newline(res)
-        if arg["type"] == "Variant":
-            res += f"{INDENT * 2}cdef Variant variant_{arg['name']} = Variant({pythonize_name(arg['name'])})"
-            res = generate_newline(res)
-    return res
-
-
 def generate_method(class_, mMethod):
     res = ""
-    args = generate_args(mMethod)
-    def_function = f"{INDENT}def {pythonize_name(mMethod['name'])}({args})->{get_ret_value(mMethod)}: pass"
+    args = generate_args(class_, mMethod)
+    def_function = f"{INDENT}def {pythonize_name(mMethod['name'])}({args})->{ungodottype_type_array(get_ret_value(mMethod, class_), class_['name'])}: pass"
     res += generate_method_headers(mMethod)
     res += def_function
     res = generate_newline(res)
     return res
 
 
-def get_ret_value(method):
+def get_ret_value(method, class_):
     if "return_value" in method.keys() or "return_type" in method.keys():
         if "return_value" in method.keys():
             return_type = method["return_value"]["type"]
         else:
             return_type = method["return_type"]
-        return untypearray(unbitfield_type(unenumize_type(ungodottype(return_type))))
+        return ungodottype_type_array(untypearray(unbitfield_type(unenumize_type(return_type))), class_["name"])
 
 
 def generate_operators(class_):
@@ -346,6 +324,13 @@ def collect_members(obj):
             core_class.core_members.append(core_member)
         core_classes[class_["name"]] = core_class
     print(core_classes)
+
+
+def generate_init(class_):
+    result = ""
+    result += f"{INDENT}def __init__(self)->None:pass"
+    result = generate_newline(result)
+    return result
 
 
 def generate_common_methods(class_):
@@ -377,7 +362,7 @@ def generate_properties(class_):
     result = ""
     if ("properties" in class_.keys()):
         for property in class_["properties"]:
-            result += generate_property(property)
+            result += generate_property(property, class_)
     return result
 
 
@@ -386,6 +371,9 @@ def generate_member_getter(class_, member):
     res += f"{INDENT}@property"
     res = generate_newline(res)
     res += f"{INDENT}def {member.name}(self)->{undouble_type(member.type_)}:pass"
+    res = generate_newline(res)
+
+    res += f"{INDENT}def get_{member.name}(self)->{undouble_type(member.type_)}:pass"
     res = generate_newline(res)
     return res
 
@@ -401,6 +389,8 @@ def generate_member_setter(class_, member):
     res += f"{INDENT}@{member.name}.setter"
     res = generate_newline(res)
     res += f"{INDENT}def {member.name}(self, value:{undouble_type(member.type_)})->None:pass"
+    res = generate_newline(res)
+    res += f"{INDENT}def set_{member.name}(self, value:{undouble_type(member.type_)})->None:pass"
     res = generate_newline(res)
 
     return res
@@ -421,17 +411,17 @@ def simplify_type(type):
     return list_types[-1]
 
 
-def generate_property(property):
+def generate_property(property, class_):
     result = ""
     result += f"{INDENT}@property"
     result = generate_newline(result)
-    result += f"{INDENT}def {pythonize_name(property['name'])}(self)->{unbitfield_type(unenumize_type(ungodottype((property['type']))))}: pass"
+    result += f"{INDENT}def {pythonize_name(property['name'])}(self)->{ungodottype_type_array(unbitfield_type(unenumize_type((property['type']))), class_['name'])}: pass"
     result = generate_newline(result)
 
     if "setter" in property and property["setter"] != "":
         result += f"{INDENT}@{pythonize_name(property['name'])}.setter"
         result = generate_newline(result)
-        result += f"{INDENT}def {pythonize_name(property['name'])}(self,  value:{ungodottype(untypearray(simplify_type(property['type'])))})->None: pass"
+        result += f"{INDENT}def {pythonize_name(property['name'])}(self,  value:{ungodottype_type_array(untypearray(simplify_type(property['type'])), class_['name'])})->None: pass"
         result = generate_newline(result)
 
     return result
@@ -452,14 +442,53 @@ def unbitfield_type(arg_type):
 def ungodottype(type_):
     if (type_ == "String"):
         return "str"
-    if (type_ == "StringName"):
-        return "str"
     if (type_ == "Variant"):
         return "object"
+    elif type_ in builtin_classes - {"float", "int", "Nil", "bool"}:
+        if not is_core:
+            return f"__core__.{type_}"
+        else:
+            return type_
+    elif type_ in typed_arrays_names:
+        return f"__typedarrays__.{type_}"
+    if (type_ in classes):
+        return f"__{type_.lower()}__.{type_}"
+
     return type_
 
 
-def generate_args(method_with_args):
+def ungodottype_type_array(type_, class_name):
+    if type_ == None:
+        return "None"
+    if (type_ == "String"):
+        return "str"
+    if (type_ == "Variant"):
+        if class_name in typed_arrays_names:
+            typed_array_type = class_name.replace("TypedArray", "")
+
+            if typed_array_type in builtin_classes - {"float", "int", "Nil", "bool"}:
+                if not is_core:
+                    return f"__core__.{typed_array_type}"
+                else:
+                    return {typed_array_type}
+            elif (typed_array_type in classes):
+                return f"__{typed_array_type.lower()}__.{typed_array_type}"
+            return typed_array_type
+        return "object"
+    elif type_ in builtin_classes - {"float", "int", "Nil", "bool"}:
+        if not is_core:
+            return f"__core__.{type_}"
+        else:
+            return type_
+    elif type_ in typed_arrays_names:
+        return f"__typedarrays__.{type_}"
+    if (type_ in classes):
+        return f"__{type_.lower()}__.{type_}"
+
+    return type_
+
+
+def generate_args(class_, method_with_args):
     result = "self, "
     if (is_static(method_with_args)):
         result = ""
@@ -468,7 +497,11 @@ def generate_args(method_with_args):
 
     for arg in method_with_args["arguments"]:
         if not arg["type"].startswith("enum::"):
-            result += f"{pythonize_name(arg['name'])}:{ungodottype(untypearray(unbitfield_type(arg['type'])))}{generate_default_arg(arg, arg['type'])}, "
+            if class_["name"] not in typed_arrays_names:
+                result += f"{pythonize_name(arg['name'])}:{ungodottype(untypearray(unbitfield_type(arg['type'])))}{generate_default_arg(arg, arg['type'])}, "
+            else:
+                result += f"{pythonize_name(arg['name'])}:{ungodottype_type_array(untypearray(unbitfield_type(arg['type'])), class_['name'])}{generate_default_arg(arg, arg['type'])}, "
+
         else:
             # enums are marked with enum:: . To be able to use this, we have to strip this
             arg_type = arg["type"].replace("enum::", "")
@@ -482,9 +515,12 @@ def generate_default_arg(arg, arg_type):
     if "default_value" in arg:
         if arg_type in set_to_iterate:
             if arg_type in builtin_classes:
-                return f"= {arg_type}.new0()"
+                if not is_core:
+                    return f"= __core__.{arg_type}.new0()"
+                else:
+                    return f"= {arg_type}.new0()"
             else:
-                return f"= {arg_type}.constructor()"
+                return f"= __{arg_type.lower()}__.{arg_type}.constructor()"
         else:
             return f"={pythonize_boolean_types(unref_type(unnull_type(arg['default_value'])))}"
 
@@ -495,7 +531,7 @@ def unenumize_type(type_):
     enum_type = type_.replace("enum::", "")
     type_list = enum_type.split(".")
     if len(type_list) > 1:
-        return type_list[0] + "__" + type_list[1]
+        return type_list[-1]
     return type_list[0]
 
 
@@ -550,16 +586,22 @@ def generate_constructor(classname):
     return res
 
 
-def generate_init(class_):
+def unvariant_type(type_):
+    if type_ == "Variant":
+        return "object"
+    return type_
+
+
+def collect_right_types(operator):
     res = ""
-    res += f"{INDENT}def __init__(self, *args)->{class_['name']}:pass"
-    res = generate_newline(res)
-    return res
+    for right_type in operator.right_type_values:
+        res += unvariant_type(ungodottype(right_type)) + "|"
+    return res[:-1]
 
 
 def get_parameters_operator(operator):
     if len(operator.right_type_values) > 0:
-        return "self, other"
+        return f"self, other:{collect_right_types(operator)}"
     return "self"
 
 
@@ -575,14 +617,23 @@ def generate_operators_for_class(class_name):
     return res
 
 
-def generate_classes(classes, filename, is_core=False):
+def generate_classes(classes, filename, is_core=False, is_typed_array=False):
     res = generate_import()
     res = generate_newline(res)
-    if not is_core:
+    if is_typed_array:
+        res += generate_class_imports(get_classes_to_import(classes))
+        res = generate_newline(res)
+        for cls in classes:
+            typed_array_type = cls["name"].replace("TypedArray", "")
+            if typed_array_type in builtin_classes:
+                continue
+            res += f"import py4godot.classes.{typed_array_type}.{typed_array_type} as __{typed_array_type.lower()}__"
+            res = generate_newline(res)
+    elif not is_core:
         res += generate_class_imports(get_classes_to_import(classes))
         res = generate_newline(res)
     else:
-        res += "from py4godot.classes.Object.Object import *"
+        res += "import py4godot.classes.Object.Object as __object__"
         res = generate_newline(res)
     for class_ in classes:
         if (class_["name"] in IGNORED_CLASSES):
@@ -717,7 +768,7 @@ def generate_special_methods_array(class_):
 
 
 def generate_get_pyscript():
-    res = f"{INDENT}def get_pyscript()->None:pass"
+    res = f"{INDENT}def get_pyscript(self)->Object:pass"
     res = generate_newline(res)
     return res
 
@@ -750,6 +801,47 @@ def generate_operators_set(class_):
             operator_dict[class_["name"]][operator["name"]].right_type_values.append(operator["right_type"])
 
 
+def collect_typed_arrays_from_return(method_):
+    if "return_value" in method_.keys() or "return_type" in method_.keys():
+        ret_val = None
+        if ("return_value" in method_.keys()):
+            ret_val = ReturnType("_ret", method_['return_value']['type'])
+        else:
+            ret_val = ReturnType("_ret", method_['return_type'])
+        if "typedarray" in ret_val.type:
+            return [ret_val.type]
+    return []
+
+
+def collect_typed_arrays_from_args(method):
+    typed_arrays = []
+    if "arguments" not in method.keys():
+        return []
+    else:
+        for argument in method["arguments"]:
+            if ("typedarray" in argument["type"]):
+                typed_arrays.append(argument["type"])
+    return typed_arrays
+
+
+def collect_typed_arrays(classes):
+    typed_arrays = []
+    for cls in classes:
+        if not "methods" in cls.keys():
+            continue
+        for method in cls["methods"]:
+            typed_arrays += collect_typed_arrays_from_return(method)
+            typed_arrays += collect_typed_arrays_from_args(method)
+
+    return set(typed_arrays)
+
+
+def generate_typed_array_name(name):
+    if (name == "typedarray::Array"):
+        pass
+    return (name.split("::")[1] + "TypedArray").replace("24/17:", "")
+
+
 classes = set()
 
 if __name__ == "__main__":
@@ -763,6 +855,19 @@ if __name__ == "__main__":
         native_structs = set([native_struct["name"] for native_struct in obj["native_structures"]])
         singletons = set([singleton["name"] for singleton in obj["singletons"]])
         collect_members(obj)
+
+        array_cls = None
+        arrays = []
+        for cls in obj["builtin_classes"]:
+            if cls["name"] == "Array":
+                array_cls = cls
+        print("typedarrays:", collect_typed_arrays(obj["classes"] + obj["builtin_classes"]))
+        for typed_array in collect_typed_arrays(obj["classes"] + obj["builtin_classes"]):
+            my_array_cls = copy.deepcopy(array_cls)
+            my_array_cls["name"] = generate_typed_array_name(typed_array)
+            typed_arrays_names.add(generate_typed_array_name(typed_array))
+            arrays.append(my_array_cls)
+
         for class_ in obj["builtin_classes"]:
             generate_operators_set(class_)
         for class_ in obj["classes"]:
@@ -772,4 +877,6 @@ if __name__ == "__main__":
                 pass
             generate_classes([class_], f"py4godot/classes/{class_['name']}/{class_['name']}.pyi")
 
+        is_core = True
+        generate_classes(arrays, f"py4godot/classes/typedarrays.pyi", is_core=False, is_typed_array=True)
         generate_classes(obj["builtin_classes"], f"py4godot/classes/generated4_core.pyi", is_core=True)

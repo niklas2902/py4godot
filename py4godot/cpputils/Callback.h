@@ -13,7 +13,7 @@ namespace godot{
         void (*callback)(T&, void*) ;
     };
 
-    std::unordered_map<long long,BaseCallback*> address_to_callback = {};
+    static std::unordered_map<long long,BaseCallback*> address_to_callback = {};
 
     BaseCallback* get_callback_by_address(long long address);
 }

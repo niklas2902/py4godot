@@ -5,11 +5,9 @@ from libcpp.vector cimport vector
 cdef class SignalDescription:
     """"Description class for the properties, a gdclass can have and which can be found in the editor"""
     def __init__(self, name, args):
-        print_error("init SignalDescription")
         cdef int index = 0
 
 
-        print_error("before creating vector")
         cdef CPPSignalArg signal_arg
         cdef vector[CPPSignalArg]  signal_args
         cdef str arg_name
@@ -22,7 +20,8 @@ cdef class SignalDescription:
             signal_arg.name = c_name
             signal_arg.type = <GDExtensionVariantType>(<SignalArg>args[i]).variant_type
             signal_args.push_back(signal_arg)
-        self.dict.Dictionary_internal_class = init_signal_description(name.encode("utf-8"), signal_args);
+        self.dict = Dictionary.new0()
+        init_signal_description(name.encode("utf-8"), signal_args, self.dict.Dictionary_internal_class_ptr);
 
     def get_var_signal_dict(self):
         return self.var_signal_dict

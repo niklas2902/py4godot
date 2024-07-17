@@ -14,14 +14,16 @@ uint32_t hint,
 String& hint_string,
 uint32_t usage
 ){
-    StringName * stringname = new StringName{};
-    *stringname = name;
+    StringName * stringname = new StringName{name};
+    stringname->shouldBeDeleted = false;
 
-    StringName * classname = new StringName{};
-    *classname = class_name;
+    StringName class_name_empty = StringName::new0();
+    StringName *classname = new StringName{class_name_empty};
+    classname->shouldBeDeleted = false;
 
-    String * ptr_hint_string = new String{};
-    *ptr_hint_string = c_string_to_string("");
+    auto temp_hint_string = c_string_to_string("");
+    String * ptr_hint_string = new String{temp_hint_string};
+    ptr_hint_string->shouldBeDeleted = false;
 
 
     property_info.type = type_;

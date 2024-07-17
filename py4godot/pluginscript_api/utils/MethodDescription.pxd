@@ -1,9 +1,14 @@
+from libcpp.vector cimport vector
+
 from py4godot.pluginscript_api.hints.BaseHint cimport *
 from py4godot.godot_bindings.binding4_godot4 cimport *
 from py4godot.classes.generated4_core cimport *
 from py4godot.pluginscript_api.utils.PropertyDescription cimport *
+from libc.stdint cimport uint32_t
+
 cdef uint32_t id_counter = 0
 cdef inc_id_counter()
+
 cdef class MethodDescription:
 
     cdef StringName name
@@ -21,5 +26,7 @@ cdef class MethodDescription:
     cdef list default_arguments;
 
     cdef GDExtensionMethodInfo method_info
+
+    cdef vector[GDExtensionPropertyInfo] args
 
     cdef void to_c(self)
