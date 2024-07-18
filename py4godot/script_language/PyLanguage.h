@@ -9,6 +9,7 @@ namespace godot{
       const char* language_name = "Python";
       const char* extension;
       std::unordered_set<const char*> keywords;
+      unsigned int counter;
 
       public:
           static PyLanguage* constructor();
@@ -69,5 +70,6 @@ namespace godot{
           void _get_global_class_name( String& path, GDExtensionTypePtr res);
           void _get_doc_comment_delimiters(GDExtensionTypePtr res);
           void _preferred_file_name_casing(GDExtensionTypePtr res);
+          void init_theme_icon();
     };
 }
