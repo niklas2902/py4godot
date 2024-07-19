@@ -14,7 +14,9 @@ jobs:
     outputs:
       should_run: ${{ steps.should_run.outputs.should_run }}
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
+        with:
+          ref: master
       - name: print latest_commit
         run: echo ${{ github.sha }}
 
@@ -25,8 +27,8 @@ jobs:
         run: test -z $(git rev-list  --after="24 hours"  ${{ github.sha }}) && echo "::set-output name=should_run::false"
         
   windows-build:
-    needs: check_date
-    if: ${{ needs.check_date.outputs.should_run != 'false' }}
+    #needs: check_date
+    #if: ${{ needs.check_date.outputs.should_run != 'false' }}
     
     runs-on: windows-latest
     strategy:
@@ -37,7 +39,9 @@ jobs:
             VS_ARCH: 'amd64'
 
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v3
+      with:
+        ref: develop
     - name: Set up Python 3.8.8
       uses: actions/setup-python@v2
       with:
