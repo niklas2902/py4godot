@@ -54,8 +54,9 @@ def run_docker():
 
 def copy_other_files(folder_path):
     shutil.copy("build_resources/plugin.cfg", folder_path+"/plugin.cfg")
-    shutil.copy("build_resources/py4godot.gd", folder_path+"/py4godot.gd")
+    shutil.copy("example/addons/py4godot/py4godot.gd", folder_path + "/py4godot.gd")
     shutil.copy("build_resources/python.gdextension", folder_path+"/python.gdextension")
+    shutil.copy("example/addons/py4godot/Python.svg", folder_path + "/Python.svg")
     with open(folder_path+"/.gitignore", "w") as f:
         pass
 

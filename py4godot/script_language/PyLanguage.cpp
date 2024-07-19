@@ -6,8 +6,33 @@
 #include "py4godot/cppcore/Variant.h"
 #include <cassert>
 #include "py4godot/script_language/template.h"
+#include "py4godot/cppclasses/EditorInterface/EditorInterface.h"
+#include "py4godot/cppclasses/Theme/Theme.h"
+#include "py4godot/cppclasses/ImageTexture/ImageTexture.h"
+#include "py4godot/cppclasses/Image/Image.h"
+#include "py4godot/pluginscript_api/api.h"
+void PyLanguage::init_theme_icon(){
+    if(counter == 1){
+        auto instance = EditorInterface::get_instance();
+        auto theme = instance ->get_editor_theme();
+        std::shared_ptr<ImageTexture> image_texture = ImageTexture::constructor();
+        auto icon_path = c_string_to_string("addons/py4godot/Python.svg");
+        auto icon_image = Image::constructor();
+        icon_image->reference();
+        icon_image->load(icon_path);
+        image_texture = ImageTexture::py_create_from_image(icon_image);
 
-
+        auto icon_name = c_string_to_string_name("Python");
+        auto py_script_icon_name = c_string_to_string_name("PyScriptExtension");
+        auto theme_name = c_string_to_string_name("EditorIcons");
+        counter ++;
+        theme.set_icon(icon_name, theme_name, image_texture.get());
+        theme.set_icon(py_script_icon_name, theme_name, image_texture.get());
+    }
+    else{
+        counter ++;
+    }
+}
   PyLanguage* PyLanguage::constructor(){
     PyLanguage* class_ = new PyLanguage();
 
@@ -32,7 +57,10 @@
   void PyLanguage::_init(GDExtensionTypePtr res){}
 
   void PyLanguage::_get_type(GDExtensionTypePtr res){
+    init_theme_icon();
     print_error("_get_type");
+    char* path = "Python";
+    c_string_to_string_result(path, (void**)res);
   }
 
   void PyLanguage::_get_extension(GDExtensionTypePtr res){
