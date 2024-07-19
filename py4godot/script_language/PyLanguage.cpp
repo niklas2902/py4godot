@@ -16,20 +16,18 @@ void PyLanguage::init_theme_icon(){
         auto instance = EditorInterface::get_instance();
         auto theme = instance ->get_editor_theme();
         std::shared_ptr<ImageTexture> image_texture = ImageTexture::constructor();
-        auto icon_path = c_string_to_string("res://Python.svg");
+        auto icon_path = c_string_to_string("addons/py4godot/Python.svg");
         auto icon_image = Image::constructor();
         icon_image->reference();
         icon_image->load(icon_path);
-        auto width = icon_image->get_width();
         image_texture = ImageTexture::py_create_from_image(icon_image);
-        auto height = icon_image->get_height();
-        //auto image = image_texture->get_image();
-        //auto test_width = image.get_width();
 
         auto icon_name = c_string_to_string_name("Python");
+        auto py_script_icon_name = c_string_to_string_name("PyScriptExtension");
         auto theme_name = c_string_to_string_name("EditorIcons");
         counter ++;
         theme.set_icon(icon_name, theme_name, image_texture.get());
+        theme.set_icon(py_script_icon_name, theme_name, image_texture.get());
     }
     else{
         counter ++;
