@@ -125,7 +125,6 @@ def gdproperty(*args, ** kwargs):
 
 def gdmethod(func):
     args = inspect.getfullargspec(func).args
-    print_tools.print_error(f"args:{args}")
     list_args = []
     cdef PropertyDescription property_description
     for arg in args:

@@ -67,7 +67,7 @@ void PyResourceFormatLoader::_handles_type( StringName& type, GDExtensionTypePtr
   *((GDExtensionTypePtr*) res) =  (void*)handles_type;
 }
 void PyResourceFormatLoader::_get_resource_type( String& path, GDExtensionTypePtr res){
-        print_error("_get_resource_type");
+    print_error("_get_resource_type");
     functions::get_string_new_with_utf8_chars()(res, "PyScriptExtension");
 }
 void PyResourceFormatLoader::_get_resource_script_class( String& path, GDExtensionTypePtr res)

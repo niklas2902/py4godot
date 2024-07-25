@@ -230,6 +230,7 @@ void PyScriptExtension::update_instance_data(InstanceData* gd_instance, PyObject
             set_default_val(gd_instance->owner, PyUnicode_FromStringAndSize(c_property_name, property_name.length()), default_value);
             gd_instance->already_set_properties.push_back(string_property_name);
         }
+        gd_instance->custom_properties.insert(string_property_name);
         index ++;
     }
 }
@@ -798,7 +799,7 @@ void call_virtual_func__get_rpc_config(GDExtensionClassInstancePtr p_instance, c
 
 
 GDExtensionClassCallVirtual get_virtual_script(void *p_userdata, GDExtensionConstStringNamePtr p_name) {
-    //std::lock_guard<std::mutex> lock(mtx); TODO: enable again
+    std::lock_guard<std::mutex> lock(mtx);
 
     StringName name = StringName::new_static(((void**)const_cast<GDExtensionTypePtr>(p_name))[0]);
     String name_string = String::new2(name);

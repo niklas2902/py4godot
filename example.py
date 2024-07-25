@@ -53,7 +53,10 @@ if __name__ == "__main__":
         shutil.rmtree(f"example/addons/py4godot/cpython-3.11.3-{args.target_platform}/", onerror=onerror)
     copytree(f"build/final/{args.target_platform}/cpython-3.11.3-{args.target_platform}", f"example/addons/py4godot/cpython-3.11.3-{args.target_platform}")
     shutil.copy("build_resources/python.gdextension", "example/addons/py4godot/python.gdextension")
-    shutil.copy("example/addons/py4godot/Python.svg", "example/addons/py4godot/"+ "/Python.svg")
+
+    python_svg_dest = "example/addons/py4godot/"+ "/Python.svg"
+    if not os.path.exists(python_svg_dest):
+        shutil.copy("build_resources/Python.svg", python_svg_dest)
     # shutil.copyfile("build_files/get-pip.py", "addons/windows64/cpython-3.11.3-windows64/python/install/get-pip.py")
 
     # try:

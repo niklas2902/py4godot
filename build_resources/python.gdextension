@@ -1,12 +1,12 @@
 [configuration]
 
-entry_symbol = "py4godot_init"
+entry_symbol = "initialize_pythonscript"
 compatibility_minimum="4.3.0"
 [libraries]
 
-windows.debug.x86_64 = "cpython-3.11.3-windows64/python/install/main.dll"
-windows.release.x86_64 = "cpython-3.11.3-windows64/python/install/main.dll"
+windows.debug.x86_64 = "cpython-3.11.3-windows64/python/install/pythonscript.dll"
+windows.release.x86_64 = "cpython-3.11.3-windows64/python/install/pythonscript.dll"
 
 
-linux.debug.x86_64 = "cpython-3.11.3-linux64/python/install/bin/main.so"
-linux.release.x86_64 = "cpython-3.11.3-linux64/python/install/bin/main.so"
+linux.debug.x86_64 = "cpython-3.11.3-linux64/python/install/bin/pythonscript.so"
+linux.release.x86_64 = "cpython-3.11.3-linux64/python/install/bin/pythonscript.so"

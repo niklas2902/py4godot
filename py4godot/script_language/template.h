@@ -1,6 +1,5 @@
 const char* basic_template = R"(
-from py4godot.pluginscript_api.utils.annotations import *
-from py4godot.pluginscript_api.utils.SignalArg import *
+from py4godot import prop, signal, gdmethod, gdclass, SignalArg
 from py4godot.classes.constants import *
 from py4godot.classes.generated4_core import Vector3
 from py4godot.classes.{INHERITS}.{INHERITS} import {INHERITS}

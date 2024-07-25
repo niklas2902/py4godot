@@ -65,11 +65,15 @@ def copy_main(platform):
     #  as the pythin39.dll must currently be in the same directory as main.pyd/main.so
     if "windows" in platform:
         # This is a weird phenomenon of godot 4.2. It copies the dll and renames it. Thus, we have to change what we depend on
-        copy(f"build/{platform}/~main.dll",
+        copy(f"build/{platform}/main.dll",
              f"build/final/{platform}/{config_data['python_ver']}-{platform}/python/install/main.dll")
+        copy(f"build/{platform}/pythonscript.dll",
+             f"build/final/{platform}/{config_data['python_ver']}-{platform}/python/install/pythonscript.dll")
     elif "linux" in platform:
         copy(f"build/{platform}/main.so",
              f"build/final/{platform}/{config_data['python_ver']}-{platform}/python/install/bin/main.so")
+        copy(f"build/{platform}/pythonscript.so",
+             f"build/final/{platform}/{config_data['python_ver']}-{platform}/python/install/pythonscript.so")
 
 
 def copy_tests(platform):

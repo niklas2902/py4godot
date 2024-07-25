@@ -1,7 +1,13 @@
 import json
-import_string_core = """"""
+import_string_core = """
+"""
 
 import_string_py4godot = """
+import py4godot.classes.generated4_core as core
+import py4godot.classes.common_functions as functions
+from py4godot.pluginscript_api.utils.SignalArg import SignalArg
+from py4godot.pluginscript_api.utils.annotations import gdclass, gdproperty,signal, gdmethod
+from py4godot.pluginscript_api.utils.experimental import prop
 """
 
 import_string_hints = """

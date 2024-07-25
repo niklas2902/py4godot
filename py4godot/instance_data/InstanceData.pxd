@@ -14,3 +14,9 @@ cdef extern from "py4godot/instance_data/CPPInstanceData.h":
         vector[GDExtensionMethodInfo] methods;
         void* script;
         GDExtensionScriptInstanceInfo info;
+
+cdef extern from "py4godot/instance_data/CPPMethodCallData.h":
+    cdef cppclass MethodCallData:
+        bool has_value;
+        PyObject* ret_val
+        PyObject* ret_typename

@@ -5,16 +5,6 @@
 #include "functions.h"
 
 #include <string.h>
-
-#if !defined(GDN_EXPORT)
-#if defined(_WIN32)
-#define GDN_EXPORT __declspec(dllexport)
-#elif defined(__GNUC__)
-#define GDN_EXPORT __attribute__((visibility("default")))
-#else
-#define GDN_EXPORT
-#endif
-#endif
 GDExtensionInterfaceGetProcAddress global_p_get_proc_address;
 GDExtensionClassLibraryPtr _library = nullptr;
 std::mutex mtx;
@@ -180,28 +170,12 @@ void deinitialize_py4godot(void *userdata, GDExtensionInitializationLevel p_leve
     godot::deinit_py_language();
 
 }
-extern "C"{
-    GDExtensionBool GDN_EXPORT py4godot_init(GDExtensionInterfaceGetProcAddress p_get_proc_address, GDExtensionClassLibraryPtr p_library, GDExtensionInitialization *r_initialization){
-        _library = p_library;
-        global_p_get_proc_address = p_get_proc_address;
+GDExtensionBool GDN_EXPORT py4godot_init(GDExtensionInterfaceGetProcAddress p_get_proc_address, GDExtensionClassLibraryPtr p_library, GDExtensionInitialization *r_initialization){
+    _library = p_library;
+    global_p_get_proc_address = p_get_proc_address;
 
-        r_initialization->initialize = initialize_py4godot;
-        r_initialization->deinitialize = deinitialize_py4godot;
+    r_initialization->initialize = initialize_py4godot;
+    r_initialization->deinitialize = deinitialize_py4godot;
 
-        return 1;
-
-    }
-}
-
-// `gdnative_terminate` which is called before the library is unloaded.
-// Godot will unload the library when no object uses it anymore.
-void godot_gdnative_terminate() {
-
-    // Re-acquire the gil in order to finalize properly
-    PyEval_RestoreThread(gilstate);
-
-    int ret = Py_FinalizeEx();
-}
-void godot_gdnative_singleton() {
-    //placeholder to prevent error from being raised
+    return 1;
 }

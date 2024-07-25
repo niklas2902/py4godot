@@ -1,9 +1,10 @@
 #pragma once
 #include "gdextension_interface.h"
 
-#include "PyScriptInstance_api.h"
 #include "py4godot/instance_data/CPPInstanceData.h"
+#include "py4godot/instance_data/CPPMethodCallData.h"
 #include "py4godot/script_extension/PyScriptExtension.h"
+#include "PyScriptInstance_api.h"
 #include "py4godot/cpputils/utils.h"
 #include "py4godot/cppcore/Variant.h"
 #include <string>
@@ -14,13 +15,17 @@ GDExtensionScriptInstanceInfo native_script_instance;
 
 GDExtensionBool c_instance_get(GDExtensionScriptInstanceDataPtr p_instance, GDExtensionConstStringNamePtr p_name, GDExtensionVariantPtr r_ret){
     print_error("_c_instance_get");
-    std::lock_guard<std::mutex> lock(mtx);
     auto gil_state = PyGILState_Ensure();
     InstanceData* instance = (InstanceData*)p_instance;
     StringName method_name = StringName::new_static(((void**)p_name)[0]);
     String method_name_str = String::new2(method_name);
     char* c_method_name;
     gd_string_to_c_string(&method_name_str.godot_owner, method_name_str.length(), &c_method_name);
+    if(instance->custom_properties.find(std::string{c_method_name}) == instance->custom_properties.end()){
+        // TODO: look over this again. Currently setting editor description is broken.
+        PyGILState_Release(gil_state);
+        return 0;
+    }
     if(std::string{c_method_name} == std::string{"script"}){
         auto constructor = functions::get_get_variant_from_type_constructor()(GDExtensionVariantType::GDEXTENSION_VARIANT_TYPE_OBJECT);
         constructor(r_ret, &((PyScriptExtension*)instance->script)->godot_owner);
@@ -38,33 +43,84 @@ GDExtensionBool c_instance_get(GDExtensionScriptInstanceDataPtr p_instance, GDEx
     return 1;
 }
 
+std::string convertUnicodeToChar(PyObject* py_unicode) {
+    if (py_unicode == nullptr || !PyUnicode_Check(py_unicode)) {
+        assert(false);
+        return nullptr;
+    }
+    // Encode the Python Unicode String to UTF-8
+    PyObject* py_bytes = PyUnicode_AsEncodedString(py_unicode, "utf-8", "strict");
+    if (py_bytes == nullptr) {
+        assert(false);
+        return nullptr;
+    }
+    // Extract the char* from the Python bytes object
+    char* c_string = PyBytes_AsString(py_bytes);
+    if (c_string == nullptr) {
+        assert(false);
+        return nullptr;
+    }
+    // Increase the reference count for the bytes object before returning the char*
+    Py_INCREF(py_bytes);
+    // Create a std::string from the char*
+    std::string result(c_string);
 
-void c_instance_call(GDExtensionScriptInstanceDataPtr p_self, GDExtensionConstStringNamePtr p_method, const GDExtensionConstVariantPtr *p_args, GDExtensionInt p_argument_count, GDExtensionVariantPtr r_return, GDExtensionCallError *r_error){
+    // Decrement the reference count of py_bytes
+    Py_DECREF(py_bytes);
+
+    return result;
+}
+
+
+
+void c_instance_call(GDExtensionScriptInstanceDataPtr p_self, GDExtensionConstStringNamePtr p_method,
+ const GDExtensionConstVariantPtr *p_args, GDExtensionInt p_argument_count,
+ GDExtensionVariantPtr r_return, GDExtensionCallError *r_error){
     print_error("_c_instance_call");
-    std::lock_guard<std::mutex> lock(mtx);
     auto name = StringName::new_static(((void**)p_method)[0]);
     auto _ready = c_string_to_string_name("_ready");
     auto _enter_tree = c_string_to_string_name("_enter_tree");
+    auto set_visible = c_string_to_string_name("visible");
+    r_error->error = GDExtensionCallErrorType::GDEXTENSION_CALL_ERROR_INVALID_METHOD;
     if(((InstanceData*)p_self)->is_placeholder && (name == _ready || name == _enter_tree)){
-
         return;
     }
-
     auto gil_state = PyGILState_Ensure();
-    auto* p_instance = (InstanceData*)p_self;
-    instance_call(p_self, p_method, p_args, p_argument_count, r_return, r_error);
+    String method_name_str = String::new2(name);
+    if (instance_has_method(p_self, p_method)){
+        auto* p_instance = (InstanceData*)p_self;
+        MethodCallData data = instance_call(p_self, p_method, p_args, p_argument_count, r_return, r_error);
+        Variant* res_var =  new Variant();
+        res_var->native_ptr = r_return;
+        if(data.has_value){
+            auto my_str = convertUnicodeToChar(data.ret_typename);
+            res_var->init_from_py_object(data.ret_val, my_str.c_str());
+            // TODO: Py_DECREF for result_obj
+            Py_DECREF(data.ret_val);
+        }
+        r_error->error = GDExtensionCallErrorType::GDEXTENSION_CALL_OK; // signaling that calling the method worked
+    }
     PyGILState_Release(gil_state);
 }
 
 
 GDExtensionBool c_instance_set(GDExtensionScriptInstanceDataPtr p_instance, GDExtensionConstStringNamePtr p_name, GDExtensionConstVariantPtr p_value){
     print_error("_c_instance_set");
-    std::lock_guard<std::mutex> lock(mtx);
+    //std::lock_guard<std::mutex> lock(mtx);
+    InstanceData* instance = (InstanceData*)p_instance;
+    StringName method_name = StringName::new_static(((void**)p_name)[0]);
+    String method_name_str = String::new2(method_name);
+    char* c_method_name;
+    gd_string_to_c_string(&method_name_str.godot_owner, method_name_str.length(), &c_method_name);
+    if(instance->custom_properties.find(std::string{c_method_name}) == instance->custom_properties.end()){
+        // TODO: look over this again. Currently setting editor description is broken.
+        return 0;
+    }
     auto gil_state = PyGILState_Ensure();
     auto ret = instance_set(p_instance, p_name, p_value);
     PyGILState_Release(gil_state);
 
-    return ret;
+    return 1;
 }
 
 const GDExtensionPropertyInfo * c_instance_get_property_list(GDExtensionScriptInstanceDataPtr p_instance, uint32_t *r_count){
