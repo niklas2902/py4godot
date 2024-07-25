@@ -16,10 +16,10 @@ cdef extern from "py4godot/cpputils/utils.h":
     void destroy_object(void* godot_owner)
     void delete_char_array(char* array)
 
+    void break_()
+
 cdef extern from "py4godot/cpputils/ScriptHolder.h":
     PyObject* get_py_script(int id)
-
-
 cdef core.StringName py_c_string_to_string_name(char* string)
 cdef core.String py_c_string_to_string(char* string)
 cdef unicode gd_string_to_py_string(core.String string)

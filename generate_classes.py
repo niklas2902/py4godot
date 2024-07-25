@@ -90,6 +90,7 @@ def generate_import():
               "from libcpp.vector cimport vector\n"
               "from py4godot.enums.enums4 cimport *\n"
               "from py4godot.utils.utils cimport *\n"
+              "import py4godot.utils.utils as py_utils\n"
               "from py4godot.classes.typedarrays cimport *\n"
               "from libcpp.memory cimport make_shared\n")
     return result
@@ -1236,7 +1237,7 @@ def generate_constructor(classname):
     res = generate_newline(res)
     res += f"{INDENT}def constructor():"
     res = generate_newline(res)
-    res += f"{INDENT * 2}cdef {classname} class_ = {classname}()"
+    res += f"{INDENT * 2}cdef {classname} class_ = {classname}.__new__({classname})"
     res = generate_newline(res)
     res += f"{INDENT * 2}class_.{class_['name']}_internal_class_ptr = CPP{class_['name']}.constructor()"
     res = generate_newline(res)
@@ -1244,6 +1245,15 @@ def generate_constructor(classname):
     res = generate_newline(res)
 
     res += f"{INDENT * 2}return class_"
+    res = generate_newline(res)
+
+    res += f"{INDENT}def __init__(self):"
+    res = generate_newline(res)
+    res += f"{INDENT * 2}if py_utils.shouldCreateObject:"
+    res = generate_newline(res)
+    res += f"{INDENT * 3}self.{class_['name']}_internal_class_ptr = CPP{class_['name']}.constructor()"
+    res = generate_newline(res)
+    res += f"{INDENT * 3}self.set_gdowner(self.{class_['name']}_internal_class_ptr.get().get_godot_owner())"
     res = generate_newline(res)
     return res
 

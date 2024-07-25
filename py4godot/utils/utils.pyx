@@ -2,6 +2,7 @@ from py4godot.utils.print_tools import *
 from py4godot.utils.test_utils cimport *
 from libc.stdlib cimport malloc, free
 from cpython.ref cimport Py_INCREF, Py_DECREF
+
 cdef core.StringName py_c_string_to_string_name(char* string):
     cdef core.StringName gd_string_name = core.StringName.__new__(core.StringName)
     gd_string_name.StringName_internal_class_ptr = c_string_to_string_name_ptr(string)
