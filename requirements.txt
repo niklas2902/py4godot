@@ -1,4 +1,4 @@
-setuptools~=49.2.1
+setuptools>=65.5.1
 Cython~=0.29.24
 zstandard
 wget
