@@ -162,7 +162,7 @@ void PyScriptExtension::_init_values(){}
 
 void PyScriptExtension::_editor_can_reload_from_file(GDExtensionTypePtr res){
        print_error("_editor_can_reload_from_files");
-    *(static_cast<bool*>(res)) = true;
+    *(static_cast<bool*>(res)) = false;
 }
 void PyScriptExtension::_can_instantiate(GDExtensionTypePtr res){
        print_error("_can_instantiate");
