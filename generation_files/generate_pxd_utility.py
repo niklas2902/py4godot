@@ -259,6 +259,7 @@ def graph_to_list(node, liste):
 
 
 if __name__ == "__main__":
+    os.chdir("..")
     with open('py4godot/gdextension-api/extension_api.json', 'r') as myfile:
         data = myfile.read()
         obj = json.loads(data)

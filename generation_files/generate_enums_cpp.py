@@ -1,4 +1,7 @@
 import json
+import os
+
+
 def generate_newline(str_):
     return str_ + "\n"
 
@@ -9,6 +12,7 @@ def enumize_name(str_):
     return str_array[0]
 
 if __name__ == "__main__":
+    os.chdir("..")
     res = "#pragma once"
     res = generate_newline(res)
     res += "namespace godot{"

@@ -1,6 +1,6 @@
 import copy
 import json
-import os.path
+import os.path, os
 
 from generate_enums import enumize_name
 
@@ -1834,6 +1834,7 @@ def generate_typed_array_name(name):
 
 
 if __name__ == "__main__":
+    os.chdir("..")
     with open('py4godot/gdextension-api/extension_api.json', 'r') as myfile:
         data = myfile.read()
         obj = json.loads(data)

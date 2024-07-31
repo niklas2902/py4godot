@@ -1,5 +1,6 @@
 import copy
 import json
+import os
 
 import generate_pxd_bridge
 from generate_classes import import_type, ReturnType
@@ -148,6 +149,7 @@ def generate_typed_array_name(name):
 
 
 if __name__ == "__main__":
+    os.chdir("..")
     with open('py4godot/gdextension-api/extension_api.json', 'r') as myfile:
         data = myfile.read()
         obj = json.loads(data)

@@ -3,6 +3,7 @@ import os
 
 
 # List of scripts to execute
+dir = "generation_files"
 scripts = [
     'generate_classes.py',
     'generate_classes_cpp.py',
@@ -19,7 +20,7 @@ scripts = [
     'generate_utils_cpp.py'
 ]
 
-
+os.chdir(dir)
 # Execute each script
 for script in scripts:
     print(f"Executing {script}...")
