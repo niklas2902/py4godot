@@ -64,4 +64,4 @@ py4godot/utils/print_tools.cpp
 py4godot/script_instance/PyScriptInstance_api.h
 py4godot/script_extension/script_extension_helpers.cpp
 py4godot/script_extension/script_extension_helpers_api.h
-/platforms/python_ver/python_ver_compile.cross
+py4godot/platforms/python_ver
