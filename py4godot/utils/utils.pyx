@@ -2,6 +2,11 @@ from py4godot.utils.print_tools import *
 from py4godot.utils.test_utils cimport *
 from libc.stdlib cimport malloc, free
 from cpython.ref cimport Py_INCREF, Py_DECREF
+from py4godot.classes.Node.Node cimport *
+cimport py4godot.classes.Viewport.Viewport as py4godot_viewport
+cimport py4godot.classes.SceneTree.SceneTree as py4godot_scenetree
+cimport py4godot.classes.Window.Window as py4godot_window
+
 
 cdef core.StringName py_c_string_to_string_name(char* string):
     cdef core.StringName gd_string_name = core.StringName.__new__(core.StringName)
@@ -52,6 +57,34 @@ cdef unicode gd_string_to_py_string(core.String string):
     cdef unicode py_string = <unicode>PyUnicode_FromStringAndSize(c_str,string.length())
     free(c_str)
     return py_string
+
+def get_viewport(Node node):
+
+    cdef py4godot_viewport.Viewport _ret = py4godot_viewport.Viewport.__new__(py4godot_viewport.Viewport)
+    _ret.Viewport_internal_class_ptr = node.Node_internal_class_ptr.get().py_get_viewport()
+    #_ret.set_gdowner(_ret.Viewport_internal_class.get_godot_owner())
+
+    return _ret
+
+
+
+def get_window(Node node):
+
+    cdef py4godot_window.Window _ret = py4godot_window.Window.__new__(py4godot_window.Window)
+    _ret.Window_internal_class_ptr = node.Node_internal_class_ptr.get().py_get_window()
+    #_ret.set_gdowner(_ret.Window_internal_class.get_godot_owner())
+
+    return _ret
+
+
+def get_tree(Node node):
+
+    cdef py4godot_scenetree.SceneTree _ret = py4godot_scenetree.SceneTree.__new__(py4godot_scenetree.SceneTree)
+    _ret.SceneTree_internal_class_ptr = node.Node_internal_class_ptr.get().py_get_tree()
+    #_ret.set_gdowner(_ret.SceneTree_internal_class.get_godot_owner())
+
+    return _ret
+
 
 """
 cdef unicode gd_string_name_to_py_string(core.StringName string_name):
