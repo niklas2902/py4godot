@@ -55,7 +55,7 @@ def generate_files():
     #res.wait()
     #if res.returncode != 0:
     #   raise Exception("generation failed")
-    # res = subprocess.Popen(f"python cythonize_test.py", shell=True)
+    # res = subprocess.Popen(f"python cythonize_files.py", shell=True)
     # res.wait()
     # if res.returncode != 0:
     #    raise Exception("generation failed")

@@ -1,12 +1,15 @@
+# Build and IDE directories
+build
 example
-build_meson
 .idea
 __pycache__
 python_files
 venv
 platforms/binary_dirs/python_ver_compile.cross
 .vscode
+/logs/
 
+# Py4godot directories and files
 py4godot/enums/*.c
 py4godot/core/**/*.c
 py4godot/core/**/*.h
@@ -14,20 +17,26 @@ py4godot/pluginscript_api/*.c
 py4godot/pluginscript_api/*.h
 py4godot/pluginscript_api/**/*.c
 py4godot/utils/*.c
+py4godot/utils/core_holder_api.h
 
 py4godot/classes/*.c
 py4godot/classes/*.h
 py4godot/classes/generated.pxd
 py4godot/classes/generated.pyx
-/tests/addons/
-/py4godot/gdnative_api/api.c
-/py4godot/gdnative_api/api_api.h
-/tests/core/vector3/addons/
-/py4godot/events/*.c
-/tests/core/vector2/addons/
+py4godot/classes/generated.pyi
+py4godot/classes/generated4.pyx
+
+py4godot/gdnative_api/api.c
+py4godot/gdnative_api/api_api.h
+py4godot/events/*.c
+py4godot/instance_data/InstanceData.c
+
+# Godot and test directories
 /godot/
+/tests/addons/
+/tests/core/vector3/addons/
+/tests/core/vector2/addons/
 /tests/core/aabb/addons/
-/logs/
 /tests/core/basis/addons/
 /tests/core/array/addons/
 /tests/core/rect2/addons/
@@ -37,9 +46,5 @@ py4godot/classes/generated.pyx
 /tests/core/node_path/addons/
 /tests/core/transform/addons/
 /tests/core/transform2d/addons/
-/py4godot/utils/core_holder_api.h
 /tests/core/pool_array/addons/
 /tests/binding/crash_on_call/addons/windows64/
-/py4godot/classes/generated.pyi
-/py4godot/classes/generated4.pyx
-/py4godot/instance_data/InstanceData.c
