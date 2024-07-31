@@ -20,7 +20,19 @@ scripts = [
     'generate_utils_cpp.py'
 ]
 
-os.chdir(dir)
+# Make sure all necessary directories are there
+if not os.path.isdir("py4godot/classes"):
+    os.mkdir("py4godot/classes")
+    with open("py4godot/classes/__init__.py", "w") as file:
+        pass
+if not os.path.isdir("py4godot/enums"):
+    os.mkdir("py4godot/enums")
+    with open("py4godot/enums/__init__.py", "w") as file:
+        pass
+if not os.path.isdir("py4godot/cppclasses"):
+    os.mkdir("py4godot/cppclasses")
+
+os.chdir(dir) # All files execute on subdirectory
 # Execute each script
 for script in scripts:
     print(f"Executing {script}...")
