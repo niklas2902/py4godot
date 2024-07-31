@@ -30,6 +30,8 @@ py4godot/gdnative_api/api.c
 py4godot/gdnative_api/api_api.h
 py4godot/events/*.c
 py4godot/instance_data/InstanceData.c
+py4godot/script_instance/PyScriptInstance.cpp
+py4godot/script_instance/PyScriptInstance.h
 
 # Godot and test directories
 /godot/
