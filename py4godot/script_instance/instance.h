@@ -90,11 +90,11 @@ void c_instance_call(GDExtensionScriptInstanceDataPtr p_self, GDExtensionConstSt
     if (instance_has_method(p_self, p_method)){
         auto* p_instance = (InstanceData*)p_self;
         MethodCallData data = instance_call(p_self, p_method, p_args, p_argument_count, r_return, r_error);
-        Variant* res_var =  new Variant();
-        res_var->native_ptr = r_return;
+        Variant res_var =  Variant();
+        res_var.native_ptr = r_return;
         if(data.has_value){
             auto my_str = convertUnicodeToChar(data.ret_typename);
-            res_var->init_from_py_object(data.ret_val, my_str.c_str());
+            res_var.init_from_py_object(data.ret_val, my_str.c_str());
             // TODO: Py_DECREF for result_obj
             Py_DECREF(data.ret_val);
         }

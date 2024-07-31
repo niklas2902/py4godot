@@ -1749,6 +1749,18 @@ def generate_cast(class_):
     return res
 
 
+def generate_str_method(class_):
+    res = ""
+    res += f"{INDENT}def __str__(self):"
+    res = generate_newline(res)
+    if class_["name"] == "String":
+        res += f"{INDENT*2}return py_utils.gd_string_to_py_string(self)"
+    if class_["name"] == "StringName":
+        res += f"{INDENT*2}return py_utils.gd_string_name_to_py_string(self)"
+    res = generate_newline(res)
+    return res
+
+
 def generate_special_methods(class_):
     res = ""
     if class_["name"] == "Dictionary":
@@ -1759,6 +1771,8 @@ def generate_special_methods(class_):
 
     if class_["name"] in classes - builtin_classes:
         res += generate_cast(class_)
+    if class_["name"] in {"String", "StringName"}:
+        res += generate_str_method(class_)
 
     return res
 
