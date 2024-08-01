@@ -181,8 +181,8 @@ def generate_constructors(class_):
 
 
 def generate_class_imports(classes):
-    result = "from py4godot.classes.generated4_core cimport *"
-    result = "import py4godot.classes.generated4_core as generated_core"
+    result = "from py4godot.classes.core cimport *"
+    result = "import py4godot.classes.core as generated_core"
     result = generate_newline(result)
 
     return result
@@ -1100,12 +1100,6 @@ def unnull_arg(default_value, arg_type):
     return default_value
 
 
-def core_import(class_):
-    if class_["name"] in builtin_classes:
-        return ""
-    return "generated_core."
-
-
 def generate_default_arg(class_, arg, arg_type):
     set_to_iterate = builtin_classes.union(classes) - {"int", "float", "bool", "Nil"}
     if "default_value" in arg:
@@ -1392,7 +1386,7 @@ def generate_classes(classes, filename, is_core=False, is_typed_array=False):
         res += f"from py4godot.classes.Object.Object cimport *"
         res = generate_newline(res)
 
-        res += f"from py4godot.classes.generated4_core cimport *"
+        res += f"from py4godot.classes.core cimport *"
         res = generate_newline(res)
         classes_to_import = get_classes_to_import(classes)
         for cls in classes_to_import:
@@ -1871,4 +1865,4 @@ if __name__ == "__main__":
 
         generate_classes(arrays, f"py4godot/classes/typedarrays.pyx", is_core=False, is_typed_array=True)
 
-        generate_classes(obj["builtin_classes"], f"py4godot/classes/generated4_core.pyx", is_core=True)
+        generate_classes(obj["builtin_classes"], f"py4godot/classes/core.pyx", is_core=True)

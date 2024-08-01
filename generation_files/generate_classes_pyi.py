@@ -151,7 +151,7 @@ def generate_constructors(class_):
 
 
 def generate_class_imports(classes):
-    result = "import py4godot.classes.generated4_core as __core__"
+    result = "import py4godot.classes.core as __core__"
     result = generate_newline(result)
     result += "import py4godot.classes.typedarrays as __typedarrays__"
     result = generate_newline(result)
@@ -880,4 +880,4 @@ if __name__ == "__main__":
 
         is_core = True
         generate_classes(arrays, f"py4godot/classes/typedarrays.pyi", is_core=False, is_typed_array=True)
-        generate_classes(obj["builtin_classes"], f"py4godot/classes/generated4_core.pyi", is_core=True)
+        generate_classes(obj["builtin_classes"], f"py4godot/classes/core.pyi", is_core=True)

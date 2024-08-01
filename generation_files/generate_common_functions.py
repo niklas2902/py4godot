@@ -87,13 +87,12 @@ def generate_import():
               "from libcpp.vector cimport vector\n"
               "from py4godot.enums.enums4 cimport *\n"
               "from py4godot.utils.utils cimport *\n"
-              "from py4godot.classes.py_utils cimport *\n"
-              "from py4godot.classes.generated4_core cimport *\n"
+              "from py4godot.classes.core cimport *\n"
               "cimport py4godot.classes.Object.Object as py4godot_object\n")
 
     for cls in builtin_classes:
         if cls not in {"Nil", "float", "int", "bool"}:
-            result += f"cimport py4godot.classes.generated4_core as py4godot_{cls.lower()}\n"
+            result += f"cimport py4godot.classes.core as py4godot_{cls.lower()}\n"
     return result
 
 
@@ -748,5 +747,5 @@ if __name__ == "__main__":
             res += generate_method(utility_function)
             res = generate_newline(res)
 
-        with open("py4godot/classes/common_functions.pyx", "w") as f:
+        with open("py4godot/functions.pyx", "w") as f:
             f.write(res)

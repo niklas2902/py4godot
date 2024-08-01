@@ -1,6 +1,6 @@
 from py4godot.godot_bindings.binding4_godot4 cimport *
 from py4godot.core.variant4.Variant4 cimport *
-from py4godot.classes.generated4_core cimport *
+from py4godot.classes.core cimport *
 from py4godot.instance_data.InstanceData cimport MethodCallData
 
 cdef api GDExtensionBool instance_set(GDExtensionScriptInstanceDataPtr p_instance, GDExtensionConstStringNamePtr p_name, GDExtensionConstVariantPtr p_value)

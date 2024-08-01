@@ -79,6 +79,7 @@ void init_pluginscript_api(){
         char *strExcType = PyBytes_AS_STRING(pyStr);
         PyErr_Print();
         print_error(strExcType);
+        functions::get_print_error()(strExcType, "test", "test", 1, 1);
         assert(false);
         return;
     }

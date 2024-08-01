@@ -5,7 +5,6 @@ import time
 import traceback
 
 from Cython.Build import cythonize
-import generate_bindings, generate_bindings_pyi
 
 from meson_scripts import copy_tools, download_python, generate_init_files, \
     locations, platform_check, generate_godot, \

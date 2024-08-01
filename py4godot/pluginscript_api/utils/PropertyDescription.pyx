@@ -4,7 +4,7 @@ from py4godot.godot_bindings.binding4_godot4 cimport *
 from py4godot.classes.Object.Object cimport *
 from py4godot.utils.utils cimport *
 from py4godot.pluginscript_api.utils.utils cimport *
-from py4godot.classes.generated4_core cimport *
+from py4godot.classes.core cimport *
 cimport py4godot.classes.cpp_bridge as bridge
 
 cdef class PropertyDescription:

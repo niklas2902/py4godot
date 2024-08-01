@@ -170,7 +170,7 @@ if __name__ == "__main__":
 
             res += generate_pxd_class(class_)
 
-        with open("py4godot/classes/generated4_core.pxd", "w") as f:
+        with open("py4godot/classes/core.pxd", "w") as f:
             f.write(res)
         for class_ in obj["classes"]:
             if class_["name"] in IGNORED_CLASSES:
@@ -181,7 +181,7 @@ if __name__ == "__main__":
 
             res += f"from py4godot.classes.cpp_bridge cimport {class_['name']} as CPP{class_['name']} "
             res = generate_newline(res)
-            res += f"from py4godot.classes.generated4_core cimport *"
+            res += f"from py4godot.classes.core cimport *"
             res = generate_newline(res)
             res += generate_pxd_class(class_)
             with open(f"py4godot/classes/{class_['name']}/{class_['name']}.pxd", "w") as f:

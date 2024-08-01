@@ -22,6 +22,7 @@ py4godot/utils/*.c
 py4godot/utils/core_holder_api.h
 
 py4godot/classes/
+py4godot/constants/*.cpp
 py4godot/cppclasses/
 py4godot/enums/
 platforms/binary_dirs/python_ver_compile.cross
@@ -65,3 +66,7 @@ py4godot/utils/print_tools.cpp
 py4godot/script_instance/PyScriptInstance_api.h
 py4godot/script_extension/script_extension_helpers.cpp
 py4godot/script_extension/script_extension_helpers_api.h
+/py4godot/functions.pxd
+/py4godot/functions.pyi
+/py4godot/functions.pyx
+/py4godot/functions.cpp

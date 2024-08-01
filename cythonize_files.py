@@ -13,6 +13,7 @@ def _cythonize(filename: str):
 if __name__ == "__main__":
     _time = datetime.datetime.now()
     nthreads = 6
+    cythonize("py4godot/functions.pyx", language_level=3, language="c++", nthreads=nthreads)
     cythonize("py4godot/classes/Object/Object.pyx", language_level=3, language="c++", nthreads=nthreads)
     cythonize("py4godot/core/variant4/Variant4.pyx", language_level=3, language="c++")
     cythonize("py4godot/core/variant4/type_helpers.pyx", language_level=3, language="c++")
@@ -21,8 +22,8 @@ if __name__ == "__main__":
     cythonize("py4godot/classes/*/*.pyx", language_level=3, language="c++", nthreads=nthreads)
     cythonize("py4godot/script_instance/*.pyx", language_level=3, language="c++")
     cythonize("py4godot/script_extension/script_extension_helpers.pyx", language_level=3, language="c++")
+    cythonize("py4godot/constants/*.pyx", language_level=3, language="c++")
     cythonize("py4godot/enums/enums4.pyx", language_level=3)
-    cythonize("py4godot/classes/utils.pyx", language_level=3, language="c++")
     cythonize("py4godot/utils/utils.pyx", language_level=3, language="c++")
     cythonize("py4godot/utils/instance_utils.pyx", language_level=3, language="c++")
     cythonize("py4godot/utils/print_tools.pyx", language_level=3, language="c++")

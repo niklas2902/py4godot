@@ -282,5 +282,5 @@ if __name__ == "__main__":
             res += generate_method(utility_function)
             res = generate_newline(res)
 
-        with open("py4godot/classes/py_utils.pxd", "w") as f:
+        with open("py4godot/functions.pxd", "w") as f:
             f.write(res)
