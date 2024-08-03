@@ -10,6 +10,7 @@ platforms/binary_dirs/python_ver_compile.cross/
 logs/
 
 # Py4godot directories and files
+*.html
 py4godot/enums/*.c
 py4godot/core/**/*.c
 py4godot/core/**/*.h
@@ -70,3 +71,9 @@ py4godot/script_extension/script_extension_helpers_api.h
 /py4godot/functions.pyi
 /py4godot/functions.pyx
 /py4godot/functions.cpp
+/py4godot/utils/MethodInfo.cpp
+/py4godot/utils/ScriptHolder.cpp
+/py4godot/utils/VariantTypeWrapper4.cpp
+/py4godot/utils/VariantTypeWrapper4.h
+/py4godot/test_file.cpp
+/py4godot/script_instance/PyScriptInstance_api.h
