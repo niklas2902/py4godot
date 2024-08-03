@@ -1,5 +1,6 @@
+# distutils: language=c++
 from py4godot.godot_bindings.binding4_godot4 cimport *
-from py4godot.classes.generated4_core cimport *
+from py4godot.classes.core cimport *
 
 cdef class SignalDescription:
     cdef Dictionary dict

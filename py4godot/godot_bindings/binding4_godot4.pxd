@@ -1,3 +1,4 @@
+# distutils: language=c++
 #include "binding4.h"
 from libc.stdint cimport uint32_t
 from libc.stdint cimport int32_t

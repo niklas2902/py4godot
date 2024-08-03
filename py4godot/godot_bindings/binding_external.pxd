@@ -1,3 +1,4 @@
+# distutils: language=c++
 from py4godot.godot_bindings.types cimport *
 from cython import *
 from cpython.ref cimport PyObject

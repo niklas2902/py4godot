@@ -1,3 +1,4 @@
+# distutils: language=c++
 from libcpp cimport bool
 from libc.stddef cimport wchar_t
 from cpython.ref cimport PyObject

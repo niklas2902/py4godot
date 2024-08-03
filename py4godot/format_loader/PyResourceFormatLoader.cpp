@@ -67,7 +67,7 @@ void PyResourceFormatLoader::_handles_type( StringName& type, GDExtensionTypePtr
   *((GDExtensionTypePtr*) res) =  (void*)handles_type;
 }
 void PyResourceFormatLoader::_get_resource_type( String& path, GDExtensionTypePtr res){
-        print_error("_get_resource_type");
+    print_error("_get_resource_type");
     functions::get_string_new_with_utf8_chars()(res, "PyScriptExtension");
 }
 void PyResourceFormatLoader::_get_resource_script_class( String& path, GDExtensionTypePtr res)
@@ -127,14 +127,16 @@ void PyResourceFormatLoader::_load( String& path, String& original_path, bool us
 
     PyScriptExtension* script_extension = nullptr;
     auto string_path = std::string{c_path};
-    script_extension = PyScriptExtension::constructor(lang);
     if(path_to_script_extension.find(string_path) == path_to_script_extension.end()){
+        script_extension = PyScriptExtension::constructor(lang);
         path_to_script_extension[string_path] = script_extension;
 
     }
     else{
-       path_to_script_extension[string_path]->_set_source_code_internal(source_code);
-
+        path_to_script_extension[string_path]->_set_source_code_internal(source_code);
+        constructor_func = functions::get_get_variant_from_type_constructor()(GDExtensionVariantType::GDEXTENSION_VARIANT_TYPE_OBJECT);
+        constructor_func(res,&path_to_script_extension[string_path]->godot_owner);
+        return;
     }
     script_extension->set_path(path);
     script_extension ->_set_source_code_internal(source_code);

@@ -1,3 +1,4 @@
+# distutils: language=c++
 from py4godot.godot_bindings.binding4_godot4 cimport *
 
 cdef extern from "py4godot/cppcore/Variant.h" namespace "godot":

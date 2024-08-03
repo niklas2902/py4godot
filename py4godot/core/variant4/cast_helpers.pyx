@@ -1,3 +1,4 @@
+# distutils: language=c++
 from cpython cimport Py_INCREF, Py_DECREF, PyObject
 from py4godot.classes.GLTFSpecGloss.GLTFSpecGloss cimport *
 from py4godot.classes.SphereMesh.SphereMesh cimport *

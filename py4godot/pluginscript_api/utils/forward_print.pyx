@@ -1,5 +1,6 @@
+# distutils: language=c++
 import sys
-from py4godot.classes.common_functions import print as gdprint
+from py4godot.functions import print as gdprint
 
 welcome_text="""
 #################################################

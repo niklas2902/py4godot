@@ -1,4 +1,5 @@
-from py4godot.classes.generated4_core cimport *
+# distutils: language=c++
+from py4godot.classes.core cimport *
 from py4godot.classes.Object.Object cimport *
 cimport py4godot.utils.utils as utils
 

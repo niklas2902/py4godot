@@ -1,3 +1,4 @@
+# distutils: language=c++
 import sys,os
 import inspect, traceback
 from py4godot.pluginscript_api.hints.BaseHint cimport *
@@ -21,6 +22,20 @@ class_name = ""
 gd_class = None
 is_tool = False
 current_class_name = ""
+
+def load_module(module_name, file_to_load):
+    # Check if the module is already loaded
+    if module_name in sys.modules:
+        del sys.modules[module_name]
+
+    module_spec = importlib.util.spec_from_file_location(module_name, file_to_load)
+    if module_spec is None:
+        raise FileNotFoundError(f"Cannot find the module file: {file_to_load}")
+    module = importlib.util.module_from_spec(module_spec)
+    module_spec.loader.exec_module(module)
+    sys.modules[module_name] = module
+
+    return sys.modules[module_name]
 
 cdef api TransferObject exec_class(str source_string, str class_name_):
     global  gd_class, properties, signals, methods,default_values, class_name, is_tool, methods
@@ -48,17 +63,14 @@ cdef api TransferObject exec_class(str source_string, str class_name_):
             py_class_name_ = py_class_name_[:-1]
         module_name = py_class_name_.replace("res://", "").replace("/",".").replace(".py", "").replace("\\", ".")
         file_to_load = py_class_name_.replace("res://", "")
-        module_spec = importlib.util.spec_from_file_location(module_name, file_to_load)
-        module = importlib.util.module_from_spec(module_spec)
-        module_spec.loader.exec_module(module)
+        load_module(module_name, file_to_load)
     except Exception as e:
         print_tools.print_error("exec_class: Exception happened:")
+        print_tools.print_error(f"class to load:{class_name_}")
         bytes_class = py_class_name_.encode("utf-8")
         my_str_class = bytes_class
         print_tools.print_error(my_str_class)
-        bytes_exception = (f"exec_class: Exception happened: {traceback.format_exc()}").encode("utf-8")
-        my_str_exception = bytes_exception
-        print_tools.print_error(my_str_exception)
+        print_tools.print_error(f"exec_class: Exception happened: {traceback.format_exc()}")
 
     for signal in signals:
         transfer_object.signals.push_back((<SignalDescription>signal).get_signal_dict().Dictionary_internal_class_ptr.get()[0])
@@ -125,7 +137,6 @@ def gdproperty(*args, ** kwargs):
 
 def gdmethod(func):
     args = inspect.getfullargspec(func).args
-    print_tools.print_error(f"args:{args}")
     list_args = []
     cdef PropertyDescription property_description
     for arg in args:

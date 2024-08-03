@@ -21,8 +21,9 @@ if __name__ == "__main__":
             if "cppclasses" in entry or "PyScriptExtension" in entry or "PyLanguage" in entry or entry.endswith(
                     "main.cpp") \
                     or entry.endswith(
-                "api.cpp") or "PyResourceFormatLoader" in entry or "PyResourceFormatSaver" in entry \
-                    or (entry.endswith("functions.cpp") and not "common_functions" in entry):
+                "api.cpp") or "PyResourceFormatLoader" in entry or "PyResourceFormatSaver" in entry :
+                continue
+            if "functions" in entry and "godot_bindings" in entry:
                 continue
 
             if len(entry) > 107:

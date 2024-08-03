@@ -1,3 +1,4 @@
+# distutils: language=c++
 from cpython.ref cimport Py_INCREF, Py_DECREF
 from cpython.object cimport PyObject
 from py4godot.core.variant4 import cast_helpers

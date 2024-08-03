@@ -1,3 +1,4 @@
+# distutils: language=c++
 from libc.stdint cimport uint32_t
 from libc.stdint cimport int32_t
 from libc.stdint cimport uint8_t

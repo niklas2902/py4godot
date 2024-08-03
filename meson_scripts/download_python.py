@@ -9,7 +9,7 @@ platform_dict = {"windows64": "x86_64-pc-windows-msvc-shared-pgo", "windows": "i
                  "linux64": "x86_64-unknown-linux-gnu-lto", "linux": "i686-unknown-linux-gnu-pgo"}
 python_files_dir = "python_files"
 copy_dir = "build/final"
-python_ver = "cpython-3.11.3"
+python_ver = "cpython-3.12.4"
 
 sitecustomize_py = """
 import site
@@ -26,7 +26,7 @@ def download_file(platform, allow_copy=False):
 
     print("download:" + platform)
 
-    url = f'https://github.com/indygreg/python-build-standalone/releases/download/20230507/{python_ver}+20230507-{platform_dict[platform]}-full.tar.zst'
+    url = f'https://github.com/indygreg/python-build-standalone/releases/download/20240713/{python_ver}+20240713-{platform_dict[platform]}-full.tar.zst'
     python_file = f'{python_files_dir}/{python_ver}-{platform_dict[platform]}.tar.zst'
     export_name = f"{python_ver}-" + platform
 
@@ -79,6 +79,6 @@ def create_sitecustomization(export_folder, platform):
                   "w") as sitecustomize_file:
             sitecustomize_file.write(sitecustomize_py.replace("{platform}", platform))
     elif "linux" in platform:
-        with open(f"python_files/{export_folder}/python/install/lib/python3.11/site-packages/sitecustomize.py",
+        with open(f"python_files/{export_folder}/python/install/lib/python3.12/site-packages/sitecustomize.py",
                   "w") as sitecustomize_file:
             sitecustomize_file.write(sitecustomize_py.replace("{platform}", platform))
