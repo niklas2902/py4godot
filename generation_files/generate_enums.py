@@ -34,6 +34,6 @@ if __name__ == "__main__":
             res = generate_newline(res)
 
     with open("py4godot/enums/enums4.pyx", "w") as f:
-        f.write("from py4godot.godot_bindings.binding4_godot4 cimport *")
+        f.write("# distutils: language=c++"+"from py4godot.godot_bindings.binding4_godot4 cimport *")
     with open("py4godot/enums/enums4.pxd", "w") as f:
-        f.write(res)
+        f.write("# distutils: language=c++"+res)

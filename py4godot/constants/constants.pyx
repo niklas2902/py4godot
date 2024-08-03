@@ -1,3 +1,4 @@
+# distutils: language=c++
 cdef class ConstantVector3(Vector3):
 
   @staticmethod

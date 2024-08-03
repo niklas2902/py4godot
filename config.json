@@ -1,5 +1,5 @@
 {
-  "python_ver": "cpython-3.11.3",
+  "python_ver": "cpython-3.12.4",
   "output_dir": "build/final",
   "python_dir": "python_files",
   "core_folder": "core",

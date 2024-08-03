@@ -596,6 +596,25 @@ def get_class_from_enum(type_):
     type_list = enum_type.split(".")
     return type_list[0]
 
+def generate_help_functions(classname):
+    res = ""
+    res += f"static std::shared_ptr<{classname}> construct_{classname}(){{"
+    res = generate_newline(res)
+    if not is_singleton(class_["name"]):
+        res += f"{INDENT}return {classname}::constructor();"
+    else:
+        res += f"{INDENT} return std::shared_ptr<{classname}>();" #TODO: don't generate at all if this happens
+    res = generate_newline(res)
+    res += f"}}"
+    res = generate_newline(res)
+    res += f"static std::shared_ptr<{classname}> cast_to_{classname}(Wrapper* pwrapper){{"
+    res = generate_newline(res)
+    res += f"{INDENT}return {classname}::cast(pwrapper);"
+    res = generate_newline(res)
+    res += f"}}"
+    res = generate_newline(res)
+    return res
+
 
 def generate_constructor(classname):
     res = ""
@@ -727,6 +746,9 @@ def generate_classes(classes, filename, is_core=False):
         res = generate_newline(res)
         if "methods" not in class_.keys():
             res += "};"
+            if not "typedarray" in class_["name"].lower():
+                res = generate_newline(res)
+                res += generate_help_functions(class_["name"])
             res = generate_newline(res)
             continue
         # res += generate_properties(class_)
@@ -740,6 +762,10 @@ def generate_classes(classes, filename, is_core=False):
         res += generate_operators_for_class(class_["name"])
         res = generate_newline(res)
         res += "};"
+        if not "typedarray" in class_["name"].lower():
+            res = generate_newline(res)
+            res += generate_help_functions(class_["name"])
+    res = generate_newline(res)
     res += "}"
     res = generate_newline(res)
     res += "#endif"

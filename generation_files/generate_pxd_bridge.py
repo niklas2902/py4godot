@@ -100,6 +100,13 @@ cdef cppclass Error:
 def ref(type_):
     return "&" if type_ not in {"float", "int", "bool"} else ""
 
+def generate_help_functions(classname):
+    res = ""
+    res += f"{INDENT}shared_ptr[{classname}] construct_{classname}()"
+    res = generate_newline(res)
+    res += f"{INDENT}shared_ptr[{classname}] cast_to_{classname}(Wrapper* pwrapper)"
+    res = generate_newline(res)
+    return res
 
 def generate_constructor_args(constructor):
     result = ""
@@ -652,6 +659,8 @@ def generate_classes(classes, filename, is_core=False):
             res += f'cdef extern from "py4godot/cppclasses/generated4_core.h" namespace "godot":'
         else:
             res += f'cdef extern from "py4godot/cppclasses/{class_["name"]}/{class_["name"]}.h" namespace "godot":'
+        res = generate_newline(res)
+        res += generate_help_functions(class_["name"])
         res = generate_newline(res)
         res = generate_newline(res)
         res += f"{INDENT}cdef cppclass {class_['name']}({get_base_class(class_)}):"

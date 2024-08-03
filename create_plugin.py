@@ -27,7 +27,7 @@ def run_docker():
         print(f"Folder '{folder_path}' already exists.")
     f = open('plugin/windows_build.tar', 'wb')
 
-    bits, stat = last_container.get_archive('/app/build/final/windows64/cpython-3.11.3-windows64')
+    bits, stat = last_container.get_archive('/app/build/final/windows64/cpython-3.12.4-windows64')
 
     print(stat)
     for chunk in bits:
@@ -40,7 +40,7 @@ def run_docker():
     last_container = client.containers.get("linux64")
     f = open('plugin/linux_build.tar', 'wb')
 
-    bits, stat = last_container.get_archive('/app/build/final/linux64/cpython-3.11.3-linux64')
+    bits, stat = last_container.get_archive('/app/build/final/linux64/cpython-3.12.4-linux64')
 
 
     print(stat)

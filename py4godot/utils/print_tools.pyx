@@ -1,3 +1,4 @@
+# distutils: language=c++
 
 #from py4godot.godot_bindings.binding4_godot4 cimport *
 cimport py4godot.utils.print_tools_tools as tools

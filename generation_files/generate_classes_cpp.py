@@ -148,7 +148,6 @@ def generate_args(method_with_args, builtin_classes, is_cpp=False, should_make_s
 def ref(type_):
     return "&" if type_ not in {"float", "int", "bool"} else ""
 
-
 def generate_constructor_args(constructor, should_make_shared = False):
     result = ""
     if "arguments" not in constructor:

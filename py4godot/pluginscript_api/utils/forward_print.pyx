@@ -1,3 +1,4 @@
+# distutils: language=c++
 import sys
 from py4godot.functions import print as gdprint
 

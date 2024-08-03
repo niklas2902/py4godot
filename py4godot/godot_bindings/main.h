@@ -7,19 +7,19 @@
 
 
 #ifdef _WIN64
-#define PYTHONHOME L"addons/py4godot/cpython-3.11.3-windows64/python/install"
+#define PYTHONHOME L"addons/py4godot/cpython-3.12.4-windows64/python/install"
 
 #elif _WIN32
-#define PYTHONHOME L"cpython-3.11.3-lnux64/python/install"
+#define PYTHONHOME L"cpython-3.12.4-lnux64/python/install"
 
 #elif __linux32__
-#define PYTHONHOME L"cpython-3.11.3-linux/python/install/lib"
+#define PYTHONHOME L"cpython-3.12.4-linux/python/install/lib"
 
 #elif __linux__
-#define PYTHONHOME L"addons/py4godot/cpython-3.11.3-linux64/python/install"
+#define PYTHONHOME L"addons/py4godot/cpython-3.12.4-linux64/python/install"
 
 #elif __APPLE__
-#define PYTHONHOME L"cpython-3.11.3-windows32/python/install"
+#define PYTHONHOME L"cpython-3.12.4-windows32/python/install"
 #endif
 #if !defined(GDN_EXPORT)
 #if defined(_WIN32)

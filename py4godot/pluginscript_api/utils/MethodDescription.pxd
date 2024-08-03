@@ -1,3 +1,4 @@
+# distutils: language=c++
 from libcpp.vector cimport vector
 
 from py4godot.pluginscript_api.hints.BaseHint cimport *

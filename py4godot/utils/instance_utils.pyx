@@ -1,3 +1,4 @@
+# distutils: language=c++
 from py4godot.classes.Object.Object cimport *
 from py4godot.utils.print_tools import *
 

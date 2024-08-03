@@ -1,3 +1,4 @@
+# distutils: language=c++
 import sys,os
 import inspect, traceback
 from py4godot.pluginscript_api.hints.BaseHint cimport *

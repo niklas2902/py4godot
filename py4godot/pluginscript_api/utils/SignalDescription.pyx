@@ -1,3 +1,4 @@
+# distutils: language=c++
 from py4godot.pluginscript_api.utils.utils cimport *
 from py4godot.pluginscript_api.utils.SignalArg cimport *
 from libcpp.vector cimport vector

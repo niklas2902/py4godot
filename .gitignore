@@ -63,7 +63,7 @@ py4godot/cppenums/cppenums.h
 py4godot/utils/instance_utils_api.h
 py4godot/instance_data/InstanceData.cpp
 py4godot/utils/print_tools.cpp
-py4godot/script_instance/PyScriptInstance_api.h
+py4godot/script_instance/api
 py4godot/script_extension/script_extension_helpers.cpp
 py4godot/script_extension/script_extension_helpers_api.h
 /py4godot/functions.pxd

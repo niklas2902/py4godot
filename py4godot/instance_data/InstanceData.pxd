@@ -1,3 +1,4 @@
+# distutils: language=c++
 from libcpp.vector cimport vector
 from py4godot.godot_bindings.binding4_godot4 cimport *
 from py4godot.classes.cpp_bridge cimport *

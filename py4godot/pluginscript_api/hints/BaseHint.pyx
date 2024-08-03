@@ -1,3 +1,4 @@
+# distutils: language=c++
 cdef class BaseHint(object):
     def __init__(self):
         self.hint = 0

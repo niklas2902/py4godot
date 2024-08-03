@@ -1,3 +1,4 @@
+# distutils: language=c++
 from py4godot.utils.print_tools import *
 from py4godot.utils.test_utils cimport *
 from libc.stdlib cimport malloc, free

@@ -1,3 +1,4 @@
+# distutils: language=c++
 cdef class ScriptHolder:
     cdef dict instances
     cdef object get_script(self, int id)

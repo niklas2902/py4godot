@@ -1,3 +1,4 @@
+# distutils: language=c++
 from py4godot.utils.print_tools import *
 import traceback
 cimport py4godot.classes.Node3D.Node3D as node3d

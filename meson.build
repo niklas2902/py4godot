@@ -49,25 +49,25 @@ if build_machine.system() == 'windows'
 endif
 if meson.has_external_property('is_mingw') and build_machine.system() == 'linux'
     message('using mingw')
-    lib_py = cc.find_library('python311', dirs:meson.current_source_dir()+'/python_files/cpython-3.11.3-windows64/python/install')
+    lib_py = cc.find_library('python311', dirs:meson.current_source_dir()+'/python_files/cpython-3.12.4-windows64/python/install')
         internal_inc = include_directories('py4godot','py4godot/gdextension-api/', 'py4godot/core', 'py4godot/enums',
     'py4godot/classes', 'py4godot/pluginscript_api', 'py4godot/godot_bindings',
     'py4godot/script_instance', 'py4godot/core/variant4', 'py4godot/cppcore', 'py4godot/cppenums',
     'py4godot/cppclasses', 'py4godot/cpputils', 'py4godot/script_language', 'py4godot/pluginscript_api',
     'py4godot/pluginscript_api/utils',
-    'py4godot/instance_data', 'python_files/cpython-3.11.3-windows64/python/install/include')
+    'py4godot/instance_data', 'python_files/cpython-3.12.4-windows64/python/install/include')
     glob = run_command('python3', files(meson.current_source_dir()+'/meson_scripts/glob_tools.py'))
     glob_cpp = run_command('python3', files(meson.current_source_dir()+'/meson_scripts/glob_tools_cpp.py'))
     dep_py = lib_py
 endif
 
 if not meson.has_external_property('is_mingw') and build_machine.system() == 'linux'
-    lib_py = cc.find_library('python3.11', dirs:meson.current_source_dir()+'/python_files/cpython-3.11.3-'+machine+platform_format+'/python/install/lib')
+    lib_py = cc.find_library('python3.11', dirs:meson.current_source_dir()+'/python_files/cpython-3.12.4-'+machine+platform_format+'/python/install/lib')
         internal_inc = include_directories('py4godot','py4godot/gdextension-api/', 'py4godot/core', 'py4godot/enums',
     'py4godot/classes', 'py4godot/pluginscript_api', 'py4godot/godot_bindings',
     'py4godot/script_instance', 'py4godot/core/variant4', 'py4godot/cppcore', 'py4godot/cppenums',
     'py4godot/cppclasses', 'py4godot/cpputils', 'py4godot/script_language', 'py4godot/pluginscript_api',
-    'py4godot/pluginscript_api/utils','python_files/cpython-3.11.3-'+machine+platform_format+'/python/install/include/python3.11',
+    'py4godot/pluginscript_api/utils','python_files/cpython-3.12.4-'+machine+platform_format+'/python/install/include/python3.11',
     'py4godot/instance_data')
     glob = run_command('python3', files(meson.current_source_dir()+'/meson_scripts/glob_tools.py'))
     glob_cpp = run_command('python3', files(meson.current_source_dir()+'/meson_scripts/glob_tools_cpp.py'))

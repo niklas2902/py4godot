@@ -1233,7 +1233,7 @@ def generate_constructor(classname):
     res = generate_newline(res)
     res += f"{INDENT * 2}cdef {classname} class_ = {classname}.__new__({classname})"
     res = generate_newline(res)
-    res += f"{INDENT * 2}class_.{class_['name']}_internal_class_ptr = CPP{class_['name']}.constructor()"
+    res += f"{INDENT * 2}class_.{class_['name']}_internal_class_ptr = construct_{class_['name']}()"
     res = generate_newline(res)
     res += f"{INDENT * 2}class_.set_gdowner(class_.{class_['name']}_internal_class_ptr.get().get_godot_owner())"
     res = generate_newline(res)
@@ -1245,7 +1245,7 @@ def generate_constructor(classname):
     res = generate_newline(res)
     res += f"{INDENT * 2}if py_utils.shouldCreateObject:"
     res = generate_newline(res)
-    res += f"{INDENT * 3}self.{class_['name']}_internal_class_ptr = CPP{class_['name']}.constructor()"
+    res += f"{INDENT * 3}self.{class_['name']}_internal_class_ptr = construct_{class_['name']}()"
     res = generate_newline(res)
     res += f"{INDENT * 3}self.set_gdowner(self.{class_['name']}_internal_class_ptr.get().get_godot_owner())"
     res = generate_newline(res)
@@ -1398,6 +1398,10 @@ def generate_classes(classes, filename, is_core=False, is_typed_array=False):
             res = generate_newline(res)
 
     elif not is_core:
+        res += f"from py4godot.classes.cpp_bridge cimport construct_{classes[0]['name']}"
+        res = generate_newline(res)
+        res += f"from py4godot.classes.cpp_bridge cimport cast_to_{classes[0]['name']}"
+        res = generate_newline(res)
         classes_to_import = get_classes_to_import(classes)
         for cls in classes_to_import:
             if cls in [class_["name"] for class_ in classes]:
@@ -1445,7 +1449,7 @@ def generate_classes(classes, filename, is_core=False, is_typed_array=False):
             if already_existing_file.read() == res:
                 return
     with open(filename, "w") as f:
-        f.write(res)
+        f.write("# distutils: language=c++\n"+res)
 
 
 def generate_dictionary_set_item():
@@ -1734,7 +1738,7 @@ def generate_cast(class_):
     res = generate_newline(res)
     res += f"{INDENT * 2}cdef {class_['name']} cls = {class_['name']}()"
     res = generate_newline(res)
-    res += f"{INDENT * 2}cls.{class_['name']}_internal_class_ptr = CPP{class_['name']}.cast(other.Object_internal_class_ptr.get())"
+    res += f"{INDENT * 2}cls.{class_['name']}_internal_class_ptr = cast_to_{class_['name']}(other.Object_internal_class_ptr.get())"
     res = generate_newline(res)
     res += (f"{INDENT * 2}cls"
             f".set_gdowner(other.Object_internal_class_ptr.get().get_godot_owner())")
