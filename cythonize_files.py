@@ -33,7 +33,6 @@ def main():
         "py4godot/pluginscript_api/hints/*.pyx",
         "py4godot/pluginscript_api/utils/*.pyx",
         "py4godot/godot_bindings/binding4_godot4.pyx",
-        "py4godot/test_file.pyx",
         "py4godot/classes/*.pyx",
         "py4godot/classes/*/*.pyx",
     ]
