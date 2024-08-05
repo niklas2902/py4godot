@@ -61,6 +61,11 @@ $ python3 -m venv venv  # creating the folder with the virtual environment
 $ source venv/bin/activate  # starting the virtual environment
 $ pip install -r requirements.txt  # load dependencies from the text file requirements.txt
 ```
+If you are on Python 3.12, you unfortunately have to use this workarount:
+```console
+$ pip install setuptools #Weirdly cython on linux depends on distutils. But python3.12 doesn't provide this anymore. So we have to use this workaround
+$ python copy_distutils.py
+```
 ### Generating files
 We want to generate the files, we will later use for the cython compilation like this:
 ```console
