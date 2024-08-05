@@ -1,8 +1,10 @@
 import argparse
 import os
+import shutil
 import subprocess
 import time
 import traceback
+from shutil import copytree
 
 from Cython.Build import cythonize
 
@@ -101,6 +103,7 @@ my_parser.add_argument('--target_platform',
                        help='specify the platform, you want to go build for')
 my_parser.add_argument("-run_tests", help="should tests be run", default="False")
 my_parser.add_argument("-download_godot", help="should tests be run", default="False")
+my_parser.add_argument("-create_plugin", help="Should this create a plugin", default="True")
 # Execute parse_args()
 args = my_parser.parse_args()
 
@@ -108,7 +111,6 @@ args = my_parser.parse_args()
 should_run_tests = args.run_tests.lower() == "true"
 # Determining if godot binary should be downloaded
 should_download_godot = args.download_godot.lower() == "true"
-
 build_dir = f"build/{args.target_platform}"
 
 start = time.time()
@@ -172,6 +174,17 @@ try:
     copy_tools.copy_experimental(args.target_platform)
     generate_godot.generate_gdignore(args.target_platform)
     generate_init_files.create_init_file(args.target_platform)
+
+    should_create_plugin =args.create_plugin
+    #TODO: ignore unnecessary copy. Don't copy stuff to final
+    if should_create_plugin.lower() == "true":
+        copytree(f"build/final/{args.target_platform}/cpython-3.12.4-{args.target_platform}", f"build/py4godot/cpython-3.12.4-{args.target_platform}")
+        shutil.copy("build_resources/python.gdextension", "build/py4godot/python.gdextension")
+
+        python_svg_dest = "build/py4godot/"+ "/Python.svg"
+        if not os.path.exists(python_svg_dest):
+            shutil.copy("build_resources/Python.svg", python_svg_dest)
+
 
     print("=================================Build finished==================================")
     print("Build took:", time.time() - start, "seconds")
