@@ -83,7 +83,7 @@ $ python cythonize_files.py
 #### Compile project
 Now, we just need to compile the project. The result of the compilation can be found on build/final # TODO. build whole plugin for build.
 ```console
-$ python build.py --target_platform=windows64 --compiler=clang 
+$ python build.py --target_platform=windows64 --compiler=gcc 
 ```
 ## Example Code
 Here you can see a basic example of how this project can be used. 
