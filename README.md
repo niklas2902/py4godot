@@ -11,6 +11,12 @@ You need a Python 3 version of at least 3.11 with pip installed.
 
 ### Windows
 
+#### Init submodules
+inititalize submodules
+```console
+$ git submodule init
+$ git submodule update+
+```
 #### Setting up a virtual environment (optional)
 As this project depends on some modules which are downloaded by pip, if you don't want to mess with your packages, you should set up a virtual enviroment.
 The following code should be executed after cloning the repo
@@ -23,7 +29,7 @@ $ pip install -r requirements.txt #load dependencies from the textfile requireme
 ### Generating files
 We want to generate the files, we will later use for the cython compilation like this:
 ```console
-$ python generate_files.py
+$ python generate.py
 ```
 
 Now we use Cython to generate the C++ files for our Python classes. 
@@ -42,17 +48,28 @@ $ python build.py --target_platform=windows64 --compiler=msvc
 
 ### Linux
 Building for linux was testet on Ubuntu 20.04.4 LTS
+#### Init submodules
+inititalize submodules
+```console
+$ git submodule init
+$ git submodule update+
+```
 #### Setting up a virtual environment (optional)
 The following code should be executed after cloning the repo
 ```console
-$ python3 -m venv virtual_python #creating the folder with the virtual environemnt
-$ .\virtual_python\Scripts\activate #starting the virtual enviromnent 
-$ pip install -r requirements.txt #load dependencies from the textfile requirements.txt
+$ python3 -m venv venv  # creating the folder with the virtual environment
+$ source venv/bin/activate  # starting the virtual environment
+$ pip install -r requirements.txt  # load dependencies from the text file requirements.txt
+```
+If you are on Python 3.12, you unfortunately have to use this workarount:
+```console
+$ pip install setuptools #Weirdly cython on linux depends on distutils. But python3.12 doesn't provide this anymore. So we have to use this workaround
+$ python copy_distutils.py
 ```
 ### Generating files
 We want to generate the files, we will later use for the cython compilation like this:
 ```console
-$ python generate_files.py
+$ python generate.py
 ```
 
 Now we use Cython to generate the C++ files for our Python classes. 
@@ -66,7 +83,7 @@ $ python cythonize_files.py
 #### Compile project
 Now, we just need to compile the project. The result of the compilation can be found on build/final # TODO. build whole plugin for build.
 ```console
-$ python build.py --target_platform=windows64 --compiler=clang 
+$ python build.py --target_platform=linux64 --compiler=gcc 
 ```
 ## Example Code
 Here you can see a basic example of how this project can be used. 
