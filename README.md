@@ -29,7 +29,7 @@ $ pip install -r requirements.txt #load dependencies from the textfile requireme
 ### Generating files
 We want to generate the files, we will later use for the cython compilation like this:
 ```console
-$ python generate_files.py
+$ python generate.py
 ```
 
 Now we use Cython to generate the C++ files for our Python classes. 
@@ -64,7 +64,7 @@ $ pip install -r requirements.txt  # load dependencies from the text file requir
 ### Generating files
 We want to generate the files, we will later use for the cython compilation like this:
 ```console
-$ python generate_files.py
+$ python generate.py
 ```
 
 Now we use Cython to generate the C++ files for our Python classes. 
