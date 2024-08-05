@@ -4,938 +4,938 @@
 {
     "distutils": {
         "depends": [
-            "py4godot\\core\\variant4\\variant_utils.h",
-            "py4godot\\cppclasses\\AESContext\\AESContext.h",
-            "py4godot\\cppclasses\\AStar2D\\AStar2D.h",
-            "py4godot\\cppclasses\\AStar3D\\AStar3D.h",
-            "py4godot\\cppclasses\\AStarGrid2D\\AStarGrid2D.h",
-            "py4godot\\cppclasses\\AcceptDialog\\AcceptDialog.h",
-            "py4godot\\cppclasses\\AnimatableBody2D\\AnimatableBody2D.h",
-            "py4godot\\cppclasses\\AnimatableBody3D\\AnimatableBody3D.h",
-            "py4godot\\cppclasses\\AnimatedSprite2D\\AnimatedSprite2D.h",
-            "py4godot\\cppclasses\\AnimatedSprite3D\\AnimatedSprite3D.h",
-            "py4godot\\cppclasses\\AnimatedTexture\\AnimatedTexture.h",
-            "py4godot\\cppclasses\\AnimationLibrary\\AnimationLibrary.h",
-            "py4godot\\cppclasses\\AnimationMixer\\AnimationMixer.h",
-            "py4godot\\cppclasses\\AnimationNodeAdd2\\AnimationNodeAdd2.h",
-            "py4godot\\cppclasses\\AnimationNodeAdd3\\AnimationNodeAdd3.h",
-            "py4godot\\cppclasses\\AnimationNodeAnimation\\AnimationNodeAnimation.h",
-            "py4godot\\cppclasses\\AnimationNodeBlend2\\AnimationNodeBlend2.h",
-            "py4godot\\cppclasses\\AnimationNodeBlend3\\AnimationNodeBlend3.h",
-            "py4godot\\cppclasses\\AnimationNodeBlendSpace1D\\AnimationNodeBlendSpace1D.h",
-            "py4godot\\cppclasses\\AnimationNodeBlendSpace2D\\AnimationNodeBlendSpace2D.h",
-            "py4godot\\cppclasses\\AnimationNodeBlendTree\\AnimationNodeBlendTree.h",
-            "py4godot\\cppclasses\\AnimationNodeOneShot\\AnimationNodeOneShot.h",
-            "py4godot\\cppclasses\\AnimationNodeOutput\\AnimationNodeOutput.h",
-            "py4godot\\cppclasses\\AnimationNodeStateMachinePlayback\\AnimationNodeStateMachinePlayback.h",
-            "py4godot\\cppclasses\\AnimationNodeStateMachineTransition\\AnimationNodeStateMachineTransition.h",
-            "py4godot\\cppclasses\\AnimationNodeStateMachine\\AnimationNodeStateMachine.h",
-            "py4godot\\cppclasses\\AnimationNodeSub2\\AnimationNodeSub2.h",
-            "py4godot\\cppclasses\\AnimationNodeSync\\AnimationNodeSync.h",
-            "py4godot\\cppclasses\\AnimationNodeTimeScale\\AnimationNodeTimeScale.h",
-            "py4godot\\cppclasses\\AnimationNodeTimeSeek\\AnimationNodeTimeSeek.h",
-            "py4godot\\cppclasses\\AnimationNodeTransition\\AnimationNodeTransition.h",
-            "py4godot\\cppclasses\\AnimationNode\\AnimationNode.h",
-            "py4godot\\cppclasses\\AnimationPlayer\\AnimationPlayer.h",
-            "py4godot\\cppclasses\\AnimationRootNode\\AnimationRootNode.h",
-            "py4godot\\cppclasses\\AnimationTree\\AnimationTree.h",
-            "py4godot\\cppclasses\\Animation\\Animation.h",
-            "py4godot\\cppclasses\\Area2D\\Area2D.h",
-            "py4godot\\cppclasses\\Area3D\\Area3D.h",
-            "py4godot\\cppclasses\\ArrayMesh\\ArrayMesh.h",
-            "py4godot\\cppclasses\\ArrayOccluder3D\\ArrayOccluder3D.h",
-            "py4godot\\cppclasses\\AspectRatioContainer\\AspectRatioContainer.h",
-            "py4godot\\cppclasses\\AtlasTexture\\AtlasTexture.h",
-            "py4godot\\cppclasses\\AudioBusLayout\\AudioBusLayout.h",
-            "py4godot\\cppclasses\\AudioEffectAmplify\\AudioEffectAmplify.h",
-            "py4godot\\cppclasses\\AudioEffectBandLimitFilter\\AudioEffectBandLimitFilter.h",
-            "py4godot\\cppclasses\\AudioEffectBandPassFilter\\AudioEffectBandPassFilter.h",
-            "py4godot\\cppclasses\\AudioEffectCapture\\AudioEffectCapture.h",
-            "py4godot\\cppclasses\\AudioEffectChorus\\AudioEffectChorus.h",
-            "py4godot\\cppclasses\\AudioEffectCompressor\\AudioEffectCompressor.h",
-            "py4godot\\cppclasses\\AudioEffectDelay\\AudioEffectDelay.h",
-            "py4godot\\cppclasses\\AudioEffectDistortion\\AudioEffectDistortion.h",
-            "py4godot\\cppclasses\\AudioEffectEQ10\\AudioEffectEQ10.h",
-            "py4godot\\cppclasses\\AudioEffectEQ21\\AudioEffectEQ21.h",
-            "py4godot\\cppclasses\\AudioEffectEQ6\\AudioEffectEQ6.h",
-            "py4godot\\cppclasses\\AudioEffectEQ\\AudioEffectEQ.h",
-            "py4godot\\cppclasses\\AudioEffectFilter\\AudioEffectFilter.h",
-            "py4godot\\cppclasses\\AudioEffectHardLimiter\\AudioEffectHardLimiter.h",
-            "py4godot\\cppclasses\\AudioEffectHighPassFilter\\AudioEffectHighPassFilter.h",
-            "py4godot\\cppclasses\\AudioEffectHighShelfFilter\\AudioEffectHighShelfFilter.h",
-            "py4godot\\cppclasses\\AudioEffectInstance\\AudioEffectInstance.h",
-            "py4godot\\cppclasses\\AudioEffectLimiter\\AudioEffectLimiter.h",
-            "py4godot\\cppclasses\\AudioEffectLowPassFilter\\AudioEffectLowPassFilter.h",
-            "py4godot\\cppclasses\\AudioEffectLowShelfFilter\\AudioEffectLowShelfFilter.h",
-            "py4godot\\cppclasses\\AudioEffectNotchFilter\\AudioEffectNotchFilter.h",
-            "py4godot\\cppclasses\\AudioEffectPanner\\AudioEffectPanner.h",
-            "py4godot\\cppclasses\\AudioEffectPhaser\\AudioEffectPhaser.h",
-            "py4godot\\cppclasses\\AudioEffectPitchShift\\AudioEffectPitchShift.h",
-            "py4godot\\cppclasses\\AudioEffectRecord\\AudioEffectRecord.h",
-            "py4godot\\cppclasses\\AudioEffectReverb\\AudioEffectReverb.h",
-            "py4godot\\cppclasses\\AudioEffectSpectrumAnalyzerInstance\\AudioEffectSpectrumAnalyzerInstance.h",
-            "py4godot\\cppclasses\\AudioEffectSpectrumAnalyzer\\AudioEffectSpectrumAnalyzer.h",
-            "py4godot\\cppclasses\\AudioEffectStereoEnhance\\AudioEffectStereoEnhance.h",
-            "py4godot\\cppclasses\\AudioEffect\\AudioEffect.h",
-            "py4godot\\cppclasses\\AudioListener2D\\AudioListener2D.h",
-            "py4godot\\cppclasses\\AudioListener3D\\AudioListener3D.h",
-            "py4godot\\cppclasses\\AudioSamplePlayback\\AudioSamplePlayback.h",
-            "py4godot\\cppclasses\\AudioSample\\AudioSample.h",
-            "py4godot\\cppclasses\\AudioServer\\AudioServer.h",
-            "py4godot\\cppclasses\\AudioStreamGeneratorPlayback\\AudioStreamGeneratorPlayback.h",
-            "py4godot\\cppclasses\\AudioStreamGenerator\\AudioStreamGenerator.h",
-            "py4godot\\cppclasses\\AudioStreamInteractive\\AudioStreamInteractive.h",
-            "py4godot\\cppclasses\\AudioStreamMP3\\AudioStreamMP3.h",
-            "py4godot\\cppclasses\\AudioStreamMicrophone\\AudioStreamMicrophone.h",
-            "py4godot\\cppclasses\\AudioStreamOggVorbis\\AudioStreamOggVorbis.h",
-            "py4godot\\cppclasses\\AudioStreamPlaybackInteractive\\AudioStreamPlaybackInteractive.h",
-            "py4godot\\cppclasses\\AudioStreamPlaybackOggVorbis\\AudioStreamPlaybackOggVorbis.h",
-            "py4godot\\cppclasses\\AudioStreamPlaybackPlaylist\\AudioStreamPlaybackPlaylist.h",
-            "py4godot\\cppclasses\\AudioStreamPlaybackPolyphonic\\AudioStreamPlaybackPolyphonic.h",
-            "py4godot\\cppclasses\\AudioStreamPlaybackResampled\\AudioStreamPlaybackResampled.h",
-            "py4godot\\cppclasses\\AudioStreamPlaybackSynchronized\\AudioStreamPlaybackSynchronized.h",
-            "py4godot\\cppclasses\\AudioStreamPlayback\\AudioStreamPlayback.h",
-            "py4godot\\cppclasses\\AudioStreamPlayer2D\\AudioStreamPlayer2D.h",
-            "py4godot\\cppclasses\\AudioStreamPlayer3D\\AudioStreamPlayer3D.h",
-            "py4godot\\cppclasses\\AudioStreamPlayer\\AudioStreamPlayer.h",
-            "py4godot\\cppclasses\\AudioStreamPlaylist\\AudioStreamPlaylist.h",
-            "py4godot\\cppclasses\\AudioStreamPolyphonic\\AudioStreamPolyphonic.h",
-            "py4godot\\cppclasses\\AudioStreamRandomizer\\AudioStreamRandomizer.h",
-            "py4godot\\cppclasses\\AudioStreamSynchronized\\AudioStreamSynchronized.h",
-            "py4godot\\cppclasses\\AudioStreamWAV\\AudioStreamWAV.h",
-            "py4godot\\cppclasses\\AudioStream\\AudioStream.h",
-            "py4godot\\cppclasses\\BackBufferCopy\\BackBufferCopy.h",
-            "py4godot\\cppclasses\\BaseButton\\BaseButton.h",
-            "py4godot\\cppclasses\\BaseMaterial3D\\BaseMaterial3D.h",
-            "py4godot\\cppclasses\\BitMap\\BitMap.h",
-            "py4godot\\cppclasses\\Bone2D\\Bone2D.h",
-            "py4godot\\cppclasses\\BoneAttachment3D\\BoneAttachment3D.h",
-            "py4godot\\cppclasses\\BoneMap\\BoneMap.h",
-            "py4godot\\cppclasses\\BoxContainer\\BoxContainer.h",
-            "py4godot\\cppclasses\\BoxMesh\\BoxMesh.h",
-            "py4godot\\cppclasses\\BoxOccluder3D\\BoxOccluder3D.h",
-            "py4godot\\cppclasses\\BoxShape3D\\BoxShape3D.h",
-            "py4godot\\cppclasses\\ButtonGroup\\ButtonGroup.h",
-            "py4godot\\cppclasses\\Button\\Button.h",
-            "py4godot\\cppclasses\\CPUParticles2D\\CPUParticles2D.h",
-            "py4godot\\cppclasses\\CPUParticles3D\\CPUParticles3D.h",
-            "py4godot\\cppclasses\\CSGBox3D\\CSGBox3D.h",
-            "py4godot\\cppclasses\\CSGCombiner3D\\CSGCombiner3D.h",
-            "py4godot\\cppclasses\\CSGCylinder3D\\CSGCylinder3D.h",
-            "py4godot\\cppclasses\\CSGMesh3D\\CSGMesh3D.h",
-            "py4godot\\cppclasses\\CSGPolygon3D\\CSGPolygon3D.h",
-            "py4godot\\cppclasses\\CSGPrimitive3D\\CSGPrimitive3D.h",
-            "py4godot\\cppclasses\\CSGShape3D\\CSGShape3D.h",
-            "py4godot\\cppclasses\\CSGSphere3D\\CSGSphere3D.h",
-            "py4godot\\cppclasses\\CSGTorus3D\\CSGTorus3D.h",
-            "py4godot\\cppclasses\\CallbackTweener\\CallbackTweener.h",
-            "py4godot\\cppclasses\\Camera2D\\Camera2D.h",
-            "py4godot\\cppclasses\\Camera3D\\Camera3D.h",
-            "py4godot\\cppclasses\\CameraAttributesPhysical\\CameraAttributesPhysical.h",
-            "py4godot\\cppclasses\\CameraAttributesPractical\\CameraAttributesPractical.h",
-            "py4godot\\cppclasses\\CameraAttributes\\CameraAttributes.h",
-            "py4godot\\cppclasses\\CameraFeed\\CameraFeed.h",
-            "py4godot\\cppclasses\\CameraServer\\CameraServer.h",
-            "py4godot\\cppclasses\\CameraTexture\\CameraTexture.h",
-            "py4godot\\cppclasses\\CanvasGroup\\CanvasGroup.h",
-            "py4godot\\cppclasses\\CanvasItemMaterial\\CanvasItemMaterial.h",
-            "py4godot\\cppclasses\\CanvasItem\\CanvasItem.h",
-            "py4godot\\cppclasses\\CanvasLayer\\CanvasLayer.h",
-            "py4godot\\cppclasses\\CanvasModulate\\CanvasModulate.h",
-            "py4godot\\cppclasses\\CanvasTexture\\CanvasTexture.h",
-            "py4godot\\cppclasses\\CapsuleMesh\\CapsuleMesh.h",
-            "py4godot\\cppclasses\\CapsuleShape2D\\CapsuleShape2D.h",
-            "py4godot\\cppclasses\\CapsuleShape3D\\CapsuleShape3D.h",
-            "py4godot\\cppclasses\\CenterContainer\\CenterContainer.h",
-            "py4godot\\cppclasses\\CharFXTransform\\CharFXTransform.h",
-            "py4godot\\cppclasses\\CharacterBody2D\\CharacterBody2D.h",
-            "py4godot\\cppclasses\\CharacterBody3D\\CharacterBody3D.h",
-            "py4godot\\cppclasses\\CheckBox\\CheckBox.h",
-            "py4godot\\cppclasses\\CheckButton\\CheckButton.h",
-            "py4godot\\cppclasses\\CircleShape2D\\CircleShape2D.h",
-            "py4godot\\cppclasses\\ClassDB\\ClassDB.h",
-            "py4godot\\cppclasses\\CodeEdit\\CodeEdit.h",
-            "py4godot\\cppclasses\\CodeHighlighter\\CodeHighlighter.h",
-            "py4godot\\cppclasses\\CollisionObject2D\\CollisionObject2D.h",
-            "py4godot\\cppclasses\\CollisionObject3D\\CollisionObject3D.h",
-            "py4godot\\cppclasses\\CollisionPolygon2D\\CollisionPolygon2D.h",
-            "py4godot\\cppclasses\\CollisionPolygon3D\\CollisionPolygon3D.h",
-            "py4godot\\cppclasses\\CollisionShape2D\\CollisionShape2D.h",
-            "py4godot\\cppclasses\\CollisionShape3D\\CollisionShape3D.h",
-            "py4godot\\cppclasses\\ColorPickerButton\\ColorPickerButton.h",
-            "py4godot\\cppclasses\\ColorPicker\\ColorPicker.h",
-            "py4godot\\cppclasses\\ColorRect\\ColorRect.h",
-            "py4godot\\cppclasses\\CompositorEffect\\CompositorEffect.h",
-            "py4godot\\cppclasses\\Compositor\\Compositor.h",
-            "py4godot\\cppclasses\\CompressedCubemapArray\\CompressedCubemapArray.h",
-            "py4godot\\cppclasses\\CompressedCubemap\\CompressedCubemap.h",
-            "py4godot\\cppclasses\\CompressedTexture2DArray\\CompressedTexture2DArray.h",
-            "py4godot\\cppclasses\\CompressedTexture2D\\CompressedTexture2D.h",
-            "py4godot\\cppclasses\\CompressedTexture3D\\CompressedTexture3D.h",
-            "py4godot\\cppclasses\\CompressedTextureLayered\\CompressedTextureLayered.h",
-            "py4godot\\cppclasses\\ConcavePolygonShape2D\\ConcavePolygonShape2D.h",
-            "py4godot\\cppclasses\\ConcavePolygonShape3D\\ConcavePolygonShape3D.h",
-            "py4godot\\cppclasses\\ConeTwistJoint3D\\ConeTwistJoint3D.h",
-            "py4godot\\cppclasses\\ConfigFile\\ConfigFile.h",
-            "py4godot\\cppclasses\\ConfirmationDialog\\ConfirmationDialog.h",
-            "py4godot\\cppclasses\\Container\\Container.h",
-            "py4godot\\cppclasses\\Control\\Control.h",
-            "py4godot\\cppclasses\\ConvexPolygonShape2D\\ConvexPolygonShape2D.h",
-            "py4godot\\cppclasses\\ConvexPolygonShape3D\\ConvexPolygonShape3D.h",
-            "py4godot\\cppclasses\\CryptoKey\\CryptoKey.h",
-            "py4godot\\cppclasses\\Crypto\\Crypto.h",
-            "py4godot\\cppclasses\\CubemapArray\\CubemapArray.h",
-            "py4godot\\cppclasses\\Cubemap\\Cubemap.h",
-            "py4godot\\cppclasses\\Curve2D\\Curve2D.h",
-            "py4godot\\cppclasses\\Curve3D\\Curve3D.h",
-            "py4godot\\cppclasses\\CurveTexture\\CurveTexture.h",
-            "py4godot\\cppclasses\\CurveXYZTexture\\CurveXYZTexture.h",
-            "py4godot\\cppclasses\\Curve\\Curve.h",
-            "py4godot\\cppclasses\\CylinderMesh\\CylinderMesh.h",
-            "py4godot\\cppclasses\\CylinderShape3D\\CylinderShape3D.h",
-            "py4godot\\cppclasses\\DTLSServer\\DTLSServer.h",
-            "py4godot\\cppclasses\\DampedSpringJoint2D\\DampedSpringJoint2D.h",
-            "py4godot\\cppclasses\\Decal\\Decal.h",
-            "py4godot\\cppclasses\\DirAccess\\DirAccess.h",
-            "py4godot\\cppclasses\\DirectionalLight2D\\DirectionalLight2D.h",
-            "py4godot\\cppclasses\\DirectionalLight3D\\DirectionalLight3D.h",
-            "py4godot\\cppclasses\\DisplayServer\\DisplayServer.h",
-            "py4godot\\cppclasses\\ENetConnection\\ENetConnection.h",
-            "py4godot\\cppclasses\\ENetMultiplayerPeer\\ENetMultiplayerPeer.h",
-            "py4godot\\cppclasses\\ENetPacketPeer\\ENetPacketPeer.h",
-            "py4godot\\cppclasses\\EditorCommandPalette\\EditorCommandPalette.h",
-            "py4godot\\cppclasses\\EditorDebuggerPlugin\\EditorDebuggerPlugin.h",
-            "py4godot\\cppclasses\\EditorDebuggerSession\\EditorDebuggerSession.h",
-            "py4godot\\cppclasses\\EditorExportPlatformAndroid\\EditorExportPlatformAndroid.h",
-            "py4godot\\cppclasses\\EditorExportPlatformIOS\\EditorExportPlatformIOS.h",
-            "py4godot\\cppclasses\\EditorExportPlatformLinuxBSD\\EditorExportPlatformLinuxBSD.h",
-            "py4godot\\cppclasses\\EditorExportPlatformMacOS\\EditorExportPlatformMacOS.h",
-            "py4godot\\cppclasses\\EditorExportPlatformPC\\EditorExportPlatformPC.h",
-            "py4godot\\cppclasses\\EditorExportPlatformWeb\\EditorExportPlatformWeb.h",
-            "py4godot\\cppclasses\\EditorExportPlatformWindows\\EditorExportPlatformWindows.h",
-            "py4godot\\cppclasses\\EditorExportPlatform\\EditorExportPlatform.h",
-            "py4godot\\cppclasses\\EditorExportPlugin\\EditorExportPlugin.h",
-            "py4godot\\cppclasses\\EditorFeatureProfile\\EditorFeatureProfile.h",
-            "py4godot\\cppclasses\\EditorFileDialog\\EditorFileDialog.h",
-            "py4godot\\cppclasses\\EditorFileSystemDirectory\\EditorFileSystemDirectory.h",
-            "py4godot\\cppclasses\\EditorFileSystemImportFormatSupportQuery\\EditorFileSystemImportFormatSupportQuery.h",
-            "py4godot\\cppclasses\\EditorFileSystem\\EditorFileSystem.h",
-            "py4godot\\cppclasses\\EditorImportPlugin\\EditorImportPlugin.h",
-            "py4godot\\cppclasses\\EditorInspectorPlugin\\EditorInspectorPlugin.h",
-            "py4godot\\cppclasses\\EditorInspector\\EditorInspector.h",
-            "py4godot\\cppclasses\\EditorInterface\\EditorInterface.h",
-            "py4godot\\cppclasses\\EditorNode3DGizmoPlugin\\EditorNode3DGizmoPlugin.h",
-            "py4godot\\cppclasses\\EditorNode3DGizmo\\EditorNode3DGizmo.h",
-            "py4godot\\cppclasses\\EditorPaths\\EditorPaths.h",
-            "py4godot\\cppclasses\\EditorPlugin\\EditorPlugin.h",
-            "py4godot\\cppclasses\\EditorProperty\\EditorProperty.h",
-            "py4godot\\cppclasses\\EditorResourceConversionPlugin\\EditorResourceConversionPlugin.h",
-            "py4godot\\cppclasses\\EditorResourcePicker\\EditorResourcePicker.h",
-            "py4godot\\cppclasses\\EditorResourcePreviewGenerator\\EditorResourcePreviewGenerator.h",
-            "py4godot\\cppclasses\\EditorResourcePreview\\EditorResourcePreview.h",
-            "py4godot\\cppclasses\\EditorResourceTooltipPlugin\\EditorResourceTooltipPlugin.h",
-            "py4godot\\cppclasses\\EditorSceneFormatImporterBlend\\EditorSceneFormatImporterBlend.h",
-            "py4godot\\cppclasses\\EditorSceneFormatImporterFBX2GLTF\\EditorSceneFormatImporterFBX2GLTF.h",
-            "py4godot\\cppclasses\\EditorSceneFormatImporterGLTF\\EditorSceneFormatImporterGLTF.h",
-            "py4godot\\cppclasses\\EditorSceneFormatImporterUFBX\\EditorSceneFormatImporterUFBX.h",
-            "py4godot\\cppclasses\\EditorSceneFormatImporter\\EditorSceneFormatImporter.h",
-            "py4godot\\cppclasses\\EditorScenePostImportPlugin\\EditorScenePostImportPlugin.h",
-            "py4godot\\cppclasses\\EditorScenePostImport\\EditorScenePostImport.h",
-            "py4godot\\cppclasses\\EditorScriptPicker\\EditorScriptPicker.h",
-            "py4godot\\cppclasses\\EditorScript\\EditorScript.h",
-            "py4godot\\cppclasses\\EditorSelection\\EditorSelection.h",
-            "py4godot\\cppclasses\\EditorSettings\\EditorSettings.h",
-            "py4godot\\cppclasses\\EditorSpinSlider\\EditorSpinSlider.h",
-            "py4godot\\cppclasses\\EditorSyntaxHighlighter\\EditorSyntaxHighlighter.h",
-            "py4godot\\cppclasses\\EditorTranslationParserPlugin\\EditorTranslationParserPlugin.h",
-            "py4godot\\cppclasses\\EditorUndoRedoManager\\EditorUndoRedoManager.h",
-            "py4godot\\cppclasses\\EditorVCSInterface\\EditorVCSInterface.h",
-            "py4godot\\cppclasses\\EncodedObjectAsID\\EncodedObjectAsID.h",
-            "py4godot\\cppclasses\\EngineDebugger\\EngineDebugger.h",
-            "py4godot\\cppclasses\\EngineProfiler\\EngineProfiler.h",
-            "py4godot\\cppclasses\\Engine\\Engine.h",
-            "py4godot\\cppclasses\\Environment\\Environment.h",
-            "py4godot\\cppclasses\\Expression\\Expression.h",
-            "py4godot\\cppclasses\\FBXDocument\\FBXDocument.h",
-            "py4godot\\cppclasses\\FBXState\\FBXState.h",
-            "py4godot\\cppclasses\\FastNoiseLite\\FastNoiseLite.h",
-            "py4godot\\cppclasses\\FileAccess\\FileAccess.h",
-            "py4godot\\cppclasses\\FileDialog\\FileDialog.h",
-            "py4godot\\cppclasses\\FileSystemDock\\FileSystemDock.h",
-            "py4godot\\cppclasses\\FlowContainer\\FlowContainer.h",
-            "py4godot\\cppclasses\\FogMaterial\\FogMaterial.h",
-            "py4godot\\cppclasses\\FogVolume\\FogVolume.h",
-            "py4godot\\cppclasses\\FontFile\\FontFile.h",
-            "py4godot\\cppclasses\\FontVariation\\FontVariation.h",
-            "py4godot\\cppclasses\\Font\\Font.h",
-            "py4godot\\cppclasses\\FramebufferCacheRD\\FramebufferCacheRD.h",
-            "py4godot\\cppclasses\\GDExtensionManager\\GDExtensionManager.h",
-            "py4godot\\cppclasses\\GDExtension\\GDExtension.h",
-            "py4godot\\cppclasses\\GDScript\\GDScript.h",
-            "py4godot\\cppclasses\\GLTFAccessor\\GLTFAccessor.h",
-            "py4godot\\cppclasses\\GLTFAnimation\\GLTFAnimation.h",
-            "py4godot\\cppclasses\\GLTFBufferView\\GLTFBufferView.h",
-            "py4godot\\cppclasses\\GLTFCamera\\GLTFCamera.h",
-            "py4godot\\cppclasses\\GLTFDocumentExtensionConvertImporterMesh\\GLTFDocumentExtensionConvertImporterMesh.h",
-            "py4godot\\cppclasses\\GLTFDocumentExtension\\GLTFDocumentExtension.h",
-            "py4godot\\cppclasses\\GLTFDocument\\GLTFDocument.h",
-            "py4godot\\cppclasses\\GLTFLight\\GLTFLight.h",
-            "py4godot\\cppclasses\\GLTFMesh\\GLTFMesh.h",
-            "py4godot\\cppclasses\\GLTFNode\\GLTFNode.h",
-            "py4godot\\cppclasses\\GLTFPhysicsBody\\GLTFPhysicsBody.h",
-            "py4godot\\cppclasses\\GLTFPhysicsShape\\GLTFPhysicsShape.h",
-            "py4godot\\cppclasses\\GLTFSkeleton\\GLTFSkeleton.h",
-            "py4godot\\cppclasses\\GLTFSkin\\GLTFSkin.h",
-            "py4godot\\cppclasses\\GLTFSpecGloss\\GLTFSpecGloss.h",
-            "py4godot\\cppclasses\\GLTFState\\GLTFState.h",
-            "py4godot\\cppclasses\\GLTFTextureSampler\\GLTFTextureSampler.h",
-            "py4godot\\cppclasses\\GLTFTexture\\GLTFTexture.h",
-            "py4godot\\cppclasses\\GPUParticles2D\\GPUParticles2D.h",
-            "py4godot\\cppclasses\\GPUParticles3D\\GPUParticles3D.h",
-            "py4godot\\cppclasses\\GPUParticlesAttractor3D\\GPUParticlesAttractor3D.h",
-            "py4godot\\cppclasses\\GPUParticlesAttractorBox3D\\GPUParticlesAttractorBox3D.h",
-            "py4godot\\cppclasses\\GPUParticlesAttractorSphere3D\\GPUParticlesAttractorSphere3D.h",
-            "py4godot\\cppclasses\\GPUParticlesAttractorVectorField3D\\GPUParticlesAttractorVectorField3D.h",
-            "py4godot\\cppclasses\\GPUParticlesCollision3D\\GPUParticlesCollision3D.h",
-            "py4godot\\cppclasses\\GPUParticlesCollisionBox3D\\GPUParticlesCollisionBox3D.h",
-            "py4godot\\cppclasses\\GPUParticlesCollisionHeightField3D\\GPUParticlesCollisionHeightField3D.h",
-            "py4godot\\cppclasses\\GPUParticlesCollisionSDF3D\\GPUParticlesCollisionSDF3D.h",
-            "py4godot\\cppclasses\\GPUParticlesCollisionSphere3D\\GPUParticlesCollisionSphere3D.h",
-            "py4godot\\cppclasses\\Generic6DOFJoint3D\\Generic6DOFJoint3D.h",
-            "py4godot\\cppclasses\\Geometry2D\\Geometry2D.h",
-            "py4godot\\cppclasses\\Geometry3D\\Geometry3D.h",
-            "py4godot\\cppclasses\\GeometryInstance3D\\GeometryInstance3D.h",
-            "py4godot\\cppclasses\\GradientTexture1D\\GradientTexture1D.h",
-            "py4godot\\cppclasses\\GradientTexture2D\\GradientTexture2D.h",
-            "py4godot\\cppclasses\\Gradient\\Gradient.h",
-            "py4godot\\cppclasses\\GraphEdit\\GraphEdit.h",
-            "py4godot\\cppclasses\\GraphElement\\GraphElement.h",
-            "py4godot\\cppclasses\\GraphFrame\\GraphFrame.h",
-            "py4godot\\cppclasses\\GraphNode\\GraphNode.h",
-            "py4godot\\cppclasses\\GridContainer\\GridContainer.h",
-            "py4godot\\cppclasses\\GridMap\\GridMap.h",
-            "py4godot\\cppclasses\\GrooveJoint2D\\GrooveJoint2D.h",
-            "py4godot\\cppclasses\\HBoxContainer\\HBoxContainer.h",
-            "py4godot\\cppclasses\\HFlowContainer\\HFlowContainer.h",
-            "py4godot\\cppclasses\\HMACContext\\HMACContext.h",
-            "py4godot\\cppclasses\\HScrollBar\\HScrollBar.h",
-            "py4godot\\cppclasses\\HSeparator\\HSeparator.h",
-            "py4godot\\cppclasses\\HSlider\\HSlider.h",
-            "py4godot\\cppclasses\\HSplitContainer\\HSplitContainer.h",
-            "py4godot\\cppclasses\\HTTPClient\\HTTPClient.h",
-            "py4godot\\cppclasses\\HTTPRequest\\HTTPRequest.h",
-            "py4godot\\cppclasses\\HashingContext\\HashingContext.h",
-            "py4godot\\cppclasses\\HeightMapShape3D\\HeightMapShape3D.h",
-            "py4godot\\cppclasses\\HingeJoint3D\\HingeJoint3D.h",
-            "py4godot\\cppclasses\\IP\\IP.h",
-            "py4godot\\cppclasses\\ImageFormatLoaderExtension\\ImageFormatLoaderExtension.h",
-            "py4godot\\cppclasses\\ImageFormatLoader\\ImageFormatLoader.h",
-            "py4godot\\cppclasses\\ImageTexture3D\\ImageTexture3D.h",
-            "py4godot\\cppclasses\\ImageTextureLayered\\ImageTextureLayered.h",
-            "py4godot\\cppclasses\\ImageTexture\\ImageTexture.h",
-            "py4godot\\cppclasses\\Image\\Image.h",
-            "py4godot\\cppclasses\\ImmediateMesh\\ImmediateMesh.h",
-            "py4godot\\cppclasses\\ImporterMeshInstance3D\\ImporterMeshInstance3D.h",
-            "py4godot\\cppclasses\\ImporterMesh\\ImporterMesh.h",
-            "py4godot\\cppclasses\\InputEventAction\\InputEventAction.h",
-            "py4godot\\cppclasses\\InputEventFromWindow\\InputEventFromWindow.h",
-            "py4godot\\cppclasses\\InputEventGesture\\InputEventGesture.h",
-            "py4godot\\cppclasses\\InputEventJoypadButton\\InputEventJoypadButton.h",
-            "py4godot\\cppclasses\\InputEventJoypadMotion\\InputEventJoypadMotion.h",
-            "py4godot\\cppclasses\\InputEventKey\\InputEventKey.h",
-            "py4godot\\cppclasses\\InputEventMIDI\\InputEventMIDI.h",
-            "py4godot\\cppclasses\\InputEventMagnifyGesture\\InputEventMagnifyGesture.h",
-            "py4godot\\cppclasses\\InputEventMouseButton\\InputEventMouseButton.h",
-            "py4godot\\cppclasses\\InputEventMouseMotion\\InputEventMouseMotion.h",
-            "py4godot\\cppclasses\\InputEventMouse\\InputEventMouse.h",
-            "py4godot\\cppclasses\\InputEventPanGesture\\InputEventPanGesture.h",
-            "py4godot\\cppclasses\\InputEventScreenDrag\\InputEventScreenDrag.h",
-            "py4godot\\cppclasses\\InputEventScreenTouch\\InputEventScreenTouch.h",
-            "py4godot\\cppclasses\\InputEventShortcut\\InputEventShortcut.h",
-            "py4godot\\cppclasses\\InputEventWithModifiers\\InputEventWithModifiers.h",
-            "py4godot\\cppclasses\\InputEvent\\InputEvent.h",
-            "py4godot\\cppclasses\\InputMap\\InputMap.h",
-            "py4godot\\cppclasses\\Input\\Input.h",
-            "py4godot\\cppclasses\\InstancePlaceholder\\InstancePlaceholder.h",
-            "py4godot\\cppclasses\\IntervalTweener\\IntervalTweener.h",
-            "py4godot\\cppclasses\\ItemList\\ItemList.h",
-            "py4godot\\cppclasses\\JNISingleton\\JNISingleton.h",
-            "py4godot\\cppclasses\\JSONRPC\\JSONRPC.h",
-            "py4godot\\cppclasses\\JSON\\JSON.h",
-            "py4godot\\cppclasses\\JavaClassWrapper\\JavaClassWrapper.h",
-            "py4godot\\cppclasses\\JavaClass\\JavaClass.h",
-            "py4godot\\cppclasses\\JavaScriptBridge\\JavaScriptBridge.h",
-            "py4godot\\cppclasses\\JavaScriptObject\\JavaScriptObject.h",
-            "py4godot\\cppclasses\\Joint2D\\Joint2D.h",
-            "py4godot\\cppclasses\\Joint3D\\Joint3D.h",
-            "py4godot\\cppclasses\\KinematicCollision2D\\KinematicCollision2D.h",
-            "py4godot\\cppclasses\\KinematicCollision3D\\KinematicCollision3D.h",
-            "py4godot\\cppclasses\\Label3D\\Label3D.h",
-            "py4godot\\cppclasses\\LabelSettings\\LabelSettings.h",
-            "py4godot\\cppclasses\\Label\\Label.h",
-            "py4godot\\cppclasses\\Light2D\\Light2D.h",
-            "py4godot\\cppclasses\\Light3D\\Light3D.h",
-            "py4godot\\cppclasses\\LightOccluder2D\\LightOccluder2D.h",
-            "py4godot\\cppclasses\\LightmapGIData\\LightmapGIData.h",
-            "py4godot\\cppclasses\\LightmapGI\\LightmapGI.h",
-            "py4godot\\cppclasses\\LightmapProbe\\LightmapProbe.h",
-            "py4godot\\cppclasses\\LightmapperRD\\LightmapperRD.h",
-            "py4godot\\cppclasses\\Lightmapper\\Lightmapper.h",
-            "py4godot\\cppclasses\\Line2D\\Line2D.h",
-            "py4godot\\cppclasses\\LineEdit\\LineEdit.h",
-            "py4godot\\cppclasses\\LinkButton\\LinkButton.h",
-            "py4godot\\cppclasses\\MainLoop\\MainLoop.h",
-            "py4godot\\cppclasses\\MarginContainer\\MarginContainer.h",
-            "py4godot\\cppclasses\\Marker2D\\Marker2D.h",
-            "py4godot\\cppclasses\\Marker3D\\Marker3D.h",
-            "py4godot\\cppclasses\\Marshalls\\Marshalls.h",
-            "py4godot\\cppclasses\\Material\\Material.h",
-            "py4godot\\cppclasses\\MenuBar\\MenuBar.h",
-            "py4godot\\cppclasses\\MenuButton\\MenuButton.h",
-            "py4godot\\cppclasses\\MeshConvexDecompositionSettings\\MeshConvexDecompositionSettings.h",
-            "py4godot\\cppclasses\\MeshDataTool\\MeshDataTool.h",
-            "py4godot\\cppclasses\\MeshInstance2D\\MeshInstance2D.h",
-            "py4godot\\cppclasses\\MeshInstance3D\\MeshInstance3D.h",
-            "py4godot\\cppclasses\\MeshLibrary\\MeshLibrary.h",
-            "py4godot\\cppclasses\\MeshTexture\\MeshTexture.h",
-            "py4godot\\cppclasses\\Mesh\\Mesh.h",
-            "py4godot\\cppclasses\\MethodTweener\\MethodTweener.h",
-            "py4godot\\cppclasses\\MissingNode\\MissingNode.h",
-            "py4godot\\cppclasses\\MissingResource\\MissingResource.h",
-            "py4godot\\cppclasses\\MobileVRInterface\\MobileVRInterface.h",
-            "py4godot\\cppclasses\\MovieWriter\\MovieWriter.h",
-            "py4godot\\cppclasses\\MultiMeshInstance2D\\MultiMeshInstance2D.h",
-            "py4godot\\cppclasses\\MultiMeshInstance3D\\MultiMeshInstance3D.h",
-            "py4godot\\cppclasses\\MultiMesh\\MultiMesh.h",
-            "py4godot\\cppclasses\\MultiplayerAPIExtension\\MultiplayerAPIExtension.h",
-            "py4godot\\cppclasses\\MultiplayerAPI\\MultiplayerAPI.h",
-            "py4godot\\cppclasses\\MultiplayerPeerExtension\\MultiplayerPeerExtension.h",
-            "py4godot\\cppclasses\\MultiplayerPeer\\MultiplayerPeer.h",
-            "py4godot\\cppclasses\\MultiplayerSpawner\\MultiplayerSpawner.h",
-            "py4godot\\cppclasses\\MultiplayerSynchronizer\\MultiplayerSynchronizer.h",
-            "py4godot\\cppclasses\\Mutex\\Mutex.h",
-            "py4godot\\cppclasses\\NativeMenu\\NativeMenu.h",
-            "py4godot\\cppclasses\\NavigationAgent2D\\NavigationAgent2D.h",
-            "py4godot\\cppclasses\\NavigationAgent3D\\NavigationAgent3D.h",
-            "py4godot\\cppclasses\\NavigationLink2D\\NavigationLink2D.h",
-            "py4godot\\cppclasses\\NavigationLink3D\\NavigationLink3D.h",
-            "py4godot\\cppclasses\\NavigationMeshGenerator\\NavigationMeshGenerator.h",
-            "py4godot\\cppclasses\\NavigationMeshSourceGeometryData2D\\NavigationMeshSourceGeometryData2D.h",
-            "py4godot\\cppclasses\\NavigationMeshSourceGeometryData3D\\NavigationMeshSourceGeometryData3D.h",
-            "py4godot\\cppclasses\\NavigationMesh\\NavigationMesh.h",
-            "py4godot\\cppclasses\\NavigationObstacle2D\\NavigationObstacle2D.h",
-            "py4godot\\cppclasses\\NavigationObstacle3D\\NavigationObstacle3D.h",
-            "py4godot\\cppclasses\\NavigationPathQueryParameters2D\\NavigationPathQueryParameters2D.h",
-            "py4godot\\cppclasses\\NavigationPathQueryParameters3D\\NavigationPathQueryParameters3D.h",
-            "py4godot\\cppclasses\\NavigationPathQueryResult2D\\NavigationPathQueryResult2D.h",
-            "py4godot\\cppclasses\\NavigationPathQueryResult3D\\NavigationPathQueryResult3D.h",
-            "py4godot\\cppclasses\\NavigationPolygon\\NavigationPolygon.h",
-            "py4godot\\cppclasses\\NavigationRegion2D\\NavigationRegion2D.h",
-            "py4godot\\cppclasses\\NavigationRegion3D\\NavigationRegion3D.h",
-            "py4godot\\cppclasses\\NavigationServer2D\\NavigationServer2D.h",
-            "py4godot\\cppclasses\\NavigationServer3D\\NavigationServer3D.h",
-            "py4godot\\cppclasses\\NinePatchRect\\NinePatchRect.h",
-            "py4godot\\cppclasses\\Node2D\\Node2D.h",
-            "py4godot\\cppclasses\\Node3DGizmo\\Node3DGizmo.h",
-            "py4godot\\cppclasses\\Node3D\\Node3D.h",
-            "py4godot\\cppclasses\\Node\\Node.h",
-            "py4godot\\cppclasses\\NoiseTexture2D\\NoiseTexture2D.h",
-            "py4godot\\cppclasses\\NoiseTexture3D\\NoiseTexture3D.h",
-            "py4godot\\cppclasses\\Noise\\Noise.h",
-            "py4godot\\cppclasses\\ORMMaterial3D\\ORMMaterial3D.h",
-            "py4godot\\cppclasses\\OS\\OS.h",
-            "py4godot\\cppclasses\\Object\\Object.h",
-            "py4godot\\cppclasses\\Occluder3D\\Occluder3D.h",
-            "py4godot\\cppclasses\\OccluderInstance3D\\OccluderInstance3D.h",
-            "py4godot\\cppclasses\\OccluderPolygon2D\\OccluderPolygon2D.h",
-            "py4godot\\cppclasses\\OfflineMultiplayerPeer\\OfflineMultiplayerPeer.h",
-            "py4godot\\cppclasses\\OggPacketSequencePlayback\\OggPacketSequencePlayback.h",
-            "py4godot\\cppclasses\\OggPacketSequence\\OggPacketSequence.h",
-            "py4godot\\cppclasses\\OmniLight3D\\OmniLight3D.h",
-            "py4godot\\cppclasses\\OpenXRAPIExtension\\OpenXRAPIExtension.h",
-            "py4godot\\cppclasses\\OpenXRActionMap\\OpenXRActionMap.h",
-            "py4godot\\cppclasses\\OpenXRActionSet\\OpenXRActionSet.h",
-            "py4godot\\cppclasses\\OpenXRAction\\OpenXRAction.h",
-            "py4godot\\cppclasses\\OpenXRCompositionLayerCylinder\\OpenXRCompositionLayerCylinder.h",
-            "py4godot\\cppclasses\\OpenXRCompositionLayerEquirect\\OpenXRCompositionLayerEquirect.h",
-            "py4godot\\cppclasses\\OpenXRCompositionLayerQuad\\OpenXRCompositionLayerQuad.h",
-            "py4godot\\cppclasses\\OpenXRCompositionLayer\\OpenXRCompositionLayer.h",
-            "py4godot\\cppclasses\\OpenXRExtensionWrapperExtension\\OpenXRExtensionWrapperExtension.h",
-            "py4godot\\cppclasses\\OpenXRHand\\OpenXRHand.h",
-            "py4godot\\cppclasses\\OpenXRIPBinding\\OpenXRIPBinding.h",
-            "py4godot\\cppclasses\\OpenXRInteractionProfileMetadata\\OpenXRInteractionProfileMetadata.h",
-            "py4godot\\cppclasses\\OpenXRInteractionProfile\\OpenXRInteractionProfile.h",
-            "py4godot\\cppclasses\\OpenXRInterface\\OpenXRInterface.h",
-            "py4godot\\cppclasses\\OptimizedTranslation\\OptimizedTranslation.h",
-            "py4godot\\cppclasses\\OptionButton\\OptionButton.h",
-            "py4godot\\cppclasses\\PCKPacker\\PCKPacker.h",
-            "py4godot\\cppclasses\\PackedDataContainerRef\\PackedDataContainerRef.h",
-            "py4godot\\cppclasses\\PackedDataContainer\\PackedDataContainer.h",
-            "py4godot\\cppclasses\\PackedScene\\PackedScene.h",
-            "py4godot\\cppclasses\\PacketPeerDTLS\\PacketPeerDTLS.h",
-            "py4godot\\cppclasses\\PacketPeerExtension\\PacketPeerExtension.h",
-            "py4godot\\cppclasses\\PacketPeerStream\\PacketPeerStream.h",
-            "py4godot\\cppclasses\\PacketPeerUDP\\PacketPeerUDP.h",
-            "py4godot\\cppclasses\\PacketPeer\\PacketPeer.h",
-            "py4godot\\cppclasses\\PanelContainer\\PanelContainer.h",
-            "py4godot\\cppclasses\\Panel\\Panel.h",
-            "py4godot\\cppclasses\\PanoramaSkyMaterial\\PanoramaSkyMaterial.h",
-            "py4godot\\cppclasses\\Parallax2D\\Parallax2D.h",
-            "py4godot\\cppclasses\\ParallaxBackground\\ParallaxBackground.h",
-            "py4godot\\cppclasses\\ParallaxLayer\\ParallaxLayer.h",
-            "py4godot\\cppclasses\\ParticleProcessMaterial\\ParticleProcessMaterial.h",
-            "py4godot\\cppclasses\\Path2D\\Path2D.h",
-            "py4godot\\cppclasses\\Path3D\\Path3D.h",
-            "py4godot\\cppclasses\\PathFollow2D\\PathFollow2D.h",
-            "py4godot\\cppclasses\\PathFollow3D\\PathFollow3D.h",
-            "py4godot\\cppclasses\\Performance\\Performance.h",
-            "py4godot\\cppclasses\\PhysicalBone2D\\PhysicalBone2D.h",
-            "py4godot\\cppclasses\\PhysicalBone3D\\PhysicalBone3D.h",
-            "py4godot\\cppclasses\\PhysicalBoneSimulator3D\\PhysicalBoneSimulator3D.h",
-            "py4godot\\cppclasses\\PhysicalSkyMaterial\\PhysicalSkyMaterial.h",
-            "py4godot\\cppclasses\\PhysicsBody2D\\PhysicsBody2D.h",
-            "py4godot\\cppclasses\\PhysicsBody3D\\PhysicsBody3D.h",
-            "py4godot\\cppclasses\\PhysicsDirectBodyState2DExtension\\PhysicsDirectBodyState2DExtension.h",
-            "py4godot\\cppclasses\\PhysicsDirectBodyState2D\\PhysicsDirectBodyState2D.h",
-            "py4godot\\cppclasses\\PhysicsDirectBodyState3DExtension\\PhysicsDirectBodyState3DExtension.h",
-            "py4godot\\cppclasses\\PhysicsDirectBodyState3D\\PhysicsDirectBodyState3D.h",
-            "py4godot\\cppclasses\\PhysicsDirectSpaceState2DExtension\\PhysicsDirectSpaceState2DExtension.h",
-            "py4godot\\cppclasses\\PhysicsDirectSpaceState2D\\PhysicsDirectSpaceState2D.h",
-            "py4godot\\cppclasses\\PhysicsDirectSpaceState3DExtension\\PhysicsDirectSpaceState3DExtension.h",
-            "py4godot\\cppclasses\\PhysicsDirectSpaceState3D\\PhysicsDirectSpaceState3D.h",
-            "py4godot\\cppclasses\\PhysicsMaterial\\PhysicsMaterial.h",
-            "py4godot\\cppclasses\\PhysicsPointQueryParameters2D\\PhysicsPointQueryParameters2D.h",
-            "py4godot\\cppclasses\\PhysicsPointQueryParameters3D\\PhysicsPointQueryParameters3D.h",
-            "py4godot\\cppclasses\\PhysicsRayQueryParameters2D\\PhysicsRayQueryParameters2D.h",
-            "py4godot\\cppclasses\\PhysicsRayQueryParameters3D\\PhysicsRayQueryParameters3D.h",
-            "py4godot\\cppclasses\\PhysicsServer2DExtension\\PhysicsServer2DExtension.h",
-            "py4godot\\cppclasses\\PhysicsServer2DManager\\PhysicsServer2DManager.h",
-            "py4godot\\cppclasses\\PhysicsServer2D\\PhysicsServer2D.h",
-            "py4godot\\cppclasses\\PhysicsServer3DExtension\\PhysicsServer3DExtension.h",
-            "py4godot\\cppclasses\\PhysicsServer3DManager\\PhysicsServer3DManager.h",
-            "py4godot\\cppclasses\\PhysicsServer3DRenderingServerHandler\\PhysicsServer3DRenderingServerHandler.h",
-            "py4godot\\cppclasses\\PhysicsServer3D\\PhysicsServer3D.h",
-            "py4godot\\cppclasses\\PhysicsShapeQueryParameters2D\\PhysicsShapeQueryParameters2D.h",
-            "py4godot\\cppclasses\\PhysicsShapeQueryParameters3D\\PhysicsShapeQueryParameters3D.h",
-            "py4godot\\cppclasses\\PhysicsTestMotionParameters2D\\PhysicsTestMotionParameters2D.h",
-            "py4godot\\cppclasses\\PhysicsTestMotionParameters3D\\PhysicsTestMotionParameters3D.h",
-            "py4godot\\cppclasses\\PhysicsTestMotionResult2D\\PhysicsTestMotionResult2D.h",
-            "py4godot\\cppclasses\\PhysicsTestMotionResult3D\\PhysicsTestMotionResult3D.h",
-            "py4godot\\cppclasses\\PinJoint2D\\PinJoint2D.h",
-            "py4godot\\cppclasses\\PinJoint3D\\PinJoint3D.h",
-            "py4godot\\cppclasses\\PlaceholderCubemapArray\\PlaceholderCubemapArray.h",
-            "py4godot\\cppclasses\\PlaceholderCubemap\\PlaceholderCubemap.h",
-            "py4godot\\cppclasses\\PlaceholderMaterial\\PlaceholderMaterial.h",
-            "py4godot\\cppclasses\\PlaceholderMesh\\PlaceholderMesh.h",
-            "py4godot\\cppclasses\\PlaceholderTexture2DArray\\PlaceholderTexture2DArray.h",
-            "py4godot\\cppclasses\\PlaceholderTexture2D\\PlaceholderTexture2D.h",
-            "py4godot\\cppclasses\\PlaceholderTexture3D\\PlaceholderTexture3D.h",
-            "py4godot\\cppclasses\\PlaceholderTextureLayered\\PlaceholderTextureLayered.h",
-            "py4godot\\cppclasses\\PlaneMesh\\PlaneMesh.h",
-            "py4godot\\cppclasses\\PointLight2D\\PointLight2D.h",
-            "py4godot\\cppclasses\\PointMesh\\PointMesh.h",
-            "py4godot\\cppclasses\\Polygon2D\\Polygon2D.h",
-            "py4godot\\cppclasses\\PolygonOccluder3D\\PolygonOccluder3D.h",
-            "py4godot\\cppclasses\\PolygonPathFinder\\PolygonPathFinder.h",
-            "py4godot\\cppclasses\\PopupMenu\\PopupMenu.h",
-            "py4godot\\cppclasses\\PopupPanel\\PopupPanel.h",
-            "py4godot\\cppclasses\\Popup\\Popup.h",
-            "py4godot\\cppclasses\\PortableCompressedTexture2D\\PortableCompressedTexture2D.h",
-            "py4godot\\cppclasses\\PrimitiveMesh\\PrimitiveMesh.h",
-            "py4godot\\cppclasses\\PrismMesh\\PrismMesh.h",
-            "py4godot\\cppclasses\\ProceduralSkyMaterial\\ProceduralSkyMaterial.h",
-            "py4godot\\cppclasses\\ProgressBar\\ProgressBar.h",
-            "py4godot\\cppclasses\\ProjectSettings\\ProjectSettings.h",
-            "py4godot\\cppclasses\\PropertyTweener\\PropertyTweener.h",
-            "py4godot\\cppclasses\\QuadMesh\\QuadMesh.h",
-            "py4godot\\cppclasses\\QuadOccluder3D\\QuadOccluder3D.h",
-            "py4godot\\cppclasses\\RDAttachmentFormat\\RDAttachmentFormat.h",
-            "py4godot\\cppclasses\\RDFramebufferPass\\RDFramebufferPass.h",
-            "py4godot\\cppclasses\\RDPipelineColorBlendStateAttachment\\RDPipelineColorBlendStateAttachment.h",
-            "py4godot\\cppclasses\\RDPipelineColorBlendState\\RDPipelineColorBlendState.h",
-            "py4godot\\cppclasses\\RDPipelineDepthStencilState\\RDPipelineDepthStencilState.h",
-            "py4godot\\cppclasses\\RDPipelineMultisampleState\\RDPipelineMultisampleState.h",
-            "py4godot\\cppclasses\\RDPipelineRasterizationState\\RDPipelineRasterizationState.h",
-            "py4godot\\cppclasses\\RDPipelineSpecializationConstant\\RDPipelineSpecializationConstant.h",
-            "py4godot\\cppclasses\\RDSamplerState\\RDSamplerState.h",
-            "py4godot\\cppclasses\\RDShaderFile\\RDShaderFile.h",
-            "py4godot\\cppclasses\\RDShaderSPIRV\\RDShaderSPIRV.h",
-            "py4godot\\cppclasses\\RDShaderSource\\RDShaderSource.h",
-            "py4godot\\cppclasses\\RDTextureFormat\\RDTextureFormat.h",
-            "py4godot\\cppclasses\\RDTextureView\\RDTextureView.h",
-            "py4godot\\cppclasses\\RDUniform\\RDUniform.h",
-            "py4godot\\cppclasses\\RDVertexAttribute\\RDVertexAttribute.h",
-            "py4godot\\cppclasses\\RandomNumberGenerator\\RandomNumberGenerator.h",
-            "py4godot\\cppclasses\\Range\\Range.h",
-            "py4godot\\cppclasses\\RayCast2D\\RayCast2D.h",
-            "py4godot\\cppclasses\\RayCast3D\\RayCast3D.h",
-            "py4godot\\cppclasses\\RectangleShape2D\\RectangleShape2D.h",
-            "py4godot\\cppclasses\\RefCounted\\RefCounted.h",
-            "py4godot\\cppclasses\\ReferenceRect\\ReferenceRect.h",
-            "py4godot\\cppclasses\\ReflectionProbe\\ReflectionProbe.h",
-            "py4godot\\cppclasses\\RegExMatch\\RegExMatch.h",
-            "py4godot\\cppclasses\\RegEx\\RegEx.h",
-            "py4godot\\cppclasses\\RemoteTransform2D\\RemoteTransform2D.h",
-            "py4godot\\cppclasses\\RemoteTransform3D\\RemoteTransform3D.h",
-            "py4godot\\cppclasses\\RenderDataExtension\\RenderDataExtension.h",
-            "py4godot\\cppclasses\\RenderDataRD\\RenderDataRD.h",
-            "py4godot\\cppclasses\\RenderData\\RenderData.h",
-            "py4godot\\cppclasses\\RenderSceneBuffersConfiguration\\RenderSceneBuffersConfiguration.h",
-            "py4godot\\cppclasses\\RenderSceneBuffersExtension\\RenderSceneBuffersExtension.h",
-            "py4godot\\cppclasses\\RenderSceneBuffersRD\\RenderSceneBuffersRD.h",
-            "py4godot\\cppclasses\\RenderSceneBuffers\\RenderSceneBuffers.h",
-            "py4godot\\cppclasses\\RenderSceneDataExtension\\RenderSceneDataExtension.h",
-            "py4godot\\cppclasses\\RenderSceneDataRD\\RenderSceneDataRD.h",
-            "py4godot\\cppclasses\\RenderSceneData\\RenderSceneData.h",
-            "py4godot\\cppclasses\\RenderingDevice\\RenderingDevice.h",
-            "py4godot\\cppclasses\\RenderingServer\\RenderingServer.h",
-            "py4godot\\cppclasses\\ResourceFormatLoader\\ResourceFormatLoader.h",
-            "py4godot\\cppclasses\\ResourceFormatSaver\\ResourceFormatSaver.h",
-            "py4godot\\cppclasses\\ResourceImporterBMFont\\ResourceImporterBMFont.h",
-            "py4godot\\cppclasses\\ResourceImporterBitMap\\ResourceImporterBitMap.h",
-            "py4godot\\cppclasses\\ResourceImporterCSVTranslation\\ResourceImporterCSVTranslation.h",
-            "py4godot\\cppclasses\\ResourceImporterDynamicFont\\ResourceImporterDynamicFont.h",
-            "py4godot\\cppclasses\\ResourceImporterImageFont\\ResourceImporterImageFont.h",
-            "py4godot\\cppclasses\\ResourceImporterImage\\ResourceImporterImage.h",
-            "py4godot\\cppclasses\\ResourceImporterLayeredTexture\\ResourceImporterLayeredTexture.h",
-            "py4godot\\cppclasses\\ResourceImporterMP3\\ResourceImporterMP3.h",
-            "py4godot\\cppclasses\\ResourceImporterOBJ\\ResourceImporterOBJ.h",
-            "py4godot\\cppclasses\\ResourceImporterOggVorbis\\ResourceImporterOggVorbis.h",
-            "py4godot\\cppclasses\\ResourceImporterScene\\ResourceImporterScene.h",
-            "py4godot\\cppclasses\\ResourceImporterShaderFile\\ResourceImporterShaderFile.h",
-            "py4godot\\cppclasses\\ResourceImporterTextureAtlas\\ResourceImporterTextureAtlas.h",
-            "py4godot\\cppclasses\\ResourceImporterTexture\\ResourceImporterTexture.h",
-            "py4godot\\cppclasses\\ResourceImporterWAV\\ResourceImporterWAV.h",
-            "py4godot\\cppclasses\\ResourceImporter\\ResourceImporter.h",
-            "py4godot\\cppclasses\\ResourceLoader\\ResourceLoader.h",
-            "py4godot\\cppclasses\\ResourcePreloader\\ResourcePreloader.h",
-            "py4godot\\cppclasses\\ResourceSaver\\ResourceSaver.h",
-            "py4godot\\cppclasses\\ResourceUID\\ResourceUID.h",
-            "py4godot\\cppclasses\\Resource\\Resource.h",
-            "py4godot\\cppclasses\\RibbonTrailMesh\\RibbonTrailMesh.h",
-            "py4godot\\cppclasses\\RichTextEffect\\RichTextEffect.h",
-            "py4godot\\cppclasses\\RichTextLabel\\RichTextLabel.h",
-            "py4godot\\cppclasses\\RigidBody2D\\RigidBody2D.h",
-            "py4godot\\cppclasses\\RigidBody3D\\RigidBody3D.h",
-            "py4godot\\cppclasses\\RootMotionView\\RootMotionView.h",
-            "py4godot\\cppclasses\\SceneMultiplayer\\SceneMultiplayer.h",
-            "py4godot\\cppclasses\\SceneReplicationConfig\\SceneReplicationConfig.h",
-            "py4godot\\cppclasses\\SceneState\\SceneState.h",
-            "py4godot\\cppclasses\\SceneTreeTimer\\SceneTreeTimer.h",
-            "py4godot\\cppclasses\\SceneTree\\SceneTree.h",
-            "py4godot\\cppclasses\\ScriptCreateDialog\\ScriptCreateDialog.h",
-            "py4godot\\cppclasses\\ScriptEditorBase\\ScriptEditorBase.h",
-            "py4godot\\cppclasses\\ScriptEditor\\ScriptEditor.h",
-            "py4godot\\cppclasses\\ScriptExtension\\ScriptExtension.h",
-            "py4godot\\cppclasses\\ScriptLanguageExtension\\ScriptLanguageExtension.h",
-            "py4godot\\cppclasses\\ScriptLanguage\\ScriptLanguage.h",
-            "py4godot\\cppclasses\\Script\\Script.h",
-            "py4godot\\cppclasses\\ScrollBar\\ScrollBar.h",
-            "py4godot\\cppclasses\\ScrollContainer\\ScrollContainer.h",
-            "py4godot\\cppclasses\\SegmentShape2D\\SegmentShape2D.h",
-            "py4godot\\cppclasses\\Semaphore\\Semaphore.h",
-            "py4godot\\cppclasses\\SeparationRayShape2D\\SeparationRayShape2D.h",
-            "py4godot\\cppclasses\\SeparationRayShape3D\\SeparationRayShape3D.h",
-            "py4godot\\cppclasses\\Separator\\Separator.h",
-            "py4godot\\cppclasses\\ShaderGlobalsOverride\\ShaderGlobalsOverride.h",
-            "py4godot\\cppclasses\\ShaderInclude\\ShaderInclude.h",
-            "py4godot\\cppclasses\\ShaderMaterial\\ShaderMaterial.h",
-            "py4godot\\cppclasses\\Shader\\Shader.h",
-            "py4godot\\cppclasses\\Shape2D\\Shape2D.h",
-            "py4godot\\cppclasses\\Shape3D\\Shape3D.h",
-            "py4godot\\cppclasses\\ShapeCast2D\\ShapeCast2D.h",
-            "py4godot\\cppclasses\\ShapeCast3D\\ShapeCast3D.h",
-            "py4godot\\cppclasses\\Shortcut\\Shortcut.h",
-            "py4godot\\cppclasses\\Skeleton2D\\Skeleton2D.h",
-            "py4godot\\cppclasses\\Skeleton3D\\Skeleton3D.h",
-            "py4godot\\cppclasses\\SkeletonIK3D\\SkeletonIK3D.h",
-            "py4godot\\cppclasses\\SkeletonModification2DCCDIK\\SkeletonModification2DCCDIK.h",
-            "py4godot\\cppclasses\\SkeletonModification2DFABRIK\\SkeletonModification2DFABRIK.h",
-            "py4godot\\cppclasses\\SkeletonModification2DJiggle\\SkeletonModification2DJiggle.h",
-            "py4godot\\cppclasses\\SkeletonModification2DLookAt\\SkeletonModification2DLookAt.h",
-            "py4godot\\cppclasses\\SkeletonModification2DPhysicalBones\\SkeletonModification2DPhysicalBones.h",
-            "py4godot\\cppclasses\\SkeletonModification2DStackHolder\\SkeletonModification2DStackHolder.h",
-            "py4godot\\cppclasses\\SkeletonModification2DTwoBoneIK\\SkeletonModification2DTwoBoneIK.h",
-            "py4godot\\cppclasses\\SkeletonModification2D\\SkeletonModification2D.h",
-            "py4godot\\cppclasses\\SkeletonModificationStack2D\\SkeletonModificationStack2D.h",
-            "py4godot\\cppclasses\\SkeletonModifier3D\\SkeletonModifier3D.h",
-            "py4godot\\cppclasses\\SkeletonProfileHumanoid\\SkeletonProfileHumanoid.h",
-            "py4godot\\cppclasses\\SkeletonProfile\\SkeletonProfile.h",
-            "py4godot\\cppclasses\\SkinReference\\SkinReference.h",
-            "py4godot\\cppclasses\\Skin\\Skin.h",
-            "py4godot\\cppclasses\\Sky\\Sky.h",
-            "py4godot\\cppclasses\\SliderJoint3D\\SliderJoint3D.h",
-            "py4godot\\cppclasses\\Slider\\Slider.h",
-            "py4godot\\cppclasses\\SoftBody3D\\SoftBody3D.h",
-            "py4godot\\cppclasses\\SphereMesh\\SphereMesh.h",
-            "py4godot\\cppclasses\\SphereOccluder3D\\SphereOccluder3D.h",
-            "py4godot\\cppclasses\\SphereShape3D\\SphereShape3D.h",
-            "py4godot\\cppclasses\\SpinBox\\SpinBox.h",
-            "py4godot\\cppclasses\\SplitContainer\\SplitContainer.h",
-            "py4godot\\cppclasses\\SpotLight3D\\SpotLight3D.h",
-            "py4godot\\cppclasses\\SpringArm3D\\SpringArm3D.h",
-            "py4godot\\cppclasses\\Sprite2D\\Sprite2D.h",
-            "py4godot\\cppclasses\\Sprite3D\\Sprite3D.h",
-            "py4godot\\cppclasses\\SpriteBase3D\\SpriteBase3D.h",
-            "py4godot\\cppclasses\\SpriteFrames\\SpriteFrames.h",
-            "py4godot\\cppclasses\\StandardMaterial3D\\StandardMaterial3D.h",
-            "py4godot\\cppclasses\\StaticBody2D\\StaticBody2D.h",
-            "py4godot\\cppclasses\\StaticBody3D\\StaticBody3D.h",
-            "py4godot\\cppclasses\\StatusIndicator\\StatusIndicator.h",
-            "py4godot\\cppclasses\\StreamPeerBuffer\\StreamPeerBuffer.h",
-            "py4godot\\cppclasses\\StreamPeerExtension\\StreamPeerExtension.h",
-            "py4godot\\cppclasses\\StreamPeerGZIP\\StreamPeerGZIP.h",
-            "py4godot\\cppclasses\\StreamPeerTCP\\StreamPeerTCP.h",
-            "py4godot\\cppclasses\\StreamPeerTLS\\StreamPeerTLS.h",
-            "py4godot\\cppclasses\\StreamPeer\\StreamPeer.h",
-            "py4godot\\cppclasses\\StyleBoxEmpty\\StyleBoxEmpty.h",
-            "py4godot\\cppclasses\\StyleBoxFlat\\StyleBoxFlat.h",
-            "py4godot\\cppclasses\\StyleBoxLine\\StyleBoxLine.h",
-            "py4godot\\cppclasses\\StyleBoxTexture\\StyleBoxTexture.h",
-            "py4godot\\cppclasses\\StyleBox\\StyleBox.h",
-            "py4godot\\cppclasses\\SubViewportContainer\\SubViewportContainer.h",
-            "py4godot\\cppclasses\\SubViewport\\SubViewport.h",
-            "py4godot\\cppclasses\\SurfaceTool\\SurfaceTool.h",
-            "py4godot\\cppclasses\\SyntaxHighlighter\\SyntaxHighlighter.h",
-            "py4godot\\cppclasses\\SystemFont\\SystemFont.h",
-            "py4godot\\cppclasses\\TCPServer\\TCPServer.h",
-            "py4godot\\cppclasses\\TLSOptions\\TLSOptions.h",
-            "py4godot\\cppclasses\\TabBar\\TabBar.h",
-            "py4godot\\cppclasses\\TabContainer\\TabContainer.h",
-            "py4godot\\cppclasses\\TextEdit\\TextEdit.h",
-            "py4godot\\cppclasses\\TextLine\\TextLine.h",
-            "py4godot\\cppclasses\\TextMesh\\TextMesh.h",
-            "py4godot\\cppclasses\\TextParagraph\\TextParagraph.h",
-            "py4godot\\cppclasses\\TextServerAdvanced\\TextServerAdvanced.h",
-            "py4godot\\cppclasses\\TextServerDummy\\TextServerDummy.h",
-            "py4godot\\cppclasses\\TextServerExtension\\TextServerExtension.h",
-            "py4godot\\cppclasses\\TextServerManager\\TextServerManager.h",
-            "py4godot\\cppclasses\\TextServer\\TextServer.h",
-            "py4godot\\cppclasses\\Texture2DArrayRD\\Texture2DArrayRD.h",
-            "py4godot\\cppclasses\\Texture2DArray\\Texture2DArray.h",
-            "py4godot\\cppclasses\\Texture2DRD\\Texture2DRD.h",
-            "py4godot\\cppclasses\\Texture2D\\Texture2D.h",
-            "py4godot\\cppclasses\\Texture3DRD\\Texture3DRD.h",
-            "py4godot\\cppclasses\\Texture3D\\Texture3D.h",
-            "py4godot\\cppclasses\\TextureButton\\TextureButton.h",
-            "py4godot\\cppclasses\\TextureCubemapArrayRD\\TextureCubemapArrayRD.h",
-            "py4godot\\cppclasses\\TextureCubemapRD\\TextureCubemapRD.h",
-            "py4godot\\cppclasses\\TextureLayeredRD\\TextureLayeredRD.h",
-            "py4godot\\cppclasses\\TextureLayered\\TextureLayered.h",
-            "py4godot\\cppclasses\\TextureProgressBar\\TextureProgressBar.h",
-            "py4godot\\cppclasses\\TextureRect\\TextureRect.h",
-            "py4godot\\cppclasses\\Texture\\Texture.h",
-            "py4godot\\cppclasses\\ThemeDB\\ThemeDB.h",
-            "py4godot\\cppclasses\\Theme\\Theme.h",
-            "py4godot\\cppclasses\\Thread\\Thread.h",
-            "py4godot\\cppclasses\\TileData\\TileData.h",
-            "py4godot\\cppclasses\\TileMapLayer\\TileMapLayer.h",
-            "py4godot\\cppclasses\\TileMapPattern\\TileMapPattern.h",
-            "py4godot\\cppclasses\\TileMap\\TileMap.h",
-            "py4godot\\cppclasses\\TileSetAtlasSource\\TileSetAtlasSource.h",
-            "py4godot\\cppclasses\\TileSetScenesCollectionSource\\TileSetScenesCollectionSource.h",
-            "py4godot\\cppclasses\\TileSetSource\\TileSetSource.h",
-            "py4godot\\cppclasses\\TileSet\\TileSet.h",
-            "py4godot\\cppclasses\\Time\\Time.h",
-            "py4godot\\cppclasses\\Timer\\Timer.h",
-            "py4godot\\cppclasses\\TorusMesh\\TorusMesh.h",
-            "py4godot\\cppclasses\\TouchScreenButton\\TouchScreenButton.h",
-            "py4godot\\cppclasses\\TranslationServer\\TranslationServer.h",
-            "py4godot\\cppclasses\\Translation\\Translation.h",
-            "py4godot\\cppclasses\\TreeItem\\TreeItem.h",
-            "py4godot\\cppclasses\\Tree\\Tree.h",
-            "py4godot\\cppclasses\\TriangleMesh\\TriangleMesh.h",
-            "py4godot\\cppclasses\\TubeTrailMesh\\TubeTrailMesh.h",
-            "py4godot\\cppclasses\\Tween\\Tween.h",
-            "py4godot\\cppclasses\\Tweener\\Tweener.h",
-            "py4godot\\cppclasses\\UDPServer\\UDPServer.h",
-            "py4godot\\cppclasses\\UPNPDevice\\UPNPDevice.h",
-            "py4godot\\cppclasses\\UPNP\\UPNP.h",
-            "py4godot\\cppclasses\\UndoRedo\\UndoRedo.h",
-            "py4godot\\cppclasses\\UniformSetCacheRD\\UniformSetCacheRD.h",
-            "py4godot\\cppclasses\\VBoxContainer\\VBoxContainer.h",
-            "py4godot\\cppclasses\\VFlowContainer\\VFlowContainer.h",
-            "py4godot\\cppclasses\\VScrollBar\\VScrollBar.h",
-            "py4godot\\cppclasses\\VSeparator\\VSeparator.h",
-            "py4godot\\cppclasses\\VSlider\\VSlider.h",
-            "py4godot\\cppclasses\\VSplitContainer\\VSplitContainer.h",
-            "py4godot\\cppclasses\\VehicleBody3D\\VehicleBody3D.h",
-            "py4godot\\cppclasses\\VehicleWheel3D\\VehicleWheel3D.h",
-            "py4godot\\cppclasses\\VideoStreamPlayback\\VideoStreamPlayback.h",
-            "py4godot\\cppclasses\\VideoStreamPlayer\\VideoStreamPlayer.h",
-            "py4godot\\cppclasses\\VideoStreamTheora\\VideoStreamTheora.h",
-            "py4godot\\cppclasses\\VideoStream\\VideoStream.h",
-            "py4godot\\cppclasses\\ViewportTexture\\ViewportTexture.h",
-            "py4godot\\cppclasses\\Viewport\\Viewport.h",
-            "py4godot\\cppclasses\\VisibleOnScreenEnabler2D\\VisibleOnScreenEnabler2D.h",
-            "py4godot\\cppclasses\\VisibleOnScreenEnabler3D\\VisibleOnScreenEnabler3D.h",
-            "py4godot\\cppclasses\\VisibleOnScreenNotifier2D\\VisibleOnScreenNotifier2D.h",
-            "py4godot\\cppclasses\\VisibleOnScreenNotifier3D\\VisibleOnScreenNotifier3D.h",
-            "py4godot\\cppclasses\\VisualInstance3D\\VisualInstance3D.h",
-            "py4godot\\cppclasses\\VisualShaderNodeBillboard\\VisualShaderNodeBillboard.h",
-            "py4godot\\cppclasses\\VisualShaderNodeBooleanConstant\\VisualShaderNodeBooleanConstant.h",
-            "py4godot\\cppclasses\\VisualShaderNodeBooleanParameter\\VisualShaderNodeBooleanParameter.h",
-            "py4godot\\cppclasses\\VisualShaderNodeClamp\\VisualShaderNodeClamp.h",
-            "py4godot\\cppclasses\\VisualShaderNodeColorConstant\\VisualShaderNodeColorConstant.h",
-            "py4godot\\cppclasses\\VisualShaderNodeColorFunc\\VisualShaderNodeColorFunc.h",
-            "py4godot\\cppclasses\\VisualShaderNodeColorOp\\VisualShaderNodeColorOp.h",
-            "py4godot\\cppclasses\\VisualShaderNodeColorParameter\\VisualShaderNodeColorParameter.h",
-            "py4godot\\cppclasses\\VisualShaderNodeComment\\VisualShaderNodeComment.h",
-            "py4godot\\cppclasses\\VisualShaderNodeCompare\\VisualShaderNodeCompare.h",
-            "py4godot\\cppclasses\\VisualShaderNodeConstant\\VisualShaderNodeConstant.h",
-            "py4godot\\cppclasses\\VisualShaderNodeCubemapParameter\\VisualShaderNodeCubemapParameter.h",
-            "py4godot\\cppclasses\\VisualShaderNodeCubemap\\VisualShaderNodeCubemap.h",
-            "py4godot\\cppclasses\\VisualShaderNodeCurveTexture\\VisualShaderNodeCurveTexture.h",
-            "py4godot\\cppclasses\\VisualShaderNodeCurveXYZTexture\\VisualShaderNodeCurveXYZTexture.h",
-            "py4godot\\cppclasses\\VisualShaderNodeCustom\\VisualShaderNodeCustom.h",
-            "py4godot\\cppclasses\\VisualShaderNodeDerivativeFunc\\VisualShaderNodeDerivativeFunc.h",
-            "py4godot\\cppclasses\\VisualShaderNodeDeterminant\\VisualShaderNodeDeterminant.h",
-            "py4godot\\cppclasses\\VisualShaderNodeDistanceFade\\VisualShaderNodeDistanceFade.h",
-            "py4godot\\cppclasses\\VisualShaderNodeDotProduct\\VisualShaderNodeDotProduct.h",
-            "py4godot\\cppclasses\\VisualShaderNodeExpression\\VisualShaderNodeExpression.h",
-            "py4godot\\cppclasses\\VisualShaderNodeFaceForward\\VisualShaderNodeFaceForward.h",
-            "py4godot\\cppclasses\\VisualShaderNodeFloatConstant\\VisualShaderNodeFloatConstant.h",
-            "py4godot\\cppclasses\\VisualShaderNodeFloatFunc\\VisualShaderNodeFloatFunc.h",
-            "py4godot\\cppclasses\\VisualShaderNodeFloatOp\\VisualShaderNodeFloatOp.h",
-            "py4godot\\cppclasses\\VisualShaderNodeFloatParameter\\VisualShaderNodeFloatParameter.h",
-            "py4godot\\cppclasses\\VisualShaderNodeFrame\\VisualShaderNodeFrame.h",
-            "py4godot\\cppclasses\\VisualShaderNodeFresnel\\VisualShaderNodeFresnel.h",
-            "py4godot\\cppclasses\\VisualShaderNodeGlobalExpression\\VisualShaderNodeGlobalExpression.h",
-            "py4godot\\cppclasses\\VisualShaderNodeGroupBase\\VisualShaderNodeGroupBase.h",
-            "py4godot\\cppclasses\\VisualShaderNodeIf\\VisualShaderNodeIf.h",
-            "py4godot\\cppclasses\\VisualShaderNodeInput\\VisualShaderNodeInput.h",
-            "py4godot\\cppclasses\\VisualShaderNodeIntConstant\\VisualShaderNodeIntConstant.h",
-            "py4godot\\cppclasses\\VisualShaderNodeIntFunc\\VisualShaderNodeIntFunc.h",
-            "py4godot\\cppclasses\\VisualShaderNodeIntOp\\VisualShaderNodeIntOp.h",
-            "py4godot\\cppclasses\\VisualShaderNodeIntParameter\\VisualShaderNodeIntParameter.h",
-            "py4godot\\cppclasses\\VisualShaderNodeIs\\VisualShaderNodeIs.h",
-            "py4godot\\cppclasses\\VisualShaderNodeLinearSceneDepth\\VisualShaderNodeLinearSceneDepth.h",
-            "py4godot\\cppclasses\\VisualShaderNodeMix\\VisualShaderNodeMix.h",
-            "py4godot\\cppclasses\\VisualShaderNodeMultiplyAdd\\VisualShaderNodeMultiplyAdd.h",
-            "py4godot\\cppclasses\\VisualShaderNodeOuterProduct\\VisualShaderNodeOuterProduct.h",
-            "py4godot\\cppclasses\\VisualShaderNodeOutput\\VisualShaderNodeOutput.h",
-            "py4godot\\cppclasses\\VisualShaderNodeParameterRef\\VisualShaderNodeParameterRef.h",
-            "py4godot\\cppclasses\\VisualShaderNodeParameter\\VisualShaderNodeParameter.h",
-            "py4godot\\cppclasses\\VisualShaderNodeParticleAccelerator\\VisualShaderNodeParticleAccelerator.h",
-            "py4godot\\cppclasses\\VisualShaderNodeParticleBoxEmitter\\VisualShaderNodeParticleBoxEmitter.h",
-            "py4godot\\cppclasses\\VisualShaderNodeParticleConeVelocity\\VisualShaderNodeParticleConeVelocity.h",
-            "py4godot\\cppclasses\\VisualShaderNodeParticleEmit\\VisualShaderNodeParticleEmit.h",
-            "py4godot\\cppclasses\\VisualShaderNodeParticleEmitter\\VisualShaderNodeParticleEmitter.h",
-            "py4godot\\cppclasses\\VisualShaderNodeParticleMeshEmitter\\VisualShaderNodeParticleMeshEmitter.h",
-            "py4godot\\cppclasses\\VisualShaderNodeParticleMultiplyByAxisAngle\\VisualShaderNodeParticleMultiplyByAxisAngle.h",
-            "py4godot\\cppclasses\\VisualShaderNodeParticleOutput\\VisualShaderNodeParticleOutput.h",
-            "py4godot\\cppclasses\\VisualShaderNodeParticleRandomness\\VisualShaderNodeParticleRandomness.h",
-            "py4godot\\cppclasses\\VisualShaderNodeParticleRingEmitter\\VisualShaderNodeParticleRingEmitter.h",
-            "py4godot\\cppclasses\\VisualShaderNodeParticleSphereEmitter\\VisualShaderNodeParticleSphereEmitter.h",
-            "py4godot\\cppclasses\\VisualShaderNodeProximityFade\\VisualShaderNodeProximityFade.h",
-            "py4godot\\cppclasses\\VisualShaderNodeRandomRange\\VisualShaderNodeRandomRange.h",
-            "py4godot\\cppclasses\\VisualShaderNodeRemap\\VisualShaderNodeRemap.h",
-            "py4godot\\cppclasses\\VisualShaderNodeReroute\\VisualShaderNodeReroute.h",
-            "py4godot\\cppclasses\\VisualShaderNodeResizableBase\\VisualShaderNodeResizableBase.h",
-            "py4godot\\cppclasses\\VisualShaderNodeRotationByAxis\\VisualShaderNodeRotationByAxis.h",
-            "py4godot\\cppclasses\\VisualShaderNodeSDFRaymarch\\VisualShaderNodeSDFRaymarch.h",
-            "py4godot\\cppclasses\\VisualShaderNodeSDFToScreenUV\\VisualShaderNodeSDFToScreenUV.h",
-            "py4godot\\cppclasses\\VisualShaderNodeSample3D\\VisualShaderNodeSample3D.h",
-            "py4godot\\cppclasses\\VisualShaderNodeScreenNormalWorldSpace\\VisualShaderNodeScreenNormalWorldSpace.h",
-            "py4godot\\cppclasses\\VisualShaderNodeScreenUVToSDF\\VisualShaderNodeScreenUVToSDF.h",
-            "py4godot\\cppclasses\\VisualShaderNodeSmoothStep\\VisualShaderNodeSmoothStep.h",
-            "py4godot\\cppclasses\\VisualShaderNodeStep\\VisualShaderNodeStep.h",
-            "py4godot\\cppclasses\\VisualShaderNodeSwitch\\VisualShaderNodeSwitch.h",
-            "py4godot\\cppclasses\\VisualShaderNodeTexture2DArrayParameter\\VisualShaderNodeTexture2DArrayParameter.h",
-            "py4godot\\cppclasses\\VisualShaderNodeTexture2DArray\\VisualShaderNodeTexture2DArray.h",
-            "py4godot\\cppclasses\\VisualShaderNodeTexture2DParameter\\VisualShaderNodeTexture2DParameter.h",
-            "py4godot\\cppclasses\\VisualShaderNodeTexture3DParameter\\VisualShaderNodeTexture3DParameter.h",
-            "py4godot\\cppclasses\\VisualShaderNodeTexture3D\\VisualShaderNodeTexture3D.h",
-            "py4godot\\cppclasses\\VisualShaderNodeTextureParameterTriplanar\\VisualShaderNodeTextureParameterTriplanar.h",
-            "py4godot\\cppclasses\\VisualShaderNodeTextureParameter\\VisualShaderNodeTextureParameter.h",
-            "py4godot\\cppclasses\\VisualShaderNodeTextureSDFNormal\\VisualShaderNodeTextureSDFNormal.h",
-            "py4godot\\cppclasses\\VisualShaderNodeTextureSDF\\VisualShaderNodeTextureSDF.h",
-            "py4godot\\cppclasses\\VisualShaderNodeTexture\\VisualShaderNodeTexture.h",
-            "py4godot\\cppclasses\\VisualShaderNodeTransformCompose\\VisualShaderNodeTransformCompose.h",
-            "py4godot\\cppclasses\\VisualShaderNodeTransformConstant\\VisualShaderNodeTransformConstant.h",
-            "py4godot\\cppclasses\\VisualShaderNodeTransformDecompose\\VisualShaderNodeTransformDecompose.h",
-            "py4godot\\cppclasses\\VisualShaderNodeTransformFunc\\VisualShaderNodeTransformFunc.h",
-            "py4godot\\cppclasses\\VisualShaderNodeTransformOp\\VisualShaderNodeTransformOp.h",
-            "py4godot\\cppclasses\\VisualShaderNodeTransformParameter\\VisualShaderNodeTransformParameter.h",
-            "py4godot\\cppclasses\\VisualShaderNodeTransformVecMult\\VisualShaderNodeTransformVecMult.h",
-            "py4godot\\cppclasses\\VisualShaderNodeUIntConstant\\VisualShaderNodeUIntConstant.h",
-            "py4godot\\cppclasses\\VisualShaderNodeUIntFunc\\VisualShaderNodeUIntFunc.h",
-            "py4godot\\cppclasses\\VisualShaderNodeUIntOp\\VisualShaderNodeUIntOp.h",
-            "py4godot\\cppclasses\\VisualShaderNodeUIntParameter\\VisualShaderNodeUIntParameter.h",
-            "py4godot\\cppclasses\\VisualShaderNodeUVFunc\\VisualShaderNodeUVFunc.h",
-            "py4godot\\cppclasses\\VisualShaderNodeUVPolarCoord\\VisualShaderNodeUVPolarCoord.h",
-            "py4godot\\cppclasses\\VisualShaderNodeVaryingGetter\\VisualShaderNodeVaryingGetter.h",
-            "py4godot\\cppclasses\\VisualShaderNodeVaryingSetter\\VisualShaderNodeVaryingSetter.h",
-            "py4godot\\cppclasses\\VisualShaderNodeVarying\\VisualShaderNodeVarying.h",
-            "py4godot\\cppclasses\\VisualShaderNodeVec2Constant\\VisualShaderNodeVec2Constant.h",
-            "py4godot\\cppclasses\\VisualShaderNodeVec2Parameter\\VisualShaderNodeVec2Parameter.h",
-            "py4godot\\cppclasses\\VisualShaderNodeVec3Constant\\VisualShaderNodeVec3Constant.h",
-            "py4godot\\cppclasses\\VisualShaderNodeVec3Parameter\\VisualShaderNodeVec3Parameter.h",
-            "py4godot\\cppclasses\\VisualShaderNodeVec4Constant\\VisualShaderNodeVec4Constant.h",
-            "py4godot\\cppclasses\\VisualShaderNodeVec4Parameter\\VisualShaderNodeVec4Parameter.h",
-            "py4godot\\cppclasses\\VisualShaderNodeVectorBase\\VisualShaderNodeVectorBase.h",
-            "py4godot\\cppclasses\\VisualShaderNodeVectorCompose\\VisualShaderNodeVectorCompose.h",
-            "py4godot\\cppclasses\\VisualShaderNodeVectorDecompose\\VisualShaderNodeVectorDecompose.h",
-            "py4godot\\cppclasses\\VisualShaderNodeVectorDistance\\VisualShaderNodeVectorDistance.h",
-            "py4godot\\cppclasses\\VisualShaderNodeVectorFunc\\VisualShaderNodeVectorFunc.h",
-            "py4godot\\cppclasses\\VisualShaderNodeVectorLen\\VisualShaderNodeVectorLen.h",
-            "py4godot\\cppclasses\\VisualShaderNodeVectorOp\\VisualShaderNodeVectorOp.h",
-            "py4godot\\cppclasses\\VisualShaderNodeVectorRefract\\VisualShaderNodeVectorRefract.h",
-            "py4godot\\cppclasses\\VisualShaderNodeWorldPositionFromDepth\\VisualShaderNodeWorldPositionFromDepth.h",
-            "py4godot\\cppclasses\\VisualShaderNode\\VisualShaderNode.h",
-            "py4godot\\cppclasses\\VisualShader\\VisualShader.h",
-            "py4godot\\cppclasses\\VoxelGIData\\VoxelGIData.h",
-            "py4godot\\cppclasses\\VoxelGI\\VoxelGI.h",
-            "py4godot\\cppclasses\\WeakRef\\WeakRef.h",
-            "py4godot\\cppclasses\\WebRTCDataChannelExtension\\WebRTCDataChannelExtension.h",
-            "py4godot\\cppclasses\\WebRTCDataChannel\\WebRTCDataChannel.h",
-            "py4godot\\cppclasses\\WebRTCMultiplayerPeer\\WebRTCMultiplayerPeer.h",
-            "py4godot\\cppclasses\\WebRTCPeerConnectionExtension\\WebRTCPeerConnectionExtension.h",
-            "py4godot\\cppclasses\\WebRTCPeerConnection\\WebRTCPeerConnection.h",
-            "py4godot\\cppclasses\\WebSocketMultiplayerPeer\\WebSocketMultiplayerPeer.h",
-            "py4godot\\cppclasses\\WebSocketPeer\\WebSocketPeer.h",
-            "py4godot\\cppclasses\\WebXRInterface\\WebXRInterface.h",
-            "py4godot\\cppclasses\\Window\\Window.h",
-            "py4godot\\cppclasses\\WorkerThreadPool\\WorkerThreadPool.h",
-            "py4godot\\cppclasses\\World2D\\World2D.h",
-            "py4godot\\cppclasses\\World3D\\World3D.h",
-            "py4godot\\cppclasses\\WorldBoundaryShape2D\\WorldBoundaryShape2D.h",
-            "py4godot\\cppclasses\\WorldBoundaryShape3D\\WorldBoundaryShape3D.h",
-            "py4godot\\cppclasses\\WorldEnvironment\\WorldEnvironment.h",
-            "py4godot\\cppclasses\\X509Certificate\\X509Certificate.h",
-            "py4godot\\cppclasses\\XMLParser\\XMLParser.h",
-            "py4godot\\cppclasses\\XRAnchor3D\\XRAnchor3D.h",
-            "py4godot\\cppclasses\\XRBodyModifier3D\\XRBodyModifier3D.h",
-            "py4godot\\cppclasses\\XRBodyTracker\\XRBodyTracker.h",
-            "py4godot\\cppclasses\\XRCamera3D\\XRCamera3D.h",
-            "py4godot\\cppclasses\\XRController3D\\XRController3D.h",
-            "py4godot\\cppclasses\\XRControllerTracker\\XRControllerTracker.h",
-            "py4godot\\cppclasses\\XRFaceModifier3D\\XRFaceModifier3D.h",
-            "py4godot\\cppclasses\\XRFaceTracker\\XRFaceTracker.h",
-            "py4godot\\cppclasses\\XRHandModifier3D\\XRHandModifier3D.h",
-            "py4godot\\cppclasses\\XRHandTracker\\XRHandTracker.h",
-            "py4godot\\cppclasses\\XRInterfaceExtension\\XRInterfaceExtension.h",
-            "py4godot\\cppclasses\\XRInterface\\XRInterface.h",
-            "py4godot\\cppclasses\\XRNode3D\\XRNode3D.h",
-            "py4godot\\cppclasses\\XROrigin3D\\XROrigin3D.h",
-            "py4godot\\cppclasses\\XRPose\\XRPose.h",
-            "py4godot\\cppclasses\\XRPositionalTracker\\XRPositionalTracker.h",
-            "py4godot\\cppclasses\\XRServer\\XRServer.h",
-            "py4godot\\cppclasses\\XRTracker\\XRTracker.h",
-            "py4godot\\cppclasses\\XRVRS\\XRVRS.h",
-            "py4godot\\cppclasses\\ZIPPacker\\ZIPPacker.h",
-            "py4godot\\cppclasses\\ZIPReader\\ZIPReader.h",
-            "py4godot\\cppclasses\\generated4_core.h",
-            "py4godot\\cppclasses\\typedarrays.h",
-            "py4godot\\cppcore\\Variant.h",
-            "py4godot\\cpputils\\VariantTypeWrapper.h",
-            "py4godot\\cpputils\\Wrapper.h",
-            "py4godot\\godot_bindings\\binding4.h",
-            "py4godot\\godot_bindings\\functions.h"
+            "py4godot/core/variant4/variant_utils.h",
+            "py4godot/cppclasses/AESContext/AESContext.h",
+            "py4godot/cppclasses/AStar2D/AStar2D.h",
+            "py4godot/cppclasses/AStar3D/AStar3D.h",
+            "py4godot/cppclasses/AStarGrid2D/AStarGrid2D.h",
+            "py4godot/cppclasses/AcceptDialog/AcceptDialog.h",
+            "py4godot/cppclasses/AnimatableBody2D/AnimatableBody2D.h",
+            "py4godot/cppclasses/AnimatableBody3D/AnimatableBody3D.h",
+            "py4godot/cppclasses/AnimatedSprite2D/AnimatedSprite2D.h",
+            "py4godot/cppclasses/AnimatedSprite3D/AnimatedSprite3D.h",
+            "py4godot/cppclasses/AnimatedTexture/AnimatedTexture.h",
+            "py4godot/cppclasses/Animation/Animation.h",
+            "py4godot/cppclasses/AnimationLibrary/AnimationLibrary.h",
+            "py4godot/cppclasses/AnimationMixer/AnimationMixer.h",
+            "py4godot/cppclasses/AnimationNode/AnimationNode.h",
+            "py4godot/cppclasses/AnimationNodeAdd2/AnimationNodeAdd2.h",
+            "py4godot/cppclasses/AnimationNodeAdd3/AnimationNodeAdd3.h",
+            "py4godot/cppclasses/AnimationNodeAnimation/AnimationNodeAnimation.h",
+            "py4godot/cppclasses/AnimationNodeBlend2/AnimationNodeBlend2.h",
+            "py4godot/cppclasses/AnimationNodeBlend3/AnimationNodeBlend3.h",
+            "py4godot/cppclasses/AnimationNodeBlendSpace1D/AnimationNodeBlendSpace1D.h",
+            "py4godot/cppclasses/AnimationNodeBlendSpace2D/AnimationNodeBlendSpace2D.h",
+            "py4godot/cppclasses/AnimationNodeBlendTree/AnimationNodeBlendTree.h",
+            "py4godot/cppclasses/AnimationNodeOneShot/AnimationNodeOneShot.h",
+            "py4godot/cppclasses/AnimationNodeOutput/AnimationNodeOutput.h",
+            "py4godot/cppclasses/AnimationNodeStateMachine/AnimationNodeStateMachine.h",
+            "py4godot/cppclasses/AnimationNodeStateMachinePlayback/AnimationNodeStateMachinePlayback.h",
+            "py4godot/cppclasses/AnimationNodeStateMachineTransition/AnimationNodeStateMachineTransition.h",
+            "py4godot/cppclasses/AnimationNodeSub2/AnimationNodeSub2.h",
+            "py4godot/cppclasses/AnimationNodeSync/AnimationNodeSync.h",
+            "py4godot/cppclasses/AnimationNodeTimeScale/AnimationNodeTimeScale.h",
+            "py4godot/cppclasses/AnimationNodeTimeSeek/AnimationNodeTimeSeek.h",
+            "py4godot/cppclasses/AnimationNodeTransition/AnimationNodeTransition.h",
+            "py4godot/cppclasses/AnimationPlayer/AnimationPlayer.h",
+            "py4godot/cppclasses/AnimationRootNode/AnimationRootNode.h",
+            "py4godot/cppclasses/AnimationTree/AnimationTree.h",
+            "py4godot/cppclasses/Area2D/Area2D.h",
+            "py4godot/cppclasses/Area3D/Area3D.h",
+            "py4godot/cppclasses/ArrayMesh/ArrayMesh.h",
+            "py4godot/cppclasses/ArrayOccluder3D/ArrayOccluder3D.h",
+            "py4godot/cppclasses/AspectRatioContainer/AspectRatioContainer.h",
+            "py4godot/cppclasses/AtlasTexture/AtlasTexture.h",
+            "py4godot/cppclasses/AudioBusLayout/AudioBusLayout.h",
+            "py4godot/cppclasses/AudioEffect/AudioEffect.h",
+            "py4godot/cppclasses/AudioEffectAmplify/AudioEffectAmplify.h",
+            "py4godot/cppclasses/AudioEffectBandLimitFilter/AudioEffectBandLimitFilter.h",
+            "py4godot/cppclasses/AudioEffectBandPassFilter/AudioEffectBandPassFilter.h",
+            "py4godot/cppclasses/AudioEffectCapture/AudioEffectCapture.h",
+            "py4godot/cppclasses/AudioEffectChorus/AudioEffectChorus.h",
+            "py4godot/cppclasses/AudioEffectCompressor/AudioEffectCompressor.h",
+            "py4godot/cppclasses/AudioEffectDelay/AudioEffectDelay.h",
+            "py4godot/cppclasses/AudioEffectDistortion/AudioEffectDistortion.h",
+            "py4godot/cppclasses/AudioEffectEQ/AudioEffectEQ.h",
+            "py4godot/cppclasses/AudioEffectEQ10/AudioEffectEQ10.h",
+            "py4godot/cppclasses/AudioEffectEQ21/AudioEffectEQ21.h",
+            "py4godot/cppclasses/AudioEffectEQ6/AudioEffectEQ6.h",
+            "py4godot/cppclasses/AudioEffectFilter/AudioEffectFilter.h",
+            "py4godot/cppclasses/AudioEffectHardLimiter/AudioEffectHardLimiter.h",
+            "py4godot/cppclasses/AudioEffectHighPassFilter/AudioEffectHighPassFilter.h",
+            "py4godot/cppclasses/AudioEffectHighShelfFilter/AudioEffectHighShelfFilter.h",
+            "py4godot/cppclasses/AudioEffectInstance/AudioEffectInstance.h",
+            "py4godot/cppclasses/AudioEffectLimiter/AudioEffectLimiter.h",
+            "py4godot/cppclasses/AudioEffectLowPassFilter/AudioEffectLowPassFilter.h",
+            "py4godot/cppclasses/AudioEffectLowShelfFilter/AudioEffectLowShelfFilter.h",
+            "py4godot/cppclasses/AudioEffectNotchFilter/AudioEffectNotchFilter.h",
+            "py4godot/cppclasses/AudioEffectPanner/AudioEffectPanner.h",
+            "py4godot/cppclasses/AudioEffectPhaser/AudioEffectPhaser.h",
+            "py4godot/cppclasses/AudioEffectPitchShift/AudioEffectPitchShift.h",
+            "py4godot/cppclasses/AudioEffectRecord/AudioEffectRecord.h",
+            "py4godot/cppclasses/AudioEffectReverb/AudioEffectReverb.h",
+            "py4godot/cppclasses/AudioEffectSpectrumAnalyzer/AudioEffectSpectrumAnalyzer.h",
+            "py4godot/cppclasses/AudioEffectSpectrumAnalyzerInstance/AudioEffectSpectrumAnalyzerInstance.h",
+            "py4godot/cppclasses/AudioEffectStereoEnhance/AudioEffectStereoEnhance.h",
+            "py4godot/cppclasses/AudioListener2D/AudioListener2D.h",
+            "py4godot/cppclasses/AudioListener3D/AudioListener3D.h",
+            "py4godot/cppclasses/AudioSample/AudioSample.h",
+            "py4godot/cppclasses/AudioSamplePlayback/AudioSamplePlayback.h",
+            "py4godot/cppclasses/AudioServer/AudioServer.h",
+            "py4godot/cppclasses/AudioStream/AudioStream.h",
+            "py4godot/cppclasses/AudioStreamGenerator/AudioStreamGenerator.h",
+            "py4godot/cppclasses/AudioStreamGeneratorPlayback/AudioStreamGeneratorPlayback.h",
+            "py4godot/cppclasses/AudioStreamInteractive/AudioStreamInteractive.h",
+            "py4godot/cppclasses/AudioStreamMP3/AudioStreamMP3.h",
+            "py4godot/cppclasses/AudioStreamMicrophone/AudioStreamMicrophone.h",
+            "py4godot/cppclasses/AudioStreamOggVorbis/AudioStreamOggVorbis.h",
+            "py4godot/cppclasses/AudioStreamPlayback/AudioStreamPlayback.h",
+            "py4godot/cppclasses/AudioStreamPlaybackInteractive/AudioStreamPlaybackInteractive.h",
+            "py4godot/cppclasses/AudioStreamPlaybackOggVorbis/AudioStreamPlaybackOggVorbis.h",
+            "py4godot/cppclasses/AudioStreamPlaybackPlaylist/AudioStreamPlaybackPlaylist.h",
+            "py4godot/cppclasses/AudioStreamPlaybackPolyphonic/AudioStreamPlaybackPolyphonic.h",
+            "py4godot/cppclasses/AudioStreamPlaybackResampled/AudioStreamPlaybackResampled.h",
+            "py4godot/cppclasses/AudioStreamPlaybackSynchronized/AudioStreamPlaybackSynchronized.h",
+            "py4godot/cppclasses/AudioStreamPlayer/AudioStreamPlayer.h",
+            "py4godot/cppclasses/AudioStreamPlayer2D/AudioStreamPlayer2D.h",
+            "py4godot/cppclasses/AudioStreamPlayer3D/AudioStreamPlayer3D.h",
+            "py4godot/cppclasses/AudioStreamPlaylist/AudioStreamPlaylist.h",
+            "py4godot/cppclasses/AudioStreamPolyphonic/AudioStreamPolyphonic.h",
+            "py4godot/cppclasses/AudioStreamRandomizer/AudioStreamRandomizer.h",
+            "py4godot/cppclasses/AudioStreamSynchronized/AudioStreamSynchronized.h",
+            "py4godot/cppclasses/AudioStreamWAV/AudioStreamWAV.h",
+            "py4godot/cppclasses/BackBufferCopy/BackBufferCopy.h",
+            "py4godot/cppclasses/BaseButton/BaseButton.h",
+            "py4godot/cppclasses/BaseMaterial3D/BaseMaterial3D.h",
+            "py4godot/cppclasses/BitMap/BitMap.h",
+            "py4godot/cppclasses/Bone2D/Bone2D.h",
+            "py4godot/cppclasses/BoneAttachment3D/BoneAttachment3D.h",
+            "py4godot/cppclasses/BoneMap/BoneMap.h",
+            "py4godot/cppclasses/BoxContainer/BoxContainer.h",
+            "py4godot/cppclasses/BoxMesh/BoxMesh.h",
+            "py4godot/cppclasses/BoxOccluder3D/BoxOccluder3D.h",
+            "py4godot/cppclasses/BoxShape3D/BoxShape3D.h",
+            "py4godot/cppclasses/Button/Button.h",
+            "py4godot/cppclasses/ButtonGroup/ButtonGroup.h",
+            "py4godot/cppclasses/CPUParticles2D/CPUParticles2D.h",
+            "py4godot/cppclasses/CPUParticles3D/CPUParticles3D.h",
+            "py4godot/cppclasses/CSGBox3D/CSGBox3D.h",
+            "py4godot/cppclasses/CSGCombiner3D/CSGCombiner3D.h",
+            "py4godot/cppclasses/CSGCylinder3D/CSGCylinder3D.h",
+            "py4godot/cppclasses/CSGMesh3D/CSGMesh3D.h",
+            "py4godot/cppclasses/CSGPolygon3D/CSGPolygon3D.h",
+            "py4godot/cppclasses/CSGPrimitive3D/CSGPrimitive3D.h",
+            "py4godot/cppclasses/CSGShape3D/CSGShape3D.h",
+            "py4godot/cppclasses/CSGSphere3D/CSGSphere3D.h",
+            "py4godot/cppclasses/CSGTorus3D/CSGTorus3D.h",
+            "py4godot/cppclasses/CallbackTweener/CallbackTweener.h",
+            "py4godot/cppclasses/Camera2D/Camera2D.h",
+            "py4godot/cppclasses/Camera3D/Camera3D.h",
+            "py4godot/cppclasses/CameraAttributes/CameraAttributes.h",
+            "py4godot/cppclasses/CameraAttributesPhysical/CameraAttributesPhysical.h",
+            "py4godot/cppclasses/CameraAttributesPractical/CameraAttributesPractical.h",
+            "py4godot/cppclasses/CameraFeed/CameraFeed.h",
+            "py4godot/cppclasses/CameraServer/CameraServer.h",
+            "py4godot/cppclasses/CameraTexture/CameraTexture.h",
+            "py4godot/cppclasses/CanvasGroup/CanvasGroup.h",
+            "py4godot/cppclasses/CanvasItem/CanvasItem.h",
+            "py4godot/cppclasses/CanvasItemMaterial/CanvasItemMaterial.h",
+            "py4godot/cppclasses/CanvasLayer/CanvasLayer.h",
+            "py4godot/cppclasses/CanvasModulate/CanvasModulate.h",
+            "py4godot/cppclasses/CanvasTexture/CanvasTexture.h",
+            "py4godot/cppclasses/CapsuleMesh/CapsuleMesh.h",
+            "py4godot/cppclasses/CapsuleShape2D/CapsuleShape2D.h",
+            "py4godot/cppclasses/CapsuleShape3D/CapsuleShape3D.h",
+            "py4godot/cppclasses/CenterContainer/CenterContainer.h",
+            "py4godot/cppclasses/CharFXTransform/CharFXTransform.h",
+            "py4godot/cppclasses/CharacterBody2D/CharacterBody2D.h",
+            "py4godot/cppclasses/CharacterBody3D/CharacterBody3D.h",
+            "py4godot/cppclasses/CheckBox/CheckBox.h",
+            "py4godot/cppclasses/CheckButton/CheckButton.h",
+            "py4godot/cppclasses/CircleShape2D/CircleShape2D.h",
+            "py4godot/cppclasses/ClassDB/ClassDB.h",
+            "py4godot/cppclasses/CodeEdit/CodeEdit.h",
+            "py4godot/cppclasses/CodeHighlighter/CodeHighlighter.h",
+            "py4godot/cppclasses/CollisionObject2D/CollisionObject2D.h",
+            "py4godot/cppclasses/CollisionObject3D/CollisionObject3D.h",
+            "py4godot/cppclasses/CollisionPolygon2D/CollisionPolygon2D.h",
+            "py4godot/cppclasses/CollisionPolygon3D/CollisionPolygon3D.h",
+            "py4godot/cppclasses/CollisionShape2D/CollisionShape2D.h",
+            "py4godot/cppclasses/CollisionShape3D/CollisionShape3D.h",
+            "py4godot/cppclasses/ColorPicker/ColorPicker.h",
+            "py4godot/cppclasses/ColorPickerButton/ColorPickerButton.h",
+            "py4godot/cppclasses/ColorRect/ColorRect.h",
+            "py4godot/cppclasses/Compositor/Compositor.h",
+            "py4godot/cppclasses/CompositorEffect/CompositorEffect.h",
+            "py4godot/cppclasses/CompressedCubemap/CompressedCubemap.h",
+            "py4godot/cppclasses/CompressedCubemapArray/CompressedCubemapArray.h",
+            "py4godot/cppclasses/CompressedTexture2D/CompressedTexture2D.h",
+            "py4godot/cppclasses/CompressedTexture2DArray/CompressedTexture2DArray.h",
+            "py4godot/cppclasses/CompressedTexture3D/CompressedTexture3D.h",
+            "py4godot/cppclasses/CompressedTextureLayered/CompressedTextureLayered.h",
+            "py4godot/cppclasses/ConcavePolygonShape2D/ConcavePolygonShape2D.h",
+            "py4godot/cppclasses/ConcavePolygonShape3D/ConcavePolygonShape3D.h",
+            "py4godot/cppclasses/ConeTwistJoint3D/ConeTwistJoint3D.h",
+            "py4godot/cppclasses/ConfigFile/ConfigFile.h",
+            "py4godot/cppclasses/ConfirmationDialog/ConfirmationDialog.h",
+            "py4godot/cppclasses/Container/Container.h",
+            "py4godot/cppclasses/Control/Control.h",
+            "py4godot/cppclasses/ConvexPolygonShape2D/ConvexPolygonShape2D.h",
+            "py4godot/cppclasses/ConvexPolygonShape3D/ConvexPolygonShape3D.h",
+            "py4godot/cppclasses/Crypto/Crypto.h",
+            "py4godot/cppclasses/CryptoKey/CryptoKey.h",
+            "py4godot/cppclasses/Cubemap/Cubemap.h",
+            "py4godot/cppclasses/CubemapArray/CubemapArray.h",
+            "py4godot/cppclasses/Curve/Curve.h",
+            "py4godot/cppclasses/Curve2D/Curve2D.h",
+            "py4godot/cppclasses/Curve3D/Curve3D.h",
+            "py4godot/cppclasses/CurveTexture/CurveTexture.h",
+            "py4godot/cppclasses/CurveXYZTexture/CurveXYZTexture.h",
+            "py4godot/cppclasses/CylinderMesh/CylinderMesh.h",
+            "py4godot/cppclasses/CylinderShape3D/CylinderShape3D.h",
+            "py4godot/cppclasses/DTLSServer/DTLSServer.h",
+            "py4godot/cppclasses/DampedSpringJoint2D/DampedSpringJoint2D.h",
+            "py4godot/cppclasses/Decal/Decal.h",
+            "py4godot/cppclasses/DirAccess/DirAccess.h",
+            "py4godot/cppclasses/DirectionalLight2D/DirectionalLight2D.h",
+            "py4godot/cppclasses/DirectionalLight3D/DirectionalLight3D.h",
+            "py4godot/cppclasses/DisplayServer/DisplayServer.h",
+            "py4godot/cppclasses/ENetConnection/ENetConnection.h",
+            "py4godot/cppclasses/ENetMultiplayerPeer/ENetMultiplayerPeer.h",
+            "py4godot/cppclasses/ENetPacketPeer/ENetPacketPeer.h",
+            "py4godot/cppclasses/EditorCommandPalette/EditorCommandPalette.h",
+            "py4godot/cppclasses/EditorDebuggerPlugin/EditorDebuggerPlugin.h",
+            "py4godot/cppclasses/EditorDebuggerSession/EditorDebuggerSession.h",
+            "py4godot/cppclasses/EditorExportPlatform/EditorExportPlatform.h",
+            "py4godot/cppclasses/EditorExportPlatformAndroid/EditorExportPlatformAndroid.h",
+            "py4godot/cppclasses/EditorExportPlatformIOS/EditorExportPlatformIOS.h",
+            "py4godot/cppclasses/EditorExportPlatformLinuxBSD/EditorExportPlatformLinuxBSD.h",
+            "py4godot/cppclasses/EditorExportPlatformMacOS/EditorExportPlatformMacOS.h",
+            "py4godot/cppclasses/EditorExportPlatformPC/EditorExportPlatformPC.h",
+            "py4godot/cppclasses/EditorExportPlatformWeb/EditorExportPlatformWeb.h",
+            "py4godot/cppclasses/EditorExportPlatformWindows/EditorExportPlatformWindows.h",
+            "py4godot/cppclasses/EditorExportPlugin/EditorExportPlugin.h",
+            "py4godot/cppclasses/EditorFeatureProfile/EditorFeatureProfile.h",
+            "py4godot/cppclasses/EditorFileDialog/EditorFileDialog.h",
+            "py4godot/cppclasses/EditorFileSystem/EditorFileSystem.h",
+            "py4godot/cppclasses/EditorFileSystemDirectory/EditorFileSystemDirectory.h",
+            "py4godot/cppclasses/EditorFileSystemImportFormatSupportQuery/EditorFileSystemImportFormatSupportQuery.h",
+            "py4godot/cppclasses/EditorImportPlugin/EditorImportPlugin.h",
+            "py4godot/cppclasses/EditorInspector/EditorInspector.h",
+            "py4godot/cppclasses/EditorInspectorPlugin/EditorInspectorPlugin.h",
+            "py4godot/cppclasses/EditorInterface/EditorInterface.h",
+            "py4godot/cppclasses/EditorNode3DGizmo/EditorNode3DGizmo.h",
+            "py4godot/cppclasses/EditorNode3DGizmoPlugin/EditorNode3DGizmoPlugin.h",
+            "py4godot/cppclasses/EditorPaths/EditorPaths.h",
+            "py4godot/cppclasses/EditorPlugin/EditorPlugin.h",
+            "py4godot/cppclasses/EditorProperty/EditorProperty.h",
+            "py4godot/cppclasses/EditorResourceConversionPlugin/EditorResourceConversionPlugin.h",
+            "py4godot/cppclasses/EditorResourcePicker/EditorResourcePicker.h",
+            "py4godot/cppclasses/EditorResourcePreview/EditorResourcePreview.h",
+            "py4godot/cppclasses/EditorResourcePreviewGenerator/EditorResourcePreviewGenerator.h",
+            "py4godot/cppclasses/EditorResourceTooltipPlugin/EditorResourceTooltipPlugin.h",
+            "py4godot/cppclasses/EditorSceneFormatImporter/EditorSceneFormatImporter.h",
+            "py4godot/cppclasses/EditorSceneFormatImporterBlend/EditorSceneFormatImporterBlend.h",
+            "py4godot/cppclasses/EditorSceneFormatImporterFBX2GLTF/EditorSceneFormatImporterFBX2GLTF.h",
+            "py4godot/cppclasses/EditorSceneFormatImporterGLTF/EditorSceneFormatImporterGLTF.h",
+            "py4godot/cppclasses/EditorSceneFormatImporterUFBX/EditorSceneFormatImporterUFBX.h",
+            "py4godot/cppclasses/EditorScenePostImport/EditorScenePostImport.h",
+            "py4godot/cppclasses/EditorScenePostImportPlugin/EditorScenePostImportPlugin.h",
+            "py4godot/cppclasses/EditorScript/EditorScript.h",
+            "py4godot/cppclasses/EditorScriptPicker/EditorScriptPicker.h",
+            "py4godot/cppclasses/EditorSelection/EditorSelection.h",
+            "py4godot/cppclasses/EditorSettings/EditorSettings.h",
+            "py4godot/cppclasses/EditorSpinSlider/EditorSpinSlider.h",
+            "py4godot/cppclasses/EditorSyntaxHighlighter/EditorSyntaxHighlighter.h",
+            "py4godot/cppclasses/EditorTranslationParserPlugin/EditorTranslationParserPlugin.h",
+            "py4godot/cppclasses/EditorUndoRedoManager/EditorUndoRedoManager.h",
+            "py4godot/cppclasses/EditorVCSInterface/EditorVCSInterface.h",
+            "py4godot/cppclasses/EncodedObjectAsID/EncodedObjectAsID.h",
+            "py4godot/cppclasses/Engine/Engine.h",
+            "py4godot/cppclasses/EngineDebugger/EngineDebugger.h",
+            "py4godot/cppclasses/EngineProfiler/EngineProfiler.h",
+            "py4godot/cppclasses/Environment/Environment.h",
+            "py4godot/cppclasses/Expression/Expression.h",
+            "py4godot/cppclasses/FBXDocument/FBXDocument.h",
+            "py4godot/cppclasses/FBXState/FBXState.h",
+            "py4godot/cppclasses/FastNoiseLite/FastNoiseLite.h",
+            "py4godot/cppclasses/FileAccess/FileAccess.h",
+            "py4godot/cppclasses/FileDialog/FileDialog.h",
+            "py4godot/cppclasses/FileSystemDock/FileSystemDock.h",
+            "py4godot/cppclasses/FlowContainer/FlowContainer.h",
+            "py4godot/cppclasses/FogMaterial/FogMaterial.h",
+            "py4godot/cppclasses/FogVolume/FogVolume.h",
+            "py4godot/cppclasses/Font/Font.h",
+            "py4godot/cppclasses/FontFile/FontFile.h",
+            "py4godot/cppclasses/FontVariation/FontVariation.h",
+            "py4godot/cppclasses/FramebufferCacheRD/FramebufferCacheRD.h",
+            "py4godot/cppclasses/GDExtension/GDExtension.h",
+            "py4godot/cppclasses/GDExtensionManager/GDExtensionManager.h",
+            "py4godot/cppclasses/GDScript/GDScript.h",
+            "py4godot/cppclasses/GLTFAccessor/GLTFAccessor.h",
+            "py4godot/cppclasses/GLTFAnimation/GLTFAnimation.h",
+            "py4godot/cppclasses/GLTFBufferView/GLTFBufferView.h",
+            "py4godot/cppclasses/GLTFCamera/GLTFCamera.h",
+            "py4godot/cppclasses/GLTFDocument/GLTFDocument.h",
+            "py4godot/cppclasses/GLTFDocumentExtension/GLTFDocumentExtension.h",
+            "py4godot/cppclasses/GLTFDocumentExtensionConvertImporterMesh/GLTFDocumentExtensionConvertImporterMesh.h",
+            "py4godot/cppclasses/GLTFLight/GLTFLight.h",
+            "py4godot/cppclasses/GLTFMesh/GLTFMesh.h",
+            "py4godot/cppclasses/GLTFNode/GLTFNode.h",
+            "py4godot/cppclasses/GLTFPhysicsBody/GLTFPhysicsBody.h",
+            "py4godot/cppclasses/GLTFPhysicsShape/GLTFPhysicsShape.h",
+            "py4godot/cppclasses/GLTFSkeleton/GLTFSkeleton.h",
+            "py4godot/cppclasses/GLTFSkin/GLTFSkin.h",
+            "py4godot/cppclasses/GLTFSpecGloss/GLTFSpecGloss.h",
+            "py4godot/cppclasses/GLTFState/GLTFState.h",
+            "py4godot/cppclasses/GLTFTexture/GLTFTexture.h",
+            "py4godot/cppclasses/GLTFTextureSampler/GLTFTextureSampler.h",
+            "py4godot/cppclasses/GPUParticles2D/GPUParticles2D.h",
+            "py4godot/cppclasses/GPUParticles3D/GPUParticles3D.h",
+            "py4godot/cppclasses/GPUParticlesAttractor3D/GPUParticlesAttractor3D.h",
+            "py4godot/cppclasses/GPUParticlesAttractorBox3D/GPUParticlesAttractorBox3D.h",
+            "py4godot/cppclasses/GPUParticlesAttractorSphere3D/GPUParticlesAttractorSphere3D.h",
+            "py4godot/cppclasses/GPUParticlesAttractorVectorField3D/GPUParticlesAttractorVectorField3D.h",
+            "py4godot/cppclasses/GPUParticlesCollision3D/GPUParticlesCollision3D.h",
+            "py4godot/cppclasses/GPUParticlesCollisionBox3D/GPUParticlesCollisionBox3D.h",
+            "py4godot/cppclasses/GPUParticlesCollisionHeightField3D/GPUParticlesCollisionHeightField3D.h",
+            "py4godot/cppclasses/GPUParticlesCollisionSDF3D/GPUParticlesCollisionSDF3D.h",
+            "py4godot/cppclasses/GPUParticlesCollisionSphere3D/GPUParticlesCollisionSphere3D.h",
+            "py4godot/cppclasses/Generic6DOFJoint3D/Generic6DOFJoint3D.h",
+            "py4godot/cppclasses/Geometry2D/Geometry2D.h",
+            "py4godot/cppclasses/Geometry3D/Geometry3D.h",
+            "py4godot/cppclasses/GeometryInstance3D/GeometryInstance3D.h",
+            "py4godot/cppclasses/Gradient/Gradient.h",
+            "py4godot/cppclasses/GradientTexture1D/GradientTexture1D.h",
+            "py4godot/cppclasses/GradientTexture2D/GradientTexture2D.h",
+            "py4godot/cppclasses/GraphEdit/GraphEdit.h",
+            "py4godot/cppclasses/GraphElement/GraphElement.h",
+            "py4godot/cppclasses/GraphFrame/GraphFrame.h",
+            "py4godot/cppclasses/GraphNode/GraphNode.h",
+            "py4godot/cppclasses/GridContainer/GridContainer.h",
+            "py4godot/cppclasses/GridMap/GridMap.h",
+            "py4godot/cppclasses/GrooveJoint2D/GrooveJoint2D.h",
+            "py4godot/cppclasses/HBoxContainer/HBoxContainer.h",
+            "py4godot/cppclasses/HFlowContainer/HFlowContainer.h",
+            "py4godot/cppclasses/HMACContext/HMACContext.h",
+            "py4godot/cppclasses/HScrollBar/HScrollBar.h",
+            "py4godot/cppclasses/HSeparator/HSeparator.h",
+            "py4godot/cppclasses/HSlider/HSlider.h",
+            "py4godot/cppclasses/HSplitContainer/HSplitContainer.h",
+            "py4godot/cppclasses/HTTPClient/HTTPClient.h",
+            "py4godot/cppclasses/HTTPRequest/HTTPRequest.h",
+            "py4godot/cppclasses/HashingContext/HashingContext.h",
+            "py4godot/cppclasses/HeightMapShape3D/HeightMapShape3D.h",
+            "py4godot/cppclasses/HingeJoint3D/HingeJoint3D.h",
+            "py4godot/cppclasses/IP/IP.h",
+            "py4godot/cppclasses/Image/Image.h",
+            "py4godot/cppclasses/ImageFormatLoader/ImageFormatLoader.h",
+            "py4godot/cppclasses/ImageFormatLoaderExtension/ImageFormatLoaderExtension.h",
+            "py4godot/cppclasses/ImageTexture/ImageTexture.h",
+            "py4godot/cppclasses/ImageTexture3D/ImageTexture3D.h",
+            "py4godot/cppclasses/ImageTextureLayered/ImageTextureLayered.h",
+            "py4godot/cppclasses/ImmediateMesh/ImmediateMesh.h",
+            "py4godot/cppclasses/ImporterMesh/ImporterMesh.h",
+            "py4godot/cppclasses/ImporterMeshInstance3D/ImporterMeshInstance3D.h",
+            "py4godot/cppclasses/Input/Input.h",
+            "py4godot/cppclasses/InputEvent/InputEvent.h",
+            "py4godot/cppclasses/InputEventAction/InputEventAction.h",
+            "py4godot/cppclasses/InputEventFromWindow/InputEventFromWindow.h",
+            "py4godot/cppclasses/InputEventGesture/InputEventGesture.h",
+            "py4godot/cppclasses/InputEventJoypadButton/InputEventJoypadButton.h",
+            "py4godot/cppclasses/InputEventJoypadMotion/InputEventJoypadMotion.h",
+            "py4godot/cppclasses/InputEventKey/InputEventKey.h",
+            "py4godot/cppclasses/InputEventMIDI/InputEventMIDI.h",
+            "py4godot/cppclasses/InputEventMagnifyGesture/InputEventMagnifyGesture.h",
+            "py4godot/cppclasses/InputEventMouse/InputEventMouse.h",
+            "py4godot/cppclasses/InputEventMouseButton/InputEventMouseButton.h",
+            "py4godot/cppclasses/InputEventMouseMotion/InputEventMouseMotion.h",
+            "py4godot/cppclasses/InputEventPanGesture/InputEventPanGesture.h",
+            "py4godot/cppclasses/InputEventScreenDrag/InputEventScreenDrag.h",
+            "py4godot/cppclasses/InputEventScreenTouch/InputEventScreenTouch.h",
+            "py4godot/cppclasses/InputEventShortcut/InputEventShortcut.h",
+            "py4godot/cppclasses/InputEventWithModifiers/InputEventWithModifiers.h",
+            "py4godot/cppclasses/InputMap/InputMap.h",
+            "py4godot/cppclasses/InstancePlaceholder/InstancePlaceholder.h",
+            "py4godot/cppclasses/IntervalTweener/IntervalTweener.h",
+            "py4godot/cppclasses/ItemList/ItemList.h",
+            "py4godot/cppclasses/JNISingleton/JNISingleton.h",
+            "py4godot/cppclasses/JSON/JSON.h",
+            "py4godot/cppclasses/JSONRPC/JSONRPC.h",
+            "py4godot/cppclasses/JavaClass/JavaClass.h",
+            "py4godot/cppclasses/JavaClassWrapper/JavaClassWrapper.h",
+            "py4godot/cppclasses/JavaScriptBridge/JavaScriptBridge.h",
+            "py4godot/cppclasses/JavaScriptObject/JavaScriptObject.h",
+            "py4godot/cppclasses/Joint2D/Joint2D.h",
+            "py4godot/cppclasses/Joint3D/Joint3D.h",
+            "py4godot/cppclasses/KinematicCollision2D/KinematicCollision2D.h",
+            "py4godot/cppclasses/KinematicCollision3D/KinematicCollision3D.h",
+            "py4godot/cppclasses/Label/Label.h",
+            "py4godot/cppclasses/Label3D/Label3D.h",
+            "py4godot/cppclasses/LabelSettings/LabelSettings.h",
+            "py4godot/cppclasses/Light2D/Light2D.h",
+            "py4godot/cppclasses/Light3D/Light3D.h",
+            "py4godot/cppclasses/LightOccluder2D/LightOccluder2D.h",
+            "py4godot/cppclasses/LightmapGI/LightmapGI.h",
+            "py4godot/cppclasses/LightmapGIData/LightmapGIData.h",
+            "py4godot/cppclasses/LightmapProbe/LightmapProbe.h",
+            "py4godot/cppclasses/Lightmapper/Lightmapper.h",
+            "py4godot/cppclasses/LightmapperRD/LightmapperRD.h",
+            "py4godot/cppclasses/Line2D/Line2D.h",
+            "py4godot/cppclasses/LineEdit/LineEdit.h",
+            "py4godot/cppclasses/LinkButton/LinkButton.h",
+            "py4godot/cppclasses/MainLoop/MainLoop.h",
+            "py4godot/cppclasses/MarginContainer/MarginContainer.h",
+            "py4godot/cppclasses/Marker2D/Marker2D.h",
+            "py4godot/cppclasses/Marker3D/Marker3D.h",
+            "py4godot/cppclasses/Marshalls/Marshalls.h",
+            "py4godot/cppclasses/Material/Material.h",
+            "py4godot/cppclasses/MenuBar/MenuBar.h",
+            "py4godot/cppclasses/MenuButton/MenuButton.h",
+            "py4godot/cppclasses/Mesh/Mesh.h",
+            "py4godot/cppclasses/MeshConvexDecompositionSettings/MeshConvexDecompositionSettings.h",
+            "py4godot/cppclasses/MeshDataTool/MeshDataTool.h",
+            "py4godot/cppclasses/MeshInstance2D/MeshInstance2D.h",
+            "py4godot/cppclasses/MeshInstance3D/MeshInstance3D.h",
+            "py4godot/cppclasses/MeshLibrary/MeshLibrary.h",
+            "py4godot/cppclasses/MeshTexture/MeshTexture.h",
+            "py4godot/cppclasses/MethodTweener/MethodTweener.h",
+            "py4godot/cppclasses/MissingNode/MissingNode.h",
+            "py4godot/cppclasses/MissingResource/MissingResource.h",
+            "py4godot/cppclasses/MobileVRInterface/MobileVRInterface.h",
+            "py4godot/cppclasses/MovieWriter/MovieWriter.h",
+            "py4godot/cppclasses/MultiMesh/MultiMesh.h",
+            "py4godot/cppclasses/MultiMeshInstance2D/MultiMeshInstance2D.h",
+            "py4godot/cppclasses/MultiMeshInstance3D/MultiMeshInstance3D.h",
+            "py4godot/cppclasses/MultiplayerAPI/MultiplayerAPI.h",
+            "py4godot/cppclasses/MultiplayerAPIExtension/MultiplayerAPIExtension.h",
+            "py4godot/cppclasses/MultiplayerPeer/MultiplayerPeer.h",
+            "py4godot/cppclasses/MultiplayerPeerExtension/MultiplayerPeerExtension.h",
+            "py4godot/cppclasses/MultiplayerSpawner/MultiplayerSpawner.h",
+            "py4godot/cppclasses/MultiplayerSynchronizer/MultiplayerSynchronizer.h",
+            "py4godot/cppclasses/Mutex/Mutex.h",
+            "py4godot/cppclasses/NativeMenu/NativeMenu.h",
+            "py4godot/cppclasses/NavigationAgent2D/NavigationAgent2D.h",
+            "py4godot/cppclasses/NavigationAgent3D/NavigationAgent3D.h",
+            "py4godot/cppclasses/NavigationLink2D/NavigationLink2D.h",
+            "py4godot/cppclasses/NavigationLink3D/NavigationLink3D.h",
+            "py4godot/cppclasses/NavigationMesh/NavigationMesh.h",
+            "py4godot/cppclasses/NavigationMeshGenerator/NavigationMeshGenerator.h",
+            "py4godot/cppclasses/NavigationMeshSourceGeometryData2D/NavigationMeshSourceGeometryData2D.h",
+            "py4godot/cppclasses/NavigationMeshSourceGeometryData3D/NavigationMeshSourceGeometryData3D.h",
+            "py4godot/cppclasses/NavigationObstacle2D/NavigationObstacle2D.h",
+            "py4godot/cppclasses/NavigationObstacle3D/NavigationObstacle3D.h",
+            "py4godot/cppclasses/NavigationPathQueryParameters2D/NavigationPathQueryParameters2D.h",
+            "py4godot/cppclasses/NavigationPathQueryParameters3D/NavigationPathQueryParameters3D.h",
+            "py4godot/cppclasses/NavigationPathQueryResult2D/NavigationPathQueryResult2D.h",
+            "py4godot/cppclasses/NavigationPathQueryResult3D/NavigationPathQueryResult3D.h",
+            "py4godot/cppclasses/NavigationPolygon/NavigationPolygon.h",
+            "py4godot/cppclasses/NavigationRegion2D/NavigationRegion2D.h",
+            "py4godot/cppclasses/NavigationRegion3D/NavigationRegion3D.h",
+            "py4godot/cppclasses/NavigationServer2D/NavigationServer2D.h",
+            "py4godot/cppclasses/NavigationServer3D/NavigationServer3D.h",
+            "py4godot/cppclasses/NinePatchRect/NinePatchRect.h",
+            "py4godot/cppclasses/Node/Node.h",
+            "py4godot/cppclasses/Node2D/Node2D.h",
+            "py4godot/cppclasses/Node3D/Node3D.h",
+            "py4godot/cppclasses/Node3DGizmo/Node3DGizmo.h",
+            "py4godot/cppclasses/Noise/Noise.h",
+            "py4godot/cppclasses/NoiseTexture2D/NoiseTexture2D.h",
+            "py4godot/cppclasses/NoiseTexture3D/NoiseTexture3D.h",
+            "py4godot/cppclasses/ORMMaterial3D/ORMMaterial3D.h",
+            "py4godot/cppclasses/OS/OS.h",
+            "py4godot/cppclasses/Object/Object.h",
+            "py4godot/cppclasses/Occluder3D/Occluder3D.h",
+            "py4godot/cppclasses/OccluderInstance3D/OccluderInstance3D.h",
+            "py4godot/cppclasses/OccluderPolygon2D/OccluderPolygon2D.h",
+            "py4godot/cppclasses/OfflineMultiplayerPeer/OfflineMultiplayerPeer.h",
+            "py4godot/cppclasses/OggPacketSequence/OggPacketSequence.h",
+            "py4godot/cppclasses/OggPacketSequencePlayback/OggPacketSequencePlayback.h",
+            "py4godot/cppclasses/OmniLight3D/OmniLight3D.h",
+            "py4godot/cppclasses/OpenXRAPIExtension/OpenXRAPIExtension.h",
+            "py4godot/cppclasses/OpenXRAction/OpenXRAction.h",
+            "py4godot/cppclasses/OpenXRActionMap/OpenXRActionMap.h",
+            "py4godot/cppclasses/OpenXRActionSet/OpenXRActionSet.h",
+            "py4godot/cppclasses/OpenXRCompositionLayer/OpenXRCompositionLayer.h",
+            "py4godot/cppclasses/OpenXRCompositionLayerCylinder/OpenXRCompositionLayerCylinder.h",
+            "py4godot/cppclasses/OpenXRCompositionLayerEquirect/OpenXRCompositionLayerEquirect.h",
+            "py4godot/cppclasses/OpenXRCompositionLayerQuad/OpenXRCompositionLayerQuad.h",
+            "py4godot/cppclasses/OpenXRExtensionWrapperExtension/OpenXRExtensionWrapperExtension.h",
+            "py4godot/cppclasses/OpenXRHand/OpenXRHand.h",
+            "py4godot/cppclasses/OpenXRIPBinding/OpenXRIPBinding.h",
+            "py4godot/cppclasses/OpenXRInteractionProfile/OpenXRInteractionProfile.h",
+            "py4godot/cppclasses/OpenXRInteractionProfileMetadata/OpenXRInteractionProfileMetadata.h",
+            "py4godot/cppclasses/OpenXRInterface/OpenXRInterface.h",
+            "py4godot/cppclasses/OptimizedTranslation/OptimizedTranslation.h",
+            "py4godot/cppclasses/OptionButton/OptionButton.h",
+            "py4godot/cppclasses/PCKPacker/PCKPacker.h",
+            "py4godot/cppclasses/PackedDataContainer/PackedDataContainer.h",
+            "py4godot/cppclasses/PackedDataContainerRef/PackedDataContainerRef.h",
+            "py4godot/cppclasses/PackedScene/PackedScene.h",
+            "py4godot/cppclasses/PacketPeer/PacketPeer.h",
+            "py4godot/cppclasses/PacketPeerDTLS/PacketPeerDTLS.h",
+            "py4godot/cppclasses/PacketPeerExtension/PacketPeerExtension.h",
+            "py4godot/cppclasses/PacketPeerStream/PacketPeerStream.h",
+            "py4godot/cppclasses/PacketPeerUDP/PacketPeerUDP.h",
+            "py4godot/cppclasses/Panel/Panel.h",
+            "py4godot/cppclasses/PanelContainer/PanelContainer.h",
+            "py4godot/cppclasses/PanoramaSkyMaterial/PanoramaSkyMaterial.h",
+            "py4godot/cppclasses/Parallax2D/Parallax2D.h",
+            "py4godot/cppclasses/ParallaxBackground/ParallaxBackground.h",
+            "py4godot/cppclasses/ParallaxLayer/ParallaxLayer.h",
+            "py4godot/cppclasses/ParticleProcessMaterial/ParticleProcessMaterial.h",
+            "py4godot/cppclasses/Path2D/Path2D.h",
+            "py4godot/cppclasses/Path3D/Path3D.h",
+            "py4godot/cppclasses/PathFollow2D/PathFollow2D.h",
+            "py4godot/cppclasses/PathFollow3D/PathFollow3D.h",
+            "py4godot/cppclasses/Performance/Performance.h",
+            "py4godot/cppclasses/PhysicalBone2D/PhysicalBone2D.h",
+            "py4godot/cppclasses/PhysicalBone3D/PhysicalBone3D.h",
+            "py4godot/cppclasses/PhysicalBoneSimulator3D/PhysicalBoneSimulator3D.h",
+            "py4godot/cppclasses/PhysicalSkyMaterial/PhysicalSkyMaterial.h",
+            "py4godot/cppclasses/PhysicsBody2D/PhysicsBody2D.h",
+            "py4godot/cppclasses/PhysicsBody3D/PhysicsBody3D.h",
+            "py4godot/cppclasses/PhysicsDirectBodyState2D/PhysicsDirectBodyState2D.h",
+            "py4godot/cppclasses/PhysicsDirectBodyState2DExtension/PhysicsDirectBodyState2DExtension.h",
+            "py4godot/cppclasses/PhysicsDirectBodyState3D/PhysicsDirectBodyState3D.h",
+            "py4godot/cppclasses/PhysicsDirectBodyState3DExtension/PhysicsDirectBodyState3DExtension.h",
+            "py4godot/cppclasses/PhysicsDirectSpaceState2D/PhysicsDirectSpaceState2D.h",
+            "py4godot/cppclasses/PhysicsDirectSpaceState2DExtension/PhysicsDirectSpaceState2DExtension.h",
+            "py4godot/cppclasses/PhysicsDirectSpaceState3D/PhysicsDirectSpaceState3D.h",
+            "py4godot/cppclasses/PhysicsDirectSpaceState3DExtension/PhysicsDirectSpaceState3DExtension.h",
+            "py4godot/cppclasses/PhysicsMaterial/PhysicsMaterial.h",
+            "py4godot/cppclasses/PhysicsPointQueryParameters2D/PhysicsPointQueryParameters2D.h",
+            "py4godot/cppclasses/PhysicsPointQueryParameters3D/PhysicsPointQueryParameters3D.h",
+            "py4godot/cppclasses/PhysicsRayQueryParameters2D/PhysicsRayQueryParameters2D.h",
+            "py4godot/cppclasses/PhysicsRayQueryParameters3D/PhysicsRayQueryParameters3D.h",
+            "py4godot/cppclasses/PhysicsServer2D/PhysicsServer2D.h",
+            "py4godot/cppclasses/PhysicsServer2DExtension/PhysicsServer2DExtension.h",
+            "py4godot/cppclasses/PhysicsServer2DManager/PhysicsServer2DManager.h",
+            "py4godot/cppclasses/PhysicsServer3D/PhysicsServer3D.h",
+            "py4godot/cppclasses/PhysicsServer3DExtension/PhysicsServer3DExtension.h",
+            "py4godot/cppclasses/PhysicsServer3DManager/PhysicsServer3DManager.h",
+            "py4godot/cppclasses/PhysicsServer3DRenderingServerHandler/PhysicsServer3DRenderingServerHandler.h",
+            "py4godot/cppclasses/PhysicsShapeQueryParameters2D/PhysicsShapeQueryParameters2D.h",
+            "py4godot/cppclasses/PhysicsShapeQueryParameters3D/PhysicsShapeQueryParameters3D.h",
+            "py4godot/cppclasses/PhysicsTestMotionParameters2D/PhysicsTestMotionParameters2D.h",
+            "py4godot/cppclasses/PhysicsTestMotionParameters3D/PhysicsTestMotionParameters3D.h",
+            "py4godot/cppclasses/PhysicsTestMotionResult2D/PhysicsTestMotionResult2D.h",
+            "py4godot/cppclasses/PhysicsTestMotionResult3D/PhysicsTestMotionResult3D.h",
+            "py4godot/cppclasses/PinJoint2D/PinJoint2D.h",
+            "py4godot/cppclasses/PinJoint3D/PinJoint3D.h",
+            "py4godot/cppclasses/PlaceholderCubemap/PlaceholderCubemap.h",
+            "py4godot/cppclasses/PlaceholderCubemapArray/PlaceholderCubemapArray.h",
+            "py4godot/cppclasses/PlaceholderMaterial/PlaceholderMaterial.h",
+            "py4godot/cppclasses/PlaceholderMesh/PlaceholderMesh.h",
+            "py4godot/cppclasses/PlaceholderTexture2D/PlaceholderTexture2D.h",
+            "py4godot/cppclasses/PlaceholderTexture2DArray/PlaceholderTexture2DArray.h",
+            "py4godot/cppclasses/PlaceholderTexture3D/PlaceholderTexture3D.h",
+            "py4godot/cppclasses/PlaceholderTextureLayered/PlaceholderTextureLayered.h",
+            "py4godot/cppclasses/PlaneMesh/PlaneMesh.h",
+            "py4godot/cppclasses/PointLight2D/PointLight2D.h",
+            "py4godot/cppclasses/PointMesh/PointMesh.h",
+            "py4godot/cppclasses/Polygon2D/Polygon2D.h",
+            "py4godot/cppclasses/PolygonOccluder3D/PolygonOccluder3D.h",
+            "py4godot/cppclasses/PolygonPathFinder/PolygonPathFinder.h",
+            "py4godot/cppclasses/Popup/Popup.h",
+            "py4godot/cppclasses/PopupMenu/PopupMenu.h",
+            "py4godot/cppclasses/PopupPanel/PopupPanel.h",
+            "py4godot/cppclasses/PortableCompressedTexture2D/PortableCompressedTexture2D.h",
+            "py4godot/cppclasses/PrimitiveMesh/PrimitiveMesh.h",
+            "py4godot/cppclasses/PrismMesh/PrismMesh.h",
+            "py4godot/cppclasses/ProceduralSkyMaterial/ProceduralSkyMaterial.h",
+            "py4godot/cppclasses/ProgressBar/ProgressBar.h",
+            "py4godot/cppclasses/ProjectSettings/ProjectSettings.h",
+            "py4godot/cppclasses/PropertyTweener/PropertyTweener.h",
+            "py4godot/cppclasses/QuadMesh/QuadMesh.h",
+            "py4godot/cppclasses/QuadOccluder3D/QuadOccluder3D.h",
+            "py4godot/cppclasses/RDAttachmentFormat/RDAttachmentFormat.h",
+            "py4godot/cppclasses/RDFramebufferPass/RDFramebufferPass.h",
+            "py4godot/cppclasses/RDPipelineColorBlendState/RDPipelineColorBlendState.h",
+            "py4godot/cppclasses/RDPipelineColorBlendStateAttachment/RDPipelineColorBlendStateAttachment.h",
+            "py4godot/cppclasses/RDPipelineDepthStencilState/RDPipelineDepthStencilState.h",
+            "py4godot/cppclasses/RDPipelineMultisampleState/RDPipelineMultisampleState.h",
+            "py4godot/cppclasses/RDPipelineRasterizationState/RDPipelineRasterizationState.h",
+            "py4godot/cppclasses/RDPipelineSpecializationConstant/RDPipelineSpecializationConstant.h",
+            "py4godot/cppclasses/RDSamplerState/RDSamplerState.h",
+            "py4godot/cppclasses/RDShaderFile/RDShaderFile.h",
+            "py4godot/cppclasses/RDShaderSPIRV/RDShaderSPIRV.h",
+            "py4godot/cppclasses/RDShaderSource/RDShaderSource.h",
+            "py4godot/cppclasses/RDTextureFormat/RDTextureFormat.h",
+            "py4godot/cppclasses/RDTextureView/RDTextureView.h",
+            "py4godot/cppclasses/RDUniform/RDUniform.h",
+            "py4godot/cppclasses/RDVertexAttribute/RDVertexAttribute.h",
+            "py4godot/cppclasses/RandomNumberGenerator/RandomNumberGenerator.h",
+            "py4godot/cppclasses/Range/Range.h",
+            "py4godot/cppclasses/RayCast2D/RayCast2D.h",
+            "py4godot/cppclasses/RayCast3D/RayCast3D.h",
+            "py4godot/cppclasses/RectangleShape2D/RectangleShape2D.h",
+            "py4godot/cppclasses/RefCounted/RefCounted.h",
+            "py4godot/cppclasses/ReferenceRect/ReferenceRect.h",
+            "py4godot/cppclasses/ReflectionProbe/ReflectionProbe.h",
+            "py4godot/cppclasses/RegEx/RegEx.h",
+            "py4godot/cppclasses/RegExMatch/RegExMatch.h",
+            "py4godot/cppclasses/RemoteTransform2D/RemoteTransform2D.h",
+            "py4godot/cppclasses/RemoteTransform3D/RemoteTransform3D.h",
+            "py4godot/cppclasses/RenderData/RenderData.h",
+            "py4godot/cppclasses/RenderDataExtension/RenderDataExtension.h",
+            "py4godot/cppclasses/RenderDataRD/RenderDataRD.h",
+            "py4godot/cppclasses/RenderSceneBuffers/RenderSceneBuffers.h",
+            "py4godot/cppclasses/RenderSceneBuffersConfiguration/RenderSceneBuffersConfiguration.h",
+            "py4godot/cppclasses/RenderSceneBuffersExtension/RenderSceneBuffersExtension.h",
+            "py4godot/cppclasses/RenderSceneBuffersRD/RenderSceneBuffersRD.h",
+            "py4godot/cppclasses/RenderSceneData/RenderSceneData.h",
+            "py4godot/cppclasses/RenderSceneDataExtension/RenderSceneDataExtension.h",
+            "py4godot/cppclasses/RenderSceneDataRD/RenderSceneDataRD.h",
+            "py4godot/cppclasses/RenderingDevice/RenderingDevice.h",
+            "py4godot/cppclasses/RenderingServer/RenderingServer.h",
+            "py4godot/cppclasses/Resource/Resource.h",
+            "py4godot/cppclasses/ResourceFormatLoader/ResourceFormatLoader.h",
+            "py4godot/cppclasses/ResourceFormatSaver/ResourceFormatSaver.h",
+            "py4godot/cppclasses/ResourceImporter/ResourceImporter.h",
+            "py4godot/cppclasses/ResourceImporterBMFont/ResourceImporterBMFont.h",
+            "py4godot/cppclasses/ResourceImporterBitMap/ResourceImporterBitMap.h",
+            "py4godot/cppclasses/ResourceImporterCSVTranslation/ResourceImporterCSVTranslation.h",
+            "py4godot/cppclasses/ResourceImporterDynamicFont/ResourceImporterDynamicFont.h",
+            "py4godot/cppclasses/ResourceImporterImage/ResourceImporterImage.h",
+            "py4godot/cppclasses/ResourceImporterImageFont/ResourceImporterImageFont.h",
+            "py4godot/cppclasses/ResourceImporterLayeredTexture/ResourceImporterLayeredTexture.h",
+            "py4godot/cppclasses/ResourceImporterMP3/ResourceImporterMP3.h",
+            "py4godot/cppclasses/ResourceImporterOBJ/ResourceImporterOBJ.h",
+            "py4godot/cppclasses/ResourceImporterOggVorbis/ResourceImporterOggVorbis.h",
+            "py4godot/cppclasses/ResourceImporterScene/ResourceImporterScene.h",
+            "py4godot/cppclasses/ResourceImporterShaderFile/ResourceImporterShaderFile.h",
+            "py4godot/cppclasses/ResourceImporterTexture/ResourceImporterTexture.h",
+            "py4godot/cppclasses/ResourceImporterTextureAtlas/ResourceImporterTextureAtlas.h",
+            "py4godot/cppclasses/ResourceImporterWAV/ResourceImporterWAV.h",
+            "py4godot/cppclasses/ResourceLoader/ResourceLoader.h",
+            "py4godot/cppclasses/ResourcePreloader/ResourcePreloader.h",
+            "py4godot/cppclasses/ResourceSaver/ResourceSaver.h",
+            "py4godot/cppclasses/ResourceUID/ResourceUID.h",
+            "py4godot/cppclasses/RibbonTrailMesh/RibbonTrailMesh.h",
+            "py4godot/cppclasses/RichTextEffect/RichTextEffect.h",
+            "py4godot/cppclasses/RichTextLabel/RichTextLabel.h",
+            "py4godot/cppclasses/RigidBody2D/RigidBody2D.h",
+            "py4godot/cppclasses/RigidBody3D/RigidBody3D.h",
+            "py4godot/cppclasses/RootMotionView/RootMotionView.h",
+            "py4godot/cppclasses/SceneMultiplayer/SceneMultiplayer.h",
+            "py4godot/cppclasses/SceneReplicationConfig/SceneReplicationConfig.h",
+            "py4godot/cppclasses/SceneState/SceneState.h",
+            "py4godot/cppclasses/SceneTree/SceneTree.h",
+            "py4godot/cppclasses/SceneTreeTimer/SceneTreeTimer.h",
+            "py4godot/cppclasses/Script/Script.h",
+            "py4godot/cppclasses/ScriptCreateDialog/ScriptCreateDialog.h",
+            "py4godot/cppclasses/ScriptEditor/ScriptEditor.h",
+            "py4godot/cppclasses/ScriptEditorBase/ScriptEditorBase.h",
+            "py4godot/cppclasses/ScriptExtension/ScriptExtension.h",
+            "py4godot/cppclasses/ScriptLanguage/ScriptLanguage.h",
+            "py4godot/cppclasses/ScriptLanguageExtension/ScriptLanguageExtension.h",
+            "py4godot/cppclasses/ScrollBar/ScrollBar.h",
+            "py4godot/cppclasses/ScrollContainer/ScrollContainer.h",
+            "py4godot/cppclasses/SegmentShape2D/SegmentShape2D.h",
+            "py4godot/cppclasses/Semaphore/Semaphore.h",
+            "py4godot/cppclasses/SeparationRayShape2D/SeparationRayShape2D.h",
+            "py4godot/cppclasses/SeparationRayShape3D/SeparationRayShape3D.h",
+            "py4godot/cppclasses/Separator/Separator.h",
+            "py4godot/cppclasses/Shader/Shader.h",
+            "py4godot/cppclasses/ShaderGlobalsOverride/ShaderGlobalsOverride.h",
+            "py4godot/cppclasses/ShaderInclude/ShaderInclude.h",
+            "py4godot/cppclasses/ShaderMaterial/ShaderMaterial.h",
+            "py4godot/cppclasses/Shape2D/Shape2D.h",
+            "py4godot/cppclasses/Shape3D/Shape3D.h",
+            "py4godot/cppclasses/ShapeCast2D/ShapeCast2D.h",
+            "py4godot/cppclasses/ShapeCast3D/ShapeCast3D.h",
+            "py4godot/cppclasses/Shortcut/Shortcut.h",
+            "py4godot/cppclasses/Skeleton2D/Skeleton2D.h",
+            "py4godot/cppclasses/Skeleton3D/Skeleton3D.h",
+            "py4godot/cppclasses/SkeletonIK3D/SkeletonIK3D.h",
+            "py4godot/cppclasses/SkeletonModification2D/SkeletonModification2D.h",
+            "py4godot/cppclasses/SkeletonModification2DCCDIK/SkeletonModification2DCCDIK.h",
+            "py4godot/cppclasses/SkeletonModification2DFABRIK/SkeletonModification2DFABRIK.h",
+            "py4godot/cppclasses/SkeletonModification2DJiggle/SkeletonModification2DJiggle.h",
+            "py4godot/cppclasses/SkeletonModification2DLookAt/SkeletonModification2DLookAt.h",
+            "py4godot/cppclasses/SkeletonModification2DPhysicalBones/SkeletonModification2DPhysicalBones.h",
+            "py4godot/cppclasses/SkeletonModification2DStackHolder/SkeletonModification2DStackHolder.h",
+            "py4godot/cppclasses/SkeletonModification2DTwoBoneIK/SkeletonModification2DTwoBoneIK.h",
+            "py4godot/cppclasses/SkeletonModificationStack2D/SkeletonModificationStack2D.h",
+            "py4godot/cppclasses/SkeletonModifier3D/SkeletonModifier3D.h",
+            "py4godot/cppclasses/SkeletonProfile/SkeletonProfile.h",
+            "py4godot/cppclasses/SkeletonProfileHumanoid/SkeletonProfileHumanoid.h",
+            "py4godot/cppclasses/Skin/Skin.h",
+            "py4godot/cppclasses/SkinReference/SkinReference.h",
+            "py4godot/cppclasses/Sky/Sky.h",
+            "py4godot/cppclasses/Slider/Slider.h",
+            "py4godot/cppclasses/SliderJoint3D/SliderJoint3D.h",
+            "py4godot/cppclasses/SoftBody3D/SoftBody3D.h",
+            "py4godot/cppclasses/SphereMesh/SphereMesh.h",
+            "py4godot/cppclasses/SphereOccluder3D/SphereOccluder3D.h",
+            "py4godot/cppclasses/SphereShape3D/SphereShape3D.h",
+            "py4godot/cppclasses/SpinBox/SpinBox.h",
+            "py4godot/cppclasses/SplitContainer/SplitContainer.h",
+            "py4godot/cppclasses/SpotLight3D/SpotLight3D.h",
+            "py4godot/cppclasses/SpringArm3D/SpringArm3D.h",
+            "py4godot/cppclasses/Sprite2D/Sprite2D.h",
+            "py4godot/cppclasses/Sprite3D/Sprite3D.h",
+            "py4godot/cppclasses/SpriteBase3D/SpriteBase3D.h",
+            "py4godot/cppclasses/SpriteFrames/SpriteFrames.h",
+            "py4godot/cppclasses/StandardMaterial3D/StandardMaterial3D.h",
+            "py4godot/cppclasses/StaticBody2D/StaticBody2D.h",
+            "py4godot/cppclasses/StaticBody3D/StaticBody3D.h",
+            "py4godot/cppclasses/StatusIndicator/StatusIndicator.h",
+            "py4godot/cppclasses/StreamPeer/StreamPeer.h",
+            "py4godot/cppclasses/StreamPeerBuffer/StreamPeerBuffer.h",
+            "py4godot/cppclasses/StreamPeerExtension/StreamPeerExtension.h",
+            "py4godot/cppclasses/StreamPeerGZIP/StreamPeerGZIP.h",
+            "py4godot/cppclasses/StreamPeerTCP/StreamPeerTCP.h",
+            "py4godot/cppclasses/StreamPeerTLS/StreamPeerTLS.h",
+            "py4godot/cppclasses/StyleBox/StyleBox.h",
+            "py4godot/cppclasses/StyleBoxEmpty/StyleBoxEmpty.h",
+            "py4godot/cppclasses/StyleBoxFlat/StyleBoxFlat.h",
+            "py4godot/cppclasses/StyleBoxLine/StyleBoxLine.h",
+            "py4godot/cppclasses/StyleBoxTexture/StyleBoxTexture.h",
+            "py4godot/cppclasses/SubViewport/SubViewport.h",
+            "py4godot/cppclasses/SubViewportContainer/SubViewportContainer.h",
+            "py4godot/cppclasses/SurfaceTool/SurfaceTool.h",
+            "py4godot/cppclasses/SyntaxHighlighter/SyntaxHighlighter.h",
+            "py4godot/cppclasses/SystemFont/SystemFont.h",
+            "py4godot/cppclasses/TCPServer/TCPServer.h",
+            "py4godot/cppclasses/TLSOptions/TLSOptions.h",
+            "py4godot/cppclasses/TabBar/TabBar.h",
+            "py4godot/cppclasses/TabContainer/TabContainer.h",
+            "py4godot/cppclasses/TextEdit/TextEdit.h",
+            "py4godot/cppclasses/TextLine/TextLine.h",
+            "py4godot/cppclasses/TextMesh/TextMesh.h",
+            "py4godot/cppclasses/TextParagraph/TextParagraph.h",
+            "py4godot/cppclasses/TextServer/TextServer.h",
+            "py4godot/cppclasses/TextServerAdvanced/TextServerAdvanced.h",
+            "py4godot/cppclasses/TextServerDummy/TextServerDummy.h",
+            "py4godot/cppclasses/TextServerExtension/TextServerExtension.h",
+            "py4godot/cppclasses/TextServerManager/TextServerManager.h",
+            "py4godot/cppclasses/Texture/Texture.h",
+            "py4godot/cppclasses/Texture2D/Texture2D.h",
+            "py4godot/cppclasses/Texture2DArray/Texture2DArray.h",
+            "py4godot/cppclasses/Texture2DArrayRD/Texture2DArrayRD.h",
+            "py4godot/cppclasses/Texture2DRD/Texture2DRD.h",
+            "py4godot/cppclasses/Texture3D/Texture3D.h",
+            "py4godot/cppclasses/Texture3DRD/Texture3DRD.h",
+            "py4godot/cppclasses/TextureButton/TextureButton.h",
+            "py4godot/cppclasses/TextureCubemapArrayRD/TextureCubemapArrayRD.h",
+            "py4godot/cppclasses/TextureCubemapRD/TextureCubemapRD.h",
+            "py4godot/cppclasses/TextureLayered/TextureLayered.h",
+            "py4godot/cppclasses/TextureLayeredRD/TextureLayeredRD.h",
+            "py4godot/cppclasses/TextureProgressBar/TextureProgressBar.h",
+            "py4godot/cppclasses/TextureRect/TextureRect.h",
+            "py4godot/cppclasses/Theme/Theme.h",
+            "py4godot/cppclasses/ThemeDB/ThemeDB.h",
+            "py4godot/cppclasses/Thread/Thread.h",
+            "py4godot/cppclasses/TileData/TileData.h",
+            "py4godot/cppclasses/TileMap/TileMap.h",
+            "py4godot/cppclasses/TileMapLayer/TileMapLayer.h",
+            "py4godot/cppclasses/TileMapPattern/TileMapPattern.h",
+            "py4godot/cppclasses/TileSet/TileSet.h",
+            "py4godot/cppclasses/TileSetAtlasSource/TileSetAtlasSource.h",
+            "py4godot/cppclasses/TileSetScenesCollectionSource/TileSetScenesCollectionSource.h",
+            "py4godot/cppclasses/TileSetSource/TileSetSource.h",
+            "py4godot/cppclasses/Time/Time.h",
+            "py4godot/cppclasses/Timer/Timer.h",
+            "py4godot/cppclasses/TorusMesh/TorusMesh.h",
+            "py4godot/cppclasses/TouchScreenButton/TouchScreenButton.h",
+            "py4godot/cppclasses/Translation/Translation.h",
+            "py4godot/cppclasses/TranslationServer/TranslationServer.h",
+            "py4godot/cppclasses/Tree/Tree.h",
+            "py4godot/cppclasses/TreeItem/TreeItem.h",
+            "py4godot/cppclasses/TriangleMesh/TriangleMesh.h",
+            "py4godot/cppclasses/TubeTrailMesh/TubeTrailMesh.h",
+            "py4godot/cppclasses/Tween/Tween.h",
+            "py4godot/cppclasses/Tweener/Tweener.h",
+            "py4godot/cppclasses/UDPServer/UDPServer.h",
+            "py4godot/cppclasses/UPNP/UPNP.h",
+            "py4godot/cppclasses/UPNPDevice/UPNPDevice.h",
+            "py4godot/cppclasses/UndoRedo/UndoRedo.h",
+            "py4godot/cppclasses/UniformSetCacheRD/UniformSetCacheRD.h",
+            "py4godot/cppclasses/VBoxContainer/VBoxContainer.h",
+            "py4godot/cppclasses/VFlowContainer/VFlowContainer.h",
+            "py4godot/cppclasses/VScrollBar/VScrollBar.h",
+            "py4godot/cppclasses/VSeparator/VSeparator.h",
+            "py4godot/cppclasses/VSlider/VSlider.h",
+            "py4godot/cppclasses/VSplitContainer/VSplitContainer.h",
+            "py4godot/cppclasses/VehicleBody3D/VehicleBody3D.h",
+            "py4godot/cppclasses/VehicleWheel3D/VehicleWheel3D.h",
+            "py4godot/cppclasses/VideoStream/VideoStream.h",
+            "py4godot/cppclasses/VideoStreamPlayback/VideoStreamPlayback.h",
+            "py4godot/cppclasses/VideoStreamPlayer/VideoStreamPlayer.h",
+            "py4godot/cppclasses/VideoStreamTheora/VideoStreamTheora.h",
+            "py4godot/cppclasses/Viewport/Viewport.h",
+            "py4godot/cppclasses/ViewportTexture/ViewportTexture.h",
+            "py4godot/cppclasses/VisibleOnScreenEnabler2D/VisibleOnScreenEnabler2D.h",
+            "py4godot/cppclasses/VisibleOnScreenEnabler3D/VisibleOnScreenEnabler3D.h",
+            "py4godot/cppclasses/VisibleOnScreenNotifier2D/VisibleOnScreenNotifier2D.h",
+            "py4godot/cppclasses/VisibleOnScreenNotifier3D/VisibleOnScreenNotifier3D.h",
+            "py4godot/cppclasses/VisualInstance3D/VisualInstance3D.h",
+            "py4godot/cppclasses/VisualShader/VisualShader.h",
+            "py4godot/cppclasses/VisualShaderNode/VisualShaderNode.h",
+            "py4godot/cppclasses/VisualShaderNodeBillboard/VisualShaderNodeBillboard.h",
+            "py4godot/cppclasses/VisualShaderNodeBooleanConstant/VisualShaderNodeBooleanConstant.h",
+            "py4godot/cppclasses/VisualShaderNodeBooleanParameter/VisualShaderNodeBooleanParameter.h",
+            "py4godot/cppclasses/VisualShaderNodeClamp/VisualShaderNodeClamp.h",
+            "py4godot/cppclasses/VisualShaderNodeColorConstant/VisualShaderNodeColorConstant.h",
+            "py4godot/cppclasses/VisualShaderNodeColorFunc/VisualShaderNodeColorFunc.h",
+            "py4godot/cppclasses/VisualShaderNodeColorOp/VisualShaderNodeColorOp.h",
+            "py4godot/cppclasses/VisualShaderNodeColorParameter/VisualShaderNodeColorParameter.h",
+            "py4godot/cppclasses/VisualShaderNodeComment/VisualShaderNodeComment.h",
+            "py4godot/cppclasses/VisualShaderNodeCompare/VisualShaderNodeCompare.h",
+            "py4godot/cppclasses/VisualShaderNodeConstant/VisualShaderNodeConstant.h",
+            "py4godot/cppclasses/VisualShaderNodeCubemap/VisualShaderNodeCubemap.h",
+            "py4godot/cppclasses/VisualShaderNodeCubemapParameter/VisualShaderNodeCubemapParameter.h",
+            "py4godot/cppclasses/VisualShaderNodeCurveTexture/VisualShaderNodeCurveTexture.h",
+            "py4godot/cppclasses/VisualShaderNodeCurveXYZTexture/VisualShaderNodeCurveXYZTexture.h",
+            "py4godot/cppclasses/VisualShaderNodeCustom/VisualShaderNodeCustom.h",
+            "py4godot/cppclasses/VisualShaderNodeDerivativeFunc/VisualShaderNodeDerivativeFunc.h",
+            "py4godot/cppclasses/VisualShaderNodeDeterminant/VisualShaderNodeDeterminant.h",
+            "py4godot/cppclasses/VisualShaderNodeDistanceFade/VisualShaderNodeDistanceFade.h",
+            "py4godot/cppclasses/VisualShaderNodeDotProduct/VisualShaderNodeDotProduct.h",
+            "py4godot/cppclasses/VisualShaderNodeExpression/VisualShaderNodeExpression.h",
+            "py4godot/cppclasses/VisualShaderNodeFaceForward/VisualShaderNodeFaceForward.h",
+            "py4godot/cppclasses/VisualShaderNodeFloatConstant/VisualShaderNodeFloatConstant.h",
+            "py4godot/cppclasses/VisualShaderNodeFloatFunc/VisualShaderNodeFloatFunc.h",
+            "py4godot/cppclasses/VisualShaderNodeFloatOp/VisualShaderNodeFloatOp.h",
+            "py4godot/cppclasses/VisualShaderNodeFloatParameter/VisualShaderNodeFloatParameter.h",
+            "py4godot/cppclasses/VisualShaderNodeFrame/VisualShaderNodeFrame.h",
+            "py4godot/cppclasses/VisualShaderNodeFresnel/VisualShaderNodeFresnel.h",
+            "py4godot/cppclasses/VisualShaderNodeGlobalExpression/VisualShaderNodeGlobalExpression.h",
+            "py4godot/cppclasses/VisualShaderNodeGroupBase/VisualShaderNodeGroupBase.h",
+            "py4godot/cppclasses/VisualShaderNodeIf/VisualShaderNodeIf.h",
+            "py4godot/cppclasses/VisualShaderNodeInput/VisualShaderNodeInput.h",
+            "py4godot/cppclasses/VisualShaderNodeIntConstant/VisualShaderNodeIntConstant.h",
+            "py4godot/cppclasses/VisualShaderNodeIntFunc/VisualShaderNodeIntFunc.h",
+            "py4godot/cppclasses/VisualShaderNodeIntOp/VisualShaderNodeIntOp.h",
+            "py4godot/cppclasses/VisualShaderNodeIntParameter/VisualShaderNodeIntParameter.h",
+            "py4godot/cppclasses/VisualShaderNodeIs/VisualShaderNodeIs.h",
+            "py4godot/cppclasses/VisualShaderNodeLinearSceneDepth/VisualShaderNodeLinearSceneDepth.h",
+            "py4godot/cppclasses/VisualShaderNodeMix/VisualShaderNodeMix.h",
+            "py4godot/cppclasses/VisualShaderNodeMultiplyAdd/VisualShaderNodeMultiplyAdd.h",
+            "py4godot/cppclasses/VisualShaderNodeOuterProduct/VisualShaderNodeOuterProduct.h",
+            "py4godot/cppclasses/VisualShaderNodeOutput/VisualShaderNodeOutput.h",
+            "py4godot/cppclasses/VisualShaderNodeParameter/VisualShaderNodeParameter.h",
+            "py4godot/cppclasses/VisualShaderNodeParameterRef/VisualShaderNodeParameterRef.h",
+            "py4godot/cppclasses/VisualShaderNodeParticleAccelerator/VisualShaderNodeParticleAccelerator.h",
+            "py4godot/cppclasses/VisualShaderNodeParticleBoxEmitter/VisualShaderNodeParticleBoxEmitter.h",
+            "py4godot/cppclasses/VisualShaderNodeParticleConeVelocity/VisualShaderNodeParticleConeVelocity.h",
+            "py4godot/cppclasses/VisualShaderNodeParticleEmit/VisualShaderNodeParticleEmit.h",
+            "py4godot/cppclasses/VisualShaderNodeParticleEmitter/VisualShaderNodeParticleEmitter.h",
+            "py4godot/cppclasses/VisualShaderNodeParticleMeshEmitter/VisualShaderNodeParticleMeshEmitter.h",
+            "py4godot/cppclasses/VisualShaderNodeParticleMultiplyByAxisAngle/VisualShaderNodeParticleMultiplyByAxisAngle.h",
+            "py4godot/cppclasses/VisualShaderNodeParticleOutput/VisualShaderNodeParticleOutput.h",
+            "py4godot/cppclasses/VisualShaderNodeParticleRandomness/VisualShaderNodeParticleRandomness.h",
+            "py4godot/cppclasses/VisualShaderNodeParticleRingEmitter/VisualShaderNodeParticleRingEmitter.h",
+            "py4godot/cppclasses/VisualShaderNodeParticleSphereEmitter/VisualShaderNodeParticleSphereEmitter.h",
+            "py4godot/cppclasses/VisualShaderNodeProximityFade/VisualShaderNodeProximityFade.h",
+            "py4godot/cppclasses/VisualShaderNodeRandomRange/VisualShaderNodeRandomRange.h",
+            "py4godot/cppclasses/VisualShaderNodeRemap/VisualShaderNodeRemap.h",
+            "py4godot/cppclasses/VisualShaderNodeReroute/VisualShaderNodeReroute.h",
+            "py4godot/cppclasses/VisualShaderNodeResizableBase/VisualShaderNodeResizableBase.h",
+            "py4godot/cppclasses/VisualShaderNodeRotationByAxis/VisualShaderNodeRotationByAxis.h",
+            "py4godot/cppclasses/VisualShaderNodeSDFRaymarch/VisualShaderNodeSDFRaymarch.h",
+            "py4godot/cppclasses/VisualShaderNodeSDFToScreenUV/VisualShaderNodeSDFToScreenUV.h",
+            "py4godot/cppclasses/VisualShaderNodeSample3D/VisualShaderNodeSample3D.h",
+            "py4godot/cppclasses/VisualShaderNodeScreenNormalWorldSpace/VisualShaderNodeScreenNormalWorldSpace.h",
+            "py4godot/cppclasses/VisualShaderNodeScreenUVToSDF/VisualShaderNodeScreenUVToSDF.h",
+            "py4godot/cppclasses/VisualShaderNodeSmoothStep/VisualShaderNodeSmoothStep.h",
+            "py4godot/cppclasses/VisualShaderNodeStep/VisualShaderNodeStep.h",
+            "py4godot/cppclasses/VisualShaderNodeSwitch/VisualShaderNodeSwitch.h",
+            "py4godot/cppclasses/VisualShaderNodeTexture/VisualShaderNodeTexture.h",
+            "py4godot/cppclasses/VisualShaderNodeTexture2DArray/VisualShaderNodeTexture2DArray.h",
+            "py4godot/cppclasses/VisualShaderNodeTexture2DArrayParameter/VisualShaderNodeTexture2DArrayParameter.h",
+            "py4godot/cppclasses/VisualShaderNodeTexture2DParameter/VisualShaderNodeTexture2DParameter.h",
+            "py4godot/cppclasses/VisualShaderNodeTexture3D/VisualShaderNodeTexture3D.h",
+            "py4godot/cppclasses/VisualShaderNodeTexture3DParameter/VisualShaderNodeTexture3DParameter.h",
+            "py4godot/cppclasses/VisualShaderNodeTextureParameter/VisualShaderNodeTextureParameter.h",
+            "py4godot/cppclasses/VisualShaderNodeTextureParameterTriplanar/VisualShaderNodeTextureParameterTriplanar.h",
+            "py4godot/cppclasses/VisualShaderNodeTextureSDF/VisualShaderNodeTextureSDF.h",
+            "py4godot/cppclasses/VisualShaderNodeTextureSDFNormal/VisualShaderNodeTextureSDFNormal.h",
+            "py4godot/cppclasses/VisualShaderNodeTransformCompose/VisualShaderNodeTransformCompose.h",
+            "py4godot/cppclasses/VisualShaderNodeTransformConstant/VisualShaderNodeTransformConstant.h",
+            "py4godot/cppclasses/VisualShaderNodeTransformDecompose/VisualShaderNodeTransformDecompose.h",
+            "py4godot/cppclasses/VisualShaderNodeTransformFunc/VisualShaderNodeTransformFunc.h",
+            "py4godot/cppclasses/VisualShaderNodeTransformOp/VisualShaderNodeTransformOp.h",
+            "py4godot/cppclasses/VisualShaderNodeTransformParameter/VisualShaderNodeTransformParameter.h",
+            "py4godot/cppclasses/VisualShaderNodeTransformVecMult/VisualShaderNodeTransformVecMult.h",
+            "py4godot/cppclasses/VisualShaderNodeUIntConstant/VisualShaderNodeUIntConstant.h",
+            "py4godot/cppclasses/VisualShaderNodeUIntFunc/VisualShaderNodeUIntFunc.h",
+            "py4godot/cppclasses/VisualShaderNodeUIntOp/VisualShaderNodeUIntOp.h",
+            "py4godot/cppclasses/VisualShaderNodeUIntParameter/VisualShaderNodeUIntParameter.h",
+            "py4godot/cppclasses/VisualShaderNodeUVFunc/VisualShaderNodeUVFunc.h",
+            "py4godot/cppclasses/VisualShaderNodeUVPolarCoord/VisualShaderNodeUVPolarCoord.h",
+            "py4godot/cppclasses/VisualShaderNodeVarying/VisualShaderNodeVarying.h",
+            "py4godot/cppclasses/VisualShaderNodeVaryingGetter/VisualShaderNodeVaryingGetter.h",
+            "py4godot/cppclasses/VisualShaderNodeVaryingSetter/VisualShaderNodeVaryingSetter.h",
+            "py4godot/cppclasses/VisualShaderNodeVec2Constant/VisualShaderNodeVec2Constant.h",
+            "py4godot/cppclasses/VisualShaderNodeVec2Parameter/VisualShaderNodeVec2Parameter.h",
+            "py4godot/cppclasses/VisualShaderNodeVec3Constant/VisualShaderNodeVec3Constant.h",
+            "py4godot/cppclasses/VisualShaderNodeVec3Parameter/VisualShaderNodeVec3Parameter.h",
+            "py4godot/cppclasses/VisualShaderNodeVec4Constant/VisualShaderNodeVec4Constant.h",
+            "py4godot/cppclasses/VisualShaderNodeVec4Parameter/VisualShaderNodeVec4Parameter.h",
+            "py4godot/cppclasses/VisualShaderNodeVectorBase/VisualShaderNodeVectorBase.h",
+            "py4godot/cppclasses/VisualShaderNodeVectorCompose/VisualShaderNodeVectorCompose.h",
+            "py4godot/cppclasses/VisualShaderNodeVectorDecompose/VisualShaderNodeVectorDecompose.h",
+            "py4godot/cppclasses/VisualShaderNodeVectorDistance/VisualShaderNodeVectorDistance.h",
+            "py4godot/cppclasses/VisualShaderNodeVectorFunc/VisualShaderNodeVectorFunc.h",
+            "py4godot/cppclasses/VisualShaderNodeVectorLen/VisualShaderNodeVectorLen.h",
+            "py4godot/cppclasses/VisualShaderNodeVectorOp/VisualShaderNodeVectorOp.h",
+            "py4godot/cppclasses/VisualShaderNodeVectorRefract/VisualShaderNodeVectorRefract.h",
+            "py4godot/cppclasses/VisualShaderNodeWorldPositionFromDepth/VisualShaderNodeWorldPositionFromDepth.h",
+            "py4godot/cppclasses/VoxelGI/VoxelGI.h",
+            "py4godot/cppclasses/VoxelGIData/VoxelGIData.h",
+            "py4godot/cppclasses/WeakRef/WeakRef.h",
+            "py4godot/cppclasses/WebRTCDataChannel/WebRTCDataChannel.h",
+            "py4godot/cppclasses/WebRTCDataChannelExtension/WebRTCDataChannelExtension.h",
+            "py4godot/cppclasses/WebRTCMultiplayerPeer/WebRTCMultiplayerPeer.h",
+            "py4godot/cppclasses/WebRTCPeerConnection/WebRTCPeerConnection.h",
+            "py4godot/cppclasses/WebRTCPeerConnectionExtension/WebRTCPeerConnectionExtension.h",
+            "py4godot/cppclasses/WebSocketMultiplayerPeer/WebSocketMultiplayerPeer.h",
+            "py4godot/cppclasses/WebSocketPeer/WebSocketPeer.h",
+            "py4godot/cppclasses/WebXRInterface/WebXRInterface.h",
+            "py4godot/cppclasses/Window/Window.h",
+            "py4godot/cppclasses/WorkerThreadPool/WorkerThreadPool.h",
+            "py4godot/cppclasses/World2D/World2D.h",
+            "py4godot/cppclasses/World3D/World3D.h",
+            "py4godot/cppclasses/WorldBoundaryShape2D/WorldBoundaryShape2D.h",
+            "py4godot/cppclasses/WorldBoundaryShape3D/WorldBoundaryShape3D.h",
+            "py4godot/cppclasses/WorldEnvironment/WorldEnvironment.h",
+            "py4godot/cppclasses/X509Certificate/X509Certificate.h",
+            "py4godot/cppclasses/XMLParser/XMLParser.h",
+            "py4godot/cppclasses/XRAnchor3D/XRAnchor3D.h",
+            "py4godot/cppclasses/XRBodyModifier3D/XRBodyModifier3D.h",
+            "py4godot/cppclasses/XRBodyTracker/XRBodyTracker.h",
+            "py4godot/cppclasses/XRCamera3D/XRCamera3D.h",
+            "py4godot/cppclasses/XRController3D/XRController3D.h",
+            "py4godot/cppclasses/XRControllerTracker/XRControllerTracker.h",
+            "py4godot/cppclasses/XRFaceModifier3D/XRFaceModifier3D.h",
+            "py4godot/cppclasses/XRFaceTracker/XRFaceTracker.h",
+            "py4godot/cppclasses/XRHandModifier3D/XRHandModifier3D.h",
+            "py4godot/cppclasses/XRHandTracker/XRHandTracker.h",
+            "py4godot/cppclasses/XRInterface/XRInterface.h",
+            "py4godot/cppclasses/XRInterfaceExtension/XRInterfaceExtension.h",
+            "py4godot/cppclasses/XRNode3D/XRNode3D.h",
+            "py4godot/cppclasses/XROrigin3D/XROrigin3D.h",
+            "py4godot/cppclasses/XRPose/XRPose.h",
+            "py4godot/cppclasses/XRPositionalTracker/XRPositionalTracker.h",
+            "py4godot/cppclasses/XRServer/XRServer.h",
+            "py4godot/cppclasses/XRTracker/XRTracker.h",
+            "py4godot/cppclasses/XRVRS/XRVRS.h",
+            "py4godot/cppclasses/ZIPPacker/ZIPPacker.h",
+            "py4godot/cppclasses/ZIPReader/ZIPReader.h",
+            "py4godot/cppclasses/generated4_core.h",
+            "py4godot/cppclasses/typedarrays.h",
+            "py4godot/cppcore/Variant.h",
+            "py4godot/cpputils/VariantTypeWrapper.h",
+            "py4godot/cpputils/Wrapper.h",
+            "py4godot/godot_bindings/binding4.h",
+            "py4godot/godot_bindings/functions.h"
         ],
         "include_dirs": [
-            "py4godot\\core\\variant4",
-            "py4godot\\godot_bindings"
+            "py4godot/core/variant4",
+            "py4godot/godot_bindings"
         ],
         "language": "c++",
         "name": "py4godot.utils.instance_utils",
@@ -3382,14 +3382,14 @@ static const char *__pyx_filename;
 /* #### Code section: filename_table ### */
 
 static const char *__pyx_f[] = {
-  "myenv\\\\Lib\\\\site-packages\\\\Cython\\\\Includes\\\\cpython\\\\contextvars.pxd",
-  "py4godot\\\\utils\\\\instance_utils.pyx",
-  "myenv\\\\Lib\\\\site-packages\\\\Cython\\\\Includes\\\\cpython\\\\type.pxd",
-  "myenv\\\\Lib\\\\site-packages\\\\Cython\\\\Includes\\\\cpython\\\\bool.pxd",
-  "myenv\\\\Lib\\\\site-packages\\\\Cython\\\\Includes\\\\cpython\\\\complex.pxd",
-  "py4godot\\\\core\\\\variant4\\\\Variant4.pxd",
-  "py4godot\\\\classes\\\\core.pxd",
-  "py4godot\\\\classes\\\\Object\\\\Object.pxd",
+  "venv/lib/python3.12/site-packages/Cython/Includes/cpython/contextvars.pxd",
+  "py4godot/utils/instance_utils.pyx",
+  "venv/lib/python3.12/site-packages/Cython/Includes/cpython/type.pxd",
+  "venv/lib/python3.12/site-packages/Cython/Includes/cpython/bool.pxd",
+  "venv/lib/python3.12/site-packages/Cython/Includes/cpython/complex.pxd",
+  "py4godot/core/variant4/Variant4.pxd",
+  "py4godot/classes/core.pxd",
+  "py4godot/classes/Object/Object.pxd",
 };
 /* #### Code section: utility_code_proto_before_types ### */
 /* ForceInitThreads.proto */
@@ -3468,7 +3468,7 @@ struct __pyx_obj_8py4godot_7classes_6Object_6Object_Object;
 struct __pyx_opt_args_7cpython_11contextvars_get_value;
 struct __pyx_opt_args_7cpython_11contextvars_get_value_no_default;
 
-/* "cpython/contextvars.pxd":113
+/* "cpython/contextvars.pxd":112
  * 
  * 
  * cdef inline object get_value(var, default_value=None):             # <<<<<<<<<<<<<<
@@ -3480,7 +3480,7 @@ struct __pyx_opt_args_7cpython_11contextvars_get_value {
   PyObject *default_value;
 };
 
-/* "cpython/contextvars.pxd":130
+/* "cpython/contextvars.pxd":129
  * 
  * 
  * cdef inline object get_value_no_default(var, default_value=None):             # <<<<<<<<<<<<<<
@@ -3701,7 +3701,7 @@ typedef void (*__pyx_t_8py4godot_14godot_bindings_15binding4_godot4_GDExtensionP
 struct __pyx_t_8py4godot_7classes_10cpp_bridge_Error;
 struct __pyx_t_8py4godot_7classes_10cpp_bridge_Error {
 
-  /* "py4godot/classes/cpp_bridge.pxd":8
+  /* "py4godot/classes/cpp_bridge.pxd":7
  * from libcpp.memory cimport shared_ptr
  * 
  * cdef cppclass Error:             # <<<<<<<<<<<<<<
@@ -3710,7 +3710,7 @@ struct __pyx_t_8py4godot_7classes_10cpp_bridge_Error {
  */
 };
 
-/* "py4godot/classes/core.pxd":49
+/* "py4godot/classes/core.pxd":48
  * 
  * 
  * cpdef enum Vector2__Axis:             # <<<<<<<<<<<<<<
@@ -3722,7 +3722,7 @@ enum __pyx_t_8py4godot_7classes_4core_Vector2__Axis {
   __pyx_e_8py4godot_7classes_4core_Vector2__AXIS_Y = 1
 };
 
-/* "py4godot/classes/core.pxd":63
+/* "py4godot/classes/core.pxd":62
  * 
  * 
  * cpdef enum Vector2i__Axis:             # <<<<<<<<<<<<<<
@@ -3734,7 +3734,7 @@ enum __pyx_t_8py4godot_7classes_4core_Vector2i__Axis {
   __pyx_e_8py4godot_7classes_4core_Vector2i__AXIS_Y = 1
 };
 
-/* "py4godot/classes/core.pxd":97
+/* "py4godot/classes/core.pxd":96
  * 
  * 
  * cpdef enum Vector3__Axis:             # <<<<<<<<<<<<<<
@@ -3747,7 +3747,7 @@ enum __pyx_t_8py4godot_7classes_4core_Vector3__Axis {
   __pyx_e_8py4godot_7classes_4core_Vector3__AXIS_Z = 2
 };
 
-/* "py4godot/classes/core.pxd":112
+/* "py4godot/classes/core.pxd":111
  * 
  * 
  * cpdef enum Vector3i__Axis:             # <<<<<<<<<<<<<<
@@ -3760,7 +3760,7 @@ enum __pyx_t_8py4godot_7classes_4core_Vector3i__Axis {
   __pyx_e_8py4godot_7classes_4core_Vector3i__AXIS_Z = 2
 };
 
-/* "py4godot/classes/core.pxd":137
+/* "py4godot/classes/core.pxd":136
  * 
  * 
  * cpdef enum Vector4__Axis:             # <<<<<<<<<<<<<<
@@ -3774,7 +3774,7 @@ enum __pyx_t_8py4godot_7classes_4core_Vector4__Axis {
   __pyx_e_8py4godot_7classes_4core_Vector4__AXIS_W = 3
 };
 
-/* "py4godot/classes/core.pxd":153
+/* "py4godot/classes/core.pxd":152
  * 
  * 
  * cpdef enum Vector4i__Axis:             # <<<<<<<<<<<<<<
@@ -3788,7 +3788,7 @@ enum __pyx_t_8py4godot_7classes_4core_Vector4i__Axis {
   __pyx_e_8py4godot_7classes_4core_Vector4i__AXIS_W = 3
 };
 
-/* "py4godot/classes/core.pxd":219
+/* "py4godot/classes/core.pxd":218
  * 
  * 
  * cpdef enum Projection__Planes:             # <<<<<<<<<<<<<<
@@ -3832,7 +3832,7 @@ struct __pyx_obj_8py4godot_4core_8variant4_8Variant4_PyVariant {
 };
 
 
-/* "py4godot/classes/core.pxd":40
+/* "py4godot/classes/core.pxd":39
  * 
  * 
  * cdef class String():             # <<<<<<<<<<<<<<
@@ -3846,7 +3846,7 @@ struct __pyx_obj_8py4godot_7classes_4core_String {
 };
 
 
-/* "py4godot/classes/core.pxd":54
+/* "py4godot/classes/core.pxd":53
  * 
  * 
  * cdef class Vector2():             # <<<<<<<<<<<<<<
@@ -3860,7 +3860,7 @@ struct __pyx_obj_8py4godot_7classes_4core_Vector2 {
 };
 
 
-/* "py4godot/classes/core.pxd":68
+/* "py4godot/classes/core.pxd":67
  * 
  * 
  * cdef class Vector2i():             # <<<<<<<<<<<<<<
@@ -3874,7 +3874,7 @@ struct __pyx_obj_8py4godot_7classes_4core_Vector2i {
 };
 
 
-/* "py4godot/classes/core.pxd":78
+/* "py4godot/classes/core.pxd":77
  * 
  * 
  * cdef class Rect2():             # <<<<<<<<<<<<<<
@@ -3888,7 +3888,7 @@ struct __pyx_obj_8py4godot_7classes_4core_Rect2 {
 };
 
 
-/* "py4godot/classes/core.pxd":88
+/* "py4godot/classes/core.pxd":87
  * 
  * 
  * cdef class Rect2i():             # <<<<<<<<<<<<<<
@@ -3902,7 +3902,7 @@ struct __pyx_obj_8py4godot_7classes_4core_Rect2i {
 };
 
 
-/* "py4godot/classes/core.pxd":103
+/* "py4godot/classes/core.pxd":102
  * 
  * 
  * cdef class Vector3():             # <<<<<<<<<<<<<<
@@ -3916,7 +3916,7 @@ struct __pyx_obj_8py4godot_7classes_4core_Vector3 {
 };
 
 
-/* "py4godot/classes/core.pxd":118
+/* "py4godot/classes/core.pxd":117
  * 
  * 
  * cdef class Vector3i():             # <<<<<<<<<<<<<<
@@ -3930,7 +3930,7 @@ struct __pyx_obj_8py4godot_7classes_4core_Vector3i {
 };
 
 
-/* "py4godot/classes/core.pxd":128
+/* "py4godot/classes/core.pxd":127
  * 
  * 
  * cdef class Transform2D():             # <<<<<<<<<<<<<<
@@ -3944,7 +3944,7 @@ struct __pyx_obj_8py4godot_7classes_4core_Transform2D {
 };
 
 
-/* "py4godot/classes/core.pxd":144
+/* "py4godot/classes/core.pxd":143
  * 
  * 
  * cdef class Vector4():             # <<<<<<<<<<<<<<
@@ -3958,7 +3958,7 @@ struct __pyx_obj_8py4godot_7classes_4core_Vector4 {
 };
 
 
-/* "py4godot/classes/core.pxd":160
+/* "py4godot/classes/core.pxd":159
  * 
  * 
  * cdef class Vector4i():             # <<<<<<<<<<<<<<
@@ -3972,7 +3972,7 @@ struct __pyx_obj_8py4godot_7classes_4core_Vector4i {
 };
 
 
-/* "py4godot/classes/core.pxd":170
+/* "py4godot/classes/core.pxd":169
  * 
  * 
  * cdef class Plane():             # <<<<<<<<<<<<<<
@@ -3986,7 +3986,7 @@ struct __pyx_obj_8py4godot_7classes_4core_Plane {
 };
 
 
-/* "py4godot/classes/core.pxd":180
+/* "py4godot/classes/core.pxd":179
  * 
  * 
  * cdef class Quaternion():             # <<<<<<<<<<<<<<
@@ -4000,7 +4000,7 @@ struct __pyx_obj_8py4godot_7classes_4core_Quaternion {
 };
 
 
-/* "py4godot/classes/core.pxd":190
+/* "py4godot/classes/core.pxd":189
  * 
  * 
  * cdef class AABB():             # <<<<<<<<<<<<<<
@@ -4014,7 +4014,7 @@ struct __pyx_obj_8py4godot_7classes_4core_AABB {
 };
 
 
-/* "py4godot/classes/core.pxd":200
+/* "py4godot/classes/core.pxd":199
  * 
  * 
  * cdef class Basis():             # <<<<<<<<<<<<<<
@@ -4028,7 +4028,7 @@ struct __pyx_obj_8py4godot_7classes_4core_Basis {
 };
 
 
-/* "py4godot/classes/core.pxd":210
+/* "py4godot/classes/core.pxd":209
  * 
  * 
  * cdef class Transform3D():             # <<<<<<<<<<<<<<
@@ -4042,7 +4042,7 @@ struct __pyx_obj_8py4godot_7classes_4core_Transform3D {
 };
 
 
-/* "py4godot/classes/core.pxd":228
+/* "py4godot/classes/core.pxd":227
  * 
  * 
  * cdef class Projection():             # <<<<<<<<<<<<<<
@@ -4056,7 +4056,7 @@ struct __pyx_obj_8py4godot_7classes_4core_Projection {
 };
 
 
-/* "py4godot/classes/core.pxd":238
+/* "py4godot/classes/core.pxd":237
  * 
  * 
  * cdef class Color():             # <<<<<<<<<<<<<<
@@ -4070,7 +4070,7 @@ struct __pyx_obj_8py4godot_7classes_4core_Color {
 };
 
 
-/* "py4godot/classes/core.pxd":248
+/* "py4godot/classes/core.pxd":247
  * 
  * 
  * cdef class StringName():             # <<<<<<<<<<<<<<
@@ -4084,7 +4084,7 @@ struct __pyx_obj_8py4godot_7classes_4core_StringName {
 };
 
 
-/* "py4godot/classes/core.pxd":258
+/* "py4godot/classes/core.pxd":257
  * 
  * 
  * cdef class NodePath():             # <<<<<<<<<<<<<<
@@ -4098,7 +4098,7 @@ struct __pyx_obj_8py4godot_7classes_4core_NodePath {
 };
 
 
-/* "py4godot/classes/core.pxd":268
+/* "py4godot/classes/core.pxd":267
  * 
  * 
  * cdef class RID():             # <<<<<<<<<<<<<<
@@ -4112,7 +4112,7 @@ struct __pyx_obj_8py4godot_7classes_4core_RID {
 };
 
 
-/* "py4godot/classes/core.pxd":278
+/* "py4godot/classes/core.pxd":277
  * 
  * 
  * cdef class Callable():             # <<<<<<<<<<<<<<
@@ -4126,7 +4126,7 @@ struct __pyx_obj_8py4godot_7classes_4core_Callable {
 };
 
 
-/* "py4godot/classes/core.pxd":288
+/* "py4godot/classes/core.pxd":287
  * 
  * 
  * cdef class Signal():             # <<<<<<<<<<<<<<
@@ -4140,7 +4140,7 @@ struct __pyx_obj_8py4godot_7classes_4core_Signal {
 };
 
 
-/* "py4godot/classes/core.pxd":298
+/* "py4godot/classes/core.pxd":297
  * 
  * 
  * cdef class Dictionary():             # <<<<<<<<<<<<<<
@@ -4154,7 +4154,7 @@ struct __pyx_obj_8py4godot_7classes_4core_Dictionary {
 };
 
 
-/* "py4godot/classes/core.pxd":308
+/* "py4godot/classes/core.pxd":307
  * 
  * 
  * cdef class Array():             # <<<<<<<<<<<<<<
@@ -4169,7 +4169,7 @@ struct __pyx_obj_8py4godot_7classes_4core_Array {
 };
 
 
-/* "py4godot/classes/core.pxd":318
+/* "py4godot/classes/core.pxd":317
  * 
  * 
  * cdef class PackedByteArray():             # <<<<<<<<<<<<<<
@@ -4184,7 +4184,7 @@ struct __pyx_obj_8py4godot_7classes_4core_PackedByteArray {
 };
 
 
-/* "py4godot/classes/core.pxd":328
+/* "py4godot/classes/core.pxd":327
  * 
  * 
  * cdef class PackedInt32Array():             # <<<<<<<<<<<<<<
@@ -4199,7 +4199,7 @@ struct __pyx_obj_8py4godot_7classes_4core_PackedInt32Array {
 };
 
 
-/* "py4godot/classes/core.pxd":338
+/* "py4godot/classes/core.pxd":337
  * 
  * 
  * cdef class PackedInt64Array():             # <<<<<<<<<<<<<<
@@ -4214,7 +4214,7 @@ struct __pyx_obj_8py4godot_7classes_4core_PackedInt64Array {
 };
 
 
-/* "py4godot/classes/core.pxd":348
+/* "py4godot/classes/core.pxd":347
  * 
  * 
  * cdef class PackedFloat32Array():             # <<<<<<<<<<<<<<
@@ -4229,7 +4229,7 @@ struct __pyx_obj_8py4godot_7classes_4core_PackedFloat32Array {
 };
 
 
-/* "py4godot/classes/core.pxd":358
+/* "py4godot/classes/core.pxd":357
  * 
  * 
  * cdef class PackedFloat64Array():             # <<<<<<<<<<<<<<
@@ -4244,7 +4244,7 @@ struct __pyx_obj_8py4godot_7classes_4core_PackedFloat64Array {
 };
 
 
-/* "py4godot/classes/core.pxd":368
+/* "py4godot/classes/core.pxd":367
  * 
  * 
  * cdef class PackedStringArray():             # <<<<<<<<<<<<<<
@@ -4259,7 +4259,7 @@ struct __pyx_obj_8py4godot_7classes_4core_PackedStringArray {
 };
 
 
-/* "py4godot/classes/core.pxd":378
+/* "py4godot/classes/core.pxd":377
  * 
  * 
  * cdef class PackedVector2Array():             # <<<<<<<<<<<<<<
@@ -4274,7 +4274,7 @@ struct __pyx_obj_8py4godot_7classes_4core_PackedVector2Array {
 };
 
 
-/* "py4godot/classes/core.pxd":388
+/* "py4godot/classes/core.pxd":387
  * 
  * 
  * cdef class PackedVector3Array():             # <<<<<<<<<<<<<<
@@ -4289,7 +4289,7 @@ struct __pyx_obj_8py4godot_7classes_4core_PackedVector3Array {
 };
 
 
-/* "py4godot/classes/core.pxd":398
+/* "py4godot/classes/core.pxd":397
  * 
  * 
  * cdef class PackedColorArray():             # <<<<<<<<<<<<<<
@@ -4304,7 +4304,7 @@ struct __pyx_obj_8py4godot_7classes_4core_PackedColorArray {
 };
 
 
-/* "py4godot/classes/core.pxd":408
+/* "py4godot/classes/core.pxd":407
  * 
  * 
  * cdef class PackedVector4Array():             # <<<<<<<<<<<<<<
@@ -4352,7 +4352,7 @@ struct __pyx_vtabstruct_8py4godot_4core_8variant4_8Variant4_PyVariant {
 static struct __pyx_vtabstruct_8py4godot_4core_8variant4_8Variant4_PyVariant *__pyx_vtabptr_8py4godot_4core_8variant4_8Variant4_PyVariant;
 
 
-/* "py4godot/classes/core.pxd":40
+/* "py4godot/classes/core.pxd":39
  * 
  * 
  * cdef class String():             # <<<<<<<<<<<<<<
@@ -4366,7 +4366,7 @@ struct __pyx_vtabstruct_8py4godot_7classes_4core_String {
 static struct __pyx_vtabstruct_8py4godot_7classes_4core_String *__pyx_vtabptr_8py4godot_7classes_4core_String;
 
 
-/* "py4godot/classes/core.pxd":54
+/* "py4godot/classes/core.pxd":53
  * 
  * 
  * cdef class Vector2():             # <<<<<<<<<<<<<<
@@ -4380,7 +4380,7 @@ struct __pyx_vtabstruct_8py4godot_7classes_4core_Vector2 {
 static struct __pyx_vtabstruct_8py4godot_7classes_4core_Vector2 *__pyx_vtabptr_8py4godot_7classes_4core_Vector2;
 
 
-/* "py4godot/classes/core.pxd":68
+/* "py4godot/classes/core.pxd":67
  * 
  * 
  * cdef class Vector2i():             # <<<<<<<<<<<<<<
@@ -4394,7 +4394,7 @@ struct __pyx_vtabstruct_8py4godot_7classes_4core_Vector2i {
 static struct __pyx_vtabstruct_8py4godot_7classes_4core_Vector2i *__pyx_vtabptr_8py4godot_7classes_4core_Vector2i;
 
 
-/* "py4godot/classes/core.pxd":78
+/* "py4godot/classes/core.pxd":77
  * 
  * 
  * cdef class Rect2():             # <<<<<<<<<<<<<<
@@ -4408,7 +4408,7 @@ struct __pyx_vtabstruct_8py4godot_7classes_4core_Rect2 {
 static struct __pyx_vtabstruct_8py4godot_7classes_4core_Rect2 *__pyx_vtabptr_8py4godot_7classes_4core_Rect2;
 
 
-/* "py4godot/classes/core.pxd":88
+/* "py4godot/classes/core.pxd":87
  * 
  * 
  * cdef class Rect2i():             # <<<<<<<<<<<<<<
@@ -4422,7 +4422,7 @@ struct __pyx_vtabstruct_8py4godot_7classes_4core_Rect2i {
 static struct __pyx_vtabstruct_8py4godot_7classes_4core_Rect2i *__pyx_vtabptr_8py4godot_7classes_4core_Rect2i;
 
 
-/* "py4godot/classes/core.pxd":103
+/* "py4godot/classes/core.pxd":102
  * 
  * 
  * cdef class Vector3():             # <<<<<<<<<<<<<<
@@ -4436,7 +4436,7 @@ struct __pyx_vtabstruct_8py4godot_7classes_4core_Vector3 {
 static struct __pyx_vtabstruct_8py4godot_7classes_4core_Vector3 *__pyx_vtabptr_8py4godot_7classes_4core_Vector3;
 
 
-/* "py4godot/classes/core.pxd":118
+/* "py4godot/classes/core.pxd":117
  * 
  * 
  * cdef class Vector3i():             # <<<<<<<<<<<<<<
@@ -4450,7 +4450,7 @@ struct __pyx_vtabstruct_8py4godot_7classes_4core_Vector3i {
 static struct __pyx_vtabstruct_8py4godot_7classes_4core_Vector3i *__pyx_vtabptr_8py4godot_7classes_4core_Vector3i;
 
 
-/* "py4godot/classes/core.pxd":128
+/* "py4godot/classes/core.pxd":127
  * 
  * 
  * cdef class Transform2D():             # <<<<<<<<<<<<<<
@@ -4464,7 +4464,7 @@ struct __pyx_vtabstruct_8py4godot_7classes_4core_Transform2D {
 static struct __pyx_vtabstruct_8py4godot_7classes_4core_Transform2D *__pyx_vtabptr_8py4godot_7classes_4core_Transform2D;
 
 
-/* "py4godot/classes/core.pxd":144
+/* "py4godot/classes/core.pxd":143
  * 
  * 
  * cdef class Vector4():             # <<<<<<<<<<<<<<
@@ -4478,7 +4478,7 @@ struct __pyx_vtabstruct_8py4godot_7classes_4core_Vector4 {
 static struct __pyx_vtabstruct_8py4godot_7classes_4core_Vector4 *__pyx_vtabptr_8py4godot_7classes_4core_Vector4;
 
 
-/* "py4godot/classes/core.pxd":160
+/* "py4godot/classes/core.pxd":159
  * 
  * 
  * cdef class Vector4i():             # <<<<<<<<<<<<<<
@@ -4492,7 +4492,7 @@ struct __pyx_vtabstruct_8py4godot_7classes_4core_Vector4i {
 static struct __pyx_vtabstruct_8py4godot_7classes_4core_Vector4i *__pyx_vtabptr_8py4godot_7classes_4core_Vector4i;
 
 
-/* "py4godot/classes/core.pxd":170
+/* "py4godot/classes/core.pxd":169
  * 
  * 
  * cdef class Plane():             # <<<<<<<<<<<<<<
@@ -4506,7 +4506,7 @@ struct __pyx_vtabstruct_8py4godot_7classes_4core_Plane {
 static struct __pyx_vtabstruct_8py4godot_7classes_4core_Plane *__pyx_vtabptr_8py4godot_7classes_4core_Plane;
 
 
-/* "py4godot/classes/core.pxd":180
+/* "py4godot/classes/core.pxd":179
  * 
  * 
  * cdef class Quaternion():             # <<<<<<<<<<<<<<
@@ -4520,7 +4520,7 @@ struct __pyx_vtabstruct_8py4godot_7classes_4core_Quaternion {
 static struct __pyx_vtabstruct_8py4godot_7classes_4core_Quaternion *__pyx_vtabptr_8py4godot_7classes_4core_Quaternion;
 
 
-/* "py4godot/classes/core.pxd":190
+/* "py4godot/classes/core.pxd":189
  * 
  * 
  * cdef class AABB():             # <<<<<<<<<<<<<<
@@ -4534,7 +4534,7 @@ struct __pyx_vtabstruct_8py4godot_7classes_4core_AABB {
 static struct __pyx_vtabstruct_8py4godot_7classes_4core_AABB *__pyx_vtabptr_8py4godot_7classes_4core_AABB;
 
 
-/* "py4godot/classes/core.pxd":200
+/* "py4godot/classes/core.pxd":199
  * 
  * 
  * cdef class Basis():             # <<<<<<<<<<<<<<
@@ -4548,7 +4548,7 @@ struct __pyx_vtabstruct_8py4godot_7classes_4core_Basis {
 static struct __pyx_vtabstruct_8py4godot_7classes_4core_Basis *__pyx_vtabptr_8py4godot_7classes_4core_Basis;
 
 
-/* "py4godot/classes/core.pxd":210
+/* "py4godot/classes/core.pxd":209
  * 
  * 
  * cdef class Transform3D():             # <<<<<<<<<<<<<<
@@ -4562,7 +4562,7 @@ struct __pyx_vtabstruct_8py4godot_7classes_4core_Transform3D {
 static struct __pyx_vtabstruct_8py4godot_7classes_4core_Transform3D *__pyx_vtabptr_8py4godot_7classes_4core_Transform3D;
 
 
-/* "py4godot/classes/core.pxd":228
+/* "py4godot/classes/core.pxd":227
  * 
  * 
  * cdef class Projection():             # <<<<<<<<<<<<<<
@@ -4576,7 +4576,7 @@ struct __pyx_vtabstruct_8py4godot_7classes_4core_Projection {
 static struct __pyx_vtabstruct_8py4godot_7classes_4core_Projection *__pyx_vtabptr_8py4godot_7classes_4core_Projection;
 
 
-/* "py4godot/classes/core.pxd":238
+/* "py4godot/classes/core.pxd":237
  * 
  * 
  * cdef class Color():             # <<<<<<<<<<<<<<
@@ -4590,7 +4590,7 @@ struct __pyx_vtabstruct_8py4godot_7classes_4core_Color {
 static struct __pyx_vtabstruct_8py4godot_7classes_4core_Color *__pyx_vtabptr_8py4godot_7classes_4core_Color;
 
 
-/* "py4godot/classes/core.pxd":248
+/* "py4godot/classes/core.pxd":247
  * 
  * 
  * cdef class StringName():             # <<<<<<<<<<<<<<
@@ -4604,7 +4604,7 @@ struct __pyx_vtabstruct_8py4godot_7classes_4core_StringName {
 static struct __pyx_vtabstruct_8py4godot_7classes_4core_StringName *__pyx_vtabptr_8py4godot_7classes_4core_StringName;
 
 
-/* "py4godot/classes/core.pxd":258
+/* "py4godot/classes/core.pxd":257
  * 
  * 
  * cdef class NodePath():             # <<<<<<<<<<<<<<
@@ -4618,7 +4618,7 @@ struct __pyx_vtabstruct_8py4godot_7classes_4core_NodePath {
 static struct __pyx_vtabstruct_8py4godot_7classes_4core_NodePath *__pyx_vtabptr_8py4godot_7classes_4core_NodePath;
 
 
-/* "py4godot/classes/core.pxd":268
+/* "py4godot/classes/core.pxd":267
  * 
  * 
  * cdef class RID():             # <<<<<<<<<<<<<<
@@ -4632,7 +4632,7 @@ struct __pyx_vtabstruct_8py4godot_7classes_4core_RID {
 static struct __pyx_vtabstruct_8py4godot_7classes_4core_RID *__pyx_vtabptr_8py4godot_7classes_4core_RID;
 
 
-/* "py4godot/classes/core.pxd":278
+/* "py4godot/classes/core.pxd":277
  * 
  * 
  * cdef class Callable():             # <<<<<<<<<<<<<<
@@ -4646,7 +4646,7 @@ struct __pyx_vtabstruct_8py4godot_7classes_4core_Callable {
 static struct __pyx_vtabstruct_8py4godot_7classes_4core_Callable *__pyx_vtabptr_8py4godot_7classes_4core_Callable;
 
 
-/* "py4godot/classes/core.pxd":288
+/* "py4godot/classes/core.pxd":287
  * 
  * 
  * cdef class Signal():             # <<<<<<<<<<<<<<
@@ -4660,7 +4660,7 @@ struct __pyx_vtabstruct_8py4godot_7classes_4core_Signal {
 static struct __pyx_vtabstruct_8py4godot_7classes_4core_Signal *__pyx_vtabptr_8py4godot_7classes_4core_Signal;
 
 
-/* "py4godot/classes/core.pxd":298
+/* "py4godot/classes/core.pxd":297
  * 
  * 
  * cdef class Dictionary():             # <<<<<<<<<<<<<<
@@ -4674,7 +4674,7 @@ struct __pyx_vtabstruct_8py4godot_7classes_4core_Dictionary {
 static struct __pyx_vtabstruct_8py4godot_7classes_4core_Dictionary *__pyx_vtabptr_8py4godot_7classes_4core_Dictionary;
 
 
-/* "py4godot/classes/core.pxd":308
+/* "py4godot/classes/core.pxd":307
  * 
  * 
  * cdef class Array():             # <<<<<<<<<<<<<<
@@ -4688,7 +4688,7 @@ struct __pyx_vtabstruct_8py4godot_7classes_4core_Array {
 static struct __pyx_vtabstruct_8py4godot_7classes_4core_Array *__pyx_vtabptr_8py4godot_7classes_4core_Array;
 
 
-/* "py4godot/classes/core.pxd":318
+/* "py4godot/classes/core.pxd":317
  * 
  * 
  * cdef class PackedByteArray():             # <<<<<<<<<<<<<<
@@ -4702,7 +4702,7 @@ struct __pyx_vtabstruct_8py4godot_7classes_4core_PackedByteArray {
 static struct __pyx_vtabstruct_8py4godot_7classes_4core_PackedByteArray *__pyx_vtabptr_8py4godot_7classes_4core_PackedByteArray;
 
 
-/* "py4godot/classes/core.pxd":328
+/* "py4godot/classes/core.pxd":327
  * 
  * 
  * cdef class PackedInt32Array():             # <<<<<<<<<<<<<<
@@ -4716,7 +4716,7 @@ struct __pyx_vtabstruct_8py4godot_7classes_4core_PackedInt32Array {
 static struct __pyx_vtabstruct_8py4godot_7classes_4core_PackedInt32Array *__pyx_vtabptr_8py4godot_7classes_4core_PackedInt32Array;
 
 
-/* "py4godot/classes/core.pxd":338
+/* "py4godot/classes/core.pxd":337
  * 
  * 
  * cdef class PackedInt64Array():             # <<<<<<<<<<<<<<
@@ -4730,7 +4730,7 @@ struct __pyx_vtabstruct_8py4godot_7classes_4core_PackedInt64Array {
 static struct __pyx_vtabstruct_8py4godot_7classes_4core_PackedInt64Array *__pyx_vtabptr_8py4godot_7classes_4core_PackedInt64Array;
 
 
-/* "py4godot/classes/core.pxd":348
+/* "py4godot/classes/core.pxd":347
  * 
  * 
  * cdef class PackedFloat32Array():             # <<<<<<<<<<<<<<
@@ -4744,7 +4744,7 @@ struct __pyx_vtabstruct_8py4godot_7classes_4core_PackedFloat32Array {
 static struct __pyx_vtabstruct_8py4godot_7classes_4core_PackedFloat32Array *__pyx_vtabptr_8py4godot_7classes_4core_PackedFloat32Array;
 
 
-/* "py4godot/classes/core.pxd":358
+/* "py4godot/classes/core.pxd":357
  * 
  * 
  * cdef class PackedFloat64Array():             # <<<<<<<<<<<<<<
@@ -4758,7 +4758,7 @@ struct __pyx_vtabstruct_8py4godot_7classes_4core_PackedFloat64Array {
 static struct __pyx_vtabstruct_8py4godot_7classes_4core_PackedFloat64Array *__pyx_vtabptr_8py4godot_7classes_4core_PackedFloat64Array;
 
 
-/* "py4godot/classes/core.pxd":368
+/* "py4godot/classes/core.pxd":367
  * 
  * 
  * cdef class PackedStringArray():             # <<<<<<<<<<<<<<
@@ -4772,7 +4772,7 @@ struct __pyx_vtabstruct_8py4godot_7classes_4core_PackedStringArray {
 static struct __pyx_vtabstruct_8py4godot_7classes_4core_PackedStringArray *__pyx_vtabptr_8py4godot_7classes_4core_PackedStringArray;
 
 
-/* "py4godot/classes/core.pxd":378
+/* "py4godot/classes/core.pxd":377
  * 
  * 
  * cdef class PackedVector2Array():             # <<<<<<<<<<<<<<
@@ -4786,7 +4786,7 @@ struct __pyx_vtabstruct_8py4godot_7classes_4core_PackedVector2Array {
 static struct __pyx_vtabstruct_8py4godot_7classes_4core_PackedVector2Array *__pyx_vtabptr_8py4godot_7classes_4core_PackedVector2Array;
 
 
-/* "py4godot/classes/core.pxd":388
+/* "py4godot/classes/core.pxd":387
  * 
  * 
  * cdef class PackedVector3Array():             # <<<<<<<<<<<<<<
@@ -4800,7 +4800,7 @@ struct __pyx_vtabstruct_8py4godot_7classes_4core_PackedVector3Array {
 static struct __pyx_vtabstruct_8py4godot_7classes_4core_PackedVector3Array *__pyx_vtabptr_8py4godot_7classes_4core_PackedVector3Array;
 
 
-/* "py4godot/classes/core.pxd":398
+/* "py4godot/classes/core.pxd":397
  * 
  * 
  * cdef class PackedColorArray():             # <<<<<<<<<<<<<<
@@ -4814,7 +4814,7 @@ struct __pyx_vtabstruct_8py4godot_7classes_4core_PackedColorArray {
 static struct __pyx_vtabstruct_8py4godot_7classes_4core_PackedColorArray *__pyx_vtabptr_8py4godot_7classes_4core_PackedColorArray;
 
 
-/* "py4godot/classes/core.pxd":408
+/* "py4godot/classes/core.pxd":407
  * 
  * 
  * cdef class PackedVector4Array():             # <<<<<<<<<<<<<<
@@ -5900,7 +5900,7 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
 #define __pyx_n_s_test __pyx_mstate_global->__pyx_n_s_test
 /* #### Code section: module_code ### */
 
-/* "cpython/complex.pxd":20
+/* "cpython/complex.pxd":19
  * 
  *         @property
  *         cdef inline double real(self) noexcept:             # <<<<<<<<<<<<<<
@@ -5911,7 +5911,7 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
 static CYTHON_INLINE double __pyx_f_7cpython_7complex_7complex_4real_real(PyComplexObject *__pyx_v_self) {
   double __pyx_r;
 
-  /* "cpython/complex.pxd":21
+  /* "cpython/complex.pxd":20
  *         @property
  *         cdef inline double real(self) noexcept:
  *             return self.cval.real             # <<<<<<<<<<<<<<
@@ -5921,7 +5921,7 @@ static CYTHON_INLINE double __pyx_f_7cpython_7complex_7complex_4real_real(PyComp
   __pyx_r = __pyx_v_self->cval.real;
   goto __pyx_L0;
 
-  /* "cpython/complex.pxd":20
+  /* "cpython/complex.pxd":19
  * 
  *         @property
  *         cdef inline double real(self) noexcept:             # <<<<<<<<<<<<<<
@@ -5934,7 +5934,7 @@ static CYTHON_INLINE double __pyx_f_7cpython_7complex_7complex_4real_real(PyComp
   return __pyx_r;
 }
 
-/* "cpython/complex.pxd":24
+/* "cpython/complex.pxd":23
  * 
  *         @property
  *         cdef inline double imag(self) noexcept:             # <<<<<<<<<<<<<<
@@ -5945,7 +5945,7 @@ static CYTHON_INLINE double __pyx_f_7cpython_7complex_7complex_4real_real(PyComp
 static CYTHON_INLINE double __pyx_f_7cpython_7complex_7complex_4imag_imag(PyComplexObject *__pyx_v_self) {
   double __pyx_r;
 
-  /* "cpython/complex.pxd":25
+  /* "cpython/complex.pxd":24
  *         @property
  *         cdef inline double imag(self) noexcept:
  *             return self.cval.imag             # <<<<<<<<<<<<<<
@@ -5955,7 +5955,7 @@ static CYTHON_INLINE double __pyx_f_7cpython_7complex_7complex_4imag_imag(PyComp
   __pyx_r = __pyx_v_self->cval.imag;
   goto __pyx_L0;
 
-  /* "cpython/complex.pxd":24
+  /* "cpython/complex.pxd":23
  * 
  *         @property
  *         cdef inline double imag(self) noexcept:             # <<<<<<<<<<<<<<
@@ -5968,7 +5968,7 @@ static CYTHON_INLINE double __pyx_f_7cpython_7complex_7complex_4imag_imag(PyComp
   return __pyx_r;
 }
 
-/* "cpython/contextvars.pxd":113
+/* "cpython/contextvars.pxd":112
  * 
  * 
  * cdef inline object get_value(var, default_value=None):             # <<<<<<<<<<<<<<
@@ -5995,7 +5995,7 @@ static CYTHON_INLINE PyObject *__pyx_f_7cpython_11contextvars_get_value(PyObject
     }
   }
 
-  /* "cpython/contextvars.pxd":118
+  /* "cpython/contextvars.pxd":117
  *     or None if no such value or default was found.
  *     """
  *     cdef PyObject *value = NULL             # <<<<<<<<<<<<<<
@@ -6004,16 +6004,16 @@ static CYTHON_INLINE PyObject *__pyx_f_7cpython_11contextvars_get_value(PyObject
  */
   __pyx_v_value = NULL;
 
-  /* "cpython/contextvars.pxd":119
+  /* "cpython/contextvars.pxd":118
  *     """
  *     cdef PyObject *value = NULL
  *     PyContextVar_Get(var, NULL, &value)             # <<<<<<<<<<<<<<
  *     if value is NULL:
  *         # context variable does not have a default
  */
-  __pyx_t_1 = PyContextVar_Get(__pyx_v_var, NULL, (&__pyx_v_value)); if (unlikely(__pyx_t_1 == ((int)-1))) __PYX_ERR(0, 119, __pyx_L1_error)
+  __pyx_t_1 = PyContextVar_Get(__pyx_v_var, NULL, (&__pyx_v_value)); if (unlikely(__pyx_t_1 == ((int)-1))) __PYX_ERR(0, 118, __pyx_L1_error)
 
-  /* "cpython/contextvars.pxd":120
+  /* "cpython/contextvars.pxd":119
  *     cdef PyObject *value = NULL
  *     PyContextVar_Get(var, NULL, &value)
  *     if value is NULL:             # <<<<<<<<<<<<<<
@@ -6023,7 +6023,7 @@ static CYTHON_INLINE PyObject *__pyx_f_7cpython_11contextvars_get_value(PyObject
   __pyx_t_2 = (__pyx_v_value == NULL);
   if (__pyx_t_2) {
 
-    /* "cpython/contextvars.pxd":122
+    /* "cpython/contextvars.pxd":121
  *     if value is NULL:
  *         # context variable does not have a default
  *         pyvalue = default_value             # <<<<<<<<<<<<<<
@@ -6033,7 +6033,7 @@ static CYTHON_INLINE PyObject *__pyx_f_7cpython_11contextvars_get_value(PyObject
     __Pyx_INCREF(__pyx_v_default_value);
     __pyx_v_pyvalue = __pyx_v_default_value;
 
-    /* "cpython/contextvars.pxd":120
+    /* "cpython/contextvars.pxd":119
  *     cdef PyObject *value = NULL
  *     PyContextVar_Get(var, NULL, &value)
  *     if value is NULL:             # <<<<<<<<<<<<<<
@@ -6043,7 +6043,7 @@ static CYTHON_INLINE PyObject *__pyx_f_7cpython_11contextvars_get_value(PyObject
     goto __pyx_L3;
   }
 
-  /* "cpython/contextvars.pxd":125
+  /* "cpython/contextvars.pxd":124
  *     else:
  *         # value or default value of context variable
  *         pyvalue = <object>value             # <<<<<<<<<<<<<<
@@ -6056,7 +6056,7 @@ static CYTHON_INLINE PyObject *__pyx_f_7cpython_11contextvars_get_value(PyObject
     __pyx_v_pyvalue = __pyx_t_3;
     __pyx_t_3 = 0;
 
-    /* "cpython/contextvars.pxd":126
+    /* "cpython/contextvars.pxd":125
  *         # value or default value of context variable
  *         pyvalue = <object>value
  *         Py_XDECREF(value)  # PyContextVar_Get() returned an owned reference as 'PyObject*'             # <<<<<<<<<<<<<<
@@ -6067,7 +6067,7 @@ static CYTHON_INLINE PyObject *__pyx_f_7cpython_11contextvars_get_value(PyObject
   }
   __pyx_L3:;
 
-  /* "cpython/contextvars.pxd":127
+  /* "cpython/contextvars.pxd":126
  *         pyvalue = <object>value
  *         Py_XDECREF(value)  # PyContextVar_Get() returned an owned reference as 'PyObject*'
  *     return pyvalue             # <<<<<<<<<<<<<<
@@ -6079,7 +6079,7 @@ static CYTHON_INLINE PyObject *__pyx_f_7cpython_11contextvars_get_value(PyObject
   __pyx_r = __pyx_v_pyvalue;
   goto __pyx_L0;
 
-  /* "cpython/contextvars.pxd":113
+  /* "cpython/contextvars.pxd":112
  * 
  * 
  * cdef inline object get_value(var, default_value=None):             # <<<<<<<<<<<<<<
@@ -6099,7 +6099,7 @@ static CYTHON_INLINE PyObject *__pyx_f_7cpython_11contextvars_get_value(PyObject
   return __pyx_r;
 }
 
-/* "cpython/contextvars.pxd":130
+/* "cpython/contextvars.pxd":129
  * 
  * 
  * cdef inline object get_value_no_default(var, default_value=None):             # <<<<<<<<<<<<<<
@@ -6125,7 +6125,7 @@ static CYTHON_INLINE PyObject *__pyx_f_7cpython_11contextvars_get_value_no_defau
     }
   }
 
-  /* "cpython/contextvars.pxd":136
+  /* "cpython/contextvars.pxd":135
  *     Ignores the default value of the context variable, if any.
  *     """
  *     cdef PyObject *value = NULL             # <<<<<<<<<<<<<<
@@ -6134,16 +6134,16 @@ static CYTHON_INLINE PyObject *__pyx_f_7cpython_11contextvars_get_value_no_defau
  */
   __pyx_v_value = NULL;
 
-  /* "cpython/contextvars.pxd":137
+  /* "cpython/contextvars.pxd":136
  *     """
  *     cdef PyObject *value = NULL
  *     PyContextVar_Get(var, <PyObject*>default_value, &value)             # <<<<<<<<<<<<<<
  *     # value of context variable or 'default_value'
  *     pyvalue = <object>value
  */
-  __pyx_t_1 = PyContextVar_Get(__pyx_v_var, ((PyObject *)__pyx_v_default_value), (&__pyx_v_value)); if (unlikely(__pyx_t_1 == ((int)-1))) __PYX_ERR(0, 137, __pyx_L1_error)
+  __pyx_t_1 = PyContextVar_Get(__pyx_v_var, ((PyObject *)__pyx_v_default_value), (&__pyx_v_value)); if (unlikely(__pyx_t_1 == ((int)-1))) __PYX_ERR(0, 136, __pyx_L1_error)
 
-  /* "cpython/contextvars.pxd":139
+  /* "cpython/contextvars.pxd":138
  *     PyContextVar_Get(var, <PyObject*>default_value, &value)
  *     # value of context variable or 'default_value'
  *     pyvalue = <object>value             # <<<<<<<<<<<<<<
@@ -6155,7 +6155,7 @@ static CYTHON_INLINE PyObject *__pyx_f_7cpython_11contextvars_get_value_no_defau
   __pyx_v_pyvalue = __pyx_t_2;
   __pyx_t_2 = 0;
 
-  /* "cpython/contextvars.pxd":140
+  /* "cpython/contextvars.pxd":139
  *     # value of context variable or 'default_value'
  *     pyvalue = <object>value
  *     Py_XDECREF(value)  # PyContextVar_Get() returned an owned reference as 'PyObject*'             # <<<<<<<<<<<<<<
@@ -6163,7 +6163,7 @@ static CYTHON_INLINE PyObject *__pyx_f_7cpython_11contextvars_get_value_no_defau
  */
   Py_XDECREF(__pyx_v_value);
 
-  /* "cpython/contextvars.pxd":141
+  /* "cpython/contextvars.pxd":140
  *     pyvalue = <object>value
  *     Py_XDECREF(value)  # PyContextVar_Get() returned an owned reference as 'PyObject*'
  *     return pyvalue             # <<<<<<<<<<<<<<
@@ -6173,7 +6173,7 @@ static CYTHON_INLINE PyObject *__pyx_f_7cpython_11contextvars_get_value_no_defau
   __pyx_r = __pyx_v_pyvalue;
   goto __pyx_L0;
 
-  /* "cpython/contextvars.pxd":130
+  /* "cpython/contextvars.pxd":129
  * 
  * 
  * cdef inline object get_value_no_default(var, default_value=None):             # <<<<<<<<<<<<<<
@@ -6961,7 +6961,7 @@ static int __Pyx_modinit_type_import_code(void) {
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__Pyx_modinit_type_import_code", 0);
   /*--- Type import code ---*/
-  __pyx_t_1 = PyImport_ImportModule(__Pyx_BUILTIN_MODULE_NAME); if (unlikely(!__pyx_t_1)) __PYX_ERR(2, 10, __pyx_L1_error)
+  __pyx_t_1 = PyImport_ImportModule(__Pyx_BUILTIN_MODULE_NAME); if (unlikely(!__pyx_t_1)) __PYX_ERR(2, 9, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_ptype_7cpython_4type_type = __Pyx_ImportType_3_0_10(__pyx_t_1, __Pyx_BUILTIN_MODULE_NAME, "type", 
   #if defined(PYPY_VERSION_NUM) && PYPY_VERSION_NUM < 0x050B0000
@@ -6971,91 +6971,91 @@ static int __Pyx_modinit_type_import_code(void) {
   #else
   sizeof(PyHeapTypeObject), __PYX_GET_STRUCT_ALIGNMENT_3_0_10(PyHeapTypeObject),
   #endif
-  __Pyx_ImportType_CheckSize_Warn_3_0_10); if (!__pyx_ptype_7cpython_4type_type) __PYX_ERR(2, 10, __pyx_L1_error)
+  __Pyx_ImportType_CheckSize_Warn_3_0_10); if (!__pyx_ptype_7cpython_4type_type) __PYX_ERR(2, 9, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_1 = PyImport_ImportModule(__Pyx_BUILTIN_MODULE_NAME); if (unlikely(!__pyx_t_1)) __PYX_ERR(3, 9, __pyx_L1_error)
+  __pyx_t_1 = PyImport_ImportModule(__Pyx_BUILTIN_MODULE_NAME); if (unlikely(!__pyx_t_1)) __PYX_ERR(3, 8, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_ptype_7cpython_4bool_bool = __Pyx_ImportType_3_0_10(__pyx_t_1, __Pyx_BUILTIN_MODULE_NAME, "bool", sizeof(PyBoolObject), __PYX_GET_STRUCT_ALIGNMENT_3_0_10(PyBoolObject),__Pyx_ImportType_CheckSize_Warn_3_0_10); if (!__pyx_ptype_7cpython_4bool_bool) __PYX_ERR(3, 9, __pyx_L1_error)
+  __pyx_ptype_7cpython_4bool_bool = __Pyx_ImportType_3_0_10(__pyx_t_1, __Pyx_BUILTIN_MODULE_NAME, "bool", sizeof(PyBoolObject), __PYX_GET_STRUCT_ALIGNMENT_3_0_10(PyBoolObject),__Pyx_ImportType_CheckSize_Warn_3_0_10); if (!__pyx_ptype_7cpython_4bool_bool) __PYX_ERR(3, 8, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_1 = PyImport_ImportModule(__Pyx_BUILTIN_MODULE_NAME); if (unlikely(!__pyx_t_1)) __PYX_ERR(4, 16, __pyx_L1_error)
+  __pyx_t_1 = PyImport_ImportModule(__Pyx_BUILTIN_MODULE_NAME); if (unlikely(!__pyx_t_1)) __PYX_ERR(4, 15, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_ptype_7cpython_7complex_complex = __Pyx_ImportType_3_0_10(__pyx_t_1, __Pyx_BUILTIN_MODULE_NAME, "complex", sizeof(PyComplexObject), __PYX_GET_STRUCT_ALIGNMENT_3_0_10(PyComplexObject),__Pyx_ImportType_CheckSize_Warn_3_0_10); if (!__pyx_ptype_7cpython_7complex_complex) __PYX_ERR(4, 16, __pyx_L1_error)
+  __pyx_ptype_7cpython_7complex_complex = __Pyx_ImportType_3_0_10(__pyx_t_1, __Pyx_BUILTIN_MODULE_NAME, "complex", sizeof(PyComplexObject), __PYX_GET_STRUCT_ALIGNMENT_3_0_10(PyComplexObject),__Pyx_ImportType_CheckSize_Warn_3_0_10); if (!__pyx_ptype_7cpython_7complex_complex) __PYX_ERR(4, 15, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_t_1 = PyImport_ImportModule("py4godot.core.variant4.Variant4"); if (unlikely(!__pyx_t_1)) __PYX_ERR(5, 13, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_ptype_8py4godot_4core_8variant4_8Variant4_PyVariant = __Pyx_ImportType_3_0_10(__pyx_t_1, "py4godot.core.variant4.Variant4", "PyVariant", sizeof(struct __pyx_obj_8py4godot_4core_8variant4_8Variant4_PyVariant), __PYX_GET_STRUCT_ALIGNMENT_3_0_10(struct __pyx_obj_8py4godot_4core_8variant4_8Variant4_PyVariant),__Pyx_ImportType_CheckSize_Warn_3_0_10); if (!__pyx_ptype_8py4godot_4core_8variant4_8Variant4_PyVariant) __PYX_ERR(5, 13, __pyx_L1_error)
   __pyx_vtabptr_8py4godot_4core_8variant4_8Variant4_PyVariant = (struct __pyx_vtabstruct_8py4godot_4core_8variant4_8Variant4_PyVariant*)__Pyx_GetVtable(__pyx_ptype_8py4godot_4core_8variant4_8Variant4_PyVariant); if (unlikely(!__pyx_vtabptr_8py4godot_4core_8variant4_8Variant4_PyVariant)) __PYX_ERR(5, 13, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_1 = PyImport_ImportModule("py4godot.classes.core"); if (unlikely(!__pyx_t_1)) __PYX_ERR(6, 40, __pyx_L1_error)
+  __pyx_t_1 = PyImport_ImportModule("py4godot.classes.core"); if (unlikely(!__pyx_t_1)) __PYX_ERR(6, 39, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_ptype_8py4godot_7classes_4core_String = __Pyx_ImportType_3_0_10(__pyx_t_1, "py4godot.classes.core", "String", sizeof(struct __pyx_obj_8py4godot_7classes_4core_String), __PYX_GET_STRUCT_ALIGNMENT_3_0_10(struct __pyx_obj_8py4godot_7classes_4core_String),__Pyx_ImportType_CheckSize_Warn_3_0_10); if (!__pyx_ptype_8py4godot_7classes_4core_String) __PYX_ERR(6, 40, __pyx_L1_error)
-  __pyx_vtabptr_8py4godot_7classes_4core_String = (struct __pyx_vtabstruct_8py4godot_7classes_4core_String*)__Pyx_GetVtable(__pyx_ptype_8py4godot_7classes_4core_String); if (unlikely(!__pyx_vtabptr_8py4godot_7classes_4core_String)) __PYX_ERR(6, 40, __pyx_L1_error)
-  __pyx_ptype_8py4godot_7classes_4core_Vector2 = __Pyx_ImportType_3_0_10(__pyx_t_1, "py4godot.classes.core", "Vector2", sizeof(struct __pyx_obj_8py4godot_7classes_4core_Vector2), __PYX_GET_STRUCT_ALIGNMENT_3_0_10(struct __pyx_obj_8py4godot_7classes_4core_Vector2),__Pyx_ImportType_CheckSize_Warn_3_0_10); if (!__pyx_ptype_8py4godot_7classes_4core_Vector2) __PYX_ERR(6, 54, __pyx_L1_error)
-  __pyx_vtabptr_8py4godot_7classes_4core_Vector2 = (struct __pyx_vtabstruct_8py4godot_7classes_4core_Vector2*)__Pyx_GetVtable(__pyx_ptype_8py4godot_7classes_4core_Vector2); if (unlikely(!__pyx_vtabptr_8py4godot_7classes_4core_Vector2)) __PYX_ERR(6, 54, __pyx_L1_error)
-  __pyx_ptype_8py4godot_7classes_4core_Vector2i = __Pyx_ImportType_3_0_10(__pyx_t_1, "py4godot.classes.core", "Vector2i", sizeof(struct __pyx_obj_8py4godot_7classes_4core_Vector2i), __PYX_GET_STRUCT_ALIGNMENT_3_0_10(struct __pyx_obj_8py4godot_7classes_4core_Vector2i),__Pyx_ImportType_CheckSize_Warn_3_0_10); if (!__pyx_ptype_8py4godot_7classes_4core_Vector2i) __PYX_ERR(6, 68, __pyx_L1_error)
-  __pyx_vtabptr_8py4godot_7classes_4core_Vector2i = (struct __pyx_vtabstruct_8py4godot_7classes_4core_Vector2i*)__Pyx_GetVtable(__pyx_ptype_8py4godot_7classes_4core_Vector2i); if (unlikely(!__pyx_vtabptr_8py4godot_7classes_4core_Vector2i)) __PYX_ERR(6, 68, __pyx_L1_error)
-  __pyx_ptype_8py4godot_7classes_4core_Rect2 = __Pyx_ImportType_3_0_10(__pyx_t_1, "py4godot.classes.core", "Rect2", sizeof(struct __pyx_obj_8py4godot_7classes_4core_Rect2), __PYX_GET_STRUCT_ALIGNMENT_3_0_10(struct __pyx_obj_8py4godot_7classes_4core_Rect2),__Pyx_ImportType_CheckSize_Warn_3_0_10); if (!__pyx_ptype_8py4godot_7classes_4core_Rect2) __PYX_ERR(6, 78, __pyx_L1_error)
-  __pyx_vtabptr_8py4godot_7classes_4core_Rect2 = (struct __pyx_vtabstruct_8py4godot_7classes_4core_Rect2*)__Pyx_GetVtable(__pyx_ptype_8py4godot_7classes_4core_Rect2); if (unlikely(!__pyx_vtabptr_8py4godot_7classes_4core_Rect2)) __PYX_ERR(6, 78, __pyx_L1_error)
-  __pyx_ptype_8py4godot_7classes_4core_Rect2i = __Pyx_ImportType_3_0_10(__pyx_t_1, "py4godot.classes.core", "Rect2i", sizeof(struct __pyx_obj_8py4godot_7classes_4core_Rect2i), __PYX_GET_STRUCT_ALIGNMENT_3_0_10(struct __pyx_obj_8py4godot_7classes_4core_Rect2i),__Pyx_ImportType_CheckSize_Warn_3_0_10); if (!__pyx_ptype_8py4godot_7classes_4core_Rect2i) __PYX_ERR(6, 88, __pyx_L1_error)
-  __pyx_vtabptr_8py4godot_7classes_4core_Rect2i = (struct __pyx_vtabstruct_8py4godot_7classes_4core_Rect2i*)__Pyx_GetVtable(__pyx_ptype_8py4godot_7classes_4core_Rect2i); if (unlikely(!__pyx_vtabptr_8py4godot_7classes_4core_Rect2i)) __PYX_ERR(6, 88, __pyx_L1_error)
-  __pyx_ptype_8py4godot_7classes_4core_Vector3 = __Pyx_ImportType_3_0_10(__pyx_t_1, "py4godot.classes.core", "Vector3", sizeof(struct __pyx_obj_8py4godot_7classes_4core_Vector3), __PYX_GET_STRUCT_ALIGNMENT_3_0_10(struct __pyx_obj_8py4godot_7classes_4core_Vector3),__Pyx_ImportType_CheckSize_Warn_3_0_10); if (!__pyx_ptype_8py4godot_7classes_4core_Vector3) __PYX_ERR(6, 103, __pyx_L1_error)
-  __pyx_vtabptr_8py4godot_7classes_4core_Vector3 = (struct __pyx_vtabstruct_8py4godot_7classes_4core_Vector3*)__Pyx_GetVtable(__pyx_ptype_8py4godot_7classes_4core_Vector3); if (unlikely(!__pyx_vtabptr_8py4godot_7classes_4core_Vector3)) __PYX_ERR(6, 103, __pyx_L1_error)
-  __pyx_ptype_8py4godot_7classes_4core_Vector3i = __Pyx_ImportType_3_0_10(__pyx_t_1, "py4godot.classes.core", "Vector3i", sizeof(struct __pyx_obj_8py4godot_7classes_4core_Vector3i), __PYX_GET_STRUCT_ALIGNMENT_3_0_10(struct __pyx_obj_8py4godot_7classes_4core_Vector3i),__Pyx_ImportType_CheckSize_Warn_3_0_10); if (!__pyx_ptype_8py4godot_7classes_4core_Vector3i) __PYX_ERR(6, 118, __pyx_L1_error)
-  __pyx_vtabptr_8py4godot_7classes_4core_Vector3i = (struct __pyx_vtabstruct_8py4godot_7classes_4core_Vector3i*)__Pyx_GetVtable(__pyx_ptype_8py4godot_7classes_4core_Vector3i); if (unlikely(!__pyx_vtabptr_8py4godot_7classes_4core_Vector3i)) __PYX_ERR(6, 118, __pyx_L1_error)
-  __pyx_ptype_8py4godot_7classes_4core_Transform2D = __Pyx_ImportType_3_0_10(__pyx_t_1, "py4godot.classes.core", "Transform2D", sizeof(struct __pyx_obj_8py4godot_7classes_4core_Transform2D), __PYX_GET_STRUCT_ALIGNMENT_3_0_10(struct __pyx_obj_8py4godot_7classes_4core_Transform2D),__Pyx_ImportType_CheckSize_Warn_3_0_10); if (!__pyx_ptype_8py4godot_7classes_4core_Transform2D) __PYX_ERR(6, 128, __pyx_L1_error)
-  __pyx_vtabptr_8py4godot_7classes_4core_Transform2D = (struct __pyx_vtabstruct_8py4godot_7classes_4core_Transform2D*)__Pyx_GetVtable(__pyx_ptype_8py4godot_7classes_4core_Transform2D); if (unlikely(!__pyx_vtabptr_8py4godot_7classes_4core_Transform2D)) __PYX_ERR(6, 128, __pyx_L1_error)
-  __pyx_ptype_8py4godot_7classes_4core_Vector4 = __Pyx_ImportType_3_0_10(__pyx_t_1, "py4godot.classes.core", "Vector4", sizeof(struct __pyx_obj_8py4godot_7classes_4core_Vector4), __PYX_GET_STRUCT_ALIGNMENT_3_0_10(struct __pyx_obj_8py4godot_7classes_4core_Vector4),__Pyx_ImportType_CheckSize_Warn_3_0_10); if (!__pyx_ptype_8py4godot_7classes_4core_Vector4) __PYX_ERR(6, 144, __pyx_L1_error)
-  __pyx_vtabptr_8py4godot_7classes_4core_Vector4 = (struct __pyx_vtabstruct_8py4godot_7classes_4core_Vector4*)__Pyx_GetVtable(__pyx_ptype_8py4godot_7classes_4core_Vector4); if (unlikely(!__pyx_vtabptr_8py4godot_7classes_4core_Vector4)) __PYX_ERR(6, 144, __pyx_L1_error)
-  __pyx_ptype_8py4godot_7classes_4core_Vector4i = __Pyx_ImportType_3_0_10(__pyx_t_1, "py4godot.classes.core", "Vector4i", sizeof(struct __pyx_obj_8py4godot_7classes_4core_Vector4i), __PYX_GET_STRUCT_ALIGNMENT_3_0_10(struct __pyx_obj_8py4godot_7classes_4core_Vector4i),__Pyx_ImportType_CheckSize_Warn_3_0_10); if (!__pyx_ptype_8py4godot_7classes_4core_Vector4i) __PYX_ERR(6, 160, __pyx_L1_error)
-  __pyx_vtabptr_8py4godot_7classes_4core_Vector4i = (struct __pyx_vtabstruct_8py4godot_7classes_4core_Vector4i*)__Pyx_GetVtable(__pyx_ptype_8py4godot_7classes_4core_Vector4i); if (unlikely(!__pyx_vtabptr_8py4godot_7classes_4core_Vector4i)) __PYX_ERR(6, 160, __pyx_L1_error)
-  __pyx_ptype_8py4godot_7classes_4core_Plane = __Pyx_ImportType_3_0_10(__pyx_t_1, "py4godot.classes.core", "Plane", sizeof(struct __pyx_obj_8py4godot_7classes_4core_Plane), __PYX_GET_STRUCT_ALIGNMENT_3_0_10(struct __pyx_obj_8py4godot_7classes_4core_Plane),__Pyx_ImportType_CheckSize_Warn_3_0_10); if (!__pyx_ptype_8py4godot_7classes_4core_Plane) __PYX_ERR(6, 170, __pyx_L1_error)
-  __pyx_vtabptr_8py4godot_7classes_4core_Plane = (struct __pyx_vtabstruct_8py4godot_7classes_4core_Plane*)__Pyx_GetVtable(__pyx_ptype_8py4godot_7classes_4core_Plane); if (unlikely(!__pyx_vtabptr_8py4godot_7classes_4core_Plane)) __PYX_ERR(6, 170, __pyx_L1_error)
-  __pyx_ptype_8py4godot_7classes_4core_Quaternion = __Pyx_ImportType_3_0_10(__pyx_t_1, "py4godot.classes.core", "Quaternion", sizeof(struct __pyx_obj_8py4godot_7classes_4core_Quaternion), __PYX_GET_STRUCT_ALIGNMENT_3_0_10(struct __pyx_obj_8py4godot_7classes_4core_Quaternion),__Pyx_ImportType_CheckSize_Warn_3_0_10); if (!__pyx_ptype_8py4godot_7classes_4core_Quaternion) __PYX_ERR(6, 180, __pyx_L1_error)
-  __pyx_vtabptr_8py4godot_7classes_4core_Quaternion = (struct __pyx_vtabstruct_8py4godot_7classes_4core_Quaternion*)__Pyx_GetVtable(__pyx_ptype_8py4godot_7classes_4core_Quaternion); if (unlikely(!__pyx_vtabptr_8py4godot_7classes_4core_Quaternion)) __PYX_ERR(6, 180, __pyx_L1_error)
-  __pyx_ptype_8py4godot_7classes_4core_AABB = __Pyx_ImportType_3_0_10(__pyx_t_1, "py4godot.classes.core", "AABB", sizeof(struct __pyx_obj_8py4godot_7classes_4core_AABB), __PYX_GET_STRUCT_ALIGNMENT_3_0_10(struct __pyx_obj_8py4godot_7classes_4core_AABB),__Pyx_ImportType_CheckSize_Warn_3_0_10); if (!__pyx_ptype_8py4godot_7classes_4core_AABB) __PYX_ERR(6, 190, __pyx_L1_error)
-  __pyx_vtabptr_8py4godot_7classes_4core_AABB = (struct __pyx_vtabstruct_8py4godot_7classes_4core_AABB*)__Pyx_GetVtable(__pyx_ptype_8py4godot_7classes_4core_AABB); if (unlikely(!__pyx_vtabptr_8py4godot_7classes_4core_AABB)) __PYX_ERR(6, 190, __pyx_L1_error)
-  __pyx_ptype_8py4godot_7classes_4core_Basis = __Pyx_ImportType_3_0_10(__pyx_t_1, "py4godot.classes.core", "Basis", sizeof(struct __pyx_obj_8py4godot_7classes_4core_Basis), __PYX_GET_STRUCT_ALIGNMENT_3_0_10(struct __pyx_obj_8py4godot_7classes_4core_Basis),__Pyx_ImportType_CheckSize_Warn_3_0_10); if (!__pyx_ptype_8py4godot_7classes_4core_Basis) __PYX_ERR(6, 200, __pyx_L1_error)
-  __pyx_vtabptr_8py4godot_7classes_4core_Basis = (struct __pyx_vtabstruct_8py4godot_7classes_4core_Basis*)__Pyx_GetVtable(__pyx_ptype_8py4godot_7classes_4core_Basis); if (unlikely(!__pyx_vtabptr_8py4godot_7classes_4core_Basis)) __PYX_ERR(6, 200, __pyx_L1_error)
-  __pyx_ptype_8py4godot_7classes_4core_Transform3D = __Pyx_ImportType_3_0_10(__pyx_t_1, "py4godot.classes.core", "Transform3D", sizeof(struct __pyx_obj_8py4godot_7classes_4core_Transform3D), __PYX_GET_STRUCT_ALIGNMENT_3_0_10(struct __pyx_obj_8py4godot_7classes_4core_Transform3D),__Pyx_ImportType_CheckSize_Warn_3_0_10); if (!__pyx_ptype_8py4godot_7classes_4core_Transform3D) __PYX_ERR(6, 210, __pyx_L1_error)
-  __pyx_vtabptr_8py4godot_7classes_4core_Transform3D = (struct __pyx_vtabstruct_8py4godot_7classes_4core_Transform3D*)__Pyx_GetVtable(__pyx_ptype_8py4godot_7classes_4core_Transform3D); if (unlikely(!__pyx_vtabptr_8py4godot_7classes_4core_Transform3D)) __PYX_ERR(6, 210, __pyx_L1_error)
-  __pyx_ptype_8py4godot_7classes_4core_Projection = __Pyx_ImportType_3_0_10(__pyx_t_1, "py4godot.classes.core", "Projection", sizeof(struct __pyx_obj_8py4godot_7classes_4core_Projection), __PYX_GET_STRUCT_ALIGNMENT_3_0_10(struct __pyx_obj_8py4godot_7classes_4core_Projection),__Pyx_ImportType_CheckSize_Warn_3_0_10); if (!__pyx_ptype_8py4godot_7classes_4core_Projection) __PYX_ERR(6, 228, __pyx_L1_error)
-  __pyx_vtabptr_8py4godot_7classes_4core_Projection = (struct __pyx_vtabstruct_8py4godot_7classes_4core_Projection*)__Pyx_GetVtable(__pyx_ptype_8py4godot_7classes_4core_Projection); if (unlikely(!__pyx_vtabptr_8py4godot_7classes_4core_Projection)) __PYX_ERR(6, 228, __pyx_L1_error)
-  __pyx_ptype_8py4godot_7classes_4core_Color = __Pyx_ImportType_3_0_10(__pyx_t_1, "py4godot.classes.core", "Color", sizeof(struct __pyx_obj_8py4godot_7classes_4core_Color), __PYX_GET_STRUCT_ALIGNMENT_3_0_10(struct __pyx_obj_8py4godot_7classes_4core_Color),__Pyx_ImportType_CheckSize_Warn_3_0_10); if (!__pyx_ptype_8py4godot_7classes_4core_Color) __PYX_ERR(6, 238, __pyx_L1_error)
-  __pyx_vtabptr_8py4godot_7classes_4core_Color = (struct __pyx_vtabstruct_8py4godot_7classes_4core_Color*)__Pyx_GetVtable(__pyx_ptype_8py4godot_7classes_4core_Color); if (unlikely(!__pyx_vtabptr_8py4godot_7classes_4core_Color)) __PYX_ERR(6, 238, __pyx_L1_error)
-  __pyx_ptype_8py4godot_7classes_4core_StringName = __Pyx_ImportType_3_0_10(__pyx_t_1, "py4godot.classes.core", "StringName", sizeof(struct __pyx_obj_8py4godot_7classes_4core_StringName), __PYX_GET_STRUCT_ALIGNMENT_3_0_10(struct __pyx_obj_8py4godot_7classes_4core_StringName),__Pyx_ImportType_CheckSize_Warn_3_0_10); if (!__pyx_ptype_8py4godot_7classes_4core_StringName) __PYX_ERR(6, 248, __pyx_L1_error)
-  __pyx_vtabptr_8py4godot_7classes_4core_StringName = (struct __pyx_vtabstruct_8py4godot_7classes_4core_StringName*)__Pyx_GetVtable(__pyx_ptype_8py4godot_7classes_4core_StringName); if (unlikely(!__pyx_vtabptr_8py4godot_7classes_4core_StringName)) __PYX_ERR(6, 248, __pyx_L1_error)
-  __pyx_ptype_8py4godot_7classes_4core_NodePath = __Pyx_ImportType_3_0_10(__pyx_t_1, "py4godot.classes.core", "NodePath", sizeof(struct __pyx_obj_8py4godot_7classes_4core_NodePath), __PYX_GET_STRUCT_ALIGNMENT_3_0_10(struct __pyx_obj_8py4godot_7classes_4core_NodePath),__Pyx_ImportType_CheckSize_Warn_3_0_10); if (!__pyx_ptype_8py4godot_7classes_4core_NodePath) __PYX_ERR(6, 258, __pyx_L1_error)
-  __pyx_vtabptr_8py4godot_7classes_4core_NodePath = (struct __pyx_vtabstruct_8py4godot_7classes_4core_NodePath*)__Pyx_GetVtable(__pyx_ptype_8py4godot_7classes_4core_NodePath); if (unlikely(!__pyx_vtabptr_8py4godot_7classes_4core_NodePath)) __PYX_ERR(6, 258, __pyx_L1_error)
-  __pyx_ptype_8py4godot_7classes_4core_RID = __Pyx_ImportType_3_0_10(__pyx_t_1, "py4godot.classes.core", "RID", sizeof(struct __pyx_obj_8py4godot_7classes_4core_RID), __PYX_GET_STRUCT_ALIGNMENT_3_0_10(struct __pyx_obj_8py4godot_7classes_4core_RID),__Pyx_ImportType_CheckSize_Warn_3_0_10); if (!__pyx_ptype_8py4godot_7classes_4core_RID) __PYX_ERR(6, 268, __pyx_L1_error)
-  __pyx_vtabptr_8py4godot_7classes_4core_RID = (struct __pyx_vtabstruct_8py4godot_7classes_4core_RID*)__Pyx_GetVtable(__pyx_ptype_8py4godot_7classes_4core_RID); if (unlikely(!__pyx_vtabptr_8py4godot_7classes_4core_RID)) __PYX_ERR(6, 268, __pyx_L1_error)
-  __pyx_ptype_8py4godot_7classes_4core_Callable = __Pyx_ImportType_3_0_10(__pyx_t_1, "py4godot.classes.core", "Callable", sizeof(struct __pyx_obj_8py4godot_7classes_4core_Callable), __PYX_GET_STRUCT_ALIGNMENT_3_0_10(struct __pyx_obj_8py4godot_7classes_4core_Callable),__Pyx_ImportType_CheckSize_Warn_3_0_10); if (!__pyx_ptype_8py4godot_7classes_4core_Callable) __PYX_ERR(6, 278, __pyx_L1_error)
-  __pyx_vtabptr_8py4godot_7classes_4core_Callable = (struct __pyx_vtabstruct_8py4godot_7classes_4core_Callable*)__Pyx_GetVtable(__pyx_ptype_8py4godot_7classes_4core_Callable); if (unlikely(!__pyx_vtabptr_8py4godot_7classes_4core_Callable)) __PYX_ERR(6, 278, __pyx_L1_error)
-  __pyx_ptype_8py4godot_7classes_4core_Signal = __Pyx_ImportType_3_0_10(__pyx_t_1, "py4godot.classes.core", "Signal", sizeof(struct __pyx_obj_8py4godot_7classes_4core_Signal), __PYX_GET_STRUCT_ALIGNMENT_3_0_10(struct __pyx_obj_8py4godot_7classes_4core_Signal),__Pyx_ImportType_CheckSize_Warn_3_0_10); if (!__pyx_ptype_8py4godot_7classes_4core_Signal) __PYX_ERR(6, 288, __pyx_L1_error)
-  __pyx_vtabptr_8py4godot_7classes_4core_Signal = (struct __pyx_vtabstruct_8py4godot_7classes_4core_Signal*)__Pyx_GetVtable(__pyx_ptype_8py4godot_7classes_4core_Signal); if (unlikely(!__pyx_vtabptr_8py4godot_7classes_4core_Signal)) __PYX_ERR(6, 288, __pyx_L1_error)
-  __pyx_ptype_8py4godot_7classes_4core_Dictionary = __Pyx_ImportType_3_0_10(__pyx_t_1, "py4godot.classes.core", "Dictionary", sizeof(struct __pyx_obj_8py4godot_7classes_4core_Dictionary), __PYX_GET_STRUCT_ALIGNMENT_3_0_10(struct __pyx_obj_8py4godot_7classes_4core_Dictionary),__Pyx_ImportType_CheckSize_Warn_3_0_10); if (!__pyx_ptype_8py4godot_7classes_4core_Dictionary) __PYX_ERR(6, 298, __pyx_L1_error)
-  __pyx_vtabptr_8py4godot_7classes_4core_Dictionary = (struct __pyx_vtabstruct_8py4godot_7classes_4core_Dictionary*)__Pyx_GetVtable(__pyx_ptype_8py4godot_7classes_4core_Dictionary); if (unlikely(!__pyx_vtabptr_8py4godot_7classes_4core_Dictionary)) __PYX_ERR(6, 298, __pyx_L1_error)
-  __pyx_ptype_8py4godot_7classes_4core_Array = __Pyx_ImportType_3_0_10(__pyx_t_1, "py4godot.classes.core", "Array", sizeof(struct __pyx_obj_8py4godot_7classes_4core_Array), __PYX_GET_STRUCT_ALIGNMENT_3_0_10(struct __pyx_obj_8py4godot_7classes_4core_Array),__Pyx_ImportType_CheckSize_Warn_3_0_10); if (!__pyx_ptype_8py4godot_7classes_4core_Array) __PYX_ERR(6, 308, __pyx_L1_error)
-  __pyx_vtabptr_8py4godot_7classes_4core_Array = (struct __pyx_vtabstruct_8py4godot_7classes_4core_Array*)__Pyx_GetVtable(__pyx_ptype_8py4godot_7classes_4core_Array); if (unlikely(!__pyx_vtabptr_8py4godot_7classes_4core_Array)) __PYX_ERR(6, 308, __pyx_L1_error)
-  __pyx_ptype_8py4godot_7classes_4core_PackedByteArray = __Pyx_ImportType_3_0_10(__pyx_t_1, "py4godot.classes.core", "PackedByteArray", sizeof(struct __pyx_obj_8py4godot_7classes_4core_PackedByteArray), __PYX_GET_STRUCT_ALIGNMENT_3_0_10(struct __pyx_obj_8py4godot_7classes_4core_PackedByteArray),__Pyx_ImportType_CheckSize_Warn_3_0_10); if (!__pyx_ptype_8py4godot_7classes_4core_PackedByteArray) __PYX_ERR(6, 318, __pyx_L1_error)
-  __pyx_vtabptr_8py4godot_7classes_4core_PackedByteArray = (struct __pyx_vtabstruct_8py4godot_7classes_4core_PackedByteArray*)__Pyx_GetVtable(__pyx_ptype_8py4godot_7classes_4core_PackedByteArray); if (unlikely(!__pyx_vtabptr_8py4godot_7classes_4core_PackedByteArray)) __PYX_ERR(6, 318, __pyx_L1_error)
-  __pyx_ptype_8py4godot_7classes_4core_PackedInt32Array = __Pyx_ImportType_3_0_10(__pyx_t_1, "py4godot.classes.core", "PackedInt32Array", sizeof(struct __pyx_obj_8py4godot_7classes_4core_PackedInt32Array), __PYX_GET_STRUCT_ALIGNMENT_3_0_10(struct __pyx_obj_8py4godot_7classes_4core_PackedInt32Array),__Pyx_ImportType_CheckSize_Warn_3_0_10); if (!__pyx_ptype_8py4godot_7classes_4core_PackedInt32Array) __PYX_ERR(6, 328, __pyx_L1_error)
-  __pyx_vtabptr_8py4godot_7classes_4core_PackedInt32Array = (struct __pyx_vtabstruct_8py4godot_7classes_4core_PackedInt32Array*)__Pyx_GetVtable(__pyx_ptype_8py4godot_7classes_4core_PackedInt32Array); if (unlikely(!__pyx_vtabptr_8py4godot_7classes_4core_PackedInt32Array)) __PYX_ERR(6, 328, __pyx_L1_error)
-  __pyx_ptype_8py4godot_7classes_4core_PackedInt64Array = __Pyx_ImportType_3_0_10(__pyx_t_1, "py4godot.classes.core", "PackedInt64Array", sizeof(struct __pyx_obj_8py4godot_7classes_4core_PackedInt64Array), __PYX_GET_STRUCT_ALIGNMENT_3_0_10(struct __pyx_obj_8py4godot_7classes_4core_PackedInt64Array),__Pyx_ImportType_CheckSize_Warn_3_0_10); if (!__pyx_ptype_8py4godot_7classes_4core_PackedInt64Array) __PYX_ERR(6, 338, __pyx_L1_error)
-  __pyx_vtabptr_8py4godot_7classes_4core_PackedInt64Array = (struct __pyx_vtabstruct_8py4godot_7classes_4core_PackedInt64Array*)__Pyx_GetVtable(__pyx_ptype_8py4godot_7classes_4core_PackedInt64Array); if (unlikely(!__pyx_vtabptr_8py4godot_7classes_4core_PackedInt64Array)) __PYX_ERR(6, 338, __pyx_L1_error)
-  __pyx_ptype_8py4godot_7classes_4core_PackedFloat32Array = __Pyx_ImportType_3_0_10(__pyx_t_1, "py4godot.classes.core", "PackedFloat32Array", sizeof(struct __pyx_obj_8py4godot_7classes_4core_PackedFloat32Array), __PYX_GET_STRUCT_ALIGNMENT_3_0_10(struct __pyx_obj_8py4godot_7classes_4core_PackedFloat32Array),__Pyx_ImportType_CheckSize_Warn_3_0_10); if (!__pyx_ptype_8py4godot_7classes_4core_PackedFloat32Array) __PYX_ERR(6, 348, __pyx_L1_error)
-  __pyx_vtabptr_8py4godot_7classes_4core_PackedFloat32Array = (struct __pyx_vtabstruct_8py4godot_7classes_4core_PackedFloat32Array*)__Pyx_GetVtable(__pyx_ptype_8py4godot_7classes_4core_PackedFloat32Array); if (unlikely(!__pyx_vtabptr_8py4godot_7classes_4core_PackedFloat32Array)) __PYX_ERR(6, 348, __pyx_L1_error)
-  __pyx_ptype_8py4godot_7classes_4core_PackedFloat64Array = __Pyx_ImportType_3_0_10(__pyx_t_1, "py4godot.classes.core", "PackedFloat64Array", sizeof(struct __pyx_obj_8py4godot_7classes_4core_PackedFloat64Array), __PYX_GET_STRUCT_ALIGNMENT_3_0_10(struct __pyx_obj_8py4godot_7classes_4core_PackedFloat64Array),__Pyx_ImportType_CheckSize_Warn_3_0_10); if (!__pyx_ptype_8py4godot_7classes_4core_PackedFloat64Array) __PYX_ERR(6, 358, __pyx_L1_error)
-  __pyx_vtabptr_8py4godot_7classes_4core_PackedFloat64Array = (struct __pyx_vtabstruct_8py4godot_7classes_4core_PackedFloat64Array*)__Pyx_GetVtable(__pyx_ptype_8py4godot_7classes_4core_PackedFloat64Array); if (unlikely(!__pyx_vtabptr_8py4godot_7classes_4core_PackedFloat64Array)) __PYX_ERR(6, 358, __pyx_L1_error)
-  __pyx_ptype_8py4godot_7classes_4core_PackedStringArray = __Pyx_ImportType_3_0_10(__pyx_t_1, "py4godot.classes.core", "PackedStringArray", sizeof(struct __pyx_obj_8py4godot_7classes_4core_PackedStringArray), __PYX_GET_STRUCT_ALIGNMENT_3_0_10(struct __pyx_obj_8py4godot_7classes_4core_PackedStringArray),__Pyx_ImportType_CheckSize_Warn_3_0_10); if (!__pyx_ptype_8py4godot_7classes_4core_PackedStringArray) __PYX_ERR(6, 368, __pyx_L1_error)
-  __pyx_vtabptr_8py4godot_7classes_4core_PackedStringArray = (struct __pyx_vtabstruct_8py4godot_7classes_4core_PackedStringArray*)__Pyx_GetVtable(__pyx_ptype_8py4godot_7classes_4core_PackedStringArray); if (unlikely(!__pyx_vtabptr_8py4godot_7classes_4core_PackedStringArray)) __PYX_ERR(6, 368, __pyx_L1_error)
-  __pyx_ptype_8py4godot_7classes_4core_PackedVector2Array = __Pyx_ImportType_3_0_10(__pyx_t_1, "py4godot.classes.core", "PackedVector2Array", sizeof(struct __pyx_obj_8py4godot_7classes_4core_PackedVector2Array), __PYX_GET_STRUCT_ALIGNMENT_3_0_10(struct __pyx_obj_8py4godot_7classes_4core_PackedVector2Array),__Pyx_ImportType_CheckSize_Warn_3_0_10); if (!__pyx_ptype_8py4godot_7classes_4core_PackedVector2Array) __PYX_ERR(6, 378, __pyx_L1_error)
-  __pyx_vtabptr_8py4godot_7classes_4core_PackedVector2Array = (struct __pyx_vtabstruct_8py4godot_7classes_4core_PackedVector2Array*)__Pyx_GetVtable(__pyx_ptype_8py4godot_7classes_4core_PackedVector2Array); if (unlikely(!__pyx_vtabptr_8py4godot_7classes_4core_PackedVector2Array)) __PYX_ERR(6, 378, __pyx_L1_error)
-  __pyx_ptype_8py4godot_7classes_4core_PackedVector3Array = __Pyx_ImportType_3_0_10(__pyx_t_1, "py4godot.classes.core", "PackedVector3Array", sizeof(struct __pyx_obj_8py4godot_7classes_4core_PackedVector3Array), __PYX_GET_STRUCT_ALIGNMENT_3_0_10(struct __pyx_obj_8py4godot_7classes_4core_PackedVector3Array),__Pyx_ImportType_CheckSize_Warn_3_0_10); if (!__pyx_ptype_8py4godot_7classes_4core_PackedVector3Array) __PYX_ERR(6, 388, __pyx_L1_error)
-  __pyx_vtabptr_8py4godot_7classes_4core_PackedVector3Array = (struct __pyx_vtabstruct_8py4godot_7classes_4core_PackedVector3Array*)__Pyx_GetVtable(__pyx_ptype_8py4godot_7classes_4core_PackedVector3Array); if (unlikely(!__pyx_vtabptr_8py4godot_7classes_4core_PackedVector3Array)) __PYX_ERR(6, 388, __pyx_L1_error)
-  __pyx_ptype_8py4godot_7classes_4core_PackedColorArray = __Pyx_ImportType_3_0_10(__pyx_t_1, "py4godot.classes.core", "PackedColorArray", sizeof(struct __pyx_obj_8py4godot_7classes_4core_PackedColorArray), __PYX_GET_STRUCT_ALIGNMENT_3_0_10(struct __pyx_obj_8py4godot_7classes_4core_PackedColorArray),__Pyx_ImportType_CheckSize_Warn_3_0_10); if (!__pyx_ptype_8py4godot_7classes_4core_PackedColorArray) __PYX_ERR(6, 398, __pyx_L1_error)
-  __pyx_vtabptr_8py4godot_7classes_4core_PackedColorArray = (struct __pyx_vtabstruct_8py4godot_7classes_4core_PackedColorArray*)__Pyx_GetVtable(__pyx_ptype_8py4godot_7classes_4core_PackedColorArray); if (unlikely(!__pyx_vtabptr_8py4godot_7classes_4core_PackedColorArray)) __PYX_ERR(6, 398, __pyx_L1_error)
-  __pyx_ptype_8py4godot_7classes_4core_PackedVector4Array = __Pyx_ImportType_3_0_10(__pyx_t_1, "py4godot.classes.core", "PackedVector4Array", sizeof(struct __pyx_obj_8py4godot_7classes_4core_PackedVector4Array), __PYX_GET_STRUCT_ALIGNMENT_3_0_10(struct __pyx_obj_8py4godot_7classes_4core_PackedVector4Array),__Pyx_ImportType_CheckSize_Warn_3_0_10); if (!__pyx_ptype_8py4godot_7classes_4core_PackedVector4Array) __PYX_ERR(6, 408, __pyx_L1_error)
-  __pyx_vtabptr_8py4godot_7classes_4core_PackedVector4Array = (struct __pyx_vtabstruct_8py4godot_7classes_4core_PackedVector4Array*)__Pyx_GetVtable(__pyx_ptype_8py4godot_7classes_4core_PackedVector4Array); if (unlikely(!__pyx_vtabptr_8py4godot_7classes_4core_PackedVector4Array)) __PYX_ERR(6, 408, __pyx_L1_error)
+  __pyx_ptype_8py4godot_7classes_4core_String = __Pyx_ImportType_3_0_10(__pyx_t_1, "py4godot.classes.core", "String", sizeof(struct __pyx_obj_8py4godot_7classes_4core_String), __PYX_GET_STRUCT_ALIGNMENT_3_0_10(struct __pyx_obj_8py4godot_7classes_4core_String),__Pyx_ImportType_CheckSize_Warn_3_0_10); if (!__pyx_ptype_8py4godot_7classes_4core_String) __PYX_ERR(6, 39, __pyx_L1_error)
+  __pyx_vtabptr_8py4godot_7classes_4core_String = (struct __pyx_vtabstruct_8py4godot_7classes_4core_String*)__Pyx_GetVtable(__pyx_ptype_8py4godot_7classes_4core_String); if (unlikely(!__pyx_vtabptr_8py4godot_7classes_4core_String)) __PYX_ERR(6, 39, __pyx_L1_error)
+  __pyx_ptype_8py4godot_7classes_4core_Vector2 = __Pyx_ImportType_3_0_10(__pyx_t_1, "py4godot.classes.core", "Vector2", sizeof(struct __pyx_obj_8py4godot_7classes_4core_Vector2), __PYX_GET_STRUCT_ALIGNMENT_3_0_10(struct __pyx_obj_8py4godot_7classes_4core_Vector2),__Pyx_ImportType_CheckSize_Warn_3_0_10); if (!__pyx_ptype_8py4godot_7classes_4core_Vector2) __PYX_ERR(6, 53, __pyx_L1_error)
+  __pyx_vtabptr_8py4godot_7classes_4core_Vector2 = (struct __pyx_vtabstruct_8py4godot_7classes_4core_Vector2*)__Pyx_GetVtable(__pyx_ptype_8py4godot_7classes_4core_Vector2); if (unlikely(!__pyx_vtabptr_8py4godot_7classes_4core_Vector2)) __PYX_ERR(6, 53, __pyx_L1_error)
+  __pyx_ptype_8py4godot_7classes_4core_Vector2i = __Pyx_ImportType_3_0_10(__pyx_t_1, "py4godot.classes.core", "Vector2i", sizeof(struct __pyx_obj_8py4godot_7classes_4core_Vector2i), __PYX_GET_STRUCT_ALIGNMENT_3_0_10(struct __pyx_obj_8py4godot_7classes_4core_Vector2i),__Pyx_ImportType_CheckSize_Warn_3_0_10); if (!__pyx_ptype_8py4godot_7classes_4core_Vector2i) __PYX_ERR(6, 67, __pyx_L1_error)
+  __pyx_vtabptr_8py4godot_7classes_4core_Vector2i = (struct __pyx_vtabstruct_8py4godot_7classes_4core_Vector2i*)__Pyx_GetVtable(__pyx_ptype_8py4godot_7classes_4core_Vector2i); if (unlikely(!__pyx_vtabptr_8py4godot_7classes_4core_Vector2i)) __PYX_ERR(6, 67, __pyx_L1_error)
+  __pyx_ptype_8py4godot_7classes_4core_Rect2 = __Pyx_ImportType_3_0_10(__pyx_t_1, "py4godot.classes.core", "Rect2", sizeof(struct __pyx_obj_8py4godot_7classes_4core_Rect2), __PYX_GET_STRUCT_ALIGNMENT_3_0_10(struct __pyx_obj_8py4godot_7classes_4core_Rect2),__Pyx_ImportType_CheckSize_Warn_3_0_10); if (!__pyx_ptype_8py4godot_7classes_4core_Rect2) __PYX_ERR(6, 77, __pyx_L1_error)
+  __pyx_vtabptr_8py4godot_7classes_4core_Rect2 = (struct __pyx_vtabstruct_8py4godot_7classes_4core_Rect2*)__Pyx_GetVtable(__pyx_ptype_8py4godot_7classes_4core_Rect2); if (unlikely(!__pyx_vtabptr_8py4godot_7classes_4core_Rect2)) __PYX_ERR(6, 77, __pyx_L1_error)
+  __pyx_ptype_8py4godot_7classes_4core_Rect2i = __Pyx_ImportType_3_0_10(__pyx_t_1, "py4godot.classes.core", "Rect2i", sizeof(struct __pyx_obj_8py4godot_7classes_4core_Rect2i), __PYX_GET_STRUCT_ALIGNMENT_3_0_10(struct __pyx_obj_8py4godot_7classes_4core_Rect2i),__Pyx_ImportType_CheckSize_Warn_3_0_10); if (!__pyx_ptype_8py4godot_7classes_4core_Rect2i) __PYX_ERR(6, 87, __pyx_L1_error)
+  __pyx_vtabptr_8py4godot_7classes_4core_Rect2i = (struct __pyx_vtabstruct_8py4godot_7classes_4core_Rect2i*)__Pyx_GetVtable(__pyx_ptype_8py4godot_7classes_4core_Rect2i); if (unlikely(!__pyx_vtabptr_8py4godot_7classes_4core_Rect2i)) __PYX_ERR(6, 87, __pyx_L1_error)
+  __pyx_ptype_8py4godot_7classes_4core_Vector3 = __Pyx_ImportType_3_0_10(__pyx_t_1, "py4godot.classes.core", "Vector3", sizeof(struct __pyx_obj_8py4godot_7classes_4core_Vector3), __PYX_GET_STRUCT_ALIGNMENT_3_0_10(struct __pyx_obj_8py4godot_7classes_4core_Vector3),__Pyx_ImportType_CheckSize_Warn_3_0_10); if (!__pyx_ptype_8py4godot_7classes_4core_Vector3) __PYX_ERR(6, 102, __pyx_L1_error)
+  __pyx_vtabptr_8py4godot_7classes_4core_Vector3 = (struct __pyx_vtabstruct_8py4godot_7classes_4core_Vector3*)__Pyx_GetVtable(__pyx_ptype_8py4godot_7classes_4core_Vector3); if (unlikely(!__pyx_vtabptr_8py4godot_7classes_4core_Vector3)) __PYX_ERR(6, 102, __pyx_L1_error)
+  __pyx_ptype_8py4godot_7classes_4core_Vector3i = __Pyx_ImportType_3_0_10(__pyx_t_1, "py4godot.classes.core", "Vector3i", sizeof(struct __pyx_obj_8py4godot_7classes_4core_Vector3i), __PYX_GET_STRUCT_ALIGNMENT_3_0_10(struct __pyx_obj_8py4godot_7classes_4core_Vector3i),__Pyx_ImportType_CheckSize_Warn_3_0_10); if (!__pyx_ptype_8py4godot_7classes_4core_Vector3i) __PYX_ERR(6, 117, __pyx_L1_error)
+  __pyx_vtabptr_8py4godot_7classes_4core_Vector3i = (struct __pyx_vtabstruct_8py4godot_7classes_4core_Vector3i*)__Pyx_GetVtable(__pyx_ptype_8py4godot_7classes_4core_Vector3i); if (unlikely(!__pyx_vtabptr_8py4godot_7classes_4core_Vector3i)) __PYX_ERR(6, 117, __pyx_L1_error)
+  __pyx_ptype_8py4godot_7classes_4core_Transform2D = __Pyx_ImportType_3_0_10(__pyx_t_1, "py4godot.classes.core", "Transform2D", sizeof(struct __pyx_obj_8py4godot_7classes_4core_Transform2D), __PYX_GET_STRUCT_ALIGNMENT_3_0_10(struct __pyx_obj_8py4godot_7classes_4core_Transform2D),__Pyx_ImportType_CheckSize_Warn_3_0_10); if (!__pyx_ptype_8py4godot_7classes_4core_Transform2D) __PYX_ERR(6, 127, __pyx_L1_error)
+  __pyx_vtabptr_8py4godot_7classes_4core_Transform2D = (struct __pyx_vtabstruct_8py4godot_7classes_4core_Transform2D*)__Pyx_GetVtable(__pyx_ptype_8py4godot_7classes_4core_Transform2D); if (unlikely(!__pyx_vtabptr_8py4godot_7classes_4core_Transform2D)) __PYX_ERR(6, 127, __pyx_L1_error)
+  __pyx_ptype_8py4godot_7classes_4core_Vector4 = __Pyx_ImportType_3_0_10(__pyx_t_1, "py4godot.classes.core", "Vector4", sizeof(struct __pyx_obj_8py4godot_7classes_4core_Vector4), __PYX_GET_STRUCT_ALIGNMENT_3_0_10(struct __pyx_obj_8py4godot_7classes_4core_Vector4),__Pyx_ImportType_CheckSize_Warn_3_0_10); if (!__pyx_ptype_8py4godot_7classes_4core_Vector4) __PYX_ERR(6, 143, __pyx_L1_error)
+  __pyx_vtabptr_8py4godot_7classes_4core_Vector4 = (struct __pyx_vtabstruct_8py4godot_7classes_4core_Vector4*)__Pyx_GetVtable(__pyx_ptype_8py4godot_7classes_4core_Vector4); if (unlikely(!__pyx_vtabptr_8py4godot_7classes_4core_Vector4)) __PYX_ERR(6, 143, __pyx_L1_error)
+  __pyx_ptype_8py4godot_7classes_4core_Vector4i = __Pyx_ImportType_3_0_10(__pyx_t_1, "py4godot.classes.core", "Vector4i", sizeof(struct __pyx_obj_8py4godot_7classes_4core_Vector4i), __PYX_GET_STRUCT_ALIGNMENT_3_0_10(struct __pyx_obj_8py4godot_7classes_4core_Vector4i),__Pyx_ImportType_CheckSize_Warn_3_0_10); if (!__pyx_ptype_8py4godot_7classes_4core_Vector4i) __PYX_ERR(6, 159, __pyx_L1_error)
+  __pyx_vtabptr_8py4godot_7classes_4core_Vector4i = (struct __pyx_vtabstruct_8py4godot_7classes_4core_Vector4i*)__Pyx_GetVtable(__pyx_ptype_8py4godot_7classes_4core_Vector4i); if (unlikely(!__pyx_vtabptr_8py4godot_7classes_4core_Vector4i)) __PYX_ERR(6, 159, __pyx_L1_error)
+  __pyx_ptype_8py4godot_7classes_4core_Plane = __Pyx_ImportType_3_0_10(__pyx_t_1, "py4godot.classes.core", "Plane", sizeof(struct __pyx_obj_8py4godot_7classes_4core_Plane), __PYX_GET_STRUCT_ALIGNMENT_3_0_10(struct __pyx_obj_8py4godot_7classes_4core_Plane),__Pyx_ImportType_CheckSize_Warn_3_0_10); if (!__pyx_ptype_8py4godot_7classes_4core_Plane) __PYX_ERR(6, 169, __pyx_L1_error)
+  __pyx_vtabptr_8py4godot_7classes_4core_Plane = (struct __pyx_vtabstruct_8py4godot_7classes_4core_Plane*)__Pyx_GetVtable(__pyx_ptype_8py4godot_7classes_4core_Plane); if (unlikely(!__pyx_vtabptr_8py4godot_7classes_4core_Plane)) __PYX_ERR(6, 169, __pyx_L1_error)
+  __pyx_ptype_8py4godot_7classes_4core_Quaternion = __Pyx_ImportType_3_0_10(__pyx_t_1, "py4godot.classes.core", "Quaternion", sizeof(struct __pyx_obj_8py4godot_7classes_4core_Quaternion), __PYX_GET_STRUCT_ALIGNMENT_3_0_10(struct __pyx_obj_8py4godot_7classes_4core_Quaternion),__Pyx_ImportType_CheckSize_Warn_3_0_10); if (!__pyx_ptype_8py4godot_7classes_4core_Quaternion) __PYX_ERR(6, 179, __pyx_L1_error)
+  __pyx_vtabptr_8py4godot_7classes_4core_Quaternion = (struct __pyx_vtabstruct_8py4godot_7classes_4core_Quaternion*)__Pyx_GetVtable(__pyx_ptype_8py4godot_7classes_4core_Quaternion); if (unlikely(!__pyx_vtabptr_8py4godot_7classes_4core_Quaternion)) __PYX_ERR(6, 179, __pyx_L1_error)
+  __pyx_ptype_8py4godot_7classes_4core_AABB = __Pyx_ImportType_3_0_10(__pyx_t_1, "py4godot.classes.core", "AABB", sizeof(struct __pyx_obj_8py4godot_7classes_4core_AABB), __PYX_GET_STRUCT_ALIGNMENT_3_0_10(struct __pyx_obj_8py4godot_7classes_4core_AABB),__Pyx_ImportType_CheckSize_Warn_3_0_10); if (!__pyx_ptype_8py4godot_7classes_4core_AABB) __PYX_ERR(6, 189, __pyx_L1_error)
+  __pyx_vtabptr_8py4godot_7classes_4core_AABB = (struct __pyx_vtabstruct_8py4godot_7classes_4core_AABB*)__Pyx_GetVtable(__pyx_ptype_8py4godot_7classes_4core_AABB); if (unlikely(!__pyx_vtabptr_8py4godot_7classes_4core_AABB)) __PYX_ERR(6, 189, __pyx_L1_error)
+  __pyx_ptype_8py4godot_7classes_4core_Basis = __Pyx_ImportType_3_0_10(__pyx_t_1, "py4godot.classes.core", "Basis", sizeof(struct __pyx_obj_8py4godot_7classes_4core_Basis), __PYX_GET_STRUCT_ALIGNMENT_3_0_10(struct __pyx_obj_8py4godot_7classes_4core_Basis),__Pyx_ImportType_CheckSize_Warn_3_0_10); if (!__pyx_ptype_8py4godot_7classes_4core_Basis) __PYX_ERR(6, 199, __pyx_L1_error)
+  __pyx_vtabptr_8py4godot_7classes_4core_Basis = (struct __pyx_vtabstruct_8py4godot_7classes_4core_Basis*)__Pyx_GetVtable(__pyx_ptype_8py4godot_7classes_4core_Basis); if (unlikely(!__pyx_vtabptr_8py4godot_7classes_4core_Basis)) __PYX_ERR(6, 199, __pyx_L1_error)
+  __pyx_ptype_8py4godot_7classes_4core_Transform3D = __Pyx_ImportType_3_0_10(__pyx_t_1, "py4godot.classes.core", "Transform3D", sizeof(struct __pyx_obj_8py4godot_7classes_4core_Transform3D), __PYX_GET_STRUCT_ALIGNMENT_3_0_10(struct __pyx_obj_8py4godot_7classes_4core_Transform3D),__Pyx_ImportType_CheckSize_Warn_3_0_10); if (!__pyx_ptype_8py4godot_7classes_4core_Transform3D) __PYX_ERR(6, 209, __pyx_L1_error)
+  __pyx_vtabptr_8py4godot_7classes_4core_Transform3D = (struct __pyx_vtabstruct_8py4godot_7classes_4core_Transform3D*)__Pyx_GetVtable(__pyx_ptype_8py4godot_7classes_4core_Transform3D); if (unlikely(!__pyx_vtabptr_8py4godot_7classes_4core_Transform3D)) __PYX_ERR(6, 209, __pyx_L1_error)
+  __pyx_ptype_8py4godot_7classes_4core_Projection = __Pyx_ImportType_3_0_10(__pyx_t_1, "py4godot.classes.core", "Projection", sizeof(struct __pyx_obj_8py4godot_7classes_4core_Projection), __PYX_GET_STRUCT_ALIGNMENT_3_0_10(struct __pyx_obj_8py4godot_7classes_4core_Projection),__Pyx_ImportType_CheckSize_Warn_3_0_10); if (!__pyx_ptype_8py4godot_7classes_4core_Projection) __PYX_ERR(6, 227, __pyx_L1_error)
+  __pyx_vtabptr_8py4godot_7classes_4core_Projection = (struct __pyx_vtabstruct_8py4godot_7classes_4core_Projection*)__Pyx_GetVtable(__pyx_ptype_8py4godot_7classes_4core_Projection); if (unlikely(!__pyx_vtabptr_8py4godot_7classes_4core_Projection)) __PYX_ERR(6, 227, __pyx_L1_error)
+  __pyx_ptype_8py4godot_7classes_4core_Color = __Pyx_ImportType_3_0_10(__pyx_t_1, "py4godot.classes.core", "Color", sizeof(struct __pyx_obj_8py4godot_7classes_4core_Color), __PYX_GET_STRUCT_ALIGNMENT_3_0_10(struct __pyx_obj_8py4godot_7classes_4core_Color),__Pyx_ImportType_CheckSize_Warn_3_0_10); if (!__pyx_ptype_8py4godot_7classes_4core_Color) __PYX_ERR(6, 237, __pyx_L1_error)
+  __pyx_vtabptr_8py4godot_7classes_4core_Color = (struct __pyx_vtabstruct_8py4godot_7classes_4core_Color*)__Pyx_GetVtable(__pyx_ptype_8py4godot_7classes_4core_Color); if (unlikely(!__pyx_vtabptr_8py4godot_7classes_4core_Color)) __PYX_ERR(6, 237, __pyx_L1_error)
+  __pyx_ptype_8py4godot_7classes_4core_StringName = __Pyx_ImportType_3_0_10(__pyx_t_1, "py4godot.classes.core", "StringName", sizeof(struct __pyx_obj_8py4godot_7classes_4core_StringName), __PYX_GET_STRUCT_ALIGNMENT_3_0_10(struct __pyx_obj_8py4godot_7classes_4core_StringName),__Pyx_ImportType_CheckSize_Warn_3_0_10); if (!__pyx_ptype_8py4godot_7classes_4core_StringName) __PYX_ERR(6, 247, __pyx_L1_error)
+  __pyx_vtabptr_8py4godot_7classes_4core_StringName = (struct __pyx_vtabstruct_8py4godot_7classes_4core_StringName*)__Pyx_GetVtable(__pyx_ptype_8py4godot_7classes_4core_StringName); if (unlikely(!__pyx_vtabptr_8py4godot_7classes_4core_StringName)) __PYX_ERR(6, 247, __pyx_L1_error)
+  __pyx_ptype_8py4godot_7classes_4core_NodePath = __Pyx_ImportType_3_0_10(__pyx_t_1, "py4godot.classes.core", "NodePath", sizeof(struct __pyx_obj_8py4godot_7classes_4core_NodePath), __PYX_GET_STRUCT_ALIGNMENT_3_0_10(struct __pyx_obj_8py4godot_7classes_4core_NodePath),__Pyx_ImportType_CheckSize_Warn_3_0_10); if (!__pyx_ptype_8py4godot_7classes_4core_NodePath) __PYX_ERR(6, 257, __pyx_L1_error)
+  __pyx_vtabptr_8py4godot_7classes_4core_NodePath = (struct __pyx_vtabstruct_8py4godot_7classes_4core_NodePath*)__Pyx_GetVtable(__pyx_ptype_8py4godot_7classes_4core_NodePath); if (unlikely(!__pyx_vtabptr_8py4godot_7classes_4core_NodePath)) __PYX_ERR(6, 257, __pyx_L1_error)
+  __pyx_ptype_8py4godot_7classes_4core_RID = __Pyx_ImportType_3_0_10(__pyx_t_1, "py4godot.classes.core", "RID", sizeof(struct __pyx_obj_8py4godot_7classes_4core_RID), __PYX_GET_STRUCT_ALIGNMENT_3_0_10(struct __pyx_obj_8py4godot_7classes_4core_RID),__Pyx_ImportType_CheckSize_Warn_3_0_10); if (!__pyx_ptype_8py4godot_7classes_4core_RID) __PYX_ERR(6, 267, __pyx_L1_error)
+  __pyx_vtabptr_8py4godot_7classes_4core_RID = (struct __pyx_vtabstruct_8py4godot_7classes_4core_RID*)__Pyx_GetVtable(__pyx_ptype_8py4godot_7classes_4core_RID); if (unlikely(!__pyx_vtabptr_8py4godot_7classes_4core_RID)) __PYX_ERR(6, 267, __pyx_L1_error)
+  __pyx_ptype_8py4godot_7classes_4core_Callable = __Pyx_ImportType_3_0_10(__pyx_t_1, "py4godot.classes.core", "Callable", sizeof(struct __pyx_obj_8py4godot_7classes_4core_Callable), __PYX_GET_STRUCT_ALIGNMENT_3_0_10(struct __pyx_obj_8py4godot_7classes_4core_Callable),__Pyx_ImportType_CheckSize_Warn_3_0_10); if (!__pyx_ptype_8py4godot_7classes_4core_Callable) __PYX_ERR(6, 277, __pyx_L1_error)
+  __pyx_vtabptr_8py4godot_7classes_4core_Callable = (struct __pyx_vtabstruct_8py4godot_7classes_4core_Callable*)__Pyx_GetVtable(__pyx_ptype_8py4godot_7classes_4core_Callable); if (unlikely(!__pyx_vtabptr_8py4godot_7classes_4core_Callable)) __PYX_ERR(6, 277, __pyx_L1_error)
+  __pyx_ptype_8py4godot_7classes_4core_Signal = __Pyx_ImportType_3_0_10(__pyx_t_1, "py4godot.classes.core", "Signal", sizeof(struct __pyx_obj_8py4godot_7classes_4core_Signal), __PYX_GET_STRUCT_ALIGNMENT_3_0_10(struct __pyx_obj_8py4godot_7classes_4core_Signal),__Pyx_ImportType_CheckSize_Warn_3_0_10); if (!__pyx_ptype_8py4godot_7classes_4core_Signal) __PYX_ERR(6, 287, __pyx_L1_error)
+  __pyx_vtabptr_8py4godot_7classes_4core_Signal = (struct __pyx_vtabstruct_8py4godot_7classes_4core_Signal*)__Pyx_GetVtable(__pyx_ptype_8py4godot_7classes_4core_Signal); if (unlikely(!__pyx_vtabptr_8py4godot_7classes_4core_Signal)) __PYX_ERR(6, 287, __pyx_L1_error)
+  __pyx_ptype_8py4godot_7classes_4core_Dictionary = __Pyx_ImportType_3_0_10(__pyx_t_1, "py4godot.classes.core", "Dictionary", sizeof(struct __pyx_obj_8py4godot_7classes_4core_Dictionary), __PYX_GET_STRUCT_ALIGNMENT_3_0_10(struct __pyx_obj_8py4godot_7classes_4core_Dictionary),__Pyx_ImportType_CheckSize_Warn_3_0_10); if (!__pyx_ptype_8py4godot_7classes_4core_Dictionary) __PYX_ERR(6, 297, __pyx_L1_error)
+  __pyx_vtabptr_8py4godot_7classes_4core_Dictionary = (struct __pyx_vtabstruct_8py4godot_7classes_4core_Dictionary*)__Pyx_GetVtable(__pyx_ptype_8py4godot_7classes_4core_Dictionary); if (unlikely(!__pyx_vtabptr_8py4godot_7classes_4core_Dictionary)) __PYX_ERR(6, 297, __pyx_L1_error)
+  __pyx_ptype_8py4godot_7classes_4core_Array = __Pyx_ImportType_3_0_10(__pyx_t_1, "py4godot.classes.core", "Array", sizeof(struct __pyx_obj_8py4godot_7classes_4core_Array), __PYX_GET_STRUCT_ALIGNMENT_3_0_10(struct __pyx_obj_8py4godot_7classes_4core_Array),__Pyx_ImportType_CheckSize_Warn_3_0_10); if (!__pyx_ptype_8py4godot_7classes_4core_Array) __PYX_ERR(6, 307, __pyx_L1_error)
+  __pyx_vtabptr_8py4godot_7classes_4core_Array = (struct __pyx_vtabstruct_8py4godot_7classes_4core_Array*)__Pyx_GetVtable(__pyx_ptype_8py4godot_7classes_4core_Array); if (unlikely(!__pyx_vtabptr_8py4godot_7classes_4core_Array)) __PYX_ERR(6, 307, __pyx_L1_error)
+  __pyx_ptype_8py4godot_7classes_4core_PackedByteArray = __Pyx_ImportType_3_0_10(__pyx_t_1, "py4godot.classes.core", "PackedByteArray", sizeof(struct __pyx_obj_8py4godot_7classes_4core_PackedByteArray), __PYX_GET_STRUCT_ALIGNMENT_3_0_10(struct __pyx_obj_8py4godot_7classes_4core_PackedByteArray),__Pyx_ImportType_CheckSize_Warn_3_0_10); if (!__pyx_ptype_8py4godot_7classes_4core_PackedByteArray) __PYX_ERR(6, 317, __pyx_L1_error)
+  __pyx_vtabptr_8py4godot_7classes_4core_PackedByteArray = (struct __pyx_vtabstruct_8py4godot_7classes_4core_PackedByteArray*)__Pyx_GetVtable(__pyx_ptype_8py4godot_7classes_4core_PackedByteArray); if (unlikely(!__pyx_vtabptr_8py4godot_7classes_4core_PackedByteArray)) __PYX_ERR(6, 317, __pyx_L1_error)
+  __pyx_ptype_8py4godot_7classes_4core_PackedInt32Array = __Pyx_ImportType_3_0_10(__pyx_t_1, "py4godot.classes.core", "PackedInt32Array", sizeof(struct __pyx_obj_8py4godot_7classes_4core_PackedInt32Array), __PYX_GET_STRUCT_ALIGNMENT_3_0_10(struct __pyx_obj_8py4godot_7classes_4core_PackedInt32Array),__Pyx_ImportType_CheckSize_Warn_3_0_10); if (!__pyx_ptype_8py4godot_7classes_4core_PackedInt32Array) __PYX_ERR(6, 327, __pyx_L1_error)
+  __pyx_vtabptr_8py4godot_7classes_4core_PackedInt32Array = (struct __pyx_vtabstruct_8py4godot_7classes_4core_PackedInt32Array*)__Pyx_GetVtable(__pyx_ptype_8py4godot_7classes_4core_PackedInt32Array); if (unlikely(!__pyx_vtabptr_8py4godot_7classes_4core_PackedInt32Array)) __PYX_ERR(6, 327, __pyx_L1_error)
+  __pyx_ptype_8py4godot_7classes_4core_PackedInt64Array = __Pyx_ImportType_3_0_10(__pyx_t_1, "py4godot.classes.core", "PackedInt64Array", sizeof(struct __pyx_obj_8py4godot_7classes_4core_PackedInt64Array), __PYX_GET_STRUCT_ALIGNMENT_3_0_10(struct __pyx_obj_8py4godot_7classes_4core_PackedInt64Array),__Pyx_ImportType_CheckSize_Warn_3_0_10); if (!__pyx_ptype_8py4godot_7classes_4core_PackedInt64Array) __PYX_ERR(6, 337, __pyx_L1_error)
+  __pyx_vtabptr_8py4godot_7classes_4core_PackedInt64Array = (struct __pyx_vtabstruct_8py4godot_7classes_4core_PackedInt64Array*)__Pyx_GetVtable(__pyx_ptype_8py4godot_7classes_4core_PackedInt64Array); if (unlikely(!__pyx_vtabptr_8py4godot_7classes_4core_PackedInt64Array)) __PYX_ERR(6, 337, __pyx_L1_error)
+  __pyx_ptype_8py4godot_7classes_4core_PackedFloat32Array = __Pyx_ImportType_3_0_10(__pyx_t_1, "py4godot.classes.core", "PackedFloat32Array", sizeof(struct __pyx_obj_8py4godot_7classes_4core_PackedFloat32Array), __PYX_GET_STRUCT_ALIGNMENT_3_0_10(struct __pyx_obj_8py4godot_7classes_4core_PackedFloat32Array),__Pyx_ImportType_CheckSize_Warn_3_0_10); if (!__pyx_ptype_8py4godot_7classes_4core_PackedFloat32Array) __PYX_ERR(6, 347, __pyx_L1_error)
+  __pyx_vtabptr_8py4godot_7classes_4core_PackedFloat32Array = (struct __pyx_vtabstruct_8py4godot_7classes_4core_PackedFloat32Array*)__Pyx_GetVtable(__pyx_ptype_8py4godot_7classes_4core_PackedFloat32Array); if (unlikely(!__pyx_vtabptr_8py4godot_7classes_4core_PackedFloat32Array)) __PYX_ERR(6, 347, __pyx_L1_error)
+  __pyx_ptype_8py4godot_7classes_4core_PackedFloat64Array = __Pyx_ImportType_3_0_10(__pyx_t_1, "py4godot.classes.core", "PackedFloat64Array", sizeof(struct __pyx_obj_8py4godot_7classes_4core_PackedFloat64Array), __PYX_GET_STRUCT_ALIGNMENT_3_0_10(struct __pyx_obj_8py4godot_7classes_4core_PackedFloat64Array),__Pyx_ImportType_CheckSize_Warn_3_0_10); if (!__pyx_ptype_8py4godot_7classes_4core_PackedFloat64Array) __PYX_ERR(6, 357, __pyx_L1_error)
+  __pyx_vtabptr_8py4godot_7classes_4core_PackedFloat64Array = (struct __pyx_vtabstruct_8py4godot_7classes_4core_PackedFloat64Array*)__Pyx_GetVtable(__pyx_ptype_8py4godot_7classes_4core_PackedFloat64Array); if (unlikely(!__pyx_vtabptr_8py4godot_7classes_4core_PackedFloat64Array)) __PYX_ERR(6, 357, __pyx_L1_error)
+  __pyx_ptype_8py4godot_7classes_4core_PackedStringArray = __Pyx_ImportType_3_0_10(__pyx_t_1, "py4godot.classes.core", "PackedStringArray", sizeof(struct __pyx_obj_8py4godot_7classes_4core_PackedStringArray), __PYX_GET_STRUCT_ALIGNMENT_3_0_10(struct __pyx_obj_8py4godot_7classes_4core_PackedStringArray),__Pyx_ImportType_CheckSize_Warn_3_0_10); if (!__pyx_ptype_8py4godot_7classes_4core_PackedStringArray) __PYX_ERR(6, 367, __pyx_L1_error)
+  __pyx_vtabptr_8py4godot_7classes_4core_PackedStringArray = (struct __pyx_vtabstruct_8py4godot_7classes_4core_PackedStringArray*)__Pyx_GetVtable(__pyx_ptype_8py4godot_7classes_4core_PackedStringArray); if (unlikely(!__pyx_vtabptr_8py4godot_7classes_4core_PackedStringArray)) __PYX_ERR(6, 367, __pyx_L1_error)
+  __pyx_ptype_8py4godot_7classes_4core_PackedVector2Array = __Pyx_ImportType_3_0_10(__pyx_t_1, "py4godot.classes.core", "PackedVector2Array", sizeof(struct __pyx_obj_8py4godot_7classes_4core_PackedVector2Array), __PYX_GET_STRUCT_ALIGNMENT_3_0_10(struct __pyx_obj_8py4godot_7classes_4core_PackedVector2Array),__Pyx_ImportType_CheckSize_Warn_3_0_10); if (!__pyx_ptype_8py4godot_7classes_4core_PackedVector2Array) __PYX_ERR(6, 377, __pyx_L1_error)
+  __pyx_vtabptr_8py4godot_7classes_4core_PackedVector2Array = (struct __pyx_vtabstruct_8py4godot_7classes_4core_PackedVector2Array*)__Pyx_GetVtable(__pyx_ptype_8py4godot_7classes_4core_PackedVector2Array); if (unlikely(!__pyx_vtabptr_8py4godot_7classes_4core_PackedVector2Array)) __PYX_ERR(6, 377, __pyx_L1_error)
+  __pyx_ptype_8py4godot_7classes_4core_PackedVector3Array = __Pyx_ImportType_3_0_10(__pyx_t_1, "py4godot.classes.core", "PackedVector3Array", sizeof(struct __pyx_obj_8py4godot_7classes_4core_PackedVector3Array), __PYX_GET_STRUCT_ALIGNMENT_3_0_10(struct __pyx_obj_8py4godot_7classes_4core_PackedVector3Array),__Pyx_ImportType_CheckSize_Warn_3_0_10); if (!__pyx_ptype_8py4godot_7classes_4core_PackedVector3Array) __PYX_ERR(6, 387, __pyx_L1_error)
+  __pyx_vtabptr_8py4godot_7classes_4core_PackedVector3Array = (struct __pyx_vtabstruct_8py4godot_7classes_4core_PackedVector3Array*)__Pyx_GetVtable(__pyx_ptype_8py4godot_7classes_4core_PackedVector3Array); if (unlikely(!__pyx_vtabptr_8py4godot_7classes_4core_PackedVector3Array)) __PYX_ERR(6, 387, __pyx_L1_error)
+  __pyx_ptype_8py4godot_7classes_4core_PackedColorArray = __Pyx_ImportType_3_0_10(__pyx_t_1, "py4godot.classes.core", "PackedColorArray", sizeof(struct __pyx_obj_8py4godot_7classes_4core_PackedColorArray), __PYX_GET_STRUCT_ALIGNMENT_3_0_10(struct __pyx_obj_8py4godot_7classes_4core_PackedColorArray),__Pyx_ImportType_CheckSize_Warn_3_0_10); if (!__pyx_ptype_8py4godot_7classes_4core_PackedColorArray) __PYX_ERR(6, 397, __pyx_L1_error)
+  __pyx_vtabptr_8py4godot_7classes_4core_PackedColorArray = (struct __pyx_vtabstruct_8py4godot_7classes_4core_PackedColorArray*)__Pyx_GetVtable(__pyx_ptype_8py4godot_7classes_4core_PackedColorArray); if (unlikely(!__pyx_vtabptr_8py4godot_7classes_4core_PackedColorArray)) __PYX_ERR(6, 397, __pyx_L1_error)
+  __pyx_ptype_8py4godot_7classes_4core_PackedVector4Array = __Pyx_ImportType_3_0_10(__pyx_t_1, "py4godot.classes.core", "PackedVector4Array", sizeof(struct __pyx_obj_8py4godot_7classes_4core_PackedVector4Array), __PYX_GET_STRUCT_ALIGNMENT_3_0_10(struct __pyx_obj_8py4godot_7classes_4core_PackedVector4Array),__Pyx_ImportType_CheckSize_Warn_3_0_10); if (!__pyx_ptype_8py4godot_7classes_4core_PackedVector4Array) __PYX_ERR(6, 407, __pyx_L1_error)
+  __pyx_vtabptr_8py4godot_7classes_4core_PackedVector4Array = (struct __pyx_vtabstruct_8py4godot_7classes_4core_PackedVector4Array*)__Pyx_GetVtable(__pyx_ptype_8py4godot_7classes_4core_PackedVector4Array); if (unlikely(!__pyx_vtabptr_8py4godot_7classes_4core_PackedVector4Array)) __PYX_ERR(6, 407, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_t_1 = PyImport_ImportModule("py4godot.classes.Object.Object"); if (unlikely(!__pyx_t_1)) __PYX_ERR(7, 13, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);

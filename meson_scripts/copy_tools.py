@@ -73,7 +73,7 @@ def copy_main(platform):
         copy(f"build/{platform}/main.so",
              f"build/final/{platform}/{config_data['python_ver']}-{platform}/python/install/bin/main.so")
         copy(f"build/{platform}/pythonscript.so",
-             f"build/final/{platform}/{config_data['python_ver']}-{platform}/python/install/pythonscript.so")
+             f"build/final/{platform}/{config_data['python_ver']}-{platform}/python/install/bin/pythonscript.so")
 
 
 def copy_tests(platform):
