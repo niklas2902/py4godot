@@ -1,0 +1,32 @@
+# Use the official Ubuntu base image
+FROM ubuntu:22.04
+
+# Set the working directory in the container
+WORKDIR /app
+
+# Update the package list and install necessary dependencies
+RUN apt-get update && \
+    apt-get install -y python3 python3-pip mingw-w64 build-essential
+
+# Copy the local files into the container at /app
+COPY . /app
+
+# Install any additional dependencies using pip, if needed
+RUN pip3 install -r requirements.txt
+
+# Create a symbolic link for python to point to python3
+RUN ln -s /usr/bin/python3 /usr/bin/python
+
+# Ensure the correct toolchain is used
+RUN ln -sf /usr/bin/i686-w64-mingw32-gcc /usr/bin/gcc-mingw && \
+    ln -sf /usr/bin/i686-w64-mingw32-g++ /usr/bin/g++-mingw32 && \
+    ln -sf /usr/bin/i686-w64-mingw32-ld /usr/bin/ld
+
+# Export LD environment variable to ensure 32-bit linker is used
+ENV LD=i686-w64-mingw32-ld
+
+# Ensure the correct PATH is set
+ENV PATH=/usr/local/bin:$PATH
+
+# Command to execute when the container starts
+CMD ["python3", "build.py", "--target_platform=windows32", "--compiler=g++-mingw32", "-run_tests=false", "-download_godot=false"]s

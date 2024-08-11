@@ -1,12 +1,14 @@
 import pathlib
+import zipfile
+
 import wget
 import zstandard
 import tarfile
 import os
 from shutil import copytree, ignore_patterns
 
-platform_dict = {"windows64": "x86_64-pc-windows-msvc-shared-pgo", "windows": "i686-pc-windows-msvc-shared-pgo",
-                 "linux64": "x86_64-unknown-linux-gnu-pgo+lto", "linux": "i686-unknown-linux-gnu-pgo"}
+platform_dict = {"windows64": "x86_64-pc-windows-msvc-shared-pgo", "windows32": "i686-pc-windows-msvc-shared-pgo",
+                 "linux64": "x86_64-unknown-linux-gnu-pgo+lto"}
 python_files_dir = "python_files"
 copy_dir = "build/final"
 python_ver = "cpython-3.12.4"
@@ -26,8 +28,13 @@ def download_file(platform, allow_copy=False):
 
     print("download:" + platform)
 
-    url = f'https://github.com/indygreg/python-build-standalone/releases/download/20240713/{python_ver}+20240713-{platform_dict[platform]}-full.tar.zst'
-    python_file = f'{python_files_dir}/{python_ver}-{platform_dict[platform]}.tar.zst'
+    if platform != "linux32":
+        url = f'https://github.com/indygreg/python-build-standalone/releases/download/20240713/{python_ver}+20240713-{platform_dict[platform]}-full.tar.zst'
+        python_file = f'{python_files_dir}/{python_ver}-{platform_dict[platform]}.tar.zst'
+    else :
+        url = f'https://github.com/niklas2902/prebuild-python-linux32/releases/download/release-0.1/{python_ver}-linux32.zip'
+        python_file = f'{python_files_dir}/{python_ver}-linux32.zip'
+
     export_name = f"{python_ver}-" + platform
 
     if (not os.path.isfile(python_file)):  # checking whether file was already downloaded
@@ -41,7 +48,7 @@ def download_file(platform, allow_copy=False):
         decompress_zstandard_to_folder(python_file)
     if (not os.path.isdir(python_files_dir + "/" + export_name)):  # extracting the files from the tar folder
         print("extracting .tar file")
-        extract_tar(python_file.replace(".zst", ""), export_name)
+        extract_archive(python_file.replace(".zst", ""), export_name)
 
     if (allow_copy):
         create_sitecustomization(export_name, platform)
@@ -58,12 +65,17 @@ def decompress_zstandard_to_folder(input_file):
             decomp.copy_stream(compressed, destination)
 
 
-def extract_tar(file, export_name):
+def extract_archive(file, export_name):
     """function for extracting .tar archieve"""
     if (not os.path.isdir(python_files_dir + "/" + export_name)):
-        my_tar = tarfile.open(file)
-        my_tar.extractall(python_files_dir + "/" + export_name)  # specify which folder to extract to
-        my_tar.close()
+        print("File:", file)
+        if file.endswith("tar"):
+            my_tar = tarfile.open(file)
+            my_tar.extractall(python_files_dir + "/" + export_name)  # specify which folder to extract to
+            my_tar.close()
+        else:
+            with zipfile.ZipFile(file, 'r') as zip_ref:
+                zip_ref.extractall(python_files_dir + "/" + export_name)
 
 
 def copy_to_build(export_folder, platform):

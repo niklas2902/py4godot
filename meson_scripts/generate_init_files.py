@@ -33,11 +33,11 @@ def create_init_file(platform):
         with open(f"{build_folder}/{platform}/{config_data['python_ver']}-{platform}/python/install/Lib/site-packages/py4godot/__init__.py", "w") as init_file:
             init_file.write(import_string_py4godot)
     else:
-        with open(f"{build_folder}/{platform}/{config_data['python_ver']}-{platform}/python/install/lib/python3.11/py4godot/{core_folder}/__init__.py", "w") as init_file:
+        with open(f"{build_folder}/{platform}/{config_data['python_ver']}-{platform}/python/install/lib/python3.12/site-packages/py4godot/{core_folder}/__init__.py", "w") as init_file:
             init_file.write(import_string_core)
 
         """generate the __init__ file needed for the py4godot module"""
-        with open(f"{build_folder}/{platform}/{config_data['python_ver']}-{platform}/python/install/lib/python3.11/py4godot/__init__.py", "w") as init_file:
+        with open(f"{build_folder}/{platform}/{config_data['python_ver']}-{platform}/python/install/lib/python3.12/site-packages/py4godot/__init__.py", "w") as init_file:
             init_file.write(import_string_py4godot)
 
 

@@ -7,9 +7,6 @@
 #include "py4godot/cppclasses/Script/Script.h"
 #include "py4godot/cppcore/Variant.h"
 #include <cassert>
-#include <mutex>
-
-std::mutex mutex_loader{};
 
 GDExtensionPtrOperatorEvaluator operator_equal_string_name_loader;
 std::int64_t PyResourceFormatLoader::id_counter{1000};
@@ -280,7 +277,7 @@ StringName func_name__load;
 
 }
 GDExtensionClassCallVirtual get_virtual_loader(void *p_userdata, GDExtensionConstStringNamePtr p_name) {
-    std::lock_guard<std::mutex> lock(mtx);
+    LOCK(mtx);
 
     StringName name = StringName::new_static(((void**)const_cast<GDExtensionTypePtr>(p_name))[0]);
     auto length = name.length();

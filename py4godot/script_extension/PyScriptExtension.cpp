@@ -14,10 +14,7 @@
 #include "py4godot/script_extension/script_extension_helpers_api.h"
 #include <cassert>
 #include "Python.h"
-#include <mutex>
 #include <algorithm>
-
-std::mutex m;
 
 GDExtensionPtrOperatorEvaluator operator_equal_string_namescript;
 PyScriptExtension extension;
@@ -800,7 +797,7 @@ void call_virtual_func__get_rpc_config(GDExtensionClassInstancePtr p_instance, c
 
 
 GDExtensionClassCallVirtual get_virtual_script(void *p_userdata, GDExtensionConstStringNamePtr p_name) {
-    std::lock_guard<std::mutex> lock(mtx);
+    LOCK(mtx);
 
     StringName name = StringName::new_static(((void**)const_cast<GDExtensionTypePtr>(p_name))[0]);
     String name_string = String::new2(name);

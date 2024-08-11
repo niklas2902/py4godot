@@ -3,14 +3,13 @@
 #include "gdextension_interface.h"
 #include "functions.h"
 #include "Python.h"
-#include <mutex>
 
 
 #ifdef _WIN64
 #define PYTHONHOME L"addons/py4godot/cpython-3.12.4-windows64/python/install"
 
 #elif _WIN32
-#define PYTHONHOME L"cpython-3.12.4-lnux64/python/install"
+#define PYTHONHOME L"cpython-3.12.4-windows32/python/install"
 
 #elif __linux32__
 #define PYTHONHOME L"cpython-3.12.4-linux/python/install/lib"
@@ -31,8 +30,42 @@
 #endif
 #endif
 
+//Setting up threading
+#ifdef _WIN32
+    #ifdef _M_IX86
+        //extern int mtx;
+        #define NOMINMAX
+        #define NOATOM
+        #include <windows.h>
+        #undef far
+        #undef near
+        #undef interface
+        extern CRITICAL_SECTION mtx;
+        class MutexLock {
+        private:
+            CRITICAL_SECTION& mutex;
 
-extern std::mutex mtx; // Define a mutex
+        public:
+            MutexLock(CRITICAL_SECTION& m) : mutex(m) {
+                EnterCriticalSection(&mutex);
+            }
+
+            ~MutexLock() {
+                LeaveCriticalSection(&mutex);
+            }
+        };
+        #define LOCK //MutexLock lock
+
+    #else
+        #include <mutex>
+        extern std::mutex mtx; // Define a mutex
+        #define LOCK std::lock_guard<std::mutex> lock
+    #endif
+#else
+    #include <mutex>
+    extern std::mutex mtx; // Define a mutex
+    #define LOCK std::lock_guard<std::mutex> lock
+#endif
 
 extern GDExtensionClassLibraryPtr _library;
 
