@@ -4,8 +4,8 @@ import_string_core = """
 
 import_string_py4godot = """
 from py4godot.pluginscript_api.utils.SignalArg import SignalArg
-from py4godot.pluginscript_api.utils.annotations import gdclass, gdproperty,signal, gdmethod
-from py4godot.pluginscript_api.utils.experimental import prop
+from py4godot.pluginscript_api.utils.annotations import gdclass, signal, gdmethod
+from py4godot.pluginscript_api.utils.experimental import gdproperty
 import py4godot.constants as constants
 """
 
