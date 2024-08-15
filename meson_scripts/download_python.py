@@ -8,7 +8,7 @@ import os
 from shutil import copytree, ignore_patterns
 
 platform_dict = {"windows64": "x86_64-pc-windows-msvc-shared-pgo", "windows32": "i686-pc-windows-msvc-shared-pgo",
-                 "linux64": "x86_64-unknown-linux-gnu-pgo+lto"}
+                 "linux64": "x86_64-unknown-linux-gnu_stripped"}
 python_files_dir = "python_files"
 copy_dir = "build/final"
 python_ver = "cpython-3.12.4"
@@ -29,8 +29,8 @@ def download_file(platform, allow_copy=False):
     print("download:" + platform)
 
     if platform != "linux32":
-        url = f'https://github.com/indygreg/python-build-standalone/releases/download/20240713/{python_ver}+20240713-{platform_dict[platform]}-full.tar.zst'
-        python_file = f'{python_files_dir}/{python_ver}-{platform_dict[platform]}.tar.zst'
+        url = f'https://github.com/indygreg/python-build-standalone/releases/download/20240726/{python_ver}+20240726-{platform_dict[platform]}.tar.gz'
+        python_file = f'{python_files_dir}/{python_ver}-{platform_dict[platform]}.tar.gz'
     else :
         url = f'https://github.com/niklas2902/prebuild-python-linux32/releases/download/release-0.1/{python_ver}-linux32.zip'
         python_file = f'{python_files_dir}/{python_ver}-linux32.zip'
@@ -69,7 +69,7 @@ def extract_archive(file, export_name):
     """function for extracting .tar archieve"""
     if (not os.path.isdir(python_files_dir + "/" + export_name)):
         print("File:", file)
-        if file.endswith("tar"):
+        if file.endswith("tar") or file.endswith("gz"):
             my_tar = tarfile.open(file)
             my_tar.extractall(python_files_dir + "/" + export_name)  # specify which folder to extract to
             my_tar.close()
