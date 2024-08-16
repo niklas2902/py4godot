@@ -4,8 +4,8 @@ import_string_core = """
 
 import_string_py4godot = """
 from py4godot.pluginscript_api.utils.SignalArg import SignalArg
-from py4godot.pluginscript_api.utils.annotations import gdclass, gdproperty,signal, gdmethod
-from py4godot.pluginscript_api.utils.experimental import prop
+from py4godot.pluginscript_api.utils.annotations import gdclass, signal, gdmethod
+from py4godot.pluginscript_api.utils.experimental import gdproperty
 import py4godot.constants as constants
 """
 
@@ -33,11 +33,11 @@ def create_init_file(platform):
         with open(f"{build_folder}/{platform}/{config_data['python_ver']}-{platform}/python/install/Lib/site-packages/py4godot/__init__.py", "w") as init_file:
             init_file.write(import_string_py4godot)
     else:
-        with open(f"{build_folder}/{platform}/{config_data['python_ver']}-{platform}/python/install/lib/python3.11/py4godot/{core_folder}/__init__.py", "w") as init_file:
+        with open(f"{build_folder}/{platform}/{config_data['python_ver']}-{platform}/python/install/lib/python3.12/site-packages/py4godot/{core_folder}/__init__.py", "w") as init_file:
             init_file.write(import_string_core)
 
         """generate the __init__ file needed for the py4godot module"""
-        with open(f"{build_folder}/{platform}/{config_data['python_ver']}-{platform}/python/install/lib/python3.11/py4godot/__init__.py", "w") as init_file:
+        with open(f"{build_folder}/{platform}/{config_data['python_ver']}-{platform}/python/install/lib/python3.12/site-packages/py4godot/__init__.py", "w") as init_file:
             init_file.write(import_string_py4godot)
 
 

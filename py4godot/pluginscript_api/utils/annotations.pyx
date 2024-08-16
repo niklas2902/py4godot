@@ -132,9 +132,6 @@ def prop(name,type_, defaultval, hint = BaseHint(), hint_string = ""):
                 type_=type_,hint = hint,usage = 4096|6|32768,
                 default_value=defaultval))
 
-def gdproperty(*args, ** kwargs):
-    pass
-
 def gdmethod(func):
     args = inspect.getfullargspec(func).args
     list_args = []

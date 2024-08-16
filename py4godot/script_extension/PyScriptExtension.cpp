@@ -14,10 +14,7 @@
 #include "py4godot/script_extension/script_extension_helpers_api.h"
 #include <cassert>
 #include "Python.h"
-#include <mutex>
 #include <algorithm>
-
-std::mutex m;
 
 GDExtensionPtrOperatorEvaluator operator_equal_string_namescript;
 PyScriptExtension extension;
@@ -353,13 +350,12 @@ void PyScriptExtension::_get_script_signal_list(GDExtensionTypePtr res){
     print_error("_get_script_signal_list");
     int index;
     for (auto& signal_dict : transfer_object.signals) {
-        Variant var_signal = Variant{};
-
-        //res_array.push_back(var_signal);
+        Variant* var_signal = new Variant{1};
         auto constructor = functions::get_get_variant_from_type_constructor()(GDExtensionVariantType::GDEXTENSION_VARIANT_TYPE_DICTIONARY);
-        constructor(&(var_signal.native_ptr), &signal_dict.godot_owner);
+        constructor(&(var_signal->native_ptr), &signal_dict.godot_owner);
 
-        add_variant_to_array(res, var_signal);
+        add_variant_to_array(res, *var_signal);
+        delete var_signal;
     }
 
 }
@@ -800,7 +796,7 @@ void call_virtual_func__get_rpc_config(GDExtensionClassInstancePtr p_instance, c
 
 
 GDExtensionClassCallVirtual get_virtual_script(void *p_userdata, GDExtensionConstStringNamePtr p_name) {
-    std::lock_guard<std::mutex> lock(mtx);
+    LOCK(mtx);
 
     StringName name = StringName::new_static(((void**)const_cast<GDExtensionTypePtr>(p_name))[0]);
     String name_string = String::new2(name);

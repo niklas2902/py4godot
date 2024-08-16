@@ -7,7 +7,19 @@
 #include <string.h>
 GDExtensionInterfaceGetProcAddress global_p_get_proc_address;
 GDExtensionClassLibraryPtr _library = nullptr;
-std::mutex mtx;
+
+#ifdef _WIN32
+    #ifdef _M_IX86
+        //int mtx = 0;
+        CRITICAL_SECTION mtx;
+    #else
+        std::mutex mtx;
+    #endif
+#else
+    std::mutex mtx; // Define a mutex
+#endif
+
+
 typedef void (*FunctionPointer)();
 FunctionPointer load_proc_address (char* function_name){
     auto function = global_p_get_proc_address(function_name);
@@ -173,6 +185,13 @@ void deinitialize_py4godot(void *userdata, GDExtensionInitializationLevel p_leve
 GDExtensionBool GDN_EXPORT py4godot_init(GDExtensionInterfaceGetProcAddress p_get_proc_address, GDExtensionClassLibraryPtr p_library, GDExtensionInitialization *r_initialization){
     _library = p_library;
     global_p_get_proc_address = p_get_proc_address;
+
+    #ifdef _WIN32
+        #ifdef _M_IX86
+            InitializeCriticalSection(&mtx);
+        #endif
+    #endif
+
 
     r_initialization->initialize = initialize_py4godot;
     r_initialization->deinitialize = deinitialize_py4godot;

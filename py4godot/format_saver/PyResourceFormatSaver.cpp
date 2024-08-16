@@ -133,7 +133,7 @@ namespace saver{
 
 
     GDExtensionClassCallVirtual get_virtual_saver(void *p_userdata, GDExtensionConstStringNamePtr p_name) {
-        std::lock_guard<std::mutex> lock(mtx);
+        LOCK(mtx);
 
         StringName name = StringName::new_static(((void**)const_cast<GDExtensionTypePtr>(p_name))[0]);
 

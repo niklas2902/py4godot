@@ -185,7 +185,7 @@ if __name__ == "__main__":
             res = generate_newline(res)
             res += generate_pxd_class(class_)
             with open(f"py4godot/classes/{class_['name']}/{class_['name']}.pxd", "w") as f:
-                f.write("# distutils: language=c++"+res)
+                f.write("# distutils: language=c++\n"+res)
 
         array_cls = None
         arrays = []
@@ -208,4 +208,4 @@ if __name__ == "__main__":
             res = generate_newline(res)
             res += generate_pxd_class(class_)
             with open(f"py4godot/classes/typedarrays.pxd", "w") as f:
-                f.write("# distutils: language=c++"+res)
+                f.write("# distutils: language=c++\n"+res)

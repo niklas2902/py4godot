@@ -283,4 +283,4 @@ if __name__ == "__main__":
             res = generate_newline(res)
 
         with open("py4godot/functions.pxd", "w") as f:
-            f.write("# distutils: language=c++"+res)
+            f.write("# distutils: language=c++\n"+res)
