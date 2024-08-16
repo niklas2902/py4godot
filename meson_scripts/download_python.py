@@ -8,7 +8,7 @@ import os
 from shutil import copytree, ignore_patterns
 
 platform_dict = {"windows64": "x86_64-pc-windows-msvc-shared-pgo", "windows32": "i686-pc-windows-msvc-shared-pgo",
-                 "linux64": "x86_64-unknown-linux-gnu_stripped"}
+                 "linux64": "x86_64-unknown-linux-gnu-install_only_stripped"}
 python_files_dir = "python_files"
 copy_dir = "build/final"
 python_ver = "cpython-3.12.4"

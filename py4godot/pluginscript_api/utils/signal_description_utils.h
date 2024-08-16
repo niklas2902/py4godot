@@ -40,22 +40,28 @@ void init_signal_description(char* name, std::vector<CPPSignalArg>& args, std::s
     // add args
     String arg_key = c_string_to_string("args");
     Variant arg_key_variant = Variant(arg_key);
-    Variant var_args = Variant::new_static(functions::get_dictionary_operator_index()(&(*signal_dict_ptr).godot_owner, &arg_key_variant.native_ptr));
+    Variant* var_args = new Variant{1};
+    var_args->native_ptr = functions::get_dictionary_operator_index()(&(*signal_dict_ptr).godot_owner, &arg_key_variant.native_ptr);
 
-    Array args_array = Array::new0();
-    args_array.shouldBeDeleted=false;
+    Array* args_array = new Array();
+    GDExtensionPtrConstructor constructor = functions::get_variant_get_ptr_constructor()(GDExtensionVariantType::GDEXTENSION_VARIANT_TYPE_ARRAY, 0);
+    GDExtensionTypePtr _args[1];
+    constructor(&args_array->godot_owner,_args);
+
     Dictionary dictionary_signal_args = Dictionary::new0();
     dictionary_signal_args.shouldBeDeleted=false;
     Variant dictionary_var = Variant(1);
     auto type_name = c_string_to_string_name("");
-    functions::get_array_set_typed()(&args_array.godot_owner, GDExtensionVariantType::GDEXTENSION_VARIANT_TYPE_DICTIONARY,  &type_name.godot_owner, &dictionary_var.native_ptr);
+    functions::get_array_set_typed()(&args_array->godot_owner, GDExtensionVariantType::GDEXTENSION_VARIANT_TYPE_DICTIONARY,  &type_name.godot_owner, &dictionary_var.native_ptr);
 
     // create a signal arg
     for (const auto& arg: args){
-         create_signal_arg(arg.name, arg.type, args_array);
+         create_signal_arg(arg.name, arg.type, *args_array);
      }
 
 
     //add args dictionaries to args array
-    var_args.init_type(args_array);
+    var_args->init_type(*args_array);
+    delete args_array;
+    delete var_args;
 }
