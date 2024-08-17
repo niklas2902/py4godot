@@ -44,7 +44,7 @@ $ python cythonize_files.py
 ```
 
 #### Compile project
-Now, we just need to compile the project. The result of the compilation can be found on build/final # TODO. build whole plugin for build.
+Now, we just need to compile the project. The result of the compilation can be found on build/py4godot
 ```console
 $ python build.py --target_platform=windows64 --compiler=msvc 
 ```
