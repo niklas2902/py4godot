@@ -4,6 +4,9 @@ The target of this project is to bring python to godot via gdextension.
 Inspiration for this project was taken from: https://github.com/touilleMan/godot-python.
 
 This project is currently in an early phase of development. Consider this more as a demo and don't use this for bigger projects.
+
+## Install
+Download the .zip from Releases, extract it and copy the folder into the addons folder on the root of your project.
 ## Prerequesits
 You need a Python 3 version of at least 3.11 with pip installed.
 
