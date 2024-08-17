@@ -1,5 +1,5 @@
 # py4godot
-The target of this project is to bring python to godot via gdextension.
+*Python scripting for Godot*. This GDExtension plugin allows you to use Python like GDScript, accessing the Godot engine's features and benefiting from Python's vast ecosystem.
 
 Inspiration for this project was taken from: https://github.com/touilleMan/godot-python.
 
