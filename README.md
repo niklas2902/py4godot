@@ -3,7 +3,7 @@
 
 Inspiration for this project was taken from: https://github.com/touilleMan/godot-python.
 
-This project is currently in an early phase of development. Consider this more as a demo and don't use this for bigger projects.
+This project is currently in an early phase of development. Consider this more as a demo and don't use this for bigger projects. At the moment only Windows 64 bit and Linux 64 bit are supported
 
 ## Install
 Download the .zip from Releases, extract it and copy the folder into the addons folder on the root of your project.
