@@ -56,7 +56,7 @@ Building for linux was testet on Ubuntu 20.04.4 LTS
 inititalize submodules
 ```console
 $ git submodule init
-$ git submodule update+
+$ git submodule update
 ```
 #### Setting up a virtual environment (optional)
 The following code should be executed after cloning the repo
