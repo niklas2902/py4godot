@@ -1,9 +1,13 @@
 # py4godot
-The target of this project is to bring python to godot via gdextension.
+*Python scripting for Godot*. This GDExtension plugin allows you to use Python like GDScript, accessing the Godot engine's features and benefiting from Python's vast ecosystem.
 
 Inspiration for this project was taken from: https://github.com/touilleMan/godot-python.
 
-This project is currently in an early phase of development. Consider this more as a demo and don't use this for bigger projects.
+This project is currently in an early phase of development. Consider this more as a demo and don't use this for bigger projects. At the moment only Windows 64 bit and Linux 64 bit are supported.
+
+You can check out the api documenthation here: [Api Documentation](https://github.com/niklas2902/py4godot/wiki/API-Documentation)
+## Install
+Download the .zip from Releases, extract it and copy the folder into the addons folder on the root of your project.
 ## Prerequesits
 You need a Python 3 version of at least 3.11 with pip installed.
 
@@ -15,7 +19,7 @@ You need a Python 3 version of at least 3.11 with pip installed.
 inititalize submodules
 ```console
 $ git submodule init
-$ git submodule update+
+$ git submodule update
 ```
 #### Setting up a virtual environment (optional)
 As this project depends on some modules which are downloaded by pip, if you don't want to mess with your packages, you should set up a virtual enviroment.
@@ -41,7 +45,7 @@ $ python cythonize_files.py
 ```
 
 #### Compile project
-Now, we just need to compile the project. The result of the compilation can be found on build/final # TODO. build whole plugin for build.
+Now, we just need to compile the project. The result of the compilation can be found on build/py4godot
 ```console
 $ python build.py --target_platform=windows64 --compiler=msvc 
 ```
@@ -52,7 +56,7 @@ Building for linux was testet on Ubuntu 20.04.4 LTS
 inititalize submodules
 ```console
 $ git submodule init
-$ git submodule update+
+$ git submodule update
 ```
 #### Setting up a virtual environment (optional)
 The following code should be executed after cloning the repo
@@ -81,7 +85,7 @@ $ python cythonize_files.py
 ```
 
 #### Compile project
-Now, we just need to compile the project. The result of the compilation can be found on build/final # TODO. build whole plugin for build.
+Now, we just need to compile the project. The result of the compilation can be found on build/py4godot
 ```console
 $ python build.py --target_platform=linux64 --compiler=gcc 
 ```
