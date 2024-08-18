@@ -3,7 +3,7 @@
 
 Inspiration for this project was taken from: https://github.com/touilleMan/godot-python.
 
-This project is currently in an early phase of development. Consider this more as a demo and don't use this for bigger projects. At the moment only Windows 64 bit and Linux 64 bit are supported
+This project is currently in an early phase of development. Consider this more as a demo and don't use this for bigger projects. At the moment only Windows 64 bit and Linux 64 bit are supported.
 
 You can check out the api documenthation here: [Api Documentation](https://github.com/niklas2902/py4godot/wiki/API-Documentation)
 ## Install
