@@ -23,15 +23,17 @@ def run(platform):
         list_dll = glob.glob("**/*.so", recursive=True)
 
     for entry in list_dll:
+        if "cpython" in entry:
+            continue
         entry = entry.lstrip("/")
         if entry.startswith("build"):
             if "windows" in entry:
                 os.makedirs(os.path.dirname(
-                    f"build/final/{platform}/{config_data['python_ver']}-{platform}/python/install/Lib/site-packages/" + strip_platform(
+                    f"build/final/{platform}/{config_data['python_ver']}-{platform}/python/Lib/site-packages/" + strip_platform(
                         entry.lstrip("build").replace("#", "/"))),
                     exist_ok=True)
                 copy(entry,
-                     f"build/final/{platform}/{config_data['python_ver']}-{platform}/python/install/Lib/site-packages/" + strip_platform(
+                     f"build/final/{platform}/{config_data['python_ver']}-{platform}/python/Lib/site-packages/" + strip_platform(
                          entry.lstrip("build").replace("#", "/")).
                      replace(".dll", ".pyd"))  # dst can be a folder; use copy2() to preserve timestamp
             else:
@@ -48,27 +50,30 @@ def run(platform):
         list_dll = glob.glob("**/*.pdb", recursive=True)
     else:
         return
+
     for entry in list_dll:
         entry = entry.lstrip("/")
+        if entry.startswith("build/py4godot"):
+            continue
+        if entry.count("cpython-") >= 1:
+            continue
         if entry.startswith("build"):
             os.makedirs(os.path.dirname(
-                f"build/final/{platform}/{config_data['python_ver']}-{platform}/python/install/Lib/site-packages/" + strip_platform(
+                f"build/final/{platform}/{config_data['python_ver']}-{platform}/python/Lib/site-packages/" + strip_platform(
                     entry.lstrip("build").replace("#", "/"))),
                 exist_ok=True)
             copy(entry,
-                 f"build/final/{platform}/{config_data['python_ver']}-{platform}/python/install/Lib/site-packages/" + strip_platform(
+                 f"build/final/{platform}/{config_data['python_ver']}-{platform}/python/Lib/site-packages/" + strip_platform(
                      entry.lstrip("build").replace("#", "/")))  # dst can be a folder; use copy2() to preserve timestamp
 
 
 def copy_main(platform):
-    # Todo: check whether python39.dll can be in another path copying the main.pyd inside the python version,
-    #  as the pythin39.dll must currently be in the same directory as main.pyd/main.so
     if "windows" in platform:
         # This is a weird phenomenon of godot 4.2. It copies the dll and renames it. Thus, we have to change what we depend on
         copy(f"build/{platform}/main.dll",
-             f"build/final/{platform}/{config_data['python_ver']}-{platform}/python/install/main.dll")
+             f"build/final/{platform}/{config_data['python_ver']}-{platform}/python/main.dll")
         copy(f"build/{platform}/pythonscript.dll",
-             f"build/final/{platform}/{config_data['python_ver']}-{platform}/python/install/pythonscript.dll")
+             f"build/final/{platform}/{config_data['python_ver']}-{platform}/python/pythonscript.dll")
     elif "linux" in platform:
         copy(f"build/{platform}/main.so",
              f"build/final/{platform}/{config_data['python_ver']}-{platform}/python/install/bin/main.so")
@@ -97,10 +102,10 @@ def copy_stub_files(platform):
             continue
         if "windows" in platform:
             os.makedirs(os.path.dirname(
-                f"build/final/{platform}/{config_data['python_ver']}-{platform}/python/install/Lib/site-packages/" + file),
+                f"build/final/{platform}/{config_data['python_ver']}-{platform}/python/Lib/site-packages/" + file),
                 exist_ok=True)
             copy(file,
-                 f"build/final/{platform}/{config_data['python_ver']}-{platform}/python/install/Lib/site-packages/" + file)
+                 f"build/final/{platform}/{config_data['python_ver']}-{platform}/python/Lib/site-packages/" + file)
         else:
             os.makedirs(os.path.dirname(
                 f"build/final/{platform}/{config_data['python_ver']}-{platform}/python/install/lib/python3.12/site-packages/" + file),
@@ -114,7 +119,7 @@ def copy_experimental(platform):
                  "py4godot/pluginscript_api/utils/annotation_tools.py"]:
         if "windows" in platform:
             copy(file,
-             f"build/final/{platform}/{config_data['python_ver']}-{platform}/python/install/Lib/site-packages/" + file)
+             f"build/final/{platform}/{config_data['python_ver']}-{platform}/python/Lib/site-packages/" + file)
         else:
             copy(file,
              f"build/final/{platform}/{config_data['python_ver']}-{platform}/python/install/lib/python3.12/site-packages/" + file)

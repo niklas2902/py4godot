@@ -1658,12 +1658,6 @@ def generate_del(class_):
             res += f"{INDENT * 3}self.RefCounted_internal_class_ptr.get().py_destroy_ref()"
             res = generate_newline(res)
             return res
-        elif is_node(class_): #is node TODO: implement
-            res += f"{INDENT * 2}if not is_ptr_null(self.Node_internal_class_ptr):"
-            res = generate_newline(res)
-            res += f"{INDENT * 3}self.Node_internal_class_ptr.get().py_destroy_node()"
-            res = generate_newline(res)
-        #    return res
         else:
             res += f"{INDENT*2}pass"
             res = generate_newline(res)

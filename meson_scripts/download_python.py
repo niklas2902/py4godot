@@ -7,7 +7,7 @@ import tarfile
 import os
 from shutil import copytree, ignore_patterns
 
-platform_dict = {"windows64": "x86_64-pc-windows-msvc-shared-pgo", "windows32": "i686-pc-windows-msvc-shared-pgo",
+platform_dict = {"windows64": "x86_64-pc-windows-msvc-install_only_stripped", "windows32": "i686-pc-windows-msvc-shared-pgo",
                  "linux64": "x86_64-unknown-linux-gnu-install_only_stripped"}
 python_files_dir = "python_files"
 copy_dir = "build/final"
@@ -87,7 +87,7 @@ def copy_to_build(export_folder, platform):
 
 def create_sitecustomization(export_folder, platform):
     if "windows" in platform:
-        with open(f"python_files/{export_folder}/python/install/Lib/site-packages/sitecustomize.py",
+        with open(f"python_files/{export_folder}/python/Lib/site-packages/sitecustomize.py",
                   "w") as sitecustomize_file:
             sitecustomize_file.write(sitecustomize_py.replace("{platform}", platform))
     elif "linux" in platform:

@@ -178,6 +178,8 @@ try:
     should_create_plugin =args.create_plugin
     #TODO: ignore unnecessary copy. Don't copy stuff to final
     if should_create_plugin.lower() == "true":
+        if  os.path.exists("build/py4godot") and os.path.isdir("build/py4godot"):
+            shutil.rmtree("build/py4godot")
         copytree(f"build/final/{args.target_platform}/cpython-3.12.4-{args.target_platform}", f"build/py4godot/cpython-3.12.4-{args.target_platform}")
         shutil.copy("build_resources/python.gdextension", "build/py4godot/python.gdextension")
 

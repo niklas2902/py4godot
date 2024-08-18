@@ -4,10 +4,10 @@ entry_symbol = "initialize_pythonscript"
 compatibility_minimum="4.3.0"
 [libraries]
 
-windows.debug.x86_64 = "cpython-3.12.4-windows64/python/install/pythonscript.dll"
-windows.release.x86_64 = "cpython-3.12.4-windows64/python/install/pythonscript.dll"
-windows.debug.x86 = "cpython-3.12.4-windows32/python/install/pythonscript.dll"
-windows.release.x86 = "cpython-3.12.4-windows32/python/install/pythonscript.dll"
+windows.debug.x86_64 = "cpython-3.12.4-windows64/python/pythonscript.dll"
+windows.release.x86_64 = "cpython-3.12.4-windows64/python/pythonscript.dll"
+windows.debug.x86 = "cpython-3.12.4-windows32/python/pythonscript.dll"
+windows.release.x86 = "cpython-3.12.4-windows32/python/pythonscript.dll"
 
 
 linux.debug.x86_64 = "cpython-3.12.4-linux64/python/install/bin/pythonscript.so"

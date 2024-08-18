@@ -9,7 +9,7 @@ dir_godot_extract_to = config_data['dir_godot_extract_to']
 
 def get_python_dir(platform):
     if("windows" in platform):
-        return (os.getcwd()+f"/{python_dir}/{python_ver}-{platform}/python/install/python.exe").replace("\\", "/")
+        return (os.getcwd()+f"/{python_dir}/{python_ver}-{platform}/python/python.exe").replace("\\", "/")
     elif("linux" in platform):
         return (os.getcwd() + f"/{python_dir}/{python_ver}-{platform}/python/install/bin/python3").replace("\\", "/")
 def get_godot_dir(platform):
