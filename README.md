@@ -19,7 +19,7 @@ You need a Python 3 version of at least 3.11 with pip installed.
 inititalize submodules
 ```console
 $ git submodule init
-$ git submodule update+
+$ git submodule update
 ```
 #### Setting up a virtual environment (optional)
 As this project depends on some modules which are downloaded by pip, if you don't want to mess with your packages, you should set up a virtual enviroment.
