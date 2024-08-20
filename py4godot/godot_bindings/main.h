@@ -9,13 +9,13 @@
 #define PYTHONHOME L"addons/py4godot/cpython-3.12.4-windows64/python"
 
 #elif _WIN32
-#define PYTHONHOME L"cpython-3.12.4-windows32/python/install"
+#define PYTHONHOME L"addons/cpython-3.12.4-windows32/python/install"
 
 #elif __linux32__
-#define PYTHONHOME L"cpython-3.12.4-linux/python/install/lib"
+#define PYTHONHOME L"addons/cpython-3.12.4-linux/python/lib"
 
 #elif __linux__
-#define PYTHONHOME L"addons/py4godot/cpython-3.12.4-linux64/python/install"
+#define PYTHONHOME L"addons/py4godot/cpython-3.12.4-linux64/python"
 
 #elif __APPLE__
 #define PYTHONHOME L"cpython-3.12.4-windows32/python/install"

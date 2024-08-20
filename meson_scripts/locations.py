@@ -11,7 +11,7 @@ def get_python_dir(platform):
     if("windows" in platform):
         return (os.getcwd()+f"/{python_dir}/{python_ver}-{platform}/python/python.exe").replace("\\", "/")
     elif("linux" in platform):
-        return (os.getcwd() + f"/{python_dir}/{python_ver}-{platform}/python/install/bin/python3").replace("\\", "/")
+        return (os.getcwd() + f"/{python_dir}/{python_ver}-{platform}/python/bin/python3").replace("\\", "/")
 def get_godot_dir(platform):
     if "windows" in platform:
         return (os.getcwd()+f"/{dir_godot_extract_to}/Godot_v3.4.2-stable_win64.exe")
