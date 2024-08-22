@@ -22,7 +22,6 @@ if meson.get_compiler('cpp').get_id() == 'gcc'
     cpp_args = ['-w',  '-D LIBRARY_EXPORTS=1', '-fpermissive', '-g']
     if platform_format == '32'
         link_args = ['-m32']
-        #link_args = ['-L/usr/i686-w64-mingw32/lib', '-lmingw32', '-lmingwex']
         cpp_args += ['-m32', '-std=c++14']
     endif
 endif
@@ -31,7 +30,6 @@ if meson.get_compiler('cpp').get_id() == 'g++'
     cpp_args = ['-w',   '-D LIBRARY_EXPORTS=1', '-fpermissive' , '-g']
     if platform_format == '32'
         link_args = ['-m32']
-        #link_args = ['-L/usr/i686-w64-mingw32/lib', '-lmingw32', '-lmingwex']
         cpp_args += ['-m32', '-std=c++14']
     endif
 endif
@@ -59,8 +57,9 @@ if build_machine.system() == 'windows'
 endif
 if meson.has_external_property('is_mingw') and build_machine.system() == 'linux'
     message('dirs:')
-    message(meson.current_source_dir()+'/python_files/cpython-3.12.4-'+machine+platform_format + '/python/install')
-    lib_py = cc.find_library('python312', dirs:meson.current_source_dir()+'/python_files/cpython-3.12.4-'+machine+platform_format + '/python/install')
+    message(meson.current_source_dir()+'/python_files/cpython-3.12.4-'+machine+platform_format + '/python')
+    link_args += ['-static-libgcc', '-static-libstdc++'] #TODO: Is this good like this?
+    lib_py = cc.find_library('python312', dirs:meson.current_source_dir()+'/python_files/cpython-3.12.4-'+machine+platform_format + '/python')
         internal_inc = include_directories('py4godot','py4godot/gdextension-api/', 'py4godot/core', 'py4godot/enums',
     'py4godot/classes', 'py4godot/pluginscript_api', 'py4godot/godot_bindings',
     'py4godot/script_instance', 'py4godot/core/variant4', 'py4godot/cppcore', 'py4godot/cppenums',

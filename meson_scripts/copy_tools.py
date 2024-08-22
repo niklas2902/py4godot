@@ -150,6 +150,14 @@ def clear_build():
         shutil.rmtree(os.path.dirname(
             f"build/final/"), onerror=onerror)
 
+def copy_mingw(compiler, platform):
+    if "mingw" in compiler and "windows" in platform:
+        if "64" in platform:
+            shutil.copy("/usr/x86_64-w64-mingw32/lib/libwinpthread-1.dll",
+                        f"build/final/{platform}/{config_data['python_ver']}-{platform}/python/libwinpthread-1.dll")
+        elif "32" in platform:
+            shutil.copy("/usr/i686-w64-mingw32/lib/libwinpthread-1.dll",
+                        f"build/final/{platform}/{config_data['python_ver']}-{platform}/python/libwinpthread-1.dll")
 
 if __name__ == "__main__":
     # copy_c_into_cache("windows64")

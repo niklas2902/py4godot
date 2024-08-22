@@ -170,6 +170,7 @@ try:
 
     copy_tools.run(args.target_platform)
     copy_tools.copy_main(args.target_platform)
+    copy_tools.copy_mingw(args.compiler, args.target_platform)
     copy_tools.copy_stub_files(args.target_platform)
     copy_tools.copy_experimental(args.target_platform)
     generate_godot.generate_gdignore(args.target_platform)
