@@ -8,13 +8,9 @@
 GDExtensionInterfaceGetProcAddress global_p_get_proc_address;
 GDExtensionClassLibraryPtr _library = nullptr;
 
-#ifdef _WIN32
-    #ifdef _M_IX86
+#if defined(_WIN64) || defined(_WIN32)
         //int mtx = 0;
         CRITICAL_SECTION mtx;
-    #else
-        std::mutex mtx;
-    #endif
 #else
     std::mutex mtx; // Define a mutex
 #endif

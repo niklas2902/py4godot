@@ -14,10 +14,10 @@ class DockerImageContainer:
     container_name:str
     platform:str
 builds:List[DockerImageContainer] = [
-    DockerImageContainer("linux32_py4godot","py4godot_linux32_container" ,"linux32"),
+    DockerImageContainer("windows32_py4godot", "py4godot_windows32_container", "windows32"),
     DockerImageContainer("windows64_py4godot","py4godot_windows64_container" ,"windows64"),
-    DockerImageContainer("windows32_py4godot","py4godot_windows32_container" ,"windows32"),
     DockerImageContainer("linux64_py4godot","py4godot_linux64_container" ,"linux64"),
+    DockerImageContainer("linux32_py4godot", "py4godot_linux32_container", "linux32"),
                                      ]
 
 def get_docker_build_name(name):

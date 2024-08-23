@@ -9,13 +9,13 @@
 #define PYTHONHOME L"addons/py4godot/cpython-3.12.4-windows64/python"
 
 #elif _WIN32
-#define PYTHONHOME L"cpython-3.12.4-windows32/python/install"
+#define PYTHONHOME L"addons/py4godot/cpython-3.12.4-windows32/python/"
 
 #elif __linux32__
-#define PYTHONHOME L"cpython-3.12.4-linux/python/install/lib"
+#define PYTHONHOME L"addons/py4godot/cpython-3.12.4-linux32/python/"
 
 #elif __linux__
-#define PYTHONHOME L"addons/py4godot/cpython-3.12.4-linux64/python/install"
+#define PYTHONHOME L"addons/py4godot/cpython-3.12.4-linux64/python"
 
 #elif __APPLE__
 #define PYTHONHOME L"cpython-3.12.4-windows32/python/install"
@@ -31,8 +31,7 @@
 #endif
 
 //Setting up threading
-#ifdef _WIN32
-    #ifdef _M_IX86
+#if defined(_WIN64) || defined(_WIN32)
         //extern int mtx;
         #define NOMINMAX
         #define NOATOM
@@ -55,12 +54,6 @@
             }
         };
         #define LOCK //MutexLock lock
-
-    #else
-        #include <mutex>
-        extern std::mutex mtx; // Define a mutex
-        #define LOCK std::lock_guard<std::mutex> lock
-    #endif
 #else
     #include <mutex>
     extern std::mutex mtx; // Define a mutex
