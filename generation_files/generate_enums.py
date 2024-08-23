@@ -18,6 +18,8 @@ if __name__ == "__main__":
     res += "from py4godot.godot_bindings.binding4_godot4 cimport *"
     res = generate_newline(res)
     res = generate_newline(res)
+
+    res_pyi = ""
     with open('py4godot/gdextension-api/extension_api.json', 'r') as myfile:
         data = myfile.read()
         obj = json.loads(data)
@@ -33,7 +35,16 @@ if __name__ == "__main__":
             res += "####################################"
             res = generate_newline(res)
 
-    with open("py4godot/enums/enums4.pyx", "w") as f:
+            res_pyi += f"class {enumize_name(enum_def['name'])}:"
+            res_pyi = generate_newline(res_pyi)
+            for value in enum_def["values"]:
+                res_pyi += f"  {value['name']} = {value['value']}"
+                res_pyi = generate_newline(res_pyi)
+
+
+    with open("py4godot/enums/enums.pyx", "w") as f:
         f.write("# distutils: language=c++\n"+"from py4godot.godot_bindings.binding4_godot4 cimport *")
-    with open("py4godot/enums/enums4.pxd", "w") as f:
+    with open("py4godot/enums/enums.pxd", "w") as f:
         f.write("# distutils: language=c++\n"+res)
+    with open("py4godot/enums/enums.pyi", "w") as f:
+        f.write("# distutils: language=c++\n"+res_pyi)
