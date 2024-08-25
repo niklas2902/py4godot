@@ -25,7 +25,7 @@ def main():
         "py4godot/script_instance/*.pyx",
         "py4godot/script_extension/script_extension_helpers.pyx",
         "py4godot/constants/*.pyx",
-        "py4godot/enums/enums4.pyx",
+        "py4godot/enums/enums.pyx",
         "py4godot/utils/utils.pyx",
         "py4godot/utils/instance_utils.pyx",
         "py4godot/utils/print_tools.pyx",
