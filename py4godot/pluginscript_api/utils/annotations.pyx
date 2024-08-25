@@ -17,11 +17,13 @@ from py4godot.classes.Node3D.Node3D cimport *
 from py4godot.classes.Object.Object cimport *
 import importlib
 import importlib.util
+from libcpp.string cimport string
 
 class_name = ""
 gd_class = None
 is_tool = False
 current_class_name = ""
+cdef str class_icon = None
 
 def load_module(module_name, file_to_load):
     # Check if the module is already loaded
@@ -72,6 +74,14 @@ cdef api TransferObject exec_class(str source_string, str class_name_):
         print_tools.print_error(my_str_class)
         print_tools.print_error(f"exec_class: Exception happened: {traceback.format_exc()}")
 
+    cdef char* c_icon_path
+    cdef bytes bytes_icon_path
+    cdef string cpp_string
+    if class_icon != None:
+        bytes_icon_path = class_icon.encode("utf-8")
+        c_icon_path = bytes_icon_path
+        cpp_string = string(c_icon_path)
+        transfer_object.icon_path = cpp_string
     for signal in signals:
         transfer_object.signals.push_back((<SignalDescription>signal).get_signal_dict().Dictionary_internal_class_ptr.get()[0])
 
@@ -94,21 +104,26 @@ cdef api TransferObject exec_class(str source_string, str class_name_):
     transfer_object.class_ = <PyObject*>gd_class
     return transfer_object
 
-def gdclass(cls):
-    global gd_class, is_tool
+def gdclass(cls = None, icon=None):
+    global gd_class, is_tool, class_icon
 
-    cdef str global_class_name = "global class_name:"+ class_name
-    cdef str __class__name = "cls.__name__:"+ cls.__name__
-    if cls.__name__ != class_name:
-        properties.clear()
-        default_values.clear()
-        return cls
-    if(gd_class == None):
-        gd_class = cls
-        is_tool = False
-    else:
-        raise Exception(f"More than one class was marked as gd_class or gd_tool_class in one file ({current_class_name}, {gd_class}, {cls})")
-    return cls
+    def internal_decorator(cls):
+        global gd_class, is_tool, class_icon
+        cdef str global_class_name = "global class_name:"+ class_name
+        cdef str __class__name = "cls.__name__:"+ cls.__name__
+        if cls.__name__ != class_name:
+            properties.clear()
+            default_values.clear()
+            return cls
+        if(gd_class == None):
+            gd_class = cls
+            is_tool = False
+            class_icon = icon
+        else:
+            raise Exception(f"More than one class was marked as gd_class or gd_tool_class in one file ({current_class_name}, {gd_class}, {cls})")
+    if cls is not None:
+        return internal_decorator(cls)
+    return internal_decorator
 
 def gdtool(cls):
     global gd_class, is_tool

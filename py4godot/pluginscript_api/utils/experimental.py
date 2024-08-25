@@ -12,4 +12,11 @@ def gdproperty(type_:type, defaultval:T, hint:BaseHint = BaseHint(), hint_string
     prop(name, type_,defaultval, hint, hint_string)
     return defaultval
 
+def gdprop(defaultval:T, hint:BaseHint = BaseHint(), hint_string:str = ""):
+    stack = inspect.stack()
+    name = stack[1].code_context[0].split("=")[0].split(":")[0].strip()
+    type_ = eval(stack[1].code_context[0].split("=")[0].split(":")[1].strip())
+    prop(name, type_,defaultval, hint, hint_string)
+    return defaultval
+
 

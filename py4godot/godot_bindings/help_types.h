@@ -10,6 +10,7 @@ struct TransferObject{
     std::vector<GDExtensionPropertyInfo> properties;
     std::vector<GDExtensionMethodInfo> methods;
     std::vector<PyObject*> default_values;
+    std::string icon_path;
     PyObject* class_;
     PyObject* instance;
     bool is_tool = false;

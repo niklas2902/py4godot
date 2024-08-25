@@ -181,6 +181,9 @@ void PyScriptExtension::_is_abstract(GDExtensionTypePtr res){
 
 void PyScriptExtension::_get_class_item_path(GDExtensionTypePtr res){
    print_error("_is_class_item_path");
+   if(transfer_object.icon_path != std::string{}){
+         functions::get_string_new_with_utf8_chars()(res, transfer_object.icon_path.c_str());
+   }
 }
 
 

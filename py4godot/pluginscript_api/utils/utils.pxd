@@ -3,12 +3,13 @@ from py4godot.godot_bindings.binding4_godot4 cimport *
 from py4godot.classes.cpp_bridge cimport *
 from libcpp.vector cimport vector
 from libcpp.memory cimport shared_ptr
-
+from libcpp.string cimport string
 cdef extern from "help_types.h":
     ctypedef struct TransferObject:
         vector[Dictionary] signals
         vector[GDExtensionPropertyInfo] properties
         vector[GDExtensionMethodInfo] methods
+        string icon_path;
         vector [PyObject*] default_values
         PyObject* class_
         PyObject* instance
