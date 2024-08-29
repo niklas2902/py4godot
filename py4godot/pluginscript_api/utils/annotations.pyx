@@ -1,5 +1,7 @@
 # distutils: language=c++
 import sys,os
+from typing import get_type_hints
+
 import inspect, traceback
 from py4godot.pluginscript_api.hints.BaseHint cimport *
 from py4godot.godot_bindings.binding4_godot4 cimport *
@@ -24,6 +26,7 @@ gd_class = None
 is_tool = False
 current_class_name = ""
 cdef str class_icon = None
+already_registered_property_names = []
 
 def load_module(module_name, file_to_load):
     # Check if the module is already loaded
@@ -39,9 +42,49 @@ def load_module(module_name, file_to_load):
 
     return sys.modules[module_name]
 
-cdef api TransferObject exec_class(str source_string, str class_name_):
-    global  gd_class, properties, signals, methods,default_values, class_name, is_tool, methods
+def get_class_attributes(cls, should_get_types=False):
+    # Get type hints
+    type_hints = get_type_hints(cls)
 
+    # Get class variables
+    class_vars = {key: value for key, value in vars(cls).items()
+                  if not key.startswith('__') and not callable(value)}
+
+    # Combine type hints and class variables
+    attributes = {}
+    for key in set(type_hints.keys()) | set(class_vars.keys()):
+        if key in class_vars and not should_get_types:
+            attributes[key] = class_vars[key]
+        else:
+            if should_get_types:
+                attributes[key] = type_hints[key]
+
+    return attributes
+
+
+def generate_default_val(type_):
+    if type_ == type(0): return 0
+    elif type_ == type(1.0): return 0.0
+    elif type_ == type(""): return ""
+    elif type_ == type(True): return False
+
+    return type_.new0()
+def collect_properties(cls):
+
+    potential_properties = get_class_attributes(cls)
+    for potential_property in potential_properties.keys():
+        if potential_property not in already_registered_property_names:
+            prop(potential_property, type(potential_properties[potential_property]),
+                 potential_properties[potential_property])
+
+    potential_properties = get_class_attributes(cls, True)
+    for potential_property in potential_properties.keys():
+        if potential_property not in already_registered_property_names:
+            prop(potential_property, potential_properties[potential_property],
+                 generate_default_val(potential_properties[potential_property]))
+
+cdef api TransferObject exec_class(str source_string, str class_name_):
+    global  gd_class, properties, signals, methods,default_values, class_name, is_tool, methods, already_registered_property_names
     current_class_name = class_name_
     cdef str py_source_string = source_string
     cdef str py_class_name_ = class_name_
@@ -55,6 +98,7 @@ cdef api TransferObject exec_class(str source_string, str class_name_):
     signals = []
     methods = []
     default_values = []
+    already_registered_property_names = []
     cdef char* my_str_class
     cdef char* my_str_exception
     cdef bytes bytes_class
@@ -66,6 +110,7 @@ cdef api TransferObject exec_class(str source_string, str class_name_):
         module_name = py_class_name_.replace("res://", "").replace("/",".").replace(".py", "").replace("\\", ".")
         file_to_load = py_class_name_.replace("res://", "")
         load_module(module_name, file_to_load)
+        collect_properties(gd_class)
     except Exception as e:
         print_tools.print_error("exec_class: Exception happened:")
         print_tools.print_error(f"class to load:{class_name_}")
@@ -142,6 +187,7 @@ def gdtool(cls):
     return cls
 
 def prop(name,type_, defaultval, hint = BaseHint(), hint_string = ""):
+    already_registered_property_names.append(name)
     default_values.append(defaultval)
     properties.append(PropertyDescription(name = name,
                 type_=type_,hint = hint,usage = 4096|6|32768,
