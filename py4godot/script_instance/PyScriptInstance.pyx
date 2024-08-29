@@ -20,6 +20,22 @@ cdef api GDExtensionBool instance_set(GDExtensionScriptInstanceDataPtr p_instanc
     py_log("instance_set")
     cdef InstanceData* instance = <InstanceData*>p_instance
     #TODO still a problem with custom string attributes. Why is this still crashing?
+    cdef StringName method_name = StringName.__new__(StringName)
+    cdef cppbridge.StringName internal_method_name = cppbridge.StringName.new_static((<void**>p_name)[0]) #TODO: Create unconst helper
+    method_name.StringName_internal_class_ptr = make_shared[cppbridge.StringName](internal_method_name)
+    cdef String method_name_str = String.new2(method_name)
+    cdef unicode py_method_name_str = gd_string_to_py_string(method_name_str)
+
+    cdef Variant var
+    try:
+        var.native_ptr = <void*>p_value
+        val = <object>var.get_converted_value(True)
+        setattr(<object>(instance.owner),py_method_name_str, <object>val)
+        #Py_DECREF(<object>val)#TODO: is this necessary?
+
+    except Exception as e:
+        error(f"An Exception happened while setting attribute:{e}" )
+        print_error(f"traceback: {traceback.format_exc()}")
 
     return 1
 
