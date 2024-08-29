@@ -20,6 +20,7 @@ from py4godot.classes.Object.Object cimport *
 import importlib
 import importlib.util
 from libcpp.string cimport string
+from collections import OrderedDict
 
 class_name = ""
 gd_class = None
@@ -42,7 +43,7 @@ def load_module(module_name, file_to_load):
 
     return sys.modules[module_name]
 
-def get_class_attributes(cls, should_get_types=False):
+def get_class_attributes(cls):
     # Get type hints
     type_hints = get_type_hints(cls)
 
@@ -50,14 +51,32 @@ def get_class_attributes(cls, should_get_types=False):
     class_vars = {key: value for key, value in vars(cls).items()
                   if not key.startswith('__') and not callable(value)}
 
-    # Combine type hints and class variables
-    attributes = {}
-    for key in set(type_hints.keys()) | set(class_vars.keys()):
-        if key in class_vars and not should_get_types:
+    # Get the source code of the class
+    source = inspect.getsource(cls)
+
+    # Parse the source code to get the order of attributes
+    lines = source.split('\n')
+    attribute_order = []
+    for line in lines:
+        line = line.strip()
+        if '=' in line and not line.startswith('def'):
+            attribute_name = line.split('=')[0].strip()
+            if ":" in attribute_name:
+                attribute_name = attribute_name.split(":")[0].strip()
+            if attribute_name not in attribute_order:
+                attribute_order.append(attribute_name)
+        elif ':' in line and not line.startswith('def'):
+            attribute_name = line.split(':')[0].strip()
+            if attribute_name not in attribute_order:
+                attribute_order.append(attribute_name)
+
+    # Combine type hints and class variables in the correct order
+    attributes = OrderedDict()
+    for key in attribute_order:
+        if key in class_vars:
             attributes[key] = class_vars[key]
-        else:
-            if should_get_types:
-                attributes[key] = type_hints[key]
+        elif key in type_hints:
+            attributes[key] = type_hints[key]
 
     return attributes
 
@@ -69,19 +88,20 @@ def generate_default_val(type_):
     elif type_ == type(True): return False
 
     return type_.new0()
+
+def is_class(type_):
+    return type(int) == type(type_)
 def collect_properties(cls):
 
     potential_properties = get_class_attributes(cls)
     for potential_property in potential_properties.keys():
         if potential_property not in already_registered_property_names:
-            prop(potential_property, type(potential_properties[potential_property]),
-                 potential_properties[potential_property])
-
-    potential_properties = get_class_attributes(cls, True)
-    for potential_property in potential_properties.keys():
-        if potential_property not in already_registered_property_names:
-            prop(potential_property, potential_properties[potential_property],
-                 generate_default_val(potential_properties[potential_property]))
+            if not is_class(potential_properties[potential_property]):
+                prop(potential_property, type(potential_properties[potential_property]),
+                     potential_properties[potential_property])
+            else:
+                prop(potential_property, potential_properties[potential_property],
+                     generate_default_val(potential_properties[potential_property]))
 
 cdef api TransferObject exec_class(str source_string, str class_name_):
     global  gd_class, properties, signals, methods,default_values, class_name, is_tool, methods, already_registered_property_names
