@@ -13,6 +13,7 @@ def gdtool(cls:object)->None:pass
 def prop(name:str,type_:object, defaultval:object, hint:BaseHint = BaseHint(""), hint_string:str = "")->None:pass
 
 def gdmethod(func)->None:pass
+def private(func)->None:pass
 
 def signal(name, args:list[SignalArg] = [])->None:pass
 

@@ -28,6 +28,7 @@ is_tool = False
 current_class_name = ""
 cdef str class_icon = None
 already_registered_property_names = []
+already_registered_method_names = []
 
 def load_module(module_name, file_to_load):
     # Check if the module is already loaded
@@ -103,8 +104,16 @@ def collect_properties(cls):
                 prop(potential_property, potential_properties[potential_property],
                      generate_default_val(potential_properties[potential_property]))
 
+def collect_methods(cls):
+    methods = methods = [func for name, func in inspect.getmembers(cls, predicate=inspect.isfunction)]
+    for method in methods:
+        if method not in already_registered_method_names:
+            gdmethod(method)
+
+
 cdef api TransferObject exec_class(str source_string, str class_name_):
-    global  gd_class, properties, signals, methods,default_values, class_name, is_tool, methods, already_registered_property_names
+    global  gd_class, properties, signals, methods,default_values, class_name, is_tool, methods, \
+        already_registered_property_names, already_registered_method_names
     current_class_name = class_name_
     cdef str py_source_string = source_string
     cdef str py_class_name_ = class_name_
@@ -119,6 +128,7 @@ cdef api TransferObject exec_class(str source_string, str class_name_):
     methods = []
     default_values = []
     already_registered_property_names = []
+    already_registered_method_names.clear()
     cdef char* my_str_class
     cdef char* my_str_exception
     cdef bytes bytes_class
@@ -131,6 +141,7 @@ cdef api TransferObject exec_class(str source_string, str class_name_):
         file_to_load = py_class_name_.replace("res://", "")
         load_module(module_name, file_to_load)
         collect_properties(gd_class)
+        collect_methods(gd_class)
     except Exception as e:
         print_tools.print_error("exec_class: Exception happened:")
         print_tools.print_error(f"class to load:{class_name_}")
@@ -214,6 +225,7 @@ def prop(name,type_, defaultval, hint = BaseHint(), hint_string = ""):
                 default_value=defaultval))
 
 def gdmethod(func):
+    global already_registered_method_names
     args = inspect.getfullargspec(func).args
     list_args = []
     cdef PropertyDescription property_description
@@ -224,6 +236,11 @@ def gdmethod(func):
         property_description.to_c()
         list_args.append(property_description)
     methods.append(MethodDescription(func.__name__,None, 0, list_args,[]))
+    already_registered_method_names.append(func)
+    return func
+
+def private(func):
+    already_registered_method_names.append(func)
     return func
 
 def signal(name, list args = []):
