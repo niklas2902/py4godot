@@ -1,5 +1,5 @@
 const char* basic_template = R"(
-from py4godot import gdproperty, signal, gdmethod, gdclass, SignalArg
+from py4godot import gdproperty, signal, private, gdclass, SignalArg
 from py4godot.classes.core import Vector3
 from py4godot.classes.{INHERITS}.{INHERITS} import {INHERITS}
 
@@ -24,8 +24,8 @@ class {CLASSNAME}({INHERITS}):
 		pass
 		# put dynamic code here
 
-	# Method visible in the godot editor, e.g. for connecting signals
-	@gdmethod
+	# Hide the method in the godot editor
+	@private
 	def test_method(self):
 		pass
 )";
