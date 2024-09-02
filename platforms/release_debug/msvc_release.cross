@@ -1,0 +1,23 @@
+[built-in options]
+
+cpp_args = [
+    '/O1',       # Optimize for minimum size
+    '/Oi',     # Enable intrinsic functions
+    '/Ot',     # Favor fast code (usually the default)
+    '/Oy',     # Suppress the creation of frame pointers on the call stack
+    '/GL',     # Whole program optimization
+    '/Zc:inline',  # Remove unreferenced COMDATs
+    '/Gw',     # Enable global data optimization
+    '/GS-',    # Disable security checks (use with caution)
+    '/fp:fast',  # Fast floating-point model
+    '/bigobj',
+    '/DNDEBUG']
+
+cpp_link_args = [
+    '/LTCG',     # Link-time code generation
+    '/OPT:REF',  # Eliminate unreferenced code
+    '/OPT:ICF',  # Remove identical COMDATs (folding)
+    '/INCREMENTAL:NO']
+
+[properties]
+buildtype = 'release'

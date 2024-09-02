@@ -1,5 +1,2 @@
 [binaries]
 cpp = ['cl']
-
-[built-in options]]
-c_args = ['/bigobj', '/DEBUG:FULL', '/Z7']

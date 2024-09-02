@@ -1,0 +1,8 @@
+[built-in options]
+
+cpp_args = ['/bigobj', '-d2SSAOptimizer-', '/DEBUG:FULL', '/Z7', '/DEBUG:FULL']
+
+cpp_link_args = ['/DEBUG:FULL']
+
+[properties]
+buildtype = 'release'

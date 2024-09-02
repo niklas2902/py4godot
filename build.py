@@ -74,6 +74,12 @@ def compile_python_ver_file(platform):
         with open("platforms/binary_dirs/python_ver_compile.cross", "w") as python_compile:
             python_compile.write(file_string)
 
+def get_debug_release_cross_compile_file(compiler, buildtype):
+    if "msvc" in compiler:
+        if "release" in buildtype:
+            return "--cross-file platforms/release_debug/msvc_release.cross"
+        else:
+            return "--cross-file platforms/release_debug/msvc_debug.cross"
 
 def get_compiler():
     compiler_res = subprocess.run("vcvarsall", shell=True, stdout=subprocess.DEVNULL,
@@ -104,6 +110,7 @@ my_parser.add_argument('--target_platform',
 my_parser.add_argument("-run_tests", help="should tests be run", default="False")
 my_parser.add_argument("-download_godot", help="should tests be run", default="False")
 my_parser.add_argument("-create_plugin", help="Should this create a plugin", default="True")
+my_parser.add_argument("-buildtype", help="Should this be a debug build or release build", default="release")
 # Execute parse_args()
 args = my_parser.parse_args()
 
@@ -112,6 +119,8 @@ should_run_tests = args.run_tests.lower() == "true"
 # Determining if godot binary should be downloaded
 should_download_godot = args.download_godot.lower() == "true"
 build_dir = f"build/{args.target_platform}"
+
+build_type = args.buildtype.lower().strip()
 
 start = time.time()
 if args.compiler is None:
@@ -140,14 +149,16 @@ try:
               f"meson {build_dir} --cross-file platforms/{args.target_platform}.cross "
               f"--cross-file platforms/compilers/{args.compiler}_compiler.native "
               f"--cross-file platforms/binary_dirs/python_ver_compile.cross "
-              f"--buildtype=release"
+              f"{get_debug_release_cross_compile_file(args.compiler, build_type)}"
+              f"--buildtype=release "
               f"{command_separator} meson compile -C build/{args.target_platform}"
               )
         res = subprocess.Popen(msvc_init +
                                f"meson {build_dir} --cross-file platforms/{args.target_platform}.cross "
                                f"--cross-file platforms/compilers/{args.compiler}_compiler.native "
                                f"--cross-file platforms/binary_dirs/python_ver_compile.cross "
-                               f"--buildtype=release"
+                               f"{get_debug_release_cross_compile_file(args.compiler, build_type)} "
+                               f"--buildtype=release "
                                f"{command_separator} meson compile -C build/{args.target_platform}",
                                shell=True)
     else:
@@ -155,14 +166,16 @@ try:
               f"meson {build_dir} --cross-file platforms/{args.target_platform}.cross "
               f"--cross-file platforms/compilers/{args.compiler}_compiler.native "
               f"--cross-file platforms/binary_dirs/python_ver_compile.cross "
-              f"--buildtype=release"
+              f"{get_debug_release_cross_compile_file(args.compiler, build_type)}"
+              f"--buildtype=release "
               f"{command_separator} meson compile -C build/{args.target_platform}"
               )
         res = subprocess.Popen(msvc_init +
                                f"meson {build_dir} --cross-file platforms/{args.target_platform}.cross "
                                f"--cross-file platforms/compilers/{args.compiler}_compiler.native "
                                f"--cross-file platforms/binary_dirs/python_ver_compile.cross "
-                               f"--buildtype=release"
+                               f"--buildtype=release "
+                               f"{get_debug_release_cross_compile_file(args.compiler, build_type)}"
                                f"{command_separator} meson compile -C build/{args.target_platform}",
                                shell=True)
 

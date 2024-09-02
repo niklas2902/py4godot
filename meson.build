@@ -35,10 +35,6 @@ if meson.get_compiler('cpp').get_id() == 'g++'
 endif
 if meson.get_compiler('cpp').get_id() == 'msvc'
     add_global_arguments('/bigobj', language : 'cpp')
-    add_global_arguments('-d2SSAOptimizer-', language : 'cpp')
-    add_global_arguments('/DEBUG:FULL', language : 'cpp')
-    add_global_arguments('/Z7', language : 'cpp')
-    link_args = ['/DEBUG:FULL']
     cpp_args = ['/DLIBRARY_EXPORTS=1']
 endif
 
