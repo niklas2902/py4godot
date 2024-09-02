@@ -17,9 +17,10 @@ extra_args = []
 message(meson.get_compiler('cpp').get_id())
 
 link_args = []
+cpp_args = []
 if meson.get_compiler('cpp').get_id() == 'gcc'
     add_global_arguments('-DMS_WIN'+ platform_format, language : 'cpp')
-    cpp_args = ['-w',  '-D LIBRARY_EXPORTS=1', '-fpermissive', '-g']
+    cpp_args = ['-D LIBRARY_EXPORTS=1']
     if platform_format == '32'
         link_args = ['-m32']
         cpp_args += ['-m32', '-std=c++14']
@@ -27,7 +28,7 @@ if meson.get_compiler('cpp').get_id() == 'gcc'
 endif
 if meson.get_compiler('cpp').get_id() == 'g++'
     add_global_arguments('-DMS_WIN'+platform_format, language : 'cpp')
-    cpp_args = ['-w',   '-D LIBRARY_EXPORTS=1', '-fpermissive' , '-g']
+    cpp_args = ['-D LIBRARY_EXPORTS=1',]
     if platform_format == '32'
         link_args = ['-m32']
         cpp_args += ['-m32', '-std=c++14']

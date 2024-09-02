@@ -1,0 +1,16 @@
+[built-in options]
+
+cpp_args = [
+    '-fpermissive',
+    '-w',
+    '-Os',        # Optimize for size
+    '-ffunction-sections', # Place each function in its own section in the output file
+    '-fdata-sections',     # Place each data item in its own section in the output file
+    '-fvisibility=hidden', # Hide symbols by default (only expose what's necessary)
+    '-fno-rtti']           # Disable RTTI (if runtime type information is not needed)
+
+cpp_link_args = [
+    '-Wl,--gc-sections',   # Remove unused sections
+    '-Wl,--strip-all',     # Strip all symbols (no debugging information)
+    '-Wl,--as-needed',     # Only link needed libraries
+    '-Wl,--build-id=none'] # Omit build ID from the output

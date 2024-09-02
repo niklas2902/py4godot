@@ -80,6 +80,12 @@ def get_debug_release_cross_compile_file(compiler, buildtype):
             return "--cross-file platforms/release_debug/msvc_release.cross"
         else:
             return "--cross-file platforms/release_debug/msvc_debug.cross"
+    elif "gcc" in compiler or "g++" in compiler:
+        if "release" in buildtype:
+            return "--cross-file platforms/release_debug/g++_release.cross"
+        else:
+            return "--cross-file platforms/release_debug/g++_debug.cross"
+
 
 def get_compiler():
     compiler_res = subprocess.run("vcvarsall", shell=True, stdout=subprocess.DEVNULL,

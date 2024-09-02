@@ -1,0 +1,5 @@
+[built-in options]
+
+cpp_args = ['-w',  '-fpermissive', '-g']
+
+cpp_link_args = []
