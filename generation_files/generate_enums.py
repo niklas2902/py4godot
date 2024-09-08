@@ -20,7 +20,7 @@ if __name__ == "__main__":
     res = generate_newline(res)
 
     res_pyi = ""
-    with open('py4godot/gdextension-api/extension_api.json', 'r') as myfile:
+    with open('py4godot/gdextension-api/extension_api.json', 'r', encoding="utf-8") as myfile:
         data = myfile.read()
         obj = json.loads(data)
         for enum_def in obj["global_enums"]:

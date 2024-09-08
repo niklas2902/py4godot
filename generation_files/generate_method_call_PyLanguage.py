@@ -149,7 +149,7 @@ def generate_method_string_name(method):
     return f'func_name_{method["name"]} = c_string_to_string_name("{method["name"]}")';
 
 if __name__ == "__main__":
-    with open('../py4godot/gdextension-api/extension_api.json', 'r') as myfile:
+    with open('../py4godot/gdextension-api/extension_api.json', 'r', encoding="utf-8") as myfile:
         data = myfile.read()
         obj = json.loads(data)
 
