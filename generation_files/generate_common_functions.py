@@ -85,7 +85,7 @@ def generate_import():
     result = ("from py4godot.core.variant4.Variant4 cimport *\n"
               "from libcpp cimport bool\n"
               "from libcpp.vector cimport vector\n"
-              "from py4godot.enums.enums4 cimport *\n"
+              "from py4godot.enums.enums cimport *\n"
               "from py4godot.utils.utils cimport *\n"
               "from py4godot.classes.core cimport *\n"
               "cimport py4godot.classes.Object.Object as py4godot_object\n")

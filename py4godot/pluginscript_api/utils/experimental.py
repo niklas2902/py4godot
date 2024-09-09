@@ -1,8 +1,11 @@
 import inspect
-from typing import TypeVar
+from py4godot.pluginscript_api.utils.SignalArg import SignalArg
+from typing import TypeVar, List
 
 from py4godot.pluginscript_api.hints.BaseHint import BaseHint
-from py4godot.pluginscript_api.utils.annotations import prop
+from py4godot.pluginscript_api.utils.annotations import prop, signal
+from py4godot.classes.core import Callable, Signal
+from py4godot.utils.print_tools import print_error
 
 T = TypeVar("T")
 #Very experimental
@@ -20,3 +23,10 @@ def gdprop(defaultval:T, hint:BaseHint = BaseHint(), hint_string:str = ""):
     return defaultval
 
 
+def gdsignal(args: List[SignalArg]=[]):
+    stack = inspect.stack()
+    print_error(f"Stack:{stack[1]}")
+    name = stack[1].code_context[0].split("=")[0].split(":")[0].strip()
+    print_error(f"Name:{name}")
+    signal(name, args)
+    return None

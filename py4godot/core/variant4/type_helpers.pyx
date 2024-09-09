@@ -3,6 +3,8 @@ from py4godot.classes.core cimport *
 from py4godot.classes.Object.Object cimport *
 cimport py4godot.classes.cpp_bridge as bridge
 from cpython cimport Py_INCREF, Py_DECREF, PyObject
+
+from py4godot.core.signals cimport GDSignal
 from py4godot.utils.utils cimport *
 from py4godot.utils.print_tools import *
 from libcpp cimport bool
@@ -140,7 +142,7 @@ cdef api object type_helper_create_packedcolorarray(shared_ptr[bridge.PackedColo
     #Py_INCREF(val)
     return val
 cdef api object type_helper_create_signal(shared_ptr[bridge.Signal]& bridge_val):
-    cdef Signal val = Signal()
+    cdef GDSignal val = GDSignal()
     val.Signal_internal_class_ptr = bridge_val
     #Py_INCREF(val)
     return val

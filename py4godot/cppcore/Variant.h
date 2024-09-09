@@ -23,6 +23,7 @@ namespace godot{
         Variant(int val);
 
         void init_type(String& val);
+        void init_type(StringName& val);
         void init_type(Dictionary& val);
         void init_type(int val);
         void init_type(Array& val);

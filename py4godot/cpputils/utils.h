@@ -5,6 +5,7 @@
 #include "functions.h"
 #include <memory>
 #include <stdlib.h>
+#include <string>
 
 using namespace godot;
 static bool is_none(PyObject* pyobject){
@@ -183,4 +184,24 @@ static long long get_packed_string_array_size(void* ptr){
 static String get_packed_string_array_element(void* ptr, int index){
     void* string_ptr = functions::get_packed_string_array_operator_index()(ptr, index);
     return String::new_static(*((void**)string_ptr));
+}
+
+static std::string get_python_typename(PyObject* get_val) {
+    // Step 1: Get the type object
+    PyObject* type_obj = PyObject_Type(get_val);
+
+    // Step 2: Get the __name__ attribute from the type object
+    PyObject* type_name_obj = PyObject_GetAttrString(type_obj, "__name__");
+
+    // Step 3: Convert the __name__ attribute to a C string
+    const char* type_name_cstr = PyUnicode_AsUTF8(type_name_obj);
+
+    // Step 4: Convert the C string to a std::string
+    std::string py_typename(type_name_cstr);
+
+    // Clean up: Decrement reference counts for temporary objects
+    Py_XDECREF(type_obj);
+    Py_XDECREF(type_name_obj);
+
+    return py_typename;
 }

@@ -88,9 +88,9 @@ def generate_import():
               "from libcpp cimport bool\n"
               #"from libcpp.memory cimport static_pointer_cast\n"
               "from libcpp.vector cimport vector\n"
-              "from py4godot.enums.enums4 cimport *\n"
+              "from py4godot.enums.enums cimport *\n"
               "from py4godot.utils.utils cimport *\n"
-              "import py4godot.utils.utils as py_utils\n"
+              "cimport py4godot.utils.utils as py_utils\n"
               "from py4godot.classes.typedarrays cimport *\n"
               "from libcpp.memory cimport make_shared\n")
     return result
