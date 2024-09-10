@@ -54,3 +54,29 @@ cdef class GDSignal():
 
     def disconnect(self, object function ):
         pass
+
+
+
+cdef class BuiltinSignal():
+    def __init__(self, parent, name):
+        self.signal_name = <StringName> name
+        self.parent = <Object> parent
+    def __cinit__(self):
+        self.Signal_internal_class_ptr = make_shared[CPPSignal]()
+
+    def connect(self, object function , int flags =0):
+        cdef str function_name = function.__name__
+        cdef Object parent = <Object> (function.__self__ if hasattr(function, '__self__') else None)
+        parent.get_class()
+        cdef bytes b_function_name = function_name.encode("utf-8")
+        cdef char* c_function_name = b_function_name
+        # Don't use StringName::new2 here. Somehow it results in an empty string
+        cdef StringName gd_function_name = py_c_string_to_string_name(c_function_name)
+        cdef Callable callable = Callable.new2(parent, gd_function_name )
+        Py_INCREF(callable)
+
+        self.parent.connect(self.signal_name, self.callable)
+
+
+    def disconnect(self, object function ):
+        pass

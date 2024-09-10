@@ -36,6 +36,14 @@ def generate_enums(class_):
     res = generate_newline(res)
     return res
 
+def generate_signals(cls):
+    if not "signals" in cls.keys():
+        return ""
+    res = ""
+    for signal in cls["signals"]:
+        res += f"{INDENT}cdef public Signal {signal['name']}"
+        res = generate_newline(res)
+    return res
 
 def generate_newline(str_):
     return str_ + "\n"
@@ -88,6 +96,8 @@ def generate_pxd_class(pxd_class):
     result += generate_common_methods(class_)
     result = generate_newline(result)
     result += generate_properties(class_)
+    result = generate_newline(result)
+    result += generate_signals(pxd_class)
     result = generate_newline(result)
     return result
 

@@ -782,9 +782,20 @@ def generate_cinit(class_):
                 break
             cls = find_class(cls["inherits"])
     res = generate_newline(res)
+    res += generate_init_signals(class_)
+    res = generate_newline(res)
     return res
 
 
+def generate_init_signals(cls):
+    res = ""
+    if "signals" in cls.keys():
+        for signal in cls["signals"]:
+            res += f"{INDENT*2}cdef StringName {signal['name']}_name = py_c_string_to_string_name(\"{signal['name']}\")"
+            res = generate_newline(res)
+            res += f"{INDENT*2}self.{signal['name']} = BuiltinSignal(self, {signal['name']}_name)"
+            res = generate_newline(res)
+    return res
 def generate_destroy_object_method():
     res = ""
     res = generate_newline(res)
@@ -1398,6 +1409,8 @@ def generate_classes(classes, filename, is_core=False, is_typed_array=False):
             res = generate_newline(res)
 
     elif not is_core:
+        res += f"from py4godot.core.signals cimport BuiltinSignal"
+        res = generate_newline(res)
         res += f"from py4godot.classes.cpp_bridge cimport construct_{classes[0]['name']}"
         res = generate_newline(res)
         res += f"from py4godot.classes.cpp_bridge cimport cast_to_{classes[0]['name']}"
