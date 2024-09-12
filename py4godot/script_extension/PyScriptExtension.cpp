@@ -245,7 +245,6 @@ void PyScriptExtension::update_instance_data(InstanceData* gd_instance, PyObject
 }
 void PyScriptExtension::_instance_create( Object& for_object, GDExtensionTypePtr res){
     print_error("_instance_create");
-    functions::get_print_error()("instance_create", "test", "test", 1, 1);
     auto gil_state = PyGILState_Ensure();
 
     GDExtensionVariantFromTypeConstructorFunc constructor_func;

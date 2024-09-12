@@ -41,7 +41,7 @@ def generate_signals(cls):
         return ""
     res = ""
     for signal in cls["signals"]:
-        res += f"{INDENT}cdef public Signal {signal['name']}"
+        res += f"{INDENT}cdef public object {signal['name']}"
         res = generate_newline(res)
     return res
 

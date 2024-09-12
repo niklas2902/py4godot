@@ -31,7 +31,6 @@ cdef api PyObject*  instantiate_class(PyObject* gd_class):
     return <PyObject*>o
 
 cdef api void create_signals(PyObject* instance, vector[shared_ptr[BridgeDictionary]]& signals):
-    print_error("start creating signals")
     cdef object py_instance = <object>instance
     cdef StringName name
     cdef str py_name

@@ -25,8 +25,6 @@ def gdprop(defaultval:T, hint:BaseHint = BaseHint(), hint_string:str = ""):
 
 def gdsignal(args: List[SignalArg]=[]):
     stack = inspect.stack()
-    print_error(f"Stack:{stack[1]}")
     name = stack[1].code_context[0].split("=")[0].split(":")[0].strip()
-    print_error(f"Name:{name}")
     signal(name, args)
     return None

@@ -1,3 +1,4 @@
+# distutils: language=c++
 from cpython.ref cimport Py_INCREF, Py_DECREF
 from py4godot.classes.core cimport *
 from py4godot.classes.Object.Object import Object
@@ -39,32 +40,17 @@ cdef class GDSignal():
     def connect(self, object function , int flags =0):
         cdef str function_name = function.__name__
         cdef Object parent = <Object> (function.__self__ if hasattr(function, '__self__') else None)
-        print_error("connect - Object:", parent)
         parent.get_class()
-        print_error(f"function_name:{ function_name}")
         cdef bytes b_function_name = function_name.encode("utf-8")
         cdef char* c_function_name = b_function_name
         # Don't use StringName::new2 here. Somehow it results in an empty string
         cdef StringName gd_function_name = py_c_string_to_string_name(c_function_name)
         cdef Callable callable = Callable.new2(parent, gd_function_name )
         Py_INCREF(callable)
-
         super().connect(callable)
 
 
     def disconnect(self, object function ):
-        pass
-
-
-
-cdef class BuiltinSignal():
-    def __init__(self, parent, name):
-        self.signal_name = <StringName> name
-        self.parent = <Object> parent
-    def __cinit__(self):
-        self.Signal_internal_class_ptr = make_shared[CPPSignal]()
-
-    def connect(self, object function , int flags =0):
         cdef str function_name = function.__name__
         cdef Object parent = <Object> (function.__self__ if hasattr(function, '__self__') else None)
         parent.get_class()
@@ -74,9 +60,66 @@ cdef class BuiltinSignal():
         cdef StringName gd_function_name = py_c_string_to_string_name(c_function_name)
         cdef Callable callable = Callable.new2(parent, gd_function_name )
         Py_INCREF(callable)
+        super().disconnect(callable)
 
+
+
+cdef class BuiltinSignal():
+    def __init__(self, parent, name):
+        cdef Object temp_object
+        self.signal_name = <StringName> name
+        temp_object = parent
+        Py_INCREF(temp_object) # Memory Issue: This could possibly be a memory issue. Currently on Cython3.10, if I don't keep it,
+                               # the program crashes and I don't see memory issues. But in later Cython versions this could
+                               # become a problem. So this should be reminded
+        self.parent = temp_object
+    def connect(self, object function , int flags =0):
+        return
+        cdef str function_name = function.__name__
+        cdef Object parent = <Object> (function.__self__ if hasattr(function, '__self__') else None)
+        parent.get_class()
+        cdef bytes b_function_name = function_name.encode("utf-8")
+        cdef char* c_function_name = b_function_name
+        # Don't use StringName::new2 here. Somehow it results in an empty string
+        cdef StringName gd_function_name = py_c_string_to_string_name(c_function_name)
+        cdef Callable callable = Callable.new2(parent, gd_function_name )
+        Py_INCREF(callable)
         self.parent.connect(self.signal_name, self.callable)
 
 
     def disconnect(self, object function ):
-        pass
+        cdef str function_name = function.__name__
+        cdef Object parent = <Object> (function.__self__ if hasattr(function, '__self__') else None)
+        parent.get_class()
+        cdef bytes b_function_name = function_name.encode("utf-8")
+        cdef char* c_function_name = b_function_name
+        # Don't use StringName::new2 here. Somehow it results in an empty string
+        cdef StringName gd_function_name = py_c_string_to_string_name(c_function_name)
+        cdef Callable callable = Callable.new2(parent, gd_function_name )
+        Py_INCREF(callable)
+        self.parent.disconnect(self.signal_name, callable)
+
+    def is_null(self):
+        proxy_signal = Signal.new2(self.parent, self.signal_name)
+        return proxy_signal.is_null()
+
+    def get_object(self):
+        return self.parent
+    def get_object_id(self):
+        return self.parent.get_instance_id()
+
+    def get_name(self):
+        return self.signal_name
+
+    def is_connected(self, Callable callable ):
+        return self.parent.is_connected(self.signal_name, callable)
+
+    def get_connections(self):
+        return self.get_signal_connection_list(self.signal_name)
+
+    def __eq__(self, other):
+        proxy_signal = Signal.new2(self.parent, self.signal_name)
+        return proxy_signal.__eq__(other)
+    def __ne__(self, other):
+        proxy_signal = Signal.new2(self.parent, self.signal_name)
+        return proxy_signal.__ne__(other)

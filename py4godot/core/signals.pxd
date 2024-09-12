@@ -5,7 +5,7 @@ from py4godot.classes.Object.Object cimport Object
 cdef class GDSignal(Signal):
     pass
 
-cdef class BuiltinSignal(Signal):
+cdef class BuiltinSignal():
     cdef Object parent
     cdef StringName signal_name
 

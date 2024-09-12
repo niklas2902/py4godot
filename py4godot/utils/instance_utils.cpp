@@ -3147,7 +3147,7 @@ struct __pyx_t_8py4godot_7classes_10cpp_bridge_Error {
  */
 };
 
-/* "py4godot/classes/core.pxd":48
+/* "py4godot/classes/core.pxd":49
  * 
  * 
  * cpdef enum Vector2__Axis:             # <<<<<<<<<<<<<<
@@ -3159,7 +3159,7 @@ enum __pyx_t_8py4godot_7classes_4core_Vector2__Axis {
   __pyx_e_8py4godot_7classes_4core_Vector2__AXIS_Y = 1
 };
 
-/* "py4godot/classes/core.pxd":62
+/* "py4godot/classes/core.pxd":64
  * 
  * 
  * cpdef enum Vector2i__Axis:             # <<<<<<<<<<<<<<
@@ -3171,7 +3171,7 @@ enum __pyx_t_8py4godot_7classes_4core_Vector2i__Axis {
   __pyx_e_8py4godot_7classes_4core_Vector2i__AXIS_Y = 1
 };
 
-/* "py4godot/classes/core.pxd":96
+/* "py4godot/classes/core.pxd":101
  * 
  * 
  * cpdef enum Vector3__Axis:             # <<<<<<<<<<<<<<
@@ -3184,7 +3184,7 @@ enum __pyx_t_8py4godot_7classes_4core_Vector3__Axis {
   __pyx_e_8py4godot_7classes_4core_Vector3__AXIS_Z = 2
 };
 
-/* "py4godot/classes/core.pxd":111
+/* "py4godot/classes/core.pxd":117
  * 
  * 
  * cpdef enum Vector3i__Axis:             # <<<<<<<<<<<<<<
@@ -3197,7 +3197,7 @@ enum __pyx_t_8py4godot_7classes_4core_Vector3i__Axis {
   __pyx_e_8py4godot_7classes_4core_Vector3i__AXIS_Z = 2
 };
 
-/* "py4godot/classes/core.pxd":136
+/* "py4godot/classes/core.pxd":144
  * 
  * 
  * cpdef enum Vector4__Axis:             # <<<<<<<<<<<<<<
@@ -3211,7 +3211,7 @@ enum __pyx_t_8py4godot_7classes_4core_Vector4__Axis {
   __pyx_e_8py4godot_7classes_4core_Vector4__AXIS_W = 3
 };
 
-/* "py4godot/classes/core.pxd":152
+/* "py4godot/classes/core.pxd":161
  * 
  * 
  * cpdef enum Vector4i__Axis:             # <<<<<<<<<<<<<<
@@ -3225,7 +3225,7 @@ enum __pyx_t_8py4godot_7classes_4core_Vector4i__Axis {
   __pyx_e_8py4godot_7classes_4core_Vector4i__AXIS_W = 3
 };
 
-/* "py4godot/classes/core.pxd":218
+/* "py4godot/classes/core.pxd":233
  * 
  * 
  * cpdef enum Projection__Planes:             # <<<<<<<<<<<<<<
@@ -3283,7 +3283,7 @@ struct __pyx_obj_8py4godot_7classes_4core_String {
 };
 
 
-/* "py4godot/classes/core.pxd":53
+/* "py4godot/classes/core.pxd":54
  * 
  * 
  * cdef class Vector2():             # <<<<<<<<<<<<<<
@@ -3297,7 +3297,7 @@ struct __pyx_obj_8py4godot_7classes_4core_Vector2 {
 };
 
 
-/* "py4godot/classes/core.pxd":67
+/* "py4godot/classes/core.pxd":69
  * 
  * 
  * cdef class Vector2i():             # <<<<<<<<<<<<<<
@@ -3311,7 +3311,7 @@ struct __pyx_obj_8py4godot_7classes_4core_Vector2i {
 };
 
 
-/* "py4godot/classes/core.pxd":77
+/* "py4godot/classes/core.pxd":80
  * 
  * 
  * cdef class Rect2():             # <<<<<<<<<<<<<<
@@ -3325,7 +3325,7 @@ struct __pyx_obj_8py4godot_7classes_4core_Rect2 {
 };
 
 
-/* "py4godot/classes/core.pxd":87
+/* "py4godot/classes/core.pxd":91
  * 
  * 
  * cdef class Rect2i():             # <<<<<<<<<<<<<<
@@ -3339,7 +3339,7 @@ struct __pyx_obj_8py4godot_7classes_4core_Rect2i {
 };
 
 
-/* "py4godot/classes/core.pxd":102
+/* "py4godot/classes/core.pxd":107
  * 
  * 
  * cdef class Vector3():             # <<<<<<<<<<<<<<
@@ -3353,7 +3353,7 @@ struct __pyx_obj_8py4godot_7classes_4core_Vector3 {
 };
 
 
-/* "py4godot/classes/core.pxd":117
+/* "py4godot/classes/core.pxd":123
  * 
  * 
  * cdef class Vector3i():             # <<<<<<<<<<<<<<
@@ -3367,7 +3367,7 @@ struct __pyx_obj_8py4godot_7classes_4core_Vector3i {
 };
 
 
-/* "py4godot/classes/core.pxd":127
+/* "py4godot/classes/core.pxd":134
  * 
  * 
  * cdef class Transform2D():             # <<<<<<<<<<<<<<
@@ -3381,7 +3381,7 @@ struct __pyx_obj_8py4godot_7classes_4core_Transform2D {
 };
 
 
-/* "py4godot/classes/core.pxd":143
+/* "py4godot/classes/core.pxd":151
  * 
  * 
  * cdef class Vector4():             # <<<<<<<<<<<<<<
@@ -3395,7 +3395,7 @@ struct __pyx_obj_8py4godot_7classes_4core_Vector4 {
 };
 
 
-/* "py4godot/classes/core.pxd":159
+/* "py4godot/classes/core.pxd":168
  * 
  * 
  * cdef class Vector4i():             # <<<<<<<<<<<<<<
@@ -3409,7 +3409,7 @@ struct __pyx_obj_8py4godot_7classes_4core_Vector4i {
 };
 
 
-/* "py4godot/classes/core.pxd":169
+/* "py4godot/classes/core.pxd":179
  * 
  * 
  * cdef class Plane():             # <<<<<<<<<<<<<<
@@ -3423,7 +3423,7 @@ struct __pyx_obj_8py4godot_7classes_4core_Plane {
 };
 
 
-/* "py4godot/classes/core.pxd":179
+/* "py4godot/classes/core.pxd":190
  * 
  * 
  * cdef class Quaternion():             # <<<<<<<<<<<<<<
@@ -3437,7 +3437,7 @@ struct __pyx_obj_8py4godot_7classes_4core_Quaternion {
 };
 
 
-/* "py4godot/classes/core.pxd":189
+/* "py4godot/classes/core.pxd":201
  * 
  * 
  * cdef class AABB():             # <<<<<<<<<<<<<<
@@ -3451,7 +3451,7 @@ struct __pyx_obj_8py4godot_7classes_4core_AABB {
 };
 
 
-/* "py4godot/classes/core.pxd":199
+/* "py4godot/classes/core.pxd":212
  * 
  * 
  * cdef class Basis():             # <<<<<<<<<<<<<<
@@ -3465,7 +3465,7 @@ struct __pyx_obj_8py4godot_7classes_4core_Basis {
 };
 
 
-/* "py4godot/classes/core.pxd":209
+/* "py4godot/classes/core.pxd":223
  * 
  * 
  * cdef class Transform3D():             # <<<<<<<<<<<<<<
@@ -3479,7 +3479,7 @@ struct __pyx_obj_8py4godot_7classes_4core_Transform3D {
 };
 
 
-/* "py4godot/classes/core.pxd":227
+/* "py4godot/classes/core.pxd":242
  * 
  * 
  * cdef class Projection():             # <<<<<<<<<<<<<<
@@ -3493,7 +3493,7 @@ struct __pyx_obj_8py4godot_7classes_4core_Projection {
 };
 
 
-/* "py4godot/classes/core.pxd":237
+/* "py4godot/classes/core.pxd":253
  * 
  * 
  * cdef class Color():             # <<<<<<<<<<<<<<
@@ -3507,7 +3507,7 @@ struct __pyx_obj_8py4godot_7classes_4core_Color {
 };
 
 
-/* "py4godot/classes/core.pxd":247
+/* "py4godot/classes/core.pxd":264
  * 
  * 
  * cdef class StringName():             # <<<<<<<<<<<<<<
@@ -3521,7 +3521,7 @@ struct __pyx_obj_8py4godot_7classes_4core_StringName {
 };
 
 
-/* "py4godot/classes/core.pxd":257
+/* "py4godot/classes/core.pxd":275
  * 
  * 
  * cdef class NodePath():             # <<<<<<<<<<<<<<
@@ -3535,7 +3535,7 @@ struct __pyx_obj_8py4godot_7classes_4core_NodePath {
 };
 
 
-/* "py4godot/classes/core.pxd":267
+/* "py4godot/classes/core.pxd":286
  * 
  * 
  * cdef class RID():             # <<<<<<<<<<<<<<
@@ -3549,7 +3549,7 @@ struct __pyx_obj_8py4godot_7classes_4core_RID {
 };
 
 
-/* "py4godot/classes/core.pxd":277
+/* "py4godot/classes/core.pxd":297
  * 
  * 
  * cdef class Callable():             # <<<<<<<<<<<<<<
@@ -3563,7 +3563,7 @@ struct __pyx_obj_8py4godot_7classes_4core_Callable {
 };
 
 
-/* "py4godot/classes/core.pxd":287
+/* "py4godot/classes/core.pxd":308
  * 
  * 
  * cdef class Signal():             # <<<<<<<<<<<<<<
@@ -3577,7 +3577,7 @@ struct __pyx_obj_8py4godot_7classes_4core_Signal {
 };
 
 
-/* "py4godot/classes/core.pxd":297
+/* "py4godot/classes/core.pxd":319
  * 
  * 
  * cdef class Dictionary():             # <<<<<<<<<<<<<<
@@ -3591,7 +3591,7 @@ struct __pyx_obj_8py4godot_7classes_4core_Dictionary {
 };
 
 
-/* "py4godot/classes/core.pxd":307
+/* "py4godot/classes/core.pxd":330
  * 
  * 
  * cdef class Array():             # <<<<<<<<<<<<<<
@@ -3606,7 +3606,7 @@ struct __pyx_obj_8py4godot_7classes_4core_Array {
 };
 
 
-/* "py4godot/classes/core.pxd":317
+/* "py4godot/classes/core.pxd":341
  * 
  * 
  * cdef class PackedByteArray():             # <<<<<<<<<<<<<<
@@ -3621,7 +3621,7 @@ struct __pyx_obj_8py4godot_7classes_4core_PackedByteArray {
 };
 
 
-/* "py4godot/classes/core.pxd":327
+/* "py4godot/classes/core.pxd":352
  * 
  * 
  * cdef class PackedInt32Array():             # <<<<<<<<<<<<<<
@@ -3636,7 +3636,7 @@ struct __pyx_obj_8py4godot_7classes_4core_PackedInt32Array {
 };
 
 
-/* "py4godot/classes/core.pxd":337
+/* "py4godot/classes/core.pxd":363
  * 
  * 
  * cdef class PackedInt64Array():             # <<<<<<<<<<<<<<
@@ -3651,7 +3651,7 @@ struct __pyx_obj_8py4godot_7classes_4core_PackedInt64Array {
 };
 
 
-/* "py4godot/classes/core.pxd":347
+/* "py4godot/classes/core.pxd":374
  * 
  * 
  * cdef class PackedFloat32Array():             # <<<<<<<<<<<<<<
@@ -3666,7 +3666,7 @@ struct __pyx_obj_8py4godot_7classes_4core_PackedFloat32Array {
 };
 
 
-/* "py4godot/classes/core.pxd":357
+/* "py4godot/classes/core.pxd":385
  * 
  * 
  * cdef class PackedFloat64Array():             # <<<<<<<<<<<<<<
@@ -3681,7 +3681,7 @@ struct __pyx_obj_8py4godot_7classes_4core_PackedFloat64Array {
 };
 
 
-/* "py4godot/classes/core.pxd":367
+/* "py4godot/classes/core.pxd":396
  * 
  * 
  * cdef class PackedStringArray():             # <<<<<<<<<<<<<<
@@ -3696,7 +3696,7 @@ struct __pyx_obj_8py4godot_7classes_4core_PackedStringArray {
 };
 
 
-/* "py4godot/classes/core.pxd":377
+/* "py4godot/classes/core.pxd":407
  * 
  * 
  * cdef class PackedVector2Array():             # <<<<<<<<<<<<<<
@@ -3711,7 +3711,7 @@ struct __pyx_obj_8py4godot_7classes_4core_PackedVector2Array {
 };
 
 
-/* "py4godot/classes/core.pxd":387
+/* "py4godot/classes/core.pxd":418
  * 
  * 
  * cdef class PackedVector3Array():             # <<<<<<<<<<<<<<
@@ -3726,7 +3726,7 @@ struct __pyx_obj_8py4godot_7classes_4core_PackedVector3Array {
 };
 
 
-/* "py4godot/classes/core.pxd":397
+/* "py4godot/classes/core.pxd":429
  * 
  * 
  * cdef class PackedColorArray():             # <<<<<<<<<<<<<<
@@ -3741,7 +3741,7 @@ struct __pyx_obj_8py4godot_7classes_4core_PackedColorArray {
 };
 
 
-/* "py4godot/classes/core.pxd":407
+/* "py4godot/classes/core.pxd":440
  * 
  * 
  * cdef class PackedVector4Array():             # <<<<<<<<<<<<<<
@@ -3768,6 +3768,8 @@ struct __pyx_obj_8py4godot_7classes_6Object_6Object_Object {
   struct __pyx_vtabstruct_8py4godot_7classes_6Object_6Object_Object *__pyx_vtab;
   int already_deallocated;
   std::shared_ptr<godot::Object>  Object_internal_class_ptr;
+  PyObject *script_changed;
+  PyObject *property_list_changed;
 };
 
 
@@ -3803,7 +3805,7 @@ struct __pyx_vtabstruct_8py4godot_7classes_4core_String {
 static struct __pyx_vtabstruct_8py4godot_7classes_4core_String *__pyx_vtabptr_8py4godot_7classes_4core_String;
 
 
-/* "py4godot/classes/core.pxd":53
+/* "py4godot/classes/core.pxd":54
  * 
  * 
  * cdef class Vector2():             # <<<<<<<<<<<<<<
@@ -3817,7 +3819,7 @@ struct __pyx_vtabstruct_8py4godot_7classes_4core_Vector2 {
 static struct __pyx_vtabstruct_8py4godot_7classes_4core_Vector2 *__pyx_vtabptr_8py4godot_7classes_4core_Vector2;
 
 
-/* "py4godot/classes/core.pxd":67
+/* "py4godot/classes/core.pxd":69
  * 
  * 
  * cdef class Vector2i():             # <<<<<<<<<<<<<<
@@ -3831,7 +3833,7 @@ struct __pyx_vtabstruct_8py4godot_7classes_4core_Vector2i {
 static struct __pyx_vtabstruct_8py4godot_7classes_4core_Vector2i *__pyx_vtabptr_8py4godot_7classes_4core_Vector2i;
 
 
-/* "py4godot/classes/core.pxd":77
+/* "py4godot/classes/core.pxd":80
  * 
  * 
  * cdef class Rect2():             # <<<<<<<<<<<<<<
@@ -3845,7 +3847,7 @@ struct __pyx_vtabstruct_8py4godot_7classes_4core_Rect2 {
 static struct __pyx_vtabstruct_8py4godot_7classes_4core_Rect2 *__pyx_vtabptr_8py4godot_7classes_4core_Rect2;
 
 
-/* "py4godot/classes/core.pxd":87
+/* "py4godot/classes/core.pxd":91
  * 
  * 
  * cdef class Rect2i():             # <<<<<<<<<<<<<<
@@ -3859,7 +3861,7 @@ struct __pyx_vtabstruct_8py4godot_7classes_4core_Rect2i {
 static struct __pyx_vtabstruct_8py4godot_7classes_4core_Rect2i *__pyx_vtabptr_8py4godot_7classes_4core_Rect2i;
 
 
-/* "py4godot/classes/core.pxd":102
+/* "py4godot/classes/core.pxd":107
  * 
  * 
  * cdef class Vector3():             # <<<<<<<<<<<<<<
@@ -3873,7 +3875,7 @@ struct __pyx_vtabstruct_8py4godot_7classes_4core_Vector3 {
 static struct __pyx_vtabstruct_8py4godot_7classes_4core_Vector3 *__pyx_vtabptr_8py4godot_7classes_4core_Vector3;
 
 
-/* "py4godot/classes/core.pxd":117
+/* "py4godot/classes/core.pxd":123
  * 
  * 
  * cdef class Vector3i():             # <<<<<<<<<<<<<<
@@ -3887,7 +3889,7 @@ struct __pyx_vtabstruct_8py4godot_7classes_4core_Vector3i {
 static struct __pyx_vtabstruct_8py4godot_7classes_4core_Vector3i *__pyx_vtabptr_8py4godot_7classes_4core_Vector3i;
 
 
-/* "py4godot/classes/core.pxd":127
+/* "py4godot/classes/core.pxd":134
  * 
  * 
  * cdef class Transform2D():             # <<<<<<<<<<<<<<
@@ -3901,7 +3903,7 @@ struct __pyx_vtabstruct_8py4godot_7classes_4core_Transform2D {
 static struct __pyx_vtabstruct_8py4godot_7classes_4core_Transform2D *__pyx_vtabptr_8py4godot_7classes_4core_Transform2D;
 
 
-/* "py4godot/classes/core.pxd":143
+/* "py4godot/classes/core.pxd":151
  * 
  * 
  * cdef class Vector4():             # <<<<<<<<<<<<<<
@@ -3915,7 +3917,7 @@ struct __pyx_vtabstruct_8py4godot_7classes_4core_Vector4 {
 static struct __pyx_vtabstruct_8py4godot_7classes_4core_Vector4 *__pyx_vtabptr_8py4godot_7classes_4core_Vector4;
 
 
-/* "py4godot/classes/core.pxd":159
+/* "py4godot/classes/core.pxd":168
  * 
  * 
  * cdef class Vector4i():             # <<<<<<<<<<<<<<
@@ -3929,7 +3931,7 @@ struct __pyx_vtabstruct_8py4godot_7classes_4core_Vector4i {
 static struct __pyx_vtabstruct_8py4godot_7classes_4core_Vector4i *__pyx_vtabptr_8py4godot_7classes_4core_Vector4i;
 
 
-/* "py4godot/classes/core.pxd":169
+/* "py4godot/classes/core.pxd":179
  * 
  * 
  * cdef class Plane():             # <<<<<<<<<<<<<<
@@ -3943,7 +3945,7 @@ struct __pyx_vtabstruct_8py4godot_7classes_4core_Plane {
 static struct __pyx_vtabstruct_8py4godot_7classes_4core_Plane *__pyx_vtabptr_8py4godot_7classes_4core_Plane;
 
 
-/* "py4godot/classes/core.pxd":179
+/* "py4godot/classes/core.pxd":190
  * 
  * 
  * cdef class Quaternion():             # <<<<<<<<<<<<<<
@@ -3957,7 +3959,7 @@ struct __pyx_vtabstruct_8py4godot_7classes_4core_Quaternion {
 static struct __pyx_vtabstruct_8py4godot_7classes_4core_Quaternion *__pyx_vtabptr_8py4godot_7classes_4core_Quaternion;
 
 
-/* "py4godot/classes/core.pxd":189
+/* "py4godot/classes/core.pxd":201
  * 
  * 
  * cdef class AABB():             # <<<<<<<<<<<<<<
@@ -3971,7 +3973,7 @@ struct __pyx_vtabstruct_8py4godot_7classes_4core_AABB {
 static struct __pyx_vtabstruct_8py4godot_7classes_4core_AABB *__pyx_vtabptr_8py4godot_7classes_4core_AABB;
 
 
-/* "py4godot/classes/core.pxd":199
+/* "py4godot/classes/core.pxd":212
  * 
  * 
  * cdef class Basis():             # <<<<<<<<<<<<<<
@@ -3985,7 +3987,7 @@ struct __pyx_vtabstruct_8py4godot_7classes_4core_Basis {
 static struct __pyx_vtabstruct_8py4godot_7classes_4core_Basis *__pyx_vtabptr_8py4godot_7classes_4core_Basis;
 
 
-/* "py4godot/classes/core.pxd":209
+/* "py4godot/classes/core.pxd":223
  * 
  * 
  * cdef class Transform3D():             # <<<<<<<<<<<<<<
@@ -3999,7 +4001,7 @@ struct __pyx_vtabstruct_8py4godot_7classes_4core_Transform3D {
 static struct __pyx_vtabstruct_8py4godot_7classes_4core_Transform3D *__pyx_vtabptr_8py4godot_7classes_4core_Transform3D;
 
 
-/* "py4godot/classes/core.pxd":227
+/* "py4godot/classes/core.pxd":242
  * 
  * 
  * cdef class Projection():             # <<<<<<<<<<<<<<
@@ -4013,7 +4015,7 @@ struct __pyx_vtabstruct_8py4godot_7classes_4core_Projection {
 static struct __pyx_vtabstruct_8py4godot_7classes_4core_Projection *__pyx_vtabptr_8py4godot_7classes_4core_Projection;
 
 
-/* "py4godot/classes/core.pxd":237
+/* "py4godot/classes/core.pxd":253
  * 
  * 
  * cdef class Color():             # <<<<<<<<<<<<<<
@@ -4027,7 +4029,7 @@ struct __pyx_vtabstruct_8py4godot_7classes_4core_Color {
 static struct __pyx_vtabstruct_8py4godot_7classes_4core_Color *__pyx_vtabptr_8py4godot_7classes_4core_Color;
 
 
-/* "py4godot/classes/core.pxd":247
+/* "py4godot/classes/core.pxd":264
  * 
  * 
  * cdef class StringName():             # <<<<<<<<<<<<<<
@@ -4041,7 +4043,7 @@ struct __pyx_vtabstruct_8py4godot_7classes_4core_StringName {
 static struct __pyx_vtabstruct_8py4godot_7classes_4core_StringName *__pyx_vtabptr_8py4godot_7classes_4core_StringName;
 
 
-/* "py4godot/classes/core.pxd":257
+/* "py4godot/classes/core.pxd":275
  * 
  * 
  * cdef class NodePath():             # <<<<<<<<<<<<<<
@@ -4055,7 +4057,7 @@ struct __pyx_vtabstruct_8py4godot_7classes_4core_NodePath {
 static struct __pyx_vtabstruct_8py4godot_7classes_4core_NodePath *__pyx_vtabptr_8py4godot_7classes_4core_NodePath;
 
 
-/* "py4godot/classes/core.pxd":267
+/* "py4godot/classes/core.pxd":286
  * 
  * 
  * cdef class RID():             # <<<<<<<<<<<<<<
@@ -4069,7 +4071,7 @@ struct __pyx_vtabstruct_8py4godot_7classes_4core_RID {
 static struct __pyx_vtabstruct_8py4godot_7classes_4core_RID *__pyx_vtabptr_8py4godot_7classes_4core_RID;
 
 
-/* "py4godot/classes/core.pxd":277
+/* "py4godot/classes/core.pxd":297
  * 
  * 
  * cdef class Callable():             # <<<<<<<<<<<<<<
@@ -4083,7 +4085,7 @@ struct __pyx_vtabstruct_8py4godot_7classes_4core_Callable {
 static struct __pyx_vtabstruct_8py4godot_7classes_4core_Callable *__pyx_vtabptr_8py4godot_7classes_4core_Callable;
 
 
-/* "py4godot/classes/core.pxd":287
+/* "py4godot/classes/core.pxd":308
  * 
  * 
  * cdef class Signal():             # <<<<<<<<<<<<<<
@@ -4097,7 +4099,7 @@ struct __pyx_vtabstruct_8py4godot_7classes_4core_Signal {
 static struct __pyx_vtabstruct_8py4godot_7classes_4core_Signal *__pyx_vtabptr_8py4godot_7classes_4core_Signal;
 
 
-/* "py4godot/classes/core.pxd":297
+/* "py4godot/classes/core.pxd":319
  * 
  * 
  * cdef class Dictionary():             # <<<<<<<<<<<<<<
@@ -4111,7 +4113,7 @@ struct __pyx_vtabstruct_8py4godot_7classes_4core_Dictionary {
 static struct __pyx_vtabstruct_8py4godot_7classes_4core_Dictionary *__pyx_vtabptr_8py4godot_7classes_4core_Dictionary;
 
 
-/* "py4godot/classes/core.pxd":307
+/* "py4godot/classes/core.pxd":330
  * 
  * 
  * cdef class Array():             # <<<<<<<<<<<<<<
@@ -4125,7 +4127,7 @@ struct __pyx_vtabstruct_8py4godot_7classes_4core_Array {
 static struct __pyx_vtabstruct_8py4godot_7classes_4core_Array *__pyx_vtabptr_8py4godot_7classes_4core_Array;
 
 
-/* "py4godot/classes/core.pxd":317
+/* "py4godot/classes/core.pxd":341
  * 
  * 
  * cdef class PackedByteArray():             # <<<<<<<<<<<<<<
@@ -4139,7 +4141,7 @@ struct __pyx_vtabstruct_8py4godot_7classes_4core_PackedByteArray {
 static struct __pyx_vtabstruct_8py4godot_7classes_4core_PackedByteArray *__pyx_vtabptr_8py4godot_7classes_4core_PackedByteArray;
 
 
-/* "py4godot/classes/core.pxd":327
+/* "py4godot/classes/core.pxd":352
  * 
  * 
  * cdef class PackedInt32Array():             # <<<<<<<<<<<<<<
@@ -4153,7 +4155,7 @@ struct __pyx_vtabstruct_8py4godot_7classes_4core_PackedInt32Array {
 static struct __pyx_vtabstruct_8py4godot_7classes_4core_PackedInt32Array *__pyx_vtabptr_8py4godot_7classes_4core_PackedInt32Array;
 
 
-/* "py4godot/classes/core.pxd":337
+/* "py4godot/classes/core.pxd":363
  * 
  * 
  * cdef class PackedInt64Array():             # <<<<<<<<<<<<<<
@@ -4167,7 +4169,7 @@ struct __pyx_vtabstruct_8py4godot_7classes_4core_PackedInt64Array {
 static struct __pyx_vtabstruct_8py4godot_7classes_4core_PackedInt64Array *__pyx_vtabptr_8py4godot_7classes_4core_PackedInt64Array;
 
 
-/* "py4godot/classes/core.pxd":347
+/* "py4godot/classes/core.pxd":374
  * 
  * 
  * cdef class PackedFloat32Array():             # <<<<<<<<<<<<<<
@@ -4181,7 +4183,7 @@ struct __pyx_vtabstruct_8py4godot_7classes_4core_PackedFloat32Array {
 static struct __pyx_vtabstruct_8py4godot_7classes_4core_PackedFloat32Array *__pyx_vtabptr_8py4godot_7classes_4core_PackedFloat32Array;
 
 
-/* "py4godot/classes/core.pxd":357
+/* "py4godot/classes/core.pxd":385
  * 
  * 
  * cdef class PackedFloat64Array():             # <<<<<<<<<<<<<<
@@ -4195,7 +4197,7 @@ struct __pyx_vtabstruct_8py4godot_7classes_4core_PackedFloat64Array {
 static struct __pyx_vtabstruct_8py4godot_7classes_4core_PackedFloat64Array *__pyx_vtabptr_8py4godot_7classes_4core_PackedFloat64Array;
 
 
-/* "py4godot/classes/core.pxd":367
+/* "py4godot/classes/core.pxd":396
  * 
  * 
  * cdef class PackedStringArray():             # <<<<<<<<<<<<<<
@@ -4209,7 +4211,7 @@ struct __pyx_vtabstruct_8py4godot_7classes_4core_PackedStringArray {
 static struct __pyx_vtabstruct_8py4godot_7classes_4core_PackedStringArray *__pyx_vtabptr_8py4godot_7classes_4core_PackedStringArray;
 
 
-/* "py4godot/classes/core.pxd":377
+/* "py4godot/classes/core.pxd":407
  * 
  * 
  * cdef class PackedVector2Array():             # <<<<<<<<<<<<<<
@@ -4223,7 +4225,7 @@ struct __pyx_vtabstruct_8py4godot_7classes_4core_PackedVector2Array {
 static struct __pyx_vtabstruct_8py4godot_7classes_4core_PackedVector2Array *__pyx_vtabptr_8py4godot_7classes_4core_PackedVector2Array;
 
 
-/* "py4godot/classes/core.pxd":387
+/* "py4godot/classes/core.pxd":418
  * 
  * 
  * cdef class PackedVector3Array():             # <<<<<<<<<<<<<<
@@ -4237,7 +4239,7 @@ struct __pyx_vtabstruct_8py4godot_7classes_4core_PackedVector3Array {
 static struct __pyx_vtabstruct_8py4godot_7classes_4core_PackedVector3Array *__pyx_vtabptr_8py4godot_7classes_4core_PackedVector3Array;
 
 
-/* "py4godot/classes/core.pxd":397
+/* "py4godot/classes/core.pxd":429
  * 
  * 
  * cdef class PackedColorArray():             # <<<<<<<<<<<<<<
@@ -4251,7 +4253,7 @@ struct __pyx_vtabstruct_8py4godot_7classes_4core_PackedColorArray {
 static struct __pyx_vtabstruct_8py4godot_7classes_4core_PackedColorArray *__pyx_vtabptr_8py4godot_7classes_4core_PackedColorArray;
 
 
-/* "py4godot/classes/core.pxd":407
+/* "py4godot/classes/core.pxd":440
  * 
  * 
  * cdef class PackedVector4Array():             # <<<<<<<<<<<<<<
@@ -5461,72 +5463,72 @@ static int __Pyx_modinit_type_import_code(void) {
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_ptype_8py4godot_7classes_4core_String = __Pyx_ImportType_0_29_37(__pyx_t_1, "py4godot.classes.core", "String", sizeof(struct __pyx_obj_8py4godot_7classes_4core_String), __PYX_GET_STRUCT_ALIGNMENT_0_29_37(struct __pyx_obj_8py4godot_7classes_4core_String),__Pyx_ImportType_CheckSize_Warn_0_29_37); if (!__pyx_ptype_8py4godot_7classes_4core_String) __PYX_ERR(5, 39, __pyx_L1_error)
   __pyx_vtabptr_8py4godot_7classes_4core_String = (struct __pyx_vtabstruct_8py4godot_7classes_4core_String*)__Pyx_GetVtable(__pyx_ptype_8py4godot_7classes_4core_String->tp_dict); if (unlikely(!__pyx_vtabptr_8py4godot_7classes_4core_String)) __PYX_ERR(5, 39, __pyx_L1_error)
-  __pyx_ptype_8py4godot_7classes_4core_Vector2 = __Pyx_ImportType_0_29_37(__pyx_t_1, "py4godot.classes.core", "Vector2", sizeof(struct __pyx_obj_8py4godot_7classes_4core_Vector2), __PYX_GET_STRUCT_ALIGNMENT_0_29_37(struct __pyx_obj_8py4godot_7classes_4core_Vector2),__Pyx_ImportType_CheckSize_Warn_0_29_37); if (!__pyx_ptype_8py4godot_7classes_4core_Vector2) __PYX_ERR(5, 53, __pyx_L1_error)
-  __pyx_vtabptr_8py4godot_7classes_4core_Vector2 = (struct __pyx_vtabstruct_8py4godot_7classes_4core_Vector2*)__Pyx_GetVtable(__pyx_ptype_8py4godot_7classes_4core_Vector2->tp_dict); if (unlikely(!__pyx_vtabptr_8py4godot_7classes_4core_Vector2)) __PYX_ERR(5, 53, __pyx_L1_error)
-  __pyx_ptype_8py4godot_7classes_4core_Vector2i = __Pyx_ImportType_0_29_37(__pyx_t_1, "py4godot.classes.core", "Vector2i", sizeof(struct __pyx_obj_8py4godot_7classes_4core_Vector2i), __PYX_GET_STRUCT_ALIGNMENT_0_29_37(struct __pyx_obj_8py4godot_7classes_4core_Vector2i),__Pyx_ImportType_CheckSize_Warn_0_29_37); if (!__pyx_ptype_8py4godot_7classes_4core_Vector2i) __PYX_ERR(5, 67, __pyx_L1_error)
-  __pyx_vtabptr_8py4godot_7classes_4core_Vector2i = (struct __pyx_vtabstruct_8py4godot_7classes_4core_Vector2i*)__Pyx_GetVtable(__pyx_ptype_8py4godot_7classes_4core_Vector2i->tp_dict); if (unlikely(!__pyx_vtabptr_8py4godot_7classes_4core_Vector2i)) __PYX_ERR(5, 67, __pyx_L1_error)
-  __pyx_ptype_8py4godot_7classes_4core_Rect2 = __Pyx_ImportType_0_29_37(__pyx_t_1, "py4godot.classes.core", "Rect2", sizeof(struct __pyx_obj_8py4godot_7classes_4core_Rect2), __PYX_GET_STRUCT_ALIGNMENT_0_29_37(struct __pyx_obj_8py4godot_7classes_4core_Rect2),__Pyx_ImportType_CheckSize_Warn_0_29_37); if (!__pyx_ptype_8py4godot_7classes_4core_Rect2) __PYX_ERR(5, 77, __pyx_L1_error)
-  __pyx_vtabptr_8py4godot_7classes_4core_Rect2 = (struct __pyx_vtabstruct_8py4godot_7classes_4core_Rect2*)__Pyx_GetVtable(__pyx_ptype_8py4godot_7classes_4core_Rect2->tp_dict); if (unlikely(!__pyx_vtabptr_8py4godot_7classes_4core_Rect2)) __PYX_ERR(5, 77, __pyx_L1_error)
-  __pyx_ptype_8py4godot_7classes_4core_Rect2i = __Pyx_ImportType_0_29_37(__pyx_t_1, "py4godot.classes.core", "Rect2i", sizeof(struct __pyx_obj_8py4godot_7classes_4core_Rect2i), __PYX_GET_STRUCT_ALIGNMENT_0_29_37(struct __pyx_obj_8py4godot_7classes_4core_Rect2i),__Pyx_ImportType_CheckSize_Warn_0_29_37); if (!__pyx_ptype_8py4godot_7classes_4core_Rect2i) __PYX_ERR(5, 87, __pyx_L1_error)
-  __pyx_vtabptr_8py4godot_7classes_4core_Rect2i = (struct __pyx_vtabstruct_8py4godot_7classes_4core_Rect2i*)__Pyx_GetVtable(__pyx_ptype_8py4godot_7classes_4core_Rect2i->tp_dict); if (unlikely(!__pyx_vtabptr_8py4godot_7classes_4core_Rect2i)) __PYX_ERR(5, 87, __pyx_L1_error)
-  __pyx_ptype_8py4godot_7classes_4core_Vector3 = __Pyx_ImportType_0_29_37(__pyx_t_1, "py4godot.classes.core", "Vector3", sizeof(struct __pyx_obj_8py4godot_7classes_4core_Vector3), __PYX_GET_STRUCT_ALIGNMENT_0_29_37(struct __pyx_obj_8py4godot_7classes_4core_Vector3),__Pyx_ImportType_CheckSize_Warn_0_29_37); if (!__pyx_ptype_8py4godot_7classes_4core_Vector3) __PYX_ERR(5, 102, __pyx_L1_error)
-  __pyx_vtabptr_8py4godot_7classes_4core_Vector3 = (struct __pyx_vtabstruct_8py4godot_7classes_4core_Vector3*)__Pyx_GetVtable(__pyx_ptype_8py4godot_7classes_4core_Vector3->tp_dict); if (unlikely(!__pyx_vtabptr_8py4godot_7classes_4core_Vector3)) __PYX_ERR(5, 102, __pyx_L1_error)
-  __pyx_ptype_8py4godot_7classes_4core_Vector3i = __Pyx_ImportType_0_29_37(__pyx_t_1, "py4godot.classes.core", "Vector3i", sizeof(struct __pyx_obj_8py4godot_7classes_4core_Vector3i), __PYX_GET_STRUCT_ALIGNMENT_0_29_37(struct __pyx_obj_8py4godot_7classes_4core_Vector3i),__Pyx_ImportType_CheckSize_Warn_0_29_37); if (!__pyx_ptype_8py4godot_7classes_4core_Vector3i) __PYX_ERR(5, 117, __pyx_L1_error)
-  __pyx_vtabptr_8py4godot_7classes_4core_Vector3i = (struct __pyx_vtabstruct_8py4godot_7classes_4core_Vector3i*)__Pyx_GetVtable(__pyx_ptype_8py4godot_7classes_4core_Vector3i->tp_dict); if (unlikely(!__pyx_vtabptr_8py4godot_7classes_4core_Vector3i)) __PYX_ERR(5, 117, __pyx_L1_error)
-  __pyx_ptype_8py4godot_7classes_4core_Transform2D = __Pyx_ImportType_0_29_37(__pyx_t_1, "py4godot.classes.core", "Transform2D", sizeof(struct __pyx_obj_8py4godot_7classes_4core_Transform2D), __PYX_GET_STRUCT_ALIGNMENT_0_29_37(struct __pyx_obj_8py4godot_7classes_4core_Transform2D),__Pyx_ImportType_CheckSize_Warn_0_29_37); if (!__pyx_ptype_8py4godot_7classes_4core_Transform2D) __PYX_ERR(5, 127, __pyx_L1_error)
-  __pyx_vtabptr_8py4godot_7classes_4core_Transform2D = (struct __pyx_vtabstruct_8py4godot_7classes_4core_Transform2D*)__Pyx_GetVtable(__pyx_ptype_8py4godot_7classes_4core_Transform2D->tp_dict); if (unlikely(!__pyx_vtabptr_8py4godot_7classes_4core_Transform2D)) __PYX_ERR(5, 127, __pyx_L1_error)
-  __pyx_ptype_8py4godot_7classes_4core_Vector4 = __Pyx_ImportType_0_29_37(__pyx_t_1, "py4godot.classes.core", "Vector4", sizeof(struct __pyx_obj_8py4godot_7classes_4core_Vector4), __PYX_GET_STRUCT_ALIGNMENT_0_29_37(struct __pyx_obj_8py4godot_7classes_4core_Vector4),__Pyx_ImportType_CheckSize_Warn_0_29_37); if (!__pyx_ptype_8py4godot_7classes_4core_Vector4) __PYX_ERR(5, 143, __pyx_L1_error)
-  __pyx_vtabptr_8py4godot_7classes_4core_Vector4 = (struct __pyx_vtabstruct_8py4godot_7classes_4core_Vector4*)__Pyx_GetVtable(__pyx_ptype_8py4godot_7classes_4core_Vector4->tp_dict); if (unlikely(!__pyx_vtabptr_8py4godot_7classes_4core_Vector4)) __PYX_ERR(5, 143, __pyx_L1_error)
-  __pyx_ptype_8py4godot_7classes_4core_Vector4i = __Pyx_ImportType_0_29_37(__pyx_t_1, "py4godot.classes.core", "Vector4i", sizeof(struct __pyx_obj_8py4godot_7classes_4core_Vector4i), __PYX_GET_STRUCT_ALIGNMENT_0_29_37(struct __pyx_obj_8py4godot_7classes_4core_Vector4i),__Pyx_ImportType_CheckSize_Warn_0_29_37); if (!__pyx_ptype_8py4godot_7classes_4core_Vector4i) __PYX_ERR(5, 159, __pyx_L1_error)
-  __pyx_vtabptr_8py4godot_7classes_4core_Vector4i = (struct __pyx_vtabstruct_8py4godot_7classes_4core_Vector4i*)__Pyx_GetVtable(__pyx_ptype_8py4godot_7classes_4core_Vector4i->tp_dict); if (unlikely(!__pyx_vtabptr_8py4godot_7classes_4core_Vector4i)) __PYX_ERR(5, 159, __pyx_L1_error)
-  __pyx_ptype_8py4godot_7classes_4core_Plane = __Pyx_ImportType_0_29_37(__pyx_t_1, "py4godot.classes.core", "Plane", sizeof(struct __pyx_obj_8py4godot_7classes_4core_Plane), __PYX_GET_STRUCT_ALIGNMENT_0_29_37(struct __pyx_obj_8py4godot_7classes_4core_Plane),__Pyx_ImportType_CheckSize_Warn_0_29_37); if (!__pyx_ptype_8py4godot_7classes_4core_Plane) __PYX_ERR(5, 169, __pyx_L1_error)
-  __pyx_vtabptr_8py4godot_7classes_4core_Plane = (struct __pyx_vtabstruct_8py4godot_7classes_4core_Plane*)__Pyx_GetVtable(__pyx_ptype_8py4godot_7classes_4core_Plane->tp_dict); if (unlikely(!__pyx_vtabptr_8py4godot_7classes_4core_Plane)) __PYX_ERR(5, 169, __pyx_L1_error)
-  __pyx_ptype_8py4godot_7classes_4core_Quaternion = __Pyx_ImportType_0_29_37(__pyx_t_1, "py4godot.classes.core", "Quaternion", sizeof(struct __pyx_obj_8py4godot_7classes_4core_Quaternion), __PYX_GET_STRUCT_ALIGNMENT_0_29_37(struct __pyx_obj_8py4godot_7classes_4core_Quaternion),__Pyx_ImportType_CheckSize_Warn_0_29_37); if (!__pyx_ptype_8py4godot_7classes_4core_Quaternion) __PYX_ERR(5, 179, __pyx_L1_error)
-  __pyx_vtabptr_8py4godot_7classes_4core_Quaternion = (struct __pyx_vtabstruct_8py4godot_7classes_4core_Quaternion*)__Pyx_GetVtable(__pyx_ptype_8py4godot_7classes_4core_Quaternion->tp_dict); if (unlikely(!__pyx_vtabptr_8py4godot_7classes_4core_Quaternion)) __PYX_ERR(5, 179, __pyx_L1_error)
-  __pyx_ptype_8py4godot_7classes_4core_AABB = __Pyx_ImportType_0_29_37(__pyx_t_1, "py4godot.classes.core", "AABB", sizeof(struct __pyx_obj_8py4godot_7classes_4core_AABB), __PYX_GET_STRUCT_ALIGNMENT_0_29_37(struct __pyx_obj_8py4godot_7classes_4core_AABB),__Pyx_ImportType_CheckSize_Warn_0_29_37); if (!__pyx_ptype_8py4godot_7classes_4core_AABB) __PYX_ERR(5, 189, __pyx_L1_error)
-  __pyx_vtabptr_8py4godot_7classes_4core_AABB = (struct __pyx_vtabstruct_8py4godot_7classes_4core_AABB*)__Pyx_GetVtable(__pyx_ptype_8py4godot_7classes_4core_AABB->tp_dict); if (unlikely(!__pyx_vtabptr_8py4godot_7classes_4core_AABB)) __PYX_ERR(5, 189, __pyx_L1_error)
-  __pyx_ptype_8py4godot_7classes_4core_Basis = __Pyx_ImportType_0_29_37(__pyx_t_1, "py4godot.classes.core", "Basis", sizeof(struct __pyx_obj_8py4godot_7classes_4core_Basis), __PYX_GET_STRUCT_ALIGNMENT_0_29_37(struct __pyx_obj_8py4godot_7classes_4core_Basis),__Pyx_ImportType_CheckSize_Warn_0_29_37); if (!__pyx_ptype_8py4godot_7classes_4core_Basis) __PYX_ERR(5, 199, __pyx_L1_error)
-  __pyx_vtabptr_8py4godot_7classes_4core_Basis = (struct __pyx_vtabstruct_8py4godot_7classes_4core_Basis*)__Pyx_GetVtable(__pyx_ptype_8py4godot_7classes_4core_Basis->tp_dict); if (unlikely(!__pyx_vtabptr_8py4godot_7classes_4core_Basis)) __PYX_ERR(5, 199, __pyx_L1_error)
-  __pyx_ptype_8py4godot_7classes_4core_Transform3D = __Pyx_ImportType_0_29_37(__pyx_t_1, "py4godot.classes.core", "Transform3D", sizeof(struct __pyx_obj_8py4godot_7classes_4core_Transform3D), __PYX_GET_STRUCT_ALIGNMENT_0_29_37(struct __pyx_obj_8py4godot_7classes_4core_Transform3D),__Pyx_ImportType_CheckSize_Warn_0_29_37); if (!__pyx_ptype_8py4godot_7classes_4core_Transform3D) __PYX_ERR(5, 209, __pyx_L1_error)
-  __pyx_vtabptr_8py4godot_7classes_4core_Transform3D = (struct __pyx_vtabstruct_8py4godot_7classes_4core_Transform3D*)__Pyx_GetVtable(__pyx_ptype_8py4godot_7classes_4core_Transform3D->tp_dict); if (unlikely(!__pyx_vtabptr_8py4godot_7classes_4core_Transform3D)) __PYX_ERR(5, 209, __pyx_L1_error)
-  __pyx_ptype_8py4godot_7classes_4core_Projection = __Pyx_ImportType_0_29_37(__pyx_t_1, "py4godot.classes.core", "Projection", sizeof(struct __pyx_obj_8py4godot_7classes_4core_Projection), __PYX_GET_STRUCT_ALIGNMENT_0_29_37(struct __pyx_obj_8py4godot_7classes_4core_Projection),__Pyx_ImportType_CheckSize_Warn_0_29_37); if (!__pyx_ptype_8py4godot_7classes_4core_Projection) __PYX_ERR(5, 227, __pyx_L1_error)
-  __pyx_vtabptr_8py4godot_7classes_4core_Projection = (struct __pyx_vtabstruct_8py4godot_7classes_4core_Projection*)__Pyx_GetVtable(__pyx_ptype_8py4godot_7classes_4core_Projection->tp_dict); if (unlikely(!__pyx_vtabptr_8py4godot_7classes_4core_Projection)) __PYX_ERR(5, 227, __pyx_L1_error)
-  __pyx_ptype_8py4godot_7classes_4core_Color = __Pyx_ImportType_0_29_37(__pyx_t_1, "py4godot.classes.core", "Color", sizeof(struct __pyx_obj_8py4godot_7classes_4core_Color), __PYX_GET_STRUCT_ALIGNMENT_0_29_37(struct __pyx_obj_8py4godot_7classes_4core_Color),__Pyx_ImportType_CheckSize_Warn_0_29_37); if (!__pyx_ptype_8py4godot_7classes_4core_Color) __PYX_ERR(5, 237, __pyx_L1_error)
-  __pyx_vtabptr_8py4godot_7classes_4core_Color = (struct __pyx_vtabstruct_8py4godot_7classes_4core_Color*)__Pyx_GetVtable(__pyx_ptype_8py4godot_7classes_4core_Color->tp_dict); if (unlikely(!__pyx_vtabptr_8py4godot_7classes_4core_Color)) __PYX_ERR(5, 237, __pyx_L1_error)
-  __pyx_ptype_8py4godot_7classes_4core_StringName = __Pyx_ImportType_0_29_37(__pyx_t_1, "py4godot.classes.core", "StringName", sizeof(struct __pyx_obj_8py4godot_7classes_4core_StringName), __PYX_GET_STRUCT_ALIGNMENT_0_29_37(struct __pyx_obj_8py4godot_7classes_4core_StringName),__Pyx_ImportType_CheckSize_Warn_0_29_37); if (!__pyx_ptype_8py4godot_7classes_4core_StringName) __PYX_ERR(5, 247, __pyx_L1_error)
-  __pyx_vtabptr_8py4godot_7classes_4core_StringName = (struct __pyx_vtabstruct_8py4godot_7classes_4core_StringName*)__Pyx_GetVtable(__pyx_ptype_8py4godot_7classes_4core_StringName->tp_dict); if (unlikely(!__pyx_vtabptr_8py4godot_7classes_4core_StringName)) __PYX_ERR(5, 247, __pyx_L1_error)
-  __pyx_ptype_8py4godot_7classes_4core_NodePath = __Pyx_ImportType_0_29_37(__pyx_t_1, "py4godot.classes.core", "NodePath", sizeof(struct __pyx_obj_8py4godot_7classes_4core_NodePath), __PYX_GET_STRUCT_ALIGNMENT_0_29_37(struct __pyx_obj_8py4godot_7classes_4core_NodePath),__Pyx_ImportType_CheckSize_Warn_0_29_37); if (!__pyx_ptype_8py4godot_7classes_4core_NodePath) __PYX_ERR(5, 257, __pyx_L1_error)
-  __pyx_vtabptr_8py4godot_7classes_4core_NodePath = (struct __pyx_vtabstruct_8py4godot_7classes_4core_NodePath*)__Pyx_GetVtable(__pyx_ptype_8py4godot_7classes_4core_NodePath->tp_dict); if (unlikely(!__pyx_vtabptr_8py4godot_7classes_4core_NodePath)) __PYX_ERR(5, 257, __pyx_L1_error)
-  __pyx_ptype_8py4godot_7classes_4core_RID = __Pyx_ImportType_0_29_37(__pyx_t_1, "py4godot.classes.core", "RID", sizeof(struct __pyx_obj_8py4godot_7classes_4core_RID), __PYX_GET_STRUCT_ALIGNMENT_0_29_37(struct __pyx_obj_8py4godot_7classes_4core_RID),__Pyx_ImportType_CheckSize_Warn_0_29_37); if (!__pyx_ptype_8py4godot_7classes_4core_RID) __PYX_ERR(5, 267, __pyx_L1_error)
-  __pyx_vtabptr_8py4godot_7classes_4core_RID = (struct __pyx_vtabstruct_8py4godot_7classes_4core_RID*)__Pyx_GetVtable(__pyx_ptype_8py4godot_7classes_4core_RID->tp_dict); if (unlikely(!__pyx_vtabptr_8py4godot_7classes_4core_RID)) __PYX_ERR(5, 267, __pyx_L1_error)
-  __pyx_ptype_8py4godot_7classes_4core_Callable = __Pyx_ImportType_0_29_37(__pyx_t_1, "py4godot.classes.core", "Callable", sizeof(struct __pyx_obj_8py4godot_7classes_4core_Callable), __PYX_GET_STRUCT_ALIGNMENT_0_29_37(struct __pyx_obj_8py4godot_7classes_4core_Callable),__Pyx_ImportType_CheckSize_Warn_0_29_37); if (!__pyx_ptype_8py4godot_7classes_4core_Callable) __PYX_ERR(5, 277, __pyx_L1_error)
-  __pyx_vtabptr_8py4godot_7classes_4core_Callable = (struct __pyx_vtabstruct_8py4godot_7classes_4core_Callable*)__Pyx_GetVtable(__pyx_ptype_8py4godot_7classes_4core_Callable->tp_dict); if (unlikely(!__pyx_vtabptr_8py4godot_7classes_4core_Callable)) __PYX_ERR(5, 277, __pyx_L1_error)
-  __pyx_ptype_8py4godot_7classes_4core_Signal = __Pyx_ImportType_0_29_37(__pyx_t_1, "py4godot.classes.core", "Signal", sizeof(struct __pyx_obj_8py4godot_7classes_4core_Signal), __PYX_GET_STRUCT_ALIGNMENT_0_29_37(struct __pyx_obj_8py4godot_7classes_4core_Signal),__Pyx_ImportType_CheckSize_Warn_0_29_37); if (!__pyx_ptype_8py4godot_7classes_4core_Signal) __PYX_ERR(5, 287, __pyx_L1_error)
-  __pyx_vtabptr_8py4godot_7classes_4core_Signal = (struct __pyx_vtabstruct_8py4godot_7classes_4core_Signal*)__Pyx_GetVtable(__pyx_ptype_8py4godot_7classes_4core_Signal->tp_dict); if (unlikely(!__pyx_vtabptr_8py4godot_7classes_4core_Signal)) __PYX_ERR(5, 287, __pyx_L1_error)
-  __pyx_ptype_8py4godot_7classes_4core_Dictionary = __Pyx_ImportType_0_29_37(__pyx_t_1, "py4godot.classes.core", "Dictionary", sizeof(struct __pyx_obj_8py4godot_7classes_4core_Dictionary), __PYX_GET_STRUCT_ALIGNMENT_0_29_37(struct __pyx_obj_8py4godot_7classes_4core_Dictionary),__Pyx_ImportType_CheckSize_Warn_0_29_37); if (!__pyx_ptype_8py4godot_7classes_4core_Dictionary) __PYX_ERR(5, 297, __pyx_L1_error)
-  __pyx_vtabptr_8py4godot_7classes_4core_Dictionary = (struct __pyx_vtabstruct_8py4godot_7classes_4core_Dictionary*)__Pyx_GetVtable(__pyx_ptype_8py4godot_7classes_4core_Dictionary->tp_dict); if (unlikely(!__pyx_vtabptr_8py4godot_7classes_4core_Dictionary)) __PYX_ERR(5, 297, __pyx_L1_error)
-  __pyx_ptype_8py4godot_7classes_4core_Array = __Pyx_ImportType_0_29_37(__pyx_t_1, "py4godot.classes.core", "Array", sizeof(struct __pyx_obj_8py4godot_7classes_4core_Array), __PYX_GET_STRUCT_ALIGNMENT_0_29_37(struct __pyx_obj_8py4godot_7classes_4core_Array),__Pyx_ImportType_CheckSize_Warn_0_29_37); if (!__pyx_ptype_8py4godot_7classes_4core_Array) __PYX_ERR(5, 307, __pyx_L1_error)
-  __pyx_vtabptr_8py4godot_7classes_4core_Array = (struct __pyx_vtabstruct_8py4godot_7classes_4core_Array*)__Pyx_GetVtable(__pyx_ptype_8py4godot_7classes_4core_Array->tp_dict); if (unlikely(!__pyx_vtabptr_8py4godot_7classes_4core_Array)) __PYX_ERR(5, 307, __pyx_L1_error)
-  __pyx_ptype_8py4godot_7classes_4core_PackedByteArray = __Pyx_ImportType_0_29_37(__pyx_t_1, "py4godot.classes.core", "PackedByteArray", sizeof(struct __pyx_obj_8py4godot_7classes_4core_PackedByteArray), __PYX_GET_STRUCT_ALIGNMENT_0_29_37(struct __pyx_obj_8py4godot_7classes_4core_PackedByteArray),__Pyx_ImportType_CheckSize_Warn_0_29_37); if (!__pyx_ptype_8py4godot_7classes_4core_PackedByteArray) __PYX_ERR(5, 317, __pyx_L1_error)
-  __pyx_vtabptr_8py4godot_7classes_4core_PackedByteArray = (struct __pyx_vtabstruct_8py4godot_7classes_4core_PackedByteArray*)__Pyx_GetVtable(__pyx_ptype_8py4godot_7classes_4core_PackedByteArray->tp_dict); if (unlikely(!__pyx_vtabptr_8py4godot_7classes_4core_PackedByteArray)) __PYX_ERR(5, 317, __pyx_L1_error)
-  __pyx_ptype_8py4godot_7classes_4core_PackedInt32Array = __Pyx_ImportType_0_29_37(__pyx_t_1, "py4godot.classes.core", "PackedInt32Array", sizeof(struct __pyx_obj_8py4godot_7classes_4core_PackedInt32Array), __PYX_GET_STRUCT_ALIGNMENT_0_29_37(struct __pyx_obj_8py4godot_7classes_4core_PackedInt32Array),__Pyx_ImportType_CheckSize_Warn_0_29_37); if (!__pyx_ptype_8py4godot_7classes_4core_PackedInt32Array) __PYX_ERR(5, 327, __pyx_L1_error)
-  __pyx_vtabptr_8py4godot_7classes_4core_PackedInt32Array = (struct __pyx_vtabstruct_8py4godot_7classes_4core_PackedInt32Array*)__Pyx_GetVtable(__pyx_ptype_8py4godot_7classes_4core_PackedInt32Array->tp_dict); if (unlikely(!__pyx_vtabptr_8py4godot_7classes_4core_PackedInt32Array)) __PYX_ERR(5, 327, __pyx_L1_error)
-  __pyx_ptype_8py4godot_7classes_4core_PackedInt64Array = __Pyx_ImportType_0_29_37(__pyx_t_1, "py4godot.classes.core", "PackedInt64Array", sizeof(struct __pyx_obj_8py4godot_7classes_4core_PackedInt64Array), __PYX_GET_STRUCT_ALIGNMENT_0_29_37(struct __pyx_obj_8py4godot_7classes_4core_PackedInt64Array),__Pyx_ImportType_CheckSize_Warn_0_29_37); if (!__pyx_ptype_8py4godot_7classes_4core_PackedInt64Array) __PYX_ERR(5, 337, __pyx_L1_error)
-  __pyx_vtabptr_8py4godot_7classes_4core_PackedInt64Array = (struct __pyx_vtabstruct_8py4godot_7classes_4core_PackedInt64Array*)__Pyx_GetVtable(__pyx_ptype_8py4godot_7classes_4core_PackedInt64Array->tp_dict); if (unlikely(!__pyx_vtabptr_8py4godot_7classes_4core_PackedInt64Array)) __PYX_ERR(5, 337, __pyx_L1_error)
-  __pyx_ptype_8py4godot_7classes_4core_PackedFloat32Array = __Pyx_ImportType_0_29_37(__pyx_t_1, "py4godot.classes.core", "PackedFloat32Array", sizeof(struct __pyx_obj_8py4godot_7classes_4core_PackedFloat32Array), __PYX_GET_STRUCT_ALIGNMENT_0_29_37(struct __pyx_obj_8py4godot_7classes_4core_PackedFloat32Array),__Pyx_ImportType_CheckSize_Warn_0_29_37); if (!__pyx_ptype_8py4godot_7classes_4core_PackedFloat32Array) __PYX_ERR(5, 347, __pyx_L1_error)
-  __pyx_vtabptr_8py4godot_7classes_4core_PackedFloat32Array = (struct __pyx_vtabstruct_8py4godot_7classes_4core_PackedFloat32Array*)__Pyx_GetVtable(__pyx_ptype_8py4godot_7classes_4core_PackedFloat32Array->tp_dict); if (unlikely(!__pyx_vtabptr_8py4godot_7classes_4core_PackedFloat32Array)) __PYX_ERR(5, 347, __pyx_L1_error)
-  __pyx_ptype_8py4godot_7classes_4core_PackedFloat64Array = __Pyx_ImportType_0_29_37(__pyx_t_1, "py4godot.classes.core", "PackedFloat64Array", sizeof(struct __pyx_obj_8py4godot_7classes_4core_PackedFloat64Array), __PYX_GET_STRUCT_ALIGNMENT_0_29_37(struct __pyx_obj_8py4godot_7classes_4core_PackedFloat64Array),__Pyx_ImportType_CheckSize_Warn_0_29_37); if (!__pyx_ptype_8py4godot_7classes_4core_PackedFloat64Array) __PYX_ERR(5, 357, __pyx_L1_error)
-  __pyx_vtabptr_8py4godot_7classes_4core_PackedFloat64Array = (struct __pyx_vtabstruct_8py4godot_7classes_4core_PackedFloat64Array*)__Pyx_GetVtable(__pyx_ptype_8py4godot_7classes_4core_PackedFloat64Array->tp_dict); if (unlikely(!__pyx_vtabptr_8py4godot_7classes_4core_PackedFloat64Array)) __PYX_ERR(5, 357, __pyx_L1_error)
-  __pyx_ptype_8py4godot_7classes_4core_PackedStringArray = __Pyx_ImportType_0_29_37(__pyx_t_1, "py4godot.classes.core", "PackedStringArray", sizeof(struct __pyx_obj_8py4godot_7classes_4core_PackedStringArray), __PYX_GET_STRUCT_ALIGNMENT_0_29_37(struct __pyx_obj_8py4godot_7classes_4core_PackedStringArray),__Pyx_ImportType_CheckSize_Warn_0_29_37); if (!__pyx_ptype_8py4godot_7classes_4core_PackedStringArray) __PYX_ERR(5, 367, __pyx_L1_error)
-  __pyx_vtabptr_8py4godot_7classes_4core_PackedStringArray = (struct __pyx_vtabstruct_8py4godot_7classes_4core_PackedStringArray*)__Pyx_GetVtable(__pyx_ptype_8py4godot_7classes_4core_PackedStringArray->tp_dict); if (unlikely(!__pyx_vtabptr_8py4godot_7classes_4core_PackedStringArray)) __PYX_ERR(5, 367, __pyx_L1_error)
-  __pyx_ptype_8py4godot_7classes_4core_PackedVector2Array = __Pyx_ImportType_0_29_37(__pyx_t_1, "py4godot.classes.core", "PackedVector2Array", sizeof(struct __pyx_obj_8py4godot_7classes_4core_PackedVector2Array), __PYX_GET_STRUCT_ALIGNMENT_0_29_37(struct __pyx_obj_8py4godot_7classes_4core_PackedVector2Array),__Pyx_ImportType_CheckSize_Warn_0_29_37); if (!__pyx_ptype_8py4godot_7classes_4core_PackedVector2Array) __PYX_ERR(5, 377, __pyx_L1_error)
-  __pyx_vtabptr_8py4godot_7classes_4core_PackedVector2Array = (struct __pyx_vtabstruct_8py4godot_7classes_4core_PackedVector2Array*)__Pyx_GetVtable(__pyx_ptype_8py4godot_7classes_4core_PackedVector2Array->tp_dict); if (unlikely(!__pyx_vtabptr_8py4godot_7classes_4core_PackedVector2Array)) __PYX_ERR(5, 377, __pyx_L1_error)
-  __pyx_ptype_8py4godot_7classes_4core_PackedVector3Array = __Pyx_ImportType_0_29_37(__pyx_t_1, "py4godot.classes.core", "PackedVector3Array", sizeof(struct __pyx_obj_8py4godot_7classes_4core_PackedVector3Array), __PYX_GET_STRUCT_ALIGNMENT_0_29_37(struct __pyx_obj_8py4godot_7classes_4core_PackedVector3Array),__Pyx_ImportType_CheckSize_Warn_0_29_37); if (!__pyx_ptype_8py4godot_7classes_4core_PackedVector3Array) __PYX_ERR(5, 387, __pyx_L1_error)
-  __pyx_vtabptr_8py4godot_7classes_4core_PackedVector3Array = (struct __pyx_vtabstruct_8py4godot_7classes_4core_PackedVector3Array*)__Pyx_GetVtable(__pyx_ptype_8py4godot_7classes_4core_PackedVector3Array->tp_dict); if (unlikely(!__pyx_vtabptr_8py4godot_7classes_4core_PackedVector3Array)) __PYX_ERR(5, 387, __pyx_L1_error)
-  __pyx_ptype_8py4godot_7classes_4core_PackedColorArray = __Pyx_ImportType_0_29_37(__pyx_t_1, "py4godot.classes.core", "PackedColorArray", sizeof(struct __pyx_obj_8py4godot_7classes_4core_PackedColorArray), __PYX_GET_STRUCT_ALIGNMENT_0_29_37(struct __pyx_obj_8py4godot_7classes_4core_PackedColorArray),__Pyx_ImportType_CheckSize_Warn_0_29_37); if (!__pyx_ptype_8py4godot_7classes_4core_PackedColorArray) __PYX_ERR(5, 397, __pyx_L1_error)
-  __pyx_vtabptr_8py4godot_7classes_4core_PackedColorArray = (struct __pyx_vtabstruct_8py4godot_7classes_4core_PackedColorArray*)__Pyx_GetVtable(__pyx_ptype_8py4godot_7classes_4core_PackedColorArray->tp_dict); if (unlikely(!__pyx_vtabptr_8py4godot_7classes_4core_PackedColorArray)) __PYX_ERR(5, 397, __pyx_L1_error)
-  __pyx_ptype_8py4godot_7classes_4core_PackedVector4Array = __Pyx_ImportType_0_29_37(__pyx_t_1, "py4godot.classes.core", "PackedVector4Array", sizeof(struct __pyx_obj_8py4godot_7classes_4core_PackedVector4Array), __PYX_GET_STRUCT_ALIGNMENT_0_29_37(struct __pyx_obj_8py4godot_7classes_4core_PackedVector4Array),__Pyx_ImportType_CheckSize_Warn_0_29_37); if (!__pyx_ptype_8py4godot_7classes_4core_PackedVector4Array) __PYX_ERR(5, 407, __pyx_L1_error)
-  __pyx_vtabptr_8py4godot_7classes_4core_PackedVector4Array = (struct __pyx_vtabstruct_8py4godot_7classes_4core_PackedVector4Array*)__Pyx_GetVtable(__pyx_ptype_8py4godot_7classes_4core_PackedVector4Array->tp_dict); if (unlikely(!__pyx_vtabptr_8py4godot_7classes_4core_PackedVector4Array)) __PYX_ERR(5, 407, __pyx_L1_error)
+  __pyx_ptype_8py4godot_7classes_4core_Vector2 = __Pyx_ImportType_0_29_37(__pyx_t_1, "py4godot.classes.core", "Vector2", sizeof(struct __pyx_obj_8py4godot_7classes_4core_Vector2), __PYX_GET_STRUCT_ALIGNMENT_0_29_37(struct __pyx_obj_8py4godot_7classes_4core_Vector2),__Pyx_ImportType_CheckSize_Warn_0_29_37); if (!__pyx_ptype_8py4godot_7classes_4core_Vector2) __PYX_ERR(5, 54, __pyx_L1_error)
+  __pyx_vtabptr_8py4godot_7classes_4core_Vector2 = (struct __pyx_vtabstruct_8py4godot_7classes_4core_Vector2*)__Pyx_GetVtable(__pyx_ptype_8py4godot_7classes_4core_Vector2->tp_dict); if (unlikely(!__pyx_vtabptr_8py4godot_7classes_4core_Vector2)) __PYX_ERR(5, 54, __pyx_L1_error)
+  __pyx_ptype_8py4godot_7classes_4core_Vector2i = __Pyx_ImportType_0_29_37(__pyx_t_1, "py4godot.classes.core", "Vector2i", sizeof(struct __pyx_obj_8py4godot_7classes_4core_Vector2i), __PYX_GET_STRUCT_ALIGNMENT_0_29_37(struct __pyx_obj_8py4godot_7classes_4core_Vector2i),__Pyx_ImportType_CheckSize_Warn_0_29_37); if (!__pyx_ptype_8py4godot_7classes_4core_Vector2i) __PYX_ERR(5, 69, __pyx_L1_error)
+  __pyx_vtabptr_8py4godot_7classes_4core_Vector2i = (struct __pyx_vtabstruct_8py4godot_7classes_4core_Vector2i*)__Pyx_GetVtable(__pyx_ptype_8py4godot_7classes_4core_Vector2i->tp_dict); if (unlikely(!__pyx_vtabptr_8py4godot_7classes_4core_Vector2i)) __PYX_ERR(5, 69, __pyx_L1_error)
+  __pyx_ptype_8py4godot_7classes_4core_Rect2 = __Pyx_ImportType_0_29_37(__pyx_t_1, "py4godot.classes.core", "Rect2", sizeof(struct __pyx_obj_8py4godot_7classes_4core_Rect2), __PYX_GET_STRUCT_ALIGNMENT_0_29_37(struct __pyx_obj_8py4godot_7classes_4core_Rect2),__Pyx_ImportType_CheckSize_Warn_0_29_37); if (!__pyx_ptype_8py4godot_7classes_4core_Rect2) __PYX_ERR(5, 80, __pyx_L1_error)
+  __pyx_vtabptr_8py4godot_7classes_4core_Rect2 = (struct __pyx_vtabstruct_8py4godot_7classes_4core_Rect2*)__Pyx_GetVtable(__pyx_ptype_8py4godot_7classes_4core_Rect2->tp_dict); if (unlikely(!__pyx_vtabptr_8py4godot_7classes_4core_Rect2)) __PYX_ERR(5, 80, __pyx_L1_error)
+  __pyx_ptype_8py4godot_7classes_4core_Rect2i = __Pyx_ImportType_0_29_37(__pyx_t_1, "py4godot.classes.core", "Rect2i", sizeof(struct __pyx_obj_8py4godot_7classes_4core_Rect2i), __PYX_GET_STRUCT_ALIGNMENT_0_29_37(struct __pyx_obj_8py4godot_7classes_4core_Rect2i),__Pyx_ImportType_CheckSize_Warn_0_29_37); if (!__pyx_ptype_8py4godot_7classes_4core_Rect2i) __PYX_ERR(5, 91, __pyx_L1_error)
+  __pyx_vtabptr_8py4godot_7classes_4core_Rect2i = (struct __pyx_vtabstruct_8py4godot_7classes_4core_Rect2i*)__Pyx_GetVtable(__pyx_ptype_8py4godot_7classes_4core_Rect2i->tp_dict); if (unlikely(!__pyx_vtabptr_8py4godot_7classes_4core_Rect2i)) __PYX_ERR(5, 91, __pyx_L1_error)
+  __pyx_ptype_8py4godot_7classes_4core_Vector3 = __Pyx_ImportType_0_29_37(__pyx_t_1, "py4godot.classes.core", "Vector3", sizeof(struct __pyx_obj_8py4godot_7classes_4core_Vector3), __PYX_GET_STRUCT_ALIGNMENT_0_29_37(struct __pyx_obj_8py4godot_7classes_4core_Vector3),__Pyx_ImportType_CheckSize_Warn_0_29_37); if (!__pyx_ptype_8py4godot_7classes_4core_Vector3) __PYX_ERR(5, 107, __pyx_L1_error)
+  __pyx_vtabptr_8py4godot_7classes_4core_Vector3 = (struct __pyx_vtabstruct_8py4godot_7classes_4core_Vector3*)__Pyx_GetVtable(__pyx_ptype_8py4godot_7classes_4core_Vector3->tp_dict); if (unlikely(!__pyx_vtabptr_8py4godot_7classes_4core_Vector3)) __PYX_ERR(5, 107, __pyx_L1_error)
+  __pyx_ptype_8py4godot_7classes_4core_Vector3i = __Pyx_ImportType_0_29_37(__pyx_t_1, "py4godot.classes.core", "Vector3i", sizeof(struct __pyx_obj_8py4godot_7classes_4core_Vector3i), __PYX_GET_STRUCT_ALIGNMENT_0_29_37(struct __pyx_obj_8py4godot_7classes_4core_Vector3i),__Pyx_ImportType_CheckSize_Warn_0_29_37); if (!__pyx_ptype_8py4godot_7classes_4core_Vector3i) __PYX_ERR(5, 123, __pyx_L1_error)
+  __pyx_vtabptr_8py4godot_7classes_4core_Vector3i = (struct __pyx_vtabstruct_8py4godot_7classes_4core_Vector3i*)__Pyx_GetVtable(__pyx_ptype_8py4godot_7classes_4core_Vector3i->tp_dict); if (unlikely(!__pyx_vtabptr_8py4godot_7classes_4core_Vector3i)) __PYX_ERR(5, 123, __pyx_L1_error)
+  __pyx_ptype_8py4godot_7classes_4core_Transform2D = __Pyx_ImportType_0_29_37(__pyx_t_1, "py4godot.classes.core", "Transform2D", sizeof(struct __pyx_obj_8py4godot_7classes_4core_Transform2D), __PYX_GET_STRUCT_ALIGNMENT_0_29_37(struct __pyx_obj_8py4godot_7classes_4core_Transform2D),__Pyx_ImportType_CheckSize_Warn_0_29_37); if (!__pyx_ptype_8py4godot_7classes_4core_Transform2D) __PYX_ERR(5, 134, __pyx_L1_error)
+  __pyx_vtabptr_8py4godot_7classes_4core_Transform2D = (struct __pyx_vtabstruct_8py4godot_7classes_4core_Transform2D*)__Pyx_GetVtable(__pyx_ptype_8py4godot_7classes_4core_Transform2D->tp_dict); if (unlikely(!__pyx_vtabptr_8py4godot_7classes_4core_Transform2D)) __PYX_ERR(5, 134, __pyx_L1_error)
+  __pyx_ptype_8py4godot_7classes_4core_Vector4 = __Pyx_ImportType_0_29_37(__pyx_t_1, "py4godot.classes.core", "Vector4", sizeof(struct __pyx_obj_8py4godot_7classes_4core_Vector4), __PYX_GET_STRUCT_ALIGNMENT_0_29_37(struct __pyx_obj_8py4godot_7classes_4core_Vector4),__Pyx_ImportType_CheckSize_Warn_0_29_37); if (!__pyx_ptype_8py4godot_7classes_4core_Vector4) __PYX_ERR(5, 151, __pyx_L1_error)
+  __pyx_vtabptr_8py4godot_7classes_4core_Vector4 = (struct __pyx_vtabstruct_8py4godot_7classes_4core_Vector4*)__Pyx_GetVtable(__pyx_ptype_8py4godot_7classes_4core_Vector4->tp_dict); if (unlikely(!__pyx_vtabptr_8py4godot_7classes_4core_Vector4)) __PYX_ERR(5, 151, __pyx_L1_error)
+  __pyx_ptype_8py4godot_7classes_4core_Vector4i = __Pyx_ImportType_0_29_37(__pyx_t_1, "py4godot.classes.core", "Vector4i", sizeof(struct __pyx_obj_8py4godot_7classes_4core_Vector4i), __PYX_GET_STRUCT_ALIGNMENT_0_29_37(struct __pyx_obj_8py4godot_7classes_4core_Vector4i),__Pyx_ImportType_CheckSize_Warn_0_29_37); if (!__pyx_ptype_8py4godot_7classes_4core_Vector4i) __PYX_ERR(5, 168, __pyx_L1_error)
+  __pyx_vtabptr_8py4godot_7classes_4core_Vector4i = (struct __pyx_vtabstruct_8py4godot_7classes_4core_Vector4i*)__Pyx_GetVtable(__pyx_ptype_8py4godot_7classes_4core_Vector4i->tp_dict); if (unlikely(!__pyx_vtabptr_8py4godot_7classes_4core_Vector4i)) __PYX_ERR(5, 168, __pyx_L1_error)
+  __pyx_ptype_8py4godot_7classes_4core_Plane = __Pyx_ImportType_0_29_37(__pyx_t_1, "py4godot.classes.core", "Plane", sizeof(struct __pyx_obj_8py4godot_7classes_4core_Plane), __PYX_GET_STRUCT_ALIGNMENT_0_29_37(struct __pyx_obj_8py4godot_7classes_4core_Plane),__Pyx_ImportType_CheckSize_Warn_0_29_37); if (!__pyx_ptype_8py4godot_7classes_4core_Plane) __PYX_ERR(5, 179, __pyx_L1_error)
+  __pyx_vtabptr_8py4godot_7classes_4core_Plane = (struct __pyx_vtabstruct_8py4godot_7classes_4core_Plane*)__Pyx_GetVtable(__pyx_ptype_8py4godot_7classes_4core_Plane->tp_dict); if (unlikely(!__pyx_vtabptr_8py4godot_7classes_4core_Plane)) __PYX_ERR(5, 179, __pyx_L1_error)
+  __pyx_ptype_8py4godot_7classes_4core_Quaternion = __Pyx_ImportType_0_29_37(__pyx_t_1, "py4godot.classes.core", "Quaternion", sizeof(struct __pyx_obj_8py4godot_7classes_4core_Quaternion), __PYX_GET_STRUCT_ALIGNMENT_0_29_37(struct __pyx_obj_8py4godot_7classes_4core_Quaternion),__Pyx_ImportType_CheckSize_Warn_0_29_37); if (!__pyx_ptype_8py4godot_7classes_4core_Quaternion) __PYX_ERR(5, 190, __pyx_L1_error)
+  __pyx_vtabptr_8py4godot_7classes_4core_Quaternion = (struct __pyx_vtabstruct_8py4godot_7classes_4core_Quaternion*)__Pyx_GetVtable(__pyx_ptype_8py4godot_7classes_4core_Quaternion->tp_dict); if (unlikely(!__pyx_vtabptr_8py4godot_7classes_4core_Quaternion)) __PYX_ERR(5, 190, __pyx_L1_error)
+  __pyx_ptype_8py4godot_7classes_4core_AABB = __Pyx_ImportType_0_29_37(__pyx_t_1, "py4godot.classes.core", "AABB", sizeof(struct __pyx_obj_8py4godot_7classes_4core_AABB), __PYX_GET_STRUCT_ALIGNMENT_0_29_37(struct __pyx_obj_8py4godot_7classes_4core_AABB),__Pyx_ImportType_CheckSize_Warn_0_29_37); if (!__pyx_ptype_8py4godot_7classes_4core_AABB) __PYX_ERR(5, 201, __pyx_L1_error)
+  __pyx_vtabptr_8py4godot_7classes_4core_AABB = (struct __pyx_vtabstruct_8py4godot_7classes_4core_AABB*)__Pyx_GetVtable(__pyx_ptype_8py4godot_7classes_4core_AABB->tp_dict); if (unlikely(!__pyx_vtabptr_8py4godot_7classes_4core_AABB)) __PYX_ERR(5, 201, __pyx_L1_error)
+  __pyx_ptype_8py4godot_7classes_4core_Basis = __Pyx_ImportType_0_29_37(__pyx_t_1, "py4godot.classes.core", "Basis", sizeof(struct __pyx_obj_8py4godot_7classes_4core_Basis), __PYX_GET_STRUCT_ALIGNMENT_0_29_37(struct __pyx_obj_8py4godot_7classes_4core_Basis),__Pyx_ImportType_CheckSize_Warn_0_29_37); if (!__pyx_ptype_8py4godot_7classes_4core_Basis) __PYX_ERR(5, 212, __pyx_L1_error)
+  __pyx_vtabptr_8py4godot_7classes_4core_Basis = (struct __pyx_vtabstruct_8py4godot_7classes_4core_Basis*)__Pyx_GetVtable(__pyx_ptype_8py4godot_7classes_4core_Basis->tp_dict); if (unlikely(!__pyx_vtabptr_8py4godot_7classes_4core_Basis)) __PYX_ERR(5, 212, __pyx_L1_error)
+  __pyx_ptype_8py4godot_7classes_4core_Transform3D = __Pyx_ImportType_0_29_37(__pyx_t_1, "py4godot.classes.core", "Transform3D", sizeof(struct __pyx_obj_8py4godot_7classes_4core_Transform3D), __PYX_GET_STRUCT_ALIGNMENT_0_29_37(struct __pyx_obj_8py4godot_7classes_4core_Transform3D),__Pyx_ImportType_CheckSize_Warn_0_29_37); if (!__pyx_ptype_8py4godot_7classes_4core_Transform3D) __PYX_ERR(5, 223, __pyx_L1_error)
+  __pyx_vtabptr_8py4godot_7classes_4core_Transform3D = (struct __pyx_vtabstruct_8py4godot_7classes_4core_Transform3D*)__Pyx_GetVtable(__pyx_ptype_8py4godot_7classes_4core_Transform3D->tp_dict); if (unlikely(!__pyx_vtabptr_8py4godot_7classes_4core_Transform3D)) __PYX_ERR(5, 223, __pyx_L1_error)
+  __pyx_ptype_8py4godot_7classes_4core_Projection = __Pyx_ImportType_0_29_37(__pyx_t_1, "py4godot.classes.core", "Projection", sizeof(struct __pyx_obj_8py4godot_7classes_4core_Projection), __PYX_GET_STRUCT_ALIGNMENT_0_29_37(struct __pyx_obj_8py4godot_7classes_4core_Projection),__Pyx_ImportType_CheckSize_Warn_0_29_37); if (!__pyx_ptype_8py4godot_7classes_4core_Projection) __PYX_ERR(5, 242, __pyx_L1_error)
+  __pyx_vtabptr_8py4godot_7classes_4core_Projection = (struct __pyx_vtabstruct_8py4godot_7classes_4core_Projection*)__Pyx_GetVtable(__pyx_ptype_8py4godot_7classes_4core_Projection->tp_dict); if (unlikely(!__pyx_vtabptr_8py4godot_7classes_4core_Projection)) __PYX_ERR(5, 242, __pyx_L1_error)
+  __pyx_ptype_8py4godot_7classes_4core_Color = __Pyx_ImportType_0_29_37(__pyx_t_1, "py4godot.classes.core", "Color", sizeof(struct __pyx_obj_8py4godot_7classes_4core_Color), __PYX_GET_STRUCT_ALIGNMENT_0_29_37(struct __pyx_obj_8py4godot_7classes_4core_Color),__Pyx_ImportType_CheckSize_Warn_0_29_37); if (!__pyx_ptype_8py4godot_7classes_4core_Color) __PYX_ERR(5, 253, __pyx_L1_error)
+  __pyx_vtabptr_8py4godot_7classes_4core_Color = (struct __pyx_vtabstruct_8py4godot_7classes_4core_Color*)__Pyx_GetVtable(__pyx_ptype_8py4godot_7classes_4core_Color->tp_dict); if (unlikely(!__pyx_vtabptr_8py4godot_7classes_4core_Color)) __PYX_ERR(5, 253, __pyx_L1_error)
+  __pyx_ptype_8py4godot_7classes_4core_StringName = __Pyx_ImportType_0_29_37(__pyx_t_1, "py4godot.classes.core", "StringName", sizeof(struct __pyx_obj_8py4godot_7classes_4core_StringName), __PYX_GET_STRUCT_ALIGNMENT_0_29_37(struct __pyx_obj_8py4godot_7classes_4core_StringName),__Pyx_ImportType_CheckSize_Warn_0_29_37); if (!__pyx_ptype_8py4godot_7classes_4core_StringName) __PYX_ERR(5, 264, __pyx_L1_error)
+  __pyx_vtabptr_8py4godot_7classes_4core_StringName = (struct __pyx_vtabstruct_8py4godot_7classes_4core_StringName*)__Pyx_GetVtable(__pyx_ptype_8py4godot_7classes_4core_StringName->tp_dict); if (unlikely(!__pyx_vtabptr_8py4godot_7classes_4core_StringName)) __PYX_ERR(5, 264, __pyx_L1_error)
+  __pyx_ptype_8py4godot_7classes_4core_NodePath = __Pyx_ImportType_0_29_37(__pyx_t_1, "py4godot.classes.core", "NodePath", sizeof(struct __pyx_obj_8py4godot_7classes_4core_NodePath), __PYX_GET_STRUCT_ALIGNMENT_0_29_37(struct __pyx_obj_8py4godot_7classes_4core_NodePath),__Pyx_ImportType_CheckSize_Warn_0_29_37); if (!__pyx_ptype_8py4godot_7classes_4core_NodePath) __PYX_ERR(5, 275, __pyx_L1_error)
+  __pyx_vtabptr_8py4godot_7classes_4core_NodePath = (struct __pyx_vtabstruct_8py4godot_7classes_4core_NodePath*)__Pyx_GetVtable(__pyx_ptype_8py4godot_7classes_4core_NodePath->tp_dict); if (unlikely(!__pyx_vtabptr_8py4godot_7classes_4core_NodePath)) __PYX_ERR(5, 275, __pyx_L1_error)
+  __pyx_ptype_8py4godot_7classes_4core_RID = __Pyx_ImportType_0_29_37(__pyx_t_1, "py4godot.classes.core", "RID", sizeof(struct __pyx_obj_8py4godot_7classes_4core_RID), __PYX_GET_STRUCT_ALIGNMENT_0_29_37(struct __pyx_obj_8py4godot_7classes_4core_RID),__Pyx_ImportType_CheckSize_Warn_0_29_37); if (!__pyx_ptype_8py4godot_7classes_4core_RID) __PYX_ERR(5, 286, __pyx_L1_error)
+  __pyx_vtabptr_8py4godot_7classes_4core_RID = (struct __pyx_vtabstruct_8py4godot_7classes_4core_RID*)__Pyx_GetVtable(__pyx_ptype_8py4godot_7classes_4core_RID->tp_dict); if (unlikely(!__pyx_vtabptr_8py4godot_7classes_4core_RID)) __PYX_ERR(5, 286, __pyx_L1_error)
+  __pyx_ptype_8py4godot_7classes_4core_Callable = __Pyx_ImportType_0_29_37(__pyx_t_1, "py4godot.classes.core", "Callable", sizeof(struct __pyx_obj_8py4godot_7classes_4core_Callable), __PYX_GET_STRUCT_ALIGNMENT_0_29_37(struct __pyx_obj_8py4godot_7classes_4core_Callable),__Pyx_ImportType_CheckSize_Warn_0_29_37); if (!__pyx_ptype_8py4godot_7classes_4core_Callable) __PYX_ERR(5, 297, __pyx_L1_error)
+  __pyx_vtabptr_8py4godot_7classes_4core_Callable = (struct __pyx_vtabstruct_8py4godot_7classes_4core_Callable*)__Pyx_GetVtable(__pyx_ptype_8py4godot_7classes_4core_Callable->tp_dict); if (unlikely(!__pyx_vtabptr_8py4godot_7classes_4core_Callable)) __PYX_ERR(5, 297, __pyx_L1_error)
+  __pyx_ptype_8py4godot_7classes_4core_Signal = __Pyx_ImportType_0_29_37(__pyx_t_1, "py4godot.classes.core", "Signal", sizeof(struct __pyx_obj_8py4godot_7classes_4core_Signal), __PYX_GET_STRUCT_ALIGNMENT_0_29_37(struct __pyx_obj_8py4godot_7classes_4core_Signal),__Pyx_ImportType_CheckSize_Warn_0_29_37); if (!__pyx_ptype_8py4godot_7classes_4core_Signal) __PYX_ERR(5, 308, __pyx_L1_error)
+  __pyx_vtabptr_8py4godot_7classes_4core_Signal = (struct __pyx_vtabstruct_8py4godot_7classes_4core_Signal*)__Pyx_GetVtable(__pyx_ptype_8py4godot_7classes_4core_Signal->tp_dict); if (unlikely(!__pyx_vtabptr_8py4godot_7classes_4core_Signal)) __PYX_ERR(5, 308, __pyx_L1_error)
+  __pyx_ptype_8py4godot_7classes_4core_Dictionary = __Pyx_ImportType_0_29_37(__pyx_t_1, "py4godot.classes.core", "Dictionary", sizeof(struct __pyx_obj_8py4godot_7classes_4core_Dictionary), __PYX_GET_STRUCT_ALIGNMENT_0_29_37(struct __pyx_obj_8py4godot_7classes_4core_Dictionary),__Pyx_ImportType_CheckSize_Warn_0_29_37); if (!__pyx_ptype_8py4godot_7classes_4core_Dictionary) __PYX_ERR(5, 319, __pyx_L1_error)
+  __pyx_vtabptr_8py4godot_7classes_4core_Dictionary = (struct __pyx_vtabstruct_8py4godot_7classes_4core_Dictionary*)__Pyx_GetVtable(__pyx_ptype_8py4godot_7classes_4core_Dictionary->tp_dict); if (unlikely(!__pyx_vtabptr_8py4godot_7classes_4core_Dictionary)) __PYX_ERR(5, 319, __pyx_L1_error)
+  __pyx_ptype_8py4godot_7classes_4core_Array = __Pyx_ImportType_0_29_37(__pyx_t_1, "py4godot.classes.core", "Array", sizeof(struct __pyx_obj_8py4godot_7classes_4core_Array), __PYX_GET_STRUCT_ALIGNMENT_0_29_37(struct __pyx_obj_8py4godot_7classes_4core_Array),__Pyx_ImportType_CheckSize_Warn_0_29_37); if (!__pyx_ptype_8py4godot_7classes_4core_Array) __PYX_ERR(5, 330, __pyx_L1_error)
+  __pyx_vtabptr_8py4godot_7classes_4core_Array = (struct __pyx_vtabstruct_8py4godot_7classes_4core_Array*)__Pyx_GetVtable(__pyx_ptype_8py4godot_7classes_4core_Array->tp_dict); if (unlikely(!__pyx_vtabptr_8py4godot_7classes_4core_Array)) __PYX_ERR(5, 330, __pyx_L1_error)
+  __pyx_ptype_8py4godot_7classes_4core_PackedByteArray = __Pyx_ImportType_0_29_37(__pyx_t_1, "py4godot.classes.core", "PackedByteArray", sizeof(struct __pyx_obj_8py4godot_7classes_4core_PackedByteArray), __PYX_GET_STRUCT_ALIGNMENT_0_29_37(struct __pyx_obj_8py4godot_7classes_4core_PackedByteArray),__Pyx_ImportType_CheckSize_Warn_0_29_37); if (!__pyx_ptype_8py4godot_7classes_4core_PackedByteArray) __PYX_ERR(5, 341, __pyx_L1_error)
+  __pyx_vtabptr_8py4godot_7classes_4core_PackedByteArray = (struct __pyx_vtabstruct_8py4godot_7classes_4core_PackedByteArray*)__Pyx_GetVtable(__pyx_ptype_8py4godot_7classes_4core_PackedByteArray->tp_dict); if (unlikely(!__pyx_vtabptr_8py4godot_7classes_4core_PackedByteArray)) __PYX_ERR(5, 341, __pyx_L1_error)
+  __pyx_ptype_8py4godot_7classes_4core_PackedInt32Array = __Pyx_ImportType_0_29_37(__pyx_t_1, "py4godot.classes.core", "PackedInt32Array", sizeof(struct __pyx_obj_8py4godot_7classes_4core_PackedInt32Array), __PYX_GET_STRUCT_ALIGNMENT_0_29_37(struct __pyx_obj_8py4godot_7classes_4core_PackedInt32Array),__Pyx_ImportType_CheckSize_Warn_0_29_37); if (!__pyx_ptype_8py4godot_7classes_4core_PackedInt32Array) __PYX_ERR(5, 352, __pyx_L1_error)
+  __pyx_vtabptr_8py4godot_7classes_4core_PackedInt32Array = (struct __pyx_vtabstruct_8py4godot_7classes_4core_PackedInt32Array*)__Pyx_GetVtable(__pyx_ptype_8py4godot_7classes_4core_PackedInt32Array->tp_dict); if (unlikely(!__pyx_vtabptr_8py4godot_7classes_4core_PackedInt32Array)) __PYX_ERR(5, 352, __pyx_L1_error)
+  __pyx_ptype_8py4godot_7classes_4core_PackedInt64Array = __Pyx_ImportType_0_29_37(__pyx_t_1, "py4godot.classes.core", "PackedInt64Array", sizeof(struct __pyx_obj_8py4godot_7classes_4core_PackedInt64Array), __PYX_GET_STRUCT_ALIGNMENT_0_29_37(struct __pyx_obj_8py4godot_7classes_4core_PackedInt64Array),__Pyx_ImportType_CheckSize_Warn_0_29_37); if (!__pyx_ptype_8py4godot_7classes_4core_PackedInt64Array) __PYX_ERR(5, 363, __pyx_L1_error)
+  __pyx_vtabptr_8py4godot_7classes_4core_PackedInt64Array = (struct __pyx_vtabstruct_8py4godot_7classes_4core_PackedInt64Array*)__Pyx_GetVtable(__pyx_ptype_8py4godot_7classes_4core_PackedInt64Array->tp_dict); if (unlikely(!__pyx_vtabptr_8py4godot_7classes_4core_PackedInt64Array)) __PYX_ERR(5, 363, __pyx_L1_error)
+  __pyx_ptype_8py4godot_7classes_4core_PackedFloat32Array = __Pyx_ImportType_0_29_37(__pyx_t_1, "py4godot.classes.core", "PackedFloat32Array", sizeof(struct __pyx_obj_8py4godot_7classes_4core_PackedFloat32Array), __PYX_GET_STRUCT_ALIGNMENT_0_29_37(struct __pyx_obj_8py4godot_7classes_4core_PackedFloat32Array),__Pyx_ImportType_CheckSize_Warn_0_29_37); if (!__pyx_ptype_8py4godot_7classes_4core_PackedFloat32Array) __PYX_ERR(5, 374, __pyx_L1_error)
+  __pyx_vtabptr_8py4godot_7classes_4core_PackedFloat32Array = (struct __pyx_vtabstruct_8py4godot_7classes_4core_PackedFloat32Array*)__Pyx_GetVtable(__pyx_ptype_8py4godot_7classes_4core_PackedFloat32Array->tp_dict); if (unlikely(!__pyx_vtabptr_8py4godot_7classes_4core_PackedFloat32Array)) __PYX_ERR(5, 374, __pyx_L1_error)
+  __pyx_ptype_8py4godot_7classes_4core_PackedFloat64Array = __Pyx_ImportType_0_29_37(__pyx_t_1, "py4godot.classes.core", "PackedFloat64Array", sizeof(struct __pyx_obj_8py4godot_7classes_4core_PackedFloat64Array), __PYX_GET_STRUCT_ALIGNMENT_0_29_37(struct __pyx_obj_8py4godot_7classes_4core_PackedFloat64Array),__Pyx_ImportType_CheckSize_Warn_0_29_37); if (!__pyx_ptype_8py4godot_7classes_4core_PackedFloat64Array) __PYX_ERR(5, 385, __pyx_L1_error)
+  __pyx_vtabptr_8py4godot_7classes_4core_PackedFloat64Array = (struct __pyx_vtabstruct_8py4godot_7classes_4core_PackedFloat64Array*)__Pyx_GetVtable(__pyx_ptype_8py4godot_7classes_4core_PackedFloat64Array->tp_dict); if (unlikely(!__pyx_vtabptr_8py4godot_7classes_4core_PackedFloat64Array)) __PYX_ERR(5, 385, __pyx_L1_error)
+  __pyx_ptype_8py4godot_7classes_4core_PackedStringArray = __Pyx_ImportType_0_29_37(__pyx_t_1, "py4godot.classes.core", "PackedStringArray", sizeof(struct __pyx_obj_8py4godot_7classes_4core_PackedStringArray), __PYX_GET_STRUCT_ALIGNMENT_0_29_37(struct __pyx_obj_8py4godot_7classes_4core_PackedStringArray),__Pyx_ImportType_CheckSize_Warn_0_29_37); if (!__pyx_ptype_8py4godot_7classes_4core_PackedStringArray) __PYX_ERR(5, 396, __pyx_L1_error)
+  __pyx_vtabptr_8py4godot_7classes_4core_PackedStringArray = (struct __pyx_vtabstruct_8py4godot_7classes_4core_PackedStringArray*)__Pyx_GetVtable(__pyx_ptype_8py4godot_7classes_4core_PackedStringArray->tp_dict); if (unlikely(!__pyx_vtabptr_8py4godot_7classes_4core_PackedStringArray)) __PYX_ERR(5, 396, __pyx_L1_error)
+  __pyx_ptype_8py4godot_7classes_4core_PackedVector2Array = __Pyx_ImportType_0_29_37(__pyx_t_1, "py4godot.classes.core", "PackedVector2Array", sizeof(struct __pyx_obj_8py4godot_7classes_4core_PackedVector2Array), __PYX_GET_STRUCT_ALIGNMENT_0_29_37(struct __pyx_obj_8py4godot_7classes_4core_PackedVector2Array),__Pyx_ImportType_CheckSize_Warn_0_29_37); if (!__pyx_ptype_8py4godot_7classes_4core_PackedVector2Array) __PYX_ERR(5, 407, __pyx_L1_error)
+  __pyx_vtabptr_8py4godot_7classes_4core_PackedVector2Array = (struct __pyx_vtabstruct_8py4godot_7classes_4core_PackedVector2Array*)__Pyx_GetVtable(__pyx_ptype_8py4godot_7classes_4core_PackedVector2Array->tp_dict); if (unlikely(!__pyx_vtabptr_8py4godot_7classes_4core_PackedVector2Array)) __PYX_ERR(5, 407, __pyx_L1_error)
+  __pyx_ptype_8py4godot_7classes_4core_PackedVector3Array = __Pyx_ImportType_0_29_37(__pyx_t_1, "py4godot.classes.core", "PackedVector3Array", sizeof(struct __pyx_obj_8py4godot_7classes_4core_PackedVector3Array), __PYX_GET_STRUCT_ALIGNMENT_0_29_37(struct __pyx_obj_8py4godot_7classes_4core_PackedVector3Array),__Pyx_ImportType_CheckSize_Warn_0_29_37); if (!__pyx_ptype_8py4godot_7classes_4core_PackedVector3Array) __PYX_ERR(5, 418, __pyx_L1_error)
+  __pyx_vtabptr_8py4godot_7classes_4core_PackedVector3Array = (struct __pyx_vtabstruct_8py4godot_7classes_4core_PackedVector3Array*)__Pyx_GetVtable(__pyx_ptype_8py4godot_7classes_4core_PackedVector3Array->tp_dict); if (unlikely(!__pyx_vtabptr_8py4godot_7classes_4core_PackedVector3Array)) __PYX_ERR(5, 418, __pyx_L1_error)
+  __pyx_ptype_8py4godot_7classes_4core_PackedColorArray = __Pyx_ImportType_0_29_37(__pyx_t_1, "py4godot.classes.core", "PackedColorArray", sizeof(struct __pyx_obj_8py4godot_7classes_4core_PackedColorArray), __PYX_GET_STRUCT_ALIGNMENT_0_29_37(struct __pyx_obj_8py4godot_7classes_4core_PackedColorArray),__Pyx_ImportType_CheckSize_Warn_0_29_37); if (!__pyx_ptype_8py4godot_7classes_4core_PackedColorArray) __PYX_ERR(5, 429, __pyx_L1_error)
+  __pyx_vtabptr_8py4godot_7classes_4core_PackedColorArray = (struct __pyx_vtabstruct_8py4godot_7classes_4core_PackedColorArray*)__Pyx_GetVtable(__pyx_ptype_8py4godot_7classes_4core_PackedColorArray->tp_dict); if (unlikely(!__pyx_vtabptr_8py4godot_7classes_4core_PackedColorArray)) __PYX_ERR(5, 429, __pyx_L1_error)
+  __pyx_ptype_8py4godot_7classes_4core_PackedVector4Array = __Pyx_ImportType_0_29_37(__pyx_t_1, "py4godot.classes.core", "PackedVector4Array", sizeof(struct __pyx_obj_8py4godot_7classes_4core_PackedVector4Array), __PYX_GET_STRUCT_ALIGNMENT_0_29_37(struct __pyx_obj_8py4godot_7classes_4core_PackedVector4Array),__Pyx_ImportType_CheckSize_Warn_0_29_37); if (!__pyx_ptype_8py4godot_7classes_4core_PackedVector4Array) __PYX_ERR(5, 440, __pyx_L1_error)
+  __pyx_vtabptr_8py4godot_7classes_4core_PackedVector4Array = (struct __pyx_vtabstruct_8py4godot_7classes_4core_PackedVector4Array*)__Pyx_GetVtable(__pyx_ptype_8py4godot_7classes_4core_PackedVector4Array->tp_dict); if (unlikely(!__pyx_vtabptr_8py4godot_7classes_4core_PackedVector4Array)) __PYX_ERR(5, 440, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_t_1 = PyImport_ImportModule("py4godot.classes.Object.Object"); if (unlikely(!__pyx_t_1)) __PYX_ERR(6, 13, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
