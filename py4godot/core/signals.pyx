@@ -46,7 +46,6 @@ cdef class GDSignal():
         # Don't use StringName::new2 here. Somehow it results in an empty string
         cdef StringName gd_function_name = py_c_string_to_string_name(c_function_name)
         cdef Callable callable = Callable.new2(parent, gd_function_name )
-        Py_INCREF(callable)
         super().connect(callable)
 
 
@@ -59,12 +58,11 @@ cdef class GDSignal():
         # Don't use StringName::new2 here. Somehow it results in an empty string
         cdef StringName gd_function_name = py_c_string_to_string_name(c_function_name)
         cdef Callable callable = Callable.new2(parent, gd_function_name )
-        Py_INCREF(callable)
         super().disconnect(callable)
 
 
 
-cdef class BuiltinSignal():
+cdef class BuiltinSignal(Signal):
     def __init__(self, parent, name):
         cdef Object temp_object
         self.signal_name = <StringName> name
@@ -74,17 +72,13 @@ cdef class BuiltinSignal():
                                # become a problem. So this should be reminded
         self.parent = temp_object
     def connect(self, object function , int flags =0):
-        return
         cdef str function_name = function.__name__
         cdef Object parent = <Object> (function.__self__ if hasattr(function, '__self__') else None)
-        parent.get_class()
         cdef bytes b_function_name = function_name.encode("utf-8")
         cdef char* c_function_name = b_function_name
-        # Don't use StringName::new2 here. Somehow it results in an empty string
         cdef StringName gd_function_name = py_c_string_to_string_name(c_function_name)
         cdef Callable callable = Callable.new2(parent, gd_function_name )
-        Py_INCREF(callable)
-        self.parent.connect(self.signal_name, self.callable)
+        self.parent.connect(self.signal_name, callable)
 
 
     def disconnect(self, object function ):
@@ -96,7 +90,6 @@ cdef class BuiltinSignal():
         # Don't use StringName::new2 here. Somehow it results in an empty string
         cdef StringName gd_function_name = py_c_string_to_string_name(c_function_name)
         cdef Callable callable = Callable.new2(parent, gd_function_name )
-        Py_INCREF(callable)
         self.parent.disconnect(self.signal_name, callable)
 
     def is_null(self):
