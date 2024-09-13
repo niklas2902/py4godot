@@ -116,7 +116,7 @@ my_parser.add_argument('--target_platform',
 my_parser.add_argument("-run_tests", help="should tests be run", default="False")
 my_parser.add_argument("-download_godot", help="should tests be run", default="False")
 my_parser.add_argument("-create_plugin", help="Should this create a plugin", default="True")
-my_parser.add_argument("-buildtype", help="Should this be a debug build or release build", default="release")
+my_parser.add_argument("-buildtype", help="Should this be a debug build or release build", default="debug")
 # Execute parse_args()
 args = my_parser.parse_args()
 
@@ -155,7 +155,7 @@ try:
               f"meson {build_dir} --cross-file platforms/{args.target_platform}.cross "
               f"--cross-file platforms/compilers/{args.compiler}_compiler.native "
               f"--cross-file platforms/binary_dirs/python_ver_compile.cross "
-              f"{get_debug_release_cross_compile_file(args.compiler, build_type)}"
+              f"{get_debug_release_cross_compile_file(args.compiler, build_type)} "
               f"--buildtype=release "
               f"{command_separator} meson compile -C build/{args.target_platform}"
               )

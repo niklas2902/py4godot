@@ -125,6 +125,14 @@ void init_pluginscript_api(){
 
 }
 
+void PyScriptExtension::init_signals(PyObject* instance){
+    std::vector<std::shared_ptr<godot::Dictionary>> signals;
+    for (auto& signal: transfer_object.signals){
+        signals.push_back(std::make_shared<godot::Dictionary>(signal));
+    }
+    create_signals(instance, signals);
+}
+
 
 bool string_names_equal_script(StringName& left, StringName& right){
     print_error("stirng_names_equal_script");
@@ -237,7 +245,6 @@ void PyScriptExtension::update_instance_data(InstanceData* gd_instance, PyObject
 }
 void PyScriptExtension::_instance_create( Object& for_object, GDExtensionTypePtr res){
     print_error("_instance_create");
-    functions::get_print_error()("instance_create", "test", "test", 1, 1);
     auto gil_state = PyGILState_Ensure();
 
     GDExtensionVariantFromTypeConstructorFunc constructor_func;
@@ -260,6 +267,8 @@ void PyScriptExtension::_instance_create( Object& for_object, GDExtensionTypePtr
     ScriptDatabase::instance()->register_script(for_object.get_instance_id(), gd_instance->owner);
     instance_ptr = functions::get_script_instance_create()(&(gd_instance->info), gd_instance);
     *((GDExtensionTypePtr*)res) = instance_ptr;
+
+    init_signals(gd_instance->owner);
     PyGILState_Release(gil_state);
 
 }
@@ -292,6 +301,7 @@ void PyScriptExtension::_placeholder_instance_create( Object& for_object, GDExte
     for_object.godot_owner = ((void**)for_object.godot_owner)[0];
     auto instance_id = for_object.get_instance_id();
     ScriptDatabase::instance()->register_script(for_object.get_instance_id(), gd_instance->owner);
+    init_signals(gd_instance->owner);
     PyGILState_Release(gil_state);
 
 }
@@ -360,6 +370,7 @@ void PyScriptExtension::_get_script_signal_list(GDExtensionTypePtr res){
         add_variant_to_array(res, *var_signal);
         delete var_signal;
     }
+    //assert(false);
 
 }
 void PyScriptExtension::_has_property_default_value( StringName& property, GDExtensionTypePtr res){

@@ -95,6 +95,11 @@ void Variant::init_type(String& val){
     auto constructor = functions::get_get_variant_from_type_constructor()(GDExtensionVariantType::GDEXTENSION_VARIANT_TYPE_STRING);
     constructor(native_ptr, &val.godot_owner);
 }
+
+void Variant::init_type(StringName& val){
+    auto constructor = functions::get_get_variant_from_type_constructor()(GDExtensionVariantType::GDEXTENSION_VARIANT_TYPE_STRING_NAME);
+    constructor(native_ptr, &val.godot_owner);
+}
 void Variant::init_type(Dictionary& val){
     auto constructor = functions::get_get_variant_from_type_constructor()(GDExtensionVariantType::GDEXTENSION_VARIANT_TYPE_DICTIONARY);
     constructor(native_ptr, &val.godot_owner);

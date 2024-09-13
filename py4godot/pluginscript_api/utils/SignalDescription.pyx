@@ -2,6 +2,7 @@
 from py4godot.pluginscript_api.utils.utils cimport *
 from py4godot.pluginscript_api.utils.SignalArg cimport *
 from libcpp.vector cimport vector
+from py4godot.utils.print_tools import print_error as pe
 
 cdef class SignalDescription:
     """"Description class for the properties, a gdclass can have and which can be found in the editor"""
@@ -22,7 +23,9 @@ cdef class SignalDescription:
             signal_arg.type = <GDExtensionVariantType>(<SignalArg>args[i]).variant_type
             signal_args.push_back(signal_arg)
         self.dict = Dictionary.new0()
-        init_signal_description(name.encode("utf-8"), signal_args, self.dict.Dictionary_internal_class_ptr);
+        py_bytes = name.encode("utf-8")
+        cdef char* signal_c_name = py_bytes
+        init_signal_description(signal_c_name, signal_args, self.dict.Dictionary_internal_class_ptr);
 
     def get_var_signal_dict(self):
         return self.var_signal_dict

@@ -33,8 +33,9 @@ void init_signal_description(char* name, std::vector<CPPSignalArg>& args, std::s
     auto temp_name = c_string_to_string(name);
     Variant signal_name_variant = Variant(temp_name);
     Variant var_name = Variant::new_static(functions::get_dictionary_operator_index()(&(*signal_dict_ptr).godot_owner, &signal_key_variant.native_ptr));
-    auto string_name = c_string_to_string(name);
-    var_name.init_type(string_name);
+    // TODO: remove the pointer?
+    auto string_name = new StringName{c_string_to_string_name(name)};
+    var_name.init_type(*string_name);
     auto var_signal_dict = Variant(*signal_dict_ptr);
 
     // add args

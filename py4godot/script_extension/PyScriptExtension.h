@@ -32,6 +32,8 @@ namespace godot{
 
           static PyScriptExtension* constructor(PyLanguage* language);
           void _init_values(); //# self-defined
+          void init_signals(PyObject* instance);
+
           void update_instance_data(InstanceData* gd_instance, PyObject* instance); // self-defined
           void apply_code();
           std::string path_as_string();

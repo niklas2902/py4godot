@@ -26,3 +26,5 @@ cdef core.String py_c_string_to_string(char* string)
 cdef unicode gd_string_to_py_string(core.String string)
 cdef unicode gd_string_to_py_string_instance(core.String string)
 cdef unicode gd_string_name_to_py_string(core.StringName string_name)
+
+cdef bool shouldCreateObject = True

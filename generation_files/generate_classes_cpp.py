@@ -684,7 +684,7 @@ def generate_variant_vector(mMethod):
         res = generate_newline(res)
         res += f"{INDENT * 3}Variant* _var = new Variant(1);"
         res = generate_newline(res)
-        res += f'{INDENT * 3}_var->init_from_py_object_native_ptr(_variant, "Object");'
+        res += f'{INDENT * 3}_var->init_from_py_object_native_ptr(_variant, get_python_typename(_variant).c_str());'
         res = generate_newline(res)
         res += f'{INDENT * 3}variant_argument_array.push_back(_var);'
         res = generate_newline(res)
@@ -886,6 +886,8 @@ def generate_args_array(method):
 
 def get_first_args_native(method_):
     if "arguments" not in method_:
+        if method_["is_vararg"]:
+            return "argument_array.empty()?NULL:&argument_array[0]"
         return "NULL"
     return "&_args[0]"
 
@@ -893,6 +895,9 @@ def get_first_args_native(method_):
 def get_args_count(method):
     if "arguments" in method:
         return len(method["arguments"])
+    if "arguments" not in method:
+        if method["is_vararg"]:
+            return "argument_array.size()"
     return 0
 
 

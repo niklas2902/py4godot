@@ -30,6 +30,8 @@ cdef api GDExtensionBool instance_set(GDExtensionScriptInstanceDataPtr p_instanc
     try:
         var.native_ptr = <void*>p_value
         val = <object>var.get_converted_value(True)
+        if isinstance(val, Signal):
+            return 1 #TODO: improve this. The problem is, that Godot decides to set signals itself. This lead to problems in the past. Check if it is still an issue
         setattr(<object>(instance.owner),py_method_name_str, <object>val)
         #Py_DECREF(<object>val)#TODO: is this necessary?
 
