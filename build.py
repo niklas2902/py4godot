@@ -156,7 +156,7 @@ try:
               f"--cross-file platforms/compilers/{args.compiler}_compiler.native "
               f"--cross-file platforms/binary_dirs/python_ver_compile.cross "
               f"{get_debug_release_cross_compile_file(args.compiler, build_type)} "
-              f"--buildtype=debugoptimized "
+              f"--buildtype=release "
               f"{command_separator} meson compile -C build/{args.target_platform}"
               )
         res = subprocess.Popen(msvc_init +
@@ -164,7 +164,7 @@ try:
                                f"--cross-file platforms/compilers/{args.compiler}_compiler.native "
                                f"--cross-file platforms/binary_dirs/python_ver_compile.cross "
                                f"{get_debug_release_cross_compile_file(args.compiler, build_type)} "
-                               f"--buildtype=debugoptimized "
+                               f"--buildtype=release "
                                f"{command_separator} meson compile -C build/{args.target_platform}",
                                shell=True)
     else:
@@ -173,14 +173,14 @@ try:
               f"--cross-file platforms/compilers/{args.compiler}_compiler.native "
               f"--cross-file platforms/binary_dirs/python_ver_compile.cross "
               f"{get_debug_release_cross_compile_file(args.compiler, build_type)}"
-              f"--buildtype=debugoptimized "
+              f"--buildtype=release "
               f"{command_separator} meson compile -C build/{args.target_platform}"
               )
         res = subprocess.Popen(msvc_init +
                                f"meson {build_dir} --cross-file platforms/{args.target_platform}.cross "
                                f"--cross-file platforms/compilers/{args.compiler}_compiler.native "
                                f"--cross-file platforms/binary_dirs/python_ver_compile.cross "
-                               f"--buildtype=debugoptimized "
+                               f"--buildtype=release "
                                f"{get_debug_release_cross_compile_file(args.compiler, build_type)}"
                                f"{command_separator} meson compile -C build/{args.target_platform}",
                                shell=True)
