@@ -62,29 +62,34 @@ jobs:
       - name: Sync file timestamps
         shell: bash
         run: |
-          # Sync .cpp and .pxd file timestamps with .pyx files
-          find classes -name '*.pyx' | while read pyx_file; do
-              # Update .cpp file
-              cpp_file="${pyx_file%.pyx}.cpp"
-              if [ -f "$cpp_file" ]; then
-                  touch -r "$pyx_file" "$cpp_file"
-              fi
-          
-              # Update .pxd file
-              pxd_file="${pyx_file%.pyx}.pxd"
-              if [ -f "$pxd_file" ]; then
-                  touch -r "$pyx_file" "$pxd_file"
-              fi
-          done
-
-          # Sync standalone .pxd files with their corresponding .cpp files
-          find classes -name '*.pxd' | while read pxd_file; do
-            cpp_file="${pxd_file%.pxd}.cpp"
-            if [ -f "$cpp_file" ]; then
-              touch -r "$pxd_file" "$cpp_file"
+          # Function to sync timestamps
+          sync_timestamps() {
+            local dir=$1
+            local extension=$2
+            if [ -d "$dir" ]; then
+              find "$dir" -name "*.$extension" | while read src_file; do
+                for target_ext in cpp pxd; do
+                  target_file="${src_file%.$extension}.$target_ext"
+                  if [ -f "$target_file" ]; then
+                    touch -r "$src_file" "$target_file"
+                  fi
+                done
+              done
+            else
+              echo "Directory $dir not found. Skipping timestamp sync for *.$extension files."
             fi
-          done
+          }
 
+          # Sync .pyx files
+          sync_timestamps "py4godot" "pyx"
+          sync_timestamps "classes" "pyx"
+
+          # Sync standalone .pxd files
+          sync_timestamps "py4godot" "pxd"
+          sync_timestamps "classes" "pxd"
+
+          echo "File timestamp synchronization completed."
+          
       - name: Install Mesa
         shell: cmd
         run: |
