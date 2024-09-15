@@ -59,6 +59,15 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-checkout-
 
+      - name: Sync .cpp file timestamps with .pyx files
+        run: |
+          for pyx in $(find classes -name '*.pyx'); do
+          cfile="${pyx%.pyx}.cpp"
+          if [ -f "$cfile" ]; then
+           touch -r "$pyx" "$cfile"
+          fi
+          done
+
       - name: Install Mesa
         shell: cmd
         run: |
