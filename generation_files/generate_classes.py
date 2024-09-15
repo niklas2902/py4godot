@@ -1210,16 +1210,14 @@ def get_classes_to_import(classes):
             for method in class_["methods"]:
                 if ("return_value" in method.keys()):
                     if (unbitfield_type(get_class_from_enum(method["return_value"]["type"])) in normal_classes):
-                        classes_to_import.append(get_class_from_enum(method["return_value"]["type"]))
+                        if not "enum" in method["return_value"]["type"]:
+                            classes_to_import.append(get_class_from_enum(method["return_value"]["type"]))
                 if ("arguments" not in method.keys()):
                     continue
                 for argument in method["arguments"]:
                     if argument["type"] in normal_classes:
                         classes_to_import.append(argument["type"])
-                    if "enum" in argument["type"]:
-                        type = argument["type"].lstrip("enum::")
-                        if type.split(".")[0] in normal_classes:
-                            classes_to_import.append(type.split(".")[0])
+
 
         if "properties" in class_.keys():
             for prop in class_["properties"]:
