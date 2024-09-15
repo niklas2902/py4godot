@@ -78,8 +78,7 @@ operator_to_variant_operator = {"+": "GDExtensionVariantOperator.GDEXTENSION_VAR
 
 def generate_import():
     result = \
-        """from py4godot.utils.Wrapper4 import *
-from py4godot.utils.VariantTypeWrapper4 import *
+        """from py4godot.utils.VariantTypeWrapper4 import *
 import py4godot.classes.Object.Object as __object__
 """
     return result
@@ -155,6 +154,8 @@ def generate_class_imports(classes):
     result = generate_newline(result)
     result += "import py4godot.classes.typedarrays as __typedarrays__"
     result = generate_newline(result)
+    result += "from py4godot.core.signals import BuiltinSignal"
+    result = generate_newline(result)
     for class_ in classes:
         result += f"import py4godot.classes.{class_}.{class_} as __{class_.lower()}__"
         result = generate_newline(result)
@@ -170,7 +171,7 @@ def get_base_class(class_):
         return "__" + class_["inherits"].lower() + "__." + class_["inherits"]
     if class_["name"] in builtin_classes:
         return "VariantTypeWrapper4"
-    return "Wrapper4"
+    return ""
 
 
 def strip_symbols_from_type(type):
@@ -644,6 +645,9 @@ def generate_classes(classes, filename, is_core=False, is_typed_array=False):
         if (is_core):
             res = generate_newline(res)
             res += generate_init(class_)
+        if not is_core:
+            res += generate_signals(class_)
+            res = generate_newline(res)
         res += generate_common_methods(class_)
         res += generate_special_methods(class_)
         res = generate_newline(res)
@@ -812,6 +816,14 @@ def collect_typed_arrays_from_return(method_):
             return [ret_val.type]
     return []
 
+def generate_signals(cls):
+    if not "signals" in cls.keys():
+        return ""
+    res = ""
+    for signal in cls["signals"]:
+        res += f"{INDENT}{signal['name']}: BuiltinSignal"
+        res = generate_newline(res)
+    return res
 
 def collect_typed_arrays_from_args(method):
     typed_arrays = []
