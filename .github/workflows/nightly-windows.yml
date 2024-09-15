@@ -60,6 +60,7 @@ jobs:
             ${{ runner.os }}-checkout-
 
       - name: Sync .cpp file timestamps with .pyx files
+        shell: bash  # Specify Bash shell here
         run: |
           for pyx in $(find classes -name '*.pyx'); do
           cfile="${pyx%.pyx}.cpp"
