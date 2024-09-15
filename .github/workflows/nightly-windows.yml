@@ -44,6 +44,14 @@ jobs:
         with:
           python-version: "3.11.3"
 
+      - name: Cache entire directory
+        uses: actions/cache@v3
+        with:
+          path: .
+          key: ${{ runner.os }}-checkout-${{ hashFiles('**/package.json') }}  # Unique key based on project files
+          restore-keys: |
+            ${{ runner.os }}-checkout-
+
       - name: Install Mesa
         shell: cmd
         run: |

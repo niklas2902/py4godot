@@ -1455,12 +1455,13 @@ def generate_classes(classes, filename, is_core=False, is_typed_array=False):
             res += generate_method(class_, method)
             res = generate_newline(res)
         res += generate_operators_for_class(class_["name"])
+    text_to_write = "# distutils: language=c++\n"+res
     if (os.path.exists(filename)):
         with open(filename, "r") as already_existing_file:
-            if already_existing_file.read() == res:
+            if already_existing_file.read() == text_to_write:
                 return
     with open(filename, "w") as f:
-        f.write("# distutils: language=c++\n"+res)
+        f.write(text_to_write)
 
 
 def generate_dictionary_set_item():
