@@ -76,7 +76,7 @@ jobs:
         run: |
           python meson_scripts/generate_cast_helpers.py
 
-      - name: cythonize dev
+      - name: generate files
         run: |
           python generate.py
 
@@ -86,7 +86,7 @@ jobs:
 
       - name: build
         run: |
-          python example.py --target_platform=windows64 --compiler=msvc -create_plugin=False -buildtype=release
+          python build.py --target_platform=windows64 --compiler=gcc -create_plugin=False -buildtype=release
 
       - name: print structure
         run: |
