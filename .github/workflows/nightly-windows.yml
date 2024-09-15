@@ -62,12 +62,28 @@ jobs:
       - name: Sync .cpp file timestamps with .pyx files
         shell: bash  # Specify Bash shell here
         run: |
-          for pyx in $(find classes -name '*.pyx'); do
-          cfile="${pyx%.pyx}.cpp"
-          if [ -f "$cfile" ]; then
-           touch -r "$pyx" "$cfile"
-          fi
+          # Sync .cpp and .pxd file timestamps with .pyx files
+          find classes -name '*.pyx' | while read pyx_file; do
+              # Update .cpp file
+              cpp_file="${pyx_file%.pyx}.cpp"
+              if [ -f "$cpp_file" ]; then
+                  touch -r "$pyx_file" "$cpp_file"
+              fi
+          
+              # Update .pxd file
+              pxd_file="${pyx_file%.pyx}.pxd"
+              if [ -f "$pxd_file" ]; then
+                  touch -r "$pyx_file" "$pxd_file"
+              fi
           done
+
+# Sync standalone .pxd files with their corresponding .cpp files
+find classes -name '*.pxd' | while read pxd_file; do
+    cpp_file="${pxd_file%.pxd}.cpp"
+    if [ -f "$cpp_file" ]; then
+        touch -r "$pxd_file" "$cpp_file"
+    fi
+done
 
       - name: Install Mesa
         shell: cmd
