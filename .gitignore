@@ -78,3 +78,4 @@ py4godot/script_extension/script_extension_helpers_api.h
 /py4godot/utils/VariantTypeWrapper4.h
 /py4godot/test_file.cpp
 /py4godot/script_instance/PyScriptInstance_api.h
+/py4godot/utils/instance_utils.cpp
