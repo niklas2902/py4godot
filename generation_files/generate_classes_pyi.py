@@ -344,21 +344,6 @@ def generate_common_methods(class_):
     result = generate_newline(result)
     return result
 
-
-def generate_enums(class_):
-    if not "enums" in class_.keys():
-        return ""
-    res = ""
-    for enum in class_["enums"]:
-        res += f"cpdef enum {class_['name']}__{enum['name']}:"
-        res = generate_newline(res)
-        for enum_value in enum["values"]:
-            res += f"{INDENT}{class_['name']}__{enum_value['name']} = {enum_value['value']}"
-            res = generate_newline(res)
-    res = generate_newline(res)
-    return res
-
-
 def generate_properties(class_):
     result = ""
     if ("properties" in class_.keys()):
@@ -505,8 +490,7 @@ def generate_args(class_, method_with_args):
 
         else:
             # enums are marked with enum:: . To be able to use this, we have to strip this
-            arg_type = arg["type"].replace("enum::", "")
-            result += f"{pythonize_name(arg['name'])}:{ungodottype(untypearray(unenumize_type(arg_type)))} {generate_default_arg(arg, arg['type'])}, "
+            result += f"{pythonize_name(arg['name'])}:{ungodottype(untypearray(unenumize_type(arg['type'])))} {generate_default_arg(arg, arg['type'])}, "
     result = result[:-2]
     return result
 
@@ -529,11 +513,9 @@ def generate_default_arg(arg, arg_type):
 
 
 def unenumize_type(type_):
-    enum_type = type_.replace("enum::", "")
-    type_list = enum_type.split(".")
-    if len(type_list) > 1:
-        return type_list[-1]
-    return type_list[0]
+    if "enum::" in type_:
+        return "int"
+    return type_
 
 
 def untypearray(type_):
