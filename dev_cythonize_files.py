@@ -5,7 +5,7 @@ import time
 from Cython.Build import cythonize
 from tqdm import tqdm
 
-from get_dependencies_for_classes import generate_dev_build
+from meson_scripts.get_dependencies_for_classes import generate_dev_build
 
 NTHREADS = 3  # Adjust based on your CPU
 BATCH_SIZE = 3  # Adjust based on your system's capabilities
