@@ -687,8 +687,14 @@ def generate_classes(classes, filename, is_core=False):
         res = generate_newline(res)
     if (os.path.exists(filename)):
         with open(filename, "r") as already_existing_file:
-            if already_existing_file.read() == res:
+            text = already_existing_file.read()
+            if text == res:
                 return
+            else:
+                with open("output_already_existing", "w") as existing:
+                    existing.write(text)
+                with open("output_newly_generated", "w") as new:
+                    new.write(res)
     with open(filename, "w") as f:
         f.write(res)
 
@@ -933,6 +939,8 @@ if __name__ == "__main__":
             my_array_cls["name"] = generate_typed_array_name(typed_array)
             typed_arrays_names.add(generate_typed_array_name(typed_array))
             arrays.append(my_array_cls)
+        arrays = sorted(arrays, key = lambda a: a["name"] )
+        typed_arrays_names = sorted(list(typed_arrays_names))
 
         generate_classes(arrays + obj["builtin_classes"] + classes_to_generate, f"py4godot/classes/cpp_bridge.pxd",
                          is_core=True)
