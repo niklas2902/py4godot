@@ -78,6 +78,10 @@ jobs:
 
       - name: cythonize dev
         run: |
+          python generate.py
+
+      - name: cythonize dev
+        run: |
           python dev_cythonize_files.py
 
       - name: build
