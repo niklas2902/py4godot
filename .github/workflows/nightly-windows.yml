@@ -76,7 +76,7 @@ jobs:
         run: |
           python meson_scripts/generate_cast_helpers.py
 
-      - name: cythonize dev
+      - name: generate files
         run: |
           python generate.py
 
