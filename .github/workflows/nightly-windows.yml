@@ -55,12 +55,12 @@ jobs:
           path: |
             py4godot
             build
-          key: ${{ runner.os }}-checkout-${{ hashFiles('**/generate_classes.py', '**/generate_pxd_bridge.py', '**/extension_api.json') }}  # Unique key based on project files
+          key: ${{ runner.os }}-checkout-${{ hashFiles('**/generate_classes.py', '**/generate_pxd_bridge.py', '**/extension_api.json') }}
           restore-keys: |
             ${{ runner.os }}-checkout-
 
-      - name: Sync .cpp file timestamps with .pyx files
-        shell: bash  # Specify Bash shell here
+      - name: Sync file timestamps
+        shell: bash
         run: |
           # Sync .cpp and .pxd file timestamps with .pyx files
           find classes -name '*.pyx' | while read pyx_file; do
@@ -77,13 +77,13 @@ jobs:
               fi
           done
 
-# Sync standalone .pxd files with their corresponding .cpp files
-find classes -name '*.pxd' | while read pxd_file; do
-    cpp_file="${pxd_file%.pxd}.cpp"
-    if [ -f "$cpp_file" ]; then
-        touch -r "$pxd_file" "$cpp_file"
-    fi
-done
+          # Sync standalone .pxd files with their corresponding .cpp files
+          find classes -name '*.pxd' | while read pxd_file; do
+            cpp_file="${pxd_file%.pxd}.cpp"
+            if [ -f "$cpp_file" ]; then
+              touch -r "$pxd_file" "$cpp_file"
+            fi
+          done
 
       - name: Install Mesa
         shell: cmd
@@ -95,37 +95,25 @@ done
           mklink opengl32.dll "x64\opengl32.dll"
           mklink libglapi.dll "x64\libglapi.dll"
 
-      - name: print structure
-        run: |
-          python meson_scripts/print_tools.py
+      - name: Print structure
+        run: python meson_scripts/print_tools.py
 
       - name: Install dependencies
         run: |
           python -m pip install -r requirements.txt
           python -m pip install flake8
-      #- name: Lint with flake8
-      #  run: |
-          # stop the build if there are Python syntax errors or undefined names
-          #flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
-          # exit-zero treats all errors as warnings. The GitHub editor is 127 chars wide
-          #flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
-      - name: generate cast helpers
-        run: |
-          python meson_scripts/generate_cast_helpers.py
 
-      - name: generate files
-        run: |
-          python generate.py
+      - name: Generate cast helpers
+        run: python meson_scripts/generate_cast_helpers.py
 
-      - name: cythonize dev
-        run: |
-          python dev_cythonize_files.py
+      - name: Generate files
+        run: python generate.py
 
-      - name: build
-        run: |
-          python build.py --target_platform=windows64 --compiler=gcc -create_plugin=False -buildtype=release
+      - name: Cythonize dev
+        run: python dev_cythonize_files.py
 
-      - name: print structure
-        run: |
-          python meson_scripts/print_tools.py
+      - name: Build
+        run: python build.py --target_platform=windows64 --compiler=gcc -create_plugin=False -buildtype=release
 
+      - name: Print structure
+        run: python meson_scripts/print_tools.py
