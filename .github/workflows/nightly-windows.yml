@@ -44,11 +44,13 @@ jobs:
         with:
           python-version: "3.11.3"
 
-      - name: Cache entire directory
+      - name: Cache py4godot and build directories
         uses: actions/cache@v3
         with:
-          path: .
-          key: ${{ runner.os }}-checkout-${{ hashFiles('**/package.json') }}  # Unique key based on project files
+          path: |
+            py4godot/py4godot
+            py4godot/build
+          key: ${{ runner.os }}-checkout-${{ hashFiles('**/generate_classes.py', '**/generate_pxd_bridge.py') }}  # Unique key based on project files
           restore-keys: |
             ${{ runner.os }}-checkout-
 
