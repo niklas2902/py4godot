@@ -61,15 +61,6 @@ jobs:
       - name: Print structure
         run: python meson_scripts/print_tools.py
 
-      - name: Check if cache was loaded
-        shell: bash
-        run: |
-          if [ "${{ steps.cache_step.outputs.cache-hit }}" == "true" ]; then
-            python ../cache_hit_cythonize.py
-          else
-            python ../dev_cythonize.py
-          fi
-
       - name: Install Mesa
         shell: cmd
         run: |
@@ -97,9 +88,14 @@ jobs:
       - name: Generate files
         run: python generate.py
 
-      - name: Cythonize dev
-        run: python dev_cythonize_files.py
-
+      - name: Check if cache was loaded
+        shell: bash
+        run: |
+          if [ "${{ steps.cache_step.outputs.cache-hit }}" == "true" ]; then
+            python cache_hit_cythonize.py
+          else
+            python dev_cythonize_files.py
+          fi
       - name: Build
         run: python build.py --target_platform=windows64 --compiler=gcc -create_plugin=False -buildtype=release
 
