@@ -60,6 +60,7 @@ jobs:
             # Add any actions you want to take on success
           else
             echo "Cache does not exist"
+            exit ß
           fi
       - name: Print variables
         run: |
@@ -107,6 +108,7 @@ jobs:
           else
             echo "Cache miss for py4godot/classes directory"
             python dev_cythonize_files.pys
+            exit 0
           fi
     
       - name: Build
