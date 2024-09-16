@@ -16,17 +16,15 @@ jobs:
           ref: master
       - name: print latest_commit
         run: echo ${{ github.sha }}
-
       - id: should_run
         continue-on-error: true
         name: check latest commit is less than a day
         if: ${{ github.event_name == 'schedule' }}
-        run: test -z $(git rev-list  --after="24 hours"  ${{ github.sha }}) && echo "::set-output name=should_run::false"
+        run: test -z $(git rev-list  --after="24 hours"  ${{ github.sha }}) && echo "should_run=false" >> $GITHUB_OUTPUT
 
   windows-build:
-    #needs: check_date
-    #if: ${{ needs.check_date.outputs.should_run != 'false' }}
-
+    needs: check_date
+    if: ${{ needs.check_date.outputs.should_run != 'false' }}
     runs-on: windows-latest
     strategy:
       matrix:
@@ -34,39 +32,46 @@ jobs:
           - PLATFORM: 'windows-64'
             PYTHON_ARCH: 'x64'
             VS_ARCH: 'amd64'
-
     steps:
       - uses: actions/checkout@v3
         with:
           ref: master
+          submodules: 'recursive'
+
       - name: Set up Python 3.11.3
         uses: actions/setup-python@v2
         with:
           python-version: "3.11.3"
 
-      - name: Init submodule
-        run: |
-          git submodule init
-          git submodule update
-
-      - name: Cache py4godot and build directories
+      - name: Cache py4godot/classes directory
+        id: cache-py4godot-classes
         uses: actions/cache@v3
         with:
-          path: |
-            py4godot/classes
-          key: ${{ runner.os }}-checkout-${{ hashFiles('**/generate_classes.py', '**/generate_pxd_bridge.py', '**/extension_api.json') }}
+          path: py4godot/classes
+          key: ${{ runner.os }}-py4godot-classes-${{ hashFiles('**/generate_classes.py', '**/generate_pxd_bridge.py', '**/extension_api.json') }}
           restore-keys: |
-            ${{ runner.os }}-checkout-
-
-      - name: Check cache status for py4godot and build directories
+            ${{ runner.os }}-py4godot-classes-
+      - name: Conditional cythonize
         shell: bash
         run: |
-          if [[ -n "${{ steps.cache-py4godot-classes.outputs.cache-hit }}" ]]; then
-            echo "Cache hit for py4godot and build directories"
+          if [[ "${{ steps.cache-py4godot-classes.outputs.cache-hit }}" == 'true' ]]; then
+            echo "Cache hit for py4godot/classes directory"
           else
-            echo "Cache miss for py4godot and build directories"
+            echo "Cache miss for py4godot/classes directory"
           fi
-      
+
+      - name: Cache pip
+        uses: actions/cache@v3
+        with:
+          path: ~/.cache/pip
+          key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
+          restore-keys: |
+            ${{ runner.os }}-pip-
+
+      - name: Install dependencies
+        run: |
+          python -m pip install -r requirements.txt
+          python -m pip install flake8
 
       - name: Print structure
         run: python meson_scripts/print_tools.py
@@ -81,17 +86,6 @@ jobs:
           mklink opengl32.dll "x64\opengl32.dll"
           mklink libglapi.dll "x64\libglapi.dll"
 
-      - name: Install dependencies
-        run: |
-          python -m pip install -r requirements.txt
-          python -m pip install flake8
-      #- name: Lint with flake8
-      #  run: |
-          # stop the build if there are Python syntax errors or undefined names
-          #flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
-          # exit-zero treats all errors as warnings. The GitHub editor is 127 chars wide
-          #flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
-
       - name: Generate cast helpers
         run: python meson_scripts/generate_cast_helpers.py
 
@@ -101,13 +95,14 @@ jobs:
       - name: Conditional cythonize
         shell: bash
         run: |
-          if [[ -n "${{ steps.cache-py4godot-classes.outputs.cache-hit }}" ]]; then
-          # Cache hit, run cache-specific cythonize script
-          python cache_hit_cythonize.py
+          if [[ "${{ steps.cache-py4godot-classes.outputs.cache-hit }}" == 'true' ]]; then
+            echo "Cache hit for py4godot/classes directory"
+            python cache_hit_cythonize.py
           else
-          # Cache miss, run development cythonize script
-          python dev_cythonize_files.py
+            echo "Cache miss for py4godot/classes directory"
+            python dev_cythonize_files.py
           fi
+
       - name: Build
         run: python build.py --target_platform=windows64 --compiler=gcc -create_plugin=False -buildtype=release
 
