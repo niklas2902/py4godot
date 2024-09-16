@@ -1,1 +1,1 @@
-with open("../py4godot/classes/cache", "w"):pass
+with open("py4godot/classes/cache", "w"):pass
