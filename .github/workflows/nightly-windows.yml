@@ -120,7 +120,7 @@ jobs:
         run: python build.py --target_platform=windows64 --compiler=gcc -create_plugin=False -buildtype=release
 
       - name: Create cache
-        run: python create_cache.py
+        run: python meson_scripts/create_cache.py
 
       - name: Print structure
         run: python meson_scripts/print_tools.py
