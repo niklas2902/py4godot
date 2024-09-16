@@ -59,6 +59,7 @@ jobs:
             ${{ runner.os }}-checkout-
 
       - name: Check if cache was loaded
+        shell: bash
         run: |
           if [ "${{ steps.cache_step.outputs.cache-hit }}" == "true" ]; then
             python cache_hit_cythonize.py
