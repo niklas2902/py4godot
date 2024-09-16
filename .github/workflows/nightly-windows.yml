@@ -65,7 +65,8 @@ jobs:
             python cache_hit_cythonize.py
           else
             python dev_cythonize.py
-          fis
+          fi
+
       - name: Install Mesa
         shell: cmd
         run: |
