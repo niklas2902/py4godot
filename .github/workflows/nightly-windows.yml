@@ -112,7 +112,7 @@ jobs:
             python ../cache_hit_cythonize.py
           else
             echo "Cache miss for py4godot/classes directory"
-            python ../dev_cythonize_files.pys
+            python ../dev_cythonize_files.py
           fi
           set -e
     
