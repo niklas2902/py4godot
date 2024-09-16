@@ -59,6 +59,7 @@ jobs:
             ${{ runner.os }}-checkout-
 
       - name: Check cache status for py4godot and build directories
+        shell: bash
         run: |
           if [[ -n "${{ github.cache.restore_keys }}" ]]; then
             echo "Cache hit for py4godot and build directories"
