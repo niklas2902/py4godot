@@ -53,7 +53,7 @@ jobs:
         uses: actions/cache@v3
         with:
           path: |
-            classes
+            py4godot/classes
           key: ${{ runner.os }}-checkout-${{ hashFiles('**/generate_classes.py', '**/generate_pxd_bridge.py', '**/extension_api.json') }}
           restore-keys: |
             ${{ runner.os }}-checkout-
