@@ -1,7 +1,8 @@
 import json
 import os
+import sys
 
-from generation_files.generation_tools import write_if_different
+from generation_tools import write_if_different
 
 
 def generate_newline(str_):
@@ -15,6 +16,7 @@ def enumize_name(str_):
 
 if __name__ == "__main__":
     os.chdir("..")
+    sys.path.append(os.path.abspath('..'))
 
     res = ""
     res += "from py4godot.godot_bindings.binding4_godot4 cimport *"

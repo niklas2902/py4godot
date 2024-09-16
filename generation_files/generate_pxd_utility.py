@@ -1,10 +1,11 @@
 import json
 import os.path
+import sys
 
 from generate_classes import pythonize_boolean_types, unref_type, \
     unnull_type
 from generate_classes_hpp import has_native_struct, ungodottype
-from generation_files.generation_tools import write_if_different
+from generation_tools import write_if_different
 
 INDENT = "  "
 
@@ -261,6 +262,7 @@ def graph_to_list(node, liste):
 
 if __name__ == "__main__":
     os.chdir("..")
+    sys.path.append(os.path.abspath('..'))
     with open('py4godot/gdextension-api/extension_api.json', 'r', encoding="utf-8") as myfile:
         data = myfile.read()
         obj = json.loads(data)
