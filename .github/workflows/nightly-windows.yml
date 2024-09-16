@@ -61,7 +61,7 @@ jobs:
       - name: Check cache status for py4godot and build directories
         shell: bash
         run: |
-          if [[ -n "${{ steps.cache-classes.outputs.cache-hit }}" ]]; then
+          if [[ -n "${{ steps.cache-py4godot-classes.outputs.cache-hit }}" ]]; then
             echo "Cache hit for py4godot and build directories"
           else
             echo "Cache miss for py4godot and build directories"
@@ -101,7 +101,7 @@ jobs:
       - name: Conditional cythonize
         shell: bash
         run: |
-          if [[ -n "${{ steps.cache-classes.outputs.cache-hit }}" ]]; then
+          if [[ -n "${{ steps.cache-py4godot-classes.outputs.cache-hit }}" ]]; then
           # Cache hit, run cache-specific cythonize script
           python cache_hit_cythonize.py
           else
