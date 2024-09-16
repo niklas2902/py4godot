@@ -58,6 +58,9 @@ jobs:
           key: ${{ runner.os }}-checkout-${{ hashFiles('**/generate_classes.py', '**/generate_pxd_bridge.py', '**/extension_api.json') }}
           restore-keys: |
             ${{ runner.os }}-checkout-
+      
+      - name: Reset time of pxd
+        run: python meson_scripts/reset_times.py
 
       - name: Install Mesa
         shell: cmd
