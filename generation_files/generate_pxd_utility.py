@@ -4,6 +4,7 @@ import os.path
 from generate_classes import pythonize_boolean_types, unref_type, \
     unnull_type
 from generate_classes_hpp import has_native_struct, ungodottype
+from generation_files.generation_tools import write_if_different
 
 INDENT = "  "
 
@@ -282,5 +283,4 @@ if __name__ == "__main__":
             res += generate_method(utility_function)
             res = generate_newline(res)
 
-        with open("py4godot/functions.pxd", "w") as f:
-            f.write("# distutils: language=c++\n"+res)
+        write_if_different("py4godot/functions.pxd", "# distutils: language=c++\n"+res)

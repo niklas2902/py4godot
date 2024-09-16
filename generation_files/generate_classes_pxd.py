@@ -157,6 +157,17 @@ def generate_typed_array_name(name):
         pass
     return name.split("::")[1] + "TypedArray"
 
+def write_if_different(file_path, text_to_write):
+    if os.path.exists(file_path):
+        with open(file_path, 'r') as existing_file:
+            if existing_file.read() != text_to_write:
+                with open(file_path, 'w') as file_to_write:
+                    file_to_write.write(text_to_write)
+    else:
+        with open(file_path, 'w') as file_to_write:
+            file_to_write.write(text_to_write)
+
+
 
 if __name__ == "__main__":
     os.chdir("..")
@@ -165,7 +176,7 @@ if __name__ == "__main__":
         obj = json.loads(data)
         classes = set([class_['name'] if class_["name"] not in IGNORED_CLASSES else None for class_ in
                        obj['classes'] + obj["builtin_classes"]])
-        builtin_classes = set(class_["name"] for class_ in obj["builtin_classes"])
+        builtin_classes = [class_["name"] for class_ in obj["builtin_classes"]]
         res = generate_import()
         res = generate_newline(res)
         for class_ in builtin_classes:
@@ -180,8 +191,8 @@ if __name__ == "__main__":
 
             res += generate_pxd_class(class_)
 
-        with open("py4godot/classes/core.pxd", "w") as f:
-            f.write("# distutils: language=c++"+res)
+        text_to_write = "# distutils: language=c++"+res
+        write_if_different("py4godot/classes/core.pxd", text_to_write)
         for class_ in obj["classes"]:
             if class_["name"] in IGNORED_CLASSES:
                 continue
@@ -194,9 +205,9 @@ if __name__ == "__main__":
             res += f"from py4godot.classes.core cimport *"
             res = generate_newline(res)
             res += generate_pxd_class(class_)
-            with open(f"py4godot/classes/{class_['name']}/{class_['name']}.pxd", "w") as f:
-                f.write("# distutils: language=c++\n"+res)
 
+            text_to_write = "# distutils: language=c++\n"+res
+            write_if_different(f"py4godot/classes/{class_['name']}/{class_['name']}.pxd", text_to_write)
         array_cls = None
         arrays = []
         for cls in obj["builtin_classes"]:
@@ -208,6 +219,7 @@ if __name__ == "__main__":
             my_array_cls["name"] = generate_typed_array_name(typed_array)
             typed_arrays_names.add(generate_typed_array_name(typed_array))
             arrays.append(my_array_cls)
+        arrays = sorted(arrays, key = lambda array: array["name"])
 
         res = ""
         for class_ in arrays:
@@ -217,5 +229,7 @@ if __name__ == "__main__":
             res += f"from libcpp.memory cimport shared_ptr, allocator"
             res = generate_newline(res)
             res += generate_pxd_class(class_)
-            with open(f"py4godot/classes/typedarrays.pxd", "w") as f:
-                f.write("# distutils: language=c++\n"+res)
+
+        text_to_write = "# distutils: language=c++\n"+res
+
+        write_if_different(f"py4godot/classes/typedarrays.pxd", text_to_write)

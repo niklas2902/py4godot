@@ -2,6 +2,7 @@ import json
 import os.path
 
 from generate_enums import enumize_name
+from generation_files.generation_tools import write_if_different
 
 INDENT = "  "
 
@@ -90,7 +91,7 @@ def generate_import():
               "from py4godot.classes.core cimport *\n"
               "cimport py4godot.classes.Object.Object as py4godot_object\n")
 
-    for cls in builtin_classes:
+    for cls in sorted(list(builtin_classes)):
         if cls not in {"Nil", "float", "int", "bool"}:
             result += f"cimport py4godot.classes.core as py4godot_{cls.lower()}\n"
     return result
@@ -746,6 +747,4 @@ if __name__ == "__main__":
         for utility_function in obj["utility_functions"]:
             res += generate_method(utility_function)
             res = generate_newline(res)
-
-        with open("py4godot/functions.pyx", "w") as f:
-            f.write("# distutils: language=c++\n"+res)
+        write_if_different("py4godot/functions.pyx", "# distutils: language=c++\n"+res)

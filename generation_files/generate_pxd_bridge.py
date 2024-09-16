@@ -5,6 +5,7 @@ import os.path
 from generate_classes import pythonize_boolean_types, unref_type, \
     unnull_type
 from generate_classes_hpp import has_native_struct, ungodottype
+from generation_files.generation_tools import write_if_different
 
 INDENT = "  "
 
@@ -685,18 +686,7 @@ def generate_classes(classes, filename, is_core=False):
             res = generate_newline(res)
         res += generate_operators_for_class(class_["name"])
         res = generate_newline(res)
-    if (os.path.exists(filename)):
-        with open(filename, "r") as already_existing_file:
-            text = already_existing_file.read()
-            if text == res:
-                return
-            else:
-                with open("output_already_existing", "w") as existing:
-                    existing.write(text)
-                with open("output_newly_generated", "w") as new:
-                    new.write(res)
-    with open(filename, "w") as f:
-        f.write(res)
+    write_if_different(filename, res)
 
 
 def generate_dictionary_set_item():
