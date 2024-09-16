@@ -59,37 +59,6 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-checkout-
 
-      - name: Sync file timestamps
-        shell: bash
-        run: |
-          # Function to sync timestamps
-          sync_timestamps() {
-            local dir=$1
-            local extension=$2
-            if [ -d "$dir" ]; then
-              find "$dir" -name "*.$extension" | while read src_file; do
-                for target_ext in cpp pxd; do
-                  target_file="${src_file%.$extension}.$target_ext"
-                  if [ -f "$target_file" ]; then
-                    touch -r "$src_file" "$target_file"
-                  fi
-                done
-              done
-            else
-              echo "Directory $dir not found. Skipping timestamp sync for *.$extension files."
-            fi
-          }
-
-          # Sync .pyx files
-          sync_timestamps "py4godot" "pyx"
-          sync_timestamps "classes" "pyx"
-
-          # Sync standalone .pxd files
-          sync_timestamps "py4godot" "pxd"
-          sync_timestamps "classes" "pxd"
-
-          echo "File timestamp synchronization completed."
-          
       - name: Install Mesa
         shell: cmd
         run: |
