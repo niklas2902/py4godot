@@ -91,7 +91,7 @@ jobs:
       - name: Conditional cythonizes
         shell: bash
         run: |
-          if [ "${{ steps.cache_step.outputs.cache-hit }}" == "true" ]; then
+          if [[ -n "${{ github.cache.restore_keys }}" ]]; then
             python cache_hit_cythonize.py
           else
             python dev_cythonize_files.py
