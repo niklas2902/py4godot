@@ -1,6 +1,8 @@
 import json
 import os
 
+from generation_files.generation_tools import write_if_different
+
 
 def generate_newline(str_):
     return str_ + "\n"
@@ -42,9 +44,6 @@ if __name__ == "__main__":
                 res_pyi = generate_newline(res_pyi)
 
 
-    with open("py4godot/enums/enums.pyx", "w") as f:
-        f.write("# distutils: language=c++\n"+"from py4godot.godot_bindings.binding4_godot4 cimport *")
-    with open("py4godot/enums/enums.pxd", "w") as f:
-        f.write("# distutils: language=c++\n"+res)
-    with open("py4godot/enums/enums.pyi", "w") as f:
-        f.write("# distutils: language=c++\n"+res_pyi)
+    write_if_different("py4godot/enums/enums.pyx","# distutils: language=c++\n"+"from py4godot.godot_bindings.binding4_godot4 cimport *")
+    write_if_different("py4godot/enums/enums.pxd", "# distutils: language=c++\n"+res)
+    write_if_different("py4godot/enums/enums.pyi", "# distutils: language=c++\n"+res_pyi)

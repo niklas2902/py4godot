@@ -3,6 +3,7 @@ import json
 import os.path, os
 
 from generate_enums import enumize_name
+from generation_files.generation_tools import write_if_different
 
 INDENT = "  "
 
@@ -1456,12 +1457,7 @@ def generate_classes(classes, filename, is_core=False, is_typed_array=False):
             res = generate_newline(res)
         res += generate_operators_for_class(class_["name"])
     text_to_write = "# distutils: language=c++\n"+res
-    if (os.path.exists(filename)):
-        with open(filename, "r") as already_existing_file:
-            if already_existing_file.read() == text_to_write:
-                return
-    with open(filename, "w") as f:
-        f.write(text_to_write)
+    write_if_different(filename, text_to_write)
 
 
 def generate_dictionary_set_item():
@@ -1873,6 +1869,7 @@ if __name__ == "__main__":
             typed_arrays_names.add(generate_typed_array_name(typed_array))
             arrays.append(my_array_cls)
 
+        arrays = sorted(arrays, key= lambda key:key["name"])
         generate_classes(arrays, f"py4godot/classes/typedarrays.pyx", is_core=False, is_typed_array=True)
 
         generate_classes(obj["builtin_classes"], f"py4godot/classes/core.pyx", is_core=True)
