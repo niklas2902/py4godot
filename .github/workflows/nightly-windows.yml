@@ -59,6 +59,9 @@ jobs:
           else
             echo "Cache miss for py4godot/classes directory"
           fi
+      - name: Print variables
+        run: |
+          python variables.py
 
       - name: Cache pip
         uses: actions/cache@v3
