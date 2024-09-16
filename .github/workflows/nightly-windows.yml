@@ -60,7 +60,7 @@ jobs:
             # Add any actions you want to take on success
           else
             echo "Cache does not exist"
-            exit ß
+            exit 0
           fi
       - name: Print variables
         run: |
