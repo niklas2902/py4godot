@@ -58,6 +58,15 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-checkout-
 
+      - name: Check cache status for py4godot and build directories
+        run: |
+          if [[ -n "${{ github.cache.restore_keys }}" ]]; then
+            echo "Cache hit for py4godot and build directories"
+          else
+            echo "Cache miss for py4godot and build directories"
+          fi
+      
+
       - name: Print structure
         run: python meson_scripts/print_tools.py
 
@@ -88,13 +97,15 @@ jobs:
       - name: Generate files
         run: python generate.py
 
-      - name: Conditional cythonizes
+      - name: Conditional cythonize
         shell: bash
         run: |
           if [[ -n "${{ github.cache.restore_keys }}" ]]; then
-            python cache_hit_cythonize.py
+          # Cache hit, run cache-specific cythonize script
+          python cache_hit_cythonize.py
           else
-            python dev_cythonize_files.py
+          # Cache miss, run development cythonize script
+          python dev_cythonize_files.py
           fi
       - name: Build
         run: python build.py --target_platform=windows64 --compiler=gcc -create_plugin=False -buildtype=release
