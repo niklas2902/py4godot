@@ -5,7 +5,9 @@ import os
 import time
 
 files = glob.glob("C:/hostedtoolcache/windows/Python/3.11.3/x64/Lib/site-packages/Cython/Includes/libcpp/*.pxd")
-
+class_pxd_files = glob.glob("py4godot/classes/**/*.pxd", recursive=True)
+class_pyx_fiels = glob.glob("py4godot/classes/**/*.pyx", recursive=True)
+files += class_pxd_files + class_pyx_fiels
 # Desired modification time (in the format: Year, Month, Day, Hour, Minute, Second)
 desired_time = (2023, 1, 15, 12, 30, 0)
 
