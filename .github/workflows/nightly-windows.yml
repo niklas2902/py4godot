@@ -62,9 +62,9 @@ jobs:
         shell: bash
         run: |
           if [ "${{ steps.cache_step.outputs.cache-hit }}" == "true" ]; then
-            python cache_hit_cythonize.py
+            python ../cache_hit_cythonize.py
           else
-            python dev_cythonize.py
+            python ../dev_cythonize.py
           fi
 
       - name: Install Mesa
