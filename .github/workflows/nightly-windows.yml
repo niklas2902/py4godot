@@ -53,15 +53,18 @@ jobs:
         uses: actions/cache@v3
         with:
           path: |
-            py4godot
-            build
+            py4godot/classes
           key: ${{ runner.os }}-checkout-${{ hashFiles('**/generate_classes.py', '**/generate_pxd_bridge.py', '**/extension_api.json') }}
           restore-keys: |
             ${{ runner.os }}-checkout-
-      
-      - name: Reset time of pxd
-        run: python meson_scripts/reset_times.py
 
+      - name: Check if cache was loaded
+        run: |
+          if [ "${{ steps.cache_step.outputs.cache-hit }}" == "true" ]; then
+            python cache_hit_cythonize.py
+          else
+            python dev_cythonize.py
+          fis
       - name: Install Mesa
         shell: cmd
         run: |
