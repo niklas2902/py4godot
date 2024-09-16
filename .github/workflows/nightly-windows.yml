@@ -51,13 +51,15 @@ jobs:
           key: ${{ runner.os }}-py4godot-classes-${{ hashFiles('**/generate_classes.py', '**/generate_pxd_bridge.py', '**/extension_api.json') }}
           restore-keys: |
             ${{ runner.os }}-py4godot-classes-
-      - name: Conditional cythonize
+      - name: Run Python script and check result
         shell: bash
         run: |
-          if [[ "${{ steps.cache-py4godot-classes.outputs.cache-hit }}" == 'true' ]]; then
-            echo "Cache hit for py4godot/classes directory"
+          python meson_scripts/does_cache_exist.py
+          if [ $? -eq 0 ]; then
+            echo "Cache exists"
+            # Add any actions you want to take on success
           else
-            echo "Cache miss for py4godot/classes directory"
+            echo "Cache does not exist"
           fi
       - name: Print variables
         run: |
@@ -98,16 +100,20 @@ jobs:
       - name: Conditional cythonize
         shell: bash
         run: |
-          if [[ "${{ steps.cache-py4godot-classes.outputs.cache-hit }}" == 'true' ]]; then
+          python meson_scripts/does_cache_exist.py
+          if [ $? -eq 0 ]; then
             echo "Cache hit for py4godot/classes directory"
             python cache_hit_cythonize.py
           else
             echo "Cache miss for py4godot/classes directory"
-            python dev_cythonize_files.py
+            python dev_cythonize_files.pys
           fi
-
+    
       - name: Build
         run: python build.py --target_platform=windows64 --compiler=gcc -create_plugin=False -buildtype=release
+
+      - name: Create cache
+        run: python create_cache.py
 
       - name: Print structure
         run: python meson_scripts/print_tools.py
