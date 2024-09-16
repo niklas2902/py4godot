@@ -3,7 +3,7 @@ import json
 import os.path, os
 
 from generate_enums import enumize_name
-from generation_files.generation_tools import write_if_different
+from generation_tools import write_if_different
 
 INDENT = "  "
 
