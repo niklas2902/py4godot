@@ -44,6 +44,12 @@ depending on your RAM and CPU capabilities.
 $ python cythonize_files.py
 ```
 
+if you want faster building, you can build a minimized version. This doesn't include all the classes, but should be enoug for most development and simple projects. For this just call `generate.py`and `cythonize_files.py` with the following options:
+```console
+$ python generate.py -dev_build=True
+$ python cythonize_files.py -mode="dev"
+```
+
 #### Compile project
 Now, we just need to compile the project. The result of the compilation can be found on build/py4godot
 ```console
@@ -82,6 +88,11 @@ You can tweak the file a bit by changing the parameters `NTHREADS` and `BATCH_SI
 depending on your RAM and CPU capabilities.
 ```console
 $ python cythonize_files.py
+```
+if you want faster building, you can build a minimized version. This doesn't include all the classes, but should be enoug for most development and simple projects. For this just call `generate.py`and `cythonize_files.py` with the following options:
+```console
+$ python generate.py -dev_build=True
+$ python cythonize_files.py -mode="dev"
 ```
 
 #### Compile project
