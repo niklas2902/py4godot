@@ -1,7 +1,12 @@
 import subprocess
 import os
+import argparse
 
-
+my_parser = argparse.ArgumentParser(fromfile_prefix_chars='@')
+my_parser.add_argument('-dev_build', default=False,
+                       help='Specify whether you want to build a minimized version')
+# Execute parse_args()
+args = my_parser.parse_args()
 # List of scripts to execute
 dir = "generation_files"
 scripts = [
@@ -19,6 +24,8 @@ scripts = [
     'generate_utility_hpp.py',
     'generate_utils_cpp.py'
 ]
+if bool(args.dev_build):
+    scripts.append("generate_cast_helpers.py")
 
 # Make sure all necessary directories are there
 if not os.path.isdir("py4godot/classes"):

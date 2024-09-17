@@ -1,5 +1,10 @@
-from get_dependencies_for_classes import generate_dev_build
-
+import os
+import sys
+sys.path.append(os.getcwd()+"/../")
+sys.path.append(os.getcwd())
+if "generation_files" in os.getcwd():
+    os.chdir(os.getcwd()+"/../")
+from meson_scripts.get_dependencies_for_classes import generate_dev_build
 if __name__ == "__main__":
     res = ""
     import_ = """# distutils: language=c++
@@ -69,3 +74,5 @@ PyObject* cast_to_type(char* classname, PyObject* object_to_cast){
 
     with open("py4godot/cppcore/cast_type.cpp" , "w") as f:
         f.write(cast_type.replace("#cast_code", switch_statements))
+
+    os.chdir(os.getcwd()+"/generation_files")
