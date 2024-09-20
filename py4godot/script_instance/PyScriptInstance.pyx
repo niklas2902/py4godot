@@ -97,7 +97,7 @@ cdef api GDExtensionBool instance_has_method(GDExtensionScriptInstanceDataPtr p_
     except Exception as e:
         print_error(f"Exception: {e}")
     return hasattr(<object>(instance.owner), py_method_name_str)
-#
+
 cdef api MethodCallData instance_call(GDExtensionScriptInstanceDataPtr p_self, GDExtensionConstStringNamePtr p_method, const GDExtensionConstVariantPtr *p_args, GDExtensionInt p_argument_count, GDExtensionVariantPtr r_return, GDExtensionCallError *r_error) noexcept:
     py_log("instance_call")
     cdef InstanceData* instance = <InstanceData*>p_self

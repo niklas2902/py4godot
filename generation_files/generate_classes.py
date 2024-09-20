@@ -1408,7 +1408,7 @@ def generate_classes(classes, filename, is_core=False, is_typed_array=False):
             res = generate_newline(res)
 
     elif not is_core:
-        res += f"from py4godot.core.signals cimport BuiltinSignal"
+        res += f"from py4godot.signals cimport BuiltinSignal"
         res = generate_newline(res)
         res += f"from py4godot.classes.cpp_bridge cimport construct_{classes[0]['name']}"
         res = generate_newline(res)

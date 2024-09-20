@@ -1,16 +1,30 @@
 # distutils: language=c++
+import inspect
+
 from cpython.ref cimport Py_INCREF, Py_DECREF
 from py4godot.classes.core cimport *
-from py4godot.classes.Object.Object import Object
 from libcpp.memory cimport make_shared
-
 from py4godot.utils.print_tools import print_error
 from py4godot.utils.utils cimport *
+import py4godot.pluginscript_api.utils.annotations as annotations
+from py4godot.pluginscript_api.utils.helpers cimport get_variant_type
+cdef class SignalArg:
+    def __init__(self, name, type_):
+        self.name = name
+        self.variant_type = get_variant_type(type_)
+
+    cdef char* get_name(self):
+        return self.name.encode("utf-8")
+
+def signal(name, list args = []):
+    stack = inspect.stack()
+    name = stack[0].code_context[0].split("=")[0].split(":")[0].strip()
+    annotations.signal(name, args)
+    return None
+
 
 callables = []
-cdef class GDSignal():
-
-
+cdef class GDSignal(Signal):
     @staticmethod
     def new0():
         cdef GDSignal _class = GDSignal.__new__(GDSignal)

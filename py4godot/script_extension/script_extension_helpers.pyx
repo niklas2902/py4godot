@@ -1,6 +1,6 @@
 # distutils: language=c++
 from py4godot.classes.core cimport StringName, Signal, Callable, String
-from py4godot.core.signals cimport GDSignal
+from py4godot.signals cimport GDSignal
 from py4godot.classes.core cimport Dictionary
 from py4godot.classes.cpp_bridge cimport Dictionary as BridgeDictionary
 from py4godot.utils.print_tools import *

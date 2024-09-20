@@ -92,6 +92,7 @@ def generate_default_val(type_):
 
 def is_class(type_):
     return type(int) == type(type_)
+
 def collect_properties(cls):
 
     potential_properties = get_class_attributes(cls)

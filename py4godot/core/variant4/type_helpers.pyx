@@ -4,7 +4,7 @@ from py4godot.classes.Object.Object cimport *
 cimport py4godot.classes.cpp_bridge as bridge
 from cpython cimport Py_INCREF, Py_DECREF, PyObject
 
-from py4godot.core.signals cimport GDSignal
+from py4godot.signals cimport GDSignal
 from py4godot.utils.utils cimport *
 from py4godot.utils.print_tools import *
 from libcpp cimport bool

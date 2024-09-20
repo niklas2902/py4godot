@@ -154,7 +154,7 @@ def generate_class_imports(classes):
     result = generate_newline(result)
     result += "import py4godot.classes.typedarrays as __typedarrays__"
     result = generate_newline(result)
-    result += "from py4godot.core.signals import BuiltinSignal"
+    result += "from py4godot.signals import BuiltinSignal"
     result = generate_newline(result)
     for class_ in classes:
         result += f"import py4godot.classes.{class_}.{class_} as __{class_.lower()}__"

@@ -1101,6 +1101,12 @@ void Variant::init_from_py_object(PyObject* object, const char* type_name){
         case str2int("Signal"):
             construct_Signal(object);
             break;
+        case str2int("GDSignal"):
+            construct_Signal(object);
+            break;
+        case str2int("Builtin"):
+            construct_Signal(object);
+            break;
         case str2int("PackedVector2Array"):
             construct_PackedVector2Array(object);
             break;
@@ -1222,6 +1228,12 @@ void Variant::init_from_py_object_native_ptr(PyObject* object, const char* type_
             construct_PackedColorArray_native_ptr(object);
             break;
         case str2int("Signal"):
+            construct_Signal_native_ptr(object);
+            break;
+       case str2int("BuiltinSignal"):
+           construct_Signal_native_ptr(object);
+           break;
+        case str2int("GDSignal"):
             construct_Signal_native_ptr(object);
             break;
         case str2int("PackedVector2Array"):
@@ -1421,7 +1433,7 @@ auto converted_val =  get_packedcolorarray_from_pyobject(object);
         converted_val->shouldBeDeleted=true;
 }
 void Variant::construct_Signal(PyObject* object){
-auto converted_val =  get_signal_from_pyobject(object);
+        auto converted_val =  get_signal_from_pyobject(object);
         auto constructor = functions::get_get_variant_from_type_constructor()(GDExtensionVariantType::GDEXTENSION_VARIANT_TYPE_SIGNAL);
         constructor(native_ptr, &converted_val->godot_owner);
         converted_val->shouldBeDeleted=true;

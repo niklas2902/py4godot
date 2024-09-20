@@ -1,5 +1,7 @@
 const char* basic_template = R"(
-from py4godot import gdproperty, signal, private, gdclass, SignalArg
+from py4godot.methods import private
+from py4godot.signals import signal, SignalArg
+from py4godot.classes import gdclass
 from py4godot.classes.core import Vector3
 from py4godot.classes.{INHERITS}.{INHERITS} import {INHERITS}
 
@@ -13,7 +15,7 @@ class {CLASSNAME}({INHERITS}):
 	test_vector: Vector3 = gdproperty(Vector3, Vector3.new0())
 
 	# define signals like this
-	signal("test_signal", [SignalArg("test_arg", int)])
+	test_signal = signal("test_signal", [SignalArg("test_arg", int)])
 
 
 	def _ready(self) -> None:

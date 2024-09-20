@@ -17,7 +17,7 @@ def cythonize_batch(filenames):
 def main():
     file_patterns = [
         "py4godot/functions.pyx",
-        "py4godot/core/signals.pyx",
+        "py4godot/signals.pyx",
         "py4godot/classes/Object/Object.pyx",
         "py4godot/classes/AESContext/AESContext.pyx",
         "py4godot/core/variant4/Variant4.pyx",

@@ -116,7 +116,9 @@ def copy_stub_files(platform):
 
 def copy_experimental(platform):
     for file in ["py4godot/pluginscript_api/utils/experimental.py",
-                 "py4godot/pluginscript_api/utils/annotation_tools.py"]:
+                 "py4godot/pluginscript_api/utils/annotation_tools.py",
+                 "py4godot/classes/__init__.py",
+                 "py4godot/methods.py"]:
         if "windows" in platform:
             copy(file,
              f"build/final/{platform}/{config_data['python_ver']}-{platform}/python/Lib/site-packages/" + file)
