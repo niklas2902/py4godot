@@ -1,5 +1,4 @@
 import inspect
-from py4godot.pluginscript_api.utils.SignalArg import SignalArg
 from typing import TypeVar, List
 
 from py4godot.pluginscript_api.hints.BaseHint import BaseHint

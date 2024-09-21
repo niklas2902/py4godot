@@ -3,9 +3,32 @@ import_string_core = """
 """
 
 import_string_py4godot = """
-from py4godot.pluginscript_api.utils.SignalArg import SignalArg
-from py4godot.pluginscript_api.utils.annotations import gdclass, signal, private, gdmethod
-from py4godot.pluginscript_api.utils.experimental import gdproperty
+#Note: Improting from here is deprecated
+
+from typing import TypeVar
+from typing import List
+def SignalArg(name:str, type_:type):
+    import py4godot.signals as signals
+    return signals.SignalArg(name, type_)
+
+
+def signal(args: List[SignalArg]):
+    import py4godot.signals as signals
+    signals.signal(args)
+
+def private(method):
+    import py4godot.methods as methods
+    methods.private(method)
+
+def gdclass(cls = None, icon=None):
+    import py4godot.classes as classes
+    classes.gdclass(cls, icon)
+
+T = TypeVar("T")
+def gdproperty(type_:type, defaultval:T):
+    import py4godot.properties as properties
+    properties.gdproperty(type_, defaultval)
+
 import py4godot.constants as constants
 """
 

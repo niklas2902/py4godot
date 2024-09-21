@@ -9,13 +9,13 @@ from py4godot.classes.{INHERITS}.{INHERITS} import {INHERITS}
 class {CLASSNAME}({INHERITS}):
 
 	# define properties like this
-	test_int: int = gdproperty(int, 5)
-	test_float: float = gdproperty(float, 5.2)
-	test_bool: bool = gdproperty(bool, True)
-	test_vector: Vector3 = gdproperty(Vector3, Vector3.new0())
+	test_int: int = 5
+	test_float: float = 5.2
+	test_bool: bool = True
+	test_vector: Vector3 = Vector3.new3(1,2,3)
 
 	# define signals like this
-	test_signal = signal("test_signal", [SignalArg("test_arg", int)])
+	test_signal = signal([SignalArg("test_arg", int)])
 
 
 	def _ready(self) -> None:

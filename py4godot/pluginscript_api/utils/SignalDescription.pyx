@@ -1,7 +1,8 @@
 # distutils: language=c++
 from py4godot.pluginscript_api.utils.utils cimport *
-from py4godot.pluginscript_api.utils.SignalArg cimport *
+from py4godot.classes.core cimport Dictionary, String, StringName
 from libcpp.vector cimport vector
+from py4godot.signals cimport SignalArg
 from py4godot.utils.print_tools import print_error as pe
 
 cdef class SignalDescription:
@@ -16,7 +17,7 @@ cdef class SignalDescription:
         cdef char* c_name
         cdef py_bytes
         for i in range(len(args)):
-            arg_name = (<SignalArg>args[i]).name
+            arg_name = <str>((<SignalArg>args[i]).name)
             py_bytes = arg_name.encode("utf-8")
             c_name = py_bytes
             signal_arg.name = c_name

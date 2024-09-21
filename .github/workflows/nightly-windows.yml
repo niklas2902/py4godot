@@ -107,10 +107,10 @@ jobs:
           set -e
           if [ $exit_code -eq 0 ]; then
             echo "Cache hit for py4godot/classes directory"
-            python cythonize_files.py -mode="cache"
+            python meson_scripts/cythonize_files/cache_hit_cythonize.py
           else
             echo "Cache miss for py4godot/classes directory"
-            python cythonize_files.py -mode="dev"
+            python meson_scripts/cythonize_files/dev_cythonize_files.py
           fi
     
       - name: Build

@@ -16,7 +16,7 @@ cdef class SignalArg:
     cdef char* get_name(self):
         return self.name.encode("utf-8")
 
-def signal(name, list args = []):
+def signal(list args = []):
     stack = inspect.stack()
     name = stack[0].code_context[0].split("=")[0].split(":")[0].strip()
     annotations.signal(name, args)

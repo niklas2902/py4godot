@@ -1,4 +1,4 @@
-from py4godot.pluginscript_api.utils.SignalArg import SignalArg
+from py4godot.signalss import SignalArg
 
 
 class SignalDescription:

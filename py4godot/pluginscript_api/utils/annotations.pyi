@@ -2,7 +2,6 @@ from typing import TypeVar
 
 from py4godot.pluginscript_api.hints import *
 from py4godot.pluginscript_api.hints.BaseHint import BaseHint
-from py4godot.pluginscript_api.utils.SignalArg import SignalArg
 
 T = TypeVar("T")
 
