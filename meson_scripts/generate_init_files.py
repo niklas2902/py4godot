@@ -7,27 +7,31 @@ import_string_py4godot = """
 
 from typing import TypeVar
 from typing import List
+import inspect
 def SignalArg(name:str, type_:type):
     import py4godot.signals as signals
     return signals.SignalArg(name, type_)
 
 
 def signal(args: List[SignalArg]):
-    import py4godot.signals as signals
-    signals.signal(args)
+    import py4godot.pluginscript_api.utils.annotations as annotations
+    stack = inspect.stack()
+    name = stack[1].code_context[0].split("=")[0].split(":")[0].strip()
+    annotations.signal(name, args)
+    return None
 
 def private(method):
     import py4godot.methods as methods
-    methods.private(method)
+    return methods.private(method)
 
 def gdclass(cls = None, icon=None):
     import py4godot.classes as classes
-    classes.gdclass(cls, icon)
+    return classes.gdclass(cls, icon)
 
 T = TypeVar("T")
 def gdproperty(type_:type, defaultval:T):
     import py4godot.properties as properties
-    properties.gdproperty(type_, defaultval)
+    return properties.gdproperty(type_, defaultval)
 
 import py4godot.constants as constants
 """
