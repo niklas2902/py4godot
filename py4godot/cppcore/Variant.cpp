@@ -1104,7 +1104,7 @@ void Variant::init_from_py_object(PyObject* object, const char* type_name){
         case str2int("GDSignal"):
             construct_Signal(object);
             break;
-        case str2int("Builtin"):
+        case str2int("BuiltinSignal"):
             construct_Signal(object);
             break;
         case str2int("PackedVector2Array"):

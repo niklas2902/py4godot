@@ -29,6 +29,7 @@ current_class_name = ""
 cdef str class_icon = None
 already_registered_property_names = []
 already_registered_method_names = []
+already_registered_signal_names = []
 
 def load_module(module_name, file_to_load):
     # Check if the module is already loaded
@@ -97,7 +98,7 @@ def collect_properties(cls):
 
     potential_properties = get_class_attributes(cls)
     for potential_property in potential_properties.keys():
-        if potential_property not in already_registered_property_names:
+        if potential_property not in already_registered_property_names and potential_property not in already_registered_signal_names:
             if not is_class(potential_properties[potential_property]):
                 prop(potential_property, type(potential_properties[potential_property]),
                      potential_properties[potential_property])
@@ -114,7 +115,7 @@ def collect_methods(cls):
 
 cdef api TransferObject exec_class(str source_string, str class_name_):
     global  gd_class, properties, signals, methods,default_values, class_name, is_tool, methods, \
-        already_registered_property_names, already_registered_method_names
+        already_registered_property_names, already_registered_method_names, already_registered_signal_names
     current_class_name = class_name_
     cdef str py_source_string = source_string
     cdef str py_class_name_ = class_name_
@@ -130,6 +131,7 @@ cdef api TransferObject exec_class(str source_string, str class_name_):
     default_values = []
     already_registered_property_names = []
     already_registered_method_names.clear()
+    already_registered_signal_names.clear()
     cdef char* my_str_class
     cdef char* my_str_exception
     cdef bytes bytes_class
@@ -245,5 +247,6 @@ def private(func):
     return func
 
 def signal(name, list args = []):
+    already_registered_signal_names.append(name)
     description = SignalDescription(name, args)
     signals.append(description)
