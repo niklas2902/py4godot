@@ -3,11 +3,15 @@ import_string_core = """
 """
 
 import_string_py4godot = """
-#Note: Improting from here is deprecated
+#Note: Importing from here is deprecated
 
 from typing import TypeVar
 from typing import List
 import inspect
+
+def gdmethod(function:object):
+    pass
+    
 def SignalArg(name:str, type_:type):
     import py4godot.signals as signals
     return signals.SignalArg(name, type_)
@@ -31,7 +35,7 @@ def gdclass(cls = None, icon=None):
 T = TypeVar("T")
 def gdproperty(type_:type, defaultval:T):
     import py4godot.properties as properties
-    return properties.gdproperty(type_, defaultval)
+    return properties.gdproperty(type_, defaultval, 2)
 
 import py4godot.constants as constants
 """
