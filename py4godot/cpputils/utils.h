@@ -13,7 +13,7 @@ static bool is_none(PyObject* pyobject){
 }
 
 static void print_error(char* error_message){
-//    functions::get_print_error()(error_message, "test", "test", 1, 1);
+    //functions::get_print_error()(error_message, "test", "test", 1, 1);
 }
 
 static void break_(){
@@ -185,6 +185,16 @@ static String get_packed_string_array_element(void* ptr, int index){
     void* string_ptr = functions::get_packed_string_array_operator_index()(ptr, index);
     return String::new_static(*((void**)string_ptr));
 }
+
+static std::string get_python_typename(int get_val) {
+    return std::string{ "int" };
+}
+
+static PyObject* convert_to_PyObject(PyObject* val){
+    return val;
+}
+
+
 
 static std::string get_python_typename(PyObject* get_val) {
     // Step 1: Get the type object

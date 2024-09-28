@@ -205,6 +205,8 @@ PyObject* cast_to_type(char* classname, PyObject* object_to_cast){
             return cast_to_gltfskeleton(object_to_cast);
         case str2int("Script"):
             return cast_to_script(object_to_cast);
+        case str2int("PyScriptExtension"):
+            return cast_to_script(object_to_cast);
         case str2int("RenderData"):
             return cast_to_renderdata(object_to_cast);
         case str2int("CameraAttributes"):

@@ -313,7 +313,7 @@ def generate_method(class_, mMethod):
     if get_ret_value(mMethod) in builtin_classes - {"float", "int", "bool", "Nil"}:
         res += f"{INDENT}{generate_method_modifiers(mMethod)} {get_ret_value(mMethod)}* buffer_{class_['name']}_{mMethod['name']};"
     args = generate_args(mMethod, builtin_classes, should_make_shared=True)
-    args_normal = generate_args(mMethod, builtin_classes)
+    args_normal = generate_args(mMethod, builtin_classes, is_cpp=True)
     def_function = f"{INDENT}{generate_method_modifiers(mMethod)} {ungodottype(unenumize_type(untypearray(get_ret_value(mMethod))))} {pythonize_name(mMethod['name'])}({args_normal});"
     def_function2 = f"{INDENT}{INDENT}{generate_method_modifiers(mMethod)} {make_ptr(unvarianttype(ungodottype(unenumize_type(untypearray(get_ret_value(mMethod))))))} py_{pythonize_name(mMethod['name'])}({args});"
     res = generate_newline(res)
@@ -526,11 +526,16 @@ def generate_args(method_with_args, builtin_classes, is_cpp=False, should_make_s
                 result += f"{make_ptr(unenumize_type(untypearray(unbitfield_type(arg['type']))))} {pythonize_name(arg['name'])}, "
             else:
                 result += f"{unenumize_type(untypearray(unbitfield_type(arg['type'])))}* {pythonize_name(arg['name'])}, "
-        elif untypearray(arg["type"]) in builtin_classes - {"int", "float", "bool", "Nil"} or arg["type"] == "Variant":
+        elif untypearray(arg["type"]) in builtin_classes - {"int", "float", "bool", "Nil"}:
             if should_make_shared:
                 result += f"{make_ptr(unenumize_type(untypearray(unbitfield_type(arg['type']))))} {pythonize_name(arg['name'])}, "
             else:
                 result += f"{unenumize_type(untypearray(unbitfield_type(arg['type'])))}& {pythonize_name(arg['name'])}, "
+        elif arg["type"] == "Variant":
+            if is_cpp:
+                result += f"Variant& {pythonize_name(arg['name'])}, "
+            else:
+                result += f"PyObject* {pythonize_name(arg['name'])}, "
         elif untypearray(arg["type"]) in typed_arrays_names:
             if should_make_shared:
                 result += f"{make_ptr(unenumize_type(untypearray(unbitfield_type(arg['type']))))} {pythonize_name(arg['name'])}, "

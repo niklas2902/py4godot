@@ -121,7 +121,7 @@ def generate_args(method_with_args, builtin_classes, is_cpp=False, should_make_s
                 result += f"{make_ptr(unenumize_type(untypearray(unbitfield_type(arg['type']))))} {pythonize_name(arg['name'])}, "
             else:
                 result += f"{unenumize_type(untypearray(unbitfield_type(arg['type'])))}* {pythonize_name(arg['name'])}, "
-        elif untypearray(arg["type"]) in builtin_classes - {"int", "float", "bool", "Nil"} or arg["type"] == "Variant":
+        elif untypearray(arg["type"]) in builtin_classes - {"int", "float", "bool", "Nil"}:
             if should_make_shared:
                 result += f"{make_ptr(unenumize_type(untypearray(unbitfield_type(arg['type']))))} {pythonize_name(arg['name'])}, "
             else:
@@ -133,7 +133,11 @@ def generate_args(method_with_args, builtin_classes, is_cpp=False, should_make_s
                 result += f"{unenumize_type(untypearray(unbitfield_type(arg['type'])))}& {pythonize_name(arg['name'])}, "
         elif arg["type"] in {"int", "float", "bool"}:
             result += f"{ungodottype(unenumize_type(untypearray(unbitfield_type(arg['type']))))} {pythonize_name(arg['name'])}, "
-
+        elif arg["type"] == "Variant":
+            if is_cpp:
+                result += f"Variant& {pythonize_name(arg['name'])}, "
+            else:
+                result += f"PyObject* {pythonize_name(arg['name'])}, "
         else:
             # enums are marked with enum:: . To be able to use this, we have to strip this
             arg_type = arg["type"].replace("enum::", "")
@@ -746,7 +750,10 @@ def generate_args_for_call(method_with_args, is_cpp=False):
         return result[:-2]
 
     for arg in method_with_args["arguments"]:
-        result += f"{unref_pointer(pythonize_name(arg['type']), pythonize_name(arg['name']))}, "
+        if arg["type"] == "Variant":
+            result += f"variant_{pythonize_name(arg['name'])}, "
+        else:
+            result += f"{unref_pointer(pythonize_name(arg['type']), pythonize_name(arg['name']))}, "
     result = result[:-2]
 
     if method_with_args["is_vararg"]:
@@ -762,9 +769,23 @@ def unref_pointer_constructor(type_, value_name="value"):
         return f"*({value_name})"
     return value_name
 
-
+def generate_variants(method):
+    result = ""
+    if "arguments" not in method:
+        return result
+    for arg in method["arguments"]:
+        if arg["type"] == "Variant":
+            result += f"{INDENT*2}Variant variant_{pythonize_name(arg['name'])};"
+            result = generate_newline(result)
+            result += f"{INDENT*2}std::string type_name_{pythonize_name(arg['name'])} = get_python_typename({pythonize_name(arg['name'])});"
+            result = generate_newline(result)
+            result += f"{INDENT*2}variant_{pythonize_name(arg['name'])}.init_from_py_object_native_ptr({pythonize_name(arg['name'])}, type_name_{pythonize_name(arg['name'])}.c_str());"
+            result = generate_newline(result)
+    return result
 def generate_py_method_body(class_, method):
     result = ""
+
+    result += generate_variants(method)
 
     if ("return_value" in method.keys() or "return_type" in method.keys()):
         if not is_static(method):
@@ -803,10 +824,11 @@ def free_variants(mMethod):
         return res
     for argument in mMethod["arguments"]:
         if argument["type"] == "Variant":
-            res += f"{INDENT * 2}if (functions::get_variant_get_type()(&{pythonize_name(argument['name'])}.native_ptr) != GDEXTENSION_VARIANT_TYPE_OBJECT){{"
+            res += f"{INDENT * 2}if (functions::get_variant_get_type()(&variant_{pythonize_name(argument['name'])}.native_ptr) != GDEXTENSION_VARIANT_TYPE_OBJECT){{"
             res = generate_newline(res)
-            res += f"{INDENT * 3}functions::get_variant_destroy()(&{pythonize_name(argument['name'])}.native_ptr);"
+            res += f"{INDENT * 3}functions::get_variant_destroy()(&variant_{pythonize_name(argument['name'])}.native_ptr);"
             res = generate_newline(res)
+            res += f"{INDENT*3}Py_DECREF({pythonize_name(argument['name'])});"
             res +=f"{INDENT*2}}}"
             res = generate_newline(res)
     return res
@@ -823,7 +845,7 @@ def generate_method(class_, mMethod):
     if has_native_struct(mMethod):
         return res
     args = generate_args(mMethod, builtin_classes, True, False)
-    args_ptr = generate_args(mMethod, builtin_classes, True, True)
+    args_ptr = generate_args(mMethod, builtin_classes, False, True)
     py_def_function = f"{INDENT}{make_ptr(unvarianttype(ungodottype(unenumize_type(untypearray(get_ret_value(mMethod))))))} {class_['name']}::py_{pythonize_name(mMethod['name'])}({args_ptr})" + "{"
     res += py_def_function
     res = generate_newline(res)

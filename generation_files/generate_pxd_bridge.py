@@ -342,7 +342,7 @@ def generate_method(class_, mMethod):
     res = ""
     if has_native_struct(mMethod):
         return res
-    args = generate_args(mMethod)
+    args = generate_args(mMethod, is_py_method=True)
     def_function = f"{INDENT * 2}{make_to_ptr(unvarianttype(ungodottype(untypearray(get_ret_value(mMethod)))))} py_{pythonize_name(mMethod['name'])}({args});"
     res = generate_newline(res)
     res += generate_method_modifiers(mMethod)
@@ -492,7 +492,7 @@ def unbitfield_type(arg_type):
     return arg_type
 
 
-def generate_args(method_with_args):
+def generate_args(method_with_args, is_py_method=False):
     result = " "
     if (is_static(method_with_args)):
         result = ""
@@ -503,7 +503,10 @@ def generate_args(method_with_args):
 
     for arg in method_with_args["arguments"]:
         if arg["type"] == "Variant":
-            result += f"{unenumize_type(untypearray(unbitfield_type(arg['type'])))}& {pythonize_name(arg['name'])}, "
+            if is_py_method:
+                result += f"PyObject* {pythonize_name(arg['name'])}, "
+            else:
+                result += f"{unenumize_type(untypearray(unbitfield_type(arg['type'])))}& {pythonize_name(arg['name'])}, "
         elif not arg["type"].startswith("enum::") and not arg["type"].startswith("bitfield::") and not untypearray(
                 arg["type"]) in builtin_classes and not is_typed_array(untypearray(arg["type"])):
             result += f"shared_ptr[{unenumize_type(untypearray(unbitfield_type(arg['type'])))}] {pythonize_name(arg['name'])}, "
