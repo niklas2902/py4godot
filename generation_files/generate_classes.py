@@ -596,12 +596,6 @@ def generate_variants(method):
     result = ""
     if "arguments" not in method.keys():
         return result
-    for arg in method["arguments"]:
-        if arg["type"] == "Variant":
-            result += f"{INDENT * 2}cdef PyVariant py_variant_{pythonize_name(arg['name'])} = create_variant_from_py_object({pythonize_name(arg['name'])})"
-            result = generate_newline(result)
-            result += f"{INDENT * 2}cdef Variant variant_{pythonize_name(arg['name'])} = py_variant_{pythonize_name(arg['name'])}.variant"
-            result = generate_newline(result)
     return result
 
 def cast_from_obj_to_type(typename):
@@ -683,7 +677,7 @@ def generate_method_args(method):
         elif "TypedArray" in untypearray(arg["type"]):
             res += f"{pythonize_name(arg['name'])}.{untypearray(arg['type'])}_internal_class_ptr, "
         elif arg["type"] == "Variant":
-            res += f"variant_{(pythonize_name(arg['name']))}, "
+            res += f"to_py_object({(pythonize_name(arg['name']))}), "
         else:
             res += f"{pythonize_name(arg['name'])}, "
     if method["is_vararg"]:
@@ -1738,7 +1732,7 @@ def generate_cast(class_):
     res = generate_newline(res)
     res += f"{INDENT * 2}assert other != None # Object to be casted must not be None"
     res = generate_newline(res)
-    res += f"{INDENT * 2}cdef {class_['name']} cls = {class_['name']}()"
+    res += f"{INDENT * 2}cdef {class_['name']} cls = {class_['name']}.__new__({class_['name']})"
     res = generate_newline(res)
     res += f"{INDENT * 2}cls.{class_['name']}_internal_class_ptr = cast_to_{class_['name']}(other.Object_internal_class_ptr.get())"
     res = generate_newline(res)

@@ -27,4 +27,6 @@ cdef unicode gd_string_to_py_string(core.String string)
 cdef unicode gd_string_to_py_string_instance(core.String string)
 cdef unicode gd_string_name_to_py_string(core.StringName string_name)
 
+cdef PyObject* to_py_object(val) # converting c++ values to python objects (especially useful for typedarrays/intTypedArray, as it works with ints, which are interpreted as C++)
+
 cdef bool shouldCreateObject = True
