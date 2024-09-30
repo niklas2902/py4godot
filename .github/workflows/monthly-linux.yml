@@ -68,9 +68,9 @@ jobs:
         git submodule init
         git submodule update
 
-    -name: Cythonize
-        run: |
-            python3 cythonize_files.py
+    - name: Cythonize
+      run: |
+          python3 cythonize_files.py
 
     - name: build
       run: |
