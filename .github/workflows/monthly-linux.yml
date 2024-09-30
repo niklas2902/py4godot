@@ -68,11 +68,15 @@ jobs:
         git submodule init
         git submodule update
 
+    - name: Generate files
+      run: |
+          python3 generate.py
+
     - name: Cythonize
       run: |
           python3 cythonize_files.py
 
-    - name: build
+    - name: Create plugin
       run: |
          python3 create_plugin.py
 
