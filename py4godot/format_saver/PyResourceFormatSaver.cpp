@@ -133,8 +133,6 @@ namespace saver{
 
 
     GDExtensionClassCallVirtual get_virtual_saver(void *p_userdata, GDExtensionConstStringNamePtr p_name) {
-        LOCK(mtx);
-
         StringName name = StringName::new_static(((void**)const_cast<GDExtensionTypePtr>(p_name))[0]);
 
         String name_string = String::new2(name);
