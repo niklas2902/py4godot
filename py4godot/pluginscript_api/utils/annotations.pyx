@@ -95,6 +95,8 @@ def is_class(type_):
     return type(int) == type(type_)
 
 def collect_properties(cls):
+    if cls is None:
+        return
 
     potential_properties = get_class_attributes(cls)
     for potential_property in potential_properties.keys():
@@ -107,6 +109,9 @@ def collect_properties(cls):
                      generate_default_val(potential_properties[potential_property]))
 
 def collect_methods(cls):
+    if cls is None:
+        return
+
     methods = methods = [func for name, func in inspect.getmembers(cls, predicate=inspect.isfunction)]
     for method in methods:
         if method not in already_registered_method_names:
