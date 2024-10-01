@@ -105,23 +105,24 @@ Here you can see a basic example of how this project can be used.
 Please note, that the classname you define under `@gdclass` must match the filename
 ```python 
 # file: node3d.py
-from py4godot import prop, signal, gdclass, gdmethod
-from py4godot.pluginscript_api.utils.SignalArg import *
-from py4godot.constants.constants import VECTOR3_UP
+from py4godot.methods import private
+from py4godot.signals import signal, SignalArg
+from py4godot.classes import gdclass
 from py4godot.classes.core import Vector3
+from py4godot.constants.constants import VECTOR3_UP
 from py4godot.classes.Node3D.Node3D import Node3D
 
 @gdclass
 class node3d(Node3D):
 
 	# define properties like this
-	test_int: int = gdproperty(int, 5)
-	test_float: float = gdproperty(float, 5.2)
-	test_bool: bool = gdproperty(bool, True)
-	test_vector: Vector3 = gdproperty(Vector3, Vector3.new0())
+	test_int: int = 5
+	test_float: float = 5.2
+	test_bool: bool = True
+	test_vector: Vector3 = Vector3.new3(1,2,3)
 
 	# define signals like this
-	signal("test_signal", [SignalArg("test_arg", int)])
+	test_signal = signal([SignalArg("test_arg", int)])
 
 
 	def _ready(self) -> None:
@@ -132,8 +133,8 @@ class node3d(Node3D):
 		pass
 		# put dynamic code here
 
-	# Method visible in the godot editor, e.g. for connecting signals
-	@gdmethod
+	# Hide the method in the godot editor
+	@private
 	def test_method(self):
 		pass
 ```

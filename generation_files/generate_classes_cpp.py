@@ -751,7 +751,7 @@ def generate_args_for_call(method_with_args, is_cpp=False):
 
     for arg in method_with_args["arguments"]:
         if arg["type"] == "Variant":
-            result += f"variant_{pythonize_name(arg['name'])}, "
+            result += f"*variant_{pythonize_name(arg['name'])}, "
         else:
             result += f"{unref_pointer(pythonize_name(arg['type']), pythonize_name(arg['name']))}, "
     result = result[:-2]
@@ -775,11 +775,11 @@ def generate_variants(method):
         return result
     for arg in method["arguments"]:
         if arg["type"] == "Variant":
-            result += f"{INDENT*2}Variant variant_{pythonize_name(arg['name'])};"
+            result += f"{INDENT*2}Variant* variant_{pythonize_name(arg['name'])} = new Variant(1);"
             result = generate_newline(result)
             result += f"{INDENT*2}std::string type_name_{pythonize_name(arg['name'])} = get_python_typename({pythonize_name(arg['name'])});"
             result = generate_newline(result)
-            result += f"{INDENT*2}variant_{pythonize_name(arg['name'])}.init_from_py_object_native_ptr({pythonize_name(arg['name'])}, type_name_{pythonize_name(arg['name'])}.c_str());"
+            result += f"{INDENT*2}variant_{pythonize_name(arg['name'])}->init_from_py_object_native_ptr({pythonize_name(arg['name'])}, type_name_{pythonize_name(arg['name'])}.c_str());"
             result = generate_newline(result)
     return result
 def generate_py_method_body(class_, method):
@@ -824,9 +824,11 @@ def free_variants(mMethod):
         return res
     for argument in mMethod["arguments"]:
         if argument["type"] == "Variant":
-            res += f"{INDENT * 2}if (functions::get_variant_get_type()(&variant_{pythonize_name(argument['name'])}.native_ptr) != GDEXTENSION_VARIANT_TYPE_OBJECT){{"
+            res += f"{INDENT * 2}if (functions::get_variant_get_type()(&variant_{pythonize_name(argument['name'])}->native_ptr) != GDEXTENSION_VARIANT_TYPE_OBJECT){{"
             res = generate_newline(res)
-            res += f"{INDENT * 3}functions::get_variant_destroy()(&variant_{pythonize_name(argument['name'])}.native_ptr);"
+            res += f"{INDENT * 3}functions::get_variant_destroy()(&variant_{pythonize_name(argument['name'])}->native_ptr);"
+            res = generate_newline(res)
+            res += f"{INDENT * 3}free(variant_{pythonize_name(argument['name'])});"
             res = generate_newline(res)
             res += f"{INDENT*3}Py_DECREF({pythonize_name(argument['name'])});"
             res +=f"{INDENT*2}}}"
