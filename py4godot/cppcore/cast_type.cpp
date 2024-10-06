@@ -57,18 +57,34 @@ PyObject* cast_to_type(char* classname, PyObject* object_to_cast){
             return cast_to_animationnodeadd2(object_to_cast);
         case str2int("AnimationNodeAdd3"):
             return cast_to_animationnodeadd3(object_to_cast);
+        case str2int("AnimationNodeAnimation"):
+            return cast_to_animationnodeanimation(object_to_cast);
         case str2int("AnimationNodeBlend2"):
             return cast_to_animationnodeblend2(object_to_cast);
         case str2int("AnimationNodeBlend3"):
             return cast_to_animationnodeblend3(object_to_cast);
+        case str2int("AnimationNodeBlendSpace1D"):
+            return cast_to_animationnodeblendspace1d(object_to_cast);
+        case str2int("AnimationNodeBlendSpace2D"):
+            return cast_to_animationnodeblendspace2d(object_to_cast);
+        case str2int("AnimationNodeBlendTree"):
+            return cast_to_animationnodeblendtree(object_to_cast);
         case str2int("AnimationNodeOneShot"):
             return cast_to_animationnodeoneshot(object_to_cast);
         case str2int("AnimationNodeOutput"):
             return cast_to_animationnodeoutput(object_to_cast);
+        case str2int("AnimationNodeStateMachine"):
+            return cast_to_animationnodestatemachine(object_to_cast);
         case str2int("AnimationNodeSub2"):
             return cast_to_animationnodesub2(object_to_cast);
         case str2int("AnimationNodeSync"):
             return cast_to_animationnodesync(object_to_cast);
+        case str2int("AnimationNodeTimeScale"):
+            return cast_to_animationnodetimescale(object_to_cast);
+        case str2int("AnimationNodeTimeSeek"):
+            return cast_to_animationnodetimeseek(object_to_cast);
+        case str2int("AnimationNodeTransition"):
+            return cast_to_animationnodetransition(object_to_cast);
         case str2int("AnimationPlayer"):
             return cast_to_animationplayer(object_to_cast);
         case str2int("AnimationRootNode"):
@@ -93,12 +109,20 @@ PyObject* cast_to_type(char* classname, PyObject* object_to_cast){
             return cast_to_audioeffect(object_to_cast);
         case str2int("AudioEffectAmplify"):
             return cast_to_audioeffectamplify(object_to_cast);
+        case str2int("AudioEffectBandLimitFilter"):
+            return cast_to_audioeffectbandlimitfilter(object_to_cast);
+        case str2int("AudioEffectBandPassFilter"):
+            return cast_to_audioeffectbandpassfilter(object_to_cast);
         case str2int("AudioEffectCapture"):
             return cast_to_audioeffectcapture(object_to_cast);
         case str2int("AudioEffectChorus"):
             return cast_to_audioeffectchorus(object_to_cast);
+        case str2int("AudioEffectCompressor"):
+            return cast_to_audioeffectcompressor(object_to_cast);
         case str2int("AudioEffectDelay"):
             return cast_to_audioeffectdelay(object_to_cast);
+        case str2int("AudioEffectDistortion"):
+            return cast_to_audioeffectdistortion(object_to_cast);
         case str2int("AudioEffectEQ"):
             return cast_to_audioeffecteq(object_to_cast);
         case str2int("AudioEffectEQ10"):
@@ -109,18 +133,36 @@ PyObject* cast_to_type(char* classname, PyObject* object_to_cast){
             return cast_to_audioeffecteq6(object_to_cast);
         case str2int("AudioEffectFilter"):
             return cast_to_audioeffectfilter(object_to_cast);
+        case str2int("AudioEffectHardLimiter"):
+            return cast_to_audioeffecthardlimiter(object_to_cast);
+        case str2int("AudioEffectHighPassFilter"):
+            return cast_to_audioeffecthighpassfilter(object_to_cast);
+        case str2int("AudioEffectHighShelfFilter"):
+            return cast_to_audioeffecthighshelffilter(object_to_cast);
         case str2int("AudioEffectInstance"):
             return cast_to_audioeffectinstance(object_to_cast);
         case str2int("AudioEffectLimiter"):
             return cast_to_audioeffectlimiter(object_to_cast);
+        case str2int("AudioEffectLowPassFilter"):
+            return cast_to_audioeffectlowpassfilter(object_to_cast);
+        case str2int("AudioEffectLowShelfFilter"):
+            return cast_to_audioeffectlowshelffilter(object_to_cast);
+        case str2int("AudioEffectNotchFilter"):
+            return cast_to_audioeffectnotchfilter(object_to_cast);
         case str2int("AudioEffectPanner"):
             return cast_to_audioeffectpanner(object_to_cast);
         case str2int("AudioEffectPhaser"):
             return cast_to_audioeffectphaser(object_to_cast);
+        case str2int("AudioEffectPitchShift"):
+            return cast_to_audioeffectpitchshift(object_to_cast);
         case str2int("AudioEffectRecord"):
             return cast_to_audioeffectrecord(object_to_cast);
         case str2int("AudioEffectReverb"):
             return cast_to_audioeffectreverb(object_to_cast);
+        case str2int("AudioEffectSpectrumAnalyzer"):
+            return cast_to_audioeffectspectrumanalyzer(object_to_cast);
+        case str2int("AudioEffectStereoEnhance"):
+            return cast_to_audioeffectstereoenhance(object_to_cast);
         case str2int("AudioListener2D"):
             return cast_to_audiolistener2d(object_to_cast);
         case str2int("AudioListener3D"):
@@ -135,12 +177,26 @@ PyObject* cast_to_type(char* classname, PyObject* object_to_cast){
             return cast_to_audiostream(object_to_cast);
         case str2int("AudioStreamGenerator"):
             return cast_to_audiostreamgenerator(object_to_cast);
+        case str2int("AudioStreamGeneratorPlayback"):
+            return cast_to_audiostreamgeneratorplayback(object_to_cast);
+        case str2int("AudioStreamInteractive"):
+            return cast_to_audiostreaminteractive(object_to_cast);
         case str2int("AudioStreamMP3"):
             return cast_to_audiostreammp3(object_to_cast);
+        case str2int("AudioStreamMicrophone"):
+            return cast_to_audiostreammicrophone(object_to_cast);
         case str2int("AudioStreamOggVorbis"):
             return cast_to_audiostreamoggvorbis(object_to_cast);
         case str2int("AudioStreamPlayback"):
             return cast_to_audiostreamplayback(object_to_cast);
+        case str2int("AudioStreamPlaybackOggVorbis"):
+            return cast_to_audiostreamplaybackoggvorbis(object_to_cast);
+        case str2int("AudioStreamPlaybackPlaylist"):
+            return cast_to_audiostreamplaybackplaylist(object_to_cast);
+        case str2int("AudioStreamPlaybackPolyphonic"):
+            return cast_to_audiostreamplaybackpolyphonic(object_to_cast);
+        case str2int("AudioStreamPlaybackResampled"):
+            return cast_to_audiostreamplaybackresampled(object_to_cast);
         case str2int("AudioStreamPlayer"):
             return cast_to_audiostreamplayer(object_to_cast);
         case str2int("AudioStreamPlayer2D"):
@@ -149,6 +205,12 @@ PyObject* cast_to_type(char* classname, PyObject* object_to_cast){
             return cast_to_audiostreamplayer3d(object_to_cast);
         case str2int("AudioStreamPlaylist"):
             return cast_to_audiostreamplaylist(object_to_cast);
+        case str2int("AudioStreamPolyphonic"):
+            return cast_to_audiostreampolyphonic(object_to_cast);
+        case str2int("AudioStreamRandomizer"):
+            return cast_to_audiostreamrandomizer(object_to_cast);
+        case str2int("AudioStreamSynchronized"):
+            return cast_to_audiostreamsynchronized(object_to_cast);
         case str2int("AudioStreamWAV"):
             return cast_to_audiostreamwav(object_to_cast);
         case str2int("BackBufferCopy"):
@@ -207,6 +269,10 @@ PyObject* cast_to_type(char* classname, PyObject* object_to_cast){
             return cast_to_camera3d(object_to_cast);
         case str2int("CameraAttributes"):
             return cast_to_cameraattributes(object_to_cast);
+        case str2int("CameraAttributesPhysical"):
+            return cast_to_cameraattributesphysical(object_to_cast);
+        case str2int("CameraAttributesPractical"):
+            return cast_to_cameraattributespractical(object_to_cast);
         case str2int("CameraFeed"):
             return cast_to_camerafeed(object_to_cast);
         case str2int("CameraServer"):
@@ -275,10 +341,20 @@ PyObject* cast_to_type(char* classname, PyObject* object_to_cast){
             return cast_to_compositoreffect(object_to_cast);
         case str2int("CompressedCubemap"):
             return cast_to_compressedcubemap(object_to_cast);
+        case str2int("CompressedCubemapArray"):
+            return cast_to_compressedcubemaparray(object_to_cast);
         case str2int("CompressedTexture2D"):
             return cast_to_compressedtexture2d(object_to_cast);
+        case str2int("CompressedTexture2DArray"):
+            return cast_to_compressedtexture2darray(object_to_cast);
         case str2int("CompressedTexture3D"):
             return cast_to_compressedtexture3d(object_to_cast);
+        case str2int("CompressedTextureLayered"):
+            return cast_to_compressedtexturelayered(object_to_cast);
+        case str2int("ConcavePolygonShape2D"):
+            return cast_to_concavepolygonshape2d(object_to_cast);
+        case str2int("ConcavePolygonShape3D"):
+            return cast_to_concavepolygonshape3d(object_to_cast);
         case str2int("ConeTwistJoint3D"):
             return cast_to_conetwistjoint3d(object_to_cast);
         case str2int("ConfigFile"):
@@ -339,8 +415,24 @@ PyObject* cast_to_type(char* classname, PyObject* object_to_cast){
             return cast_to_editorcommandpalette(object_to_cast);
         case str2int("EditorDebuggerPlugin"):
             return cast_to_editordebuggerplugin(object_to_cast);
+        case str2int("EditorDebuggerSession"):
+            return cast_to_editordebuggersession(object_to_cast);
         case str2int("EditorExportPlatform"):
             return cast_to_editorexportplatform(object_to_cast);
+        case str2int("EditorExportPlatformAndroid"):
+            return cast_to_editorexportplatformandroid(object_to_cast);
+        case str2int("EditorExportPlatformIOS"):
+            return cast_to_editorexportplatformios(object_to_cast);
+        case str2int("EditorExportPlatformLinuxBSD"):
+            return cast_to_editorexportplatformlinuxbsd(object_to_cast);
+        case str2int("EditorExportPlatformMacOS"):
+            return cast_to_editorexportplatformmacos(object_to_cast);
+        case str2int("EditorExportPlatformPC"):
+            return cast_to_editorexportplatformpc(object_to_cast);
+        case str2int("EditorExportPlatformWeb"):
+            return cast_to_editorexportplatformweb(object_to_cast);
+        case str2int("EditorExportPlatformWindows"):
+            return cast_to_editorexportplatformwindows(object_to_cast);
         case str2int("EditorExportPlugin"):
             return cast_to_editorexportplugin(object_to_cast);
         case str2int("EditorFeatureProfile"):
@@ -349,14 +441,20 @@ PyObject* cast_to_type(char* classname, PyObject* object_to_cast){
             return cast_to_editorfiledialog(object_to_cast);
         case str2int("EditorFileSystem"):
             return cast_to_editorfilesystem(object_to_cast);
+        case str2int("EditorFileSystemDirectory"):
+            return cast_to_editorfilesystemdirectory(object_to_cast);
         case str2int("EditorImportPlugin"):
             return cast_to_editorimportplugin(object_to_cast);
         case str2int("EditorInspector"):
             return cast_to_editorinspector(object_to_cast);
+        case str2int("EditorInspectorPlugin"):
+            return cast_to_editorinspectorplugin(object_to_cast);
         case str2int("EditorInterface"):
             return cast_to_editorinterface(object_to_cast);
         case str2int("EditorNode3DGizmo"):
             return cast_to_editornode3dgizmo(object_to_cast);
+        case str2int("EditorNode3DGizmoPlugin"):
+            return cast_to_editornode3dgizmoplugin(object_to_cast);
         case str2int("EditorPaths"):
             return cast_to_editorpaths(object_to_cast);
         case str2int("EditorPlugin"):
@@ -365,6 +463,20 @@ PyObject* cast_to_type(char* classname, PyObject* object_to_cast){
             return cast_to_editorproperty(object_to_cast);
         case str2int("EditorResourcePicker"):
             return cast_to_editorresourcepicker(object_to_cast);
+        case str2int("EditorResourcePreview"):
+            return cast_to_editorresourcepreview(object_to_cast);
+        case str2int("EditorResourceTooltipPlugin"):
+            return cast_to_editorresourcetooltipplugin(object_to_cast);
+        case str2int("EditorSceneFormatImporter"):
+            return cast_to_editorsceneformatimporter(object_to_cast);
+        case str2int("EditorSceneFormatImporterGLTF"):
+            return cast_to_editorsceneformatimportergltf(object_to_cast);
+        case str2int("EditorSceneFormatImporterUFBX"):
+            return cast_to_editorsceneformatimporterufbx(object_to_cast);
+        case str2int("EditorScenePostImport"):
+            return cast_to_editorscenepostimport(object_to_cast);
+        case str2int("EditorScenePostImportPlugin"):
+            return cast_to_editorscenepostimportplugin(object_to_cast);
         case str2int("EditorScript"):
             return cast_to_editorscript(object_to_cast);
         case str2int("EditorScriptPicker"):
@@ -375,6 +487,12 @@ PyObject* cast_to_type(char* classname, PyObject* object_to_cast){
             return cast_to_editorsettings(object_to_cast);
         case str2int("EditorSpinSlider"):
             return cast_to_editorspinslider(object_to_cast);
+        case str2int("EditorSyntaxHighlighter"):
+            return cast_to_editorsyntaxhighlighter(object_to_cast);
+        case str2int("EditorTranslationParserPlugin"):
+            return cast_to_editortranslationparserplugin(object_to_cast);
+        case str2int("EditorUndoRedoManager"):
+            return cast_to_editorundoredomanager(object_to_cast);
         case str2int("EditorVCSInterface"):
             return cast_to_editorvcsinterface(object_to_cast);
         case str2int("EncodedObjectAsID"):
@@ -431,6 +549,8 @@ PyObject* cast_to_type(char* classname, PyObject* object_to_cast){
             return cast_to_gltfcamera(object_to_cast);
         case str2int("GLTFDocument"):
             return cast_to_gltfdocument(object_to_cast);
+        case str2int("GLTFDocumentExtension"):
+            return cast_to_gltfdocumentextension(object_to_cast);
         case str2int("GLTFLight"):
             return cast_to_gltflight(object_to_cast);
         case str2int("GLTFMesh"):
@@ -457,6 +577,20 @@ PyObject* cast_to_type(char* classname, PyObject* object_to_cast){
             return cast_to_gpuparticles2d(object_to_cast);
         case str2int("GPUParticles3D"):
             return cast_to_gpuparticles3d(object_to_cast);
+        case str2int("GPUParticlesAttractor3D"):
+            return cast_to_gpuparticlesattractor3d(object_to_cast);
+        case str2int("GPUParticlesAttractorBox3D"):
+            return cast_to_gpuparticlesattractorbox3d(object_to_cast);
+        case str2int("GPUParticlesAttractorSphere3D"):
+            return cast_to_gpuparticlesattractorsphere3d(object_to_cast);
+        case str2int("GPUParticlesCollision3D"):
+            return cast_to_gpuparticlescollision3d(object_to_cast);
+        case str2int("GPUParticlesCollisionBox3D"):
+            return cast_to_gpuparticlescollisionbox3d(object_to_cast);
+        case str2int("GPUParticlesCollisionSDF3D"):
+            return cast_to_gpuparticlescollisionsdf3d(object_to_cast);
+        case str2int("GPUParticlesCollisionSphere3D"):
+            return cast_to_gpuparticlescollisionsphere3d(object_to_cast);
         case str2int("Generic6DOFJoint3D"):
             return cast_to_generic6dofjoint3d(object_to_cast);
         case str2int("Geometry2D"):
@@ -515,6 +649,8 @@ PyObject* cast_to_type(char* classname, PyObject* object_to_cast){
             return cast_to_image(object_to_cast);
         case str2int("ImageFormatLoader"):
             return cast_to_imageformatloader(object_to_cast);
+        case str2int("ImageFormatLoaderExtension"):
+            return cast_to_imageformatloaderextension(object_to_cast);
         case str2int("ImageTexture"):
             return cast_to_imagetexture(object_to_cast);
         case str2int("ImageTexture3D"):
@@ -525,6 +661,8 @@ PyObject* cast_to_type(char* classname, PyObject* object_to_cast){
             return cast_to_immediatemesh(object_to_cast);
         case str2int("ImporterMesh"):
             return cast_to_importermesh(object_to_cast);
+        case str2int("ImporterMeshInstance3D"):
+            return cast_to_importermeshinstance3d(object_to_cast);
         case str2int("Input"):
             return cast_to_input(object_to_cast);
         case str2int("InputEvent"):
@@ -535,18 +673,32 @@ PyObject* cast_to_type(char* classname, PyObject* object_to_cast){
             return cast_to_inputeventfromwindow(object_to_cast);
         case str2int("InputEventGesture"):
             return cast_to_inputeventgesture(object_to_cast);
+        case str2int("InputEventJoypadButton"):
+            return cast_to_inputeventjoypadbutton(object_to_cast);
+        case str2int("InputEventJoypadMotion"):
+            return cast_to_inputeventjoypadmotion(object_to_cast);
         case str2int("InputEventKey"):
             return cast_to_inputeventkey(object_to_cast);
         case str2int("InputEventMIDI"):
             return cast_to_inputeventmidi(object_to_cast);
+        case str2int("InputEventMagnifyGesture"):
+            return cast_to_inputeventmagnifygesture(object_to_cast);
         case str2int("InputEventMouse"):
             return cast_to_inputeventmouse(object_to_cast);
+        case str2int("InputEventMouseButton"):
+            return cast_to_inputeventmousebutton(object_to_cast);
+        case str2int("InputEventMouseMotion"):
+            return cast_to_inputeventmousemotion(object_to_cast);
         case str2int("InputEventPanGesture"):
             return cast_to_inputeventpangesture(object_to_cast);
         case str2int("InputEventScreenDrag"):
             return cast_to_inputeventscreendrag(object_to_cast);
+        case str2int("InputEventScreenTouch"):
+            return cast_to_inputeventscreentouch(object_to_cast);
         case str2int("InputEventShortcut"):
             return cast_to_inputeventshortcut(object_to_cast);
+        case str2int("InputEventWithModifiers"):
+            return cast_to_inputeventwithmodifiers(object_to_cast);
         case str2int("InputMap"):
             return cast_to_inputmap(object_to_cast);
         case str2int("InstancePlaceholder"):
@@ -651,10 +803,16 @@ PyObject* cast_to_type(char* classname, PyObject* object_to_cast){
             return cast_to_multimeshinstance3d(object_to_cast);
         case str2int("MultiplayerAPI"):
             return cast_to_multiplayerapi(object_to_cast);
+        case str2int("MultiplayerAPIExtension"):
+            return cast_to_multiplayerapiextension(object_to_cast);
         case str2int("MultiplayerPeer"):
             return cast_to_multiplayerpeer(object_to_cast);
+        case str2int("MultiplayerPeerExtension"):
+            return cast_to_multiplayerpeerextension(object_to_cast);
         case str2int("MultiplayerSpawner"):
             return cast_to_multiplayerspawner(object_to_cast);
+        case str2int("MultiplayerSynchronizer"):
+            return cast_to_multiplayersynchronizer(object_to_cast);
         case str2int("Mutex"):
             return cast_to_mutex(object_to_cast);
         case str2int("NativeMenu"):
@@ -669,10 +827,16 @@ PyObject* cast_to_type(char* classname, PyObject* object_to_cast){
             return cast_to_navigationlink3d(object_to_cast);
         case str2int("NavigationMesh"):
             return cast_to_navigationmesh(object_to_cast);
+        case str2int("NavigationMeshGenerator"):
+            return cast_to_navigationmeshgenerator(object_to_cast);
         case str2int("NavigationObstacle2D"):
             return cast_to_navigationobstacle2d(object_to_cast);
         case str2int("NavigationObstacle3D"):
             return cast_to_navigationobstacle3d(object_to_cast);
+        case str2int("NavigationPathQueryResult2D"):
+            return cast_to_navigationpathqueryresult2d(object_to_cast);
+        case str2int("NavigationPathQueryResult3D"):
+            return cast_to_navigationpathqueryresult3d(object_to_cast);
         case str2int("NavigationPolygon"):
             return cast_to_navigationpolygon(object_to_cast);
         case str2int("NavigationRegion2D"):
@@ -711,8 +875,12 @@ PyObject* cast_to_type(char* classname, PyObject* object_to_cast){
             return cast_to_occluderinstance3d(object_to_cast);
         case str2int("OccluderPolygon2D"):
             return cast_to_occluderpolygon2d(object_to_cast);
+        case str2int("OfflineMultiplayerPeer"):
+            return cast_to_offlinemultiplayerpeer(object_to_cast);
         case str2int("OggPacketSequence"):
             return cast_to_oggpacketsequence(object_to_cast);
+        case str2int("OggPacketSequencePlayback"):
+            return cast_to_oggpacketsequenceplayback(object_to_cast);
         case str2int("OmniLight3D"):
             return cast_to_omnilight3d(object_to_cast);
         case str2int("OpenXRAPIExtension"):
@@ -723,10 +891,16 @@ PyObject* cast_to_type(char* classname, PyObject* object_to_cast){
             return cast_to_openxractionmap(object_to_cast);
         case str2int("OpenXRActionSet"):
             return cast_to_openxractionset(object_to_cast);
+        case str2int("OpenXRCompositionLayer"):
+            return cast_to_openxrcompositionlayer(object_to_cast);
+        case str2int("OpenXRCompositionLayerQuad"):
+            return cast_to_openxrcompositionlayerquad(object_to_cast);
         case str2int("OpenXRHand"):
             return cast_to_openxrhand(object_to_cast);
         case str2int("OpenXRIPBinding"):
             return cast_to_openxripbinding(object_to_cast);
+        case str2int("OpenXRInteractionProfile"):
+            return cast_to_openxrinteractionprofile(object_to_cast);
         case str2int("OpenXRInterface"):
             return cast_to_openxrinterface(object_to_cast);
         case str2int("OptimizedTranslation"):
@@ -737,6 +911,8 @@ PyObject* cast_to_type(char* classname, PyObject* object_to_cast){
             return cast_to_pckpacker(object_to_cast);
         case str2int("PackedDataContainer"):
             return cast_to_packeddatacontainer(object_to_cast);
+        case str2int("PackedDataContainerRef"):
+            return cast_to_packeddatacontainerref(object_to_cast);
         case str2int("PackedScene"):
             return cast_to_packedscene(object_to_cast);
         case str2int("PacketPeer"):
@@ -761,6 +937,8 @@ PyObject* cast_to_type(char* classname, PyObject* object_to_cast){
             return cast_to_parallaxbackground(object_to_cast);
         case str2int("ParallaxLayer"):
             return cast_to_parallaxlayer(object_to_cast);
+        case str2int("ParticleProcessMaterial"):
+            return cast_to_particleprocessmaterial(object_to_cast);
         case str2int("Path2D"):
             return cast_to_path2d(object_to_cast);
         case str2int("Path3D"):
@@ -775,32 +953,76 @@ PyObject* cast_to_type(char* classname, PyObject* object_to_cast){
             return cast_to_physicalbone2d(object_to_cast);
         case str2int("PhysicalBone3D"):
             return cast_to_physicalbone3d(object_to_cast);
+        case str2int("PhysicalBoneSimulator3D"):
+            return cast_to_physicalbonesimulator3d(object_to_cast);
         case str2int("PhysicalSkyMaterial"):
             return cast_to_physicalskymaterial(object_to_cast);
         case str2int("PhysicsBody2D"):
             return cast_to_physicsbody2d(object_to_cast);
         case str2int("PhysicsBody3D"):
             return cast_to_physicsbody3d(object_to_cast);
+        case str2int("PhysicsDirectBodyState2D"):
+            return cast_to_physicsdirectbodystate2d(object_to_cast);
+        case str2int("PhysicsDirectBodyState3D"):
+            return cast_to_physicsdirectbodystate3d(object_to_cast);
+        case str2int("PhysicsDirectSpaceState2D"):
+            return cast_to_physicsdirectspacestate2d(object_to_cast);
+        case str2int("PhysicsDirectSpaceState3D"):
+            return cast_to_physicsdirectspacestate3d(object_to_cast);
         case str2int("PhysicsMaterial"):
             return cast_to_physicsmaterial(object_to_cast);
+        case str2int("PhysicsPointQueryParameters2D"):
+            return cast_to_physicspointqueryparameters2d(object_to_cast);
+        case str2int("PhysicsPointQueryParameters3D"):
+            return cast_to_physicspointqueryparameters3d(object_to_cast);
+        case str2int("PhysicsRayQueryParameters2D"):
+            return cast_to_physicsrayqueryparameters2d(object_to_cast);
+        case str2int("PhysicsRayQueryParameters3D"):
+            return cast_to_physicsrayqueryparameters3d(object_to_cast);
         case str2int("PhysicsServer2D"):
             return cast_to_physicsserver2d(object_to_cast);
+        case str2int("PhysicsServer2DExtension"):
+            return cast_to_physicsserver2dextension(object_to_cast);
+        case str2int("PhysicsServer2DManager"):
+            return cast_to_physicsserver2dmanager(object_to_cast);
         case str2int("PhysicsServer3D"):
             return cast_to_physicsserver3d(object_to_cast);
+        case str2int("PhysicsServer3DExtension"):
+            return cast_to_physicsserver3dextension(object_to_cast);
+        case str2int("PhysicsServer3DManager"):
+            return cast_to_physicsserver3dmanager(object_to_cast);
+        case str2int("PhysicsShapeQueryParameters2D"):
+            return cast_to_physicsshapequeryparameters2d(object_to_cast);
+        case str2int("PhysicsShapeQueryParameters3D"):
+            return cast_to_physicsshapequeryparameters3d(object_to_cast);
+        case str2int("PhysicsTestMotionParameters2D"):
+            return cast_to_physicstestmotionparameters2d(object_to_cast);
+        case str2int("PhysicsTestMotionParameters3D"):
+            return cast_to_physicstestmotionparameters3d(object_to_cast);
+        case str2int("PhysicsTestMotionResult2D"):
+            return cast_to_physicstestmotionresult2d(object_to_cast);
+        case str2int("PhysicsTestMotionResult3D"):
+            return cast_to_physicstestmotionresult3d(object_to_cast);
         case str2int("PinJoint2D"):
             return cast_to_pinjoint2d(object_to_cast);
         case str2int("PinJoint3D"):
             return cast_to_pinjoint3d(object_to_cast);
         case str2int("PlaceholderCubemap"):
             return cast_to_placeholdercubemap(object_to_cast);
+        case str2int("PlaceholderCubemapArray"):
+            return cast_to_placeholdercubemaparray(object_to_cast);
         case str2int("PlaceholderMaterial"):
             return cast_to_placeholdermaterial(object_to_cast);
         case str2int("PlaceholderMesh"):
             return cast_to_placeholdermesh(object_to_cast);
         case str2int("PlaceholderTexture2D"):
             return cast_to_placeholdertexture2d(object_to_cast);
+        case str2int("PlaceholderTexture2DArray"):
+            return cast_to_placeholdertexture2darray(object_to_cast);
         case str2int("PlaceholderTexture3D"):
             return cast_to_placeholdertexture3d(object_to_cast);
+        case str2int("PlaceholderTextureLayered"):
+            return cast_to_placeholdertexturelayered(object_to_cast);
         case str2int("PlaneMesh"):
             return cast_to_planemesh(object_to_cast);
         case str2int("PointLight2D"):
@@ -819,10 +1041,14 @@ PyObject* cast_to_type(char* classname, PyObject* object_to_cast){
             return cast_to_popupmenu(object_to_cast);
         case str2int("PopupPanel"):
             return cast_to_popuppanel(object_to_cast);
+        case str2int("PortableCompressedTexture2D"):
+            return cast_to_portablecompressedtexture2d(object_to_cast);
         case str2int("PrimitiveMesh"):
             return cast_to_primitivemesh(object_to_cast);
         case str2int("PrismMesh"):
             return cast_to_prismmesh(object_to_cast);
+        case str2int("ProceduralSkyMaterial"):
+            return cast_to_proceduralskymaterial(object_to_cast);
         case str2int("ProgressBar"):
             return cast_to_progressbar(object_to_cast);
         case str2int("ProjectSettings"):
@@ -837,6 +1063,14 @@ PyObject* cast_to_type(char* classname, PyObject* object_to_cast){
             return cast_to_rdattachmentformat(object_to_cast);
         case str2int("RDFramebufferPass"):
             return cast_to_rdframebufferpass(object_to_cast);
+        case str2int("RDPipelineColorBlendState"):
+            return cast_to_rdpipelinecolorblendstate(object_to_cast);
+        case str2int("RDPipelineDepthStencilState"):
+            return cast_to_rdpipelinedepthstencilstate(object_to_cast);
+        case str2int("RDPipelineMultisampleState"):
+            return cast_to_rdpipelinemultisamplestate(object_to_cast);
+        case str2int("RDPipelineRasterizationState"):
+            return cast_to_rdpipelinerasterizationstate(object_to_cast);
         case str2int("RDSamplerState"):
             return cast_to_rdsamplerstate(object_to_cast);
         case str2int("RDShaderFile"):
@@ -853,6 +1087,8 @@ PyObject* cast_to_type(char* classname, PyObject* object_to_cast){
             return cast_to_rduniform(object_to_cast);
         case str2int("RDVertexAttribute"):
             return cast_to_rdvertexattribute(object_to_cast);
+        case str2int("RandomNumberGenerator"):
+            return cast_to_randomnumbergenerator(object_to_cast);
         case str2int("Range"):
             return cast_to_range(object_to_cast);
         case str2int("RayCast2D"):
@@ -883,10 +1119,14 @@ PyObject* cast_to_type(char* classname, PyObject* object_to_cast){
             return cast_to_renderdatard(object_to_cast);
         case str2int("RenderSceneBuffers"):
             return cast_to_renderscenebuffers(object_to_cast);
+        case str2int("RenderSceneBuffersExtension"):
+            return cast_to_renderscenebuffersextension(object_to_cast);
         case str2int("RenderSceneBuffersRD"):
             return cast_to_renderscenebuffersrd(object_to_cast);
         case str2int("RenderSceneData"):
             return cast_to_renderscenedata(object_to_cast);
+        case str2int("RenderSceneDataExtension"):
+            return cast_to_renderscenedataextension(object_to_cast);
         case str2int("RenderSceneDataRD"):
             return cast_to_renderscenedatard(object_to_cast);
         case str2int("RenderingDevice"):
@@ -901,10 +1141,30 @@ PyObject* cast_to_type(char* classname, PyObject* object_to_cast){
             return cast_to_resourceformatsaver(object_to_cast);
         case str2int("ResourceImporter"):
             return cast_to_resourceimporter(object_to_cast);
+        case str2int("ResourceImporterBMFont"):
+            return cast_to_resourceimporterbmfont(object_to_cast);
+        case str2int("ResourceImporterBitMap"):
+            return cast_to_resourceimporterbitmap(object_to_cast);
+        case str2int("ResourceImporterDynamicFont"):
+            return cast_to_resourceimporterdynamicfont(object_to_cast);
+        case str2int("ResourceImporterImage"):
+            return cast_to_resourceimporterimage(object_to_cast);
+        case str2int("ResourceImporterImageFont"):
+            return cast_to_resourceimporterimagefont(object_to_cast);
         case str2int("ResourceImporterMP3"):
             return cast_to_resourceimportermp3(object_to_cast);
         case str2int("ResourceImporterOBJ"):
             return cast_to_resourceimporterobj(object_to_cast);
+        case str2int("ResourceImporterOggVorbis"):
+            return cast_to_resourceimporteroggvorbis(object_to_cast);
+        case str2int("ResourceImporterScene"):
+            return cast_to_resourceimporterscene(object_to_cast);
+        case str2int("ResourceImporterShaderFile"):
+            return cast_to_resourceimportershaderfile(object_to_cast);
+        case str2int("ResourceImporterTexture"):
+            return cast_to_resourceimportertexture(object_to_cast);
+        case str2int("ResourceImporterTextureAtlas"):
+            return cast_to_resourceimportertextureatlas(object_to_cast);
         case str2int("ResourceImporterWAV"):
             return cast_to_resourceimporterwav(object_to_cast);
         case str2int("ResourceLoader"):
@@ -929,6 +1189,8 @@ PyObject* cast_to_type(char* classname, PyObject* object_to_cast){
             return cast_to_rootmotionview(object_to_cast);
         case str2int("SceneMultiplayer"):
             return cast_to_scenemultiplayer(object_to_cast);
+        case str2int("SceneReplicationConfig"):
+            return cast_to_scenereplicationconfig(object_to_cast);
         case str2int("SceneState"):
             return cast_to_scenestate(object_to_cast);
         case str2int("SceneTree"):
@@ -947,6 +1209,8 @@ PyObject* cast_to_type(char* classname, PyObject* object_to_cast){
             return cast_to_scriptextension(object_to_cast);
         case str2int("ScriptLanguage"):
             return cast_to_scriptlanguage(object_to_cast);
+        case str2int("ScriptLanguageExtension"):
+            return cast_to_scriptlanguageextension(object_to_cast);
         case str2int("ScrollBar"):
             return cast_to_scrollbar(object_to_cast);
         case str2int("ScrollContainer"):
@@ -963,6 +1227,8 @@ PyObject* cast_to_type(char* classname, PyObject* object_to_cast){
             return cast_to_separator(object_to_cast);
         case str2int("Shader"):
             return cast_to_shader(object_to_cast);
+        case str2int("ShaderGlobalsOverride"):
+            return cast_to_shaderglobalsoverride(object_to_cast);
         case str2int("ShaderInclude"):
             return cast_to_shaderinclude(object_to_cast);
         case str2int("ShaderMaterial"):
@@ -983,10 +1249,24 @@ PyObject* cast_to_type(char* classname, PyObject* object_to_cast){
             return cast_to_skeleton3d(object_to_cast);
         case str2int("SkeletonIK3D"):
             return cast_to_skeletonik3d(object_to_cast);
+        case str2int("SkeletonModification2D"):
+            return cast_to_skeletonmodification2d(object_to_cast);
+        case str2int("SkeletonModification2DCCDIK"):
+            return cast_to_skeletonmodification2dccdik(object_to_cast);
+        case str2int("SkeletonModification2DFABRIK"):
+            return cast_to_skeletonmodification2dfabrik(object_to_cast);
+        case str2int("SkeletonModification2DJiggle"):
+            return cast_to_skeletonmodification2djiggle(object_to_cast);
+        case str2int("SkeletonModification2DLookAt"):
+            return cast_to_skeletonmodification2dlookat(object_to_cast);
+        case str2int("SkeletonModificationStack2D"):
+            return cast_to_skeletonmodificationstack2d(object_to_cast);
         case str2int("SkeletonModifier3D"):
             return cast_to_skeletonmodifier3d(object_to_cast);
         case str2int("SkeletonProfile"):
             return cast_to_skeletonprofile(object_to_cast);
+        case str2int("SkeletonProfileHumanoid"):
+            return cast_to_skeletonprofilehumanoid(object_to_cast);
         case str2int("Skin"):
             return cast_to_skin(object_to_cast);
         case str2int("SkinReference"):
@@ -1103,6 +1383,8 @@ PyObject* cast_to_type(char* classname, PyObject* object_to_cast){
             return cast_to_texture3drd(object_to_cast);
         case str2int("TextureButton"):
             return cast_to_texturebutton(object_to_cast);
+        case str2int("TextureCubemapArrayRD"):
+            return cast_to_texturecubemaparrayrd(object_to_cast);
         case str2int("TextureCubemapRD"):
             return cast_to_texturecubemaprd(object_to_cast);
         case str2int("TextureLayered"):
@@ -1131,6 +1413,8 @@ PyObject* cast_to_type(char* classname, PyObject* object_to_cast){
             return cast_to_tileset(object_to_cast);
         case str2int("TileSetAtlasSource"):
             return cast_to_tilesetatlassource(object_to_cast);
+        case str2int("TileSetScenesCollectionSource"):
+            return cast_to_tilesetscenescollectionsource(object_to_cast);
         case str2int("TileSetSource"):
             return cast_to_tilesetsource(object_to_cast);
         case str2int("Time"):
@@ -1195,20 +1479,168 @@ PyObject* cast_to_type(char* classname, PyObject* object_to_cast){
             return cast_to_viewport(object_to_cast);
         case str2int("ViewportTexture"):
             return cast_to_viewporttexture(object_to_cast);
+        case str2int("VisibleOnScreenEnabler2D"):
+            return cast_to_visibleonscreenenabler2d(object_to_cast);
+        case str2int("VisibleOnScreenEnabler3D"):
+            return cast_to_visibleonscreenenabler3d(object_to_cast);
+        case str2int("VisibleOnScreenNotifier2D"):
+            return cast_to_visibleonscreennotifier2d(object_to_cast);
+        case str2int("VisibleOnScreenNotifier3D"):
+            return cast_to_visibleonscreennotifier3d(object_to_cast);
         case str2int("VisualInstance3D"):
             return cast_to_visualinstance3d(object_to_cast);
         case str2int("VisualShader"):
             return cast_to_visualshader(object_to_cast);
         case str2int("VisualShaderNode"):
             return cast_to_visualshadernode(object_to_cast);
+        case str2int("VisualShaderNodeBillboard"):
+            return cast_to_visualshadernodebillboard(object_to_cast);
+        case str2int("VisualShaderNodeClamp"):
+            return cast_to_visualshadernodeclamp(object_to_cast);
+        case str2int("VisualShaderNodeColorConstant"):
+            return cast_to_visualshadernodecolorconstant(object_to_cast);
+        case str2int("VisualShaderNodeColorFunc"):
+            return cast_to_visualshadernodecolorfunc(object_to_cast);
+        case str2int("VisualShaderNodeColorOp"):
+            return cast_to_visualshadernodecolorop(object_to_cast);
+        case str2int("VisualShaderNodeComment"):
+            return cast_to_visualshadernodecomment(object_to_cast);
+        case str2int("VisualShaderNodeCompare"):
+            return cast_to_visualshadernodecompare(object_to_cast);
+        case str2int("VisualShaderNodeConstant"):
+            return cast_to_visualshadernodeconstant(object_to_cast);
+        case str2int("VisualShaderNodeCubemap"):
+            return cast_to_visualshadernodecubemap(object_to_cast);
+        case str2int("VisualShaderNodeCurveTexture"):
+            return cast_to_visualshadernodecurvetexture(object_to_cast);
+        case str2int("VisualShaderNodeCustom"):
+            return cast_to_visualshadernodecustom(object_to_cast);
+        case str2int("VisualShaderNodeDeterminant"):
+            return cast_to_visualshadernodedeterminant(object_to_cast);
+        case str2int("VisualShaderNodeDistanceFade"):
+            return cast_to_visualshadernodedistancefade(object_to_cast);
+        case str2int("VisualShaderNodeDotProduct"):
+            return cast_to_visualshadernodedotproduct(object_to_cast);
+        case str2int("VisualShaderNodeExpression"):
+            return cast_to_visualshadernodeexpression(object_to_cast);
+        case str2int("VisualShaderNodeFaceForward"):
+            return cast_to_visualshadernodefaceforward(object_to_cast);
+        case str2int("VisualShaderNodeFloatConstant"):
+            return cast_to_visualshadernodefloatconstant(object_to_cast);
+        case str2int("VisualShaderNodeFloatFunc"):
+            return cast_to_visualshadernodefloatfunc(object_to_cast);
+        case str2int("VisualShaderNodeFloatOp"):
+            return cast_to_visualshadernodefloatop(object_to_cast);
+        case str2int("VisualShaderNodeFrame"):
+            return cast_to_visualshadernodeframe(object_to_cast);
+        case str2int("VisualShaderNodeFresnel"):
+            return cast_to_visualshadernodefresnel(object_to_cast);
+        case str2int("VisualShaderNodeGroupBase"):
+            return cast_to_visualshadernodegroupbase(object_to_cast);
         case str2int("VisualShaderNodeIf"):
             return cast_to_visualshadernodeif(object_to_cast);
+        case str2int("VisualShaderNodeInput"):
+            return cast_to_visualshadernodeinput(object_to_cast);
+        case str2int("VisualShaderNodeIntConstant"):
+            return cast_to_visualshadernodeintconstant(object_to_cast);
+        case str2int("VisualShaderNodeIntFunc"):
+            return cast_to_visualshadernodeintfunc(object_to_cast);
+        case str2int("VisualShaderNodeIntOp"):
+            return cast_to_visualshadernodeintop(object_to_cast);
+        case str2int("VisualShaderNodeIntParameter"):
+            return cast_to_visualshadernodeintparameter(object_to_cast);
         case str2int("VisualShaderNodeIs"):
             return cast_to_visualshadernodeis(object_to_cast);
         case str2int("VisualShaderNodeMix"):
             return cast_to_visualshadernodemix(object_to_cast);
+        case str2int("VisualShaderNodeMultiplyAdd"):
+            return cast_to_visualshadernodemultiplyadd(object_to_cast);
+        case str2int("VisualShaderNodeOuterProduct"):
+            return cast_to_visualshadernodeouterproduct(object_to_cast);
+        case str2int("VisualShaderNodeOutput"):
+            return cast_to_visualshadernodeoutput(object_to_cast);
+        case str2int("VisualShaderNodeParameter"):
+            return cast_to_visualshadernodeparameter(object_to_cast);
+        case str2int("VisualShaderNodeParameterRef"):
+            return cast_to_visualshadernodeparameterref(object_to_cast);
+        case str2int("VisualShaderNodeParticleEmit"):
+            return cast_to_visualshadernodeparticleemit(object_to_cast);
+        case str2int("VisualShaderNodeProximityFade"):
+            return cast_to_visualshadernodeproximityfade(object_to_cast);
+        case str2int("VisualShaderNodeRandomRange"):
+            return cast_to_visualshadernoderandomrange(object_to_cast);
+        case str2int("VisualShaderNodeRemap"):
+            return cast_to_visualshadernoderemap(object_to_cast);
+        case str2int("VisualShaderNodeReroute"):
+            return cast_to_visualshadernodereroute(object_to_cast);
+        case str2int("VisualShaderNodeResizableBase"):
+            return cast_to_visualshadernoderesizablebase(object_to_cast);
+        case str2int("VisualShaderNodeSDFRaymarch"):
+            return cast_to_visualshadernodesdfraymarch(object_to_cast);
+        case str2int("VisualShaderNodeSDFToScreenUV"):
+            return cast_to_visualshadernodesdftoscreenuv(object_to_cast);
+        case str2int("VisualShaderNodeSample3D"):
+            return cast_to_visualshadernodesample3d(object_to_cast);
+        case str2int("VisualShaderNodeScreenUVToSDF"):
+            return cast_to_visualshadernodescreenuvtosdf(object_to_cast);
+        case str2int("VisualShaderNodeSmoothStep"):
+            return cast_to_visualshadernodesmoothstep(object_to_cast);
         case str2int("VisualShaderNodeStep"):
             return cast_to_visualshadernodestep(object_to_cast);
+        case str2int("VisualShaderNodeSwitch"):
+            return cast_to_visualshadernodeswitch(object_to_cast);
+        case str2int("VisualShaderNodeTexture"):
+            return cast_to_visualshadernodetexture(object_to_cast);
+        case str2int("VisualShaderNodeTexture3D"):
+            return cast_to_visualshadernodetexture3d(object_to_cast);
+        case str2int("VisualShaderNodeTextureSDF"):
+            return cast_to_visualshadernodetexturesdf(object_to_cast);
+        case str2int("VisualShaderNodeTransformFunc"):
+            return cast_to_visualshadernodetransformfunc(object_to_cast);
+        case str2int("VisualShaderNodeTransformOp"):
+            return cast_to_visualshadernodetransformop(object_to_cast);
+        case str2int("VisualShaderNodeUIntConstant"):
+            return cast_to_visualshadernodeuintconstant(object_to_cast);
+        case str2int("VisualShaderNodeUIntFunc"):
+            return cast_to_visualshadernodeuintfunc(object_to_cast);
+        case str2int("VisualShaderNodeUIntOp"):
+            return cast_to_visualshadernodeuintop(object_to_cast);
+        case str2int("VisualShaderNodeUIntParameter"):
+            return cast_to_visualshadernodeuintparameter(object_to_cast);
+        case str2int("VisualShaderNodeUVFunc"):
+            return cast_to_visualshadernodeuvfunc(object_to_cast);
+        case str2int("VisualShaderNodeUVPolarCoord"):
+            return cast_to_visualshadernodeuvpolarcoord(object_to_cast);
+        case str2int("VisualShaderNodeVarying"):
+            return cast_to_visualshadernodevarying(object_to_cast);
+        case str2int("VisualShaderNodeVaryingGetter"):
+            return cast_to_visualshadernodevaryinggetter(object_to_cast);
+        case str2int("VisualShaderNodeVaryingSetter"):
+            return cast_to_visualshadernodevaryingsetter(object_to_cast);
+        case str2int("VisualShaderNodeVec2Constant"):
+            return cast_to_visualshadernodevec2constant(object_to_cast);
+        case str2int("VisualShaderNodeVec2Parameter"):
+            return cast_to_visualshadernodevec2parameter(object_to_cast);
+        case str2int("VisualShaderNodeVec3Constant"):
+            return cast_to_visualshadernodevec3constant(object_to_cast);
+        case str2int("VisualShaderNodeVec3Parameter"):
+            return cast_to_visualshadernodevec3parameter(object_to_cast);
+        case str2int("VisualShaderNodeVec4Constant"):
+            return cast_to_visualshadernodevec4constant(object_to_cast);
+        case str2int("VisualShaderNodeVec4Parameter"):
+            return cast_to_visualshadernodevec4parameter(object_to_cast);
+        case str2int("VisualShaderNodeVectorBase"):
+            return cast_to_visualshadernodevectorbase(object_to_cast);
+        case str2int("VisualShaderNodeVectorCompose"):
+            return cast_to_visualshadernodevectorcompose(object_to_cast);
+        case str2int("VisualShaderNodeVectorFunc"):
+            return cast_to_visualshadernodevectorfunc(object_to_cast);
+        case str2int("VisualShaderNodeVectorLen"):
+            return cast_to_visualshadernodevectorlen(object_to_cast);
+        case str2int("VisualShaderNodeVectorOp"):
+            return cast_to_visualshadernodevectorop(object_to_cast);
+        case str2int("VisualShaderNodeVectorRefract"):
+            return cast_to_visualshadernodevectorrefract(object_to_cast);
         case str2int("VoxelGI"):
             return cast_to_voxelgi(object_to_cast);
         case str2int("VoxelGIData"):
@@ -1217,8 +1649,16 @@ PyObject* cast_to_type(char* classname, PyObject* object_to_cast){
             return cast_to_weakref(object_to_cast);
         case str2int("WebRTCDataChannel"):
             return cast_to_webrtcdatachannel(object_to_cast);
+        case str2int("WebRTCDataChannelExtension"):
+            return cast_to_webrtcdatachannelextension(object_to_cast);
+        case str2int("WebRTCMultiplayerPeer"):
+            return cast_to_webrtcmultiplayerpeer(object_to_cast);
         case str2int("WebRTCPeerConnection"):
             return cast_to_webrtcpeerconnection(object_to_cast);
+        case str2int("WebRTCPeerConnectionExtension"):
+            return cast_to_webrtcpeerconnectionextension(object_to_cast);
+        case str2int("WebSocketMultiplayerPeer"):
+            return cast_to_websocketmultiplayerpeer(object_to_cast);
         case str2int("WebSocketPeer"):
             return cast_to_websocketpeer(object_to_cast);
         case str2int("WebXRInterface"):
