@@ -5,7 +5,6 @@ from py4godot.classes.core cimport Dictionary
 from py4godot.classes.cpp_bridge cimport Dictionary as BridgeDictionary
 from py4godot.utils.print_tools import *
 import traceback
-cimport py4godot.classes.Node3D.Node3D as node3d
 from cpython cimport Py_INCREF, Py_DECREF, PyObject
 from py4godot.utils.utils cimport *
 cimport py4godot.utils.utils as py_utils

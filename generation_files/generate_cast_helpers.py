@@ -23,7 +23,7 @@ def clear_vals():
     return <PyObject*>o\n"""
 
     for dependency in dependencies:
-        import_ += f"from py4godot.classes.{dependency}.{dependency} cimport *\n"
+        import_ += f"from py4godot.classes.{dependency} cimport *\n"
 
     total_string = import_ + res
     print(total_string)

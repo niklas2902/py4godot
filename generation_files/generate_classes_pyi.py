@@ -79,7 +79,7 @@ operator_to_variant_operator = {"+": "GDExtensionVariantOperator.GDEXTENSION_VAR
 def generate_import():
     result = \
         """from py4godot.utils.VariantTypeWrapper4 import *
-import py4godot.classes.Object.Object as __object__
+import py4godot.classes.Object as __object__
 """
     return result
 
@@ -157,7 +157,7 @@ def generate_class_imports(classes):
     result += "from py4godot.signals import BuiltinSignal"
     result = generate_newline(result)
     for class_ in classes:
-        result += f"import py4godot.classes.{class_}.{class_} as __{class_.lower()}__"
+        result += f"import py4godot.classes.{class_} as __{class_.lower()}__"
         result = generate_newline(result)
     return result
 
@@ -866,11 +866,7 @@ if __name__ == "__main__":
         for class_ in obj["builtin_classes"]:
             generate_operators_set(class_)
         for class_ in obj["classes"]:
-            if (not os.path.exists(f"py4godot/classes/{class_['name']}/")):
-                os.mkdir(f"py4godot/classes/{class_['name']}/")
-            with open(f"py4godot/classes/{class_['name']}/__init__.py", "w"):
-                pass
-            generate_classes([class_], f"py4godot/classes/{class_['name']}/{class_['name']}.pyi")
+            generate_classes([class_], f"py4godot/classes/{class_['name']}.pyi")
 
         is_core = True
         generate_classes(arrays, f"py4godot/classes/typedarrays.pyi", is_core=False, is_typed_array=True)

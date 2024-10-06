@@ -1387,7 +1387,7 @@ def should_skip_import(classname, class_to_import):
 def generate_classes(classes, filename, is_core=False, is_typed_array=False):
     res = generate_import()
     if is_typed_array:
-        res += f"from py4godot.classes.Object.Object cimport *"
+        res += f"from py4godot.classes.Object cimport *"
         res = generate_newline(res)
 
         res += f"from py4godot.classes.core cimport *"
@@ -1398,7 +1398,7 @@ def generate_classes(classes, filename, is_core=False, is_typed_array=False):
                 continue
             if should_skip_import(classes[0]["name"], cls):
                 continue
-            res += f"cimport py4godot.classes.{cls}.{cls} as py4godot_{cls.lower()} "
+            res += f"cimport py4godot.classes.{cls} as py4godot_{cls.lower()} "
             res = generate_newline(res)
 
     elif not is_core:
@@ -1414,7 +1414,7 @@ def generate_classes(classes, filename, is_core=False, is_typed_array=False):
                 continue
             if should_skip_import(classes[0]["name"], cls):
                 continue
-            res += f"cimport py4godot.classes.{cls}.{cls} as py4godot_{cls.lower()} "
+            res += f"cimport py4godot.classes.{cls} as py4godot_{cls.lower()} "
             res = generate_newline(res)
 
         if "inherits" in classes[0].keys():
@@ -1426,7 +1426,7 @@ def generate_classes(classes, filename, is_core=False, is_typed_array=False):
                     break
                 cls = find_class(cls["inherits"])
     else:
-        res += f"from py4godot.classes.Object.Object cimport *"
+        res += f"from py4godot.classes.Object cimport *"
         res = generate_newline(res)
     for class_ in classes:
         if (class_["name"] in IGNORED_CLASSES):
@@ -1845,11 +1845,7 @@ if __name__ == "__main__":
             generate_operators_set(class_)
 
         for class_ in obj["classes"]:
-            if (not os.path.exists(f"py4godot/classes/{class_['name']}/")):
-                os.mkdir(f"py4godot/classes/{class_['name']}/")
-            with open(f"py4godot/classes/{class_['name']}/__init__.py", "w"):
-                pass
-            generate_classes([class_], f"py4godot/classes/{class_['name']}/{class_['name']}.pyx")
+            generate_classes([class_], f"py4godot/classes/{class_['name']}.pyx")
 
         array_cls = None
         arrays = []

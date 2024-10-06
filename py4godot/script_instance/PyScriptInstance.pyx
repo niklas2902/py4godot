@@ -6,7 +6,7 @@ from py4godot.utils.utils cimport *
 from py4godot.instance_data.InstanceData cimport *
 cimport py4godot.classes.cpp_bridge as cppbridge
 from py4godot.classes.core cimport *
-from py4godot.classes.Object.Object cimport *
+from py4godot.classes.Object cimport *
 from py4godot.core.variant4.Variant4 cimport *
 from py4godot.utils.print_tools import *
 from libc.stdlib cimport malloc, free

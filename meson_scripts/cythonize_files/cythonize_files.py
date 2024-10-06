@@ -25,7 +25,7 @@ def main():
         "py4godot/core/variant4/cast_helpers.pyx",
         "py4godot/script_instance/*.pyx",
         "py4godot/script_extension/script_extension_helpers.pyx",
-        "py4godot/constants/*.pyx",
+        "py4godot/constants.pyx",
         "py4godot/enums/enums.pyx",
         "py4godot/utils/utils.pyx",
         "py4godot/utils/instance_utils.pyx",
@@ -34,9 +34,7 @@ def main():
         "py4godot/pluginscript_api/hints/*.pyx",
         "py4godot/pluginscript_api/utils/*.pyx",
         "py4godot/godot_bindings/binding4_godot4.pyx",
-        "py4godot/classes/*.pyx",
-        "py4godot/classes/*/*.pyx",
-    ]
+        "py4godot/classes/*.pyx"]
 
     files_to_cythonize = []
     for pattern in file_patterns:

@@ -1,6 +1,6 @@
 from py4godot.classes.cpp_bridge cimport Signal as CPPSignal
 from py4godot.classes.core cimport Signal, StringName
-from py4godot.classes.Object.Object cimport Object
+from py4godot.classes.Object cimport Object
 
 cdef class SignalArg:
     cdef str name

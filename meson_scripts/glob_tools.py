@@ -26,6 +26,4 @@ if __name__ == "__main__":
             if "functions" in entry and "godot_bindings" in entry:
                 continue
 
-            if len(entry) > 107:
-                continue
             print(entry.lstrip("../").replace(".cpp", ""))

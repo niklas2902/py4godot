@@ -3,7 +3,7 @@ from py4godot.pluginscript_api.hints.BaseHint cimport *
 from py4godot.pluginscript_api.utils.helpers cimport *
 from py4godot.godot_bindings.binding4_godot4 cimport *
 from py4godot.classes.core cimport *
-from py4godot.classes.Object.Object cimport *
+from py4godot.classes.Object cimport *
 from py4godot.utils.utils cimport *
 import py4godot.utils.print_tools as tools
 from py4godot.core.variant4.Variant4 cimport *
