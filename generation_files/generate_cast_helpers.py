@@ -4,8 +4,9 @@ sys.path.append(os.getcwd()+"/../")
 sys.path.append(os.getcwd())
 if "generation_files" in os.getcwd():
     os.chdir(os.getcwd()+"/../")
-from meson_scripts.get_dependencies_for_classes import generate_dev_build
-if __name__ == "__main__":
+
+
+def generate_cast_helpers(class_names):
     res = ""
     import_ = """# distutils: language=c++
 from cpython cimport Py_INCREF, Py_DECREF, PyObject
@@ -14,15 +15,14 @@ def clear_vals():
     global vals
     vals.clear()
 """
-    dependencies = generate_dev_build()
-    for dependency in dependencies:
+    for dependency in class_names:
         res += \
             f"""cdef api PyObject* cast_to_{dependency.lower()}(PyObject* other):
     cdef {dependency} o = {dependency}.cast(<Object>other)
     vals.append(o)
     return <PyObject*>o\n"""
 
-    for dependency in dependencies:
+    for dependency in class_names:
         import_ += f"from py4godot.classes.{dependency} cimport *\n"
 
     total_string = import_ + res
@@ -68,7 +68,7 @@ PyObject* cast_to_type(char* classname, PyObject* object_to_cast){
 }"""
 
     switch_statements = ""
-    for dependency in dependencies:
+    for dependency in class_names:
         switch_statements += f'''        case str2int("{dependency}"):
             return cast_to_{dependency.lower()}(object_to_cast);\n'''
 
