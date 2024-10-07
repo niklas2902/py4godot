@@ -80,3 +80,5 @@ py4godot/script_extension/script_extension_helpers_api.h
 /py4godot/script_instance/PyScriptInstance_api.h
 /py4godot/utils/instance_utils.cpp
 /py4godot/core/signals.cpp
+/py4godot/constants.cpp
+/py4godot/signals.cpp
