@@ -6,8 +6,8 @@ from py4godot.pluginscript_api.utils.annotations import prop
 
 T = TypeVar("T")
 #Very experimental
-def gdproperty(type_:type, defaultval:T, stack_index = 1):
+def gdproperty(type_:type, defaultval:T, stack_index = 1, hint = BaseHint(hint_string="1,100", hint = 1)):
     stack = inspect.stack()
     name = stack[stack_index].code_context[0].split("=")[0].split(":")[0].strip()
-    prop(name, type_,defaultval, BaseHint(), "")
+    prop(name, type_,defaultval, hint)
     return defaultval

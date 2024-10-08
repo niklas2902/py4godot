@@ -225,7 +225,7 @@ def gdtool(cls):
         raise Exception("More than one class was marked as gd_class or gd_tool_class in one file")
     return cls
 
-def prop(name,type_, defaultval, hint = BaseHint(), hint_string = ""):
+def prop(name,type_, defaultval, hint = BaseHint()):
     already_registered_property_names.append(name)
     default_values.append(defaultval)
     properties.append(PropertyDescription(name = name,
