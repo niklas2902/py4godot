@@ -35,7 +35,7 @@ def gdclass(cls = None, icon=None):
 T = TypeVar("T")
 def gdproperty(type_:type, defaultval:T):
     import py4godot.properties as properties
-    return properties.gdproperty(type_, defaultval, 2)
+    return properties._gdproperty_internal(type_, defaultval, 3)
 
 import py4godot.constants as constants
 """

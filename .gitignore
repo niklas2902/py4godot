@@ -36,6 +36,8 @@ py4godot/instance_data/InstanceData.c
 py4godot/script_instance/PyScriptInstance.cpp
 py4godot/script_instance/PyScriptInstance.h
 
+py4godot/hints/*.cpp
+
 # Godot and test directories
 godot/
 tests/addons/
