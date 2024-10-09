@@ -1,6 +1,10 @@
 #pragma once
 #include "py4godot/gdextension-api/gdextension_interface.h"
 #include "py4godot/cppclasses/ScriptLanguageExtension/ScriptLanguageExtension.h"
+#include "py4godot/cppclasses/EditorInterface/EditorInterface.h"
+#include "py4godot/cppclasses/Theme/Theme.h"
+#include "py4godot/cppclasses/ImageTexture/ImageTexture.h"
+#include "py4godot/cppclasses/Image/Image.h"
 #include <unordered_set>
 
 void register_class();

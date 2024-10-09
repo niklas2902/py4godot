@@ -28,6 +28,10 @@ void PyLanguage::init_theme_icon(){
         counter ++;
         theme.set_icon(icon_name, theme_name, image_texture.get());
         theme.set_icon(py_script_icon_name, theme_name, image_texture.get());
+        icon_image->unreference();
+        theme.unreference();
+        image_texture->unreference();
+
     }
     else{
         counter ++;
