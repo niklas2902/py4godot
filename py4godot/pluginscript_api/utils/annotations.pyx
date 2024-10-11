@@ -17,6 +17,7 @@ import py4godot.utils.print_tools as print_tools
 from importlib.machinery import SourceFileLoader
 from py4godot.classes.Node3D cimport *
 from py4godot.classes.Object cimport *
+import py4godot.classes.core
 import importlib
 import importlib.util
 from libcpp.string cimport string
@@ -94,19 +95,28 @@ def generate_default_val(type_):
 def is_class(type_):
     return type(int) == type(type_)
 
+cdef accepted_types = {int, str, float, type(True)}
+def type_is_accepted(type_to_accept):
+    return type_to_accept in accepted_types or type_to_accept in py4godot.classes.core.core_classes
+
+
 def collect_properties(cls):
     if cls is None:
         return
 
     potential_properties = get_class_attributes(cls)
     for potential_property in potential_properties.keys():
+        if potential_property.startswith("_"): # We handle _ like private names
+            continue
         if potential_property not in already_registered_property_names and potential_property not in already_registered_signal_names:
             if not is_class(potential_properties[potential_property]):
-                prop(potential_property, type(potential_properties[potential_property]),
-                     potential_properties[potential_property])
+                if type_is_accepted(type(potential_properties[potential_property])):
+                    prop(potential_property, type(potential_properties[potential_property]),
+                         potential_properties[potential_property])
             else:
-                prop(potential_property, potential_properties[potential_property],
-                     generate_default_val(potential_properties[potential_property]))
+                if type_is_accepted(type(potential_properties[potential_property])):
+                    prop(potential_property, potential_properties[potential_property],
+                         generate_default_val(potential_properties[potential_property]))
 
 def collect_methods(cls):
     if cls is None:
