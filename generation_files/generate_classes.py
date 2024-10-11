@@ -1384,6 +1384,15 @@ def should_skip_import(classname, class_to_import):
     return classname == "Node" and class_to_import in {"SceneTree", "Viewport", "Window"}
 
 
+def create_core_classes_set():
+    res = "core_classes = {"
+    for cls in builtin_classes - {"int", "float", "bool", "Nil"}:
+        res += cls + ","
+    res += "}"
+    res = generate_newline(res)
+    return res
+
+
 def generate_classes(classes, filename, is_core=False, is_typed_array=False):
     res = generate_import()
     if is_typed_array:
@@ -1450,6 +1459,8 @@ def generate_classes(classes, filename, is_core=False, is_typed_array=False):
             res += generate_method(class_, method)
             res = generate_newline(res)
         res += generate_operators_for_class(class_["name"])
+    if is_core:
+        res += create_core_classes_set()
     text_to_write = "# distutils: language=c++\n"+res
     write_if_different(filename, text_to_write)
 
