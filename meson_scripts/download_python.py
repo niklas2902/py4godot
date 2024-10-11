@@ -1,4 +1,5 @@
 import pathlib
+import shutil
 import zipfile
 
 import wget
@@ -52,6 +53,7 @@ def download_file(platform, allow_copy=False):
 
     if (allow_copy):
         create_sitecustomization(export_name, platform)
+        delete_pip(platform, export_name)
         copy_to_build(export_name + "/", platform)
 
 
@@ -83,6 +85,17 @@ def copy_to_build(export_folder, platform):
     if (not os.path.isdir(copy_dir + "/" + platform + "/" + export_folder)):
         copytree(python_files_dir + "/" + export_folder, copy_dir + "/" + platform + "/" + export_folder,
                  ignore=ignore_patterns("build"))  # build and lib are unnecessary
+
+def delete_pip( platform, export_folder):
+    """The builtin pip is broken. We install it manually later"""
+    if "windows" in platform:
+        print("deleting pip...")
+        if os.path.isdir(f"python_files/{export_folder}/python/Lib/site-packages/pip"):
+            shutil.rmtree(f"python_files/{export_folder}/python/Lib/site-packages/pip")
+    elif "linux" in platform:
+        print("deleting pip...")
+        if os.path.isdir(f"python_files/{export_folder}/python/lib/python3.12/site-packages/pip"):
+            shutil.rmtree(f"python_files/{export_folder}/python/lib/python3.12/site-packages/pip")
 
 
 def create_sitecustomization(export_folder, platform):

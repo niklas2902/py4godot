@@ -8,6 +8,7 @@ from shutil import copytree
 
 from Cython.Build import cythonize
 
+from build_tools import download_get_pip
 from meson_scripts import copy_tools, download_python, generate_init_files, \
     locations, platform_check, generate_godot, \
     download_godot
@@ -202,7 +203,10 @@ try:
             shutil.rmtree("build/py4godot")
         copytree(f"build/final/{args.target_platform}/cpython-3.12.4-{args.target_platform}", f"build/py4godot/cpython-3.12.4-{args.target_platform}")
         shutil.copy("build_resources/python.gdextension", "build/py4godot/python.gdextension")
-
+        shutil.copy("build_resources/dependencies.txt", "build/py4godot/dependencies.txt")
+        shutil.copy("build_resources/install_pip.py", "build/py4godot/install_pip.py")
+        shutil.copy("build_resources/install_dependencies.py", "build/py4godot/install_dependencies.py")
+        download_get_pip("build/py4godot")
         python_svg_dest = "build/py4godot/"+ "/Python.svg"
         if not os.path.exists(python_svg_dest):
             shutil.copy("build_resources/Python.svg", python_svg_dest)
