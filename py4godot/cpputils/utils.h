@@ -215,3 +215,7 @@ static std::string get_python_typename(PyObject* get_val) {
 
     return py_typename;
 }
+
+static std::shared_ptr<godot::Dictionary> empty_dictionary_pointer(){
+    return std::shared_ptr<Dictionary>();
+}
