@@ -1245,6 +1245,20 @@ def generate_constructor(classname):
     res += f"{INDENT * 2}return class_"
     res = generate_newline(res)
 
+    res += f"{INDENT}@staticmethod"
+    res = generate_newline(res)
+    res += f"{INDENT}def new():"
+    res = generate_newline(res)
+    res += f"{INDENT * 2}cdef {classname} class_ = {classname}.__new__({classname})"
+    res = generate_newline(res)
+    res += f"{INDENT * 2}class_.{class_['name']}_internal_class_ptr = construct_{class_['name']}()"
+    res = generate_newline(res)
+    res += f"{INDENT * 2}class_.set_gdowner(class_.{class_['name']}_internal_class_ptr.get().get_godot_owner())"
+    res = generate_newline(res)
+
+    res += f"{INDENT * 2}return class_"
+    res = generate_newline(res)
+
     res += f"{INDENT}def __init__(self):"
     res = generate_newline(res)
     res += f"{INDENT * 2}if py_utils.shouldCreateObject:"
