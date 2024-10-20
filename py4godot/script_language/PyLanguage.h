@@ -8,6 +8,7 @@
 #include <unordered_set>
 
 void register_class();
+void deinit_func_names();
 namespace godot{
     class PyLanguage:public ScriptLanguageExtension{
       const char* language_name = "Python";
@@ -75,5 +76,6 @@ namespace godot{
           void _get_doc_comment_delimiters(GDExtensionTypePtr res);
           void _preferred_file_name_casing(GDExtensionTypePtr res);
           void init_theme_icon();
+          void deinit_theme_icon();
     };
 }

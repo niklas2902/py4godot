@@ -11,11 +11,15 @@
 #include "py4godot/cppclasses/ImageTexture/ImageTexture.h"
 #include "py4godot/cppclasses/Image/Image.h"
 #include "py4godot/pluginscript_api/api.h"
+Theme theme;
+std::shared_ptr<ImageTexture> image_texture;
+
 void PyLanguage::init_theme_icon(){
     if(counter == 1){
         auto instance = EditorInterface::get_instance();
-        auto theme = instance ->get_editor_theme();
-        std::shared_ptr<ImageTexture> image_texture = ImageTexture::constructor();
+        theme = instance ->get_editor_theme();
+
+        image_texture = ImageTexture::constructor();
         auto icon_path = c_string_to_string("addons/py4godot/Python.svg");
         auto icon_image = Image::constructor();
         icon_image->reference();
@@ -29,18 +33,21 @@ void PyLanguage::init_theme_icon(){
         theme.set_icon(icon_name, theme_name, image_texture.get());
         theme.set_icon(py_script_icon_name, theme_name, image_texture.get());
         icon_image->unreference();
-        theme.unreference();
-        image_texture->unreference();
 
     }
     else{
         counter ++;
     }
 }
+void PyLanguage::deinit_theme_icon(){
+    theme.unreference();
+    image_texture->unreference();
+}
   PyLanguage* PyLanguage::constructor(){
     PyLanguage* class_ = new PyLanguage();
 
     StringName class_name = c_string_to_string_name("PyLanguage");
+    class_name.shouldBeDeleted = true;
 
     class_->godot_owner = functions::get_classdb_construct_object()(&class_name.godot_owner);
     functions::get_object_set_instance()(class_->godot_owner,&class_name.godot_owner , class_);
@@ -166,16 +173,16 @@ void PyLanguage::init_theme_icon(){
 
   void PyLanguage::_get_string_delimiters(GDExtensionTypePtr res){
     print_error("_get_string_delimiters");
-    auto string_del1 = c_string_to_string("\"");
-    auto string_del2 = c_string_to_string("'");
+    auto string_del1 = c_string_to_string("\".*\"");
+    auto string_del2 = c_string_to_string("'.*'");
     add_string_to_array(res,string_del1);
     add_string_to_array(res,string_del2);
 
   }
     void PyLanguage::_get_doc_comment_delimiters(GDExtensionTypePtr res){
     print_error("_get_doc_comment_delimiters");
-    auto string_del = c_string_to_string("\"\"\"");
-    auto string_del2 = c_string_to_string("'''");
+    auto string_del = c_string_to_string("\"\"\".*\"\"\"");
+    auto string_del2 = c_string_to_string("'''.*'''");
     add_string_to_array(res,string_del);
     add_string_to_array(res,string_del2);
   }
@@ -1139,6 +1146,7 @@ GDExtensionClassCallVirtual get_virtual(void *p_userdata, GDExtensionConstString
 
     print_error("called function:");
     print_error(res_string);
+    delete res_string;
 
     if (string_names_equal(func_name__get_name, name)){
         return call_virtual_func__get_name;
@@ -1365,63 +1373,176 @@ GDExtensionClassCallVirtual get_virtual(void *p_userdata, GDExtensionConstString
     return nullptr;
 }
 
+void deinit_func_names(){
+      func_name__get_name=StringName::new_static(nullptr);
+      func_name__init=StringName::new_static(nullptr);
+      func_name__get_type=StringName::new_static(nullptr);
+      func_name__get_extension=StringName::new_static(nullptr);
+      func_name__finish=StringName::new_static(nullptr);
+      func_name__get_reserved_words=StringName::new_static(nullptr);
+      func_name__is_control_flow_keyword=StringName::new_static(nullptr);
+      func_name__get_comment_delimiters=StringName::new_static(nullptr);
+      func_name__get_doc_comment_delimiters=StringName::new_static(nullptr);
+      func_name__get_string_delimiters=StringName::new_static(nullptr);
+      func_name__make_template=StringName::new_static(nullptr);
+      func_name__get_built_in_templates=StringName::new_static(nullptr);
+      func_name__is_using_templates=StringName::new_static(nullptr);
+      func_name__validate=StringName::new_static(nullptr);
+      func_name__validate_path=StringName::new_static(nullptr);
+      func_name__create_script=StringName::new_static(nullptr);
+      func_name__has_named_classes=StringName::new_static(nullptr);
+      func_name__supports_builtin_mode=StringName::new_static(nullptr);
+      func_name__supports_documentation=StringName::new_static(nullptr);
+      func_name__can_inherit_from_file=StringName::new_static(nullptr);
+      func_name__find_function=StringName::new_static(nullptr);
+      func_name__make_function=StringName::new_static(nullptr);
+      func_name__can_make_function=StringName::new_static(nullptr);
+      func_name__open_in_external_editor=StringName::new_static(nullptr);
+      func_name__overrides_external_editor=StringName::new_static(nullptr);
+      func_name__preferred_file_name_casing=StringName::new_static(nullptr);
+      func_name__complete_code=StringName::new_static(nullptr);
+      func_name__lookup_code=StringName::new_static(nullptr);
+      func_name__auto_indent_code=StringName::new_static(nullptr);
+      func_name__add_global_constant=StringName::new_static(nullptr);
+      func_name__add_named_global_constant=StringName::new_static(nullptr);
+      func_name__remove_named_global_constant=StringName::new_static(nullptr);
+      func_name__thread_enter=StringName::new_static(nullptr);
+      func_name__thread_exit=StringName::new_static(nullptr);
+      func_name__debug_get_error=StringName::new_static(nullptr);
+      func_name__debug_get_stack_level_count=StringName::new_static(nullptr);
+      func_name__debug_get_stack_level_line=StringName::new_static(nullptr);
+      func_name__debug_get_stack_level_function=StringName::new_static(nullptr);
+      func_name__debug_get_stack_level_locals=StringName::new_static(nullptr);
+      func_name__debug_get_stack_level_members=StringName::new_static(nullptr);
+      func_name__debug_get_stack_level_instance=StringName::new_static(nullptr);
+      func_name__debug_get_globals=StringName::new_static(nullptr);
+      func_name__debug_parse_stack_level_expression=StringName::new_static(nullptr);
+      func_name__debug_get_current_stack_info=StringName::new_static(nullptr);
+      func_name__reload_all_scripts=StringName::new_static(nullptr);
+      func_name__reload_tool_script=StringName::new_static(nullptr);
+      func_name__get_recognized_extensions=StringName::new_static(nullptr);
+      func_name__get_public_functions=StringName::new_static(nullptr);
+      func_name__get_public_constants=StringName::new_static(nullptr);
+      func_name__get_public_annotations=StringName::new_static(nullptr);
+      func_name__profiling_start=StringName::new_static(nullptr);
+      func_name__profiling_stop=StringName::new_static(nullptr);
+      func_name__frame=StringName::new_static(nullptr);
+      func_name__handles_global_class_type=StringName::new_static(nullptr);
+      func_name__get_global_class_name=StringName::new_static(nullptr);
+}
+
 
 void init_func_names(){
-    func_name__get_name = c_string_to_string_name("_get_name");
-    func_name__init = c_string_to_string_name("_init");
-    func_name__get_type = c_string_to_string_name("_get_type");
-    func_name__get_extension = c_string_to_string_name("_get_extension");
-    func_name__finish = c_string_to_string_name("_finish");
-    func_name__get_reserved_words = c_string_to_string_name("_get_reserved_words");
-    func_name__is_control_flow_keyword = c_string_to_string_name("_is_control_flow_keyword");
-    func_name__get_comment_delimiters = c_string_to_string_name("_get_comment_delimiters");
-    func_name__get_string_delimiters = c_string_to_string_name("_get_string_delimiters");
-    func_name__get_doc_comment_delimiters = c_string_to_string_name("_get_doc_comment_delimiters");
-    func_name__make_template = c_string_to_string_name("_make_template");
-    func_name__get_built_in_templates = c_string_to_string_name("_get_built_in_templates");
-    func_name__is_using_templates = c_string_to_string_name("_is_using_templates");
-    func_name__validate = c_string_to_string_name("_validate");
-    func_name__validate_path = c_string_to_string_name("_validate_path");
-    func_name__create_script = c_string_to_string_name("_create_script");
-    func_name__has_named_classes = c_string_to_string_name("_has_named_classes");
-    func_name__supports_builtin_mode = c_string_to_string_name("_supports_builtin_mode");
-    func_name__supports_documentation = c_string_to_string_name("_supports_documentation");
-    func_name__can_inherit_from_file = c_string_to_string_name("_can_inherit_from_file");
-    func_name__can_make_function = c_string_to_string_name("_can_make_function");
-    func_name__preferred_file_name_casing = c_string_to_string_name("_preferred_file_name_casing");
-    func_name__find_function = c_string_to_string_name("_find_function");
-    func_name__make_function = c_string_to_string_name("_make_function");
-    func_name__open_in_external_editor = c_string_to_string_name("_open_in_external_editor");
-    func_name__overrides_external_editor = c_string_to_string_name("_overrides_external_editor");
-    func_name__complete_code = c_string_to_string_name("_complete_code");
-    func_name__lookup_code = c_string_to_string_name("_lookup_code");
-    func_name__auto_indent_code = c_string_to_string_name("_auto_indent_code");
-    func_name__add_global_constant = c_string_to_string_name("_add_global_constant");
-    func_name__add_named_global_constant = c_string_to_string_name("_add_named_global_constant");
-    func_name__remove_named_global_constant = c_string_to_string_name("_remove_named_global_constant");
-    func_name__thread_enter = c_string_to_string_name("_thread_enter");
-    func_name__thread_exit = c_string_to_string_name("_thread_exit");
-    func_name__debug_get_error = c_string_to_string_name("_debug_get_error");
-    func_name__debug_get_stack_level_count = c_string_to_string_name("_debug_get_stack_level_count");
-    func_name__debug_get_stack_level_line = c_string_to_string_name("_debug_get_stack_level_line");
-    func_name__debug_get_stack_level_function = c_string_to_string_name("_debug_get_stack_level_function");
-    func_name__debug_get_stack_level_locals = c_string_to_string_name("_debug_get_stack_level_locals");
-    func_name__debug_get_stack_level_members = c_string_to_string_name("_debug_get_stack_level_members");
-    func_name__debug_get_stack_level_instance = c_string_to_string_name("_debug_get_stack_level_instance");
-    func_name__debug_get_globals = c_string_to_string_name("_debug_get_globals");
-    func_name__debug_parse_stack_level_expression = c_string_to_string_name("_debug_parse_stack_level_expression");
-    func_name__debug_get_current_stack_info = c_string_to_string_name("_debug_get_current_stack_info");
-    func_name__reload_all_scripts = c_string_to_string_name("_reload_all_scripts");
-    func_name__reload_tool_script = c_string_to_string_name("_reload_tool_script");
-    func_name__get_recognized_extensions = c_string_to_string_name("_get_recognized_extensions");
-    func_name__get_public_functions = c_string_to_string_name("_get_public_functions");
-    func_name__get_public_constants = c_string_to_string_name("_get_public_constants");
-    func_name__get_public_annotations = c_string_to_string_name("_get_public_annotations");
-    func_name__profiling_start = c_string_to_string_name("_profiling_start");
-    func_name__profiling_stop = c_string_to_string_name("_profiling_stop");
-    func_name__frame = c_string_to_string_name("_frame");
-    func_name__handles_global_class_type = c_string_to_string_name("_handles_global_class_type");
-    func_name__get_global_class_name = c_string_to_string_name("_get_global_class_name");
+   func_name__get_name = c_string_to_string_name("_get_name");
+   func_name__get_name.shouldBeDeleted=true;
+   func_name__init = c_string_to_string_name("_init");
+   func_name__init.shouldBeDeleted=true;
+   func_name__get_type = c_string_to_string_name("_get_type");
+   func_name__get_type.shouldBeDeleted=true;
+   func_name__get_extension = c_string_to_string_name("_get_extension");
+   func_name__get_extension.shouldBeDeleted=true;
+   func_name__finish = c_string_to_string_name("_finish");
+   func_name__finish.shouldBeDeleted=true;
+   func_name__get_reserved_words = c_string_to_string_name("_get_reserved_words");
+   func_name__get_reserved_words.shouldBeDeleted=true;
+   func_name__is_control_flow_keyword = c_string_to_string_name("_is_control_flow_keyword");
+   func_name__is_control_flow_keyword.shouldBeDeleted=true;
+   func_name__get_comment_delimiters = c_string_to_string_name("_get_comment_delimiters");
+   func_name__get_comment_delimiters.shouldBeDeleted=true;
+   func_name__get_doc_comment_delimiters = c_string_to_string_name("_get_doc_comment_delimiters");
+   func_name__get_doc_comment_delimiters.shouldBeDeleted=true;
+   func_name__get_string_delimiters = c_string_to_string_name("_get_string_delimiters");
+   func_name__get_string_delimiters.shouldBeDeleted=true;
+   func_name__make_template = c_string_to_string_name("_make_template");
+   func_name__make_template.shouldBeDeleted=true;
+   func_name__get_built_in_templates = c_string_to_string_name("_get_built_in_templates");
+   func_name__get_built_in_templates.shouldBeDeleted=true;
+   func_name__is_using_templates = c_string_to_string_name("_is_using_templates");
+   func_name__is_using_templates.shouldBeDeleted=true;
+   func_name__validate = c_string_to_string_name("_validate");
+   func_name__validate.shouldBeDeleted=true;
+   func_name__validate_path = c_string_to_string_name("_validate_path");
+   func_name__validate_path.shouldBeDeleted=true;
+   func_name__create_script = c_string_to_string_name("_create_script");
+   func_name__create_script.shouldBeDeleted=true;
+   func_name__has_named_classes = c_string_to_string_name("_has_named_classes");
+   func_name__has_named_classes.shouldBeDeleted=true;
+   func_name__supports_builtin_mode = c_string_to_string_name("_supports_builtin_mode");
+   func_name__supports_builtin_mode.shouldBeDeleted=true;
+   func_name__supports_documentation = c_string_to_string_name("_supports_documentation");
+   func_name__supports_documentation.shouldBeDeleted=true;
+   func_name__can_inherit_from_file = c_string_to_string_name("_can_inherit_from_file");
+   func_name__can_inherit_from_file.shouldBeDeleted=true;
+   func_name__find_function = c_string_to_string_name("_find_function");
+   func_name__find_function.shouldBeDeleted=true;
+   func_name__make_function = c_string_to_string_name("_make_function");
+   func_name__make_function.shouldBeDeleted=true;
+   func_name__can_make_function = c_string_to_string_name("_can_make_function");
+   func_name__can_make_function.shouldBeDeleted=true;
+   func_name__open_in_external_editor = c_string_to_string_name("_open_in_external_editor");
+   func_name__open_in_external_editor.shouldBeDeleted=true;
+   func_name__overrides_external_editor = c_string_to_string_name("_overrides_external_editor");
+   func_name__overrides_external_editor.shouldBeDeleted=true;
+   func_name__preferred_file_name_casing = c_string_to_string_name("_preferred_file_name_casing");
+   func_name__preferred_file_name_casing.shouldBeDeleted=true;
+   func_name__complete_code = c_string_to_string_name("_complete_code");
+   func_name__complete_code.shouldBeDeleted=true;
+   func_name__lookup_code = c_string_to_string_name("_lookup_code");
+   func_name__lookup_code.shouldBeDeleted=true;
+   func_name__auto_indent_code = c_string_to_string_name("_auto_indent_code");
+   func_name__auto_indent_code.shouldBeDeleted=true;
+   func_name__add_global_constant = c_string_to_string_name("_add_global_constant");
+   func_name__add_global_constant.shouldBeDeleted=true;
+   func_name__add_named_global_constant = c_string_to_string_name("_add_named_global_constant");
+   func_name__add_named_global_constant.shouldBeDeleted=true;
+   func_name__remove_named_global_constant = c_string_to_string_name("_remove_named_global_constant");
+   func_name__remove_named_global_constant.shouldBeDeleted=true;
+   func_name__thread_enter = c_string_to_string_name("_thread_enter");
+   func_name__thread_enter.shouldBeDeleted=true;
+   func_name__thread_exit = c_string_to_string_name("_thread_exit");
+   func_name__thread_exit.shouldBeDeleted=true;
+   func_name__debug_get_error = c_string_to_string_name("_debug_get_error");
+   func_name__debug_get_error.shouldBeDeleted=true;
+   func_name__debug_get_stack_level_count = c_string_to_string_name("_debug_get_stack_level_count");
+   func_name__debug_get_stack_level_count.shouldBeDeleted=true;
+   func_name__debug_get_stack_level_line = c_string_to_string_name("_debug_get_stack_level_line");
+   func_name__debug_get_stack_level_line.shouldBeDeleted=true;
+   func_name__debug_get_stack_level_function = c_string_to_string_name("_debug_get_stack_level_function");
+   func_name__debug_get_stack_level_function.shouldBeDeleted=true;
+   func_name__debug_get_stack_level_locals = c_string_to_string_name("_debug_get_stack_level_locals");
+   func_name__debug_get_stack_level_locals.shouldBeDeleted=true;
+   func_name__debug_get_stack_level_members = c_string_to_string_name("_debug_get_stack_level_members");
+   func_name__debug_get_stack_level_members.shouldBeDeleted=true;
+   func_name__debug_get_stack_level_instance = c_string_to_string_name("_debug_get_stack_level_instance");
+   func_name__debug_get_stack_level_instance.shouldBeDeleted=true;
+   func_name__debug_get_globals = c_string_to_string_name("_debug_get_globals");
+   func_name__debug_get_globals.shouldBeDeleted=true;
+   func_name__debug_parse_stack_level_expression = c_string_to_string_name("_debug_parse_stack_level_expression");
+   func_name__debug_parse_stack_level_expression.shouldBeDeleted=true;
+   func_name__debug_get_current_stack_info = c_string_to_string_name("_debug_get_current_stack_info");
+   func_name__debug_get_current_stack_info.shouldBeDeleted=true;
+   func_name__reload_all_scripts = c_string_to_string_name("_reload_all_scripts");
+   func_name__reload_all_scripts.shouldBeDeleted=true;
+   func_name__reload_tool_script = c_string_to_string_name("_reload_tool_script");
+   func_name__reload_tool_script.shouldBeDeleted=true;
+   func_name__get_recognized_extensions = c_string_to_string_name("_get_recognized_extensions");
+   func_name__get_recognized_extensions.shouldBeDeleted=true;
+   func_name__get_public_functions = c_string_to_string_name("_get_public_functions");
+   func_name__get_public_functions.shouldBeDeleted=true;
+   func_name__get_public_constants = c_string_to_string_name("_get_public_constants");
+   func_name__get_public_constants.shouldBeDeleted=true;
+   func_name__get_public_annotations = c_string_to_string_name("_get_public_annotations");
+   func_name__get_public_annotations.shouldBeDeleted=true;
+   func_name__profiling_start = c_string_to_string_name("_profiling_start");
+   func_name__profiling_start.shouldBeDeleted=true;
+   func_name__profiling_stop = c_string_to_string_name("_profiling_stop");
+   func_name__profiling_stop.shouldBeDeleted=true;
+   func_name__frame = c_string_to_string_name("_frame");
+   func_name__frame.shouldBeDeleted=true;
+   func_name__handles_global_class_type = c_string_to_string_name("_handles_global_class_type");
+   func_name__handles_global_class_type.shouldBeDeleted=true;
+   func_name__get_global_class_name = c_string_to_string_name("_get_global_class_name");
+   func_name__get_global_class_name.shouldBeDeleted=true;
 }
 
 #pragma endregion
@@ -1443,7 +1564,9 @@ void register_class(){
     creation_info->get_virtual_func = get_virtual;
 
     StringName class_name_lang = c_string_to_string_name("PyLanguage");
+    class_name_lang.shouldBeDeleted = true;
     StringName parent_class_name = c_string_to_string_name("ScriptLanguageExtension");
+    parent_class_name.shouldBeDeleted=true;
 
     functions::get_classdb_register_extension_class()(_library, &class_name_lang.godot_owner, &parent_class_name.godot_owner, creation_info);
 }
