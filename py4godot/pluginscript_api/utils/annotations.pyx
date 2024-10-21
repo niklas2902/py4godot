@@ -161,12 +161,12 @@ cdef api TransferObject exec_class(str source_string, str class_name_):
         collect_properties(gd_class)
         collect_methods(gd_class)
     except Exception as e:
-        print_tools.print_error("exec_class: Exception happened:")
-        print_tools.print_error(f"class to load:{class_name_}")
+        print_tools.print_error_detailed('annotations.pyx', 'exec_class', 164, "exec_class: Exception happened:") # !this gets generated print_error
+        print_tools.print_error_detailed('annotations.pyx', 'exec_class', 165, f"class to load:{class_name_}") # !this gets generated print_error
         bytes_class = py_class_name_.encode("utf-8")
         my_str_class = bytes_class
-        print_tools.print_error(my_str_class)
-        print_tools.print_error(f"exec_class: Exception happened: {traceback.format_exc()}")
+        print_tools.print_error_detailed('annotations.pyx', 'exec_class', 168, my_str_class) # !this gets generated print_error
+        print_tools.print_error_detailed('annotations.pyx', 'exec_class', 169, f"exec_class: Exception happened: {traceback.format_exc()}") # !this gets generated print_error
 
     cdef char* c_icon_path
     cdef bytes bytes_icon_path

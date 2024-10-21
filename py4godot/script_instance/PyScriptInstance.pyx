@@ -36,8 +36,8 @@ cdef api GDExtensionBool instance_set(GDExtensionScriptInstanceDataPtr p_instanc
         #Py_DECREF(<object>val)#TODO: is this necessary?
 
     except Exception as e:
-        error(f"An Exception happened while setting attribute:{e}" )
-        print_error(f"traceback: {traceback.format_exc()}")
+        print_error_detailed('PyScriptInstance.pyx', 'instance_set', 39, f"An Exception happened while setting attribute:{e}" ) # !this gets generated print_error
+        print_error_detailed('PyScriptInstance.pyx', 'instance_set', 40, f"traceback: {traceback.format_exc()}") # !this gets generated print_error
 
     return 1
 
@@ -60,8 +60,8 @@ cdef api GDExtensionBool instance_get(GDExtensionScriptInstanceDataPtr p_instanc
         py_typename = str(type(get_val).__name__)
         get_var.init_from_py_object(<PyObject*>get_val, py_typename.encode("utf-8"))
     except Exception as e:
-        print_error("Exception while getting attribute:",e)
-        print_error(f"traceback: {traceback.format_exc()}")
+        print_error_detailed('PyScriptInstance.pyx', 'instance_get', 63, "Exception while getting attribute:",e) # !this gets generated print_error
+        print_error_detailed('PyScriptInstance.pyx', 'instance_get', 64, f"traceback: {traceback.format_exc()}") # !this gets generated print_error
     return 1
 
 """cdef api const GDExtensionMethodInfo * instance_get_method_list(GDExtensionScriptInstanceDataPtr p_instance, uint32_t *r_count) :
@@ -95,7 +95,7 @@ cdef api GDExtensionBool instance_has_method(GDExtensionScriptInstanceDataPtr p_
     try:
         py_method_name_str = gd_string_name_to_py_string(method_name)
     except Exception as e:
-        print_error(f"Exception: {e}")
+        print_error(f"Exception: {e}") # !this gets generated print_error
     return hasattr(<object>(instance.owner), py_method_name_str)
 
 cdef api MethodCallData instance_call(GDExtensionScriptInstanceDataPtr p_self, GDExtensionConstStringNamePtr p_method, const GDExtensionConstVariantPtr *p_args, GDExtensionInt p_argument_count, GDExtensionVariantPtr r_return, GDExtensionCallError *r_error) noexcept:
@@ -109,7 +109,7 @@ cdef api MethodCallData instance_call(GDExtensionScriptInstanceDataPtr p_self, G
     try:
         py_method_name_str = gd_string_name_to_py_string(method_name)
     except Exception as e:
-        print_error(f"Exception: {e}")
+        print_error_detailed('PyScriptInstance.pyx', 'instance_call', 112, f"Exception: {e}") # !this gets generated print_error
     cdef Variant var
     args = []
     cdef object instance_object = <object>instance.owner
@@ -130,9 +130,9 @@ cdef api MethodCallData instance_call(GDExtensionScriptInstanceDataPtr p_self, G
         method = getattr(instance_object,py_method_name_str)
         result = method(*args)
     except Exception as e:
-        print_error(f"An Exception happened while calling a method:{e}" )
-        print_error(f"traceback: {traceback.format_exc()}")
-        print_error(f"method name:{py_method_name_str}")
+        print_error_detailed('PyScriptInstance.pyx', 'instance_call', 133, f"An Exception happened while calling a method:{e}" ) # !this gets generated print_error
+        print_error_detailed('PyScriptInstance.pyx', 'instance_call', 134, f"traceback: {traceback.format_exc()}") # !this gets generated print_error
+        print_error_detailed('PyScriptInstance.pyx', 'instance_call', 135, f"method name:{py_method_name_str}") # !this gets generated print_error
     py_log("object:"+str(instance_object))
 
     py_typename = str(type(result).__name__)
