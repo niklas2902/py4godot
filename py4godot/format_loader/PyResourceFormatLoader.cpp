@@ -21,7 +21,7 @@ bool string_names_equal_loader(StringName& left, StringName& right){
     PyResourceFormatLoader* class_ = new PyResourceFormatLoader();
 
     StringName class_name = c_string_to_string_name("PyResourceFormatLoader");
-    class_name.shouldBeDeleted = false;
+    class_name.shouldBeDeleted = true;
     class_->godot_owner = functions::get_classdb_construct_object()(&class_name.godot_owner);
     functions::get_object_set_instance()(class_->godot_owner,&class_name.godot_owner , class_);
 

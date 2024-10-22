@@ -1,12 +1,11 @@
 from py4godot.enums.enums import *
-from py4godot.classes.generated import *
+from py4godot.classes.Node3D import *
 from py4godot.pluginscript_api.utils.annotations import *
-from py4godot.pluginscript_api.hints import *
 import PythonTest
 import unittest
 
-@gclass
-class TestRunner(Spatial):
+@gdclass
+class TestRunner(Node3D):
 
 	def __init__(self):
 		print("__init__")
@@ -19,5 +18,3 @@ class TestRunner(Spatial):
 			self.get_tree().quit(0)
 		else:
 			self.get_tree().quit(1)
-
-
