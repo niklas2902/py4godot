@@ -84,7 +84,6 @@ def copy_other_files(folder_path):
     shutil.copy("build_resources/python.gdextension", folder_path+"/python.gdextension")
     shutil.copy("build_resources/dependencies.txt", folder_path+"/dependencies.txt")
     shutil.copy("build_resources/Python.svg", folder_path + "/Python.svg")
-    shutil.copy("build_resources/install_pip.py", folder_path + "/install_pip.py")
     shutil.copy("build_resources/install_dependencies.py", folder_path + "/install_dependencies.py")
     download_get_pip(folder_path)
     with open(folder_path+"/.gitignore", "w") as f:

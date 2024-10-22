@@ -58,7 +58,6 @@ if __name__ == "__main__":
     copytree(f"build/final/{args.target_platform}/cpython-3.12.4-{args.target_platform}", f"example/addons/py4godot/cpython-3.12.4-{args.target_platform}")
     shutil.copy("build_resources/python.gdextension", "example/addons/py4godot/python.gdextension")
     shutil.copy("build_resources/dependencies.txt", "example/addons/py4godot/dependencies.txt")
-    shutil.copy("build_resources/install_pip.py", "example/addons/py4godot/install_pip.py")
     shutil.copy("build_resources/install_dependencies.py", "example/addons/py4godot/install_dependencies.py")
     download_get_pip("example/addons/py4godot")
 

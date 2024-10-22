@@ -18,6 +18,7 @@
 #include <cassert>
 #include "Python.h"
 #include <algorithm>
+#DEFINE AUTO_INSTALL
 
 GDExtensionPtrOperatorEvaluator operator_equal_string_namescript;
 PyScriptExtension extension;
@@ -43,14 +44,10 @@ void init_pluginscript_api(){
     }
 
     // Construct the full path using the current working directory and PYTHONHOME
-    print_error("Executing:");
-    std::string python_exe = std::string(current_dir) + "/" + python_home_narrow + "/python.exe addons/py4godot/install_pip.py";
+    #ifdef AUTO_INSTALL
     std::string install_dependencies = std::string(current_dir) + "/" + python_home_narrow + "/python.exe addons/py4godot/install_dependencies.py";
-    print_error(const_cast<char*>(python_exe.c_str()));
-    print_error(const_cast<char*>(install_dependencies.c_str()));
-    system(python_exe.c_str());
     system(install_dependencies.c_str());
-
+    #endif
     Py_SetProgramName(L"python");
     Py_SetPythonHome(PYTHONHOME);
     // Initialize interpreter but skip initialization registration of signal handlers
