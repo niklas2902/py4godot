@@ -14,9 +14,24 @@
 Theme theme;
 std::shared_ptr<ImageTexture> image_texture;
 
+//TODO: generate this
+bool theme_has_method(){
+    StringName _class_name = c_string_to_string_name("EditorInterface");
+    _class_name.shouldBeDeleted = true;
+
+    StringName _method_name = c_string_to_string_name("get_editor_theme");
+    _method_name.shouldBeDeleted = true;
+
+    GDExtensionMethodBindPtr method_bind = functions::get_classdb_get_method_bind()(&_class_name.godot_owner,&_method_name.godot_owner, 3846893731);
+    return method_bind != nullptr;
+}
+
 void PyLanguage::init_theme_icon(){
     if(counter == 1){
         auto instance = EditorInterface::get_instance();
+        if(!theme_has_method()){
+            return;
+        }
         theme = instance ->get_editor_theme();
 
         image_texture = ImageTexture::constructor();
@@ -40,8 +55,8 @@ void PyLanguage::init_theme_icon(){
     }
 }
 void PyLanguage::deinit_theme_icon(){
-    theme.unreference();
-    image_texture->unreference();
+    //theme.unreference();
+    //image_texture->unreference();
 }
   PyLanguage* PyLanguage::constructor(){
     PyLanguage* class_ = new PyLanguage();
