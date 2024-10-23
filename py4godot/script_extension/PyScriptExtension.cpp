@@ -18,7 +18,6 @@
 #include <cassert>
 #include "Python.h"
 #include <algorithm>
-#DEFINE AUTO_INSTALL
 
 GDExtensionPtrOperatorEvaluator operator_equal_string_namescript;
 PyScriptExtension extension;

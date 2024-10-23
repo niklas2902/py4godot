@@ -118,6 +118,8 @@ my_parser.add_argument("-run_tests", help="should tests be run", default="False"
 my_parser.add_argument("-download_godot", help="should tests be run", default="False")
 my_parser.add_argument("-create_plugin", help="Should this create a plugin", default="True")
 my_parser.add_argument("-buildtype", help="Should this be a debug build or release build, optionas are release or debugoptimized", default="release")
+my_parser.add_argument("-auto_install", help="Should the build automatically install pip and dependencies", default="False")
+
 # Execute parse_args()
 args = my_parser.parse_args()
 
@@ -161,10 +163,11 @@ try:
               f"{command_separator} meson compile -C build/{args.target_platform}"
               )
         res = subprocess.Popen(msvc_init +
-                               f"meson {build_dir} --cross-file platforms/{args.target_platform}.cross "
+                               f"meson setup {build_dir} --cross-file platforms/{args.target_platform}.cross "
                                f"--cross-file platforms/compilers/{args.compiler}_compiler.native "
                                f"--cross-file platforms/binary_dirs/python_ver_compile.cross "
                                f"{get_debug_release_cross_compile_file(args.compiler, build_type)} "
+                               +(f"-Dcpp_args=-DAUTO_INSTALL=1 " if args.auto_install else " ")+
                                f"--buildtype={args.buildtype} "
                                f"{command_separator} meson compile -C build/{args.target_platform}",
                                shell=True)
@@ -178,11 +181,12 @@ try:
               f"{command_separator} meson compile -C build/{args.target_platform}"
               )
         res = subprocess.Popen(msvc_init +
-                               f"meson {build_dir} --cross-file platforms/{args.target_platform}.cross "
+                               f"meson setup {build_dir} --cross-file platforms/{args.target_platform}.cross "
                                f"--cross-file platforms/compilers/{args.compiler}_compiler.native "
                                f"--cross-file platforms/binary_dirs/python_ver_compile.cross "
+                               +(f"-Dcpp_args=-DAUTO_INSTALL=1 " if args.auto_install else " ")+
                                f"--buildtype={args.buildtype} "
-                               f"{get_debug_release_cross_compile_file(args.compiler, build_type)}"
+                               f"{get_debug_release_cross_compile_file(args.compiler, build_type)} "
                                f"{command_separator} meson compile -C build/{args.target_platform}",
                                shell=True)
 

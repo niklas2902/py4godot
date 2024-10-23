@@ -42,12 +42,17 @@ if __name__ == "__main__":
     my_parser.add_argument("-download_godot", help="should tests be run", default="False")
     my_parser.add_argument("-create_plugin", help="Should this create a plugin", default="True")
     my_parser.add_argument("-buildtype", help="Should this be a debug build or release build, optionas are release or debugoptimized", default="release")
+    my_parser.add_argument("-auto_install", help="Should the build automatically install pip and dependencies",
+                           default="False")
+
     # Execute parse_args()
     args = my_parser.parse_args()
 
     try:
         res = subprocess.Popen(f"python build.py --target_platform={args.target_platform} "
-                               f"--compiler={args.compiler} -run_tests={args.run_tests} -download_godot={args.download_godot} -create_plugin={args.create_plugin} -buildtype={args.buildtype}",
+                               f"--compiler={args.compiler} -run_tests={args.run_tests} "
+                               f"-download_godot={args.download_godot} -create_plugin={args.create_plugin} "
+                               f"-buildtype={args.buildtype} -auto_install={args.auto_install}",
                                shell=True)
         res.wait()
     except Exception as e:
