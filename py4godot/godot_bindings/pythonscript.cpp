@@ -1,8 +1,9 @@
 #include "main.h"
 #include "gdextension_interface.h"
+#ifdef __linux__
 #include <iostream>
 #include <dlfcn.h>  // For dlopen, dlsym, dlclose
-
+#endif
 
 typedef GDExtensionBool (*Py4GodotInitFunc)(GDExtensionInterfaceGetProcAddress p_get_proc_address,
                                          GDExtensionClassLibraryPtr p_library,
