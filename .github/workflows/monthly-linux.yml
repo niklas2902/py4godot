@@ -35,7 +35,8 @@ jobs:
     steps:
     - name: Checkout repository
       uses: actions/checkout@v2cific branch you want to check out
-
+      with:
+        ref: "master"
     - name: Set up Python 3.11.3
       uses: actions/setup-python@v2
       with:
