@@ -34,7 +34,7 @@ jobs:
             VS_ARCH: 'amd64'
     steps:
     - name: Checkout repository
-      uses: actions/checkout@v2cific branch you want to check out
+      uses: actions/checkout@v2
       with:
         ref: "master"
     - name: Set up Python 3.11.3
