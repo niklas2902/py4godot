@@ -32,9 +32,12 @@ jobs:
           - PLATFORM: 'linux64'
             PYTHON_ARCH: 'x64'
             VS_ARCH: 'amd64'
-
     steps:
-    - uses: actions/checkout@v2
+    - name: Checkout repository
+      uses: actions/checkout@v2
+      with:
+        ref: branch_name  # Replace branch_name with the specific branch you want to check out
+
     - name: Set up Python 3.11.3
       uses: actions/setup-python@v2
       with:
