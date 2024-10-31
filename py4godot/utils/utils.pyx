@@ -3,10 +3,10 @@ from py4godot.utils.print_tools import *
 from py4godot.utils.test_utils cimport *
 from libc.stdlib cimport malloc, free
 from cpython.ref cimport Py_INCREF, Py_DECREF
-from py4godot.classes.Node.Node cimport *
-cimport py4godot.classes.Viewport.Viewport as py4godot_viewport
-cimport py4godot.classes.SceneTree.SceneTree as py4godot_scenetree
-cimport py4godot.classes.Window.Window as py4godot_window
+from py4godot.classes.Node cimport *
+cimport py4godot.classes.Viewport as py4godot_viewport
+cimport py4godot.classes.SceneTree as py4godot_scenetree
+cimport py4godot.classes.Window as py4godot_window
 
 
 cdef core.StringName py_c_string_to_string_name(char* string):

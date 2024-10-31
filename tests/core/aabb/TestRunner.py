@@ -1,12 +1,19 @@
 from py4godot.enums.enums import *
-from py4godot.classes.generated import *
+from py4godot.classes.Node3D import *
+from py4godot.utils.utils import get_tree
 from py4godot.pluginscript_api.utils.annotations import *
-from py4godot.pluginscript_api.hints import *
 import PythonTest
 import unittest
 
-@gclass
-class TestRunner(Spatial):
+class PrintStream:
+	def write(self, msg):
+		print(msg, end='')
+
+	def flush(self):
+		pass
+
+@gdclass
+class TestRunner(Node3D):
 
 	def __init__(self):
 		print("__init__")
@@ -14,10 +21,9 @@ class TestRunner(Spatial):
 	def _ready(self):
 		print("##########start#############")
 		suite = unittest.TestLoader().loadTestsFromModule(PythonTest)
-		res = unittest.TextTestRunner().run(suite)
+		res = unittest.TextTestRunner(stream=PrintStream()).run(suite)
+		import sys
 		if len(res.failures) == 0:
-			self.get_tree().quit(0)
+			get_tree(self).quit(0)
 		else:
-			self.get_tree().quit(1)
-
-
+			get_tree(self).quit(1)

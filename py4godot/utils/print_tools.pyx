@@ -14,7 +14,23 @@ def print_error(*objects, sep=' ', end=''):
     b_str = string.encode('utf-8')
     cdef char* c_str = b_str
 
-    output(c_str, "test", "test",1, 1);
+    output(c_str, "error", "error",1, 1);
+
+
+def print_error_detailed(str file, str function, int line, *objects, sep=' ', end=''):
+    cdef GDExtensionInterfacePrintError output = tools.get_print_error()
+    cdef str string = ""
+    for object in objects:
+        string += str(object) + sep
+    string.rstrip(sep)
+    string += end
+    b_str = string.encode('utf-8')
+    cdef char* c_str = b_str
+
+    cdef bytes encoded_file= file.encode('utf-8')
+    cdef bytes encoded_function = function.encode('utf-8')
+    output(c_str, encoded_file, encoded_function,line, 1);
+
 
 def error(*objects, sep=' ', end=''):
     return

@@ -1245,6 +1245,20 @@ def generate_constructor(classname):
     res += f"{INDENT * 2}return class_"
     res = generate_newline(res)
 
+    res += f"{INDENT}@staticmethod"
+    res = generate_newline(res)
+    res += f"{INDENT}def new():"
+    res = generate_newline(res)
+    res += f"{INDENT * 2}cdef {classname} class_ = {classname}.__new__({classname})"
+    res = generate_newline(res)
+    res += f"{INDENT * 2}class_.{class_['name']}_internal_class_ptr = construct_{class_['name']}()"
+    res = generate_newline(res)
+    res += f"{INDENT * 2}class_.set_gdowner(class_.{class_['name']}_internal_class_ptr.get().get_godot_owner())"
+    res = generate_newline(res)
+
+    res += f"{INDENT * 2}return class_"
+    res = generate_newline(res)
+
     res += f"{INDENT}def __init__(self):"
     res = generate_newline(res)
     res += f"{INDENT * 2}if py_utils.shouldCreateObject:"
@@ -1384,10 +1398,19 @@ def should_skip_import(classname, class_to_import):
     return classname == "Node" and class_to_import in {"SceneTree", "Viewport", "Window"}
 
 
+def create_core_classes_set():
+    res = "core_classes = {"
+    for cls in builtin_classes - {"int", "float", "bool", "Nil"}:
+        res += cls + ","
+    res += "}"
+    res = generate_newline(res)
+    return res
+
+
 def generate_classes(classes, filename, is_core=False, is_typed_array=False):
     res = generate_import()
     if is_typed_array:
-        res += f"from py4godot.classes.Object.Object cimport *"
+        res += f"from py4godot.classes.Object cimport *"
         res = generate_newline(res)
 
         res += f"from py4godot.classes.core cimport *"
@@ -1398,7 +1421,7 @@ def generate_classes(classes, filename, is_core=False, is_typed_array=False):
                 continue
             if should_skip_import(classes[0]["name"], cls):
                 continue
-            res += f"cimport py4godot.classes.{cls}.{cls} as py4godot_{cls.lower()} "
+            res += f"cimport py4godot.classes.{cls} as py4godot_{cls.lower()} "
             res = generate_newline(res)
 
     elif not is_core:
@@ -1414,7 +1437,7 @@ def generate_classes(classes, filename, is_core=False, is_typed_array=False):
                 continue
             if should_skip_import(classes[0]["name"], cls):
                 continue
-            res += f"cimport py4godot.classes.{cls}.{cls} as py4godot_{cls.lower()} "
+            res += f"cimport py4godot.classes.{cls} as py4godot_{cls.lower()} "
             res = generate_newline(res)
 
         if "inherits" in classes[0].keys():
@@ -1426,7 +1449,7 @@ def generate_classes(classes, filename, is_core=False, is_typed_array=False):
                     break
                 cls = find_class(cls["inherits"])
     else:
-        res += f"from py4godot.classes.Object.Object cimport *"
+        res += f"from py4godot.classes.Object cimport *"
         res = generate_newline(res)
     for class_ in classes:
         if (class_["name"] in IGNORED_CLASSES):
@@ -1450,6 +1473,8 @@ def generate_classes(classes, filename, is_core=False, is_typed_array=False):
             res += generate_method(class_, method)
             res = generate_newline(res)
         res += generate_operators_for_class(class_["name"])
+    if is_core:
+        res += create_core_classes_set()
     text_to_write = "# distutils: language=c++\n"+res
     write_if_different(filename, text_to_write)
 
@@ -1845,11 +1870,7 @@ if __name__ == "__main__":
             generate_operators_set(class_)
 
         for class_ in obj["classes"]:
-            if (not os.path.exists(f"py4godot/classes/{class_['name']}/")):
-                os.mkdir(f"py4godot/classes/{class_['name']}/")
-            with open(f"py4godot/classes/{class_['name']}/__init__.py", "w"):
-                pass
-            generate_classes([class_], f"py4godot/classes/{class_['name']}/{class_['name']}.pyx")
+            generate_classes([class_], f"py4godot/classes/{class_['name']}.pyx")
 
         array_cls = None
         arrays = []

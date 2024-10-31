@@ -3,7 +3,7 @@ import sys,os
 from typing import get_type_hints
 
 import inspect, traceback
-from py4godot.pluginscript_api.hints.BaseHint cimport *
+from py4godot.hints.BaseHint cimport *
 from py4godot.godot_bindings.binding4_godot4 cimport *
 from py4godot.pluginscript_api.utils.utils cimport *
 
@@ -15,8 +15,9 @@ from py4godot.pluginscript_api.utils.SignalDescription cimport *
 from py4godot.pluginscript_api.utils.PropertyDescription cimport *
 import py4godot.utils.print_tools as print_tools
 from importlib.machinery import SourceFileLoader
-from py4godot.classes.Node3D.Node3D cimport *
-from py4godot.classes.Object.Object cimport *
+from py4godot.classes.Node3D cimport *
+from py4godot.classes.Object cimport *
+import py4godot.classes.core
 import importlib
 import importlib.util
 from libcpp.string cimport string
@@ -94,19 +95,28 @@ def generate_default_val(type_):
 def is_class(type_):
     return type(int) == type(type_)
 
+cdef accepted_types = {int, str, float, type(True)}
+def type_is_accepted(type_to_accept):
+    return type_to_accept in accepted_types or type_to_accept in py4godot.classes.core.core_classes
+
+
 def collect_properties(cls):
     if cls is None:
         return
 
     potential_properties = get_class_attributes(cls)
     for potential_property in potential_properties.keys():
+        if potential_property.startswith("_"): # We handle _ like private names
+            continue
         if potential_property not in already_registered_property_names and potential_property not in already_registered_signal_names:
             if not is_class(potential_properties[potential_property]):
-                prop(potential_property, type(potential_properties[potential_property]),
-                     potential_properties[potential_property])
+                if type_is_accepted(type(potential_properties[potential_property])):
+                    prop(potential_property, type(potential_properties[potential_property]),
+                         potential_properties[potential_property])
             else:
-                prop(potential_property, potential_properties[potential_property],
-                     generate_default_val(potential_properties[potential_property]))
+                if type_is_accepted(type(potential_properties[potential_property])):
+                    prop(potential_property, potential_properties[potential_property],
+                         generate_default_val(potential_properties[potential_property]))
 
 def collect_methods(cls):
     if cls is None:
@@ -151,12 +161,12 @@ cdef api TransferObject exec_class(str source_string, str class_name_):
         collect_properties(gd_class)
         collect_methods(gd_class)
     except Exception as e:
-        print_tools.print_error("exec_class: Exception happened:")
-        print_tools.print_error(f"class to load:{class_name_}")
+        print_tools.print_error_detailed('annotations.pyx', 'exec_class', 164, "exec_class: Exception happened:") # !this gets generated print_error
+        print_tools.print_error_detailed('annotations.pyx', 'exec_class', 165, f"class to load:{class_name_}") # !this gets generated print_error
         bytes_class = py_class_name_.encode("utf-8")
         my_str_class = bytes_class
-        print_tools.print_error(my_str_class)
-        print_tools.print_error(f"exec_class: Exception happened: {traceback.format_exc()}")
+        print_tools.print_error_detailed('annotations.pyx', 'exec_class', 168, my_str_class) # !this gets generated print_error
+        print_tools.print_error_detailed('annotations.pyx', 'exec_class', 169, f"exec_class: Exception happened: {traceback.format_exc()}") # !this gets generated print_error
 
     cdef char* c_icon_path
     cdef bytes bytes_icon_path
@@ -225,7 +235,7 @@ def gdtool(cls):
         raise Exception("More than one class was marked as gd_class or gd_tool_class in one file")
     return cls
 
-def prop(name,type_, defaultval, hint = BaseHint(), hint_string = ""):
+def prop(name,type_, defaultval, hint = BaseHint()):
     already_registered_property_names.append(name)
     default_values.append(defaultval)
     properties.append(PropertyDescription(name = name,

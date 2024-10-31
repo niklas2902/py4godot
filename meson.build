@@ -1,17 +1,17 @@
 project('py4godot', 'cpp')
 
 cc = meson.get_compiler('cpp')
-message('system:'+build_machine.system())
-message('cpu_familiy:'+build_machine.cpu_family())
+message('system:' + build_machine.system())
+message('cpu_family:' + build_machine.cpu_family())
 platform_format = ''
 machine = host_machine.system()
-platform_format='32'
-if host_machine.cpu_family()=='x86_64'
-    platform_format='64'
+platform_format = '32'
+if host_machine.cpu_family() == 'x86_64'
+    platform_format = '64'
 endif
 
-message('platform:'+platform_format)
-message('machine:'+machine)
+message('platform:' + platform_format)
+message('machine:' + machine)
 
 extra_args = []
 message(meson.get_compiler('cpp').get_id())
@@ -19,7 +19,7 @@ message(meson.get_compiler('cpp').get_id())
 link_args = []
 cpp_args = []
 if meson.get_compiler('cpp').get_id() == 'gcc'
-    add_global_arguments('-DMS_WIN'+ platform_format, language : 'cpp')
+    add_global_arguments('-DMS_WIN' + platform_format, language: 'cpp')
     cpp_args = ['-D LIBRARY_EXPORTS=1']
     if platform_format == '32'
         link_args = ['-m32']
@@ -27,15 +27,15 @@ if meson.get_compiler('cpp').get_id() == 'gcc'
     endif
 endif
 if meson.get_compiler('cpp').get_id() == 'g++'
-    add_global_arguments('-DMS_WIN'+platform_format, language : 'cpp')
-    cpp_args = ['-D LIBRARY_EXPORTS=1',]
+    add_global_arguments('-DMS_WIN' + platform_format, language: 'cpp')
+    cpp_args = ['-D LIBRARY_EXPORTS=1']
     if platform_format == '32'
         link_args = ['-m32']
         cpp_args += ['-m32', '-std=c++14']
     endif
 endif
 if meson.get_compiler('cpp').get_id() == 'msvc'
-    add_global_arguments('/bigobj', language : 'cpp')
+    add_global_arguments('/bigobj', language: 'cpp')
     cpp_args = ['/DLIBRARY_EXPORTS=1']
 endif
 

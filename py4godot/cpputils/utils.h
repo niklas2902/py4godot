@@ -13,7 +13,12 @@ static bool is_none(PyObject* pyobject){
 }
 
 static void print_error(char* error_message){
-    //functions::get_print_error()(error_message, "test", "test", 1, 1);
+    //functions::get_print_error()(error_message, "error", "error", 1, 1);
+}
+
+
+static void print_error_detailed(char* error_message, char* function, char* file, int line){
+    functions::get_print_error()(error_message, function, file, line, 1);
 }
 
 static void break_(){
@@ -214,4 +219,8 @@ static std::string get_python_typename(PyObject* get_val) {
     Py_XDECREF(type_name_obj);
 
     return py_typename;
+}
+
+static std::shared_ptr<godot::Dictionary> empty_dictionary_pointer(){
+    return std::shared_ptr<Dictionary>();
 }

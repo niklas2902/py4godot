@@ -1,8 +1,8 @@
 # distutils: language=c++
 cdef class BaseHint(object):
-    def __init__(self):
-        self.hint = 0
-        self.hint_string = ""
+    def __init__(self, int hint = 0, str hint_string = ""):
+        self.hint = hint
+        self.hint_string = hint_string
     def get_hint(self):
         return self.hint
 

@@ -24,8 +24,11 @@ scripts = [
     'generate_utility_hpp.py',
     'generate_utils_cpp.py'
 ]
-if bool(args.dev_build):
-    scripts.append("generate_cast_helpers.py")
+if bool(args.dev_build == "True"):
+    scripts.append("generate_cast_helpers_dev.py")
+else:
+    scripts.append("generate_cast_helpers_release.py")
+
 
 # Make sure all necessary directories are there
 if not os.path.isdir("py4godot/classes"):
