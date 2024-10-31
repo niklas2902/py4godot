@@ -63,4 +63,6 @@
 extern GDExtensionClassLibraryPtr _library;
 
 static PyThreadState *gilstate = NULL;
+extern "C" {
 GDExtensionBool GDN_EXPORT py4godot_init(GDExtensionInterfaceGetProcAddress p_get_proc_address, GDExtensionClassLibraryPtr p_library, GDExtensionInitialization *r_initialization);
+}

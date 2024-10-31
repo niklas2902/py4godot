@@ -178,19 +178,21 @@ void deinitialize_py4godot(void *userdata, GDExtensionInitializationLevel p_leve
     godot::deinit_py_language();
 
 }
-GDExtensionBool GDN_EXPORT py4godot_init(GDExtensionInterfaceGetProcAddress p_get_proc_address, GDExtensionClassLibraryPtr p_library, GDExtensionInitialization *r_initialization){
-    _library = p_library;
-    global_p_get_proc_address = p_get_proc_address;
+extern "C"{
+    GDExtensionBool GDN_EXPORT py4godot_init(GDExtensionInterfaceGetProcAddress p_get_proc_address, GDExtensionClassLibraryPtr p_library, GDExtensionInitialization *r_initialization){
+        _library = p_library;
+        global_p_get_proc_address = p_get_proc_address;
 
-    #ifdef _WIN32
-        #ifdef _M_IX86
-            InitializeCriticalSection(&mtx);
+        #ifdef _WIN32
+            #ifdef _M_IX86
+                InitializeCriticalSection(&mtx);
+            #endif
         #endif
-    #endif
 
 
-    r_initialization->initialize = initialize_py4godot;
-    r_initialization->deinitialize = deinitialize_py4godot;
+        r_initialization->initialize = initialize_py4godot;
+        r_initialization->deinitialize = deinitialize_py4godot;
 
-    return 1;
+        return 1;
+    }
 }
