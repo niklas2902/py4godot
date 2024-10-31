@@ -11,7 +11,7 @@ with open('config.json', 'r') as f:
 
 def strip_platform(text):
     text = text[1:]
-    return text.lstrip("linux64").lstrip("windows64").lstrip("windows32").lstrip("linux32")
+    return text.lstrip("linux64").lstrip("windows64").lstrip("windows32").lstrip("linux32").lstrip("darwin32")
 
 
 def run(platform):
@@ -21,7 +21,8 @@ def run(platform):
         list_dll = glob.glob("**/*.dll", recursive=True)
     elif "linux" in platform:
         list_dll = glob.glob("**/*.so", recursive=True)
-
+    elif "darwin" in platform:
+        list_dll = glob.glob("**/*.dylib", recursive=True)
     for entry in list_dll:
         if "cpython" in entry:
             continue
@@ -78,6 +79,11 @@ def copy_main(platform):
         copy(f"build/{platform}/main.so",
              f"build/final/{platform}/{config_data['python_ver']}-{platform}/python/bin/main.so")
         copy(f"build/{platform}/pythonscript.so",
+             f"build/final/{platform}/{config_data['python_ver']}-{platform}/python/bin/pythonscript.so")
+    elif "darwin" in platform:
+        copy(f"build/{platform}/main.dylib",
+             f"build/final/{platform}/{config_data['python_ver']}-{platform}/python/bin/main.so")
+        copy(f"build/{platform}/pythonscript.dylib",
              f"build/final/{platform}/{config_data['python_ver']}-{platform}/python/bin/pythonscript.so")
 
 
