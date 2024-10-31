@@ -14,3 +14,6 @@ linux.debug.x86_64 = "cpython-3.12.4-linux64/python/bin/pythonscript.so"
 linux.release.x86_64 = "cpython-3.12.4-linux64/python/bin/pythonscript.so"
 linux.debug.x86 = "cpython-3.12.4-linux32/python/bin/pythonscript.so"
 linux.release.x86 = "cpython-3.12.4-linux32/python/bin/pythonscript.so"
+
+macos.debug.aarch64 = "cpython-3.12.4-darwin64/python/bin/pythonscript.dylib"
+macos.release.aarch64 = "cpython-3.12.4-darwin64/python/bin/pythonscript.dylib"
