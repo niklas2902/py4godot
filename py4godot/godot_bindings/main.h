@@ -18,7 +18,7 @@
 #define PYTHONHOME L"addons/py4godot/cpython-3.12.4-linux64/python"
 
 #elif __APPLE__
-#define PYTHONHOME L"cpython-3.12.4-windows32/python/install"
+#define PYTHONHOME L"addons/py4godot/cpython-3.12.4-linux64/python"
 #endif
 #if !defined(GDN_EXPORT)
 #if defined(_WIN32)

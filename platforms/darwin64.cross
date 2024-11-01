@@ -1,0 +1,19 @@
+[binaries]
+c = 'clang'
+cpp = 'clang++'
+ar = 'ar'
+strip = 'strip'
+# 'exe_wrapper' is typically used when cross-compiling for a system with no native execution
+# Here, it's left out, as no wrapper is usually required on macOS
+
+#[properties]
+# Optional, if targeting a specific macOS SDK or version
+#sys_root = '/path/to/SDK'  # E.g., '/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.15.sdk'
+#c_args = ['-isysroot', '/path/to/SDK']
+#cpp_args = ['-isysroot', '/path/to/SDK']
+
+[host_machine]
+system = 'darwin'
+cpu_family = 'x86_64'  # Change to 'aarch64' if targeting Apple Silicon
+cpu = 'x86_64'         # Change to 'arm64' if targeting Apple Silicon
+endian = 'little'
