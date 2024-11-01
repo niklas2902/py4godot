@@ -105,7 +105,7 @@ jobs:
           fi
 
       - name: Build
-        run: python build.py --target_platform=macos64 --compiler=clang -create_plugin=False -buildtype=release
+        run: python build.py --target_platform=darwin64 --compiler=clang -create_plugin=False -buildtype=release
 
       - name: Create cache
         run: python meson_scripts/create_cache.py
