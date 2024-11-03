@@ -28,10 +28,10 @@ cdef api object type_helper_create_string(shared_ptr[bridge.String]& bridge_stri
 
 
 cdef api object type_helper_create_object(shared_ptr[bridge.Object]& bridge_object):
-    cdef Object val = Object()
-    val.Object_internal_class_ptr = bridge_object
-    ##Py_INCREF(val)
-    return val
+    cdef Object temp_val = Object.__new__(Object)
+    temp_val.Object_internal_class_ptr = bridge_object
+    #Py_INCREF(temp_val)
+    return temp_val
 
 
 cdef api object type_helper_create_py_string(shared_ptr[bridge.String]& bridge_string):
