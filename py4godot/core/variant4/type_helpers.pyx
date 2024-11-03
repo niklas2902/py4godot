@@ -26,9 +26,12 @@ cdef api object type_helper_create_string(shared_ptr[bridge.String]& bridge_stri
     ##Py_INCREF(val)
     return val
 
-
+cdef Object val = None
 cdef api object type_helper_create_object(shared_ptr[bridge.Object]& bridge_object):
-    cdef Object val = Object()
+    global val
+    if not val:
+        val = Object() # Just using object.__new__(Object) crashes. This seems to fix that
+        val.destroy() # Free object to not run into memory leaks
     val.Object_internal_class_ptr = bridge_object
     ##Py_INCREF(val)
     return val
