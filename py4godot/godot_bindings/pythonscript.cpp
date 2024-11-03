@@ -49,14 +49,15 @@ extern "C" {
 
         // Close the library handle
         dlclose(handle);
+        return result;
 
         #endif
         #ifdef _WIN64
         // Direct call on Windows, where dynamic linking is handled differently
         py4godot_init(p_get_proc_address, p_library, r_initialization);
+        return 1;
         #endif
 
-        return result;
     }
 }
 
