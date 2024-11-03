@@ -7,15 +7,11 @@ cdef class PyVariant:
     cdef object get_converted_value(self, bint should_return_pystring):
         cdef PyObject* obj = self.variant.get_converted_value(should_return_pystring)
         cdef object py_obj = <object> obj
-        print_error("cast_helpers:")
-        print_error(cast_helpers.vals)
         cast_helpers.clear_vals()
         return py_obj
     cdef object get_converted_value_native_ptr(self, bint should_return_pystring):
         cdef PyObject* obj = self.variant.get_converted_value_native_ptr(should_return_pystring)
         cdef object py_obj = <object> obj
-        print_error("cast_helpers")
-        print_error(cast_helpers.vals)
         cast_helpers.clear_vals()
         return py_obj
     cdef void init_from_py_object(self, object pyobject):

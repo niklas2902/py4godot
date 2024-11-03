@@ -89,7 +89,7 @@ def generate_import():
               "from py4godot.enums.enums cimport *\n"
               "from py4godot.utils.utils cimport *\n"
               "from py4godot.classes.core cimport *\n"
-              "cimport py4godot.classes.Object.Object as py4godot_object\n")
+              "cimport py4godot.classes.Object as py4godot_object\n")
 
     for cls in sorted(list(builtin_classes)):
         if cls not in {"Nil", "float", "int", "bool"}:

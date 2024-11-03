@@ -15,9 +15,9 @@ def generate_import(class_to_import=None):
     res = ""
     if class_to_import:
         if class_to_import != "Wrapper4":
-            res += f"cimport py4godot.classes.{class_to_import}.{class_to_import} as py4godot_{class_to_import.lower()}"
+            res += f"cimport py4godot.classes.{class_to_import} as py4godot_{class_to_import.lower()}"
             res = generate_newline(res)
-    res += f"from py4godot.classes.Object.Object cimport *"
+    res += f"from py4godot.classes.Object cimport *"
     res = generate_newline(res)
     res += f"from libcpp.memory cimport shared_ptr, allocator"
     return res
@@ -207,7 +207,7 @@ if __name__ == "__main__":
             res += generate_pxd_class(class_)
 
             text_to_write = "# distutils: language=c++\n"+res
-            write_if_different(f"py4godot/classes/{class_['name']}/{class_['name']}.pxd", text_to_write)
+            write_if_different(f"py4godot/classes/{class_['name']}.pxd", text_to_write)
         array_cls = None
         arrays = []
         for cls in obj["builtin_classes"]:

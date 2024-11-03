@@ -8,6 +8,7 @@ from shutil import copytree
 
 from Cython.Build import cythonize
 
+from build_tools import download_get_pip
 from meson_scripts import copy_tools, download_python, generate_init_files, \
     locations, platform_check, generate_godot, \
     download_godot
@@ -117,6 +118,8 @@ my_parser.add_argument("-run_tests", help="should tests be run", default="False"
 my_parser.add_argument("-download_godot", help="should tests be run", default="False")
 my_parser.add_argument("-create_plugin", help="Should this create a plugin", default="True")
 my_parser.add_argument("-buildtype", help="Should this be a debug build or release build, optionas are release or debugoptimized", default="release")
+my_parser.add_argument("-auto_install", help="Should the build automatically install pip and dependencies", default="False")
+
 # Execute parse_args()
 args = my_parser.parse_args()
 
@@ -160,10 +163,11 @@ try:
               f"{command_separator} meson compile -C build/{args.target_platform}"
               )
         res = subprocess.Popen(msvc_init +
-                               f"meson {build_dir} --cross-file platforms/{args.target_platform}.cross "
+                               f"meson setup {build_dir} --cross-file platforms/{args.target_platform}.cross "
                                f"--cross-file platforms/compilers/{args.compiler}_compiler.native "
                                f"--cross-file platforms/binary_dirs/python_ver_compile.cross "
                                f"{get_debug_release_cross_compile_file(args.compiler, build_type)} "
+                               +(f"-Dcpp_args=-DAUTO_INSTALL=1 " if args.auto_install else " ")+
                                f"--buildtype={args.buildtype} "
                                f"{command_separator} meson compile -C build/{args.target_platform}",
                                shell=True)
@@ -177,11 +181,12 @@ try:
               f"{command_separator} meson compile -C build/{args.target_platform}"
               )
         res = subprocess.Popen(msvc_init +
-                               f"meson {build_dir} --cross-file platforms/{args.target_platform}.cross "
+                               f"meson setup {build_dir} --cross-file platforms/{args.target_platform}.cross "
                                f"--cross-file platforms/compilers/{args.compiler}_compiler.native "
                                f"--cross-file platforms/binary_dirs/python_ver_compile.cross "
+                               +(f"-Dcpp_args=-DAUTO_INSTALL=1 " if args.auto_install else " ")+
                                f"--buildtype={args.buildtype} "
-                               f"{get_debug_release_cross_compile_file(args.compiler, build_type)}"
+                               f"{get_debug_release_cross_compile_file(args.compiler, build_type)} "
                                f"{command_separator} meson compile -C build/{args.target_platform}",
                                shell=True)
 
@@ -202,7 +207,9 @@ try:
             shutil.rmtree("build/py4godot")
         copytree(f"build/final/{args.target_platform}/cpython-3.12.4-{args.target_platform}", f"build/py4godot/cpython-3.12.4-{args.target_platform}")
         shutil.copy("build_resources/python.gdextension", "build/py4godot/python.gdextension")
-
+        shutil.copy("build_resources/dependencies.txt", "build/py4godot/dependencies.txt")
+        shutil.copy("build_resources/install_dependencies.py", "build/py4godot/install_dependencies.py")
+        download_get_pip("build/py4godot")
         python_svg_dest = "build/py4godot/"+ "/Python.svg"
         if not os.path.exists(python_svg_dest):
             shutil.copy("build_resources/Python.svg", python_svg_dest)

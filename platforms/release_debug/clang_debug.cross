@@ -1,0 +1,6 @@
+[built-in options]
+
+cpp_args = ['-g', '-O0', '-DDEBUG']
+
+cpp_link_args = ['-g']
+

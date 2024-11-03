@@ -12,6 +12,9 @@
 #include "py4godot/utils/instance_utils_api.h"
 #include "py4godot/cpputils/ScriptHolder.h"
 #include "py4godot/script_extension/script_extension_helpers_api.h"
+#include <cstdlib>  // For system()
+
+#include <direct.h>  // For _getcwd() on Windows
 #include <cassert>
 #include "Python.h"
 #include <algorithm>
@@ -20,6 +23,7 @@ GDExtensionPtrOperatorEvaluator operator_equal_string_namescript;
 PyScriptExtension extension;
 
 bool pluginscript_initialized = false;
+
 void init_pluginscript_api(){
     print_error("_init_pluginscript_api");
 
@@ -28,7 +32,22 @@ void init_pluginscript_api(){
     }
     pluginscript_initialized = true;
 
-    Py_SetProgramName(L"godot");
+    // Buffer to hold the converted narrow string
+    char python_home_narrow[256];
+    wcstombs(python_home_narrow, PYTHONHOME, sizeof(python_home_narrow));
+
+    char current_dir[256];
+    if (_getcwd(current_dir, sizeof(current_dir)) == NULL) {
+        print_error("Error getting current directory");
+        return;
+    }
+
+    // Construct the full path using the current working directory and PYTHONHOME
+    #ifdef AUTO_INSTALL
+    std::string install_dependencies = std::string(current_dir) + "/" + python_home_narrow + "/python.exe addons/py4godot/install_dependencies.py";
+    system(install_dependencies.c_str());
+    #endif
+    Py_SetProgramName(L"python");
     Py_SetPythonHome(PYTHONHOME);
     // Initialize interpreter but skip initialization registration of signal handlers
     Py_InitializeEx(0);
@@ -179,7 +198,7 @@ bool string_names_equal_script(StringName& left, StringName& right){
     PyScriptExtension* class_ = new PyScriptExtension();
 
     StringName class_name = c_string_to_string_name("PyScriptExtension");
-    class_name.shouldBeDeleted = false;
+    class_name.shouldBeDeleted = true;
     class_->godot_owner = functions::get_classdb_construct_object()(&class_name.godot_owner);
     functions::get_object_set_instance()(class_->godot_owner,&class_name.godot_owner , class_);
 

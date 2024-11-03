@@ -18,7 +18,7 @@ bool string_names_equal_save(StringName& left, StringName& right){
     PyResourceFormatSaver* class_ = new PyResourceFormatSaver();
 
     StringName class_name = c_string_to_string_name("PyResourceFormatSaver");
-    class_name.shouldBeDeleted = false;
+    class_name.shouldBeDeleted = true;
 
     class_->godot_owner = functions::get_classdb_construct_object()(&class_name.godot_owner);
     functions::get_object_set_instance()(class_->godot_owner,&class_name.godot_owner , class_);
@@ -42,6 +42,7 @@ void PyResourceFormatSaver::_init_values(){}
 
   void PyResourceFormatSaver::_save( Resource& resource, String& path, int flags, GDExtensionTypePtr res){
     print_error("_save");
+    LOCK(mtx);
     Script script = Script::new_static(resource.godot_owner);
 
     auto source = script.get_source_code();

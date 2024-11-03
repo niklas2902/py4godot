@@ -21,8 +21,7 @@ uint32_t usage
     StringName *classname = new StringName{class_name_empty};
     classname->shouldBeDeleted = false;
 
-    auto temp_hint_string = c_string_to_string("");
-    String * ptr_hint_string = new String{temp_hint_string};
+    String * ptr_hint_string = new String{hint_string};
     ptr_hint_string->shouldBeDeleted = false;
 
 
