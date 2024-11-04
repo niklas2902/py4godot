@@ -15,13 +15,13 @@ cdef api shared_ptr[bridge.String] type_helper_pystring_to_gdstring(str string):
     return gd_string.String_internal_class_ptr
 
 cdef api object type_helper_create_vector3(shared_ptr[bridge.Vector3]& bridge_vector):
-    cdef Vector3 val = Vector3()
+    cdef Vector3 val = Vector3.__new__(Vector3)
     val.Vector3_internal_class_ptr = bridge_vector
     #Py_INCREF(val)
     return val
 
 cdef api object type_helper_create_string(shared_ptr[bridge.String]& bridge_string):
-    cdef String val = String()
+    cdef String val = String.__new__(String)
     val.String_internal_class_ptr = bridge_string
     ##Py_INCREF(val)
     return val
@@ -35,164 +35,164 @@ cdef api object type_helper_create_object(shared_ptr[bridge.Object]& bridge_obje
 
 
 cdef api object type_helper_create_py_string(shared_ptr[bridge.String]& bridge_string):
-    cdef String gen_string = String()
+    cdef String gen_string = String.__new__(String)
     gen_string.String_internal_class_ptr = bridge_string
     cdef unicode val = gd_string_to_py_string(gen_string)
     #Py_INCREF(val)
     return val
 
 cdef api object type_helper_create_rect2i(shared_ptr[bridge.Rect2i]& bridge_val):
-    cdef Rect2i val = Rect2i()
+    cdef Rect2i val = Rect2i.__new__(Rect2i)
     val.Rect2i_internal_class_ptr = bridge_val
     #Py_INCREF(val)
     return val
 cdef api object type_helper_create_callable(shared_ptr[bridge.Callable]& bridge_val):
-    cdef Callable val = Callable()
+    cdef Callable val = Callable.__new__(Callable)
     val.Callable_internal_class_ptr = bridge_val
     #Py_INCREF(val)
     return val
 cdef api object type_helper_create_nodepath(shared_ptr[bridge.NodePath]& bridge_val):
-    cdef NodePath val = NodePath()
+    cdef NodePath val = NodePath.__new__(NodePath)
     val.NodePath_internal_class_ptr = bridge_val
     #Py_INCREF(val)
     return val
 cdef api object type_helper_create_packedvector3array(shared_ptr[bridge.PackedVector3Array]& bridge_val):
-    cdef PackedVector3Array val = PackedVector3Array()
+    cdef PackedVector3Array val = PackedVector3Array.__new__(PackedVector3Array)
     val.PackedVector3Array_internal_class_ptr = bridge_val
     #Py_INCREF(val)
     return val
 cdef api object type_helper_create_dictionary(shared_ptr[bridge.Dictionary]& bridge_val):
-    cdef Dictionary val = Dictionary()
+    cdef Dictionary val = Dictionary.__new__(Dictionary)
     val.Dictionary_internal_class_ptr = bridge_val
     #Py_INCREF(val)
     return val
 cdef api object type_helper_create_projection(shared_ptr[bridge.Projection]& bridge_val):
-    cdef Projection val = Projection()
+    cdef Projection val = Projection.__new__(Projection)
     val.Projection_internal_class_ptr = bridge_val
     #Py_INCREF(val)
     return val
 cdef api object type_helper_create_rid(shared_ptr[bridge.RID]& bridge_val):
-    cdef RID val = RID()
+    cdef RID val = RID.__new__(RID)
     val.RID_internal_class_ptr = bridge_val
     #Py_INCREF(val)
     return val
 cdef api object type_helper_create_vector2i(shared_ptr[bridge.Vector2i]& bridge_val):
-    cdef Vector2i val = Vector2i()
+    cdef Vector2i val = Vector2i.__new__(Vector2i)
     val.Vector2i_internal_class_ptr = bridge_val
     #Py_INCREF(val)
     return val
 cdef api object type_helper_create_transform2d(shared_ptr[bridge.Transform2D]& bridge_val):
-    cdef Transform2D val = Transform2D()
+    cdef Transform2D val = Transform2D.__new__(Transform2D)
     val.Transform2D_internal_class_ptr = bridge_val
     #Py_INCREF(val)
     return val
 cdef api object type_helper_create_aabb(shared_ptr[bridge.AABB]& bridge_val):
-    cdef AABB val = AABB()
+    cdef AABB val = AABB.__new__(AABB)
     val.AABB_internal_class_ptr = bridge_val
     #Py_INCREF(val)
     return val
 cdef api object type_helper_create_vector3i(shared_ptr[bridge.Vector3i]& bridge_val):
-    cdef Vector3i val = Vector3i()
+    cdef Vector3i val = Vector3i.__new__(Vector3i)
     val.Vector3i_internal_class_ptr = bridge_val
     #Py_INCREF(val)
     return val
 cdef api object type_helper_create_packedint64array(shared_ptr[bridge.PackedInt64Array]& bridge_val):
-    cdef PackedInt64Array val = PackedInt64Array()
+    cdef PackedInt64Array val = PackedInt64Array.__new__(PackedInt64Array)
     val.PackedInt64Array_internal_class_ptr = bridge_val
     #Py_INCREF(val)
     return val
 cdef api object type_helper_create_packedint32array(shared_ptr[bridge.PackedInt32Array]& bridge_val):
-    cdef PackedInt32Array val = PackedInt32Array()
+    cdef PackedInt32Array val = PackedInt32Array.__new__(PackedInt32Array)
     val.PackedInt32Array_internal_class_ptr = bridge_val
     #Py_INCREF(val)
     return val
 cdef api object type_helper_create_packedfloat32array(shared_ptr[bridge.PackedFloat32Array]& bridge_val):
-    cdef PackedFloat32Array val = PackedFloat32Array()
+    cdef PackedFloat32Array val = PackedFloat32Array.__new__(PackedFloat32Array)
     val.PackedFloat32Array_internal_class_ptr = bridge_val
     #Py_INCREF(val)
     return val
 cdef api object type_helper_create_packedbytearray(shared_ptr[bridge.PackedByteArray]& bridge_val):
-    cdef PackedByteArray val = PackedByteArray()
+    cdef PackedByteArray val = PackedByteArray.__new__(PackedByteArray)
     val.PackedByteArray_internal_class_ptr = bridge_val
     #Py_INCREF(val)
     return val
 cdef api object type_helper_create_vector4(shared_ptr[bridge.Vector4]& bridge_val):
-    cdef Vector4 val = Vector4()
+    cdef Vector4 val = Vector4.__new__(Vector4)
     val.Vector4_internal_class_ptr = bridge_val
     #Py_INCREF(val)
     return val
 cdef api object type_helper_create_rect2(shared_ptr[bridge.Rect2]& bridge_val):
-    cdef Rect2 val = Rect2()
+    cdef Rect2 val = Rect2.__new__(Rect2)
     val.Rect2_internal_class_ptr = bridge_val
     #Py_INCREF(val)
     return val
 cdef api object type_helper_create_vector2(shared_ptr[bridge.Vector2]& bridge_val):
-    cdef Vector2 val = Vector2()
+    cdef Vector2 val = Vector2.__new__(Vector2)
     val.Vector2_internal_class_ptr = bridge_val
     #Py_INCREF(val)
     return val
 cdef api object type_helper_create_transform3d(shared_ptr[bridge.Transform3D]& bridge_val):
-    cdef Transform3D val = Transform3D()
+    cdef Transform3D val = Transform3D.__new__(Transform3D)
     val.Transform3D_internal_class_ptr = bridge_val
     #Py_INCREF(val)
     return val
 cdef api object type_helper_create_packedcolorarray(shared_ptr[bridge.PackedColorArray]& bridge_val):
-    cdef PackedColorArray val = PackedColorArray()
+    cdef PackedColorArray val = PackedColorArray.__new__(PackedColorArray)
     val.PackedColorArray_internal_class_ptr = bridge_val
     #Py_INCREF(val)
     return val
 cdef api object type_helper_create_signal(shared_ptr[bridge.Signal]& bridge_val):
-    cdef GDSignal val = GDSignal()
+    cdef GDSignal val = GDSignal.__new__(GDSignal)
     val.Signal_internal_class_ptr = bridge_val
     #Py_INCREF(val)
     return val
 cdef api object type_helper_create_packedvector2array(shared_ptr[bridge.PackedVector2Array]& bridge_val):
-    cdef PackedVector2Array val = PackedVector2Array()
+    cdef PackedVector2Array val = PackedVector2Array.__new__(PackedVector2Array)
     val.PackedVector2Array_internal_class_ptr = bridge_val
     #Py_INCREF(val)
     return val
 cdef api object type_helper_create_plane(shared_ptr[bridge.Plane]& bridge_val):
-    cdef Plane val = Plane()
+    cdef Plane val = Plane.__new__(Plane)
     val.Plane_internal_class_ptr = bridge_val
     #Py_INCREF(val)
     return val
 cdef api object type_helper_create_packedfloat64array(shared_ptr[bridge.PackedFloat64Array]& bridge_val):
-    cdef PackedFloat64Array val = PackedFloat64Array()
+    cdef PackedFloat64Array val = PackedFloat64Array.__new__(PackedFloat64Array)
     val.PackedFloat64Array_internal_class_ptr = bridge_val
     #Py_INCREF(val)
     return val
 cdef api object type_helper_create_basis(shared_ptr[bridge.Basis]& bridge_val):
-    cdef Basis val = Basis()
+    cdef Basis val = Basis.__new__(Basis)
     val.Basis_internal_class_ptr = bridge_val
     #Py_INCREF(val)
     return val
 cdef api object type_helper_create_color(shared_ptr[bridge.Color]& bridge_val):
-    cdef Color val = Color()
+    cdef Color val = Color.__new__(Color)
     val.Color_internal_class_ptr = bridge_val
     #Py_INCREF(val)
     return val
 cdef api object type_helper_create_vector4i(shared_ptr[bridge.Vector4i]& bridge_val):
-    cdef Vector4i val = Vector4i()
+    cdef Vector4i val = Vector4i.__new__(Vector4i)
     val.Vector4i_internal_class_ptr = bridge_val
     #Py_INCREF(val)
     return val
 cdef api object type_helper_create_array(shared_ptr[bridge.Array]& bridge_val):
-    cdef Array val = Array()
+    cdef Array val = Array.__new__(Array)
     val.Array_internal_class_ptr = bridge_val
     #Py_INCREF(val)
     return val
 cdef api object type_helper_create_quaternion(shared_ptr[bridge.Quaternion]& bridge_val):
-    cdef Quaternion val = Quaternion()
+    cdef Quaternion val = Quaternion.__new__(Quaternion)
     val.Quaternion_internal_class_ptr = bridge_val
     #Py_INCREF(val)
     return val
 cdef api object type_helper_create_packedstringarray(shared_ptr[bridge.PackedStringArray]& bridge_val):
-    cdef PackedStringArray val = PackedStringArray()
+    cdef PackedStringArray val = PackedStringArray.__new__(PackedStringArray)
     val.PackedStringArray_internal_class_ptr = bridge_val
     #Py_INCREF(val)
     return val
 cdef api object type_helper_create_stringname(shared_ptr[bridge.StringName]& bridge_val):
-    cdef StringName val = StringName()
+    cdef StringName val = StringName.__new__(StringName)
     val.StringName_internal_class_ptr = bridge_val
     #Py_INCREF(val)
     return val
