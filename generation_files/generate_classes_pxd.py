@@ -107,6 +107,9 @@ def generate_wrapped_attribute(class_):
     res = generate_newline(res)
     res += f"{INDENT}cdef shared_ptr [CPP{class_['name']}] {class_['name']}_internal_class_ptr"
     res = generate_newline(res)
+    if class_["name"] == "Object":
+        res += f"{INDENT}cdef object __weakref__" # This is for being able to use weakref to fix memory propblems in signal
+        res = generate_newline(res)
 
     return res
 

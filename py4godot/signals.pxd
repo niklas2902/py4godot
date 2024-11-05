@@ -12,6 +12,6 @@ cdef class GDSignal(Signal):
     pass
 
 cdef class BuiltinSignal(Signal):
-    cdef Object parent
+    cdef object parent
     cdef StringName signal_name
 

@@ -1,6 +1,6 @@
 # distutils: language=c++
 import inspect
-
+import weakref
 from cpython.ref cimport Py_INCREF, Py_DECREF
 from py4godot.classes.core cimport *
 from libcpp.memory cimport make_shared
@@ -78,13 +78,12 @@ cdef class GDSignal(Signal):
 
 cdef class BuiltinSignal(Signal):
     def __init__(self, parent, name):
-        cdef Object temp_object
-        self.signal_name = <StringName> name
-        temp_object = parent
-        Py_INCREF(temp_object) # Memory Issue: This could possibly be a memory issue. Currently on Cython3.10, if I don't keep it,
-                               # the program crashes and I don't see memory issues. But in later Cython versions this could
-                               # become a problem. So this should be reminded
-        self.parent = temp_object
+        cdef Object temp_val
+        try:
+            self.parent = weakref.ref(parent) #This fixes memory errors. But could lead to side effecs
+            self.signal_name = <StringName> name
+        except Exception as e:
+            print_error(f"Exception when creating signal: {e}")
     def connect(self, object function , int flags =0):
         cdef str function_name = function.__name__
         cdef Object parent = <Object> (function.__self__ if hasattr(function, '__self__') else None)
@@ -107,13 +106,13 @@ cdef class BuiltinSignal(Signal):
         self.parent.disconnect(self.signal_name, callable)
 
     def is_null(self):
-        proxy_signal = Signal.new2(self.parent, self.signal_name)
+        proxy_signal = Signal.new2(<Object>self.parent, self.signal_name)
         return proxy_signal.is_null()
 
     def get_object(self):
         return self.parent
     def get_object_id(self):
-        return self.parent.get_instance_id()
+        return (<Object>self.parent).get_instance_id()
 
     def get_name(self):
         return self.signal_name
@@ -125,8 +124,8 @@ cdef class BuiltinSignal(Signal):
         return self.get_signal_connection_list(self.signal_name)
 
     def __eq__(self, other):
-        proxy_signal = Signal.new2(self.parent, self.signal_name)
+        proxy_signal = Signal.new2(<Object>self.parent, self.signal_name)
         return proxy_signal.__eq__(other)
     def __ne__(self, other):
-        proxy_signal = Signal.new2(self.parent, self.signal_name)
+        proxy_signal = Signal.new2(<Object>self.parent, self.signal_name)
         return proxy_signal.__ne__(other)

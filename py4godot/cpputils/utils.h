@@ -106,6 +106,7 @@ static void c_string_to_string_name_void(const char* string, void** stringname){
 
 static std::shared_ptr<StringName> c_string_to_string_name_ptr(const char* string){
     std::shared_ptr<String> gd_string = String::py_new0();
+    gd_string->shouldBeDeleted = true;
     functions::get_string_new_with_utf8_chars()(&gd_string->godot_owner, string);
     std::shared_ptr<StringName> gd_string_name = StringName::py_new2(gd_string);
     return gd_string_name;
