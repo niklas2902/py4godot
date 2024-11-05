@@ -91,7 +91,7 @@ cdef class BuiltinSignal(Signal):
         cdef char* c_function_name = b_function_name
         cdef StringName gd_function_name = py_c_string_to_string_name(c_function_name)
         cdef Callable callable = Callable.new2(parent, gd_function_name )
-        self.parent.connect(self.signal_name, callable)
+        self.parent().connect(self.signal_name, callable)
 
 
     def disconnect(self, object function ):
@@ -103,29 +103,29 @@ cdef class BuiltinSignal(Signal):
         # Don't use StringName::new2 here. Somehow it results in an empty string
         cdef StringName gd_function_name = py_c_string_to_string_name(c_function_name)
         cdef Callable callable = Callable.new2(parent, gd_function_name )
-        self.parent.disconnect(self.signal_name, callable)
+        self.parent().disconnect(self.signal_name, callable)
 
     def is_null(self):
-        proxy_signal = Signal.new2(<Object>self.parent, self.signal_name)
+        proxy_signal = Signal.new2(<Object>self.parent(), self.signal_name)
         return proxy_signal.is_null()
 
     def get_object(self):
-        return self.parent
+        return self.parent()
     def get_object_id(self):
-        return (<Object>self.parent).get_instance_id()
+        return (<Object>self.parent()).get_instance_id()
 
     def get_name(self):
         return self.signal_name
 
     def is_connected(self, Callable callable ):
-        return self.parent.is_connected(self.signal_name, callable)
+        return self.parent().is_connected(self.signal_name, callable)
 
     def get_connections(self):
         return self.get_signal_connection_list(self.signal_name)
 
     def __eq__(self, other):
-        proxy_signal = Signal.new2(<Object>self.parent, self.signal_name)
+        proxy_signal = Signal.new2(<Object>self.parent(), self.signal_name)
         return proxy_signal.__eq__(other)
     def __ne__(self, other):
-        proxy_signal = Signal.new2(<Object>self.parent, self.signal_name)
+        proxy_signal = Signal.new2(<Object>self.parent(), self.signal_name)
         return proxy_signal.__ne__(other)
