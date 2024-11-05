@@ -12,7 +12,7 @@ BATCH_SIZE = 3  # Adjust based on your system's capabilities
 
 def cythonize_batch(filenames):
     start_time = time.time()
-    cythonize(filenames, language_level=3, nthreads=NTHREADS, annotate=True, cache=True)
+    cythonize(filenames, language_level=3, nthreads=NTHREADS, annotate=True, cache=False)
     end_time = time.time()
     print("Total time elapsed for batch: {:.2f}".format(end_time - start_time))
 

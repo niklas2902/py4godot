@@ -167,7 +167,7 @@ try:
                                f"--cross-file platforms/compilers/{args.compiler}_compiler.native "
                                f"--cross-file platforms/binary_dirs/python_ver_compile.cross "
                                f"{get_debug_release_cross_compile_file(args.compiler, build_type)} "
-                               +(f"-Dcpp_args=-DAUTO_INSTALL=1 " if args.auto_install else " ")+
+                               +(f"-Dcpp_args=-DAUTO_INSTALL=1 " if args.auto_install.lower() == "true" else " ")+
                                f"--buildtype={args.buildtype} "
                                f"{command_separator} meson compile -C build/{args.target_platform}",
                                shell=True)
@@ -184,7 +184,7 @@ try:
                                f"meson setup {build_dir} --cross-file platforms/{args.target_platform}.cross "
                                f"--cross-file platforms/compilers/{args.compiler}_compiler.native "
                                f"--cross-file platforms/binary_dirs/python_ver_compile.cross "
-                               +(f"-Dcpp_args=-DAUTO_INSTALL=1 " if args.auto_install else " ")+
+                               +(f"-Dcpp_args=-DAUTO_INSTALL=1 " if args.auto_install.lower() == "true" else " ")+
                                f"--buildtype={args.buildtype} "
                                f"{get_debug_release_cross_compile_file(args.compiler, build_type)} "
                                f"{command_separator} meson compile -C build/{args.target_platform}",
