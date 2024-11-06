@@ -12,6 +12,7 @@ cimport py4godot.classes.Window as py4godot_window
 cdef core.StringName py_c_string_to_string_name(char* string):
     cdef core.StringName gd_string_name = core.StringName.__new__(core.StringName)
     gd_string_name.StringName_internal_class_ptr = c_string_to_string_name_ptr(string)
+    gd_string_name.StringName_internal_class_ptr.get().set_shouldBeDeleted(False) # Deletion should be handled by python
     return gd_string_name
 
 
