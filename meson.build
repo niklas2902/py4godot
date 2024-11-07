@@ -52,7 +52,7 @@ if build_machine.system() == 'windows'
     glob = run_command('python', files(meson.current_source_dir()+'/meson_scripts/glob_tools.py'))
     glob_cpp = run_command('python', files(meson.current_source_dir()+'/meson_scripts/glob_tools_cpp.py'))
 endif
-if build_machine.system() == "darwing"
+if build_machine.system() == 'darwin'
     py = import('python').find_installation('python3')
     dep_py = py.dependency()
     lib_py = cc.find_library('python312', dirs:meson.current_source_dir()+'/python_files/cpython-3.12.4-'+machine+platform_format + '/python')
