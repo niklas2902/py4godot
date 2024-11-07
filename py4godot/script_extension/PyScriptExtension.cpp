@@ -14,7 +14,7 @@
 #include "py4godot/script_extension/script_extension_helpers_api.h"
 #include <cstdlib>  // For system()
 
-#include <direct.h>  // For _getcwd() on Windows
+//#include <direct.h>  // For _getcwd() on Windows
 #include <cassert>
 #include "Python.h"
 #include <algorithm>
@@ -37,7 +37,7 @@ void init_pluginscript_api(){
     wcstombs(python_home_narrow, PYTHONHOME, sizeof(python_home_narrow));
 
     char current_dir[256];
-    if (_getcwd(current_dir, sizeof(current_dir)) == NULL) {
+    /*if (_getcwd(current_dir, sizeof(current_dir)) == NULL) {
         print_error("Error getting current directory");
         return;
     }
@@ -47,6 +47,7 @@ void init_pluginscript_api(){
     std::string install_dependencies = std::string(current_dir) + "/" + python_home_narrow + "/python.exe addons/py4godot/install_dependencies.py";
     system(install_dependencies.c_str());
     #endif
+    */
     Py_SetProgramName(L"python");
     Py_SetPythonHome(PYTHONHOME);
     // Initialize interpreter but skip initialization registration of signal handlers
