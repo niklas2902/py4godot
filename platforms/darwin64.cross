@@ -15,5 +15,5 @@ strip = 'strip'
 [host_machine]
 system = 'darwin'
 cpu_family = 'aarch64'  # Change to 'aarch64' if targeting Apple Silicon
-cpu = 'arm64'         # Change to 'arm64' if targeting Apple Silicon
+cpu = 'aarch64'         # Change to 'arm64' if targeting Apple Silicon
 endian = 'little'
