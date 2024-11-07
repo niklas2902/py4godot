@@ -14,6 +14,7 @@ from meson_scripts import copy_tools, download_python, generate_init_files, \
     locations, platform_check, generate_godot, \
     download_godot
 
+print("----------------------------Hello---------------------------------------")
 
 # generate_bindings_pyi.build()
 # generate_bindings.build()
@@ -87,6 +88,11 @@ def get_debug_release_cross_compile_file(compiler, buildtype):
             return "--cross-file platforms/release_debug/g++_release.cross"
         else:
             return "--cross-file platforms/release_debug/g++_debug.cross"
+    elif "clang" in compiler:
+        if "release" in buildtype:
+            return "--cross-file platforms/release_debug/clang_release.cross"
+        else:
+            return "--cross-file platforms/release_debug/clang_debug.cross"
 
 
 def get_compiler():
