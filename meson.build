@@ -53,9 +53,11 @@ if build_machine.system() == 'windows'
     glob_cpp = run_command('python', files(meson.current_source_dir()+'/meson_scripts/glob_tools_cpp.py'))
 endif
 if build_machine.system() == 'darwin'
+    message('search:')
+    message(meson.current_source_dir()+'/python_files/cpython-3.12.4-'+machine+platform_format + '/python')
     py = import('python').find_installation('python3')
     dep_py = py.dependency()
-    lib_py = cc.find_library('libpython3.12', dirs:meson.current_source_dir()+'/python_files/cpython-3.12.4-'+machine+platform_format + '/python')
+    lib_py = cc.find_library('python3.12', dirs:meson.current_source_dir()+'/python_files/cpython-3.12.4-'+machine+platform_format + '/python')
         internal_inc = include_directories('py4godot','py4godot/gdextension-api/', 'py4godot/core', 'py4godot/enums',
     'py4godot/classes', 'py4godot/pluginscript_api', 'py4godot/godot_bindings',
     'py4godot/script_instance', 'py4godot/core/variant4', 'py4godot/cppcore', 'py4godot/cppenums',
