@@ -2,6 +2,7 @@ import argparse
 import os
 import shutil
 import subprocess
+import sys
 import time
 import traceback
 from shutil import copytree
@@ -153,6 +154,7 @@ msvc_init = f"vcvarsall.bat {'x86_amd64'} {command_separator} cl {command_separa
 
 res = None
 try:
+    print("starting building:")
     if os.path.exists(build_dir):
         print("command:\n",
               f"meson {build_dir} --cross-file platforms/{args.target_platform}.cross "
@@ -243,4 +245,4 @@ except Exception as e:
     print("---------------------------------Build failed-----------------------------------")
     print(e)
     traceback.print_exc()
-    time.sleep(1000)
+    sys.exit(1)
