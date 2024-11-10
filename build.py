@@ -177,6 +177,11 @@ if os.path.exists(build_dir):
           command
           )
     res = subprocess.Popen(msvc_init +command,shell=True)
+    res.wait()
+    command = f"meson compile -C build/{args.target_platform}"
+    print("command:\n", command)
+    res = subprocess.Popen(msvc_init + command, shell=True)
+    res.wait()
 else:
     command = (
         f"meson setup {build_dir} "
@@ -186,14 +191,17 @@ else:
         f"{'-Dcpp_args=-DAUTO_INSTALL=1 ' if args.auto_install.lower() == 'true' else ''}"
         f"--buildtype={args.buildtype} "
         f"{get_debug_release_cross_compile_file(args.compiler, build_type)} "
-        f"{command_separator} meson compile -C build/{args.target_platform}"
+        f"{command_separator}"
     )
 
     print("command:\n",
           command)
     res = subprocess.Popen(msvc_init + command,shell=True)
-
-res.wait()
+    res.wait()
+    command = f"meson compile -C build/{args.target_platform}"
+    print("command:\n", command)
+    res = subprocess.Popen(msvc_init + command,shell=True)
+    res.wait()
 """
 
     copy_tools.run(args.target_platform)
