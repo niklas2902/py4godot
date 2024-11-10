@@ -170,7 +170,6 @@ if os.path.exists(build_dir):
         f"{get_debug_release_cross_compile_file(args.compiler, build_type)} "
         f"{'-Dcpp_args=-DAUTO_INSTALL=1 ' if args.auto_install.lower() == 'true' else ''}"
         f"--buildtype={args.buildtype} "
-        f"{command_separator} meson compile -C build/{args.target_platform}"
     )
 
     print("command:\n",
@@ -191,7 +190,6 @@ else:
         f"{'-Dcpp_args=-DAUTO_INSTALL=1 ' if args.auto_install.lower() == 'true' else ''}"
         f"--buildtype={args.buildtype} "
         f"{get_debug_release_cross_compile_file(args.compiler, build_type)} "
-        f"{command_separator}"
     )
 
     print("command:\n",
