@@ -1,6 +1,7 @@
 project('py4godot', 'cpp')
 
 cc = meson.get_compiler('cpp')
+message('compiler:' + cc.get_id())
 message('system:' + build_machine.system())
 message('cpu_family:' + build_machine.cpu_family())
 message('host_platform:' + host_machine.system())
@@ -27,7 +28,7 @@ if meson.get_compiler('cpp').get_id() == 'gcc'
     cpp_args = ['-D LIBRARY_EXPORTS=1']
     if platform_format == '32'
         link_args = ['-m32']
-        cpp_args += ['-m32', '-std=c++14']
+        cpp_args += ['-m32', '-std=c++17']
     endif
 endif
 if meson.get_compiler('cpp').get_id() == 'g++'
@@ -35,8 +36,11 @@ if meson.get_compiler('cpp').get_id() == 'g++'
     cpp_args = ['-D LIBRARY_EXPORTS=1']
     if platform_format == '32'
         link_args = ['-m32']
-        cpp_args += ['-m32', '-std=c++14']
+        cpp_args += ['-m32', '-std=c++17']
     endif
+endif
+if meson.get_compiler('cpp').get_id() == 'clang'
+    cpp_args += ['-std=c++17']
 endif
 if meson.get_compiler('cpp').get_id() == 'msvc'
     add_global_arguments('/bigobj', language: 'cpp')
