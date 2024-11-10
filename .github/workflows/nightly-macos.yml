@@ -80,20 +80,20 @@ jobs:
       - name: Generate files
         run: python generate.py -dev_build=True
 
-      #- name: Conditional cythonize
-      #  shell: bash
-      #  run: |
-      #    set +e
-      #    python meson_scripts/does_cache_exist.py
-      #    exit_code=$?
-      #    set -e
-      #    if [ $exit_code -eq 0 ]; then
-      #      echo "Cache hit for py4godot/classes directory"
-      #      python cythonize_files.py -mode="cache"
-      #    else
-      #      echo "Cache miss for py4godot/classes directory"
-      #      python cythonize_files.py -mode="dev"
-      #    fi
+      - name: Conditional cythonize
+        shell: bash
+        run: |
+          set +e
+          python meson_scripts/does_cache_exist.py
+          exit_code=$?
+          set -e
+          if [ $exit_code -eq 0 ]; then
+            echo "Cache hit for py4godot/classes directory"
+            python cythonize_files.py -mode="cache"
+          else
+            echo "Cache miss for py4godot/classes directory"
+            python cythonize_files.py -mode="dev"
+          fi
 
       - name: Build
         run: python build.py --target_platform=darwin64 --compiler=clang -create_plugin=False -buildtype=release
