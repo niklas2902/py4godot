@@ -67,7 +67,7 @@ if build_machine.system() == 'darwin'
     'py4godot/script_instance', 'py4godot/core/variant4', 'py4godot/cppcore', 'py4godot/cppenums',
     'py4godot/cppclasses', 'py4godot/cpputils', 'py4godot/script_language', 'py4godot/pluginscript_api',
     'py4godot/pluginscript_api/utils',
-    'py4godot/instance_data', 'python_files/cpython-3.12.4-'+machine+platform_format+'/python/include')
+    'py4godot/instance_data', 'python_files/cpython-3.12.4-'+machine+platform_format+'/python/include/python3.12')
     glob = run_command('python3', files(meson.current_source_dir()+'/meson_scripts/glob_tools.py'))
     glob_cpp = run_command('python3', files(meson.current_source_dir()+'/meson_scripts/glob_tools_cpp.py'))
     dep_py = lib_py
