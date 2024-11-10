@@ -154,41 +154,36 @@ msvc_init = f"vcvarsall.bat {'x86_amd64'} {command_separator} cl {command_separa
 res = None
 try:
     if os.path.exists(build_dir):
+        command = (
+            f"meson setup {build_dir} "
+            f"--cross-file platforms/{args.target_platform}.cross "
+            f"--cross-file platforms/compilers/{args.compiler}_compiler.native "
+            f"--cross-file platforms/binary_dirs/python_ver_compile.cross "
+            f"{get_debug_release_cross_compile_file(args.compiler, build_type)} "
+            f"{'-Dcpp_args=-DAUTO_INSTALL=1 ' if args.auto_install.lower() == 'true' else ''}"
+            f"--buildtype={args.buildtype} "
+            f"{command_separator} meson compile -C build/{args.target_platform}"
+        )
+
         print("command:\n",
-              f"meson {build_dir} --cross-file platforms/{args.target_platform}.cross "
-              f"--cross-file platforms/compilers/{args.compiler}_compiler.native "
-              f"--cross-file platforms/binary_dirs/python_ver_compile.cross "
-              f"{get_debug_release_cross_compile_file(args.compiler, build_type)} "
-              f"--buildtype={args.buildtype} "
-              f"{command_separator} meson compile -C build/{args.target_platform}"
+              command
               )
-        res = subprocess.Popen(msvc_init +
-                               f"meson setup {build_dir} --cross-file platforms/{args.target_platform}.cross "
-                               f"--cross-file platforms/compilers/{args.compiler}_compiler.native "
-                               f"--cross-file platforms/binary_dirs/python_ver_compile.cross "
-                               f"{get_debug_release_cross_compile_file(args.compiler, build_type)} "
-                               +(f"-Dcpp_args=-DAUTO_INSTALL=1 " if args.auto_install.lower() == "true" else " ")+
-                               f"--buildtype={args.buildtype} "
-                               f"{command_separator} meson compile -C build/{args.target_platform}",
-                               shell=True)
+        res = subprocess.Popen(msvc_init +command,shell=True)
     else:
+        command = (
+            f"meson setup {build_dir} "
+            f"--cross-file platforms/{args.target_platform}.cross "
+            f"--cross-file platforms/compilers/{args.compiler}_compiler.native "
+            f"--cross-file platforms/binary_dirs/python_ver_compile.cross "
+            f"{'-Dcpp_args=-DAUTO_INSTALL=1 ' if args.auto_install.lower() == 'true' else ''}"
+            f"--buildtype={args.buildtype} "
+            f"{get_debug_release_cross_compile_file(args.compiler, build_type)} "
+            f"{command_separator} meson compile -C build/{args.target_platform}"
+        )
+
         print("command:\n",
-              f"meson {build_dir} --cross-file platforms/{args.target_platform}.cross "
-              f"--cross-file platforms/compilers/{args.compiler}_compiler.native "
-              f"--cross-file platforms/binary_dirs/python_ver_compile.cross "
-              f"{get_debug_release_cross_compile_file(args.compiler, build_type)}"
-              f"--buildtype={args.buildtype} "
-              f"{command_separator} meson compile -C build/{args.target_platform}"
-              )
-        res = subprocess.Popen(msvc_init +
-                               f"meson setup {build_dir} --cross-file platforms/{args.target_platform}.cross "
-                               f"--cross-file platforms/compilers/{args.compiler}_compiler.native "
-                               f"--cross-file platforms/binary_dirs/python_ver_compile.cross "
-                               +(f"-Dcpp_args=-DAUTO_INSTALL=1 " if args.auto_install.lower() == "true" else " ")+
-                               f"--buildtype={args.buildtype} "
-                               f"{get_debug_release_cross_compile_file(args.compiler, build_type)} "
-                               f"{command_separator} meson compile -C build/{args.target_platform}",
-                               shell=True)
+              command)
+        res = subprocess.Popen(msvc_init + command,shell=True)
 
     res.wait()
 
