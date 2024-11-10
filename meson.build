@@ -40,7 +40,7 @@ if meson.get_compiler('cpp').get_id() == 'g++'
     endif
 endif
 if meson.get_compiler('cpp').get_id() == 'clang'
-    cpp_args += ['-std=c++17']
+    cpp_args += ['-std=c++17', '-Wno-address-of-temporary']
 endif
 if meson.get_compiler('cpp').get_id() == 'msvc'
     add_global_arguments('/bigobj', language: 'cpp')
