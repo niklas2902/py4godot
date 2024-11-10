@@ -2,6 +2,7 @@ import argparse
 import os
 import shutil
 import subprocess
+import sys
 import time
 import traceback
 from shutil import copytree
@@ -13,6 +14,7 @@ from meson_scripts import copy_tools, download_python, generate_init_files, \
     locations, platform_check, generate_godot, \
     download_godot
 
+print("----------------------------Hello---------------------------------------")
 
 # generate_bindings_pyi.build()
 # generate_bindings.build()
@@ -86,6 +88,11 @@ def get_debug_release_cross_compile_file(compiler, buildtype):
             return "--cross-file platforms/release_debug/g++_release.cross"
         else:
             return "--cross-file platforms/release_debug/g++_debug.cross"
+    elif "clang" in compiler:
+        if "release" in buildtype:
+            return "--cross-file platforms/release_debug/clang_release.cross"
+        else:
+            return "--cross-file platforms/release_debug/clang_debug.cross"
 
 
 def get_compiler():
@@ -153,6 +160,7 @@ msvc_init = f"vcvarsall.bat {'x86_amd64'} {command_separator} cl {command_separa
 
 res = None
 try:
+    print("starting building:")
     if os.path.exists(build_dir):
         command = (
             f"meson setup {build_dir} "
@@ -238,4 +246,4 @@ except Exception as e:
     print("---------------------------------Build failed-----------------------------------")
     print(e)
     traceback.print_exc()
-    time.sleep(1000)
+    sys.exit(1)

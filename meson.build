@@ -3,10 +3,14 @@ project('py4godot', 'cpp')
 cc = meson.get_compiler('cpp')
 message('system:' + build_machine.system())
 message('cpu_family:' + build_machine.cpu_family())
+message('host_platform:' + host_machine.system())
 platform_format = ''
 machine = host_machine.system()
 platform_format = '32'
 if host_machine.cpu_family() == 'x86_64'
+    platform_format = '64'
+endif
+if host_machine.cpu_family() == 'aarch64'
     platform_format = '64'
 endif
 
@@ -51,6 +55,22 @@ if build_machine.system() == 'windows'
     'py4godot/pluginscript_api/utils')
     glob = run_command('python', files(meson.current_source_dir()+'/meson_scripts/glob_tools.py'))
     glob_cpp = run_command('python', files(meson.current_source_dir()+'/meson_scripts/glob_tools_cpp.py'))
+endif
+if build_machine.system() == 'darwin'
+    message('search:')
+    message(meson.current_source_dir()+'/python_files/cpython-3.12.4-'+machine+platform_format + '/python')
+    py = import('python').find_installation('python3')
+    dep_py = py.dependency()
+    lib_py = cc.find_library('python3.12', dirs:meson.current_source_dir()+'/python_files/cpython-3.12.4-'+machine+platform_format + '/python/lib')
+        internal_inc = include_directories('py4godot','py4godot/gdextension-api/', 'py4godot/core', 'py4godot/enums',
+    'py4godot/classes', 'py4godot/pluginscript_api', 'py4godot/godot_bindings',
+    'py4godot/script_instance', 'py4godot/core/variant4', 'py4godot/cppcore', 'py4godot/cppenums',
+    'py4godot/cppclasses', 'py4godot/cpputils', 'py4godot/script_language', 'py4godot/pluginscript_api',
+    'py4godot/pluginscript_api/utils',
+    'py4godot/instance_data', 'python_files/cpython-3.12.4-'+machine+platform_format+'/python/include')
+    glob = run_command('python3', files(meson.current_source_dir()+'/meson_scripts/glob_tools.py'))
+    glob_cpp = run_command('python3', files(meson.current_source_dir()+'/meson_scripts/glob_tools_cpp.py'))
+    dep_py = lib_py
 endif
 if meson.has_external_property('is_mingw') and build_machine.system() == 'linux'
     message('dirs:')
