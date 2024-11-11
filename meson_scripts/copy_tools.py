@@ -23,6 +23,7 @@ def run(platform):
         list_dll = glob.glob("**/*.so", recursive=True)
     elif "darwin" in platform:
         list_dll = glob.glob("**/*.dylib", recursive=True)
+    print("List to copy:", list_dll)
     for entry in list_dll:
         if "cpython" in entry:
             continue
@@ -46,6 +47,7 @@ def run(platform):
                      f"build/final/{platform}/{config_data['python_ver']}-{platform}/python/lib/python3.12/site-packages/" + strip_platform(
                          entry.lstrip("build").replace("#", "/")).
                      replace(".dll", ".pyd"))  # dst can be a folder; use copy2() to preserve timestamp
+                print("Finished copying:", entry)
 
     if "windows" in platform:
         list_dll = glob.glob("**/*.pdb", recursive=True)
