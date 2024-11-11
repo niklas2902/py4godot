@@ -159,48 +159,47 @@ compile_python_ver_file(current_platform)
 msvc_init = f"vcvarsall.bat {'x86_amd64'} {command_separator} cl {command_separator} " if "msvc" in args.compiler else ""
 
 res = None
-#try:
-#    print("starting building:")
-if os.path.exists(build_dir):
-    command = (
-        f"meson setup {build_dir} "
-        f"--cross-file platforms/{args.target_platform}.cross "
-        f"--cross-file platforms/compilers/{args.compiler}_compiler.native "
-        f"--cross-file platforms/binary_dirs/python_ver_compile.cross "
-        f"{get_debug_release_cross_compile_file(args.compiler, build_type)} "
-        f"{'-Dcpp_args=-DAUTO_INSTALL=1 ' if args.auto_install.lower() == 'true' else ''}"
-        f"--buildtype={args.buildtype} "
-    )
+try:
+    print("starting building:")
+    if os.path.exists(build_dir):
+        command = (
+            f"meson setup {build_dir} "
+            f"--cross-file platforms/{args.target_platform}.cross "
+            f"--cross-file platforms/compilers/{args.compiler}_compiler.native "
+            f"--cross-file platforms/binary_dirs/python_ver_compile.cross "
+            f"{get_debug_release_cross_compile_file(args.compiler, build_type)} "
+            f"{'-Dcpp_args=-DAUTO_INSTALL=1 ' if args.auto_install.lower() == 'true' else ''}"
+            f"--buildtype={args.buildtype} "
+        )
 
-    print("command:\n",
-          command
-          )
-    res = subprocess.Popen(msvc_init +command,shell=True)
-    res.wait()
-    command = f"meson compile -C build/{args.target_platform}"
-    print("command:\n", command)
-    res = subprocess.Popen(msvc_init + command, shell=True)
-    res.wait()
-else:
-    command = (
-        f"meson setup {build_dir} "
-        f"--cross-file platforms/{args.target_platform}.cross "
-        f"--cross-file platforms/compilers/{args.compiler}_compiler.native "
-        f"--cross-file platforms/binary_dirs/python_ver_compile.cross "
-        f"{'-Dcpp_args=-DAUTO_INSTALL=1 ' if args.auto_install.lower() == 'true' else ''}"
-        f"--buildtype={args.buildtype} "
-        f"{get_debug_release_cross_compile_file(args.compiler, build_type)} "
-    )
+        print("command:\n",
+              command
+              )
+        res = subprocess.Popen(msvc_init +command,shell=True)
+        res.wait()
+        command = f"meson compile -C build/{args.target_platform}"
+        print("command:\n", command)
+        res = subprocess.Popen(msvc_init + command, shell=True)
+        res.wait()
+    else:
+        command = (
+            f"meson setup {build_dir} "
+            f"--cross-file platforms/{args.target_platform}.cross "
+            f"--cross-file platforms/compilers/{args.compiler}_compiler.native "
+            f"--cross-file platforms/binary_dirs/python_ver_compile.cross "
+            f"{'-Dcpp_args=-DAUTO_INSTALL=1 ' if args.auto_install.lower() == 'true' else ''}"
+            f"--buildtype={args.buildtype} "
+            f"{get_debug_release_cross_compile_file(args.compiler, build_type)} "
+        )
 
-    print("command:\n",
-          command)
-    res = subprocess.Popen(msvc_init + command,shell=True)
-    res.wait()
-    command = f"meson compile -C build/{args.target_platform}"
-    print("command:\n", command)
-    res = subprocess.Popen(msvc_init + command,shell=True)
-    res.wait()
-"""
+        print("command:\n",
+              command)
+        res = subprocess.Popen(msvc_init + command,shell=True)
+        res.wait()
+        command = f"meson compile -C build/{args.target_platform}"
+        print("command:\n", command)
+        res = subprocess.Popen(msvc_init + command,shell=True)
+        res.wait()
 
     copy_tools.run(args.target_platform)
     copy_tools.copy_main(args.target_platform)
@@ -254,4 +253,3 @@ except Exception as e:
     print(e)
     traceback.print_exc()
     sys.exit(1)
-"""
