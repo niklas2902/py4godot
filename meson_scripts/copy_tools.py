@@ -48,6 +48,8 @@ def run(platform):
                          entry.lstrip("build").replace("#", "/")).
                      replace(".dll", ".pyd"))  # dst can be a folder; use copy2() to preserve timestamp
                 print("Finished copying:", entry)
+                print(f"copy to: build/final/{platform}/{config_data['python_ver']}-{platform}/python/lib/python3.12/site-packages/" + strip_platform(
+                         entry.lstrip("build").replace("#", "/")))
 
     if "windows" in platform:
         list_dll = glob.glob("**/*.pdb", recursive=True)
