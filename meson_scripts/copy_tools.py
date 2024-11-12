@@ -11,7 +11,7 @@ with open('config.json', 'r') as f:
 
 def strip_platform(text):
     text = text[1:]
-    return text.lstrip("linux64").lstrip("windows64").lstrip("windows32").lstrip("linux32").lstrip("darwin32")
+    return text.lstrip("linux64").lstrip("windows64").lstrip("windows32").lstrip("linux32").lstrip("darwin64")
 
 
 def run(platform):
