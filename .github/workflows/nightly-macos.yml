@@ -42,6 +42,15 @@ jobs:
         with:
           python-version: "3.11.3"
 
+      - name: Cache py4godot/classes directory
+        id: cache-py4godot-classes
+        uses: actions/cache@v3
+        with:
+          path: py4godot/classes
+          key: ${{ runner.os }}-py4godot-classes-${{ hashFiles('**/generate_classes.py', '**/generate_pxd_bridge.py', '**/extension_api.json') }}
+          restore-keys: |
+            ${{ runner.os }}-py4godot-classes-
+
       - name: Run Python script and check result
         shell: bash
         run: |
