@@ -84,10 +84,6 @@ def generate_import(class_name):
 #include "py4godot/cppcore/Variant.h"
 #include "py4godot/cppenums/cppenums.h"
 #include<memory>
-#ifndef BOOLDEFINED
-#define BOODEFINED
-typedef unsigned char byte;
-#endif
 """
     return result
 
