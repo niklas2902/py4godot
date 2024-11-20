@@ -1,3 +1,0 @@
-[submodule "py4godot/gdextension-api"]
-	path = py4godot/gdextension-api
-	url = https://github.com/niklas2902/gdextension-api.git
