@@ -10,7 +10,7 @@ from typing import List
 import inspect
 
 def gdmethod(function:object):
-    pass
+    return function
     
 def SignalArg(name:str, type_:type):
     import py4godot.signals as signals
