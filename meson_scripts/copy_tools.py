@@ -82,9 +82,9 @@ def copy_main(platform):
              f"build/final/{platform}/{config_data['python_ver']}-{platform}/python/bin/pythonscript.so")
     elif "darwin" in platform:
         copy(f"build/{platform}/main.dylib",
-             f"build/final/{platform}/{config_data['python_ver']}-{platform}/python/bin/main.so")
+             f"build/final/{platform}/{config_data['python_ver']}-{platform}/python/bin/main.dylib")
         copy(f"build/{platform}/pythonscript.dylib",
-             f"build/final/{platform}/{config_data['python_ver']}-{platform}/python/bin/pythonscript.so")
+             f"build/final/{platform}/{config_data['python_ver']}-{platform}/python/bin/pythonscript.dylib")
 
 
 def copy_tests(platform):
