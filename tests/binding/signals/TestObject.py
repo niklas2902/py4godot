@@ -31,6 +31,6 @@ class TestObject(Node3D):
 		self.custom_signal_with_args.disconnect(self.custom_signal_with_arg_function)	
 	
 	def disconnect_custom_signal(self) -> None:
-		self.custom_signal_no_arg.disconnect()	
+		self.custom_signal_no_args.disconnect(self.custom_signal_no_arg_function)
 	def disconnect_visibility(self) -> None:
 		self.visibility_changed.disconnect(self.visible_changed)
