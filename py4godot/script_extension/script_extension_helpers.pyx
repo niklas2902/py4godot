@@ -35,7 +35,7 @@ cdef api void create_signals(PyObject* instance, vector[shared_ptr[BridgeDiction
     cdef StringName name
     cdef str py_name
     cdef GDSignal signal
-    cdef Dictionary py_signal = Dicionary()
+    cdef Dictionary py_signal = Dictionary()
     cdef StringName gd_name
     try:
         for signal_ind in range(signals.size()):

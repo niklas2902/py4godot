@@ -728,7 +728,7 @@ def generate_init(class_):
     res = ""
     res += f"{INDENT}def __init__(self):"
     res = generate_newline(res)
-    res += f"{INDENT * 2}self = {class_['name']}.new0()"
+    res += f"{INDENT * 2}self.{class_['name']}_internal_class_ptr = (CPP{class_['name']}.py_new0())"
     res = generate_newline(res)
     return res
 
@@ -1660,19 +1660,6 @@ def generate_array_get_item(class_):
 
     res = generate_newline(res)
     return res
-
-
-def generate_init(class_):
-    res = ""
-    res += f"{INDENT}def __init__(self, *args):"
-    res = generate_newline(res)
-    res += f"{INDENT * 2}self = {class_['name']}.new0()"
-    res = generate_newline(res)
-    res += f"{INDENT * 2}for arg in args:"
-    res = generate_newline(res)
-    res += f"{INDENT * 3}self.push_back(arg)"
-    return res
-
 
 def generate_del(class_):
     if class_["name"] not in builtin_classes and class_["name"] not in typed_arrays_names:
