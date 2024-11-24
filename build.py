@@ -236,7 +236,9 @@ try:
     if should_run_tests:
         print("=================================Start tests==================================")
         start = time.time()
+        print("copy_tests")
         copy_tools.copy_tests(args.target_platform)
+        print("run tests")
         res = subprocess.Popen(
             f"ninja -C build/{args.target_platform} test", shell=True)
         res.wait()

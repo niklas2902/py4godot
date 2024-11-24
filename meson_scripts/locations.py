@@ -16,8 +16,8 @@ def get_python_dir(platform):
         return (os.getcwd() + f"/{python_dir}/{python_ver}-{platform}/python/bin/python3").replace("\\", "/")
 def get_godot_dir(platform):
     if "windows" in platform:
-        return (os.getcwd()+f"/{dir_godot_extract_to}/Godot_v3.4.2-stable_win64.exe")
+        return (os.getcwd()+f"/{dir_godot_extract_to}/Godot_v4.3-stable_win64.exe")
     elif "linux" in platform:
-        return (os.getcwd()+f"/{dir_godot_extract_to}/Godot_v3.4.3-stable_x11.64")
+        return (os.getcwd()+f"/{dir_godot_extract_to}/Godot_v4.3-stable_linux.x86_64")
     elif "darwin" in platform:
         return (os.getcwd()+f"/{dir_godot_extract_to}/Godot_v3.4.3-stable_x11.64")

@@ -91,16 +91,26 @@ def copy_tests(platform):
     """copy plugin inside godot"""
     core_tests = glob.glob("tests/core/*")
     for core_test in core_tests:
-        if os.path.exists(f"{core_test}/addons/{platform}"):
-            rmtree(f"{core_test}/addons/{platform}")
-        copytree(f"build/final/{platform}", f"{core_test}/addons/{platform}")
+        print(f"copy_to:{core_test}")
+        if os.path.exists(f"{core_test}/addons"):
+            rmtree(f"{core_test}/addons")
+        copytree(f"build/final/{platform}/{config_data['python_ver']}-{platform}", f"{core_test}/addons/py4godot/{config_data['python_ver']}-{platform}")
 
+        copy("build_resources/dependencies.txt", f"{core_test}/addons/py4godot/dependencies.txt")
+        copy("build_resources/python.gdextension", f"{core_test}/addons/py4godot/python.gdextension")
+        copy("build_resources/install_dependencies.py", f"{core_test}/addons/py4godot/install_dependencies.py")
+        copy("build_resources/Python.svg", f"{core_test}/addons/py4godot/Python.svg")
     binding_tests = glob.glob("tests/binding/*")
     for binding_test in binding_tests:
-        if os.path.exists(f"{binding_test}/addons/{platform}"):
-            rmtree(f"{binding_test}/addons/{platform}")
-        copytree(f"build/final/{platform}", f"{binding_test}/addons/{platform}")
 
+        print(f"copy_to:{binding_test}")
+        if os.path.exists(f"{binding_test}/addons"):
+            rmtree(f"{binding_test}/addons")
+        copytree(f"build/final/{platform}/{config_data['python_ver']}-{platform}", f"{binding_test}/addons/py4godot/{config_data['python_ver']}-{platform}")
+        copy("build_resources/dependencies.txt", f"{binding_test}/addons/py4godot/dependencies.txt")
+        copy("build_resources/python.gdextension", f"{binding_test}/addons/py4godot/python.gdextension")
+        copy("build_resources/install_dependencies.py", f"{binding_test}/addons/py4godot/install_dependencies.py")
+        copy("build_resources/Python.svg", f"{binding_test}/addons/py4godot/Python.svg")
 
 def copy_stub_files(platform):
     for file in (glob.glob("**/*.pyi", recursive=True)):

@@ -1,9 +1,10 @@
-from py4godot.enums.enums import *
-from py4godot.classes.Node3D import *
-from py4godot.utils.utils import get_tree
-from py4godot.pluginscript_api.utils.annotations import *
-import PythonTest
 import unittest
+
+import PythonTest
+from py4godot.classes import gdclass
+from py4godot.classes.Node3D import Node3D
+from py4godot.utils.utils import get_tree
+
 
 class PrintStream:
 	def write(self, msg):
@@ -17,13 +18,9 @@ class TestRunner(Node3D):
 
 	def __init__(self):
 		print("__init__")
-	@gdmethod
-	def _ready(self):
+	def _process(self, delta:float) -> None:
 		print("##########start#############")
 		suite = unittest.TestLoader().loadTestsFromModule(PythonTest)
 		res = unittest.TextTestRunner(stream=PrintStream()).run(suite)
-		import sys
-		if len(res.failures) == 0:
-			get_tree(self).quit(0)
-		else:
-			get_tree(self).quit(1)
+		res_code = 0 if  len(res.failures) == 0 else 1
+		get_tree(self).quit(res_code)

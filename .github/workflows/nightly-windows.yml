@@ -114,7 +114,7 @@ jobs:
           fi
     
       - name: Build
-        run: python build.py --target_platform=windows64 --compiler=gcc -create_plugin=False -buildtype=release
+        run: python build.py --target_platform=windows64 --compiler=gcc -create_plugin=False -buildtype=release -run_tests=True -download_godot=True
 
       - name: Create cache
         run: python meson_scripts/create_cache.py

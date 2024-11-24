@@ -9,13 +9,13 @@ import json
 with open('config.json', 'r') as f:
     config_data = json.load(f)
 
-url = 'https://github.com/godotengine/godot/releases/download/3.4.2-stable/Godot_v3.4.2-stable_win64.exe.zip'
+url = 'https://github.com/godotengine/godot/releases/download/4.3-stable/Godot_v4.3-stable_win64.exe.zip'
 download_dir = config_data["download_godot_dir"]
 dir_zipfile_extract_to = config_data["dir_godot_extract_to"]
 def run(platform):
     global url
     if("linux" in platform):
-        url = "https://downloads.tuxfamily.org/godotengine/3.4.3/Godot_v3.4.3-stable_x11.64.zip"
+        url = "https://github.com/godotengine/godot/releases/download/4.3-stable/Godot_v4.3-stable_linux.x86_64.zip"
     if os.path.exists(download_dir):
         os.remove(download_dir)
     wget.download(url, download_dir) # download .zip file

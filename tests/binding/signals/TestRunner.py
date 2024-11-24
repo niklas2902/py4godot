@@ -16,7 +16,6 @@ class PrintStream:
 
 @gdclass
 class TestRunner(Node3D):
-	hello:int = 0
 	test_object_path: NodePath = gdproperty(NodePath, NodePath())
 	def __init__(self):
 		print("__init__")
