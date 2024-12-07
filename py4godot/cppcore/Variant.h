@@ -19,6 +19,7 @@ namespace godot{
         Variant(String& val);
         Variant(StringName& val);
         Variant(Dictionary& val);
+        Variant(Array& val);
         Variant(Object& val);
         Variant(int val);
 

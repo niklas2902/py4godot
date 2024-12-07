@@ -6,7 +6,7 @@ from libcpp.memory cimport shared_ptr
 from libcpp.string cimport string
 cdef extern from "help_types.h":
     ctypedef struct TransferObject:
-        vector[Dictionary] signals
+        vector[CPPSignalDescription*] signals
         vector[GDExtensionPropertyInfo] properties
         vector[GDExtensionMethodInfo] methods
         string icon_path;
@@ -20,8 +20,13 @@ cdef extern from "help_types.h":
         char* name;
         GDExtensionVariantType type;
 
+    ctypedef struct CPPSignalDescription:
+        Dictionary dictionary;
+        StringName name;
+        vector [CPPSignalArg] args;
+
 cdef extern from "py4godot/pluginscript_api/utils/signal_description_utils.h":
-    void init_signal_description(char* name, vector[CPPSignalArg]& args, shared_ptr[Dictionary]& output)
+    CPPSignalDescription* init_signal_description(char* name, vector[CPPSignalArg]& args)
     void print_error(char* text)
 
 cdef extern from "py4godot/pluginscript_api/utils/property_description_utils.h":

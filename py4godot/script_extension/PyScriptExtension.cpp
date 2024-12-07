@@ -12,6 +12,7 @@
 #include "py4godot/utils/instance_utils_api.h"
 #include "py4godot/cpputils/ScriptHolder.h"
 #include "py4godot/script_extension/script_extension_helpers_api.h"
+#include "py4godot/script_extension/signal_builder.h"
 #include <cstdlib>  // For system()
 
 //#include <direct.h>  // For _getcwd() on Windows
@@ -180,10 +181,11 @@ void init_pluginscript_api(){
 
 void PyScriptExtension::init_signals(PyObject* instance){
     std::vector<std::shared_ptr<godot::Dictionary>> signals;
-    for (auto& signal: transfer_object.signals){
+    /*for (auto& signal: transfer_object.signals){
         signals.push_back(std::make_shared<godot::Dictionary>(signal));
     }
-    create_signals(instance, signals);
+    */
+    //create_signals(instance, signals);
 }
 
 
@@ -415,7 +417,8 @@ void PyScriptExtension::_has_script_signal( StringName& signal, GDExtensionTypeP
 void PyScriptExtension::_get_script_signal_list(GDExtensionTypePtr res){
     print_error("_get_script_signal_list");
     int index;
-    for (auto& signal_dict : transfer_object.signals) {
+    for (auto& signal_description_ptr : transfer_object.signals) {
+        auto signal_dict = build_signal(*signal_description_ptr);
         Variant* var_signal = new Variant{1};
         auto constructor = functions::get_get_variant_from_type_constructor()(GDExtensionVariantType::GDEXTENSION_VARIANT_TYPE_DICTIONARY);
         constructor(&(var_signal->native_ptr), &signal_dict.godot_owner);

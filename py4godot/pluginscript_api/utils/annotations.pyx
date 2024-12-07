@@ -177,7 +177,7 @@ cdef api TransferObject exec_class(str source_string, str class_name_):
         cpp_string = string(c_icon_path)
         transfer_object.icon_path = cpp_string
     for signal in signals:
-        transfer_object.signals.push_back((<SignalDescription>signal).get_signal_dict().Dictionary_internal_class_ptr.get()[0])
+        transfer_object.signals.push_back((<SignalDescription>signal).get_signal_description())
 
     cdef GDExtensionMethodInfo method_info
     for method in methods:

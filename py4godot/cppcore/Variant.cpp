@@ -81,6 +81,11 @@ Variant::Variant(Dictionary& val){
     constructor(&native_ptr, &val.godot_owner);
 }
 
+Variant::Variant(Array& val){
+    auto constructor = functions::get_get_variant_from_type_constructor()(GDExtensionVariantType::GDEXTENSION_VARIANT_TYPE_ARRAY);
+    constructor(&native_ptr, &val.godot_owner);
+}
+
 Variant::Variant(Object& val){
     auto constructor = functions::get_get_variant_from_type_constructor()(GDExtensionVariantType::GDEXTENSION_VARIANT_TYPE_OBJECT);
     constructor(&native_ptr, &val.godot_owner);

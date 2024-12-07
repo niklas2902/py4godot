@@ -5,8 +5,20 @@
 #include <string>
 #include "Python.h"
 
+struct CPPSignalArg{
+    char* name;
+    godot::StringName stringname_name;
+    GDExtensionVariantType type;
+};
+
+struct CPPSignalDescription{
+    godot::Dictionary dictionary;
+    godot::StringName name;
+    std::vector<CPPSignalArg> args;
+};
+
 struct TransferObject{
-    std::vector<godot::Dictionary> signals;
+    std::vector<CPPSignalDescription*> signals;
     std::vector<GDExtensionPropertyInfo> properties;
     std::vector<GDExtensionMethodInfo> methods;
     std::vector<PyObject*> default_values;
@@ -14,9 +26,4 @@ struct TransferObject{
     PyObject* class_;
     PyObject* instance;
     bool is_tool = false;
-};
-
-struct CPPSignalArg{
-    char* name;
-    GDExtensionVariantType type;
 };
