@@ -13,8 +13,7 @@ from build_tools import download_get_pip
 from meson_scripts import copy_tools, download_python, generate_init_files, \
     locations, platform_check, generate_godot, \
     download_godot
-
-print("----------------------------Hello---------------------------------------")
+from meson_scripts.fix_path_macos import fix_macos_paths
 
 # generate_bindings_pyi.build()
 # generate_bindings.build()
@@ -201,6 +200,7 @@ try:
         res = subprocess.Popen(msvc_init + command,shell=True)
         res.wait()
 
+    fix_macos_paths()
     copy_tools.run(args.target_platform)
     copy_tools.copy_main(args.target_platform)
     copy_tools.copy_mingw(args.compiler, args.target_platform)

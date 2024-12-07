@@ -417,14 +417,16 @@ void PyScriptExtension::_has_script_signal( StringName& signal, GDExtensionTypeP
 void PyScriptExtension::_get_script_signal_list(GDExtensionTypePtr res){
     print_error("_get_script_signal_list");
     int index;
+
     for (auto& signal_description_ptr : transfer_object.signals) {
         auto signal_dict = build_signal(*signal_description_ptr);
-        Variant* var_signal = new Variant{1};
+        auto var_signal_ptr = std::make_shared<Variant>(1);
+        signal_variants.push_back(var_signal_ptr);
         auto constructor = functions::get_get_variant_from_type_constructor()(GDExtensionVariantType::GDEXTENSION_VARIANT_TYPE_DICTIONARY);
-        constructor(&(var_signal->native_ptr), &signal_dict.godot_owner);
+        constructor(&(var_signal_ptr->native_ptr), &signal_dict.godot_owner);
 
-        add_variant_to_array(res, *var_signal);
-        delete var_signal;
+        add_variant_to_array(res, *var_signal_ptr);
+
     }
     //assert(false);
 

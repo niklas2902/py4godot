@@ -119,7 +119,6 @@ static String c_string_to_string(const char* string){
 static std::shared_ptr<String> c_string_to_string_ptr(const char* string){
     std::shared_ptr<String> gd_string = String::py_new0();
     functions::get_string_new_with_utf8_chars()(&gd_string->godot_owner, string);
-    gd_string->length();
     return gd_string;
 }
 

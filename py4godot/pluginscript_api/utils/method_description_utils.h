@@ -23,8 +23,23 @@ typedef struct {
 //} GDExtensionMethodInfo;
 
 static uint32_t id = 0;
-void init_method_description(StringName name, std::vector<GDExtensionPropertyInfo>& properties, GDExtensionMethodInfo& method_info) {
-     StringName * stringname = new StringName{name};
+void copy_string(void** target, String& from){
+    GDExtensionPtrConstructor constructor = functions::get_variant_get_ptr_constructor()
+    (GDExtensionVariantType::GDEXTENSION_VARIANT_TYPE_STRING, 1);
+    GDExtensionTypePtr _args[1];
+    _args[0] = &from.godot_owner;
+    constructor(*target,_args);
+}
+void copy_string_name(void** target, StringName& from){
+    GDExtensionPtrConstructor constructor = functions::get_variant_get_ptr_constructor()
+    (GDExtensionVariantType::GDEXTENSION_VARIANT_TYPE_STRING_NAME, 1);
+    GDExtensionTypePtr _args[1];
+    _args[0] = &from.godot_owner;
+    constructor(&target,_args);
+}
+void init_method_description(StringName name, std::vector<GDExtensionPropertyInfo>& properties,
+GDExtensionMethodInfo& method_info, std::vector<void*>& data_to_delete) {
+    StringName * stringname = new StringName{name};
     stringname->shouldBeDeleted = false;
     method_info.name = &stringname->godot_owner;
     method_info.flags = 4096|6|32768;
@@ -49,5 +64,11 @@ void init_method_description(StringName name, std::vector<GDExtensionPropertyInf
     return_info.hint = 0;
     return_info.hint_string = &return_hint->godot_owner;
     return_info.usage = 4096|6|32768;
-
+    delete return_name;
+    delete return_class_name;
+    delete return_hint;
+    data_to_delete.push_back((void*) return_name);
+    data_to_delete.push_back((void*) return_class_name);
+    data_to_delete.push_back((void*) return_hint);
+    delete stringname;
 }

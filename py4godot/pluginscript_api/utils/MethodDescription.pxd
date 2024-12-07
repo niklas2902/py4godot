@@ -29,5 +29,6 @@ cdef class MethodDescription:
     cdef GDExtensionMethodInfo method_info
 
     cdef vector[GDExtensionPropertyInfo] args
+    cdef vector[void*] data_to_delete
 
     cdef void to_c(self)

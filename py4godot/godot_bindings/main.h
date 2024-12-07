@@ -18,7 +18,7 @@
 #define PYTHONHOME L"addons/py4godot/cpython-3.12.4-linux64/python"
 
 #elif __APPLE__
-#define PYTHONHOME L"addons/py4godot/cpython-3.12.4-linux64/python"
+#define PYTHONHOME L"addons/py4godot/cpython-3.12.4-darwin64/python"
 #endif
 #if !defined(GDN_EXPORT)
 #if defined(_WIN32)
@@ -57,7 +57,7 @@
 #else
     #include <mutex>
     extern std::mutex mtx; // Define a mutex
-    #define LOCK std::lock_guard<std::mutex> lock
+    #define LOCK //std::lock_guard<std::mutex> lock
 #endif
 
 extern GDExtensionClassLibraryPtr _library;

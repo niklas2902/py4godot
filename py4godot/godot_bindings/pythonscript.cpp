@@ -47,8 +47,10 @@ extern "C" {
         // Call the loaded function
         int result = load_function_handle(p_get_proc_address, p_library, r_initialization);
 
-        // Close the library handle
+        // Close the library handle only on linux (crash on macos)
+        #if defined(__linux__)
         dlclose(handle);
+        #endif
         return result;
 
         #endif

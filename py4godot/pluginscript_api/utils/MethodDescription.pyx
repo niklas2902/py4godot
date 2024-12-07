@@ -39,4 +39,5 @@ cdef class MethodDescription:
             tools.print_error(f"Exception:{e}")
 
     cdef void to_c(self):
-        init_method_description(self.name.StringName_internal_class_ptr.get()[0], self.args, self.method_info)
+        init_method_description(self.name.StringName_internal_class_ptr.get()[0],
+                                self.args, self.method_info, self.data_to_delete)

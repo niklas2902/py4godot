@@ -40,4 +40,4 @@ cdef extern from "py4godot/pluginscript_api/utils/property_description_utils.h":
 )
 
 cdef extern from "py4godot/pluginscript_api/utils/method_description_utils.h":
-    void init_method_description(StringName name,vector[GDExtensionPropertyInfo]& properties,  GDExtensionMethodInfo& method_info)
+    void init_method_description(StringName name,vector[GDExtensionPropertyInfo]& properties,  GDExtensionMethodInfo& method_info, vector[void*] data)
