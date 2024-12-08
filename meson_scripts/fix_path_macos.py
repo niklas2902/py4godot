@@ -23,17 +23,15 @@ def fix_macos_paths():
         abs_entry = os.path.abspath(entry)
         if "main" in entry or "pythonscript" in entry:
             rel_path = "@loader_path/../"
-            #rel_path = ""
         else:
-            rel_path = "../../../"
+            rel_path = "@loader_path/../../../"
             for i in range(entry.count("#")):
                 rel_path += "../"
-            rel_path = "/Users/customer/Documents/py4godot/example/addons/py4godot/cpython-3.12.4-darwin64/python"
         # Check if the .dylib file contains the old Python path
         command = [
             "install_name_tool",
-            "-change", old_python_path, "/Users/customer/Documents/py4godot/example/addons/py4godot/cpython-3.12.4-darwin64/python/lib/libpython3.12.dylib", abs_entry
-            #"-change", old_python_path, rel_path+ new_python_path, abs_entry
+            #"-change", old_python_path, "/Users/customer/Documents/py4godot/example/addons/py4godot/cpython-3.12.4-darwin64/python/lib/libpython3.12.dylib", abs_entry
+            "-change", old_python_path, rel_path+ new_python_path, abs_entry
         ]
         try:
             # Run the install_name_tool command
