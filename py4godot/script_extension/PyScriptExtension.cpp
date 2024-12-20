@@ -180,9 +180,10 @@ void init_pluginscript_api(){
 }
 
 void PyScriptExtension::init_signals(PyObject* instance){
+
     std::vector<std::shared_ptr<godot::Dictionary>> signals;
-    for (auto& signal: transfer_object.signals){
-        signals.push_back(std::make_shared<godot::Dictionary>(signal));
+    for (auto& signal_description_ptr: transfer_object.signals){
+        signals.push_back(std::make_shared<godot::Dictionary>(build_signal(*signal_description_ptr)));
     }
     create_signals(instance, signals);
 }
