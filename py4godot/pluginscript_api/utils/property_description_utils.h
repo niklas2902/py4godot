@@ -6,7 +6,7 @@
 #include <vector>
 using namespace godot;
 
-void init_property_description(GDExtensionPropertyInfo& property_info,
+CPPPropertyDescription* init_property_description(
 GDExtensionVariantType type_,
 StringName& name,
 StringName& class_name,
@@ -14,21 +14,12 @@ uint32_t hint,
 String& hint_string,
 uint32_t usage
 ){
-    StringName * stringname = new StringName{name};
-    stringname->shouldBeDeleted = false;
-
-    StringName class_name_empty = StringName::new0();
-    StringName *classname = new StringName{class_name_empty};
-    classname->shouldBeDeleted = false;
-
-    String * ptr_hint_string = new String{hint_string};
-    ptr_hint_string->shouldBeDeleted = false;
-
-
-    property_info.type = type_;
-    property_info.name = &stringname->godot_owner;
-    property_info.class_name = &classname->godot_owner;
-    property_info.hint = hint;
-    property_info.hint_string = &ptr_hint_string->godot_owner;
-    property_info.usage = usage;
+    CPPPropertyDescription* res = new CPPPropertyDescription();
+    res -> name = StringName(name);
+    res -> class_name = StringName::new0();
+    res -> hint_string = String(hint_string);
+    res -> hint = hint;
+    res -> usage = usage;
+    res -> type_ = type_;
+    return res;
 }

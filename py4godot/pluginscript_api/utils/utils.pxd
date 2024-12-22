@@ -7,8 +7,8 @@ from libcpp.string cimport string
 cdef extern from "help_types.h":
     ctypedef struct TransferObject:
         vector[CPPSignalDescription*] signals
-        vector[GDExtensionPropertyInfo] properties
-        vector[GDExtensionMethodInfo] methods
+        vector[CPPPropertyDescription*] properties
+        vector[CPPMethodDescription*] methods
         string icon_path;
         vector [PyObject*] default_values
         PyObject* class_
@@ -25,12 +25,28 @@ cdef extern from "help_types.h":
         StringName name;
         vector [CPPSignalArg] args;
 
+    ctypedef struct CPPPropertyDescription:
+        GDExtensionVariantType type_,
+        StringName& name,
+        StringName& class_name,
+        uint32_t hint,
+        String& hint_string,
+        uint32_t usage
+
+
+    ctypedef struct CPPMethodDescription:
+        CPPPropertyDescription* return_value;
+        vector[CPPPropertyDescription*] args;
+        StringName name;
+        int flags;
+        uint32_t id;
+
 cdef extern from "py4godot/pluginscript_api/utils/signal_description_utils.h":
     CPPSignalDescription* init_signal_description(char* name, vector[CPPSignalArg]& args)
     void print_error(char* text)
 
 cdef extern from "py4godot/pluginscript_api/utils/property_description_utils.h":
-    void init_property_description(GDExtensionPropertyInfo& property_info,
+    CPPPropertyDescription* init_property_description(
     GDExtensionVariantType type_,
     StringName name,
     StringName class_name,
@@ -40,4 +56,4 @@ cdef extern from "py4godot/pluginscript_api/utils/property_description_utils.h":
 )
 
 cdef extern from "py4godot/pluginscript_api/utils/method_description_utils.h":
-    void init_method_description(StringName name,vector[GDExtensionPropertyInfo]& properties,  GDExtensionMethodInfo& method_info, vector[void*] data)
+    CPPMethodDescription* init_method_description(StringName name, vector[CPPPropertyDescription*]& properties)

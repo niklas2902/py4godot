@@ -2,7 +2,7 @@
 from py4godot.hints.BaseHint cimport *
 from  py4godot.godot_bindings.binding4_godot4 cimport *
 from py4godot.classes.core cimport *
-
+cimport py4godot.pluginscript_api.utils.utils as utils
 
 cdef class PropertyDescription:
     cdef str name
@@ -16,6 +16,6 @@ cdef class PropertyDescription:
     cdef StringName class_name
     cdef int usage
     cdef object default_value
-    cdef GDExtensionPropertyInfo property_info
+    cdef utils.CPPPropertyDescription* property_description
 
     cdef void to_c(self)

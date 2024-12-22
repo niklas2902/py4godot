@@ -39,7 +39,6 @@ cdef api void create_signals(PyObject* instance, vector[shared_ptr[BridgeDiction
     cdef StringName gd_name
     try:
         for signal_ind in range(signals.size()):
-            print(f"create_signal: {signal_ind}")
             py_signal.Dictionary_internal_class_ptr = <shared_ptr[BridgeDictionary]> signals[signal_ind]
             gd_name = StringName.new2("name")
             py_name = str(String.new2(py_signal["name"]))

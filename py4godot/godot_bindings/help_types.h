@@ -17,10 +17,27 @@ struct CPPSignalDescription{
     std::vector<CPPSignalArg> args;
 };
 
+struct CPPPropertyDescription{
+    GDExtensionVariantType type_;
+    godot::StringName name;
+    godot::StringName class_name;
+    uint32_t hint;
+    godot::String hint_string;
+    uint32_t usage;
+};
+
+struct CPPMethodDescription{
+    CPPPropertyDescription* return_value;
+    std::vector<CPPPropertyDescription*> args;
+    godot::StringName name;
+    int flags;
+    uint32_t id;
+};
+
 struct TransferObject{
     std::vector<CPPSignalDescription*> signals;
-    std::vector<GDExtensionPropertyInfo> properties;
-    std::vector<GDExtensionMethodInfo> methods;
+    std::vector<CPPPropertyDescription*> properties;
+    std::vector<CPPMethodDescription*> methods;
     std::vector<PyObject*> default_values;
     std::string icon_path;
     PyObject* class_;

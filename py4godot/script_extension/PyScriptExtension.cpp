@@ -283,7 +283,7 @@ void PyScriptExtension::update_instance_data(InstanceData* gd_instance, PyObject
 
     int index = 0;
     for (auto& default_value: transfer_object.default_values){
-        auto property_string_name =  StringName::new_static(((void**)transfer_object.properties[index].name)[0]);
+        auto property_string_name =  transfer_object.properties[index]->name;
         String property_name = String::new2(property_string_name);
         char* c_property_name;
         gd_string_to_c_string( &property_name.godot_owner, property_name.length(), &c_property_name);

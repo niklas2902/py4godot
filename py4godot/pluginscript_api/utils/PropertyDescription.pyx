@@ -29,8 +29,7 @@ cdef class PropertyDescription:
         return self.default_value
 
     cdef void to_c(self):
-        init_property_description( self.property_info,
-                                self.type_,
+        self.property_description = init_property_description( self.type_,
                                 self.gd_name.StringName_internal_class_ptr.get()[0],
                                 self.class_name.StringName_internal_class_ptr.get()[0],
                                 self.hint,

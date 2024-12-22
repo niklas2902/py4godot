@@ -123,19 +123,59 @@ GDExtensionBool c_instance_set(GDExtensionScriptInstanceDataPtr p_instance, GDEx
     return 1;
 }
 
+GDExtensionPropertyInfo create_property_info(CPPPropertyDescription* description_ptr){
+    GDExtensionPropertyInfo property_info;
+    property_info.type = description_ptr->type_;
+    property_info.name = &description_ptr->name.godot_owner;
+    property_info.class_name = &description_ptr->class_name.godot_owner;
+    property_info.hint = description_ptr->hint;
+    property_info.hint_string = &description_ptr->hint_string.godot_owner;
+    property_info.usage = description_ptr->usage;
+    return property_info;
+}
+
+std::vector<GDExtensionPropertyInfo> build_property_info(std::vector<CPPPropertyDescription*> descriptions){
+    std::vector<GDExtensionPropertyInfo> res;
+    for(auto& description_ptr:descriptions){
+        res.push_back(create_property_info(description_ptr));
+    }
+    return res;
+
+}
+
 const GDExtensionPropertyInfo * c_instance_get_property_list(GDExtensionScriptInstanceDataPtr p_instance, uint32_t *r_count){
     print_error("_c_instance_get_property_list");
     auto p_instance_data = (InstanceData*) p_instance;
-    auto& properties = p_instance_data->properties;
-    *r_count = properties.size();
-    if (properties.size() == 0) {
+    p_instance_data->gd_properties = build_property_info(p_instance_data->properties);
+    *r_count = p_instance_data->properties.size();
+    if (p_instance_data->gd_properties.size() == 0) {
         return nullptr;
     }
-    return &properties[0];
+    return &p_instance_data->gd_properties[0];
+}
+
+
+GDExtensionMethodInfo create_method_info(CPPMethodDescription* description_ptr){
+    GDExtensionMethodInfo method_info;
+    method_info.name = &description_ptr->name.godot_owner;
+    method_info.flags = description_ptr->flags;
+    method_info.id = description_ptr->id;
+    method_info.argument_count = description_ptr->args.size();
+    method_info.default_argument_count = 0;
+
+   GDExtensionPropertyInfo return_info = create_property_info(description_ptr->return_value);
+    method_info.return_value = return_info;
+
+    GDExtensionPropertyInfo* my_args = (GDExtensionPropertyInfo*)malloc(sizeof(GDExtensionPropertyInfo) * description_ptr->args.size());
+    for(size_t index = 0; index < description_ptr->args.size(); index++){
+        CPPPropertyDescription* arg = description_ptr->args[index];
+        my_args[index] = create_property_info(arg);
+    }
+    method_info.arguments = my_args;
+    return method_info;
 }
 
 const GDExtensionMethodInfo * c_instance_get_method_list(GDExtensionScriptInstanceDataPtr p_instance, uint32_t *r_count){
-    print_error("_c_instance_get_property_list");
     auto p_instance_data = (InstanceData*) p_instance;
     auto& methods = p_instance_data->methods;
     *r_count = methods.size();
@@ -143,7 +183,11 @@ const GDExtensionMethodInfo * c_instance_get_method_list(GDExtensionScriptInstan
         return nullptr;
     }
 
-    return &methods[0];
+    for(auto& p_method: methods){
+        p_instance_data->gd_methods.push_back(create_method_info(p_method));
+    }
+    return &p_instance_data->gd_methods[0];
+
 }
 
 GDExtensionObjectPtr c_instance_get_script(GDExtensionScriptInstanceDataPtr p_instance){

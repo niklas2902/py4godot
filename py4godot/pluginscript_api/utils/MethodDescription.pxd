@@ -5,6 +5,7 @@ from py4godot.hints.BaseHint cimport *
 from py4godot.godot_bindings.binding4_godot4 cimport *
 from py4godot.classes.core cimport *
 from py4godot.pluginscript_api.utils.PropertyDescription cimport *
+cimport py4godot.pluginscript_api.utils.utils as utils
 from libc.stdint cimport uint32_t
 
 cdef uint32_t id_counter = 0
@@ -26,9 +27,7 @@ cdef class MethodDescription:
     cdef uint32_t default_argument_count;
     cdef list default_arguments;
 
-    cdef GDExtensionMethodInfo method_info
+    cdef utils.CPPMethodDescription* method_description
 
-    cdef vector[GDExtensionPropertyInfo] args
-    cdef vector[void*] data_to_delete
-
+    cdef vector[utils.CPPPropertyDescription*] args
     cdef void to_c(self)
