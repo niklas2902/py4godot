@@ -166,12 +166,13 @@ GDExtensionMethodInfo create_method_info(CPPMethodDescription* description_ptr){
    GDExtensionPropertyInfo return_info = create_property_info(description_ptr->return_value);
     method_info.return_value = return_info;
 
-    GDExtensionPropertyInfo* my_args = (GDExtensionPropertyInfo*)malloc(sizeof(GDExtensionPropertyInfo) * description_ptr->args.size());
+    std::vector<GDExtensionPropertyInfo> my_args;
     for(size_t index = 0; index < description_ptr->args.size(); index++){
         CPPPropertyDescription* arg = description_ptr->args[index];
-        my_args[index] = create_property_info(arg);
+        my_args.push_back(create_property_info(arg));
     }
-    method_info.arguments = my_args;
+    description_ptr->cpp_args = my_args;
+    method_info.arguments = &description_ptr->cpp_args[0];
     return method_info;
 }
 

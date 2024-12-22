@@ -29,6 +29,7 @@ struct CPPPropertyDescription{
 struct CPPMethodDescription{
     CPPPropertyDescription* return_value;
     std::vector<CPPPropertyDescription*> args;
+    std::vector<GDExtensionPropertyInfo> cpp_args;
     godot::StringName name;
     int flags;
     uint32_t id;
