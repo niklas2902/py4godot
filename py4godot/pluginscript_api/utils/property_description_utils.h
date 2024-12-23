@@ -4,9 +4,10 @@
 #include "py4godot/gdextension-api/gdextension_interface.h"
 #include "py4godot/cpputils/utils.h"
 #include <vector>
+#include<memory>
 using namespace godot;
 
-CPPPropertyDescription* init_property_description(
+std::shared_ptr<CPPPropertyDescription> init_property_description(
 GDExtensionVariantType type_,
 StringName& name,
 StringName& class_name,
@@ -14,7 +15,7 @@ uint32_t hint,
 String& hint_string,
 uint32_t usage
 ){
-    CPPPropertyDescription* res = new CPPPropertyDescription();
+    std::shared_ptr<CPPPropertyDescription> res = std::make_shared<CPPPropertyDescription>();
     res -> name = StringName(name);
     res -> class_name = StringName::new0();
     res -> hint_string = String(hint_string);

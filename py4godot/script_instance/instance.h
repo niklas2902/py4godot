@@ -123,7 +123,7 @@ GDExtensionBool c_instance_set(GDExtensionScriptInstanceDataPtr p_instance, GDEx
     return 1;
 }
 
-GDExtensionPropertyInfo create_property_info(CPPPropertyDescription* description_ptr){
+GDExtensionPropertyInfo create_property_info(std::shared_ptr<CPPPropertyDescription> description_ptr){
     GDExtensionPropertyInfo property_info;
     property_info.type = description_ptr->type_;
     property_info.name = &description_ptr->name.godot_owner;
@@ -134,7 +134,7 @@ GDExtensionPropertyInfo create_property_info(CPPPropertyDescription* description
     return property_info;
 }
 
-std::vector<GDExtensionPropertyInfo> build_property_info(std::vector<CPPPropertyDescription*> descriptions){
+std::vector<GDExtensionPropertyInfo> build_property_info(std::vector<std::shared_ptr<CPPPropertyDescription>> descriptions){
     std::vector<GDExtensionPropertyInfo> res;
     for(auto& description_ptr:descriptions){
         res.push_back(create_property_info(description_ptr));
@@ -155,7 +155,7 @@ const GDExtensionPropertyInfo * c_instance_get_property_list(GDExtensionScriptIn
 }
 
 
-GDExtensionMethodInfo create_method_info(CPPMethodDescription* description_ptr){
+GDExtensionMethodInfo create_method_info(std::shared_ptr<CPPMethodDescription> description_ptr){
     GDExtensionMethodInfo method_info;
     method_info.name = &description_ptr->name.godot_owner;
     method_info.flags = description_ptr->flags;
@@ -168,7 +168,7 @@ GDExtensionMethodInfo create_method_info(CPPMethodDescription* description_ptr){
 
     std::vector<GDExtensionPropertyInfo> my_args;
     for(size_t index = 0; index < description_ptr->args.size(); index++){
-        CPPPropertyDescription* arg = description_ptr->args[index];
+        std::shared_ptr<CPPPropertyDescription> arg = description_ptr->args[index];
         my_args.push_back(create_property_info(arg));
     }
     description_ptr->cpp_args = my_args;

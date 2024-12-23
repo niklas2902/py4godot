@@ -30,5 +30,5 @@ cdef class SignalDescription:
     def get_var_signal_dict(self):
         return self.var_signal_dict
 
-    cdef CPPSignalDescription* get_signal_description(self):
+    cdef shared_ptr[CPPSignalDescription] get_signal_description(self):
         return self.description

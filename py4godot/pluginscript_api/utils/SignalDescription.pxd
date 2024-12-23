@@ -5,5 +5,5 @@ from py4godot.pluginscript_api.utils.utils cimport *
 
 cdef class SignalDescription:
     #cdef Variant create_signal_arg(self, String name, int type)
-    cdef CPPSignalDescription* get_signal_description(self)
-    cdef CPPSignalDescription* description
+    cdef shared_ptr[CPPSignalDescription] get_signal_description(self)
+    cdef shared_ptr[CPPSignalDescription] description

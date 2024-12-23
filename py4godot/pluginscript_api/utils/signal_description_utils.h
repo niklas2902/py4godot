@@ -4,6 +4,7 @@
 #include "py4godot/cpputils/utils.h"
 #include "main.h"
 #include <vector>
+#include<memory>
 using namespace godot;
 /*
 void create_signal_arg(const char* name, int variant_type, Array& args_dicts){
@@ -28,8 +29,8 @@ void create_signal_arg(const char* name, int variant_type, Array& args_dicts){
 */
 
 
-CPPSignalDescription* init_signal_description(char* name, std::vector<CPPSignalArg>& args){
-    CPPSignalDescription* description  = new CPPSignalDescription;
+std::shared_ptr<CPPSignalDescription> init_signal_description(char* name, std::vector<CPPSignalArg>& args){
+    std::shared_ptr<CPPSignalDescription> description  = std::make_shared<CPPSignalDescription>();
     description->name = c_string_to_string_name(name);
     for(auto& arg: args){
         arg.stringname_name = c_string_to_string_name(arg.name);

@@ -179,11 +179,11 @@ cdef api TransferObject exec_class(str source_string, str class_name_):
     for signal in signals:
         transfer_object.signals.push_back((<SignalDescription>signal).get_signal_description())
 
-    cdef CPPMethodDescription* method_description
+    cdef shared_ptr[CPPMethodDescription] method_description
     for method in methods:
         method_description = (<MethodDescription>method).method_description
         transfer_object.methods.push_back(method_description)
-    cdef CPPPropertyDescription* property_info
+    cdef shared_ptr[CPPPropertyDescription] property_info
     for property in properties:
         (<PropertyDescription>property).to_c()
         property_info = (<PropertyDescription>property).property_description

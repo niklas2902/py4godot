@@ -27,7 +27,7 @@ cdef class MethodDescription:
     cdef uint32_t default_argument_count;
     cdef list default_arguments;
 
-    cdef utils.CPPMethodDescription* method_description
+    cdef shared_ptr[utils.CPPMethodDescription] method_description
 
-    cdef vector[utils.CPPPropertyDescription*] args
+    cdef vector[shared_ptr[utils.CPPPropertyDescription]] args
     cdef void to_c(self)

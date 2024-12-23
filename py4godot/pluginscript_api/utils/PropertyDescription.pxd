@@ -16,6 +16,6 @@ cdef class PropertyDescription:
     cdef StringName class_name
     cdef int usage
     cdef object default_value
-    cdef utils.CPPPropertyDescription* property_description
+    cdef shared_ptr[utils.CPPPropertyDescription] property_description
 
     cdef void to_c(self)

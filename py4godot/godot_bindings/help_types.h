@@ -27,8 +27,8 @@ struct CPPPropertyDescription{
 };
 
 struct CPPMethodDescription{
-    CPPPropertyDescription* return_value;
-    std::vector<CPPPropertyDescription*> args;
+    std::shared_ptr<CPPPropertyDescription> return_value;
+    std::vector<std::shared_ptr<CPPPropertyDescription>> args;
     std::vector<GDExtensionPropertyInfo> cpp_args;
     godot::StringName name;
     int flags;
@@ -36,9 +36,9 @@ struct CPPMethodDescription{
 };
 
 struct TransferObject{
-    std::vector<CPPSignalDescription*> signals;
-    std::vector<CPPPropertyDescription*> properties;
-    std::vector<CPPMethodDescription*> methods;
+    std::vector<std::shared_ptr<CPPSignalDescription>> signals;
+    std::vector<std::shared_ptr<CPPPropertyDescription>> properties;
+    std::vector<std::shared_ptr<CPPMethodDescription>> methods;
     std::vector<PyObject*> default_values;
     std::string icon_path;
     PyObject* class_;

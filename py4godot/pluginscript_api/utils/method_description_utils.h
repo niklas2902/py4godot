@@ -4,6 +4,7 @@
 #include "py4godot/cpputils/utils.h"
 #include "main.h"
 #include <vector>
+#include <memory>
 using namespace godot;
 
 /*
@@ -24,14 +25,14 @@ typedef struct {
 
 static uint32_t id = 0;
 
-CPPMethodDescription* init_method_description(StringName name, std::vector<CPPPropertyDescription*>& properties) {
-    CPPMethodDescription* res = new CPPMethodDescription();
+std::shared_ptr<CPPMethodDescription> init_method_description(StringName name, std::vector<std::shared_ptr<CPPPropertyDescription>>& properties) {
+    std::shared_ptr<CPPMethodDescription> res = std::make_shared<CPPMethodDescription>();
     res->name = name;
     res->flags = 4096|6|32768;
     res->id = id++;
     res->args = properties;
 
-    CPPPropertyDescription* return_description = new CPPPropertyDescription();
+    std::shared_ptr<CPPPropertyDescription> return_description = std::make_shared<CPPPropertyDescription>();
     return_description->type_ = GDExtensionVariantType::GDEXTENSION_VARIANT_TYPE_NIL;
     return_description->name = c_string_to_string_name("return");
     return_description->class_name = c_string_to_string_name("Nil");

@@ -8,9 +8,9 @@
 struct InstanceData{
     PyObject* owner;
     std::vector<GDExtensionPropertyInfo> gd_properties; // properties for GODOT
-    std::vector<CPPPropertyDescription*> properties; // properties, we are working with internally
+    std::vector<std::shared_ptr<CPPPropertyDescription>> properties; // properties, we are working with internally
     std::vector<GDExtensionMethodInfo>gd_methods;
-    std::vector<CPPMethodDescription*> methods;
+    std::vector<std::shared_ptr<CPPMethodDescription>> methods;
     std::vector<std::string> already_set_properties;
     std::unordered_set<std::string> custom_properties;
     void* script;
