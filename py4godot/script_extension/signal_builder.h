@@ -6,23 +6,23 @@
 using namespace godot;
 
 void create_signal_arg(CPPSignalArg& arg, Array& args_dicts){
-    Dictionary arg_dict = Dictionary::new0();
-    arg_dict.shouldBeDeleted = false;
-    auto godot_name = c_string_to_string("name");
-    Variant arg_name_key_variant = Variant(godot_name);
+    arg.arg_dict = std::make_shared<Dictionary>(Dictionary::new0());
+    auto& arg_dict = *arg.arg_dict;
+    arg.godot_name = c_string_to_string("name");
+    arg.arg_name_key_variant = Variant(arg.godot_name);
 
 
-    Variant var_name_arg = arg_dict[arg_name_key_variant];
-    var_name_arg.init_type(arg.stringname_name);
+    arg.var_name_arg = arg_dict[arg.arg_name_key_variant];
+    arg.var_name_arg.init_type(arg.stringname_name);
 
-    String arg_type_key = c_string_to_string("type");
-    Variant arg_type_key_variant = Variant(arg_type_key);
+    arg.arg_type_key = c_string_to_string("type");
+    arg.arg_type_key_variant = Variant(arg.arg_type_key);
 
-    Variant var_type_arg = arg_dict[arg_type_key_variant];
-    var_type_arg.init_type(arg.type);
+    arg.var_type_arg = arg_dict[arg.arg_type_key_variant];
+    arg.var_type_arg.init_type(arg.type);
 
-    Variant var_args_dict = Variant(arg_dict);
-    args_dicts.append(var_args_dict);
+    arg.var_args_dict = Variant(arg_dict);
+    args_dicts.append(arg.var_args_dict);
 }
 
 Array create_args_array(){
@@ -37,24 +37,24 @@ Array create_args_array(){
     return args_array;
 }
 
-Dictionary build_signal(CPPSignalDescription& description){
-    Dictionary ret = Dictionary::new0();
-    String name_key_string = c_string_to_string("name");
-    Variant name_key = Variant(name_key_string);
-    Variant name_val = ret[name_key];
-    name_val.init_type(description.name);
+Dictionary* build_signal(CPPSignalDescription& description){
+    description.cpp_signal = Dictionary::new0();
+    description.name_key_string = c_string_to_string("name");
+    description.name_key = Variant(description.name_key_string);
+    description.name_val = description.cpp_signal[description.name_key];
+    description.name_val.init_type(description.name);
 
-    String args_key_string = c_string_to_string("args");
-    Variant args_key = Variant(args_key_string);
-    Array args_array = create_args_array();
-    Variant args_array_value = ret[args_key];
-    args_array_value.init_type(args_array);
+    description.args_key_string = c_string_to_string("args");
+    description.args_key = Variant(description.args_key_string);
+    description.args_array = create_args_array();
+    description.args_array_value = description.cpp_signal[description.args_key];
+    description.args_array_value.init_type(description.args_array);
 
     // create a signal arg
     auto description_args = description.args;
     for (auto& arg: description_args){
-         create_signal_arg(arg, args_array);
+         create_signal_arg(arg, description.args_array);
      }
 
-    return ret;
+    return &description.cpp_signal;
 }

@@ -36,6 +36,8 @@ std::shared_ptr<CPPSignalDescription> init_signal_description(char* name, std::v
         arg.stringname_name = c_string_to_string_name(arg.name);
     }
     description->args = args;
+
+    description->cpp_signal = Dictionary::new0();
     return description;
     /*String signal_key = c_string_to_string("name");
     Variant signal_key_variant = Variant(signal_key);

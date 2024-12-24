@@ -183,7 +183,7 @@ void PyScriptExtension::init_signals(PyObject* instance){
 
     std::vector<std::shared_ptr<godot::Dictionary>> signals;
     for (auto& signal_description_ptr: transfer_object.signals){
-        signals.push_back(std::make_shared<godot::Dictionary>(build_signal(*signal_description_ptr)));
+        signals.push_back(std::make_shared<godot::Dictionary>(*build_signal(*signal_description_ptr)));
     }
     create_signals(instance, signals);
 }
@@ -423,7 +423,7 @@ void PyScriptExtension::_get_script_signal_list(GDExtensionTypePtr res){
         auto var_signal_ptr = std::make_shared<Variant>(1);
         signal_variants.push_back(var_signal_ptr);
         auto constructor = functions::get_get_variant_from_type_constructor()(GDExtensionVariantType::GDEXTENSION_VARIANT_TYPE_DICTIONARY);
-        constructor(&(var_signal_ptr->native_ptr), &signal_dict.godot_owner);
+        constructor(&(var_signal_ptr->native_ptr), &signal_dict->godot_owner);
 
         add_variant_to_array(res, *var_signal_ptr);
 
