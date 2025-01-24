@@ -172,7 +172,8 @@ GDExtensionMethodInfo create_method_info(std::shared_ptr<CPPMethodDescription> d
         my_args.push_back(create_property_info(arg));
     }
     description_ptr->cpp_args = my_args;
-    method_info.arguments = &description_ptr->cpp_args[0];
+    auto& head = description_ptr->cpp_args[0];
+    method_info.arguments = &head;
     return method_info;
 }
 
@@ -183,6 +184,7 @@ const GDExtensionMethodInfo * c_instance_get_method_list(GDExtensionScriptInstan
     if(methods.size() == 0){
         return nullptr;
     }
+    p_instance_data->gd_methods.clear();
 
     for(auto& p_method: methods){
         p_instance_data->gd_methods.push_back(create_method_info(p_method));
