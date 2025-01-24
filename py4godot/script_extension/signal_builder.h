@@ -6,8 +6,7 @@
 using namespace godot;
 
 void create_signal_arg(CPPSignalArg& arg, Array& args_dicts){
-    arg.arg_dict = std::make_shared<Dictionary>(Dictionary::new0());
-    auto& arg_dict = *arg.arg_dict;
+    Dictionary arg_dict = Dictionary::new0();
     arg.godot_name = c_string_to_string("name");
     arg.arg_name_key_variant = Variant(arg.godot_name);
 
@@ -23,6 +22,7 @@ void create_signal_arg(CPPSignalArg& arg, Array& args_dicts){
 
     arg.var_args_dict = Variant(arg_dict);
     args_dicts.append(arg.var_args_dict);
+    arg.arg_dict = std::make_shared<Dictionary>(arg_dict);
 }
 
 Array create_args_array(){
