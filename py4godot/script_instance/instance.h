@@ -151,7 +151,8 @@ const GDExtensionPropertyInfo * c_instance_get_property_list(GDExtensionScriptIn
     if (p_instance_data->gd_properties.size() == 0) {
         return nullptr;
     }
-    return &p_instance_data->gd_properties[0];
+    auto& head = p_instance_data->gd_properties[0];
+    return &head;
 }
 
 
@@ -189,7 +190,8 @@ const GDExtensionMethodInfo * c_instance_get_method_list(GDExtensionScriptInstan
     for(auto& p_method: methods){
         p_instance_data->gd_methods.push_back(create_method_info(p_method));
     }
-    return &p_instance_data->gd_methods[0];
+    auto& head = p_instance_data->gd_methods[0];
+    return &head;
 
 }
 
