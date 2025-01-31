@@ -188,16 +188,16 @@ void PyLanguage::deinit_theme_icon(){
 
   void PyLanguage::_get_string_delimiters(GDExtensionTypePtr res){
     print_error("_get_string_delimiters");
-    auto string_del1 = c_string_to_string("\".*\"");
-    auto string_del2 = c_string_to_string("'.*'");
+    auto string_del1 = c_string_to_string("\" \"");
+    auto string_del2 = c_string_to_string("' '");
     add_string_to_array(res,string_del1);
     add_string_to_array(res,string_del2);
 
   }
     void PyLanguage::_get_doc_comment_delimiters(GDExtensionTypePtr res){
     print_error("_get_doc_comment_delimiters");
-    auto string_del = c_string_to_string("\"\"\".*\"\"\"");
-    auto string_del2 = c_string_to_string("'''.*'''");
+    auto string_del = c_string_to_string("\"\"\" \"\"\"");
+    auto string_del2 = c_string_to_string("''' '''");
     add_string_to_array(res,string_del);
     add_string_to_array(res,string_del2);
   }
