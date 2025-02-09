@@ -424,7 +424,7 @@ def generate_default_args(mMethod):
         return ""
 
     for arg in mMethod["arguments"]:
-        if "default_value" not in arg["type"]:
+        if "default_value" not in arg:
             return ""
         if arg["type"] in {"float", "int", "Nil", "bool"}:
             continue
@@ -432,9 +432,18 @@ def generate_default_args(mMethod):
             "type"].startswith("bitfield::"):
             type_ = unvariant(untypearray(unbitfield_type(arg['type'])))
             if arg["type"] in builtin_classes:
-                res += f"{INDENT * 2}{pythonize_name(arg['name'])} = {arg['type']}.new0()"
+                res += f"{INDENT * 2}if {pythonize_name(arg['name'])} is None:"
+                res = generate_newline(res)
+                res += f"{INDENT * 3}{pythonize_name(arg['name'])} = {arg['type']}.new0()"
+            elif arg["type"] == "Variant":
+                res += f"{INDENT * 2}if {pythonize_name(arg['name'])} is None:"
+                res = generate_newline(res)
+                res += f"{INDENT * 3}{pythonize_name(arg['name'])} = create_variant_from_py_object(1)"
             else:
-                res += f"{INDENT * 2}{pythonize_name(arg['name'])} = {arg['type']}.constructor()"
+                res += f"{INDENT * 2}if {pythonize_name(arg['name'])} is None:"
+                res = generate_newline(res)
+                type_ = arg["type"]
+                res += f"{INDENT * 3}{pythonize_name(arg['name'])} = py4godot_{type_.lower()}.{type_}.constructor()"
         res = generate_newline(res)
     return res
 

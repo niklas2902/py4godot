@@ -123,7 +123,7 @@ my_parser.add_argument('--target_platform',
 my_parser.add_argument("-run_tests", help="should tests be run", default="False")
 my_parser.add_argument("-download_godot", help="should tests be run", default="False")
 my_parser.add_argument("-create_plugin", help="Should this create a plugin", default="True")
-my_parser.add_argument("-buildtype", help="Should this be a debug build or release build, optionas are release or debugoptimized", default="release")
+my_parser.add_argument("-buildtype", help="Should this be a debug build or release build, options are release or debugoptimized", default="release")
 my_parser.add_argument("-auto_install", help="Should the build automatically install pip and dependencies", default="False")
 
 # Execute parse_args()
