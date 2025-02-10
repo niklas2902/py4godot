@@ -1760,6 +1760,26 @@ def generate_cast(class_):
     res += (f"{INDENT * 2}cls"
             f".set_gdowner(other.Object_internal_class_ptr.get().get_godot_owner())")
     res = generate_newline(res)
+    if is_refcounted(class_):
+        res += f"{INDENT * 2}cls.reference()"
+        res = generate_newline(res)
+    res += f"{INDENT * 2}return cls"
+    res = generate_newline(res)
+
+
+    res += f"{INDENT}@staticmethod"
+    res = generate_newline(res)
+    res += f"{INDENT}def cast_without_reference(Object other):"
+    res = generate_newline(res)
+    res += f"{INDENT * 2}assert other != None # Object to be casted must not be None"
+    res = generate_newline(res)
+    res += f"{INDENT * 2}cdef {class_['name']} cls = {class_['name']}.__new__({class_['name']})"
+    res = generate_newline(res)
+    res += f"{INDENT * 2}cls.{class_['name']}_internal_class_ptr = cast_to_{class_['name']}(other.Object_internal_class_ptr.get())"
+    res = generate_newline(res)
+    res += (f"{INDENT * 2}cls"
+            f".set_gdowner(other.Object_internal_class_ptr.get().get_godot_owner())")
+    res = generate_newline(res)
     res += f"{INDENT * 2}return cls"
     return res
 
