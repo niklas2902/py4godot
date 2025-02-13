@@ -200,7 +200,7 @@ def generate_singleton_constructor(classname):
     res = ""
     res += f"{INDENT}@staticmethod"
     res = generate_newline(res)
-    res += f"{INDENT}def get_instance()->{classname}:pass"
+    res += f"{INDENT}def instance()->{classname}:pass"
     res = generate_newline(res)
     return res
 

@@ -286,14 +286,21 @@ def generate_singleton_constructor(classname):
     res = ""
     res += f"{INDENT}@staticmethod"
     res = generate_newline(res)
-    res += f"{INDENT}def get_instance():"
+    res += f"{INDENT}def instance():"
     res = generate_newline(res)
-
-    res += f"{INDENT * 2}cdef {classname} singleton = {classname}()"
+    res += f"{INDENT*2}global _{classname}_singleton_instance"
     res = generate_newline(res)
-    res += f"{INDENT * 2}singleton.{classname}_internal_class_ptr = CPP{classname}.get_instance()"
+    res += f"{INDENT * 2}cdef {classname} singleton"
     res = generate_newline(res)
-    res += f"{INDENT * 2}return singleton"
+    res += f"{INDENT * 2}if _{classname}_singleton_instance is None:"
+    res = generate_newline(res)
+    res += f"{INDENT * 3}singleton = {classname}()"
+    res = generate_newline(res)
+    res += f"{INDENT * 3}singleton.{classname}_internal_class_ptr = CPP{classname}.get_instance()"
+    res = generate_newline(res)
+    res += f"{INDENT * 3}_{classname}_singleton_instance = singleton"
+    res = generate_newline(res)
+    res += f"{INDENT * 2}return _{classname}_singleton_instance"
     res = generate_newline(res)
     return res
 
@@ -1464,6 +1471,10 @@ def generate_classes(classes, filename, is_core=False, is_typed_array=False):
         if (class_["name"] in IGNORED_CLASSES):
             continue
         res = generate_newline(res)
+        if is_singleton(class_["name"]):
+            res += f"cdef object _{class_['name']}_singleton_instance = None"
+            res = generate_newline(res)
+
         res += f"cdef class {class_['name']}({get_base_class(class_)}):"
         res = generate_newline(res)
         res += generate_common_methods(class_)
@@ -1870,7 +1881,7 @@ def generate_typed_array_name(name):
 
 if __name__ == "__main__":
     os.chdir("..")
-    with open('py4godot/gdextension-api/extension_api.json', 'r', encoding="utf-8") as myfile:
+    with open('py4godot/gdextension-api/extension_api.json', 'r') as myfile:
         data = myfile.read()
         obj = json.loads(data)
         classes = set([class_['name'] if class_["name"] not in IGNORED_CLASSES else None for class_ in
