@@ -1122,6 +1122,16 @@ def generate_destructor(class_):
         res = generate_newline(res)
         res += f"{INDENT * 2}}}"
         res = generate_newline(res)
+        res += f"{INDENT*2}else {{"
+        res = generate_newline(res)
+        res += f"{INDENT*3}if (godot_owner != nullptr && get_reference_count() > 1){{"
+        res = generate_newline(res)
+        res += f"{INDENT * 4}return unreference();"
+        res = generate_newline(res)
+        res += f"{INDENT * 3}}}"
+        res = generate_newline(res)
+        res += f"{INDENT*2}}}"
+        res = generate_newline(res)
         res +=f"{INDENT}}}"
         res = generate_newline(res)
 
