@@ -100,6 +100,7 @@ if not meson.has_external_property('is_mingw') and build_machine.system() == 'li
     'py4godot/cppclasses', 'py4godot/cpputils', 'py4godot/script_language', 'py4godot/pluginscript_api',
     'py4godot/pluginscript_api/utils','python_files/cpython-3.12.4-'+machine+platform_format+'/python/include/python3.12',
     'py4godot/instance_data')
+    py = import('python').find_installation('python3')
     glob = run_command('python3', files(meson.current_source_dir()+'/meson_scripts/glob_tools.py'))
     glob_cpp = run_command('python3', files(meson.current_source_dir()+'/meson_scripts/glob_tools_cpp.py'))
     dep_py = lib_py
