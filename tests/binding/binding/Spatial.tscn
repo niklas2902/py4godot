@@ -3,11 +3,11 @@
 [ext_resource path="res://TestObj.py" type="Script" id=1]
 [ext_resource path="res://TestRunner.py" type="Script" id=2]
 
-[node name="Spatial" type="Spatial"]
+[node name="Node3D" type="Node3D"]
 
-[node name="TestObj" type="Spatial" parent="."]
+[node name="TestObj" type="Node3D" parent="."]
 script = ExtResource( 1 )
 
-[node name="TestRunner" type="Spatial" parent="."]
+[node name="TestRunner" type="Node3D" parent="."]
 script = ExtResource( 2 )
 node = NodePath("../TestObj")

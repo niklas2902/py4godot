@@ -1,3 +1,4 @@
+; Project was converted by built-in tool to Godot 4
 ; Engine configuration file.
 ; It's best edited using the editor UI and not directly,
 ; since the parameters that go here are not all obvious.
@@ -6,7 +7,7 @@
 ;   [section] ; section goes between []
 ;   param=value ; assign values to parameters
 
-config_version=4
+config_version=5
 
 [application]
 
@@ -25,4 +26,4 @@ common/enable_pause_aware_picking=true
 [rendering]
 
 quality/driver/fallback_to_gles2=true
-environment/default_environment="res://default_env.tres"
+environment/defaults/default_environment="res://default_env.tres"
