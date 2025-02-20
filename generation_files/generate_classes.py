@@ -1687,7 +1687,7 @@ def generate_del(class_):
         res += f"{INDENT}def __dealloc__(self):"
         res = generate_newline(res)
         if is_refcounted(class_):
-            res += f"{INDENT * 2}if not is_ptr_null(self.RefCounted_internal_class_ptr):"
+            res += f"{INDENT * 2}if not is_ptr_null(self.RefCounted_internal_class_ptr) and self.casted_from is None:"
             res = generate_newline(res)
             res += f"{INDENT * 3}self.RefCounted_internal_class_ptr.get().py_destroy_ref()"
             res = generate_newline(res)
@@ -1772,7 +1772,7 @@ def generate_cast(class_):
             f".set_gdowner(other.Object_internal_class_ptr.get().get_godot_owner())")
     res = generate_newline(res)
     if is_refcounted(class_):
-        res += f"{INDENT * 2}cls.reference()"
+        res += f"{INDENT * 2}cls.casted_from = other"
         res = generate_newline(res)
     res += f"{INDENT * 2}return cls"
     res = generate_newline(res)

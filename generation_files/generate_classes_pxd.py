@@ -88,6 +88,8 @@ def generate_pxd_class(pxd_class):
     result = generate_newline(result)
     if pxd_class["name"] == "Object":
         result += f"{INDENT}cdef bint already_deallocated"
+        result = generate_newline(result)
+        result += f"{INDENT}cdef object casted_from"
     result = generate_newline(result)
     result += generate_wrapped_attribute(class_)
     result = generate_newline(result)
