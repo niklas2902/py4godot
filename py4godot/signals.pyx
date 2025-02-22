@@ -1,13 +1,12 @@
 # distutils: language=c++
 import inspect
-import weakref
-from cpython.ref cimport Py_INCREF, Py_DECREF
 from py4godot.classes.core cimport *
 from libcpp.memory cimport make_shared
 from py4godot.utils.print_tools import print_error
 from py4godot.utils.utils cimport *
 import py4godot.pluginscript_api.utils.annotations as annotations
 from py4godot.pluginscript_api.utils.helpers cimport get_variant_type
+from py4godot.classes.Object cimport Object as CObject
 cdef class SignalArg:
     def __init__(self, name, type_):
         self.name = name
@@ -78,12 +77,9 @@ cdef class GDSignal(Signal):
 
 cdef class BuiltinSignal(Signal):
     def __init__(self, parent, name):
-        cdef Object temp_val
-        try:
-            self.parent = weakref.ref(parent) #This fixes memory errors. But could lead to side effecs
-            self.signal_name = <StringName> name
-        except Exception as e:
-            print_error(f"Exception when creating signal: {e}")
+        self.parent_ptr = (<Object>parent).Object_internal_class_ptr
+        self.signal_name = <StringName> name
+
     def connect(self, object function , int flags =0):
         cdef str function_name = function.__name__
         cdef Object parent = <Object> (function.__self__ if hasattr(function, '__self__') else None)
@@ -92,6 +88,11 @@ cdef class BuiltinSignal(Signal):
         cdef StringName gd_function_name = py_c_string_to_string_name(c_function_name)
         cdef Callable callable = Callable.new2(parent, gd_function_name )
         self.parent().connect(self.signal_name, callable)
+
+    def parent(self):
+        cdef Object o = Object.__new__(Object)
+        o.Object_internal_class_ptr = self.parent_ptr
+        return o
 
 
     def disconnect(self, object function ):
