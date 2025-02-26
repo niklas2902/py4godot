@@ -69,6 +69,8 @@ def generate_c_props():
 def generate_special_attributes(class_):
     if "array" in class_["name"].lower():
         return f"{INDENT}cdef int _index"
+    if class_["name"] in builtin_classes:
+        return f"{INDENT}cdef bint shouldBeDeleted"
     return ""
 
 def generate_properties(class_):
@@ -78,6 +80,9 @@ def generate_properties(class_):
             if "setter" in property.keys() or "getter" in property.keys():
                 result += f"{INDENT}cdef object py__{property['name']}"
                 result = generate_newline(result)
+                if property["type"] == "String":
+                    result += f"{INDENT}cdef list buffer_py__{property['name']}"
+                    result = generate_newline(result)
     return result
 
 def generate_pxd_class(pxd_class):

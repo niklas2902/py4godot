@@ -1,6 +1,6 @@
 import copy
 import json
-import os.path, os
+import os
 
 from generate_enums import enumize_name
 from generation_tools import write_if_different
@@ -624,6 +624,22 @@ def cast_from_type_to_obj(typename):
         return f"my_static_pointer_cast [CPP{typename}, CPPObject ]"
     return ""
 
+def generate_string_arg(arg):
+    res = ""
+    res += f"{INDENT * 2}cdef String py__string_{pythonize_name(arg['name'])} = py_c_string_to_string({pythonize_name(arg['name'])}.encode('utf-8'))"
+    res = generate_newline(res)
+    res += f"{INDENT * 2}py__string_{pythonize_name(arg['name'])}.shouldBeDeleted = False"
+    res = generate_newline(res)
+    return res
+def generate_string_args(method):
+    res = ""
+    for arg in method["arguments"]:
+        if arg["type"] == "String":
+            res += generate_string_arg(arg)
+            res = generate_newline(res)
+    return res
+
+
 def generate_method_body_standard(class_, method):
     number_arguments = 0
     result = ""
@@ -637,15 +653,19 @@ def generate_method_body_standard(class_, method):
     result = generate_newline(result)
     result += generate_variants(method)
     result = generate_newline(result)
+    if is_property_setter(class_, method["name"]):
+        result += generate_string_args(method)
+        result = generate_newline(result)
+
     if "return_value" in method.keys() or "return_type" in method.keys():
         result += generate_return_value(class_["name"], method)
         if not is_static(method):
 
-            result += f"{INDENT * 2}{generate_ret_call(method)} = self.{class_['name']}_internal_class_ptr.get().py_{pythonize_name(method['name'])}({generate_method_args(method)})"
+            result += f"{INDENT * 2}{generate_ret_call(method)} = self.{class_['name']}_internal_class_ptr.get().py_{pythonize_name(method['name'])}({generate_method_args(class_, method)})"
             result = generate_newline(result)
             result += generate_set_gd_owner_for_ret(method)
         else:
-            result += f"{INDENT * 2}{generate_ret_call(method)} = CPP{class_['name']}.py_{pythonize_name(method['name'])}({generate_method_args(method)})"
+            result += f"{INDENT * 2}{generate_ret_call(method)} = CPP{class_['name']}.py_{pythonize_name(method['name'])}({generate_method_args(class_,method)})"
             result = generate_newline(result)
             result += generate_set_gd_owner_for_ret(method)
         result = generate_newline(result)
@@ -666,9 +686,9 @@ def generate_method_body_standard(class_, method):
         result += generate_return_statement(method)
     else:
         if not is_static(method):
-            result += f"{INDENT * 2}self.{class_['name']}_internal_class_ptr.get().py_{pythonize_name(method['name'])}({generate_method_args(method)})"
+            result += f"{INDENT * 2}self.{class_['name']}_internal_class_ptr.get().py_{pythonize_name(method['name'])}({generate_method_args(class_, method)})"
         else:
-            result += f"{INDENT * 2}CPP{class_['name']}.py_{pythonize_name(method['name'])}({generate_method_args(method)})"
+            result += f"{INDENT * 2}CPP{class_['name']}.py_{pythonize_name(method['name'])}({generate_method_args(class_, method)})"
     return result
 
 def shared_ptr_type(classname):
@@ -676,7 +696,7 @@ def shared_ptr_type(classname):
         return "CPP"+classname
     return "CPPObject"
 
-def generate_method_args(method):
+def generate_method_args(class_, method):
     res = ""
     if "arguments" not in method.keys():
         if method["is_vararg"]:
@@ -687,7 +707,10 @@ def generate_method_args(method):
             res += f"{pythonize_name(arg['name'])}.{untypearray(arg['type'])}_internal_class_ptr if {pythonize_name(arg['name'])} != None else {pythonize_name(arg['name'])}.{untypearray(arg['type'])}_internal_class_ptr, " # Todo: implement conditional
         elif untypearray(arg["type"]) in builtin_classes - IGNORED_CLASSES:
             if arg["type"] == "String":
-                res += f"py_c_string_to_string({pythonize_name(arg['name'])}.encode('utf-8')).{untypearray(arg['type'])}_internal_class_ptr, "
+                if is_property_setter(class_, method["name"]):
+                    res += f"py__string_{pythonize_name(arg['name'])}.String_internal_class_ptr, "
+                else:
+                    res += f"py_c_string_to_string({pythonize_name(arg['name'])}.encode('utf-8')).{untypearray(arg['type'])}_internal_class_ptr, "
             else:
                 res += f"{pythonize_name(arg['name'])}.{untypearray(arg['type'])}_internal_class_ptr, "
         elif "TypedArray" in untypearray(arg["type"]):
@@ -783,7 +806,8 @@ def generate_cinit(class_):
     if class_["name"] in classes - builtin_classes:
         res += f"{INDENT * 2}self.already_deallocated = False"
         res = generate_newline(res)
-
+    if class_["name"] in builtin_classes:
+        res += f"{INDENT * 2}self.shouldBeDeleted = True"
     if "inherits" in class_.keys():
         cls = find_class(class_["inherits"])
         while cls:
@@ -1699,7 +1723,7 @@ def generate_del(class_):
         res = ""
         res += f"{INDENT}def __dealloc__(self):"
         res = generate_newline(res)
-        res += f"{INDENT * 2}if not is_ptr_null(self.{class_['name']}_internal_class_ptr):"
+        res += f"{INDENT * 2}if not is_ptr_null(self.{class_['name']}_internal_class_ptr) and self.shouldBeDeleted:"
         res = generate_newline(res)
         res += f"{INDENT * 3}self.{class_['name']}_internal_class_ptr.get().{class_['name']}_py_destroy()"
         res = generate_newline(res)
