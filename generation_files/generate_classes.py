@@ -93,7 +93,8 @@ def generate_import():
               "from py4godot.utils.utils cimport *\n"
               "cimport py4godot.utils.utils as py_utils\n"
               "from py4godot.classes.typedarrays cimport *\n"
-              "from libcpp.memory cimport make_shared\n")
+              "from libcpp.memory cimport make_shared\n"
+              "from py4godot.utils.smart_cast import smart_cast, register_cast_function\n")
     return result
 
 
@@ -300,7 +301,7 @@ def generate_return_statement(method_):
             result += f"{INDENT * 2}return <object>_ret"
         else:
             if ret_val.type in classes - builtin_classes:
-                result = f"{INDENT * 2}return None if _ret.{ret_val.type}_internal_class_ptr.get().get_godot_owner() == NULL else _ret"
+                result = f"{INDENT * 2}return None if _ret.{ret_val.type}_internal_class_ptr.get().get_godot_owner() == NULL else smart_cast(_ret)"
             else:
                 result = ""
                 result += f"{INDENT * 2}return _ret"
@@ -1564,11 +1565,18 @@ def generate_classes(classes, filename, is_core=False, is_typed_array=False):
             res += generate_method(class_, method)
             res = generate_newline(res)
         res += generate_operators_for_class(class_["name"])
+        if class_["name"] not in builtin_classes and not is_typed_array:
+            res += generate_register_cast(class_["name"])
     if is_core:
         res += create_core_classes_set()
     text_to_write = "# distutils: language=c++\n"+res
     write_if_different(filename, text_to_write)
 
+def generate_register_cast(class_name):
+    res = ""
+    res += f"register_cast_function('{class_name}', {class_name}.cast)"
+    res = generate_newline(res)
+    return res
 
 def generate_dictionary_set_item():
     res = ""
