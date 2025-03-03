@@ -428,6 +428,10 @@ def unbitfield_type(arg_type):
 def ungodottype(type_):
     if (type_ == "String"):
         return "str"
+    if (type_ == "NodePath"):
+        return "__core__.NodePath|str"
+    if (type_ == "StringName"):
+        return "__core__.StringName|str"
     if (type_ == "Variant"):
         return "object"
     elif type_ in builtin_classes - {"float", "int", "Nil", "bool"}:
