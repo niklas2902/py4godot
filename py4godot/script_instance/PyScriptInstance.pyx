@@ -68,14 +68,9 @@ cdef api GDExtensionBool instance_get(GDExtensionScriptInstanceDataPtr p_instanc
     return 1
 
 def fix_string_behavior(gd_object, val, name):
-    # Unfortunately, we need some kind of string buffering, so that the editor doesn't crash
-    get_val = String.new1(val)
-    property_name = "__gd_property" + name + "__"
-    buffer_name = "__buffer" + property_name
-    if hasattr(gd_object, property_name):
-        temp_val = getattr(gd_object, property_name)
-        setattr(gd_object, buffer_name, temp_val)
-    setattr(gd_object, property_name, get_val)
+    # We can't delete Strings, when getting with property in order not to crash
+    cdef String get_val = String.new1(val)
+    get_val.shouldBeDeleted = False
     return get_val
 
 """cdef api const GDExtensionMethodInfo * instance_get_method_list(GDExtensionScriptInstanceDataPtr p_instance, uint32_t *r_count) :
