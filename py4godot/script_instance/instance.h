@@ -60,8 +60,7 @@ std::string convertUnicodeToChar(PyObject* py_unicode) {
         assert(false);
         return nullptr;
     }
-    // Increase the reference count for the bytes object before returning the char*
-    Py_INCREF(py_bytes);
+
     // Create a std::string from the char*
     std::string result(c_string);
 
@@ -86,7 +85,6 @@ void c_instance_call(GDExtensionScriptInstanceDataPtr p_self, GDExtensionConstSt
         return;
     }
     auto gil_state = PyGILState_Ensure();
-    String method_name_str = String::new2(name);
     if (instance_has_method(p_self, p_method)){
         auto* p_instance = (InstanceData*)p_self;
         MethodCallData data = instance_call(p_self, p_method, p_args, p_argument_count, r_return, r_error);
