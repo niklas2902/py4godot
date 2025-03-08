@@ -80,9 +80,6 @@ def generate_properties(class_):
             if "setter" in property.keys() or "getter" in property.keys():
                 result += f"{INDENT}cdef object py__{property['name']}"
                 result = generate_newline(result)
-                if property["type"] == "String":
-                    result += f"{INDENT}cdef list buffer_py__{property['name']}"
-                    result = generate_newline(result)
     return result
 
 def generate_pxd_class(pxd_class):
