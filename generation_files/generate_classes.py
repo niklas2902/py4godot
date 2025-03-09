@@ -1,6 +1,6 @@
 import copy
 import json
-import os.path, os
+import os
 
 from generate_enums import enumize_name
 from generation_tools import write_if_different
@@ -93,22 +93,26 @@ def generate_import():
               "from py4godot.utils.utils cimport *\n"
               "cimport py4godot.utils.utils as py_utils\n"
               "from py4godot.classes.typedarrays cimport *\n"
-              "from libcpp.memory cimport make_shared\n")
+              "from libcpp.memory cimport make_shared\n"
+              "from py4godot.utils.smart_cast import smart_cast, register_cast_function\n")
     return result
 
 
-def generate_constructor_args(constructor):
+def generate_constructor_args(class_, constructor):
     result = ""
     if "arguments" not in constructor:
         return result
 
     for arg in constructor["arguments"]:
         if not arg["type"].startswith("enum::"):
-            result += f"{unstring(unvariant(untypearray(unbitfield_type(arg['type']))))} {pythonize_name(arg['name'])}, "
+            if should_turn_string_to_nodepath(class_, constructor): # We want to be able to create a NodePath from String
+                result += f"{unvariant(untypearray(unbitfield_type(arg['type'])))} {pythonize_name(arg['name'])}, "
+            else:
+                result += f"{unnodepath(unstringname(unstring(unvariant(untypearray(unbitfield_type(arg['type']))))))} {pythonize_name(arg['name'])}, "
         else:
             # enums are marked with enum:: . To be able to use this, we have to strip this
             arg_type = arg["type"].replace("enum::", "")
-            result += f"{unstring(unvariant(untypearray(unenumize_type(arg_type))))} {pythonize_name(arg['name'])}, "
+            result += f"{unstringname(unnodepath(unstring(unvariant(untypearray(unenumize_type(arg_type))))))} {pythonize_name(arg['name'])}, "
     result = result[:-2]
     return result
 
@@ -140,8 +144,20 @@ def generate_variant_type(class_):
     else:
         return f"GDExtensionVariantType.GDEXTENSION_VARIANT_TYPE_NIL"
 
-
-def generate_constructor_call_args(constructor):
+def generate_string_name_or_node_path_args(args):
+    res = ""
+    for arg in args:
+        if arg["type"] == "StringName":
+            res += f"{INDENT*2}assert(isinstance({pythonize_name(arg['name'])}, (str, unicode, StringName)))"
+            res = generate_newline(res)
+            res += f"{INDENT * 2}cdef StringName py_stringname_{pythonize_name(arg['name'])} = {pythonize_name(arg['name'])} if isinstance({pythonize_name(arg['name'])}, StringName) else StringName.new2({pythonize_name(arg['name'])})"
+        elif arg["type"] == "NodePath":
+            res += f"{INDENT*2}assert(isinstance({pythonize_name(arg['name'])}, (str, unicode, NodePath)))"
+            res = generate_newline(res)
+            res += f"{INDENT * 2}cdef NodePath py_nodepath_{pythonize_name(arg['name'])} = {pythonize_name(arg['name'])} if isinstance({pythonize_name(arg['name'])},NodePath) else NodePath.new2({pythonize_name(arg['name'])})"
+        res = generate_newline(res)
+    return res
+def generate_constructor_call_args(class_, constructor):
     result = ""
     if "arguments" not in constructor:
         return result
@@ -150,6 +166,10 @@ def generate_constructor_call_args(constructor):
         if arg["type"] in classes - IGNORED_CLASSES:
             if arg["type"] == "String":
                 result += f"py_c_string_to_string({pythonize_name(arg['name'])}.encode('utf-8')).{untypearray(arg['type'])}_internal_class_ptr, "
+            elif arg["type"] == "StringName" and not should_turn_string_to_nodepath(class_, constructor):
+                result += f"py_stringname_{pythonize_name(arg['name'])}.StringName_internal_class_ptr, "
+            elif arg["type"] == "NodePath" and not should_turn_string_to_nodepath(class_, constructor):
+                result += f"py_nodepath_{pythonize_name(arg['name'])}.NodePath_internal_class_ptr, "
             else:
                 result += f"{pythonize_name(arg['name'])}.{arg['type']}_internal_class_ptr, "
         elif arg["type"] == "Variant":
@@ -160,6 +180,10 @@ def generate_constructor_call_args(constructor):
     return result
 
 
+def should_turn_string_to_nodepath(class_, constructor):
+    return (class_["name"] == "String" and constructor["index"] != 1)
+
+
 def generate_constructors(class_):
     res = ""
     if "constructors" not in class_.keys():
@@ -167,14 +191,17 @@ def generate_constructors(class_):
     for constructor in class_["constructors"]:
         res += f"{INDENT}@staticmethod"
         res = generate_newline(res)
-        res += f"{INDENT}def new{constructor['index']}({generate_constructor_args(constructor)}):"
+        res += f"{INDENT}def new{constructor['index']}({generate_constructor_args(class_, constructor)}):"
         res = generate_newline(res)
         if "arguments" in constructor:
             res += generate_assert(constructor["arguments"])
             res = generate_newline(res)
         res += f"{INDENT * 2}cdef {class_['name']} _class = {class_['name']}.__new__({class_['name']})"
         res = generate_newline(res)
-        res += f"{INDENT * 2}_class.{class_['name']}_internal_class_ptr = (CPP{class_['name']}.py_new{constructor['index']}({generate_constructor_call_args(constructor)}))"
+        if "arguments" in constructor:
+            res += generate_string_name_or_node_path_args(constructor["arguments"])
+            res = generate_newline(res)
+        res += f"{INDENT * 2}_class.{class_['name']}_internal_class_ptr = (CPP{class_['name']}.py_new{constructor['index']}({generate_constructor_call_args(class_, constructor)}))"
         res = generate_newline(res)
         res += f"{INDENT * 2}return _class"
         res = generate_newline(res)
@@ -274,7 +301,7 @@ def generate_return_statement(method_):
             result += f"{INDENT * 2}return <object>_ret"
         else:
             if ret_val.type in classes - builtin_classes:
-                result = f"{INDENT * 2}return None if _ret.{ret_val.type}_internal_class_ptr.get().get_godot_owner() == NULL else _ret"
+                result = f"{INDENT * 2}return None if _ret.{ret_val.type}_internal_class_ptr.get().get_godot_owner() == NULL else smart_cast(_ret)"
             else:
                 result = ""
                 result += f"{INDENT * 2}return _ret"
@@ -432,7 +459,7 @@ def generate_default_args(mMethod):
 
     for arg in mMethod["arguments"]:
         if "default_value" not in arg:
-            return ""
+            continue
         if arg["type"] in {"float", "int", "Nil", "bool"}:
             continue
         if not arg["type"].startswith("enum::") and not arg["type"].startswith("typedarray::") and not arg[
@@ -624,6 +651,22 @@ def cast_from_type_to_obj(typename):
         return f"my_static_pointer_cast [CPP{typename}, CPPObject ]"
     return ""
 
+def generate_string_arg(arg):
+    res = ""
+    res += f"{INDENT * 2}cdef String py__string_{pythonize_name(arg['name'])} = py_c_string_to_string({pythonize_name(arg['name'])}.encode('utf-8'))"
+    res = generate_newline(res)
+    res += f"{INDENT * 2}py__string_{pythonize_name(arg['name'])}.shouldBeDeleted = False"
+    res = generate_newline(res)
+    return res
+def generate_string_args(method):
+    res = ""
+    for arg in method["arguments"]:
+        if arg["type"] == "String":
+            res += generate_string_arg(arg)
+            res = generate_newline(res)
+    return res
+
+
 def generate_method_body_standard(class_, method):
     number_arguments = 0
     result = ""
@@ -637,15 +680,22 @@ def generate_method_body_standard(class_, method):
     result = generate_newline(result)
     result += generate_variants(method)
     result = generate_newline(result)
+    if "arguments" in method.keys():
+        result += generate_string_name_or_node_path_args(method["arguments"])
+        result = generate_newline(result)
+    if is_property_setter(class_, method["name"]):
+        result += generate_string_args(method)
+        result = generate_newline(result)
+
     if "return_value" in method.keys() or "return_type" in method.keys():
         result += generate_return_value(class_["name"], method)
         if not is_static(method):
 
-            result += f"{INDENT * 2}{generate_ret_call(method)} = self.{class_['name']}_internal_class_ptr.get().py_{pythonize_name(method['name'])}({generate_method_args(method)})"
+            result += f"{INDENT * 2}{generate_ret_call(method)} = self.{class_['name']}_internal_class_ptr.get().py_{pythonize_name(method['name'])}({generate_method_args(class_, method)})"
             result = generate_newline(result)
             result += generate_set_gd_owner_for_ret(method)
         else:
-            result += f"{INDENT * 2}{generate_ret_call(method)} = CPP{class_['name']}.py_{pythonize_name(method['name'])}({generate_method_args(method)})"
+            result += f"{INDENT * 2}{generate_ret_call(method)} = CPP{class_['name']}.py_{pythonize_name(method['name'])}({generate_method_args(class_,method)})"
             result = generate_newline(result)
             result += generate_set_gd_owner_for_ret(method)
         result = generate_newline(result)
@@ -666,9 +716,9 @@ def generate_method_body_standard(class_, method):
         result += generate_return_statement(method)
     else:
         if not is_static(method):
-            result += f"{INDENT * 2}self.{class_['name']}_internal_class_ptr.get().py_{pythonize_name(method['name'])}({generate_method_args(method)})"
+            result += f"{INDENT * 2}self.{class_['name']}_internal_class_ptr.get().py_{pythonize_name(method['name'])}({generate_method_args(class_, method)})"
         else:
-            result += f"{INDENT * 2}CPP{class_['name']}.py_{pythonize_name(method['name'])}({generate_method_args(method)})"
+            result += f"{INDENT * 2}CPP{class_['name']}.py_{pythonize_name(method['name'])}({generate_method_args(class_, method)})"
     return result
 
 def shared_ptr_type(classname):
@@ -676,7 +726,7 @@ def shared_ptr_type(classname):
         return "CPP"+classname
     return "CPPObject"
 
-def generate_method_args(method):
+def generate_method_args(class_, method):
     res = ""
     if "arguments" not in method.keys():
         if method["is_vararg"]:
@@ -687,7 +737,14 @@ def generate_method_args(method):
             res += f"{pythonize_name(arg['name'])}.{untypearray(arg['type'])}_internal_class_ptr if {pythonize_name(arg['name'])} != None else {pythonize_name(arg['name'])}.{untypearray(arg['type'])}_internal_class_ptr, " # Todo: implement conditional
         elif untypearray(arg["type"]) in builtin_classes - IGNORED_CLASSES:
             if arg["type"] == "String":
-                res += f"py_c_string_to_string({pythonize_name(arg['name'])}.encode('utf-8')).{untypearray(arg['type'])}_internal_class_ptr, "
+                if is_property_setter(class_, method["name"]):
+                    res += f"py__string_{pythonize_name(arg['name'])}.String_internal_class_ptr, "
+                else:
+                    res += f"py_c_string_to_string({pythonize_name(arg['name'])}.encode('utf-8')).{untypearray(arg['type'])}_internal_class_ptr, "
+            elif arg["type"] == "StringName":
+                res += f"py_stringname_{pythonize_name(arg['name'])}.StringName_internal_class_ptr, "
+            elif arg["type"] == "NodePath":
+                res += f"py_nodepath_{pythonize_name(arg['name'])}.NodePath_internal_class_ptr, "
             else:
                 res += f"{pythonize_name(arg['name'])}.{untypearray(arg['type'])}_internal_class_ptr, "
         elif "TypedArray" in untypearray(arg["type"]):
@@ -783,7 +840,8 @@ def generate_cinit(class_):
     if class_["name"] in classes - builtin_classes:
         res += f"{INDENT * 2}self.already_deallocated = False"
         res = generate_newline(res)
-
+    if class_["name"] in builtin_classes:
+        res += f"{INDENT * 2}self.shouldBeDeleted = True"
     if "inherits" in class_.keys():
         cls = find_class(class_["inherits"])
         while cls:
@@ -1015,9 +1073,9 @@ def generate_property(property, classname):
         if (classname == "RichTextLabel" and property["name"] == "custom_effects"):
             result += f"{INDENT}def {pythonize_name(property['name'])}(self, Array value):"  # TODO remove, when properties finally are the same types as functions
         elif classname in typed_arrays_names:
-            result += f"{INDENT}def {pythonize_name(property['name'])}(self, {import_type(unvariant_type_array(unstring(untypearray(simplify_type(property['type']))), classname), classname)} value):"
+            result += f"{INDENT}def {pythonize_name(property['name'])}(self, {import_type(unvariant_type_array(unnodepath(unstring(unstringname(untypearray(simplify_type(property['type']))))), classname), classname)} value):"
         else:
-            result += f"{INDENT}def {pythonize_name(property['name'])}(self, {import_type(unvariant(unstring(untypearray(simplify_type(property['type'])))), classname)} value):"
+            result += f"{INDENT}def {pythonize_name(property['name'])}(self, {import_type(unnodepath(unstringname(unvariant(unstring(untypearray(simplify_type(property['type'])))))), classname)} value):"
         result = generate_newline(result)
         result += f"{INDENT * 2}self.{pythonize_name(property['setter'])}({generate_property_index(property, True)}value)"
         result = generate_newline(result)
@@ -1156,7 +1214,18 @@ def import_type(type_, classname):
 
 
 def unstring(type_):
-    return "str" if type_ == "String" else type_
+   if type_ == "String":
+       return "str"
+   return type_
+
+def unstringname(type_):
+    if type_ == "StringName":
+        return "object"
+    return type_
+def unnodepath(type_):
+    if type_ == "NodePath":
+        return "object"
+    return type_
 
 
 def generate_args(class_, method_with_args):
@@ -1170,10 +1239,13 @@ def generate_args(class_, method_with_args):
 
     for arg in method_with_args["arguments"]:
         if not arg["type"].startswith("enum::"):
-            type_ = unstring(unvariant(untypearray(unbitfield_type(arg['type']))))
+            type_ = unnodepath(unstringname(unstring(unvariant(untypearray(unbitfield_type(arg['type']))))))
             if class_["name"] in typed_arrays_names:
                 type_ = unstring(unvariant_type_array(untypearray(unbitfield_type(arg['type'])), class_["name"]))
-            result += f"{import_type(type_, class_['name'])} {pythonize_name(arg['name'])} {generate_default_arg(class_, arg, type_)}, "
+            arg_type_for_default_arg = type_
+            if arg["type"] in ("NodePath", "StringName"):
+                arg_type_for_default_arg = arg["type"]
+            result += f"{import_type(type_, class_['name'])} {pythonize_name(arg['name'])} {generate_default_arg(class_, arg, arg_type_for_default_arg)}, "
         else:
             # enums are marked with enum:: . To be able to use this, we have to strip this
             arg_type = arg["type"].replace("enum::", "")
@@ -1493,11 +1565,18 @@ def generate_classes(classes, filename, is_core=False, is_typed_array=False):
             res += generate_method(class_, method)
             res = generate_newline(res)
         res += generate_operators_for_class(class_["name"])
+        if class_["name"] not in builtin_classes and not is_typed_array:
+            res += generate_register_cast(class_["name"])
     if is_core:
         res += create_core_classes_set()
     text_to_write = "# distutils: language=c++\n"+res
     write_if_different(filename, text_to_write)
 
+def generate_register_cast(class_name):
+    res = ""
+    res += f"register_cast_function('{class_name}', {class_name}.cast)"
+    res = generate_newline(res)
+    return res
 
 def generate_dictionary_set_item():
     res = ""
@@ -1687,7 +1766,7 @@ def generate_del(class_):
         res += f"{INDENT}def __dealloc__(self):"
         res = generate_newline(res)
         if is_refcounted(class_):
-            res += f"{INDENT * 2}if not is_ptr_null(self.RefCounted_internal_class_ptr):"
+            res += f"{INDENT * 2}if not is_ptr_null(self.RefCounted_internal_class_ptr) and self.casted_from is None:"
             res = generate_newline(res)
             res += f"{INDENT * 3}self.RefCounted_internal_class_ptr.get().py_destroy_ref()"
             res = generate_newline(res)
@@ -1699,7 +1778,7 @@ def generate_del(class_):
         res = ""
         res += f"{INDENT}def __dealloc__(self):"
         res = generate_newline(res)
-        res += f"{INDENT * 2}if not is_ptr_null(self.{class_['name']}_internal_class_ptr):"
+        res += f"{INDENT * 2}if not is_ptr_null(self.{class_['name']}_internal_class_ptr) and self.shouldBeDeleted:"
         res = generate_newline(res)
         res += f"{INDENT * 3}self.{class_['name']}_internal_class_ptr.get().{class_['name']}_py_destroy()"
         res = generate_newline(res)
@@ -1772,7 +1851,7 @@ def generate_cast(class_):
             f".set_gdowner(other.Object_internal_class_ptr.get().get_godot_owner())")
     res = generate_newline(res)
     if is_refcounted(class_):
-        res += f"{INDENT * 2}cls.reference()"
+        res += f"{INDENT * 2}cls.casted_from = other"
         res = generate_newline(res)
     res += f"{INDENT * 2}return cls"
     res = generate_newline(res)

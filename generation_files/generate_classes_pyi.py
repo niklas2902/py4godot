@@ -1,6 +1,7 @@
 import copy
 import json
 import os.path
+from functools import lru_cache
 
 from generate_classes import pythonize_boolean_types, unref_type, \
     unnull_type
@@ -47,6 +48,7 @@ builtin_classes = set()
 core_classes = dict()
 operator_dict = dict()
 typed_arrays_names = set()
+full_classes = []
 is_core = False
 operator_to_method = {"+": "__add__",
                       "*": "__mul__",
@@ -290,7 +292,8 @@ def generate_method_headers(mMethod):
 def generate_method(class_, mMethod):
     res = ""
     args = generate_args(class_, mMethod)
-    def_function = f"{INDENT}def {pythonize_name(mMethod['name'])}({args})->{ungodottype_type_array(get_ret_value(mMethod, class_), class_['name'])}: pass"
+    ret = generate_children(class_['name'], get_ret_value(mMethod, class_))
+    def_function = f"{INDENT}def {pythonize_name(mMethod['name'])}({args})->{ret}: pass"
     res += generate_method_headers(mMethod)
     res += def_function
     res = generate_newline(res)
@@ -303,7 +306,7 @@ def get_ret_value(method, class_):
             return_type = method["return_value"]["type"]
         else:
             return_type = method["return_type"]
-        return ungodottype_type_array(untypearray(unbitfield_type(unenumize_type(return_type))), class_["name"])
+        return return_type
 
 
 def generate_operators(class_):
@@ -396,12 +399,41 @@ def simplify_type(type):
     list_types = type.split(",")
     return list_types[-1]
 
+def generate_children(containing_class_, type_):
+    already_registed_classes = set()
+    if isinstance(type_, set):
+        for part_type in type_:
+            already_registed_classes.add(part_type)
+    else:
+        already_registed_classes.add(type_)
+    if type_ == None:
+        return None
+    temp = set()
+    for cls in already_registed_classes:
+        children = get_children(cls)
+        temp.update(children)
+        temp.add(cls)
+    already_registed_classes = temp
+    res = ""
+    for cls in already_registed_classes:
+        res += ungodottype_type_array(unbitfield_type(unenumize_type(cls)), containing_class_) + "|"
+    return res[:-1]
+
+@lru_cache(maxsize=None)
+def get_children(base_cls):
+    res = {base_cls}
+    for cls in full_classes:
+        if not "inherits" in cls.keys():
+            continue
+        if cls["inherits"] == base_cls:
+            res.update(get_children(cls["name"]))
+    return res
 
 def generate_property(property, class_):
     result = ""
     result += f"{INDENT}@property"
     result = generate_newline(result)
-    result += f"{INDENT}def {pythonize_name(property['name'])}(self)->{ungodottype_type_array(unbitfield_type(unenumize_type((property['type']))), class_['name'])}: pass"
+    result += f"{INDENT}def {pythonize_name(property['name'])}(self)->{generate_children(class_['name'], property['type'])}: pass"
     result = generate_newline(result)
 
     if "setter" in property and property["setter"] != "":
@@ -428,6 +460,10 @@ def unbitfield_type(arg_type):
 def ungodottype(type_):
     if (type_ == "String"):
         return "str"
+    if (type_ == "NodePath"):
+        return "__core__.NodePath|str"
+    if (type_ == "StringName"):
+        return "__core__.StringName|str"
     if (type_ == "Variant"):
         return "object"
     elif type_ in builtin_classes - {"float", "int", "Nil", "bool"}:
@@ -456,7 +492,7 @@ def ungodottype_type_array(type_, class_name):
                 if not is_core:
                     return f"__core__.{typed_array_type}"
                 else:
-                    return {typed_array_type}
+                    return typed_array_type
             elif (typed_array_type in classes):
                 return f"__{typed_array_type.lower()}__.{typed_array_type}"
             return typed_array_type
@@ -530,6 +566,11 @@ def get_class_from_enum(type_):
     type_list = enum_type.split(".")
     return type_list[0]
 
+def is_in_classes(_cls, classes):
+    for cls in classes:
+        if _cls == cls["name"]:
+            return True
+    return False
 
 def get_classes_to_import(classes):
     classes_to_import = set()
@@ -540,7 +581,7 @@ def get_classes_to_import(classes):
             for method in class_["methods"]:
                 if ("return_value" in method.keys()):
                     if (unbitfield_type(get_class_from_enum(method["return_value"]["type"])) in normal_classes):
-                        classes_to_import.add(get_class_from_enum(method["return_value"]["type"]))
+                        classes_to_import.update(get_children(get_class_from_enum(method["return_value"]["type"])))
                 if ("arguments" not in method.keys()):
                     continue
                 for argument in method["arguments"]:
@@ -557,6 +598,8 @@ def get_classes_to_import(classes):
                 if simplify_type(prop["type"]) in normal_classes:
                     classes_to_import.add(simplify_type(prop["type"]))
 
+    for cls in classes:
+        classes_to_import.difference({cls["name"]})
     return classes_to_import
 
 
@@ -845,6 +888,7 @@ if __name__ == "__main__":
         obj = json.loads(data)
         classes = set([class_['name'] if class_["name"] not in IGNORED_CLASSES else None for class_ in
                        obj['classes'] + obj["builtin_classes"]])
+        full_classes = [cls for cls in obj["classes"]]
         builtin_classes = set(class_["name"] for class_ in obj["builtin_classes"])
         normal_classes = set([class_['name'] for class_ in obj['classes']])
         native_structs = set([native_struct["name"] for native_struct in obj["native_structures"]])
