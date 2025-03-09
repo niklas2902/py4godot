@@ -19,6 +19,8 @@
 #include <cassert>
 #include "Python.h"
 #include <algorithm>
+#include <iostream>
+#include <unistd.h>  // For getcwd()
 
 GDExtensionPtrOperatorEvaluator operator_equal_string_namescript;
 PyScriptExtension extension;
@@ -54,10 +56,20 @@ void init_pluginscript_api(){
     // Initialize interpreter but skip initialization registration of signal handlers
     Py_InitializeEx(0);
 
+
+    char cwd[PATH_MAX];  // Buffer to store the path
+    if (getcwd(cwd, sizeof(cwd)) == nullptr) {
+        print_error("Current working directory: ");
+        print_error(cwd);
+    } else {
+        print_error("Failed to get current working directory.");
+    }
+
     // Convert parentDir to Python string format
     std::string pythonCode = "import sys\n"
                              "import os\n"
-                             "sys.path.append(os.getcwd() + r'/../..')";
+                             "sys.path.append('" + std::string{ cwd} + "')\n"
+                             "sys.path.append('" + std::string{cwd} + std::string{PYTHONPATH} + "')";
 
     // Convert Python code to const char* for PyRun_SimpleString
     const char *pythonCodeWchar = pythonCode.c_str();

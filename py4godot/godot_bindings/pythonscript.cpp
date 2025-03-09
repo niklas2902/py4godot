@@ -49,7 +49,7 @@ extern "C" {
 
         // Close the library handle only on linux (crash on macos)
         #if defined(__linux__)
-        dlclose(handle);
+//        dlclose(handle);
         #endif
         return result;
 
