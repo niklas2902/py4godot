@@ -397,7 +397,7 @@ def generate_members_of_class(class_):
 
 def simplify_type(type):
     list_types = type.split(",")
-    return list_types[-1]
+    return list_types[0]
 
 def generate_children(containing_class_, type_):
     already_registed_classes = set()

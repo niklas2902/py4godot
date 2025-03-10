@@ -271,11 +271,12 @@ def native_structs_in_method(mMethod):
                 return True
             if strip_symbols_from_type(arg["type"]) in native_structs:
                 return True
-    # if "return_value" in mMethod.keys():
-    #    if mMethod["return_value"]["type"] in forbidden_types:
-    #        return True
-    #    if strip_symbols_from_type(mMethod["return_value"]["type"]) in native_structs:
-    #        return True
+
+    if "return_value" in mMethod.keys():
+       if mMethod["return_value"]["type"] in forbidden_types:
+           return True
+       if strip_symbols_from_type(mMethod["return_value"]["type"]) in native_structs:
+           return True
     return False
 
 
@@ -1041,7 +1042,7 @@ def generate_members_of_class(class_):
 
 def simplify_type(type):
     list_types = type.split(",")
-    return list_types[-1]
+    return list_types[0]
 
 
 def generate_property_index(property, is_setter=False):
@@ -1075,12 +1076,17 @@ def generate_property(property, classname):
         elif classname in typed_arrays_names:
             result += f"{INDENT}def {pythonize_name(property['name'])}(self, {import_type(unvariant_type_array(unnodepath(unstring(unstringname(untypearray(simplify_type(property['type']))))), classname), classname)} value):"
         else:
-            result += f"{INDENT}def {pythonize_name(property['name'])}(self, {import_type(unnodepath(unstringname(unvariant(unstring(untypearray(simplify_type(property['type'])))))), classname)} value):"
+            result += f"{INDENT}def {pythonize_name(property['name'])}(self, {import_type(objectify_type(unnodepath(unstringname(unvariant(unstring(untypearray(simplify_type(property['type']))))))), classname)} value):"
         result = generate_newline(result)
         result += f"{INDENT * 2}self.{pythonize_name(property['setter'])}({generate_property_index(property, True)}value)"
         result = generate_newline(result)
 
     return result
+
+def objectify_type(type_):
+    if type_ in classes - builtin_classes:
+        return "Object"
+    return type_
 
 
 def is_property_setter(class_, methodname):
@@ -1301,12 +1307,6 @@ def get_classes_to_import(classes):
                     if argument["type"] in normal_classes:
                         classes_to_import.append(argument["type"])
 
-
-        if "properties" in class_.keys():
-            for prop in class_["properties"]:
-
-                if simplify_type(prop["type"]) in normal_classes:
-                    classes_to_import.append(simplify_type(prop["type"]))
         if class_["name"] in typed_arrays_names:
             if class_["name"].replace("TypedArray", "") in builtin_classes:
                 continue
@@ -1953,9 +1953,7 @@ def collect_typed_arrays(classes):
 
 
 def generate_typed_array_name(name):
-    if (name == "typedarray::Array"):
-        pass
-    return (name.split("::")[1] + "TypedArray").replace("24/17:", "")
+    return (name.split("::")[1] + "TypedArray").replace("24/17:", "").replace("27/0:TypedArray", "DictionaryTypedArray")
 
 
 if __name__ == "__main__":

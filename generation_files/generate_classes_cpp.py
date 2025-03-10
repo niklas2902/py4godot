@@ -81,13 +81,15 @@ def generate_import(class_, is_core):
         res = f'''
 #include "py4godot/cpputils/utils.h"
 #include "py4godot/cppclasses/generated4_core.h"
-#include "py4godot/cppclasses/typedarrays.h"
 #include "py4godot/godot_bindings/main.h"
 #include <stdlib.h>
 #include <memory>
 '''
         for cls in get_classes_to_import([class_]):
-            res += f'#include "py4godot/cppclasses/{cls}/{cls}.h"'
+            if "typedarray" in cls.lower():
+                res += f'#include "py4godot/cppclasses/typedarrays/{cls}.h"'
+            else:
+                res += f'#include "py4godot/cppclasses/{cls}/{cls}.h"'
             res = generate_newline(res)
         res += f'''#include "py4godot/cppclasses/{class_['name']}/{class_['name']}.h"'''
         res = generate_newline(res)
@@ -95,9 +97,9 @@ def generate_import(class_, is_core):
 
     result = f'#include "py4godot/cpputils/utils.h"\n' \
              f'#include "py4godot/cppclasses/generated4_core.h"\n'
+    if "typedarray" in class_["name"].lower():
+        result += f'#include "py4godot/cppclasses/typedarrays/{class_["name"]}.h"\n'
     f'#include <memory>"\n'
-    if class_["name"].endswith("Array"):
-        result += f'#include "py4godot/cppclasses/typedarrays.h"\n'
     return result
 
 
@@ -613,7 +615,10 @@ def generate_virtual_return_type(return_type):
         return "String();"
     elif return_type == "void*":
         return "nullptr;"
-
+    elif return_type == "Variant":
+        return "Variant(1);"
+    elif "bitfield" in return_type:
+        return "0;"
     return untypearray(return_type) + "();"
 
 
@@ -621,7 +626,10 @@ def generate_method_body_virtual(class_, mMethod):
     res = ""
     if "return_value" in mMethod.keys():
         res += f"{INDENT * 2}return {generate_virtual_return_type(unenumize_type(mMethod['return_value']['type']))};"
-        res = generate_newline(res)
+    elif "return_type" in mMethod.keys():
+        res += f"{INDENT * 2}return {generate_virtual_return_type(unenumize_type(mMethod['return_type']))};"
+    res = generate_newline(res)
+
     return res
 
 
@@ -862,7 +870,7 @@ def generate_method(class_, mMethod):
     res = generate_newline(res)
     res += generate_varargs_variants(mMethod)
     res += generate_variant_vector(mMethod)
-    if ("hash" in mMethod.keys()):
+    if not is_virtual(mMethod):
         res += generate_method_body_standard(class_, mMethod)
     else:
         res += generate_method_body_virtual(class_, mMethod)
@@ -872,6 +880,9 @@ def generate_method(class_, mMethod):
     res += "}"
     res = generate_newline(res)
     return res
+
+def is_virtual(method):
+    return "hash" in method.keys() or ("is_virtual" in method.keys and  method["is_virtual"])
 
 
 def generate_ret_value_assign(argument):
@@ -1361,9 +1372,10 @@ def generate_members_of_class(class_):
     return res
 
 
+
 def simplify_type(type):
     list_types = type.split(",")
-    return list_types[-1]
+    return list_types[0]
 
 
 def generate_property(class_, property):
@@ -1535,6 +1547,10 @@ def get_classes_to_import(classes):
                 if ("return_value" in method.keys()):
                     if (unbitfield_type(get_class_from_enum(method["return_value"]["type"])) in normal_classes):
                         classes_to_import.append(get_class_from_enum(method["return_value"]["type"]))
+                    else:
+                        if "typedarray" in method["return_value"]["type"]:
+                            type = method["return_value"]["type"].lstrip("typedarray::")
+                            classes_to_import.append(type+"TypedArray")
                 if ("arguments" not in method.keys()):
                     continue
                 for argument in method["arguments"]:
@@ -1544,12 +1560,19 @@ def get_classes_to_import(classes):
                         type = argument["type"].lstrip("enum::")
                         if type.split(".")[0] in normal_classes:
                             classes_to_import.append(type.split(".")[0])
+                    if "typedarray" in argument["type"]:
+                        type = argument["type"].lstrip("typedarray::")
+                        classes_to_import.append(type+"TypedArray")
 
         if "properties" in class_.keys():
             for prop in class_["properties"]:
 
                 if simplify_type(prop["type"]) in normal_classes:
                     classes_to_import.append(simplify_type(prop["type"]))
+                elif "typedarray" in prop["type"]:
+                    type = prop["type"].lstrip("typedarray::")
+                    if type.split(".")[0] in normal_classes:
+                        classes_to_import.append(type.split(".")[0])
 
     return classes_to_import
 
@@ -1974,6 +1997,8 @@ if __name__ == "__main__":
             if (not os.path.exists(f"py4godot/cppclasses/{class_['name']}/")):
                 os.mkdir(f"py4godot/cppclasses/{class_['name']}/")
             generate_classes([class_], f"py4godot/cppclasses/{class_['name']}/{class_['name']}.cpp")
-
-        generate_classes(arrays, f"py4godot/cppclasses/typedarrays.cpp", is_core=True)
+        if not os.path.exists(f"py4godot/cppclasses/typedarrays/"):
+            os.mkdir(f"py4godot/cppclasses/typedarrays/")
+        for array in arrays:
+            generate_classes([array], f"py4godot/cppclasses/typedarrays/{array['name']}.cpp", is_core=True)
         generate_classes(obj["builtin_classes"], f"py4godot/cppclasses/generated4_core.cpp", is_core=True)
