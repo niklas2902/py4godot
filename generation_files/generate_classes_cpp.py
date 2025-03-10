@@ -882,7 +882,7 @@ def generate_method(class_, mMethod):
     return res
 
 def is_virtual(method):
-    return "hash" in method.keys() or ("is_virtual" in method.keys and  method["is_virtual"])
+    return "hash" not in method.keys() or method["name"].startswith("_")
 
 
 def generate_ret_value_assign(argument):
