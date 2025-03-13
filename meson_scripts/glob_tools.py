@@ -8,6 +8,8 @@ with open('config.json', 'r') as f:
 build_folder = config_data['output_dir']
 core_folder = config_data['core_folder']
 
+def is_main(entry):
+    return entry.endswith("main.cpp") and "godot_bindings" in entry
 if __name__ == "__main__":
     l = glob.glob("**/*.cpp", recursive=True)
 
@@ -18,8 +20,7 @@ if __name__ == "__main__":
                 "build") \
                 and not entry.startswith("venv") and not entry.startswith('tests') and not entry.startswith(
                     "meson_cache")):
-            if "cppclasses" in entry or "PyScriptExtension" in entry or "PyLanguage" in entry or entry.endswith(
-                    "main.cpp") \
+            if "cppclasses" in entry or "PyScriptExtension" in entry or "PyLanguage" in entry or is_main(entry) \
                     or entry.endswith(
                 "api.cpp") or "PyResourceFormatLoader" in entry or "PyResourceFormatSaver" in entry :
                 continue

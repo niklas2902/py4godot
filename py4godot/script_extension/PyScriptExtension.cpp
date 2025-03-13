@@ -367,6 +367,10 @@ void PyScriptExtension::_has_source_code(GDExtensionTypePtr res){
     print_error("_has_source_code");
 }
 
+void PyScriptExtension::_get_doc_class_name(GDExtensionTypePtr res){
+    print_error("_get_doc_class_name");
+}
+
 void PyScriptExtension::_has_static_method(GDExtensionTypePtr res) {
     print_error("_has_static_method");
     *((bool*)res) = false;
@@ -616,6 +620,15 @@ void call_virtual_func__has_source_code(GDExtensionClassInstancePtr p_instance, 
 }
 
 StringName func_name__has_source_code ;
+
+void call_virtual_func__get_doc_class_name(GDExtensionClassInstancePtr p_instance, const GDExtensionConstTypePtr* p_args, GDExtensionTypePtr r_ret) {
+    PyScriptExtension* pylanguage = static_cast<PyScriptExtension*> (p_instance);
+
+    pylanguage->_get_doc_class_name(r_ret);
+}
+
+StringName func_name__get_doc_class_name ;
+
 
 void call_virtual_func__has_static_method(GDExtensionClassInstancePtr p_instance, const GDExtensionConstTypePtr* p_args, GDExtensionTypePtr r_ret) {
     PyScriptExtension* pylanguage = static_cast<PyScriptExtension*> (p_instance);
@@ -918,6 +931,10 @@ GDExtensionClassCallVirtual get_virtual_script(void *p_userdata, GDExtensionCons
         return script::call_virtual_func__has_source_code;
     }
 
+    else if (string_names_equal_script(script::func_name__get_doc_class_name, name)){
+        return script::call_virtual_func__get_doc_class_name;
+    }
+
     else if (string_names_equal_script(script::func_name__has_static_method, name)) {
         return script::call_virtual_func__has_static_method;
     }
@@ -1026,6 +1043,7 @@ void init_func_names_script(){
     script::func_name__placeholder_instance_create = c_string_to_string_name("_placeholder_instance_create");
     script::func_name__instance_has = c_string_to_string_name("_instance_has");
     script::func_name__has_source_code = c_string_to_string_name("_has_source_code");
+    script::func_name__get_doc_class_name = c_string_to_string_name("_get_doc_class_name");
     script::func_name__has_static_method = c_string_to_string_name("_has_static_method");
     script::func_name__get_source_code = c_string_to_string_name("_get_source_code");
     script::func_name__set_source_code = c_string_to_string_name("_set_source_code");
