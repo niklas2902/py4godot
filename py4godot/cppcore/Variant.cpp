@@ -136,8 +136,8 @@ PyObject* Variant::create_string(){
     //return Py_None;
     GDExtensionVariantType type = functions::get_variant_get_type()(native_ptr);
     auto constructor = functions::get_get_variant_to_type_constructor()(type);
-    auto string = std::make_shared<String>();
-    string->shouldBeDeleted=true;
+    auto string = String::py_new0();
+    string->shouldBeDeleted=false;
     constructor(&string->godot_owner, native_ptr);
 
     auto val = type_helper_create_string(string);
@@ -148,8 +148,8 @@ PyObject* Variant::create_py_string(){
     //return Py_None;
     GDExtensionVariantType type = functions::get_variant_get_type()(native_ptr);
     auto constructor = functions::get_get_variant_to_type_constructor()(type);
-    auto string = std::make_shared<String>();
-    string->shouldBeDeleted=true;
+    auto string = String::py_new0();
+    string->shouldBeDeleted=false;
     constructor(&string->godot_owner, native_ptr);
 
     auto val = type_helper_create_py_string(string);

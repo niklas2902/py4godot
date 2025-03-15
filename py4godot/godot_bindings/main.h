@@ -33,28 +33,9 @@
 
 //Setting up threading
 #if defined(_WIN64) || defined(_WIN32)
-        //extern int mtx;
-        #define NOMINMAX
-        #define NOATOM
-        #include <windows.h>
-        #undef far
-        #undef near
-        #undef interface
-        extern CRITICAL_SECTION mtx;
-        class MutexLock {
-        private:
-            CRITICAL_SECTION& mutex;
-
-        public:
-            MutexLock(CRITICAL_SECTION& m) : mutex(m) {
-                EnterCriticalSection(&mutex);
-            }
-
-            ~MutexLock() {
-                LeaveCriticalSection(&mutex);
-            }
-        };
-        #define LOCK //MutexLock lock
+    #include <mutex>
+    extern std::mutex mtx; // Define a mutex
+    #define LOCK //std::lock_guard<std::mutex> lock
 #else
     #include <mutex>
     extern std::mutex mtx; // Define a mutex
