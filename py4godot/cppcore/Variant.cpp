@@ -126,7 +126,7 @@ PyObject* Variant::create_vector3(){
     GDExtensionVariantType type = functions::get_variant_get_type()(native_ptr);
     auto constructor = functions::get_get_variant_to_type_constructor()(type);
     auto vector = std::make_shared<Vector3>();
-    vector->shouldBeDeleted=true;
+    vector->shouldBeDeleted=false;
     constructor(&vector->godot_owner, native_ptr);
     auto val = type_helper_create_vector3(vector);
     return val;
@@ -136,8 +136,8 @@ PyObject* Variant::create_string(){
     //return Py_None;
     GDExtensionVariantType type = functions::get_variant_get_type()(native_ptr);
     auto constructor = functions::get_get_variant_to_type_constructor()(type);
-    auto string = std::make_shared<String>();
-    string->shouldBeDeleted=true;
+    auto string = String::py_new0();
+    string->shouldBeDeleted=false;
     constructor(&string->godot_owner, native_ptr);
 
     auto val = type_helper_create_string(string);
@@ -148,8 +148,8 @@ PyObject* Variant::create_py_string(){
     //return Py_None;
     GDExtensionVariantType type = functions::get_variant_get_type()(native_ptr);
     auto constructor = functions::get_get_variant_to_type_constructor()(type);
-    auto string = std::make_shared<String>();
-    string->shouldBeDeleted=true;
+    auto string = String::py_new0();
+    string->shouldBeDeleted=false;
     constructor(&string->godot_owner, native_ptr);
 
     auto val = type_helper_create_py_string(string);
@@ -161,7 +161,7 @@ PyObject* Variant::create_rect2i(){
     GDExtensionVariantType type = functions::get_variant_get_type()(native_ptr);
     auto constructor = functions::get_get_variant_to_type_constructor()(type);
     auto string = std::make_shared<Rect2i>();
-    string->shouldBeDeleted=true;
+    string->shouldBeDeleted=false;
     constructor(&string->godot_owner, native_ptr);
     auto val = type_helper_create_rect2i(string);
     return val;
@@ -171,7 +171,7 @@ PyObject* Variant::create_callable(){
     GDExtensionVariantType type = functions::get_variant_get_type()(native_ptr);
     auto constructor = functions::get_get_variant_to_type_constructor()(type);
     auto string = std::make_shared<Callable>();
-    string->shouldBeDeleted=true;
+    string->shouldBeDeleted=false;
     constructor(&string->godot_owner, native_ptr);
     auto val = type_helper_create_callable(string);
     return val;
@@ -181,7 +181,7 @@ PyObject* Variant::create_nodepath(){
     GDExtensionVariantType type = functions::get_variant_get_type()(native_ptr);
     auto constructor = functions::get_get_variant_to_type_constructor()(type);
     auto string = std::make_shared<NodePath>();
-    string->shouldBeDeleted=true;
+    string->shouldBeDeleted=false;
     constructor(&string->godot_owner, native_ptr);
     auto val = type_helper_create_nodepath(string);
     return val;
@@ -199,7 +199,7 @@ PyObject* Variant::create_packedvector3array(){
     GDExtensionVariantType type = functions::get_variant_get_type()(native_ptr);
     auto constructor = functions::get_get_variant_to_type_constructor()(type);
     auto string = std::make_shared<PackedVector3Array>();
-    string->shouldBeDeleted=true;
+    string->shouldBeDeleted=false;
     constructor(&string->godot_owner, native_ptr);
     auto val = type_helper_create_packedvector3array(string);
     return val;
@@ -210,7 +210,7 @@ PyObject* Variant::create_dictionary(){
     GDExtensionVariantType type = functions::get_variant_get_type()(native_ptr);
     auto constructor = functions::get_get_variant_to_type_constructor()(type);
     auto string = std::make_shared<Dictionary>();
-    string->shouldBeDeleted=true;
+    string->shouldBeDeleted=false;
     constructor(&string->godot_owner, native_ptr);
     auto val = type_helper_create_dictionary(string);
     return val;
@@ -220,7 +220,7 @@ PyObject* Variant::create_projection(){
     GDExtensionVariantType type = functions::get_variant_get_type()(native_ptr);
     auto constructor = functions::get_get_variant_to_type_constructor()(type);
     auto string = std::make_shared<Projection>();
-    string->shouldBeDeleted=true;
+    string->shouldBeDeleted=false;
     constructor(&string->godot_owner, native_ptr);
     auto val = type_helper_create_projection(string);
     return val;
@@ -230,7 +230,7 @@ PyObject* Variant::create_rid(){
     GDExtensionVariantType type = functions::get_variant_get_type()(native_ptr);
     auto constructor = functions::get_get_variant_to_type_constructor()(type);
     auto string = std::make_shared<RID>();
-    string->shouldBeDeleted=true;
+    string->shouldBeDeleted=false;
     constructor(&string->godot_owner, native_ptr);
     auto val = type_helper_create_rid(string);
     return val;
@@ -240,7 +240,7 @@ PyObject* Variant::create_vector2i(){
     GDExtensionVariantType type = functions::get_variant_get_type()(native_ptr);
     auto constructor = functions::get_get_variant_to_type_constructor()(type);
     auto string = std::make_shared<Vector2i>();
-    string->shouldBeDeleted=true;
+    string->shouldBeDeleted=false;
     constructor(&string->godot_owner, native_ptr);
     auto val = type_helper_create_vector2i(string);
     return val;
@@ -250,7 +250,7 @@ PyObject* Variant::create_transform2d(){
     GDExtensionVariantType type = functions::get_variant_get_type()(native_ptr);
     auto constructor = functions::get_get_variant_to_type_constructor()(type);
     auto string = std::make_shared<Transform2D>();
-    string->shouldBeDeleted=true;
+    string->shouldBeDeleted=false;
     constructor(&string->godot_owner, native_ptr);
     auto val = type_helper_create_transform2d(string);
     return val;
@@ -260,7 +260,7 @@ PyObject* Variant::create_aabb(){
     GDExtensionVariantType type = functions::get_variant_get_type()(native_ptr);
     auto constructor = functions::get_get_variant_to_type_constructor()(type);
     auto string = std::make_shared<AABB>();
-    string->shouldBeDeleted=true;
+    string->shouldBeDeleted=false;
     constructor(&string->godot_owner, native_ptr);
     auto val = type_helper_create_aabb(string);
     return val;
@@ -277,7 +277,7 @@ PyObject* Variant::create_vector3i(){
     GDExtensionVariantType type = functions::get_variant_get_type()(native_ptr);
     auto constructor = functions::get_get_variant_to_type_constructor()(type);
     auto string = std::make_shared<Vector3i>();
-    string->shouldBeDeleted=true;
+    string->shouldBeDeleted=false;
     constructor(&string->godot_owner, native_ptr);
     auto val = type_helper_create_vector3i(string);
     return val;
@@ -286,7 +286,7 @@ PyObject* Variant::create_packedint64array(){
     GDExtensionVariantType type = functions::get_variant_get_type()(native_ptr);
     auto constructor = functions::get_get_variant_to_type_constructor()(type);
     auto string = std::make_shared<PackedInt64Array>();
-    string->shouldBeDeleted=true;
+    string->shouldBeDeleted=false;
     constructor(&string->godot_owner, native_ptr);
     auto val = type_helper_create_packedint64array(string);
     return val;
@@ -295,7 +295,7 @@ PyObject* Variant::create_packedint32array(){
     GDExtensionVariantType type = functions::get_variant_get_type()(native_ptr);
     auto constructor = functions::get_get_variant_to_type_constructor()(type);
     auto string = std::make_shared<PackedInt32Array>();
-    string->shouldBeDeleted=true;
+    string->shouldBeDeleted=false;
     constructor(&string->godot_owner, native_ptr);
     auto val = type_helper_create_packedint32array(string);
     return val;
@@ -304,7 +304,7 @@ PyObject* Variant::create_packedfloat32array(){
     GDExtensionVariantType type = functions::get_variant_get_type()(native_ptr);
     auto constructor = functions::get_get_variant_to_type_constructor()(type);
     auto string = std::make_shared<PackedFloat32Array>();
-    string->shouldBeDeleted=true;
+    string->shouldBeDeleted=false;
     constructor(&string->godot_owner, native_ptr);
     auto val = type_helper_create_packedfloat32array(string);
     return val;
@@ -313,7 +313,7 @@ PyObject* Variant::create_packedbytearray(){
     GDExtensionVariantType type = functions::get_variant_get_type()(native_ptr);
     auto constructor = functions::get_get_variant_to_type_constructor()(type);
     auto string = std::make_shared<PackedByteArray>();
-    string->shouldBeDeleted=true;
+    string->shouldBeDeleted=false;
     constructor(&string->godot_owner, native_ptr);
     auto val = type_helper_create_packedbytearray(string);
     return val;
@@ -322,7 +322,7 @@ PyObject* Variant::create_vector4(){
     GDExtensionVariantType type = functions::get_variant_get_type()(native_ptr);
     auto constructor = functions::get_get_variant_to_type_constructor()(type);
     auto string = std::make_shared<Vector4>();
-    string->shouldBeDeleted=true;
+    string->shouldBeDeleted=false;
     constructor(&string->godot_owner, native_ptr);
     auto val = type_helper_create_vector4(string);
     return val;
@@ -331,7 +331,7 @@ PyObject* Variant::create_rect2(){
     GDExtensionVariantType type = functions::get_variant_get_type()(native_ptr);
     auto constructor = functions::get_get_variant_to_type_constructor()(type);
     auto string = std::make_shared<Rect2>();
-    string->shouldBeDeleted=true;
+    string->shouldBeDeleted=false;
     constructor(&string->godot_owner, native_ptr);
     auto val = type_helper_create_rect2(string);
     return val;
@@ -349,7 +349,7 @@ PyObject* Variant::create_transform3d(){
     auto constructor = functions::get_get_variant_to_type_constructor()(type);
     auto string = std::make_shared<Transform3D>();
     constructor(&string->godot_owner, native_ptr);
-    string->shouldBeDeleted=true;
+    string->shouldBeDeleted=false;
     auto val = type_helper_create_transform3d(string);
     return val;
 }
@@ -358,7 +358,7 @@ PyObject* Variant::create_packedcolorarray(){
     auto constructor = functions::get_get_variant_to_type_constructor()(type);
     auto string = std::make_shared<PackedColorArray>();
     constructor(&string->godot_owner, native_ptr);
-    string->shouldBeDeleted=true;
+    string->shouldBeDeleted=false;
     auto val = type_helper_create_packedcolorarray(string);
     return val;
 }
@@ -367,7 +367,7 @@ PyObject* Variant::create_signal(){
     auto constructor = functions::get_get_variant_to_type_constructor()(type);
     auto string = std::make_shared<Signal>();
     constructor(&string->godot_owner, native_ptr);
-    string->shouldBeDeleted=true;
+    string->shouldBeDeleted=false;
     auto val = type_helper_create_signal(string);
     return val;
 }
@@ -376,7 +376,7 @@ PyObject* Variant::create_packedvector2array(){
     auto constructor = functions::get_get_variant_to_type_constructor()(type);
     auto string = std::make_shared<PackedVector2Array>();
     constructor(&string->godot_owner, native_ptr);
-    string->shouldBeDeleted=true;
+    string->shouldBeDeleted=false;
     auto val = type_helper_create_packedvector2array(string);
     return val;
 }
@@ -385,7 +385,7 @@ PyObject* Variant::create_plane(){
     auto constructor = functions::get_get_variant_to_type_constructor()(type);
     auto string = std::make_shared<Plane>();
     constructor(&string->godot_owner, native_ptr);
-    string->shouldBeDeleted=true;
+    string->shouldBeDeleted=false;
     auto val = type_helper_create_plane(string);
     return val;
 }
@@ -394,7 +394,7 @@ PyObject* Variant::create_packedfloat64array(){
     auto constructor = functions::get_get_variant_to_type_constructor()(type);
     auto string = std::make_shared<PackedFloat64Array>();
     constructor(&string->godot_owner, native_ptr);
-    string->shouldBeDeleted=true;
+    string->shouldBeDeleted=false;
     auto val = type_helper_create_packedfloat64array(string);
     return val;
 }
@@ -410,7 +410,7 @@ PyObject* Variant::create_basis(){
     GDExtensionVariantType type = functions::get_variant_get_type()(native_ptr);
     auto constructor = functions::get_get_variant_to_type_constructor()(type);
     auto string = std::make_shared<Basis>();
-    string->shouldBeDeleted=true;
+    string->shouldBeDeleted=false;
     constructor(&string->godot_owner, native_ptr);
     auto val = type_helper_create_basis(string);
     return val;
@@ -419,7 +419,7 @@ PyObject* Variant::create_color(){
     GDExtensionVariantType type = functions::get_variant_get_type()(native_ptr);
     auto constructor = functions::get_get_variant_to_type_constructor()(type);
     auto string = std::make_shared<Color>();
-    string->shouldBeDeleted=true;
+    string->shouldBeDeleted=false;
     constructor(&string->godot_owner, native_ptr);
     auto val = type_helper_create_color(string);
     return val;
@@ -428,7 +428,7 @@ PyObject* Variant::create_vector4i(){
     GDExtensionVariantType type = functions::get_variant_get_type()(native_ptr);
     auto constructor = functions::get_get_variant_to_type_constructor()(type);
     auto string = std::make_shared<Vector4i>();
-    string->shouldBeDeleted=true;
+    string->shouldBeDeleted=false;
     constructor(&string->godot_owner, native_ptr);
     auto val = type_helper_create_vector4i(string);
     return val;
@@ -437,7 +437,7 @@ PyObject* Variant::create_array(){
     GDExtensionVariantType type = functions::get_variant_get_type()(native_ptr);
     auto constructor = functions::get_get_variant_to_type_constructor()(type);
     auto string = std::make_shared<Array>();
-    string->shouldBeDeleted=true;
+    string->shouldBeDeleted=false;
     constructor(&string->godot_owner, native_ptr);
     auto val = type_helper_create_array(string);
     return val;
@@ -446,7 +446,7 @@ PyObject* Variant::create_quaternion(){
     GDExtensionVariantType type = functions::get_variant_get_type()(native_ptr);
     auto constructor = functions::get_get_variant_to_type_constructor()(type);
     auto string = std::make_shared<Quaternion>();
-    string->shouldBeDeleted=true;
+    string->shouldBeDeleted=false;
     constructor(&string->godot_owner, native_ptr);
     auto val = type_helper_create_quaternion(string);
     return val;
@@ -456,7 +456,7 @@ PyObject* Variant::create_packedstringarray(){
     auto constructor = functions::get_get_variant_to_type_constructor()(type);
     auto string = std::make_shared<PackedStringArray>();
     constructor(&string->godot_owner, native_ptr);
-    string->shouldBeDeleted=true;
+    string->shouldBeDeleted=false;
     auto val = type_helper_create_packedstringarray(string);
     return val;
 }
@@ -465,7 +465,7 @@ PyObject* Variant::create_stringname(){
     auto constructor = functions::get_get_variant_to_type_constructor()(type);
     auto string = std::make_shared<StringName>();
     constructor(&string->godot_owner, native_ptr);
-    string->shouldBeDeleted=true;
+    string->shouldBeDeleted=false;
     auto val = type_helper_create_stringname(string);
     return val;
 }
@@ -496,7 +496,7 @@ PyObject* Variant::create_object(){
     GDExtensionVariantType type = functions::get_variant_get_type()(native_ptr);
     auto constructor = functions::get_get_variant_to_type_constructor()(type);
     std::shared_ptr<Object> string = std::make_shared<Object>();
-    string->shouldBeDeleted=true;
+    string->shouldBeDeleted=false;
     constructor(&string->godot_owner, native_ptr);
     if (string->godot_owner == nullptr) {
         return Py_None;
@@ -517,7 +517,7 @@ PyObject* Variant::create_vector3_native_ptr(){
     GDExtensionVariantType type = functions::get_variant_get_type()(&native_ptr);
     auto constructor = functions::get_get_variant_to_type_constructor()(type);
     auto vector = std::make_shared<Vector3>();
-    vector->shouldBeDeleted=true;
+    vector->shouldBeDeleted=false;
     constructor(&vector->godot_owner, &native_ptr);
 
     auto val = type_helper_create_vector3(vector);
@@ -528,7 +528,7 @@ PyObject* Variant::create_string_native_ptr(){
     GDExtensionVariantType type = functions::get_variant_get_type()(&native_ptr);
     auto constructor = functions::get_get_variant_to_type_constructor()(type);
     auto string = std::make_shared<String>();
-    string->shouldBeDeleted=true;
+    string->shouldBeDeleted=false;
     constructor(&string->godot_owner, &native_ptr);
 
     auto val = type_helper_create_string(string);
@@ -539,7 +539,7 @@ PyObject* Variant::create_py_string_native_ptr(){
     GDExtensionVariantType type = functions::get_variant_get_type()(&native_ptr);
     auto constructor = functions::get_get_variant_to_type_constructor()(type);
     auto string = std::make_shared<String>();
-    string->shouldBeDeleted=true;
+    string->shouldBeDeleted=false;
     constructor(&string->godot_owner, &native_ptr);
 
     auto val = type_helper_create_py_string(string);
@@ -550,7 +550,7 @@ PyObject* Variant::create_rect2i_native_ptr(){
     GDExtensionVariantType type = functions::get_variant_get_type()(&native_ptr);
     auto constructor = functions::get_get_variant_to_type_constructor()(type);
     auto string = std::make_shared<Rect2i>();
-    string->shouldBeDeleted=true;
+    string->shouldBeDeleted=false;
     constructor(&string->godot_owner, &native_ptr);
     auto val = type_helper_create_rect2i(string);
     return val;
@@ -559,7 +559,7 @@ PyObject* Variant::create_callable_native_ptr(){
     GDExtensionVariantType type = functions::get_variant_get_type()(&native_ptr);
     auto constructor = functions::get_get_variant_to_type_constructor()(type);
     auto string = std::make_shared<Callable>();
-    string->shouldBeDeleted=true;
+    string->shouldBeDeleted=false;
     constructor(&string->godot_owner, &native_ptr);
     auto val = type_helper_create_callable(string);
     return val;
@@ -568,7 +568,7 @@ PyObject* Variant::create_nodepath_native_ptr(){
     GDExtensionVariantType type = functions::get_variant_get_type()(&native_ptr);
     auto constructor = functions::get_get_variant_to_type_constructor()(type);
     auto string = std::make_shared<NodePath>();
-    string->shouldBeDeleted=true;
+    string->shouldBeDeleted=false;
     constructor(&string->godot_owner, &native_ptr);
     auto val = type_helper_create_nodepath(string);
     return val;
@@ -585,7 +585,7 @@ PyObject* Variant::create_packedvector3array_native_ptr(){
     GDExtensionVariantType type = functions::get_variant_get_type()(&native_ptr);
     auto constructor = functions::get_get_variant_to_type_constructor()(type);
     auto string = std::make_shared<PackedVector3Array>();
-    string->shouldBeDeleted=true;
+    string->shouldBeDeleted=false;
     constructor(&string->godot_owner, &native_ptr);
     auto val = type_helper_create_packedvector3array(string);
     return val;
@@ -595,7 +595,7 @@ PyObject* Variant::create_dictionary_native_ptr(){
     GDExtensionVariantType type = functions::get_variant_get_type()(&native_ptr);
     auto constructor = functions::get_get_variant_to_type_constructor()(type);
     auto string = std::make_shared<Dictionary>();
-    string->shouldBeDeleted=true;
+    string->shouldBeDeleted=false;
     constructor(&string->godot_owner, &native_ptr);
     auto val = type_helper_create_dictionary(string);
     return val;
@@ -612,7 +612,7 @@ PyObject* Variant::create_rid_native_ptr(){
     GDExtensionVariantType type = functions::get_variant_get_type()(&native_ptr);
     auto constructor = functions::get_get_variant_to_type_constructor()(type);
     auto string = std::make_shared<RID>();
-    string->shouldBeDeleted=true;
+    string->shouldBeDeleted=false;
     constructor(&string->godot_owner, &native_ptr);
     auto val = type_helper_create_rid(string);
     return val;
@@ -621,7 +621,7 @@ PyObject* Variant::create_vector2i_native_ptr(){
     GDExtensionVariantType type = functions::get_variant_get_type()(&native_ptr);
     auto constructor = functions::get_get_variant_to_type_constructor()(type);
     auto string = std::make_shared<Vector2i>();
-    string->shouldBeDeleted=true;
+    string->shouldBeDeleted=false;
     constructor(&string->godot_owner, &native_ptr);
     auto val = type_helper_create_vector2i(string);
     return val;
@@ -630,7 +630,7 @@ PyObject* Variant::create_transform2d_native_ptr(){
     GDExtensionVariantType type = functions::get_variant_get_type()(&native_ptr);
     auto constructor = functions::get_get_variant_to_type_constructor()(type);
     auto string = std::make_shared<Transform2D>();
-    string->shouldBeDeleted=true;
+    string->shouldBeDeleted=false;
     constructor(&string->godot_owner, &native_ptr);
     auto val = type_helper_create_transform2d(string);
     return val;
@@ -639,7 +639,7 @@ PyObject* Variant::create_aabb_native_ptr(){
     GDExtensionVariantType type = functions::get_variant_get_type()(&native_ptr);
     auto constructor = functions::get_get_variant_to_type_constructor()(type);
     auto string = std::make_shared<AABB>();
-    string->shouldBeDeleted=true;
+    string->shouldBeDeleted=false;
     constructor(&string->godot_owner, &native_ptr);
     auto val = type_helper_create_aabb(string);
     return val;
@@ -655,7 +655,7 @@ PyObject* Variant::create_vector3i_native_ptr(){
     GDExtensionVariantType type = functions::get_variant_get_type()(&native_ptr);
     auto constructor = functions::get_get_variant_to_type_constructor()(type);
     auto string = std::make_shared<Vector3i>();
-    string->shouldBeDeleted=true;
+    string->shouldBeDeleted=false;
     constructor(&string->godot_owner, &native_ptr);
     auto val = type_helper_create_vector3i(string);
     return val;
@@ -664,7 +664,7 @@ PyObject* Variant::create_packedint64array_native_ptr(){
     GDExtensionVariantType type = functions::get_variant_get_type()(&native_ptr);
     auto constructor = functions::get_get_variant_to_type_constructor()(type);
     auto string = std::make_shared<PackedInt64Array>();
-    string->shouldBeDeleted=true;
+    string->shouldBeDeleted=false;
     constructor(&string->godot_owner, &native_ptr);
     auto val = type_helper_create_packedint64array(string);
     return val;
@@ -673,7 +673,7 @@ PyObject* Variant::create_packedint32array_native_ptr(){
     GDExtensionVariantType type = functions::get_variant_get_type()(&native_ptr);
     auto constructor = functions::get_get_variant_to_type_constructor()(type);
     auto string = std::make_shared<PackedInt32Array>();
-    string->shouldBeDeleted=true;
+    string->shouldBeDeleted=false;
     constructor(&string->godot_owner, &native_ptr);
     auto val = type_helper_create_packedint32array(string);
     return val;
@@ -682,7 +682,7 @@ PyObject* Variant::create_packedfloat32array_native_ptr(){
     GDExtensionVariantType type = functions::get_variant_get_type()(&native_ptr);
     auto constructor = functions::get_get_variant_to_type_constructor()(type);
     auto string = std::make_shared<PackedFloat32Array>();
-    string->shouldBeDeleted=true;
+    string->shouldBeDeleted=false;
     constructor(&string->godot_owner, &native_ptr);
     auto val = type_helper_create_packedfloat32array(string);
     return val;
@@ -691,7 +691,7 @@ PyObject* Variant::create_packedbytearray_native_ptr(){
     GDExtensionVariantType type = functions::get_variant_get_type()(&native_ptr);
     auto constructor = functions::get_get_variant_to_type_constructor()(type);
     auto string = std::make_shared<PackedByteArray>();
-    string->shouldBeDeleted=true;
+    string->shouldBeDeleted=false;
     constructor(&string->godot_owner, &native_ptr);
     auto val = type_helper_create_packedbytearray(string);
     return val;
@@ -700,7 +700,7 @@ PyObject* Variant::create_vector4_native_ptr(){
     GDExtensionVariantType type = functions::get_variant_get_type()(&native_ptr);
     auto constructor = functions::get_get_variant_to_type_constructor()(type);
     auto string = std::make_shared<Vector4>();
-    string->shouldBeDeleted=true;
+    string->shouldBeDeleted=false;
     constructor(&string->godot_owner, &native_ptr);
     auto val = type_helper_create_vector4(string);
     return val;
@@ -709,7 +709,7 @@ PyObject* Variant::create_rect2_native_ptr(){
     GDExtensionVariantType type = functions::get_variant_get_type()(&native_ptr);
     auto constructor = functions::get_get_variant_to_type_constructor()(type);
     auto string = std::make_shared<Rect2>();
-    string->shouldBeDeleted=true;
+    string->shouldBeDeleted=false;
     constructor(&string->godot_owner, &native_ptr);
     auto val = type_helper_create_rect2(string);
     return val;
@@ -718,7 +718,7 @@ PyObject* Variant::create_vector2_native_ptr(){
     GDExtensionVariantType type = functions::get_variant_get_type()(&native_ptr);
     auto constructor = functions::get_get_variant_to_type_constructor()(type);
     auto string = std::make_shared<Vector2>();
-    string->shouldBeDeleted=true;
+    string->shouldBeDeleted=false;
     constructor(&string->godot_owner, &native_ptr);
     auto val = type_helper_create_vector2(string);
     return val;
@@ -727,7 +727,7 @@ PyObject* Variant::create_transform3d_native_ptr(){
     GDExtensionVariantType type = functions::get_variant_get_type()(&native_ptr);
     auto constructor = functions::get_get_variant_to_type_constructor()(type);
     auto string = std::make_shared<Transform3D>();
-    string->shouldBeDeleted=true;
+    string->shouldBeDeleted=false;
     constructor(&string->godot_owner, &native_ptr);
     auto val = type_helper_create_transform3d(string);
     return val;
@@ -736,7 +736,7 @@ PyObject* Variant::create_packedcolorarray_native_ptr(){
     GDExtensionVariantType type = functions::get_variant_get_type()(&native_ptr);
     auto constructor = functions::get_get_variant_to_type_constructor()(type);
     auto string = std::make_shared<PackedColorArray>();
-    string->shouldBeDeleted=true;
+    string->shouldBeDeleted=false;
     constructor(&string->godot_owner, &native_ptr);
     auto val = type_helper_create_packedcolorarray(string);
     return val;
@@ -745,7 +745,7 @@ PyObject* Variant::create_signal_native_ptr(){
     GDExtensionVariantType type = functions::get_variant_get_type()(&native_ptr);
     auto constructor = functions::get_get_variant_to_type_constructor()(type);
     auto string = std::make_shared<Signal>();
-    string->shouldBeDeleted=true;
+    string->shouldBeDeleted=false;
     constructor(&string->godot_owner, &native_ptr);
     auto val = type_helper_create_signal(string);
     return val;
@@ -754,7 +754,7 @@ PyObject* Variant::create_packedvector2array_native_ptr(){
     GDExtensionVariantType type = functions::get_variant_get_type()(&native_ptr);
     auto constructor = functions::get_get_variant_to_type_constructor()(type);
     auto string = std::make_shared<PackedVector2Array>();
-    string->shouldBeDeleted=true;
+    string->shouldBeDeleted=false;
     constructor(&string->godot_owner, &native_ptr);
     auto val = type_helper_create_packedvector2array(string);
     return val;
@@ -763,7 +763,7 @@ PyObject* Variant::create_plane_native_ptr(){
     GDExtensionVariantType type = functions::get_variant_get_type()(&native_ptr);
     auto constructor = functions::get_get_variant_to_type_constructor()(type);
     auto string = std::make_shared<Plane>();
-    string->shouldBeDeleted=true;
+    string->shouldBeDeleted=false;
     constructor(&string->godot_owner, &native_ptr);
     auto val = type_helper_create_plane(string);
     return val;
@@ -772,7 +772,7 @@ PyObject* Variant::create_packedfloat64array_native_ptr(){
     GDExtensionVariantType type = functions::get_variant_get_type()(&native_ptr);
     auto constructor = functions::get_get_variant_to_type_constructor()(type);
     auto string = std::make_shared<PackedFloat64Array>();
-    string->shouldBeDeleted=true;
+    string->shouldBeDeleted=false;
     constructor(&string->godot_owner, &native_ptr);
     auto val = type_helper_create_packedfloat64array(string);
     return val;
@@ -789,7 +789,7 @@ PyObject* Variant::create_basis_native_ptr(){
     GDExtensionVariantType type = functions::get_variant_get_type()(&native_ptr);
     auto constructor = functions::get_get_variant_to_type_constructor()(type);
     auto string = std::make_shared<Basis>();
-    string->shouldBeDeleted=true;
+    string->shouldBeDeleted=false;
     constructor(&string->godot_owner, &native_ptr);
     auto val = type_helper_create_basis(string);
     return val;
@@ -798,7 +798,7 @@ PyObject* Variant::create_color_native_ptr(){
     GDExtensionVariantType type = functions::get_variant_get_type()(&native_ptr);
     auto constructor = functions::get_get_variant_to_type_constructor()(type);
     auto string = std::make_shared<Color>();
-    string->shouldBeDeleted=true;
+    string->shouldBeDeleted=false;
     constructor(&string->godot_owner, &native_ptr);
     auto val = type_helper_create_color(string);
     return val;
@@ -807,7 +807,7 @@ PyObject* Variant::create_vector4i_native_ptr(){
     GDExtensionVariantType type = functions::get_variant_get_type()(&native_ptr);
     auto constructor = functions::get_get_variant_to_type_constructor()(type);
     auto string = std::make_shared<Vector4i>();
-    string->shouldBeDeleted=true;
+    string->shouldBeDeleted=false;
     constructor(&string->godot_owner, &native_ptr);
     auto val = type_helper_create_vector4i(string);
     return val;
@@ -816,7 +816,7 @@ PyObject* Variant::create_array_native_ptr(){
     GDExtensionVariantType type = functions::get_variant_get_type()(&native_ptr);
     auto constructor = functions::get_get_variant_to_type_constructor()(type);
     auto string = std::make_shared<Array>();
-    string->shouldBeDeleted=true;
+    string->shouldBeDeleted=false;
     constructor(&string->godot_owner, &native_ptr);
     auto val = type_helper_create_array(string);
     return val;
@@ -825,7 +825,7 @@ PyObject* Variant::create_quaternion_native_ptr(){
     GDExtensionVariantType type = functions::get_variant_get_type()(&native_ptr);
     auto constructor = functions::get_get_variant_to_type_constructor()(type);
     auto string = std::make_shared<Quaternion>();
-    string->shouldBeDeleted=true;
+    string->shouldBeDeleted=false;
     constructor(&string->godot_owner, &native_ptr);
     auto val = type_helper_create_quaternion(string);
     return val;
@@ -834,7 +834,7 @@ PyObject* Variant::create_packedstringarray_native_ptr(){
     GDExtensionVariantType type = functions::get_variant_get_type()(&native_ptr);
     auto constructor = functions::get_get_variant_to_type_constructor()(type);
     auto string = std::make_shared<PackedStringArray>();
-    string->shouldBeDeleted=true;
+    string->shouldBeDeleted=false;
     constructor(&string->godot_owner, &native_ptr);
     auto val = type_helper_create_packedstringarray(string);
     return val;
@@ -843,7 +843,7 @@ PyObject* Variant::create_stringname_native_ptr(){
     GDExtensionVariantType type = functions::get_variant_get_type()(&native_ptr);
     auto constructor = functions::get_get_variant_to_type_constructor()(type);
     auto string = std::make_shared<StringName>();
-    string->shouldBeDeleted=true;
+    string->shouldBeDeleted=false;
     constructor(&string->godot_owner, &native_ptr);
     auto val = type_helper_create_stringname(string);
     return val;

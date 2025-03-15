@@ -7,6 +7,7 @@
 
 #ifdef _WIN64
 #define PYTHONHOME L"addons/py4godot/cpython-3.12.4-windows64/python"
+#define PYTHONPATH L"addons/py4godot/cpython-3.12.4-windows64/python/Lib/site-packages"
 
 #elif _WIN32
 #define PYTHONHOME L"addons/py4godot/cpython-3.12.4-windows32/python/"
@@ -33,28 +34,9 @@
 
 //Setting up threading
 #if defined(_WIN64) || defined(_WIN32)
-        //extern int mtx;
-        #define NOMINMAX
-        #define NOATOM
-        #include <windows.h>
-        #undef far
-        #undef near
-        #undef interface
-        extern CRITICAL_SECTION mtx;
-        class MutexLock {
-        private:
-            CRITICAL_SECTION& mutex;
-
-        public:
-            MutexLock(CRITICAL_SECTION& m) : mutex(m) {
-                EnterCriticalSection(&mutex);
-            }
-
-            ~MutexLock() {
-                LeaveCriticalSection(&mutex);
-            }
-        };
-        #define LOCK //MutexLock lock
+    #include <mutex>
+    extern std::mutex mtx; // Define a mutex
+    #define LOCK //std::lock_guard<std::mutex> lock
 #else
     #include <mutex>
     extern std::mutex mtx; // Define a mutex

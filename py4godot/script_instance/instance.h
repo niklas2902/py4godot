@@ -24,24 +24,21 @@ GDExtensionBool c_instance_get(GDExtensionScriptInstanceDataPtr p_instance, GDEx
     if(instance->custom_properties.find(std::string{c_method_name}) == instance->custom_properties.end()){
         // TODO: look over this again. Currently setting editor description is broken.
         PyGILState_Release(gil_state);
+        delete c_method_name;
         return 0;
     }
+
     if(std::string{c_method_name} == std::string{"script"}){
-        auto constructor = functions::get_get_variant_from_type_constructor()(GDExtensionVariantType::GDEXTENSION_VARIANT_TYPE_OBJECT);
-        constructor(r_ret, &((PyScriptExtension*)instance->script)->godot_owner);
         PyGILState_Release(gil_state);
-
-        return 1;
+        delete c_method_name;
+        return 0;
     }
-    else{
-        auto ret = instance_get(p_instance, p_name, r_ret);
-        PyGILState_Release(gil_state);
-
-        return ret;
-    }
-
-    return 1;
+    auto ret = instance_get(p_instance, p_name, r_ret);
+    PyGILState_Release(gil_state);
+    delete c_method_name;
+    return ret;
 }
+
 
 std::string convertUnicodeToChar(PyObject* py_unicode) {
     if (py_unicode == nullptr || !PyUnicode_Check(py_unicode)) {
@@ -109,7 +106,7 @@ GDExtensionBool c_instance_set(GDExtensionScriptInstanceDataPtr p_instance, GDEx
     InstanceData* instance = (InstanceData*)p_instance;
     StringName method_name = StringName::new_static(((void**)p_name)[0]);
     String method_name_str = String::new2(method_name);
-    char* c_method_name;
+    char* c_method_name = (char*)malloc(sizeof(char) * method_name_str.length());
     gd_string_to_c_string(&method_name_str.godot_owner, method_name_str.length(), &c_method_name);
     if(instance->custom_properties.find(std::string{c_method_name}) == instance->custom_properties.end()){
         // TODO: look over this again. Currently setting editor description is broken.
@@ -118,6 +115,7 @@ GDExtensionBool c_instance_set(GDExtensionScriptInstanceDataPtr p_instance, GDEx
     auto gil_state = PyGILState_Ensure();
     auto ret = instance_set(p_instance, p_name, p_value);
     PyGILState_Release(gil_state);
+    delete c_method_name;
 
     return 1;
 }

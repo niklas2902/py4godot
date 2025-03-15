@@ -2,11 +2,9 @@
 import inspect
 from py4godot.classes.core cimport *
 from libcpp.memory cimport make_shared
-from py4godot.utils.print_tools import print_error
 from py4godot.utils.utils cimport *
 import py4godot.pluginscript_api.utils.annotations as annotations
 from py4godot.pluginscript_api.utils.helpers cimport get_variant_type
-from py4godot.classes.Object cimport Object as CObject
 cdef class SignalArg:
     def __init__(self, name, type_):
         self.name = name

@@ -431,7 +431,7 @@ def generate_members_of_class(class_):
 
 def simplify_type(type):
     list_types = type.split(",")
-    return list_types[-1]
+    return list_types[0]
 
 
 def generate_property(property):
@@ -955,7 +955,10 @@ if __name__ == "__main__":
             if (not os.path.exists(f"py4godot/cppclasses/{class_['name']}/")):
                 os.mkdir(f"py4godot/cppclasses/{class_['name']}/")
             generate_classes([class_], f"py4godot/cppclasses/{class_['name']}/{class_['name']}.h")
-        generate_classes(arrays, f"py4godot/cppclasses/typedarrays.h", is_core=True)
+        if not os.path.exists(f"py4godot/cppclasses/typedarrays/"):
+            os.mkdir(f"py4godot/cppclasses/typedarrays/")
+        for array in arrays:
+            generate_classes([array], f"py4godot/cppclasses/typedarrays/{array['name']}.h", is_core=True)
 
         generate_classes(obj["builtin_classes"], f"py4godot/cppclasses/generated4_core.h", is_core=True)
 

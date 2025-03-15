@@ -68,7 +68,10 @@ def generate_c_props():
 
 def generate_special_attributes(class_):
     if "array" in class_["name"].lower():
-        return f"{INDENT}cdef int _index"
+        res = f"{INDENT}cdef int _index"
+        res = generate_newline(res)
+        res += f"{INDENT}cdef bint shouldBeDeleted"
+        return res
     if class_["name"] in builtin_classes:
         return f"{INDENT}cdef bint shouldBeDeleted"
     return ""
