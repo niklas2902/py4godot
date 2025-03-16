@@ -43,6 +43,29 @@ jobs:
         with:
           python-version: "3.11.3"
 
+      - name: Download latest Godot and add to PATH
+        shell: bash
+        run: |
+          # Create directory for Godot
+          mkdir -p godot_bin
+
+          # Download latest Godot stable (you can change URL for nightly builds)
+          curl -L -o godot_bin/godot.zip https://downloads.tuxfamily.org/godotengine/4.4.0/Godot_v4.4.0-stable_win64.exe.zip
+
+          # Extract Godot
+          cd godot_bin
+          unzip godot.zip
+
+          # Rename the executable to "godot"
+          mv Godot_v4.4.0-stable_win64.exe godot.exe
+
+          # Add to PATH for current job
+          echo "$PWD" >> $GITHUB_PATH
+
+          # Verify installation
+          cd ..
+          godot --version
+
       - name: Cache py4godot/classes directory
         id: cache-py4godot-classes
         uses: actions/cache@v3
@@ -114,7 +137,7 @@ jobs:
           fi
     
       - name: Build
-        run: python build.py --target_platform=windows64 --compiler=gcc -create_plugin=False -buildtype=release -run_tests=False -download_godot=True
+        run: python build.py --target_platform=windows64 --compiler=gcc -create_plugin=False -buildtype=release -run_tests=True -download_godot=True
 
       - name: Create cache
         run: python meson_scripts/create_cache.py
