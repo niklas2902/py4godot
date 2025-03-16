@@ -1,4 +1,4 @@
-name: nightly windows🌃
+name: nightly linux
 on:
   workflow_dispatch:
   schedule:
@@ -7,6 +7,7 @@ on:
 jobs:
   check_date:
     runs-on: ubuntu-latest
+    container: niklas2902/py4godot:latest
     name: Check latest commit
     outputs:
       should_run: ${{ steps.should_run.outputs.should_run }}
@@ -22,7 +23,7 @@ jobs:
         if: ${{ github.event_name == 'schedule' }}
         run: test -z $(git rev-list  --after="24 hours"  ${{ github.sha }}) && echo "should_run=false" >> $GITHUB_OUTPUT
 
-  windows-build:
+  linux-build:
     needs: check_date
     if: ${{ needs.check_date.outputs.should_run != 'false' }}
     runs-on: windows-latest
@@ -114,7 +115,7 @@ jobs:
           fi
     
       - name: Build
-        run: python build.py --target_platform=windows64 --compiler=gcc -create_plugin=False -buildtype=release -run_tests=False -download_godot=True
+        run: python build.py --target_platform=linux64 --compiler=gcc -create_plugin=False -buildtype=release -run_tests=True -download_godot=True
 
       - name: Create cache
         run: python meson_scripts/create_cache.py
