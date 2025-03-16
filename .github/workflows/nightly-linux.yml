@@ -47,6 +47,7 @@ jobs:
           key: ${{ runner.os }}-py4godot-classes-${{ hashFiles('**/generate_classes.py', '**/generate_pxd_bridge.py', '**/extension_api.json') }}
           restore-keys: |
             ${{ runner.os }}-py4godot-classes-
+
       - name: Run Python script and check result
         shell: bash
         run: |
@@ -61,6 +62,7 @@ jobs:
             exit 0
           fi
           set -e
+
       - name: Print variables
         run: |
           python meson_scripts/variables.py
@@ -81,16 +83,6 @@ jobs:
       - name: Print structure
         run: python meson_scripts/print_tools.py
 
-      - name: Install Mesa
-        shell: cmd
-        run: |
-          mkdir godot
-          curl.exe -L --output godot/mesa.7z --url https://github.com/pal1000/mesa-dist-win/releases/download/20.3.2/mesa3d-20.3.2-release-msvc.7z
-          "C:\Program Files\7-Zip\7z.exe" x godot/mesa.7z -ogodot
-          cd godot
-          mklink opengl32.dll "x64\opengl32.dll"
-          mklink libglapi.dll "x64\libglapi.dll"
-
       - name: Generate files
         run: python generate.py -dev_build=True
 
@@ -108,7 +100,7 @@ jobs:
             echo "Cache miss for py4godot/classes directory"
             python cythonize_files.py -mode="dev"
           fi
-    
+
       - name: Build
         run: python build.py --target_platform=linux64 --compiler=gcc -create_plugin=False -buildtype=release -run_tests=True -download_godot=True
 
