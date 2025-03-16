@@ -9,6 +9,9 @@ new_python_path = "/lib/libpython3.12.dylib"
 #new_python_path = "/Users/customer/Documents/py4godot/example/addons/py4godot/cpython-3.12.4-darwin64/python/lib/libpython3.12.dylib"
 parent_folder = "python"
 
+def is_main(path):
+    return "godot_bindings" in path and "main" in path
+
 def fix_macos_paths():
     # Recursively find all .dylib files
     list_dll = glob.glob("**/*.dylib", recursive=True)
@@ -21,7 +24,7 @@ def fix_macos_paths():
 
         # Get the absolute path of the current .dylib file
         abs_entry = os.path.abspath(entry)
-        if "main" in entry or "pythonscript" in entry:
+        if is_main(entry) or "pythonscript" in entry:
             rel_path = "@loader_path/../"
         else:
             rel_path = "@loader_path/../../../"
