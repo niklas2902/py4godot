@@ -7,7 +7,7 @@
 
 #ifdef _WIN64
 #define PYTHONHOME L"addons/py4godot/cpython-3.12.4-windows64/python"
-#define PYTHONPATH L"addons/py4godot/cpython-3.12.4-windows64/python/Lib/site-packages"
+#define PYTHONPATH "addons/py4godot/cpython-3.12.4-windows64/python/Lib/site-packages"
 
 #elif _WIN32
 #define PYTHONHOME L"addons/py4godot/cpython-3.12.4-windows32/python/"
