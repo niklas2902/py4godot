@@ -26,13 +26,8 @@ jobs:
   linux-build:
     needs: check_date
     if: ${{ needs.check_date.outputs.should_run != 'false' }}
-    runs-on: windows-latest
-    strategy:
-      matrix:
-        include:
-          - PLATFORM: 'windows-64'
-            PYTHON_ARCH: 'x64'
-            VS_ARCH: 'amd64'
+    runs-on: ubuntu-latest
+    container: niklas2902/py4godot:4.4
     steps:
       - uses: actions/checkout@v3
         with:
