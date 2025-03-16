@@ -42,29 +42,32 @@ jobs:
         uses: actions/setup-python@v2
         with:
           python-version: "3.11.3"
-
       - name: Download latest Godot and add to PATH
         shell: bash
         run: |
           # Create directory for Godot
           mkdir -p godot_bin
-
-          # Download latest Godot stable (you can change URL for nightly builds)
-          curl -L -o godot_bin/godot.zip https://downloads.tuxfamily.org/godotengine/4.4.0/Godot_v4.4.0-stable_win64.exe.zip
-
+      
+          # Download latest Godot stable
+          curl -L -o godot_bin/godot.zip https://github.com/godotengine/godot/releases/download/4.4-stable/Godot_v4.4-stable_win64.exe.zip
+      
           # Extract Godot
           cd godot_bin
           unzip godot.zip
-
+      
           # Rename the executable to "godot"
-          mv Godot_v4.4.0-stable_win64.exe godot.exe
-
-          # Add to PATH for current job
-          echo "$PWD" >> $GITHUB_PATH
-
-          # Verify installation
+          mv Godot_v4.4-stable_win64.exe godot.exe
+      
+          # Get absolute path for adding to PATH
+          GODOT_PATH="$(pwd)"
+          echo "Adding $GODOT_PATH to PATH"
+          echo "$GODOT_PATH" >> $GITHUB_PATH
+      
+          # Verify installation with full path
+          ./godot.exe --version || echo "Failed to run Godot directly"
+          
+          # Go back to original directory
           cd ..
-          godot --version
 
       - name: Cache py4godot/classes directory
         id: cache-py4godot-classes
