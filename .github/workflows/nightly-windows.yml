@@ -50,14 +50,14 @@ jobs:
           mkdir -p godot_bin
 
           # Download latest Godot stable (you can change URL for nightly builds)
-          curl -L -o godot_bin/godot.zip https://downloads.tuxfamily.org/godotengine/4.4.0/Godot_v4.4.0-stable_win64.exe.zip
+          curl -L -o godot_bin/godot.zip https://github.com/godotengine/godot/releases/download/4.4-stable/Godot_v4.4-stable_win64.exe.zip
 
           # Extract Godot
           cd godot_bin
           unzip godot.zip
 
           # Rename the executable to "godot"
-          mv Godot_v4.4.0-stable_win64.exe godot.exe
+          mv Godot_v4.4-stable_win64.exe godot.exe
 
           # Add to PATH for current job
           echo "$PWD" >> $GITHUB_PATH
