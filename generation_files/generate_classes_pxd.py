@@ -68,7 +68,12 @@ def generate_c_props():
 
 def generate_special_attributes(class_):
     if "array" in class_["name"].lower():
-        return f"{INDENT}cdef int _index"
+        res = f"{INDENT}cdef int _index"
+        res = generate_newline(res)
+        res += f"{INDENT}cdef bint shouldBeDeleted"
+        return res
+    if class_["name"] in builtin_classes:
+        return f"{INDENT}cdef bint shouldBeDeleted"
     return ""
 
 def generate_properties(class_):
@@ -88,6 +93,8 @@ def generate_pxd_class(pxd_class):
     result = generate_newline(result)
     if pxd_class["name"] == "Object":
         result += f"{INDENT}cdef bint already_deallocated"
+        result = generate_newline(result)
+        result += f"{INDENT}cdef object casted_from"
     result = generate_newline(result)
     result += generate_wrapped_attribute(class_)
     result = generate_newline(result)

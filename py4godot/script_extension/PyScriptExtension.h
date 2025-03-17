@@ -37,6 +37,7 @@ namespace godot{
           void update_instance_data(InstanceData* gd_instance, PyObject* instance); // self-defined
           void apply_code();
           std::string path_as_string();
+          std::vector<std::shared_ptr<Variant>> signal_variants;
 
            void _editor_can_reload_from_file(GDExtensionTypePtr res);
            void _can_instantiate(GDExtensionTypePtr res);
@@ -72,7 +73,7 @@ namespace godot{
            void _is_abstract(GDExtensionTypePtr res);
            void _get_class_item_path(GDExtensionTypePtr res);
            void _has_static_method (GDExtensionTypePtr res);
-
+           void _get_doc_class_name(GDExtensionTypePtr res);
            void _set_source_code_internal(String& source_code);
            /*void set_path(const char* path);*/
     };

@@ -461,7 +461,7 @@ def generate_members_of_class(class_):
 
 def simplify_type(type):
     list_types = type.split(",")
-    return list_types[-1]
+    return list_types[0]
 
 
 def generate_property(property):
@@ -658,7 +658,7 @@ def generate_classes(classes, filename, is_core=False):
         if (class_["name"] in IGNORED_CLASSES):
             continue
         if class_["name"] in typed_arrays_names:
-            res += f'cdef extern from "py4godot/cppclasses/typedarrays.h" namespace "godot":'
+            res += f'cdef extern from "py4godot/cppclasses/typedarrays/{class_["name"]}.h" namespace "godot":'
         elif class_["name"] in builtin_classes:
             res += f'cdef extern from "py4godot/cppclasses/generated4_core.h" namespace "godot":'
         else:

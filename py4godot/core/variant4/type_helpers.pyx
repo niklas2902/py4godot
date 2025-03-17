@@ -204,7 +204,9 @@ cdef api shared_ptr[bridge.Callable] get_callable_from_pyobject(PyObject* py_obj
 cdef api shared_ptr[bridge.NodePath] get_nodepath_from_pyobject(PyObject* py_object):
     return (<NodePath>py_object).NodePath_internal_class_ptr;
 cdef api shared_ptr[bridge.String] get_string_from_py_string(str py_object):
-    return py_c_string_to_string(py_object.encode("utf-8")).String_internal_class_ptr;
+    cdef String string = py_c_string_to_string(py_object.encode("utf-8"))
+    string.shouldBeDeleted = False
+    return string.String_internal_class_ptr
 cdef api shared_ptr[bridge.String] get_string_from_pyobject(PyObject* py_object):
     return (<String>py_object).String_internal_class_ptr;
 cdef api shared_ptr[bridge.PackedVector3Array] get_packedvector3array_from_pyobject(PyObject* py_object):

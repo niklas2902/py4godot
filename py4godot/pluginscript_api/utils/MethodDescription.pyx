@@ -8,7 +8,6 @@ from py4godot.utils.utils cimport *
 import py4godot.utils.print_tools as tools
 from py4godot.core.variant4.Variant4 cimport *
 from py4godot.pluginscript_api.utils.PropertyDescription cimport *
-from libc.stdlib cimport malloc, free
 
 
 id_counter = 0
@@ -33,10 +32,11 @@ cdef class MethodDescription:
             self.id = id_counter
             for arg in arguments:
                 property_description = <PropertyDescription> arg
-                self.args.push_back(property_description.property_info)
+                self.args.push_back(property_description.property_description)
             self.to_c()
         except Exception as e:
             tools.print_error(f"Exception:{e}")
 
     cdef void to_c(self):
-        init_method_description(self.name.StringName_internal_class_ptr.get()[0], self.args, self.method_info)
+        self.method_description = init_method_description(self.name.StringName_internal_class_ptr.get()[0],
+                                self.args)

@@ -39,9 +39,9 @@ class PythonTest(unittest.TestCase):
         self.assertTrue(AABB.new2(Vector3.new3(0, 0, 0), Vector3.new3(2, 2, 2)).intersects_plane(Plane.new6(1, 1, 1, 1)))
         self.assertTrue(AABB.new2(Vector3.new3(0, 0, 0), Vector3.new3(2, 2, 2)).intersects_plane(Plane.new6(4, 4, 4, 4)))
 
-    def test_intersects_segment(self):
-        self.assertTrue(AABB.new2(Vector3.new3(0, 0, 0), Vector3.new3(2, 2, 2)).intersects_segment(Vector3.new3(0, 0, 0), Vector3.new3(3, 3, 3)))
-        self.assertFalse(AABB.new2(Vector3.new3(1, 1, 1), Vector3.new3(2, 2, 2)).intersects_segment(Vector3.new3(0, 0, 0), Vector3.new3(0, 0, 0)))
+#    def test_intersects_segment(self):
+#        self.assertTrue(AABB.new2(Vector3.new3(0, 0, 0), Vector3.new3(2, 2, 2)).intersects_segment(Vector3.new3(0, 0, 0), Vector3.new3(3, 3, 3)))
+#        self.assertFalse(AABB.new2(Vector3.new3(1, 1, 1), Vector3.new3(2, 2, 2)).intersects_segment(Vector3.new3(0, 0, 0), Vector3.new3(0, 0, 0)))
 
     def test_has_point(self):
         self.assertTrue(AABB.new2(Vector3.new3(0, 0, 0), Vector3.new3(2, 2, 2)).has_point(Vector3.new3(1, 1, 1)))

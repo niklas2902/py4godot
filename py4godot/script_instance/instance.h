@@ -24,24 +24,21 @@ GDExtensionBool c_instance_get(GDExtensionScriptInstanceDataPtr p_instance, GDEx
     if(instance->custom_properties.find(std::string{c_method_name}) == instance->custom_properties.end()){
         // TODO: look over this again. Currently setting editor description is broken.
         PyGILState_Release(gil_state);
+        delete c_method_name;
         return 0;
     }
+
     if(std::string{c_method_name} == std::string{"script"}){
-        auto constructor = functions::get_get_variant_from_type_constructor()(GDExtensionVariantType::GDEXTENSION_VARIANT_TYPE_OBJECT);
-        constructor(r_ret, &((PyScriptExtension*)instance->script)->godot_owner);
         PyGILState_Release(gil_state);
-
-        return 1;
+        delete c_method_name;
+        return 0;
     }
-    else{
-        auto ret = instance_get(p_instance, p_name, r_ret);
-        PyGILState_Release(gil_state);
-
-        return ret;
-    }
-
-    return 1;
+    auto ret = instance_get(p_instance, p_name, r_ret);
+    PyGILState_Release(gil_state);
+    delete c_method_name;
+    return ret;
 }
+
 
 std::string convertUnicodeToChar(PyObject* py_unicode) {
     if (py_unicode == nullptr || !PyUnicode_Check(py_unicode)) {
@@ -60,8 +57,7 @@ std::string convertUnicodeToChar(PyObject* py_unicode) {
         assert(false);
         return nullptr;
     }
-    // Increase the reference count for the bytes object before returning the char*
-    Py_INCREF(py_bytes);
+
     // Create a std::string from the char*
     std::string result(c_string);
 
@@ -86,17 +82,17 @@ void c_instance_call(GDExtensionScriptInstanceDataPtr p_self, GDExtensionConstSt
         return;
     }
     auto gil_state = PyGILState_Ensure();
-    String method_name_str = String::new2(name);
     if (instance_has_method(p_self, p_method)){
         auto* p_instance = (InstanceData*)p_self;
         MethodCallData data = instance_call(p_self, p_method, p_args, p_argument_count, r_return, r_error);
-        Variant res_var =  Variant();
-        res_var.native_ptr = r_return;
         if(data.has_value){
+            Variant res_var =  Variant();
+            res_var.native_ptr = r_return;
             auto my_str = convertUnicodeToChar(data.ret_typename);
             res_var.init_from_py_object(data.ret_val, my_str.c_str());
             // TODO: Py_DECREF for result_obj
             Py_DECREF(data.ret_val);
+            Py_DECREF(data.ret_typename);
         }
         r_error->error = GDExtensionCallErrorType::GDEXTENSION_CALL_OK; // signaling that calling the method worked
     }
@@ -110,7 +106,7 @@ GDExtensionBool c_instance_set(GDExtensionScriptInstanceDataPtr p_instance, GDEx
     InstanceData* instance = (InstanceData*)p_instance;
     StringName method_name = StringName::new_static(((void**)p_name)[0]);
     String method_name_str = String::new2(method_name);
-    char* c_method_name;
+    char* c_method_name = (char*)malloc(sizeof(char) * method_name_str.length());
     gd_string_to_c_string(&method_name_str.godot_owner, method_name_str.length(), &c_method_name);
     if(instance->custom_properties.find(std::string{c_method_name}) == instance->custom_properties.end()){
         // TODO: look over this again. Currently setting editor description is broken.
@@ -119,31 +115,81 @@ GDExtensionBool c_instance_set(GDExtensionScriptInstanceDataPtr p_instance, GDEx
     auto gil_state = PyGILState_Ensure();
     auto ret = instance_set(p_instance, p_name, p_value);
     PyGILState_Release(gil_state);
+    delete c_method_name;
 
     return 1;
+}
+
+GDExtensionPropertyInfo create_property_info(std::shared_ptr<CPPPropertyDescription> description_ptr){
+    GDExtensionPropertyInfo property_info;
+    property_info.type = description_ptr->type_;
+    property_info.name = &description_ptr->name.godot_owner;
+    property_info.class_name = &description_ptr->class_name.godot_owner;
+    property_info.hint = description_ptr->hint;
+    property_info.hint_string = &description_ptr->hint_string.godot_owner;
+    property_info.usage = description_ptr->usage;
+    return property_info;
+}
+
+std::vector<GDExtensionPropertyInfo> build_property_info(std::vector<std::shared_ptr<CPPPropertyDescription>> descriptions){
+    std::vector<GDExtensionPropertyInfo> res;
+    for(auto& description_ptr:descriptions){
+        res.push_back(create_property_info(description_ptr));
+    }
+    return res;
+
 }
 
 const GDExtensionPropertyInfo * c_instance_get_property_list(GDExtensionScriptInstanceDataPtr p_instance, uint32_t *r_count){
     print_error("_c_instance_get_property_list");
     auto p_instance_data = (InstanceData*) p_instance;
-    auto& properties = p_instance_data->properties;
-    *r_count = properties.size();
-    if (properties.size() == 0) {
+    p_instance_data->gd_properties = build_property_info(p_instance_data->properties);
+    *r_count = p_instance_data->properties.size();
+    if (p_instance_data->gd_properties.size() == 0) {
         return nullptr;
     }
-    return &properties[0];
+    auto& head = p_instance_data->gd_properties[0];
+    return &head;
+}
+
+
+GDExtensionMethodInfo create_method_info(std::shared_ptr<CPPMethodDescription> description_ptr){
+    GDExtensionMethodInfo method_info;
+    method_info.name = &description_ptr->name.godot_owner;
+    method_info.flags = description_ptr->flags;
+    method_info.id = description_ptr->id;
+    method_info.argument_count = description_ptr->args.size();
+    method_info.default_argument_count = 0;
+
+   GDExtensionPropertyInfo return_info = create_property_info(description_ptr->return_value);
+    method_info.return_value = return_info;
+
+    std::vector<GDExtensionPropertyInfo> my_args;
+    for(size_t index = 0; index < description_ptr->args.size(); index++){
+        std::shared_ptr<CPPPropertyDescription> arg = description_ptr->args[index];
+        my_args.push_back(create_property_info(arg));
+    }
+    description_ptr->cpp_args = my_args;
+    auto& head = description_ptr->cpp_args[0];
+    method_info.arguments = &head;
+    return method_info;
 }
 
 const GDExtensionMethodInfo * c_instance_get_method_list(GDExtensionScriptInstanceDataPtr p_instance, uint32_t *r_count){
-    print_error("_c_instance_get_property_list");
     auto p_instance_data = (InstanceData*) p_instance;
     auto& methods = p_instance_data->methods;
     *r_count = methods.size();
     if(methods.size() == 0){
         return nullptr;
     }
+    p_instance_data->gd_methods.clear();
 
-    return &methods[0];
+    for(auto& p_method: methods){
+        p_instance_data->gd_methods.push_back(create_method_info(p_method));
+    }
+    auto& head = p_instance_data->gd_methods[0];
+    return &head;
+
 }
 
 GDExtensionObjectPtr c_instance_get_script(GDExtensionScriptInstanceDataPtr p_instance){

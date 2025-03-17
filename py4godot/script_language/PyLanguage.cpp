@@ -188,16 +188,16 @@ void PyLanguage::deinit_theme_icon(){
 
   void PyLanguage::_get_string_delimiters(GDExtensionTypePtr res){
     print_error("_get_string_delimiters");
-    auto string_del1 = c_string_to_string("\".*\"");
-    auto string_del2 = c_string_to_string("'.*'");
+    auto string_del1 = c_string_to_string("\" \"");
+    auto string_del2 = c_string_to_string("' '");
     add_string_to_array(res,string_del1);
     add_string_to_array(res,string_del2);
 
   }
     void PyLanguage::_get_doc_comment_delimiters(GDExtensionTypePtr res){
     print_error("_get_doc_comment_delimiters");
-    auto string_del = c_string_to_string("\"\"\".*\"\"\"");
-    auto string_del2 = c_string_to_string("'''.*'''");
+    auto string_del = c_string_to_string("\"\"\" \"\"\"");
+    auto string_del2 = c_string_to_string("''' '''");
     add_string_to_array(res,string_del);
     add_string_to_array(res,string_del2);
   }
@@ -359,6 +359,23 @@ void PyLanguage::deinit_theme_icon(){
 
   void PyLanguage::_lookup_code(String& code, String& symbol, String& path, Object& owner, GDExtensionTypePtr res){
     print_error("_lookup_code");
+    GDExtensionVariantPtr varptr;
+    String key = c_string_to_string("result");
+    auto key_var = Variant(key);
+
+    bool valid = true;
+    GDExtensionVariantPtr value_var = functions::get_dictionary_operator_index()(const_cast<GDExtensionTypePtr>(res), &key_var.native_ptr);
+    GDExtensionVariantFromTypeConstructorFunc constructor_func_valid = functions::get_get_variant_from_type_constructor()(GDExtensionVariantType::GDEXTENSION_VARIANT_TYPE_BOOL);
+    constructor_func_valid(value_var, &valid);
+
+
+    String key_type = c_string_to_string("type");
+    auto key_type_var = Variant(key_type);
+
+    int type = GDEXTENSION_VARIANT_TYPE_BOOL;
+    GDExtensionVariantPtr value_var_type = functions::get_dictionary_operator_index()(const_cast<GDExtensionTypePtr>(res), &key_type_var.native_ptr);
+    GDExtensionVariantFromTypeConstructorFunc constructor_func_type = functions::get_get_variant_from_type_constructor()(GDExtensionVariantType::GDEXTENSION_VARIANT_TYPE_INT);
+    constructor_func_type(value_var_type, &type);
   }
 
   void PyLanguage::_auto_indent_code(String& code, int from_line, int to_line, GDExtensionTypePtr res){

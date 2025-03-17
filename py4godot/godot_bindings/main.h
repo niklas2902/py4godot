@@ -7,6 +7,7 @@
 
 #ifdef _WIN64
 #define PYTHONHOME L"addons/py4godot/cpython-3.12.4-windows64/python"
+#define PYTHONPATH "addons/py4godot/cpython-3.12.4-windows64/python/Lib/site-packages"
 
 #elif _WIN32
 #define PYTHONHOME L"addons/py4godot/cpython-3.12.4-windows32/python/"
@@ -16,9 +17,11 @@
 
 #elif __linux__
 #define PYTHONHOME L"addons/py4godot/cpython-3.12.4-linux64/python"
+#define PYTHONPATH "/addons/py4godot/cpython-3.12.4-linux64/python/lib/python3.12/site-packages"
 
 #elif __APPLE__
-#define PYTHONHOME L"addons/py4godot/cpython-3.12.4-linux64/python"
+#define PYTHONHOME L"addons/py4godot/cpython-3.12.4-darwin64/python"
+#define PYTHONPATH "/addons/py4godot/cpython-3.12.4-darwin64/python/lib/python3.12/site-packages"
 #endif
 #if !defined(GDN_EXPORT)
 #if defined(_WIN32)
@@ -32,32 +35,13 @@
 
 //Setting up threading
 #if defined(_WIN64) || defined(_WIN32)
-        //extern int mtx;
-        #define NOMINMAX
-        #define NOATOM
-        #include <windows.h>
-        #undef far
-        #undef near
-        #undef interface
-        extern CRITICAL_SECTION mtx;
-        class MutexLock {
-        private:
-            CRITICAL_SECTION& mutex;
-
-        public:
-            MutexLock(CRITICAL_SECTION& m) : mutex(m) {
-                EnterCriticalSection(&mutex);
-            }
-
-            ~MutexLock() {
-                LeaveCriticalSection(&mutex);
-            }
-        };
-        #define LOCK //MutexLock lock
+    #include <mutex>
+    extern std::mutex mtx; // Define a mutex
+    #define LOCK //std::lock_guard<std::mutex> lock
 #else
     #include <mutex>
     extern std::mutex mtx; // Define a mutex
-    #define LOCK std::lock_guard<std::mutex> lock
+    #define LOCK //std::lock_guard<std::mutex> lock
 #endif
 
 extern GDExtensionClassLibraryPtr _library;

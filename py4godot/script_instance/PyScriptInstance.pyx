@@ -15,6 +15,7 @@ from py4godot.core.variant4 import cast_helpers
 import threading
 
 cdef types_to_decref = {type(1), type(1.), type(True)}
+l = []
 
 cdef api GDExtensionBool instance_set(GDExtensionScriptInstanceDataPtr p_instance, GDExtensionConstStringNamePtr p_name, GDExtensionConstVariantPtr p_value) noexcept:
     py_log("instance_set")
@@ -57,12 +58,20 @@ cdef api GDExtensionBool instance_get(GDExtensionScriptInstanceDataPtr p_instanc
     try:
         get_var.native_ptr = <void*>r_ret
         get_val = getattr(<object>(instance.owner),py_method_name_str)
+        if type(get_val) == type(""):
+            get_val = fix_string_behavior(<object>instance.owner, get_val, py_method_name_str)
         py_typename = str(type(get_val).__name__)
         get_var.init_from_py_object(<PyObject*>get_val, py_typename.encode("utf-8"))
     except Exception as e:
         print_error_detailed('PyScriptInstance.pyx', 'instance_get', 63, "Exception while getting attribute:",e) # !this gets generated print_error
         print_error_detailed('PyScriptInstance.pyx', 'instance_get', 64, f"traceback: {traceback.format_exc()}") # !this gets generated print_error
     return 1
+
+def fix_string_behavior(gd_object, val, name):
+    # We can't delete Strings, when getting with property in order not to crash
+    cdef String get_val = String.new1(val)
+    get_val.shouldBeDeleted = False
+    return get_val
 
 """cdef api const GDExtensionMethodInfo * instance_get_method_list(GDExtensionScriptInstanceDataPtr p_instance, uint32_t *r_count) :
     global method_infos

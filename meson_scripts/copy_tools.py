@@ -4,6 +4,8 @@ import os
 import glob
 import json
 
+from build_tools import download_get_pip
+
 """This file is for copying the generated so/dll files from ninja/meson into the build folder"""
 with open('config.json', 'r') as f:
     config_data = json.load(f)
@@ -45,7 +47,7 @@ def run(platform):
                 copy(entry,
                      f"build/final/{platform}/{config_data['python_ver']}-{platform}/python/lib/python3.12/site-packages/" + strip_platform(
                          entry.lstrip("build").replace("#", "/")).
-                     replace(".dll", ".pyd"))  # dst can be a folder; use copy2() to preserve timestamp
+                     replace(".dylib", ".so"))  # dst can be a folder; use copy2() to preserve timestamp
 
     if "windows" in platform:
         list_dll = glob.glob("**/*.pdb", recursive=True)
@@ -90,27 +92,23 @@ def copy_main(platform):
 def copy_tests(platform):
     """copy plugin inside godot"""
     core_tests = glob.glob("tests/core/*")
-    for core_test in core_tests:
-        print(f"copy_to:{core_test}")
-        if os.path.exists(f"{core_test}/addons"):
-            rmtree(f"{core_test}/addons")
-        copytree(f"build/final/{platform}/{config_data['python_ver']}-{platform}", f"{core_test}/addons/py4godot/{config_data['python_ver']}-{platform}")
-
-        copy("build_resources/dependencies.txt", f"{core_test}/addons/py4godot/dependencies.txt")
-        copy("build_resources/python.gdextension", f"{core_test}/addons/py4godot/python.gdextension")
-        copy("build_resources/install_dependencies.py", f"{core_test}/addons/py4godot/install_dependencies.py")
-        copy("build_resources/Python.svg", f"{core_test}/addons/py4godot/Python.svg")
     binding_tests = glob.glob("tests/binding/*")
-    for binding_test in binding_tests:
+    for core_test in core_tests + binding_tests:
+        print(f"copy_to:{core_test}")
 
-        print(f"copy_to:{binding_test}")
-        if os.path.exists(f"{binding_test}/addons"):
-            rmtree(f"{binding_test}/addons")
-        copytree(f"build/final/{platform}/{config_data['python_ver']}-{platform}", f"{binding_test}/addons/py4godot/{config_data['python_ver']}-{platform}")
-        copy("build_resources/dependencies.txt", f"{binding_test}/addons/py4godot/dependencies.txt")
-        copy("build_resources/python.gdextension", f"{binding_test}/addons/py4godot/python.gdextension")
-        copy("build_resources/install_dependencies.py", f"{binding_test}/addons/py4godot/install_dependencies.py")
-        copy("build_resources/Python.svg", f"{binding_test}/addons/py4godot/Python.svg")
+        if os.path.exists(f"{core_test}/addons/py4godot/cpython-3.12.4-{platform}"):
+            shutil.rmtree(f"{core_test}/addons/py4godot/cpython-3.12.4-{platform}/", onerror=onerror)
+        copytree(f"build/final/{platform}/cpython-3.12.4-{platform}",
+                 f"{core_test}/addons/py4godot/cpython-3.12.4-{platform}")
+        shutil.copy("build_resources/python.gdextension", f"{core_test}/addons/py4godot/python.gdextension")
+        shutil.copy("build_resources/dependencies.txt", f"{core_test}/addons/py4godot/dependencies.txt")
+        shutil.copy("build_resources/install_dependencies.py", f"{core_test}/addons/py4godot/install_dependencies.py")
+        download_get_pip(f"{core_test}/addons/py4godot")
+
+        python_svg_dest = f"{core_test}/addons/py4godot/" + "/Python.svg"
+        if not os.path.exists(python_svg_dest):
+            shutil.copy("build_resources/Python.svg", python_svg_dest)
+
 
 def copy_stub_files(platform):
     for file in (glob.glob("**/*.pyi", recursive=True)):
@@ -133,6 +131,7 @@ def copy_stub_files(platform):
 def copy_experimental(platform):
     for file in ["py4godot/pluginscript_api/utils/experimental.py",
                  "py4godot/pluginscript_api/utils/annotation_tools.py",
+                 "py4godot/utils/smart_cast.py",
                  "py4godot/classes/__init__.py",
                  "py4godot/methods.py",
                  "py4godot/properties.py"]:

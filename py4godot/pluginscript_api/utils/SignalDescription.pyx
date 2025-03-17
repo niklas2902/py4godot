@@ -23,13 +23,12 @@ cdef class SignalDescription:
             signal_arg.name = c_name
             signal_arg.type = <GDExtensionVariantType>(<SignalArg>args[i]).variant_type
             signal_args.push_back(signal_arg)
-        self.dict = Dictionary.new0()
         py_bytes = name.encode("utf-8")
         cdef char* signal_c_name = py_bytes
-        init_signal_description(signal_c_name, signal_args, self.dict.Dictionary_internal_class_ptr);
+        self.description = init_signal_description(signal_c_name, signal_args)
 
     def get_var_signal_dict(self):
         return self.var_signal_dict
 
-    cdef Dictionary get_signal_dict(self):
-        return self.dict
+    cdef shared_ptr[CPPSignalDescription] get_signal_description(self):
+        return self.description

@@ -177,16 +177,16 @@ cdef api TransferObject exec_class(str source_string, str class_name_):
         cpp_string = string(c_icon_path)
         transfer_object.icon_path = cpp_string
     for signal in signals:
-        transfer_object.signals.push_back((<SignalDescription>signal).get_signal_dict().Dictionary_internal_class_ptr.get()[0])
+        transfer_object.signals.push_back((<SignalDescription>signal).get_signal_description())
 
-    cdef GDExtensionMethodInfo method_info
+    cdef shared_ptr[CPPMethodDescription] method_description
     for method in methods:
-        method_info = (<MethodDescription>method).method_info
-        transfer_object.methods.push_back(method_info)
-    cdef GDExtensionPropertyInfo property_info
+        method_description = (<MethodDescription>method).method_description
+        transfer_object.methods.push_back(method_description)
+    cdef shared_ptr[CPPPropertyDescription] property_info
     for property in properties:
         (<PropertyDescription>property).to_c()
-        property_info = (<PropertyDescription>property).property_info
+        property_info = (<PropertyDescription>property).property_description
         transfer_object.properties.push_back(property_info)
 
     for default_value in default_values:

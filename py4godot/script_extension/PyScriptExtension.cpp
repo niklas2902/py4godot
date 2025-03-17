@@ -12,12 +12,15 @@
 #include "py4godot/utils/instance_utils_api.h"
 #include "py4godot/cpputils/ScriptHolder.h"
 #include "py4godot/script_extension/script_extension_helpers_api.h"
+#include "py4godot/script_extension/signal_builder.h"
 #include <cstdlib>  // For system()
 
 //#include <direct.h>  // For _getcwd() on Windows
 #include <cassert>
 #include "Python.h"
 #include <algorithm>
+#include <iostream>
+#include <unistd.h>  // For getcwd()
 
 GDExtensionPtrOperatorEvaluator operator_equal_string_namescript;
 PyScriptExtension extension;
@@ -53,10 +56,20 @@ void init_pluginscript_api(){
     // Initialize interpreter but skip initialization registration of signal handlers
     Py_InitializeEx(0);
 
+
+    char cwd[PATH_MAX];  // Buffer to store the path
+    if (getcwd(cwd, sizeof(cwd)) == nullptr) {
+        print_error("Current working directory: ");
+        print_error(cwd);
+    } else {
+        print_error("Failed to get current working directory.");
+    }
+
     // Convert parentDir to Python string format
     std::string pythonCode = "import sys\n"
                              "import os\n"
-                             "sys.path.append(os.getcwd() + r'/../..')";
+                             "sys.path.append('" + std::string{ cwd} + "')\n"
+                             "sys.path.append('" + std::string{cwd} + std::string{PYTHONPATH} + "')";
 
     // Convert Python code to const char* for PyRun_SimpleString
     const char *pythonCodeWchar = pythonCode.c_str();
@@ -179,9 +192,10 @@ void init_pluginscript_api(){
 }
 
 void PyScriptExtension::init_signals(PyObject* instance){
+
     std::vector<std::shared_ptr<godot::Dictionary>> signals;
-    for (auto& signal: transfer_object.signals){
-        signals.push_back(std::make_shared<godot::Dictionary>(signal));
+    for (auto& signal_description_ptr: transfer_object.signals){
+        signals.push_back(std::make_shared<godot::Dictionary>(*build_signal(*signal_description_ptr)));
     }
     create_signals(instance, signals);
 }
@@ -281,7 +295,7 @@ void PyScriptExtension::update_instance_data(InstanceData* gd_instance, PyObject
 
     int index = 0;
     for (auto& default_value: transfer_object.default_values){
-        auto property_string_name =  StringName::new_static(((void**)transfer_object.properties[index].name)[0]);
+        auto property_string_name =  transfer_object.properties[index]->name;
         String property_name = String::new2(property_string_name);
         char* c_property_name;
         gd_string_to_c_string( &property_name.godot_owner, property_name.length(), &c_property_name);
@@ -365,6 +379,10 @@ void PyScriptExtension::_has_source_code(GDExtensionTypePtr res){
     print_error("_has_source_code");
 }
 
+void PyScriptExtension::_get_doc_class_name(GDExtensionTypePtr res){
+    print_error("_get_doc_class_name");
+}
+
 void PyScriptExtension::_has_static_method(GDExtensionTypePtr res) {
     print_error("_has_static_method");
     *((bool*)res) = false;
@@ -415,13 +433,16 @@ void PyScriptExtension::_has_script_signal( StringName& signal, GDExtensionTypeP
 void PyScriptExtension::_get_script_signal_list(GDExtensionTypePtr res){
     print_error("_get_script_signal_list");
     int index;
-    for (auto& signal_dict : transfer_object.signals) {
-        Variant* var_signal = new Variant{1};
+    signal_variants.clear();
+    for (auto& signal_description_ptr : transfer_object.signals) {
+        auto signal_dict = build_signal(*signal_description_ptr);
+        auto var_signal_ptr = std::make_shared<Variant>(1);
+        signal_variants.push_back(var_signal_ptr);
         auto constructor = functions::get_get_variant_from_type_constructor()(GDExtensionVariantType::GDEXTENSION_VARIANT_TYPE_DICTIONARY);
-        constructor(&(var_signal->native_ptr), &signal_dict.godot_owner);
+        constructor(&(var_signal_ptr->native_ptr), &signal_dict->godot_owner);
 
-        add_variant_to_array(res, *var_signal);
-        delete var_signal;
+        add_variant_to_array(res, *var_signal_ptr);
+
     }
     //assert(false);
 
@@ -611,6 +632,15 @@ void call_virtual_func__has_source_code(GDExtensionClassInstancePtr p_instance, 
 }
 
 StringName func_name__has_source_code ;
+
+void call_virtual_func__get_doc_class_name(GDExtensionClassInstancePtr p_instance, const GDExtensionConstTypePtr* p_args, GDExtensionTypePtr r_ret) {
+    PyScriptExtension* pylanguage = static_cast<PyScriptExtension*> (p_instance);
+
+    pylanguage->_get_doc_class_name(r_ret);
+}
+
+StringName func_name__get_doc_class_name ;
+
 
 void call_virtual_func__has_static_method(GDExtensionClassInstancePtr p_instance, const GDExtensionConstTypePtr* p_args, GDExtensionTypePtr r_ret) {
     PyScriptExtension* pylanguage = static_cast<PyScriptExtension*> (p_instance);
@@ -913,6 +943,10 @@ GDExtensionClassCallVirtual get_virtual_script(void *p_userdata, GDExtensionCons
         return script::call_virtual_func__has_source_code;
     }
 
+    else if (string_names_equal_script(script::func_name__get_doc_class_name, name)){
+        return script::call_virtual_func__get_doc_class_name;
+    }
+
     else if (string_names_equal_script(script::func_name__has_static_method, name)) {
         return script::call_virtual_func__has_static_method;
     }
@@ -1021,6 +1055,7 @@ void init_func_names_script(){
     script::func_name__placeholder_instance_create = c_string_to_string_name("_placeholder_instance_create");
     script::func_name__instance_has = c_string_to_string_name("_instance_has");
     script::func_name__has_source_code = c_string_to_string_name("_has_source_code");
+    script::func_name__get_doc_class_name = c_string_to_string_name("_get_doc_class_name");
     script::func_name__has_static_method = c_string_to_string_name("_has_static_method");
     script::func_name__get_source_code = c_string_to_string_name("_get_source_code");
     script::func_name__set_source_code = c_string_to_string_name("_set_source_code");
