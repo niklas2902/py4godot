@@ -58,7 +58,7 @@ void init_pluginscript_api(){
 
 
     char cwd[PATH_MAX];  // Buffer to store the path
-    if (getcwd(cwd, sizeof(cwd)) == nullptr) {
+    if (getcwd(cwd, sizeof(cwd)) != nullptr) {
         print_error("Current working directory: ");
         print_error(cwd);
     } else {
@@ -188,6 +188,7 @@ void init_pluginscript_api(){
 
     // Release the Kraken... er I mean the GIL !
     gilstate = PyEval_SaveThread();
+    print_error("###FINISHED INIT PLUGINSCRIPT######");
 
 }
 
