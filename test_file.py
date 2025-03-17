@@ -5,7 +5,7 @@ import argparse
 # Set up argument parsing
 parser = argparse.ArgumentParser(description="Run Godot with a specific project path.")
 parser.add_argument("path", help="The project path to open with Godot.")
-parser.add_argument("--godot", default=r"godot\Godot_v4.3-stable_win64.exe", help="The Godot executable path.")
+parser.add_argument("--godot", default=r"godot", help="The Godot executable path.")
 
 # Parse the arguments
 args = parser.parse_args()
