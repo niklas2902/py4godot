@@ -65,7 +65,7 @@ jobs:
           echo "$GODOT_PATH" >> $GITHUB_PATH
       
           # Verify installation with full path
-          ./godot.exe --version || echo "Failed to run Godot directly"
+          ./godot --version || echo "Failed to run Godot directly"
           
           # Go back to original directory
           cd ..
