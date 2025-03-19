@@ -88,9 +88,7 @@ def get_tree(Node node):
     return _ret
 
 cdef PyObject* to_py_object(val):
-    Py_INCREF(val)
-    cdef PyObject* py_val = <PyObject*>val # This needs to be decreffed in C++
-    return py_val # Just returning for converting
+    return <PyObject*>val # Just returning for converting
 
 """
 cdef unicode gd_string_name_to_py_string(core.StringName string_name):

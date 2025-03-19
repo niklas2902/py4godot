@@ -674,9 +674,9 @@ def generate_varargs_variants(mMethod):
 
     for arg in mMethod["arguments"]:
         if arg["type"] in builtin_classes:
-            res += f"{INDENT * 2}Variant* variant_{pythonize_name(arg['name'])} = new Variant({pythonize_name(arg['name'])});"
+            res += f"{INDENT * 2}std::shared_ptr<Variant> variant_{pythonize_name(arg['name'])} = std::make_shared<Variant>({pythonize_name(arg['name'])});"
         else:
-            res += f"{INDENT * 2}Variant* variant_{pythonize_name(arg['name'])} = new Variant(*{pythonize_name(arg['name'])});"
+            res += f"{INDENT * 2}std::shared_ptr<Variant> variant_{pythonize_name(arg['name'])} = std::make_shared<Variant>(*{pythonize_name(arg['name'])});"
         res = generate_newline(res)
     return res
 
@@ -686,7 +686,7 @@ def generate_variant_vector(mMethod):
     if mMethod["is_vararg"]:
         res += f"{INDENT * 2}std::vector<void*> argument_array{{}};"
         res = generate_newline(res)
-        res += f"{INDENT * 2}std::vector<Variant*> variant_argument_array{{}};"
+        res += f"{INDENT * 2}std::vector<std::shared_ptr<Variant>> variant_argument_array{{}};"
         res = generate_newline(res)
         if "arguments" in mMethod.keys():
             for arg in mMethod["arguments"]:
@@ -694,7 +694,7 @@ def generate_variant_vector(mMethod):
                 res = generate_newline(res)
         res += f"{INDENT * 2}for(auto& _variant: varargs){{"
         res = generate_newline(res)
-        res += f"{INDENT * 3}Variant* _var = new Variant(1);"
+        res += f"{INDENT * 3}std::shared_ptr<Variant> _var = std::make_shared<Variant>(1);"
         res = generate_newline(res)
         res += f'{INDENT * 3}_var->init_from_py_object_native_ptr(_variant, get_python_typename(_variant).c_str());'
         res = generate_newline(res)
@@ -716,15 +716,6 @@ def generate_delete_varargs_variants(mMethod):
         return ""
 
     if "arguments" in mMethod.keys():
-        for arg in mMethod["arguments"]:
-            res = generate_newline(res)
-            res += f"{INDENT * 2}delete variant_{pythonize_name(arg['name'])};"
-        res = generate_newline(res)
-        res += f"{INDENT * 2}for(auto& _variant:variant_argument_array){{"
-        res = generate_newline(res)
-        res += f"{INDENT * 3}delete _variant;"
-        res = generate_newline(res)
-        res += f"{INDENT * 2}}}"
         res = generate_newline(res)
 
     return res
@@ -783,7 +774,7 @@ def generate_variants(method):
         return result
     for arg in method["arguments"]:
         if arg["type"] == "Variant":
-            result += f"{INDENT*2}Variant* variant_{pythonize_name(arg['name'])} = new Variant(1);"
+            result += f"{INDENT*2}std::shared_ptr<Variant> variant_{pythonize_name(arg['name'])} = std::make_shared<Variant>(1);"
             result = generate_newline(result)
             result += f"{INDENT*2}std::string type_name_{pythonize_name(arg['name'])} = get_python_typename({pythonize_name(arg['name'])});"
             result = generate_newline(result)
@@ -835,8 +826,6 @@ def free_variants(mMethod):
             res += f"{INDENT * 2}if (functions::get_variant_get_type()(&variant_{pythonize_name(argument['name'])}->native_ptr) != GDEXTENSION_VARIANT_TYPE_OBJECT){{"
             res = generate_newline(res)
             res += f"{INDENT * 3}functions::get_variant_destroy()(&variant_{pythonize_name(argument['name'])}->native_ptr);"
-            res = generate_newline(res)
-            res += f"{INDENT * 3}free(variant_{pythonize_name(argument['name'])});"
             res = generate_newline(res)
             res += f"{INDENT*3}Py_DECREF({pythonize_name(argument['name'])});"
             res +=f"{INDENT*2}}}"
