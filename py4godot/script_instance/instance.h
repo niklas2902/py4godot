@@ -77,10 +77,17 @@ void c_instance_call(GDExtensionScriptInstanceDataPtr p_self, GDExtensionConstSt
     auto _ready = c_string_to_string_name("_ready");
     auto _enter_tree = c_string_to_string_name("_enter_tree");
     auto set_visible = c_string_to_string_name("visible");
+    auto _has_point = c_string_to_string_name("_has_point");
     r_error->error = GDExtensionCallErrorType::GDEXTENSION_CALL_ERROR_INVALID_METHOD;
     if(((InstanceData*)p_self)->is_placeholder && (name == _ready || name == _enter_tree)){
         return;
     }
+
+    if(name == _has_point){
+        return; // Fix problems with buttons not working at alls
+    }
+
+
     auto gil_state = PyGILState_Ensure();
     if (instance_has_method(p_self, p_method)){
         auto* p_instance = (InstanceData*)p_self;
