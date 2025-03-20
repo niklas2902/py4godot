@@ -10,7 +10,11 @@ new_python_path = "/lib/libpython3.12.dylib"
 parent_folder = "python"
 
 def is_main(path):
-    return "godot_bindings" in path and "main" in path
+    if "main" in path:
+        print(path)
+        print("build/darwin64/main.dylib" in path)
+        print("----------------------")
+    return "build/darwin64/main.dylib" in path
 
 def fix_macos_paths():
     # Recursively find all .dylib files
