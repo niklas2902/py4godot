@@ -5,7 +5,7 @@ Inspiration for this project was taken from: https://github.com/touilleMan/godot
 
 This project is currently in an early phase of development. Consider this more as a demo and don't use this for bigger projects. At the moment only Windows 64 bit and Linux 64 bit are supported.
 
-You can check out the api documenthation here: [Api Documentation](https://github.com/niklas2902/py4godot/wiki/API-Documentation)
+You can check out the api documentation here: [API Documentation](https://github.com/niklas2902/py4godot/wiki/API-Documentation)
 
 ## Supported Platforms
 - [ ] Windows 32 bit
@@ -18,7 +18,7 @@ You can check out the api documenthation here: [Api Documentation](https://githu
 
 ## Install
 Download the .zip from Releases, extract it and copy the folder into the addons folder on the root of your project.
-## Prerequesits
+## Prerequisites
 You need a Python 3 version of at least 3.11 with pip installed.
 
 ## How to build
@@ -34,7 +34,7 @@ $ pip install -r requirements.txt #load dependencies from the textfile requireme
 
 ```
 ### Generating files
-We want to generate the files, we will later use for the cython compilation like this:
+We want to generate the files we will later use for the cython compilation like this:
 ```console
 $ python generate.py
 ```
@@ -60,7 +60,7 @@ $ python build.py --target_platform=windows64 --compiler=msvc
 ```
 
 ### Linux
-Building for linux was testet on Ubuntu 20.04.4 LTS
+Building for linux was tested on Ubuntu 20.04.4 LTS
 #### Setting up a virtual environment (optional)
 The following code should be executed after cloning the repo
 ```console
@@ -68,13 +68,13 @@ $ python3 -m venv venv  # creating the folder with the virtual environment
 $ source venv/bin/activate  # starting the virtual environment
 $ pip install -r requirements.txt  # load dependencies from the text file requirements.txt
 ```
-If you are on Python 3.12, you unfortunately have to use this workarount:
+If you are on Python 3.12, you unfortunately have to use this workaround:
 ```console
 $ pip install setuptools #Weirdly cython on linux depends on distutils. But python3.12 doesn't provide this anymore. So we have to use this workaround
 $ python copy_distutils.py
 ```
 ### Generating files
-We want to generate the files, we will later use for the cython compilation like this:
+We want to generate the files we will later use for the cython compilation like this:
 ```console
 $ python generate.py
 ```
