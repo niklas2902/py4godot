@@ -91,7 +91,8 @@ def generate_import():
               "from libcpp.vector cimport vector\n"
               "from py4godot.enums.enums cimport *\n"
               "from py4godot.utils.utils cimport *\n"
-              "cimport py4godot.utils.utils as py_utils\n"
+              "cimport py4godot.utils.utils as c_utils\n"
+              "import py4godot.utils.functools as  functools\n"
               "from py4godot.classes.typedarrays cimport *\n"
               "from libcpp.memory cimport make_shared\n"
               "from py4godot.utils.smart_cast import smart_cast, register_cast_function\n")
@@ -433,7 +434,9 @@ def generate_method_headers(mMethod):
         res = f"{INDENT}@staticmethod"
         res = generate_newline(res)
         return res
-    return ""
+    res = f"{INDENT}@functools.native_method"
+    res = generate_newline(res)
+    return res
 
 
 def generate_native_params(mMethod):
@@ -1349,7 +1352,7 @@ def generate_constructor(classname):
 
     res += f"{INDENT}def __init__(self):"
     res = generate_newline(res)
-    res += f"{INDENT * 2}if py_utils.shouldCreateObject:"
+    res += f"{INDENT * 2}if c_utils.shouldCreateObject:"
     res = generate_newline(res)
     res += f"{INDENT * 3}self.{class_['name']}_internal_class_ptr = construct_{class_['name']}()"
     res = generate_newline(res)
@@ -1879,9 +1882,9 @@ def generate_str_method(class_):
     res += f"{INDENT}def __str__(self):"
     res = generate_newline(res)
     if class_["name"] == "String":
-        res += f"{INDENT*2}return py_utils.gd_string_to_py_string(self)"
+        res += f"{INDENT*2}return c_utils.gd_string_to_py_string(self)"
     if class_["name"] == "StringName":
-        res += f"{INDENT*2}return py_utils.gd_string_name_to_py_string(self)"
+        res += f"{INDENT*2}return c_utils.gd_string_name_to_py_string(self)"
     res = generate_newline(res)
     return res
 

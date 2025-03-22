@@ -2,6 +2,8 @@
 import inspect, traceback
 from cython.operator cimport dereference
 from cpython cimport Py_INCREF, Py_DECREF, PyObject
+
+from py4godot.utils.print_tools import print_error
 from py4godot.utils.utils cimport *
 from py4godot.instance_data.InstanceData cimport *
 cimport py4godot.classes.cpp_bridge as cppbridge
@@ -93,6 +95,25 @@ def fix_string_behavior(gd_object, val, name):
         error("Exception in method_list:", e)
     return method_infos
 """
+
+cdef api GDExtensionBool is_overridden(GDExtensionScriptInstanceDataPtr p_instance, GDExtensionConstStringNamePtr p_name):
+    py_log("instance_has_method")
+    cdef InstanceData* instance = <InstanceData*>p_instance
+
+    cdef StringName method_name = StringName.__new__(StringName)
+    cdef cppbridge.StringName internal_method_name = cppbridge.StringName.new_static((<void**>p_name)[0]) #TODO: Create unconst helper
+    method_name.StringName_internal_class_ptr = make_shared[cppbridge.StringName](internal_method_name)
+    cdef unicode py_method_name_str
+    try:
+        py_method_name_str = gd_string_name_to_py_string(method_name)
+    except Exception as e:
+        print_error(f"Exception: {e}") # !this gets generated print_error
+    method = getattr(<object>(instance.owner), py_method_name_str, None)
+    #print_error(py_method_name_str)
+    #print_error(method)
+    #print_error(hasattr(method, "gd_is_native"))
+    return int(method and not hasattr(method, "gd_is_native"))
+
 cdef api GDExtensionBool instance_has_method(GDExtensionScriptInstanceDataPtr p_instance, GDExtensionConstStringNamePtr p_name) noexcept:
     py_log("instance_has_method")
     cdef InstanceData* instance = <InstanceData*>p_instance
@@ -105,7 +126,8 @@ cdef api GDExtensionBool instance_has_method(GDExtensionScriptInstanceDataPtr p_
         py_method_name_str = gd_string_name_to_py_string(method_name)
     except Exception as e:
         print_error(f"Exception: {e}") # !this gets generated print_error
-    return hasattr(<object>(instance.owner), py_method_name_str)
+    method = getattr(<object>(instance.owner), py_method_name_str, None)
+    return int(method != None)
 
 cdef api MethodCallData instance_call(GDExtensionScriptInstanceDataPtr p_self, GDExtensionConstStringNamePtr p_method, const GDExtensionConstVariantPtr *p_args, GDExtensionInt p_argument_count, GDExtensionVariantPtr r_return, GDExtensionCallError *r_error) noexcept:
     py_log("instance_call")
@@ -119,6 +141,7 @@ cdef api MethodCallData instance_call(GDExtensionScriptInstanceDataPtr p_self, G
         py_method_name_str = gd_string_name_to_py_string(method_name)
     except Exception as e:
         print_error_detailed('PyScriptInstance.pyx', 'instance_call', 112, f"Exception: {e}") # !this gets generated print_error
+    print_error(f"call:{py_method_name_str}")
     cdef Variant var
     args = []
     cdef object instance_object = <object>instance.owner

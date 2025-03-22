@@ -82,15 +82,10 @@ void c_instance_call(GDExtensionScriptInstanceDataPtr p_self, GDExtensionConstSt
     if(((InstanceData*)p_self)->is_placeholder && (name == _ready || name == _enter_tree)){
         return;
     }
-
-    if(name == _has_point){
-        return; // Fix problems with buttons not working at alls
-    }
-
-
     auto gil_state = PyGILState_Ensure();
-    if (instance_has_method(p_self, p_method)){
-        auto* p_instance = (InstanceData*)p_self;
+    auto* p_instance = (InstanceData*)p_self;
+
+    if (is_overridden(p_self, p_method)){
         MethodCallData data = instance_call(p_self, p_method, p_args, p_argument_count, r_return, r_error);
         if(data.has_value){
             Variant res_var =  Variant();

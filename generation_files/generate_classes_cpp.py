@@ -601,6 +601,11 @@ def generate_method_bind(current_class, method):
                f"""&_method_name.godot_owner, {get_hash(method)});"""
         res = generate_newline(res)
         res += f"{INDENT * 2}assert(method_bind != nullptr);"
+        res = generate_newline(res)
+        if has_return_value(method):
+            res += f"{INDENT * 2}if (method_bind == nullptr)return _ret;"
+        else:
+            res += f"{INDENT * 2}if (method_bind == nullptr)return;"
 
     res = generate_newline(res)
     return res
@@ -936,6 +941,8 @@ def get_godot_owner_core(method):
         return "NULL"
     return "&godot_owner"
 
+def has_return_value(method):
+    return "return_value" in method.keys() or "return_type" in method.keys()
 
 def generate_callback(class_, method):
     if is_static(method):
