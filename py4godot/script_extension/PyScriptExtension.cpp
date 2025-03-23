@@ -15,13 +15,18 @@
 #include "py4godot/script_extension/signal_builder.h"
 #include <cstdlib>  // For system()
 
-//#include <direct.h>  // For _getcwd() on Windows
 #include <cassert>
 #include "Python.h"
 #include <algorithm>
 #include <iostream>
-#include <unistd.h>  // For getcwd()
+#ifdef _WIN32
+    #include <direct.h>  // For _getcwd() on Windows
+    #define getcwd _getcwd
+#else
+    #include <unistd.h>  // For getcwd() on Linux/macOS
+#endif
 
+#define PATH_MAX 1024
 GDExtensionPtrOperatorEvaluator operator_equal_string_namescript;
 PyScriptExtension extension;
 
