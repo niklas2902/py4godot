@@ -65,8 +65,11 @@ jobs:
           [Environment]::SetEnvironmentVariable("PATH", "$env:PATH;C:\Godot", [EnvironmentVariableTarget]::Machine)
           
           # Verify Godot is in PATH
-          $env:Path = [System.Environment]::GetEnvironmentVariable("Path", "Machine") + ";" + [System.Environment]::GetEnvironmentVariable("Path", "User")
-          godot --version || Write-Host "Failed to run Godot from PATH"
+          try {
+              godot --version
+          } catch {
+              Write-Host "Failed to run Godot from PATH"
+          }
 
       - name: Cache py4godot/classes directory
         id: cache-py4godot-classes
@@ -151,6 +154,10 @@ jobs:
             Write-Host "Godot not found in PATH"
             Write-Host "Current PATH: $env:Path"
           }
+          
+          # Test with Python's shutil.which
+          $pythonTest = python -c "import shutil; print('Godot path:', shutil.which('godot'))"
+          Write-Host $pythonTest
 
       - name: Build
         shell: bash
