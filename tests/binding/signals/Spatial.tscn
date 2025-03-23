@@ -8,7 +8,6 @@
 [node name="TestRunner" type="Node3D" parent="."]
 script = ExtResource("2")
 test_object_path = NodePath("../TestObject")
-hello = 0
 
 [node name="TestObject" type="Node3D" parent="."]
 script = ExtResource("2_hkbyt")
