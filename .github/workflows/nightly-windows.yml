@@ -141,6 +141,7 @@ jobs:
           fi
     
       - name: Build
+        shell: bash
         run: python build.py --target_platform=windows64 --compiler=gcc -create_plugin=False -buildtype=release -run_tests=True -download_godot=True
 
       - name: Create cache
