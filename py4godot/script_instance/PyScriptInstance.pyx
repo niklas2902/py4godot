@@ -9,6 +9,8 @@ from py4godot.instance_data.InstanceData cimport *
 cimport py4godot.classes.cpp_bridge as cppbridge
 from py4godot.classes.core cimport *
 from py4godot.classes.Object cimport *
+from py4godot.classes.RefCounted cimport RefCounted
+
 from py4godot.core.variant4.Variant4 cimport *
 from py4godot.utils.print_tools import *
 from libc.stdlib cimport malloc, free
@@ -112,7 +114,7 @@ cdef api GDExtensionBool is_overridden(GDExtensionScriptInstanceDataPtr p_instan
     #print_error(py_method_name_str)
     #print_error(method)
     #print_error(hasattr(method, "gd_is_native"))
-    return int(method and not hasattr(method, "gd_is_native"))
+    return method != None and not hasattr(method, "gd_is_native")
 
 cdef api GDExtensionBool instance_has_method(GDExtensionScriptInstanceDataPtr p_instance, GDExtensionConstStringNamePtr p_name) noexcept:
     py_log("instance_has_method")
@@ -129,6 +131,9 @@ cdef api GDExtensionBool instance_has_method(GDExtensionScriptInstanceDataPtr p_
     method = getattr(<object>(instance.owner), py_method_name_str, None)
     return int(method != None)
 
+cdef unrefcount(RefCounted object):
+    object.casted_from = 1 #Set a value, so that the object doesn't get deleted. TODO: get rid of this. this is a workaround
+
 cdef api MethodCallData instance_call(GDExtensionScriptInstanceDataPtr p_self, GDExtensionConstStringNamePtr p_method, const GDExtensionConstVariantPtr *p_args, GDExtensionInt p_argument_count, GDExtensionVariantPtr r_return, GDExtensionCallError *r_error) noexcept:
     py_log("instance_call")
     cdef InstanceData* instance = <InstanceData*>p_self
@@ -141,7 +146,6 @@ cdef api MethodCallData instance_call(GDExtensionScriptInstanceDataPtr p_self, G
         py_method_name_str = gd_string_name_to_py_string(method_name)
     except Exception as e:
         print_error_detailed('PyScriptInstance.pyx', 'instance_call', 112, f"Exception: {e}") # !this gets generated print_error
-    print_error(f"call:{py_method_name_str}")
     cdef Variant var
     args = []
     cdef object instance_object = <object>instance.owner
@@ -155,6 +159,8 @@ cdef api MethodCallData instance_call(GDExtensionScriptInstanceDataPtr p_self, G
             arg = <object>var.get_converted_value(True)
             if type(arg) in types_to_decref :#or isinstance(arg, Object):
                 Py_DECREF(arg)
+            if isinstance(arg, RefCounted):
+               unrefcount(arg) #TODO: fix this. this is a workaround, so that python doesn't delete this.
             args.append(arg)
         cast_helpers.clear_vals() # free memory again, now that we are safe
         if not hasattr(instance_object,py_method_name_str):
