@@ -19,3 +19,4 @@ def get_godot_dir(platform):
         godot_path = shutil.which("godot")
         if godot_path:
             return godot_path
+        return ""
