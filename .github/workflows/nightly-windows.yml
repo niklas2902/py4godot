@@ -163,6 +163,10 @@ jobs:
         shell: bash
         run: python build.py --target_platform=windows64 --compiler=gcc -create_plugin=False -buildtype=release -run_tests=True -download_godot=True
 
+      - name: Echo testlog.txt
+        if: always() # Ensures it runs even if the previous step fails
+        run: cat build/windows64/meson-logs/testlog.txt
+
       - name: Create cache
         run: python meson_scripts/create_cache.py
 
