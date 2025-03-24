@@ -89,25 +89,63 @@ def copy_main(platform):
              f"build/final/{platform}/{config_data['python_ver']}-{platform}/python/bin/pythonscript.dylib")
 
 
+def onerror(func, path, exc_info):
+    print(f"Error removing {path}: {exc_info}")
+
+
 def copy_tests(platform):
-    """copy plugin inside godot"""
     core_tests = glob.glob("tests/core/*")
     binding_tests = glob.glob("tests/binding/*")
+
+    print("Core tests:", core_tests)
+    print("Binding tests:", binding_tests)
+
+    if not core_tests and not binding_tests:
+        print("Warning: No test directories found! Check if files exist in CI.")
+
     for core_test in core_tests + binding_tests:
-        print(f"copy_to:{core_test}")
+        print(f"Copying to: {core_test}")
 
-        if os.path.exists(f"{core_test}/addons/py4godot/cpython-3.12.4-{platform}"):
-            shutil.rmtree(f"{core_test}/addons/py4godot/cpython-3.12.4-{platform}/", onerror=onerror)
-        copytree(f"build/final/{platform}/cpython-3.12.4-{platform}",
-                 f"{core_test}/addons/py4godot/cpython-3.12.4-{platform}")
-        shutil.copy("build_resources/python.gdextension", f"{core_test}/addons/py4godot/python.gdextension")
-        shutil.copy("build_resources/dependencies.txt", f"{core_test}/addons/py4godot/dependencies.txt")
-        shutil.copy("build_resources/install_dependencies.py", f"{core_test}/addons/py4godot/install_dependencies.py")
+        src_path = f"build/final/{platform}/cpython-3.12.4-{platform}"
+        dest_path = f"{core_test}/addons/py4godot/cpython-3.12.4-{platform}"
+
+        print("Checking source path:", src_path)
+        print("Checking destination path:", dest_path)
+
+        if not os.path.exists(src_path):
+            print(f"Error: Source path {src_path} does not exist!")
+            continue
+
+        if os.path.exists(dest_path):
+            try:
+                shutil.rmtree(dest_path, onerror=onerror)
+                print(f"Removed existing directory: {dest_path}")
+            except Exception as e:
+                print(f"Failed to remove {dest_path}: {e}")
+
+        try:
+            shutil.copytree(src_path, dest_path)
+            print(f"Copied {src_path} to {dest_path}")
+        except Exception as e:
+            print(f"Error copying {src_path} to {dest_path}: {e}")
+
+        resources = [
+            ("build_resources/python.gdextension", "python.gdextension"),
+            ("build_resources/dependencies.txt", "dependencies.txt"),
+            ("build_resources/install_dependencies.py", "install_dependencies.py"),
+            ("build_resources/Python.svg", "Python.svg"),
+        ]
+
+        for src, filename in resources:
+            dest_file = f"{core_test}/addons/py4godot/{filename}"
+            if not os.path.exists(dest_file) or filename == "Python.svg":
+                try:
+                    shutil.copy(src, dest_file)
+                    print(f"Copied {src} to {dest_file}")
+                except Exception as e:
+                    print(f"Error copying {src} to {dest_file}: {e}")
+
         download_get_pip(f"{core_test}/addons/py4godot")
-
-        python_svg_dest = f"{core_test}/addons/py4godot/" + "/Python.svg"
-        if not os.path.exists(python_svg_dest):
-            shutil.copy("build_resources/Python.svg", python_svg_dest)
 
 
 def copy_stub_files(platform):

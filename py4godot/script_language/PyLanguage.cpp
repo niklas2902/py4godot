@@ -441,7 +441,6 @@ void PyLanguage::deinit_theme_icon(){
 
   void PyLanguage::_reload_all_scripts(GDExtensionTypePtr res){
     print_error("_reload_all_scripts");
-    assert(false);
   }
 
   void PyLanguage::_reload_tool_script(Script& script, bool soft_reload, GDExtensionTypePtr res){}

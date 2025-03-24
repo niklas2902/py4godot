@@ -13,7 +13,7 @@ def print_meson(platform):
     except Exception as e:
         print(f"Exception occurred:{e.with_traceback()}")
 
-def print_tree(path, layer, max_layer=3):
+def print_tree(path, layer, max_layer=10):
     if layer >= max_layer:
         return
     l = glob.glob(f"{path}/*", recursive=True)
@@ -26,5 +26,5 @@ if __name__ == "__main__":
     print_tree(f"{meson_dir}", 0)
     print_tree(f"{dir_godot_extract_to}", 0)
     print("print root")
-    print_tree(os.getcwd().rstrip("\\"), 0, 4)
+    print_tree(os.getcwd().rstrip("\\"), 0, 10)
     print(os.getcwd())
