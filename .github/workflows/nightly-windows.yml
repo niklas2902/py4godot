@@ -189,3 +189,4 @@ jobs:
 
       - name: Print structure
         run: python meson_scripts/print_tools.py
+        if: always() # Ensures it runs even if the previous step fails
