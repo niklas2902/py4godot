@@ -1401,7 +1401,7 @@ GDExtensionClassCallVirtual get_virtual(void *p_userdata, GDExtensionConstString
     }
 
 
-    assert(false); // There are methods not being handled
+    //assert(false); // There are methods not being handled
     return nullptr;
 }
 
