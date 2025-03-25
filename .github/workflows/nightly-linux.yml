@@ -65,7 +65,7 @@ jobs:
         run: python meson_scripts/print_tools.py
 
       - name: Generate files
-        run: sudo python generate.py -dev_build=True
+        run: python generate.py -dev_build=True
 
       - name: Conditional cythonize
         shell: bash
