@@ -83,7 +83,7 @@ jobs:
           fi
 
       - name: Build
-        run: sudo python build.py --target_platform=linux64 --compiler=gcc -create_plugin=False -buildtype=release -run_tests=True -download_godot=True
+        run: python build.py --target_platform=linux64 --compiler=gcc -create_plugin=False -buildtype=release -run_tests=True -download_godot=True
 
       - name: Create cache
         run: python meson_scripts/create_cache.py
