@@ -7,6 +7,7 @@ import zstandard
 import tarfile
 import os
 from shutil import copytree, ignore_patterns
+import stat
 
 platform_dict = {"windows64": "x86_64-pc-windows-msvc-install_only_stripped", "windows32": "i686-pc-windows-msvc-install_only_stripped",
                  "linux64": "x86_64-unknown-linux-gnu-install_only_stripped", "darwin64":"aarch64-apple-darwin-install_only_stripped",}
