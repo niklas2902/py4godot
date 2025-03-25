@@ -88,6 +88,12 @@ def copy_to_build(export_folder, platform):
     if (not os.path.isdir(copy_dir + "/" + platform + "/" + export_folder)):
         copytree(python_files_dir + "/" + export_folder, copy_dir + "/" + platform + "/" + export_folder,
                  ignore=ignore_patterns("build"))  # build and lib are unnecessary
+    if "linux" in platform:
+        # Ensure Python is executable
+        python_bin = os.path.join(target_dir, "python/bin/python3")
+        if os.path.exists(python_bin):
+            st = os.stat(python_bin)
+            os.chmod(python_bin, st.st_mode | stat.S_IXUSR | stat.S_IXGRP | stat.S_IXOTH)  #
 
 def delete_pip( platform, export_folder):
     """The builtin pip is broken. We install it manually later"""
