@@ -109,7 +109,7 @@ endif
 if build_machine.system() == 'linux'
 endif
 
-godot_program = find_program('godot')
+godot_program = find_program('godot', required:false)
 sources = glob.stdout().strip().split('\n')
 
 cppsources = glob_cpp.stdout().strip().split('\n')
