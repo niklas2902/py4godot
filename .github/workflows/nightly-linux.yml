@@ -65,7 +65,7 @@ jobs:
         run: python meson_scripts/print_tools.py
 
       - name: Generate files
-        run: python generate.py -dev_build=True
+        run: sudo python generate.py -dev_build=True
 
       - name: Conditional cythonize
         shell: bash
@@ -83,7 +83,7 @@ jobs:
           fi
 
       - name: Build
-        run: python build.py --target_platform=linux64 --compiler=gcc -create_plugin=False -buildtype=release -run_tests=True -download_godot=True
+        run: sudo python build.py --target_platform=linux64 --compiler=gcc -create_plugin=False -buildtype=release -run_tests=True -download_godot=True
 
       - name: Create cache
         run: python meson_scripts/create_cache.py
