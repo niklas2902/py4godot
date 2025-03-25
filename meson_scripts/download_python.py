@@ -91,11 +91,15 @@ def copy_to_build(export_folder, platform):
                  ignore=ignore_patterns("build"))  # build and lib are unnecessary
     if "linux" in platform:
         # Ensure Python is executable
-        target_dir = copy_dir + "/" + platform + "/" + export_folder
+        target_dir = python_files_dir + "/" + export_folder
         python_bin = os.path.join(target_dir, "python/bin/python3")
+        print("path:", python_bin)
         if os.path.exists(python_bin):
+            print("change access")
             st = os.stat(python_bin)
             os.chmod(python_bin, st.st_mode | stat.S_IXUSR | stat.S_IXGRP | stat.S_IXOTH)
+        else:
+            print("access could not be chagned")
 
 def delete_pip( platform, export_folder):
     """The builtin pip is broken. We install it manually later"""
