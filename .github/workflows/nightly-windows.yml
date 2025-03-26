@@ -110,9 +110,6 @@ jobs:
           python -m pip install -r requirements.txt
           python -m pip install flake8
 
-      - name: Print structure
-        run: python meson_scripts/print_tools.py
-
       - name: Install Mesa
         shell: cmd
         run: |
@@ -162,27 +159,6 @@ jobs:
       - name: Build
         shell: cmd
         run: python build.py --target_platform=windows64 --compiler=gcc -create_plugin=False -buildtype=release -run_tests=False
-
-      - name: Echo testlog.txt
-        if: always() # Ensures it runs even if the previous step fails
-        run: cat build/windows64/meson-logs/testlog.txt
-
-      - name: aabb_godot_stderr.log
-        if: always() # Ensures it runs even if the previous step fails
-        run: cat build/aabb_godot_stderr.log
-
-      - name: aabb_godot_stdout.log
-        if: always() # Ensures it runs even if the previous step fails
-        run: cat build/aabb_godot_stdout.log
-
-      - name: signals_godot_stderr.log
-        if: always() # Ensures it runs even if the previous step fails
-        run: cat build/signals_godot_stderr.log
-
-
-      - name: signals_godot_stdout.log
-        if: always() # Ensures it runs even if the previous step fails
-        run: cat build/signals_godot_stdout.log
 
       - name: Create cache
         run: python meson_scripts/create_cache.py
