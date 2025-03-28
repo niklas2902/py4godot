@@ -1,3 +1,4 @@
+import platform
 import subprocess
 import os
 import subprocess
@@ -5,9 +6,20 @@ import sys
 import argparse
 
 
-subprocess.run(["tests/libraries/numpy/addons/py4godot/cpython-3.12.4-windows64/python/python.exe", "tests/libraries/numpy/addons/py4godot/get_pip.py"])
-subprocess.run(["tests/libraries/numpy/addons/py4godot/cpython-3.12.4-windows64/python/python.exe", "-m", "pip", "install", "numpy"])
+os_name = platform.system()
 
+if os_name == "Windows":
+    python_exe = "tests/libraries/numpy/addons/py4godot/cpython-3.12.4-windows64/python/python.exe"
+elif os_name == "Darwin":  # macOS
+    python_exe = "tests/libraries/numpy/addons/py4godot/cpython-3.12.4-macos64/python/python3"
+elif os_name == "Linux":
+    python_exe = "tests/libraries/numpy/addons/py4godot/cpython-3.12.4-linux64/python/python3"
+else:
+    raise RuntimeError(f"Unsupported OS: {os_name}")
+
+# Run the Python executable for the detected platform
+subprocess.run([python_exe, "tests/libraries/numpy/addons/py4godot/get_pip.py"])
+subprocess.run([python_exe, "-m", "pip", "install", "numpy"])
 # Set up argument parsing
 parser = argparse.ArgumentParser(description="Run Godot with a specific project path.")
 parser.add_argument("path", help="The project path to open with Godot.")
