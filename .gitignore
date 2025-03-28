@@ -55,6 +55,7 @@ tests/core/transform/addons/
 tests/core/transform2d/addons/
 tests/core/pool_array/addons/
 tests/binding/crash_on_call/addons/windows64/
+tests/numpy
 
 # py4godot specific files
 py4godot/core/variant4/cast_helpers.cpp

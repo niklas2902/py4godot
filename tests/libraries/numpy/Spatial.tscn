@@ -1,0 +1,23 @@
+[gd_scene load_steps=2 format=3 uid="uid://bx11ebu3iwgdm"]
+
+[ext_resource type="Script" path="res://TestRunner.py" id="2"]
+
+[node name="Node3D" type="Node3D"]
+
+[node name="TestRunner" type="Node3D" parent="."]
+_import_path = NodePath("")
+unique_name_in_owner = false
+process_mode = 0
+process_priority = 0
+process_physics_priority = 0
+process_thread_group = 0
+physics_interpolation_mode = 0
+auto_translate_mode = 0
+editor_description = ""
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+rotation_edit_mode = 0
+rotation_order = 2
+top_level = false
+visible = true
+visibility_parent = NodePath("")
+script = ExtResource("2")
