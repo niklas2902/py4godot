@@ -10,10 +10,10 @@ os_name = platform.system()
 
 if os_name == "Windows":
     python_exe = "tests/libraries/numpy/addons/py4godot/cpython-3.12.4-windows64/python/python.exe"
-elif os_name == "Darwin":  # macOS
-    python_exe = "tests/libraries/numpy/addons/py4godot/cpython-3.12.4-macos64/python/python3"
+elif os_name == "Darwin":
+    python_exe = "tests/libraries/numpy/addons/py4godot/cpython-3.12.4-macos64/python/bin/python3"
 elif os_name == "Linux":
-    python_exe = "tests/libraries/numpy/addons/py4godot/cpython-3.12.4-linux64/python/python3"
+    python_exe = "tests/libraries/numpy/addons/py4godot/cpython-3.12.4-linux64/python/bin/python3"
 else:
     raise RuntimeError(f"Unsupported OS: {os_name}")
 
