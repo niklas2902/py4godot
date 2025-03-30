@@ -1690,8 +1690,12 @@ def generate_array_set_item(class_):
         res = generate_newline(res)
 
         res += f"{INDENT * 2}(&self.{class_['name']}_internal_class_ptr.get()[0][index])[0] = value"
-    #    elif class_["name"] == "PackedByteArray":
-    #        res += f"{INDENT * 2}gdnative_interface.packed_byte_array_operator_index(self.godot_owner, index)[0] = value"
+
+    elif class_["name"] == "PackedByteArray":
+        res += f"{INDENT}def __setitem__(self,  index, value):"
+        res = generate_newline(res)
+
+        res += f"{INDENT * 2}(&self.{class_['name']}_internal_class_ptr.get()[0][index])[0] = value"
 
     elif class_["name"] == "PackedColorArray":
         res += f"{INDENT}def __setitem__(self,  index, value):"
@@ -1744,7 +1748,7 @@ def generate_array_get_item(class_):
     elif class_["name"] == "PackedBoolArray":
         res += generate_get_item_from_type_array(class_["name"], "bool")
     elif class_["name"] == "PackedByteArray":
-        res += f"{INDENT * 2}raise Exception('not implemented')"
+        res += generate_get_item_from_type_array(class_["name"], "byte")
 
     elif class_["name"] == "PackedColorArray":
         res += generate_get_item_from_type_array(class_["name"], "Color")

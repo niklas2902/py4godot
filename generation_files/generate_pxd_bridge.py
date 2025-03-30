@@ -91,6 +91,7 @@ from py4godot.core.variant4.Variant4 cimport *
 from libcpp.vector cimport vector
 from cpython cimport Py_INCREF, Py_DECREF, PyObject
 from libcpp.memory cimport shared_ptr
+ctypedef unsigned char byte
 
 cdef cppclass Error:
     pass
@@ -729,8 +730,8 @@ def generate_array_set_item(class_):
         res += f"{INDENT * 2}double& operator [](int index);"
     elif class_["name"] == "PackedBoolArray":
         res += f"{INDENT * 2}bool& operator [](int index);"
-    # elif class_["name"] == "PackedByteArray":
-    #    res += f"{INDENT*2}byte& operator [](int index);"
+    elif class_["name"] == "PackedByteArray":
+       res += f"{INDENT*2}byte& operator [](int index);"
 
     elif class_["name"] == "PackedColorArray":
         res += f"{INDENT * 2}shared_ptr[Color]& operator [](int index);"
