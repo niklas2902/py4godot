@@ -12,7 +12,7 @@ You can check out the api documentation here: [API Documentation](https://github
 - [x] Windows 64 bit
 - [ ] Linux 32 bit
 - [x] Linux 64 bit
-- [ ] macOS
+- [x] macOS
 - [ ] Android
 - [ ] iOS
 
@@ -107,7 +107,7 @@ from py4godot.signals import signal, SignalArg
 from py4godot.classes import gdclass
 from py4godot.classes.core import Vector3
 from py4godot.constants.constants import VECTOR3_UP
-from py4godot.classes.Node3D.Node3D import Node3D
+from py4godot.classes.Node3D import Node3D
 
 @gdclass
 class node3d(Node3D):
