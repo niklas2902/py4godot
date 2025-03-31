@@ -9,7 +9,7 @@ from cpython cimport Py_INCREF, Py_DECREF, PyObject
 from py4godot.utils.utils cimport *
 cimport py4godot.utils.utils as py_utils
 from libcpp.vector cimport vector
-from cpython.unicode cimport PyUnicode_AsUTF8
+from cpython.unicode cimport PyUnicode_AsUTF8, PyUnicode_Check
 from libcpp.string cimport string
 
 instantiated_classes = []
@@ -38,12 +38,15 @@ cdef api string get_type(PyObject* gd_class):
         return string()
 
     cdef object o
+    cdef object classname
     cdef const char * cname
     try:
         o = <object>gd_class
         classname = o.get_type()  # Python string
+        if not PyUnicode_Check(classname):
+            # Handle the case where classname is not a string
+            return string()
         cname = PyUnicode_AsUTF8(classname)  # Convert to C string
-
         if cname != NULL:
             return string(cname)  # Convert to std::string
 

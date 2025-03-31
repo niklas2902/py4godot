@@ -289,7 +289,9 @@ void PyScriptExtension::_inherits_script( Script* script, GDExtensionTypePtr res
 }
 void PyScriptExtension::_get_instance_base_type(GDExtensionTypePtr res){
    print_error("_get_instance_base_type");
+   auto gil_state = PyGILState_Ensure();
    const std::string type = get_type(transfer_object.class_);
+   PyGILState_Release(gil_state);
    String gd_string = String::new0();
    functions::get_string_new_with_utf8_chars()(&gd_string.godot_owner, type.c_str());
 

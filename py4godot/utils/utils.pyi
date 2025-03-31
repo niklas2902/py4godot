@@ -11,3 +11,5 @@ def get_window(node: Node) -> py4godot_window.Window: pass
 
 
 def get_tree(node: Node) -> py4godot_scenetree.SceneTree: pass
+
+def get_singleton(name:str) -> object: pass

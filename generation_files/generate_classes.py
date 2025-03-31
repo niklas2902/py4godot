@@ -907,7 +907,7 @@ def generate_get_type(classname):
     result = ""
     result += f"{INDENT}@staticmethod"
     result = generate_newline(result)
-    result += f"{INDENT}def get_type(self):"
+    result += f"{INDENT}def get_type():"
     result = generate_newline(result)
     result += f"{INDENT*2}return '{classname}'"
     result = generate_newline(result)

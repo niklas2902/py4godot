@@ -79,7 +79,7 @@ def get_window(Node node):
 
     return _ret
 
-cdef char * py_str_to_c_charptr(object py_str):
+cdef const char * py_str_to_c_charptr(object py_str):
     if not isinstance(py_str, str):
         raise TypeError("Expected a string")
 
@@ -87,7 +87,7 @@ cdef char * py_str_to_c_charptr(object py_str):
 
 singletons = dict()
 def get_singleton(name):
-    cdef char* c_name = py_str_to_c_charptr(name)
+    cdef const char* c_name = py_str_to_c_charptr(name)
     if name not in singletons.keys():
         singleton = Object.__new__(Object)
         singleton.Object_internal_class_ptr = get_singleton(c_name)
