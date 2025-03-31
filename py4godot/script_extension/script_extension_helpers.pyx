@@ -9,6 +9,8 @@ from cpython cimport Py_INCREF, Py_DECREF, PyObject
 from py4godot.utils.utils cimport *
 cimport py4godot.utils.utils as py_utils
 from libcpp.vector cimport vector
+from cpython.unicode cimport PyUnicode_AsUTF8
+from libcpp.string cimport string
 
 instantiated_classes = []
 
@@ -29,6 +31,29 @@ cdef api PyObject*  instantiate_class(PyObject* gd_class):
         return NULL
     instantiated_classes.append(o)
     return <PyObject*>o
+
+cdef api string get_type(PyObject* gd_class):
+    cdef object class_ = <object>gd_class
+    if class_ is None:
+        return string()
+
+    cdef object o
+    cdef const char * cname
+    try:
+        o = <object>gd_class
+        classname = o.get_type()  # Python string
+        cname = PyUnicode_AsUTF8(classname)  # Convert to C string
+
+        if cname != NULL:
+            return string(cname)  # Convert to std::string
+
+    except Exception as e:
+        print_error("Exception - getting type didn't work")
+        print_error(str(e).encode("utf-8"))
+        import traceback
+        print_error(traceback.format_exc().encode("utf-8"))
+
+    return string()
 
 cdef api void create_signals(PyObject* instance, vector[shared_ptr[BridgeDictionary]]& signals):
     cdef object py_instance = <object>instance

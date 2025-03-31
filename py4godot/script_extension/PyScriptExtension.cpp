@@ -288,7 +288,16 @@ void PyScriptExtension::_inherits_script( Script* script, GDExtensionTypePtr res
        print_error("_inherits_script");
 }
 void PyScriptExtension::_get_instance_base_type(GDExtensionTypePtr res){
-       print_error("_get_instance_base_type");
+   print_error("_get_instance_base_type");
+   const std::string type = get_type(transfer_object.class_);
+   String gd_string = String::new0();
+   functions::get_string_new_with_utf8_chars()(&gd_string.godot_owner, type.c_str());
+
+   auto variant_type = GDExtensionVariantType::GDEXTENSION_VARIANT_TYPE_STRING_NAME;
+   GDExtensionPtrConstructor constructor = functions::get_variant_get_ptr_constructor()(variant_type, 2);
+   GDExtensionTypePtr _args[1];
+   _args[0] = &gd_string.godot_owner;
+   constructor(((void**)res), _args);
 }
 
 void PyScriptExtension::update_instance_data(InstanceData* gd_instance, PyObject* instance){
