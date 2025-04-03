@@ -230,9 +230,8 @@ if __name__ == "__main__":
             typed_arrays_names.add(generate_typed_array_name(typed_array))
             arrays.append(my_array_cls)
         arrays = sorted(arrays, key = lambda array: array["name"])
-
-        res = ""
         for class_ in arrays:
+            res = ""
             print(class_["name"])
             res += f"from py4godot.classes.cpp_bridge cimport {class_['name']} as CPP{class_['name']} "
             res = generate_newline(res)
@@ -240,6 +239,6 @@ if __name__ == "__main__":
             res = generate_newline(res)
             res += generate_pxd_class(class_)
 
-        text_to_write = "# distutils: language=c++\n"+res
+            text_to_write = "# distutils: language=c++\n"+res
 
-        write_if_different(f"py4godot/classes/typedarrays.pxd", text_to_write)
+            write_if_different(f"py4godot/classes/{class_['name']}.pxd", text_to_write)

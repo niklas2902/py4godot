@@ -154,8 +154,6 @@ def generate_constructors(class_):
 def generate_class_imports(classes):
     result = "import py4godot.classes.core as __core__"
     result = generate_newline(result)
-    result += "import py4godot.classes.typedarrays as __typedarrays__"
-    result = generate_newline(result)
     result += "from py4godot.signals import BuiltinSignal"
     result = generate_newline(result)
     for class_ in classes:
@@ -472,7 +470,7 @@ def ungodottype(type_):
         else:
             return type_
     elif type_ in typed_arrays_names:
-        return f"__typedarrays__.{type_}"
+        return f"__{type_.lower()}__.{type_}"
     if (type_ in classes):
         return f"__{type_.lower()}__.{type_}"
 
@@ -503,7 +501,7 @@ def ungodottype_type_array(type_, class_name):
         else:
             return type_
     elif type_ in typed_arrays_names:
-        return f"__typedarrays__.{type_}"
+        return f"__{type_.lower()}__.{type_}"
     if (type_ in classes):
         return f"__{type_.lower()}__.{type_}"
 
@@ -582,6 +580,8 @@ def get_classes_to_import(classes):
                 if ("return_value" in method.keys()):
                     if (unbitfield_type(get_class_from_enum(method["return_value"]["type"])) in normal_classes):
                         classes_to_import.update(get_children(get_class_from_enum(method["return_value"]["type"])))
+                    if "typedarray::" in method["return_value"]["type"]:
+                        classes_to_import.update(generate_typed_array_name(method["return_value"]["type"]))
                 if ("arguments" not in method.keys()):
                     continue
                 for argument in method["arguments"]:
@@ -591,7 +591,8 @@ def get_classes_to_import(classes):
                         type = argument["type"].lstrip("enum::")
                         if type.split(".")[0] in normal_classes:
                             classes_to_import.add(type.split(".")[0])
-
+                    if "typedarray::" in argument["type"]:
+                        classes_to_import.update(generate_typed_array_name(argument["type"]))
         if "properties" in class_.keys():
             for prop in class_["properties"]:
 
@@ -900,7 +901,6 @@ if __name__ == "__main__":
         for cls in obj["builtin_classes"]:
             if cls["name"] == "Array":
                 array_cls = cls
-        print("typedarrays:", collect_typed_arrays(obj["classes"] + obj["builtin_classes"]))
         for typed_array in collect_typed_arrays(obj["classes"] + obj["builtin_classes"]):
             my_array_cls = copy.deepcopy(array_cls)
             my_array_cls["name"] = generate_typed_array_name(typed_array)
@@ -913,5 +913,6 @@ if __name__ == "__main__":
             generate_classes([class_], f"py4godot/classes/{class_['name']}.pyi")
 
         is_core = True
-        generate_classes(arrays, f"py4godot/classes/typedarrays.pyi", is_core=False, is_typed_array=True)
+        for array in arrays:
+            generate_classes([array], f"py4godot/classes/{array['name']}.pyi", is_core=False, is_typed_array=True)
         generate_classes(obj["builtin_classes"], f"py4godot/classes/core.pyi", is_core=True)

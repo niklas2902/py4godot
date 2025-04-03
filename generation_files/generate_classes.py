@@ -93,7 +93,6 @@ def generate_import():
               "from py4godot.utils.utils cimport *\n"
               "cimport py4godot.utils.utils as c_utils\n"
               "import py4godot.utils.functools as  functools\n"
-              "from py4godot.classes.typedarrays cimport *\n"
               "from libcpp.memory cimport make_shared\n"
               "from py4godot.utils.smart_cast import smart_cast, register_cast_function\n")
     return result
@@ -239,7 +238,9 @@ def generate_return_value(classname, method_):
         elif ret_val.type == "Variant":
             result += f"{INDENT * 2}cdef PyObject* {ret_val.name} = NULL"
         elif "typedarray" in ret_val.type:
-            result += f"{INDENT * 2}cdef {generate_typed_array_name(ret_val.type)} _ret = {generate_typed_array_name(ret_val.type)}.__new__({generate_typed_array_name(ret_val.type)})"
+            result += (f"{INDENT * 2}cdef  py4godot_{generate_typed_array_name(ret_val.type).lower()}.{generate_typed_array_name(ret_val.type)} _ret = "
+                       f"py4godot_{generate_typed_array_name(ret_val.type).lower()}.{generate_typed_array_name(ret_val.type)}.__new__("
+                       f"py4godot_{generate_typed_array_name(ret_val.type).lower()}.{generate_typed_array_name(ret_val.type)})")
         elif "enum::" in ret_val.type:
             result += f"{INDENT * 2}cdef int {ret_val.name}"
         else:
@@ -1218,7 +1219,7 @@ def import_type(type_, classname):
     elif type_ == "str":
         return type_
     elif "TypedArray" in type_:
-        return untypearray(type_)
+        return "py4godot_" + untypearray(type_).lower()+ "." + type_
     return "py4godot_" + type_.lower() + "." + type_
 
 
@@ -1304,18 +1305,32 @@ def get_classes_to_import(classes):
                     if (unbitfield_type(get_class_from_enum(method["return_value"]["type"])) in normal_classes):
                         if not "enum" in method["return_value"]["type"]:
                             classes_to_import.append(get_class_from_enum(method["return_value"]["type"]))
+                    if "typedarray::" in method["return_value"]["type"]:
+                        classes_to_import.append(generate_typed_array_name(method["return_value"]["type"]))
                 if ("arguments" not in method.keys()):
                     continue
                 for argument in method["arguments"]:
                     if argument["type"] in normal_classes:
                         classes_to_import.append(argument["type"])
+                    if "typedarray::" in argument["type"]:
+                        classes_to_import.append(generate_typed_array_name(argument["type"]))
 
         if class_["name"] in typed_arrays_names:
             if class_["name"].replace("TypedArray", "") in builtin_classes:
                 continue
             classes_to_import.append(simplify_type(class_["name"].replace("TypedArray", "")))
 
-    return classes_to_import
+        if "properties" in class_.keys():
+            for property in class_["properties"]:
+                if "typedarray::" in property["type"]:
+                    classes_to_import.append(generate_typed_array_name(property["type"]))
+
+
+    return remove_duplicates(classes_to_import)
+
+def remove_duplicates(lst):
+    seen = set()
+    return [x for x in lst if not (x in seen or seen.add(x))]
 
 
 def generate_constructor(classname):
@@ -1996,6 +2011,7 @@ if __name__ == "__main__":
             arrays.append(my_array_cls)
 
         arrays = sorted(arrays, key= lambda key:key["name"])
-        generate_classes(arrays, f"py4godot/classes/typedarrays.pyx", is_core=False, is_typed_array=True)
+        for array in arrays:
+            generate_classes([array], f"py4godot/classes/{array['name']}.pyx", is_core=False, is_typed_array=True)
 
         generate_classes(obj["builtin_classes"], f"py4godot/classes/core.pyx", is_core=True)

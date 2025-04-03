@@ -37,7 +37,6 @@ def main():
         "py4godot/pluginscript_api/utils/*.pyx",
         "py4godot/godot_bindings/binding4_godot4.pyx",
         "py4godot/classes/core.pyx",
-        "py4godot/classes/typedarrays.pyx",
     ]
 
     files_to_cythonize = []
