@@ -144,6 +144,7 @@ endforeach
 #test('test_vector2', godot_program, args : ['--path', 'tests/core/vector2', '--headless'], workdir:meson.source_root(),  timeout:1000, is_parallel:false)
 #test('test_rect2', godot_program, args : ['--path', 'tests/core/rect2', '--headless'], workdir:meson.source_root(), timeout:1000, is_parallel:false)
 test('test_aabb', py, args:['test_file.py', 'tests/core/aabb', godot_program],  workdir:meson.source_root(), timeout:1000, is_parallel:false)
+test('test_color', py, args:['test_file.py', 'tests/core/color', godot_program],  workdir:meson.source_root(), timeout:1000, is_parallel:false)
 #test('test_basis', godot_program, args : ['--path', 'tests/core/basis', '--headless'], workdir:meson.source_root(), timeout:1000, is_parallel:false)
 #test('test_array', godot_program, args : ['--path', 'tests/core/array', '--headless'], workdir:meson.source_root(), timeout:1000, is_parallel:false)
 #test('test_color', godot_program, args : ['--path', 'tests/core/color', '--headless'], workdir:meson.source_root(), timeout:1000, is_parallel:false)

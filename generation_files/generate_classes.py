@@ -999,7 +999,7 @@ def generate_member_getter(class_, member):
         body += f"{INDENT * 2}_ret.set_gdowner(_ret.{member.type_}_internal_class_ptr.get().get_godot_owner())"
         body = generate_newline(body)
     else:
-        body += f"{INDENT * 2}cdef {member.type_} _ret = self.{class_}_internal_class_ptr.get().py_member_get_{member.name}()"
+        body += f"{INDENT * 2}cdef {ungodottype(member.type_)} _ret = self.{class_}_internal_class_ptr.get().py_member_get_{member.name}()"
     body = generate_newline(body)
     body += f"{INDENT * 2}return _ret"
     body = generate_newline(body)

@@ -1255,7 +1255,7 @@ def generate_properties(class_):
 
 def generate_member_getter(class_, member):
     res = ""
-    res += f"{INDENT}{make_ptr(unbitfield_type(unenumize_type((member.type_))))} {class_}::py_member_get_{member.name}()" + "{"
+    res += f"{INDENT}{make_ptr(unbitfield_type(unenumize_type((ungodottype(member.type_)))))} {class_}::py_member_get_{member.name}()" + "{"
     res = generate_newline(res)
     res += f"{INDENT}auto _ret = member_get_{member.name}();"
     res = generate_newline(res)
@@ -1264,7 +1264,7 @@ def generate_member_getter(class_, member):
     res += f"{INDENT}}}"
     res = generate_newline(res)
 
-    res += f"{INDENT}{unbitfield_type(unenumize_type((member.type_)))} {class_}::member_get_{member.name}()" + "{"
+    res += f"{INDENT}{unbitfield_type(unenumize_type((ungodottype(member.type_))))} {class_}::member_get_{member.name}()" + "{"
     res = generate_newline(res)
     res += f"{INDENT * 2}String _member_name_string = String::new0();"
     res = generate_newline(res)
@@ -1275,7 +1275,7 @@ def generate_member_getter(class_, member):
     res += f"{INDENT * 2}GDExtensionPtrGetter getter = functions::get_variant_get_ptr_getter()({generate_variant_type(class_)},&_member_name.godot_owner);"
     res = generate_newline(res)
     if member.type_ == "int" or member.type_ == "float" or member.type_ == "double":
-        res += f"{INDENT * 2}{member.type_} _ret;"
+        res += f"{INDENT * 2}{ungodottype(member.type_)} _ret;"
     else:
         res += f"{INDENT * 2}{member.type_} _ret = {member.type_}::new0();"
     res = generate_newline(res)
