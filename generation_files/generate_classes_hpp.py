@@ -404,9 +404,9 @@ def generate_member_getter(class_, member):
     res = ""
     res += f"{INDENT}"
     res = generate_newline(res)
-    res += f"{INDENT}{member.type_} member_get_{member.name}();"
+    res += f"{INDENT}{ungodottype(member.type_)} member_get_{member.name}();"
     res = generate_newline(res)
-    res += f"{INDENT}{make_ptr(member.type_)} py_member_get_{member.name}();"
+    res += f"{INDENT}{make_ptr(ungodottype(member.type_))} py_member_get_{member.name}();"
     res = generate_newline(res)
     return res
 
