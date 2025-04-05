@@ -85,18 +85,6 @@ cdef const char * py_str_to_c_charptr(str py_str):
 
     return PyUnicode_AsUTF8(py_str)  # Returns a pointer to internal UTF-8 buffer
 
-singletons = dict()
-cpdef get_singleton(str name):
-    cdef const char* c_name = py_str_to_c_charptr(name)
-    cdef Object singleton
-    if name not in singletons.keys():
-        singleton = Object.__new__(Object)
-        singleton.Object_internal_class_ptr = get_instance(<char*>c_name)
-        if singleton.Object_internal_class_ptr.get().get_godot_owner() == NULL:
-            return None
-        singletons[name] = smart_cast(singleton)
-    return singletons[name]
-
 def get_tree(Node node):
 
     cdef py4godot_scenetree.SceneTree _ret = py4godot_scenetree.SceneTree.__new__(py4godot_scenetree.SceneTree)

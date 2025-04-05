@@ -224,11 +224,3 @@ static std::string get_python_typename(PyObject* get_val) {
 static std::shared_ptr<godot::Dictionary> empty_dictionary_pointer(){
     return std::shared_ptr<Dictionary>();
 }
-
- static std::shared_ptr<Object> get_instance(char* name){
-    StringName class_name = c_string_to_string_name(name);
-    class_name.shouldBeDeleted = true;
-    std::shared_ptr<Object> singleton = std::make_shared<Object>();
-    std::shared_ptr<Object> object = Engine::get_instance()->py_get_singleton(std::make_shared<StringName>(class_name));
-    return singleton;
-}
