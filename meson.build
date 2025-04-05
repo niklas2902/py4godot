@@ -154,4 +154,5 @@ test('test_aabb', py, args:['test_file.py', 'tests/core/aabb', godot_program],  
 #test('test_transform', godot_program, args : ['--path', 'tests/core/transform', '--headless'], workdir:meson.source_root(), timeout:1000, is_parallel:false)
 #test('test_transform2d', godot_program, args : ['--path', 'tests/core/transform2d', '--headless'], workdir:meson.source_root(), timeout:1000, is_parallel:false)
 test('test_signals', py, args:['test_file.py', 'tests/binding/signals', godot_program], workdir:meson.source_root(), timeout:100, is_parallel:false)
+test('test_singletons', py, args:['test_file.py', 'tests/binding/singletons', godot_program], workdir:meson.source_root(), timeout:100, is_parallel:false)
 test('test_numpy', py, args:['tests/libraries/numpy/test_file.py', 'tests/libraries/numpy', godot_program], workdir:meson.source_root(), timeout:100, is_parallel:false)
