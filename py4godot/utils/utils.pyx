@@ -4,11 +4,12 @@ from py4godot.utils.test_utils cimport *
 from libc.stdlib cimport malloc, free
 from cpython.ref cimport Py_INCREF, Py_DECREF
 from py4godot.classes.Node cimport *
+from py4godot.classes.cpp_bridge cimport Object as CPPObject
 cimport py4godot.classes.Viewport as py4godot_viewport
 cimport py4godot.classes.SceneTree as py4godot_scenetree
 cimport py4godot.classes.Window as py4godot_window
-
-
+from cpython.unicode cimport PyUnicode_AsUTF8
+from py4godot.utils.smart_cast import smart_cast
 cdef core.StringName py_c_string_to_string_name(char* string):
     cdef core.StringName gd_string_name = core.StringName.__new__(core.StringName)
     gd_string_name.StringName_internal_class_ptr = c_string_to_string_name_ptr(string)
@@ -78,6 +79,20 @@ def get_window(Node node):
 
     return _ret
 
+cdef char * py_str_to_c_charptr(object py_str):
+    if not isinstance(py_str, str):
+        raise TypeError("Expected a string")
+
+    return PyUnicode_AsUTF8(py_str)  # Returns a pointer to internal UTF-8 buffer
+
+singletons = dict()
+def get_singleton(name):
+    cdef char* c_name = py_str_to_c_charptr(name)
+    if name not in singletons.keys():
+        singleton = Object.__new__(Object)
+        singleton.Object_internal_class_ptr = get_singleton(c_name)
+        singletons[name] = smart_cast(singleton)
+    return singletons[name]
 
 def get_tree(Node node):
 

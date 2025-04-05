@@ -895,6 +895,8 @@ def generate_common_methods(class_):
         result += generate_get_py_script_method()
         result += generate_destroy_object_method()
 
+    result += generate_get_type(class_["name"])
+    result += generate_newline(result)
     result += generate_cinit(class_)
     result += generate_new_static(class_)
     if not is_singleton(class_["name"]):
@@ -902,6 +904,15 @@ def generate_common_methods(class_):
 
     return result
 
+def generate_get_type(classname):
+    result = ""
+    result += f"{INDENT}@staticmethod"
+    result = generate_newline(result)
+    result += f"{INDENT}def get_type(self):"
+    result = generate_newline(result)
+    result += f"{INDENT*2}return '{classname}'"
+    result = generate_newline(result)
+    return result
 
 def generate_get_py_script_method():
     result = ""
