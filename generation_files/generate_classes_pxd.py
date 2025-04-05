@@ -28,10 +28,12 @@ def generate_enums(class_):
         return ""
     res = ""
     for enum in class_["enums"]:
-        res += f"cpdef enum {class_['name']}__{enum['name']}:"
+        if enum["name"] == "Axis" and class_["name"] in builtin_classes and not is_correct_axis(class_, enum):
+            continue
+        res += f"cpdef enum {enum['name']}:"
         res = generate_newline(res)
         for enum_value in enum["values"]:
-            res += f"{INDENT}{class_['name']}__{enum_value['name']} = {enum_value['value']}"
+            res += f"{INDENT}{enum_value['name']} = {enum_value['value']}"
             res = generate_newline(res)
     res = generate_newline(res)
     return res
@@ -84,6 +86,9 @@ def generate_properties(class_):
                 result += f"{INDENT}cdef object py__{property['name']}"
                 result = generate_newline(result)
     return result
+
+def is_correct_axis(class_, enum):
+    return class_["name"] == "Vector4" and enum["name"] == "Axis"
 
 def generate_pxd_class(pxd_class):
     result = ""
