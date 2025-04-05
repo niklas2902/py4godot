@@ -1,6 +1,6 @@
 import json
 CLASSES = ["Node", "Node3D", "Input", "InputEvnet", "InputEventMouseButton",
-           "InputEventMouseMotion", "Shape2D","GLTFCamera"]
+           "InputEventMouseMotion", "Shape2D","GLTFCamera", "Engine"]
 dependencies:set = set()
 class ReturnType:
     def __init__(self, name, type_):

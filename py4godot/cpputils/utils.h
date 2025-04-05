@@ -3,6 +3,7 @@
 #include "py4godot/godot_bindings/main.h"
 #include "Python.h"
 #include "functions.h"
+#include "py4godot/cppclasses/Engine/Engine.h"
 #include <memory>
 #include <stdlib.h>
 #include <string>
@@ -222,13 +223,4 @@ static std::string get_python_typename(PyObject* get_val) {
 
 static std::shared_ptr<godot::Dictionary> empty_dictionary_pointer(){
     return std::shared_ptr<Dictionary>();
-}
-
- static std::shared_ptr<Object> get_instance(char* name){
-    StringName class_name = c_string_to_string_name(name);
-    class_name.shouldBeDeleted = true;
-    Object singleton = Object();
-    GDExtensionObjectPtr object = functions::get_global_get_singleton()(&class_name.godot_owner);
-    singleton.set_godot_owner(object);
-    return std::make_shared<Object>(singleton);
 }
