@@ -96,6 +96,7 @@ def onerror(func, path, exc_info):
 def copy_tests(platform):
     core_tests = glob.glob("tests/core/*")
     binding_tests = glob.glob("tests/binding/*")
+    library_tests = glob.glob("tests/libraries/*")
 
     print("Core tests:", core_tests)
     print("Binding tests:", binding_tests)
@@ -103,7 +104,7 @@ def copy_tests(platform):
     if not core_tests and not binding_tests:
         print("Warning: No test directories found! Check if files exist in CI.")
 
-    for core_test in core_tests + binding_tests:
+    for core_test in core_tests + binding_tests + library_tests:
         print(f"Copying to: {core_test}")
 
         src_path = f"build/final/{platform}/cpython-3.12.4-{platform}"

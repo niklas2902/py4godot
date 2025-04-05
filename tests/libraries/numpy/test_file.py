@@ -8,12 +8,27 @@ import argparse
 
 os_name = platform.system()
 
+def force_executable(python_exe):
+    if os.path.exists(python_exe):
+        if os.access(python_exe, os.X_OK):
+            print(f"{python_exe} is already executable")
+        else:
+            print(f"{python_exe} is NOT executable. Trying to fix...")
+            os.chmod(python_exe, 0o755)  # Grant execute permission
+            if os.access(python_exe, os.X_OK):
+                print(f"Successfully made {python_exe} executable!")
+            else:
+                print(f"Failed to make {python_exe} executable. Check permissions.")
+    else:
+        print(f"{python_exe} does not exist!")
+
 if os_name == "Windows":
     python_exe = "tests/libraries/numpy/addons/py4godot/cpython-3.12.4-windows64/python/python.exe"
-elif os_name == "Darwin":  # macOS
-    python_exe = "tests/libraries/numpy/addons/py4godot/cpython-3.12.4-macos64/python/python3"
+elif os_name == "Darwin":
+    python_exe = "tests/libraries/numpy/addons/py4godot/cpython-3.12.4-macos64/python/bin/python3"
 elif os_name == "Linux":
-    python_exe = "tests/libraries/numpy/addons/py4godot/cpython-3.12.4-linux64/python/python3"
+    python_exe = "tests/libraries/numpy/addons/py4godot/cpython-3.12.4-linux64/python/bin/python3"
+    force_executable(python_exe)
 else:
     raise RuntimeError(f"Unsupported OS: {os_name}")
 

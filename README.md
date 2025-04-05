@@ -5,14 +5,17 @@ Inspiration for this project was taken from: https://github.com/touilleMan/godot
 
 This project is currently in an early phase of development. Consider this more as a demo and don't use this for bigger projects. At the moment only Windows 64 bit and Linux 64 bit are supported.
 
+Examples for this plugin can be found here: [Exmaples](https://github.com/niklas2902/py4godot-examples)
+
 You can check out the api documentation here: [API Documentation](https://github.com/niklas2902/py4godot/wiki/API-Documentation)
+
 
 ## Supported Platforms
 - [ ] Windows 32 bit
 - [x] Windows 64 bit
 - [ ] Linux 32 bit
 - [x] Linux 64 bit
-- [ ] macOS
+- [x] macOS
 - [ ] Android
 - [ ] iOS
 
@@ -107,7 +110,7 @@ from py4godot.signals import signal, SignalArg
 from py4godot.classes import gdclass
 from py4godot.classes.core import Vector3
 from py4godot.constants.constants import VECTOR3_UP
-from py4godot.classes.Node3D.Node3D import Node3D
+from py4godot.classes.Node3D import Node3D
 
 @gdclass
 class node3d(Node3D):

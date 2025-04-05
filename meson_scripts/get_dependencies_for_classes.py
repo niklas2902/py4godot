@@ -13,13 +13,25 @@ dependencies_stack = []
 
 def add_to_dependencies_stack(cls):
     if (cls not in dependencies and not "enum:" in cls and not "bitfield:" in cls and cls not in builtin_classes
-            and not "typedarray:" in cls and not "Variant" in cls):
+             and not "Variant" in cls):
+
         dependencies_stack.append(get_class_for_name(cls))
-        dependencies.add(cls)
+        if "typedarray::" in cls:
+            dependencies.add(generate_typed_array_name(cls))
+        else:
+            dependencies.add(cls)
+
+def generate_typed_array_name(name):
+    return (name.split("::")[1] + "TypedArray").replace("24/17:", "").replace("27/0:TypedArray", "DictionaryTypedArray")
+
+
 def get_class_for_name(cls_name):
     for cls in classes:
         if cls_name == cls["name"]:
             return cls
+    if "typedarray::" in cls_name:
+        print(generate_typed_array_name(cls_name))
+        return generate_typed_array_name(cls_name)
     raise Exception()
 def simplify_type(type):
     list_types = type.split(",")
@@ -40,10 +52,13 @@ def resolve_dependencies(cls):
                 for arg in method["arguments"]:
                     type_ = arg["type"]
                     add_to_dependencies_stack(type_)
-            if "properties" in cls.keys():
-                for prop in cls["properties"]:
-                    if simplify_type(prop["type"]) in class_names:
-                        add_to_dependencies_stack(simplify_type(prop["type"]))
+    if "properties" in cls:
+        for prop in cls["properties"]:
+            if simplify_type(prop["type"]) in class_names:
+                add_to_dependencies_stack(simplify_type(prop["type"]))
+
+            elif "typedarray::" in prop["type"]:
+                dependencies.update([generate_typed_array_name(prop["type"])])
     if len(dependencies_stack) > 0:
         val = dependencies_stack.pop()
         resolve_dependencies(val)
