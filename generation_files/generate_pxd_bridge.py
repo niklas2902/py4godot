@@ -439,7 +439,7 @@ def generate_member_getter(class_, member):
     res = ""
     res += f"{INDENT}"
     res = generate_newline(res)
-    res += f"{INDENT * 2}{make_to_ptr(member.type_)} py_member_get_{member.name}();"
+    res += f"{INDENT * 2}{make_to_ptr(ungodottype(member.type_))} py_member_get_{member.name}();"
     res = generate_newline(res)
     return res
 
