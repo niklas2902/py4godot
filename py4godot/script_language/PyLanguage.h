@@ -18,6 +18,7 @@ namespace godot{
 
       public:
           static PyLanguage* constructor();
+          void destroy();
           void _init_values(); //# self-defined
           void _new(GDExtensionTypePtr res);
           void _get_name(GDExtensionTypePtr res);

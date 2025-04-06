@@ -30,6 +30,10 @@ bool string_names_equal_loader(StringName& left, StringName& right){
     return class_;
 }
 
+void PyResourceFormatLoader::destroy(){
+    functions::get_object_destroy()(this->godot_owner);
+}
+
 void* create_instance_loader(void* userdata){
     print_error("create_instance_loader");
     StringName class_name = c_string_to_string_name("ResourceFormatLoader");
