@@ -1090,6 +1090,8 @@ def generate_property(property, classname):
             result += f"{INDENT}def {pythonize_name(property['name'])}(self, Array value):"  # TODO remove, when properties finally are the same types as functions
         elif classname in typed_arrays_names:
             result += f"{INDENT}def {pythonize_name(property['name'])}(self, {import_type(unvariant_type_array(unnodepath(unstring(unstringname(untypearray(simplify_type(property['type']))))), classname), classname)} value):"
+        elif "typedarray" in property['type']:
+            result += f"{INDENT}def {pythonize_name(property['name'])}(self, Array value):"
         else:
             result += f"{INDENT}def {pythonize_name(property['name'])}(self, {import_type(objectify_type(unnodepath(unstringname(unvariant(unstring(untypearray(simplify_type(property['type']))))))), classname)} value):"
         result = generate_newline(result)
@@ -1330,12 +1332,6 @@ def get_classes_to_import(classes):
             if class_["name"].replace("TypedArray", "") in builtin_classes:
                 continue
             classes_to_import.append(simplify_type(class_["name"].replace("TypedArray", "")))
-
-        if "properties" in class_.keys():
-            for property in class_["properties"]:
-                if "typedarray::" in property["type"]:
-                    classes_to_import.append(generate_typed_array_name(property["type"]))
-
 
     return remove_duplicates(classes_to_import)
 

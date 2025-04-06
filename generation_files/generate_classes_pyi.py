@@ -643,6 +643,29 @@ def generate_operators_for_class(class_name):
     res = generate_newline(res)
     return res
 
+def is_correct_axis(class_, enum):
+    return class_["name"] == "Vector4" and enum["name"] == "Axis"
+
+def generate_enums(class_):
+    if not "enums" in class_.keys():
+        return ""
+    res = ""
+    for enum in class_["enums"]:
+        if enum["name"] == "Axis" and class_["name"] in builtin_classes and not is_correct_axis(class_, enum):
+            continue
+        res += f"class {enum['name']}:"
+        res = generate_newline(res)
+        for enum_value in enum["values"]:
+            enum_type_name = rename_enum_value(enum_value["name"])
+            res += f"{INDENT}{enum_type_name}:int = {enum_value['value']}"
+            res = generate_newline(res)
+    res = generate_newline(res)
+    return res
+
+def rename_enum_value(enum_type_name):
+    enum_type_name = enum_type_name.replace("TYPE_", "KIND_")  # Rename as this leads to problems
+    enum_type_name = enum_type_name.replace("OP_", "OPERATOR_")  # Rename as this leads to problems
+    return enum_type_name
 
 def generate_classes(classes, filename, is_core=False, is_typed_array=False):
     res = generate_import()
@@ -665,6 +688,8 @@ def generate_classes(classes, filename, is_core=False, is_typed_array=False):
     for class_ in classes:
         if (class_["name"] in IGNORED_CLASSES):
             continue
+        res = generate_newline(res)
+        res += generate_enums(class_)
         res = generate_newline(res)
         res += f"class {class_['name']}({get_base_class(class_)}):"
         res = generate_newline(res)

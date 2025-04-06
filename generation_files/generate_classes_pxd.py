@@ -28,13 +28,24 @@ def generate_enums(class_):
         return ""
     res = ""
     for enum in class_["enums"]:
-        res += f"cpdef enum {class_['name']}__{enum['name']}:"
+        if enum["name"] == "Axis" and class_["name"] in builtin_classes and not is_correct_axis(class_, enum):
+            continue
+        name = enum["name"]
+        res += f"cpdef enum {name}:"
         res = generate_newline(res)
         for enum_value in enum["values"]:
-            res += f"{INDENT}{class_['name']}__{enum_value['name']} = {enum_value['value']}"
+            enum_type_name = rename_enum_value(enum_value["name"])
+            res += f"{INDENT}{enum_type_name} = {enum_value['value']}"
             res = generate_newline(res)
     res = generate_newline(res)
     return res
+
+
+def rename_enum_value(enum_type_name):
+    enum_type_name = enum_type_name.replace("TYPE_", "KIND_")  # Rename as this leads to problems
+    enum_type_name = enum_type_name.replace("OP_", "OPERATOR_")  # Rename as this leads to problems
+    return enum_type_name
+
 
 def generate_signals(cls):
     if not "signals" in cls.keys():
@@ -84,6 +95,9 @@ def generate_properties(class_):
                 result += f"{INDENT}cdef object py__{property['name']}"
                 result = generate_newline(result)
     return result
+
+def is_correct_axis(class_, enum):
+    return class_["name"] == "Vector4" and enum["name"] == "Axis"
 
 def generate_pxd_class(pxd_class):
     result = ""
