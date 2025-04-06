@@ -27,12 +27,10 @@ void godot::init_py_language(){
     std::shared_ptr<godot::ResourceSaver> resource_saver = godot::ResourceSaver::get_instance();
     std::shared_ptr<godot::Engine> engine = godot::Engine::get_instance();
 
-    engine->is_in_physics_frame();
     engine->register_script_language(py_language);
     resource_loader->add_resource_format_loader(py_resource_format_loader, false);
 
     resource_saver->add_resource_format_saver(py_resource_format_saver, false);
-
 }
 
 void godot::deinit_py_language(){
@@ -44,7 +42,9 @@ void godot::deinit_py_language(){
 
     resource_loader->remove_resource_format_loader(py_resource_format_loader);
 
-    resource_saver->remove_resource_format_saver(py_resource_format_saver);
+   resource_saver->remove_resource_format_saver(py_resource_format_saver);
     deinit_func_names();
-
+    py_language->destroy();
+    py_resource_format_loader->destroy();
+    py_resource_format_saver->destroy();
 }

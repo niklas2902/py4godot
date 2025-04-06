@@ -18,6 +18,7 @@ namespace godot{
 
           static std::int64_t id_counter;
           static PyResourceFormatLoader* constructor(PyLanguage* language);
+          void destroy();
           void _init_values(); // self-defined
           void _get_recognized_extensions(GDExtensionTypePtr res);
           void _recognize_path( String& path, StringName& type, GDExtensionTypePtr res);

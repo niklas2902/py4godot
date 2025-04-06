@@ -9,6 +9,7 @@ namespace godot{
     class PyResourceFormatSaver:public ResourceFormatSaver{
       public:
           static PyResourceFormatSaver* constructor();
+          void destroy();
           void _init_values(); // self-defined
           void _save( Resource& resource, String& path, int flags, GDExtensionTypePtr res);
           void _set_uid( String& path, int uid, GDExtensionTypePtr res);
