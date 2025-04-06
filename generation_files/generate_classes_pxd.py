@@ -30,13 +30,22 @@ def generate_enums(class_):
     for enum in class_["enums"]:
         if enum["name"] == "Axis" and class_["name"] in builtin_classes and not is_correct_axis(class_, enum):
             continue
-        res += f"cpdef enum {enum['name']}:"
+        name = enum["name"]
+        res += f"cpdef enum {name}:"
         res = generate_newline(res)
         for enum_value in enum["values"]:
-            res += f"{INDENT}{enum_value['name']} = {enum_value['value']}"
+            enum_type_name = rename_enum_value(enum_value["name"])
+            res += f"{INDENT}{enum_type_name} = {enum_value['value']}"
             res = generate_newline(res)
     res = generate_newline(res)
     return res
+
+
+def rename_enum_value(enum_type_name):
+    enum_type_name = enum_type_name.replace("TYPE_", "KIND_")  # Rename as this leads to problems
+    enum_type_name = enum_type_name.replace("OP_", "OPERATOR_")  # Rename as this leads to problems
+    return enum_type_name
+
 
 def generate_signals(cls):
     if not "signals" in cls.keys():

@@ -656,10 +656,16 @@ def generate_enums(class_):
         res += f"class {enum['name']}:"
         res = generate_newline(res)
         for enum_value in enum["values"]:
-            res += f"{INDENT}{enum_value['name']}:int = {enum_value['value']}"
+            enum_type_name = rename_enum_value(enum_value["name"])
+            res += f"{INDENT}{enum_type_name}:int = {enum_value['value']}"
             res = generate_newline(res)
     res = generate_newline(res)
     return res
+
+def rename_enum_value(enum_type_name):
+    enum_type_name = enum_type_name.replace("TYPE_", "KIND_")  # Rename as this leads to problems
+    enum_type_name = enum_type_name.replace("OP_", "OPERATOR_")  # Rename as this leads to problems
+    return enum_type_name
 
 def generate_classes(classes, filename, is_core=False, is_typed_array=False):
     res = generate_import()
@@ -683,7 +689,7 @@ def generate_classes(classes, filename, is_core=False, is_typed_array=False):
         if (class_["name"] in IGNORED_CLASSES):
             continue
         res = generate_newline(res)
-        generate_enums(class_)
+        res += generate_enums(class_)
         res = generate_newline(res)
         res += f"class {class_['name']}({get_base_class(class_)}):"
         res = generate_newline(res)
