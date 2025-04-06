@@ -7,6 +7,7 @@
 #include <cassert>
 #include "py4godot/script_language/template.h"
 #include "py4godot/cppclasses/EditorInterface/EditorInterface.h"
+#include "py4godot/cppclasses/Engine/Engine.h"
 #include "py4godot/cppclasses/Theme/Theme.h"
 #include "py4godot/cppclasses/ImageTexture/ImageTexture.h"
 #include "py4godot/cppclasses/Image/Image.h"
@@ -28,6 +29,12 @@ bool theme_has_method(){
 
 void PyLanguage::init_theme_icon(){
     if(counter == 1){
+
+        auto engine = Engine::get_instance();
+        if (!engine->has_singleton(c_string_to_string_name("EditorInterface"))){
+            return;
+        }
+
         auto instance = EditorInterface::get_instance();
         if(!theme_has_method()){
             return;
