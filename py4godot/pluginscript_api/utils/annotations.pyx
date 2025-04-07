@@ -249,7 +249,7 @@ def gdmethod(func):
     cdef PropertyDescription property_description
     for arg in args:
         property_description = PropertyDescription(name = arg,
-                                                   type_=int,hint = BaseHint(),usage = 4096|6|32768,
+                                                   type_=object,hint = BaseHint(),usage = 4096|6|32768,
                                                    default_value=None)
         property_description.to_c()
         list_args.append(property_description)
