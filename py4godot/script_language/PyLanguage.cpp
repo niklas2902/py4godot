@@ -31,7 +31,8 @@ void PyLanguage::init_theme_icon(){
     if(counter == 1){
 
         auto engine = Engine::get_instance();
-        if (!engine->has_singleton(c_string_to_string_name("EditorInterface"))){
+        auto editor_interface_name = c_string_to_string_name("EditorInterface");
+        if (!engine->has_singleton(editor_interface_name)){
             return;
         }
 
