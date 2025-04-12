@@ -10,6 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     container:
       image: niklas2902/py4godot_arm64:4.4
+      options: --platform linux/arm64
 
     steps:
       - uses: actions/checkout@v3
