@@ -9,8 +9,7 @@ jobs:
     if: ${{ needs.check_date.outputs.should_run != 'false' }}
     runs-on: ubuntu-latest
     container:
-      image: niklas2902/py4godot:4.4
-      options: --platform linux/arm64
+      image: niklas2902/py4godot_arm64:4.4
 
     steps:
       - uses: actions/checkout@v3
