@@ -28,7 +28,7 @@ bool string_names_equal_save(StringName& left, StringName& right){
 }
 
 void PyResourceFormatSaver::destroy(){
-    functions::get_object_destroy()(this->godot_owner);
+    this->unreference();
 }
 
 void* create_instance_saver(void* userdata){

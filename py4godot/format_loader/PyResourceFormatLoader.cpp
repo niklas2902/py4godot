@@ -31,7 +31,7 @@ bool string_names_equal_loader(StringName& left, StringName& right){
 }
 
 void PyResourceFormatLoader::destroy(){
-    functions::get_object_destroy()(this->godot_owner);
+    this->unreference();
 }
 
 void* create_instance_loader(void* userdata){
