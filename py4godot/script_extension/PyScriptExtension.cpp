@@ -32,6 +32,55 @@ PyScriptExtension extension;
 
 bool pluginscript_initialized = false;
 
+void handle_python_error(PyObject* ptype, PyObject* pvalue, PyObject* ptraceback)
+{
+    // Retrieve the error type and value (already handled in your code)
+    PyObject* str_exc_type = PyObject_Repr(pvalue); // Exception as a unicode object
+    PyObject* pyStr = PyUnicode_AsEncodedString(str_exc_type, "utf-8", "Error ~");
+    char* strExcType = PyBytes_AS_STRING(pyStr);
+
+    // Print the exception type
+    print_error_user(strExcType);
+
+    // Use the Python traceback module to format the traceback object
+    PyObject* traceback_module = PyImport_ImportModule("traceback");
+    if (traceback_module != NULL) {
+        PyObject* traceback_list = PyObject_CallMethod(
+            traceback_module,
+            "format_exception",
+            "OOO",
+            ptype, pvalue, ptraceback
+        );
+
+        // Join the traceback list into a single string
+        if (traceback_list != NULL) {
+            PyObject* str_traceback = PyUnicode_Join(
+                PyUnicode_FromString(""),
+                traceback_list
+            );
+
+            if (str_traceback != NULL) {
+                // Convert traceback to a C string and print it
+                PyObject* pyStr_tb = PyUnicode_AsEncodedString(str_traceback, "utf-8", "Error ~");
+                char* traceback_str = PyBytes_AS_STRING(pyStr_tb);
+                print_error_user(traceback_str); // Print the formatted traceback
+
+                Py_XDECREF(pyStr_tb);
+                Py_XDECREF(str_traceback);
+            }
+            Py_XDECREF(traceback_list);
+        }
+        Py_XDECREF(traceback_module);
+    }
+
+    // Clean up the exception objects
+    Py_XDECREF(pyStr);
+    Py_XDECREF(str_exc_type);
+
+    assert(false);
+    return;
+}
+
 void init_pluginscript_api(){
     print_error("_init_pluginscript_api");
 
@@ -74,16 +123,20 @@ void init_pluginscript_api(){
     std::string pythonCode = "import sys\n"
                              "import os\n"
                              "sys.path.append('''" + std::string{ cwd} + "''')\n"
-                             "sys.path.append(''' " + std::string{cwd} + std::string{PYTHONPATH} + "''')"
-;
-
+                             "sys.path.append(''' " + std::string{cwd} + std::string{PYTHONPATH} + "''')";
     // Convert Python code to const char* for PyRun_SimpleString
     const char *pythonCodeWchar = pythonCode.c_str();
 
     // Execute Python code to add parent directory to sys.path
-    int runResult = PyRun_SimpleString(pythonCodeWchar);
-    if (runResult != 0) {
-        Py_Finalize();
+    PyObject* main_module = PyImport_AddModule("__main__");
+    PyObject* global_dict = PyModule_GetDict(main_module);
+    PyObject* result = PyRun_String(pythonCode.c_str(), Py_file_input, global_dict, global_dict);
+
+    if (PyErr_Occurred())
+    {
+        PyObject* ptype, * pvalue, * ptraceback;
+        PyErr_Fetch(&ptype, &pvalue, &ptraceback);
+        handle_python_error(ptype, pvalue, ptraceback);
         assert(false);
         return ;
     }
@@ -93,62 +146,16 @@ void init_pluginscript_api(){
     {
         PyObject* ptype, * pvalue, * ptraceback;
         PyErr_Fetch(&ptype, &pvalue, &ptraceback);
-
-        // Retrieve the error type and value (already handled in your code)
-        PyObject* str_exc_type = PyObject_Repr(pvalue); // Exception as a unicode object
-        PyObject* pyStr = PyUnicode_AsEncodedString(str_exc_type, "utf-8", "Error ~");
-        char* strExcType = PyBytes_AS_STRING(pyStr);
-
-        // Print the exception type
-        print_error(strExcType);
-
-        // Use the Python traceback module to format the traceback object
-        PyObject* traceback_module = PyImport_ImportModule("traceback");
-        if (traceback_module != NULL) {
-            PyObject* traceback_list = PyObject_CallMethod(
-                traceback_module,
-                "format_exception",
-                "OOO",
-                ptype, pvalue, ptraceback
-            );
-
-            // Join the traceback list into a single string
-            if (traceback_list != NULL) {
-                PyObject* str_traceback = PyUnicode_Join(
-                    PyUnicode_FromString(""),
-                    traceback_list
-                );
-
-                if (str_traceback != NULL) {
-                    // Convert traceback to a C string and print it
-                    PyObject* pyStr_tb = PyUnicode_AsEncodedString(str_traceback, "utf-8", "Error ~");
-                    char* traceback_str = PyBytes_AS_STRING(pyStr_tb);
-                    print_error(traceback_str); // Print the formatted traceback
-
-                    Py_XDECREF(pyStr_tb);
-                    Py_XDECREF(str_traceback);
-                }
-                Py_XDECREF(traceback_list);
-            }
-            Py_XDECREF(traceback_module);
-        }
-
-        PyErr_Print(); // Also print the default error to stderr (optional)
+        handle_python_error(ptype, pvalue, ptraceback);
         assert(false);
         return;
     }
     import_py4godot__pluginscript_api__utils__forward_print();
     if (PyErr_Occurred())
     {
-        PyObject *ptype, *pvalue, *ptraceback;
+        PyObject* ptype, * pvalue, * ptraceback;
         PyErr_Fetch(&ptype, &pvalue, &ptraceback);
-
-        PyObject* str_exc_type = PyObject_Repr(pvalue); //Now a unicode
-        PyObject* pyStr = PyUnicode_AsEncodedString(str_exc_type, "utf-8","Error ~");
-        char *strExcType = PyBytes_AS_STRING(pyStr);
-        PyErr_Print();
-        print_error(strExcType);
-        functions::get_print_error()(strExcType, "test", "test", 1, 1);
+        handle_python_error(ptype, pvalue, ptraceback);
         assert(false);
         return;
     }
@@ -156,13 +163,9 @@ void init_pluginscript_api(){
     import_py4godot__utils__instance_utils();
     if (PyErr_Occurred())
     {
-        PyObject *ptype, *pvalue, *ptraceback;
+        PyObject* ptype, * pvalue, * ptraceback;
         PyErr_Fetch(&ptype, &pvalue, &ptraceback);
-
-        PyObject* str_exc_type = PyObject_Repr(pvalue); //Now a unicode
-        PyObject* pyStr = PyUnicode_AsEncodedString(str_exc_type, "utf-8","Error ~");
-        char *strExcType = PyBytes_AS_STRING(pyStr);
-        PyErr_Print();
+        handle_python_error(ptype, pvalue, ptraceback);
         assert(false);
         return;
     }
@@ -170,13 +173,9 @@ void init_pluginscript_api(){
     import_py4godot__script_extension__script_extension_helpers();
     if (PyErr_Occurred())
     {
-        PyObject *ptype, *pvalue, *ptraceback;
+        PyObject* ptype, * pvalue, * ptraceback;
         PyErr_Fetch(&ptype, &pvalue, &ptraceback);
-
-        PyObject* str_exc_type = PyObject_Repr(pvalue); //Now a unicode
-        PyObject* pyStr = PyUnicode_AsEncodedString(str_exc_type, "utf-8","Error ~");
-        char *strExcType = PyBytes_AS_STRING(pyStr);
-        PyErr_Print();
+        handle_python_error(ptype, pvalue, ptraceback);
         assert(false);
         return;
     }
