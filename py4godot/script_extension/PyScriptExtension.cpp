@@ -122,8 +122,8 @@ void init_pluginscript_api(){
     // Convert parentDir to Python string format
     std::string pythonCode = "import sys\n"
                              "import os\n"
-                             "sys.path.append('''" + std::string{ cwd} + "''')\n"
-                             "sys.path.append(''' " + std::string{cwd} + std::string{PYTHONPATH} + "''')";
+                             "sys.path.append(r'''" + std::string{ cwd} + "''')\n"
+                             "sys.path.append(r''' " + std::string{cwd} + std::string{PYTHONPATH} + "''')";
     // Convert Python code to const char* for PyRun_SimpleString
     const char *pythonCodeWchar = pythonCode.c_str();
 
