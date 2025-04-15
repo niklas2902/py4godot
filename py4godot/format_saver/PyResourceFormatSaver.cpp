@@ -167,6 +167,8 @@ namespace saver{
             return saver::call_virtual_func__recognize_path;
         }
         assert(false); // There are methods not being handled
+        print_error_user("function not found  for function loader:");
+        print_error_user(res_string);
         return nullptr;
     }
 }

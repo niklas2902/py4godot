@@ -187,6 +187,7 @@ void init_pluginscript_api(){
     if (PyErr_Occurred())
     {
         PyErr_Print();
+        handle_python_error(ptype, pvalue, ptraceback);
         assert(false);
         return ;
     }
@@ -461,8 +462,6 @@ void PyScriptExtension::_get_script_signal_list(GDExtensionTypePtr res){
         add_variant_to_array(res, *var_signal_ptr);
 
     }
-    //assert(false);
-
 }
 void PyScriptExtension::_has_property_default_value( StringName& property, GDExtensionTypePtr res){
     print_error("_has_property_default_value");
@@ -1057,6 +1056,8 @@ GDExtensionClassCallVirtual get_virtual_script(void *p_userdata, GDExtensionCons
     }
 
     assert(false); // There are methods not being handled
+    print_error_user("function not found  for function loader:");
+    print_error_user(res_string);
     return nullptr;
 }
 
