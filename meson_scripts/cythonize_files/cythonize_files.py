@@ -7,16 +7,15 @@ import sys
 import multiprocessing as mp
 from tqdm import tqdm
 
-NTHREADS = 5  # Adjust based on your CPU
-BATCH_SIZE = 5  # Adjust based on your system's capabilities
+NTHREADS = 3  # Adjust based on your CPU
+BATCH_SIZE = 20  # Adjust based on your system's capabilities
 
 
 def cythonize_file(filename):
     """Cythonize a single file using a subprocess to isolate memory usage."""
     start_time = time.time()
     cmd = [
-        sys.executable, "-m", "cython",
-        "-a",  # annotate
+        sys.executable, "meson_scripts/cythonize_files/cythonize_one_file.py",
         filename
     ]
     result = subprocess.run(cmd, capture_output=True, text=True)
