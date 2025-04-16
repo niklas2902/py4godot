@@ -186,7 +186,8 @@ void init_pluginscript_api(){
     PyEval_InitThreads();
     if (PyErr_Occurred())
     {
-        PyErr_Print();
+        PyObject* ptype, * pvalue, * ptraceback;
+        PyErr_Fetch(&ptype, &pvalue, &ptraceback);
         handle_python_error(ptype, pvalue, ptraceback);
         assert(false);
         return ;
