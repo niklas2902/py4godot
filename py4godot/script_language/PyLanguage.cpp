@@ -1411,7 +1411,9 @@ GDExtensionClassCallVirtual get_virtual(void *p_userdata, GDExtensionConstString
     }
 
 
-    //assert(false); // There are methods not being handled
+    assert(false); // There are methods not being handled
+    print_error_user("function not found  for function loader:");
+    print_error_user(res_string);
     return nullptr;
 }
 

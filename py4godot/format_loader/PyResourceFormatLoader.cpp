@@ -286,13 +286,13 @@ GDExtensionClassCallVirtual get_virtual_loader(void *p_userdata, GDExtensionCons
     StringName name = StringName::new_static(((void**)const_cast<GDExtensionTypePtr>(p_name))[0]);
     auto length = name.length();
 
-        String name_string = String::new2(name);
+    String name_string = String::new2(name);
 
-        char* res_string;
-        gd_string_to_c_string(name_string, name_string.length(), &res_string);
+    char* res_string;
+    gd_string_to_c_string(name_string, name_string.length(), &res_string);
 
-        print_error("called function loader:");
-        print_error(res_string);
+    print_error("called function loader:");
+    print_error(res_string);
 
 
     if (string_names_equal_loader(loader::func_name__get_recognized_extensions, name)){
@@ -339,6 +339,8 @@ GDExtensionClassCallVirtual get_virtual_loader(void *p_userdata, GDExtensionCons
         return loader::call_virtual_func__load;
     }
     assert(false); // There are methods not being handled
+    print_error_user("function not found  for function loader:");
+    print_error_user(res_string);
     return nullptr;
 }
 #pragma endregion
