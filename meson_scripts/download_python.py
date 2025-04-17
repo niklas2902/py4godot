@@ -56,6 +56,11 @@ def download_file(platform, allow_copy=False):
         print("extracting .tar file")
         extract_archive(python_file.replace(".zst", ""), export_name)
 
+    if platform == "linux64":
+        print("change access")
+        st = os.stat(python_files_dir + "/" + export_name + "/" + "python" + "/" + "bin" + "/" + "python3")
+        os.chmod(python_files_dir + "/" + export_name + "/" + "python" + "/" + "bin" + "/" + "python3",
+                 st.st_mode | stat.S_IXUSR | stat.S_IXGRP | stat.S_IXOTH)
     if (allow_copy):
         create_sitecustomization(export_name, platform)
         delete_pip(platform, export_name)

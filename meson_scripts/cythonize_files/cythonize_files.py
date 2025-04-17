@@ -7,7 +7,7 @@ import sys
 import multiprocessing as mp
 from tqdm import tqdm
 
-NTHREADS = 3  # Adjust based on your CPU
+NTHREADS = 5  # Adjust based on your CPU
 BATCH_SIZE = 20  # Adjust based on your system's capabilities
 
 

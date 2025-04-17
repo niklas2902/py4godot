@@ -78,6 +78,7 @@ if build_machine.system() == 'darwin'
 endif
 if meson.has_external_property('is_mingw') and build_machine.system() == 'linux'
     message('dirs:')
+    py = import('python').find_installation('python3')
     message(meson.current_source_dir()+'/python_files/cpython-3.12.4-'+machine+platform_format + '/python')
     link_args += ['-static-libgcc', '-static-libstdc++'] #TODO: Is this good like this?
     lib_py = cc.find_library('python312', dirs:meson.current_source_dir()+'/python_files/cpython-3.12.4-'+machine+platform_format + '/python')
