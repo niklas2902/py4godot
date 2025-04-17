@@ -1,20 +1,55 @@
-import os
+import gc
 import glob
+import multiprocessing as mp
+import subprocess
+import sys
 import time
 
-from Cython.Build import cythonize
 from tqdm import tqdm
 
 from meson_scripts.get_dependencies_for_classes import generate_dev_build
 
 NTHREADS = 3  # Adjust based on your CPU
-BATCH_SIZE = 3  # Adjust based on your system's capabilities
+BATCH_SIZE = 20  # Adjust based on your system's capabilities
 
-def cythonize_batch(filenames):
+
+def cythonize_file(filename):
+    """Cythonize a single file using a subprocess to isolate memory usage."""
     start_time = time.time()
-    cythonize(filenames, language_level=3, nthreads=NTHREADS, annotate=True, cache=False)
+    cmd = [
+        sys.executable, "meson_scripts/cythonize_files/cythonize_one_file.py",
+        filename
+    ]
+    result = subprocess.run(cmd, capture_output=True, text=True)
+    if result.returncode != 0:
+        print(f"Error cythonizing {filename}:")
+        print(result.stderr)
+        return False
+
     end_time = time.time()
-    print("Total time elapsed for batch: {:.2f}".format(end_time - start_time))
+    print(f"Compiled {filename} in {end_time - start_time:.2f} seconds")
+    return True
+
+
+def process_batch(batch_files):
+    """Process a batch of files using a pool of workers."""
+    successful = 0
+    start_time = time.time()
+
+    # Use a process pool to parallelize work while isolating memory
+    with mp.Pool(processes=NTHREADS) as pool:
+        results = list(pool.map(cythonize_file, batch_files))
+
+    successful = sum(results)
+    end_time = time.time()
+
+    print(f"Batch completed: {successful}/{len(batch_files)} files in {end_time - start_time:.2f} seconds")
+    print("##############################")
+
+    # Force garbage collection after each batch
+    gc.collect()
+
+    return successful
 
 def main():
     file_patterns = [
@@ -50,7 +85,7 @@ def main():
 
     for i in tqdm(range(0, total_files, BATCH_SIZE), desc="Total progress:", smoothing=0.8):
         batch = files_to_cythonize[i:i+BATCH_SIZE]
-        cythonize_batch(batch)
+        process_batch(batch)
         print("##############################")
 
     print(f"Compiled {total_files} files")
