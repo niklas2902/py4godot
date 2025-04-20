@@ -480,9 +480,9 @@ def ungodottype(type_):
     if (type_ == "String"):
         return "str"
     if (type_ == "NodePath"):
-        return "__core__.NodePath|str"
+        return ("__core__." if not is_core else "") + "NodePath|str"
     if (type_ == "StringName"):
-        return "__core__.StringName|str"
+        return ("__core__." if not is_core else "") +"StringName|str"
     if (type_ == "Variant"):
         return "object"
     elif type_ in builtin_classes - {"float", "int", "Nil", "bool"}:
