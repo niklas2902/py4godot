@@ -291,7 +291,10 @@ def generate_method_headers(mMethod):
 def generate_method(class_, mMethod):
     res = ""
     args = generate_args(class_, mMethod)
-    ret = generate_children(class_['name'], get_ret_value(mMethod, class_))
+    if get_ret_value(mMethod, class_) == "Object" and is_core:
+        ret = "object"
+    else:
+        ret = generate_children(class_['name'], get_ret_value(mMethod, class_))
     def_function = f"{INDENT}def {pythonize_name(mMethod['name'])}({args})->{ret}:"
     res += generate_method_headers(mMethod)
     res += def_function
