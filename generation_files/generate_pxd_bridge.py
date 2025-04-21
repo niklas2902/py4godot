@@ -637,6 +637,19 @@ def generate_operators_for_class(class_name):
 def is_typed_array(classname):
     return classname in typed_arrays_names
 
+def generate_array_methods(class_):
+    if class_["name"] in ("PackedFloat32Array", "PackedFloat64Array", "PackedByteArray", "PackedInt32Array", "PackedInt64Array"):
+        if class_["name"] == "PackedFloat32Array":
+            return f"{INDENT*2}vector[float] to_vector()"
+        if class_["name"] == "PackedFloat64Array":
+            return f"{INDENT*2}vector[double] to_vector()"
+        if class_["name"] == "PackedByteArray":
+            return f"{INDENT * 2}vector[byte] to_vector()"
+        if class_["name"] == "PackedInt32Array":
+            return f"{INDENT * 2}vector[int32_t] to_vector()"
+        if class_["name"] == "PackedInt64Array":
+            return f"{INDENT * 2}vector[int64_t] to_vector()"
+    return ""
 
 def generate_classes(classes, filename, is_core=False):
     res = generate_import()
@@ -672,6 +685,9 @@ def generate_classes(classes, filename, is_core=False):
         res = generate_newline(res)
         res += generate_common_methods(class_)
         res += generate_special_methods(class_)
+        res = generate_newline(res)
+
+        res += generate_array_methods(class_)
         res = generate_newline(res)
         res += generate_construction(class_)
         res = generate_newline(res)

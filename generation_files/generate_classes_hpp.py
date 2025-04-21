@@ -747,6 +747,8 @@ def generate_classes(classes, filename, is_core=False):
         res = generate_newline(res)
         res += generate_special_methods(class_)
         res = generate_newline(res)
+        res += generate_array_methods(class_)
+        res = generate_newline(res)
         res += generate_construction(class_)
         res = generate_newline(res)
         if "methods" not in class_.keys():
@@ -850,6 +852,19 @@ def generate_cast(class_):
     res = generate_newline(res)
     return res
 
+def generate_array_methods(class_):
+    if class_["name"] in ("PackedInt32Array", "PackedInt64Array", "PackedFloat32Array", "PackedFloat64Array", "PackedByteArray"):
+        if class_["name"] == "PackedFloat32Array":
+            return f"{INDENT*1}std::vector<float> to_vector();"
+        if class_["name"] == "PackedFloat64Array":
+            return f"{INDENT*1}std::vector<double> to_vector();"
+        if class_["name"] == "PackedByteArray":
+            return f"{INDENT * 1}std::vector<byte> to_vector();"
+        if class_["name"] == "PackedInt32Array":
+            return f"{INDENT * 1}std::vector<int32_t> to_vector();"
+        if class_["name"] == "PackedInt64Array":
+            return f"{INDENT * 1}std::vector<int64_t> to_vector();"
+    return ""
 
 def generate_special_methods(class_):
     res = ""

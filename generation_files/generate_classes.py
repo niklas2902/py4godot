@@ -1928,8 +1928,30 @@ def generate_special_methods(class_):
     if class_["name"] in {"String", "StringName"}:
         res += generate_str_method(class_)
 
+    if class_["name"] in ("PackedInt32Array", "PackedInt64Array", "PackedFloat32Array", "PackedFloat64Array", "PackedByteArray"):
+        res += generate_special_methods_packed_array(class_)
+
     return res
 
+def generate_special_methods_packed_array(class_):
+    res = ""
+    if class_["name"] == "PackedByteArray":
+        return res #TODO enable by defining byte
+    packed_array_type = {"PackedInt32Array":"int32_t", "PackedInt64Array":"int64_t", "PackedFloat32Array":"float",
+                         "PackedFloat64Array":"double",
+                         "PackedByteArray":"uint8_t"}[class_['name']]
+    type_ = packed_array_type
+    res += f"{INDENT * 1}def to_list(self):"
+    res = generate_newline(res)
+    res += f"{INDENT*2}cdef vector[{type_}] value_vector = self.{class_['name']}_internal_class_ptr.get()[0].to_vector()"
+    res = generate_newline(res)
+    res += f"{INDENT * 2}cdef Py_ssize_t size = value_vector.size()"
+    res = generate_newline(res)
+    res += f"{INDENT*2}cdef {type_}[:] memory_view = <{type_}[:size]>value_vector.data()"
+    res = generate_newline(res)
+    res += f"{INDENT*2}return list(memory_view)"
+    res = generate_newline(res)
+    return res
 
 def generate_operators_set(class_):
     for operator in class_["operators"]:
