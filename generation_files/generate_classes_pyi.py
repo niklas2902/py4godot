@@ -841,6 +841,21 @@ def generate_special_methods(class_):
 
     if class_["name"] in classes - builtin_classes:
         res += generate_cast(class_["name"])
+    if class_["name"] in ("PackedInt32Array", "PackedInt64Array", "PackedFloat32Array", "PackedFloat64Array",
+                          "PackedByteArray"):
+        res += generate_special_methods_packed_array(class_)
+
+    return res
+
+def generate_special_methods_packed_array(class_):
+    res = ""
+    packed_array_type = \
+    {"PackedInt32Array": "int", "PackedInt64Array": "int", "PackedFloat32Array": "float",
+     "PackedFloat64Array": "float",
+     "PackedByteArray": "int"}[class_['name']]
+    type_ = packed_array_type
+    res += f"{INDENT * 1}def to_list(self) -> list[{packed_array_type}]:pass"
+    res = generate_newline(res)
     return res
 
 
