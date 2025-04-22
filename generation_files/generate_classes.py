@@ -1564,6 +1564,8 @@ def generate_classes(classes, filename, is_core=False, is_typed_array=False):
     else:
         res += f"from py4godot.classes.Object cimport *"
         res = generate_newline(res)
+        res += f"from py4godot.classes.cpp_bridge cimport byte"
+        res = generate_newline(res)
     for class_ in classes:
         if (class_["name"] in IGNORED_CLASSES):
             continue
@@ -1935,11 +1937,9 @@ def generate_special_methods(class_):
 
 def generate_special_methods_packed_array(class_):
     res = ""
-    if class_["name"] == "PackedByteArray":
-        return res #TODO enable by defining byte
     packed_array_type = {"PackedInt32Array":"int32_t", "PackedInt64Array":"int64_t", "PackedFloat32Array":"float",
                          "PackedFloat64Array":"double",
-                         "PackedByteArray":"uint8_t"}[class_['name']]
+                         "PackedByteArray":"byte"}[class_['name']]
     type_ = packed_array_type
     res += f"{INDENT * 1}def to_list(self):"
     res = generate_newline(res)
