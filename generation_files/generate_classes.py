@@ -1931,7 +1931,14 @@ def generate_special_methods(class_):
         res += generate_str_method(class_)
 
     if class_["name"] in ("PackedInt32Array", "PackedInt64Array", "PackedFloat32Array", "PackedFloat64Array", "PackedByteArray"):
+        res += generate_from_list_array(class_)
+        res = generate_newline(res)
         res += generate_special_methods_packed_array(class_)
+
+    elif "array" in class_["name"].lower():
+        res += generate_from_list_array(class_)
+        res = generate_newline(res)
+        res += generate_to_list_other_arrays(class_)
 
     return res
 
@@ -1950,6 +1957,31 @@ def generate_special_methods_packed_array(class_):
     res += f"{INDENT*2}cdef {type_}[:] memory_view = <{type_}[:size]>value_vector.data()"
     res = generate_newline(res)
     res += f"{INDENT*2}return list(memory_view)"
+    res = generate_newline(res)
+    return res
+
+def generate_to_list_other_arrays(class_):
+    res = ""
+    res += f"{INDENT * 1}def to_list(self):"
+    res = generate_newline(res)
+    res += f"{INDENT*2}return [value for value in self]"
+    res = generate_newline(res)
+    return res
+
+def generate_from_list_array(class_):
+    res = ""
+    res = generate_newline(res)
+    res += f"{INDENT * 1}@staticmethod"
+    res = generate_newline(res)
+    res += f"{INDENT * 1}def from_list(values):"
+    res = generate_newline(res)
+    res += f"{INDENT * 2}cdef {class_['name']} result = {class_['name']}.new0()"
+    res = generate_newline(res)
+    res += f"{INDENT*2}for value in values:"
+    res = generate_newline(res)
+    res += f"{INDENT * 3}result.push_back(value)"
+    res = generate_newline(res)
+    res += f"{INDENT*2}return result"
     res = generate_newline(res)
     return res
 
