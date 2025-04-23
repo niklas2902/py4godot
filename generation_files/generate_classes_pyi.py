@@ -841,20 +841,54 @@ def generate_special_methods(class_):
 
     if class_["name"] in classes - builtin_classes:
         res += generate_cast(class_["name"])
-    if class_["name"] in ("PackedInt32Array", "PackedInt64Array", "PackedFloat32Array", "PackedFloat64Array",
-                          "PackedByteArray"):
+    if class_["name"] == "Array" or "TypedArray" in class_["name"] or ("Packed" in class_["name"] and "Array" in class_["name"]):
         res += generate_special_methods_packed_array(class_)
 
     return res
 
 def generate_special_methods_packed_array(class_):
     res = ""
-    packed_array_type = \
-    {"PackedInt32Array": "int", "PackedInt64Array": "int", "PackedFloat32Array": "float",
-     "PackedFloat64Array": "float",
-     "PackedByteArray": "int"}[class_['name']]
-    type_ = packed_array_type
-    res += f"{INDENT * 1}def to_list(self) -> list[{packed_array_type}]:pass"
+    if "TypedArray" in class_["name"]:
+        packed_array_type = class_["name"].replace("TypedArray", "")
+    elif "Array" == class_["name"]:
+        packed_array_type = "object"
+    else:
+        packed_array_type = \
+        {"PackedInt32Array": "int", "PackedInt64Array": "int", "PackedFloat32Array": "float",
+         "PackedFloat64Array": "float","PackedStringArray": "str", "PackedColorArray":"Color",
+         "PackedByteArray": "int", "PackedVector3Array":"Vector3", "PackedVector2Array":"Vector2",
+         "PackedVector4Array": "Vector4",
+         }[class_['name']]
+    res += f"{INDENT * 1}def to_list(self) -> list[{packed_array_type}]:"
+    res = generate_newline(res)
+    res += f'''    
+    """
+    Converts the PackedArray to a standard Python list.
+
+    Returns:
+        list[{packed_array_type}]: A list containing the elements of the PackedArray.
+    """'''
+    res = generate_newline(res)
+    res += f"{INDENT * 2}pass"
+    res = generate_newline(res)
+    res += f"{INDENT * 1}@staticmethod"
+    res = generate_newline(res)
+    res += (f"{INDENT * 1}def from_list(values:list[{packed_array_type}]) -> {class_['name']}:\n"
+            f'''
+    """
+    Initializes the PackedArray from a list of values.
+
+    This method takes a standard Python list and uses it to create and populate
+    a Godot PackedArray (e.g., PackedInt32Array, PackedFloat32Array, etc.).
+
+    Args:
+        values (list[{packed_array_type}]): A list of elements to populate the PackedArray with.
+
+    Returns:
+        {class_['name']}
+    """
+    '''
+            f"pass")
     res = generate_newline(res)
     return res
 
