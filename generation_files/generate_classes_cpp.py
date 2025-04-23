@@ -1896,7 +1896,14 @@ def generate_special_methods_packed_array(class_):
     res = generate_newline(res)
     res += f"{INDENT*2}std::vector<{packed_array_type}> result = std::vector<{packed_array_type}>(ptr, ptr + length);"
     res = generate_newline(res)
-    res += f"{INDENT*2}return result;"
+    res += f"{INDENT*2}return result;}}"
+    res = generate_newline(res)
+
+    res += f"{INDENT * 1}{packed_array_type}* {class_['name']}::get_pointer(){{"
+    res = generate_newline(res)
+    res += f"{INDENT*2}{packed_array_type}* ptr = {method}(&godot_owner, 0);"
+    res = generate_newline(res)
+    res += f"{INDENT*2}return ptr;"
     res = generate_newline(res)
     res += f"{INDENT}}}"
     res = generate_newline(res)

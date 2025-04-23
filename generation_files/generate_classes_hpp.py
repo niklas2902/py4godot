@@ -853,18 +853,29 @@ def generate_cast(class_):
     return res
 
 def generate_array_methods(class_):
+    res = ""
     if class_["name"] in ("PackedInt32Array", "PackedInt64Array", "PackedFloat32Array", "PackedFloat64Array", "PackedByteArray"):
         if class_["name"] == "PackedFloat32Array":
-            return f"{INDENT*1}std::vector<float> to_vector();"
+            res += f"{INDENT*1}std::vector<float> to_vector();"
+            res = generate_newline(res)
+            res += f"{INDENT*1}float* get_pointer();"
         if class_["name"] == "PackedFloat64Array":
-            return f"{INDENT*1}std::vector<double> to_vector();"
+            res += f"{INDENT*1}std::vector<double> to_vector();"
+            res = generate_newline(res)
+            res += f"{INDENT * 1}double* get_pointer();"
         if class_["name"] == "PackedByteArray":
-            return f"{INDENT * 1}std::vector<byte> to_vector();"
+            res += f"{INDENT * 1}std::vector<byte> to_vector();"
+            res = generate_newline(res)
+            res += f"{INDENT * 1}byte* get_pointer();"
         if class_["name"] == "PackedInt32Array":
-            return f"{INDENT * 1}std::vector<int32_t> to_vector();"
+            res += f"{INDENT * 1}std::vector<int32_t> to_vector();"
+            res = generate_newline(res)
+            res += f"{INDENT * 1}int32_t* get_pointer();"
         if class_["name"] == "PackedInt64Array":
-            return f"{INDENT * 1}std::vector<int64_t> to_vector();"
-    return ""
+            res += f"{INDENT * 1}std::vector<int64_t> to_vector();"
+            res = generate_newline(res)
+            res += f"{INDENT * 1}int64_t* get_pointer();"
+    return res
 
 def generate_special_methods(class_):
     res = ""

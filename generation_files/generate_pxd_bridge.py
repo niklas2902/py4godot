@@ -638,18 +638,29 @@ def is_typed_array(classname):
     return classname in typed_arrays_names
 
 def generate_array_methods(class_):
+    res = ""
     if class_["name"] in ("PackedFloat32Array", "PackedFloat64Array", "PackedByteArray", "PackedInt32Array", "PackedInt64Array"):
         if class_["name"] == "PackedFloat32Array":
-            return f"{INDENT*2}vector[float] to_vector()"
+            res += f"{INDENT*2}vector[float] to_vector()"
+            res = generate_newline(res)
+            res += f"{INDENT*2}float* get_pointer()"
         if class_["name"] == "PackedFloat64Array":
-            return f"{INDENT*2}vector[double] to_vector()"
+            res += f"{INDENT*2}vector[double] to_vector()"
+            res = generate_newline(res)
+            res += f"{INDENT * 2}double* get_pointer()"
         if class_["name"] == "PackedByteArray":
-            return f"{INDENT * 2}vector[byte] to_vector()"
+            res += f"{INDENT * 2}vector[byte] to_vector()"
+            res = generate_newline(res)
+            res += f"{INDENT * 2}byte* get_pointer()"
         if class_["name"] == "PackedInt32Array":
-            return f"{INDENT * 2}vector[int32_t] to_vector()"
+            res += f"{INDENT * 2}vector[int32_t] to_vector()"
+            res = generate_newline(res)
+            res += f"{INDENT * 2}int32_t* get_pointer()"
         if class_["name"] == "PackedInt64Array":
-            return f"{INDENT * 2}vector[int64_t] to_vector()"
-    return ""
+            res += f"{INDENT * 2}vector[int64_t] to_vector()"
+            res = generate_newline(res)
+            res += f"{INDENT * 2}int64_t* get_pointer()"
+    return res
 
 def generate_classes(classes, filename, is_core=False):
     res = generate_import()

@@ -869,6 +869,18 @@ def generate_special_methods_packed_array(class_):
         list[{packed_array_type}]: A list containing the elements of the PackedArray.
     """'''
     res = generate_newline(res)
+    res += f"{INDENT * 1}def get_memory_view(self) -> memoryview[{packed_array_type}]:"
+    res = generate_newline(res)
+    res += f'''    
+    """
+    Gets a memoryview the PackedArray. 
+    Be careful: This is not a copy of the data, but a view into the data. 
+    So deleting data and then trying to access it will leed to crases
+
+    Returns:
+        memoryview[{packed_array_type}]: A memory view containing the elements of the PackedArray.
+    """'''
+    res = generate_newline(res)
     res += f"{INDENT * 2}pass"
     res = generate_newline(res)
     res += f"{INDENT * 1}@staticmethod"
