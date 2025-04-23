@@ -873,7 +873,7 @@ def generate_special_methods_packed_array(class_):
     res = generate_newline(res)
     res += f'''    
     """
-    Gets a memoryview the PackedArray. 
+    Gets a memoryview of the PackedArray. 
     Be careful: This is not a copy of the data, but a view into the data. 
     So deleting data and then trying to access it will leed to crases
 
