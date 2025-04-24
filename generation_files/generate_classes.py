@@ -1564,6 +1564,8 @@ def generate_classes(classes, filename, is_core=False, is_typed_array=False):
     else:
         res += f"from py4godot.classes.Object cimport *"
         res = generate_newline(res)
+        res += f"from py4godot.classes.cpp_bridge cimport byte"
+        res = generate_newline(res)
     for class_ in classes:
         if (class_["name"] in IGNORED_CLASSES):
             continue
@@ -1928,8 +1930,87 @@ def generate_special_methods(class_):
     if class_["name"] in {"String", "StringName"}:
         res += generate_str_method(class_)
 
+    if class_["name"] in ("PackedInt32Array", "PackedInt64Array", "PackedFloat32Array", "PackedFloat64Array", "PackedByteArray"):
+        res += generate_from_list_array(class_)
+        res = generate_newline(res)
+        res += generate_special_methods_packed_array(class_)
+
+    elif "array" in class_["name"].lower():
+        res += generate_from_list_array(class_)
+        res = generate_newline(res)
+        res += generate_to_list_other_arrays(class_)
+
     return res
 
+def generate_special_methods_packed_array(class_):
+    res = ""
+    packed_array_type = {"PackedInt32Array":"int32_t", "PackedInt64Array":"int64_t", "PackedFloat32Array":"float",
+                         "PackedFloat64Array":"double",
+                         "PackedByteArray":"byte"}[class_['name']]
+    type_ = packed_array_type
+    res += f"{INDENT * 1}def to_list(self):"
+    res = generate_newline(res)
+    res += f"{INDENT*2}cdef vector[{type_}] value_vector = self.{class_['name']}_internal_class_ptr.get()[0].to_vector()"
+    res = generate_newline(res)
+    res += f"{INDENT * 2}cdef Py_ssize_t size = value_vector.size()"
+    res = generate_newline(res)
+    res += f"{INDENT*2}cdef {type_}[:] memory_view = <{type_}[:size]>value_vector.data()"
+    res = generate_newline(res)
+    res += f"{INDENT*2}return list(memory_view)"
+    res = generate_newline(res)
+
+    res += f"{INDENT * 1}def get_memory_view(self):"
+    res = generate_newline(res)
+    res += f"{INDENT*2}cdef {type_}* value_ptr = self.{class_['name']}_internal_class_ptr.get()[0].get_pointer()"
+    res = generate_newline(res)
+    res += f"{INDENT * 2}cdef Py_ssize_t size = self.size()"
+    res = generate_newline(res)
+    res += f"{INDENT*2}cdef {type_}[:] memory_view = <{type_}[:size]>value_ptr"
+    res = generate_newline(res)
+    res += f"{INDENT*2}return memory_view"
+    res = generate_newline(res)
+
+    res += f"{INDENT * 1}@staticmethod"
+    res = generate_newline(res)
+    res += f"{INDENT * 1}def from_memory_view({type_}[:] memory_view):"
+    res = generate_newline(res)
+    res += f"{INDENT*2}cdef {type_}* value_ptr = &memory_view[0]"
+    res = generate_newline(res)
+    res += f"{INDENT * 2}cdef Py_ssize_t size = len(memory_view)"
+    res = generate_newline(res)
+    res += f"{INDENT*2}cdef {class_['name']} array = {class_['name']}.__new__({class_['name']})"
+    res = generate_newline(res)
+    res += f"{INDENT*2}array.{class_['name']}_internal_class_ptr = (CPP{class_['name']}.py_from_ptr(value_ptr, size))"
+    res = generate_newline(res)
+    res += f"{INDENT*2}return array"
+    res = generate_newline(res)
+
+    return res
+
+def generate_to_list_other_arrays(class_):
+    res = ""
+    res += f"{INDENT * 1}def to_list(self):"
+    res = generate_newline(res)
+    res += f"{INDENT*2}return [value for value in self]"
+    res = generate_newline(res)
+    return res
+
+def generate_from_list_array(class_):
+    res = ""
+    res = generate_newline(res)
+    res += f"{INDENT * 1}@staticmethod"
+    res = generate_newline(res)
+    res += f"{INDENT * 1}def from_list(values):"
+    res = generate_newline(res)
+    res += f"{INDENT * 2}cdef {class_['name']} result = {class_['name']}.new0()"
+    res = generate_newline(res)
+    res += f"{INDENT*2}for value in values:"
+    res = generate_newline(res)
+    res += f"{INDENT * 3}result.push_back(value)"
+    res = generate_newline(res)
+    res += f"{INDENT*2}return result"
+    res = generate_newline(res)
+    return res
 
 def generate_operators_set(class_):
     for operator in class_["operators"]:
