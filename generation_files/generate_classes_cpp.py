@@ -1907,6 +1907,35 @@ def generate_special_methods_packed_array(class_):
     res = generate_newline(res)
     res += f"{INDENT}}}"
     res = generate_newline(res)
+
+    res += f"{INDENT * 1}std::shared_ptr<{class_['name']}> {class_['name']}::py_from_ptr({packed_array_type}* ptr, long long size){{"
+    res = generate_newline(res)
+    res = generate_newline(res)
+    res += f"{INDENT * 2}{class_['name']} _class{{}};"
+    res = generate_newline(res)
+    res += f"{INDENT * 2}_class.shouldBeDeleted = true;"
+    res = generate_newline(res)
+    res += f"{INDENT * 2}_class.set_variant_type({generate_variant_type(class_['name'])});"
+    res = generate_newline(res)
+    res += f"{INDENT * 2}GDExtensionPtrConstructor constructor = functions::get_variant_get_ptr_constructor()(_class.variant_type, 0);"
+    res = generate_newline(res)
+    res += f"{INDENT*2}GDExtensionTypePtr _args[1];"
+    res = generate_newline(res)
+    res += f"{INDENT * 2}_class.allocated_memory = true;"
+    res = generate_newline(res)
+
+    res += f"{INDENT * 2}constructor(&_class.godot_owner,_args);"
+    res = generate_newline(res)
+    res += f"{INDENT * 2}_class.resize(size);"
+    res = generate_newline(res)
+    res += f"{INDENT*2}{packed_array_type}* packed_array_ptr = {method}(&_class.godot_owner, 0);"
+    res = generate_newline(res)
+    res += f"{INDENT*2}memcpy(packed_array_ptr,ptr, size);"
+    res = generate_newline(res)
+    res += f"{INDENT*2}return std::make_shared<{class_['name']}>(_class);"
+    res = generate_newline(res)
+    res += f"{INDENT}}}"
+    res = generate_newline(res)
     return res
 
 

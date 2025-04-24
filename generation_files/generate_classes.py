@@ -1970,6 +1970,21 @@ def generate_special_methods_packed_array(class_):
     res += f"{INDENT*2}return memory_view"
     res = generate_newline(res)
 
+    res += f"{INDENT * 1}@staticmethod"
+    res = generate_newline(res)
+    res += f"{INDENT * 1}def from_memory_view({type_}[:] memory_view):"
+    res = generate_newline(res)
+    res += f"{INDENT*2}cdef {type_}* value_ptr = &memory_view[0]"
+    res = generate_newline(res)
+    res += f"{INDENT * 2}cdef Py_ssize_t size = len(memory_view)"
+    res = generate_newline(res)
+    res += f"{INDENT*2}cdef {class_['name']} array = {class_['name']}.__new__({class_['name']})"
+    res = generate_newline(res)
+    res += f"{INDENT*2}array.{class_['name']}_internal_class_ptr = (CPP{class_['name']}.py_from_ptr(value_ptr, size))"
+    res = generate_newline(res)
+    res += f"{INDENT*2}return array"
+    res = generate_newline(res)
+
     return res
 
 def generate_to_list_other_arrays(class_):

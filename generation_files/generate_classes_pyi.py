@@ -902,6 +902,26 @@ def generate_special_methods_packed_array(class_):
     '''
             f"pass")
     res = generate_newline(res)
+    res += f"{INDENT * 1}@staticmethod"
+    res = generate_newline(res)
+    res += (f"{INDENT * 1}def from_memory_view(values:memoryview[{packed_array_type}]) -> {class_['name']}:\n"
+            f'''
+    """
+    Initializes the PackedArray from a memory view.
+
+    This method takes a Python memory view and uses it to create and populate
+    a Godot PackedArray (e.g., PackedInt32Array, PackedFloat32Array, etc.).
+    You can use this to populate a PackedArray fast. Please take care that the data in your array is contiguous. 
+    E.g. use numpy arrays
+
+    Args:
+        values (memoryview[{packed_array_type}]): A list of elements to populate the PackedArray with.
+
+    Returns:
+        {class_['name']}
+    """
+    '''
+            f"pass")
     return res
 
 
