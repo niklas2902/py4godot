@@ -17,8 +17,8 @@
 
 
 #elif defined(__linux__) && defined(__aarch64__)
-#define PYTHONHOME L"addons/py4godot/cpython-3.12.4-linux-arm64/python/"
-#define PYTHONPATH "/addons/py4godot/cpython-3.12.4-linux-arm64/python/lib/python3.12/site-packages"
+#define PYTHONHOME L"addons/py4godot/cpython-3.12.4-linuxarm64/python/"
+#define PYTHONPATH "/addons/py4godot/cpython-3.12.4-linuxarm64/python/lib/python3.12/site-packages"
 
 
 #elif __linux__
