@@ -54,7 +54,7 @@ cdef class ConstantVector2(Vector2):
   @staticmethod
   def new3(float x, float y):
     cdef ConstantVector2 _class = ConstantVector2.__new__(ConstantVector2)
-    cdef shared_ptr[CPPVector2] vector2 = CPPVector2.py_new2(x, y)
+    cdef shared_ptr[CPPVector2] vector2 = CPPVector2.py_new3(x, y)
     vector2.get().set_shouldBeDeleted(False)
     _class.Vector2_internal_class_ptr = vector2
     return _class
