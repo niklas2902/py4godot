@@ -869,19 +869,8 @@ def generate_special_methods_packed_array(class_):
         list[{packed_array_type}]: A list containing the elements of the PackedArray.
     """'''
     res = generate_newline(res)
-    res += f"{INDENT * 1}def get_memory_view(self) -> memoryview[{packed_array_type}]:"
-    res = generate_newline(res)
-    res += f'''    
-    """
-    Gets a memoryview of the PackedArray. 
-    Be careful: This is not a copy of the data, but a view into the data. 
-    So deleting data and then trying to access it will leed to crases
-
-    Returns:
-        memoryview[{packed_array_type}]: A memory view containing the elements of the PackedArray.
-    """'''
-    res = generate_newline(res)
-    res += f"{INDENT * 2}pass"
+    if class_["name"] in ("PackedInt32Array", "PackedInt64Array", "PackedFloat32Array", "PackedFloat64Array", "PackedByteArray"):
+        res = generate_get_memory_view(packed_array_type, res)
     res = generate_newline(res)
     res += f"{INDENT * 1}@staticmethod"
     res = generate_newline(res)
@@ -902,6 +891,12 @@ def generate_special_methods_packed_array(class_):
     '''
             f"pass")
     res = generate_newline(res)
+    if class_["name"] in ("PackedInt32Array", "PackedInt64Array", "PackedFloat32Array", "PackedFloat64Array", "PackedByteArray"):
+        res = generate_from_memory_view(class_, packed_array_type, res)
+    return res
+
+
+def generate_from_memory_view(class_, packed_array_type, res):
     res += f"{INDENT * 1}@staticmethod"
     res = generate_newline(res)
     res += (f"{INDENT * 1}def from_memory_view(values:memoryview[{packed_array_type}]) -> {class_['name']}:\n"
@@ -922,6 +917,23 @@ def generate_special_methods_packed_array(class_):
     """
     '''
             f"pass")
+    return res
+
+
+def generate_get_memory_view(packed_array_type, res):
+    res += f"{INDENT * 1}def get_memory_view(self) -> memoryview[{packed_array_type}]:"
+    res = generate_newline(res)
+    res += f'''    
+    """
+    Gets a memoryview of the PackedArray. 
+    Be careful: This is not a copy of the data, but a view into the data. 
+    So deleting data and then trying to access it will leed to crases
+
+    Returns:
+        memoryview[{packed_array_type}]: A memory view containing the elements of the PackedArray.
+    """'''
+    res = generate_newline(res)
+    res += f"{INDENT * 2}pass"
     return res
 
 
