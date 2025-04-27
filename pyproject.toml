@@ -1,0 +1,23 @@
+[project]
+name = "py4godot"
+version = "4.4-alpha7"
+description = "Python scripting for Godot. This GDExtension plugin allows you to use Python like GDScript, accessing the Godot engine's features and benefiting from Python's vast ecosystem."
+authors = [
+    {name = "Niklas Zimmer",email = "nzimmer@uni-bremen.de"}
+]
+license = {text = "MIT"}
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "cython (>=3.0.0)",
+    "zstandard (>=0.23.0,<0.24.0)",
+    "wget (>=3.2,<4.0)",
+    "meson (>=1.0.0)",
+    "ninja (==1.10.2.3)",
+    "tqdm (>=4.67.1,<5.0.0)"
+]
+
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
