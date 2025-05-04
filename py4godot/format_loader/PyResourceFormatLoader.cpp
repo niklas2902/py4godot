@@ -69,7 +69,13 @@ void PyResourceFormatLoader::_handles_type( StringName& type, GDExtensionTypePtr
 }
 void PyResourceFormatLoader::_get_resource_type( String& path, GDExtensionTypePtr res){
     print_error("_get_resource_type");
-    functions::get_string_new_with_utf8_chars()(res, "PyScriptExtension");
+    String py = c_string_to_string("py");
+    String pyw = c_string_to_string("pyw");
+    String pyi = c_string_to_string("pyi");
+    bool can_be_loaded =  path.ends_with(py) || path.ends_with(pyw) || path.ends_with(pyi);
+    if (can_be_loaded){
+        functions::get_string_new_with_utf8_chars()(res, "PyScriptExtension");
+    }
 }
 void PyResourceFormatLoader::_get_resource_script_class( String& path, GDExtensionTypePtr res)
 {
