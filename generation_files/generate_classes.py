@@ -106,13 +106,13 @@ def generate_constructor_args(class_, constructor):
     for arg in constructor["arguments"]:
         if not arg["type"].startswith("enum::"):
             if should_turn_string_to_nodepath(class_, constructor): # We want to be able to create a NodePath from String
-                result += f"{unvariant(untypearray(unbitfield_type(arg['type'])))} {pythonize_name(arg['name'])}, "
+                result += f"{unvariant(untypearray_or_dictionary(unbitfield_type(arg['type'])))} {pythonize_name(arg['name'])}, "
             else:
-                result += f"{unnodepath(unstringname(unstring(unvariant(untypearray(unbitfield_type(arg['type']))))))} {pythonize_name(arg['name'])}, "
+                result += f"{unnodepath(unstringname(unstring(unvariant(untypearray_or_dictionary(unbitfield_type(arg['type']))))))} {pythonize_name(arg['name'])}, "
         else:
             # enums are marked with enum:: . To be able to use this, we have to strip this
             arg_type = arg["type"].replace("enum::", "")
-            result += f"{unstringname(unnodepath(unstring(unvariant(untypearray(unenumize_type(arg_type))))))} {pythonize_name(arg['name'])}, "
+            result += f"{unstringname(unnodepath(unstring(unvariant(untypearray_or_dictionary(unenumize_type(arg_type))))))} {pythonize_name(arg['name'])}, "
     result = result[:-2]
     return result
 
@@ -165,7 +165,7 @@ def generate_constructor_call_args(class_, constructor):
     for arg in constructor["arguments"]:
         if arg["type"] in classes - IGNORED_CLASSES:
             if arg["type"] == "String":
-                result += f"py_c_string_to_string({pythonize_name(arg['name'])}.encode('utf-8')).{untypearray(arg['type'])}_internal_class_ptr, "
+                result += f"py_c_string_to_string({pythonize_name(arg['name'])}.encode('utf-8')).{untypearray_or_dictionary(arg['type'])}_internal_class_ptr, "
             elif arg["type"] == "StringName" and not should_turn_string_to_nodepath(class_, constructor):
                 result += f"py_stringname_{pythonize_name(arg['name'])}.StringName_internal_class_ptr, "
             elif arg["type"] == "NodePath" and not should_turn_string_to_nodepath(class_, constructor):
@@ -288,6 +288,7 @@ def is_primitive(type_):
 
 def generate_return_statement(method_):
     # TODO generate returns
+    result = ""
     if "return_value" in method_.keys() or "return_type" in method_.keys():
         ret_val = None
         if ("return_value" in method_.keys()):
@@ -469,7 +470,7 @@ def generate_default_args(mMethod):
             continue
         if not arg["type"].startswith("enum::") and not arg["type"].startswith("typedarray::") and not arg[
             "type"].startswith("bitfield::"):
-            type_ = unvariant(untypearray(unbitfield_type(arg['type'])))
+            type_ = unvariant(untypearray_or_dictionary(unbitfield_type(arg['type'])))
             if arg["type"] in builtin_classes:
                 res += f"{INDENT * 2}if {pythonize_name(arg['name'])} is None:"
                 res = generate_newline(res)
@@ -567,7 +568,7 @@ def generate_ret_call(method_):
         elif ret_val.type == "Variant":
             result += f"_ret"
         elif "typedarray" in ret_val.type:
-            result += f"_ret.{untypearray(ret_val.type)}_internal_class_ptr"
+            result += f"_ret.{untypearray_or_dictionary(ret_val.type)}_internal_class_ptr"
         else:
             result += f"_ret"
     else:
@@ -738,22 +739,22 @@ def generate_method_args(class_, method):
             return "args_vector"
         return res
     for arg in method["arguments"]:
-        if untypearray(arg["type"]) in classes - IGNORED_CLASSES - builtin_classes:
-            res += f"{pythonize_name(arg['name'])}.{untypearray(arg['type'])}_internal_class_ptr if {pythonize_name(arg['name'])} != None else {pythonize_name(arg['name'])}.{untypearray(arg['type'])}_internal_class_ptr, " # Todo: implement conditional
-        elif untypearray(arg["type"]) in builtin_classes - IGNORED_CLASSES:
+        if untypearray_or_dictionary(arg["type"]) in classes - IGNORED_CLASSES - builtin_classes:
+            res += f"{pythonize_name(arg['name'])}.{untypearray_or_dictionary(arg['type'])}_internal_class_ptr if {pythonize_name(arg['name'])} != None else {pythonize_name(arg['name'])}.{untypearray_or_dictionary(arg['type'])}_internal_class_ptr, " # Todo: implement conditional
+        elif untypearray_or_dictionary(arg["type"]) in builtin_classes - IGNORED_CLASSES:
             if arg["type"] == "String":
                 if is_property_setter(class_, method["name"]):
                     res += f"py__string_{pythonize_name(arg['name'])}.String_internal_class_ptr, "
                 else:
-                    res += f"py_c_string_to_string({pythonize_name(arg['name'])}.encode('utf-8')).{untypearray(arg['type'])}_internal_class_ptr, "
+                    res += f"py_c_string_to_string({pythonize_name(arg['name'])}.encode('utf-8')).{untypearray_or_dictionary(arg['type'])}_internal_class_ptr, "
             elif arg["type"] == "StringName":
                 res += f"py_stringname_{pythonize_name(arg['name'])}.StringName_internal_class_ptr, "
             elif arg["type"] == "NodePath":
                 res += f"py_nodepath_{pythonize_name(arg['name'])}.NodePath_internal_class_ptr, "
             else:
-                res += f"{pythonize_name(arg['name'])}.{untypearray(arg['type'])}_internal_class_ptr, "
-        elif "TypedArray" in untypearray(arg["type"]):
-            res += f"{pythonize_name(arg['name'])}.{untypearray(arg['type'])}_internal_class_ptr, "
+                res += f"{pythonize_name(arg['name'])}.{untypearray_or_dictionary(arg['type'])}_internal_class_ptr, "
+        elif "TypedArray" in untypearray_or_dictionary(arg["type"]):
+            res += f"{pythonize_name(arg['name'])}.{untypearray_or_dictionary(arg['type'])}_internal_class_ptr, "
         elif arg["type"] == "Variant":
             res += f"to_py_object({(pythonize_name(arg['name']))}), "
         else:
@@ -1089,11 +1090,11 @@ def generate_property(property, classname):
         if (classname == "RichTextLabel" and property["name"] == "custom_effects"):
             result += f"{INDENT}def {pythonize_name(property['name'])}(self, Array value):"  # TODO remove, when properties finally are the same types as functions
         elif classname in typed_arrays_names:
-            result += f"{INDENT}def {pythonize_name(property['name'])}(self, {import_type(unvariant_type_array(unnodepath(unstring(unstringname(untypearray(simplify_type(property['type']))))), classname), classname)} value):"
+            result += f"{INDENT}def {pythonize_name(property['name'])}(self, {import_type(unvariant_type_array(unnodepath(unstring(unstringname(untypearray_or_dictionary(simplify_type(property['type']))))), classname), classname)} value):"
         elif "typedarray" in property['type']:
             result += f"{INDENT}def {pythonize_name(property['name'])}(self, Array value):"
         else:
-            result += f"{INDENT}def {pythonize_name(property['name'])}(self, {import_type(objectify_type(unnodepath(unstringname(unvariant(unstring(untypearray(simplify_type(property['type']))))))), classname)} value):"
+            result += f"{INDENT}def {pythonize_name(property['name'])}(self, {import_type(objectify_type(unnodepath(unstringname(unvariant(unstring(untypearray_or_dictionary(simplify_type(property['type']))))))), classname)} value):"
         result = generate_newline(result)
         result += f"{INDENT * 2}self.{pythonize_name(property['setter'])}({generate_property_index(property, True)}value)"
         result = generate_newline(result)
@@ -1232,7 +1233,7 @@ def import_type(type_, classname):
     elif type_ == "str":
         return type_
     elif "TypedArray" in type_:
-        return "py4godot_" + untypearray(type_).lower()+ "." + type_
+        return "py4godot_" + untypearray_or_dictionary(type_).lower()+ "." + type_
     return "py4godot_" + type_.lower() + "." + type_
 
 
@@ -1262,9 +1263,9 @@ def generate_args(class_, method_with_args):
 
     for arg in method_with_args["arguments"]:
         if not arg["type"].startswith("enum::"):
-            type_ = unnodepath(unstringname(unstring(unvariant(untypearray(unbitfield_type(arg['type']))))))
+            type_ = unnodepath(unstringname(unstring(unvariant(untypearray_or_dictionary(unbitfield_type(arg['type']))))))
             if class_["name"] in typed_arrays_names:
-                type_ = unstring(unvariant_type_array(untypearray(unbitfield_type(arg['type'])), class_["name"]))
+                type_ = unstring(unvariant_type_array(untypearray_or_dictionary(unbitfield_type(arg['type'])), class_["name"]))
             arg_type_for_default_arg = type_
             if arg["type"] in ("NodePath", "StringName"):
                 arg_type_for_default_arg = arg["type"]
@@ -1272,9 +1273,9 @@ def generate_args(class_, method_with_args):
         else:
             # enums are marked with enum:: . To be able to use this, we have to strip this
             arg_type = arg["type"].replace("enum::", "")
-            type_ = unstring(unvariant(untypearray(unenumize_type(arg_type))))
+            type_ = unstring(unvariant(untypearray_or_dictionary(unenumize_type(arg_type))))
             if class_["name"] in typed_arrays_names:
-                type_ = unstring(unvariant_type_array(untypearray(unenumize_type(arg_type)), class_["name"]))
+                type_ = unstring(unvariant_type_array(untypearray_or_dictionary(unenumize_type(arg_type)), class_["name"]))
             result += f"{import_type(type_, class_['name'])} {pythonize_name(arg['name'])} {generate_default_arg(class_, arg, type_)}, "
     if method_with_args["is_vararg"]:
         result += "*varargs, "
@@ -1294,8 +1295,10 @@ def unenumize_type(type_):
     return type_list[0]
 
 
-def untypearray(type_):
+def untypearray_or_dictionary(type_):
     # TODO improve this by creating actually typed arrays
+    if "typeddictionary" in type_:
+        return "Dictionary"
     if "typedarray" in type_:
         return generate_typed_array_name(type_)
     return type_

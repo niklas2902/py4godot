@@ -120,21 +120,21 @@ def generate_args(method_with_args, builtin_classes, is_cpp=False, should_make_s
                 "bitfield::") and not arg["type"].startswith("typedarray::") \
                 and not arg["type"] == "Variant":
             if should_make_shared:
-                result += f"{make_ptr(unenumize_type(untypearray(unbitfield_type(arg['type']))))} {pythonize_name(arg['name'])}, "
+                result += f"{make_ptr(unenumize_type(untypearray_or_dictionary(unbitfield_type(arg['type']))))} {pythonize_name(arg['name'])}, "
             else:
-                result += f"{unenumize_type(untypearray(unbitfield_type(arg['type'])))}* {pythonize_name(arg['name'])}, "
-        elif untypearray(arg["type"]) in builtin_classes - {"int", "float", "bool", "Nil"}:
+                result += f"{unenumize_type(untypearray_or_dictionary(unbitfield_type(arg['type'])))}* {pythonize_name(arg['name'])}, "
+        elif untypearray_or_dictionary(arg["type"]) in builtin_classes - {"int", "float", "bool", "Nil"}:
             if should_make_shared:
-                result += f"{make_ptr(unenumize_type(untypearray(unbitfield_type(arg['type']))))} {pythonize_name(arg['name'])}, "
+                result += f"{make_ptr(unenumize_type(untypearray_or_dictionary(unbitfield_type(arg['type']))))} {pythonize_name(arg['name'])}, "
             else:
-                result += f"{unenumize_type(untypearray(unbitfield_type(arg['type'])))}& {pythonize_name(arg['name'])}, "
-        elif untypearray(arg["type"]) in typed_arrays_names:
+                result += f"{unenumize_type(untypearray_or_dictionary(unbitfield_type(arg['type'])))}& {pythonize_name(arg['name'])}, "
+        elif untypearray_or_dictionary(arg["type"]) in typed_arrays_names:
             if should_make_shared:
-                result += f"{make_ptr(unenumize_type(untypearray(unbitfield_type(arg['type']))))} {pythonize_name(arg['name'])}, "
+                result += f"{make_ptr(unenumize_type(untypearray_or_dictionary(unbitfield_type(arg['type']))))} {pythonize_name(arg['name'])}, "
             else:
-                result += f"{unenumize_type(untypearray(unbitfield_type(arg['type'])))}& {pythonize_name(arg['name'])}, "
+                result += f"{unenumize_type(untypearray_or_dictionary(unbitfield_type(arg['type'])))}& {pythonize_name(arg['name'])}, "
         elif arg["type"] in {"int", "float", "bool"}:
-            result += f"{ungodottype(unenumize_type(untypearray(unbitfield_type(arg['type']))))} {pythonize_name(arg['name'])}, "
+            result += f"{ungodottype(unenumize_type(untypearray_or_dictionary(unbitfield_type(arg['type']))))} {pythonize_name(arg['name'])}, "
         elif arg["type"] == "Variant":
             if is_cpp:
                 result += f"Variant& {pythonize_name(arg['name'])}, "
@@ -162,13 +162,13 @@ def generate_constructor_args(constructor, should_make_shared = False):
     for arg in constructor["arguments"]:
         if not arg["type"].startswith("enum::"):
             if should_make_shared:
-                result += f"{make_ptr(ungodottype(untypearray(unbitfield_type(arg['type']))))}{ref(arg['type'])} {pythonize_name(arg['name'])}, "
+                result += f"{make_ptr(ungodottype(untypearray_or_dictionary(unbitfield_type(arg['type']))))}{ref(arg['type'])} {pythonize_name(arg['name'])}, "
             else:
-                result += f"{ungodottype(untypearray(unbitfield_type(arg['type'])))}{ref(arg['type'])} {pythonize_name(arg['name'])}, "
+                result += f"{ungodottype(untypearray_or_dictionary(unbitfield_type(arg['type'])))}{ref(arg['type'])} {pythonize_name(arg['name'])}, "
         else:
             # enums are marked with enum:: . To be able to use this, we have to strip this
             arg_type = arg["type"].replace("enum::", "")
-            result += f"{untypearray(unenumize_type(arg_type))} {pythonize_name(arg['name'])}, "
+            result += f"{untypearray_or_dictionary(unenumize_type(arg_type))} {pythonize_name(arg['name'])}, "
     result = result[:-2]
     return result
 
@@ -624,7 +624,7 @@ def generate_virtual_return_type(return_type):
         return "Variant(1);"
     elif "bitfield" in return_type:
         return "0;"
-    return untypearray(return_type) + "();"
+    return untypearray_or_dictionary(return_type) + "();"
 
 
 def generate_method_body_virtual(class_, mMethod):
@@ -661,7 +661,7 @@ def generate_default_args(mMethod):
             continue
         if not arg["type"].startswith("enum::") and not arg["type"].startswith("typedarray::") and not arg[
             "type"].startswith("bitfield::"):
-            type_ = untypearray(unbitfield_type(arg['type']))
+            type_ = untypearray_or_dictionary(unbitfield_type(arg['type']))
             if arg["type"] in builtin_classes:
                 res += f"{INDENT * 2}{pythonize_name(arg['name'])} = {arg['type']}::new0()"
             else:
@@ -850,14 +850,14 @@ def generate_method(class_, mMethod):
         return res
     args = generate_args(mMethod, builtin_classes, True, False)
     args_ptr = generate_args(mMethod, builtin_classes, False, True)
-    py_def_function = f"{INDENT}{make_ptr(unvarianttype(ungodottype(unenumize_type(untypearray(get_ret_value(mMethod))))))} {class_['name']}::py_{pythonize_name(mMethod['name'])}({args_ptr})" + "{"
+    py_def_function = f"{INDENT}{make_ptr(unvarianttype(ungodottype(unenumize_type(untypearray_or_dictionary(get_ret_value(mMethod))))))} {class_['name']}::py_{pythonize_name(mMethod['name'])}({args_ptr})" + "{"
     res += py_def_function
     res = generate_newline(res)
     res += generate_py_method_body(class_, mMethod)
     res = generate_newline(res)
     res = generate_newline(res)
 
-    def_function = f"{INDENT}{ungodottype(unenumize_type(untypearray(get_ret_value(mMethod))))} {class_['name']}::{pythonize_name(mMethod['name'])}({args})" + "{"
+    def_function = f"{INDENT}{ungodottype(unenumize_type(untypearray_or_dictionary(get_ret_value(mMethod))))} {class_['name']}::{pythonize_name(mMethod['name'])}({args})" + "{"
     res += def_function
     res = generate_newline(res)
     res += generate_default_args(mMethod)
@@ -1301,8 +1301,8 @@ def generate_member_getter(class_, member):
     return res
 
 def generate_ret_ptr(type_, _ret_name = "_ret"):
-    if untypearray(type_) in typed_arrays_names:
-        return f"std::make_shared<{untypearray(type_)}>({_ret_name})"
+    if untypearray_or_dictionary(type_) in typed_arrays_names:
+        return f"std::make_shared<{untypearray_or_dictionary(type_)}>({_ret_name})"
     if type_ in builtin_classes - {"int", "float", "bool", "Nil"}:
         return f"std::make_shared<{type_}>({_ret_name})"
     if type_ in classes:
@@ -1406,7 +1406,7 @@ def generate_property(class_, property):
         return result
     result += f"{INDENT}"
     result = generate_newline(result)
-    result += f"{INDENT}{simplify_type(untypearray(unbitfield_type(unenumize_type((property['type'])))))} {class_['name']}::prop_get_{pythonize_name(property['name'])}()" + "{"
+    result += f"{INDENT}{simplify_type(untypearray_or_dictionary(unbitfield_type(unenumize_type((property['type'])))))} {class_['name']}::prop_get_{pythonize_name(property['name'])}()" + "{"
     result = generate_newline(result)
     if "index" not in property.keys():
         result += f"{INDENT * 2}{simplify_type(unbitfield_type(unenumize_type((property['type']))))} _ret = {pythonize_name(property['getter'])}();"
@@ -1427,7 +1427,7 @@ def generate_property(class_, property):
     result = generate_newline(result)
 
     if "setter" in property and property["setter"] != "":
-        result += f"{INDENT}void {class_['name']}::prop_set_{pythonize_name(property['name'])}({untypearray(simplify_type(property['type']))} value)" + "{"
+        result += f"{INDENT}void {class_['name']}::prop_set_{pythonize_name(property['name'])}({untypearray_or_dictionary(simplify_type(property['type']))} value)" + "{"
         result = generate_newline(result)
         if "index" not in property.keys():
             result += f"{INDENT * 2}{pythonize_name(property['setter'])}(value);"
@@ -1520,12 +1520,12 @@ def unenumize_type(type_):
     return type_list[0]
 
 
-def untypearray(type_):
-    # TODO improve this by creating actually typed arrays
+def untypearray_or_dictionary(type_):
+    if "typeddictionary" in type_:
+        return "Dictionary"
     if "typedarray" in type_:
         return generate_typed_array_name(type_)
     return type_
-
 
 def get_class_from_enum(type_):
     enum_type = type_.replace("enum::", "")

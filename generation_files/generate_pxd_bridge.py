@@ -117,11 +117,11 @@ def generate_constructor_args(constructor):
 
     for arg in constructor["arguments"]:
         if not arg["type"].startswith("enum::"):
-            result += f"{make_to_ptr(ungodottype(untypearray(unbitfield_type(arg['type']))))}{ref(arg['type'])} {pythonize_name(arg['name'])}, "
+            result += f"{make_to_ptr(ungodottype(untypearray_or_dictionary(unbitfield_type(arg['type']))))}{ref(arg['type'])} {pythonize_name(arg['name'])}, "
         else:
             # enums are marked with enum:: . To be able to use this, we have to strip this
             arg_type = arg["type"].replace("enum::", "")
-            result += f"{make_to_ptr(untypearray(unenumize_type(arg_type)))} {pythonize_name(arg['name'])}, "
+            result += f"{make_to_ptr(untypearray_or_dictionary(unenumize_type(arg_type)))} {pythonize_name(arg['name'])}, "
     result = result[:-2]
     return result
 
@@ -344,7 +344,7 @@ def generate_method(class_, mMethod):
     if has_native_struct(mMethod):
         return res
     args = generate_args(mMethod, is_py_method=True)
-    def_function = f"{INDENT * 2}{make_to_ptr(unvarianttype(ungodottype(untypearray(get_ret_value(mMethod)))))} py_{pythonize_name(mMethod['name'])}({args});"
+    def_function = f"{INDENT * 2}{make_to_ptr(unvarianttype(ungodottype(untypearray_or_dictionary(get_ret_value(mMethod)))))} py_{pythonize_name(mMethod['name'])}({args});"
     res = generate_newline(res)
     res += generate_method_modifiers(mMethod)
     res = generate_newline(res)
@@ -467,13 +467,13 @@ def simplify_type(type):
 
 def generate_property(property):
     result = ""
-    if "typedarray" in property["type"]:
+    if "typedarray" in property["type"] or "typeddictionary" in property["type"]:
         return result  # TODO: Enable again
     result += f"{INDENT * 2}{simplify_type(unbitfield_type(unenumize_type((property['type']))))} prop_get_{pythonize_name(property['name'])}()" + ";"
     result = generate_newline(result)
 
     if "setter" in property and property["setter"] != "":
-        result += f"{INDENT * 2}void prop_set_{pythonize_name(property['name'])}({simplify_type(untypearray(simplify_type(property['type'])))} value);"
+        result += f"{INDENT * 2}void prop_set_{pythonize_name(property['name'])}({simplify_type(untypearray_or_dictionary(simplify_type(property['type'])))} value);"
         result = generate_newline(result)
 
     return result
@@ -507,19 +507,19 @@ def generate_args(method_with_args, is_py_method=False):
             if is_py_method:
                 result += f"PyObject* {pythonize_name(arg['name'])}, "
             else:
-                result += f"{unenumize_type(untypearray(unbitfield_type(arg['type'])))}& {pythonize_name(arg['name'])}, "
-        elif not arg["type"].startswith("enum::") and not arg["type"].startswith("bitfield::") and not untypearray(
-                arg["type"]) in builtin_classes and not is_typed_array(untypearray(arg["type"])):
-            result += f"shared_ptr[{unenumize_type(untypearray(unbitfield_type(arg['type'])))}] {pythonize_name(arg['name'])}, "
-        elif untypearray(arg["type"]) in builtin_classes - {"int", "float", "bool", "Nil"}:
-            result += f"shared_ptr[{unenumize_type(untypearray(unbitfield_type(arg['type'])))}] {pythonize_name(arg['name'])}, "
-        elif is_typed_array(untypearray(arg["type"])):
-            result += f"shared_ptr[{unenumize_type(untypearray(unbitfield_type(arg['type'])))}] {pythonize_name(arg['name'])}, "
+                result += f"{unenumize_type(untypearray_or_dictionary(unbitfield_type(arg['type'])))}& {pythonize_name(arg['name'])}, "
+        elif not arg["type"].startswith("enum::") and not arg["type"].startswith("bitfield::") and not untypearray_or_dictionary(
+                arg["type"]) in builtin_classes and not is_typed_array(untypearray_or_dictionary(arg["type"])):
+            result += f"shared_ptr[{unenumize_type(untypearray_or_dictionary(unbitfield_type(arg['type'])))}] {pythonize_name(arg['name'])}, "
+        elif untypearray_or_dictionary(arg["type"]) in builtin_classes - {"int", "float", "bool", "Nil"}:
+            result += f"shared_ptr[{unenumize_type(untypearray_or_dictionary(unbitfield_type(arg['type'])))}] {pythonize_name(arg['name'])}, "
+        elif is_typed_array(untypearray_or_dictionary(arg["type"])):
+            result += f"shared_ptr[{unenumize_type(untypearray_or_dictionary(unbitfield_type(arg['type'])))}] {pythonize_name(arg['name'])}, "
         elif arg["type"] in {"int", "float", "bool"}:
-            result += f"{unenumize_type(untypearray(unbitfield_type(arg['type'])))} {pythonize_name(arg['name'])}, "
+            result += f"{unenumize_type(untypearray_or_dictionary(unbitfield_type(arg['type'])))} {pythonize_name(arg['name'])}, "
         else:
             # enums are marked with enum:: . To be able to use this, we have to strip this
-            result += f"{untypearray(unbitfield_type(unenumize_type(arg['type'])))} {pythonize_name(arg['name'])} , "
+            result += f"{untypearray_or_dictionary(unbitfield_type(unenumize_type(arg['type'])))} {pythonize_name(arg['name'])} , "
     result = result[:-2]
     if method_with_args["is_vararg"]:
         result += ", vector[PyObject*]& varargs"
@@ -537,8 +537,9 @@ def unenumize_type(type_):
     return type_list[0]
 
 
-def untypearray(type_):
-    # TODO improve this by creating actually typed arrays
+def untypearray_or_dictionary(type_):
+    if "typeddictionary" in type_:
+        return "Dictionary"
     if "typedarray" in type_:
         return generate_typed_array_name(type_)
     return type_
