@@ -31,8 +31,20 @@ bool theme_has_method(){
 
 void PyLanguage::init_theme_icon(){
 }
+
 void PyLanguage::deinit_theme_icon(){
+    auto engine = Engine::get_instance();
+    if(!engine->is_editor_hint()){
+        return;
+    }
+    auto icon_name = c_string_to_string_name("Python");
+    auto py_script_icon_name = c_string_to_string_name("PyScriptExtension");
+    auto theme_name = c_string_to_string_name("EditorIcons");
+    functions::get_object_destroy()(image_texture->godot_owner);
+    icon_image->unreference();
+    functions::get_object_destroy()(icon_image->godot_owner);
 }
+
   PyLanguage* PyLanguage::constructor(){
     PyLanguage* class_ = new PyLanguage();
 
@@ -59,6 +71,9 @@ void PyLanguage::destroy(){
     functions::get_string_new_with_utf8_chars()(res, language_name);
   }
   void PyLanguage::_init(GDExtensionTypePtr res){
+    std::vector<PyObject*> varargs;
+    auto method_name = c_string_to_string_name("register_icon");
+    this->call_deferred(method_name, varargs);
   }
 
   void PyLanguage::_get_type(GDExtensionTypePtr res){
@@ -1613,9 +1628,11 @@ void init_func_names(){
 
 #pragma endregion
 void free_instance(void *p_userdata, GDExtensionClassInstancePtr p_instance){
-    assert(false);
     //functions::get_object_destroy()(p_instance);
 }
+
+GDExtensionClassMethodInfo create_method_info(StringName& method_name);
+
 void register_class(){
     GDExtensionClassCreationInfo* creation_info = new GDExtensionClassCreationInfo{};
     init_func_names();
@@ -1635,4 +1652,78 @@ void register_class(){
     parent_class_name.shouldBeDeleted=true;
 
     functions::get_classdb_register_extension_class()(_library, &class_name_lang.godot_owner, &parent_class_name.godot_owner, creation_info);
+
+    StringName method_name = c_string_to_string_name("register_icon");
+    auto method_info = create_method_info(method_name);
+    functions::get_classdb_register_extension_class_method()(
+        _library,
+        &class_name_lang.godot_owner, // same class name used earlier
+        &method_info
+    );
+}
+
+
+void register_icon(
+    GDExtensionClassInstancePtr instance,
+    const GDExtensionConstVariantPtr* args,
+    GDExtensionVariantPtr return_value,
+    GDExtensionInt arg_count,
+    GDExtensionCallError* error
+) {
+    auto engine = Engine::get_instance();
+    if(!engine->is_editor_hint()){
+        return;
+    }
+    auto editor_interface_name = c_string_to_string_name("EditorInterface");
+    std::vector<PyObject*> varargs;
+    if (!engine->has_singleton(editor_interface_name)){
+        auto register_icon_name = c_string_to_string_name("register_icon");
+        get_language()->call_deferred(register_icon_name, varargs);
+        return;
+    }
+
+    auto editor_interface = EditorInterface::get_instance();
+    if(!theme_has_method()){
+        auto register_icon_name = c_string_to_string_name("register_icon");
+        get_language()->call_deferred(register_icon_name, varargs);
+        return;
+    }
+    // Retry until the base_control and its theme are ready
+    /*if (!editor_interface->get_base_control() || !theme) {
+        call_deferred("register_icon");
+        return;
+    }*/
+    theme = editor_interface->get_editor_theme();
+    auto icon_path = c_string_to_string("addons/py4godot/Python.svg");
+    icon_image = Image::constructor();
+    icon_image->reference();
+    icon_image->load(icon_path);
+    image_texture = ImageTexture::py_create_from_image(icon_image);
+
+    auto icon_name = c_string_to_string_name("Python");
+    auto py_script_icon_name = c_string_to_string_name("PyScriptExtension");
+    auto theme_name = c_string_to_string_name("EditorIcons");
+    theme.set_icon(icon_name, theme_name, image_texture.get());
+    theme.set_icon(py_script_icon_name, theme_name, image_texture.get());
+
+    theme.unreference();
+}
+
+GDExtensionClassMethodInfo create_method_info(StringName& method_name){
+    GDExtensionClassMethodInfo method_info = {};
+    method_info.name = &method_name.godot_owner;
+
+    // Assign function pointer
+    method_info.method_userdata = nullptr;
+    method_info.call_func = (GDExtensionClassMethodCall)&register_icon;
+    method_info.ptrcall_func = nullptr; // unless you implement ptrcall
+    method_info.method_flags = GDEXTENSION_METHOD_FLAG_NORMAL;
+    method_info.method_flags = GDEXTENSION_METHOD_FLAG_NORMAL;
+
+    // Optional: argument metadata
+    method_info.arguments_info = nullptr;
+    method_info.argument_count = 0;
+    method_info.default_arguments = nullptr;
+    method_info.default_argument_count = 0;
+    return method_info;
 }
