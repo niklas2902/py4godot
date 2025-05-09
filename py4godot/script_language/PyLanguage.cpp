@@ -15,6 +15,7 @@
 Theme theme;
 std::shared_ptr<ImageTexture> image_texture;
 std::shared_ptr<Image> icon_image;
+godot::StringName register_icon_name;
 
 
 //TODO: generate this
@@ -71,9 +72,8 @@ void PyLanguage::destroy(){
     functions::get_string_new_with_utf8_chars()(res, language_name);
   }
   void PyLanguage::_init(GDExtensionTypePtr res){
-    std::vector<PyObject*> varargs;
-    auto method_name = c_string_to_string_name("register_icon");
-    this->call_deferred(method_name, varargs);
+    std::vector<PyObject*> varargs{};
+    this->call_deferred(register_icon_name, varargs);
   }
 
   void PyLanguage::_get_type(GDExtensionTypePtr res){
@@ -1455,6 +1455,8 @@ void deinit_func_names(){
     func_name__frame.StringName_py_destroy();
     func_name__handles_global_class_type.StringName_py_destroy();
     func_name__get_global_class_name.StringName_py_destroy();
+    register_icon_name.StringName_py_destroy();
+
     func_name__get_name.shouldBeDeleted=false;
     func_name__init.shouldBeDeleted=false;
     func_name__get_type.shouldBeDeleted=false;
@@ -1510,10 +1512,13 @@ void deinit_func_names(){
     func_name__frame.shouldBeDeleted=false;
     func_name__handles_global_class_type.shouldBeDeleted=false;
     func_name__get_global_class_name.shouldBeDeleted=false;
+    register_icon_name.shouldBeDeleted=false;
+
 }
 
 
 void init_func_names(){
+   register_icon_name = c_string_to_string_name("register_icon");
    func_name__get_name = c_string_to_string_name("_get_name");
    func_name__get_name.shouldBeDeleted=true;
    func_name__init = c_string_to_string_name("_init");
@@ -1677,14 +1682,12 @@ void register_icon(
     auto editor_interface_name = c_string_to_string_name("EditorInterface");
     std::vector<PyObject*> varargs;
     if (!engine->has_singleton(editor_interface_name)){
-        auto register_icon_name = c_string_to_string_name("register_icon");
         get_language()->call_deferred(register_icon_name, varargs);
         return;
     }
 
     auto editor_interface = EditorInterface::get_instance();
     if(!theme_has_method()){
-        auto register_icon_name = c_string_to_string_name("register_icon");
         get_language()->call_deferred(register_icon_name, varargs);
         return;
     }
