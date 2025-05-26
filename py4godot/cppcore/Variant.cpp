@@ -64,34 +64,41 @@ void Variant::switch_native_and_inner(){
 }
 
 Variant::Variant(int* val){
+    native_ptr = &data;
     auto constructor = functions::get_get_variant_from_type_constructor()(GDExtensionVariantType::GDEXTENSION_VARIANT_TYPE_INT);
     constructor(&_inner_ptr, &val);
 }
 
 Variant::Variant(String& val){
+    native_ptr = &data;
     auto constructor = functions::get_get_variant_from_type_constructor()(GDExtensionVariantType::GDEXTENSION_VARIANT_TYPE_STRING);
     constructor(&native_ptr, &val.godot_owner);
 }
 Variant::Variant(StringName& val){
+    native_ptr = &data;
     auto constructor = functions::get_get_variant_from_type_constructor()(GDExtensionVariantType::GDEXTENSION_VARIANT_TYPE_STRING_NAME);
     constructor(&native_ptr, &val.godot_owner);
 }
 Variant::Variant(Dictionary& val){
+    native_ptr = &data;
     auto constructor = functions::get_get_variant_from_type_constructor()(GDExtensionVariantType::GDEXTENSION_VARIANT_TYPE_DICTIONARY);
     constructor(&native_ptr, &val.godot_owner);
 }
 
 Variant::Variant(Array& val){
+    native_ptr = &data;
     auto constructor = functions::get_get_variant_from_type_constructor()(GDExtensionVariantType::GDEXTENSION_VARIANT_TYPE_ARRAY);
     constructor(&native_ptr, &val.godot_owner);
 }
 
 Variant::Variant(Object& val){
+    native_ptr = &data;
     auto constructor = functions::get_get_variant_from_type_constructor()(GDExtensionVariantType::GDEXTENSION_VARIANT_TYPE_OBJECT);
     constructor(&native_ptr, &val.godot_owner);
 }
 
 Variant::Variant(int val){
+    native_ptr = &data;
     auto constructor = functions::get_get_variant_from_type_constructor()(GDExtensionVariantType::GDEXTENSION_VARIANT_TYPE_INT);
     constructor(&native_ptr, &val);
 }

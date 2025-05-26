@@ -1,15 +1,16 @@
 import unittest
-from py4godot.enums.enums import *
-from py4godot.classes.generated import *
-from py4godot.pluginscript_api.utils.annotations import *
-from py4godot.pluginscript_api.hints import *
+
+from py4godot.classes.Node3D import Node3D
+from TestObject import TestObject
 
 
 class PythonTest(unittest.TestCase):
-	#TODO: ugly, improve
-	objectToTest = None
+	test_object: TestObject
 
-	def test_a(self):
-		print("objectToTest:",objectToTest)
-		objectToTest.call("test_signal")
-		self.assertTrue(objectToTest.get("signal_emitted"))
+	def __init__(self, methodName='runSignalTest', test_object: TestObject = None):
+		super().__init__(methodName)
+		self.test_object = test_object
+
+	def test_global_position(self):
+		self.test_object.global_position.x = 1
+		self.assertEqual(1, self.test_object.global_position.x)

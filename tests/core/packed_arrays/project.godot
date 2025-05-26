@@ -10,8 +10,8 @@ config_version=5
 
 [application]
 
-config/name="BindingTests"
-run/main_scene="uid://bx11ebu3iwgdm"
+config/name="Packed Array Tests"
+run/main_scene="res://Spatial.tscn"
 config/features=PackedStringArray("4.4")
 config/icon="res://icon.png"
 

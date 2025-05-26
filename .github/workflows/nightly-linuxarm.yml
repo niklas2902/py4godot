@@ -1,36 +1,38 @@
 name: nightly linuxarm
 on:
   workflow_dispatch:
-  schedule:
-    - cron: '0 3 * * *' # run at 3 AM UTC
 
 jobs:
   linuxarm-build:
-    if: ${{ needs.check_date.outputs.should_run != 'false' }}
-    runs-on: ubuntu-latest
-    container:
-      image: niklas2902/py4godot_arm64:4.4
-      options: --platform linux/arm64
+    runs-on: ubuntu-24.04-arm
 
     steps:
       - uses: actions/checkout@v3
         with:
-          ref: 130-support-linuxarm64
+          ref: master
           submodules: 'recursive'
-
-      - name: Set up Python 3.11.3
-        uses: actions/setup-python@v2
+      - name: Install system dependencies
+        run: |
+          sudo apt-get update && sudo apt-get install -y \
+            build-essential \
+            cmake \
+            libx11-dev \
+            libxcursor-dev \
+            libxinerama-dev \
+            libxrandr-dev \
+            libxi-dev \
+            libasound2-dev \
+            libpulse-dev \
+            libudev-dev \
+            libvulkan-dev \
+            mesa-vulkan-drivers \
+            meson \
+            ninja-build
+      
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v4
         with:
-          python-version: "3.11.3"
-
-      - name: Cache py4godot/classes directory
-        id: cache-py4godot-classes
-        uses: actions/cache@v3
-        with:
-          path: py4godot/classes
-          key: linuxarm64-py4godot-classes-${{ hashFiles('**/generate_classes.py', '**/generate_pxd_bridge.py', '**/extension_api.json') }}
-          restore-keys: |
-            linuxarm64-py4godot-classes-
+          python-version: "3.11"
 
       - name: Run Python script and check result
         shell: bash
@@ -67,28 +69,23 @@ jobs:
         run: python meson_scripts/print_tools.py
 
       - name: Generate files
-        run: python generate.py -dev_build=True
+        run: python generate.py
 
       - name: Conditional cythonize
         shell: bash
-        run: |
-          set +e
-          python meson_scripts/does_cache_exist.py
-          exit_code=$?
-          set -e
-          if [ $exit_code -eq 0 ]; then
-            echo "Cache hit for py4godot/classes directory"
-            python cythonize_files.py -mode="cache"
-          else
-            echo "Cache miss for py4godot/classes directory"
-            python cythonize_files.py -mode="dev"
-          fi
+        run: python cythonize_files.py 
 
       - name: Build
-        run: python build.py --target_platform=linuxarm64 --compiler=gcc -create_plugin=False -buildtype=release -run_tests=True -download_godot=True
+        run: python build.py --target_platform=linuxarm64 --compiler=gcc -create_plugin=False -buildtype=release
 
       - name: Create cache
         run: python meson_scripts/create_cache.py
+      
+      - name: Upload build folder as artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: linuxarm-build
+          path: build/
 
       - name: Print structure
         run: python meson_scripts/print_tools.py
