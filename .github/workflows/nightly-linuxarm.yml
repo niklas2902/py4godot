@@ -107,7 +107,7 @@ jobs:
         run: python meson_scripts/create_cache.py
       
       - name: Upload build folder as artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: linuxarm-build
           path: build/
