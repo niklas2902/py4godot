@@ -4,7 +4,6 @@ on:
 
 jobs:
   linuxarm-build:
-    if: ${{ needs.check_date.outputs.should_run != 'false' }}
     runs-on: ubuntu-24.04-arm
 
     steps:

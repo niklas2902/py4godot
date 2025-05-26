@@ -13,7 +13,7 @@ if host_machine.cpu_family() == 'x86_64'
     platform_format = '64'
 endif
 if host_machine.cpu_family() == 'aarch64'
-    platform_format = '64'
+    platform_format = 'arm64'
 endif
 
 message('platform:' + platform_format)
