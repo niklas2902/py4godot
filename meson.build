@@ -63,7 +63,7 @@ if build_machine.system() == 'windows'
 endif
 if build_machine.system() == 'darwin'
     message('search:')
-    message(meson.current_source_dir()+'/python_files/cpython-3.12.4-'+machine+'64 + '/python')
+    message(meson.current_source_dir()+'/python_files/cpython-3.12.4-'+machine+'64' + '/python')
     py = import('python').find_installation('python3')
     dep_py = py.dependency()
     lib_py = cc.find_library('python3.12', dirs:meson.current_source_dir()+'/python_files/cpython-3.12.4-'+machine+'64' + '/python/lib')
