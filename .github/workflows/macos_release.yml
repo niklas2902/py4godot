@@ -1,17 +1,16 @@
-name: release linux
+name: release macos-arm64
 on:
   workflow_dispatch:
 
 jobs:
-  linux-build:
+  macos-arm64-build:
+    runs-on: macos-14
     if: ${{ needs.check_date.outputs.should_run != 'false' }}
-    runs-on: ubuntu-latest
-    container: niklas2902/py4godot:4.4
     steps:
       - uses: actions/checkout@v3
         with:
           ref: master
-          submodules: 'recursive'
+          submodules: recursive
 
       - name: Set up Python 3.11.3
         uses: actions/setup-python@v2
@@ -35,7 +34,6 @@ jobs:
           exit_code=$?
           if [ $exit_code -eq 0 ]; then
             echo "Cache exists"
-            # Add any actions you want to take on success
           else
             echo "Cache does not exist"
             exit 0
@@ -43,8 +41,7 @@ jobs:
           set -e
 
       - name: Print variables
-        run: |
-          python meson_scripts/variables.py
+        run: python meson_scripts/variables.py
 
       - name: Cache pip
         uses: actions/cache@v3
@@ -56,6 +53,8 @@ jobs:
 
       - name: Install dependencies
         run: |
+          brew update
+          brew install cmake ninja meson pkg-config sdl2
           python -m pip install -r requirements.txt
           python -m pip install flake8
 
@@ -65,12 +64,12 @@ jobs:
       - name: Generate files
         run: python generate.py
 
-      - name: Conditional cythonize
+      - name: Cythonize
         shell: bash
         run: python cythonize_files.py
 
       - name: Build
-        run: python build.py --target_platform=linux64 --compiler=gcc -create_plugin=False -buildtype=release -run_tests=True -download_godot=True
+        run: python build.py --target_platform=darwin64 --compiler=clang -create_plugin=False -buildtype=release -run_tests=True -download_godot=True
 
       - name: Create cache
         run: python meson_scripts/create_cache.py
@@ -78,15 +77,14 @@ jobs:
       - name: Print structure
         run: python meson_scripts/print_tools.py
 
-
       - name: Create archive (zip)
         run: |
           cd python-source
-          zip -r build/py4godot-linux64.zip build/py4godot
+          zip -r build/py4godot-macos.zip build/py4godot
 
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
-          name: py4godot-linux64
-          path: build/py4godot-linux64.zip
+          name: py4godot-macos
+          path: build/py4godot-macos.zip
           retention-days: 30

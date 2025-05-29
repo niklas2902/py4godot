@@ -152,3 +152,16 @@ jobs:
       - name: Print structure
         run: python meson_scripts/print_tools.py
         if: always() # Ensures it runs even if the previous step fails
+
+
+      - name: Create archive (zip)
+        run: |
+          cd python-source
+          zip -r build/py4godot-windows64.zip build/py4godot
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: py4godot-windows64
+          path: build/py4godot-windows64.zip
+          retention-days: 30
