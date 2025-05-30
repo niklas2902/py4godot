@@ -62,11 +62,11 @@ jobs:
         run: python meson_scripts/print_tools.py
 
       - name: Generate files
-        run: python generate.py
+        run: python generate.py -dev_build=True
 
       - name: Cythonize
         shell: bash
-        run: python cythonize_files.py
+        run: python cythonize_files.py -mode="dev"
 
       - name: Build
         run: python build.py --target_platform=darwin64 --compiler=clang -create_plugin=False -buildtype=release -run_tests=True -download_godot=True
