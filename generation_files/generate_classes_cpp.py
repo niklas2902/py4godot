@@ -343,7 +343,7 @@ def generate_copy_constructor(class_):
     res = generate_newline(res)
     res += f"{INDENT * 3}auto instance_callback = new Callback<{class_['name']}>();"
     res = generate_newline(res)
-    res += f"{INDENT * 3}auto copy_callback = (Callback<Vector3>*) copy_val._callback;"
+    res += f"{INDENT * 3}auto copy_callback = (Callback<{class_['name']}>*) copy_val._callback;"
     res = generate_newline(res)
     res += f"{INDENT * 3}instance_callback->callback = copy_callback->callback;"
     res = generate_newline(res)
