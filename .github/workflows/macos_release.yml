@@ -79,7 +79,6 @@ jobs:
 
       - name: Create archive (zip)
         run: |
-          cd python-source
           zip -r build/py4godot-macos.zip build/py4godot
 
       - name: Upload artifact
