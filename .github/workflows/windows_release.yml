@@ -156,7 +156,6 @@ jobs:
 
       - name: Create archive (zip)
         run: |
-          cd python-source
           zip -r build/py4godot-windows64.zip build/py4godot
 
       - name: Upload artifact
