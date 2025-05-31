@@ -52,23 +52,28 @@ jobs:
         with:
           name: precompiled
 
-      - name: Install dependencies (Ubuntu)
+      - name: Install dependencies and build  (Ubuntu)
         if: matrix.os == 'ubuntu-latest'
         run: |
           sudo apt-get update
-          sudo apt-get install -y cmake ninja-build meson pkg-config libsdl2-dev
-          python3 -m pip install -r precompiled/requirements.txt
-          python3 -m pip install flake8
+          sudo apt-get install -y cmake ninja-build meson pkg-config libsdl2-dev python3-venv
+          python -m venv venv
+          source venv/bin/activate
+          python -m pip install -r precompiled/requirements.txt
+          python -m pip install flake8
+          python build.py --target_platform=linux64 --compiler=gcc 
 
-      - name: Install dependencies (macOS)
+      - name: Install dependencies and build (macOS)
         if: matrix.os == 'macos-latest'
         run: |
           brew update
-          brew install cmake ninja meson pkg-config sdl2
-          python3 -m pip install -r precompiled/requirements.txt
-          python3 -m pip install flake8
+          brew install cmake ninja meson pkg-config sdl2 python3-venv
+          source venv/bin/activate
+          python -m pip install -r precompiled/requirements.txt
+          python -m pip install flake8
+          python build.py --target_platform=darwin64 --compiler=clang
 
-      - name: Install dependencies (Windows)
+      - name: Install dependencies and build (Windows)
         if: matrix.os == 'windows-latest'
         shell: powershell
         run: |
@@ -76,6 +81,7 @@ jobs:
           choco install ninja meson pkgconfiglite -y
           python -m pip install -r precompiled/requirements.txt
           python -m pip install flake8
+          python build.py --target_platform=windows64 --compiler=msvc 
 
       - name: Use the Precompiled Code
         run: |
