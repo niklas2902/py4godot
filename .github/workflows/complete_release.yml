@@ -86,4 +86,4 @@ jobs:
           choco install ninja meson pkgconfiglite -y
           python -m pip install -r requirements.txt
           python -m pip install flake8
-          python build.py --target_platform
+          python build.py --target_platform=windows64 --compiler=msvc
