@@ -87,3 +87,10 @@ jobs:
           python -m pip install -r requirements.txt
           python -m pip install flake8
           python build.py --target_platform=windows64 --compiler=gcc
+
+      - name: Upload py4godot build artifact
+        uses: actions/upload-artifact@v4
+        with:
+            name: py4godot-${{ matrix.os }}
+            path: build/py4godot/
+            retention-days: 30
