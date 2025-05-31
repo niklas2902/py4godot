@@ -1,0 +1,84 @@
+name: complete release
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    container: niklas2902/py4godot:4.4
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          submodules: 'recursive'
+
+      - name: Set up Python 3.11.3
+        uses: actions/setup-python@v2
+        with:
+          python-version: "3.11.3"
+
+      - name: Install dependencies
+        run: |
+          python -m pip install -r requirements.txt
+          python -m pip install flake8
+
+      - name: Print structure
+        run: python meson_scripts/print_tools.py
+
+      - name: Generate files
+        run: python generate.py
+
+      - name: Conditional cythonize
+        run: python cythonize_files.py -mode="dev"
+
+      - name: Upload Precompiled Code
+        uses: actions/upload-artifact@v4
+        with:
+          name: precompiled
+          path: .
+
+  build_cpp:
+    needs: build
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+
+    steps:
+      - name: Download Precompiled Code
+        uses: actions/download-artifact@v4
+        with:
+          name: precompiled
+
+      - name: Install dependencies (Ubuntu)
+        if: matrix.os == 'ubuntu-latest'
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y cmake ninja-build meson pkg-config libsdl2-dev
+          python3 -m pip install -r precompiled/requirements.txt
+          python3 -m pip install flake8
+
+      - name: Install dependencies (macOS)
+        if: matrix.os == 'macos-latest'
+        run: |
+          brew update
+          brew install cmake ninja meson pkg-config sdl2
+          python3 -m pip install -r precompiled/requirements.txt
+          python3 -m pip install flake8
+
+      - name: Install dependencies (Windows)
+        if: matrix.os == 'windows-latest'
+        shell: powershell
+        run: |
+          choco install cmake --installargs 'ADD_CMAKE_TO_PATH=System' -y
+          choco install ninja meson pkgconfiglite -y
+          python -m pip install -r precompiled/requirements.txt
+          python -m pip install flake8
+
+      - name: Use the Precompiled Code
+        run: |
+          echo "Listing contents of artifact folder:"
+          ls -la
+        working-directory: precompiled
