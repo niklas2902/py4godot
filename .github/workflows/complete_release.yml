@@ -59,7 +59,7 @@ jobs:
           sudo apt-get install -y cmake ninja-build meson pkg-config libsdl2-dev python3-venv
           python3 -m venv venv
           source venv/bin/activate
-          python -m pip install -r precompiled/requirements.txt
+          python -m pip install -r requirements.txt
           python -m pip install flake8
           python build.py --target_platform=linux64 --compiler=gcc 
 
@@ -70,7 +70,7 @@ jobs:
           brew install cmake ninja meson pkg-config sdl2
           python3 -m venv venv
           source venv/bin/activate
-          python -m pip install -r precompiled/requirements.txt
+          python -m pip install -r requirements.txt
           python -m pip install flake8
           python build.py --target_platform=darwin64 --compiler=clang
 
@@ -80,7 +80,7 @@ jobs:
         run: |
           choco install cmake --installargs 'ADD_CMAKE_TO_PATH=System' -y
           choco install ninja meson pkgconfiglite -y
-          python -m pip install -r precompiled/requirements.txt
+          python -m pip install -r requirements.txt
           python -m pip install flake8
           python build.py --target_platform=windows64 --compiler=msvc 
 
