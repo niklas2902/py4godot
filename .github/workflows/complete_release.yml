@@ -78,14 +78,13 @@ jobs:
         if: matrix.os == 'windows-latest'
         shell: powershell
         run: |
+          # Set up the MSVC developer environment
+          & "${Env:ProgramFiles(x86)}\Microsoft Visual Studio\2022\Enterprise\Common7\Tools\VsDevCmd.bat"
+
           choco install cmake --installargs 'ADD_CMAKE_TO_PATH=System' -y
           choco install ninja meson pkgconfiglite -y
+
           python -m pip install -r requirements.txt
           python -m pip install flake8
-          python build.py --target_platform=windows64 --compiler=msvc 
 
-      - name: Use the Precompiled Code
-        run: |
-          echo "Listing contents of artifact folder:"
-          ls -la
-        working-directory: precompiled
+          python build.py --target_platform=windows64 --compiler=msvc
