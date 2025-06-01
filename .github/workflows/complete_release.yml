@@ -96,6 +96,7 @@ jobs:
             retention-days: 30
 
   combine:
+    needs: build_cpp
     runs-on: ubuntu-latest
     steps:
       - name: Download Windows
