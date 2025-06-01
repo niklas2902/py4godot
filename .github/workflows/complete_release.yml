@@ -117,5 +117,5 @@ jobs:
       - name: Upload Precompiled Code
         uses: actions/upload-artifact@v4
         with:
-          name: precompiled
+          name: final_output
           path: .
