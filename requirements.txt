@@ -2,5 +2,4 @@ Cython>=3.0.0
 zstandard
 wget
 meson>=1.0.0
-ninja==1.10.2.3
 tqdm

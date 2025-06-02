@@ -30,6 +30,12 @@ jobs:
       - name: Install dependencies
         run: |
           python -m pip install -r requirements.txt
+      - name: Install Ninja manually
+        shell: powershell
+        run: |
+          Invoke-WebRequest -Uri https://github.com/ninja-build/ninja/releases/download/v1.11.1/ninja-win.zip -OutFile ninja.zip
+          Expand-Archive ninja.zip -DestinationPath ninja
+          echo "$PWD/ninja" | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8 -Append
 
       - name: Generate files
         run: python generate.py -dev_build=True
