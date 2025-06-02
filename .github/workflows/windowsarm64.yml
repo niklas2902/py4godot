@@ -32,16 +32,6 @@ jobs:
           python -m pip install -r requirements.txt
           python -m pip install flake8
 
-      - name: Install Mesa
-        shell: cmd
-        run: |
-          mkdir godot
-          curl.exe -L --output godot/mesa.7z --url https://github.com/pal1000/mesa-dist-win/releases/download/20.3.2/mesa3d-20.3.2-release-msvc.7z
-          "C:\Program Files\7-Zip\7z.exe" x godot/mesa.7z -ogodot
-          cd godot
-          mklink opengl32.dll "x64\opengl32.dll"
-          mklink libglapi.dll "x64\libglapi.dll"
-
       - name: Generate files
         run: python generate.py -dev_build=True
 
