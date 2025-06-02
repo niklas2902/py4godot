@@ -27,9 +27,6 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-pip-
 
-      - name: Install dependencies
-        run: |
-          python -m pip install -r requirements.txt
       - name: Install Ninja manually
         shell: powershell
         run: |
@@ -37,18 +34,21 @@ jobs:
           Expand-Archive ninja.zip -DestinationPath ninja
           echo "$PWD/ninja" | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8 -Append
 
+      - name: Install dependencies
+        run: |
+          python -m pip install Cython>=3.0.0 zstandard wget meson>=1.0.0 tqdm
+
+
       - name: Generate files
         run: python generate.py -dev_build=True
 
       - name: Cythonize
         shell: bash
         run: |
-            python -m pip install -r requirements.txt
             python cythonize_files.py -mode="dev"
 
       - name: Build
         shell: cmd
         run: |
-          python -m pip install -r requirements.txt
           python build.py --target_platform=windowsarm64 --compiler=gcc -create_plugin=False -buildtype=release -run_tests=False
 
