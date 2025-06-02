@@ -30,6 +30,7 @@ def download_file(platform, allow_copy=False):
     python_folder = f"{python_ver}-" + platform
 
     print("download:" + platform)
+    print("Running on ")
 
     if platform != "linux32" and platform != "linux64" and platform != "windowsarm64":
         url = f'https://github.com/indygreg/python-build-standalone/releases/download/20240726/{python_ver}+20240726-{platform_dict[platform]}.tar.gz'

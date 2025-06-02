@@ -10,7 +10,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
         with:
-          ref: master
+          ref: winarm64
           submodules: 'recursive'
 
       - name: Set up Python 3.11.3
