@@ -5,7 +5,7 @@ Inspiration for this project was taken from: https://github.com/touilleMan/godot
 
 This project is currently in an early phase of development. Consider this more as a demo and don't use this for bigger projects. At the moment only Windows 64 bit and Linux 64 bit are supported.
 
-Examples for this plugin can be found here: [Examples](https://github.com/niklas2902/py4godot-examples)
+Examples for this plugin can be found here: [Exmaples](https://github.com/niklas2902/py4godot-examples)
 
 You can check out the api documentation here: [API Documentation](https://github.com/niklas2902/py4godot/wiki/API-Documentation)
 

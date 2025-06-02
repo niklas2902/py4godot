@@ -637,51 +637,6 @@ def generate_operators_for_class(class_name):
 def is_typed_array(classname):
     return classname in typed_arrays_names
 
-def generate_array_methods(class_):
-    res = ""
-    if class_["name"] in ("PackedFloat32Array", "PackedFloat64Array", "PackedByteArray", "PackedInt32Array", "PackedInt64Array"):
-        if class_["name"] == "PackedFloat32Array":
-            res += f"{INDENT*2}vector[float] to_vector()"
-            res = generate_newline(res)
-            res += f"{INDENT*2}float* get_pointer()"
-            res = generate_newline(res)
-            res += f"{INDENT*2}@staticmethod"
-            res = generate_newline(res)
-            res += f"{INDENT*2}shared_ptr[{class_['name']}] py_from_ptr(float* ptr, long long size)"
-            res = generate_newline(res)
-        if class_["name"] == "PackedFloat64Array":
-            res += f"{INDENT*2}vector[double] to_vector()"
-            res = generate_newline(res)
-            res += f"{INDENT * 2}double* get_pointer()"
-            res = generate_newline(res)
-            res += f"{INDENT*2}@staticmethod"
-            res = generate_newline(res)
-            res += f"{INDENT*2}shared_ptr[{class_['name']}] py_from_ptr(double* ptr, long long size)"
-        if class_["name"] == "PackedByteArray":
-            res += f"{INDENT * 2}vector[byte] to_vector()"
-            res = generate_newline(res)
-            res += f"{INDENT * 2}byte* get_pointer()"
-            res = generate_newline(res)
-            res += f"{INDENT*2}@staticmethod"
-            res = generate_newline(res)
-            res += f"{INDENT*2}shared_ptr[{class_['name']}] py_from_ptr(byte* ptr, long long size)"
-        if class_["name"] == "PackedInt32Array":
-            res += f"{INDENT * 2}vector[int32_t] to_vector()"
-            res = generate_newline(res)
-            res += f"{INDENT * 2}int32_t* get_pointer()"
-            res = generate_newline(res)
-            res += f"{INDENT*2}@staticmethod"
-            res = generate_newline(res)
-            res += f"{INDENT*2}shared_ptr[{class_['name']}] py_from_ptr(int32_t* ptr, long long size)"
-        if class_["name"] == "PackedInt64Array":
-            res += f"{INDENT * 2}vector[int64_t] to_vector()"
-            res = generate_newline(res)
-            res += f"{INDENT * 2}int64_t* get_pointer()"
-            res = generate_newline(res)
-            res += f"{INDENT*2}@staticmethod"
-            res = generate_newline(res)
-            res += f"{INDENT*2}shared_ptr[{class_['name']}] py_from_ptr(int64_t* ptr, long long size)"
-    return res
 
 def generate_classes(classes, filename, is_core=False):
     res = generate_import()
@@ -717,9 +672,6 @@ def generate_classes(classes, filename, is_core=False):
         res = generate_newline(res)
         res += generate_common_methods(class_)
         res += generate_special_methods(class_)
-        res = generate_newline(res)
-
-        res += generate_array_methods(class_)
         res = generate_newline(res)
         res += generate_construction(class_)
         res = generate_newline(res)

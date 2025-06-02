@@ -1,3 +1,4 @@
+; Project was converted by built-in tool to Godot 4
 ; Engine configuration file.
 ; It's best edited using the editor UI and not directly,
 ; since the parameters that go here are not all obvious.
@@ -11,13 +12,12 @@ config_version=5
 [application]
 
 config/name="BindingTests"
-run/main_scene="uid://bx11ebu3iwgdm"
-config/features=PackedStringArray("4.4")
+run/main_scene="res://Spatial.tscn"
 config/icon="res://icon.png"
 
 [gdnative]
 
-singletons=["res://python_lib.gdnlib"]
+singletons=[ "res://python_lib.gdnlib" ]
 
 [physics]
 
@@ -25,5 +25,5 @@ common/enable_pause_aware_picking=true
 
 [rendering]
 
-environment/defaults/default_environment="res://default_env.tres"
 quality/driver/fallback_to_gles2=true
+environment/defaults/default_environment="res://default_env.tres"

@@ -1,0 +1,74 @@
+name: WEEKLY windows-arm64
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 3 * * 1'
+
+jobs:
+  windows-build:
+    runs-on: windows-latest
+    strategy:
+      matrix:
+        include:
+          - PLATFORM: 'windows-arm64'
+            PYTHON_ARCH: 'arm64'
+            VS_ARCH: 'arm64'
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          ref: master
+          submodules: 'recursive'
+
+      - name: Set up Python 3.11.3
+        uses: actions/setup-python@v2
+        with:
+          python-version: "3.11.3"
+          architecture: arm64
+
+      - name: Download latest Godot (ARM64) and add to PATH
+        shell: powershell
+        run: |
+          New-Item -Path "C:\Godot" -ItemType Directory -Force
+          Invoke-WebRequest -Uri "https://github.com/godotengine/godot/releases/download/4.4-stable/Godot_v4.4-stable_winarm64.exe.zip" -OutFile "C:\Godot\godot.zip"
+          Expand-Archive -Path "C:\Godot\godot.zip" -DestinationPath "C:\Godot" -Force
+          Rename-Item -Path (Get-ChildItem -Path C:\Godot\*.exe | Select-Object -First 1).FullName -NewName "godot.exe" -Force
+          echo "C:\Godot" | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8 -Append
+          [Environment]::SetEnvironmentVariable("PATH", "$env:PATH;C:\Godot", [EnvironmentVariableTarget]::Machine)
+          godot --version
+
+      - name: Cache pip
+        uses: actions/cache@v3
+        with:
+          path: ~/.cache/pip
+          key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
+          restore-keys: |
+            ${{ runner.os }}-pip-
+
+      - name: Install dependencies
+        run: |
+          python -m pip install -r requirements.txt
+          python -m pip install flake8
+
+      - name: Install Mesa
+        shell: cmd
+        run: |
+          mkdir godot
+          curl.exe -L --output godot/mesa.7z --url https://github.com/pal1000/mesa-dist-win/releases/download/20.3.2/mesa3d-20.3.2-release-msvc.7z
+          "C:\Program Files\7-Zip\7z.exe" x godot/mesa.7z -ogodot
+          cd godot
+          mklink opengl32.dll "x64\opengl32.dll"
+          mklink libglapi.dll "x64\libglapi.dll"
+
+      - name: Generate files
+        run: python generate.py -dev_build=True
+
+      - name: Cythonize
+        shell: bash
+        run: |
+            python cythonize_files.py -mode="dev"
+
+      - name: Build
+        shell: cmd
+        run: python build.py --target_platform=windowsarm64 --compiler=gcc -create_plugin=False -buildtype=release -run_tests=False
+

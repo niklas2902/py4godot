@@ -44,11 +44,7 @@ void godot::deinit_py_language(){
 
    resource_saver->remove_resource_format_saver(py_resource_format_saver);
     deinit_func_names();
-    py_language->destroy();
-    py_resource_format_loader->destroy();
-    py_resource_format_saver->destroy();
-}
-
-PyLanguage* godot::get_language(){
-    return py_language;
+    //py_language->destroy();
+    //py_resource_format_loader->destroy();
+    //py_resource_format_saver->destroy();
 }

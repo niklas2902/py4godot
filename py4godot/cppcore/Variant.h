@@ -7,7 +7,6 @@ namespace godot{
     public:
         GDExtensionVariantPtr native_ptr;
         GDExtensionVariantPtr _inner_ptr;
-        char data[16];
 
 
         static void init_variant();

@@ -3,7 +3,7 @@
 
 #if defined(__linux__) || defined(__APPLE__)
 #include <iostream>
-#include <dlfcn.h>  // For dlopen, dlsym, dlclose on Linux/macOS
+#include <dlfcn.h>  // For dlopen, dlsym, dlclose on Linux
 #endif
 
 typedef GDExtensionBool (*Py4GodotInitFunc)(GDExtensionInterfaceGetProcAddress p_get_proc_address,
@@ -17,16 +17,8 @@ extern "C" {
                                                        GDExtensionInitialization *r_initialization) {
 
         #if defined(__linux__)
-        void* handle = nullptr;
-
-        #if defined(__aarch64__)
-        // Load the ARM64 Linux shared library
-        handle = dlopen("addons/py4godot/cpython-3.12.4-linuxarm64/python/bin/main.so", RTLD_NOW | RTLD_GLOBAL);
-        #else
-        // Load the x86_64 Linux shared library
-        handle = dlopen("addons/py4godot/cpython-3.12.4-linux64/python/bin/main.so", RTLD_NOW | RTLD_GLOBAL);
-        #endif
-
+        // Load the shared library on Linux
+        void* handle = dlopen("addons/py4godot/cpython-3.12.4-linux64/python/bin/main.so", RTLD_NOW | RTLD_GLOBAL);
         #elif defined(__APPLE__)
         // Load the shared library on macOS
         void* handle = dlopen("addons/py4godot/cpython-3.12.4-darwin64/python/bin/main.dylib", RTLD_NOW | RTLD_GLOBAL);
@@ -70,3 +62,5 @@ extern "C" {
 
     }
 }
+
+

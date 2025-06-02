@@ -747,8 +747,6 @@ def generate_classes(classes, filename, is_core=False):
         res = generate_newline(res)
         res += generate_special_methods(class_)
         res = generate_newline(res)
-        res += generate_array_methods(class_)
-        res = generate_newline(res)
         res += generate_construction(class_)
         res = generate_newline(res)
         if "methods" not in class_.keys():
@@ -852,40 +850,6 @@ def generate_cast(class_):
     res = generate_newline(res)
     return res
 
-def generate_array_methods(class_):
-    res = ""
-    if class_["name"] in ("PackedInt32Array", "PackedInt64Array", "PackedFloat32Array", "PackedFloat64Array", "PackedByteArray"):
-        if class_["name"] == "PackedFloat32Array":
-            res += f"{INDENT*1}std::vector<float> to_vector();"
-            res = generate_newline(res)
-            res += f"{INDENT*1}float* get_pointer();"
-            res = generate_newline(res)
-            res += f"{INDENT * 1}static std::shared_ptr<{class_['name']}> py_from_ptr(float* ptr, long long size);"
-        if class_["name"] == "PackedFloat64Array":
-            res += f"{INDENT*1}std::vector<double> to_vector();"
-            res = generate_newline(res)
-            res += f"{INDENT * 1}double* get_pointer();"
-            res = generate_newline(res)
-            res += f"{INDENT * 1}static std::shared_ptr<{class_['name']}> py_from_ptr(double* ptr, long long size);"
-        if class_["name"] == "PackedByteArray":
-            res += f"{INDENT * 1}std::vector<byte> to_vector();"
-            res = generate_newline(res)
-            res += f"{INDENT * 1}byte* get_pointer();"
-            res = generate_newline(res)
-            res += f"{INDENT * 1}static std::shared_ptr<{class_['name']}> py_from_ptr(byte* ptr, long long size);"
-        if class_["name"] == "PackedInt32Array":
-            res += f"{INDENT * 1}std::vector<int32_t> to_vector();"
-            res = generate_newline(res)
-            res += f"{INDENT * 1}int32_t* get_pointer();"
-            res = generate_newline(res)
-            res += f"{INDENT * 1}static std::shared_ptr<{class_['name']}> py_from_ptr(int32_t* ptr, long long size);"
-        if class_["name"] == "PackedInt64Array":
-            res += f"{INDENT * 1}std::vector<int64_t> to_vector();"
-            res = generate_newline(res)
-            res += f"{INDENT * 1}int64_t* get_pointer();"
-            res = generate_newline(res)
-            res += f"{INDENT * 1}static std::shared_ptr<{class_['name']}> py_from_ptr(int64_t* ptr, long long size);"
-    return res
 
 def generate_special_methods(class_):
     res = ""

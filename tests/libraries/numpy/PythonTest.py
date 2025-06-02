@@ -37,10 +37,3 @@ class PythonTest(unittest.TestCase):
         """Test that NumPy has a valid version number."""
         import numpy as np
         self.assertIsInstance(np.__version__, str)
-
-    def test_packed_array(self):
-        """Test creation of PackedArray from NumPy array."""
-        import numpy as np
-        ones = np.ones(5, dtype=np.uint8)
-        array = PackedByteArray.from_memory_view(memoryview(ones))
-        self.assertEqual(array.to_list(), [1, 1, 1, 1, 1])
