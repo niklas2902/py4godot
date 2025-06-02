@@ -1,4 +1,8 @@
 name: WEEKLY windows-arm64
+on:
+  push:
+    branches:
+      - winarm64      # or 'master', or use ['main', 'dev', 'feature/*'] for multiple
 
 jobs:
   windows-build:
