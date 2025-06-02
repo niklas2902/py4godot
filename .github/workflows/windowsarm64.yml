@@ -19,17 +19,6 @@ jobs:
           python-version: "3.11.3"
           architecture: arm64
 
-      - name: Download latest Godot (ARM64) and add to PATH
-        shell: powershell
-        run: |
-          New-Item -Path "C:\Godot" -ItemType Directory -Force
-          Invoke-WebRequest -Uri "https://github.com/godotengine/godot/releases/download/4.4-stable/Godot_v4.4-stable_winarm64.exe.zip" -OutFile "C:\Godot\godot.zip"
-          Expand-Archive -Path "C:\Godot\godot.zip" -DestinationPath "C:\Godot" -Force
-          Rename-Item -Path (Get-ChildItem -Path C:\Godot\*.exe | Select-Object -First 1).FullName -NewName "godot.exe" -Force
-          echo "C:\Godot" | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8 -Append
-          [Environment]::SetEnvironmentVariable("PATH", "$env:PATH;C:\Godot", [EnvironmentVariableTarget]::Machine)
-          godot --version
-
       - name: Cache pip
         uses: actions/cache@v3
         with:
