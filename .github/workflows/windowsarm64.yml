@@ -6,13 +6,7 @@ on:
 
 jobs:
   windows-build:
-    runs-on: windows-latest
-    strategy:
-      matrix:
-        include:
-          - PLATFORM: 'windows-arm64'
-            PYTHON_ARCH: 'arm64'
-            VS_ARCH: 'arm64'
+    runs-on: windows-11-arm
     steps:
       - uses: actions/checkout@v3
         with:
