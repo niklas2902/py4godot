@@ -4,6 +4,9 @@ on:
   push:
     branches: [master]
   pull_request:
+  schedule:
+    - cron: '0 3 * * 1'  # Runs at 03:00 UTC every Monday
+  workflow_dispatch:     # Allows manual triggering
 
 jobs:
   build:
@@ -31,7 +34,7 @@ jobs:
         run: python generate.py
 
       - name: Cythonize
-        run: python cythonize_files.py -mode="dev"
+        run: python cythonize_files.py
 
       - name: Upload Precompiled Code
         uses: actions/upload-artifact@v4
@@ -102,9 +105,9 @@ jobs:
       - name: Upload py4godot build artifact
         uses: actions/upload-artifact@v4
         with:
-            name: py4godot-${{ matrix.os }}
-            path: build/py4godot/
-            retention-days: 30
+          name: py4godot-${{ matrix.os }}
+          path: build/py4godot/
+          retention-days: 30
 
   combine:
     needs: build_cpp
