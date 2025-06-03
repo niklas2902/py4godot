@@ -154,9 +154,90 @@ download_python.download_file(current_platform, allow_copy=False)
 
 compile_python_ver_file(current_platform)
 
-# initializing for msvc if wanted as compiler (todo:should be improved sometime)
-msvc_init = f"vcvarsall.bat arm64 {command_separator} cl {command_separator} " if "msvc" in args.compiler else ""
 
+def run_with_msvc_env(command, target_arch="arm64"):
+    """Run a command with MSVC environment initialized"""
+    if "msvc" not in args.compiler:
+        # Not using MSVC, run command directly
+        return subprocess.run(command, shell=True, check=True)
+
+    # Try to find Visual Studio using multiple methods
+    vcvarsall_path = None
+
+    # Method 1: Use vswhere.exe (most reliable)
+    vswhere_locations = [
+        os.path.join(os.environ.get('ProgramFiles(x86)', ''), 'Microsoft Visual Studio', 'Installer', 'vswhere.exe'),
+        os.path.join(os.environ.get('ProgramFiles', ''), 'Microsoft Visual Studio', 'Installer', 'vswhere.exe'),
+    ]
+
+    for vswhere_path in vswhere_locations:
+        if os.path.exists(vswhere_path):
+            try:
+                vs_path = subprocess.check_output([vswhere_path, '-latest', '-property', 'installationPath'],
+                                                  text=True).strip()
+                vcvarsall_candidate = os.path.join(vs_path, "VC", "Auxiliary", "Build", "vcvarsall.bat")
+                if os.path.exists(vcvarsall_candidate):
+                    vcvarsall_path = vcvarsall_candidate
+                    break
+            except subprocess.CalledProcessError:
+                continue
+
+    # Method 2: Check environment variables
+    if not vcvarsall_path:
+        vs_vars = ['VS170COMNTOOLS', 'VS160COMNTOOLS', 'VS150COMNTOOLS', 'VS140COMNTOOLS']
+        for var in vs_vars:
+            if var in os.environ:
+                # VS tools are in Common7/Tools, vcvarsall is in VC/Auxiliary/Build
+                vs_root = os.path.dirname(os.path.dirname(os.environ[var]))
+                vcvarsall_candidate = os.path.join(vs_root, "VC", "Auxiliary", "Build", "vcvarsall.bat")
+                if os.path.exists(vcvarsall_candidate):
+                    vcvarsall_path = vcvarsall_candidate
+                    break
+
+    # Method 3: Check common installation directories using environment variables
+    if not vcvarsall_path:
+        program_dirs = [
+            os.environ.get('ProgramFiles', ''),
+            os.environ.get('ProgramFiles(x86)', ''),
+        ]
+
+        vs_versions = ['2022', '2019', '2017']
+        vs_editions = ['Enterprise', 'Professional', 'Community', 'BuildTools']
+
+        for prog_dir in program_dirs:
+            if not prog_dir:
+                continue
+            for version in vs_versions:
+                for edition in vs_editions:
+                    vcvarsall_candidate = os.path.join(
+                        prog_dir, 'Microsoft Visual Studio', version, edition,
+                        'VC', 'Auxiliary', 'Build', 'vcvarsall.bat'
+                    )
+                    if os.path.exists(vcvarsall_candidate):
+                        vcvarsall_path = vcvarsall_candidate
+                        break
+                if vcvarsall_path:
+                    break
+            if vcvarsall_path:
+                break
+
+    # Method 4: Try PATH (last resort)
+    if not vcvarsall_path:
+        try:
+            # Try to run vcvarsall directly - it might be in PATH
+            subprocess.run(['vcvarsall.bat'], shell=True, check=True,
+                           stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+            vcvarsall_path = "vcvarsall.bat"
+        except subprocess.CalledProcessError:
+            raise RuntimeError("Could not find vcvarsall.bat. Please ensure Visual Studio is properly installed.")
+
+    # Combine vcvarsall initialization with your command
+    full_command = f'"{vcvarsall_path}" {target_arch} && {command}'
+
+    return subprocess.run(full_command, shell=True, check=True)
+
+
+# Main build logic
 res = None
 try:
     print("starting building:")
@@ -171,15 +252,12 @@ try:
             f"--buildtype={args.buildtype} "
         )
 
-        print("command:\n",
-              command
-              )
-        res = subprocess.Popen(msvc_init +command,shell=True)
-        res.wait()
+        print("command:\n", command)
+        run_with_msvc_env(command)
+
         command = f"meson compile -C build/{args.target_platform}"
         print("command:\n", command)
-        res = subprocess.Popen(msvc_init + command, shell=True)
-        res.wait()
+        run_with_msvc_env(command)
     else:
         command = (
             f"meson setup {build_dir} "
@@ -191,15 +269,12 @@ try:
             f"{get_debug_release_cross_compile_file(args.compiler, build_type)} "
         )
 
-        print("command:\n",
-              command)
-        res = subprocess.Popen(msvc_init + command,shell=True)
-        res.wait()
+        print("command:\n", command)
+        run_with_msvc_env(command)
+
         command = f"meson compile -C build/{args.target_platform}"
         print("command:\n", command)
-        res = subprocess.Popen(msvc_init + command,shell=True)
-        res.wait()
-
+        run_with_msvc_env(command)
     fix_macos_paths()
     copy_tools.run(args.target_platform)
     copy_tools.copy_main(args.target_platform)
