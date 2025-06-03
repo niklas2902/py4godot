@@ -28,6 +28,8 @@ jobs:
           # Download and install pip
           Invoke-WebRequest -Uri https://bootstrap.pypa.io/get-pip.py -OutFile get-pip.py
           ./python_arm64/python.exe get-pip.py
+      - name: Print Architecture
+        run:  python meson_scripts/platform_check.py
 
       - name: Cache pip
         uses: actions/cache@v3
