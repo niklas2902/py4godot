@@ -63,4 +63,10 @@ jobs:
         shell: cmd
         run: |
           python build.py --target_platform=windowsarm64 --compiler=msvc -create_plugin=False -buildtype=release -run_tests=False
+      
+      - name: Upload Precompiled Code
+        uses: actions/upload-artifact@v4
+        with:
+          name: precompiled
+          path: .
 
