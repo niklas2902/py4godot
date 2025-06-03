@@ -11,6 +11,7 @@ def get_platform():
     """
     system = platform.system().lower()
     arch = platform.machine().lower()
+    return "windowsarm64"
 
     print(f"system: {system}, arch: {arch}")
     if system == "linux":
