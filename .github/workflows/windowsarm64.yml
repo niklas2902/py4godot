@@ -62,5 +62,5 @@ jobs:
       - name: Build
         shell: cmd
         run: |
-          python build.py --target_platform=windowsarm64 --compiler=gcc -create_plugin=False -buildtype=release -run_tests=False
+          python build.py --target_platform=windowsarm64 --compiler=msvc -create_plugin=False -buildtype=release -run_tests=False
 
