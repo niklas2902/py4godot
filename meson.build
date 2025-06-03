@@ -50,7 +50,7 @@ endif
 message(meson.current_source_dir())
 
 if build_machine.system() == 'windows'
-    py = import('python').find_installation('python3')
+    py = import('python').find_installation('C:/a/py4godot/py4godot/python_arm64/python.exe')
     dep_py = py.dependency()
     internal_inc = include_directories('py4godot/gdextension-api/', 'py4godot/core', 'py4godot/enums',
     'py4godot/classes', 'py4godot/pluginscript_api', 'py4godot/godot_bindings',
