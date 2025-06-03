@@ -14,6 +14,29 @@ jobs:
           ref: winarm64
           submodules: 'recursive'
 
+      - name: Print architecture details
+        run: |
+          echo === Platform Info ===
+          python -c "import platform; print('platform.machine():', platform.machine())"
+          python -c "import struct; print('struct.calcsize(\"P\") * 8:', struct.calcsize('P') * 8)"
+          python -c "import sys; print('sys.version:', sys.version)"
+          python -c "import os; print('PROCESSOR_ARCHITECTURE:', os.environ.get('PROCESSOR_ARCHITECTURE'))"
+          echo === Native System Info ===
+          python -c "
+          import ctypes
+          class SYSTEM_INFO(ctypes.Structure):
+              _fields_ = [('wProcessorArchitecture', ctypes.c_ushort), ('wReserved', ctypes.c_ushort),
+                          ('dwPageSize', ctypes.c_uint), ('lpMinimumApplicationAddress', ctypes.c_void_p),
+                          ('lpMaximumApplicationAddress', ctypes.c_void_p), ('dwActiveProcessorMask', ctypes.POINTER(ctypes.c_ulong)),
+                          ('dwNumberOfProcessors', ctypes.c_uint), ('dwProcessorType', ctypes.c_uint),
+                          ('dwAllocationGranularity', ctypes.c_uint), ('wProcessorLevel', ctypes.c_ushort),
+                          ('wProcessorRevision', ctypes.c_ushort)]
+          arch_map = {0: 'x86 (32-bit)', 5: 'ARM', 6: 'Itanium', 9: 'x64', 12: 'ARM64'}
+          sysinfo = SYSTEM_INFO()
+          ctypes.windll.kernel32.GetNativeSystemInfo(ctypes.byref(sysinfo))
+          print('GetNativeSystemInfo:', arch_map.get(sysinfo.wProcessorArchitecture, sysinfo.wProcessorArchitecture))
+          "
+      
       - name: Set up ARM64 Python and pip
         shell: powershell
         run: |
