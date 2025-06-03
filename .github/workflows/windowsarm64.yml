@@ -13,11 +13,12 @@ jobs:
           ref: winarm64
           submodules: 'recursive'
 
-      - name: Set up Python 3.11.3
-        uses: actions/setup-python@v2
-        with:
-          python-version: "3.11.3"
-          architecture: arm64
+      - name: Install ARM64 Python manually
+        shell: powershell
+        run: |
+          Invoke-WebRequest -Uri https://www.python.org/ftp/python/3.11.3/python-3.11.3-embed-arm64.zip -OutFile python.zip
+          Expand-Archive python.zip -DestinationPath python_arm64
+          echo "$PWD/python_arm64" | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8 -Append
 
       - name: Cache pip
         uses: actions/cache@v3
