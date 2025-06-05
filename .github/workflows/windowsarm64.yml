@@ -52,12 +52,12 @@ jobs:
 
 
       - name: Generate files
-        run: python generate.py -dev_build=True
+        run: python generate.py
 
       - name: Cythonize
         shell: bash
         run: |
-            python cythonize_files.py -mode="dev"
+            python cythonize_files.py
 
       - name: Build
         shell: cmd
@@ -68,6 +68,6 @@ jobs:
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: precompiled
-          path: .
+          name: py4godot-windowsarm64
+          path: build/final
 

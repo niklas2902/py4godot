@@ -1,85 +1,140 @@
-name: WEEKLY windows-arm64
+name: complete release
 
 on:
   push:
-    branches:
-      - winarm64
+    branches: [master]
+  pull_request:
+  schedule:
+    - cron: '0 3 * * 1'  # Runs at 03:00 UTC every Monday
+  workflow_dispatch:     # Allows manual triggering
 
 jobs:
-  windows-build:
-    runs-on: windows-11-arm
+  build:
+    runs-on: ubuntu-latest
+    container: niklas2902/py4godot:4.4
     steps:
       - uses: actions/checkout@v3
         with:
-          ref: winarm64
           submodules: 'recursive'
 
-      - name: Print architecture details
-        run: |
-          echo === Platform Info ===
-          python -c "import platform; print('platform.machine():', platform.machine())"
-          python -c "import struct; print('struct.calcsize(\"P\") * 8:', struct.calcsize('P') * 8)"
-          python -c "import sys; print('sys.version:', sys.version)"
-          python -c "import os; print('PROCESSOR_ARCHITECTURE:', os.environ.get('PROCESSOR_ARCHITECTURE'))"
-          echo === Native System Info ===
-          python -c "
-          import ctypes
-          class SYSTEM_INFO(ctypes.Structure):
-              _fields_ = [('wProcessorArchitecture', ctypes.c_ushort), ('wReserved', ctypes.c_ushort),
-                          ('dwPageSize', ctypes.c_uint), ('lpMinimumApplicationAddress', ctypes.c_void_p),
-                          ('lpMaximumApplicationAddress', ctypes.c_void_p), ('dwActiveProcessorMask', ctypes.POINTER(ctypes.c_ulong)),
-                          ('dwNumberOfProcessors', ctypes.c_uint), ('dwProcessorType', ctypes.c_uint),
-                          ('dwAllocationGranularity', ctypes.c_uint), ('wProcessorLevel', ctypes.c_ushort),
-                          ('wProcessorRevision', ctypes.c_ushort)]
-          arch_map = {0: 'x86 (32-bit)', 5: 'ARM', 6: 'Itanium', 9: 'x64', 12: 'ARM64'}
-          sysinfo = SYSTEM_INFO()
-          ctypes.windll.kernel32.GetNativeSystemInfo(ctypes.byref(sysinfo))
-          print('GetNativeSystemInfo:', arch_map.get(sysinfo.wProcessorArchitecture, sysinfo.wProcessorArchitecture))
-          "
-      
-      - name: Set up ARM64 Python and pip
-        shell: powershell
-        run: |
-          Invoke-WebRequest -Uri https://www.python.org/ftp/python/3.11.3/python-3.11.3-embed-arm64.zip -OutFile python.zip
-          Expand-Archive python.zip -DestinationPath python_arm64
-          New-Item -ItemType Directory -Path python_arm64\Lib\site-packages -Force | Out-Null
-          Add-Content -Path python_arm64\python._pth -Value "import site"
-          Invoke-WebRequest -Uri https://bootstrap.pypa.io/get-pip.py -OutFile get-pip.py
-          ./python_arm64/python.exe get-pip.py
-
-      - name: Set up MSVC environment
-        shell: powershell
-        run: |
-          $env:VSCMD_ARG_TGT_ARCH="arm64"
-          $vcvars = "${env:ProgramFiles(x86)}\Microsoft Visual Studio\2022\Enterprise\VC\Auxiliary\Build\vcvarsall.bat"
-          if (!(Test-Path $vcvars)) {
-            $vcvars = "${env:ProgramFiles(x86)}\Microsoft Visual Studio\2022\Professional\VC\Auxiliary\Build\vcvarsall.bat"
-          }
-          if (!(Test-Path $vcvars)) {
-            $vcvars = "${env:ProgramFiles(x86)}\Microsoft Visual Studio\2022\Community\VC\Auxiliary\Build\vcvarsall.bat"
-          }
-          if (!(Test-Path $vcvars)) {
-            throw "vcvarsall.bat not found. Ensure Visual Studio 2022 with ARM64 components is installed."
-          }
-          echo "Calling vcvarsall for ARM64..."
-          cmd.exe /c "`"$vcvars`" arm64 && set" | ForEach-Object {
-            if ($_ -match "^(.*?)=(.*)$") {
-              [System.Environment]::SetEnvironmentVariable($matches[1], $matches[2])
-            }
-          }
+      - name: Set up Python 3.11.3
+        uses: actions/setup-python@v2
+        with:
+          python-version: "3.11.3"
 
       - name: Install dependencies
-        run: python_arm64\python.exe -m pip install Cython>=3.0.0 zstandard wget meson>=1.0.0 tqdm
+        run: |
+          python -m pip install -r requirements.txt
+          python -m pip install flake8
+
+      - name: Print structure
+        run: python meson_scripts/print_tools.py
 
       - name: Generate files
-        run: python_arm64\python.exe generate.py -dev_build=True
+        run: python generate.py
 
       - name: Cythonize
-        shell: bash
-        run: |
-          python_arm64/python.exe cythonize_files.py -mode="dev"
+        run: python cythonize_files.py
 
-      - name: Build
+      - name: Upload Precompiled Code
+        uses: actions/upload-artifact@v4
+        with:
+          name: precompiled
+          path: .
+
+  build_cpp:
+    needs: build
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest, ubuntu-24.04-arm]
+
+    steps:
+      - name: Download Precompiled Code
+        uses: actions/download-artifact@v4
+        with:
+          name: precompiled
+
+      - name: Install dependencies and build  (Ubuntu)
+        if: matrix.os == 'ubuntu-latest'
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y cmake ninja-build meson pkg-config libsdl2-dev python3-venv
+          python3 -m venv venv
+          source venv/bin/activate
+          python -m pip install -r requirements.txt
+          python -m pip install flake8
+          python build.py --target_platform=linux64 --compiler=gcc 
+
+      - name: Install dependencies and build  (Ubuntu Arm 64)
+        if: matrix.os == 'ubuntu-24.04-arm'
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y cmake ninja-build meson pkg-config libsdl2-dev python3-venv
+          python3 -m venv venv
+          source venv/bin/activate
+          python -m pip install -r requirements.txt
+          python -m pip install flake8
+          python build.py --target_platform=linuxarm64 --compiler=gcc 
+
+      - name: Install dependencies and build (macOS)
+        if: matrix.os == 'macos-latest'
+        run: |
+          brew update
+          brew install cmake ninja meson pkg-config sdl2
+          python3 -m venv venv
+          source venv/bin/activate
+          python -m pip install -r requirements.txt
+          python -m pip install flake8
+          python build.py --target_platform=darwin64 --compiler=clang
+
+      - name: Setup MSBuild (Windows only)
+        if: matrix.os == 'windows-latest'
+        uses: microsoft/setup-msbuild@v1.3.1
+
+      - name: Install dependencies and build (Windows)
+        if: matrix.os == 'windows-latest'
         shell: cmd
         run: |
-          python_arm64\python.exe build.py --target_platform=windowsarm64 --compiler=msvc -create_plugin=False -buildtype=release -run_tests=False
+          choco install cmake --installargs "ADD_CMAKE_TO_PATH=System" -y
+          choco install ninja meson pkgconfiglite -y
+          python -m pip install -r requirements.txt
+          python -m pip install flake8
+          python build.py --target_platform=windows64 --compiler=gcc
+
+      - name: Upload py4godot build artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: py4godot-${{ matrix.os }}
+          path: build/py4godot/
+          retention-days: 30
+
+  combine:
+    needs: build_cpp
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download Windows
+        uses: actions/download-artifact@v4
+        with:
+          name: py4godot-windows-latest
+
+      - name: Download Linux
+        uses: actions/download-artifact@v4
+        with:
+          name: py4godot-ubuntu-latest
+
+      - name: Download Linux
+        uses: actions/download-artifact@v4
+        with:
+          name: py4godot-ubuntu-24.04-arm
+
+      - name: Download Macos
+        uses: actions/download-artifact@v4
+        with:
+          name: py4godot-macos-latest
+
+      - name: Upload Precompiled Code
+        uses: actions/upload-artifact@v4
+        with:
+          name: final_output
+          path: .
