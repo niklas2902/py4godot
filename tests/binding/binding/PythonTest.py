@@ -16,7 +16,7 @@ class PythonTest(unittest.TestCase):
 		self.test_object.global_position.x = 1
 		self.assertEqual(1, self.test_object.global_position.x)
 
-	def tesst_get_object_from_array(self):
+	def test_get_object_from_array(self):
 		a = Array.new0()
 		a.push_back(self.test_object)
 		o = a.get(0)
