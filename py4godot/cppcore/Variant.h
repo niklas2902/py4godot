@@ -108,6 +108,7 @@ namespace godot{
         PyObject* create_quaternion_native_ptr();
         PyObject* create_packedstringarray_native_ptr();
         PyObject* create_stringname_native_ptr();
+        PyObject* create_object_native_ptr();
 
 
         void construct_py_string(PyObject* object);

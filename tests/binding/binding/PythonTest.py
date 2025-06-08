@@ -2,6 +2,7 @@ import unittest
 
 from py4godot.classes.Node3D import Node3D
 from TestObject import TestObject
+from py4godot.classes.core import Array
 
 
 class PythonTest(unittest.TestCase):
@@ -14,3 +15,9 @@ class PythonTest(unittest.TestCase):
 	def test_global_position(self):
 		self.test_object.global_position.x = 1
 		self.assertEqual(1, self.test_object.global_position.x)
+
+	def tesst_get_object_from_array(self):
+		a = Array.new0()
+		a.push_back(self.test_object)
+		o = a.get(0)
+		self.assertEqual(o.get_class(), "Node3D")
