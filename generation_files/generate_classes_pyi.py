@@ -82,6 +82,7 @@ def generate_import():
     result = \
         """from py4godot.utils.VariantTypeWrapper4 import *
 import py4godot.classes.Object as __object__
+from typing import Any
 """
     return result
 
@@ -463,7 +464,7 @@ def ungodottype(type_):
     if (type_ == "StringName"):
         return "__core__.StringName|str"
     if (type_ == "Variant"):
-        return "object"
+        return "Any"
     elif type_ in builtin_classes - {"float", "int", "Nil", "bool"}:
         if not is_core:
             return f"__core__.{type_}"
@@ -494,7 +495,7 @@ def ungodottype_type_array(type_, class_name):
             elif (typed_array_type in classes):
                 return f"__{typed_array_type.lower()}__.{typed_array_type}"
             return typed_array_type
-        return "object"
+        return "Any"
     elif type_ in builtin_classes - {"float", "int", "Nil", "bool"}:
         if not is_core:
             return f"__core__.{type_}"
@@ -615,7 +616,7 @@ def generate_constructor(classname):
 
 def unvariant_type(type_):
     if type_ == "Variant":
-        return "object"
+        return "Any"
     return type_
 
 
@@ -725,14 +726,14 @@ def generate_classes(classes, filename, is_core=False, is_typed_array=False):
 
 def generate_dictionary_set_item():
     res = ""
-    res += f"{INDENT}def __setitem__(self, value:object, key:object)->None:pass"
+    res += f"{INDENT}def __setitem__(self, value:Any, key:Any)->None:pass"
     res = generate_newline(res)
     return res
 
 
 def generate_dictionary_get_item():
     res = ""
-    res += f"{INDENT}def __getitem__(self,  key:None)->object: pass"
+    res += f"{INDENT}def __getitem__(self,  key:None)->Any: pass"
     res = generate_newline(res)
     return res
 
@@ -747,14 +748,14 @@ def generate_special_methods_dictionary():
 
 def generate_array_set_item(class_):
     res = ""
-    res += f"{INDENT}def __setitem__(self, value:object,  index:int) -> None: pass"
+    res += f"{INDENT}def __setitem__(self, value:Any,  index:int) -> None: pass"
     res = generate_newline(res)
     return res
 
 
 def generate_array_get_item(class_):
     res = ""
-    res += f"{INDENT}def __getitem__(self,  index:int)->object:pass"
+    res += f"{INDENT}def __getitem__(self,  index:int)->Any:pass"
     res = generate_newline(res)
     return res
 
@@ -804,7 +805,7 @@ def generate_next_for_arrays(class_):
 
 def generate_next_array(class_):
     res = ""
-    res += f"{INDENT}def __next__(self)->object:pass"
+    res += f"{INDENT}def __next__(self)->Any:pass"
     res = generate_newline(res)
 
     return res
@@ -836,6 +837,9 @@ def generate_special_methods(class_):
     if "array" in class_["name"].lower():
         res += generate_special_methods_array(class_)
 
+    if class_["name"] in ("Vector3", "Vector2"):
+        res += generate_vector_methods()
+
     if class_["name"] == "Object":
         res += generate_get_pyscript()
 
@@ -845,6 +849,13 @@ def generate_special_methods(class_):
         res += generate_special_methods_packed_array(class_)
 
     return res
+
+def generate_vector_methods():
+    res = ""
+    res += f"{INDENT*2}def __neg__(self):pass"
+    res = generate_newline(res)
+    return res
+
 
 def generate_special_methods_packed_array(class_):
     res = ""

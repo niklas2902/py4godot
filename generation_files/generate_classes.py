@@ -1925,6 +1925,9 @@ def generate_special_methods(class_):
     if "array" in class_["name"].lower():
         res += generate_special_methods_array(class_)
 
+    if class_["name"] in ("Vector3", "Vector2"):
+        res += generate_vector_methods()
+
     if class_["name"] in classes - builtin_classes:
         res += generate_cast(class_)
     if class_["name"] in {"String", "StringName"}:
@@ -1941,6 +1944,15 @@ def generate_special_methods(class_):
         res += generate_to_list_other_arrays(class_)
 
     return res
+
+def generate_vector_methods():
+    res = ""
+    res += f"{INDENT*2}def __neg__(self):"
+    res = generate_newline(res)
+    res += f"{INDENT*3}return self * -1"
+    res = generate_newline(res)
+    return res
+
 
 def generate_special_methods_packed_array(class_):
     res = ""
