@@ -460,9 +460,15 @@ def ungodottype(type_):
     if (type_ == "String"):
         return "str"
     if (type_ == "NodePath"):
-        return "__core__.NodePath|str"
+        if not is_core:
+            return "__core__.NodePath|str"
+        else:
+            return "NodePath|str"
     if (type_ == "StringName"):
-        return "__core__.StringName|str"
+        if not is_core:
+            return "__core__.StringName|str"
+        else:
+            return "StringName|str"
     if (type_ == "Variant"):
         return "Any"
     elif type_ in builtin_classes - {"float", "int", "Nil", "bool"}:
@@ -686,6 +692,10 @@ def generate_classes(classes, filename, is_core=False, is_typed_array=False):
     else:
         res += "import py4godot.classes.Object.Object as __object__"
         res = generate_newline(res)
+        for cls in normal_classes:
+            res += f"import py4godot.classes.{cls} as __{cls.lower()}__"
+            res = generate_newline(res)
+        res = generate_newline(res)
     for class_ in classes:
         if (class_["name"] in IGNORED_CLASSES):
             continue
@@ -852,7 +862,9 @@ def generate_special_methods(class_):
 
 def generate_vector_methods():
     res = ""
-    res += f"{INDENT*2}def __neg__(self):pass"
+    res += f"{INDENT*1}def __neg__(self):pass"
+    res = generate_newline(res)
+    res += f"{INDENT*1}def __truediv__(self):pass"
     res = generate_newline(res)
     return res
 
