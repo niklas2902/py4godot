@@ -1581,16 +1581,15 @@ def generate_classes(classes, filename, is_core=False, is_typed_array=False):
         res = generate_newline(res)
         res += generate_construction(class_)
         res = generate_newline(res)
-        if "methods" not in class_.keys():
-            continue
-        res += generate_properties(class_)
-        res += generate_members_of_class(class_)
-        for method in class_["methods"]:
-            if native_structs_in_method(method):
-                # TODO: Check if this makes sense
-                continue
-            res += generate_method(class_, method)
-            res = generate_newline(res)
+        if "methods" in class_.keys():
+            res += generate_properties(class_)
+            res += generate_members_of_class(class_)
+            for method in class_["methods"]:
+                if native_structs_in_method(method):
+                    # TODO: Check if this makes sense
+                    continue
+                res += generate_method(class_, method)
+                res = generate_newline(res)
         res += generate_operators_for_class(class_["name"])
         if class_["name"] not in builtin_classes and not is_typed_array:
             res += generate_register_cast(class_["name"])
