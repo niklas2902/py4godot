@@ -1947,9 +1947,9 @@ def generate_special_methods(class_):
 
 def generate_vector_methods():
     res = ""
-    res += f"{INDENT*2}def __neg__(self):"
+    res += f"{INDENT*1}def __neg__(self):"
     res = generate_newline(res)
-    res += f"{INDENT*3}return self * -1"
+    res += f"{INDENT*2}return self * -1"
     res = generate_newline(res)
     return res
 
