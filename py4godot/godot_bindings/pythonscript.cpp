@@ -4,6 +4,7 @@
 #if defined(__linux__) || defined(__APPLE__)
 #include <iostream>
 #include <dlfcn.h>  // For dlopen, dlsym, dlclose on Linux/macOS
+#include <dlfcn.h>  // For dlopen, dlsym, dlclose on Linux/macOS
 #elif defined(_WIN32) || defined(_WIN64)
 #include <iostream>
 #include <windows.h>  // For LoadLibrary, GetProcAddress, FreeLibrary on Windows
@@ -38,6 +39,22 @@ extern "C" {
             std::cerr << "Unsupported platform or architecture." << std::endl;
             return 1;
         }
+
+        #if defined(__linux__)
+        void* handle = nullptr;
+
+        #if defined(__aarch64__)
+        // Load the ARM64 Linux shared library
+        handle = dlopen("addons/py4godot/cpython-3.12.4-linuxarm64/python/bin/main.so", RTLD_NOW | RTLD_GLOBAL);
+        #else
+        // Load the x86_64 Linux shared library
+        handle = dlopen("addons/py4godot/cpython-3.12.4-linux64/python/bin/main.so", RTLD_NOW | RTLD_GLOBAL);
+        #endif
+
+        #elif defined(__APPLE__)
+        // Load the shared library on macOS
+        void* handle = dlopen("addons/py4godot/cpython-3.12.4-darwin64/python/bin/main.dylib", RTLD_NOW | RTLD_GLOBAL);
+        #endif
 
         #if defined(__linux__) || defined(__APPLE__)
         void* handle = dlopen(library_path.c_str(), RTLD_NOW | RTLD_GLOBAL);

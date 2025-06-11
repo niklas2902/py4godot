@@ -82,6 +82,7 @@ def generate_import():
     result = \
         """from py4godot.utils.VariantTypeWrapper4 import *
 import py4godot.classes.Object as __object__
+from typing import Any
 """
     return result
 
@@ -459,11 +460,17 @@ def ungodottype(type_):
     if (type_ == "String"):
         return "str"
     if (type_ == "NodePath"):
-        return "__core__.NodePath|str"
+        if not is_core:
+            return "__core__.NodePath|str"
+        else:
+            return "NodePath|str"
     if (type_ == "StringName"):
-        return "__core__.StringName|str"
+        if not is_core:
+            return "__core__.StringName|str"
+        else:
+            return "StringName|str"
     if (type_ == "Variant"):
-        return "object"
+        return "Any"
     elif type_ in builtin_classes - {"float", "int", "Nil", "bool"}:
         if not is_core:
             return f"__core__.{type_}"
@@ -494,7 +501,7 @@ def ungodottype_type_array(type_, class_name):
             elif (typed_array_type in classes):
                 return f"__{typed_array_type.lower()}__.{typed_array_type}"
             return typed_array_type
-        return "object"
+        return "Any"
     elif type_ in builtin_classes - {"float", "int", "Nil", "bool"}:
         if not is_core:
             return f"__core__.{type_}"
@@ -615,7 +622,7 @@ def generate_constructor(classname):
 
 def unvariant_type(type_):
     if type_ == "Variant":
-        return "object"
+        return "Any"
     return type_
 
 
@@ -685,6 +692,10 @@ def generate_classes(classes, filename, is_core=False, is_typed_array=False):
     else:
         res += "import py4godot.classes.Object.Object as __object__"
         res = generate_newline(res)
+        for cls in normal_classes:
+            res += f"import py4godot.classes.{cls} as __{cls.lower()}__"
+            res = generate_newline(res)
+        res = generate_newline(res)
     for class_ in classes:
         if (class_["name"] in IGNORED_CLASSES):
             continue
@@ -725,14 +736,14 @@ def generate_classes(classes, filename, is_core=False, is_typed_array=False):
 
 def generate_dictionary_set_item():
     res = ""
-    res += f"{INDENT}def __setitem__(self, value:object, key:object)->None:pass"
+    res += f"{INDENT}def __setitem__(self, value:Any, key:Any)->None:pass"
     res = generate_newline(res)
     return res
 
 
 def generate_dictionary_get_item():
     res = ""
-    res += f"{INDENT}def __getitem__(self,  key:None)->object: pass"
+    res += f"{INDENT}def __getitem__(self,  key:None)->Any: pass"
     res = generate_newline(res)
     return res
 
@@ -747,14 +758,14 @@ def generate_special_methods_dictionary():
 
 def generate_array_set_item(class_):
     res = ""
-    res += f"{INDENT}def __setitem__(self, value:object,  index:int) -> None: pass"
+    res += f"{INDENT}def __setitem__(self, value:Any,  index:int) -> None: pass"
     res = generate_newline(res)
     return res
 
 
 def generate_array_get_item(class_):
     res = ""
-    res += f"{INDENT}def __getitem__(self,  index:int)->object:pass"
+    res += f"{INDENT}def __getitem__(self,  index:int)->Any:pass"
     res = generate_newline(res)
     return res
 
@@ -804,7 +815,7 @@ def generate_next_for_arrays(class_):
 
 def generate_next_array(class_):
     res = ""
-    res += f"{INDENT}def __next__(self)->object:pass"
+    res += f"{INDENT}def __next__(self)->Any:pass"
     res = generate_newline(res)
 
     return res
@@ -836,11 +847,116 @@ def generate_special_methods(class_):
     if "array" in class_["name"].lower():
         res += generate_special_methods_array(class_)
 
+    if class_["name"] in ("Vector3", "Vector2"):
+        res += generate_vector_methods()
+
     if class_["name"] == "Object":
         res += generate_get_pyscript()
 
     if class_["name"] in classes - builtin_classes:
         res += generate_cast(class_["name"])
+    if class_["name"] == "Array" or "TypedArray" in class_["name"] or ("Packed" in class_["name"] and "Array" in class_["name"]):
+        res += generate_special_methods_packed_array(class_)
+
+    return res
+
+def generate_vector_methods():
+    res = ""
+    res += f"{INDENT*1}def __neg__(self):pass"
+    res = generate_newline(res)
+    res += f"{INDENT*1}def __truediv__(self):pass"
+    res = generate_newline(res)
+    return res
+
+
+def generate_special_methods_packed_array(class_):
+    res = ""
+    if "TypedArray" in class_["name"]:
+        packed_array_type = class_["name"].replace("TypedArray", "")
+    elif "Array" == class_["name"]:
+        packed_array_type = "object"
+    else:
+        packed_array_type = \
+        {"PackedInt32Array": "int", "PackedInt64Array": "int", "PackedFloat32Array": "float",
+         "PackedFloat64Array": "float","PackedStringArray": "str", "PackedColorArray":"Color",
+         "PackedByteArray": "int", "PackedVector3Array":"Vector3", "PackedVector2Array":"Vector2",
+         "PackedVector4Array": "Vector4",
+         }[class_['name']]
+    res += f"{INDENT * 1}def to_list(self) -> list[{packed_array_type}]:"
+    res = generate_newline(res)
+    res += f'''    
+    """
+    Converts the PackedArray to a standard Python list.
+
+    Returns:
+        list[{packed_array_type}]: A list containing the elements of the PackedArray.
+    """'''
+    res = generate_newline(res)
+    if class_["name"] in ("PackedInt32Array", "PackedInt64Array", "PackedFloat32Array", "PackedFloat64Array", "PackedByteArray"):
+        res = generate_get_memory_view(packed_array_type, res)
+    res = generate_newline(res)
+    res += f"{INDENT * 1}@staticmethod"
+    res = generate_newline(res)
+    res += (f"{INDENT * 1}def from_list(values:list[{packed_array_type}]) -> {class_['name']}:\n"
+            f'''
+    """
+    Initializes the PackedArray from a list of values.
+
+    This method takes a standard Python list and uses it to create and populate
+    a Godot PackedArray (e.g., PackedInt32Array, PackedFloat32Array, etc.).
+
+    Args:
+        values (list[{packed_array_type}]): A list of elements to populate the PackedArray with.
+
+    Returns:
+        {class_['name']}
+    """
+    '''
+            f"pass")
+    res = generate_newline(res)
+    if class_["name"] in ("PackedInt32Array", "PackedInt64Array", "PackedFloat32Array", "PackedFloat64Array", "PackedByteArray"):
+        res = generate_from_memory_view(class_, packed_array_type, res)
+    return res
+
+
+def generate_from_memory_view(class_, packed_array_type, res):
+    res += f"{INDENT * 1}@staticmethod"
+    res = generate_newline(res)
+    res += (f"{INDENT * 1}def from_memory_view(values:memoryview[{packed_array_type}]) -> {class_['name']}:\n"
+            f'''
+    """
+    Initializes the PackedArray from a memory view.
+
+    This method takes a Python memory view and uses it to create and populate
+    a Godot PackedArray (e.g., PackedInt32Array, PackedFloat32Array, etc.).
+    You can use this to populate a PackedArray fast. Please take care that the data in your array is contiguous. 
+    E.g. use numpy arrays
+
+    Args:
+        values (memoryview[{packed_array_type}]): A list of elements to populate the PackedArray with.
+
+    Returns:
+        {class_['name']}
+    """
+    '''
+            f"pass")
+    return res
+
+
+def generate_get_memory_view(packed_array_type, res):
+    res += f"{INDENT * 1}def get_memory_view(self) -> memoryview[{packed_array_type}]:"
+    res = generate_newline(res)
+    res += f'''    
+    """
+    Gets a memoryview of the PackedArray. 
+    Be careful: This is not a copy of the data, but a view into the data. 
+    So deleting data and then trying to access it will leed to crases
+
+    Returns:
+        memoryview[{packed_array_type}]: A memory view containing the elements of the PackedArray.
+    """'''
+    res = generate_newline(res)
+    res += f"{INDENT * 2}pass"
     return res
 
 
