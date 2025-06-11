@@ -155,7 +155,11 @@ download_python.download_file(current_platform, allow_copy=False)
 compile_python_ver_file(current_platform)
 
 # initializing for msvc if wanted as compiler (todo:should be improved sometime)
-msvc_init = f"vcvarsall.bat {'x86_amd64'} {command_separator} cl {command_separator} " if "msvc" in args.compiler else ""
+if "msvc" in args.compiler:
+    vcvars_arch = "x64_arm64" if args.target_platform == "windowsarm64" else "x86_amd64"
+    msvc_init = f"vcvarsall.bat {vcvars_arch} {command_separator} cl {command_separator} "
+else:
+    msvc_init = ""
 
 res = None
 try:
