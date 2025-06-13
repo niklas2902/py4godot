@@ -220,6 +220,7 @@ try:
             shutil.rmtree("build/py4godot")
         copytree(f"build/final/{args.target_platform}/cpython-3.12.4-{args.target_platform}", f"build/py4godot/cpython-3.12.4-{args.target_platform}")
         shutil.copy("build_resources/python.gdextension", "build/py4godot/python.gdextension")
+        shutil.copy("build_resources/plugin.cfg", "build/py4godot/plugin.cfg")
         shutil.copy("build_resources/dependencies.txt", "build/py4godot/dependencies.txt")
         shutil.copy("build_resources/install_dependencies.py", "build/py4godot/install_dependencies.py")
         download_get_pip("build/py4godot")

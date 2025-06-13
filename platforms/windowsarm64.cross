@@ -1,5 +1,5 @@
 [binaries]
-ar = 'ar'
+  ar = 'lib'
 strip = 'strip'
 exe_wrapper = ''  # Empty unless you need to run ARM64 binaries on a different host.
 

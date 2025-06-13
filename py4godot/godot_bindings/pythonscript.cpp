@@ -21,9 +21,9 @@ std::string get_library_path() {
     return "addons/py4godot/cpython-3.12.4-darwin64/python/bin/main.dylib";
     #elif defined(_WIN32) || defined(_WIN64)
     #if defined(_M_ARM64)
-    return "addons\\py4godot\\cpython-3.12.4-windowsarm64\\python\\main.dll";
+    return "addons/py4godot/cpython-3.12.4-windowsarm64/python/main.dll";
     #else
-    return "addons\\py4godot\\cpython-3.12.4-windows64\\python\\main.dll";
+    return "addons/py4godot/cpython-3.12.4-windows64/python/main.dll";
     #endif
     #else
     return "";  // Unsupported platform
@@ -80,15 +80,88 @@ extern "C" {
         return result;
 
         #elif defined(_WIN32) || defined(_WIN64)
+        // Log the full path being loaded
+        std::cerr << "[py4godot] Attempting to load library: " << library_path << std::endl;
+        
+        // Get absolute path for debugging
+        char fullPath[MAX_PATH];
+        if (GetFullPathNameA(library_path.c_str(), MAX_PATH, fullPath, nullptr)) {
+            std::cerr << "[py4godot] Full path: " << fullPath << std::endl;
+            
+            // Extract directory from full path
+            std::string fullPathStr(fullPath);
+            size_t lastSlash = fullPathStr.find_last_of("\\/");
+            if (lastSlash != std::string::npos) {
+                std::string dirPath = fullPathStr.substr(0, lastSlash);
+                std::cerr << "[py4godot] Setting DLL directory to: " << dirPath << std::endl;
+                
+                // Convert to wide string for SetDllDirectoryW
+                int size_needed = MultiByteToWideChar(CP_UTF8, 0, dirPath.c_str(), -1, NULL, 0);
+                std::wstring wideDirPath(size_needed - 1, 0);
+                MultiByteToWideChar(CP_UTF8, 0, dirPath.c_str(), -1, &wideDirPath[0], size_needed);
+                
+                // Set the DLL search directory
+                if (SetDllDirectoryW(wideDirPath.c_str())) {
+                    std::cerr << "[py4godot] Successfully set DLL directory" << std::endl;
+                } else {
+                    std::cerr << "[py4godot] Failed to set DLL directory, error: " << GetLastError() << std::endl;
+                }
+            }
+        }
+        
         HMODULE handle = LoadLibraryA(library_path.c_str());
         if (!handle) {
-            std::cerr << "Cannot load library: " << GetLastError() << std::endl;
+            DWORD error = GetLastError();
+            std::cerr << "[py4godot] ERROR: Cannot load library. Error code: " << error << std::endl;
+            
+            // Get detailed error message
+            LPVOID lpMsgBuf;
+            DWORD bufLen = FormatMessage(
+                FORMAT_MESSAGE_ALLOCATE_BUFFER | FORMAT_MESSAGE_FROM_SYSTEM | FORMAT_MESSAGE_IGNORE_INSERTS,
+                NULL,
+                error,
+                MAKELANGID(LANG_NEUTRAL, SUBLANG_DEFAULT),
+                (LPTSTR) &lpMsgBuf,
+                0, NULL);
+            
+            if (bufLen) {
+                std::cerr << "[py4godot] Error details: " << (char*)lpMsgBuf << std::endl;
+                LocalFree(lpMsgBuf);
+            }
+            
+            // Check if file exists
+            DWORD fileAttr = GetFileAttributesA(library_path.c_str());
+            if (fileAttr == INVALID_FILE_ATTRIBUTES) {
+                std::cerr << "[py4godot] File does not exist or cannot be accessed at: " << library_path << std::endl;
+            } else {
+                std::cerr << "[py4godot] File exists but cannot be loaded. This may indicate missing dependencies." << std::endl;
+            }
+            
             return 1;
         }
 
+        std::cerr << "[py4godot] Library loaded successfully. Looking for 'py4godot_init' symbol..." << std::endl;
+        
         Py4GodotInitFunc load_function_handle = (Py4GodotInitFunc)GetProcAddress(handle, "py4godot_init");
         if (!load_function_handle) {
-            std::cerr << "Cannot load symbol 'py4godot_init': " << GetLastError() << std::endl;
+            DWORD error = GetLastError();
+            std::cerr << "[py4godot] ERROR: Cannot load symbol 'py4godot_init'. Error code: " << error << std::endl;
+            
+            // Get detailed error message
+            LPVOID lpMsgBuf;
+            DWORD bufLen = FormatMessage(
+                FORMAT_MESSAGE_ALLOCATE_BUFFER | FORMAT_MESSAGE_FROM_SYSTEM | FORMAT_MESSAGE_IGNORE_INSERTS,
+                NULL,
+                error,
+                MAKELANGID(LANG_NEUTRAL, SUBLANG_DEFAULT),
+                (LPTSTR) &lpMsgBuf,
+                0, NULL);
+            
+            if (bufLen) {
+                std::cerr << "[py4godot] Error details: " << (char*)lpMsgBuf << std::endl;
+                LocalFree(lpMsgBuf);
+            }
+            
             FreeLibrary(handle);
             return 1;
         }
