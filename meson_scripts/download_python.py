@@ -11,7 +11,7 @@ import stat
 
 platform_dict = {"windows64": "x86_64-pc-windows-msvc-install_only_stripped", "windows32": "i686-pc-windows-msvc-install_only_stripped",
                  "linux64": "x86_64-unknown-linux-gnu-install_only_stripped", "darwin64":"aarch64-apple-darwin-install_only_stripped",
-                 "linuxarm64":"aarch64-unknown-linux-gnu-install_only_stripped"}
+                 "linuxarm64":"aarch64-unknown-linux-gnu-install_only_stripped", "windowsarm64":"aarch64-pc-windows-msvc-install_only_stripped"}
 python_files_dir = "python_files"
 copy_dir = "build/final"
 python_ver = "cpython-3.12.4"
@@ -31,12 +31,15 @@ def download_file(platform, allow_copy=False):
 
     print("download:" + platform)
 
-    if platform != "linux32" and platform != "linux64":
+    if platform != "linux32" and platform != "linux64" and platform != "windowsarm64":
         url = f'https://github.com/indygreg/python-build-standalone/releases/download/20240726/{python_ver}+20240726-{platform_dict[platform]}.tar.gz'
         python_file = f'{python_files_dir}/{python_ver}-{platform_dict[platform]}.tar.gz'
     elif platform == "linux64":
         url = f'https://github.com/niklas2902/prebuild-python-linux64/releases/download/release-0.1/{python_ver}-linux64.zip'
         python_file = f'{python_files_dir}/{python_ver}-linux64.zip'
+    elif platform == "windowsarm64":
+        url = f'https://github.com/niklas2902/prebuilt-windowsarm64/releases/download/release-0.1/{python_ver}-windowsarm64.zip'
+        python_file = f'{python_files_dir}/{python_ver}-windowsarm64.zip'
     else :
         url = f'https://github.com/niklas2902/prebuild-python-linux32/releases/download/release-0.1/{python_ver}-linux32.zip'
         python_file = f'{python_files_dir}/{python_ver}-linux32.zip'
