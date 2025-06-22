@@ -117,8 +117,8 @@ def delete_pip( platform, export_folder):
             shutil.rmtree(f"python_files/{export_folder}/python/Lib/site-packages/pip")
     elif "linux" in platform:
         print("deleting pip...")
-        if os.path.isdir(f"python_files/{export_folder}/python/lib/python3.11.13/site-packages/pip"):
-            shutil.rmtree(f"python_files/{export_folder}/python/lib/python3.11.13/site-packages/pip")
+        if os.path.isdir(f"python_files/{export_folder}/python/lib/python3.11/site-packages/pip"):
+            shutil.rmtree(f"python_files/{export_folder}/python/lib/python3.11/site-packages/pip")
 
 
 def create_sitecustomization(export_folder, platform):
