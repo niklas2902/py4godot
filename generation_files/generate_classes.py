@@ -112,7 +112,7 @@ def generate_constructor_args(class_, constructor):
         else:
             # enums are marked with enum:: . To be able to use this, we have to strip this
             arg_type = arg["type"].replace("enum::", "")
-            result += f"{unstringname(unnodepath(unstring(unvariant(untypearray_or_dictionary(unenumize_type(arg_type))))))} {pythonize_name(arg['name'])}, "
+            result += f"{unstringname(unnodepath(unstring(unvariant(untypearray_or_dictionary(unenumize_type(arg_type, class_))))))} {pythonize_name(arg['name'])}, "
     result = result[:-2]
     return result
 
@@ -244,7 +244,7 @@ def generate_return_value(classname, method_):
         elif "enum::" in ret_val.type:
             result += f"{INDENT * 2}cdef int {ret_val.name}"
         else:
-            result += f"{INDENT * 2}cdef {unbitfield_type(unenumize_type(ret_val.type))} {ret_val.name}"
+            result += f"{INDENT * 2}cdef {unbitfield_type(unenumize_type(ret_val.type, class_))} {ret_val.name}"
     else:
         result += f"{INDENT * 2}cdef object ret = None"
     result = generate_newline(result)
@@ -1273,9 +1273,9 @@ def generate_args(class_, method_with_args):
         else:
             # enums are marked with enum:: . To be able to use this, we have to strip this
             arg_type = arg["type"].replace("enum::", "")
-            type_ = unstring(unvariant(untypearray_or_dictionary(unenumize_type(arg_type))))
+            type_ = unstring(unvariant(untypearray_or_dictionary(unenumize_type(arg_type, class_))))
             if class_["name"] in typed_arrays_names:
-                type_ = unstring(unvariant_type_array(untypearray_or_dictionary(unenumize_type(arg_type)), class_["name"]))
+                type_ = unstring(unvariant_type_array(untypearray_or_dictionary(unenumize_type(arg_type, class_)), class_["name"]))
             result += f"{import_type(type_, class_['name'])} {pythonize_name(arg['name'])} {generate_default_arg(class_, arg, type_)}, "
     if method_with_args["is_vararg"]:
         result += "*varargs, "
@@ -1283,7 +1283,7 @@ def generate_args(class_, method_with_args):
     return result
 
 
-def unenumize_type(type_):
+def unenumize_type(type_, class_):
     enum_type = type_.replace("enum::", "")
     type_list = enum_type.split(".")
     if len(type_list) > 1:
@@ -1292,6 +1292,10 @@ def unenumize_type(type_):
         return "int"
     elif type_ in enums:
         return "int"
+    if "enums" in class_ :
+        names = [enum["name"] for enum in class_["enums"]]
+        if enum_type in names:
+            return "int"
     return type_list[0]
 
 

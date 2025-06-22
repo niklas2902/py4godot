@@ -120,21 +120,21 @@ def generate_args(method_with_args, builtin_classes, is_cpp=False, should_make_s
                 "bitfield::") and not arg["type"].startswith("typedarray::") \
                 and not arg["type"] == "Variant":
             if should_make_shared:
-                result += f"{make_ptr(unenumize_type(untypearray_or_dictionary(unbitfield_type(arg['type']))))} {pythonize_name(arg['name'])}, "
+                result += f"{make_ptr(unenumize_type(untypearray_or_dictionary(unbitfield_type(arg['type'])), class_))} {pythonize_name(arg['name'])}, "
             else:
-                result += f"{unenumize_type(untypearray_or_dictionary(unbitfield_type(arg['type'])))}* {pythonize_name(arg['name'])}, "
+                result += f"{unenumize_type(untypearray_or_dictionary(unbitfield_type(arg['type'])), class_)}* {pythonize_name(arg['name'])}, "
         elif untypearray_or_dictionary(arg["type"]) in builtin_classes - {"int", "float", "bool", "Nil"}:
             if should_make_shared:
-                result += f"{make_ptr(unenumize_type(untypearray_or_dictionary(unbitfield_type(arg['type']))))} {pythonize_name(arg['name'])}, "
+                result += f"{make_ptr(unenumize_type(untypearray_or_dictionary(unbitfield_type(arg['type'])), class_))} {pythonize_name(arg['name'])}, "
             else:
-                result += f"{unenumize_type(untypearray_or_dictionary(unbitfield_type(arg['type'])))}& {pythonize_name(arg['name'])}, "
+                result += f"{unenumize_type(untypearray_or_dictionary(unbitfield_type(arg['type'])), class_)}& {pythonize_name(arg['name'])}, "
         elif untypearray_or_dictionary(arg["type"]) in typed_arrays_names:
             if should_make_shared:
-                result += f"{make_ptr(unenumize_type(untypearray_or_dictionary(unbitfield_type(arg['type']))))} {pythonize_name(arg['name'])}, "
+                result += f"{make_ptr(unenumize_type(untypearray_or_dictionary(unbitfield_type(arg['type'])), class_))} {pythonize_name(arg['name'])}, "
             else:
-                result += f"{unenumize_type(untypearray_or_dictionary(unbitfield_type(arg['type'])))}& {pythonize_name(arg['name'])}, "
+                result += f"{unenumize_type(untypearray_or_dictionary(unbitfield_type(arg['type'])), class_)}& {pythonize_name(arg['name'])}, "
         elif arg["type"] in {"int", "float", "bool"}:
-            result += f"{ungodottype(unenumize_type(untypearray_or_dictionary(unbitfield_type(arg['type']))))} {pythonize_name(arg['name'])}, "
+            result += f"{ungodottype(unenumize_type(untypearray_or_dictionary(unbitfield_type(arg['type'])), class_))} {pythonize_name(arg['name'])}, "
         elif arg["type"] == "Variant":
             if is_cpp:
                 result += f"Variant& {pythonize_name(arg['name'])}, "
@@ -168,7 +168,7 @@ def generate_constructor_args(constructor, should_make_shared = False):
         else:
             # enums are marked with enum:: . To be able to use this, we have to strip this
             arg_type = arg["type"].replace("enum::", "")
-            result += f"{untypearray_or_dictionary(unenumize_type(arg_type))} {pythonize_name(arg['name'])}, "
+            result += f"{untypearray_or_dictionary(unenumize_type(arg_type, class_))} {pythonize_name(arg['name'])}, "
     result = result[:-2]
     return result
 
@@ -417,7 +417,7 @@ def generate_return_value(method_, classname):
         elif "typedarray" in ret_val.type:
             result += f"{INDENT * 2}{generate_typed_array_name(ret_val.type)} _ret = {generate_typed_array_name(ret_val.type)}::new0();"
         else:
-            result += f"{INDENT * 2}{ungodottype(unbitfield_type(unenumize_type(ret_val.type)))} {ret_val.name};"
+            result += f"{INDENT * 2}{ungodottype(unbitfield_type(unenumize_type(ret_val.type, class_)))} {ret_val.name};"
     else:
         result += f"{INDENT * 2}GDExtensionTypePtr _ret;"
     return result
@@ -645,9 +645,9 @@ def generate_virtual_return_type(return_type):
 def generate_method_body_virtual(class_, mMethod):
     res = ""
     if "return_value" in mMethod.keys():
-        res += f"{INDENT * 2}return {generate_virtual_return_type(unenumize_type(mMethod['return_value']['type']))};"
+        res += f"{INDENT * 2}return {generate_virtual_return_type(unenumize_type(mMethod['return_value']['type'], class_))};"
     elif "return_type" in mMethod.keys():
-        res += f"{INDENT * 2}return {generate_virtual_return_type(unenumize_type(mMethod['return_type']))};"
+        res += f"{INDENT * 2}return {generate_virtual_return_type(unenumize_type(mMethod['return_type'], class_))};"
     res = generate_newline(res)
 
     return res
@@ -865,14 +865,14 @@ def generate_method(class_, mMethod):
         return res
     args = generate_args(mMethod, builtin_classes, True, False)
     args_ptr = generate_args(mMethod, builtin_classes, False, True)
-    py_def_function = f"{INDENT}{make_ptr(unvarianttype(ungodottype(unenumize_type(untypearray_or_dictionary(get_ret_value(mMethod))))))} {class_['name']}::py_{pythonize_name(mMethod['name'])}({args_ptr})" + "{"
+    py_def_function = f"{INDENT}{make_ptr(unvarianttype(ungodottype(unenumize_type(untypearray_or_dictionary(get_ret_value(mMethod)), class_))))} {class_['name']}::py_{pythonize_name(mMethod['name'])}({args_ptr})" + "{"
     res += py_def_function
     res = generate_newline(res)
     res += generate_py_method_body(class_, mMethod)
     res = generate_newline(res)
     res = generate_newline(res)
 
-    def_function = f"{INDENT}{ungodottype(unenumize_type(untypearray_or_dictionary(get_ret_value(mMethod))))} {class_['name']}::{pythonize_name(mMethod['name'])}({args})" + "{"
+    def_function = f"{INDENT}{ungodottype(unenumize_type(untypearray_or_dictionary(get_ret_value(mMethod)), class_))} {class_['name']}::{pythonize_name(mMethod['name'])}({args})" + "{"
     res += def_function
     res = generate_newline(res)
     res += generate_default_args(mMethod)
@@ -1270,7 +1270,7 @@ def generate_properties(class_):
 
 def generate_member_getter(class_, member):
     res = ""
-    res += f"{INDENT}{make_ptr(unbitfield_type(unenumize_type((ungodottype(member.type_)))))} {class_}::py_member_get_{member.name}()" + "{"
+    res += f"{INDENT}{make_ptr(unbitfield_type(unenumize_type((ungodottype(member.type_)), class_)))} {class_}::py_member_get_{member.name}()" + "{"
     res = generate_newline(res)
     res += f"{INDENT}auto _ret = member_get_{member.name}();"
     res = generate_newline(res)
@@ -1279,7 +1279,7 @@ def generate_member_getter(class_, member):
     res += f"{INDENT}}}"
     res = generate_newline(res)
 
-    res += f"{INDENT}{unbitfield_type(unenumize_type((ungodottype(member.type_))))} {class_}::member_get_{member.name}()" + "{"
+    res += f"{INDENT}{unbitfield_type(unenumize_type((ungodottype(member.type_)), class_))} {class_}::member_get_{member.name}()" + "{"
     res = generate_newline(res)
     res += f"{INDENT * 2}String _member_name_string = String::new0();"
     res = generate_newline(res)
@@ -1421,12 +1421,12 @@ def generate_property(class_, property):
         return result
     result += f"{INDENT}"
     result = generate_newline(result)
-    result += f"{INDENT}{simplify_type(untypearray_or_dictionary(unbitfield_type(unenumize_type((property['type'])))))} {class_['name']}::prop_get_{pythonize_name(property['name'])}()" + "{"
+    result += f"{INDENT}{simplify_type(untypearray_or_dictionary(unbitfield_type(unenumize_type((property['type']), class_))))} {class_['name']}::prop_get_{pythonize_name(property['name'])}()" + "{"
     result = generate_newline(result)
     if "index" not in property.keys():
-        result += f"{INDENT * 2}{simplify_type(unbitfield_type(unenumize_type((property['type']))))} _ret = {pythonize_name(property['getter'])}();"
+        result += f"{INDENT * 2}{simplify_type(unbitfield_type(unenumize_type((property['type']), class_)))} _ret = {pythonize_name(property['getter'])}();"
     else:
-        result += f"{INDENT * 2}{simplify_type(unbitfield_type(unenumize_type((property['type']))))} _ret = {pythonize_name(property['getter'])}({property['index']});"
+        result += f"{INDENT * 2}{simplify_type(unbitfield_type(unenumize_type((property['type']), class_)))} _ret = {pythonize_name(property['getter'])}({property['index']});"
     result = generate_newline(result)
 
     if "setter" in property and property["setter"] != "":
@@ -1523,7 +1523,7 @@ def core_import(class_):
     return "generated_core."
 
 
-def unenumize_type(type_):
+def unenumize_type(type_, class_):
     enum_type = type_.replace("enum::", "")
     type_list = enum_type.split(".")
     if len(type_list) > 1:
@@ -1532,6 +1532,10 @@ def unenumize_type(type_):
         return "int"
     elif type_ in enums:
         return "int"
+    if "enums" in class_ :
+        names = [enum["name"] for enum in class_["enums"]]
+        if enum_type in names:
+            return "int"
     return type_list[0]
 
 
