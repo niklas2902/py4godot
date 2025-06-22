@@ -1,0 +1,89 @@
+name: release macos-arm64
+on:
+  workflow_dispatch:
+
+jobs:
+  macos-arm64-build:
+    runs-on: macos-14
+    if: ${{ needs.check_date.outputs.should_run != 'false' }}
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          ref: master
+          submodules: recursive
+
+      - name: Set up Python 3.11.3
+        uses: actions/setup-python@v2
+        with:
+          python-version: "3.11.3"
+
+      - name: Cache py4godot/classes directory
+        id: cache-py4godot-classes
+        uses: actions/cache@v3
+        with:
+          path: py4godot/classes
+          key: ${{ runner.os }}-py4godot-classes-${{ hashFiles('**/generate_classes.py', '**/generate_pxd_bridge.py', '**/extension_api.json') }}
+          restore-keys: |
+            ${{ runner.os }}-py4godot-classes-
+
+      - name: Run Python script and check result
+        shell: bash
+        run: |
+          set +e
+          python meson_scripts/does_cache_exist.py
+          exit_code=$?
+          if [ $exit_code -eq 0 ]; then
+            echo "Cache exists"
+          else
+            echo "Cache does not exist"
+            exit 0
+          fi
+          set -e
+
+      - name: Print variables
+        run: python meson_scripts/variables.py
+
+      - name: Cache pip
+        uses: actions/cache@v3
+        with:
+          path: ~/.cache/pip
+          key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
+          restore-keys: |
+            ${{ runner.os }}-pip-
+
+      - name: Install dependencies
+        run: |
+          brew update
+          brew install cmake ninja meson pkg-config sdl2
+          python -m pip install -r requirements.txt
+          python -m pip install flake8
+
+      - name: Print structure
+        run: python meson_scripts/print_tools.py
+
+      - name: Generate files
+        run: python generate.py -dev_build=True
+
+      - name: Cythonize
+        shell: bash
+        run: python cythonize_files.py -mode="dev"
+
+      - name: Build
+        run: python build.py --target_platform=darwin64 --compiler=clang -create_plugin=False -buildtype=release -run_tests=True -download_godot=True
+
+      - name: Create cache
+        run: python meson_scripts/create_cache.py
+
+      - name: Print structure
+        run: python meson_scripts/print_tools.py
+
+      - name: Create archive (zip)
+        run: |
+          zip -r build/py4godot-macos.zip build
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: py4godot-macos
+          path: build/py4godot-macos.zip
+          retention-days: 30

@@ -31,7 +31,7 @@ bool string_names_equal_loader(StringName& left, StringName& right){
 }
 
 void PyResourceFormatLoader::destroy(){
-    this->unreference();
+    //this->unreference();
 }
 
 void* create_instance_loader(void* userdata){

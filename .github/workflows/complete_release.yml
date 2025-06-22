@@ -1,0 +1,140 @@
+name: complete release
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+  schedule:
+    - cron: '0 3 * * 1'  # Runs at 03:00 UTC every Monday
+  workflow_dispatch:     # Allows manual triggering
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    container: niklas2902/py4godot:4.4
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          submodules: 'recursive'
+
+      - name: Set up Python 3.11.3
+        uses: actions/setup-python@v2
+        with:
+          python-version: "3.11.3"
+
+      - name: Install dependencies
+        run: |
+          python -m pip install -r requirements.txt
+          python -m pip install flake8
+
+      - name: Print structure
+        run: python meson_scripts/print_tools.py
+
+      - name: Generate files
+        run: python generate.py
+
+      - name: Cythonize
+        run: python cythonize_files.py
+
+      - name: Upload Precompiled Code
+        uses: actions/upload-artifact@v4
+        with:
+          name: precompiled
+          path: .
+
+  build_cpp:
+    needs: build
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest, ubuntu-24.04-arm]
+
+    steps:
+      - name: Download Precompiled Code
+        uses: actions/download-artifact@v4
+        with:
+          name: precompiled
+
+      - name: Install dependencies and build  (Ubuntu)
+        if: matrix.os == 'ubuntu-latest'
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y cmake ninja-build meson pkg-config libsdl2-dev python3-venv
+          python3 -m venv venv
+          source venv/bin/activate
+          python -m pip install -r requirements.txt
+          python -m pip install flake8
+          python build.py --target_platform=linux64 --compiler=gcc 
+
+      - name: Install dependencies and build  (Ubuntu Arm 64)
+        if: matrix.os == 'ubuntu-24.04-arm'
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y cmake ninja-build meson pkg-config libsdl2-dev python3-venv
+          python3 -m venv venv
+          source venv/bin/activate
+          python -m pip install -r requirements.txt
+          python -m pip install flake8
+          python build.py --target_platform=linuxarm64 --compiler=gcc 
+
+      - name: Install dependencies and build (macOS)
+        if: matrix.os == 'macos-latest'
+        run: |
+          brew update
+          brew install cmake ninja meson pkg-config sdl2
+          python3 -m venv venv
+          source venv/bin/activate
+          python -m pip install -r requirements.txt
+          python -m pip install flake8
+          python build.py --target_platform=darwin64 --compiler=clang
+
+      - name: Setup MSBuild (Windows only)
+        if: matrix.os == 'windows-latest'
+        uses: microsoft/setup-msbuild@v1.3.1
+
+      - name: Install dependencies and build (Windows)
+        if: matrix.os == 'windows-latest'
+        shell: cmd
+        run: |
+          choco install cmake --installargs "ADD_CMAKE_TO_PATH=System" -y
+          choco install ninja meson pkgconfiglite -y
+          python -m pip install -r requirements.txt
+          python -m pip install flake8
+          python build.py --target_platform=windows64 --compiler=gcc
+
+      - name: Upload py4godot build artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: py4godot-${{ matrix.os }}
+          path: build/py4godot/
+          retention-days: 30
+
+  combine:
+    needs: build_cpp
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download Windows
+        uses: actions/download-artifact@v4
+        with:
+          name: py4godot-windows-latest
+
+      - name: Download Linux
+        uses: actions/download-artifact@v4
+        with:
+          name: py4godot-ubuntu-latest
+
+      - name: Download Linux
+        uses: actions/download-artifact@v4
+        with:
+          name: py4godot-ubuntu-24.04-arm
+
+      - name: Download Macos
+        uses: actions/download-artifact@v4
+        with:
+          name: py4godot-macos-latest
+
+      - name: Upload Precompiled Code
+        uses: actions/upload-artifact@v4
+        with:
+          name: final_output
+          path: .

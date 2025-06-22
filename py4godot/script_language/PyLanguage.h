@@ -14,7 +14,6 @@ namespace godot{
       const char* language_name = "Python";
       const char* extension;
       std::unordered_set<const char*> keywords;
-      unsigned int counter;
 
       public:
           static PyLanguage* constructor();

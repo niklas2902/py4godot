@@ -338,6 +338,21 @@ def generate_copy_constructor(class_):
     res = generate_newline(res)
     res += f"{INDENT * 2}constructor(&godot_owner,_args);"
     res = generate_newline(res)
+    res += f"{INDENT * 2}if(copy_val._callback){{"
+
+    res = generate_newline(res)
+    res += f"{INDENT * 3}auto instance_callback = new Callback<{class_['name']}>();"
+    res = generate_newline(res)
+    res += f"{INDENT * 3}auto copy_callback = (Callback<{class_['name']}>*) copy_val._callback;"
+    res = generate_newline(res)
+    res += f"{INDENT * 3}instance_callback->callback = copy_callback->callback;"
+    res = generate_newline(res)
+    res += f"{INDENT * 3}instance_callback->instance = copy_callback->instance;"
+    res = generate_newline(res)
+    res += f"{INDENT * 3}this->_callback = instance_callback;"
+    res = generate_newline(res)
+    res += f"{INDENT*2}}}"
+    res = generate_newline(res)
     res += f"{INDENT}}}"
     res = generate_newline(res)
     return res
