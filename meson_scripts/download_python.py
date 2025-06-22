@@ -14,7 +14,7 @@ platform_dict = {"windows64": "x86_64-pc-windows-msvc-install_only_stripped", "w
                  "linuxarm64":"aarch64-unknown-linux-gnu-install_only_stripped"}
 python_files_dir = "python_files"
 copy_dir = "build/final"
-python_ver = "cpython-3.12.4"
+python_ver = "cpython-3.11.13"
 
 sitecustomize_py = """
 import site
@@ -32,7 +32,7 @@ def download_file(platform, allow_copy=False):
     print("download:" + platform)
 
     if platform != "linux32" and platform != "linux64":
-        url = f'https://github.com/indygreg/python-build-standalone/releases/download/20240726/{python_ver}+20240726-{platform_dict[platform]}.tar.gz'
+        url = f'https://github.com/indygreg/python-build-standalone/releases/download/20250612/{python_ver}+20250612-{platform_dict[platform]}.tar.gz'
         python_file = f'{python_files_dir}/{python_ver}-{platform_dict[platform]}.tar.gz'
     elif platform == "linux64":
         url = f'https://github.com/niklas2902/prebuild-python-linux64/releases/download/release-0.1/{python_ver}-linux64.zip'
@@ -117,8 +117,8 @@ def delete_pip( platform, export_folder):
             shutil.rmtree(f"python_files/{export_folder}/python/Lib/site-packages/pip")
     elif "linux" in platform:
         print("deleting pip...")
-        if os.path.isdir(f"python_files/{export_folder}/python/lib/python3.12/site-packages/pip"):
-            shutil.rmtree(f"python_files/{export_folder}/python/lib/python3.12/site-packages/pip")
+        if os.path.isdir(f"python_files/{export_folder}/python/lib/python3.11.13/site-packages/pip"):
+            shutil.rmtree(f"python_files/{export_folder}/python/lib/python3.11.13/site-packages/pip")
 
 
 def create_sitecustomization(export_folder, platform):
@@ -127,6 +127,6 @@ def create_sitecustomization(export_folder, platform):
                   "w") as sitecustomize_file:
             sitecustomize_file.write(sitecustomize_py.replace("{platform}", platform))
     elif "linux" in platform:
-        with open(f"python_files/{export_folder}/python/lib/python3.12/site-packages/sitecustomize.py",
+        with open(f"python_files/{export_folder}/python/lib/python3.11.13/site-packages/sitecustomize.py",
                   "w") as sitecustomize_file:
             sitecustomize_file.write(sitecustomize_py.replace("{platform}", platform))
