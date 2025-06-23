@@ -25,6 +25,7 @@ class TestRunner(Node3D):
 		test_object = self.get_node(self.test_object_path).get_pyscript()  # Replace with the actual object you're testing
 		suite = unittest.TestSuite()
 		suite.addTest(PythonTest("test_global_position", test_object=test_object))
+		suite.addTest(PythonTest("test_meta", test_object=test_object))
 		res = unittest.TextTestRunner(stream=PrintStream()).run(suite)
 		if len(res.failures) == 0:
 			get_tree(self).quit(0)

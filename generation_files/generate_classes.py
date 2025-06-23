@@ -475,9 +475,7 @@ def generate_default_args(mMethod):
                 res = generate_newline(res)
                 res += f"{INDENT * 3}{pythonize_name(arg['name'])} = {arg['type']}.new0()"
             elif arg["type"] == "Variant":
-                res += f"{INDENT * 2}if {pythonize_name(arg['name'])} is None:"
-                res = generate_newline(res)
-                res += f"{INDENT * 3}{pythonize_name(arg['name'])} = create_variant_from_py_object(1)"
+                pass # We actually don't want to set anything here. This is later handled by C++
             else:
                 res += f"{INDENT * 2}if {pythonize_name(arg['name'])} is None:"
                 res = generate_newline(res)

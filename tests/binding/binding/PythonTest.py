@@ -21,3 +21,6 @@ class PythonTest(unittest.TestCase):
 		a.push_back(self.test_object)
 		o = a.get(0)
 		self.assertEqual(o.get_class(), "Node3D")
+	
+	def test_meta(self):
+		self.assertEqual(self.test_object.get_meta_object(), True)
