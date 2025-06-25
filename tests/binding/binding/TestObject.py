@@ -34,3 +34,6 @@ class TestObject(Node3D):
 		self.custom_signal_no_args.disconnect(self.custom_signal_no_arg_function)
 	def disconnect_visibility(self) -> None:
 		self.visibility_changed.disconnect(self.visible_changed)
+	
+	def get_meta_object(self) -> object:
+		return self.get_meta("is_test_object")
