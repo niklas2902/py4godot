@@ -1600,6 +1600,9 @@ def generate_register_cast(class_name):
     res = ""
     res += f"register_cast_function('{class_name}', {class_name}.cast)"
     res = generate_newline(res)
+    if class_name == "ScriptExtension":
+        res += f"register_cast_function('PyScriptExtension', {class_name}.cast)"
+        res = generate_newline(res)
     return res
 
 def generate_dictionary_set_item():
