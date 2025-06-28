@@ -10,7 +10,8 @@ from shutil import copytree, ignore_patterns
 import stat
 
 platform_dict = {"windows64": "x86_64-pc-windows-msvc-install_only_stripped", "windows32": "i686-pc-windows-msvc-install_only_stripped",
-                 "linux64": "x86_64-unknown-linux-gnu-install_only_stripped", "darwin64":"aarch64-apple-darwin-install_only_stripped",}
+                 "linux64": "x86_64-unknown-linux-gnu-install_only_stripped", "darwin64":"aarch64-apple-darwin-install_only_stripped",
+                 "linuxarm64":"aarch64-unknown-linux-gnu-install_only_stripped"}
 python_files_dir = "python_files"
 copy_dir = "build/final"
 python_ver = "cpython-3.12.4"
@@ -55,6 +56,11 @@ def download_file(platform, allow_copy=False):
         print("extracting .tar file")
         extract_archive(python_file.replace(".zst", ""), export_name)
 
+    if platform == "linux64":
+        print("change access")
+        st = os.stat(python_files_dir + "/" + export_name + "/" + "python" + "/" + "bin" + "/" + "python3")
+        os.chmod(python_files_dir + "/" + export_name + "/" + "python" + "/" + "bin" + "/" + "python3",
+                 st.st_mode | stat.S_IXUSR | stat.S_IXGRP | stat.S_IXOTH)
     if (allow_copy):
         create_sitecustomization(export_name, platform)
         delete_pip(platform, export_name)
@@ -77,6 +83,8 @@ def extract_archive(file, export_name):
         print("File:", file)
         if file.endswith("tar") or file.endswith("gz"):
             my_tar = tarfile.open(file)
+            print(export_name)
+            print(python_files_dir + "/" + export_name)
             my_tar.extractall(python_files_dir + "/" + export_name)  # specify which folder to extract to
             my_tar.close()
         else:

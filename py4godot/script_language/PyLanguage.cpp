@@ -14,6 +14,9 @@
 #include "py4godot/pluginscript_api/api.h"
 Theme theme;
 std::shared_ptr<ImageTexture> image_texture;
+std::shared_ptr<Image> icon_image;
+godot::StringName register_icon_name;
+
 
 //TODO: generate this
 bool theme_has_method(){
@@ -28,43 +31,21 @@ bool theme_has_method(){
 }
 
 void PyLanguage::init_theme_icon(){
-    if(counter == 1){
-
-        auto engine = Engine::get_instance();
-        if (!engine->has_singleton(c_string_to_string_name("EditorInterface"))){
-            return;
-        }
-
-        auto instance = EditorInterface::get_instance();
-        if(!theme_has_method()){
-            return;
-        }
-        theme = instance ->get_editor_theme();
-
-        image_texture = ImageTexture::constructor();
-        auto icon_path = c_string_to_string("addons/py4godot/Python.svg");
-        auto icon_image = Image::constructor();
-        icon_image->reference();
-        icon_image->load(icon_path);
-        image_texture = ImageTexture::py_create_from_image(icon_image);
-
-        auto icon_name = c_string_to_string_name("Python");
-        auto py_script_icon_name = c_string_to_string_name("PyScriptExtension");
-        auto theme_name = c_string_to_string_name("EditorIcons");
-        counter ++;
-        theme.set_icon(icon_name, theme_name, image_texture.get());
-        theme.set_icon(py_script_icon_name, theme_name, image_texture.get());
-        icon_image->unreference();
-
-    }
-    else{
-        counter ++;
-    }
 }
+
 void PyLanguage::deinit_theme_icon(){
-    //theme.unreference();
-    //image_texture->unreference();
+    auto engine = Engine::get_instance();
+    if(!engine->is_editor_hint()){
+        return;
+    }
+    auto icon_name = c_string_to_string_name("Python");
+    auto py_script_icon_name = c_string_to_string_name("PyScriptExtension");
+    auto theme_name = c_string_to_string_name("EditorIcons");
+    functions::get_object_destroy()(image_texture->godot_owner);
+    icon_image->unreference();
+    functions::get_object_destroy()(icon_image->godot_owner);
 }
+
   PyLanguage* PyLanguage::constructor(){
     PyLanguage* class_ = new PyLanguage();
 
@@ -90,10 +71,12 @@ void PyLanguage::destroy(){
   void PyLanguage::_get_name(GDExtensionTypePtr res){
     functions::get_string_new_with_utf8_chars()(res, language_name);
   }
-  void PyLanguage::_init(GDExtensionTypePtr res){}
+  void PyLanguage::_init(GDExtensionTypePtr res){
+    std::vector<PyObject*> varargs{};
+    this->call_deferred(register_icon_name, varargs);
+  }
 
   void PyLanguage::_get_type(GDExtensionTypePtr res){
-    init_theme_icon();
     print_error("_get_type");
     char* path = "Python";
     c_string_to_string_result(path, (void**)res);
@@ -1410,7 +1393,9 @@ GDExtensionClassCallVirtual get_virtual(void *p_userdata, GDExtensionConstString
     }
 
 
-    //assert(false); // There are methods not being handled
+    assert(false); // There are methods not being handled
+    print_error_user("function not found  for function loader:");
+    print_error_user(res_string);
     return nullptr;
 }
 
@@ -1470,6 +1455,8 @@ void deinit_func_names(){
     func_name__frame.StringName_py_destroy();
     func_name__handles_global_class_type.StringName_py_destroy();
     func_name__get_global_class_name.StringName_py_destroy();
+    register_icon_name.StringName_py_destroy();
+
     func_name__get_name.shouldBeDeleted=false;
     func_name__init.shouldBeDeleted=false;
     func_name__get_type.shouldBeDeleted=false;
@@ -1525,10 +1512,13 @@ void deinit_func_names(){
     func_name__frame.shouldBeDeleted=false;
     func_name__handles_global_class_type.shouldBeDeleted=false;
     func_name__get_global_class_name.shouldBeDeleted=false;
+    register_icon_name.shouldBeDeleted=false;
+
 }
 
 
 void init_func_names(){
+   register_icon_name = c_string_to_string_name("register_icon");
    func_name__get_name = c_string_to_string_name("_get_name");
    func_name__get_name.shouldBeDeleted=true;
    func_name__init = c_string_to_string_name("_init");
@@ -1643,9 +1633,11 @@ void init_func_names(){
 
 #pragma endregion
 void free_instance(void *p_userdata, GDExtensionClassInstancePtr p_instance){
-    assert(false);
     //functions::get_object_destroy()(p_instance);
 }
+
+GDExtensionClassMethodInfo create_method_info(StringName& method_name);
+
 void register_class(){
     GDExtensionClassCreationInfo* creation_info = new GDExtensionClassCreationInfo{};
     init_func_names();
@@ -1665,4 +1657,76 @@ void register_class(){
     parent_class_name.shouldBeDeleted=true;
 
     functions::get_classdb_register_extension_class()(_library, &class_name_lang.godot_owner, &parent_class_name.godot_owner, creation_info);
+
+    StringName method_name = c_string_to_string_name("register_icon");
+    auto method_info = create_method_info(method_name);
+    functions::get_classdb_register_extension_class_method()(
+        _library,
+        &class_name_lang.godot_owner, // same class name used earlier
+        &method_info
+    );
+}
+
+
+void register_icon(
+    GDExtensionClassInstancePtr instance,
+    const GDExtensionConstVariantPtr* args,
+    GDExtensionVariantPtr return_value,
+    GDExtensionInt arg_count,
+    GDExtensionCallError* error
+) {
+    auto engine = Engine::get_instance();
+    if(!engine->is_editor_hint()){
+        return;
+    }
+    auto editor_interface_name = c_string_to_string_name("EditorInterface");
+    std::vector<PyObject*> varargs;
+    if (!engine->has_singleton(editor_interface_name)){
+        get_language()->call_deferred(register_icon_name, varargs);
+        return;
+    }
+
+    auto editor_interface = EditorInterface::get_instance();
+    if(!theme_has_method()){
+        get_language()->call_deferred(register_icon_name, varargs);
+        return;
+    }
+    // Retry until the base_control and its theme are ready
+    /*if (!editor_interface->get_base_control() || !theme) {
+        call_deferred("register_icon");
+        return;
+    }*/
+    theme = editor_interface->get_editor_theme();
+    auto icon_path = c_string_to_string("addons/py4godot/Python.svg");
+    icon_image = Image::constructor();
+    icon_image->reference();
+    icon_image->load(icon_path);
+    image_texture = ImageTexture::py_create_from_image(icon_image);
+
+    auto icon_name = c_string_to_string_name("Python");
+    auto py_script_icon_name = c_string_to_string_name("PyScriptExtension");
+    auto theme_name = c_string_to_string_name("EditorIcons");
+    theme.set_icon(icon_name, theme_name, image_texture.get());
+    theme.set_icon(py_script_icon_name, theme_name, image_texture.get());
+
+    theme.unreference();
+}
+
+GDExtensionClassMethodInfo create_method_info(StringName& method_name){
+    GDExtensionClassMethodInfo method_info = {};
+    method_info.name = &method_name.godot_owner;
+
+    // Assign function pointer
+    method_info.method_userdata = nullptr;
+    method_info.call_func = (GDExtensionClassMethodCall)&register_icon;
+    method_info.ptrcall_func = nullptr; // unless you implement ptrcall
+    method_info.method_flags = GDEXTENSION_METHOD_FLAG_NORMAL;
+    method_info.method_flags = GDEXTENSION_METHOD_FLAG_NORMAL;
+
+    // Optional: argument metadata
+    method_info.arguments_info = nullptr;
+    method_info.argument_count = 0;
+    method_info.default_arguments = nullptr;
+    method_info.default_argument_count = 0;
+    return method_info;
 }

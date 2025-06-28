@@ -28,7 +28,7 @@ bool string_names_equal_save(StringName& left, StringName& right){
 }
 
 void PyResourceFormatSaver::destroy(){
-    functions::get_object_destroy()(this->godot_owner);
+    //this->unreference();
 }
 
 void* create_instance_saver(void* userdata){
@@ -167,6 +167,8 @@ namespace saver{
             return saver::call_virtual_func__recognize_path;
         }
         assert(false); // There are methods not being handled
+        print_error_user("function not found  for function loader:");
+        print_error_user(res_string);
         return nullptr;
     }
 }

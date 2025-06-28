@@ -17,6 +17,9 @@ static void print_error(char* error_message){
     //functions::get_print_error()(error_message, "error", "error", 1, 1);
 }
 
+static void print_error_user(char* error_message){
+    functions::get_print_error()(error_message, "error", "error", 1, 1);
+}
 
 static void print_error_detailed(char* error_message, char* function, char* file, int line){
     functions::get_print_error()(error_message, function, file, line, 1);

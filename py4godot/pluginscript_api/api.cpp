@@ -48,3 +48,7 @@ void godot::deinit_py_language(){
     py_resource_format_loader->destroy();
     py_resource_format_saver->destroy();
 }
+
+PyLanguage* godot::get_language(){
+    return py_language;
+}

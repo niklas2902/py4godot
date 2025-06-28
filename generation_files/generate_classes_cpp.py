@@ -338,6 +338,21 @@ def generate_copy_constructor(class_):
     res = generate_newline(res)
     res += f"{INDENT * 2}constructor(&godot_owner,_args);"
     res = generate_newline(res)
+    res += f"{INDENT * 2}if(copy_val._callback){{"
+
+    res = generate_newline(res)
+    res += f"{INDENT * 3}auto instance_callback = new Callback<{class_['name']}>();"
+    res = generate_newline(res)
+    res += f"{INDENT * 3}auto copy_callback = (Callback<{class_['name']}>*) copy_val._callback;"
+    res = generate_newline(res)
+    res += f"{INDENT * 3}instance_callback->callback = copy_callback->callback;"
+    res = generate_newline(res)
+    res += f"{INDENT * 3}instance_callback->instance = copy_callback->instance;"
+    res = generate_newline(res)
+    res += f"{INDENT * 3}this->_callback = instance_callback;"
+    res = generate_newline(res)
+    res += f"{INDENT*2}}}"
+    res = generate_newline(res)
     res += f"{INDENT}}}"
     res = generate_newline(res)
     return res
@@ -1872,7 +1887,72 @@ def generate_special_methods(class_):
     if class_["name"] == "Object":
         res += generate_special_methods_object()
 
+    if class_["name"] in ("PackedInt32Array", "PackedInt64Array", "PackedFloat32Array", "PackedFloat64Array", "PackedByteArray"):
+        res += generate_special_methods_packed_array(class_)
+
     return res
+
+
+def generate_special_methods_packed_array(class_):
+    res = ""
+    method = {"PackedInt32Array":"functions::get_packed_int32_array_operator_index()",
+                "PackedInt64Array":"functions::get_packed_int64_array_operator_index()",
+               "PackedFloat32Array":"functions::get_packed_float32_array_operator_index()",
+              "PackedFloat64Array": "functions::get_packed_float64_array_operator_index()",
+               "PackedByteArray":"functions::get_packed_byte_array_operator_index()"}[class_['name']]
+    packed_array_type = {"PackedInt32Array":"int32_t", "PackedInt64Array":"int64_t", "PackedFloat32Array":"float",
+                         "PackedFloat64Array":"double",
+                         "PackedByteArray":"byte"}[class_['name']]
+    res += f"{INDENT * 1}std::vector<{packed_array_type}> {class_['name']}::to_vector(){{"
+    res = generate_newline(res)
+    res += f"{INDENT*2}{packed_array_type}* ptr = {method}(&godot_owner, 0);"
+    res = generate_newline(res)
+    res += f"{INDENT*2}long long length = size();"
+    res = generate_newline(res)
+    res += f"{INDENT*2}std::vector<{packed_array_type}> result = std::vector<{packed_array_type}>(ptr, ptr + length);"
+    res = generate_newline(res)
+    res += f"{INDENT*2}return result;}}"
+    res = generate_newline(res)
+
+    res += f"{INDENT * 1}{packed_array_type}* {class_['name']}::get_pointer(){{"
+    res = generate_newline(res)
+    res += f"{INDENT*2}{packed_array_type}* ptr = {method}(&godot_owner, 0);"
+    res = generate_newline(res)
+    res += f"{INDENT*2}return ptr;"
+    res = generate_newline(res)
+    res += f"{INDENT}}}"
+    res = generate_newline(res)
+
+    res += f"{INDENT * 1}std::shared_ptr<{class_['name']}> {class_['name']}::py_from_ptr({packed_array_type}* ptr, long long size){{"
+    res = generate_newline(res)
+    res = generate_newline(res)
+    res += f"{INDENT * 2}{class_['name']} _class{{}};"
+    res = generate_newline(res)
+    res += f"{INDENT * 2}_class.shouldBeDeleted = true;"
+    res = generate_newline(res)
+    res += f"{INDENT * 2}_class.set_variant_type({generate_variant_type(class_['name'])});"
+    res = generate_newline(res)
+    res += f"{INDENT * 2}GDExtensionPtrConstructor constructor = functions::get_variant_get_ptr_constructor()(_class.variant_type, 0);"
+    res = generate_newline(res)
+    res += f"{INDENT*2}GDExtensionTypePtr _args[1];"
+    res = generate_newline(res)
+    res += f"{INDENT * 2}_class.allocated_memory = true;"
+    res = generate_newline(res)
+
+    res += f"{INDENT * 2}constructor(&_class.godot_owner,_args);"
+    res = generate_newline(res)
+    res += f"{INDENT * 2}_class.resize(size);"
+    res = generate_newline(res)
+    res += f"{INDENT*2}{packed_array_type}* packed_array_ptr = {method}(&_class.godot_owner, 0);"
+    res = generate_newline(res)
+    res += f"{INDENT*2}memcpy(packed_array_ptr,ptr, size);"
+    res = generate_newline(res)
+    res += f"{INDENT*2}return std::make_shared<{class_['name']}>(_class);"
+    res = generate_newline(res)
+    res += f"{INDENT}}}"
+    res = generate_newline(res)
+    return res
+
 
 
 def generate_operators_set(class_):

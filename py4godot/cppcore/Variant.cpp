@@ -64,34 +64,41 @@ void Variant::switch_native_and_inner(){
 }
 
 Variant::Variant(int* val){
+    native_ptr = &data;
     auto constructor = functions::get_get_variant_from_type_constructor()(GDExtensionVariantType::GDEXTENSION_VARIANT_TYPE_INT);
     constructor(&_inner_ptr, &val);
 }
 
 Variant::Variant(String& val){
+    native_ptr = &data;
     auto constructor = functions::get_get_variant_from_type_constructor()(GDExtensionVariantType::GDEXTENSION_VARIANT_TYPE_STRING);
     constructor(&native_ptr, &val.godot_owner);
 }
 Variant::Variant(StringName& val){
+    native_ptr = &data;
     auto constructor = functions::get_get_variant_from_type_constructor()(GDExtensionVariantType::GDEXTENSION_VARIANT_TYPE_STRING_NAME);
     constructor(&native_ptr, &val.godot_owner);
 }
 Variant::Variant(Dictionary& val){
+    native_ptr = &data;
     auto constructor = functions::get_get_variant_from_type_constructor()(GDExtensionVariantType::GDEXTENSION_VARIANT_TYPE_DICTIONARY);
     constructor(&native_ptr, &val.godot_owner);
 }
 
 Variant::Variant(Array& val){
+    native_ptr = &data;
     auto constructor = functions::get_get_variant_from_type_constructor()(GDExtensionVariantType::GDEXTENSION_VARIANT_TYPE_ARRAY);
     constructor(&native_ptr, &val.godot_owner);
 }
 
 Variant::Variant(Object& val){
+    native_ptr = &data;
     auto constructor = functions::get_get_variant_from_type_constructor()(GDExtensionVariantType::GDEXTENSION_VARIANT_TYPE_OBJECT);
     constructor(&native_ptr, &val.godot_owner);
 }
 
 Variant::Variant(int val){
+    native_ptr = &data;
     auto constructor = functions::get_get_variant_from_type_constructor()(GDExtensionVariantType::GDEXTENSION_VARIANT_TYPE_INT);
     constructor(&native_ptr, &val);
 }
@@ -498,6 +505,27 @@ PyObject* Variant::create_object(){
     std::shared_ptr<Object> string = std::make_shared<Object>();
     string->shouldBeDeleted=false;
     constructor(&string->godot_owner, native_ptr);
+    if (string->godot_owner == nullptr) {
+        return Py_None;
+    }
+    auto val = type_helper_create_object(string);
+    char* class_name;
+    auto class_name_string = string->get_class();
+    class_name_string.shouldBeDeleted = true;
+    gd_string_to_c_string(&class_name_string.godot_owner, class_name_string.length(),&class_name);
+    auto casted = cast_to_type(class_name,val);
+    Py_DECREF(val);
+    free(class_name);
+    return casted;
+}
+
+PyObject* Variant::create_object_native_ptr(){
+
+    GDExtensionVariantType type = functions::get_variant_get_type()(&native_ptr);
+    auto constructor = functions::get_get_variant_to_type_constructor()(type);
+    std::shared_ptr<Object> string = std::make_shared<Object>();
+    string->shouldBeDeleted=false;
+    constructor(&string->godot_owner, &native_ptr);
     if (string->godot_owner == nullptr) {
         return Py_None;
     }
@@ -1018,7 +1046,12 @@ PyObject* Variant::get_converted_value_native_ptr(bool should_return_pystring){
         return create_stringname_native_ptr();
     case GDExtensionVariantType::GDEXTENSION_VARIANT_TYPE_NIL:
         return Py_None;
+
+    case GDExtensionVariantType::GDEXTENSION_VARIANT_TYPE_OBJECT:
+        auto object_ =  create_object_native_ptr();
+        return object_;
     }
+    assert(false);
     return nullptr;
 }
 

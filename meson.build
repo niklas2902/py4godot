@@ -1,4 +1,5 @@
-project('py4godot', 'cpp')
+project('py4godot', 'cpp',
+    meson_version: '>=1.6.0',)
 
 cc = meson.get_compiler('cpp')
 message('compiler:' + cc.get_id())
@@ -12,7 +13,7 @@ if host_machine.cpu_family() == 'x86_64'
     platform_format = '64'
 endif
 if host_machine.cpu_family() == 'aarch64'
-    platform_format = '64'
+    platform_format = 'arm64'
 endif
 
 message('platform:' + platform_format)
@@ -57,27 +58,28 @@ if build_machine.system() == 'windows'
     'py4godot/script_instance', 'py4godot/core/variant4', 'py4godot/cppcore', 'py4godot/cppenums',
     'py4godot/cppclasses', 'py4godot/cpputils', 'py4godot/script_language', 'py4godot/pluginscript_api',
     'py4godot/pluginscript_api/utils')
-    glob = run_command('python', files(meson.current_source_dir()+'/meson_scripts/glob_tools.py'))
-    glob_cpp = run_command('python', files(meson.current_source_dir()+'/meson_scripts/glob_tools_cpp.py'))
+    glob = run_command('python', files(meson.current_source_dir()+'/meson_scripts/glob_tools.py'), check:false)
+    glob_cpp = run_command('python', files(meson.current_source_dir()+'/meson_scripts/glob_tools_cpp.py'), check:false)
 endif
 if build_machine.system() == 'darwin'
     message('search:')
-    message(meson.current_source_dir()+'/python_files/cpython-3.12.4-'+machine+platform_format + '/python')
+    message(meson.current_source_dir()+'/python_files/cpython-3.12.4-'+machine+'64' + '/python')
     py = import('python').find_installation('python3')
     dep_py = py.dependency()
-    lib_py = cc.find_library('python3.12', dirs:meson.current_source_dir()+'/python_files/cpython-3.12.4-'+machine+platform_format + '/python/lib')
+    lib_py = cc.find_library('python3.12', dirs:meson.current_source_dir()+'/python_files/cpython-3.12.4-'+machine+'64' + '/python/lib')
         internal_inc = include_directories('py4godot','py4godot/gdextension-api/', 'py4godot/core', 'py4godot/enums',
     'py4godot/classes', 'py4godot/pluginscript_api', 'py4godot/godot_bindings',
     'py4godot/script_instance', 'py4godot/core/variant4', 'py4godot/cppcore', 'py4godot/cppenums',
     'py4godot/cppclasses', 'py4godot/cpputils', 'py4godot/script_language', 'py4godot/pluginscript_api',
     'py4godot/pluginscript_api/utils',
-    'py4godot/instance_data', 'python_files/cpython-3.12.4-'+machine+platform_format+'/python/include/python3.12')
-    glob = run_command('python3', files(meson.current_source_dir()+'/meson_scripts/glob_tools.py'))
-    glob_cpp = run_command('python3', files(meson.current_source_dir()+'/meson_scripts/glob_tools_cpp.py'))
+    'py4godot/instance_data', 'python_files/cpython-3.12.4-'+machine+'64'+'/python/include/python3.12')
+    glob = run_command('python3', files(meson.current_source_dir()+'/meson_scripts/glob_tools.py'), check:false)
+    glob_cpp = run_command('python3', files(meson.current_source_dir()+'/meson_scripts/glob_tools_cpp.py'), check:false)
     dep_py = lib_py
 endif
 if meson.has_external_property('is_mingw') and build_machine.system() == 'linux'
     message('dirs:')
+    py = import('python').find_installation('python3')
     message(meson.current_source_dir()+'/python_files/cpython-3.12.4-'+machine+platform_format + '/python')
     link_args += ['-static-libgcc', '-static-libstdc++'] #TODO: Is this good like this?
     lib_py = cc.find_library('python312', dirs:meson.current_source_dir()+'/python_files/cpython-3.12.4-'+machine+platform_format + '/python')
@@ -87,8 +89,8 @@ if meson.has_external_property('is_mingw') and build_machine.system() == 'linux'
     'py4godot/cppclasses', 'py4godot/cpputils', 'py4godot/script_language', 'py4godot/pluginscript_api',
     'py4godot/pluginscript_api/utils',
     'py4godot/instance_data', 'python_files/cpython-3.12.4-'+machine+platform_format+'/python/include')
-    glob = run_command('python3', files(meson.current_source_dir()+'/meson_scripts/glob_tools.py'))
-    glob_cpp = run_command('python3', files(meson.current_source_dir()+'/meson_scripts/glob_tools_cpp.py'))
+    glob = run_command('python3', files(meson.current_source_dir()+'/meson_scripts/glob_tools.py'), check:false)
+    glob_cpp = run_command('python3', files(meson.current_source_dir()+'/meson_scripts/glob_tools_cpp.py'), check:false)
     dep_py = lib_py
 endif
 
@@ -101,8 +103,8 @@ if not meson.has_external_property('is_mingw') and build_machine.system() == 'li
     'py4godot/pluginscript_api/utils','python_files/cpython-3.12.4-'+machine+platform_format+'/python/include/python3.12',
     'py4godot/instance_data')
     py = import('python').find_installation('python3')
-    glob = run_command('python3', files(meson.current_source_dir()+'/meson_scripts/glob_tools.py'))
-    glob_cpp = run_command('python3', files(meson.current_source_dir()+'/meson_scripts/glob_tools_cpp.py'))
+    glob = run_command('python3', files(meson.current_source_dir()+'/meson_scripts/glob_tools.py'), check:false)
+    glob_cpp = run_command('python3', files(meson.current_source_dir()+'/meson_scripts/glob_tools_cpp.py'), check:false)
     dep_py = lib_py
 endif
 
@@ -139,21 +141,24 @@ foreach source : sources
     cpp_args:cpp_args, install_rpath: '$ORIGIN/../lib',
     build_rpath : '$ORIGIN/../lib')
 endforeach
-
-#test('test_vector3', godot_program, args : ['--path', 'tests/core/vector3', '--headless'], workdir:meson.source_root(), timeout:1000, is_parallel:false)
-#test('test_vector2', godot_program, args : ['--path', 'tests/core/vector2', '--headless'], workdir:meson.source_root(),  timeout:1000, is_parallel:false)
-#test('test_rect2', godot_program, args : ['--path', 'tests/core/rect2', '--headless'], workdir:meson.source_root(), timeout:1000, is_parallel:false)
-test('test_aabb', py, args:['test_file.py', 'tests/core/aabb', godot_program],  workdir:meson.source_root(), timeout:1000, is_parallel:false)
-test('test_color', py, args:['test_file.py', 'tests/core/color', godot_program],  workdir:meson.source_root(), timeout:1000, is_parallel:false)
-#test('test_basis', godot_program, args : ['--path', 'tests/core/basis', '--headless'], workdir:meson.source_root(), timeout:1000, is_parallel:false)
-#test('test_array', godot_program, args : ['--path', 'tests/core/array', '--headless'], workdir:meson.source_root(), timeout:1000, is_parallel:false)
-#test('test_color', godot_program, args : ['--path', 'tests/core/color', '--headless'], workdir:meson.source_root(), timeout:1000, is_parallel:false)
-#test('test_dictionary', godot_program, args : ['--path', 'tests/core/dictionary', '--headless'], workdir:meson.source_root(), timeout:1000, is_parallel:false)
-#test('test_node_path', godot_program, args : ['--path', 'tests/core/node_path', '--headless'], workdir:meson.source_root(), timeout:1000, is_parallel:false)
-#test('test_rid', godot_program, args : ['--path', 'tests/core/rid', '--headless'], workdir:meson.source_root(), timeout:1000, is_parallel:false)
-#test('test_quat', godot_program, args : ['--path', 'tests/core/quat', '--headless'], workdir:meson.source_root(), timeout:1000, is_parallel:false)
-#test('test_transform', godot_program, args : ['--path', 'tests/core/transform', '--headless'], workdir:meson.source_root(), timeout:1000, is_parallel:false)
-#test('test_transform2d', godot_program, args : ['--path', 'tests/core/transform2d', '--headless'], workdir:meson.source_root(), timeout:1000, is_parallel:false)
-test('test_signals', py, args:['test_file.py', 'tests/binding/signals', godot_program], workdir:meson.source_root(), timeout:100, is_parallel:false)
-test('test_singletons', py, args:['test_file.py', 'tests/binding/singletons', godot_program], workdir:meson.source_root(), timeout:100, is_parallel:false)
-test('test_numpy', py, args:['tests/libraries/numpy/test_file.py', 'tests/libraries/numpy', godot_program], workdir:meson.source_root(), timeout:100, is_parallel:false)
+if godot_program.found()
+    #test('test_vector3', godot_program, args : ['--path', 'tests/core/vector3', '--headless'], workdir:meson.global_source_root(), timeout:1000, is_parallel:false)
+    #test('test_vector2', godot_program, args : ['--path', 'tests/core/vector2', '--headless'], workdir:meson.global_source_root(),  timeout:1000, is_parallel:false)
+    #test('test_rect2', godot_program, args : ['--path', 'tests/core/rect2', '--headless'], workdir:meson.global_source_root(), timeout:1000, is_parallel:false)
+    test('test_aabb', py, args:['test_file.py', 'tests/core/aabb', godot_program],  workdir:meson.global_source_root(), timeout:1000, is_parallel:false)
+    test('test_color', py, args:['test_file.py', 'tests/core/color', godot_program],  workdir:meson.global_source_root(), timeout:1000, is_parallel:false)
+    #test('test_basis', godot_program, args : ['--path', 'tests/core/basis', '--headless'], workdir:meson.global_source_root(), timeout:1000, is_parallel:false)
+    #test('test_array', godot_program, args : ['--path', 'tests/core/array', '--headless'], workdir:meson.global_source_root(), timeout:1000, is_parallel:false)
+    test('test_color', godot_program, args : ['--path', 'tests/core/color', '--headless'], workdir:meson.global_source_root(), timeout:1000, is_parallel:false)
+    test('test_packed_arrays', godot_program, args : ['--path', 'tests/core/packed_arrays', '--headless'], workdir:meson.global_source_root(), timeout:1000, is_parallel:false)
+    #test('test_dictionary', godot_program, args : ['--path', 'tests/core/dictionary', '--headless'], workdir:meson.global_source_root(), timeout:1000, is_parallel:false)
+    #test('test_node_path', godot_program, args : ['--path', 'tests/core/node_path', '--headless'], workdir:meson.global_source_root(), timeout:1000, is_parallel:false)
+    #test('test_rid', godot_program, args : ['--path', 'tests/core/rid', '--headless'], workdir:meson.global_source_root(), timeout:1000, is_parallel:false)
+    #test('test_quat', godot_program, args : ['--path', 'tests/core/quat', '--headless'], workdir:meson.global_source_root(), timeout:1000, is_parallel:false)
+    #test('test_transform', godot_program, args : ['--path', 'tests/core/transform', '--headless'], workdir:meson.global_source_root(), timeout:1000, is_parallel:false)
+    #test('test_transform2d', godot_program, args : ['--path', 'tests/core/transform2d', '--headless'], workdir:meson.global_source_root(), timeout:1000, is_parallel:false)
+    test('test_signals', py, args:['test_file.py', 'tests/binding/signals', godot_program], workdir:meson.global_source_root(), timeout:100, is_parallel:false)
+    test('test_binding', py, args:['test_file.py', 'tests/binding/binding', godot_program], workdir:meson.global_source_root(), timeout:100, is_parallel:false)
+    test('test_singletons', py, args:['test_file.py', 'tests/binding/singletons', godot_program], workdir:meson.global_source_root(), timeout:100, is_parallel:false)
+    test('test_numpy', py, args:['tests/libraries/numpy/test_file.py', 'tests/libraries/numpy', godot_program], workdir:meson.global_source_root(), timeout:100, is_parallel:false)
+endif

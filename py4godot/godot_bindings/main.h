@@ -12,12 +12,19 @@
 #elif _WIN32
 #define PYTHONHOME L"addons/py4godot/cpython-3.12.4-windows32/python/"
 
-#elif __linux32__
+#elif __linux32__ && defined(__i386__)
 #define PYTHONHOME L"addons/py4godot/cpython-3.12.4-linux32/python/"
+
+
+#elif defined(__linux__) && defined(__aarch64__)
+#define PYTHONHOME L"addons/py4godot/cpython-3.12.4-linuxarm64/python/"
+#define PYTHONPATH "/addons/py4godot/cpython-3.12.4-linuxarm64/python/lib/python3.12/site-packages"
+
 
 #elif __linux__
 #define PYTHONHOME L"addons/py4godot/cpython-3.12.4-linux64/python"
 #define PYTHONPATH "/addons/py4godot/cpython-3.12.4-linux64/python/lib/python3.12/site-packages"
+
 
 #elif __APPLE__
 #define PYTHONHOME L"addons/py4godot/cpython-3.12.4-darwin64/python"
