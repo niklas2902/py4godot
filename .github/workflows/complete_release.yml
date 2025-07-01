@@ -117,24 +117,33 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: py4godot-windows-latest
+          path: install_dir/py4godot
 
       - name: Download Linux
         uses: actions/download-artifact@v4
         with:
           name: py4godot-ubuntu-latest
+          path: install_dir/py4godot
 
-      - name: Download Linux
+      - name: Download Linux ARM
         uses: actions/download-artifact@v4
         with:
           name: py4godot-ubuntu-24.04-arm
+          path: install_dir/py4godot
 
       - name: Download Macos
         uses: actions/download-artifact@v4
         with:
           name: py4godot-macos-latest
+          path: install_dir/py4godot
 
-      - name: Upload Precompiled Code
+      - name: Zip all into py4godot.zip
+        run: |
+          cd install_dir
+          zip -r ../py4godot.zip py4godot
+
+      - name: Upload Zipped Artifact
         uses: actions/upload-artifact@v4
         with:
-          name: final_output
-          path: .
+          name: py4godot
+          path: py4godot.zip
