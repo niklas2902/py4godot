@@ -137,12 +137,8 @@ jobs:
           name: py4godot-macos-latest
           path: install_dir/addons/py4godot
 
-      - name: Zip all into py4godot.zip
-        run: |
-          zip -r py4godot.zip install_dir
-
       - name: Upload Zipped Artifact
         uses: actions/upload-artifact@v4
         with:
           name: py4godot
-          path: py4godot.zip
+          path: install_dir
