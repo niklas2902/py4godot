@@ -4,3 +4,5 @@ wget
 meson>=1.0.0
 ninja==1.10.2.3
 tqdm
+beautifulsoup4
+lxml

@@ -5,6 +5,7 @@ from functools import lru_cache
 
 from generate_classes import pythonize_boolean_types, unref_type, \
     unnull_type
+from xml_help import init_class, get_class_description, get_method_description, get_property_description
 
 INDENT = "  "
 
@@ -291,10 +292,17 @@ def generate_method_headers(mMethod):
 def generate_method(class_, mMethod):
     res = ""
     args = generate_args(class_, mMethod)
-    ret = generate_children(class_['name'], get_ret_value(mMethod, class_))
-    def_function = f"{INDENT}def {pythonize_name(mMethod['name'])}({args})->{ret}: pass"
+    if get_ret_value(mMethod, class_) == "Object" and is_core:
+        ret = "object"
+    else:
+        ret = generate_children(class_['name'], get_ret_value(mMethod, class_))
+    def_function = f"{INDENT}def {pythonize_name(mMethod['name'])}({args})->{ret}:"
     res += generate_method_headers(mMethod)
     res += def_function
+    res = generate_newline(res)
+    res += generate_method_docstring(mMethod["name"])
+    res = generate_newline(res)
+    res += f"{INDENT*2}pass"
     res = generate_newline(res)
     return res
 
@@ -358,10 +366,18 @@ def generate_member_getter(class_, member):
     res = ""
     res += f"{INDENT}@property"
     res = generate_newline(res)
-    res += f"{INDENT}def {member.name}(self)->{undouble_type(member.type_)}:pass"
+    res += f"{INDENT}def {member.name}(self)->{undouble_type(member.type_)}:"
+    res = generate_newline(res)
+    res += generate_property_docstring(member.name)
+    res = generate_newline(res)
+    res += f"{INDENT*2}pass"
     res = generate_newline(res)
 
-    res += f"{INDENT}def get_{member.name}(self)->{undouble_type(member.type_)}:pass"
+    res += f"{INDENT}def get_{member.name}(self)->{undouble_type(member.type_)}:"
+    res = generate_newline(res)
+    res += generate_property_docstring(member.name)
+    res = generate_newline(res)
+    res += f"{INDENT * 2}pass"
     res = generate_newline(res)
     return res
 
@@ -432,13 +448,21 @@ def generate_property(property, class_):
     result = ""
     result += f"{INDENT}@property"
     result = generate_newline(result)
-    result += f"{INDENT}def {pythonize_name(property['name'])}(self)->{generate_children(class_['name'], property['type'])}: pass"
+    result += f"{INDENT}def {pythonize_name(property['name'])}(self)->{generate_children(class_['name'], property['type'])}:"
+    result = generate_newline(result)
+    result += generate_property_docstring(property['name'])
+    result = generate_newline(result)
+    result += f"{INDENT*2}pass"
     result = generate_newline(result)
 
     if "setter" in property and property["setter"] != "":
         result += f"{INDENT}@{pythonize_name(property['name'])}.setter"
         result = generate_newline(result)
-        result += f"{INDENT}def {pythonize_name(property['name'])}(self,  value:{ungodottype_type_array(untypearray(simplify_type(property['type'])), class_['name'])})->None: pass"
+        result += f"{INDENT}def {pythonize_name(property['name'])}(self,  value:{ungodottype_type_array(untypearray(simplify_type(property['type'])), class_['name'])})->None:"
+        result = generate_newline(result)
+        result += generate_property_docstring(property['name'])
+        result = generate_newline(result)
+        result += f"{INDENT * 2}pass"
         result = generate_newline(result)
 
     return result
@@ -699,10 +723,13 @@ def generate_classes(classes, filename, is_core=False, is_typed_array=False):
     for class_ in classes:
         if (class_["name"] in IGNORED_CLASSES):
             continue
+        init_class(class_["name"])
         res = generate_newline(res)
         res += generate_enums(class_)
         res = generate_newline(res)
         res += f"class {class_['name']}({get_base_class(class_)}):"
+        res = generate_newline(res)
+        res += generate_class_docstring()
         res = generate_newline(res)
         if (is_core):
             res = generate_newline(res)
@@ -727,12 +754,20 @@ def generate_classes(classes, filename, is_core=False, is_typed_array=False):
             res = generate_newline(res)
         res += generate_operators_for_class(class_["name"])
     if (os.path.exists(filename)):
-        with open(filename, "r") as already_existing_file:
+        with open(filename, "r", encoding="utf-8") as already_existing_file:
             if already_existing_file.read() == res:
                 return
-    with open(filename, "w") as f:
+    with open(filename, "w", encoding="utf-8") as f:
         f.write(res)
 
+def generate_class_docstring():
+    return f'{INDENT}"""{get_class_description()}"""'
+
+def generate_method_docstring(methodname):
+    return f'{INDENT*2}"""{get_method_description(methodname)}"""'
+
+def generate_property_docstring(propertyname):
+    return f'{INDENT*2}"""{get_property_description(propertyname)}"""'
 
 def generate_dictionary_set_item():
     res = ""

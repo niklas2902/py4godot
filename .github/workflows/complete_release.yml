@@ -139,7 +139,7 @@ jobs:
 
       - name: Zip all into py4godot.zip
         run: |
-          zip -r ../py4godot.zip install_dir
+          zip -r py4godot.zip install_dir
 
       - name: Upload Zipped Artifact
         uses: actions/upload-artifact@v4
