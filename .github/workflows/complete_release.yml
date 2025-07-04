@@ -117,7 +117,7 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: py4godot-windows-latest
-          path: to_zip/install_dir/addons/py4godot
+          path: install_dir/addons/py4godot
 
       - name: Download Linux
         uses: actions/download-artifact@v4
