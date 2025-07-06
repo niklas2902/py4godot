@@ -1,11 +1,6 @@
 name: complete release
 
 on:
-  push:
-    branches: [master]
-  pull_request:
-  schedule:
-    - cron: '0 3 * * 1'  # Runs at 03:00 UTC every Monday
   workflow_dispatch:     # Allows manual triggering
 
 jobs:
