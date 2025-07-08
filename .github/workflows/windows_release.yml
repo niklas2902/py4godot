@@ -2,72 +2,23 @@ name: release windows
 on:
   workflow_dispatch:
 jobs:
-  check_date:
-    runs-on: ubuntu-latest
-    name: Check latest commit
-    outputs:
-      should_run: ${{ steps.should_run.outputs.should_run }}
-    steps:
-      - uses: actions/checkout@v3
-        with:
-          ref: master
-      - name: print latest_commit
-        run: echo ${{ github.sha }}
-      - id: should_run
-        continue-on-error: true
-        name: check latest commit is less than a day
-        if: ${{ github.event_name == 'schedule' }}
-        run: test -z $(git rev-list  --after="24 hours"  ${{ github.sha }}) && echo "should_run=false" >> $GITHUB_OUTPUT
-
   windows-build:
-    needs: check_date
     if: ${{ needs.check_date.outputs.should_run != 'false' }}
-    runs-on: windows-latest
-    strategy:
-      matrix:
-        include:
-          - PLATFORM: 'windows-64'
-            PYTHON_ARCH: 'x64'
-            VS_ARCH: 'amd64'
+    runs-on: ubuntu-latest
+    container: niklas2902/py4godot:4.4
     steps:
       - uses: actions/checkout@v3
         with:
           ref: master
           submodules: 'recursive'
-
       - name: Set up Python 3.11.3
         uses: actions/setup-python@v2
         with:
           python-version: "3.11.3"
-
-      - name: Download latest Godot and add to PATH
-        shell: powershell
+      - name: Install MinGW cross-compiler
         run: |
-          # Create directory for Godot
-          New-Item -Path "C:\Godot" -ItemType Directory -Force
-      
-          # Download latest Godot stable
-          Invoke-WebRequest -Uri "https://github.com/godotengine/godot/releases/download/4.4-stable/Godot_v4.4-stable_win64.exe.zip" -OutFile "C:\Godot\godot.zip"
-      
-          # Extract Godot
-          Expand-Archive -Path "C:\Godot\godot.zip" -DestinationPath "C:\Godot" -Force
-      
-          # Rename the executable to "godot"
-          Rename-Item -Path "C:\Godot\Godot_v4.4-stable_win64.exe" -NewName "godot.exe" -Force
-      
-          # Add to PATH environment variable (system-wide)
-          echo "C:\Godot" | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8 -Append
-          
-          # Add to system path for child processes
-          [Environment]::SetEnvironmentVariable("PATH", "$env:PATH;C:\Godot", [EnvironmentVariableTarget]::Machine)
-          
-          # Verify Godot is in PATH
-          try {
-              godot --version
-          } catch {
-              Write-Host "Failed to run Godot from PATH"
-          }
-
+          apt-get update
+          apt-get install -y mingw-w64 mingw-w64-tools
       - name: Cache py4godot/classes directory
         id: cache-py4godot-classes
         uses: actions/cache@v3
@@ -93,7 +44,6 @@ jobs:
       - name: Print variables
         run: |
           python meson_scripts/variables.py
-
       - name: Cache pip
         uses: actions/cache@v3
         with:
@@ -101,63 +51,61 @@ jobs:
           key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
           restore-keys: |
             ${{ runner.os }}-pip-
-
       - name: Install dependencies
         run: |
           python -m pip install -r requirements.txt
           python -m pip install flake8
-
-      - name: Install Mesa
-        shell: cmd
-        run: |
-          mkdir godot
-          curl.exe -L --output godot/mesa.7z --url https://github.com/pal1000/mesa-dist-win/releases/download/20.3.2/mesa3d-20.3.2-release-msvc.7z
-          "C:\Program Files\7-Zip\7z.exe" x godot/mesa.7z -ogodot
-          cd godot
-          mklink opengl32.dll "x64\opengl32.dll"
-          mklink libglapi.dll "x64\libglapi.dll"
-
+      - name: Print structure
+        run: python meson_scripts/print_tools.py
       - name: Generate files
         run: python generate.py
-
       - name: Conditional cythonize
         shell: bash
         run: python cythonize_files.py
-
-      - name: Test Godot in PATH
-        shell: powershell
+      - name: Set up cross-compilation environment
         run: |
-          # Refresh environment variables
-          $env:Path = [System.Environment]::GetEnvironmentVariable("Path", "Machine") + ";" + [System.Environment]::GetEnvironmentVariable("Path", "User")
-          # Check if godot is in PATH
-          $godotPath = Get-Command godot -ErrorAction SilentlyContinue | Select-Object -ExpandProperty Source
-          if ($godotPath) {
-            Write-Host "Godot found at: $godotPath"
-          } else {
-            Write-Host "Godot not found in PATH"
-            Write-Host "Current PATH: $env:Path"
-          }
-          
-          # Test with Python's shutil.which
-          $pythonTest = python -c "import shutil; print('Godot path:', shutil.which('godot'))"
-          Write-Host $pythonTest
-
+          export CC=x86_64-w64-mingw32-gcc
+          export CXX=x86_64-w64-mingw32-g++-posix
+          export AR=x86_64-w64-mingw32-ar
+          export STRIP=x86_64-w64-mingw32-strip
+          export PKG_CONFIG_PATH=/usr/x86_64-w64-mingw32/lib/pkgconfig
+          echo "CC=$CC" >> $GITHUB_ENV
+          echo "CXX=$CXX" >> $GITHUB_ENV
+          echo "AR=$AR" >> $GITHUB_ENV
+          echo "STRIP=$STRIP" >> $GITHUB_ENV
+          echo "PKG_CONFIG_PATH=$PKG_CONFIG_PATH" >> $GITHUB_ENV
       - name: Build
-        shell: cmd
-        run: python build.py --target_platform=windows64 --compiler=gcc -create_plugin=False -buildtype=release -run_tests=False
-
+        run: python build.py --target_platform=windows64 --compiler=g++-mingw -create_plugin=False -buildtype=release -run_tests=False -download_godot=True
       - name: Create cache
         run: python meson_scripts/create_cache.py
-
       - name: Print structure
         run: python meson_scripts/print_tools.py
-        if: always() # Ensures it runs even if the previous step fails
-
-
+      - name: Copy MinGW runtime DLLs
+        run: |
+          # Create a directory for the DLLs
+          mkdir -p build/py4godot/mingw_dlls
+          
+          # Copy essential MinGW runtime DLLs
+          cp /usr/x86_64-w64-mingw32/lib/libgcc_s_seh-1.dll build/py4godot/mingw_dlls/ || true
+          cp /usr/x86_64-w64-mingw32/lib/libstdc++-6.dll build/py4godot/mingw_dlls/ || true
+          cp /usr/x86_64-w64-mingw32/lib/libwinpthread-1.dll build/py4godot/mingw_dlls/ || true
+          
+          # Alternative locations for DLLs
+          cp /usr/lib/gcc/x86_64-w64-mingw32/*/libgcc_s_seh-1.dll build/py4godot/mingw_dlls/ || true
+          cp /usr/lib/gcc/x86_64-w64-mingw32/*/libstdc++-6.dll build/py4godot/mingw_dlls/ || true
+          cp /usr/x86_64-w64-mingw32/lib/libwinpthread-1.dll build/py4godot/mingw_dlls/ || true
+          
+          # Find and copy any additional DLLs that might be needed
+          find /usr/x86_64-w64-mingw32 -name "*.dll" -exec cp {} build/py4godot/mingw_dlls/ \; || true
+          find /usr/lib/gcc/x86_64-w64-mingw32 -name "*.dll" -exec cp {} build/py4godot/mingw_dlls/ \; || true
+          
+          # List what DLLs were copied
+          echo "Copied DLLs:"
+          ls -la build/py4godot/mingw_dlls/
       - name: Create archive (zip)
         run: |
+          cd python-source
           zip -r build/py4godot-windows64.zip build/py4godot
-
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
