@@ -102,13 +102,9 @@ jobs:
           # List what DLLs were copied
           echo "Copied DLLs:"
           ls -la build/py4godot/mingw_dlls/
-      - name: Create archive (zip)
-        run: |
-          cd python-source
-          zip -r build/py4godot-windows64.zip build/py4godot
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
           name: py4godot-windows64
-          path: build/py4godot-windows64.zip
+          path: .
           retention-days: 30
