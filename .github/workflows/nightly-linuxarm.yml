@@ -1,6 +1,6 @@
 name: nightly linuxarm
-on:
-  workflow_dispatch:
+on: push
+
 
 jobs:
   linuxarm-build:
@@ -9,7 +9,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
         with:
-          ref: master
+          ref: python-3.11
           submodules: 'recursive'
       - name: Install system dependencies
         run: |
@@ -73,7 +73,7 @@ jobs:
 
       - name: Conditional cythonize
         shell: bash
-        run: python cythonize_files.py 
+        run: python cythonize_files.py -mode=dev
 
       - name: Build
         run: python build.py --target_platform=linuxarm64 --compiler=gcc -create_plugin=False -buildtype=release
