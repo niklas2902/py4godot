@@ -42,7 +42,10 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        os: [ubuntu-latest, windows-latest, macos-latest, ubuntu-24.04-arm]
+        os: [ubuntu-latest,
+             #windows-latest,
+             macos-latest,
+             ubuntu-24.04-arm]
 
     steps:
       - name: Download Precompiled Code
@@ -83,19 +86,19 @@ jobs:
           python -m pip install flake8
           python build.py --target_platform=darwin64 --compiler=clang
 
-      - name: Setup MSBuild (Windows only)
-        if: matrix.os == 'windows-latest'
-        uses: microsoft/setup-msbuild@v1.3.1
-
-      - name: Install dependencies and build (Windows)
-        if: matrix.os == 'windows-latest'
-        shell: cmd
-        run: |
-          choco install cmake --installargs "ADD_CMAKE_TO_PATH=System" -y
-          choco install ninja meson pkgconfiglite -y
-          python -m pip install -r requirements.txt
-          python -m pip install flake8
-          python build.py --target_platform=windows64 --compiler=gcc
+#      - name: Setup MSBuild (Windows only)
+#        if: matrix.os == 'windows-latest'
+#        uses: microsoft/setup-msbuild@v1.3.1
+#
+#      - name: Install dependencies and build (Windows)
+#        if: matrix.os == 'windows-latest'
+#        shell: cmd
+#        run: |
+#          choco install cmake --installargs "ADD_CMAKE_TO_PATH=System" -y
+#          choco install ninja meson pkgconfiglite -y
+#          python -m pip install -r requirements.txt
+#          python -m pip install flake8
+#          python build.py --target_platform=windows64 --compiler=gcc
 
       - name: Upload py4godot build artifact
         uses: actions/upload-artifact@v4
@@ -108,11 +111,11 @@ jobs:
     needs: build_cpp
     runs-on: ubuntu-latest
     steps:
-      - name: Download Windows
-        uses: actions/download-artifact@v4
-        with:
-          name: py4godot-windows-latest
-          path: install_dir/addons/py4godot
+#      - name: Download Windows
+#        uses: actions/download-artifact@v4
+#        with:
+#          name: py4godot-windows-latest
+#          path: install_dir/addons/py4godot
 
       - name: Download Linux
         uses: actions/download-artifact@v4
