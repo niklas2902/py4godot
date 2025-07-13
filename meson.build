@@ -115,9 +115,21 @@ godot_program = find_program('godot', required:false)
 sources = glob.stdout().strip().split('\n')
 
 cppsources = glob_cpp.stdout().strip().split('\n')
+
+# Add .def file for Windows to ensure symbol exports
+main_link_args = link_args
+if host_machine.system() == 'windows'
+    main_def_file = meson.current_source_dir() / 'py4godot' / 'godot_bindings' / 'main.def'
+    if meson.get_compiler('cpp').get_id() == 'msvc'
+        main_link_args += ['/DEF:' + main_def_file]
+    else
+        main_link_args += ['-Wl,--output-def,' + main_def_file]
+    endif
+endif
+
 main_lib = shared_library('main',cppsources,
 dependencies:[dep_py], include_directories:internal_inc,name_prefix:'',c_args:extra_args,
- link_args : link_args,
+ link_args : main_link_args,
  cpp_args:cpp_args,
  install_rpath: '$ORIGIN/../lib',
   build_rpath : '$ORIGIN/../lib')

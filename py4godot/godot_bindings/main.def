@@ -1,0 +1,3 @@
+LIBRARY main
+EXPORTS
+    py4godot_init
