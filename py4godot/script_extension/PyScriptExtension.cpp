@@ -496,6 +496,10 @@ void PyScriptExtension::_set_source_code_internal(String& source_code){
     apply_code();
 }
 
+void PyScriptExtension::_set_path_cache( String& path, GDExtensionTypePtr res){
+
+}
+
 void PyScriptExtension::apply_code(){
     print_error("apply_code");
 
@@ -866,6 +870,19 @@ void call_virtual_func__get_member_line(GDExtensionClassInstancePtr p_instance, 
 StringName func_name__get_member_line ;
 
 
+void call_virtual_func__set_path_cache(GDExtensionClassInstancePtr p_instance, const GDExtensionConstTypePtr* p_args, GDExtensionTypePtr r_ret) {
+    PyScriptExtension* pylanguage = static_cast<PyScriptExtension*> (p_instance);
+    String args0 = String::new_static(const_cast<GDExtensionStringPtr*>(p_args + 0));
+
+
+
+    pylanguage->_set_path_cache(args0,r_ret);
+}
+
+StringName func_name__set_path_cache;
+
+
+
 void call_virtual_func__get_constants(GDExtensionClassInstancePtr p_instance, const GDExtensionConstTypePtr* p_args, GDExtensionTypePtr r_ret) {
     PyScriptExtension* pylanguage = static_cast<PyScriptExtension*> (p_instance);
 
@@ -1036,6 +1053,10 @@ GDExtensionClassCallVirtual get_virtual_script(void *p_userdata, GDExtensionCons
         return script::call_virtual_func__get_member_line;
     }
 
+    else if (string_names_equal_script(script::func_name__set_path_cache, name)){
+        return script::call_virtual_func__set_path_cache;
+    }
+
     else if (string_names_equal_script(script::func_name__get_constants, name)){
         return script::call_virtual_func__get_constants;
     }
@@ -1093,6 +1114,7 @@ void init_func_names_script(){
     script::func_name__get_script_method_list = c_string_to_string_name("_get_script_method_list");
     script::func_name__get_script_property_list = c_string_to_string_name("_get_script_property_list");
     script::func_name__get_member_line = c_string_to_string_name("_get_member_line");
+    script::func_name__set_path_cache = c_string_to_string_name("_set_path_cache");
     script::func_name__get_constants = c_string_to_string_name("_get_constants");
     script::func_name__get_members = c_string_to_string_name("_get_members");
     script::func_name__is_placeholder_fallback_enabled = c_string_to_string_name("_is_placeholder_fallback_enabled");
