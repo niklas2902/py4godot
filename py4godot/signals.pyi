@@ -1,3 +1,4 @@
+from py4godot.classes.Object import Object
 from typing import Any, List
 
 from py4godot.classes.core import *
@@ -31,7 +32,7 @@ def signal(args: List[SignalArg]) -> GDSignal:
     pass
 
 
-class GDSignal():
+class GDSignal(Signal):
     """
     Represents a custom Godot signal that can be emitted and connected to callbacks.
 
