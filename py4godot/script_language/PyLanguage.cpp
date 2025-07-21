@@ -316,6 +316,24 @@ void PyLanguage::destroy(){
     *((long*) res) = -1;
   }
 
+  std::string replace_string_types(const std::string& c_arg_string) {
+    std::string cpp_arg_string = c_arg_string;
+    size_t colon_pos = cpp_arg_string.find(':');
+
+    if (colon_pos != std::string::npos) {
+        std::string arg = cpp_arg_string.substr(0, colon_pos);
+        std::string datatype = cpp_arg_string.substr(colon_pos + 1);
+
+        if (datatype == "String" || datatype == "StringName") {
+            datatype = "str";
+        }
+
+        cpp_arg_string = arg + ":" + datatype;
+    }
+
+    return cpp_arg_string;
+}
+
   void PyLanguage::_make_function(String& class_name, String& function_name, PackedStringArray& function_args, GDExtensionTypePtr res){
     print_error("_make_function");
 
@@ -327,8 +345,10 @@ void PyLanguage::destroy(){
         godot::String arg_string = get_packed_string_array_element(function_args.godot_owner, i);
         char* c_arg_string;
         gd_string_to_c_string(&arg_string.godot_owner, arg_string.length(), &c_arg_string);
+        std::string cpp_arg_string = std::string{c_arg_string};
+        cpp_arg_string = replace_string_types(cpp_arg_string);
         std::string komma = i == get_packed_string_array_size(function_args.godot_owner) - 1?std::string{}: std::string{", "};
-        args += std::string{c_arg_string} + komma;
+        args += cpp_arg_string + komma;
         free(c_arg_string);
     }
     std::string komma = get_packed_string_array_size(function_args.godot_owner) > 0? std::string{", "}:std::string{};
