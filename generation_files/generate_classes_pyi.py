@@ -544,6 +544,8 @@ def generate_args(class_, method_with_args):
     if (is_static(method_with_args)):
         result = ""
     if "arguments" not in method_with_args:
+        if method_with_args["is_vararg"]:
+            result += "*varargs, "
         return result[:-2]
 
     for arg in method_with_args["arguments"]:
@@ -557,6 +559,8 @@ def generate_args(class_, method_with_args):
             # enums are marked with enum:: . To be able to use this, we have to strip this
             result += f"{pythonize_name(arg['name'])}:{ungodottype(untypearray(unenumize_type(arg['type'])))} {generate_default_arg(arg, arg['type'])}, "
     result = result[:-2]
+    if method_with_args["is_vararg"]:
+            result += "*varargs"
     return result
 
 
