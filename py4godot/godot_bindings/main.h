@@ -5,7 +5,11 @@
 #include "Python.h"
 
 
-#ifdef _WIN64
+#if defined(_WIN64) && defined(_M_ARM64)
+#define PYTHONHOME L"addons/py4godot/cpython-3.12.4-windowsarm64/python"
+#define PYTHONPATH "addons/py4godot/cpython-3.12.4-windowsarm64/python/Lib/site-packages"
+
+#elif defined(_WIN64)
 #define PYTHONHOME L"addons/py4godot/cpython-3.12.4-windows64/python"
 #define PYTHONPATH "addons/py4godot/cpython-3.12.4-windows64/python/Lib/site-packages"
 

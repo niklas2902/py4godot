@@ -1,0 +1,13 @@
+[binaries]
+  ar = 'lib'
+strip = 'strip'
+exe_wrapper = ''  # Empty unless you need to run ARM64 binaries on a different host.
+
+[host_machine]
+system = 'windows'
+cpu_family = 'aarch64'
+cpu = 'aarch64'
+endian = 'little'
+
+[properties]
+current_platform = 'Windows'

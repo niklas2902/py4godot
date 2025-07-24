@@ -11,7 +11,12 @@ def get_platform():
             return "linuxarm64"
         elif struct.calcsize("P") * 8 == 64:
             return "linux64"
-    
+
+    if system == "windows":
+        if arch in ("aarch64", "arm64"):
+            return "windowsarm64"
+        elif struct.calcsize("P") * 8 == 64:
+            return "windows64"
+
     # Fallback for other systems if needed
     return f"{system}{struct.calcsize('P') * 8}"
-
