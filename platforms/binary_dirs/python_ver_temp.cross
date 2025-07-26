@@ -1,3 +1,7 @@
 [binaries]
-python = '{python_ver}'
+python = '{python_bin}'
 godot= '{godot}'
+
+[properties]
+python_ver_short = '{python_ver_short}'
+python_ver = '{python_ver}'

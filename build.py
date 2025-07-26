@@ -10,6 +10,7 @@ from shutil import copytree
 from Cython.Build import cythonize
 
 from build_tools import download_get_pip
+from config import python_ver, python_ver_short
 from meson_scripts import copy_tools, download_python, generate_init_files, \
     locations, platform_check, generate_godot, \
     download_godot
@@ -71,8 +72,10 @@ def compile_python_ver_file(platform):
     with open("platforms/binary_dirs/python_ver_temp.cross", "r") as python_temp:
         file_string = python_temp.read()
         # Replacing things like in a template
-        file_string = file_string.replace("{python_ver}", python_dir)
+        file_string = file_string.replace("{python_bin}", python_dir)
         file_string = file_string.replace("{godot}", godot_dir)
+        file_string = file_string.replace("{python_ver}", python_ver)
+        file_string = file_string.replace("{python_ver_short}", python_ver_short)
         with open("platforms/binary_dirs/python_ver_compile.cross", "w") as python_compile:
             python_compile.write(file_string)
 
