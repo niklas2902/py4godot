@@ -109,6 +109,21 @@ def get_compiler():
 
     raise Exception("No compiler found")
 
+def create_gdextension():
+    gdextension_text = ""
+    with open("build_resources/python.gdextension", "r") as f:
+        gdextension_text = f.read().replace("{python_ver", python_ver)
+    with open("build/py4godot/python.gdextension", "w") as f:
+        f.write(gdextension_text)
+
+
+def create_python_paths():
+    text_to_write = ""
+    with open("py4godot/godot_bindings/pythonpaths_template.h") as f:
+        text_to_write = f.read().replace("{python_ver", python_ver)
+    with open("py4godot/godot_bindings/pythonpaths.h", "w") as f:
+        f.write(text_to_write)
+
 
 generate_files()
 
@@ -154,6 +169,7 @@ download_python.download_file(args.target_platform, allow_copy=True)
 
 # downlaod needed python files for the current platform
 download_python.download_file(current_platform, allow_copy=False)
+create_python_paths()
 
 compile_python_ver_file(current_platform)
 
@@ -217,8 +233,8 @@ try:
     if should_create_plugin.lower() == "true":
         if  os.path.exists("build/py4godot") and os.path.isdir("build/py4godot"):
             shutil.rmtree("build/py4godot")
-        copytree(f"build/final/{args.target_platform}/cpython-3.12.4-{args.target_platform}", f"build/py4godot/cpython-3.12.4-{args.target_platform}")
-        shutil.copy("build_resources/python.gdextension", "build/py4godot/python.gdextension")
+        copytree(f"build/final/{args.target_platform}/{python_ver}-{args.target_platform}", f"build/py4godot/{python_ver}-{args.target_platform}")
+        create_gdextension()
         shutil.copy("build_resources/dependencies.txt", "build/py4godot/dependencies.txt")
         shutil.copy("build_resources/install_dependencies.py", "build/py4godot/install_dependencies.py")
         download_get_pip("build/py4godot")

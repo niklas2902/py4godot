@@ -9,12 +9,13 @@ import os
 from shutil import copytree, ignore_patterns
 import stat
 
+from config import python_ver, python_ver_short
+
 platform_dict = {"windows64": "x86_64-pc-windows-msvc-install_only_stripped", "windows32": "i686-pc-windows-msvc-install_only_stripped",
                  "linux64": "x86_64-unknown-linux-gnu-install_only_stripped", "darwin64":"aarch64-apple-darwin-install_only_stripped",
                  "linuxarm64":"aarch64-unknown-linux-gnu-install_only_stripped"}
 python_files_dir = "python_files"
 copy_dir = "build/final"
-python_ver = "cpython-3.12.4"
 
 sitecustomize_py = """
 import site
@@ -117,8 +118,8 @@ def delete_pip( platform, export_folder):
             shutil.rmtree(f"python_files/{export_folder}/python/Lib/site-packages/pip")
     elif "linux" in platform:
         print("deleting pip...")
-        if os.path.isdir(f"python_files/{export_folder}/python/lib/python3.12/site-packages/pip"):
-            shutil.rmtree(f"python_files/{export_folder}/python/lib/python3.12/site-packages/pip")
+        if os.path.isdir(f"python_files/{export_folder}/python/lib/{python_ver_short}/site-packages/pip"):
+            shutil.rmtree(f"python_files/{export_folder}/python/lib/{python_ver_short}/site-packages/pip")
 
 
 def create_sitecustomization(export_folder, platform):
@@ -127,6 +128,6 @@ def create_sitecustomization(export_folder, platform):
                   "w") as sitecustomize_file:
             sitecustomize_file.write(sitecustomize_py.replace("{platform}", platform))
     elif "linux" in platform:
-        with open(f"python_files/{export_folder}/python/lib/python3.12/site-packages/sitecustomize.py",
+        with open(f"python_files/{export_folder}/python/lib/{python_ver_short}/site-packages/sitecustomize.py",
                   "w") as sitecustomize_file:
             sitecustomize_file.write(sitecustomize_py.replace("{platform}", platform))
