@@ -89,3 +89,4 @@ py4godot/script_extension/script_extension_helpers_api.h
 /py4godot/core/variant4/cast_helpers.pyx
 /virtual_python
 /doc/
+/py4godot/godot_bindings/pythonpaths.h
