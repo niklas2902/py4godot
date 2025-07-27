@@ -18,18 +18,21 @@ extern "C" {
 
         #if defined(__linux__)
         void* handle = nullptr;
+        char python_home[PATH_MAX];
+        wcstombs(python_home, PYTHONHOME, sizeof(python_home));
+
 
         #if defined(__aarch64__)
         // Load the ARM64 Linux shared library
-        handle = dlopen("addons/py4godot/cpython-3.12.4-linuxarm64/python/bin/main.so", RTLD_NOW | RTLD_GLOBAL);
+        handle = dlopen((std::string(python_home) + "/bin/main.so").c_str(), RTLD_NOW | RTLD_GLOBAL);
         #else
         // Load the x86_64 Linux shared library
-        handle = dlopen("addons/py4godot/cpython-3.12.4-linux64/python/bin/main.so", RTLD_NOW | RTLD_GLOBAL);
+        handle = dlopen((std::string(python_home) + "/bin/main.so").c_str(), RTLD_NOW | RTLD_GLOBAL);
         #endif
 
         #elif defined(__APPLE__)
         // Load the shared library on macOS
-        void* handle = dlopen("addons/py4godot/cpython-3.12.4-darwin64/python/bin/main.dylib", RTLD_NOW | RTLD_GLOBAL);
+        void* handle = dlopen((std::string(python_home) + "/bin/main.dylib").c_str(), RTLD_NOW | RTLD_GLOBAL);
         #endif
 
         #if defined(__linux__) || defined(__APPLE__)

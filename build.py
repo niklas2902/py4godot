@@ -112,7 +112,7 @@ def get_compiler():
 def create_gdextension():
     gdextension_text = ""
     with open("build_resources/gdextension_template.gdextension", "r") as f:
-        gdextension_text = f.read().replace("{python_ver", python_ver)
+        gdextension_text = f.read().replace("{python_ver}", python_ver)
     with open("build/py4godot/python.gdextension", "w") as f:
         f.write(gdextension_text)
 
@@ -120,7 +120,7 @@ def create_gdextension():
 def create_python_paths():
     text_to_write = ""
     with open("py4godot/godot_bindings/pythonpaths_template.h") as f:
-        text_to_write = f.read().replace("{python_ver", python_ver)
+        text_to_write = f.read().replace("{python_ver}", python_ver)
     if os.path.exists("py4godot/godot_bindings/pythonpaths.h"):
         with open("py4godot/godot_bindings/pythonpaths.h", "r") as f:
             if f.read() == text_to_write:

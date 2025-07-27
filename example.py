@@ -34,7 +34,7 @@ def clear_build():
 def create_gdextension():
     gdextension_text = ""
     with open("build_resources/gdextension_template.gdextension", "r") as f:
-        gdextension_text = f.read().replace("{python_ver", python_ver)
+        gdextension_text = f.read().replace("{python_ver}", python_ver)
     with open("example/addons/py4godot/python.gdextension", "w") as f:
         f.write(gdextension_text)
 
@@ -65,9 +65,10 @@ if __name__ == "__main__":
     except Exception as e:
         print(e)
     print("======================Start copying files=======================")
-    if os.path.exists(f"example/addons/py4godot/cpython-3.12.4-{args.target_platform}"):
-        shutil.rmtree(f"example/addons/py4godot/cpython-3.12.4-{args.target_platform}/", onerror=onerror)
-    copytree(f"build/final/{args.target_platform}/cpython-3.12.4-{args.target_platform}", f"example/addons/py4godot/cpython-3.12.4-{args.target_platform}")
+    if os.path.exists(f"example/addons/py4godot/{python_ver}-{args.target_platform}"):
+        shutil.rmtree(f"example/addons/py4godot/{python_ver}-{args.target_platform}/", onerror=onerror)
+    copytree(f"build/final/{args.target_platform}/{python_ver}-{args.target_platform}",
+             f"example/addons/py4godot/{python_ver}-{args.target_platform}")
     create_gdextension()
     shutil.copy("build_resources/dependencies.txt", "example/addons/py4godot/dependencies.txt")
     shutil.copy("build_resources/install_dependencies.py", "example/addons/py4godot/install_dependencies.py")
@@ -76,14 +77,4 @@ if __name__ == "__main__":
     python_svg_dest = "example/addons/py4godot/"+ "/Python.svg"
     if not os.path.exists(python_svg_dest):
         shutil.copy("build_resources/Python.svg", python_svg_dest)
-    # shutil.copyfile("build_files/get-pip.py", "addons/windows64/cpython-3.12.4-windows64/python/install/get-pip.py")
-
-    # try:
-    #    res = subprocess.Popen(f"cd addons/windows64/cpython-3.12.4-windows64/python/install &&"
-    #                           f"python get-pip.py && "
-    #                           f"python -m pip install debugpy ",
-    #                           shell=True)
-    #    res.wait()
-    # except Exception as e:
-    #    print(e)
     print("======================End copying files=======================")
