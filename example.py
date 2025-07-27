@@ -4,6 +4,7 @@ import subprocess
 from shutil import copy, copytree, rmtree
 
 from build_tools import download_get_pip
+from config import python_ver
 
 
 def onerror(func, path, exc_info):
@@ -30,6 +31,12 @@ def clear_build():
     shutil.rmtree(os.path.dirname(
         f"addons/windows64/"), onerror=onerror)
 
+def create_gdextension():
+    gdextension_text = ""
+    with open("build_resources/gdextension_template.gdextension", "r") as f:
+        gdextension_text = f.read().replace("{python_ver", python_ver)
+    with open("example/addons/py4godot/python.gdextension", "w") as f:
+        f.write(gdextension_text)
 
 if __name__ == "__main__":
 
@@ -61,7 +68,7 @@ if __name__ == "__main__":
     if os.path.exists(f"example/addons/py4godot/cpython-3.12.4-{args.target_platform}"):
         shutil.rmtree(f"example/addons/py4godot/cpython-3.12.4-{args.target_platform}/", onerror=onerror)
     copytree(f"build/final/{args.target_platform}/cpython-3.12.4-{args.target_platform}", f"example/addons/py4godot/cpython-3.12.4-{args.target_platform}")
-    shutil.copy("build_resources/python.gdextension", "example/addons/py4godot/python.gdextension")
+    create_gdextension()
     shutil.copy("build_resources/dependencies.txt", "example/addons/py4godot/dependencies.txt")
     shutil.copy("build_resources/install_dependencies.py", "example/addons/py4godot/install_dependencies.py")
     download_get_pip("example/addons/py4godot")
