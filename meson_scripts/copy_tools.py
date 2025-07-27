@@ -5,10 +5,7 @@ import glob
 import json
 
 from build_tools import download_get_pip
-
-"""This file is for copying the generated so/dll files from ninja/meson into the build folder"""
-with open('config.json', 'r') as f:
-    config_data = json.load(f)
+from config import python_ver, python_ver_short
 
 
 def strip_platform(text):
@@ -32,20 +29,20 @@ def run(platform):
         if entry.startswith("build"):
             if "windows" in entry:
                 os.makedirs(os.path.dirname(
-                    f"build/final/{platform}/{config_data['python_ver']}-{platform}/python/Lib/site-packages/" + strip_platform(
+                    f"build/final/{platform}/{python_ver}-{platform}/python/Lib/site-packages/" + strip_platform(
                         entry.lstrip("build").replace("#", "/"))),
                     exist_ok=True)
                 copy(entry,
-                     f"build/final/{platform}/{config_data['python_ver']}-{platform}/python/Lib/site-packages/" + strip_platform(
+                     f"build/final/{platform}/{python_ver}-{platform}/python/Lib/site-packages/" + strip_platform(
                          entry.lstrip("build").replace("#", "/")).
                      replace(".dll", ".pyd"))  # dst can be a folder; use copy2() to preserve timestamp
             else:
                 os.makedirs(os.path.dirname(
-                    f"build/final/{platform}/{config_data['python_ver']}-{platform}/python/lib/python3.12/site-packages/" + strip_platform(
+                    f"build/final/{platform}/{python_ver}-{platform}/python/lib/{python_ver_short}/site-packages/" + strip_platform(
                         entry.lstrip("build").replace("#", "/"))),
                     exist_ok=True)
                 copy(entry,
-                     f"build/final/{platform}/{config_data['python_ver']}-{platform}/python/lib/python3.12/site-packages/" + strip_platform(
+                     f"build/final/{platform}/{python_ver}-{platform}/python/lib/{python_ver_short}/site-packages/" + strip_platform(
                          entry.lstrip("build").replace("#", "/")).
                      replace(".dylib", ".so"))  # dst can be a folder; use copy2() to preserve timestamp
 
@@ -62,11 +59,11 @@ def run(platform):
             continue
         if entry.startswith("build"):
             os.makedirs(os.path.dirname(
-                f"build/final/{platform}/{config_data['python_ver']}-{platform}/python/Lib/site-packages/" + strip_platform(
+                f"build/final/{platform}/{python_ver}-{platform}/python/Lib/site-packages/" + strip_platform(
                     entry.lstrip("build").replace("#", "/"))),
                 exist_ok=True)
             copy(entry,
-                 f"build/final/{platform}/{config_data['python_ver']}-{platform}/python/Lib/site-packages/" + strip_platform(
+                 f"build/final/{platform}/{python_ver}-{platform}/python/Lib/site-packages/" + strip_platform(
                      entry.lstrip("build").replace("#", "/")))  # dst can be a folder; use copy2() to preserve timestamp
 
 
@@ -74,19 +71,19 @@ def copy_main(platform):
     if "windows" in platform:
         # This is a weird phenomenon of godot 4.2. It copies the dll and renames it. Thus, we have to change what we depend on
         copy(f"build/{platform}/main.dll",
-             f"build/final/{platform}/{config_data['python_ver']}-{platform}/python/main.dll")
+             f"build/final/{platform}/{python_ver}-{platform}/python/main.dll")
         copy(f"build/{platform}/pythonscript.dll",
-             f"build/final/{platform}/{config_data['python_ver']}-{platform}/python/pythonscript.dll")
+             f"build/final/{platform}/{python_ver}-{platform}/python/pythonscript.dll")
     elif "linux" in platform:
         copy(f"build/{platform}/main.so",
-             f"build/final/{platform}/{config_data['python_ver']}-{platform}/python/bin/main.so")
+             f"build/final/{platform}/{python_ver}-{platform}/python/bin/main.so")
         copy(f"build/{platform}/pythonscript.so",
-             f"build/final/{platform}/{config_data['python_ver']}-{platform}/python/bin/pythonscript.so")
+             f"build/final/{platform}/{python_ver}-{platform}/python/bin/pythonscript.so")
     elif "darwin" in platform:
         copy(f"build/{platform}/main.dylib",
-             f"build/final/{platform}/{config_data['python_ver']}-{platform}/python/bin/main.dylib")
+             f"build/final/{platform}/{python_ver}-{platform}/python/bin/main.dylib")
         copy(f"build/{platform}/pythonscript.dylib",
-             f"build/final/{platform}/{config_data['python_ver']}-{platform}/python/bin/pythonscript.dylib")
+             f"build/final/{platform}/{python_ver}-{platform}/python/bin/pythonscript.dylib")
 
 
 def onerror(func, path, exc_info):
@@ -107,8 +104,8 @@ def copy_tests(platform):
     for core_test in core_tests + binding_tests + library_tests:
         print(f"Copying to: {core_test}")
 
-        src_path = f"build/final/{platform}/cpython-3.12.4-{platform}"
-        dest_path = f"{core_test}/addons/py4godot/cpython-3.12.4-{platform}"
+        src_path = f"build/final/{platform}/{python_ver}-{platform}"
+        dest_path = f"{core_test}/addons/py4godot/{python_ver}-{platform}"
 
         print("Checking source path:", src_path)
         print("Checking destination path:", dest_path)
@@ -155,16 +152,16 @@ def copy_stub_files(platform):
             continue
         if "windows" in platform:
             os.makedirs(os.path.dirname(
-                f"build/final/{platform}/{config_data['python_ver']}-{platform}/python/Lib/site-packages/" + file),
+                f"build/final/{platform}/{python_ver}-{platform}/python/Lib/site-packages/" + file),
                 exist_ok=True)
             copy(file,
-                 f"build/final/{platform}/{config_data['python_ver']}-{platform}/python/Lib/site-packages/" + file)
+                 f"build/final/{platform}/{python_ver}-{platform}/python/Lib/site-packages/" + file)
         else:
             os.makedirs(os.path.dirname(
-                f"build/final/{platform}/{config_data['python_ver']}-{platform}/python/lib/python3.12/site-packages/" + file),
+                f"build/final/{platform}/{python_ver}-{platform}/python/lib/{python_ver_short}/site-packages/" + file),
                 exist_ok=True)
             copy(file,
-                 f"build/final/{platform}/{config_data['python_ver']}-{platform}/python/lib/python3.12/site-packages/" + file)
+                 f"build/final/{platform}/{python_ver}-{platform}/python/lib/{python_ver_short}/site-packages/" + file)
 
 
 def copy_experimental(platform):
@@ -178,10 +175,10 @@ def copy_experimental(platform):
                  "py4godot/utils/functools.py"]:
         if "windows" in platform:
             copy(file,
-             f"build/final/{platform}/{config_data['python_ver']}-{platform}/python/Lib/site-packages/" + file)
+             f"build/final/{platform}/{python_ver}-{platform}/python/Lib/site-packages/" + file)
         else:
             copy(file,
-             f"build/final/{platform}/{config_data['python_ver']}-{platform}/python/lib/python3.12/site-packages/" + file)
+             f"build/final/{platform}/{python_ver}-{platform}/python/lib/{python_ver_short}/site-packages/" + file)
 
 
 def onerror(func, path, exc_info):
@@ -213,10 +210,10 @@ def copy_mingw(compiler, platform):
     if "mingw" in compiler and "windows" in platform:
         if "64" in platform:
             shutil.copy("/usr/x86_64-w64-mingw32/lib/libwinpthread-1.dll",
-                        f"build/final/{platform}/{config_data['python_ver']}-{platform}/python/libwinpthread-1.dll")
+                        f"build/final/{platform}/{python_ver}-{platform}/python/libwinpthread-1.dll")
         elif "32" in platform:
             shutil.copy("/usr/i686-w64-mingw32/lib/libwinpthread-1.dll",
-                        f"build/final/{platform}/{config_data['python_ver']}-{platform}/python/libwinpthread-1.dll")
+                        f"build/final/{platform}/{python_ver}-{platform}/python/libwinpthread-1.dll")
 
 if __name__ == "__main__":
     # copy_c_into_cache("windows64")
