@@ -531,8 +531,8 @@ def ungodottype_type_array(type_, class_name):
             return f"__core__.{type_}"
         else:
             return type_
-    elif type_ in typed_arrays_names:
-        return f"__{type_.lower()}__.{type_}"
+    elif "typedarray::" in type_:
+        return f"__{untypearray(type_).lower()}__.{untypearray(type_)}"
     if (type_ in classes):
         return f"__{type_.lower()}__.{type_}"
 
@@ -560,7 +560,7 @@ def generate_args(class_, method_with_args):
             result += f"{pythonize_name(arg['name'])}:{ungodottype(untypearray(unenumize_type(arg['type'])))} {generate_default_arg(arg, arg['type'])}, "
     result = result[:-2]
     if method_with_args["is_vararg"]:
-            result += "*varargs"
+            result += ", *varargs"
     return result
 
 
@@ -590,8 +590,11 @@ def unenumize_type(type_):
 def untypearray(type_):
     # TODO improve this by creating actually typed arrays
     if "typedarray" in type_:
-        return "Array"
+        return generate_typed_array_name(type_)
     return type_
+
+def generate_typed_array_name(name):
+    return (name.split("::")[1] + "TypedArray").replace("24/17:", "").replace("27/0:TypedArray", "DictionaryTypedArray")
 
 
 def get_class_from_enum(type_):
@@ -616,7 +619,7 @@ def get_classes_to_import(classes):
                     if (unbitfield_type(get_class_from_enum(method["return_value"]["type"])) in normal_classes):
                         classes_to_import.update(get_children(get_class_from_enum(method["return_value"]["type"])))
                     if "typedarray::" in method["return_value"]["type"]:
-                        classes_to_import.update(generate_typed_array_name(method["return_value"]["type"]))
+                        classes_to_import.add(generate_typed_array_name(method["return_value"]["type"]))
                 if ("arguments" not in method.keys()):
                     continue
                 for argument in method["arguments"]:
@@ -627,7 +630,7 @@ def get_classes_to_import(classes):
                         if type.split(".")[0] in normal_classes:
                             classes_to_import.add(type.split(".")[0])
                     if "typedarray::" in argument["type"]:
-                        classes_to_import.update(generate_typed_array_name(argument["type"]))
+                        classes_to_import.add(generate_typed_array_name(argument["type"]))
         if "properties" in class_.keys():
             for prop in class_["properties"]:
 
