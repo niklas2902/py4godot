@@ -1,6 +1,6 @@
 import glob, os, json
 
-from config import meson_dir, dir_godot_extract_to
+from ..config import meson_dir, dir_godot_extract_to
 
 
 def print_meson(platform):
