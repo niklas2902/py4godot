@@ -9,6 +9,7 @@ import tarfile
 import shutil
 
 from build_tools import download_get_pip
+from config import python_ver
 
 
 @dataclass
@@ -55,7 +56,7 @@ def run_docker():
             print(f"Folder '{folder_path}' already exists.")
         f = open(f'plugin/{build.platform[:-2]}.tar', 'wb')
 
-        bits, stat = last_container.get_archive(f'/app/build/final/{build.platform}/cpython-3.12.4-{build.platform}')
+        bits, stat = last_container.get_archive(f'/app/build/final/{build.platform}/{python_ver}-{build.platform}')
 
         print(stat)
         for chunk in bits:

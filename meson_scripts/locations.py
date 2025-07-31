@@ -1,12 +1,8 @@
 import os, json
 import shutil
 
-with open('config.json', 'r') as f:
-    config_data = json.load(f)
+from config import python_dir, python_ver
 
-python_dir = config_data['python_dir']
-python_ver = config_data['python_ver']
-dir_godot_extract_to = config_data['dir_godot_extract_to']
 
 def get_python_dir(platform):
     if("windows" in platform):

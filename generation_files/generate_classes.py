@@ -476,9 +476,7 @@ def generate_default_args(mMethod):
                 res = generate_newline(res)
                 res += f"{INDENT * 3}{pythonize_name(arg['name'])} = {arg['type']}.new0()"
             elif arg["type"] == "Variant":
-                res += f"{INDENT * 2}if {pythonize_name(arg['name'])} is None:"
-                res = generate_newline(res)
-                res += f"{INDENT * 3}{pythonize_name(arg['name'])} = create_variant_from_py_object(1)"
+                pass # We actually don't want to set anything here. This is later handled by C++
             else:
                 res += f"{INDENT * 2}if {pythonize_name(arg['name'])} is None:"
                 res = generate_newline(res)
@@ -1588,16 +1586,15 @@ def generate_classes(classes, filename, is_core=False, is_typed_array=False):
         res = generate_newline(res)
         res += generate_construction(class_)
         res = generate_newline(res)
-        if "methods" not in class_.keys():
-            continue
-        res += generate_properties(class_)
-        res += generate_members_of_class(class_)
-        for method in class_["methods"]:
-            if native_structs_in_method(method):
-                # TODO: Check if this makes sense
-                continue
-            res += generate_method(class_, method)
-            res = generate_newline(res)
+        if "methods" in class_.keys():
+            res += generate_properties(class_)
+            res += generate_members_of_class(class_)
+            for method in class_["methods"]:
+                if native_structs_in_method(method):
+                    # TODO: Check if this makes sense
+                    continue
+                res += generate_method(class_, method)
+                res = generate_newline(res)
         res += generate_operators_for_class(class_["name"])
         if class_["name"] not in builtin_classes and not is_typed_array:
             res += generate_register_cast(class_["name"])
@@ -1610,6 +1607,9 @@ def generate_register_cast(class_name):
     res = ""
     res += f"register_cast_function('{class_name}', {class_name}.cast)"
     res = generate_newline(res)
+    if class_name == "ScriptExtension":
+        res += f"register_cast_function('PyScriptExtension', {class_name}.cast)"
+        res = generate_newline(res)
     return res
 
 def generate_dictionary_set_item():

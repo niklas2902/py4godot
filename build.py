@@ -10,6 +10,7 @@ from shutil import copytree
 from Cython.Build import cythonize
 
 from build_tools import download_get_pip
+from config import python_ver, python_ver_short
 from meson_scripts import copy_tools, download_python, generate_init_files, \
     locations, platform_check, generate_godot, \
     download_godot
@@ -71,8 +72,10 @@ def compile_python_ver_file(platform):
     with open("platforms/binary_dirs/python_ver_temp.cross", "r") as python_temp:
         file_string = python_temp.read()
         # Replacing things like in a template
-        file_string = file_string.replace("{python_ver}", python_dir)
+        file_string = file_string.replace("{python_bin}", python_dir)
         file_string = file_string.replace("{godot}", godot_dir)
+        file_string = file_string.replace("{python_ver}", python_ver)
+        file_string = file_string.replace("{python_ver_short}", python_ver_short)
         with open("platforms/binary_dirs/python_ver_compile.cross", "w") as python_compile:
             python_compile.write(file_string)
 
@@ -105,6 +108,25 @@ def get_compiler():
         return "gcc"
 
     raise Exception("No compiler found")
+
+def create_gdextension():
+    gdextension_text = ""
+    with open("build_resources/gdextension_template.gdextension", "r") as f:
+        gdextension_text = f.read().replace("{python_ver}", python_ver)
+    with open("build/final/python.gdextension", "w") as f:
+        f.write(gdextension_text)
+
+
+def create_python_paths():
+    text_to_write = ""
+    with open("py4godot/godot_bindings/pythonpaths_template.h") as f:
+        text_to_write = f.read().replace("{python_ver}", python_ver)
+    if os.path.exists("py4godot/godot_bindings/pythonpaths.h"):
+        with open("py4godot/godot_bindings/pythonpaths.h", "r") as f:
+            if f.read() == text_to_write:
+                return
+    with open("py4godot/godot_bindings/pythonpaths.h", "w") as f:
+        f.write(text_to_write)
 
 
 generate_files()
@@ -151,6 +173,7 @@ download_python.download_file(args.target_platform, allow_copy=True)
 
 # downlaod needed python files for the current platform
 download_python.download_file(current_platform, allow_copy=False)
+create_python_paths()
 
 compile_python_ver_file(current_platform)
 
@@ -214,10 +237,10 @@ try:
     if should_create_plugin.lower() == "true":
         if  os.path.exists("build/py4godot") and os.path.isdir("build/py4godot"):
             shutil.rmtree("build/py4godot")
-        copytree(f"build/final/{args.target_platform}/cpython-3.12.4-{args.target_platform}", f"build/py4godot/cpython-3.12.4-{args.target_platform}")
-        shutil.copy("build_resources/python.gdextension", "build/py4godot/python.gdextension")
+        copytree(f"build/final/{args.target_platform}/{python_ver}-{args.target_platform}", f"build/py4godot/{python_ver}-{args.target_platform}")
         shutil.copy("build_resources/dependencies.txt", "build/py4godot/dependencies.txt")
         shutil.copy("build_resources/install_dependencies.py", "build/py4godot/install_dependencies.py")
+        create_gdextension()
         download_get_pip("build/py4godot")
         python_svg_dest = "build/py4godot/"+ "/Python.svg"
         if not os.path.exists(python_svg_dest):

@@ -1,10 +1,7 @@
 import glob, os, json
-with open('config.json', 'r') as f:
-    config_data = json.load(f)
 
-meson_dir = config_data['meson_dir']
-dir_godot_extract_to = config_data["dir_godot_extract_to"]
-core_folder = config_data['core_folder']
+from ..config import meson_dir, dir_godot_extract_to
+
 
 def print_meson(platform):
     try:

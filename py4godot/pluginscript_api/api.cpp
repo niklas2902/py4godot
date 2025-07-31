@@ -13,6 +13,8 @@ godot::PyLanguage* py_language;
 godot::PyResourceFormatLoader * py_resource_format_loader;
 godot::PyResourceFormatSaver * py_resource_format_saver;
 
+bool wasInitialized = false;
+
 void godot::init_py_language(){
     register_class();
     register_class_script();
@@ -31,9 +33,15 @@ void godot::init_py_language(){
     resource_loader->add_resource_format_loader(py_resource_format_loader, false);
 
     resource_saver->add_resource_format_saver(py_resource_format_saver, false);
+
+    wasInitialized = true;
 }
 
 void godot::deinit_py_language(){
+
+    if (!wasInitialized){
+        return;
+    }
     std::shared_ptr<godot::ResourceLoader> resource_loader = godot::ResourceLoader::get_instance();
     std::shared_ptr<godot::ResourceSaver> resource_saver = godot::ResourceSaver::get_instance();
     std::shared_ptr<godot::Engine> engine = godot::Engine::get_instance();

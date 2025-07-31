@@ -1,0 +1,22 @@
+[configuration]
+
+entry_symbol = "initialize_pythonscript"
+compatibility_minimum="4.4.0"
+version = "4.4-alpha-8"
+[libraries]
+
+windows.debug.x86_64 = "{python_ver}-windows64/python/pythonscript.dll"
+windows.release.x86_64 = "{python_ver}-windows64/python/pythonscript.dll"
+windows.debug.x86 = "{python_ver}-windows32/python/pythonscript.dll"
+windows.release.x86 = "{python_ver}-windows32/python/pythonscript.dll"
+
+
+linux.debug.x86_64 = "{python_ver}-linux64/python/bin/pythonscript.so"
+linux.release.x86_64 = "{python_ver}-linux64/python/bin/pythonscript.so"
+linux.debug.arm64 = "{python_ver}-linuxarm64/python/bin/pythonscript.so"
+linux.release.arm64 = "{python_ver}-linuxarm64/python/bin/pythonscript.so"
+linux.debug.x86 = "{python_ver}-linux32/python/bin/pythonscript.so"
+linux.release.x86 = "{python_ver}-linux32/python/bin/pythonscript.so"
+
+macos.debug.arm64 = "{python_ver}-darwin64/python/bin/pythonscript.dylib"
+macos.release.arm64 = "{python_ver}-darwin64/python/bin/pythonscript.dylib"
