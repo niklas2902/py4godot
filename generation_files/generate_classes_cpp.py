@@ -817,8 +817,8 @@ def generate_py_method_body(class_, method):
         else:
             result += f"{INDENT * 2}{class_['name']}::{pythonize_name(method['name'])}({generate_args_for_call(method)});"
 
-    result = generate_newline(result)
-    result += free_variants(method)
+    # result = generate_newline(result)
+    # result += free_variants(method) # This leads to crashes TODO nzimmer: Check if needed
     result = generate_newline(result)
     if ("return_value" in method.keys() or "return_type" in method.keys()):
         if ("return_value" in method.keys()):
