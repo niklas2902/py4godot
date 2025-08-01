@@ -818,7 +818,7 @@ def generate_py_method_body(class_, method):
             result += f"{INDENT * 2}{class_['name']}::{pythonize_name(method['name'])}({generate_args_for_call(method)});"
 
     # result = generate_newline(result)
-    # result += free_variants(method) # This leads to crashes TODO nzimmer: Check if needed
+    result += free_variants(method)
     result = generate_newline(result)
     if ("return_value" in method.keys() or "return_type" in method.keys()):
         if ("return_value" in method.keys()):
@@ -846,8 +846,8 @@ def free_variants(mMethod):
             res += f"{INDENT * 2}if (functions::get_variant_get_type()(&variant_{pythonize_name(argument['name'])}->native_ptr) != GDEXTENSION_VARIANT_TYPE_OBJECT){{"
             res = generate_newline(res)
             res += f"{INDENT * 3}functions::get_variant_destroy()(&variant_{pythonize_name(argument['name'])}->native_ptr);"
-            res = generate_newline(res)
-            res += f"{INDENT*3}Py_DECREF({pythonize_name(argument['name'])});"
+            #res = generate_newline(res)
+            #res += f"{INDENT*3}Py_DECREF({pythonize_name(argument['name'])});" # TODO: nzimmer is this needed?
             res +=f"{INDENT*2}}}"
             res = generate_newline(res)
     return res
