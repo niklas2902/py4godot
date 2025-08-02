@@ -4,5 +4,5 @@ output_dir = "build/final"
 python_dir = "python_files"
 core_folder = "core"
 meson_dir= "build_meson"
-download_godot_dir = "godot_zipfile.zip",
+download_godot_dir = "godot_zipfile.zip"
 dir_godot_extract_to = "godot"
