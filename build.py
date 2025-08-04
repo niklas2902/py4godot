@@ -113,7 +113,7 @@ def create_gdextension():
     gdextension_text = ""
     with open("build_resources/gdextension_template.gdextension", "r") as f:
         gdextension_text = f.read().replace("{python_ver}", python_ver)
-    with open("build/final/python.gdextension", "w") as f:
+    with open("build_resources/python.gdextension", "w") as f:
         f.write(gdextension_text)
 
 
@@ -224,6 +224,7 @@ try:
         res.wait()
 
     fix_macos_paths()
+    create_gdextension()
     copy_tools.run(args.target_platform)
     copy_tools.copy_main(args.target_platform)
     copy_tools.copy_mingw(args.compiler, args.target_platform)
@@ -240,7 +241,7 @@ try:
         copytree(f"build/final/{args.target_platform}/{python_ver}-{args.target_platform}", f"build/py4godot/{python_ver}-{args.target_platform}")
         shutil.copy("build_resources/dependencies.txt", "build/py4godot/dependencies.txt")
         shutil.copy("build_resources/install_dependencies.py", "build/py4godot/install_dependencies.py")
-        create_gdextension()
+        shutil.copy("build_resources/python.gdextension", "build/py4godot/python.gdextension")
         download_get_pip("build/py4godot")
         python_svg_dest = "build/py4godot/"+ "/Python.svg"
         if not os.path.exists(python_svg_dest):

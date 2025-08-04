@@ -81,7 +81,14 @@ def clean_up_image(build, client):
                         forcerm=True  # Always remove intermediate containers even if the build fails
                         )
 
+def create_gdextension():
+    gdextension_text = ""
+    with open("build_resources/gdextension_template.gdextension", "r") as f:
+        gdextension_text = f.read().replace("{python_ver}", python_ver)
+    with open("build_resources/python.gdextension", "w") as f:
+        f.write(gdextension_text)
 def copy_other_files(folder_path):
+    create_gdextension()
     shutil.copy("build_resources/python.gdextension", folder_path+"/python.gdextension")
     shutil.copy("build_resources/dependencies.txt", folder_path+"/dependencies.txt")
     shutil.copy("build_resources/Python.svg", folder_path + "/Python.svg")
