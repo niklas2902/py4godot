@@ -90,3 +90,4 @@ py4godot/script_extension/script_extension_helpers_api.h
 /virtual_python
 /doc/
 /py4godot/godot_bindings/pythonpaths.h
+/build_resources/python.gdextension
