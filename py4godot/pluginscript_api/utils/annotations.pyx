@@ -215,6 +215,7 @@ def gdclass(cls = None, icon=None):
             class_icon = icon
         else:
             raise Exception(f"More than one class was marked as gd_class or gd_tool_class in one file ({current_class_name}, {gd_class}, {cls})")
+        return cls
     if cls is not None:
         return internal_decorator(cls)
     return internal_decorator
