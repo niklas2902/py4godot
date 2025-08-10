@@ -82,9 +82,14 @@ def generate_special_attributes(class_):
         res = f"{INDENT}cdef int _index"
         res = generate_newline(res)
         res += f"{INDENT}cdef bint shouldBeDeleted"
+        res = generate_newline(res)
+        res += f"{INDENT}cdef bint __is_constant__"
         return res
     if class_["name"] in builtin_classes:
-        return f"{INDENT}cdef bint shouldBeDeleted"
+        res = f"{INDENT}cdef bint shouldBeDeleted"
+        res = generate_newline(res)
+        res +=  f"{INDENT}cdef bint __is_constant__"
+        return res
     return ""
 
 def generate_properties(class_):

@@ -519,6 +519,12 @@ def generate_method(class_, mMethod):
 
     if is_property_setter(class_, mMethod["name"]):
         property_name = get_property_name_for_method(class_, mMethod["name"])
+        if class_["name"] in builtin_classes:
+            res += f"{INDENT * 2}if self.__is_constant__:"
+            res = generate_newline(res)
+            res += f"{INDENT * 3}raise RuntimeError('You can't set the value of a constant')"
+            res = generate_newline(res)
+
         res += f"{INDENT*2}self.py__{property_name} = {pythonize_name(mMethod['arguments'][0]['name'])}"
         res = generate_newline(res)
     if ("hash" in mMethod.keys()):
