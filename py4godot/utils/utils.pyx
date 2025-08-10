@@ -11,11 +11,21 @@ cimport py4godot.classes.SceneTree as py4godot_scenetree
 cimport py4godot.classes.Window as py4godot_window
 from cpython.unicode cimport PyUnicode_AsUTF8
 from py4godot.utils.smart_cast import smart_cast
+
+cdef core.StringName py_string_to_string_name(str string):
+    cdef char* c_str = string.encode("utf-8")
+    return py_c_string_to_string_name(c_str)
+
+
 cdef core.StringName py_c_string_to_string_name(char* string):
     cdef core.StringName gd_string_name = core.StringName.__new__(core.StringName)
     gd_string_name.StringName_internal_class_ptr = c_string_to_string_name_ptr(string)
     gd_string_name.StringName_internal_class_ptr.get().set_shouldBeDeleted(False) # Deletion should be handled by python
     return gd_string_name
+
+cdef core.String py_string_to_string(str string):
+    cdef char* c_str = string.encode("utf-8")
+    return py_c_string_to_string(c_str)
 
 
 cdef core.String py_c_string_to_string(char* string):
