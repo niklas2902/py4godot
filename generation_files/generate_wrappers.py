@@ -57,12 +57,22 @@ def generate_wrapper(class_name):
     res = generate_newline(res)
     res += f"{INDENT}pass"
     res = generate_newline(res)
+
+    res += f"cdef public shared_ptr[{class_name}] extract_ptr_from_{class_name}Wrapper(object o):"
+    res = generate_newline(res)
+    res += f"{INDENT}cdef CPP{class_name}Wrapper wrapper = <CPP{class_name}Wrapper>(object.wrapper)"
+    res = generate_newline(res)
+    res += f"{INDENT}cdef shared_ptr[{class_name}] ptr = wrapper._ptr"
+    res = generate_newline(res)
+    res += f"{INDENT}return ptr"
     return res
 
 def generate_wrapper_pxd(class_name):
     res = f"cdef class CPP{class_name}Wrapper(CPPWrapper):"
     res = generate_newline(res)
     res += f"{INDENT}cdef shared_ptr[{class_name}] _ptr"
+    res = generate_newline(res)
+    res += f"cdef public shared_ptr[{class_name}] extract_ptr_from_{class_name}Wrapper(object o)"
     res = generate_newline(res)
     return res
 

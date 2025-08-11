@@ -1,6 +1,7 @@
 #pragma once
 #include "py4godot/gdextension-api/gdextension_interface.h"
 #include "py4godot/godot_bindings/macros.h"
+#include "Python.h"
 namespace godot{
     class LIBRARY_API Wrapper{
 
@@ -23,6 +24,13 @@ namespace godot{
 
         GDExtensionObjectPtr& get_godot_owner() {
             return godot_owner;
+        }
+
+        void switch_call(int method_hash, PyObject* objects){
+        }
+
+
+        PyObject* switch_call_return(int method_hash, PyObject* objects){
         }
     };
 }
