@@ -700,11 +700,11 @@ def generate_method_body_standard(class_, method):
         result += generate_return_value(class_["name"], method)
         if not is_static(method):
 
-            result += f"{INDENT * 2}{generate_ret_call(method)} = self.{class_['name']}_internal_class_ptr.get().py_{pythonize_name(method['name'])}({generate_method_args(class_, method)})"
+            result += f"{INDENT * 2}{generate_ret_call(method)} = self.{class_['name']}_internal_class_ptr.get().py_{pythonize_name(method['name'])}(({generate_method_args(class_, method)}))"
             result = generate_newline(result)
             result += generate_set_gd_owner_for_ret(method)
         else:
-            result += f"{INDENT * 2}{generate_ret_call(method)} = CPP{class_['name']}.py_{pythonize_name(method['name'])}({generate_method_args(class_,method)})"
+            result += f"{INDENT * 2}{generate_ret_call(method)} = CPP{class_['name']}.py_{pythonize_name(method['name'])}(({generate_method_args(class_,method)}))"
             result = generate_newline(result)
             result += generate_set_gd_owner_for_ret(method)
         result = generate_newline(result)
@@ -725,9 +725,9 @@ def generate_method_body_standard(class_, method):
         result += generate_return_statement(method)
     else:
         if not is_static(method):
-            result += f"{INDENT * 2}self.{class_['name']}_internal_class_ptr.get().py_{pythonize_name(method['name'])}({generate_method_args(class_, method)})"
+            result += f"{INDENT * 2}self.{class_['name']}_internal_class_ptr.get().py_{pythonize_name(method['name'])}(({generate_method_args(class_, method)}))"
         else:
-            result += f"{INDENT * 2}CPP{class_['name']}.py_{pythonize_name(method['name'])}({generate_method_args(class_, method)})"
+            result += f"{INDENT * 2}CPP{class_['name']}.py_{pythonize_name(method['name'])}(({generate_method_args(class_, method)}))"
     return result
 
 def shared_ptr_type(classname):

@@ -383,8 +383,19 @@ def generate_common_methods(class_):
     result = generate_newline(result)
     result += generate_set_owner(class_)
     result = generate_newline(result)
+    result += generate_switch_methods()
+    result = generate_newline(result)
     return result
 
+def generate_switch_methods():
+    res = ""
+    res += f"{INDENT}virtual void switch_call(int method_hash, PyObject* args_tuple);"
+    res = generate_newline(res)
+    res += f"{INDENT}virtual PyObject* switch_call_return(int method_hash, PyObject* args_tuple);"
+    res = generate_newline(res)
+    res += f"{INDENT}static virtual PyObject* call_static_method_with_return(int method_hash, PyObject* args_tuple)"
+    res = generate_newline(res)
+    return res
 
 def generate_enums(class_):
     if not "enums" in class_.keys():

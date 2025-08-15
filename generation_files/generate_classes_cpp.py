@@ -1243,7 +1243,65 @@ def generate_common_methods(class_):
     result = generate_newline(result)
     result += generate_constructors(class_)
     result = generate_newline(result)
+    result += generate_switch_methods(class_)
+    result = generate_newline(result)
     return result
+
+def generate_method_switch_args(method):
+    res = ""
+    index = 1
+    if "arguments" in method:
+        for arg in method["arguments"]:
+            if arg["type"] in classes:
+                res += f"extract_ptr_from_{arg['type']}Wrapper(PyTuple_GetItem(args_tuple, {index})), "
+            elif arg["type"] == "int":
+                res += f"PyLong_AsLong(PyTuple_GetItem(args_tuple, {index})), "
+            elif arg["type"] == "bool":
+                res += f"(PyObject_IsTrue(PyTuple_GetItem(args_tuple, {index})) ? true : false), "
+            elif arg["type"] == "float":
+                res += f"PyFloat_AsDouble(PyTuple_GetItem(args_tuple, {index})), "
+            else:
+                res += f"PyTuple_GetItem(args_tuple, {index}), "
+            index += 1
+    return res
+
+def collect_methods(class_, static_methods):
+    res = []
+    if "methods" in class_:
+        res += list(filter(lambda method: is_static(method) and static_methods or
+                                          not is_static(method) and not static_methods, class_["methods"]))
+
+    if "inherits" in class_:
+        res += collect_methods(find_class(class_["inherits"]), static_methods)
+    return res
+
+def generate_switch_methods(class_):
+    res = ""
+    res += f"{INDENT}virtual void switch_call(int method_hash, PyObject* args_tuple){{"
+    res = generate_newline(res)
+    methods = collect_methods(class_, False)
+    for method in methods:
+        args = generate_method_switch_args(method, )
+        res += f"{INDENT*2}case {method['hash']}: {pythonize_name(method['name'])}({args});break;"
+        res = generate_newline(res)
+    res += f"{INDENT}}}"
+    res = generate_newline(res)
+    res += f"{INDENT}virtual PyObject* switch_call_return(int method_hash, PyObject* args_tuple){{"
+    res = generate_newline(res)
+    if "methods" in class_:
+        for method in class_["methods"]:
+            if not ("return_value" in method or "return_type" in method):
+                continue
+            args = generate_method_switch_args(method)
+            res += f"{INDENT*2}case {method['hash']}: return {pythonize_name(method['name'])}({args});"
+            res = generate_newline(res)
+    res += f"{INDENT*2}return Py_None;"
+    res = generate_newline(res)
+    res += f"{INDENT}}}"
+    res = generate_newline(res)
+    res += f"{INDENT}static virtual PyObject* call_static_method_with_return(int method_hash, PyObject* args_tuple)return NULL"
+    res = generate_newline(res)
+    return res
 
 
 def generate_enums(class_):

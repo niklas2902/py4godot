@@ -26,11 +26,13 @@ namespace godot{
             return godot_owner;
         }
 
-        void switch_call(int method_hash, PyObject* objects){
+        virtual void switch_call(int method_hash, PyObject* args_tuple){
         }
 
 
-        PyObject* switch_call_return(int method_hash, PyObject* objects){
+        virtual PyObject* switch_call_return(int method_hash, PyObject* args_tuple){
         }
+
+        static virtual PyObject* call_static_method_with_return(int method_hash, PyObject* args_tuple)
     };
 }

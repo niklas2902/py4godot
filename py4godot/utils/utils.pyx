@@ -1,4 +1,7 @@
 # distutils: language=c++
+from Cython.Includes.libcpp.memory import shared_ptr
+
+from py4godot.py_classes.core import StringName, String
 from py4godot.utils.print_tools import *
 from py4godot.utils.test_utils cimport *
 from libc.stdlib cimport malloc, free
@@ -12,25 +15,26 @@ cimport py4godot.classes.Window as py4godot_window
 from cpython.unicode cimport PyUnicode_AsUTF8
 from py4godot.utils.smart_cast import smart_cast
 
-cdef core.StringName py_string_to_string_name(str string):
+cdef StringName py_string_to_string_name(str string):
     cdef char* c_str = string.encode("utf-8")
     return py_c_string_to_string_name(c_str)
 
 
-cdef core.StringName py_c_string_to_string_name(char* string):
-    cdef core.StringName gd_string_name = core.StringName.__new__(core.StringName)
-    gd_string_name.StringName_internal_class_ptr = c_string_to_string_name_ptr(string)
-    gd_string_name.StringName_internal_class_ptr.get().set_shouldBeDeleted(False) # Deletion should be handled by python
+cdef StringName py_c_string_to_string_name(char* string):
+    gd_string_name = StringName.__new__(StringName)
+    gd_string_name._ptr = c_string_to_string_name_ptr(string)
+    (<shared_ptr[bridge.StringName]>gd_string_name._ptr).get().set_shouldBeDeleted(False) # Deletion should be handled by python
     return gd_string_name
 
-cdef core.String py_string_to_string(str string):
+cdef String py_string_to_string(str string):
     cdef char* c_str = string.encode("utf-8")
     return py_c_string_to_string(c_str)
 
 
 cdef core.String py_c_string_to_string(char* string):
-    cdef core.String gd_string = core.String.__new__(core.String)
-    gd_string.String_internal_class_ptr = c_string_to_string_ptr(string)
+    gd_string = String.__new__(String)
+    gd_string._ptr = c_string_to_string_name_ptr(string)
+    (<shared_ptr[bridge.String]>gd_string._ptr).get().set_shouldBeDeleted(False) # Deletion should be handled by python
     return gd_string
 
 cdef unicode gd_string_to_py_string_instance(core.String string):

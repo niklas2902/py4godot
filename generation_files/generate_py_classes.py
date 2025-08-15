@@ -540,13 +540,13 @@ def generate_ret_call(method_):
             if ret_val.type in {"int", "float", "bool"}:
                 result += f"_ret"
             elif ret_val.type in builtin_classes:
-                result += f"{ret_val.name}.{ret_val.type}_internal_class_ptr"
+                result += f"{ret_val.name}._ptr"
             else:
-                result += f"{ret_val.name}.{ret_val.type}_internal_class_ptr"
+                result += f"{ret_val.name}._ptr"
         elif ret_val.type == "Variant":
             result += f"_ret"
         elif "typedarray" in ret_val.type:
-            result += f"_ret.{untypearray(ret_val.type)}_internal_class_ptr"
+            result += f"_ret._ptr"
         else:
             result += f"_ret"
     else:
@@ -637,9 +637,9 @@ def generate_method_body_standard(class_, method):
         result += generate_return_value(class_["name"], method)
         if not is_static(method):
 
-            result += f"{INDENT * 2}{generate_ret_call(method)} = self.{class_['name']}_internal_class_ptr.get().py_{pythonize_name(method['name'])}({generate_method_args(class_, method)})"
+            result += f"{INDENT * 2}{generate_ret_call(method)} = self._ptr.call_with_return({method['hash']},[{generate_method_args(class_, method)}])"
         else:
-            result += f"{INDENT * 2}{generate_ret_call(method)} = CPP{class_['name']}.py_{pythonize_name(method['name'])}({generate_method_args(class_,method)})"
+            result += f"{INDENT * 2}{generate_ret_call(method)} = CPPWrapper.call_static_method_with_return({method['hash']},[{generate_method_args(class_, method)}])"
         result = generate_newline(result)
 
         if is_property_getter(class_, method["name"]):
@@ -658,9 +658,9 @@ def generate_method_body_standard(class_, method):
         result += generate_return_statement(method)
     else:
         if not is_static(method):
-            result += f"{INDENT * 2}self.{class_['name']}_internal_class_ptr.get().py_{pythonize_name(method['name'])}({generate_method_args(class_, method)})"
+            result += f"{INDENT * 2}self._ptr.call_with_return({method['hash']},[{generate_method_args(class_, method)}])"
         else:
-            result += f"{INDENT * 2}CPP{class_['name']}.py_{pythonize_name(method['name'])}({generate_method_args(class_, method)})"
+            result += f"{INDENT * 2}CPPWrapper.call_static_method_with_return({method['hash']},[{generate_method_args(class_, method)}])"
     return result
 
 def shared_ptr_type(classname):
