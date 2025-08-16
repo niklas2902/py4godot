@@ -35,8 +35,8 @@ cdef core.String py_c_string_to_string(char* string):
     gd_string._ptr = c_string_to_string_name_ptr(string)
     return gd_string
 
-cdef unicode gd_string_to_py_string_instance(core.String string):
-    cdef shared_ptr[bridge.String] internal_string = string.String_internal_class_ptr
+cdef unicode gd_string_to_py_string_instance(object string):
+    cdef shared_ptr[bridge.String] internal_string = (<CPPStringWrapper>(string._ptr))._ptr
     cdef char* c_str
     cdef unicode py_string
     cdef char* c_str_test = "test"
@@ -49,8 +49,8 @@ cdef unicode gd_string_to_py_string_instance(core.String string):
         print_error("error:" + str(e))
     return py_string
 
-cdef unicode gd_string_name_to_py_string(core.StringName string):
-    cdef shared_ptr[bridge.StringName] internal_string_name = string.StringName_internal_class_ptr
+cdef unicode gd_string_name_to_py_string(object string):
+    cdef shared_ptr[bridge.StringName] internal_string_name = (<CPPStringNameWrapper>(string._ptr))._ptr
     cdef char* c_str
     cdef unicode py_string
     cdef char* c_str_test = "test"
@@ -63,8 +63,8 @@ cdef unicode gd_string_name_to_py_string(core.StringName string):
         print_error("error:" + str(e))
     return py_string
 
-cdef unicode gd_string_to_py_string(core.String string):
-    cdef shared_ptr[bridge.String] internal_string = string.String_internal_class_ptr
+cdef unicode gd_string_to_py_string(object string):
+    cdef shared_ptr[bridge.String] internal_string = (<CPPStringWrapper>(string._ptr))._ptr
     cdef char* c_str
     try:
         gd_string_to_c_string(internal_string.get()[0], string.length(), &c_str)
@@ -73,37 +73,6 @@ cdef unicode gd_string_to_py_string(core.String string):
     cdef unicode py_string = <unicode>PyUnicode_FromStringAndSize(c_str,string.length())
     free(c_str)
     return py_string
-
-def get_viewport(Node node):
-
-    cdef py4godot_viewport.Viewport _ret = py4godot_viewport.Viewport.__new__(py4godot_viewport.Viewport)
-    _ret.Viewport_internal_class_ptr = node.Node_internal_class_ptr.get().py_get_viewport()
-    #_ret.set_gdowner(_ret.Viewport_internal_class.get_godot_owner())
-
-    return _ret
-
-
-
-def get_window(Node node):
-
-    cdef py4godot_window.Window _ret = py4godot_window.Window.__new__(py4godot_window.Window)
-    _ret.Window_internal_class_ptr = node.Node_internal_class_ptr.get().py_get_window()
-    #_ret.set_gdowner(_ret.Window_internal_class.get_godot_owner())
-
-    return _ret
-
-cdef const char * py_str_to_c_charptr(str py_str):
-    print(f"py_str_type:{type(py_str)}")
-
-    return PyUnicode_AsUTF8(py_str)  # Returns a pointer to internal UTF-8 buffer
-
-def get_tree(Node node):
-
-    cdef py4godot_scenetree.SceneTree _ret = py4godot_scenetree.SceneTree.__new__(py4godot_scenetree.SceneTree)
-    _ret.SceneTree_internal_class_ptr = node.Node_internal_class_ptr.get().py_get_tree()
-    #_ret.set_gdowner(_ret.SceneTree_internal_class.get_godot_owner())
-
-    return _ret
 
 cdef PyObject* to_py_object(val):
     return <PyObject*>val # Just returning for converting
