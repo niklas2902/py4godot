@@ -13,8 +13,8 @@ cdef extern from "py4godot/cpputils/utils.h":
     bool is_none(PyObject* py_object)
     shared_ptr[To] my_static_pointer_cast[From,To](const shared_ptr[From]& ptr) except +
     shared_ptr[bridge.Dictionary] empty_dictionary_pointer() except +
-    shared_ptr[bridge.String] c_string_to_string_ptr(const char* string)
-    shared_ptr[bridge.StringName] c_string_to_string_name_ptr(const char* string)
+    object c_string_to_string_ptr(const char* string)
+    object c_string_to_string_name_ptr(const char* string)
     void destroy_object(void* godot_owner)
     void delete_char_array(char* array)
 

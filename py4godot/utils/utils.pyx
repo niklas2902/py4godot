@@ -23,7 +23,6 @@ cdef StringName py_string_to_string_name(str string):
 cdef StringName py_c_string_to_string_name(char* string):
     gd_string_name = StringName.__new__(StringName)
     gd_string_name._ptr = c_string_to_string_name_ptr(string)
-    (<shared_ptr[bridge.StringName]>gd_string_name._ptr).get().set_shouldBeDeleted(False) # Deletion should be handled by python
     return gd_string_name
 
 cdef String py_string_to_string(str string):
@@ -34,7 +33,6 @@ cdef String py_string_to_string(str string):
 cdef core.String py_c_string_to_string(char* string):
     gd_string = String.__new__(String)
     gd_string._ptr = c_string_to_string_name_ptr(string)
-    (<shared_ptr[bridge.String]>gd_string._ptr).get().set_shouldBeDeleted(False) # Deletion should be handled by python
     return gd_string
 
 cdef unicode gd_string_to_py_string_instance(core.String string):

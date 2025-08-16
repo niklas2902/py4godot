@@ -108,11 +108,12 @@ static void c_string_to_string_name_void(const char* string, void** stringname){
     constructor(*stringname,_args);
 }
 
-static std::shared_ptr<StringName> c_string_to_string_name_ptr(const char* string){
+static PyObject* c_string_to_string_name_ptr(const char* string){
     std::shared_ptr<String> gd_string = std::make_shared<String>(String::new0());
     functions::get_string_new_with_utf8_chars()(&gd_string->godot_owner, string);
     std::shared_ptr<StringName> gd_string_name = std::make_shared<StringName>(StringName::new2(*gd_string));
-    return gd_string_name;
+
+    return create_wrapper_from_StringName_ptr(gd_string_name);
 }
 static String c_string_to_string(const char* string){
     String gd_string = String::new0();
@@ -120,14 +121,14 @@ static String c_string_to_string(const char* string){
     return gd_string;
 }
 
-static std::shared_ptr<String> c_string_to_string_ptr(const char* string){
+static PyObject* c_string_to_string_ptr(const char* string){
     std::shared_ptr<String> gd_string = String::py_new0();
     functions::get_string_new_with_utf8_chars()(&gd_string->godot_owner, string);
-    return gd_string;
+    return create_wrapper_from_String_ptr(gd_string);
 }
 
 static void c_string_to_string_result(const char* string, void** string_ptr){
-functions::get_string_new_with_utf8_chars()(string_ptr, string);
+    functions::get_string_new_with_utf8_chars()(string_ptr, string);
 }
 
 static void add_string_to_array(GDExtensionTypePtr array, String& string){
