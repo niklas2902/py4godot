@@ -1,3 +1,6 @@
+# distutils: language=c++
+
+
 cdef class CPPWrapper:
     cdef call_without_return(self, int method_hash, tuple args_tuple):
         self._ptr.switch_call(method_hash, args_tuple)

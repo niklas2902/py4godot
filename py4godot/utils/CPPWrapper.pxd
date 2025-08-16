@@ -1,3 +1,5 @@
+# distutils: language=c++
+
 cdef extern from "py4godot/cppclasses/static_methods.h":
     object call_static_method(int class_number, int hash, tuple args)
     object call_constructor(int class_number, int constructor_number, tuple args)
