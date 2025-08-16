@@ -1288,18 +1288,29 @@ def generate_switch_methods(class_):
     res = generate_newline(res)
     res += f"{INDENT}virtual PyObject* switch_call_return(int method_hash, PyObject* args_tuple){{"
     res = generate_newline(res)
-    if "methods" in class_:
-        for method in class_["methods"]:
-            if not ("return_value" in method or "return_type" in method):
-                continue
-            args = generate_method_switch_args(method)
-            res += f"{INDENT*2}case {method['hash']}: return {pythonize_name(method['name'])}({args});"
-            res = generate_newline(res)
+    for method in methods:
+        if not ("return_value" in method or "return_type" in method):
+            continue
+        args = generate_method_switch_args(method)
+        res += f"{INDENT*2}case {method['hash']}: return {pythonize_name(method['name'])}({args});"
+        res = generate_newline(res)
     res += f"{INDENT*2}return Py_None;"
     res = generate_newline(res)
     res += f"{INDENT}}}"
     res = generate_newline(res)
-    res += f"{INDENT}static virtual PyObject* call_static_method_with_return(int method_hash, PyObject* args_tuple)return NULL"
+    res += f"{INDENT}static virtual PyObject* call_static_method_with_return(int method_hash, PyObject* args_tuple){{"
+    res = generate_newline(res)
+    static_methods = collect_methods(class_, True)
+    for method in static_methods:
+        args = generate_method_switch_args(method)
+        if not ("return_value" in method or "return_type" in method):
+            res += f"{INDENT * 2}case {method['hash']}: {pythonize_name(method['name'])}({args}); break;"
+        else:
+            res += f"{INDENT * 2}case {method['hash']}: return {pythonize_name(method['name'])}({args});"
+        res = generate_newline(res)
+    res += f"{INDENT * 2}return Py_None;"
+    res = generate_newline(res)
+    res += f"{INDENT}}}"
     res = generate_newline(res)
     return res
 
