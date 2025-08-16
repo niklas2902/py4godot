@@ -4,7 +4,9 @@ cdef class CPPWrapper:
     cdef call_with_return(self, int method_hash, tuple args_tuple):
         return self._ptr.switch_call_return(method_hash, args_tuple)
 
-
     @staticmethod
-    cdef call_static_method_with_return(int class_hash, int method_hash, list py_objects):
-        pass #TODO minize: Implement this. Do a c method which switches for everything
+    cdef call_new(int class_number, int number, tuple args):
+        return call_constructor(class_number, number, args)
+    @staticmethod
+    cdef call_static_method_with_return(int class_hash, int method_hash, tuple py_objects):
+        return call_static_method(class_hash, method_hash, py_objects)

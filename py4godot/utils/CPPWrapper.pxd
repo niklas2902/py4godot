@@ -1,11 +1,13 @@
-from py4godot.classes.cpp_bridge cimport*
+cdef extern from "py4godot/cppclasses/static_methods.h":
+    object call_static_method(int class_number, int hash, tuple args)
+    object call_constructor(int class_number, int constructor_number, tuple args)
+
 
 cdef class CPPWrapper:
-    cdef call_without_return(self, int method_hash, object arg1, object arg2, object arg3, object arg4, object arg5, object arg6)
-    cdef call_with_return(self, int method_hash, object arg1, object arg2, object arg3, object arg4, object arg5, object arg6)
-    cdef call_new(self, int number, object arg1, object arg2, object arg3, object arg4, object arg5, object arg6)
+    cdef call_without_return(self, int method_hash, tuple args)
+    cdef call_with_return(self, int method_hash, tuple args)
 
     @staticmethod
-    cdef call_static_method_with_return(int method_hash, object arg1, object arg2, object arg3, object arg4, object arg5, object arg6)
-#cdef class CPPVector3Wrapper(CPPWrapper):
-#    cdef shared_ptr[Vector3] _ptr
+    cdef call_new(self, int number, tuple args)
+    @staticmethod
+    cdef call_static_method_with_return(int class_hash, int method_hash, tuple py_objects)
