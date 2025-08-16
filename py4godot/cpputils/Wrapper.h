@@ -32,7 +32,5 @@ namespace godot{
 
         virtual PyObject* switch_call_return(int method_hash, PyObject* args_tuple){
         }
-
-        static virtual PyObject* call_static_method_with_return(int method_hash, PyObject* args_tuple)
     };
 }
