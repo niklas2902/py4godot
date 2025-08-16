@@ -1311,6 +1311,30 @@ def generate_switch_methods(class_):
     res += f"{INDENT * 2}return Py_None;"
     res = generate_newline(res)
     res += f"{INDENT}}}"
+
+    res = generate_newline(res)
+
+    res += f"{INDENT}static virtual PyObject* call_constructor(int method_hash, PyObject* args_tuple){{"
+    res = generate_newline(res)
+    if class_["name"] not in builtin_classes:
+        res += f"{INDENT * 2}return create_wrapper_from_{class_['name']}({class_['name']}::constructor());"
+    elif class_["name"] in builtin_classes:
+        res += f"{INDENT*2} switch(method_hash){{"
+        res = generate_newline(res)
+        index = 0
+        for constructor in class_["constructors"]:
+            args = generate_method_switch_args(constructor)
+            res += f"{INDENT*3}case {index}: py_new{index}({args});"
+            res = generate_newline(res)
+            index += 1
+        res = generate_newline(res)
+        res += f"{INDENT*2}}}"
+    else:
+        res += f"{INDENT * 2}return Py_None;"
+    res = generate_newline(res)
+    res = generate_newline(res)
+
+    res += f"{INDENT}}}"
     res = generate_newline(res)
     return res
 

@@ -52,6 +52,14 @@ def generate_typed_array_name(name):
 def generate_newline(str_):
     return str_ + "\n"
 
+def generate_import():
+    res = ""
+    res += "from libcpp.memory cimport shared_ptr"
+    res = generate_newline(res)
+    res += "from py4godot.classes.cpp_bridge cimport *"
+    res = generate_newline(res)
+    return res
+
 def generate_wrapper(class_name):
     res = f"cdef class CPP{class_name}Wrapper(CPPWrapper):"
     res = generate_newline(res)
@@ -99,6 +107,8 @@ if __name__ == "__main__":
                        obj['classes'] + obj["builtin_classes"]])
         builtin_classes = [class_["name"] for class_ in obj["builtin_classes"]]
         res = "from py4godot.utils.CPPWrapper cimport *"
+        res = generate_newline(res)
+        res += generate_import()
         res = generate_newline(res)
         array_cls = None
         arrays = []

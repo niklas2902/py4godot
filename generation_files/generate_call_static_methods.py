@@ -54,17 +54,17 @@ def generate_newline(str_):
 
 def generate_includes(classes):
     res = ""
-    res += "#include Python.h"
+    res += '#include "Python.h"'
     res = generate_newline(res)
     res += '#include "py4godot/cppclasses/generated4_core.h"'
     res = generate_newline(res)
     for cls in classes:
-        if "typedarray" in cls:
+        if "typedarray" in cls.lower():
             res += f'#include "py4godot/cppclasses/typedarrays/{cls}.h"\n'
         elif cls in builtin_classes:
             continue
         else:
-            res += f'#include "py4godot/cppclasses/{cls}/{cls}.h'
+            res += f'#include "py4godot/cppclasses/{cls}/{cls}.h"'
 
         res = generate_newline(res)
     return res
@@ -105,9 +105,12 @@ def generate_static_methods(classes):
     res = ""
     res += generate_includes(classes)
     res = generate_newline(res)
+    res += "namespace godot{"
+    res = generate_newline(res)
     res += generate_call_static_methods()
     res = generate_newline(res)
     res += generate_call_constructor()
+    res += "}"
     return res
 
 
