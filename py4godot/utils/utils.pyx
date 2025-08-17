@@ -1,42 +1,35 @@
 # distutils: language=c++
-from Cython.Includes.libcpp.memory import shared_ptr
-
 from py4godot.py_classes.core import StringName, String
+from py4godot.wrappers.wrappers cimport CPPStringWrapper, CPPStringNameWrapper
 from py4godot.utils.print_tools import *
 from py4godot.utils.test_utils cimport *
 from libc.stdlib cimport malloc, free
-from cpython.ref cimport Py_INCREF, Py_DECREF
-from py4godot.classes.Node cimport *
-from py4godot.classes.cpp_bridge cimport Object as CPPObject
-cimport py4godot.classes.cpp_bridge as bridge
-cimport py4godot.classes.Viewport as py4godot_viewport
-cimport py4godot.classes.SceneTree as py4godot_scenetree
-cimport py4godot.classes.Window as py4godot_window
-from cpython.unicode cimport PyUnicode_AsUTF8
-from py4godot.utils.smart_cast import smart_cast
 
-cdef StringName py_string_to_string_name(str string):
-    cdef char* c_str = string.encode("utf-8")
+cdef object py_string_to_string_name(str string):
+    cdef bytes encoded = string.encode("utf-8")
+    cdef const char * c_str = encoded
     return py_c_string_to_string_name(c_str)
 
 
-cdef StringName py_c_string_to_string_name(char* string):
+cdef object py_c_string_to_string_name(char* string):
     gd_string_name = StringName.__new__(StringName)
     gd_string_name._ptr = c_string_to_string_name_ptr(string)
     return gd_string_name
 
-cdef String py_string_to_string(str string):
-    cdef char* c_str = string.encode("utf-8")
+cdef object py_string_to_string(str string):
+    cdef bytes encoded = string.encode("utf-8")
+    cdef const char * c_str = encoded
     return py_c_string_to_string(c_str)
 
 
-cdef core.String py_c_string_to_string(char* string):
+cdef object py_c_string_to_string(char* string):
     gd_string = String.__new__(String)
     gd_string._ptr = c_string_to_string_name_ptr(string)
     return gd_string
 
 cdef unicode gd_string_to_py_string_instance(object string):
-    cdef shared_ptr[bridge.String] internal_string = (<CPPStringWrapper>(string._ptr))._ptr
+    cdef CPPStringWrapper wrapper = <CPPStringWrapper>(string._ptr)
+    cdef shared_ptr[bridge.String] internal_string = wrapper._ptr
     cdef char* c_str
     cdef unicode py_string
     cdef char* c_str_test = "test"
@@ -50,7 +43,8 @@ cdef unicode gd_string_to_py_string_instance(object string):
     return py_string
 
 cdef unicode gd_string_name_to_py_string(object string):
-    cdef shared_ptr[bridge.StringName] internal_string_name = (<CPPStringNameWrapper>(string._ptr))._ptr
+    cdef CPPStringNameWrapper wrapper = <CPPStringNameWrapper>(string._ptr)
+    cdef shared_ptr[bridge.StringName] internal_string_name = wrapper._ptr
     cdef char* c_str
     cdef unicode py_string
     cdef char* c_str_test = "test"
@@ -64,7 +58,8 @@ cdef unicode gd_string_name_to_py_string(object string):
     return py_string
 
 cdef unicode gd_string_to_py_string(object string):
-    cdef shared_ptr[bridge.String] internal_string = (<CPPStringWrapper>(string._ptr))._ptr
+    cdef CPPStringWrapper wrapper = <CPPStringWrapper>(string._ptr)
+    cdef shared_ptr[bridge.String] internal_string = wrapper._ptr
     cdef char* c_str
     try:
         gd_string_to_c_string(internal_string.get()[0], string.length(), &c_str)
