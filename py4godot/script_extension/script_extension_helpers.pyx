@@ -1,11 +1,12 @@
 # distutils: language=c++
-from py4godot.classes.core cimport StringName, Signal, Callable, String
-from py4godot.signals cimport GDSignal
-from py4godot.classes.core cimport Dictionary
+from py4godot.classes.core import StringName
+from py4godot.signals import GDSignal
+from py4godot.classes.core import Dictionary
+from py4godot.wrappers.wrappers cimport create_wrapper_from_Dictionary_ptr
 from py4godot.classes.cpp_bridge cimport Dictionary as BridgeDictionary
 from py4godot.utils.print_tools import *
 import traceback
-from cpython cimport Py_INCREF, Py_DECREF, PyObject
+from cpython cimport PyObject
 from py4godot.utils.utils cimport *
 cimport py4godot.utils.utils as py_utils
 from libcpp.vector cimport vector
@@ -60,20 +61,20 @@ cdef api string get_type(PyObject* gd_class):
 
 cdef api void create_signals(PyObject* instance, vector[shared_ptr[BridgeDictionary]]& signals):
     cdef object py_instance = <object>instance
-    cdef StringName name
+    cdef object name
     cdef str py_name
-    cdef GDSignal signal
-    cdef Dictionary py_signal = Dictionary.new0()
-    cdef StringName gd_name
+    cdef object signal
+    cdef object py_signal = Dictionary.new0()
+    cdef object gd_name
     try:
         for signal_ind in range(signals.size()):
-            py_signal.Dictionary_internal_class_ptr = <shared_ptr[BridgeDictionary]> signals[signal_ind]
+            py_signal._ptr = create_wrapper_from_Dictionary_ptr(signals[signal_ind])
             gd_name = StringName.new2("name")
             py_name = str(py_signal["name"].substr(0))
             signal = GDSignal.new2(py_instance, StringName.new2(py_name))
             setattr(py_instance, py_name, signal)
 
-            py_signal.Dictionary_internal_class_ptr = empty_dictionary_pointer()
+            py_signal._ptr = create_wrapper_from_Dictionary_ptr(empty_dictionary_pointer())
 
     except Exception as e:
         print_error("Exception happened:", e)
