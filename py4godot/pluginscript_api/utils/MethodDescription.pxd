@@ -3,7 +3,6 @@ from libcpp.vector cimport vector
 
 from py4godot.hints.BaseHint cimport *
 from py4godot.godot_bindings.binding4_godot4 cimport *
-from py4godot.classes.core cimport *
 from py4godot.pluginscript_api.utils.PropertyDescription cimport *
 cimport py4godot.pluginscript_api.utils.utils as utils
 from libc.stdint cimport uint32_t
@@ -13,8 +12,8 @@ cdef inc_id_counter()
 
 cdef class MethodDescription:
 
-    cdef StringName name
-    cdef String name_str
+    cdef object name
+    cdef object name_str
     cdef PropertyDescription return_value;
     cdef uint32_t flags; # Bitfield of `GDExtensionClassMethodFlags`.
     cdef int32_t id;

@@ -15,8 +15,6 @@ from py4godot.pluginscript_api.utils.SignalDescription cimport *
 from py4godot.pluginscript_api.utils.PropertyDescription cimport *
 import py4godot.utils.print_tools as print_tools
 from importlib.machinery import SourceFileLoader
-from py4godot.classes.Node3D cimport *
-from py4godot.classes.Object cimport *
 import py4godot.classes.core
 import importlib
 import importlib.util
