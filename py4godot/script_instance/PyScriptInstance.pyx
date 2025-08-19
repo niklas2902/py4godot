@@ -1,22 +1,19 @@
 # distutils: language=c++
-import inspect, traceback
+import traceback
 from cython.operator cimport dereference
-from cpython cimport Py_INCREF, Py_DECREF, PyObject
-
-from py4godot.utils.print_tools import print_error
+import py4godot.classes.core as core
+from py4godot.utils.print_tools import print_error, py_log, print_error_detailed
 from py4godot.utils.utils cimport *
-from py4godot.instance_data.InstanceData cimport *
+from py4godot.instance_data.InstanceData cimport InstanceData, MethodCallData
 cimport py4godot.classes.cpp_bridge as cppbridge
-from py4godot.classes.core cimport *
-from py4godot.classes.Object cimport *
-from py4godot.classes.RefCounted cimport RefCounted
-
+import py4godot.classes.RefCounted as refCounted
 from py4godot.core.variant4.Variant4 cimport *
-from py4godot.utils.print_tools import *
-from libc.stdlib cimport malloc, free
 from libcpp.memory cimport make_shared
 from py4godot.core.variant4 import cast_helpers
-import threading
+from cpython cimport Py_INCREF, Py_DECREF, PyObject
+from py4godot.utils.utils cimport create_string_name_from_ptr
+
+from py4godot.wrappers.wrappers cimport create_wrapper_from_String_ptr, create_wrapper_from_StringName_ptr
 
 cdef types_to_decref = {type(1), type(1.), type(True)}
 l = []
@@ -25,17 +22,17 @@ cdef api GDExtensionBool instance_set(GDExtensionScriptInstanceDataPtr p_instanc
     py_log("instance_set")
     cdef InstanceData* instance = <InstanceData*>p_instance
     #TODO still a problem with custom string attributes. Why is this still crashing?
-    cdef StringName method_name = StringName.__new__(StringName)
-    cdef cppbridge.StringName internal_method_name = cppbridge.StringName.new_static((<void**>p_name)[0]) #TODO: Create unconst helper
-    method_name.StringName_internal_class_ptr = make_shared[cppbridge.StringName](internal_method_name)
-    cdef String method_name_str = String.new2(method_name)
+    cdef object method_name = core.StringName.__new__(core.StringName)
+    cdef shared_ptr[cppbridge.StringName] internal_method_name  = create_string_name_from_ptr(<void**>p_name[0])
+    method_name.StringName_internal_class_ptr = create_wrapper_from_StringName_ptr(internal_method_name)
+    cdef object method_name_str = core.String.new2(method_name)
     cdef unicode py_method_name_str = gd_string_to_py_string(method_name_str)
 
     cdef Variant var
     try:
         var.native_ptr = <void*>p_value
         val = <object>var.get_converted_value(True)
-        if isinstance(val, Signal):
+        if isinstance(val, core.Signal):
             return 1 #TODO: improve this. The problem is, that Godot decides to set signals itself. This lead to problems in the past. Check if it is still an issue
         setattr(<object>(instance.owner),py_method_name_str, <object>val)
         #Py_DECREF(<object>val)#TODO: is this necessary?
@@ -49,11 +46,12 @@ cdef api GDExtensionBool instance_set(GDExtensionScriptInstanceDataPtr p_instanc
 cdef api GDExtensionBool instance_get(GDExtensionScriptInstanceDataPtr p_instance, GDExtensionConstStringNamePtr p_name, GDExtensionVariantPtr r_ret)  noexcept:
     py_log("instance_get")
     cdef InstanceData* instance = <InstanceData*>p_instance
+    cdef object method_name = core.StringName.__new__(core.StringName)
     #TODO still a problem with custom string attributes. Why is this still crashing?
-    cdef StringName method_name = StringName.__new__(StringName)
-    cdef cppbridge.StringName internal_method_name = cppbridge.StringName.new_static((<void**>p_name)[0]) #TODO: Create unconst helper
-    method_name.StringName_internal_class_ptr = make_shared[cppbridge.StringName](internal_method_name)
-    cdef String method_name_str = String.new2(method_name)
+    cdef objectmethod_name = core.StringName.__new__(core.StringName)
+    cdef shared_ptr[cppbridge.StringName] internal_method_name = create_string_name_from_ptr(<void**>p_name[0])
+    method_name._ptr = create_wrapper_from_StringName_ptr(internal_method_name)
+    cdef object method_name_str = core.String.new2(method_name)
     cdef unicode py_method_name_str = gd_string_to_py_string(method_name_str)
     cdef str py_typename;
 
@@ -73,7 +71,7 @@ cdef api GDExtensionBool instance_get(GDExtensionScriptInstanceDataPtr p_instanc
 
 def fix_string_behavior(gd_object, val, name):
     # We can't delete Strings, when getting with property in order not to crash
-    cdef String get_val = String.new1(val)
+    cdef object get_val = core.String.new1(val)
     get_val.shouldBeDeleted = False
     return get_val
 
@@ -102,9 +100,9 @@ cdef api GDExtensionBool is_overridden(GDExtensionScriptInstanceDataPtr p_instan
     py_log("instance_has_method")
     cdef InstanceData* instance = <InstanceData*>p_instance
 
-    cdef StringName method_name = StringName.__new__(StringName)
-    cdef cppbridge.StringName internal_method_name = cppbridge.StringName.new_static((<void**>p_name)[0]) #TODO: Create unconst helper
-    method_name.StringName_internal_class_ptr = make_shared[cppbridge.StringName](internal_method_name)
+    cdef object method_name = core.StringName.__new__(core.StringName)
+    cdef shared_ptr[cppbridge.StringName] internal_method_name = create_string_name_from_ptr(<void**>p_name[0])
+    method_name._ptr = create_wrapper_from_StringName_ptr(internal_method_name)
     cdef unicode py_method_name_str
     try:
         py_method_name_str = gd_string_name_to_py_string(method_name)
@@ -120,9 +118,9 @@ cdef api GDExtensionBool instance_has_method(GDExtensionScriptInstanceDataPtr p_
     py_log("instance_has_method")
     cdef InstanceData* instance = <InstanceData*>p_instance
 
-    cdef StringName method_name = StringName.__new__(StringName)
-    cdef cppbridge.StringName internal_method_name = cppbridge.StringName.new_static((<void**>p_name)[0]) #TODO: Create unconst helper
-    method_name.StringName_internal_class_ptr = make_shared[cppbridge.StringName](internal_method_name)
+    cdef object method_name = core.StringName.__new__(core.StringName)
+    cdef shared_ptr[cppbridge.StringName] internal_method_name = create_string_name_from_ptr(<void**>p_name[0])
+    method_name._ptr = create_wrapper_from_StringName_ptr(internal_method_name)
     cdef unicode py_method_name_str
     try:
         py_method_name_str = gd_string_name_to_py_string(method_name)
@@ -131,16 +129,16 @@ cdef api GDExtensionBool instance_has_method(GDExtensionScriptInstanceDataPtr p_
     method = getattr(<object>(instance.owner), py_method_name_str, None)
     return int(method != None)
 
-cdef unrefcount(RefCounted object):
+cdef unrefcount(object object):
     object.casted_from = 1 #Set a value, so that the object doesn't get deleted. TODO: get rid of this. this is a workaround
 
 cdef api MethodCallData instance_call(GDExtensionScriptInstanceDataPtr p_self, GDExtensionConstStringNamePtr p_method, const GDExtensionConstVariantPtr *p_args, GDExtensionInt p_argument_count, GDExtensionVariantPtr r_return, GDExtensionCallError *r_error) noexcept:
     py_log("instance_call")
     cdef InstanceData* instance = <InstanceData*>p_self
     #TODO still a problem with custom string attributes. Why is this still crashing?
-    cdef StringName method_name = StringName.__new__(StringName)
-    cdef cppbridge.StringName internal_method_name = cppbridge.StringName.new_static((<void**>p_method)[0]) #TODO: Create unconst helper
-    method_name.StringName_internal_class_ptr = make_shared[cppbridge.StringName](internal_method_name)
+    cdef object method_name = core.StringName.__new__(core.StringName)
+    cdef shared_ptr[cppbridge.StringName] internal_method_name = create_string_name_from_ptr(<void**>p_method[0])
+    method_name._ptr = create_wrapper_from_StringName_ptr(internal_method_name)
     cdef unicode py_method_name_str
     try:
         py_method_name_str = gd_string_name_to_py_string(method_name)
@@ -159,7 +157,7 @@ cdef api MethodCallData instance_call(GDExtensionScriptInstanceDataPtr p_self, G
             arg = <object>var.get_converted_value(True)
             if type(arg) in types_to_decref :#or isinstance(arg, Object):
                 Py_DECREF(arg)
-            if isinstance(arg, RefCounted):
+            if isinstance(arg, refCounted.RefCounted):
                unrefcount(arg) #TODO: fix this. this is a workaround, so that python doesn't delete this.
             args.append(arg)
         cast_helpers.clear_vals() # free memory again, now that we are safe

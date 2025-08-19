@@ -16,6 +16,7 @@ cdef extern from "py4godot/cpputils/utils.h":
     object c_string_to_string_name_ptr(const char* string)
     void destroy_object(void* godot_owner)
     void delete_char_array(char* array)
+    shared_ptr[bridge.StringName] create_string_name_from_ptr(void* godot_owner)
 
     void break_()
 
