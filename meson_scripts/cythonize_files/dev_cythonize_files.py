@@ -20,8 +20,6 @@ def main():
     file_patterns = [
         "py4godot/functions.pyx",
         "py4godot/signals.pyx",
-        "py4godot/classes/Object/Object.pyx",
-        "py4godot/classes/AESContext/AESContext.pyx",
         "py4godot/core/variant4/Variant4.pyx",
         "py4godot/core/variant4/type_helpers.pyx",
         "py4godot/core/variant4/cast_helpers.pyx",
@@ -36,15 +34,12 @@ def main():
         "py4godot/hints/*.pyx",
         "py4godot/pluginscript_api/utils/*.pyx",
         "py4godot/godot_bindings/binding4_godot4.pyx",
-        "py4godot/classes/core.pyx",
+
     ]
 
     files_to_cythonize = []
     for pattern in file_patterns:
         files_to_cythonize.extend(glob.glob(pattern, recursive=True))
-    dependencies = generate_dev_build()
-    for dependency in dependencies:
-        files_to_cythonize.append(f"py4godot/classes/{dependency}.pyx")
 
     total_files = len(files_to_cythonize)
 
