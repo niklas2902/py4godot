@@ -21,7 +21,7 @@ if sys.platform == "win32":
     extra_link_args = ["/OPT:REF", "/OPT:ICF"]  # remove unused code & fold identical functions
 else:
     # Optimize for size on GCC/Clang
-    extra_compile_args = ["-Os", "-s", "-fdata-sections", "-ffunction-sections"]
+    extra_compile_args = ["-O3", "-s", "-fdata-sections", "-ffunction-sections"]
     extra_link_args = ["-Wl,--gc-sections", "-s"]  # remove unused sections & strip symbols
 
 extensions = [

@@ -23,7 +23,7 @@ cdef api GDExtensionBool instance_set(GDExtensionScriptInstanceDataPtr p_instanc
     cdef InstanceData* instance = <InstanceData*>p_instance
     #TODO still a problem with custom string attributes. Why is this still crashing?
     cdef object method_name = core.StringName.__new__(core.StringName)
-    cdef shared_ptr[cppbridge.StringName] internal_method_name  = create_string_name_from_ptr(<void**>p_name[0])
+    cdef shared_ptr[cppbridge.StringName] internal_method_name  = create_string_name_from_ptr((<void**>p_name)[0])
     method_name.StringName_internal_class_ptr = create_wrapper_from_StringName_ptr(internal_method_name)
     cdef object method_name_str = core.String.new2(method_name)
     cdef unicode py_method_name_str = gd_string_to_py_string(method_name_str)
@@ -49,7 +49,7 @@ cdef api GDExtensionBool instance_get(GDExtensionScriptInstanceDataPtr p_instanc
     cdef object method_name = core.StringName.__new__(core.StringName)
     #TODO still a problem with custom string attributes. Why is this still crashing?
     cdef objectmethod_name = core.StringName.__new__(core.StringName)
-    cdef shared_ptr[cppbridge.StringName] internal_method_name = create_string_name_from_ptr(<void**>p_name[0])
+    cdef shared_ptr[cppbridge.StringName] internal_method_name = create_string_name_from_ptr((<void**>p_name)[0])
     method_name._ptr = create_wrapper_from_StringName_ptr(internal_method_name)
     cdef object method_name_str = core.String.new2(method_name)
     cdef unicode py_method_name_str = gd_string_to_py_string(method_name_str)
@@ -101,7 +101,7 @@ cdef api GDExtensionBool is_overridden(GDExtensionScriptInstanceDataPtr p_instan
     cdef InstanceData* instance = <InstanceData*>p_instance
 
     cdef object method_name = core.StringName.__new__(core.StringName)
-    cdef shared_ptr[cppbridge.StringName] internal_method_name = create_string_name_from_ptr(<void**>p_name[0])
+    cdef shared_ptr[cppbridge.StringName] internal_method_name = create_string_name_from_ptr((<void**>p_name)[0])
     method_name._ptr = create_wrapper_from_StringName_ptr(internal_method_name)
     cdef unicode py_method_name_str
     try:
@@ -119,7 +119,7 @@ cdef api GDExtensionBool instance_has_method(GDExtensionScriptInstanceDataPtr p_
     cdef InstanceData* instance = <InstanceData*>p_instance
 
     cdef object method_name = core.StringName.__new__(core.StringName)
-    cdef shared_ptr[cppbridge.StringName] internal_method_name = create_string_name_from_ptr(<void**>p_name[0])
+    cdef shared_ptr[cppbridge.StringName] internal_method_name = create_string_name_from_ptr((<void**>p_name)[0])
     method_name._ptr = create_wrapper_from_StringName_ptr(internal_method_name)
     cdef unicode py_method_name_str
     try:
@@ -137,7 +137,7 @@ cdef api MethodCallData instance_call(GDExtensionScriptInstanceDataPtr p_self, G
     cdef InstanceData* instance = <InstanceData*>p_self
     #TODO still a problem with custom string attributes. Why is this still crashing?
     cdef object method_name = core.StringName.__new__(core.StringName)
-    cdef shared_ptr[cppbridge.StringName] internal_method_name = create_string_name_from_ptr(<void**>p_method[0])
+    cdef shared_ptr[cppbridge.StringName] internal_method_name = create_string_name_from_ptr((<void**>p_method)[0])
     method_name._ptr = create_wrapper_from_StringName_ptr(internal_method_name)
     cdef unicode py_method_name_str
     try:

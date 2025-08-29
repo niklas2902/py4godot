@@ -168,7 +168,6 @@ def copy_experimental(platform):
     for file in ["py4godot/pluginscript_api/utils/experimental.py",
                  "py4godot/pluginscript_api/utils/annotation_tools.py",
                  "py4godot/utils/smart_cast.py",
-                 "py4godot/classes/__init__.py",
                  "py4godot/methods.py",
                  "py4godot/singletons.py",
                  "py4godot/properties.py",

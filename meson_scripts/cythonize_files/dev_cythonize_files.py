@@ -34,6 +34,8 @@ def main():
         "py4godot/hints/*.pyx",
         "py4godot/pluginscript_api/utils/*.pyx",
         "py4godot/godot_bindings/binding4_godot4.pyx",
+        "py4godot/wrappers/wrappers.pyx",
+        "py4godot/utils/CPPWrapper.pyx"
 
     ]
 

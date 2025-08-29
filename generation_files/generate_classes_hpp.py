@@ -104,7 +104,7 @@ def generate_constructor_args(constructor, should_make_shared = False):
     for arg in constructor["arguments"]:
         if not arg["type"].startswith("enum::"):
             if should_make_shared:
-                result += f"{make_ptr(ungodottype(untypearray(unbitfield_type(arg['type']))))}{ref(arg['type'])} {pythonize_name(arg['name'])}, "
+                result += f"{make_ptr(ungodottype(untypearray(unbitfield_type(arg['type']))))}  {pythonize_name(arg['name'])}, "
             else:
                 result += f"{ungodottype(untypearray(unbitfield_type(arg['type'])))}{ref(arg['type'])} {pythonize_name(arg['name'])}, "
         else:

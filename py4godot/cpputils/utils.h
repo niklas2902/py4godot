@@ -4,6 +4,7 @@
 #include "Python.h"
 #include "functions.h"
 #include "py4godot/cppclasses/Engine/Engine.h"
+#include "py4godot/wrappers/wrappers_api.h"
 #include <memory>
 #include <stdlib.h>
 #include <string>

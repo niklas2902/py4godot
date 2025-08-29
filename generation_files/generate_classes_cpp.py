@@ -6,7 +6,7 @@ from generate_classes_hpp import get_ret_value, has_native_struct, ungodottype
 from generate_enums import enumize_name
 
 INDENT = "  "
-
+index = 0
 
 class ReturnType:
     def __init__(self, name, type_):
@@ -82,6 +82,7 @@ def generate_import(class_, is_core):
 #include "py4godot/cpputils/utils.h"
 #include "py4godot/cppclasses/generated4_core.h"
 #include "py4godot/godot_bindings/main.h"
+#include "py4godot/wrappers/wrappers_api.h"
 #include <stdlib.h>
 #include <memory>
 '''
@@ -162,7 +163,7 @@ def generate_constructor_args(constructor, should_make_shared = False):
     for arg in constructor["arguments"]:
         if not arg["type"].startswith("enum::"):
             if should_make_shared:
-                result += f"{make_ptr(ungodottype(untypearray(unbitfield_type(arg['type']))))}{ref(arg['type'])} {pythonize_name(arg['name'])}, "
+                result += f"{make_ptr(ungodottype(untypearray(unbitfield_type(arg['type']))))}  {pythonize_name(arg['name'])}, "
             else:
                 result += f"{ungodottype(untypearray(unbitfield_type(arg['type'])))}{ref(arg['type'])} {pythonize_name(arg['name'])}, "
         else:
@@ -1252,8 +1253,8 @@ def generate_method_switch_args(method):
     index = 1
     if "arguments" in method:
         for arg in method["arguments"]:
-            if arg["type"] in classes:
-                res += f"extract_ptr_from_{arg['type']}Wrapper(PyTuple_GetItem(args_tuple, {index})), "
+            if arg["type"] in classes or "typedarray" in arg["type"].lower():
+                res += f"extract_ptr_from_{untypearray(arg['type'])}Wrapper(PyTuple_GetItem(args_tuple, {index})), "
             elif arg["type"] == "int":
                 res += f"PyLong_AsLong(PyTuple_GetItem(args_tuple, {index})), "
             elif arg["type"] == "bool":
@@ -1263,68 +1264,97 @@ def generate_method_switch_args(method):
             else:
                 res += f"PyTuple_GetItem(args_tuple, {index}), "
             index += 1
+    if "is_vararg" in method and method["is_vararg"]:
+        res += "varargs, "
+    if res:
+        res = res[:-2]
     return res
 
 def collect_methods(class_, static_methods):
     res = []
     if "methods" in class_:
         res += list(filter(lambda method: is_static(method) and static_methods or
-                                          not is_static(method) and not static_methods, class_["methods"]))
+                                          not is_static(method) and not static_methods and not has_native_struct(method), class_["methods"]))
 
     if "inherits" in class_:
         res += collect_methods(find_class(class_["inherits"]), static_methods)
+    res = list(filter (lambda method: is_virtual(method) and not native_structs_in_method(method), res))
     return res
 
 def generate_switch_methods(class_):
+    global index
     res = ""
-    res += f"{INDENT}virtual void switch_call(int method_hash, PyObject* args_tuple){{"
+    res += f"{INDENT}void {class_['name']}::switch_call(int method_hash, PyObject* args_tuple){{"
+
+    res = generate_newline(res)
+    res += f"{INDENT}std::vector<PyObject*> varargs{{}};"
     res = generate_newline(res)
     methods = collect_methods(class_, False)
+    res+= f"{INDENT*2}switch(method_hash){{"
+    res = generate_newline(res)
     for method in methods:
         args = generate_method_switch_args(method, )
-        res += f"{INDENT*2}case {method['hash']}: {pythonize_name(method['name'])}({args});break;"
+        res += f"{INDENT*3}case {index}: py_{pythonize_name(method['name'])}({args});break;"
         res = generate_newline(res)
+        index += 1
+    res += f"{INDENT*2}}}"
     res += f"{INDENT}}}"
     res = generate_newline(res)
-    res += f"{INDENT}virtual PyObject* switch_call_return(int method_hash, PyObject* args_tuple){{"
+    res += f"{INDENT}PyObject* {class_['name']}::switch_call_return(int method_hash, PyObject* args_tuple){{"
+    res = generate_newline(res)
+    res += f"{INDENT}std::vector<PyObject*> varargs{{}};"
+    res = generate_newline(res)
+    res+= f"{INDENT*2}switch(method_hash){{"
     res = generate_newline(res)
     for method in methods:
         if not ("return_value" in method or "return_type" in method):
             continue
         args = generate_method_switch_args(method)
-        res += f"{INDENT*2}case {method['hash']}: return {pythonize_name(method['name'])}({args});"
+        res += f"{INDENT*3}case {index}: return Py_None;//py_{pythonize_name(method['name'])}({args});"
         res = generate_newline(res)
+        index += 1
+    res += f"{INDENT*2}}}"
     res += f"{INDENT*2}return Py_None;"
     res = generate_newline(res)
     res += f"{INDENT}}}"
     res = generate_newline(res)
-    res += f"{INDENT}static virtual PyObject* call_static_method_with_return(int method_hash, PyObject* args_tuple){{"
+    res += f"{INDENT}static PyObject* {class_['name']}::call_static_method_with_return(int method_hash, PyObject* args_tuple){{"
+    res = generate_newline(res)
+    res += f"{INDENT}std::vector<PyObject*> varargs{{}};"
+    res = generate_newline(res)
+    res += f"{INDENT*2}switch(method_hash){{"
     res = generate_newline(res)
     static_methods = collect_methods(class_, True)
     for method in static_methods:
         args = generate_method_switch_args(method)
         if not ("return_value" in method or "return_type" in method):
-            res += f"{INDENT * 2}case {method['hash']}: {pythonize_name(method['name'])}({args}); break;"
+            res += f"{INDENT * 2}case {index}: py_{pythonize_name(method['name'])}({args}); break;"
         else:
-            res += f"{INDENT * 2}case {method['hash']}: return {pythonize_name(method['name'])}({args});"
+            res += f"{INDENT * 2}case {index}: return Py_None;"
         res = generate_newline(res)
+        index += 1
+    res += f"{INDENT*2}}}"
+    res = generate_newline(res)
     res += f"{INDENT * 2}return Py_None;"
     res = generate_newline(res)
     res += f"{INDENT}}}"
 
     res = generate_newline(res)
 
-    res += f"{INDENT}static virtual PyObject* call_constructor(int method_hash, PyObject* args_tuple){{"
+    res += f"{INDENT}static PyObject* godot::{class_['name']}::call_constructor(int method_hash, PyObject* args_tuple){{"
     res = generate_newline(res)
     if class_["name"] not in builtin_classes:
-        res += f"{INDENT * 2}return create_wrapper_from_{class_['name']}({class_['name']}::constructor());"
+        if is_singleton(class_["name"]):
+            res += f"{INDENT * 2}return Py_None;"
+        else:
+            res += f"{INDENT * 2}return create_wrapper_from_{class_['name']}_ptr({class_['name']}::constructor());"
     elif class_["name"] in builtin_classes:
         res += f"{INDENT*2} switch(method_hash){{"
         res = generate_newline(res)
         index = 0
         for constructor in class_["constructors"]:
             args = generate_method_switch_args(constructor)
-            res += f"{INDENT*3}case {index}: py_new{index}({args});"
+            res += f"{INDENT*3}case {index}: {class_['name']}::py_new{index}({args});"
             res = generate_newline(res)
             index += 1
         res = generate_newline(res)

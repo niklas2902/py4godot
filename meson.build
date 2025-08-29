@@ -63,7 +63,7 @@ if build_machine.system() == 'windows'
     internal_inc = include_directories('py4godot/gdextension-api/', 'py4godot/core', 'py4godot/enums',
     'py4godot/classes', 'py4godot/pluginscript_api', 'py4godot/godot_bindings',
     'py4godot/script_instance', 'py4godot/core/variant4', 'py4godot/cppcore', 'py4godot/cppenums',
-    'py4godot/cppclasses', 'py4godot/cpputils', 'py4godot/script_language', 'py4godot/pluginscript_api',
+    'py4godot/cppclasses', 'py4godot/cpputils', 'py4godot/script_language', 'py4godot/pluginscript_api','py4godot/wrappers',
     'py4godot/pluginscript_api/utils')
     glob = run_command('python', files(meson.current_source_dir()+'/meson_scripts/glob_tools.py'), check:false)
     glob_cpp = run_command('python', files(meson.current_source_dir()+'/meson_scripts/glob_tools_cpp.py'), check:false)
@@ -77,7 +77,7 @@ if build_machine.system() == 'darwin'
         internal_inc = include_directories('py4godot','py4godot/gdextension-api/', 'py4godot/core', 'py4godot/enums',
     'py4godot/classes', 'py4godot/pluginscript_api', 'py4godot/godot_bindings',
     'py4godot/script_instance', 'py4godot/core/variant4', 'py4godot/cppcore', 'py4godot/cppenums',
-    'py4godot/cppclasses', 'py4godot/cpputils', 'py4godot/script_language', 'py4godot/pluginscript_api',
+    'py4godot/cppclasses', 'py4godot/cpputils', 'py4godot/script_language', 'py4godot/pluginscript_api','py4godot/wrappers',
     'py4godot/pluginscript_api/utils',
     'py4godot/instance_data', 'python_files/'+python_ver+'-'+machine+'64'+'/python/include/'+python_ver_short)
     glob = run_command('python3', files(meson.current_source_dir()+'/meson_scripts/glob_tools.py'), check:false)
@@ -94,7 +94,7 @@ if meson.has_external_property('is_mingw') and build_machine.system() == 'linux'
     'py4godot/classes', 'py4godot/pluginscript_api', 'py4godot/godot_bindings',
     'py4godot/script_instance', 'py4godot/core/variant4', 'py4godot/cppcore', 'py4godot/cppenums',
     'py4godot/cppclasses', 'py4godot/cpputils', 'py4godot/script_language', 'py4godot/pluginscript_api',
-    'py4godot/pluginscript_api/utils',
+    'py4godot/pluginscript_api/utils','py4godot/wrappers',
     'py4godot/instance_data', 'python_files/'+python_ver+'-'+machine+platform_format+'/python/include')
     glob = run_command('python3', files(meson.current_source_dir()+'/meson_scripts/glob_tools.py'), check:false)
     glob_cpp = run_command('python3', files(meson.current_source_dir()+'/meson_scripts/glob_tools_cpp.py'), check:false)
@@ -106,7 +106,7 @@ if not meson.has_external_property('is_mingw') and build_machine.system() == 'li
         internal_inc = include_directories('py4godot','py4godot/gdextension-api/', 'py4godot/core', 'py4godot/enums',
     'py4godot/classes', 'py4godot/pluginscript_api', 'py4godot/godot_bindings',
     'py4godot/script_instance', 'py4godot/core/variant4', 'py4godot/cppcore', 'py4godot/cppenums',
-    'py4godot/cppclasses', 'py4godot/cpputils', 'py4godot/script_language', 'py4godot/pluginscript_api',
+    'py4godot/cppclasses', 'py4godot/cpputils', 'py4godot/script_language', 'py4godot/pluginscript_api', 'py4godot/wrappers',
     'py4godot/pluginscript_api/utils','python_files/'+python_ver+'-'+machine+platform_format+'/python/include/'+python_ver_short,
     'py4godot/instance_data')
     py = import('python').find_installation('python3')

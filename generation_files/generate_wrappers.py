@@ -66,7 +66,7 @@ def generate_wrapper(class_name):
     res += f"{INDENT}pass"
     res = generate_newline(res)
 
-    res += f"cdef public shared_ptr[{class_name}] extract_ptr_from_{class_name}Wrapper(object o):"
+    res += f"cdef api shared_ptr[{class_name}] extract_ptr_from_{class_name}Wrapper(object o):"
     res = generate_newline(res)
     res += f"{INDENT}cdef CPP{class_name}Wrapper wrapper = <CPP{class_name}Wrapper>(object.wrapper)"
     res = generate_newline(res)
@@ -75,7 +75,7 @@ def generate_wrapper(class_name):
     res += f"{INDENT}return ptr"
 
     res = generate_newline(res)
-    res += f"cdef public object create_wrapper_from_{class_name}_ptr(shared_ptr[{class_name}] ptr):"
+    res += f"cdef api object create_wrapper_from_{class_name}_ptr(shared_ptr[{class_name}] ptr):"
     res = generate_newline(res)
     res += f"{INDENT}cdef CPP{class_name}Wrapper wrapper = CPP{class_name}Wrapper()"
     res = generate_newline(res)
@@ -90,9 +90,9 @@ def generate_wrapper_pxd(class_name):
     res = generate_newline(res)
     res += f"{INDENT}cdef shared_ptr[{class_name}] _ptr"
     res = generate_newline(res)
-    res += f"cdef public shared_ptr[{class_name}] extract_ptr_from_{class_name}Wrapper(object o)"
+    res += f"cdef api shared_ptr[{class_name}] extract_ptr_from_{class_name}Wrapper(object o)"
     res = generate_newline(res)
-    res += f"cdef public object create_wrapper_from_{class_name}_ptr(shared_ptr[{class_name}] ptr)"
+    res += f"cdef api object create_wrapper_from_{class_name}_ptr(shared_ptr[{class_name}] ptr)"
     res = generate_newline(res)
 
     return res
