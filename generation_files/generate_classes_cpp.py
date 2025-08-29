@@ -655,6 +655,7 @@ def generate_method_body_virtual(class_, mMethod):
 
 
 def is_static(mMethod):
+
     return mMethod["is_static"]
 
 
@@ -1273,8 +1274,7 @@ def generate_method_switch_args(method):
 def collect_methods(class_, static_methods):
     res = []
     if "methods" in class_:
-        res += list(filter(lambda method: is_static(method) and static_methods or
-                                          not is_static(method) and not static_methods and not has_native_struct(method), class_["methods"]))
+        res += list(filter(lambda method: is_static(method) == static_methods and not has_native_struct(method), class_["methods"]))
 
     if "inherits" in class_:
         res += collect_methods(find_class(class_["inherits"]), static_methods)
@@ -1310,7 +1310,17 @@ def generate_switch_methods(class_):
         if not ("return_value" in method or "return_type" in method):
             continue
         args = generate_method_switch_args(method)
-        res += f"{INDENT*3}case {index}: return Py_None;//py_{pythonize_name(method['name'])}({args});"
+        ret_type = get_ret_value(method)
+        if ret_type in builtin_classes.union(classes).difference({"float", "int", "bool"}):
+            res += f"{INDENT*3}case {index}: return create_wrapper_from_{ret_type}_ptr(py_{pythonize_name(method['name'])}({args}));"
+        elif ret_type  == "int":
+            res += f"{INDENT*3}case {index}: return  PyLong_FromLong(py_{pythonize_name(method['name'])}({args}));"
+        elif ret_type  == "bool":
+            res += f"{INDENT*3}case {index}: return  PyBool_FromLong(py_{pythonize_name(method['name'])}({args}));"
+        elif ret_type  == "float":
+            res += f"{INDENT*3}case {index}: return  PyFloat_FromDouble(py_{pythonize_name(method['name'])}({args}));"
+        else:
+            res += f"{INDENT*3}case {index}: py_{pythonize_name(method['name'])}({args});"
         res = generate_newline(res)
         index += 1
     res += f"{INDENT*2}}}"
@@ -1330,7 +1340,17 @@ def generate_switch_methods(class_):
         if not ("return_value" in method or "return_type" in method):
             res += f"{INDENT * 2}case {index}: py_{pythonize_name(method['name'])}({args}); break;"
         else:
-            res += f"{INDENT * 2}case {index}: return Py_None;"
+            ret_type = get_ret_value(method)
+            if ret_type in builtin_classes.union(classes).difference({"float", "int", "bool"}):
+                res += f"{INDENT * 3}case {index}: return create_wrapper_from_{ret_type}_ptr(py_{pythonize_name(method['name'])}({args}));"
+            elif ret_type == "int":
+                res += f"{INDENT * 3}case {index}: return  PyLong_FromLong(py_{pythonize_name(method['name'])}({args}));"
+            elif ret_type == "bool":
+                res += f"{INDENT * 3}case {index}: return  PyBool_FromLong(py_{pythonize_name(method['name'])}({args}));"
+            elif ret_type == "float":
+                res += f"{INDENT * 3}case {index}: return  PyFloat_FromDouble(py_{pythonize_name(method['name'])}({args}));"
+            else:
+                res += f"{INDENT * 3}case {index}: py_{pythonize_name(method['name'])}({args});"
         res = generate_newline(res)
         index += 1
     res += f"{INDENT*2}}}"
