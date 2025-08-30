@@ -4,6 +4,7 @@ import os
 
 from generate_enums import enumize_name
 from generation_tools import write_if_different
+from py4godot.method_ids import method_ids
 
 INDENT = "  "
 
@@ -88,8 +89,8 @@ def generate_import():
     result = (
               "import py4godot.utils.functools as  functools\n"
               "from py4godot.utils.utils import py_string_to_string_name, py_string_to_string\n"
-              "from py4godot.classes.Object import Object\n"
-              "from py4godot.classes.core import *\n"
+              "from py4godot.py_classes.Object import Object\n"
+              "from py4godot.py_classes.core import *\n"
               "from py4godot.utils.smart_cast import smart_cast, register_cast_function\n")
     return result
 
@@ -203,8 +204,8 @@ def generate_constructors(class_):
 
 
 def generate_class_imports(classes):
-    result = "from py4godot.classes.core import *"
-    result = "import py4godot.classes.core as generated_core"
+    result = "from py4godot.py_classes.core import *"
+    result = "import py4godot.py_classes.core as generated_core"
     result = generate_newline(result)
 
     return result
@@ -637,9 +638,9 @@ def generate_method_body_standard(class_, method):
         result += generate_return_value(class_["name"], method)
         if not is_static(method):
 
-            result += f"{INDENT * 2}{generate_ret_call(method)} = self._ptr.call_with_return({method['hash']},[{generate_method_args(class_, method)}])"
+            result += f"{INDENT * 2}{generate_ret_call(method)} = self._ptr.call_with_return({method_ids['normal_methods'][class_['name']][method['name']]},[{generate_method_args(class_, method)}])"
         else:
-            result += f"{INDENT * 2}{generate_ret_call(method)} = CPPWrapper.call_static_method_with_return({method['hash']},[{generate_method_args(class_, method)}])"
+            result += f"{INDENT * 2}{generate_ret_call(method)} = CPPWrapper.call_static_method_with_return({method_ids['static_methods'][class_['name']][method['name']]},[{generate_method_args(class_, method)}])"
         result = generate_newline(result)
 
         if is_property_getter(class_, method["name"]):
@@ -1355,10 +1356,10 @@ def create_core_classes_set():
 def generate_classes(classes, filename, is_core=False, is_typed_array=False):
     res = generate_import()
     if is_typed_array:
-        res += f"from py4godot.classes.Object import *"
+        res += f"from py4godot.py_classes.Object import *"
         res = generate_newline(res)
 
-        res += f"from py4godot.classes.core import *"
+        res += f"from py4godot.py_classes.core import *"
         res = generate_newline(res)
         classes_to_import = get_classes_to_import(classes)
         for cls in classes_to_import:
@@ -1366,7 +1367,7 @@ def generate_classes(classes, filename, is_core=False, is_typed_array=False):
                 continue
             if should_skip_import(classes[0]["name"], cls):
                 continue
-            res += f"import py4godot.classes.{cls} as py4godot_{cls.lower()} "
+            res += f"import py4godot.py_classes.{cls} as py4godot_{cls.lower()} "
             res = generate_newline(res)
 
     elif not is_core:
@@ -1378,11 +1379,11 @@ def generate_classes(classes, filename, is_core=False, is_typed_array=False):
                 continue
             if should_skip_import(classes[0]["name"], cls):
                 continue
-            res += f"import py4godot.classes.{cls} as py4godot_{cls.lower()} "
+            res += f"import py4godot.py_classes.{cls} as py4godot_{cls.lower()} "
             res = generate_newline(res)
 
     else:
-        res += f"from py4godot.classes.Object import *"
+        res += f"from py4godot.py_classes.Object import *"
         res = generate_newline(res)
     for class_ in classes:
         if (class_["name"] in IGNORED_CLASSES):
@@ -1615,7 +1616,7 @@ def generate_del(class_):
         res += f"{INDENT}def __dealloc__(self):"
         res = generate_newline(res)
         if is_refcounted(class_):
-            res += f"{INDENT * 2}if not is_ptr_null(self.RefCounted_internal_class_ptr) and self.casted_from is None:"
+            res += f"{INDENT * 2}if self.casted_from is None:"
             res = generate_newline(res)
             res += f"{INDENT * 3}self.RefCounted_internal_class_ptr.get().py_destroy_ref()"
             res = generate_newline(res)
@@ -1627,7 +1628,7 @@ def generate_del(class_):
         res = ""
         res += f"{INDENT}def __dealloc__(self):"
         res = generate_newline(res)
-        res += f"{INDENT * 2}if not is_ptr_null(self.{class_['name']}_internal_class_ptr) and self.shouldBeDeleted:"
+        res += f"{INDENT * 2}if self.shouldBeDeleted:"
         res = generate_newline(res)
         res += f"{INDENT * 3}self.{class_['name']}_internal_class_ptr.get().{class_['name']}_py_destroy()"
         res = generate_newline(res)

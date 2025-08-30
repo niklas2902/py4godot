@@ -4,6 +4,7 @@ import os.path
 
 from generate_classes_hpp import get_ret_value, has_native_struct, ungodottype
 from generate_enums import enumize_name
+from py4godot.method_ids import method_ids
 
 INDENT = "  "
 index = 0
@@ -1277,8 +1278,8 @@ def collect_methods(class_, static_methods):
         res += list(filter(lambda method: is_static(method) == static_methods and not has_native_struct(method), class_["methods"]))
 
     if "inherits" in class_:
-        res += collect_methods(find_class(class_["inherits"]), static_methods)
-    res = list(filter (lambda method: is_virtual(method) and not native_structs_in_method(method), res))
+        res = collect_methods(find_class(class_["inherits"]), static_methods) + res
+    res = list(filter (lambda method:  not native_structs_in_method(method), res))
     return res
 
 def generate_switch_methods(class_):
@@ -1294,7 +1295,7 @@ def generate_switch_methods(class_):
     res = generate_newline(res)
     for method in methods:
         args = generate_method_switch_args(method, )
-        res += f"{INDENT*3}case {index}: py_{pythonize_name(method['name'])}({args});break;"
+        res += f"{INDENT*3}case {method_ids['normal_methods'][class_['name']][method['name']]}: py_{pythonize_name(method['name'])}({args});break;"
         res = generate_newline(res)
         index += 1
     res += f"{INDENT*2}}}"
@@ -1307,22 +1308,24 @@ def generate_switch_methods(class_):
     res+= f"{INDENT*2}switch(method_hash){{"
     res = generate_newline(res)
     for method in methods:
-        if not ("return_value" in method or "return_type" in method):
-            continue
+
         args = generate_method_switch_args(method)
+        if not ("return_value" in method or "return_type" in method):
+            res += f"{INDENT*3}case {method_ids['normal_methods'][class_['name']][method['name']]}: py_{pythonize_name(method['name'])}({args}); return Py_None;"
+            res = generate_newline(res)
+            continue
         ret_type = get_ret_value(method)
-        if ret_type in builtin_classes.union(classes).difference({"float", "int", "bool"}):
-            res += f"{INDENT*3}case {index}: return create_wrapper_from_{ret_type}_ptr(py_{pythonize_name(method['name'])}({args}));"
+        if ret_type in builtin_classes.union(classes).difference({"float", "int", "bool"}) or "typedarray" in ret_type.lower():
+            res += f"{INDENT*3}case {method_ids['normal_methods'][class_['name']][method['name']]}: return create_wrapper_from_{untypearray(ret_type)}_ptr(py_{pythonize_name(method['name'])}({args}));"
         elif ret_type  == "int":
-            res += f"{INDENT*3}case {index}: return  PyLong_FromLong(py_{pythonize_name(method['name'])}({args}));"
+            res += f"{INDENT*3}case {method_ids['normal_methods'][class_['name']][method['name']]}: return  PyLong_FromLong(py_{pythonize_name(method['name'])}({args}));"
         elif ret_type  == "bool":
-            res += f"{INDENT*3}case {index}: return  PyBool_FromLong(py_{pythonize_name(method['name'])}({args}));"
+            res += f"{INDENT*3}case {method_ids['normal_methods'][class_['name']][method['name']]}: return  PyBool_FromLong(py_{pythonize_name(method['name'])}({args}));"
         elif ret_type  == "float":
-            res += f"{INDENT*3}case {index}: return  PyFloat_FromDouble(py_{pythonize_name(method['name'])}({args}));"
+            res += f"{INDENT*3}case {method_ids['normal_methods'][class_['name']][method['name']]}: return  PyFloat_FromDouble(py_{pythonize_name(method['name'])}({args}));"
         else:
-            res += f"{INDENT*3}case {index}: py_{pythonize_name(method['name'])}({args});"
+            res += f"{INDENT*3}case {method_ids['normal_methods'][class_['name']][method['name']]}: return py_{pythonize_name(method['name'])}({args});"
         res = generate_newline(res)
-        index += 1
     res += f"{INDENT*2}}}"
     res += f"{INDENT*2}return Py_None;"
     res = generate_newline(res)
@@ -1336,23 +1339,23 @@ def generate_switch_methods(class_):
     res = generate_newline(res)
     static_methods = collect_methods(class_, True)
     for method in static_methods:
+        method_id = method_ids['static_methods'][class_['name']][method['name']]
         args = generate_method_switch_args(method)
         if not ("return_value" in method or "return_type" in method):
-            res += f"{INDENT * 2}case {index}: py_{pythonize_name(method['name'])}({args}); break;"
+            res += f"{INDENT * 2}case {method_id}: py_{pythonize_name(method['name'])}({args}); break;"
         else:
             ret_type = get_ret_value(method)
-            if ret_type in builtin_classes.union(classes).difference({"float", "int", "bool"}):
-                res += f"{INDENT * 3}case {index}: return create_wrapper_from_{ret_type}_ptr(py_{pythonize_name(method['name'])}({args}));"
+            if ret_type in builtin_classes.union(classes).difference({"float", "int", "bool"}) or "typedarray" in ret_type.lower():
+                res += f"{INDENT * 3}case {method_id}: return create_wrapper_from_{untypearray(ret_type)}_ptr(py_{pythonize_name(method['name'])}({args}));"
             elif ret_type == "int":
-                res += f"{INDENT * 3}case {index}: return  PyLong_FromLong(py_{pythonize_name(method['name'])}({args}));"
+                res += f"{INDENT * 3}case {method_id}: return  PyLong_FromLong(py_{pythonize_name(method['name'])}({args}));"
             elif ret_type == "bool":
-                res += f"{INDENT * 3}case {index}: return  PyBool_FromLong(py_{pythonize_name(method['name'])}({args}));"
+                res += f"{INDENT * 3}case {method_id}: return  PyBool_FromLong(py_{pythonize_name(method['name'])}({args}));"
             elif ret_type == "float":
-                res += f"{INDENT * 3}case {index}: return  PyFloat_FromDouble(py_{pythonize_name(method['name'])}({args}));"
+                res += f"{INDENT * 3}case {method_id}: return  PyFloat_FromDouble(py_{pythonize_name(method['name'])}({args}));"
             else:
-                res += f"{INDENT * 3}case {index}: py_{pythonize_name(method['name'])}({args});"
+                res += f"{INDENT * 3}case {method_id}: py_{pythonize_name(method['name'])}({args});"
         res = generate_newline(res)
-        index += 1
     res += f"{INDENT*2}}}"
     res = generate_newline(res)
     res += f"{INDENT * 2}return Py_None;"
