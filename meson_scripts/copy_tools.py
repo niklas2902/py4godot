@@ -14,7 +14,7 @@ def strip_platform(text):
 
 
 def run(platform):
-    # copying all the files from build to the folder of the addon
+    # copying all the files from build to the folder of the add-on
     list_dll = []
     if "windows" in platform:
         list_dll = glob.glob("**/*.dll", recursive=True)
@@ -178,6 +178,15 @@ def copy_experimental(platform):
         else:
             copy(file,
              f"build/final/{platform}/{python_ver}-{platform}/python/lib/{python_ver_short}/site-packages/" + file)
+    if "windows" in platform:
+        copytree("py4godot/py_classes",
+                 f"build/final/{platform}/{python_ver}-{platform}/python/Lib/site-packages/py4godot/py_classes",
+                 dirs_exist_ok=True)
+    else:
+        copytree("py4godot/py_classes",
+                 f"build/final/{platform}/{python_ver}-{platform}/python/lib/{python_ver_short}/site-packages/py4godot/py_classes",
+                 dirs_exist_ok=True)
+
 
 
 def onerror(func, path, exc_info):

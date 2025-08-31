@@ -1,13 +1,13 @@
 # distutils: language=c++
 cimport py4godot.utils.utils as utils
-from py4godot.py_classes.Object import Object as GDObject
+import py4godot.py_classes.Object as obj
 import py4godot.py_classes.core as core
 cdef dict types_dict = {
 int:GDExtensionVariantType.GDEXTENSION_VARIANT_TYPE_INT,
 str:GDExtensionVariantType.GDEXTENSION_VARIANT_TYPE_STRING,
 type(True):GDExtensionVariantType.GDEXTENSION_VARIANT_TYPE_BOOL,
 float:GDExtensionVariantType.GDEXTENSION_VARIANT_TYPE_FLOAT,
-GDObject:GDExtensionVariantType.GDEXTENSION_VARIANT_TYPE_OBJECT,
+obj.Object:GDExtensionVariantType.GDEXTENSION_VARIANT_TYPE_OBJECT,
 core.Vector4:GDExtensionVariantType.GDEXTENSION_VARIANT_TYPE_VECTOR4,
 core.PackedColorArray:GDExtensionVariantType.GDEXTENSION_VARIANT_TYPE_PACKED_COLOR_ARRAY,
 core.Vector2i:GDExtensionVariantType.GDEXTENSION_VARIANT_TYPE_VECTOR2I,

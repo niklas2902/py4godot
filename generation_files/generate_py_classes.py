@@ -89,11 +89,10 @@ def ungodottype(type_):
 def generate_import():
     result = (
               "import py4godot.utils.functools as  functools\n"
-              "from py4godot.utils.utils import py_string_to_string_name, py_string_to_string, gd_string_to_py_string, gd_string_name_to_py_string\n"
-              "from py4godot.py_classes.Object import Object\n"
+              "import py4godot.utils.utils as utils\n"
               "from py4godot.py_classes.core import *\n"
               "from py4godot.utils.smart_cast import smart_cast, register_cast_function\n"
-              "from py4godot.utils.CPPWrapper import call_constructor, CPPWrapper\n"
+              "from py4godot.utils.CPPWrapper import CPPWrapper, constructor, static_method\n"
               "import py4godot.utils.utils as c_utils\n"
 
     )
@@ -167,9 +166,9 @@ def generate_constructor_call_args(class_, constructor):
     for arg in constructor["arguments"]:
         if arg["type"] in classes - IGNORED_CLASSES:
             if arg["type"] == "String":
-                result += f"py_string_to_string({pythonize_name(arg['name'])}), "
+                result += f"utils.py_string_to_string({pythonize_name(arg['name'])}), "
             elif arg["type"] == "StringName" and not should_turn_string_to_nodepath(class_, constructor):
-                result += f"py_stringname_{pythonize_name(arg['name'])}, "
+                result += f"utils.py_stringname_{pythonize_name(arg['name'])}, "
             elif arg["type"] == "NodePath" and not should_turn_string_to_nodepath(class_, constructor):
                 result += f"py_nodepath_{pythonize_name(arg['name'])}, "
             else:
@@ -242,7 +241,7 @@ def generate_return_value(classname, method_):
         elif ret_val.type == "Variant":
             result += f"{INDENT * 2}{ret_val.name} = None"
         elif "typedarray" in ret_val.type:
-            result += (f"{INDENT * 2}{generate_typed_array_name(ret_val.type)} _ret = "
+            result += (f"{INDENT * 2}_ret = "
                        f"py4godot_{generate_typed_array_name(ret_val.type).lower()}.{generate_typed_array_name(ret_val.type)}.__new__("
                        f"py4godot_{generate_typed_array_name(ret_val.type).lower()}.{generate_typed_array_name(ret_val.type)})")
         elif "enum::" in ret_val.type:
@@ -299,7 +298,7 @@ def generate_return_statement(method_):
         else:
             ret_val = ReturnType("_ret", method_['return_type'])
         if ret_val.type == "String":
-            result = f"{INDENT * 2}return gd_string_to_py_string(_ret)"
+            result = f"{INDENT * 2}return utils.gd_string_to_py_string(_ret)"
         elif ret_val.type == "Variant":
             result = f"{INDENT * 2}return _ret"
         else:
@@ -607,7 +606,7 @@ def cast_from_type_to_obj(typename):
 
 def generate_string_arg(arg):
     res = ""
-    res += f"{INDENT * 2}py__string_{pythonize_name(arg['name'])} = py_string_to_string({pythonize_name(arg['name'])})"
+    res += f"{INDENT * 2}py__string_{pythonize_name(arg['name'])} = utils.py_string_to_string({pythonize_name(arg['name'])})"
     res = generate_newline(res)
     res += f"{INDENT * 2}py__string_{pythonize_name(arg['name'])}.shouldBeDeleted = False"
     res = generate_newline(res)
@@ -645,7 +644,7 @@ def generate_method_body_standard(class_, method):
 
             result += f"{INDENT * 2}{generate_ret_call(method)} = self._ptr.call_with_return({method_ids['normal_methods'][class_['name']][method['name']]},[{generate_method_args(class_, method)}])"
         else:
-            result += f"{INDENT * 2}{generate_ret_call(method)} = CPPWrapper.call_static_method_with_return({method_ids['static_methods'][class_['name']][method['name']]},[{generate_method_args(class_, method)}])"
+            result += f"{INDENT * 2}{generate_ret_call(method)} = static_method({method_ids['static_methods'][class_['name']][method['name']]},[{generate_method_args(class_, method)}])"
         result = generate_newline(result)
 
         if is_property_getter(class_, method["name"]):
@@ -666,7 +665,7 @@ def generate_method_body_standard(class_, method):
         if not is_static(method):
             result += f"{INDENT * 2}self._ptr.call_with_return({method_ids['normal_methods'][class_['name']][method['name']]},[{generate_method_args(class_, method)}])"
         else:
-            result += f"{INDENT * 2}CPPWrapper.call_static_method_with_return({method_ids['static_methods'][class_['name']][method['name']]},[{generate_method_args(class_, method)}])"
+            result += f"{INDENT * 2}static_method({method_ids['static_methods'][class_['name']][method['name']]},[{generate_method_args(class_, method)}])"
     return result
 
 def shared_ptr_type(classname):
@@ -688,9 +687,9 @@ def generate_method_args(class_, method):
                 if is_property_setter(class_, method["name"]):
                     res += f"py__string_{pythonize_name(arg['name'])}.String_internal_class_ptr, "
                 else:
-                    res += f"py_string_to_string({pythonize_name(arg['name'])}).{untypearray(arg['type'])}_internal_class_ptr, "
+                    res += f"utils.py_string_to_string({pythonize_name(arg['name'])}).{untypearray(arg['type'])}_internal_class_ptr, "
             elif arg["type"] == "StringName":
-                res += f"py_stringname_{pythonize_name(arg['name'])}.StringName_internal_class_ptr, "
+                res += f"utils.py_stringname_{pythonize_name(arg['name'])}.StringName_internal_class_ptr, "
             elif arg["type"] == "NodePath":
                 res += f"py_nodepath_{pythonize_name(arg['name'])}.NodePath_internal_class_ptr, "
             else:
@@ -749,7 +748,7 @@ def generate_init(class_):
     res = ""
     res += f"{INDENT}def __init__(self):"
     res = generate_newline(res)
-    res += f"{INDENT * 2}self._ptr =  call_constructor({classes_dict[class_['name']]},0, ())"
+    res += f"{INDENT * 2}self._ptr =  constructor({classes_dict[class_['name']]},0, ())"
     res = generate_newline(res)
     return res
 
@@ -784,9 +783,9 @@ def generate_init_signals(cls):
     res = ""
     if "signals" in cls.keys():
         for signal in cls["signals"]:
-            res += f"{INDENT*2}{signal['name']}_name = py_string_to_string_name(\"{signal['name']}\")"
+            res += f"{INDENT*2}{signal['name']}_name = utils.py_string_to_string_name(\"{signal['name']}\")"
             res = generate_newline(res)
-            res += f"{INDENT*2}self.{signal['name']} = BuiltinSignal(self, {signal['name']}_name)"
+            res += f"{INDENT*2}self.{signal['name']} = signals.BuiltinSignal(self, {signal['name']}_name)"
             res = generate_newline(res)
     return res
 def generate_destroy_object_method():
@@ -835,9 +834,9 @@ def generate_get_py_script_method():
     result = ""
     result += f"{INDENT}def get_pyscript(self):"
     result = generate_newline(result)
-    result += f"{INDENT * 2}cdef long long id = self.get_instance_id()"
+    result += f"{INDENT * 2}id = self.get_instance_id()"
     result = generate_newline(result)
-    result += f"{INDENT * 2}cdef object script = <object>get_py_script(id)"
+    result += f"{INDENT * 2}script = c_utils.get_py_script(id)"
     result = generate_newline(result)
     result += f"{INDENT * 2}return script"
     result = generate_newline(result)
@@ -847,11 +846,11 @@ def generate_get_py_script_method():
     result = generate_newline(result)
     result += f"{INDENT}def _import_path(self):"
     result = generate_newline(result)
-    result += f"{INDENT * 2}cdef String _ret = String.__new__(String)"
+    result += f"{INDENT * 2}_ret = String.new0()"
     result = generate_newline(result)
-    result += f"{INDENT * 2}_ret.String_internal_class_ptr = self.Object_internal_class_ptr.get().get_import_path()"
+    result += f"{INDENT * 2}#_ret._ptr = self.Object_internal_class_ptr.get().get_import_path()"
     result = generate_newline(result)
-    result += f"{INDENT * 2}return gd_string_to_py_string(_ret)"
+    result += f"{INDENT * 2}return c_utils.gd_string_to_py_string(_ret)"
 
     result = generate_newline(result)
     result += f"{INDENT}@_import_path.setter"
@@ -1123,7 +1122,7 @@ def import_type(type_, classname):
     elif type_ == "object":  # TODO merge with PyVariant
         return type_
     elif type_ == "Object":
-        return type_
+        return "py4godot_" + type_.lower() + "." + type_
     elif type_ == "str":
         return type_
     elif "TypedArray" in type_:
@@ -1245,7 +1244,7 @@ def generate_constructor(classname):
     res = generate_newline(res)
     res += f"{INDENT * 2}class_ = {classname}.__new__({classname})"
     res = generate_newline(res)
-    res += f"{INDENT * 2}class_._ptr = call_constructor({classes_dict[classname]},0, ())"
+    res += f"{INDENT * 2}class_._ptr = constructor({classes_dict[classname]},0, ())"
     res = generate_newline(res)
 
     res += f"{INDENT * 2}return class_"
@@ -1257,7 +1256,7 @@ def generate_constructor(classname):
     res = generate_newline(res)
     res += f"{INDENT * 2}class_ = {classname}.__new__({classname})"
     res = generate_newline(res)
-    res += f"{INDENT * 2}class_._ptr = call_constructor({classes_dict[classname]},0, ())"
+    res += f"{INDENT * 2}class_._ptr = constructor({classes_dict[classname]},0, ())"
     res = generate_newline(res)
 
     res += f"{INDENT * 2}return class_"
@@ -1267,7 +1266,7 @@ def generate_constructor(classname):
     res = generate_newline(res)
     res += f"{INDENT * 2}if c_utils.shouldCreateObject:"
     res = generate_newline(res)
-    res += f"{INDENT * 3}self._ptr = call_constructor({classes_dict[classname]},0, ())"
+    res += f"{INDENT * 3}self._ptr = constructor({classes_dict[classname]},0, ())"
     res = generate_newline(res)
     return res
 
@@ -1361,7 +1360,6 @@ def create_core_classes_set():
 def generate_classes(classes, filename, is_core=False, is_typed_array=False):
     res = generate_import()
     if is_typed_array:
-        res += f"from py4godot.py_classes.Object import *"
         res = generate_newline(res)
 
         res += f"from py4godot.py_classes.core import *"
@@ -1376,7 +1374,7 @@ def generate_classes(classes, filename, is_core=False, is_typed_array=False):
             res = generate_newline(res)
 
     elif not is_core:
-        res += f"from py4godot.signals import BuiltinSignal"
+        res += f"import py4godot.signals as signals"
         res = generate_newline(res)
         classes_to_import = get_classes_to_import(classes)
         for cls in classes_to_import:
@@ -1386,10 +1384,6 @@ def generate_classes(classes, filename, is_core=False, is_typed_array=False):
                 continue
             res += f"import py4godot.py_classes.{cls} as py4godot_{cls.lower()} "
             res = generate_newline(res)
-
-    else:
-        res += f"from py4godot.py_classes.Object import *"
-        res = generate_newline(res)
     for class_ in classes:
         if (class_["name"] in IGNORED_CLASSES):
             continue
@@ -1687,7 +1681,7 @@ def generate_cast(class_):
     res = ""
     res += f"{INDENT}@staticmethod"
     res = generate_newline(res)
-    res += f"{INDENT}def cast(other:Object):"
+    res += f"{INDENT}def cast(other:'Object'):"
     res = generate_newline(res)
     res += f"{INDENT * 2}assert other != None # Object to be casted must not be None"
     res = generate_newline(res)
@@ -1704,7 +1698,7 @@ def generate_cast(class_):
 
     res += f"{INDENT}@staticmethod"
     res = generate_newline(res)
-    res += f"{INDENT}def cast_without_reference(other: Object):"
+    res += f"{INDENT}def cast_without_reference(other: 'Object'):"
     res = generate_newline(res)
     res += f"{INDENT * 2}assert other != None # Object to be casted must not be None"
     res = generate_newline(res)
@@ -1721,9 +1715,9 @@ def generate_str_method(class_):
     res += f"{INDENT}def __str__(self):"
     res = generate_newline(res)
     if class_["name"] == "String":
-        res += f"{INDENT*2}return gd_string_to_py_string(self)"
+        res += f"{INDENT*2}return utils.gd_string_to_py_string(self)"
     if class_["name"] == "StringName":
-        res += f"{INDENT*2}return gd_string_name_to_py_string(self)"
+        res += f"{INDENT*2}return utils.gd_string_name_to_py_string(self)"
     res = generate_newline(res)
     return res
 

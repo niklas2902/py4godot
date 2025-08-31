@@ -2,8 +2,8 @@
 import inspect
 from libcpp.memory cimport make_shared
 
-from py4godot.py_classes.Object import Object
-from py4godot.py_classes.core import Callable
+import py4godot.py_classes.Object as obj
+from py4godot.py_classes.core import Callable, Signal
 from py4godot.utils.utils cimport *
 import py4godot.pluginscript_api.utils.annotations as annotations
 from py4godot.pluginscript_api.utils.helpers cimport get_variant_type
@@ -87,7 +87,7 @@ class BuiltinSignal(Signal):
         self.parent().connect(self.signal_name, callable)
 
     def parent(self):
-        cdef object o = Object.__new__(Object)
+        cdef object o = obj.Object.__new__(obj.Object)
         o.Object_internal_class_ptr = self.parent_ptr
         return o
 

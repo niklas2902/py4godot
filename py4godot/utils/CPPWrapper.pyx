@@ -1,5 +1,10 @@
 # distutils: language=c++
 
+def static_method(class_number: int, hash: int, args:tuple):
+    return call_static_method(class_number, hash, args)
+
+def constructor(class_number: int, constructor_number: int, args:tuple):
+    return call_constructor(class_number, constructor_number, args)
 
 cdef class CPPWrapper:
     cdef call_without_return(self, int method_hash, tuple args_tuple):
