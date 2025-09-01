@@ -746,6 +746,7 @@ def generate_init(class_):
     res = generate_newline(res)
     res += f"{INDENT * 2}self._ptr =  constructor({classes_dict[class_['name']]},0, ())"
     res = generate_newline(res)
+
     return res
 
 def is_refcounted(class_):
@@ -1260,6 +1261,8 @@ def generate_constructor(classname):
 
     res += f"{INDENT}def __init__(self):"
     res = generate_newline(res)
+    res += f"{INDENT * 2}self._ptr =  CPP{class_['name']}Wrapper()"
+    res = generate_newline(res)
     res += f"{INDENT * 2}if c_utils.shouldCreateObject:"
     res = generate_newline(res)
     res += f"{INDENT * 3}self._ptr = constructor({classes_dict[classname]},0, ())"
@@ -1388,6 +1391,10 @@ def generate_classes(classes, filename, is_core=False, is_typed_array=False):
     for class_ in classes:
         if (class_["name"] in IGNORED_CLASSES):
             continue
+
+
+        res += f"from py4godot.wrappers.wrappers import CPP{class_['name']}Wrapper"
+        res = generate_newline(res)
         res = generate_newline(res)
         if is_singleton(class_["name"]):
             res += f"_{class_['name']}_singleton_instance = None"

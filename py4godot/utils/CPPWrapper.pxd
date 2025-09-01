@@ -7,6 +7,7 @@ cdef extern from "py4godot/cppclasses/static_methods.h" namespace "godot":
 cdef class CPPWrapper:
     cdef call_without_return(self, int method_hash, tuple args)
     cdef call_with_return(self, int method_hash, tuple args)
+    cdef set_gdowner(self, void* godot_owner)
 
     @staticmethod
     cdef call_new(self, int number, tuple args)

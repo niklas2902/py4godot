@@ -63,7 +63,9 @@ def generate_import():
 def generate_wrapper(class_name):
     res = f"cdef class CPP{class_name}Wrapper(CPPWrapper):"
     res = generate_newline(res)
-    res += f"{INDENT}pass"
+    res += f"{INDENT}cdef set_gdowner(self, void* godot_owner):"
+    res = generate_newline(res)
+    res += f"{INDENT*2}pass#self._ptr.get().set_godot_owner(godot_owner)"
     res = generate_newline(res)
 
     res += f"cdef api shared_ptr[{class_name}] extract_ptr_from_{class_name}Wrapper(object o):"
@@ -89,6 +91,8 @@ def generate_wrapper_pxd(class_name):
     res = f"cdef class CPP{class_name}Wrapper(CPPWrapper):"
     res = generate_newline(res)
     res += f"{INDENT}cdef shared_ptr[{class_name}] _ptr"
+    res = generate_newline(res)
+    res += f"{INDENT}cdef set_gdowner(self, void* godot_owner)"
     res = generate_newline(res)
     res += f"cdef api shared_ptr[{class_name}] extract_ptr_from_{class_name}Wrapper(object o)"
     res = generate_newline(res)

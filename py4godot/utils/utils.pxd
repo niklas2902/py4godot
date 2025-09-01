@@ -23,9 +23,9 @@ cdef extern from "py4godot/cpputils/utils.h":
 cdef extern from "py4godot/cpputils/ScriptHolder.h":
     PyObject* get_py_script(int id)
 cdef object py_c_string_to_string_name(char* string)
-cdef object py_string_to_string_name(str string)
+cpdef object py_string_to_string_name(str string)
 cdef object py_c_string_to_string(char* string)
-cdef object py_string_to_string(str string)
+cpdef object py_string_to_string(str string)
 cdef unicode gd_string_to_py_string(object string)
 cdef unicode gd_string_to_py_string_instance(object string)
 cdef unicode gd_string_name_to_py_string(object string_name)

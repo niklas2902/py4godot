@@ -7,7 +7,7 @@ from libc.stdlib cimport malloc, free
 
 shouldCreateObject = True
 
-cdef object py_string_to_string_name(str string):
+cpdef object py_string_to_string_name(str string):
     cdef bytes encoded = string.encode("utf-8")
     cdef const char * c_str = encoded
     return py_c_string_to_string_name(c_str)
@@ -18,7 +18,7 @@ cdef object py_c_string_to_string_name(char* string):
     gd_string_name._ptr = c_string_to_string_name_ptr(string)
     return gd_string_name
 
-cdef object py_string_to_string(str string):
+cpdef object py_string_to_string(str string):
     cdef bytes encoded = string.encode("utf-8")
     cdef const char * c_str = encoded
     return py_c_string_to_string(c_str)
