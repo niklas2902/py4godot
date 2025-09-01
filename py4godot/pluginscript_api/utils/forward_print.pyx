@@ -1,7 +1,7 @@
 # distutils: language=c++
 import sys
-from py4godot.functions import print as gdprint
-from py4godot.functions import printerr as gdprinterr
+#from py4godot.functions import print as gdprint
+#from py4godot.functions import printerr as gdprinterr
 import sys
 
 welcome_text="""
@@ -26,7 +26,8 @@ class CustomPrint:
     # Now, when you use print, it will write to your_custom_function
     def custom_print(self, text):
         # Add your custom logic here
-        gdprint("debug", text.strip())
+        pass
+        #gdprint("debug", text.strip())
 
     def flush(self):
         # Flush method to ensure compatibility with sys.stdout
@@ -43,7 +44,8 @@ class CustomPrintError:
     # Now, when you use print, it will write to your_custom_function
     def custom_print(self, text):
         # Add your custom logic here
-        gdprinterr("debug", text.strip())
+        pass
+        #gdprinterr("debug", text.strip())
 
     def flush(self):
         # Flush method to ensure compatibility with sys.stdout

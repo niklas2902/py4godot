@@ -68,7 +68,7 @@ def generate_wrapper(class_name):
 
     res += f"cdef api shared_ptr[{class_name}] extract_ptr_from_{class_name}Wrapper(object o):"
     res = generate_newline(res)
-    res += f"{INDENT}cdef CPP{class_name}Wrapper wrapper = <CPP{class_name}Wrapper>(object.wrapper)"
+    res += f"{INDENT}cdef CPP{class_name}Wrapper wrapper = <CPP{class_name}Wrapper>(o)"
     res = generate_newline(res)
     res += f"{INDENT}cdef shared_ptr[{class_name}] ptr = wrapper._ptr"
     res = generate_newline(res)
@@ -95,6 +95,24 @@ def generate_wrapper_pxd(class_name):
     res += f"cdef api object create_wrapper_from_{class_name}_ptr(shared_ptr[{class_name}] ptr)"
     res = generate_newline(res)
 
+    return res
+
+def generate_wrapper_header(class_name):
+    res = ""
+    res += f"std::shared_ptr<godot::{class_name}> wrapper__extract_ptr_from_{class_name}Wrapper(PyObject* object);"
+    res = generate_newline(res)
+    res += f"PyObject* wrapper__create_wrapper_from_{class_name}_ptr(std::shared_ptr<godot::{class_name}> ptr);"
+    res = generate_newline(res)
+    return res
+
+
+def generate_wrapper_source(class_name):
+    res = ""
+    res = generate_newline(res)
+    res += f"std::shared_ptr<godot::{class_name}> wrapper__extract_ptr_from_{class_name}Wrapper(PyObject* object){{return extract_ptr_from_{class_name}Wrapper(object);}};"
+    res = generate_newline(res)
+    res += f"PyObject* wrapper__create_wrapper_from_{class_name}_ptr(std::shared_ptr<godot::{class_name}> ptr){{return create_wrapper_from_{class_name}_ptr(ptr);}};"
+    res = generate_newline(res)
     return res
 
 
@@ -136,3 +154,37 @@ if __name__ == "__main__":
                 res += generate_wrapper(cls["name"])
                 res = generate_newline(res)
         write_if_different("py4godot/wrappers/wrappers.pyx", res)
+
+        all_classes = arrays + obj['classes'] + obj["builtin_classes"]
+        res = "#pragma once\n#include \"Python.h\"\n#include \"py4godot/cppclasses/class_defs.h\"\n"
+        res = generate_newline(res)
+        res += "void init_wrappers();"
+        res = generate_newline(res)
+        for cls in all_classes:
+            if cls["name"] not in IGNORED_CLASSES:
+                res += generate_wrapper_header(cls["name"])
+                res = generate_newline(res)
+        write_if_different("py4godot/wrappers/wrappers_wrapper.h", res)
+
+
+
+        res = '#include "py4godot/wrappers/wrappers_wrapper.h"'
+        res = generate_newline(res)
+        for cls in all_classes:
+            if cls["name"] not in IGNORED_CLASSES and "typedarray" in cls["name"].lower():
+                res += f'#include "py4godot/cppclasses/typedarrays/{cls["name"]}.h"'
+                res = generate_newline(res)
+            elif cls["name"] in classes - set(builtin_classes):
+                res += f'#include "py4godot/cppclasses/{cls["name"]}/{cls["name"]}.h"'
+                res = generate_newline(res)
+
+        res += '#include "py4godot/wrappers/wrappers_api.h"'
+        res = generate_newline(res)
+        res += "void init_wrappers(){import_py4godot__wrappers__wrappers();}"
+        res = generate_newline(res)
+
+        for cls in all_classes:
+            if cls["name"] not in IGNORED_CLASSES:
+                res += generate_wrapper_source(cls["name"])
+                res = generate_newline(res)
+        write_if_different("py4godot/wrappers/wrappers_wrapper.cpp", res)

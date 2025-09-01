@@ -10,7 +10,7 @@ if __name__=="__main__":
                 and not entry.startswith("venv") and not entry.startswith('tests') and not entry.startswith("meson_cache")):
             if "cppclasses" in entry or "test_bridge.cpp"  in entry or "main.cpp" in entry or "functions.cpp" in entry or "PyLanguage.cpp" in entry or \
                 "api.cpp" in entry or "PyScriptExtension.cpp" in entry or "PyResourceFormatSaver.cpp" in entry or\
-                    "PyResourceFormatLoader.cpp" in entry or "classes" in entry or "cppcore" in entry or "cpputils" in entry:
+                    "PyResourceFormatLoader.cpp" in entry or "classes" in entry or "cppcore" in entry or "cpputils" in entry or "wrappers_wrapper.cpp" in entry:
                 if "classes" in entry and not "cppclasses" in entry:
                     continue
                 if "functions" in entry and not "godot_bindings" in entry:

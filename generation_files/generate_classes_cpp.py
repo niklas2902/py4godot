@@ -83,7 +83,7 @@ def generate_import(class_, is_core):
 #include "py4godot/cpputils/utils.h"
 #include "py4godot/cppclasses/generated4_core.h"
 #include "py4godot/godot_bindings/main.h"
-#include "py4godot/wrappers/wrappers_api.h"
+#include "py4godot/wrappers/wrappers_wrapper.h"
 #include <stdlib.h>
 #include <memory>
 '''
@@ -98,7 +98,8 @@ def generate_import(class_, is_core):
         return res
 
     result = f'#include "py4godot/cpputils/utils.h"\n' \
-             f'#include "py4godot/cppclasses/generated4_core.h"\n'
+             f'#include "py4godot/cppclasses/generated4_core.h"\n'\
+             f'#include "py4godot/wrappers/wrappers_wrapper.h"\n'
     if "typedarray" in class_["name"].lower():
         result += f'#include "py4godot/cppclasses/typedarrays/{class_["name"]}.h"\n'
     f'#include <memory>"\n'
@@ -1252,11 +1253,11 @@ def generate_common_methods(class_):
 
 def generate_method_switch_args(method):
     res = ""
-    index = 1
+    index = 0
     if "arguments" in method:
         for arg in method["arguments"]:
             if arg["type"] in classes or "typedarray" in arg["type"].lower():
-                res += f"extract_ptr_from_{untypearray(arg['type'])}Wrapper(PyTuple_GetItem(args_tuple, {index})), "
+                res += f"wrapper__extract_ptr_from_{untypearray(arg['type'])}Wrapper(PyTuple_GetItem(args_tuple, {index})), "
             elif arg["type"] == "int":
                 res += f"PyLong_AsLong(PyTuple_GetItem(args_tuple, {index})), "
             elif arg["type"] == "bool":
@@ -1316,7 +1317,7 @@ def generate_switch_methods(class_):
             continue
         ret_type = get_ret_value(method)
         if ret_type in builtin_classes.union(classes).difference({"float", "int", "bool"}) or "typedarray" in ret_type.lower():
-            res += f"{INDENT*3}case {method_ids['normal_methods'][class_['name']][method['name']]}: return create_wrapper_from_{untypearray(ret_type)}_ptr(py_{pythonize_name(method['name'])}({args}));"
+            res += f"{INDENT*3}case {method_ids['normal_methods'][class_['name']][method['name']]}: return wrapper__create_wrapper_from_{untypearray(ret_type)}_ptr(py_{pythonize_name(method['name'])}({args}));"
         elif ret_type  == "int":
             res += f"{INDENT*3}case {method_ids['normal_methods'][class_['name']][method['name']]}: return  PyLong_FromLong(py_{pythonize_name(method['name'])}({args}));"
         elif ret_type  == "bool":
@@ -1346,7 +1347,7 @@ def generate_switch_methods(class_):
         else:
             ret_type = get_ret_value(method)
             if ret_type in builtin_classes.union(classes).difference({"float", "int", "bool"}) or "typedarray" in ret_type.lower():
-                res += f"{INDENT * 3}case {method_id}: return create_wrapper_from_{untypearray(ret_type)}_ptr(py_{pythonize_name(method['name'])}({args}));"
+                res += f"{INDENT * 3}case {method_id}: return wrapper__create_wrapper_from_{untypearray(ret_type)}_ptr(py_{pythonize_name(method['name'])}({args}));"
             elif ret_type == "int":
                 res += f"{INDENT * 3}case {method_id}: return  PyLong_FromLong(py_{pythonize_name(method['name'])}({args}));"
             elif ret_type == "bool":
@@ -1370,14 +1371,14 @@ def generate_switch_methods(class_):
         if is_singleton(class_["name"]):
             res += f"{INDENT * 2}return Py_None;"
         else:
-            res += f"{INDENT * 2}return create_wrapper_from_{class_['name']}_ptr({class_['name']}::constructor());"
+            res += f"{INDENT * 2}return wrapper__create_wrapper_from_{class_['name']}_ptr({class_['name']}::constructor());"
     elif class_["name"] in builtin_classes:
         res += f"{INDENT*2} switch(method_hash){{"
         res = generate_newline(res)
         index = 0
         for constructor in class_["constructors"]:
             args = generate_method_switch_args(constructor)
-            res += f"{INDENT*3}case {index}: {class_['name']}::py_new{index}({args});"
+            res += f"{INDENT*3}case {index}: return wrapper__create_wrapper_from_{class_['name']}_ptr({class_['name']}::py_new{index}({args}));"
             res = generate_newline(res)
             index += 1
         res = generate_newline(res)

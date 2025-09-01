@@ -203,7 +203,7 @@ def generate_constructors(class_):
             res += generate_string_name_or_node_path_args(constructor["arguments"])
             res = generate_newline(res)
 
-        res += f"{INDENT*2}_class._ptr = call_constructor({constructor['index']}, {constructor['index']}, tuple({generate_constructor_call_args(class_, constructor)}))"
+        res += f"{INDENT*2}_class._ptr = constructor({classes_dict[class_['name']]}, {constructor['index']}, tuple([{generate_constructor_call_args(class_, constructor)}]))"
         res = generate_newline(res)
         res += f"{INDENT * 2}return _class"
         res = generate_newline(res)
@@ -237,7 +237,7 @@ def generate_return_value(classname, method_):
             if ret_val.type in builtin_classes.union({"Object"}) or ret_val.type == classname:
                 result += f"{INDENT * 2}{ret_val.name} = {ret_val.type}.__new__({ret_val.type})"
             else:
-                result += f"{INDENT * 2}{ret_val.name} = py4godot_{ret_val.type.lower()}.{ret_val.type}.__new__(py4godot_{ret_val.type.lower()}.{ret_val.type})"
+                result += f"{INDENT * 2}{ret_val.name} = py4godot_object.Object.__new__(py4godot_object.Object) #Smart casted to: {ret_val.type}"
         elif ret_val.type == "Variant":
             result += f"{INDENT * 2}{ret_val.name} = None"
         elif "typedarray" in ret_val.type:
@@ -652,10 +652,6 @@ def generate_method_body_standard(class_, method):
             ret_val = None
             if ("return_value" in method.keys()):
                 ret_val = ReturnType("_ret", method['return_value']['type'])
-            else:
-                ret_val = ReturnType("_ret", method['return_type'])
-            if ret_val.type == "Variant":
-                result += f"{INDENT * 2}self.py__{property_name} = <object>_ret"
             else:
                 result += f"{INDENT * 2}self.py__{property_name} = _ret"
             result = generate_newline(result)
@@ -1376,11 +1372,16 @@ def generate_classes(classes, filename, is_core=False, is_typed_array=False):
     elif not is_core:
         res += f"import py4godot.signals as signals"
         res = generate_newline(res)
+        if "Object" not in [class_["name"] for class_ in classes]:
+            res += f"import py4godot.py_classes.Object as py4godot_object"
+        res = generate_newline(res)
         classes_to_import = get_classes_to_import(classes)
         for cls in classes_to_import:
             if cls in [class_["name"] for class_ in classes]:
                 continue
             if should_skip_import(classes[0]["name"], cls):
+                continue
+            if cls in [cls["name"] for cls in obj["classes"]] and cls not in [class_["inherits"] for class_ in classes]:
                 continue
             res += f"import py4godot.py_classes.{cls} as py4godot_{cls.lower()} "
             res = generate_newline(res)

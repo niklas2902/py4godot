@@ -216,19 +216,65 @@ void c_free_func(GDExtensionScriptInstanceDataPtr p_instance){
 }
 
 
+void handle_python_error_instance(PyObject* ptype, PyObject* pvalue, PyObject* ptraceback)
+{
+    // Retrieve the error type and value (already handled in your code)
+    PyObject* str_exc_type = PyObject_Repr(pvalue); // Exception as a unicode object
+    PyObject* pyStr = PyUnicode_AsEncodedString(str_exc_type, "utf-8", "Error ~");
+    char* strExcType = PyBytes_AS_STRING(pyStr);
+
+    // Print the exception type
+    print_error_user(strExcType);
+
+    // Use the Python traceback module to format the traceback object
+    PyObject* traceback_module = PyImport_ImportModule("traceback");
+    if (traceback_module != NULL) {
+        PyObject* traceback_list = PyObject_CallMethod(
+            traceback_module,
+            "format_exception",
+            "OOO",
+            ptype, pvalue, ptraceback
+        );
+
+        // Join the traceback list into a single string
+        if (traceback_list != NULL) {
+            PyObject* str_traceback = PyUnicode_Join(
+                PyUnicode_FromString(""),
+                traceback_list
+            );
+
+            if (str_traceback != NULL) {
+                // Convert traceback to a C string and print it
+                PyObject* pyStr_tb = PyUnicode_AsEncodedString(str_traceback, "utf-8", "Error ~");
+                char* traceback_str = PyBytes_AS_STRING(pyStr_tb);
+                print_error_user(traceback_str); // Print the formatted traceback
+
+                Py_XDECREF(pyStr_tb);
+                Py_XDECREF(str_traceback);
+            }
+            Py_XDECREF(traceback_list);
+        }
+        Py_XDECREF(traceback_module);
+    }
+
+    // Clean up the exception objects
+    Py_XDECREF(pyStr);
+    Py_XDECREF(str_exc_type);
+
+    assert(false);
+    return;
+}
+
 void init_instance(GDExtensionScriptInstanceInfo* native_script_instance, bool is_placeholder){
     print_error("init_instance");
     auto gil_state = PyGILState_Ensure();
     import_py4godot__script_instance__PyScriptInstance();
     if (PyErr_Occurred())
     {
-        PyObject *ptype, *pvalue, *ptraceback;
+        PyObject* ptype, * pvalue, * ptraceback;
         PyErr_Fetch(&ptype, &pvalue, &ptraceback);
+        handle_python_error_instance(ptype, pvalue, ptraceback);
 
-        PyObject* str_exc_type = PyObject_Repr(pvalue); //Now a unicode
-        PyObject* pyStr = PyUnicode_AsEncodedString(str_exc_type, "utf-8","Error ~");
-        const char *strExcType = PyBytes_AS_STRING(pyStr);
-        PyErr_Print();
         assert(false);
         PyGILState_Release(gil_state);
         return;

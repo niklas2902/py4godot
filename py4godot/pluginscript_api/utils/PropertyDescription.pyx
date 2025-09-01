@@ -14,6 +14,7 @@ cdef class PropertyDescription:
         self.bname = self.name.encode("utf-8")
         self.cname = self.bname
         self.gd_name = py_c_string_to_string_name(self.cname)
+        self.class_name = py_string_to_string_name("")#TODO minimize
 
         self.type_ = get_variant_type(type_)
         self.hint = hint.get_hint()

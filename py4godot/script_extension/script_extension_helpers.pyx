@@ -1,14 +1,14 @@
 # distutils: language=c++
-from py4godot.classes.core import StringName
+from py4godot.py_classes.core import StringName
 from py4godot.signals import GDSignal
-from py4godot.classes.core import Dictionary
+from py4godot.py_classes.core import Dictionary
 from py4godot.wrappers.wrappers cimport create_wrapper_from_Dictionary_ptr
 from py4godot.classes.cpp_bridge cimport Dictionary as BridgeDictionary
 from py4godot.utils.print_tools import *
 import traceback
 from cpython cimport PyObject
 from py4godot.utils.utils cimport *
-cimport py4godot.utils.utils as py_utils
+import py4godot.utils.utils as py_utils
 from libcpp.vector cimport vector
 from cpython.unicode cimport PyUnicode_AsUTF8, PyUnicode_Check
 from libcpp.string cimport string

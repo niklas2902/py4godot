@@ -3,7 +3,7 @@
 def static_method(class_number: int, hash: int, args:tuple):
     return call_static_method(class_number, hash, args)
 
-def constructor(class_number: int, constructor_number: int, args:tuple):
+def constructor(int class_number, int constructor_number, tuple args):
     return call_constructor(class_number, constructor_number, args)
 
 cdef class CPPWrapper:

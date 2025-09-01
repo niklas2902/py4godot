@@ -5,6 +5,8 @@ from py4godot.utils.print_tools import *
 from py4godot.utils.test_utils cimport *
 from libc.stdlib cimport malloc, free
 
+shouldCreateObject = True
+
 cdef object py_string_to_string_name(str string):
     cdef bytes encoded = string.encode("utf-8")
     cdef const char * c_str = encoded
