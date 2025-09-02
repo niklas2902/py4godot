@@ -166,13 +166,13 @@ def generate_constructor_call_args(class_, constructor):
     for arg in constructor["arguments"]:
         if arg["type"] in classes - IGNORED_CLASSES:
             if arg["type"] == "String":
-                result += f"utils.py_string_to_string({pythonize_name(arg['name'])}), "
+                result += f"utils.py_string_to_string({pythonize_name(arg['name'])})._ptr, "
             elif arg["type"] == "StringName" and not should_turn_string_to_nodepath(class_, constructor):
-                result += f"utils.py_stringname_{pythonize_name(arg['name'])}, "
+                result += f"utils.py_stringname_{pythonize_name(arg['name'])}._ptr, "
             elif arg["type"] == "NodePath" and not should_turn_string_to_nodepath(class_, constructor):
-                result += f"py_nodepath_{pythonize_name(arg['name'])}, "
+                result += f"py_nodepath_{pythonize_name(arg['name'])}._ptr, "
             else:
-                result += f"{pythonize_name(arg['name'])}, "
+                result += f"{pythonize_name(arg['name'])}._ptr, "
         elif arg["type"] == "Variant":
             result += f"{pythonize_name(arg['name'])}, "
         else:
@@ -642,9 +642,9 @@ def generate_method_body_standard(class_, method):
         result += generate_return_value(class_["name"], method)
         if not is_static(method):
 
-            result += f"{INDENT * 2}{generate_ret_call(method)} = self._ptr.call_with_return({method_ids['normal_methods'][class_['name']][method['name']]},[{generate_method_args(class_, method)}])"
+            result += f"{INDENT * 2}{generate_ret_call(method)} = self._ptr.call_with_return({method_ids['normal_methods'][class_['name']][method['name']]},tuple([{generate_method_args(class_, method)}]))"
         else:
-            result += f"{INDENT * 2}{generate_ret_call(method)} = static_method({method_ids['static_methods'][class_['name']][method['name']]},[{generate_method_args(class_, method)}])"
+            result += f"{INDENT * 2}{generate_ret_call(method)} = static_method({method_ids['static_methods'][class_['name']][method['name']]},tuple([{generate_method_args(class_, method)}]))"
         result = generate_newline(result)
 
         if is_property_getter(class_, method["name"]):
@@ -659,9 +659,9 @@ def generate_method_body_standard(class_, method):
         result += generate_return_statement(method)
     else:
         if not is_static(method):
-            result += f"{INDENT * 2}self._ptr.call_with_return({method_ids['normal_methods'][class_['name']][method['name']]},[{generate_method_args(class_, method)}])"
+            result += f"{INDENT * 2}self._ptr.call_with_return({method_ids['normal_methods'][class_['name']][method['name']]},tuple([{generate_method_args(class_, method)}]))"
         else:
-            result += f"{INDENT * 2}static_method({method_ids['static_methods'][class_['name']][method['name']]},[{generate_method_args(class_, method)}])"
+            result += f"{INDENT * 2}static_method({method_ids['static_methods'][class_['name']][method['name']]},tuple([{generate_method_args(class_, method)}]))"
     return result
 
 def shared_ptr_type(classname):
@@ -677,21 +677,21 @@ def generate_method_args(class_, method):
         return res
     for arg in method["arguments"]:
         if untypearray(arg["type"]) in classes - IGNORED_CLASSES - builtin_classes:
-            res += f"{pythonize_name(arg['name'])}.{untypearray(arg['type'])}_internal_class_ptr if {pythonize_name(arg['name'])} != None else {pythonize_name(arg['name'])}.{untypearray(arg['type'])}_internal_class_ptr, " # Todo: implement conditional
+            res += f"{pythonize_name(arg['name'])}.{untypearray(arg['type'])}_internal_class_ptr if {pythonize_name(arg['name'])} != None else {pythonize_name(arg['name'])}._ptr, " # Todo: implement conditional
         elif untypearray(arg["type"]) in builtin_classes - IGNORED_CLASSES:
             if arg["type"] == "String":
                 if is_property_setter(class_, method["name"]):
-                    res += f"py__string_{pythonize_name(arg['name'])}.String_internal_class_ptr, "
+                    res += f"py__string_{pythonize_name(arg['name'])}._ptr, "
                 else:
-                    res += f"utils.py_string_to_string({pythonize_name(arg['name'])}).{untypearray(arg['type'])}_internal_class_ptr, "
+                    res += f"utils.py_string_to_string({pythonize_name(arg['name'])}).{untypearray(arg['type'])}_ptr, "
             elif arg["type"] == "StringName":
-                res += f"utils.py_stringname_{pythonize_name(arg['name'])}.StringName_internal_class_ptr, "
+                res += f"utils.py_stringname_{pythonize_name(arg['name'])}._ptr, "
             elif arg["type"] == "NodePath":
-                res += f"py_nodepath_{pythonize_name(arg['name'])}.NodePath_internal_class_ptr, "
+                res += f"py_nodepath_{pythonize_name(arg['name'])}._ptr, "
             else:
-                res += f"{pythonize_name(arg['name'])}.{untypearray(arg['type'])}_internal_class_ptr, "
+                res += f"{pythonize_name(arg['name'])}._ptr, "
         elif "TypedArray" in untypearray(arg["type"]):
-            res += f"{pythonize_name(arg['name'])}.{untypearray(arg['type'])}_internal_class_ptr, "
+            res += f"{pythonize_name(arg['name'])}._ptr, "
         elif arg["type"] == "Variant":
             res += f"{(pythonize_name(arg['name']))}, "
         else:
@@ -901,7 +901,7 @@ def generate_member_getter(class_, member):
     res = generate_newline(res)
 
     body = ""
-    body += f"{INDENT * 2}_ret = self.switch_call_with_return(1, [])"
+    body += f"{INDENT * 2}_ret = self.switch_call_with_return(1, ())"
     body = generate_newline(body)
     body += f"{INDENT * 2}return _ret"
     body = generate_newline(body)
@@ -1455,9 +1455,7 @@ def generate_dictionary_get_item():
     res = generate_newline(res)
     res += f"{INDENT * 2}o = None"
     res = generate_newline(res)
-    res += f"{INDENT * 2}if not is_none(pyobject):"
-    res = generate_newline(res)
-    res += f"{INDENT * 3}o = pyobject"
+    res += f"{INDENT * 2}o = pyobject"
     res = generate_newline(res)
     res += f"{INDENT * 2}return o"
     return res

@@ -68,6 +68,17 @@ def generate_wrapper(class_name):
     res += f"{INDENT*2}pass#self._ptr.get().set_godot_owner(godot_owner)"
     res = generate_newline(res)
 
+    res += f"{INDENT}cpdef call_without_return(self, int method_hash, tuple args_tuple):"
+    res = generate_newline(res)
+    res += f"{INDENT*2}self._ptr.get().switch_call(method_hash, <PyObject*>args_tuple)"
+    res = generate_newline(res)
+
+    res += f"{INDENT}cpdef call_with_return(self, int method_hash, tuple args_tuple):"
+    res = generate_newline(res)
+    res += f"{INDENT*2}return <object>self._ptr.get().switch_call_return(method_hash, <PyObject*>args_tuple)"
+    res = generate_newline(res)
+
+
     res += f"cdef api shared_ptr[{class_name}] extract_ptr_from_{class_name}Wrapper(object o):"
     res = generate_newline(res)
     res += f"{INDENT}cdef CPP{class_name}Wrapper wrapper = <CPP{class_name}Wrapper>(o)"
@@ -94,6 +105,11 @@ def generate_wrapper_pxd(class_name):
     res = generate_newline(res)
     res += f"{INDENT}cdef set_gdowner(self, void* godot_owner)"
     res = generate_newline(res)
+    res += f"{INDENT}cpdef call_without_return(self, int method_hash, tuple args_tuple)"
+    res = generate_newline(res)
+    res += f"{INDENT}cpdef call_with_return(self, int method_hash, tuple args_tuple)"
+    res = generate_newline(res)
+
     res += f"cdef api shared_ptr[{class_name}] extract_ptr_from_{class_name}Wrapper(object o)"
     res = generate_newline(res)
     res += f"cdef api object create_wrapper_from_{class_name}_ptr(shared_ptr[{class_name}] ptr)"
