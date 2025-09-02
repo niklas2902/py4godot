@@ -70,7 +70,7 @@ cdef api void create_signals(PyObject* instance, vector[shared_ptr[BridgeDiction
         for signal_ind in range(signals.size()):
             py_signal._ptr = create_wrapper_from_Dictionary_ptr(signals[signal_ind])
             gd_name = StringName.new2("name")
-            py_name = str(py_signal["name"].substr(0))
+            py_name = str(py_signal.get("name").substr(0))
             signal = GDSignal.new2(py_instance, StringName.new2(py_name))
             setattr(py_instance, py_name, signal)
 

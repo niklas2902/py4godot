@@ -44,7 +44,7 @@ cdef unicode gd_string_to_py_string_instance(object string):
         print_error("error:" + str(e))
     return py_string
 
-cdef unicode gd_string_name_to_py_string(object string):
+cpdef unicode gd_string_name_to_py_string(object string):
     cdef CPPStringNameWrapper wrapper = <CPPStringNameWrapper>(string._ptr)
     cdef shared_ptr[bridge.StringName] internal_string_name = wrapper._ptr
     cdef char* c_str
@@ -59,7 +59,7 @@ cdef unicode gd_string_name_to_py_string(object string):
         print_error("error:" + str(e))
     return py_string
 
-cdef unicode gd_string_to_py_string(object string):
+cpdef unicode gd_string_to_py_string(object string):
     cdef CPPStringWrapper wrapper = <CPPStringWrapper>(string._ptr)
     cdef shared_ptr[bridge.String] internal_string = wrapper._ptr
     cdef char* c_str
