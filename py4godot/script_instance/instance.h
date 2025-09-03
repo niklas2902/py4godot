@@ -172,8 +172,13 @@ GDExtensionMethodInfo create_method_info(std::shared_ptr<CPPMethodDescription> d
         my_args.push_back(create_property_info(arg));
     }
     description_ptr->cpp_args = my_args;
-    auto& head = description_ptr->cpp_args[0];
-    method_info.arguments = &head;
+    if(my_args.size() > 0){
+        auto& head = description_ptr->cpp_args[0];
+        method_info.arguments = &head;
+    }
+    else{
+        method_info.arguments = nullptr;
+    }
     return method_info;
 }
 
