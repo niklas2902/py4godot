@@ -54,18 +54,24 @@ def generate_newline(str_):
 
 def generate_import():
     res = ""
-    res += "from libcpp.memory cimport shared_ptr"
+    res += "from libcpp.memory cimport shared_ptr, make_shared"
     res = generate_newline(res)
     res += "from py4godot.classes.cpp_bridge cimport *"
+    res = generate_newline(res)
+    res += "from py4godot.utils.print_tools import print_error"
     res = generate_newline(res)
     return res
 
 def generate_wrapper(class_name):
     res = f"cdef class CPP{class_name}Wrapper(CPPWrapper):"
     res = generate_newline(res)
+    res += f"{INDENT}def __cinit__(self):"
+    res = generate_newline(res)
+    res += f"{INDENT*2}self._ptr = make_shared[{class_name}]()"
+    res = generate_newline(res)
     res += f"{INDENT}cdef set_gdowner(self, void* godot_owner):"
     res = generate_newline(res)
-    res += f"{INDENT*2}pass#self._ptr.get().set_godot_owner(godot_owner)"
+    res += f"{INDENT*2}self._ptr.get().set_godot_owner(godot_owner)"
     res = generate_newline(res)
 
     res += f"{INDENT}cpdef call_without_return(self, int method_hash, tuple args_tuple):"
@@ -169,6 +175,8 @@ if __name__ == "__main__":
         write_if_different("py4godot/wrappers/wrappers.pxd", res)
 
         res = ""
+        res += "from py4godot.utils.print_tools import print_error"
+        res = generate_newline(res)
         for cls in all_classes:
             if cls["name"] not in IGNORED_CLASSES:
                 res += generate_wrapper(cls["name"])
