@@ -24,7 +24,7 @@ cdef api GDExtensionBool instance_set(GDExtensionScriptInstanceDataPtr p_instanc
     #TODO still a problem with custom string attributes. Why is this still crashing?
     cdef object method_name = core.StringName.__new__(core.StringName)
     cdef shared_ptr[cppbridge.StringName] internal_method_name  = create_string_name_from_ptr((<void**>p_name)[0])
-    method_name.StringName_internal_class_ptr = create_wrapper_from_StringName_ptr(internal_method_name)
+    method_name._ptr = create_wrapper_from_StringName_ptr(internal_method_name)
     cdef object method_name_str = core.String.new2(method_name)
     cdef unicode py_method_name_str = gd_string_to_py_string(method_name_str)
 
@@ -35,7 +35,6 @@ cdef api GDExtensionBool instance_set(GDExtensionScriptInstanceDataPtr p_instanc
         if isinstance(val, core.Signal):
             return 1 #TODO: improve this. The problem is, that Godot decides to set signals itself. This lead to problems in the past. Check if it is still an issue
         setattr(<object>(instance.owner),py_method_name_str, <object>val)
-        #Py_DECREF(<object>val)#TODO: is this necessary?
 
     except Exception as e:
         print_error_detailed('PyScriptInstance.pyx', 'instance_set', 39, f"An Exception happened while setting attribute:{e}" ) # !this gets generated print_error
