@@ -1251,21 +1251,23 @@ def generate_common_methods(class_):
     result = generate_newline(result)
     return result
 
+def extract_arg(type_, index):
+    if type_ in classes or "typedarray" in type_.lower():
+        return f"wrapper__extract_ptr_from_{untypearray(type_)}Wrapper(PyTuple_GetItem(args_tuple, {index})) "
+    elif type_ == "int":
+        return f"PyLong_AsLong(PyTuple_GetItem(args_tuple, {index})) "
+    elif type_ == "bool":
+        return f"(PyObject_IsTrue(PyTuple_GetItem(args_tuple, {index})) ? true : false) "
+    elif type_ == "float" or type_ == "double":
+        return f"PyFloat_AsDouble(PyTuple_GetItem(args_tuple, {index})) "
+    return f"PyTuple_GetItem(args_tuple, {index}) "
+
 def generate_method_switch_args(method):
     res = ""
     index = 0
     if "arguments" in method:
         for arg in method["arguments"]:
-            if arg["type"] in classes or "typedarray" in arg["type"].lower():
-                res += f"wrapper__extract_ptr_from_{untypearray(arg['type'])}Wrapper(PyTuple_GetItem(args_tuple, {index})), "
-            elif arg["type"] == "int":
-                res += f"PyLong_AsLong(PyTuple_GetItem(args_tuple, {index})), "
-            elif arg["type"] == "bool":
-                res += f"(PyObject_IsTrue(PyTuple_GetItem(args_tuple, {index})) ? true : false), "
-            elif arg["type"] == "float":
-                res += f"PyFloat_AsDouble(PyTuple_GetItem(args_tuple, {index})), "
-            else:
-                res += f"PyTuple_GetItem(args_tuple, {index}), "
+            res += extract_arg(arg["type"], index)+", "
             index += 1
     if "is_vararg" in method and method["is_vararg"]:
         res += "varargs, "
@@ -1299,6 +1301,14 @@ def generate_switch_methods(class_):
         res += f"{INDENT*3}case {method_ids['normal_methods'][class_['name']][method['name']]}: py_{pythonize_name(method['name'])}({args});break;"
         res = generate_newline(res)
         index += 1
+
+    if class_["name"] in core_classes.keys():
+        for member in core_classes[class_["name"]].core_members:
+            res += f"{INDENT*3}case {method_ids['normal_methods'][class_['name']]['get_member_'+member.name]}: py_member_get_{member.name}();break;"
+            res = generate_newline(res)
+            res += f"{INDENT * 3}case {method_ids['normal_methods'][class_['name']]['set_member_' + member.name]}: py_member_set_{member.name}({extract_arg(member.type_,0)});break;"
+            res = generate_newline(res)
+
     res += f"{INDENT*2}}}"
     res += f"{INDENT}}}"
     res = generate_newline(res)
@@ -1327,6 +1337,24 @@ def generate_switch_methods(class_):
         else:
             res += f"{INDENT*3}case {method_ids['normal_methods'][class_['name']][method['name']]}: return py_{pythonize_name(method['name'])}({args});"
         res = generate_newline(res)
+
+    if class_["name"] in core_classes.keys():
+        for member in core_classes[class_["name"]].core_members:
+            if member.type_ in builtin_classes.union(classes).difference(
+                    {"float", "int", "bool"}) or "typedarray" in member.type_.lower():
+                res += f"{INDENT*3}case {method_ids['normal_methods'][class_['name']]['get_member_'+member.name]}: return wrapper__create_wrapper_from_{untypearray(member.type_)}_ptr(py_member_get_{member.name}());"
+                res = generate_newline(res)
+            elif member.type_ == "int":
+                res += f"{INDENT * 3}case {method_ids['normal_methods'][class_['name']]['get_member_'+member.name]}: return  PyLong_FromLong(py_member_get_{member.name}());"
+            elif member.type_== "bool":
+                res += f"{INDENT * 3}case {method_ids['normal_methods'][class_['name']]['get_member_'+member.name]}: return  PyBool_FromLong(py_member_get_{member.name}());"
+            elif member.type_== "float" or member.type_ == "double":
+                res += f"{INDENT * 3}case {method_ids['normal_methods'][class_['name']]['get_member_'+member.name]}: return  PyFloat_FromDouble(py_member_get_{member.name}());"
+            else:
+                res += f"{INDENT * 3}case {method_ids['normal_methods'][class_['name']]['get_member_'+member.name]}: return py_member_get_{member.name}();"
+            res = generate_newline(res)
+            res += f"{INDENT * 3}case {method_ids['normal_methods'][class_['name']]['set_member_' + member.name]}: py_member_set_{member.name}({extract_arg(member.type_, 0)});return Py_None;"
+            res = generate_newline(res)
     res += f"{INDENT*2}}}"
     res += f"{INDENT*2}return Py_None;"
     res = generate_newline(res)
@@ -1483,7 +1511,7 @@ def unref_pointer(type_, value_name="value"):
 
 def generate_member_setter(class_, member):
     res = ""
-    res += f"{INDENT}void {class_}::py_member_set_{member.name}({make_ptr(member.type_)}& value)" + "{"
+    res += f"{INDENT}void {class_}::py_member_set_{member.name}({make_ptr(member.type_)} value)" + "{"
     res = generate_newline(res)
     res += f"{INDENT}member_set_{member.name}({unref_pointer(member.type_)});"
     res = generate_newline(res)

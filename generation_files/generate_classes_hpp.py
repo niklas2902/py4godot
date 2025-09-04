@@ -429,7 +429,7 @@ def generate_member_setter(class_, member):
     res = ""
     res += f"{INDENT}void member_set_{member.name}({member.type_}& value);"
     res = generate_newline(res)
-    res += f"{INDENT}void py_member_set_{member.name}({make_ptr(member.type_)}& value);"
+    res += f"{INDENT}void py_member_set_{member.name}({make_ptr(member.type_)} value);"
     return res
 
 

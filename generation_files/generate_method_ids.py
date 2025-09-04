@@ -111,6 +111,15 @@ def collect_methods(class_, static_methods):
         res = collect_methods(find_class(class_["inherits"]), static_methods) +res
     res = list(filter (lambda method: not native_structs_in_method(method), res))
     return res
+
+def collect_members(class_):
+    members = []
+    if "members" not in class_:
+        return members
+    for member in class_["members"]:
+        members.append(member["name"])
+    return members
+
 def is_static(mMethod):
 
     return mMethod["is_static"]
@@ -166,6 +175,13 @@ def generate_method_ids(classes):
         for method in methods:
             normal_methods[cls["name"]][method["name"]] = id
             id += 1
+        if cls["name"] in builtin_classes:
+            members = collect_members(cls)
+            for member in members:
+                normal_methods[cls["name"]]["get_member_"+member] = id
+                id += 1
+                normal_methods[cls["name"]]["set_member_" + member] = id
+                id += 1
 
         static_id = 0
         static_methods_list = collect_methods(cls, True)

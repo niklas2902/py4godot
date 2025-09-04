@@ -901,7 +901,7 @@ def generate_member_getter(class_, member):
     res = generate_newline(res)
 
     body = ""
-    body += f"{INDENT * 2}_ret = self.switch_call_with_return(1, ())"
+    body += f"{INDENT * 2}_ret = self._ptr.call_with_return({method_ids["normal_methods"][class_]["get_member_"+member.name]}, tuple())"
     body = generate_newline(body)
     body += f"{INDENT * 2}return _ret"
     body = generate_newline(body)
@@ -926,7 +926,7 @@ def generate_member_setter(class_, member):
     res = generate_newline(res)
 
     body = ""
-    body += f"{INDENT * 2}self._ptr.switch_call(1, value)"
+    body += f"{INDENT * 2}self._ptr.call_without_return({method_ids["normal_methods"][class_]["set_member_"+member.name]}, tuple([value]))"
     body = generate_newline(body)
     res += body
 
@@ -1335,7 +1335,7 @@ def generate_operators_for_class(class_name):
                 res = generate_newline(res)
                 res += f"{INDENT * 2}_ret = {init_return_type(op.return_type)}"
                 res = generate_newline(res)
-                res += f"{INDENT * 2}_ret = self._ptr.switch_call(1, other).get_converted_value()"
+                res += f"{INDENT * 2}_ret = self._ptr.call_without_return(1, other).get_converted_value()"
                 res = generate_newline(res)
                 res += f"{INDENT * 2}return _ret"
                 res = generate_newline(res)
