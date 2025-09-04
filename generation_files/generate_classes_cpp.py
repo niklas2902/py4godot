@@ -1397,7 +1397,7 @@ def generate_switch_methods(class_):
     res = generate_newline(res)
     if class_["name"] not in builtin_classes:
         if is_singleton(class_["name"]):
-            res += f"{INDENT * 2}return Py_None;"
+            res += f"{INDENT * 2}return wrapper__create_wrapper_from_{class_['name']}_ptr({class_['name']}::get_instance());;"
         else:
             res += f"{INDENT * 2}return wrapper__create_wrapper_from_{class_['name']}_ptr({class_['name']}::constructor());"
     elif class_["name"] in builtin_classes:

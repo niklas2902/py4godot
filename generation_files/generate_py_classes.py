@@ -323,7 +323,7 @@ def generate_singleton_constructor(classname):
     res = generate_newline(res)
     res += f"{INDENT * 3}singleton = {classname}()"
     res = generate_newline(res)
-    res += f"{INDENT * 3}singleton.{classname}_internal_class_ptr = CPP{classname}.get_instance()"
+    res += f"{INDENT * 3}singleton._ptr = constructor({classes_dict[class_['name']]},0, ())"
     res = generate_newline(res)
     res += f"{INDENT * 3}_{classname}_singleton_instance = singleton"
     res = generate_newline(res)
