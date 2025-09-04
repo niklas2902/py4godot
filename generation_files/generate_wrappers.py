@@ -73,6 +73,10 @@ def generate_wrapper(class_name):
     res = generate_newline(res)
     res += f"{INDENT*2}self._ptr.get().set_godot_owner(godot_owner)"
     res = generate_newline(res)
+    res += f"{INDENT}cdef void* get_gdowner(self):"
+    res = generate_newline(res)
+    res += f"{INDENT*2}return self._ptr.get().get_godot_owner()"
+    res = generate_newline(res)
 
     res += f"{INDENT}cpdef call_without_return(self, int method_hash, tuple args_tuple):"
     res = generate_newline(res)
@@ -110,6 +114,8 @@ def generate_wrapper_pxd(class_name):
     res += f"{INDENT}cdef shared_ptr[{class_name}] _ptr"
     res = generate_newline(res)
     res += f"{INDENT}cdef set_gdowner(self, void* godot_owner)"
+    res = generate_newline(res)
+    res += f"{INDENT}cdef void* get_gdowner(self)"
     res = generate_newline(res)
     res += f"{INDENT}cpdef call_without_return(self, int method_hash, tuple args_tuple)"
     res = generate_newline(res)

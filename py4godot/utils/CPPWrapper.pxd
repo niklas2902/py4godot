@@ -9,6 +9,7 @@ cdef class CPPWrapper:
     cpdef call_without_return(self, int method_hash, tuple args)
     cpdef call_with_return(self, int method_hash, tuple args)
     cdef set_gdowner(self, void* godot_owner)
+    cdef void* get_gdowner(self)
 
     @staticmethod
     cdef call_new(self, int number, tuple args)

@@ -86,14 +86,13 @@ def generate_import():
     result = ("from py4godot.core.variant4.Variant4 cimport *\n"
               "from libcpp cimport bool\n"
               "from libcpp.vector cimport vector\n"
-              "from py4godot.enums.enums cimport *\n"
               "from py4godot.utils.utils cimport *\n"
-              "from py4godot.classes.core cimport *\n"
-              "cimport py4godot.classes.Object as py4godot_object\n")
+              "from py4godot.utils.CPPWrapper cimport *\n"
+              "import py4godot.py_classes.Object as py4godot_object\n")
 
     for cls in sorted(list(builtin_classes)):
         if cls not in {"Nil", "float", "int", "bool"}:
-            result += f"cimport py4godot.classes.core as py4godot_{cls.lower()}\n"
+            result += f"import py4godot.py_classes.core as py4godot_{cls.lower()}\n"
     return result
 
 
@@ -156,11 +155,11 @@ def generate_return_value(method_):
         if ret_val.type in {"int", "float", "bool"}:
             result += f"{INDENT * 2}cdef {ungodottype(ret_val.type)} {ret_val.name} = 0"
         elif ret_val.type in classes:
-                result += f"{INDENT * 2}cdef py4godot_{ret_val.type.lower()}.{ret_val.type} {ret_val.name} = py4godot_{ret_val.type.lower()}.{ret_val.type}.__new__(py4godot_{ret_val.type.lower()}.{ret_val.type})"
+                result += f"{INDENT * 2}cdef object {ret_val.name} = py4godot_{ret_val.type.lower()}.{ret_val.type}.__new__(py4godot_{ret_val.type.lower()}.{ret_val.type})"
         elif ret_val.type == "Variant":
             result += f"{INDENT * 2}cdef PyObject* {ret_val.name} = NULL"
         elif "typedarray" in ret_val.type:
-            result += f"{INDENT * 2}cdef Array _ret = Array.new0()"
+            result += f"{INDENT * 2}cdef object_ret = Array.new0()"
         elif "enum::" in ret_val.type:
             result += f"{INDENT * 2}cdef int {ret_val.name}"
         else:
@@ -207,6 +206,7 @@ def is_primitive(type_):
 
 def generate_return_statement(method_):
     # TODO generate returns
+    result = ""
     if "return_value" in method_.keys() or "return_type" in method_.keys():
         ret_val = None
         if ("return_value" in method_.keys()):
@@ -223,7 +223,7 @@ def generate_return_statement(method_):
             result += f"{INDENT * 2}return <object>_ret"
         else:
             if ret_val.type in classes - builtin_classes:
-                result = f"{INDENT * 2}return None if _ret.{ret_val.type}_internal_class_ptr.get().get_godot_owner() == NULL else _ret"
+                result = f"{INDENT * 2}return None if (<CPPWrapper>_ret._ptr).get_gdowner() == NULL else _ret"
             else:
                 result = ""
                 result += f"{INDENT * 2}return _ret"
@@ -397,33 +397,19 @@ def generate_ret_call(method_):
             if ret_val.type in {"int", "float", "bool"}:
                 result += f"_ret"
             elif ret_val.type in builtin_classes:
-                result += f"{ret_val.name}.{ret_val.type}_internal_class_ptr"
+                result += f"{ret_val.name}._ptr"
             else:
-                result += f"{ret_val.name}.{ret_val.type}_internal_class_ptr"
+                result += f"{ret_val.name}._ptr"
         elif ret_val.type == "Variant":
             result += f"_ret"
         elif "typedarray" in ret_val.type:
-            result += f"_ret.{untypearray(ret_val.type)}_internal_class_ptr"
+            result += f"_ret._ptr"
         else:
             result += f"_ret"
     else:
         result += f"_ret"
     return result
 
-def generate_set_gd_owner_for_ret(method):
-    result = ""
-    if "return_value" in method.keys() or "return_type" in method.keys():
-        if ("return_value" in method.keys()):
-            ret_val = ReturnType("_ret", method['return_value']['type'])
-        else:
-            ret_val = ReturnType("_ret", method['return_type'])
-        if ret_val.type in classes:
-            if ret_val.type in builtin_classes:
-                result += f"{INDENT * 2}{ret_val.name}.set_gdowner({ret_val.name}.{ret_val.type}_internal_class_ptr.get().get_godot_owner())"
-            else:
-                result += f"{INDENT * 2}{ret_val.name}.set_gdowner({ret_val.name}.{ret_val.type}_internal_class_ptr.get().get_godot_owner())"
-        result = generate_newline(result)
-    return result
 
 def generate_varargs_vector(method):
     result = ""
@@ -472,8 +458,6 @@ def generate_method_body_standard(method):
         result += generate_return_value(method)
         result += f"{INDENT * 2}{generate_ret_call(method)} = py_{pythonize_name(method['name'])}({generate_method_args(method)})"
         result = generate_newline(result)
-        result += generate_set_gd_owner_for_ret(method)
-        result = generate_newline(result)
         result += generate_return_statement(method)
     else:
             result += f"{INDENT * 2}py_{pythonize_name(method['name'])}({generate_method_args(method)})"
@@ -496,12 +480,12 @@ def generate_method_args(method):
         return res
     for arg in method["arguments"]:
         if untypearray(arg["type"]) in classes - IGNORED_CLASSES - builtin_classes:
-            res += f"&{pythonize_name(arg['name'])}.{untypearray(arg['type'])}_internal_class_ptr if {pythonize_name(arg['name'])} != None else NULL, "
+            res += f"&{pythonize_name(arg['name'])}._ptr if {pythonize_name(arg['name'])} != None else NULL, "
         elif untypearray(arg["type"]) in builtin_classes - IGNORED_CLASSES:
             if arg["type"] == "String":
-                res += f"py_c_string_to_string({pythonize_name(arg['name'])}.encode('utf-8')).{untypearray(arg['type'])}_internal_class_ptr, "
+                res += f"py_c_string_to_string({pythonize_name(arg['name'])}.encode('utf-8'))._ptr, "
             else:
-                res += f"{pythonize_name(arg['name'])}.{untypearray(arg['type'])}_internal_class_ptr, "
+                res += f"{pythonize_name(arg['name'])}._ptr, "
         elif arg["type"] == "Variant":
             res += f"variant_{(pythonize_name(arg['name']))}, "
         else:
@@ -696,7 +680,7 @@ def generate_args(method_with_args):
     for arg in method_with_args["arguments"]:
         if not arg["type"].startswith("enum::"):
             type_ = unstring(unvariant(untypearray(unbitfield_type(arg['type']))))
-            result += f"{import_type(type_)} {pythonize_name(arg['name'])} {generate_default_arg(arg, type_)}, "
+            result += f"object {pythonize_name(arg['name'])} {generate_default_arg(arg, type_)}, "
         else:
             # enums are marked with enum:: . To be able to use this, we have to strip this
             arg_type = arg["type"].replace("enum::", "")

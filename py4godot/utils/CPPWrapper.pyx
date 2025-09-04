@@ -13,6 +13,8 @@ cdef class CPPWrapper:
         return self._ptr.switch_call_return(method_hash, args_tuple)
     cdef set_gdowner(self, void* godot_owner):
         pass
+    cdef void * get_gdowner(self):
+        return NULL
     @staticmethod
     cdef call_new(int class_number, int number, tuple args):
         return call_constructor(class_number, number, args)

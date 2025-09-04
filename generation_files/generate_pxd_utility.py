@@ -101,9 +101,9 @@ def unvarianttype(type_):
         return "PyObject*"
     return type_
 
-def make_to_ptr(ret_val):
+def make_to_wrapper(ret_val):
     if ret_val in builtin_classes - {"int", "float", "bool"} or ret_val in classes:
-        return f"shared_ptr[{ret_val}]"
+        return f"object"
     return ret_val
 
 def generate_method(mMethod):
@@ -111,7 +111,7 @@ def generate_method(mMethod):
     if has_native_struct(mMethod):
         return res
     args = generate_args(mMethod)
-    def_function = f"{INDENT}{make_to_ptr(unvarianttype(ungodottype(untypearray(get_ret_value(mMethod)))))} py_{pythonize_name(mMethod['name'])}({args});"
+    def_function = f"{INDENT}{make_to_wrapper(unvarianttype(ungodottype(untypearray(get_ret_value(mMethod)))))} py_{pythonize_name(mMethod['name'])}({args});"
     res = generate_newline(res)
     res += def_function
     res = generate_newline(res)
@@ -171,9 +171,9 @@ def generate_args(method_with_args):
             result += f"{unenumize_type(untypearray(unbitfield_type(arg['type'])))}& {pythonize_name(arg['name'])}, "
         elif not arg["type"].startswith("enum::") and not arg["type"].startswith("bitfield::") and not untypearray(
                 arg["type"]) in builtin_classes :
-            result += f"shared_ptr[{unenumize_type(untypearray(unbitfield_type(arg['type'])))}] {pythonize_name(arg['name'])}, "
+            result += f"object {pythonize_name(arg['name'])}, "
         elif untypearray(arg["type"]) in builtin_classes - {"int", "float", "bool", "Nil"}:
-            result += f"shared_ptr[{unenumize_type(untypearray(unbitfield_type(arg['type'])))}] {pythonize_name(arg['name'])}, "
+            result += f"object {pythonize_name(arg['name'])}, "
         elif arg["type"] in {"int", "float", "bool"}:
             result += f"{unenumize_type(untypearray(unbitfield_type(arg['type'])))} {pythonize_name(arg['name'])}, "
         else:

@@ -744,6 +744,8 @@ def generate_init(class_):
     res = ""
     res += f"{INDENT}def __init__(self):"
     res = generate_newline(res)
+    res += f"{INDENT * 2}self.shouldBeDeleted = False"
+    res = generate_newline(res)
     res += f"{INDENT * 2}self._ptr =  constructor({classes_dict[class_['name']]},0, ())"
     res = generate_newline(res)
 
@@ -1633,7 +1635,7 @@ def generate_del(class_):
         res = ""
         res += f"{INDENT}def __del__(self):"
         res = generate_newline(res)
-        res += f"{INDENT * 2}if self.shouldBeDeleted:"
+        res += f"{INDENT * 2}if hasattr( self, 'shouldBeDeleted') and self.shouldBeDeleted:" #TODO nzimmer: Improve this
         res = generate_newline(res)
         res += f"{INDENT * 3}self.{class_['name']}_internal_class_ptr.get().{class_['name']}_py_destroy()"
         res = generate_newline(res)
