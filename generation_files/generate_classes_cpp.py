@@ -84,6 +84,7 @@ def generate_import(class_, is_core):
 #include "py4godot/cppclasses/generated4_core.h"
 #include "py4godot/godot_bindings/main.h"
 #include "py4godot/wrappers/wrappers_wrapper.h"
+#include "py4godot/wrappers/type_checking_wrapper.h"
 #include <stdlib.h>
 #include <memory>
 '''

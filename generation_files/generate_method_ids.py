@@ -10,6 +10,19 @@ IGNORED_CLASSES = ("Nil", "bool", "float", "int")
 INDENT = " "
 builtin_classes = set()
 typed_arrays_names = set()
+allowed_operators = {"+": "__add__",
+                      "*": "__mul__",
+                      "-": "__sub__",
+                      "/": "__truediv__",
+                      "%": "__mod__",
+                      "**": "__pow__",
+                      "==": "__eq__",
+                      "!=": "__ne__",
+                      "<": "__lt__",
+                      "<=": "__le__",
+                      ">": "__gt__",
+                      ">=": "__ge__",
+                      }
 
 
 def collect_typed_arrays_from_return(method_):
@@ -181,6 +194,13 @@ def generate_method_ids(classes):
                 normal_methods[cls["name"]]["get_member_"+member] = id
                 id += 1
                 normal_methods[cls["name"]]["set_member_" + member] = id
+                id += 1
+
+        if "operators" in cls:
+            for operator in cls["operators"]:
+                if operator["name"] not in allowed_operators:
+                    continue
+                normal_methods[cls["name"]][operator["name"]] = id
                 id += 1
 
         static_id = 0

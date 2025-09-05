@@ -7,6 +7,7 @@
 #include "py4godot/cppcore/Variant.h"
 #include "py4godot/pluginscript_api/api.h"
 #include "py4godot/wrappers/wrappers_wrapper.h"
+#include "py4godot/wrappers/type_checking_wrapper.h"
 #include "py4godot/script_instance/instance.h"
 #include "py4godot/pluginscript_api/utils/annotations_api.h"
 #include "py4godot/pluginscript_api/utils/forward_print_api.h"
@@ -184,6 +185,15 @@ void init_pluginscript_api(){
 
     print_error_user("before importing");
     init_wrappers();
+    if (PyErr_Occurred())
+    {
+        PyObject* ptype, * pvalue, * ptraceback;
+        PyErr_Fetch(&ptype, &pvalue, &ptraceback);
+        handle_python_error(ptype, pvalue, ptraceback);
+        assert(false);
+        return;
+    }
+    init_type_checking();
     if (PyErr_Occurred())
     {
         PyObject* ptype, * pvalue, * ptraceback;
