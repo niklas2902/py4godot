@@ -1337,7 +1337,10 @@ def generate_operators_for_class(class_name):
                 res = generate_newline(res)
                 res += f"{INDENT * 2}_ret = {init_return_type(op.return_type)}"
                 res = generate_newline(res)
-                res += f"{INDENT * 2}_ret = self._ptr.call_without_return({method_ids['normal_methods'][class_name][operator]}, other).get_converted_value()"
+                if op.return_type in builtin_classes - {"float", "int", "bool", "Nil"}:
+                    res += f"{INDENT * 2}_ret._ptr = self._ptr.call_with_return({method_ids['normal_methods'][class_name][operator]}, (other,))"
+                else:
+                    res += f"{INDENT * 2}_ret= self._ptr.call_with_return({method_ids['normal_methods'][class_name][operator]}, (other,))"
                 res = generate_newline(res)
                 res += f"{INDENT * 2}return _ret"
                 res = generate_newline(res)

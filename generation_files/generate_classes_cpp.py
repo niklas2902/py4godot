@@ -84,7 +84,6 @@ def generate_import(class_, is_core):
 #include "py4godot/cppclasses/generated4_core.h"
 #include "py4godot/godot_bindings/main.h"
 #include "py4godot/wrappers/wrappers_wrapper.h"
-#include "py4godot/wrappers/type_checking_wrapper.h"
 #include <stdlib.h>
 #include <memory>
 '''
@@ -100,7 +99,8 @@ def generate_import(class_, is_core):
 
     result = f'#include "py4godot/cpputils/utils.h"\n' \
              f'#include "py4godot/cppclasses/generated4_core.h"\n'\
-             f'#include "py4godot/wrappers/wrappers_wrapper.h"\n'
+             f'#include "py4godot/wrappers/wrappers_wrapper.h"\n'\
+             f'# include "py4godot/wrappers/type_checking_wrapper.h"\n'
     if "typedarray" in class_["name"].lower():
         result += f'#include "py4godot/cppclasses/typedarrays/{class_["name"]}.h"\n'
     f'#include <memory>"\n'
@@ -1263,6 +1263,17 @@ def extract_arg(type_, index):
         return f"PyFloat_AsDouble(PyTuple_GetItem(args_tuple, {index})) "
     return f"PyTuple_GetItem(args_tuple, {index}) "
 
+def extract_arg_operator(type_):
+    if type_ in classes or "typedarray" in type_.lower():
+        return f"wrapper__extract_ptr_from_{untypearray(type_)}Wrapper(wrapper__extract_ptr_from_py_object(other)) "
+    elif type_ == "int":
+        return f"(long long)PyLong_AsLong(other) "
+    elif type_ == "bool":
+        return f"(PyObject_IsTrue(other) ? true : false) "
+    elif type_ == "float" or type_ == "double":
+        return f"PyFloat_AsDouble(other) "
+    return f"other "
+
 def generate_method_switch_args(method):
     res = ""
     index = 0
@@ -1309,6 +1320,12 @@ def generate_switch_methods(class_):
             res = generate_newline(res)
             res += f"{INDENT * 3}case {method_ids['normal_methods'][class_['name']]['set_member_' + member.name]}: py_member_set_{member.name}({extract_arg(member.type_,0)});break;"
             res = generate_newline(res)
+    if class_["name"] in builtin_classes:
+        for operator in operator_dict[get_class_name(class_["name"])]:
+            if operator in operator_to_method.keys():
+                op = operator_dict[get_class_name(class_["name"])][operator]
+                res += f"{INDENT*2}case {method_ids['normal_methods'][class_['name']][operator]}: wrap_operator_{operator_to_python_name(operator)}(PyTuple_GetItem(args_tuple, 0));break;"
+                res = generate_newline(res)
 
     res += f"{INDENT*2}}}"
     res += f"{INDENT}}}"
@@ -1356,6 +1373,13 @@ def generate_switch_methods(class_):
             res = generate_newline(res)
             res += f"{INDENT * 3}case {method_ids['normal_methods'][class_['name']]['set_member_' + member.name]}: py_member_set_{member.name}({extract_arg(member.type_, 0)});return Py_None;"
             res = generate_newline(res)
+    if class_["name"] in builtin_classes:
+        for operator in operator_dict[get_class_name(class_["name"])]:
+            if operator in operator_to_method.keys():
+                op = operator_dict[get_class_name(class_["name"])][operator]
+                res += f"{INDENT*2}case {method_ids['normal_methods'][class_['name']][operator]}: return wrap_operator_{operator_to_python_name(operator)}(PyTuple_GetItem(args_tuple, 0));"
+                res = generate_newline(res)
+
     res += f"{INDENT*2}}}"
     res += f"{INDENT*2}return Py_None;"
     res = generate_newline(res)
@@ -1870,6 +1894,45 @@ def generate_operators_for_class(class_name):
             if operator in operator_to_method.keys():
                 op = operator_dict[get_class_name(class_name)][operator]
                 if op.right_type_values:
+                    res += f"{INDENT}PyObject* {class_name}::wrap_operator_{operator_to_python_name(operator)} (PyObject* other){{"
+                    res = generate_newline(res)
+                    for right_type in op.right_type_values:
+                        if right_type != "Variant":
+                            ret_type = op.return_type
+                            if ret_type in builtin_classes.union(classes).difference(
+                                    {"float", "int", "bool"}) or "typedarray" in ret_type.lower():
+
+                                res += f"{INDENT * 2}if (type_checking_{right_type}(other)){{return wrapper__create_wrapper_from_{untypearray(op.return_type)}_ptr(py_operator_{operator_to_python_name(operator)}({extract_arg_operator(right_type)}));}}"
+                            elif ret_type == "int":
+                                res += f"{INDENT * 2}if (type_checking_{right_type}(other)){{return PyLong_FromLong(py_operator_{operator_to_python_name(operator)}({extract_arg_operator(right_type)}));}}"
+
+                            elif ret_type == "bool":
+                                res += f"{INDENT * 2}if (type_checking_{right_type}(other)){{return PyBool_FromLong(py_operator_{operator_to_python_name(operator)}({extract_arg_operator(right_type)}));}}"
+                            elif ret_type == "float":
+                                res += f"{INDENT * 2}if (type_checking_{right_type}(other)){{return PyFloat_FromDouble(py_operator_{operator_to_python_name(operator)}({extract_arg_operator(right_type)}));}}"
+                            else:
+                                res += f"{INDENT * 2}if (type_checking_{right_type}(other)){{py_operator_{operator_to_python_name(operator)}({extract_arg_operator(right_type)});}}"
+                            res = generate_newline(res)
+                    if "Variant" in op.right_type_values:
+
+                        ret_type = op.return_type
+                        if ret_type in builtin_classes.union(classes).difference(
+                                {"float", "int", "bool"}) or "typedarray" in ret_type.lower():
+
+                            res += f"{INDENT * 2}wrapper__create_wrapper_from_{untypearray(op.return_type)}_ptr(py_operator_{operator_to_python_name(operator)}(other));"
+                        elif ret_type == "int":
+                            res += f"{INDENT * 2}return PyLong_FromLong(py_operator_{operator_to_python_name(operator)}(other));"
+
+                        elif ret_type == "bool":
+                            res += f"{INDENT * 2}return PyBool_FromLong(py_operator_{operator_to_python_name(operator)}(other));"
+                        elif ret_type == "float":
+                            res += f"{INDENT * 2}return PyFloat_FromDouble(py_operator_{operator_to_python_name(operator)}(other));"
+                        else:
+                            res += f"{INDENT * 2}return py_operator_{operator_to_python_name(operator)}(other);"
+                        res = generate_newline(res)
+
+                    res += f"}}"
+                    res = generate_newline(res)
                     for right_type in op.right_type_values:
                         res += f"{INDENT}{op.return_type} {class_name}::operator {operator}({ungodottype(right_type)}{generate_reference(right_type)} other)" + "{"
                         res = generate_newline(res)
@@ -1892,7 +1955,7 @@ def generate_operators_for_class(class_name):
                         res += INDENT + "}"
                         res = generate_newline(res)
 
-                        res += f"{INDENT}{make_ptr(op.return_type)} {class_name}::py_operator_{operator_to_python_name(operator)}({make_ptr(ungodottype(right_type))}{generate_reference(right_type)} other)" + "{"
+                        res += f"{INDENT}{make_ptr(op.return_type)} {class_name}::py_operator_{operator_to_python_name(operator)}({make_ptr(ungodottype(right_type))} other)" + "{"
                         res = generate_newline(res)
                         res += f"{INDENT * 2}auto _ret = *this {operator} {unref_pointer(type_=ungodottype(right_type), value_name='other')};"
                         res = generate_newline(res)

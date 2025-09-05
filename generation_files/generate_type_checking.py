@@ -16,8 +16,10 @@ def type_checking():
     for cls in set(builtin_classes) - {"float", "int", "bool", "Nil"}:
         res += f"from py4godot.py_classes.core import {cls}"
         res = generate_newline(res)
+    res += f"from py4godot.py_classes.Object import Object"
+    res = generate_newline(res)
 
-    for cls in set(builtin_classes) - {"Nil"}:
+    for cls in (set(builtin_classes) - {"Nil"}).union({"Object"}):
         res += f"cdef api bint is_{cls}(object o):"
         res = generate_newline(res)
         res += f"{INDENT}return type(o) == {cls}"
@@ -61,7 +63,7 @@ if __name__ == "__main__":
         res = generate_newline(res)
         res += "void init_type_checking(){import_py4godot__wrappers__type_checking();}"
         res = generate_newline(res)
-        for cls in builtin_classes:
+        for cls in builtin_classes + ["Object"]:
             res += generate_wrapper_source(cls)
 
         write_if_different("py4godot/wrappers/type_checking_wrapper.cpp", res)
@@ -72,7 +74,7 @@ if __name__ == "__main__":
         res = generate_newline(res)
         res += "void init_type_checking();"
         res = generate_newline(res)
-        for cls in builtin_classes:
+        for cls in builtin_classes + ["Object"]:
             res += generate_wrapper_header(cls)
 
         write_if_different("py4godot/wrappers/type_checking_wrapper.h", res)

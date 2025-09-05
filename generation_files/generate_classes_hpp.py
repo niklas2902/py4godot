@@ -708,11 +708,13 @@ def generate_operators_for_class(class_name):
             if operator in operator_to_method.keys():
                 op = operator_dict[get_class_name(class_name)][operator]
                 if op.right_type_values:
+                    res += f"{INDENT}PyObject* wrap_operator_{operator_to_python_name(operator)} (PyObject* other);"
+                    res = generate_newline(res)
                     for right_type in op.right_type_values:
                         res += f"{INDENT}{op.return_type} operator {operator} ({ungodottype(right_type)}{generate_reference(right_type)} other);"
                         res = generate_newline(res)
 
-                        res += f"{INDENT}{make_ptr(op.return_type)} py_operator_{operator_to_python_name(operator)} ({make_ptr(ungodottype(right_type))}{generate_reference(right_type)} other);"
+                        res += f"{INDENT}{make_ptr(op.return_type)} py_operator_{operator_to_python_name(operator)} ({make_ptr(ungodottype(right_type))} other);"
                         res = generate_newline(res)
     res = generate_newline(res)
     return res

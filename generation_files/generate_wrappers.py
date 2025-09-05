@@ -174,6 +174,8 @@ if __name__ == "__main__":
         arrays = sorted(arrays, key = lambda array: array["name"])
 
         all_classes = arrays + obj['classes'] + obj["builtin_classes"]
+        res += f"cdef api object extract_ptr_from_py_object(object other)"
+        res = generate_newline(res)
         for cls in all_classes:
             if cls["name"] not in IGNORED_CLASSES:
                 res += generate_wrapper_pxd(cls["name"])
@@ -182,6 +184,8 @@ if __name__ == "__main__":
 
         res = ""
         res += "from py4godot.utils.print_tools import print_error"
+        res = generate_newline(res)
+        res += f"cdef api object extract_ptr_from_py_object(object other):return other._ptr"
         res = generate_newline(res)
         for cls in all_classes:
             if cls["name"] not in IGNORED_CLASSES:
@@ -193,6 +197,9 @@ if __name__ == "__main__":
         res = "#pragma once\n#include \"Python.h\"\n#include \"py4godot/cppclasses/class_defs.h\"\n"
         res = generate_newline(res)
         res += "void init_wrappers();"
+        res = generate_newline(res)
+
+        res += "PyObject* wrapper__extract_ptr_from_py_object(PyObject* object);"
         res = generate_newline(res)
         for cls in all_classes:
             if cls["name"] not in IGNORED_CLASSES:
@@ -215,6 +222,8 @@ if __name__ == "__main__":
         res += '#include "py4godot/wrappers/wrappers_api.h"'
         res = generate_newline(res)
         res += "void init_wrappers(){import_py4godot__wrappers__wrappers();}"
+        res = generate_newline(res)
+        res += "PyObject* wrapper__extract_ptr_from_py_object(PyObject* object){return extract_ptr_from_py_object(object) ;}"
         res = generate_newline(res)
 
         for cls in all_classes:
