@@ -1515,109 +1515,39 @@ def generate_special_methods_dictionary():
     res += generate_dictionary_get_item()
     return res
 
+def is_builtin_class_in_name(classname):
+    for cls in builtin_classes- {"int", "float", "bool", "Nil"}:
+        if cls in classname:
+            return True
+    return False
 
 def generate_array_set_item(class_):
     res = ""
-    if class_["name"] == "PackedInt32Array":
-        res += f"{INDENT}def __setitem__(self,  index, value):"
-        res = generate_newline(res)
-
-        res += f"{INDENT * 2}pass#(&self.{class_['name']}_internal_class_ptr.get()[0][index])[0] = <int>value"
-    elif class_["name"] == "PackedInt64Array":
-        res += f"{INDENT}def __setitem__(self,  index, value):"
-        res = generate_newline(res)
-
-        res += f"{INDENT * 2}pass#(&self.{class_['name']}_internal_class_ptr.get()[0][index])[0] = <int>value"
-    elif class_["name"] == "PackedFloat32Array":
-        res += f"{INDENT}def __setitem__(self,  index, value):"
-        res = generate_newline(res)
-
-        res += f"{INDENT * 2}pass#(&self.{class_['name']}_internal_class_ptr.get()[0][index])[0] = value"
-    elif class_["name"] == "PackedFloat64Array":
-        res += f"{INDENT}def __setitem__(self,  index, value):"
-        res = generate_newline(res)
-
-        res += f"{INDENT * 2}pass#(&self.{class_['name']}_internal_class_ptr.get()[0][index])[0] = value"
-    elif class_["name"] == "PackedBoolArray":
-        res += f"{INDENT}def __setitem__(self,  index, value):"
-        res = generate_newline(res)
-
-        res += f"{INDENT * 2}pass#(&self.{class_['name']}_internal_class_ptr.get()[0][index])[0] = value"
-
-    elif class_["name"] == "PackedByteArray":
-        res += f"{INDENT}def __setitem__(self,  index, value):"
-        res = generate_newline(res)
-
-        res += f"{INDENT * 2}pass#(&self.{class_['name']}_internal_class_ptr.get()[0][index])[0] = value"
-
-    elif class_["name"] == "PackedColorArray":
-        res += f"{INDENT}def __setitem__(self,  index, value):"
-        res = generate_newline(res)
-
-        res += f"{INDENT * 2}pass#(&self.{class_['name']}_internal_class_ptr.get()[0][index])[0] = (<Color>value).Color_internal_class_ptr"
-    elif class_["name"] == "PackedVector3Array":
-        res += f"{INDENT}def __setitem__(self,  index, value):"
-        res = generate_newline(res)
-
-        res += f"{INDENT * 2}pass#(&self.{class_['name']}_internal_class_ptr.get()[0][index])[0] = (<Vector3>value).Vector3_internal_class_ptr"
-    elif class_["name"] == "PackedVector2Array":
-        res += f"{INDENT}def __setitem__(self,  index, value):"
-        res = generate_newline(res)
-
-        res += f"{INDENT * 2}pass#(&self.{class_['name']}_internal_class_ptr.get()[0][index])[0] = (<Vector2>value).Vector2_internal_class_ptr"
-    elif class_["name"] == "PackedStringArray":
-        res += f"{INDENT}def __setitem__(self,  index, value):"
-        res = generate_newline(res)
-
-        res += f"{INDENT * 2}pass#(&self.{class_['name']}_internal_class_ptr.get()[0][index])[0] = (<String>value).String_internal_class_ptr"
-
-    elif class_["name"] == "Array":
-        res += f"{INDENT}def __setitem__(self,  index, value):"
-        res = generate_newline(res)
-
-        res += f"{INDENT * 2}pass#TODO:self.{class_['name']}_internal_class_ptr.get()[0][index].init_from_py_object(<PyObject*>value, type(value).__name__.encode('utf-8'))"
-
-    elif class_["name"] in typed_arrays_names:
-        res += f"{INDENT}def __setitem__(self,  index, value):"
-        res = generate_newline(res)
-
-        res += f"{INDENT * 2}pass#TODO:self.{class_['name']}_internal_class_ptr.get()[0][index].init_from_py_object(<PyObject*>value, type(value).__name__.encode('utf-8'))"
-
+    res += f"{INDENT}def __setitem__(self,  index, value):"
+    res = generate_newline(res)
+    if not is_builtin_class_in_name(class_):
+        res += f"{INDENT * 2}self._ptr.call_with_return({method_ids['normal_methods'][class_['name']]['__setitem__']}, (index, value))"
+    else:
+        res += f"{INDENT * 2}self._ptr.call_with_return({method_ids['normal_methods'][class_['name']]['__setitem__']}, (index, value._ptr))"
     res = generate_newline(res)
     return res
 
 
 def generate_array_get_item(class_):
     res = ""
-
-    if class_["name"] == "PackedInt32Array":
-        res += generate_get_item_from_type_array(class_["name"], "int")
-    elif class_["name"] == "PackedInt64Array":
-        res += generate_get_item_from_type_array(class_["name"], "int")
-    elif class_["name"] == "PackedFloat32Array":
-        res += generate_get_item_from_type_array(class_["name"], "float")
-    elif class_["name"] == "PackedFloat64Array":
-        res += generate_get_item_from_type_array(class_["name"], "float")
-    elif class_["name"] == "PackedBoolArray":
-        res += generate_get_item_from_type_array(class_["name"], "bool")
-    elif class_["name"] == "PackedByteArray":
-        res += generate_get_item_from_type_array(class_["name"], "byte")
-
-    elif class_["name"] == "PackedColorArray":
-        res += generate_get_item_from_type_array(class_["name"], "Color")
-    elif class_["name"] == "PackedVector3Array":
-        res += generate_get_item_from_type_array(class_["name"], "Vector3")
-    elif class_["name"] == "PackedVector2Array":
-        res += generate_get_item_from_type_array(class_["name"], "Vector2")
-    elif class_["name"] == "PackedStringArray":
-        res += generate_get_item_from_type_array(class_["name"], "String")
-
-    elif class_["name"] == "Array":
-        res += generate_get_item_from_array(class_["name"])
-    elif class_["name"] in typed_arrays_names:
-        res += generate_get_item_from_array(class_["name"])
-
+    res += f"{INDENT}def __getitem__(self,  index):"
     res = generate_newline(res)
+    res = generate_newline(res)
+    res += f"{INDENT * 2}if index < 0:"
+    res = generate_newline(res)
+    res += f"{INDENT * 3}raise KeyError(f\"Index '%s' invalid\")".replace("%s", "{index}")
+    res = generate_newline(res)
+    if not is_builtin_class_in_name(class_):
+        res += f"{INDENT * 2}pyobject = self._ptr.call_with_return({method_ids['normal_methods'][class_['name']]['__getitem__']}, (index,))"
+    else:
+        res += f"{INDENT * 2}pyobject._ptr = self._ptr.call_with_return({method_ids['normal_methods'][class_['name']]['__getitem__']}, (index,))"
+    res = generate_newline(res)
+    res += f"{INDENT * 2}return pyobject"
     return res
 
 def generate_del(class_):

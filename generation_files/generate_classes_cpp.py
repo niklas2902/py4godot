@@ -1313,7 +1313,6 @@ def generate_switch_methods(class_):
         res += f"{INDENT*3}case {method_ids['normal_methods'][class_['name']][method['name']]}: py_{pythonize_name(method['name'])}({args});break;"
         res = generate_newline(res)
         index += 1
-
     if class_["name"] in core_classes.keys():
         for member in core_classes[class_["name"]].core_members:
             res += f"{INDENT*3}case {method_ids['normal_methods'][class_['name']]['get_member_'+member.name]}: py_member_get_{member.name}();break;"
@@ -1326,6 +1325,11 @@ def generate_switch_methods(class_):
                 op = operator_dict[get_class_name(class_["name"])][operator]
                 res += f"{INDENT*2}case {method_ids['normal_methods'][class_['name']][operator]}: wrap_operator_{operator_to_python_name(operator)}(PyTuple_GetItem(args_tuple, 0));break;"
                 res = generate_newline(res)
+    if "array" in class_["name"].lower():
+        res += f"{INDENT * 3}case {method_ids['normal_methods'][class_['name']]["__getitem__"]}: py_getitem((int)PyLong_AsLong(PyTuple_GetItem(args_tuple, 0)));break;"
+        res = generate_newline(res)
+        res += f"{INDENT * 3}case {method_ids['normal_methods'][class_['name']]["__setitem__"]}: py_setitem((int)PyLong_AsLong(PyTuple_GetItem(args_tuple, 0)), PyTuple_GetItem(args_tuple, 1));break;"
+        res = generate_newline(res)
 
     res += f"{INDENT*2}}}"
     res += f"{INDENT}}}"
@@ -1379,6 +1383,11 @@ def generate_switch_methods(class_):
                 op = operator_dict[get_class_name(class_["name"])][operator]
                 res += f"{INDENT*2}case {method_ids['normal_methods'][class_['name']][operator]}: return wrap_operator_{operator_to_python_name(operator)}(PyTuple_GetItem(args_tuple, 0));"
                 res = generate_newline(res)
+    if "array" in class_["name"].lower():
+        res += f"{INDENT * 3}case {method_ids['normal_methods'][class_['name']]["__getitem__"]}: return py_getitem((int)PyLong_AsLong(PyTuple_GetItem(args_tuple, 0)));break;"
+        res = generate_newline(res)
+        res += f"{INDENT * 3}case {method_ids['normal_methods'][class_['name']]["__setitem__"]}: py_setitem((int)PyLong_AsLong(PyTuple_GetItem(args_tuple, 0)), PyTuple_GetItem(args_tuple, 1));return Py_None;"
+        res = generate_newline(res)
 
     res += f"{INDENT*2}}}"
     res += f"{INDENT*2}return Py_None;"
@@ -2097,8 +2106,139 @@ def generate_array_set_item(class_):
     return res
 
 
+def generate_array_get_item_wrapper(class_):
+    res = ""
+    if class_["name"] == "PackedInt32Array":
+        res += f"{INDENT}PyObject* {class_['name']}::py_getitem(int index)" + "{"
+        res = generate_newline(res)
+        res += f"{INDENT * 2}return PyLong_FromLong(functions::get_packed_int32_array_operator_index()(&godot_owner, index)[0]);"
+        res += INDENT + "}"
+    elif class_["name"] == "PackedInt64Array":
+        res += f"{INDENT}PyObject* {class_['name']}::py_getitem(int index)" + "{"
+        res = generate_newline(res)
+        res += f"{INDENT * 2}return PyLong_FromLong(functions::get_packed_int64_array_operator_index()(&godot_owner, index)[0]);"
+        res += INDENT + "}"
+    elif class_["name"] == "PackedFloat32Array":
+        res += f"{INDENT}PyObject* {class_['name']}::py_getitem(int index)" + "{"
+        res = generate_newline(res)
+        res += f"{INDENT * 2}return PyFloat_FromDouble(functions::get_packed_float32_array_operator_index()(&godot_owner, index)[0]);"
+        res += INDENT + "}"
+    elif class_["name"] == "PackedFloat64Array":
+        res += f"{INDENT}PyObject* {class_['name']}::py_getitem(int index)" + "{"
+        res = generate_newline(res)
+        res += f"{INDENT * 2}return PyFloat_FromDouble(functions::get_packed_float64_array_operator_index()(&godot_owner, index)[0]);"
+        res += INDENT + "}"
+    elif class_["name"] == "PackedByteArray":
+        res += f"{INDENT}PyObject* {class_['name']}::py_getitem(int index)" + "{"
+        res = generate_newline(res)
+        res += f"{INDENT * 2}return PyLong_FromLong(functions::get_packed_byte_array_operator_index()(&godot_owner, index)[0]);"
+        res += INDENT + "}"
+
+    elif class_["name"] == "PackedColorArray":
+        res += f"{INDENT}PyObject* {class_['name']}::py_getitem(int index)" + "{"
+        res = generate_newline(res)
+        res += f"{INDENT * 2}return wrapper__create_wrapper_from_Color_ptr(std::make_shared<Color>(Color::new_static(((void**)functions::get_packed_color_array_operator_index()(&godot_owner, index))[0])));"
+        res += INDENT + "}"
+    elif class_["name"] == "PackedVector3Array":
+        res += f"{INDENT}PyObject* {class_['name']}::py_getitem(int index)" + "{"
+        res = generate_newline(res)
+        res += f"{INDENT * 2}return wrapper__create_wrapper_from_Vector3_ptr(std::make_shared<Vector3>(Vector3::new_static(((void**)functions::get_packed_vector3_array_operator_index()(&godot_owner, index))[0])));"
+        res += INDENT + "}"
+    elif class_["name"] == "PackedVector2Array":
+        res += f"{INDENT}PyObject* {class_['name']}::py_getitem(int index)" + "{"
+        res = generate_newline(res)
+        res += f"{INDENT * 2}return wrapper__create_wrapper_from_Vector2_ptr(std::make_shared<Vector2>(Vector2::new_static(((void**)functions::get_packed_vector2_array_operator_index()(&godot_owner, index))[0])));"
+        res += INDENT + "}"
+    elif class_["name"] == "PackedStringArray":
+        res += f"{INDENT}PyObject* {class_['name']}::py_getitem(int index)" + "{"
+        res = generate_newline(res)
+        res += f"{INDENT * 2}return wrapper__create_wrapper_from_String_ptr(std::make_shared<String>(String::new_static(((void**)functions::get_packed_string_array_operator_index()(&godot_owner, index))[0])));"
+        res += INDENT + "}"
+    elif get_class_name(class_["name"]) == "Array":
+        res += f"{INDENT}PyObject* {class_['name']}::py_getitem(int index)" + "{"
+        res = generate_newline(res)
+        res += f"{INDENT * 2}Variant variant;"
+        res = generate_newline(res)
+        res += f"{INDENT * 2}variant.native_ptr = (functions::get_array_operator_index()(&godot_owner, index));"
+        res = generate_newline(res)
+        res += f"{INDENT * 2}return variant.get_converted_value(true);"
+        res += INDENT + "}"
+    else:
+        res += f"{INDENT}PyObject* {class_['name']}::py_getitem(int index)" + "{"
+        res = generate_newline(res)
+        res += f"{INDENT * 2}return Py_None;"
+        res += INDENT + "}"
+
+    return res
+
+
+def generate_array_set_item_wrapper(class_):
+    res = ""
+    if class_["name"] == "PackedInt32Array":
+        res += f"{INDENT}void {class_['name']}::py_setitem(int index,PyObject* value)" + "{"
+        res = generate_newline(res)
+        res += f"{INDENT * 2}functions::get_packed_int32_array_operator_index()(&godot_owner, index)[0] = (int32_t)(PyLong_AsLong(value));"
+        res += INDENT + "}"
+    elif class_["name"] == "PackedInt64Array":
+        res += f"{INDENT}void {class_['name']}::py_setitem(int index,PyObject* value)" + "{"
+        res = generate_newline(res)
+        res += f"{INDENT * 2}functions::get_packed_int64_array_operator_index()(&godot_owner, index)[0] = (int64_t)(PyLong_AsLong(value));"
+        res += INDENT + "}"
+    elif class_["name"] == "PackedFloat32Array":
+        res += f"{INDENT}void {class_['name']}::py_setitem(int index,PyObject* value)" + "{"
+        res = generate_newline(res)
+        res += f"{INDENT * 2}functions::get_packed_float32_array_operator_index()(&godot_owner, index)[0] = (float)(PyFloat_AsDouble(value));"
+        res += INDENT + "}"
+    elif class_["name"] == "PackedFloat64Array":
+        res += f"{INDENT}void {class_['name']}::py_setitem(int index,PyObject* value)" + "{"
+        res = generate_newline(res)
+        res += f"{INDENT * 2}functions::get_packed_float64_array_operator_index()(&godot_owner, index)[0] = (PyFloat_AsDouble(value));"
+        res += INDENT + "}"
+    elif class_["name"] == "PackedByteArray":
+        res += f"{INDENT}void {class_['name']}::py_setitem(int index,PyObject* value)" + "{"
+        res = generate_newline(res)
+        res += f"{INDENT * 2}functions::get_packed_byte_array_operator_index()(&godot_owner, index)[0] = (byte)(PyLong_AsLong(value));"
+        res += INDENT + "}"
+
+    elif class_["name"] == "PackedColorArray":
+        res += f"{INDENT}void {class_['name']}::py_setitem(int index,PyObject* value)" + "{"
+        res = generate_newline(res)
+        res += f"{INDENT * 2}((void**)functions::get_packed_color_array_operator_index()(&godot_owner, index))[0] = wrapper__extract_ptr_from_ColorWrapper(value)->godot_owner;"
+        res += INDENT + "}"
+    elif class_["name"] == "PackedVector3Array":
+        res += f"{INDENT}void {class_['name']}::py_setitem(int index,PyObject* value)" + "{"
+        res = generate_newline(res)
+        res += f"{INDENT * 2}((void**)functions::get_packed_vector3_array_operator_index()(&godot_owner, index))[0] = wrapper__extract_ptr_from_Vector3Wrapper(value)->godot_owner;"
+        res += INDENT + "}"
+    elif class_["name"] == "PackedVector2Array":
+        res += f"{INDENT}void {class_['name']}::py_setitem(int index,PyObject* value)" + "{"
+        res = generate_newline(res)
+        res += f"{INDENT * 2}((void**)functions::get_packed_vector2_array_operator_index()(&godot_owner, index))[0] = wrapper__extract_ptr_from_Vector2Wrapper(value)->godot_owner;"
+        res += INDENT + "}"
+    elif class_["name"] == "PackedStringArray":
+        res += f"{INDENT}void {class_['name']}::py_setitem(int index,PyObject* value)" + "{"
+        res = generate_newline(res)
+        res += f"{INDENT * 2} ((void**)functions::get_packed_string_array_operator_index()(&godot_owner, index))[0] = wrapper__extract_ptr_from_StringWrapper(value)->godot_owner;"
+        res += INDENT + "}"
+    elif get_class_name(class_["name"]) == "Array":
+        res += f"{INDENT}void {class_['name']}::py_setitem(int index,PyObject* value)" + "{"
+        res = generate_newline(res)
+        res += f"{INDENT * 2}Variant variant;"
+        res = generate_newline(res)
+        res += f"{INDENT * 2}variant.native_ptr = (functions::get_array_operator_index()(&godot_owner, index));"
+        res = generate_newline(res)
+        res += f"{INDENT * 2}variant.init_from_py_object(value, type_checking__get_name_from_object(value));"
+        res += INDENT + "}"
+
+    else :
+        res += f"{INDENT}void {class_['name']}::py_setitem(int index,PyObject* value)" + "{" + "}"
+    return res
 def generate_special_methods_array(class_):
     res = ""
+    res += generate_array_set_item_wrapper(class_)
+    res = generate_newline(res)
+    res += generate_array_get_item_wrapper(class_)
+    res = generate_newline(res)
     res += generate_array_set_item(class_)
     return res
 

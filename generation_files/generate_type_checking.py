@@ -19,6 +19,18 @@ def type_checking():
     res += f"from py4godot.py_classes.Object import Object"
     res = generate_newline(res)
 
+    res += f"from cpython.bytes cimport PyBytes_AsString"
+    res = generate_newline(res)
+
+    res += f"cdef api char* get_name_from_object(object o):"
+    res = generate_newline(res)
+
+    res += f"{INDENT}cdef str typename = type(o).__name__"
+    res = generate_newline(res)
+    res += f"{INDENT}cdef bytes b_typename = typename.encode('utf-8')"
+    res = generate_newline(res)
+    res += f"{INDENT}return PyBytes_AsString(b_typename)"
+    res = generate_newline(res)
     for cls in (set(builtin_classes) - {"Nil"}).union({"Object"}):
         res += f"cdef api bint is_{cls}(object o):"
         res = generate_newline(res)
@@ -63,6 +75,8 @@ if __name__ == "__main__":
         res = generate_newline(res)
         res += "void init_type_checking(){import_py4godot__wrappers__type_checking();}"
         res = generate_newline(res)
+        res += f"char* type_checking__get_name_from_object(PyObject* o){{return get_name_from_object(o); }}"
+        res = generate_newline(res)
         for cls in builtin_classes + ["Object"]:
             res += generate_wrapper_source(cls)
 
@@ -73,6 +87,8 @@ if __name__ == "__main__":
         res += '#include "Python.h"'
         res = generate_newline(res)
         res += "void init_type_checking();"
+        res = generate_newline(res)
+        res += f"char* type_checking__get_name_from_object(PyObject* o);"
         res = generate_newline(res)
         for cls in builtin_classes + ["Object"]:
             res += generate_wrapper_header(cls)

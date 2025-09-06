@@ -852,6 +852,12 @@ def generate_special_methods_object():
 def generate_special_methods_array(class_):
     res = ""
     res += generate_array_set_item(class_)
+    res = generate_newline(res)
+    res += f"{INDENT}PyObject* py_getitem(int index);"
+    res = generate_newline(res)
+    res += f"{INDENT}void py_setitem(int index,PyObject* value);"
+    res = generate_newline(res)
+
     return res
 
 
