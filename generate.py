@@ -10,11 +10,12 @@ args = my_parser.parse_args()
 # List of scripts to execute
 dir = "generation_files"
 scripts = [
-    'generate_classes.py',
+    'generate_method_ids.py',
+    'generate_type_checking.py',
+    'generate_wrappers.py',
+    'generate_py_classes.py',
     'generate_classes_cpp.py',
     'generate_classes_hpp.py',
-    'generate_classes_pxd.py',
-    'generate_classes_pyi.py',
     'generate_common_functions.py',
     'generate_common_functions_pyi.py',
     'generate_enums.py',

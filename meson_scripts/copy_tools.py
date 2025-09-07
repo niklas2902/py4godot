@@ -179,12 +179,12 @@ def copy_experimental(platform):
             copy(file,
              f"build/final/{platform}/{python_ver}-{platform}/python/lib/{python_ver_short}/site-packages/" + file)
     if "windows" in platform:
-        copytree("py4godot/py_classes",
-                 f"build/final/{platform}/{python_ver}-{platform}/python/Lib/site-packages/py4godot/py_classes",
+        copytree("py4godot/classes",
+                 f"build/final/{platform}/{python_ver}-{platform}/python/Lib/site-packages/py4godot/classes",
                  dirs_exist_ok=True)
     else:
-        copytree("py4godot/py_classes",
-                 f"build/final/{platform}/{python_ver}-{platform}/python/lib/{python_ver_short}/site-packages/py4godot/py_classes",
+        copytree("py4godot/classes",
+                 f"build/final/{platform}/{python_ver}-{platform}/python/lib/{python_ver_short}/site-packages/py4godot/classes",
                  dirs_exist_ok=True)
 
 

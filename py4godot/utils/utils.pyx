@@ -1,5 +1,5 @@
 # distutils: language=c++
-from py4godot.py_classes.core import StringName, String
+from py4godot.classes.core import StringName, String
 from py4godot.wrappers.wrappers cimport CPPStringWrapper, CPPStringNameWrapper
 from py4godot.utils.print_tools import *
 from py4godot.utils.test_utils cimport *

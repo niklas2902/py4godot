@@ -1,6 +1,6 @@
 # distutils: language=c++
-import py4godot.py_classes.core as core
-from py4godot.py_classes.Object import Object
+import py4godot.classes.core as core
+from py4godot.classes.Object import Object
 cimport py4godot.classes.cpp_bridge as bridge
 from cpython cimport Py_INCREF, Py_DECREF, PyObject
 

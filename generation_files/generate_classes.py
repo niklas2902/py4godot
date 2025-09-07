@@ -504,8 +504,8 @@ def generate_assert(args):
 
 def generate_method(class_, mMethod):
     res = ""
-    if should_skip_method(class_, mMethod):
-        return res
+    #if should_skip_method(class_, mMethod):
+    #    return res
     args = generate_args(class_, mMethod)
     def_function = f"{INDENT}def {pythonize_name(mMethod['name'])}({args}):"
     res += generate_method_headers(mMethod)

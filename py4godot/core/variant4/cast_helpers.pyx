@@ -4,908 +4,4763 @@ vals = []
 def clear_vals():
     global vals
     vals.clear()
-from py4godot.py_classes.Popup import Popup
-from py4godot.py_classes.IntervalTweener import IntervalTweener
-from py4godot.py_classes.CanvasItem import CanvasItem
-from py4godot.py_classes.InputEventMouseMotion import InputEventMouseMotion
-from py4godot.py_classes.PhysicsBody2DTypedArray import PhysicsBody2DTypedArray
-from py4godot.py_classes.CameraAttributes import CameraAttributes
-from py4godot.py_classes.GLTFBufferView import GLTFBufferView
-from py4godot.py_classes.PhysicsPointQueryParameters2D import PhysicsPointQueryParameters2D
-from py4godot.py_classes.Area3DTypedArray import Area3DTypedArray
-from py4godot.py_classes.CallbackTweener import CallbackTweener
-from py4godot.py_classes.RDFramebufferPass import RDFramebufferPass
-from py4godot.py_classes.PhysicsDirectSpaceState2D import PhysicsDirectSpaceState2D
-from py4godot.py_classes.Texture import Texture
-from py4godot.py_classes.PhysicsBody3D import PhysicsBody3D
-from py4godot.py_classes.Texture3D import Texture3D
-from py4godot.py_classes.Shortcut import Shortcut
-from py4godot.py_classes.AnimationPlayer import AnimationPlayer
-from py4godot.py_classes.MaterialTypedArray import MaterialTypedArray
-from py4godot.py_classes.InputEventMouse import InputEventMouse
-from py4godot.py_classes.AnimationLibrary import AnimationLibrary
-from py4godot.py_classes.World2D import World2D
-from py4godot.py_classes.Object import Object
-from py4godot.py_classes.World3D import World3D
-from py4godot.py_classes.SceneTree import SceneTree
-from py4godot.py_classes.Tree import Tree
-from py4godot.py_classes.GLTFAccessorTypedArray import GLTFAccessorTypedArray
-from py4godot.py_classes.Camera3D import Camera3D
-from py4godot.py_classes.Node3DGizmoTypedArray import Node3DGizmoTypedArray
-from py4godot.py_classes.SyntaxHighlighter import SyntaxHighlighter
-from py4godot.py_classes.PopupMenu import PopupMenu
-from py4godot.py_classes.RenderSceneBuffers import RenderSceneBuffers
-from py4godot.py_classes.Window import Window
-from py4godot.py_classes.Skin import Skin
-from py4godot.py_classes.Script import Script
-from py4godot.py_classes.MainLoop import MainLoop
-from py4godot.py_classes.Node3D import Node3D
-from py4godot.py_classes.intTypedArray import intTypedArray
-from py4godot.py_classes.InputEventFromWindow import InputEventFromWindow
-from py4godot.py_classes.ScriptLanguage import ScriptLanguage
-from py4godot.py_classes.TriangleMesh import TriangleMesh
-from py4godot.py_classes.GLTFCameraTypedArray import GLTFCameraTypedArray
-from py4godot.py_classes.ENetPacketPeer import ENetPacketPeer
-from py4godot.py_classes.GLTFTextureSamplerTypedArray import GLTFTextureSamplerTypedArray
-from py4godot.py_classes.CompositorEffectTypedArray import CompositorEffectTypedArray
-from py4godot.py_classes.PhysicsShapeQueryParameters2D import PhysicsShapeQueryParameters2D
-from py4godot.py_classes.VBoxContainer import VBoxContainer
-from py4godot.py_classes.BoxContainer import BoxContainer
-from py4godot.py_classes.GLTFNode import GLTFNode
-from py4godot.py_classes.PhysicsBody3DTypedArray import PhysicsBody3DTypedArray
-from py4godot.py_classes.RegExMatch import RegExMatch
-from py4godot.py_classes.Input import Input
-from py4godot.py_classes.StringNameTypedArray import StringNameTypedArray
-from py4godot.py_classes.WindowTypedArray import WindowTypedArray
-from py4godot.py_classes.GLTFMeshTypedArray import GLTFMeshTypedArray
-from py4godot.py_classes.Animation import Animation
-from py4godot.py_classes.SkinReference import SkinReference
-from py4godot.py_classes.GLTFSkinTypedArray import GLTFSkinTypedArray
-from py4godot.py_classes.GLTFSkin import GLTFSkin
-from py4godot.py_classes.Material import Material
-from py4godot.py_classes.ConvexPolygonShape3D import ConvexPolygonShape3D
-from py4godot.py_classes.Compositor import Compositor
-from py4godot.py_classes.Node3DTypedArray import Node3DTypedArray
-from py4godot.py_classes.ViewportTexture import ViewportTexture
-from py4godot.py_classes.TweenTypedArray import TweenTypedArray
-from py4godot.py_classes.InputEventWithModifiers import InputEventWithModifiers
-from py4godot.py_classes.EditorSyntaxHighlighter import EditorSyntaxHighlighter
-from py4godot.py_classes.GLTFLightTypedArray import GLTFLightTypedArray
-from py4godot.py_classes.Theme import Theme
-from py4godot.py_classes.Resource import Resource
-from py4godot.py_classes.MultiMesh import MultiMesh
-from py4godot.py_classes.InputEventMouseButton import InputEventMouseButton
-from py4godot.py_classes.CollisionObject2D import CollisionObject2D
-from py4godot.py_classes.RenderData import RenderData
-from py4godot.py_classes.RDPipelineColorBlendStateAttachment import RDPipelineColorBlendStateAttachment
-from py4godot.py_classes.VScrollBar import VScrollBar
-from py4godot.py_classes.Control import Control
-from py4godot.py_classes.Range import Range
-from py4godot.py_classes.PackedByteArrayTypedArray import PackedByteArrayTypedArray
-from py4godot.py_classes.Container import Container
-from py4godot.py_classes.ArrayTypedArray import ArrayTypedArray
-from py4godot.py_classes.Node2D import Node2D
-from py4godot.py_classes.GLTFMesh import GLTFMesh
-from py4godot.py_classes.PhysicsShapeQueryParameters3D import PhysicsShapeQueryParameters3D
-from py4godot.py_classes.Shape2D import Shape2D
-from py4godot.py_classes.GLTFTextureTypedArray import GLTFTextureTypedArray
-from py4godot.py_classes.Vector3TypedArray import Vector3TypedArray
-from py4godot.py_classes.CompositorEffect import CompositorEffect
-from py4godot.py_classes.RDPipelineSpecializationConstant import RDPipelineSpecializationConstant
-from py4godot.py_classes.GLTFCamera import GLTFCamera
-from py4godot.py_classes.Skeleton3D import Skeleton3D
-from py4godot.py_classes.SceneState import SceneState
-from py4godot.py_classes.Tween import Tween
-from py4godot.py_classes.DictionaryTypedArray import DictionaryTypedArray
-from py4godot.py_classes.SubtweenTweener import SubtweenTweener
-from py4godot.py_classes.Sky import Sky
-from py4godot.py_classes.Node3DGizmo import Node3DGizmo
-from py4godot.py_classes.PackedScene import PackedScene
-from py4godot.py_classes.GLTFTextureSampler import GLTFTextureSampler
-from py4godot.py_classes.ArrayMesh import ArrayMesh
-from py4godot.py_classes.Vector2TypedArray import Vector2TypedArray
-from py4godot.py_classes.Environment import Environment
-from py4godot.py_classes.GLTFSkeletonTypedArray import GLTFSkeletonTypedArray
-from py4godot.py_classes.AnimationMixer import AnimationMixer
-from py4godot.py_classes.Shape3D import Shape3D
-from py4godot.py_classes.Area2DTypedArray import Area2DTypedArray
-from py4godot.py_classes.Vector2iTypedArray import Vector2iTypedArray
-from py4godot.py_classes.Shader import Shader
-from py4godot.py_classes.GLTFAnimation import GLTFAnimation
-from py4godot.py_classes.Font import Font
-from py4godot.py_classes.RDUniform import RDUniform
-from py4godot.py_classes.PacketPeer import PacketPeer
-from py4godot.py_classes.PhysicsPointQueryParameters3D import PhysicsPointQueryParameters3D
-from py4godot.py_classes.ScriptEditorBase import ScriptEditorBase
-from py4godot.py_classes.Image import Image
-from py4godot.py_classes.TreeItemTypedArray import TreeItemTypedArray
-from py4godot.py_classes.GLTFAnimationTypedArray import GLTFAnimationTypedArray
-from py4godot.py_classes.StringTypedArray import StringTypedArray
-from py4godot.py_classes.BoneAttachment3D import BoneAttachment3D
-from py4godot.py_classes.ButtonGroup import ButtonGroup
-from py4godot.py_classes.MultiplayerPeer import MultiplayerPeer
-from py4godot.py_classes.BaseButtonTypedArray import BaseButtonTypedArray
-from py4godot.py_classes.TreeItem import TreeItem
-from py4godot.py_classes.RenderSceneData import RenderSceneData
-from py4godot.py_classes.ImporterMesh import ImporterMesh
-from py4godot.py_classes.CollisionObject3D import CollisionObject3D
-from py4godot.py_classes.Viewport import Viewport
-from py4godot.py_classes.Engine import Engine
-from py4godot.py_classes.ConcavePolygonShape3D import ConcavePolygonShape3D
-from py4godot.py_classes.AudioListener2D import AudioListener2D
-from py4godot.py_classes.Mesh import Mesh
-from py4godot.py_classes.RDVertexAttribute import RDVertexAttribute
-from py4godot.py_classes.PropertyTweener import PropertyTweener
-from py4godot.py_classes.Vector3iTypedArray import Vector3iTypedArray
-from py4godot.py_classes.AudioListener3D import AudioListener3D
-from py4godot.py_classes.ScrollBar import ScrollBar
-from py4godot.py_classes.PhysicsBody2D import PhysicsBody2D
-from py4godot.py_classes.Texture2D import Texture2D
-from py4godot.py_classes.Node2DTypedArray import Node2DTypedArray
-from py4godot.py_classes.RDAttachmentFormat import RDAttachmentFormat
-from py4godot.py_classes.CameraFeed import CameraFeed
-from py4godot.py_classes.RefCounted import RefCounted
-from py4godot.py_classes.RIDTypedArray import RIDTypedArray
-from py4godot.py_classes.Node import Node
-from py4godot.py_classes.CanvasLayer import CanvasLayer
-from py4godot.py_classes.PhysicsRayQueryParameters2D import PhysicsRayQueryParameters2D
-from py4godot.py_classes.RenderSceneBuffersConfiguration import RenderSceneBuffersConfiguration
-from py4godot.py_classes.KinematicCollision2D import KinematicCollision2D
-from py4godot.py_classes.Light3D import Light3D
-from py4godot.py_classes.GLTFTexture import GLTFTexture
-from py4godot.py_classes.SceneTreeTimer import SceneTreeTimer
-from py4godot.py_classes.InputEventTypedArray import InputEventTypedArray
-from py4godot.py_classes.GLTFState import GLTFState
-from py4godot.py_classes.CameraAttributesPhysical import CameraAttributesPhysical
-from py4godot.py_classes.GLTFSkeleton import GLTFSkeleton
-from py4godot.py_classes.BaseButton import BaseButton
-from py4godot.py_classes.GLTFLight import GLTFLight
-from py4godot.py_classes.KinematicCollision3D import KinematicCollision3D
-from py4godot.py_classes.Area2D import Area2D
-from py4godot.py_classes.Tweener import Tweener
-from py4godot.py_classes.MultiplayerAPI import MultiplayerAPI
-from py4godot.py_classes.ShaderMaterial import ShaderMaterial
-from py4godot.py_classes.PhysicsDirectSpaceState3D import PhysicsDirectSpaceState3D
-from py4godot.py_classes.InputEvent import InputEvent
-from py4godot.py_classes.MethodTweener import MethodTweener
-from py4godot.py_classes.TextEdit import TextEdit
-from py4godot.py_classes.GLTFBufferViewTypedArray import GLTFBufferViewTypedArray
-from py4godot.py_classes.GLTFNodeTypedArray import GLTFNodeTypedArray
-from py4godot.py_classes.Camera2D import Camera2D
-from py4godot.py_classes.PhysicsRayQueryParameters3D import PhysicsRayQueryParameters3D
-from py4godot.py_classes.NodeTypedArray import NodeTypedArray
-from py4godot.py_classes.StyleBox import StyleBox
-from py4godot.py_classes.FontTypedArray import FontTypedArray
-from py4godot.py_classes.VisualInstance3D import VisualInstance3D
-from py4godot.py_classes.TextureLayered import TextureLayered
-from py4godot.py_classes.PlaneTypedArray import PlaneTypedArray
-from py4godot.py_classes.GLTFAccessor import GLTFAccessor
-from py4godot.py_classes.Area3D import Area3D
-from py4godot.py_classes.HScrollBar import HScrollBar
-from py4godot.py_classes.Texture2DTypedArray import Texture2DTypedArray
-from py4godot.py_classes.ImageTypedArray import ImageTypedArray
-from py4godot.py_classes.Transform3DTypedArray import Transform3DTypedArray
-cdef api PyObject* cast_to_popup(PyObject* other):
-    cdef object o = Popup.cast_without_reference(<object>other)
+from py4godot.classes.AESContext import AESContext
+from py4godot.classes.AStar2D import AStar2D
+from py4godot.classes.AStar3D import AStar3D
+from py4godot.classes.AStarGrid2D import AStarGrid2D
+from py4godot.classes.AcceptDialog import AcceptDialog
+from py4godot.classes.AnimatableBody2D import AnimatableBody2D
+from py4godot.classes.AnimatableBody3D import AnimatableBody3D
+from py4godot.classes.AnimatedSprite2D import AnimatedSprite2D
+from py4godot.classes.AnimatedSprite3D import AnimatedSprite3D
+from py4godot.classes.AnimatedTexture import AnimatedTexture
+from py4godot.classes.Animation import Animation
+from py4godot.classes.AnimationLibrary import AnimationLibrary
+from py4godot.classes.AnimationMixer import AnimationMixer
+from py4godot.classes.AnimationNode import AnimationNode
+from py4godot.classes.AnimationNodeAdd2 import AnimationNodeAdd2
+from py4godot.classes.AnimationNodeAdd3 import AnimationNodeAdd3
+from py4godot.classes.AnimationNodeAnimation import AnimationNodeAnimation
+from py4godot.classes.AnimationNodeBlend2 import AnimationNodeBlend2
+from py4godot.classes.AnimationNodeBlend3 import AnimationNodeBlend3
+from py4godot.classes.AnimationNodeBlendSpace1D import AnimationNodeBlendSpace1D
+from py4godot.classes.AnimationNodeBlendSpace2D import AnimationNodeBlendSpace2D
+from py4godot.classes.AnimationNodeBlendTree import AnimationNodeBlendTree
+from py4godot.classes.AnimationNodeExtension import AnimationNodeExtension
+from py4godot.classes.AnimationNodeOneShot import AnimationNodeOneShot
+from py4godot.classes.AnimationNodeOutput import AnimationNodeOutput
+from py4godot.classes.AnimationNodeStateMachine import AnimationNodeStateMachine
+from py4godot.classes.AnimationNodeStateMachinePlayback import AnimationNodeStateMachinePlayback
+from py4godot.classes.AnimationNodeStateMachineTransition import AnimationNodeStateMachineTransition
+from py4godot.classes.AnimationNodeSub2 import AnimationNodeSub2
+from py4godot.classes.AnimationNodeSync import AnimationNodeSync
+from py4godot.classes.AnimationNodeTimeScale import AnimationNodeTimeScale
+from py4godot.classes.AnimationNodeTimeSeek import AnimationNodeTimeSeek
+from py4godot.classes.AnimationNodeTransition import AnimationNodeTransition
+from py4godot.classes.AnimationPlayer import AnimationPlayer
+from py4godot.classes.AnimationRootNode import AnimationRootNode
+from py4godot.classes.AnimationTree import AnimationTree
+from py4godot.classes.Area2D import Area2D
+from py4godot.classes.Area3D import Area3D
+from py4godot.classes.ArrayMesh import ArrayMesh
+from py4godot.classes.ArrayOccluder3D import ArrayOccluder3D
+from py4godot.classes.AspectRatioContainer import AspectRatioContainer
+from py4godot.classes.AtlasTexture import AtlasTexture
+from py4godot.classes.AudioBusLayout import AudioBusLayout
+from py4godot.classes.AudioEffect import AudioEffect
+from py4godot.classes.AudioEffectAmplify import AudioEffectAmplify
+from py4godot.classes.AudioEffectBandLimitFilter import AudioEffectBandLimitFilter
+from py4godot.classes.AudioEffectBandPassFilter import AudioEffectBandPassFilter
+from py4godot.classes.AudioEffectCapture import AudioEffectCapture
+from py4godot.classes.AudioEffectChorus import AudioEffectChorus
+from py4godot.classes.AudioEffectCompressor import AudioEffectCompressor
+from py4godot.classes.AudioEffectDelay import AudioEffectDelay
+from py4godot.classes.AudioEffectDistortion import AudioEffectDistortion
+from py4godot.classes.AudioEffectEQ import AudioEffectEQ
+from py4godot.classes.AudioEffectEQ10 import AudioEffectEQ10
+from py4godot.classes.AudioEffectEQ21 import AudioEffectEQ21
+from py4godot.classes.AudioEffectEQ6 import AudioEffectEQ6
+from py4godot.classes.AudioEffectFilter import AudioEffectFilter
+from py4godot.classes.AudioEffectHardLimiter import AudioEffectHardLimiter
+from py4godot.classes.AudioEffectHighPassFilter import AudioEffectHighPassFilter
+from py4godot.classes.AudioEffectHighShelfFilter import AudioEffectHighShelfFilter
+from py4godot.classes.AudioEffectInstance import AudioEffectInstance
+from py4godot.classes.AudioEffectLimiter import AudioEffectLimiter
+from py4godot.classes.AudioEffectLowPassFilter import AudioEffectLowPassFilter
+from py4godot.classes.AudioEffectLowShelfFilter import AudioEffectLowShelfFilter
+from py4godot.classes.AudioEffectNotchFilter import AudioEffectNotchFilter
+from py4godot.classes.AudioEffectPanner import AudioEffectPanner
+from py4godot.classes.AudioEffectPhaser import AudioEffectPhaser
+from py4godot.classes.AudioEffectPitchShift import AudioEffectPitchShift
+from py4godot.classes.AudioEffectRecord import AudioEffectRecord
+from py4godot.classes.AudioEffectReverb import AudioEffectReverb
+from py4godot.classes.AudioEffectSpectrumAnalyzer import AudioEffectSpectrumAnalyzer
+from py4godot.classes.AudioEffectSpectrumAnalyzerInstance import AudioEffectSpectrumAnalyzerInstance
+from py4godot.classes.AudioEffectStereoEnhance import AudioEffectStereoEnhance
+from py4godot.classes.AudioListener2D import AudioListener2D
+from py4godot.classes.AudioListener3D import AudioListener3D
+from py4godot.classes.AudioSample import AudioSample
+from py4godot.classes.AudioSamplePlayback import AudioSamplePlayback
+from py4godot.classes.AudioServer import AudioServer
+from py4godot.classes.AudioStream import AudioStream
+from py4godot.classes.AudioStreamGenerator import AudioStreamGenerator
+from py4godot.classes.AudioStreamGeneratorPlayback import AudioStreamGeneratorPlayback
+from py4godot.classes.AudioStreamInteractive import AudioStreamInteractive
+from py4godot.classes.AudioStreamMP3 import AudioStreamMP3
+from py4godot.classes.AudioStreamMicrophone import AudioStreamMicrophone
+from py4godot.classes.AudioStreamOggVorbis import AudioStreamOggVorbis
+from py4godot.classes.AudioStreamPlayback import AudioStreamPlayback
+from py4godot.classes.AudioStreamPlaybackInteractive import AudioStreamPlaybackInteractive
+from py4godot.classes.AudioStreamPlaybackOggVorbis import AudioStreamPlaybackOggVorbis
+from py4godot.classes.AudioStreamPlaybackPlaylist import AudioStreamPlaybackPlaylist
+from py4godot.classes.AudioStreamPlaybackPolyphonic import AudioStreamPlaybackPolyphonic
+from py4godot.classes.AudioStreamPlaybackResampled import AudioStreamPlaybackResampled
+from py4godot.classes.AudioStreamPlaybackSynchronized import AudioStreamPlaybackSynchronized
+from py4godot.classes.AudioStreamPlayer import AudioStreamPlayer
+from py4godot.classes.AudioStreamPlayer2D import AudioStreamPlayer2D
+from py4godot.classes.AudioStreamPlayer3D import AudioStreamPlayer3D
+from py4godot.classes.AudioStreamPlaylist import AudioStreamPlaylist
+from py4godot.classes.AudioStreamPolyphonic import AudioStreamPolyphonic
+from py4godot.classes.AudioStreamRandomizer import AudioStreamRandomizer
+from py4godot.classes.AudioStreamSynchronized import AudioStreamSynchronized
+from py4godot.classes.AudioStreamWAV import AudioStreamWAV
+from py4godot.classes.BackBufferCopy import BackBufferCopy
+from py4godot.classes.BaseButton import BaseButton
+from py4godot.classes.BaseMaterial3D import BaseMaterial3D
+from py4godot.classes.BitMap import BitMap
+from py4godot.classes.Bone2D import Bone2D
+from py4godot.classes.BoneAttachment3D import BoneAttachment3D
+from py4godot.classes.BoneMap import BoneMap
+from py4godot.classes.BoxContainer import BoxContainer
+from py4godot.classes.BoxMesh import BoxMesh
+from py4godot.classes.BoxOccluder3D import BoxOccluder3D
+from py4godot.classes.BoxShape3D import BoxShape3D
+from py4godot.classes.Button import Button
+from py4godot.classes.ButtonGroup import ButtonGroup
+from py4godot.classes.CPUParticles2D import CPUParticles2D
+from py4godot.classes.CPUParticles3D import CPUParticles3D
+from py4godot.classes.CSGBox3D import CSGBox3D
+from py4godot.classes.CSGCombiner3D import CSGCombiner3D
+from py4godot.classes.CSGCylinder3D import CSGCylinder3D
+from py4godot.classes.CSGMesh3D import CSGMesh3D
+from py4godot.classes.CSGPolygon3D import CSGPolygon3D
+from py4godot.classes.CSGPrimitive3D import CSGPrimitive3D
+from py4godot.classes.CSGShape3D import CSGShape3D
+from py4godot.classes.CSGSphere3D import CSGSphere3D
+from py4godot.classes.CSGTorus3D import CSGTorus3D
+from py4godot.classes.CallbackTweener import CallbackTweener
+from py4godot.classes.Camera2D import Camera2D
+from py4godot.classes.Camera3D import Camera3D
+from py4godot.classes.CameraAttributes import CameraAttributes
+from py4godot.classes.CameraAttributesPhysical import CameraAttributesPhysical
+from py4godot.classes.CameraAttributesPractical import CameraAttributesPractical
+from py4godot.classes.CameraFeed import CameraFeed
+from py4godot.classes.CameraServer import CameraServer
+from py4godot.classes.CameraTexture import CameraTexture
+from py4godot.classes.CanvasGroup import CanvasGroup
+from py4godot.classes.CanvasItem import CanvasItem
+from py4godot.classes.CanvasItemMaterial import CanvasItemMaterial
+from py4godot.classes.CanvasLayer import CanvasLayer
+from py4godot.classes.CanvasModulate import CanvasModulate
+from py4godot.classes.CanvasTexture import CanvasTexture
+from py4godot.classes.CapsuleMesh import CapsuleMesh
+from py4godot.classes.CapsuleShape2D import CapsuleShape2D
+from py4godot.classes.CapsuleShape3D import CapsuleShape3D
+from py4godot.classes.CenterContainer import CenterContainer
+from py4godot.classes.CharFXTransform import CharFXTransform
+from py4godot.classes.CharacterBody2D import CharacterBody2D
+from py4godot.classes.CharacterBody3D import CharacterBody3D
+from py4godot.classes.CheckBox import CheckBox
+from py4godot.classes.CheckButton import CheckButton
+from py4godot.classes.CircleShape2D import CircleShape2D
+from py4godot.classes.ClassDB import ClassDB
+from py4godot.classes.CodeEdit import CodeEdit
+from py4godot.classes.CodeHighlighter import CodeHighlighter
+from py4godot.classes.CollisionObject2D import CollisionObject2D
+from py4godot.classes.CollisionObject3D import CollisionObject3D
+from py4godot.classes.CollisionPolygon2D import CollisionPolygon2D
+from py4godot.classes.CollisionPolygon3D import CollisionPolygon3D
+from py4godot.classes.CollisionShape2D import CollisionShape2D
+from py4godot.classes.CollisionShape3D import CollisionShape3D
+from py4godot.classes.ColorPalette import ColorPalette
+from py4godot.classes.ColorPicker import ColorPicker
+from py4godot.classes.ColorPickerButton import ColorPickerButton
+from py4godot.classes.ColorRect import ColorRect
+from py4godot.classes.Compositor import Compositor
+from py4godot.classes.CompositorEffect import CompositorEffect
+from py4godot.classes.CompressedCubemap import CompressedCubemap
+from py4godot.classes.CompressedCubemapArray import CompressedCubemapArray
+from py4godot.classes.CompressedTexture2D import CompressedTexture2D
+from py4godot.classes.CompressedTexture2DArray import CompressedTexture2DArray
+from py4godot.classes.CompressedTexture3D import CompressedTexture3D
+from py4godot.classes.CompressedTextureLayered import CompressedTextureLayered
+from py4godot.classes.ConcavePolygonShape2D import ConcavePolygonShape2D
+from py4godot.classes.ConcavePolygonShape3D import ConcavePolygonShape3D
+from py4godot.classes.ConeTwistJoint3D import ConeTwistJoint3D
+from py4godot.classes.ConfigFile import ConfigFile
+from py4godot.classes.ConfirmationDialog import ConfirmationDialog
+from py4godot.classes.Container import Container
+from py4godot.classes.Control import Control
+from py4godot.classes.ConvexPolygonShape2D import ConvexPolygonShape2D
+from py4godot.classes.ConvexPolygonShape3D import ConvexPolygonShape3D
+from py4godot.classes.Crypto import Crypto
+from py4godot.classes.CryptoKey import CryptoKey
+from py4godot.classes.Cubemap import Cubemap
+from py4godot.classes.CubemapArray import CubemapArray
+from py4godot.classes.Curve import Curve
+from py4godot.classes.Curve2D import Curve2D
+from py4godot.classes.Curve3D import Curve3D
+from py4godot.classes.CurveTexture import CurveTexture
+from py4godot.classes.CurveXYZTexture import CurveXYZTexture
+from py4godot.classes.CylinderMesh import CylinderMesh
+from py4godot.classes.CylinderShape3D import CylinderShape3D
+from py4godot.classes.DTLSServer import DTLSServer
+from py4godot.classes.DampedSpringJoint2D import DampedSpringJoint2D
+from py4godot.classes.Decal import Decal
+from py4godot.classes.DirAccess import DirAccess
+from py4godot.classes.DirectionalLight2D import DirectionalLight2D
+from py4godot.classes.DirectionalLight3D import DirectionalLight3D
+from py4godot.classes.DisplayServer import DisplayServer
+from py4godot.classes.ENetConnection import ENetConnection
+from py4godot.classes.ENetMultiplayerPeer import ENetMultiplayerPeer
+from py4godot.classes.ENetPacketPeer import ENetPacketPeer
+from py4godot.classes.EditorCommandPalette import EditorCommandPalette
+from py4godot.classes.EditorContextMenuPlugin import EditorContextMenuPlugin
+from py4godot.classes.EditorDebuggerPlugin import EditorDebuggerPlugin
+from py4godot.classes.EditorDebuggerSession import EditorDebuggerSession
+from py4godot.classes.EditorExportPlatform import EditorExportPlatform
+from py4godot.classes.EditorExportPlatformAndroid import EditorExportPlatformAndroid
+from py4godot.classes.EditorExportPlatformExtension import EditorExportPlatformExtension
+from py4godot.classes.EditorExportPlatformIOS import EditorExportPlatformIOS
+from py4godot.classes.EditorExportPlatformLinuxBSD import EditorExportPlatformLinuxBSD
+from py4godot.classes.EditorExportPlatformMacOS import EditorExportPlatformMacOS
+from py4godot.classes.EditorExportPlatformPC import EditorExportPlatformPC
+from py4godot.classes.EditorExportPlatformWeb import EditorExportPlatformWeb
+from py4godot.classes.EditorExportPlatformWindows import EditorExportPlatformWindows
+from py4godot.classes.EditorExportPlugin import EditorExportPlugin
+from py4godot.classes.EditorExportPreset import EditorExportPreset
+from py4godot.classes.EditorFeatureProfile import EditorFeatureProfile
+from py4godot.classes.EditorFileDialog import EditorFileDialog
+from py4godot.classes.EditorFileSystem import EditorFileSystem
+from py4godot.classes.EditorFileSystemDirectory import EditorFileSystemDirectory
+from py4godot.classes.EditorFileSystemImportFormatSupportQuery import EditorFileSystemImportFormatSupportQuery
+from py4godot.classes.EditorImportPlugin import EditorImportPlugin
+from py4godot.classes.EditorInspector import EditorInspector
+from py4godot.classes.EditorInspectorPlugin import EditorInspectorPlugin
+from py4godot.classes.EditorInterface import EditorInterface
+from py4godot.classes.EditorNode3DGizmo import EditorNode3DGizmo
+from py4godot.classes.EditorNode3DGizmoPlugin import EditorNode3DGizmoPlugin
+from py4godot.classes.EditorPaths import EditorPaths
+from py4godot.classes.EditorPlugin import EditorPlugin
+from py4godot.classes.EditorProperty import EditorProperty
+from py4godot.classes.EditorResourceConversionPlugin import EditorResourceConversionPlugin
+from py4godot.classes.EditorResourcePicker import EditorResourcePicker
+from py4godot.classes.EditorResourcePreview import EditorResourcePreview
+from py4godot.classes.EditorResourcePreviewGenerator import EditorResourcePreviewGenerator
+from py4godot.classes.EditorResourceTooltipPlugin import EditorResourceTooltipPlugin
+from py4godot.classes.EditorSceneFormatImporter import EditorSceneFormatImporter
+from py4godot.classes.EditorSceneFormatImporterBlend import EditorSceneFormatImporterBlend
+from py4godot.classes.EditorSceneFormatImporterFBX2GLTF import EditorSceneFormatImporterFBX2GLTF
+from py4godot.classes.EditorSceneFormatImporterGLTF import EditorSceneFormatImporterGLTF
+from py4godot.classes.EditorSceneFormatImporterUFBX import EditorSceneFormatImporterUFBX
+from py4godot.classes.EditorScenePostImport import EditorScenePostImport
+from py4godot.classes.EditorScenePostImportPlugin import EditorScenePostImportPlugin
+from py4godot.classes.EditorScript import EditorScript
+from py4godot.classes.EditorScriptPicker import EditorScriptPicker
+from py4godot.classes.EditorSelection import EditorSelection
+from py4godot.classes.EditorSettings import EditorSettings
+from py4godot.classes.EditorSpinSlider import EditorSpinSlider
+from py4godot.classes.EditorSyntaxHighlighter import EditorSyntaxHighlighter
+from py4godot.classes.EditorToaster import EditorToaster
+from py4godot.classes.EditorTranslationParserPlugin import EditorTranslationParserPlugin
+from py4godot.classes.EditorUndoRedoManager import EditorUndoRedoManager
+from py4godot.classes.EditorVCSInterface import EditorVCSInterface
+from py4godot.classes.EncodedObjectAsID import EncodedObjectAsID
+from py4godot.classes.Engine import Engine
+from py4godot.classes.EngineDebugger import EngineDebugger
+from py4godot.classes.EngineProfiler import EngineProfiler
+from py4godot.classes.Environment import Environment
+from py4godot.classes.Expression import Expression
+from py4godot.classes.ExternalTexture import ExternalTexture
+from py4godot.classes.FBXDocument import FBXDocument
+from py4godot.classes.FBXState import FBXState
+from py4godot.classes.FastNoiseLite import FastNoiseLite
+from py4godot.classes.FileAccess import FileAccess
+from py4godot.classes.FileDialog import FileDialog
+from py4godot.classes.FileSystemDock import FileSystemDock
+from py4godot.classes.FlowContainer import FlowContainer
+from py4godot.classes.FogMaterial import FogMaterial
+from py4godot.classes.FogVolume import FogVolume
+from py4godot.classes.Font import Font
+from py4godot.classes.FontFile import FontFile
+from py4godot.classes.FontVariation import FontVariation
+from py4godot.classes.FramebufferCacheRD import FramebufferCacheRD
+from py4godot.classes.GDExtension import GDExtension
+from py4godot.classes.GDExtensionManager import GDExtensionManager
+from py4godot.classes.GDScript import GDScript
+from py4godot.classes.GDScriptSyntaxHighlighter import GDScriptSyntaxHighlighter
+from py4godot.classes.GLTFAccessor import GLTFAccessor
+from py4godot.classes.GLTFAnimation import GLTFAnimation
+from py4godot.classes.GLTFBufferView import GLTFBufferView
+from py4godot.classes.GLTFCamera import GLTFCamera
+from py4godot.classes.GLTFDocument import GLTFDocument
+from py4godot.classes.GLTFDocumentExtension import GLTFDocumentExtension
+from py4godot.classes.GLTFDocumentExtensionConvertImporterMesh import GLTFDocumentExtensionConvertImporterMesh
+from py4godot.classes.GLTFLight import GLTFLight
+from py4godot.classes.GLTFMesh import GLTFMesh
+from py4godot.classes.GLTFNode import GLTFNode
+from py4godot.classes.GLTFObjectModelProperty import GLTFObjectModelProperty
+from py4godot.classes.GLTFPhysicsBody import GLTFPhysicsBody
+from py4godot.classes.GLTFPhysicsShape import GLTFPhysicsShape
+from py4godot.classes.GLTFSkeleton import GLTFSkeleton
+from py4godot.classes.GLTFSkin import GLTFSkin
+from py4godot.classes.GLTFSpecGloss import GLTFSpecGloss
+from py4godot.classes.GLTFState import GLTFState
+from py4godot.classes.GLTFTexture import GLTFTexture
+from py4godot.classes.GLTFTextureSampler import GLTFTextureSampler
+from py4godot.classes.GPUParticles2D import GPUParticles2D
+from py4godot.classes.GPUParticles3D import GPUParticles3D
+from py4godot.classes.GPUParticlesAttractor3D import GPUParticlesAttractor3D
+from py4godot.classes.GPUParticlesAttractorBox3D import GPUParticlesAttractorBox3D
+from py4godot.classes.GPUParticlesAttractorSphere3D import GPUParticlesAttractorSphere3D
+from py4godot.classes.GPUParticlesAttractorVectorField3D import GPUParticlesAttractorVectorField3D
+from py4godot.classes.GPUParticlesCollision3D import GPUParticlesCollision3D
+from py4godot.classes.GPUParticlesCollisionBox3D import GPUParticlesCollisionBox3D
+from py4godot.classes.GPUParticlesCollisionHeightField3D import GPUParticlesCollisionHeightField3D
+from py4godot.classes.GPUParticlesCollisionSDF3D import GPUParticlesCollisionSDF3D
+from py4godot.classes.GPUParticlesCollisionSphere3D import GPUParticlesCollisionSphere3D
+from py4godot.classes.Generic6DOFJoint3D import Generic6DOFJoint3D
+from py4godot.classes.Geometry2D import Geometry2D
+from py4godot.classes.Geometry3D import Geometry3D
+from py4godot.classes.GeometryInstance3D import GeometryInstance3D
+from py4godot.classes.Gradient import Gradient
+from py4godot.classes.GradientTexture1D import GradientTexture1D
+from py4godot.classes.GradientTexture2D import GradientTexture2D
+from py4godot.classes.GraphEdit import GraphEdit
+from py4godot.classes.GraphElement import GraphElement
+from py4godot.classes.GraphFrame import GraphFrame
+from py4godot.classes.GraphNode import GraphNode
+from py4godot.classes.GridContainer import GridContainer
+from py4godot.classes.GridMap import GridMap
+from py4godot.classes.GridMapEditorPlugin import GridMapEditorPlugin
+from py4godot.classes.GrooveJoint2D import GrooveJoint2D
+from py4godot.classes.HBoxContainer import HBoxContainer
+from py4godot.classes.HFlowContainer import HFlowContainer
+from py4godot.classes.HMACContext import HMACContext
+from py4godot.classes.HScrollBar import HScrollBar
+from py4godot.classes.HSeparator import HSeparator
+from py4godot.classes.HSlider import HSlider
+from py4godot.classes.HSplitContainer import HSplitContainer
+from py4godot.classes.HTTPClient import HTTPClient
+from py4godot.classes.HTTPRequest import HTTPRequest
+from py4godot.classes.HashingContext import HashingContext
+from py4godot.classes.HeightMapShape3D import HeightMapShape3D
+from py4godot.classes.HingeJoint3D import HingeJoint3D
+from py4godot.classes.IP import IP
+from py4godot.classes.Image import Image
+from py4godot.classes.ImageFormatLoader import ImageFormatLoader
+from py4godot.classes.ImageFormatLoaderExtension import ImageFormatLoaderExtension
+from py4godot.classes.ImageTexture import ImageTexture
+from py4godot.classes.ImageTexture3D import ImageTexture3D
+from py4godot.classes.ImageTextureLayered import ImageTextureLayered
+from py4godot.classes.ImmediateMesh import ImmediateMesh
+from py4godot.classes.ImporterMesh import ImporterMesh
+from py4godot.classes.ImporterMeshInstance3D import ImporterMeshInstance3D
+from py4godot.classes.Input import Input
+from py4godot.classes.InputEvent import InputEvent
+from py4godot.classes.InputEventAction import InputEventAction
+from py4godot.classes.InputEventFromWindow import InputEventFromWindow
+from py4godot.classes.InputEventGesture import InputEventGesture
+from py4godot.classes.InputEventJoypadButton import InputEventJoypadButton
+from py4godot.classes.InputEventJoypadMotion import InputEventJoypadMotion
+from py4godot.classes.InputEventKey import InputEventKey
+from py4godot.classes.InputEventMIDI import InputEventMIDI
+from py4godot.classes.InputEventMagnifyGesture import InputEventMagnifyGesture
+from py4godot.classes.InputEventMouse import InputEventMouse
+from py4godot.classes.InputEventMouseButton import InputEventMouseButton
+from py4godot.classes.InputEventMouseMotion import InputEventMouseMotion
+from py4godot.classes.InputEventPanGesture import InputEventPanGesture
+from py4godot.classes.InputEventScreenDrag import InputEventScreenDrag
+from py4godot.classes.InputEventScreenTouch import InputEventScreenTouch
+from py4godot.classes.InputEventShortcut import InputEventShortcut
+from py4godot.classes.InputEventWithModifiers import InputEventWithModifiers
+from py4godot.classes.InputMap import InputMap
+from py4godot.classes.InstancePlaceholder import InstancePlaceholder
+from py4godot.classes.IntervalTweener import IntervalTweener
+from py4godot.classes.ItemList import ItemList
+from py4godot.classes.JNISingleton import JNISingleton
+from py4godot.classes.JSON import JSON
+from py4godot.classes.JSONRPC import JSONRPC
+from py4godot.classes.JavaClass import JavaClass
+from py4godot.classes.JavaClassWrapper import JavaClassWrapper
+from py4godot.classes.JavaObject import JavaObject
+from py4godot.classes.JavaScriptBridge import JavaScriptBridge
+from py4godot.classes.JavaScriptObject import JavaScriptObject
+from py4godot.classes.Joint2D import Joint2D
+from py4godot.classes.Joint3D import Joint3D
+from py4godot.classes.KinematicCollision2D import KinematicCollision2D
+from py4godot.classes.KinematicCollision3D import KinematicCollision3D
+from py4godot.classes.Label import Label
+from py4godot.classes.Label3D import Label3D
+from py4godot.classes.LabelSettings import LabelSettings
+from py4godot.classes.Light2D import Light2D
+from py4godot.classes.Light3D import Light3D
+from py4godot.classes.LightOccluder2D import LightOccluder2D
+from py4godot.classes.LightmapGI import LightmapGI
+from py4godot.classes.LightmapGIData import LightmapGIData
+from py4godot.classes.LightmapProbe import LightmapProbe
+from py4godot.classes.Lightmapper import Lightmapper
+from py4godot.classes.LightmapperRD import LightmapperRD
+from py4godot.classes.Line2D import Line2D
+from py4godot.classes.LineEdit import LineEdit
+from py4godot.classes.LinkButton import LinkButton
+from py4godot.classes.LookAtModifier3D import LookAtModifier3D
+from py4godot.classes.MainLoop import MainLoop
+from py4godot.classes.MarginContainer import MarginContainer
+from py4godot.classes.Marker2D import Marker2D
+from py4godot.classes.Marker3D import Marker3D
+from py4godot.classes.Marshalls import Marshalls
+from py4godot.classes.Material import Material
+from py4godot.classes.MenuBar import MenuBar
+from py4godot.classes.MenuButton import MenuButton
+from py4godot.classes.Mesh import Mesh
+from py4godot.classes.MeshConvexDecompositionSettings import MeshConvexDecompositionSettings
+from py4godot.classes.MeshDataTool import MeshDataTool
+from py4godot.classes.MeshInstance2D import MeshInstance2D
+from py4godot.classes.MeshInstance3D import MeshInstance3D
+from py4godot.classes.MeshLibrary import MeshLibrary
+from py4godot.classes.MeshTexture import MeshTexture
+from py4godot.classes.MethodTweener import MethodTweener
+from py4godot.classes.MissingNode import MissingNode
+from py4godot.classes.MissingResource import MissingResource
+from py4godot.classes.MobileVRInterface import MobileVRInterface
+from py4godot.classes.MovieWriter import MovieWriter
+from py4godot.classes.MultiMesh import MultiMesh
+from py4godot.classes.MultiMeshInstance2D import MultiMeshInstance2D
+from py4godot.classes.MultiMeshInstance3D import MultiMeshInstance3D
+from py4godot.classes.MultiplayerAPI import MultiplayerAPI
+from py4godot.classes.MultiplayerAPIExtension import MultiplayerAPIExtension
+from py4godot.classes.MultiplayerPeer import MultiplayerPeer
+from py4godot.classes.MultiplayerPeerExtension import MultiplayerPeerExtension
+from py4godot.classes.MultiplayerSpawner import MultiplayerSpawner
+from py4godot.classes.MultiplayerSynchronizer import MultiplayerSynchronizer
+from py4godot.classes.Mutex import Mutex
+from py4godot.classes.NativeMenu import NativeMenu
+from py4godot.classes.NavigationAgent2D import NavigationAgent2D
+from py4godot.classes.NavigationAgent3D import NavigationAgent3D
+from py4godot.classes.NavigationLink2D import NavigationLink2D
+from py4godot.classes.NavigationLink3D import NavigationLink3D
+from py4godot.classes.NavigationMesh import NavigationMesh
+from py4godot.classes.NavigationMeshGenerator import NavigationMeshGenerator
+from py4godot.classes.NavigationMeshSourceGeometryData2D import NavigationMeshSourceGeometryData2D
+from py4godot.classes.NavigationMeshSourceGeometryData3D import NavigationMeshSourceGeometryData3D
+from py4godot.classes.NavigationObstacle2D import NavigationObstacle2D
+from py4godot.classes.NavigationObstacle3D import NavigationObstacle3D
+from py4godot.classes.NavigationPathQueryParameters2D import NavigationPathQueryParameters2D
+from py4godot.classes.NavigationPathQueryParameters3D import NavigationPathQueryParameters3D
+from py4godot.classes.NavigationPathQueryResult2D import NavigationPathQueryResult2D
+from py4godot.classes.NavigationPathQueryResult3D import NavigationPathQueryResult3D
+from py4godot.classes.NavigationPolygon import NavigationPolygon
+from py4godot.classes.NavigationRegion2D import NavigationRegion2D
+from py4godot.classes.NavigationRegion3D import NavigationRegion3D
+from py4godot.classes.NavigationServer2D import NavigationServer2D
+from py4godot.classes.NavigationServer3D import NavigationServer3D
+from py4godot.classes.NinePatchRect import NinePatchRect
+from py4godot.classes.Node import Node
+from py4godot.classes.Node2D import Node2D
+from py4godot.classes.Node3D import Node3D
+from py4godot.classes.Node3DGizmo import Node3DGizmo
+from py4godot.classes.Noise import Noise
+from py4godot.classes.NoiseTexture2D import NoiseTexture2D
+from py4godot.classes.NoiseTexture3D import NoiseTexture3D
+from py4godot.classes.ORMMaterial3D import ORMMaterial3D
+from py4godot.classes.OS import OS
+from py4godot.classes.Object import Object
+from py4godot.classes.Occluder3D import Occluder3D
+from py4godot.classes.OccluderInstance3D import OccluderInstance3D
+from py4godot.classes.OccluderPolygon2D import OccluderPolygon2D
+from py4godot.classes.OfflineMultiplayerPeer import OfflineMultiplayerPeer
+from py4godot.classes.OggPacketSequence import OggPacketSequence
+from py4godot.classes.OggPacketSequencePlayback import OggPacketSequencePlayback
+from py4godot.classes.OmniLight3D import OmniLight3D
+from py4godot.classes.OpenXRAPIExtension import OpenXRAPIExtension
+from py4godot.classes.OpenXRAction import OpenXRAction
+from py4godot.classes.OpenXRActionBindingModifier import OpenXRActionBindingModifier
+from py4godot.classes.OpenXRActionMap import OpenXRActionMap
+from py4godot.classes.OpenXRActionSet import OpenXRActionSet
+from py4godot.classes.OpenXRAnalogThresholdModifier import OpenXRAnalogThresholdModifier
+from py4godot.classes.OpenXRBindingModifier import OpenXRBindingModifier
+from py4godot.classes.OpenXRBindingModifierEditor import OpenXRBindingModifierEditor
+from py4godot.classes.OpenXRCompositionLayer import OpenXRCompositionLayer
+from py4godot.classes.OpenXRCompositionLayerCylinder import OpenXRCompositionLayerCylinder
+from py4godot.classes.OpenXRCompositionLayerEquirect import OpenXRCompositionLayerEquirect
+from py4godot.classes.OpenXRCompositionLayerQuad import OpenXRCompositionLayerQuad
+from py4godot.classes.OpenXRDpadBindingModifier import OpenXRDpadBindingModifier
+from py4godot.classes.OpenXRExtensionWrapperExtension import OpenXRExtensionWrapperExtension
+from py4godot.classes.OpenXRHand import OpenXRHand
+from py4godot.classes.OpenXRHapticBase import OpenXRHapticBase
+from py4godot.classes.OpenXRHapticVibration import OpenXRHapticVibration
+from py4godot.classes.OpenXRIPBinding import OpenXRIPBinding
+from py4godot.classes.OpenXRIPBindingModifier import OpenXRIPBindingModifier
+from py4godot.classes.OpenXRInteractionProfile import OpenXRInteractionProfile
+from py4godot.classes.OpenXRInteractionProfileEditor import OpenXRInteractionProfileEditor
+from py4godot.classes.OpenXRInteractionProfileEditorBase import OpenXRInteractionProfileEditorBase
+from py4godot.classes.OpenXRInteractionProfileMetadata import OpenXRInteractionProfileMetadata
+from py4godot.classes.OpenXRInterface import OpenXRInterface
+from py4godot.classes.OpenXRVisibilityMask import OpenXRVisibilityMask
+from py4godot.classes.OptimizedTranslation import OptimizedTranslation
+from py4godot.classes.OptionButton import OptionButton
+from py4godot.classes.PCKPacker import PCKPacker
+from py4godot.classes.PackedDataContainer import PackedDataContainer
+from py4godot.classes.PackedDataContainerRef import PackedDataContainerRef
+from py4godot.classes.PackedScene import PackedScene
+from py4godot.classes.PacketPeer import PacketPeer
+from py4godot.classes.PacketPeerDTLS import PacketPeerDTLS
+from py4godot.classes.PacketPeerExtension import PacketPeerExtension
+from py4godot.classes.PacketPeerStream import PacketPeerStream
+from py4godot.classes.PacketPeerUDP import PacketPeerUDP
+from py4godot.classes.Panel import Panel
+from py4godot.classes.PanelContainer import PanelContainer
+from py4godot.classes.PanoramaSkyMaterial import PanoramaSkyMaterial
+from py4godot.classes.Parallax2D import Parallax2D
+from py4godot.classes.ParallaxBackground import ParallaxBackground
+from py4godot.classes.ParallaxLayer import ParallaxLayer
+from py4godot.classes.ParticleProcessMaterial import ParticleProcessMaterial
+from py4godot.classes.Path2D import Path2D
+from py4godot.classes.Path3D import Path3D
+from py4godot.classes.PathFollow2D import PathFollow2D
+from py4godot.classes.PathFollow3D import PathFollow3D
+from py4godot.classes.Performance import Performance
+from py4godot.classes.PhysicalBone2D import PhysicalBone2D
+from py4godot.classes.PhysicalBone3D import PhysicalBone3D
+from py4godot.classes.PhysicalBoneSimulator3D import PhysicalBoneSimulator3D
+from py4godot.classes.PhysicalSkyMaterial import PhysicalSkyMaterial
+from py4godot.classes.PhysicsBody2D import PhysicsBody2D
+from py4godot.classes.PhysicsBody3D import PhysicsBody3D
+from py4godot.classes.PhysicsDirectBodyState2D import PhysicsDirectBodyState2D
+from py4godot.classes.PhysicsDirectBodyState2DExtension import PhysicsDirectBodyState2DExtension
+from py4godot.classes.PhysicsDirectBodyState3D import PhysicsDirectBodyState3D
+from py4godot.classes.PhysicsDirectBodyState3DExtension import PhysicsDirectBodyState3DExtension
+from py4godot.classes.PhysicsDirectSpaceState2D import PhysicsDirectSpaceState2D
+from py4godot.classes.PhysicsDirectSpaceState2DExtension import PhysicsDirectSpaceState2DExtension
+from py4godot.classes.PhysicsDirectSpaceState3D import PhysicsDirectSpaceState3D
+from py4godot.classes.PhysicsDirectSpaceState3DExtension import PhysicsDirectSpaceState3DExtension
+from py4godot.classes.PhysicsMaterial import PhysicsMaterial
+from py4godot.classes.PhysicsPointQueryParameters2D import PhysicsPointQueryParameters2D
+from py4godot.classes.PhysicsPointQueryParameters3D import PhysicsPointQueryParameters3D
+from py4godot.classes.PhysicsRayQueryParameters2D import PhysicsRayQueryParameters2D
+from py4godot.classes.PhysicsRayQueryParameters3D import PhysicsRayQueryParameters3D
+from py4godot.classes.PhysicsServer2D import PhysicsServer2D
+from py4godot.classes.PhysicsServer2DExtension import PhysicsServer2DExtension
+from py4godot.classes.PhysicsServer2DManager import PhysicsServer2DManager
+from py4godot.classes.PhysicsServer3D import PhysicsServer3D
+from py4godot.classes.PhysicsServer3DExtension import PhysicsServer3DExtension
+from py4godot.classes.PhysicsServer3DManager import PhysicsServer3DManager
+from py4godot.classes.PhysicsServer3DRenderingServerHandler import PhysicsServer3DRenderingServerHandler
+from py4godot.classes.PhysicsShapeQueryParameters2D import PhysicsShapeQueryParameters2D
+from py4godot.classes.PhysicsShapeQueryParameters3D import PhysicsShapeQueryParameters3D
+from py4godot.classes.PhysicsTestMotionParameters2D import PhysicsTestMotionParameters2D
+from py4godot.classes.PhysicsTestMotionParameters3D import PhysicsTestMotionParameters3D
+from py4godot.classes.PhysicsTestMotionResult2D import PhysicsTestMotionResult2D
+from py4godot.classes.PhysicsTestMotionResult3D import PhysicsTestMotionResult3D
+from py4godot.classes.PinJoint2D import PinJoint2D
+from py4godot.classes.PinJoint3D import PinJoint3D
+from py4godot.classes.PlaceholderCubemap import PlaceholderCubemap
+from py4godot.classes.PlaceholderCubemapArray import PlaceholderCubemapArray
+from py4godot.classes.PlaceholderMaterial import PlaceholderMaterial
+from py4godot.classes.PlaceholderMesh import PlaceholderMesh
+from py4godot.classes.PlaceholderTexture2D import PlaceholderTexture2D
+from py4godot.classes.PlaceholderTexture2DArray import PlaceholderTexture2DArray
+from py4godot.classes.PlaceholderTexture3D import PlaceholderTexture3D
+from py4godot.classes.PlaceholderTextureLayered import PlaceholderTextureLayered
+from py4godot.classes.PlaneMesh import PlaneMesh
+from py4godot.classes.PointLight2D import PointLight2D
+from py4godot.classes.PointMesh import PointMesh
+from py4godot.classes.Polygon2D import Polygon2D
+from py4godot.classes.PolygonOccluder3D import PolygonOccluder3D
+from py4godot.classes.PolygonPathFinder import PolygonPathFinder
+from py4godot.classes.Popup import Popup
+from py4godot.classes.PopupMenu import PopupMenu
+from py4godot.classes.PopupPanel import PopupPanel
+from py4godot.classes.PortableCompressedTexture2D import PortableCompressedTexture2D
+from py4godot.classes.PrimitiveMesh import PrimitiveMesh
+from py4godot.classes.PrismMesh import PrismMesh
+from py4godot.classes.ProceduralSkyMaterial import ProceduralSkyMaterial
+from py4godot.classes.ProgressBar import ProgressBar
+from py4godot.classes.ProjectSettings import ProjectSettings
+from py4godot.classes.PropertyTweener import PropertyTweener
+from py4godot.classes.QuadMesh import QuadMesh
+from py4godot.classes.QuadOccluder3D import QuadOccluder3D
+from py4godot.classes.RDAttachmentFormat import RDAttachmentFormat
+from py4godot.classes.RDFramebufferPass import RDFramebufferPass
+from py4godot.classes.RDPipelineColorBlendState import RDPipelineColorBlendState
+from py4godot.classes.RDPipelineColorBlendStateAttachment import RDPipelineColorBlendStateAttachment
+from py4godot.classes.RDPipelineDepthStencilState import RDPipelineDepthStencilState
+from py4godot.classes.RDPipelineMultisampleState import RDPipelineMultisampleState
+from py4godot.classes.RDPipelineRasterizationState import RDPipelineRasterizationState
+from py4godot.classes.RDPipelineSpecializationConstant import RDPipelineSpecializationConstant
+from py4godot.classes.RDSamplerState import RDSamplerState
+from py4godot.classes.RDShaderFile import RDShaderFile
+from py4godot.classes.RDShaderSPIRV import RDShaderSPIRV
+from py4godot.classes.RDShaderSource import RDShaderSource
+from py4godot.classes.RDTextureFormat import RDTextureFormat
+from py4godot.classes.RDTextureView import RDTextureView
+from py4godot.classes.RDUniform import RDUniform
+from py4godot.classes.RDVertexAttribute import RDVertexAttribute
+from py4godot.classes.RandomNumberGenerator import RandomNumberGenerator
+from py4godot.classes.Range import Range
+from py4godot.classes.RayCast2D import RayCast2D
+from py4godot.classes.RayCast3D import RayCast3D
+from py4godot.classes.RectangleShape2D import RectangleShape2D
+from py4godot.classes.RefCounted import RefCounted
+from py4godot.classes.ReferenceRect import ReferenceRect
+from py4godot.classes.ReflectionProbe import ReflectionProbe
+from py4godot.classes.RegEx import RegEx
+from py4godot.classes.RegExMatch import RegExMatch
+from py4godot.classes.RemoteTransform2D import RemoteTransform2D
+from py4godot.classes.RemoteTransform3D import RemoteTransform3D
+from py4godot.classes.RenderData import RenderData
+from py4godot.classes.RenderDataExtension import RenderDataExtension
+from py4godot.classes.RenderDataRD import RenderDataRD
+from py4godot.classes.RenderSceneBuffers import RenderSceneBuffers
+from py4godot.classes.RenderSceneBuffersConfiguration import RenderSceneBuffersConfiguration
+from py4godot.classes.RenderSceneBuffersExtension import RenderSceneBuffersExtension
+from py4godot.classes.RenderSceneBuffersRD import RenderSceneBuffersRD
+from py4godot.classes.RenderSceneData import RenderSceneData
+from py4godot.classes.RenderSceneDataExtension import RenderSceneDataExtension
+from py4godot.classes.RenderSceneDataRD import RenderSceneDataRD
+from py4godot.classes.RenderingDevice import RenderingDevice
+from py4godot.classes.RenderingServer import RenderingServer
+from py4godot.classes.Resource import Resource
+from py4godot.classes.ResourceFormatLoader import ResourceFormatLoader
+from py4godot.classes.ResourceFormatSaver import ResourceFormatSaver
+from py4godot.classes.ResourceImporter import ResourceImporter
+from py4godot.classes.ResourceImporterBMFont import ResourceImporterBMFont
+from py4godot.classes.ResourceImporterBitMap import ResourceImporterBitMap
+from py4godot.classes.ResourceImporterCSVTranslation import ResourceImporterCSVTranslation
+from py4godot.classes.ResourceImporterDynamicFont import ResourceImporterDynamicFont
+from py4godot.classes.ResourceImporterImage import ResourceImporterImage
+from py4godot.classes.ResourceImporterImageFont import ResourceImporterImageFont
+from py4godot.classes.ResourceImporterLayeredTexture import ResourceImporterLayeredTexture
+from py4godot.classes.ResourceImporterMP3 import ResourceImporterMP3
+from py4godot.classes.ResourceImporterOBJ import ResourceImporterOBJ
+from py4godot.classes.ResourceImporterOggVorbis import ResourceImporterOggVorbis
+from py4godot.classes.ResourceImporterScene import ResourceImporterScene
+from py4godot.classes.ResourceImporterShaderFile import ResourceImporterShaderFile
+from py4godot.classes.ResourceImporterTexture import ResourceImporterTexture
+from py4godot.classes.ResourceImporterTextureAtlas import ResourceImporterTextureAtlas
+from py4godot.classes.ResourceImporterWAV import ResourceImporterWAV
+from py4godot.classes.ResourceLoader import ResourceLoader
+from py4godot.classes.ResourcePreloader import ResourcePreloader
+from py4godot.classes.ResourceSaver import ResourceSaver
+from py4godot.classes.ResourceUID import ResourceUID
+from py4godot.classes.RetargetModifier3D import RetargetModifier3D
+from py4godot.classes.RibbonTrailMesh import RibbonTrailMesh
+from py4godot.classes.RichTextEffect import RichTextEffect
+from py4godot.classes.RichTextLabel import RichTextLabel
+from py4godot.classes.RigidBody2D import RigidBody2D
+from py4godot.classes.RigidBody3D import RigidBody3D
+from py4godot.classes.RootMotionView import RootMotionView
+from py4godot.classes.SceneMultiplayer import SceneMultiplayer
+from py4godot.classes.SceneReplicationConfig import SceneReplicationConfig
+from py4godot.classes.SceneState import SceneState
+from py4godot.classes.SceneTree import SceneTree
+from py4godot.classes.SceneTreeTimer import SceneTreeTimer
+from py4godot.classes.Script import Script
+from py4godot.classes.ScriptCreateDialog import ScriptCreateDialog
+from py4godot.classes.ScriptEditor import ScriptEditor
+from py4godot.classes.ScriptEditorBase import ScriptEditorBase
+from py4godot.classes.ScriptExtension import ScriptExtension
+from py4godot.classes.ScriptLanguage import ScriptLanguage
+from py4godot.classes.ScriptLanguageExtension import ScriptLanguageExtension
+from py4godot.classes.ScrollBar import ScrollBar
+from py4godot.classes.ScrollContainer import ScrollContainer
+from py4godot.classes.SegmentShape2D import SegmentShape2D
+from py4godot.classes.Semaphore import Semaphore
+from py4godot.classes.SeparationRayShape2D import SeparationRayShape2D
+from py4godot.classes.SeparationRayShape3D import SeparationRayShape3D
+from py4godot.classes.Separator import Separator
+from py4godot.classes.Shader import Shader
+from py4godot.classes.ShaderGlobalsOverride import ShaderGlobalsOverride
+from py4godot.classes.ShaderInclude import ShaderInclude
+from py4godot.classes.ShaderIncludeDB import ShaderIncludeDB
+from py4godot.classes.ShaderMaterial import ShaderMaterial
+from py4godot.classes.Shape2D import Shape2D
+from py4godot.classes.Shape3D import Shape3D
+from py4godot.classes.ShapeCast2D import ShapeCast2D
+from py4godot.classes.ShapeCast3D import ShapeCast3D
+from py4godot.classes.Shortcut import Shortcut
+from py4godot.classes.Skeleton2D import Skeleton2D
+from py4godot.classes.Skeleton3D import Skeleton3D
+from py4godot.classes.SkeletonIK3D import SkeletonIK3D
+from py4godot.classes.SkeletonModification2D import SkeletonModification2D
+from py4godot.classes.SkeletonModification2DCCDIK import SkeletonModification2DCCDIK
+from py4godot.classes.SkeletonModification2DFABRIK import SkeletonModification2DFABRIK
+from py4godot.classes.SkeletonModification2DJiggle import SkeletonModification2DJiggle
+from py4godot.classes.SkeletonModification2DLookAt import SkeletonModification2DLookAt
+from py4godot.classes.SkeletonModification2DPhysicalBones import SkeletonModification2DPhysicalBones
+from py4godot.classes.SkeletonModification2DStackHolder import SkeletonModification2DStackHolder
+from py4godot.classes.SkeletonModification2DTwoBoneIK import SkeletonModification2DTwoBoneIK
+from py4godot.classes.SkeletonModificationStack2D import SkeletonModificationStack2D
+from py4godot.classes.SkeletonModifier3D import SkeletonModifier3D
+from py4godot.classes.SkeletonProfile import SkeletonProfile
+from py4godot.classes.SkeletonProfileHumanoid import SkeletonProfileHumanoid
+from py4godot.classes.Skin import Skin
+from py4godot.classes.SkinReference import SkinReference
+from py4godot.classes.Sky import Sky
+from py4godot.classes.Slider import Slider
+from py4godot.classes.SliderJoint3D import SliderJoint3D
+from py4godot.classes.SoftBody3D import SoftBody3D
+from py4godot.classes.SphereMesh import SphereMesh
+from py4godot.classes.SphereOccluder3D import SphereOccluder3D
+from py4godot.classes.SphereShape3D import SphereShape3D
+from py4godot.classes.SpinBox import SpinBox
+from py4godot.classes.SplitContainer import SplitContainer
+from py4godot.classes.SpotLight3D import SpotLight3D
+from py4godot.classes.SpringArm3D import SpringArm3D
+from py4godot.classes.SpringBoneCollision3D import SpringBoneCollision3D
+from py4godot.classes.SpringBoneCollisionCapsule3D import SpringBoneCollisionCapsule3D
+from py4godot.classes.SpringBoneCollisionPlane3D import SpringBoneCollisionPlane3D
+from py4godot.classes.SpringBoneCollisionSphere3D import SpringBoneCollisionSphere3D
+from py4godot.classes.SpringBoneSimulator3D import SpringBoneSimulator3D
+from py4godot.classes.Sprite2D import Sprite2D
+from py4godot.classes.Sprite3D import Sprite3D
+from py4godot.classes.SpriteBase3D import SpriteBase3D
+from py4godot.classes.SpriteFrames import SpriteFrames
+from py4godot.classes.StandardMaterial3D import StandardMaterial3D
+from py4godot.classes.StaticBody2D import StaticBody2D
+from py4godot.classes.StaticBody3D import StaticBody3D
+from py4godot.classes.StatusIndicator import StatusIndicator
+from py4godot.classes.StreamPeer import StreamPeer
+from py4godot.classes.StreamPeerBuffer import StreamPeerBuffer
+from py4godot.classes.StreamPeerExtension import StreamPeerExtension
+from py4godot.classes.StreamPeerGZIP import StreamPeerGZIP
+from py4godot.classes.StreamPeerTCP import StreamPeerTCP
+from py4godot.classes.StreamPeerTLS import StreamPeerTLS
+from py4godot.classes.StyleBox import StyleBox
+from py4godot.classes.StyleBoxEmpty import StyleBoxEmpty
+from py4godot.classes.StyleBoxFlat import StyleBoxFlat
+from py4godot.classes.StyleBoxLine import StyleBoxLine
+from py4godot.classes.StyleBoxTexture import StyleBoxTexture
+from py4godot.classes.SubViewport import SubViewport
+from py4godot.classes.SubViewportContainer import SubViewportContainer
+from py4godot.classes.SubtweenTweener import SubtweenTweener
+from py4godot.classes.SurfaceTool import SurfaceTool
+from py4godot.classes.SyntaxHighlighter import SyntaxHighlighter
+from py4godot.classes.SystemFont import SystemFont
+from py4godot.classes.TCPServer import TCPServer
+from py4godot.classes.TLSOptions import TLSOptions
+from py4godot.classes.TabBar import TabBar
+from py4godot.classes.TabContainer import TabContainer
+from py4godot.classes.TextEdit import TextEdit
+from py4godot.classes.TextLine import TextLine
+from py4godot.classes.TextMesh import TextMesh
+from py4godot.classes.TextParagraph import TextParagraph
+from py4godot.classes.TextServer import TextServer
+from py4godot.classes.TextServerAdvanced import TextServerAdvanced
+from py4godot.classes.TextServerDummy import TextServerDummy
+from py4godot.classes.TextServerExtension import TextServerExtension
+from py4godot.classes.TextServerManager import TextServerManager
+from py4godot.classes.Texture import Texture
+from py4godot.classes.Texture2D import Texture2D
+from py4godot.classes.Texture2DArray import Texture2DArray
+from py4godot.classes.Texture2DArrayRD import Texture2DArrayRD
+from py4godot.classes.Texture2DRD import Texture2DRD
+from py4godot.classes.Texture3D import Texture3D
+from py4godot.classes.Texture3DRD import Texture3DRD
+from py4godot.classes.TextureButton import TextureButton
+from py4godot.classes.TextureCubemapArrayRD import TextureCubemapArrayRD
+from py4godot.classes.TextureCubemapRD import TextureCubemapRD
+from py4godot.classes.TextureLayered import TextureLayered
+from py4godot.classes.TextureLayeredRD import TextureLayeredRD
+from py4godot.classes.TextureProgressBar import TextureProgressBar
+from py4godot.classes.TextureRect import TextureRect
+from py4godot.classes.Theme import Theme
+from py4godot.classes.ThemeDB import ThemeDB
+from py4godot.classes.Thread import Thread
+from py4godot.classes.TileData import TileData
+from py4godot.classes.TileMap import TileMap
+from py4godot.classes.TileMapLayer import TileMapLayer
+from py4godot.classes.TileMapPattern import TileMapPattern
+from py4godot.classes.TileSet import TileSet
+from py4godot.classes.TileSetAtlasSource import TileSetAtlasSource
+from py4godot.classes.TileSetScenesCollectionSource import TileSetScenesCollectionSource
+from py4godot.classes.TileSetSource import TileSetSource
+from py4godot.classes.Time import Time
+from py4godot.classes.Timer import Timer
+from py4godot.classes.TorusMesh import TorusMesh
+from py4godot.classes.TouchScreenButton import TouchScreenButton
+from py4godot.classes.Translation import Translation
+from py4godot.classes.TranslationDomain import TranslationDomain
+from py4godot.classes.TranslationServer import TranslationServer
+from py4godot.classes.Tree import Tree
+from py4godot.classes.TreeItem import TreeItem
+from py4godot.classes.TriangleMesh import TriangleMesh
+from py4godot.classes.TubeTrailMesh import TubeTrailMesh
+from py4godot.classes.Tween import Tween
+from py4godot.classes.Tweener import Tweener
+from py4godot.classes.UDPServer import UDPServer
+from py4godot.classes.UPNP import UPNP
+from py4godot.classes.UPNPDevice import UPNPDevice
+from py4godot.classes.UndoRedo import UndoRedo
+from py4godot.classes.UniformSetCacheRD import UniformSetCacheRD
+from py4godot.classes.VBoxContainer import VBoxContainer
+from py4godot.classes.VFlowContainer import VFlowContainer
+from py4godot.classes.VScrollBar import VScrollBar
+from py4godot.classes.VSeparator import VSeparator
+from py4godot.classes.VSlider import VSlider
+from py4godot.classes.VSplitContainer import VSplitContainer
+from py4godot.classes.VehicleBody3D import VehicleBody3D
+from py4godot.classes.VehicleWheel3D import VehicleWheel3D
+from py4godot.classes.VideoStream import VideoStream
+from py4godot.classes.VideoStreamPlayback import VideoStreamPlayback
+from py4godot.classes.VideoStreamPlayer import VideoStreamPlayer
+from py4godot.classes.VideoStreamTheora import VideoStreamTheora
+from py4godot.classes.Viewport import Viewport
+from py4godot.classes.ViewportTexture import ViewportTexture
+from py4godot.classes.VisibleOnScreenEnabler2D import VisibleOnScreenEnabler2D
+from py4godot.classes.VisibleOnScreenEnabler3D import VisibleOnScreenEnabler3D
+from py4godot.classes.VisibleOnScreenNotifier2D import VisibleOnScreenNotifier2D
+from py4godot.classes.VisibleOnScreenNotifier3D import VisibleOnScreenNotifier3D
+from py4godot.classes.VisualInstance3D import VisualInstance3D
+from py4godot.classes.VisualShader import VisualShader
+from py4godot.classes.VisualShaderNode import VisualShaderNode
+from py4godot.classes.VisualShaderNodeBillboard import VisualShaderNodeBillboard
+from py4godot.classes.VisualShaderNodeBooleanConstant import VisualShaderNodeBooleanConstant
+from py4godot.classes.VisualShaderNodeBooleanParameter import VisualShaderNodeBooleanParameter
+from py4godot.classes.VisualShaderNodeClamp import VisualShaderNodeClamp
+from py4godot.classes.VisualShaderNodeColorConstant import VisualShaderNodeColorConstant
+from py4godot.classes.VisualShaderNodeColorFunc import VisualShaderNodeColorFunc
+from py4godot.classes.VisualShaderNodeColorOp import VisualShaderNodeColorOp
+from py4godot.classes.VisualShaderNodeColorParameter import VisualShaderNodeColorParameter
+from py4godot.classes.VisualShaderNodeComment import VisualShaderNodeComment
+from py4godot.classes.VisualShaderNodeCompare import VisualShaderNodeCompare
+from py4godot.classes.VisualShaderNodeConstant import VisualShaderNodeConstant
+from py4godot.classes.VisualShaderNodeCubemap import VisualShaderNodeCubemap
+from py4godot.classes.VisualShaderNodeCubemapParameter import VisualShaderNodeCubemapParameter
+from py4godot.classes.VisualShaderNodeCurveTexture import VisualShaderNodeCurveTexture
+from py4godot.classes.VisualShaderNodeCurveXYZTexture import VisualShaderNodeCurveXYZTexture
+from py4godot.classes.VisualShaderNodeCustom import VisualShaderNodeCustom
+from py4godot.classes.VisualShaderNodeDerivativeFunc import VisualShaderNodeDerivativeFunc
+from py4godot.classes.VisualShaderNodeDeterminant import VisualShaderNodeDeterminant
+from py4godot.classes.VisualShaderNodeDistanceFade import VisualShaderNodeDistanceFade
+from py4godot.classes.VisualShaderNodeDotProduct import VisualShaderNodeDotProduct
+from py4godot.classes.VisualShaderNodeExpression import VisualShaderNodeExpression
+from py4godot.classes.VisualShaderNodeFaceForward import VisualShaderNodeFaceForward
+from py4godot.classes.VisualShaderNodeFloatConstant import VisualShaderNodeFloatConstant
+from py4godot.classes.VisualShaderNodeFloatFunc import VisualShaderNodeFloatFunc
+from py4godot.classes.VisualShaderNodeFloatOp import VisualShaderNodeFloatOp
+from py4godot.classes.VisualShaderNodeFloatParameter import VisualShaderNodeFloatParameter
+from py4godot.classes.VisualShaderNodeFrame import VisualShaderNodeFrame
+from py4godot.classes.VisualShaderNodeFresnel import VisualShaderNodeFresnel
+from py4godot.classes.VisualShaderNodeGlobalExpression import VisualShaderNodeGlobalExpression
+from py4godot.classes.VisualShaderNodeGroupBase import VisualShaderNodeGroupBase
+from py4godot.classes.VisualShaderNodeIf import VisualShaderNodeIf
+from py4godot.classes.VisualShaderNodeInput import VisualShaderNodeInput
+from py4godot.classes.VisualShaderNodeIntConstant import VisualShaderNodeIntConstant
+from py4godot.classes.VisualShaderNodeIntFunc import VisualShaderNodeIntFunc
+from py4godot.classes.VisualShaderNodeIntOp import VisualShaderNodeIntOp
+from py4godot.classes.VisualShaderNodeIntParameter import VisualShaderNodeIntParameter
+from py4godot.classes.VisualShaderNodeIs import VisualShaderNodeIs
+from py4godot.classes.VisualShaderNodeLinearSceneDepth import VisualShaderNodeLinearSceneDepth
+from py4godot.classes.VisualShaderNodeMix import VisualShaderNodeMix
+from py4godot.classes.VisualShaderNodeMultiplyAdd import VisualShaderNodeMultiplyAdd
+from py4godot.classes.VisualShaderNodeOuterProduct import VisualShaderNodeOuterProduct
+from py4godot.classes.VisualShaderNodeOutput import VisualShaderNodeOutput
+from py4godot.classes.VisualShaderNodeParameter import VisualShaderNodeParameter
+from py4godot.classes.VisualShaderNodeParameterRef import VisualShaderNodeParameterRef
+from py4godot.classes.VisualShaderNodeParticleAccelerator import VisualShaderNodeParticleAccelerator
+from py4godot.classes.VisualShaderNodeParticleBoxEmitter import VisualShaderNodeParticleBoxEmitter
+from py4godot.classes.VisualShaderNodeParticleConeVelocity import VisualShaderNodeParticleConeVelocity
+from py4godot.classes.VisualShaderNodeParticleEmit import VisualShaderNodeParticleEmit
+from py4godot.classes.VisualShaderNodeParticleEmitter import VisualShaderNodeParticleEmitter
+from py4godot.classes.VisualShaderNodeParticleMeshEmitter import VisualShaderNodeParticleMeshEmitter
+from py4godot.classes.VisualShaderNodeParticleMultiplyByAxisAngle import VisualShaderNodeParticleMultiplyByAxisAngle
+from py4godot.classes.VisualShaderNodeParticleOutput import VisualShaderNodeParticleOutput
+from py4godot.classes.VisualShaderNodeParticleRandomness import VisualShaderNodeParticleRandomness
+from py4godot.classes.VisualShaderNodeParticleRingEmitter import VisualShaderNodeParticleRingEmitter
+from py4godot.classes.VisualShaderNodeParticleSphereEmitter import VisualShaderNodeParticleSphereEmitter
+from py4godot.classes.VisualShaderNodeProximityFade import VisualShaderNodeProximityFade
+from py4godot.classes.VisualShaderNodeRandomRange import VisualShaderNodeRandomRange
+from py4godot.classes.VisualShaderNodeRemap import VisualShaderNodeRemap
+from py4godot.classes.VisualShaderNodeReroute import VisualShaderNodeReroute
+from py4godot.classes.VisualShaderNodeResizableBase import VisualShaderNodeResizableBase
+from py4godot.classes.VisualShaderNodeRotationByAxis import VisualShaderNodeRotationByAxis
+from py4godot.classes.VisualShaderNodeSDFRaymarch import VisualShaderNodeSDFRaymarch
+from py4godot.classes.VisualShaderNodeSDFToScreenUV import VisualShaderNodeSDFToScreenUV
+from py4godot.classes.VisualShaderNodeSample3D import VisualShaderNodeSample3D
+from py4godot.classes.VisualShaderNodeScreenNormalWorldSpace import VisualShaderNodeScreenNormalWorldSpace
+from py4godot.classes.VisualShaderNodeScreenUVToSDF import VisualShaderNodeScreenUVToSDF
+from py4godot.classes.VisualShaderNodeSmoothStep import VisualShaderNodeSmoothStep
+from py4godot.classes.VisualShaderNodeStep import VisualShaderNodeStep
+from py4godot.classes.VisualShaderNodeSwitch import VisualShaderNodeSwitch
+from py4godot.classes.VisualShaderNodeTexture import VisualShaderNodeTexture
+from py4godot.classes.VisualShaderNodeTexture2DArray import VisualShaderNodeTexture2DArray
+from py4godot.classes.VisualShaderNodeTexture2DArrayParameter import VisualShaderNodeTexture2DArrayParameter
+from py4godot.classes.VisualShaderNodeTexture2DParameter import VisualShaderNodeTexture2DParameter
+from py4godot.classes.VisualShaderNodeTexture3D import VisualShaderNodeTexture3D
+from py4godot.classes.VisualShaderNodeTexture3DParameter import VisualShaderNodeTexture3DParameter
+from py4godot.classes.VisualShaderNodeTextureParameter import VisualShaderNodeTextureParameter
+from py4godot.classes.VisualShaderNodeTextureParameterTriplanar import VisualShaderNodeTextureParameterTriplanar
+from py4godot.classes.VisualShaderNodeTextureSDF import VisualShaderNodeTextureSDF
+from py4godot.classes.VisualShaderNodeTextureSDFNormal import VisualShaderNodeTextureSDFNormal
+from py4godot.classes.VisualShaderNodeTransformCompose import VisualShaderNodeTransformCompose
+from py4godot.classes.VisualShaderNodeTransformConstant import VisualShaderNodeTransformConstant
+from py4godot.classes.VisualShaderNodeTransformDecompose import VisualShaderNodeTransformDecompose
+from py4godot.classes.VisualShaderNodeTransformFunc import VisualShaderNodeTransformFunc
+from py4godot.classes.VisualShaderNodeTransformOp import VisualShaderNodeTransformOp
+from py4godot.classes.VisualShaderNodeTransformParameter import VisualShaderNodeTransformParameter
+from py4godot.classes.VisualShaderNodeTransformVecMult import VisualShaderNodeTransformVecMult
+from py4godot.classes.VisualShaderNodeUIntConstant import VisualShaderNodeUIntConstant
+from py4godot.classes.VisualShaderNodeUIntFunc import VisualShaderNodeUIntFunc
+from py4godot.classes.VisualShaderNodeUIntOp import VisualShaderNodeUIntOp
+from py4godot.classes.VisualShaderNodeUIntParameter import VisualShaderNodeUIntParameter
+from py4godot.classes.VisualShaderNodeUVFunc import VisualShaderNodeUVFunc
+from py4godot.classes.VisualShaderNodeUVPolarCoord import VisualShaderNodeUVPolarCoord
+from py4godot.classes.VisualShaderNodeVarying import VisualShaderNodeVarying
+from py4godot.classes.VisualShaderNodeVaryingGetter import VisualShaderNodeVaryingGetter
+from py4godot.classes.VisualShaderNodeVaryingSetter import VisualShaderNodeVaryingSetter
+from py4godot.classes.VisualShaderNodeVec2Constant import VisualShaderNodeVec2Constant
+from py4godot.classes.VisualShaderNodeVec2Parameter import VisualShaderNodeVec2Parameter
+from py4godot.classes.VisualShaderNodeVec3Constant import VisualShaderNodeVec3Constant
+from py4godot.classes.VisualShaderNodeVec3Parameter import VisualShaderNodeVec3Parameter
+from py4godot.classes.VisualShaderNodeVec4Constant import VisualShaderNodeVec4Constant
+from py4godot.classes.VisualShaderNodeVec4Parameter import VisualShaderNodeVec4Parameter
+from py4godot.classes.VisualShaderNodeVectorBase import VisualShaderNodeVectorBase
+from py4godot.classes.VisualShaderNodeVectorCompose import VisualShaderNodeVectorCompose
+from py4godot.classes.VisualShaderNodeVectorDecompose import VisualShaderNodeVectorDecompose
+from py4godot.classes.VisualShaderNodeVectorDistance import VisualShaderNodeVectorDistance
+from py4godot.classes.VisualShaderNodeVectorFunc import VisualShaderNodeVectorFunc
+from py4godot.classes.VisualShaderNodeVectorLen import VisualShaderNodeVectorLen
+from py4godot.classes.VisualShaderNodeVectorOp import VisualShaderNodeVectorOp
+from py4godot.classes.VisualShaderNodeVectorRefract import VisualShaderNodeVectorRefract
+from py4godot.classes.VisualShaderNodeWorldPositionFromDepth import VisualShaderNodeWorldPositionFromDepth
+from py4godot.classes.VoxelGI import VoxelGI
+from py4godot.classes.VoxelGIData import VoxelGIData
+from py4godot.classes.WeakRef import WeakRef
+from py4godot.classes.WebRTCDataChannel import WebRTCDataChannel
+from py4godot.classes.WebRTCDataChannelExtension import WebRTCDataChannelExtension
+from py4godot.classes.WebRTCMultiplayerPeer import WebRTCMultiplayerPeer
+from py4godot.classes.WebRTCPeerConnection import WebRTCPeerConnection
+from py4godot.classes.WebRTCPeerConnectionExtension import WebRTCPeerConnectionExtension
+from py4godot.classes.WebSocketMultiplayerPeer import WebSocketMultiplayerPeer
+from py4godot.classes.WebSocketPeer import WebSocketPeer
+from py4godot.classes.WebXRInterface import WebXRInterface
+from py4godot.classes.Window import Window
+from py4godot.classes.WorkerThreadPool import WorkerThreadPool
+from py4godot.classes.World2D import World2D
+from py4godot.classes.World3D import World3D
+from py4godot.classes.WorldBoundaryShape2D import WorldBoundaryShape2D
+from py4godot.classes.WorldBoundaryShape3D import WorldBoundaryShape3D
+from py4godot.classes.WorldEnvironment import WorldEnvironment
+from py4godot.classes.X509Certificate import X509Certificate
+from py4godot.classes.XMLParser import XMLParser
+from py4godot.classes.XRAnchor3D import XRAnchor3D
+from py4godot.classes.XRBodyModifier3D import XRBodyModifier3D
+from py4godot.classes.XRBodyTracker import XRBodyTracker
+from py4godot.classes.XRCamera3D import XRCamera3D
+from py4godot.classes.XRController3D import XRController3D
+from py4godot.classes.XRControllerTracker import XRControllerTracker
+from py4godot.classes.XRFaceModifier3D import XRFaceModifier3D
+from py4godot.classes.XRFaceTracker import XRFaceTracker
+from py4godot.classes.XRHandModifier3D import XRHandModifier3D
+from py4godot.classes.XRHandTracker import XRHandTracker
+from py4godot.classes.XRInterface import XRInterface
+from py4godot.classes.XRInterfaceExtension import XRInterfaceExtension
+from py4godot.classes.XRNode3D import XRNode3D
+from py4godot.classes.XROrigin3D import XROrigin3D
+from py4godot.classes.XRPose import XRPose
+from py4godot.classes.XRPositionalTracker import XRPositionalTracker
+from py4godot.classes.XRServer import XRServer
+from py4godot.classes.XRTracker import XRTracker
+from py4godot.classes.XRVRS import XRVRS
+from py4godot.classes.ZIPPacker import ZIPPacker
+from py4godot.classes.ZIPReader import ZIPReader
+cdef api PyObject* cast_to_aescontext(PyObject* other):
+    cdef object o = AESContext.cast_without_reference(<object>other)
     vals.append(o)
     return <PyObject*>o
-cdef api PyObject* cast_to_intervaltweener(PyObject* other):
-    cdef object o = IntervalTweener.cast_without_reference(<object>other)
+cdef api PyObject* cast_to_astar2d(PyObject* other):
+    cdef object o = AStar2D.cast_without_reference(<object>other)
     vals.append(o)
     return <PyObject*>o
-cdef api PyObject* cast_to_canvasitem(PyObject* other):
-    cdef object o = CanvasItem.cast_without_reference(<object>other)
+cdef api PyObject* cast_to_astar3d(PyObject* other):
+    cdef object o = AStar3D.cast_without_reference(<object>other)
     vals.append(o)
     return <PyObject*>o
-cdef api PyObject* cast_to_inputeventmousemotion(PyObject* other):
-    cdef object o = InputEventMouseMotion.cast_without_reference(<object>other)
+cdef api PyObject* cast_to_astargrid2d(PyObject* other):
+    cdef object o = AStarGrid2D.cast_without_reference(<object>other)
     vals.append(o)
     return <PyObject*>o
-cdef api PyObject* cast_to_physicsbody2dtypedarray(PyObject* other):
-    cdef object o = PhysicsBody2DTypedArray.cast_without_reference(<object>other)
+cdef api PyObject* cast_to_acceptdialog(PyObject* other):
+    cdef object o = AcceptDialog.cast_without_reference(<object>other)
     vals.append(o)
     return <PyObject*>o
-cdef api PyObject* cast_to_cameraattributes(PyObject* other):
-    cdef object o = CameraAttributes.cast_without_reference(<object>other)
+cdef api PyObject* cast_to_animatablebody2d(PyObject* other):
+    cdef object o = AnimatableBody2D.cast_without_reference(<object>other)
     vals.append(o)
     return <PyObject*>o
-cdef api PyObject* cast_to_gltfbufferview(PyObject* other):
-    cdef object o = GLTFBufferView.cast_without_reference(<object>other)
+cdef api PyObject* cast_to_animatablebody3d(PyObject* other):
+    cdef object o = AnimatableBody3D.cast_without_reference(<object>other)
     vals.append(o)
     return <PyObject*>o
-cdef api PyObject* cast_to_physicspointqueryparameters2d(PyObject* other):
-    cdef object o = PhysicsPointQueryParameters2D.cast_without_reference(<object>other)
+cdef api PyObject* cast_to_animatedsprite2d(PyObject* other):
+    cdef object o = AnimatedSprite2D.cast_without_reference(<object>other)
     vals.append(o)
     return <PyObject*>o
-cdef api PyObject* cast_to_area3dtypedarray(PyObject* other):
-    cdef object o = Area3DTypedArray.cast_without_reference(<object>other)
+cdef api PyObject* cast_to_animatedsprite3d(PyObject* other):
+    cdef object o = AnimatedSprite3D.cast_without_reference(<object>other)
     vals.append(o)
     return <PyObject*>o
-cdef api PyObject* cast_to_callbacktweener(PyObject* other):
-    cdef object o = CallbackTweener.cast_without_reference(<object>other)
-    vals.append(o)
-    return <PyObject*>o
-cdef api PyObject* cast_to_rdframebufferpass(PyObject* other):
-    cdef object o = RDFramebufferPass.cast_without_reference(<object>other)
-    vals.append(o)
-    return <PyObject*>o
-cdef api PyObject* cast_to_physicsdirectspacestate2d(PyObject* other):
-    cdef object o = PhysicsDirectSpaceState2D.cast_without_reference(<object>other)
-    vals.append(o)
-    return <PyObject*>o
-cdef api PyObject* cast_to_texture(PyObject* other):
-    cdef object o = Texture.cast_without_reference(<object>other)
-    vals.append(o)
-    return <PyObject*>o
-cdef api PyObject* cast_to_physicsbody3d(PyObject* other):
-    cdef object o = PhysicsBody3D.cast_without_reference(<object>other)
-    vals.append(o)
-    return <PyObject*>o
-cdef api PyObject* cast_to_texture3d(PyObject* other):
-    cdef object o = Texture3D.cast_without_reference(<object>other)
-    vals.append(o)
-    return <PyObject*>o
-cdef api PyObject* cast_to_shortcut(PyObject* other):
-    cdef object o = Shortcut.cast_without_reference(<object>other)
-    vals.append(o)
-    return <PyObject*>o
-cdef api PyObject* cast_to_animationplayer(PyObject* other):
-    cdef object o = AnimationPlayer.cast_without_reference(<object>other)
-    vals.append(o)
-    return <PyObject*>o
-cdef api PyObject* cast_to_materialtypedarray(PyObject* other):
-    cdef object o = MaterialTypedArray.cast_without_reference(<object>other)
-    vals.append(o)
-    return <PyObject*>o
-cdef api PyObject* cast_to_inputeventmouse(PyObject* other):
-    cdef object o = InputEventMouse.cast_without_reference(<object>other)
-    vals.append(o)
-    return <PyObject*>o
-cdef api PyObject* cast_to_animationlibrary(PyObject* other):
-    cdef object o = AnimationLibrary.cast_without_reference(<object>other)
-    vals.append(o)
-    return <PyObject*>o
-cdef api PyObject* cast_to_world2d(PyObject* other):
-    cdef object o = World2D.cast_without_reference(<object>other)
-    vals.append(o)
-    return <PyObject*>o
-cdef api PyObject* cast_to_object(PyObject* other):
-    cdef object o = Object.cast_without_reference(<object>other)
-    vals.append(o)
-    return <PyObject*>o
-cdef api PyObject* cast_to_world3d(PyObject* other):
-    cdef object o = World3D.cast_without_reference(<object>other)
-    vals.append(o)
-    return <PyObject*>o
-cdef api PyObject* cast_to_scenetree(PyObject* other):
-    cdef object o = SceneTree.cast_without_reference(<object>other)
-    vals.append(o)
-    return <PyObject*>o
-cdef api PyObject* cast_to_tree(PyObject* other):
-    cdef object o = Tree.cast_without_reference(<object>other)
-    vals.append(o)
-    return <PyObject*>o
-cdef api PyObject* cast_to_gltfaccessortypedarray(PyObject* other):
-    cdef object o = GLTFAccessorTypedArray.cast_without_reference(<object>other)
-    vals.append(o)
-    return <PyObject*>o
-cdef api PyObject* cast_to_camera3d(PyObject* other):
-    cdef object o = Camera3D.cast_without_reference(<object>other)
-    vals.append(o)
-    return <PyObject*>o
-cdef api PyObject* cast_to_node3dgizmotypedarray(PyObject* other):
-    cdef object o = Node3DGizmoTypedArray.cast_without_reference(<object>other)
-    vals.append(o)
-    return <PyObject*>o
-cdef api PyObject* cast_to_syntaxhighlighter(PyObject* other):
-    cdef object o = SyntaxHighlighter.cast_without_reference(<object>other)
-    vals.append(o)
-    return <PyObject*>o
-cdef api PyObject* cast_to_popupmenu(PyObject* other):
-    cdef object o = PopupMenu.cast_without_reference(<object>other)
-    vals.append(o)
-    return <PyObject*>o
-cdef api PyObject* cast_to_renderscenebuffers(PyObject* other):
-    cdef object o = RenderSceneBuffers.cast_without_reference(<object>other)
-    vals.append(o)
-    return <PyObject*>o
-cdef api PyObject* cast_to_window(PyObject* other):
-    cdef object o = Window.cast_without_reference(<object>other)
-    vals.append(o)
-    return <PyObject*>o
-cdef api PyObject* cast_to_skin(PyObject* other):
-    cdef object o = Skin.cast_without_reference(<object>other)
-    vals.append(o)
-    return <PyObject*>o
-cdef api PyObject* cast_to_script(PyObject* other):
-    cdef object o = Script.cast_without_reference(<object>other)
-    vals.append(o)
-    return <PyObject*>o
-cdef api PyObject* cast_to_mainloop(PyObject* other):
-    cdef object o = MainLoop.cast_without_reference(<object>other)
-    vals.append(o)
-    return <PyObject*>o
-cdef api PyObject* cast_to_node3d(PyObject* other):
-    cdef object o = Node3D.cast_without_reference(<object>other)
-    vals.append(o)
-    return <PyObject*>o
-cdef api PyObject* cast_to_inttypedarray(PyObject* other):
-    cdef object o = intTypedArray.cast_without_reference(<object>other)
-    vals.append(o)
-    return <PyObject*>o
-cdef api PyObject* cast_to_inputeventfromwindow(PyObject* other):
-    cdef object o = InputEventFromWindow.cast_without_reference(<object>other)
-    vals.append(o)
-    return <PyObject*>o
-cdef api PyObject* cast_to_scriptlanguage(PyObject* other):
-    cdef object o = ScriptLanguage.cast_without_reference(<object>other)
-    vals.append(o)
-    return <PyObject*>o
-cdef api PyObject* cast_to_trianglemesh(PyObject* other):
-    cdef object o = TriangleMesh.cast_without_reference(<object>other)
-    vals.append(o)
-    return <PyObject*>o
-cdef api PyObject* cast_to_gltfcameratypedarray(PyObject* other):
-    cdef object o = GLTFCameraTypedArray.cast_without_reference(<object>other)
-    vals.append(o)
-    return <PyObject*>o
-cdef api PyObject* cast_to_enetpacketpeer(PyObject* other):
-    cdef object o = ENetPacketPeer.cast_without_reference(<object>other)
-    vals.append(o)
-    return <PyObject*>o
-cdef api PyObject* cast_to_gltftexturesamplertypedarray(PyObject* other):
-    cdef object o = GLTFTextureSamplerTypedArray.cast_without_reference(<object>other)
-    vals.append(o)
-    return <PyObject*>o
-cdef api PyObject* cast_to_compositoreffecttypedarray(PyObject* other):
-    cdef object o = CompositorEffectTypedArray.cast_without_reference(<object>other)
-    vals.append(o)
-    return <PyObject*>o
-cdef api PyObject* cast_to_physicsshapequeryparameters2d(PyObject* other):
-    cdef object o = PhysicsShapeQueryParameters2D.cast_without_reference(<object>other)
-    vals.append(o)
-    return <PyObject*>o
-cdef api PyObject* cast_to_vboxcontainer(PyObject* other):
-    cdef object o = VBoxContainer.cast_without_reference(<object>other)
-    vals.append(o)
-    return <PyObject*>o
-cdef api PyObject* cast_to_boxcontainer(PyObject* other):
-    cdef object o = BoxContainer.cast_without_reference(<object>other)
-    vals.append(o)
-    return <PyObject*>o
-cdef api PyObject* cast_to_gltfnode(PyObject* other):
-    cdef object o = GLTFNode.cast_without_reference(<object>other)
-    vals.append(o)
-    return <PyObject*>o
-cdef api PyObject* cast_to_physicsbody3dtypedarray(PyObject* other):
-    cdef object o = PhysicsBody3DTypedArray.cast_without_reference(<object>other)
-    vals.append(o)
-    return <PyObject*>o
-cdef api PyObject* cast_to_regexmatch(PyObject* other):
-    cdef object o = RegExMatch.cast_without_reference(<object>other)
-    vals.append(o)
-    return <PyObject*>o
-cdef api PyObject* cast_to_input(PyObject* other):
-    cdef object o = Input.cast_without_reference(<object>other)
-    vals.append(o)
-    return <PyObject*>o
-cdef api PyObject* cast_to_stringnametypedarray(PyObject* other):
-    cdef object o = StringNameTypedArray.cast_without_reference(<object>other)
-    vals.append(o)
-    return <PyObject*>o
-cdef api PyObject* cast_to_windowtypedarray(PyObject* other):
-    cdef object o = WindowTypedArray.cast_without_reference(<object>other)
-    vals.append(o)
-    return <PyObject*>o
-cdef api PyObject* cast_to_gltfmeshtypedarray(PyObject* other):
-    cdef object o = GLTFMeshTypedArray.cast_without_reference(<object>other)
+cdef api PyObject* cast_to_animatedtexture(PyObject* other):
+    cdef object o = AnimatedTexture.cast_without_reference(<object>other)
     vals.append(o)
     return <PyObject*>o
 cdef api PyObject* cast_to_animation(PyObject* other):
     cdef object o = Animation.cast_without_reference(<object>other)
     vals.append(o)
     return <PyObject*>o
-cdef api PyObject* cast_to_skinreference(PyObject* other):
-    cdef object o = SkinReference.cast_without_reference(<object>other)
-    vals.append(o)
-    return <PyObject*>o
-cdef api PyObject* cast_to_gltfskintypedarray(PyObject* other):
-    cdef object o = GLTFSkinTypedArray.cast_without_reference(<object>other)
-    vals.append(o)
-    return <PyObject*>o
-cdef api PyObject* cast_to_gltfskin(PyObject* other):
-    cdef object o = GLTFSkin.cast_without_reference(<object>other)
-    vals.append(o)
-    return <PyObject*>o
-cdef api PyObject* cast_to_material(PyObject* other):
-    cdef object o = Material.cast_without_reference(<object>other)
-    vals.append(o)
-    return <PyObject*>o
-cdef api PyObject* cast_to_convexpolygonshape3d(PyObject* other):
-    cdef object o = ConvexPolygonShape3D.cast_without_reference(<object>other)
-    vals.append(o)
-    return <PyObject*>o
-cdef api PyObject* cast_to_compositor(PyObject* other):
-    cdef object o = Compositor.cast_without_reference(<object>other)
-    vals.append(o)
-    return <PyObject*>o
-cdef api PyObject* cast_to_node3dtypedarray(PyObject* other):
-    cdef object o = Node3DTypedArray.cast_without_reference(<object>other)
-    vals.append(o)
-    return <PyObject*>o
-cdef api PyObject* cast_to_viewporttexture(PyObject* other):
-    cdef object o = ViewportTexture.cast_without_reference(<object>other)
-    vals.append(o)
-    return <PyObject*>o
-cdef api PyObject* cast_to_tweentypedarray(PyObject* other):
-    cdef object o = TweenTypedArray.cast_without_reference(<object>other)
-    vals.append(o)
-    return <PyObject*>o
-cdef api PyObject* cast_to_inputeventwithmodifiers(PyObject* other):
-    cdef object o = InputEventWithModifiers.cast_without_reference(<object>other)
-    vals.append(o)
-    return <PyObject*>o
-cdef api PyObject* cast_to_editorsyntaxhighlighter(PyObject* other):
-    cdef object o = EditorSyntaxHighlighter.cast_without_reference(<object>other)
-    vals.append(o)
-    return <PyObject*>o
-cdef api PyObject* cast_to_gltflighttypedarray(PyObject* other):
-    cdef object o = GLTFLightTypedArray.cast_without_reference(<object>other)
-    vals.append(o)
-    return <PyObject*>o
-cdef api PyObject* cast_to_theme(PyObject* other):
-    cdef object o = Theme.cast_without_reference(<object>other)
-    vals.append(o)
-    return <PyObject*>o
-cdef api PyObject* cast_to_resource(PyObject* other):
-    cdef object o = Resource.cast_without_reference(<object>other)
-    vals.append(o)
-    return <PyObject*>o
-cdef api PyObject* cast_to_multimesh(PyObject* other):
-    cdef object o = MultiMesh.cast_without_reference(<object>other)
-    vals.append(o)
-    return <PyObject*>o
-cdef api PyObject* cast_to_inputeventmousebutton(PyObject* other):
-    cdef object o = InputEventMouseButton.cast_without_reference(<object>other)
-    vals.append(o)
-    return <PyObject*>o
-cdef api PyObject* cast_to_collisionobject2d(PyObject* other):
-    cdef object o = CollisionObject2D.cast_without_reference(<object>other)
-    vals.append(o)
-    return <PyObject*>o
-cdef api PyObject* cast_to_renderdata(PyObject* other):
-    cdef object o = RenderData.cast_without_reference(<object>other)
-    vals.append(o)
-    return <PyObject*>o
-cdef api PyObject* cast_to_rdpipelinecolorblendstateattachment(PyObject* other):
-    cdef object o = RDPipelineColorBlendStateAttachment.cast_without_reference(<object>other)
-    vals.append(o)
-    return <PyObject*>o
-cdef api PyObject* cast_to_vscrollbar(PyObject* other):
-    cdef object o = VScrollBar.cast_without_reference(<object>other)
-    vals.append(o)
-    return <PyObject*>o
-cdef api PyObject* cast_to_control(PyObject* other):
-    cdef object o = Control.cast_without_reference(<object>other)
-    vals.append(o)
-    return <PyObject*>o
-cdef api PyObject* cast_to_range(PyObject* other):
-    cdef object o = Range.cast_without_reference(<object>other)
-    vals.append(o)
-    return <PyObject*>o
-cdef api PyObject* cast_to_packedbytearraytypedarray(PyObject* other):
-    cdef object o = PackedByteArrayTypedArray.cast_without_reference(<object>other)
-    vals.append(o)
-    return <PyObject*>o
-cdef api PyObject* cast_to_container(PyObject* other):
-    cdef object o = Container.cast_without_reference(<object>other)
-    vals.append(o)
-    return <PyObject*>o
-cdef api PyObject* cast_to_arraytypedarray(PyObject* other):
-    cdef object o = ArrayTypedArray.cast_without_reference(<object>other)
-    vals.append(o)
-    return <PyObject*>o
-cdef api PyObject* cast_to_node2d(PyObject* other):
-    cdef object o = Node2D.cast_without_reference(<object>other)
-    vals.append(o)
-    return <PyObject*>o
-cdef api PyObject* cast_to_gltfmesh(PyObject* other):
-    cdef object o = GLTFMesh.cast_without_reference(<object>other)
-    vals.append(o)
-    return <PyObject*>o
-cdef api PyObject* cast_to_physicsshapequeryparameters3d(PyObject* other):
-    cdef object o = PhysicsShapeQueryParameters3D.cast_without_reference(<object>other)
-    vals.append(o)
-    return <PyObject*>o
-cdef api PyObject* cast_to_shape2d(PyObject* other):
-    cdef object o = Shape2D.cast_without_reference(<object>other)
-    vals.append(o)
-    return <PyObject*>o
-cdef api PyObject* cast_to_gltftexturetypedarray(PyObject* other):
-    cdef object o = GLTFTextureTypedArray.cast_without_reference(<object>other)
-    vals.append(o)
-    return <PyObject*>o
-cdef api PyObject* cast_to_vector3typedarray(PyObject* other):
-    cdef object o = Vector3TypedArray.cast_without_reference(<object>other)
-    vals.append(o)
-    return <PyObject*>o
-cdef api PyObject* cast_to_compositoreffect(PyObject* other):
-    cdef object o = CompositorEffect.cast_without_reference(<object>other)
-    vals.append(o)
-    return <PyObject*>o
-cdef api PyObject* cast_to_rdpipelinespecializationconstant(PyObject* other):
-    cdef object o = RDPipelineSpecializationConstant.cast_without_reference(<object>other)
-    vals.append(o)
-    return <PyObject*>o
-cdef api PyObject* cast_to_gltfcamera(PyObject* other):
-    cdef object o = GLTFCamera.cast_without_reference(<object>other)
-    vals.append(o)
-    return <PyObject*>o
-cdef api PyObject* cast_to_skeleton3d(PyObject* other):
-    cdef object o = Skeleton3D.cast_without_reference(<object>other)
-    vals.append(o)
-    return <PyObject*>o
-cdef api PyObject* cast_to_scenestate(PyObject* other):
-    cdef object o = SceneState.cast_without_reference(<object>other)
-    vals.append(o)
-    return <PyObject*>o
-cdef api PyObject* cast_to_tween(PyObject* other):
-    cdef object o = Tween.cast_without_reference(<object>other)
-    vals.append(o)
-    return <PyObject*>o
-cdef api PyObject* cast_to_dictionarytypedarray(PyObject* other):
-    cdef object o = DictionaryTypedArray.cast_without_reference(<object>other)
-    vals.append(o)
-    return <PyObject*>o
-cdef api PyObject* cast_to_subtweentweener(PyObject* other):
-    cdef object o = SubtweenTweener.cast_without_reference(<object>other)
-    vals.append(o)
-    return <PyObject*>o
-cdef api PyObject* cast_to_sky(PyObject* other):
-    cdef object o = Sky.cast_without_reference(<object>other)
-    vals.append(o)
-    return <PyObject*>o
-cdef api PyObject* cast_to_node3dgizmo(PyObject* other):
-    cdef object o = Node3DGizmo.cast_without_reference(<object>other)
-    vals.append(o)
-    return <PyObject*>o
-cdef api PyObject* cast_to_packedscene(PyObject* other):
-    cdef object o = PackedScene.cast_without_reference(<object>other)
-    vals.append(o)
-    return <PyObject*>o
-cdef api PyObject* cast_to_gltftexturesampler(PyObject* other):
-    cdef object o = GLTFTextureSampler.cast_without_reference(<object>other)
-    vals.append(o)
-    return <PyObject*>o
-cdef api PyObject* cast_to_arraymesh(PyObject* other):
-    cdef object o = ArrayMesh.cast_without_reference(<object>other)
-    vals.append(o)
-    return <PyObject*>o
-cdef api PyObject* cast_to_vector2typedarray(PyObject* other):
-    cdef object o = Vector2TypedArray.cast_without_reference(<object>other)
-    vals.append(o)
-    return <PyObject*>o
-cdef api PyObject* cast_to_environment(PyObject* other):
-    cdef object o = Environment.cast_without_reference(<object>other)
-    vals.append(o)
-    return <PyObject*>o
-cdef api PyObject* cast_to_gltfskeletontypedarray(PyObject* other):
-    cdef object o = GLTFSkeletonTypedArray.cast_without_reference(<object>other)
+cdef api PyObject* cast_to_animationlibrary(PyObject* other):
+    cdef object o = AnimationLibrary.cast_without_reference(<object>other)
     vals.append(o)
     return <PyObject*>o
 cdef api PyObject* cast_to_animationmixer(PyObject* other):
     cdef object o = AnimationMixer.cast_without_reference(<object>other)
     vals.append(o)
     return <PyObject*>o
-cdef api PyObject* cast_to_shape3d(PyObject* other):
-    cdef object o = Shape3D.cast_without_reference(<object>other)
+cdef api PyObject* cast_to_animationnode(PyObject* other):
+    cdef object o = AnimationNode.cast_without_reference(<object>other)
     vals.append(o)
     return <PyObject*>o
-cdef api PyObject* cast_to_area2dtypedarray(PyObject* other):
-    cdef object o = Area2DTypedArray.cast_without_reference(<object>other)
+cdef api PyObject* cast_to_animationnodeadd2(PyObject* other):
+    cdef object o = AnimationNodeAdd2.cast_without_reference(<object>other)
     vals.append(o)
     return <PyObject*>o
-cdef api PyObject* cast_to_vector2itypedarray(PyObject* other):
-    cdef object o = Vector2iTypedArray.cast_without_reference(<object>other)
+cdef api PyObject* cast_to_animationnodeadd3(PyObject* other):
+    cdef object o = AnimationNodeAdd3.cast_without_reference(<object>other)
     vals.append(o)
     return <PyObject*>o
-cdef api PyObject* cast_to_shader(PyObject* other):
-    cdef object o = Shader.cast_without_reference(<object>other)
+cdef api PyObject* cast_to_animationnodeanimation(PyObject* other):
+    cdef object o = AnimationNodeAnimation.cast_without_reference(<object>other)
     vals.append(o)
     return <PyObject*>o
-cdef api PyObject* cast_to_gltfanimation(PyObject* other):
-    cdef object o = GLTFAnimation.cast_without_reference(<object>other)
+cdef api PyObject* cast_to_animationnodeblend2(PyObject* other):
+    cdef object o = AnimationNodeBlend2.cast_without_reference(<object>other)
     vals.append(o)
     return <PyObject*>o
-cdef api PyObject* cast_to_font(PyObject* other):
-    cdef object o = Font.cast_without_reference(<object>other)
+cdef api PyObject* cast_to_animationnodeblend3(PyObject* other):
+    cdef object o = AnimationNodeBlend3.cast_without_reference(<object>other)
     vals.append(o)
     return <PyObject*>o
-cdef api PyObject* cast_to_rduniform(PyObject* other):
-    cdef object o = RDUniform.cast_without_reference(<object>other)
+cdef api PyObject* cast_to_animationnodeblendspace1d(PyObject* other):
+    cdef object o = AnimationNodeBlendSpace1D.cast_without_reference(<object>other)
     vals.append(o)
     return <PyObject*>o
-cdef api PyObject* cast_to_packetpeer(PyObject* other):
-    cdef object o = PacketPeer.cast_without_reference(<object>other)
+cdef api PyObject* cast_to_animationnodeblendspace2d(PyObject* other):
+    cdef object o = AnimationNodeBlendSpace2D.cast_without_reference(<object>other)
     vals.append(o)
     return <PyObject*>o
-cdef api PyObject* cast_to_physicspointqueryparameters3d(PyObject* other):
-    cdef object o = PhysicsPointQueryParameters3D.cast_without_reference(<object>other)
+cdef api PyObject* cast_to_animationnodeblendtree(PyObject* other):
+    cdef object o = AnimationNodeBlendTree.cast_without_reference(<object>other)
     vals.append(o)
     return <PyObject*>o
-cdef api PyObject* cast_to_scripteditorbase(PyObject* other):
-    cdef object o = ScriptEditorBase.cast_without_reference(<object>other)
+cdef api PyObject* cast_to_animationnodeextension(PyObject* other):
+    cdef object o = AnimationNodeExtension.cast_without_reference(<object>other)
     vals.append(o)
     return <PyObject*>o
-cdef api PyObject* cast_to_image(PyObject* other):
-    cdef object o = Image.cast_without_reference(<object>other)
+cdef api PyObject* cast_to_animationnodeoneshot(PyObject* other):
+    cdef object o = AnimationNodeOneShot.cast_without_reference(<object>other)
     vals.append(o)
     return <PyObject*>o
-cdef api PyObject* cast_to_treeitemtypedarray(PyObject* other):
-    cdef object o = TreeItemTypedArray.cast_without_reference(<object>other)
+cdef api PyObject* cast_to_animationnodeoutput(PyObject* other):
+    cdef object o = AnimationNodeOutput.cast_without_reference(<object>other)
     vals.append(o)
     return <PyObject*>o
-cdef api PyObject* cast_to_gltfanimationtypedarray(PyObject* other):
-    cdef object o = GLTFAnimationTypedArray.cast_without_reference(<object>other)
+cdef api PyObject* cast_to_animationnodestatemachine(PyObject* other):
+    cdef object o = AnimationNodeStateMachine.cast_without_reference(<object>other)
     vals.append(o)
     return <PyObject*>o
-cdef api PyObject* cast_to_stringtypedarray(PyObject* other):
-    cdef object o = StringTypedArray.cast_without_reference(<object>other)
+cdef api PyObject* cast_to_animationnodestatemachineplayback(PyObject* other):
+    cdef object o = AnimationNodeStateMachinePlayback.cast_without_reference(<object>other)
     vals.append(o)
     return <PyObject*>o
-cdef api PyObject* cast_to_boneattachment3d(PyObject* other):
-    cdef object o = BoneAttachment3D.cast_without_reference(<object>other)
+cdef api PyObject* cast_to_animationnodestatemachinetransition(PyObject* other):
+    cdef object o = AnimationNodeStateMachineTransition.cast_without_reference(<object>other)
     vals.append(o)
     return <PyObject*>o
-cdef api PyObject* cast_to_buttongroup(PyObject* other):
-    cdef object o = ButtonGroup.cast_without_reference(<object>other)
+cdef api PyObject* cast_to_animationnodesub2(PyObject* other):
+    cdef object o = AnimationNodeSub2.cast_without_reference(<object>other)
     vals.append(o)
     return <PyObject*>o
-cdef api PyObject* cast_to_multiplayerpeer(PyObject* other):
-    cdef object o = MultiplayerPeer.cast_without_reference(<object>other)
+cdef api PyObject* cast_to_animationnodesync(PyObject* other):
+    cdef object o = AnimationNodeSync.cast_without_reference(<object>other)
     vals.append(o)
     return <PyObject*>o
-cdef api PyObject* cast_to_basebuttontypedarray(PyObject* other):
-    cdef object o = BaseButtonTypedArray.cast_without_reference(<object>other)
+cdef api PyObject* cast_to_animationnodetimescale(PyObject* other):
+    cdef object o = AnimationNodeTimeScale.cast_without_reference(<object>other)
     vals.append(o)
     return <PyObject*>o
-cdef api PyObject* cast_to_treeitem(PyObject* other):
-    cdef object o = TreeItem.cast_without_reference(<object>other)
+cdef api PyObject* cast_to_animationnodetimeseek(PyObject* other):
+    cdef object o = AnimationNodeTimeSeek.cast_without_reference(<object>other)
     vals.append(o)
     return <PyObject*>o
-cdef api PyObject* cast_to_renderscenedata(PyObject* other):
-    cdef object o = RenderSceneData.cast_without_reference(<object>other)
+cdef api PyObject* cast_to_animationnodetransition(PyObject* other):
+    cdef object o = AnimationNodeTransition.cast_without_reference(<object>other)
     vals.append(o)
     return <PyObject*>o
-cdef api PyObject* cast_to_importermesh(PyObject* other):
-    cdef object o = ImporterMesh.cast_without_reference(<object>other)
+cdef api PyObject* cast_to_animationplayer(PyObject* other):
+    cdef object o = AnimationPlayer.cast_without_reference(<object>other)
     vals.append(o)
     return <PyObject*>o
-cdef api PyObject* cast_to_collisionobject3d(PyObject* other):
-    cdef object o = CollisionObject3D.cast_without_reference(<object>other)
+cdef api PyObject* cast_to_animationrootnode(PyObject* other):
+    cdef object o = AnimationRootNode.cast_without_reference(<object>other)
     vals.append(o)
     return <PyObject*>o
-cdef api PyObject* cast_to_viewport(PyObject* other):
-    cdef object o = Viewport.cast_without_reference(<object>other)
-    vals.append(o)
-    return <PyObject*>o
-cdef api PyObject* cast_to_engine(PyObject* other):
-    cdef object o = Engine.cast_without_reference(<object>other)
-    vals.append(o)
-    return <PyObject*>o
-cdef api PyObject* cast_to_concavepolygonshape3d(PyObject* other):
-    cdef object o = ConcavePolygonShape3D.cast_without_reference(<object>other)
-    vals.append(o)
-    return <PyObject*>o
-cdef api PyObject* cast_to_audiolistener2d(PyObject* other):
-    cdef object o = AudioListener2D.cast_without_reference(<object>other)
-    vals.append(o)
-    return <PyObject*>o
-cdef api PyObject* cast_to_mesh(PyObject* other):
-    cdef object o = Mesh.cast_without_reference(<object>other)
-    vals.append(o)
-    return <PyObject*>o
-cdef api PyObject* cast_to_rdvertexattribute(PyObject* other):
-    cdef object o = RDVertexAttribute.cast_without_reference(<object>other)
-    vals.append(o)
-    return <PyObject*>o
-cdef api PyObject* cast_to_propertytweener(PyObject* other):
-    cdef object o = PropertyTweener.cast_without_reference(<object>other)
-    vals.append(o)
-    return <PyObject*>o
-cdef api PyObject* cast_to_vector3itypedarray(PyObject* other):
-    cdef object o = Vector3iTypedArray.cast_without_reference(<object>other)
-    vals.append(o)
-    return <PyObject*>o
-cdef api PyObject* cast_to_audiolistener3d(PyObject* other):
-    cdef object o = AudioListener3D.cast_without_reference(<object>other)
-    vals.append(o)
-    return <PyObject*>o
-cdef api PyObject* cast_to_scrollbar(PyObject* other):
-    cdef object o = ScrollBar.cast_without_reference(<object>other)
-    vals.append(o)
-    return <PyObject*>o
-cdef api PyObject* cast_to_physicsbody2d(PyObject* other):
-    cdef object o = PhysicsBody2D.cast_without_reference(<object>other)
-    vals.append(o)
-    return <PyObject*>o
-cdef api PyObject* cast_to_texture2d(PyObject* other):
-    cdef object o = Texture2D.cast_without_reference(<object>other)
-    vals.append(o)
-    return <PyObject*>o
-cdef api PyObject* cast_to_node2dtypedarray(PyObject* other):
-    cdef object o = Node2DTypedArray.cast_without_reference(<object>other)
-    vals.append(o)
-    return <PyObject*>o
-cdef api PyObject* cast_to_rdattachmentformat(PyObject* other):
-    cdef object o = RDAttachmentFormat.cast_without_reference(<object>other)
-    vals.append(o)
-    return <PyObject*>o
-cdef api PyObject* cast_to_camerafeed(PyObject* other):
-    cdef object o = CameraFeed.cast_without_reference(<object>other)
-    vals.append(o)
-    return <PyObject*>o
-cdef api PyObject* cast_to_refcounted(PyObject* other):
-    cdef object o = RefCounted.cast_without_reference(<object>other)
-    vals.append(o)
-    return <PyObject*>o
-cdef api PyObject* cast_to_ridtypedarray(PyObject* other):
-    cdef object o = RIDTypedArray.cast_without_reference(<object>other)
-    vals.append(o)
-    return <PyObject*>o
-cdef api PyObject* cast_to_node(PyObject* other):
-    cdef object o = Node.cast_without_reference(<object>other)
-    vals.append(o)
-    return <PyObject*>o
-cdef api PyObject* cast_to_canvaslayer(PyObject* other):
-    cdef object o = CanvasLayer.cast_without_reference(<object>other)
-    vals.append(o)
-    return <PyObject*>o
-cdef api PyObject* cast_to_physicsrayqueryparameters2d(PyObject* other):
-    cdef object o = PhysicsRayQueryParameters2D.cast_without_reference(<object>other)
-    vals.append(o)
-    return <PyObject*>o
-cdef api PyObject* cast_to_renderscenebuffersconfiguration(PyObject* other):
-    cdef object o = RenderSceneBuffersConfiguration.cast_without_reference(<object>other)
-    vals.append(o)
-    return <PyObject*>o
-cdef api PyObject* cast_to_kinematiccollision2d(PyObject* other):
-    cdef object o = KinematicCollision2D.cast_without_reference(<object>other)
-    vals.append(o)
-    return <PyObject*>o
-cdef api PyObject* cast_to_light3d(PyObject* other):
-    cdef object o = Light3D.cast_without_reference(<object>other)
-    vals.append(o)
-    return <PyObject*>o
-cdef api PyObject* cast_to_gltftexture(PyObject* other):
-    cdef object o = GLTFTexture.cast_without_reference(<object>other)
-    vals.append(o)
-    return <PyObject*>o
-cdef api PyObject* cast_to_scenetreetimer(PyObject* other):
-    cdef object o = SceneTreeTimer.cast_without_reference(<object>other)
-    vals.append(o)
-    return <PyObject*>o
-cdef api PyObject* cast_to_inputeventtypedarray(PyObject* other):
-    cdef object o = InputEventTypedArray.cast_without_reference(<object>other)
-    vals.append(o)
-    return <PyObject*>o
-cdef api PyObject* cast_to_gltfstate(PyObject* other):
-    cdef object o = GLTFState.cast_without_reference(<object>other)
-    vals.append(o)
-    return <PyObject*>o
-cdef api PyObject* cast_to_cameraattributesphysical(PyObject* other):
-    cdef object o = CameraAttributesPhysical.cast_without_reference(<object>other)
-    vals.append(o)
-    return <PyObject*>o
-cdef api PyObject* cast_to_gltfskeleton(PyObject* other):
-    cdef object o = GLTFSkeleton.cast_without_reference(<object>other)
-    vals.append(o)
-    return <PyObject*>o
-cdef api PyObject* cast_to_basebutton(PyObject* other):
-    cdef object o = BaseButton.cast_without_reference(<object>other)
-    vals.append(o)
-    return <PyObject*>o
-cdef api PyObject* cast_to_gltflight(PyObject* other):
-    cdef object o = GLTFLight.cast_without_reference(<object>other)
-    vals.append(o)
-    return <PyObject*>o
-cdef api PyObject* cast_to_kinematiccollision3d(PyObject* other):
-    cdef object o = KinematicCollision3D.cast_without_reference(<object>other)
+cdef api PyObject* cast_to_animationtree(PyObject* other):
+    cdef object o = AnimationTree.cast_without_reference(<object>other)
     vals.append(o)
     return <PyObject*>o
 cdef api PyObject* cast_to_area2d(PyObject* other):
     cdef object o = Area2D.cast_without_reference(<object>other)
     vals.append(o)
     return <PyObject*>o
-cdef api PyObject* cast_to_tweener(PyObject* other):
-    cdef object o = Tweener.cast_without_reference(<object>other)
+cdef api PyObject* cast_to_area3d(PyObject* other):
+    cdef object o = Area3D.cast_without_reference(<object>other)
     vals.append(o)
     return <PyObject*>o
-cdef api PyObject* cast_to_multiplayerapi(PyObject* other):
-    cdef object o = MultiplayerAPI.cast_without_reference(<object>other)
+cdef api PyObject* cast_to_arraymesh(PyObject* other):
+    cdef object o = ArrayMesh.cast_without_reference(<object>other)
     vals.append(o)
     return <PyObject*>o
-cdef api PyObject* cast_to_shadermaterial(PyObject* other):
-    cdef object o = ShaderMaterial.cast_without_reference(<object>other)
+cdef api PyObject* cast_to_arrayoccluder3d(PyObject* other):
+    cdef object o = ArrayOccluder3D.cast_without_reference(<object>other)
     vals.append(o)
     return <PyObject*>o
-cdef api PyObject* cast_to_physicsdirectspacestate3d(PyObject* other):
-    cdef object o = PhysicsDirectSpaceState3D.cast_without_reference(<object>other)
+cdef api PyObject* cast_to_aspectratiocontainer(PyObject* other):
+    cdef object o = AspectRatioContainer.cast_without_reference(<object>other)
     vals.append(o)
     return <PyObject*>o
-cdef api PyObject* cast_to_inputevent(PyObject* other):
-    cdef object o = InputEvent.cast_without_reference(<object>other)
+cdef api PyObject* cast_to_atlastexture(PyObject* other):
+    cdef object o = AtlasTexture.cast_without_reference(<object>other)
     vals.append(o)
     return <PyObject*>o
-cdef api PyObject* cast_to_methodtweener(PyObject* other):
-    cdef object o = MethodTweener.cast_without_reference(<object>other)
+cdef api PyObject* cast_to_audiobuslayout(PyObject* other):
+    cdef object o = AudioBusLayout.cast_without_reference(<object>other)
     vals.append(o)
     return <PyObject*>o
-cdef api PyObject* cast_to_textedit(PyObject* other):
-    cdef object o = TextEdit.cast_without_reference(<object>other)
+cdef api PyObject* cast_to_audioeffect(PyObject* other):
+    cdef object o = AudioEffect.cast_without_reference(<object>other)
     vals.append(o)
     return <PyObject*>o
-cdef api PyObject* cast_to_gltfbufferviewtypedarray(PyObject* other):
-    cdef object o = GLTFBufferViewTypedArray.cast_without_reference(<object>other)
+cdef api PyObject* cast_to_audioeffectamplify(PyObject* other):
+    cdef object o = AudioEffectAmplify.cast_without_reference(<object>other)
     vals.append(o)
     return <PyObject*>o
-cdef api PyObject* cast_to_gltfnodetypedarray(PyObject* other):
-    cdef object o = GLTFNodeTypedArray.cast_without_reference(<object>other)
+cdef api PyObject* cast_to_audioeffectbandlimitfilter(PyObject* other):
+    cdef object o = AudioEffectBandLimitFilter.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_audioeffectbandpassfilter(PyObject* other):
+    cdef object o = AudioEffectBandPassFilter.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_audioeffectcapture(PyObject* other):
+    cdef object o = AudioEffectCapture.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_audioeffectchorus(PyObject* other):
+    cdef object o = AudioEffectChorus.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_audioeffectcompressor(PyObject* other):
+    cdef object o = AudioEffectCompressor.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_audioeffectdelay(PyObject* other):
+    cdef object o = AudioEffectDelay.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_audioeffectdistortion(PyObject* other):
+    cdef object o = AudioEffectDistortion.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_audioeffecteq(PyObject* other):
+    cdef object o = AudioEffectEQ.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_audioeffecteq10(PyObject* other):
+    cdef object o = AudioEffectEQ10.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_audioeffecteq21(PyObject* other):
+    cdef object o = AudioEffectEQ21.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_audioeffecteq6(PyObject* other):
+    cdef object o = AudioEffectEQ6.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_audioeffectfilter(PyObject* other):
+    cdef object o = AudioEffectFilter.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_audioeffecthardlimiter(PyObject* other):
+    cdef object o = AudioEffectHardLimiter.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_audioeffecthighpassfilter(PyObject* other):
+    cdef object o = AudioEffectHighPassFilter.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_audioeffecthighshelffilter(PyObject* other):
+    cdef object o = AudioEffectHighShelfFilter.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_audioeffectinstance(PyObject* other):
+    cdef object o = AudioEffectInstance.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_audioeffectlimiter(PyObject* other):
+    cdef object o = AudioEffectLimiter.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_audioeffectlowpassfilter(PyObject* other):
+    cdef object o = AudioEffectLowPassFilter.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_audioeffectlowshelffilter(PyObject* other):
+    cdef object o = AudioEffectLowShelfFilter.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_audioeffectnotchfilter(PyObject* other):
+    cdef object o = AudioEffectNotchFilter.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_audioeffectpanner(PyObject* other):
+    cdef object o = AudioEffectPanner.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_audioeffectphaser(PyObject* other):
+    cdef object o = AudioEffectPhaser.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_audioeffectpitchshift(PyObject* other):
+    cdef object o = AudioEffectPitchShift.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_audioeffectrecord(PyObject* other):
+    cdef object o = AudioEffectRecord.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_audioeffectreverb(PyObject* other):
+    cdef object o = AudioEffectReverb.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_audioeffectspectrumanalyzer(PyObject* other):
+    cdef object o = AudioEffectSpectrumAnalyzer.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_audioeffectspectrumanalyzerinstance(PyObject* other):
+    cdef object o = AudioEffectSpectrumAnalyzerInstance.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_audioeffectstereoenhance(PyObject* other):
+    cdef object o = AudioEffectStereoEnhance.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_audiolistener2d(PyObject* other):
+    cdef object o = AudioListener2D.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_audiolistener3d(PyObject* other):
+    cdef object o = AudioListener3D.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_audiosample(PyObject* other):
+    cdef object o = AudioSample.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_audiosampleplayback(PyObject* other):
+    cdef object o = AudioSamplePlayback.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_audioserver(PyObject* other):
+    cdef object o = AudioServer.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_audiostream(PyObject* other):
+    cdef object o = AudioStream.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_audiostreamgenerator(PyObject* other):
+    cdef object o = AudioStreamGenerator.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_audiostreamgeneratorplayback(PyObject* other):
+    cdef object o = AudioStreamGeneratorPlayback.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_audiostreaminteractive(PyObject* other):
+    cdef object o = AudioStreamInteractive.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_audiostreammp3(PyObject* other):
+    cdef object o = AudioStreamMP3.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_audiostreammicrophone(PyObject* other):
+    cdef object o = AudioStreamMicrophone.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_audiostreamoggvorbis(PyObject* other):
+    cdef object o = AudioStreamOggVorbis.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_audiostreamplayback(PyObject* other):
+    cdef object o = AudioStreamPlayback.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_audiostreamplaybackinteractive(PyObject* other):
+    cdef object o = AudioStreamPlaybackInteractive.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_audiostreamplaybackoggvorbis(PyObject* other):
+    cdef object o = AudioStreamPlaybackOggVorbis.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_audiostreamplaybackplaylist(PyObject* other):
+    cdef object o = AudioStreamPlaybackPlaylist.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_audiostreamplaybackpolyphonic(PyObject* other):
+    cdef object o = AudioStreamPlaybackPolyphonic.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_audiostreamplaybackresampled(PyObject* other):
+    cdef object o = AudioStreamPlaybackResampled.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_audiostreamplaybacksynchronized(PyObject* other):
+    cdef object o = AudioStreamPlaybackSynchronized.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_audiostreamplayer(PyObject* other):
+    cdef object o = AudioStreamPlayer.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_audiostreamplayer2d(PyObject* other):
+    cdef object o = AudioStreamPlayer2D.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_audiostreamplayer3d(PyObject* other):
+    cdef object o = AudioStreamPlayer3D.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_audiostreamplaylist(PyObject* other):
+    cdef object o = AudioStreamPlaylist.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_audiostreampolyphonic(PyObject* other):
+    cdef object o = AudioStreamPolyphonic.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_audiostreamrandomizer(PyObject* other):
+    cdef object o = AudioStreamRandomizer.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_audiostreamsynchronized(PyObject* other):
+    cdef object o = AudioStreamSynchronized.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_audiostreamwav(PyObject* other):
+    cdef object o = AudioStreamWAV.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_backbuffercopy(PyObject* other):
+    cdef object o = BackBufferCopy.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_basebutton(PyObject* other):
+    cdef object o = BaseButton.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_basematerial3d(PyObject* other):
+    cdef object o = BaseMaterial3D.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_bitmap(PyObject* other):
+    cdef object o = BitMap.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_bone2d(PyObject* other):
+    cdef object o = Bone2D.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_boneattachment3d(PyObject* other):
+    cdef object o = BoneAttachment3D.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_bonemap(PyObject* other):
+    cdef object o = BoneMap.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_boxcontainer(PyObject* other):
+    cdef object o = BoxContainer.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_boxmesh(PyObject* other):
+    cdef object o = BoxMesh.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_boxoccluder3d(PyObject* other):
+    cdef object o = BoxOccluder3D.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_boxshape3d(PyObject* other):
+    cdef object o = BoxShape3D.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_button(PyObject* other):
+    cdef object o = Button.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_buttongroup(PyObject* other):
+    cdef object o = ButtonGroup.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_cpuparticles2d(PyObject* other):
+    cdef object o = CPUParticles2D.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_cpuparticles3d(PyObject* other):
+    cdef object o = CPUParticles3D.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_csgbox3d(PyObject* other):
+    cdef object o = CSGBox3D.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_csgcombiner3d(PyObject* other):
+    cdef object o = CSGCombiner3D.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_csgcylinder3d(PyObject* other):
+    cdef object o = CSGCylinder3D.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_csgmesh3d(PyObject* other):
+    cdef object o = CSGMesh3D.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_csgpolygon3d(PyObject* other):
+    cdef object o = CSGPolygon3D.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_csgprimitive3d(PyObject* other):
+    cdef object o = CSGPrimitive3D.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_csgshape3d(PyObject* other):
+    cdef object o = CSGShape3D.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_csgsphere3d(PyObject* other):
+    cdef object o = CSGSphere3D.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_csgtorus3d(PyObject* other):
+    cdef object o = CSGTorus3D.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_callbacktweener(PyObject* other):
+    cdef object o = CallbackTweener.cast_without_reference(<object>other)
     vals.append(o)
     return <PyObject*>o
 cdef api PyObject* cast_to_camera2d(PyObject* other):
     cdef object o = Camera2D.cast_without_reference(<object>other)
     vals.append(o)
     return <PyObject*>o
-cdef api PyObject* cast_to_physicsrayqueryparameters3d(PyObject* other):
-    cdef object o = PhysicsRayQueryParameters3D.cast_without_reference(<object>other)
+cdef api PyObject* cast_to_camera3d(PyObject* other):
+    cdef object o = Camera3D.cast_without_reference(<object>other)
     vals.append(o)
     return <PyObject*>o
-cdef api PyObject* cast_to_nodetypedarray(PyObject* other):
-    cdef object o = NodeTypedArray.cast_without_reference(<object>other)
+cdef api PyObject* cast_to_cameraattributes(PyObject* other):
+    cdef object o = CameraAttributes.cast_without_reference(<object>other)
     vals.append(o)
     return <PyObject*>o
-cdef api PyObject* cast_to_stylebox(PyObject* other):
-    cdef object o = StyleBox.cast_without_reference(<object>other)
+cdef api PyObject* cast_to_cameraattributesphysical(PyObject* other):
+    cdef object o = CameraAttributesPhysical.cast_without_reference(<object>other)
     vals.append(o)
     return <PyObject*>o
-cdef api PyObject* cast_to_fonttypedarray(PyObject* other):
-    cdef object o = FontTypedArray.cast_without_reference(<object>other)
+cdef api PyObject* cast_to_cameraattributespractical(PyObject* other):
+    cdef object o = CameraAttributesPractical.cast_without_reference(<object>other)
     vals.append(o)
     return <PyObject*>o
-cdef api PyObject* cast_to_visualinstance3d(PyObject* other):
-    cdef object o = VisualInstance3D.cast_without_reference(<object>other)
+cdef api PyObject* cast_to_camerafeed(PyObject* other):
+    cdef object o = CameraFeed.cast_without_reference(<object>other)
     vals.append(o)
     return <PyObject*>o
-cdef api PyObject* cast_to_texturelayered(PyObject* other):
-    cdef object o = TextureLayered.cast_without_reference(<object>other)
+cdef api PyObject* cast_to_cameraserver(PyObject* other):
+    cdef object o = CameraServer.cast_without_reference(<object>other)
     vals.append(o)
     return <PyObject*>o
-cdef api PyObject* cast_to_planetypedarray(PyObject* other):
-    cdef object o = PlaneTypedArray.cast_without_reference(<object>other)
+cdef api PyObject* cast_to_cameratexture(PyObject* other):
+    cdef object o = CameraTexture.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_canvasgroup(PyObject* other):
+    cdef object o = CanvasGroup.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_canvasitem(PyObject* other):
+    cdef object o = CanvasItem.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_canvasitemmaterial(PyObject* other):
+    cdef object o = CanvasItemMaterial.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_canvaslayer(PyObject* other):
+    cdef object o = CanvasLayer.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_canvasmodulate(PyObject* other):
+    cdef object o = CanvasModulate.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_canvastexture(PyObject* other):
+    cdef object o = CanvasTexture.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_capsulemesh(PyObject* other):
+    cdef object o = CapsuleMesh.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_capsuleshape2d(PyObject* other):
+    cdef object o = CapsuleShape2D.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_capsuleshape3d(PyObject* other):
+    cdef object o = CapsuleShape3D.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_centercontainer(PyObject* other):
+    cdef object o = CenterContainer.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_charfxtransform(PyObject* other):
+    cdef object o = CharFXTransform.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_characterbody2d(PyObject* other):
+    cdef object o = CharacterBody2D.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_characterbody3d(PyObject* other):
+    cdef object o = CharacterBody3D.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_checkbox(PyObject* other):
+    cdef object o = CheckBox.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_checkbutton(PyObject* other):
+    cdef object o = CheckButton.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_circleshape2d(PyObject* other):
+    cdef object o = CircleShape2D.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_classdb(PyObject* other):
+    cdef object o = ClassDB.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_codeedit(PyObject* other):
+    cdef object o = CodeEdit.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_codehighlighter(PyObject* other):
+    cdef object o = CodeHighlighter.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_collisionobject2d(PyObject* other):
+    cdef object o = CollisionObject2D.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_collisionobject3d(PyObject* other):
+    cdef object o = CollisionObject3D.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_collisionpolygon2d(PyObject* other):
+    cdef object o = CollisionPolygon2D.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_collisionpolygon3d(PyObject* other):
+    cdef object o = CollisionPolygon3D.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_collisionshape2d(PyObject* other):
+    cdef object o = CollisionShape2D.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_collisionshape3d(PyObject* other):
+    cdef object o = CollisionShape3D.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_colorpalette(PyObject* other):
+    cdef object o = ColorPalette.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_colorpicker(PyObject* other):
+    cdef object o = ColorPicker.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_colorpickerbutton(PyObject* other):
+    cdef object o = ColorPickerButton.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_colorrect(PyObject* other):
+    cdef object o = ColorRect.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_compositor(PyObject* other):
+    cdef object o = Compositor.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_compositoreffect(PyObject* other):
+    cdef object o = CompositorEffect.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_compressedcubemap(PyObject* other):
+    cdef object o = CompressedCubemap.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_compressedcubemaparray(PyObject* other):
+    cdef object o = CompressedCubemapArray.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_compressedtexture2d(PyObject* other):
+    cdef object o = CompressedTexture2D.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_compressedtexture2darray(PyObject* other):
+    cdef object o = CompressedTexture2DArray.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_compressedtexture3d(PyObject* other):
+    cdef object o = CompressedTexture3D.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_compressedtexturelayered(PyObject* other):
+    cdef object o = CompressedTextureLayered.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_concavepolygonshape2d(PyObject* other):
+    cdef object o = ConcavePolygonShape2D.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_concavepolygonshape3d(PyObject* other):
+    cdef object o = ConcavePolygonShape3D.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_conetwistjoint3d(PyObject* other):
+    cdef object o = ConeTwistJoint3D.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_configfile(PyObject* other):
+    cdef object o = ConfigFile.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_confirmationdialog(PyObject* other):
+    cdef object o = ConfirmationDialog.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_container(PyObject* other):
+    cdef object o = Container.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_control(PyObject* other):
+    cdef object o = Control.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_convexpolygonshape2d(PyObject* other):
+    cdef object o = ConvexPolygonShape2D.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_convexpolygonshape3d(PyObject* other):
+    cdef object o = ConvexPolygonShape3D.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_crypto(PyObject* other):
+    cdef object o = Crypto.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_cryptokey(PyObject* other):
+    cdef object o = CryptoKey.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_cubemap(PyObject* other):
+    cdef object o = Cubemap.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_cubemaparray(PyObject* other):
+    cdef object o = CubemapArray.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_curve(PyObject* other):
+    cdef object o = Curve.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_curve2d(PyObject* other):
+    cdef object o = Curve2D.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_curve3d(PyObject* other):
+    cdef object o = Curve3D.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_curvetexture(PyObject* other):
+    cdef object o = CurveTexture.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_curvexyztexture(PyObject* other):
+    cdef object o = CurveXYZTexture.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_cylindermesh(PyObject* other):
+    cdef object o = CylinderMesh.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_cylindershape3d(PyObject* other):
+    cdef object o = CylinderShape3D.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_dtlsserver(PyObject* other):
+    cdef object o = DTLSServer.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_dampedspringjoint2d(PyObject* other):
+    cdef object o = DampedSpringJoint2D.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_decal(PyObject* other):
+    cdef object o = Decal.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_diraccess(PyObject* other):
+    cdef object o = DirAccess.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_directionallight2d(PyObject* other):
+    cdef object o = DirectionalLight2D.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_directionallight3d(PyObject* other):
+    cdef object o = DirectionalLight3D.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_displayserver(PyObject* other):
+    cdef object o = DisplayServer.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_enetconnection(PyObject* other):
+    cdef object o = ENetConnection.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_enetmultiplayerpeer(PyObject* other):
+    cdef object o = ENetMultiplayerPeer.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_enetpacketpeer(PyObject* other):
+    cdef object o = ENetPacketPeer.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_editorcommandpalette(PyObject* other):
+    cdef object o = EditorCommandPalette.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_editorcontextmenuplugin(PyObject* other):
+    cdef object o = EditorContextMenuPlugin.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_editordebuggerplugin(PyObject* other):
+    cdef object o = EditorDebuggerPlugin.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_editordebuggersession(PyObject* other):
+    cdef object o = EditorDebuggerSession.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_editorexportplatform(PyObject* other):
+    cdef object o = EditorExportPlatform.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_editorexportplatformandroid(PyObject* other):
+    cdef object o = EditorExportPlatformAndroid.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_editorexportplatformextension(PyObject* other):
+    cdef object o = EditorExportPlatformExtension.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_editorexportplatformios(PyObject* other):
+    cdef object o = EditorExportPlatformIOS.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_editorexportplatformlinuxbsd(PyObject* other):
+    cdef object o = EditorExportPlatformLinuxBSD.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_editorexportplatformmacos(PyObject* other):
+    cdef object o = EditorExportPlatformMacOS.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_editorexportplatformpc(PyObject* other):
+    cdef object o = EditorExportPlatformPC.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_editorexportplatformweb(PyObject* other):
+    cdef object o = EditorExportPlatformWeb.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_editorexportplatformwindows(PyObject* other):
+    cdef object o = EditorExportPlatformWindows.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_editorexportplugin(PyObject* other):
+    cdef object o = EditorExportPlugin.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_editorexportpreset(PyObject* other):
+    cdef object o = EditorExportPreset.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_editorfeatureprofile(PyObject* other):
+    cdef object o = EditorFeatureProfile.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_editorfiledialog(PyObject* other):
+    cdef object o = EditorFileDialog.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_editorfilesystem(PyObject* other):
+    cdef object o = EditorFileSystem.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_editorfilesystemdirectory(PyObject* other):
+    cdef object o = EditorFileSystemDirectory.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_editorfilesystemimportformatsupportquery(PyObject* other):
+    cdef object o = EditorFileSystemImportFormatSupportQuery.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_editorimportplugin(PyObject* other):
+    cdef object o = EditorImportPlugin.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_editorinspector(PyObject* other):
+    cdef object o = EditorInspector.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_editorinspectorplugin(PyObject* other):
+    cdef object o = EditorInspectorPlugin.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_editorinterface(PyObject* other):
+    cdef object o = EditorInterface.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_editornode3dgizmo(PyObject* other):
+    cdef object o = EditorNode3DGizmo.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_editornode3dgizmoplugin(PyObject* other):
+    cdef object o = EditorNode3DGizmoPlugin.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_editorpaths(PyObject* other):
+    cdef object o = EditorPaths.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_editorplugin(PyObject* other):
+    cdef object o = EditorPlugin.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_editorproperty(PyObject* other):
+    cdef object o = EditorProperty.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_editorresourceconversionplugin(PyObject* other):
+    cdef object o = EditorResourceConversionPlugin.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_editorresourcepicker(PyObject* other):
+    cdef object o = EditorResourcePicker.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_editorresourcepreview(PyObject* other):
+    cdef object o = EditorResourcePreview.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_editorresourcepreviewgenerator(PyObject* other):
+    cdef object o = EditorResourcePreviewGenerator.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_editorresourcetooltipplugin(PyObject* other):
+    cdef object o = EditorResourceTooltipPlugin.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_editorsceneformatimporter(PyObject* other):
+    cdef object o = EditorSceneFormatImporter.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_editorsceneformatimporterblend(PyObject* other):
+    cdef object o = EditorSceneFormatImporterBlend.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_editorsceneformatimporterfbx2gltf(PyObject* other):
+    cdef object o = EditorSceneFormatImporterFBX2GLTF.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_editorsceneformatimportergltf(PyObject* other):
+    cdef object o = EditorSceneFormatImporterGLTF.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_editorsceneformatimporterufbx(PyObject* other):
+    cdef object o = EditorSceneFormatImporterUFBX.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_editorscenepostimport(PyObject* other):
+    cdef object o = EditorScenePostImport.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_editorscenepostimportplugin(PyObject* other):
+    cdef object o = EditorScenePostImportPlugin.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_editorscript(PyObject* other):
+    cdef object o = EditorScript.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_editorscriptpicker(PyObject* other):
+    cdef object o = EditorScriptPicker.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_editorselection(PyObject* other):
+    cdef object o = EditorSelection.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_editorsettings(PyObject* other):
+    cdef object o = EditorSettings.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_editorspinslider(PyObject* other):
+    cdef object o = EditorSpinSlider.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_editorsyntaxhighlighter(PyObject* other):
+    cdef object o = EditorSyntaxHighlighter.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_editortoaster(PyObject* other):
+    cdef object o = EditorToaster.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_editortranslationparserplugin(PyObject* other):
+    cdef object o = EditorTranslationParserPlugin.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_editorundoredomanager(PyObject* other):
+    cdef object o = EditorUndoRedoManager.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_editorvcsinterface(PyObject* other):
+    cdef object o = EditorVCSInterface.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_encodedobjectasid(PyObject* other):
+    cdef object o = EncodedObjectAsID.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_engine(PyObject* other):
+    cdef object o = Engine.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_enginedebugger(PyObject* other):
+    cdef object o = EngineDebugger.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_engineprofiler(PyObject* other):
+    cdef object o = EngineProfiler.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_environment(PyObject* other):
+    cdef object o = Environment.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_expression(PyObject* other):
+    cdef object o = Expression.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_externaltexture(PyObject* other):
+    cdef object o = ExternalTexture.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_fbxdocument(PyObject* other):
+    cdef object o = FBXDocument.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_fbxstate(PyObject* other):
+    cdef object o = FBXState.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_fastnoiselite(PyObject* other):
+    cdef object o = FastNoiseLite.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_fileaccess(PyObject* other):
+    cdef object o = FileAccess.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_filedialog(PyObject* other):
+    cdef object o = FileDialog.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_filesystemdock(PyObject* other):
+    cdef object o = FileSystemDock.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_flowcontainer(PyObject* other):
+    cdef object o = FlowContainer.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_fogmaterial(PyObject* other):
+    cdef object o = FogMaterial.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_fogvolume(PyObject* other):
+    cdef object o = FogVolume.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_font(PyObject* other):
+    cdef object o = Font.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_fontfile(PyObject* other):
+    cdef object o = FontFile.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_fontvariation(PyObject* other):
+    cdef object o = FontVariation.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_framebuffercacherd(PyObject* other):
+    cdef object o = FramebufferCacheRD.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_gdextension(PyObject* other):
+    cdef object o = GDExtension.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_gdextensionmanager(PyObject* other):
+    cdef object o = GDExtensionManager.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_gdscript(PyObject* other):
+    cdef object o = GDScript.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_gdscriptsyntaxhighlighter(PyObject* other):
+    cdef object o = GDScriptSyntaxHighlighter.cast_without_reference(<object>other)
     vals.append(o)
     return <PyObject*>o
 cdef api PyObject* cast_to_gltfaccessor(PyObject* other):
     cdef object o = GLTFAccessor.cast_without_reference(<object>other)
     vals.append(o)
     return <PyObject*>o
-cdef api PyObject* cast_to_area3d(PyObject* other):
-    cdef object o = Area3D.cast_without_reference(<object>other)
+cdef api PyObject* cast_to_gltfanimation(PyObject* other):
+    cdef object o = GLTFAnimation.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_gltfbufferview(PyObject* other):
+    cdef object o = GLTFBufferView.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_gltfcamera(PyObject* other):
+    cdef object o = GLTFCamera.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_gltfdocument(PyObject* other):
+    cdef object o = GLTFDocument.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_gltfdocumentextension(PyObject* other):
+    cdef object o = GLTFDocumentExtension.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_gltfdocumentextensionconvertimportermesh(PyObject* other):
+    cdef object o = GLTFDocumentExtensionConvertImporterMesh.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_gltflight(PyObject* other):
+    cdef object o = GLTFLight.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_gltfmesh(PyObject* other):
+    cdef object o = GLTFMesh.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_gltfnode(PyObject* other):
+    cdef object o = GLTFNode.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_gltfobjectmodelproperty(PyObject* other):
+    cdef object o = GLTFObjectModelProperty.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_gltfphysicsbody(PyObject* other):
+    cdef object o = GLTFPhysicsBody.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_gltfphysicsshape(PyObject* other):
+    cdef object o = GLTFPhysicsShape.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_gltfskeleton(PyObject* other):
+    cdef object o = GLTFSkeleton.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_gltfskin(PyObject* other):
+    cdef object o = GLTFSkin.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_gltfspecgloss(PyObject* other):
+    cdef object o = GLTFSpecGloss.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_gltfstate(PyObject* other):
+    cdef object o = GLTFState.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_gltftexture(PyObject* other):
+    cdef object o = GLTFTexture.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_gltftexturesampler(PyObject* other):
+    cdef object o = GLTFTextureSampler.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_gpuparticles2d(PyObject* other):
+    cdef object o = GPUParticles2D.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_gpuparticles3d(PyObject* other):
+    cdef object o = GPUParticles3D.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_gpuparticlesattractor3d(PyObject* other):
+    cdef object o = GPUParticlesAttractor3D.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_gpuparticlesattractorbox3d(PyObject* other):
+    cdef object o = GPUParticlesAttractorBox3D.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_gpuparticlesattractorsphere3d(PyObject* other):
+    cdef object o = GPUParticlesAttractorSphere3D.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_gpuparticlesattractorvectorfield3d(PyObject* other):
+    cdef object o = GPUParticlesAttractorVectorField3D.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_gpuparticlescollision3d(PyObject* other):
+    cdef object o = GPUParticlesCollision3D.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_gpuparticlescollisionbox3d(PyObject* other):
+    cdef object o = GPUParticlesCollisionBox3D.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_gpuparticlescollisionheightfield3d(PyObject* other):
+    cdef object o = GPUParticlesCollisionHeightField3D.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_gpuparticlescollisionsdf3d(PyObject* other):
+    cdef object o = GPUParticlesCollisionSDF3D.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_gpuparticlescollisionsphere3d(PyObject* other):
+    cdef object o = GPUParticlesCollisionSphere3D.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_generic6dofjoint3d(PyObject* other):
+    cdef object o = Generic6DOFJoint3D.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_geometry2d(PyObject* other):
+    cdef object o = Geometry2D.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_geometry3d(PyObject* other):
+    cdef object o = Geometry3D.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_geometryinstance3d(PyObject* other):
+    cdef object o = GeometryInstance3D.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_gradient(PyObject* other):
+    cdef object o = Gradient.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_gradienttexture1d(PyObject* other):
+    cdef object o = GradientTexture1D.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_gradienttexture2d(PyObject* other):
+    cdef object o = GradientTexture2D.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_graphedit(PyObject* other):
+    cdef object o = GraphEdit.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_graphelement(PyObject* other):
+    cdef object o = GraphElement.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_graphframe(PyObject* other):
+    cdef object o = GraphFrame.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_graphnode(PyObject* other):
+    cdef object o = GraphNode.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_gridcontainer(PyObject* other):
+    cdef object o = GridContainer.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_gridmap(PyObject* other):
+    cdef object o = GridMap.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_gridmapeditorplugin(PyObject* other):
+    cdef object o = GridMapEditorPlugin.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_groovejoint2d(PyObject* other):
+    cdef object o = GrooveJoint2D.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_hboxcontainer(PyObject* other):
+    cdef object o = HBoxContainer.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_hflowcontainer(PyObject* other):
+    cdef object o = HFlowContainer.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_hmaccontext(PyObject* other):
+    cdef object o = HMACContext.cast_without_reference(<object>other)
     vals.append(o)
     return <PyObject*>o
 cdef api PyObject* cast_to_hscrollbar(PyObject* other):
     cdef object o = HScrollBar.cast_without_reference(<object>other)
     vals.append(o)
     return <PyObject*>o
-cdef api PyObject* cast_to_texture2dtypedarray(PyObject* other):
-    cdef object o = Texture2DTypedArray.cast_without_reference(<object>other)
+cdef api PyObject* cast_to_hseparator(PyObject* other):
+    cdef object o = HSeparator.cast_without_reference(<object>other)
     vals.append(o)
     return <PyObject*>o
-cdef api PyObject* cast_to_imagetypedarray(PyObject* other):
-    cdef object o = ImageTypedArray.cast_without_reference(<object>other)
+cdef api PyObject* cast_to_hslider(PyObject* other):
+    cdef object o = HSlider.cast_without_reference(<object>other)
     vals.append(o)
     return <PyObject*>o
-cdef api PyObject* cast_to_transform3dtypedarray(PyObject* other):
-    cdef object o = Transform3DTypedArray.cast_without_reference(<object>other)
+cdef api PyObject* cast_to_hsplitcontainer(PyObject* other):
+    cdef object o = HSplitContainer.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_httpclient(PyObject* other):
+    cdef object o = HTTPClient.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_httprequest(PyObject* other):
+    cdef object o = HTTPRequest.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_hashingcontext(PyObject* other):
+    cdef object o = HashingContext.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_heightmapshape3d(PyObject* other):
+    cdef object o = HeightMapShape3D.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_hingejoint3d(PyObject* other):
+    cdef object o = HingeJoint3D.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_ip(PyObject* other):
+    cdef object o = IP.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_image(PyObject* other):
+    cdef object o = Image.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_imageformatloader(PyObject* other):
+    cdef object o = ImageFormatLoader.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_imageformatloaderextension(PyObject* other):
+    cdef object o = ImageFormatLoaderExtension.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_imagetexture(PyObject* other):
+    cdef object o = ImageTexture.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_imagetexture3d(PyObject* other):
+    cdef object o = ImageTexture3D.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_imagetexturelayered(PyObject* other):
+    cdef object o = ImageTextureLayered.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_immediatemesh(PyObject* other):
+    cdef object o = ImmediateMesh.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_importermesh(PyObject* other):
+    cdef object o = ImporterMesh.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_importermeshinstance3d(PyObject* other):
+    cdef object o = ImporterMeshInstance3D.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_input(PyObject* other):
+    cdef object o = Input.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_inputevent(PyObject* other):
+    cdef object o = InputEvent.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_inputeventaction(PyObject* other):
+    cdef object o = InputEventAction.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_inputeventfromwindow(PyObject* other):
+    cdef object o = InputEventFromWindow.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_inputeventgesture(PyObject* other):
+    cdef object o = InputEventGesture.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_inputeventjoypadbutton(PyObject* other):
+    cdef object o = InputEventJoypadButton.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_inputeventjoypadmotion(PyObject* other):
+    cdef object o = InputEventJoypadMotion.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_inputeventkey(PyObject* other):
+    cdef object o = InputEventKey.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_inputeventmidi(PyObject* other):
+    cdef object o = InputEventMIDI.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_inputeventmagnifygesture(PyObject* other):
+    cdef object o = InputEventMagnifyGesture.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_inputeventmouse(PyObject* other):
+    cdef object o = InputEventMouse.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_inputeventmousebutton(PyObject* other):
+    cdef object o = InputEventMouseButton.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_inputeventmousemotion(PyObject* other):
+    cdef object o = InputEventMouseMotion.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_inputeventpangesture(PyObject* other):
+    cdef object o = InputEventPanGesture.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_inputeventscreendrag(PyObject* other):
+    cdef object o = InputEventScreenDrag.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_inputeventscreentouch(PyObject* other):
+    cdef object o = InputEventScreenTouch.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_inputeventshortcut(PyObject* other):
+    cdef object o = InputEventShortcut.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_inputeventwithmodifiers(PyObject* other):
+    cdef object o = InputEventWithModifiers.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_inputmap(PyObject* other):
+    cdef object o = InputMap.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_instanceplaceholder(PyObject* other):
+    cdef object o = InstancePlaceholder.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_intervaltweener(PyObject* other):
+    cdef object o = IntervalTweener.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_itemlist(PyObject* other):
+    cdef object o = ItemList.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_jnisingleton(PyObject* other):
+    cdef object o = JNISingleton.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_json(PyObject* other):
+    cdef object o = JSON.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_jsonrpc(PyObject* other):
+    cdef object o = JSONRPC.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_javaclass(PyObject* other):
+    cdef object o = JavaClass.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_javaclasswrapper(PyObject* other):
+    cdef object o = JavaClassWrapper.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_javaobject(PyObject* other):
+    cdef object o = JavaObject.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_javascriptbridge(PyObject* other):
+    cdef object o = JavaScriptBridge.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_javascriptobject(PyObject* other):
+    cdef object o = JavaScriptObject.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_joint2d(PyObject* other):
+    cdef object o = Joint2D.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_joint3d(PyObject* other):
+    cdef object o = Joint3D.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_kinematiccollision2d(PyObject* other):
+    cdef object o = KinematicCollision2D.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_kinematiccollision3d(PyObject* other):
+    cdef object o = KinematicCollision3D.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_label(PyObject* other):
+    cdef object o = Label.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_label3d(PyObject* other):
+    cdef object o = Label3D.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_labelsettings(PyObject* other):
+    cdef object o = LabelSettings.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_light2d(PyObject* other):
+    cdef object o = Light2D.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_light3d(PyObject* other):
+    cdef object o = Light3D.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_lightoccluder2d(PyObject* other):
+    cdef object o = LightOccluder2D.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_lightmapgi(PyObject* other):
+    cdef object o = LightmapGI.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_lightmapgidata(PyObject* other):
+    cdef object o = LightmapGIData.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_lightmapprobe(PyObject* other):
+    cdef object o = LightmapProbe.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_lightmapper(PyObject* other):
+    cdef object o = Lightmapper.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_lightmapperrd(PyObject* other):
+    cdef object o = LightmapperRD.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_line2d(PyObject* other):
+    cdef object o = Line2D.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_lineedit(PyObject* other):
+    cdef object o = LineEdit.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_linkbutton(PyObject* other):
+    cdef object o = LinkButton.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_lookatmodifier3d(PyObject* other):
+    cdef object o = LookAtModifier3D.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_mainloop(PyObject* other):
+    cdef object o = MainLoop.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_margincontainer(PyObject* other):
+    cdef object o = MarginContainer.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_marker2d(PyObject* other):
+    cdef object o = Marker2D.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_marker3d(PyObject* other):
+    cdef object o = Marker3D.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_marshalls(PyObject* other):
+    cdef object o = Marshalls.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_material(PyObject* other):
+    cdef object o = Material.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_menubar(PyObject* other):
+    cdef object o = MenuBar.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_menubutton(PyObject* other):
+    cdef object o = MenuButton.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_mesh(PyObject* other):
+    cdef object o = Mesh.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_meshconvexdecompositionsettings(PyObject* other):
+    cdef object o = MeshConvexDecompositionSettings.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_meshdatatool(PyObject* other):
+    cdef object o = MeshDataTool.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_meshinstance2d(PyObject* other):
+    cdef object o = MeshInstance2D.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_meshinstance3d(PyObject* other):
+    cdef object o = MeshInstance3D.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_meshlibrary(PyObject* other):
+    cdef object o = MeshLibrary.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_meshtexture(PyObject* other):
+    cdef object o = MeshTexture.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_methodtweener(PyObject* other):
+    cdef object o = MethodTweener.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_missingnode(PyObject* other):
+    cdef object o = MissingNode.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_missingresource(PyObject* other):
+    cdef object o = MissingResource.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_mobilevrinterface(PyObject* other):
+    cdef object o = MobileVRInterface.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_moviewriter(PyObject* other):
+    cdef object o = MovieWriter.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_multimesh(PyObject* other):
+    cdef object o = MultiMesh.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_multimeshinstance2d(PyObject* other):
+    cdef object o = MultiMeshInstance2D.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_multimeshinstance3d(PyObject* other):
+    cdef object o = MultiMeshInstance3D.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_multiplayerapi(PyObject* other):
+    cdef object o = MultiplayerAPI.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_multiplayerapiextension(PyObject* other):
+    cdef object o = MultiplayerAPIExtension.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_multiplayerpeer(PyObject* other):
+    cdef object o = MultiplayerPeer.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_multiplayerpeerextension(PyObject* other):
+    cdef object o = MultiplayerPeerExtension.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_multiplayerspawner(PyObject* other):
+    cdef object o = MultiplayerSpawner.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_multiplayersynchronizer(PyObject* other):
+    cdef object o = MultiplayerSynchronizer.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_mutex(PyObject* other):
+    cdef object o = Mutex.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_nativemenu(PyObject* other):
+    cdef object o = NativeMenu.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_navigationagent2d(PyObject* other):
+    cdef object o = NavigationAgent2D.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_navigationagent3d(PyObject* other):
+    cdef object o = NavigationAgent3D.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_navigationlink2d(PyObject* other):
+    cdef object o = NavigationLink2D.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_navigationlink3d(PyObject* other):
+    cdef object o = NavigationLink3D.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_navigationmesh(PyObject* other):
+    cdef object o = NavigationMesh.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_navigationmeshgenerator(PyObject* other):
+    cdef object o = NavigationMeshGenerator.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_navigationmeshsourcegeometrydata2d(PyObject* other):
+    cdef object o = NavigationMeshSourceGeometryData2D.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_navigationmeshsourcegeometrydata3d(PyObject* other):
+    cdef object o = NavigationMeshSourceGeometryData3D.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_navigationobstacle2d(PyObject* other):
+    cdef object o = NavigationObstacle2D.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_navigationobstacle3d(PyObject* other):
+    cdef object o = NavigationObstacle3D.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_navigationpathqueryparameters2d(PyObject* other):
+    cdef object o = NavigationPathQueryParameters2D.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_navigationpathqueryparameters3d(PyObject* other):
+    cdef object o = NavigationPathQueryParameters3D.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_navigationpathqueryresult2d(PyObject* other):
+    cdef object o = NavigationPathQueryResult2D.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_navigationpathqueryresult3d(PyObject* other):
+    cdef object o = NavigationPathQueryResult3D.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_navigationpolygon(PyObject* other):
+    cdef object o = NavigationPolygon.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_navigationregion2d(PyObject* other):
+    cdef object o = NavigationRegion2D.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_navigationregion3d(PyObject* other):
+    cdef object o = NavigationRegion3D.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_navigationserver2d(PyObject* other):
+    cdef object o = NavigationServer2D.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_navigationserver3d(PyObject* other):
+    cdef object o = NavigationServer3D.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_ninepatchrect(PyObject* other):
+    cdef object o = NinePatchRect.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_node(PyObject* other):
+    cdef object o = Node.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_node2d(PyObject* other):
+    cdef object o = Node2D.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_node3d(PyObject* other):
+    cdef object o = Node3D.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_node3dgizmo(PyObject* other):
+    cdef object o = Node3DGizmo.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_noise(PyObject* other):
+    cdef object o = Noise.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_noisetexture2d(PyObject* other):
+    cdef object o = NoiseTexture2D.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_noisetexture3d(PyObject* other):
+    cdef object o = NoiseTexture3D.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_ormmaterial3d(PyObject* other):
+    cdef object o = ORMMaterial3D.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_os(PyObject* other):
+    cdef object o = OS.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_object(PyObject* other):
+    cdef object o = Object.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_occluder3d(PyObject* other):
+    cdef object o = Occluder3D.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_occluderinstance3d(PyObject* other):
+    cdef object o = OccluderInstance3D.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_occluderpolygon2d(PyObject* other):
+    cdef object o = OccluderPolygon2D.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_offlinemultiplayerpeer(PyObject* other):
+    cdef object o = OfflineMultiplayerPeer.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_oggpacketsequence(PyObject* other):
+    cdef object o = OggPacketSequence.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_oggpacketsequenceplayback(PyObject* other):
+    cdef object o = OggPacketSequencePlayback.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_omnilight3d(PyObject* other):
+    cdef object o = OmniLight3D.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_openxrapiextension(PyObject* other):
+    cdef object o = OpenXRAPIExtension.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_openxraction(PyObject* other):
+    cdef object o = OpenXRAction.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_openxractionbindingmodifier(PyObject* other):
+    cdef object o = OpenXRActionBindingModifier.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_openxractionmap(PyObject* other):
+    cdef object o = OpenXRActionMap.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_openxractionset(PyObject* other):
+    cdef object o = OpenXRActionSet.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_openxranalogthresholdmodifier(PyObject* other):
+    cdef object o = OpenXRAnalogThresholdModifier.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_openxrbindingmodifier(PyObject* other):
+    cdef object o = OpenXRBindingModifier.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_openxrbindingmodifiereditor(PyObject* other):
+    cdef object o = OpenXRBindingModifierEditor.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_openxrcompositionlayer(PyObject* other):
+    cdef object o = OpenXRCompositionLayer.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_openxrcompositionlayercylinder(PyObject* other):
+    cdef object o = OpenXRCompositionLayerCylinder.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_openxrcompositionlayerequirect(PyObject* other):
+    cdef object o = OpenXRCompositionLayerEquirect.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_openxrcompositionlayerquad(PyObject* other):
+    cdef object o = OpenXRCompositionLayerQuad.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_openxrdpadbindingmodifier(PyObject* other):
+    cdef object o = OpenXRDpadBindingModifier.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_openxrextensionwrapperextension(PyObject* other):
+    cdef object o = OpenXRExtensionWrapperExtension.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_openxrhand(PyObject* other):
+    cdef object o = OpenXRHand.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_openxrhapticbase(PyObject* other):
+    cdef object o = OpenXRHapticBase.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_openxrhapticvibration(PyObject* other):
+    cdef object o = OpenXRHapticVibration.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_openxripbinding(PyObject* other):
+    cdef object o = OpenXRIPBinding.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_openxripbindingmodifier(PyObject* other):
+    cdef object o = OpenXRIPBindingModifier.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_openxrinteractionprofile(PyObject* other):
+    cdef object o = OpenXRInteractionProfile.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_openxrinteractionprofileeditor(PyObject* other):
+    cdef object o = OpenXRInteractionProfileEditor.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_openxrinteractionprofileeditorbase(PyObject* other):
+    cdef object o = OpenXRInteractionProfileEditorBase.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_openxrinteractionprofilemetadata(PyObject* other):
+    cdef object o = OpenXRInteractionProfileMetadata.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_openxrinterface(PyObject* other):
+    cdef object o = OpenXRInterface.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_openxrvisibilitymask(PyObject* other):
+    cdef object o = OpenXRVisibilityMask.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_optimizedtranslation(PyObject* other):
+    cdef object o = OptimizedTranslation.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_optionbutton(PyObject* other):
+    cdef object o = OptionButton.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_pckpacker(PyObject* other):
+    cdef object o = PCKPacker.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_packeddatacontainer(PyObject* other):
+    cdef object o = PackedDataContainer.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_packeddatacontainerref(PyObject* other):
+    cdef object o = PackedDataContainerRef.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_packedscene(PyObject* other):
+    cdef object o = PackedScene.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_packetpeer(PyObject* other):
+    cdef object o = PacketPeer.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_packetpeerdtls(PyObject* other):
+    cdef object o = PacketPeerDTLS.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_packetpeerextension(PyObject* other):
+    cdef object o = PacketPeerExtension.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_packetpeerstream(PyObject* other):
+    cdef object o = PacketPeerStream.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_packetpeerudp(PyObject* other):
+    cdef object o = PacketPeerUDP.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_panel(PyObject* other):
+    cdef object o = Panel.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_panelcontainer(PyObject* other):
+    cdef object o = PanelContainer.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_panoramaskymaterial(PyObject* other):
+    cdef object o = PanoramaSkyMaterial.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_parallax2d(PyObject* other):
+    cdef object o = Parallax2D.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_parallaxbackground(PyObject* other):
+    cdef object o = ParallaxBackground.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_parallaxlayer(PyObject* other):
+    cdef object o = ParallaxLayer.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_particleprocessmaterial(PyObject* other):
+    cdef object o = ParticleProcessMaterial.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_path2d(PyObject* other):
+    cdef object o = Path2D.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_path3d(PyObject* other):
+    cdef object o = Path3D.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_pathfollow2d(PyObject* other):
+    cdef object o = PathFollow2D.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_pathfollow3d(PyObject* other):
+    cdef object o = PathFollow3D.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_performance(PyObject* other):
+    cdef object o = Performance.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_physicalbone2d(PyObject* other):
+    cdef object o = PhysicalBone2D.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_physicalbone3d(PyObject* other):
+    cdef object o = PhysicalBone3D.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_physicalbonesimulator3d(PyObject* other):
+    cdef object o = PhysicalBoneSimulator3D.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_physicalskymaterial(PyObject* other):
+    cdef object o = PhysicalSkyMaterial.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_physicsbody2d(PyObject* other):
+    cdef object o = PhysicsBody2D.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_physicsbody3d(PyObject* other):
+    cdef object o = PhysicsBody3D.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_physicsdirectbodystate2d(PyObject* other):
+    cdef object o = PhysicsDirectBodyState2D.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_physicsdirectbodystate2dextension(PyObject* other):
+    cdef object o = PhysicsDirectBodyState2DExtension.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_physicsdirectbodystate3d(PyObject* other):
+    cdef object o = PhysicsDirectBodyState3D.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_physicsdirectbodystate3dextension(PyObject* other):
+    cdef object o = PhysicsDirectBodyState3DExtension.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_physicsdirectspacestate2d(PyObject* other):
+    cdef object o = PhysicsDirectSpaceState2D.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_physicsdirectspacestate2dextension(PyObject* other):
+    cdef object o = PhysicsDirectSpaceState2DExtension.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_physicsdirectspacestate3d(PyObject* other):
+    cdef object o = PhysicsDirectSpaceState3D.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_physicsdirectspacestate3dextension(PyObject* other):
+    cdef object o = PhysicsDirectSpaceState3DExtension.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_physicsmaterial(PyObject* other):
+    cdef object o = PhysicsMaterial.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_physicspointqueryparameters2d(PyObject* other):
+    cdef object o = PhysicsPointQueryParameters2D.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_physicspointqueryparameters3d(PyObject* other):
+    cdef object o = PhysicsPointQueryParameters3D.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_physicsrayqueryparameters2d(PyObject* other):
+    cdef object o = PhysicsRayQueryParameters2D.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_physicsrayqueryparameters3d(PyObject* other):
+    cdef object o = PhysicsRayQueryParameters3D.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_physicsserver2d(PyObject* other):
+    cdef object o = PhysicsServer2D.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_physicsserver2dextension(PyObject* other):
+    cdef object o = PhysicsServer2DExtension.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_physicsserver2dmanager(PyObject* other):
+    cdef object o = PhysicsServer2DManager.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_physicsserver3d(PyObject* other):
+    cdef object o = PhysicsServer3D.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_physicsserver3dextension(PyObject* other):
+    cdef object o = PhysicsServer3DExtension.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_physicsserver3dmanager(PyObject* other):
+    cdef object o = PhysicsServer3DManager.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_physicsserver3drenderingserverhandler(PyObject* other):
+    cdef object o = PhysicsServer3DRenderingServerHandler.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_physicsshapequeryparameters2d(PyObject* other):
+    cdef object o = PhysicsShapeQueryParameters2D.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_physicsshapequeryparameters3d(PyObject* other):
+    cdef object o = PhysicsShapeQueryParameters3D.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_physicstestmotionparameters2d(PyObject* other):
+    cdef object o = PhysicsTestMotionParameters2D.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_physicstestmotionparameters3d(PyObject* other):
+    cdef object o = PhysicsTestMotionParameters3D.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_physicstestmotionresult2d(PyObject* other):
+    cdef object o = PhysicsTestMotionResult2D.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_physicstestmotionresult3d(PyObject* other):
+    cdef object o = PhysicsTestMotionResult3D.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_pinjoint2d(PyObject* other):
+    cdef object o = PinJoint2D.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_pinjoint3d(PyObject* other):
+    cdef object o = PinJoint3D.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_placeholdercubemap(PyObject* other):
+    cdef object o = PlaceholderCubemap.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_placeholdercubemaparray(PyObject* other):
+    cdef object o = PlaceholderCubemapArray.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_placeholdermaterial(PyObject* other):
+    cdef object o = PlaceholderMaterial.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_placeholdermesh(PyObject* other):
+    cdef object o = PlaceholderMesh.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_placeholdertexture2d(PyObject* other):
+    cdef object o = PlaceholderTexture2D.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_placeholdertexture2darray(PyObject* other):
+    cdef object o = PlaceholderTexture2DArray.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_placeholdertexture3d(PyObject* other):
+    cdef object o = PlaceholderTexture3D.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_placeholdertexturelayered(PyObject* other):
+    cdef object o = PlaceholderTextureLayered.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_planemesh(PyObject* other):
+    cdef object o = PlaneMesh.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_pointlight2d(PyObject* other):
+    cdef object o = PointLight2D.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_pointmesh(PyObject* other):
+    cdef object o = PointMesh.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_polygon2d(PyObject* other):
+    cdef object o = Polygon2D.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_polygonoccluder3d(PyObject* other):
+    cdef object o = PolygonOccluder3D.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_polygonpathfinder(PyObject* other):
+    cdef object o = PolygonPathFinder.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_popup(PyObject* other):
+    cdef object o = Popup.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_popupmenu(PyObject* other):
+    cdef object o = PopupMenu.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_popuppanel(PyObject* other):
+    cdef object o = PopupPanel.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_portablecompressedtexture2d(PyObject* other):
+    cdef object o = PortableCompressedTexture2D.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_primitivemesh(PyObject* other):
+    cdef object o = PrimitiveMesh.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_prismmesh(PyObject* other):
+    cdef object o = PrismMesh.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_proceduralskymaterial(PyObject* other):
+    cdef object o = ProceduralSkyMaterial.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_progressbar(PyObject* other):
+    cdef object o = ProgressBar.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_projectsettings(PyObject* other):
+    cdef object o = ProjectSettings.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_propertytweener(PyObject* other):
+    cdef object o = PropertyTweener.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_quadmesh(PyObject* other):
+    cdef object o = QuadMesh.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_quadoccluder3d(PyObject* other):
+    cdef object o = QuadOccluder3D.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_rdattachmentformat(PyObject* other):
+    cdef object o = RDAttachmentFormat.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_rdframebufferpass(PyObject* other):
+    cdef object o = RDFramebufferPass.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_rdpipelinecolorblendstate(PyObject* other):
+    cdef object o = RDPipelineColorBlendState.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_rdpipelinecolorblendstateattachment(PyObject* other):
+    cdef object o = RDPipelineColorBlendStateAttachment.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_rdpipelinedepthstencilstate(PyObject* other):
+    cdef object o = RDPipelineDepthStencilState.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_rdpipelinemultisamplestate(PyObject* other):
+    cdef object o = RDPipelineMultisampleState.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_rdpipelinerasterizationstate(PyObject* other):
+    cdef object o = RDPipelineRasterizationState.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_rdpipelinespecializationconstant(PyObject* other):
+    cdef object o = RDPipelineSpecializationConstant.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_rdsamplerstate(PyObject* other):
+    cdef object o = RDSamplerState.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_rdshaderfile(PyObject* other):
+    cdef object o = RDShaderFile.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_rdshaderspirv(PyObject* other):
+    cdef object o = RDShaderSPIRV.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_rdshadersource(PyObject* other):
+    cdef object o = RDShaderSource.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_rdtextureformat(PyObject* other):
+    cdef object o = RDTextureFormat.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_rdtextureview(PyObject* other):
+    cdef object o = RDTextureView.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_rduniform(PyObject* other):
+    cdef object o = RDUniform.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_rdvertexattribute(PyObject* other):
+    cdef object o = RDVertexAttribute.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_randomnumbergenerator(PyObject* other):
+    cdef object o = RandomNumberGenerator.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_range(PyObject* other):
+    cdef object o = Range.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_raycast2d(PyObject* other):
+    cdef object o = RayCast2D.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_raycast3d(PyObject* other):
+    cdef object o = RayCast3D.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_rectangleshape2d(PyObject* other):
+    cdef object o = RectangleShape2D.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_refcounted(PyObject* other):
+    cdef object o = RefCounted.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_referencerect(PyObject* other):
+    cdef object o = ReferenceRect.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_reflectionprobe(PyObject* other):
+    cdef object o = ReflectionProbe.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_regex(PyObject* other):
+    cdef object o = RegEx.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_regexmatch(PyObject* other):
+    cdef object o = RegExMatch.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_remotetransform2d(PyObject* other):
+    cdef object o = RemoteTransform2D.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_remotetransform3d(PyObject* other):
+    cdef object o = RemoteTransform3D.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_renderdata(PyObject* other):
+    cdef object o = RenderData.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_renderdataextension(PyObject* other):
+    cdef object o = RenderDataExtension.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_renderdatard(PyObject* other):
+    cdef object o = RenderDataRD.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_renderscenebuffers(PyObject* other):
+    cdef object o = RenderSceneBuffers.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_renderscenebuffersconfiguration(PyObject* other):
+    cdef object o = RenderSceneBuffersConfiguration.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_renderscenebuffersextension(PyObject* other):
+    cdef object o = RenderSceneBuffersExtension.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_renderscenebuffersrd(PyObject* other):
+    cdef object o = RenderSceneBuffersRD.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_renderscenedata(PyObject* other):
+    cdef object o = RenderSceneData.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_renderscenedataextension(PyObject* other):
+    cdef object o = RenderSceneDataExtension.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_renderscenedatard(PyObject* other):
+    cdef object o = RenderSceneDataRD.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_renderingdevice(PyObject* other):
+    cdef object o = RenderingDevice.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_renderingserver(PyObject* other):
+    cdef object o = RenderingServer.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_resource(PyObject* other):
+    cdef object o = Resource.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_resourceformatloader(PyObject* other):
+    cdef object o = ResourceFormatLoader.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_resourceformatsaver(PyObject* other):
+    cdef object o = ResourceFormatSaver.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_resourceimporter(PyObject* other):
+    cdef object o = ResourceImporter.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_resourceimporterbmfont(PyObject* other):
+    cdef object o = ResourceImporterBMFont.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_resourceimporterbitmap(PyObject* other):
+    cdef object o = ResourceImporterBitMap.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_resourceimportercsvtranslation(PyObject* other):
+    cdef object o = ResourceImporterCSVTranslation.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_resourceimporterdynamicfont(PyObject* other):
+    cdef object o = ResourceImporterDynamicFont.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_resourceimporterimage(PyObject* other):
+    cdef object o = ResourceImporterImage.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_resourceimporterimagefont(PyObject* other):
+    cdef object o = ResourceImporterImageFont.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_resourceimporterlayeredtexture(PyObject* other):
+    cdef object o = ResourceImporterLayeredTexture.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_resourceimportermp3(PyObject* other):
+    cdef object o = ResourceImporterMP3.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_resourceimporterobj(PyObject* other):
+    cdef object o = ResourceImporterOBJ.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_resourceimporteroggvorbis(PyObject* other):
+    cdef object o = ResourceImporterOggVorbis.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_resourceimporterscene(PyObject* other):
+    cdef object o = ResourceImporterScene.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_resourceimportershaderfile(PyObject* other):
+    cdef object o = ResourceImporterShaderFile.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_resourceimportertexture(PyObject* other):
+    cdef object o = ResourceImporterTexture.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_resourceimportertextureatlas(PyObject* other):
+    cdef object o = ResourceImporterTextureAtlas.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_resourceimporterwav(PyObject* other):
+    cdef object o = ResourceImporterWAV.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_resourceloader(PyObject* other):
+    cdef object o = ResourceLoader.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_resourcepreloader(PyObject* other):
+    cdef object o = ResourcePreloader.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_resourcesaver(PyObject* other):
+    cdef object o = ResourceSaver.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_resourceuid(PyObject* other):
+    cdef object o = ResourceUID.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_retargetmodifier3d(PyObject* other):
+    cdef object o = RetargetModifier3D.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_ribbontrailmesh(PyObject* other):
+    cdef object o = RibbonTrailMesh.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_richtexteffect(PyObject* other):
+    cdef object o = RichTextEffect.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_richtextlabel(PyObject* other):
+    cdef object o = RichTextLabel.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_rigidbody2d(PyObject* other):
+    cdef object o = RigidBody2D.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_rigidbody3d(PyObject* other):
+    cdef object o = RigidBody3D.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_rootmotionview(PyObject* other):
+    cdef object o = RootMotionView.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_scenemultiplayer(PyObject* other):
+    cdef object o = SceneMultiplayer.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_scenereplicationconfig(PyObject* other):
+    cdef object o = SceneReplicationConfig.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_scenestate(PyObject* other):
+    cdef object o = SceneState.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_scenetree(PyObject* other):
+    cdef object o = SceneTree.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_scenetreetimer(PyObject* other):
+    cdef object o = SceneTreeTimer.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_script(PyObject* other):
+    cdef object o = Script.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_scriptcreatedialog(PyObject* other):
+    cdef object o = ScriptCreateDialog.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_scripteditor(PyObject* other):
+    cdef object o = ScriptEditor.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_scripteditorbase(PyObject* other):
+    cdef object o = ScriptEditorBase.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_scriptextension(PyObject* other):
+    cdef object o = ScriptExtension.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_scriptlanguage(PyObject* other):
+    cdef object o = ScriptLanguage.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_scriptlanguageextension(PyObject* other):
+    cdef object o = ScriptLanguageExtension.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_scrollbar(PyObject* other):
+    cdef object o = ScrollBar.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_scrollcontainer(PyObject* other):
+    cdef object o = ScrollContainer.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_segmentshape2d(PyObject* other):
+    cdef object o = SegmentShape2D.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_semaphore(PyObject* other):
+    cdef object o = Semaphore.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_separationrayshape2d(PyObject* other):
+    cdef object o = SeparationRayShape2D.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_separationrayshape3d(PyObject* other):
+    cdef object o = SeparationRayShape3D.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_separator(PyObject* other):
+    cdef object o = Separator.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_shader(PyObject* other):
+    cdef object o = Shader.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_shaderglobalsoverride(PyObject* other):
+    cdef object o = ShaderGlobalsOverride.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_shaderinclude(PyObject* other):
+    cdef object o = ShaderInclude.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_shaderincludedb(PyObject* other):
+    cdef object o = ShaderIncludeDB.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_shadermaterial(PyObject* other):
+    cdef object o = ShaderMaterial.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_shape2d(PyObject* other):
+    cdef object o = Shape2D.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_shape3d(PyObject* other):
+    cdef object o = Shape3D.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_shapecast2d(PyObject* other):
+    cdef object o = ShapeCast2D.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_shapecast3d(PyObject* other):
+    cdef object o = ShapeCast3D.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_shortcut(PyObject* other):
+    cdef object o = Shortcut.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_skeleton2d(PyObject* other):
+    cdef object o = Skeleton2D.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_skeleton3d(PyObject* other):
+    cdef object o = Skeleton3D.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_skeletonik3d(PyObject* other):
+    cdef object o = SkeletonIK3D.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_skeletonmodification2d(PyObject* other):
+    cdef object o = SkeletonModification2D.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_skeletonmodification2dccdik(PyObject* other):
+    cdef object o = SkeletonModification2DCCDIK.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_skeletonmodification2dfabrik(PyObject* other):
+    cdef object o = SkeletonModification2DFABRIK.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_skeletonmodification2djiggle(PyObject* other):
+    cdef object o = SkeletonModification2DJiggle.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_skeletonmodification2dlookat(PyObject* other):
+    cdef object o = SkeletonModification2DLookAt.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_skeletonmodification2dphysicalbones(PyObject* other):
+    cdef object o = SkeletonModification2DPhysicalBones.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_skeletonmodification2dstackholder(PyObject* other):
+    cdef object o = SkeletonModification2DStackHolder.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_skeletonmodification2dtwoboneik(PyObject* other):
+    cdef object o = SkeletonModification2DTwoBoneIK.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_skeletonmodificationstack2d(PyObject* other):
+    cdef object o = SkeletonModificationStack2D.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_skeletonmodifier3d(PyObject* other):
+    cdef object o = SkeletonModifier3D.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_skeletonprofile(PyObject* other):
+    cdef object o = SkeletonProfile.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_skeletonprofilehumanoid(PyObject* other):
+    cdef object o = SkeletonProfileHumanoid.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_skin(PyObject* other):
+    cdef object o = Skin.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_skinreference(PyObject* other):
+    cdef object o = SkinReference.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_sky(PyObject* other):
+    cdef object o = Sky.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_slider(PyObject* other):
+    cdef object o = Slider.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_sliderjoint3d(PyObject* other):
+    cdef object o = SliderJoint3D.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_softbody3d(PyObject* other):
+    cdef object o = SoftBody3D.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_spheremesh(PyObject* other):
+    cdef object o = SphereMesh.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_sphereoccluder3d(PyObject* other):
+    cdef object o = SphereOccluder3D.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_sphereshape3d(PyObject* other):
+    cdef object o = SphereShape3D.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_spinbox(PyObject* other):
+    cdef object o = SpinBox.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_splitcontainer(PyObject* other):
+    cdef object o = SplitContainer.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_spotlight3d(PyObject* other):
+    cdef object o = SpotLight3D.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_springarm3d(PyObject* other):
+    cdef object o = SpringArm3D.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_springbonecollision3d(PyObject* other):
+    cdef object o = SpringBoneCollision3D.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_springbonecollisioncapsule3d(PyObject* other):
+    cdef object o = SpringBoneCollisionCapsule3D.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_springbonecollisionplane3d(PyObject* other):
+    cdef object o = SpringBoneCollisionPlane3D.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_springbonecollisionsphere3d(PyObject* other):
+    cdef object o = SpringBoneCollisionSphere3D.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_springbonesimulator3d(PyObject* other):
+    cdef object o = SpringBoneSimulator3D.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_sprite2d(PyObject* other):
+    cdef object o = Sprite2D.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_sprite3d(PyObject* other):
+    cdef object o = Sprite3D.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_spritebase3d(PyObject* other):
+    cdef object o = SpriteBase3D.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_spriteframes(PyObject* other):
+    cdef object o = SpriteFrames.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_standardmaterial3d(PyObject* other):
+    cdef object o = StandardMaterial3D.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_staticbody2d(PyObject* other):
+    cdef object o = StaticBody2D.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_staticbody3d(PyObject* other):
+    cdef object o = StaticBody3D.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_statusindicator(PyObject* other):
+    cdef object o = StatusIndicator.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_streampeer(PyObject* other):
+    cdef object o = StreamPeer.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_streampeerbuffer(PyObject* other):
+    cdef object o = StreamPeerBuffer.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_streampeerextension(PyObject* other):
+    cdef object o = StreamPeerExtension.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_streampeergzip(PyObject* other):
+    cdef object o = StreamPeerGZIP.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_streampeertcp(PyObject* other):
+    cdef object o = StreamPeerTCP.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_streampeertls(PyObject* other):
+    cdef object o = StreamPeerTLS.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_stylebox(PyObject* other):
+    cdef object o = StyleBox.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_styleboxempty(PyObject* other):
+    cdef object o = StyleBoxEmpty.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_styleboxflat(PyObject* other):
+    cdef object o = StyleBoxFlat.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_styleboxline(PyObject* other):
+    cdef object o = StyleBoxLine.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_styleboxtexture(PyObject* other):
+    cdef object o = StyleBoxTexture.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_subviewport(PyObject* other):
+    cdef object o = SubViewport.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_subviewportcontainer(PyObject* other):
+    cdef object o = SubViewportContainer.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_subtweentweener(PyObject* other):
+    cdef object o = SubtweenTweener.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_surfacetool(PyObject* other):
+    cdef object o = SurfaceTool.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_syntaxhighlighter(PyObject* other):
+    cdef object o = SyntaxHighlighter.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_systemfont(PyObject* other):
+    cdef object o = SystemFont.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_tcpserver(PyObject* other):
+    cdef object o = TCPServer.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_tlsoptions(PyObject* other):
+    cdef object o = TLSOptions.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_tabbar(PyObject* other):
+    cdef object o = TabBar.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_tabcontainer(PyObject* other):
+    cdef object o = TabContainer.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_textedit(PyObject* other):
+    cdef object o = TextEdit.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_textline(PyObject* other):
+    cdef object o = TextLine.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_textmesh(PyObject* other):
+    cdef object o = TextMesh.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_textparagraph(PyObject* other):
+    cdef object o = TextParagraph.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_textserver(PyObject* other):
+    cdef object o = TextServer.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_textserveradvanced(PyObject* other):
+    cdef object o = TextServerAdvanced.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_textserverdummy(PyObject* other):
+    cdef object o = TextServerDummy.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_textserverextension(PyObject* other):
+    cdef object o = TextServerExtension.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_textservermanager(PyObject* other):
+    cdef object o = TextServerManager.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_texture(PyObject* other):
+    cdef object o = Texture.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_texture2d(PyObject* other):
+    cdef object o = Texture2D.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_texture2darray(PyObject* other):
+    cdef object o = Texture2DArray.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_texture2darrayrd(PyObject* other):
+    cdef object o = Texture2DArrayRD.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_texture2drd(PyObject* other):
+    cdef object o = Texture2DRD.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_texture3d(PyObject* other):
+    cdef object o = Texture3D.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_texture3drd(PyObject* other):
+    cdef object o = Texture3DRD.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_texturebutton(PyObject* other):
+    cdef object o = TextureButton.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_texturecubemaparrayrd(PyObject* other):
+    cdef object o = TextureCubemapArrayRD.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_texturecubemaprd(PyObject* other):
+    cdef object o = TextureCubemapRD.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_texturelayered(PyObject* other):
+    cdef object o = TextureLayered.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_texturelayeredrd(PyObject* other):
+    cdef object o = TextureLayeredRD.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_textureprogressbar(PyObject* other):
+    cdef object o = TextureProgressBar.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_texturerect(PyObject* other):
+    cdef object o = TextureRect.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_theme(PyObject* other):
+    cdef object o = Theme.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_themedb(PyObject* other):
+    cdef object o = ThemeDB.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_thread(PyObject* other):
+    cdef object o = Thread.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_tiledata(PyObject* other):
+    cdef object o = TileData.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_tilemap(PyObject* other):
+    cdef object o = TileMap.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_tilemaplayer(PyObject* other):
+    cdef object o = TileMapLayer.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_tilemappattern(PyObject* other):
+    cdef object o = TileMapPattern.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_tileset(PyObject* other):
+    cdef object o = TileSet.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_tilesetatlassource(PyObject* other):
+    cdef object o = TileSetAtlasSource.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_tilesetscenescollectionsource(PyObject* other):
+    cdef object o = TileSetScenesCollectionSource.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_tilesetsource(PyObject* other):
+    cdef object o = TileSetSource.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_time(PyObject* other):
+    cdef object o = Time.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_timer(PyObject* other):
+    cdef object o = Timer.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_torusmesh(PyObject* other):
+    cdef object o = TorusMesh.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_touchscreenbutton(PyObject* other):
+    cdef object o = TouchScreenButton.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_translation(PyObject* other):
+    cdef object o = Translation.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_translationdomain(PyObject* other):
+    cdef object o = TranslationDomain.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_translationserver(PyObject* other):
+    cdef object o = TranslationServer.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_tree(PyObject* other):
+    cdef object o = Tree.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_treeitem(PyObject* other):
+    cdef object o = TreeItem.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_trianglemesh(PyObject* other):
+    cdef object o = TriangleMesh.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_tubetrailmesh(PyObject* other):
+    cdef object o = TubeTrailMesh.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_tween(PyObject* other):
+    cdef object o = Tween.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_tweener(PyObject* other):
+    cdef object o = Tweener.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_udpserver(PyObject* other):
+    cdef object o = UDPServer.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_upnp(PyObject* other):
+    cdef object o = UPNP.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_upnpdevice(PyObject* other):
+    cdef object o = UPNPDevice.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_undoredo(PyObject* other):
+    cdef object o = UndoRedo.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_uniformsetcacherd(PyObject* other):
+    cdef object o = UniformSetCacheRD.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_vboxcontainer(PyObject* other):
+    cdef object o = VBoxContainer.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_vflowcontainer(PyObject* other):
+    cdef object o = VFlowContainer.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_vscrollbar(PyObject* other):
+    cdef object o = VScrollBar.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_vseparator(PyObject* other):
+    cdef object o = VSeparator.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_vslider(PyObject* other):
+    cdef object o = VSlider.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_vsplitcontainer(PyObject* other):
+    cdef object o = VSplitContainer.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_vehiclebody3d(PyObject* other):
+    cdef object o = VehicleBody3D.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_vehiclewheel3d(PyObject* other):
+    cdef object o = VehicleWheel3D.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_videostream(PyObject* other):
+    cdef object o = VideoStream.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_videostreamplayback(PyObject* other):
+    cdef object o = VideoStreamPlayback.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_videostreamplayer(PyObject* other):
+    cdef object o = VideoStreamPlayer.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_videostreamtheora(PyObject* other):
+    cdef object o = VideoStreamTheora.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_viewport(PyObject* other):
+    cdef object o = Viewport.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_viewporttexture(PyObject* other):
+    cdef object o = ViewportTexture.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_visibleonscreenenabler2d(PyObject* other):
+    cdef object o = VisibleOnScreenEnabler2D.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_visibleonscreenenabler3d(PyObject* other):
+    cdef object o = VisibleOnScreenEnabler3D.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_visibleonscreennotifier2d(PyObject* other):
+    cdef object o = VisibleOnScreenNotifier2D.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_visibleonscreennotifier3d(PyObject* other):
+    cdef object o = VisibleOnScreenNotifier3D.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_visualinstance3d(PyObject* other):
+    cdef object o = VisualInstance3D.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_visualshader(PyObject* other):
+    cdef object o = VisualShader.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_visualshadernode(PyObject* other):
+    cdef object o = VisualShaderNode.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_visualshadernodebillboard(PyObject* other):
+    cdef object o = VisualShaderNodeBillboard.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_visualshadernodebooleanconstant(PyObject* other):
+    cdef object o = VisualShaderNodeBooleanConstant.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_visualshadernodebooleanparameter(PyObject* other):
+    cdef object o = VisualShaderNodeBooleanParameter.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_visualshadernodeclamp(PyObject* other):
+    cdef object o = VisualShaderNodeClamp.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_visualshadernodecolorconstant(PyObject* other):
+    cdef object o = VisualShaderNodeColorConstant.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_visualshadernodecolorfunc(PyObject* other):
+    cdef object o = VisualShaderNodeColorFunc.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_visualshadernodecolorop(PyObject* other):
+    cdef object o = VisualShaderNodeColorOp.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_visualshadernodecolorparameter(PyObject* other):
+    cdef object o = VisualShaderNodeColorParameter.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_visualshadernodecomment(PyObject* other):
+    cdef object o = VisualShaderNodeComment.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_visualshadernodecompare(PyObject* other):
+    cdef object o = VisualShaderNodeCompare.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_visualshadernodeconstant(PyObject* other):
+    cdef object o = VisualShaderNodeConstant.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_visualshadernodecubemap(PyObject* other):
+    cdef object o = VisualShaderNodeCubemap.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_visualshadernodecubemapparameter(PyObject* other):
+    cdef object o = VisualShaderNodeCubemapParameter.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_visualshadernodecurvetexture(PyObject* other):
+    cdef object o = VisualShaderNodeCurveTexture.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_visualshadernodecurvexyztexture(PyObject* other):
+    cdef object o = VisualShaderNodeCurveXYZTexture.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_visualshadernodecustom(PyObject* other):
+    cdef object o = VisualShaderNodeCustom.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_visualshadernodederivativefunc(PyObject* other):
+    cdef object o = VisualShaderNodeDerivativeFunc.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_visualshadernodedeterminant(PyObject* other):
+    cdef object o = VisualShaderNodeDeterminant.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_visualshadernodedistancefade(PyObject* other):
+    cdef object o = VisualShaderNodeDistanceFade.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_visualshadernodedotproduct(PyObject* other):
+    cdef object o = VisualShaderNodeDotProduct.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_visualshadernodeexpression(PyObject* other):
+    cdef object o = VisualShaderNodeExpression.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_visualshadernodefaceforward(PyObject* other):
+    cdef object o = VisualShaderNodeFaceForward.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_visualshadernodefloatconstant(PyObject* other):
+    cdef object o = VisualShaderNodeFloatConstant.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_visualshadernodefloatfunc(PyObject* other):
+    cdef object o = VisualShaderNodeFloatFunc.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_visualshadernodefloatop(PyObject* other):
+    cdef object o = VisualShaderNodeFloatOp.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_visualshadernodefloatparameter(PyObject* other):
+    cdef object o = VisualShaderNodeFloatParameter.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_visualshadernodeframe(PyObject* other):
+    cdef object o = VisualShaderNodeFrame.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_visualshadernodefresnel(PyObject* other):
+    cdef object o = VisualShaderNodeFresnel.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_visualshadernodeglobalexpression(PyObject* other):
+    cdef object o = VisualShaderNodeGlobalExpression.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_visualshadernodegroupbase(PyObject* other):
+    cdef object o = VisualShaderNodeGroupBase.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_visualshadernodeif(PyObject* other):
+    cdef object o = VisualShaderNodeIf.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_visualshadernodeinput(PyObject* other):
+    cdef object o = VisualShaderNodeInput.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_visualshadernodeintconstant(PyObject* other):
+    cdef object o = VisualShaderNodeIntConstant.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_visualshadernodeintfunc(PyObject* other):
+    cdef object o = VisualShaderNodeIntFunc.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_visualshadernodeintop(PyObject* other):
+    cdef object o = VisualShaderNodeIntOp.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_visualshadernodeintparameter(PyObject* other):
+    cdef object o = VisualShaderNodeIntParameter.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_visualshadernodeis(PyObject* other):
+    cdef object o = VisualShaderNodeIs.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_visualshadernodelinearscenedepth(PyObject* other):
+    cdef object o = VisualShaderNodeLinearSceneDepth.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_visualshadernodemix(PyObject* other):
+    cdef object o = VisualShaderNodeMix.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_visualshadernodemultiplyadd(PyObject* other):
+    cdef object o = VisualShaderNodeMultiplyAdd.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_visualshadernodeouterproduct(PyObject* other):
+    cdef object o = VisualShaderNodeOuterProduct.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_visualshadernodeoutput(PyObject* other):
+    cdef object o = VisualShaderNodeOutput.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_visualshadernodeparameter(PyObject* other):
+    cdef object o = VisualShaderNodeParameter.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_visualshadernodeparameterref(PyObject* other):
+    cdef object o = VisualShaderNodeParameterRef.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_visualshadernodeparticleaccelerator(PyObject* other):
+    cdef object o = VisualShaderNodeParticleAccelerator.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_visualshadernodeparticleboxemitter(PyObject* other):
+    cdef object o = VisualShaderNodeParticleBoxEmitter.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_visualshadernodeparticleconevelocity(PyObject* other):
+    cdef object o = VisualShaderNodeParticleConeVelocity.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_visualshadernodeparticleemit(PyObject* other):
+    cdef object o = VisualShaderNodeParticleEmit.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_visualshadernodeparticleemitter(PyObject* other):
+    cdef object o = VisualShaderNodeParticleEmitter.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_visualshadernodeparticlemeshemitter(PyObject* other):
+    cdef object o = VisualShaderNodeParticleMeshEmitter.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_visualshadernodeparticlemultiplybyaxisangle(PyObject* other):
+    cdef object o = VisualShaderNodeParticleMultiplyByAxisAngle.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_visualshadernodeparticleoutput(PyObject* other):
+    cdef object o = VisualShaderNodeParticleOutput.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_visualshadernodeparticlerandomness(PyObject* other):
+    cdef object o = VisualShaderNodeParticleRandomness.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_visualshadernodeparticleringemitter(PyObject* other):
+    cdef object o = VisualShaderNodeParticleRingEmitter.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_visualshadernodeparticlesphereemitter(PyObject* other):
+    cdef object o = VisualShaderNodeParticleSphereEmitter.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_visualshadernodeproximityfade(PyObject* other):
+    cdef object o = VisualShaderNodeProximityFade.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_visualshadernoderandomrange(PyObject* other):
+    cdef object o = VisualShaderNodeRandomRange.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_visualshadernoderemap(PyObject* other):
+    cdef object o = VisualShaderNodeRemap.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_visualshadernodereroute(PyObject* other):
+    cdef object o = VisualShaderNodeReroute.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_visualshadernoderesizablebase(PyObject* other):
+    cdef object o = VisualShaderNodeResizableBase.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_visualshadernoderotationbyaxis(PyObject* other):
+    cdef object o = VisualShaderNodeRotationByAxis.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_visualshadernodesdfraymarch(PyObject* other):
+    cdef object o = VisualShaderNodeSDFRaymarch.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_visualshadernodesdftoscreenuv(PyObject* other):
+    cdef object o = VisualShaderNodeSDFToScreenUV.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_visualshadernodesample3d(PyObject* other):
+    cdef object o = VisualShaderNodeSample3D.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_visualshadernodescreennormalworldspace(PyObject* other):
+    cdef object o = VisualShaderNodeScreenNormalWorldSpace.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_visualshadernodescreenuvtosdf(PyObject* other):
+    cdef object o = VisualShaderNodeScreenUVToSDF.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_visualshadernodesmoothstep(PyObject* other):
+    cdef object o = VisualShaderNodeSmoothStep.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_visualshadernodestep(PyObject* other):
+    cdef object o = VisualShaderNodeStep.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_visualshadernodeswitch(PyObject* other):
+    cdef object o = VisualShaderNodeSwitch.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_visualshadernodetexture(PyObject* other):
+    cdef object o = VisualShaderNodeTexture.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_visualshadernodetexture2darray(PyObject* other):
+    cdef object o = VisualShaderNodeTexture2DArray.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_visualshadernodetexture2darrayparameter(PyObject* other):
+    cdef object o = VisualShaderNodeTexture2DArrayParameter.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_visualshadernodetexture2dparameter(PyObject* other):
+    cdef object o = VisualShaderNodeTexture2DParameter.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_visualshadernodetexture3d(PyObject* other):
+    cdef object o = VisualShaderNodeTexture3D.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_visualshadernodetexture3dparameter(PyObject* other):
+    cdef object o = VisualShaderNodeTexture3DParameter.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_visualshadernodetextureparameter(PyObject* other):
+    cdef object o = VisualShaderNodeTextureParameter.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_visualshadernodetextureparametertriplanar(PyObject* other):
+    cdef object o = VisualShaderNodeTextureParameterTriplanar.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_visualshadernodetexturesdf(PyObject* other):
+    cdef object o = VisualShaderNodeTextureSDF.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_visualshadernodetexturesdfnormal(PyObject* other):
+    cdef object o = VisualShaderNodeTextureSDFNormal.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_visualshadernodetransformcompose(PyObject* other):
+    cdef object o = VisualShaderNodeTransformCompose.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_visualshadernodetransformconstant(PyObject* other):
+    cdef object o = VisualShaderNodeTransformConstant.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_visualshadernodetransformdecompose(PyObject* other):
+    cdef object o = VisualShaderNodeTransformDecompose.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_visualshadernodetransformfunc(PyObject* other):
+    cdef object o = VisualShaderNodeTransformFunc.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_visualshadernodetransformop(PyObject* other):
+    cdef object o = VisualShaderNodeTransformOp.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_visualshadernodetransformparameter(PyObject* other):
+    cdef object o = VisualShaderNodeTransformParameter.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_visualshadernodetransformvecmult(PyObject* other):
+    cdef object o = VisualShaderNodeTransformVecMult.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_visualshadernodeuintconstant(PyObject* other):
+    cdef object o = VisualShaderNodeUIntConstant.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_visualshadernodeuintfunc(PyObject* other):
+    cdef object o = VisualShaderNodeUIntFunc.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_visualshadernodeuintop(PyObject* other):
+    cdef object o = VisualShaderNodeUIntOp.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_visualshadernodeuintparameter(PyObject* other):
+    cdef object o = VisualShaderNodeUIntParameter.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_visualshadernodeuvfunc(PyObject* other):
+    cdef object o = VisualShaderNodeUVFunc.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_visualshadernodeuvpolarcoord(PyObject* other):
+    cdef object o = VisualShaderNodeUVPolarCoord.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_visualshadernodevarying(PyObject* other):
+    cdef object o = VisualShaderNodeVarying.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_visualshadernodevaryinggetter(PyObject* other):
+    cdef object o = VisualShaderNodeVaryingGetter.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_visualshadernodevaryingsetter(PyObject* other):
+    cdef object o = VisualShaderNodeVaryingSetter.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_visualshadernodevec2constant(PyObject* other):
+    cdef object o = VisualShaderNodeVec2Constant.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_visualshadernodevec2parameter(PyObject* other):
+    cdef object o = VisualShaderNodeVec2Parameter.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_visualshadernodevec3constant(PyObject* other):
+    cdef object o = VisualShaderNodeVec3Constant.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_visualshadernodevec3parameter(PyObject* other):
+    cdef object o = VisualShaderNodeVec3Parameter.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_visualshadernodevec4constant(PyObject* other):
+    cdef object o = VisualShaderNodeVec4Constant.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_visualshadernodevec4parameter(PyObject* other):
+    cdef object o = VisualShaderNodeVec4Parameter.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_visualshadernodevectorbase(PyObject* other):
+    cdef object o = VisualShaderNodeVectorBase.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_visualshadernodevectorcompose(PyObject* other):
+    cdef object o = VisualShaderNodeVectorCompose.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_visualshadernodevectordecompose(PyObject* other):
+    cdef object o = VisualShaderNodeVectorDecompose.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_visualshadernodevectordistance(PyObject* other):
+    cdef object o = VisualShaderNodeVectorDistance.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_visualshadernodevectorfunc(PyObject* other):
+    cdef object o = VisualShaderNodeVectorFunc.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_visualshadernodevectorlen(PyObject* other):
+    cdef object o = VisualShaderNodeVectorLen.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_visualshadernodevectorop(PyObject* other):
+    cdef object o = VisualShaderNodeVectorOp.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_visualshadernodevectorrefract(PyObject* other):
+    cdef object o = VisualShaderNodeVectorRefract.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_visualshadernodeworldpositionfromdepth(PyObject* other):
+    cdef object o = VisualShaderNodeWorldPositionFromDepth.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_voxelgi(PyObject* other):
+    cdef object o = VoxelGI.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_voxelgidata(PyObject* other):
+    cdef object o = VoxelGIData.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_weakref(PyObject* other):
+    cdef object o = WeakRef.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_webrtcdatachannel(PyObject* other):
+    cdef object o = WebRTCDataChannel.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_webrtcdatachannelextension(PyObject* other):
+    cdef object o = WebRTCDataChannelExtension.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_webrtcmultiplayerpeer(PyObject* other):
+    cdef object o = WebRTCMultiplayerPeer.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_webrtcpeerconnection(PyObject* other):
+    cdef object o = WebRTCPeerConnection.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_webrtcpeerconnectionextension(PyObject* other):
+    cdef object o = WebRTCPeerConnectionExtension.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_websocketmultiplayerpeer(PyObject* other):
+    cdef object o = WebSocketMultiplayerPeer.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_websocketpeer(PyObject* other):
+    cdef object o = WebSocketPeer.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_webxrinterface(PyObject* other):
+    cdef object o = WebXRInterface.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_window(PyObject* other):
+    cdef object o = Window.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_workerthreadpool(PyObject* other):
+    cdef object o = WorkerThreadPool.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_world2d(PyObject* other):
+    cdef object o = World2D.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_world3d(PyObject* other):
+    cdef object o = World3D.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_worldboundaryshape2d(PyObject* other):
+    cdef object o = WorldBoundaryShape2D.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_worldboundaryshape3d(PyObject* other):
+    cdef object o = WorldBoundaryShape3D.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_worldenvironment(PyObject* other):
+    cdef object o = WorldEnvironment.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_x509certificate(PyObject* other):
+    cdef object o = X509Certificate.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_xmlparser(PyObject* other):
+    cdef object o = XMLParser.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_xranchor3d(PyObject* other):
+    cdef object o = XRAnchor3D.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_xrbodymodifier3d(PyObject* other):
+    cdef object o = XRBodyModifier3D.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_xrbodytracker(PyObject* other):
+    cdef object o = XRBodyTracker.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_xrcamera3d(PyObject* other):
+    cdef object o = XRCamera3D.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_xrcontroller3d(PyObject* other):
+    cdef object o = XRController3D.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_xrcontrollertracker(PyObject* other):
+    cdef object o = XRControllerTracker.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_xrfacemodifier3d(PyObject* other):
+    cdef object o = XRFaceModifier3D.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_xrfacetracker(PyObject* other):
+    cdef object o = XRFaceTracker.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_xrhandmodifier3d(PyObject* other):
+    cdef object o = XRHandModifier3D.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_xrhandtracker(PyObject* other):
+    cdef object o = XRHandTracker.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_xrinterface(PyObject* other):
+    cdef object o = XRInterface.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_xrinterfaceextension(PyObject* other):
+    cdef object o = XRInterfaceExtension.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_xrnode3d(PyObject* other):
+    cdef object o = XRNode3D.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_xrorigin3d(PyObject* other):
+    cdef object o = XROrigin3D.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_xrpose(PyObject* other):
+    cdef object o = XRPose.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_xrpositionaltracker(PyObject* other):
+    cdef object o = XRPositionalTracker.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_xrserver(PyObject* other):
+    cdef object o = XRServer.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_xrtracker(PyObject* other):
+    cdef object o = XRTracker.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_xrvrs(PyObject* other):
+    cdef object o = XRVRS.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_zippacker(PyObject* other):
+    cdef object o = ZIPPacker.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_zipreader(PyObject* other):
+    cdef object o = ZIPReader.cast_without_reference(<object>other)
     vals.append(o)
     return <PyObject*>o

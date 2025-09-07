@@ -15,7 +15,7 @@ from py4godot.pluginscript_api.utils.SignalDescription cimport *
 from py4godot.pluginscript_api.utils.PropertyDescription cimport *
 import py4godot.utils.print_tools as print_tools
 from importlib.machinery import SourceFileLoader
-import py4godot.py_classes.core
+import py4godot.classes.core
 import importlib
 import importlib.util
 from libcpp.string cimport string
@@ -95,7 +95,7 @@ def is_class(type_):
 
 cdef accepted_types = {int, str, float, type(True)}
 def type_is_accepted(type_to_accept):
-    return type_to_accept in accepted_types or type_to_accept in py4godot.py_classes.core.core_classes
+    return type_to_accept in accepted_types or type_to_accept in py4godot.classes.core.core_classes
 
 
 def collect_properties(cls):

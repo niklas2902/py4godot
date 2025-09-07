@@ -1,12 +1,12 @@
 # distutils: language=c++
 import traceback
 from cython.operator cimport dereference
-import py4godot.py_classes.core as core
+import py4godot.classes.core as core
 from py4godot.utils.print_tools import print_error, py_log, print_error_detailed
 from py4godot.utils.utils cimport *
 from py4godot.instance_data.InstanceData cimport InstanceData, MethodCallData
 cimport py4godot.classes.cpp_bridge as cppbridge
-import py4godot.py_classes.RefCounted as refCounted
+import py4godot.classes.RefCounted as refCounted
 from py4godot.core.variant4.Variant4 cimport *
 from libcpp.memory cimport make_shared
 from py4godot.core.variant4 import cast_helpers

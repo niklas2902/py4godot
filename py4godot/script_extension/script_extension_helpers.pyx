@@ -1,7 +1,7 @@
 # distutils: language=c++
-from py4godot.py_classes.core import StringName
+from py4godot.classes.core import StringName
 from py4godot.signals import GDSignal
-from py4godot.py_classes.core import Dictionary
+from py4godot.classes.core import Dictionary
 from py4godot.wrappers.wrappers cimport create_wrapper_from_Dictionary_ptr
 from py4godot.classes.cpp_bridge cimport Dictionary as BridgeDictionary
 from py4godot.utils.print_tools import *
@@ -24,6 +24,8 @@ cdef api PyObject*  instantiate_class(PyObject* gd_class):
     try:
         py_utils.shouldCreateObject = False
         o = class_()
+        o._ptr = o.generate_wrapper()
+        o.init_signals()
         py_utils.shouldCreateObject = True
     except Exception as e:
         print_error("Exception - creating class didn't work")

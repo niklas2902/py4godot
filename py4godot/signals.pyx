@@ -2,8 +2,8 @@
 import inspect
 from libcpp.memory cimport make_shared
 
-import py4godot.py_classes.Object as obj
-from py4godot.py_classes.core import Callable, Signal
+import py4godot.classes.Object as obj
+from py4godot.classes.core import Callable, Signal
 from py4godot.utils.utils cimport *
 import py4godot.pluginscript_api.utils.annotations as annotations
 from py4godot.pluginscript_api.utils.helpers cimport get_variant_type
@@ -27,7 +27,7 @@ class GDSignal(Signal):
     @staticmethod
     def new0():
         cdef object _class = GDSignal.construct_without_init()
-        #_class.Signal_internal_class_ptr = (CPPSignal.py_new0())
+        _class._ptr = Signal.new0()
         return _class
     @staticmethod
     def new1(object from_):
@@ -74,7 +74,7 @@ class GDSignal(Signal):
 
 class BuiltinSignal(Signal):
     def __init__(self, parent, name):
-        self.parent_ptr = parent.Object_internal_class_ptr
+        self._parent = parent
         self.signal_name =  name
 
     def connect(self, object function , int flags =0):
@@ -88,7 +88,7 @@ class BuiltinSignal(Signal):
 
     def parent(self):
         cdef object o = obj.Object.construct_without_init()
-        o.Object_internal_class_ptr = self.parent_ptr
+        o._ptr = self._parent._ptr
         return o
 
 

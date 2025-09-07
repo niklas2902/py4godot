@@ -5,4 +5,12 @@
 [node name="Node3D" type="Node3D"]
 
 [node name="TestRunner" type="Node3D" parent="."]
+_import_path = NodePath("")
+process_mode = 0
+process_physics_priority = 0
+physics_interpolation_mode = 0
+editor_description = ""
+rotation_edit_mode = 0
+top_level = false
+visibility_parent = NodePath("")
 script = ExtResource("2")

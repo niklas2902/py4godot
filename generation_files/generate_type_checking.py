@@ -14,9 +14,9 @@ def type_checking():
     res = "# distutils: language=c++"
     res = generate_newline(res)
     for cls in set(builtin_classes) - {"float", "int", "bool", "Nil"}:
-        res += f"from py4godot.py_classes.core import {cls}"
+        res += f"from py4godot.classes.core import {cls}"
         res = generate_newline(res)
-    res += f"from py4godot.py_classes.Object import Object"
+    res += f"from py4godot.classes.Object import Object"
     res = generate_newline(res)
 
     res += f"from cpython.bytes cimport PyBytes_AsString"

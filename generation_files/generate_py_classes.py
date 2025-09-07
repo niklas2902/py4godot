@@ -90,7 +90,7 @@ def generate_import():
     result = (
               "import py4godot.utils.functools as  functools\n"
               "import py4godot.utils.utils as utils\n"
-              "from py4godot.py_classes.core import *\n"
+              "from py4godot.classes.core import *\n"
               "from py4godot.utils.smart_cast import smart_cast, register_cast_function\n"
               "from py4godot.utils.CPPWrapper import CPPWrapper, constructor, static_method\n"
               "import py4godot.utils.utils as c_utils\n"
@@ -212,8 +212,8 @@ def generate_constructors(class_):
 
 
 def generate_class_imports(classes):
-    result = "from py4godot.py_classes.core import *"
-    result = "import py4godot.py_classes.core as generated_core"
+    result = "from py4godot.classes.core import *"
+    result = "import py4godot.classes.core as generated_core"
     result = generate_newline(result)
 
     return result
@@ -483,8 +483,8 @@ def generate_assert(args):
 
 def generate_method(class_, mMethod):
     res = ""
-    if should_skip_method(class_, mMethod):
-        return res
+    #if should_skip_method(class_, mMethod):
+    #    return res
     args = generate_args(class_, mMethod)
     def_function = f"{INDENT}def {pythonize_name(mMethod['name'])}({args}):"
     res += generate_method_headers(mMethod)
@@ -778,11 +778,20 @@ def is_node(class_):
 
 def generate_init_signals(cls):
     res = ""
+    res += f"{INDENT}def init_signals(self):"
+    res = generate_newline(res)
+    if cls["name"] != "Object" and cls["name"] not in builtin_classes:
+        res += f"{INDENT*2}super().init_signals()"
+        res = generate_newline(res)
+    if cls["name"] in builtin_classes:
+        res += f"{INDENT*2}pass"
+        res = generate_newline(res)
+        return res
     if "signals" in cls.keys():
         for signal in cls["signals"]:
             res += f"{INDENT*2}{signal['name']}_name = utils.py_string_to_string_name(\"{signal['name']}\")"
             res = generate_newline(res)
-            res += f"{INDENT*2}cls.{signal['name']} = signals.BuiltinSignal(cls, {signal['name']}_name)"
+            res += f"{INDENT*2}self.{signal['name']} = signals.BuiltinSignal(self, {signal['name']}_name)"
             res = generate_newline(res)
     return res
 def generate_destroy_object_method():
@@ -821,7 +830,11 @@ def generate_common_methods(class_):
 
 def generate_construct_without_init(class_):
     res = ""
-
+    res += f"{INDENT}def generate_wrapper(self):"
+    res = generate_newline(res)
+    res += f"{INDENT*2}return CPP{class_['name']}Wrapper"
+    res = generate_newline(res)
+    res += generate_init_signals(class_)
     res = generate_newline(res)
     res += f"{INDENT}@staticmethod"
     res = generate_newline(res)
@@ -831,7 +844,7 @@ def generate_construct_without_init(class_):
     res = generate_newline(res)
     res += f"{INDENT * 2}cls.shouldBeDeleted = False"
     res = generate_newline(res)
-    res += generate_init_signals(class_)
+    res += f"{INDENT * 2}cls.init_signals()"
     res = generate_newline(res)
     res += f"{INDENT * 2}return cls"
     res = generate_newline(res)
@@ -921,7 +934,9 @@ def generate_member_getter(class_, member):
     res = generate_newline(res)
 
     body = ""
-    body += f"{INDENT * 2}_ret = self._ptr.call_with_return({method_ids["normal_methods"][class_]["get_member_"+member.name]}, tuple())"
+    body += f"{INDENT * 2}_ret = {class_}.construct_without_init()"
+    body = generate_newline(body)
+    body += f"{INDENT * 2}_ret._ptr = self._ptr.call_with_return({method_ids["normal_methods"][class_]["get_member_"+member.name]}, tuple())"
     body = generate_newline(body)
     body += f"{INDENT * 2}return _ret"
     body = generate_newline(body)
@@ -988,7 +1003,9 @@ def generate_property(property, classname):
     result = generate_newline(result)
     result += f"{INDENT}def {pythonize_name(property['name'])}(self):"
     result = generate_newline(result)
-    result += f"{INDENT * 2}_ret = self. {pythonize_name(property['getter'])}({generate_property_index(property)})"
+    result += f"{INDENT * 2}_ret = {untypearray(property['type'])}.construct_without_ptr()"
+    result = generate_newline(result)
+    result += f"{INDENT * 2}_ret._ptr = self. {pythonize_name(property['getter'])}({generate_property_index(property)})"
     result = generate_newline(result)
 
     result += f"{INDENT * 2}return _ret"
@@ -1366,9 +1383,6 @@ def generate_operators_for_class(class_name):
     return res
 
 
-def should_skip_import(classname, class_to_import):
-    return classname == "Node" and class_to_import in {"SceneTree", "Viewport", "Window"}
-
 
 def create_core_classes_set():
     res = "core_classes = {"
@@ -1384,32 +1398,30 @@ def generate_classes(classes, filename, is_core=False, is_typed_array=False):
     if is_typed_array:
         res = generate_newline(res)
 
-        res += f"from py4godot.py_classes.core import *"
+        res += f"from py4godot.classes.core import *"
         res = generate_newline(res)
         classes_to_import = get_classes_to_import(classes)
         for cls in classes_to_import:
             if cls in [class_["name"] for class_ in classes]:
                 continue
-            if should_skip_import(classes[0]["name"], cls):
-                continue
-            res += f"import py4godot.py_classes.{cls} as py4godot_{cls.lower()} "
+            res += f"import py4godot.classes.{cls} as py4godot_{cls.lower()} "
             res = generate_newline(res)
 
     elif not is_core:
         res += f"import py4godot.signals as signals"
         res = generate_newline(res)
         if "Object" not in [class_["name"] for class_ in classes]:
-            res += f"import py4godot.py_classes.Object as py4godot_object"
+            res += f"import py4godot.classes.Object as py4godot_object"
         res = generate_newline(res)
         classes_to_import = get_classes_to_import(classes)
         for cls in classes_to_import:
             if cls in [class_["name"] for class_ in classes]:
                 continue
-            if should_skip_import(classes[0]["name"], cls):
-                continue
+            #if should_skip_import(classes[0]["name"], cls):
+            #    continue
             if cls in [cls["name"] for cls in obj["classes"]] and cls not in [class_["inherits"] for class_ in classes]:
                 continue
-            res += f"import py4godot.py_classes.{cls} as py4godot_{cls.lower()} "
+            res += f"import py4godot.classes.{cls} as py4godot_{cls.lower()} "
             res = generate_newline(res)
     for class_ in classes:
         if (class_["name"] in IGNORED_CLASSES):
@@ -1860,7 +1872,7 @@ if __name__ == "__main__":
             generate_operators_set(class_)
 
         for class_ in obj["classes"]:
-            generate_classes([class_], f"py4godot/py_classes/{class_['name']}.py")
+            generate_classes([class_], f"py4godot/classes/{class_['name']}.py")
 
         array_cls = None
         arrays = []
@@ -1876,6 +1888,6 @@ if __name__ == "__main__":
 
         arrays = sorted(arrays, key= lambda key:key["name"])
         for array in arrays:
-            generate_classes([array], f"py4godot/py_classes/{array['name']}.py", is_core=False, is_typed_array=True)
+            generate_classes([array], f"py4godot/classes/{array['name']}.py", is_core=False, is_typed_array=True)
 
-        generate_classes(obj["builtin_classes"], f"py4godot/py_classes/core.py", is_core=True)
+        generate_classes(obj["builtin_classes"], f"py4godot/classes/core.py", is_core=True)

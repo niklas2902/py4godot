@@ -88,11 +88,11 @@ def generate_import():
               "from libcpp.vector cimport vector\n"
               "from py4godot.utils.utils cimport *\n"
               "from py4godot.utils.CPPWrapper cimport *\n"
-              "import py4godot.py_classes.Object as py4godot_object\n")
+              "import py4godot.classes.Object as py4godot_object\n")
 
     for cls in sorted(list(builtin_classes)):
         if cls not in {"Nil", "float", "int", "bool"}:
-            result += f"import py4godot.py_classes.core as py4godot_{cls.lower()}\n"
+            result += f"import py4godot.classes.core as py4godot_{cls.lower()}\n"
     return result
 
 
