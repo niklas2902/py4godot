@@ -1330,6 +1330,11 @@ def generate_switch_methods(class_):
         res = generate_newline(res)
         res += f"{INDENT * 3}case {method_ids['normal_methods'][class_['name']]["__setitem__"]}: py_setitem((int)PyLong_AsLong(PyTuple_GetItem(args_tuple, 0)), PyTuple_GetItem(args_tuple, 1));break;"
         res = generate_newline(res)
+    if "Dictionary" == class_["name"]:
+        res += f"{INDENT * 3}case {method_ids['normal_methods'][class_['name']]["__getitem__"]}: py_getitem(PyTuple_GetItem(args_tuple, 0));break;"
+        res = generate_newline(res)
+        res += f"{INDENT * 3}case {method_ids['normal_methods'][class_['name']]["__setitem__"]}: py_setitem(PyTuple_GetItem(args_tuple, 0), PyTuple_GetItem(args_tuple, 1));break;"
+        res = generate_newline(res)
 
     res += f"{INDENT*2}}}"
     res += f"{INDENT}}}"
@@ -1387,6 +1392,11 @@ def generate_switch_methods(class_):
         res += f"{INDENT * 3}case {method_ids['normal_methods'][class_['name']]["__getitem__"]}: return py_getitem((int)PyLong_AsLong(PyTuple_GetItem(args_tuple, 0)));break;"
         res = generate_newline(res)
         res += f"{INDENT * 3}case {method_ids['normal_methods'][class_['name']]["__setitem__"]}: py_setitem((int)PyLong_AsLong(PyTuple_GetItem(args_tuple, 0)), PyTuple_GetItem(args_tuple, 1));return Py_None;"
+        res = generate_newline(res)
+    if "Dictionary" == class_["name"]:
+        res += f"{INDENT * 3}case {method_ids['normal_methods'][class_['name']]["__getitem__"]}: return py_getitem(PyTuple_GetItem(args_tuple, 0));break;"
+        res = generate_newline(res)
+        res += f"{INDENT * 3}case {method_ids['normal_methods'][class_['name']]["__setitem__"]}: py_setitem(PyTuple_GetItem(args_tuple, 0), PyTuple_GetItem(args_tuple, 1));return Py_None;"
         res = generate_newline(res)
 
     res += f"{INDENT*2}}}"
@@ -2023,7 +2033,41 @@ def generate_classes(classes, filename, is_core=False):
 
 def generate_dictionary_set_item():
     res = ""
-    res += f"{INDENT}Variant Dictionary::operator [](Variant key)" + "{"
+
+    # py_getitem
+    res += f"{INDENT}PyObject* Dictionary::py_getitem(PyObject* key)" + "{"
+    res = generate_newline(res)
+    res += f"{INDENT * 2}std::shared_ptr<Variant> variant_key = std::make_shared<Variant>(1);"
+    res = generate_newline(res)
+    res += f"{INDENT * 2}variant_key->init_from_py_object_native_ptr(key, type_checking__get_name_from_object(key));"
+    res = generate_newline(res)
+    res += f"{INDENT * 2}Variant variant = (*this)[*variant_key];"
+    res = generate_newline(res)
+    res += f"{INDENT * 2}return variant.get_converted_value(true);"
+    res = generate_newline(res)
+    res += f"{INDENT}" + "}"
+    res = generate_newline(res)
+
+    # py_setitem
+    res += f"{INDENT}void Dictionary::py_setitem(PyObject* key, PyObject* value)" + "{"
+    res = generate_newline(res)
+    res += f"{INDENT * 2}std::shared_ptr<Variant> variant_key = std::make_shared<Variant>(1);"
+    res = generate_newline(res)
+    res += f"{INDENT * 2}variant_key->init_from_py_object_native_ptr(key, type_checking__get_name_from_object(key));"
+    res = generate_newline(res)
+    res += f"{INDENT * 2}Variant value_variant = (*this)[*variant_key];"
+    res = generate_newline(res)
+    res += f"{INDENT * 2}value_variant.init_from_py_object(value, type_checking__get_name_from_object(value));"
+    res = generate_newline(res)
+    res += f"{INDENT}" + "}"
+    res = generate_newline(res)
+
+    return res
+
+
+def generate_dictionary_get_item():
+    res = ""
+    res += f"{INDENT}Variant Dictionary::operator[](Variant key)" + "{"
     res = generate_newline(res)
     res += f"{INDENT * 2}return Variant::new_static(functions::get_dictionary_operator_index()(&godot_owner, &key.native_ptr));"
     res = generate_newline(res)
@@ -2032,19 +2076,10 @@ def generate_dictionary_set_item():
     return res
 
 
-def generate_dictionary_get_item():
-    res = ""
-    res += f"{INDENT}const Variant Dictionary::operator[](Variant key)" + "{"
-    res = generate_newline(res)
-    res += f"{INDENT * 2}return Variant::new_static(functions::get_dictionary_operator_index()(godot_owner, key.native_ptr));"
-    res = generate_newline(res)
-    res += f"{INDENT}" + "}"
-    res = generate_newline(res)
-    return res
-
-
 def generate_special_methods_dictionary():
     res = ""
+    res += generate_dictionary_get_item()
+    res = generate_newline(res)
     res += generate_dictionary_set_item()
     res = generate_newline(res)
     return res

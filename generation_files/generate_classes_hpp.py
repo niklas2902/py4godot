@@ -804,6 +804,11 @@ def generate_dictionary_set_item():
     res = ""
     res += f"{INDENT}Variant operator [](Variant key);"
     res = generate_newline(res)
+    res = generate_newline(res)
+    res += f"{INDENT}PyObject* py_getitem(PyObject* key);"
+    res = generate_newline(res)
+    res += f"{INDENT}void py_setitem(PyObject* key, PyObject* value);"
+    res = generate_newline(res)
     return res
 
 

@@ -208,6 +208,11 @@ def generate_method_ids(classes):
             id += 1
             normal_methods[cls["name"]]["__setitem__"] = id
             id += 1
+        if cls["name"] == "Dictionary":
+            normal_methods[cls["name"]]["__getitem__"] = id
+            id += 1
+            normal_methods[cls["name"]]["__setitem__"] = id
+            id += 1
 
         static_id = 0
         static_methods_list = collect_methods(cls, True)

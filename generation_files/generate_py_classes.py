@@ -1442,9 +1442,8 @@ def generate_dictionary_set_item():
     res = ""
     res += f"{INDENT}def __setitem__(self, key, value):"
     res = generate_newline(res)
-    res += f"{INDENT * 2}#TODO: cdef Variant var = self.Dictionary_internal_class_ptr.get()[0][create_variant_from_py_object(key).variant]"
+    res += f"{INDENT*2}self._ptr.call_with_return({method_ids['normal_methods']['Dictionary']['__setitem__']}, (key, value))"
     res = generate_newline(res)
-    res += f"{INDENT * 2}pass#TODO:var.init_from_py_object(<PyObject*>value, typename.encode('utf-8'))"
     return res
 
 
@@ -1456,13 +1455,9 @@ def generate_dictionary_get_item():
     res = generate_newline(res)
     res += f"{INDENT * 3}raise KeyError(f\"Key '%s' not found\")".replace("%s", "{key}")
     res = generate_newline(res)
-    res += f"{INDENT * 2}pyobject = None#TODO: cdef PyObject * pyobject = self.Dictionary_internal_class_ptr.get()[0][create_variant_from_py_object(key).variant].get_converted_value(True)"
+    res += f"{INDENT * 2}pyobject = self._ptr.call_with_return({method_ids['normal_methods']['Dictionary']['__getitem__']}, (key,))"
     res = generate_newline(res)
-    res += f"{INDENT * 2}o = None"
-    res = generate_newline(res)
-    res += f"{INDENT * 2}o = pyobject"
-    res = generate_newline(res)
-    res += f"{INDENT * 2}return o"
+    res += f"{INDENT * 2}return pyobject"
     return res
 
 
