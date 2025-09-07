@@ -14,7 +14,7 @@ cpdef object py_string_to_string_name(str string):
 
 
 cdef object py_c_string_to_string_name(char* string):
-    gd_string_name = StringName.__new__(StringName)
+    gd_string_name = StringName.construct_without_init()
     gd_string_name._ptr = c_string_to_string_name_ptr(string)
     return gd_string_name
 
@@ -25,7 +25,7 @@ cpdef object py_string_to_string(str string):
 
 
 cdef object py_c_string_to_string(char* string):
-    gd_string = String.__new__(String)
+    gd_string = String.construct_without_init()
     gd_string._ptr = c_string_to_string_name_ptr(string)
     return gd_string
 

@@ -155,7 +155,7 @@ def generate_return_value(method_):
         if ret_val.type in {"int", "float", "bool"}:
             result += f"{INDENT * 2}cdef {ungodottype(ret_val.type)} {ret_val.name} = 0"
         elif ret_val.type in classes:
-                result += f"{INDENT * 2}cdef object {ret_val.name} = py4godot_{ret_val.type.lower()}.{ret_val.type}.__new__(py4godot_{ret_val.type.lower()}.{ret_val.type})"
+                result += f"{INDENT * 2}cdef object {ret_val.name} = py4godot_{ret_val.type.lower()}.{ret_val.type}.construct_without_init()"
         elif ret_val.type == "Variant":
             result += f"{INDENT * 2}cdef PyObject* {ret_val.name} = NULL"
         elif "typedarray" in ret_val.type:

@@ -26,14 +26,14 @@ callables = []
 class GDSignal(Signal):
     @staticmethod
     def new0():
-        cdef object _class = GDSignal.__new__(GDSignal)
+        cdef object _class = GDSignal.construct_without_init()
         #_class.Signal_internal_class_ptr = (CPPSignal.py_new0())
         return _class
     @staticmethod
     def new1(object from_):
         assert(not from_ is None)
 
-        cdef object _class = GDSignal.__new__(GDSignal)
+        cdef object _class = GDSignal.construct_without_init()
         #TODO
         return _class
     @staticmethod
@@ -41,7 +41,7 @@ class GDSignal(Signal):
         assert(not object_ is None)
         assert(not signal is None)
 
-        cdef object _class = GDSignal.__new__(GDSignal)
+        cdef object _class = GDSignal.construct_without_init()
         #TODO
         return _class
 
@@ -87,7 +87,7 @@ class BuiltinSignal(Signal):
         self.parent().connect(self.signal_name, callable)
 
     def parent(self):
-        cdef object o = obj.Object.__new__(obj.Object)
+        cdef object o = obj.Object.construct_without_init()
         o.Object_internal_class_ptr = self.parent_ptr
         return o
 

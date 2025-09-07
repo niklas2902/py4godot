@@ -197,7 +197,7 @@ def generate_constructors(class_):
         if "arguments" in constructor:
             res += generate_assert(constructor["arguments"])
             res = generate_newline(res)
-        res += f"{INDENT * 2}_class = {class_['name']}.__new__({class_['name']})"
+        res += f"{INDENT * 2}_class = {class_['name']}.construct_without_init()"
         res = generate_newline(res)
         if "arguments" in constructor:
             res += generate_string_name_or_node_path_args(constructor["arguments"])
@@ -235,15 +235,14 @@ def generate_return_value(classname, method_):
             result += f"{INDENT * 2}{ret_val.name} = 0"
         elif ret_val.type in classes:
             if ret_val.type in builtin_classes.union({"Object"}) or ret_val.type == classname:
-                result += f"{INDENT * 2}{ret_val.name} = {ret_val.type}.__new__({ret_val.type})"
+                result += f"{INDENT * 2}{ret_val.name} = {ret_val.type}.construct_without_init()"
             else:
-                result += f"{INDENT * 2}{ret_val.name} = py4godot_object.Object.__new__(py4godot_object.Object) #Smart casted to: {ret_val.type}"
+                result += f"{INDENT * 2}{ret_val.name} = py4godot_object.Object.construct_without_init() #Smart casted to: {ret_val.type}"
         elif ret_val.type == "Variant":
             result += f"{INDENT * 2}{ret_val.name} = None"
         elif "typedarray" in ret_val.type:
             result += (f"{INDENT * 2}_ret = "
-                       f"py4godot_{generate_typed_array_name(ret_val.type).lower()}.{generate_typed_array_name(ret_val.type)}.__new__("
-                       f"py4godot_{generate_typed_array_name(ret_val.type).lower()}.{generate_typed_array_name(ret_val.type)})")
+                       f"py4godot_{generate_typed_array_name(ret_val.type).lower()}.{generate_typed_array_name(ret_val.type)}.construct_without_init()")
         elif "enum::" in ret_val.type:
             result += f"{INDENT * 2}{ret_val.name}:int"
         else:
@@ -748,7 +747,6 @@ def generate_init(class_):
     res = generate_newline(res)
     res += f"{INDENT * 2}self._ptr =  constructor({classes_dict[class_['name']]},0, ())"
     res = generate_newline(res)
-
     return res
 
 def is_refcounted(class_):
@@ -784,7 +782,7 @@ def generate_init_signals(cls):
         for signal in cls["signals"]:
             res += f"{INDENT*2}{signal['name']}_name = utils.py_string_to_string_name(\"{signal['name']}\")"
             res = generate_newline(res)
-            res += f"{INDENT*2}self.{signal['name']} = signals.BuiltinSignal(self, {signal['name']}_name)"
+            res += f"{INDENT*2}cls.{signal['name']} = signals.BuiltinSignal(cls, {signal['name']}_name)"
             res = generate_newline(res)
     return res
 def generate_destroy_object_method():
@@ -812,12 +810,32 @@ def generate_common_methods(class_):
         result += generate_get_py_script_method()
         result += generate_destroy_object_method()
 
+    result += generate_construct_without_init(class_)
+
     result += generate_get_type(class_["name"])
     result = generate_newline(result)
     if not is_singleton(class_["name"]):
         result += generate_del(class_)
 
     return result
+
+def generate_construct_without_init(class_):
+    res = ""
+
+    res = generate_newline(res)
+    res += f"{INDENT}@staticmethod"
+    res = generate_newline(res)
+    res += f"{INDENT}def construct_without_init():"
+    res = generate_newline(res)
+    res += f"{INDENT * 2}cls = {class_['name']}.__new__({class_['name']})"
+    res = generate_newline(res)
+    res += f"{INDENT * 2}cls.shouldBeDeleted = False"
+    res = generate_newline(res)
+    res += generate_init_signals(class_)
+    res = generate_newline(res)
+    res += f"{INDENT * 2}return cls"
+    res = generate_newline(res)
+    return res
 
 def generate_get_type(classname):
     result = ""
@@ -1241,7 +1259,7 @@ def generate_constructor(classname):
     res = generate_newline(res)
     res += f"{INDENT}def constructor():"
     res = generate_newline(res)
-    res += f"{INDENT * 2}class_ = {classname}.__new__({classname})"
+    res += f"{INDENT * 2}class_ = {classname}.construct_without_init()"
     res = generate_newline(res)
     res += f"{INDENT * 2}class_._ptr = constructor({classes_dict[classname]},0, ())"
     res = generate_newline(res)
@@ -1253,7 +1271,7 @@ def generate_constructor(classname):
     res = generate_newline(res)
     res += f"{INDENT}def new():"
     res = generate_newline(res)
-    res += f"{INDENT * 2}class_ = {classname}.__new__({classname})"
+    res += f"{INDENT * 2}class_ = {classname}.construct_without_init()"
     res = generate_newline(res)
     res += f"{INDENT * 2}class_._ptr = constructor({classes_dict[classname]},0, ())"
     res = generate_newline(res)
@@ -1621,7 +1639,7 @@ def generate_cast(class_):
     res = generate_newline(res)
     res += f"{INDENT * 2}assert other != None # Object to be casted must not be None"
     res = generate_newline(res)
-    res += f"{INDENT * 2}cls = {class_['name']}.__new__({class_['name']})"
+    res += f"{INDENT * 2}cls = {class_['name']}.construct_without_init()"
     res = generate_newline(res)
     res += f"{INDENT * 2}cls._ptr = other._ptr"
     res = generate_newline(res)
@@ -1638,7 +1656,7 @@ def generate_cast(class_):
     res = generate_newline(res)
     res += f"{INDENT * 2}assert other != None # Object to be casted must not be None"
     res = generate_newline(res)
-    res += f"{INDENT * 2}cls = {class_['name']}.__new__({class_['name']})"
+    res += f"{INDENT * 2}cls = {class_['name']}.construct_without_init()"
     res = generate_newline(res)
     res += f"{INDENT * 2}cls._ptr = other._ptr"
     res = generate_newline(res)
@@ -1736,7 +1754,7 @@ def generate_special_methods_packed_array(class_):
     res = generate_newline(res)
     res += f"{INDENT * 2}#cdef Py_ssize_t size = len(memory_view)"
     res = generate_newline(res)
-    res += f"{INDENT*2}#cdef {class_['name']} array = {class_['name']}.__new__({class_['name']})"
+    res += f"{INDENT*2}#cdef {class_['name']} array = {class_['name']}.construct_without_init()"
     res = generate_newline(res)
     res += f"{INDENT*2}#array.{class_['name']}_internal_class_ptr = (CPP{class_['name']}.py_from_ptr(value_ptr, size))"
     res = generate_newline(res)
