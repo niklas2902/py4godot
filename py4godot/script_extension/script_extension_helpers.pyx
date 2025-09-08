@@ -1,4 +1,5 @@
 # distutils: language=c++
+from py4godot.classes.Object import Object
 from py4godot.classes.core import StringName
 from py4godot.signals import GDSignal
 from py4godot.classes.core import Dictionary
@@ -18,7 +19,7 @@ instantiated_classes = []
 cdef api PyObject*  instantiate_class(PyObject* gd_class):
     cdef object class_ = <object>gd_class
     if class_ == None:
-        return NULL
+        class_ = Object
 
     cdef object o
     try:
@@ -31,7 +32,7 @@ cdef api PyObject*  instantiate_class(PyObject* gd_class):
         print_error("Exception - creating class didn't work")
         print_error(str(e).encode("utf-8"))
         print_error(traceback.format_exc().encode("utf-8"))
-        return NULL
+        o = Object()
     instantiated_classes.append(o)
     return <PyObject*>o
 
@@ -72,7 +73,7 @@ cdef api void create_signals(PyObject* instance, vector[shared_ptr[BridgeDiction
         print_error("before setting signal")
         for signal_ind in range(signals.size()):
             py_signal._ptr = create_wrapper_from_Dictionary_ptr(signals[signal_ind])
-            gd_name = StringName.new2("name")
+            gd_name = py_utils.py_string_to_string_name("name")
             py_name = str(py_signal.get("name").substr(0))
             signal = GDSignal.new2(py_instance, StringName.new2(py_name))
             setattr(py_instance, py_name, signal)

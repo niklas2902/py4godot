@@ -1297,6 +1297,12 @@ def collect_methods(class_, static_methods):
     res = list(filter (lambda method:  not native_structs_in_method(method), res))
     return res
 
+def generate_varargs(method):
+    res = ""
+    if method["is_vararg"]:
+        res += f"for(int i= 0; i< (int)PyTuple_Size(args_tuple);i++)varargs.push_back(PyTuple_GetItem(args_tuple, i));"
+    return res
+
 def generate_switch_methods(class_):
     global index
     res = ""
@@ -1310,7 +1316,7 @@ def generate_switch_methods(class_):
     res = generate_newline(res)
     for method in methods:
         args = generate_method_switch_args(method, )
-        res += f"{INDENT*3}case {method_ids['normal_methods'][class_['name']][method['name']]}: py_{pythonize_name(method['name'])}({args});break;"
+        res += f"{INDENT*3}case {method_ids['normal_methods'][class_['name']][method['name']]}: {generate_varargs(method)} py_{pythonize_name(method['name'])}({args});break;"
         res = generate_newline(res)
         index += 1
     if class_["name"] in core_classes.keys():
@@ -1323,7 +1329,7 @@ def generate_switch_methods(class_):
         for operator in operator_dict[get_class_name(class_["name"])]:
             if operator in operator_to_method.keys():
                 op = operator_dict[get_class_name(class_["name"])][operator]
-                res += f"{INDENT*2}case {method_ids['normal_methods'][class_['name']][operator]}: wrap_operator_{operator_to_python_name(operator)}(PyTuple_GetItem(args_tuple, 0));break;"
+                res += f"{INDENT*2}case {method_ids['normal_methods'][class_['name']][operator]}: {generate_varargs(method)} wrap_operator_{operator_to_python_name(operator)}(PyTuple_GetItem(args_tuple, 0));break;"
                 res = generate_newline(res)
     if "array" in class_["name"].lower():
         res += f"{INDENT * 3}case {method_ids['normal_methods'][class_['name']]["__getitem__"]}: py_getitem((int)PyLong_AsLong(PyTuple_GetItem(args_tuple, 0)));break;"
@@ -1349,34 +1355,34 @@ def generate_switch_methods(class_):
 
         args = generate_method_switch_args(method)
         if not ("return_value" in method or "return_type" in method):
-            res += f"{INDENT*3}case {method_ids['normal_methods'][class_['name']][method['name']]}: py_{pythonize_name(method['name'])}({args}); return Py_None;"
+            res += f"{INDENT*3}case {method_ids['normal_methods'][class_['name']][method['name']]}: {generate_varargs(method)} py_{pythonize_name(method['name'])}({args}); return Py_None;"
             res = generate_newline(res)
             continue
         ret_type = get_ret_value(method)
         if ret_type in builtin_classes.union(classes).difference({"float", "int", "bool"}) or "typedarray" in ret_type.lower():
-            res += f"{INDENT*3}case {method_ids['normal_methods'][class_['name']][method['name']]}: return wrapper__create_wrapper_from_{untypearray(ret_type)}_ptr(py_{pythonize_name(method['name'])}({args}));"
+            res += f"{INDENT*3}case {method_ids['normal_methods'][class_['name']][method['name']]}: {generate_varargs(method)} return wrapper__create_wrapper_from_{untypearray(ret_type)}_ptr(py_{pythonize_name(method['name'])}({args}));"
         elif ret_type  == "int":
-            res += f"{INDENT*3}case {method_ids['normal_methods'][class_['name']][method['name']]}: return  PyLong_FromLong(py_{pythonize_name(method['name'])}({args}));"
+            res += f"{INDENT*3}case {method_ids['normal_methods'][class_['name']][method['name']]}: {generate_varargs(method)} return  PyLong_FromLong(py_{pythonize_name(method['name'])}({args}));"
         elif ret_type  == "bool":
-            res += f"{INDENT*3}case {method_ids['normal_methods'][class_['name']][method['name']]}: return  PyBool_FromLong(py_{pythonize_name(method['name'])}({args}));"
+            res += f"{INDENT*3}case {method_ids['normal_methods'][class_['name']][method['name']]}: {generate_varargs(method)} return  PyBool_FromLong(py_{pythonize_name(method['name'])}({args}));"
         elif ret_type  == "float":
-            res += f"{INDENT*3}case {method_ids['normal_methods'][class_['name']][method['name']]}: return  PyFloat_FromDouble(py_{pythonize_name(method['name'])}({args}));"
+            res += f"{INDENT*3}case {method_ids['normal_methods'][class_['name']][method['name']]}: {generate_varargs(method)} return  PyFloat_FromDouble(py_{pythonize_name(method['name'])}({args}));"
         else:
-            res += f"{INDENT*3}case {method_ids['normal_methods'][class_['name']][method['name']]}: return py_{pythonize_name(method['name'])}({args});"
+            res += f"{INDENT*3}case {method_ids['normal_methods'][class_['name']][method['name']]}: {generate_varargs(method)} return py_{pythonize_name(method['name'])}({args});"
         res = generate_newline(res)
 
     if class_["name"] in core_classes.keys():
         for member in core_classes[class_["name"]].core_members:
             if member.type_ in builtin_classes.union(classes).difference(
                     {"float", "int", "bool"}) or "typedarray" in member.type_.lower():
-                res += f"{INDENT*3}case {method_ids['normal_methods'][class_['name']]['get_member_'+member.name]}: return wrapper__create_wrapper_from_{untypearray(member.type_)}_ptr(py_member_get_{member.name}());"
+                res += f"{INDENT*3}case {method_ids['normal_methods'][class_['name']]['get_member_'+member.name]}: {generate_varargs(method)} return wrapper__create_wrapper_from_{untypearray(member.type_)}_ptr(py_member_get_{member.name}());"
                 res = generate_newline(res)
             elif member.type_ == "int":
-                res += f"{INDENT * 3}case {method_ids['normal_methods'][class_['name']]['get_member_'+member.name]}: return  PyLong_FromLong(py_member_get_{member.name}());"
+                res += f"{INDENT * 3}case {method_ids['normal_methods'][class_['name']]['get_member_'+member.name]}: {generate_varargs(method)} return  PyLong_FromLong(py_member_get_{member.name}());"
             elif member.type_== "bool":
-                res += f"{INDENT * 3}case {method_ids['normal_methods'][class_['name']]['get_member_'+member.name]}: return  PyBool_FromLong(py_member_get_{member.name}());"
+                res += f"{INDENT * 3}case {method_ids['normal_methods'][class_['name']]['get_member_'+member.name]}: {generate_varargs(method)} return  PyBool_FromLong(py_member_get_{member.name}());"
             elif member.type_== "float" or member.type_ == "double":
-                res += f"{INDENT * 3}case {method_ids['normal_methods'][class_['name']]['get_member_'+member.name]}: return  PyFloat_FromDouble(py_member_get_{member.name}());"
+                res += f"{INDENT * 3}case {method_ids['normal_methods'][class_['name']]['get_member_'+member.name]}: {generate_varargs(method)} return  PyFloat_FromDouble(py_member_get_{member.name}());"
             else:
                 res += f"{INDENT * 3}case {method_ids['normal_methods'][class_['name']]['get_member_'+member.name]}: return py_member_get_{member.name}();"
             res = generate_newline(res)
@@ -1419,15 +1425,15 @@ def generate_switch_methods(class_):
         else:
             ret_type = get_ret_value(method)
             if ret_type in builtin_classes.union(classes).difference({"float", "int", "bool"}) or "typedarray" in ret_type.lower():
-                res += f"{INDENT * 3}case {method_id}: return wrapper__create_wrapper_from_{untypearray(ret_type)}_ptr(py_{pythonize_name(method['name'])}({args}));"
+                res += f"{INDENT * 3}case {method_id}:{generate_varargs(method)} return wrapper__create_wrapper_from_{untypearray(ret_type)}_ptr(py_{pythonize_name(method['name'])}({args}));"
             elif ret_type == "int":
-                res += f"{INDENT * 3}case {method_id}: return  PyLong_FromLong(py_{pythonize_name(method['name'])}({args}));"
+                res += f"{INDENT * 3}case {method_id}:{generate_varargs(method)} return  PyLong_FromLong(py_{pythonize_name(method['name'])}({args}));"
             elif ret_type == "bool":
-                res += f"{INDENT * 3}case {method_id}: return  PyBool_FromLong(py_{pythonize_name(method['name'])}({args}));"
+                res += f"{INDENT * 3}case {method_id}:{generate_varargs(method)} return  PyBool_FromLong(py_{pythonize_name(method['name'])}({args}));"
             elif ret_type == "float":
-                res += f"{INDENT * 3}case {method_id}: return  PyFloat_FromDouble(py_{pythonize_name(method['name'])}({args}));"
+                res += f"{INDENT * 3}case {method_id}:{generate_varargs(method)} return  PyFloat_FromDouble(py_{pythonize_name(method['name'])}({args}));"
             else:
-                res += f"{INDENT * 3}case {method_id}: py_{pythonize_name(method['name'])}({args});"
+                res += f"{INDENT * 3}case {method_id}:{generate_varargs(method)} py_{pythonize_name(method['name'])}({args});"
         res = generate_newline(res)
     res += f"{INDENT*2}}}"
     res = generate_newline(res)
