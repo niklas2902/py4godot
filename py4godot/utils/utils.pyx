@@ -74,6 +74,8 @@ cpdef unicode gd_string_to_py_string(object string):
 cdef PyObject* to_py_object(val):
     return <PyObject*>val # Just returning for converting
 
+cpdef object py_get_py_script(long id):
+    return <object>get_py_script(id)
 """
 cdef unicode gd_string_name_to_py_string(core.StringName string_name):
     cdef core.String string = core.String.new2(string_name)

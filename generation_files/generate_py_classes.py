@@ -151,7 +151,7 @@ def generate_string_name_or_node_path_args(args):
         if arg["type"] == "StringName":
             res += f"{INDENT*2}assert(isinstance({pythonize_name(arg['name'])}, (str, StringName)))"
             res = generate_newline(res)
-            res += f"{INDENT * 2}py_stringname_{pythonize_name(arg['name'])} = {pythonize_name(arg['name'])} if isinstance({pythonize_name(arg['name'])}, StringName) else StringName.new2({pythonize_name(arg['name'])})"
+            res += f"{INDENT * 2}py_stringname_{pythonize_name(arg['name'])} = {pythonize_name(arg['name'])} if isinstance({pythonize_name(arg['name'])}, StringName) else c_utils.py_string_to_string_name({pythonize_name(arg['name'])})"
         elif arg["type"] == "NodePath":
             res += f"{INDENT*2}assert(isinstance({pythonize_name(arg['name'])}, (str, NodePath)))"
             res = generate_newline(res)
@@ -866,7 +866,7 @@ def generate_get_py_script_method():
     result = generate_newline(result)
     result += f"{INDENT * 2}id = self.get_instance_id()"
     result = generate_newline(result)
-    result += f"{INDENT * 2}script = c_utils.get_py_script(id)"
+    result += f"{INDENT * 2}script = c_utils.py_get_py_script(id)"
     result = generate_newline(result)
     result += f"{INDENT * 2}return script"
     result = generate_newline(result)
@@ -934,10 +934,14 @@ def generate_member_getter(class_, member):
     res = generate_newline(res)
 
     body = ""
-    body += f"{INDENT * 2}_ret = {class_}.construct_without_init()"
-    body = generate_newline(body)
-    body += f"{INDENT * 2}_ret._ptr = self._ptr.call_with_return({method_ids["normal_methods"][class_]["get_member_"+member.name]}, tuple())"
-    body = generate_newline(body)
+    if member.type_ in builtin_classes - {"float", "int", "bool"}:
+        body += f"{INDENT * 2}_ret = {class_}.construct_without_init()"
+        body = generate_newline(body)
+        body += f"{INDENT * 2}_ret._ptr = self._ptr.call_with_return({method_ids["normal_methods"][class_]["get_member_"+member.name]}, tuple())"
+        body = generate_newline(body)
+    else:
+        body += f"{INDENT * 2}_ret = self._ptr.call_with_return({method_ids["normal_methods"][class_]["get_member_"+member.name]}, tuple())"
+        body = generate_newline(body)
     body += f"{INDENT * 2}return _ret"
     body = generate_newline(body)
     res += body
@@ -1003,9 +1007,7 @@ def generate_property(property, classname):
     result = generate_newline(result)
     result += f"{INDENT}def {pythonize_name(property['name'])}(self):"
     result = generate_newline(result)
-    result += f"{INDENT * 2}_ret = {untypearray(property['type'])}.construct_without_ptr()"
-    result = generate_newline(result)
-    result += f"{INDENT * 2}_ret._ptr = self. {pythonize_name(property['getter'])}({generate_property_index(property)})"
+    result += f"{INDENT * 2}_ret = self. {pythonize_name(property['getter'])}({generate_property_index(property)})"
     result = generate_newline(result)
 
     result += f"{INDENT * 2}return _ret"

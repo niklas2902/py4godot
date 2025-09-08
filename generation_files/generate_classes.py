@@ -924,7 +924,7 @@ def generate_get_py_script_method():
     result = generate_newline(result)
     result += f"{INDENT * 2}cdef long long id = self.get_instance_id()"
     result = generate_newline(result)
-    result += f"{INDENT * 2}cdef object script = <object>get_py_script(id)"
+    result += f"{INDENT * 2}cdef object script = <object>c_utils.py_get_py_script(id)"
     result = generate_newline(result)
     result += f"{INDENT * 2}return script"
     result = generate_newline(result)

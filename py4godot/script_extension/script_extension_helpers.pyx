@@ -69,13 +69,14 @@ cdef api void create_signals(PyObject* instance, vector[shared_ptr[BridgeDiction
     cdef object py_signal = Dictionary.new0()
     cdef object gd_name
     try:
+        print_error("before setting signal")
         for signal_ind in range(signals.size()):
             py_signal._ptr = create_wrapper_from_Dictionary_ptr(signals[signal_ind])
             gd_name = StringName.new2("name")
             py_name = str(py_signal.get("name").substr(0))
             signal = GDSignal.new2(py_instance, StringName.new2(py_name))
             setattr(py_instance, py_name, signal)
-
+            print_error("---------------creating signal--------------")
             py_signal._ptr = create_wrapper_from_Dictionary_ptr(empty_dictionary_pointer())
 
     except Exception as e:
