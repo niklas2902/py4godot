@@ -56,7 +56,9 @@ def generate_import():
     res = ""
     res += "from libcpp.memory cimport shared_ptr, make_shared"
     res = generate_newline(res)
-    res += "from py4godot.classes.cpp_bridge cimport *"
+    res += "from cpython.ref cimport PyObject"
+    res = generate_newline(res)
+    res += "cimport py4godot.classes.cpp_bridge as bridge"
     res = generate_newline(res)
     res += "from py4godot.utils.print_tools import print_error"
     res = generate_newline(res)
@@ -67,7 +69,7 @@ def generate_wrapper(class_name):
     res = generate_newline(res)
     res += f"{INDENT}def __cinit__(self):"
     res = generate_newline(res)
-    res += f"{INDENT*2}self._ptr = make_shared[{class_name}]()"
+    res += f"{INDENT*2}self._ptr = make_shared[bridge.{class_name}]()"
     res = generate_newline(res)
     res += f"{INDENT}cdef set_gdowner(self, void* godot_owner):"
     res = generate_newline(res)
@@ -89,16 +91,16 @@ def generate_wrapper(class_name):
     res = generate_newline(res)
 
 
-    res += f"cdef api shared_ptr[{class_name}] extract_ptr_from_{class_name}Wrapper(object o):"
+    res += f"cdef api shared_ptr[bridge.{class_name}] extract_ptr_from_{class_name}Wrapper(object o):"
     res = generate_newline(res)
     res += f"{INDENT}cdef CPP{class_name}Wrapper wrapper = <CPP{class_name}Wrapper>(o)"
     res = generate_newline(res)
-    res += f"{INDENT}cdef shared_ptr[{class_name}] ptr = wrapper._ptr"
+    res += f"{INDENT}cdef shared_ptr[bridge.{class_name}] ptr = wrapper._ptr"
     res = generate_newline(res)
     res += f"{INDENT}return ptr"
 
     res = generate_newline(res)
-    res += f"cdef api object create_wrapper_from_{class_name}_ptr(shared_ptr[{class_name}] ptr):"
+    res += f"cdef api object create_wrapper_from_{class_name}_ptr(shared_ptr[bridge.{class_name}] ptr):"
     res = generate_newline(res)
     res += f"{INDENT}cdef CPP{class_name}Wrapper wrapper = CPP{class_name}Wrapper()"
     res = generate_newline(res)
@@ -111,7 +113,7 @@ def generate_wrapper(class_name):
 def generate_wrapper_pxd(class_name):
     res = f"cdef class CPP{class_name}Wrapper(CPPWrapper):"
     res = generate_newline(res)
-    res += f"{INDENT}cdef shared_ptr[{class_name}] _ptr"
+    res += f"{INDENT}cdef shared_ptr[bridge.{class_name}] _ptr"
     res = generate_newline(res)
     res += f"{INDENT}cdef set_gdowner(self, void* godot_owner)"
     res = generate_newline(res)
@@ -122,9 +124,9 @@ def generate_wrapper_pxd(class_name):
     res += f"{INDENT}cpdef call_with_return(self, int method_hash, tuple args_tuple)"
     res = generate_newline(res)
 
-    res += f"cdef api shared_ptr[{class_name}] extract_ptr_from_{class_name}Wrapper(object o)"
+    res += f"cdef api shared_ptr[bridge.{class_name}] extract_ptr_from_{class_name}Wrapper(object o)"
     res = generate_newline(res)
-    res += f"cdef api object create_wrapper_from_{class_name}_ptr(shared_ptr[{class_name}] ptr)"
+    res += f"cdef api object create_wrapper_from_{class_name}_ptr(shared_ptr[bridge.{class_name}] ptr)"
     res = generate_newline(res)
 
     return res

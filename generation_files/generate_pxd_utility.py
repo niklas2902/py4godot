@@ -88,7 +88,6 @@ def generate_import():
         """
 from py4godot.core.variant4.Variant4 cimport *
 from libcpp.vector cimport vector
-from py4godot.classes.cpp_bridge cimport *
 from cpython cimport Py_INCREF, Py_DECREF, PyObject
 """
     return result

@@ -3,7 +3,6 @@ from py4godot.enums.enums import *
 from py4godot.pluginscript_api.utils.annotations import *
 from py4godot.classes.Node3D import *
 from py4godot.properties import gdproperty
-from py4godot.utils.utils import get_tree
 from PythonTest import PythonTest
 import unittest
 
@@ -17,8 +16,6 @@ class PrintStream:
 @gdclass
 class TestRunner(Node3D):
 	test_object_path: NodePath = gdproperty(NodePath, NodePath())
-	def __init__(self):
-		print("__init__")
 	@gdmethod
 	def _process(self, delta:float) -> None:
 		print("##########start#############")

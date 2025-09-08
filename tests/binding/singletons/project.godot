@@ -15,6 +15,10 @@ run/main_scene="res://Spatial.tscn"
 config/features=PackedStringArray("4.4")
 config/icon="res://icon.png"
 
+[autoload]
+
+Singleton="*res://singleton.py"
+
 [gdnative]
 
 singletons=["res://python_lib.gdnlib"]
@@ -27,8 +31,3 @@ common/enable_pause_aware_picking=true
 
 environment/defaults/default_environment="res://default_env.tres"
 quality/driver/fallback_to_gles2=true
-
-[autoload]
-
-Singleton="*res://singleton.py"
-

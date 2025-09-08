@@ -168,7 +168,7 @@ def generate_constructor_call_args(class_, constructor):
             if arg["type"] == "String":
                 result += f"utils.py_string_to_string({pythonize_name(arg['name'])})._ptr, "
             elif arg["type"] == "StringName" and not should_turn_string_to_nodepath(class_, constructor):
-                result += f"utils.py_stringname_{pythonize_name(arg['name'])}._ptr, "
+                result += f"py_stringname_{pythonize_name(arg['name'])}._ptr, "
             elif arg["type"] == "NodePath" and not should_turn_string_to_nodepath(class_, constructor):
                 result += f"py_nodepath_{pythonize_name(arg['name'])}._ptr, "
             else:
@@ -684,7 +684,7 @@ def generate_method_args(class_, method):
                 else:
                     res += f"utils.py_string_to_string({pythonize_name(arg['name'])}).{untypearray(arg['type'])}_ptr, "
             elif arg["type"] == "StringName":
-                res += f"utils.py_stringname_{pythonize_name(arg['name'])}._ptr, "
+                res += f"py_stringname_{pythonize_name(arg['name'])}._ptr, "
             elif arg["type"] == "NodePath":
                 res += f"py_nodepath_{pythonize_name(arg['name'])}._ptr, "
             else:
@@ -832,7 +832,7 @@ def generate_construct_without_init(class_):
     res = ""
     res += f"{INDENT}def generate_wrapper(self):"
     res = generate_newline(res)
-    res += f"{INDENT*2}return CPP{class_['name']}Wrapper"
+    res += f"{INDENT*2}return CPP{class_['name']}Wrapper()"
     res = generate_newline(res)
     res += generate_init_signals(class_)
     res = generate_newline(res)

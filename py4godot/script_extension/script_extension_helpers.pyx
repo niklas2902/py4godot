@@ -25,8 +25,8 @@ cdef api PyObject*  instantiate_class(PyObject* gd_class):
         py_utils.shouldCreateObject = False
         o = class_()
         o._ptr = o.generate_wrapper()
-        o.init_signals()
         py_utils.shouldCreateObject = True
+        o.init_signals()
     except Exception as e:
         print_error("Exception - creating class didn't work")
         print_error(str(e).encode("utf-8"))
