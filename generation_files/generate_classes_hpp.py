@@ -882,6 +882,8 @@ def generate_cast(class_):
 def generate_array_methods(class_):
     res = ""
     if class_["name"] in ("PackedInt32Array", "PackedInt64Array", "PackedFloat32Array", "PackedFloat64Array", "PackedByteArray"):
+        res += f"{INDENT * 1}PyObject* py_get_memory_view();"
+        res = generate_newline(res)
         if class_["name"] == "PackedFloat32Array":
             res += f"{INDENT*1}std::vector<float> to_vector();"
             res = generate_newline(res)

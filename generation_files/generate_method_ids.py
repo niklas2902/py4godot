@@ -214,6 +214,11 @@ def generate_method_ids(classes):
             normal_methods[cls["name"]]["__setitem__"] = id
             id += 1
 
+        if cls["name"] in ("PackedInt32Array", "PackedInt64Array", "PackedFloat32Array", "PackedFloat64Array", "PackedByteArray"):
+            normal_methods[cls["name"]]["get_memoryview"] = id
+            id += 1
+
+
         static_id = 0
         static_methods_list = collect_methods(cls, True)
         static_methods[cls["name"]] = dict()

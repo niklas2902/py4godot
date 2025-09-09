@@ -1749,16 +1749,8 @@ def generate_special_methods_packed_array(class_):
 
     res += f"{INDENT * 1}def get_memory_view(self):"
     res = generate_newline(res)
-    res += f"{INDENT * 2}pass"
+    res += f"{INDENT * 2}return self._ptr.call_with_return({method_ids['normal_methods'][class_['name']]['get_memoryview']},())"
     res = generate_newline(res)
-    #res += f"{INDENT*2}cdef {type_}* value_ptr = self.{class_['name']}_internal_class_ptr.get()[0].get_pointer()"
-    #res = generate_newline(res)
-    #res += f"{INDENT * 2}cdef Py_ssize_t size = self.size()"
-    #res = generate_newline(res)
-    #res += f"{INDENT*2}cdef {type_}[:] memory_view = <{type_}[:size]>value_ptr"
-    #res = generate_newline(res)
-    #res += f"{INDENT*2}return memory_view"
-    #res = generate_newline(res)
 
     res += f"{INDENT * 1}@staticmethod"
     res = generate_newline(res)

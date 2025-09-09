@@ -1405,6 +1405,9 @@ def generate_switch_methods(class_):
         res += f"{INDENT * 3}case {method_ids['normal_methods'][class_['name']]["__setitem__"]}: py_setitem(PyTuple_GetItem(args_tuple, 0), PyTuple_GetItem(args_tuple, 1));return Py_None;"
         res = generate_newline(res)
 
+    if class_["name"] in ("PackedInt32Array", "PackedInt64Array", "PackedFloat32Array", "PackedFloat64Array", "PackedByteArray"):
+        res += f"case {method_ids['normal_methods'][class_['name']]['get_memoryview']}: return py_get_memory_view();"
+
     res += f"{INDENT*2}}}"
     res += f"{INDENT*2}return Py_None;"
     res = generate_newline(res)
@@ -2320,9 +2323,63 @@ def generate_special_methods_packed_array(class_):
                "PackedFloat32Array":"functions::get_packed_float32_array_operator_index()",
               "PackedFloat64Array": "functions::get_packed_float64_array_operator_index()",
                "PackedByteArray":"functions::get_packed_byte_array_operator_index()"}[class_['name']]
+    format = {
+        "PackedInt32Array": "\"i\"",  # int32_t
+        "PackedInt64Array": "\"q\"",  # int64_t
+        "PackedFloat32Array": "\"f\"",  # float
+        "PackedFloat64Array": "\"d\"",  # double
+        "PackedByteArray": "\"B\"",  # unsigned bytes
+    }
+    format_code = format[class_["name"]]
     packed_array_type = {"PackedInt32Array":"int32_t", "PackedInt64Array":"int64_t", "PackedFloat32Array":"float",
                          "PackedFloat64Array":"double",
                          "PackedByteArray":"byte"}[class_['name']]
+
+    res += f"{INDENT * 1}PyObject* {class_['name']}::py_get_memory_view(){{"
+    res = generate_newline(res)
+    res += f"{INDENT * 2}long long length = size();"
+    res = generate_newline(res)
+    res += f"{INDENT*2}{packed_array_type}* ptr = {method}(&godot_owner, 0);"
+    res = generate_newline(res)
+
+    res += f"{INDENT * 2}Py_buffer view;"
+    res = generate_newline(res)
+    res += f"{INDENT * 2}view.buf = (void*)ptr;"
+    res = generate_newline(res)
+    res += f"{INDENT * 2}view.obj = NULL;"
+    res = generate_newline(res)
+    res += f"{INDENT * 2}view.len = length * sizeof({packed_array_type});"
+    res = generate_newline(res)
+    res += f"{INDENT * 2}view.readonly = 0;"
+    res = generate_newline(res)
+    res += f"{INDENT * 2}view.itemsize = sizeof({packed_array_type});"
+    res = generate_newline(res)
+    res += f"{INDENT * 2}view.ndim = 1;"
+    res = generate_newline(res)
+    res += f"{INDENT * 2}static Py_ssize_t shape[1];"
+    res = generate_newline(res)
+    res += f"{INDENT * 2}static Py_ssize_t strides[1];"
+    res = generate_newline(res)
+    res += f"{INDENT * 2}shape[0] = length;"
+    res = generate_newline(res)
+    res += f"{INDENT * 2}strides[0] = sizeof({packed_array_type});"
+    res = generate_newline(res)
+    res += f"{INDENT * 2}view.shape = shape;"
+    res = generate_newline(res)
+    res += f"{INDENT * 2}view.strides = strides;"
+    res = generate_newline(res)
+    res += f"{INDENT * 2}view.suboffsets = NULL;"
+    res = generate_newline(res)
+    res += f"{INDENT * 2}view.internal = NULL;"
+    res = generate_newline(res)
+    res += f"{INDENT * 2}view.format = {format_code};"
+    res = generate_newline(res)
+    res += f"{INDENT * 2}PyObject* result = PyMemoryView_FromBuffer(&view);"
+    res = generate_newline(res)
+    res += f"{INDENT*2}return result;}}"
+
+
+    res = generate_newline(res)
     res += f"{INDENT * 1}std::vector<{packed_array_type}> {class_['name']}::to_vector(){{"
     res = generate_newline(res)
     res += f"{INDENT*2}{packed_array_type}* ptr = {method}(&godot_owner, 0);"
