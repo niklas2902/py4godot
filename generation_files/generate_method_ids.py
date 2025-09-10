@@ -226,6 +226,9 @@ def generate_method_ids(classes):
         for method in static_methods_list:
             static_methods[cls["name"]][method["name"]] = static_id
             static_id += 1
+        if cls["name"] in ("PackedInt32Array", "PackedInt64Array", "PackedFloat32Array", "PackedFloat64Array", "PackedByteArray"):
+            static_methods[cls["name"]]["from_memoryview"] = static_id
+            static_id += 1
 
     return "method_ids = " + to_json_string(normal_methods, static_methods)
 

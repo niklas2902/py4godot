@@ -1436,7 +1436,30 @@ def generate_switch_methods(class_):
             elif ret_type == "float":
                 res += f"{INDENT * 3}case {method_id}:{generate_varargs(method)} return  PyFloat_FromDouble(py_{pythonize_name(method['name'])}({args}));"
             else:
-                res += f"{INDENT * 3}case {method_id}:{generate_varargs(method)} py_{pythonize_name(method['name'])}({args});"
+                res += f"{INDENT * 3}case {method_id}:{generate_varargs(method)} py_{pythonize_name(method['name'])}({args});break;"
+        res = generate_newline(res)
+    if class_["name"] in ("PackedInt32Array", "PackedInt64Array", "PackedFloat32Array", "PackedFloat64Array",
+                       "PackedByteArray"):
+        packed_array_type = \
+        {"PackedInt32Array": "int32_t", "PackedInt64Array": "int64_t", "PackedFloat32Array": "float",
+         "PackedFloat64Array": "double",
+         "PackedByteArray": "byte"}[class_['name']]
+        method_id = method_ids['static_methods'][class_['name']]["from_memoryview"]
+        res += f"{INDENT * 3}case {method_id}:{{"
+        res = generate_newline(res)
+        res += f"{INDENT * 4}Py_buffer buffer;"
+        res = generate_newline(res)
+        res += f"{INDENT * 4}PyObject* memory_view = PyTuple_GetItem(args_tuple, 0);"
+        res = generate_newline(res)
+        res += f"{INDENT*4}PyObject_GetBuffer(memory_view, &buffer, PyBUF_SIMPLE);"
+        res = generate_newline(res)
+        res += f"{INDENT * 4}Py_ssize_t n_elements = buffer.len / buffer.itemsize;"
+        res = generate_newline(res)
+        res += f"{INDENT * 4}void* ptr = buffer.buf;"
+        res = generate_newline(res)
+        res += f"{INDENT * 4}return wrapper__create_wrapper_from_{class_['name']}_ptr({class_['name']}::py_from_ptr(({packed_array_type}*)ptr, (long long)n_elements));"
+        res = generate_newline(res)
+        res += f"{INDENT * 3}}}"
         res = generate_newline(res)
     res += f"{INDENT*2}}}"
     res = generate_newline(res)

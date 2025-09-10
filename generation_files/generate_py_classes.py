@@ -1756,15 +1756,11 @@ def generate_special_methods_packed_array(class_):
     res = generate_newline(res)
     res += f"{INDENT * 1}def from_memory_view(memory_view):"
     res = generate_newline(res)
-    res += f"{INDENT*2}#cdef {type_}* value_ptr = &memory_view[0]"
+    res += f"{INDENT*2}array = {class_['name']}.construct_without_init()"
     res = generate_newline(res)
-    res += f"{INDENT * 2}#cdef Py_ssize_t size = len(memory_view)"
+    res += f"{INDENT*2}array._ptr = (static_method({classes_dict[class_['name']]},{method_ids['static_methods'][class_['name']]['from_memoryview']}, (memory_view,)))"
     res = generate_newline(res)
-    res += f"{INDENT*2}#cdef {class_['name']} array = {class_['name']}.construct_without_init()"
-    res = generate_newline(res)
-    res += f"{INDENT*2}#array.{class_['name']}_internal_class_ptr = (CPP{class_['name']}.py_from_ptr(value_ptr, size))"
-    res = generate_newline(res)
-    res += f"{INDENT*2}pass#return array"
+    res += f"{INDENT*2}return array"
     res = generate_newline(res)
 
     return res
