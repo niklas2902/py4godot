@@ -1736,16 +1736,8 @@ def generate_special_methods_packed_array(class_):
     res = generate_newline(res)
     res += f"{INDENT * 1}def to_list(self):"
     res = generate_newline(res)
-    res += f"{INDENT*2}pass"
+    res += f"{INDENT*2}return list(self.get_memory_view())"
     res = generate_newline(res)
-    #res += f"{INDENT*2}cdef vector[{type_}] value_vector = self.{class_['name']}_internal_class_ptr.get()[0].to_vector()"
-    #res = generate_newline(res)
-    #res += f"{INDENT * 2}cdef Py_ssize_t size = value_vector.size()"
-    #res = generate_newline(res)
-    #res += f"{INDENT*2}cdef {type_}[:] memory_view = <{type_}[:size]>value_vector.data()"
-    #res = generate_newline(res)
-    #res += f"{INDENT*2}return list(memory_view)"
-    #res = generate_newline(res)
 
     res += f"{INDENT * 1}def get_memory_view(self):"
     res = generate_newline(res)

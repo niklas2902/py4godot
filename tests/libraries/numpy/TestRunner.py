@@ -3,7 +3,6 @@ import unittest
 import PythonTest
 from py4godot.classes import gdclass
 from py4godot.classes.Node3D import Node3D
-from py4godot.utils.utils import get_tree
 
 
 class PrintStream:
