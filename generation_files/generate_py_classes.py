@@ -91,7 +91,7 @@ def generate_import():
               "import py4godot.utils.functools as  functools\n"
               "import py4godot.utils.utils as utils\n"
               "from py4godot.classes.core import *\n"
-              "from py4godot.utils.smart_cast import smart_cast, register_cast_function\n"
+              "from py4godot.utils.smart_cast import smart_cast, register_cast_function, register_class, get_class\n"
               "from py4godot.utils.CPPWrapper import CPPWrapper, constructor, static_method\n"
               "import py4godot.utils.utils as c_utils\n"
 
@@ -195,7 +195,7 @@ def generate_constructors(class_):
         res += f"{INDENT}def new{constructor['index']}({generate_constructor_args(class_, constructor)}):"
         res = generate_newline(res)
         if "arguments" in constructor:
-            res += generate_assert(constructor["arguments"])
+            res += generate_assert(constructor["arguments"], "", class_["name"])
             res = generate_newline(res)
         res += f"{INDENT * 2}_class = {class_['name']}.construct_without_init()"
         res = generate_newline(res)
@@ -469,7 +469,7 @@ def should_skip_method(class_, method):
                                                            "get_last_exclusive_window"}
 
 
-def generate_assert(args):
+def generate_assert(args, methodname, classname):
     res = ""
 
     for arg in args:
@@ -477,6 +477,10 @@ def generate_assert(args):
             if "default_value" in arg:
                 continue
             res += f"{INDENT * 2}assert(not {pythonize_name(arg['name'])} is None)"
+            res = generate_newline(res)
+        if not (methodname in ("connect", "disconnect") and classname == "Object"):
+            type_ = unenumize_type(untypearray(arg['type']))
+            res += f"{INDENT * 2}{generate_type_assertion(pythonize_name(arg['name']), type_)}"
             res = generate_newline(res)
     return res
 
@@ -493,7 +497,7 @@ def generate_method(class_, mMethod):
     res += generate_default_args(mMethod)
     res = generate_newline(res)
     if "arguments" in mMethod.keys():
-        res += generate_assert(mMethod["arguments"])
+        res += generate_assert(mMethod["arguments"], mMethod["name"], class_["name"])
         res = generate_newline(res)
 
     if is_property_setter(class_, mMethod["name"]):
@@ -965,6 +969,8 @@ def generate_member_setter(class_, member):
     res = generate_newline(res)
 
     body = ""
+    body += f"{INDENT * 2}"+generate_type_assertion("value", unenumize_type(untypearray(member.type_)))
+    body = generate_newline(body)
     body += f"{INDENT * 2}self._ptr.call_without_return({method_ids["normal_methods"][class_]["set_member_"+member.name]}, tuple([value]))"
     body = generate_newline(body)
     res += body
@@ -1456,6 +1462,7 @@ def generate_classes(classes, filename, is_core=False, is_typed_array=False):
         res += generate_operators_for_class(class_["name"])
         if class_["name"] not in builtin_classes and not is_typed_array:
             res += generate_register_cast(class_["name"])
+            res += generate_register_class(class_["name"])
     if is_core:
         res += create_core_classes_set()
     text_to_write = "# distutils: language=c++\n"+res
@@ -1468,6 +1475,12 @@ def generate_register_cast(class_name):
     if class_name == "ScriptExtension":
         res += f"register_cast_function('PyScriptExtension', {class_name}.cast)"
         res = generate_newline(res)
+    return res
+
+def generate_register_class(class_name):
+    res = ""
+    res += f"register_class('{class_name}', {class_name})"
+    res = generate_newline(res)
     return res
 
 def generate_dictionary_set_item():
@@ -1675,6 +1688,26 @@ def generate_cast(class_):
     res += f"{INDENT * 2}cls._ptr = other._ptr"
     res = generate_newline(res)
     res += f"{INDENT * 2}return cls"
+    return res
+
+def generate_type_assertion(arg_name,type_):
+    res = ""
+    if type_ in ("int", "float"):
+        res += f"assert isinstance({arg_name}, (int, float)), '{arg_name} must be int or float'"
+    elif type_ == "String":
+        res += f"assert isinstance({arg_name}, (str, String)), '{arg_name} must be str or String'"
+    elif type_ == "StringName":
+        res += f"assert isinstance({arg_name}, (str, StringName)), '{arg_name} must be str or StringName'"
+    elif type_ == "NodePath":
+        res += f"assert isinstance({arg_name}, (str, NodePath)), '{arg_name} must be str or NodePath'"
+    elif type_ in ("bool",):
+        res += f"assert isinstance({arg_name}, bool), '{arg_name} must be bool'"
+    elif type_ in builtin_classes - {"int", "float", "bool"}:
+        type_ = unenumize_type(untypearray(type_))
+        res += f"assert isinstance({arg_name}, get_class('{type_}')), '{arg_name} must be {type_}'"
+    else:
+        type_ = unenumize_type(untypearray(type_))
+        res += f"assert isinstance({arg_name}, get_class('{type_}')), '{arg_name} must be {type_}'"
     return res
 
 
