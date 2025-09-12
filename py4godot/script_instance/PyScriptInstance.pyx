@@ -25,6 +25,7 @@ cdef api GDExtensionBool instance_set(GDExtensionScriptInstanceDataPtr p_instanc
     cdef object method_name = core.StringName.__new__(core.StringName)
     cdef shared_ptr[cppbridge.StringName] internal_method_name  = create_string_name_from_ptr((<void**>p_name)[0])
     method_name._ptr = create_wrapper_from_StringName_ptr(internal_method_name)
+    method_name.shouldBeDeleted = False
     cdef object method_name_str = core.String.new2(method_name)
     cdef unicode py_method_name_str = gd_string_to_py_string(method_name_str)
 
@@ -50,6 +51,7 @@ cdef api GDExtensionBool instance_get(GDExtensionScriptInstanceDataPtr p_instanc
     cdef objectmethod_name = core.StringName.__new__(core.StringName)
     cdef shared_ptr[cppbridge.StringName] internal_method_name = create_string_name_from_ptr((<void**>p_name)[0])
     method_name._ptr = create_wrapper_from_StringName_ptr(internal_method_name)
+    method_name.shouldBeDeleted = False
     cdef object method_name_str = core.String.new2(method_name)
     cdef unicode py_method_name_str = gd_string_to_py_string(method_name_str)
     cdef str py_typename;
@@ -102,6 +104,7 @@ cdef api GDExtensionBool is_overridden(GDExtensionScriptInstanceDataPtr p_instan
     cdef object method_name = core.StringName.__new__(core.StringName)
     cdef shared_ptr[cppbridge.StringName] internal_method_name = create_string_name_from_ptr((<void**>p_name)[0])
     method_name._ptr = create_wrapper_from_StringName_ptr(internal_method_name)
+    method_name.shouldBeDeleted = False
     cdef unicode py_method_name_str
     try:
         py_method_name_str = gd_string_name_to_py_string(method_name)
@@ -120,6 +123,7 @@ cdef api GDExtensionBool instance_has_method(GDExtensionScriptInstanceDataPtr p_
     cdef object method_name = core.StringName.__new__(core.StringName)
     cdef shared_ptr[cppbridge.StringName] internal_method_name = create_string_name_from_ptr((<void**>p_name)[0])
     method_name._ptr = create_wrapper_from_StringName_ptr(internal_method_name)
+    method_name.shouldBeDeleted = False
     cdef unicode py_method_name_str
     try:
         py_method_name_str = gd_string_name_to_py_string(method_name)
@@ -138,6 +142,7 @@ cdef api MethodCallData instance_call(GDExtensionScriptInstanceDataPtr p_self, G
     cdef object method_name = core.StringName.__new__(core.StringName)
     cdef shared_ptr[cppbridge.StringName] internal_method_name = create_string_name_from_ptr((<void**>p_method)[0])
     method_name._ptr = create_wrapper_from_StringName_ptr(internal_method_name)
+    method_name.shouldBeDeleted = False
     cdef unicode py_method_name_str
     try:
         py_method_name_str = gd_string_name_to_py_string(method_name)

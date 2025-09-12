@@ -68,6 +68,7 @@ cdef api void create_signals(PyObject* instance, vector[shared_ptr[BridgeDiction
     cdef str py_name
     cdef object signal
     cdef object py_signal = Dictionary.new0()
+    py_signal.shouldBeDeleted = False
     cdef object gd_name
     try:
         print_error("before setting signal")

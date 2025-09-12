@@ -21,6 +21,7 @@ cdef class MethodDescription:
         try:
             inc_id_counter()
             self.name = py_c_string_to_string_name(name.encode("utf-8"))
+            self.name.shouldBeDeleted = False
             if return_value != None:
                 self.return_value = return_value
             else:

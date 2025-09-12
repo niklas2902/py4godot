@@ -249,6 +249,7 @@ def generate_return_value(classname, method_):
             result += f"{INDENT * 2}{ret_val.name}"
     else:
         result += f"{INDENT * 2}ret = None"
+
     result = generate_newline(result)
     return result
 
@@ -644,7 +645,6 @@ def generate_method_body_standard(class_, method):
     if "return_value" in method.keys() or "return_type" in method.keys():
         result += generate_return_value(class_["name"], method)
         if not is_static(method):
-
             result += f"{INDENT * 2}{generate_ret_call(method)} = self._ptr.call_with_return({method_ids['normal_methods'][class_['name']][method['name']]},tuple([{generate_method_args(class_, method)}]))"
         else:
             result += f"{INDENT * 2}{generate_ret_call(method)} = static_method({method_ids['static_methods'][class_['name']][method['name']]},tuple([{generate_method_args(class_, method)}]))"
@@ -680,13 +680,13 @@ def generate_method_args(class_, method):
         return res
     for arg in method["arguments"]:
         if untypearray(arg["type"]) in classes - IGNORED_CLASSES - builtin_classes:
-            res += f"{pythonize_name(arg['name'])}.{untypearray(arg['type'])}_internal_class_ptr if {pythonize_name(arg['name'])} != None else {pythonize_name(arg['name'])}._ptr, " # Todo: implement conditional
+            res += f"{pythonize_name(arg['name'])}.{untypearray(arg['type'])}._ptr if {pythonize_name(arg['name'])} != None else {pythonize_name(arg['name'])}._ptr, " # Todo: implement conditional
         elif untypearray(arg["type"]) in builtin_classes - IGNORED_CLASSES:
             if arg["type"] == "String":
                 if is_property_setter(class_, method["name"]):
                     res += f"py__string_{pythonize_name(arg['name'])}._ptr, "
                 else:
-                    res += f"utils.py_string_to_string({pythonize_name(arg['name'])}).{untypearray(arg['type'])}_ptr, "
+                    res += f"utils.py_string_to_string({pythonize_name(arg['name'])})._ptr, "
             elif arg["type"] == "StringName":
                 res += f"py_stringname_{pythonize_name(arg['name'])}._ptr, "
             elif arg["type"] == "NodePath":
@@ -747,7 +747,7 @@ def generate_init(class_):
     res = ""
     res += f"{INDENT}def __init__(self):"
     res = generate_newline(res)
-    res += f"{INDENT * 2}self.shouldBeDeleted = False"
+    res += f"{INDENT * 2}self.shouldBeDeleted = True"
     res = generate_newline(res)
     res += f"{INDENT * 2}self._ptr =  constructor({classes_dict[class_['name']]},0, ())"
     res = generate_newline(res)
@@ -846,7 +846,7 @@ def generate_construct_without_init(class_):
     res = generate_newline(res)
     res += f"{INDENT * 2}cls = {class_['name']}.__new__({class_['name']})"
     res = generate_newline(res)
-    res += f"{INDENT * 2}cls.shouldBeDeleted = False"
+    res += f"{INDENT * 2}cls.shouldBeDeleted = True"
     res = generate_newline(res)
     res += f"{INDENT * 2}cls.init_signals()"
     res = generate_newline(res)
@@ -1422,11 +1422,22 @@ def generate_classes(classes, filename, is_core=False, is_typed_array=False):
             res += f"import py4godot.classes.Object as py4godot_object"
         res = generate_newline(res)
         classes_to_import = get_classes_to_import(classes)
+        res += "import typing"
+        res = generate_newline(res)
+        res += "if typing.TYPE_CHECKING:"
+        res = generate_newline(res)
+        res += f"{INDENT}pass"
+        res = generate_newline(res)
         for cls in classes_to_import:
             if cls in [class_["name"] for class_ in classes]:
                 continue
-            #if should_skip_import(classes[0]["name"], cls):
-            #    continue
+            if cls in [cls["name"] for cls in obj["classes"]] and cls in [class_["inherits"] for class_ in classes]:
+                continue
+            res += f"{INDENT}import py4godot.classes.{cls} as py4godot_{cls.lower()} "
+            res = generate_newline(res)
+        for cls in classes_to_import:
+            if cls in [class_["name"] for class_ in classes]:
+                continue
             if cls in [cls["name"] for cls in obj["classes"]] and cls not in [class_["inherits"] for class_ in classes]:
                 continue
             res += f"import py4godot.classes.{cls} as py4godot_{cls.lower()} "
@@ -1591,28 +1602,27 @@ def generate_array_get_item(class_):
     return res
 
 def generate_del(class_):
+    res = ""
     if class_["name"] not in builtin_classes and class_["name"] not in typed_arrays_names:
-        res = ""
         res += f"{INDENT}def __del__(self):"
         res = generate_newline(res)
-        if is_refcounted(class_):
+        if class_["name"] == "RefCounted":
             res += f"{INDENT * 2}if self.casted_from is None:"
             res = generate_newline(res)
-            res += f"{INDENT * 3}self.RefCounted_internal_class_ptr.get().py_destroy_ref()"
+            res += f"{INDENT * 3}self._ptr.call_with_return({method_ids['normal_methods'][class_['name']]['py_destroy']}, ())"
+            res = generate_newline(res)
+            res += f"{INDENT * 3}self._ptr = None"
             res = generate_newline(res)
             return res
         else:
             res += f"{INDENT*2}pass"
             res = generate_newline(res)
-    else:
-        res = ""
+    elif class_["name"] not in typed_arrays_names:
         res += f"{INDENT}def __del__(self):"
         res = generate_newline(res)
         res += f"{INDENT * 2}if hasattr( self, 'shouldBeDeleted') and self.shouldBeDeleted:" #TODO nzimmer: Improve this
         res = generate_newline(res)
-        res += f"{INDENT * 3}self.{class_['name']}_internal_class_ptr.get().{class_['name']}_py_destroy()"
-        res = generate_newline(res)
-        res += f"{INDENT * 3}self.{class_['name']}_internal_class_ptr.reset()"
+        res += f"{INDENT * 3}self._ptr.call_with_return({method_ids['normal_methods'][class_['name']]['py_destroy']}, ())"
         res = generate_newline(res)
     return res
 
@@ -1692,6 +1702,7 @@ def generate_cast(class_):
 
 def generate_type_assertion(arg_name,type_):
     res = ""
+    type_ = unenumize_type(untypearray(type_))
     if type_ in ("int", "float"):
         res += f"assert isinstance({arg_name}, (int, float)), '{arg_name} must be int or float'"
     elif type_ == "String":
@@ -1703,10 +1714,8 @@ def generate_type_assertion(arg_name,type_):
     elif type_ in ("bool",):
         res += f"assert isinstance({arg_name}, bool), '{arg_name} must be bool'"
     elif type_ in builtin_classes - {"int", "float", "bool"}:
-        type_ = unenumize_type(untypearray(type_))
-        res += f"assert isinstance({arg_name}, get_class('{type_}')), '{arg_name} must be {type_}'"
+        res += f"assert isinstance({arg_name}, {type_}), '{arg_name} must be {type_}'"
     else:
-        type_ = unenumize_type(untypearray(type_))
         res += f"assert isinstance({arg_name}, get_class('{type_}')), '{arg_name} must be {type_}'"
     return res
 

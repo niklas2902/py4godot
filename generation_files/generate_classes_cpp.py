@@ -1326,6 +1326,12 @@ def generate_switch_methods(class_):
             res += f"{INDENT * 3}case {method_ids['normal_methods'][class_['name']]['set_member_' + member.name]}: py_member_set_{member.name}({extract_arg(member.type_,0)});break;"
             res = generate_newline(res)
     if class_["name"] in builtin_classes:
+        res += f"{INDENT * 3}case {method_ids['normal_methods'][class_['name']]['py_destroy']}: {class_['name']}_py_destroy(); return Py_None;"
+        res = generate_newline(res)
+    if class_["name"] == "RefCounted":
+        res += f"{INDENT * 3}case {method_ids['normal_methods'][class_['name']]['py_destroy']}: py_destroy_ref(); return Py_None;"
+        res = generate_newline(res)
+    if class_["name"] in builtin_classes:
         for operator in operator_dict[get_class_name(class_["name"])]:
             if operator in operator_to_method.keys():
                 op = operator_dict[get_class_name(class_["name"])][operator]
@@ -1369,6 +1375,13 @@ def generate_switch_methods(class_):
             res += f"{INDENT*3}case {method_ids['normal_methods'][class_['name']][method['name']]}: {generate_varargs(method)} return  PyFloat_FromDouble(py_{pythonize_name(method['name'])}({args}));"
         else:
             res += f"{INDENT*3}case {method_ids['normal_methods'][class_['name']][method['name']]}: {generate_varargs(method)} return py_{pythonize_name(method['name'])}({args});"
+        res = generate_newline(res)
+
+    if class_["name"] in builtin_classes:
+        res += f"{INDENT * 3}case {method_ids['normal_methods'][class_['name']]['py_destroy']}: {class_['name']}_py_destroy();return Py_None;"
+        res = generate_newline(res)
+    if class_["name"] == "RefCounted":
+        res += f"{INDENT * 3}case {method_ids['normal_methods'][class_['name']]['py_destroy']}: py_destroy_ref(); return Py_None;"
         res = generate_newline(res)
 
     if class_["name"] in core_classes.keys():
