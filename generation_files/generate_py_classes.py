@@ -547,6 +547,8 @@ def generate_ret_call(method_):
             ret_val = ReturnType("_ret", method_['return_type'])
         if ret_val.type in classes:
             if ret_val.type in {"int", "float", "bool"}:
+                result += f"c_utils.decref(_ret) # This needs to be decrefed, as it comes from C++ with one ref too much"
+                result = generate_newline(result)
                 result += f"_ret"
             elif ret_val.type in builtin_classes:
                 result += f"{ret_val.name}._ptr"
@@ -945,6 +947,8 @@ def generate_member_getter(class_, member):
         body = generate_newline(body)
     else:
         body += f"{INDENT * 2}_ret = self._ptr.call_with_return({method_ids["normal_methods"][class_]["get_member_"+member.name]}, tuple())"
+        body = generate_newline(body)
+        body += f"{INDENT * 2}c_utils.decref(_ret) # This needs to be decrefed, as it comes from C++ with one ref too much"
         body = generate_newline(body)
     body += f"{INDENT * 2}return _ret"
     body = generate_newline(body)
@@ -1715,6 +1719,8 @@ def generate_type_assertion(arg_name,type_):
         res += f"assert isinstance({arg_name}, bool), '{arg_name} must be bool'"
     elif type_ in builtin_classes - {"int", "float", "bool"}:
         res += f"assert isinstance({arg_name}, {type_}), '{arg_name} must be {type_}'"
+    elif type_ == "Variant":
+        pass
     else:
         res += f"assert isinstance({arg_name}, get_class('{type_}')), '{arg_name} must be {type_}'"
     return res

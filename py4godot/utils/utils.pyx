@@ -4,6 +4,7 @@ from py4godot.wrappers.wrappers cimport CPPStringWrapper, CPPStringNameWrapper
 from py4godot.utils.print_tools import *
 from py4godot.utils.test_utils cimport *
 from libc.stdlib cimport malloc, free
+from cpython.ref cimport Py_INCREF, Py_DECREF
 
 shouldCreateObject = True
 
@@ -76,6 +77,10 @@ cdef PyObject* to_py_object(val):
 
 cpdef object py_get_py_script(long id):
     return <object>get_py_script(id)
+
+cpdef void decref(object o):
+    Py_DECREF(o)
+
 """
 cdef unicode gd_string_name_to_py_string(core.StringName string_name):
     cdef core.String string = core.String.new2(string_name)
