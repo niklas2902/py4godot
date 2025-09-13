@@ -106,6 +106,8 @@ def generate_wrapper():
     res = generate_newline(res)
     res += f'{INDENT * 2}GDExtensionObjectPtr& get_godot_owner()'
     res = generate_newline(res)
+    res += f'{INDENT * 2}void copy_owner(Wrapper* ptr)'
+    res = generate_newline(res)
     res += f'{INDENT * 2}void set_godot_owner(GDExtensionObjectPtr owner)'
     res = generate_newline(res)
     res += f'{INDENT * 2}void switch_call(int method_hash, PyObject * objects)'

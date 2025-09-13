@@ -152,6 +152,11 @@ def generate_string_name_or_node_path_args(args):
             res += f"{INDENT*2}assert(isinstance({pythonize_name(arg['name'])}, (str, StringName)))"
             res = generate_newline(res)
             res += f"{INDENT * 2}py_stringname_{pythonize_name(arg['name'])} = {pythonize_name(arg['name'])} if isinstance({pythonize_name(arg['name'])}, StringName) else c_utils.py_string_to_string_name({pythonize_name(arg['name'])})"
+        elif arg["type"] == "String":
+            res += f"{INDENT * 2}assert(isinstance({pythonize_name(arg['name'])}, (str, String)))"
+            res = generate_newline(res)
+            res += f"{INDENT * 2}py_string_{pythonize_name(arg['name'])} = {pythonize_name(arg['name'])} if isinstance({pythonize_name(arg['name'])}, StringName) else c_utils.py_string_to_string({pythonize_name(arg['name'])})"
+
         elif arg["type"] == "NodePath":
             res += f"{INDENT*2}assert(isinstance({pythonize_name(arg['name'])}, (str, NodePath)))"
             res = generate_newline(res)
@@ -166,7 +171,7 @@ def generate_constructor_call_args(class_, constructor):
     for arg in constructor["arguments"]:
         if arg["type"] in classes - IGNORED_CLASSES:
             if arg["type"] == "String":
-                result += f"utils.py_string_to_string({pythonize_name(arg['name'])})._ptr, "
+                result += f"py_string_{pythonize_name(arg['name'])}._ptr, "
             elif arg["type"] == "StringName" and not should_turn_string_to_nodepath(class_, constructor):
                 result += f"py_stringname_{pythonize_name(arg['name'])}._ptr, "
             elif arg["type"] == "NodePath" and not should_turn_string_to_nodepath(class_, constructor):
@@ -184,6 +189,22 @@ def generate_constructor_call_args(class_, constructor):
 def should_turn_string_to_nodepath(class_, constructor):
     return (class_["name"] == "String" and constructor["index"] != 1)
 
+def generate_buffer_for_constructor( args):
+    res = ""
+    for arg in args:
+        if arg["type"] == "StringName":
+            res += f"{INDENT * 2}_class.py_stringname_{pythonize_name(arg['name'])} =py_stringname_{pythonize_name(arg['name'])}"
+        elif arg["type"] == "String":
+            res += f"{INDENT * 2}_class.py_string_{pythonize_name(arg['name'])} = py_string_{pythonize_name(arg['name'])}"
+
+        elif arg["type"] == "NodePath":
+            res += f"{INDENT * 2}_class.py_nodepath_{pythonize_name(arg['name'])} = py_nodepath_{pythonize_name(arg['name'])}"
+
+        elif arg["type"] in builtin_classes - {"float", "int", "bool"}:
+            res += f"{INDENT * 2}_class.__{pythonize_name(arg['name'])}__ = {pythonize_name(arg['name'])}"
+
+        res = generate_newline(res)
+    return res
 
 def generate_constructors(class_):
     res = ""
@@ -202,6 +223,7 @@ def generate_constructors(class_):
         if "arguments" in constructor:
             res += generate_string_name_or_node_path_args(constructor["arguments"])
             res = generate_newline(res)
+            res += generate_buffer_for_constructor(constructor["arguments"])
 
         res += f"{INDENT*2}_class._ptr = constructor({classes_dict[class_['name']]}, {constructor['index']}, tuple([{generate_constructor_call_args(class_, constructor)}]))"
         res = generate_newline(res)
@@ -234,7 +256,7 @@ def generate_return_value(classname, method_):
         if ret_val.type in {"int", "float", "bool"}:
             result += f"{INDENT * 2}{ret_val.name} = 0"
         elif ret_val.type in classes:
-            if ret_val.type in builtin_classes.union({"Object"}) or ret_val.type == classname:
+            if ret_val.type in builtin_classes or ret_val.type == classname:
                 result += f"{INDENT * 2}{ret_val.name} = {ret_val.type}.construct_without_init()"
             else:
                 result += f"{INDENT * 2}{ret_val.name} = py4godot_object.Object.construct_without_init() #Smart casted to: {ret_val.type}"
@@ -303,7 +325,7 @@ def generate_return_statement(method_):
             result = f"{INDENT * 2}return _ret"
         else:
             if ret_val.type in classes - builtin_classes:
-                result = f"{INDENT * 2}return smart_cast(_ret)"
+                result = f"{INDENT * 2}return smart_cast(_ret) if not _ret._ptr.is_null() else None"
             else:
                 result = ""
                 result += f"{INDENT * 2}return _ret"
@@ -688,7 +710,7 @@ def generate_method_args(class_, method):
                 if is_property_setter(class_, method["name"]):
                     res += f"py__string_{pythonize_name(arg['name'])}._ptr, "
                 else:
-                    res += f"utils.py_string_to_string({pythonize_name(arg['name'])})._ptr, "
+                    res += f"py_string_{pythonize_name(arg['name'])}._ptr, "
             elif arg["type"] == "StringName":
                 res += f"py_stringname_{pythonize_name(arg['name'])}._ptr, "
             elif arg["type"] == "NodePath":
@@ -1680,9 +1702,11 @@ def generate_cast(class_):
     res = generate_newline(res)
     res += f"{INDENT * 2}assert other != None # Object to be casted must not be None"
     res = generate_newline(res)
-    res += f"{INDENT * 2}cls = {class_['name']}.construct_without_init()"
+    res += f"{INDENT * 2}cls = {class_['name']}.constructor()"
     res = generate_newline(res)
-    res += f"{INDENT * 2}cls._ptr = other._ptr"
+    res += f"{INDENT * 2}cls._ptr_before = other._ptr # Save pointer"
+    res = generate_newline(res)
+    res += f"{INDENT * 2}cls._ptr.copy_gdowner(cls._ptr_before)"
     res = generate_newline(res)
     if is_refcounted(class_):
         res += f"{INDENT * 2}cls.casted_from = other"
@@ -1710,6 +1734,7 @@ def generate_type_assertion(arg_name,type_):
     if type_ in ("int", "float"):
         res += f"assert isinstance({arg_name}, (int, float)), '{arg_name} must be int or float'"
     elif type_ == "String":
+
         res += f"assert isinstance({arg_name}, (str, String)), '{arg_name} must be str or String'"
     elif type_ == "StringName":
         res += f"assert isinstance({arg_name}, (str, StringName)), '{arg_name} must be str or StringName'"

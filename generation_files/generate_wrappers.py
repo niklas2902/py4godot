@@ -71,6 +71,10 @@ def generate_wrapper(class_name):
     res = generate_newline(res)
     res += f"{INDENT*2}self._ptr = make_shared[bridge.{class_name}]()"
     res = generate_newline(res)
+    res += f"{INDENT}cdef bridge.Wrapper* get_ptr(self):"
+    res = generate_newline(res)
+    res += f"{INDENT*2}return <bridge.Wrapper*> self._ptr.get()"
+    res = generate_newline(res)
     res += f"{INDENT}cdef set_gdowner(self, void* godot_owner):"
     res = generate_newline(res)
     res += f"{INDENT*2}self._ptr.get().set_godot_owner(godot_owner)"
@@ -114,6 +118,9 @@ def generate_wrapper_pxd(class_name):
     res = f"cdef class CPP{class_name}Wrapper(CPPWrapper):"
     res = generate_newline(res)
     res += f"{INDENT}cdef shared_ptr[bridge.{class_name}] _ptr"
+    res = generate_newline(res)
+
+    res += f"{INDENT}cdef bridge.Wrapper* get_ptr(self)"
     res = generate_newline(res)
     res += f"{INDENT}cdef set_gdowner(self, void* godot_owner)"
     res = generate_newline(res)

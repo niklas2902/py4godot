@@ -128,6 +128,26 @@ static PyObject* c_string_to_string_ptr(const char* string){
     return wrapper__create_wrapper_from_String_ptr(gd_string);
 }
 
+static PyObject* py_string_to_string_ptr(PyObject* o) {
+    if (!PyUnicode_Check(o)) {
+        PyErr_SetString(PyExc_TypeError, "Expected a Python string");
+        return NULL;
+    }
+
+    Py_ssize_t size;
+    const char* py_str = PyUnicode_AsUTF8AndSize(o, &size);
+    if (!py_str) {
+        return NULL; // error already set
+    }
+
+    // Create your Godot String using the malloc'ed copy
+    std::shared_ptr<String> gd_string = String::py_new0();
+    functions::get_string_new_with_utf8_chars()(&gd_string->godot_owner, py_str);
+
+    return wrapper__create_wrapper_from_String_ptr(gd_string);
+}
+
+
 static void c_string_to_string_result(const char* string, void** string_ptr){
     functions::get_string_new_with_utf8_chars()(string_ptr, string);
 }

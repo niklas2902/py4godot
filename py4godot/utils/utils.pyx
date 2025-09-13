@@ -5,6 +5,8 @@ from py4godot.utils.print_tools import *
 from py4godot.utils.test_utils cimport *
 from libc.stdlib cimport malloc, free
 from cpython.ref cimport Py_INCREF, Py_DECREF
+from libc.stdlib cimport malloc, free
+from libc.string cimport memcpy, strlen
 
 shouldCreateObject = True
 
@@ -20,9 +22,9 @@ cdef object py_c_string_to_string_name(char* string):
     return gd_string_name
 
 cpdef object py_string_to_string(str string):
-    cdef bytes encoded = string.encode("utf-8")
-    cdef const char * c_str = encoded
-    return py_c_string_to_string(c_str)
+    gd_string = String.construct_without_init()
+    gd_string._ptr = py_string_to_string_ptr(string)
+    return gd_string
 
 
 cdef object py_c_string_to_string(char* string):
