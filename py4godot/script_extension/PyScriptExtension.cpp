@@ -183,7 +183,6 @@ void init_pluginscript_api(){
     }
 
 
-    print_error_user("before importing");
     init_wrappers();
     if (PyErr_Occurred())
     {
@@ -202,7 +201,6 @@ void init_pluginscript_api(){
         assert(false);
         return;
     }
-     print_error_user("after importing");
 
 
     Variant::init_variant();

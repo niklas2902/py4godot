@@ -155,7 +155,6 @@ cdef api MethodCallData instance_call(GDExtensionScriptInstanceDataPtr p_self, G
     cdef object arg
     cdef MethodCallData ret_val
     ret_val.has_value = False
-    print_error("hello2")
     try:
         for index in range(0, p_argument_count):
             var.native_ptr = <void*>p_args[index]
@@ -168,11 +167,8 @@ cdef api MethodCallData instance_call(GDExtensionScriptInstanceDataPtr p_self, G
         cast_helpers.clear_vals() # free memory again, now that we are safe
         if not hasattr(instance_object,py_method_name_str):
             return ret_val
-        print_error("hello3")
         method = getattr(instance_object,py_method_name_str)
-        print_error(f"before calling method'{py_method_name_str}'")
         result = method(*args)
-        print_error("after calling method")
     except Exception as e:
         print_error_detailed('PyScriptInstance.pyx', 'instance_call', 133, f"An Exception happened while calling a method:{e}" ) # !this gets generated print_error
         print_error_detailed('PyScriptInstance.pyx', 'instance_call', 134, f"traceback: {traceback.format_exc()}") # !this gets generated print_error
