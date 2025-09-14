@@ -1,6 +1,7 @@
 import copy
 import json
 import os
+from functools import lru_cache
 
 from generate_enums import enumize_name
 from generation_tools import write_if_different
@@ -94,6 +95,7 @@ def generate_import():
               "from py4godot.utils.smart_cast import smart_cast, register_cast_function, register_class, get_class\n"
               "from py4godot.utils.CPPWrapper import CPPWrapper, constructor, static_method\n"
               "import py4godot.utils.utils as c_utils\n"
+              "import typing\n"
 
     )
     return result
@@ -507,13 +509,28 @@ def generate_assert(args, methodname, classname):
             res = generate_newline(res)
     return res
 
+def get_ret_value(method, class_):
+    if "return_value" in method.keys() or "return_type" in method.keys():
+        if "return_value" in method.keys():
+            return_type = method["return_value"]["type"]
+        else:
+            return_type = method["return_type"]
+        return return_type
 
 def generate_method(class_, mMethod):
     res = ""
     #if should_skip_method(class_, mMethod):
     #    return res
     args = generate_args(class_, mMethod)
-    def_function = f"{INDENT}def {pythonize_name(mMethod['name'])}({args}):"
+    ret_val = None
+    args = generate_args(class_, mMethod)
+    if get_ret_value(mMethod, class_) == "Object" and is_core:
+        ret = "object"
+    else:
+        ret = generate_children(class_['name'], get_ret_value(mMethod, class_))
+        if ret != None and len(ret) > 200:
+            ret = "typing.Any"
+    def_function = f"{INDENT}def {pythonize_name(mMethod['name'])}({args}) -> {ret}:"
     res += generate_method_headers(mMethod)
     res += def_function
     res = generate_newline(res)
@@ -633,6 +650,7 @@ def cast_from_type_to_obj(typename):
     return ""
 
 def generate_string_arg(arg):
+    res = ""
     res = ""
     res += f"{INDENT * 2}py__string_{pythonize_name(arg['name'])} = utils.py_string_to_string({pythonize_name(arg['name'])})"
     res = generate_newline(res)
@@ -958,7 +976,7 @@ def generate_member_getter(class_, member):
     res = ""
     res += f"{INDENT}@property"
     res = generate_newline(res)
-    res += f"{INDENT}def {member.name}(self):"
+    res += f"{INDENT}def {member.name}(self) -> {undouble_type(member.type_)}:"
     res = generate_newline(res)
 
     body = ""
@@ -976,7 +994,7 @@ def generate_member_getter(class_, member):
     body = generate_newline(body)
     res += body
 
-    res += f"{INDENT}def get_{member.name}(self):"
+    res += f"{INDENT}def get_{member.name}(self) -> None:"
     res = generate_newline(res)
     res += body
 
@@ -1033,11 +1051,78 @@ def generate_property_index(property, is_setter=False):
     return ""
 
 
+def generate_children(containing_class_, type_):
+    if type_ and "," in type_:
+        type_ = type_.split(",")[0].strip()
+    already_registed_classes = set()
+    if isinstance(type_, set):
+        for part_type in type_:
+            already_registed_classes.add(part_type)
+    else:
+        already_registed_classes.add(type_)
+    if type_ == None:
+        return None
+    temp = set()
+    for cls in already_registed_classes:
+        children = get_children(cls)
+        temp.update(children)
+        temp.add(cls)
+    already_registed_classes = temp
+    res = ""
+    for cls in already_registed_classes:
+        res += unenumize_type(ungodottype_type_array(unbitfield_type(unenumize_type(cls)), containing_class_)) + "|"
+    return res[:-1]
+
+def ungodottype_type_array(type_, class_name):
+    if type_ == None:
+        return "None"
+    if (type_ == "String"):
+        return "str"
+    if (type_ == "Variant"):
+        if class_name in typed_arrays_names:
+            typed_array_type = class_name.replace("TypedArray", "")
+
+            if typed_array_type in builtin_classes - {"float", "int", "Nil", "bool"}:
+                if not is_core:
+                    return f"{typed_array_type}"
+                else:
+                    return typed_array_type
+            elif (typed_array_type in classes):
+                return f"py4godot_{typed_array_type.lower()}.{typed_array_type}"
+            return typed_array_type
+        return "typing.Any"
+    elif type_ in builtin_classes - {"float", "int", "Nil", "bool"}:
+        if not is_core:
+            return f"'{type_}'"
+        else:
+            return f"'{type_}'"
+    elif "typedarray::" in type_:
+        return f"py4godot_{untypearray(type_).lower()}.{untypearray(type_)}"
+    if (type_ in classes):
+        return f"py4godot_{type_.lower()}.{type_}"
+
+    return type_
+
+
+
+@lru_cache(maxsize=None)
+def get_children(base_cls):
+    res = {base_cls}
+    for cls in full_classes:
+        if not "inherits" in cls.keys():
+            continue
+        if cls["inherits"] == base_cls:
+            res.update(get_children(cls["name"]))
+    return res
+
 def generate_property(property, classname):
     result = ""
     result += f"{INDENT}@property"
     result = generate_newline(result)
-    result += f"{INDENT}def {pythonize_name(property['name'])}(self):"
+    ret = generate_children(class_['name'], property['type'])
+    if len(ret) > 200:
+        ret = "typing.Any"
+    result += f"{INDENT}def {pythonize_name(property['name'])}(self) -> {ret}:"
     result = generate_newline(result)
     result += f"{INDENT * 2}_ret = self. {pythonize_name(property['getter'])}({generate_property_index(property)})"
     result = generate_newline(result)
@@ -1269,33 +1354,39 @@ def get_class_from_enum(type_):
     return type_list[0]
 
 
+
 def get_classes_to_import(classes):
-    classes_to_import = []
+    classes_to_import = set()
     for class_ in classes:
         if ("inherits" in class_.keys()):
-            classes_to_import.append(class_["inherits"])
+            classes_to_import.add(class_["inherits"])
         if "methods" in class_.keys():
             for method in class_["methods"]:
                 if ("return_value" in method.keys()):
                     if (unbitfield_type(get_class_from_enum(method["return_value"]["type"])) in normal_classes):
-                        if not "enum" in method["return_value"]["type"]:
-                            classes_to_import.append(get_class_from_enum(method["return_value"]["type"]))
+                        classes_to_import.update(get_children(get_class_from_enum(method["return_value"]["type"])))
                     if "typedarray::" in method["return_value"]["type"]:
-                        classes_to_import.append(generate_typed_array_name(method["return_value"]["type"]))
+                        classes_to_import.add(generate_typed_array_name(method["return_value"]["type"]))
                 if ("arguments" not in method.keys()):
                     continue
                 for argument in method["arguments"]:
                     if argument["type"] in normal_classes:
-                        classes_to_import.append(argument["type"])
+                        classes_to_import.add(argument["type"])
+                    if "enum" in argument["type"]:
+                        type = argument["type"].lstrip("enum::")
+                        if type.split(".")[0] in normal_classes:
+                            classes_to_import.add(type.split(".")[0])
                     if "typedarray::" in argument["type"]:
-                        classes_to_import.append(generate_typed_array_name(argument["type"]))
+                        classes_to_import.add(generate_typed_array_name(argument["type"]))
+        if "properties" in class_.keys():
+            for prop in class_["properties"]:
 
-        if class_["name"] in typed_arrays_names:
-            if class_["name"].replace("TypedArray", "") in builtin_classes:
-                continue
-            classes_to_import.append(simplify_type(class_["name"].replace("TypedArray", "")))
+                if simplify_type(prop["type"]) in normal_classes:
+                    classes_to_import.add(simplify_type(prop["type"]))
 
-    return remove_duplicates(classes_to_import)
+    for cls in classes:
+        classes_to_import.difference({cls["name"]})
+    return classes_to_import
 
 def remove_duplicates(lst):
     seen = set()
@@ -1444,8 +1535,6 @@ def generate_classes(classes, filename, is_core=False, is_typed_array=False):
     elif not is_core:
         res += f"import py4godot.signals as signals"
         res = generate_newline(res)
-        if "Object" not in [class_["name"] for class_ in classes]:
-            res += f"import py4godot.classes.Object as py4godot_object"
         res = generate_newline(res)
         classes_to_import = get_classes_to_import(classes)
         res += "import typing"
@@ -1912,10 +2001,12 @@ def generate_typed_array_name(name):
 if __name__ == "__main__":
     os.chdir("..")
     with open('py4godot/gdextension-api/extension_api.json', 'r') as myfile:
+        is_core = False
         data = myfile.read()
         obj = json.loads(data)
         classes = set([class_['name'] if class_["name"] not in IGNORED_CLASSES else None for class_ in
                        obj['classes'] + obj["builtin_classes"]])
+        full_classes = [cls for cls in obj["classes"]]
         for enum_def in obj["global_enums"]:
             enums.append(f"{enumize_name(enum_def['name'])}")
         builtin_classes = set(class_["name"] for class_ in obj["builtin_classes"])
@@ -1941,6 +2032,7 @@ if __name__ == "__main__":
             typed_arrays_names.add(generate_typed_array_name(typed_array))
             arrays.append(my_array_cls)
 
+        is_core = True
         arrays = sorted(arrays, key= lambda key:key["name"])
         for array in arrays:
             generate_classes([array], f"py4godot/classes/{array['name']}.py", is_core=False, is_typed_array=True)

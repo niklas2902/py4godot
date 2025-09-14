@@ -181,11 +181,11 @@ def copy_experimental(platform):
     if "windows" in platform:
         copytree("py4godot/classes",
                  f"build/final/{platform}/{python_ver}-{platform}/python/Lib/site-packages/py4godot/classes",
-                 dirs_exist_ok=True)
+                 dirs_exist_ok=True, ignore=shutil.ignore_patterns("cpp_bridge.pxd"))
     else:
         copytree("py4godot/classes",
                  f"build/final/{platform}/{python_ver}-{platform}/python/lib/{python_ver_short}/site-packages/py4godot/classes",
-                 dirs_exist_ok=True)
+                 dirs_exist_ok=True, ignore=shutil.ignore_patterns("cpp_bridge.pxd"))
 
 
 
