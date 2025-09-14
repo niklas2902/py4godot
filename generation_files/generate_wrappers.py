@@ -160,6 +160,9 @@ def generate_wrapper_source(class_name):
 if __name__ == "__main__":
     os.chdir("..")
     with open('py4godot/gdextension-api/extension_api.json', 'r', encoding="utf-8") as myfile:
+        if not os.path.isdir("py4godot/wrappers"):
+            os.mkdir("py4godot/wrappers")
+            with open("py4godot/wrappers/__init__.py", "w", encoding="utf-8") as file:pass
         data = myfile.read()
         obj = json.loads(data)
         classes = set([class_['name'] if class_["name"] not in IGNORED_CLASSES else None for class_ in

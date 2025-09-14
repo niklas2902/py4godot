@@ -166,11 +166,11 @@ def replace_infinite(value:str):
     return value.replace("inf", "float('inf')")
 
 def main():
-    """Main function to generate godot_constants.py file."""
+    """Main function to generate constants.py file."""
     # Use Path for better path handling
     os.chdir("..")
     json_file_path = "py4godot/gdextension-api/extension_api.json"
-    output_file_path =  "py4godot/godot_constants.py"
+    output_file_path =  "py4godot/constants.py"
 
     # Generate the constants
     result = generate_constants_classes(json_file_path)
@@ -179,7 +179,7 @@ def main():
     with open(output_file_path, "w", encoding='utf-8') as f:
         f.write(result)
 
-    print(f"godot_constants.py generated successfully at: {output_file_path}")
+    print(f"constants.py generated successfully at: {output_file_path}")
 
     return 0
 

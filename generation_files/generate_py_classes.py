@@ -4,12 +4,23 @@ import os
 from functools import lru_cache
 
 from generate_enums import enumize_name
+from generation_files.xml_help import init_class, get_class_description, get_method_description, get_property_description
 from generation_tools import write_if_different
 from py4godot.method_ids import method_ids
 from py4godot.class_ids import classes_dict
 
 INDENT = "  "
 
+
+
+def generate_class_docstring():
+    return f"{INDENT}r'''{get_class_description()}'''"
+
+def generate_method_docstring(methodname):
+    return f"{INDENT*2}r'''{get_method_description(methodname)}'''"
+
+def generate_property_docstring(propertyname):
+    return f"{INDENT*2}r'''{get_property_description(propertyname)}'''"
 
 class ReturnType:
     def __init__(self, name, type_):
@@ -534,6 +545,9 @@ def generate_method(class_, mMethod):
     res += generate_method_headers(mMethod)
     res += def_function
     res = generate_newline(res)
+    res += generate_method_docstring(mMethod["name"])
+    res = generate_newline(res)
+    res += generate_default_args(mMethod)
     res += generate_default_args(mMethod)
     res = generate_newline(res)
     if "arguments" in mMethod.keys():
@@ -1124,6 +1138,8 @@ def generate_property(property, classname):
         ret = "typing.Any"
     result += f"{INDENT}def {pythonize_name(property['name'])}(self) -> {ret}:"
     result = generate_newline(result)
+    result += generate_property_docstring(property["name"])
+    result = generate_newline(result)
     result += f"{INDENT * 2}_ret = self. {pythonize_name(property['getter'])}({generate_property_index(property)})"
     result = generate_newline(result)
 
@@ -1570,6 +1586,8 @@ def generate_classes(classes, filename, is_core=False, is_typed_array=False):
             res = generate_newline(res)
 
         res += f"class {class_['name']}({get_base_class(class_)}):"
+        res = generate_newline(res)
+        res += generate_class_docstring()
         res = generate_newline(res)
         res += generate_common_methods(class_)
         res += generate_special_methods(class_)
@@ -2018,6 +2036,7 @@ if __name__ == "__main__":
             generate_operators_set(class_)
 
         for class_ in obj["classes"]:
+            init_class(class_["name"])
             generate_classes([class_], f"py4godot/classes/{class_['name']}.py")
 
         array_cls = None
