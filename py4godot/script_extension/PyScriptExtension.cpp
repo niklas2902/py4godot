@@ -241,7 +241,9 @@ bool string_names_equal_script(StringName& left, StringName& right){
 
   PyScriptExtension* PyScriptExtension::constructor(PyLanguage* language){
     print_error("_constructor");
+    print_error_user("constructor");
     PyScriptExtension* class_ = new PyScriptExtension();
+    class_->initialized = true;
 
     StringName class_name = c_string_to_string_name("PyScriptExtension");
     class_name.shouldBeDeleted = true;
@@ -292,14 +294,13 @@ void PyScriptExtension::_get_class_item_path(GDExtensionTypePtr res){
    }
 }
 
+void PyScriptExtension::set_path_internal(std::string path)  {
+    string_path = path;
+}
+
 
 std::string PyScriptExtension::path_as_string(){
-    auto path = get_path();
-    char* path_as_c_string;
-    gd_string_to_c_string( &path.godot_owner, path.length(), &path_as_c_string);
-    std::string path_string = std::string{path_as_c_string};
-    free(path_as_c_string);
-    return path_string;
+    return string_path;
 }
 
 void  PyScriptExtension::_get_base_script(GDExtensionTypePtr res){

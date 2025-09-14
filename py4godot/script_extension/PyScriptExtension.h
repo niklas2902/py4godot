@@ -14,6 +14,7 @@ namespace godot{
       const char* script_name;
       std::string source_code;
       std::string path;
+      bool initialized = false;
 
       TransferObject transfer_object;
 
@@ -29,6 +30,7 @@ namespace godot{
       public:
           PyLanguage* lang;
           std::vector<InstanceData*> instance_datas{};
+          std::string string_path;
 
           static PyScriptExtension* constructor(PyLanguage* language);
           void _init_values(); //# self-defined
@@ -36,6 +38,7 @@ namespace godot{
 
           void update_instance_data(InstanceData* gd_instance, PyObject* instance); // self-defined
           void apply_code();
+          void set_path_internal(std::string path);
           std::string path_as_string();
           std::vector<std::shared_ptr<Variant>> signal_variants;
 
