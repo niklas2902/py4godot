@@ -241,7 +241,6 @@ bool string_names_equal_script(StringName& left, StringName& right){
 
   PyScriptExtension* PyScriptExtension::constructor(PyLanguage* language){
     print_error("_constructor");
-    print_error_user("constructor");
     PyScriptExtension* class_ = new PyScriptExtension();
     class_->initialized = true;
 

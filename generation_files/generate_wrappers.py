@@ -140,9 +140,9 @@ def generate_wrapper_pxd(class_name):
 
 def generate_wrapper_header(class_name):
     res = ""
-    res += f"std::shared_ptr<godot::{class_name}> wrapper__extract_ptr_from_{class_name}Wrapper(PyObject* object);"
+    res += f"GDN_EXPORT std::shared_ptr<godot::{class_name}> wrapper__extract_ptr_from_{class_name}Wrapper(PyObject* object);"
     res = generate_newline(res)
-    res += f"PyObject* wrapper__create_wrapper_from_{class_name}_ptr(std::shared_ptr<godot::{class_name}> ptr);"
+    res += f"GDN_EXPORT PyObject* wrapper__create_wrapper_from_{class_name}_ptr(std::shared_ptr<godot::{class_name}> ptr);"
     res = generate_newline(res)
     return res
 
@@ -150,9 +150,9 @@ def generate_wrapper_header(class_name):
 def generate_wrapper_source(class_name):
     res = ""
     res = generate_newline(res)
-    res += f"std::shared_ptr<godot::{class_name}> wrapper__extract_ptr_from_{class_name}Wrapper(PyObject* object){{return extract_ptr_from_{class_name}Wrapper(object);}};"
+    res += f"GDN_EXPORT std::shared_ptr<godot::{class_name}> wrapper__extract_ptr_from_{class_name}Wrapper(PyObject* object){{return extract_ptr_from_{class_name}Wrapper(object);}};"
     res = generate_newline(res)
-    res += f"PyObject* wrapper__create_wrapper_from_{class_name}_ptr(std::shared_ptr<godot::{class_name}> ptr){{return create_wrapper_from_{class_name}_ptr(ptr);}};"
+    res += f"GDN_EXPORT PyObject* wrapper__create_wrapper_from_{class_name}_ptr(std::shared_ptr<godot::{class_name}> ptr){{return create_wrapper_from_{class_name}_ptr(ptr);}};"
     res = generate_newline(res)
     return res
 
@@ -204,6 +204,16 @@ if __name__ == "__main__":
 
         all_classes = arrays + obj['classes'] + obj["builtin_classes"]
         res = "#pragma once\n#include \"Python.h\"\n#include \"py4godot/cppclasses/class_defs.h\"\n"
+        res = generate_newline(res)
+        res += """#if !defined(GDN_EXPORT)
+#if defined(_WIN32)
+#define GDN_EXPORT __declspec(dllexport)
+#elif defined(__GNUC__)
+#define GDN_EXPORT __attribute__((visibility("default")))
+#else
+#define GDN_EXPORT
+#endif
+#endif"""
         res = generate_newline(res)
         res += "void init_wrappers();"
         res = generate_newline(res)
