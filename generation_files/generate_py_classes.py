@@ -272,7 +272,7 @@ def generate_return_value(classname, method_):
             if ret_val.type in builtin_classes or ret_val.type == classname:
                 result += f"{INDENT * 2}{ret_val.name} = {ret_val.type}.construct_without_init()"
             else:
-                result += f"{INDENT * 2}{ret_val.name} = py4godot_object.Object.construct_without_init() #Smart casted to: {ret_val.type}"
+                result += f"{INDENT * 2}{ret_val.name} = classes.Object.Object.construct_without_init() #Smart casted to: {ret_val.type}"
         elif ret_val.type == "Variant":
             result += f"{INDENT * 2}{ret_val.name} = None"
         elif "typedarray" in ret_val.type:
@@ -736,7 +736,7 @@ def generate_method_args(class_, method):
         return res
     for arg in method["arguments"]:
         if untypearray(arg["type"]) in classes - IGNORED_CLASSES - builtin_classes:
-            res += f"{pythonize_name(arg['name'])}.{untypearray(arg['type'])}._ptr if {pythonize_name(arg['name'])} != None else {pythonize_name(arg['name'])}._ptr, " # Todo: implement conditional
+            res += f"{pythonize_name(arg['name'])}._ptr, " # Todo: implement conditional
         elif untypearray(arg["type"]) in builtin_classes - IGNORED_CLASSES:
             if arg["type"] == "String":
                 if is_property_setter(class_, method["name"]):
@@ -995,7 +995,7 @@ def generate_member_getter(class_, member):
 
     body = ""
     if member.type_ in builtin_classes - {"float", "int", "bool"}:
-        body += f"{INDENT * 2}_ret = {class_}.construct_without_init()"
+        body += f"{INDENT * 2}_ret = {member.type_}.construct_without_init()"
         body = generate_newline(body)
         body += f"{INDENT * 2}_ret._ptr = self._ptr.call_with_return({method_ids["normal_methods"][class_]["get_member_"+member.name]}, tuple())"
         body = generate_newline(body)
@@ -1549,6 +1549,9 @@ def generate_classes(classes, filename, is_core=False, is_typed_array=False):
             res = generate_newline(res)
 
     elif not is_core:
+        if not "Object" in [cls["name"] for cls in classes]:
+            res += "import py4godot.classes as classes"
+            res = generate_newline(res)
         res += f"import py4godot.signals as signals"
         res = generate_newline(res)
         res = generate_newline(res)
@@ -1837,7 +1840,7 @@ def generate_cast(class_):
 
 def generate_type_assertion(arg_name,type_):
     res = ""
-    type_ = unenumize_type(untypearray(type_))
+    type_ = unenumize_type(untypearray(undouble_type(type_)))
     if type_ in ("int", "float"):
         res += f"assert isinstance({arg_name}, (int, float)), '{arg_name} must be int or float'"
     elif type_ == "String":

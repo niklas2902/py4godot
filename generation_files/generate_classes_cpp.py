@@ -507,7 +507,7 @@ def generate_singleton_constructor(classname):
     res = generate_newline(res)
     res += f"{INDENT * 2}GDExtensionObjectPtr object = functions::get_global_get_singleton()(&class_name.godot_owner);"
     res = generate_newline(res)
-    res += f"{INDENT * 2}singleton.set_godot_owner(object);"
+    res += f"{INDENT * 2}singleton.godot_owner = object;"
     res = generate_newline(res)
     res += f"{INDENT * 2}return std::make_shared<{classname}>(singleton);"
     res = generate_newline(res)
@@ -1253,6 +1253,7 @@ def generate_common_methods(class_):
     return result
 
 def extract_arg(type_, index):
+    type_ = untypearray(unenumize_type(type_))
     if type_ in classes or "typedarray" in type_.lower():
         return f"wrapper__extract_ptr_from_{untypearray(type_)}Wrapper(PyTuple_GetItem(args_tuple, {index})) "
     elif type_ == "int":
@@ -1264,6 +1265,7 @@ def extract_arg(type_, index):
     return f"PyTuple_GetItem(args_tuple, {index}) "
 
 def extract_arg_operator(type_):
+    type_ = untypearray(unenumize_type(type_))
     if type_ in classes or "typedarray" in type_.lower():
         return f"wrapper__extract_ptr_from_{untypearray(type_)}Wrapper(wrapper__extract_ptr_from_py_object(other)) "
     elif type_ == "int":
@@ -1300,7 +1302,10 @@ def collect_methods(class_, static_methods):
 def generate_varargs(method):
     res = ""
     if method["is_vararg"]:
-        res += f"for(int i= 0; i< (int)PyTuple_Size(args_tuple);i++)varargs.push_back(PyTuple_GetItem(args_tuple, i));"
+        number_arguments = 0
+        if "arguments" in method:
+            number_arguments = len(method["arguments"])
+        res += f"for(int i= {number_arguments}; i< (int)PyTuple_Size(args_tuple);i++)varargs.push_back(PyTuple_GetItem(args_tuple, i));"
     return res
 
 def generate_switch_methods(class_):
@@ -1863,7 +1868,7 @@ def generate_constructor(classname):
     res += f"{INDENT * 2}class_name.shouldBeDeleted = true;"
     res = generate_newline(res)
 
-    res += f"{INDENT * 2}class_.set_godot_owner(functions::get_classdb_construct_object()(&class_name.godot_owner));"
+    res += f"{INDENT * 2}class_.godot_owner = functions::get_classdb_construct_object()(&class_name.godot_owner);"
     res = generate_newline(res)
     res += f"{INDENT * 2}return std::make_shared<{classname}>(class_);"
     res = generate_newline(res)

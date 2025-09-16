@@ -35,7 +35,6 @@ class GDSignal(Signal):
 
         cdef object _class = GDSignal()
         _class._ptr = Signal.new1(from_)._ptr
-        #TODO
         return _class
     @staticmethod
     def new2(object object_, object signal):
@@ -43,9 +42,9 @@ class GDSignal(Signal):
         assert(not signal is None)
 
         cdef object _class = GDSignal()
+        _class.my_signal = Signal.new2(object_, signal)
 
-        _class._ptr = Signal.new2(object_, signal)._ptr
-        #TODO
+        _class._ptr = _class.my_signal._ptr
         return _class
 
     def __init__(self, *args):
@@ -53,19 +52,19 @@ class GDSignal(Signal):
     def connect(self, object function , int flags =0):
         cdef str function_name = function.__name__
         cdef object parent = (function.__self__ if hasattr(function, '__self__') else None)
-        parent.get_class()
         cdef bytes b_function_name = function_name.encode("utf-8")
         cdef char* c_function_name = b_function_name
         # Don't use StringName::new2 here. Somehow it results in an empty string
         cdef object gd_function_name = py_c_string_to_string_name(c_function_name)
         cdef object callable = Callable.new2(parent, gd_function_name )
+        callables.append(callable)
+        callables.append(gd_function_name)
         super().connect(callable)
 
 
     def disconnect(self, object function ):
         cdef str function_name = function.__name__
         cdef object parent =  (function.__self__ if hasattr(function, '__self__') else None)
-        parent.get_class()
         cdef bytes b_function_name = function_name.encode("utf-8")
         cdef char* c_function_name = b_function_name
         # Don't use StringName::new2 here. Somehow it results in an empty string
