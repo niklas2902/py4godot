@@ -703,7 +703,7 @@ def generate_method_body_standard(class_, method):
         if not is_static(method):
             result += f"{INDENT * 2}{generate_ret_call(method)} = self._ptr.call_with_return({method_ids['normal_methods'][class_['name']][method['name']]},tuple([{generate_method_args(class_, method)}]))"
         else:
-            result += f"{INDENT * 2}{generate_ret_call(method)} = static_method({method_ids['static_methods'][class_['name']][method['name']]},tuple([{generate_method_args(class_, method)}]))"
+            result += f"{INDENT * 2}{generate_ret_call(method)} = static_method({classes_dict[class_['name']]},{method_ids['static_methods'][class_['name']][method['name']]},tuple([{generate_method_args(class_, method)}]))"
         result = generate_newline(result)
 
         if is_property_getter(class_, method["name"]):
@@ -720,7 +720,7 @@ def generate_method_body_standard(class_, method):
         if not is_static(method):
             result += f"{INDENT * 2}self._ptr.call_with_return({method_ids['normal_methods'][class_['name']][method['name']]},tuple([{generate_method_args(class_, method)}]))"
         else:
-            result += f"{INDENT * 2}static_method({method_ids['static_methods'][class_['name']][method['name']]},tuple([{generate_method_args(class_, method)}]))"
+            result += f"{INDENT * 2}static_method({classes_dict[class_['name']]},{method_ids['static_methods'][class_['name']][method['name']]},tuple([{generate_method_args(class_, method)}]))"
     return result
 
 def shared_ptr_type(classname):
@@ -1812,7 +1812,9 @@ def generate_cast(class_):
     res = generate_newline(res)
     res += f"{INDENT * 2}assert other != None # Object to be casted must not be None"
     res = generate_newline(res)
-    res += f"{INDENT * 2}cls = {class_['name']}.constructor()"
+    res += f"{INDENT * 2}cls = {class_['name']}.construct_without_init()"
+    res = generate_newline(res)
+    res += f"{INDENT * 2}cls._ptr = CPP{class_['name']}Wrapper()"
     res = generate_newline(res)
     res += f"{INDENT * 2}cls._ptr_before = other._ptr # Save pointer"
     res = generate_newline(res)
@@ -1833,7 +1835,11 @@ def generate_cast(class_):
     res = generate_newline(res)
     res += f"{INDENT * 2}cls = {class_['name']}.construct_without_init()"
     res = generate_newline(res)
-    res += f"{INDENT * 2}cls._ptr = other._ptr"
+    res += f"{INDENT * 2}cls._ptr = CPP{class_['name']}Wrapper()"
+    res = generate_newline(res)
+    res += f"{INDENT * 2}cls._ptr_before = other._ptr # Save pointer"
+    res = generate_newline(res)
+    res += f"{INDENT * 2}cls._ptr.copy_gdowner(cls._ptr_before)"
     res = generate_newline(res)
     res += f"{INDENT * 2}return cls"
     return res
