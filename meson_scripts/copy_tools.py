@@ -14,14 +14,14 @@ def strip_platform(text):
 
 
 def run(platform):
-    # copying all the files from build to the folder of the addon
+    # copying all the files from build to the folder of the add-on
     list_dll = []
     if "windows" in platform:
-        list_dll = glob.glob("**/*.dll", recursive=True)
+        list_dll = list(filter(lambda pathname: not (pathname.endswith("main.dll") or pathname.endswith("pythonscript.dll")),glob.glob("**/*.dll", recursive=True)))
     elif "linux" in platform:
-        list_dll = glob.glob("**/*.so", recursive=True)
+        list_dll = list(filter(lambda pathname: not (pathname.endswith("main.so") or pathname.endswith("pythonscript.so")),glob.glob("**/*.so", recursive=True)))
     elif "darwin" in platform:
-        list_dll = glob.glob("**/*.dylib", recursive=True)
+        list_dll = list(filter(lambda pathname: not (pathname.endswith("main.dylib") or pathname.endswith("pythonscript.dylib")),glob.glob("**/*.dylib", recursive=True)))
     for entry in list_dll:
         if "cpython" in entry:
             continue
@@ -168,9 +168,9 @@ def copy_experimental(platform):
     for file in ["py4godot/pluginscript_api/utils/experimental.py",
                  "py4godot/pluginscript_api/utils/annotation_tools.py",
                  "py4godot/utils/smart_cast.py",
-                 "py4godot/classes/__init__.py",
                  "py4godot/methods.py",
                  "py4godot/singletons.py",
+                 "py4godot/constants.py",
                  "py4godot/properties.py",
                  "py4godot/utils/functools.py"]:
         if "windows" in platform:
@@ -179,6 +179,15 @@ def copy_experimental(platform):
         else:
             copy(file,
              f"build/final/{platform}/{python_ver}-{platform}/python/lib/{python_ver_short}/site-packages/" + file)
+    if "windows" in platform:
+        copytree("py4godot/classes",
+                 f"build/final/{platform}/{python_ver}-{platform}/python/Lib/site-packages/py4godot/classes",
+                 dirs_exist_ok=True, ignore=shutil.ignore_patterns("cpp_bridge.pxd"))
+    else:
+        copytree("py4godot/classes",
+                 f"build/final/{platform}/{python_ver}-{platform}/python/lib/{python_ver_short}/site-packages/py4godot/classes",
+                 dirs_exist_ok=True, ignore=shutil.ignore_patterns("cpp_bridge.pxd"))
+
 
 
 def onerror(func, path, exc_info):

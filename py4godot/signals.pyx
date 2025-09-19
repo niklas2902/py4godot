@@ -1,7 +1,9 @@
 # distutils: language=c++
 import inspect
-from py4godot.classes.core cimport *
 from libcpp.memory cimport make_shared
+
+import py4godot.classes.Object as obj
+from py4godot.classes.core import Callable, Signal
 from py4godot.utils.utils cimport *
 import py4godot.pluginscript_api.utils.annotations as annotations
 from py4godot.pluginscript_api.utils.helpers cimport get_variant_type
@@ -21,110 +23,110 @@ def signal(list args = []):
 
 
 callables = []
-cdef class GDSignal(Signal):
+class GDSignal(Signal):
     @staticmethod
     def new0():
-        cdef GDSignal _class = GDSignal.__new__(GDSignal)
-        _class.Signal_internal_class_ptr = (CPPSignal.py_new0())
+        cdef object _class = GDSignal()
+        _class._ptr = Signal.new0()._ptr
         return _class
     @staticmethod
-    def new1(Signal from_):
+    def new1(object from_):
         assert(not from_ is None)
 
-        cdef GDSignal _class = GDSignal.__new__(GDSignal)
-        _class.Signal_internal_class_ptr = (CPPSignal.py_new1(from_.Signal_internal_class_ptr))
+        cdef object _class = GDSignal()
+        _class._ptr = Signal.new1(from_)._ptr
         return _class
     @staticmethod
-    def new2(Object object_, StringName signal):
+    def new2(object object_, object signal):
         assert(not object_ is None)
         assert(not signal is None)
 
-        cdef GDSignal _class = GDSignal.__new__(GDSignal)
-        _class.Signal_internal_class_ptr = (CPPSignal.py_new2(object_.Object_internal_class_ptr, signal.StringName_internal_class_ptr))
+        cdef object _class = GDSignal()
+        _class.my_signal = Signal.new2(object_, signal)
+
+        _class._ptr = _class.my_signal._ptr
         return _class
 
     def __init__(self, *args):
-        self = GDSignal.new0()
-    def __cinit__(self):
-        self.Signal_internal_class_ptr = make_shared[CPPSignal]()
-
+        super().__init__()
     def connect(self, object function , int flags =0):
         cdef str function_name = function.__name__
-        cdef Object parent = <Object> (function.__self__ if hasattr(function, '__self__') else None)
-        parent.get_class()
+        cdef object parent = (function.__self__ if hasattr(function, '__self__') else None)
         cdef bytes b_function_name = function_name.encode("utf-8")
         cdef char* c_function_name = b_function_name
         # Don't use StringName::new2 here. Somehow it results in an empty string
-        cdef StringName gd_function_name = py_c_string_to_string_name(c_function_name)
-        cdef Callable callable = Callable.new2(parent, gd_function_name )
+        cdef object gd_function_name = py_c_string_to_string_name(c_function_name)
+        cdef object callable = Callable.new2(parent, gd_function_name )
+        callables.append(callable)
+        callables.append(gd_function_name)
         super().connect(callable)
 
 
     def disconnect(self, object function ):
         cdef str function_name = function.__name__
-        cdef Object parent = <Object> (function.__self__ if hasattr(function, '__self__') else None)
-        parent.get_class()
+        cdef object parent =  (function.__self__ if hasattr(function, '__self__') else None)
         cdef bytes b_function_name = function_name.encode("utf-8")
         cdef char* c_function_name = b_function_name
         # Don't use StringName::new2 here. Somehow it results in an empty string
-        cdef StringName gd_function_name = py_c_string_to_string_name(c_function_name)
-        cdef Callable callable = Callable.new2(parent, gd_function_name )
+        cdef object gd_function_name = py_c_string_to_string_name(c_function_name)
+        cdef object callable = Callable.new2(parent, gd_function_name )
         super().disconnect(callable)
 
 
 
-cdef class BuiltinSignal(Signal):
+class BuiltinSignal(Signal):
     def __init__(self, parent, name):
-        self.parent_ptr = (<Object>parent).Object_internal_class_ptr
-        self.signal_name = <StringName> name
+        super().__init__()
+        self._parent = parent
+        self.signal_name =  name
 
     def connect(self, object function , int flags =0):
         cdef str function_name = function.__name__
-        cdef Object parent = <Object> (function.__self__ if hasattr(function, '__self__') else None)
+        cdef object parent = function.__self__ if hasattr(function, '__self__') else None
         cdef bytes b_function_name = function_name.encode("utf-8")
         cdef char* c_function_name = b_function_name
-        cdef StringName gd_function_name = py_c_string_to_string_name(c_function_name)
-        cdef Callable callable = Callable.new2(parent, gd_function_name )
+        cdef object gd_function_name = py_c_string_to_string_name(c_function_name)
+        cdef object callable = Callable.new2(parent, gd_function_name )
         self.parent().connect(self.signal_name, callable)
 
     def parent(self):
-        cdef Object o = Object.__new__(Object)
-        o.Object_internal_class_ptr = self.parent_ptr
+        cdef object o = obj.Object.construct_without_init()
+        o._ptr = self._parent._ptr
         return o
 
 
     def disconnect(self, object function ):
         cdef str function_name = function.__name__
-        cdef Object parent = <Object> (function.__self__ if hasattr(function, '__self__') else None)
+        cdef object parent = function.__self__ if hasattr(function, '__self__') else None
         parent.get_class()
         cdef bytes b_function_name = function_name.encode("utf-8")
         cdef char* c_function_name = b_function_name
         # Don't use StringName::new2 here. Somehow it results in an empty string
-        cdef StringName gd_function_name = py_c_string_to_string_name(c_function_name)
-        cdef Callable callable = Callable.new2(parent, gd_function_name )
+        cdef object gd_function_name = py_c_string_to_string_name(c_function_name)
+        cdef object callable = Callable.new2(parent, gd_function_name )
         self.parent().disconnect(self.signal_name, callable)
 
     def is_null(self):
-        proxy_signal = Signal.new2(<Object>self.parent(), self.signal_name)
+        proxy_signal = Signal.new2(self.parent(), self.signal_name)
         return proxy_signal.is_null()
 
     def get_object(self):
         return self.parent()
     def get_object_id(self):
-        return (<Object>self.parent()).get_instance_id()
+        return self.parent().get_instance_id()
 
     def get_name(self):
         return self.signal_name
 
-    def is_connected(self, Callable callable ):
+    def is_connected(self, object callable ):
         return self.parent().is_connected(self.signal_name, callable)
 
     def get_connections(self):
         return self.get_signal_connection_list(self.signal_name)
 
     def __eq__(self, other):
-        proxy_signal = Signal.new2(<Object>self.parent(), self.signal_name)
+        proxy_signal = Signal.new2(self.parent(), self.signal_name)
         return proxy_signal.__eq__(other)
     def __ne__(self, other):
-        proxy_signal = Signal.new2(<Object>self.parent(), self.signal_name)
+        proxy_signal = Signal.new2(self.parent(), self.signal_name)
         return proxy_signal.__ne__(other)

@@ -4,6 +4,7 @@
 #include "Python.h"
 #include "functions.h"
 #include "py4godot/cppclasses/Engine/Engine.h"
+#include "py4godot/wrappers/wrappers_wrapper.h"
 #include <memory>
 #include <stdlib.h>
 #include <string>
@@ -108,11 +109,12 @@ static void c_string_to_string_name_void(const char* string, void** stringname){
     constructor(*stringname,_args);
 }
 
-static std::shared_ptr<StringName> c_string_to_string_name_ptr(const char* string){
+static PyObject* c_string_to_string_name_ptr(const char* string){
     std::shared_ptr<String> gd_string = std::make_shared<String>(String::new0());
     functions::get_string_new_with_utf8_chars()(&gd_string->godot_owner, string);
     std::shared_ptr<StringName> gd_string_name = std::make_shared<StringName>(StringName::new2(*gd_string));
-    return gd_string_name;
+
+    return wrapper__create_wrapper_from_StringName_ptr(gd_string_name);
 }
 static String c_string_to_string(const char* string){
     String gd_string = String::new0();
@@ -120,14 +122,34 @@ static String c_string_to_string(const char* string){
     return gd_string;
 }
 
-static std::shared_ptr<String> c_string_to_string_ptr(const char* string){
+static PyObject* c_string_to_string_ptr(const char* string){
     std::shared_ptr<String> gd_string = String::py_new0();
     functions::get_string_new_with_utf8_chars()(&gd_string->godot_owner, string);
-    return gd_string;
+    return wrapper__create_wrapper_from_String_ptr(gd_string);
 }
 
+static PyObject* py_string_to_string_ptr(PyObject* o) {
+    if (!PyUnicode_Check(o)) {
+        PyErr_SetString(PyExc_TypeError, "Expected a Python string");
+        return NULL;
+    }
+
+    Py_ssize_t size;
+    const char* py_str = PyUnicode_AsUTF8AndSize(o, &size);
+    if (!py_str) {
+        return NULL; // error already set
+    }
+
+    // Create your Godot String using the malloc'ed copy
+    std::shared_ptr<String> gd_string = String::py_new0();
+    functions::get_string_new_with_utf8_chars()(&gd_string->godot_owner, py_str);
+
+    return wrapper__create_wrapper_from_String_ptr(gd_string);
+}
+
+
 static void c_string_to_string_result(const char* string, void** string_ptr){
-functions::get_string_new_with_utf8_chars()(string_ptr, string);
+    functions::get_string_new_with_utf8_chars()(string_ptr, string);
 }
 
 static void add_string_to_array(GDExtensionTypePtr array, String& string){
@@ -226,4 +248,8 @@ static std::string get_python_typename(PyObject* get_val) {
 
 static std::shared_ptr<godot::Dictionary> empty_dictionary_pointer(){
     return std::shared_ptr<Dictionary>();
+}
+
+static std::shared_ptr<godot::StringName> create_string_name_from_ptr(void* godot_owner){
+    return std::make_shared<godot::StringName>(godot::StringName::new_static(godot_owner));
 }

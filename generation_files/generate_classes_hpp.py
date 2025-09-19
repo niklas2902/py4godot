@@ -104,7 +104,7 @@ def generate_constructor_args(constructor, should_make_shared = False):
     for arg in constructor["arguments"]:
         if not arg["type"].startswith("enum::"):
             if should_make_shared:
-                result += f"{make_ptr(ungodottype(untypearray(unbitfield_type(arg['type']))))}{ref(arg['type'])} {pythonize_name(arg['name'])}, "
+                result += f"{make_ptr(ungodottype(untypearray(unbitfield_type(arg['type']))))}  {pythonize_name(arg['name'])}, "
             else:
                 result += f"{ungodottype(untypearray(unbitfield_type(arg['type'])))}{ref(arg['type'])} {pythonize_name(arg['name'])}, "
         else:
@@ -383,8 +383,22 @@ def generate_common_methods(class_):
     result = generate_newline(result)
     result += generate_set_owner(class_)
     result = generate_newline(result)
+    result += generate_switch_methods()
+    result = generate_newline(result)
     return result
 
+def generate_switch_methods():
+    res = ""
+    res += f"{INDENT}virtual void switch_call(int method_hash, PyObject* args_tuple);"
+    res = generate_newline(res)
+    res += f"{INDENT}virtual PyObject* switch_call_return(int method_hash, PyObject* args_tuple);"
+    res = generate_newline(res)
+    res += f"{INDENT}static PyObject* call_constructor(int constructor_id, PyObject* args_tuple);"
+    res = generate_newline(res)
+
+    res += f"{INDENT}static PyObject* call_static_method_with_return(int method_hash, PyObject* args_tuple);"
+    res = generate_newline(res)
+    return res
 
 def generate_enums(class_):
     if not "enums" in class_.keys():
@@ -415,7 +429,7 @@ def generate_member_setter(class_, member):
     res = ""
     res += f"{INDENT}void member_set_{member.name}({member.type_}& value);"
     res = generate_newline(res)
-    res += f"{INDENT}void py_member_set_{member.name}({make_ptr(member.type_)}& value);"
+    res += f"{INDENT}void py_member_set_{member.name}({make_ptr(member.type_)} value);"
     return res
 
 
@@ -694,11 +708,13 @@ def generate_operators_for_class(class_name):
             if operator in operator_to_method.keys():
                 op = operator_dict[get_class_name(class_name)][operator]
                 if op.right_type_values:
+                    res += f"{INDENT}PyObject* wrap_operator_{operator_to_python_name(operator)} (PyObject* other);"
+                    res = generate_newline(res)
                     for right_type in op.right_type_values:
                         res += f"{INDENT}{op.return_type} operator {operator} ({ungodottype(right_type)}{generate_reference(right_type)} other);"
                         res = generate_newline(res)
 
-                        res += f"{INDENT}{make_ptr(op.return_type)} py_operator_{operator_to_python_name(operator)} ({make_ptr(ungodottype(right_type))}{generate_reference(right_type)} other);"
+                        res += f"{INDENT}{make_ptr(op.return_type)} py_operator_{operator_to_python_name(operator)} ({make_ptr(ungodottype(right_type))} other);"
                         res = generate_newline(res)
     res = generate_newline(res)
     return res
@@ -788,6 +804,11 @@ def generate_dictionary_set_item():
     res = ""
     res += f"{INDENT}Variant operator [](Variant key);"
     res = generate_newline(res)
+    res = generate_newline(res)
+    res += f"{INDENT}PyObject* py_getitem(PyObject* key);"
+    res = generate_newline(res)
+    res += f"{INDENT}void py_setitem(PyObject* key, PyObject* value);"
+    res = generate_newline(res)
     return res
 
 
@@ -836,6 +857,12 @@ def generate_special_methods_object():
 def generate_special_methods_array(class_):
     res = ""
     res += generate_array_set_item(class_)
+    res = generate_newline(res)
+    res += f"{INDENT}PyObject* py_getitem(int index);"
+    res = generate_newline(res)
+    res += f"{INDENT}void py_setitem(int index,PyObject* value);"
+    res = generate_newline(res)
+
     return res
 
 
@@ -855,6 +882,8 @@ def generate_cast(class_):
 def generate_array_methods(class_):
     res = ""
     if class_["name"] in ("PackedInt32Array", "PackedInt64Array", "PackedFloat32Array", "PackedFloat64Array", "PackedByteArray"):
+        res += f"{INDENT * 1}PyObject* py_get_memory_view();"
+        res = generate_newline(res)
         if class_["name"] == "PackedFloat32Array":
             res += f"{INDENT*1}std::vector<float> to_vector();"
             res = generate_newline(res)

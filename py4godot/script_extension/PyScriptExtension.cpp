@@ -6,6 +6,8 @@
 #include "py4godot/cppclasses/Engine/Engine.h"
 #include "py4godot/cppcore/Variant.h"
 #include "py4godot/pluginscript_api/api.h"
+#include "py4godot/wrappers/wrappers_wrapper.h"
+#include "py4godot/wrappers/type_checking_wrapper.h"
 #include "py4godot/script_instance/instance.h"
 #include "py4godot/pluginscript_api/utils/annotations_api.h"
 #include "py4godot/pluginscript_api/utils/forward_print_api.h"
@@ -180,6 +182,27 @@ void init_pluginscript_api(){
         return;
     }
 
+
+    init_wrappers();
+    if (PyErr_Occurred())
+    {
+        PyObject* ptype, * pvalue, * ptraceback;
+        PyErr_Fetch(&ptype, &pvalue, &ptraceback);
+        handle_python_error(ptype, pvalue, ptraceback);
+        assert(false);
+        return;
+    }
+    init_type_checking();
+    if (PyErr_Occurred())
+    {
+        PyObject* ptype, * pvalue, * ptraceback;
+        PyErr_Fetch(&ptype, &pvalue, &ptraceback);
+        handle_python_error(ptype, pvalue, ptraceback);
+        assert(false);
+        return;
+    }
+
+
     Variant::init_variant();
     forward_print();
 
@@ -219,6 +242,7 @@ bool string_names_equal_script(StringName& left, StringName& right){
   PyScriptExtension* PyScriptExtension::constructor(PyLanguage* language){
     print_error("_constructor");
     PyScriptExtension* class_ = new PyScriptExtension();
+    class_->initialized = true;
 
     StringName class_name = c_string_to_string_name("PyScriptExtension");
     class_name.shouldBeDeleted = true;
@@ -269,14 +293,13 @@ void PyScriptExtension::_get_class_item_path(GDExtensionTypePtr res){
    }
 }
 
+void PyScriptExtension::set_path_internal(std::string path)  {
+    string_path = path;
+}
+
 
 std::string PyScriptExtension::path_as_string(){
-    auto path = get_path();
-    char* path_as_c_string;
-    gd_string_to_c_string( &path.godot_owner, path.length(), &path_as_c_string);
-    std::string path_string = std::string{path_as_c_string};
-    free(path_as_c_string);
-    return path_string;
+    return string_path;
 }
 
 void  PyScriptExtension::_get_base_script(GDExtensionTypePtr res){

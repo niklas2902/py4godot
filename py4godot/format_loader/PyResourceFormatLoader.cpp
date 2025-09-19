@@ -115,8 +115,13 @@ void PyResourceFormatLoader::_get_classes_used( String& path, GDExtensionTypePtr
     print_error("_get_classes_used");
 }
 void PyResourceFormatLoader::_load( String& path, String& original_path, bool use_sub_threads, int cache_mode, GDExtensionTypePtr res){
+    //LOCK(mtx);
+
     print_error("_load");
     GDExtensionVariantFromTypeConstructorFunc constructor_func;
+    char* c_path;
+    gd_string_to_c_string(&path.godot_owner, path.length(), &c_path);
+
     FileAccess file;
     {
         file = FileAccess::open(path, 1/*Read*/);
@@ -124,28 +129,16 @@ void PyResourceFormatLoader::_load( String& path, String& original_path, bool us
             return;
         }
     }
-
     auto source_code = file.get_as_text(false);
     source_code.shouldBeDeleted = false;
     functions::get_object_destroy()(file.godot_owner);
 
-    char* c_path;
-    gd_string_to_c_string(&path.godot_owner, path.length(), &c_path);
-
     PyScriptExtension* script_extension = nullptr;
     auto string_path = std::string{c_path};
-    if(path_to_script_extension.find(string_path) == path_to_script_extension.end()){
-        script_extension = PyScriptExtension::constructor(lang);
-        path_to_script_extension[string_path] = script_extension;
+    script_extension = PyScriptExtension::constructor(lang);
+    path_to_script_extension[string_path] = script_extension;
 
-    }
-    else{
-        path_to_script_extension[string_path]->_set_source_code_internal(source_code);
-        constructor_func = functions::get_get_variant_from_type_constructor()(GDExtensionVariantType::GDEXTENSION_VARIANT_TYPE_OBJECT);
-        constructor_func(res,&path_to_script_extension[string_path]->godot_owner);
-        return;
-    }
-    script_extension->set_path(path);
+    script_extension->set_path_internal(string_path);
     script_extension ->_set_source_code_internal(source_code);
 
     constructor_func = functions::get_get_variant_from_type_constructor()(GDExtensionVariantType::GDEXTENSION_VARIANT_TYPE_OBJECT);

@@ -2,11 +2,10 @@
 from py4godot.hints.BaseHint cimport *
 from py4godot.pluginscript_api.utils.helpers cimport *
 from py4godot.godot_bindings.binding4_godot4 cimport *
-from py4godot.classes.Object cimport *
 from py4godot.utils.utils cimport *
 from py4godot.pluginscript_api.utils.utils cimport *
-from py4godot.classes.core cimport *
-cimport py4godot.classes.cpp_bridge as bridge
+
+from py4godot.wrappers.wrappers cimport extract_ptr_from_StringNameWrapper, extract_ptr_from_StringWrapper
 
 cdef class PropertyDescription:
     """"Description class for the properties, a gdclass can have and which can be found in the editor"""
@@ -15,10 +14,13 @@ cdef class PropertyDescription:
         self.bname = self.name.encode("utf-8")
         self.cname = self.bname
         self.gd_name = py_c_string_to_string_name(self.cname)
-
+        self.gd_name.shouldBeDeleted=False
+        self.class_name = py_string_to_string_name("")#TODO minimize
+        self.class_name.shouldBeDeleted = False
         self.type_ = get_variant_type(type_)
         self.hint = hint.get_hint()
         self.hint_string = py_c_string_to_string(hint.get_string().encode("utf-8"))
+        self.hint_string.shouldBeDeleted = False
         self.usage = usage
         self.default_value = convert_val(default_value)
 
@@ -30,10 +32,10 @@ cdef class PropertyDescription:
 
     cdef void to_c(self):
         self.property_description = init_property_description( self.type_,
-                                self.gd_name.StringName_internal_class_ptr.get()[0],
-                                self.class_name.StringName_internal_class_ptr.get()[0],
+                                extract_ptr_from_StringNameWrapper(self.gd_name._ptr).get()[0],
+                                extract_ptr_from_StringNameWrapper(self.class_name._ptr).get()[0],
                                 self.hint,
-                                self.hint_string.String_internal_class_ptr.get()[0],
+                                extract_ptr_from_StringWrapper(self.hint_string._ptr).get()[0],
                                 self.usage)
 
 

@@ -1,6 +1,5 @@
 # distutils: language=c++
 from py4godot.pluginscript_api.utils.utils cimport *
-from py4godot.classes.core cimport Dictionary, String, StringName
 from libcpp.vector cimport vector
 from py4godot.signals cimport SignalArg
 from py4godot.utils.print_tools import print_error as pe

@@ -1,18 +1,57 @@
-import argparse
-import meson_scripts.cythonize_files.cythonize_files as full_cythonize
-import meson_scripts.cythonize_files.dev_cythonize_files as dev_cythonize
-import meson_scripts.cythonize_files.cache_hit_cythonize as cache_cythonize
-if __name__ == "__main__":
-    my_parser = argparse.ArgumentParser(fromfile_prefix_chars='@')
-    my_parser.add_argument('-mode', default="release",
-                           help='Sepcify whether you want to turn all files to c++ files (release) or only a smaller portion (dev).'
-                                'This impacts mainly the speed')
-    # Execute parse_args()
-    args = my_parser.parse_args()
+import os
+import glob
+import time
 
-    if args.mode == "release":
-        full_cythonize.main()
-    elif args.mode == "dev":
-        dev_cythonize.main()
-    elif args.mode == "cache":
-        cache_cythonize.main()
+from Cython.Build import cythonize
+from tqdm import tqdm
+
+from meson_scripts.get_dependencies_for_classes import generate_dev_build
+
+NTHREADS = 3  # Adjust based on your CPU
+BATCH_SIZE = 3  # Adjust based on your system's capabilities
+
+def cythonize_batch(filenames):
+    start_time = time.time()
+    cythonize(filenames, language_level=3, nthreads=NTHREADS, annotate=True, cache=False)
+    end_time = time.time()
+    print("Total time elapsed for batch: {:.2f}".format(end_time - start_time))
+
+def main():
+    file_patterns = [
+        "py4godot/functions.pyx",
+        "py4godot/signals.pyx",
+        "py4godot/core/variant4/Variant4.pyx",
+        "py4godot/core/variant4/type_helpers.pyx",
+        "py4godot/core/variant4/cast_helpers.pyx",
+        "py4godot/script_instance/*.pyx",
+        "py4godot/script_extension/script_extension_helpers.pyx",
+        "py4godot/constants.pyx",
+        "py4godot/enums/enums.pyx",
+        "py4godot/utils/utils.pyx",
+        "py4godot/utils/instance_utils.pyx",
+        "py4godot/utils/print_tools.pyx",
+        "py4godot/instance_data/InstanceData.pyx",
+        "py4godot/hints/*.pyx",
+        "py4godot/pluginscript_api/utils/*.pyx",
+        "py4godot/godot_bindings/binding4_godot4.pyx",
+        "py4godot/wrappers/wrappers.pyx",
+        "py4godot/wrappers/type_checking.pyx",
+        "py4godot/utils/CPPWrapper.pyx"
+
+    ]
+
+    files_to_cythonize = []
+    for pattern in file_patterns:
+        files_to_cythonize.extend(glob.glob(pattern, recursive=True))
+
+    total_files = len(files_to_cythonize)
+
+    for i in tqdm(range(0, total_files, BATCH_SIZE), desc="Total progress:", smoothing=0.8):
+        batch = files_to_cythonize[i:i+BATCH_SIZE]
+        cythonize_batch(batch)
+        print("##############################")
+
+    print(f"Compiled {total_files} files")
+
+if __name__ == "__main__":
+    main()

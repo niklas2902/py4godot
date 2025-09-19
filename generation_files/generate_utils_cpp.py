@@ -81,6 +81,7 @@ def generate_import():
 #include "py4godot/cppclasses/utils.h"
 #include "py4godot/godot_bindings/main.h"
 #include <stdlib.h>
+#include "py4godot/wrappers/wrappers_wrapper.h"
     '''
     return res
 
@@ -232,9 +233,9 @@ def generate_return_statement(method_):
 
 def generate_ret_ptr(type_, _ret_name = "_ret"):
     if type_ in builtin_classes - {"int", "float", "bool", "Nil"}:
-        return f"std::make_shared<{type_}>({_ret_name})"
+        return f"wrapper__create_wrapper_from_{type_}_ptr(std::make_shared<{type_}>({_ret_name}))"
     if type_ in classes:
-        return f"std::make_shared<{type_}>({_ret_name})"
+        return f"wrapper__create_wrapper_from_{type_}_ptr(std::make_shared<{type_}>({_ret_name}))"
     return _ret_name
 def generate_return_py_statement(method_):
     # TODO handle primitive types
@@ -445,7 +446,10 @@ def generate_args_for_call(method_with_args, is_cpp=False):
         return result[:-2]
 
     for arg in method_with_args["arguments"]:
-        result += f"{unref_pointer(pythonize_name(arg['type']), pythonize_name(arg['name']))}, "
+        if arg["type"] in builtin_classes - {"float", "int", "bool"} or arg["type"] in classes:
+            return f"*wrapper__extract_ptr_from_{arg['type']}Wrapper({arg['name']})"
+        else:
+            result += f"{unref_pointer(pythonize_name(arg['type']), pythonize_name(arg['name']))}, "
     result = result[:-2]
 
     if method_with_args["is_vararg"]:
@@ -500,9 +504,9 @@ def unvarianttype(type_):
 
 def make_ptr(type_):
     if type_ in builtin_classes - {"int", "float", "bool", "Nil"}:
-        return f"std::shared_ptr<{type_}>"
+        return f"PyObject*"
     if type_ in classes:
-        return f"std::shared_ptr<{type_}>"
+        return f"PyObject*"
     return type_
 def generate_args(method_with_args, builtin_classes, is_cpp=False, should_make_shared=False):
     result = " "

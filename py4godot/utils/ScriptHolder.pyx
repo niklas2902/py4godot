@@ -1,6 +1,4 @@
 # distutils: language=c++
-from py4godot.classes.Object.Object cimport *
-
 cdef ScriptHolder _script_holder = ScriptHolder()
 
 cdef class ScriptHolder:

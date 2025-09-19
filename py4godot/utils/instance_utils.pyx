@@ -1,10 +1,14 @@
 # distutils: language=c++
-from py4godot.classes.Object cimport *
 from py4godot.utils.print_tools import *
-
+from py4godot.wrappers.wrappers cimport extract_ptr_from_ObjectWrapper
+from py4godot.utils.CPPWrapper cimport CPPWrapper
 cdef api void set_owner(object o, void* owner):
+    cdef CPPWrapper cppwrapper
     try:
-        (<Object>o).set_gdowner(owner)
+        cppwrapper = <CPPWrapper>o._ptr
+        cppwrapper.set_gdowner(owner)
+
+        #extract_ptr_from_ObjectWrapper(o._ptr).get().set_godot_owner(owner)
     except Exception as e:
         print_error_detailed('instance_utils.pyx', 'set_owner', 9, "Exception:", e) # !this gets generated print_error
 

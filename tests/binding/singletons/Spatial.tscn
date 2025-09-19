@@ -1,13 +1,18 @@
-[gd_scene load_steps=3 format=3 uid="uid://bx11ebu3iwgdm"]
+[gd_scene load_steps=2 format=3 uid="uid://bx11ebu3iwgdm"]
 
-[ext_resource type="Script" path="res://TestRunner.py" id="2"]
-[ext_resource type="Script" path="res://TestObject.py" id="2_hkbyt"]
+[ext_resource type="Script" path="res://TestRunner.py" id="1_gpild"]
 
 [node name="Node3D" type="Node3D"]
 
 [node name="TestRunner" type="Node3D" parent="."]
-script = ExtResource("2")
-test_object_path = NodePath("../TestObject")
+_import_path = NodePath("")
+process_mode = 0
+process_physics_priority = 0
+physics_interpolation_mode = 0
+editor_description = ""
+rotation_edit_mode = 0
+top_level = false
+visibility_parent = NodePath("")
+script = ExtResource("1_gpild")
 
 [node name="TestObject" type="Node3D" parent="."]
-script = ExtResource("2_hkbyt")

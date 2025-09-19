@@ -196,7 +196,7 @@ PyObject* Variant::create_nodepath(){
 PyObject* Variant::create_int(){
     GDExtensionVariantType type = functions::get_variant_get_type()(native_ptr);
     auto constructor = functions::get_get_variant_to_type_constructor()(type);
-    long val = 0;
+    long long val = 0;
     constructor(&val, native_ptr);
     return PyLong_FromLong(val);
 }
@@ -604,7 +604,7 @@ PyObject* Variant::create_nodepath_native_ptr(){
 PyObject* Variant::create_int_native_ptr(){
     GDExtensionVariantType type = functions::get_variant_get_type()(&native_ptr);
     auto constructor = functions::get_get_variant_to_type_constructor()(type);
-    int val = 0;
+    long long val = 0;
     constructor(&val, &native_ptr);
     return PyLong_FromLong(val);
 }

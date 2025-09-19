@@ -281,9 +281,9 @@ def unvarianttype(type_):
 
 def make_ptr(type_):
     if type_ in builtin_classes - {"int", "float", "bool", "Nil"}:
-        return f"std::shared_ptr<{type_}>"
+        return f"PyObject*"
     if type_ in classes:
-        return f"std::shared_ptr<{type_}>"
+        return f"PyObject*"
     return type_
 
 

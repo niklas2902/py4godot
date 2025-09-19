@@ -39,8 +39,6 @@ T = TypeVar("T")
 def gdproperty(type_:type, defaultval:T):
     import py4godot.properties as properties
     return properties._gdproperty_internal(type_, defaultval, 2)
-
-import py4godot.constants as constants
 """
 
 import_string_hints = """

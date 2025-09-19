@@ -4,9 +4,10 @@ import os.path
 
 from generate_classes_hpp import get_ret_value, has_native_struct, ungodottype
 from generate_enums import enumize_name
+from py4godot.method_ids import method_ids
 
 INDENT = "  "
-
+index = 0
 
 class ReturnType:
     def __init__(self, name, type_):
@@ -82,6 +83,7 @@ def generate_import(class_, is_core):
 #include "py4godot/cpputils/utils.h"
 #include "py4godot/cppclasses/generated4_core.h"
 #include "py4godot/godot_bindings/main.h"
+#include "py4godot/wrappers/wrappers_wrapper.h"
 #include <stdlib.h>
 #include <memory>
 '''
@@ -96,7 +98,9 @@ def generate_import(class_, is_core):
         return res
 
     result = f'#include "py4godot/cpputils/utils.h"\n' \
-             f'#include "py4godot/cppclasses/generated4_core.h"\n'
+             f'#include "py4godot/cppclasses/generated4_core.h"\n'\
+             f'#include "py4godot/wrappers/wrappers_wrapper.h"\n'\
+             f'# include "py4godot/wrappers/type_checking_wrapper.h"\n'
     if "typedarray" in class_["name"].lower():
         result += f'#include "py4godot/cppclasses/typedarrays/{class_["name"]}.h"\n'
     f'#include <memory>"\n'
@@ -162,7 +166,7 @@ def generate_constructor_args(constructor, should_make_shared = False):
     for arg in constructor["arguments"]:
         if not arg["type"].startswith("enum::"):
             if should_make_shared:
-                result += f"{make_ptr(ungodottype(untypearray(unbitfield_type(arg['type']))))}{ref(arg['type'])} {pythonize_name(arg['name'])}, "
+                result += f"{make_ptr(ungodottype(untypearray(unbitfield_type(arg['type']))))}  {pythonize_name(arg['name'])}, "
             else:
                 result += f"{ungodottype(untypearray(unbitfield_type(arg['type'])))}{ref(arg['type'])} {pythonize_name(arg['name'])}, "
         else:
@@ -503,7 +507,7 @@ def generate_singleton_constructor(classname):
     res = generate_newline(res)
     res += f"{INDENT * 2}GDExtensionObjectPtr object = functions::get_global_get_singleton()(&class_name.godot_owner);"
     res = generate_newline(res)
-    res += f"{INDENT * 2}singleton.set_godot_owner(object);"
+    res += f"{INDENT * 2}singleton.godot_owner = object;"
     res = generate_newline(res)
     res += f"{INDENT * 2}return std::make_shared<{classname}>(singleton);"
     res = generate_newline(res)
@@ -654,6 +658,7 @@ def generate_method_body_virtual(class_, mMethod):
 
 
 def is_static(mMethod):
+
     return mMethod["is_static"]
 
 
@@ -1243,7 +1248,271 @@ def generate_common_methods(class_):
     result = generate_newline(result)
     result += generate_constructors(class_)
     result = generate_newline(result)
+    result += generate_switch_methods(class_)
+    result = generate_newline(result)
     return result
+
+def extract_arg(type_, index):
+    type_ = untypearray(unenumize_type(type_))
+    if type_ in classes or "typedarray" in type_.lower():
+        return f"wrapper__extract_ptr_from_{untypearray(type_)}Wrapper(PyTuple_GetItem(args_tuple, {index})) "
+    elif type_ == "int":
+        return f"PyLong_AsLong(PyTuple_GetItem(args_tuple, {index})) "
+    elif type_ == "bool":
+        return f"(PyObject_IsTrue(PyTuple_GetItem(args_tuple, {index})) ? true : false) "
+    elif type_ == "float" or type_ == "double":
+        return f"PyFloat_AsDouble(PyTuple_GetItem(args_tuple, {index})) "
+    return f"PyTuple_GetItem(args_tuple, {index}) "
+
+def extract_arg_operator(type_):
+    type_ = untypearray(unenumize_type(type_))
+    if type_ in classes or "typedarray" in type_.lower():
+        return f"wrapper__extract_ptr_from_{untypearray(type_)}Wrapper(wrapper__extract_ptr_from_py_object(other)) "
+    elif type_ == "int":
+        return f"(long long)PyLong_AsLong(other) "
+    elif type_ == "bool":
+        return f"(PyObject_IsTrue(other) ? true : false) "
+    elif type_ == "float" or type_ == "double":
+        return f"PyFloat_AsDouble(other) "
+    return f"other "
+
+def generate_method_switch_args(method):
+    res = ""
+    index = 0
+    if "arguments" in method:
+        for arg in method["arguments"]:
+            res += extract_arg(arg["type"], index)+", "
+            index += 1
+    if "is_vararg" in method and method["is_vararg"]:
+        res += "varargs, "
+    if res:
+        res = res[:-2]
+    return res
+
+def collect_methods(class_, static_methods):
+    res = []
+    if "methods" in class_:
+        res += list(filter(lambda method: is_static(method) == static_methods and not has_native_struct(method), class_["methods"]))
+
+    if "inherits" in class_:
+        res = collect_methods(find_class(class_["inherits"]), static_methods) + res
+    res = list(filter (lambda method:  not native_structs_in_method(method), res))
+    return res
+
+def generate_varargs(method):
+    res = ""
+    if method["is_vararg"]:
+        number_arguments = 0
+        if "arguments" in method:
+            number_arguments = len(method["arguments"])
+        res += f"for(int i= {number_arguments}; i< (int)PyTuple_Size(args_tuple);i++)varargs.push_back(PyTuple_GetItem(args_tuple, i));"
+    return res
+
+def generate_switch_methods(class_):
+    global index
+    res = ""
+    res += f"{INDENT}void {class_['name']}::switch_call(int method_hash, PyObject* args_tuple){{"
+
+    res = generate_newline(res)
+    res += f"{INDENT}std::vector<PyObject*> varargs{{}};"
+    res = generate_newline(res)
+    methods = collect_methods(class_, False)
+    res+= f"{INDENT*2}switch(method_hash){{"
+    res = generate_newline(res)
+    for method in methods:
+        args = generate_method_switch_args(method, )
+        res += f"{INDENT*3}case {method_ids['normal_methods'][class_['name']][method['name']]}: {generate_varargs(method)} py_{pythonize_name(method['name'])}({args});break;"
+        res = generate_newline(res)
+        index += 1
+    if class_["name"] in core_classes.keys():
+        for member in core_classes[class_["name"]].core_members:
+            res += f"{INDENT*3}case {method_ids['normal_methods'][class_['name']]['get_member_'+member.name]}: py_member_get_{member.name}();break;"
+            res = generate_newline(res)
+            res += f"{INDENT * 3}case {method_ids['normal_methods'][class_['name']]['set_member_' + member.name]}: py_member_set_{member.name}({extract_arg(member.type_,0)});break;"
+            res = generate_newline(res)
+    if class_["name"] in builtin_classes:
+        res += f"{INDENT * 3}case {method_ids['normal_methods'][class_['name']]['py_destroy']}: {class_['name']}_py_destroy(); return Py_None;"
+        res = generate_newline(res)
+    if class_["name"] == "RefCounted":
+        res += f"{INDENT * 3}case {method_ids['normal_methods'][class_['name']]['py_destroy']}: py_destroy_ref(); return Py_None;"
+        res = generate_newline(res)
+    if class_["name"] in builtin_classes:
+        for operator in operator_dict[get_class_name(class_["name"])]:
+            if operator in operator_to_method.keys():
+                op = operator_dict[get_class_name(class_["name"])][operator]
+                res += f"{INDENT*2}case {method_ids['normal_methods'][class_['name']][operator]}: {generate_varargs(method)} wrap_operator_{operator_to_python_name(operator)}(PyTuple_GetItem(args_tuple, 0));break;"
+                res = generate_newline(res)
+    if "array" in class_["name"].lower():
+        res += f"{INDENT * 3}case {method_ids['normal_methods'][class_['name']]["__getitem__"]}: py_getitem((int)PyLong_AsLong(PyTuple_GetItem(args_tuple, 0)));break;"
+        res = generate_newline(res)
+        res += f"{INDENT * 3}case {method_ids['normal_methods'][class_['name']]["__setitem__"]}: py_setitem((int)PyLong_AsLong(PyTuple_GetItem(args_tuple, 0)), PyTuple_GetItem(args_tuple, 1));break;"
+        res = generate_newline(res)
+    if "Dictionary" == class_["name"]:
+        res += f"{INDENT * 3}case {method_ids['normal_methods'][class_['name']]["__getitem__"]}: py_getitem(PyTuple_GetItem(args_tuple, 0));break;"
+        res = generate_newline(res)
+        res += f"{INDENT * 3}case {method_ids['normal_methods'][class_['name']]["__setitem__"]}: py_setitem(PyTuple_GetItem(args_tuple, 0), PyTuple_GetItem(args_tuple, 1));break;"
+        res = generate_newline(res)
+
+    res += f"{INDENT*2}}}"
+    res += f"{INDENT}}}"
+    res = generate_newline(res)
+    res += f"{INDENT}PyObject* {class_['name']}::switch_call_return(int method_hash, PyObject* args_tuple){{"
+    res = generate_newline(res)
+    res += f"{INDENT}std::vector<PyObject*> varargs{{}};"
+    res = generate_newline(res)
+    res+= f"{INDENT*2}switch(method_hash){{"
+    res = generate_newline(res)
+    for method in methods:
+
+        args = generate_method_switch_args(method)
+        if not ("return_value" in method or "return_type" in method):
+            res += f"{INDENT*3}case {method_ids['normal_methods'][class_['name']][method['name']]}: {generate_varargs(method)} py_{pythonize_name(method['name'])}({args}); return Py_None;"
+            res = generate_newline(res)
+            continue
+        ret_type = get_ret_value(method)
+        if ret_type in builtin_classes.union(classes).difference({"float", "int", "bool"}) or "typedarray" in ret_type.lower():
+            res += f"{INDENT*3}case {method_ids['normal_methods'][class_['name']][method['name']]}: {generate_varargs(method)} return wrapper__create_wrapper_from_{untypearray(ret_type)}_ptr(py_{pythonize_name(method['name'])}({args}));"
+        elif ret_type  == "int":
+            res += f"{INDENT*3}case {method_ids['normal_methods'][class_['name']][method['name']]}: {generate_varargs(method)} return  PyLong_FromLong(py_{pythonize_name(method['name'])}({args}));"
+        elif ret_type  == "bool":
+            res += f"{INDENT*3}case {method_ids['normal_methods'][class_['name']][method['name']]}: {generate_varargs(method)} return  PyBool_FromLong(py_{pythonize_name(method['name'])}({args}));"
+        elif ret_type  == "float":
+            res += f"{INDENT*3}case {method_ids['normal_methods'][class_['name']][method['name']]}: {generate_varargs(method)} return  PyFloat_FromDouble(py_{pythonize_name(method['name'])}({args}));"
+        else:
+            res += f"{INDENT*3}case {method_ids['normal_methods'][class_['name']][method['name']]}: {generate_varargs(method)} return py_{pythonize_name(method['name'])}({args});"
+        res = generate_newline(res)
+
+    if class_["name"] in builtin_classes:
+        res += f"{INDENT * 3}case {method_ids['normal_methods'][class_['name']]['py_destroy']}: {class_['name']}_py_destroy();return Py_None;"
+        res = generate_newline(res)
+    if class_["name"] == "RefCounted":
+        res += f"{INDENT * 3}case {method_ids['normal_methods'][class_['name']]['py_destroy']}: py_destroy_ref(); return Py_None;"
+        res = generate_newline(res)
+
+    if class_["name"] in core_classes.keys():
+        for member in core_classes[class_["name"]].core_members:
+            if member.type_ in builtin_classes.union(classes).difference(
+                    {"float", "int", "bool"}) or "typedarray" in member.type_.lower():
+                res += f"{INDENT*3}case {method_ids['normal_methods'][class_['name']]['get_member_'+member.name]}: {generate_varargs(method)} return wrapper__create_wrapper_from_{untypearray(member.type_)}_ptr(py_member_get_{member.name}());"
+                res = generate_newline(res)
+            elif member.type_ == "int":
+                res += f"{INDENT * 3}case {method_ids['normal_methods'][class_['name']]['get_member_'+member.name]}: {generate_varargs(method)} return  PyLong_FromLong(py_member_get_{member.name}());"
+            elif member.type_== "bool":
+                res += f"{INDENT * 3}case {method_ids['normal_methods'][class_['name']]['get_member_'+member.name]}: {generate_varargs(method)} return  PyBool_FromLong(py_member_get_{member.name}());"
+            elif member.type_== "float" or member.type_ == "double":
+                res += f"{INDENT * 3}case {method_ids['normal_methods'][class_['name']]['get_member_'+member.name]}: {generate_varargs(method)} return  PyFloat_FromDouble(py_member_get_{member.name}());"
+            else:
+                res += f"{INDENT * 3}case {method_ids['normal_methods'][class_['name']]['get_member_'+member.name]}: return py_member_get_{member.name}();"
+            res = generate_newline(res)
+            res += f"{INDENT * 3}case {method_ids['normal_methods'][class_['name']]['set_member_' + member.name]}: py_member_set_{member.name}({extract_arg(member.type_, 0)});return Py_None;"
+            res = generate_newline(res)
+    if class_["name"] in builtin_classes:
+        for operator in operator_dict[get_class_name(class_["name"])]:
+            if operator in operator_to_method.keys():
+                op = operator_dict[get_class_name(class_["name"])][operator]
+                res += f"{INDENT*2}case {method_ids['normal_methods'][class_['name']][operator]}: return wrap_operator_{operator_to_python_name(operator)}(PyTuple_GetItem(args_tuple, 0));"
+                res = generate_newline(res)
+    if "array" in class_["name"].lower():
+        res += f"{INDENT * 3}case {method_ids['normal_methods'][class_['name']]["__getitem__"]}: return py_getitem((int)PyLong_AsLong(PyTuple_GetItem(args_tuple, 0)));break;"
+        res = generate_newline(res)
+        res += f"{INDENT * 3}case {method_ids['normal_methods'][class_['name']]["__setitem__"]}: py_setitem((int)PyLong_AsLong(PyTuple_GetItem(args_tuple, 0)), PyTuple_GetItem(args_tuple, 1));return Py_None;"
+        res = generate_newline(res)
+    if "Dictionary" == class_["name"]:
+        res += f"{INDENT * 3}case {method_ids['normal_methods'][class_['name']]["__getitem__"]}: return py_getitem(PyTuple_GetItem(args_tuple, 0));break;"
+        res = generate_newline(res)
+        res += f"{INDENT * 3}case {method_ids['normal_methods'][class_['name']]["__setitem__"]}: py_setitem(PyTuple_GetItem(args_tuple, 0), PyTuple_GetItem(args_tuple, 1));return Py_None;"
+        res = generate_newline(res)
+
+    if class_["name"] in ("PackedInt32Array", "PackedInt64Array", "PackedFloat32Array", "PackedFloat64Array", "PackedByteArray"):
+        res += f"case {method_ids['normal_methods'][class_['name']]['get_memoryview']}: return py_get_memory_view();"
+
+    res += f"{INDENT*2}}}"
+    res += f"{INDENT*2}return Py_None;"
+    res = generate_newline(res)
+    res += f"{INDENT}}}"
+    res = generate_newline(res)
+    res += f"{INDENT}static PyObject* {class_['name']}::call_static_method_with_return(int method_hash, PyObject* args_tuple){{"
+    res = generate_newline(res)
+    res += f"{INDENT}std::vector<PyObject*> varargs{{}};"
+    res = generate_newline(res)
+    res += f"{INDENT*2}switch(method_hash){{"
+    res = generate_newline(res)
+    static_methods = collect_methods(class_, True)
+    for method in static_methods:
+        method_id = method_ids['static_methods'][class_['name']][method['name']]
+        args = generate_method_switch_args(method)
+        if not ("return_value" in method or "return_type" in method):
+            res += f"{INDENT * 2}case {method_id}: py_{pythonize_name(method['name'])}({args}); break;"
+        else:
+            ret_type = get_ret_value(method)
+            if ret_type in builtin_classes.union(classes).difference({"float", "int", "bool"}) or "typedarray" in ret_type.lower():
+                res += f"{INDENT * 3}case {method_id}:{generate_varargs(method)} return wrapper__create_wrapper_from_{untypearray(ret_type)}_ptr(py_{pythonize_name(method['name'])}({args}));"
+            elif ret_type == "int":
+                res += f"{INDENT * 3}case {method_id}:{generate_varargs(method)} return  PyLong_FromLong(py_{pythonize_name(method['name'])}({args}));"
+            elif ret_type == "bool":
+                res += f"{INDENT * 3}case {method_id}:{generate_varargs(method)} return  PyBool_FromLong(py_{pythonize_name(method['name'])}({args}));"
+            elif ret_type == "float":
+                res += f"{INDENT * 3}case {method_id}:{generate_varargs(method)} return  PyFloat_FromDouble(py_{pythonize_name(method['name'])}({args}));"
+            else:
+                res += f"{INDENT * 3}case {method_id}:{generate_varargs(method)} py_{pythonize_name(method['name'])}({args});break;"
+        res = generate_newline(res)
+    if class_["name"] in ("PackedInt32Array", "PackedInt64Array", "PackedFloat32Array", "PackedFloat64Array",
+                       "PackedByteArray"):
+        packed_array_type = \
+        {"PackedInt32Array": "int32_t", "PackedInt64Array": "int64_t", "PackedFloat32Array": "float",
+         "PackedFloat64Array": "double",
+         "PackedByteArray": "byte"}[class_['name']]
+        method_id = method_ids['static_methods'][class_['name']]["from_memoryview"]
+        res += f"{INDENT * 3}case {method_id}:{{"
+        res = generate_newline(res)
+        res += f"{INDENT * 4}Py_buffer buffer;"
+        res = generate_newline(res)
+        res += f"{INDENT * 4}PyObject* memory_view = PyTuple_GetItem(args_tuple, 0);"
+        res = generate_newline(res)
+        res += f"{INDENT*4}PyObject_GetBuffer(memory_view, &buffer, PyBUF_SIMPLE);"
+        res = generate_newline(res)
+        res += f"{INDENT * 4}Py_ssize_t n_elements = buffer.len / buffer.itemsize;"
+        res = generate_newline(res)
+        res += f"{INDENT * 4}void* ptr = buffer.buf;"
+        res = generate_newline(res)
+        res += f"{INDENT * 4}return wrapper__create_wrapper_from_{class_['name']}_ptr({class_['name']}::py_from_ptr(({packed_array_type}*)ptr, (long long)n_elements));"
+        res = generate_newline(res)
+        res += f"{INDENT * 3}}}"
+        res = generate_newline(res)
+    res += f"{INDENT*2}}}"
+    res = generate_newline(res)
+    res += f"{INDENT * 2}return Py_None;"
+    res = generate_newline(res)
+    res += f"{INDENT}}}"
+
+    res = generate_newline(res)
+
+    res += f"{INDENT}static PyObject* godot::{class_['name']}::call_constructor(int method_hash, PyObject* args_tuple){{"
+    res = generate_newline(res)
+    if class_["name"] not in builtin_classes:
+        if is_singleton(class_["name"]):
+            res += f"{INDENT * 2}return wrapper__create_wrapper_from_{class_['name']}_ptr({class_['name']}::get_instance());;"
+        else:
+            res += f"{INDENT * 2}return wrapper__create_wrapper_from_{class_['name']}_ptr({class_['name']}::constructor());"
+    elif class_["name"] in builtin_classes:
+        res += f"{INDENT*2} switch(method_hash){{"
+        res = generate_newline(res)
+        index = 0
+        for constructor in class_["constructors"]:
+            args = generate_method_switch_args(constructor)
+            res += f"{INDENT*3}case {index}: return wrapper__create_wrapper_from_{class_['name']}_ptr({class_['name']}::py_new{index}({args}));"
+            res = generate_newline(res)
+            index += 1
+        res = generate_newline(res)
+        res += f"{INDENT*2}}}"
+    else:
+        res += f"{INDENT * 2}return Py_None;"
+    res = generate_newline(res)
+    res = generate_newline(res)
+
+    res += f"{INDENT}}}"
+    res = generate_newline(res)
+    return res
 
 
 def generate_enums(class_):
@@ -1336,7 +1605,7 @@ def unref_pointer(type_, value_name="value"):
 
 def generate_member_setter(class_, member):
     res = ""
-    res += f"{INDENT}void {class_}::py_member_set_{member.name}({make_ptr(member.type_)}& value)" + "{"
+    res += f"{INDENT}void {class_}::py_member_set_{member.name}({make_ptr(member.type_)} value)" + "{"
     res = generate_newline(res)
     res += f"{INDENT}member_set_{member.name}({unref_pointer(member.type_)});"
     res = generate_newline(res)
@@ -1599,7 +1868,7 @@ def generate_constructor(classname):
     res += f"{INDENT * 2}class_name.shouldBeDeleted = true;"
     res = generate_newline(res)
 
-    res += f"{INDENT * 2}class_.set_godot_owner(functions::get_classdb_construct_object()(&class_name.godot_owner));"
+    res += f"{INDENT * 2}class_.godot_owner = functions::get_classdb_construct_object()(&class_name.godot_owner);"
     res = generate_newline(res)
     res += f"{INDENT * 2}return std::make_shared<{classname}>(class_);"
     res = generate_newline(res)
@@ -1694,6 +1963,45 @@ def generate_operators_for_class(class_name):
             if operator in operator_to_method.keys():
                 op = operator_dict[get_class_name(class_name)][operator]
                 if op.right_type_values:
+                    res += f"{INDENT}PyObject* {class_name}::wrap_operator_{operator_to_python_name(operator)} (PyObject* other){{"
+                    res = generate_newline(res)
+                    for right_type in op.right_type_values:
+                        if right_type != "Variant":
+                            ret_type = op.return_type
+                            if ret_type in builtin_classes.union(classes).difference(
+                                    {"float", "int", "bool"}) or "typedarray" in ret_type.lower():
+
+                                res += f"{INDENT * 2}if (type_checking_{right_type}(other)){{return wrapper__create_wrapper_from_{untypearray(op.return_type)}_ptr(py_operator_{operator_to_python_name(operator)}({extract_arg_operator(right_type)}));}}"
+                            elif ret_type == "int":
+                                res += f"{INDENT * 2}if (type_checking_{right_type}(other)){{return PyLong_FromLong(py_operator_{operator_to_python_name(operator)}({extract_arg_operator(right_type)}));}}"
+
+                            elif ret_type == "bool":
+                                res += f"{INDENT * 2}if (type_checking_{right_type}(other)){{return PyBool_FromLong(py_operator_{operator_to_python_name(operator)}({extract_arg_operator(right_type)}));}}"
+                            elif ret_type == "float":
+                                res += f"{INDENT * 2}if (type_checking_{right_type}(other)){{return PyFloat_FromDouble(py_operator_{operator_to_python_name(operator)}({extract_arg_operator(right_type)}));}}"
+                            else:
+                                res += f"{INDENT * 2}if (type_checking_{right_type}(other)){{py_operator_{operator_to_python_name(operator)}({extract_arg_operator(right_type)});}}"
+                            res = generate_newline(res)
+                    if "Variant" in op.right_type_values:
+
+                        ret_type = op.return_type
+                        if ret_type in builtin_classes.union(classes).difference(
+                                {"float", "int", "bool"}) or "typedarray" in ret_type.lower():
+
+                            res += f"{INDENT * 2}wrapper__create_wrapper_from_{untypearray(op.return_type)}_ptr(py_operator_{operator_to_python_name(operator)}(other));"
+                        elif ret_type == "int":
+                            res += f"{INDENT * 2}return PyLong_FromLong(py_operator_{operator_to_python_name(operator)}(other));"
+
+                        elif ret_type == "bool":
+                            res += f"{INDENT * 2}return PyBool_FromLong(py_operator_{operator_to_python_name(operator)}(other));"
+                        elif ret_type == "float":
+                            res += f"{INDENT * 2}return PyFloat_FromDouble(py_operator_{operator_to_python_name(operator)}(other));"
+                        else:
+                            res += f"{INDENT * 2}return py_operator_{operator_to_python_name(operator)}(other);"
+                        res = generate_newline(res)
+
+                    res += f"}}"
+                    res = generate_newline(res)
                     for right_type in op.right_type_values:
                         res += f"{INDENT}{op.return_type} {class_name}::operator {operator}({ungodottype(right_type)}{generate_reference(right_type)} other)" + "{"
                         res = generate_newline(res)
@@ -1716,7 +2024,7 @@ def generate_operators_for_class(class_name):
                         res += INDENT + "}"
                         res = generate_newline(res)
 
-                        res += f"{INDENT}{make_ptr(op.return_type)} {class_name}::py_operator_{operator_to_python_name(operator)}({make_ptr(ungodottype(right_type))}{generate_reference(right_type)} other)" + "{"
+                        res += f"{INDENT}{make_ptr(op.return_type)} {class_name}::py_operator_{operator_to_python_name(operator)}({make_ptr(ungodottype(right_type))} other)" + "{"
                         res = generate_newline(res)
                         res += f"{INDENT * 2}auto _ret = *this {operator} {unref_pointer(type_=ungodottype(right_type), value_name='other')};"
                         res = generate_newline(res)
@@ -1775,7 +2083,41 @@ def generate_classes(classes, filename, is_core=False):
 
 def generate_dictionary_set_item():
     res = ""
-    res += f"{INDENT}Variant Dictionary::operator [](Variant key)" + "{"
+
+    # py_getitem
+    res += f"{INDENT}PyObject* Dictionary::py_getitem(PyObject* key)" + "{"
+    res = generate_newline(res)
+    res += f"{INDENT * 2}std::shared_ptr<Variant> variant_key = std::make_shared<Variant>(1);"
+    res = generate_newline(res)
+    res += f"{INDENT * 2}variant_key->init_from_py_object_native_ptr(key, type_checking__get_name_from_object(key));"
+    res = generate_newline(res)
+    res += f"{INDENT * 2}Variant variant = (*this)[*variant_key];"
+    res = generate_newline(res)
+    res += f"{INDENT * 2}return variant.get_converted_value(true);"
+    res = generate_newline(res)
+    res += f"{INDENT}" + "}"
+    res = generate_newline(res)
+
+    # py_setitem
+    res += f"{INDENT}void Dictionary::py_setitem(PyObject* key, PyObject* value)" + "{"
+    res = generate_newline(res)
+    res += f"{INDENT * 2}std::shared_ptr<Variant> variant_key = std::make_shared<Variant>(1);"
+    res = generate_newline(res)
+    res += f"{INDENT * 2}variant_key->init_from_py_object_native_ptr(key, type_checking__get_name_from_object(key));"
+    res = generate_newline(res)
+    res += f"{INDENT * 2}Variant value_variant = (*this)[*variant_key];"
+    res = generate_newline(res)
+    res += f"{INDENT * 2}value_variant.init_from_py_object(value, type_checking__get_name_from_object(value));"
+    res = generate_newline(res)
+    res += f"{INDENT}" + "}"
+    res = generate_newline(res)
+
+    return res
+
+
+def generate_dictionary_get_item():
+    res = ""
+    res += f"{INDENT}Variant Dictionary::operator[](Variant key)" + "{"
     res = generate_newline(res)
     res += f"{INDENT * 2}return Variant::new_static(functions::get_dictionary_operator_index()(&godot_owner, &key.native_ptr));"
     res = generate_newline(res)
@@ -1784,19 +2126,10 @@ def generate_dictionary_set_item():
     return res
 
 
-def generate_dictionary_get_item():
-    res = ""
-    res += f"{INDENT}const Variant Dictionary::operator[](Variant key)" + "{"
-    res = generate_newline(res)
-    res += f"{INDENT * 2}return Variant::new_static(functions::get_dictionary_operator_index()(godot_owner, key.native_ptr));"
-    res = generate_newline(res)
-    res += f"{INDENT}" + "}"
-    res = generate_newline(res)
-    return res
-
-
 def generate_special_methods_dictionary():
     res = ""
+    res += generate_dictionary_get_item()
+    res = generate_newline(res)
     res += generate_dictionary_set_item()
     res = generate_newline(res)
     return res
@@ -1858,8 +2191,139 @@ def generate_array_set_item(class_):
     return res
 
 
+def generate_array_get_item_wrapper(class_):
+    res = ""
+    if class_["name"] == "PackedInt32Array":
+        res += f"{INDENT}PyObject* {class_['name']}::py_getitem(int index)" + "{"
+        res = generate_newline(res)
+        res += f"{INDENT * 2}return PyLong_FromLong(functions::get_packed_int32_array_operator_index()(&godot_owner, index)[0]);"
+        res += INDENT + "}"
+    elif class_["name"] == "PackedInt64Array":
+        res += f"{INDENT}PyObject* {class_['name']}::py_getitem(int index)" + "{"
+        res = generate_newline(res)
+        res += f"{INDENT * 2}return PyLong_FromLong(functions::get_packed_int64_array_operator_index()(&godot_owner, index)[0]);"
+        res += INDENT + "}"
+    elif class_["name"] == "PackedFloat32Array":
+        res += f"{INDENT}PyObject* {class_['name']}::py_getitem(int index)" + "{"
+        res = generate_newline(res)
+        res += f"{INDENT * 2}return PyFloat_FromDouble(functions::get_packed_float32_array_operator_index()(&godot_owner, index)[0]);"
+        res += INDENT + "}"
+    elif class_["name"] == "PackedFloat64Array":
+        res += f"{INDENT}PyObject* {class_['name']}::py_getitem(int index)" + "{"
+        res = generate_newline(res)
+        res += f"{INDENT * 2}return PyFloat_FromDouble(functions::get_packed_float64_array_operator_index()(&godot_owner, index)[0]);"
+        res += INDENT + "}"
+    elif class_["name"] == "PackedByteArray":
+        res += f"{INDENT}PyObject* {class_['name']}::py_getitem(int index)" + "{"
+        res = generate_newline(res)
+        res += f"{INDENT * 2}return PyLong_FromLong(functions::get_packed_byte_array_operator_index()(&godot_owner, index)[0]);"
+        res += INDENT + "}"
+
+    elif class_["name"] == "PackedColorArray":
+        res += f"{INDENT}PyObject* {class_['name']}::py_getitem(int index)" + "{"
+        res = generate_newline(res)
+        res += f"{INDENT * 2}return wrapper__create_wrapper_from_Color_ptr(std::make_shared<Color>(Color::new_static(((void**)functions::get_packed_color_array_operator_index()(&godot_owner, index))[0])));"
+        res += INDENT + "}"
+    elif class_["name"] == "PackedVector3Array":
+        res += f"{INDENT}PyObject* {class_['name']}::py_getitem(int index)" + "{"
+        res = generate_newline(res)
+        res += f"{INDENT * 2}return wrapper__create_wrapper_from_Vector3_ptr(std::make_shared<Vector3>(Vector3::new_static(((void**)functions::get_packed_vector3_array_operator_index()(&godot_owner, index))[0])));"
+        res += INDENT + "}"
+    elif class_["name"] == "PackedVector2Array":
+        res += f"{INDENT}PyObject* {class_['name']}::py_getitem(int index)" + "{"
+        res = generate_newline(res)
+        res += f"{INDENT * 2}return wrapper__create_wrapper_from_Vector2_ptr(std::make_shared<Vector2>(Vector2::new_static(((void**)functions::get_packed_vector2_array_operator_index()(&godot_owner, index))[0])));"
+        res += INDENT + "}"
+    elif class_["name"] == "PackedStringArray":
+        res += f"{INDENT}PyObject* {class_['name']}::py_getitem(int index)" + "{"
+        res = generate_newline(res)
+        res += f"{INDENT * 2}return wrapper__create_wrapper_from_String_ptr(std::make_shared<String>(String::new_static(((void**)functions::get_packed_string_array_operator_index()(&godot_owner, index))[0])));"
+        res += INDENT + "}"
+    elif get_class_name(class_["name"]) == "Array":
+        res += f"{INDENT}PyObject* {class_['name']}::py_getitem(int index)" + "{"
+        res = generate_newline(res)
+        res += f"{INDENT * 2}Variant variant;"
+        res = generate_newline(res)
+        res += f"{INDENT * 2}variant.native_ptr = (functions::get_array_operator_index()(&godot_owner, index));"
+        res = generate_newline(res)
+        res += f"{INDENT * 2}return variant.get_converted_value(true);"
+        res += INDENT + "}"
+    else:
+        res += f"{INDENT}PyObject* {class_['name']}::py_getitem(int index)" + "{"
+        res = generate_newline(res)
+        res += f"{INDENT * 2}return Py_None;"
+        res += INDENT + "}"
+
+    return res
+
+
+def generate_array_set_item_wrapper(class_):
+    res = ""
+    if class_["name"] == "PackedInt32Array":
+        res += f"{INDENT}void {class_['name']}::py_setitem(int index,PyObject* value)" + "{"
+        res = generate_newline(res)
+        res += f"{INDENT * 2}functions::get_packed_int32_array_operator_index()(&godot_owner, index)[0] = (int32_t)(PyLong_AsLong(value));"
+        res += INDENT + "}"
+    elif class_["name"] == "PackedInt64Array":
+        res += f"{INDENT}void {class_['name']}::py_setitem(int index,PyObject* value)" + "{"
+        res = generate_newline(res)
+        res += f"{INDENT * 2}functions::get_packed_int64_array_operator_index()(&godot_owner, index)[0] = (int64_t)(PyLong_AsLong(value));"
+        res += INDENT + "}"
+    elif class_["name"] == "PackedFloat32Array":
+        res += f"{INDENT}void {class_['name']}::py_setitem(int index,PyObject* value)" + "{"
+        res = generate_newline(res)
+        res += f"{INDENT * 2}functions::get_packed_float32_array_operator_index()(&godot_owner, index)[0] = (float)(PyFloat_AsDouble(value));"
+        res += INDENT + "}"
+    elif class_["name"] == "PackedFloat64Array":
+        res += f"{INDENT}void {class_['name']}::py_setitem(int index,PyObject* value)" + "{"
+        res = generate_newline(res)
+        res += f"{INDENT * 2}functions::get_packed_float64_array_operator_index()(&godot_owner, index)[0] = (PyFloat_AsDouble(value));"
+        res += INDENT + "}"
+    elif class_["name"] == "PackedByteArray":
+        res += f"{INDENT}void {class_['name']}::py_setitem(int index,PyObject* value)" + "{"
+        res = generate_newline(res)
+        res += f"{INDENT * 2}functions::get_packed_byte_array_operator_index()(&godot_owner, index)[0] = (byte)(PyLong_AsLong(value));"
+        res += INDENT + "}"
+
+    elif class_["name"] == "PackedColorArray":
+        res += f"{INDENT}void {class_['name']}::py_setitem(int index,PyObject* value)" + "{"
+        res = generate_newline(res)
+        res += f"{INDENT * 2}((void**)functions::get_packed_color_array_operator_index()(&godot_owner, index))[0] = wrapper__extract_ptr_from_ColorWrapper(value)->godot_owner;"
+        res += INDENT + "}"
+    elif class_["name"] == "PackedVector3Array":
+        res += f"{INDENT}void {class_['name']}::py_setitem(int index,PyObject* value)" + "{"
+        res = generate_newline(res)
+        res += f"{INDENT * 2}((void**)functions::get_packed_vector3_array_operator_index()(&godot_owner, index))[0] = wrapper__extract_ptr_from_Vector3Wrapper(value)->godot_owner;"
+        res += INDENT + "}"
+    elif class_["name"] == "PackedVector2Array":
+        res += f"{INDENT}void {class_['name']}::py_setitem(int index,PyObject* value)" + "{"
+        res = generate_newline(res)
+        res += f"{INDENT * 2}((void**)functions::get_packed_vector2_array_operator_index()(&godot_owner, index))[0] = wrapper__extract_ptr_from_Vector2Wrapper(value)->godot_owner;"
+        res += INDENT + "}"
+    elif class_["name"] == "PackedStringArray":
+        res += f"{INDENT}void {class_['name']}::py_setitem(int index,PyObject* value)" + "{"
+        res = generate_newline(res)
+        res += f"{INDENT * 2} ((void**)functions::get_packed_string_array_operator_index()(&godot_owner, index))[0] = wrapper__extract_ptr_from_StringWrapper(value)->godot_owner;"
+        res += INDENT + "}"
+    elif get_class_name(class_["name"]) == "Array":
+        res += f"{INDENT}void {class_['name']}::py_setitem(int index,PyObject* value)" + "{"
+        res = generate_newline(res)
+        res += f"{INDENT * 2}Variant variant;"
+        res = generate_newline(res)
+        res += f"{INDENT * 2}variant.native_ptr = (functions::get_array_operator_index()(&godot_owner, index));"
+        res = generate_newline(res)
+        res += f"{INDENT * 2}variant.init_from_py_object(value, type_checking__get_name_from_object(value));"
+        res += INDENT + "}"
+
+    else :
+        res += f"{INDENT}void {class_['name']}::py_setitem(int index,PyObject* value)" + "{" + "}"
+    return res
 def generate_special_methods_array(class_):
     res = ""
+    res += generate_array_set_item_wrapper(class_)
+    res = generate_newline(res)
+    res += generate_array_get_item_wrapper(class_)
+    res = generate_newline(res)
     res += generate_array_set_item(class_)
     return res
 
@@ -1900,9 +2364,63 @@ def generate_special_methods_packed_array(class_):
                "PackedFloat32Array":"functions::get_packed_float32_array_operator_index()",
               "PackedFloat64Array": "functions::get_packed_float64_array_operator_index()",
                "PackedByteArray":"functions::get_packed_byte_array_operator_index()"}[class_['name']]
+    format = {
+        "PackedInt32Array": "\"i\"",  # int32_t
+        "PackedInt64Array": "\"q\"",  # int64_t
+        "PackedFloat32Array": "\"f\"",  # float
+        "PackedFloat64Array": "\"d\"",  # double
+        "PackedByteArray": "\"B\"",  # unsigned bytes
+    }
+    format_code = format[class_["name"]]
     packed_array_type = {"PackedInt32Array":"int32_t", "PackedInt64Array":"int64_t", "PackedFloat32Array":"float",
                          "PackedFloat64Array":"double",
                          "PackedByteArray":"byte"}[class_['name']]
+
+    res += f"{INDENT * 1}PyObject* {class_['name']}::py_get_memory_view(){{"
+    res = generate_newline(res)
+    res += f"{INDENT * 2}long long length = size();"
+    res = generate_newline(res)
+    res += f"{INDENT*2}{packed_array_type}* ptr = {method}(&godot_owner, 0);"
+    res = generate_newline(res)
+
+    res += f"{INDENT * 2}Py_buffer view;"
+    res = generate_newline(res)
+    res += f"{INDENT * 2}view.buf = (void*)ptr;"
+    res = generate_newline(res)
+    res += f"{INDENT * 2}view.obj = NULL;"
+    res = generate_newline(res)
+    res += f"{INDENT * 2}view.len = length * sizeof({packed_array_type});"
+    res = generate_newline(res)
+    res += f"{INDENT * 2}view.readonly = 0;"
+    res = generate_newline(res)
+    res += f"{INDENT * 2}view.itemsize = sizeof({packed_array_type});"
+    res = generate_newline(res)
+    res += f"{INDENT * 2}view.ndim = 1;"
+    res = generate_newline(res)
+    res += f"{INDENT * 2}static Py_ssize_t shape[1];"
+    res = generate_newline(res)
+    res += f"{INDENT * 2}static Py_ssize_t strides[1];"
+    res = generate_newline(res)
+    res += f"{INDENT * 2}shape[0] = length;"
+    res = generate_newline(res)
+    res += f"{INDENT * 2}strides[0] = sizeof({packed_array_type});"
+    res = generate_newline(res)
+    res += f"{INDENT * 2}view.shape = shape;"
+    res = generate_newline(res)
+    res += f"{INDENT * 2}view.strides = strides;"
+    res = generate_newline(res)
+    res += f"{INDENT * 2}view.suboffsets = NULL;"
+    res = generate_newline(res)
+    res += f"{INDENT * 2}view.internal = NULL;"
+    res = generate_newline(res)
+    res += f"{INDENT * 2}view.format = {format_code};"
+    res = generate_newline(res)
+    res += f"{INDENT * 2}PyObject* result = PyMemoryView_FromBuffer(&view);"
+    res = generate_newline(res)
+    res += f"{INDENT*2}return result;}}"
+
+
+    res = generate_newline(res)
     res += f"{INDENT * 1}std::vector<{packed_array_type}> {class_['name']}::to_vector(){{"
     res = generate_newline(res)
     res += f"{INDENT*2}{packed_array_type}* ptr = {method}(&godot_owner, 0);"
