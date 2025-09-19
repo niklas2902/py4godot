@@ -29,21 +29,6 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-py4godot-classes-
 
-      - name: Run Python script and check result
-        shell: bash
-        run: |
-          set +e
-          python meson_scripts/does_cache_exist.py
-          exit_code=$?
-          if [ $exit_code -eq 0 ]; then
-            echo "Cache exists"
-            # Add any actions you want to take on success
-          else
-            echo "Cache does not exist"
-            exit 0
-          fi
-          set -e
-
       - name: Print variables
         run: |
           python meson_scripts/variables.py
@@ -67,20 +52,9 @@ jobs:
       - name: Generate files
         run: python generate.py -dev_build=True
 
-      - name: Conditional cythonize
+      - name: Cythoniz
         shell: bash
-        run: |
-          set +e
-          python meson_scripts/does_cache_exist.py
-          exit_code=$?
-          set -e
-          if [ $exit_code -eq 0 ]; then
-            echo "Cache hit for py4godot/classes directory"
-            python cythonize_files.py -mode="cache"
-          else
-            echo "Cache miss for py4godot/classes directory"
-            python cythonize_files.py -mode="dev"
-          fi
+        run: python cythonize_files.py
 
       - name: Build
         run: python build.py --target_platform=linux64 --compiler=gcc -create_plugin=False -buildtype=release -run_tests=True -download_godot=True
