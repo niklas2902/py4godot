@@ -11,6 +11,7 @@ args = my_parser.parse_args()
 dir = "generation_files"
 scripts = [
     'generate_method_ids.py',
+    'generate_class_ids.py',
     'generate_type_checking.py',
     'generate_wrappers.py',
     'generate_py_classes.py',
