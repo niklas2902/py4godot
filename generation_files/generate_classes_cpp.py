@@ -166,13 +166,13 @@ def generate_constructor_args(constructor, should_make_shared = False):
     for arg in constructor["arguments"]:
         if not arg["type"].startswith("enum::"):
             if should_make_shared:
-                result += f"{make_ptr(ungodottype(untypearray(unbitfield_type(arg['type']))))}  {pythonize_name(arg['name'])}, "
+                result += f"{make_ptr(ungodottype(untypearray_or_dictionary(unbitfield_type(arg['type']))))} {pythonize_name(arg['name'])}, "
             else:
-                result += f"{ungodottype(untypearray(unbitfield_type(arg['type'])))}{ref(arg['type'])} {pythonize_name(arg['name'])}, "
+                result += f"{ungodottype(untypearray_or_dictionary(unbitfield_type(arg['type'])))}{ref(arg['type'])} {pythonize_name(arg['name'])}, "
         else:
             # enums are marked with enum:: . To be able to use this, we have to strip this
             arg_type = arg["type"].replace("enum::", "")
-            result += f"{untypearray(unenumize_type(arg_type))} {pythonize_name(arg['name'])}, "
+            result += f"{untypearray_or_dictionary(unenumize_type(arg_type, class_))} {pythonize_name(arg['name'])}, "
     result = result[:-2]
     return result
 
@@ -421,7 +421,7 @@ def generate_return_value(method_, classname):
         elif "typedarray" in ret_val.type:
             result += f"{INDENT * 2}{generate_typed_array_name(ret_val.type)} _ret = {generate_typed_array_name(ret_val.type)}::new0();"
         else:
-            result += f"{INDENT * 2}{ungodottype(unbitfield_type(unenumize_type(ret_val.type)))} {ret_val.name};"
+            result += f"{INDENT * 2}{ungodottype(unbitfield_type(unenumize_type(ret_val.type, class_)))} {ret_val.name};"
     else:
         result += f"{INDENT * 2}GDExtensionTypePtr _ret;"
     return result
@@ -643,15 +643,15 @@ def generate_virtual_return_type(return_type):
         return "Variant(1);"
     elif "bitfield" in return_type:
         return "0;"
-    return untypearray(return_type) + "();"
+    return untypearray_or_dictionary(return_type) + "();"
 
 
 def generate_method_body_virtual(class_, mMethod):
     res = ""
     if "return_value" in mMethod.keys():
-        res += f"{INDENT * 2}return {generate_virtual_return_type(unenumize_type(mMethod['return_value']['type']))};"
+        res += f"{INDENT * 2}return {generate_virtual_return_type(unenumize_type(mMethod['return_value']['type'], class_))};"
     elif "return_type" in mMethod.keys():
-        res += f"{INDENT * 2}return {generate_virtual_return_type(unenumize_type(mMethod['return_type']))};"
+        res += f"{INDENT * 2}return {generate_virtual_return_type(unenumize_type(mMethod['return_type'], class_))};"
     res = generate_newline(res)
 
     return res
@@ -822,7 +822,7 @@ def generate_py_method_body(class_, method):
         else:
             result += f"{INDENT * 2}{class_['name']}::{pythonize_name(method['name'])}({generate_args_for_call(method)});"
 
-    # result = generate_newline(result)
+    result = generate_newline(result)
     result += free_variants(method)
     result = generate_newline(result)
     if ("return_value" in method.keys() or "return_type" in method.keys()):
@@ -851,8 +851,8 @@ def free_variants(mMethod):
             res += f"{INDENT * 2}if (functions::get_variant_get_type()(&variant_{pythonize_name(argument['name'])}->native_ptr) != GDEXTENSION_VARIANT_TYPE_OBJECT){{"
             res = generate_newline(res)
             res += f"{INDENT * 3}functions::get_variant_destroy()(&variant_{pythonize_name(argument['name'])}->native_ptr);"
-            #res = generate_newline(res)
-            #res += f"{INDENT*3}Py_DECREF({pythonize_name(argument['name'])});" # TODO: nzimmer is this needed?
+            res = generate_newline(res)
+            res += f"{INDENT*3}Py_DECREF({pythonize_name(argument['name'])});"
             res +=f"{INDENT*2}}}"
             res = generate_newline(res)
     return res
