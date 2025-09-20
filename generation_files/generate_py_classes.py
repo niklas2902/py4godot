@@ -1,10 +1,11 @@
 import copy
 import json
 import os
+import sys
 from functools import lru_cache
-
+sys.path.append("..")
 from generate_enums import enumize_name
-from generation_files.xml_help import init_class, get_class_description, get_method_description, get_property_description
+from xml_help import init_class, get_class_description, get_method_description, get_property_description
 from generation_tools import write_if_different
 from py4godot.method_ids import method_ids
 from py4godot.class_ids import classes_dict
@@ -997,10 +998,10 @@ def generate_member_getter(class_, member):
     if member.type_ in builtin_classes - {"float", "int", "bool"}:
         body += f"{INDENT * 2}_ret = {member.type_}.construct_without_init()"
         body = generate_newline(body)
-        body += f"{INDENT * 2}_ret._ptr = self._ptr.call_with_return({method_ids["normal_methods"][class_]["get_member_"+member.name]}, tuple())"
+        body += f"{INDENT * 2}_ret._ptr = self._ptr.call_with_return({method_ids['normal_methods'][class_]['get_member_' + member.name]}, tuple())"
         body = generate_newline(body)
     else:
-        body += f"{INDENT * 2}_ret = self._ptr.call_with_return({method_ids["normal_methods"][class_]["get_member_"+member.name]}, tuple())"
+        body += f"{INDENT * 2}_ret = self._ptr.call_with_return({method_ids['normal_methods'][class_]['get_member_'+member.name]}, tuple())"
         body = generate_newline(body)
         body += f"{INDENT * 2}c_utils.decref(_ret) # This needs to be decrefed, as it comes from C++ with one ref too much"
         body = generate_newline(body)
@@ -1029,7 +1030,7 @@ def generate_member_setter(class_, member):
     body = ""
     body += f"{INDENT * 2}"+generate_type_assertion("value", unenumize_type(untypearray(member.type_)))
     body = generate_newline(body)
-    body += f"{INDENT * 2}self._ptr.call_without_return({method_ids["normal_methods"][class_]["set_member_"+member.name]}, tuple([value]))"
+    body += f"{INDENT * 2}self._ptr.call_without_return({method_ids['normal_methods'][class_]['set_member_'+member.name]}, tuple([value]))"
     body = generate_newline(body)
     res += body
 

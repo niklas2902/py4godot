@@ -1,9 +1,11 @@
 import copy
 import json
 import os.path
+import sys
 
 from generate_classes_hpp import get_ret_value, has_native_struct, ungodottype
 from generate_enums import enumize_name
+sys.path.append("..")
 from py4godot.method_ids import method_ids
 
 INDENT = "  "
@@ -1343,14 +1345,14 @@ def generate_switch_methods(class_):
                 res += f"{INDENT*2}case {method_ids['normal_methods'][class_['name']][operator]}: {generate_varargs(method)} wrap_operator_{operator_to_python_name(operator)}(PyTuple_GetItem(args_tuple, 0));break;"
                 res = generate_newline(res)
     if "array" in class_["name"].lower():
-        res += f"{INDENT * 3}case {method_ids['normal_methods'][class_['name']]["__getitem__"]}: py_getitem((int)PyLong_AsLong(PyTuple_GetItem(args_tuple, 0)));break;"
+        res += f"{INDENT * 3}case {method_ids['normal_methods'][class_['name']]['__getitem__']}: py_getitem((int)PyLong_AsLong(PyTuple_GetItem(args_tuple, 0)));break;"
         res = generate_newline(res)
-        res += f"{INDENT * 3}case {method_ids['normal_methods'][class_['name']]["__setitem__"]}: py_setitem((int)PyLong_AsLong(PyTuple_GetItem(args_tuple, 0)), PyTuple_GetItem(args_tuple, 1));break;"
+        res += f"{INDENT * 3}case {method_ids['normal_methods'][class_['name']]['__setitem__']}: py_setitem((int)PyLong_AsLong(PyTuple_GetItem(args_tuple, 0)), PyTuple_GetItem(args_tuple, 1));break;"
         res = generate_newline(res)
     if "Dictionary" == class_["name"]:
-        res += f"{INDENT * 3}case {method_ids['normal_methods'][class_['name']]["__getitem__"]}: py_getitem(PyTuple_GetItem(args_tuple, 0));break;"
+        res += f"{INDENT * 3}case {method_ids['normal_methods'][class_['name']]['__getitem__']}: py_getitem(PyTuple_GetItem(args_tuple, 0));break;"
         res = generate_newline(res)
-        res += f"{INDENT * 3}case {method_ids['normal_methods'][class_['name']]["__setitem__"]}: py_setitem(PyTuple_GetItem(args_tuple, 0), PyTuple_GetItem(args_tuple, 1));break;"
+        res += f"{INDENT * 3}case {method_ids['normal_methods'][class_['name']]['__setitem__']}: py_setitem(PyTuple_GetItem(args_tuple, 0), PyTuple_GetItem(args_tuple, 1));break;"
         res = generate_newline(res)
 
     res += f"{INDENT*2}}}"
@@ -1413,14 +1415,14 @@ def generate_switch_methods(class_):
                 res += f"{INDENT*2}case {method_ids['normal_methods'][class_['name']][operator]}: return wrap_operator_{operator_to_python_name(operator)}(PyTuple_GetItem(args_tuple, 0));"
                 res = generate_newline(res)
     if "array" in class_["name"].lower():
-        res += f"{INDENT * 3}case {method_ids['normal_methods'][class_['name']]["__getitem__"]}: return py_getitem((int)PyLong_AsLong(PyTuple_GetItem(args_tuple, 0)));break;"
+        res += f"{INDENT * 3}case {method_ids['normal_methods'][class_['name']]['__getitem__']}: return py_getitem((int)PyLong_AsLong(PyTuple_GetItem(args_tuple, 0)));break;"
         res = generate_newline(res)
-        res += f"{INDENT * 3}case {method_ids['normal_methods'][class_['name']]["__setitem__"]}: py_setitem((int)PyLong_AsLong(PyTuple_GetItem(args_tuple, 0)), PyTuple_GetItem(args_tuple, 1));return Py_None;"
+        res += f"{INDENT * 3}case {method_ids['normal_methods'][class_['name']]['__setitem__']}: py_setitem((int)PyLong_AsLong(PyTuple_GetItem(args_tuple, 0)), PyTuple_GetItem(args_tuple, 1));return Py_None;"
         res = generate_newline(res)
     if "Dictionary" == class_["name"]:
-        res += f"{INDENT * 3}case {method_ids['normal_methods'][class_['name']]["__getitem__"]}: return py_getitem(PyTuple_GetItem(args_tuple, 0));break;"
+        res += f"{INDENT * 3}case {method_ids['normal_methods'][class_['name']]['__getitem__']}: return py_getitem(PyTuple_GetItem(args_tuple, 0));break;"
         res = generate_newline(res)
-        res += f"{INDENT * 3}case {method_ids['normal_methods'][class_['name']]["__setitem__"]}: py_setitem(PyTuple_GetItem(args_tuple, 0), PyTuple_GetItem(args_tuple, 1));return Py_None;"
+        res += f"{INDENT * 3}case {method_ids['normal_methods'][class_['name']]['__setitem__']}: py_setitem(PyTuple_GetItem(args_tuple, 0), PyTuple_GetItem(args_tuple, 1));return Py_None;"
         res = generate_newline(res)
 
     if class_["name"] in ("PackedInt32Array", "PackedInt64Array", "PackedFloat32Array", "PackedFloat64Array", "PackedByteArray"):
