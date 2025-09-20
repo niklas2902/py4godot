@@ -1,9 +1,11 @@
 import copy
 import json
 import os.path
+import sys
 
 from generate_classes_hpp import get_ret_value, has_native_struct, ungodottype
 from generate_enums import enumize_name
+sys.path.append("..")
 from py4godot.method_ids import method_ids
 
 INDENT = "  "

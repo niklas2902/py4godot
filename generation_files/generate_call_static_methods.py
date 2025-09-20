@@ -1,9 +1,11 @@
 import copy
 import json
 import os
+import sys
 
 from generate_classes import ReturnType
-from generation_files.generation_tools import write_if_different
+from generation_tools import write_if_different
+sys.path.append("..")
 from py4godot.class_ids import classes_dict
 
 IGNORED_CLASSES = ("Nil", "bool", "float", "int")

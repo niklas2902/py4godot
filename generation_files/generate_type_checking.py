@@ -3,8 +3,7 @@ import json
 import os
 
 from generate_classes import ReturnType, generate_newline
-from generation_files.generation_tools import write_if_different
-from py4godot.class_ids import classes_dict
+from generation_tools import write_if_different
 
 IGNORED_CLASSES = ("Nil", "bool", "float", "int")
 INDENT = " "

@@ -1,10 +1,11 @@
 import copy
 import json
 import os
+import sys
 from functools import lru_cache
-
+sys.path.append("..")
 from generate_enums import enumize_name
-from generation_files.xml_help import init_class, get_class_description, get_method_description, get_property_description
+from xml_help import init_class, get_class_description, get_method_description, get_property_description
 from generation_tools import write_if_different
 from py4godot.method_ids import method_ids
 from py4godot.class_ids import classes_dict
