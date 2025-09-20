@@ -998,10 +998,10 @@ def generate_member_getter(class_, member):
     if member.type_ in builtin_classes - {"float", "int", "bool"}:
         body += f"{INDENT * 2}_ret = {member.type_}.construct_without_init()"
         body = generate_newline(body)
-        body += f"{INDENT * 2}_ret._ptr = self._ptr.call_with_return({method_ids["normal_methods"][class_]["get_member_"+member.name]}, tuple())"
+        body += f"{INDENT * 2}_ret._ptr = self._ptr.call_with_return({method_ids['normal_methods'][class_]['get_member_' + member.name]}, tuple())"
         body = generate_newline(body)
     else:
-        body += f"{INDENT * 2}_ret = self._ptr.call_with_return({method_ids["normal_methods"][class_]["get_member_"+member.name]}, tuple())"
+        body += f"{INDENT * 2}_ret = self._ptr.call_with_return({method_ids['normal_methods'][class_]['get_member_'+member.name]}, tuple())"
         body = generate_newline(body)
         body += f"{INDENT * 2}c_utils.decref(_ret) # This needs to be decrefed, as it comes from C++ with one ref too much"
         body = generate_newline(body)
