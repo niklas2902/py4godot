@@ -1,5 +1,5 @@
-# Use an ARM64-compatible Ubuntu base image
-FROM --platform=linux/arm64 ubuntu:22.04
+# Use an Ubuntu base image (x86_64)
+FROM ubuntu:22.04
 
 # Avoid interactive prompts
 ENV DEBIAN_FRONTEND=noninteractive
@@ -42,12 +42,12 @@ RUN python3 -m pip install --upgrade pip
 # Set working directory
 WORKDIR /app
 
-# Download and install Godot 4.4 ARM64 build
-RUN wget https://github.com/godotengine/godot/releases/download/4.4-stable/Godot_v4.4-stable_linux.arm64.zip && \
-    unzip Godot_v4.4-stable_linux.arm64.zip -d /usr/local/bin && \
-    chmod +x /usr/local/bin/Godot_v4.4-stable_linux.arm64 && \
-    ln -s /usr/local/bin/Godot_v4.4-stable_linux.arm64 /usr/local/bin/godot && \
-    rm Godot_v4.4-stable_linux.arm64.zip
+# Download and install Godot 4.5 x86_64 build
+RUN wget https://github.com/godotengine/godot/releases/download/4.5-stable/Godot_v4.5-stable_linux.x86_64.zip && \
+    unzip Godot_v4.5-stable_linux.x86_64.zip -d /usr/local/bin && \
+    chmod +x /usr/local/bin/Godot_v4.5-stable_linux.x86_64 && \
+    ln -s /usr/local/bin/Godot_v4.5-stable_linux.x86_64 /usr/local/bin/godot && \
+    rm Godot_v4.5-stable_linux.x86_64.zip
 
 # Verify Godot installation
 RUN godot --version && which godot
