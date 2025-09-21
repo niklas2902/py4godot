@@ -121,13 +121,13 @@ def generate_constructor_args(class_, constructor):
     for arg in constructor["arguments"]:
         if not arg["type"].startswith("enum::"):
             if should_turn_string_to_nodepath(class_, constructor): # We want to be able to create a NodePath from String
-                result += f"{pythonize_name(arg['name'])}:'{unvariant(untypearray(unbitfield_type(arg['type'])))}' , "
+                result += f"{pythonize_name(arg['name'])}:'{unvariant(untypearray_or_dictionary(unbitfield_type(arg['type'])))}' , "
             else:
-                result += f"{pythonize_name(arg['name'])}:'{unnodepath(unstringname(unstring(unvariant(untypearray(unbitfield_type(arg['type']))))))}' , "
+                result += f"{pythonize_name(arg['name'])}:'{unnodepath(unstringname(unstring(unvariant(untypearray_or_dictionary(unbitfield_type(arg['type']))))))}' , "
         else:
             # enums are marked with enum:: . To be able to use this, we have to strip this
             arg_type = arg["type"].replace("enum::", "")
-            result += f"{pythonize_name(arg['name'])}:'{unstringname(unnodepath(unstring(unvariant(untypearray(unenumize_type(arg_type))))))}', "
+            result += f"{pythonize_name(arg['name'])}:'{unstringname(unnodepath(unstring(unvariant(untypearray_or_dictionary(unenumize_type(arg_type))))))}', "
     result = result[:-2]
     return result
 
@@ -485,7 +485,7 @@ def generate_default_args(mMethod):
             continue
         if not arg["type"].startswith("enum::") and not arg["type"].startswith("typedarray::") and not arg[
             "type"].startswith("bitfield::"):
-            type_ = unvariant(untypearray(unbitfield_type(arg['type'])))
+            type_ = unvariant(untypearray_or_dictionary(unbitfield_type(arg['type'])))
             if arg["type"] in builtin_classes:
                 res += f"{INDENT * 2}if {pythonize_name(arg['name'])} is None:"
                 res = generate_newline(res)
@@ -516,7 +516,7 @@ def generate_assert(args, methodname, classname):
             res += f"{INDENT * 2}assert(not {pythonize_name(arg['name'])} is None)"
             res = generate_newline(res)
         if not (methodname in ("connect", "disconnect") and classname == "Object"):
-            type_ = unenumize_type(untypearray(arg['type']))
+            type_ = unenumize_type(untypearray_or_dictionary(arg['type']))
             res += f"{INDENT * 2}{generate_type_assertion(pythonize_name(arg['name']), type_)}"
             res = generate_newline(res)
     return res
@@ -736,9 +736,9 @@ def generate_method_args(class_, method):
             return "*varargs"
         return res
     for arg in method["arguments"]:
-        if untypearray(arg["type"]) in classes - IGNORED_CLASSES - builtin_classes:
+        if untypearray_or_dictionary(arg["type"]) in classes - IGNORED_CLASSES - builtin_classes:
             res += f"{pythonize_name(arg['name'])}._ptr, " # Todo: implement conditional
-        elif untypearray(arg["type"]) in builtin_classes - IGNORED_CLASSES:
+        elif untypearray_or_dictionary(arg["type"]) in builtin_classes - IGNORED_CLASSES:
             if arg["type"] == "String":
                 if is_property_setter(class_, method["name"]):
                     res += f"py__string_{pythonize_name(arg['name'])}._ptr, "
@@ -750,7 +750,7 @@ def generate_method_args(class_, method):
                 res += f"py_nodepath_{pythonize_name(arg['name'])}._ptr, "
             else:
                 res += f"{pythonize_name(arg['name'])}._ptr, "
-        elif "TypedArray" in untypearray(arg["type"]):
+        elif "TypedArray" in untypearray_or_dictionary(arg["type"]):
             res += f"{pythonize_name(arg['name'])}._ptr, "
         elif arg["type"] == "Variant":
             res += f"{(pythonize_name(arg['name']))}, "
@@ -1028,7 +1028,7 @@ def generate_member_setter(class_, member):
     res = generate_newline(res)
 
     body = ""
-    body += f"{INDENT * 2}"+generate_type_assertion("value", unenumize_type(untypearray(member.type_)))
+    body += f"{INDENT * 2}"+generate_type_assertion("value", unenumize_type(untypearray_or_dictionary(member.type_)))
     body = generate_newline(body)
     body += f"{INDENT * 2}self._ptr.call_without_return({method_ids['normal_methods'][class_]['set_member_'+member.name]}, tuple([value]))"
     body = generate_newline(body)
@@ -1069,6 +1069,8 @@ def generate_property_index(property, is_setter=False):
 def generate_children(containing_class_, type_):
     if type_ and "," in type_:
         type_ = type_.split(",")[0].strip()
+    if type_ and ";" in type_:
+        type_ = type_.split(";")[0].strip()
     already_registed_classes = set()
     if isinstance(type_, set):
         for part_type in type_:
@@ -1084,11 +1086,14 @@ def generate_children(containing_class_, type_):
         temp.add(cls)
     already_registed_classes = temp
     res = ""
+    res += "typing.Union["
     for cls in already_registed_classes:
-        res += unenumize_type(ungodottype_type_array(unbitfield_type(unenumize_type(cls)), containing_class_)) + "|"
-    return res[:-1]
+        res += ungodottype_type_array(unbitfield_type(unenumize_type(cls)), containing_class_) + ","
+    return res[:-1] +"]"
 
 def ungodottype_type_array(type_, class_name):
+    if type_ == class_name:
+        return "'typing.Self'"
     if type_ == None:
         return "None"
     if (type_ == "String"):
@@ -1099,11 +1104,11 @@ def ungodottype_type_array(type_, class_name):
 
             if typed_array_type in builtin_classes - {"float", "int", "Nil", "bool"}:
                 if not is_core:
-                    return f"{typed_array_type}"
+                    return f"'{typed_array_type}'"
                 else:
-                    return typed_array_type
+                    return f"'{typed_array_type}'"
             elif (typed_array_type in classes):
-                return f"py4godot_{typed_array_type.lower()}.{typed_array_type}"
+                return f"'py4godot_{typed_array_type.lower()}.{typed_array_type}'"
             return typed_array_type
         return "typing.Any"
     elif type_ in builtin_classes - {"float", "int", "Nil", "bool"}:
@@ -1112,9 +1117,11 @@ def ungodottype_type_array(type_, class_name):
         else:
             return f"'{type_}'"
     elif "typedarray::" in type_:
-        return f"py4godot_{untypearray(type_).lower()}.{untypearray(type_)}"
+        return f"'py4godot_{untypearray_or_dictionary(type_).lower()}.{untypearray_or_dictionary(type_)}'"
+    elif "typeddictionary::" in type_:
+        return f"'{untypearray_or_dictionary(type_)}'"
     if (type_ in classes):
-        return f"py4godot_{type_.lower()}.{type_}"
+        return f"'py4godot_{type_.lower()}.{type_}'"
 
     return type_
 
@@ -1153,11 +1160,11 @@ def generate_property(property, classname):
         if (classname == "RichTextLabel" and property["name"] == "custom_effects"):
             result += f"{INDENT}def {pythonize_name(property['name'])}(self, value:'Array'):"  # TODO remove, when properties finally are the same types as functions
         elif classname in typed_arrays_names:
-            result += f"{INDENT}def {pythonize_name(property['name'])}(self, {import_type(unvariant_type_array(unnodepath(unstring(unstringname(untypearray(simplify_type(property['type']))))), classname), classname)} value):"
+            result += f"{INDENT}def {pythonize_name(property['name'])}(self, {import_type(unvariant_type_array(unnodepath(unstring(unstringname(untypearray_or_dictionary(simplify_type(property['type']))))), classname), classname)} value):"
         elif "typedarray" in property['type']:
             result += f"{INDENT}def {pythonize_name(property['name'])}(self, value:'Array'):"
         else:
-            result += f"{INDENT}def {pythonize_name(property['name'])}(self,  value:'{import_type(objectify_type(unnodepath(unstringname(unvariant(unstring(untypearray(simplify_type(property['type']))))))), classname)}'):"
+            result += f"{INDENT}def {pythonize_name(property['name'])}(self,  value:'{import_type(objectify_type(unnodepath(unstringname(unvariant(unstring(untypearray_or_dictionary(simplify_type(property['type']))))))), classname)}'):"
         result = generate_newline(result)
         result += f"{INDENT * 2}self.{pythonize_name(property['setter'])}(value)"
         result = generate_newline(result)
@@ -1296,7 +1303,7 @@ def import_type(type_, classname):
     elif type_ == "str":
         return type_
     elif "TypedArray" in type_:
-        return "py4godot_" + untypearray(type_).lower()+ "." + type_
+        return "py4godot_" + untypearray_or_dictionary(type_).lower()+ "." + type_
     return "py4godot_" + type_.lower() + "." + type_
 
 
@@ -1326,9 +1333,9 @@ def generate_args(class_, method_with_args):
 
     for arg in method_with_args["arguments"]:
         if not arg["type"].startswith("enum::"):
-            type_ = unnodepath(unstringname(unstring(unvariant(untypearray(unbitfield_type(arg['type']))))))
+            type_ = unnodepath(unstringname(unstring(unvariant(untypearray_or_dictionary(unbitfield_type(arg['type']))))))
             if class_["name"] in typed_arrays_names:
-                type_ = unstring(unvariant_type_array(untypearray(unbitfield_type(arg['type'])), class_["name"]))
+                type_ = unstring(unvariant_type_array(untypearray_or_dictionary(unbitfield_type(arg['type'])), class_["name"]))
             arg_type_for_default_arg = type_
             if arg["type"] in ("NodePath", "StringName"):
                 arg_type_for_default_arg = arg["type"]
@@ -1336,9 +1343,9 @@ def generate_args(class_, method_with_args):
         else:
             # enums are marked with enum:: . To be able to use this, we have to strip this
             arg_type = arg["type"].replace("enum::", "")
-            type_ = unstring(unvariant(untypearray(unenumize_type(arg_type))))
+            type_ = unstring(unvariant(untypearray_or_dictionary(unenumize_type(arg_type))))
             if class_["name"] in typed_arrays_names:
-                type_ = unstring(unvariant_type_array(untypearray(unenumize_type(arg_type)), class_["name"]))
+                type_ = unstring(unvariant_type_array(untypearray_or_dictionary(unenumize_type(arg_type)), class_["name"]))
             result += f"{pythonize_name(arg['name'])}:'{import_type(type_, class_['name'])}'  {generate_default_arg(class_, arg, type_)}, "
     if method_with_args["is_vararg"]:
         result += "*varargs, "
@@ -1353,13 +1360,14 @@ def unenumize_type(type_):
         # return "int"
         # TODO: enable later
         return "int"
-    elif type_ in enums:
+    elif enum_type in enums:
         return "int"
     return type_list[0]
 
 
-def untypearray(type_):
-    # TODO improve this by creating actually typed arrays
+def untypearray_or_dictionary(type_):
+    if "typeddictionary" in type_:
+        return "Dictionary"
     if "typedarray" in type_:
         return generate_typed_array_name(type_)
     return type_
@@ -1539,6 +1547,13 @@ def generate_classes(classes, filename, is_core=False, is_typed_array=False):
     res = generate_import()
     if is_typed_array:
         res = generate_newline(res)
+
+        typedarray_type = classes[0]["name"].replace('TypedArray', '')
+        if typedarray_type not in builtin_classes:
+            res += f"if typing.TYPE_CHECKING:"
+            res = generate_newline(res)
+            res += f"{INDENT}import py4godot.classes.{typedarray_type} as py4godot_{typedarray_type.lower()}"
+            res = generate_newline(res)
 
         res += f"from py4godot.classes.core import *"
         res = generate_newline(res)
@@ -1847,7 +1862,7 @@ def generate_cast(class_):
 
 def generate_type_assertion(arg_name,type_):
     res = ""
-    type_ = unenumize_type(untypearray(undouble_type(type_)))
+    type_ = untypearray_or_dictionary(unenumize_type(undouble_type(type_)))
     if type_ in ("int", "float"):
         res += f"assert isinstance({arg_name}, (int, float)), '{arg_name} must be int or float'"
     elif type_ == "String":
