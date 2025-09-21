@@ -12,7 +12,7 @@ shouldCreateObject = True
 
 cpdef object py_string_to_string_name(str string):
     cdef bytes encoded = string.encode("utf-8")
-    cdef const char * c_str = encoded
+    cdef char * c_str = encoded
     return py_c_string_to_string_name(c_str)
 
 
