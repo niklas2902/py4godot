@@ -36,6 +36,12 @@ void Variant::init_variant(){
     init_casting();
 }
 
+Variant Variant::construct_from_py_object(PyObject* object, const char* type){
+    Variant var{1};
+    var.init_from_py_object(object, type);
+    return var;
+}
+
 Variant::Variant(){
     /*int dummy = 0;
     auto constructor = get_interface()->get_variant_from_type_constructor(GDExtensionVariantType::GDEXTENSION_VARIANT_TYPE_INT);
