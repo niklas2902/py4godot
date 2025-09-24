@@ -24,13 +24,6 @@ jobs:
         run: |
           python meson_scripts/variables.py
 
-      - name: Cache pip
-        uses: actions/cache@v3
-        with:
-          path: ~/.cache/pip
-          key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
-          restore-keys: |
-            ${{ runner.os }}-pip-
 
       - name: Install dependencies
         run: |
@@ -43,7 +36,7 @@ jobs:
       - name: Generate files
         run: python generate.py -dev_build=True
 
-      - name: Cythoniz
+      - name: Cythonize
         shell: bash
         run: python cythonize_files.py
 
