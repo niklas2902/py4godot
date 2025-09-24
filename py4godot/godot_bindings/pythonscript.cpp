@@ -31,6 +31,8 @@ extern "C" {
         #endif
 
         #elif defined(__APPLE__)
+        char python_home[PATH_MAX];
+        wcstombs(python_home, PYTHONHOME, sizeof(python_home));
         // Load the shared library on macOS
         void* handle = dlopen((std::string(python_home) + "/bin/main.dylib").c_str(), RTLD_NOW | RTLD_GLOBAL);
         #endif

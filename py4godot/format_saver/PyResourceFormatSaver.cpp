@@ -56,6 +56,7 @@ void PyResourceFormatSaver::_init_values(){}
     file.flush();
     functions::get_object_destroy()(file.godot_owner);
 
+    script.set_path(path);
     *reinterpret_cast<int*>(res) = 0;
     script.reload(false);//update if properties changed //TODO:Better place?
     }

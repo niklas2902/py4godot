@@ -1254,7 +1254,7 @@ def generate_common_methods(class_):
     result = generate_newline(result)
     return result
 
-def extract_arg(type_, index):
+def extract_arg(type_, index, is_constructor=False):
     type_ = untypearray_or_dictionary(unenumize_type(type_))
     if type_ in classes or "typedarray" in type_.lower():
         return f"wrapper__extract_ptr_from_{untypearray_or_dictionary(type_)}Wrapper(PyTuple_GetItem(args_tuple, {index})) "
@@ -1264,6 +1264,12 @@ def extract_arg(type_, index):
         return f"(PyObject_IsTrue(PyTuple_GetItem(args_tuple, {index})) ? true : false) "
     elif type_ == "float" or type_ == "double":
         return f"PyFloat_AsDouble(PyTuple_GetItem(args_tuple, {index})) "
+    elif "enum::" in type_:
+        return f"PyLong_AsLong(PyTuple_GetItem(args_tuple, {index})) "
+    elif "bitfield::" in type_:
+        return f"PyLong_AsLong(PyTuple_GetItem(args_tuple, {index})) "
+    if is_constructor and type_ == "Variant":
+        return f"Variant::construct_from_py_object(PyTuple_GetItem(args_tuple, {index}), type_checking__get_name_from_object(PyTuple_GetItem(args_tuple, {index})))"
     return f"PyTuple_GetItem(args_tuple, {index}) "
 
 def extract_arg_operator(type_):
@@ -1278,12 +1284,12 @@ def extract_arg_operator(type_):
         return f"PyFloat_AsDouble(other) "
     return f"other "
 
-def generate_method_switch_args(method):
+def generate_method_switch_args(method, is_constructor=False):
     res = ""
     index = 0
     if "arguments" in method:
         for arg in method["arguments"]:
-            res += extract_arg(arg["type"], index)+", "
+            res += extract_arg(arg["type"], index, is_constructor=is_constructor)+", "
             index += 1
     if "is_vararg" in method and method["is_vararg"]:
         res += "varargs, "
@@ -1333,10 +1339,10 @@ def generate_switch_methods(class_):
             res += f"{INDENT * 3}case {method_ids['normal_methods'][class_['name']]['set_member_' + member.name]}: py_member_set_{member.name}({extract_arg(member.type_,0)});break;"
             res = generate_newline(res)
     if class_["name"] in builtin_classes:
-        res += f"{INDENT * 3}case {method_ids['normal_methods'][class_['name']]['py_destroy']}: {class_['name']}_py_destroy(); return Py_None;"
+        res += f"{INDENT * 3}case {method_ids['normal_methods'][class_['name']]['py_destroy']}: {class_['name']}_py_destroy(); break;"
         res = generate_newline(res)
     if class_["name"] == "RefCounted":
-        res += f"{INDENT * 3}case {method_ids['normal_methods'][class_['name']]['py_destroy']}: py_destroy_ref(); return Py_None;"
+        res += f"{INDENT * 3}case {method_ids['normal_methods'][class_['name']]['py_destroy']}: py_destroy_ref(); break;"
         res = generate_newline(res)
     if class_["name"] in builtin_classes:
         for operator in operator_dict[get_class_name(class_["name"])]:
@@ -1372,7 +1378,10 @@ def generate_switch_methods(class_):
             res = generate_newline(res)
             continue
         ret_type = get_ret_value(method)
-        if ret_type in builtin_classes.union(classes).difference({"float", "int", "bool"}) or "typedarray" in ret_type.lower():
+        if ret_type in {"void*"}:
+            res += f"{INDENT * 3}case {method_ids['normal_methods'][class_['name']][method['name']]}: {generate_varargs(method)} py_{pythonize_name(method['name'])}({args}); return Py_None;"
+
+        elif ret_type in builtin_classes.union(classes).difference({"float", "int", "bool"}) or "typedarray" in ret_type.lower():
             res += f"{INDENT*3}case {method_ids['normal_methods'][class_['name']][method['name']]}: {generate_varargs(method)} return wrapper__create_wrapper_from_{untypearray_or_dictionary(ret_type)}_ptr(py_{pythonize_name(method['name'])}({args}));"
         elif ret_type  == "int":
             res += f"{INDENT*3}case {method_ids['normal_methods'][class_['name']][method['name']]}: {generate_varargs(method)} return  PyLong_FromLong(py_{pythonize_name(method['name'])}({args}));"
@@ -1433,7 +1442,7 @@ def generate_switch_methods(class_):
     res = generate_newline(res)
     res += f"{INDENT}}}"
     res = generate_newline(res)
-    res += f"{INDENT}static PyObject* {class_['name']}::call_static_method_with_return(int method_hash, PyObject* args_tuple){{"
+    res += f"{INDENT}PyObject* {class_['name']}::call_static_method_with_return(int method_hash, PyObject* args_tuple){{"
     res = generate_newline(res)
     res += f"{INDENT}std::vector<PyObject*> varargs{{}};"
     res = generate_newline(res)
@@ -1489,7 +1498,7 @@ def generate_switch_methods(class_):
 
     res = generate_newline(res)
 
-    res += f"{INDENT}static PyObject* godot::{class_['name']}::call_constructor(int method_hash, PyObject* args_tuple){{"
+    res += f"{INDENT}PyObject* godot::{class_['name']}::call_constructor(int method_hash, PyObject* args_tuple){{"
     res = generate_newline(res)
     if class_["name"] not in builtin_classes:
         if is_singleton(class_["name"]):
@@ -1501,7 +1510,7 @@ def generate_switch_methods(class_):
         res = generate_newline(res)
         index = 0
         for constructor in class_["constructors"]:
-            args = generate_method_switch_args(constructor)
+            args = generate_method_switch_args(constructor, is_constructor=True)
             res += f"{INDENT*3}case {index}: return wrapper__create_wrapper_from_{class_['name']}_ptr({class_['name']}::py_new{index}({args}));"
             res = generate_newline(res)
             index += 1
@@ -1587,8 +1596,8 @@ def generate_member_getter(class_, member):
     return res
 
 def generate_ret_ptr(type_, _ret_name = "_ret"):
-    if untypearray_or_dictionary(type_) in typed_arrays_names:
-        return f"std::make_shared<{untypearray_or_dictionary(type_)}>({_ret_name})"
+    if untypearray(type_) in typed_arrays_names:
+        return f"std::make_shared<{untypearray(type_)}>({_ret_name})"
     if type_ in builtin_classes - {"int", "float", "bool", "Nil"}:
         return f"std::make_shared<{type_}>({_ret_name})"
     if type_ in classes:
@@ -1692,7 +1701,7 @@ def generate_property(class_, property):
         return result
     result += f"{INDENT}"
     result = generate_newline(result)
-    result += f"{INDENT}{simplify_type(untypearray_or_dictionary(unbitfield_type(unenumize_type((property['type'])))))} {class_['name']}::prop_get_{pythonize_name(property['name'])}()" + "{"
+    result += f"{INDENT}{simplify_type(untypearray(unbitfield_type(unenumize_type((property['type'])))))} {class_['name']}::prop_get_{pythonize_name(property['name'])}()" + "{"
     result = generate_newline(result)
     if "index" not in property.keys():
         result += f"{INDENT * 2}{simplify_type(unbitfield_type(unenumize_type((property['type']))))} _ret = {pythonize_name(property['getter'])}();"
@@ -1713,7 +1722,7 @@ def generate_property(class_, property):
     result = generate_newline(result)
 
     if "setter" in property and property["setter"] != "":
-        result += f"{INDENT}void {class_['name']}::prop_set_{pythonize_name(property['name'])}({untypearray_or_dictionary(simplify_type(property['type']))} value)" + "{"
+        result += f"{INDENT}void {class_['name']}::prop_set_{pythonize_name(property['name'])}({untypearray(simplify_type(property['type']))} value)" + "{"
         result = generate_newline(result)
         if "index" not in property.keys():
             result += f"{INDENT * 2}{pythonize_name(property['setter'])}(value);"
@@ -1806,9 +1815,8 @@ def unenumize_type(type_):
     return type_list[0]
 
 
-def untypearray_or_dictionary(type_):
-    if "typeddictionary" in type_:
-        return "Dictionary"
+def untypearray(type_):
+    # TODO improve this by creating actually typed arrays
     if "typedarray" in type_:
         return generate_typed_array_name(type_)
     return type_
@@ -1974,7 +1982,7 @@ def generate_operators_for_class(class_name):
                             if ret_type in builtin_classes.union(classes).difference(
                                     {"float", "int", "bool"}) or "typedarray" in ret_type.lower():
 
-                                res += f"{INDENT * 2}if (type_checking_{right_type}(other)){{return wrapper__create_wrapper_from_{untypearray_or_dictionary(op.return_type)}_ptr(py_operator_{operator_to_python_name(operator)}({extract_arg_operator(right_type)}));}}"
+                                res += f"{INDENT * 2}if (type_checking_{right_type}(other)){{return wrapper__create_wrapper_from_{untypearray(op.return_type)}_ptr(py_operator_{operator_to_python_name(operator)}({extract_arg_operator(right_type)}));}}"
                             elif ret_type == "int":
                                 res += f"{INDENT * 2}if (type_checking_{right_type}(other)){{return PyLong_FromLong(py_operator_{operator_to_python_name(operator)}({extract_arg_operator(right_type)}));}}"
 
@@ -1991,16 +1999,16 @@ def generate_operators_for_class(class_name):
                         if ret_type in builtin_classes.union(classes).difference(
                                 {"float", "int", "bool"}) or "typedarray" in ret_type.lower():
 
-                            res += f"{INDENT * 2}wrapper__create_wrapper_from_{untypearray_or_dictionary(op.return_type)}_ptr(py_operator_{operator_to_python_name(operator)}(other));"
+                            res += f"{INDENT * 2}wrapper__create_wrapper_from_{untypearray_or_dictionary(op.return_type)}_ptr(py_operator_{operator_to_python_name(operator)}(Variant::construct_from_py_object(other, type_checking__get_name_from_object(other))));"
                         elif ret_type == "int":
-                            res += f"{INDENT * 2}return PyLong_FromLong(py_operator_{operator_to_python_name(operator)}(other));"
+                            res += f"{INDENT * 2}return PyLong_FromLong(py_operator_{operator_to_python_name(operator)}(Variant::construct_from_py_object(other, type_checking__get_name_from_object(other))));"
 
                         elif ret_type == "bool":
-                            res += f"{INDENT * 2}return PyBool_FromLong(py_operator_{operator_to_python_name(operator)}(other));"
+                            res += f"{INDENT * 2}return PyBool_FromLong(py_operator_{operator_to_python_name(operator)}(Variant::construct_from_py_object(other, type_checking__get_name_from_object(other))));"
                         elif ret_type == "float":
-                            res += f"{INDENT * 2}return PyFloat_FromDouble(py_operator_{operator_to_python_name(operator)}(other));"
+                            res += f"{INDENT * 2}return PyFloat_FromDouble(py_operator_{operator_to_python_name(operator)}(Variant::construct_from_py_object(other, type_checking__get_name_from_object(other))));"
                         else:
-                            res += f"{INDENT * 2}return py_operator_{operator_to_python_name(operator)}(other);"
+                            res += f"{INDENT * 2}return py_operator_{operator_to_python_name(operator)}(Variant::construct_from_py_object(other, type_checking__get_name_from_object(other)));"
                         res = generate_newline(res)
 
                     res += f"}}"

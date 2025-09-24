@@ -197,6 +197,7 @@ namespace godot{
         PyObject* get_converted_value(bool should_return_pystring = false);
         PyObject* get_converted_value_native_ptr(bool should_return_pystring = false);
 
+        static Variant construct_from_py_object(PyObject* object, const char* type);
         void init_from_py_object(PyObject* object, const char* type);
         void init_from_py_object_native_ptr(PyObject* object, const char* type_name);
         static Variant new_static(GDExtensionTypePtr ptr) {

@@ -299,6 +299,13 @@ void PyScriptExtension::set_path_internal(std::string path)  {
 
 
 std::string PyScriptExtension::path_as_string(){
+    if (string_path == std::string{}){
+        auto gd_path = get_path();
+        char* res_string;
+        gd_string_to_c_string(gd_path, gd_path.length(), &res_string);
+        string_path = std::string{res_string};
+        delete[] res_string;
+    }
     return string_path;
 }
 
