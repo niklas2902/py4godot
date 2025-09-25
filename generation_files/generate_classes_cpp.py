@@ -1596,8 +1596,8 @@ def generate_member_getter(class_, member):
     return res
 
 def generate_ret_ptr(type_, _ret_name = "_ret"):
-    if untypearray(type_) in typed_arrays_names:
-        return f"std::make_shared<{untypearray(type_)}>({_ret_name})"
+    if untypearray_or_dictionary(type_) in typed_arrays_names:
+        return f"std::make_shared<{untypearray_or_dictionary(type_)}>({_ret_name})"
     if type_ in builtin_classes - {"int", "float", "bool", "Nil"}:
         return f"std::make_shared<{type_}>({_ret_name})"
     if type_ in classes:
@@ -1701,7 +1701,7 @@ def generate_property(class_, property):
         return result
     result += f"{INDENT}"
     result = generate_newline(result)
-    result += f"{INDENT}{simplify_type(untypearray(unbitfield_type(unenumize_type((property['type'])))))} {class_['name']}::prop_get_{pythonize_name(property['name'])}()" + "{"
+    result += f"{INDENT}{simplify_type(untypearray_or_dictionary(unbitfield_type(unenumize_type((property['type'])))))} {class_['name']}::prop_get_{pythonize_name(property['name'])}()" + "{"
     result = generate_newline(result)
     if "index" not in property.keys():
         result += f"{INDENT * 2}{simplify_type(unbitfield_type(unenumize_type((property['type']))))} _ret = {pythonize_name(property['getter'])}();"
@@ -1722,7 +1722,7 @@ def generate_property(class_, property):
     result = generate_newline(result)
 
     if "setter" in property and property["setter"] != "":
-        result += f"{INDENT}void {class_['name']}::prop_set_{pythonize_name(property['name'])}({untypearray(simplify_type(property['type']))} value)" + "{"
+        result += f"{INDENT}void {class_['name']}::prop_set_{pythonize_name(property['name'])}({untypearray_or_dictionary(simplify_type(property['type']))} value)" + "{"
         result = generate_newline(result)
         if "index" not in property.keys():
             result += f"{INDENT * 2}{pythonize_name(property['setter'])}(value);"
@@ -1815,8 +1815,10 @@ def unenumize_type(type_):
     return type_list[0]
 
 
-def untypearray(type_):
-    # TODO improve this by creating actually typed arrays
+
+def untypearray_or_dictionary(type_):
+    if "typeddictionary" in type_:
+        return "Dictionary"
     if "typedarray" in type_:
         return generate_typed_array_name(type_)
     return type_
@@ -1982,7 +1984,7 @@ def generate_operators_for_class(class_name):
                             if ret_type in builtin_classes.union(classes).difference(
                                     {"float", "int", "bool"}) or "typedarray" in ret_type.lower():
 
-                                res += f"{INDENT * 2}if (type_checking_{right_type}(other)){{return wrapper__create_wrapper_from_{untypearray(op.return_type)}_ptr(py_operator_{operator_to_python_name(operator)}({extract_arg_operator(right_type)}));}}"
+                                res += f"{INDENT * 2}if (type_checking_{right_type}(other)){{return wrapper__create_wrapper_from_{untypearray_or_dictionary(op.return_type)}_ptr(py_operator_{operator_to_python_name(operator)}({extract_arg_operator(right_type)}));}}"
                             elif ret_type == "int":
                                 res += f"{INDENT * 2}if (type_checking_{right_type}(other)){{return PyLong_FromLong(py_operator_{operator_to_python_name(operator)}({extract_arg_operator(right_type)}));}}"
 
