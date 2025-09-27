@@ -57,12 +57,12 @@ jobs:
         if: matrix.os == 'ubuntu-latest'
         run: |
           sudo apt-get update
-          sudo apt-get install -y cmake ninja-build meson pkg-config libsdl2-dev python3-venv
+          sudo apt-get install -y cmake ninja-build meson pkg-config libsdl2-dev python3-venv mingw-w64 
           python3 -m venv venv
           source venv/bin/activate
           python -m pip install -r requirements.txt
-          python -m pip install flake8
-          python create_plugin.py
+          python build.py --target_platform=linux64 --compiler=gcc 
+          python build.py --target_platform=windows64 --compiler=g++-mingw 
 
       - name: Install dependencies and build  (Ubuntu Arm 64)
         if: matrix.os == 'ubuntu-24.04-arm'
@@ -72,7 +72,6 @@ jobs:
           python3 -m venv venv
           source venv/bin/activate
           python -m pip install -r requirements.txt
-          python -m pip install flake8
           python build.py --target_platform=linuxarm64 --compiler=gcc 
 
       - name: Install dependencies and build (macOS)
@@ -105,7 +104,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: py4godot-${{ matrix.os }}
-          path: plugin/addons/py4godot
+          path: build/py4godot
           retention-days: 30
 
       - name: Upload py4godot build artifact (Other)
