@@ -246,6 +246,8 @@ try:
         shutil.copy("build_resources/dependencies.txt", "build/py4godot/dependencies.txt")
         shutil.copy("build_resources/install_dependencies.py", "build/py4godot/install_dependencies.py")
         shutil.copy("build_resources/python.gdextension", "build/py4godot/python.gdextension")
+        with open(f"build/py4godot/{python_ver}-{args.target_platform}/.gdignore", "w"):
+            pass
         download_get_pip("build/py4godot")
         python_svg_dest = "build/py4godot/"+ "/Python.svg"
         if not os.path.exists(python_svg_dest):
