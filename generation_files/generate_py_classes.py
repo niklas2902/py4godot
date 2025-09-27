@@ -1030,7 +1030,7 @@ def generate_member_setter(class_, member):
     body = ""
     body += f"{INDENT * 2}"+generate_type_assertion("value", unenumize_type(untypearray_or_dictionary(member.type_)))
     body = generate_newline(body)
-    body += f"{INDENT * 2}self._ptr.call_without_return({method_ids['normal_methods'][class_]['set_member_'+member.name]}, tuple([value]))"
+    body += f"{INDENT * 2}self._ptr.call_with_return({method_ids['normal_methods'][class_]['set_member_'+member.name]}, tuple([value]))"
     body = generate_newline(body)
     res += body
 

@@ -1255,7 +1255,7 @@ def generate_common_methods(class_):
     return result
 
 def extract_arg(type_, index, is_constructor=False):
-    type_ = untypearray_or_dictionary(unenumize_type(type_))
+    type_ = untypearray_or_dictionary(type_)
     if type_ in classes or "typedarray" in type_.lower():
         return f"wrapper__extract_ptr_from_{untypearray_or_dictionary(type_)}Wrapper(PyTuple_GetItem(args_tuple, {index})) "
     elif type_ == "int":
@@ -1406,7 +1406,7 @@ def generate_switch_methods(class_):
                     {"float", "int", "bool"}) or "typedarray" in member.type_.lower():
                 res += f"{INDENT*3}case {method_ids['normal_methods'][class_['name']]['get_member_'+member.name]}: {generate_varargs(method)} return wrapper__create_wrapper_from_{untypearray_or_dictionary(member.type_)}_ptr(py_member_get_{member.name}());"
                 res = generate_newline(res)
-            elif member.type_ == "int":
+            elif member.type_ == "int" or "enum::" in member.type_:
                 res += f"{INDENT * 3}case {method_ids['normal_methods'][class_['name']]['get_member_'+member.name]}: {generate_varargs(method)} return  PyLong_FromLong(py_member_get_{member.name}());"
             elif member.type_== "bool":
                 res += f"{INDENT * 3}case {method_ids['normal_methods'][class_['name']]['get_member_'+member.name]}: {generate_varargs(method)} return  PyBool_FromLong(py_member_get_{member.name}());"

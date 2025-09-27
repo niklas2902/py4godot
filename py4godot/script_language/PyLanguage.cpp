@@ -1179,7 +1179,7 @@ void call_virtual_func__get_global_class_name(GDExtensionClassInstancePtr p_inst
 StringName func_name__get_global_class_name;
 
 GDExtensionClassCallVirtual get_virtual(void *p_userdata, GDExtensionConstStringNamePtr p_name) {
-    LOCK(mtx);
+
 
     StringName name = StringName::new_static(((void**)const_cast<GDExtensionTypePtr>(p_name))[0]);
 

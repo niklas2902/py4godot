@@ -1,5 +1,5 @@
 # Use an Ubuntu base image (x86_64)
-FROM ubuntu:22.04
+FROM ubuntu:latest
 
 # Avoid interactive prompts
 ENV DEBIAN_FRONTEND=noninteractive
@@ -30,14 +30,10 @@ RUN apt-get update && apt-get install -y \
     && rm -rf /var/lib/apt/lists/*
 
 # Install Python 3.11 and pip
-RUN apt-get update && apt-get install -y python3.11 python3.11-venv python3.11-dev python3-pip
+RUN apt-get update && apt-get install -y python3-venv python-is-python3 python3-pip
 
-# Set Python 3.11 as the default
-RUN update-alternatives --install /usr/bin/python3 python3 /usr/bin/python3.11 1 && \
-    update-alternatives --set python3 /usr/bin/python3.11
 
-# Upgrade pip
-RUN python3 -m pip install --upgrade pip
+RUN python3 -m pip install setuptools --break-system-packages
 
 # Set working directory
 WORKDIR /app

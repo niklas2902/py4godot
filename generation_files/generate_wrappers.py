@@ -84,11 +84,6 @@ def generate_wrapper(class_name):
     res += f"{INDENT*2}return self._ptr.get().get_godot_owner()"
     res = generate_newline(res)
 
-    res += f"{INDENT}cpdef call_without_return(self, int method_hash, tuple args_tuple):"
-    res = generate_newline(res)
-    res += f"{INDENT*2}self._ptr.get().switch_call(method_hash, <PyObject*>args_tuple)"
-    res = generate_newline(res)
-
     res += f"{INDENT}cpdef call_with_return(self, int method_hash, tuple args_tuple):"
     res = generate_newline(res)
     res += f"{INDENT*2}return <object>self._ptr.get().switch_call_return(method_hash, <PyObject*>args_tuple)"
@@ -125,8 +120,6 @@ def generate_wrapper_pxd(class_name):
     res += f"{INDENT}cdef set_gdowner(self, void* godot_owner)"
     res = generate_newline(res)
     res += f"{INDENT}cdef void* get_gdowner(self)"
-    res = generate_newline(res)
-    res += f"{INDENT}cpdef call_without_return(self, int method_hash, tuple args_tuple)"
     res = generate_newline(res)
     res += f"{INDENT}cpdef call_with_return(self, int method_hash, tuple args_tuple)"
     res = generate_newline(res)

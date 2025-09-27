@@ -1,0 +1,7 @@
+[built-in options]
+
+cpp_args = ['-Os', '-DNDEBUG', '-w', '-fvisibility=hidden']
+cpp_link_args = ['-s', '-flto', '-Wl,--strip-all']
+
+
+

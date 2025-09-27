@@ -15,16 +15,6 @@
 #endif
 #endif
 
-//Setting up threading
-#if defined(_WIN64) || defined(_WIN32)
-    #include <mutex>
-    extern std::mutex mtx; // Define a mutex
-    #define LOCK //std::lock_guard<std::mutex> lock
-#else
-    #include <mutex>
-    extern std::mutex mtx; // Define a mutex
-    #define LOCK //std::lock_guard<std::mutex> lock
-#endif
 
 extern GDExtensionClassLibraryPtr _library;
 

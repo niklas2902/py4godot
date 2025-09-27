@@ -115,7 +115,6 @@ void PyResourceFormatLoader::_get_classes_used( String& path, GDExtensionTypePtr
     print_error("_get_classes_used");
 }
 void PyResourceFormatLoader::_load( String& path, String& original_path, bool use_sub_threads, int cache_mode, GDExtensionTypePtr res){
-    //LOCK(mtx);
 
     print_error("_load");
     GDExtensionVariantFromTypeConstructorFunc constructor_func;
@@ -280,7 +279,7 @@ StringName func_name__load;
 
 }
 GDExtensionClassCallVirtual get_virtual_loader(void *p_userdata, GDExtensionConstStringNamePtr p_name) {
-    LOCK(mtx);
+
 
     StringName name = StringName::new_static(((void**)const_cast<GDExtensionTypePtr>(p_name))[0]);
     auto length = name.length();

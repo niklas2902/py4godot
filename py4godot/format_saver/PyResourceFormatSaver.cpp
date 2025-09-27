@@ -46,7 +46,7 @@ void PyResourceFormatSaver::_init_values(){}
 
   void PyResourceFormatSaver::_save( Resource& resource, String& path, int flags, GDExtensionTypePtr res){
     print_error("_save");
-    LOCK(mtx);
+
     Script script = Script::new_static(resource.godot_owner);
 
     auto source = script.get_source_code();

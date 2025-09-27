@@ -104,7 +104,7 @@ void c_instance_call(GDExtensionScriptInstanceDataPtr p_self, GDExtensionConstSt
 
 GDExtensionBool c_instance_set(GDExtensionScriptInstanceDataPtr p_instance, GDExtensionConstStringNamePtr p_name, GDExtensionConstVariantPtr p_value){
     print_error("_c_instance_set");
-    //std::lock_guard<std::mutex> lock(mtx);
+    //std::lock_guard<std::mutex>
     InstanceData* instance = (InstanceData*)p_instance;
     StringName method_name = StringName::new_static(((void**)p_name)[0]);
     String method_name_str = String::new2(method_name);
@@ -201,7 +201,6 @@ const GDExtensionMethodInfo * c_instance_get_method_list(GDExtensionScriptInstan
 
 GDExtensionObjectPtr c_instance_get_script(GDExtensionScriptInstanceDataPtr p_instance){
     print_error("_c_instance_get_script");
-    LOCK(mtx);
     auto p_instance_data = (InstanceData*) p_instance;
     PyScriptExtension* extension = (PyScriptExtension*)(p_instance_data->script);
     return extension->godot_owner;
@@ -209,7 +208,6 @@ GDExtensionObjectPtr c_instance_get_script(GDExtensionScriptInstanceDataPtr p_in
 
 GDExtensionBool c_instance_has_method(GDExtensionScriptInstanceDataPtr p_instance, GDExtensionConstStringNamePtr p_name){
     print_error("_c_instance_has_method");
-    LOCK(mtx);
     auto gil_state = PyGILState_Ensure();
     auto ret = instance_has_method(p_instance, p_name);
     PyGILState_Release(gil_state);

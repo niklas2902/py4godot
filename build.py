@@ -85,6 +85,11 @@ def get_debug_release_cross_compile_file(compiler, buildtype):
             return "--cross-file platforms/release_debug/msvc_release.cross"
         else:
             return "--cross-file platforms/release_debug/msvc_debug.cross"
+    elif "mingw" in compiler:
+        if "release" in buildtype:
+            return "--cross-file platforms/release_debug/mingw_release.cross"
+        else:
+            return "--cross-file platforms/release_debug/mingw_debug.cross"
     elif "gcc" in compiler or "g++" in compiler:
         if "release" in buildtype:
             return "--cross-file platforms/release_debug/g++_release.cross"
@@ -227,7 +232,6 @@ try:
     create_gdextension()
     copy_tools.run(args.target_platform)
     copy_tools.copy_main(args.target_platform)
-    copy_tools.copy_mingw(args.compiler, args.target_platform)
     copy_tools.copy_stub_files(args.target_platform)
     copy_tools.copy_experimental(args.target_platform)
     generate_godot.generate_gdignore(args.target_platform)
