@@ -42,10 +42,15 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        os: [ubuntu-latest,
-             #windows-latest,
-             macos-latest,
-             ubuntu-24.04-arm]
+        include:
+          - os: ubuntu-latest
+            target: linux
+          - os: ubuntu-latest
+            target: windows
+          - os: macos-latest
+            target: macos
+          - os: ubuntu-24.04-arm
+            target: linux-arm
 
     steps:
       - name: Download Precompiled Code
@@ -53,19 +58,29 @@ jobs:
         with:
           name: precompiled
 
-      - name: Install dependencies and build for linux and windows  (Ubuntu)
-        if: matrix.os == 'ubuntu-latest'
+      - name: Install dependencies and build for linux  (Ubuntu)
+        if: matrix.target == 'linux'
         run: |
           sudo apt-get update
-          sudo apt-get install -y cmake ninja-build meson pkg-config libsdl2-dev python3-venv mingw-w64 
+          sudo apt-get install -y cmake ninja-build meson pkg-config libsdl2-dev python3-venv
           python3 -m venv venv
           source venv/bin/activate
           python -m pip install -r requirements.txt
           python build.py --target_platform=linux64 --compiler=gcc 
           python build.py --target_platform=windows64 --compiler=g++-mingw 
 
+      - name: Install dependencies and build for Windows  (Ubuntu)
+        if: matrix.target == 'windows'
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y cmake ninja-build meson pkg-config libsdl2-dev python3-venv mingw-w64 
+          python3 -m venv venv
+          source venv/bin/activate
+          python -m pip install -r requirements.txt
+          python build.py --target_platform=windows64 --compiler=g++-mingw 
+
       - name: Install dependencies and build  (Ubuntu Arm 64)
-        if: matrix.os == 'ubuntu-24.04-arm'
+        if: matrix.target == 'linux-arm'
         run: |
           sudo apt-get update
           sudo apt-get install -y cmake ninja-build meson pkg-config libsdl2-dev python3-venv
@@ -75,7 +90,7 @@ jobs:
           python build.py --target_platform=linuxarm64 --compiler=gcc 
 
       - name: Install dependencies and build (macOS)
-        if: matrix.os == 'macos-latest'
+        if: matrix.target == 'macos'
         run: |
           brew update
           brew install cmake ninja meson pkg-config sdl2
@@ -85,33 +100,10 @@ jobs:
           python -m pip install flake8
           python build.py --target_platform=darwin64 --compiler=clang
 
-#      - name: Setup MSBuild (Windows only)
-#        if: matrix.os == 'windows-latest'
-#        uses: microsoft/setup-msbuild@v1.3.1
-#
-#      - name: Install dependencies and build (Windows)
-#        if: matrix.os == 'windows-latest'
-#        shell: cmd
-#        run: |
-#          choco install cmake --installargs "ADD_CMAKE_TO_PATH=System" -y
-#          choco install ninja meson pkgconfiglite -y
-#          python -m pip install -r requirements.txt
-#          python -m pip install flake8
-#          python build.py --target_platform=windows64 --compiler=gcc
-
-      - name: Upload py4godot build artifact (Ubuntu)
-        if: matrix.os == 'ubuntu-latest'
+      - name: Upload py4godot build artifact
         uses: actions/upload-artifact@v4
         with:
-          name: py4godot-${{ matrix.os }}
-          path: build/py4godot
-          retention-days: 30
-
-      - name: Upload py4godot build artifact (Other)
-        if: matrix.os != 'ubuntu-latest'
-        uses: actions/upload-artifact@v4
-        with:
-          name: py4godot-${{ matrix.os }}
+          name: py4godot-${{ matrix.target }}
           path: build/py4godot/
           retention-days: 30
 
@@ -119,28 +111,28 @@ jobs:
     needs: build_cpp
     runs-on: ubuntu-latest
     steps:
-#      - name: Download Windows
-#        uses: actions/download-artifact@v4
-#        with:
-#          name: py4godot-windows-latest
-#          path: install_dir/addons/py4godot
-
       - name: Download Linux
         uses: actions/download-artifact@v4
         with:
-          name: py4godot-ubuntu-latest
+          name: py4godot-linux
           path: install_dir/addons/py4godot
 
       - name: Download Linux ARM
         uses: actions/download-artifact@v4
         with:
-          name: py4godot-ubuntu-24.04-arm
+          name: py4godot-linux-arm
           path: install_dir/addons/py4godot
 
       - name: Download Macos
         uses: actions/download-artifact@v4
         with:
-          name: py4godot-macos-latest
+          name: py4godot-macos
+          path: install_dir/addons/py4godot
+
+      - name: Download Windows
+        uses: actions/download-artifact@v4
+        with:
+          name: py4godot-windows
           path: install_dir/addons/py4godot
 
       - name: Upload Zipped Artifact
