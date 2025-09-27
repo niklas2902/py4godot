@@ -67,13 +67,12 @@ jobs:
           source venv/bin/activate
           python -m pip install -r requirements.txt
           python build.py --target_platform=linux64 --compiler=gcc 
-          python build.py --target_platform=windows64 --compiler=g++-mingw 
 
       - name: Install dependencies and build for Windows  (Ubuntu)
         if: matrix.target == 'windows'
         run: |
           sudo apt-get update
-          sudo apt-get install -y cmake ninja-build meson pkg-config libsdl2-dev python3-venv mingw-w64 
+          sudo apt-get install -y cmake ninja-build meson pkg-config libsdl2-dev python3-venv mingw-w64 binutils-mingw-w64
           python3 -m venv venv
           source venv/bin/activate
           python -m pip install -r requirements.txt
