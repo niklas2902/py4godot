@@ -53,7 +53,7 @@ jobs:
         with:
           name: precompiled
 
-      - name: Install dependencies and build  (Ubuntu)
+      - name: Install dependencies and build for linux and windows  (Ubuntu)
         if: matrix.os == 'ubuntu-latest'
         run: |
           sudo apt-get update
@@ -62,7 +62,7 @@ jobs:
           source venv/bin/activate
           python -m pip install -r requirements.txt
           python -m pip install flake8
-          python build.py --target_platform=linux64 --compiler=gcc 
+          python create_plugin.py
 
       - name: Install dependencies and build  (Ubuntu Arm 64)
         if: matrix.os == 'ubuntu-24.04-arm'
@@ -100,7 +100,16 @@ jobs:
 #          python -m pip install flake8
 #          python build.py --target_platform=windows64 --compiler=gcc
 
-      - name: Upload py4godot build artifact
+      - name: Upload py4godot build artifact (Ubuntu)
+        if: matrix.os == 'ubuntu-latest'
+        uses: actions/upload-artifact@v4
+        with:
+          name: py4godot-${{ matrix.os }}
+          path: plugin/addons/py4godot
+          retention-days: 30
+
+      - name: Upload py4godot build artifact (Other)
+        if: matrix.os != 'ubuntu-latest'
         uses: actions/upload-artifact@v4
         with:
           name: py4godot-${{ matrix.os }}
