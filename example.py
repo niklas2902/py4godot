@@ -72,6 +72,9 @@ if __name__ == "__main__":
     create_gdextension()
     shutil.copy("build_resources/dependencies.txt", "example/addons/py4godot/dependencies.txt")
     shutil.copy("build_resources/install_dependencies.py", "example/addons/py4godot/install_dependencies.py")
+    shutil.copy("build_resources/export_py4godot.gd", "example/addons/py4godot/export_py4godot.gd")
+    shutil.copy("build_resources/export_py4godot_main.gd", "example/addons/py4godot/export_py4godot_main.gd")
+    shutil.copy("build_resources/plugin.cfg", "example/addons/py4godot/plugin.cfg")
     download_get_pip("example/addons/py4godot")
 
     python_svg_dest = "example/addons/py4godot/"+ "/Python.svg"

@@ -246,6 +246,9 @@ try:
         shutil.copy("build_resources/dependencies.txt", "build/py4godot/dependencies.txt")
         shutil.copy("build_resources/install_dependencies.py", "build/py4godot/install_dependencies.py")
         shutil.copy("build_resources/python.gdextension", "build/py4godot/python.gdextension")
+        shutil.copy("build_resources/export_py4godot.gd", "build/py4godot/export_py4godot.gd")
+        shutil.copy("build_resources/export_py4godot_main.gd", "build/py4godot/export_py4godot_main.gd")
+        shutil.copy("build_resources/plugin.cfg", "build/py4godot/plugin.cfg")
         with open(f"build/py4godot/{python_ver}-{args.target_platform}/.gdignore", "w"):
             pass
         download_get_pip("build/py4godot")
