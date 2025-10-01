@@ -970,10 +970,10 @@ def generate_enums(class_):
         return ""
     res = ""
     for enum in class_["enums"]:
-        res += f"cpdef enum {class_['name']}__{enum['name']}:"
+        res += f"class {enum['name']}:"
         res = generate_newline(res)
         for enum_value in enum["values"]:
-            res += f"{INDENT}{class_['name']}__{enum_value['name']} = {enum_value['value']}"
+            res += f"{INDENT}{enum_value['name']} = {enum_value['value']}"
             res = generate_newline(res)
     res = generate_newline(res)
     return res
@@ -1603,6 +1603,9 @@ def generate_classes(classes, filename, is_core=False, is_typed_array=False):
         if is_singleton(class_["name"]):
             res += f"_{class_['name']}_singleton_instance = None"
             res = generate_newline(res)
+
+        res += generate_enums(class_)
+        res = generate_newline(res)
 
         res += f"class {class_['name']}({get_base_class(class_)}):"
         res = generate_newline(res)
