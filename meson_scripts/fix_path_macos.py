@@ -23,7 +23,7 @@ def fix_macos_paths():
     # Iterate over the found libraries
     for entry in list_dll:
         # Skip any .dylib files related to cpython (you can adjust this check as needed)
-        if "cpython" in entry:
+        if "cpython" in entry or "venv" in entry:
             continue
 
         # Get the absolute path of the current .dylib file
