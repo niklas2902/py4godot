@@ -3,11 +3,10 @@ import json
 import os
 import sys
 from functools import lru_cache
+sys.path.append("..")
 
 from generation_files.utils.constant_generation_helpers import generate_constants_for_class, \
     generate_type_hints_constants_for_class
-
-sys.path.append("..")
 from generate_enums import enumize_name
 from xml_help import init_class, get_class_description, get_method_description, get_property_description
 from generation_tools import write_if_different
