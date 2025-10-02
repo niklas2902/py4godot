@@ -3,6 +3,10 @@ import json
 import os
 import sys
 from functools import lru_cache
+
+from generation_files.utils.constant_generation_helpers import generate_constants_for_class, \
+    generate_type_hints_constants_for_class
+
 sys.path.append("..")
 from generate_enums import enumize_name
 from xml_help import init_class, get_class_description, get_method_description, get_property_description
@@ -1610,6 +1614,8 @@ def generate_classes(classes, filename, is_core=False, is_typed_array=False):
         res += f"class {class_['name']}({get_base_class(class_)}):"
         res = generate_newline(res)
         res += generate_class_docstring()
+        res = generate_newline(res)
+        res += generate_type_hints_constants_for_class(class_)
         res = generate_newline(res)
         res += generate_common_methods(class_)
         res += generate_special_methods(class_)

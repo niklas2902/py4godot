@@ -30,84 +30,6 @@ def format_value(value, typ=None):
     else:
         return str(value)
 
-
-def generate_constants_classes(json_path):
-    """Generate Python constants classes from Godot extension API JSON."""
-    try:
-        with open(json_path, 'r', encoding='utf-8') as f:
-            data = json.load(f)
-    except FileNotFoundError:
-        raise FileNotFoundError(f"JSON file not found: {json_path}")
-    except json.JSONDecodeError as e:
-        raise ValueError(f"Invalid JSON in file {json_path}: {e}")
-
-    # Extract constants from classes in the API
-    grouped = {}
-
-    # Look for classes in the API data
-    classes = data.get('classes', []) + data.get("builtin_classes", [])
-    print([cls['name'] for cls in classes])
-    for class_info in classes:
-        class_name = class_info.get('name', 'Unknown')
-        constants = class_info.get('constants', [])
-
-        if not constants:
-            continue
-
-        # Create a constants class for this Godot class
-        const_class_name = f"{class_name}"
-        if const_class_name not in grouped:
-            grouped[const_class_name] = []
-
-        for const in constants:
-            name = const.get('name')
-            value = const.get('value')
-
-            if not name or value is None:
-                continue
-
-            grouped[const_class_name].append((name, value))
-
-    global_constants = data.get('global_constants', [])
-    if global_constants:
-        grouped['GlobalConstants'] = []
-        for const in global_constants:
-            name = const.get('name')
-            value = const.get('value')
-
-            if not name or value is None:
-                continue
-
-            grouped['GlobalConstants'].append((name, value))
-
-    # Generate Python classes
-    output_lines = [
-        "# Auto-generated from godot extension_api.json",
-        "from py4godot.classes.core import Vector2, Vector3,Vector3i, Transform2D, Vector2i, Vector4i, Vector4, Plane, "
-        "Quaternion, Transform3D, Color, Basis, Projection",""
-    ]
-    for class_name, consts in grouped.items():
-        if class_name not in ("Vector2, Vector3,Vector3i, Transform2D, Vector2i, Vector4i, Vector4, Plane, "
-            "Quaternion, Transform3D, Color, Basis, Projection"):
-            output_lines.append(f"from py4godot.classes.{class_name} import {class_name}")
-
-    for class_name, consts in grouped.items():
-        if not consts:
-            output_lines.append("    pass")
-        else:
-            for name, value in consts:
-                # For constants, we usually don't need special Vector formatting
-                # since they're typically integers, strings, or simple values
-                if isinstance(value, str):
-                    formatted_value = construct_value(value)
-                else:
-                    formatted_value = str(value)
-                output_lines.append(f"{class_name}.{name} = {formatted_value}")
-
-        output_lines.append("")  # Empty line after each class
-
-    return "\n".join(output_lines)
-
 def construct_value(value):
     split_array = value.split("(")
     type_ = split_array[0]
@@ -167,24 +89,44 @@ def pythonize_values(values):
 def replace_infinite(value:str):
     return value.replace("inf", "float('inf')")
 
-def main():
-    """Main function to generate constants.py file."""
-    # Use Path for better path handling
-    os.chdir("..")
-    json_file_path = "py4godot/gdextension-api/extension_api.json"
-    output_file_path =  "py4godot/constants.py"
 
-    # Generate the constants
-    result = generate_constants_classes(json_file_path)
+def generate_constants_for_class(class_info):
+    grouped = {}
 
-    # Write the result
-    with open(output_file_path, "w", encoding='utf-8') as f:
-        f.write(result)
+    # Look for classes in the API data
+    constants = class_info.get('constants', [])
 
-    print(f"constants.py generated successfully at: {output_file_path}")
+    if not constants:
+        return ""
 
-    return 0
+    output_lines = []
 
+    for const in constants:
+        if isinstance(const["value"], str):
+            formatted_value = construct_value(const["value"])
+        else:
+            formatted_value = str(const["value"])
+        output_lines.append(f"{class_info['name']}.{const['name']} = {formatted_value}")
 
-if __name__ == "__main__":
-    exit(main())
+        output_lines.append("")  # Empty line after each class
+
+    return "\n".join(output_lines)
+
+def generate_type_hints_constants_for_class(class_info):
+    # Look for classes in the API data
+    constants = class_info.get('constants', [])
+
+    if not constants:
+        return ""
+
+    output_lines = []
+
+    for const in constants:
+        if not "type" in const:
+            output_lines.append(f"  {const['name']}:typing.ClassVar[int]")
+        else:
+            output_lines.append(f"  {const['name']}:typing.ClassVar['{const['type']}']")
+
+        output_lines.append("")  # Empty line after each class
+
+    return "\n".join(output_lines)

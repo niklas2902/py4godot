@@ -216,6 +216,18 @@ void init_pluginscript_api(){
         return ;
     }
 
+    PyObject* pName = PyUnicode_DecodeFSDefault("py4godot._internal_constants");
+    PyObject* pModule = PyImport_Import(pName);
+    Py_DECREF(pName);
+    if (PyErr_Occurred())
+    {
+        PyObject* ptype, * pvalue, * ptraceback;
+        PyErr_Fetch(&ptype, &pvalue, &ptraceback);
+        handle_python_error(ptype, pvalue, ptraceback);
+        assert(false);
+        return ;
+    }
+
     // Release the Kraken... er I mean the GIL !
     gilstate = PyEval_SaveThread();
     print_error("###FINISHED INIT PLUGINSCRIPT######");
