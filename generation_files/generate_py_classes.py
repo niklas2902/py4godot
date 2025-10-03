@@ -498,8 +498,9 @@ def generate_default_args(mMethod):
             else:
                 res += f"{INDENT * 2}if {pythonize_name(arg['name'])} is None:"
                 res = generate_newline(res)
+
                 type_ = arg["type"]
-                res += f"{INDENT * 3}{pythonize_name(arg['name'])} = py4godot_{type_.lower()}.{type_}.constructor()"
+                res += f"{INDENT * 3}{pythonize_name(arg['name'])} = c_utils.empty_object"
         res = generate_newline(res)
     return res
 

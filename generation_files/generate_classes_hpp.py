@@ -389,8 +389,6 @@ def generate_common_methods(class_):
 
 def generate_switch_methods():
     res = ""
-    res += f"{INDENT}virtual void switch_call(int method_hash, PyObject* args_tuple);"
-    res = generate_newline(res)
     res += f"{INDENT}virtual PyObject* switch_call_return(int method_hash, PyObject* args_tuple);"
     res = generate_newline(res)
     res += f"{INDENT}static PyObject* call_constructor(int constructor_id, PyObject* args_tuple);"

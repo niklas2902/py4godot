@@ -1254,10 +1254,12 @@ def generate_common_methods(class_):
     result = generate_newline(result)
     return result
 
-def extract_arg(type_, index, is_constructor=False):
+def extract_arg(type_, index, is_default_value, is_constructor=False):
     type_ = untypearray_or_dictionary(type_)
     if type_ in classes or "typedarray" in type_.lower():
-        return f"wrapper__extract_ptr_from_{untypearray_or_dictionary(type_)}Wrapper(PyTuple_GetItem(args_tuple, {index})) "
+        if not is_default_value:
+            return f"wrapper__extract_ptr_from_{untypearray_or_dictionary(type_)}Wrapper(PyTuple_GetItem(args_tuple, {index})) "
+        return f"wrapper__default_extract_ptr_from_{untypearray_or_dictionary(type_)}Wrapper(PyTuple_GetItem(args_tuple, {index})) "
     elif type_ == "int":
         return f"PyLong_AsLong(PyTuple_GetItem(args_tuple, {index})) "
     elif type_ == "bool":
@@ -1289,7 +1291,7 @@ def generate_method_switch_args(method, is_constructor=False):
     index = 0
     if "arguments" in method:
         for arg in method["arguments"]:
-            res += extract_arg(arg["type"], index, is_constructor=is_constructor)+", "
+            res += extract_arg(arg["type"], index, is_constructor=is_constructor, is_default_value = "default_value" in arg)+", "
             index += 1
     if "is_vararg" in method and method["is_vararg"]:
         res += "varargs, "
@@ -1318,52 +1320,8 @@ def generate_varargs(method):
 
 def generate_switch_methods(class_):
     global index
-    res = ""
-    res += f"{INDENT}void {class_['name']}::switch_call(int method_hash, PyObject* args_tuple){{"
-
-    res = generate_newline(res)
-    res += f"{INDENT}std::vector<PyObject*> varargs{{}};"
-    res = generate_newline(res)
     methods = collect_methods(class_, False)
-    res+= f"{INDENT*2}switch(method_hash){{"
-    res = generate_newline(res)
-    for method in methods:
-        args = generate_method_switch_args(method, )
-        res += f"{INDENT*3}case {method_ids['normal_methods'][class_['name']][method['name']]}: {generate_varargs(method)} py_{pythonize_name(method['name'])}({args});break;"
-        res = generate_newline(res)
-        index += 1
-    if class_["name"] in core_classes.keys():
-        for member in core_classes[class_["name"]].core_members:
-            res += f"{INDENT*3}case {method_ids['normal_methods'][class_['name']]['get_member_'+member.name]}: py_member_get_{member.name}();break;"
-            res = generate_newline(res)
-            res += f"{INDENT * 3}case {method_ids['normal_methods'][class_['name']]['set_member_' + member.name]}: py_member_set_{member.name}({extract_arg(member.type_,0)});break;"
-            res = generate_newline(res)
-    if class_["name"] in builtin_classes:
-        res += f"{INDENT * 3}case {method_ids['normal_methods'][class_['name']]['py_destroy']}: {class_['name']}_py_destroy(); break;"
-        res = generate_newline(res)
-    if class_["name"] == "RefCounted":
-        res += f"{INDENT * 3}case {method_ids['normal_methods'][class_['name']]['py_destroy']}: py_destroy_ref(); break;"
-        res = generate_newline(res)
-    if class_["name"] in builtin_classes:
-        for operator in operator_dict[get_class_name(class_["name"])]:
-            if operator in operator_to_method.keys():
-                op = operator_dict[get_class_name(class_["name"])][operator]
-                res += f"{INDENT*2}case {method_ids['normal_methods'][class_['name']][operator]}: {generate_varargs(method)} wrap_operator_{operator_to_python_name(operator)}(PyTuple_GetItem(args_tuple, 0));break;"
-                res = generate_newline(res)
-    if "array" in class_["name"].lower():
-        res += f"{INDENT * 3}case {method_ids['normal_methods'][class_['name']]['__getitem__']}: py_getitem((int)PyLong_AsLong(PyTuple_GetItem(args_tuple, 0)));break;"
-        res = generate_newline(res)
-        res += f"{INDENT * 3}case {method_ids['normal_methods'][class_['name']]['__setitem__']}: py_setitem((int)PyLong_AsLong(PyTuple_GetItem(args_tuple, 0)), PyTuple_GetItem(args_tuple, 1));break;"
-        res = generate_newline(res)
-    if "Dictionary" == class_["name"]:
-        res += f"{INDENT * 3}case {method_ids['normal_methods'][class_['name']]['__getitem__']}: py_getitem(PyTuple_GetItem(args_tuple, 0));break;"
-        res = generate_newline(res)
-        res += f"{INDENT * 3}case {method_ids['normal_methods'][class_['name']]['__setitem__']}: py_setitem(PyTuple_GetItem(args_tuple, 0), PyTuple_GetItem(args_tuple, 1));break;"
-        res = generate_newline(res)
-
-    res += f"{INDENT*2}}}"
-    res += f"{INDENT}}}"
-    res = generate_newline(res)
+    res = ""
     res += f"{INDENT}PyObject* {class_['name']}::switch_call_return(int method_hash, PyObject* args_tuple){{"
     res = generate_newline(res)
     res += f"{INDENT}std::vector<PyObject*> varargs{{}};"
@@ -1415,7 +1373,7 @@ def generate_switch_methods(class_):
             else:
                 res += f"{INDENT * 3}case {method_ids['normal_methods'][class_['name']]['get_member_'+member.name]}: return py_member_get_{member.name}();"
             res = generate_newline(res)
-            res += f"{INDENT * 3}case {method_ids['normal_methods'][class_['name']]['set_member_' + member.name]}: py_member_set_{member.name}({extract_arg(member.type_, 0)});return Py_None;"
+            res += f"{INDENT * 3}case {method_ids['normal_methods'][class_['name']]['set_member_' + member.name]}: py_member_set_{member.name}({extract_arg(member.type_, 0, is_default_value=False)});return Py_None;"
             res = generate_newline(res)
     if class_["name"] in builtin_classes:
         for operator in operator_dict[get_class_name(class_["name"])]:

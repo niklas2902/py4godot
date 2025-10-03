@@ -135,16 +135,25 @@ def generate_wrapper_header(class_name):
     res = ""
     res += f"GDN_EXPORT std::shared_ptr<godot::{class_name}> wrapper__extract_ptr_from_{class_name}Wrapper(PyObject* object);"
     res = generate_newline(res)
+
+    res += f"GDN_EXPORT std::shared_ptr<godot::{class_name}> wrapper__default_extract_ptr_from_{class_name}Wrapper(PyObject* object);"
+    res = generate_newline(res)
     res += f"GDN_EXPORT PyObject* wrapper__create_wrapper_from_{class_name}_ptr(std::shared_ptr<godot::{class_name}> ptr);"
     res = generate_newline(res)
     return res
 
 
-def generate_wrapper_source(class_name):
+def generate_wrapper_source(class_name, is_singleton):
     res = ""
     res = generate_newline(res)
     res += f"GDN_EXPORT std::shared_ptr<godot::{class_name}> wrapper__extract_ptr_from_{class_name}Wrapper(PyObject* object){{return extract_ptr_from_{class_name}Wrapper(object);}};"
     res = generate_newline(res)
+    if class_name in classes - set(builtin_classes):
+        res += f"GDN_EXPORT std::shared_ptr<godot::{class_name}> wrapper__default_extract_ptr_from_{class_name}Wrapper(PyObject* object){{return object != Py_None? extract_ptr_from_{class_name}Wrapper(object):std::shared_ptr<godot::{class_name}>();}};"
+        res = generate_newline(res)
+    else:
+        res += f"GDN_EXPORT std::shared_ptr<godot::{class_name}> wrapper__default_extract_ptr_from_{class_name}Wrapper(PyObject* object){{return object != Py_None? extract_ptr_from_{class_name}Wrapper(object): godot::{class_name}::py_new0();}};"
+        res = generate_newline(res)
     res += f"GDN_EXPORT PyObject* wrapper__create_wrapper_from_{class_name}_ptr(std::shared_ptr<godot::{class_name}> ptr){{return create_wrapper_from_{class_name}_ptr(ptr);}};"
     res = generate_newline(res)
     return res
@@ -161,6 +170,7 @@ if __name__ == "__main__":
         classes = set([class_['name'] if class_["name"] not in IGNORED_CLASSES else None for class_ in
                        obj['classes'] + obj["builtin_classes"]])
         builtin_classes = [class_["name"] for class_ in obj["builtin_classes"]]
+        singletons = set([singleton["name"] for singleton in obj["singletons"]])
         res = "from py4godot.utils.CPPWrapper cimport *"
         res = generate_newline(res)
         res += generate_import()
@@ -243,6 +253,6 @@ if __name__ == "__main__":
 
         for cls in all_classes:
             if cls["name"] not in IGNORED_CLASSES:
-                res += generate_wrapper_source(cls["name"])
+                res += generate_wrapper_source(cls["name"], cls["name"] in singletons)
                 res = generate_newline(res)
         write_if_different("py4godot/wrappers/wrappers_wrapper.cpp", res)

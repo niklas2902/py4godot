@@ -10,6 +10,12 @@ from libc.string cimport memcpy, strlen
 
 shouldCreateObject = True
 
+class EmptyObject(object):
+    def __init__(self):
+        self._ptr = None
+
+empty_object = EmptyObject()
+
 cpdef object py_string_to_string_name(str string):
     cdef bytes encoded = string.encode("utf-8")
     cdef char * c_str = encoded
