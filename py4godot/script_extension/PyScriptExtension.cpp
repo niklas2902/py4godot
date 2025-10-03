@@ -216,7 +216,7 @@ void init_pluginscript_api(){
         return ;
     }
 
-    PyObject* pName = PyUnicode_DecodeFSDefault("py4godot._internal_constants");
+    PyObject* pName = PyUnicode_DecodeFSDefault("py4godot.constants");
     PyObject* pModule = PyImport_Import(pName);
     Py_DECREF(pName);
     if (PyErr_Occurred())
