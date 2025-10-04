@@ -553,7 +553,6 @@ def generate_method(class_, mMethod):
     res += generate_method_docstring(mMethod["name"])
     res = generate_newline(res)
     res += generate_default_args(mMethod)
-    res += generate_default_args(mMethod)
     res = generate_newline(res)
     if "arguments" in mMethod.keys():
         res += generate_assert(mMethod["arguments"], mMethod["name"], class_["name"])
