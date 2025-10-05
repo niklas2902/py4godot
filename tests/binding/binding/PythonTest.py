@@ -2,7 +2,7 @@ import unittest
 
 from py4godot.classes.Node3D import Node3D
 from TestObject import TestObject
-from py4godot.classes.core import Array
+from py4godot.classes.core import Array, Vector3
 from py4godot.utils.print_tools import print_error
 
 
@@ -22,6 +22,9 @@ class PythonTest(unittest.TestCase):
         a.push_back(self.test_object)
         o = a.get(0)
         self.assertEqual(o.get_class(), "Node3D")
+
+    def test_constants(self):
+        self.assertEqual(Vector3.UP, Vector3.new3(0,  1,  0))
 
     def test_meta(self):
         self.assertEqual(self.test_object.get_meta_object(), True)

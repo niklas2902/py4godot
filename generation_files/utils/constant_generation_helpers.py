@@ -125,7 +125,7 @@ def generate_type_hints_constants_for_class(class_info):
         if not "type" in const:
             output_lines.append(f"  {const['name']}:typing.ClassVar[int]")
         else:
-            output_lines.append(f"  {const['name']}:typing.ClassVar['{const['type']}']")
+            output_lines.append(f"  {const['name']}:typing.ClassVar['{const['type']}'] # {const['value']}")
 
         output_lines.append("")  # Empty line after each class
 
