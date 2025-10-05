@@ -43,9 +43,6 @@ $ python generate.py
 ```
 
 Now we use Cython to generate the C++ files for our Python classes. 
-Please note that this takes a while (4 hours for me). So feel free to make yourself a coffee and spend a little time with your family.
-You can tweak the file a bit by changing the parameters `NTHREADS` and `BATCH_SIZE`
-depending on your RAM and CPU capabilities.
 ```console
 $ python cythonize_files.py
 ```
@@ -83,9 +80,6 @@ $ python generate.py
 ```
 
 Now we use Cython to generate the C++ files for our Python classes. 
-Please note that this takes a while (4 hours for me). So feel free to make yourself a coffee and spend a little time with your family.
-You can tweak the file a bit by changing the parameters `NTHREADS` and `BATCH_SIZE`
-depending on your RAM and CPU capabilities.
 ```console
 $ python cythonize_files.py
 ```
