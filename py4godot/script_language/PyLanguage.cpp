@@ -128,6 +128,8 @@ void PyLanguage::destroy(){
     auto class_ = c_string_to_string("class");
     auto is_ = c_string_to_string("is");
     auto await = c_string_to_string("await");
+    auto match = c_string_to_string("match");
+    auto case_ = c_string_to_string("case");
 
 
     add_string_to_array(res, del);
@@ -165,6 +167,8 @@ void PyLanguage::destroy(){
     add_string_to_array(res, class_);
     add_string_to_array(res, is_);
     add_string_to_array(res, await);
+    add_string_to_array(res, match);
+    add_string_to_array(res, case_);
   }
   void PyLanguage::_is_control_flow_keyword(String& keyword, GDExtensionTypePtr res){
   print_error("_is_control_flow_keyword");
