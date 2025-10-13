@@ -16,6 +16,7 @@ scripts = [
     'generate_call_static_methods.py',
     'generate_wrappers.py',
     'generate_constants.py',
+    'generate_constant_core_classes.py',
     'generate_py_classes.py',
     'generate_classes_cpp.py',
     'generate_classes_hpp.py',

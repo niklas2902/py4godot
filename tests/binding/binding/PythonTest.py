@@ -26,5 +26,11 @@ class PythonTest(unittest.TestCase):
     def test_constants(self):
         self.assertEqual(Vector3.UP, Vector3.new3(0,  1,  0))
 
+
+    def test_constants_throw_error(self):
+        with self.assertRaises(RuntimeError):
+            up = Vector3.UP
+            up.x = 1
+
     def test_meta(self):
         self.assertEqual(self.test_object.get_meta_object(), True)

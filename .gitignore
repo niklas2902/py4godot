@@ -7304,3 +7304,4 @@ py4godot/script_extension/script_extension_helpers_api.h
 /tests/libraries/numpy/addons/py4godot/install_dependencies.py
 /tests/libraries/numpy/addons/py4godot/python.gdextension
 /tests/libraries/numpy/addons/py4godot/Python.svg
+/py4godot/constant_helpers.py

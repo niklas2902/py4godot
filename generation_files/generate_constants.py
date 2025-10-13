@@ -83,6 +83,7 @@ def generate_constants_classes(json_path):
     # Generate Python classes
     output_lines = [
         "# Auto-generated from godot extension_api.json",
+        "import py4godot.constant_helpers as helpers",
         "from py4godot.classes.core import Vector2, Vector3,Vector3i, Transform2D, Vector2i, Vector4i, Vector4, Plane, "
         "Quaternion, Transform3D, Color, Basis, Projection",""
     ]
@@ -113,44 +114,40 @@ def construct_value(value):
     type_ = split_array[0]
     values = pythonize_values(split_array[1][:-1].split(","))
     if type_ == "Vector4":
-        return f"Vector4.new3({', '.join(values)})"
+        return f"helpers.ConstantVector4.new3({', '.join(values)})"
     if type_ == "Vector4i":
-        return f"Vector4i.new3({', '.join(values)})"
+        return f"helpers.ConstantVector4i.new3({', '.join(values)})"
 
 
     if type_ == "Vector3":
-        return f"Vector3.new3({', '.join(values)})"
+        return f"helpers.ConstantVector3.new3({', '.join(values)})"
     if type_ == "Vector3i":
-        return f"Vector3i.new3({', '.join(values)})"
+        return f"helpers.ConstantVector3i.new3({', '.join(values)})"
     if type_ == "Color":
-        return f"Color.new4({', '.join(values)})"
+        return f"helpers.ConstantColor.new4({', '.join(values)})"
     if type_ == "Vector2":
-        return f"Vector2.new3({', '.join(values)})"
+        return f"helpers.ConstantVector2.new3({', '.join(values)})"
     if type_ == "Vector2i":
-        return f"Vector2i.new3({', '.join(values)})"
+        return f"helpers.ConstantVector2i.new3({', '.join(values)})"
     if type_ == "Transform2D":
-        return (f"Transform2D.new4(Vector2.new3({values[0]}, {values[1]}), "
+        return (f"helpers.ConstantTransform2D.new4(Vector2.new3({values[0]}, {values[1]}), "
                 f"Vector2.new3({values[2]}, {values[3]}), "
                 f"Vector2.new3({values[4]}, {values[5]}))")
     if type_ == "Plane":
-        return f"Plane.new6({', '.join(values)})"
+        return f"helpers.ConstantPlane.new6({', '.join(values)})"
     if type_ == "Quaternion":
-        return f"Quaternion.new5({', '.join(values)})"
+        return f"helpers.ConstantQuaternion.new5({', '.join(values)})"
     if type_ == "Basis":
-        return (f"Basis.new4(Vector3.new3({values[0]}, {values[1]}, {values[2]}), "
-                f"Vector3.new3({values[3]}, {values[4]}, {values[5]}), "
-                f"Vector3.new3({values[6]}, {values[7]}, {values[8]}),)")
-    if type_ == "Basis":
-        return (f"Basis.new4(Vector3.new3({values[0]}, {values[1]}, {values[2]}), "
+        return (f"helpers.ConstantBasis.new4(Vector3.new3({values[0]}, {values[1]}, {values[2]}), "
                 f"Vector3.new3({values[3]}, {values[4]}, {values[5]}), "
                 f"Vector3.new3({values[6]}, {values[7]}, {values[8]}),)")
     if type_ == "Transform3D":
-        return (f"Transform3D.new3(Vector3.new3({values[0]}, {values[1]}, {values[2]}), "
+        return (f"helpers.ConstantTransform3D.new3(Vector3.new3({values[0]}, {values[1]}, {values[2]}), "
                 f"Vector3.new3({values[3]}, {values[4]}, {values[5]}), "
                 f"Vector3.new3({values[6]}, {values[7]}, {values[8]}),"
                 f"Vector3.new3({values[9]}, {values[10]}, {values[11]}),)")
     if type_ == "Projection":
-        return (f"Projection.new3(Vector4.new3({values[0]}, {values[1]}, {values[2]},{values[3]}), "
+        return (f"helpers.ConstantProjection.new3(Vector4.new3({values[0]}, {values[1]}, {values[2]},{values[3]}), "
                 f"Vector4.new3({values[4]}, {values[5]}, {values[6]},{values[7]}),"
                 f"Vector4.new3({values[8]}, {values[9]}, {values[10]},{values[11]}),"
                 f"Vector4.new3({values[12]}, {values[13]}, {values[14]},{values[15]}),)")
