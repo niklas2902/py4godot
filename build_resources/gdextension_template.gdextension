@@ -20,3 +20,8 @@ linux.release.x86 = "{python_ver}-linux32/python/bin/pythonscript.so"
 
 macos.debug.arm64 = "{python_ver}-darwin64/python/bin/pythonscript.dylib"
 macos.release.arm64 = "{python_ver}-darwin64/python/bin/pythonscript.dylib"
+
+android.debug.arm64 = "{python_ver}-android/python/lib/libpythonscript.so"
+android.release.arm64 = "{python_ver}-android/python/lib/libpythonscript.so"
+android.debug.x86_64 = "{python_ver}-androidx86_64/python/lib/libpythonscript.so"
+android.release.x86_64 = "{python_ver}-androidx86_64/python/lib/libpythonscript.so"

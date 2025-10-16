@@ -1,0 +1,9 @@
+[host_machine]
+system = 'android'
+cpu_family = 'aarch64'
+cpu = 'armv8-a'
+endian = 'little'
+
+[properties]
+needs_exe_wrapper = true
+current_platform = 'Android'

@@ -1,0 +1,11 @@
+[binaries]
+c = '/home/niklas/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/bin/aarch64-linux-android21-clang'
+cpp = '/home/niklas/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/bin/aarch64-linux-android21-clang++'
+ar = '/home/niklas/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/bin/llvm-ar'
+strip = '/home/niklas/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/bin/llvm-strip'
+pkgconfig = 'pkg-config'
+
+[properties]
+needs_exe_wrapper = true
+has_function_printf = true
+sys_root = '/home/niklas/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/sysroot'
