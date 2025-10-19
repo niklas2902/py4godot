@@ -9,3 +9,9 @@ pkgconfig = 'pkg-config'
 needs_exe_wrapper = true
 has_function_printf = true
 sys_root = '/home/niklas/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/sysroot'
+
+[built-in options]
+
+cpp_args = ['-g', '-O0', '-DDEBUG']
+
+cpp_link_args = ['-g', '-llog']

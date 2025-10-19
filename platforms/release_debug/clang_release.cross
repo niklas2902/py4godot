@@ -2,6 +2,6 @@
 
 cpp_args = ['-O3', '-DNDEBUG', '-w']
 
-cpp_link_args = ['-s', '-flto']
+cpp_link_args = ['-s', '-flto', '-llog']
 
 
