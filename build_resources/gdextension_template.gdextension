@@ -21,7 +21,17 @@ linux.release.x86 = "{python_ver}-linux32/python/bin/pythonscript.so"
 macos.debug.arm64 = "{python_ver}-darwin64/python/bin/pythonscript.dylib"
 macos.release.arm64 = "{python_ver}-darwin64/python/bin/pythonscript.dylib"
 
-android.debug.arm64 = "{python_ver}-android/python/lib/libpythonscript.so"
-android.release.arm64 = "{python_ver}-android/python/lib/libpythonscript.so"
-android.debug.x86_64 = "{python_ver}-androidx86_64/python/lib/libpythonscript.so"
-android.release.x86_64 = "{python_ver}-androidx86_64/python/lib/libpythonscript.so"
+android.debug.arm64 = "{python_ver}-androidarm64/python/bin/libpythonscript.so"
+android.release.arm64 = "{python_ver}-androidarm64/python/bin/libpythonscript.so"
+android.debug.x86_64 = "{python_ver}-androidx86_64/python/bin/libpythonscript.so"
+android.release.x86_64 = "{python_ver}-androidx86_64/python/bin/libpythonscript.so"
+
+[dependencies]
+android.debug.arm64 = {
+    "res://addons/py4godot/cpython-3.12.4-androidarm64/python/lib/libpython3.12.so": "lib/arm64-v8a/addons/py4godot/cpython-3.12.4-androidarm64/python/lib/libpython3.12.so",
+    "res://addons/py4godot/cpython-3.12.4-androidarm64/python/bin/libmain.so": "lib/arm64-v8a/addons/py4godot/cpython-3.12.4-androidarm64/python/bin/libmain.so"
+}
+android.release.arm64 = {
+    "res://addons/py4godot/cpython-3.12.4-androidarm64/python/lib/libpython3.12.so": "lib/arm64-v8a/addons/py4godot/cpython-3.12.4-androidarm64/python/lib/libpython3.12.so",
+    "res://addons/py4godot/cpython-3.12.4-androidarm64/python/bin/libmain.so": "lib/arm64-v8a/addons/py4godot/cpython-3.12.4-androidarm64/python/bin/libmain.so"
+}
