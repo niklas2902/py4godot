@@ -370,6 +370,16 @@ void PyScriptExtension::update_instance_data(InstanceData* gd_instance, PyObject
         gd_instance->custom_properties.insert(string_property_name);
         index ++;
     }
+
+    for (const auto& signal: transfer_object.signals){
+        auto signal_string_name =  signal->name;
+        String signal_name = String::new2(signal_string_name);
+        char* c_signal_name;
+        gd_string_to_c_string( &signal_name.godot_owner, signal_name.length(), &c_signal_name);
+        std::string string_signal_name{c_signal_name};
+        gd_instance->custom_properties.insert(string_signal_name);
+    }
+
 }
 void PyScriptExtension::_instance_create( Object& for_object, GDExtensionTypePtr res){
     print_error("_instance_create");

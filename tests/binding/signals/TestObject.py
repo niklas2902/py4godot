@@ -7,6 +7,7 @@ from py4godot.signals import signal, SignalArg
 class TestObject(Node3D):
 	custom_signal_no_args = signal()
 	custom_signal_with_args = signal([SignalArg("test_arg", int)])
+	custom_signal_godot_object = signal([SignalArg("test_arg", int)])
 	def __init__(self) -> None:
 		super().__init__()
 		self.is_visible_called = False
@@ -34,3 +35,6 @@ class TestObject(Node3D):
 		self.custom_signal_no_args.disconnect(self.custom_signal_no_arg_function)
 	def disconnect_visibility(self) -> None:
 		self.visibility_changed.disconnect(self.visible_changed)
+	
+	def emit_godot_object_signal(self)->None:
+		self.custom_signal_godot_object.emit(1)

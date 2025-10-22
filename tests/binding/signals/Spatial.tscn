@@ -1,13 +1,31 @@
-[gd_scene load_steps=3 format=3 uid="uid://bx11ebu3iwgdm"]
+[gd_scene load_steps=4 format=3 uid="uid://bx11ebu3iwgdm"]
 
 [ext_resource type="Script" path="res://TestRunner.py" id="2"]
 [ext_resource type="Script" path="res://TestObject.py" id="2_hkbyt"]
+[ext_resource type="Script" uid="uid://bjccbc87wre3r" path="res://godot_object.gd" id="3_iqnod"]
 
 [node name="Node3D" type="Node3D"]
 
 [node name="TestRunner" type="Node3D" parent="."]
+editor_description = ""
+rotation_edit_mode = 0
+rotation_order = 2
+top_level = false
+visible = true
+visibility_parent = NodePath("")
 script = ExtResource("2")
 test_object_path = NodePath("../TestObject")
 
 [node name="TestObject" type="Node3D" parent="."]
+unique_name_in_owner = true
+editor_description = ""
+rotation_edit_mode = 0
+rotation_order = 2
+top_level = false
+visible = true
+visibility_parent = NodePath("")
 script = ExtResource("2_hkbyt")
+
+[node name="GodotObject" type="Node3D" parent="."]
+unique_name_in_owner = true
+script = ExtResource("3_iqnod")
