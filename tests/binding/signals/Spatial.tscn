@@ -7,22 +7,23 @@
 [node name="Node3D" type="Node3D"]
 
 [node name="TestRunner" type="Node3D" parent="."]
-editor_description = ""
+unique_name_in_owner = false
+process_priority = 0
+process_thread_group = 0
+auto_translate_mode = 0
 rotation_edit_mode = 0
-rotation_order = 2
 top_level = false
-visible = true
 visibility_parent = NodePath("")
 script = ExtResource("2")
 test_object_path = NodePath("../TestObject")
 
 [node name="TestObject" type="Node3D" parent="."]
 unique_name_in_owner = true
-editor_description = ""
+process_priority = 0
+process_thread_group = 0
+auto_translate_mode = 0
 rotation_edit_mode = 0
-rotation_order = 2
 top_level = false
-visible = true
 visibility_parent = NodePath("")
 script = ExtResource("2_hkbyt")
 
