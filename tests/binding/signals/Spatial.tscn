@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://TestRunner.py" id="2"]
 [ext_resource type="Script" path="res://TestObject.py" id="2_hkbyt"]
-[ext_resource type="Script" uid="uid://bjccbc87wre3r" path="res://godot_object.gd" id="3_iqnod"]
+[ext_resource type="Script" uid="uid://2ryqey05k0kq" path="res://godot_object.gd" id="3_iqnod"]
 
 [node name="Node3D" type="Node3D"]
 
