@@ -42,7 +42,6 @@ class PythonTest(unittest.TestCase):
         self.assertEqual(self.test_object.custom_signal_with_args_value, 5) # Did not change
 
     def test_custom_signal_godot_object(self):
-        return
         self.assertIsNotNone(self.test_object)
         self.test_object.emit_godot_object_signal()
         godot_object = self.test_object.get_node("%GodotObject")
