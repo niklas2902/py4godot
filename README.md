@@ -7,7 +7,7 @@ There are a few other cool projects bringing Python to Godot. Check them out!
 - [godot-python-extension](https://github.com/maiself/godot-python-extension)  
 - [godot-python](https://github.com/touilleMan/godot-python)
 
-
+## Description
 *Python scripting for Godot*. This GDExtension plugin allows you to use Python like GDScript, accessing the Godot engine's features and benefiting from Python's vast ecosystem.
 
 Inspiration for this project was taken from: https://github.com/touilleMan/godot-python.
