@@ -111,6 +111,7 @@ def generate_import():
               "from py4godot.utils.CPPWrapper import CPPWrapper, constructor, static_method\n"
               "import py4godot.utils.utils as c_utils\n"
               "import typing\n"
+              "import py4godot.variant_types\n"
 
     )
     return result
@@ -556,6 +557,8 @@ def generate_method(class_, mMethod):
     res = generate_newline(res)
     if "arguments" in mMethod.keys():
         res += generate_assert(mMethod["arguments"], mMethod["name"], class_["name"])
+        res = generate_newline(res)
+        res += generate_variant_checks(mMethod, class_["name"])
         res = generate_newline(res)
 
     if is_property_setter(class_, mMethod["name"]):
@@ -1548,6 +1551,9 @@ def create_core_classes_set():
 
 def generate_classes(classes, filename, is_core=False, is_typed_array=False):
     res = generate_import()
+    if classes[0]["name"] != "Object":
+        res += "import py4godot.classes as classes"
+        res = generate_newline(res)
     if is_typed_array:
         res = generate_newline(res)
 
@@ -2047,6 +2053,35 @@ def collect_typed_arrays(classes):
 
 def generate_typed_array_name(name):
     return (name.split("::")[1] + "TypedArray").replace("24/17:", "").replace("27/0:TypedArray", "DictionaryTypedArray")
+
+def generate_variant_checks(method, classname):
+    res = ""
+    args = method["arguments"]
+    py4godot_type = "Object" if classname == "Object" else "classes.Object.Object"
+    for arg in args:
+        if arg["type"] == "Variant":
+            res += f"{INDENT*2}if not (type({pythonize_name(arg['name'])}).__name__ in py4godot.variant_types.core_types or isinstance({pythonize_name(arg['name'])}, {py4godot_type})):"
+            res = generate_newline(res)
+            res += f"""{INDENT * 3}raise ValueError(
+                f"Unsupported type for argument '{pythonize_name(arg['name'])}': "
+                f"{{type({pythonize_name(arg['name'])}).__name__}}. "
+                "Supported types are: Godot types (Vector3, Vector2, Array, Object, ...) "
+                "and built-in types int, float, and bool."
+            )"""
+            res = generate_newline(res)
+
+    if method["is_vararg"]:
+        res += f"{INDENT*2}for arg in varargs:"
+        res = generate_newline(res)
+        res += f"{INDENT*3}if not (type(arg).__name__ in py4godot.variant_types.core_types or isinstance(arg, {py4godot_type})):"
+        res = generate_newline(res)
+        res += f"""{INDENT * 4}raise ValueError(
+            f"Unsupported type in varargs: {{type(arg).__name__}}. "
+            "Supported types are: Godot types (Vector3, Vector2, Array, Object, ...) "
+            "and built-in types int, float, and bool."
+        )"""
+    return res
+
 
 
 if __name__ == "__main__":

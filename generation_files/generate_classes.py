@@ -94,7 +94,8 @@ def generate_import():
               "cimport py4godot.utils.utils as c_utils\n"
               "import py4godot.utils.functools as  functools\n"
               "from libcpp.memory cimport make_shared\n"
-              "from py4godot.utils.smart_cast import smart_cast, register_cast_function\n")
+              "from py4godot.utils.smart_cast import smart_cast, register_cast_function\n"
+              "import py4godot.variant_types\n")
     return result
 
 
@@ -516,6 +517,8 @@ def generate_method(class_, mMethod):
     res = generate_newline(res)
     if "arguments" in mMethod.keys():
         res += generate_assert(mMethod["arguments"])
+        res = generate_newline(res)
+        res += generate_variant_checks(mMethod)
         res = generate_newline(res)
 
     if is_property_setter(class_, mMethod["name"]):
@@ -2085,6 +2088,34 @@ def collect_typed_arrays(classes):
             typed_arrays += collect_typed_arrays_from_args(method)
 
     return set(typed_arrays)
+
+def generate_variant_checks(method):
+    res = ""
+    args = method["arguments"]
+    for arg in args:
+        if arg["type"] == "Variant":
+            res += f"{INDENT*2}if not (type({arg['name']}).__name__ in variant_types.core_type or isinstance({arg['name']}, py4godot_object.Object)):"
+            res = generate_newline(res)
+            res += f"""{INDENT*3}raise ValueError(
+    f"Unsupported type for argument '{arg['name']}': "
+    f"{{type({arg['name']}).__name__}}. "
+    "Supported types are: Godot types (Vector3, Vector2, Array, Object, ...) "
+    "and built-in types int, float, and bool."
+)"""
+            res = generate_newline(res)
+
+    if method["is_vararg"]:
+        res += f"{INDENT*2}for arg in varargs:"
+        res = generate_newline(res)
+        res += f"{INDENT*3}if not (type(arg).__name__ in variant_types.core_type or isinstance(arg, py4godot_object.Object))"
+        res = generate_newline(res)
+        res += f"""{INDENT * 4}raise ValueError(
+    f"Unsupported type in varargs: {{type(arg).__name__}}. "
+    "Supported types are: Godot types (Vector3, Vector2, Array, Object, ...) "
+    "and built-in types int, float, and bool."
+)"""
+
+    return res
 
 
 def generate_typed_array_name(name):

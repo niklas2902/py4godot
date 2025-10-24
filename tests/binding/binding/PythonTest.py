@@ -34,3 +34,22 @@ class PythonTest(unittest.TestCase):
 
     def test_meta(self):
         self.assertEqual(self.test_object.get_meta_object(), True)
+
+    def test_calling_variant(self):
+        self.assertEqual(self.test_object.call("variant_test_function", 1), 1)
+        self.assertEqual(self.test_object.call("variant_test_function", "test"), "test")
+
+        with self.assertRaises(ValueError) as cm:
+            self.test_object.call("variant_test_function", [])
+        self.assertEqual(
+            str(cm.exception),
+            "Unsupported type in varargs: list. Supported types are: Godot types (Vector3, Vector2, Array, Object, ...) and built-in types int, float, and bool."
+        )
+
+    def test_array_add(self):
+        my_array = Array.new0()
+        my_array.append("test")
+        self.assertEqual(my_array.get(0), "test")
+
+        with self.assertRaises(ValueError) as cm:
+            my_array.append([])

@@ -170,6 +170,7 @@ def copy_experimental(platform):
                  "py4godot/utils/smart_cast.py",
                  "py4godot/methods.py",
                  "py4godot/singletons.py",
+                 "py4godot/variant_types.py",
                  "py4godot/constants.py",
                  "py4godot/constant_helpers.py",
                  "py4godot/properties.py",
