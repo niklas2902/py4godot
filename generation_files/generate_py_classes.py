@@ -110,6 +110,7 @@ def generate_import():
               "from py4godot.utils.smart_cast import smart_cast, register_cast_function, register_class, get_class\n"
               "from py4godot.utils.CPPWrapper import CPPWrapper, constructor, static_method\n"
               "import py4godot.utils.utils as c_utils\n"
+              "from py4godot.utils.CoreType import CoreType\n"
               "import typing\n"
               "import py4godot.variant_types\n"
 
@@ -298,7 +299,7 @@ def get_base_class(class_):
     if "inherits" in class_.keys():
         return import_type(class_["inherits"], class_["name"])
     if class_["name"] in builtin_classes:
-        return ""
+        return "CoreType"
     return ""
 
 
@@ -534,6 +535,17 @@ def get_ret_value(method, class_):
             return_type = method["return_type"]
         return return_type
 
+def generate_call_deferred(method):
+    res = ""
+    if method["is_vararg"]:
+        res += f"{INDENT*2}for arg in varargs:"
+        res = generate_newline(res)
+        res += f"{INDENT*3}if isinstance(arg, CoreType):"
+        res = generate_newline(res)
+        res += f"{INDENT * 4}arg.shouldBeDeleted=False"
+        res = generate_newline(res)
+    return res
+
 def generate_method(class_, mMethod):
     res = ""
     #if should_skip_method(class_, mMethod):
@@ -560,6 +572,11 @@ def generate_method(class_, mMethod):
         res = generate_newline(res)
         res += generate_variant_checks(mMethod, class_["name"])
         res = generate_newline(res)
+
+    if mMethod["name"] == "call_deferred":
+        res += generate_call_deferred(mMethod)
+        res = generate_newline(res)
+
 
     if is_property_setter(class_, mMethod["name"]):
         property_name = get_property_name_for_method(class_, mMethod["name"])

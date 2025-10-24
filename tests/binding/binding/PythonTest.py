@@ -2,7 +2,7 @@ import unittest
 
 from py4godot.classes.Node3D import Node3D
 from TestObject import TestObject
-from py4godot.classes.core import Array, Vector3
+from py4godot.classes.core import Array, Vector3, PackedByteArray
 from py4godot.utils.print_tools import print_error
 
 
@@ -53,3 +53,8 @@ class PythonTest(unittest.TestCase):
 
         with self.assertRaises(ValueError) as cm:
             my_array.append([])
+
+
+    def test_call_deferred(self):
+        packedbyteArray = PackedByteArray.from_list([1])
+        self.test_object.call_deferred("test_function", packedbyteArray)

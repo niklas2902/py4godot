@@ -174,7 +174,8 @@ def copy_experimental(platform):
                  "py4godot/constants.py",
                  "py4godot/constant_helpers.py",
                  "py4godot/properties.py",
-                 "py4godot/utils/functools.py"]:
+                 "py4godot/utils/functools.py",
+                 "py4godot/utils/CoreType.py"]:
         if "windows" in platform:
             copy(file,
              f"build/final/{platform}/{python_ver}-{platform}/python/Lib/site-packages/" + file)
