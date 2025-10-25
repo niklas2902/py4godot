@@ -177,7 +177,6 @@ cdef api MethodCallData instance_call(GDExtensionScriptInstanceDataPtr p_self, G
 
     py_typename = str(type(result).__name__)
     ret_val.has_value = True
-    print(f"ret_val:{result}")
     cdef PyObject* py_obj_result = <PyObject*>result
 
     Py_INCREF(result)

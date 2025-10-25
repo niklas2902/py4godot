@@ -312,10 +312,26 @@ def generate_constructors(class_):
         res = generate_newline(res)
         res += f"{INDENT * 2}_class.shouldBeDeleted = false;"
         res = generate_newline(res)
-        res += f"{INDENT * 2}return std::make_shared<{class_['name']}>(_class);"
+        res += f"{INDENT * 2}return {class_['name']}::make_shared_ptr(_class);"
         res = generate_newline(res)
         res += "}"
         res = generate_newline(res)
+    return res
+
+def generate_make_shared_ptr(class_):
+    res = ""
+    res += f"{INDENT}std::shared_ptr<{class_['name']}> {class_['name']}::make_shared_ptr({class_['name']}& _class)" + "{"
+    res = generate_newline(res)
+    res += f"{INDENT * 2}auto ptr = std::make_shared<{class_['name']}>();"
+    res = generate_newline(res)
+    res += f"{INDENT * 2}ptr->godot_owner = _class.godot_owner;"
+    res = generate_newline(res)
+    res += f"{INDENT * 2}ptr->shouldBeDeleted = false;"
+    res = generate_newline(res)
+    res += f"{INDENT * 2}return ptr;"
+    res = generate_newline(res)
+    res += f"{INDENT}}}"
+    res = generate_newline(res)
     return res
 
 
@@ -1250,6 +1266,8 @@ def generate_common_methods(class_):
     result = generate_newline(result)
     result += generate_constructors(class_)
     result = generate_newline(result)
+    result += generate_make_shared_ptr(class_)
+    result = generate_newline(result)
     result += generate_switch_methods(class_)
     result = generate_newline(result)
     return result
@@ -1555,11 +1573,11 @@ def generate_member_getter(class_, member):
 
 def generate_ret_ptr(type_, _ret_name = "_ret"):
     if untypearray_or_dictionary(type_) in typed_arrays_names:
-        return f"std::make_shared<{untypearray_or_dictionary(type_)}>({_ret_name})"
+        return f"{untypearray_or_dictionary(type_)}::make_shared_ptr({_ret_name})"
     if type_ in builtin_classes - {"int", "float", "bool", "Nil"}:
-        return f"std::make_shared<{type_}>({_ret_name})"
+        return f"{type_}::make_shared_ptr({_ret_name})"
     if type_ in classes:
-        return f"std::make_shared<{type_}>({_ret_name})"
+        return f"{type_}::make_shared_ptr({_ret_name})"
     return _ret_name
 
 def unref_pointer(type_, value_name="value"):
@@ -1705,7 +1723,7 @@ def generate_special_methods_object():
     res = generate_newline(res)
     res += f'{INDENT * 2}auto my_string = c_string_to_string("import_path");'
     res = generate_newline(res)
-    res += f'{INDENT * 2}return std::make_shared<String>(my_string);'
+    res += f'{INDENT * 2}return String::make_shared_ptr(my_string);'
     res = generate_newline(res)
     res += f'{INDENT}}}'
     res = generate_newline(res)

@@ -142,6 +142,12 @@ def generate_variant_type(class_):
     else:
         return f"GDExtensionVariantType.GDEXTENSION_VARIANT_TYPE_NIL"
 
+def generate_shared_ptr(class_):
+    res = ""
+    res += f"{INDENT}static std::shared_ptr<{class_['name']}> make_shared_ptr({class_['name']}& class_);"
+    res = generate_newline(res)
+    return res
+
 
 def generate_constructors(class_):
     res = ""
@@ -378,6 +384,8 @@ def generate_common_methods(class_):
         result += generate_constructor(class_["name"])
         result = generate_newline(result)
     result += generate_constructors(class_)
+    result = generate_newline(result)
+    result += generate_shared_ptr(class_)
     result = generate_newline(result)
     result += generate_new_static(class_)
     result = generate_newline(result)
