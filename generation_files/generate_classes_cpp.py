@@ -10,6 +10,7 @@ from py4godot.method_ids import method_ids
 
 INDENT = "  "
 index = 0
+build_size = "float_32"
 
 class ReturnType:
     def __init__(self, name, type_):
@@ -50,6 +51,7 @@ builtin_classes = set()
 core_classes = dict()
 operator_dict = dict()
 enums = list()
+sizes = dict()
 typed_arrays_names = set()
 operator_to_method = {"+": "__add__",
                       "*": "__mul__",
@@ -317,11 +319,16 @@ def generate_constructors(class_):
         res += "}"
         res = generate_newline(res)
     return res
-
 def generate_make_shared_ptr(class_):
     res = ""
-    res += f"{INDENT}std::shared_ptr<{class_['name']}> {class_['name']}::make_shared_ptr({class_['name']}& _class)" + "{"
+    res += f"{INDENT}std::shared_ptr<{class_['name']}> {class_['name']}::make_shared_ptr({class_['name']}& _class) {{"
     res = generate_newline(res)
+    if class_["name"] not in ("Array", "Dictionary"):
+        res += f"{INDENT * 2}return std::make_shared<{class_['name']}>(_class);"
+        res = generate_newline(res)
+        res += f"{INDENT}}}"
+        res = generate_newline(res)
+        return res
     res += f"{INDENT * 2}auto ptr = std::make_shared<{class_['name']}>();"
     res = generate_newline(res)
     res += f"{INDENT * 2}ptr->godot_owner = _class.godot_owner;"
@@ -332,6 +339,7 @@ def generate_make_shared_ptr(class_):
     res = generate_newline(res)
     res += f"{INDENT}}}"
     res = generate_newline(res)
+    
     return res
 
 
@@ -2545,6 +2553,14 @@ def generate_typed_array_name(name):
         pass
     return name.split("::")[1] + "TypedArray"
 
+def generate_sizes(obj):
+    res = {}
+    sizes = obj["builtin_class_sizes"]
+    for size in sizes:
+        if size["build_configuration"] == build_size:
+            for configuration in size["sizes"]:
+                res[configuration["name"]] = configuration["size"]
+    return res
 
 classes = set()
 
@@ -2562,6 +2578,7 @@ if __name__ == "__main__":
         native_structs = set([native_struct["name"] for native_struct in obj["native_structures"]])
         singletons = set([singleton["name"] for singleton in obj["singletons"]])
         collect_members(obj)
+        sizes = generate_sizes(obj)
         for class_ in obj["builtin_classes"]:
             generate_operators_set(class_)
         array_cls = None
