@@ -46,6 +46,7 @@ singletons = set()
 builtin_classes = set()
 core_classes = dict()
 operator_dict = dict()
+cpp_core_structs = set()
 typed_arrays_names = set()
 operator_to_method = {"+": "__add__",
                       "*": "__mul__",
@@ -84,6 +85,7 @@ def generate_import(class_name):
 #include "py4godot/cppcore/Variant.h"
 #include "py4godot/cppenums/cppenums.h"
 #include<memory>
+#include "py4godot/cppclasses/native_structs.h"
 #ifndef BOOLDEFINED
 #define BOODEFINED
 typedef unsigned char byte;
@@ -382,6 +384,9 @@ def generate_common_methods(class_):
         result += generate_destructor(class_["name"])
         result = generate_newline(result)
         result += generate_constructor(class_["name"])
+        result = generate_newline(result)
+    if class_["name"] in cpp_core_structs:
+        result += f"{INDENT}native_structs::{class_['name']} native_struct;"
         result = generate_newline(result)
     result += generate_constructors(class_)
     result = generate_newline(result)
@@ -993,6 +998,11 @@ def collect_typed_arrays(classes):
 def generate_typed_array_name(name):
     return name.split("::")[1] + "TypedArray"
 
+def collect_class_structs(configuration):
+    res = set()
+    for cls in configuration["classes"]:
+        res.add(cls["name"])
+    return res
 
 classes = set()
 
@@ -1008,6 +1018,7 @@ if __name__ == "__main__":
         native_structs = set([native_struct["name"] for native_struct in obj["native_structures"]])
         singletons = set([singleton["name"] for singleton in obj["singletons"]])
         collect_members(obj)
+        cpp_core_structs = collect_class_structs(obj["builtin_class_member_offsets"][0])
         for class_ in obj["builtin_classes"]:
             generate_operators_set(class_)
 
