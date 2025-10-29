@@ -970,12 +970,14 @@ def generate_ret_value_assign(argument):
 def generate_ret_value_assign_constructor(argument):
     if argument["type"] in cpp_core_structs:
         return f"&{pythonize_name(argument['name'])}.native_struct"
+    if argument["type"] in builtin_classes - {"int", "float", "bool"}:
+        return f"&{pythonize_name(argument['name'])}.godot_owner"
     if argument["type"] in classes:
         return f"&{pythonize_name(argument['name'])}.godot_owner"
     elif argument["type"] == "Variant":
         return f"{argument['name']}.get_native_ptr()"
     elif "typedarray" in argument["type"]:
-        return f"{pythonize_name(argument['name'])}.get_godot_owner()"
+        return f"{pythonize_name(argument['name'])}.godot_owner()"
     return f"&{pythonize_name(argument['name'])}"
 
 

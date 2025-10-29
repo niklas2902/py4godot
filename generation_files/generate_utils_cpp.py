@@ -1,7 +1,7 @@
 import json
 import os.path
 
-from generate_classes_hpp import get_ret_value, has_native_struct, ungodottype
+from generate_classes_hpp import get_ret_value, has_native_struct, ungodottype, collect_class_structs
 from generate_enums import enumize_name
 
 INDENT = "  "
@@ -582,10 +582,12 @@ def generate_ret_value_assign(argument):
     if argument["type"] in classes - builtin_classes:
 
         return f"{pythonize_name(argument['name'])} != nullptr?&({pythonize_name(argument['name'])}->godot_owner):nullptr"
+    if argument["type"] in cpp_core_structs:
+        return f"&{pythonize_name(argument['name'])}.native_struct"
     elif argument["type"] in classes - {"int", "float", "bool", "Nil"}:
         return f"&{pythonize_name(argument['name'])}.godot_owner"
     elif "typedarray" in argument["type"]:
-        return f"{pythonize_name(argument['name'])}.godot_owner"
+        return f"&{pythonize_name(argument['name'])}.godot_owner"
     elif "Variant" == argument["type"]:
         return f"&{pythonize_name(argument['name'])}.native_ptr"
     return f"&{pythonize_name(argument['name'])}"
@@ -667,8 +669,8 @@ def address_ret(method):
 def address_ret_decision(return_type):
     if return_type in {"int", "float", "bool"}:
         return "&_ret"
-    if return_type == "Transform3D":
-        return "&_ret.godot_owner"
+    if return_type in cpp_core_structs:
+        return "&(_ret.native_struct)"
     if return_type in builtin_classes:
         return "&(_ret.godot_owner)"
     if return_type in classes:
@@ -699,58 +701,6 @@ def collect_members(obj):
             core_class.core_members.append(core_member)
         core_classes[class_["name"]] = core_class
     print(core_classes)
-
-
-def generate_destructor(classname):
-    res = ""
-    if classname in builtin_classes:
-        res += f"{INDENT}void {classname}::_py_destroy(){{"
-        res = generate_newline(res)
-        res += f"{INDENT * 2}auto destructor = functions::get_variant_get_ptr_destructor()({generate_variant_type(classname)});"
-        res = generate_newline(res)
-        res += f"{INDENT * 2}destructor(&godot_owner);"
-        res = generate_newline(res)
-        res += f"{INDENT}}}"
-        res = generate_newline(res)
-
-    res += f"{INDENT}{classname}::~{classname}(){{"
-    res = generate_newline(res)
-    res += f"{INDENT * 2}if(shouldBeDeleted && godot_owner != nullptr){{"
-    res = generate_newline(res)
-    if classname not in builtin_classes:
-        pass
-    else:
-        res += f"{INDENT * 4}auto destructor = functions::get_variant_get_ptr_destructor()({generate_variant_type(classname)});"
-        res = generate_newline(res)
-        res += f"{INDENT * 4}destructor(&godot_owner);"
-        res = generate_newline(res)
-
-    res += f"{INDENT * 2}}}"
-    res = generate_newline(res)
-    res += f"{INDENT}}}"
-    return res
-
-
-def generate_enums(class_):
-    if not "enums" in class_.keys():
-        return ""
-    res = ""
-    for enum in class_["enums"]:
-        res += f"cpdef enum {class_['name']}__{enum['name']}:"
-        res = generate_newline(res)
-        for enum_value in enum["values"]:
-            res += f"{INDENT}{class_['name']}__{enum_value['name']} = {enum_value['value']}"
-            res = generate_newline(res)
-    res = generate_newline(res)
-    return res
-
-
-def generate_properties(class_):
-    result = ""
-    if ("properties" in class_.keys()):
-        for property in class_["properties"]:
-            result += generate_property(class_, property)
-    return result
 
 
 def generate_member_getter(class_, member):
@@ -1044,26 +994,6 @@ def get_classes_to_import(classes):
     return classes_to_import
 
 
-def generate_constructor(classname):
-    res = ""
-    res += f"{INDENT}{classname} {classname}::constructor()" + "{"
-    res = generate_newline(res)
-    res += f"{INDENT * 2}{classname} class_ = {classname}();"
-    res = generate_newline(res)
-    res += f"{INDENT * 2}StringName class_name =  c_string_to_string_name(\"{classname}\");"
-    res = generate_newline(res)
-    res += f"{INDENT * 2}class_name.shouldBeDeleted = true;"
-    res = generate_newline(res)
-
-    res += f"{INDENT * 2}class_.set_godot_owner(functions::get_classdb_construct_object()(&class_name.godot_owner));"
-    res = generate_newline(res)
-    res += f"{INDENT * 2}return class_;"
-    res = generate_newline(res)
-    res += INDENT + "}"
-    res = generate_newline(res)
-    return res
-
-
 def generate_new_static(class_):
     res = ""
     if (class_["name"] in builtin_classes):
@@ -1109,6 +1039,8 @@ def init_return_type(return_type):
 
 
 def address_param(target):
+    if target in cpp_core_structs:
+        return f"&other.native_struct"
     if target in builtin_classes - {"int", "float", "bool", "Nil"}:
         return f"&other.godot_owner"
     if target == "int":
@@ -1141,171 +1073,6 @@ def generate_reference(type_):
     return ""
 
 
-def generate_operators_for_class(class_name):
-    res = ""
-    if class_name in operator_dict.keys():
-        for operator in operator_dict[class_name]:
-            if operator in operator_to_method.keys():
-                op = operator_dict[class_name][operator]
-                if op.right_type_values:
-                    for right_type in op.right_type_values:
-                        res += f"{INDENT}{op.return_type} {class_name}::operator {operator}({ungodottype(right_type)}{generate_reference(right_type)} other)" + "{"
-                        res = generate_newline(res)
-                        res += f"{INDENT * 2}{op.return_type} _ret = {init_return_type(op.return_type)};"
-                        res = generate_newline(res)
-
-                        res = generate_newline(res)
-                        res += f"{INDENT * 2}GDExtensionPtrOperatorEvaluator operator_evaluator;"
-                        res = generate_newline(res)
-                        if right_type in {"float", "int", "bool", "Nil"}:
-                            res += f"{INDENT * 2}{ungodottype(right_type)} primitive_val_{right_type} = other;"
-                        res = generate_newline(res)
-                        res += f"{INDENT * 2}operator_evaluator = {INDENT * 2}functions::get_variant_get_ptr_operator_evaluator()({operator_to_variant_operator[operator]}, {generate_variant_type(op.class_)}, {generate_variant_type(right_type)});"
-                        res = generate_newline(res)
-                        res += f"{INDENT * 2}operator_evaluator(&godot_owner, {address_param(right_type)}, {address_ret_decision(op.return_type)});"
-                        res = generate_newline(res)
-
-                        res += f"{INDENT * 2}return _ret;"
-                        res = generate_newline(res)
-                        res += INDENT + "}"
-                        res = generate_newline(res)
-
-                        res += f"{INDENT}{op.return_type} {class_name}::py_operator_{operator_to_python_name(operator)}({ungodottype(right_type)}{generate_reference(right_type)} other)" + "{"
-                        res = generate_newline(res)
-                        res += f"{INDENT * 2}auto _ret = *this {operator} other;"
-                        res = generate_newline(res)
-                        if op.return_type in builtin_classes - {"float", "int", "bool", "Nil"}:
-                            res += f"{INDENT * 2}_ret.shouldBeDeleted=false;"
-                            res = generate_newline(res)
-                        res = generate_newline(res)
-                        res += f"{INDENT * 2}return _ret;"
-                        res = generate_newline(res)
-                        res += INDENT + "}"
-                        res = generate_newline(res)
-    res = generate_newline(res)
-    return res
-
-
-def generate_classes(classes, filename, is_core=False):
-    res = generate_import(classes[0], is_core)
-    res = generate_newline(res)
-    res += generate_header_statements()
-    res = generate_newline(res)
-    for class_ in classes:
-        if (class_["name"] in IGNORED_CLASSES):
-            continue
-        res = generate_newline(res)
-        res += generate_special_methods(class_)
-        res = generate_newline(res)
-        if "methods" not in class_.keys():
-            continue
-        # res += generate_properties(class_)
-        res += generate_members_of_class(class_)
-        for method in class_["methods"]:
-            if native_structs_in_method(method):
-                # TODO: Check if this makes sense
-                continue
-            res += generate_method(class_, method)
-            res = generate_newline(res)
-        res += generate_operators_for_class(class_["name"])
-    if (os.path.exists(filename)):
-        with open(filename, "r") as already_existing_file:
-            if already_existing_file.read() == res:
-                return
-    with open(filename, "w") as f:
-        f.write(res)
-
-
-def generate_dictionary_set_item():
-    res = ""
-    res += f"{INDENT}Variant Dictionary::operator [](Variant key)" + "{"
-    res = generate_newline(res)
-    res += f"{INDENT * 2}return Variant::new_static(functions::get_dictionary_operator_index()(&godot_owner, &key.native_ptr));"
-    res = generate_newline(res)
-    res += f"{INDENT}" + "}"
-    res = generate_newline(res)
-    return res
-
-
-def generate_dictionary_get_item():
-    res = ""
-    res += f"{INDENT}const Variant Dictionary::operator[](Variant key)" + "{"
-    res = generate_newline(res)
-    res += f"{INDENT * 2}return Variant::new_static(functions::get_dictionary_operator_index()(godot_owner, key.native_ptr));"
-    res = generate_newline(res)
-    res += f"{INDENT}" + "}"
-    res = generate_newline(res)
-    return res
-
-
-def generate_special_methods_dictionary():
-    res = ""
-    res += generate_dictionary_set_item()
-    res = generate_newline(res)
-    return res
-
-
-def generate_array_set_item(class_):
-    res = ""
-    if class_["name"] == "PackedInt32Array":
-        res += f"{INDENT}int& {class_['name']}::operator[](int index)" + "{"
-        res = generate_newline(res)
-        res += f"{INDENT * 2}return functions::get_packed_int32_array_operator_index()(&godot_owner, index)[0];"
-        res += INDENT + "}"
-    elif class_["name"] == "PackedInt64Array":
-        res += f"{INDENT}int64_t& {class_['name']}::operator[](int index)" + "{"
-        res = generate_newline(res)
-        res += f"{INDENT * 2}return functions::get_packed_int64_array_operator_index()(&godot_owner, index)[0];"
-        res += INDENT + "}"
-    elif class_["name"] == "PackedFloat32Array":
-        res += f"{INDENT}float& {class_['name']}::operator[](int index)" + "{"
-        res = generate_newline(res)
-        res += f"{INDENT * 2}return functions::get_packed_float32_array_operator_index()(&godot_owner, index)[0];"
-        res += INDENT + "}"
-    elif class_["name"] == "PackedFloat64Array":
-        res += f"{INDENT}double& {class_['name']}::operator[](int index)" + "{"
-        res = generate_newline(res)
-        res += f"{INDENT * 2}return functions::get_packed_float64_array_operator_index()(&godot_owner, index)[0];"
-        res += INDENT + "}"
-    elif class_["name"] == "PackedByteArray":
-        res += f"{INDENT}byte& {class_['name']}::operator[](int index)" + "{"
-        res = generate_newline(res)
-        res += f"{INDENT * 2}return functions::get_packed_byte_array_operator_index()(&godot_owner, index)[0];"
-        res += INDENT + "}"
-
-    elif class_["name"] == "PackedColorArray":
-        res += f"{INDENT}Color {class_['name']}::operator[](int index)" + "{"
-        res = generate_newline(res)
-        res += f"{INDENT * 2}return Color::new_static(functions::get_packed_color_array_operator_index()(&godot_owner, index));"
-        res += INDENT + "}"
-    elif class_["name"] == "PackedVector3Array":
-        res += f"{INDENT}Vector3 {class_['name']}::operator[](int index)" + "{"
-        res = generate_newline(res)
-        res += f"{INDENT * 2}return Vector3::new_static(functions::get_packed_vector3_array_operator_index()(&godot_owner, index));"
-        res += INDENT + "}"
-    elif class_["name"] == "PackedVector2Array":
-        res += f"{INDENT}Vector2 {class_['name']}::operator[](int index)" + "{"
-        res = generate_newline(res)
-        res += f"{INDENT * 2}return Vector2::new_static(functions::get_packed_vector2_array_operator_index()(&godot_owner, index));"
-        res += INDENT + "}"
-    elif class_["name"] == "PackedStringArray":
-        res += f"{INDENT}String {class_['name']}::operator[](int index)" + "{"
-        res = generate_newline(res)
-        res += f"{INDENT * 2}return String::new_static(functions::get_packed_string_array_operator_index()(&godot_owner, index));;"
-        res += INDENT + "}"
-    elif class_["name"] == "Array":
-        res += f"{INDENT}Variant {class_['name']}::operator[](int index)" + "{"
-        res = generate_newline(res)
-        res += f"{INDENT * 2}return Variant::new_static(functions::get_array_operator_index()(&godot_owner, index));"
-        res += INDENT + "}"
-    return res
-
-
-def generate_special_methods_array(class_):
-    res = ""
-    res += generate_array_set_item(class_)
-    return res
-
 
 def generate_cast(class_):
     res = ""
@@ -1316,21 +1083,6 @@ def generate_cast(class_):
     res = generate_newline(res)
     return res
 
-
-def generate_special_methods(class_):
-    res = ""
-    if class_["name"] == "Dictionary":
-        res += generate_special_methods_dictionary()
-
-    if "array" in class_["name"].lower():
-        res += generate_special_methods_array(class_)
-    if class_["name"] in classes:
-        res += generate_cast(class_)
-
-    if class_["name"] == "Object":
-        res += generate_special_methods_object()
-
-    return res
 
 
 def generate_operators_set(class_):
@@ -1389,6 +1141,7 @@ if __name__ == "__main__":
         normal_classes = set([class_['name'] for class_ in obj['classes']])
         native_structs = set([native_struct["name"] for native_struct in obj["native_structures"]])
         singletons = set([singleton["name"] for singleton in obj["singletons"]])
+        cpp_core_structs = collect_class_structs(obj["builtin_class_member_offsets"][0])
         collect_members(obj)
         print(obj["utility_functions"])
     res = generate_import()
