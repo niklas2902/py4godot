@@ -16,19 +16,6 @@ namespace godot{
         VariantTypeWrapper(){
             shouldBeDeleted = false;
         }
-
-        void set_callback(BaseCallback* callback){
-            //_internal_update_callback = callback;
-        }
-
-        void set_variant_type(GDExtensionVariantType variant_type) {
-            this->variant_type = variant_type;
-        }
-
-        GDExtensionVariantType get_variant_type() {
-            return variant_type;
-        }
-
         void set_shouldBeDeleted(bool val){
             shouldBeDeleted = val;
         }

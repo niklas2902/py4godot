@@ -9,12 +9,6 @@ namespace godot{
             bool shouldBeDeleted = false;
             GDExtensionObjectPtr godot_owner = nullptr;
             bool is_put_in_tree = true;
-            bool py_get_is_put_in_tree(){
-                return is_put_in_tree;
-            }
-            void py_get_is_put_in_tree(bool value){
-                is_put_in_tree = value;
-            }
             Wrapper(){
                 shouldBeDeleted = false;
             }
