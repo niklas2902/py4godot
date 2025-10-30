@@ -608,12 +608,6 @@ def get_args_count(method):
     return 0
 
 
-def get_godot_owner(method):
-    if is_static(method):
-        return "NULL"
-    return "self.godot_owner"
-
-
 def generate_ret_call(method_):
     result = ""
     if "return_value" in method_.keys() or "return_type" in method_.keys():

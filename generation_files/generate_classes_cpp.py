@@ -301,8 +301,6 @@ def generate_constructors(class_):
         # TODO:improve - fill with args
         res += generate_constructor_args_array(constructor)
         res = generate_newline(res)
-        res += f"{INDENT * 2}_class.allocated_memory = true;"
-        res = generate_newline(res)
         if class_["name"] in cpp_core_structs:
             res += f"{INDENT * 2}constructor(&_class.native_struct,_args);"
         else:
@@ -396,8 +394,6 @@ def generate_copy_constructor(class_):
 
         res = generate_newline(res)
         res += f"{INDENT * 2}godot_owner = (void*)(&data);"
-        res = generate_newline(res)
-        res += f"{INDENT * 2}allocated_memory = true;"
         res = generate_newline(res)
         res += f"{INDENT * 2}constructor(&godot_owner,_args);"
         res = generate_newline(res)
@@ -2520,8 +2516,6 @@ def generate_special_methods_packed_array(class_):
     res += f"{INDENT * 2}GDExtensionPtrConstructor constructor = functions::get_variant_get_ptr_constructor()(_class.variant_type, 0);"
     res = generate_newline(res)
     res += f"{INDENT*2}GDExtensionTypePtr _args[1];"
-    res = generate_newline(res)
-    res += f"{INDENT * 2}_class.allocated_memory = true;"
     res = generate_newline(res)
 
     res += f"{INDENT * 2}constructor(&_class.godot_owner,_args);"
