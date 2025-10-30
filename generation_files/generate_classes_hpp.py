@@ -391,7 +391,10 @@ def generate_common_methods(class_):
     elif (class_["name"] in builtin_classes or "typedarray" in class_["name"].lower()) and class_["name"] not in cpp_core_structs:
         result += f"{INDENT}void* godot_owner;"
         result = generate_newline(result)
-        result += f"{INDENT}uint8_t data[8];"
+        if "typedarray" in class_["name"].lower():
+            result += f"{INDENT}uint8_t data[ARRAY_SIZE];"
+        else:
+            result += f"{INDENT}uint8_t data[{class_['name'].upper()}_SIZE];"
         result = generate_newline(result)
     result += generate_constructors(class_)
     result = generate_newline(result)

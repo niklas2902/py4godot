@@ -1,13 +1,14 @@
 #pragma once 
 #include "py4godot/gdextension-api/gdextension_interface.h"
 #include "py4godot/cppclasses/class_defs.h"
+#include "py4godot/cppclasses/native_structs.h"
 #include "Python.h"
 namespace godot{
     class LIBRARY_API Variant {
     public:
         GDExtensionVariantPtr native_ptr;
         GDExtensionVariantPtr _inner_ptr;
-        char data[16];
+        uint8_t data[VARIANT_SIZE];
 
 
         static void init_variant();

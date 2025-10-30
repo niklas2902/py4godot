@@ -24,8 +24,16 @@ def generate_structs(configruation):
             res = generate_newline(res)
         res += f"{INDENT}}};"
         res = generate_newline(res)
-
     return res
+
+def generate_sizes(obj):
+    res = ""
+    sizes = obj["builtin_class_sizes"][0]["sizes"]
+    for size in sizes:
+        res += f"#define {size['name'].upper()}_SIZE {size['size']}"
+        res = generate_newline(res)
+    return res
+
 def generate_text(obj):
     res = ""
     res += "#ifndef INNER_STRUCTS"
@@ -33,6 +41,8 @@ def generate_text(obj):
     res += "#define INNER_STRUCTS"
     res = generate_newline(res)
     res += "#include <cstdint>"
+    res = generate_newline(res)
+    res += generate_sizes(obj)
     res = generate_newline(res)
     res += "namespace native_structs{"
     res = generate_newline(res)
