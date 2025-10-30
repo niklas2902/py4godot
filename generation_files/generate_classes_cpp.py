@@ -335,6 +335,20 @@ def generate_make_shared_ptr(class_):
         res = generate_newline(res)
         res += f"{INDENT * 2}ptr->shouldBeDeleted = false;"
         res = generate_newline(res)
+        res += f"{INDENT*2}if (_class._callback){{"
+        res = generate_newline(res)
+        res += f"{INDENT * 3}auto instance_callback = new Callback<{class_['name']}>();"
+        res = generate_newline(res)
+        res += f"{INDENT * 3}auto copy_callback = (Callback<{class_['name']}>*) _class._callback;"
+        res = generate_newline(res)
+        res += f"{INDENT * 3}instance_callback->callback = copy_callback->callback;"
+        res = generate_newline(res)
+        res += f"{INDENT * 3}instance_callback->instance = copy_callback->instance;"
+        res = generate_newline(res)
+        res += f"{INDENT * 3}ptr->_callback = instance_callback;"
+        res = generate_newline(res)
+        res += f"{INDENT * 2}}}"
+        res = generate_newline(res)
         res += f"{INDENT * 2}return ptr;"
         res = generate_newline(res)
         res += f"{INDENT}}}"
@@ -1598,7 +1612,6 @@ def generate_member_getter(class_, member):
         res += f"{INDENT * 2}{member.type_} _ret = {member.type_}::new0();"
     res = generate_newline(res)
     if class_ in cpp_core_structs:
-
         if member.type_ != "int" and member.type_ != "float" and member.type_ != "double":
             res += f"{INDENT * 2}getter(&native_struct, &_ret.godot_owner);"
         else:
@@ -2067,7 +2080,10 @@ def generate_operators_for_class(class_name):
                         res = generate_newline(res)
                         res += f"{INDENT * 2}operator_evaluator = {INDENT * 2}functions::get_variant_get_ptr_operator_evaluator()({operator_to_variant_operator[operator]}, {generate_variant_type(op.class_)}, {generate_variant_type(right_type)});"
                         res = generate_newline(res)
-                        res += f"{INDENT * 2}operator_evaluator(&godot_owner, {address_param(right_type)}, {address_ret_decision(op.return_type)});"
+                        if class_name in cpp_core_structs:
+                            res += f"{INDENT * 2}operator_evaluator(&native_struct, {address_param(right_type)}, {address_ret_decision(op.return_type)});"
+                        else:
+                            res += f"{INDENT * 2}operator_evaluator(&godot_owner, {address_param(right_type)}, {address_ret_decision(op.return_type)});"
                         res = generate_newline(res)
 
                         res += f"{INDENT * 2}return _ret;"
