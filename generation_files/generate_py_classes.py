@@ -823,6 +823,8 @@ def generate_init(class_):
     res = generate_newline(res)
     res += f"{INDENT * 2}self.shouldBeDeleted = True"
     res = generate_newline(res)
+    res += f"{INDENT * 2}self.casted_from = None"
+    res = generate_newline(res)
     res += f"{INDENT * 2}self._ptr =  constructor({classes_dict[class_['name']]},0, ())"
     res = generate_newline(res)
     return res
@@ -921,6 +923,8 @@ def generate_construct_without_init(class_):
     res += f"{INDENT * 2}cls = {class_['name']}.__new__({class_['name']})"
     res = generate_newline(res)
     res += f"{INDENT * 2}cls.shouldBeDeleted = True"
+    res = generate_newline(res)
+    res += f"{INDENT * 2}cls.casted_from = None"
     res = generate_newline(res)
     res += f"{INDENT * 2}cls.init_signals()"
     res = generate_newline(res)
@@ -1467,6 +1471,8 @@ def generate_constructor(classname):
     res = generate_newline(res)
     res += f"{INDENT * 2}self._ptr =  CPP{class_['name']}Wrapper()"
     res = generate_newline(res)
+    res += f"{INDENT * 2}self.casted_from = None"
+    res = generate_newline(res)
     res += f"{INDENT * 2}if c_utils.shouldCreateObject:"
     res = generate_newline(res)
     res += f"{INDENT * 3}self._ptr = constructor({classes_dict[classname]},0, ())"
@@ -1783,7 +1789,7 @@ def generate_del(class_):
     if class_["name"] not in builtin_classes and class_["name"] not in typed_arrays_names:
         res += f"{INDENT}def __del__(self):"
         res = generate_newline(res)
-        if class_["name"] == "RefCounted":
+        if class_["name"] == "RefCounted" or is_refcounted(class_):
             res += f"{INDENT * 2}if self.casted_from is None:"
             res = generate_newline(res)
             res += f"{INDENT * 3}self._ptr.call_with_return({method_ids['normal_methods'][class_['name']]['py_destroy']}, ())"

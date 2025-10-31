@@ -38,6 +38,21 @@ def collect_typed_arrays_from_return(method_):
             return [ret_val.type]
     return []
 
+def is_refcounted(class_):
+    if class_ == None:
+        return False
+    if "inherits" in class_.keys():
+        cls = find_class(class_["inherits"])
+        if cls["name"] == "RefCounted":
+            return True
+        while cls:
+            if "inherits" not in cls.keys():
+                break
+            cls = find_class(cls["inherits"])
+            if cls["name"] == "RefCounted":
+                return True
+    return False
+
 def collect_typed_arrays_from_args(method):
     typed_arrays = []
     if "arguments" not in method.keys():
@@ -193,7 +208,7 @@ def generate_method_ids(classes):
         if cls["name"] in builtin_classes:
             normal_methods[cls["name"]]["py_destroy"] = id
             id += 1
-        elif cls["name"] == "RefCounted":
+        elif cls["name"] == "RefCounted" or is_refcounted(cls):
             normal_methods[cls["name"]]["py_destroy"] = id
             id += 1
         if cls["name"] in builtin_classes:

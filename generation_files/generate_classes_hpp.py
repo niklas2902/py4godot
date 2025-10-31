@@ -392,9 +392,9 @@ def generate_common_methods(class_):
         result += f"{INDENT}void* godot_owner;"
         result = generate_newline(result)
         if "typedarray" in class_["name"].lower():
-            result += f"{INDENT}uint8_t data[ARRAY_SIZE];"
+            result += f"{INDENT}uint8_t data[ARRAY_SIZE] = {{0}};"
         else:
-            result += f"{INDENT}uint8_t data[{class_['name'].upper()}_SIZE];"
+            result += f"{INDENT}uint8_t data[{class_['name'].upper()}_SIZE] = {{0}};"
         result = generate_newline(result)
     result += generate_constructors(class_)
     result = generate_newline(result)

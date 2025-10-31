@@ -353,12 +353,6 @@ def generate_make_shared_ptr(class_):
         res = generate_newline(res)
         return res
 
-    if class_["name"] not in ("Array", "Dictionary"):
-        res += f"{INDENT * 2}return std::make_shared<{class_['name']}>(_class);"
-        res = generate_newline(res)
-        res += f"{INDENT}}}"
-        res = generate_newline(res)
-        return res
     res += f"{INDENT * 2}auto ptr = std::make_shared<{class_['name']}>();"
     res = generate_newline(res)
     res += f"{INDENT * 2}ptr->godot_owner = _class.godot_owner;"
@@ -1469,8 +1463,11 @@ def generate_switch_methods(class_):
 
     if class_["name"] in ("PackedInt32Array", "PackedInt64Array", "PackedFloat32Array", "PackedFloat64Array", "PackedByteArray"):
         res += f"case {method_ids['normal_methods'][class_['name']]['get_memoryview']}: return py_get_memory_view();"
-
+    if not "Object" in class_["name"] and is_refcounted(class_):
+        res += f"{INDENT*3}case {method_ids['normal_methods'][class_['name']]['py_destroy']}: py_destroy_ref();return Py_None;"
+        res = generate_newline(res)
     res += f"{INDENT*2}}}"
+    res = generate_newline(res)
     res += f"{INDENT*2}return Py_None;"
     res = generate_newline(res)
     res += f"{INDENT}}}"
