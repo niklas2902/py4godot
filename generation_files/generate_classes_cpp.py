@@ -294,7 +294,7 @@ def generate_constructors(class_):
         res = generate_newline(res)
         res += f"{INDENT * 2}_class.shouldBeDeleted = true;"
         res = generate_newline(res)
-        res += f"{INDENT * 2}_class.set_variant_type({generate_variant_type(class_['name'])});"
+        res += f"{INDENT * 2}_class.variant_type = {generate_variant_type(class_['name'])};"
         res = generate_newline(res)
         res += f"{INDENT * 2}GDExtensionPtrConstructor constructor = functions::get_variant_get_ptr_constructor()(_class.variant_type, {constructor['index']});"
         res = generate_newline(res)
@@ -382,7 +382,7 @@ def generate_copy_constructor(class_):
     res = generate_newline(res)
     res += f"{INDENT * 2}this->_callback = nullptr;"
     res = generate_newline(res)
-    res += f"{INDENT * 2}this->set_variant_type({get_class_name(generate_variant_type(class_['name']))});"
+    res += f"{INDENT * 2}this->variant_type = {get_class_name(generate_variant_type(class_['name']))};"
     res = generate_newline(res)
     res += f"{INDENT * 2}GDExtensionPtrConstructor constructor = functions::get_variant_get_ptr_constructor()(this->variant_type, 1);"
     res = generate_newline(res)
@@ -431,7 +431,7 @@ def generate_copy_operator(class_):
     res = generate_newline(res)
     res += f"{INDENT * 2}this->_callback = nullptr;"
     res = generate_newline(res)
-    res += f"{INDENT * 2}this->set_variant_type({get_class_name(generate_variant_type(class_['name']))});"
+    res += f"{INDENT * 2}this->variant_type = {get_class_name(generate_variant_type(class_['name']))};"
     res = generate_newline(res)
     res += f"{INDENT * 2}GDExtensionPtrConstructor constructor = functions::get_variant_get_ptr_constructor()(this->variant_type, 1);"
     res = generate_newline(res)
@@ -2511,7 +2511,7 @@ def generate_special_methods_packed_array(class_):
     res = generate_newline(res)
     res += f"{INDENT * 2}_class.shouldBeDeleted = true;"
     res = generate_newline(res)
-    res += f"{INDENT * 2}_class.set_variant_type({generate_variant_type(class_['name'])});"
+    res += f"{INDENT * 2}_class.variant_type = {generate_variant_type(class_['name'])};"
     res = generate_newline(res)
     res += f"{INDENT * 2}GDExtensionPtrConstructor constructor = functions::get_variant_get_ptr_constructor()(_class.variant_type, 0);"
     res = generate_newline(res)
