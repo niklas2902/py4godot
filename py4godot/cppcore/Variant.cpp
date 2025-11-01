@@ -140,7 +140,7 @@ PyObject* Variant::create_vector3(){
     auto constructor = functions::get_get_variant_to_type_constructor()(type);
     auto vector = std::make_shared<Vector3>();
     vector->shouldBeDeleted=false;
-    constructor(&vector->godot_owner, native_ptr);
+    constructor(&vector->native_struct, native_ptr);
     auto val = type_helper_create_vector3(vector);
     return val;
 }
@@ -175,7 +175,7 @@ PyObject* Variant::create_rect2i(){
     auto constructor = functions::get_get_variant_to_type_constructor()(type);
     auto string = std::make_shared<Rect2i>();
     string->shouldBeDeleted=false;
-    constructor(&string->godot_owner, native_ptr);
+    constructor(&string->native_struct, native_ptr);
     auto val = type_helper_create_rect2i(string);
     return val;
 }
@@ -234,7 +234,7 @@ PyObject* Variant::create_projection(){
     auto constructor = functions::get_get_variant_to_type_constructor()(type);
     auto string = std::make_shared<Projection>();
     string->shouldBeDeleted=false;
-    constructor(&string->godot_owner, native_ptr);
+    constructor(&string->native_struct, native_ptr);
     auto val = type_helper_create_projection(string);
     return val;
 }
@@ -254,7 +254,7 @@ PyObject* Variant::create_vector2i(){
     auto constructor = functions::get_get_variant_to_type_constructor()(type);
     auto string = std::make_shared<Vector2i>();
     string->shouldBeDeleted=false;
-    constructor(&string->godot_owner, native_ptr);
+    constructor(&string->native_struct, native_ptr);
     auto val = type_helper_create_vector2i(string);
     return val;
 }
@@ -264,7 +264,7 @@ PyObject* Variant::create_transform2d(){
     auto constructor = functions::get_get_variant_to_type_constructor()(type);
     auto string = std::make_shared<Transform2D>();
     string->shouldBeDeleted=false;
-    constructor(&string->godot_owner, native_ptr);
+    constructor(&string->native_struct, native_ptr);
     auto val = type_helper_create_transform2d(string);
     return val;
 }
@@ -274,7 +274,7 @@ PyObject* Variant::create_aabb(){
     auto constructor = functions::get_get_variant_to_type_constructor()(type);
     auto string = std::make_shared<AABB>();
     string->shouldBeDeleted=false;
-    constructor(&string->godot_owner, native_ptr);
+    constructor(&string->native_struct, native_ptr);
     auto val = type_helper_create_aabb(string);
     return val;
 }
@@ -291,7 +291,7 @@ PyObject* Variant::create_vector3i(){
     auto constructor = functions::get_get_variant_to_type_constructor()(type);
     auto string = std::make_shared<Vector3i>();
     string->shouldBeDeleted=false;
-    constructor(&string->godot_owner, native_ptr);
+    constructor(&string->native_struct, native_ptr);
     auto val = type_helper_create_vector3i(string);
     return val;
 }
@@ -336,7 +336,7 @@ PyObject* Variant::create_vector4(){
     auto constructor = functions::get_get_variant_to_type_constructor()(type);
     auto string = std::make_shared<Vector4>();
     string->shouldBeDeleted=false;
-    constructor(&string->godot_owner, native_ptr);
+    constructor(&string->native_struct, native_ptr);
     auto val = type_helper_create_vector4(string);
     return val;
 }
@@ -345,7 +345,7 @@ PyObject* Variant::create_rect2(){
     auto constructor = functions::get_get_variant_to_type_constructor()(type);
     auto string = std::make_shared<Rect2>();
     string->shouldBeDeleted=false;
-    constructor(&string->godot_owner, native_ptr);
+    constructor(&string->native_struct, native_ptr);
     auto val = type_helper_create_rect2(string);
     return val;
 }
@@ -353,7 +353,7 @@ PyObject* Variant::create_vector2(){
     GDExtensionVariantType type = functions::get_variant_get_type()(native_ptr);
     auto constructor = functions::get_get_variant_to_type_constructor()(type);
     auto string = std::make_shared<Vector2>();
-    constructor(&string->godot_owner, native_ptr);
+    constructor(&string->native_struct, native_ptr);
     auto val = type_helper_create_vector2(string);
     return val;
 }
@@ -361,7 +361,7 @@ PyObject* Variant::create_transform3d(){
     GDExtensionVariantType type = functions::get_variant_get_type()(native_ptr);
     auto constructor = functions::get_get_variant_to_type_constructor()(type);
     auto string = std::make_shared<Transform3D>();
-    constructor(&string->godot_owner, native_ptr);
+    constructor(&string->native_struct, native_ptr);
     string->shouldBeDeleted=false;
     auto val = type_helper_create_transform3d(string);
     return val;
@@ -397,7 +397,7 @@ PyObject* Variant::create_plane(){
     GDExtensionVariantType type = functions::get_variant_get_type()(native_ptr);
     auto constructor = functions::get_get_variant_to_type_constructor()(type);
     auto string = std::make_shared<Plane>();
-    constructor(&string->godot_owner, native_ptr);
+    constructor(&string->native_struct, native_ptr);
     string->shouldBeDeleted=false;
     auto val = type_helper_create_plane(string);
     return val;
@@ -424,7 +424,7 @@ PyObject* Variant::create_basis(){
     auto constructor = functions::get_get_variant_to_type_constructor()(type);
     auto string = std::make_shared<Basis>();
     string->shouldBeDeleted=false;
-    constructor(&string->godot_owner, native_ptr);
+    constructor(&string->native_struct, native_ptr);
     auto val = type_helper_create_basis(string);
     return val;
 }
@@ -433,7 +433,7 @@ PyObject* Variant::create_color(){
     auto constructor = functions::get_get_variant_to_type_constructor()(type);
     auto string = std::make_shared<Color>();
     string->shouldBeDeleted=false;
-    constructor(&string->godot_owner, native_ptr);
+    constructor(&string->native_struct, native_ptr);
     auto val = type_helper_create_color(string);
     return val;
 }
@@ -442,7 +442,7 @@ PyObject* Variant::create_vector4i(){
     auto constructor = functions::get_get_variant_to_type_constructor()(type);
     auto string = std::make_shared<Vector4i>();
     string->shouldBeDeleted=false;
-    constructor(&string->godot_owner, native_ptr);
+    constructor(&string->native_struct, native_ptr);
     auto val = type_helper_create_vector4i(string);
     return val;
 }
@@ -460,7 +460,7 @@ PyObject* Variant::create_quaternion(){
     auto constructor = functions::get_get_variant_to_type_constructor()(type);
     auto string = std::make_shared<Quaternion>();
     string->shouldBeDeleted=false;
-    constructor(&string->godot_owner, native_ptr);
+    constructor(&string->native_struct, native_ptr);
     auto val = type_helper_create_quaternion(string);
     return val;
 }
@@ -552,7 +552,7 @@ PyObject* Variant::create_vector3_native_ptr(){
     auto constructor = functions::get_get_variant_to_type_constructor()(type);
     auto vector = std::make_shared<Vector3>();
     vector->shouldBeDeleted=false;
-    constructor(&vector->godot_owner, &native_ptr);
+    constructor(&vector->native_struct, &native_ptr);
 
     auto val = type_helper_create_vector3(vector);
     return val;
@@ -585,7 +585,7 @@ PyObject* Variant::create_rect2i_native_ptr(){
     auto constructor = functions::get_get_variant_to_type_constructor()(type);
     auto string = std::make_shared<Rect2i>();
     string->shouldBeDeleted=false;
-    constructor(&string->godot_owner, &native_ptr);
+    constructor(&string->native_struct, &native_ptr);
     auto val = type_helper_create_rect2i(string);
     return val;
 }
@@ -638,7 +638,7 @@ PyObject* Variant::create_projection_native_ptr(){
     GDExtensionVariantType type = functions::get_variant_get_type()(&native_ptr);
     auto constructor = functions::get_get_variant_to_type_constructor()(type);
     auto string = std::make_shared<Projection>();
-    constructor(&string->godot_owner, &native_ptr);
+    constructor(&string->native_struct, &native_ptr);
     auto val = type_helper_create_projection(string);
     return val;
 }
@@ -656,7 +656,7 @@ PyObject* Variant::create_vector2i_native_ptr(){
     auto constructor = functions::get_get_variant_to_type_constructor()(type);
     auto string = std::make_shared<Vector2i>();
     string->shouldBeDeleted=false;
-    constructor(&string->godot_owner, &native_ptr);
+    constructor(&string->native_struct, &native_ptr);
     auto val = type_helper_create_vector2i(string);
     return val;
 }
@@ -665,7 +665,7 @@ PyObject* Variant::create_transform2d_native_ptr(){
     auto constructor = functions::get_get_variant_to_type_constructor()(type);
     auto string = std::make_shared<Transform2D>();
     string->shouldBeDeleted=false;
-    constructor(&string->godot_owner, &native_ptr);
+    constructor(&string->native_struct, &native_ptr);
     auto val = type_helper_create_transform2d(string);
     return val;
 }
@@ -674,7 +674,7 @@ PyObject* Variant::create_aabb_native_ptr(){
     auto constructor = functions::get_get_variant_to_type_constructor()(type);
     auto string = std::make_shared<AABB>();
     string->shouldBeDeleted=false;
-    constructor(&string->godot_owner, &native_ptr);
+    constructor(&string->native_struct, &native_ptr);
     auto val = type_helper_create_aabb(string);
     return val;
 }
@@ -690,7 +690,7 @@ PyObject* Variant::create_vector3i_native_ptr(){
     auto constructor = functions::get_get_variant_to_type_constructor()(type);
     auto string = std::make_shared<Vector3i>();
     string->shouldBeDeleted=false;
-    constructor(&string->godot_owner, &native_ptr);
+    constructor(&string->native_struct, &native_ptr);
     auto val = type_helper_create_vector3i(string);
     return val;
 }
@@ -735,7 +735,7 @@ PyObject* Variant::create_vector4_native_ptr(){
     auto constructor = functions::get_get_variant_to_type_constructor()(type);
     auto string = std::make_shared<Vector4>();
     string->shouldBeDeleted=false;
-    constructor(&string->godot_owner, &native_ptr);
+    constructor(&string->native_struct, &native_ptr);
     auto val = type_helper_create_vector4(string);
     return val;
 }
@@ -744,7 +744,7 @@ PyObject* Variant::create_rect2_native_ptr(){
     auto constructor = functions::get_get_variant_to_type_constructor()(type);
     auto string = std::make_shared<Rect2>();
     string->shouldBeDeleted=false;
-    constructor(&string->godot_owner, &native_ptr);
+    constructor(&string->native_struct, &native_ptr);
     auto val = type_helper_create_rect2(string);
     return val;
 }
@@ -753,7 +753,7 @@ PyObject* Variant::create_vector2_native_ptr(){
     auto constructor = functions::get_get_variant_to_type_constructor()(type);
     auto string = std::make_shared<Vector2>();
     string->shouldBeDeleted=false;
-    constructor(&string->godot_owner, &native_ptr);
+    constructor(&string->native_struct, &native_ptr);
     auto val = type_helper_create_vector2(string);
     return val;
 }
@@ -762,7 +762,7 @@ PyObject* Variant::create_transform3d_native_ptr(){
     auto constructor = functions::get_get_variant_to_type_constructor()(type);
     auto string = std::make_shared<Transform3D>();
     string->shouldBeDeleted=false;
-    constructor(&string->godot_owner, &native_ptr);
+    constructor(&string->native_struct, &native_ptr);
     auto val = type_helper_create_transform3d(string);
     return val;
 }
@@ -798,7 +798,7 @@ PyObject* Variant::create_plane_native_ptr(){
     auto constructor = functions::get_get_variant_to_type_constructor()(type);
     auto string = std::make_shared<Plane>();
     string->shouldBeDeleted=false;
-    constructor(&string->godot_owner, &native_ptr);
+    constructor(&string->native_struct, &native_ptr);
     auto val = type_helper_create_plane(string);
     return val;
 }
@@ -824,7 +824,7 @@ PyObject* Variant::create_basis_native_ptr(){
     auto constructor = functions::get_get_variant_to_type_constructor()(type);
     auto string = std::make_shared<Basis>();
     string->shouldBeDeleted=false;
-    constructor(&string->godot_owner, &native_ptr);
+    constructor(&string->native_struct, &native_ptr);
     auto val = type_helper_create_basis(string);
     return val;
 }
@@ -833,7 +833,7 @@ PyObject* Variant::create_color_native_ptr(){
     auto constructor = functions::get_get_variant_to_type_constructor()(type);
     auto string = std::make_shared<Color>();
     string->shouldBeDeleted=false;
-    constructor(&string->godot_owner, &native_ptr);
+    constructor(&string->native_struct, &native_ptr);
     auto val = type_helper_create_color(string);
     return val;
 }
@@ -842,7 +842,7 @@ PyObject* Variant::create_vector4i_native_ptr(){
     auto constructor = functions::get_get_variant_to_type_constructor()(type);
     auto string = std::make_shared<Vector4i>();
     string->shouldBeDeleted=false;
-    constructor(&string->godot_owner, &native_ptr);
+    constructor(&string->native_struct, &native_ptr);
     auto val = type_helper_create_vector4i(string);
     return val;
 }
@@ -860,7 +860,7 @@ PyObject* Variant::create_quaternion_native_ptr(){
     auto constructor = functions::get_get_variant_to_type_constructor()(type);
     auto string = std::make_shared<Quaternion>();
     string->shouldBeDeleted=false;
-    constructor(&string->godot_owner, &native_ptr);
+    constructor(&string->native_struct, &native_ptr);
     auto val = type_helper_create_quaternion(string);
     return val;
 }
@@ -1326,7 +1326,7 @@ void Variant::init_from_py_object_native_ptr(PyObject* object, const char* type_
 void Variant::construct_Rect2i(PyObject* object){
         std::shared_ptr<Rect2i> converted_val = get_rect2i_from_pyobject(object);
         auto constructor = functions::get_get_variant_from_type_constructor()(GDExtensionVariantType::GDEXTENSION_VARIANT_TYPE_RECT2I);
-        constructor(native_ptr, &converted_val->godot_owner);
+        constructor(native_ptr, &converted_val->native_struct);
         converted_val->shouldBeDeleted=true;
 }
 void Variant::construct_Callable(PyObject* object){
@@ -1369,7 +1369,7 @@ auto converted_val =  get_packedvector3array_from_pyobject(object);
 void Variant::construct_Vector3(PyObject* object){
 auto converted_val =  get_vector3_from_pyobject(object);
         auto constructor = functions::get_get_variant_from_type_constructor()(GDExtensionVariantType::GDEXTENSION_VARIANT_TYPE_VECTOR3);
-        constructor(native_ptr, &converted_val->godot_owner);
+        constructor(native_ptr, &converted_val->native_struct);
         converted_val->shouldBeDeleted=true;
 }
 void Variant::construct_Dictionary(PyObject* object){
@@ -1381,7 +1381,7 @@ auto converted_val =  get_dictionary_from_pyobject(object);
 void Variant::construct_Projection(PyObject* object){
 auto converted_val =  get_projection_from_pyobject(object);
         auto constructor = functions::get_get_variant_from_type_constructor()(GDExtensionVariantType::GDEXTENSION_VARIANT_TYPE_PROJECTION);
-        constructor(native_ptr, &converted_val->godot_owner);
+        constructor(native_ptr, &converted_val->native_struct);
         converted_val->shouldBeDeleted=true;
 }
 void Variant::construct_RID(PyObject* object){
@@ -1393,18 +1393,18 @@ auto converted_val =  get_rid_from_pyobject(object);
 void Variant::construct_Vector2i(PyObject* object){
 auto converted_val =  get_vector2i_from_pyobject(object);
         auto constructor = functions::get_get_variant_from_type_constructor()(GDExtensionVariantType::GDEXTENSION_VARIANT_TYPE_VECTOR2I);
-        constructor(native_ptr, &converted_val->godot_owner);
+        constructor(native_ptr, &converted_val->native_struct);
 }
 void Variant::construct_Transform2D(PyObject* object){
 auto converted_val =  get_transform2d_from_pyobject(object);
         auto constructor = functions::get_get_variant_from_type_constructor()(GDExtensionVariantType::GDEXTENSION_VARIANT_TYPE_TRANSFORM2D);
-        constructor(native_ptr, &converted_val->godot_owner);
+        constructor(native_ptr, &converted_val->native_struct);
         converted_val->shouldBeDeleted=true;
 }
 void Variant::construct_AABB(PyObject* object){
 auto converted_val =  get_aabb_from_pyobject(object);
         auto constructor = functions::get_get_variant_from_type_constructor()(GDExtensionVariantType::GDEXTENSION_VARIANT_TYPE_AABB);
-        constructor(native_ptr, &converted_val->godot_owner);
+        constructor(native_ptr, &converted_val->native_struct);
         converted_val->shouldBeDeleted=true;
 }
 void Variant::construct_float(PyObject* object){
@@ -1415,7 +1415,7 @@ auto converted_val =  PyFloat_AsDouble(object);
 void Variant::construct_Vector3i(PyObject* object){
 auto converted_val =  get_vector3i_from_pyobject(object);
         auto constructor = functions::get_get_variant_from_type_constructor()(GDExtensionVariantType::GDEXTENSION_VARIANT_TYPE_VECTOR3I);
-        constructor(native_ptr, &converted_val->godot_owner);
+        constructor(native_ptr, &converted_val->native_struct);
         converted_val->shouldBeDeleted=true;
 }
 void Variant::construct_PackedInt64Array(PyObject* object){
@@ -1450,25 +1450,25 @@ auto converted_val =  get_packedbytearray_from_pyobject(object);
 void Variant::construct_Vector4(PyObject* object){
 auto converted_val =  get_vector4_from_pyobject(object);
         auto constructor = functions::get_get_variant_from_type_constructor()(GDExtensionVariantType::GDEXTENSION_VARIANT_TYPE_VECTOR4);
-        constructor(native_ptr, &converted_val->godot_owner);
+        constructor(native_ptr, &converted_val->native_struct);
         converted_val->shouldBeDeleted=true;
 }
 void Variant::construct_Rect2(PyObject* object){
 auto converted_val =  get_rect2_from_pyobject(object);
         auto constructor = functions::get_get_variant_from_type_constructor()(GDExtensionVariantType::GDEXTENSION_VARIANT_TYPE_RECT2);
-        constructor(native_ptr, &converted_val->godot_owner);
+        constructor(native_ptr, &converted_val->native_struct);
         converted_val->shouldBeDeleted=true;
 }
 void Variant::construct_Vector2(PyObject* object){
 auto converted_val =  get_vector2_from_pyobject(object);
         auto constructor = functions::get_get_variant_from_type_constructor()(GDExtensionVariantType::GDEXTENSION_VARIANT_TYPE_VECTOR2);
-        constructor(native_ptr, &converted_val->godot_owner);
+        constructor(native_ptr, &converted_val->native_struct);
         converted_val->shouldBeDeleted=true;
 }
 void Variant::construct_Transform3D(PyObject* object){
 auto converted_val =  get_transform3d_from_pyobject(object);
         auto constructor = functions::get_get_variant_from_type_constructor()(GDExtensionVariantType::GDEXTENSION_VARIANT_TYPE_TRANSFORM3D);
-        constructor(native_ptr, &converted_val->godot_owner);
+        constructor(native_ptr, &converted_val->native_struct);
         converted_val->shouldBeDeleted=true;
 }
 void Variant::construct_PackedColorArray(PyObject* object){
@@ -1492,7 +1492,7 @@ auto converted_val =  get_packedvector2array_from_pyobject(object);
 void Variant::construct_Plane(PyObject* object){
 auto converted_val =  get_plane_from_pyobject(object);
         auto constructor = functions::get_get_variant_from_type_constructor()(GDExtensionVariantType::GDEXTENSION_VARIANT_TYPE_PLANE);
-        constructor(native_ptr, &converted_val->godot_owner);
+        constructor(native_ptr, &converted_val->native_struct);
         converted_val->shouldBeDeleted=true;
 }
 void Variant::construct_PackedFloat64Array(PyObject* object){
@@ -1509,19 +1509,19 @@ auto converted_val =  PyObject_IsTrue(object);
 void Variant::construct_Basis(PyObject* object){
 auto converted_val =  get_basis_from_pyobject(object);
         auto constructor = functions::get_get_variant_from_type_constructor()(GDExtensionVariantType::GDEXTENSION_VARIANT_TYPE_BASIS);
-        constructor(native_ptr, &converted_val->godot_owner);
+        constructor(native_ptr, &converted_val->native_struct);
         converted_val->shouldBeDeleted=true;
 }
 void Variant::construct_Color(PyObject* object){
 auto converted_val =  get_color_from_pyobject(object);
         auto constructor = functions::get_get_variant_from_type_constructor()(GDExtensionVariantType::GDEXTENSION_VARIANT_TYPE_COLOR);
-        constructor(native_ptr, &converted_val->godot_owner);
+        constructor(native_ptr, &converted_val->native_struct);
         converted_val->shouldBeDeleted=true;
 }
 void Variant::construct_Vector4i(PyObject* object){
 auto converted_val =  get_vector4i_from_pyobject(object);
         auto constructor = functions::get_get_variant_from_type_constructor()(GDExtensionVariantType::GDEXTENSION_VARIANT_TYPE_VECTOR4I);
-        constructor(native_ptr, &converted_val->godot_owner);
+        constructor(native_ptr, &converted_val->native_struct);
         converted_val->shouldBeDeleted=true;
 }
 void Variant::construct_Array(PyObject* object){
@@ -1533,7 +1533,7 @@ auto converted_val =  get_array_from_pyobject(object);
 void Variant::construct_Quaternion(PyObject* object){
 auto converted_val =  get_quaternion_from_pyobject(object);
         auto constructor = functions::get_get_variant_from_type_constructor()(GDExtensionVariantType::GDEXTENSION_VARIANT_TYPE_QUATERNION);
-        constructor(native_ptr, &converted_val->godot_owner);
+        constructor(native_ptr, &converted_val->native_struct);
         converted_val->shouldBeDeleted=true;
 }
 void Variant::construct_PackedStringArray(PyObject* object){
@@ -1565,7 +1565,7 @@ void Variant::construct_Rect2i_native_ptr(PyObject* object){
 auto converted_val =  get_rect2i_from_pyobject(object);
         converted_val->shouldBeDeleted=true;
         auto constructor = functions::get_get_variant_from_type_constructor()(GDExtensionVariantType::GDEXTENSION_VARIANT_TYPE_RECT2I);
-        constructor(&native_ptr, &converted_val->godot_owner);
+        constructor(&native_ptr, &converted_val->native_struct);
 }
 void Variant::construct_Callable_native_ptr(PyObject* object){
 auto converted_val =  get_callable_from_pyobject(object);
@@ -1607,7 +1607,7 @@ void Variant::construct_Vector3_native_ptr(PyObject* object){
 auto converted_val =  get_vector3_from_pyobject(object);
         converted_val->shouldBeDeleted=true;
         auto constructor = functions::get_get_variant_from_type_constructor()(GDExtensionVariantType::GDEXTENSION_VARIANT_TYPE_VECTOR3);
-        constructor(&native_ptr, &converted_val->godot_owner);
+        constructor(&native_ptr, &converted_val->native_struct);
 }
 void Variant::construct_Dictionary_native_ptr(PyObject* object){
 auto converted_val =  get_dictionary_from_pyobject(object);
@@ -1619,7 +1619,7 @@ void Variant::construct_Projection_native_ptr(PyObject* object){
 auto converted_val =  get_projection_from_pyobject(object);
         converted_val->shouldBeDeleted=true;
         auto constructor = functions::get_get_variant_from_type_constructor()(GDExtensionVariantType::GDEXTENSION_VARIANT_TYPE_PROJECTION);
-        constructor(&native_ptr, &converted_val->godot_owner);
+        constructor(&native_ptr, &converted_val->native_struct);
 }
 void Variant::construct_RID_native_ptr(PyObject* object){
 auto converted_val =  get_rid_from_pyobject(object);
@@ -1631,19 +1631,19 @@ void Variant::construct_Vector2i_native_ptr(PyObject* object){
 auto converted_val =  get_vector2i_from_pyobject(object);
         converted_val->shouldBeDeleted=true;
         auto constructor = functions::get_get_variant_from_type_constructor()(GDExtensionVariantType::GDEXTENSION_VARIANT_TYPE_VECTOR2I);
-        constructor(&native_ptr, &converted_val->godot_owner);
+        constructor(&native_ptr, &converted_val->native_struct);
 }
 void Variant::construct_Transform2D_native_ptr(PyObject* object){
 auto converted_val =  get_transform2d_from_pyobject(object);
         converted_val->shouldBeDeleted=true;
         auto constructor = functions::get_get_variant_from_type_constructor()(GDExtensionVariantType::GDEXTENSION_VARIANT_TYPE_TRANSFORM2D);
-        constructor(&native_ptr, &converted_val->godot_owner);
+        constructor(&native_ptr, &converted_val->native_struct);
 }
 void Variant::construct_AABB_native_ptr(PyObject* object){
 auto converted_val =  get_aabb_from_pyobject(object);
         converted_val->shouldBeDeleted=true;
         auto constructor = functions::get_get_variant_from_type_constructor()(GDExtensionVariantType::GDEXTENSION_VARIANT_TYPE_AABB);
-        constructor(&native_ptr, &converted_val->godot_owner);
+        constructor(&native_ptr, &converted_val->native_struct);
 }
 void Variant::construct_float_native_ptr(PyObject* object){
 auto converted_val =  PyFloat_AsDouble(object);
@@ -1654,7 +1654,7 @@ void Variant::construct_Vector3i_native_ptr(PyObject* object){
 auto converted_val =  get_vector3i_from_pyobject(object);
         converted_val->shouldBeDeleted=true;
         auto constructor = functions::get_get_variant_from_type_constructor()(GDExtensionVariantType::GDEXTENSION_VARIANT_TYPE_VECTOR3I);
-        constructor(&native_ptr, &converted_val->godot_owner);
+        constructor(&native_ptr, &converted_val->native_struct);
 }
 void Variant::construct_PackedInt64Array_native_ptr(PyObject* object){
 auto converted_val =  get_packedint64array_from_pyobject(object);
@@ -1689,25 +1689,25 @@ void Variant::construct_Vector4_native_ptr(PyObject* object){
 auto converted_val =  get_vector4_from_pyobject(object);
         converted_val->shouldBeDeleted=true;
         auto constructor = functions::get_get_variant_from_type_constructor()(GDExtensionVariantType::GDEXTENSION_VARIANT_TYPE_VECTOR4);
-        constructor(&native_ptr, &converted_val->godot_owner);
+        constructor(&native_ptr, &converted_val->native_struct);
 }
 void Variant::construct_Rect2_native_ptr(PyObject* object){
 auto converted_val =  get_rect2_from_pyobject(object);
         converted_val->shouldBeDeleted=true;
         auto constructor = functions::get_get_variant_from_type_constructor()(GDExtensionVariantType::GDEXTENSION_VARIANT_TYPE_RECT2);
-        constructor(&native_ptr, &converted_val->godot_owner);
+        constructor(&native_ptr, &converted_val->native_struct);
 }
 void Variant::construct_Vector2_native_ptr(PyObject* object){
 auto converted_val =  get_vector2_from_pyobject(object);
         converted_val->shouldBeDeleted=true;
         auto constructor = functions::get_get_variant_from_type_constructor()(GDExtensionVariantType::GDEXTENSION_VARIANT_TYPE_VECTOR2);
-        constructor(&native_ptr, &converted_val->godot_owner);
+        constructor(&native_ptr, &converted_val->native_struct);
 }
 void Variant::construct_Transform3D_native_ptr(PyObject* object){
 auto converted_val =  get_transform3d_from_pyobject(object);
         converted_val->shouldBeDeleted=true;
         auto constructor = functions::get_get_variant_from_type_constructor()(GDExtensionVariantType::GDEXTENSION_VARIANT_TYPE_TRANSFORM3D);
-        constructor(&native_ptr, &converted_val->godot_owner);
+        constructor(&native_ptr, &converted_val->native_struct);
 }
 void Variant::construct_PackedColorArray_native_ptr(PyObject* object){
 auto converted_val =  get_packedcolorarray_from_pyobject(object);
@@ -1731,7 +1731,7 @@ void Variant::construct_Plane_native_ptr(PyObject* object){
 auto converted_val =  get_plane_from_pyobject(object);
         converted_val->shouldBeDeleted=true;
         auto constructor = functions::get_get_variant_from_type_constructor()(GDExtensionVariantType::GDEXTENSION_VARIANT_TYPE_PLANE);
-        constructor(&native_ptr, &converted_val->godot_owner);
+        constructor(&native_ptr, &converted_val->native_struct);
 }
 void Variant::construct_PackedFloat64Array_native_ptr(PyObject* object){
 auto converted_val =  get_packedfloat64array_from_pyobject(object);
@@ -1748,19 +1748,19 @@ void Variant::construct_Basis_native_ptr(PyObject* object){
 auto converted_val =  get_basis_from_pyobject(object);
         converted_val->shouldBeDeleted=true;
         auto constructor = functions::get_get_variant_from_type_constructor()(GDExtensionVariantType::GDEXTENSION_VARIANT_TYPE_BASIS);
-        constructor(&native_ptr, &converted_val->godot_owner);
+        constructor(&native_ptr, &converted_val->native_struct);
 }
 void Variant::construct_Color_native_ptr(PyObject* object){
 auto converted_val =  get_color_from_pyobject(object);
         converted_val->shouldBeDeleted=true;
         auto constructor = functions::get_get_variant_from_type_constructor()(GDExtensionVariantType::GDEXTENSION_VARIANT_TYPE_COLOR);
-        constructor(&native_ptr, &converted_val->godot_owner);
+        constructor(&native_ptr, &converted_val->native_struct);
 }
 void Variant::construct_Vector4i_native_ptr(PyObject* object){
 auto converted_val =  get_vector4i_from_pyobject(object);
         converted_val->shouldBeDeleted=true;
         auto constructor = functions::get_get_variant_from_type_constructor()(GDExtensionVariantType::GDEXTENSION_VARIANT_TYPE_VECTOR4I);
-        constructor(&native_ptr, &converted_val->godot_owner);
+        constructor(&native_ptr, &converted_val->native_struct);
 }
 void Variant::construct_Array_native_ptr(PyObject* object){
 auto converted_val =  get_array_from_pyobject(object);
@@ -1772,7 +1772,7 @@ void Variant::construct_Quaternion_native_ptr(PyObject* object){
 auto converted_val =  get_quaternion_from_pyobject(object);
         converted_val->shouldBeDeleted=true;
         auto constructor = functions::get_get_variant_from_type_constructor()(GDExtensionVariantType::GDEXTENSION_VARIANT_TYPE_QUATERNION);
-        constructor(&native_ptr, &converted_val->godot_owner);
+        constructor(&native_ptr, &converted_val->native_struct);
 }
 void Variant::construct_PackedStringArray_native_ptr(PyObject* object){
 auto converted_val =  get_packedstringarray_from_pyobject(object);

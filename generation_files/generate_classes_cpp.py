@@ -3,7 +3,7 @@ import json
 import os.path
 import sys
 
-from generate_classes_hpp import get_ret_value, has_native_struct, ungodottype
+from generate_classes_hpp import get_ret_value, has_native_struct, ungodottype, collect_class_structs
 from generate_enums import enumize_name
 sys.path.append("..")
 from py4godot.method_ids import method_ids
@@ -11,6 +11,7 @@ from py4godot.method_ids import method_ids
 INDENT = "  "
 index = 0
 build_size = "float_32"
+cpp_core_structs = set()
 
 class ReturnType:
     def __init__(self, name, type_):
@@ -262,6 +263,8 @@ def create_class(classname):
 
 
 def address_val(classname, val_name='val'):
+    if classname in cpp_core_structs:
+        return "&val.native_struct"
     if classname in builtin_classes - {"float", "int", "bool"}:
         return f"&val.godot_owner"
     elif classname in classes:
@@ -291,17 +294,17 @@ def generate_constructors(class_):
         res = generate_newline(res)
         res += f"{INDENT * 2}_class.shouldBeDeleted = true;"
         res = generate_newline(res)
-        res += f"{INDENT * 2}_class.set_variant_type({generate_variant_type(class_['name'])});"
+        res += f"{INDENT * 2}_class.variant_type = {generate_variant_type(class_['name'])};"
         res = generate_newline(res)
         res += f"{INDENT * 2}GDExtensionPtrConstructor constructor = functions::get_variant_get_ptr_constructor()(_class.variant_type, {constructor['index']});"
         res = generate_newline(res)
         # TODO:improve - fill with args
         res += generate_constructor_args_array(constructor)
         res = generate_newline(res)
-        res += f"{INDENT * 2}_class.allocated_memory = true;"
-        res = generate_newline(res)
-
-        res += f"{INDENT * 2}constructor(&_class.godot_owner,_args);"
+        if class_["name"] in cpp_core_structs:
+            res += f"{INDENT * 2}constructor(&_class.native_struct,_args);"
+        else:
+            res += f"{INDENT * 2}constructor(&_class.godot_owner,_args);"
         res = generate_newline(res)
         res += f"{INDENT * 2}return _class;"
         res = generate_newline(res)
@@ -319,21 +322,50 @@ def generate_constructors(class_):
         res += "}"
         res = generate_newline(res)
     return res
+
+def get_size(classname):
+    if classname in builtin_classes:
+        return f"{classname.upper()}_SIZE"
+    if classname in typed_arrays_names:
+        return "ARRAY_SIZE"
+    else:
+        return "OBJECT_SIZE"
 def generate_make_shared_ptr(class_):
     res = ""
     res += f"{INDENT}std::shared_ptr<{class_['name']}> {class_['name']}::make_shared_ptr({class_['name']}& _class) {{"
     res = generate_newline(res)
-    if class_["name"] not in ("Array", "Dictionary"):
-        res += f"{INDENT * 2}return std::make_shared<{class_['name']}>(_class);"
+    if class_["name"] in cpp_core_structs:
+        res += f"{INDENT * 2}auto ptr = std::make_shared<{class_['name']}>();"
+        res = generate_newline(res)
+        res += f"{INDENT * 2}ptr->native_struct = _class.native_struct;"
+        res = generate_newline(res)
+        res += f"{INDENT * 2}ptr->shouldBeDeleted = false;"
+        res = generate_newline(res)
+        res += f"{INDENT*2}if (_class._callback){{"
+        res = generate_newline(res)
+        res += f"{INDENT * 3}auto instance_callback = new Callback<{class_['name']}>();"
+        res = generate_newline(res)
+        res += f"{INDENT * 3}auto copy_callback = (Callback<{class_['name']}>*) _class._callback;"
+        res = generate_newline(res)
+        res += f"{INDENT * 3}instance_callback->callback = copy_callback->callback;"
+        res = generate_newline(res)
+        res += f"{INDENT * 3}instance_callback->instance = copy_callback->instance;"
+        res = generate_newline(res)
+        res += f"{INDENT * 3}ptr->_callback = instance_callback;"
+        res = generate_newline(res)
+        res += f"{INDENT * 2}}}"
+        res = generate_newline(res)
+        res += f"{INDENT * 2}return ptr;"
         res = generate_newline(res)
         res += f"{INDENT}}}"
         res = generate_newline(res)
         return res
-    res += f"{INDENT * 2}auto ptr = std::make_shared<{class_['name']}>();"
-    res = generate_newline(res)
-    res += f"{INDENT * 2}ptr->godot_owner = _class.godot_owner;"
+
+    res += f"{INDENT*2}auto ptr = std::make_shared<{class_['name']}>(_class);"
     res = generate_newline(res)
     res += f"{INDENT * 2}ptr->shouldBeDeleted = false;"
+    if class_["name"] in typed_arrays_names or class_["name"] in builtin_classes:
+        res += f"{INDENT*2}_class.{class_['name']}_py_destroy();"
     res = generate_newline(res)
     res += f"{INDENT * 2}return ptr;"
     res = generate_newline(res)
@@ -352,22 +384,26 @@ def generate_copy_constructor(class_):
     res = generate_newline(res)
     res += f"{INDENT * 2}this->_callback = nullptr;"
     res = generate_newline(res)
-    res += f"{INDENT * 2}this->set_variant_type({get_class_name(generate_variant_type(class_['name']))});"
+    res += f"{INDENT * 2}this->variant_type = {get_class_name(generate_variant_type(class_['name']))};"
     res = generate_newline(res)
     res += f"{INDENT * 2}GDExtensionPtrConstructor constructor = functions::get_variant_get_ptr_constructor()(this->variant_type, 1);"
     res = generate_newline(res)
     # TODO:improve - fill with args
     res += f"{INDENT * 2}GDExtensionTypePtr _args[1];"
     res = generate_newline(res)
-    res += f"{INDENT * 2}_args[0] = &const_cast<{class_['name']}&>(copy_val).godot_owner;"
+    if class_["name"] not in cpp_core_structs:
+        res += f"{INDENT * 2}_args[0] = &const_cast<{class_['name']}&>(copy_val).godot_owner;"
 
-    res = generate_newline(res)
-    res += f"{INDENT * 2}godot_owner = (void*)(&data);"
-    res = generate_newline(res)
-    res += f"{INDENT * 2}allocated_memory = true;"
-    res = generate_newline(res)
-    res += f"{INDENT * 2}constructor(&godot_owner,_args);"
-    res = generate_newline(res)
+        res = generate_newline(res)
+        res += f"{INDENT * 2}godot_owner = (void*)(&data);"
+        res = generate_newline(res)
+        res += f"{INDENT * 2}constructor(&godot_owner,_args);"
+        res = generate_newline(res)
+    else:
+
+        res = generate_newline(res)
+        res += f"{INDENT * 2}constructor(&native_struct,_args);"
+
     res += f"{INDENT * 2}if(copy_val._callback){{"
 
     res = generate_newline(res)
@@ -397,18 +433,21 @@ def generate_copy_operator(class_):
     res = generate_newline(res)
     res += f"{INDENT * 2}this->_callback = nullptr;"
     res = generate_newline(res)
-    res += f"{INDENT * 2}this->set_variant_type({get_class_name(generate_variant_type(class_['name']))});"
+    res += f"{INDENT * 2}this->variant_type = {get_class_name(generate_variant_type(class_['name']))};"
     res = generate_newline(res)
     res += f"{INDENT * 2}GDExtensionPtrConstructor constructor = functions::get_variant_get_ptr_constructor()(this->variant_type, 1);"
     res = generate_newline(res)
     # TODO:improve - fill with args
     res += f"{INDENT * 2}GDExtensionTypePtr _args[1];"
     res = generate_newline(res)
-    res += f"{INDENT * 2}_args[0] = &const_cast<{class_['name']}&>(copy_val).godot_owner;"
-    res = generate_newline(res)
-    res += f"{INDENT * 2}godot_owner = &data;"
-    res = generate_newline(res)
-    res += f"{INDENT * 2}constructor(&godot_owner,_args);"
+    if class_["name"] not in cpp_core_structs:
+        res += f"{INDENT * 2}_args[0] = &const_cast<{class_['name']}&>(copy_val).godot_owner;"
+        res = generate_newline(res)
+        res += f"{INDENT * 2}godot_owner = &data;"
+        res = generate_newline(res)
+        res += f"{INDENT * 2}constructor(&godot_owner,_args);"
+    else:
+        res += f"{INDENT * 2}constructor(&native_struct,_args);"
     res = generate_newline(res)
     res += f"{INDENT * 2}return *this;"
     res += f"{INDENT}}}"
@@ -929,6 +968,8 @@ def generate_ret_value_assign(argument):
     if argument["type"] in classes - builtin_classes:
 
         return f"{pythonize_name(argument['name'])} != nullptr?&({pythonize_name(argument['name'])}->godot_owner):nullptr"
+    if argument["type"] in cpp_core_structs:
+        return f"&{pythonize_name(argument['name'])}.native_struct"
     elif argument["type"] in classes - {"int", "float", "bool", "Nil"}:
         return f"&{pythonize_name(argument['name'])}.godot_owner"
     elif "typedarray" in argument["type"]:
@@ -939,12 +980,16 @@ def generate_ret_value_assign(argument):
 
 
 def generate_ret_value_assign_constructor(argument):
+    if argument["type"] in cpp_core_structs:
+        return f"&{pythonize_name(argument['name'])}.native_struct"
+    if argument["type"] in builtin_classes - {"int", "float", "bool"}:
+        return f"&{pythonize_name(argument['name'])}.godot_owner"
     if argument["type"] in classes:
         return f"&{pythonize_name(argument['name'])}.godot_owner"
     elif argument["type"] == "Variant":
         return f"{argument['name']}.get_native_ptr()"
     elif "typedarray" in argument["type"]:
-        return f"{pythonize_name(argument['name'])}.get_godot_owner()"
+        return f"{pythonize_name(argument['name'])}.godot_owner()"
     return f"&{pythonize_name(argument['name'])}"
 
 
@@ -1045,7 +1090,13 @@ def generate_method_body_standard(class_, method):
     result = generate_newline(result)
 
     if (class_['name'] in builtin_classes or class_["name"] in typed_arrays_names):
-        result += f"{INDENT * 2}method_to_call({get_godot_owner_core(method)}, {get_first_args_native(method)}, {address_ret(method)}, {get_args_count(method)});"
+        if class_["name"] in cpp_core_structs:
+            if is_static(method):
+                result += f"{INDENT * 2}method_to_call(nullptr, {get_first_args_native(method)}, {address_ret(method)}, {get_args_count(method)});"
+            else:
+                result += f"{INDENT * 2}method_to_call(&native_struct, {get_first_args_native(method)}, {address_ret(method)}, {get_args_count(method)});"
+        else:
+            result += f"{INDENT * 2}method_to_call({get_godot_owner_core(method)}, {get_first_args_native(method)}, {address_ret(method)}, {get_args_count(method)});"
         result = generate_newline(result)
     else:
         result += generate_method_call_object(method)
@@ -1098,8 +1149,8 @@ def address_ret(method):
 def address_ret_decision(return_type):
     if return_type in {"int", "float", "bool"}:
         return "&_ret"
-    if return_type == "Transform3D":
-        return "&_ret.godot_owner"
+    if return_type in cpp_core_structs:
+        return "&_ret.native_struct"
     if return_type in builtin_classes:
         return "&(_ret.godot_owner)"
     if return_type in classes:
@@ -1420,8 +1471,11 @@ def generate_switch_methods(class_):
 
     if class_["name"] in ("PackedInt32Array", "PackedInt64Array", "PackedFloat32Array", "PackedFloat64Array", "PackedByteArray"):
         res += f"case {method_ids['normal_methods'][class_['name']]['get_memoryview']}: return py_get_memory_view();"
-
+    if not "Object" in class_["name"] and is_refcounted(class_):
+        res += f"{INDENT*3}case {method_ids['normal_methods'][class_['name']]['py_destroy']}: py_destroy_ref();return Py_None;"
+        res = generate_newline(res)
     res += f"{INDENT*2}}}"
+    res = generate_newline(res)
     res += f"{INDENT*2}return Py_None;"
     res = generate_newline(res)
     res += f"{INDENT}}}"
@@ -1558,10 +1612,16 @@ def generate_member_getter(class_, member):
     else:
         res += f"{INDENT * 2}{member.type_} _ret = {member.type_}::new0();"
     res = generate_newline(res)
-    if member.type_ != "int" and member.type_ != "float" and member.type_ != "double":
-        res += f"{INDENT * 2}getter(&godot_owner, &_ret.godot_owner);"
+    if class_ in cpp_core_structs:
+        if member.type_ != "int" and member.type_ != "float" and member.type_ != "double":
+            res += f"{INDENT * 2}getter(&native_struct, &_ret.godot_owner);"
+        else:
+            res += f"{INDENT * 2}getter(&native_struct, &_ret);"
     else:
-        res += f"{INDENT * 2}getter(&godot_owner, &_ret);"
+        if member.type_ != "int" and member.type_ != "float" and member.type_ != "double":
+            res += f"{INDENT * 2}getter(&godot_owner, &_ret.godot_owner);"
+        else:
+            res += f"{INDENT * 2}getter(&godot_owner, &_ret);"
     res = generate_newline(res)
     if member.type_ in builtin_classes - {"int", "float", "bool", "Nil"}:
         res += f"{INDENT * 2}Callback<{member.type_}>* _update_callback = new Callback<{member.type_}>();"
@@ -1617,10 +1677,16 @@ def generate_member_setter(class_, member):
     res = generate_newline(res)
     res += f"{INDENT * 2}GDExtensionPtrSetter setter = functions::get_variant_get_ptr_setter()({generate_variant_type(class_)},&_member_name.godot_owner);"
     res = generate_newline(res)
-    if member.type_ != "int" and member.type_ != "float" and member.type_ != "double":
-        res += f"{INDENT * 2}setter(&godot_owner, &value.godot_owner);"
+    if class_ in cpp_core_structs:
+        if member.type_ != "int" and member.type_ != "float" and member.type_ != "double":
+            res += f"{INDENT * 2}setter(&native_struct, &value.godot_owner);"
+        else:
+            res += f"{INDENT * 2}setter(&native_struct, &value);"
     else:
-        res += f"{INDENT * 2}setter(&godot_owner, &value);"
+        if member.type_ != "int" and member.type_ != "float" and member.type_ != "double":
+            res += f"{INDENT * 2}setter(&godot_owner, &value.godot_owner);"
+        else:
+            res += f"{INDENT * 2}setter(&godot_owner, &value);"
     res = generate_newline(res)
     if class_ in builtin_classes:
         # TODO: enable this again
@@ -1921,6 +1987,8 @@ def init_return_type(return_type):
 
 
 def address_param(target):
+    if target in cpp_core_structs:
+        return f"&other.native_struct"
     if target in builtin_classes - {"int", "float", "bool", "Nil"}:
         return f"&other.godot_owner"
     if target == "int":
@@ -2013,7 +2081,10 @@ def generate_operators_for_class(class_name):
                         res = generate_newline(res)
                         res += f"{INDENT * 2}operator_evaluator = {INDENT * 2}functions::get_variant_get_ptr_operator_evaluator()({operator_to_variant_operator[operator]}, {generate_variant_type(op.class_)}, {generate_variant_type(right_type)});"
                         res = generate_newline(res)
-                        res += f"{INDENT * 2}operator_evaluator(&godot_owner, {address_param(right_type)}, {address_ret_decision(op.return_type)});"
+                        if class_name in cpp_core_structs:
+                            res += f"{INDENT * 2}operator_evaluator(&native_struct, {address_param(right_type)}, {address_ret_decision(op.return_type)});"
+                        else:
+                            res += f"{INDENT * 2}operator_evaluator(&godot_owner, {address_param(right_type)}, {address_ret_decision(op.return_type)});"
                         res = generate_newline(res)
 
                         res += f"{INDENT * 2}return _ret;"
@@ -2445,13 +2516,11 @@ def generate_special_methods_packed_array(class_):
     res = generate_newline(res)
     res += f"{INDENT * 2}_class.shouldBeDeleted = true;"
     res = generate_newline(res)
-    res += f"{INDENT * 2}_class.set_variant_type({generate_variant_type(class_['name'])});"
+    res += f"{INDENT * 2}_class.variant_type = {generate_variant_type(class_['name'])};"
     res = generate_newline(res)
     res += f"{INDENT * 2}GDExtensionPtrConstructor constructor = functions::get_variant_get_ptr_constructor()(_class.variant_type, 0);"
     res = generate_newline(res)
     res += f"{INDENT*2}GDExtensionTypePtr _args[1];"
-    res = generate_newline(res)
-    res += f"{INDENT * 2}_class.allocated_memory = true;"
     res = generate_newline(res)
 
     res += f"{INDENT * 2}constructor(&_class.godot_owner,_args);"
@@ -2577,6 +2646,7 @@ if __name__ == "__main__":
         normal_classes = set([class_['name'] for class_ in obj['classes']])
         native_structs = set([native_struct["name"] for native_struct in obj["native_structures"]])
         singletons = set([singleton["name"] for singleton in obj["singletons"]])
+        cpp_core_structs = collect_class_structs(obj["builtin_class_member_offsets"][0])
         collect_members(obj)
         sizes = generate_sizes(obj)
         for class_ in obj["builtin_classes"]:
