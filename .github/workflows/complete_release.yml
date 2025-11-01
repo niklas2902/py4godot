@@ -103,7 +103,9 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: py4godot-${{ matrix.target }}
-          path: build/py4godot/
+          path: |
+            build/py4godot/**
+            build/py4godot/**/.*
           retention-days: 30
 
   combine:
@@ -138,4 +140,6 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: py4godot
-          path: install_dir
+          path: |
+            install_dir/**
+            install_dir/**/.*
