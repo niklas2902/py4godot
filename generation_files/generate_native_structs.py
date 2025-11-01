@@ -1,8 +1,8 @@
 import json
 import os
 
-from generation_files.generate_call_static_methods import generate_newline
-from generation_files.generation_tools import write_if_different
+from generate_call_static_methods import generate_newline
+from generation_tools import write_if_different
 
 structs_with_fields = set()
 type_matching_dict = {"int32": "int32_t"}

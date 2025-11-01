@@ -27,7 +27,8 @@ scripts = [
     'generate_pxd_bridge.py',
     'generate_pxd_utility.py',
     'generate_utility_hpp.py',
-    'generate_utils_cpp.py'
+    'generate_utils_cpp.py',
+    'generate_native_structs.py'
 ]
 if bool(args.dev_build == "True"):
     scripts.append("generate_cast_helpers_dev.py")
