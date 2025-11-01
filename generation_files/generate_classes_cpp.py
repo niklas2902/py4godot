@@ -322,6 +322,14 @@ def generate_constructors(class_):
         res += "}"
         res = generate_newline(res)
     return res
+
+def get_size(classname):
+    if classname in builtin_classes:
+        return f"{classname.upper()}_SIZE"
+    if classname in typed_arrays_names:
+        return "ARRAY_SIZE"
+    else:
+        return "OBJECT_SIZE"
 def generate_make_shared_ptr(class_):
     res = ""
     res += f"{INDENT}std::shared_ptr<{class_['name']}> {class_['name']}::make_shared_ptr({class_['name']}& _class) {{"
@@ -353,11 +361,11 @@ def generate_make_shared_ptr(class_):
         res = generate_newline(res)
         return res
 
-    res += f"{INDENT * 2}auto ptr = std::make_shared<{class_['name']}>();"
-    res = generate_newline(res)
-    res += f"{INDENT * 2}ptr->godot_owner = _class.godot_owner;"
+    res += f"{INDENT*2}auto ptr = std::make_shared<{class_['name']}>(_class);"
     res = generate_newline(res)
     res += f"{INDENT * 2}ptr->shouldBeDeleted = false;"
+    if class_["name"] in typed_arrays_names or class_["name"] in builtin_classes:
+        res += f"{INDENT*2}_class.{class_['name']}_py_destroy();"
     res = generate_newline(res)
     res += f"{INDENT * 2}return ptr;"
     res = generate_newline(res)
