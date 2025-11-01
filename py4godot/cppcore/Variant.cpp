@@ -1347,7 +1347,7 @@ auto converted_val =  (int64_t)PyLong_AsLong(object);
         constructor(native_ptr, &converted_val);
 }
 void Variant::construct_py_string(PyObject* object){
-        char* c_str = PyUnicode_AsUTF8(object);
+        char* c_str = (char*)PyUnicode_AsUTF8(object);
         auto converted_val =  c_string_to_string(c_str);
         auto constructor = functions::get_get_variant_from_type_constructor()(GDExtensionVariantType::GDEXTENSION_VARIANT_TYPE_STRING);
         constructor(native_ptr, &converted_val.godot_owner);
