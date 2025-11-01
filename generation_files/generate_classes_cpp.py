@@ -1614,7 +1614,7 @@ def generate_member_getter(class_, member):
     res = generate_newline(res)
     if class_ in cpp_core_structs:
         if member.type_ != "int" and member.type_ != "float" and member.type_ != "double":
-            res += f"{INDENT * 2}getter(&native_struct, &_ret.godot_owner);"
+            res += f"{INDENT * 2}getter(&native_struct, &_ret.native_struct);"
         else:
             res += f"{INDENT * 2}getter(&native_struct, &_ret);"
     else:
@@ -1679,7 +1679,7 @@ def generate_member_setter(class_, member):
     res = generate_newline(res)
     if class_ in cpp_core_structs:
         if member.type_ != "int" and member.type_ != "float" and member.type_ != "double":
-            res += f"{INDENT * 2}setter(&native_struct, &value.godot_owner);"
+            res += f"{INDENT * 2}setter(&native_struct, &value.native_struct);"
         else:
             res += f"{INDENT * 2}setter(&native_struct, &value);"
     else:
