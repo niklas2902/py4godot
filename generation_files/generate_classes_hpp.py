@@ -318,8 +318,6 @@ def generate_method(class_, mMethod):
     res = ""
     if has_native_struct(mMethod):
         return res
-    if get_ret_value(mMethod) in builtin_classes - {"float", "int", "bool", "Nil"}:
-        res += f"{INDENT}{generate_method_modifiers(mMethod)} {get_ret_value(mMethod)}* buffer_{class_['name']}_{mMethod['name']};"
     args = generate_args(mMethod, builtin_classes, should_make_shared=True)
     args_normal = generate_args(mMethod, builtin_classes, is_cpp=True)
     def_function = f"{INDENT}{generate_method_modifiers(mMethod)} {ungodottype(unenumize_type(untypearray_or_dictionary(get_ret_value(mMethod))))} {pythonize_name(mMethod['name'])}({args_normal});"
