@@ -460,6 +460,29 @@ void PyLanguage::destroy(){
     print_error("_reload_all_scripts");
   }
 
+  std::shared_ptr<ScriptExtension> extract_extension(Variant& variant){
+
+    GDExtensionVariantType type = functions::get_variant_get_type()(&variant.native_ptr);
+    auto constructor = functions::get_get_variant_to_type_constructor()(type);
+    std::shared_ptr<ScriptExtension> extension = std::make_shared<ScriptExtension>();
+    extension->shouldBeDeleted=false;
+    constructor(&extension->godot_owner, &variant.native_ptr);
+    if (extension->godot_owner == nullptr) {
+        return nullptr;
+    }
+    return extension;
+}
+
+  void PyLanguage::_reload_scripts(GDExtensionTypePtr res, Array& extensions, bool soft_reload){
+    print_error_user("_reload_scripts");
+    for(int extension_index = 0; extension_index < extensions.size(); extension_index++){
+        print_error_user("reloading script");
+        auto variant = extensions.get(extension_index);
+        auto extension = extract_extension(variant);
+        extension->reload(false);
+    }
+  }
+
   void PyLanguage::_reload_tool_script(Script& script, bool soft_reload, GDExtensionTypePtr res){}
 
   void  PyLanguage::_get_recognized_extensions(GDExtensionTypePtr res){
@@ -1068,6 +1091,16 @@ void call_virtual_func__reload_all_scripts(GDExtensionClassInstancePtr p_instanc
 
 StringName func_name__reload_all_scripts;
 
+void call_virtual_func__reload_scripts(GDExtensionClassInstancePtr p_instance, const GDExtensionConstTypePtr* p_args, GDExtensionTypePtr r_ret) {
+    PyLanguage* pylanguage = static_cast<PyLanguage*> (p_instance);
+    Array args0 = Array::new_static(*((void**)(p_args[0])));
+    bool args1 = *((int*)(p_args + 1));
+
+    pylanguage->_reload_scripts(r_ret, args0, args1);
+}
+
+StringName func_name__reload_scripts;
+
 
 void call_virtual_func__reload_tool_script(GDExtensionClassInstancePtr p_instance, const GDExtensionConstTypePtr* p_args, GDExtensionTypePtr r_ret) {
     PyLanguage* pylanguage = static_cast<PyLanguage*> (p_instance);
@@ -1375,6 +1408,9 @@ GDExtensionClassCallVirtual get_virtual(void *p_userdata, GDExtensionConstString
     else if (string_names_equal(func_name__reload_all_scripts, name)){
         return call_virtual_func__reload_all_scripts;
     }
+    else if (string_names_equal(func_name__reload_scripts, name)){
+        return call_virtual_func__reload_scripts;
+    }
 
     else if (string_names_equal(func_name__reload_tool_script, name)){
         return call_virtual_func__reload_tool_script;
@@ -1416,10 +1452,10 @@ GDExtensionClassCallVirtual get_virtual(void *p_userdata, GDExtensionConstString
         return call_virtual_func__get_global_class_name;
     }
 
-
-    assert(false); // There are methods not being handled
     print_error_user("function not found  for function loader:");
     print_error_user(res_string);
+
+    assert(false); // There are methods not being handled
     return nullptr;
 }
 
@@ -1469,6 +1505,7 @@ void deinit_func_names(){
     func_name__debug_parse_stack_level_expression.StringName_py_destroy();
     func_name__debug_get_current_stack_info.StringName_py_destroy();
     func_name__reload_all_scripts.StringName_py_destroy();
+    func_name__reload_scripts.StringName_py_destroy();
     func_name__reload_tool_script.StringName_py_destroy();
     func_name__get_recognized_extensions.StringName_py_destroy();
     func_name__get_public_functions.StringName_py_destroy();
@@ -1526,6 +1563,7 @@ void deinit_func_names(){
     func_name__debug_parse_stack_level_expression.shouldBeDeleted=false;
     func_name__debug_get_current_stack_info.shouldBeDeleted=false;
     func_name__reload_all_scripts.shouldBeDeleted=false;
+    func_name__reload_scripts.shouldBeDeleted=false;
     func_name__reload_tool_script.shouldBeDeleted=false;
     func_name__get_recognized_extensions.shouldBeDeleted=false;
     func_name__get_public_functions.shouldBeDeleted=false;
@@ -1633,6 +1671,8 @@ void init_func_names(){
    func_name__debug_get_current_stack_info.shouldBeDeleted=true;
    func_name__reload_all_scripts = c_string_to_string_name("_reload_all_scripts");
    func_name__reload_all_scripts.shouldBeDeleted=true;
+   func_name__reload_scripts = c_string_to_string_name("_reload_scripts");
+   func_name__reload_scripts.shouldBeDeleted=true;
    func_name__reload_tool_script = c_string_to_string_name("_reload_tool_script");
    func_name__reload_tool_script.shouldBeDeleted=true;
    func_name__get_recognized_extensions = c_string_to_string_name("_get_recognized_extensions");

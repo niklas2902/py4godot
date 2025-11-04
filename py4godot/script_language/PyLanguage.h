@@ -63,6 +63,7 @@ namespace godot{
           void _debug_parse_stack_level_expression( int level, String& expression, int max_subitems, int max_depth, GDExtensionTypePtr res);
           void _debug_get_current_stack_info(GDExtensionTypePtr res);
           void _reload_all_scripts(GDExtensionTypePtr res);
+          void _reload_scripts(GDExtensionTypePtr res, Array& extensions, bool soft_reload);
           void _reload_tool_script( Script& script, bool soft_reload, GDExtensionTypePtr res);
           void _get_recognized_extensions(GDExtensionTypePtr res);
           void _get_public_functions(GDExtensionTypePtr res);
