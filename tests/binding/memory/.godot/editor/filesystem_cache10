@@ -1,0 +1,15 @@
+63f7b34db8d8cdea90c76aacccf841ec
+::res://::1762600552
+default_env.tres::Environment::1829415172647386522::1761992171::0::1::::<><><>0<>0<><>::
+icon.png::CompressedTexture2D/CompressedTexture2D::2163312729348237104::1759564113::1759564113::1::::<><><>0<>0<>fd1185df1cb80d8d3a05e0afc41449ad<>res://.godot/imported/icon.png-487276ed1e3a0c39cad0279d744ee560.ctex::
+icon_color.png::CompressedTexture2D::3444964115603791503::1762599755::1762600555::1::::<><><>0<>0<>842c55a5e6ec505b4d48fcc04da7e722<>res://.godot/imported/icon_color.png-ae4071d873347cce354c5580e75f1138.ctex::
+Spatial.tscn::PackedScene::4056023778664140474::1761992171::0::1::::<><><>0<>0<><>::res://TestRunner.py<>res://TestObject.py
+TestObject.py::PyScriptExtension::-1::1762600447::0::1::::<><><>0<>0<><>::
+::res://addons/::1762599833
+::res://addons/py4godot/::1762599833
+dependencies.txt::TextFile::-1::1760359283::0::1::::<><><>0<>0<><>::
+get_pip (1).py::PyScriptExtension::-1::1762108431::0::1::::<><><>0<>0<><>::
+get_pip.py::PyScriptExtension::-1::1760359285::0::1::::<><><>0<>0<><>::
+install_dependencies.py::PyScriptExtension::-1::1760359283::0::1::::<><><>0<>0<><>::
+python.gdextension::GDExtension::1060513302462739696::1760359283::0::1::::<><><>0<>0<><>::
+Python.svg::CompressedTexture2D/CompressedTexture2D::7969551306885063590::1762108429::1761298022::1::::<><><>0<>0<>4ac4b7f3d1bf85dab0541bbcece7db79<>res://.godot/imported/Python.svg-681cb785c113434a7384dcc1fd345d19.ctex::

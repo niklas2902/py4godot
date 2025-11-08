@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://bx11ebu3iwgdm"]
+
+[ext_resource type="Script" path="res://TestObject.py" id="2_hkbyt"]
+[ext_resource type="Script" uid="uid://fuds8p7tc7ue" path="res://gd_node.gd" id="2_qajub"]
+
+[node name="Node3D" type="Node3D"]
+
+[node name="TestObject" type="Node3D" parent="."]
+script = ExtResource("2_hkbyt")
+metadata/is_test_object = true
+
+[node name="GDNode" type="Node3D" parent="."]
+script = ExtResource("2_qajub")

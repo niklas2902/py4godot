@@ -82,7 +82,7 @@ jobs:
       - name: Create archive (zip)
         run: |
           cd python-source
-          zip -r build/py4godot-linux64.zip build/py4godot
+          find build/py4godot -type f -print | zip -@ build/py4godot-linux64.zip
 
       - name: Upload artifact
         uses: actions/upload-artifact@v4
