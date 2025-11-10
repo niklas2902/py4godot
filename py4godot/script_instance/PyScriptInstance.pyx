@@ -155,6 +155,7 @@ cdef api MethodCallData instance_call(GDExtensionScriptInstanceDataPtr p_self, G
     cdef object arg
     cdef MethodCallData ret_val
     ret_val.has_value = False
+    result = None
     try:
         for index in range(0, p_argument_count):
             var.native_ptr = <void*>p_args[index]
