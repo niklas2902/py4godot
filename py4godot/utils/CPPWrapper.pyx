@@ -7,16 +7,10 @@ def constructor(int class_number, int constructor_number, tuple args):
 
 cdef class CPPWrapper:
     cpdef call_with_return(self, int method_hash, tuple args_tuple):
-        return self._ptr.switch_call_return(method_hash, args_tuple)
-    cdef set_gdowner(self, void* godot_owner):
-        raise Exception("setting gdowner is not implemented")
-        pass
-    cdef void * get_gdowner(self):
-        raise Exception("getting gdowner is not implemented")
-        return NULL
+        raise Exception("call_with_return is not implemented")
 
     cdef bridge.Wrapper* get_ptr(self):
-        raise Exception("get_shared_ptr is not implemented")
+        raise Exception("get_ptr is not implemented")
 
     cpdef copy_gdowner(self, CPPWrapper other):
         cdef bridge.Wrapper* bridge_wrapper = (other.get_ptr())
@@ -25,7 +19,8 @@ cdef class CPPWrapper:
         self_wrapper.copy_owner(bridge_wrapper)
 
     cpdef bint is_null(self):
-        return self.get_gdowner() == NULL
+        cdef bridge.Wrapper * bridge_wrapper = self.get_ptr()
+        return bridge_wrapper.get_godot_owner() == NULL
 
     @staticmethod
     cdef call_new(int class_number, int number, tuple args):

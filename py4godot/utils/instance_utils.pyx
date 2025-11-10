@@ -2,11 +2,14 @@
 from py4godot.utils.print_tools import *
 from py4godot.wrappers.wrappers cimport extract_ptr_from_ObjectWrapper
 from py4godot.utils.CPPWrapper cimport CPPWrapper
+cimport py4godot.classes.cpp_bridge as bridge
 cdef api void set_owner(object o, void* owner):
     cdef CPPWrapper cppwrapper
+    cdef bridge.Wrapper* bridge_wrapper
     try:
         cppwrapper = <CPPWrapper>o._ptr
-        cppwrapper.set_gdowner(owner)
+        bridge_wrapper = cppwrapper.get_ptr()
+        bridge_wrapper.set_godot_owner(owner)
 
         #extract_ptr_from_ObjectWrapper(o._ptr).get().set_godot_owner(owner)
     except Exception as e:

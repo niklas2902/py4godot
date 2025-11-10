@@ -223,7 +223,7 @@ def generate_return_statement(method_):
             result += f"{INDENT * 2}return <object>_ret"
         else:
             if ret_val.type in classes - builtin_classes:
-                result = f"{INDENT * 2}return None if (<CPPWrapper>_ret._ptr).get_gdowner() == NULL else _ret"
+                result = f"{INDENT * 2}return None if (<CPPWrapper>_ret._ptr).is_null() else _ret"
             else:
                 result = ""
                 result += f"{INDENT * 2}return _ret"
