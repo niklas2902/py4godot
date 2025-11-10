@@ -348,6 +348,9 @@ void PyScriptExtension::_get_instance_base_type(GDExtensionTypePtr res){
 void PyScriptExtension::update_instance_data(InstanceData* gd_instance, PyObject* instance){
    print_error("_update_instance_data");
     if(instance != nullptr){
+        if(gd_instance->owner != nullptr){
+            copy_source_to_dest(gd_instance->owner, instance);
+        }
         gd_instance->owner = instance;
     }
     gd_instance->properties = transfer_object.properties;
@@ -563,7 +566,13 @@ void PyScriptExtension::apply_code(){
     assert(_path != nullptr);
     transfer_object = exec_class(source, _path);
     for(auto p_instance:instance_datas){
-        update_instance_data(p_instance, nullptr);
+        auto instance = instantiate_class(transfer_object.class_);
+        if(instance == Py_None || instance == nullptr){
+            update_instance_data(p_instance, nullptr);
+        }
+        else{
+            update_instance_data(p_instance, instance);
+        }
     }
     PyGILState_Release(gil_state);
 

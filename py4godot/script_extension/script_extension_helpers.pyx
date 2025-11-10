@@ -62,6 +62,12 @@ cdef api string get_type(PyObject* gd_class):
 
     return string()
 
+cdef api void copy_source_to_dest(object source, object dest):
+    for name, value in vars(source).items():
+        if name.startswith('__') and name.endswith('__'):
+            continue  # skip dunder attributes
+        setattr(dest, name, value)
+
 cdef api void create_signals(PyObject* instance, vector[shared_ptr[BridgeDictionary]]& signals):
     cdef object py_instance = <object>instance
     cdef object name
