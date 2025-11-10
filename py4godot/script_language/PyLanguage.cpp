@@ -16,7 +16,7 @@ Theme theme;
 std::shared_ptr<ImageTexture> image_texture;
 std::shared_ptr<Image> icon_image;
 godot::StringName register_icon_name;
-
+bool icon_registered=false;
 
 //TODO: generate this
 bool theme_has_method(){
@@ -35,7 +35,7 @@ void PyLanguage::init_theme_icon(){
 
 void PyLanguage::deinit_theme_icon(){
     auto engine = Engine::get_instance();
-    if(!engine->is_editor_hint()){
+    if(!engine->is_editor_hint() || !icon_registered){
         return;
     }
     auto icon_name = c_string_to_string_name("Python");
@@ -1755,11 +1755,6 @@ void register_icon(
         get_language()->call_deferred(register_icon_name, varargs);
         return;
     }
-    // Retry until the base_control and its theme are ready
-    /*if (!editor_interface->get_base_control() || !theme) {
-        call_deferred("register_icon");
-        return;
-    }*/
     theme = editor_interface->get_editor_theme();
     auto icon_path = c_string_to_string("addons/py4godot/Python.svg");
     icon_image = Image::constructor();
@@ -1774,6 +1769,7 @@ void register_icon(
     theme.set_icon(py_script_icon_name, theme_name, image_texture.get());
 
     theme.unreference();
+    icon_registered = true;
 }
 
 GDExtensionClassMethodInfo create_method_info(StringName& method_name){
