@@ -5,7 +5,7 @@ sys.path.append(os.getcwd())
 if "generation_files" in os.getcwd():
     os.chdir(os.getcwd()+"/../")
 
-
+aliases = {"PhysicsDirectBodyState3D": ["GodotPhysicsDirectBodyState3D"], "PhysicsDirectBodyState2D": ["GodotPhysicsDirectBodyState2D"]}
 def generate_cast_helpers(class_names):
     res = ""
     import_ = """# distutils: language=c++
@@ -71,8 +71,17 @@ PyObject* cast_to_type(char* classname, PyObject* object_to_cast){
     for dependency in class_names:
         switch_statements += f'''        case str2int("{dependency}"):
             return cast_to_{dependency.lower()}(object_to_cast);\n'''
+        if not dependency in aliases:
+            continue
+        aliases_ = aliases[dependency]
+        for alias in aliases_:
+            switch_statements += f'''        case str2int("{alias}"):
+                return cast_to_{dependency.lower()}(object_to_cast);\n'''
 
     with open("py4godot/cppcore/cast_type.cpp" , "w") as f:
         f.write(cast_type.replace("#cast_code", switch_statements))
 
     os.chdir(os.getcwd()+"/generation_files")
+from meson_scripts.collect_all_classes import collect_all_classes
+if __name__ == "__main__":
+    generate_cast_helpers(collect_all_classes())
