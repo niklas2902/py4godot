@@ -2,10 +2,10 @@ import os
 import sys
 sys.path.append(os.getcwd()+"/../")
 sys.path.append(os.getcwd())
+from aliases import aliases
 if "generation_files" in os.getcwd():
     os.chdir(os.getcwd()+"/../")
 
-aliases = {"PhysicsDirectBodyState3D": ["GodotPhysicsDirectBodyState3D"], "PhysicsDirectBodyState2D": ["GodotPhysicsDirectBodyState2D"]}
 def generate_cast_helpers(class_names):
     res = ""
     import_ = """# distutils: language=c++

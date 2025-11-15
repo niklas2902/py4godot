@@ -1,0 +1,2 @@
+aliases = {"PhysicsDirectBodyState3D": ["GodotPhysicsDirectBodyState3D"], "PhysicsDirectBodyState2D": ["GodotPhysicsDirectBodyState2D"],
+           "PhysicsDirectSpaceState3D":["GodotPhysicsDirectSpaceState3D"], "PhysicsDirectSpaceState2D":["GodotPhysicsDirectSpaceState2D"]}

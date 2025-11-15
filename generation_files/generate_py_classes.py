@@ -13,6 +13,8 @@ from generation_tools import write_if_different
 from py4godot.method_ids import method_ids
 from py4godot.class_ids import classes_dict
 
+from aliases import aliases
+
 INDENT = "  "
 
 
@@ -546,6 +548,15 @@ def generate_call_deferred(method):
         res = generate_newline(res)
     return res
 
+def generate_reference(args):
+    res = ""
+    for arg in args:
+        class_ = find_class(arg["type"])
+        if class_ and is_refcounted(class_):
+            res += f"{INDENT*2}{pythonize_name(arg['name'])}.reference()"
+            res = generate_newline(res)
+    return res
+
 def generate_method(class_, mMethod):
     res = ""
     #if should_skip_method(class_, mMethod):
@@ -571,6 +582,8 @@ def generate_method(class_, mMethod):
         res += generate_assert(mMethod["arguments"], mMethod["name"], class_["name"])
         res = generate_newline(res)
         res += generate_variant_checks(mMethod, class_["name"])
+        res = generate_newline(res)
+        res += generate_reference(mMethod["arguments"])
         res = generate_newline(res)
 
     if mMethod["name"] == "call_deferred":
@@ -1669,12 +1682,22 @@ def generate_register_cast(class_name):
     if class_name == "ScriptExtension":
         res += f"register_cast_function('PyScriptExtension', {class_name}.cast)"
         res = generate_newline(res)
+    if not class_name in aliases:
+        return res
+    for alias in aliases[class_name]:
+        res += f"register_cast_function('{alias}', {class_name}.cast)"
+        res = generate_newline(res)
     return res
 
 def generate_register_class(class_name):
     res = ""
     res += f"register_class('{class_name}', {class_name})"
     res = generate_newline(res)
+    if not class_name in aliases:
+        return res
+    for alias in aliases[class_name]:
+        res += f"register_class('{alias}', {class_name})"
+        res = generate_newline(res)
     return res
 
 def generate_dictionary_set_item():
