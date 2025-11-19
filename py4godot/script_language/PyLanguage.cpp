@@ -172,9 +172,11 @@ void PyLanguage::destroy(){
   }
   void PyLanguage::_is_control_flow_keyword(String& keyword, GDExtensionTypePtr res){
   print_error("_is_control_flow_keyword");
-    const char* py_string = gd_string_to_c_string(&keyword.godot_owner, keyword.length());
+    char* py_string;
+    gd_string_to_c_string(&keyword.godot_owner, &py_string);
     bool is_in_keywords = keywords.find(py_string) != keywords.end();
     *static_cast<bool*>(res) = is_in_keywords;
+    delete py_string;
   }
 
   void PyLanguage::_get_comment_delimiters(GDExtensionTypePtr res){
@@ -342,13 +344,13 @@ void PyLanguage::destroy(){
     print_error("_make_function");
 
     char* c_function_name;
-    gd_string_to_c_string(function_name, function_name.length(), &c_function_name);
+    gd_string_to_c_string(function_name, &c_function_name);
     std::string function_name_string{c_function_name};
     std::string args{};
     for(int i = 0; i< get_packed_string_array_size(function_args.godot_owner); i++){
         godot::String arg_string = get_packed_string_array_element(function_args.godot_owner, i);
         char* c_arg_string;
-        gd_string_to_c_string(&arg_string.godot_owner, arg_string.length(), &c_arg_string);
+        gd_string_to_c_string(&arg_string.godot_owner,  &c_arg_string);
         std::string cpp_arg_string = std::string{c_arg_string};
         cpp_arg_string = replace_string_types(cpp_arg_string);
         std::string komma = i == get_packed_string_array_size(function_args.godot_owner) - 1?std::string{}: std::string{", "};
@@ -1223,7 +1225,7 @@ GDExtensionClassCallVirtual get_virtual(void *p_userdata, GDExtensionConstString
     String name_string = String::new2(name);
 
     char* res_string;
-    gd_string_to_c_string(name_string, name_string.length(), &res_string);
+    gd_string_to_c_string(name_string,  &res_string);
 
     print_error("called function:");
     print_error(res_string);

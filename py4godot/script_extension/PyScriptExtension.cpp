@@ -314,7 +314,7 @@ std::string PyScriptExtension::path_as_string(){
     if (string_path == std::string{}){
         auto gd_path = get_path();
         char* res_string;
-        gd_string_to_c_string(gd_path, gd_path.length(), &res_string);
+        gd_string_to_c_string(gd_path, &res_string);
         string_path = std::string{res_string};
         delete[] res_string;
     }
@@ -362,7 +362,7 @@ void PyScriptExtension::update_instance_data(InstanceData* gd_instance, PyObject
         auto property_string_name =  transfer_object.properties[index]->name;
         String property_name = String::new2(property_string_name);
         char* c_property_name;
-        gd_string_to_c_string( &property_name.godot_owner, property_name.length(), &c_property_name);
+        gd_string_to_c_string( &property_name.godot_owner, &c_property_name);
         std::string string_property_name{c_property_name};
         if(std::find(gd_instance->already_set_properties.begin(),
             gd_instance->already_set_properties.end(), string_property_name) == gd_instance->already_set_properties.end()){
@@ -378,7 +378,7 @@ void PyScriptExtension::update_instance_data(InstanceData* gd_instance, PyObject
         auto signal_string_name =  signal->name;
         String signal_name = String::new2(signal_string_name);
         char* c_signal_name;
-        gd_string_to_c_string( &signal_name.godot_owner, signal_name.length(), &c_signal_name);
+        gd_string_to_c_string( &signal_name.godot_owner, &c_signal_name);
         std::string string_signal_name{c_signal_name};
         gd_instance->custom_properties.insert(string_signal_name);
     }
@@ -468,7 +468,7 @@ void PyScriptExtension::_get_source_code(GDExtensionTypePtr& res){
 void PyScriptExtension::_set_source_code( String& code, GDExtensionTypePtr res){
     print_error("_set_source_code");
      char* c_source_code;
-    gd_string_to_c_string(&code.godot_owner, code.length(), &c_source_code);
+    gd_string_to_c_string(&code.godot_owner,  &c_source_code);
     this->source_code = std::string(c_source_code);
 }
 void PyScriptExtension::_reload( bool keep_state, GDExtensionTypePtr res){
@@ -546,7 +546,7 @@ void PyScriptExtension::_get_rpc_config(GDExtensionTypePtr res){}
 void PyScriptExtension::_set_source_code_internal(String& source_code){
     print_error("_set_source_code_internal");
     char* c_source_code;
-    gd_string_to_c_string(&source_code.godot_owner, source_code.length(), &c_source_code);
+    gd_string_to_c_string(&source_code.godot_owner, &c_source_code);
     this->source_code = std::string(c_source_code);
     apply_code();
 }
@@ -992,7 +992,7 @@ GDExtensionClassCallVirtual get_virtual_script(void *p_userdata, GDExtensionCons
     StringName name = StringName::new_static(((void**)const_cast<GDExtensionTypePtr>(p_name))[0]);
     String name_string = String::new2(name);
     char* res_string;
-    gd_string_to_c_string(name_string, name_string.length(), &res_string);
+    gd_string_to_c_string(name_string, &res_string);
 
     print_error("called function_script:");
     print_error(res_string);

@@ -518,7 +518,7 @@ PyObject* Variant::create_object(){
     char* class_name;
     auto class_name_string = string->get_class();
     class_name_string.shouldBeDeleted = true;
-    gd_string_to_c_string(&class_name_string.godot_owner, class_name_string.length(),&class_name);
+    gd_string_to_c_string(&class_name_string.godot_owner, &class_name);
     auto casted = cast_to_type(class_name,val);
     Py_DECREF(val);
     free(class_name);
@@ -539,7 +539,7 @@ PyObject* Variant::create_object_native_ptr(){
     char* class_name;
     auto class_name_string = string->get_class();
     class_name_string.shouldBeDeleted = true;
-    gd_string_to_c_string(&class_name_string.godot_owner, class_name_string.length(),&class_name);
+    gd_string_to_c_string(&class_name_string.godot_owner, &class_name);
     auto casted = cast_to_type(class_name,val);
     Py_DECREF(val);
     free(class_name);
