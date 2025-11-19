@@ -12,9 +12,11 @@ func _export_begin(features, is_debug, path, flags):
 	_copy_dir(project_path + "/addons/py4godot", export_base + "/addons/py4godot")
 	print("Finished copying /addons/py4godot")
 	print("Copying python files ...")
+	print("export_base:", export_base)
+	print("project_path:", project_path)
 	_copy_py_files(project_path, export_base)
 	print("Finished copying python files")
-	
+
 func _export_file(path, type, features):
 	return null if path.ends_with(".py") or path.begins_with("addons/py4godot/") else null
 
@@ -50,5 +52,6 @@ func _copy_py_files(src_dir: String, dst_base: String):
 				if not name.begins_with(".") and name != "addons":
 					_copy_py_files(full_src, dst_base)
 			elif name.ends_with(".py"):
-				_copy_file(full_src, dst_base + "/" + full_src.replace(src_dir + "/", ""))
+				_copy_file(full_src,
+				dst_base + "/" + full_src.replace( ProjectSettings.globalize_path("res://"), ""))
 		name = dir.get_next()
