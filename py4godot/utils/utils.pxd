@@ -6,8 +6,9 @@ cdef extern from "py4godot/cpputils/utils.h":
     bridge.StringName c_string_to_string_name(const char* string)
     bridge.String c_string_to_string(const char* string)
     #const char * gd_string_to_c_string( bridge.String string, int length)
-    void gd_string_to_c_string(bridge.String string, int length, char** res_string)
-    void gd_string_to_c_string_instance(bridge.String string, int length, char** res_string)
+    void gd_string_to_c_string(bridge.String string, char** res_string)
+    void gd_string_to_c_string_instance(bridge.String string, char** res_string)
+    size_t get_gd_string_byte_length(bridge.String)
     bool is_ptr_null[T](const shared_ptr[T]& ptr)
     bool is_none(PyObject* py_object)
     shared_ptr[To] my_static_pointer_cast[From,To](const shared_ptr[From]& ptr) except +

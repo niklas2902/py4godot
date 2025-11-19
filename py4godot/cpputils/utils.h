@@ -30,12 +30,6 @@ static void break_(){
     assert(false);
 }
 
-static const char* gd_string_to_c_string( GDExtensionConstStringPtr string_ptr, int length) {
-    char* native_string = (char*)malloc(sizeof(char) * (length));
-    functions::get_string_to_utf8_chars()(string_ptr, native_string, length);
-    return native_string;
-}
-
 #include <memory>
 
 template<typename From, typename To>
@@ -47,45 +41,51 @@ static bool is_ptr_null(const std::shared_ptr<T>& ptr) {
     return !ptr || ptr.get() == nullptr;
 }
 
-static void gd_string_to_c_string(String& string, int length,  char** res_string) {
-    *res_string = (char*)malloc(sizeof(char) * (length+1));
-    functions::get_string_to_utf8_chars()(&string.godot_owner, *res_string, length);
-    (*res_string)[length] = '\0';
+static size_t get_gd_string_byte_length(String& string) {
+    return functions::get_string_to_utf8_chars()(&string.godot_owner, nullptr, 0);
 }
 
-static void gd_string_to_c_string(GDExtensionConstStringPtr string_ptr, int length, char** res_string) {
+static void gd_string_to_c_string(String& string, char** res_string) {
+    size_t needed = functions::get_string_to_utf8_chars()(&string.godot_owner, nullptr, 0);
+    *res_string = (char*)malloc(sizeof(char) * (needed+1));
+    functions::get_string_to_utf8_chars()(&string.godot_owner, *res_string, needed+1);
+    (*res_string)[needed] = '\0';
+}
+
+static void gd_string_to_c_string(GDExtensionConstStringPtr string_ptr, char** res_string) {
+    size_t length = functions::get_string_to_utf8_chars()(string_ptr, nullptr, 0);
     *res_string = (char*)malloc(sizeof(char) * (length+1));
     functions::get_string_to_utf8_chars()(string_ptr, *res_string, length);
     (*res_string)[length] = '\0';
 }
 
-static void gd_string_to_c_string_instance(String& string, int length, char** res_string) {
 
-    *res_string = new char[length + 1];
-    functions::get_string_to_utf8_chars()(&string.godot_owner, *res_string, length);
+static void gd_string_to_c_string_instance(String& string,  char** res_string) {
+    size_t needed = functions::get_string_to_utf8_chars()(&string.godot_owner, nullptr, 0);
+    *res_string = (char*)malloc(sizeof(char) * (needed+1));
     auto unicode_string = PyUnicode_FromString(*res_string);
-    (*res_string)[length] = '\0';
-    delete [] *res_string;
+    (*res_string)[needed] = '\0';
 }
 
-static PyObject* gd_string_to_unicode(String& string, int length) {
+static PyObject* gd_string_to_unicode(String& string) {
 
-    char * res_string = new char[length + 1];
-    functions::get_string_to_utf8_chars()(&string.godot_owner, res_string, length);
-    res_string[length] = '\0';
+    size_t needed = functions::get_string_to_utf8_chars()(&string.godot_owner, nullptr, 0);
+    char* res_string = (char*)malloc(sizeof(char) * (needed+1));
+    functions::get_string_to_utf8_chars()(&string.godot_owner, res_string, needed+1);
+    res_string[needed] = '\0';
     auto unicode_string = PyUnicode_FromString(res_string);
-    delete[]  res_string;
+    delete  res_string;
     return unicode_string;
 }
 
-static PyObject* gd_string_name_to_unicode(StringName& stringname, int length) {
-
-    char * res_string = new char[length + 1];
+static PyObject* gd_string_name_to_unicode(StringName& stringname) {
     String string = String::new2(stringname);
-    functions::get_string_to_utf8_chars()(&string.godot_owner, res_string, length);
-    res_string[length] = '\0';
+    size_t needed = functions::get_string_to_utf8_chars()(&string.godot_owner, nullptr, 0);
+    char* res_string = (char*)malloc(sizeof(char) * (needed+1));
+    functions::get_string_to_utf8_chars()(&string.godot_owner, res_string, needed+1);
+    res_string[needed] = '\0';
     auto unicode_string = PyUnicode_FromString(res_string);
-    delete[]  res_string;
+    delete  res_string;
     return unicode_string;
 }
 

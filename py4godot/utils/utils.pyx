@@ -1,4 +1,6 @@
 # distutils: language=c++
+from cpython.unicode cimport PyUnicode_DecodeUTF8
+
 from py4godot.classes.core import StringName, String
 from py4godot.wrappers.wrappers cimport CPPStringWrapper, CPPStringNameWrapper
 from py4godot.utils.print_tools import *
@@ -46,7 +48,7 @@ cdef unicode gd_string_to_py_string_instance(object string):
     cdef char* c_str_test = "test"
     cdef PyObject* py_unicode
     try:
-        py_unicode = gd_string_to_unicode(internal_string.get()[0], string.length())
+        py_unicode = gd_string_to_unicode(internal_string.get()[0])
         py_string = <unicode>py_unicode
         decrefPyObject(py_unicode)
     except Exception as e:
@@ -61,7 +63,7 @@ cpdef unicode gd_string_name_to_py_string(object string):
     cdef char* c_str_test = "test"
     cdef PyObject* py_unicode
     try:
-        py_unicode = gd_string_name_to_unicode(internal_string_name.get()[0], string.length())
+        py_unicode = gd_string_name_to_unicode(internal_string_name.get()[0])
         py_string = <unicode>py_unicode
         decrefPyObject(py_unicode)
     except Exception as e:
@@ -72,11 +74,13 @@ cpdef unicode gd_string_to_py_string(object string):
     cdef CPPStringWrapper wrapper = <CPPStringWrapper>(string._ptr)
     cdef shared_ptr[bridge.String] internal_string = wrapper._ptr
     cdef char* c_str
+    cdef size_t length
     try:
-        gd_string_to_c_string(internal_string.get()[0], string.length(), &c_str)
+        gd_string_to_c_string(internal_string.get()[0], &c_str)
+        length = get_gd_string_byte_length(internal_string.get()[0])
     except Exception as e:
         print_error("error:" + str(e))
-    cdef unicode py_string = <unicode>PyUnicode_FromStringAndSize(c_str,string.length())
+    cdef unicode py_string = <unicode>PyUnicode_DecodeUTF8(c_str, length, "strict")
     free(c_str)
     return py_string
 

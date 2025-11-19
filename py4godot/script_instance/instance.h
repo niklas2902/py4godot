@@ -20,7 +20,7 @@ GDExtensionBool c_instance_get(GDExtensionScriptInstanceDataPtr p_instance, GDEx
     StringName method_name = StringName::new_static(((void**)p_name)[0]);
     String method_name_str = String::new2(method_name);
     char* c_method_name;
-    gd_string_to_c_string(&method_name_str.godot_owner, method_name_str.length(), &c_method_name);
+    gd_string_to_c_string(&method_name_str.godot_owner, &c_method_name);
     if(instance->custom_properties.find(std::string{c_method_name}) == instance->custom_properties.end()){
         // TODO: look over this again. Currently setting editor description is broken.
         PyGILState_Release(gil_state);
@@ -108,8 +108,9 @@ GDExtensionBool c_instance_set(GDExtensionScriptInstanceDataPtr p_instance, GDEx
     InstanceData* instance = (InstanceData*)p_instance;
     StringName method_name = StringName::new_static(((void**)p_name)[0]);
     String method_name_str = String::new2(method_name);
+    auto length = functions::get_string_to_utf8_chars()(&method_name_str.godot_owner, nullptr, 0);
     char* c_method_name = (char*)malloc(sizeof(char) * method_name_str.length());
-    gd_string_to_c_string(&method_name_str.godot_owner, method_name_str.length(), &c_method_name);
+    gd_string_to_c_string(&method_name_str.godot_owner, &c_method_name);
     if(instance->custom_properties.find(std::string{c_method_name}) == instance->custom_properties.end()){
         // TODO: look over this again. Currently setting editor description is broken.
         return 0;

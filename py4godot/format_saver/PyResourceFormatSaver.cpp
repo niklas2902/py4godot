@@ -144,7 +144,7 @@ namespace saver{
         String name_string = String::new2(name);
 
         char* res_string;
-        gd_string_to_c_string(name_string, name_string.length(), &res_string);
+        gd_string_to_c_string(name_string,  &res_string);
 
         print_error("called function:");
         print_error(res_string);

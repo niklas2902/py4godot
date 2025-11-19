@@ -93,7 +93,7 @@ void PyResourceFormatLoader::_get_resource_uid( String& path, GDExtensionTypePtr
 
         return;
     }
-    gd_string_to_c_string(path, path.length(), &res_string);
+    gd_string_to_c_string(path, &res_string);
     std::string str_res_string = std::string{res_string};
     if(path_to_id.find(str_res_string) == path_to_id.end()){
         PyResourceFormatLoader::id_counter ++;
@@ -119,7 +119,7 @@ void PyResourceFormatLoader::_load( String& path, String& original_path, bool us
     print_error("_load");
     GDExtensionVariantFromTypeConstructorFunc constructor_func;
     char* c_path;
-    gd_string_to_c_string(&path.godot_owner, path.length(), &c_path);
+    gd_string_to_c_string(&path.godot_owner, &c_path);
 
     FileAccess file;
     {
@@ -287,7 +287,7 @@ GDExtensionClassCallVirtual get_virtual_loader(void *p_userdata, GDExtensionCons
     String name_string = String::new2(name);
 
     char* res_string;
-    gd_string_to_c_string(name_string, name_string.length(), &res_string);
+    gd_string_to_c_string(name_string,  &res_string);
 
     print_error("called function loader:");
     print_error(res_string);
