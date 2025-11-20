@@ -40,7 +40,7 @@ class TestObject(Node3D):
 		return self.get_meta("is_test_object")
 	
 	def get_text_edit_text(self):
-		return self.get_node("TextEdit").get_text()
+		return self.get_node("%TextEdit").get_text()
 
 	def variant_test_function(self, arg) -> object:
 		return arg
