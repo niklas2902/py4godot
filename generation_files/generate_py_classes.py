@@ -58,6 +58,7 @@ class Operator:
         self.class_ = class_
         self.operator_string = operator_string
         self.return_types = return_types
+        self.has_variant = False
 
 
 IGNORED_CLASSES = {"Nil", "bool", "float", "int"}
@@ -1586,6 +1587,12 @@ def generate_operators_for_class(class_name):
                         res += f"{INDENT * 2}return _ret"
 
                     res = generate_newline(res)
+                if op.has_variant:
+                    res = generate_newline(res)
+                    res += f"{INDENT * 2}_ret= self._ptr.call_with_return({method_ids['normal_methods'][class_name][operator]}, (other,))"
+                    res = generate_newline(res)
+                    res += f"{INDENT * 2}return _ret"
+
 
                 res = generate_newline(res)
     res = generate_newline(res)
@@ -2077,7 +2084,9 @@ def generate_operators_set(class_):
                     OperatorReturnType(operator["return_type"], ""))
         if "right_type" in operator.keys():
             if operator["right_type"] == "Variant":
-                continue #TODO: Implement this
+                operator_dict[class_["name"]][operator["name"]].has_variant = True
+                operator_dict[class_["name"]][operator["name"]].variant_return_value = operator["return_type"]
+                continue
             operator_dict[class_["name"]][operator["name"]].right_type_values.append(operator["right_type"])
             operator_dict[class_["name"]][operator["name"]].return_types.append(OperatorReturnType(operator["return_type"], operator["right_type"]))
 

@@ -39,6 +39,8 @@ class Operator:
         self.class_ = class_
         self.operator_string = operator_string
         self.return_types = return_types
+        self.has_variant=False
+        self.variant_return_type = None
 
 IGNORED_CLASSES = {"Nil", "bool", "float", "int"}
 
@@ -740,6 +742,14 @@ def generate_operators_for_class(class_name):
 
                         res += f"{INDENT}{make_ptr(return_type.return_type)} py_operator_{operator_to_python_name(operator)} ({make_ptr(ungodottype(return_type.right_type))} other);"
                         res = generate_newline(res)
+
+                if op.has_variant:
+                    res += f"{INDENT}{op.variant_return_type} operator {operator} (Variant& other);"
+                    res = generate_newline(res)
+
+                    res += f"{INDENT}{make_ptr(op.variant_return_type)} py_operator_{operator_to_python_name(operator)} (PyObject* other);"
+                    res = generate_newline(res)
+
     res = generate_newline(res)
     return res
 
@@ -972,10 +982,11 @@ def generate_operators_set(class_):
                     OperatorReturnType(operator["return_type"], ""))
         if "right_type" in operator.keys():
             if operator["right_type"] == "Variant":
-                continue #TODO: Implement this
+                operator_dict[class_["name"]][operator["name"]].has_variant = True
+                operator_dict[class_["name"]][operator["name"]].variant_return_type = operator["return_type"]
+                continue
             operator_dict[class_["name"]][operator["name"]].right_type_values.append(operator["right_type"])
             operator_dict[class_["name"]][operator["name"]].return_types.append(OperatorReturnType(operator["return_type"], operator["right_type"]))
-
 
 
 def collect_typed_arrays_from_return(method_):
