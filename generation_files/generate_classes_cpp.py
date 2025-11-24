@@ -1474,6 +1474,7 @@ def generate_switch_methods(class_):
                 op = operator_dict[get_class_name(class_["name"])][operator]
                 res += f"{INDENT*2}case {method_ids['normal_methods'][class_['name']][operator]}: return wrap_operator_{operator_to_python_name(operator)}(PyTuple_GetItem(args_tuple, 0));"
                 res = generate_newline(res)
+
     if "array" in class_["name"].lower():
         res += f"{INDENT * 3}case {method_ids['normal_methods'][class_['name']]['__getitem__']}: return py_getitem((int)PyLong_AsLong(PyTuple_GetItem(args_tuple, 0)));break;"
         res = generate_newline(res)
@@ -2065,6 +2066,25 @@ def generate_operators_for_class(class_name):
                             else:
                                 res += f"{INDENT * 2}if (type_checking_{right_type}(other)){{return py_operator_{operator_to_python_name(operator)}({extract_arg_operator(right_type)});}}"
                             res = generate_newline(res)
+
+                    if op.has_variant:
+                        ret_type = op.variant_return_type
+                        if ret_type in builtin_classes.union(classes).difference(
+                               {"float", "int", "bool"}) or "typedarray" in ret_type.lower():
+
+                           res += f"{INDENT * 2}wrapper__create_wrapper_from_{untypearray_or_dictionary(ret_type)}_ptr(py_operator_{operator_to_python_name(operator)}(other));"
+                        elif ret_type == "int":
+                           res += f"{INDENT * 2}return PyLong_FromLong(py_operator_{operator_to_python_name(operator)}(other));"
+
+                        elif ret_type == "bool":
+                           res += f"{INDENT * 2}return PyBool_FromLong(py_operator_{operator_to_python_name(operator)}(other));"
+                        elif ret_type == "float":
+                           res += f"{INDENT * 2}return PyFloat_FromDouble(py_operator_{operator_to_python_name(operator)}(other));"
+                        else:
+                           res += f"{INDENT * 2}return py_operator_{operator_to_python_name(operator)}(other);"
+                        res = generate_newline(res)
+                    else:
+                        res += f"{INDENT*2}return Py_None;"
 
                     #if "Variant" in op.right_type_values:
 
