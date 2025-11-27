@@ -386,7 +386,7 @@ def generate_variant_vector(mMethod):
         res = generate_newline(res)
         res += f"{INDENT * 3}Variant* _var = new Variant(1);"
         res = generate_newline(res)
-        res += f'{INDENT * 3}_var->init_from_py_object_native_ptr(_variant, "Object");'
+        res += f'{INDENT * 3}_var->init_from_py_object_native_ptr(_variant, get_python_typename(_variant).c_str());'
         res = generate_newline(res)
         res += f'{INDENT * 3}variant_argument_array.push_back(_var);'
         res = generate_newline(res)
