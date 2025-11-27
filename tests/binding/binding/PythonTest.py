@@ -3,6 +3,7 @@ import unittest
 from py4godot.classes.Node3D import Node3D
 from TestObject import TestObject
 from py4godot.classes.core import Array, Vector3, PackedByteArray, Basis
+from py4godot.functions import lerp
 from py4godot.utils.print_tools import print_error
 
 
@@ -74,6 +75,9 @@ class PythonTest(unittest.TestCase):
 	def test_basis_equals_string(self):
 		basis = Basis.FLIP_X
 		self.assertFalse(basis == "test")
+
+	def test_lerp(self):
+		self.assertEqual(lerp(1, 3, 0.5), 2)
 
 
 
