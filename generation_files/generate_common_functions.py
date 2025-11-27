@@ -528,14 +528,6 @@ def generate_enums(class_):
     return res
 
 
-def generate_properties(class_):
-    result = ""
-    if ("properties" in class_.keys()):
-        for property in class_["properties"]:
-            result += generate_property(property, class_["name"])
-    return result
-
-
 def simplify_type(type):
     list_types = type.split(",")
     return list_types[-1]
@@ -550,30 +542,6 @@ def generate_property_index(property, is_setter=False):
             return str(property["index"]) + ", "
 
     return ""
-
-
-def generate_property(property, classname):
-    result = ""
-    result += f"{INDENT}@property"
-    result = generate_newline(result)
-    result += f"{INDENT}def {pythonize_name(property['name'])}(self):"
-    result = generate_newline(result)
-    result += f"{INDENT * 2}cdef _ret = self. {pythonize_name(property['getter'])}({generate_property_index(property)})"
-    result = generate_newline(result)
-
-    result += f"{INDENT * 2}return _ret"
-    result = generate_newline(result)
-
-    if "setter" in property and property["setter"] != "":
-        result += f"{INDENT}@{pythonize_name(property['name'])}.setter"
-        result = generate_newline(result)
-        result += f"{INDENT}def {pythonize_name(property['name'])}(self, {import_type(unvariant(unstring(untypearray(simplify_type(property['type'])))), classname)} value):"
-        result = generate_newline(result)
-        result += f"{INDENT * 2}self.{pythonize_name(property['setter'])}({generate_property_index(property, True)}value)"
-        result = generate_newline(result)
-
-    return result
-
 
 def pythonize_name(name):
     if name in (
@@ -671,7 +639,7 @@ def unstring(type_):
 
 
 def generate_args(method_with_args):
-    result = "self, "
+    result = ""
     if "arguments" not in method_with_args:
         if method_with_args["is_vararg"]:
             result += "*varargs, "

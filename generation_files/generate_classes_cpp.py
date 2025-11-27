@@ -1,4 +1,5 @@
 import copy
+import dataclasses
 import json
 import os.path
 import sys
@@ -32,12 +33,19 @@ class CoreMember:
         self.type_ = type_
 
 
+@dataclasses.dataclass
+class OperatorReturnType:
+    return_type:str
+    right_type:str
+
 class Operator:
-    def __init__(self, class_, operator_string, return_type):
+    def __init__(self, class_, operator_string, return_types):
         self.right_type_values = []
         self.class_ = class_
         self.operator_string = operator_string
-        self.return_type = return_type
+        self.return_types = return_types
+        self.has_variant=False
+        self.variant_return_type = None
 
 
 IGNORED_CLASSES = {"Nil", "bool", "float", "int"}
@@ -1466,6 +1474,7 @@ def generate_switch_methods(class_):
                 op = operator_dict[get_class_name(class_["name"])][operator]
                 res += f"{INDENT*2}case {method_ids['normal_methods'][class_['name']][operator]}: return wrap_operator_{operator_to_python_name(operator)}(PyTuple_GetItem(args_tuple, 0));"
                 res = generate_newline(res)
+
     if "array" in class_["name"].lower():
         res += f"{INDENT * 3}case {method_ids['normal_methods'][class_['name']]['__getitem__']}: return py_getitem((int)PyLong_AsLong(PyTuple_GetItem(args_tuple, 0)));break;"
         res = generate_newline(res)
@@ -2038,13 +2047,15 @@ def generate_operators_for_class(class_name):
                 if op.right_type_values:
                     res += f"{INDENT}PyObject* {class_name}::wrap_operator_{operator_to_python_name(operator)} (PyObject* other){{"
                     res = generate_newline(res)
-                    for right_type in op.right_type_values:
+                    ret_types = op.return_types
+                    for return_type in ret_types:
+                        right_type = return_type.right_type
                         if right_type != "Variant":
-                            ret_type = op.return_type
+                            ret_type = return_type.return_type
                             if ret_type in builtin_classes.union(classes).difference(
                                     {"float", "int", "bool"}) or "typedarray" in ret_type.lower():
 
-                                res += f"{INDENT * 2}if (type_checking_{right_type}(other)){{return wrapper__create_wrapper_from_{untypearray_or_dictionary(op.return_type)}_ptr(py_operator_{operator_to_python_name(operator)}({extract_arg_operator(right_type)}));}}"
+                                res += f"{INDENT * 2}if (type_checking_{right_type}(other)){{return wrapper__create_wrapper_from_{untypearray_or_dictionary(return_type.return_type)}_ptr(py_operator_{operator_to_python_name(operator)}({extract_arg_operator(right_type)}));}}"
                             elif ret_type == "int":
                                 res += f"{INDENT * 2}if (type_checking_{right_type}(other)){{return PyLong_FromLong(py_operator_{operator_to_python_name(operator)}({extract_arg_operator(right_type)}));}}"
 
@@ -2053,32 +2064,53 @@ def generate_operators_for_class(class_name):
                             elif ret_type == "float":
                                 res += f"{INDENT * 2}if (type_checking_{right_type}(other)){{return PyFloat_FromDouble(py_operator_{operator_to_python_name(operator)}({extract_arg_operator(right_type)}));}}"
                             else:
-                                res += f"{INDENT * 2}if (type_checking_{right_type}(other)){{py_operator_{operator_to_python_name(operator)}({extract_arg_operator(right_type)});}}"
+                                res += f"{INDENT * 2}if (type_checking_{right_type}(other)){{return py_operator_{operator_to_python_name(operator)}({extract_arg_operator(right_type)});}}"
                             res = generate_newline(res)
-                    if "Variant" in op.right_type_values:
 
-                        ret_type = op.return_type
+                    if op.has_variant:
+                        ret_type = op.variant_return_type
                         if ret_type in builtin_classes.union(classes).difference(
-                                {"float", "int", "bool"}) or "typedarray" in ret_type.lower():
+                               {"float", "int", "bool"}) or "typedarray" in ret_type.lower():
 
-                            res += f"{INDENT * 2}wrapper__create_wrapper_from_{untypearray_or_dictionary(op.return_type)}_ptr(py_operator_{operator_to_python_name(operator)}(Variant::construct_from_py_object(other, type_checking__get_name_from_object(other))));"
+                           res += f"{INDENT * 2}wrapper__create_wrapper_from_{untypearray_or_dictionary(ret_type)}_ptr(py_operator_{operator_to_python_name(operator)}(other));"
                         elif ret_type == "int":
-                            res += f"{INDENT * 2}return PyLong_FromLong(py_operator_{operator_to_python_name(operator)}(Variant::construct_from_py_object(other, type_checking__get_name_from_object(other))));"
+                           res += f"{INDENT * 2}return PyLong_FromLong(py_operator_{operator_to_python_name(operator)}(other));"
 
                         elif ret_type == "bool":
-                            res += f"{INDENT * 2}return PyBool_FromLong(py_operator_{operator_to_python_name(operator)}(Variant::construct_from_py_object(other, type_checking__get_name_from_object(other))));"
+                           res += f"{INDENT * 2}return PyBool_FromLong(py_operator_{operator_to_python_name(operator)}(other));"
                         elif ret_type == "float":
-                            res += f"{INDENT * 2}return PyFloat_FromDouble(py_operator_{operator_to_python_name(operator)}(Variant::construct_from_py_object(other, type_checking__get_name_from_object(other))));"
+                           res += f"{INDENT * 2}return PyFloat_FromDouble(py_operator_{operator_to_python_name(operator)}(other));"
                         else:
-                            res += f"{INDENT * 2}return py_operator_{operator_to_python_name(operator)}(Variant::construct_from_py_object(other, type_checking__get_name_from_object(other)));"
+                           res += f"{INDENT * 2}return py_operator_{operator_to_python_name(operator)}(other);"
                         res = generate_newline(res)
+                    else:
+                        res += f"{INDENT*2}return Py_None;"
+
+                    #if "Variant" in op.right_type_values:
+
+                    #    ret_type = op.return_type
+                    #    if ret_type in builtin_classes.union(classes).difference(
+                    #            {"float", "int", "bool"}) or "typedarray" in ret_type.lower():
+
+                    #        res += f"{INDENT * 2}wrapper__create_wrapper_from_{untypearray_or_dictionary(op.return_type)}_ptr(py_operator_{operator_to_python_name(operator)}(Variant::construct_from_py_object(other, type_checking__get_name_from_object(other))));"
+                    #    elif ret_type == "int":
+                    #        res += f"{INDENT * 2}return PyLong_FromLong(py_operator_{operator_to_python_name(operator)}(Variant::construct_from_py_object(other, type_checking__get_name_from_object(other))));"
+
+                    #    elif ret_type == "bool":
+                    #        res += f"{INDENT * 2}return PyBool_FromLong(py_operator_{operator_to_python_name(operator)}(Variant::construct_from_py_object(other, type_checking__get_name_from_object(other))));"
+                    #    elif ret_type == "float":
+                    #        res += f"{INDENT * 2}return PyFloat_FromDouble(py_operator_{operator_to_python_name(operator)}(Variant::construct_from_py_object(other, type_checking__get_name_from_object(other))));"
+                    #    else:
+                    #        res += f"{INDENT * 2}return py_operator_{operator_to_python_name(operator)}(Variant::construct_from_py_object(other, type_checking__get_name_from_object(other)));"
+                    #    res = generate_newline(res)
 
                     res += f"}}"
                     res = generate_newline(res)
-                    for right_type in op.right_type_values:
-                        res += f"{INDENT}{op.return_type} {class_name}::operator {operator}({ungodottype(right_type)}{generate_reference(right_type)} other)" + "{"
+                    for return_type in ret_types:
+                        right_type = return_type.right_type
+                        res += f"{INDENT}{return_type.return_type} {class_name}::operator {operator}({ungodottype(right_type)}{generate_reference(right_type)} other)" + "{"
                         res = generate_newline(res)
-                        res += f"{INDENT * 2}{op.return_type} _ret = {init_return_type(op.return_type)};"
+                        res += f"{INDENT * 2}{return_type.return_type} _ret = {init_return_type(return_type.return_type)};"
                         res = generate_newline(res)
 
                         res = generate_newline(res)
@@ -2090,9 +2122,9 @@ def generate_operators_for_class(class_name):
                         res += f"{INDENT * 2}operator_evaluator = {INDENT * 2}functions::get_variant_get_ptr_operator_evaluator()({operator_to_variant_operator[operator]}, {generate_variant_type(op.class_)}, {generate_variant_type(right_type)});"
                         res = generate_newline(res)
                         if class_name in cpp_core_structs:
-                            res += f"{INDENT * 2}operator_evaluator(&native_struct, {address_param(right_type)}, {address_ret_decision(op.return_type)});"
+                            res += f"{INDENT * 2}operator_evaluator(&native_struct, {address_param(right_type)}, {address_ret_decision(return_type.return_type)});"
                         else:
-                            res += f"{INDENT * 2}operator_evaluator(&godot_owner, {address_param(right_type)}, {address_ret_decision(op.return_type)});"
+                            res += f"{INDENT * 2}operator_evaluator(&godot_owner, {address_param(right_type)}, {address_ret_decision(return_type.return_type)});"
                         res = generate_newline(res)
 
                         res += f"{INDENT * 2}return _ret;"
@@ -2100,14 +2132,51 @@ def generate_operators_for_class(class_name):
                         res += INDENT + "}"
                         res = generate_newline(res)
 
-                        res += f"{INDENT}{make_ptr(op.return_type)} {class_name}::py_operator_{operator_to_python_name(operator)}({make_ptr(ungodottype(right_type))} other)" + "{"
+                        res += f"{INDENT}{make_ptr(return_type.return_type)} {class_name}::py_operator_{operator_to_python_name(operator)}({make_ptr(ungodottype(right_type))} other)" + "{"
                         res = generate_newline(res)
                         res += f"{INDENT * 2}auto _ret = *this {operator} {unref_pointer(type_=ungodottype(right_type), value_name='other')};"
                         res = generate_newline(res)
-                        res += f"{INDENT * 2}return {generate_ret_ptr(op.return_type)};"
+                        res += f"{INDENT * 2}return {generate_ret_ptr(return_type.return_type)};"
                         res = generate_newline(res)
                         res += INDENT + "}"
                         res = generate_newline(res)
+                if op.has_variant:
+                    res += f"{INDENT}{op.variant_return_type} {class_name}::operator {operator}(Variant& other)" + "{"
+                    res = generate_newline(res)
+                    res += f"{INDENT * 2}{op.variant_return_type} _ret = {init_return_type(op.variant_return_type)};"
+                    res = generate_newline(res)
+
+                    res = generate_newline(res)
+                    res += f"{INDENT * 2}GDExtensionPtrOperatorEvaluator operator_evaluator;"
+                    res = generate_newline(res)
+                    res = generate_newline(res)
+                    res += f"{INDENT * 2}operator_evaluator = {INDENT * 2}functions::get_variant_get_ptr_operator_evaluator()({operator_to_variant_operator[operator]}, {generate_variant_type(op.class_)}, {generate_variant_type(right_type)});"
+                    res = generate_newline(res)
+                    if class_name in cpp_core_structs:
+                        res += f"{INDENT * 2}operator_evaluator(&native_struct, &other.native_ptr, {address_ret_decision(op.variant_return_type)});"
+                    else:
+                        res += f"{INDENT * 2}operator_evaluator(&godot_owner, &other.native_ptr, {address_ret_decision(op.variant_return_type)});"
+                    res = generate_newline(res)
+
+                    res += f"{INDENT * 2}return _ret;"
+                    res = generate_newline(res)
+                    res += INDENT + "}"
+                    res = generate_newline(res)
+
+                    res += f"{INDENT}{make_ptr(op.variant_return_type)} {class_name}::py_operator_{operator_to_python_name(operator)}(PyObject* other)" + "{"
+                    res = generate_newline(res)
+                    #std::shared_ptr < Variant > _var = std::make_shared < Variant > (1);
+                    #_var->init_from_py_object_native_ptr(_variant, get_python_typename(_variant).c_str());
+                    res += f"{INDENT*2}Variant _var = Variant(1);"
+                    res = generate_newline(res)
+                    res += f"{INDENT*2}_var.init_from_py_object_native_ptr(other, get_python_typename(other).c_str());"
+                    res = generate_newline(res)
+                    res += f"{INDENT * 2}auto _ret = *this {operator} _var;"
+                    res = generate_newline(res)
+                    res += f"{INDENT * 2}return {generate_ret_ptr(op.variant_return_type)};"
+                    res = generate_newline(res)
+                    res += INDENT + "}"
+                    res = generate_newline(res)
     res = generate_newline(res)
     return res
 
@@ -2554,9 +2623,17 @@ def generate_operators_set(class_):
             operator_dict[class_["name"]] = dict()
         if not operator["name"] in operator_dict[class_["name"]]:
             operator_dict[class_["name"]][operator["name"]] = Operator(class_["name"], operator["name"],
-                                                                       operator["return_type"])
+                                                                       [])
+            if not "right_type" in operator.keys():
+                operator_dict[class_["name"]][operator["name"]].return_types.append(
+                    OperatorReturnType(operator["return_type"], ""))
         if "right_type" in operator.keys():
+            if operator["right_type"] == "Variant":
+                operator_dict[class_["name"]][operator["name"]].has_variant = True
+                operator_dict[class_["name"]][operator["name"]].variant_return_type = operator["return_type"]
+                continue
             operator_dict[class_["name"]][operator["name"]].right_type_values.append(operator["right_type"])
+            operator_dict[class_["name"]][operator["name"]].return_types.append(OperatorReturnType(operator["return_type"], operator["right_type"]))
 
 
 def is_property_setter(class_, methodname):

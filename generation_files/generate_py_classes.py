@@ -1,4 +1,5 @@
 import copy
+import dataclasses
 import json
 import os
 import sys
@@ -46,13 +47,18 @@ class CoreMember:
         self.name = name
         self.type_ = type_
 
+@dataclasses.dataclass
+class OperatorReturnType:
+    return_type:str
+    right_type:str
 
 class Operator:
-    def __init__(self, class_, operator_string, return_type):
+    def __init__(self, class_, operator_string, return_types):
         self.right_type_values = []
         self.class_ = class_
         self.operator_string = operator_string
-        self.return_type = return_type
+        self.return_types = return_types
+        self.has_variant = False
 
 
 IGNORED_CLASSES = {"Nil", "bool", "float", "int"}
@@ -1556,14 +1562,38 @@ def generate_operators_for_class(class_name):
                 op = operator_dict[class_name][operator]
                 res += f"{INDENT}def {operator_to_method[operator]}({get_parameters_operator(operator_dict[class_name][operator])}):"
                 res = generate_newline(res)
-                res += f"{INDENT * 2}_ret = {init_return_type(op.return_type)}"
-                res = generate_newline(res)
-                if op.return_type in builtin_classes - {"float", "int", "bool", "Nil"}:
-                    res += f"{INDENT * 2}_ret._ptr = self._ptr.call_with_return({method_ids['normal_methods'][class_name][operator]}, (other,))"
-                else:
+                for return_type in op.return_types:
+                    if return_type.right_type:
+                        res += f"{INDENT*2}if isinstance(other, {return_type.right_type}):"
+                        res = generate_newline(res)
+                        res += f"{INDENT * 3}_ret = {init_return_type(return_type.return_type)}"
+                        res = generate_newline(res)
+                        res = generate_newline(res)
+                        if return_type.return_type in builtin_classes - {"float", "int", "bool", "Nil"}:
+                            res += f"{INDENT * 3}_ret._ptr = self._ptr.call_with_return({method_ids['normal_methods'][class_name][operator]}, (other,))"
+                        else:
+                            res += f"{INDENT * 3}_ret= self._ptr.call_with_return({method_ids['normal_methods'][class_name][operator]}, (other,))"
+                        res = generate_newline(res)
+                        res += f"{INDENT * 3}return _ret"
+                    else:
+                        res += f"{INDENT * 2}_ret = {init_return_type(return_type.return_type)}"
+                        res = generate_newline(res)
+                        res = generate_newline(res)
+                        if return_type.return_type in builtin_classes - {"float", "int", "bool", "Nil"}:
+                            res += f"{INDENT * 2}_ret._ptr = self._ptr.call_with_return({method_ids['normal_methods'][class_name][operator]}, (other,))"
+                        else:
+                            res += f"{INDENT * 2}_ret= self._ptr.call_with_return({method_ids['normal_methods'][class_name][operator]}, (other,))"
+                        res = generate_newline(res)
+                        res += f"{INDENT * 2}return _ret"
+
+                    res = generate_newline(res)
+                if op.has_variant:
+                    res = generate_newline(res)
                     res += f"{INDENT * 2}_ret= self._ptr.call_with_return({method_ids['normal_methods'][class_name][operator]}, (other,))"
-                res = generate_newline(res)
-                res += f"{INDENT * 2}return _ret"
+                    res = generate_newline(res)
+                    res += f"{INDENT * 2}return _ret"
+
+
                 res = generate_newline(res)
     res = generate_newline(res)
     return res
@@ -2048,9 +2078,17 @@ def generate_operators_set(class_):
             operator_dict[class_["name"]] = dict()
         if not operator["name"] in operator_dict[class_["name"]]:
             operator_dict[class_["name"]][operator["name"]] = Operator(class_["name"], operator["name"],
-                                                                       operator["return_type"])
+                                                                       [])
+            if not "right_type" in operator.keys():
+                operator_dict[class_["name"]][operator["name"]].return_types.append(
+                    OperatorReturnType(operator["return_type"], ""))
         if "right_type" in operator.keys():
+            if operator["right_type"] == "Variant":
+                operator_dict[class_["name"]][operator["name"]].has_variant = True
+                operator_dict[class_["name"]][operator["name"]].variant_return_value = operator["return_type"]
+                continue
             operator_dict[class_["name"]][operator["name"]].right_type_values.append(operator["right_type"])
+            operator_dict[class_["name"]][operator["name"]].return_types.append(OperatorReturnType(operator["return_type"], operator["right_type"]))
 
 
 classes = set()

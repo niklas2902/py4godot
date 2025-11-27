@@ -1,4 +1,5 @@
 import copy
+import dataclasses
 import json
 import os.path
 
@@ -27,13 +28,19 @@ class CoreMember:
         self.type_ = type_
 
 
+@dataclasses.dataclass
+class OperatorReturnType:
+    return_type:str
+    right_type:str
+
 class Operator:
-    def __init__(self, class_, operator_string, return_type):
+    def __init__(self, class_, operator_string, return_types):
         self.right_type_values = []
         self.class_ = class_
         self.operator_string = operator_string
-        self.return_type = return_type
-
+        self.return_types = return_types
+        self.has_variant=False
+        self.variant_return_type = None
 
 IGNORED_CLASSES = {"Nil", "bool", "float", "int"}
 
@@ -728,12 +735,21 @@ def generate_operators_for_class(class_name):
                 if op.right_type_values:
                     res += f"{INDENT}PyObject* wrap_operator_{operator_to_python_name(operator)} (PyObject* other);"
                     res = generate_newline(res)
-                    for right_type in op.right_type_values:
-                        res += f"{INDENT}{op.return_type} operator {operator} ({ungodottype(right_type)}{generate_reference(right_type)} other);"
+                    return_types = op.return_types
+                    for return_type in return_types:
+                        res += f"{INDENT}{return_type.return_type} operator {operator} ({ungodottype(return_type.right_type)}{generate_reference(return_type.right_type)} other);"
                         res = generate_newline(res)
 
-                        res += f"{INDENT}{make_ptr(op.return_type)} py_operator_{operator_to_python_name(operator)} ({make_ptr(ungodottype(right_type))} other);"
+                        res += f"{INDENT}{make_ptr(return_type.return_type)} py_operator_{operator_to_python_name(operator)} ({make_ptr(ungodottype(return_type.right_type))} other);"
                         res = generate_newline(res)
+
+                if op.has_variant:
+                    res += f"{INDENT}{op.variant_return_type} operator {operator} (Variant& other);"
+                    res = generate_newline(res)
+
+                    res += f"{INDENT}{make_ptr(op.variant_return_type)} py_operator_{operator_to_python_name(operator)} (PyObject* other);"
+                    res = generate_newline(res)
+
     res = generate_newline(res)
     return res
 
@@ -953,7 +969,6 @@ def generate_special_methods(class_):
 
     return res
 
-
 def generate_operators_set(class_):
     for operator in class_["operators"]:
         print(operator)
@@ -961,9 +976,17 @@ def generate_operators_set(class_):
             operator_dict[class_["name"]] = dict()
         if not operator["name"] in operator_dict[class_["name"]]:
             operator_dict[class_["name"]][operator["name"]] = Operator(class_["name"], operator["name"],
-                                                                       operator["return_type"])
+                                                                       [])
+            if not "right_type" in operator.keys():
+                operator_dict[class_["name"]][operator["name"]].return_types.append(
+                    OperatorReturnType(operator["return_type"], ""))
         if "right_type" in operator.keys():
+            if operator["right_type"] == "Variant":
+                operator_dict[class_["name"]][operator["name"]].has_variant = True
+                operator_dict[class_["name"]][operator["name"]].variant_return_type = operator["return_type"]
+                continue
             operator_dict[class_["name"]][operator["name"]].right_type_values.append(operator["right_type"])
+            operator_dict[class_["name"]][operator["name"]].return_types.append(OperatorReturnType(operator["return_type"], operator["right_type"]))
 
 
 def collect_typed_arrays_from_return(method_):

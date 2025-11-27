@@ -2,7 +2,7 @@ import unittest
 
 from py4godot.classes.Node3D import Node3D
 from TestObject import TestObject
-from py4godot.classes.core import Array, Vector3, PackedByteArray
+from py4godot.classes.core import Array, Vector3, PackedByteArray, Basis
 from py4godot.utils.print_tools import print_error
 
 
@@ -53,7 +53,7 @@ class PythonTest(unittest.TestCase):
 
 		with self.assertRaises(ValueError) as cm:
 			my_array.append([])
-	
+
 	def test_get_text(self):
 		self.assertEqual("我喜欢学习物理", self.test_object.get_text_edit_text())
 
@@ -61,6 +61,19 @@ class PythonTest(unittest.TestCase):
 	def test_call_deferred(self):
 		packedbyteArray = PackedByteArray.from_list([1])
 		self.test_object.call_deferred("test_function", packedbyteArray)
+
+	def test_basis_mult_vector3(self):
+		up = Vector3.UP
+		basis = Basis.FLIP_Y
+		mult = basis * up
+		print(mult.x)
+		print(mult.y)
+		print(mult.z)
+		self.assertEqual(mult, Vector3.new3(0, -1, 0))
+
+	def test_basis_equals_string(self):
+		basis = Basis.FLIP_X
+		self.assertFalse(basis == "test")
 
 
 

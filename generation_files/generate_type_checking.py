@@ -15,6 +15,8 @@ def type_checking():
     for cls in set(builtin_classes) - {"float", "int", "bool", "Nil"}:
         res += f"from py4godot.classes.core import {cls}"
         res = generate_newline(res)
+    res += f"import py4godot.constant_helpers as constants"
+    res = generate_newline(res)
     res += f"from py4godot.classes.Object import Object"
     res = generate_newline(res)
 
@@ -33,7 +35,11 @@ def type_checking():
     for cls in (set(builtin_classes) - {"Nil"}).union({"Object"}):
         res += f"cdef api bint is_{cls}(object o):"
         res = generate_newline(res)
-        res += f"{INDENT}return type(o) == {cls}"
+        if cls not in {"Projection", "Basis", "Vector2", "Vector2i", "Vector3", "Vector3i", "Vector4", "Vector4i",
+                       "Color", "Transform2D", "Transform3D", "Plane"}:
+            res += f"{INDENT}return type(o) == {cls}"
+        else:
+            res += f"{INDENT}return type(o) == {cls} or type(o) == constants.Constant{cls}"
         res = generate_newline(res)
 
     return res
