@@ -74,12 +74,8 @@ void c_instance_call(GDExtensionScriptInstanceDataPtr p_self, GDExtensionConstSt
  GDExtensionVariantPtr r_return, GDExtensionCallError *r_error){
     print_error("_c_instance_call");
     auto name = StringName::new_static(((void**)p_method)[0]);
-    auto _ready = c_string_to_string_name("_ready");
-    auto _enter_tree = c_string_to_string_name("_enter_tree");
-    auto set_visible = c_string_to_string_name("visible");
-    auto _has_point = c_string_to_string_name("_has_point");
     r_error->error = GDExtensionCallErrorType::GDEXTENSION_CALL_ERROR_INVALID_METHOD;
-    if(((InstanceData*)p_self)->is_placeholder && (name == _ready || name == _enter_tree)){
+    if(((InstanceData*)p_self)->is_placeholder){
         return;
     }
     auto gil_state = PyGILState_Ensure();
