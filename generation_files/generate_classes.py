@@ -1933,6 +1933,8 @@ def generate_str_method(class_):
     return res
 
 
+def generate_len():
+    return  f"{INDENT}def __len__(self):return self.size()\n"
 def generate_special_methods(class_):
     res = ""
     if class_["name"] == "Dictionary":
@@ -1940,6 +1942,9 @@ def generate_special_methods(class_):
 
     if "array" in class_["name"].lower():
         res += generate_special_methods_array(class_)
+
+    if "array" in class_["name"].lower() or class_["name"] == "Dictionary":
+        res += generate_len()
 
     if class_["name"] in ("Vector3", "Vector2"):
         res += generate_vector_methods()

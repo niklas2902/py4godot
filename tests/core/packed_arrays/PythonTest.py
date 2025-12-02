@@ -27,3 +27,7 @@ class PythonTest(unittest.TestCase):
 		pa.get_memory_view()[0] = 4
 		self.assertEqual(pa.to_list(), [4,2,3])
 		self.assertEqual(list(pa.get_memory_view()), [4,2,3])
+
+	def test_len(self):
+		pa = PackedByteArray.from_list([1, 2, 3])
+		self.assertEqual(len(pa), 3)
