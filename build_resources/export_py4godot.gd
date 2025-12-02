@@ -52,7 +52,7 @@ func _copy_py_files(src_dir: String, dst_base: String):
 				if not name.begins_with(".") and name != "addons":
 					_copy_py_files(full_src, dst_base)
 			elif name.ends_with(".py"):
-			    _copy_file(full_src,
+				_copy_file(full_src,
 				dst_base + "/" + full_src.replace( ProjectSettings.globalize_path("res://"), ""))
 
 		name = dir.get_next()
