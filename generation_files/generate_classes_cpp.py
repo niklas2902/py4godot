@@ -925,7 +925,6 @@ def free_variants(mMethod):
             res = generate_newline(res)
             res += f"{INDENT * 3}functions::get_variant_destroy()(&variant_{pythonize_name(argument['name'])}->native_ptr);"
             res = generate_newline(res)
-            res += f"{INDENT*3}Py_DECREF({pythonize_name(argument['name'])});"
             res +=f"{INDENT*2}}}"
             res = generate_newline(res)
     return res
