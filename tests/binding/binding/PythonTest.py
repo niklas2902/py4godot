@@ -1,3 +1,4 @@
+import random
 import unittest
 
 from py4godot.classes.Node3D import Node3D
@@ -44,7 +45,7 @@ class PythonTest(unittest.TestCase):
 			self.test_object.call("variant_test_function", [])
 		self.assertEqual(
 			str(cm.exception),
-            "Unsupported type in varargs: list. Supported types are: Godot types (Vector3, Vector2, Array, Object, ...) and built-in types int, float, and bool."
+			"Unsupported type in varargs: list. Supported types are: Godot types (Vector3, Vector2, Array, Object, ...) and built-in types int, float, and bool."
 		)
 
 	def test_array_add(self):
@@ -78,6 +79,12 @@ class PythonTest(unittest.TestCase):
 
 	def test_lerp(self):
 		self.assertEqual(lerp(1, 3, 0.5), 2)
+
+	def test_set(self): # To test for https://github.com/niklas2902/py4godot/issues/199
+		for i in range(1000):
+			random_val = random.random()
+			self.test_object.set("test_float", random_val)
+			self.assertAlmostEqual(self.test_object.get("test_float"), random_val, places=2)
 
 
 

@@ -37,6 +37,7 @@ class TestRunner(Node3D):
 		suite.addTest(PythonTest("test_basis_mult_vector3", test_object=test_object))
 		suite.addTest(PythonTest("test_basis_equals_string", test_object=test_object))
 		suite.addTest(PythonTest("test_lerp", test_object=test_object))
+		suite.addTest(PythonTest("test_set", test_object=test_object))
 		res = unittest.TextTestRunner(stream=PrintStream()).run(suite)
 		if len(res.failures) == 0:
 			self.get_tree().quit(0)

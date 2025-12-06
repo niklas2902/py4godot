@@ -8,6 +8,7 @@ from py4godot.signals import signal, SignalArg
 class TestObject(Node3D):
 	custom_signal_no_args = signal()
 	custom_signal_with_args = signal([SignalArg("test_arg", int)])
+	test_float:float = 0.1
 	def __init__(self) -> None:
 		super().__init__()
 		self.is_visible_called = False
@@ -38,7 +39,7 @@ class TestObject(Node3D):
 
 	def get_meta_object(self) -> object:
 		return self.get_meta("is_test_object")
-	
+
 	def get_text_edit_text(self):
 		return self.get_node("%TextEdit").get_text()
 
