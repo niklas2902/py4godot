@@ -12,13 +12,13 @@ GDExtensionVariantType type_,
 StringName& name,
 StringName& class_name,
 uint32_t hint,
-String& hint_string,
+char* hint_string,
 uint32_t usage
 ){
     std::shared_ptr<CPPPropertyDescription> res = std::make_shared<CPPPropertyDescription>();
     res -> name = StringName(name);
     res -> class_name = StringName::new0();
-    res -> hint_string = String(hint_string);
+    res -> hint_string = c_string_to_string(hint_string);
     res -> hint = hint;
     res -> usage = usage;
     res -> type_ = type_;

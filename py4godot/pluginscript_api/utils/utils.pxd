@@ -51,7 +51,7 @@ cdef extern from "py4godot/pluginscript_api/utils/property_description_utils.h":
     bridge.StringName name,
     bridge.StringName class_name,
     uint32_t hint,
-    bridge.String hint_string,
+    char* hint_string,
     uint32_t usage
 )
 

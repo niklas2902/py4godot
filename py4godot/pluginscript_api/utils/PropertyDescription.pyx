@@ -13,14 +13,14 @@ cdef class PropertyDescription:
         self.name = name
         self.bname = self.name.encode("utf-8")
         self.cname = self.bname
+        self.bhint_string = hint.get_string().encode("utf-8")
+        self.chint_string = <char*>self.bhint_string
         self.gd_name = py_c_string_to_string_name(self.cname)
         self.gd_name.shouldBeDeleted=False
         self.class_name = py_string_to_string_name("")#TODO minimize
         self.class_name.shouldBeDeleted = False
         self.type_ = get_variant_type(type_)
         self.hint = hint.get_hint()
-        self.hint_string = py_c_string_to_string(hint.get_string().encode("utf-8"))
-        self.hint_string.shouldBeDeleted = False
         self.usage = usage
         self.default_value = convert_val(default_value)
 
@@ -35,7 +35,7 @@ cdef class PropertyDescription:
                                 extract_ptr_from_StringNameWrapper(self.gd_name._ptr).get()[0],
                                 extract_ptr_from_StringNameWrapper(self.class_name._ptr).get()[0],
                                 self.hint,
-                                extract_ptr_from_StringWrapper(self.hint_string._ptr).get()[0],
+                                self.chint_string,
                                 self.usage)
 
 
