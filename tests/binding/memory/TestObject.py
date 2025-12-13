@@ -1,4 +1,6 @@
 from py4godot.classes import gdclass
+from py4godot.classes.PhysicsRayQueryParameters3D import PhysicsRayQueryParameters3D
+from py4godot.classes.PhysicsServer3D import PhysicsServer3D
 from py4godot.classes.Image import Image
 from py4godot.classes.Node3D import Node3D
 from py4godot.classes.PhysicsDirectSpaceState3D import PhysicsDirectSpaceState3D
@@ -31,6 +33,18 @@ class TestObject(Node3D):
         parameter.collision_mask = 0xFFFFFFFF
         space_state.intersect_shape(parameter, 1)
 
+    def do_ray_query(self) -> None:
+        target = Vector3.new0()
+        ds = PhysicsServer3D.instance().space_get_direct_state(self.get_world_3d().get_space())
+        parameters = PhysicsRayQueryParameters3D.create(
+            target,
+            target,
+            0xffffffff,
+            Array.from_list([])
+        )
+
+        ds.intersect_ray(parameters)
+
 
     def _process(self, delta:'float'   ) -> None:
         self.current_time += delta
@@ -49,5 +63,6 @@ class TestObject(Node3D):
             my_array.push_back(data)
 
             self.do_sphere_cast()
+            self.do_ray_query()
 
         gc.collect() #making sure, that everything is cleaned up for being able to get data

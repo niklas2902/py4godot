@@ -899,13 +899,6 @@ def generate_py_method_body(class_, method):
     result += free_variants(method)
     result = generate_newline(result)
     if ("return_value" in method.keys() or "return_type" in method.keys()):
-        if ("return_value" in method.keys()):
-            ret_val = ReturnType("_ret", method['return_value']['type'])
-        else:
-            ret_val = ReturnType("_ret", method['return_type'])
-        if is_refcounted(find_class(ret_val.type)):
-            result = generate_newline(result)
-            result += f"{INDENT*2}_ret.already_deleted = true;"
         result = generate_newline(result)
         result += generate_return_py_statement(method)
         result = generate_newline(result)

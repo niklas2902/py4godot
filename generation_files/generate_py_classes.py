@@ -556,15 +556,6 @@ def generate_call_deferred(method):
         res = generate_newline(res)
     return res
 
-def generate_reference(args):
-    res = ""
-    for arg in args:
-        class_ = find_class(arg["type"])
-        if class_ and is_refcounted(class_):
-            res += f"{INDENT*2}{pythonize_name(arg['name'])}.reference()"
-            res = generate_newline(res)
-    return res
-
 def generate_method(class_, mMethod):
     res = ""
     #if should_skip_method(class_, mMethod):
@@ -590,8 +581,6 @@ def generate_method(class_, mMethod):
         res += generate_assert(mMethod["arguments"], mMethod["name"], class_["name"])
         res = generate_newline(res)
         res += generate_variant_checks(mMethod, class_["name"])
-        res = generate_newline(res)
-        res += generate_reference(mMethod["arguments"])
         res = generate_newline(res)
 
     if mMethod["name"] == "call_deferred":
