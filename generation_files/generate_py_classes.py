@@ -1070,7 +1070,10 @@ def generate_member_setter(class_, member):
     body = ""
     body += f"{INDENT * 2}"+generate_type_assertion("value", unenumize_type(untypearray_or_dictionary(member.type_)))
     body = generate_newline(body)
-    body += f"{INDENT * 2}self._ptr.call_with_return({method_ids['normal_methods'][class_]['set_member_'+member.name]}, tuple([value]))"
+    if member.type_ in {"float", "bool", "int"}:
+        body += f"{INDENT * 2}self._ptr.call_with_return({method_ids['normal_methods'][class_]['set_member_'+member.name]}, tuple([value]))"
+    else:
+        body += f"{INDENT * 2}self._ptr.call_with_return({method_ids['normal_methods'][class_]['set_member_'+member.name]}, tuple([value._ptr]))"
     body = generate_newline(body)
     res += body
 
@@ -1958,6 +1961,8 @@ def generate_type_assertion(arg_name,type_):
         res += f"assert isinstance({arg_name}, (str, NodePath)), '{arg_name} must be str or NodePath'"
     elif type_ in ("bool",):
         res += f"assert isinstance({arg_name}, bool), '{arg_name} must be bool'"
+    elif "typedarray" in type_.lower():
+        res += f"assert isinstance({arg_name}, Array), '{arg_name} must be Array'"
     elif type_ in builtin_classes - {"int", "float", "bool"}:
         res += f"assert isinstance({arg_name}, {type_}), '{arg_name} must be {type_}'"
     elif type_ == "Variant":
