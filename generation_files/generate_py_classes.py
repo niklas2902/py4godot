@@ -348,7 +348,7 @@ def generate_return_statement(method_):
             ret_val = ReturnType("_ret", method_['return_type'])
         if ret_val.type == "String":
             result = f"{INDENT * 2}return utils.gd_string_to_py_string(_ret)"
-        if ret_val.type == "StringName":
+        elif ret_val.type == "StringName":
             result = f"{INDENT * 2}return str(_ret)"
         elif ret_val.type == "Variant":
             result = f"{INDENT * 2}return _ret"
@@ -1211,7 +1211,10 @@ def generate_property(property, classname):
         else:
             result += f"{INDENT}def {pythonize_name(property['name'])}(self,  value:'{import_type(objectify_type(unnodepath(unstringname(unvariant(unstring(untypearray_or_dictionary(simplify_type(property['type']))))))), classname)}'):"
         result = generate_newline(result)
-        result += f"{INDENT * 2}self.{pythonize_name(property['setter'])}(value)"
+        if "index" in property.keys():
+            result += f"{INDENT * 2}self.{pythonize_name(property['setter'])}({property['index']}, value)" #TODO: are there more cases like this?
+        else:
+            result += f"{INDENT * 2}self.{pythonize_name(property['setter'])}(value)"
         result = generate_newline(result)
 
     return result
