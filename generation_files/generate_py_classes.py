@@ -348,6 +348,8 @@ def generate_return_statement(method_):
             ret_val = ReturnType("_ret", method_['return_type'])
         if ret_val.type == "String":
             result = f"{INDENT * 2}return utils.gd_string_to_py_string(_ret)"
+        if ret_val.type == "StringName":
+            result = f"{INDENT * 2}return str(_ret)"
         elif ret_val.type == "Variant":
             result = f"{INDENT * 2}return _ret"
         else:
