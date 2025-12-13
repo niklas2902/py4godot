@@ -1070,7 +1070,7 @@ def generate_member_setter(class_, member):
     body = ""
     body += f"{INDENT * 2}"+generate_type_assertion("value", unenumize_type(untypearray_or_dictionary(member.type_)))
     body = generate_newline(body)
-    if member.type_ in {"float", "bool", "int"}:
+    if undouble_type(member.type_) in {"float", "bool", "int"}:
         body += f"{INDENT * 2}self._ptr.call_with_return({method_ids['normal_methods'][class_]['set_member_'+member.name]}, tuple([value]))"
     else:
         body += f"{INDENT * 2}self._ptr.call_with_return({method_ids['normal_methods'][class_]['set_member_'+member.name]}, tuple([value._ptr]))"
