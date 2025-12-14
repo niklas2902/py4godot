@@ -50,6 +50,10 @@ class GDSignal(Signal):
     def __init__(self, *args):
         super().__init__()
     def connect(self, object function , int flags =0):
+        if isinstance(function, Callable):
+            super().connect(function)
+            return
+
         cdef str function_name = function.__name__
         cdef object parent = (function.__self__ if hasattr(function, '__self__') else None)
         cdef bytes b_function_name = function_name.encode("utf-8")
@@ -81,6 +85,9 @@ class BuiltinSignal(Signal):
         self.signal_name =  name
 
     def connect(self, object function , int flags =0):
+        if isinstance(function, Callable):
+            super().connect(function)
+            return
         cdef str function_name = function.__name__
         cdef object parent = function.__self__ if hasattr(function, '__self__') else None
         cdef bytes b_function_name = function_name.encode("utf-8")
