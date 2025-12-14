@@ -86,7 +86,7 @@ class BuiltinSignal(Signal):
 
     def connect(self, object function , int flags =0):
         if isinstance(function, Callable):
-            super().connect(function)
+            self.parent().connect(self.signal_name, function)
             return
         cdef str function_name = function.__name__
         cdef object parent = function.__self__ if hasattr(function, '__self__') else None
