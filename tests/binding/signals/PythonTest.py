@@ -1,3 +1,4 @@
+import time
 import unittest
 
 from py4godot.classes.Node3D import Node3D
@@ -47,3 +48,16 @@ class PythonTest(unittest.TestCase):
         godot_object = self.test_object.get_node("%GodotObject")
         val = godot_object.get("val")
         self.assertEqual(val, 1)
+
+    def test_wait_emit(self):
+        self.test_object.check_wait_emit()
+        self.assertFalse(self.test_object.custom_signal_wait_emit_called)
+        self.assertFalse(self.test_object.is_visible_wait_emit_called)
+        self.test_object.emit_godot_object_signal()
+        time.sleep(1)
+        self.assertTrue(self.test_object.custom_signal_wait_emit_called)
+        self.assertFalse(self.test_object.is_visible_wait_emit_called)
+        self.test_object.visible = not self.test_object.visible
+        time.sleep(1)
+        self.assertTrue(self.test_object.custom_signal_wait_emit_called)
+        self.assertTrue(self.test_object.is_visible_wait_emit_called)

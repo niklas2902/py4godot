@@ -12,5 +12,5 @@ class signal_script(Object):
 		super().__init__()
 		self.handled = False
 
-	def handler(self):
+	def handler(self, *args):
 		self.handled = True
