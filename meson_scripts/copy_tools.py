@@ -132,6 +132,7 @@ def copy_tests(platform):
             ("build_resources/dependencies.txt", "dependencies.txt"),
             ("build_resources/install_dependencies.py", "install_dependencies.py"),
             ("build_resources/Python.svg", "Python.svg"),
+            ("build_resources/signal_script.py", "signal_script.py"),
         ]
 
         for src, filename in resources:

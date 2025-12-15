@@ -1,12 +1,23 @@
 # distutils: language=c++
+import asyncio
 import inspect
 from libcpp.memory cimport make_shared
 
 import py4godot.classes.Object as obj
+from py4godot.classes.Node3D import Node3D
+from py4godot.classes.ResourceLoader import ResourceLoader
 from py4godot.classes.core import Callable, Signal
 from py4godot.utils.utils cimport *
 import py4godot.pluginscript_api.utils.annotations as annotations
 from py4godot.pluginscript_api.utils.helpers cimport get_variant_type
+
+
+loop = None
+def set_event_loop(loop_):
+    global loop
+    loop = loop_
+def get_event_loop():
+    return loop
 cdef class SignalArg:
     def __init__(self, name, type_):
         self.name = name
@@ -77,6 +88,19 @@ class GDSignal(Signal):
         super().disconnect(callable)
 
 
+    async def wait_emit(self):
+        o = Node3D.new()
+        script = ResourceLoader.instance().load("res://addons/py4godot/signal_script.py")
+        o.set_script(script)
+        self.connect(o.get_pyscript().handler)
+        await self.signal_check_loop(o)
+        o.queue_free()
+
+    async def signal_check_loop(self, o):
+        while not o.get_pyscript().handled:
+            await asyncio.sleep(0.01)  # Check every 0.01 seconds
+
+
 
 class BuiltinSignal(Signal):
     def __init__(self, parent, name):
@@ -130,6 +154,19 @@ class BuiltinSignal(Signal):
 
     def get_connections(self):
         return self.get_signal_connection_list(self.signal_name)
+
+    async def wait_emit(self):
+        o = Node3D.new()
+        script = ResourceLoader.instance().load("res://addons/py4godot/signal_script.py")
+        o.set_script(script)
+        self.connect(o.get_pyscript().handler)
+        await self.signal_check_loop(o)
+        o.queue_free()
+
+    async def signal_check_loop(self, o):
+        while not o.get_pyscript().handled:
+            await asyncio.sleep(0.01)  # Check every 0.01 seconds
+
 
     def __eq__(self, other):
         proxy_signal = Signal.new2(self.parent(), self.signal_name)

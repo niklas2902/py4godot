@@ -1,7 +1,10 @@
 # distutils: language=c++
+import threading
+
 from py4godot.classes.Object import Object
 from py4godot.classes.core import StringName
 from py4godot.signals import GDSignal
+import py4godot.signals
 from py4godot.classes.core import Dictionary
 from py4godot.wrappers.wrappers cimport create_wrapper_from_Dictionary_ptr
 from py4godot.classes.cpp_bridge cimport Dictionary as BridgeDictionary
@@ -13,8 +16,10 @@ import py4godot.utils.utils as py_utils
 from libcpp.vector cimport vector
 from cpython.unicode cimport PyUnicode_AsUTF8, PyUnicode_Check
 from libcpp.string cimport string
+import asyncio
 
 instantiated_classes = []
+loop = None
 
 cdef api PyObject*  instantiate_class(PyObject* gd_class):
     cdef object class_ = <object>gd_class
@@ -88,3 +93,17 @@ cdef api void create_signals(PyObject* instance, vector[shared_ptr[BridgeDiction
     except Exception as e:
         print_error("Exception happened:", e)
         print_error(traceback.format_exc())
+
+
+cdef api void init_asyncio():
+    global loop
+    loop = asyncio.new_event_loop()
+
+    def run_loop():
+        asyncio.set_event_loop(loop)
+        loop.run_forever()
+
+    loop_thread = threading.Thread(target=run_loop, daemon=True)
+    loop_thread.start()
+    py4godot.signals.set_event_loop(loop)
+    print(f"loop:{loop}")

@@ -75,6 +75,7 @@ if __name__ == "__main__":
     shutil.copy("build_resources/export_py4godot.gd", "example/addons/py4godot/export_py4godot.gd")
     shutil.copy("build_resources/export_py4godot_main.gd", "example/addons/py4godot/export_py4godot_main.gd")
     shutil.copy("build_resources/plugin.cfg", "example/addons/py4godot/plugin.cfg")
+    shutil.copy("build_resources/signal_script.py", "example/addons/py4godot/signal_script.py")
     download_get_pip("example/addons/py4godot")
 
     python_svg_dest = "example/addons/py4godot/"+ "/Python.svg"

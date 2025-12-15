@@ -201,6 +201,15 @@ void init_pluginscript_api(){
         assert(false);
         return;
     }
+    init_asyncio();
+    if (PyErr_Occurred())
+    {
+        PyObject* ptype, * pvalue, * ptraceback;
+        PyErr_Fetch(&ptype, &pvalue, &ptraceback);
+        handle_python_error(ptype, pvalue, ptraceback);
+        assert(false);
+        return;
+    }
 
 
     Variant::init_variant();

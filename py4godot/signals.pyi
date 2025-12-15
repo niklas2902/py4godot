@@ -3,6 +3,12 @@ from typing import Any, List
 
 from py4godot.classes.core import *
 
+def get_event_loop():
+    """
+        Gets the current asyncio loop instance.
+    """
+    pass
+
 
 class SignalArg:
     """
@@ -97,6 +103,24 @@ class GDSignal(Signal):
         pass
 
 
+    def wait_emit(self) -> None:
+        """This can be used similarily to the Godot await to wait for a signal to then procede with the program flow
+            Example:
+                ```python
+
+                from py4godot.signals import get_event_loop
+                import asyncio
+                ...
+                    def start_event_loop_thread(self):
+                        asyncio.run_coroutine_threadsafe(self.wait_for_signal(), get_event_loop())
+
+                    async def wait_for_signal(self):
+                        print("waiting for signal visibility_changed")
+                        await self.visibility_changed.wait_emit()
+                        print("executed after signal visibility_changed")
+                ```
+        """
+
 class BuiltinSignal(Signal):
     """
     Represents a built-in Godot signal associated with a specific object.
@@ -136,3 +160,21 @@ class BuiltinSignal(Signal):
             function (Any): The function or callable to disconnect from this signal.
         """
         pass
+
+    def wait_emit(self) -> None:
+        """This can be used similarily to the Godot await to wait for a signal to then procede with the program flow
+            Example:
+                ```python
+
+                from py4godot.signals import get_event_loop
+                import asyncio
+                ...
+                    def start_event_loop_thread(self):
+                        asyncio.run_coroutine_threadsafe(self.wait_for_signal(), get_event_loop())
+
+                    async def wait_for_signal(self):
+                        print("waiting for signal visibility_changed")
+                        await self.visibility_changed.wait_emit()
+                        print("executed after signal visibility_changed")
+                ```
+        """
