@@ -7,6 +7,7 @@ import py4godot.classes.Object as obj
 from py4godot.classes.Object import Object
 from py4godot.classes.ResourceLoader import ResourceLoader
 from py4godot.classes.core import Callable, Signal
+from py4godot.functions import weakref
 from py4godot.utils.utils cimport *
 import py4godot.pluginscript_api.utils.annotations as annotations
 from py4godot.pluginscript_api.utils.helpers cimport get_variant_type
@@ -80,6 +81,7 @@ class GDSignal(Signal):
             parent.set_script(script)
             parent.get_pyscript().lambda_ = function
             callable = Callable.new2(parent, "lambda_handler")
+            function.gd_parent = weakref(parent.get_pyscript())
         callables.append(callable)
         callables.append(gd_function_name)
         super().connect(callable)
@@ -88,6 +90,9 @@ class GDSignal(Signal):
     def disconnect(self, object function ):
         cdef str function_name = function.__name__
         cdef object parent =  (function.__self__ if hasattr(function, '__self__') else None)
+        if not parent:
+            function.gd_parent.destroy()
+            return
         cdef bytes b_function_name = function_name.encode("utf-8")
         cdef char* c_function_name = b_function_name
         # Don't use StringName::new2 here. Somehow it results in an empty string
@@ -134,6 +139,7 @@ class BuiltinSignal(Signal):
             parent.set_script(script)
             parent.get_pyscript().lambda_ = function
             callable = Callable.new2(parent, "lambda_handler")
+            function.gd_parent = weakref(parent.get_pyscript())
 
         self.parent().connect(self.signal_name, callable)
 
@@ -146,7 +152,9 @@ class BuiltinSignal(Signal):
     def disconnect(self, object function ):
         cdef str function_name = function.__name__
         cdef object parent = function.__self__ if hasattr(function, '__self__') else None
-        parent.get_class()
+        if not parent:
+            function.gd_parent.destroy()
+            return
         cdef bytes b_function_name = function_name.encode("utf-8")
         cdef char* c_function_name = b_function_name
         # Don't use StringName::new2 here. Somehow it results in an empty string

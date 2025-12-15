@@ -249,6 +249,7 @@ try:
         shutil.copy("build_resources/export_py4godot.gd", "build/py4godot/export_py4godot.gd")
         shutil.copy("build_resources/export_py4godot_main.gd", "build/py4godot/export_py4godot_main.gd")
         shutil.copy("build_resources/plugin.cfg", "build/py4godot/plugin.cfg")
+        shutil.copy("build_resources/signal_script.py", "build/py4godot/signal_script.py")
         with open(f"build/py4godot/{python_ver}-{args.target_platform}/.gdignore", "w"):
             pass
         download_get_pip("build/py4godot")
