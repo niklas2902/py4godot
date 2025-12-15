@@ -4,7 +4,7 @@ import inspect
 from libcpp.memory cimport make_shared
 
 import py4godot.classes.Object as obj
-from py4godot.classes.Node3D import Node3D
+from py4godot.classes.Object import Object
 from py4godot.classes.ResourceLoader import ResourceLoader
 from py4godot.classes.core import Callable, Signal
 from py4godot.utils.utils cimport *
@@ -89,12 +89,12 @@ class GDSignal(Signal):
 
 
     async def wait_emit(self):
-        o = Node3D.new()
+        o = Object.new()
         script = ResourceLoader.instance().load("res://addons/py4godot/signal_script.py")
         o.set_script(script)
         self.connect(o.get_pyscript().handler)
         await self.signal_check_loop(o)
-        o.queue_free()
+        o.destroy()
 
     async def signal_check_loop(self, o):
         while not o.get_pyscript().handled:
@@ -156,12 +156,12 @@ class BuiltinSignal(Signal):
         return self.get_signal_connection_list(self.signal_name)
 
     async def wait_emit(self):
-        o = Node3D.new()
+        o = Object.new()
         script = ResourceLoader.instance().load("res://addons/py4godot/signal_script.py")
         o.set_script(script)
         self.connect(o.get_pyscript().handler)
         await self.signal_check_loop(o)
-        o.queue_free()
+        o.destroy()
 
     async def signal_check_loop(self, o):
         while not o.get_pyscript().handled:

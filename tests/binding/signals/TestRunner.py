@@ -27,6 +27,7 @@ class TestRunner(Node3D):
 		suite.addTest(PythonTest("test_custom_signal_no_args", test_object=test_object))
 		suite.addTest(PythonTest("test_custom_signal_with_args", test_object=test_object))
 		suite.addTest(PythonTest("test_custom_signal_godot_object", test_object=test_object))
+		suite.addTest(PythonTest("test_wait_emit", test_object=test_object))
 		res = unittest.TextTestRunner(stream=PrintStream()).run(suite)
 		if len(res.failures) == 0:
 			self.get_tree().quit(0)

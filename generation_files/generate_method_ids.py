@@ -241,6 +241,10 @@ def generate_method_ids(classes):
             normal_methods[cls["name"]]["get_memoryview"] = id
             id += 1
 
+        if cls["name"] in ("Object",):
+            normal_methods[cls["name"]]["destroy"] = id
+            id += 1
+
         static_id = 0
         static_methods_list = collect_methods(cls, True)
         static_methods[cls["name"]] = dict()

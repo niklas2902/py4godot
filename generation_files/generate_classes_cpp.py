@@ -1483,6 +1483,11 @@ def generate_switch_methods(class_):
     if not "Object" in class_["name"] and is_refcounted(class_):
         res += f"{INDENT*3}case {method_ids['normal_methods'][class_['name']]['py_destroy']}: py_destroy_ref();return Py_None;"
         res = generate_newline(res)
+
+    if class_["name"] == "Object":
+        method_id = method_ids['normal_methods'][class_['name']]['destroy']
+        res += f"{INDENT * 3}case {method_id}:Object_py_destroy();return Py_None;"
+        res = generate_newline(res)
     res += f"{INDENT*2}}}"
     res = generate_newline(res)
     res += f"{INDENT*2}return Py_None;"

@@ -889,7 +889,7 @@ def generate_destroy_object_method():
     res = generate_newline(res)
     res += f"{INDENT}def destroy(self):"
     res = generate_newline(res)
-    res += f"{INDENT*2}self.Object_internal_class_ptr.get().destroy()"
+    res += f"{INDENT*2}self._ptr.call_with_return({method_ids['normal_methods'][class_["name"]]['destroy']}, tuple())"
     res = generate_newline(res)
     return res
 
