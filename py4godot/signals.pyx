@@ -71,7 +71,15 @@ class GDSignal(Signal):
         cdef char* c_function_name = b_function_name
         # Don't use StringName::new2 here. Somehow it results in an empty string
         cdef object gd_function_name = py_c_string_to_string_name(c_function_name)
-        cdef object callable = Callable.new2(parent, gd_function_name )
+        cdef object callable
+        if parent:
+            callable = Callable.new2(parent, gd_function_name )
+        else:
+            parent = Object.new()
+            script = ResourceLoader.instance().load("res://addons/py4godot/signal_script.py")
+            parent.set_script(script)
+            parent.get_pyscript().lambda_ = function
+            callable = Callable.new2(parent, "lambda_handler")
         callables.append(callable)
         callables.append(gd_function_name)
         super().connect(callable)
@@ -117,7 +125,16 @@ class BuiltinSignal(Signal):
         cdef bytes b_function_name = function_name.encode("utf-8")
         cdef char* c_function_name = b_function_name
         cdef object gd_function_name = py_c_string_to_string_name(c_function_name)
-        cdef object callable = Callable.new2(parent, gd_function_name )
+        cdef object callable
+        if parent:
+            callable = Callable.new2(parent, gd_function_name )
+        else:
+            parent = Object.new()
+            script = ResourceLoader.instance().load("res://addons/py4godot/signal_script.py")
+            parent.set_script(script)
+            parent.get_pyscript().lambda_ = function
+            callable = Callable.new2(parent, "lambda_handler")
+
         self.parent().connect(self.signal_name, callable)
 
     def parent(self):

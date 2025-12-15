@@ -7,10 +7,15 @@ from py4godot.classes.Object import Object
 
 @gdclass
 class signal_script(Object):
-	
-	def __init__(self):
-		super().__init__()
-		self.handled = False
 
-	def handler(self, *args):
-		self.handled = True
+    def __init__(self):
+        super().__init__()
+        self.handled = False
+        self.lambda_ = None
+
+    def handler(self, *args):
+        self.handled = True
+
+    def lambda_handler(self, *args):
+        self.lambda_(*args)
+        self.destroy()

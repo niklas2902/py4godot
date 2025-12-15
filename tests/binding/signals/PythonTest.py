@@ -62,3 +62,13 @@ class PythonTest(unittest.TestCase):
 		time.sleep(0.5)
 		self.assertTrue(self.test_object.is_visible_wait_emit_called)
 		self.assertTrue(self.test_object.custom_signal_wait_emit_called)
+
+	def test_lambdas(self):
+		self.test_object.custom_signal_godot_object.connect(lambda val: self.assertEqual(val, 5))
+		l = [False]
+		def set_visibility(val):
+			l[0] = True
+		self.test_object.visibility_changed.connect(lambda: set_visibility(True))
+		self.test_object.visible = not self.test_object.visible
+		self.test_object.custom_signal_godot_object.emit(5)
+		self.assertTrue(l[0])
