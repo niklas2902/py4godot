@@ -221,6 +221,38 @@ def generate_newline(str_):
     return str_ + "\n"
 
 
+class LineBuilder:
+    """Efficient string builder using list accumulation.
+    
+    This is more efficient than repeated string concatenation which creates
+    many intermediate string objects (O(n²) behavior).
+    
+    Usage:
+        builder = LineBuilder()
+        builder.add("line 1")
+        builder.add("line 2")
+        result = builder.build()
+    """
+    def __init__(self):
+        self.lines = []
+    
+    def add(self, line):
+        """Add a line (newline will be appended automatically)."""
+        self.lines.append(line)
+    
+    def extend(self, text):
+        """Add multi-line text (preserves existing newlines)."""
+        if text:
+            # Remove trailing newline to avoid double newlines
+            text = text.rstrip('\n')
+            if text:
+                self.lines.extend(text.split('\n'))
+    
+    def build(self):
+        """Build the final string."""
+        return '\n'.join(self.lines) + '\n' if self.lines else ''
+
+
 def generate_return_value(classname, method_):
     result = ""
     if "return_value" in method_.keys() or "return_type" in method_.keys():

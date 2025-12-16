@@ -234,30 +234,25 @@ def generate_buffer_for_constructor( args):
     return res
 
 def generate_constructors(class_):
-    res = ""
     if "constructors" not in class_.keys():
-        return res
+        return ""
+    
+    builder = LineBuilder()
     for constructor in class_["constructors"]:
-        res += f"{INDENT}@staticmethod"
-        res = generate_newline(res)
-        res += f"{INDENT}def new{constructor['index']}({generate_constructor_args(class_, constructor)}):"
-        res = generate_newline(res)
+        builder.add(f"{INDENT}@staticmethod")
+        builder.add(f"{INDENT}def new{constructor['index']}({generate_constructor_args(class_, constructor)}):")
         if "arguments" in constructor:
-            res += generate_assert(constructor["arguments"], "", class_["name"])
-            res = generate_newline(res)
-        res += f"{INDENT * 2}_class = {class_['name']}.construct_without_init()"
-        res = generate_newline(res)
+            builder.extend(generate_assert(constructor["arguments"], "", class_["name"]))
+        builder.add(f"{INDENT * 2}_class = {class_['name']}.construct_without_init()")
         if "arguments" in constructor:
-            res += generate_string_name_or_node_path_args(constructor["arguments"])
-            res = generate_newline(res)
-            res += generate_buffer_for_constructor(constructor["arguments"])
+            builder.extend(generate_string_name_or_node_path_args(constructor["arguments"]))
+            builder.extend(generate_buffer_for_constructor(constructor["arguments"]))
 
-        res += f"{INDENT*2}_class._ptr = constructor({classes_dict[class_['name']]}, {constructor['index']}, tuple([{generate_constructor_call_args(class_, constructor)}]))"
-        res = generate_newline(res)
-        res += f"{INDENT * 2}return _class"
-        res = generate_newline(res)
+        builder.add(f"{INDENT*2}_class._ptr = constructor({classes_dict[class_['name']]}, {constructor['index']}, tuple([{generate_constructor_call_args(class_, constructor)}]))")
+        builder.add(f"{INDENT * 2}return _class")
+        builder.add("")
 
-    return res
+    return builder.build()
 
 
 def generate_class_imports(classes):
@@ -270,6 +265,38 @@ def generate_class_imports(classes):
 
 def generate_newline(str_):
     return str_ + "\n"
+
+
+class LineBuilder:
+    """Efficient string builder using list accumulation.
+    
+    This is more efficient than repeated string concatenation which creates
+    many intermediate string objects (O(n²) behavior).
+    
+    Usage:
+        builder = LineBuilder()
+        builder.add("line 1")
+        builder.add("line 2")
+        result = builder.build()
+    """
+    def __init__(self):
+        self.lines = []
+    
+    def add(self, line):
+        """Add a line (newline will be appended automatically)."""
+        self.lines.append(line)
+    
+    def extend(self, text):
+        """Add multi-line text (preserves existing newlines)."""
+        if text:
+            # Remove trailing newline to avoid double newlines
+            text = text.rstrip('\n')
+            if text:
+                self.lines.extend(text.split('\n'))
+    
+    def build(self):
+        """Build the final string."""
+        return '\n'.join(self.lines) + '\n' if self.lines else ''
 
 
 def generate_return_value(classname, method_):

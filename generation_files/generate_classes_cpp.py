@@ -287,49 +287,36 @@ def objectify_type(type_):
 
 
 def generate_constructors(class_):
-    res = ""
     if "constructors" not in class_.keys():
-        return res
+        return ""
 
-    res += generate_copy_constructor(class_)
-    res = generate_newline(res)
-    res += generate_copy_operator(class_)
+    builder = LineBuilder()
+    builder.extend(generate_copy_constructor(class_))
+    builder.extend(generate_copy_operator(class_))
 
     for constructor in class_["constructors"]:
-        res += f"{INDENT}{class_['name']} {class_['name']}::new{constructor['index']}({generate_constructor_args(constructor)})" + "{"
-        res = generate_newline(res)
-        res += f"{INDENT * 2}{class_['name']} _class{{}};"
-        res = generate_newline(res)
-        res += f"{INDENT * 2}_class.shouldBeDeleted = true;"
-        res = generate_newline(res)
-        res += f"{INDENT * 2}_class.variant_type = {generate_variant_type(class_['name'])};"
-        res = generate_newline(res)
-        res += f"{INDENT * 2}GDExtensionPtrConstructor constructor = functions::get_variant_get_ptr_constructor()(_class.variant_type, {constructor['index']});"
-        res = generate_newline(res)
+        builder.add(f"{INDENT}{class_['name']} {class_['name']}::new{constructor['index']}({generate_constructor_args(constructor)})" + "{")
+        builder.add(f"{INDENT * 2}{class_['name']} _class{{}};")
+        builder.add(f"{INDENT * 2}_class.shouldBeDeleted = true;")
+        builder.add(f"{INDENT * 2}_class.variant_type = {generate_variant_type(class_['name'])};")
+        builder.add(f"{INDENT * 2}GDExtensionPtrConstructor constructor = functions::get_variant_get_ptr_constructor()(_class.variant_type, {constructor['index']});")
         # TODO:improve - fill with args
-        res += generate_constructor_args_array(constructor)
-        res = generate_newline(res)
+        builder.extend(generate_constructor_args_array(constructor))
         if class_["name"] in cpp_core_structs:
-            res += f"{INDENT * 2}constructor(&_class.native_struct,_args);"
+            builder.add(f"{INDENT * 2}constructor(&_class.native_struct,_args);")
         else:
-            res += f"{INDENT * 2}constructor(&_class.godot_owner,_args);"
-        res = generate_newline(res)
-        res += f"{INDENT * 2}return _class;"
-        res = generate_newline(res)
-        res += "}"
-        res = generate_newline(res)
+            builder.add(f"{INDENT * 2}constructor(&_class.godot_owner,_args);")
+        builder.add(f"{INDENT * 2}return _class;")
+        builder.add("}")
+        builder.add("")
 
-        res += f"{INDENT}std::shared_ptr<{class_['name']}> {class_['name']}::py_new{constructor['index']}({generate_constructor_args(constructor, True)})" + "{"
-        res = generate_newline(res)
-        res += f"{INDENT * 2}auto _class = {class_['name']}::new{constructor['index']}({call_constructor_args(constructor)});"
-        res = generate_newline(res)
-        res += f"{INDENT * 2}_class.shouldBeDeleted = false;"
-        res = generate_newline(res)
-        res += f"{INDENT * 2}return {class_['name']}::make_shared_ptr(_class);"
-        res = generate_newline(res)
-        res += "}"
-        res = generate_newline(res)
-    return res
+        builder.add(f"{INDENT}std::shared_ptr<{class_['name']}> {class_['name']}::py_new{constructor['index']}({generate_constructor_args(constructor, True)})" + "{")
+        builder.add(f"{INDENT * 2}auto _class = {class_['name']}::new{constructor['index']}({call_constructor_args(constructor)});")
+        builder.add(f"{INDENT * 2}_class.shouldBeDeleted = false;")
+        builder.add(f"{INDENT * 2}return {class_['name']}::make_shared_ptr(_class);")
+        builder.add("}")
+        builder.add("")
+    return builder.build()
 
 def get_size(classname):
     if classname in builtin_classes:
@@ -471,6 +458,38 @@ def generate_header_statements():
 
 def generate_newline(str_):
     return str_ + "\n"
+
+
+class LineBuilder:
+    """Efficient string builder using list accumulation.
+    
+    This is more efficient than repeated string concatenation which creates
+    many intermediate string objects (O(n²) behavior).
+    
+    Usage:
+        builder = LineBuilder()
+        builder.add("line 1")
+        builder.add("line 2")
+        result = builder.build()
+    """
+    def __init__(self):
+        self.lines = []
+    
+    def add(self, line):
+        """Add a line (newline will be appended automatically)."""
+        self.lines.append(line)
+    
+    def extend(self, text):
+        """Add multi-line text (preserves existing newlines)."""
+        if text:
+            # Remove trailing newline to avoid double newlines
+            text = text.rstrip('\n')
+            if text:
+                self.lines.extend(text.split('\n'))
+    
+    def build(self):
+        """Build the final string."""
+        return '\n'.join(self.lines) + '\n' if self.lines else ''
 
 
 def generate_return_value(method_, classname):
@@ -1074,39 +1093,33 @@ def generate_callback(class_, method):
 
 def generate_method_body_standard(class_, method):
     number_arguments = 0
-    result = ""
     if 'arguments' in method.keys():
         number_arguments = len(method['arguments'])
 
-    result += generate_args_array(method)
-    result = generate_newline(result)
-    result += generate_return_value(method, class_["name"])
-    result = generate_newline(result)
-
-    result = generate_newline(result)
-    result += generate_method_bind(class_, method)
-    result = generate_newline(result)
-    result += generate_operators(class_)
-    result = generate_newline(result)
+    builder = LineBuilder()
+    builder.extend(generate_args_array(method))
+    builder.extend(generate_return_value(method, class_["name"]))
+    builder.add("")
+    builder.extend(generate_method_bind(class_, method))
+    builder.extend(generate_operators(class_))
 
     if (class_['name'] in builtin_classes or class_["name"] in typed_arrays_names):
         if class_["name"] in cpp_core_structs:
             if is_static(method):
-                result += f"{INDENT * 2}method_to_call(nullptr, {get_first_args_native(method)}, {address_ret(method)}, {get_args_count(method)});"
+                builder.add(f"{INDENT * 2}method_to_call(nullptr, {get_first_args_native(method)}, {address_ret(method)}, {get_args_count(method)});")
             else:
-                result += f"{INDENT * 2}method_to_call(&native_struct, {get_first_args_native(method)}, {address_ret(method)}, {get_args_count(method)});"
+                builder.add(f"{INDENT * 2}method_to_call(&native_struct, {get_first_args_native(method)}, {address_ret(method)}, {get_args_count(method)});")
         else:
-            result += f"{INDENT * 2}method_to_call({get_godot_owner_core(method)}, {get_first_args_native(method)}, {address_ret(method)}, {get_args_count(method)});"
-        result = generate_newline(result)
+            builder.add(f"{INDENT * 2}method_to_call({get_godot_owner_core(method)}, {get_first_args_native(method)}, {address_ret(method)}, {get_args_count(method)});")
     else:
-        result += generate_method_call_object(method)
+        builder.extend(generate_method_call_object(method))
 
     if ("return_value" in method.keys() or "return_type" in method.keys()):
-        result = generate_newline(result)
-        result += generate_callback(class_, method)
-        result = generate_newline(result)
-        result += generate_return_statement(method)
-    return result
+        builder.add("")
+        builder.extend(generate_callback(class_, method))
+        builder.add("")
+        builder.extend(generate_return_statement(method))
+    return builder.build()
 
 
 def get_argument_count(method):
