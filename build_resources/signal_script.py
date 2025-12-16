@@ -18,3 +18,6 @@ class signal_script(Object):
 
     def lambda_handler(self, *args):
         self.lambda_(*args)
+
+    def free_signal(self, * args):
+        self.destroy()

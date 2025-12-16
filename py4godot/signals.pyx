@@ -82,6 +82,7 @@ class GDSignal(Signal):
             parent.get_pyscript().lambda_ = function
             callable = Callable.new2(parent, "lambda_handler")
             function.gd_parent = weakref(parent.get_pyscript())
+            self.get_object().tree_exited.connect(parent.get_pyscript().free_signal)
         callables.append(callable)
         callables.append(gd_function_name)
         super().connect(callable)
@@ -140,6 +141,7 @@ class BuiltinSignal(Signal):
             parent.get_pyscript().lambda_ = function
             callable = Callable.new2(parent, "lambda_handler")
             function.gd_parent = weakref(parent.get_pyscript())
+            self.parent().tree_exited.connect(parent.get_pyscript().free_signal)
 
         self.parent().connect(self.signal_name, callable)
 
