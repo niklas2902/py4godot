@@ -9,6 +9,7 @@ from py4godot.classes.AStar2D import AStar2D
 from py4godot.classes.AStar3D import AStar3D
 from py4godot.classes.AStarGrid2D import AStarGrid2D
 from py4godot.classes.AcceptDialog import AcceptDialog
+from py4godot.classes.AimModifier3D import AimModifier3D
 from py4godot.classes.AnimatableBody2D import AnimatableBody2D
 from py4godot.classes.AnimatableBody3D import AnimatableBody3D
 from py4godot.classes.AnimatedSprite2D import AnimatedSprite2D
@@ -110,6 +111,7 @@ from py4godot.classes.BaseMaterial3D import BaseMaterial3D
 from py4godot.classes.BitMap import BitMap
 from py4godot.classes.Bone2D import Bone2D
 from py4godot.classes.BoneAttachment3D import BoneAttachment3D
+from py4godot.classes.BoneConstraint3D import BoneConstraint3D
 from py4godot.classes.BoneMap import BoneMap
 from py4godot.classes.BoxContainer import BoxContainer
 from py4godot.classes.BoxMesh import BoxMesh
@@ -181,8 +183,10 @@ from py4godot.classes.ConfigFile import ConfigFile
 from py4godot.classes.ConfirmationDialog import ConfirmationDialog
 from py4godot.classes.Container import Container
 from py4godot.classes.Control import Control
+from py4godot.classes.ConvertTransformModifier3D import ConvertTransformModifier3D
 from py4godot.classes.ConvexPolygonShape2D import ConvexPolygonShape2D
 from py4godot.classes.ConvexPolygonShape3D import ConvexPolygonShape3D
+from py4godot.classes.CopyTransformModifier3D import CopyTransformModifier3D
 from py4godot.classes.Crypto import Crypto
 from py4godot.classes.CryptoKey import CryptoKey
 from py4godot.classes.Cubemap import Cubemap
@@ -194,6 +198,7 @@ from py4godot.classes.CurveTexture import CurveTexture
 from py4godot.classes.CurveXYZTexture import CurveXYZTexture
 from py4godot.classes.CylinderMesh import CylinderMesh
 from py4godot.classes.CylinderShape3D import CylinderShape3D
+from py4godot.classes.DPITexture import DPITexture
 from py4godot.classes.DTLSServer import DTLSServer
 from py4godot.classes.DampedSpringJoint2D import DampedSpringJoint2D
 from py4godot.classes.Decal import Decal
@@ -210,11 +215,13 @@ from py4godot.classes.EditorDebuggerPlugin import EditorDebuggerPlugin
 from py4godot.classes.EditorDebuggerSession import EditorDebuggerSession
 from py4godot.classes.EditorExportPlatform import EditorExportPlatform
 from py4godot.classes.EditorExportPlatformAndroid import EditorExportPlatformAndroid
+from py4godot.classes.EditorExportPlatformAppleEmbedded import EditorExportPlatformAppleEmbedded
 from py4godot.classes.EditorExportPlatformExtension import EditorExportPlatformExtension
 from py4godot.classes.EditorExportPlatformIOS import EditorExportPlatformIOS
 from py4godot.classes.EditorExportPlatformLinuxBSD import EditorExportPlatformLinuxBSD
 from py4godot.classes.EditorExportPlatformMacOS import EditorExportPlatformMacOS
 from py4godot.classes.EditorExportPlatformPC import EditorExportPlatformPC
+from py4godot.classes.EditorExportPlatformVisionOS import EditorExportPlatformVisionOS
 from py4godot.classes.EditorExportPlatformWeb import EditorExportPlatformWeb
 from py4godot.classes.EditorExportPlatformWindows import EditorExportPlatformWindows
 from py4godot.classes.EditorExportPlugin import EditorExportPlugin
@@ -271,6 +278,8 @@ from py4godot.classes.FileSystemDock import FileSystemDock
 from py4godot.classes.FlowContainer import FlowContainer
 from py4godot.classes.FogMaterial import FogMaterial
 from py4godot.classes.FogVolume import FogVolume
+from py4godot.classes.FoldableContainer import FoldableContainer
+from py4godot.classes.FoldableGroup import FoldableGroup
 from py4godot.classes.Font import Font
 from py4godot.classes.FontFile import FontFile
 from py4godot.classes.FontVariation import FontVariation
@@ -394,6 +403,7 @@ from py4godot.classes.LightmapperRD import LightmapperRD
 from py4godot.classes.Line2D import Line2D
 from py4godot.classes.LineEdit import LineEdit
 from py4godot.classes.LinkButton import LinkButton
+from py4godot.classes.Logger import Logger
 from py4godot.classes.LookAtModifier3D import LookAtModifier3D
 from py4godot.classes.MainLoop import MainLoop
 from py4godot.classes.MarginContainer import MarginContainer
@@ -414,6 +424,7 @@ from py4godot.classes.MethodTweener import MethodTweener
 from py4godot.classes.MissingNode import MissingNode
 from py4godot.classes.MissingResource import MissingResource
 from py4godot.classes.MobileVRInterface import MobileVRInterface
+from py4godot.classes.ModifierBoneTarget3D import ModifierBoneTarget3D
 from py4godot.classes.MovieWriter import MovieWriter
 from py4godot.classes.MultiMesh import MultiMesh
 from py4godot.classes.MultiMeshInstance2D import MultiMeshInstance2D
@@ -476,7 +487,10 @@ from py4godot.classes.OpenXRCompositionLayerCylinder import OpenXRCompositionLay
 from py4godot.classes.OpenXRCompositionLayerEquirect import OpenXRCompositionLayerEquirect
 from py4godot.classes.OpenXRCompositionLayerQuad import OpenXRCompositionLayerQuad
 from py4godot.classes.OpenXRDpadBindingModifier import OpenXRDpadBindingModifier
+from py4godot.classes.OpenXRExtensionWrapper import OpenXRExtensionWrapper
 from py4godot.classes.OpenXRExtensionWrapperExtension import OpenXRExtensionWrapperExtension
+from py4godot.classes.OpenXRFutureExtension import OpenXRFutureExtension
+from py4godot.classes.OpenXRFutureResult import OpenXRFutureResult
 from py4godot.classes.OpenXRHand import OpenXRHand
 from py4godot.classes.OpenXRHapticBase import OpenXRHapticBase
 from py4godot.classes.OpenXRHapticVibration import OpenXRHapticVibration
@@ -487,6 +501,9 @@ from py4godot.classes.OpenXRInteractionProfileEditor import OpenXRInteractionPro
 from py4godot.classes.OpenXRInteractionProfileEditorBase import OpenXRInteractionProfileEditorBase
 from py4godot.classes.OpenXRInteractionProfileMetadata import OpenXRInteractionProfileMetadata
 from py4godot.classes.OpenXRInterface import OpenXRInterface
+from py4godot.classes.OpenXRRenderModel import OpenXRRenderModel
+from py4godot.classes.OpenXRRenderModelExtension import OpenXRRenderModelExtension
+from py4godot.classes.OpenXRRenderModelManager import OpenXRRenderModelManager
 from py4godot.classes.OpenXRVisibilityMask import OpenXRVisibilityMask
 from py4godot.classes.OptimizedTranslation import OptimizedTranslation
 from py4godot.classes.OptionButton import OptionButton
@@ -625,6 +642,7 @@ from py4godot.classes.ResourceImporterLayeredTexture import ResourceImporterLaye
 from py4godot.classes.ResourceImporterMP3 import ResourceImporterMP3
 from py4godot.classes.ResourceImporterOBJ import ResourceImporterOBJ
 from py4godot.classes.ResourceImporterOggVorbis import ResourceImporterOggVorbis
+from py4godot.classes.ResourceImporterSVG import ResourceImporterSVG
 from py4godot.classes.ResourceImporterScene import ResourceImporterScene
 from py4godot.classes.ResourceImporterShaderFile import ResourceImporterShaderFile
 from py4godot.classes.ResourceImporterTexture import ResourceImporterTexture
@@ -647,6 +665,7 @@ from py4godot.classes.SceneState import SceneState
 from py4godot.classes.SceneTree import SceneTree
 from py4godot.classes.SceneTreeTimer import SceneTreeTimer
 from py4godot.classes.Script import Script
+from py4godot.classes.ScriptBacktrace import ScriptBacktrace
 from py4godot.classes.ScriptCreateDialog import ScriptCreateDialog
 from py4godot.classes.ScriptEditor import ScriptEditor
 from py4godot.classes.ScriptEditorBase import ScriptEditorBase
@@ -974,6 +993,10 @@ cdef api PyObject* cast_to_astargrid2d(PyObject* other):
     return <PyObject*>o
 cdef api PyObject* cast_to_acceptdialog(PyObject* other):
     cdef object o = AcceptDialog.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_aimmodifier3d(PyObject* other):
+    cdef object o = AimModifier3D.cast_without_reference(<object>other)
     vals.append(o)
     return <PyObject*>o
 cdef api PyObject* cast_to_animatablebody2d(PyObject* other):
@@ -1380,6 +1403,10 @@ cdef api PyObject* cast_to_boneattachment3d(PyObject* other):
     cdef object o = BoneAttachment3D.cast_without_reference(<object>other)
     vals.append(o)
     return <PyObject*>o
+cdef api PyObject* cast_to_boneconstraint3d(PyObject* other):
+    cdef object o = BoneConstraint3D.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
 cdef api PyObject* cast_to_bonemap(PyObject* other):
     cdef object o = BoneMap.cast_without_reference(<object>other)
     vals.append(o)
@@ -1664,12 +1691,20 @@ cdef api PyObject* cast_to_control(PyObject* other):
     cdef object o = Control.cast_without_reference(<object>other)
     vals.append(o)
     return <PyObject*>o
+cdef api PyObject* cast_to_converttransformmodifier3d(PyObject* other):
+    cdef object o = ConvertTransformModifier3D.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
 cdef api PyObject* cast_to_convexpolygonshape2d(PyObject* other):
     cdef object o = ConvexPolygonShape2D.cast_without_reference(<object>other)
     vals.append(o)
     return <PyObject*>o
 cdef api PyObject* cast_to_convexpolygonshape3d(PyObject* other):
     cdef object o = ConvexPolygonShape3D.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_copytransformmodifier3d(PyObject* other):
+    cdef object o = CopyTransformModifier3D.cast_without_reference(<object>other)
     vals.append(o)
     return <PyObject*>o
 cdef api PyObject* cast_to_crypto(PyObject* other):
@@ -1714,6 +1749,10 @@ cdef api PyObject* cast_to_cylindermesh(PyObject* other):
     return <PyObject*>o
 cdef api PyObject* cast_to_cylindershape3d(PyObject* other):
     cdef object o = CylinderShape3D.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_dpitexture(PyObject* other):
+    cdef object o = DPITexture.cast_without_reference(<object>other)
     vals.append(o)
     return <PyObject*>o
 cdef api PyObject* cast_to_dtlsserver(PyObject* other):
@@ -1780,6 +1819,10 @@ cdef api PyObject* cast_to_editorexportplatformandroid(PyObject* other):
     cdef object o = EditorExportPlatformAndroid.cast_without_reference(<object>other)
     vals.append(o)
     return <PyObject*>o
+cdef api PyObject* cast_to_editorexportplatformappleembedded(PyObject* other):
+    cdef object o = EditorExportPlatformAppleEmbedded.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
 cdef api PyObject* cast_to_editorexportplatformextension(PyObject* other):
     cdef object o = EditorExportPlatformExtension.cast_without_reference(<object>other)
     vals.append(o)
@@ -1798,6 +1841,10 @@ cdef api PyObject* cast_to_editorexportplatformmacos(PyObject* other):
     return <PyObject*>o
 cdef api PyObject* cast_to_editorexportplatformpc(PyObject* other):
     cdef object o = EditorExportPlatformPC.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_editorexportplatformvisionos(PyObject* other):
+    cdef object o = EditorExportPlatformVisionOS.cast_without_reference(<object>other)
     vals.append(o)
     return <PyObject*>o
 cdef api PyObject* cast_to_editorexportplatformweb(PyObject* other):
@@ -2022,6 +2069,14 @@ cdef api PyObject* cast_to_fogmaterial(PyObject* other):
     return <PyObject*>o
 cdef api PyObject* cast_to_fogvolume(PyObject* other):
     cdef object o = FogVolume.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_foldablecontainer(PyObject* other):
+    cdef object o = FoldableContainer.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_foldablegroup(PyObject* other):
+    cdef object o = FoldableGroup.cast_without_reference(<object>other)
     vals.append(o)
     return <PyObject*>o
 cdef api PyObject* cast_to_font(PyObject* other):
@@ -2516,6 +2571,10 @@ cdef api PyObject* cast_to_linkbutton(PyObject* other):
     cdef object o = LinkButton.cast_without_reference(<object>other)
     vals.append(o)
     return <PyObject*>o
+cdef api PyObject* cast_to_logger(PyObject* other):
+    cdef object o = Logger.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
 cdef api PyObject* cast_to_lookatmodifier3d(PyObject* other):
     cdef object o = LookAtModifier3D.cast_without_reference(<object>other)
     vals.append(o)
@@ -2594,6 +2653,10 @@ cdef api PyObject* cast_to_missingresource(PyObject* other):
     return <PyObject*>o
 cdef api PyObject* cast_to_mobilevrinterface(PyObject* other):
     cdef object o = MobileVRInterface.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_modifierbonetarget3d(PyObject* other):
+    cdef object o = ModifierBoneTarget3D.cast_without_reference(<object>other)
     vals.append(o)
     return <PyObject*>o
 cdef api PyObject* cast_to_moviewriter(PyObject* other):
@@ -2844,8 +2907,20 @@ cdef api PyObject* cast_to_openxrdpadbindingmodifier(PyObject* other):
     cdef object o = OpenXRDpadBindingModifier.cast_without_reference(<object>other)
     vals.append(o)
     return <PyObject*>o
+cdef api PyObject* cast_to_openxrextensionwrapper(PyObject* other):
+    cdef object o = OpenXRExtensionWrapper.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
 cdef api PyObject* cast_to_openxrextensionwrapperextension(PyObject* other):
     cdef object o = OpenXRExtensionWrapperExtension.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_openxrfutureextension(PyObject* other):
+    cdef object o = OpenXRFutureExtension.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_openxrfutureresult(PyObject* other):
+    cdef object o = OpenXRFutureResult.cast_without_reference(<object>other)
     vals.append(o)
     return <PyObject*>o
 cdef api PyObject* cast_to_openxrhand(PyObject* other):
@@ -2886,6 +2961,18 @@ cdef api PyObject* cast_to_openxrinteractionprofilemetadata(PyObject* other):
     return <PyObject*>o
 cdef api PyObject* cast_to_openxrinterface(PyObject* other):
     cdef object o = OpenXRInterface.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_openxrrendermodel(PyObject* other):
+    cdef object o = OpenXRRenderModel.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_openxrrendermodelextension(PyObject* other):
+    cdef object o = OpenXRRenderModelExtension.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_openxrrendermodelmanager(PyObject* other):
+    cdef object o = OpenXRRenderModelManager.cast_without_reference(<object>other)
     vals.append(o)
     return <PyObject*>o
 cdef api PyObject* cast_to_openxrvisibilitymask(PyObject* other):
@@ -3440,6 +3527,10 @@ cdef api PyObject* cast_to_resourceimporteroggvorbis(PyObject* other):
     cdef object o = ResourceImporterOggVorbis.cast_without_reference(<object>other)
     vals.append(o)
     return <PyObject*>o
+cdef api PyObject* cast_to_resourceimportersvg(PyObject* other):
+    cdef object o = ResourceImporterSVG.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
 cdef api PyObject* cast_to_resourceimporterscene(PyObject* other):
     cdef object o = ResourceImporterScene.cast_without_reference(<object>other)
     vals.append(o)
@@ -3526,6 +3617,10 @@ cdef api PyObject* cast_to_scenetreetimer(PyObject* other):
     return <PyObject*>o
 cdef api PyObject* cast_to_script(PyObject* other):
     cdef object o = Script.cast_without_reference(<object>other)
+    vals.append(o)
+    return <PyObject*>o
+cdef api PyObject* cast_to_scriptbacktrace(PyObject* other):
+    cdef object o = ScriptBacktrace.cast_without_reference(<object>other)
     vals.append(o)
     return <PyObject*>o
 cdef api PyObject* cast_to_scriptcreatedialog(PyObject* other):
