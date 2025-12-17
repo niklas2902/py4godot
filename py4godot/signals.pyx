@@ -4,12 +4,12 @@ import inspect
 from libcpp.memory cimport make_shared
 
 import py4godot.classes.Object as obj
-from py4godot.classes.Object import Object
+from py4godot.classes.Node import Node
 from py4godot.classes.ResourceLoader import ResourceLoader
 from py4godot.classes.core import Callable, Signal
-from py4godot.functions import weakref
 from py4godot.utils.utils cimport *
 import py4godot.pluginscript_api.utils.annotations as annotations
+import weakref
 from py4godot.pluginscript_api.utils.helpers cimport get_variant_type
 
 
@@ -76,15 +76,15 @@ class GDSignal(Signal):
         if parent:
             callable = Callable.new2(parent, gd_function_name )
         else:
-            parent = Object.new()
+            parent = Node.new()
             script = ResourceLoader.instance().load("res://addons/py4godot/signal_script.py")
             parent.set_script(script)
             parent.get_pyscript().lambda_ = function
             callable = Callable.new2(parent, "lambda_handler")
-            function.gd_parent = weakref(parent.get_pyscript())
-            self.get_object().tree_exited.connect(parent.get_pyscript().free_signal)
+            function.gd_parent = weakref.ref(parent.get_pyscript())
         callables.append(callable)
         callables.append(gd_function_name)
+        print(f"------------------connect: {function}--------------")
         super().connect(callable)
 
 
@@ -92,7 +92,7 @@ class GDSignal(Signal):
         cdef str function_name = function.__name__
         cdef object parent =  (function.__self__ if hasattr(function, '__self__') else None)
         if not parent:
-            function.gd_parent.destroy()
+            function.gd_parent.queue_free()
             return
         cdef bytes b_function_name = function_name.encode("utf-8")
         cdef char* c_function_name = b_function_name
@@ -103,12 +103,12 @@ class GDSignal(Signal):
 
 
     async def wait_emit(self):
-        o = Object.new()
+        o = Node.new()
         script = ResourceLoader.instance().load("res://addons/py4godot/signal_script.py")
         o.set_script(script)
         self.connect(o.get_pyscript().handler)
         await self.signal_check_loop(o)
-        o.destroy()
+        o.queue_free()
 
     async def signal_check_loop(self, o):
         while not o.get_pyscript().handled:
@@ -135,13 +135,13 @@ class BuiltinSignal(Signal):
         if parent:
             callable = Callable.new2(parent, gd_function_name )
         else:
-            parent = Object.new()
+            parent = Node.new()
             script = ResourceLoader.instance().load("res://addons/py4godot/signal_script.py")
             parent.set_script(script)
             parent.get_pyscript().lambda_ = function
             callable = Callable.new2(parent, "lambda_handler")
-            function.gd_parent = weakref(parent.get_pyscript())
-            self.parent().tree_exited.connect(parent.get_pyscript().free_signal)
+            function.gd_parent = weakref.ref(parent.get_pyscript())
+        print(f"------------------connect: {function}--------------")
 
         self.parent().connect(self.signal_name, callable)
 
@@ -154,8 +154,10 @@ class BuiltinSignal(Signal):
     def disconnect(self, object function ):
         cdef str function_name = function.__name__
         cdef object parent = function.__self__ if hasattr(function, '__self__') else None
+        print(f"disconnect:{function}|{parent}")
         if not parent:
-            function.gd_parent.destroy()
+            print(f"destroy:{function}|{parent}")
+            function.gd_parent().queue_free()
             return
         cdef bytes b_function_name = function_name.encode("utf-8")
         cdef char* c_function_name = b_function_name
@@ -183,12 +185,12 @@ class BuiltinSignal(Signal):
         return self.get_signal_connection_list(self.signal_name)
 
     async def wait_emit(self):
-        o = Object.new()
+        o = Node.new()
         script = ResourceLoader.instance().load("res://addons/py4godot/signal_script.py")
         o.set_script(script)
         self.connect(o.get_pyscript().handler)
         await self.signal_check_loop(o)
-        o.destroy()
+        o.queue_free()
 
     async def signal_check_loop(self, o):
         while not o.get_pyscript().handled:

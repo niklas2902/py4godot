@@ -1,12 +1,8 @@
-
-from py4godot.methods import private
-from py4godot.signals import signal, SignalArg
 from py4godot.classes import gdclass
-from py4godot.classes.core import Vector3
-from py4godot.classes.Object import Object
+from py4godot.classes.Node import Node
 
 @gdclass
-class signal_script(Object):
+class signal_script(Node):
 
     def __init__(self):
         super().__init__()
@@ -20,4 +16,4 @@ class signal_script(Object):
         self.lambda_(*args)
 
     def free_signal(self, * args):
-        self.destroy()
+        self.queue_free()
