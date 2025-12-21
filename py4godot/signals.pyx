@@ -80,12 +80,12 @@ class GDSignal(Signal):
             script = ResourceLoader.instance().load("res://addons/py4godot/signal_script.py")
             parent.set_script(script)
             parent.get_pyscript().lambda_ = function
+            parent.delete_on_emit = flags | obj.ConnectFlags.CONNECT_ONE_SHOT
             callable = Callable.new2(parent, "lambda_handler")
             function.gd_parent = weakref.ref(parent.get_pyscript())
         callables.append(callable)
         callables.append(gd_function_name)
-        print(f"------------------connect: {function}--------------")
-        super().connect(callable)
+        super().connect(callable, flags)
 
 
     def disconnect(self, object function ):
@@ -139,11 +139,11 @@ class BuiltinSignal(Signal):
             script = ResourceLoader.instance().load("res://addons/py4godot/signal_script.py")
             parent.set_script(script)
             parent.get_pyscript().lambda_ = function
+            parent.delete_on_emit = flags | obj.ConnectFlags.CONNECT_ONE_SHOT
             callable = Callable.new2(parent, "lambda_handler")
             function.gd_parent = weakref.ref(parent.get_pyscript())
-        print(f"------------------connect: {function}--------------")
 
-        self.parent().connect(self.signal_name, callable)
+        self.parent().connect(self.signal_name, callable, flags)
 
     def parent(self):
         cdef object o = obj.Object.construct_without_init()
@@ -154,9 +154,7 @@ class BuiltinSignal(Signal):
     def disconnect(self, object function ):
         cdef str function_name = function.__name__
         cdef object parent = function.__self__ if hasattr(function, '__self__') else None
-        print(f"disconnect:{function}|{parent}")
         if not parent:
-            print(f"destroy:{function}|{parent}")
             function.gd_parent().queue_free()
             return
         cdef bytes b_function_name = function_name.encode("utf-8")
