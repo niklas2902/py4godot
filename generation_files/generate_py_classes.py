@@ -1572,8 +1572,6 @@ def generate_operators_for_class(class_name):
                             res += f"{INDENT * 3}_ret= self._ptr.call_with_return({method_ids['normal_methods'][class_name][operator]}, (other,))"
                         res = generate_newline(res)
                         res += f"{INDENT * 3}return _ret"
-                        res = generate_newline(res)
-                        res += f"{INDENT*2}raise TypeError(f\"This operator does not support '{{type(other)}}'\")"
                     else:
                         res += f"{INDENT * 2}_ret = {init_return_type(return_type.return_type)}"
                         res = generate_newline(res)
@@ -1591,8 +1589,9 @@ def generate_operators_for_class(class_name):
                     res += f"{INDENT * 2}_ret= self._ptr.call_with_return({method_ids['normal_methods'][class_name][operator]}, (other,))"
                     res = generate_newline(res)
                     res += f"{INDENT * 2}return _ret"
-
-
+                else:
+                    res += f"{INDENT * 2}raise TypeError(f\"This operator does not support '{{type(other)}}'\")"
+                    res = generate_newline(res)
                 res = generate_newline(res)
 
     res = generate_newline(res)
