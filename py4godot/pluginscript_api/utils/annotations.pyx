@@ -20,6 +20,7 @@ import importlib
 import importlib.util
 from libcpp.string cimport string
 from collections import OrderedDict
+import inspect
 
 class_name = ""
 gd_class = None
@@ -45,39 +46,46 @@ def load_module(module_name, file_to_load):
     return sys.modules[module_name]
 
 def get_class_attributes(cls):
-    # Get type hints
-    type_hints = get_type_hints(cls)
 
-    # Get class variables
-    class_vars = {key: value for key, value in vars(cls).items()
-                  if not key.startswith('__') and not callable(value)}
-
-    # Get the source code of the class
-    source = inspect.getsource(cls)
-
-    # Parse the source code to get the order of attributes
-    lines = source.split('\n')
-    attribute_order = []
-    for line in lines:
-        line = line.strip()
-        if '=' in line and not line.startswith('def'):
-            attribute_name = line.split('=')[0].strip()
-            if ":" in attribute_name:
-                attribute_name = attribute_name.split(":")[0].strip()
-            if attribute_name not in attribute_order:
-                attribute_order.append(attribute_name)
-        elif ':' in line and not line.startswith('def'):
-            attribute_name = line.split(':')[0].strip()
-            if attribute_name not in attribute_order:
-                attribute_order.append(attribute_name)
-
-    # Combine type hints and class variables in the correct order
     attributes = OrderedDict()
-    for key in attribute_order:
-        if key in class_vars:
-            attributes[key] = class_vars[key]
-        elif key in type_hints:
-            attributes[key] = type_hints[key]
+
+    for base_cls in reversed(cls.__mro__[:-1]):
+        # Get type hints for this class
+        type_hints = get_type_hints(base_cls)
+
+        # Get class variables for this class only (not inherited)
+        class_vars = {key: value for key, value in vars(base_cls).items()
+                      if not key.startswith('__') and not callable(value) and not key.isupper()}
+
+        # Get the source code of this class
+        try:
+            source = inspect.getsource(base_cls)
+        except (OSError, TypeError):
+            # Can't get source for built-in classes or dynamically created classes
+            continue
+
+        # Parse the source code to get the order of attributes
+        lines = source.split('\n')
+        attribute_order = []
+        for line in lines:
+            line = line.strip()
+            if '=' in line and not line.startswith('def'):
+                attribute_name = line.split('=')[0].strip()
+                if ":" in attribute_name:
+                    attribute_name = attribute_name.split(":")[0].strip()
+                if attribute_name not in attribute_order and not attribute_name.isupper():
+                    attribute_order.append(attribute_name)
+            elif ':' in line and not line.startswith('def'):
+                attribute_name = line.split(':')[0].strip()
+                if attribute_name not in attribute_order and not attribute_name.isupper():
+                    attribute_order.append(attribute_name)
+
+        # Add attributes from this class in the correct order
+        for key in attribute_order:
+            if key in class_vars:
+                attributes[key] = class_vars[key]
+            elif key in type_hints:
+                attributes[key] = type_hints[key]
 
     return attributes
 
