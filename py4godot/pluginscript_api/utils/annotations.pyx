@@ -190,7 +190,7 @@ cdef api TransferObject exec_class(str source_string, str class_name_):
         method_description = (<MethodDescription>method).method_description
         transfer_object.methods.push_back(method_description)
     cdef shared_ptr[CPPPropertyDescription] property_info
-    for property in properties:
+    for property in properties + collect_gd_properties_for_cls(gd_class):
         (<PropertyDescription>property).to_c()
         property_info = (<PropertyDescription>property).property_description
         transfer_object.properties.push_back(property_info)
@@ -248,6 +248,20 @@ def prop(name,type_, defaultval, hint = BaseHint()):
     properties.append(PropertyDescription(name = name,
                 type_=type_,hint = hint,usage = 4096|6|32768,
                 default_value=defaultval))
+
+def prop_return(name,type_, defaultval, hint = BaseHint()):
+    already_registered_property_names.append(name)
+    default_values.append(defaultval)
+    return PropertyDescription(name = name,
+                type_=type_,hint = hint,usage = 4096|6|32768,
+                default_value=defaultval)
+
+def collect_gd_properties_for_cls(cls):
+    properties = []
+    for attr in dir(cls):
+        if type(getattr(cls, attr)) == PropertyDescription:
+            properties.append(getattr(cls, attr))
+    return properties
 
 def gdmethod(func):
     global already_registered_method_names
