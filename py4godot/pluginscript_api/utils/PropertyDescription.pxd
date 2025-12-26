@@ -9,6 +9,8 @@ cdef class PropertyDescription:
     cdef object gd_name
     cdef bytes bname
     cdef char* cname
+    cdef bytes bhint_string
+    cdef char* chint_string
     cdef GDExtensionVariantType type_
     cdef int hint
     cdef object hint_string
