@@ -1187,6 +1187,9 @@ void Variant::init_from_py_object(PyObject* object, const char* type_name){
         case str2int("str"):
             construct_py_string(object);
             break;
+        case str2int("NoneType"):
+            construct_Nil(object);
+            break;
         default:
             construct_Object(object);
     }
@@ -1426,7 +1429,7 @@ auto converted_val =  get_packedint64array_from_pyobject(object);
 }
 void Variant::construct_Nil(PyObject* object){
         long long val = 0;
-        auto constructor = functions::get_get_variant_from_type_constructor()(GDExtensionVariantType::GDEXTENSION_VARIANT_TYPE_NIL);
+        auto constructor = functions::get_get_variant_from_type_constructor()(GDExtensionVariantType::GDEXTENSION_VARIANT_TYPE_INT);
         constructor(native_ptr, &val);
 }
 void Variant::construct_PackedInt32Array(PyObject* object){

@@ -3,6 +3,9 @@ import sys,os
 from typing import get_type_hints
 
 import inspect, traceback
+
+from py4godot.classes.Node import Node
+from py4godot.classes.Resource import Resource
 from py4godot.hints.BaseHint cimport *
 from py4godot.godot_bindings.binding4_godot4 cimport *
 from py4godot.pluginscript_api.utils.utils cimport *
@@ -21,6 +24,7 @@ import importlib.util
 from libcpp.string cimport string
 from collections import OrderedDict
 import inspect
+from py4godot.classes.Object import Object
 
 class_name = ""
 gd_class = None
@@ -82,10 +86,13 @@ def get_class_attributes(cls):
 
         # Add attributes from this class in the correct order
         for key in attribute_order:
+            val = [None, None]
             if key in class_vars:
-                attributes[key] = class_vars[key]
-            elif key in type_hints:
-                attributes[key] = type_hints[key]
+                val[0] = class_vars[key]
+            if key in type_hints:
+                val[1] = type_hints[key]
+            if val != [None, None]:
+                attributes[key] = val
 
     return attributes
 
@@ -96,6 +103,8 @@ def generate_default_val(type_):
     elif type_ == type(""): return ""
     elif type_ == type(True): return False
 
+    if issubclass(type_, Object):return type_.new()
+
     return type_.new0()
 
 def is_class(type_):
@@ -103,7 +112,7 @@ def is_class(type_):
 
 cdef accepted_types = {int, str, float, type(True)}
 def type_is_accepted(type_to_accept):
-    return type_to_accept in accepted_types or type_to_accept in py4godot.classes.core.core_classes
+    return type_to_accept in accepted_types or type_to_accept in py4godot.classes.core.core_classes or issubclass(type_to_accept, Object)
 
 
 def collect_properties(cls):
@@ -115,14 +124,14 @@ def collect_properties(cls):
         if potential_property.startswith("_"): # We handle _ like private names
             continue
         if potential_property not in already_registered_property_names and potential_property not in already_registered_signal_names:
-            if not is_class(potential_properties[potential_property]):
-                if type_is_accepted(type(potential_properties[potential_property])):
-                    prop(potential_property, type(potential_properties[potential_property]),
-                         potential_properties[potential_property])
+            if potential_properties[potential_property][0] and not is_class(potential_properties[potential_property][0]):
+                if type_is_accepted(type(potential_properties[potential_property][0])):
+                    prop(potential_property, potential_properties[potential_property][1],
+                         potential_properties[potential_property][0])
             else:
-                if type_is_accepted(type(potential_properties[potential_property])):
-                    prop(potential_property, potential_properties[potential_property],
-                         generate_default_val(potential_properties[potential_property]))
+                if type_is_accepted(potential_properties[potential_property][1]):
+                    prop(potential_property, potential_properties[potential_property][1],
+                         generate_default_val(potential_properties[potential_property][1]))
 
 def collect_methods(cls):
     if cls is None:
@@ -242,9 +251,26 @@ def gdtool(cls):
         raise Exception("More than one class was marked as gd_class or gd_tool_class in one file")
     return cls
 
+def create_hint(hint, type_):
+    if not isinstance(hint, BaseHint):
+        return hint
+    if not issubclass(type_, Object):
+        return hint
+    if issubclass(type_, Node):
+        return BaseHint(34, type_.__name__)
+
+    if issubclass(type_, Resource):
+        return BaseHint(17, type_.__name__)
+    return hint
+
 def prop(name,type_, defaultval, hint = BaseHint()):
     already_registered_property_names.append(name)
     default_values.append(defaultval)
+    hint = create_hint(hint, type_)
+    if issubclass(type_, Object):
+        type_ = Object
+    if not defaultval:
+        defaultval = generate_default_val(type_)
     properties.append(PropertyDescription(name = name,
                 type_=type_,hint = hint,usage = 4096|6|32768,
                 default_value=defaultval))
@@ -252,6 +278,11 @@ def prop(name,type_, defaultval, hint = BaseHint()):
 def prop_return(name,type_, defaultval, hint = BaseHint()):
     already_registered_property_names.append(name)
     default_values.append(defaultval)
+    hint = create_hint(hint, type_)
+    if issubclass(type_, Object):
+        type_ = Object
+    if not defaultval:
+        defaultval = generate_default_val(type_)
     return PropertyDescription(name = name,
                 type_=type_,hint = hint,usage = 4096|6|32768,
                 default_value=defaultval)
