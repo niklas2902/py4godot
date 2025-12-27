@@ -8,7 +8,7 @@ jobs:
   linux-build:
     if: ${{ needs.check_date.outputs.should_run != 'false' }}
     runs-on: ubuntu-latest
-    container: niklas2902/py4godot:4.4
+    container: niklas2902/py4godot:4.5
     steps:
       - uses: actions/checkout@v3
         with:
@@ -29,19 +29,20 @@ jobs:
         run: |
           python -m pip install -r requirements.txt
           python -m pip install flake8
+          python -m pip install setuptools
 
       - name: Print structure
         run: python meson_scripts/print_tools.py
 
       - name: Generate files
-        run: python generate.py -dev_build=True
+        run: python generate.py
 
       - name: Cythonize
         shell: bash
         run: python cythonize_files.py
 
       - name: Build
-        run: python build.py --target_platform=linux64 --compiler=gcc -create_plugin=False -buildtype=release -run_tests=True -download_godot=True
+        run: python build.py --target_platform=linux64 --compiler=gcc -create_plugin=False -buildtype=release -run_tests=True
 
       - name: Print structure
         run: python meson_scripts/print_tools.py
