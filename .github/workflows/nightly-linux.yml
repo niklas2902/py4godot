@@ -15,10 +15,12 @@ jobs:
           ref: master
           submodules: 'recursive'
 
-      - name: Set up Python 3.11.3
-        uses: actions/setup-python@v2
-        with:
-          python-version: "3.11.3"
+      - name: Set up Python virtual environment
+        run: |
+          python3 -m venv venv
+          source venv/bin/activate
+          python --version
+          pip --version
 
       - name: Print variables
         run: |
