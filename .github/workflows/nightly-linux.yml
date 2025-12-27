@@ -2,11 +2,10 @@ name: nightly linux
 on:
   workflow_dispatch:
   schedule:
-    - cron: '0 3 * * *' # run at 2 AM UTC
+    - cron: '0 3 * * *' # run at 3 AM UTC
 
 jobs:
   linux-build:
-    if: ${{ needs.check_date.outputs.should_run != 'false' }}
     runs-on: ubuntu-latest
     container: niklas2902/py4godot:4.5
     steps:
@@ -24,31 +23,45 @@ jobs:
           pip --version
 
       - name: Print variables
+        shell: bash
         run: |
+          source venv/bin/activate
           python meson_scripts/variables.py
-
 
       - name: Install dependencies
         shell: bash
         run: |
+          source venv/bin/activate
           python -m pip install -r requirements.txt
           python -m pip install flake8
           python -m pip install setuptools
 
       - name: Print structure
-        run: python meson_scripts/print_tools.py
+        shell: bash
+        run: |
+          source venv/bin/activate
+          python meson_scripts/print_tools.py
 
       - name: Generate files
         shell: bash
-        run: python generate.py
+        run: |
+          source venv/bin/activate
+          python generate.py
 
       - name: Cythonize
         shell: bash
-        run: python cythonize_files.py
+        run: |
+          source venv/bin/activate
+          python cythonize_files.py
 
       - name: Build
         shell: bash
-        run: python build.py --target_platform=linux64 --compiler=gcc -create_plugin=False -buildtype=release -run_tests=True
+        run: |
+          source venv/bin/activate
+          python build.py --target_platform=linux64 --compiler=gcc -create_plugin=False -buildtype=release -run_tests=True
 
       - name: Print structure
-        run: python meson_scripts/print_tools.py
+        shell: bash
+        run: |
+          source venv/bin/activate
+          python meson_scripts/print_tools.py
