@@ -16,6 +16,7 @@ jobs:
           submodules: 'recursive'
 
       - name: Set up Python virtual environment
+        shell: bash
         run: |
           python3 -m venv venv
           source venv/bin/activate
@@ -44,6 +45,7 @@ jobs:
         run: python cythonize_files.py
 
       - name: Build
+        shell: bash
         run: python build.py --target_platform=linux64 --compiler=gcc -create_plugin=False -buildtype=release -run_tests=True
 
       - name: Print structure
