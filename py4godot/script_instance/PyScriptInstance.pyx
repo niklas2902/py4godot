@@ -2,6 +2,7 @@
 import traceback
 from cython.operator cimport dereference
 import py4godot.classes.core as core
+from py4godot.utils.CoreType import CoreType
 from py4godot.utils.print_tools import print_error, py_log, print_error_detailed
 from py4godot.utils.utils cimport *
 from py4godot.instance_data.InstanceData cimport InstanceData, MethodCallData
@@ -160,9 +161,12 @@ cdef api MethodCallData instance_call(GDExtensionScriptInstanceDataPtr p_self, G
         for index in range(0, p_argument_count):
             var.native_ptr = <void*>p_args[index]
             arg = <object>var.get_converted_value(True)
-            if type(arg) in types_to_decref :#or isinstance(arg, Object):
+            if type(arg) in types_to_decref:#or isinstance(arg, Object):
                 Py_DECREF(arg)
-            if isinstance(arg, refCounted.RefCounted):
+            elif isinstance(arg, CoreType):
+                Py_DECREF(arg)
+                arg.shouldBeDeleted = True
+            elif isinstance(arg, refCounted.RefCounted):
                unrefcount(arg) #TODO: fix this. this is a workaround, so that python doesn't delete this.
             args.append(arg)
         cast_helpers.clear_vals() # free memory again, now that we are safe
