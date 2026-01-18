@@ -14,6 +14,7 @@ cimport py4godot.wrappers.wrappers as wrappers
 
 cdef api shared_ptr[bridge.String] type_helper_pystring_to_gdstring(str string):
     cdef object gd_string = py_c_string_to_string(string.encode("utf-8"))
+    gd_string.constructed_from_python = False
     #Py_INCREF(val)
     return wrappers.extract_ptr_from_StringWrapper(gd_string._ptr)
 
@@ -25,6 +26,7 @@ cdef api object type_helper_create_vector3(shared_ptr[bridge.Vector3]& bridge_ve
 
 cdef api object type_helper_create_string(shared_ptr[bridge.String]& bridge_string):
     cdef object val = core.String.__new__(core.String)
+    val.constructed_from_python = False
     val._ptr = wrappers.create_wrapper_from_String_ptr(bridge_string)
     ##Py_INCREF(val)
     return val
@@ -45,116 +47,139 @@ cdef api object type_helper_create_py_string(shared_ptr[bridge.String]& bridge_s
 
 cdef api object type_helper_create_rect2i(shared_ptr[bridge.Rect2i]& bridge_val):
     cdef object val = core.Rect2i.__new__(core.Rect2i)
+    val.constructed_from_python = False
     val._ptr = wrappers.create_wrapper_from_Rect2i_ptr(bridge_val)
     #Py_INCREF(val)
     return val
 cdef api object type_helper_create_callable(shared_ptr[bridge.Callable]& bridge_val):
     cdef object val = core.Callable.__new__(core.Callable)
+    val.constructed_from_python = False
     val._ptr = wrappers.create_wrapper_from_Callable_ptr(bridge_val)
     #Py_INCREF(val)
     return val
 cdef api object type_helper_create_nodepath(shared_ptr[bridge.NodePath]& bridge_val):
     cdef object val = core.NodePath.__new__(core.NodePath)
+    val.constructed_from_python = False
     val._ptr = wrappers.create_wrapper_from_NodePath_ptr(bridge_val)
     #Py_INCREF(val)
     return val
 cdef api object type_helper_create_packedvector3array(shared_ptr[bridge.PackedVector3Array]& bridge_val):
     cdef object val = core.PackedVector3Array.__new__(core.PackedVector3Array)
+    val.constructed_from_python = False
     val._ptr = wrappers.create_wrapper_from_PackedVector3Array_ptr(bridge_val)
     #Py_INCREF(val)
     return val
 cdef api object type_helper_create_dictionary(shared_ptr[bridge.Dictionary]& bridge_val):
     cdef object val = core.Dictionary.__new__(core.Dictionary)
+    val.constructed_from_python = False
     val._ptr = wrappers.create_wrapper_from_Dictionary_ptr(bridge_val)
     #Py_INCREF(val)
     return val
 cdef api object type_helper_create_projection(shared_ptr[bridge.Projection]& bridge_val):
     cdef object val = core.Projection.__new__(core.Projection)
+    val.constructed_from_python = False
     val._ptr = wrappers.create_wrapper_from_Projection_ptr(bridge_val)
     #Py_INCREF(val)
     return val
 cdef api object type_helper_create_rid(shared_ptr[bridge.RID]& bridge_val):
     cdef object val = core.RID.__new__(core.RID)
+    val.constructed_from_python = False
     val._ptr = wrappers.create_wrapper_from_RID_ptr(bridge_val)
     #Py_INCREF(val)
     return val
 cdef api object type_helper_create_vector2i(shared_ptr[bridge.Vector2i]& bridge_val):
     cdef object val = core.Vector2i.__new__(core.Vector2i)
+    val.constructed_from_python = False
     val._ptr = wrappers.create_wrapper_from_Vector2i_ptr(bridge_val)
     #Py_INCREF(val)
     return val
 cdef api object type_helper_create_transform2d(shared_ptr[bridge.Transform2D]& bridge_val):
     cdef object val = core.Transform2D.__new__(core.Transform2D)
+    val.constructed_from_python = False
     val._ptr = wrappers.create_wrapper_from_Transform2D_ptr(bridge_val)
     #Py_INCREF(val)
     return val
 cdef api object type_helper_create_aabb(shared_ptr[bridge.AABB]& bridge_val):
     cdef object val = core.AABB.__new__(core.AABB)
+    val.constructed_from_python = False
     val._ptr = wrappers.create_wrapper_from_AABB_ptr(bridge_val)
     #Py_INCREF(val)
     return val
 cdef api object type_helper_create_vector3i(shared_ptr[bridge.Vector3i]& bridge_val):
     cdef object val = core.Vector3i.__new__(core.Vector3i)
+    val.constructed_from_python = False
     val._ptr = wrappers.create_wrapper_from_Vector3i_ptr(bridge_val)
     #Py_INCREF(val)
     return val
 cdef api object type_helper_create_packedint64array(shared_ptr[bridge.PackedInt64Array]& bridge_val):
     cdef object val = core.PackedInt64Array.__new__(core.PackedInt64Array)
+    val.constructed_from_python = False
     val._ptr = wrappers.create_wrapper_from_PackedInt64Array_ptr(bridge_val)
     #Py_INCREF(val)
     return val
 cdef api object type_helper_create_packedint32array(shared_ptr[bridge.PackedInt32Array]& bridge_val):
     cdef object val = core.PackedInt32Array.__new__(core.PackedInt32Array)
+    val.constructed_from_python = False
     val._ptr = wrappers.create_wrapper_from_PackedInt32Array_ptr(bridge_val)
     #Py_INCREF(val)
     return val
 cdef api object type_helper_create_packedfloat32array(shared_ptr[bridge.PackedFloat32Array]& bridge_val):
     cdef object val = core.PackedFloat32Array.__new__(core.PackedFloat32Array)
+    val.constructed_from_python = False
     val._ptr = wrappers.create_wrapper_from_PackedFloat32Array_ptr(bridge_val)
     #Py_INCREF(val)
     return val
 cdef api object type_helper_create_packedbytearray(shared_ptr[bridge.PackedByteArray]& bridge_val):
     cdef object val = core.PackedByteArray.__new__(core.PackedByteArray)
+    val.constructed_from_python = False
     val._ptr = wrappers.create_wrapper_from_PackedByteArray_ptr(bridge_val)
     #Py_INCREF(val)
     return val
 cdef api object type_helper_create_vector4(shared_ptr[bridge.Vector4]& bridge_val):
     cdef object val = core.Vector4.__new__(core.Vector4)
+    val.constructed_from_python = False
     val._ptr = wrappers.create_wrapper_from_Vector4_ptr(bridge_val)
     #Py_INCREF(val)
     return val
 cdef api object type_helper_create_rect2(shared_ptr[bridge.Rect2]& bridge_val):
     cdef object val = core.Rect2.__new__(core.Rect2)
+    val.constructed_from_python = False
     val._ptr = wrappers.create_wrapper_from_Rect2_ptr(bridge_val)
     #Py_INCREF(val)
     return val
 cdef api object type_helper_create_vector2(shared_ptr[bridge.Vector2]& bridge_val):
     cdef object val = core.Vector2.__new__(core.Vector2)
+    val.constructed_from_python = False
     val._ptr = wrappers.create_wrapper_from_Vector2_ptr(bridge_val)
     #Py_INCREF(val)
     return val
 cdef api object type_helper_create_transform3d(shared_ptr[bridge.Transform3D]& bridge_val):
     cdef object val = core.Transform3D.__new__(core.Transform3D)
+    val.constructed_from_python = False
     val._ptr = wrappers.create_wrapper_from_Transform3D_ptr(bridge_val)
     #Py_INCREF(val)
     return val
 cdef api object type_helper_create_packedcolorarray(shared_ptr[bridge.PackedColorArray]& bridge_val):
     cdef object val = core.PackedColorArray.__new__(core.PackedColorArray)
+    val.constructed_from_python = False
     val._ptr = wrappers.create_wrapper_from_PackedColorArray_ptr(bridge_val)
     #Py_INCREF(val)
     return val
 cdef api object type_helper_create_signal(shared_ptr[bridge.Signal]& bridge_val):
     cdef object val = GDSignal.__new__(GDSignal)
+    val.constructed_from_python = False
     val._ptr = wrappers.create_wrapper_from_Signal_ptr(bridge_val)
     #Py_INCREF(val)
     return val
 cdef api object type_helper_create_packedvector2array(shared_ptr[bridge.PackedVector2Array]& bridge_val):
     cdef object val = core.PackedVector2Array.__new__(core.PackedVector2Array)
+    val.constructed_from_python = False
     val._ptr = wrappers.create_wrapper_from_PackedVector2Array_ptr(bridge_val)
     #Py_INCREF(val)
     return val
 cdef api object type_helper_create_plane(shared_ptr[bridge.Plane]& bridge_val):
     cdef object val = core.Plane.__new__(core.Plane)
+    val.constructed_from_python = False
     val._ptr = wrappers.create_wrapper_from_Plane_ptr(bridge_val)
     #Py_INCREF(val)
     return val
@@ -165,36 +190,43 @@ cdef api object type_helper_create_packedfloat64array(shared_ptr[bridge.PackedFl
     return val
 cdef api object type_helper_create_basis(shared_ptr[bridge.Basis]& bridge_val):
     cdef object val = core.Basis.__new__(core.Basis)
+    val.constructed_from_python = False
     val._ptr = wrappers.create_wrapper_from_Basis_ptr(bridge_val)
     #Py_INCREF(val)
     return val
 cdef api object type_helper_create_color(shared_ptr[bridge.Color]& bridge_val):
     cdef object val = core.Color.__new__(core.Color)
+    val.constructed_from_python = False
     val._ptr = wrappers.create_wrapper_from_Color_ptr(bridge_val)
     #Py_INCREF(val)
     return val
 cdef api object type_helper_create_vector4i(shared_ptr[bridge.Vector4i]& bridge_val):
     cdef object val = core.Vector4i.__new__(core.Vector4i)
+    val.constructed_from_python = False
     val._ptr = wrappers.create_wrapper_from_Vector4i_ptr(bridge_val)
     #Py_INCREF(val)
     return val
 cdef api object type_helper_create_array(shared_ptr[bridge.Array]& bridge_val):
     cdef object val = core.Array.__new__(core.Array)
+    val.constructed_from_python = False
     val._ptr = wrappers.create_wrapper_from_Array_ptr(bridge_val)
     #Py_INCREF(val)
     return val
 cdef api object type_helper_create_quaternion(shared_ptr[bridge.Quaternion]& bridge_val):
     cdef object val = core.Quaternion.__new__(core.Quaternion)
+    val.constructed_from_python = False
     val._ptr = wrappers.create_wrapper_from_Quaternion_ptr(bridge_val)
     #Py_INCREF(val)
     return val
 cdef api object type_helper_create_packedstringarray(shared_ptr[bridge.PackedStringArray]& bridge_val):
     cdef object val = core.PackedStringArray.__new__(core.PackedStringArray)
+    val.constructed_from_python = False
     val._ptr = wrappers.create_wrapper_from_PackedStringArray_ptr(bridge_val)
     #Py_INCREF(val)
     return val
 cdef api object type_helper_create_stringname(shared_ptr[bridge.StringName]& bridge_val):
     cdef object val = core.StringName.__new__(core.StringName)
+    val.constructed_from_python = False
     val._ptr = wrappers.create_wrapper_from_StringName_ptr(bridge_val)
     #Py_INCREF(val)
     return val
