@@ -36,6 +36,8 @@ cdef api GDExtensionBool instance_set(GDExtensionScriptInstanceDataPtr p_instanc
         val = <object>var.get_converted_value(True)
         if isinstance(val, core.Signal):
             return 1 #TODO: improve this. The problem is, that Godot decides to set signals itself. This lead to problems in the past. Check if it is still an issue
+        elif isinstance(val, refCounted.RefCounted):
+            val.reference()
         setattr(<object>(instance.owner),py_method_name_str, <object>val)
 
     except Exception as e:
