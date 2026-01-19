@@ -191,7 +191,7 @@ cdef api TransferObject exec_class(str source_string, str class_name_):
         c_icon_path = bytes_icon_path
         cpp_string = string(c_icon_path)
         transfer_object.icon_path = cpp_string
-    for signal in signals:
+    for signal in signals + collect_signals_for_cls(gd_class):
         transfer_object.signals.push_back((<SignalDescription>signal).get_signal_description())
 
     cdef shared_ptr[CPPMethodDescription] method_description
@@ -294,6 +294,14 @@ def collect_gd_properties_for_cls(cls):
             properties.append(getattr(cls, attr))
     return properties
 
+
+def collect_signals_for_cls(cls):
+    signals = []
+    for attr in dir(cls):
+        if type(getattr(cls, attr)) == SignalDescription:
+            signals.append(getattr(cls, attr))
+    return signals
+
 def gdmethod(func):
     global already_registered_method_names
     args = inspect.getfullargspec(func).args
@@ -317,3 +325,4 @@ def signal(name, list args = []):
     already_registered_signal_names.append(name)
     description = SignalDescription(name, args)
     signals.append(description)
+    return description
