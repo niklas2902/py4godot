@@ -264,6 +264,8 @@ def create_hint(hint, type_):
     return hint
 
 def prop(name,type_, defaultval, hint = BaseHint()):
+    if not type_:
+        return
     already_registered_property_names.append(name)
     default_values.append(defaultval)
     hint = create_hint(hint, type_)
@@ -276,6 +278,8 @@ def prop(name,type_, defaultval, hint = BaseHint()):
                 default_value=defaultval))
 
 def prop_return(name,type_, defaultval, hint = BaseHint()):
+    if not type_:
+        return
     already_registered_property_names.append(name)
     default_values.append(defaultval)
     hint = create_hint(hint, type_)
