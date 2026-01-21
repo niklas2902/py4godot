@@ -326,7 +326,7 @@ PyObject* Variant::create_packedbytearray(){
     GDExtensionVariantType type = functions::get_variant_get_type()(native_ptr);
     auto constructor = functions::get_get_variant_to_type_constructor()(type);
     auto string = std::make_shared<PackedByteArray>();
-    string->shouldBeDeleted=false;
+    string->shouldBeDeleted=true;
     constructor(&string->godot_owner, native_ptr);
     auto val = type_helper_create_packedbytearray(string);
     return val;
@@ -725,7 +725,7 @@ PyObject* Variant::create_packedbytearray_native_ptr(){
     GDExtensionVariantType type = functions::get_variant_get_type()(&native_ptr);
     auto constructor = functions::get_get_variant_to_type_constructor()(type);
     auto string = std::make_shared<PackedByteArray>();
-    string->shouldBeDeleted=false;
+    string->shouldBeDeleted=true;
     constructor(&string->godot_owner, &native_ptr);
     auto val = type_helper_create_packedbytearray(string);
     return val;

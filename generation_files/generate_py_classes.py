@@ -247,6 +247,8 @@ def generate_constructors(class_):
             res = generate_newline(res)
         res += f"{INDENT * 2}_class = {class_['name']}.construct_without_init()"
         res = generate_newline(res)
+        res += f"{INDENT * 2}_class.constructed_from_python = True"
+        res = generate_newline(res)
         if "arguments" in constructor:
             res += generate_string_name_or_node_path_args(constructor["arguments"])
             res = generate_newline(res)
@@ -552,7 +554,7 @@ def generate_call_deferred(method):
         res = generate_newline(res)
         res += f"{INDENT*3}if isinstance(arg, CoreType):"
         res = generate_newline(res)
-        res += f"{INDENT * 4}arg.shouldBeDeleted=False"
+        res += f"{INDENT * 4}arg.shouldBeDeleted = not arg.constructed_from_python"
         res = generate_newline(res)
     return res
 
@@ -935,6 +937,8 @@ def generate_construct_without_init(class_):
     res += f"{INDENT * 2}cls.shouldBeDeleted = True"
     res = generate_newline(res)
     res += f"{INDENT * 2}cls.casted_from = None"
+    res = generate_newline(res)
+    res += f"{INDENT * 2}cls.constructed_from_python = False"
     res = generate_newline(res)
     res += f"{INDENT * 2}cls.init_signals()"
     res = generate_newline(res)

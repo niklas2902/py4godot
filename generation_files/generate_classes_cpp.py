@@ -808,14 +808,12 @@ def generate_variant_vector(mMethod):
 
 def generate_delete_varargs_variants(mMethod):
     res = ""
-    if "arguments" not in mMethod:
-        return ""
     if not mMethod["is_vararg"]:
         return ""
 
-    if "arguments" in mMethod.keys():
-        res = generate_newline(res)
-
+    res = generate_newline(res)
+    res += f"{INDENT*2}for (auto & vararg: variant_argument_array){{functions:: get_variant_destroy()( & vararg->native_ptr);}}"
+    res = generate_newline(res)
     return res
 
 
@@ -954,8 +952,6 @@ def generate_method(class_, mMethod):
     else:
         res += generate_method_body_virtual(class_, mMethod)
 
-    res += generate_delete_varargs_variants(mMethod)
-    res = generate_newline(res)
     res += "}"
     res = generate_newline(res)
     return res
@@ -1100,6 +1096,9 @@ def generate_method_body_standard(class_, method):
         result = generate_newline(result)
     else:
         result += generate_method_call_object(method)
+    result = generate_newline(result)
+    result += generate_delete_varargs_variants(method)
+    result = generate_newline(result)
 
     if ("return_value" in method.keys() or "return_type" in method.keys()):
         result = generate_newline(result)
