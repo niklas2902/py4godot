@@ -128,7 +128,7 @@ void PyResourceFormatLoader::_load( String& path, String& original_path, bool us
             return;
         }
     }
-    auto source_code = file.get_as_text(false);
+    auto source_code = file.get_as_text();
     source_code.shouldBeDeleted = false;
     functions::get_object_destroy()(file.godot_owner);
 

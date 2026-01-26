@@ -332,6 +332,7 @@ std::string PyScriptExtension::path_as_string(){
 
 void  PyScriptExtension::_get_base_script(GDExtensionTypePtr res){
        print_error("_get_base_script");
+       *((void**)res) = nullptr;
 }
 void PyScriptExtension::_get_global_name(GDExtensionTypePtr res){
        print_error("_get_global_name");
@@ -410,6 +411,7 @@ void PyScriptExtension::_instance_create( Object& for_object, GDExtensionTypePtr
     instance_datas.push_back(gd_instance);
     set_owner(gd_instance->owner, ((void**)for_object.godot_owner)[0]);
     //instance.godot_owner = for_object.godot_owner;
+    this->reference();
     gd_instance->script = this;
     Py_INCREF(gd_instance->owner);
 
@@ -443,6 +445,7 @@ void PyScriptExtension::_placeholder_instance_create( Object& for_object, GDExte
     instance_datas.push_back(gd_instance);
     set_owner(gd_instance->owner, ((void**)for_object.godot_owner)[0]);
     //instance.godot_owner = for_object.godot_owner;
+    this->reference();
     gd_instance->script = this;
     Py_INCREF(gd_instance->owner);
     instance_ptr = functions::get_script_instance_create()(&(gd_instance->info), gd_instance);
