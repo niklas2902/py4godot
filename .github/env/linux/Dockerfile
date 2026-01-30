@@ -38,12 +38,12 @@ RUN python3 -m pip install setuptools --break-system-packages
 # Set working directory
 WORKDIR /app
 
-# Download and install Godot 4.5 x86_64 build
-RUN wget https://github.com/godotengine/godot/releases/download/4.5-stable/Godot_v4.5-stable_linux.x86_64.zip && \
-    unzip Godot_v4.5-stable_linux.x86_64.zip -d /usr/local/bin && \
-    chmod +x /usr/local/bin/Godot_v4.5-stable_linux.x86_64 && \
-    ln -s /usr/local/bin/Godot_v4.5-stable_linux.x86_64 /usr/local/bin/godot && \
-    rm Godot_v4.5-stable_linux.x86_64.zip
+# Download and install Godot 4.6 x86_64 build
+RUN wget https://github.com/godotengine/godot/releases/download/4.6-stable/Godot_v4.6-stable_linux.x86_64.zip && \
+    unzip Godot_v4.6-stable_linux.x86_64.zip -d /usr/local/bin && \
+    chmod +x /usr/local/bin/Godot_v4.6-stable_linux.x86_64 && \
+    ln -s /usr/local/bin/Godot_v4.6-stable_linux.x86_64 /usr/local/bin/godot && \
+    rm Godot_v4.6-stable_linux.x86_64.zip
 
 # Verify Godot installation
 RUN godot --version && which godot

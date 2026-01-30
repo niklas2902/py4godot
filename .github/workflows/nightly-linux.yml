@@ -7,7 +7,7 @@ on:
 jobs:
   linux-build:
     runs-on: ubuntu-latest
-    container: niklas2902/py4godot:4.5
+    container: niklas2902/py4godot:4.6
     steps:
       - uses: actions/checkout@v3
         with:
