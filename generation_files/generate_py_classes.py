@@ -917,7 +917,6 @@ def generate_common_methods(class_):
     result = generate_newline(result)
     if not is_singleton(class_["name"]):
         result += generate_del(class_)
-
     return result
 
 def generate_construct_without_init(class_):
@@ -1840,6 +1839,16 @@ def generate_array_get_item(class_):
     res += f"{INDENT * 2}return pyobject"
     return res
 
+def generate_str(class_):
+    property_string = ""
+    if class_["name"] in core_classes.keys():
+        for member in core_classes[class_["name"]].core_members:
+            property_string += f"{member.name} = {{self.{member.name}}}, "
+        property_string = property_string.rstrip(", ")
+    if not property_string:
+        return f"{INDENT*2}return super().__str__()"
+    return f"{INDENT*2}return f'{class_['name']}<{property_string}>'"
+
 def generate_del(class_):
     res = ""
     if class_["name"] not in builtin_classes and class_["name"] not in typed_arrays_names:
@@ -1978,8 +1987,10 @@ def generate_str_method(class_):
     res = generate_newline(res)
     if class_["name"] == "String":
         res += f"{INDENT*2}return utils.gd_string_to_py_string(self)"
-    if class_["name"] == "StringName":
+    elif class_["name"] == "StringName":
         res += f"{INDENT*2}return utils.gd_string_name_to_py_string(self)"
+    elif class_["name"] in builtin_classes:
+        res += generate_str(class_)
     res = generate_newline(res)
     return res
 
@@ -1997,7 +2008,8 @@ def generate_special_methods(class_):
 
     if class_["name"] in classes - builtin_classes:
         res += generate_cast(class_)
-    if class_["name"] in {"String", "StringName"}:
+    if class_["name"] in builtin_classes:
+        res = generate_newline(res)
         res += generate_str_method(class_)
 
     if class_["name"] in ("PackedInt32Array", "PackedInt64Array", "PackedFloat32Array", "PackedFloat64Array", "PackedByteArray"):
