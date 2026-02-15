@@ -15,6 +15,7 @@
 #include "py4godot/cpputils/ScriptHolder.h"
 #include "py4godot/script_extension/script_extension_helpers_api.h"
 #include "py4godot/script_extension/signal_builder.h"
+#include "py4godot/script_extension/android_helpers.h"
 #include <cstdlib>  // For system()
 
 #include <cassert>
@@ -90,6 +91,8 @@ void init_pluginscript_api(){
         return;
     }
     pluginscript_initialized = true;
+
+    extract_addon_to_user_dir();
 
     // Buffer to hold the converted narrow string
     char python_home_narrow[256];

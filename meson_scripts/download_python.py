@@ -9,7 +9,7 @@ import os
 from shutil import copytree, ignore_patterns
 import stat
 
-from config import python_ver, python_ver_short
+from config import python_ver, python_ver_short, python_version_number
 
 platform_dict = {"windows64": "x86_64-pc-windows-msvc-install_only_stripped", "windows32": "i686-pc-windows-msvc-install_only_stripped",
                  "linux64": "x86_64-unknown-linux-gnu-install_only_stripped", "darwin64":"aarch64-apple-darwin-install_only_stripped",
@@ -32,12 +32,15 @@ def download_file(platform, allow_copy=False):
 
     print("download:" + platform)
 
-    if platform != "linux32" and platform != "linux64":
+    if platform != "linux32" and platform != "linux64" and platform != "androidarm64" :
         url = f'https://github.com/indygreg/python-build-standalone/releases/download/20240726/{python_ver}+20240726-{platform_dict[platform]}.tar.gz'
         python_file = f'{python_files_dir}/{python_ver}-{platform_dict[platform]}.tar.gz'
     elif platform == "linux64":
         url = f'https://github.com/niklas2902/prebuild-python-linux64/releases/download/release-0.1/{python_ver}-linux64.zip'
         python_file = f'{python_files_dir}/{python_ver}-linux64.zip'
+    elif platform == "androidarm64":
+        url = f'https://github.com/niklas2902/python-android/releases/download/{python_version_number}/cpthon-{python_version_number}-androidarm64.zip'
+        python_file = f'{python_files_dir}/{python_ver}-androidarm64.zip'
     else :
         url = f'https://github.com/niklas2902/prebuild-python-linux32/releases/download/release-0.1/{python_ver}-linux32.zip'
         python_file = f'{python_files_dir}/{python_ver}-linux32.zip'

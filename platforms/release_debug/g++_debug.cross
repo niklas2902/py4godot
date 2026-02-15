@@ -2,4 +2,4 @@
 
 cpp_args = ['-w',  '-fpermissive', '-g']
 
-cpp_link_args = ['-g']
+cpp_link_args = ['-g', '-Wl,--no-keep-memory,--export-dynamic', '-rdynamic']

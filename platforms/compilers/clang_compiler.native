@@ -1,2 +1,10 @@
 [binaries]
 c = ['clang']
+cpp = ['clang++']
+
+[built-in options]
+
+cpp_args = ['-g', '-O0', '-DDEBUG', '-Wunused-function', '-Wunused-variable', '-Wuninitialized']
+
+cpp_link_args = ['-g']
+

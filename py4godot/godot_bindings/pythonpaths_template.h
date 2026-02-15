@@ -5,7 +5,11 @@
 #elif _WIN32
 #define PYTHONHOME L"addons/py4godot/{python_ver}-windows32/python/"
 
-#elif __linux32__ && defined(__i386__)
+#elif defined(__ANDROID__) && defined(__aarch64__)
+#define PYTHONHOME L"addons/py4godot/{python_ver}-androidarm64/python"
+#define PYTHONPATH "addons/py4godot/python/lib/python3.12/site-packages"
+
+#elif defined(__linux__) && defined(__i386__)
 #define PYTHONHOME L"addons/py4godot/{python_ver}-linux32/python/"
 
 
