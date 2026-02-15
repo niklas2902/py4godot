@@ -8,7 +8,7 @@ void copy_directory_recursive(String& source, String& target, bool copy_scripts)
 void copy_file(String& source, String& target);
 void extract_addon_to_user_dir() {
     String source_dir = c_string_to_string("res://addons/py4godot");
-    String target_dir = c_string_to_string("user://files/py4godot");
+    String target_dir = c_string_to_string("user://files/addons/py4godot");
     String user_path = c_string_to_string("user://");
 
     DirAccess dir = DirAccess::open(user_path);
