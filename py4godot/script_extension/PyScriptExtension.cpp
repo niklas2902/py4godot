@@ -136,11 +136,13 @@ void init_pluginscript_api(){
     } else {
         print_error("Failed to get current working directory.");
     }
+    auto scripts_dir = str_user_dir + "files/scripts";
 
     // Convert parentDir to Python string format
     std::string pythonCode = "import sys\n"
                              "import os\n"
                              "sys.path.append(r'''" + std::string{ cwd} + "''')\n"
+                             "sys.path.append(r'''" + str_user_dir + "files/scripts" + "''')\n"
                              "sys.path.append(r'''" + std::string{cwd} + std::string{python_path} + "''')";
     // Convert Python code to const char* for PyRun_SimpleString
     const char *pythonCodeWchar = pythonCode.c_str();
