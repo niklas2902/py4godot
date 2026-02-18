@@ -18,7 +18,6 @@ extern "C" {
                                                        GDExtensionClassLibraryPtr p_library,
                                                        GDExtensionInitialization *r_initialization) {
          godot_print_error = (GDExtensionInterfacePrintError)p_get_proc_address("print_error");
-         godot_print_error("start", "test", "test", 1, 1);
 
         #if defined(__linux__)
         void* handle = nullptr;
@@ -28,11 +27,7 @@ extern "C" {
 
         #if defined(__ANDROID__)
         // Load the Android shared library
-        godot_print_error("before load", "test", "test", 1, 1);
-
         handle = dlopen("libmain.so", RTLD_NOW | RTLD_GLOBAL);
-        godot_print_error("after load", "test", "test", 1, 1);
-
         #elif defined(__aarch64__)
         // Load the ARM64 Linux shared library
         handle = dlopen((std::string(python_home) + "/bin/main.so").c_str(), RTLD_NOW | RTLD_GLOBAL);
@@ -68,12 +63,8 @@ extern "C" {
         // Clear any existing errors
         dlerror();
 
-        godot_print_error("before loading handle", "test", "test", 1, 1);
-
         // Load the py4godot_init symbol
         Py4GodotInitFunc load_function_handle = (Py4GodotInitFunc) dlsym(handle, "py4godot_init");
-
-        godot_print_error("after loading handle", "test", "test", 1, 1);
 
         // Check for dlsym errors
         const char* dlsym_error = dlerror();
