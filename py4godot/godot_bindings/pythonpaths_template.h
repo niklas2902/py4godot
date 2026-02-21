@@ -11,15 +11,15 @@
 
 #elif defined(__linux__) && defined(__aarch64__)
 #define PYTHONHOME L"addons/py4godot/{python_ver}-linuxarm64/python/"
-#define PYTHONPATH "/addons/py4godot/{python_ver}-linuxarm64/python/lib/python3.12/site-packages"
+#define PYTHONPATH "/addons/py4godot/{python_ver}-linuxarm64/python/lib/python3.14/site-packages"
 
 
 #elif __linux__
 #define PYTHONHOME L"addons/py4godot/{python_ver}-linux64/python"
-#define PYTHONPATH "/addons/py4godot/{python_ver}-linux64/python/lib/python3.12/site-packages"
+#define PYTHONPATH "/addons/py4godot/{python_ver}-linux64/python/lib/python3.14/site-packages"
 
 
 #elif __APPLE__
 #define PYTHONHOME L"addons/py4godot/{python_ver}-darwin64/python"
-#define PYTHONPATH "/addons/py4godot/{python_ver}-darwin64/python/lib/python3.12/site-packages"
+#define PYTHONPATH "/addons/py4godot/{python_ver}-darwin64/python/lib/python3.14/site-packages"
 #endif

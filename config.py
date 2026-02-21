@@ -1,5 +1,5 @@
-python_ver = "cpython-3.12.4"
-python_ver_short = "python3.12"
+python_ver = "cpython-3.14.3"
+python_ver_short = "python3.14"
 output_dir = "build/final"
 python_dir = "python_files"
 core_folder = "core"
