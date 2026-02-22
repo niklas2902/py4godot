@@ -1,4 +1,5 @@
 # distutils: language=c++
+import platform
 import sys,os
 from typing import get_type_hints
 
@@ -40,8 +41,9 @@ def load_module(module_name, file_to_load):
     # Check if the module is already loaded
     if module_name in sys.modules:
         del sys.modules[module_name]
-    user_path = ProjectSettings.instance().globalize_path("user://files/scripts/")
-
+    user_path = ""
+    if "android" in platform.platform().lower():
+        user_path = ProjectSettings.instance().globalize_path("user://files/scripts/")
     module_spec = importlib.util.spec_from_file_location(module_name, user_path + file_to_load)
     if module_spec is None:
         raise FileNotFoundError(f"Cannot find the module file: {user_path + file_to_load}")

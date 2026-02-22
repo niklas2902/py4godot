@@ -1,11 +1,11 @@
 [constants]
 # Android NDK path
-ndk_root = '/opt/android-sdk/android-ndk-r26d'
+ndk_root = env.get('ANDROID_NDK_ROOT', '/opt/android-sdk/android-ndk-r29')
 
 [binaries]
 # Android NDK toolchain binaries
-c = ndk_root / 'toolchains/llvm/prebuilt/linux-x86_64/bin/aarch64-linux-android21-clang'
-cpp = ndk_root / 'toolchains/llvm/prebuilt/linux-x86_64/bin/aarch64-linux-android21-clang++'
+c = ndk_root / 'toolchains/llvm/prebuilt/linux-x86_64/bin/aarch64-linux-android35-clang'
+cpp = ndk_root / 'toolchains/llvm/prebuilt/linux-x86_64/bin/aarch64-linux-android35-clang++'
 ar = ndk_root / 'toolchains/llvm/prebuilt/linux-x86_64/bin/llvm-ar'
 strip = ndk_root / 'toolchains/llvm/prebuilt/linux-x86_64/bin/llvm-strip'
 pkgconfig = 'pkg-config'
