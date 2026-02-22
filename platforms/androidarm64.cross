@@ -1,9 +1,7 @@
 [constants]
-# Android NDK path
-ndk_root = env.get('ANDROID_NDK_ROOT', '/opt/android-sdk/android-ndk-r29')
+ndk_root = '/opt/android-sdk/android-ndk-r29'
 
 [binaries]
-# Android NDK toolchain binaries
 c = ndk_root / 'toolchains/llvm/prebuilt/linux-x86_64/bin/aarch64-linux-android35-clang'
 cpp = ndk_root / 'toolchains/llvm/prebuilt/linux-x86_64/bin/aarch64-linux-android35-clang++'
 ar = ndk_root / 'toolchains/llvm/prebuilt/linux-x86_64/bin/llvm-ar'
@@ -11,7 +9,6 @@ strip = ndk_root / 'toolchains/llvm/prebuilt/linux-x86_64/bin/llvm-strip'
 pkgconfig = 'pkg-config'
 
 [properties]
-# Set system root for headers and libraries
 sys_root = ndk_root / 'toolchains/llvm/prebuilt/linux-x86_64/sysroot'
 is_android = 1
 
@@ -22,6 +19,6 @@ cpu = 'armv8'
 endian = 'little'
 
 [built-in options]
-# Common Android build options
-c_args = ['-fPIC']
-cpp_args = ['-fPIC']
+cpp_args = ['-O3', '-DNDEBUG', '-w', '-fPIC']
+
+cpp_link_args = ['-s', '-flto', '-fPIC']
