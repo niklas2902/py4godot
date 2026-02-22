@@ -33,7 +33,7 @@ def download_file(platform, allow_copy=False):
     print("download:" + platform)
 
     if platform != "linux32" and platform != "linux64":
-        url = f'https://github.com/indygreg/python-build-standalone/releases/download/20240726/{python_ver}+20240726-{platform_dict[platform]}.tar.gz'
+        url = f'https://github.com/astral-sh/python-build-standalone/releases/download/20260211/{python_ver}+20260211-{platform_dict[platform]}.tar.gz'
         python_file = f'{python_files_dir}/{python_ver}-{platform_dict[platform]}.tar.gz'
     elif platform == "linux64":
         url = f'https://github.com/astral-sh/python-build-standalone/releases/download/20260211/{python_ver}+20260211-{platform_dict[platform]}.tar.gz'
