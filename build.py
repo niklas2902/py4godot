@@ -102,7 +102,6 @@ def create_python_paths():
         f.write(text_to_write)
 
 
-generate_files()
 
 current_platform = platform_check.get_platform()
 
