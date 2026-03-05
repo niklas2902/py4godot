@@ -1,6 +1,7 @@
 import subprocess
 import os
 import argparse
+import sys
 
 my_parser = argparse.ArgumentParser(fromfile_prefix_chars='@')
 my_parser.add_argument('-dev_build', default=False,
@@ -51,7 +52,7 @@ os.chdir(dir) # All files execute on subdirectory
 # Execute each script
 for script in scripts:
     print(f"Executing {script}...")
-    result = subprocess.run(['python', script], capture_output=True, text=True)
+    result = subprocess.run([sys.executable, script], capture_output=True, text=True)
     if result.returncode == 0:
         print(f"{script} executed successfully.")
     else:
