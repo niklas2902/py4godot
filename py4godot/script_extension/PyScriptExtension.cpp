@@ -314,20 +314,17 @@ void PyScriptExtension::_get_class_item_path(GDExtensionTypePtr res){
    }
 }
 
-void PyScriptExtension::set_path_internal(std::string path)  {
-    string_path = path;
-}
-
 
 std::string PyScriptExtension::path_as_string(){
     auto gd_path = get_path();
+    std::string result_string{};
     if (gd_path.length() != 0){
         char* res_string;
         gd_string_to_c_string(gd_path, &res_string);
-        string_path = std::string{res_string};
+        result_string = std::string{res_string};
         delete[] res_string;
     }
-    return string_path;
+    return result_string;
 }
 
 void  PyScriptExtension::_get_base_script(GDExtensionTypePtr res){
