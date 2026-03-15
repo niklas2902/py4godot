@@ -566,10 +566,13 @@ void PyScriptExtension::_set_path_cache( String& path, GDExtensionTypePtr res){
 
 void PyScriptExtension::apply_code(){
     print_error("apply_code");
+    std::string script_path = path_as_string();
+    if (script_path.empty()){
+        return;
+    }
 
     auto gil_state = PyGILState_Ensure();
     auto source = PyUnicode_FromString(this->source_code.c_str());
-    std::string script_path = path_as_string();
     auto _path = PyUnicode_FromString(script_path.c_str());
     assert(source != nullptr);
     assert(_path != nullptr);
