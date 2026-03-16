@@ -1,3 +1,4 @@
+from py4godot.class_ids import classes_dict
 import copy
 import json
 import os
@@ -6,7 +7,6 @@ import sys
 from generate_classes import ReturnType
 from generation_tools import write_if_different
 sys.path.append("..")
-from py4godot.class_ids import classes_dict
 
 IGNORED_CLASSES = ("Nil", "bool", "float", "int")
 INDENT = " "
@@ -25,6 +25,7 @@ def collect_typed_arrays_from_return(method_):
             return [ret_val.type]
     return []
 
+
 def collect_typed_arrays_from_args(method):
     typed_arrays = []
     if "arguments" not in method.keys():
@@ -35,10 +36,11 @@ def collect_typed_arrays_from_args(method):
                 typed_arrays.append(argument["type"])
     return typed_arrays
 
+
 def collect_typed_arrays(classes):
     typed_arrays = []
     for cls in classes:
-        if not "methods" in cls.keys():
+        if "methods" not in cls.keys():
             continue
         for method in cls["methods"]:
             typed_arrays += collect_typed_arrays_from_return(method)
@@ -46,13 +48,16 @@ def collect_typed_arrays(classes):
 
     return set(typed_arrays)
 
+
 def generate_typed_array_name(name):
     if (name == "typedarray::Array"):
         pass
     return name.split("::")[1] + "TypedArray"
 
+
 def generate_newline(str_):
     return str_ + "\n"
+
 
 def generate_includes(classes):
     res = ""
@@ -71,13 +76,18 @@ def generate_includes(classes):
         res = generate_newline(res)
     return res
 
+
 def generate_call_static_methods():
     res = ""
     res += f"PyObject* call_static_method(int class_id, int hash, PyObject* args){{"
     res = generate_newline(res)
     res += f"{INDENT}switch(class_id){{"
     for entry in classes_dict.items():
-        res += f"{INDENT*2}case {entry[1]}: return {entry[0]}::call_static_method_with_return(hash, args);"
+        res += f"{
+            INDENT *
+            2}case {
+            entry[1]}: return {
+            entry[0]}::call_static_method_with_return(hash, args);"
         res = generate_newline(res)
     res += f"{INDENT}}}"
     res = generate_newline(res)
@@ -93,7 +103,11 @@ def generate_call_constructor():
     res = generate_newline(res)
     res += f"{INDENT}switch(class_id){{"
     for entry in classes_dict.items():
-        res += f"{INDENT*2}case {entry[1]}: return {entry[0]}::call_constructor(constructor_num, args);"
+        res += f"{
+            INDENT *
+            2}case {
+            entry[1]}: return {
+            entry[0]}::call_constructor(constructor_num, args);"
         res = generate_newline(res)
     res += f"{INDENT}}}"
     res = generate_newline(res)
@@ -116,7 +130,6 @@ def generate_static_methods(classes):
     return res
 
 
-
 if __name__ == "__main__":
     os.chdir("..")
     with open('py4godot/gdextension-api/extension_api.json', 'r', encoding="utf-8") as myfile:
@@ -132,12 +145,18 @@ if __name__ == "__main__":
         for cls in obj["builtin_classes"]:
             if cls["name"] == "Array":
                 array_cls = cls
-        for typed_array in collect_typed_arrays(obj["classes"] + obj["builtin_classes"]):
+        for typed_array in collect_typed_arrays(
+                obj["classes"] + obj["builtin_classes"]):
             my_array_cls = copy.deepcopy(array_cls)
             my_array_cls["name"] = generate_typed_array_name(typed_array)
             typed_arrays_names.add(generate_typed_array_name(typed_array))
             arrays.append(my_array_cls)
-        arrays = sorted(arrays, key = lambda array: array["name"])
+        arrays = sorted(arrays, key=lambda array: array["name"])
 
         classes.remove(None)
-        write_if_different("py4godot/cppclasses/static_methods.h", generate_static_methods([array["name"] for array in arrays] + list(classes)))
+        write_if_different(
+            "py4godot/cppclasses/static_methods.h",
+            generate_static_methods(
+                [
+                    array["name"] for array in arrays] +
+                list(classes)))

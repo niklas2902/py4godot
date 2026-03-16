@@ -55,7 +55,14 @@ class PythonTest(unittest.TestCase):
         self.assertEqual(Vector2(1, 0).distance_to(Vector2(0, 0)), 1)
         self.assertEqual(Vector2(2, 0).distance_to(Vector2(0, 0)), 2)
         self.assertEqual(Vector2(1, 1).distance_to(Vector2(0, 1)), 1)
-        self.assertEqual(Vector2(1, 1).distance_to(Vector2(0, 0)), 1.4142135381698608)
+        self.assertEqual(
+            Vector2(
+                1,
+                1).distance_to(
+                Vector2(
+                    0,
+                    0)),
+            1.4142135381698608)
 
     def test_distance_squared_to(self):
         self.assertEqual(Vector2(1, 0).distance_squared_to(Vector2(0, 0)), 1)
@@ -63,21 +70,70 @@ class PythonTest(unittest.TestCase):
         self.assertEqual(Vector2(3, 1).distance_squared_to(Vector2(0, 1)), 9)
 
     def test_angle_to(self):
-        self.assertEqual(Vector2(1, 0).angle_to(Vector2(0, 1)), 1.5707963705062866)
+        self.assertEqual(
+            Vector2(
+                1,
+                0).angle_to(
+                Vector2(
+                    0,
+                    1)),
+            1.5707963705062866)
         self.assertEqual(Vector2(1, 0).angle_to(Vector2(0.5, 0)), 0)
-        self.assertEqual(Vector2(1, 0).angle_to(Vector2(0.5, 1)), 1.1071487665176392)
-        self.assertEqual(Vector2(1, 0).angle_to(Vector2(1, 1)), 0.7853981852531433)
-        self.assertEqual(Vector2(100, 0).angle_to(Vector2(0, 1)), 1.5707963705062866)
+        self.assertEqual(
+            Vector2(
+                1,
+                0).angle_to(
+                Vector2(
+                    0.5,
+                    1)),
+            1.1071487665176392)
+        self.assertEqual(
+            Vector2(
+                1,
+                0).angle_to(
+                Vector2(
+                    1,
+                    1)),
+            0.7853981852531433)
+        self.assertEqual(
+            Vector2(
+                100,
+                0).angle_to(
+                Vector2(
+                    0,
+                    1)),
+            1.5707963705062866)
 
     def test_linear_interpolate(self):
-        self.assertEqual(Vector2(1, 1).linear_interpolate(Vector2(1, 2), 1), Vector2(1, 2))
-        self.assertEqual(Vector2(1, 1).linear_interpolate(Vector2(1, 2), 2), Vector2(1, 3))
-        self.assertEqual(Vector2(1, 1).linear_interpolate(Vector2(1, 2), 0), Vector2(1, 1))
+        self.assertEqual(
+            Vector2(
+                1, 1).linear_interpolate(
+                Vector2(
+                    1, 2), 1), Vector2(
+                    1, 2))
+        self.assertEqual(
+            Vector2(
+                1, 1).linear_interpolate(
+                Vector2(
+                    1, 2), 2), Vector2(
+                    1, 3))
+        self.assertEqual(
+            Vector2(
+                1, 1).linear_interpolate(
+                Vector2(
+                    1, 2), 0), Vector2(
+                    1, 1))
 
     def test_cubic_interpolate(self):
         # TODO: Find out what this does
-        self.assertEqual(Vector2(1, 1).cubic_interpolate(Vector2(1, 2), Vector2(1, 2),
-                                                         Vector2(1, 2), 5), Vector2(1, -124))
+        self.assertEqual(
+            Vector2(
+                1, 1).cubic_interpolate(
+                Vector2(
+                    1, 2), Vector2(
+                    1, 2), Vector2(
+                        1, 2), 5), Vector2(
+                            1, -124))
 
     def test_rotated(self):
         self.assertEqual(Vector2(1, 0).rotated(3.14159265359).get_x(), -1)
@@ -93,8 +149,26 @@ class PythonTest(unittest.TestCase):
 
     def test_snapped(self):
         self.assertEqual(Vector2(1, 3.1).snapped(Vector2(1, 1)), Vector2(1, 3))
-        self.assertEqual(Vector2(1.3, 3.21).snapped(Vector2(1, 0.1)), Vector2(1, 3.2))
-        self.assertEqual(Vector2(1.3, 3.21).snapped(Vector2(1, 0.1)), Vector2(1, 3.2))
+        self.assertEqual(
+            Vector2(
+                1.3,
+                3.21).snapped(
+                Vector2(
+                    1,
+                    0.1)),
+            Vector2(
+                1,
+                3.2))
+        self.assertEqual(
+            Vector2(
+                1.3,
+                3.21).snapped(
+                Vector2(
+                    1,
+                    0.1)),
+            Vector2(
+                1,
+                3.2))
 
     def test_dot(self):
         self.assertEqual(Vector2(1, 0).dot(Vector2(0, 1)), 0)
@@ -135,10 +209,22 @@ class PythonTest(unittest.TestCase):
         self.assertEqual(Vector2(1, 2).neg(), Vector2(-1, -2))
 
     def test_multiplay_vector(self):
-        self.assertEqual(Vector2(1, 2).multiply_vector(Vector2(1, 2)), Vector2(1, 4))
-        self.assertEqual(Vector2(-1, 2).multiply_vector(Vector2(1, 2)), Vector2(-1, 4))
-        self.assertEqual(Vector2(4, -5).multiply_vector(Vector2(7, 8)), Vector2(28, -40))
-        self.assertEqual(Vector2(1, 2).multiply_vector(Vector2(1, 2)), Vector2(1, 4))
+        self.assertEqual(
+            Vector2(
+                1, 2).multiply_vector(
+                Vector2(
+                    1, 2)), Vector2(
+                    1, 4))
+        self.assertEqual(
+            Vector2(-1, 2).multiply_vector(Vector2(1, 2)), Vector2(-1, 4))
+        self.assertEqual(
+            Vector2(4, -5).multiply_vector(Vector2(7, 8)), Vector2(28, -40))
+        self.assertEqual(
+            Vector2(
+                1, 2).multiply_vector(
+                Vector2(
+                    1, 2)), Vector2(
+                    1, 4))
 
     def test_multiply_scalar(self):
         self.assertEqual(Vector2(1, 2).multiply_scalar(3), Vector2(3, 6))
@@ -158,8 +244,14 @@ class PythonTest(unittest.TestCase):
         self.assertEqual(Vector2(2, 2).divide_scalar(-1), Vector2(-2, -2))
 
     def test_divide_vector(self):
-        self.assertEqual(Vector2(1, 2).divide_vector(Vector2(1, 2)), Vector2(1, 1))
-        self.assertEqual(Vector2(1, 2).divide_vector(Vector2(-1, -2)), Vector2(-1, -1))
+        self.assertEqual(
+            Vector2(
+                1, 2).divide_vector(
+                Vector2(
+                    1, 2)), Vector2(
+                    1, 1))
+        self.assertEqual(Vector2(1, 2).divide_vector(
+            Vector2(-1, -2)), Vector2(-1, -1))
 
     def test_divide_operator(self):
         self.assertEqual(Vector2(1, 2) / Vector2(1, 2), Vector2(1, 1))

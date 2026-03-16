@@ -8,11 +8,13 @@ from generation_tools import write_if_different
 def generate_newline(str_):
     return str_ + "\n"
 
+
 def enumize_name(str_):
     str_array = str_.split(".")
-    if len(str_array) >1:
-        return str_array[0]+ "__" + str_array[1]
+    if len(str_array) > 1:
+        return str_array[0] + "__" + str_array[1]
     return str_array[0]
+
 
 if __name__ == "__main__":
     os.chdir("..")
@@ -45,7 +47,14 @@ if __name__ == "__main__":
                 res_pyi += f"  {value['name']} = {value['value']}"
                 res_pyi = generate_newline(res_pyi)
 
-
-    write_if_different("py4godot/enums/enums.pyx","# distutils: language=c++\n"+"from py4godot.godot_bindings.binding4_godot4 cimport *")
-    write_if_different("py4godot/enums/enums.pxd", "# distutils: language=c++\n"+res)
-    write_if_different("py4godot/enums/enums.pyi", "# distutils: language=c++\n"+res_pyi)
+    write_if_different(
+        "py4godot/enums/enums.pyx",
+        "# distutils: language=c++\n" +
+        "from py4godot.godot_bindings.binding4_godot4 cimport *")
+    write_if_different(
+        "py4godot/enums/enums.pxd",
+        "# distutils: language=c++\n" + res)
+    write_if_different(
+        "py4godot/enums/enums.pyi",
+        "# distutils: language=c++\n" +
+        res_pyi)

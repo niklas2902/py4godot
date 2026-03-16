@@ -30,6 +30,7 @@ def format_value(value, typ=None):
     else:
         return str(value)
 
+
 def construct_value(value):
     split_array = value.split("(")
     type_ = split_array[0]
@@ -38,7 +39,6 @@ def construct_value(value):
         return f"Vector4.new3({', '.join(values)})"
     if type_ == "Vector4i":
         return f"Vector4i.new3({', '.join(values)})"
-
 
     if type_ == "Vector3":
         return f"Vector3.new3({', '.join(values)})"
@@ -59,26 +59,66 @@ def construct_value(value):
     if type_ == "Quaternion":
         return f"Quaternion.new5({', '.join(values)})"
     if type_ == "Basis":
-        return (f"Basis.new4(Vector3.new3({values[0]}, {values[1]}, {values[2]}), "
-                f"Vector3.new3({values[3]}, {values[4]}, {values[5]}), "
-                f"Vector3.new3({values[6]}, {values[7]}, {values[8]}),)")
+        return (
+            f"Basis.new4(Vector3.new3({
+                values[0]}, {
+                values[1]}, {
+                values[2]}), " f"Vector3.new3({
+                    values[3]}, {
+                        values[4]}, {
+                            values[5]}), " f"Vector3.new3({
+                                values[6]}, {
+                                    values[7]}, {
+                                        values[8]}),)")
     if type_ == "Basis":
-        return (f"Basis.new4(Vector3.new3({values[0]}, {values[1]}, {values[2]}), "
-                f"Vector3.new3({values[3]}, {values[4]}, {values[5]}), "
-                f"Vector3.new3({values[6]}, {values[7]}, {values[8]}),)")
+        return (
+            f"Basis.new4(Vector3.new3({
+                values[0]}, {
+                values[1]}, {
+                values[2]}), " f"Vector3.new3({
+                    values[3]}, {
+                        values[4]}, {
+                            values[5]}), " f"Vector3.new3({
+                                values[6]}, {
+                                    values[7]}, {
+                                        values[8]}),)")
     if type_ == "Transform3D":
-        return (f"Transform3D.new3(Vector3.new3({values[0]}, {values[1]}, {values[2]}), "
-                f"Vector3.new3({values[3]}, {values[4]}, {values[5]}), "
-                f"Vector3.new3({values[6]}, {values[7]}, {values[8]}),"
-                f"Vector3.new3({values[9]}, {values[10]}, {values[11]}),)")
+        return (
+            f"Transform3D.new3(Vector3.new3({
+                values[0]}, {
+                values[1]}, {
+                values[2]}), " f"Vector3.new3({
+                    values[3]}, {
+                        values[4]}, {
+                            values[5]}), " f"Vector3.new3({
+                                values[6]}, {
+                                    values[7]}, {
+                                        values[8]})," f"Vector3.new3({
+                                            values[9]}, {
+                                                values[10]}, {
+                                                    values[11]}),)")
     if type_ == "Projection":
-        return (f"Projection.new3(Vector4.new3({values[0]}, {values[1]}, {values[2]},{values[3]}), "
-                f"Vector4.new3({values[4]}, {values[5]}, {values[6]},{values[7]}),"
-                f"Vector4.new3({values[8]}, {values[9]}, {values[10]},{values[11]}),"
-                f"Vector4.new3({values[12]}, {values[13]}, {values[14]},{values[15]}),)")
-
+        return (
+            f"Projection.new3(Vector4.new3({
+                values[0]}, {
+                values[1]}, {
+                values[2]},{
+                    values[3]}), " f"Vector4.new3({
+                        values[4]}, {
+                            values[5]}, {
+                                values[6]},{
+                                    values[7]})," f"Vector4.new3({
+                                        values[8]}, {
+                                            values[9]}, {
+                                                values[10]},{
+                                                    values[11]})," f"Vector4.new3({
+                                                        values[12]}, {
+                                                            values[13]}, {
+                                                                values[14]},{
+                                                                    values[15]}),)")
 
     return value
+
 
 def pythonize_values(values):
     for i in range(len(values)):
@@ -86,7 +126,8 @@ def pythonize_values(values):
             values[i] = "float('inf')"
     return values
 
-def replace_infinite(value:str):
+
+def replace_infinite(value: str):
     return value.replace("inf", "float('inf')")
 
 
@@ -106,11 +147,13 @@ def generate_constants_for_class(class_info):
             formatted_value = construct_value(const["value"])
         else:
             formatted_value = str(const["value"])
-        output_lines.append(f"{class_info['name']}.{const['name']} = {formatted_value}")
+        output_lines.append(
+            f"{class_info['name']}.{const['name']} = {formatted_value}")
 
         output_lines.append("")  # Empty line after each class
 
     return "\n".join(output_lines)
+
 
 def generate_type_hints_constants_for_class(class_info):
     # Look for classes in the API data
@@ -122,10 +165,14 @@ def generate_type_hints_constants_for_class(class_info):
     output_lines = []
 
     for const in constants:
-        if not "type" in const:
+        if "type" not in const:
             output_lines.append(f"  {const['name']}:typing.ClassVar[int]")
         else:
-            output_lines.append(f"  {const['name']}:typing.ClassVar['{const['type']}'] # {const['value']}")
+            output_lines.append(
+                f"  {
+                    const['name']}:typing.ClassVar['{
+                    const['type']}'] # {
+                    const['value']}")
 
         output_lines.append("")  # Empty line after each class
 

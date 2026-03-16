@@ -5,5 +5,5 @@ from py4godot.classes.Node3D import Node3D
 @gdclass
 class singleton(Node3D):
 
-	def test_method(self):
-		return True
+    def test_method(self):
+        return True

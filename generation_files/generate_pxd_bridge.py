@@ -69,19 +69,20 @@ operator_to_method = {"+": "__add__",
                       ">": "__gt__",
                       ">=": "__ge__",
                       }
-operator_to_variant_operator = {"+": "GDExtensionVariantOperator.GDEXTENSION_VARIANT_OP_ADD",
-                                "*": "GDExtensionVariantOperator.GDEXTENSION_VARIANT_OP_MULTIPLY",
-                                "-": "GDExtensionVariantOperator.GDEXTENSION_VARIANT_OP_SUBTRACT",
-                                "/": "GDExtensionVariantOperator.GDEXTENSION_VARIANT_OP_DIVIDE",
-                                "%": "GDExtensionVariantOperator.GDEXTENSION_VARIANT_OP_MODULE",
-                                "**": "GDExtensionVariantOperator.GDEXTENSION_VARIANT_OP_POWER",
-                                "==": "GDExtensionVariantOperator.GDEXTENSION_VARIANT_OP_EQUAL",
-                                "!=": "GDExtensionVariantOperator.GDEXTENSION_VARIANT_OP_NOT_EQUAL",
-                                "<": "GDExtensionVariantOperator.GDEXTENSION_VARIANT_OP_LESS",
-                                "<=": "GDExtensionVariantOperator.GDEXTENSION_VARIANT_OP_LESS_EQUAL",
-                                ">": "GDExtensionVariantOperator.GDEXTENSION_VARIANT_OP_GREATER",
-                                ">=": "GDExtensionVariantOperator.GDEXTENSION_VARIANT_OP_GREATER_EQUAL",
-                                }
+operator_to_variant_operator = {
+    "+": "GDExtensionVariantOperator.GDEXTENSION_VARIANT_OP_ADD",
+    "*": "GDExtensionVariantOperator.GDEXTENSION_VARIANT_OP_MULTIPLY",
+    "-": "GDExtensionVariantOperator.GDEXTENSION_VARIANT_OP_SUBTRACT",
+    "/": "GDExtensionVariantOperator.GDEXTENSION_VARIANT_OP_DIVIDE",
+    "%": "GDExtensionVariantOperator.GDEXTENSION_VARIANT_OP_MODULE",
+    "**": "GDExtensionVariantOperator.GDEXTENSION_VARIANT_OP_POWER",
+    "==": "GDExtensionVariantOperator.GDEXTENSION_VARIANT_OP_EQUAL",
+    "!=": "GDExtensionVariantOperator.GDEXTENSION_VARIANT_OP_NOT_EQUAL",
+    "<": "GDExtensionVariantOperator.GDEXTENSION_VARIANT_OP_LESS",
+    "<=": "GDExtensionVariantOperator.GDEXTENSION_VARIANT_OP_LESS_EQUAL",
+    ">": "GDExtensionVariantOperator.GDEXTENSION_VARIANT_OP_GREATER",
+    ">=": "GDExtensionVariantOperator.GDEXTENSION_VARIANT_OP_GREATER_EQUAL",
+}
 
 
 def generate_import():
@@ -102,6 +103,7 @@ cdef cppclass Error:
 def ref(type_):
     return "&" if type_ not in {"float", "int", "bool"} else ""
 
+
 def generate_help_functions(classname):
     res = ""
     res += f"{INDENT}shared_ptr[{classname}] construct_{classname}()"
@@ -110,6 +112,7 @@ def generate_help_functions(classname):
     res = generate_newline(res)
     return res
 
+
 def generate_constructor_args(constructor):
     result = ""
     if "arguments" not in constructor:
@@ -117,11 +120,26 @@ def generate_constructor_args(constructor):
 
     for arg in constructor["arguments"]:
         if not arg["type"].startswith("enum::"):
-            result += f"{make_to_ptr(ungodottype(untypearray(unbitfield_type(arg['type']))))}{ref(arg['type'])} {pythonize_name(arg['name'])}, "
+            result += f"{
+                make_to_ptr(
+                    ungodottype(
+                        untypearray(
+                            unbitfield_type(
+                                arg['type']))))}{
+                ref(
+                    arg['type'])} {
+                pythonize_name(
+                    arg['name'])}, "
         else:
-            # enums are marked with enum:: . To be able to use this, we have to strip this
+            # enums are marked with enum:: . To be able to use this, we have to
+            # strip this
             arg_type = arg["type"].replace("enum::", "")
-            result += f"{make_to_ptr(untypearray(unenumize_type(arg_type)))} {pythonize_name(arg['name'])}, "
+            result += f"{
+                make_to_ptr(
+                    untypearray(
+                        unenumize_type(arg_type)))} {
+                pythonize_name(
+                    arg['name'])}, "
     result = result[:-2]
     return result
 
@@ -141,15 +159,16 @@ def convert_camel_case_to_underscore(string):
             res += char
         was_upper = char.isupper()
         was_number = char in {"1", "2", "3", "4", "5", "6", "7", "8", "9", "0"}
-    if ((
-            "vector3" in res.lower() or "vector2" in res.lower()) or "float64" in res.lower() or "float32" in res.lower() or "int64" in res.lower() or "int32" in res.lower()):
+    if (("vector3" in res.lower() or "vector2" in res.lower()) or "float64" in res.lower(
+    ) or "float32" in res.lower() or "int64" in res.lower() or "int32" in res.lower()):
         res = res.replace("Array", "_Array")
     return res
 
 
 def generate_variant_type(class_):
     if class_ in builtin_classes:
-        return f"GDExtensionVariantType.GDEXTENSION_VARIANT_TYPE_{convert_camel_case_to_underscore(class_).upper()}"
+        return f"GDExtensionVariantType.GDEXTENSION_VARIANT_TYPE_{
+            convert_camel_case_to_underscore(class_).upper()}"
     else:
         return f"GDExtensionVariantType.GDEXTENSION_VARIANT_TYPE_NIL"
 
@@ -168,11 +187,13 @@ def generate_constructors(class_):
     for constructor in class_["constructors"]:
         res += f"{INDENT * 2}@staticmethod"
         res = generate_newline(res)
-        res += f"{INDENT * 2}{class_['name']} new{constructor['index']}({generate_constructor_args(constructor)});"
+        res += f"{INDENT *
+                  2}{class_['name']} new{constructor['index']}({generate_constructor_args(constructor)});"
         res = generate_newline(res)
         res += f"{INDENT * 2}@staticmethod"
         res = generate_newline(res)
-        res += f"{INDENT * 2}shared_ptr[{class_['name']}] py_new{constructor['index']}({generate_constructor_args(constructor)});"
+        res += f"{INDENT *
+                  2}shared_ptr[{class_['name']}] py_new{constructor['index']}({generate_constructor_args(constructor)});"
         res = generate_newline(res)
     return res
 
@@ -335,16 +356,21 @@ def unvarianttype(type_):
         return "PyObject*"
     return type_
 
+
 def make_to_ptr(ret_val):
-    if ret_val in builtin_classes - {"int", "float", "bool"} or ret_val in classes or ret_val in typed_arrays_names:
+    if ret_val in builtin_classes - \
+            {"int", "float", "bool"} or ret_val in classes or ret_val in typed_arrays_names:
         return f"shared_ptr[{ret_val}]"
     return ret_val
+
+
 def generate_method(class_, mMethod):
     res = ""
     if has_native_struct(mMethod):
         return res
     args = generate_args(mMethod, is_py_method=True)
-    def_function = f"{INDENT * 2}{make_to_ptr(unvarianttype(ungodottype(untypearray(get_ret_value(mMethod)))))} py_{pythonize_name(mMethod['name'])}({args});"
+    def_function = f"{INDENT *
+                      2}{make_to_ptr(unvarianttype(ungodottype(untypearray(get_ret_value(mMethod)))))} py_{pythonize_name(mMethod['name'])}({args});"
     res = generate_newline(res)
     res += generate_method_modifiers(mMethod)
     res = generate_newline(res)
@@ -378,7 +404,11 @@ def collect_members(obj):
     for class_ in obj["builtin_class_member_offsets"][3]["classes"]:
         core_class = BuiltinClass(class_["name"])
         for member in class_["members"]:
-            core_member = CoreMember(member["member"], member["meta"].replace("32", ""))
+            core_member = CoreMember(
+                member["member"],
+                member["meta"].replace(
+                    "32",
+                    ""))
             core_class.core_members.append(core_member)
         core_classes[class_["name"]] = core_class
     print(core_classes)
@@ -410,26 +440,29 @@ def generate_common_methods(class_):
         result += generate_set_should_be_deleted(class_)
     if class_["name"] == "RefCounted":
         result = generate_newline(result)
-        result += f"{INDENT*2}void py_destroy_ref()"
+        result += f"{INDENT * 2}void py_destroy_ref()"
         result = generate_newline(result)
     if class_["name"] == "Object":
-        result += f"{INDENT*2}void destroy()"
+        result += f"{INDENT * 2}void destroy()"
         result = generate_newline(result)
     if class_["name"] == "Node":
-        result += f"{INDENT*2}void py_destroy_node()"
+        result += f"{INDENT * 2}void py_destroy_node()"
         result = generate_newline(result)
     return result
 
 
 def generate_enums(class_):
-    if not "enums" in class_.keys():
+    if "enums" not in class_.keys():
         return ""
     res = ""
     for enum in class_["enums"]:
         res += f"cpdef enum {class_['name']}__{enum['name']}:"
         res = generate_newline(res)
         for enum_value in enum["values"]:
-            res += f"{INDENT}{class_['name']}__{enum_value['name']} = {enum_value['value']}"
+            res += f"{INDENT}{
+                class_['name']}__{
+                enum_value['name']} = {
+                enum_value['value']}"
             res = generate_newline(res)
     res = generate_newline(res)
     return res
@@ -439,14 +472,16 @@ def generate_member_getter(class_, member):
     res = ""
     res += f"{INDENT}"
     res = generate_newline(res)
-    res += f"{INDENT * 2}{make_to_ptr(ungodottype(member.type_))} py_member_get_{member.name}();"
+    res += f"{INDENT *
+              2}{make_to_ptr(ungodottype(member.type_))} py_member_get_{member.name}();"
     res = generate_newline(res)
     return res
 
 
 def generate_member_setter(class_, member):
     res = ""
-    res += f"{INDENT * 2}void py_member_set_{member.name}({make_to_ptr(member.type_)} value);"
+    res += f"{INDENT *
+              2}void py_member_set_{member.name}({make_to_ptr(member.type_)} value);"
     return res
 
 
@@ -469,11 +504,19 @@ def generate_property(property):
     result = ""
     if "typedarray" in property["type"]:
         return result  # TODO: Enable again
-    result += f"{INDENT * 2}{simplify_type(unbitfield_type(unenumize_type((property['type']))))} prop_get_{pythonize_name(property['name'])}()" + ";"
+    result += f"{
+        INDENT * 2}{
+        simplify_type(
+            unbitfield_type(
+                unenumize_type(
+                    (property['type']))))} prop_get_{
+                        pythonize_name(
+                            property['name'])}()" + ";"
     result = generate_newline(result)
 
     if "setter" in property and property["setter"] != "":
-        result += f"{INDENT * 2}void prop_set_{pythonize_name(property['name'])}({simplify_type(untypearray(simplify_type(property['type'])))} value);"
+        result += f"{INDENT *
+                     2}void prop_set_{pythonize_name(property['name'])}({simplify_type(untypearray(simplify_type(property['type'])))} value);"
         result = generate_newline(result)
 
     return result
@@ -481,7 +524,18 @@ def generate_property(property):
 
 def pythonize_name(name):
     if name in (
-            "from", "len", "in", "for", "with", "class", "pass", "raise", "global", "char", "default", "new",
+        "from",
+        "len",
+        "in",
+        "for",
+        "with",
+        "class",
+        "pass",
+        "raise",
+        "global",
+        "char",
+        "default",
+        "new",
             "get_interface"):
         return name + "_"
     return name
@@ -507,19 +561,56 @@ def generate_args(method_with_args, is_py_method=False):
             if is_py_method:
                 result += f"PyObject* {pythonize_name(arg['name'])}, "
             else:
-                result += f"{unenumize_type(untypearray_or_dictionary(unbitfield_type(arg['type'])))}& {pythonize_name(arg['name'])}, "
+                result += f"{
+                    unenumize_type(
+                        untypearray_or_dictionary(
+                            unbitfield_type(
+                                arg['type'])))}& {
+                    pythonize_name(
+                        arg['name'])}, "
         elif not arg["type"].startswith("enum::") and not arg["type"].startswith("bitfield::") and not untypearray(
                 arg["type"]) in builtin_classes and not is_typed_array(untypearray_or_dictionary(arg["type"])):
-            result += f"shared_ptr[{unenumize_type(untypearray_or_dictionary(unbitfield_type(arg['type'])))}] {pythonize_name(arg['name'])}, "
+            result += f"shared_ptr[{
+                unenumize_type(
+                    untypearray_or_dictionary(
+                        unbitfield_type(
+                            arg['type'])))}] {
+                pythonize_name(
+                    arg['name'])}, "
         elif untypearray_or_dictionary(arg["type"]) in builtin_classes - {"int", "float", "bool", "Nil"}:
-            result += f"shared_ptr[{unenumize_type(untypearray_or_dictionary(unbitfield_type(arg['type'])))}] {pythonize_name(arg['name'])}, "
+            result += f"shared_ptr[{
+                unenumize_type(
+                    untypearray_or_dictionary(
+                        unbitfield_type(
+                            arg['type'])))}] {
+                pythonize_name(
+                    arg['name'])}, "
         elif is_typed_array(untypearray_or_dictionary(arg["type"])):
-            result += f"shared_ptr[{unenumize_type(untypearray_or_dictionary(unbitfield_type(arg['type'])))}] {pythonize_name(arg['name'])}, "
+            result += f"shared_ptr[{
+                unenumize_type(
+                    untypearray_or_dictionary(
+                        unbitfield_type(
+                            arg['type'])))}] {
+                pythonize_name(
+                    arg['name'])}, "
         elif arg["type"] in {"int", "float", "bool"}:
-            result += f"{unenumize_type(untypearray_or_dictionary(unbitfield_type(arg['type'])))} {pythonize_name(arg['name'])}, "
+            result += f"{
+                unenumize_type(
+                    untypearray_or_dictionary(
+                        unbitfield_type(
+                            arg['type'])))} {
+                pythonize_name(
+                    arg['name'])}, "
         else:
-            # enums are marked with enum:: . To be able to use this, we have to strip this
-            result += f"{untypearray_or_dictionary(unbitfield_type(unenumize_type(arg['type'])))} {pythonize_name(arg['name'])} , "
+            # enums are marked with enum:: . To be able to use this, we have to
+            # strip this
+            result += f"{
+                untypearray_or_dictionary(
+                    unbitfield_type(
+                        unenumize_type(
+                            arg['type'])))} {
+                pythonize_name(
+                    arg['name'])} , "
     result = result[:-2]
     if method_with_args["is_vararg"]:
         result += ", vector[PyObject*]& varargs"
@@ -559,8 +650,11 @@ def get_classes_to_import(classes):
         if "methods" in class_.keys():
             for method in class_["methods"]:
                 if ("return_value" in method.keys()):
-                    if (unbitfield_type(get_class_from_enum(method["return_value"]["type"])) in normal_classes):
-                        classes_to_import.add(get_class_from_enum(method["return_value"]["type"]))
+                    if (unbitfield_type(get_class_from_enum(
+                            method["return_value"]["type"])) in normal_classes):
+                        classes_to_import.add(
+                            get_class_from_enum(
+                                method["return_value"]["type"]))
                 if ("arguments" not in method.keys()):
                     continue
                 for argument in method["arguments"]:
@@ -592,9 +686,11 @@ def generate_new_static(class_):
     res = f"{INDENT * 2}@staticmethod"
     res = generate_newline(res)
     if (class_["name"] in builtin_classes):
-        res += f"{INDENT * 2}{class_['name']} new_static(GDExtensionTypePtr owner);"
+        res += f"{INDENT *
+                  2}{class_['name']} new_static(GDExtensionTypePtr owner);"
     else:
-        res += f"{INDENT * 2}{class_['name']} new_static(GDExtensionObjectPtr owner);"
+        res += f"{INDENT *
+                  2}{class_['name']} new_static(GDExtensionObjectPtr owner);"
 
     return res
 
@@ -607,9 +703,18 @@ def generate_set_owner(class_):
 
 
 def operator_to_python_name(operator_name):
-    operator_names = {"*": "mult", "/": "divide", "+": "add", "-": "subtract", "==": "equals", "!=": "unequals",
-                      "%": "modulo", "<": "lower_than", ">": "greater_than", ">=": "greater_euqals",
-                      "<=": "lower_equals"}
+    operator_names = {
+        "*": "mult",
+        "/": "divide",
+        "+": "add",
+        "-": "subtract",
+        "==": "equals",
+        "!=": "unequals",
+        "%": "modulo",
+        "<": "lower_than",
+        ">": "greater_than",
+        ">=": "greater_euqals",
+        "<=": "lower_equals"}
     return operator_names[operator_name]
 
 
@@ -627,9 +732,17 @@ def generate_operators_for_class(class_name):
                 op = operator_dict[class_name][operator]
                 if op.right_type_values:
                     for right_type in op.right_type_values:
-                        res += f"{INDENT * 2}{op.return_type} operator{operator}({ungodottype(right_type)}{generate_reference(right_type)} other);"
+                        res += f"{INDENT *
+                                  2}{op.return_type} operator{operator}({ungodottype(right_type)}{generate_reference(right_type)} other);"
                         res = generate_newline(res)
-                        res += f"{INDENT * 2}{make_to_ptr(op.return_type)} py_operator_{operator_to_python_name(operator)} ({make_to_ptr(ungodottype(right_type))}{generate_reference(right_type)} other);"
+                        res += f"{
+                            INDENT * 2}{
+                            make_to_ptr(
+                                op.return_type)} py_operator_{
+                            operator_to_python_name(operator)} ({
+                            make_to_ptr(
+                                ungodottype(right_type))}{
+                            generate_reference(right_type)} other);"
                         res = generate_newline(res)
     res = generate_newline(res)
     return res
@@ -638,51 +751,63 @@ def generate_operators_for_class(class_name):
 def is_typed_array(classname):
     return classname in typed_arrays_names
 
+
 def generate_array_methods(class_):
     res = ""
-    if class_["name"] in ("PackedFloat32Array", "PackedFloat64Array", "PackedByteArray", "PackedInt32Array", "PackedInt64Array"):
+    if class_["name"] in (
+        "PackedFloat32Array",
+        "PackedFloat64Array",
+        "PackedByteArray",
+        "PackedInt32Array",
+            "PackedInt64Array"):
         if class_["name"] == "PackedFloat32Array":
-            res += f"{INDENT*2}vector[float] to_vector()"
+            res += f"{INDENT * 2}vector[float] to_vector()"
             res = generate_newline(res)
-            res += f"{INDENT*2}float* get_pointer()"
+            res += f"{INDENT * 2}float* get_pointer()"
             res = generate_newline(res)
-            res += f"{INDENT*2}@staticmethod"
+            res += f"{INDENT * 2}@staticmethod"
             res = generate_newline(res)
-            res += f"{INDENT*2}shared_ptr[{class_['name']}] py_from_ptr(float* ptr, long long size)"
+            res += f"{INDENT *
+                      2}shared_ptr[{class_['name']}] py_from_ptr(float* ptr, long long size)"
             res = generate_newline(res)
         if class_["name"] == "PackedFloat64Array":
-            res += f"{INDENT*2}vector[double] to_vector()"
+            res += f"{INDENT * 2}vector[double] to_vector()"
             res = generate_newline(res)
             res += f"{INDENT * 2}double* get_pointer()"
             res = generate_newline(res)
-            res += f"{INDENT*2}@staticmethod"
+            res += f"{INDENT * 2}@staticmethod"
             res = generate_newline(res)
-            res += f"{INDENT*2}shared_ptr[{class_['name']}] py_from_ptr(double* ptr, long long size)"
+            res += f"{INDENT *
+                      2}shared_ptr[{class_['name']}] py_from_ptr(double* ptr, long long size)"
         if class_["name"] == "PackedByteArray":
             res += f"{INDENT * 2}vector[byte] to_vector()"
             res = generate_newline(res)
             res += f"{INDENT * 2}byte* get_pointer()"
             res = generate_newline(res)
-            res += f"{INDENT*2}@staticmethod"
+            res += f"{INDENT * 2}@staticmethod"
             res = generate_newline(res)
-            res += f"{INDENT*2}shared_ptr[{class_['name']}] py_from_ptr(byte* ptr, long long size)"
+            res += f"{INDENT *
+                      2}shared_ptr[{class_['name']}] py_from_ptr(byte* ptr, long long size)"
         if class_["name"] == "PackedInt32Array":
             res += f"{INDENT * 2}vector[int32_t] to_vector()"
             res = generate_newline(res)
             res += f"{INDENT * 2}int32_t* get_pointer()"
             res = generate_newline(res)
-            res += f"{INDENT*2}@staticmethod"
+            res += f"{INDENT * 2}@staticmethod"
             res = generate_newline(res)
-            res += f"{INDENT*2}shared_ptr[{class_['name']}] py_from_ptr(int32_t* ptr, long long size)"
+            res += f"{INDENT *
+                      2}shared_ptr[{class_['name']}] py_from_ptr(int32_t* ptr, long long size)"
         if class_["name"] == "PackedInt64Array":
             res += f"{INDENT * 2}vector[int64_t] to_vector()"
             res = generate_newline(res)
             res += f"{INDENT * 2}int64_t* get_pointer()"
             res = generate_newline(res)
-            res += f"{INDENT*2}@staticmethod"
+            res += f"{INDENT * 2}@staticmethod"
             res = generate_newline(res)
-            res += f"{INDENT*2}shared_ptr[{class_['name']}] py_from_ptr(int64_t* ptr, long long size)"
+            res += f"{INDENT *
+                      2}shared_ptr[{class_['name']}] py_from_ptr(int64_t* ptr, long long size)"
     return res
+
 
 def generate_wrapper():
     res = generate_import()
@@ -699,7 +824,8 @@ def generate_wrapper():
     res = generate_newline(res)
     res += f'{INDENT * 2}void switch_call(int method_hash, PyObject * objects)'
     res = generate_newline(res)
-    res += f'{INDENT * 2}PyObject* switch_call_return(int method_hash, PyObject * objects)'
+    res += f'{INDENT *
+              2}PyObject* switch_call_return(int method_hash, PyObject * objects)'
     res = generate_newline(res)
 
     res += f'cdef extern from "py4godot/cpputils/VariantTypeWrapper.h" namespace "godot":'
@@ -709,6 +835,7 @@ def generate_wrapper():
     res += f'{INDENT * 2}GDExtensionTypePtr& get_godot_owner()'
     res = generate_newline(res)
     return res
+
 
 def generate_classes(classes, filename, is_core=False):
     res = generate_import()
@@ -725,7 +852,8 @@ def generate_classes(classes, filename, is_core=False):
     res = generate_newline(res)
     res += f'{INDENT * 2}void switch_call(int method_hash, PyObject * objects)'
     res = generate_newline(res)
-    res += f'{INDENT * 2}PyObject* switch_call_return(int method_hash, PyObject * objects)'
+    res += f'{INDENT *
+              2}PyObject* switch_call_return(int method_hash, PyObject * objects)'
     res = generate_newline(res)
 
     res += f'cdef extern from "py4godot/cpputils/VariantTypeWrapper.h" namespace "godot":'
@@ -747,8 +875,9 @@ def generate_pxd_bridge_class(classname):
     res = generate_newline(res)
     res += f'{INDENT}cdef cppclass {classname}(Wrapper):'
     res = generate_newline(res)
-    res += f'{INDENT*2}pass'
+    res += f'{INDENT * 2}pass'
     return res
+
 
 def collect_typed_arrays_from_return(method_):
     if "return_value" in method_.keys() or "return_type" in method_.keys():
@@ -776,7 +905,7 @@ def collect_typed_arrays_from_args(method):
 def collect_typed_arrays(classes):
     typed_arrays = []
     for cls in classes:
-        if not "methods" in cls.keys():
+        if "methods" not in cls.keys():
             continue
         for method in cls["methods"]:
             typed_arrays += collect_typed_arrays_from_return(method)
@@ -799,12 +928,14 @@ if __name__ == "__main__":
         classes = set([class_['name'] if class_["name"] not in IGNORED_CLASSES else None for class_ in
                        obj['classes'] + obj["builtin_classes"]])
 
-        builtin_classes = set(class_["name"] for class_ in obj["builtin_classes"])
+        builtin_classes = set(class_["name"]
+                              for class_ in obj["builtin_classes"])
         normal_classes = set([class_['name'] for class_ in obj['classes']])
-        native_structs = set([native_struct["name"] for native_struct in obj["native_structures"]])
-        singletons = set([singleton["name"] for singleton in obj["singletons"]])
+        native_structs = set([native_struct["name"]
+                             for native_struct in obj["native_structures"]])
+        singletons = set([singleton["name"]
+                         for singleton in obj["singletons"]])
         classes_to_generate = []
-
 
         # for class_ in obj["classes"]:
         #    if class_["name"] in {"Object", "RefCounted", "AESContext"}:
@@ -821,13 +952,18 @@ if __name__ == "__main__":
         for cls in obj["builtin_classes"]:
             if cls["name"] == "Array":
                 array_cls = cls
-        print("typedarrays:", collect_typed_arrays(obj["classes"] + obj["builtin_classes"]))
-        for typed_array in collect_typed_arrays(obj["classes"] + obj["builtin_classes"]):
+        print(
+            "typedarrays:",
+            collect_typed_arrays(
+                obj["classes"] +
+                obj["builtin_classes"]))
+        for typed_array in collect_typed_arrays(
+                obj["classes"] + obj["builtin_classes"]):
             my_array_cls = copy.deepcopy(array_cls)
             my_array_cls["name"] = generate_typed_array_name(typed_array)
             typed_arrays_names.add(generate_typed_array_name(typed_array))
             arrays.append(my_array_cls)
-        arrays = sorted(arrays, key = lambda a: a["name"] )
+        arrays = sorted(arrays, key=lambda a: a["name"])
         typed_arrays_names = sorted(list(typed_arrays_names))
         res = ""
         res += generate_wrapper()

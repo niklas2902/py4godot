@@ -11,6 +11,8 @@ import gc
 
 END_TIME = 20
 START_TIME = 10
+
+
 @gdclass
 class TestObject(Node3D):
     def _ready(self) -> None:
@@ -35,7 +37,8 @@ class TestObject(Node3D):
 
     def do_ray_query(self) -> None:
         target = Vector3.new0()
-        ds = PhysicsServer3D.instance().space_get_direct_state(self.get_world_3d().get_space())
+        ds = PhysicsServer3D.instance().space_get_direct_state(
+            self.get_world_3d().get_space())
         parameters = PhysicsRayQueryParameters3D.create(
             target,
             target,
@@ -45,8 +48,7 @@ class TestObject(Node3D):
 
         ds.intersect_ray(parameters)
 
-
-    def _process(self, delta:'float'   ) -> None:
+    def _process(self, delta: 'float') -> None:
         self.current_time += delta
         if self.current_time >= START_TIME and self.current_time <= END_TIME:
             # Testing refcounted structures
@@ -65,4 +67,4 @@ class TestObject(Node3D):
             self.do_sphere_cast()
             self.do_ray_query()
 
-        gc.collect() #making sure, that everything is cleaned up for being able to get data
+        gc.collect()  # making sure, that everything is cleaned up for being able to get data

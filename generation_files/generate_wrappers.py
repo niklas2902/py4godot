@@ -23,6 +23,7 @@ def collect_typed_arrays_from_return(method_):
             return [ret_val.type]
     return []
 
+
 def collect_typed_arrays_from_args(method):
     typed_arrays = []
     if "arguments" not in method.keys():
@@ -33,10 +34,11 @@ def collect_typed_arrays_from_args(method):
                 typed_arrays.append(argument["type"])
     return typed_arrays
 
+
 def collect_typed_arrays(classes):
     typed_arrays = []
     for cls in classes:
-        if not "methods" in cls.keys():
+        if "methods" not in cls.keys():
             continue
         for method in cls["methods"]:
             typed_arrays += collect_typed_arrays_from_return(method)
@@ -44,13 +46,16 @@ def collect_typed_arrays(classes):
 
     return set(typed_arrays)
 
+
 def generate_typed_array_name(name):
     if (name == "typedarray::Array"):
         pass
     return name.split("::")[1] + "TypedArray"
 
+
 def generate_newline(str_):
     return str_ + "\n"
+
 
 def generate_import():
     res = ""
@@ -64,23 +69,23 @@ def generate_import():
     res = generate_newline(res)
     return res
 
+
 def generate_wrapper(class_name):
     res = f"cdef class CPP{class_name}Wrapper(CPPWrapper):"
     res = generate_newline(res)
     res += f"{INDENT}def __cinit__(self):"
     res = generate_newline(res)
-    res += f"{INDENT*2}self._ptr = make_shared[bridge.{class_name}]()"
+    res += f"{INDENT * 2}self._ptr = make_shared[bridge.{class_name}]()"
     res = generate_newline(res)
     res += f"{INDENT}cdef bridge.Wrapper* get_ptr(self):"
     res = generate_newline(res)
-    res += f"{INDENT*2}return <bridge.Wrapper*> self._ptr.get()"
+    res += f"{INDENT * 2}return <bridge.Wrapper*> self._ptr.get()"
     res = generate_newline(res)
 
     res += f"{INDENT}cpdef call_with_return(self, int method_hash, tuple args_tuple):"
     res = generate_newline(res)
-    res += f"{INDENT*2}return <object>self._ptr.get().switch_call_return(method_hash, <PyObject*>args_tuple)"
+    res += f"{INDENT * 2}return <object>self._ptr.get().switch_call_return(method_hash, <PyObject*>args_tuple)"
     res = generate_newline(res)
-
 
     res += f"cdef api shared_ptr[bridge.{class_name}] extract_ptr_from_{class_name}Wrapper(object o):"
     res = generate_newline(res)
@@ -101,6 +106,7 @@ def generate_wrapper(class_name):
 
     return res
 
+
 def generate_wrapper_pxd(class_name):
     res = f"cdef class CPP{class_name}Wrapper(CPPWrapper):"
     res = generate_newline(res)
@@ -118,6 +124,7 @@ def generate_wrapper_pxd(class_name):
     res = generate_newline(res)
 
     return res
+
 
 def generate_wrapper_header(class_name):
     res = ""
@@ -152,13 +159,15 @@ if __name__ == "__main__":
     with open('py4godot/gdextension-api/extension_api.json', 'r', encoding="utf-8") as myfile:
         if not os.path.isdir("py4godot/wrappers"):
             os.mkdir("py4godot/wrappers")
-            with open("py4godot/wrappers/__init__.py", "w", encoding="utf-8") as file:pass
+            with open("py4godot/wrappers/__init__.py", "w", encoding="utf-8") as file:
+                pass
         data = myfile.read()
         obj = json.loads(data)
         classes = set([class_['name'] if class_["name"] not in IGNORED_CLASSES else None for class_ in
                        obj['classes'] + obj["builtin_classes"]])
         builtin_classes = [class_["name"] for class_ in obj["builtin_classes"]]
-        singletons = set([singleton["name"] for singleton in obj["singletons"]])
+        singletons = set([singleton["name"]
+                         for singleton in obj["singletons"]])
         res = "from py4godot.utils.CPPWrapper cimport *"
         res = generate_newline(res)
         res += generate_import()
@@ -168,13 +177,18 @@ if __name__ == "__main__":
         for cls in obj["builtin_classes"]:
             if cls["name"] == "Array":
                 array_cls = cls
-        print("typedarrays:", collect_typed_arrays(obj["classes"] + obj["builtin_classes"]))
-        for typed_array in collect_typed_arrays(obj["classes"] + obj["builtin_classes"]):
+        print(
+            "typedarrays:",
+            collect_typed_arrays(
+                obj["classes"] +
+                obj["builtin_classes"]))
+        for typed_array in collect_typed_arrays(
+                obj["classes"] + obj["builtin_classes"]):
             my_array_cls = copy.deepcopy(array_cls)
             my_array_cls["name"] = generate_typed_array_name(typed_array)
             typed_arrays_names.add(generate_typed_array_name(typed_array))
             arrays.append(my_array_cls)
-        arrays = sorted(arrays, key = lambda array: array["name"])
+        arrays = sorted(arrays, key=lambda array: array["name"])
 
         all_classes = arrays + obj['classes'] + obj["builtin_classes"]
         res += f"cdef api object extract_ptr_from_py_object(object other)"
@@ -220,13 +234,12 @@ if __name__ == "__main__":
                 res = generate_newline(res)
         write_if_different("py4godot/wrappers/wrappers_wrapper.h", res)
 
-
-
         res = '#include "py4godot/wrappers/wrappers_wrapper.h"'
         res = generate_newline(res)
         for cls in all_classes:
             if cls["name"] not in IGNORED_CLASSES and "typedarray" in cls["name"].lower():
-                res += f'#include "py4godot/cppclasses/typedarrays/{cls["name"]}.h"'
+                res += f'#include "py4godot/cppclasses/typedarrays/{
+                    cls["name"]}.h"'
                 res = generate_newline(res)
             elif cls["name"] in classes - set(builtin_classes):
                 res += f'#include "py4godot/cppclasses/{cls["name"]}/{cls["name"]}.h"'
@@ -241,6 +254,7 @@ if __name__ == "__main__":
 
         for cls in all_classes:
             if cls["name"] not in IGNORED_CLASSES:
-                res += generate_wrapper_source(cls["name"], cls["name"] in singletons)
+                res += generate_wrapper_source(cls["name"],
+                                               cls["name"] in singletons)
                 res = generate_newline(res)
         write_if_different("py4godot/wrappers/wrappers_wrapper.cpp", res)

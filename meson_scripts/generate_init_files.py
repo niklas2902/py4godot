@@ -14,7 +14,7 @@ import inspect
 
 def gdmethod(function:object):
     return function
-    
+
 def SignalArg(name:str, type_:type):
     import py4godot.signals as signals
     return signals.SignalArg(name, type_)
@@ -51,6 +51,7 @@ from py4godot.pluginscript_api.hints.flags_hint.FlagsHint import *
 
 """This file is for copying the generated so/dll files from ninja/meson into the build folder"""
 
+
 def create_init_file(platform):
     """generate the __init__ file needed for the core module"""
     if "windows" in platform:
@@ -68,6 +69,5 @@ def create_init_file(platform):
         with open(f"{output_dir}/{platform}/{python_ver}-{platform}/python/lib/{python_ver_short}/site-packages/py4godot/__init__.py", "w") as init_file:
             init_file.write(import_string_py4godot)
 
-
-    #with open(f"{build_folder}/{platform}/{config_data['python_ver']}-{platform}/python/install/Lib/site-packages/py4godot/pluginscript_api/hints/__init__.py", "w") as init_file:
+    # with open(f"{build_folder}/{platform}/{config_data['python_ver']}-{platform}/python/install/Lib/site-packages/py4godot/pluginscript_api/hints/__init__.py", "w") as init_file:
     #    init_file.write(import_string_hints)

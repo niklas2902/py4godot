@@ -4,8 +4,10 @@ import argparse
 import sys
 
 my_parser = argparse.ArgumentParser(fromfile_prefix_chars='@')
-my_parser.add_argument('-dev_build', default=False,
-                       help='Specify whether you want to build a minimized version')
+my_parser.add_argument(
+    '-dev_build',
+    default=False,
+    help='Specify whether you want to build a minimized version')
 # Execute parse_args()
 args = my_parser.parse_args()
 # List of scripts to execute
@@ -48,11 +50,12 @@ if not os.path.isdir("py4godot/enums"):
 if not os.path.isdir("py4godot/cppclasses"):
     os.mkdir("py4godot/cppclasses")
 
-os.chdir(dir) # All files execute on subdirectory
+os.chdir(dir)  # All files execute on subdirectory
 # Execute each script
 for script in scripts:
     print(f"Executing {script}...")
-    result = subprocess.run([sys.executable, script], capture_output=True, text=True)
+    result = subprocess.run([sys.executable, script],
+                            capture_output=True, text=True)
     if result.returncode == 0:
         print(f"{script} executed successfully.")
     else:

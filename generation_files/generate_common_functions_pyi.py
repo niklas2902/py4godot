@@ -58,19 +58,20 @@ operator_to_method = {"+": "__add__",
                       ">": "__gt__",
                       ">=": "__ge__",
                       }
-operator_to_variant_operator = {"+": "GDExtensionVariantOperator.GDEXTENSION_VARIANT_OP_ADD",
-                                "*": "GDExtensionVariantOperator.GDEXTENSION_VARIANT_OP_MULTIPLY",
-                                "-": "GDExtensionVariantOperator.GDEXTENSION_VARIANT_OP_SUBTRACT",
-                                "/": "GDExtensionVariantOperator.GDEXTENSION_VARIANT_OP_DIVIDE",
-                                "%": "GDExtensionVariantOperator.GDEXTENSION_VARIANT_OP_MODULE",
-                                "**": "GDExtensionVariantOperator.GDEXTENSION_VARIANT_OP_POWER",
-                                "==": "GDExtensionVariantOperator.GDEXTENSION_VARIANT_OP_EQUAL",
-                                "!=": "GDExtensionVariantOperator.GDEXTENSION_VARIANT_OP_NOT_EQUAL",
-                                "<": "GDExtensionVariantOperator.GDEXTENSION_VARIANT_OP_LESS",
-                                "<=": "GDExtensionVariantOperator.GDEXTENSION_VARIANT_OP_LESS_EQUAL",
-                                ">": "GDExtensionVariantOperator.GDEXTENSION_VARIANT_OP_GREATER",
-                                ">=": "GDExtensionVariantOperator.GDEXTENSION_VARIANT_OP_GREATER_EQUAL",
-                                }
+operator_to_variant_operator = {
+    "+": "GDExtensionVariantOperator.GDEXTENSION_VARIANT_OP_ADD",
+    "*": "GDExtensionVariantOperator.GDEXTENSION_VARIANT_OP_MULTIPLY",
+    "-": "GDExtensionVariantOperator.GDEXTENSION_VARIANT_OP_SUBTRACT",
+    "/": "GDExtensionVariantOperator.GDEXTENSION_VARIANT_OP_DIVIDE",
+    "%": "GDExtensionVariantOperator.GDEXTENSION_VARIANT_OP_MODULE",
+    "**": "GDExtensionVariantOperator.GDEXTENSION_VARIANT_OP_POWER",
+    "==": "GDExtensionVariantOperator.GDEXTENSION_VARIANT_OP_EQUAL",
+    "!=": "GDExtensionVariantOperator.GDEXTENSION_VARIANT_OP_NOT_EQUAL",
+    "<": "GDExtensionVariantOperator.GDEXTENSION_VARIANT_OP_LESS",
+    "<=": "GDExtensionVariantOperator.GDEXTENSION_VARIANT_OP_LESS_EQUAL",
+    ">": "GDExtensionVariantOperator.GDEXTENSION_VARIANT_OP_GREATER",
+    ">=": "GDExtensionVariantOperator.GDEXTENSION_VARIANT_OP_GREATER_EQUAL",
+}
 
 
 def generate_import():
@@ -81,7 +82,8 @@ import py4godot.classes.Object.Object as __object__
 """
     for cls in builtin_classes:
         if cls not in {"Nil", "float", "int", "bool"}:
-            result += f"import py4godot.classes.generated4_core as __{cls.lower()}__\n"
+            result += f"import py4godot.classes.generated4_core as __{
+                cls.lower()}__\n"
     return result
 
 
@@ -92,11 +94,21 @@ def generate_constructor_args(constructor):
 
     for arg in constructor["arguments"]:
         if not arg["type"].startswith("enum::"):
-            result += f"{pythonize_name(arg['name'])}:{untypearray(unbitfield_type(arg['type']))}, "
+            result += f"{
+                pythonize_name(
+                    arg['name'])}:{
+                untypearray(
+                    unbitfield_type(
+                        arg['type']))}, "
         else:
-            # enums are marked with enum:: . To be able to use this, we have to strip this
+            # enums are marked with enum:: . To be able to use this, we have to
+            # strip this
             arg_type = arg["type"].replace("enum::", "")
-            result += f"{pythonize_name(arg['name'])}:{untypearray(unenumize_type(arg_type))}, "
+            result += f"{
+                pythonize_name(
+                    arg['name'])}:{
+                untypearray(
+                    unenumize_type(arg_type))}, "
     result = result[:-2]
     return result
 
@@ -125,15 +137,16 @@ def convert_camel_case_to_underscore(string):
             res += char
         was_upper = char.isupper()
         was_number = char in {"1", "2", "3", "4", "5", "6", "7", "8", "9", "0"}
-    if ((
-            "vector3" in res.lower() or "vector2" in res.lower()) or "float64" in res.lower() or "float32" in res.lower() or "int64" in res.lower() or "int32" in res.lower()):
+    if (("vector3" in res.lower() or "vector2" in res.lower()) or "float64" in res.lower(
+    ) or "float32" in res.lower() or "int64" in res.lower() or "int32" in res.lower()):
         res = res.replace("Array", "_Array")
     return res
 
 
 def generate_variant_type(class_):
     if class_ in builtin_classes:
-        return f"GDExtensionVariantType.GDEXTENSION_VARIANT_TYPE_{convert_camel_case_to_underscore(class_).upper()}"
+        return f"GDExtensionVariantType.GDEXTENSION_VARIANT_TYPE_{
+            convert_camel_case_to_underscore(class_).upper()}"
     else:
         return f"GDExtensionVariantType.GDEXTENSION_VARIANT_TYPE_NIL"
 
@@ -154,7 +167,8 @@ def generate_class_imports(classes):
     result = "import py4godot.classes.generated4_core as __core__"
     result = generate_newline(result)
     for class_ in classes:
-        result += f"import py4godot.classes.{class_}.{class_} as __{class_.lower()}__"
+        result += f"import py4godot.classes.{class_}.{class_} as __{
+            class_.lower()}__"
         result = generate_newline(result)
     return result
 
@@ -286,7 +300,10 @@ def get_ret_value(method):
             return_type = method["return_value"]["type"]
         else:
             return_type = method["return_type"]
-        return ungodottype(untypearray(unbitfield_type(unenumize_type(return_type))))
+        return ungodottype(
+            untypearray(
+                unbitfield_type(
+                    unenumize_type(return_type))))
 
 
 def collect_members(obj):
@@ -295,7 +312,11 @@ def collect_members(obj):
     for class_ in obj["builtin_class_member_offsets"][3]["classes"]:
         core_class = BuiltinClass(class_["name"])
         for member in class_["members"]:
-            core_member = CoreMember(member["member"], member["meta"].replace("32", ""))
+            core_member = CoreMember(
+                member["member"],
+                member["meta"].replace(
+                    "32",
+                    ""))
             core_class.core_members.append(core_member)
         core_classes[class_["name"]] = core_class
     print(core_classes)
@@ -313,14 +334,17 @@ def generate_common_methods(class_):
 
 
 def generate_enums(class_):
-    if not "enums" in class_.keys():
+    if "enums" not in class_.keys():
         return ""
     res = ""
     for enum in class_["enums"]:
         res += f"cpdef enum {class_['name']}__{enum['name']}:"
         res = generate_newline(res)
         for enum_value in enum["values"]:
-            res += f"{INDENT}{class_['name']}__{enum_value['name']} = {enum_value['value']}"
+            res += f"{INDENT}{
+                class_['name']}__{
+                enum_value['name']} = {
+                enum_value['value']}"
             res = generate_newline(res)
     res = generate_newline(res)
     return res
@@ -353,7 +377,10 @@ def generate_member_setter(class_, member):
     res = ""
     res += f"{INDENT}@{member.name}.setter"
     res = generate_newline(res)
-    res += f"{INDENT}def {member.name}(self, value:{undouble_type(member.type_)})->None:pass"
+    res += f"{INDENT}def {
+        member.name}(self, value:{
+        undouble_type(
+            member.type_)})->None:pass"
     res = generate_newline(res)
 
     return res
@@ -378,20 +405,43 @@ def generate_property(property):
     result = ""
     result += f"{INDENT}@property"
     result = generate_newline(result)
-    result += f"{INDENT}def {pythonize_name(property['name'])}(self)->{unbitfield_type(unenumize_type(ungodottype((property['type']))))}: pass"
+    result += f"{INDENT}def {
+        pythonize_name(
+            property['name'])}(self)->{
+        unbitfield_type(
+            unenumize_type(
+                ungodottype(
+                    (property['type']))))}: pass"
     result = generate_newline(result)
 
     if "setter" in property and property["setter"] != "":
         result += f"{INDENT}@{pythonize_name(property['name'])}.setter"
         result = generate_newline(result)
-        result += f"{INDENT}def {pythonize_name(property['name'])}(self,  value:{ungodottype(untypearray(simplify_type(property['type'])))})->None: pass"
+        result += f"{INDENT}def {
+            pythonize_name(
+                property['name'])}(self,  value:{
+            ungodottype(
+                untypearray(
+                    simplify_type(
+                        property['type'])))})->None: pass"
         result = generate_newline(result)
 
     return result
 
 
 def pythonize_name(name):
-    if name in ("from", "len", "in", "for", "with", "class", "pass", "raise", "global", "str", "typeof"):
+    if name in (
+        "from",
+        "len",
+        "in",
+        "for",
+        "with",
+        "class",
+        "pass",
+        "raise",
+        "global",
+        "str",
+            "typeof"):
         return name + "_"
     return name
 
@@ -424,17 +474,36 @@ def generate_args(method_with_args):
 
     for arg in method_with_args["arguments"]:
         if not arg["type"].startswith("enum::"):
-            result += f"{pythonize_name(arg['name'])}:{ungodottype(untypearray(unbitfield_type(arg['type'])))}{generate_default_arg(arg, arg['type'])}, "
+            result += f"{
+                pythonize_name(
+                    arg['name'])}:{
+                ungodottype(
+                    untypearray(
+                        unbitfield_type(
+                            arg['type'])))}{
+                generate_default_arg(
+                    arg,
+                    arg['type'])}, "
         else:
-            # enums are marked with enum:: . To be able to use this, we have to strip this
+            # enums are marked with enum:: . To be able to use this, we have to
+            # strip this
             arg_type = arg["type"].replace("enum::", "")
-            result += f"{pythonize_name(arg['name'])}:{ungodottype(untypearray(unenumize_type(arg_type)))} {generate_default_arg(arg, arg['type'])}, "
+            result += f"{
+                pythonize_name(
+                    arg['name'])}:{
+                ungodottype(
+                    untypearray(
+                        unenumize_type(arg_type)))} {
+                        generate_default_arg(
+                            arg,
+                            arg['type'])}, "
     result = result[:-2]
     return result
 
 
 def generate_default_arg(arg, arg_type):
-    set_to_iterate = builtin_classes.union(classes) - {"int", "float", "bool", "Nil"}
+    set_to_iterate = builtin_classes.union(
+        classes) - {"int", "float", "bool", "Nil"}
     if "default_value" in arg:
         if arg_type in set_to_iterate:
             if arg_type in builtin_classes:
@@ -442,7 +511,11 @@ def generate_default_arg(arg, arg_type):
             else:
                 return f"= __{arg_type.lower()}__.{arg_type}.constructor()"
         else:
-            return f"={pythonize_boolean_types(unref_type(unnull_type(arg['default_value'])))}"
+            return f"={
+                pythonize_boolean_types(
+                    unref_type(
+                        unnull_type(
+                            arg['default_value'])))}"
 
     return ""
 
@@ -476,8 +549,11 @@ def get_classes_to_import(classes):
         if "methods" in class_.keys():
             for method in class_["methods"]:
                 if ("return_value" in method.keys()):
-                    if (unbitfield_type(get_class_from_enum(method["return_value"]["type"])) in normal_classes):
-                        classes_to_import.add(get_class_from_enum(method["return_value"]["type"]))
+                    if (unbitfield_type(get_class_from_enum(
+                            method["return_value"]["type"])) in normal_classes):
+                        classes_to_import.add(
+                            get_class_from_enum(
+                                method["return_value"]["type"]))
                 if ("arguments" not in method.keys()):
                     continue
                 for argument in method["arguments"]:
@@ -700,10 +776,11 @@ def generate_operators_set(class_):
         if not class_["name"] in operator_dict.keys():
             operator_dict[class_["name"]] = dict()
         if not operator["name"] in operator_dict[class_["name"]]:
-            operator_dict[class_["name"]][operator["name"]] = Operator(class_["name"], operator["name"],
-                                                                       operator["return_type"])
+            operator_dict[class_["name"]][operator["name"]] = Operator(
+                class_["name"], operator["name"], operator["return_type"])
         if "right_type" in operator.keys():
-            operator_dict[class_["name"]][operator["name"]].right_type_values.append(operator["right_type"])
+            operator_dict[class_["name"]][operator["name"]
+                                          ].right_type_values.append(operator["right_type"])
 
 
 classes = set()
@@ -715,10 +792,13 @@ if __name__ == "__main__":
         obj = json.loads(data)
         classes = set([class_['name'] if class_["name"] not in IGNORED_CLASSES else None for class_ in
                        obj['classes'] + obj["builtin_classes"]])
-        builtin_classes = set(class_["name"] for class_ in obj["builtin_classes"])
+        builtin_classes = set(class_["name"]
+                              for class_ in obj["builtin_classes"])
         normal_classes = set([class_['name'] for class_ in obj['classes']])
-        native_structs = set([native_struct["name"] for native_struct in obj["native_structures"]])
-        singletons = set([singleton["name"] for singleton in obj["singletons"]])
+        native_structs = set([native_struct["name"]
+                             for native_struct in obj["native_structures"]])
+        singletons = set([singleton["name"]
+                         for singleton in obj["singletons"]])
         collect_members(obj)
         res = ""
         res += generate_import()

@@ -11,7 +11,8 @@ from py4godot.utils.print_tools import print_error
 class PythonTest(unittest.TestCase):
     test_object: TestObject
 
-    def __init__(self, methodName='runSignalTest', test_object: TestObject = None):
+    def __init__(self, methodName='runSignalTest',
+                 test_object: TestObject = None):
         super().__init__(methodName)
         self.test_object = test_object
 
@@ -26,8 +27,7 @@ class PythonTest(unittest.TestCase):
         self.assertEqual(o.get_class(), "Node3D")
 
     def test_constants(self):
-        self.assertEqual(Vector3.UP, Vector3.new3(0,  1,  0))
-
+        self.assertEqual(Vector3.UP, Vector3.new3(0, 1, 0))
 
     def test_constants_throw_error(self):
         with self.assertRaises(RuntimeError):
@@ -39,7 +39,11 @@ class PythonTest(unittest.TestCase):
 
     def test_calling_variant(self):
         self.assertEqual(self.test_object.call("variant_test_function", 1), 1)
-        self.assertEqual(self.test_object.call("variant_test_function", "test"), "test")
+        self.assertEqual(
+            self.test_object.call(
+                "variant_test_function",
+                "test"),
+            "test")
 
         with self.assertRaises(ValueError) as cm:
             self.test_object.call("variant_test_function", [])
@@ -58,7 +62,6 @@ class PythonTest(unittest.TestCase):
 
     def test_get_text(self):
         self.assertEqual("我喜欢学习物理", self.test_object.get_text_edit_text())
-
 
     def test_call_deferred(self):
         packedbyteArray = PackedByteArray.from_list([1])
@@ -80,17 +83,22 @@ class PythonTest(unittest.TestCase):
     def test_lerp(self):
         self.assertEqual(lerp(1, 3, 0.5), 2)
 
-    def test_set(self): # To test for https://github.com/niklas2902/py4godot/issues/199
+    def test_set(self):  # To test for https://github.com/niklas2902/py4godot/issues/199
         for i in range(1000):
             random_val = random.random()
             self.test_object.set("test_float", random_val)
-            self.assertAlmostEqual(self.test_object.get("test_float"), random_val, places=2)
+            self.assertAlmostEqual(self.test_object.get(
+                "test_float"), random_val, places=2)
 
     def test_setting_basis_fro_transform(self):
         transform = Transform3D.new0()
         transform.basis = Basis.new4(Vector3.LEFT, Vector3.DOWN, Vector3.BACK)
-        self.assertEqual(transform.basis, Basis.new4(Vector3.LEFT, Vector3.DOWN, Vector3.BACK))
-
+        self.assertEqual(
+            transform.basis,
+            Basis.new4(
+                Vector3.LEFT,
+                Vector3.DOWN,
+                Vector3.BACK))
 
 
 ###############

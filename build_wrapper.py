@@ -18,11 +18,17 @@ extra_link_args = []
 if sys.platform == "win32":
     # Optimize for size on MSVC
     extra_compile_args = ["/O1", "/GL"]   # /GL = whole program optimization
-    extra_link_args = ["/OPT:REF", "/OPT:ICF"]  # remove unused code & fold identical functions
+    # remove unused code & fold identical functions
+    extra_link_args = ["/OPT:REF", "/OPT:ICF"]
 else:
     # Optimize for size on GCC/Clang
-    extra_compile_args = ["-O3", "-s", "-fdata-sections", "-ffunction-sections"]
-    extra_link_args = ["-Wl,--gc-sections", "-s"]  # remove unused sections & strip symbols
+    extra_compile_args = [
+        "-O3",
+        "-s",
+        "-fdata-sections",
+        "-ffunction-sections"]
+    # remove unused sections & strip symbols
+    extra_link_args = ["-Wl,--gc-sections", "-s"]
 
 extensions = [
     Extension(

@@ -14,38 +14,49 @@ from config import python_ver
 
 @dataclass
 class DockerImageContainer:
-    image_name:str
-    container_name:str
-    platform:str
-builds:List[DockerImageContainer] = [
-    DockerImageContainer("windows64_py4godot","py4godot_windows64_container" ,"windows64"),
-    DockerImageContainer("linux64_py4godot", "py4godot_linux64_container", "linux64"),
-    #DockerImageContainer("linux32_py4godot", "py4godot_linux32_container", "linux32"),
-    #DockerImageContainer("windows32_py4godot", "py4godot_windows32_container", "windows32"),
-    ]
+    image_name: str
+    container_name: str
+    platform: str
+
+
+builds: List[DockerImageContainer] = [
+    DockerImageContainer(
+        "windows64_py4godot",
+        "py4godot_windows64_container",
+        "windows64"),
+    DockerImageContainer(
+        "linux64_py4godot",
+        "py4godot_linux64_container",
+        "linux64"),
+    # DockerImageContainer("linux32_py4godot", "py4godot_linux32_container", "linux32"),
+    # DockerImageContainer("windows32_py4godot", "py4godot_windows32_container", "windows32"),
+]
+
 
 def get_docker_build_name(name):
     if name.endswith("64"):
         return name[:-2]
     return name
 
+
 def untar_file(tar_file, extract_path):
     with tarfile.open(tar_file, 'r') as tar:
         tar.extractall(extract_path)
+
 
 def unzip_zip(zip_file, extract_path):
     with zipfile.ZipFile(zip_file, 'r') as zip_ref:
         zip_ref.extractall(extract_path)
 
+
 def run_docker():
     client = docker.from_env()
     client.containers.prune()
 
-
     for build in builds:
         clean_up_image(build, client)
         print(f"Running container {build.platform}...")
-        client.containers.run(image = build.image_name, name=build.platform)
+        client.containers.run(image=build.image_name, name=build.platform)
         last_container = client.containers.get(build.platform)
 
         folder_path = "plugin"
@@ -56,15 +67,18 @@ def run_docker():
             print(f"Folder '{folder_path}' already exists.")
         f = open(f'plugin/{build.platform[:-2]}.tar', 'wb')
 
-        bits, stat = last_container.get_archive(f'/app/build/final/{build.platform}/{python_ver}-{build.platform}')
+        bits, stat = last_container.get_archive(
+            f'/app/build/final/{build.platform}/{python_ver}-{build.platform}')
 
         print(stat)
         for chunk in bits:
-           f.write(chunk)
+            f.write(chunk)
         f.close()
         print("Extracting build to plugin ...")
-        untar_file(f'plugin/{build.platform[:-2]}.tar', 'plugin/addons/py4godot')
+        untar_file(
+            f'plugin/{build.platform[:-2]}.tar', 'plugin/addons/py4godot')
         print("Finished extracting")
+
 
 def clean_up_image(build, client):
     try:
@@ -81,21 +95,30 @@ def clean_up_image(build, client):
                         forcerm=True  # Always remove intermediate containers even if the build fails
                         )
 
+
 def create_gdextension():
     gdextension_text = ""
     with open("build_resources/gdextension_template.gdextension", "r") as f:
         gdextension_text = f.read().replace("{python_ver}", python_ver)
     with open("build_resources/python.gdextension", "w") as f:
         f.write(gdextension_text)
+
+
 def copy_other_files(folder_path):
     create_gdextension()
-    shutil.copy("build_resources/python.gdextension", folder_path+"/python.gdextension")
-    shutil.copy("build_resources/dependencies.txt", folder_path+"/dependencies.txt")
+    shutil.copy("build_resources/python.gdextension",
+                folder_path + "/python.gdextension")
+    shutil.copy(
+        "build_resources/dependencies.txt",
+        folder_path +
+        "/dependencies.txt")
     shutil.copy("build_resources/Python.svg", folder_path + "/Python.svg")
-    shutil.copy("build_resources/install_dependencies.py", folder_path + "/install_dependencies.py")
+    shutil.copy("build_resources/install_dependencies.py",
+                folder_path + "/install_dependencies.py")
     download_get_pip(folder_path)
-    with open(folder_path+"/.gitignore", "w") as f:
+    with open(folder_path + "/.gitignore", "w") as f:
         f.write("*")
+
 
 if __name__ == "__main__":
     run_docker()

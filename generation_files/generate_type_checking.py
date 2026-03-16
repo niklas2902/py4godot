@@ -9,6 +9,7 @@ IGNORED_CLASSES = ("Nil", "bool", "float", "int")
 INDENT = " "
 builtin_classes = set()
 
+
 def type_checking():
     res = "# distutils: language=c++"
     res = generate_newline(res)
@@ -35,8 +36,19 @@ def type_checking():
     for cls in (set(builtin_classes) - {"Nil"}).union({"Object"}):
         res += f"cdef api bint is_{cls}(object o):"
         res = generate_newline(res)
-        if cls not in {"Projection", "Basis", "Vector2", "Vector2i", "Vector3", "Vector3i", "Vector4", "Vector4i",
-                       "Color", "Transform2D", "Transform3D", "Plane"}:
+        if cls not in {
+            "Projection",
+            "Basis",
+            "Vector2",
+            "Vector2i",
+            "Vector3",
+            "Vector3i",
+            "Vector4",
+            "Vector4i",
+            "Color",
+            "Transform2D",
+            "Transform3D",
+                "Plane"}:
             res += f"{INDENT}return type(o) == {cls}"
         else:
             res += f"{INDENT}return type(o) == {cls} or type(o) == constants.Constant{cls}"
@@ -60,8 +72,6 @@ def generate_wrapper_source(class_name):
     return res
 
 
-
-
 if __name__ == "__main__":
     os.chdir("..")
     with open('py4godot/gdextension-api/extension_api.json', 'r', encoding="utf-8") as myfile:
@@ -71,7 +81,9 @@ if __name__ == "__main__":
         builtin_classes = [class_["name"] for class_ in obj["builtin_classes"]]
         builtin_classes.remove("Nil")
 
-        write_if_different("py4godot/wrappers/type_checking.pyx", type_checking())
+        write_if_different(
+            "py4godot/wrappers/type_checking.pyx",
+            type_checking())
 
         res = ""
         res += '#include "Python.h"'
@@ -87,7 +99,6 @@ if __name__ == "__main__":
 
         write_if_different("py4godot/wrappers/type_checking_wrapper.cpp", res)
 
-
         res = ""
         res += '#include "Python.h"'
         res = generate_newline(res)
@@ -99,5 +110,3 @@ if __name__ == "__main__":
             res += generate_wrapper_header(cls)
 
         write_if_different("py4godot/wrappers/type_checking_wrapper.h", res)
-
-

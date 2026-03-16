@@ -12,15 +12,17 @@ class PrintStream:
     def flush(self):
         pass
 
+
 @gdclass
 class TestRunner(Node3D):
 
     def __init__(self):
         super().__init__()
         print("__init__")
-    def _process(self, delta:float) -> None:
+
+    def _process(self, delta: float) -> None:
         print("##########start#############")
         suite = unittest.TestLoader().loadTestsFromModule(PythonTest)
         res = unittest.TextTestRunner(stream=PrintStream()).run(suite)
-        res_code = 0 if  len(res.failures) == 0 else 1
+        res_code = 0 if len(res.failures) == 0 else 1
         self.get_tree().quit(res_code)

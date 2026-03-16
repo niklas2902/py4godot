@@ -10,7 +10,11 @@ T = TypeVar("T")
 
 
 # Very experimental
-def gdproperty(type_: type, defaultval: T, hint: BaseHint = BaseHint(), hint_string: str = "")->T:
+def gdproperty(
+        type_: type,
+        defaultval: T,
+        hint: BaseHint = BaseHint(),
+        hint_string: str = "") -> T:
     """
     Automatically registers a Godot property by extracting the property name from the code context.
 
@@ -43,8 +47,10 @@ def gdproperty(type_: type, defaultval: T, hint: BaseHint = BaseHint(), hint_str
     return prop_return(name, type_, defaultval, hint, hint_string)
 
 
-
-def gdprop(defaultval: T, hint: BaseHint = BaseHint(), hint_string: str = "")->T:
+def gdprop(
+        defaultval: T,
+        hint: BaseHint = BaseHint(),
+        hint_string: str = "") -> T:
     """
     Automatically registers a Godot property by extracting both name and type from code context.
 

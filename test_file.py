@@ -4,9 +4,13 @@ import sys
 import argparse
 
 # Set up argument parsing
-parser = argparse.ArgumentParser(description="Run Godot with a specific project path.")
+parser = argparse.ArgumentParser(
+    description="Run Godot with a specific project path.")
 parser.add_argument("path", help="The project path to open with Godot.")
-parser.add_argument("godot", default=r"godot.exe", help="The Godot executable path.")
+parser.add_argument(
+    "godot",
+    default=r"godot.exe",
+    help="The Godot executable path.")
 
 # Parse the arguments
 args = parser.parse_args()
@@ -26,12 +30,17 @@ try:
                             stdout=stdout_log,
                             stderr=stderr_log,
                             check=True, text=True)
-    print(f"Command executed successfully with return code: {result.returncode}")
+    print(
+        f"Command executed successfully with return code: {
+            result.returncode}")
 except subprocess.CalledProcessError as e:
     print(f"Command failed with return code: {e.returncode}")
     sys.exit(1)
 except FileNotFoundError:
-    print("The specified file or command was not found.", project_path, command_args)
+    print(
+        "The specified file or command was not found.",
+        project_path,
+        command_args)
     sys.exit(2)
 except Exception as e:
     print(str(e))

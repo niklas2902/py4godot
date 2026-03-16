@@ -14,26 +14,30 @@ class SignalArg:
     def get_name(self):
         return self.name.encode("utf-8")
 
+
 def signal(args=[]):
     stack = inspect.stack()
     name = stack[0].code_context[0].split("=")[0].split(":")[0].strip()
     annotations.signal(name, args)
     return None
 
+
 callables = []
+
 
 class GDSignal(Signal):
     @staticmethod
     def new0():
         _class = GDSignal.__new__(GDSignal)
-        #TODO minimize: _class.Signal_internal_class_ptr = CPPSignal.py_new0()
+        # TODO minimize: _class.Signal_internal_class_ptr = CPPSignal.py_new0()
         return _class
 
     @staticmethod
     def new1(from_):
         assert from_ is not None
         _class = GDSignal.__new__(GDSignal)
-        #TODO minimize:_class.Signal_internal_class_ptr = CPPSignal.py_new1(from_.Signal_internal_class_ptr)
+        # TODO minimize:_class.Signal_internal_class_ptr =
+        # CPPSignal.py_new1(from_.Signal_internal_class_ptr)
         return _class
 
     @staticmethod
@@ -41,7 +45,8 @@ class GDSignal(Signal):
         assert object_ is not None
         assert signal is not None
         _class = GDSignal.__new__(GDSignal)
-        #TODO minimize:_class.Signal_internal_class_ptr = CPPSignal.py_new2(object_, signal)
+        # TODO minimize:_class.Signal_internal_class_ptr =
+        # CPPSignal.py_new2(object_, signal)
         return _class
 
     def __init__(self, *args):

@@ -85,12 +85,14 @@ def generate_constants_classes(json_path):
         "# Auto-generated from godot extension_api.json",
         "import py4godot.constant_helpers as helpers",
         "from py4godot.classes.core import Vector2, Vector3,Vector3i, Transform2D, Vector2i, Vector4i, Vector4, Plane, "
-        "Quaternion, Transform3D, Color, Basis, Projection",""
-    ]
+        "Quaternion, Transform3D, Color, Basis, Projection",
+        ""]
     for class_name, consts in grouped.items():
-        if class_name not in ("Vector2, Vector3,Vector3i, Transform2D, Vector2i, Vector4i, Vector4, Plane, "
-            "Quaternion, Transform3D, Color, Basis, Projection"):
-            output_lines.append(f"from py4godot.classes.{class_name} import {class_name}")
+        if class_name not in (
+            "Vector2, Vector3,Vector3i, Transform2D, Vector2i, Vector4i, Vector4, Plane, "
+                "Quaternion, Transform3D, Color, Basis, Projection"):
+            output_lines.append(
+                f"from py4godot.classes.{class_name} import {class_name}")
 
     for class_name, consts in grouped.items():
         if not consts:
@@ -109,6 +111,7 @@ def generate_constants_classes(json_path):
 
     return "\n".join(output_lines)
 
+
 def construct_value(value):
     split_array = value.split("(")
     type_ = split_array[0]
@@ -117,7 +120,6 @@ def construct_value(value):
         return f"helpers.ConstantVector4.new3({', '.join(values)})"
     if type_ == "Vector4i":
         return f"helpers.ConstantVector4i.new3({', '.join(values)})"
-
 
     if type_ == "Vector3":
         return f"helpers.ConstantVector3.new3({', '.join(values)})"
@@ -130,30 +132,67 @@ def construct_value(value):
     if type_ == "Vector2i":
         return f"helpers.ConstantVector2i.new3({', '.join(values)})"
     if type_ == "Transform2D":
-        return (f"helpers.ConstantTransform2D.new4(Vector2.new3({values[0]}, {values[1]}), "
-                f"Vector2.new3({values[2]}, {values[3]}), "
-                f"Vector2.new3({values[4]}, {values[5]}))")
+        return (
+            f"helpers.ConstantTransform2D.new4(Vector2.new3({
+                values[0]}, {
+                values[1]}), " f"Vector2.new3({
+                values[2]}, {
+                    values[3]}), " f"Vector2.new3({
+                        values[4]}, {
+                            values[5]}))")
     if type_ == "Plane":
         return f"helpers.ConstantPlane.new6({', '.join(values)})"
     if type_ == "Quaternion":
         return f"helpers.ConstantQuaternion.new5({', '.join(values)})"
     if type_ == "Basis":
-        return (f"helpers.ConstantBasis.new4(Vector3.new3({values[0]}, {values[1]}, {values[2]}), "
-                f"Vector3.new3({values[3]}, {values[4]}, {values[5]}), "
-                f"Vector3.new3({values[6]}, {values[7]}, {values[8]}),)")
+        return (
+            f"helpers.ConstantBasis.new4(Vector3.new3({
+                values[0]}, {
+                values[1]}, {
+                values[2]}), " f"Vector3.new3({
+                    values[3]}, {
+                        values[4]}, {
+                            values[5]}), " f"Vector3.new3({
+                                values[6]}, {
+                                    values[7]}, {
+                                        values[8]}),)")
     if type_ == "Transform3D":
-        return (f"helpers.ConstantTransform3D.new3(Vector3.new3({values[0]}, {values[1]}, {values[2]}), "
-                f"Vector3.new3({values[3]}, {values[4]}, {values[5]}), "
-                f"Vector3.new3({values[6]}, {values[7]}, {values[8]}),"
-                f"Vector3.new3({values[9]}, {values[10]}, {values[11]}),)")
+        return (
+            f"helpers.ConstantTransform3D.new3(Vector3.new3({
+                values[0]}, {
+                values[1]}, {
+                values[2]}), " f"Vector3.new3({
+                    values[3]}, {
+                        values[4]}, {
+                            values[5]}), " f"Vector3.new3({
+                                values[6]}, {
+                                    values[7]}, {
+                                        values[8]})," f"Vector3.new3({
+                                            values[9]}, {
+                                                values[10]}, {
+                                                    values[11]}),)")
     if type_ == "Projection":
-        return (f"helpers.ConstantProjection.new3(Vector4.new3({values[0]}, {values[1]}, {values[2]},{values[3]}), "
-                f"Vector4.new3({values[4]}, {values[5]}, {values[6]},{values[7]}),"
-                f"Vector4.new3({values[8]}, {values[9]}, {values[10]},{values[11]}),"
-                f"Vector4.new3({values[12]}, {values[13]}, {values[14]},{values[15]}),)")
-
+        return (
+            f"helpers.ConstantProjection.new3(Vector4.new3({
+                values[0]}, {
+                values[1]}, {
+                values[2]},{
+                    values[3]}), " f"Vector4.new3({
+                        values[4]}, {
+                            values[5]}, {
+                                values[6]},{
+                                    values[7]})," f"Vector4.new3({
+                                        values[8]}, {
+                                            values[9]}, {
+                                                values[10]},{
+                                                    values[11]})," f"Vector4.new3({
+                                                        values[12]}, {
+                                                            values[13]}, {
+                                                                values[14]},{
+                                                                    values[15]}),)")
 
     return value
+
 
 def pythonize_values(values):
     for i in range(len(values)):
@@ -161,15 +200,17 @@ def pythonize_values(values):
             values[i] = "float('inf')"
     return values
 
-def replace_infinite(value:str):
+
+def replace_infinite(value: str):
     return value.replace("inf", "float('inf')")
+
 
 def main():
     """Main function to generate constants.py file."""
     # Use Path for better path handling
     os.chdir("..")
     json_file_path = "py4godot/gdextension-api/extension_api.json"
-    output_file_path =  "py4godot/constants.py"
+    output_file_path = "py4godot/constants.py"
 
     # Generate the constants
     result = generate_constants_classes(json_file_path)

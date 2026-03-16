@@ -1,5 +1,6 @@
 import json
 
+
 def collect_all_classes():
     with open('py4godot/gdextension-api/extension_api.json', 'r', encoding="utf-8") as myfile:
         data = myfile.read()
@@ -11,4 +12,3 @@ def collect_all_classes():
 
 if __name__ == "__main__":
     collect_all_classes()
-

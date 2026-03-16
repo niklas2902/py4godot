@@ -15,7 +15,8 @@ def generate_import(class_to_import=None):
     res = ""
     if class_to_import:
         if class_to_import != "Wrapper4":
-            res += f"cimport py4godot.classes.{class_to_import} as py4godot_{class_to_import.lower()}"
+            res += f"cimport py4godot.classes.{class_to_import} as py4godot_{
+                class_to_import.lower()}"
             res = generate_newline(res)
     res += f"from py4godot.classes.Object cimport *"
     res = generate_newline(res)
@@ -24,11 +25,12 @@ def generate_import(class_to_import=None):
 
 
 def generate_enums(class_):
-    if not "enums" in class_.keys():
+    if "enums" not in class_.keys():
         return ""
     res = ""
     for enum in class_["enums"]:
-        if enum["name"] == "Axis" and class_["name"] in builtin_classes and not is_correct_axis(class_, enum):
+        if enum["name"] == "Axis" and class_[
+                "name"] in builtin_classes and not is_correct_axis(class_, enum):
             continue
         name = enum["name"]
         res += f"cpdef enum {name}:"
@@ -42,19 +44,22 @@ def generate_enums(class_):
 
 
 def rename_enum_value(enum_type_name):
-    enum_type_name = enum_type_name.replace("TYPE_", "KIND_")  # Rename as this leads to problems
-    enum_type_name = enum_type_name.replace("OP_", "OPERATOR_")  # Rename as this leads to problems
+    enum_type_name = enum_type_name.replace(
+        "TYPE_", "KIND_")  # Rename as this leads to problems
+    enum_type_name = enum_type_name.replace(
+        "OP_", "OPERATOR_")  # Rename as this leads to problems
     return enum_type_name
 
 
 def generate_signals(cls):
-    if not "signals" in cls.keys():
+    if "signals" not in cls.keys():
         return ""
     res = ""
     for signal in cls["signals"]:
         res += f"{INDENT}cdef public object {signal['name']}"
         res = generate_newline(res)
     return res
+
 
 def generate_newline(str_):
     return str_ + "\n"
@@ -88,9 +93,10 @@ def generate_special_attributes(class_):
     if class_["name"] in builtin_classes:
         res = f"{INDENT}cdef bint shouldBeDeleted"
         res = generate_newline(res)
-        res +=  f"{INDENT}cdef bint __is_constant__"
+        res += f"{INDENT}cdef bint __is_constant__"
         return res
     return ""
+
 
 def generate_properties(class_):
     result = ""
@@ -101,8 +107,10 @@ def generate_properties(class_):
                 result = generate_newline(result)
     return result
 
+
 def is_correct_axis(class_, enum):
     return class_["name"] == "Vector4" and enum["name"] == "Axis"
+
 
 def generate_pxd_class(pxd_class):
     result = ""
@@ -131,10 +139,14 @@ def generate_pxd_class(pxd_class):
 def generate_wrapped_attribute(class_):
     res = ""
     res = generate_newline(res)
-    res += f"{INDENT}cdef shared_ptr [CPP{class_['name']}] {class_['name']}_internal_class_ptr"
+    res += f"{INDENT}cdef shared_ptr [CPP{
+        class_['name']}] {
+        class_['name']}_internal_class_ptr"
     res = generate_newline(res)
     if class_["name"] == "Object":
-        res += f"{INDENT}cdef object __weakref__" # This is for being able to use weakref to fix memory propblems in signal
+        # This is for being able to use weakref to fix memory propblems in
+        # signal
+        res += f"{INDENT}cdef object __weakref__"
         res = generate_newline(res)
 
     return res
@@ -172,7 +184,7 @@ def collect_typed_arrays_from_args(method):
 def collect_typed_arrays(classes):
     typed_arrays = []
     for cls in classes:
-        if not "methods" in cls.keys():
+        if "methods" not in cls.keys():
             continue
         for method in cls["methods"]:
             typed_arrays += collect_typed_arrays_from_return(method)
@@ -186,6 +198,7 @@ def generate_typed_array_name(name):
         pass
     return name.split("::")[1] + "TypedArray"
 
+
 def write_if_different(file_path, text_to_write):
     if os.path.exists(file_path):
         with open(file_path, 'r') as existing_file:
@@ -195,7 +208,6 @@ def write_if_different(file_path, text_to_write):
     else:
         with open(file_path, 'w') as file_to_write:
             file_to_write.write(text_to_write)
-
 
 
 if __name__ == "__main__":
@@ -220,7 +232,7 @@ if __name__ == "__main__":
 
             res += generate_pxd_class(class_)
 
-        text_to_write = "# distutils: language=c++"+res
+        text_to_write = "# distutils: language=c++" + res
         write_if_different("py4godot/classes/core.pxd", text_to_write)
         for class_ in obj["classes"]:
             if class_["name"] in IGNORED_CLASSES:
@@ -229,35 +241,46 @@ if __name__ == "__main__":
             res = generate_import(class_to_import=get_inherited_class(class_))
             res = generate_newline(res)
 
-            res += f"from py4godot.classes.cpp_bridge cimport {class_['name']} as CPP{class_['name']} "
+            res += f"from py4godot.classes.cpp_bridge cimport {
+                class_['name']} as CPP{
+                class_['name']} "
             res = generate_newline(res)
             res += f"from py4godot.classes.core cimport *"
             res = generate_newline(res)
             res += generate_pxd_class(class_)
 
-            text_to_write = "# distutils: language=c++\n"+res
-            write_if_different(f"py4godot/classes/{class_['name']}.pxd", text_to_write)
+            text_to_write = "# distutils: language=c++\n" + res
+            write_if_different(
+                f"py4godot/classes/{class_['name']}.pxd", text_to_write)
         array_cls = None
         arrays = []
         for cls in obj["builtin_classes"]:
             if cls["name"] == "Array":
                 array_cls = cls
-        print("typedarrays:", collect_typed_arrays(obj["classes"] + obj["builtin_classes"]))
-        for typed_array in collect_typed_arrays(obj["classes"] + obj["builtin_classes"]):
+        print(
+            "typedarrays:",
+            collect_typed_arrays(
+                obj["classes"] +
+                obj["builtin_classes"]))
+        for typed_array in collect_typed_arrays(
+                obj["classes"] + obj["builtin_classes"]):
             my_array_cls = copy.deepcopy(array_cls)
             my_array_cls["name"] = generate_typed_array_name(typed_array)
             typed_arrays_names.add(generate_typed_array_name(typed_array))
             arrays.append(my_array_cls)
-        arrays = sorted(arrays, key = lambda array: array["name"])
+        arrays = sorted(arrays, key=lambda array: array["name"])
         for class_ in arrays:
             res = ""
             print(class_["name"])
-            res += f"from py4godot.classes.cpp_bridge cimport {class_['name']} as CPP{class_['name']} "
+            res += f"from py4godot.classes.cpp_bridge cimport {
+                class_['name']} as CPP{
+                class_['name']} "
             res = generate_newline(res)
             res += f"from libcpp.memory cimport shared_ptr, allocator"
             res = generate_newline(res)
             res += generate_pxd_class(class_)
 
-            text_to_write = "# distutils: language=c++\n"+res
+            text_to_write = "# distutils: language=c++\n" + res
 
-            write_if_different(f"py4godot/classes/{class_['name']}.pxd", text_to_write)
+            write_if_different(
+                f"py4godot/classes/{class_['name']}.pxd", text_to_write)

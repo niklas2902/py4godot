@@ -21,6 +21,7 @@ def collect_typed_arrays_from_return(method_):
             return [ret_val.type]
     return []
 
+
 def collect_typed_arrays_from_args(method):
     typed_arrays = []
     if "arguments" not in method.keys():
@@ -31,10 +32,11 @@ def collect_typed_arrays_from_args(method):
                 typed_arrays.append(argument["type"])
     return typed_arrays
 
+
 def collect_typed_arrays(classes):
     typed_arrays = []
     for cls in classes:
-        if not "methods" in cls.keys():
+        if "methods" not in cls.keys():
             continue
         for method in cls["methods"]:
             typed_arrays += collect_typed_arrays_from_return(method)
@@ -42,13 +44,16 @@ def collect_typed_arrays(classes):
 
     return set(typed_arrays)
 
+
 def generate_typed_array_name(name):
     if (name == "typedarray::Array"):
         pass
     return name.split("::")[1] + "TypedArray"
 
+
 def generate_newline(str_):
     return str_ + "\n"
+
 
 classes_dict = {}
 if __name__ == "__main__":
@@ -66,12 +71,13 @@ if __name__ == "__main__":
         for cls in obj["builtin_classes"]:
             if cls["name"] == "Array":
                 array_cls = cls
-        for typed_array in collect_typed_arrays(obj["classes"] + obj["builtin_classes"]):
+        for typed_array in collect_typed_arrays(
+                obj["classes"] + obj["builtin_classes"]):
             my_array_cls = copy.deepcopy(array_cls)
             my_array_cls["name"] = generate_typed_array_name(typed_array)
             typed_arrays_names.add(generate_typed_array_name(typed_array))
             arrays.append(my_array_cls)
-        arrays = sorted(arrays, key = lambda array: array["name"])
+        arrays = sorted(arrays, key=lambda array: array["name"])
 
         all_classes = arrays + obj['classes'] + obj["builtin_classes"]
         id_counter = 0
@@ -79,4 +85,7 @@ if __name__ == "__main__":
             if cls["name"] not in IGNORED_CLASSES:
                 classes_dict[cls["name"]] = id_counter
                 id_counter += 1
-        write_if_different("py4godot/class_ids.py", "classes_dict="+str(classes_dict))
+        write_if_different(
+            "py4godot/class_ids.py",
+            "classes_dict=" +
+            str(classes_dict))

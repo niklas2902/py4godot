@@ -8,6 +8,7 @@ import argparse
 
 os_name = platform.system()
 
+
 def force_executable(python_exe):
     if os.path.exists(python_exe):
         if os.access(python_exe, os.X_OK):
@@ -18,9 +19,11 @@ def force_executable(python_exe):
             if os.access(python_exe, os.X_OK):
                 print(f"Successfully made {python_exe} executable!")
             else:
-                print(f"Failed to make {python_exe} executable. Check permissions.")
+                print(
+                    f"Failed to make {python_exe} executable. Check permissions.")
     else:
         print(f"{python_exe} does not exist!")
+
 
 if os_name == "Windows":
     python_exe = "tests/libraries/numpy/addons/py4godot/cpython-3.14.3-windows64/python/python.exe"
@@ -33,12 +36,17 @@ else:
     raise RuntimeError(f"Unsupported OS: {os_name}")
 
 # Run the Python executable for the detected platform
-subprocess.run([python_exe, "tests/libraries/numpy/addons/py4godot/get_pip.py"])
+subprocess.run(
+    [python_exe, "tests/libraries/numpy/addons/py4godot/get_pip.py"])
 subprocess.run([python_exe, "-m", "pip", "install", "numpy"])
 # Set up argument parsing
-parser = argparse.ArgumentParser(description="Run Godot with a specific project path.")
+parser = argparse.ArgumentParser(
+    description="Run Godot with a specific project path.")
 parser.add_argument("path", help="The project path to open with Godot.")
-parser.add_argument("godot", default=r"godot.exe", help="The Godot executable path.")
+parser.add_argument(
+    "godot",
+    default=r"godot.exe",
+    help="The Godot executable path.")
 
 # Parse the arguments
 args = parser.parse_args()
@@ -58,12 +66,17 @@ try:
                             stdout=stdout_log,
                             stderr=stderr_log,
                             check=True, text=True)
-    print(f"Command executed successfully with return code: {result.returncode}")
+    print(
+        f"Command executed successfully with return code: {
+            result.returncode}")
 except subprocess.CalledProcessError as e:
     print(f"Command failed with return code: {e.returncode}")
     sys.exit(1)
 except FileNotFoundError:
-    print("The specified file or command was not found.", project_path, command_args)
+    print(
+        "The specified file or command was not found.",
+        project_path,
+        command_args)
     sys.exit(2)
 except Exception as e:
     print(str(e))
