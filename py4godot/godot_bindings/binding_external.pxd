@@ -1,7 +1,10 @@
 # distutils: language=c++
 from py4godot.godot_bindings.types cimport *
+
 from cython import *
+
 from cpython.ref cimport PyObject
+
 
 cdef extern from "Python.h":
     cdef PyObject* PyUnicode_FromWideChar(const wchar_t *w, Py_ssize_t size);

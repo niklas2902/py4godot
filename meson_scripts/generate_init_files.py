@@ -1,6 +1,6 @@
 import json
 
-from config import python_ver, core_folder, output_dir, python_ver_short
+from config import core_folder, output_dir, python_ver, python_ver_short
 
 import_string_core = """
 """
@@ -51,23 +51,35 @@ from py4godot.pluginscript_api.hints.flags_hint.FlagsHint import *
 
 """This file is for copying the generated so/dll files from ninja/meson into the build folder"""
 
+
 def create_init_file(platform):
     """generate the __init__ file needed for the core module"""
     if "windows" in platform:
-        with open(f"{output_dir}/{platform}/{python_ver}-{platform}/python/Lib/site-packages/py4godot/{core_folder}/__init__.py", "w") as init_file:
+        with open(
+            f"{output_dir}/{platform}/{python_ver}-{platform}/python/Lib/site-packages/py4godot/{core_folder}/__init__.py",
+            "w",
+        ) as init_file:
             init_file.write(import_string_core)
 
         """generate the __init__ file needed for the py4godot module"""
-        with open(f"{output_dir}/{platform}/{python_ver}-{platform}/python/Lib/site-packages/py4godot/__init__.py", "w") as init_file:
+        with open(
+            f"{output_dir}/{platform}/{python_ver}-{platform}/python/Lib/site-packages/py4godot/__init__.py",
+            "w",
+        ) as init_file:
             init_file.write(import_string_py4godot)
     else:
-        with open(f"{output_dir}/{platform}/{python_ver}-{platform}/python/lib/{python_ver_short}/site-packages/py4godot/{core_folder}/__init__.py", "w") as init_file:
+        with open(
+            f"{output_dir}/{platform}/{python_ver}-{platform}/python/lib/{python_ver_short}/site-packages/py4godot/{core_folder}/__init__.py",
+            "w",
+        ) as init_file:
             init_file.write(import_string_core)
 
         """generate the __init__ file needed for the py4godot module"""
-        with open(f"{output_dir}/{platform}/{python_ver}-{platform}/python/lib/{python_ver_short}/site-packages/py4godot/__init__.py", "w") as init_file:
+        with open(
+            f"{output_dir}/{platform}/{python_ver}-{platform}/python/lib/{python_ver_short}/site-packages/py4godot/__init__.py",
+            "w",
+        ) as init_file:
             init_file.write(import_string_py4godot)
 
-
-    #with open(f"{build_folder}/{platform}/{config_data['python_ver']}-{platform}/python/install/Lib/site-packages/py4godot/pluginscript_api/hints/__init__.py", "w") as init_file:
+    # with open(f"{build_folder}/{platform}/{config_data['python_ver']}-{platform}/python/install/Lib/site-packages/py4godot/pluginscript_api/hints/__init__.py", "w") as init_file:
     #    init_file.write(import_string_hints)

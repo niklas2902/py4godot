@@ -1,15 +1,17 @@
 # distutils: language=c++
 import py4godot.classes.core as core
 from py4godot.classes.Object import Object
+
+from cpython cimport Py_DECREF, Py_INCREF, PyObject
+
 cimport py4godot.classes.cpp_bridge as bridge
-from cpython cimport Py_INCREF, Py_DECREF, PyObject
 
 from py4godot.signals import GDSignal
-from py4godot.utils.utils cimport *
+
 from libcpp cimport bool
 
 cimport py4godot.wrappers.wrappers as wrappers
-
+from py4godot.utils.utils cimport *
 
 
 cdef api shared_ptr[bridge.String] type_helper_pystring_to_gdstring(str string):

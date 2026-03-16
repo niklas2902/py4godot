@@ -1,11 +1,12 @@
 # distutils: language=c++
+from libc.stdint cimport uint32_t
 from libcpp.vector cimport vector
 
-from py4godot.hints.BaseHint cimport *
-from py4godot.godot_bindings.binding4_godot4 cimport *
-from py4godot.pluginscript_api.utils.PropertyDescription cimport *
 cimport py4godot.pluginscript_api.utils.utils as utils
-from libc.stdint cimport uint32_t
+from py4godot.godot_bindings.binding4_godot4 cimport *
+from py4godot.hints.BaseHint cimport *
+from py4godot.pluginscript_api.utils.PropertyDescription cimport *
+
 
 cdef uint32_t id_counter = 0
 cdef inc_id_counter()

@@ -1,19 +1,23 @@
+import os
 import pathlib
 import shutil
+import stat
+import tarfile
 import zipfile
+from shutil import copytree, ignore_patterns
 
 import wget
 import zstandard
-import tarfile
-import os
-from shutil import copytree, ignore_patterns
-import stat
 
 from config import python_ver, python_ver_short
 
-platform_dict = {"windows64": "x86_64-pc-windows-msvc-install_only_stripped", "windows32": "i686-pc-windows-msvc-install_only_stripped",
-                 "linux64": "x86_64-unknown-linux-gnu-install_only_stripped", "darwin64":"aarch64-apple-darwin-install_only_stripped",
-                 "linuxarm64":"aarch64-unknown-linux-gnu-install_only_stripped"}
+platform_dict = {
+    "windows64": "x86_64-pc-windows-msvc-install_only_stripped",
+    "windows32": "i686-pc-windows-msvc-install_only_stripped",
+    "linux64": "x86_64-unknown-linux-gnu-install_only_stripped",
+    "darwin64": "aarch64-apple-darwin-install_only_stripped",
+    "linuxarm64": "aarch64-unknown-linux-gnu-install_only_stripped",
+}
 python_files_dir = "python_files"
 copy_dir = "build/final"
 
@@ -33,36 +37,62 @@ def download_file(platform, allow_copy=False):
     print("download:" + platform)
 
     if platform != "linux32" and platform != "linux64":
-        url = f'https://github.com/astral-sh/python-build-standalone/releases/download/20260211/{python_ver}+20260211-{platform_dict[platform]}.tar.gz'
-        python_file = f'{python_files_dir}/{python_ver}-{platform_dict[platform]}.tar.gz'
+        url = f"https://github.com/astral-sh/python-build-standalone/releases/download/20260211/{python_ver}+20260211-{platform_dict[platform]}.tar.gz"
+        python_file = (
+            f"{python_files_dir}/{python_ver}-{platform_dict[platform]}.tar.gz"
+        )
     elif platform == "linux64":
-        url = f'https://github.com/astral-sh/python-build-standalone/releases/download/20260211/{python_ver}+20260211-{platform_dict[platform]}.tar.gz'
-        python_file = f'{python_files_dir}/{python_ver}-linux64.tar.gz'
-    else :
-        url = f'https://github.com/niklas2902/prebuild-python-linux32/releases/download/release-0.1/{python_ver}-linux32.zip'
-        python_file = f'{python_files_dir}/{python_ver}-linux32.zip'
+        url = f"https://github.com/astral-sh/python-build-standalone/releases/download/20260211/{python_ver}+20260211-{platform_dict[platform]}.tar.gz"
+        python_file = f"{python_files_dir}/{python_ver}-linux64.tar.gz"
+    else:
+        url = f"https://github.com/niklas2902/prebuild-python-linux32/releases/download/release-0.1/{python_ver}-linux32.zip"
+        python_file = f"{python_files_dir}/{python_ver}-linux32.zip"
 
     export_name = f"{python_ver}-" + platform
 
-    if (not os.path.isfile(python_file)):  # checking whether file was already downloaded
+    if not os.path.isfile(python_file):  # checking whether file was already downloaded
         print(f"downloading {python_ver} from :\n {url}")
-        if (not os.path.isdir(python_files_dir)):
+        if not os.path.isdir(python_files_dir):
             os.mkdir(python_files_dir)
         wget.download(url, python_file)  # download .tar.zst file
         print()
-    if (not os.path.isfile(python_file.replace(".zst", ""))):  # extracting the .zst file if it doesn't exist
+    if not os.path.isfile(
+        python_file.replace(".zst", "")
+    ):  # extracting the .zst file if it doesn't exist
         print("extracting .zst file")
         decompress_zstandard_to_folder(python_file)
-    if (not os.path.isdir(python_files_dir + "/" + export_name)):  # extracting the files from the tar folder
+    if not os.path.isdir(
+        python_files_dir + "/" + export_name
+    ):  # extracting the files from the tar folder
         print("extracting .tar file")
         extract_archive(python_file.replace(".zst", ""), export_name)
 
     if platform == "linux64":
         print("change access")
-        st = os.stat(python_files_dir + "/" + export_name + "/" + "python" + "/" + "bin" + "/" + "python3")
-        os.chmod(python_files_dir + "/" + export_name + "/" + "python" + "/" + "bin" + "/" + "python3",
-                 st.st_mode | stat.S_IXUSR | stat.S_IXGRP | stat.S_IXOTH)
-    if (allow_copy):
+        st = os.stat(
+            python_files_dir
+            + "/"
+            + export_name
+            + "/"
+            + "python"
+            + "/"
+            + "bin"
+            + "/"
+            + "python3"
+        )
+        os.chmod(
+            python_files_dir
+            + "/"
+            + export_name
+            + "/"
+            + "python"
+            + "/"
+            + "bin"
+            + "/"
+            + "python3",
+            st.st_mode | stat.S_IXUSR | stat.S_IXGRP | stat.S_IXOTH,
+        )
+    if allow_copy:
         create_sitecustomization(export_name, platform)
         delete_pip(platform, export_name)
         copy_to_build(export_name + "/", platform)
@@ -71,33 +101,38 @@ def download_file(platform, allow_copy=False):
 def decompress_zstandard_to_folder(input_file):
     """function for extraticing .zst files"""
     input_file = pathlib.Path(input_file)
-    with open(input_file, 'rb') as compressed:
+    with open(input_file, "rb") as compressed:
         decomp = zstandard.ZstdDecompressor()
         output_path = pathlib.Path(python_files_dir) / input_file.stem
-        with open(output_path, 'wb') as destination:
+        with open(output_path, "wb") as destination:
             decomp.copy_stream(compressed, destination)
 
 
 def extract_archive(file, export_name):
     """function for extracting .tar archieve"""
-    if (not os.path.isdir(python_files_dir + "/" + export_name)):
+    if not os.path.isdir(python_files_dir + "/" + export_name):
         print("File:", file)
         if file.endswith("tar") or file.endswith("gz"):
             my_tar = tarfile.open(file)
             print(export_name)
             print(python_files_dir + "/" + export_name)
-            my_tar.extractall(python_files_dir + "/" + export_name)  # specify which folder to extract to
+            my_tar.extractall(
+                python_files_dir + "/" + export_name
+            )  # specify which folder to extract to
             my_tar.close()
         else:
-            with zipfile.ZipFile(file, 'r') as zip_ref:
+            with zipfile.ZipFile(file, "r") as zip_ref:
                 zip_ref.extractall(python_files_dir + "/" + export_name)
 
 
 def copy_to_build(export_folder, platform):
     """function for copying files to build folder"""
-    if (not os.path.isdir(copy_dir + "/" + platform + "/" + export_folder)):
-        copytree(python_files_dir + "/" + export_folder, copy_dir + "/" + platform + "/" + export_folder,
-                 ignore=ignore_patterns("build"))  # build and lib are unnecessary
+    if not os.path.isdir(copy_dir + "/" + platform + "/" + export_folder):
+        copytree(
+            python_files_dir + "/" + export_folder,
+            copy_dir + "/" + platform + "/" + export_folder,
+            ignore=ignore_patterns("build"),
+        )  # build and lib are unnecessary
     if "linux" in platform:
         # Ensure Python is executable
         target_dir = python_files_dir + "/" + export_folder
@@ -106,11 +141,14 @@ def copy_to_build(export_folder, platform):
         if os.path.exists(python_bin):
             print("change access")
             st = os.stat(python_bin)
-            os.chmod(python_bin, st.st_mode | stat.S_IXUSR | stat.S_IXGRP | stat.S_IXOTH)
+            os.chmod(
+                python_bin, st.st_mode | stat.S_IXUSR | stat.S_IXGRP | stat.S_IXOTH
+            )
         else:
             print("access could not be chagned")
 
-def delete_pip( platform, export_folder):
+
+def delete_pip(platform, export_folder):
     """The builtin pip is broken. We install it manually later"""
     if "windows" in platform:
         print("deleting pip...")
@@ -118,16 +156,24 @@ def delete_pip( platform, export_folder):
             shutil.rmtree(f"python_files/{export_folder}/python/Lib/site-packages/pip")
     elif "linux" in platform:
         print("deleting pip...")
-        if os.path.isdir(f"python_files/{export_folder}/python/lib/{python_ver_short}/site-packages/pip"):
-            shutil.rmtree(f"python_files/{export_folder}/python/lib/{python_ver_short}/site-packages/pip")
+        if os.path.isdir(
+            f"python_files/{export_folder}/python/lib/{python_ver_short}/site-packages/pip"
+        ):
+            shutil.rmtree(
+                f"python_files/{export_folder}/python/lib/{python_ver_short}/site-packages/pip"
+            )
 
 
 def create_sitecustomization(export_folder, platform):
     if "windows" in platform:
-        with open(f"python_files/{export_folder}/python/Lib/site-packages/sitecustomize.py",
-                  "w") as sitecustomize_file:
+        with open(
+            f"python_files/{export_folder}/python/Lib/site-packages/sitecustomize.py",
+            "w",
+        ) as sitecustomize_file:
             sitecustomize_file.write(sitecustomize_py.replace("{platform}", platform))
     elif "linux" in platform:
-        with open(f"python_files/{export_folder}/python/lib/{python_ver_short}/site-packages/sitecustomize.py",
-                  "w") as sitecustomize_file:
+        with open(
+            f"python_files/{export_folder}/python/lib/{python_ver_short}/site-packages/sitecustomize.py",
+            "w",
+        ) as sitecustomize_file:
             sitecustomize_file.write(sitecustomize_py.replace("{platform}", platform))

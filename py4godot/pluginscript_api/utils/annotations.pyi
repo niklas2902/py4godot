@@ -2,12 +2,10 @@ from typing import TypeVar
 
 from py4godot.pluginscript_api.hints import *
 from py4godot.pluginscript_api.hints.BaseHint import BaseHint
-
 from py4godot.signals import SignalArg
 
 # Type variable for generic type annotations
 T = TypeVar("T")
-
 
 def gdclass(cls: object) -> None:
     """
@@ -28,7 +26,6 @@ def gdclass(cls: object) -> None:
             pass
     """
     pass
-
 
 def gdtool(cls: object) -> None:
     """
@@ -51,8 +48,13 @@ def gdtool(cls: object) -> None:
     """
     pass
 
-
-def prop(name: str, type_: object, defaultval: object, hint: BaseHint = BaseHint(""), hint_string: str = "") -> None:
+def prop(
+    name: str,
+    type_: object,
+    defaultval: object,
+    hint: BaseHint = BaseHint(""),
+    hint_string: str = "",
+) -> None:
     """
     Defines a property for a Godot class that will be visible in the inspector.
 
@@ -76,7 +78,6 @@ def prop(name: str, type_: object, defaultval: object, hint: BaseHint = BaseHint
     """
     pass
 
-
 def gdmethod(func) -> None:
     """
     Decorator that marks a method as accessible from Godot.
@@ -96,7 +97,6 @@ def gdmethod(func) -> None:
                 pass
     """
     pass
-
 
 def private(func) -> None:
     """
@@ -119,7 +119,6 @@ def private(func) -> None:
     """
     pass
 
-
 def signal(name, args: list[SignalArg] = []) -> None:
     """
     Defines a signal for a Godot class.
@@ -141,7 +140,6 @@ def signal(name, args: list[SignalArg] = []) -> None:
             test_signal = signal([SignalArg("test_arg", int)])
     """
     pass
-
 
 def register_signal(signal_name: str, args=None) -> None:
     """

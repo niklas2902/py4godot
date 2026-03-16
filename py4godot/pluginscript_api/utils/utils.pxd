@@ -1,9 +1,12 @@
 # distutils: language=c++
-from py4godot.godot_bindings.binding4_godot4 cimport *
-cimport py4godot.classes.cpp_bridge as bridge
-from libcpp.vector cimport vector
 from libcpp.memory cimport shared_ptr
 from libcpp.string cimport string
+from libcpp.vector cimport vector
+
+cimport py4godot.classes.cpp_bridge as bridge
+from py4godot.godot_bindings.binding4_godot4 cimport *
+
+
 cdef extern from "help_types.h":
     ctypedef struct TransferObject:
         vector[shared_ptr[CPPSignalDescription]] signals

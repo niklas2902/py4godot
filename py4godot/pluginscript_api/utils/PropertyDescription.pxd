@@ -1,8 +1,10 @@
 # distutils: language=c++
-from py4godot.hints.BaseHint cimport *
-from  py4godot.godot_bindings.binding4_godot4 cimport *
-cimport py4godot.pluginscript_api.utils.utils as utils
 from libcpp.memory cimport shared_ptr
+
+cimport py4godot.pluginscript_api.utils.utils as utils
+from py4godot.godot_bindings.binding4_godot4 cimport *
+from py4godot.hints.BaseHint cimport *
+
 
 cdef class PropertyDescription:
     cdef str name

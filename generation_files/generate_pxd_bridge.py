@@ -2,9 +2,8 @@ import copy
 import json
 import os.path
 
-from generate_classes import pythonize_boolean_types, unref_type, \
-    unnull_type
-from generate_classes_hpp import has_native_struct, ungodottype, generate_newline
+from generate_classes import pythonize_boolean_types, unnull_type, unref_type
+from generate_classes_hpp import generate_newline, has_native_struct, ungodottype
 from generation_tools import write_if_different
 
 INDENT = "  "
@@ -37,7 +36,7 @@ class Operator:
         self.return_type = return_type
 
 
-class GraphNode():
+class GraphNode:
     def __init__(self, class_):
         self.class_ = class_
         self.children = []
@@ -56,37 +55,38 @@ core_classes = dict()
 operator_dict = dict()
 root_node = None
 typed_arrays_names = set()
-operator_to_method = {"+": "__add__",
-                      "*": "__mul__",
-                      "-": "__sub__",
-                      "/": "__div__",
-                      "%": "__mod__",
-                      "**": "__pow__",
-                      "==": "__eq__",
-                      "!=": "__ne__",
-                      "<": "__lt__",
-                      "<=": "__le__",
-                      ">": "__gt__",
-                      ">=": "__ge__",
-                      }
-operator_to_variant_operator = {"+": "GDExtensionVariantOperator.GDEXTENSION_VARIANT_OP_ADD",
-                                "*": "GDExtensionVariantOperator.GDEXTENSION_VARIANT_OP_MULTIPLY",
-                                "-": "GDExtensionVariantOperator.GDEXTENSION_VARIANT_OP_SUBTRACT",
-                                "/": "GDExtensionVariantOperator.GDEXTENSION_VARIANT_OP_DIVIDE",
-                                "%": "GDExtensionVariantOperator.GDEXTENSION_VARIANT_OP_MODULE",
-                                "**": "GDExtensionVariantOperator.GDEXTENSION_VARIANT_OP_POWER",
-                                "==": "GDExtensionVariantOperator.GDEXTENSION_VARIANT_OP_EQUAL",
-                                "!=": "GDExtensionVariantOperator.GDEXTENSION_VARIANT_OP_NOT_EQUAL",
-                                "<": "GDExtensionVariantOperator.GDEXTENSION_VARIANT_OP_LESS",
-                                "<=": "GDExtensionVariantOperator.GDEXTENSION_VARIANT_OP_LESS_EQUAL",
-                                ">": "GDExtensionVariantOperator.GDEXTENSION_VARIANT_OP_GREATER",
-                                ">=": "GDExtensionVariantOperator.GDEXTENSION_VARIANT_OP_GREATER_EQUAL",
-                                }
+operator_to_method = {
+    "+": "__add__",
+    "*": "__mul__",
+    "-": "__sub__",
+    "/": "__div__",
+    "%": "__mod__",
+    "**": "__pow__",
+    "==": "__eq__",
+    "!=": "__ne__",
+    "<": "__lt__",
+    "<=": "__le__",
+    ">": "__gt__",
+    ">=": "__ge__",
+}
+operator_to_variant_operator = {
+    "+": "GDExtensionVariantOperator.GDEXTENSION_VARIANT_OP_ADD",
+    "*": "GDExtensionVariantOperator.GDEXTENSION_VARIANT_OP_MULTIPLY",
+    "-": "GDExtensionVariantOperator.GDEXTENSION_VARIANT_OP_SUBTRACT",
+    "/": "GDExtensionVariantOperator.GDEXTENSION_VARIANT_OP_DIVIDE",
+    "%": "GDExtensionVariantOperator.GDEXTENSION_VARIANT_OP_MODULE",
+    "**": "GDExtensionVariantOperator.GDEXTENSION_VARIANT_OP_POWER",
+    "==": "GDExtensionVariantOperator.GDEXTENSION_VARIANT_OP_EQUAL",
+    "!=": "GDExtensionVariantOperator.GDEXTENSION_VARIANT_OP_NOT_EQUAL",
+    "<": "GDExtensionVariantOperator.GDEXTENSION_VARIANT_OP_LESS",
+    "<=": "GDExtensionVariantOperator.GDEXTENSION_VARIANT_OP_LESS_EQUAL",
+    ">": "GDExtensionVariantOperator.GDEXTENSION_VARIANT_OP_GREATER",
+    ">=": "GDExtensionVariantOperator.GDEXTENSION_VARIANT_OP_GREATER_EQUAL",
+}
 
 
 def generate_import():
-    result = \
-        """
+    result = """
 from py4godot.core.variant4.Variant4 cimport *
 from libcpp.vector cimport vector
 from cpython cimport Py_INCREF, Py_DECREF, PyObject
@@ -102,6 +102,7 @@ cdef cppclass Error:
 def ref(type_):
     return "&" if type_ not in {"float", "int", "bool"} else ""
 
+
 def generate_help_functions(classname):
     res = ""
     res += f"{INDENT}shared_ptr[{classname}] construct_{classname}()"
@@ -109,6 +110,7 @@ def generate_help_functions(classname):
     res += f"{INDENT}shared_ptr[{classname}] cast_to_{classname}(Wrapper* pwrapper)"
     res = generate_newline(res)
     return res
+
 
 def generate_constructor_args(constructor):
     result = ""
@@ -141,8 +143,13 @@ def convert_camel_case_to_underscore(string):
             res += char
         was_upper = char.isupper()
         was_number = char in {"1", "2", "3", "4", "5", "6", "7", "8", "9", "0"}
-    if ((
-            "vector3" in res.lower() or "vector2" in res.lower()) or "float64" in res.lower() or "float32" in res.lower() or "int64" in res.lower() or "int32" in res.lower()):
+    if (
+        ("vector3" in res.lower() or "vector2" in res.lower())
+        or "float64" in res.lower()
+        or "float32" in res.lower()
+        or "int64" in res.lower()
+        or "int32" in res.lower()
+    ):
         res = res.replace("Array", "_Array")
     return res
 
@@ -206,11 +213,11 @@ def strip_symbols_from_type(type):
 
 def native_structs_in_method(mMethod):
     # TODO: check whether this method makes sense for later
-    if ("arguments" in mMethod):
+    if "arguments" in mMethod:
         for arg in mMethod["arguments"]:
             if arg["type"] in forbidden_types:
                 return True
-            if ("*" in arg["type"]):
+            if "*" in arg["type"]:
                 return True
             if strip_symbols_from_type(arg["type"]) in native_structs:
                 return True
@@ -224,7 +231,7 @@ def native_structs_in_method(mMethod):
 
 def generate_properties(class_):
     result = ""
-    if ("properties" in class_.keys()):
+    if "properties" in class_.keys():
         for property in class_["properties"]:
             result += generate_property(property)
     return result
@@ -255,15 +262,12 @@ def generate_method_bind_name(class_name, method_name):
 
 def get_variant_type(class_name):
     DICT = {
-
         "Nil": "GDEXTENSION_VARIANT_TYPE_NIL",
-
         #  atomic types
         "bool": "GDEXTENSION_VARIANT_TYPE_BOOL",
         "int": "GDEXTENSION_VARIANT_TYPE_INT",
         "float": "GDEXTENSION_VARIANT_TYPE_FLOAT",
         "string": "GDEXTENSION_VARIANT_TYPE_STRING",
-
         # math types
         "vector2": "GDEXTENSION_VARIANT_TYPE_VECTOR2",
         "vector2i": "GDEXTENSION_VARIANT_TYPE_VECTOR2I",
@@ -280,7 +284,6 @@ def get_variant_type(class_name):
         "basis": "GDEXTENSION_VARIANT_TYPE_BASIS",
         "transform3d": "GDEXTENSION_VARIANT_TYPE_TRANSFORM3D",
         "projection": "GDEXTENSION_VARIANT_TYPE_PROJECTION",
-
         # misc types
         "color": "GDEXTENSION_VARIANT_TYPE_COLOR",
         "stringname": "GDEXTENSION_VARIANT_TYPE_STRING_NAME",
@@ -291,7 +294,6 @@ def get_variant_type(class_name):
         "signal": "GDEXTENSION_VARIANT_TYPE_SIGNAL",
         "dictionary": "GDEXTENSION_VARIANT_TYPE_DICTIONARY",
         "array": "GDEXTENSION_VARIANT_TYPE_ARRAY",
-
         # typed arrays
         "packedbytearray": "GDEXTENSION_VARIANT_TYPE_PACKED_BYTE_ARRAY",
         "packedint32array": "GDEXTENSION_VARIANT_TYPE_PACKED_INT32_ARRAY",
@@ -301,7 +303,7 @@ def get_variant_type(class_name):
         "packedstringarray": "GDEXTENSION_VARIANT_TYPE_PACKED_STRING_ARRAY",
         "packedvector2array": "GDEXTENSION_VARIANT_TYPE_PACKED_VECTOR2_ARRAY",
         "packedvector3array": "GDEXTENSION_VARIANT_TYPE_PACKED_VECTOR3_ARRAY",
-        "packedcolorarray": "GDEXTENSION_VARIANT_TYPE_PACKED_COLOR_ARRAY"
+        "packedcolorarray": "GDEXTENSION_VARIANT_TYPE_PACKED_COLOR_ARRAY",
     }
 
     return DICT[class_name.lower()]
@@ -335,10 +337,17 @@ def unvarianttype(type_):
         return "PyObject*"
     return type_
 
+
 def make_to_ptr(ret_val):
-    if ret_val in builtin_classes - {"int", "float", "bool"} or ret_val in classes or ret_val in typed_arrays_names:
+    if (
+        ret_val in builtin_classes - {"int", "float", "bool"}
+        or ret_val in classes
+        or ret_val in typed_arrays_names
+    ):
         return f"shared_ptr[{ret_val}]"
     return ret_val
+
+
 def generate_method(class_, mMethod):
     res = ""
     if has_native_struct(mMethod):
@@ -366,7 +375,7 @@ def get_ret_value(method):
 def generate_operators(class_):
     if class_["name"] == "Dictionary":
         print(class_["name"])
-        if ("operators" in class_.keys()):
+        if "operators" in class_.keys():
             for operator in class_["operators"]:
                 print(operator)
     return ""
@@ -469,7 +478,10 @@ def generate_property(property):
     result = ""
     if "typedarray" in property["type"]:
         return result  # TODO: Enable again
-    result += f"{INDENT * 2}{simplify_type(unbitfield_type(unenumize_type((property['type']))))} prop_get_{pythonize_name(property['name'])}()" + ";"
+    result += (
+        f"{INDENT * 2}{simplify_type(unbitfield_type(unenumize_type((property['type']))))} prop_get_{pythonize_name(property['name'])}()"
+        + ";"
+    )
     result = generate_newline(result)
 
     if "setter" in property and property["setter"] != "":
@@ -481,8 +493,20 @@ def generate_property(property):
 
 def pythonize_name(name):
     if name in (
-            "from", "len", "in", "for", "with", "class", "pass", "raise", "global", "char", "default", "new",
-            "get_interface"):
+        "from",
+        "len",
+        "in",
+        "for",
+        "with",
+        "class",
+        "pass",
+        "raise",
+        "global",
+        "char",
+        "default",
+        "new",
+        "get_interface",
+    ):
         return name + "_"
     return name
 
@@ -495,7 +519,7 @@ def unbitfield_type(arg_type):
 
 def generate_args(method_with_args, is_py_method=False):
     result = " "
-    if (is_static(method_with_args)):
+    if is_static(method_with_args):
         result = ""
     if "arguments" not in method_with_args:
         if method_with_args["is_vararg"]:
@@ -508,10 +532,19 @@ def generate_args(method_with_args, is_py_method=False):
                 result += f"PyObject* {pythonize_name(arg['name'])}, "
             else:
                 result += f"{unenumize_type(untypearray_or_dictionary(unbitfield_type(arg['type'])))}& {pythonize_name(arg['name'])}, "
-        elif not arg["type"].startswith("enum::") and not arg["type"].startswith("bitfield::") and not untypearray(
-                arg["type"]) in builtin_classes and not is_typed_array(untypearray_or_dictionary(arg["type"])):
+        elif (
+            not arg["type"].startswith("enum::")
+            and not arg["type"].startswith("bitfield::")
+            and not untypearray(arg["type"]) in builtin_classes
+            and not is_typed_array(untypearray_or_dictionary(arg["type"]))
+        ):
             result += f"shared_ptr[{unenumize_type(untypearray_or_dictionary(unbitfield_type(arg['type'])))}] {pythonize_name(arg['name'])}, "
-        elif untypearray_or_dictionary(arg["type"]) in builtin_classes - {"int", "float", "bool", "Nil"}:
+        elif untypearray_or_dictionary(arg["type"]) in builtin_classes - {
+            "int",
+            "float",
+            "bool",
+            "Nil",
+        }:
             result += f"shared_ptr[{unenumize_type(untypearray_or_dictionary(unbitfield_type(arg['type'])))}] {pythonize_name(arg['name'])}, "
         elif is_typed_array(untypearray_or_dictionary(arg["type"])):
             result += f"shared_ptr[{unenumize_type(untypearray_or_dictionary(unbitfield_type(arg['type'])))}] {pythonize_name(arg['name'])}, "
@@ -554,14 +587,21 @@ def get_class_from_enum(type_):
 def get_classes_to_import(classes):
     classes_to_import = set()
     for class_ in classes:
-        if ("inherits" in class_.keys()):
+        if "inherits" in class_.keys():
             classes_to_import.add(class_["inherits"])
         if "methods" in class_.keys():
             for method in class_["methods"]:
-                if ("return_value" in method.keys()):
-                    if (unbitfield_type(get_class_from_enum(method["return_value"]["type"])) in normal_classes):
-                        classes_to_import.add(get_class_from_enum(method["return_value"]["type"]))
-                if ("arguments" not in method.keys()):
+                if "return_value" in method.keys():
+                    if (
+                        unbitfield_type(
+                            get_class_from_enum(method["return_value"]["type"])
+                        )
+                        in normal_classes
+                    ):
+                        classes_to_import.add(
+                            get_class_from_enum(method["return_value"]["type"])
+                        )
+                if "arguments" not in method.keys():
                     continue
                 for argument in method["arguments"]:
                     if argument["type"] in normal_classes:
@@ -591,7 +631,7 @@ def generate_constructor(classname):
 def generate_new_static(class_):
     res = f"{INDENT * 2}@staticmethod"
     res = generate_newline(res)
-    if (class_["name"] in builtin_classes):
+    if class_["name"] in builtin_classes:
         res += f"{INDENT * 2}{class_['name']} new_static(GDExtensionTypePtr owner);"
     else:
         res += f"{INDENT * 2}{class_['name']} new_static(GDExtensionObjectPtr owner);"
@@ -607,9 +647,19 @@ def generate_set_owner(class_):
 
 
 def operator_to_python_name(operator_name):
-    operator_names = {"*": "mult", "/": "divide", "+": "add", "-": "subtract", "==": "equals", "!=": "unequals",
-                      "%": "modulo", "<": "lower_than", ">": "greater_than", ">=": "greater_euqals",
-                      "<=": "lower_equals"}
+    operator_names = {
+        "*": "mult",
+        "/": "divide",
+        "+": "add",
+        "-": "subtract",
+        "==": "equals",
+        "!=": "unequals",
+        "%": "modulo",
+        "<": "lower_than",
+        ">": "greater_than",
+        ">=": "greater_euqals",
+        "<=": "lower_equals",
+    }
     return operator_names[operator_name]
 
 
@@ -638,9 +688,16 @@ def generate_operators_for_class(class_name):
 def is_typed_array(classname):
     return classname in typed_arrays_names
 
+
 def generate_array_methods(class_):
     res = ""
-    if class_["name"] in ("PackedFloat32Array", "PackedFloat64Array", "PackedByteArray", "PackedInt32Array", "PackedInt64Array"):
+    if class_["name"] in (
+        "PackedFloat32Array",
+        "PackedFloat64Array",
+        "PackedByteArray",
+        "PackedInt32Array",
+        "PackedInt64Array",
+    ):
         if class_["name"] == "PackedFloat32Array":
             res += f"{INDENT*2}vector[float] to_vector()"
             res = generate_newline(res)
@@ -684,55 +741,65 @@ def generate_array_methods(class_):
             res += f"{INDENT*2}shared_ptr[{class_['name']}] py_from_ptr(int64_t* ptr, long long size)"
     return res
 
+
 def generate_wrapper():
     res = generate_import()
     res = generate_newline(res)
     res += f'cdef extern from "py4godot/cpputils/Wrapper.h" namespace "godot":'
     res = generate_newline(res)
-    res += f'{INDENT}cdef cppclass Wrapper:'
+    res += f"{INDENT}cdef cppclass Wrapper:"
     res = generate_newline(res)
-    res += f'{INDENT * 2}GDExtensionObjectPtr& get_godot_owner()'
+    res += f"{INDENT * 2}GDExtensionObjectPtr& get_godot_owner()"
     res = generate_newline(res)
-    res += f'{INDENT * 2}void copy_owner(Wrapper* ptr)'
+    res += f"{INDENT * 2}void copy_owner(Wrapper* ptr)"
     res = generate_newline(res)
-    res += f'{INDENT * 2}void set_godot_owner(GDExtensionObjectPtr owner)'
+    res += f"{INDENT * 2}void set_godot_owner(GDExtensionObjectPtr owner)"
     res = generate_newline(res)
-    res += f'{INDENT * 2}void switch_call(int method_hash, PyObject * objects)'
+    res += f"{INDENT * 2}void switch_call(int method_hash, PyObject * objects)"
     res = generate_newline(res)
-    res += f'{INDENT * 2}PyObject* switch_call_return(int method_hash, PyObject * objects)'
+    res += (
+        f"{INDENT * 2}PyObject* switch_call_return(int method_hash, PyObject * objects)"
+    )
     res = generate_newline(res)
 
-    res += f'cdef extern from "py4godot/cpputils/VariantTypeWrapper.h" namespace "godot":'
+    res += (
+        f'cdef extern from "py4godot/cpputils/VariantTypeWrapper.h" namespace "godot":'
+    )
     res = generate_newline(res)
-    res += f'{INDENT}cdef cppclass VariantTypeWrapper:'
+    res += f"{INDENT}cdef cppclass VariantTypeWrapper:"
     res = generate_newline(res)
-    res += f'{INDENT * 2}GDExtensionTypePtr& get_godot_owner()'
+    res += f"{INDENT * 2}GDExtensionTypePtr& get_godot_owner()"
     res = generate_newline(res)
     return res
+
 
 def generate_classes(classes, filename, is_core=False):
     res = generate_import()
     res = generate_newline(res)
     res += f'cdef extern from "py4godot/cpputils/Wrapper.h" namespace "godot":'
     res = generate_newline(res)
-    res += f'{INDENT}cdef cppclass Wrapper:'
+    res += f"{INDENT}cdef cppclass Wrapper:"
     res = generate_newline(res)
-    res += f'{INDENT * 2}GDExtensionObjectPtr& get_godot_owner()'
+    res += f"{INDENT * 2}GDExtensionObjectPtr& get_godot_owner()"
     res = generate_newline(res)
-    res += f'{INDENT * 2}void copy_owner(Wrapper* ptr)'
+    res += f"{INDENT * 2}void copy_owner(Wrapper* ptr)"
     res = generate_newline(res)
-    res += f'{INDENT * 2}void set_godot_owner(GDExtensionObjectPtr owner)'
+    res += f"{INDENT * 2}void set_godot_owner(GDExtensionObjectPtr owner)"
     res = generate_newline(res)
-    res += f'{INDENT * 2}void switch_call(int method_hash, PyObject * objects)'
+    res += f"{INDENT * 2}void switch_call(int method_hash, PyObject * objects)"
     res = generate_newline(res)
-    res += f'{INDENT * 2}PyObject* switch_call_return(int method_hash, PyObject * objects)'
+    res += (
+        f"{INDENT * 2}PyObject* switch_call_return(int method_hash, PyObject * objects)"
+    )
     res = generate_newline(res)
 
-    res += f'cdef extern from "py4godot/cpputils/VariantTypeWrapper.h" namespace "godot":'
+    res += (
+        f'cdef extern from "py4godot/cpputils/VariantTypeWrapper.h" namespace "godot":'
+    )
     res = generate_newline(res)
-    res += f'{INDENT}cdef cppclass VariantTypeWrapper:'
+    res += f"{INDENT}cdef cppclass VariantTypeWrapper:"
     res = generate_newline(res)
-    res += f'{INDENT * 2}GDExtensionTypePtr& get_godot_owner()'
+    res += f"{INDENT * 2}GDExtensionTypePtr& get_godot_owner()"
     res = generate_newline(res)
     return res
 
@@ -745,18 +812,19 @@ def generate_pxd_bridge_class(classname):
     else:
         res = f'cdef extern from "py4godot/cppclasses/{classname}/{classname}.h" namespace "godot":'
     res = generate_newline(res)
-    res += f'{INDENT}cdef cppclass {classname}(Wrapper):'
+    res += f"{INDENT}cdef cppclass {classname}(Wrapper):"
     res = generate_newline(res)
-    res += f'{INDENT*2}pass'
+    res += f"{INDENT*2}pass"
     return res
+
 
 def collect_typed_arrays_from_return(method_):
     if "return_value" in method_.keys() or "return_type" in method_.keys():
         ret_val = None
-        if ("return_value" in method_.keys()):
-            ret_val = ReturnType("_ret", method_['return_value']['type'])
+        if "return_value" in method_.keys():
+            ret_val = ReturnType("_ret", method_["return_value"]["type"])
         else:
-            ret_val = ReturnType("_ret", method_['return_type'])
+            ret_val = ReturnType("_ret", method_["return_type"])
         if "typedarray" in ret_val.type:
             return [ret_val.type]
     return []
@@ -768,7 +836,7 @@ def collect_typed_arrays_from_args(method):
         return []
     else:
         for argument in method["arguments"]:
-            if ("typedarray" in argument["type"]):
+            if "typedarray" in argument["type"]:
                 typed_arrays.append(argument["type"])
     return typed_arrays
 
@@ -786,25 +854,32 @@ def collect_typed_arrays(classes):
 
 
 def generate_typed_array_name(name):
-    if (name == "typedarray::Array"):
+    if name == "typedarray::Array":
         pass
     return name.split("::")[1] + "TypedArray"
 
 
 if __name__ == "__main__":
     os.chdir("..")
-    with open('py4godot/gdextension-api/extension_api.json', 'r', encoding="utf-8") as myfile:
+    with open(
+        "py4godot/gdextension-api/extension_api.json", "r", encoding="utf-8"
+    ) as myfile:
         data = myfile.read()
         obj = json.loads(data)
-        classes = set([class_['name'] if class_["name"] not in IGNORED_CLASSES else None for class_ in
-                       obj['classes'] + obj["builtin_classes"]])
+        classes = set(
+            [
+                class_["name"] if class_["name"] not in IGNORED_CLASSES else None
+                for class_ in obj["classes"] + obj["builtin_classes"]
+            ]
+        )
 
         builtin_classes = set(class_["name"] for class_ in obj["builtin_classes"])
-        normal_classes = set([class_['name'] for class_ in obj['classes']])
-        native_structs = set([native_struct["name"] for native_struct in obj["native_structures"]])
+        normal_classes = set([class_["name"] for class_ in obj["classes"]])
+        native_structs = set(
+            [native_struct["name"] for native_struct in obj["native_structures"]]
+        )
         singletons = set([singleton["name"] for singleton in obj["singletons"]])
         classes_to_generate = []
-
 
         # for class_ in obj["classes"]:
         #    if class_["name"] in {"Object", "RefCounted", "AESContext"}:
@@ -821,13 +896,18 @@ if __name__ == "__main__":
         for cls in obj["builtin_classes"]:
             if cls["name"] == "Array":
                 array_cls = cls
-        print("typedarrays:", collect_typed_arrays(obj["classes"] + obj["builtin_classes"]))
-        for typed_array in collect_typed_arrays(obj["classes"] + obj["builtin_classes"]):
+        print(
+            "typedarrays:",
+            collect_typed_arrays(obj["classes"] + obj["builtin_classes"]),
+        )
+        for typed_array in collect_typed_arrays(
+            obj["classes"] + obj["builtin_classes"]
+        ):
             my_array_cls = copy.deepcopy(array_cls)
             my_array_cls["name"] = generate_typed_array_name(typed_array)
             typed_arrays_names.add(generate_typed_array_name(typed_array))
             arrays.append(my_array_cls)
-        arrays = sorted(arrays, key = lambda a: a["name"] )
+        arrays = sorted(arrays, key=lambda a: a["name"])
         typed_arrays_names = sorted(list(typed_arrays_names))
         res = ""
         res += generate_wrapper()

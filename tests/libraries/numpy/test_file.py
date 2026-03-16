@@ -1,12 +1,11 @@
+import argparse
+import os
 import platform
 import subprocess
-import os
-import subprocess
 import sys
-import argparse
-
 
 os_name = platform.system()
+
 
 def force_executable(python_exe):
     if os.path.exists(python_exe):
@@ -21,6 +20,7 @@ def force_executable(python_exe):
                 print(f"Failed to make {python_exe} executable. Check permissions.")
     else:
         print(f"{python_exe} does not exist!")
+
 
 if os_name == "Windows":
     python_exe = "tests/libraries/numpy/addons/py4godot/cpython-3.14.3-windows64/python/python.exe"
@@ -54,10 +54,9 @@ stderr_log = open(f"build/{project}_godot_stderr.log", "w")
 try:
     print("project_path:", project_path)
     print("command_args:", command_args)
-    result = subprocess.run(command_args,
-                            stdout=stdout_log,
-                            stderr=stderr_log,
-                            check=True, text=True)
+    result = subprocess.run(
+        command_args, stdout=stdout_log, stderr=stderr_log, check=True, text=True
+    )
     print(f"Command executed successfully with return code: {result.returncode}")
 except subprocess.CalledProcessError as e:
     print(f"Command failed with return code: {e.returncode}")

@@ -1,8 +1,7 @@
 import json
 import os.path
 
-from generate_classes import pythonize_boolean_types, unref_type, \
-    unnull_type
+from generate_classes import pythonize_boolean_types, unnull_type, unref_type
 
 INDENT = "  "
 
@@ -45,32 +44,34 @@ singletons = set()
 builtin_classes = set()
 core_classes = dict()
 operator_dict = dict()
-operator_to_method = {"+": "__add__",
-                      "*": "__mul__",
-                      "-": "__sub__",
-                      "/": "__div__",
-                      "%": "__mod__",
-                      "**": "__pow__",
-                      "==": "__eq__",
-                      "!=": "__ne__",
-                      "<": "__lt__",
-                      "<=": "__le__",
-                      ">": "__gt__",
-                      ">=": "__ge__",
-                      }
-operator_to_variant_operator = {"+": "GDExtensionVariantOperator.GDEXTENSION_VARIANT_OP_ADD",
-                                "*": "GDExtensionVariantOperator.GDEXTENSION_VARIANT_OP_MULTIPLY",
-                                "-": "GDExtensionVariantOperator.GDEXTENSION_VARIANT_OP_SUBTRACT",
-                                "/": "GDExtensionVariantOperator.GDEXTENSION_VARIANT_OP_DIVIDE",
-                                "%": "GDExtensionVariantOperator.GDEXTENSION_VARIANT_OP_MODULE",
-                                "**": "GDExtensionVariantOperator.GDEXTENSION_VARIANT_OP_POWER",
-                                "==": "GDExtensionVariantOperator.GDEXTENSION_VARIANT_OP_EQUAL",
-                                "!=": "GDExtensionVariantOperator.GDEXTENSION_VARIANT_OP_NOT_EQUAL",
-                                "<": "GDExtensionVariantOperator.GDEXTENSION_VARIANT_OP_LESS",
-                                "<=": "GDExtensionVariantOperator.GDEXTENSION_VARIANT_OP_LESS_EQUAL",
-                                ">": "GDExtensionVariantOperator.GDEXTENSION_VARIANT_OP_GREATER",
-                                ">=": "GDExtensionVariantOperator.GDEXTENSION_VARIANT_OP_GREATER_EQUAL",
-                                }
+operator_to_method = {
+    "+": "__add__",
+    "*": "__mul__",
+    "-": "__sub__",
+    "/": "__div__",
+    "%": "__mod__",
+    "**": "__pow__",
+    "==": "__eq__",
+    "!=": "__ne__",
+    "<": "__lt__",
+    "<=": "__le__",
+    ">": "__gt__",
+    ">=": "__ge__",
+}
+operator_to_variant_operator = {
+    "+": "GDExtensionVariantOperator.GDEXTENSION_VARIANT_OP_ADD",
+    "*": "GDExtensionVariantOperator.GDEXTENSION_VARIANT_OP_MULTIPLY",
+    "-": "GDExtensionVariantOperator.GDEXTENSION_VARIANT_OP_SUBTRACT",
+    "/": "GDExtensionVariantOperator.GDEXTENSION_VARIANT_OP_DIVIDE",
+    "%": "GDExtensionVariantOperator.GDEXTENSION_VARIANT_OP_MODULE",
+    "**": "GDExtensionVariantOperator.GDEXTENSION_VARIANT_OP_POWER",
+    "==": "GDExtensionVariantOperator.GDEXTENSION_VARIANT_OP_EQUAL",
+    "!=": "GDExtensionVariantOperator.GDEXTENSION_VARIANT_OP_NOT_EQUAL",
+    "<": "GDExtensionVariantOperator.GDEXTENSION_VARIANT_OP_LESS",
+    "<=": "GDExtensionVariantOperator.GDEXTENSION_VARIANT_OP_LESS_EQUAL",
+    ">": "GDExtensionVariantOperator.GDEXTENSION_VARIANT_OP_GREATER",
+    ">=": "GDExtensionVariantOperator.GDEXTENSION_VARIANT_OP_GREATER_EQUAL",
+}
 
 
 def generate_import():
@@ -113,8 +114,13 @@ def convert_camel_case_to_underscore(string):
             res += char
         was_upper = char.isupper()
         was_number = char in {"1", "2", "3", "4", "5", "6", "7", "8", "9", "0"}
-    if ((
-            "vector3" in res.lower() or "vector2" in res.lower()) or "float64" in res.lower() or "float32" in res.lower() or "int64" in res.lower() or "int32" in res.lower()):
+    if (
+        ("vector3" in res.lower() or "vector2" in res.lower())
+        or "float64" in res.lower()
+        or "float32" in res.lower()
+        or "int64" in res.lower()
+        or "int32" in res.lower()
+    ):
         res = res.replace("Array", "_Array")
     return res
 
@@ -131,7 +137,9 @@ def generate_constructors(class_):
     if "constructors" not in class_.keys():
         return res
 
-    res += f"{INDENT}{class_['name']} (){{godot_owner = nullptr; shouldBeDeleted=false;}};"
+    res += (
+        f"{INDENT}{class_['name']} (){{godot_owner = nullptr; shouldBeDeleted=false;}};"
+    )
     res = generate_newline(res)
     res += f"{INDENT}{class_['name']} (const {class_['name']}& copy_val);"
     res = generate_newline(res)
@@ -169,11 +177,11 @@ def strip_symbols_from_type(type):
 
 def native_structs_in_method(mMethod):
     # TODO: check whether this method makes sense for later
-    if ("arguments" in mMethod):
+    if "arguments" in mMethod:
         for arg in mMethod["arguments"]:
             if arg["type"] in forbidden_types:
                 return True
-            if ("*" in arg["type"]):
+            if "*" in arg["type"]:
                 return True
             if strip_symbols_from_type(arg["type"]) in native_structs:
                 return True
@@ -187,7 +195,7 @@ def native_structs_in_method(mMethod):
 
 def generate_properties(class_):
     result = ""
-    if ("properties" in class_.keys()):
+    if "properties" in class_.keys():
         for property in class_["properties"]:
             result += generate_property(property)
     return result
@@ -217,15 +225,12 @@ def generate_method_bind_name(class_name, method_name):
 
 def get_variant_type(class_name):
     DICT = {
-
         "Nil": "GDEXTENSION_VARIANT_TYPE_NIL",
-
         #  atomic types
         "bool": "GDEXTENSION_VARIANT_TYPE_BOOL",
         "int": "GDEXTENSION_VARIANT_TYPE_INT",
         "float": "GDEXTENSION_VARIANT_TYPE_FLOAT",
         "string": "GDEXTENSION_VARIANT_TYPE_STRING",
-
         # math types
         "vector2": "GDEXTENSION_VARIANT_TYPE_VECTOR2",
         "vector2i": "GDEXTENSION_VARIANT_TYPE_VECTOR2I",
@@ -242,7 +247,6 @@ def get_variant_type(class_name):
         "basis": "GDEXTENSION_VARIANT_TYPE_BASIS",
         "transform3d": "GDEXTENSION_VARIANT_TYPE_TRANSFORM3D",
         "projection": "GDEXTENSION_VARIANT_TYPE_PROJECTION",
-
         # misc types
         "color": "GDEXTENSION_VARIANT_TYPE_COLOR",
         "stringname": "GDEXTENSION_VARIANT_TYPE_STRING_NAME",
@@ -253,7 +257,6 @@ def get_variant_type(class_name):
         "signal": "GDEXTENSION_VARIANT_TYPE_SIGNAL",
         "dictionary": "GDEXTENSION_VARIANT_TYPE_DICTIONARY",
         "array": "GDEXTENSION_VARIANT_TYPE_ARRAY",
-
         # typed arrays
         "packedbytearray": "GDEXTENSION_VARIANT_TYPE_PACKED_BYTE_ARRAY",
         "packedint32array": "GDEXTENSION_VARIANT_TYPE_PACKED_INT32_ARRAY",
@@ -263,7 +266,7 @@ def get_variant_type(class_name):
         "packedstringarray": "GDEXTENSION_VARIANT_TYPE_PACKED_STRING_ARRAY",
         "packedvector2array": "GDEXTENSION_VARIANT_TYPE_PACKED_VECTOR2_ARRAY",
         "packedvector3array": "GDEXTENSION_VARIANT_TYPE_PACKED_VECTOR3_ARRAY",
-        "packedcolorarray": "GDEXTENSION_VARIANT_TYPE_PACKED_COLOR_ARRAY"
+        "packedcolorarray": "GDEXTENSION_VARIANT_TYPE_PACKED_COLOR_ARRAY",
     }
 
     return DICT[class_name.lower()]
@@ -278,6 +281,7 @@ def unvarianttype(type_):
     if type_ == "Variant":
         return "PyObject*"
     return type_
+
 
 def make_ptr(type_):
     if type_ in builtin_classes - {"int", "float", "bool", "Nil"}:
@@ -301,6 +305,7 @@ def generate_method(mMethod):
     res += def_function2
     res = generate_newline(res)
     return res
+
 
 def has_native_struct(method):
     if "return_value" in method.keys() or "return_type" in method.keys():
@@ -326,7 +331,7 @@ def get_ret_value(method):
 def generate_operators(class_):
     if class_["name"] == "Dictionary":
         print(class_["name"])
-        if ("operators" in class_.keys()):
+        if "operators" in class_.keys():
             for operator in class_["operators"]:
                 print(operator)
     return ""
@@ -446,7 +451,10 @@ def generate_property(property):
     if "packet_sequence" == property["name"]:
         return result
 
-    result += f"{INDENT}{simplify_type(untypearray(unbitfield_type(unenumize_type((property['type'])))))} prop_get_{pythonize_name(property['name'])}()" + ";"
+    result += (
+        f"{INDENT}{simplify_type(untypearray(unbitfield_type(unenumize_type((property['type'])))))} prop_get_{pythonize_name(property['name'])}()"
+        + ";"
+    )
     result = generate_newline(result)
 
     if "setter" in property and property["setter"] != "":
@@ -457,8 +465,27 @@ def generate_property(property):
 
 
 def pythonize_name(name):
-    if name in ("from", "len", "in", "for", "with", "class", "pass", "raise", "global", "char", "default",
-                "get_interface", "operator", "enum", "new", "template", "bool", "typeof", "str"):
+    if name in (
+        "from",
+        "len",
+        "in",
+        "for",
+        "with",
+        "class",
+        "pass",
+        "raise",
+        "global",
+        "char",
+        "default",
+        "get_interface",
+        "operator",
+        "enum",
+        "new",
+        "template",
+        "bool",
+        "typeof",
+        "str",
+    ):
         return name + "_"
     return name
 
@@ -477,8 +504,9 @@ def ungodottype(type_):
     return type_
 
 
-
-def generate_args(method_with_args, builtin_classes, is_cpp=False, should_make_shared=False):
+def generate_args(
+    method_with_args, builtin_classes, is_cpp=False, should_make_shared=False
+):
     result = " "
     if "arguments" not in method_with_args:
         if method_with_args["is_vararg"]:
@@ -489,14 +517,22 @@ def generate_args(method_with_args, builtin_classes, is_cpp=False, should_make_s
         return result[:-2]
 
     for arg in method_with_args["arguments"]:
-        if arg["type"] not in builtin_classes and not arg["type"].startswith("enum::") and not arg["type"].startswith(
-                "bitfield::") and not arg["type"].startswith("typedarray::") \
-                and not arg["type"] == "Variant":
+        if (
+            arg["type"] not in builtin_classes
+            and not arg["type"].startswith("enum::")
+            and not arg["type"].startswith("bitfield::")
+            and not arg["type"].startswith("typedarray::")
+            and not arg["type"] == "Variant"
+        ):
             if should_make_shared:
                 result += f"{make_ptr(unenumize_type(untypearray(unbitfield_type(arg['type']))))} {pythonize_name(arg['name'])}, "
             else:
                 result += f"{unenumize_type(untypearray(unbitfield_type(arg['type'])))}* {pythonize_name(arg['name'])}, "
-        elif untypearray(arg["type"]) in builtin_classes - {"int", "float", "bool", "Nil"} or arg["type"] == "Variant":
+        elif (
+            untypearray(arg["type"])
+            in builtin_classes - {"int", "float", "bool", "Nil"}
+            or arg["type"] == "Variant"
+        ):
             if should_make_shared:
                 result += f"{make_ptr(unenumize_type(untypearray(unbitfield_type(arg['type']))))} {pythonize_name(arg['name'])}, "
             else:
@@ -577,17 +613,19 @@ def generate_destructor(classname):
 
 def generate_new_static(class_):
     res = ""
-    if (class_["name"] in builtin_classes):
+    if class_["name"] in builtin_classes:
         res += f"{INDENT}static {class_['name']} new_static(GDExtensionTypePtr owner);"
     else:
-        res += f"{INDENT}static {class_['name']} new_static(GDExtensionObjectPtr owner);"
+        res += (
+            f"{INDENT}static {class_['name']} new_static(GDExtensionObjectPtr owner);"
+        )
 
     return res
 
 
 def generate_set_owner(class_):
     res = ""
-    if (class_["name"] in builtin_classes):
+    if class_["name"] in builtin_classes:
         res += f"{INDENT}void set_gdowner_{class_['name']}(GDExtensionTypePtr owner);"
     else:
         res += f"{INDENT}void set_gdowner_{class_['name']}(GDExtensionObjectPtr owner);"
@@ -596,9 +634,19 @@ def generate_set_owner(class_):
 
 
 def operator_to_python_name(operator_name):
-    operator_names = {"*": "mult", "/": "divide", "+": "add", "-": "subtract", "==": "equals", "!=": "unequals",
-                      "%": "modulo", "<": "lower_than", ">": "greater_than", ">=": "greater_euqals",
-                      "<=": "lower_equals"}
+    operator_names = {
+        "*": "mult",
+        "/": "divide",
+        "+": "add",
+        "-": "subtract",
+        "==": "equals",
+        "!=": "unequals",
+        "%": "modulo",
+        "<": "lower_than",
+        ">": "greater_than",
+        ">=": "greater_euqals",
+        "<=": "lower_equals",
+    }
     return operator_names[operator_name]
 
 
@@ -623,6 +671,7 @@ def generate_operators_for_class(class_name):
                         res = generate_newline(res)
     res = generate_newline(res)
     return res
+
 
 def generate_dictionary_set_item():
     res = ""
@@ -719,24 +768,35 @@ def generate_operators_set(class_):
         if not class_["name"] in operator_dict.keys():
             operator_dict[class_["name"]] = dict()
         if not operator["name"] in operator_dict[class_["name"]]:
-            operator_dict[class_["name"]][operator["name"]] = Operator(class_["name"], operator["name"],
-                                                                       operator["return_type"])
+            operator_dict[class_["name"]][operator["name"]] = Operator(
+                class_["name"], operator["name"], operator["return_type"]
+            )
         if "right_type" in operator.keys():
-            operator_dict[class_["name"]][operator["name"]].right_type_values.append(operator["right_type"])
+            operator_dict[class_["name"]][operator["name"]].right_type_values.append(
+                operator["right_type"]
+            )
 
 
 classes = set()
 
 if __name__ == "__main__":
     os.chdir("..")
-    with open('py4godot/gdextension-api/extension_api.json', 'r', encoding="utf-8") as myfile:
+    with open(
+        "py4godot/gdextension-api/extension_api.json", "r", encoding="utf-8"
+    ) as myfile:
         data = myfile.read()
         obj = json.loads(data)
-        classes = set([class_['name'] if class_["name"] not in IGNORED_CLASSES else None for class_ in
-                       obj['classes'] + obj["builtin_classes"]])
+        classes = set(
+            [
+                class_["name"] if class_["name"] not in IGNORED_CLASSES else None
+                for class_ in obj["classes"] + obj["builtin_classes"]
+            ]
+        )
         builtin_classes = set(class_["name"] for class_ in obj["builtin_classes"])
-        normal_classes = set([class_['name'] for class_ in obj['classes']])
-        native_structs = set([native_struct["name"] for native_struct in obj["native_structures"]])
+        normal_classes = set([class_["name"] for class_ in obj["classes"]])
+        native_structs = set(
+            [native_struct["name"] for native_struct in obj["native_structures"]]
+        )
         singletons = set([singleton["name"] for singleton in obj["singletons"]])
         collect_members(obj)
         print(obj["utility_functions"])
@@ -744,11 +804,10 @@ if __name__ == "__main__":
     res = generate_newline(res)
     res += "namespace godot{"
     for utility_function in obj["utility_functions"]:
-        res+= generate_method(utility_function)
+        res += generate_method(utility_function)
         res = generate_newline(res)
 
     res += "}"
 
     with open("py4godot/cppclasses/utils.h", "w") as f:
         f.write(res)
-

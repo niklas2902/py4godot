@@ -1,10 +1,6 @@
 # distutils: language=c++
-from libc.stdint cimport uint32_t
-from libc.stdint cimport int32_t
-from libc.stdint cimport uint8_t
-from libc.stdint cimport uint64_t
-from libc.stdint cimport int64_t
-from libc.stdint cimport int8_t
+from libc.stdint cimport int8_t, int32_t, int64_t, uint8_t, uint32_t, uint64_t
+
 
 cdef extern from "functions.h" namespace "functions":
     ctypedef uint8_t GDExtensionBool;

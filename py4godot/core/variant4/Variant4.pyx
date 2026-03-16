@@ -1,8 +1,11 @@
 # distutils: language=c++
-from cpython.ref cimport Py_INCREF, Py_DECREF
 from cpython.object cimport PyObject
+from cpython.ref cimport Py_DECREF, Py_INCREF
+
 from py4godot.core.variant4 import cast_helpers
 from py4godot.utils.print_tools import *
+
+
 cdef class PyVariant:
     cdef object get_converted_value(self, bint should_return_pystring):
         cdef PyObject* obj = self.variant.get_converted_value(should_return_pystring)

@@ -1,7 +1,10 @@
 # distutils: language=c++
 cimport py4godot.utils.utils as utils
-import py4godot.classes.Object as obj
+
 import py4godot.classes.core as core
+import py4godot.classes.Object as obj
+
+
 cdef dict types_dict = {
 int:GDExtensionVariantType.GDEXTENSION_VARIANT_TYPE_INT,
 str:GDExtensionVariantType.GDEXTENSION_VARIANT_TYPE_STRING,

@@ -1,8 +1,11 @@
 # distutils: language=c++
 from py4godot.utils.print_tools import *
-from py4godot.wrappers.wrappers cimport extract_ptr_from_ObjectWrapper
-from py4godot.utils.CPPWrapper cimport CPPWrapper
+
 cimport py4godot.classes.cpp_bridge as bridge
+from py4godot.utils.CPPWrapper cimport CPPWrapper
+from py4godot.wrappers.wrappers cimport extract_ptr_from_ObjectWrapper
+
+
 cdef api void set_owner(object o, void* owner):
     cdef CPPWrapper cppwrapper
     cdef bridge.Wrapper* bridge_wrapper

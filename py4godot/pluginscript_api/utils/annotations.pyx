@@ -1,29 +1,35 @@
 # distutils: language=c++
-import sys,os
+import inspect
+import os
+import sys
+import traceback
 from typing import get_type_hints
-
-import inspect, traceback
 
 from py4godot.classes.Node import Node
 from py4godot.classes.Resource import Resource
-from py4godot.hints.BaseHint cimport *
+
+from cpython cimport Py_DECREF, Py_INCREF, PyObject
+
 from py4godot.godot_bindings.binding4_godot4 cimport *
-from py4godot.pluginscript_api.utils.utils cimport *
-
+from py4godot.hints.BaseHint cimport *
 from py4godot.pluginscript_api.utils.MethodDescription cimport MethodDescription
-from py4godot.utils.utils cimport *
-from cpython cimport Py_INCREF, Py_DECREF, PyObject
-
-from py4godot.pluginscript_api.utils.SignalDescription cimport *
 from py4godot.pluginscript_api.utils.PropertyDescription cimport *
-import py4godot.utils.print_tools as print_tools
-from importlib.machinery import SourceFileLoader
-import py4godot.classes.core
+from py4godot.pluginscript_api.utils.SignalDescription cimport *
+from py4godot.pluginscript_api.utils.utils cimport *
+from py4godot.utils.utils cimport *
+
 import importlib
 import importlib.util
+from importlib.machinery import SourceFileLoader
+
+import py4godot.classes.core
+import py4godot.utils.print_tools as print_tools
+
 from libcpp.string cimport string
-from collections import OrderedDict
+
 import inspect
+from collections import OrderedDict
+
 from py4godot.classes.Object import Object
 
 class_name = ""

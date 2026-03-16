@@ -1,0 +1,38 @@
+# .pre-commit-config.yaml
+repos:
+  # Python formatting
+  - repo: https://github.com/psf/black
+    rev: 24.3.0
+    hooks:
+      - id: black
+        language_version: python3
+
+  - repo: https://github.com/PyCQA/isort
+    rev: 5.13.2
+    hooks:
+      - id: isort
+        args: ["--profile", "black"]  # compatible with black
+
+  # C++ formatting
+  - repo: https://github.com/pre-commit/mirrors-clang-format
+    rev: v18.1.1
+    hooks:
+      - id: clang-format
+        types_or: [c, c++, header]
+        args: ["--style=file"]
+
+  # Meson formatting
+  - repo: https://github.com/scop/pre-commit-shfmt
+    rev: v3.8.0-1
+    hooks:
+      - id: shfmt  # optional, for shell scripts in your build
+
+  - repo: local
+    hooks:
+      - id: meson-fmt
+        name: meson fmt
+        language: python
+        entry: meson fmt -i
+        files: meson\.build$|meson\.options$|meson_options\.txt$
+        pass_filenames: true
+        additional_dependencies: [meson]

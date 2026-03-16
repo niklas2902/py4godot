@@ -1,5 +1,5 @@
-import os
 import glob
+import os
 import time
 
 from Cython.Build import cythonize
@@ -10,11 +10,15 @@ from meson_scripts.get_dependencies_for_classes import generate_dev_build
 NTHREADS = 3  # Adjust based on your CPU
 BATCH_SIZE = 3  # Adjust based on your system's capabilities
 
+
 def cythonize_batch(filenames):
     start_time = time.time()
-    cythonize(filenames, language_level=3, nthreads=NTHREADS, annotate=True, cache=False)
+    cythonize(
+        filenames, language_level=3, nthreads=NTHREADS, annotate=True, cache=False
+    )
     end_time = time.time()
     print("Total time elapsed for batch: {:.2f}".format(end_time - start_time))
+
 
 def main():
     file_patterns = [
@@ -36,8 +40,7 @@ def main():
         "py4godot/godot_bindings/binding4_godot4.pyx",
         "py4godot/wrappers/wrappers.pyx",
         "py4godot/wrappers/type_checking.pyx",
-        "py4godot/utils/CPPWrapper.pyx"
-
+        "py4godot/utils/CPPWrapper.pyx",
     ]
 
     files_to_cythonize = []
@@ -46,12 +49,15 @@ def main():
 
     total_files = len(files_to_cythonize)
 
-    for i in tqdm(range(0, total_files, BATCH_SIZE), desc="Total progress:", smoothing=0.8):
-        batch = files_to_cythonize[i:i+BATCH_SIZE]
+    for i in tqdm(
+        range(0, total_files, BATCH_SIZE), desc="Total progress:", smoothing=0.8
+    ):
+        batch = files_to_cythonize[i : i + BATCH_SIZE]
         cythonize_batch(batch)
         print("##############################")
 
     print(f"Compiled {total_files} files")
+
 
 if __name__ == "__main__":
     main()

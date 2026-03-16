@@ -1,8 +1,8 @@
 import inspect
-from typing import TypeVar, List
+from typing import List, TypeVar
 
 from py4godot.pluginscript_api.hints.BaseHint import BaseHint
-from py4godot.pluginscript_api.utils.annotations import signal, prop_return
+from py4godot.pluginscript_api.utils.annotations import prop_return, signal
 from py4godot.signals import SignalArg
 
 # Type variable for generic type annotations
@@ -10,7 +10,9 @@ T = TypeVar("T")
 
 
 # Very experimental
-def gdproperty(type_: type, defaultval: T, hint: BaseHint = BaseHint(), hint_string: str = "")->T:
+def gdproperty(
+    type_: type, defaultval: T, hint: BaseHint = BaseHint(), hint_string: str = ""
+) -> T:
     """
     Automatically registers a Godot property by extracting the property name from the code context.
 
@@ -43,8 +45,7 @@ def gdproperty(type_: type, defaultval: T, hint: BaseHint = BaseHint(), hint_str
     return prop_return(name, type_, defaultval, hint, hint_string)
 
 
-
-def gdprop(defaultval: T, hint: BaseHint = BaseHint(), hint_string: str = "")->T:
+def gdprop(defaultval: T, hint: BaseHint = BaseHint(), hint_string: str = "") -> T:
     """
     Automatically registers a Godot property by extracting both name and type from code context.
 

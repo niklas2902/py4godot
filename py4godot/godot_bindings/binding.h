@@ -2,7 +2,8 @@
 
 static const godot_gdnative_core_api_struct* api_core;
 static const godot_gdnative_ext_nativescript_api_struct *nativescript_api;
-static const godot_gdnative_ext_nativescript_1_1_api_struct *nativescript_api_11;
+static const godot_gdnative_ext_nativescript_1_1_api_struct
+*nativescript_api_11;
 
 //members for bindings funcs
 int language_index;

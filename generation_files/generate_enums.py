@@ -8,15 +8,17 @@ from generation_tools import write_if_different
 def generate_newline(str_):
     return str_ + "\n"
 
+
 def enumize_name(str_):
     str_array = str_.split(".")
-    if len(str_array) >1:
-        return str_array[0]+ "__" + str_array[1]
+    if len(str_array) > 1:
+        return str_array[0] + "__" + str_array[1]
     return str_array[0]
+
 
 if __name__ == "__main__":
     os.chdir("..")
-    sys.path.append(os.path.abspath('..'))
+    sys.path.append(os.path.abspath(".."))
 
     res = ""
     res += "from py4godot.godot_bindings.binding4_godot4 cimport *"
@@ -24,7 +26,9 @@ if __name__ == "__main__":
     res = generate_newline(res)
 
     res_pyi = ""
-    with open('py4godot/gdextension-api/extension_api.json', 'r', encoding="utf-8") as myfile:
+    with open(
+        "py4godot/gdextension-api/extension_api.json", "r", encoding="utf-8"
+    ) as myfile:
         data = myfile.read()
         obj = json.loads(data)
         for enum_def in obj["global_enums"]:
@@ -45,7 +49,12 @@ if __name__ == "__main__":
                 res_pyi += f"  {value['name']} = {value['value']}"
                 res_pyi = generate_newline(res_pyi)
 
-
-    write_if_different("py4godot/enums/enums.pyx","# distutils: language=c++\n"+"from py4godot.godot_bindings.binding4_godot4 cimport *")
-    write_if_different("py4godot/enums/enums.pxd", "# distutils: language=c++\n"+res)
-    write_if_different("py4godot/enums/enums.pyi", "# distutils: language=c++\n"+res_pyi)
+    write_if_different(
+        "py4godot/enums/enums.pyx",
+        "# distutils: language=c++\n"
+        + "from py4godot.godot_bindings.binding4_godot4 cimport *",
+    )
+    write_if_different("py4godot/enums/enums.pxd", "# distutils: language=c++\n" + res)
+    write_if_different(
+        "py4godot/enums/enums.pyi", "# distutils: language=c++\n" + res_pyi
+    )

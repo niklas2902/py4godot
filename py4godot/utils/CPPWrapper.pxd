@@ -1,6 +1,8 @@
 # distutils: language=c++
-cimport py4godot.classes.cpp_bridge as bridge
 from libcpp.memory cimport shared_ptr
+
+cimport py4godot.classes.cpp_bridge as bridge
+
 
 cdef extern from "py4godot/cppclasses/static_methods.h" namespace "godot":
     object call_static_method(int class_number, int hash, tuple args)

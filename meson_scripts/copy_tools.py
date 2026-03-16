@@ -1,8 +1,8 @@
-import shutil
-from shutil import copy, copytree, rmtree
-import os
 import glob
 import json
+import os
+import shutil
+from shutil import copy, copytree, rmtree
 
 from build_tools import download_get_pip
 from config import python_ver, python_ver_short
@@ -10,41 +10,83 @@ from config import python_ver, python_ver_short
 
 def strip_platform(text):
     text = text[1:]
-    return text.lstrip("linuxarm64").lstrip("linux64").lstrip("windows64").lstrip("windows32").lstrip("linux32").lstrip("darwin64")
+    return (
+        text.lstrip("linuxarm64")
+        .lstrip("linux64")
+        .lstrip("windows64")
+        .lstrip("windows32")
+        .lstrip("linux32")
+        .lstrip("darwin64")
+    )
 
 
 def run(platform):
     # copying all the files from build to the folder of the add-on
     list_dll = []
     if "windows" in platform:
-        list_dll = list(filter(lambda pathname: not (pathname.endswith("main.dll") or pathname.endswith("pythonscript.dll")),glob.glob("**/*.dll", recursive=True)))
+        list_dll = list(
+            filter(
+                lambda pathname: not (
+                    pathname.endswith("main.dll")
+                    or pathname.endswith("pythonscript.dll")
+                ),
+                glob.glob("**/*.dll", recursive=True),
+            )
+        )
     elif "linux" in platform:
-        list_dll = list(filter(lambda pathname: not (pathname.endswith("main.so") or pathname.endswith("pythonscript.so")),glob.glob("**/*.so", recursive=True)))
+        list_dll = list(
+            filter(
+                lambda pathname: not (
+                    pathname.endswith("main.so") or pathname.endswith("pythonscript.so")
+                ),
+                glob.glob("**/*.so", recursive=True),
+            )
+        )
     elif "darwin" in platform:
-        list_dll = list(filter(lambda pathname: not (pathname.endswith("main.dylib") or pathname.endswith("pythonscript.dylib")),glob.glob("**/*.dylib", recursive=True)))
+        list_dll = list(
+            filter(
+                lambda pathname: not (
+                    pathname.endswith("main.dylib")
+                    or pathname.endswith("pythonscript.dylib")
+                ),
+                glob.glob("**/*.dylib", recursive=True),
+            )
+        )
     for entry in list_dll:
         if "cpython" in entry:
             continue
         entry = entry.lstrip("/")
         if entry.startswith("build"):
             if "windows" in entry:
-                os.makedirs(os.path.dirname(
-                    f"build/final/{platform}/{python_ver}-{platform}/python/Lib/site-packages/" + strip_platform(
-                        entry.lstrip("build").replace("#", "/"))),
-                    exist_ok=True)
-                copy(entry,
-                     f"build/final/{platform}/{python_ver}-{platform}/python/Lib/site-packages/" + strip_platform(
-                         entry.lstrip("build").replace("#", "/")).
-                     replace(".dll", ".pyd"))  # dst can be a folder; use copy2() to preserve timestamp
+                os.makedirs(
+                    os.path.dirname(
+                        f"build/final/{platform}/{python_ver}-{platform}/python/Lib/site-packages/"
+                        + strip_platform(entry.lstrip("build").replace("#", "/"))
+                    ),
+                    exist_ok=True,
+                )
+                copy(
+                    entry,
+                    f"build/final/{platform}/{python_ver}-{platform}/python/Lib/site-packages/"
+                    + strip_platform(entry.lstrip("build").replace("#", "/")).replace(
+                        ".dll", ".pyd"
+                    ),
+                )  # dst can be a folder; use copy2() to preserve timestamp
             else:
-                os.makedirs(os.path.dirname(
-                    f"build/final/{platform}/{python_ver}-{platform}/python/lib/{python_ver_short}/site-packages/" + strip_platform(
-                        entry.lstrip("build").replace("#", "/"))),
-                    exist_ok=True)
-                copy(entry,
-                     f"build/final/{platform}/{python_ver}-{platform}/python/lib/{python_ver_short}/site-packages/" + strip_platform(
-                         entry.lstrip("build").replace("#", "/")).
-                     replace(".dylib", ".so"))  # dst can be a folder; use copy2() to preserve timestamp
+                os.makedirs(
+                    os.path.dirname(
+                        f"build/final/{platform}/{python_ver}-{platform}/python/lib/{python_ver_short}/site-packages/"
+                        + strip_platform(entry.lstrip("build").replace("#", "/"))
+                    ),
+                    exist_ok=True,
+                )
+                copy(
+                    entry,
+                    f"build/final/{platform}/{python_ver}-{platform}/python/lib/{python_ver_short}/site-packages/"
+                    + strip_platform(entry.lstrip("build").replace("#", "/")).replace(
+                        ".dylib", ".so"
+                    ),
+                )  # dst can be a folder; use copy2() to preserve timestamp
 
     if "windows" in platform:
         list_dll = glob.glob("**/*.pdb", recursive=True)
@@ -58,32 +100,49 @@ def run(platform):
         if entry.count("cpython-") >= 1:
             continue
         if entry.startswith("build"):
-            os.makedirs(os.path.dirname(
-                f"build/final/{platform}/{python_ver}-{platform}/python/Lib/site-packages/" + strip_platform(
-                    entry.lstrip("build").replace("#", "/"))),
-                exist_ok=True)
-            copy(entry,
-                 f"build/final/{platform}/{python_ver}-{platform}/python/Lib/site-packages/" + strip_platform(
-                     entry.lstrip("build").replace("#", "/")))  # dst can be a folder; use copy2() to preserve timestamp
+            os.makedirs(
+                os.path.dirname(
+                    f"build/final/{platform}/{python_ver}-{platform}/python/Lib/site-packages/"
+                    + strip_platform(entry.lstrip("build").replace("#", "/"))
+                ),
+                exist_ok=True,
+            )
+            copy(
+                entry,
+                f"build/final/{platform}/{python_ver}-{platform}/python/Lib/site-packages/"
+                + strip_platform(entry.lstrip("build").replace("#", "/")),
+            )  # dst can be a folder; use copy2() to preserve timestamp
 
 
 def copy_main(platform):
     if "windows" in platform:
         # This is a weird phenomenon of godot 4.2. It copies the dll and renames it. Thus, we have to change what we depend on
-        copy(f"build/{platform}/main.dll",
-             f"build/final/{platform}/{python_ver}-{platform}/python/main.dll")
-        copy(f"build/{platform}/pythonscript.dll",
-             f"build/final/{platform}/{python_ver}-{platform}/python/pythonscript.dll")
+        copy(
+            f"build/{platform}/main.dll",
+            f"build/final/{platform}/{python_ver}-{platform}/python/main.dll",
+        )
+        copy(
+            f"build/{platform}/pythonscript.dll",
+            f"build/final/{platform}/{python_ver}-{platform}/python/pythonscript.dll",
+        )
     elif "linux" in platform:
-        copy(f"build/{platform}/main.so",
-             f"build/final/{platform}/{python_ver}-{platform}/python/bin/main.so")
-        copy(f"build/{platform}/pythonscript.so",
-             f"build/final/{platform}/{python_ver}-{platform}/python/bin/pythonscript.so")
+        copy(
+            f"build/{platform}/main.so",
+            f"build/final/{platform}/{python_ver}-{platform}/python/bin/main.so",
+        )
+        copy(
+            f"build/{platform}/pythonscript.so",
+            f"build/final/{platform}/{python_ver}-{platform}/python/bin/pythonscript.so",
+        )
     elif "darwin" in platform:
-        copy(f"build/{platform}/main.dylib",
-             f"build/final/{platform}/{python_ver}-{platform}/python/bin/main.dylib")
-        copy(f"build/{platform}/pythonscript.dylib",
-             f"build/final/{platform}/{python_ver}-{platform}/python/bin/pythonscript.dylib")
+        copy(
+            f"build/{platform}/main.dylib",
+            f"build/final/{platform}/{python_ver}-{platform}/python/bin/main.dylib",
+        )
+        copy(
+            f"build/{platform}/pythonscript.dylib",
+            f"build/final/{platform}/{python_ver}-{platform}/python/bin/pythonscript.dylib",
+        )
 
 
 def onerror(func, path, exc_info):
@@ -148,50 +207,77 @@ def copy_tests(platform):
 
 
 def copy_stub_files(platform):
-    for file in (glob.glob("**/*.pyi", recursive=True)):
+    for file in glob.glob("**/*.pyi", recursive=True):
         if not file.startswith("py4godot"):
             continue
         if "windows" in platform:
-            os.makedirs(os.path.dirname(
-                f"build/final/{platform}/{python_ver}-{platform}/python/Lib/site-packages/" + file),
-                exist_ok=True)
-            copy(file,
-                 f"build/final/{platform}/{python_ver}-{platform}/python/Lib/site-packages/" + file)
+            os.makedirs(
+                os.path.dirname(
+                    f"build/final/{platform}/{python_ver}-{platform}/python/Lib/site-packages/"
+                    + file
+                ),
+                exist_ok=True,
+            )
+            copy(
+                file,
+                f"build/final/{platform}/{python_ver}-{platform}/python/Lib/site-packages/"
+                + file,
+            )
         else:
-            os.makedirs(os.path.dirname(
-                f"build/final/{platform}/{python_ver}-{platform}/python/lib/{python_ver_short}/site-packages/" + file),
-                exist_ok=True)
-            copy(file,
-                 f"build/final/{platform}/{python_ver}-{platform}/python/lib/{python_ver_short}/site-packages/" + file)
+            os.makedirs(
+                os.path.dirname(
+                    f"build/final/{platform}/{python_ver}-{platform}/python/lib/{python_ver_short}/site-packages/"
+                    + file
+                ),
+                exist_ok=True,
+            )
+            copy(
+                file,
+                f"build/final/{platform}/{python_ver}-{platform}/python/lib/{python_ver_short}/site-packages/"
+                + file,
+            )
 
 
 def copy_experimental(platform):
-    for file in ["py4godot/pluginscript_api/utils/experimental.py",
-                 "py4godot/pluginscript_api/utils/annotation_tools.py",
-                 "py4godot/utils/smart_cast.py",
-                 "py4godot/methods.py",
-                 "py4godot/singletons.py",
-                 "py4godot/variant_types.py",
-                 "py4godot/constants.py",
-                 "py4godot/constant_helpers.py",
-                 "py4godot/properties.py",
-                 "py4godot/utils/functools.py",
-                 "py4godot/utils/CoreType.py"]:
+    for file in [
+        "py4godot/pluginscript_api/utils/experimental.py",
+        "py4godot/pluginscript_api/utils/annotation_tools.py",
+        "py4godot/utils/smart_cast.py",
+        "py4godot/methods.py",
+        "py4godot/singletons.py",
+        "py4godot/variant_types.py",
+        "py4godot/constants.py",
+        "py4godot/constant_helpers.py",
+        "py4godot/properties.py",
+        "py4godot/utils/functools.py",
+        "py4godot/utils/CoreType.py",
+    ]:
         if "windows" in platform:
-            copy(file,
-             f"build/final/{platform}/{python_ver}-{platform}/python/Lib/site-packages/" + file)
+            copy(
+                file,
+                f"build/final/{platform}/{python_ver}-{platform}/python/Lib/site-packages/"
+                + file,
+            )
         else:
-            copy(file,
-             f"build/final/{platform}/{python_ver}-{platform}/python/lib/{python_ver_short}/site-packages/" + file)
+            copy(
+                file,
+                f"build/final/{platform}/{python_ver}-{platform}/python/lib/{python_ver_short}/site-packages/"
+                + file,
+            )
     if "windows" in platform:
-        copytree("py4godot/classes",
-                 f"build/final/{platform}/{python_ver}-{platform}/python/Lib/site-packages/py4godot/classes",
-                 dirs_exist_ok=True, ignore=shutil.ignore_patterns("cpp_bridge.pxd"))
+        copytree(
+            "py4godot/classes",
+            f"build/final/{platform}/{python_ver}-{platform}/python/Lib/site-packages/py4godot/classes",
+            dirs_exist_ok=True,
+            ignore=shutil.ignore_patterns("cpp_bridge.pxd"),
+        )
     else:
-        copytree("py4godot/classes",
-                 f"build/final/{platform}/{python_ver}-{platform}/python/lib/{python_ver_short}/site-packages/py4godot/classes",
-                 dirs_exist_ok=True, ignore=shutil.ignore_patterns("cpp_bridge.pxd"))
-
+        copytree(
+            "py4godot/classes",
+            f"build/final/{platform}/{python_ver}-{platform}/python/lib/{python_ver_short}/site-packages/py4godot/classes",
+            dirs_exist_ok=True,
+            ignore=shutil.ignore_patterns("cpp_bridge.pxd"),
+        )
 
 
 def onerror(func, path, exc_info):
@@ -206,6 +292,7 @@ def onerror(func, path, exc_info):
     Usage : ``shutil.rmtree(path, onerror=onerror)``
     """
     import stat
+
     # Is the error an access error?
     if not os.access(path, os.W_OK):
         os.chmod(path, stat.S_IWUSR)
@@ -216,8 +303,7 @@ def onerror(func, path, exc_info):
 
 def clear_build():
     if os.path.isdir("build/final"):
-        shutil.rmtree(os.path.dirname(
-            f"build/final/"), onerror=onerror)
+        shutil.rmtree(os.path.dirname(f"build/final/"), onerror=onerror)
 
 
 if __name__ == "__main__":

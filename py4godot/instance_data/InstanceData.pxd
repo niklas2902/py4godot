@@ -1,7 +1,10 @@
 # distutils: language=c++
 from libcpp.vector cimport vector
-from py4godot.godot_bindings.binding4_godot4 cimport *
+
 cimport py4godot.pluginscript_api.utils.utils as utils
+from py4godot.godot_bindings.binding4_godot4 cimport *
+
+
 cdef extern from "py4godot/script_extension/PyScriptExtension.h" namespace "godot":
     cdef cppclass PyScriptExtension:
         pass

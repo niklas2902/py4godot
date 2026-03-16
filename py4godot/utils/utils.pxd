@@ -1,7 +1,10 @@
 # distutils: language=c++
-from py4godot.godot_bindings.binding4_godot4 cimport *
-cimport py4godot.classes.cpp_bridge as bridge
 from libcpp.memory cimport shared_ptr
+
+cimport py4godot.classes.cpp_bridge as bridge
+from py4godot.godot_bindings.binding4_godot4 cimport *
+
+
 cdef extern from "py4godot/cpputils/utils.h":
     bridge.StringName c_string_to_string_name(const char* string)
     bridge.String c_string_to_string(const char* string)
