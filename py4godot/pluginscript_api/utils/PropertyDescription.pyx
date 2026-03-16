@@ -1,14 +1,11 @@
 # distutils: language=c++
-from py4godot.godot_bindings.binding4_godot4 cimport *
 from py4godot.hints.BaseHint cimport *
 from py4godot.pluginscript_api.utils.helpers cimport *
-from py4godot.pluginscript_api.utils.utils cimport *
+from py4godot.godot_bindings.binding4_godot4 cimport *
 from py4godot.utils.utils cimport *
-from py4godot.wrappers.wrappers cimport (
-    extract_ptr_from_StringNameWrapper,
-    extract_ptr_from_StringWrapper,
-)
+from py4godot.pluginscript_api.utils.utils cimport *
 
+from py4godot.wrappers.wrappers cimport extract_ptr_from_StringNameWrapper, extract_ptr_from_StringWrapper
 
 cdef class PropertyDescription:
     """"Description class for the properties, a gdclass can have and which can be found in the editor"""

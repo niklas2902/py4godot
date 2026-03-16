@@ -1,39 +1,36 @@
-import argparse
-import os
 import subprocess
+import os
+import argparse
 import sys
 
-my_parser = argparse.ArgumentParser(fromfile_prefix_chars="@")
-my_parser.add_argument(
-    "-dev_build",
-    default=False,
-    help="Specify whether you want to build a minimized version",
-)
+my_parser = argparse.ArgumentParser(fromfile_prefix_chars='@')
+my_parser.add_argument('-dev_build', default=False,
+                       help='Specify whether you want to build a minimized version')
 # Execute parse_args()
 args = my_parser.parse_args()
 # List of scripts to execute
 dir = "generation_files"
 scripts = [
-    "generate_class_ids.py",
-    "generate_method_ids.py",
-    "generate_type_checking.py",
-    "generate_call_static_methods.py",
-    "generate_wrappers.py",
-    "generate_constants.py",
-    "generate_constant_core_classes.py",
-    "generate_py_classes.py",
-    "generate_classes_cpp.py",
-    "generate_classes_hpp.py",
-    "generate_common_functions.py",
-    "generate_common_functions_pyi.py",
-    "generate_enums.py",
-    "generate_enums_cpp.py",
-    "generate_pxd_bridge.py",
-    "generate_pxd_utility.py",
-    "generate_utility_hpp.py",
-    "generate_utils_cpp.py",
-    "generate_native_structs.py",
-    "generate_cast_helpers.py",
+    'generate_class_ids.py',
+    'generate_method_ids.py',
+    'generate_type_checking.py',
+    'generate_call_static_methods.py',
+    'generate_wrappers.py',
+    'generate_constants.py',
+    'generate_constant_core_classes.py',
+    'generate_py_classes.py',
+    'generate_classes_cpp.py',
+    'generate_classes_hpp.py',
+    'generate_common_functions.py',
+    'generate_common_functions_pyi.py',
+    'generate_enums.py',
+    'generate_enums_cpp.py',
+    'generate_pxd_bridge.py',
+    'generate_pxd_utility.py',
+    'generate_utility_hpp.py',
+    'generate_utils_cpp.py',
+    'generate_native_structs.py',
+    'generate_cast_helpers.py'
 ]
 
 # Make sure all necessary directories are there
@@ -43,8 +40,7 @@ if not os.path.isdir("py4godot/classes"):
         file.write(
             "import py4godot.pluginscript_api.utils.annotations as annotations\n"
             "def gdclass(cls = None, icon=None):\n"
-            "    return annotations.gdclass(cls, icon)\n"
-        )
+            "    return annotations.gdclass(cls, icon)\n")
 if not os.path.isdir("py4godot/enums"):
     os.mkdir("py4godot/enums")
     with open("py4godot/enums/__init__.py", "w") as file:
@@ -52,7 +48,7 @@ if not os.path.isdir("py4godot/enums"):
 if not os.path.isdir("py4godot/cppclasses"):
     os.mkdir("py4godot/cppclasses")
 
-os.chdir(dir)  # All files execute on subdirectory
+os.chdir(dir) # All files execute on subdirectory
 # Execute each script
 for script in scripts:
     print(f"Executing {script}...")

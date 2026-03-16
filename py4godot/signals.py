@@ -1,9 +1,8 @@
 import inspect
-
-import py4godot.pluginscript_api.utils.annotations as annotations
 from py4godot.pluginscript_api.utils.helpers import get_variant_type
-from py4godot.py_classes.core import Callable, Signal
+import py4godot.pluginscript_api.utils.annotations as annotations
 from py4godot.py_classes.Object import Object
+from py4godot.py_classes.core import Signal, Callable
 from py4godot.utils.utils import py_string_to_string_name
 
 
@@ -15,29 +14,26 @@ class SignalArg:
     def get_name(self):
         return self.name.encode("utf-8")
 
-
 def signal(args=[]):
     stack = inspect.stack()
     name = stack[0].code_context[0].split("=")[0].split(":")[0].strip()
     annotations.signal(name, args)
     return None
 
-
 callables = []
-
 
 class GDSignal(Signal):
     @staticmethod
     def new0():
         _class = GDSignal.__new__(GDSignal)
-        # TODO minimize: _class.Signal_internal_class_ptr = CPPSignal.py_new0()
+        #TODO minimize: _class.Signal_internal_class_ptr = CPPSignal.py_new0()
         return _class
 
     @staticmethod
     def new1(from_):
         assert from_ is not None
         _class = GDSignal.__new__(GDSignal)
-        # TODO minimize:_class.Signal_internal_class_ptr = CPPSignal.py_new1(from_.Signal_internal_class_ptr)
+        #TODO minimize:_class.Signal_internal_class_ptr = CPPSignal.py_new1(from_.Signal_internal_class_ptr)
         return _class
 
     @staticmethod
@@ -45,7 +41,7 @@ class GDSignal(Signal):
         assert object_ is not None
         assert signal is not None
         _class = GDSignal.__new__(GDSignal)
-        # TODO minimize:_class.Signal_internal_class_ptr = CPPSignal.py_new2(object_, signal)
+        #TODO minimize:_class.Signal_internal_class_ptr = CPPSignal.py_new2(object_, signal)
         return _class
 
     def __init__(self, *args):
@@ -53,7 +49,7 @@ class GDSignal(Signal):
 
     def connect(self, function, flags=0):
         function_name = function.__name__
-        parent = getattr(function, "__self__", None)
+        parent = getattr(function, '__self__', None)
         if parent is None:
             parent = Object()
         parent.get_class()
@@ -64,7 +60,7 @@ class GDSignal(Signal):
 
     def disconnect(self, function):
         function_name = function.__name__
-        parent = getattr(function, "__self__", None)
+        parent = getattr(function, '__self__', None)
         if parent is None:
             parent = Object()
         parent.get_class()
@@ -81,7 +77,7 @@ class BuiltinSignal(Signal):
 
     def connect(self, function, flags=0):
         function_name = function.__name__
-        parent = getattr(function, "__self__", None)
+        parent = getattr(function, '__self__', None)
         if parent is None:
             parent = Object()
         b_function_name = function_name.encode("utf-8")
@@ -94,7 +90,7 @@ class BuiltinSignal(Signal):
 
     def disconnect(self, function):
         function_name = function.__name__
-        parent = getattr(function, "__self__", None)
+        parent = getattr(function, '__self__', None)
         if parent is None:
             parent = Object()
         parent.get_class()

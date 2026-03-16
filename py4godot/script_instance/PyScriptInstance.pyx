@@ -1,32 +1,20 @@
 # distutils: language=c++
 import traceback
-
 from cython.operator cimport dereference
-
 import py4godot.classes.core as core
 from py4godot.utils.CoreType import CoreType
-from py4godot.utils.print_tools import print_error, print_error_detailed, py_log
-
-cimport py4godot.classes.cpp_bridge as cppbridge
-from py4godot.instance_data.InstanceData cimport InstanceData, MethodCallData
+from py4godot.utils.print_tools import print_error, py_log, print_error_detailed
 from py4godot.utils.utils cimport *
-
+from py4godot.instance_data.InstanceData cimport InstanceData, MethodCallData
+cimport py4godot.classes.cpp_bridge as cppbridge
 import py4godot.classes.RefCounted as refCounted
-
-from libcpp.memory cimport make_shared
-
 from py4godot.core.variant4.Variant4 cimport *
-
+from libcpp.memory cimport make_shared
 from py4godot.core.variant4 import cast_helpers
-
-from cpython cimport Py_DECREF, Py_INCREF, PyObject
-
+from cpython cimport Py_INCREF, Py_DECREF, PyObject
 from py4godot.utils.utils cimport create_string_name_from_ptr
-from py4godot.wrappers.wrappers cimport (
-    create_wrapper_from_String_ptr,
-    create_wrapper_from_StringName_ptr,
-)
 
+from py4godot.wrappers.wrappers cimport create_wrapper_from_String_ptr, create_wrapper_from_StringName_ptr
 
 cdef types_to_decref = {type(1), type(1.), type(True)}
 l = []

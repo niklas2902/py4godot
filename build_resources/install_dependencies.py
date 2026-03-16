@@ -1,13 +1,12 @@
 import importlib
 
-
 def install_package(package):
     try:
         process = subprocess.Popen(
             ["python.exe", "-m", "pip", "install", package],
             stdout=subprocess.PIPE,
             stderr=subprocess.PIPE,
-            universal_newlines=True,
+            universal_newlines=True
         )
     except Exception as e:
         print("Exception while installing package:", e)
@@ -31,18 +30,16 @@ def install_package(package):
     os.chdir(current_path)
 
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     import os
     import subprocess
     import traceback
-
     lines = []
     try:
         import pip
     except ImportError:
         print("pip is not installed yet. Installing pip...")
         import addons.py4godot.get_pip as get_pip
-
         get_pip.main()
 
     with open("addons/py4godot/dependencies.txt") as f:

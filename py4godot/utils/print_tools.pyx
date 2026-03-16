@@ -4,7 +4,6 @@
 cimport py4godot.utils.print_tools_tools as tools
 from py4godot.utils.utils cimport *
 
-
 def print_error(*objects, sep=' ', end=''):
     cdef GDExtensionInterfacePrintError output = tools.get_print_error()
     cdef str string = ""

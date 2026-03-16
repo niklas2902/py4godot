@@ -1,7 +1,7 @@
-import argparse
 import os
 import subprocess
 import sys
+import argparse
 
 # Set up argument parsing
 parser = argparse.ArgumentParser(description="Run Godot with a specific project path.")
@@ -22,9 +22,10 @@ stderr_log = open(f"build/{project}_godot_stderr.log", "w")
 try:
     print("project_path:", project_path)
     print("command_args:", command_args)
-    result = subprocess.run(
-        command_args, stdout=stdout_log, stderr=stderr_log, check=True, text=True
-    )
+    result = subprocess.run(command_args,
+                            stdout=stdout_log,
+                            stderr=stderr_log,
+                            check=True, text=True)
     print(f"Command executed successfully with return code: {result.returncode}")
 except subprocess.CalledProcessError as e:
     print(f"Command failed with return code: {e.returncode}")

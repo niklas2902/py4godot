@@ -1,6 +1,5 @@
-import platform
 import struct
-
+import platform
 
 def get_platform():
     """Return 'linuxarm64' for Linux ARM64, 'linux64' for Linux x86_64"""
@@ -12,6 +11,7 @@ def get_platform():
             return "linuxarm64"
         elif struct.calcsize("P") * 8 == 64:
             return "linux64"
-
+    
     # Fallback for other systems if needed
     return f"{system}{struct.calcsize('P') * 8}"
+

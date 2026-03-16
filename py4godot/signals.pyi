@@ -1,13 +1,14 @@
+from py4godot.classes.Object import Object
 from typing import Any, List
 
 from py4godot.classes.core import *
-from py4godot.classes.Object import Object
 
 def get_event_loop():
     """
-    Gets the current asyncio loop instance.
+        Gets the current asyncio loop instance.
     """
     pass
+
 
 class SignalArg:
     """
@@ -23,6 +24,7 @@ class SignalArg:
     def __init__(self, name, type_) -> None:
         pass
 
+
 def signal(args: List[SignalArg]) -> GDSignal:
     """
     Creates a new GDSignal with the specified arguments.
@@ -34,6 +36,7 @@ def signal(args: List[SignalArg]) -> GDSignal:
         GDSignal: A new signal instance with the specified arguments.
     """
     pass
+
 
 class GDSignal(Signal):
     """
@@ -99,22 +102,23 @@ class GDSignal(Signal):
         """
         pass
 
+
     def wait_emit(self) -> None:
         """This can be used similarily to the Godot await to wait for a signal to then procede with the program flow
-        Example:
-            ```python
+            Example:
+                ```python
 
-            from py4godot.signals import get_event_loop
-            import asyncio
-            ...
-                def start_event_loop_thread(self):
-                    asyncio.run_coroutine_threadsafe(self.wait_for_signal(), get_event_loop())
+                from py4godot.signals import get_event_loop
+                import asyncio
+                ...
+                    def start_event_loop_thread(self):
+                        asyncio.run_coroutine_threadsafe(self.wait_for_signal(), get_event_loop())
 
-                async def wait_for_signal(self):
-                    print("waiting for signal visibility_changed")
-                    await self.visibility_changed.wait_emit()
-                    print("executed after signal visibility_changed")
-            ```
+                    async def wait_for_signal(self):
+                        print("waiting for signal visibility_changed")
+                        await self.visibility_changed.wait_emit()
+                        print("executed after signal visibility_changed")
+                ```
         """
 
 class BuiltinSignal(Signal):
@@ -159,18 +163,18 @@ class BuiltinSignal(Signal):
 
     def wait_emit(self) -> None:
         """This can be used similarily to the Godot await to wait for a signal to then procede with the program flow
-        Example:
-            ```python
+            Example:
+                ```python
 
-            from py4godot.signals import get_event_loop
-            import asyncio
-            ...
-                def start_event_loop_thread(self):
-                    asyncio.run_coroutine_threadsafe(self.wait_for_signal(), get_event_loop())
+                from py4godot.signals import get_event_loop
+                import asyncio
+                ...
+                    def start_event_loop_thread(self):
+                        asyncio.run_coroutine_threadsafe(self.wait_for_signal(), get_event_loop())
 
-                async def wait_for_signal(self):
-                    print("waiting for signal visibility_changed")
-                    await self.visibility_changed.wait_emit()
-                    print("executed after signal visibility_changed")
-            ```
+                    async def wait_for_signal(self):
+                        print("waiting for signal visibility_changed")
+                        await self.visibility_changed.wait_emit()
+                        print("executed after signal visibility_changed")
+                ```
         """

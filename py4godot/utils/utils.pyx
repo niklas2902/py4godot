@@ -1,17 +1,14 @@
 # distutils: language=c++
 from cpython.unicode cimport PyUnicode_DecodeUTF8
 
-from py4godot.classes.core import String, StringName
-
-from py4godot.wrappers.wrappers cimport CPPStringNameWrapper, CPPStringWrapper
-
+from py4godot.classes.core import StringName, String
+from py4godot.wrappers.wrappers cimport CPPStringWrapper, CPPStringNameWrapper
 from py4godot.utils.print_tools import *
-
-from cpython.ref cimport Py_DECREF, Py_INCREF
-from libc.stdlib cimport free, malloc
-from libc.string cimport memcpy, strlen
-
 from py4godot.utils.test_utils cimport *
+from libc.stdlib cimport malloc, free
+from cpython.ref cimport Py_INCREF, Py_DECREF
+from libc.stdlib cimport malloc, free
+from libc.string cimport memcpy, strlen
 
 shouldCreateObject = True
 

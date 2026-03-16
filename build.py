@@ -11,25 +11,18 @@ from Cython.Build import cythonize
 
 from build_tools import download_get_pip
 from config import python_ver, python_ver_short
-from meson_scripts import (
-    copy_tools,
-    download_godot,
-    download_python,
-    generate_godot,
-    generate_init_files,
-    locations,
-    platform_check,
-)
+from meson_scripts import copy_tools, download_python, generate_init_files, \
+    locations, platform_check, generate_godot, \
+    download_godot
 from meson_scripts.fix_path_macos import fix_macos_paths
 
 # generate_bindings_pyi.build()
 # generate_bindings.build()
 
-
 def cythonize_files():
     return
-    module = cythonize("py4godot_core_holder/*.pyx", language_level=3)
-    module = cythonize("py4godot/core/*/*.pyx", language_level=3)
+    module = cythonize('py4godot_core_holder/*.pyx', language_level=3)
+    module = cythonize('py4godot/core/*/*.pyx', language_level=3)
     module += cythonize("py4godot/classes/*.pyx", language_level=3)
     module += cythonize("py4godot/classes/utils.pyx", language_level=3)
     module += cythonize("py4godot/utils/*.pyx", language_level=3)
@@ -39,7 +32,6 @@ def cythonize_files():
     module += cythonize("py4godot/gdnative_api/*.pyx", language_level=3)
     module += cythonize("py4godot/enums/*.pyx", language_level=3)
     module += cythonize("py4godot/events/*.pyx", language_level=3)
-
 
 def compile_python_ver_file(platform):
     """compile python file, to find the matching python version"""
@@ -52,11 +44,8 @@ def compile_python_ver_file(platform):
         file_string = file_string.replace("{godot}", godot_dir)
         file_string = file_string.replace("{python_ver}", python_ver)
         file_string = file_string.replace("{python_ver_short}", python_ver_short)
-        with open(
-            "platforms/binary_dirs/python_ver_compile.cross", "w"
-        ) as python_compile:
+        with open("platforms/binary_dirs/python_ver_compile.cross", "w") as python_compile:
             python_compile.write(file_string)
-
 
 def get_debug_release_cross_compile_file(compiler, buildtype):
     if "msvc" in compiler:
@@ -82,20 +71,16 @@ def get_debug_release_cross_compile_file(compiler, buildtype):
 
 
 def get_compiler():
-    compiler_res = subprocess.run(
-        "vcvarsall", shell=True, stdout=subprocess.DEVNULL, stderr=subprocess.STDOUT
-    )
+    compiler_res = subprocess.run("vcvarsall", shell=True, stdout=subprocess.DEVNULL,
+                                  stderr=subprocess.STDOUT)
     if compiler_res.returncode == 0:
         return "msvc"
 
-    compiler_res = subprocess.run(
-        "gcc --version", shell=True, stdout=subprocess.DEVNULL, stderr=subprocess.STDOUT
-    )
+    compiler_res = subprocess.run("gcc --version", shell=True, stdout=subprocess.DEVNULL, stderr=subprocess.STDOUT)
     if compiler_res.returncode == 0:
         return "gcc"
 
     raise Exception("No compiler found")
-
 
 def create_gdextension():
     gdextension_text = ""
@@ -117,34 +102,23 @@ def create_python_paths():
         f.write(text_to_write)
 
 
+
 current_platform = platform_check.get_platform()
 
 command_separator = "&"
 if "linux" in current_platform:
     command_separator = ";"
 
-my_parser = argparse.ArgumentParser(fromfile_prefix_chars="@")
-my_parser.add_argument(
-    "--compiler", help="specify the compiler, you want to use to compile"
-)
-my_parser.add_argument(
-    "--target_platform", help="specify the platform, you want to go build for"
-)
+my_parser = argparse.ArgumentParser(fromfile_prefix_chars='@')
+my_parser.add_argument('--compiler',
+                       help='specify the compiler, you want to use to compile')
+my_parser.add_argument('--target_platform',
+                       help='specify the platform, you want to go build for')
 my_parser.add_argument("-run_tests", help="should tests be run", default="False")
 my_parser.add_argument("-download_godot", help="should tests be run", default="False")
-my_parser.add_argument(
-    "-create_plugin", help="Should this create a plugin", default="True"
-)
-my_parser.add_argument(
-    "-buildtype",
-    help="Should this be a debug build or release build, options are release or debugoptimized",
-    default="release",
-)
-my_parser.add_argument(
-    "-auto_install",
-    help="Should the build automatically install pip and dependencies",
-    default="False",
-)
+my_parser.add_argument("-create_plugin", help="Should this create a plugin", default="True")
+my_parser.add_argument("-buildtype", help="Should this be a debug build or release build, options are release or debugoptimized", default="release")
+my_parser.add_argument("-auto_install", help="Should the build automatically install pip and dependencies", default="False")
 
 # Execute parse_args()
 args = my_parser.parse_args()
@@ -176,11 +150,7 @@ create_python_paths()
 compile_python_ver_file(current_platform)
 
 # initializing for msvc if wanted as compiler (todo:should be improved sometime)
-msvc_init = (
-    f"vcvarsall.bat {'x86_amd64'} {command_separator} cl {command_separator} "
-    if "msvc" in args.compiler
-    else ""
-)
+msvc_init = f"vcvarsall.bat {'x86_amd64'} {command_separator} cl {command_separator} " if "msvc" in args.compiler else ""
 
 res = None
 try:
@@ -196,8 +166,10 @@ try:
             f"--buildtype={args.buildtype} "
         )
 
-        print("command:\n", command)
-        res = subprocess.Popen(msvc_init + command, shell=True)
+        print("command:\n",
+              command
+              )
+        res = subprocess.Popen(msvc_init +command,shell=True)
         res.wait()
         command = f"meson compile -C build/{args.target_platform}"
         print("command:\n", command)
@@ -214,12 +186,13 @@ try:
             f"{get_debug_release_cross_compile_file(args.compiler, build_type)} "
         )
 
-        print("command:\n", command)
-        res = subprocess.Popen(msvc_init + command, shell=True)
+        print("command:\n",
+              command)
+        res = subprocess.Popen(msvc_init + command,shell=True)
         res.wait()
         command = f"meson compile -C build/{args.target_platform}"
         print("command:\n", command)
-        res = subprocess.Popen(msvc_init + command, shell=True)
+        res = subprocess.Popen(msvc_init + command,shell=True)
         res.wait()
 
     fix_macos_paths()
@@ -231,84 +204,55 @@ try:
     generate_godot.generate_gdignore(args.target_platform)
     generate_init_files.create_init_file(args.target_platform)
 
-    should_create_plugin = args.create_plugin
-    # TODO: ignore unnecessary copy. Don't copy stuff to final
+    should_create_plugin =args.create_plugin
+    #TODO: ignore unnecessary copy. Don't copy stuff to final
     if should_create_plugin.lower() == "true":
-        if os.path.exists("build/py4godot") and os.path.isdir("build/py4godot"):
+        if  os.path.exists("build/py4godot") and os.path.isdir("build/py4godot"):
             shutil.rmtree("build/py4godot")
-        copytree(
-            f"build/final/{args.target_platform}/{python_ver}-{args.target_platform}",
-            f"build/py4godot/{python_ver}-{args.target_platform}",
-        )
-        shutil.copy(
-            "build_resources/dependencies.txt", "build/py4godot/dependencies.txt"
-        )
-        shutil.copy(
-            "build_resources/install_dependencies.py",
-            "build/py4godot/install_dependencies.py",
-        )
-        shutil.copy(
-            "build_resources/python.gdextension", "build/py4godot/python.gdextension"
-        )
-        shutil.copy(
-            "build_resources/export_py4godot.gd", "build/py4godot/export_py4godot.gd"
-        )
-        shutil.copy(
-            "build_resources/export_py4godot_main.gd",
-            "build/py4godot/export_py4godot_main.gd",
-        )
+        copytree(f"build/final/{args.target_platform}/{python_ver}-{args.target_platform}", f"build/py4godot/{python_ver}-{args.target_platform}")
+        shutil.copy("build_resources/dependencies.txt", "build/py4godot/dependencies.txt")
+        shutil.copy("build_resources/install_dependencies.py", "build/py4godot/install_dependencies.py")
+        shutil.copy("build_resources/python.gdextension", "build/py4godot/python.gdextension")
+        shutil.copy("build_resources/export_py4godot.gd", "build/py4godot/export_py4godot.gd")
+        shutil.copy("build_resources/export_py4godot_main.gd", "build/py4godot/export_py4godot_main.gd")
         shutil.copy("build_resources/plugin.cfg", "build/py4godot/plugin.cfg")
-        shutil.copy(
-            "build_resources/signal_script.py", "build/py4godot/signal_script.py"
-        )
+        shutil.copy("build_resources/signal_script.py", "build/py4godot/signal_script.py")
         with open(f"build/py4godot/{python_ver}-{args.target_platform}/.gdignore", "w"):
             pass
         download_get_pip("build/py4godot")
-        python_svg_dest = "build/py4godot/" + "/Python.svg"
+        python_svg_dest = "build/py4godot/"+ "/Python.svg"
         if not os.path.exists(python_svg_dest):
             shutil.copy("build_resources/Python.svg", python_svg_dest)
 
-    print(
-        "=================================Build finished=================================="
-    )
+
+    print("=================================Build finished==================================")
     print("Build took:", time.time() - start, "seconds")
 
     if should_download_godot:
-        print(
-            "=================================Start download=================================="
-        )
+        print("=================================Start download==================================")
         download_godot.run(current_platform)
-        print(
-            "=================================Fnish download=================================="
-        )
+        print("=================================Fnish download==================================")
 
     # running tests
     if should_run_tests:
-        print(
-            "=================================Start tests=================================="
-        )
+        print("=================================Start tests==================================")
         start = time.time()
         print("copy_tests")
         copy_tools.copy_tests(args.target_platform)
         print("run tests")
         res = subprocess.Popen(
-            f"ninja -C build/{args.target_platform} test", shell=True
-        )
+            f"ninja -C build/{args.target_platform} test", shell=True)
         res.wait()
         streamdata = res.communicate()[0]
         rc = res.returncode
-        print(
-            "=================================Build finished=================================="
-        )
+        print("=================================Build finished==================================")
         print("Running tests took:", time.time() - start, "seconds")
 
         if rc != 0:
             raise Exception("Tests failed")
 
 except Exception as e:
-    print(
-        "---------------------------------Build failed-----------------------------------"
-    )
+    print("---------------------------------Build failed-----------------------------------")
     print(e)
     traceback.print_exc()
     sys.exit(1)

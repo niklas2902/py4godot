@@ -5,7 +5,6 @@ import sys
 
 from generate_classes import ReturnType
 from generation_tools import write_if_different
-
 sys.path.append("..")
 from py4godot.class_ids import classes_dict
 
@@ -18,14 +17,13 @@ typed_arrays_names = set()
 def collect_typed_arrays_from_return(method_):
     if "return_value" in method_.keys() or "return_type" in method_.keys():
         ret_val = None
-        if "return_value" in method_.keys():
-            ret_val = ReturnType("_ret", method_["return_value"]["type"])
+        if ("return_value" in method_.keys()):
+            ret_val = ReturnType("_ret", method_['return_value']['type'])
         else:
-            ret_val = ReturnType("_ret", method_["return_type"])
+            ret_val = ReturnType("_ret", method_['return_type'])
         if "typedarray" in ret_val.type:
             return [ret_val.type]
     return []
-
 
 def collect_typed_arrays_from_args(method):
     typed_arrays = []
@@ -33,10 +31,9 @@ def collect_typed_arrays_from_args(method):
         return []
     else:
         for argument in method["arguments"]:
-            if "typedarray" in argument["type"]:
+            if ("typedarray" in argument["type"]):
                 typed_arrays.append(argument["type"])
     return typed_arrays
-
 
 def collect_typed_arrays(classes):
     typed_arrays = []
@@ -49,16 +46,13 @@ def collect_typed_arrays(classes):
 
     return set(typed_arrays)
 
-
 def generate_typed_array_name(name):
-    if name == "typedarray::Array":
+    if (name == "typedarray::Array"):
         pass
     return name.split("::")[1] + "TypedArray"
 
-
 def generate_newline(str_):
     return str_ + "\n"
-
 
 def generate_includes(classes):
     res = ""
@@ -76,7 +70,6 @@ def generate_includes(classes):
 
         res = generate_newline(res)
     return res
-
 
 def generate_call_static_methods():
     res = ""
@@ -123,19 +116,14 @@ def generate_static_methods(classes):
     return res
 
 
+
 if __name__ == "__main__":
     os.chdir("..")
-    with open(
-        "py4godot/gdextension-api/extension_api.json", "r", encoding="utf-8"
-    ) as myfile:
+    with open('py4godot/gdextension-api/extension_api.json', 'r', encoding="utf-8") as myfile:
         data = myfile.read()
         obj = json.loads(data)
-        classes = set(
-            [
-                class_["name"] if class_["name"] not in IGNORED_CLASSES else None
-                for class_ in obj["classes"] + obj["builtin_classes"]
-            ]
-        )
+        classes = set([class_['name'] if class_["name"] not in IGNORED_CLASSES else None for class_ in
+                       obj['classes'] + obj["builtin_classes"]])
         builtin_classes = [class_["name"] for class_ in obj["builtin_classes"]]
         res = "from py4godot.utils.CPPWrapper cimport *"
         res = generate_newline(res)
@@ -144,19 +132,12 @@ if __name__ == "__main__":
         for cls in obj["builtin_classes"]:
             if cls["name"] == "Array":
                 array_cls = cls
-        for typed_array in collect_typed_arrays(
-            obj["classes"] + obj["builtin_classes"]
-        ):
+        for typed_array in collect_typed_arrays(obj["classes"] + obj["builtin_classes"]):
             my_array_cls = copy.deepcopy(array_cls)
             my_array_cls["name"] = generate_typed_array_name(typed_array)
             typed_arrays_names.add(generate_typed_array_name(typed_array))
             arrays.append(my_array_cls)
-        arrays = sorted(arrays, key=lambda array: array["name"])
+        arrays = sorted(arrays, key = lambda array: array["name"])
 
         classes.remove(None)
-        write_if_different(
-            "py4godot/cppclasses/static_methods.h",
-            generate_static_methods(
-                [array["name"] for array in arrays] + list(classes)
-            ),
-        )
+        write_if_different("py4godot/cppclasses/static_methods.h", generate_static_methods([array["name"] for array in arrays] + list(classes)))

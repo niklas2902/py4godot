@@ -1,8 +1,7 @@
 import unittest
-
-from py4godot.classes.generated import *
-from py4godot.core import *
 from py4godot.enums.enums import *
+from py4godot.core import *
+from py4godot.classes.generated import *
 from py4godot.pluginscript_api.utils.annotations import *
 
 
@@ -71,24 +70,14 @@ class PythonTest(unittest.TestCase):
         self.assertEqual(Vector2(100, 0).angle_to(Vector2(0, 1)), 1.5707963705062866)
 
     def test_linear_interpolate(self):
-        self.assertEqual(
-            Vector2(1, 1).linear_interpolate(Vector2(1, 2), 1), Vector2(1, 2)
-        )
-        self.assertEqual(
-            Vector2(1, 1).linear_interpolate(Vector2(1, 2), 2), Vector2(1, 3)
-        )
-        self.assertEqual(
-            Vector2(1, 1).linear_interpolate(Vector2(1, 2), 0), Vector2(1, 1)
-        )
+        self.assertEqual(Vector2(1, 1).linear_interpolate(Vector2(1, 2), 1), Vector2(1, 2))
+        self.assertEqual(Vector2(1, 1).linear_interpolate(Vector2(1, 2), 2), Vector2(1, 3))
+        self.assertEqual(Vector2(1, 1).linear_interpolate(Vector2(1, 2), 0), Vector2(1, 1))
 
     def test_cubic_interpolate(self):
         # TODO: Find out what this does
-        self.assertEqual(
-            Vector2(1, 1).cubic_interpolate(
-                Vector2(1, 2), Vector2(1, 2), Vector2(1, 2), 5
-            ),
-            Vector2(1, -124),
-        )
+        self.assertEqual(Vector2(1, 1).cubic_interpolate(Vector2(1, 2), Vector2(1, 2),
+                                                         Vector2(1, 2), 5), Vector2(1, -124))
 
     def test_rotated(self):
         self.assertEqual(Vector2(1, 0).rotated(3.14159265359).get_x(), -1)
@@ -148,9 +137,7 @@ class PythonTest(unittest.TestCase):
     def test_multiplay_vector(self):
         self.assertEqual(Vector2(1, 2).multiply_vector(Vector2(1, 2)), Vector2(1, 4))
         self.assertEqual(Vector2(-1, 2).multiply_vector(Vector2(1, 2)), Vector2(-1, 4))
-        self.assertEqual(
-            Vector2(4, -5).multiply_vector(Vector2(7, 8)), Vector2(28, -40)
-        )
+        self.assertEqual(Vector2(4, -5).multiply_vector(Vector2(7, 8)), Vector2(28, -40))
         self.assertEqual(Vector2(1, 2).multiply_vector(Vector2(1, 2)), Vector2(1, 4))
 
     def test_multiply_scalar(self):

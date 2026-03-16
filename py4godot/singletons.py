@@ -1,7 +1,6 @@
 from py4godot.classes.Engine import Engine
 from py4godot.classes.Object import Object
 
-
 def get_singleton(name: str) -> Object | None:
     """
     Retrieves a singleton by the name of it.

@@ -1,21 +1,17 @@
 # distutils: language=c++
 import asyncio
 import inspect
-
 from libcpp.memory cimport make_shared
 
 import py4godot.classes.Object as obj
-from py4godot.classes.core import Callable, Signal
 from py4godot.classes.Node import Node
 from py4godot.classes.ResourceLoader import ResourceLoader
-
+from py4godot.classes.core import Callable, Signal
 from py4godot.utils.utils cimport *
-
-import weakref
-
 import py4godot.pluginscript_api.utils.annotations as annotations
-
+import weakref
 from py4godot.pluginscript_api.utils.helpers cimport get_variant_type
+
 
 loop = None
 def set_event_loop(loop_):

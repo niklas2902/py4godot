@@ -1,15 +1,14 @@
+from setuptools import setup, Extension
+from Cython.Build import cythonize
 import os
 import sys
-
-from Cython.Build import cythonize
-from setuptools import Extension, setup
 
 # Determine the absolute paths for includes
 include_dirs = [
     os.path.abspath("py4godot/gdextension-api"),
     os.path.abspath("py4godot/core/variant4"),
     os.path.abspath("py4godot/godot_bindings"),
-    os.path.abspath(""),
+    os.path.abspath("")
 ]
 
 # Define compiler flags for size optimization
@@ -18,18 +17,12 @@ extra_link_args = []
 
 if sys.platform == "win32":
     # Optimize for size on MSVC
-    extra_compile_args = ["/O1", "/GL"]  # /GL = whole program optimization
-    extra_link_args = [
-        "/OPT:REF",
-        "/OPT:ICF",
-    ]  # remove unused code & fold identical functions
+    extra_compile_args = ["/O1", "/GL"]   # /GL = whole program optimization
+    extra_link_args = ["/OPT:REF", "/OPT:ICF"]  # remove unused code & fold identical functions
 else:
     # Optimize for size on GCC/Clang
     extra_compile_args = ["-O3", "-s", "-fdata-sections", "-ffunction-sections"]
-    extra_link_args = [
-        "-Wl,--gc-sections",
-        "-s",
-    ]  # remove unused sections & strip symbols
+    extra_link_args = ["-Wl,--gc-sections", "-s"]  # remove unused sections & strip symbols
 
 extensions = [
     Extension(
@@ -48,13 +41,13 @@ setup(
         extensions,
         compiler_directives={
             "language_level": "3",
-            "boundscheck": False,  # remove safety overhead
+            "boundscheck": False,     # remove safety overhead
             "wraparound": False,
             "cdivision": True,
-            "infer_types": True,
+            "infer_types": True
         },
-        annotate=False,  # disable annotate to avoid extra files
+        annotate=False  # disable annotate to avoid extra files
     ),
     packages=[],  # prevent auto-discovery
-    script_args=["build_ext", "--inplace"],
+    script_args=["build_ext", "--inplace"]
 )

@@ -1,13 +1,10 @@
 import os
 import sys
-
-sys.path.append(os.getcwd() + "/../")
+sys.path.append(os.getcwd()+"/../")
 sys.path.append(os.getcwd())
 from aliases import aliases
-
 if "generation_files" in os.getcwd():
-    os.chdir(os.getcwd() + "/../")
-
+    os.chdir(os.getcwd()+"/../")
 
 def generate_cast_helpers(class_names):
     res = ""
@@ -19,7 +16,8 @@ def clear_vals():
     vals.clear()
 """
     for dependency in class_names:
-        res += f"""cdef api PyObject* cast_to_{dependency.lower()}(PyObject* other):
+        res += \
+            f"""cdef api PyObject* cast_to_{dependency.lower()}(PyObject* other):
     cdef object o = {dependency}.cast_without_reference(<object>other)
     vals.append(o)
     return <PyObject*>o\n"""
@@ -32,6 +30,8 @@ def clear_vals():
 
     with open("py4godot/core/variant4/cast_helpers.pyx", "w") as f:
         f.write(total_string)
+
+
 
     cast_type = """#include "py4godot/cppcore/cast_type.h"
 #include <cassert>
@@ -69,22 +69,19 @@ PyObject* cast_to_type(char* classname, PyObject* object_to_cast){
 
     switch_statements = ""
     for dependency in class_names:
-        switch_statements += f"""        case str2int("{dependency}"):
-            return cast_to_{dependency.lower()}(object_to_cast);\n"""
+        switch_statements += f'''        case str2int("{dependency}"):
+            return cast_to_{dependency.lower()}(object_to_cast);\n'''
         if not dependency in aliases:
             continue
         aliases_ = aliases[dependency]
         for alias in aliases_:
-            switch_statements += f"""        case str2int("{alias}"):
-                return cast_to_{dependency.lower()}(object_to_cast);\n"""
+            switch_statements += f'''        case str2int("{alias}"):
+                return cast_to_{dependency.lower()}(object_to_cast);\n'''
 
-    with open("py4godot/cppcore/cast_type.cpp", "w") as f:
+    with open("py4godot/cppcore/cast_type.cpp" , "w") as f:
         f.write(cast_type.replace("#cast_code", switch_statements))
 
-    os.chdir(os.getcwd() + "/generation_files")
-
-
+    os.chdir(os.getcwd()+"/generation_files")
 from meson_scripts.collect_all_classes import collect_all_classes
-
 if __name__ == "__main__":
     generate_cast_helpers(collect_all_classes())

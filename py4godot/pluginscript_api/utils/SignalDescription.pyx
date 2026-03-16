@@ -1,11 +1,8 @@
 # distutils: language=c++
-from libcpp.vector cimport vector
-
 from py4godot.pluginscript_api.utils.utils cimport *
+from libcpp.vector cimport vector
 from py4godot.signals cimport SignalArg
-
 from py4godot.utils.print_tools import print_error as pe
-
 
 cdef class SignalDescription:
     """"Description class for the properties, a gdclass can have and which can be found in the editor"""

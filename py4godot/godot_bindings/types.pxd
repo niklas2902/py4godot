@@ -1,8 +1,7 @@
 # distutils: language=c++
-from cpython.ref cimport PyObject
-from libc.stddef cimport wchar_t
 from libcpp cimport bool
-
+from libc.stddef cimport wchar_t
+from cpython.ref cimport PyObject
 
 cdef extern from "binding.h":
     DEF array_size = 6 # Edit

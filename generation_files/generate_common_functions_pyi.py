@@ -1,7 +1,8 @@
 import json
 import os.path
 
-from generate_classes import pythonize_boolean_types, unnull_type, unref_type
+from generate_classes import pythonize_boolean_types, unref_type, \
+    unnull_type
 
 INDENT = "  "
 
@@ -44,38 +45,37 @@ singletons = set()
 builtin_classes = set()
 core_classes = dict()
 operator_dict = dict()
-operator_to_method = {
-    "+": "__add__",
-    "*": "__mul__",
-    "-": "__sub__",
-    "/": "__div__",
-    "%": "__mod__",
-    "**": "__pow__",
-    "==": "__eq__",
-    "!=": "__ne__",
-    "<": "__lt__",
-    "<=": "__le__",
-    ">": "__gt__",
-    ">=": "__ge__",
-}
-operator_to_variant_operator = {
-    "+": "GDExtensionVariantOperator.GDEXTENSION_VARIANT_OP_ADD",
-    "*": "GDExtensionVariantOperator.GDEXTENSION_VARIANT_OP_MULTIPLY",
-    "-": "GDExtensionVariantOperator.GDEXTENSION_VARIANT_OP_SUBTRACT",
-    "/": "GDExtensionVariantOperator.GDEXTENSION_VARIANT_OP_DIVIDE",
-    "%": "GDExtensionVariantOperator.GDEXTENSION_VARIANT_OP_MODULE",
-    "**": "GDExtensionVariantOperator.GDEXTENSION_VARIANT_OP_POWER",
-    "==": "GDExtensionVariantOperator.GDEXTENSION_VARIANT_OP_EQUAL",
-    "!=": "GDExtensionVariantOperator.GDEXTENSION_VARIANT_OP_NOT_EQUAL",
-    "<": "GDExtensionVariantOperator.GDEXTENSION_VARIANT_OP_LESS",
-    "<=": "GDExtensionVariantOperator.GDEXTENSION_VARIANT_OP_LESS_EQUAL",
-    ">": "GDExtensionVariantOperator.GDEXTENSION_VARIANT_OP_GREATER",
-    ">=": "GDExtensionVariantOperator.GDEXTENSION_VARIANT_OP_GREATER_EQUAL",
-}
+operator_to_method = {"+": "__add__",
+                      "*": "__mul__",
+                      "-": "__sub__",
+                      "/": "__div__",
+                      "%": "__mod__",
+                      "**": "__pow__",
+                      "==": "__eq__",
+                      "!=": "__ne__",
+                      "<": "__lt__",
+                      "<=": "__le__",
+                      ">": "__gt__",
+                      ">=": "__ge__",
+                      }
+operator_to_variant_operator = {"+": "GDExtensionVariantOperator.GDEXTENSION_VARIANT_OP_ADD",
+                                "*": "GDExtensionVariantOperator.GDEXTENSION_VARIANT_OP_MULTIPLY",
+                                "-": "GDExtensionVariantOperator.GDEXTENSION_VARIANT_OP_SUBTRACT",
+                                "/": "GDExtensionVariantOperator.GDEXTENSION_VARIANT_OP_DIVIDE",
+                                "%": "GDExtensionVariantOperator.GDEXTENSION_VARIANT_OP_MODULE",
+                                "**": "GDExtensionVariantOperator.GDEXTENSION_VARIANT_OP_POWER",
+                                "==": "GDExtensionVariantOperator.GDEXTENSION_VARIANT_OP_EQUAL",
+                                "!=": "GDExtensionVariantOperator.GDEXTENSION_VARIANT_OP_NOT_EQUAL",
+                                "<": "GDExtensionVariantOperator.GDEXTENSION_VARIANT_OP_LESS",
+                                "<=": "GDExtensionVariantOperator.GDEXTENSION_VARIANT_OP_LESS_EQUAL",
+                                ">": "GDExtensionVariantOperator.GDEXTENSION_VARIANT_OP_GREATER",
+                                ">=": "GDExtensionVariantOperator.GDEXTENSION_VARIANT_OP_GREATER_EQUAL",
+                                }
 
 
 def generate_import():
-    result = """from py4godot.utils.Wrapper4 import *
+    result = \
+        """from py4godot.utils.Wrapper4 import *
 from py4godot.utils.VariantTypeWrapper4 import *
 import py4godot.classes.Object.Object as __object__
 """
@@ -125,13 +125,8 @@ def convert_camel_case_to_underscore(string):
             res += char
         was_upper = char.isupper()
         was_number = char in {"1", "2", "3", "4", "5", "6", "7", "8", "9", "0"}
-    if (
-        ("vector3" in res.lower() or "vector2" in res.lower())
-        or "float64" in res.lower()
-        or "float32" in res.lower()
-        or "int64" in res.lower()
-        or "int32" in res.lower()
-    ):
+    if ((
+            "vector3" in res.lower() or "vector2" in res.lower()) or "float64" in res.lower() or "float32" in res.lower() or "int64" in res.lower() or "int32" in res.lower()):
         res = res.replace("Array", "_Array")
     return res
 
@@ -182,11 +177,11 @@ def strip_symbols_from_type(type):
 
 def native_structs_in_method(mMethod):
     # TODO: check whether this method makes sense for later
-    if "arguments" in mMethod:
+    if ("arguments" in mMethod):
         for arg in mMethod["arguments"]:
             if arg["type"] in forbidden_types:
                 return True
-            if "*" in arg["type"]:
+            if ("*" in arg["type"]):
                 return True
             if strip_symbols_from_type(arg["type"]) in native_structs:
                 return True
@@ -224,12 +219,15 @@ def generate_method_bind_name(class_name, method_name):
 
 def get_variant_type(class_name):
     DICT = {
+
         "Nil": "GDEXTENSION_VARIANT_TYPE_NIL",
+
         #  atomic types
         "bool": "GDEXTENSION_VARIANT_TYPE_BOOL",
         "int": "GDEXTENSION_VARIANT_TYPE_INT",
         "float": "GDEXTENSION_VARIANT_TYPE_FLOAT",
         "string": "GDEXTENSION_VARIANT_TYPE_STRING",
+
         # math types
         "vector2": "GDEXTENSION_VARIANT_TYPE_VECTOR2",
         "vector2i": "GDEXTENSION_VARIANT_TYPE_VECTOR2I",
@@ -246,6 +244,7 @@ def get_variant_type(class_name):
         "basis": "GDEXTENSION_VARIANT_TYPE_BASIS",
         "transform3d": "GDEXTENSION_VARIANT_TYPE_TRANSFORM3D",
         "projection": "GDEXTENSION_VARIANT_TYPE_PROJECTION",
+
         # misc types
         "color": "GDEXTENSION_VARIANT_TYPE_COLOR",
         "stringname": "GDEXTENSION_VARIANT_TYPE_STRING_NAME",
@@ -256,6 +255,7 @@ def get_variant_type(class_name):
         "signal": "GDEXTENSION_VARIANT_TYPE_SIGNAL",
         "dictionary": "GDEXTENSION_VARIANT_TYPE_DICTIONARY",
         "array": "GDEXTENSION_VARIANT_TYPE_ARRAY",
+
         # typed arrays
         "packedbytearray": "GDEXTENSION_VARIANT_TYPE_PACKED_BYTE_ARRAY",
         "packedint32array": "GDEXTENSION_VARIANT_TYPE_PACKED_INT32_ARRAY",
@@ -265,7 +265,7 @@ def get_variant_type(class_name):
         "packedstringarray": "GDEXTENSION_VARIANT_TYPE_PACKED_STRING_ARRAY",
         "packedvector2array": "GDEXTENSION_VARIANT_TYPE_PACKED_VECTOR2_ARRAY",
         "packedvector3array": "GDEXTENSION_VARIANT_TYPE_PACKED_VECTOR3_ARRAY",
-        "packedcolorarray": "GDEXTENSION_VARIANT_TYPE_PACKED_COLOR_ARRAY",
+        "packedcolorarray": "GDEXTENSION_VARIANT_TYPE_PACKED_COLOR_ARRAY"
     }
 
     return DICT[class_name.lower()]
@@ -274,9 +274,7 @@ def get_variant_type(class_name):
 def generate_method(mMethod):
     res = ""
     args = generate_args(mMethod)
-    def_function = (
-        f"def {pythonize_name(mMethod['name'])}({args})->{get_ret_value(mMethod)}: pass"
-    )
+    def_function = f"def {pythonize_name(mMethod['name'])}({args})->{get_ret_value(mMethod)}: pass"
     res += def_function
     res = generate_newline(res)
     return res
@@ -330,7 +328,7 @@ def generate_enums(class_):
 
 def generate_properties(class_):
     result = ""
-    if "properties" in class_.keys():
+    if ("properties" in class_.keys()):
         for property in class_["properties"]:
             result += generate_property(property)
     return result
@@ -393,19 +391,7 @@ def generate_property(property):
 
 
 def pythonize_name(name):
-    if name in (
-        "from",
-        "len",
-        "in",
-        "for",
-        "with",
-        "class",
-        "pass",
-        "raise",
-        "global",
-        "str",
-        "typeof",
-    ):
+    if name in ("from", "len", "in", "for", "with", "class", "pass", "raise", "global", "str", "typeof"):
         return name + "_"
     return name
 
@@ -417,13 +403,13 @@ def unbitfield_type(arg_type):
 
 
 def ungodottype(type_):
-    if type_ == "String":
+    if (type_ == "String"):
         return "str"
-    if type_ == "StringName":
+    if (type_ == "StringName"):
         return "str"
-    if type_ == "Variant":
+    if (type_ == "Variant"):
         return "object"
-    if type_ in classes:
+    if (type_ in classes):
         return f"__{type_.lower()}__.{type_}"
     elif type in builtin_classes:
         return f"__core__.{type_}"
@@ -485,21 +471,14 @@ def get_class_from_enum(type_):
 def get_classes_to_import(classes):
     classes_to_import = set()
     for class_ in classes:
-        if "inherits" in class_.keys():
+        if ("inherits" in class_.keys()):
             classes_to_import.add(class_["inherits"])
         if "methods" in class_.keys():
             for method in class_["methods"]:
-                if "return_value" in method.keys():
-                    if (
-                        unbitfield_type(
-                            get_class_from_enum(method["return_value"]["type"])
-                        )
-                        in normal_classes
-                    ):
-                        classes_to_import.add(
-                            get_class_from_enum(method["return_value"]["type"])
-                        )
-                if "arguments" not in method.keys():
+                if ("return_value" in method.keys()):
+                    if (unbitfield_type(get_class_from_enum(method["return_value"]["type"])) in normal_classes):
+                        classes_to_import.add(get_class_from_enum(method["return_value"]["type"]))
+                if ("arguments" not in method.keys()):
                     continue
                 for argument in method["arguments"]:
                     if argument["type"] in normal_classes:
@@ -562,12 +541,12 @@ def generate_classes(classes, filename, is_core=False):
         res += "import py4godot.classes.Object.Object as __object__"
         res = generate_newline(res)
     for class_ in classes:
-        if class_["name"] in IGNORED_CLASSES:
+        if (class_["name"] in IGNORED_CLASSES):
             continue
         res = generate_newline(res)
         res += f"class {class_['name']}({get_base_class(class_)}):"
         res = generate_newline(res)
-        if is_core:
+        if (is_core):
             res = generate_newline(res)
             res += generate_init(class_)
         res += generate_common_methods(class_)
@@ -586,7 +565,7 @@ def generate_classes(classes, filename, is_core=False):
             res += generate_method(class_, method)
             res = generate_newline(res)
         res += generate_operators_for_class(class_["name"])
-    if os.path.exists(filename):
+    if (os.path.exists(filename)):
         with open(filename, "r") as already_existing_file:
             if already_existing_file.read() == res:
                 return
@@ -721,35 +700,24 @@ def generate_operators_set(class_):
         if not class_["name"] in operator_dict.keys():
             operator_dict[class_["name"]] = dict()
         if not operator["name"] in operator_dict[class_["name"]]:
-            operator_dict[class_["name"]][operator["name"]] = Operator(
-                class_["name"], operator["name"], operator["return_type"]
-            )
+            operator_dict[class_["name"]][operator["name"]] = Operator(class_["name"], operator["name"],
+                                                                       operator["return_type"])
         if "right_type" in operator.keys():
-            operator_dict[class_["name"]][operator["name"]].right_type_values.append(
-                operator["right_type"]
-            )
+            operator_dict[class_["name"]][operator["name"]].right_type_values.append(operator["right_type"])
 
 
 classes = set()
 
 if __name__ == "__main__":
     os.chdir("..")
-    with open(
-        "py4godot/gdextension-api/extension_api.json", "r", encoding="utf-8"
-    ) as myfile:
+    with open('py4godot/gdextension-api/extension_api.json', 'r', encoding="utf-8") as myfile:
         data = myfile.read()
         obj = json.loads(data)
-        classes = set(
-            [
-                class_["name"] if class_["name"] not in IGNORED_CLASSES else None
-                for class_ in obj["classes"] + obj["builtin_classes"]
-            ]
-        )
+        classes = set([class_['name'] if class_["name"] not in IGNORED_CLASSES else None for class_ in
+                       obj['classes'] + obj["builtin_classes"]])
         builtin_classes = set(class_["name"] for class_ in obj["builtin_classes"])
-        normal_classes = set([class_["name"] for class_ in obj["classes"]])
-        native_structs = set(
-            [native_struct["name"] for native_struct in obj["native_structures"]]
-        )
+        normal_classes = set([class_['name'] for class_ in obj['classes']])
+        native_structs = set([native_struct["name"] for native_struct in obj["native_structures"]])
         singletons = set([singleton["name"] for singleton in obj["singletons"]])
         collect_members(obj)
         res = ""

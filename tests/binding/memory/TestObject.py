@@ -1,19 +1,16 @@
-import gc
-
 from py4godot.classes import gdclass
-from py4godot.classes.core import Array, Vector3
+from py4godot.classes.PhysicsRayQueryParameters3D import PhysicsRayQueryParameters3D
+from py4godot.classes.PhysicsServer3D import PhysicsServer3D
 from py4godot.classes.Image import Image
 from py4godot.classes.Node3D import Node3D
 from py4godot.classes.PhysicsDirectSpaceState3D import PhysicsDirectSpaceState3D
-from py4godot.classes.PhysicsRayQueryParameters3D import PhysicsRayQueryParameters3D
-from py4godot.classes.PhysicsServer3D import PhysicsServer3D
 from py4godot.classes.PhysicsShapeQueryParameters3D import PhysicsShapeQueryParameters3D
 from py4godot.classes.SphereShape3D import SphereShape3D
+from py4godot.classes.core import Array, Vector3
+import gc
 
 END_TIME = 20
 START_TIME = 10
-
-
 @gdclass
 class TestObject(Node3D):
     def _ready(self) -> None:
@@ -38,16 +35,18 @@ class TestObject(Node3D):
 
     def do_ray_query(self) -> None:
         target = Vector3.new0()
-        ds = PhysicsServer3D.instance().space_get_direct_state(
-            self.get_world_3d().get_space()
-        )
+        ds = PhysicsServer3D.instance().space_get_direct_state(self.get_world_3d().get_space())
         parameters = PhysicsRayQueryParameters3D.create(
-            target, target, 0xFFFFFFFF, Array.from_list([])
+            target,
+            target,
+            0xffffffff,
+            Array.from_list([])
         )
 
         ds.intersect_ray(parameters)
 
-    def _process(self, delta: "float") -> None:
+
+    def _process(self, delta:'float'   ) -> None:
         self.current_time += delta
         if self.current_time >= START_TIME and self.current_time <= END_TIME:
             # Testing refcounted structures
@@ -66,4 +65,4 @@ class TestObject(Node3D):
             self.do_sphere_cast()
             self.do_ray_query()
 
-        gc.collect()  # making sure, that everything is cleaned up for being able to get data
+        gc.collect() #making sure, that everything is cleaned up for being able to get data
