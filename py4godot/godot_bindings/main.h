@@ -1,8 +1,8 @@
 #pragma once
-#include "py4godot/godot_bindings/macros.h"
-#include "gdextension_interface.h"
-#include "functions.h"
 #include "Python.h"
+#include "functions.h"
+#include "gdextension_interface.h"
+#include "py4godot/godot_bindings/macros.h"
 #include "py4godot/godot_bindings/pythonpaths.h"
 
 #if !defined(GDN_EXPORT)
@@ -15,10 +15,12 @@
 #endif
 #endif
 
-
 extern GDExtensionClassLibraryPtr _library;
 
 static PyThreadState *gilstate = NULL;
 extern "C" {
-GDExtensionBool GDN_EXPORT py4godot_init(GDExtensionInterfaceGetProcAddress p_get_proc_address, GDExtensionClassLibraryPtr p_library, GDExtensionInitialization *r_initialization);
+GDExtensionBool GDN_EXPORT
+py4godot_init(GDExtensionInterfaceGetProcAddress p_get_proc_address,
+              GDExtensionClassLibraryPtr p_library,
+              GDExtensionInitialization *r_initialization);
 }
