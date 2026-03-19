@@ -89,7 +89,7 @@ if meson.has_external_property('is_mingw') and build_machine.system() == 'linux'
     py = import('python').find_installation('python3')
     message(meson.current_source_dir()+'/python_files/'+python_ver+'-'+machine+platform_format + '/python')
     link_args += ['-static-libgcc', '-static-libstdc++'] #TODO: Is this good like this?
-    lib_py = cc.find_library('python312', dirs:meson.current_source_dir()+'/python_files/'+python_ver+'-'+machine+platform_format + '/python')
+    lib_py = cc.find_library('python314', dirs:meson.current_source_dir()+'/python_files/'+python_ver+'-'+machine+platform_format + '/python')
         internal_inc = include_directories('py4godot','py4godot/gdextension-api/', 'py4godot/core', 'py4godot/enums',
     'py4godot/classes', 'py4godot/pluginscript_api', 'py4godot/godot_bindings',
     'py4godot/script_instance', 'py4godot/core/variant4', 'py4godot/cppcore', 'py4godot/cppenums',
