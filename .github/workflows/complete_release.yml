@@ -99,6 +99,10 @@ jobs:
           python -m pip install flake8
           python build.py --target_platform=darwin64 --compiler=clang
 
+      - name: Generate .gdignore files
+        run: |
+          find build/py4godot -type d -name "cpython-*" -exec touch {}/.gdignore \;
+
       - name: Upload py4godot build artifact
         uses: actions/upload-artifact@v4
         with:
