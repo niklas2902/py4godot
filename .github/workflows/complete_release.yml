@@ -99,12 +99,9 @@ jobs:
           python -m pip install flake8
           python build.py --target_platform=darwin64 --compiler=clang
 
-      - name: Generate .gdignore files
-        run: |
-          find build/py4godot -type d -name "cpython-*" -exec touch {}/.gdignore \;
-
       - name: Upload py4godot build artifact
         uses: actions/upload-artifact@v4
+        include-hidden-files: true
         with:
           name: py4godot-${{ matrix.target }}
           path: |
@@ -120,30 +117,31 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: py4godot-linux
-          path: install_dir/addons/py4godot
+          path: py4godot/install_dir/addons/py4godot
 
       - name: Download Linux ARM
         uses: actions/download-artifact@v4
         with:
           name: py4godot-linux-arm
-          path: install_dir/addons/py4godot
+          path: py4godot/install_dir/addons/py4godot
 
       - name: Download Macos
         uses: actions/download-artifact@v4
         with:
           name: py4godot-macos
-          path: install_dir/addons/py4godot
+          path: py4godot/install_dir/addons/py4godot
 
       - name: Download Windows
         uses: actions/download-artifact@v4
         with:
           name: py4godot-windows
-          path: install_dir/addons/py4godot
+          path: py4godot/install_dir/addons/py4godot
 
       - name: Upload Zipped Artifact
         uses: actions/upload-artifact@v4
+        include-hidden-files: true
         with:
           name: py4godot
           path: |
-            install_dir/**
-            install_dir/**/.*
+            py4godot/install_dir/**
+            py4godot/install_dir/**/.*
