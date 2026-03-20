@@ -143,5 +143,5 @@ jobs:
           include-hidden-files: true
           name: py4godot
           path: |
-            py4godot/install_dir/**
-            py4godot/install_dir/**/.*
+            py4godot/**
+            py4godot/**/.*
