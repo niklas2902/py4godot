@@ -101,8 +101,8 @@ jobs:
 
       - name: Upload py4godot build artifact
         uses: actions/upload-artifact@v4
-        include-hidden-files: true
         with:
+          include-hidden-files: true
           name: py4godot-${{ matrix.target }}
           path: |
             build/py4godot/**
@@ -139,8 +139,8 @@ jobs:
 
       - name: Upload Zipped Artifact
         uses: actions/upload-artifact@v4
-        include-hidden-files: true
         with:
+          include-hidden-files: true
           name: py4godot
           path: |
             py4godot/install_dir/**
