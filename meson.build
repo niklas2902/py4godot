@@ -14,6 +14,7 @@ message('system:' + build_machine.system())
 message('cpu_family:' + build_machine.cpu_family())
 message('host_platform:' + host_machine.system())
 platform_format = ''
+prefix = ''
 machine = host_machine.system()
 platform_format = '32'
 if host_machine.cpu_family() == 'x86_64'
@@ -21,6 +22,11 @@ if host_machine.cpu_family() == 'x86_64'
 endif
 if host_machine.cpu_family() == 'aarch64'
     platform_format = 'arm64'
+endif
+
+message('target_platform: ' + target_machine.system())
+if target_machine.system() == 'android'
+    prefix = 'lib'
 endif
 
 message('platform:' + platform_format)
@@ -102,6 +108,7 @@ if meson.has_external_property('is_mingw') and build_machine.system() == 'linux'
 endif
 
 if not meson.has_external_property('is_mingw') and build_machine.system() == 'linux'
+    message('looking for python in:' +meson.current_source_dir()+'/python_files/'+python_ver+'-'+machine+platform_format+'/python/lib')
     lib_py = cc.find_library(python_ver_short, dirs:meson.current_source_dir()+'/python_files/'+python_ver+'-'+machine+platform_format+'/python/lib')
         internal_inc = include_directories('py4godot','py4godot/gdextension-api/', 'py4godot/core', 'py4godot/enums',
     'py4godot/classes', 'py4godot/pluginscript_api', 'py4godot/godot_bindings',
@@ -126,6 +133,7 @@ main_lib = shared_library('main',cppsources,
 dependencies:[dep_py], include_directories:internal_inc,name_prefix:'',c_args:extra_args,
  link_args : link_args,
  cpp_args:cpp_args,
+ name_prefix :prefix,
  install_rpath: '$ORIGIN/../lib',
   build_rpath : '$ORIGIN/../lib')
 
@@ -135,6 +143,7 @@ pythonscript_lib = shared_library('pythonscript',
                         include_directories:internal_inc,name_prefix:'',
                          c_args:extra_args, link_args:link_args,link_with:main_lib,
                         cpp_args:cpp_args,
+                        name_prefix:prefix,
                         install_rpath: '$ORIGIN/../lib',
                         build_rpath : '$ORIGIN/../lib')
 

@@ -1,4 +1,5 @@
 # distutils: language=c++
+import platform
 import sys,os
 from typing import get_type_hints
 
@@ -12,6 +13,7 @@ from py4godot.pluginscript_api.utils.utils cimport *
 
 from py4godot.pluginscript_api.utils.MethodDescription cimport MethodDescription
 from py4godot.utils.utils cimport *
+from py4godot.classes.ProjectSettings import ProjectSettings
 from cpython cimport Py_INCREF, Py_DECREF, PyObject
 
 from py4godot.pluginscript_api.utils.SignalDescription cimport *
@@ -39,10 +41,12 @@ def load_module(module_name, file_to_load):
     # Check if the module is already loaded
     if module_name in sys.modules:
         del sys.modules[module_name]
-
-    module_spec = importlib.util.spec_from_file_location(module_name, file_to_load)
+    user_path = ""
+    if "android" in platform.platform().lower():
+        user_path = ProjectSettings.instance().globalize_path("user://files/scripts/")
+    module_spec = importlib.util.spec_from_file_location(module_name, user_path + file_to_load)
     if module_spec is None:
-        raise FileNotFoundError(f"Cannot find the module file: {file_to_load}")
+        raise FileNotFoundError(f"Cannot find the module file: {user_path + file_to_load}")
     module = importlib.util.module_from_spec(module_spec)
     module_spec.loader.exec_module(module)
     sys.modules[module_name] = module

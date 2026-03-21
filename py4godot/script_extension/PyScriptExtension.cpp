@@ -4,6 +4,7 @@
 #include "py4godot/cpputils/utils.h"
 #include "py4godot/cppclasses/Script/Script.h"
 #include "py4godot/cppclasses/Engine/Engine.h"
+#include "py4godot/cppclasses/ProjectSettings/ProjectSettings.h"
 #include "py4godot/cppcore/Variant.h"
 #include "py4godot/pluginscript_api/api.h"
 #include "py4godot/wrappers/wrappers_wrapper.h"
@@ -15,6 +16,7 @@
 #include "py4godot/cpputils/ScriptHolder.h"
 #include "py4godot/script_extension/script_extension_helpers_api.h"
 #include "py4godot/script_extension/signal_builder.h"
+#include "py4godot/script_extension/android_helpers.h"
 #include <cstdlib>  // For system()
 
 #include <cassert>
@@ -91,6 +93,7 @@ void init_pluginscript_api(){
     }
     pluginscript_initialized = true;
 
+
     // Buffer to hold the converted narrow string
     char python_home_narrow[256];
     wcstombs(python_home_narrow, PYTHONHOME, sizeof(python_home_narrow));
@@ -108,7 +111,25 @@ void init_pluginscript_api(){
     #endif
     */
     Py_SetProgramName(L"python");
-    Py_SetPythonHome(PYTHONHOME);
+
+    #if defined(__ANDROID__)
+        extract_addon_to_user_dir();
+        String user_path = c_string_to_string("user://");
+        String gd_user_dir = ProjectSettings::get_instance()->globalize_path(user_path);
+        char* c_user_dir;
+        gd_string_to_c_string(gd_user_dir, &c_user_dir);
+        std::wstring user_dir(c_user_dir, c_user_dir + strlen(c_user_dir));
+        std::string str_user_dir{c_user_dir};
+        delete c_user_dir;
+
+        static std::wstring python_home_wide = user_dir + L"/files/" + PYTHONHOME;
+        static std::string python_path = str_user_dir + "/files/" + PYTHONPATH;
+    #else
+        static std::wstring python_home_wide = PYTHONHOME;
+        static std::string python_path = PYTHONPATH;
+    #endif
+
+    Py_SetPythonHome(python_home_wide.c_str());
     // Initialize interpreter but skip initialization registration of signal handlers
     Py_InitializeEx(0);
 
@@ -125,7 +146,10 @@ void init_pluginscript_api(){
     std::string pythonCode = "import sys\n"
                              "import os\n"
                              "sys.path.append(r'''" + std::string{ cwd} + "''')\n"
-                             "sys.path.append(r'''" + std::string{cwd} + std::string{PYTHONPATH} + "''')";
+                             #if defined(__ANDROID__)
+                             "sys.path.append(r'''" + str_user_dir + "files/scripts" + "''')\n"
+                             #endif
+                             "sys.path.append(r'''" + std::string{cwd} + std::string{python_path} + "''')";
     // Convert Python code to const char* for PyRun_SimpleString
     const char *pythonCodeWchar = pythonCode.c_str();
 

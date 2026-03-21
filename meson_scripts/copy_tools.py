@@ -10,7 +10,7 @@ from config import python_ver, python_ver_short
 
 def strip_platform(text):
     text = text[1:]
-    return text.lstrip("linuxarm64").lstrip("linux64").lstrip("windows64").lstrip("windows32").lstrip("linux32").lstrip("darwin64")
+    return text.lstrip("linuxarm64").lstrip("linux64").lstrip("windows64").lstrip("windows32").lstrip("linux32").lstrip("darwin64").lstrip("androidarm64")
 
 
 def run(platform):
@@ -18,7 +18,7 @@ def run(platform):
     list_dll = []
     if "windows" in platform:
         list_dll = list(filter(lambda pathname: not (pathname.endswith("main.dll") or pathname.endswith("pythonscript.dll")),glob.glob("**/*.dll", recursive=True)))
-    elif "linux" in platform:
+    elif "linux" in platform or "android" in platform:
         list_dll = list(filter(lambda pathname: not (pathname.endswith("main.so") or pathname.endswith("pythonscript.so")),glob.glob("**/*.so", recursive=True)))
     elif "darwin" in platform:
         list_dll = list(filter(lambda pathname: not (pathname.endswith("main.dylib") or pathname.endswith("pythonscript.dylib")),glob.glob("**/*.dylib", recursive=True)))
@@ -79,6 +79,12 @@ def copy_main(platform):
              f"build/final/{platform}/{python_ver}-{platform}/python/bin/main.so")
         copy(f"build/{platform}/pythonscript.so",
              f"build/final/{platform}/{python_ver}-{platform}/python/bin/pythonscript.so")
+    elif "android" in platform:
+        copy(f"build/{platform}/libmain.so",
+             f"build/final/{platform}/{python_ver}-{platform}/python/bin/libmain.so")
+        copy(f"build/{platform}/libpythonscript.so",
+             f"build/final/{platform}/{python_ver}-{platform}/python/bin/libpythonscript.so")
+
     elif "darwin" in platform:
         copy(f"build/{platform}/main.dylib",
              f"build/final/{platform}/{python_ver}-{platform}/python/bin/main.dylib")
