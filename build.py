@@ -33,38 +33,6 @@ def cythonize_files():
     module += cythonize("py4godot/enums/*.pyx", language_level=3)
     module += cythonize("py4godot/events/*.pyx", language_level=3)
 
-
-def generate_files():
-    pass
-    # res = subprocess.Popen(f"python generate_classes.py", shell=True)
-    # res.wait()
-    # if res.returncode != 0:
-    #    raise Exception("generation failed")
-    # res = subprocess.Popen(f"python generate_classes_cpp.py", shell=True)
-    # res.wait()
-    # if res.returncode != 0:
-    #    raise Exception("generation failed")
-    # res = subprocess.Popen(f"python generate_classes_hpp.py", shell=True)
-    # res.wait()
-    # if res.returncode != 0:
-    #    raise Exception("generation failed")
-    # TODO: enable again
-    # res = subprocess.Popen(f"python generate_enums.py", shell=True)
-    # res.wait()
-    # res = subprocess.Popen(f"python generate_enums_cpp.py", shell=True)
-    # res.wait()
-    # if res.returncode != 0:
-    #    raise Exception("generation failed")
-    #res = subprocess.Popen(f"python generate_classes_pyi.py", shell=True)
-    #res.wait()
-    #if res.returncode != 0:
-    #   raise Exception("generation failed")
-    # res = subprocess.Popen(f"python cythonize_files.py", shell=True)
-    # res.wait()
-    # if res.returncode != 0:
-    #    raise Exception("generation failed")
-
-
 def compile_python_ver_file(platform):
     """compile python file, to find the matching python version"""
     python_dir = locations.get_python_dir(platform)
@@ -134,7 +102,6 @@ def create_python_paths():
         f.write(text_to_write)
 
 
-generate_files()
 
 current_platform = platform_check.get_platform()
 

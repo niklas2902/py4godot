@@ -106,4 +106,3 @@ cdef api void init_asyncio():
     loop_thread = threading.Thread(target=run_loop, daemon=True)
     loop_thread.start()
     py4godot.signals.set_event_loop(loop)
-    print(f"loop:{loop}")

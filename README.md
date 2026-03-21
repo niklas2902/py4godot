@@ -16,7 +16,7 @@ This project is currently in an early phase of development. Consider this more a
 
 Examples for this plugin can be found here: [Examples](https://github.com/niklas2902/py4godot-examples)
 
-You can check out the api documentation here: [API Documentation](https://github.com/niklas2902/py4godot/wiki/API-Documentation)
+If you want a small introduction into py4godot, check out the developer guide: [Developer Guide](https://github.com/niklas2902/py4godot/wiki/Developer-Guide)
 
 
 ## Supported Platforms

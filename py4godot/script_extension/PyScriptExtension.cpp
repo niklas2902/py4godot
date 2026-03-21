@@ -338,20 +338,17 @@ void PyScriptExtension::_get_class_item_path(GDExtensionTypePtr res){
    }
 }
 
-void PyScriptExtension::set_path_internal(std::string path)  {
-    string_path = path;
-}
-
 
 std::string PyScriptExtension::path_as_string(){
-    if (string_path == std::string{}){
-        auto gd_path = get_path();
+    auto gd_path = get_path();
+    std::string result_string{};
+    if (gd_path.length() != 0){
         char* res_string;
         gd_string_to_c_string(gd_path, &res_string);
-        string_path = std::string{res_string};
+        result_string = std::string{res_string};
         delete[] res_string;
     }
-    return string_path;
+    return result_string;
 }
 
 void  PyScriptExtension::_get_base_script(GDExtensionTypePtr res){
@@ -593,10 +590,13 @@ void PyScriptExtension::_set_path_cache( String& path, GDExtensionTypePtr res){
 
 void PyScriptExtension::apply_code(){
     print_error("apply_code");
+    std::string script_path = path_as_string();
+    if (script_path.empty()){
+        return;
+    }
 
     auto gil_state = PyGILState_Ensure();
     auto source = PyUnicode_FromString(this->source_code.c_str());
-    std::string script_path = path_as_string();
     auto _path = PyUnicode_FromString(script_path.c_str());
     assert(source != nullptr);
     assert(_path != nullptr);

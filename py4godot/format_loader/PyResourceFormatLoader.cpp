@@ -137,7 +137,7 @@ void PyResourceFormatLoader::_load( String& path, String& original_path, bool us
     script_extension = PyScriptExtension::constructor(lang);
     path_to_script_extension[string_path] = script_extension;
 
-    script_extension->set_path_internal(string_path);
+    script_extension->set_path(path);
     script_extension ->_set_source_code_internal(source_code);
 
     constructor_func = functions::get_get_variant_from_type_constructor()(GDExtensionVariantType::GDEXTENSION_VARIANT_TYPE_OBJECT);
