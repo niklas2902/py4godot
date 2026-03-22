@@ -48,16 +48,9 @@ jobs:
           mkdir -p build/installdir/addons
           cp -r build/py4godot-android build/installdir/addons
 
-      - name: Create archive
-        run: |
-          cd build
-          zip -r py4godot-android.zip installdir
-          cd ..
-
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
-          compression-level: 0
           name: py4godot-android
-          path: build/py4godot-android.zip
+          path: build/install_dir
           retention-days: 30
