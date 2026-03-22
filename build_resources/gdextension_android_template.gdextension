@@ -1,0 +1,21 @@
+[configuration]
+
+entry_symbol = "initialize_pythonscript"
+compatibility_minimum="4.6.0"
+version = "4.5-alpha-16"
+[libraries]
+
+android.debug.arm64 = "{python_ver}-androidarm64/python/bin/libpythonscript.so"
+android.release.arm64 = "{python_ver}-androidarm64/python/bin/"
+
+[dependencies]
+android.debug.arm64 = {
+    "res://addons/py4godot-android/{python_ver}-androidarm64/python/bin/libmain.so" : "lib/arm64-v8a",
+    "res://addons/py4godot-android/{python_ver}-androidarm64/python/lib/libpython3.14.so" : "lib/arm64-v8a",
+    "res://addons/py4godot-android/{python_ver}-androidarm64/python/lib/libpython3.so" : "lib/arm64-v8a",
+}
+android.release.arm64 = {
+    "res://addons/py4godot-android/{python_ver}-androidarm64/python/bin/libmain.so" : "lib/arm64-v8a",
+    "res://addons/py4godot-android/{python_ver}-androidarm64/python/lib/libpython3.14.so" : "lib/arm64-v8a",
+    "res://addons/py4godot-android/{python_ver}-androidarm64/python/lib/libpython3.so" : "lib/arm64-v8a",
+}

@@ -172,17 +172,18 @@ def copy_stub_files(platform):
 
 
 def copy_experimental(platform):
-    for file in ["py4godot/pluginscript_api/utils/experimental.py",
-                 "py4godot/pluginscript_api/utils/annotation_tools.py",
-                 "py4godot/utils/smart_cast.py",
-                 "py4godot/methods.py",
-                 "py4godot/singletons.py",
-                 "py4godot/variant_types.py",
-                 "py4godot/constants.py",
-                 "py4godot/constant_helpers.py",
-                 "py4godot/properties.py",
-                 "py4godot/utils/functools.py",
-                 "py4godot/utils/CoreType.py"]:
+    py4godot_version = "py4godot" if platform != "androidarmg64" else "py4godot-android"
+    for file in [f"{py4godot_version}/pluginscript_api/utils/experimental.py",
+                 f"{py4godot_version}/pluginscript_api/utils/annotation_tools.py",
+                 f"{py4godot_version}/utils/smart_cast.py",
+                 f"{py4godot_version}/methods.py",
+                 f"{py4godot_version}/singletons.py",
+                 f"{py4godot_version}/variant_types.py",
+                 f"{py4godot_version}/constants.py",
+                 f"{py4godot_version}/constant_helpers.py",
+                 f"{py4godot_version}/properties.py",
+                 f"{py4godot_version}/utils/functools.py",
+                 f"{py4godot_version}/utils/CoreType.py"]:
         if "windows" in platform:
             copy(file,
              f"build/final/{platform}/{python_ver}-{platform}/python/Lib/site-packages/" + file)

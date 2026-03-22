@@ -82,10 +82,14 @@ def get_compiler():
 
     raise Exception("No compiler found")
 
-def create_gdextension():
+def create_gdextension(platform):
     gdextension_text = ""
-    with open("build_resources/gdextension_template.gdextension", "r") as f:
-        gdextension_text = f.read().replace("{python_ver}", python_ver)
+    if platform != "androidarm64":
+        with open("build_resources/gdextension_template.gdextension", "r") as f:
+            gdextension_text = f.read().replace("{python_ver}", python_ver)
+    else:
+        with open("build_resources/gdextension_android_template.gdextension", "r") as f:
+            gdextension_text = f.read().replace("{python_ver}", python_ver)
     with open("build_resources/python.gdextension", "w") as f:
         f.write(gdextension_text)
 
@@ -196,7 +200,7 @@ try:
         res.wait()
 
     fix_macos_paths()
-    create_gdextension()
+    create_gdextension(args.target_platform)
     copy_tools.run(args.target_platform)
     copy_tools.copy_main(args.target_platform)
     copy_tools.copy_stub_files(args.target_platform)
@@ -207,20 +211,21 @@ try:
     should_create_plugin =args.create_plugin
     #TODO: ignore unnecessary copy. Don't copy stuff to final
     if should_create_plugin.lower() == "true":
-        if  os.path.exists("build/py4godot") and os.path.isdir("build/py4godot"):
-            shutil.rmtree("build/py4godot")
-        copytree(f"build/final/{args.target_platform}/{python_ver}-{args.target_platform}", f"build/py4godot/{python_ver}-{args.target_platform}")
-        shutil.copy("build_resources/dependencies.txt", "build/py4godot/dependencies.txt")
-        shutil.copy("build_resources/install_dependencies.py", "build/py4godot/install_dependencies.py")
-        shutil.copy("build_resources/python.gdextension", "build/py4godot/python.gdextension")
-        shutil.copy("build_resources/export_py4godot.gd", "build/py4godot/export_py4godot.gd")
-        shutil.copy("build_resources/export_py4godot_main.gd", "build/py4godot/export_py4godot_main.gd")
-        shutil.copy("build_resources/plugin.cfg", "build/py4godot/plugin.cfg")
-        shutil.copy("build_resources/signal_script.py", "build/py4godot/signal_script.py")
-        with open(f"build/py4godot/{python_ver}-{args.target_platform}/.gdignore", "w"):
+        py4godot_version = "py4godot" if args.target_platform != "androidarm64" else "py4godot-android"
+        if  os.path.exists(f"build/{py4godot_version}") and os.path.isdir(f"build/{py4godot_version}"):
+            shutil.rmtree(f"build/{py4godot_version}")
+        copytree(f"build/final/{args.target_platform}/{python_ver}-{args.target_platform}", f"build/{py4godot_version}/{python_ver}-{args.target_platform}")
+        shutil.copy("build_resources/dependencies.txt", f"build/{py4godot_version}/dependencies.txt")
+        shutil.copy("build_resources/install_dependencies.py", f"build/{py4godot_version}/install_dependencies.py")
+        shutil.copy("build_resources/python.gdextension", f"build/{py4godot_version}/python.gdextension")
+        shutil.copy("build_resources/export_py4godot.gd", f"build/{py4godot_version}/export_py4godot.gd")
+        shutil.copy("build_resources/export_py4godot_main.gd", f"build/{py4godot_version}/export_py4godot_main.gd")
+        shutil.copy("build_resources/plugin.cfg", f"build/{py4godot_version}/plugin.cfg")
+        shutil.copy("build_resources/signal_script.py", f"build/{py4godot_version}/signal_script.py")
+        with open(f"build/{py4godot_version}/{python_ver}-{args.target_platform}/.gdignore", "w"):
             pass
-        download_get_pip("build/py4godot")
-        python_svg_dest = "build/py4godot/"+ "/Python.svg"
+        download_get_pip(f"build/{py4godot_version}")
+        python_svg_dest = f"build/{py4godot_version}/"+ "/Python.svg"
         if not os.path.exists(python_svg_dest):
             shutil.copy("build_resources/Python.svg", python_svg_dest)
 
