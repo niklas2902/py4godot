@@ -51,7 +51,8 @@ jobs:
       - name: Create archive
         run: |
           cd build
-          zip -r py4godot-android.zip build/installdir
+          zip -r py4godot-android.zip installdir
+          cd ..
 
       - name: Upload artifact
         uses: actions/upload-artifact@v4
