@@ -42,7 +42,7 @@ jobs:
           python build.py
           --target_platform=androidarm64
           --compiler=clang-android
-          --buildtype=release
+          -buildtype=release
 
       - name: Create folder structure
         run: |
