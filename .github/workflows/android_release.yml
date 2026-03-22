@@ -1,4 +1,4 @@
-name: Complete Release
+name: Android Release
 
 on:
   workflow_dispatch: # Allows manual triggering
