@@ -13,6 +13,7 @@ RUN apt-get update && apt-get install -y \
     ninja-build \
     pkg-config \
     meson \
+    zip \
     && rm -rf /var/lib/apt/lists/*
 
 # Android NDK version and install path

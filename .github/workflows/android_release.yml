@@ -50,12 +50,13 @@ jobs:
 
       - name: Create archive
         run: |
-          apt-get install -y zip
-          zip -r build/py4godot-android.zip build/installdir
+          cd build
+          zip -r py4godot-android.zip build/installdir
 
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
+          compression-level: 0
           name: py4godot-android
           path: build/py4godot-android.zip
           retention-days: 30
