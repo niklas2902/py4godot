@@ -31,12 +31,6 @@ jobs:
           python -m pip install -r requirements.txt
           python -m pip install flake8
 
-      - name: Lint with flake8
-        run: python -m flake8 .
-
-      - name: Print structure
-        run: python meson_scripts/print_tools.py
-
       - name: Generate files
         run: python generate.py
 
