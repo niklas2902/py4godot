@@ -5,6 +5,7 @@
 #include "py4godot/cppcore/Variant.h"
 #include "py4godot/cppclasses/FileAccess/FileAccess.h"
 #include <cassert>
+#include <filesystem>
 
  GDExtensionPtrOperatorEvaluator operator_equal_string_name_save;
 
@@ -63,11 +64,18 @@ void PyResourceFormatSaver::_init_values(){}
   void PyResourceFormatSaver::_set_uid( String& path, int uid, GDExtensionTypePtr res){
   print_error("_set_uid");
   }
-  void PyResourceFormatSaver::_recognize( Resource& resource, GDExtensionTypePtr res){
+  void PyResourceFormatSaver::_recognize(Resource& resource, GDExtensionTypePtr res) {
     print_error("_recognize");
-    bool recognized =  resource.godot_owner != nullptr;
+    bool recognized = resource.godot_owner != nullptr;
+    auto path = resource.get_path();
+    char* c_path;
+    gd_string_to_c_string(path, &c_path);
+    auto ext = std::filesystem::path(c_path).extension().string();
+    recognized = recognized && (ext == ".py" || ext == ".pyi" || ext == ".pyx");
+    delete[] c_path;
+
     *reinterpret_cast<bool*>(res) = recognized;
-  }
+}
   void PyResourceFormatSaver::_get_recognized_extensions( Resource& resource, GDExtensionTypePtr res){
     print_error("_get_recognized_extensions");
     auto py = c_string_to_string("py");
