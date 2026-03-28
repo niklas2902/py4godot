@@ -7,7 +7,7 @@
 
 #elif defined(__ANDROID__) && defined(__aarch64__)
 #define PYTHONHOME L"addons/py4godot-android/{python_ver}-androidarm64/python"
-#define PYTHONPATH "addons/py4godot-android/python/lib/python3.14/site-packages"
+#define PYTHONPATH "addons/py4godot-android/python/lib/{python_ver_short}/site-packages"
 
 #elif defined(__linux__) && defined(__i386__)
 #define PYTHONHOME L"addons/py4godot/{python_ver}-linux32/python/"
@@ -15,15 +15,15 @@
 
 #elif defined(__linux__) && defined(__aarch64__)
 #define PYTHONHOME L"addons/py4godot/{python_ver}-linuxarm64/python/"
-#define PYTHONPATH "/addons/py4godot/{python_ver}-linuxarm64/python/lib/python3.14/site-packages"
+#define PYTHONPATH "/addons/py4godot/{python_ver}-linuxarm64/python/lib/{python_ver_short}/site-packages"
 
 
 #elif __linux__
 #define PYTHONHOME L"addons/py4godot/{python_ver}-linux64/python"
-#define PYTHONPATH "/addons/py4godot/{python_ver}-linux64/python/lib/python3.14/site-packages"
+#define PYTHONPATH "/addons/py4godot/{python_ver}-linux64/python/lib/{python_ver_short}/site-packages"
 
 
 #elif __APPLE__
 #define PYTHONHOME L"addons/py4godot/{python_ver}-darwin64/python"
-#define PYTHONPATH "/addons/py4godot/{python_ver}-darwin64/python/lib/python3.14/site-packages"
+#define PYTHONPATH "/addons/py4godot/{python_ver}-darwin64/python/{python_ver_short}/site-packages"
 #endif

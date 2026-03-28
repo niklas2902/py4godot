@@ -98,6 +98,7 @@ def create_python_paths():
     text_to_write = ""
     with open("py4godot/godot_bindings/pythonpaths_template.h") as f:
         text_to_write = f.read().replace("{python_ver}", python_ver)
+        text_to_write = text_to_write.replace("{python_ver_short}", python_ver_short)
     if os.path.exists("py4godot/godot_bindings/pythonpaths.h"):
         with open("py4godot/godot_bindings/pythonpaths.h", "r") as f:
             if f.read() == text_to_write:
