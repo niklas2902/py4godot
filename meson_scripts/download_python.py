@@ -33,10 +33,10 @@ def download_file(platform, allow_copy=False):
     print("download:" + platform)
 
     if platform != "linux32" and platform != "linux64" and platform != "androidarm64" :
-        url = f'https://github.com/indygreg/python-build-standalone/releases/download/20260320/{python_ver}+20260320-{platform_dict[platform]}.tar.gz'
+        url = f'https://github.com/indygreg/python-build-standalone/releases/download/20260310/{python_ver}+20260310-{platform_dict[platform]}.tar.gz'
         python_file = f'{python_files_dir}/{python_ver}-{platform_dict[platform]}.tar.gz'
     elif platform == "linux64":
-        url = f'https://github.com/astral-sh/python-build-standalone/releases/download/20260320/{python_ver}+20260320-{platform_dict[platform]}.tar.gz'
+        url = f'https://github.com/astral-sh/python-build-standalone/releases/download/20260310/{python_ver}+20260310-{platform_dict[platform]}.tar.gz'
         python_file = f'{python_files_dir}/{python_ver}-linux64.tar.gz'
     elif platform == "androidarm64":
         url = f'https://github.com/niklas2902/python-android/releases/download/{python_version_number}/cpython-{python_version_number}-androidarm64.zip'

@@ -4,8 +4,8 @@ import os
 from pathlib import Path
 
 # Define the old and new paths for libpython
-old_python_path = "/install/lib/libpython3.12.dylib"
-new_python_path = "/lib/libpython3.12.dylib"
+old_python_path = "/install/lib/libpython3.14.dylib"
+new_python_path = "/lib/libpython3.14.dylib"
 #new_python_path = "/Users/customer/Documents/py4godot/example/addons/py4godot/cpython-3.12.4-darwin64/python/lib/libpython3.12.dylib"
 parent_folder = "python"
 
