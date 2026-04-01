@@ -163,7 +163,7 @@ def generate_constructors(class_):
     if "constructors" not in class_.keys():
         return res
     if class_["name"] not in cpp_core_structs:
-        res += f"{INDENT}{class_['name']} (){{godot_owner = &data[0]; shouldBeDeleted=false;}};"
+        res += f"{INDENT}{class_['name']} (){{godot_owner = nullptr; shouldBeDeleted=false;}};"
     else:
         res += f"{INDENT}{class_['name']} (){{godot_owner = nullptr; shouldBeDeleted=false;}};"
     res = generate_newline(res)
