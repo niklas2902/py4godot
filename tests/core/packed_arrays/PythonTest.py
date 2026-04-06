@@ -5,7 +5,6 @@ from py4godot.classes.core import *
 class PythonTest(unittest.TestCase):
 
 	def test_getting_from_packed_array(self):
-		Vector3.new0()
 		pa = PackedByteArray.from_list([1,2,3])
 		self.assertEqual(pa.to_list(), [1,2,3])
 		self.assertEqual(list(pa.get_memory_view()), [1,2,3])
@@ -31,3 +30,7 @@ class PythonTest(unittest.TestCase):
 	def test_len(self):
 		pa = PackedByteArray.from_list([1, 2, 3])
 		self.assertEqual(len(pa), 3)
+	def test_packedVector2Array(self):
+		pa = PackedVector2Array.new0()
+		pa.append(Vector2.new3(0,1))
+		self.assertEqual(pa[0], Vector2.new3(0,1))

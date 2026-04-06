@@ -1805,16 +1805,13 @@ def generate_special_methods_dictionary():
     return res
 
 def is_builtin_class_in_name(classname):
-    for cls in builtin_classes- {"int", "float", "bool", "Nil"}:
-        if cls in classname:
-            return True
-    return False
+    return classname in builtin_classes - {"int", "float", "bool", "Nil"}
 
 def generate_array_set_item(class_):
     res = ""
     res += f"{INDENT}def __setitem__(self,  index, value):"
     res = generate_newline(res)
-    if not is_builtin_class_in_name(class_):
+    if not is_builtin_class_in_name(class_["name"]):
         res += f"{INDENT * 2}self._ptr.call_with_return({method_ids['normal_methods'][class_['name']]['__setitem__']}, (index, value))"
     else:
         res += f"{INDENT * 2}self._ptr.call_with_return({method_ids['normal_methods'][class_['name']]['__setitem__']}, (index, value._ptr))"
@@ -1831,9 +1828,12 @@ def generate_array_get_item(class_):
     res = generate_newline(res)
     res += f"{INDENT * 3}raise KeyError(f\"Index '%s' invalid\")".replace("%s", "{index}")
     res = generate_newline(res)
-    if not is_builtin_class_in_name(class_):
+    if not is_builtin_class_in_name(class_["name"]):
+        print(f"not is builtin_class_in_name: {class_['name']}")
         res += f"{INDENT * 2}pyobject = self._ptr.call_with_return({method_ids['normal_methods'][class_['name']]['__getitem__']}, (index,))"
     else:
+        res += f"{INDENT * 2}pyobject = {class_['name']}.construct_without_init()"
+        res = generate_newline(res)
         res += f"{INDENT * 2}pyobject._ptr = self._ptr.call_with_return({method_ids['normal_methods'][class_['name']]['__getitem__']}, (index,))"
     res = generate_newline(res)
     res += f"{INDENT * 2}return pyobject"
