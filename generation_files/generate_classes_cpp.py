@@ -661,10 +661,7 @@ def get_variant_type(class_name):
 
 
 def get_hash(method):
-    if "hash_compatibility" in method:
-        return method["hash_compatibility"][0]
-    else:
-        return method["hash"]  # TODO: why is is this weird?
+    return method["hash"]
 
 
 def generate_method_bind(current_class, method):
