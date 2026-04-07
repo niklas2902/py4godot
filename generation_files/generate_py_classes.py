@@ -1805,7 +1805,7 @@ def generate_special_methods_dictionary():
     return res
 
 def is_builtin_class_in_name(classname):
-    return classname in builtin_classes - {"int", "float", "bool", "Nil"}
+    return classname not in {"PackedByteArray", "PackedInt32Array", "PackedInt64Array", "PackedFloat32Array", "PackedFloat64Array" }
 
 def generate_array_set_item(class_):
     res = ""
@@ -1832,7 +1832,12 @@ def generate_array_get_item(class_):
         print(f"not is builtin_class_in_name: {class_['name']}")
         res += f"{INDENT * 2}pyobject = self._ptr.call_with_return({method_ids['normal_methods'][class_['name']]['__getitem__']}, (index,))"
     else:
-        res += f"{INDENT * 2}pyobject = {class_['name']}.construct_without_init()"
+        if not ("Packed" in class_["name"] and "Array" in class_["name"]) or "Typed" in class_["name"]:
+            return res
+        class_to_builtin = {"PackedVector2Array":"Vector2", "PackedVector3Array":"Vector3", "PackedVector2iArray":"Vector2i",
+                       "PackedVector3iArray":"Vector3i", "PackedStringArray":"String", "PackedColorArray":"Color",
+                            "PackedVector4Array":"Vector4"}
+        res += f"{INDENT * 2}pyobject = {class_to_builtin[class_['name']]}.construct_without_init()"
         res = generate_newline(res)
         res += f"{INDENT * 2}pyobject._ptr = self._ptr.call_with_return({method_ids['normal_methods'][class_['name']]['__getitem__']}, (index,))"
     res = generate_newline(res)
