@@ -1,49 +1,20 @@
-[gd_scene load_steps=3 format=3 uid="uid://bx11ebu3iwgdm"]
+[gd_scene format=3 uid="uid://bx11ebu3iwgdm"]
 
 [ext_resource type="Script" path="res://TestRunner.py" id="2"]
 [ext_resource type="Script" path="res://TestObject.py" id="2_hkbyt"]
 
-[node name="Node3D" type="Node3D"]
+[node name="Node3D" type="Node3D" unique_id=317619101]
 
-[node name="TestRunner" type="Node3D" parent="."]
-_import_path = NodePath("")
-unique_name_in_owner = false
-process_mode = 0
-process_priority = 0
-process_physics_priority = 0
-process_thread_group = 0
-physics_interpolation_mode = 0
-auto_translate_mode = 0
-editor_description = ""
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
-rotation_edit_mode = 0
-rotation_order = 2
-top_level = false
-visible = true
-visibility_parent = NodePath("")
+[node name="TestRunner" type="Node3D" parent="." unique_id=1560728492]
 script = ExtResource("2")
 test_object_path = NodePath("../TestObject")
 
-[node name="TestObject" type="Node3D" parent="."]
-_import_path = NodePath("")
-unique_name_in_owner = false
-process_mode = 0
-process_priority = 0
-process_physics_priority = 0
-process_thread_group = 0
-physics_interpolation_mode = 0
-auto_translate_mode = 0
-editor_description = ""
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
-rotation_edit_mode = 0
-rotation_order = 2
-top_level = false
-visible = true
-visibility_parent = NodePath("")
+[node name="TestObject" type="Node3D" parent="." unique_id=1937643268]
 script = ExtResource("2_hkbyt")
+test_float = 0.1
 metadata/is_test_object = true
 
-[node name="TextEdit" type="TextEdit" parent="."]
+[node name="TextEdit" type="TextEdit" parent="." unique_id=980414837]
 unique_name_in_owner = true
 offset_right = 8.0
 offset_bottom = 8.0

@@ -1999,6 +1999,8 @@ def generate_str_method(class_):
     res = generate_newline(res)
     return res
 
+def generate_len():
+    return  f"{INDENT}def __len__(self):return self.size()\n"
 
 def generate_special_methods(class_):
     res = ""
@@ -2016,6 +2018,12 @@ def generate_special_methods(class_):
     if class_["name"] in builtin_classes:
         res = generate_newline(res)
         res += generate_str_method(class_)
+
+    if "array" in class_["name"].lower() or class_["name"] == "Dictionary":
+        res = generate_newline(res)
+        res += generate_len()
+        res = generate_newline(res)
+
 
     if class_["name"] in ("PackedInt32Array", "PackedInt64Array", "PackedFloat32Array", "PackedFloat64Array", "PackedByteArray"):
         res += generate_from_list_array(class_)

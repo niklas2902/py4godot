@@ -2360,17 +2360,32 @@ def generate_array_get_item_wrapper(class_):
     elif class_["name"] == "PackedColorArray":
         res += f"{INDENT}PyObject* {class_['name']}::py_getitem(int index)" + "{"
         res = generate_newline(res)
-        res += f"{INDENT * 2}return wrapper__create_wrapper_from_Color_ptr(std::make_shared<Color>(Color::new_static(((void**)functions::get_packed_color_array_operator_index()(&godot_owner, index))[0])));"
+        res += f"{INDENT * 2}std::shared_ptr<Color> _ret_ptr = std::make_shared<Color>();"
+        res = generate_newline(res)
+        res += f"{INDENT * 2}memcpy(&_ret_ptr->native_struct, functions::get_packed_color_array_operator_index()(&godot_owner, index), sizeof(_ret_ptr->native_struct));"
+        res = generate_newline(res)
+        res += f"{INDENT * 2}return wrapper__create_wrapper_from_Color_ptr(_ret_ptr);"
+        res = generate_newline(res)
         res += INDENT + "}"
     elif class_["name"] == "PackedVector3Array":
         res += f"{INDENT}PyObject* {class_['name']}::py_getitem(int index)" + "{"
         res = generate_newline(res)
-        res += f"{INDENT * 2}return wrapper__create_wrapper_from_Vector3_ptr(std::make_shared<Vector3>(Vector3::new_static(((void**)functions::get_packed_vector3_array_operator_index()(&godot_owner, index))[0])));"
+        res += f"{INDENT * 2}std::shared_ptr<Vector3> _ret_ptr = std::make_shared<Vector3>();"
+        res = generate_newline(res)
+        res += f"{INDENT * 2}memcpy(&_ret_ptr->native_struct, functions::get_packed_color_array_operator_index()(&godot_owner, index), sizeof(_ret_ptr->native_struct));"
+        res = generate_newline(res)
+        res += f"{INDENT * 2}return wrapper__create_wrapper_from_Vector3_ptr(_ret_ptr);"
+        res = generate_newline(res)
         res += INDENT + "}"
     elif class_["name"] == "PackedVector2Array":
         res += f"{INDENT}PyObject* {class_['name']}::py_getitem(int index)" + "{"
         res = generate_newline(res)
-        res += f"{INDENT * 2}return wrapper__create_wrapper_from_Vector2_ptr(std::make_shared<Vector2>(Vector2::new_static(((void**)functions::get_packed_vector2_array_operator_index()(&godot_owner, index))[0])));"
+        res += f"{INDENT * 2}std::shared_ptr<Vector2> _ret_ptr = std::make_shared<Vector2>();"
+        res = generate_newline(res)
+        res += f"{INDENT * 2}memcpy(&_ret_ptr->native_struct, functions::get_packed_color_array_operator_index()(&godot_owner, index), sizeof(_ret_ptr->native_struct));"
+        res = generate_newline(res)
+        res += f"{INDENT * 2}return wrapper__create_wrapper_from_Vector2_ptr(_ret_ptr);"
+        res = generate_newline(res)
         res += INDENT + "}"
     elif class_["name"] == "PackedStringArray":
         res += f"{INDENT}PyObject* {class_['name']}::py_getitem(int index)" + "{"
