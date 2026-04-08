@@ -92,7 +92,7 @@ class GDSignal(Signal):
         cdef str function_name = function.__name__
         cdef object parent =  (function.__self__ if hasattr(function, '__self__') else None)
         if not parent:
-            function.gd_parent.queue_free()
+            function.gd_parent().queue_free()
             return
         cdef bytes b_function_name = function_name.encode("utf-8")
         cdef char* c_function_name = b_function_name

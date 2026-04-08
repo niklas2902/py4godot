@@ -34,3 +34,11 @@ class PythonTest(unittest.TestCase):
 		pa = PackedVector2Array.new0()
 		pa.append(Vector2.new3(0,1))
 		self.assertEqual(pa[0], Vector2.new3(0,1))
+	
+	def test_packedVector2Array_setitem(self):
+		pa = PackedVector2Array.new0()
+		pa.append(Vector2.new3(0,1))
+		pa[0] = Vector2.new3(1,1)
+		print(pa[0])
+		self.assertEqual(pa[0], Vector2.new3(1,1))
+	
