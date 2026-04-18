@@ -1123,10 +1123,14 @@ def generate_children(containing_class_, type_):
         temp.add(cls)
     already_registed_classes = temp
     res = ""
-    res += "typing.Union["
-    for cls in already_registed_classes:
-        res += ungodottype_type_array(unbitfield_type(unenumize_type(cls)), containing_class_) + ","
-    return res[:-1] +"]"
+    if len(already_registed_classes) == 1:
+        res += ungodottype_type_array(unbitfield_type(unenumize_type(cls)), containing_class_)
+        return res
+    else:
+        res += "typing.Union["
+        for cls in already_registed_classes:
+            res += ungodottype_type_array(unbitfield_type(unenumize_type(cls)), containing_class_) + ","
+        return res[:-1] +"]"
 
 def ungodottype_type_array(type_, class_name):
     if type_ == class_name:
