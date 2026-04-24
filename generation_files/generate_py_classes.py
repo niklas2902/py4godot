@@ -1780,11 +1780,7 @@ def generate_get_item_from_type_array(classname, classtype):
     res = ""
     res += f"{INDENT}def __getitem__(self,  index):"
     res = generate_newline(res)
-    res = generate_newline(res)
-    res += f"{INDENT * 2}if index < 0:"
-    res = generate_newline(res)
-    res += f"{INDENT * 3}raise KeyError(f\"Index '%s' invalid\")".replace("%s", "{index}")
-    res = generate_newline(res)
+    res += generate_index_check()
     if classtype in builtin_classes - {"int", "float", "bool", "Nil"}:
         res = generate_newline(res)
         res += f"{INDENT * 2}#cdef {classtype} pyobject = {classtype}()"
@@ -1811,10 +1807,25 @@ def generate_array_set_item(class_):
     res = ""
     res += f"{INDENT}def __setitem__(self,  index, value):"
     res = generate_newline(res)
+    res += generate_index_check()
     if not is_builtin_class_in_name(class_["name"]):
         res += f"{INDENT * 2}self._ptr.call_with_return({method_ids['normal_methods'][class_['name']]['__setitem__']}, (index, value))"
     else:
         res += f"{INDENT * 2}self._ptr.call_with_return({method_ids['normal_methods'][class_['name']]['__setitem__']}, (index, value._ptr))"
+    res = generate_newline(res)
+    return res
+
+def generate_index_check():
+    res = ""
+    res += f"{INDENT * 2}_size = self.size()"
+    res = generate_newline(res)
+    res += f"{INDENT * 2}if index >= _size or index < -_size:"
+    res = generate_newline(res)
+    res += f"{INDENT * 3}raise IndexError(f\"index '{{index}}' out of range\")"
+    res = generate_newline(res)
+    res += f"{INDENT * 2}if index < 0:"
+    res = generate_newline(res)
+    res += f"{INDENT * 3}index = self.size() + index"
     res = generate_newline(res)
     return res
 
@@ -1823,10 +1834,7 @@ def generate_array_get_item(class_):
     res = ""
     res += f"{INDENT}def __getitem__(self,  index):"
     res = generate_newline(res)
-    res = generate_newline(res)
-    res += f"{INDENT * 2}if index < 0:"
-    res = generate_newline(res)
-    res += f"{INDENT * 3}raise KeyError(f\"Index '%s' invalid\")".replace("%s", "{index}")
+    res += generate_index_check()
     res = generate_newline(res)
     if not is_builtin_class_in_name(class_["name"]):
         print(f"not is builtin_class_in_name: {class_['name']}")
