@@ -43,7 +43,15 @@ class TestObject(Node3D):
 
 	def get_text_edit_text(self):
 		return self.get_node("%TextEdit").get_text()
-
+	
+	def get_line2d_point(self, index):
+		return self.get_node("%Line2D").points[index]
+	
+	
+	def set_line2d_point(self, index, value):
+		self.get_node("%Line2D").points[index] = value
+	
+	
 	def variant_test_function(self, arg) -> object:
 		return arg
 

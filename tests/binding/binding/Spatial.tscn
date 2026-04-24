@@ -19,3 +19,7 @@ unique_name_in_owner = true
 offset_right = 8.0
 offset_bottom = 8.0
 text = "我喜欢学习物理"
+
+[node name="Line2D" type="Line2D" parent="." unique_id=993567194]
+unique_name_in_owner = true
+points = PackedVector2Array(275, 141, 108, 80)
