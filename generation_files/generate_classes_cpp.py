@@ -2247,6 +2247,11 @@ def generate_dictionary_set_item():
     res = generate_newline(res)
     res += f"{INDENT * 2}value_variant.init_from_py_object(value, type_checking__get_name_from_object(value));"
     res = generate_newline(res)
+
+    res += f"{INDENT * 2}Callback < Dictionary >* _update_callback = (Callback < Dictionary >*)_callback;"
+    res = generate_newline(res)
+    res += f"{INDENT * 2}if (_update_callback) _update_callback->callback( * this, _update_callback->instance);"
+    res = generate_newline(res)
     res += f"{INDENT}" + "}"
     res = generate_newline(res)
 
@@ -2416,11 +2421,23 @@ def generate_array_set_item_wrapper(class_):
         res += f"{INDENT}void {class_['name']}::py_setitem(int index,PyObject* value)" + "{"
         res = generate_newline(res)
         res += f"{INDENT * 2}functions::get_packed_int32_array_operator_index()(&godot_owner, index)[0] = (int32_t)(PyLong_AsLong(value));"
+
+        res = generate_newline(res)
+        res += f"{INDENT * 2}Callback < {class_['name']} >* _update_callback = (Callback < {class_['name']} >*)_callback;"
+        res = generate_newline(res)
+        res += f"{INDENT * 2}if (_update_callback) _update_callback->callback( * this, _update_callback->instance);"
+        res = generate_newline(res)
         res += INDENT + "}"
     elif class_["name"] == "PackedInt64Array":
         res += f"{INDENT}void {class_['name']}::py_setitem(int index,PyObject* value)" + "{"
         res = generate_newline(res)
         res += f"{INDENT * 2}functions::get_packed_int64_array_operator_index()(&godot_owner, index)[0] = (int64_t)(PyLong_AsLong(value));"
+
+        res = generate_newline(res)
+        res += f"{INDENT * 2}Callback < {class_['name']} >* _update_callback = (Callback < {class_['name']} >*)_callback;"
+        res = generate_newline(res)
+        res += f"{INDENT * 2}if (_update_callback) _update_callback->callback( * this, _update_callback->instance);"
+        res = generate_newline(res)
         res += INDENT + "}"
     elif class_["name"] == "PackedFloat32Array":
         res += f"{INDENT}void {class_['name']}::py_setitem(int index,PyObject* value)" + "{"
@@ -2431,11 +2448,23 @@ def generate_array_set_item_wrapper(class_):
         res += f"{INDENT}void {class_['name']}::py_setitem(int index,PyObject* value)" + "{"
         res = generate_newline(res)
         res += f"{INDENT * 2}functions::get_packed_float64_array_operator_index()(&godot_owner, index)[0] = (PyFloat_AsDouble(value));"
+
+        res = generate_newline(res)
+        res += f"{INDENT * 2}Callback < {class_['name']} >* _update_callback = (Callback < {class_['name']} >*)_callback;"
+        res = generate_newline(res)
+        res += f"{INDENT * 2}if (_update_callback) _update_callback->callback( * this, _update_callback->instance);"
+        res = generate_newline(res)
         res += INDENT + "}"
     elif class_["name"] == "PackedByteArray":
         res += f"{INDENT}void {class_['name']}::py_setitem(int index,PyObject* value)" + "{"
         res = generate_newline(res)
         res += f"{INDENT * 2}functions::get_packed_byte_array_operator_index()(&godot_owner, index)[0] = (byte)(PyLong_AsLong(value));"
+
+        res = generate_newline(res)
+        res += f"{INDENT * 2}Callback < {class_['name']} >* _update_callback = (Callback < {class_['name']} >*)_callback;"
+        res = generate_newline(res)
+        res += f"{INDENT * 2}if (_update_callback) _update_callback->callback( * this, _update_callback->instance);"
+        res = generate_newline(res)
         res += INDENT + "}"
 
     elif class_["name"] == "PackedColorArray":
@@ -2444,6 +2473,12 @@ def generate_array_set_item_wrapper(class_):
         res += f"{INDENT * 2}auto wrapper_ptr = wrapper__extract_ptr_from_ColorWrapper(value);"
         res = generate_newline(res)
         res += f"{INDENT * 2}memcpy(functions::get_packed_color_array_operator_index()(&godot_owner, index), &wrapper_ptr->native_struct, sizeof(wrapper_ptr->native_struct));"
+        res = generate_newline(res)
+
+        res = generate_newline(res)
+        res += f"{INDENT * 2}Callback < {class_['name']} >* _update_callback = (Callback < {class_['name']} >*)_callback;"
+        res = generate_newline(res)
+        res += f"{INDENT * 2}if (_update_callback) _update_callback->callback( * this, _update_callback->instance);"
         res = generate_newline(res)
         res += INDENT + "}"
     elif class_["name"] == "PackedVector3Array":
@@ -2454,6 +2489,12 @@ def generate_array_set_item_wrapper(class_):
         res = generate_newline(res)
         res += f"{INDENT * 2}memcpy(functions::get_packed_vector3_array_operator_index()(&godot_owner, index), &wrapper_ptr->native_struct, sizeof(wrapper_ptr->native_struct));"
         res = generate_newline(res)
+
+        res = generate_newline(res)
+        res += f"{INDENT * 2}Callback < {class_['name']} >* _update_callback = (Callback < {class_['name']} >*)_callback;"
+        res = generate_newline(res)
+        res += f"{INDENT * 2}if (_update_callback) _update_callback->callback( * this, _update_callback->instance);"
+        res = generate_newline(res)
         res += INDENT + "}"
     elif class_["name"] == "PackedVector2Array":
         res += f"{INDENT}void {class_['name']}::py_setitem(int index,PyObject* value)" + "{"
@@ -2463,11 +2504,23 @@ def generate_array_set_item_wrapper(class_):
         res = generate_newline(res)
         res += f"{INDENT * 2}memcpy(functions::get_packed_vector2_array_operator_index()(&godot_owner, index), &wrapper_ptr->native_struct, sizeof(wrapper_ptr->native_struct));"
         res = generate_newline(res)
+
+        res = generate_newline(res)
+        res += f"{INDENT * 2}Callback < {class_['name']} >* _update_callback = (Callback < {class_['name']} >*)_callback;"
+        res = generate_newline(res)
+        res += f"{INDENT * 2}if (_update_callback) _update_callback->callback( * this, _update_callback->instance);"
+        res = generate_newline(res)
         res += INDENT + "}"
     elif class_["name"] == "PackedStringArray":
         res += f"{INDENT}void {class_['name']}::py_setitem(int index,PyObject* value)" + "{"
         res = generate_newline(res)
         res += f"{INDENT * 2} ((void**)functions::get_packed_string_array_operator_index()(&godot_owner, index))[0] = wrapper__extract_ptr_from_StringWrapper(value)->godot_owner;"
+
+        res = generate_newline(res)
+        res += f"{INDENT * 2}Callback < {class_['name']} >* _update_callback = (Callback < {class_['name']} >*)_callback;"
+        res = generate_newline(res)
+        res += f"{INDENT * 2}if (_update_callback) _update_callback->callback( * this, _update_callback->instance);"
+        res = generate_newline(res)
         res += INDENT + "}"
     elif get_class_name(class_["name"]) == "Array":
         res += f"{INDENT}void {class_['name']}::py_setitem(int index,PyObject* value)" + "{"
@@ -2477,6 +2530,11 @@ def generate_array_set_item_wrapper(class_):
         res += f"{INDENT * 2}variant.native_ptr = (functions::get_array_operator_index()(&godot_owner, index));"
         res = generate_newline(res)
         res += f"{INDENT * 2}variant.init_from_py_object(value, type_checking__get_name_from_object(value));"
+        res = generate_newline(res)
+        res += f"{INDENT * 2}Callback < {class_['name']} >* _update_callback = (Callback < {class_['name']} >*)_callback;"
+        res = generate_newline(res)
+        res += f"{INDENT * 2}if (_update_callback) _update_callback->callback( * this, _update_callback->instance);"
+        res = generate_newline(res)
         res += INDENT + "}"
 
     else :

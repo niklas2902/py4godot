@@ -1,5 +1,10 @@
 # py4godot
 
+## Worth a Look
+
+Here is the link to a very cool project that also uses py4godot a tiny bit – check it out!
+[https://github.com/niklas2902/py4godot/discussions/216](https://github.com/niklas2902/py4godot/discussions/216)
+
 ## Other Projects
 
 There are a few other cool projects bringing Python to Godot. Check them out!

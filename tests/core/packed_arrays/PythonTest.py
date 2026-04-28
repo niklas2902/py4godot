@@ -30,12 +30,14 @@ class PythonTest(unittest.TestCase):
 	def test_len(self):
 		pa = PackedByteArray.from_list([1, 2, 3])
 		self.assertEqual(len(pa), 3)
+
 	def test_packedVector2Array(self):
 		pa = PackedVector2Array.new0()
 		pa.append(Vector2.new3(0,1))
 		self.assertEqual(pa[0], Vector2.new3(0,1))
+		self.assertEqual(pa[-1], Vector2.new3(0, 1))
 		self.assertEqual(pa.get(0), Vector2.new3(0, 1))
-	
+
 	def test_packedVector2Array_setitem(self):
 		pa = PackedVector2Array.new0()
 		pa.append(Vector2.new3(0,1))
@@ -46,4 +48,18 @@ class PythonTest(unittest.TestCase):
 		pa.get(0, Vector2.new3(2, 1))
 		self.assertEqual(pa[0], Vector2.new3(2, 1))
 
-	
+
+		pa.append(Vector2.new3(1,1))
+		pa[-1] = Vector2.new3(2,2)
+		self.assertEqual(pa[-1], Vector2.new3(2, 2))
+
+	def test_error(self):
+		pa = PackedVector2Array.new0()
+		pa.append(Vector2.new3(0,1))
+		with self.assertRaises(IndexError) as cm:
+			_ = pa[100]
+		self.assertEqual(str(cm.exception), "index '100' out of range")
+
+		with self.assertRaises(IndexError) as cm:
+			_ = pa[-100]
+		self.assertEqual(str(cm.exception), "index '-100' out of range")

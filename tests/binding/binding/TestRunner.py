@@ -34,6 +34,7 @@ class TestRunner(Node3D):
 		suite.addTest(PythonTest("test_array_add", test_object=test_object))
 		suite.addTest(PythonTest("test_call_deferred", test_object=test_object))
 		suite.addTest(PythonTest("test_get_text", test_object=test_object))
+		suite.addTest(PythonTest("test_line2d", test_object=test_object))
 		suite.addTest(PythonTest("test_basis_mult_vector3", test_object=test_object))
 		suite.addTest(PythonTest("test_basis_equals_string", test_object=test_object))
 		suite.addTest(PythonTest("test_lerp", test_object=test_object))

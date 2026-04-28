@@ -3,7 +3,7 @@ import unittest
 
 from py4godot.classes.Node3D import Node3D
 from TestObject import TestObject
-from py4godot.classes.core import Array, Vector3, PackedByteArray, Basis, Transform3D
+from py4godot.classes.core import Array, Vector3, PackedByteArray, Basis, Transform3D, Vector2
 from py4godot.functions import lerp
 from py4godot.utils.print_tools import print_error
 
@@ -58,6 +58,15 @@ class PythonTest(unittest.TestCase):
 
 	def test_get_text(self):
 		self.assertEqual("我喜欢学习物理", self.test_object.get_text_edit_text())
+	
+	def test_line2d(self):
+		self.assertEqual(self.test_object.get_line2d_point(0), Vector2.new3(275, 141))
+		self.assertEqual(self.test_object.get_line2d_point(-1), Vector2.new3(108, 80))
+		self.test_object.set_line2d_point(0, Vector2.new3(0,1))
+		self.test_object.set_line2d_point(-1, Vector2.new3(1,1))
+		self.assertEqual(self.test_object.get_line2d_point(0), Vector2.new3(0, 1))
+		self.assertEqual(self.test_object.get_line2d_point(-1), Vector2.new3(1, 1))
+		
 
 
 	def test_call_deferred(self):
@@ -90,7 +99,3 @@ class PythonTest(unittest.TestCase):
 		transform = Transform3D.new0()
 		transform.basis = Basis.new4(Vector3.LEFT, Vector3.DOWN, Vector3.BACK)
 		self.assertEqual(transform.basis, Basis.new4(Vector3.LEFT, Vector3.DOWN, Vector3.BACK))
-
-
-
-###############
