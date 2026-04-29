@@ -5,6 +5,7 @@ import subprocess
 import sys
 import argparse
 
+from config import python_ver
 
 os_name = platform.system()
 
@@ -23,11 +24,11 @@ def force_executable(python_exe):
         print(f"{python_exe} does not exist!")
 
 if os_name == "Windows":
-    python_exe = "tests/libraries/numpy/addons/py4godot/cpython-3.14.3-windows64/python/python.exe"
+    python_exe = f"tests/libraries/numpy/addons/py4godot/{python_ver}-windows64/python/python.exe"
 elif os_name == "Darwin":
-    python_exe = "tests/libraries/numpy/addons/py4godot/cpython-3.14.3-macos64/python/bin/python3"
+    python_exe = f"tests/libraries/numpy/addons/py4godot/{python_ver}-darwin64/python/bin/python3"
 elif os_name == "Linux":
-    python_exe = "tests/libraries/numpy/addons/py4godot/cpython-3.14.3-linux64/python/bin/python3"
+    python_exe = f"tests/libraries/numpy/addons/py4godot/{python_ver}-linux64/python/bin/python3"
     force_executable(python_exe)
 else:
     raise RuntimeError(f"Unsupported OS: {os_name}")
