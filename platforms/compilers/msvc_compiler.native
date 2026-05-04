@@ -1,2 +1,4 @@
 [binaries]
 cpp = ['cl']
+ar = 'lib'
+ld = 'link'
