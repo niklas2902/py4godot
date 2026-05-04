@@ -1,4 +1,4 @@
-name: release windows
+name: test windows
 on:
   workflow_dispatch:
 jobs:
