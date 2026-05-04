@@ -1,4 +1,4 @@
-name: test windows
+name: release windows
 on:
   workflow_dispatch:
 jobs:
@@ -15,6 +15,17 @@ jobs:
         uses: actions/setup-python@v2
         with:
           python-version: "3.11.3"
+
+      - name: Set up MSVC build environment (x64)
+        uses: ilammy/msvc-dev-cmd@v1
+        with:
+          arch: x64
+
+      - name: Verify MSVC is available
+        shell: cmd
+        run: |
+          where cl
+          cl /?
 
       - name: Cache py4godot/classes directory
         id: cache-py4godot-classes
@@ -33,7 +44,6 @@ jobs:
           exit_code=$?
           if [ $exit_code -eq 0 ]; then
             echo "Cache exists"
-            # Add any actions you want to take on success
           else
             echo "Cache does not exist"
             exit 0
@@ -41,8 +51,7 @@ jobs:
           set -e
 
       - name: Print variables
-        run: |
-          python meson_scripts/variables.py
+        run: python meson_scripts/variables.py
 
       - name: Cache pip
         uses: actions/cache@v3
@@ -54,8 +63,9 @@ jobs:
 
       - name: Install dependencies
         run: |
+          python -m pip install --upgrade pip
           python -m pip install -r requirements.txt
-          python -m pip install flake8
+          python -m pip install flake8 meson ninja
 
       - name: Print structure
         run: python meson_scripts/print_tools.py
@@ -67,16 +77,8 @@ jobs:
         shell: bash
         run: python cythonize_files.py
 
-      - name: Set up build environment
-        shell: pwsh
-        run: |
-          # Use MinGW compilers natively on Windows
-          echo "CC=gcc" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append
-          echo "CXX=g++" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append
-          echo "AR=ar" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append
-          echo "STRIP=strip" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append
-
       - name: Build
+        shell: cmd
         run: python build.py --target_platform=windows64 --compiler=msvc -create_plugin=False -buildtype=release -run_tests=False -download_godot=True
 
       - name: Create cache
@@ -84,38 +86,6 @@ jobs:
 
       - name: Print structure
         run: python meson_scripts/print_tools.py
-
-      - name: Copy MinGW runtime DLLs
-        shell: pwsh
-        run: |
-          # Create a directory for the DLLs
-          New-Item -ItemType Directory -Force -Path build\py4godot\mingw_dlls | Out-Null
-
-          # Copy essential MinGW runtime DLLs from MSYS2 installation
-          $mingwBin = "C:\msys64\mingw64\bin"
-          $dllsToCopy = @(
-              "libgcc_s_seh-1.dll",
-              "libstdc++-6.dll",
-              "libwinpthread-1.dll"
-          )
-
-          foreach ($dll in $dllsToCopy) {
-              $src = Join-Path $mingwBin $dll
-              if (Test-Path $src) {
-                  Copy-Item $src -Destination build\py4godot\mingw_dlls\ -Force
-                  Write-Host "Copied: $dll"
-              } else {
-                  Write-Host "Not found: $dll"
-              }
-          }
-
-          # Optionally copy any additional DLLs that the build may depend on.
-          # Be selective here — copying every DLL from mingw64\bin would bloat the artifact.
-          # Add extra DLL names above if the build complains about missing libraries.
-
-          # List what DLLs were copied
-          Write-Host "Copied DLLs:"
-          Get-ChildItem build\py4godot\mingw_dlls\
 
       - name: Upload artifact
         uses: actions/upload-artifact@v4
