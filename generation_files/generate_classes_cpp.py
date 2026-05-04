@@ -2635,7 +2635,7 @@ def generate_special_methods_packed_array(class_):
     res = generate_newline(res)
     res += f"{INDENT * 2}view.internal = NULL;"
     res = generate_newline(res)
-    res += f"{INDENT * 2}view.format = {format_code};"
+    res += f"{INDENT * 2}view.format = (char*){format_code};"
     res = generate_newline(res)
     res += f"{INDENT * 2}PyObject* result = PyMemoryView_FromBuffer(&view);"
     res = generate_newline(res)
