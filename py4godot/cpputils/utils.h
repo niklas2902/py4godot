@@ -14,7 +14,7 @@ static bool is_none(PyObject* pyobject){
     return pyobject == Py_None;
 }
 
-static void print_error(char* error_message){
+static void print_error(const char* error_message){
     //functions::get_print_error()(error_message, "error", "error", 1, 1);
 }
 
