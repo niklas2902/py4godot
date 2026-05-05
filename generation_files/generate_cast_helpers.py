@@ -36,10 +36,6 @@ def clear_vals():
     cast_type = """#include "py4godot/cppcore/cast_type.h"
 #include <cassert>
 
-constexpr unsigned int str2int(const char* str, int h = 0)
-{
-    return !str[h] ? 5381 : (str2int(str, h+1) * 33) ^ str[h];
-}
 
 void init_casting(){
 

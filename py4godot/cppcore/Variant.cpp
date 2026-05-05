@@ -10,11 +10,6 @@
 #include "functions.h"
 
 using namespace godot;
-
-constexpr unsigned int str2int(const char* str, int h = 0)
-{
-    return !str[h] ? 5381 : (str2int(str, h+1) * 33) ^ str[h];
-}
 void Variant::init_godot_owner(void* owner, GDExtensionVariantType type){
     auto constructor = functions::get_get_variant_from_type_constructor()(type);
     constructor(&native_ptr, &owner);
