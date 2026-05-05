@@ -78,7 +78,7 @@ void PyLanguage::destroy(){
 
   void PyLanguage::_get_type(GDExtensionTypePtr res){
     print_error("_get_type");
-    char* path = "Python";
+    const char* path = "Python";
     c_string_to_string_result(path, (void**)res);
   }
 
