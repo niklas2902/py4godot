@@ -29,6 +29,7 @@ namespace godot{
 
 
         virtual PyObject* switch_call_return(int method_hash, PyObject* args_tuple){
+            return Py_None;
         }
     };
 }
