@@ -71,7 +71,7 @@ void PyResourceFormatSaver::_init_values(){}
     char* c_path;
     gd_string_to_c_string(path, &c_path);
     auto ext = std::filesystem::path(c_path).extension().string();
-    recognized = recognized && (ext == ".py" || ext == ".pyi" || ext == ".pyx");
+    recognized = recognized && (ext == std::string{".py"} || ext == std::string{".pyi"} || ext == std::string{".pyx"});
     delete[] c_path;
 
     *reinterpret_cast<bool*>(res) = recognized;
