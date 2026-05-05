@@ -1,3 +1,4 @@
+#pragma once
 #include "cast_helpers_api.h"
 #include "Python.h"
 #include "py4godot/godot_bindings/macros.h"
