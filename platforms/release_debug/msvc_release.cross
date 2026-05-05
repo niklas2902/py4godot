@@ -15,6 +15,7 @@ cpp_link_args = [
     '/LTCG',
     '/OPT:REF',
     '/OPT:ICF=3',
-    '/INCREMENTAL:NO']
+    '/INCREMENTAL:NO'],
+    '/VERBOSE'
 [properties]
 buildtype = 'release'
