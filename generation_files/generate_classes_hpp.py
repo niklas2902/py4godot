@@ -789,7 +789,7 @@ def generate_classes(classes, filename, is_core=False):
             continue
         res = generate_newline(res)
         res = generate_newline(res)
-        res += f"class LIBRARY_API  {class_['name']}:public {get_base_class(class_)}" + "{"
+        res += f"class {class_['name']}:public {get_base_class(class_)}" + "{"
         res = generate_newline(res)
         res += f"{INDENT} public:"
         res = generate_newline(res)
