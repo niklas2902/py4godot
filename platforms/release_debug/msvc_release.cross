@@ -12,7 +12,6 @@ cpp_args = [
 cpp_link_args = [
     '/OPT:REF',
     '/OPT:ICF=3',
-    '/INCREMENTAL:NO',
-    '/VERBOSE']
+    '/INCREMENTAL:NO']
 [properties]
 buildtype = 'release'
