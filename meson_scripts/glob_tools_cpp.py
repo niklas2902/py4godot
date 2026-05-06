@@ -15,6 +15,4 @@ if __name__=="__main__":
                     continue
                 if "functions" in entry and not "godot_bindings" in entry:
                     continue
-                if "cppcore" in entry:
-                    continue
                 print(entry.lstrip("../"))
