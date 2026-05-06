@@ -79,7 +79,7 @@ jobs:
 
       - name: Build
         shell: cmd
-        run: python build.py --target_platform=windows64 --compiler=msvc -create_plugin=False -buildtype=release -run_tests=False -download_godot=True
+        run: python build.py --target_platform=windows64 --compiler=msvc -create_plugin=False -buildtype=debugoptimized -run_tests=False -download_godot=True
 
       - name: Create cache
         run: python meson_scripts/create_cache.py
