@@ -6,7 +6,6 @@ cpp_args = [
     '-Os',        # Optimize for size
     '-ffunction-sections', # Place each function in its own section in the output file
     '-fdata-sections',     # Place each data item in its own section in the output file
-    '-fvisibility=hidden', # Hide symbols by default (only expose what's necessary)
     '-fno-rtti',           # Disable RTTI (if runtime type information is not needed)
     '-DNDEBUG']
 cpp_link_args = [
