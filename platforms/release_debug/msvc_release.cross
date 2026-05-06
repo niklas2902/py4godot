@@ -1,9 +1,7 @@
 [built-in options]
 cpp_args = [
     '/O1', '/Oi', '/Oy',
-    '/Gy-',
-    '/Gw-',
-    '/GL',
+    '/Gy', '/Gw',
     '/Zc:inline',
     '/Zc:threadSafeInit-',
     '/GS-',
@@ -12,7 +10,6 @@ cpp_args = [
     '/DNDEBUG']
 
 cpp_link_args = [
-    '/LTCG',
     '/OPT:REF',
     '/OPT:ICF=3',
     '/INCREMENTAL:NO',

@@ -1,6 +1,6 @@
 project('py4godot', 'cpp',
     meson_version: '>=1.6.0',
-    default_options: ['cpp_std=c++20', 'unity=on', 'unity_size=50'])
+    default_options: ['cpp_std=c++20', 'unity=on'])
 cc = meson.get_compiler('cpp')
 python_ver = meson.get_external_property('python_ver')
 python_ver_short = meson.get_external_property('python_ver_short')
