@@ -411,18 +411,23 @@ def generate_common_methods(class_):
     result = generate_newline(result)
     result += generate_set_owner(class_)
     result = generate_newline(result)
-    result += generate_switch_methods()
+    result += generate_switch_methods(class_["name"] in builtin_classes)
     result = generate_newline(result)
     return result
 
-def generate_switch_methods():
+def generate_library_api(is_core):
+    if is_core:
+        return "LIBRARY_API"
+    return ""
+
+def generate_switch_methods(is_core):
     res = ""
     res += f"{INDENT}virtual PyObject* switch_call_return(int method_hash, PyObject* args_tuple);"
     res = generate_newline(res)
-    res += f"{INDENT}LIBRARY_API static PyObject* call_constructor(int constructor_id, PyObject* args_tuple);"
+    res += f"{INDENT}{generate_library_api(is_core)} static PyObject* call_constructor(int constructor_id, PyObject* args_tuple);"
     res = generate_newline(res)
 
-    res += f"{INDENT}LIBRARY_API static PyObject* call_static_method_with_return(int method_hash, PyObject* args_tuple);"
+    res += f"{INDENT}{generate_library_api(is_core)} static PyObject* call_static_method_with_return(int method_hash, PyObject* args_tuple);"
     res = generate_newline(res)
     return res
 
@@ -789,7 +794,7 @@ def generate_classes(classes, filename, is_core=False):
             continue
         res = generate_newline(res)
         res = generate_newline(res)
-        if not is_core:
+        if class_["name"] not in builtin_classes:
             res += f"class {class_['name']}:public {get_base_class(class_)}" + "{"
         else:
             res += f"class LIBRARY_API {class_['name']}:public {get_base_class(class_)}" + "{"
