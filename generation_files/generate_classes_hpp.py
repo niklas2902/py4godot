@@ -419,10 +419,10 @@ def generate_switch_methods():
     res = ""
     res += f"{INDENT}virtual PyObject* switch_call_return(int method_hash, PyObject* args_tuple);"
     res = generate_newline(res)
-    res += f"{INDENT}static PyObject* call_constructor(int constructor_id, PyObject* args_tuple);"
+    res += f"{INDENT}LIBRARY_API static PyObject* call_constructor(int constructor_id, PyObject* args_tuple);"
     res = generate_newline(res)
 
-    res += f"{INDENT}static PyObject* call_static_method_with_return(int method_hash, PyObject* args_tuple);"
+    res += f"{INDENT}LIBRARY_API static PyObject* call_static_method_with_return(int method_hash, PyObject* args_tuple);"
     res = generate_newline(res)
     return res
 
@@ -789,7 +789,10 @@ def generate_classes(classes, filename, is_core=False):
             continue
         res = generate_newline(res)
         res = generate_newline(res)
-        res += f"class {class_['name']}:public {get_base_class(class_)}" + "{"
+        if not is_core:
+            res += f"class {class_['name']}:public {get_base_class(class_)}" + "{"
+        else:
+            res += f"class LIBRARY_API {class_['name']}:public {get_base_class(class_)}" + "{"
         res = generate_newline(res)
         res += f"{INDENT} public:"
         res = generate_newline(res)
