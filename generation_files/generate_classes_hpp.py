@@ -416,7 +416,7 @@ def generate_common_methods(class_):
     return result
 
 def generate_library_api(is_core):
-    if is_core:
+    if not is_core:
         return "LIBRARY_API"
     return ""
 
