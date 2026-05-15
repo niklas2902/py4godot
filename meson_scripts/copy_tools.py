@@ -72,14 +72,18 @@ def run(platform):
 
 def setup_onnx(platform):
     onnx_path = ""
+    ending = ""
     if "android" in platform:
         onnx_path = "onnxruntime-android-arm64"
+        ending = "libonnx_wrapper.so"
     if "linux" in platform:
         onnx_path = "onnxruntime-linux-x64"
+        ending = "onnx_wrapper.so"
     if "darwin" in platform:
         onnx_path = "onnxruntime-osx-arm64"
-    shutil.move(f"build/final/{platform}/{python_ver}-{platform}/python/lib/python3.14/site-packages/onnx_wrapper.so",
-         f"build/final/{platform}/{python_ver}-{platform}/python/lib/python3.14/site-packages/py4godot/custom/onnx_wrapper.so")
+        ending = "onnx_wrapper.dylib"
+    shutil.move(f"build/final/{platform}/{python_ver}-{platform}/python/lib/python3.14/site-packages/{ending}",
+         f"build/final/{platform}/{python_ver}-{platform}/python/lib/python3.14/site-packages/py4godot/custom/{ending}")
     for file_path in glob.glob(f"**/onnxruntime/{onnx_path}/lib/*", recursive=True):
         if isdir(file_path):
             continue
