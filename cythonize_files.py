@@ -36,7 +36,8 @@ def main():
         "py4godot/godot_bindings/binding4_godot4.pyx",
         "py4godot/wrappers/wrappers.pyx",
         "py4godot/wrappers/type_checking.pyx",
-        "py4godot/utils/CPPWrapper.pyx"
+        "py4godot/utils/CPPWrapper.pyx",
+        "py4godot/custom/*.pyx",
 
     ]
 

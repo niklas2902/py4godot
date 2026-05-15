@@ -25,5 +25,7 @@ if __name__ == "__main__":
                 continue
             if "type_checking_wrapper" in entry or "wrappers_wrapper" in entry:
                 continue
+            if "custom_cpp" in entry or "custom" in entry:
+                continue
 
             print(entry.lstrip("../").replace(".cpp", ""))

@@ -1,4 +1,5 @@
 import shutil
+from os.path import isdir
 from shutil import copy, copytree, rmtree
 import os
 import glob
@@ -46,6 +47,8 @@ def run(platform):
                          entry.lstrip("build").replace("#", "/")).
                      replace(".dylib", ".so"))  # dst can be a folder; use copy2() to preserve timestamp
 
+    setup_onnx(platform)
+
     if "windows" in platform:
         list_dll = glob.glob("**/*.pdb", recursive=True)
     else:
@@ -64,7 +67,24 @@ def run(platform):
                 exist_ok=True)
             copy(entry,
                  f"build/final/{platform}/{python_ver}-{platform}/python/Lib/site-packages/" + strip_platform(
-                     entry.lstrip("build").replace("#", "/")))  # dst can be a folder; use copy2() to preserve timestamp
+                     entry.lstrip("build").replace("#", "/")))
+
+
+def setup_onnx(platform):
+    onnx_path = ""
+    if "android" in platform:
+        onnx_path = "onnxruntime-android-arm64"
+    if "linux" in platform:
+        onnx_path = "onnxruntime-linux-x64"
+    if "darwin" in platform:
+        onnx_path = "onnxruntime-osx-arm64"
+    shutil.move(f"build/final/{platform}/{python_ver}-{platform}/python/lib/python3.14/site-packages/onnx_wrapper.so",
+         f"build/final/{platform}/{python_ver}-{platform}/python/lib/python3.14/site-packages/py4godot/custom/onnx_wrapper.so")
+    for file_path in glob.glob(f"**/onnxruntime/{onnx_path}/lib/*", recursive=True):
+        if isdir(file_path):
+            continue
+        file_name = os.path.basename(file_path)
+        shutil.copy(file_path, f"build/final/{platform}/{python_ver}-{platform}/python/lib/python3.14/site-packages/py4godot/custom/{file_name}.so")
 
 
 def copy_main(platform):

@@ -27,6 +27,15 @@ endif
 message('target_platform: ' + target_machine.system())
 if target_machine.system() == 'android'
     prefix = 'lib'
+    onnx_path = 'onnxruntime-android-arm64'
+endif
+
+if target_machine.system() == 'linux'
+    onnx_path = 'onnxruntime-linux-x64'
+endif
+
+if target_machine.system() == 'darwin'
+    onnx_path = 'onnxruntime-osx-arm64'
 endif
 
 message('platform:' + platform_format)
@@ -157,6 +166,26 @@ foreach source : sources
     cpp_args:cpp_args, install_rpath: '$ORIGIN/../lib',
     build_rpath : '$ORIGIN/../lib')
 endforeach
+
+onnxruntime_dep = cc.find_library('onnxruntime', dirs:meson.current_source_dir()+'/py4godot/onnxruntime/' + onnx_path + '/lib', required : true)
+onnx_library = shared_library('onnx_wrapper',
+                        'py4godot/custom_cpp/gesture_interferer.cpp',
+                        include_directories:['py4godot/custom_cpp','py4godot/onnxruntime/' + onnx_path + '/include'],name_prefix:'',
+                         c_args:extra_args, link_args:link_args,dependencies:[onnxruntime_dep],
+                        cpp_args:cpp_args,
+                        name_prefix:prefix,
+                        build_rpath: '$ORIGIN',
+                        install_rpath: '$ORIGIN')
+
+onnx_bindings_library = shared_library('py4godot#custom#gesture_interferer', ['py4godot/custom/gesture_interferer.cpp'],
+    dependencies:[dep_py], include_directories:[internal_inc,
+    'py4godot/custom_cpp', 'py4godot/onnxruntime/' + onnx_path],
+    name_prefix:'',
+    c_args:extra_args,
+    link_args : link_args,
+    link_with : onnx_library,
+    build_rpath: '$ORIGIN',
+    install_rpath: '$ORIGIN')
 if godot_program.found()
     #test('test_vector3', godot_program, args : ['--path', 'tests/core/vector3', '--headless'], workdir:meson.global_source_root(), timeout:100, is_parallel:false)
     #test('test_vector2', godot_program, args : ['--path', 'tests/core/vector2', '--headless'], workdir:meson.global_source_root(),  timeout:100, is_parallel:false)

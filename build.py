@@ -198,8 +198,8 @@ try:
         print("command:\n", command)
         res = subprocess.Popen(msvc_init + command,shell=True)
         res.wait()
-
-    fix_macos_paths()
+    if "darwin" in args.target_platform:
+        fix_macos_paths()
     create_gdextension(args.target_platform)
     copy_tools.run(args.target_platform)
     copy_tools.copy_main(args.target_platform)
