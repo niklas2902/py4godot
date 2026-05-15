@@ -71,5 +71,3 @@ def fix_macos_paths():
             subprocess.run(command, check=True)
         except subprocess.CalledProcessError as e:
             print(f"Error updating {abs_entry}: {e}")
-
-fix_macos_paths()
