@@ -95,9 +95,6 @@ void init_pluginscript_api(){
 
 
     // Buffer to hold the converted narrow string
-    char python_home_narrow[256];
-    wcstombs(python_home_narrow, PYTHONHOME, sizeof(python_home_narrow));
-
     char current_dir[256];
     /*if (_getcwd(current_dir, sizeof(current_dir)) == NULL) {
         print_error("Error getting current directory");
@@ -122,12 +119,15 @@ void init_pluginscript_api(){
         std::string str_user_dir{c_user_dir};
         delete c_user_dir;
 
-        static std::wstring python_home_wide = user_dir + L"/files/" + PYTHONHOME;
-        static std::string python_path = str_user_dir + "/files/" + PYTHONPATH;
+        static std::wstring python_home_wide = user_dir + L"files/" + PYTHONHOME;
+        static std::string python_path = str_user_dir + "files/" + PYTHONPATH;
     #else
         static std::wstring python_home_wide = PYTHONHOME;
         static std::string python_path = PYTHONPATH;
     #endif
+    char python_home_narrow[256];
+    wcstombs(python_home_narrow, python_home_wide.c_str(), sizeof(python_home_narrow));
+
 
     Py_SetPythonHome(python_home_wide.c_str());
     // Initialize interpreter but skip initialization registration of signal handlers
