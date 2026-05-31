@@ -90,6 +90,8 @@ def generate_constants_classes(json_path):
     for class_name, consts in grouped.items():
         if class_name not in ("Vector2, Vector3,Vector3i, Transform2D, Vector2i, Vector4i, Vector4, Plane, "
             "Quaternion, Transform3D, Color, Basis, Projection"):
+            if class_name in "GlobalConstants":
+                continue
             output_lines.append(f"from py4godot.classes.{class_name} import {class_name}")
 
     for class_name, consts in grouped.items():
@@ -103,7 +105,10 @@ def generate_constants_classes(json_path):
                     formatted_value = construct_value(value)
                 else:
                     formatted_value = str(value)
-                output_lines.append(f"{class_name}.{name} = {formatted_value}")
+                if class_name not in "GlobalConstants":
+                    output_lines.append(f"{class_name}.{name} = {formatted_value}")
+                else:
+                    output_lines.append(f"{name} = {formatted_value}")
 
         output_lines.append("")  # Empty line after each class
 
