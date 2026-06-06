@@ -1706,6 +1706,8 @@ def generate_classes(classes, filename, is_core=False, is_typed_array=False):
         if class_["name"] not in builtin_classes and not is_typed_array:
             res += generate_register_cast(class_["name"])
             res += generate_register_class(class_["name"])
+            if is_singleton(class_["name"]):
+                res += f"{class_['name']}Singleton = None"
     if is_core:
         res += create_core_classes_set()
     text_to_write = "# distutils: language=c++\n"+res

@@ -176,6 +176,7 @@ def copy_experimental(platform):
     for file in [f"{py4godot_version}/pluginscript_api/utils/experimental.py",
                  f"{py4godot_version}/pluginscript_api/utils/annotation_tools.py",
                  f"{py4godot_version}/utils/smart_cast.py",
+                 f"{py4godot_version}/utils/singleton_instantiation.py",
                  f"{py4godot_version}/methods.py",
                  f"{py4godot_version}/singletons.py",
                  f"{py4godot_version}/variant_types.py",
