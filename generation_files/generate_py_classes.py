@@ -1919,6 +1919,14 @@ def generate_next_array(class_):
 
     return res
 
+def generate_getitem_class(class_):
+    res = ""
+    res+= f"{INDENT}def __class_getitem__(cls, item):"
+    res = generate_newline(res)
+    res += f"{INDENT * 2}cls.type_ = item"
+    res = generate_newline(res)
+    res += f"{INDENT*2}return cls"
+    return res
 
 def generate_special_methods_array(class_):
     res = ""
@@ -1929,6 +1937,8 @@ def generate_special_methods_array(class_):
     res += generate_iter_array(class_)
     res = generate_newline(res)
     res += generate_next_array(class_)
+    res = generate_newline(res)
+    res += generate_getitem_class(class_)
     res = generate_newline(res)
     return res
 
