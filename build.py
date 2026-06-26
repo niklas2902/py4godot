@@ -218,9 +218,6 @@ try:
         shutil.copy("build_resources/dependencies.txt", f"build/{py4godot_version}/dependencies.txt")
         shutil.copy("build_resources/install_dependencies.py", f"build/{py4godot_version}/install_dependencies.py")
         shutil.copy("build_resources/python.gdextension", f"build/{py4godot_version}/python.gdextension")
-        shutil.copy("build_resources/export_py4godot.gd", f"build/{py4godot_version}/export_py4godot.gd")
-        shutil.copy("build_resources/export_py4godot_main.gd", f"build/{py4godot_version}/export_py4godot_main.gd")
-        shutil.copy("build_resources/plugin.cfg", f"build/{py4godot_version}/plugin.cfg")
         shutil.copy("build_resources/signal_script.py", f"build/{py4godot_version}/signal_script.py")
         with open(f"build/{py4godot_version}/{python_ver}-{args.target_platform}/.gdignore", "w"):
             pass
