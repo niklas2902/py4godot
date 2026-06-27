@@ -136,6 +136,9 @@ jobs:
         with:
           name: py4godot-windows
           path: py4godot/install_dir/addons/py4godot
+      - name: Downlaod_artifact
+        run: cd py4godot && wget https://raw.githubusercontent.com/niklas2902/py4godot/refs/heads/master/README.md
+        
 
       - name: Upload Zipped Artifact
         uses: actions/upload-artifact@v4
