@@ -137,7 +137,7 @@ jobs:
           name: py4godot-windows
           path: py4godot/install_dir/addons/py4godot
       - name: Downlaod_artifact
-        run: wget -P py4godot/install_dir/addons/py4godot https://raw.githubusercontent.com/niklas2902/py4godot/refs/heads/master/LICENSE.md
+        run: wget -P py4godot/install_dir/addons/py4godot https://raw.githubusercontent.com/niklas2902/py4godot/refs/heads/master/LICENSE
         
 
       - name: Upload Zipped Artifact
