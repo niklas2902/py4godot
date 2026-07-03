@@ -78,9 +78,6 @@ if __name__ == "__main__":
     create_gdextension(args.target_platform)
     shutil.copy("build_resources/dependencies.txt", f"example/addons/{py4godot_version}/dependencies.txt")
     shutil.copy("build_resources/install_dependencies.py", f"example/addons/{py4godot_version}/install_dependencies.py")
-    shutil.copy("build_resources/export_py4godot.gd", f"example/addons/{py4godot_version}/export_py4godot.gd")
-    shutil.copy("build_resources/export_py4godot_main.gd", f"example/addons/{py4godot_version}/export_py4godot_main.gd")
-    shutil.copy("build_resources/plugin.cfg", f"example/addons/{py4godot_version}/plugin.cfg")
     shutil.copy("build_resources/signal_script.py", f"example/addons/{py4godot_version}/signal_script.py")
     download_get_pip(f"example/addons/{py4godot_version}")
 
