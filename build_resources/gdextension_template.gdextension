@@ -2,7 +2,7 @@
 
 entry_symbol = "initialize_pythonscript"
 compatibility_minimum="4.7.0"
-version = "4.7-alpha-18"
+version = "4.7-alpha-19"
 [libraries]
 
 windows.debug.x86_64 = "{python_ver}-windows64/python/pythonscript.dll"
