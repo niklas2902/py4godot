@@ -305,9 +305,10 @@ def collect_gd_properties_for_cls(cls):
 
 def collect_signals_for_cls(cls):
     signals = []
-    for attr in dir(cls):
-        if type(getattr(cls, attr)) == SignalDescription:
-            signals.append(getattr(cls, attr))
+    for klass in cls.__mro__:
+        for attr in dir(cls):
+            if hasattr(klass, attr) and type(getattr(klass, attr)) == SignalDescription:
+                signals.append(getattr(klass, attr))
     return signals
 
 def gdmethod(func):
