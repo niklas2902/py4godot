@@ -2,6 +2,7 @@
 #include "py4godot/script_extension/PyScriptExtension.h"
 #include "py4godot/script_language/PyLanguage.h"
 #include "py4godot/cppclasses/FileAccess/FileAccess.h"
+#include "py4godot/cppclasses/ResourceLoader/ResourceLoader.h"
 #include "py4godot/godot_bindings/main.h"
 #include "py4godot/cpputils/utils.h"
 #include "py4godot/cppclasses/Script/Script.h"
@@ -134,14 +135,29 @@ void PyResourceFormatLoader::_load( String& path, String& original_path, bool us
 
     PyScriptExtension* script_extension = nullptr;
     auto string_path = std::string{c_path};
-    script_extension = PyScriptExtension::constructor(lang);
-    path_to_script_extension[string_path] = script_extension;
+   //cript_extension = PyScriptExtension::constructor(lang);
+    //path_to_script_extension[string_path] = script_extension;
+    auto shared_string_path = std::make_shared<String>(path);
+
+    bool was_cached = false;
+    if(ResourceLoader::get_instance()->has_cached(path)){
+        auto script = ResourceLoader::get_instance()->py_get_cached_ref(shared_string_path);
+        script->set_path(path);
+        script_extension = new PyScriptExtension();
+        script_extension->godot_owner = script->godot_owner;
+        was_cached = true;
+    }
+    else{
+        script_extension = PyScriptExtension::constructor(lang);
+    }
 
     script_extension->set_path(path);
     script_extension ->_set_source_code_internal(source_code);
-
     constructor_func = functions::get_get_variant_from_type_constructor()(GDExtensionVariantType::GDEXTENSION_VARIANT_TYPE_OBJECT);
     constructor_func(res,&script_extension->godot_owner);
+    if (was_cached){
+        delete script_extension;
+    }
     //free(c_path);
 }
 

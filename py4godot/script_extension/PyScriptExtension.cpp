@@ -522,7 +522,7 @@ void PyScriptExtension::_get_method_info( StringName& method, GDExtensionTypePtr
 }
 void PyScriptExtension::_is_tool(GDExtensionTypePtr res){
     print_error("_is_tool");
-    *static_cast<bool*>(res) = false;
+    *static_cast<bool*>(res) = transfer_object.is_tool;
 }
 void PyScriptExtension::_is_valid(GDExtensionTypePtr res){
     print_error("_is_valid");

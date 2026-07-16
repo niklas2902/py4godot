@@ -239,22 +239,27 @@ def gdclass(cls = None, icon=None):
         return internal_decorator(cls)
     return internal_decorator
 
-def gdtool(cls):
-    global gd_class, is_tool
+def gdtool(cls = None, icon=None):
+    global gd_class, is_tool, class_icon
 
-    cdef str global_class_name = "global class_name:"+ class_name
-    cdef str __class__name = "cls.__name__:"+ cls.__name__
-    if cls.__name__ != class_name:
-        properties.clear()
-        default_values.clear()
+    def internal_decorator(cls):
+        global gd_class, is_tool, class_icon
+        cdef str global_class_name = "global class_name:"+ class_name
+        cdef str __class__name = "cls.__name__:"+ cls.__name__
+        if cls.__name__ != class_name:
+            properties.clear()
+            default_values.clear()
+            return cls
+        if(gd_class == None):
+            gd_class = cls
+            is_tool = True
+            class_icon = icon
+        else:
+            raise Exception(f"More than one class was marked as gd_class or gdtool class in one file ({current_class_name}, {gd_class}, {cls})")
         return cls
-    if(gd_class == None):
-        gd_class = cls
-        is_tool = True
-    else:
-        raise Exception("More than one class was marked as gd_class or gd_tool_class in one file")
-    return cls
-
+    if cls is not None:
+        return internal_decorator(cls)
+    return internal_decorator
 def create_hint(hint, type_):
     if not isinstance(hint, BaseHint):
         return hint
