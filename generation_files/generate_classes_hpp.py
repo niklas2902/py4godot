@@ -436,11 +436,12 @@ def generate_enums(class_):
         return ""
     res = ""
     for enum in class_["enums"]:
-        res += f"cpdef enum {class_['name']}__{enum['name']}:"
+        res += f"enum {class_['name']}__{enum['name']}{{"
         res = generate_newline(res)
         for enum_value in enum["values"]:
-            res += f"{INDENT}{class_['name']}__{enum_value['name']} = {enum_value['value']}"
+            res += f"{INDENT}{class_['name']}__{enum_value['name']} = {enum_value['value']},"
             res = generate_newline(res)
+        res += "};"
     res = generate_newline(res)
     return res
 
@@ -793,6 +794,8 @@ def generate_classes(classes, filename, is_core=False):
         if (class_["name"] in IGNORED_CLASSES):
             continue
         res = generate_newline(res)
+        res += generate_enums(class_)
+
         res = generate_newline(res)
         if class_["name"] not in builtin_classes:
             res += f"class {class_['name']}:public {get_base_class(class_)}" + "{"

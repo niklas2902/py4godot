@@ -140,7 +140,8 @@ void PyResourceFormatLoader::_load( String& path, String& original_path, bool us
     auto shared_string_path = std::make_shared<String>(path);
 
     bool was_cached = false;
-    if(ResourceLoader::get_instance()->has_cached(path)){
+    if(ResourceLoader::get_instance()->has_cached(path) &&
+    cache_mode == ResourceLoader__CacheMode::ResourceLoader__CACHE_MODE_REUSE){
         auto script = ResourceLoader::get_instance()->py_get_cached_ref(shared_string_path);
         script->set_path(path);
         script_extension = new PyScriptExtension();
@@ -149,9 +150,14 @@ void PyResourceFormatLoader::_load( String& path, String& original_path, bool us
     }
     else{
         script_extension = PyScriptExtension::constructor(lang);
-    }
-
-    script_extension->set_path(path);
+        if(cache_mode == ResourceLoader__CacheMode::ResourceLoader__CACHE_MODE_REPLACE ||
+        cache_mode == ResourceLoader__CacheMode::ResourceLoader__CACHE_MODE_REPLACE_DEEP){
+            script_extension->take_over_path(path);
+        }
+        else{
+            script_extension->set_path(path);
+        }
+      }
     script_extension ->_set_source_code_internal(source_code);
     constructor_func = functions::get_get_variant_from_type_constructor()(GDExtensionVariantType::GDEXTENSION_VARIANT_TYPE_OBJECT);
     constructor_func(res,&script_extension->godot_owner);
