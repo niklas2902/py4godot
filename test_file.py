@@ -16,6 +16,8 @@ command = args.godot
 project_path = args.path
 command_args = [command, "--path", project_path]
 command_args += ["--headless"]
+if "plugin" in args.path:
+    command_args += ["-e"]
 project = os.path.basename(project_path)
 stdout_log = open(f"build/{project}_godot_stdout.log", "w")
 stderr_log = open(f"build/{project}_godot_stderr.log", "w")

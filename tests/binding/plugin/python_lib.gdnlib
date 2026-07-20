@@ -1,0 +1,19 @@
+[resource]
+
+entry/Windows.64="res://addons/windows64/cpython-3.9.7-windows64/python/install/main.pyd"
+dependency/Windows.64=[  ]
+
+[general]
+
+singleton=true
+load_once=false
+symbol_prefix="godot_"
+reloadable=true
+
+[entry]
+
+Windows.64="res://addons/windows64/cpython-3.9.7-windows64/python/install/main.pyd"
+
+[dependencies]
+
+Windows.64=[  ]
