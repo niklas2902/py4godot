@@ -176,7 +176,6 @@ if godot_program.found()
     test('test_signals', py, args:['test_file.py', 'tests/binding/signals', godot_program], workdir:meson.global_source_root(), timeout:100, is_parallel:false)
     test('test_binding', py, args:['test_file.py', 'tests/binding/binding', godot_program], workdir:meson.global_source_root(), timeout:100, is_parallel:false)
     test('test_plugin', py, args:['test_file.py', 'tests/binding/plugin', godot_program], workdir:meson.global_source_root(), timeout:100, is_parallel:false)
-
     test('test_memory', py, args:['test_file.py', 'tests/binding/memory', godot_program], workdir:meson.global_source_root(), timeout:100, is_parallel:false)
     test('test_singletons', py, args:['test_file.py', 'tests/binding/singletons', godot_program], workdir:meson.global_source_root(), timeout:100, is_parallel:false)
     test('test_numpy', py, args:['tests/libraries/numpy/test_file.py', 'tests/libraries/numpy', godot_program], workdir:meson.global_source_root(), timeout:100, is_parallel:false)

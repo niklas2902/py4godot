@@ -309,6 +309,8 @@ def collect_gd_properties_for_cls(cls):
 
 
 def collect_signals_for_cls(cls):
+    if cls is None:
+        return []
     signals = []
     for klass in cls.__mro__:
         for attr in dir(cls):

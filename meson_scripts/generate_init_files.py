@@ -35,6 +35,10 @@ def gdclass(cls = None, icon=None):
     import py4godot.classes as classes
     return classes.gdclass(cls, icon)
 
+def gdtool(cls=None, icon=None):
+    import py4godot.classes as classes
+    return classes.gdtool(cls, icon)
+
 T = TypeVar("T")
 def gdproperty(type_:type, defaultval:T):
     import py4godot.properties as properties

@@ -1,5 +1,6 @@
 from py4godot.classes.EditorPlugin import EditorPlugin
-from py4godot.pluginscript_api.utils.annotations import gdtool
+from py4godot.classes import gdtool
+
 
 @gdtool
 class MyEditorPlugin(EditorPlugin):
