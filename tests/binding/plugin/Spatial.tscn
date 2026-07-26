@@ -1,0 +1,53 @@
+[gd_scene format=3 uid="uid://bx11ebu3iwgdm"]
+
+[ext_resource type="Script" path="res://TestRunner.py" id="1_qajub"]
+[ext_resource type="Script" path="res://TestObject.py" id="2_iqnod"]
+
+[node name="Node3D" type="Node3D" unique_id=317619101]
+
+[node name="TestRunner" type="Node3D" parent="." unique_id=1560728492]
+unique_name_in_owner = false
+process_mode = 0
+process_priority = 0
+process_physics_priority = 0
+process_thread_group = 0
+physics_interpolation_mode = 0
+auto_translate_mode = 0
+editor_description = ""
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+rotation_edit_mode = 0
+rotation_order = 2
+top_level = false
+visible = true
+visibility_parent = NodePath("")
+script = ExtResource("1_qajub")
+test_object_path = NodePath("../TestObject")
+
+[node name="TestObject" type="Node3D" parent="." unique_id=1937643268]
+unique_name_in_owner = false
+process_mode = 0
+process_priority = 0
+process_physics_priority = 0
+process_thread_group = 0
+physics_interpolation_mode = 0
+auto_translate_mode = 0
+editor_description = ""
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+rotation_edit_mode = 0
+rotation_order = 2
+top_level = false
+visible = true
+visibility_parent = NodePath("")
+script = ExtResource("2_iqnod")
+test_float = 0.1
+metadata/is_test_object = true
+
+[node name="TextEdit" type="TextEdit" parent="." unique_id=980414837]
+unique_name_in_owner = true
+offset_right = 8.0
+offset_bottom = 8.0
+text = "我喜欢学习物理"
+
+[node name="Line2D" type="Line2D" parent="." unique_id=993567194]
+unique_name_in_owner = true
+points = PackedVector2Array(275, 141, 108, 80)
