@@ -1289,7 +1289,7 @@ def generate_destructor(class_):
     # res = generate_newline(res)
     res += f"{INDENT}}}"
     res = generate_newline(res)
-    res += f"{INDENT}{classname}::~{classname}(){{"
+    res += f"{INDENT}LIBRARY_API {classname}::~{classname}(){{"
     res = generate_newline(res)
     if classname not in builtin_classes and classname not in typed_arrays_names:
         res += f"{INDENT}}}"
