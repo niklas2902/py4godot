@@ -68,15 +68,27 @@ jobs:
           python -m pip install -r requirements.txt
           python build.py --target_platform=linux64 --compiler=gcc 
 
-      - name: Install dependencies and build for Windows  (Ubuntu)
+      - uses: actions/setup-python@v5
         if: matrix.target == 'windows'
+        with:
+          python-version: '3.12'
+
+      - name: Set up MSVC environment
+        if: matrix.target == 'windows'
+        uses: ilammy/msvc-dev-cmd@v1
+        with:
+          arch: x64
+
+      - name: Install dependencies and build for Windows (native)
+        if: matrix.target == 'windows'
+        shell: pwsh
         run: |
-          sudo apt-get update
-          sudo apt-get install -y cmake ninja-build meson pkg-config libsdl2-dev python3-venv mingw-w64 binutils-mingw-w64
-          python3 -m venv venv
-          source venv/bin/activate
+          python -m venv venv
+          .\venv\Scripts\Activate.ps1
+          python -m pip install --upgrade pip
           python -m pip install -r requirements.txt
-          python build.py --target_platform=windows64 --compiler=g++-mingw 
+          python -m pip install meson ninja
+          python build.py --target_platform=windows64 --compiler=clang-cl
 
       - name: Install dependencies and build  (Ubuntu Arm 64)
         if: matrix.target == 'linux-arm'
