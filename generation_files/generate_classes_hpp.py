@@ -163,18 +163,18 @@ def generate_constructors(class_):
     if "constructors" not in class_.keys():
         return res
     if class_["name"] not in cpp_core_structs:
-        res += f"{INDENT}{class_['name']} (){{godot_owner = nullptr; shouldBeDeleted=false;}};"
+        res += f"{INDENT}LIBRARY_API {class_['name']} (){{godot_owner = nullptr; shouldBeDeleted=false;}};"
     else:
-        res += f"{INDENT}{class_['name']} (){{godot_owner = nullptr; shouldBeDeleted=false;}};"
+        res += f"{INDENT}LIBRARY_API {class_['name']} (){{godot_owner = nullptr; shouldBeDeleted=false;}};"
     res = generate_newline(res)
-    res += f"{INDENT}{class_['name']} (const {class_['name']}& copy_val);"
+    res += f"{INDENT}LIBRARY_API {class_['name']} (const {class_['name']}& copy_val);"
     res = generate_newline(res)
-    res += f"{INDENT}{class_['name']}& operator= (const {class_['name']}& copy_val);"
+    res += f"{INDENT}LIBRARY_API {class_['name']}& operator= (const {class_['name']}& copy_val);"
     res = generate_newline(res)
     for constructor in class_["constructors"]:
-        res += f"{INDENT}static {class_['name']} new{constructor['index']}({generate_constructor_args(constructor)});"
+        res += f"{INDENT}LIBRARY_API static {class_['name']} new{constructor['index']}({generate_constructor_args(constructor)});"
         res = generate_newline(res)
-        res += f"{INDENT}static std::shared_ptr<{class_['name']}> py_new{constructor['index']}({generate_constructor_args(constructor, should_make_shared=True)});"
+        res += f"{INDENT}LIBRARY_API static std::shared_ptr<{class_['name']}> py_new{constructor['index']}({generate_constructor_args(constructor, should_make_shared=True)});"
         res = generate_newline(res)
     return res
 
