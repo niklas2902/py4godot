@@ -422,12 +422,12 @@ def generate_library_api(is_core):
 
 def generate_switch_methods(is_core):
     res = ""
-    res += f"{INDENT}{generate_library_api(is_core)} virtual PyObject* switch_call_return(int method_hash, PyObject* args_tuple);"
+    res += f"{INDENT}LIBRARY_API virtual PyObject* switch_call_return(int method_hash, PyObject* args_tuple);"
     res = generate_newline(res)
-    res += f"{INDENT}{generate_library_api(is_core)} static PyObject* call_constructor(int constructor_id, PyObject* args_tuple);"
+    res += f"{INDENT}LIBRARY_API static PyObject* call_constructor(int constructor_id, PyObject* args_tuple);"
     res = generate_newline(res)
 
-    res += f"{INDENT}{generate_library_api(is_core)} static PyObject* call_static_method_with_return(int method_hash, PyObject* args_tuple);"
+    res += f"{INDENT}LIBRARY_API static PyObject* call_static_method_with_return(int method_hash, PyObject* args_tuple);"
     res = generate_newline(res)
     return res
 
