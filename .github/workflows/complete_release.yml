@@ -109,7 +109,7 @@ jobs:
           python -m pip install --upgrade pip
           python -m pip install -r requirements.txt
           python -m pip install meson ninja
-          python build.py --target_platform=windows64 --compiler=clang-cl
+          python build.py --target_platform=windows64 --compiler=msvc
 
       - name: Install dependencies and build (Ubuntu ARM64)
         if: matrix.target == 'linux-arm'
