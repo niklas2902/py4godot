@@ -697,9 +697,9 @@ def generate_destructor(classname):
 def generate_new_static(class_):
     res = ""
     if (class_["name"] in builtin_classes):
-        res += f"{INDENT}static {class_['name']} new_static(GDExtensionTypePtr owner);"
+        res += f"{INDENT}LIBRARY_API static {class_['name']} new_static(GDExtensionTypePtr owner);"
     else:
-        res += f"{INDENT}static {class_['name']} new_static(GDExtensionObjectPtr owner);"
+        res += f"{INDENT}LIBRARY_API static {class_['name']} new_static(GDExtensionObjectPtr owner);"
 
     return res
 
