@@ -689,7 +689,7 @@ def generate_destructor(classname):
         res = generate_newline(res)
     res += f"void {INDENT}{classname}_py_destroy();"
     res = generate_newline(res)
-    res += f"{INDENT}LIBRARY_API ~{classname}();"
+    res += f"{INDENT}~{classname}();"
     res = generate_newline(res)
     return res
 
