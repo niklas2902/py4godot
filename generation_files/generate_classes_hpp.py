@@ -689,7 +689,7 @@ def generate_destructor(classname):
         res = generate_newline(res)
     res += f"void {INDENT}{classname}_py_destroy();"
     res = generate_newline(res)
-    res += f"{INDENT}~{classname}();"
+    res += f"{INDENT}LIBRARY_API ~{classname}();"
     res = generate_newline(res)
     return res
 
@@ -798,7 +798,7 @@ def generate_classes(classes, filename, is_core=False):
 
         res = generate_newline(res)
         if class_["name"] not in builtin_classes:
-            res += f"class LIBRARY_API {class_['name']}:public {get_base_class(class_)}" + "{"
+            res += f"class {class_['name']}:public {get_base_class(class_)}" + "{"
         else:
             res += f"class LIBRARY_API {class_['name']}:public {get_base_class(class_)}" + "{"
         res = generate_newline(res)
