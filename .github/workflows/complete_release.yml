@@ -101,6 +101,7 @@ jobs:
           arch: x64
 
       - name: Install Godot
+        if: matrix.target == 'windows'
         shell: pwsh
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -119,7 +120,8 @@ jobs:
           Add-Content $env:GITHUB_PATH $dir
 
       - name: Check
-        run: Godot --version
+        if: matrix.target == 'windows'
+        run: godot --version
 
       - name: Install dependencies and build for Windows (native)
         if: matrix.target == 'windows'
