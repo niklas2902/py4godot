@@ -3,22 +3,36 @@ name: complete release
 on:
   workflow_dispatch:     # Allows manual triggering
 
+permissions:
+  contents: read
+
+concurrency:
+  group: complete-release-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  PY4GODOT_PYTHON: "3.11.3"
+
 jobs:
   build:
     runs-on: ubuntu-latest
     container: niklas2902/py4godot:4.6
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
         with:
           submodules: 'recursive'
 
-      - name: Set up Python 3.11.3
-        uses: actions/setup-python@v2
+      # If the container image already ships 3.11.3, you can drop this step
+      # entirely -- setup-python inside a container replaces the interpreter
+      # the image was built around.
+      - name: Set up Python ${{ env.PY4GODOT_PYTHON }}
+        uses: actions/setup-python@v5
         with:
-          python-version: "3.11.3"
+          python-version: ${{ env.PY4GODOT_PYTHON }}
 
       - name: Install dependencies
         run: |
+          python -m pip install --upgrade pip
           python -m pip install -r requirements.txt
           python -m pip install flake8
 
@@ -35,17 +49,23 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: precompiled
-          path: .
+          include-hidden-files: true
+          path: |
+            .
+            !.git
+            !.git/**
+          retention-days: 1
 
   build_cpp:
     needs: build
     runs-on: ${{ matrix.os }}
     strategy:
+      fail-fast: false
       matrix:
         include:
           - os: ubuntu-latest
             target: linux
-          - os: ubuntu-latest
+          - os: windows-latest        # was ubuntu-latest -- MSVC/pwsh steps cannot run on Linux
             target: windows
           - os: macos-latest
             target: macos
@@ -58,45 +78,86 @@ jobs:
         with:
           name: precompiled
 
-      - name: Install dependencies and build for linux  (Ubuntu)
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ env.PY4GODOT_PYTHON }}
+
+      - name: Install dependencies and build for Linux (Ubuntu)
         if: matrix.target == 'linux'
         run: |
           sudo apt-get update
-          sudo apt-get install -y cmake ninja-build meson pkg-config libsdl2-dev python3-venv
+          sudo apt-get install -y cmake ninja-build pkg-config libsdl2-dev
           python3 -m venv venv
           source venv/bin/activate
+          python -m pip install --upgrade pip
           python -m pip install -r requirements.txt
-          python build.py --target_platform=linux64 --compiler=gcc 
+          python -m pip install meson ninja
+          python build.py --target_platform=linux64 --compiler=gcc
 
-      - name: Install dependencies and build for Windows  (Ubuntu)
+      - name: Set up MSVC environment
         if: matrix.target == 'windows'
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y cmake ninja-build meson pkg-config libsdl2-dev python3-venv mingw-w64 binutils-mingw-w64
-          python3 -m venv venv
-          source venv/bin/activate
-          python -m pip install -r requirements.txt
-          python build.py --target_platform=windows64 --compiler=g++-mingw 
+        uses: ilammy/msvc-dev-cmd@v1
+        with:
+          arch: x64
 
-      - name: Install dependencies and build  (Ubuntu Arm 64)
+      - name: Install Godot
+        if: matrix.target == 'windows'
+        shell: pwsh
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          $headers = @{ "User-Agent" = "actions"; "Authorization" = "Bearer $env:GH_TOKEN" }
+          $release = Invoke-RestMethod "https://api.github.com/repos/godotengine/godot/releases/latest" -Headers $headers
+          $asset = $release.assets | Where-Object { $_.name -like "Godot_v*_win64.exe.zip" } | Select-Object -First 1
+          Write-Host "Installing $($release.tag_name)"
+
+          $dir = "$env:RUNNER_TEMP\godot"
+          Invoke-WebRequest $asset.browser_download_url -OutFile "$env:RUNNER_TEMP\godot.zip"
+          Expand-Archive "$env:RUNNER_TEMP\godot.zip" -DestinationPath $dir
+
+          $main    = Get-ChildItem $dir -Filter "Godot_v*_win64.exe" | Where-Object { $_.Name -notlike "*_console*" } | Select-Object -First 1
+          $console = Get-ChildItem $dir -Filter "Godot_v*_win64_console.exe" | Select-Object -First 1
+          Rename-Item $main.FullName "godot.exe"
+          Rename-Item $console.FullName "godot_console.exe"
+          Add-Content $env:GITHUB_PATH $dir
+
+      - name: Check
+        if: matrix.target == 'windows'
+        run: godot_console --version
+
+      - name: Install dependencies and build for Windows (native)
+        if: matrix.target == 'windows'
+        shell: pwsh
+        run: |
+          python -m venv venv
+          .\venv\Scripts\Activate.ps1
+          python -m pip install --upgrade pip
+          python -m pip install -r requirements.txt
+          python -m pip install meson ninja
+          python build.py --target_platform=windows64 --compiler=msvc -run_tests=True
+
+      - name: Install dependencies and build (Ubuntu ARM64)
         if: matrix.target == 'linux-arm'
         run: |
           sudo apt-get update
-          sudo apt-get install -y cmake ninja-build meson pkg-config libsdl2-dev python3-venv
+          sudo apt-get install -y cmake ninja-build pkg-config libsdl2-dev
           python3 -m venv venv
           source venv/bin/activate
+          python -m pip install --upgrade pip
           python -m pip install -r requirements.txt
-          python build.py --target_platform=linuxarm64 --compiler=gcc 
+          python -m pip install meson ninja
+          python build.py --target_platform=linuxarm64 --compiler=gcc
 
       - name: Install dependencies and build (macOS)
         if: matrix.target == 'macos'
         run: |
           brew update
-          brew install cmake ninja meson pkg-config sdl2
+          brew install cmake ninja pkg-config sdl2
           python3 -m venv venv
           source venv/bin/activate
+          python -m pip install --upgrade pip
           python -m pip install -r requirements.txt
-          python -m pip install flake8
+          python -m pip install meson ninja flake8
           python build.py --target_platform=darwin64 --compiler=clang
 
       - name: Upload py4godot build artifact
@@ -104,43 +165,35 @@ jobs:
         with:
           include-hidden-files: true
           name: py4godot-${{ matrix.target }}
-          path: |
-            build/py4godot/**
-            build/py4godot/**/.*
+          path: build/py4godot/**
           retention-days: 30
+          if-no-files-found: error
 
   combine:
     needs: build_cpp
     runs-on: ubuntu-latest
     steps:
-      - name: Download Linux
+      - name: Download all platform builds
         uses: actions/download-artifact@v4
         with:
-          name: py4godot-linux
+          pattern: py4godot-*
+          merge-multiple: true
           path: py4godot/install_dir/addons/py4godot
 
-      - name: Download Linux ARM
-        uses: actions/download-artifact@v4
+      - name: Check out LICENSE
+        uses: actions/checkout@v4
         with:
-          name: py4godot-linux-arm
-          path: py4godot/install_dir/addons/py4godot
+          sparse-checkout: LICENSE
+          sparse-checkout-cone-mode: false
+          path: license-checkout
 
-      - name: Download Macos
-        uses: actions/download-artifact@v4
-        with:
-          name: py4godot-macos
-          path: py4godot/install_dir/addons/py4godot
-
-      - name: Download Windows
-        uses: actions/download-artifact@v4
-        with:
-          name: py4godot-windows
-          path: py4godot/install_dir/addons/py4godot
+      - name: Add LICENSE
+        run: cp license-checkout/LICENSE py4godot/install_dir/addons/py4godot/LICENSE
 
       - name: Upload Zipped Artifact
         uses: actions/upload-artifact@v4
         with:
           include-hidden-files: true
           name: py4godot
-          path: |
-            py4godot
+          path: py4godot
+          if-no-files-found: error

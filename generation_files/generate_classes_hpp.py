@@ -163,18 +163,18 @@ def generate_constructors(class_):
     if "constructors" not in class_.keys():
         return res
     if class_["name"] not in cpp_core_structs:
-        res += f"{INDENT}{class_['name']} (){{godot_owner = nullptr; shouldBeDeleted=false;}};"
+        res += f"{INDENT}LIBRARY_API {class_['name']} (){{godot_owner = nullptr; shouldBeDeleted=false;}};"
     else:
-        res += f"{INDENT}{class_['name']} (){{godot_owner = nullptr; shouldBeDeleted=false;}};"
+        res += f"{INDENT}LIBRARY_API {class_['name']} (){{godot_owner = nullptr; shouldBeDeleted=false;}};"
     res = generate_newline(res)
-    res += f"{INDENT}{class_['name']} (const {class_['name']}& copy_val);"
+    res += f"{INDENT}LIBRARY_API {class_['name']} (const {class_['name']}& copy_val);"
     res = generate_newline(res)
-    res += f"{INDENT}{class_['name']}& operator= (const {class_['name']}& copy_val);"
+    res += f"{INDENT}LIBRARY_API {class_['name']}& operator= (const {class_['name']}& copy_val);"
     res = generate_newline(res)
     for constructor in class_["constructors"]:
-        res += f"{INDENT}static {class_['name']} new{constructor['index']}({generate_constructor_args(constructor)});"
+        res += f"{INDENT}LIBRARY_API static {class_['name']} new{constructor['index']}({generate_constructor_args(constructor)});"
         res = generate_newline(res)
-        res += f"{INDENT}static std::shared_ptr<{class_['name']}> py_new{constructor['index']}({generate_constructor_args(constructor, should_make_shared=True)});"
+        res += f"{INDENT}LIBRARY_API static std::shared_ptr<{class_['name']}> py_new{constructor['index']}({generate_constructor_args(constructor, should_make_shared=True)});"
         res = generate_newline(res)
     return res
 
@@ -422,12 +422,12 @@ def generate_library_api(is_core):
 
 def generate_switch_methods(is_core):
     res = ""
-    res += f"{INDENT}virtual PyObject* switch_call_return(int method_hash, PyObject* args_tuple);"
+    res += f"{INDENT}LIBRARY_API virtual PyObject* switch_call_return(int method_hash, PyObject* args_tuple);"
     res = generate_newline(res)
-    res += f"{INDENT}{generate_library_api(is_core)} static PyObject* call_constructor(int constructor_id, PyObject* args_tuple);"
+    res += f"{INDENT}LIBRARY_API static PyObject* call_constructor(int constructor_id, PyObject* args_tuple);"
     res = generate_newline(res)
 
-    res += f"{INDENT}{generate_library_api(is_core)} static PyObject* call_static_method_with_return(int method_hash, PyObject* args_tuple);"
+    res += f"{INDENT}LIBRARY_API static PyObject* call_static_method_with_return(int method_hash, PyObject* args_tuple);"
     res = generate_newline(res)
     return res
 
@@ -436,11 +436,12 @@ def generate_enums(class_):
         return ""
     res = ""
     for enum in class_["enums"]:
-        res += f"cpdef enum {class_['name']}__{enum['name']}:"
+        res += f"enum {class_['name']}__{enum['name']}{{"
         res = generate_newline(res)
         for enum_value in enum["values"]:
-            res += f"{INDENT}{class_['name']}__{enum_value['name']} = {enum_value['value']}"
+            res += f"{INDENT}{class_['name']}__{enum_value['name']} = {enum_value['value']},"
             res = generate_newline(res)
+        res += "};"
     res = generate_newline(res)
     return res
 
@@ -688,7 +689,7 @@ def generate_destructor(classname):
         res = generate_newline(res)
     res += f"void {INDENT}{classname}_py_destroy();"
     res = generate_newline(res)
-    res += f"{INDENT}~{classname}();"
+    res += f"{INDENT}LIBRARY_API ~{classname}();"
     res = generate_newline(res)
     return res
 
@@ -696,9 +697,9 @@ def generate_destructor(classname):
 def generate_new_static(class_):
     res = ""
     if (class_["name"] in builtin_classes):
-        res += f"{INDENT}static {class_['name']} new_static(GDExtensionTypePtr owner);"
+        res += f"{INDENT}LIBRARY_API static {class_['name']} new_static(GDExtensionTypePtr owner);"
     else:
-        res += f"{INDENT}static {class_['name']} new_static(GDExtensionObjectPtr owner);"
+        res += f"{INDENT}LIBRARY_API static {class_['name']} new_static(GDExtensionObjectPtr owner);"
 
     return res
 
@@ -793,11 +794,13 @@ def generate_classes(classes, filename, is_core=False):
         if (class_["name"] in IGNORED_CLASSES):
             continue
         res = generate_newline(res)
+        res += generate_enums(class_)
+
         res = generate_newline(res)
         if class_["name"] not in builtin_classes:
             res += f"class {class_['name']}:public {get_base_class(class_)}" + "{"
         else:
-            res += f"class LIBRARY_API {class_['name']}:public {get_base_class(class_)}" + "{"
+            res += f"class {class_['name']}:public {get_base_class(class_)}" + "{"
         res = generate_newline(res)
         res += f"{INDENT} public:"
         res = generate_newline(res)

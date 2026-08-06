@@ -40,7 +40,10 @@ if not os.path.isdir("py4godot/classes"):
         file.write(
             "import py4godot.pluginscript_api.utils.annotations as annotations\n"
             "def gdclass(cls = None, icon=None):\n"
-            "    return annotations.gdclass(cls, icon)\n")
+            "    return annotations.gdclass(cls, icon)\n"
+            "def gdtool(cls = None, icon=None):\n"
+            "    return annotations.gdtool(cls, icon)\n"
+        )
 if not os.path.isdir("py4godot/enums"):
     os.mkdir("py4godot/enums")
     with open("py4godot/enums/__init__.py", "w") as file:
