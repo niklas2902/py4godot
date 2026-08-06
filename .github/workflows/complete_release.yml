@@ -100,6 +100,27 @@ jobs:
         with:
           arch: x64
 
+      - name: Install Godot
+        shell: pwsh
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          $headers = @{ "User-Agent" = "actions"; "Authorization" = "Bearer $env:GH_TOKEN" }
+          $release = Invoke-RestMethod "https://api.github.com/repos/godotengine/godot/releases/latest" -Headers $headers
+          $asset = $release.assets | Where-Object { $_.name -like "Godot_v*_win64.exe.zip" } | Select-Object -First 1
+          Write-Host "Installing $($release.tag_name)"
+          
+          $dir = "$env:RUNNER_TEMP\godot"
+          Invoke-WebRequest $asset.browser_download_url -OutFile "$env:RUNNER_TEMP\godot.zip"
+          Expand-Archive "$env:RUNNER_TEMP\godot.zip" -DestinationPath $dir
+          
+          $exe = Get-ChildItem $dir -Filter "Godot_v*_win64_console.exe" | Select-Object -First 1
+          Rename-Item $exe.FullName "godot.exe"
+          Add-Content $env:GITHUB_PATH $dir
+
+      - name: Check
+        run: Godot --version
+
       - name: Install dependencies and build for Windows (native)
         if: matrix.target == 'windows'
         shell: pwsh
@@ -109,7 +130,7 @@ jobs:
           python -m pip install --upgrade pip
           python -m pip install -r requirements.txt
           python -m pip install meson ninja
-          python build.py --target_platform=windows64 --compiler=msvc
+          python build.py --target_platform=windows64 --compiler=msvc -run_tests=True
 
       - name: Install dependencies and build (Ubuntu ARM64)
         if: matrix.target == 'linux-arm'
