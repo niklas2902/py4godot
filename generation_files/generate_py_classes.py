@@ -257,11 +257,17 @@ def generate_constructors(class_):
         res += f"{INDENT*2}_class._ptr = constructor({classes_dict[class_['name']]}, {constructor['index']}, tuple([{generate_constructor_call_args(class_, constructor)}]))"
         res = generate_newline(res)
         if class_["name"] == "Array":
-            res += f"{INDENT*2}if self.type_:"
+            res += f"{INDENT*2}if _class.type_:"
             res = generate_newline(res)
-            res += f"{INDENT* 3}_class._ptr.call_with_return({method_ids['normal_methods'][class_['name']]['set_typed']},tuple([core_classes[self.type_._ptr]))"
+            cls_str = ""
+            for cls in builtin_classes - {"float", "int", "bool", "Nil"}:
+                cls_str += f"{cls}:{cls}.new0(),"
             res = generate_newline(res)
-            res += f"{INDENT*3}self.type_ = None"
+            res += f"{INDENT*3}l={{{cls_str}}}"
+            res = generate_newline(res)
+            res += f"{INDENT* 3}_class._ptr.call_with_return({method_ids['normal_methods'][class_['name']]['set_typed']},tuple([l[_class.type_]._ptr]))"
+            res = generate_newline(res)
+            res += f"{INDENT*3}_class.type_ = None"
             res = generate_newline(res)
         res += f"{INDENT * 2}return _class"
         res = generate_newline(res)
