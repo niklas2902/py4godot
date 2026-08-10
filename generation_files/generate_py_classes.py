@@ -260,12 +260,12 @@ def generate_constructors(class_):
             res += f"{INDENT*2}if _class.type_:"
             res = generate_newline(res)
             cls_str = ""
-            for cls in builtin_classes - {"float", "int", "bool", "Nil"}:
-                cls_str += f"{cls}:{cls}.new0(),"
+            for cls in builtin_classes - {"Nil"}:
+                cls_str += f"{cls}:{get_variant_type_val(cls)},"
             res = generate_newline(res)
             res += f"{INDENT*3}l={{{cls_str}}}"
             res = generate_newline(res)
-            res += f"{INDENT* 3}_class._ptr.call_with_return({method_ids['normal_methods'][class_['name']]['set_typed']},tuple([l[_class.type_]._ptr]))"
+            res += f"{INDENT* 3}_class._ptr.call_with_return({method_ids['normal_methods'][class_['name']]['set_typed']},tuple([l[_class.type_], _class.type_.__name__, None]))"
             res = generate_newline(res)
             res += f"{INDENT*3}_class.type_ = None"
             res = generate_newline(res)
@@ -412,6 +412,53 @@ def is_singleton(class_name):
 def generate_method_bind_name(class_name, method_name):
     return f"method_bind__{class_name}_{method_name}"
 
+def get_variant_type_val(class_name):
+    DICT = {
+        "Nil": 0,
+        #  atomic types
+        "bool": 1,
+        "int": 2,
+        "float": 3,
+        "string": 4,
+        # math types
+        "vector2": 5,
+        "vector2i": 6,
+        "rect2": 7,
+        "rect2i": 8,
+        "vector3": 9,
+        "vector3i": 10,
+        "transform2d": 11,
+        "vector4": 12,
+        "vector4i": 13,
+        "plane": 14,
+        "quaternion": 15,
+        "aabb": 16,
+        "basis": 17,
+        "transform3d": 18,
+        "projection": 19,
+        # misc types
+        "color": 20,
+        "stringname": 21,
+        "nodepath": 22,
+        "rid": 23,
+        "object": 24,
+        "callable": 25,
+        "signal": 26,
+        "dictionary": 27,
+        "array": 28,
+        # typed arrays
+        "packedbytearray": 29,
+        "packedint32array": 30,
+        "packedint64array": 31,
+        "packedfloat32array": 32,
+        "packedfloat64array": 33,
+        "packedstringarray": 34,
+        "packedvector2array": 35,
+        "packedvector3array": 36,
+        "packedcolorarray": 37,
+        "packedvector4array": 38,
+    }
+    return DICT[class_name.lower()]
 
 def get_variant_type(class_name):
     DICT = {

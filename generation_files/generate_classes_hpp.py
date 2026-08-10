@@ -963,6 +963,16 @@ def generate_array_methods(class_):
             res += f"{INDENT * 1}static std::shared_ptr<{class_['name']}> py_from_ptr(int64_t* ptr, long long size);"
     return res
 
+
+def generate_special_methods_normal_array():
+    res = ""
+    res += f"{INDENT*1}void set_typed(GDExtensionVariantType type, const char* class_name, void* script_owner);"
+    res = generate_newline(res)
+    res += f"{INDENT*1}void py_set_typed(GDExtensionVariantType type, PyObject* class_name, PyObject* script);"
+    res = generate_newline(res)
+    return res
+
+
 def generate_special_methods(class_):
     res = ""
     if class_["name"] == "Dictionary":
@@ -970,6 +980,9 @@ def generate_special_methods(class_):
 
     if "array" in class_["name"].lower():
         res += generate_special_methods_array(class_)
+
+    if class_["name"] == "Array":
+        res += generate_special_methods_normal_array()
 
     if class_["name"] in {"Vector3", "Vector2", "String", "Color"}:
         res += generate_copy_methods(class_["name"])

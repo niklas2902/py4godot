@@ -1484,6 +1484,11 @@ def generate_switch_methods(class_):
         method_id = method_ids['normal_methods'][class_['name']]['destroy']
         res += f"{INDENT * 3}case {method_id}:Object_py_destroy();return Py_None;"
         res = generate_newline(res)
+
+    if class_["name"] == "Array":
+        method_id = method_ids['normal_methods'][class_['name']]['set_typed']
+        res += f"{INDENT * 3}case {method_id}:py_set_typed(PyLong_AsLong(PyTuple_GetItem(args_tuple,0)),PyTuple_GetItem(args_tuple,1), PyTuple_GetItem(args_tuple,2));return Py_None;"
+        res = generate_newline(res)
     res += f"{INDENT*2}}}"
     res = generate_newline(res)
     res += f"{INDENT*2}return Py_None;"
@@ -2218,6 +2223,22 @@ def generate_classes(classes, filename, is_core=False):
     with open(filename, "w") as f:
         f.write(res)
 
+def generate_special_methods_normal_array():
+    res = ""
+    res += f"{INDENT*1}void Array::set_typed(GDExtensionVariantType type, const char* class_name, void* script_owner){{functions::get_array_set_typed()(this->godot_owner, type, class_name, script_owner);}}"
+    res = generate_newline(res)
+    res += f"{INDENT*1}void Array::py_set_typed(GDExtensionVariantType type, PyObject* class_name, PyObject* script){{"
+    res = generate_newline(res)
+    res += f"{INDENT*2}Py_ssize_t len;"
+    res = generate_newline(res)
+    res += f"{INDENT*2}const char *c_class_name = PyUnicode_AsUTF8AndSize(class_name, &len);"
+    res = generate_newline(res)
+    res += f"{INDENT*2}set_typed(type, c_class_name, nullptr);"
+    res = generate_newline(res)
+    res += f"{INDENT}}}"
+    res = generate_newline(res)
+    return res
+
 
 def generate_dictionary_set_item():
     res = ""
@@ -2547,6 +2568,9 @@ def generate_special_methods_array(class_):
     res += generate_array_get_item_wrapper(class_)
     res = generate_newline(res)
     res += generate_array_set_item(class_)
+    if class_["name"] == "Array":
+        res += generate_special_methods_normal_array()
+        res = generate_newline(res)
     return res
 
 
