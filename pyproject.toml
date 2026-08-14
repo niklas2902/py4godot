@@ -1,24 +1,25 @@
-[project]
+[tool.poetry]
 name = "py4godot"
-version = "4.4-alpha7"
-description = "Python scripting for Godot. This GDExtension plugin allows you to use Python like GDScript, accessing the Godot engine's features and benefiting from Python's vast ecosystem."
-authors = [
-    {name = "Niklas Zimmer",email = "nzimmer@uni-bremen.de"}
-]
-license = {text = "MIT"}
+version = "4.7-alpha21"
+description = ""
+authors = ["Niklas Zimmer <niklas-zimmer@hotmail.com>"]
+license = "MIT"
 readme = "README.md"
-requires-python = ">=3.11"
-dependencies = [
-    "cython (>=3.0.0)",
-    "zstandard (>=0.23.0,<0.24.0)",
-    "wget (>=3.2,<4.0)",
-    "meson (>=1.0.0)",
-    "ninja (==1.10.2.3)",
-    "tqdm (>=4.67.1,<5.0.0)",
-    "setuptools (>=80.3.0,<81.0.0)"
-]
+
+[tool.poetry.dependencies]
+python = "^3.12"
+wget = "^3.2"
+zstandard = "^0.25.0"
+cython = "^3.2.9"
+meson = "^1.12.0"
+ninja = "^1.13.0"
+tqdm = "^4.70.0"
+beautifulsoup4 = "^4.15.0"
+lxml = "^6.1.1"
+docker = "^7.2.0"
+setuptools = "^84.0.0"
 
 
 [build-system]
-requires = ["poetry-core>=2.0.0,<3.0.0"]
+requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
