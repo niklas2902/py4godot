@@ -6,7 +6,7 @@
 [Play it on itch.io](https://niklas-zimmer.itch.io/cyber-draw)
 
 **Penpot's Whac-A-Mappole** by Carlos Padial — a real-time interactive video mapping installation, projected onto a wall of cardboard reliefs and built entirely with free software. It uses a tiny bit of py4godot: a Python script inside Godot reads raw USB data from four mice used as game controllers. The rest of the project is far more impressive than that one detail. Well worth a read!
-[Read the write-up](https://surreal.asturnazari.com/2025/12/01/penpots-whac-a-mappole-a-floss-interactive-mapping/) · [Discussion](https://github.com/niklas2902/py4godot/discussions/216)
+[Read the write-up](https://surreal.asturnazari.com/2025/12/01/penpots-whac-a-mappole-a-floss-interactive-mapping/)
 
 ## Other Projects
 
