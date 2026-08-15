@@ -8,13 +8,10 @@ permissions:
 
 concurrency:
   group: complete-release-${{ github.ref }}
-  # A release run should not be killed by a second manual trigger.
-  cancel-in-progress: false
+  cancel-in-progress: true
 
 env:
   PY4GODOT_PYTHON: "3.11.3"
-  # Version of the CPython distribution that build.py bundles into build/py4godot/
-  BUNDLED_CPYTHON: "3.14.4"
 
 jobs:
   build:
@@ -24,9 +21,6 @@ jobs:
       - uses: actions/checkout@v4
         with:
           submodules: 'recursive'
-          # `branch:` is not an input of actions/checkout -- it was silently
-          # ignored and you got the default branch instead.
-          ref: 'android-game'
 
       # If the container image already ships 3.11.3, you can drop this step
       # entirely -- setup-python inside a container replaces the interpreter
@@ -61,7 +55,6 @@ jobs:
             !.git
             !.git/**
           retention-days: 1
-          if-no-files-found: error
 
   build_cpp:
     needs: build
@@ -72,16 +65,12 @@ jobs:
         include:
           - os: ubuntu-latest
             target: linux
-            platform: linux64
           - os: windows-latest        # was ubuntu-latest -- MSVC/pwsh steps cannot run on Linux
             target: windows
-            platform: windows64
           - os: macos-latest
             target: macos
-            platform: darwin64
           - os: ubuntu-24.04-arm
             target: linux-arm
-            platform: linuxarm64
 
     steps:
       - name: Download Precompiled Code
@@ -92,14 +81,6 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: ${{ env.PY4GODOT_PYTHON }}
-
-      # upload-artifact does not preserve the executable bit, so anything the
-      # build shells out to comes back from the artifact as mode 644.
-      - name: Restore executable bits
-        if: matrix.target != 'windows'
-        shell: bash
-        run: |
-          find . -type f \( -name '*.sh' -o -name '*.py' \) -exec chmod +x {} + || true
 
       - name: Install dependencies and build for Linux (Ubuntu)
         if: matrix.target == 'linux'
@@ -142,7 +123,6 @@ jobs:
 
       - name: Check
         if: matrix.target == 'windows'
-        shell: pwsh
         run: godot_console --version
 
       - name: Install dependencies and build for Windows (native)
@@ -179,54 +159,6 @@ jobs:
           python -m pip install -r requirements.txt
           python -m pip install meson ninja flake8
           python build.py --target_platform=darwin64 --compiler=clang
-
-      # ---- numpy goes into the *bundled* interpreter, not the build venv ----
-      # Must run before the upload so numpy ships inside the artifact.
-      - name: Install numpy into bundled interpreter (Unix)
-        if: matrix.target != 'windows'
-        shell: bash
-        run: |
-          set -euo pipefail
-          PYDIR="build/py4godot/cpython-${BUNDLED_CPYTHON}-${{ matrix.platform }}/python"
-          PYBIN="$PYDIR/bin/python3"
-          if [ ! -x "$PYBIN" ]; then
-            echo "Interpreter not found at $PYBIN -- contents of build/py4godot:"
-            ls -la build/py4godot || true
-            exit 1
-          fi
-          chmod +x "$PYBIN"
-          # Bootstrap pip the same way the project does elsewhere: get-pip.py,
-          # not ensurepip (these trimmed bundles may not ship ensurepip at all).
-          curl -fsSL -o "$RUNNER_TEMP/get-pip.py" https://bootstrap.pypa.io/get-pip.py
-          "$PYBIN" "$RUNNER_TEMP/get-pip.py"
-          "$PYBIN" -m pip --version
-          "$PYBIN" -m pip install --no-warn-script-location numpy
-          "$PYBIN" -c "import numpy; print('numpy', numpy.__version__, 'in', numpy.__file__)"
-
-      - name: Install numpy into bundled interpreter (Windows)
-        if: matrix.target == 'windows'
-        shell: pwsh
-        run: |
-          $ErrorActionPreference = "Stop"
-          $pyDir = "build/py4godot/cpython-$env:BUNDLED_CPYTHON-${{ matrix.platform }}/python"
-          # python-build-standalone puts python.exe at the root on Windows,
-          # but fall back to bin/ in case the layout differs.
-          $pyBin = Join-Path $pyDir "python.exe"
-          if (-not (Test-Path $pyBin)) { $pyBin = Join-Path $pyDir "bin/python.exe" }
-          if (-not (Test-Path $pyBin)) {
-            Write-Host "Interpreter not found under $pyDir -- contents of build/py4godot:"
-            Get-ChildItem "build/py4godot" -Recurse -Depth 2 | Select-Object FullName
-            throw "python.exe not found"
-          }
-          # Bootstrap pip via get-pip.py, not ensurepip.
-          Invoke-WebRequest "https://bootstrap.pypa.io/get-pip.py" -OutFile "$env:RUNNER_TEMP\get-pip.py"
-          & $pyBin "$env:RUNNER_TEMP\get-pip.py"
-          if ($LASTEXITCODE -ne 0) { throw "get-pip.py failed" }
-          & $pyBin -m pip --version
-          & $pyBin -m pip install --no-warn-script-location numpy
-          if ($LASTEXITCODE -ne 0) { throw "numpy install failed" }
-          & $pyBin -c "import numpy; print('numpy', numpy.__version__, 'in', numpy.__file__)"
-          if ($LASTEXITCODE -ne 0) { throw "numpy import check failed" }
 
       - name: Upload py4godot build artifact
         uses: actions/upload-artifact@v4
