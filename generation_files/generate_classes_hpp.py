@@ -966,9 +966,9 @@ def generate_array_methods(class_):
 
 def generate_special_methods_normal_array():
     res = ""
-    res += f"{INDENT*1}void set_typed(GDExtensionVariantType type, const char* class_name, void* script_owner);"
+    res += f"{INDENT*1}void set_typed(GDExtensionVariantType type, std::shared_ptr<StringName> class_name, void* script_owner);"
     res = generate_newline(res)
-    res += f"{INDENT*1}void py_set_typed(GDExtensionVariantType type, PyObject* class_name, PyObject* script);"
+    res += f"{INDENT*1}void py_set_typed(GDExtensionVariantType type, std::shared_ptr<StringName> class_name, PyObject* script);"
     res = generate_newline(res)
     return res
 

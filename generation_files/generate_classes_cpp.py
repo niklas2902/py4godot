@@ -1487,7 +1487,7 @@ def generate_switch_methods(class_):
 
     if class_["name"] == "Array":
         method_id = method_ids['normal_methods'][class_['name']]['set_typed']
-        res += f"{INDENT * 3}case {method_id}:py_set_typed(PyLong_AsLong(PyTuple_GetItem(args_tuple,0)),PyTuple_GetItem(args_tuple,1), PyTuple_GetItem(args_tuple,2));return Py_None;"
+        res += f"{INDENT * 3}case {method_id}:py_set_typed(PyLong_AsLong(PyTuple_GetItem(args_tuple,0)),wrapper__extract_ptr_from_StringNameWrapper(PyTuple_GetItem(args_tuple,1)), PyTuple_GetItem(args_tuple,2));return Py_None;"
         res = generate_newline(res)
     res += f"{INDENT*2}}}"
     res = generate_newline(res)
@@ -2225,15 +2225,11 @@ def generate_classes(classes, filename, is_core=False):
 
 def generate_special_methods_normal_array():
     res = ""
-    res += f"{INDENT*1}void Array::set_typed(GDExtensionVariantType type, const char* class_name, void* script_owner){{auto empty_cls = StringName::new0();auto empty_var = Variant(1);functions::get_array_set_typed()(&this->godot_owner, type, &empty_cls.godot_owner, &empty_var.native_ptr);}}"
+    res += f"{INDENT*1}void Array::set_typed(GDExtensionVariantType type, std::shared_ptr<StringName> class_name, void* script_owner){{auto empty_var = Variant(1);functions::get_array_set_typed()(&this->godot_owner, type, &class_name->godot_owner, &empty_var.native_ptr);}}"
     res = generate_newline(res)
-    res += f"{INDENT*1}void Array::py_set_typed(GDExtensionVariantType type, PyObject* class_name, PyObject* script){{"
+    res += f"{INDENT*1}void Array::py_set_typed(GDExtensionVariantType type, std::shared_ptr<StringName>  class_name, PyObject* script){{"
     res = generate_newline(res)
-    res += f"{INDENT*2}Py_ssize_t len;"
-    res = generate_newline(res)
-    res += f"{INDENT*2}const char *c_class_name = PyUnicode_AsUTF8AndSize(class_name, &len);"
-    res = generate_newline(res)
-    res += f"{INDENT*2}set_typed(type, c_class_name, nullptr);"
+    res += f"{INDENT*2}set_typed(type, class_name, nullptr);"
     res = generate_newline(res)
     res += f"{INDENT}}}"
     res = generate_newline(res)

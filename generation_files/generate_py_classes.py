@@ -265,7 +265,24 @@ def generate_constructors(class_):
             res = generate_newline(res)
             res += f"{INDENT*3}l={{{cls_str}}}"
             res = generate_newline(res)
-            res += f"{INDENT* 3}_class._ptr.call_with_return({method_ids['normal_methods'][class_['name']]['set_typed']},tuple([l[_class.type_], _class.type_.__name__, None]))"
+            res = generate_newline(res)
+            res += f"{INDENT * 3}type_name = StringName.new2('')"
+            res = generate_newline(res)
+            res += f"{INDENT * 3}script = None"
+            res = generate_newline(res)
+            res += f"{INDENT * 3}type_ = _class.type_"
+            res = generate_newline(res)
+            res += f"{INDENT * 3}if type not in l:"
+            res = generate_newline(res)
+            res += f"{INDENT * 4}type_name = StringName.new2('Object')"
+            res = generate_newline(res)
+            res += f"{INDENT*4}variant_type = {get_variant_type_val('Object')}"
+            res = generate_newline(res)
+            res += f"{INDENT * 3}else:"
+            res = generate_newline(res)
+            res += f"{INDENT * 4}variant_type= l[_class._type.__name__]"
+            res = generate_newline(res)
+            res += f"{INDENT* 3}_class._ptr.call_with_return({method_ids['normal_methods'][class_['name']]['set_typed']},tuple([variant_type, type_name._ptr, None]))"
             res = generate_newline(res)
             res += f"{INDENT*3}_class.type_ = None"
             res = generate_newline(res)
