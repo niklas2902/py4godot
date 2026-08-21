@@ -2225,11 +2225,11 @@ def generate_classes(classes, filename, is_core=False):
 
 def generate_special_methods_normal_array():
     res = ""
-    res += f"{INDENT*1}void Array::set_typed(GDExtensionVariantType type, std::shared_ptr<StringName> class_name, void* script_owner){{auto empty_var = Variant(1);functions::get_array_set_typed()(&this->godot_owner, type, &class_name->godot_owner, &empty_var.native_ptr);}}"
+    res += f"{INDENT*1}void Array::set_typed(GDExtensionVariantType type, std::shared_ptr<StringName> class_name, PyObject* script){{auto var = Variant(1); if (script != Py_None) {{var.init_from_py_object_native_ptr(script, \"Object\");}};functions::get_array_set_typed()(&this->godot_owner, type, &class_name->godot_owner, &var.native_ptr);}}"
     res = generate_newline(res)
     res += f"{INDENT*1}void Array::py_set_typed(GDExtensionVariantType type, std::shared_ptr<StringName>  class_name, PyObject* script){{"
     res = generate_newline(res)
-    res += f"{INDENT*2}set_typed(type, class_name, nullptr);"
+    res += f"{INDENT*2}set_typed(type, class_name, script);"
     res = generate_newline(res)
     res += f"{INDENT}}}"
     res = generate_newline(res)

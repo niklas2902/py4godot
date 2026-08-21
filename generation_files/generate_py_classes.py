@@ -272,17 +272,19 @@ def generate_constructors(class_):
             res = generate_newline(res)
             res += f"{INDENT * 3}type_ = _class.type_"
             res = generate_newline(res)
-            res += f"{INDENT * 3}if type not in l:"
+            res += f"{INDENT * 3}if type_ not in l:"
             res = generate_newline(res)
-            res += f"{INDENT * 4}type_name = StringName.new2('Object')"
+            res += f"{INDENT * 4}type_name = StringName.new2(_class.type_.__name__)"
             res = generate_newline(res)
             res += f"{INDENT*4}variant_type = {get_variant_type_val('Object')}"
             res = generate_newline(res)
+            res += f"{INDENT*4}script = type_._script"
+            res = generate_newline(res)
             res += f"{INDENT * 3}else:"
             res = generate_newline(res)
-            res += f"{INDENT * 4}variant_type= l[_class._type.__name__]"
+            res += f"{INDENT * 4}variant_type= l[_class.type_.__name__]"
             res = generate_newline(res)
-            res += f"{INDENT* 3}_class._ptr.call_with_return({method_ids['normal_methods'][class_['name']]['set_typed']},tuple([variant_type, type_name._ptr, None]))"
+            res += f"{INDENT* 3}_class._ptr.call_with_return({method_ids['normal_methods'][class_['name']]['set_typed']},tuple([variant_type, type_name._ptr, script]))"
             res = generate_newline(res)
             res += f"{INDENT*3}_class.type_ = None"
             res = generate_newline(res)
@@ -1762,6 +1764,9 @@ def generate_classes(classes, filename, is_core=False, is_typed_array=False):
         res += f"class {class_['name']}({get_base_class(class_)}):"
         res = generate_newline(res)
         res += generate_class_docstring()
+        res = generate_newline(res)
+        if class_["name"] == "Object":
+            res += f"{INDENT}_script=None"
         res = generate_newline(res)
         res += generate_type_hints_constants_for_class(class_)
         res = generate_newline(res)

@@ -600,7 +600,11 @@ void PyScriptExtension::apply_code(){
     auto _path = PyUnicode_FromString(script_path.c_str());
     assert(source != nullptr);
     assert(_path != nullptr);
-    transfer_object = exec_class(source, _path);
+
+    auto script = Script::new_static(godot_owner);
+    auto py_script = wrapper__create_wrapper_from_Script_ptr(std::make_shared<Script>(script));
+    Py_INCREF(py_script);
+    transfer_object = exec_class(source, _path, py_script);
     for(auto p_instance:instance_datas){
         auto instance = instantiate_class(transfer_object.class_);
         if(instance == Py_None || instance == nullptr){

@@ -7,6 +7,7 @@ import inspect, traceback
 
 from py4godot.classes.Node import Node
 from py4godot.classes.Resource import Resource
+from py4godot.classes.Script import Script
 from py4godot.hints.BaseHint cimport *
 from py4godot.godot_bindings.binding4_godot4 cimport *
 from py4godot.pluginscript_api.utils.utils cimport *
@@ -147,7 +148,7 @@ def collect_methods(cls):
             gdmethod(method)
 
 
-cdef api TransferObject exec_class(str source_string, str class_name_):
+cdef api TransferObject exec_class(str source_string, str class_name_, object py_script):
     global  gd_class, properties, signals, methods,default_values, class_name, is_tool, methods, \
         already_registered_property_names, already_registered_method_names, already_registered_signal_names
     current_class_name = class_name_
@@ -214,6 +215,11 @@ cdef api TransferObject exec_class(str source_string, str class_name_):
 
     transfer_object.is_tool = is_tool
     Py_INCREF(gd_class)
+
+    full_script = Script.construct_without_init()
+    full_script._ptr = py_script
+    gd_class._script = full_script
+
     transfer_object.class_ = <PyObject*>gd_class
     return transfer_object
 
