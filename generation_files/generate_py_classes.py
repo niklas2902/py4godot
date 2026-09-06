@@ -1765,6 +1765,9 @@ def generate_classes(classes, filename, is_core=False, is_typed_array=False):
         res = generate_newline(res)
         res += generate_class_docstring()
         res = generate_newline(res)
+        if class_["name"] == "Array":
+            res += f"{INDENT}type_=None"
+            res = generate_newline(res)
         if class_["name"] == "Object":
             res += f"{INDENT}_script=None"
         res = generate_newline(res)
@@ -1927,6 +1930,9 @@ def generate_array_get_item(class_):
         res += f"{INDENT * 2}pyobject = self._ptr.call_with_return({method_ids['normal_methods'][class_['name']]['__getitem__']}, (index,))"
     else:
         if not ("Packed" in class_["name"] and "Array" in class_["name"]) or "Typed" in class_["name"]:
+            res += f"{INDENT * 2}pyobject = self._ptr.call_with_return({method_ids['normal_methods'][class_['name']]['__getitem__']}, (index,))"
+            res = generate_newline(res)
+            res += f"{INDENT * 2}return pyobject"
             return res
         class_to_builtin = {"PackedVector2Array":"Vector2", "PackedVector3Array":"Vector3", "PackedVector2iArray":"Vector2i",
                        "PackedVector3iArray":"Vector3i", "PackedStringArray":"String", "PackedColorArray":"Color",
