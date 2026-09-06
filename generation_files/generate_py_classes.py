@@ -325,7 +325,7 @@ def generate_return_value(classname, method_):
             result += f"{INDENT * 2}{ret_val.name} = None"
         elif "typedarray" in ret_val.type:
             result += (f"{INDENT * 2}_ret = "
-                       f"py4godot_{generate_typed_array_name(ret_val.type).lower()}.{generate_typed_array_name(ret_val.type)}.construct_without_init()")
+                       f"Array[{generate_typed_array_name(ret_val.type)}].construct_without_init()")
         elif "enum::" in ret_val.type:
             result += f"{INDENT * 2}{ret_val.name}:int"
         else:
@@ -579,13 +579,13 @@ def generate_default_args(mMethod):
             continue
         if arg["type"] in {"float", "int", "Nil", "bool"}:
             continue
-        if not arg["type"].startswith("enum::") and not arg["type"].startswith("typedarray::") and not arg[
+        if not arg["type"].startswith("enum::") and not arg[
             "type"].startswith("bitfield::"):
             type_ = unvariant(untypearray_or_dictionary(unbitfield_type(arg['type'])))
             if arg["type"] in builtin_classes:
                 res += f"{INDENT * 2}if {pythonize_name(arg['name'])} is None:"
                 res = generate_newline(res)
-                res += f"{INDENT * 3}{pythonize_name(arg['name'])} = {arg['type']}.new0()"
+                res += f"{INDENT * 3}{pythonize_name(arg['name'])} = {untypearray_or_dictionary(arg['type'])}.new0()"
             elif arg["type"] == "Variant":
                 pass # We actually don't want to set anything here. This is later handled by C++
             else:
@@ -1400,7 +1400,7 @@ def unnull_arg(default_value, arg_type):
 def generate_default_arg(class_, arg, arg_type):
     set_to_iterate = builtin_classes.union(classes) - {"int", "float", "bool", "Nil"}
     if "default_value" in arg:
-        if arg_type in set_to_iterate or "TypedArray" in arg_type:
+        if arg_type in set_to_iterate or "typedarray" in arg_type.lower():
             if arg_type == "String":
                 return "= ''"
             return "= None"
@@ -1460,7 +1460,7 @@ def generate_args(class_, method_with_args):
             if class_["name"] in typed_arrays_names:
                 type_ = unstring(unvariant_type_array(untypearray_or_dictionary(unbitfield_type(arg['type'])), class_["name"]))
             arg_type_for_default_arg = type_
-            if arg["type"] in ("NodePath", "StringName"):
+            if arg["type"] in ("NodePath", "StringName") or "typedarray" in arg["type"].lower():
                 arg_type_for_default_arg = arg["type"]
             result += f"{pythonize_name(arg['name'])}:'{import_type(type_, class_['name'])}' {generate_default_arg(class_, arg, arg_type_for_default_arg)}  , "
         else:
@@ -1699,26 +1699,8 @@ def generate_classes(classes, filename, is_core=False, is_typed_array=False):
     if classes[0]["name"] != "Object":
         res += "import py4godot.classes as classes"
         res = generate_newline(res)
-    if is_typed_array:
-        res = generate_newline(res)
 
-        typedarray_type = classes[0]["name"].replace('TypedArray', '')
-        if typedarray_type not in builtin_classes:
-            res += f"if typing.TYPE_CHECKING:"
-            res = generate_newline(res)
-            res += f"{INDENT}import py4godot.classes.{typedarray_type} as py4godot_{typedarray_type.lower()}"
-            res = generate_newline(res)
-
-        res += f"from py4godot.classes.core import *"
-        res = generate_newline(res)
-        classes_to_import = get_classes_to_import(classes)
-        for cls in classes_to_import:
-            if cls in [class_["name"] for class_ in classes]:
-                continue
-            res += f"import py4godot.classes.{cls} as py4godot_{cls.lower()} "
-            res = generate_newline(res)
-
-    elif not is_core:
+    if not is_core:
         if not "Object" in [cls["name"] for cls in classes]:
             res += "import py4godot.classes as classes"
             res = generate_newline(res)
@@ -1737,12 +1719,16 @@ def generate_classes(classes, filename, is_core=False, is_typed_array=False):
                 continue
             if cls in [cls["name"] for cls in obj["classes"]] and cls in [class_["inherits"] for class_ in classes]:
                 continue
+            if cls in builtin_classes:
+                continue
             res += f"{INDENT}import py4godot.classes.{cls} as py4godot_{cls.lower()} "
             res = generate_newline(res)
         for cls in classes_to_import:
             if cls in [class_["name"] for class_ in classes]:
                 continue
             if cls in [cls["name"] for cls in obj["classes"]] and cls not in [class_["inherits"] for class_ in classes]:
+                continue
+            if cls in builtin_classes:
                 continue
             res += f"import py4godot.classes.{cls} as py4godot_{cls.lower()} "
             res = generate_newline(res)
@@ -2270,7 +2256,7 @@ def collect_typed_arrays(classes):
 
 
 def generate_typed_array_name(name):
-    return (name.split("::")[1] + "TypedArray").replace("24/17:", "").replace("27/0:TypedArray", "DictionaryTypedArray")
+    return (name.split("::")[1]).replace("24/17:", "").replace("27/0:TypedArray", "Array[Dictionary]")
 
 def generate_variant_checks(method, classname):
     res = ""
@@ -2339,7 +2325,4 @@ if __name__ == "__main__":
 
         is_core = True
         arrays = sorted(arrays, key= lambda key:key["name"])
-        for array in arrays:
-            generate_classes([array], f"py4godot/classes/{array['name']}.py", is_core=False, is_typed_array=True)
-
         generate_classes(obj["builtin_classes"], f"py4godot/classes/core.py", is_core=True)
