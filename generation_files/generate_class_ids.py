@@ -1,7 +1,7 @@
 import copy
 import json
 import os
-from generate_classes import ReturnType
+from utils import ReturnType
 from generation_tools import write_if_different
 
 IGNORED_CLASSES = ("Nil", "bool", "float", "int")

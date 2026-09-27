@@ -4,7 +4,7 @@ import os
 import sys
 
 sys.path.append("..")
-from generate_classes import ReturnType
+from utils import ReturnType
 from generation_tools import write_if_different
 from py4godot.class_ids import classes_dict
 

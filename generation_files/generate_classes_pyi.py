@@ -3,7 +3,7 @@ import json
 import os.path
 from functools import lru_cache
 
-from generate_classes import pythonize_boolean_types, unref_type, \
+from utils import pythonize_boolean_types, unref_type, \
     unnull_type
 from xml_help import init_class, get_class_description, get_method_description, get_property_description
 

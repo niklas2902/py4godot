@@ -3,7 +3,7 @@ import json
 import os
 
 import generate_pxd_bridge
-from generate_classes import import_type, ReturnType
+from utils import import_type, ReturnType
 from generation_tools import write_if_different
 
 IGNORED_CLASSES = ("Nil", "bool", "float", "int")

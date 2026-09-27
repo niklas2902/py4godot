@@ -2,7 +2,7 @@ import copy
 import json
 import os.path
 
-from generate_classes import pythonize_boolean_types, unref_type, \
+from utils import pythonize_boolean_types, unref_type, \
     unnull_type
 from generate_classes_hpp import has_native_struct, ungodottype, generate_newline
 from generation_tools import write_if_different

@@ -3,7 +3,7 @@ import json
 import os
 
 import generate_pxd_bridge
-from generate_classes import import_type, ReturnType
+from utils import import_type, ReturnType
 
 IGNORED_CLASSES = ("Nil", "bool", "float", "int")
 INDENT = " "
@@ -62,7 +62,7 @@ def generate_newline(str_):
 
 def get_base_class(class_):
     if "inherits" in class_.keys():
-        return import_type(class_["inherits"], class_["name"])
+        return import_type(class_["inherits"], class_["name"], builtin_classes)
     return ""
 
 

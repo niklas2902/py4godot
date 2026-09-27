@@ -3,7 +3,7 @@ import json
 import os
 import sys
 
-from generate_classes import ReturnType
+from utils import ReturnType
 from generation_tools import write_if_different
 sys.path.append("..")
 from py4godot.class_ids import classes_dict

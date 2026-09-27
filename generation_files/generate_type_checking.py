@@ -1,9 +1,9 @@
-import copy
+import json
 import json
 import os
 
-from generate_classes import ReturnType, generate_newline
 from generation_tools import write_if_different
+from utils import generate_newline
 
 IGNORED_CLASSES = ("Nil", "bool", "float", "int")
 INDENT = " "
