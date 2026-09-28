@@ -647,7 +647,7 @@ def generate_method(class_, mMethod):
     if get_ret_value(mMethod, class_) == "Object" and is_core:
         ret = "object"
     else:
-        ret = generate_children(class_['name'], get_ret_value(mMethod, class_))
+        ret = generate_types(class_['name'], get_ret_value(mMethod, class_))
         if ret != None and len(ret) > 200:
             ret = "typing.Any"
     def_function = f"{INDENT}def {pythonize_name(mMethod['name'])}({args}) -> {ret}:"
@@ -1182,7 +1182,7 @@ def generate_property_index(property, is_setter=False):
     return ""
 
 
-def generate_children(containing_class_, type_):
+def generate_types(containing_class_, type_):
     if type_ and "," in type_:
         type_ = type_.split(",")[0].strip()
     if type_ and ";" in type_:
@@ -1197,18 +1197,16 @@ def generate_children(containing_class_, type_):
         return None
     temp = set()
     for cls in already_registed_classes:
-        children = get_children(cls)
-        temp.update(children)
         temp.add(cls)
     already_registed_classes = temp
     res = ""
     if len(already_registed_classes) == 1:
-        res += ungodottype_type_array(unbitfield_type(unenumize_type(cls)), containing_class_)
+        res += f"{ungodottype_type_array(unbitfield_type(unenumize_type(cls)), containing_class_)}"
         return res
     else:
         res += "typing.Union["
         for cls in already_registed_classes:
-            res += ungodottype_type_array(unbitfield_type(unenumize_type(cls)), containing_class_) + ","
+            res += f"{ungodottype_type_array(unbitfield_type(unenumize_type(cls)), containing_class_)},"
         return res[:-1] +"]"
 
 def ungodottype_type_array(type_, class_name):
@@ -1261,7 +1259,7 @@ def generate_property(property, classname):
     result = ""
     result += f"{INDENT}@property"
     result = generate_newline(result)
-    ret = generate_children(class_['name'], property['type'])
+    ret = generate_types(class_['name'], property['type'])
     if len(ret) > 200:
         ret = "typing.Any"
     result += f"{INDENT}def {pythonize_name(property['name'])}(self) -> {ret}:"
@@ -1512,7 +1510,7 @@ def get_classes_to_import(classes):
             for method in class_["methods"]:
                 if ("return_value" in method.keys()):
                     if (unbitfield_type(get_class_from_enum(method["return_value"]["type"])) in normal_classes):
-                        classes_to_import.update(get_children(get_class_from_enum(method["return_value"]["type"])))
+                        classes_to_import.add(get_class_from_enum(method["return_value"]["type"]))
                     if "typedarray::" in method["return_value"]["type"]:
                         classes_to_import.add(generate_typed_array_name(method["return_value"]["type"]))
                 if ("arguments" not in method.keys()):
