@@ -87,8 +87,8 @@ cpdef unicode gd_string_to_py_string(object string):
 cdef PyObject* to_py_object(val):
     return <PyObject*>val # Just returning for converting
 
-cpdef object py_get_py_script(long id):
-    return <object>get_py_script(id)
+cpdef object py_get_py_script(long id, object gd_object):
+    return <object>get_py_script(id) or gd_object
 
 cpdef void decref(object o):
     Py_DECREF(o)

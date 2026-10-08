@@ -32,6 +32,6 @@ cpdef unicode gd_string_to_py_string(object string)
 cdef unicode gd_string_to_py_string_instance(object string)
 cpdef unicode gd_string_name_to_py_string(object string_name)
 
-cpdef object py_get_py_script(long id)
+cpdef object py_get_py_script(long id, object gd_object)
 cdef PyObject* to_py_object(val) # converting c++ values to python objects (especially useful for typedarrays/intTypedArray, as it works with ints, which are interpreted as C++)
 cpdef void decref(object o)

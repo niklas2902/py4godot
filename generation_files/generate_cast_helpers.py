@@ -18,7 +18,7 @@ def clear_vals():
     for dependency in class_names:
         res += \
             f"""cdef api PyObject* cast_to_{dependency.lower()}(PyObject* other):
-    cdef object o = {dependency}.cast_without_reference(<object>other)
+    cdef object o = {dependency}.cast_without_reference(<object>other).get_pyscript()
     vals.append(o)
     return <PyObject*>o\n"""
 

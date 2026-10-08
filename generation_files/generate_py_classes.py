@@ -388,7 +388,7 @@ def generate_return_statement(method_):
             result = f"{INDENT * 2}return _ret"
         else:
             if ret_val.type in classes - builtin_classes:
-                result = f"{INDENT * 2}return smart_cast(_ret) if not _ret._ptr.is_null() else None"
+                result = f"{INDENT * 2}return smart_cast(_ret).get_pyscript() if not _ret._ptr.is_null() else None"
             else:
                 result = ""
                 result += f"{INDENT * 2}return _ret"
@@ -1040,7 +1040,7 @@ def generate_get_py_script_method():
     result = generate_newline(result)
     result += f"{INDENT * 2}id = self.get_instance_id()"
     result = generate_newline(result)
-    result += f"{INDENT * 2}script = c_utils.py_get_py_script(id)"
+    result += f"{INDENT * 2}script = c_utils.py_get_py_script(id, self)"
     result = generate_newline(result)
     result += f"{INDENT * 2}return script"
     result = generate_newline(result)
