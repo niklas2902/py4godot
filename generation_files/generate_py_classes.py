@@ -134,13 +134,13 @@ def generate_constructor_args(class_, constructor):
     for arg in constructor["arguments"]:
         if not arg["type"].startswith("enum::"):
             if should_turn_string_to_nodepath(class_, constructor): # We want to be able to create a NodePath from String
-                result += f"{pythonize_name(arg['name'])}:'{unvariant(untypearray_or_dictionary(unbitfield_type(arg['type'])))}' , "
+                result += f"{pythonize_name(arg['name'])}:'{unvariant(class_["name"],untypearray_or_dictionary(unbitfield_type(arg['type'])))}' , "
             else:
-                result += f"{pythonize_name(arg['name'])}:'{unnodepath(unstringname(unstring(unvariant(untypearray_or_dictionary(unbitfield_type(arg['type']))))))}' , "
+                result += f"{pythonize_name(arg['name'])}:'{unnodepath(unstringname(unstring(unvariant(class_["name"],untypearray_or_dictionary(unbitfield_type(arg['type']))))))}' , "
         else:
             # enums are marked with enum:: . To be able to use this, we have to strip this
             arg_type = arg["type"].replace("enum::", "")
-            result += f"{pythonize_name(arg['name'])}:'{unstringname(unnodepath(unstring(unvariant(untypearray_or_dictionary(unenumize_type(arg_type))))))}', "
+            result += f"{pythonize_name(arg['name'])}:'{unstringname(unnodepath(unstring(unvariant(class_["name"],untypearray_or_dictionary(unenumize_type(arg_type))))))}', "
     result = result[:-2]
     return result
 
@@ -340,8 +340,11 @@ def generate_return_value(classname, method_):
 def get_base_class(class_):
     if "inherits" in class_.keys():
         return import_type(class_["inherits"], class_["name"])
+    if class_["name"] == "Array":
+        return "CoreType, Generic[T]"
     if class_["name"] in builtin_classes:
         return "CoreType"
+
     return ""
 
 
@@ -581,7 +584,7 @@ def generate_default_args(mMethod):
             continue
         if not arg["type"].startswith("enum::") and not arg[
             "type"].startswith("bitfield::"):
-            type_ = unvariant(untypearray_or_dictionary(unbitfield_type(arg['type'])))
+            type_ = unvariant(class_["name"],untypearray_or_dictionary(unbitfield_type(arg['type'])))
             if arg["type"] in builtin_classes:
                 res += f"{INDENT * 2}if {pythonize_name(arg['name'])} is None:"
                 res = generate_newline(res)
@@ -644,7 +647,9 @@ def generate_method(class_, mMethod):
     args = generate_args(class_, mMethod)
     ret_val = None
     args = generate_args(class_, mMethod)
-    if get_ret_value(mMethod, class_) == "Object" and is_core:
+    if get_ret_value(mMethod, class_) == "Variant" and class_["name"] == "Array":
+        ret = "T"
+    elif get_ret_value(mMethod, class_) == "Object" and is_core:
         ret = "object"
     else:
         ret = generate_types(class_['name'], get_ret_value(mMethod, class_))
@@ -1282,7 +1287,7 @@ def generate_property(property, classname):
         elif "typedarray" in property['type']:
             result += f"{INDENT}def {pythonize_name(property['name'])}(self, value:'Array'):"
         else:
-            result += f"{INDENT}def {pythonize_name(property['name'])}(self,  value:'{import_type(objectify_type(unnodepath(unstringname(unvariant(unstring(untypearray_or_dictionary(simplify_type(property['type']))))))), classname)}'):"
+            result += f"{INDENT}def {pythonize_name(property['name'])}(self,  value:'{import_type(objectify_type(unnodepath(unstringname(unvariant(class_["name"],unstring(untypearray_or_dictionary(simplify_type(property['type']))))))), classname)}'):"
         result = generate_newline(result)
         if "index" in property.keys():
             result += f"{INDENT * 2}self.{pythonize_name(property['setter'])}({property['index']}, value)" #TODO: are there more cases like this?
@@ -1335,7 +1340,9 @@ def unbitfield_type(arg_type):
     return arg_type
 
 
-def unvariant(type_):
+def unvariant(cls, type_):
+    if type_ == "Variant" and cls == "Array":
+        return "T"
     if (type_ == "Variant"):
         return "object"
     return type_
@@ -1417,6 +1424,8 @@ def import_type(type_, classname):
         return type_
     elif type_ == "PyVariant":
         return type_
+    elif type_=="T":
+        return type_
     elif type_ == "object":  # TODO merge with PyVariant
         return type_
     elif type_ == "Object":
@@ -1454,9 +1463,7 @@ def generate_args(class_, method_with_args):
 
     for arg in method_with_args["arguments"]:
         if not arg["type"].startswith("enum::"):
-            type_ = unnodepath(unstringname(unstring(unvariant(untypearray_or_dictionary(unbitfield_type(arg['type']))))))
-            if class_["name"] in typed_arrays_names:
-                type_ = unstring(unvariant_type_array(untypearray_or_dictionary(unbitfield_type(arg['type'])), class_["name"]))
+            type_ = unnodepath(unstringname(unstring(unvariant(class_["name"],untypearray_or_dictionary(unbitfield_type(arg['type']))))))
             arg_type_for_default_arg = type_
             if arg["type"] in ("NodePath", "StringName") or "typedarray" in arg["type"].lower():
                 arg_type_for_default_arg = arg["type"]
@@ -1464,9 +1471,7 @@ def generate_args(class_, method_with_args):
         else:
             # enums are marked with enum:: . To be able to use this, we have to strip this
             arg_type = arg["type"].replace("enum::", "")
-            type_ = unstring(unvariant(untypearray_or_dictionary(unenumize_type(arg_type))))
-            if class_["name"] in typed_arrays_names:
-                type_ = unstring(unvariant_type_array(untypearray_or_dictionary(unenumize_type(arg_type)), class_["name"]))
+            type_ = unstring(unvariant(class_["name"],untypearray_or_dictionary(unenumize_type(arg_type))))
             result += f"{pythonize_name(arg['name'])}:'{import_type(type_, class_['name'])}'  {generate_default_arg(class_, arg, type_)}, "
     if method_with_args["is_vararg"]:
         result += "*varargs, "
@@ -1731,6 +1736,8 @@ def generate_classes(classes, filename, is_core=False, is_typed_array=False):
             res += f"import py4godot.classes.{cls} as py4godot_{cls.lower()} "
             res = generate_newline(res)
     for class_ in classes:
+        if is_core:
+            init_class(class_["name"])
         if (class_["name"] in IGNORED_CLASSES):
             continue
 
@@ -1744,6 +1751,9 @@ def generate_classes(classes, filename, is_core=False, is_typed_array=False):
 
         res += generate_enums(class_)
         res = generate_newline(res)
+        if is_core:
+            res += ("from typing import Generic, TypeVar\n"
+                    "T = TypeVar('T')\n")
 
         res += f"class {class_['name']}({get_base_class(class_)}):"
         res = generate_newline(res)
@@ -1828,42 +1838,6 @@ def generate_dictionary_get_item():
     return res
 
 
-def generate_get_item_from_array(classname):
-    res = ""
-    res += f"{INDENT}def __getitem__(self,  index):"
-    res = generate_newline(res)
-    res = generate_newline(res)
-    res += f"{INDENT * 2}#if index < 0:"
-    res = generate_newline(res)
-    res += f"{INDENT * 3}#raise KeyError(f\"Index '%s' invalid\")".replace("%s", "{index}")
-    res = generate_newline(res)
-    res += f"{INDENT * 2}#cdef PyObject * pyobject = self.{classname}_internal_class_ptr.get()[0][index].get_converted_value(True)"
-    res = generate_newline(res)
-    res += f"{INDENT * 2}#cdef object o = None"
-    res = generate_newline(res)
-    res += f"{INDENT * 2}#if not is_none(pyobject):"
-    res = generate_newline(res)
-    res += f"{INDENT * 3}#o = <object>pyobject"
-    res = generate_newline(res)
-    res += f"{INDENT * 2}pass#return o"
-    return res
-
-
-def generate_get_item_from_type_array(classname, classtype):
-    res = ""
-    res += f"{INDENT}def __getitem__(self,  index):"
-    res = generate_newline(res)
-    res += generate_index_check()
-    if classtype in builtin_classes - {"int", "float", "bool", "Nil"}:
-        res = generate_newline(res)
-        res += f"{INDENT * 2}#cdef {classtype} pyobject = {classtype}()"
-        res = generate_newline(res)
-        res += f"{INDENT * 2}#pyobject.{classtype}_internal_class_ptr = self.{classname}_internal_class_ptr.get()[0][<int>index]"
-        res = generate_newline(res)
-        res += f"{INDENT * 2}pass#return pyobject"
-    else:
-        res += f"{INDENT * 2}pass#return self.{classname}_internal_class_ptr.get()[0][<int>index]"
-    return res
 
 
 def generate_special_methods_dictionary():
@@ -1878,7 +1852,7 @@ def is_builtin_class_in_name(classname):
 
 def generate_array_set_item(class_):
     res = ""
-    res += f"{INDENT}def __setitem__(self,  index, value):"
+    res += f"{INDENT}def __setitem__(self,  index:int, value:T)->None:"
     res = generate_newline(res)
     res += generate_index_check()
     if not is_builtin_class_in_name(class_["name"]):
@@ -1905,7 +1879,7 @@ def generate_index_check():
 
 def generate_array_get_item(class_):
     res = ""
-    res += f"{INDENT}def __getitem__(self,  index):"
+    res += f"{INDENT}def __getitem__(self,  index:int)->T:"
     res = generate_newline(res)
     res += generate_index_check()
     res = generate_newline(res)
