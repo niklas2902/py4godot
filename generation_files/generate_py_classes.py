@@ -240,7 +240,7 @@ def generate_constructors(class_):
     for constructor in class_["constructors"]:
         res += f"{INDENT}@staticmethod"
         res = generate_newline(res)
-        res += f"{INDENT}def new{constructor['index']}({generate_constructor_args(class_, constructor)}):"
+        res += f"{INDENT}def new{constructor['index']}({generate_constructor_args(class_, constructor)}) -> Self:"
         res = generate_newline(res)
         if "arguments" in constructor:
             res += generate_assert(constructor["arguments"], "", class_["name"])
@@ -1735,6 +1735,9 @@ def generate_classes(classes, filename, is_core=False, is_typed_array=False):
                 continue
             res += f"import py4godot.classes.{cls} as py4godot_{cls.lower()} "
             res = generate_newline(res)
+    if is_core:
+        res += ("from typing import Generic, TypeVar\n"
+                "T = TypeVar('T')\n")
     for class_ in classes:
         if is_core:
             init_class(class_["name"])
@@ -1751,9 +1754,6 @@ def generate_classes(classes, filename, is_core=False, is_typed_array=False):
 
         res += generate_enums(class_)
         res = generate_newline(res)
-        if is_core:
-            res += ("from typing import Generic, TypeVar\n"
-                    "T = TypeVar('T')\n")
 
         res += f"class {class_['name']}({get_base_class(class_)}):"
         res = generate_newline(res)
@@ -1969,7 +1969,7 @@ def generate_getitem_class(class_):
     res = ""
     res+= f"{INDENT}def __class_getitem__(cls, item):"
     res = generate_newline(res)
-    res += f"{INDENT * 2}cls.type_ = item"
+    res += f"{INDENT * 2}{class_["name"]}.type_ = item"
     res = generate_newline(res)
     res += f"{INDENT*2}return cls"
     return res
