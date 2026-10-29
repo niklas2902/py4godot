@@ -240,7 +240,7 @@ def generate_constructors(class_):
     for constructor in class_["constructors"]:
         res += f"{INDENT}@staticmethod"
         res = generate_newline(res)
-        res += f"{INDENT}def new{constructor['index']}({generate_constructor_args(class_, constructor)}) -> Self:"
+        res += f"{INDENT}def new{constructor['index']}({generate_constructor_args(class_, constructor)}) -> typing.Self:"
         res = generate_newline(res)
         if "arguments" in constructor:
             res += generate_assert(constructor["arguments"], "", class_["name"])
