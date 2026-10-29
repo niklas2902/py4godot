@@ -1,0 +1,14 @@
+78098b89c88a74ebe8c20117b8754620
+::res://::1792601965
+icon.svg::CompressedTexture2D::46521365613016351::1792601778::1792601788::1::::<><><>0<>0<>7405c697c8d67bb5a91c413f54c0d0ab<>res://.godot/imported/icon.svg-218a8f2b3041327d8a5756f3a245f83b.ctex::
+node_3d.gd::GDScript::8644960184627349160::1792601955::0::1::::<>Node3D<><>0<>0<><>::
+node_3d.tscn::PackedScene::413727703486999386::1792601965::0::1::::<><><>0<>0<><>::
+::res://addons/::1788685949
+::res://addons/py4godot/::1792601880
+dependencies.txt::TextFile::-1::1792599547::0::1::::<><><>0<>0<><>::
+get_pip (1).py::PyScriptExtension::-1::1792599548::0::1::::<><><>0<>0<><>::
+get_pip.py::PyScriptExtension::-1::1788685951::0::1::::<><><>0<>0<><>::
+install_dependencies.py::PyScriptExtension::-1::1792599547::0::1::::<><><>0<>0<><>::
+python.gdextension::GDExtension::7733354994985621861::1792599547::0::1::::<><><>0<>0<><>::
+Python.svg::CompressedTexture2D::4699026212865040118::1788685951::1792601880::1::::<><><>0<>0<>07e665d9ed15c2c7dcfdb4651ab389b4<>res://.godot/imported/Python.svg-681cb785c113434a7384dcc1fd345d19.ctex::
+signal_script.py::PyScriptExtension::-1::1792599547::0::1::::<><><>0<>0<><>::

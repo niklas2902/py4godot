@@ -1,0 +1,24 @@
+[gd_scene format=3 uid="uid://f5obgi7wny23"]
+
+[ext_resource type="Script" path="res://node_3d.py" id="1_a202f"]
+
+[node name="Node3D" type="Node3D" unique_id=481633375]
+unique_name_in_owner = false
+process_mode = 0
+process_priority = 0
+process_physics_priority = 0
+process_thread_group = 0
+physics_interpolation_mode = 0
+auto_translate_mode = 0
+editor_description = ""
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+rotation_edit_mode = 0
+rotation_order = 2
+top_level = false
+visible = true
+visibility_parent = NodePath("")
+script = ExtResource("1_a202f")
+test_int = 5
+test_float = 5.2
+test_bool = true
+test_vector = Vector3(1, 2, 3)
