@@ -117,7 +117,7 @@ cdef api GDExtensionBool is_overridden(GDExtensionScriptInstanceDataPtr p_instan
     #print_error(py_method_name_str)
     #print_error(method)
     #print_error(hasattr(method, "gd_is_native"))
-    return method != None and not hasattr(method, "gd_is_native")
+    return method is not None and not hasattr(method, "gd_is_native")
 
 cdef api GDExtensionBool instance_has_method(GDExtensionScriptInstanceDataPtr p_instance, GDExtensionConstStringNamePtr p_name) noexcept:
     py_log("instance_has_method")
