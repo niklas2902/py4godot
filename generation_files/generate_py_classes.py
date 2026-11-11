@@ -1948,7 +1948,7 @@ def generate_iter_array(class_):
     return res
 
 
-def generate_next_array(class_):
+def generate_next_array():
     res = ""
     res += f"{INDENT}def __next__(self):"
     res = generate_newline(res)
@@ -1982,7 +1982,7 @@ def generate_special_methods_array(class_):
     res = generate_newline(res)
     res += generate_iter_array(class_)
     res = generate_newline(res)
-    res += generate_next_array(class_)
+    res += generate_next_array()
     res = generate_newline(res)
     res += generate_getitem_class(class_)
     res = generate_newline(res)
