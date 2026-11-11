@@ -1,8 +1,8 @@
 import inspect
 from py4godot.pluginscript_api.utils.helpers import get_variant_type
 import py4godot.pluginscript_api.utils.annotations as annotations
-from py4godot.py_classes.Object import Object
-from py4godot.py_classes.core import Signal, Callable
+from py4godot.classes.Object import Object
+from py4godot.classes.core import Signal, Callable
 from py4godot.utils.utils import py_string_to_string_name
 
 
@@ -14,7 +14,8 @@ class SignalArg:
     def get_name(self):
         return self.name.encode("utf-8")
 
-def signal(args=[]):
+def signal(args:list[SignalArg]=None):
+    args = args or []
     stack = inspect.stack()
     name = stack[0].code_context[0].split("=")[0].split(":")[0].strip()
     annotations.signal(name, args)
