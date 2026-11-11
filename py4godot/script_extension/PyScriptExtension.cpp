@@ -617,12 +617,6 @@ void PyScriptExtension::apply_code(){
     PyGILState_Release(gil_state);
 
 }
-
-/*
-void PyScriptExtension::set_path( const char* path){
-    this->path = std::string{path};
-}
-*/
 namespace script{
 void call_virtual_func__editor_can_reload_from_file(GDExtensionClassInstancePtr p_instance, const GDExtensionConstTypePtr* p_args, GDExtensionTypePtr r_ret) {
     PyScriptExtension* pylanguage = static_cast<PyScriptExtension*> (p_instance);
