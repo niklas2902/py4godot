@@ -7,11 +7,16 @@
 void copy_directory_recursive(String& source, String& target, bool copy_scripts);
 void copy_file(String& source, String& target);
 void extract_addon_to_user_dir() {
+
     String source_dir = c_string_to_string("res://addons/py4godot-android");
     String target_dir = c_string_to_string("user://files/addons/py4godot-android");
     String user_path = c_string_to_string("user://");
 
     DirAccess dir = DirAccess::open(user_path);
+    String gdextension_file = c_string_to_string("files/addons/py4godot-android/python.gdextension");
+
+    if (dir.file_exists(gdextension_file)) return;
+
     auto files_path = c_string_to_string("files/py4godot-android");
     dir.make_dir_recursive(files_path);
     copy_directory_recursive(source_dir, target_dir, false);
@@ -23,6 +28,7 @@ void extract_addon_to_user_dir() {
     String scripts_target_dir = c_string_to_string("user://files/scripts");
 
     copy_directory_recursive(scripts_source_dir, scripts_target_dir, true);
+
 
 }
 
