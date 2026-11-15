@@ -135,8 +135,7 @@ void PyResourceFormatLoader::_load( String& path, String& original_path, bool us
 
     PyScriptExtension* script_extension = nullptr;
     auto string_path = std::string{c_path};
-   //cript_extension = PyScriptExtension::constructor(lang);
-    //path_to_script_extension[string_path] = script_extension;
+    free(c_path);
     auto shared_string_path = std::make_shared<String>(path);
 
     bool was_cached = false;
@@ -164,7 +163,6 @@ void PyResourceFormatLoader::_load( String& path, String& original_path, bool us
         script_extension->set_source_code(source_code);
         delete script_extension;
     }
-    //free(c_path);
 }
 
 #pragma region: generated

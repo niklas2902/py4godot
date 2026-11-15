@@ -450,7 +450,6 @@ void PyScriptExtension::_placeholder_instance_create( Object& for_object, GDExte
 
     auto path = get_path();
     auto gil_state = PyGILState_Ensure();
-    //for_object.get_class()
 
     GDExtensionVariantFromTypeConstructorFunc constructor_func;
     GDExtensionScriptInstancePtr instance_ptr;
@@ -465,7 +464,7 @@ void PyScriptExtension::_placeholder_instance_create( Object& for_object, GDExte
     update_instance_data(gd_instance, instance);
     instance_datas.push_back(gd_instance);
     set_owner(gd_instance->owner, ((void**)for_object.godot_owner)[0]);
-    //instance.godot_owner = for_object.godot_owner;
+
     this->reference();
     gd_instance->script = this;
     Py_INCREF(gd_instance->owner);
