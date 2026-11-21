@@ -224,7 +224,7 @@ def generate_method_ids(classes):
             normal_methods[cls["name"]]["get_memoryview"] = id
             id += 1
 
-        if cls["name"] == "Array":
+        if cls["name"] in("Dictionary", "Array"):
             normal_methods[cls["name"]]["set_typed"] = id
             id+=1
 

@@ -140,6 +140,7 @@ namespace functions{
      FUNCTIONS_API  GDExtensionInterfaceGetLibraryPath gdextension_interface_get_library_path;
      FUNCTIONS_API  GDExtensionInterfaceEditorAddPlugin gdextension_interface_editor_add_plugin;
      FUNCTIONS_API  GDExtensionInterfaceEditorRemovePlugin gdextension_interface_editor_remove_plugin;
+     FUNCTIONS_API  GDExtensionInterfaceDictionarySetTyped gdextension_interface_dictionary_set_typed;
 
 
 
@@ -279,4 +280,5 @@ namespace functions{
     LIBRARY_API GDExtensionInterfaceGetLibraryPath get_get_library_path();
     LIBRARY_API GDExtensionInterfaceEditorAddPlugin get_editor_add_plugin();
     LIBRARY_API GDExtensionInterfaceEditorRemovePlugin get_editor_remove_plugin();
+    LIBRARY_API  GDExtensionInterfaceDictionarySetTyped get_dictionary_set_typed();
 };

@@ -4,6 +4,8 @@ import json
 import os
 import sys
 from functools import lru_cache
+from typing import Any
+
 sys.path.append("..")
 
 from generation_files.utils.constant_generation_helpers import generate_constants_for_class, \
@@ -257,39 +259,108 @@ def generate_constructors(class_):
         res += f"{INDENT*2}_class._ptr = constructor({classes_dict[class_['name']]}, {constructor['index']}, tuple([{generate_constructor_call_args(class_, constructor)}]))"
         res = generate_newline(res)
         if class_["name"] == "Array":
-            res += f"{INDENT*2}if _class.type_:"
-            res = generate_newline(res)
-            cls_str = ""
-            for cls in builtin_classes - {"Nil"}:
-                cls_str += f"{cls}:{get_variant_type_val(cls)},"
-            res = generate_newline(res)
-            res += f"{INDENT*3}l={{{cls_str}}}"
-            res = generate_newline(res)
-            res = generate_newline(res)
-            res += f"{INDENT * 3}type_name = StringName.new2('')"
-            res = generate_newline(res)
-            res += f"{INDENT * 3}script = None"
-            res = generate_newline(res)
-            res += f"{INDENT * 3}type_ = _class.type_"
-            res = generate_newline(res)
-            res += f"{INDENT * 3}if type_ not in l:"
-            res = generate_newline(res)
-            res += f"{INDENT * 4}type_name = StringName.new2(_class.type_.__name__)"
-            res = generate_newline(res)
-            res += f"{INDENT*4}variant_type = {get_variant_type_val('Object')}"
-            res = generate_newline(res)
-            res += f"{INDENT*4}script = type_._script"
-            res = generate_newline(res)
-            res += f"{INDENT * 3}else:"
-            res = generate_newline(res)
-            res += f"{INDENT * 4}variant_type= l[_class.type_.__name__]"
-            res = generate_newline(res)
-            res += f"{INDENT* 3}_class._ptr.call_with_return({method_ids['normal_methods'][class_['name']]['set_typed']},tuple([variant_type, type_name._ptr, script]))"
-            res = generate_newline(res)
-            res += f"{INDENT*3}_class.type_ = None"
-            res = generate_newline(res)
+            res += generate_set_typed_array(class_)
+        if class_["name"] == "Dictionary":
+            res += generate_set_typed_dictionary(class_)
         res += f"{INDENT * 2}return _class"
         res = generate_newline(res)
+
+    return res
+
+
+def generate_set_typed_array(class_) -> Any:
+    res = ""
+    res += f"{INDENT * 2}if _class.type_:"
+    res = generate_newline(res)
+    cls_str = ""
+    for cls in builtin_classes - {"Nil"}:
+        cls_str += f"{cls}:{get_variant_type_val(cls)},"
+    res = generate_newline(res)
+    res += f"{INDENT * 3}l={{{cls_str}}}"
+    res = generate_newline(res)
+    res = generate_newline(res)
+    res += f"{INDENT * 3}type_name = StringName.new2('')"
+    res = generate_newline(res)
+    res += f"{INDENT * 3}script = None"
+    res = generate_newline(res)
+    res += f"{INDENT * 3}type_ = _class.type_"
+    res = generate_newline(res)
+    res += f"{INDENT * 3}if type_ not in l:"
+    res = generate_newline(res)
+    res += f"{INDENT * 4}type_name = StringName.new2(_class.type_.__name__)"
+    res = generate_newline(res)
+    res += f"{INDENT * 4}variant_type = {get_variant_type_val('Object')}"
+    res = generate_newline(res)
+    res += f"{INDENT * 4}script = type_._script"
+    res = generate_newline(res)
+    res += f"{INDENT * 3}else:"
+    res = generate_newline(res)
+    res += f"{INDENT * 4}variant_type= l[_class.type_.__name__]"
+    res = generate_newline(res)
+    res += f"{INDENT * 3}_class._ptr.call_with_return({method_ids['normal_methods'][class_['name']]['set_typed']},tuple([variant_type, type_name._ptr, script]))"
+    res = generate_newline(res)
+    res += f"{INDENT * 3}_class.type_ = None"
+    res = generate_newline(res)
+    return res
+
+
+def generate_set_typed_dictionary(class_) -> Any:
+    res = ""
+    res += f"{INDENT * 2}if _class.key_type and _class.val_type :"
+    res = generate_newline(res)
+    cls_str = ""
+    for cls in builtin_classes - {"Nil"}:
+        cls_str += f"{cls}:{get_variant_type_val(cls)},"
+    res = generate_newline(res)
+    res += f"{INDENT * 3}l={{{cls_str}}}"
+    res = generate_newline(res)
+    res = generate_newline(res)
+    res += f"{INDENT * 3}key_type_name = StringName.new2('')"
+    res = generate_newline(res)
+    res += f"{INDENT * 3}key_script = None"
+    res = generate_newline(res)
+    res += f"{INDENT * 3}key_type = _class.key_type"
+    res = generate_newline(res)
+    res += f"{INDENT * 3}if key_type not in l:"
+    res = generate_newline(res)
+    res += f"{INDENT * 4}key_type_name = StringName.new2(_class.key_type.__name__)"
+    res = generate_newline(res)
+    res += f"{INDENT * 4}key_variant_type = {get_variant_type_val('Object')}"
+    res = generate_newline(res)
+    res += f"{INDENT * 4}key_script = key_type._script"
+    res = generate_newline(res)
+    res += f"{INDENT * 3}else:"
+    res = generate_newline(res)
+    res += f"{INDENT * 4}key_variant_type= l[key_type]"
+    res = generate_newline(res)
+
+
+    res = generate_newline(res)
+    res += f"{INDENT * 3}val_type_name = StringName.new2('')"
+    res = generate_newline(res)
+    res += f"{INDENT * 3}val_script = None"
+    res = generate_newline(res)
+    res += f"{INDENT * 3}val_type = _class.val_type"
+    res = generate_newline(res)
+    res += f"{INDENT * 3}if val_type not in l:"
+    res = generate_newline(res)
+    res += f"{INDENT * 4}val_type_name = StringName.new2(_class.val_type.__name__)"
+    res = generate_newline(res)
+    res += f"{INDENT * 4}val_variant_type = {get_variant_type_val('Object')}"
+    res = generate_newline(res)
+    res += f"{INDENT * 4}val_script = val_type._script"
+    res = generate_newline(res)
+    res += f"{INDENT * 3}else:"
+    res = generate_newline(res)
+    res += f"{INDENT * 4}val_variant_type= l[val_type]"
+    res = generate_newline(res)
+    res += f"{INDENT * 3}_class._ptr.call_with_return({method_ids['normal_methods'][class_['name']]['set_typed']},tuple([key_variant_type, key_type_name._ptr, key_script, val_variant_type, val_type_name._ptr, val_script]))"
+    res = generate_newline(res)
+
+    res += f"{INDENT * 3}_class.key_type = None"
+    res = generate_newline(res)
+    res += f"{INDENT * 3}_class.val_type = None"
+    res = generate_newline(res)
 
     return res
 
@@ -342,6 +413,8 @@ def get_base_class(class_):
         return import_type(class_["inherits"], class_["name"])
     if class_["name"] == "Array":
         return "CoreType, Generic[T]"
+    if class_["name"] == "Dictionary":
+        return "CoreType, Generic[K, V]"
     if class_["name"] in builtin_classes:
         return "CoreType"
 
@@ -1737,7 +1810,9 @@ def generate_classes(classes, filename, is_core=False, is_typed_array=False):
             res = generate_newline(res)
     if is_core:
         res += ("from typing import Generic, TypeVar\n"
-                "T = TypeVar('T')\n")
+                "T = TypeVar('T')\n"
+                "K = TypeVar('K')\n"
+                "V = TypeVar('V')\n")
     for class_ in classes:
         if is_core:
             init_class(class_["name"])
@@ -1761,6 +1836,12 @@ def generate_classes(classes, filename, is_core=False, is_typed_array=False):
         res = generate_newline(res)
         if class_["name"] == "Array":
             res += f"{INDENT}type_=None"
+            res = generate_newline(res)
+
+        if class_["name"] == "Dictionary":
+            res += f"{INDENT}key_type=None"
+            res = generate_newline(res)
+            res += f"{INDENT}val_type=None"
             res = generate_newline(res)
         if class_["name"] == "Object":
             res += f"{INDENT}_script=None"
@@ -1845,6 +1926,9 @@ def generate_special_methods_dictionary():
     res += generate_dictionary_set_item()
     res = generate_newline(res)
     res += generate_dictionary_get_item()
+    res = generate_newline(res)
+    res += generate_getitem_class_dictionary()
+    res = generate_newline(res)
     return res
 
 def is_builtin_class_in_name(classname):
@@ -1965,11 +2049,25 @@ def generate_next_array():
 
     return res
 
-def generate_getitem_class(class_):
+def generate_getitem_class_array(class_):
     res = ""
     res+= f"{INDENT}def __class_getitem__(cls, item):"
     res = generate_newline(res)
     res += f"{INDENT * 2}{class_["name"]}.type_ = item"
+    res = generate_newline(res)
+    res += f"{INDENT*2}return cls"
+    return res
+
+
+def generate_getitem_class_dictionary():
+    res = ""
+    res+= f"{INDENT}def __class_getitem__(cls, item):"
+    res = generate_newline(res)
+    res += f"{INDENT * 2}assert type(item) is tuple, 'for a typed Dictionary, you have to specify key and value Type (e.g. Dictionary[str, int])'"
+    res = generate_newline(res)
+    res += f"{INDENT * 2}assert len(item) == 2, 'A typed Dictionary, only accepts a key and value type'"
+    res = generate_newline(res)
+    res += f"{INDENT * 2}cls.key_type, cls.val_type  = item"
     res = generate_newline(res)
     res += f"{INDENT*2}return cls"
     return res
@@ -1983,8 +2081,6 @@ def generate_special_methods_array(class_):
     res += generate_iter_array(class_)
     res = generate_newline(res)
     res += generate_next_array()
-    res = generate_newline(res)
-    res += generate_getitem_class(class_)
     res = generate_newline(res)
     return res
 
@@ -2077,6 +2173,11 @@ def generate_special_methods(class_):
 
     if "array" in class_["name"].lower():
         res += generate_special_methods_array(class_)
+
+    if class_["name"] == "Array":
+        res = generate_newline(res)
+        res += generate_getitem_class_array(class_)
+        res = generate_newline(res)
 
     if class_["name"] in ("Vector3", "Vector2"):
         res += generate_vector_methods()

@@ -152,6 +152,7 @@ void init_functions(){functions::gdextension_interface_get_godot_version = (GDEx
     functions::gdextension_interface_get_library_path = (GDExtensionInterfaceGetLibraryPath)load_proc_address(const_cast<char*>("get_library_path"));
     functions::gdextension_interface_editor_add_plugin = (GDExtensionInterfaceEditorAddPlugin)load_proc_address(const_cast<char*>("editor_add_plugin"));
     functions::gdextension_interface_editor_remove_plugin = (GDExtensionInterfaceEditorRemovePlugin)load_proc_address(const_cast<char*>("editor_remove_plugin"));
+    functions::gdextension_interface_dictionary_set_typed = (GDExtensionInterfaceDictionarySetTyped)load_proc_address(const_cast<char*>("dictionary_set_typed"));
 }
 
 void initialize_py4godot(void *userdata, GDExtensionInitializationLevel p_level){
