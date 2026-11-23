@@ -180,6 +180,9 @@ cdef api TransferObject exec_class(str source_string, str class_name_, object py
         load_module(module_name, file_to_load)
         collect_properties(gd_class)
         collect_methods(gd_class)
+        full_script = Script.construct_without_init()
+        full_script._ptr = py_script
+        gd_class._script = full_script
     except Exception as e:
         print_tools.print_error_detailed('annotations.pyx', 'exec_class', 164, "exec_class: Exception happened:") # !this gets generated print_error
         print_tools.print_error_detailed('annotations.pyx', 'exec_class', 165, f"class to load:{class_name_}") # !this gets generated print_error
@@ -216,9 +219,6 @@ cdef api TransferObject exec_class(str source_string, str class_name_, object py
     transfer_object.is_tool = is_tool
     Py_INCREF(gd_class)
 
-    full_script = Script.construct_without_init()
-    full_script._ptr = py_script
-    gd_class._script = full_script
 
     transfer_object.class_ = <PyObject*>gd_class
     return transfer_object
