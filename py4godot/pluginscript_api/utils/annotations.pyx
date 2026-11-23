@@ -180,9 +180,6 @@ cdef api TransferObject exec_class(str source_string, str class_name_, object py
         load_module(module_name, file_to_load)
         collect_properties(gd_class)
         collect_methods(gd_class)
-        full_script = Script.construct_without_init()
-        full_script._ptr = py_script
-        gd_class._script = full_script
     except Exception as e:
         print_tools.print_error_detailed('annotations.pyx', 'exec_class', 164, "exec_class: Exception happened:") # !this gets generated print_error
         print_tools.print_error_detailed('annotations.pyx', 'exec_class', 165, f"class to load:{class_name_}") # !this gets generated print_error
@@ -190,6 +187,10 @@ cdef api TransferObject exec_class(str source_string, str class_name_, object py
         my_str_class = bytes_class
         print_tools.print_error_detailed('annotations.pyx', 'exec_class', 168, my_str_class) # !this gets generated print_error
         print_tools.print_error_detailed('annotations.pyx', 'exec_class', 169, f"exec_class: Exception happened: {traceback.format_exc()}") # !this gets generated print_error
+    if gd_class:
+        full_script = Script.construct_without_init()
+        full_script._ptr = py_script
+        gd_class._script = full_script
 
     cdef char* c_icon_path
     cdef bytes bytes_icon_path
