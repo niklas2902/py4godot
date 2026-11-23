@@ -275,6 +275,7 @@ def generate_set_typed_array(class_) -> Any:
     cls_str = ""
     for cls in builtin_classes - {"Nil"}:
         cls_str += f"{cls}:{get_variant_type_val(cls)},"
+    cls_str += f"str: {get_variant_type_val('String')}"
     res = generate_newline(res)
     res += f"{INDENT * 3}l={{{cls_str}}}"
     res = generate_newline(res)
@@ -287,7 +288,7 @@ def generate_set_typed_array(class_) -> Any:
     res = generate_newline(res)
     res += f"{INDENT * 3}if type_ not in l:"
     res = generate_newline(res)
-    res += f"{INDENT * 4}type_name = StringName.new2(_class.type_.__name__)"
+    res += f"{INDENT * 4}type_name = StringName.new2(_class.type_.__gd_class_name__)"
     res = generate_newline(res)
     res += f"{INDENT * 4}variant_type = {get_variant_type_val('Object')}"
     res = generate_newline(res)
@@ -295,7 +296,7 @@ def generate_set_typed_array(class_) -> Any:
     res = generate_newline(res)
     res += f"{INDENT * 3}else:"
     res = generate_newline(res)
-    res += f"{INDENT * 4}variant_type= l[_class.type_.__name__]"
+    res += f"{INDENT * 4}variant_type= l[type_]"
     res = generate_newline(res)
     res += f"{INDENT * 3}_class._ptr.call_with_return({method_ids['normal_methods'][class_['name']]['set_typed']},tuple([variant_type, type_name._ptr, script]))"
     res = generate_newline(res)
@@ -311,6 +312,7 @@ def generate_set_typed_dictionary(class_) -> Any:
     cls_str = ""
     for cls in builtin_classes - {"Nil"}:
         cls_str += f"{cls}:{get_variant_type_val(cls)},"
+    cls_str += f"str: {get_variant_type_val('String')}"
     res = generate_newline(res)
     res += f"{INDENT * 3}l={{{cls_str}}}"
     res = generate_newline(res)
@@ -323,7 +325,7 @@ def generate_set_typed_dictionary(class_) -> Any:
     res = generate_newline(res)
     res += f"{INDENT * 3}if key_type not in l:"
     res = generate_newline(res)
-    res += f"{INDENT * 4}key_type_name = StringName.new2(_class.key_type.__name__)"
+    res += f"{INDENT * 4}key_type_name = StringName.new2(_class.key_type.__gd_class_name__)"
     res = generate_newline(res)
     res += f"{INDENT * 4}key_variant_type = {get_variant_type_val('Object')}"
     res = generate_newline(res)
@@ -344,7 +346,7 @@ def generate_set_typed_dictionary(class_) -> Any:
     res = generate_newline(res)
     res += f"{INDENT * 3}if val_type not in l:"
     res = generate_newline(res)
-    res += f"{INDENT * 4}val_type_name = StringName.new2(_class.val_type.__name__)"
+    res += f"{INDENT * 4}val_type_name = StringName.new2(_class.val_type.__gd_class_name__)"
     res = generate_newline(res)
     res += f"{INDENT * 4}val_variant_type = {get_variant_type_val('Object')}"
     res = generate_newline(res)
@@ -1831,6 +1833,8 @@ def generate_classes(classes, filename, is_core=False, is_typed_array=False):
         res = generate_newline(res)
 
         res += f"class {class_['name']}({get_base_class(class_)}):"
+        res = generate_newline(res)
+        res += f"{INDENT}__gd_class_name__ = '{class_['name']}'"
         res = generate_newline(res)
         res += generate_class_docstring()
         res = generate_newline(res)
