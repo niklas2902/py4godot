@@ -860,6 +860,10 @@ def generate_special_methods_dictionary():
     res = ""
     res += generate_dictionary_set_item()
     res = generate_newline(res)
+    res += f"{INDENT*1}void set_typed(GDExtensionVariantType type_key, std::shared_ptr<StringName> class_name_key, PyObject* script_owner_key, GDExtensionVariantType type_val, std::shared_ptr<StringName> class_name_val, PyObject* script_owner_val);"
+    res = generate_newline(res)
+    res += f"{INDENT*1}void py_set_typed(GDExtensionVariantType type_key, std::shared_ptr<StringName> class_name_key, PyObject* script_key, GDExtensionVariantType type_val, std::shared_ptr<StringName> class_name_val, PyObject* script_val);"
+    res = generate_newline(res)
     return res
 
 
@@ -968,6 +972,7 @@ def generate_special_methods_normal_array():
     res += f"{INDENT*1}void py_set_typed(GDExtensionVariantType type, std::shared_ptr<StringName> class_name, PyObject* script);"
     res = generate_newline(res)
     return res
+
 
 
 def generate_special_methods(class_):

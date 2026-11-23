@@ -45,7 +45,7 @@ tests/core/vector3/addons/
 tests/core/vector2/addons/
 tests/core/aabb/addons/
 tests/core/basis/addons/
-tests/core/array/addons/
+tests/core/array_/addons/
 tests/core/rect2/addons/
 tests/core/color/addons/
 tests/core/rid/addons/

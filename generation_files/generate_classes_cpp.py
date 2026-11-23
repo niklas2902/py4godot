@@ -1487,6 +1487,11 @@ def generate_switch_methods(class_):
         method_id = method_ids['normal_methods'][class_['name']]['set_typed']
         res += f"{INDENT * 3}case {method_id}:py_set_typed(PyLong_AsLong(PyTuple_GetItem(args_tuple,0)),wrapper__extract_ptr_from_StringNameWrapper(PyTuple_GetItem(args_tuple,1)), PyTuple_GetItem(args_tuple,2));return Py_None;"
         res = generate_newline(res)
+
+    if class_["name"] == "Dictionary":
+        method_id = method_ids['normal_methods'][class_['name']]['set_typed']
+        res += f"{INDENT * 3}case {method_id}:py_set_typed(PyLong_AsLong(PyTuple_GetItem(args_tuple,0)),wrapper__extract_ptr_from_StringNameWrapper(PyTuple_GetItem(args_tuple,1)), PyTuple_GetItem(args_tuple,2), PyLong_AsLong(PyTuple_GetItem(args_tuple,3)),wrapper__extract_ptr_from_StringNameWrapper(PyTuple_GetItem(args_tuple,4)), PyTuple_GetItem(args_tuple,5));return Py_None;"
+        res = generate_newline(res)
     res += f"{INDENT*2}}}"
     res = generate_newline(res)
     res += f"{INDENT*2}return Py_None;"
@@ -2279,6 +2284,20 @@ def generate_special_methods_dictionary():
     res += generate_dictionary_get_item()
     res = generate_newline(res)
     res += generate_dictionary_set_item()
+    res = generate_newline(res)
+    res += generate_set_typed_dictionary()
+    res = generate_newline(res)
+    return res
+
+def generate_set_typed_dictionary():
+    res = ""
+    res += f"{INDENT*1}void Dictionary::set_typed(GDExtensionVariantType type_key, std::shared_ptr<StringName> class_name_key, PyObject* script_key, GDExtensionVariantType type_val, std::shared_ptr<StringName> class_name_val, PyObject* script_val){{auto var_key = Variant(1); auto var_val = Variant(1); if (script_key != Py_None) {{var_key.init_from_py_object_native_ptr(script_key, \"Object\");}};if (script_val != Py_None) {{var_val.init_from_py_object_native_ptr(script_val, \"Object\");}};functions::get_dictionary_set_typed()(&this->godot_owner, type_key, &class_name_key->godot_owner, &var_key.native_ptr, type_val, &class_name_val->godot_owner, &var_val.native_ptr);}}"
+    res = generate_newline(res)
+    res += f"{INDENT*1}void Dictionary::py_set_typed(GDExtensionVariantType type_key, std::shared_ptr<StringName> class_name_key, PyObject* script_key, GDExtensionVariantType type_val, std::shared_ptr<StringName> class_name_val, PyObject* script_val){{"
+    res = generate_newline(res)
+    res += f"{INDENT*2}set_typed(type_key, class_name_key, script_key, type_val, class_name_val, script_val);"
+    res = generate_newline(res)
+    res += f"{INDENT}}}"
     res = generate_newline(res)
     return res
 

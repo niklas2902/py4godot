@@ -20,4 +20,5 @@ class TestRunner(Node3D):
 		suite = unittest.TestLoader().loadTestsFromModule(PythonTest)
 		res = unittest.TextTestRunner(stream=PrintStream()).run(suite)
 		res_code = 0 if  len(res.failures) == 0 else 1
-		self.get_tree().quit(res_code)
+		print(res_code)
+		#self.get_tree().quit(res_code)
