@@ -1,6 +1,5 @@
 import unittest
-from py4godot.pluginscript_api.utils.annotations import *
-from py4godot.classes.core import Vector3, Array, PackedInt32Array, Dictionary
+from py4godot.classes.core import Vector3, Array
 
 class PythonTest(unittest.TestCase):
 	def test_append(self):
