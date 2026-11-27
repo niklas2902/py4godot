@@ -21,4 +21,18 @@ visibility_parent = NodePath("")
 script = ExtResource("1_noarx")
 
 [node name="TestRunner" type="Node3D" parent="." unique_id=382014861]
+unique_name_in_owner = false
+process_mode = 0
+process_priority = 0
+process_physics_priority = 0
+process_thread_group = 0
+physics_interpolation_mode = 0
+auto_translate_mode = 0
+editor_description = ""
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+rotation_edit_mode = 0
+rotation_order = 2
+top_level = false
+visible = true
+visibility_parent = NodePath("")
 script = ExtResource("2_a0tk4")
